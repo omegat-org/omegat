@@ -3,7 +3,7 @@
           with fuzzy matching, translation memory, keyword search, 
           glossaries, and translation leveraging into updated projects.
 
- Copyright (C) 2010 Alex Buloichik
+ Copyright (C) 2010 Alex Buloichik, Aaron Madlon-Kay
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -35,6 +35,7 @@ import javax.swing.text.StyleConstants;
  * Static attributes for text.
  * 
  * @author Alex Buloichik (alex73mail@gmail.com)
+ * @author Aaron Madlon-Kay
  */
 public final class Styles {
 
@@ -74,5 +75,20 @@ public final class Styles {
             StyleConstants.setItalic(r, italic);
         }
         return r;
+    }
+    
+    public static AttributeSet createAttributeSet(Color foregroundColor, Color backgroundColor, Boolean bold,
+            Boolean italic, Boolean strikethrough, Boolean underline) {
+    	
+    	MutableAttributeSet r = (MutableAttributeSet) createAttributeSet(foregroundColor, backgroundColor, bold, italic);
+    	
+    	if (strikethrough != null) {
+    		StyleConstants.setStrikeThrough(r, strikethrough);
+    	}
+    	if (underline != null) {
+    		StyleConstants.setUnderline(r, underline);
+    	}
+    	
+    	return r;
     }
 }

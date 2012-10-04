@@ -278,8 +278,9 @@ Code has been contributed by
   Jean-Christophe Helary
   Thomas Huriaux
   Hans-Peter Jacobs
-  Guido Leenders
   Ibai Lakunza Velasco
+  Guido Leenders
+  Aaron Madlon-Kay
   Fabián Mandelbaum
   John Moran
   Maxym Mykhalchuk 
@@ -307,25 +308,23 @@ Other contributions by
 but you don't see your name on the lists, feel free to contact us.)
 
 OmegaT uses the following libraries:
-
-  HTMLParser by Somik Raha, Derrick Oswald and others (LGPL License)
-  http://sourceforge.net/projects/htmlparser
-
+  HTMLParser 1.6 by Somik Raha, Derrick Oswald and others (LGPL License)
   MRJ Adapter 1.0.8 by Steve Roy (LGPL License)
-  http://homepage.mac.com/sroy/mrjadapter/
-
   VLDocking Framework 2.1.4 by VLSolutions (CeCILL License)
-  http://www.vlsolutions.com/en/products/docking/
-
   Hunspell by László Németh and others (LGPL License)
-
   JNA by Todd Fast, Timothy Wall and others (LGPL License)
-
   Swing-Layout 1.0.2 (LGPL License)
-
   Jmyspell 2.1.4 (LGPL License)
-
-  JAXB 2.1.7 (GPLv2 + classpath exception)
+  JAXB (GPLv2 + classpath exception)
+  SJXP 1.0.2 (GPL v2)
+  SVNKit 1.7.5 (TMate License)
+  Sequence Library (Sequence Library License)
+  ANTLR 3.4 (ANTLR 3 license)
+  SQLJet 1.1.3 (GPL v2)
+  JGit (Eclipse Distribution License)
+  JSch (JSch License)
+  Base64 (public domain)
+  Diff (GPL)
 
 ==============================================================================
  5.  Is OmegaT bugging you? Do you need help?

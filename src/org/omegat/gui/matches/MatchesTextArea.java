@@ -6,7 +6,7 @@
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
                2007 Zoltan Bartko
                2011 John Moran
-               2012 Alex Buloichik, Jean-Christophe Helary, Didier Briel, Thomas Cordonnier
+               2012 Alex Buloichik, Jean-Christophe Helary, Didier Briel, Thomas Cordonnier, Aaron Madlon-Kay
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -48,6 +48,7 @@ import org.omegat.core.data.IProject;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.data.StringData;
 import org.omegat.core.data.TMXEntry;
+import org.omegat.core.matching.DiffDriver.TextRun;
 import org.omegat.core.matching.ITokenizer;
 import org.omegat.core.matching.NearString;
 import org.omegat.gui.common.EntryInfoThreadPane;
@@ -71,6 +72,7 @@ import org.omegat.util.gui.UIThreadsUtil;
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Jean-Christophe Helary
  * @author Didier Briel
+ * @author Aaron Madlon-Kay
  */
 @SuppressWarnings("serial")
 public class MatchesTextArea extends EntryInfoThreadPane<List<NearString>> implements IMatcher {
@@ -83,11 +85,15 @@ public class MatchesTextArea extends EntryInfoThreadPane<List<NearString>> imple
     private static final AttributeSet ATTRIBUTES_UNCHANGED = Styles.createAttributeSet(Color.green, null, null,
             null);
     private static final AttributeSet ATTRIBUTES_SELECTED = Styles.createAttributeSet(null, null, true, null);
-
+    private static final AttributeSet ATTRIBUTES_DELETED = Styles.createAttributeSet(Color.red, null, true, null, true, null);
+    private static final AttributeSet ATTRIBUTES_INSERTED = Styles.createAttributeSet(Color.green, null, true, null, null, true);
+    
     private final List<NearString> matches = new ArrayList<NearString>();
 
     private final List<Integer> delimiters = new ArrayList<Integer>();
     private final List<Integer> sourcePos = new ArrayList<Integer>();
+    private final List<Integer> diffPos = new ArrayList<Integer>();
+    private final List<List<TextRun>> diffInfos = new ArrayList<List<TextRun>>();
     private int activeMatch;
 
     private final MainWindow mw;
@@ -124,6 +130,8 @@ public class MatchesTextArea extends EntryInfoThreadPane<List<NearString>> imple
         matches.clear();
         delimiters.clear();
         sourcePos.clear();
+        diffPos.clear();
+        diffInfos.clear();
 
         if (newMatches == null) {
             setText("");
@@ -141,6 +149,8 @@ public class MatchesTextArea extends EntryInfoThreadPane<List<NearString>> imple
             MatchesVarExpansion.Result result = template.apply(match, i + 1);
             displayBuffer.append(result.text);
             sourcePos.add(result.sourcePos);
+            diffPos.add(result.diffPos);
+            diffInfos.add(result.diffInfo);
 
             if (i < (newMatches.size() - 1))
                 displayBuffer.append("\n\n");
@@ -348,19 +358,38 @@ public class MatchesTextArea extends EntryInfoThreadPane<List<NearString>> imple
         if (tokenizer == null) {
             return;
         }
-        Token[] tokens = tokenizer.tokenizeAllExactly(match.source);
-        // fix for bug 1586397
-        byte[] attributes = match.attr;
-        for (int i = 0; i < tokens.length; i++) {
-            Token token = tokens[i];
-            int tokstart = start + sourcePos.get(activeMatch) + token.getOffset();
-            int toklength = token.getLength();
-            if ((attributes[i] & StringData.UNIQ) != 0) {
-                doc.setCharacterAttributes(tokstart, toklength, ATTRIBUTES_CHANGED, false);
-            } else if ((attributes[i] & StringData.PAIR) != 0) {
-                doc.setCharacterAttributes(tokstart, toklength, ATTRIBUTES_UNCHANGED, false);
-            }
+        
+        // Apply sourceText styling
+        if (sourcePos.get(activeMatch) != -1) {
+	        Token[] tokens = tokenizer.tokenizeAllExactly(match.source);
+	        // fix for bug 1586397
+	        byte[] attributes = match.attr;
+	        for (int i = 0; i < tokens.length; i++) {
+	            Token token = tokens[i];
+	            int tokstart = start + sourcePos.get(activeMatch) + token.getOffset();
+	            int toklength = token.getLength();
+	            if ((attributes[i] & StringData.UNIQ) != 0) {
+	                doc.setCharacterAttributes(tokstart, toklength, ATTRIBUTES_CHANGED, false);
+	            } else if ((attributes[i] & StringData.PAIR) != 0) {
+	                doc.setCharacterAttributes(tokstart, toklength, ATTRIBUTES_UNCHANGED, false);
+	            }
+	        }
         }
+        
+        // Apply diff styling
+        List<TextRun> diffInfo = diffInfos.get(activeMatch);
+        if (diffPos.get(activeMatch) != -1 && diffInfo != null) {
+	        for (TextRun r : diffInfo) {
+	        	int tokstart = start + diffPos.get(activeMatch) + r.start;
+	        	switch (r.type) {
+	        	case DELETE:
+	        		doc.setCharacterAttributes(tokstart, r.length, ATTRIBUTES_DELETED, false);
+	        		break;
+	        	case INSERT:
+	        		doc.setCharacterAttributes(tokstart, r.length, ATTRIBUTES_INSERTED, false);
+	        	}
+	        }
+    	}
 
         doc.setCharacterAttributes(start, end - start, ATTRIBUTES_SELECTED, false);
         setCaretPosition(end - 2); // two newlines

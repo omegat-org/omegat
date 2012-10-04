@@ -69,3 +69,6 @@ jsch-0.1.46.jar is distributed under the JSch License
 (required for GITRemoteRepository.java)
 
 Base64 is public domain and is included in OmegaT sources
+
+diff.jar is distributed under the GNU General Public License version 1 and greater
+Sources are available in OmegaT sources, in the directory lib/sources

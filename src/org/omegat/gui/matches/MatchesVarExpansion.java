@@ -3,7 +3,7 @@
           with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
- Copyright (C) 2012 Thomas Cordonnier
+ Copyright (C) 2012 Thomas Cordonnier, Aaron Madlon-Kay
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -24,8 +24,12 @@
 package org.omegat.gui.matches;
 
 import org.omegat.util.VarExpansion;
+import org.omegat.core.matching.DiffDriver;
+import org.omegat.core.matching.DiffDriver.TextRun;
+import org.omegat.core.matching.DiffDriver.Render;
 import org.omegat.core.matching.NearString;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Date;
 import java.text.DateFormat;
@@ -39,6 +43,7 @@ import org.omegat.util.OStrings;
  * according to the given template containing variables.
  * 
  * @author Thomas CORDONNIER
+ * @author Aaron Madlon-Kay
  */
 public class MatchesVarExpansion extends VarExpansion<NearString> {
     
@@ -50,12 +55,14 @@ public class MatchesVarExpansion extends VarExpansion<NearString> {
     public static final String VAR_SCORE_ADJUSTED = "${adjustedScore}";
     public static final String VAR_CREATION_ID = "${creationId}";
     public static final String VAR_CREATION_DATE = "${creationDate}";
-	public static final String VAR_FUZZY_FLAG = "${fuzzyFlag}";
+    public static final String VAR_FUZZY_FLAG = "${fuzzyFlag}";
+    public static final String VAR_DIFF = "${diff}";
     
     
     public static final String[] MATCHES_VARIABLES = {
         VAR_ID, 
-        VAR_SOURCE_TEXT, 
+        VAR_SOURCE_TEXT,
+        VAR_DIFF,
         VAR_TARGET_TEXT, 
         VAR_SCORE_BASE, VAR_SCORE_NOSTEM, VAR_SCORE_ADJUSTED,
         VAR_FILE_NAME_ONLY, VAR_FILE_PATH, VAR_FILE_SHORT_PATH,
@@ -80,6 +87,8 @@ public class MatchesVarExpansion extends VarExpansion<NearString> {
     public static class Result {
         public String text; 
         public int sourcePos;
+	public List<TextRun> diffInfo;
+	public int diffPos;
     }
     
     // ------------------------------ non-static part -------------------
@@ -160,7 +169,14 @@ public class MatchesVarExpansion extends VarExpansion<NearString> {
         // Source : must be the last one to ensure sourcePos is well-positionned
         R.sourcePos = R.text.indexOf(VAR_SOURCE_TEXT);
         R.text = R.text.replace(VAR_SOURCE_TEXT, match.source);
-               
+        
+        R.diffPos = R.text.indexOf(VAR_DIFF);
+        if (R.diffPos != -1) {
+            Render diffRender = DiffDriver.render(match.source, Core.getEditor().getCurrentEntry().getSrcText());
+            R.diffInfo = diffRender.formatting;
+            R.text = R.text.replace(VAR_DIFF, diffRender.text);
+        }
+        
         return R;
     }
 

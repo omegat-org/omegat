@@ -25,5 +25,6 @@
 	<classpathentry kind="lib" path="lib/svnkit-1.7.5.jar"/>
 	<classpathentry kind="lib" path="lib/sqljet-1.1.3.jar"/>
 	<classpathentry kind="lib" path="lib/antlr-runtime-3.4.jar"/>
+	<classpathentry kind="lib" path="lib/diff.jar"/>
 	<classpathentry kind="output" path="classes"/>
 </classpath>

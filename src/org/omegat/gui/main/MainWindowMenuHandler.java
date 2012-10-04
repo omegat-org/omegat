@@ -776,7 +776,6 @@ public class MainWindowMenuHandler {
      */
     public void optionsViewOptionsMenuLoginItemActionPerformed() {
         UserPassDialog proxyOptions = new UserPassDialog(mainWindow);
-        proxyOptions.cbReadOnly.setVisible(false);
 
         String encodedUser = (Preferences.getPreference(Preferences.PROXY_USER_NAME));
         String encodedPassword = (Preferences.getPreference(Preferences.PROXY_PASSWORD));
@@ -789,8 +788,6 @@ public class MainWindowMenuHandler {
             Log.log(ex);
         }
 
-        proxyOptions.setTitle(OStrings.getString("PROXY_LOGIN_DIALOG")); // NOI18N
-        proxyOptions.descriptionTextArea.setText(OStrings.getString("PROXY_LOGIN_DESCRIPTION"));
         proxyOptions.setVisible(true);
 
         if (proxyOptions.getReturnStatus() == UserPassDialog.RET_OK) {

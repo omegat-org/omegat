@@ -32,6 +32,11 @@ import org.tmatesoft.svn.core.SVNErrorCode;
 import org.tmatesoft.svn.core.SVNException;
 import org.tmatesoft.svn.core.SVNURL;
 import org.tmatesoft.svn.core.auth.ISVNAuthenticationManager;
+import org.tmatesoft.svn.core.auth.SVNAuthentication;
+import org.tmatesoft.svn.core.internal.wc.DefaultSVNAuthenticationManager;
+import org.tmatesoft.svn.core.internal.wc.ISVNAuthStoreHandler;
+import org.tmatesoft.svn.core.internal.wc.ISVNAuthenticationStorageOptions;
+import org.tmatesoft.svn.core.internal.wc.ISVNGnomeKeyringPasswordProvider;
 import org.tmatesoft.svn.core.wc.ISVNOptions;
 import org.tmatesoft.svn.core.wc.SVNClientManager;
 import org.tmatesoft.svn.core.wc.SVNInfo;
@@ -71,10 +76,14 @@ public class SVNRemoteRepository implements IRemoteRepository {
         return status.getContentsStatus() != SVNStatusType.STATUS_NORMAL;
     }
 
-    public void setCredentials(String username, String password) {
+    public void setCredentials(String username, String password, boolean forceSacePlainPassword) {
         ourClientManager.dispose();
 
-        ISVNAuthenticationManager authManager = SVNWCUtil.createDefaultAuthenticationManager(username, password);
+        DefaultSVNAuthenticationManager authManager = new DefaultSVNAuthenticationManager(null, true, username,
+                password);
+        if (forceSacePlainPassword) {
+            authManager.setAuthenticationStorageOptions(FORCE_SAVE_PLAIN_PASSWORD);
+        }
         ISVNOptions options = SVNWCUtil.createDefaultOptions(true);
         ourClientManager = SVNClientManager.newInstance(options, authManager);
     }
@@ -167,4 +176,32 @@ public class SVNRemoteRepository implements IRemoteRepository {
             throw ex;
         }
     }
+
+    ISVNAuthenticationStorageOptions FORCE_SAVE_PLAIN_PASSWORD = new ISVNAuthenticationStorageOptions() {
+        public boolean isNonInteractive() throws SVNException {
+            return false;
+        }
+
+        public ISVNAuthStoreHandler getAuthStoreHandler() throws SVNException {
+            return FORCE_SAVE_PLAIN_PASSWORD_HANDLER;
+        }
+
+        public boolean isSSLPassphrasePromptSupported() {
+            return false;
+        }
+
+        public ISVNGnomeKeyringPasswordProvider getGnomeKeyringPasswordProvider() {
+            return null;
+        }
+    };
+
+    ISVNAuthStoreHandler FORCE_SAVE_PLAIN_PASSWORD_HANDLER = new ISVNAuthStoreHandler() {
+        public boolean canStorePlainTextPassphrases(String realm, SVNAuthentication auth) throws SVNException {
+            return false;
+        }
+
+        public boolean canStorePlainTextPasswords(String realm, SVNAuthentication auth) throws SVNException {
+            return true;
+        }
+    };
 }

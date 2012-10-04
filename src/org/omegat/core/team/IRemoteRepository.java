@@ -34,7 +34,7 @@ public interface IRemoteRepository {
     /**
      * Set credentials for repository access.
      */
-    void setCredentials(String username, String password);
+    void setCredentials(String username, String password, boolean forceSavePlainPassword);
 
     /**
      * Set repository read-only mode, or read-write mode.

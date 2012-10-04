@@ -24,7 +24,7 @@
 package org.omegat.core.team;
 
 import org.omegat.core.Core;
-import org.omegat.gui.dialogs.UserPassDialog;
+import org.omegat.gui.dialogs.TeamUserPassDialog;
 import org.omegat.util.OStrings;
 import org.omegat.util.gui.DockingUI;
 
@@ -40,15 +40,14 @@ public class RepositoryUtils {
      * @return true if user entered credentials, otherwise - false
      */
     public static boolean askForCredentials(IRemoteRepository repository, String message) {
-        UserPassDialog userPassDialog = new UserPassDialog(Core.getMainWindow().getApplicationFrame());
-        userPassDialog.cbReadOnly.setVisible(true);
+        TeamUserPassDialog userPassDialog = new TeamUserPassDialog(Core.getMainWindow().getApplicationFrame());
         DockingUI.displayCentered(userPassDialog);
-        userPassDialog.setTitle(OStrings.getString("TEAM_USERPASS_TITLE"));
         userPassDialog.descriptionTextArea.setText(message);
         userPassDialog.setVisible(true);
-        if (userPassDialog.getReturnStatus() == UserPassDialog.RET_OK) {
-            repository.setCredentials(userPassDialog.userText.getText(), new String(
-                    userPassDialog.passwordField.getPassword()));
+        if (userPassDialog.getReturnStatus() == TeamUserPassDialog.RET_OK) {
+            repository.setCredentials(userPassDialog.userText.getText(),
+                    new String(userPassDialog.passwordField.getPassword()),
+                    userPassDialog.cbForceSavePlainPassword.isSelected());
             repository.setReadOnly(userPassDialog.cbReadOnly.isSelected());
             return true;
         } else {

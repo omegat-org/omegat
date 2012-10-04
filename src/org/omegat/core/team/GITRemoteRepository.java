@@ -82,7 +82,7 @@ public class GITRemoteRepository implements IRemoteRepository {
         return status.getModified().contains(relativeFile);
     }
 
-    public void setCredentials(String username, String password) {
+    public void setCredentials(String username, String password, boolean forceSavePlainPassword) {
     }
 
     public void setReadOnly(boolean value) {

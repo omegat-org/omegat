@@ -1,3 +1,25 @@
+----------------------------------------------------------------------
+ OmegaT 2.6.1 update 2
+----------------------------------------------------------------------
+   2 Enhancements
+   1 Bug fix
+   0 Localisation update
+----------------------------------------------------------------------
+2.6.1 update 2 vs. 2.6.1 update 1
+
+  Implemented requests:
+
+  - Show where text has been added in match window
+  http://sourceforge.net/support/tracker.php?aid=1483716
+
+  - Save authentication information for team projects
+  http://sourceforge.net/support/tracker.php?aid=3574419
+
+  Bug fixes:
+
+  - Missing part from matches not highlighted
+  http://sourceforge.net/support/tracker.php?aid=1606024
+
  OmegaT 2.6.1 update 1
 ----------------------------------------------------------------------
    0 Enhancement
@@ -11,6 +33,7 @@
   - The Okapi plugin was not working: an exception was produced when trying 
 to load a file
 
+----------------------------------------------------------------------
  OmegaT 2.6.1
 ----------------------------------------------------------------------
    8 Enhancements

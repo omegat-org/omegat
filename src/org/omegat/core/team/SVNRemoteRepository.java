@@ -31,7 +31,6 @@ import org.tmatesoft.svn.core.SVNDepth;
 import org.tmatesoft.svn.core.SVNErrorCode;
 import org.tmatesoft.svn.core.SVNException;
 import org.tmatesoft.svn.core.SVNURL;
-import org.tmatesoft.svn.core.auth.BasicAuthenticationManager;
 import org.tmatesoft.svn.core.auth.ISVNAuthenticationManager;
 import org.tmatesoft.svn.core.wc.ISVNOptions;
 import org.tmatesoft.svn.core.wc.SVNClientManager;
@@ -62,7 +61,8 @@ public class SVNRemoteRepository implements IRemoteRepository {
     public SVNRemoteRepository(File localDirectory) throws Exception {
         this.baseDirectory = localDirectory;
         ISVNOptions options = SVNWCUtil.createDefaultOptions(true);
-        ourClientManager = SVNClientManager.newInstance(options, (ISVNAuthenticationManager) null);
+        ISVNAuthenticationManager authManager = SVNWCUtil.createDefaultAuthenticationManager();
+        ourClientManager = SVNClientManager.newInstance(options, authManager);
     }
 
     public boolean isChanged(File file) throws Exception {
@@ -74,7 +74,7 @@ public class SVNRemoteRepository implements IRemoteRepository {
     public void setCredentials(String username, String password) {
         ourClientManager.dispose();
 
-        ISVNAuthenticationManager authManager = new BasicAuthenticationManager(username, password);
+        ISVNAuthenticationManager authManager = SVNWCUtil.createDefaultAuthenticationManager(username, password);
         ISVNOptions options = SVNWCUtil.createDefaultOptions(true);
         ourClientManager = SVNClientManager.newInstance(options, authManager);
     }

@@ -79,6 +79,7 @@ OmegaT prend en charge directement les formats de fichier suivants :
   - Exportation Flash XML (.xml)
   - TXML Wordfast (*.txml)
   - Camtasia pour Windows (*.camproj)
+  - Visio (*.vxd)
 
 Il est également possible de personnaliser OmegaT pour accepter d'autres formats.
 
@@ -213,11 +214,13 @@ Contributions au code :
   Thomas Cordonnier
   Martin Fleurke  
   Wildrich Fourie
+  Phillip Hall
   Jean-Christophe Helary
   Thomas Huriaux
   Hans-Peter Jacobs
-  Guido Leenders
   Ibai Lakunza Velasco
+  Guido Leenders
+  Aaron Madlon-Kay
   Fabián Mandelbaum
   John Moran
   Maxym Mykhalchuk 
@@ -244,25 +247,23 @@ Autres contributions par :
 (Si vous pensez avoir contribué à OmegaT de manière significative et si votre nom ne se trouve pas sur cette liste, n'hésitez pas à nous contacter.)
 
 OmegaT utilise les bibliothèques suivantes :
-
-  HTMLParser par Somik Raha, Derrick Oswald, etc. (Licence LGPL)
-  http://sourceforge.net/projects/htmlparser
-
+  HTMLParser par Somik Raha, Derrick Oswald, etc. (licence LGPL)
   MRJ Adapter par Steve Roy (licence LGPL)
-  http://homepage.mac.com/sroy/mrjadapter/
-
   VLDocking Framework 2.1.4 par VLSolutions (licence CeCILL)
-  http://www.vlsolutions.com/fr/products/docking/
-
-  Hunspell par László Németh et d'autres personnes (Licence LGPL)
-
-  JNA par Todd Fast, Timothy Wall et d'autres personnes (Licence LGPL)
-
+  Hunspell par László Németh et d'autres personnes (licence LGPL)
+  JNA par Todd Fast, Timothy Wall et d'autres personnes (licence LGPL)
   Swing-Layout 1.0.2 (licence LGPL)
-
   Jmyspell 2.1.4 (licence LGPL)
-
-  JAXB 2.1.7 (GPLv2 + classpath exception)
+  JAXB (GPLv2 + classpath exception)
+  SJXP 1.0.2 (GPL v2)
+  SVNKit 1.7.5 (licence TMate)
+  Sequence Library (licence Sequence Library)
+  ANTLR 3.4 (licence ANTLR 3)
+  SQLJet 1.1.3 (GPL v2)
+  JGit (Eclipse Distribution License)
+  JSch (licence JSch)
+  Base64 (domaine public)
+  Diff (GPL)
 
 ==============================================================================
  5.  Est-ce qu'OmegaT vous pose problème ? Avez-vous besoin d'aide ?

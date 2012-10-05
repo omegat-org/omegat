@@ -59,7 +59,7 @@ public class DiffDriver {
         // Get "change script", a linked list of Diff.changes.
         Diff diff = new Diff(originalStrings, revisedStrings);
         Diff.change script = diff.diff_2(false);
-        assert (validate(script));
+        assert (validate(script, originalStrings, revisedStrings));
 
         Render result = new Render();
         StringBuffer rawText = new StringBuffer();
@@ -76,6 +76,9 @@ public class DiffDriver {
                     rawText.append(originalStrings[n]);
                 }
                 continue;
+            } else {
+            	// Next time, start search from the next change.
+            	script = c.link;
             }
 
             // Handle deletions
@@ -128,7 +131,9 @@ public class DiffDriver {
      * @return Element at index i, or null if not found
      */
     private static Diff.change search(int i, Diff.change script) {
-        if (script == null) {
+    	// Give up when we reach the end of the list,
+    	// OR if we've passed the desired index (list is sorted in increasing order).
+        if (script == null || script.line0 > i) {
             return null;
         }
 
@@ -139,11 +144,27 @@ public class DiffDriver {
         return search(i, script.link);
     }
 
-    private static boolean validate(Diff.change script) {
+    /**
+     * Double check some assumptions made about change scripts.
+     * Only meant to be called in debug, via assert.
+     * 
+     * @param script Linked list of Diff.change elements
+     * @param original Original strings
+     * @param revised Revised strings
+     * @return Whether or not the change script is valid
+     */
+    private static boolean validate(Diff.change script, String[] original, String[] revised) {
+    	Diff.change prev = null;
         for (Diff.change c = script; c != null; c = c.link) {
-            if (c.line1 > c.line0) {
-                return false;
+            // Script is sorted in increasing order of string line number.
+            if (prev != null && (c.line0 <= prev.line0 || c.line1 <= prev.line1)) {
+            	return false;
             }
+            // All changes will be accounted for by walking c.line0 in range [0, original.length].
+            if (c.line0 < 0 || c.line0 > original.length) {
+            	return false;
+            }
+            prev = c;
         }
         return true;
     }

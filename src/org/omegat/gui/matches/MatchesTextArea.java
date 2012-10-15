@@ -85,8 +85,10 @@ public class MatchesTextArea extends EntryInfoThreadPane<List<NearString>> imple
     private static final AttributeSet ATTRIBUTES_UNCHANGED = Styles.createAttributeSet(Color.green, null, null,
             null);
     private static final AttributeSet ATTRIBUTES_SELECTED = Styles.createAttributeSet(null, null, true, null);
-    private static final AttributeSet ATTRIBUTES_DELETED = Styles.createAttributeSet(Color.red, null, true, null, true, null);
-    private static final AttributeSet ATTRIBUTES_INSERTED = Styles.createAttributeSet(Color.green, null, true, null, null, true);
+    private static final AttributeSet ATTRIBUTES_DELETED_ACTIVE = Styles.createAttributeSet(Color.red, null, true, null, true, null);
+    private static final AttributeSet ATTRIBUTES_DELETED_INACTIVE = Styles.createAttributeSet(Color.gray, null, null, null, true, null);
+    private static final AttributeSet ATTRIBUTES_INSERTED_ACTIVE = Styles.createAttributeSet(Color.green, null, true, null, null, true);
+    private static final AttributeSet ATTRIBUTES_INSERTED_INACTIVE = Styles.createAttributeSet(Color.gray, null, null, null, null, true);
     
     private final List<NearString> matches = new ArrayList<NearString>();
 
@@ -376,20 +378,30 @@ public class MatchesTextArea extends EntryInfoThreadPane<List<NearString>> imple
 	        }
         }
         
-        // Apply diff styling
-        List<TextRun> diffInfo = diffInfos.get(activeMatch);
-        if (diffPos.get(activeMatch) != -1 && diffInfo != null) {
-	        for (TextRun r : diffInfo) {
-	        	int tokstart = start + diffPos.get(activeMatch) + r.start;
-	        	switch (r.type) {
-	        	case DELETE:
-	        		doc.setCharacterAttributes(tokstart, r.length, ATTRIBUTES_DELETED, false);
-	        		break;
-	        	case INSERT:
-	        		doc.setCharacterAttributes(tokstart, r.length, ATTRIBUTES_INSERTED, false);
-	        	}
-	        }
-    	}
+        // Apply diff styling to ALL diffs, with colors only for activeMatch
+        for (int i = 0; i < diffPos.size(); i++) {
+	        List<TextRun> diffInfo = diffInfos.get(i);
+	        if (diffPos.get(i) != -1 && diffInfo != null) {
+		        for (TextRun r : diffInfo) {
+		        	int tokstart = delimiters.get(i) + diffPos.get(i) + r.start;
+		        	switch (r.type) {
+		        	case DELETE:
+		        		doc.setCharacterAttributes(
+		        				tokstart,
+		        				r.length,
+		        				i == activeMatch ? ATTRIBUTES_DELETED_ACTIVE : ATTRIBUTES_DELETED_INACTIVE,
+		        				false);
+		        		break;
+		        	case INSERT:
+		        		doc.setCharacterAttributes(
+		        				tokstart,
+		        				r.length,
+		        				i == activeMatch ? ATTRIBUTES_INSERTED_ACTIVE : ATTRIBUTES_INSERTED_INACTIVE,
+		        				false);
+		        	}
+		        }
+	    	}
+        }
 
         doc.setCharacterAttributes(start, end - start, ATTRIBUTES_SELECTED, false);
         setCaretPosition(end - 2); // two newlines

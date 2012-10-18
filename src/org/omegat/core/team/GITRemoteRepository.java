@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2012 Alex Buloichik
@@ -24,21 +24,36 @@
 package org.omegat.core.team;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.Properties;
+
+import javax.swing.JOptionPane;
 
 import org.eclipse.jgit.api.CloneCommand;
 import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.api.LogCommand;
 import org.eclipse.jgit.api.ResetCommand;
 import org.eclipse.jgit.api.Status;
+import org.eclipse.jgit.errors.UnsupportedCredentialItem;
 import org.eclipse.jgit.lib.ProgressMonitor;
 import org.eclipse.jgit.lib.Ref;
 import org.eclipse.jgit.lib.Repository;
 import org.eclipse.jgit.revwalk.RevCommit;
 import org.eclipse.jgit.revwalk.RevWalk;
+import org.eclipse.jgit.transport.CredentialItem;
+import org.eclipse.jgit.transport.CredentialsProvider;
 import org.eclipse.jgit.transport.PushResult;
 import org.eclipse.jgit.transport.RemoteRefUpdate;
+import org.eclipse.jgit.transport.URIish;
+import org.omegat.core.Core;
+import org.omegat.gui.dialogs.TeamUserPassDialog;
 import org.omegat.util.FileUtil;
 import org.omegat.util.Log;
+import org.omegat.util.OStrings;
+import org.omegat.util.gui.DockingUI;
 
 /**
  * GIT repository connection implementation.
@@ -46,6 +61,7 @@ import org.omegat.util.Log;
  * Please, do not use it with autocrlf option, since jgit not supported it yet.
  * 
  * @author Alex Buloichik (alex73mail@gmail.com)
+ * @author Martin Fleurke
  */
 public class GITRemoteRepository implements IRemoteRepository {
     static String LOCAL_BRANCH = "master";
@@ -56,12 +72,16 @@ public class GITRemoteRepository implements IRemoteRepository {
     File localDirectory;
     Repository repository;
 
+    private MyCredentialsProvider myCredentialsProvider;
+
     public static boolean isGITDirectory(File localDirectory) {
         return getLocalRepositoryRoot(localDirectory) != null;
     }
 
     public GITRemoteRepository(File localDirectory) throws Exception {
         this.localDirectory = localDirectory;
+        myCredentialsProvider = new MyCredentialsProvider(this);
+        CredentialsProvider.setDefault(myCredentialsProvider);
         File localRepositoryDirectory = getLocalRepositoryRoot(localDirectory);
         if (localRepositoryDirectory != null) {
             repository = Git.open(localRepositoryDirectory).getRepository();
@@ -83,6 +103,8 @@ public class GITRemoteRepository implements IRemoteRepository {
     }
 
     public void setCredentials(String username, String password, boolean forceSavePlainPassword) {
+        //we use internal credentials provider, so this function is never called. Nothing to implement.
+        //if this function IS called, then we should implement myCredentialsProvider.setUsername/password()
     }
 
     public void setReadOnly(boolean value) {
@@ -218,4 +240,168 @@ public class GITRemoteRepository implements IRemoteRepository {
             System.out.println("beginTask: " + title + " total: " + totalWork);
         }
     };
+
+    /**
+     * CredentialsProvider that will ask user for credentials when required,
+     * and can store the credentials to plain text file.
+      */
+    private class MyCredentialsProvider extends CredentialsProvider {
+        GITRemoteRepository gitRemoteRepository;
+        /**
+         * Name of file to store credentials in (when asked)
+         */
+        String credentialsFilename;
+
+        /**
+         * key in properties file that contains credentials
+         */
+        private final String pkey_username = "username";
+        private final String pkey_password = "password";
+
+        /**
+         * Currently used username
+         */
+        private String username;
+        /**
+         * Currently used password
+         */
+        private char[] password;
+
+        public MyCredentialsProvider(GITRemoteRepository repo) {
+            super();
+            this.gitRemoteRepository = repo;
+            credentialsFilename = gitRemoteRepository.localDirectory+File.separator+"credentials.properties";
+            File credentialsFile = new File(credentialsFilename);
+            if (credentialsFile.canRead()) {
+                Properties p = new Properties();
+                try {
+                    p.load(new FileInputStream(credentialsFile));
+                    username = p.getProperty(pkey_username);
+                    password = p.getProperty(pkey_password).toCharArray();
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+        @Override
+        public boolean get(URIish uri, CredentialItem... items)
+                throws UnsupportedCredentialItem {
+            boolean ok = false;
+            for (CredentialItem i : items) {
+                if (i instanceof CredentialItem.Username) {
+                    if (username==null) {
+                        ok = askCredentials();
+                        if (!ok) {
+                            throw new UnsupportedCredentialItem(uri, OStrings.getString("TEAM_CREDENTIALS_DENIED"));
+                        }
+                    }
+                    ((CredentialItem.Username) i).setValue(username);
+                    continue;
+                } else if (i instanceof CredentialItem.Password) {
+                    if (password==null) {
+                        ok = askCredentials();
+                        if (!ok) {
+                            throw new UnsupportedCredentialItem(uri, OStrings.getString("TEAM_CREDENTIALS_DENIED"));
+                        }
+                    }
+                    ((CredentialItem.Password) i).setValue(password);
+                    continue;
+                } else if (i instanceof CredentialItem.StringType) {
+                    if (i.getPromptText().equals("Password: ")) {
+                        if (password==null) {
+                            if (!ok) {
+                                ok = askCredentials();
+                                if (!ok) {
+                                    throw new UnsupportedCredentialItem(uri, OStrings.getString("TEAM_CREDENTIALS_DENIED"));
+                                }
+                            }
+                        }
+                        ((CredentialItem.StringType) i).setValue(new String(password));
+                        continue;
+                    }
+                } else if (i instanceof CredentialItem.YesNoType) {
+                    int choice = JOptionPane.showConfirmDialog(Core.getMainWindow().getApplicationFrame(), i.getPromptText(),null , JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+                    if (choice==JOptionPane.YES_OPTION) {
+                        ((CredentialItem.YesNoType) i).setValue(true);
+                    } else {
+                        ((CredentialItem.YesNoType) i).setValue(false);
+                    }
+                    continue;
+                } else if (i instanceof CredentialItem.InformationalMessage) {
+                    JOptionPane.showMessageDialog(Core.getMainWindow().getApplicationFrame(), i.getPromptText());
+                    continue;
+                }
+                throw new UnsupportedCredentialItem(uri, i.getClass().getName()
+                        + ":" + i.getPromptText());
+            }
+            return true;
+        }
+
+        @Override
+        public boolean isInteractive() {
+            return true;
+        }
+
+        @Override
+        public boolean supports(CredentialItem... items) {
+            for (CredentialItem i : items) {
+                if (i instanceof CredentialItem.Username)
+                    continue;
+
+                else if (i instanceof CredentialItem.Password)
+                    continue;
+
+                else
+                    return false;
+            }
+            return true;
+        }
+
+        /**
+         * shows dialog to ask for credentials, and stores credentials.
+         * @return true when entered, false on cancel.
+         */
+        private boolean askCredentials() {
+            TeamUserPassDialog userPassDialog = new TeamUserPassDialog(Core.getMainWindow().getApplicationFrame());
+            DockingUI.displayCentered(userPassDialog);
+            userPassDialog.descriptionTextArea.setText(OStrings.getString(username==null ? "TEAM_USERPASS_FIRST" : "TEAM_USERPASS_WRONG"));
+            userPassDialog.setVisible(true);
+            if (userPassDialog.getReturnStatus() == TeamUserPassDialog.RET_OK) {
+                username = userPassDialog.userText.getText();
+                password = userPassDialog.passwordField.getPassword();
+                gitRemoteRepository.setReadOnly(userPassDialog.cbReadOnly.isSelected());
+                if (userPassDialog.cbForceSavePlainPassword.isSelected()) {
+                    Properties p = new Properties();
+                    p.setProperty(pkey_username, username);
+                    p.setProperty(pkey_password, String.valueOf(password));
+                    File credentialsFile = new File(credentialsFilename);
+                    try {
+                        if (!credentialsFile.exists()) {
+                            credentialsFile.createNewFile();
+                        }
+                        p.store(new FileOutputStream(credentialsFile), "git remote access credentials for OmegaT project");
+                    } catch (FileNotFoundException e) {
+                        e.printStackTrace();
+                        JOptionPane.showMessageDialog(Core.getMainWindow().getApplicationFrame(), "could not save credentials to textfile");
+                    } catch (IOException e) {
+                        JOptionPane.showMessageDialog(Core.getMainWindow().getApplicationFrame(), "could not save credentials to textfile");
+                        e.printStackTrace();
+                    }
+                }
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+        public void reset(URIish uri) {
+            //reset is called after 5 authorization failures. After 3 resets, the transport gives up.
+            username = null;
+            password = null;
+        }
+
+    }
 }

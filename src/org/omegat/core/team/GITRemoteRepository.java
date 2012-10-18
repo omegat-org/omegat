@@ -41,7 +41,7 @@ import org.omegat.util.FileUtil;
 import org.omegat.util.Log;
 
 /**
- * SVN repository connection implementation.
+ * GIT repository connection implementation.
  * 
  * Please, do not use it with autocrlf option, since jgit not supported it yet.
  * 

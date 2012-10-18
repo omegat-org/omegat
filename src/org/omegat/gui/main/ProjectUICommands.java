@@ -170,7 +170,7 @@ public class ProjectUICommands {
                         }
                     }.execute(repository);
                 } catch (Exception ex) {
-                    Core.getMainWindow().displayErrorRB(ex, "TEAM_CHECKOUT_ERROR", ex.getMessage());
+                    Core.getMainWindow().displayErrorRB(ex, "TEAM_CHECKOUT_ERROR");
                     mainWindow.setCursor(oldCursor);
                     return null;
                 }
@@ -324,7 +324,7 @@ public class ProjectUICommands {
                             }.execute(repository);
                         }
                     } catch (Exception ex) {
-                        Core.getMainWindow().displayErrorRB(ex, "TEAM_CHECKOUT_ERROR", ex.getMessage());
+                        Core.getMainWindow().displayErrorRB(ex, "TEAM_CHECKOUT_ERROR");
                         mainWindow.setCursor(oldCursor);
                         return null;
                     }

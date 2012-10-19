@@ -20,7 +20,7 @@
 	<classpathentry kind="lib" path="lib/swing-worker-1.2.jar" sourcepath="lib/sources/swing-worker-src-1.2.zip"/>
 	<classpathentry kind="lib" path="lib/sjsxp-1.0.2.jar"/>
 	<classpathentry kind="lib" path="lib/org.eclipse.jgit-2.1.0.201209190230-r.jar"/>
-	<classpathentry kind="lib" path="lib/jsch-0.1.46.jar"/>
+	<classpathentry kind="lib" path="lib/jsch-0.1.49.jar"/>
 	<classpathentry kind="lib" path="lib/sequence-library-1.0.2.jar"/>
 	<classpathentry kind="lib" path="lib/svnkit-1.7.5.jar"/>
 	<classpathentry kind="lib" path="lib/sqljet-1.1.3.jar"/>

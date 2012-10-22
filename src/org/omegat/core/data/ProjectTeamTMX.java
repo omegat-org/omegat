@@ -109,10 +109,12 @@ public class ProjectTeamTMX extends ProjectTMX {
         repository.restoreBase(orig);
         baseTMX = new ProjectTMX(props.getSourceLanguage(), props.getTargetLanguage(), props.isSentenceSegmentingEnabled(), orig, null);
 
+        boolean needUpload = false;
         // update to HEAD revision from repository and load
         try {
             repository.download(orig);
             setOnlineMode();
+            needUpload = true;
         } catch (SocketException ex) {
             setOfflineMode();
         } catch (Exception ex) {
@@ -164,19 +166,21 @@ public class ProjectTeamTMX extends ProjectTMX {
         }
 
         // upload updated
-        final String author = Preferences.getPreferenceDefault(Preferences.TEAM_AUTHOR,
-                System.getProperty("user.name"));
-        try {
-            new RepositoryUtils.AskCredentials() {
-                public void callRepository() throws Exception {
-                    repository.upload(orig, "Translated by " + author);
-                }
-            }.execute(repository);
-            setOnlineMode();
-        } catch(SocketException ex) {
-            setOfflineMode();
-        } catch (Exception ex) {
-            throw new KnownException(ex, "TEAM_SYNCHRONIZATION_ERROR");
+        if (needUpload) {
+            final String author = Preferences.getPreferenceDefault(Preferences.TEAM_AUTHOR,
+                    System.getProperty("user.name"));
+            try {
+                new RepositoryUtils.AskCredentials() {
+                    public void callRepository() throws Exception {
+                        repository.upload(orig, "Translated by " + author);
+                    }
+                }.execute(repository);
+                setOnlineMode();
+            } catch (SocketException ex) {
+                setOfflineMode();
+            } catch (Exception ex) {
+                throw new KnownException(ex, "TEAM_SYNCHRONIZATION_ERROR");
+            }
         }
     }
 

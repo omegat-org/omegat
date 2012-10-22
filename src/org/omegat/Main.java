@@ -421,7 +421,7 @@ public class Main {
 
         RealProject p = new RealProject(projectProperties);
         if (loadProject)
-            p.loadProject();
+            p.loadProject(true);
         Core.setProject(p);
         return p;
     }

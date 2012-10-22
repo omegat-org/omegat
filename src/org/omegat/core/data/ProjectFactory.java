@@ -61,10 +61,10 @@ public class ProjectFactory {
      * @param props
      *            properties for new project
      */
-    public static void loadProject(ProjectProperties props, IRemoteRepository repository) {
+    public static void loadProject(ProjectProperties props, IRemoteRepository repository, boolean onlineMode) {
         Core.getAutoSave().disable();
         RealProject p = new RealProject(props, repository);
-        p.loadProject();
+        p.loadProject(onlineMode);
         Core.setProject(p);
         Core.getAutoSave().enable();
         CoreEvents.fireProjectChange(IProjectEventListener.PROJECT_CHANGE_TYPE.LOAD);

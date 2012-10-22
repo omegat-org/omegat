@@ -34,7 +34,6 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InterruptedIOException;
 import java.io.RandomAccessFile;
-import java.lang.reflect.Method;
 import java.nio.channels.FileChannel;
 import java.nio.channels.FileLock;
 import java.text.Collator;
@@ -48,7 +47,6 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
-import java.util.concurrent.ExecutionException;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -213,7 +211,7 @@ public class RealProject implements IProject {
                 Segmenter.srx = Preferences.getSRX();
             }
 
-            loadTranslations();
+            loadTranslations(true);
 
             loadTM();
 
@@ -231,7 +229,7 @@ public class RealProject implements IProject {
     /**
      * Load exist project in a "big" sense -- loads project's properties, glossaries, tms, source files etc.
      */
-    public void loadProject() {
+    public void loadProject(boolean onlineMode) {
         LOGGER.info(OStrings.getString("LOG_DATAENGINE_LOAD_START"));
         UIThreadsUtil.mustNotBeSwingThread();
 
@@ -263,7 +261,7 @@ public class RealProject implements IProject {
 
             loadSourceFiles();
 
-            loadTranslations();
+            loadTranslations(onlineMode);
             
             importTranslationsFromSources();
 
@@ -555,7 +553,7 @@ public class RealProject implements IProject {
     // protected functions
 
     /** Finds and loads project's TMX file with translations (project_save.tmx). */
-    private void loadTranslations() throws Exception {
+    private void loadTranslations(boolean onlineMode) throws Exception {
 
         final File tmxFile = new File(m_config.getProjectInternal() + OConsts.STATUS_EXTENSION);
 
@@ -564,7 +562,7 @@ public class RealProject implements IProject {
 
             if (repository != null) {
                 // team project
-                projectTMX = new ProjectTeamTMX(m_config, tmxFile, checkOrphanedCallback, repository);
+                projectTMX = new ProjectTeamTMX(m_config, tmxFile, checkOrphanedCallback, repository, onlineMode);
             } else {
                 // local project
                 projectTMX = new ProjectTMX(m_config.getSourceLanguage(), m_config.getTargetLanguage(), m_config.isSentenceSegmentingEnabled(), tmxFile, checkOrphanedCallback);

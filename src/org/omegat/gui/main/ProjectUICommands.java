@@ -177,7 +177,7 @@ public class ProjectUICommands {
 
                 try {
                     ProjectProperties props = ProjectFileStorage.loadProjectProperties(localDirectory);
-                    ProjectFactory.loadProject(props, repository);
+                    ProjectFactory.loadProject(props, repository, true);
                 } catch (Exception ex) {
                     Log.logErrorRB(ex, "PP_ERROR_UNABLE_TO_READ_PROJECT_FILE");
                     Core.getMainWindow().displayErrorRB(ex, "PP_ERROR_UNABLE_TO_READ_PROJECT_FILE");
@@ -308,6 +308,7 @@ public class ProjectUICommands {
                 }
 
                 if (repository != null) {
+                    boolean onlineMode = true;
                     try {
                         File tmxFile = new File(props.getProjectInternal() + OConsts.STATUS_EXTENSION);
                         if (repository.isChanged(tmxFile)) {
@@ -323,13 +324,18 @@ public class ProjectUICommands {
                                 }
                             }.execute(repository);
                         }
+                    } catch (IRemoteRepository.NetworkException ex) {
+                        onlineMode = false;
+                        Log.logInfoRB("VCS_OFFLINE");
+                        Core.getMainWindow().displayWarningRB("VCS_OFFLINE");
                     } catch (Exception ex) {
+                        Log.logErrorRB(ex, "TEAM_CHECKOUT_ERROR", ex.getMessage());
                         Core.getMainWindow().displayErrorRB(ex, "TEAM_CHECKOUT_ERROR", ex.getMessage());
                         mainWindow.setCursor(oldCursor);
                         return null;
                     }
                     try {
-                        ProjectFactory.loadProject(props, repository);
+                        ProjectFactory.loadProject(props, repository, onlineMode);
                     } catch (Exception ex) {
                         Log.logErrorRB(ex, "PP_ERROR_UNABLE_TO_READ_PROJECT_FILE");
                         Core.getMainWindow().displayErrorRB(ex, "PP_ERROR_UNABLE_TO_READ_PROJECT_FILE");
@@ -356,7 +362,7 @@ public class ProjectUICommands {
                             }
                         }
 
-                        ProjectFactory.loadProject(props, repository);
+                        ProjectFactory.loadProject(props, repository, true);
                         if (needToSaveProperties) {
                             Core.getProject().saveProjectProperties();
                         }
@@ -405,7 +411,7 @@ public class ProjectUICommands {
                 Core.getProject().saveProject();
                 ProjectFactory.closeProject();
 
-                ProjectFactory.loadProject(props, repository);
+                ProjectFactory.loadProject(props, repository, true);
                 mainWindow.setCursor(oldCursor);
                 return null;
             }
@@ -519,7 +525,7 @@ public class ProjectUICommands {
                 Core.getProject().saveProject();
                 ProjectFactory.closeProject();
 
-                ProjectFactory.loadProject(newProps, null);
+                ProjectFactory.loadProject(newProps, null, true);
                 Core.getProject().saveProjectProperties();
                 return null;
             }

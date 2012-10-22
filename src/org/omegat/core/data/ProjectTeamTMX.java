@@ -77,11 +77,11 @@ public class ProjectTeamTMX extends ProjectTMX {
     boolean isOnlineMode;
 
     public ProjectTeamTMX(ProjectProperties props, File file, CheckOrphanedCallback callback,
-            IRemoteRepository repository) throws Exception {
+            IRemoteRepository repository, boolean onlineMode) throws Exception {
         super(props.getSourceLanguage(), props.getTargetLanguage(), props.isSentenceSegmentingEnabled(), file, callback);
 
         this.repository = repository;
-        isOnlineMode = true;
+        isOnlineMode = onlineMode;
     }
 
     /**

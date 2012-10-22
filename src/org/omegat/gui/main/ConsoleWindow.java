@@ -82,6 +82,10 @@ public class ConsoleWindow implements IMainWindow {
         System.out.println(msg);
     }
 
+    public void displayWarningRB(String message, Object... args) {
+        System.err.println(StaticUtils.format(OStrings.getString(message), args));
+    }
+
     /**
      * {@inheritDoc}
      */

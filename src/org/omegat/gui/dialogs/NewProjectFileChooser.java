@@ -59,13 +59,17 @@ public class NewProjectFileChooser extends OmegaTFileChooser {
     public void approveSelection() {
         // user hit 'open' button - redirect command to open project or
         // recurse into lower directory
-        if (getSelectedFile().exists()) {
-            // must select non-existing name for project
-            JOptionPane.showMessageDialog(this, OStrings.getString("NDC_SELECT_UNIQUE"),
+        File dir = getSelectedFile();
+        if (dir.exists()) {
+            File[] files = dir.listFiles();
+            if (files.length > 0) {
+                // must select non-existing name or empty dir for project
+                JOptionPane.showMessageDialog(this, OStrings.getString("NDC_SELECT_NEW_OR_EMPTY"),
                     OStrings.getString("NDC_SELECT_UNIQUE_TITLE"), JOptionPane.ERROR_MESSAGE);
-        } else {
-            // this is OK - continue
-            super.approveSelection();
+                return;
+            }
         }
+        // this is OK - continue
+        super.approveSelection();
     }
 }

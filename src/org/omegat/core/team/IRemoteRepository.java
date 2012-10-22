@@ -32,6 +32,14 @@ import java.io.File;
  */
 public interface IRemoteRepository {
     /**
+     * Allow or disable file locking.
+     * 
+     * File locking should be disabled for some repositories which check full snapshots instead one file, like
+     * git,
+     */
+    boolean isFilesLockingAllowed();
+
+    /**
      * Set credentials for repository access.
      */
     void setCredentials(String username, String password, boolean forceSavePlainPassword);

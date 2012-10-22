@@ -41,6 +41,7 @@ import org.eclipse.jgit.errors.UnsupportedCredentialItem;
 import org.eclipse.jgit.lib.ProgressMonitor;
 import org.eclipse.jgit.lib.Ref;
 import org.eclipse.jgit.lib.Repository;
+import org.eclipse.jgit.lib.StoredConfig;
 import org.eclipse.jgit.revwalk.RevCommit;
 import org.eclipse.jgit.revwalk.RevWalk;
 import org.eclipse.jgit.transport.CredentialItem;
@@ -58,7 +59,10 @@ import org.omegat.util.gui.DockingUI;
 /**
  * GIT repository connection implementation.
  * 
- * Please, do not use it with autocrlf option, since jgit not supported it yet.
+ * Project should use "autocrlf=true" options. Otherwise, repository can be changed every 5 minutes. This
+ * property will be setted by OmegaT on checkoutFullProject().
+ * 
+ * GIT project can't be locked, because git requires to update full snapshot.
  * 
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Martin Fleurke
@@ -78,6 +82,10 @@ public class GITRemoteRepository implements IRemoteRepository {
         return getLocalRepositoryRoot(localDirectory) != null;
     }
 
+    public boolean isFilesLockingAllowed() {
+        return false;
+    }
+
     public GITRemoteRepository(File localDirectory) throws Exception {
         this.localDirectory = localDirectory;
         myCredentialsProvider = new MyCredentialsProvider(this);
@@ -94,6 +102,11 @@ public class GITRemoteRepository implements IRemoteRepository {
         c.setDirectory(localDirectory);
         c.call();
         repository = Git.open(localDirectory).getRepository();
+
+        // set core.autocrlf
+        StoredConfig config = repository.getConfig();
+        config.setBoolean("core", null, "autocrlf", true);
+        config.save();
     }
 
     public boolean isChanged(File file) throws Exception {

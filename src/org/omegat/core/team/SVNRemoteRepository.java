@@ -61,6 +61,10 @@ public class SVNRemoteRepository implements IRemoteRepository {
         return svnDir.exists() && svnDir.isDirectory();
     }
 
+    public boolean isFilesLockingAllowed() {
+        return true;
+    }
+
     /**
      * Open working copy.
      */

@@ -369,6 +369,11 @@ public class RealProject implements IProject {
         if (!RuntimePreferences.isProjectLockingEnabled()) {
             return;
         }
+        if (repository != null) {
+            if (!repository.isFilesLockingAllowed()) {
+                return;
+            }
+        }
         try {
             File lockFile = new File(m_config.getProjectRoot(), OConsts.FILE_PROJECT);
             lockChannel = new RandomAccessFile(lockFile, "rw").getChannel();
@@ -384,6 +389,11 @@ public class RealProject implements IProject {
     protected void unlockProject() {
         if (!RuntimePreferences.isProjectLockingEnabled()) {
             return;
+        }
+        if (repository != null) {
+            if (!repository.isFilesLockingAllowed()) {
+                return;
+            }
         }
         try {
             lock.release();

@@ -2,8 +2,8 @@
  OmegaT 2.6.1 update 2
 ----------------------------------------------------------------------
    2 Enhancements
-   1 Bug fix
-   0 Localisation update
+   3 Bug fixes
+   1 Localisation update
 ----------------------------------------------------------------------
 2.6.1 update 2 vs. 2.6.1 update 1
 
@@ -20,6 +20,19 @@
   - Missing part from matches not highlighted
   http://sourceforge.net/support/tracker.php?aid=1606024
 
+  - It was not possible to use team projects offline. Now, when the 
+connection is off, a message mentions the project is in offline mode.
+The connection continues to be tested on each save. When the connection
+comes back, a message informs the user that the project is back in online
+mode.
+
+  - Git end of lines where not handled correctly under Windows
+
+  Localisation updates:
+
+  - Japanese localization updated to 2.6.0 update 1 (UI)
+
+----------------------------------------------------------------------
  OmegaT 2.6.1 update 1
 ----------------------------------------------------------------------
    0 Enhancement

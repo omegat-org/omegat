@@ -15,6 +15,10 @@
   - Save authentication information for team projects
   http://sourceforge.net/support/tracker.php?aid=3574419
 
+  Other enhancements:
+
+  - Git authorized access
+
   Bug fixes:
 
   - Missing part from matches not highlighted

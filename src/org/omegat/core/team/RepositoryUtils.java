@@ -55,7 +55,18 @@ public class RepositoryUtils {
         }
     }
 
+    /**
+     * Class to execute a repository command that can throw a IRemoteRepository.AuthenticationException.
+     * In that case, a username/password dialog will be shown.
+     */
     public static abstract class AskCredentials {
+
+       /**
+         * wrapper around callRepository to execute some repository command. 
+         * On IRemoteRepository.AuthenticationException, show username/password dialog and try again.
+         * @param repository
+         * @throws Exception when no credentials entered.
+         */
         public void execute(IRemoteRepository repository) throws Exception {
             boolean firstPass = true;
             while (true) {
@@ -73,6 +84,13 @@ public class RepositoryUtils {
             }
         }
 
+        /**
+         * Implement here a function to execute, which can throw an IRemoteRepository.AuthenticationException.
+         * It is called by the execute() function which will show an username/password dialog on this exeption.
+         * Other execptions are thrown.
+         * @throws Exception Any exception;
+         * can even be IRemoteRepository.AuthenticationException in case user did not enter his credentials.
+         */
         abstract protected void callRepository() throws Exception;
     }
 

@@ -97,7 +97,7 @@ public class SVNRemoteRepository implements IRemoteRepository {
         readOnly = value;
     }
 
-    public void updateFullProject() throws Exception {
+    public void updateFullProject() throws SocketException, Exception {
         Log.logInfoRB("SVN_START", "update");
         try {
             ourClientManager.getUpdateClient().doUpdate(baseDirectory, SVNRevision.HEAD, SVNDepth.INFINITY,
@@ -145,7 +145,7 @@ public class SVNRemoteRepository implements IRemoteRepository {
         ourClientManager.getWCClient().doRevert(new File[] { file }, SVNDepth.EMPTY, null);
     }
 
-    public void download(File file) throws Exception {
+    public void download(File file) throws SocketException, Exception {
         Log.logInfoRB("SVN_START", "download");
         try {
             ourClientManager.getUpdateClient().doUpdate(file, SVNRevision.HEAD, SVNDepth.INFINITY, false,
@@ -161,7 +161,7 @@ public class SVNRemoteRepository implements IRemoteRepository {
         }
     }
 
-    public void upload(File file, String commitMessage) throws Exception {
+    public void upload(File file, String commitMessage) throws SocketException, Exception {
         if (readOnly) {
             // read-only - upload disabled
             Log.logInfoRB("SVN_READONLY");
@@ -192,14 +192,14 @@ public class SVNRemoteRepository implements IRemoteRepository {
         }
     }
 
-    void checkNetworkException(Exception ex) throws SocketException {
+    void checkNetworkException(Exception ex) throws NetworkException {
         if (ex.getCause() instanceof SocketException) {
-            throw (SocketException) ex.getCause();
+            throw new NetworkException(ex.getCause());
         }
         if (ex instanceof SVNException) {
             SVNException se = (SVNException) ex;
             if (se.getErrorMessage().getErrorCode().getCategory() == SVNErrorCode.RA_DAV_CATEGORY) {
-                throw new SocketException(se.getMessage());
+                throw new NetworkException(se);
             }
         }
     }

@@ -57,7 +57,7 @@ public interface IRemoteRepository {
     /**
      * Update full project from remote repository.
      */
-    void updateFullProject() throws Exception;
+    void updateFullProject() throws NetworkException, Exception;
 
     /**
      * Initial project checkout.
@@ -77,7 +77,7 @@ public interface IRemoteRepository {
     /**
      * Download HEAD revision of file from remote repository.
      */
-    void download(File file) throws Exception;
+    void download(File file) throws NetworkException, Exception;
 
     /**
      * Upload local changes into remote repository.
@@ -90,10 +90,16 @@ public interface IRemoteRepository {
      * 
      * 2. Somebody changed other segments in repository.
      */
-    void upload(File file, String commitMessage) throws Exception;
+    void upload(File file, String commitMessage) throws NetworkException, Exception;
 
     public static class AuthenticationException extends Exception {
         public AuthenticationException(Exception ex) {
+            super(ex);
+        }
+    }
+
+    public static class NetworkException extends Exception {
+        public NetworkException(Throwable ex) {
             super(ex);
         }
     }

@@ -25,7 +25,6 @@ package org.omegat.core.data;
 
 import java.io.File;
 import java.io.IOException;
-import java.net.SocketException;
 import java.util.Map;
 
 import org.omegat.core.Core;
@@ -115,7 +114,7 @@ public class ProjectTeamTMX extends ProjectTMX {
             repository.download(orig);
             setOnlineMode();
             needUpload = true;
-        } catch (SocketException ex) {
+        } catch (IRemoteRepository.NetworkException ex) {
             setOfflineMode();
         } catch (Exception ex) {
         }
@@ -176,7 +175,7 @@ public class ProjectTeamTMX extends ProjectTMX {
                     }
                 }.execute(repository);
                 setOnlineMode();
-            } catch (SocketException ex) {
+            } catch (IRemoteRepository.NetworkException ex) {
                 setOfflineMode();
             } catch (Exception ex) {
                 throw new KnownException(ex, "TEAM_SYNCHRONIZATION_ERROR");

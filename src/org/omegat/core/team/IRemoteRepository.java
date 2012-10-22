@@ -92,12 +92,30 @@ public interface IRemoteRepository {
      */
     void upload(File file, String commitMessage) throws NetworkException, Exception;
 
+    /**
+     * Credentials are not provided or not correct. Should trigger credentials-prompt
+     */
+    @SuppressWarnings("serial")
     public static class AuthenticationException extends Exception {
         public AuthenticationException(Exception ex) {
             super(ex);
         }
     }
+    /**
+     * Given repository does not exist on the remote machine
+     *
+     */
+    @SuppressWarnings("serial")
+	public static class BadRepositoryException extends Exception {
+        public BadRepositoryException(String message) {
+            super(message);
+        }
+    }
 
+    /**
+     * Network problems. E.g. no internet available.
+     */
+    @SuppressWarnings("serial")
     public static class NetworkException extends Exception {
         public NetworkException(Throwable ex) {
             super(ex);

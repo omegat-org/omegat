@@ -162,6 +162,8 @@ public class ProjectUICommands {
                         return null;
                     }
 
+                    //do checkoutFullProject. This can throw IRemoteRepository.AuthenticationException,
+                    //so we wrap it in a AskCredentials object that will show credentials dialog.
                     new RepositoryUtils.AskCredentials() {
                         public void callRepository() throws Exception {
                             Core.getMainWindow().showStatusMessageRB("TEAM_CHECKOUT");
@@ -169,7 +171,13 @@ public class ProjectUICommands {
                             Core.getMainWindow().showStatusMessageRB(null);
                         }
                     }.execute(repository);
+                } catch (IRemoteRepository.BadRepositoryException bre) {
+                    Object[] args = { bre.getMessage() };
+                    Core.getMainWindow().showErrorDialogRB("TEAM_BADREPOSITORY_ERROR", args, "TF_ERROR");
+                    mainWindow.setCursor(oldCursor);
+                    return null;
                 } catch (Exception ex) {
+                    ex.printStackTrace();
                     Core.getMainWindow().displayErrorRB(ex, "TEAM_CHECKOUT_ERROR");
                     mainWindow.setCursor(oldCursor);
                     return null;

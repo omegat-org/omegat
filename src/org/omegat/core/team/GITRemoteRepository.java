@@ -37,6 +37,7 @@ import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.api.LogCommand;
 import org.eclipse.jgit.api.ResetCommand;
 import org.eclipse.jgit.api.Status;
+import org.eclipse.jgit.api.errors.InvalidRemoteException;
 import org.eclipse.jgit.api.errors.TransportException;
 import org.eclipse.jgit.errors.UnsupportedCredentialItem;
 import org.eclipse.jgit.lib.ProgressMonitor;
@@ -88,6 +89,14 @@ public class GITRemoteRepository implements IRemoteRepository {
     }
 
     public GITRemoteRepository(File localDirectory) throws Exception {
+
+        try {
+            //workaround for: file c:\project\omegat\project_save.tmx is not contained in C:\project\.
+            //The git repo uses the canonical path for some actions, and if c: != C: then an error is raised.
+            //if we make it canonical already here, then we don't have that problem.
+            localDirectory  = localDirectory.getCanonicalFile();
+        } catch (Exception e) {}
+
         this.localDirectory = localDirectory;
         myCredentialsProvider = new MyCredentialsProvider(this);
         CredentialsProvider.setDefault(myCredentialsProvider);
@@ -101,7 +110,20 @@ public class GITRemoteRepository implements IRemoteRepository {
         CloneCommand c = Git.cloneRepository();
         c.setURI(repositoryURL);
         c.setDirectory(localDirectory);
-        c.call();
+        try {
+            c.call();
+        } catch (InvalidRemoteException e) {
+            if (localDirectory.exists()) {
+                deleteDirectory(localDirectory);
+            }
+            Throwable cause = e.getCause();
+            if (cause != null && cause instanceof org.eclipse.jgit.errors.NoRemoteRepositoryException) {
+                BadRepositoryException bre = new BadRepositoryException(((org.eclipse.jgit.errors.NoRemoteRepositoryException)cause).getLocalizedMessage());
+                bre.initCause(e);
+                throw bre;
+            }
+            throw e;
+        }
         repository = Git.open(localDirectory).getRepository();
 
         // set core.autocrlf
@@ -109,6 +131,21 @@ public class GITRemoteRepository implements IRemoteRepository {
         config.setBoolean("core", null, "autocrlf", true);
         config.save();
     }
+
+    static public boolean deleteDirectory(File path) {
+        if( path.exists() ) {
+          File[] files = path.listFiles();
+          for(int i=0; i<files.length; i++) {
+             if(files[i].isDirectory()) {
+               deleteDirectory(files[i]);
+             }
+             else {
+               files[i].delete();
+             }
+          }
+        }
+        return( path.delete() );
+      }
 
     public boolean isChanged(File file) throws Exception {
         String relativeFile = FileUtil.computeRelativePath(repository.getWorkTree(), file);
@@ -313,10 +350,11 @@ public class GITRemoteRepository implements IRemoteRepository {
         public boolean get(URIish uri, CredentialItem... items)
                 throws UnsupportedCredentialItem {
             boolean ok = false;
+            //theoretically, username can be unknown, but in practice it is always set, so not requested.
             for (CredentialItem i : items) {
                 if (i instanceof CredentialItem.Username) {
                     if (username==null) {
-                        ok = askCredentials();
+                        ok = askCredentials(uri.getUser());
                         if (!ok) {
                             throw new UnsupportedCredentialItem(uri, OStrings.getString("TEAM_CREDENTIALS_DENIED"));
                         }
@@ -325,18 +363,21 @@ public class GITRemoteRepository implements IRemoteRepository {
                     continue;
                 } else if (i instanceof CredentialItem.Password) {
                     if (password==null) {
-                        ok = askCredentials();
+                        ok = askCredentials(uri.getUser());
                         if (!ok) {
                             throw new UnsupportedCredentialItem(uri, OStrings.getString("TEAM_CREDENTIALS_DENIED"));
                         }
                     }
                     ((CredentialItem.Password) i).setValue(password);
+                    if (password != null) {
+                        uri.setPass(new String(password));
+                    }
                     continue;
                 } else if (i instanceof CredentialItem.StringType) {
                     if (i.getPromptText().equals("Password: ")) {
                         if (password==null) {
                             if (!ok) {
-                                ok = askCredentials();
+                                ok = askCredentials(uri.getUser());
                                 if (!ok) {
                                     throw new UnsupportedCredentialItem(uri, OStrings.getString("TEAM_CREDENTIALS_DENIED"));
                                 }
@@ -387,10 +428,16 @@ public class GITRemoteRepository implements IRemoteRepository {
          * shows dialog to ask for credentials, and stores credentials.
          * @return true when entered, false on cancel.
          */
-        private boolean askCredentials() {
+        private boolean askCredentials(String usernameInUri) {
             TeamUserPassDialog userPassDialog = new TeamUserPassDialog(Core.getMainWindow().getApplicationFrame());
             DockingUI.displayCentered(userPassDialog);
-            userPassDialog.descriptionTextArea.setText(OStrings.getString(username==null ? "TEAM_USERPASS_FIRST" : "TEAM_USERPASS_WRONG"));
+            userPassDialog.descriptionTextArea.setText(OStrings.getString(this.username==null ? "TEAM_USERPASS_FIRST" : "TEAM_USERPASS_WRONG"));
+            //if username is already available in uri, then we will not be asked for an username, so we cannot change it.
+            if (usernameInUri != null && !"".equals(usernameInUri)) {
+                userPassDialog.userText.setText(usernameInUri);
+                userPassDialog.userText.setEditable(false);
+                userPassDialog.userText.setEnabled(false);
+            }
             userPassDialog.setVisible(true);
             if (userPassDialog.getReturnStatus() == TeamUserPassDialog.RET_OK) {
                 username = userPassDialog.userText.getText();

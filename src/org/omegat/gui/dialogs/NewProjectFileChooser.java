@@ -44,7 +44,7 @@ public class NewProjectFileChooser extends OmegaTFileChooser {
     public NewProjectFileChooser() {
         setMultiSelectionEnabled(false);
         setFileHidingEnabled(true);
-
+        setFileSelectionMode(DIRECTORIES_ONLY);
         setDialogTitle(OStrings.getString("PP_SAVE_PROJECT_FILE"));
 
         String curDir = Preferences.getPreference(Preferences.CURRENT_FOLDER);

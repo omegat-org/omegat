@@ -84,6 +84,16 @@ public interface IMainWindow {
     void showLengthMessage(String messageText);
 
     /**
+     * Display warning.
+     * 
+     * @param warningKey
+     *            warning message key in resource bundle
+     * @param params
+     *            warning text parameters
+     */
+    void displayWarningRB(String warningKey, Object... params);
+
+    /**
      * Display error.
      * 
      * @param ex

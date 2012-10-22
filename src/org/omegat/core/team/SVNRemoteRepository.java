@@ -24,6 +24,7 @@
 package org.omegat.core.team;
 
 import java.io.File;
+import java.net.SocketException;
 
 import org.omegat.util.Log;
 import org.tmatesoft.svn.core.SVNAuthenticationException;
@@ -102,6 +103,10 @@ public class SVNRemoteRepository implements IRemoteRepository {
             // authentication failed - need to ask username/password
             Log.logWarningRB("SVN_ERROR", "update", ex.getMessage());
             throw new AuthenticationException(ex);
+        } catch (SVNException ex) {
+            Log.logErrorRB("SVN_ERROR", "update", ex.getMessage());
+            checkNetworkException(ex);
+            throw ex;
         } catch (Exception ex) {
             Log.logErrorRB("SVN_ERROR", "update", ex.getMessage());
             throw ex;
@@ -142,8 +147,13 @@ public class SVNRemoteRepository implements IRemoteRepository {
             ourClientManager.getUpdateClient().doUpdate(file, SVNRevision.HEAD, SVNDepth.INFINITY, false,
                     false);
             Log.logInfoRB("SVN_FINISH", "download");
+        } catch (SVNException ex) {
+            Log.logErrorRB("SVN_ERROR", "download", ex.getMessage());
+            checkNetworkException(ex);
+            throw ex;
         } catch (Exception ex) {
             Log.logErrorRB("SVN_ERROR", "download", ex.getMessage());
+            throw ex;
         }
     }
 
@@ -169,11 +179,24 @@ public class SVNRemoteRepository implements IRemoteRepository {
                 Log.logWarningRB("SVN_CONFLICT");
             } else {
                 Log.logErrorRB("SVN_ERROR", "upload", ex.getMessage());
+                checkNetworkException(ex);
             }
             throw ex;
         } catch (Exception ex) {
             Log.logErrorRB("SVN_ERROR", "upload", ex.getMessage());
             throw ex;
+        }
+    }
+
+    void checkNetworkException(Exception ex) throws SocketException {
+        if (ex.getCause() instanceof SocketException) {
+            throw (SocketException) ex.getCause();
+        }
+        if (ex instanceof SVNException) {
+            SVNException se = (SVNException) ex;
+            if (se.getErrorMessage().getErrorCode().getCategory() == SVNErrorCode.RA_DAV_CATEGORY) {
+                throw new SocketException(se.getMessage());
+            }
         }
     }
 

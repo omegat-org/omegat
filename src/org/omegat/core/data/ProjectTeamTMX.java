@@ -25,11 +25,14 @@ package org.omegat.core.data;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.SocketException;
 import java.util.Map;
 
+import org.omegat.core.Core;
 import org.omegat.core.KnownException;
 import org.omegat.core.team.IRemoteRepository;
 import org.omegat.core.team.RepositoryUtils;
+import org.omegat.util.Log;
 import org.omegat.util.Preferences;
 
 /**
@@ -72,12 +75,14 @@ import org.omegat.util.Preferences;
  */
 public class ProjectTeamTMX extends ProjectTMX {
     IRemoteRepository repository;
+    boolean isOnlineMode;
 
     public ProjectTeamTMX(ProjectProperties props, File file, CheckOrphanedCallback callback,
             IRemoteRepository repository) throws Exception {
         super(props.getSourceLanguage(), props.getTargetLanguage(), props.isSentenceSegmentingEnabled(), file, callback);
 
         this.repository = repository;
+        isOnlineMode = true;
     }
 
     /**
@@ -105,7 +110,13 @@ public class ProjectTeamTMX extends ProjectTMX {
         baseTMX = new ProjectTMX(props.getSourceLanguage(), props.getTargetLanguage(), props.isSentenceSegmentingEnabled(), orig, null);
 
         // update to HEAD revision from repository and load
-        repository.download(orig);
+        try {
+            repository.download(orig);
+            setOnlineMode();
+        } catch (SocketException ex) {
+            setOfflineMode();
+        } catch (Exception ex) {
+        }
         String headRev = repository.getBaseRevisionId(orig);
 
         if (headRev.equals(baseRev)) {
@@ -161,9 +172,28 @@ public class ProjectTeamTMX extends ProjectTMX {
                     repository.upload(orig, "Translated by " + author);
                 }
             }.execute(repository);
+            setOnlineMode();
+        } catch(SocketException ex) {
+            setOfflineMode();
         } catch (Exception ex) {
             throw new KnownException(ex, "TEAM_SYNCHRONIZATION_ERROR");
         }
+    }
+
+    void setOnlineMode() {
+        if (!isOnlineMode) {
+            Log.logInfoRB("VCS_ONLINE");
+            Core.getMainWindow().displayWarningRB("VCS_ONLINE");
+        }
+        isOnlineMode = true;
+    }
+
+    void setOfflineMode() {
+        if (isOnlineMode) {
+            Log.logInfoRB("VCS_OFFLINE");
+            Core.getMainWindow().displayWarningRB("VCS_OFFLINE");
+        }
+        isOnlineMode = false;
     }
 
     /**

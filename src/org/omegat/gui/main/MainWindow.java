@@ -387,6 +387,27 @@ public class MainWindow extends JFrame implements IMainWindow {
     /**
      * {@inheritDoc}
      */
+    public void displayWarningRB(final String warningKey, final Object... params) {
+        UIThreadsUtil.executeInSwingThread(new Runnable() {
+            public void run() {
+                String msg;
+                if (params != null) {
+                    msg = StaticUtils.format(OStrings.getString(warningKey), params);
+                } else {
+                    msg = OStrings.getString(warningKey);
+                }
+
+                statusLabel.setText(msg);
+                String fulltext = msg;
+                JOptionPane.showMessageDialog(MainWindow.this, fulltext, OStrings.getString("TF_WARNING"),
+                        JOptionPane.WARNING_MESSAGE);
+            }
+        });
+    }
+
+    /**
+     * {@inheritDoc}
+     */
     public void displayErrorRB(final Throwable ex, final String errorKey, final Object... params) {
         UIThreadsUtil.executeInSwingThread(new Runnable() {
             public void run() {

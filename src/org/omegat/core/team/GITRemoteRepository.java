@@ -125,6 +125,8 @@ public class GITRemoteRepository implements IRemoteRepository {
             throw e;
         }
         repository = Git.open(localDirectory).getRepository();
+        new Git(repository).submoduleInit().call();
+        new Git(repository).submoduleUpdate().call();
 
         // set core.autocrlf
         StoredConfig config = repository.getConfig();
@@ -193,6 +195,7 @@ public class GITRemoteRepository implements IRemoteRepository {
             new Git(repository).branchDelete().setBranchNames(LOCAL_BRANCH).setForce(true).call();
             new Git(repository).checkout().setStartPoint(REMOTE_BRANCH).setCreateBranch(true)
                     .setName(LOCAL_BRANCH).setForce(true).call();
+            new Git(repository).submoduleUpdate().call();
             Log.logInfoRB("GIT_FINISH", "pull");
         } catch (Exception ex) {
             Log.logErrorRB("GIT_ERROR", "pull", ex.getMessage());

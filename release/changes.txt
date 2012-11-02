@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 2.6.1 update 2
 ----------------------------------------------------------------------
-   2 Enhancements
+   4 Enhancements
    3 Bug fixes
    1 Localisation update
 ----------------------------------------------------------------------
@@ -18,6 +18,8 @@
   Other enhancements:
 
   - Git authorized access
+
+  - Support for gzipped (.tmx.gz) external TMXs
 
   Bug fixes:
 

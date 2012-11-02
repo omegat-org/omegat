@@ -38,6 +38,7 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.TimeZone;
 import java.util.TreeMap;
+import java.util.zip.GZIPInputStream;
 
 import javax.xml.namespace.QName;
 import javax.xml.stream.Location;
@@ -131,7 +132,12 @@ public class TMXReader2 {
         boolean allFound = true;
 
         
-        InputStream in = new BufferedInputStream(new FileInputStream(file));
+        InputStream in;
+        if (file.getName().endsWith(".gz")) {
+            in = new BufferedInputStream(new GZIPInputStream(new FileInputStream(file)));
+        } else {
+            in = new BufferedInputStream(new FileInputStream(file));
+        }
         xml = factory.createXMLEventReader(in);
         try {
             while (xml.hasNext()) {

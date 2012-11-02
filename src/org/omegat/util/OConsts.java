@@ -49,6 +49,7 @@ public class OConsts {
     public static final String PROJ_CUR_VERSION = "1.0";
 
     public static final String TMX_EXTENSION = ".tmx";
+    public static final String TMX_GZ_EXTENSION = ".tmx.gz";
     public static final String OMEGAT_TMX = "-omegat";
     public static final String LEVEL1_TMX = "-level1";
     public static final String LEVEL2_TMX = "-level2";

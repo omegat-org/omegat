@@ -26,7 +26,7 @@
   glossary entry. If the file already exists, no attempt is done to verify the
   format or the character set of the file: the new entries will always be in
   tab-separated format and UTF-8. As the existing content will not be touched,
-  damaged to an existing file would be limited.</para>
+  damage to an existing file would be limited.</para>
 
   <section>
     <title>Usage</title>
@@ -51,11 +51,11 @@
 
       <mediaobject>
         <imageobject role="html">
-          <imagedata fileref="images/Glossarypane_25.png"/>
+          <imagedata fileref="images/GlossaryPane_25.png"/>
         </imageobject>
 
         <imageobject role="fo">
-          <imagedata fileref="images/Glossarypane_25.png" width="60%"/>
+          <imagedata fileref="images/GlossaryPane_25.png" width="60%"/>
         </imageobject>
       </mediaobject>
     </figure>

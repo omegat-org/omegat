@@ -29,6 +29,8 @@
 package org.omegat.gui.glossary;
 
 import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -39,6 +41,9 @@ import java.io.File;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.swing.JMenuItem;
+import javax.swing.JPopupMenu;
 
 import org.omegat.core.Core;
 import org.omegat.core.data.ProjectProperties;
@@ -83,13 +88,16 @@ public class GlossaryTextArea extends EntryInfoThreadPane<List<GlossaryEntry>> {
      */
     protected static List<GlossaryEntry> nowEntries;
 
+    /**
+     * popupmenu
+     */
+    protected JPopupMenu popup;
+
     private CreateGlossaryEntry createGlossaryEntryDialog;
 
     /** Creates new form MatchGlossaryPane */
     public GlossaryTextArea() {
         super(true);
-
-        setEditable(false);
 
         String title = OStrings.getString("GUI_MATCHWINDOW_SUBWINDOWTITLE_Glossary");
         Core.getMainWindow().addDockable(new DockableScrollPane("GLOSSARY", title, this, true));
@@ -97,6 +105,16 @@ public class GlossaryTextArea extends EntryInfoThreadPane<List<GlossaryEntry>> {
         setEditable(false);
         this.setText(EXPLANATION);
         setMinimumSize(new Dimension(100, 50));
+
+        //prepare popup menu
+        popup = new JPopupMenu();
+        JMenuItem menuItem = new JMenuItem(OStrings.getString("GUI_GLOSSARYWINDOW_addentry"));
+        menuItem.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e) {
+                Core.getGlossary().showCreateGlossaryEntryDialog();
+            }
+        });
+        popup.add(menuItem);
 
         addMouseListener(mouseListener);
 
@@ -190,27 +208,45 @@ public class GlossaryTextArea extends EntryInfoThreadPane<List<GlossaryEntry>> {
     }
 
     /**
-     * MouseListener for the GlossaryTextArea If there is text selected in the Glossary it will be inserted in
-     * the Editor upon a right-click.
+     * MouseListener for the GlossaryTextArea.
      */
-    protected MouseListener mouseListener = new MouseAdapter() {
+    protected MouseListener mouseListener = new PopupListener(this);
+
+    /**
+     * MoueAdapter that knows the GlossaryTextArea. If there is text selected in the Glossary it will be inserted in
+     * the Editor upon a right-click. Else a popup is shown to allow to add an entry.
+     */
+    class PopupListener extends MouseAdapter {
+
+        private GlossaryTextArea glossaryTextArea;
+
+        public PopupListener(GlossaryTextArea gte) {
+            super();
+            glossaryTextArea = gte;
+        }
+
         @Override
         public void mouseClicked(MouseEvent e) {
             if (e.isPopupTrigger() || e.getButton() == MouseEvent.BUTTON3) {
-                insertTerm();
+                String selTxt = glossaryTextArea.getSelectedText();
+                if (selTxt == null) {
+                    if (Core.getProject().isProjectLoaded()) {
+                        popup.show(glossaryTextArea, e.getX(), e.getY());
+                    }
+                } else {
+                    insertTerm(selTxt);
+                }
             }
         }
-    };
+    }
 
     /**
-     * Inserts the selected text into the EditorTextArea
+     * Inserts the given text into the EditorTextArea
+     *
+     * @param selTxt the text to insert
      */
-    private void insertTerm() {
-        String selTxt = this.getSelectedText();
-        if (selTxt == null) { /* Just do nothing */
-        } else {
-            Core.getEditor().insertText(selTxt);
-        }
+    private void insertTerm(String selTxt) {
+        Core.getEditor().insertText(selTxt);
     }
 
     public void showCreateGlossaryEntryDialog() {

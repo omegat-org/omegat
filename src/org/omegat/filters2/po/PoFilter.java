@@ -81,6 +81,7 @@ public class PoFilter extends AbstractFilter {
     static {
         HashMap<String, PluralInfo> info = new HashMap<String, PluralInfo>();
         //list taken from http://translate.sourceforge.net/wiki/l10n/pluralforms d.d. 14-09-2012
+        //See also http://unicode.org/repos/cldr-tmp/trunk/diff/supplemental/language_plural_rules.html
         info.put("ach", new PluralInfo(2, "(n > 1)"));
         info.put("af", new PluralInfo(2, "(n != 1)"));
         info.put("ak", new PluralInfo(2, "(n > 1)"));
@@ -253,6 +254,7 @@ public class PoFilter extends AbstractFilter {
 
     private StringBuilder[] sources, targets;
     private StringBuilder translatorComments, extractedComments, references;
+    private int plurals=2;
     private String path;
     private boolean nowrap, fuzzy;
 
@@ -358,18 +360,10 @@ public class PoFilter extends AbstractFilter {
         sources = new StringBuilder[2];
         sources[0] = new StringBuilder();
         sources[1] = new StringBuilder();
+        targets = new StringBuilder[2]; //can be overridden when header has been read and the number of plurals is different.
+        targets[0] = new StringBuilder();
+        targets[1] = new StringBuilder();
 
-        int plurals = 2;
-        Language targetLang = fc.getTargetLang();
-        String lang = targetLang.getLanguageCode().toLowerCase();
-        PluralInfo pluralInfo = pluralInfos.get(lang);
-        if (pluralInfo != null) {
-            plurals = pluralInfo.plurals;
-        }
-        targets = new StringBuilder[plurals];
-        for (int i=0; i < plurals; i++) {
-            targets[i] = new StringBuilder();
-        }
         translatorComments = new StringBuilder();
         extractedComments = new StringBuilder();
         references = new StringBuilder();
@@ -581,6 +575,31 @@ public class PoFilter extends AbstractFilter {
                 return;
             } else {
                 // header
+
+                //check existing plural statement. If it contains the number of plurals, then use it!
+                StringBuilder targets0 =targets[0];
+                String header = targets[0].toString();
+                Pattern pluralPattern = Pattern.compile("Plural-Forms: *nplurals= *([0-9]+) *; *plural", Pattern.CASE_INSENSITIVE);
+                Matcher pluralMatcher = pluralPattern.matcher(header);
+                if (pluralMatcher.find()) {
+                    String nrOfPluralsString = header.substring(pluralMatcher.start(1),pluralMatcher.end(1));
+                    plurals = Integer.parseInt(nrOfPluralsString);
+                } else {
+                    //else use predefined number of plurals, if it exists
+                    Language targetLang = fc.getTargetLang();
+                    String lang = targetLang.getLanguageCode().toLowerCase();
+                    PluralInfo pluralInfo = pluralInfos.get(lang);
+                    if (pluralInfo != null) {
+                        plurals = pluralInfo.plurals;
+                    }
+                }
+                //update the number of targets according to new plural number
+                targets = new StringBuilder[plurals];
+                targets[0] = targets0;
+                for (int i=1; i < plurals; i++) {
+                    targets[i] = new StringBuilder();
+                }
+
                 if (out != null) {
                     // Header is always written
                     out.write("msgstr " + getTranslation(targets[0], false, true, fc, 0) + "\n");

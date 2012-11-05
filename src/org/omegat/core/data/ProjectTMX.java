@@ -105,14 +105,6 @@ public class ProjectTMX {
     }
 
     /**
-     * Clear all data from TMX. Used for free memory on delta calculations.
-     */
-    public void clear() {
-        defaults = null;
-        alternatives = null;
-    }
-
-    /**
      * Check TMX for empty.
      */
     public boolean isEmpty() {

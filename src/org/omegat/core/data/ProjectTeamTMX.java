@@ -129,9 +129,12 @@ public class ProjectTeamTMX extends ProjectTMX {
             // need rebase
             headTMX = new ProjectTMX(props.getSourceLanguage(), props.getTargetLanguage(), props.isSentenceSegmentingEnabled(), orig, null);
             synchronized (this) {
-                ProjectTMX delta = calculateDelta(baseTMX, this);
-                baseTMX.clear();
-                applyDelta(headTMX, delta);
+                //get all local changes
+                ProjectTMX deltaLocal = calculateDelta(baseTMX, this);
+                //free up some memory
+                baseTMX = null;
+                //and apply local changes on the new head, and load new HEAD into project memory
+                applyTMXandDelta(headTMX, deltaLocal);
             }
             fileOnHead = new File(translationFile + "-based_on_" + headRev + ".new");
             exportTMX(props, fileOnHead, false, false, true);
@@ -201,8 +204,10 @@ public class ProjectTeamTMX extends ProjectTMX {
 
     /**
      * Calculates delta between base and changed TMX.
+     *
+     * @return a tmx with all updated/removed/added entries in changedTMX compared to baseTMX.
      */
-    ProjectTMX calculateDelta(ProjectTMX baseTMX, ProjectTMX changedTMX) {
+    static ProjectTMX calculateDelta(ProjectTMX baseTMX, ProjectTMX changedTMX) {
         ProjectTMX delta = new ProjectTMX();
 
         // find updated and removed
@@ -239,11 +244,14 @@ public class ProjectTeamTMX extends ProjectTMX {
     }
 
     /**
-     * Apply delta on base TMX.
+     * Replaces the current translations with those of the given TMX, and applies the delta on the translations
+     *
+     * @param newTMX the translatio nmemory of which the translations have to be used
+     * @param delta the delta that has to be applied on the new TMX.
      */
-    void applyDelta(ProjectTMX baseTMX, ProjectTMX delta) {
-        defaults = baseTMX.defaults;
-        alternatives = baseTMX.alternatives;
+    void applyTMXandDelta(ProjectTMX newTMX, ProjectTMX delta) {
+        defaults = newTMX.defaults;
+        alternatives = newTMX.alternatives;
 
         for (Map.Entry<String, TMXEntry> en : delta.defaults.entrySet()) {
             if (en.getValue() != null) {

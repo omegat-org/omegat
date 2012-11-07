@@ -407,6 +407,9 @@ public class PoFilter extends AbstractFilter {
             Matcher m;
 
             if ((m = MSG_ID.matcher(s)).matches()) {
+                if (sources[0].length() > 0) {
+                    flushTranslation(currentMode, fc, plurals);
+                }
                 currentPlural = 0;
                 String text = m.group(2);
                 if (m.group(1) == null) {

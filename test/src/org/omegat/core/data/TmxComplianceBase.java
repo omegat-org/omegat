@@ -179,7 +179,7 @@ public abstract class TmxComplianceBase extends TestCase {
         fc.setInEncoding(inCharset);
         fc.setOutEncoding(outCharset);
 
-        RealProject.AlignFilesCallback callback = new RealProject.AlignFilesCallback(false);
+        RealProject.AlignFilesCallback callback = new RealProject.AlignFilesCallback(props);
 
         filter.alignFile(sourceFile, translatedFile, null, fc, callback);
 

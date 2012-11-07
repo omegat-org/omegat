@@ -322,7 +322,7 @@ public class RealProject implements IProject {
         File root = new File(m_config.getSourceRoot());
         StaticUtils.buildFileList(srcFileList, root, true);
 
-        AlignFilesCallback alignFilesCallback = new AlignFilesCallback(m_config.isRemoveTags());
+        AlignFilesCallback alignFilesCallback = new AlignFilesCallback(props);
 
         String srcRoot = m_config.getSourceRoot();
         for (String filename : srcFileList) {
@@ -1108,25 +1108,45 @@ public class RealProject implements IProject {
     };
 
     static class AlignFilesCallback implements IAlignCallback {
-        public AlignFilesCallback(boolean removeTags) {
+        public AlignFilesCallback(ProjectProperties props) {
             super();
-            this.removeTags = removeTags;
+            this.config = props;
         }
 
         Map<String, TMXEntry> data = new HashMap<String, TMXEntry>();
-        private boolean removeTags=false;
+        private ProjectProperties config;
 
-        public void addTranslation(String id, String source, String translation, boolean isFuzzy,
-                String path, IFilter filter) {
+        public void addTranslation(String id, String source, String translation, boolean isFuzzy, String path,
+                IFilter filter) {
             if (source != null && translation != null) {
                 ParseEntry.ParseEntryResult spr = new ParseEntry.ParseEntryResult();
-                String sourceS = ParseEntry.stripSomeChars(source, spr, removeTags);
-                String transS = ParseEntry.stripSomeChars(translation, spr, removeTags);
-                if (isFuzzy) {
-                    transS = "[" + filter.getFuzzyMark() + "] " + transS;
+                String sourceS = ParseEntry.stripSomeChars(source, spr, config.isRemoveTags());
+                String transS = ParseEntry.stripSomeChars(translation, spr, config.isRemoveTags());
+                if (config.isSentenceSegmentingEnabled()) {
+                    List<String> segmentsSource = Segmenter.segment(config.getSourceLanguage(), sourceS, null, null);
+                    List<String> segmentsTranslation = Segmenter
+                            .segment(config.getTargetLanguage(), transS, null, null);
+                    if (segmentsTranslation.size() != segmentsSource.size()) {
+                        if (isFuzzy) {
+                            transS = "[" + filter.getFuzzyMark() + "] " + transS;
+                        }
+                        data.put(sourceS, new TMXEntry(sourceS, transS, null, 0, null, true));
+                    } else {
+                        for (short i = 0; i < segmentsSource.size(); i++) {
+                            String oneSrc = segmentsSource.get(i);
+                            String oneTrans = segmentsTranslation.get(i);
+                            if (isFuzzy) {
+                                oneTrans = "[" + filter.getFuzzyMark() + "] " + oneTrans;
+                            }
+                            data.put(sourceS, new TMXEntry(oneSrc, oneTrans, null, 0, null, true));
+                        }
+                    }
+                } else {
+                    if (isFuzzy) {
+                        transS = "[" + filter.getFuzzyMark() + "] " + transS;
+                    }
+                    data.put(sourceS, new TMXEntry(sourceS, transS, null, 0, null, true));
                 }
-
-                data.put(sourceS, new TMXEntry(sourceS, transS, null, 0, null, true));
             }
         }
     }

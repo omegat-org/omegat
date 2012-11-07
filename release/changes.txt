@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 2.6.1 update 2
 ----------------------------------------------------------------------
-   4 Enhancements
+   5 Enhancements
    3 Bug fixes
    1 Localisation update
 ----------------------------------------------------------------------
@@ -21,6 +21,9 @@
 
   - Support for gzipped (.tmx.gz) external TMXs
 
+  - Alignment (for filters that support it) now segments into sentences is 
+segmentation is enabled in the project
+  
   Bug fixes:
 
   - Missing part from matches not highlighted

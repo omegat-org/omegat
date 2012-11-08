@@ -85,9 +85,9 @@ public class MatchesTextArea extends EntryInfoThreadPane<List<NearString>> imple
     private static final AttributeSet ATTRIBUTES_UNCHANGED = Styles.createAttributeSet(Color.green, null, null,
             null);
     private static final AttributeSet ATTRIBUTES_SELECTED = Styles.createAttributeSet(null, null, true, null);
-    private static final AttributeSet ATTRIBUTES_DELETED_ACTIVE = Styles.createAttributeSet(Color.red, null, true, null, true, null);
-    private static final AttributeSet ATTRIBUTES_DELETED_INACTIVE = Styles.createAttributeSet(Color.gray, null, null, null, true, null);
-    private static final AttributeSet ATTRIBUTES_INSERTED_ACTIVE = Styles.createAttributeSet(Color.green, null, true, null, null, true);
+    private static final AttributeSet ATTRIBUTES_DELETED_ACTIVE = Styles.createAttributeSet(null, null, true, null, true, null);
+    private static final AttributeSet ATTRIBUTES_DELETED_INACTIVE = Styles.createAttributeSet(null, null, null, null, true, null);
+    private static final AttributeSet ATTRIBUTES_INSERTED_ACTIVE = Styles.createAttributeSet(Color.blue, null, true, null, null, true);
     private static final AttributeSet ATTRIBUTES_INSERTED_INACTIVE = Styles.createAttributeSet(Color.gray, null, null, null, null, true);
     
     private final List<NearString> matches = new ArrayList<NearString>();

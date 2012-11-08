@@ -491,7 +491,7 @@ public class RealProject implements IProject {
     }
 
     /** Saves the translation memory and preferences */
-    public void saveProject() {
+    public synchronized void saveProject() {
         LOGGER.info(OStrings.getString("LOG_DATAENGINE_SAVE_START"));
         UIThreadsUtil.mustNotBeSwingThread();
 

@@ -2,7 +2,7 @@
  OmegaT 2.6.1 update 2
 ----------------------------------------------------------------------
    9 Enhancements
-   6 Bug fixes
+   7 Bug fixes
    1 Localisation update
 ----------------------------------------------------------------------
 2.6.1 update 2 vs. 2.6.1 update 1
@@ -52,6 +52,8 @@ mode.
 
   - create/download project dialog accepts empty folder besides new folder as project location, 
 and doesn't show files any more.
+
+  - multiple save commands could interfere, causing you to loose all translations in team project.
 
   Localisation updates:
 

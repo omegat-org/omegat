@@ -256,7 +256,6 @@ public class GITRemoteRepository implements IRemoteRepository {
         }
         if (!ok) {
             Log.logWarningRB("GIT_CONFLICT");
-            throw new Exception("Conflict");
         }
     }
 

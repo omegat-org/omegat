@@ -82,6 +82,8 @@ public interface IRemoteRepository {
     /**
      * Upload local changes into remote repository.
      * 
+     * If upload fails because in the mean time the remote was updated by others, this function should not throw an error.
+     *
      * Every new implementation must be checked for conflicts resolving on upload, because some other users
      * able to change remote repository in time between download and upload. There are two critical ways which
      * should be tested:

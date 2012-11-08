@@ -72,19 +72,18 @@ public class TMXEntry {
         if (other == null) {
             return false;
         }
-        boolean equals = true;
-        if (equals && changeDate != other.changeDate) {
-            equals = false;
+        if (changeDate != other.changeDate) {
+            return false;
         }
-        if (equals && !StringUtil.equalsWithNulls(translation, other.translation)) {
-            equals = false;
+        if (!StringUtil.equalsWithNulls(translation, other.translation)) {
+            return false;
         }
-        if (equals && !StringUtil.equalsWithNulls(changer, other.changer)) {
-            equals = false;
+        if (!StringUtil.equalsWithNulls(changer, other.changer)) {
+            return false;
         }
-        if (equals && !StringUtil.equalsWithNulls(note, other.note)) {
-            equals = false;
+        if (!StringUtil.equalsWithNulls(note, other.note)) {
+            return false;
         }
-        return equals;
+        return true;
     }
 }

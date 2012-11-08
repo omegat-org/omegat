@@ -126,7 +126,7 @@ public class ProjectTMX {
         // Save data into '*.new' file
         exportTMX(props, newFile, false, false, true);
 
-        File backup = new File(translationFile + ".bak");
+        File backup = new File(translationFile + OConsts.BACKUP_EXTENSION);
         File orig = new File(translationFile);
         if (backup.exists()) {
             if (!backup.delete()) {

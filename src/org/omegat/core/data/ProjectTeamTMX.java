@@ -32,6 +32,7 @@ import org.omegat.core.KnownException;
 import org.omegat.core.team.IRemoteRepository;
 import org.omegat.core.team.RepositoryUtils;
 import org.omegat.util.Log;
+import org.omegat.util.OConsts;
 import org.omegat.util.Preferences;
 
 /**
@@ -94,14 +95,14 @@ public class ProjectTeamTMX extends ProjectTMX {
     public void save(ProjectProperties props, String translationFile, boolean translationUpdatedByUser)
             throws Exception {
         final File orig = new File(translationFile);
-        final File backup = new File(translationFile + ".bak");
+        final File backup = new File(translationFile + OConsts.BACKUP_EXTENSION);
 
         ProjectTMX baseTMX, headTMX;
         File fileOnBase, fileOnHead;
 
         String baseRev = repository.getBaseRevisionId(orig);
         // save into ".new" file
-        fileOnBase = new File(translationFile + "-based_on_" + baseRev + ".new");
+        fileOnBase = new File(translationFile + "-based_on_" + baseRev + OConsts.NEWFILE_EXTENSION);
         exportTMX(props, fileOnBase, false, false, true);
 
         // restore BASE revision and load
@@ -136,7 +137,7 @@ public class ProjectTeamTMX extends ProjectTMX {
                 //and apply local changes on the new head, and load new HEAD into project memory
                 applyTMXandDelta(headTMX, deltaLocal);
             }
-            fileOnHead = new File(translationFile + "-based_on_" + headRev + ".new");
+            fileOnHead = new File(translationFile + "-based_on_" + headRev + OConsts.NEWFILE_EXTENSION);
             exportTMX(props, fileOnHead, false, false, true);
         }
 

@@ -123,9 +123,10 @@ public class ProjectTeamTMX extends ProjectTMX {
 
         if (headRev.equals(baseRev)) {
             // don't need rebase
-            headTMX = baseTMX;
             fileOnHead = fileOnBase;
             fileOnBase = null;
+            //free memory
+            baseTMX = null;
         } else {
             // need rebase
             headTMX = new ProjectTMX(props.getSourceLanguage(), props.getTargetLanguage(), props.isSentenceSegmentingEnabled(), orig, null);

@@ -1,8 +1,8 @@
 ----------------------------------------------------------------------
  OmegaT 2.6.1 update 2
 ----------------------------------------------------------------------
-   5 Enhancements
-   3 Bug fixes
+   9 Enhancements
+   6 Bug fixes
    1 Localisation update
 ----------------------------------------------------------------------
 2.6.1 update 2 vs. 2.6.1 update 1
@@ -23,7 +23,16 @@
 
   - Alignment (for filters that support it) now segments into sentences is 
 segmentation is enabled in the project
-  
+
+  - Git submodule support added
+
+  - right-click on Glossary pane pops-up menu to add glossary item.
+
+  - The writable glossary file can now be used in team project. Updates are shared.
+
+  - PO-filter takes number of plurals from header if it is defined in the header. 
+If not defined, the default for the language is used just like before.
+
   Bug fixes:
 
   - Missing part from matches not highlighted
@@ -36,6 +45,13 @@ comes back, a message informs the user that the project is back in online
 mode.
 
   - Git end of lines where not handled correctly under Windows
+
+  - if writable glossary file does not exist, it is created when an entry is added.
+
+  - small memory consumption optimizations on team projects during save.
+
+  - create/download project dialog accepts empty folder besides new folder as project location, 
+and doesn't show files any more.
 
   Localisation updates:
 

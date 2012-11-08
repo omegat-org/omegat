@@ -319,7 +319,8 @@ public class ProjectUICommands {
                     boolean onlineMode = true;
                     try {
                         File tmxFile = new File(props.getProjectInternal() + OConsts.STATUS_EXTENSION);
-                        if (repository.isChanged(tmxFile)) {
+                        File GlossaryFile = new File(props.getWriteableGlossary());
+                        if (repository.isChanged(tmxFile) || repository.isChanged(GlossaryFile)) {
                             Log.logWarningRB("TEAM_NOCHECKOUT");
                             Core.getMainWindow().showErrorDialogRB("TEAM_NOCHECKOUT", null,
                                     "TEAM_NOCHECKOUT_TITLE");

@@ -56,6 +56,7 @@ public interface IRemoteRepository {
 
     /**
      * Update full project from remote repository.
+     * PRE: no local changes if you don't want conflicts
      */
     void updateFullProject() throws NetworkException, Exception;
 
@@ -65,19 +66,29 @@ public interface IRemoteRepository {
     void checkoutFullProject(String repositoryURL) throws Exception;
 
     /**
-     * Get base revision ID of one file from working copy.
+     * Get base revision ID of files from working copy.
      */
     String getBaseRevisionId(File file) throws Exception;
 
     /**
-     * Restore base revision of one file in working copy.
+     * Restore base revision of files in working copy.
      */
-    void restoreBase(File file) throws Exception;
+    void restoreBase(File[] files) throws Exception;
 
     /**
-     * Download HEAD revision of file from remote repository.
+     * Download HEAD revision of files from remote repository.
+     * NB: Due to the nature of some VCS, it is possible that more files than the given files are updated to the head revision.
+     * PRE: no local changes in files (except the given files), if you don't want conflicts.
      */
-    void download(File file) throws NetworkException, Exception;
+    void download(File[] files) throws NetworkException, Exception;
+
+    /**
+     * Undo all local changes
+     * 
+     * @throws Exception
+     */
+    void reset() throws Exception;
+
 
     /**
      * Upload local changes into remote repository.

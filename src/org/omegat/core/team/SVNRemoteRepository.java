@@ -25,6 +25,7 @@ package org.omegat.core.team;
 
 import java.io.File;
 import java.net.SocketException;
+import java.util.Collection;
 
 import org.omegat.util.Log;
 import org.tmatesoft.svn.core.SVNAuthenticationException;
@@ -141,14 +142,14 @@ public class SVNRemoteRepository implements IRemoteRepository {
         return Long.toString(info.getCommittedRevision().getNumber());
     }
 
-    public void restoreBase(File file) throws Exception {
-        ourClientManager.getWCClient().doRevert(new File[] { file }, SVNDepth.EMPTY, null);
+    public void restoreBase(File[] files) throws Exception {
+        ourClientManager.getWCClient().doRevert(files, SVNDepth.EMPTY, null);
     }
 
-    public void download(File file) throws SocketException, Exception {
+    public void download(File[] files) throws SocketException, Exception {
         Log.logInfoRB("SVN_START", "download");
         try {
-            ourClientManager.getUpdateClient().doUpdate(file, SVNRevision.HEAD, SVNDepth.INFINITY, false,
+            ourClientManager.getUpdateClient().doUpdate(files, SVNRevision.HEAD, SVNDepth.INFINITY, false,
                     false);
             Log.logInfoRB("SVN_FINISH", "download");
         } catch (SVNException ex) {
@@ -159,6 +160,11 @@ public class SVNRemoteRepository implements IRemoteRepository {
             Log.logErrorRB("SVN_ERROR", "download", ex.getMessage());
             throw ex;
         }
+    }
+
+    public void reset() throws Exception {
+        //not tested. Can anyone confirm this code?
+        ourClientManager.getWCClient().doRevert(new File[] {baseDirectory}, SVNDepth.INFINITY, (Collection<String>) null);
     }
 
     public void upload(File file, String commitMessage) throws SocketException, Exception {

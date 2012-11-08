@@ -32,6 +32,7 @@ import java.util.Properties;
 
 import javax.swing.JOptionPane;
 
+import org.eclipse.jgit.api.CheckoutCommand;
 import org.eclipse.jgit.api.CloneCommand;
 import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.api.LogCommand;
@@ -182,9 +183,21 @@ public class GITRemoteRepository implements IRemoteRepository {
         return commonBase.getName();
     }
 
-    public void restoreBase(File file) throws Exception {
+    public void restoreBase(File[] files) throws Exception {
+        String baseRevisionId = getBaseRevisionId(files[0]);
+        //undo local changes of specific file.
+        CheckoutCommand checkoutCommand = new Git(repository).checkout();
+        for (File f: files) {
+            String relativeFileName = FileUtil.computeRelativePath(repository.getWorkTree(), f);
+            checkoutCommand.addPath(relativeFileName);
+        }
+        checkoutCommand.call();
+        //reset repo to previous version. Can cause conflicts for other files!
+        new Git(repository).checkout().setName(baseRevisionId).call();
+    }
+
+    public void reset() throws Exception {
         new Git(repository).reset().setMode(ResetCommand.ResetType.HARD).call();
-        new Git(repository).checkout().setName(getBaseRevisionId(file)).call();
     }
 
     public void updateFullProject() throws NetworkException, Exception {
@@ -203,7 +216,7 @@ public class GITRemoteRepository implements IRemoteRepository {
         }
     }
 
-    public void download(File file) throws NetworkException, Exception {
+    public void download(File[] files) throws NetworkException, Exception {
         Log.logInfoRB("GIT_START", "download");
         try {
             new Git(repository).fetch().call();

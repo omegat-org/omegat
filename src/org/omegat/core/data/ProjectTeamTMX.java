@@ -75,133 +75,12 @@ import org.omegat.util.Preferences;
  */
 public class ProjectTeamTMX extends ProjectTMX {
     IRemoteRepository repository;
-    boolean isOnlineMode;
 
     public ProjectTeamTMX(ProjectProperties props, File file, CheckOrphanedCallback callback,
-            IRemoteRepository repository, boolean onlineMode) throws Exception {
+            IRemoteRepository repository) throws Exception {
         super(props.getSourceLanguage(), props.getTargetLanguage(), props.isSentenceSegmentingEnabled(), file, callback);
 
         this.repository = repository;
-        isOnlineMode = onlineMode;
-    }
-
-    /**
-     * Team version of save() for process all steps.
-     * 
-     * We should restore BASE revision and apply delta even in case translator didn't make any changes,
-     * because he will be able to make changes in time of downloading new revision from remote repository.
-     */
-    @Override
-    public void save(ProjectProperties props, String translationFile, boolean translationUpdatedByUser)
-            throws Exception {
-        final File orig = new File(translationFile);
-        final File backup = new File(translationFile + OConsts.BACKUP_EXTENSION);
-
-        ProjectTMX baseTMX, headTMX;
-        File fileOnBase, fileOnHead;
-
-        String baseRev = repository.getBaseRevisionId(orig);
-        // save into ".new" file
-        fileOnBase = new File(translationFile + "-based_on_" + baseRev + OConsts.NEWFILE_EXTENSION);
-        exportTMX(props, fileOnBase, false, false, true);
-
-        // restore BASE revision and load
-        repository.restoreBase(orig);
-        baseTMX = new ProjectTMX(props.getSourceLanguage(), props.getTargetLanguage(), props.isSentenceSegmentingEnabled(), orig, null);
-
-        boolean needUpload = false;
-        // update to HEAD revision from repository and load
-        try {
-            repository.download(orig);
-            setOnlineMode();
-            needUpload = true;
-        } catch (IRemoteRepository.NetworkException ex) {
-            setOfflineMode();
-        } catch (Exception ex) {
-        }
-        String headRev = repository.getBaseRevisionId(orig);
-
-        if (headRev.equals(baseRev)) {
-            // don't need rebase
-            fileOnHead = fileOnBase;
-            fileOnBase = null;
-            //free memory
-            baseTMX = null;
-        } else {
-            // need rebase
-            headTMX = new ProjectTMX(props.getSourceLanguage(), props.getTargetLanguage(), props.isSentenceSegmentingEnabled(), orig, null);
-            synchronized (this) {
-                //get all local changes
-                ProjectTMX deltaLocal = calculateDelta(baseTMX, this);
-                //free up some memory
-                baseTMX = null;
-                //and apply local changes on the new head, and load new HEAD into project memory
-                applyTMXandDelta(headTMX, deltaLocal);
-            }
-            fileOnHead = new File(translationFile + "-based_on_" + headRev + OConsts.NEWFILE_EXTENSION);
-            exportTMX(props, fileOnHead, false, false, true);
-        }
-
-        if (backup.exists()) {
-            if (!backup.delete()) {
-                throw new IOException("Error delete backup file");
-            }
-        }
-
-        // Rename existing project file in case a fatal error
-        // is encountered during the write procedure - that way
-        // everything won't be lost
-        if (orig.exists()) {
-            if (!orig.renameTo(backup)) {
-                throw new IOException("Error rename old file to backup");
-            }
-        }
-
-        // Rename new file into TMX file
-        if (!fileOnHead.renameTo(orig)) {
-            throw new IOException("Error rename new file to tmx");
-        }
-
-        if (fileOnBase != null) {
-            // Remove temp backup file
-            if (!fileOnBase.delete()) {
-                throw new IOException("Error remove old file");
-            }
-        }
-
-        // upload updated
-        if (needUpload) {
-            final String author = Preferences.getPreferenceDefault(Preferences.TEAM_AUTHOR,
-                    System.getProperty("user.name"));
-            try {
-                new RepositoryUtils.AskCredentials() {
-                    public void callRepository() throws Exception {
-                        repository.upload(orig, "Translated by " + author);
-                    }
-                }.execute(repository);
-                setOnlineMode();
-            } catch (IRemoteRepository.NetworkException ex) {
-                setOfflineMode();
-            } catch (Exception ex) {
-                throw new KnownException(ex, "TEAM_SYNCHRONIZATION_ERROR");
-            }
-        }
-    }
-
-    void setOnlineMode() {
-        if (!isOnlineMode) {
-            Log.logInfoRB("VCS_ONLINE");
-            Core.getMainWindow().displayWarningRB("VCS_ONLINE");
-        }
-        isOnlineMode = true;
-    }
-
-    void setOfflineMode() {
-        if (isOnlineMode) {
-            Log.logInfoRB("VCS_OFFLINE");
-            Core.getMainWindow().displayWarningRB("VCS_OFFLINE");
-        }
-        isOnlineMode = false;
     }
 
     /**
@@ -209,7 +88,7 @@ public class ProjectTeamTMX extends ProjectTMX {
      *
      * @return a tmx with all updated/removed/added entries in changedTMX compared to baseTMX.
      */
-    static ProjectTMX calculateDelta(ProjectTMX baseTMX, ProjectTMX changedTMX) {
+    public static ProjectTMX calculateDelta(ProjectTMX baseTMX, ProjectTMX changedTMX) {
         ProjectTMX delta = new ProjectTMX();
 
         // find updated and removed
@@ -248,7 +127,7 @@ public class ProjectTeamTMX extends ProjectTMX {
     /**
      * Replaces the current translations with those of the given TMX, and applies the delta on the translations
      *
-     * @param newTMX the translatio nmemory of which the translations have to be used
+     * @param newTMX the translation memory of which the translations have to be used
      * @param delta the delta that has to be applied on the new TMX.
      */
     void applyTMXandDelta(ProjectTMX newTMX, ProjectTMX delta) {

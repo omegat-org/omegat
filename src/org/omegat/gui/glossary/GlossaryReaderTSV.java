@@ -95,7 +95,23 @@ public class GlossaryReaderTSV {
         return result;
     }
 
+    /**
+     * Appends entry to glossary file. If file does not exist yet, it will be created.
+     *
+     * @param file The file to (create and) append to
+     * @param newEntry the entry to append.
+     * @throws IOException
+     */
     public static void append(final File file, GlossaryEntry newEntry) throws IOException {
+        if (!file.exists()) {
+            File parentFile = file.getParentFile();
+            if (parentFile != null) {
+                if (!parentFile.exists()) {
+                    parentFile.mkdirs();
+                }
+            }
+            file.createNewFile();
+        }
         Writer wr = new OutputStreamWriter(new FileOutputStream(file, true), OConsts.UTF8);
         wr.append(newEntry.getSrcText()).append('\t').append(newEntry.getLocText());
         if (!StringUtil.isEmpty(newEntry.getCommentText())) {

@@ -508,7 +508,7 @@ public class RealProject implements IProject {
                     projectTMX.save(m_config, s, isProjectModified());
 
                     if (repository != null) {
-                        rebaseProject(m_config);
+                        rebaseProject();
                     }
 
                     m_modifiedFlag = false;
@@ -572,7 +572,7 @@ public class RealProject implements IProject {
      * @author Alex Buloichik <alex73mail@gmail.com>
      * @author Martin Fleurke
      */
-    private void rebaseProject(ProjectProperties props) throws Exception {
+    private void rebaseProject() throws Exception {
         File filenameTMXwithLocalChangesOnBase, filenameTMXwithLocalChangesOnHead;
         ProjectTMX baseTMX, headTMX;
 
@@ -590,7 +590,7 @@ public class RealProject implements IProject {
         //do we have local changes?
         boolean needUpload = false;
 
-        final String glossaryFilename = props.getWriteableGlossary();
+        final String glossaryFilename = m_config.getWriteableGlossary();
         final File glossaryFile = new File(glossaryFilename);
 
         //Get current status in memory
@@ -618,7 +618,7 @@ public class RealProject implements IProject {
         //save current status to file in case we encounter errors.
         // save into ".new" file
         filenameTMXwithLocalChangesOnBase = new File(projectTMXFilename + "-based_on_" + baseRevTMX + OConsts.NEWFILE_EXTENSION);
-        projectTMX.exportTMX(props, filenameTMXwithLocalChangesOnBase, false, false, true); //overwrites file if it exists
+        projectTMX.exportTMX(m_config, filenameTMXwithLocalChangesOnBase, false, false, true); //overwrites file if it exists
         filenameGlossarywithLocalChangesOnBase = new File(glossaryFilename + "-based_on_" + baseRevGlossary + OConsts.NEWFILE_EXTENSION);
         if (updateGlossary) {
             if (filenameGlossarywithLocalChangesOnBase.exists()) {
@@ -634,7 +634,7 @@ public class RealProject implements IProject {
         // restore BASE revision
         repository.restoreBase(modifiedFiles);
         // load base revision
-        baseTMX = new ProjectTMX(props.getSourceLanguage(), props.getTargetLanguage(), props.isSentenceSegmentingEnabled(), projectTMXFile, null);
+        baseTMX = new ProjectTMX(m_config.getSourceLanguage(), m_config.getTargetLanguage(), m_config.isSentenceSegmentingEnabled(), projectTMXFile, null);
         if (updateGlossary) {
             baseGlossaryEntries = GlossaryReaderTSV.read(glossaryFile);
         }
@@ -688,17 +688,11 @@ public class RealProject implements IProject {
             baseTMX = null;
         } else {
             // need rebase
-            headTMX = new ProjectTMX(props.getSourceLanguage(), props.getTargetLanguage(), props.isSentenceSegmentingEnabled(), projectTMXFile, null);
-            synchronized (projectTMX) {
-                //get all local changes
-                ProjectTMX deltaLocal = ProjectTMX.calculateDelta(baseTMX, projectTMX);
-                //free up some memory
-                baseTMX = null;
-                //and apply local changes on the new head, and load new HEAD into project memory
-                projectTMX.applyTMXandDelta(headTMX, deltaLocal);
-            }
+            headTMX = new ProjectTMX(m_config.getSourceLanguage(), m_config.getTargetLanguage(), m_config.isSentenceSegmentingEnabled(), projectTMXFile, null);
+            //calculate delta with base, and apply delta on head and replace translations with new head.
+            projectTMX.calculateDeltaAndApply(baseTMX, headTMX);
             filenameTMXwithLocalChangesOnHead = new File(projectTMXFilename + "-based_on_" + headRevTMX + OConsts.NEWFILE_EXTENSION);
-            projectTMX.exportTMX(props, filenameTMXwithLocalChangesOnHead, false, false, true);
+            projectTMX.exportTMX(m_config, filenameTMXwithLocalChangesOnHead, false, false, true);
             //free memory
             headTMX = null;
         }

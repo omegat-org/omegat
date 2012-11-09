@@ -312,6 +312,32 @@ public class ProjectTMX {
     }
 
     /**
+     * Clear all data from TMX. Used for free memory on delta calculations.
+     */
+    private void clear() {
+        defaults = null;
+        alternatives = null;
+    }
+
+    /**
+     * Calculates the difference between this and tmxForDelta, and applies that delta to tmxToApply 
+     * and loads translations in tmxToApply instead of this' translations.
+     *
+     * @param tmxForDelta e.g baseTMX
+     * @param tmxToApply e.g. headTMX
+     */
+    public void calculateDeltaAndApply(ProjectTMX tmxForDelta, ProjectTMX tmxToApply) {
+        synchronized (this) {
+            //calculate delta
+            ProjectTMX deltaLocal = ProjectTMX.calculateDelta(tmxForDelta, this);
+            //free up some memory
+            tmxForDelta.clear();
+            //and apply local changes on the new head, and load new HEAD into project memory
+            applyTMXandDelta(tmxToApply, deltaLocal);
+        }
+    }
+
+    /**
      * Calculates delta between base and changed TMX.
      *
      * @return a tmx with all updated/removed/added entries in changedTMX compared to baseTMX.
@@ -358,7 +384,7 @@ public class ProjectTMX {
      * @param newTMX the translation memory of which the translations have to be used
      * @param delta the delta that has to be applied on the new TMX.
      */
-    void applyTMXandDelta(ProjectTMX newTMX, ProjectTMX delta) {
+    private void applyTMXandDelta(ProjectTMX newTMX, ProjectTMX delta) {
         defaults = newTMX.defaults;
         alternatives = newTMX.alternatives;
 

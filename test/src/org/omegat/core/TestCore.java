@@ -26,6 +26,7 @@ package org.omegat.core;
 
 import java.awt.Cursor;
 import java.awt.Font;
+import java.awt.HeadlessException;
 import java.io.File;
 
 import javax.swing.JFrame;
@@ -95,6 +96,14 @@ public abstract class TestCore extends XMLTestCase {
             }
 
             public void setCursor(Cursor cursor) {
+            }
+
+            public int showConfirmDialog(Object message, String title,
+                    int optionType, int messageType) throws HeadlessException {
+                return 0;
+            }
+
+            public void showMessageDialog(String message) {
             }
         });
         Core.setCurrentProject(new NotLoadedProject());

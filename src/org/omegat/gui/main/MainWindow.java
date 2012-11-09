@@ -31,6 +31,7 @@ import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.Font;
 import java.awt.Frame;
+import java.awt.HeadlessException;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.File;
@@ -488,5 +489,18 @@ public class MainWindow extends JFrame implements IMainWindow {
         JOptionPane.showMessageDialog(this.getApplicationFrame(),
                 StaticUtils.format(OStrings.getString(message), args), OStrings.getString(title),
                 JOptionPane.ERROR_MESSAGE);
+    }
+
+    /**
+     * {@inheritDoc}
+     * @see JOptionPane.showConfirmDialog
+     */
+    public int showConfirmDialog(Object message, String title, int optionType,
+            int messageType) throws HeadlessException {
+        return JOptionPane.showConfirmDialog(this, message, title, optionType, messageType);
+    }
+
+    public void showMessageDialog(String message) {
+        JOptionPane.showMessageDialog(this, message);
     }
 }

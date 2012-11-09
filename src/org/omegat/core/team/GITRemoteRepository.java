@@ -402,7 +402,7 @@ public class GITRemoteRepository implements IRemoteRepository {
                         continue;
                     }
                 } else if (i instanceof CredentialItem.YesNoType) {
-                    int choice = JOptionPane.showConfirmDialog(Core.getMainWindow().getApplicationFrame(), i.getPromptText(),null , JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+                    int choice = Core.getMainWindow().showConfirmDialog(i.getPromptText(), null, JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
                     if (choice==JOptionPane.YES_OPTION) {
                         ((CredentialItem.YesNoType) i).setValue(true);
                     } else {
@@ -410,7 +410,7 @@ public class GITRemoteRepository implements IRemoteRepository {
                     }
                     continue;
                 } else if (i instanceof CredentialItem.InformationalMessage) {
-                    JOptionPane.showMessageDialog(Core.getMainWindow().getApplicationFrame(), i.getPromptText());
+                    Core.getMainWindow().showMessageDialog(i.getPromptText());
                     continue;
                 }
                 throw new UnsupportedCredentialItem(uri, i.getClass().getName()
@@ -469,11 +469,9 @@ public class GITRemoteRepository implements IRemoteRepository {
                         }
                         p.store(new FileOutputStream(credentialsFile), "git remote access credentials for OmegaT project");
                     } catch (FileNotFoundException e) {
-                        e.printStackTrace();
-                        JOptionPane.showMessageDialog(Core.getMainWindow().getApplicationFrame(), "could not save credentials to textfile");
+                        Core.getMainWindow().displayErrorRB(e, "TEAM_ERROR_SAVE_CREDENTIALS", null, "TF_ERROR");
                     } catch (IOException e) {
-                        JOptionPane.showMessageDialog(Core.getMainWindow().getApplicationFrame(), "could not save credentials to textfile");
-                        e.printStackTrace();
+                        Core.getMainWindow().displayErrorRB(e, "TEAM_ERROR_SAVE_CREDENTIALS", null, "TF_ERROR");
                     }
                 }
                 return true;

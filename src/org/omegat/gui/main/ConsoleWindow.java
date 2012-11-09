@@ -26,6 +26,7 @@ package org.omegat.gui.main;
 
 import java.awt.Cursor;
 import java.awt.Font;
+import java.awt.HeadlessException;
 
 import javax.swing.JFrame;
 
@@ -130,6 +131,19 @@ public class ConsoleWindow implements IMainWindow {
     }
 
     public void setCursor(Cursor cursor) {
+    }
+
+    public int showConfirmDialog(Object message, String title, int optionType,
+            int messageType) throws HeadlessException {
+
+        System.out.println(title);
+        System.out.println(message);
+        System.out.println(OStrings.getString("TF_CHOSEN_YES"));
+        return 0; //JOptionPane.YES_OPTION
+    }
+
+    public void showMessageDialog(String message) {
+        System.out.println(message);
     }
 
 }

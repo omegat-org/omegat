@@ -26,8 +26,10 @@ package org.omegat.gui.main;
 
 import java.awt.Cursor;
 import java.awt.Font;
+import java.awt.HeadlessException;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 import com.vlsolutions.swing.docking.Dockable;
 
@@ -118,6 +120,25 @@ public interface IMainWindow {
      *            is to be displayed
      */
     void showErrorDialogRB(String message, Object[] args, String title);
+
+    /**
+     * shows a confirm dialog. For a GUI main window, this can be implemented as JOptionPane.showConfirmDialog
+     *
+     * @param message the Object to display
+     * @param title   the title string for the dialog (can be null)
+     * @param optionType an integer designating the JOptionPane options available on the dialog: YES_NO_OPTION, YES_NO_CANCEL_OPTION, or OK_CANCEL_OPTION
+     * @param messageType an integer designating the kind of message this is; primarily used to determine the icon from the pluggable Look and Feel: (JOptionPane ERROR_MESSAGE, INFORMATION_MESSAGE, WARNING_MESSAGE, QUESTION_MESSAGE, or PLAIN_MESSAGE
+     * @return an integer indicating the option selected by the user
+     * @throws HeadlessException if GraphicsEnvironment.isHeadless returns true
+     */
+    int showConfirmDialog(Object message, String title, int optionType, int messageType) throws HeadlessException;
+
+    /**
+     * Shows message to user
+     *
+     * @param message the message to show
+     */
+    void showMessageDialog(String message);
 
     /**
      * Add new dockable pane into application frame. This method called on

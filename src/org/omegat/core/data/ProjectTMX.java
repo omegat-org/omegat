@@ -31,7 +31,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
-import java.util.logging.Logger;
 
 import org.omegat.core.segmentation.Segmenter;
 import org.omegat.util.Language;
@@ -54,9 +53,6 @@ public class ProjectTMX {
     protected static final String PROP_PREV = "prev";
     protected static final String PROP_NEXT = "next";
     protected static final String PROP_PATH = "path";
-
-    /** Local logger. */
-    private static final Logger LOGGER = Logger.getLogger(ProjectTMX.class.getName());
 
     /**
      * Storage for default translations for current project.

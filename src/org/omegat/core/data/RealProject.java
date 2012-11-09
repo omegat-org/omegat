@@ -47,7 +47,6 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
-import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -102,8 +101,6 @@ import org.xml.sax.SAXParseException;
  * @author Martin Fleurke
  */
 public class RealProject implements IProject {
-    /** Local logger. */
-    private static final Logger LOGGER = Logger.getLogger(RealProject.class.getName());
 
     protected final ProjectProperties m_config;
     
@@ -539,6 +536,41 @@ public class RealProject implements IProject {
 
     /**
      * Rebase changes in project to remote HEAD and upload changes to remote if possible.
+     *
+     * How it works.
+     *
+     * On each moment we have 3 versions of translation(project_save.tmx file) or writable glossary:
+     *
+     * 1. BASE - version which current translator downloaded from remote repository previously(on previous
+     * synchronization or startup).
+     *
+     * 2. WORKING - current version in translator's OmegaT. It doesn't exist it remote repository yet. It's
+     * inherited from BASE version, i.e. BASE + local changes.
+     *
+     * 3. HEAD - latest version in repository, which other translators committed. It's also inherited from BASE
+     * version, i.e. BASE + remote changes.
+     *
+     * In the ideal world, we could just calculate diff between WORKING and BASE - it will be our local changes
+     * after latest synchronization, then rebase these changes on the HEAD revision, then commit into remote
+     * repository.
+     *
+     * But we have some real world limitations: a) computers and networks work slowly, i.e. this synchronization
+     * will require some seconds, but translator should be able to edit translation in this time. b) we have to
+     * handle network errors, c) other translators can commit own data in the same time.
+     *
+     * So, in the real world synchronization works by these steps:
+     *
+     * 1. Download HEAD revision from remote repository and load it in memory.
+     *
+     * 2. Load BASE revision from local disk.
+     *
+     * 3. Calculate diff between WORKING and BASE, then rebase it on the top of HEAD revision. This step
+     * synchronized around memory TMX, so, all edits are stopped. Since it's enough fast step, it's okay.
+     *
+     * 4. Upload new revision into repository.
+     *
+     * @author Alex Buloichik <alex73mail@gmail.com>
+     * @author Martin Fleurke
      */
     private void rebaseProject(ProjectProperties props) throws Exception {
         File filenameTMXwithLocalChangesOnBase, filenameTMXwithLocalChangesOnHead;
@@ -657,7 +689,7 @@ public class RealProject implements IProject {
         } else {
             // need rebase
             headTMX = new ProjectTMX(props.getSourceLanguage(), props.getTargetLanguage(), props.isSentenceSegmentingEnabled(), projectTMXFile, null);
-            synchronized (this) {
+            synchronized (projectTMX) {
                 //get all local changes
                 ProjectTMX deltaLocal = ProjectTeamTMX.calculateDelta(baseTMX, projectTMX);
                 //free up some memory

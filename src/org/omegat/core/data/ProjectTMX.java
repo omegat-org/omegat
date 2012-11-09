@@ -35,8 +35,8 @@ import java.util.logging.Logger;
 
 import org.omegat.core.segmentation.Segmenter;
 import org.omegat.util.Language;
+import org.omegat.util.Log;
 import org.omegat.util.OConsts;
-import org.omegat.util.OStrings;
 import org.omegat.util.StringUtil;
 import org.omegat.util.TMXReader2;
 import org.omegat.util.TMXWriter2;
@@ -117,7 +117,7 @@ public class ProjectTMX {
     public void save(ProjectProperties props, String translationFile, boolean translationUpdatedByUser)
             throws Exception {
         if (!translationUpdatedByUser) {
-            LOGGER.info(OStrings.getString("LOG_DATAENGINE_SAVE_NONEED"));
+            Log.logInfoRB("LOG_DATAENGINE_SAVE_NONEED");
             return;
         }
 

@@ -191,7 +191,7 @@ public class RealProject implements IProject {
      * Create new project.
      */
     public void createProject() {
-        LOGGER.info(OStrings.getString("LOG_DATAENGINE_CREATE_START"));
+        Log.logInfoRB("LOG_DATAENGINE_CREATE_START");
         UIThreadsUtil.mustNotBeSwingThread();
 
         lockProject();
@@ -227,14 +227,14 @@ public class RealProject implements IProject {
             Log.logErrorRB(e, "CT_ERROR_CREATING_PROJECT");
             Core.getMainWindow().displayErrorRB(e, "CT_ERROR_CREATING_PROJECT");
         }
-        LOGGER.info(OStrings.getString("LOG_DATAENGINE_CREATE_END"));
+        Log.logInfoRB("LOG_DATAENGINE_CREATE_END");
     }
 
     /**
      * Load exist project in a "big" sense -- loads project's properties, glossaries, tms, source files etc.
      */
     public void loadProject(boolean onlineMode) {
-        LOGGER.info(OStrings.getString("LOG_DATAENGINE_LOAD_START"));
+        Log.logInfoRB("LOG_DATAENGINE_LOAD_START");
         UIThreadsUtil.mustNotBeSwingThread();
 
         lockProject();
@@ -313,7 +313,7 @@ public class RealProject implements IProject {
             System.exit(0);
         }
 
-        LOGGER.info(OStrings.getString("LOG_DATAENGINE_LOAD_END"));
+        Log.logInfoRB("LOG_DATAENGINE_LOAD_END");
     }
 
     /**
@@ -362,7 +362,7 @@ public class RealProject implements IProject {
         tmMonitor.fin();
         tmOtherLanguagesMonitor.fin();
         unlockProject();
-        LOGGER.info(OStrings.getString("LOG_DATAENGINE_CLOSE"));
+        Log.logInfoRB("LOG_DATAENGINE_CLOSE");
     }
 
     /**
@@ -415,7 +415,7 @@ public class RealProject implements IProject {
      * @throws TranslationException
      */
     public void compileProject(String sourcePattern) throws IOException, TranslationException {
-        LOGGER.info(OStrings.getString("LOG_DATAENGINE_COMPILE_START"));
+        Log.logInfoRB("LOG_DATAENGINE_COMPILE_START");
         UIThreadsUtil.mustNotBeSwingThread();
 
         Pattern FILE_PATTERN = Pattern.compile(sourcePattern);
@@ -487,12 +487,12 @@ public class RealProject implements IProject {
 
         CoreEvents.fireProjectChange(IProjectEventListener.PROJECT_CHANGE_TYPE.COMPILE);
 
-        LOGGER.info(OStrings.getString("LOG_DATAENGINE_COMPILE_END"));
+        Log.logInfoRB("LOG_DATAENGINE_COMPILE_END");
     }
 
     /** Saves the translation memory and preferences */
     public synchronized void saveProject() {
-        LOGGER.info(OStrings.getString("LOG_DATAENGINE_SAVE_START"));
+        Log.logInfoRB("LOG_DATAENGINE_SAVE_START");
         UIThreadsUtil.mustNotBeSwingThread();
 
         Core.getAutoSave().disable();
@@ -534,7 +534,7 @@ public class RealProject implements IProject {
         } finally {
             Core.getAutoSave().enable();
         }
-        LOGGER.info(OStrings.getString("LOG_DATAENGINE_SAVE_END"));
+        Log.logInfoRB("LOG_DATAENGINE_SAVE_END");
     }
 
     /**

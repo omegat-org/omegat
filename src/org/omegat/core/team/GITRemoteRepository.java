@@ -71,9 +71,9 @@ import org.omegat.util.gui.DockingUI;
  * @author Martin Fleurke
  */
 public class GITRemoteRepository implements IRemoteRepository {
-    static String LOCAL_BRANCH = "master";
-    static String REMOTE_BRANCH = "origin/master";
-    static String REMOTE = "origin";
+    protected static String LOCAL_BRANCH = "master";
+    protected static String REMOTE_BRANCH = "origin/master";
+    protected static String REMOTE = "origin";
     boolean readOnly;
 
     File localDirectory;

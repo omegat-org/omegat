@@ -691,11 +691,11 @@ public class RealProject implements IProject {
             headTMX = new ProjectTMX(props.getSourceLanguage(), props.getTargetLanguage(), props.isSentenceSegmentingEnabled(), projectTMXFile, null);
             synchronized (projectTMX) {
                 //get all local changes
-                ProjectTMX deltaLocal = ProjectTeamTMX.calculateDelta(baseTMX, projectTMX);
+                ProjectTMX deltaLocal = ProjectTMX.calculateDelta(baseTMX, projectTMX);
                 //free up some memory
                 baseTMX = null;
                 //and apply local changes on the new head, and load new HEAD into project memory
-                ((ProjectTeamTMX)projectTMX).applyTMXandDelta(headTMX, deltaLocal);
+                projectTMX.applyTMXandDelta(headTMX, deltaLocal);
             }
             filenameTMXwithLocalChangesOnHead = new File(projectTMXFilename + "-based_on_" + headRevTMX + OConsts.NEWFILE_EXTENSION);
             projectTMX.exportTMX(props, filenameTMXwithLocalChangesOnHead, false, false, true);
@@ -818,13 +818,7 @@ public class RealProject implements IProject {
         try {
             Core.getMainWindow().showStatusMessageRB("CT_LOAD_TMX");
 
-            if (repository != null) {
-                // team project
-                projectTMX = new ProjectTeamTMX(m_config, tmxFile, checkOrphanedCallback, repository);
-            } else {
-                // local project
-                projectTMX = new ProjectTMX(m_config.getSourceLanguage(), m_config.getTargetLanguage(), m_config.isSentenceSegmentingEnabled(), tmxFile, checkOrphanedCallback);
-            }
+            projectTMX = new ProjectTMX(m_config.getSourceLanguage(), m_config.getTargetLanguage(), m_config.isSentenceSegmentingEnabled(), tmxFile, checkOrphanedCallback);
             if (tmxFile.exists()) {
                 // RFE 1001918 - backing up project's TMX upon successful read
                 FileUtil.backupFile(tmxFile);

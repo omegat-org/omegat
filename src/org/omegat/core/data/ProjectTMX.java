@@ -310,4 +310,71 @@ public class ProjectTMX {
 
         boolean existSourceInProject(String src);
     }
+
+    /**
+     * Calculates delta between base and changed TMX.
+     *
+     * @return a tmx with all updated/removed/added entries in changedTMX compared to baseTMX.
+     */
+    public static ProjectTMX calculateDelta(ProjectTMX baseTMX, ProjectTMX changedTMX) {
+        ProjectTMX delta = new ProjectTMX();
+
+        // find updated and removed
+        for (Map.Entry<String, TMXEntry> en : baseTMX.defaults.entrySet()) {
+            TMXEntry newEntry = changedTMX.defaults.get(en.getKey());
+
+            if (!en.getValue().equalsTranslation(newEntry)) {
+                delta.defaults.put(en.getKey(), newEntry);
+            }
+        }
+        for (Map.Entry<EntryKey, TMXEntry> en : baseTMX.alternatives.entrySet()) {
+            TMXEntry newEntry = changedTMX.alternatives.get(en.getKey());
+
+            if (!en.getValue().equalsTranslation(newEntry)) {
+                delta.alternatives.put(en.getKey(), newEntry);
+            }
+        }
+
+        // find added
+        if (changedTMX.defaults != null) {
+            for (Map.Entry<String, TMXEntry> en : changedTMX.defaults.entrySet()) {
+                if (!baseTMX.defaults.containsKey(en.getKey())) {
+                    delta.defaults.put(en.getKey(), en.getValue());
+                }
+            }
+        }
+        for (Map.Entry<EntryKey, TMXEntry> en : changedTMX.alternatives.entrySet()) {
+            if (!baseTMX.alternatives.containsKey(en.getKey())) {
+                delta.alternatives.put(en.getKey(), en.getValue());
+            }
+        }
+
+        return delta;
+    }
+
+    /**
+     * Replaces the current translations with those of the given TMX, and applies the delta on the translations
+     *
+     * @param newTMX the translation memory of which the translations have to be used
+     * @param delta the delta that has to be applied on the new TMX.
+     */
+    void applyTMXandDelta(ProjectTMX newTMX, ProjectTMX delta) {
+        defaults = newTMX.defaults;
+        alternatives = newTMX.alternatives;
+
+        for (Map.Entry<String, TMXEntry> en : delta.defaults.entrySet()) {
+            if (en.getValue() != null) {
+                defaults.put(en.getKey(), en.getValue());
+            } else {
+                defaults.remove(en.getKey());
+            }
+        }
+        for (Map.Entry<EntryKey, TMXEntry> en : delta.alternatives.entrySet()) {
+            if (en.getValue() != null) {
+                alternatives.put(en.getKey(), en.getValue());
+            } else {
+                alternatives.remove(en.getKey());
+            }
+        }
+    }
 }

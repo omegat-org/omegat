@@ -185,6 +185,18 @@ public class ProjectUICommands {
 
                 try {
                     ProjectProperties props = ProjectFileStorage.loadProjectProperties(localDirectory);
+                    //empty directories might not exist in VCS. Some project folders can be empty. Let's try to make them if needed.
+                    File[] projectFolders = {new File(props.getGlossaryRoot()), new File(props.getTMRoot()), new File(props.getTMAutoRoot()),new File(props.getDictRoot()), new File(props.getTargetRoot())};
+                    for (File f : projectFolders) {
+                        try {
+                            if (!f.exists()) {
+                                f.mkdir();
+                            }
+                        } catch (Exception e) {
+                            Log.logErrorRB(e, "TEAM_MISSING_FOLDER", new Object[] {f.getName()});
+                        };
+                    }
+                    //load project
                     ProjectFactory.loadProject(props, repository, true);
                 } catch (Exception ex) {
                     Log.logErrorRB(ex, "PP_ERROR_UNABLE_TO_READ_PROJECT_FILE");

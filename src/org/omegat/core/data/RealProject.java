@@ -755,11 +755,11 @@ public class RealProject implements IProject {
     }
 
     /**
-     * Create one of project directory and
+     * Create the given directory if it does not exist yet.
      * 
-     * @param dir
-     * @param dirType
-     * @throws IOException
+     * @param dir the directory path to create
+     * @param dirType the directory name to show in IOException
+     * @throws IOException when directory could not be created.
      */
     private void createDirectory(final String dir, final String dirType) throws IOException {
         File d = new File(dir);

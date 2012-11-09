@@ -43,7 +43,6 @@ import javax.swing.UIManager;
 import org.omegat.convert.ConvertConfigs;
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
-import org.omegat.core.data.ProjectFactory;
 import org.omegat.core.data.ProjectProperties;
 import org.omegat.core.data.RealProject;
 import org.omegat.core.data.SourceTextEntry;

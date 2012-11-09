@@ -77,7 +77,7 @@ public class GITRemoteRepository implements IRemoteRepository {
     boolean readOnly;
 
     File localDirectory;
-    Repository repository;
+    protected Repository repository;
 
     private MyCredentialsProvider myCredentialsProvider;
 

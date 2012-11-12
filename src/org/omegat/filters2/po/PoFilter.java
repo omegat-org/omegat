@@ -406,18 +406,19 @@ public class PoFilter extends AbstractFilter {
             }
             Matcher m;
 
-            if ((m = MSG_ID.matcher(s)).matches()) {
-                if (sources[0].length() > 0) {
-                    flushTranslation(currentMode, fc, plurals);
-                }
+            if ((m = MSG_ID.matcher(s)).matches()) { //msg_id(_plural)
                 currentPlural = 0;
                 String text = m.group(2);
                 if (m.group(1) == null) {
-                    // non-plural ID
+                    // non-plural ID ('msg_id')
+                    //we can start a new translation. Flush current translation. This has not happened when no empty lines are in between 'segments'.
+                    if (sources[0].length() > 0) {
+                        flushTranslation(currentMode, fc, plurals);
+                    }
                     currentMode = MODE.MSGID;
                     sources[0].append(text);
                 } else {
-                    // plural ID
+                    // plural ID ('msg_id_plural')
                     currentMode = MODE.MSGID_PLURAL;
                     sources[1].append(text);
                 }

@@ -78,7 +78,8 @@ public class SVNRemoteRepository implements IRemoteRepository {
 
     public boolean isChanged(File file) throws Exception {
         SVNStatus status = ourClientManager.getStatusClient().doStatus(file, false);
-
+        //if file not under version control, then return false.
+        if (status == null) return false;
         return status.getContentsStatus() != SVNStatusType.STATUS_NORMAL;
     }
 

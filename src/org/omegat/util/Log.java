@@ -50,7 +50,7 @@ public class Log {
     private static Logger LOGGER;
 
     static {
-        LOGGER = Logger.getGlobal();
+        LOGGER = Logger.getLogger("global");
 
         boolean loaded = false;
         File usersLogSettings = new File(StaticUtils.getConfigDir(), "logger.properties");

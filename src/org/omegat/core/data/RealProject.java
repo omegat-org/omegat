@@ -613,14 +613,18 @@ public class RealProject implements IProject {
 
         //get revisions of files
         String baseRevTMX = repository.getBaseRevisionId(projectTMXFile);
-        String baseRevGlossary = repository.getBaseRevisionId(glossaryFile);
+        String baseRevGlossary = null;
+        if (updateGlossary) {
+            baseRevGlossary = repository.getBaseRevisionId(glossaryFile);
+        }
 
         //save current status to file in case we encounter errors.
         // save into ".new" file
         filenameTMXwithLocalChangesOnBase = new File(projectTMXFilename + "-based_on_" + baseRevTMX + OConsts.NEWFILE_EXTENSION);
+        filenameGlossarywithLocalChangesOnBase = null;
         projectTMX.exportTMX(m_config, filenameTMXwithLocalChangesOnBase, false, false, true); //overwrites file if it exists
-        filenameGlossarywithLocalChangesOnBase = new File(glossaryFilename + "-based_on_" + baseRevGlossary + OConsts.NEWFILE_EXTENSION);
         if (updateGlossary) {
+            filenameGlossarywithLocalChangesOnBase = new File(glossaryFilename + "-based_on_" + baseRevGlossary + OConsts.NEWFILE_EXTENSION);
             if (filenameGlossarywithLocalChangesOnBase.exists()) {
                 //empty file first, because we append to it.
                 filenameGlossarywithLocalChangesOnBase.delete();
@@ -678,7 +682,6 @@ public class RealProject implements IProject {
             //go on to restore changes
         }
         String headRevTMX = repository.getBaseRevisionId(projectTMXFile);
-        String headRevGlossary = repository.getBaseRevisionId(glossaryFile);
 
         if (headRevTMX.equals(baseRevTMX)) {
             // don't need rebase
@@ -697,6 +700,7 @@ public class RealProject implements IProject {
             headTMX = null;
         }
         if (updateGlossary) {
+            String headRevGlossary = repository.getBaseRevisionId(glossaryFile);
             if (headRevGlossary.equals(baseRevGlossary)) {
                 // don't need rebase
                 filenameGlossarywithLocalChangesOnHead = filenameGlossarywithLocalChangesOnBase;

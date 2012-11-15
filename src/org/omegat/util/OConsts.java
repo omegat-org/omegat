@@ -63,7 +63,7 @@ public class OConsts {
     // status file consts
     public static final String STATUS_EXTENSION = "project_save.tmx";
     public static final String STATUS_RECOVER_EXTENSION = ".recover";
-    public static final String BACKUP_EXTENSION = ".backup";
+    public static final String BACKUP_EXTENSION = ".bak";
     public static final String NEWFILE_EXTENSION = ".new";
 
     /** Project subfolder for source files default name. */

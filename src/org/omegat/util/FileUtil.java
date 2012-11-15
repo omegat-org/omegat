@@ -173,10 +173,12 @@ public class FileUtil {
             if (!fileAbs.toUpperCase().startsWith(rootAbs.toUpperCase())) {
                 throw new IOException("File '" + file + "' is not under dir '" + rootDir + "'");
             }
+            break;
         default:
             if (!fileAbs.startsWith(rootAbs)) {
                 throw new IOException("File '" + file + "' is not under dir '" + rootDir + "'");
             }
+            break;
         }
         return fileAbs.substring(rootAbs.length());
     }

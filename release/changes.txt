@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 2.6.1 update 2
 ----------------------------------------------------------------------
-   9 Enhancements
+  10 Enhancements
    7 Bug fixes
    2 Localisations update
 ----------------------------------------------------------------------
@@ -32,6 +32,9 @@ segmentation is enabled in the project
 
   - PO-filter takes number of plurals from header if it is defined in the header. 
 If not defined, the default for the language is used just like before.
+
+  - New "--no-team" command line option, to be able to use a team project without
+OmegaT attempting to synchronise it
 
   Bug fixes:
 

@@ -318,7 +318,10 @@ public class ProjectUICommands {
 
                 final IRemoteRepository repository;
                 // check for team-project
-                if (SVNRemoteRepository.isSVNDirectory(projectRootFolder)) {
+                if (Core.getParams().containsKey("no-team")) {
+                    // disable team functionality
+                    repository = null;
+                } else if (SVNRemoteRepository.isSVNDirectory(projectRootFolder)) {
                     // SVN selected
                     repository = new SVNRemoteRepository(projectRootFolder);
                 } else if (GITRemoteRepository.isGITDirectory(projectRootFolder)) {

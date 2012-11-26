@@ -27,7 +27,7 @@
     "cats" (and possibly "catlike", "catty" etc.) as based on the root "cat",
     and "stemmer", "stemming", "stemmed" as based on "stem". A stemming
     algorithm reduces the words "fishing", "fished", "fish", and "fisher" to
-    the root word, "fish". This especially useful in case of languages that
+    the root word, "fish". This is especially useful in case of languages that
     use pre- and postfix forms for the stem words. Borrowing an example from
     Slovenian, here "good" in all possible grammatically correct forms:</para>
 
@@ -83,9 +83,9 @@
   </section>
 
   <section>
-    <title>Mac OSX specifics</title>
+    <title>Mac OS X specifics</title>
 
-    <para>If you wish to use the tokenizers with the Mac OSX OmegaT.app
+    <para>If you wish to use the tokenizers with the Mac OS X OmegaT.app
     package, the tokenizer installation described above applies (right-click
     on OmegaT.app to find the location of OmegaT.jar), but you'll need to
     specify the tokenizer names in the <filename>info.plist </filename>that
@@ -127,7 +127,7 @@
 12719: Info: Target tokenizer: org.omegat.core.matching.Tokenizer 
 </code></literallayout>
 
-    <para>With the Mac OSX OmegaT.app package, you'll need to double-click on
+    <para>With the Mac OS X OmegaT.app package, you'll need to double-click on
     the <literal>JavaApplicationStub</literal> located in
     /OmegaT.app/Contents/MacOS/ (see above to access it) to launch OmegaT from
     the console and have immediate access to the log.</para>

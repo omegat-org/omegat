@@ -290,6 +290,12 @@
     on the pane status, different signs can appear at its top right
     corner:</para>
 
+    <note>
+      <para>If you can not see all the panes (be it opened or minimized),
+      pressing <guisubmenu> Options &gt; Restore Main Window </guisubmenu>will
+      restore them to the state, defined in the installation..</para>
+    </note>
+
     <table>
       <title>Pane widgets<indexterm class="singular">
           <primary>Windows and panes in OmegaT</primary>
@@ -632,13 +638,13 @@
         </mediaobject>
       </figure>
 
-      <para>If you have TransTip option activated <guimenuitem>Options →
-      Transtip</guimenuitem>), you can right click on the highlighted word in
-      the source segment to open a drop-down menu with suggested translation,
-      as offered by your glossary. Selecting one of them will insert it at the
-      current position into the target segment. You can also highlight your
-      preferred alternative in the glossary pane and insert it into the target
-      by right clicking on the selection.</para>
+      <para>If you have TransTips option activated (<guimenuitem>Options →
+      TransTips</guimenuitem>), you can right click on the highlighted word in
+      the source segment to open a pop-up menu with suggested translation, as
+      offered by your glossary. Selecting one of them will insert it at the
+      current cursor position into the target segment. You can also highlight
+      your preferred alternative in the glossary pane and insert it into the
+      target by right clicking on the selection.</para>
     </section>
 
     <section id="dictionaries">

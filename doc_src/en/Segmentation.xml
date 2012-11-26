@@ -192,11 +192,10 @@
     dialog. An empty line will appear at the bottom of the upper table (you
     may have to scroll down to see it). Change the name of the rule set and
     the language pattern to the language concerned and its code (see <xref
-    linkend="appendix.languages"/> for a list of language codes).
-    The syntax of the language pattern conforms to regular expression syntax.
-    If your set of rules handles a language-country pair, we advise you to
-    move it to the top using the <emphasis role="bold">Move Up</emphasis>
-    button.</para>
+    linkend="appendix.languages"/> for a list of language codes). The syntax
+    of the language pattern conforms to regular expression syntax. If your set
+    of rules handles a language-country pair, we advise you to move it to the
+    top using the <emphasis role="bold">Move Up</emphasis> button.</para>
 
     <para>Add the <emphasis role="bold">Before</emphasis> and<emphasis
     role="bold"> After</emphasis> patterns. To check their syntax and their
@@ -215,13 +214,13 @@
 
     <informaltable>
       <tgroup cols="4">
-        <colspec align="left" colnum="1" colwidth="150" />
+        <colspec align="left" colnum="1" colwidth="150"/>
 
-        <colspec align="center" colnum="2" colwidth="60" />
+        <colspec align="center" colnum="2" colwidth="60"/>
 
-        <colspec align="center" colnum="3" colwidth="60" />
+        <colspec align="center" colnum="3" colwidth="60"/>
 
-        <colspec align="left" colnum="4" colwidth="190" />
+        <colspec align="left" colnum="4" colwidth="190"/>
 
         <thead>
           <row>
@@ -237,15 +236,15 @@
 
         <tbody>
           <row>
-            <entry>Set a segment after a period ('.') and before a
-            space</entry>
+            <entry>Set the segment start after a period ('.') followed by a
+            space, tab ...</entry>
 
             <entry align="center">\.</entry>
 
             <entry align="center">\s</entry>
 
-            <entry>"\." means the character "." "\s" means any white space
-            character ((space, tab, new page etc.)</entry>
+            <entry>"\." stands for the period character. "\s" means any white
+            space character (space, tab, new page etc.)</entry>
           </row>
 
           <row>
@@ -264,7 +263,7 @@
 
             <entry align="center">。</entry>
 
-            <entry align="center"></entry>
+            <entry align="center"/>
 
             <entry>Note that <literal>after</literal> is empty</entry>
           </row>

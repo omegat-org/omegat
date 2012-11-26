@@ -148,7 +148,7 @@
         tools work with textual units called segments. In OmegaT, segments can
         be based on paragraphs or on segmentation rules. Paragraph
         segmentation is less frequently used, but can be useful in cases of
-        so-called "creative" texts, The rule-based segmentation is usually
+        so-called "creative" texts. The rule-based segmentation is usually
         synonymous with sentence-based segmentation. A number of rule sets are
         provided while additional rules can be defined by the user, as
         described in this chapter.</para>
@@ -169,11 +169,12 @@
       <listitem>
         <para><emphasis role="bold">Dictionaries, Glossaries</emphasis>,
         <emphasis role="bold">Machine translation</emphasis> and <emphasis
-        role="bold">Spellchecker:</emphasis> OmegaT enables the extensive of
-        dictionaries and glossaries. If an Internet connection is available,
-        various MT services such as Google Translate can be utilized from
-        within OmegaT. If spell checking is activated, spelling mistakes and
-        typos are recognized and can be corrected during translation.</para>
+        role="bold">Spellchecker:</emphasis> OmegaT allows one an extensive
+        use of dictionaries and glossaries. If an Internet connection is
+        available, various MT services such as Google Translate can be
+        utilized from within OmegaT. If spell checking is activated, spelling
+        mistakes and typos are recognized and can be corrected during
+        translation.</para>
       </listitem>
 
       <listitem>

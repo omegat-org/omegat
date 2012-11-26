@@ -110,12 +110,12 @@
           <secondary>PO as bilingual files</secondary>
         </indexterm> can contain both the source and the target text. Seen
       from this point of view, they are plain text files<emphasis>
-      plus</emphasis> translation memories. If for a given source segment, if
-      there is no existing translation in the project translation memory
-      (project_save.tmx), the translation is saved in the project_save.tmx as
-      the default translation. In case the same source segment already exists,
-      but with a different translation, the new translation is loaded as an
-      alternative.</para>
+      plus</emphasis> translation memories. If for a given source segment
+      there is as yet no existing translation in the project translation
+      memory (project_save.tmx), the current translation will be saved in the
+      project_save.tmx as the default translation. In case, however, the same
+      source segment already exists with a different translation, the new
+      translation will be saved as an alternative.</para>
     </section>
 
     <section>

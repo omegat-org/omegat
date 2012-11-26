@@ -96,7 +96,7 @@
 
       <para>Top folder of a project always contains the file<filename>
       OmegaT.Project</filename>, containing project parameters as defined in
-      the Project properties window (<guimenuitem>File &gt;
+      the Project properties window (<guimenuitem>Project &gt;
       Properties</guimenuitem>). While the translation is progressing,
       additional files
       (<emphasis><filename>project_name</filename></emphasis><filename>-omegat.tmx,
@@ -352,7 +352,7 @@
           </row>
 
           <row>
-            <entry>MAC OSX</entry>
+            <entry>MAC OS X</entry>
 
             <entry><filename>&lt;User
             Home&gt;/Library/Preferences/<application>OmegaT</application></filename></entry>
@@ -378,7 +378,7 @@
     <para>OmegaT is supplied as a package that can be downloaded from
     SourceForge. Here a platform-independent package in a standard Java form
     is considered. Alternatives include a Linux .tar package, a Windows
-    installer – with or without a Java Runtime Environment –, a MacOSX
+    installer – with or without a Java Runtime Environment –, a Mac OS X
     installer, and a source code package for developers.</para>
 
     <para>The platform-independent package can be used on any platform with a
@@ -404,7 +404,7 @@
             <entry><filename>/docs/</filename></entry>
 
             <entry>All the user manual files can be found in this folder. You
-            can open them in An Internet browser to obtain access to external
+            can open them in an Internet browser to obtain access to external
             links.</entry>
           </row>
 
@@ -426,7 +426,7 @@
 
             <entry>This is an ordinary html file that, when opened in your
             Internet browser, directs you to the OmegaT user group hosted on
-            Yahoo Groups. Joining is not necessary, but will provide you with
+            Yahoo! Groups. Joining is not necessary, but will provide you with
             access to additional services, such as files, questionnaires, and
             the opportunity to take part in OmegaT-related discussions. The
             group archives are public and can be viewed without subscription
@@ -492,7 +492,7 @@
           <row>
             <entry/>
 
-            <entry>Linux and OSX users may find this file useful. Make it
+            <entry>Linux and OS X users may find this file useful. Make it
             executable (chmod +x OmegaT) from the command line after making
             sure you are in the /OmegaT_2.5/ directory. You will then be able
             to launch OmegaT by executing this file from the command

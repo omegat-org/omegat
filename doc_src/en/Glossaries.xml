@@ -65,8 +65,9 @@
     added (see "transitive verb" for the second item). The glossary function
     only finds exact matches with the glossary entry (e.g. does not find
     inflected forms etc.). New terms can be added manually to the glossary
-    file(s) during translation (for example in a text editor), but newly added
-    terms will not be recognized until the project is reloaded.</para>
+    file(s) during translation, for example in a text editor. Newly added
+    terms will not be recognized once the changes is the text file have been
+    saved. </para>
 
     <para>The source term does not have to be a single-word item, as the next
     example shows:</para>
@@ -98,9 +99,10 @@
     segment.<footnote>
         <para>Note that in the above case, this is just half (or even less) of
         the story, as the target language (Slovenian) uses declension. So the
-        inserted "pojavni meni" has to be changed to "pojavnem meniju". In
-        other words, typing the term correctly without bothering with
-        highlighting and rightclicking is probably faster.</para>
+        inserted "pojavni meni" in the nominative form - has to be changed to
+        "pojavnem meniju" , i.e. to the locative. So it is probably faster to
+        type the term correctly right away without bothering with the glossary
+        and its shortcuts.</para>
       </footnote></para>
   </section>
 
@@ -141,9 +143,9 @@
         <secondary>TBX format</secondary>
       </indexterm> is also supported. TBX - Term Base eXchange - is the open,
     XML-based standard for exchanging structured terminological data, TBX has
-    been approved as an international standard by LISA and ISO. If you have an existing terminology handling
-    system - MultiTerm for example - it is quite possible it offers the export
-    of terminology data via TBX format. <ulink
+    been approved as an international standard by LISA and ISO. If you have an
+    existing terminology handling system - MultiTerm for example - it is quite
+    possible it offers the export of terminology data via TBX format. <ulink
     url="http://www.microsoft.com/Language/en-US/Terminology.aspx">Microsoft
     Terminology Collection</ulink> <indexterm class="singular">
         <primary>Glossaries</primary>

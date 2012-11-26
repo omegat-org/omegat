@@ -26,7 +26,7 @@ segmentation is enabled in the project
 
   - Git submodule support added
 
-  - right-click on Glossary pane pops-up menu to add glossary item.
+  - Right-click on Glossary pane pops-up menu to add glossary item.
 
   - The writable glossary file can now be used in team project. Updates are shared.
 
@@ -49,14 +49,14 @@ mode.
 
   - Git end of lines where not handled correctly under Windows
 
-  - if writable glossary file does not exist, it is created when an entry is added.
+  - If writable glossary file does not exist, it is created when an entry is added.
 
-  - small memory consumption optimizations on team projects during save.
+  - Small memory consumption optimizations on team projects during save.
 
-  - create/download project dialog accepts empty folder besides new folder as project location, 
+  - Create/download project dialog accepts empty folder besides new folder as project location, 
 and doesn't show files any more.
 
-  - multiple save commands could interfere, causing you to loose all translations in team project.
+  - Multiple save commands could interfere, causing you to loose all translations in team project.
 
   Localisation updates:
 

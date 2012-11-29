@@ -192,6 +192,71 @@ public class WikiGet {
     }
 
     /**
+     * Get data from the remote URL.
+     * 
+     * @param address
+     *            address to post
+     * @param params
+     *            parameters
+     * @param additionalHeaders
+     *            additional headers for request, can be null
+     * @return sever output
+     */
+    public static String get(String address, Map<String, String> params,
+            Map<String, String> additionalHeaders) throws IOException {
+        String url;
+        if (params == null || params.isEmpty()) {
+            url = address;
+        } else {
+            StringBuilder s = new StringBuilder();
+            s.append(address).append('?');
+            boolean next=false;
+            for (Map.Entry<String, String> p : params.entrySet()) {
+                if (next) {
+                    s.append('&');
+                }else {
+                    next=true;
+                }
+                s.append(p.getKey());
+                s.append('=');
+                s.append(URLEncoder.encode(p.getValue(), OConsts.UTF8));
+            }
+            url = s.toString();
+        }
+
+        HttpURLConnection conn = (HttpURLConnection) new URL(url).openConnection();
+        try {
+            conn.setRequestMethod("GET");
+            if (additionalHeaders != null) {
+                for (Map.Entry<String, String> en : additionalHeaders.entrySet()) {
+                    conn.setRequestProperty(en.getKey(), en.getValue());
+                }
+            }
+
+            // Added to pass through authenticated proxy
+            String encodedUser = (Preferences.getPreference(Preferences.PROXY_USER_NAME));
+            if (!StringUtil.isEmpty(encodedUser)) { // There is a proxy user
+                String encodedPassword = (Preferences.getPreference(Preferences.PROXY_PASSWORD));
+                try {
+                    String pass = new String(org.omegat.util.Base64.decode(encodedUser));
+                    pass += ":" + new String(org.omegat.util.Base64.decode(encodedPassword));
+                    encodedPassword = org.omegat.util.Base64.encodeBytes(pass.getBytes());
+                    conn.setRequestProperty("Proxy-Authorization", "Basic " + encodedPassword);
+                } catch (IOException ex) {
+                    Log.logErrorRB("LOG_DECODING_ERROR");
+                    Log.log(ex);
+                }
+             }
+
+            conn.setDoOutput(true);
+
+            return getStringContent(conn);
+        } finally {
+            conn.disconnect();
+        }
+    }
+
+    /**
      * Post data to the remote URL.
      * 
      * @param address
@@ -249,22 +314,43 @@ public class WikiGet {
             cout.write(pout.toByteArray());
             cout.flush();
 
-            if (conn.getResponseCode() != HttpURLConnection.HTTP_OK) {
-                throw new IOException(conn.getResponseMessage());
-            }
-            String contentType = conn.getHeaderField("Content-Type");
-            int cp = contentType != null ? contentType.indexOf(CHARSET_MARK) : -1;
-            String charset = cp >= 0 ? contentType.substring(cp + CHARSET_MARK.length()) : "ISO8859-1";
-            ByteArrayOutputStream res = new ByteArrayOutputStream();
-            InputStream in = conn.getInputStream();
-            try {
-                LFileCopy.copy(in, res);
-            } finally {
-                in.close();
-            }
-            return new String(res.toByteArray(), charset);
+            return getStringContent(conn);
         } finally {
             conn.disconnect();
+        }
+    }
+
+    /**
+     * Parse response as string.
+     */
+    private static String getStringContent(HttpURLConnection conn) throws IOException {
+        if (conn.getResponseCode() != HttpURLConnection.HTTP_OK) {
+            throw new ResponseError(conn);
+        }
+        String contentType = conn.getHeaderField("Content-Type");
+        int cp = contentType != null ? contentType.indexOf(CHARSET_MARK) : -1;
+        String charset = cp >= 0 ? contentType.substring(cp + CHARSET_MARK.length()) : "ISO8859-1";
+        ByteArrayOutputStream res = new ByteArrayOutputStream();
+        InputStream in = conn.getInputStream();
+        try {
+            LFileCopy.copy(in, res);
+        } finally {
+            in.close();
+        }
+        return new String(res.toByteArray(), charset);
+    }
+
+    /**
+     * HTTP response error storage.
+     */
+    public static class ResponseError extends IOException {
+        public final int code;
+        public final String message;
+
+        public ResponseError(HttpURLConnection conn) throws IOException {
+            super(conn.getResponseCode() + ": " + conn.getResponseMessage());
+            code = conn.getResponseCode();
+            message = conn.getResponseMessage();
         }
     }
 }

@@ -114,3 +114,6 @@ OmegaT-Plugin: MachineTranslator
 Name: org.omegat.core.machinetranslators.ApertiumTranslate
 OmegaT-Plugin: MachineTranslator
 
+Name: org.omegat.core.machinetranslators.MicrosoftTranslate
+OmegaT-Plugin: MachineTranslator
+

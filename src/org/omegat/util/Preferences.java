@@ -137,6 +137,8 @@ public class Preferences {
 
     public static final String ALLOW_APERTIUM_TRANSLATE = "allow_apertium_translate";
 
+    public static final String ALLOW_MICROSOFT_TRANSLATE = "allow_microsoft_translate";
+
     /** Enable TransTips */
     public static final String TRANSTIPS = "transtips";
     /** TransTips Option: Only match exact words */

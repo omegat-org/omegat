@@ -1,0 +1,152 @@
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <title>Chapter&nbsp;11.&nbsp;Práce s prostým textem</title>
+      <link rel="stylesheet" type="text/css" href="OmegaT.css">
+      <meta name="generator" content="DocBook XSL Stylesheets V1.76.1">
+      <link rel="home" href="index.html" title="Uživatelská skupina OmegaT">
+      <link rel="up" href="index.html" title="Uživatelská skupina OmegaT">
+      <link rel="prev" href="chapter.translation.editing.html" title="Chapter&nbsp;10.&nbsp;Nastavení editace">
+      <link rel="next" href="chapter.formatted.text.html" title="Chapter&nbsp;12.&nbsp;Práce s formátovaným textem">
+   </head>
+   <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+      <div class="navheader">
+         <table width="100%" summary="Navigation header">
+            <tr>
+               <th colspan="3" align="center">Chapter&nbsp;11.&nbsp;Práce s prostým textem</th>
+            </tr>
+            <tr>
+               <td width="20%" align="left"><a accesskey="p" href="chapter.translation.editing.html">Prev</a>&nbsp;
+               </td>
+               <th width="60%" align="center">&nbsp;</th>
+               <td width="20%" align="right">&nbsp;<a accesskey="n" href="chapter.formatted.text.html">Next</a></td>
+            </tr>
+         </table>
+         <hr>
+      </div>
+      <div class="chapter" title="Chapter&nbsp;11.&nbsp;Práce s prostým textem">
+         <div class="titlepage">
+            <div>
+               <div>
+                  <h2 class="title"><a name="chapter.plain.text"></a>Chapter&nbsp;11.&nbsp;Práce s prostým textem<a class="indexterm" name="d0e5647"></a></h2>
+               </div>
+            </div>
+         </div>
+         <div class="toc">
+            <dl>
+               <dt><span class="section"><a href="chapter.plain.text.html#default.encoding">1. Výchozí kódování</a></span></dt>
+               <dt><span class="section"><a href="chapter.plain.text.html#OmegaT.solution">2. Řešení pomocí <span class="application">OmegaT</span> </a></span></dt>
+            </dl>
+         </div>
+         <div class="section" title="1.&nbsp;Výchozí kódování">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="default.encoding"></a>1.&nbsp;Výchozí kódování<a class="indexterm" name="d0e5655"></a><a class="indexterm" name="d0e5660"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <p>Prosté textové soubory - ve většině případů s koncovkou txt - obsahují výhradně textové informace a nabízí tak nejasně definovaný
+               způsob jak počítač informovat o tom, jaký jazyk obsahují. Maximum, co může OmegaT s takovém případě udělat je, že bude předpokládat,
+               že text je napsán ve stejném jazyce, jaký používá sám počítač. Toto pak není žádný problém pro soubory kódované v Unicode
+               užívající 16-ti bitovou sadu kódování znaků. Pokud je text kódován 8 bity, pak se můžete setkat s následující nepříjemnou
+               situací: místo zobrazení textu psaného japonskými znaky ... 
+            </p>
+            <div class="mediaobject"><img src="images/OmT_Japanese.png"></div>
+            <p>... systém zobrazí např. něco podobného:</p>
+            <div class="mediaobject"><img src="images/OmT_Cyrillic.png"></div>
+            <p>Počítač, na kterém je spuštěna OmegaT, má výchozí jazyk ruštinu, a proto zobrazuje znaky v azbuce, nikoliv kanji.</p>
+         </div>
+         <div class="section" title="2.&nbsp;Řešení pomocí OmegaT">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="OmegaT.solution"></a>2.&nbsp;Řešení pomocí <span class="application">OmegaT</span> <a class="indexterm" name="d0e5687"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <p><span class="application">OmegaT</span> má v podstatě k dispozici tři způsoby jak na věc. Všechny zahrnují použití filtrů souborů z nabídky  <span class="bold"><strong>Možnosti</strong></span>.
+            </p>
+            <div class="variablelist">
+               <dl>
+                  <dt><span class="term">Změňte kódování svých souborů na Unicode</span></dt>
+                  <dd>
+                     <p>otevřete zdrojový soubor v textovém editoru, který správně interpretuje použité kódování a uložte soubor s kódováním <span class="bold"><strong>„UTF-8“</strong></span>. Změňte koncovku souboru z <code class="literal">.txt</code> na <code class="literal">.utf8.</code> <span class="application">OmegaT</span> bude soubor automaticky interpretovat jako soubor v kódování UTF-8. Toto je nejběžnější alternativa, která vám nakonec ušetří
+                        spoustu problémů. 
+                     </p>
+                  </dd>
+               </dl>
+            </div>
+            <div class="variablelist">
+               <dl>
+                  <dt><span class="term">Specifikace kódování v prostých textových souborech.</span></dt>
+                  <dd>
+                     <p>- tj. soubory s koncovkou <code class="filename">.txt </code> -: - : v části <span class="bold"><strong>Textové soubory</strong></span> dialogového okna Filtry souborů, změňte <span class="bold"><strong>Kódování zdrojového souboru</strong></span> z &lt;auto&gt; na kódování odpovídající vašemu zdrojovému souboru <code class="filename">.txt</code>, např. na .jp dle nahoře uvedeného příkladu.
+                     </p>
+                  </dd>
+               </dl>
+            </div>
+            <div class="variablelist">
+               <dl>
+                  <dt><span class="term">Změňte koncovky vašich prostých textových souborů.</span></dt>
+                  <dd>
+                     <p>například z <code class="filename">.txt</code> na <code class="filename">.jp</code> pro prosté textové soubory v japonštině:&nbsp;v části <span class="bold"><strong>Textové soubory</strong></span> okna Filtry souborů, přidejte nový  <span class="bold"><strong>Vzor pro názvy zdrojových souborů</strong></span> (např. <code class="filename">*.jp</code> v tomto případě) a vyberte vhodné parametry pro kódování zdroje a cíle.
+                     </p>
+                  </dd>
+               </dl>
+            </div>
+            <p>Ve výchozím nastavení má <span class="application">OmegaT</span> k dispozici následující krátký seznam, aby pro vás bylo jednodušší zpracovávat některé prosté textové soubory:
+            </p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" type="disc">
+                  <li class="listitem">
+                     <p>Soubory s koncovkou <code class="literal">.txt</code> jsou v <span class="application">OmegaT</span> automaticky (&lt;auto&gt;) interpretovány jako kódované v předvoleném kódování počítače.
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" type="disc">
+                  <li class="listitem">
+                     <p>Soubory s koncovkou <code class="literal">.txt1</code> jsou soubory v ISO-8859-1, kryjící většinu jazyků <span class="bold"><strong>Západní Evropy</strong></span>.<a class="indexterm" name="d0e5784"></a></p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" type="disc">
+                  <li class="listitem">
+                     <p>Soubory s koncovkou <code class="literal">.txt2</code> jsou soubory v ISO-8859-2, což kryje většinu jazyků <span class="bold"><strong>Střední a Východní Evropy</strong></span>).<a class="indexterm" name="d0e5799"></a></p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" type="disc">
+                  <li class="listitem">
+                     <p>Soubory s koncovkou <code class="literal">.utf8</code> jsou v <span class="application">OmegaT</span> interpretovány jako v kódování UTF-8 (kódování, které pokrývá téměř všechny jazyky světa).<a class="indexterm" name="d0e5814"></a></p>
+                  </li>
+               </ul>
+            </div>
+            <p>Můžete si to ověřit sami tak, že označíte položku <span class="bold"><strong>Filtry souborů</strong></span> v nabídce <span class="bold"><strong>Možnosti</strong></span>. Například když máte textový soubor v češtině (velmi pravděpodobně napsaný v kódování <span class="bold"><strong>ISO-8859-2</strong></span>), pak jednoduše potřebujete jen změnit koncovku <code class="literal">.txt</code> na <code class="literal">.txt2</code>a <span class="application">OmegaT</span> bude interpretovat obsah souboru správně. A zajisté, když si chcete být zcela jistí, převeďte tyto soubory do kódování Unicode,
+               t.j. do souborového formátu <code class="literal">.utf8</code>.
+            </p>
+         </div>
+      </div>
+      <div class="navfooter">
+         <hr>
+         <table width="100%" summary="Navigation footer">
+            <tr>
+               <td width="40%" align="left"><a accesskey="p" href="chapter.translation.editing.html">Prev</a>&nbsp;
+               </td>
+               <td width="20%" align="center">&nbsp;</td>
+               <td width="40%" align="right">&nbsp;<a accesskey="n" href="chapter.formatted.text.html">Next</a></td>
+            </tr>
+            <tr>
+               <td width="40%" align="left" valign="top">Chapter&nbsp;10.&nbsp;Nastavení editace&nbsp;</td>
+               <td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
+               <td width="40%" align="right" valign="top">&nbsp;Chapter&nbsp;12.&nbsp;Práce s formátovaným textem</td>
+            </tr>
+         </table>
+      </div>
+   </body>
+</html>

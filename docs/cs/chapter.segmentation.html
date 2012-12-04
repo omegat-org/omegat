@@ -1,0 +1,232 @@
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <title>Chapter&nbsp;14.&nbsp;Segmentace zdroje</title>
+      <link rel="stylesheet" type="text/css" href="OmegaT.css">
+      <meta name="generator" content="DocBook XSL Stylesheets V1.76.1">
+      <link rel="home" href="index.html" title="Uživatelská skupina OmegaT">
+      <link rel="up" href="index.html" title="Uživatelská skupina OmegaT">
+      <link rel="prev" href="chapter.translation.memories.html" title="Chapter&nbsp;13.&nbsp;Překladové paměti">
+      <link rel="next" href="chapter.searches.html" title="Chapter&nbsp;15.&nbsp;Vyhledávání">
+   </head>
+   <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+      <div class="navheader">
+         <table width="100%" summary="Navigation header">
+            <tr>
+               <th colspan="3" align="center">Chapter&nbsp;14.&nbsp;Segmentace zdroje</th>
+            </tr>
+            <tr>
+               <td width="20%" align="left"><a accesskey="p" href="chapter.translation.memories.html">Prev</a>&nbsp;
+               </td>
+               <th width="60%" align="center">&nbsp;</th>
+               <td width="20%" align="right">&nbsp;<a accesskey="n" href="chapter.searches.html">Next</a></td>
+            </tr>
+         </table>
+         <hr>
+      </div>
+      <div class="chapter" title="Chapter&nbsp;14.&nbsp;Segmentace zdroje">
+         <div class="titlepage">
+            <div>
+               <div>
+                  <h2 class="title"><a name="chapter.segmentation"></a>Chapter&nbsp;14.&nbsp;Segmentace zdroje
+                  </h2>
+               </div>
+            </div>
+         </div>
+         <div class="toc">
+            <dl>
+               <dt><span class="section"><a href="chapter.segmentation.html#segmentation.rules">1. Pravidla segmentace</a></span></dt>
+               <dt><span class="section"><a href="chapter.segmentation.html#rules.priority">2. Pravidla přednosti</a></span></dt>
+               <dt><span class="section"><a href="chapter.segmentation.html#creating.new.rule">3. Vytváření nového pravidla</a></span></dt>
+               <dt><span class="section"><a href="chapter.segmentation.html#few.simple.examples">4. Pár jednoduchých příkladů</a></span></dt>
+            </dl>
+         </div>
+         <p>Nástroje pro práci s překladovými paměťmi pracují s textovými jednotkami nazývanými segmenty. <span class="application">OmegaT</span> nabízí dva způsoby segmentace textu: segmentace podle odstavců nebo segmentace na úrovni vět (také zvaná jako „rule-based
+            segmentation“). Pro výběr typu segmentace, označte <span class="guimenu"><a class="indexterm" name="d0e6546"></a>Projekt</span> → <span class="guimenuitem">Vlastnosti...</span>  z hlavní nabídky a zaškrtněte, nebo zrušte zaškrtnutí nabízeného zaškrtávacího políčka. Segmentace podle odstavců je výhodná
+            jen v určitých případech, jako jsou velmi kreativní nebo stylové překlady, ve kterých překladatel asi bude chtít změnit pořadí
+            celých vět; nicméně ve většině projektů je upřednostňovanou volbou právě segmentace podle vět, protože tato poskytuje lepší
+            shody s předchozími překlady. Pokud je vybráno Segmentace na úrovni vět, pak můžete nastavit pravidla vybráním položky <span class="guimenu"><a class="indexterm" name="d0e6557"></a>Možnosti</span> → <span class="guimenuitem">Segmentace...</span> v hlavní nabídce.
+         </p>
+         <p>Spolehlivá pravidla segmentace jsou dostupná pro spoustu jazyků, takže pravděpodobně nebudete potřebovat si psát vlastní pravidla
+            segmentace. Na druhou stranu tato funkce může být velmi užitečná ve speciálních případech, kdy můžete zvýšit svou produktivitu
+            úpravou segmentačních pravidel u textu, který máte překládat.
+         </p>
+         <p><span class="bold"><strong>Upozornění</strong></span>: protože po změně možností filtrů bude text segmentován odlišně, je možné, že bude nutné začít překlad zase doslova od nuly.
+            Současně se dřívější platné segmenty v překladové paměti změní na nespárované segmenty. Pokud změníte volby segmentace ve
+            chvíli, kdy je otevřený nějaký projekt, budete muset projekt znovu načíst, aby se změny projevily.
+         </p>
+         <p><span class="application">OmegaT</span> používá následující sled kroků:
+         </p>
+         <div class="variablelist">
+            <dl>
+               <dt><span class="term"><a class="indexterm" name="d0e6579"></a>Segmentace na úrovni struktury</span></dt>
+               <dd>
+                  <p><span class="application">OmegaT</span> nejprve zpracuje text pomocí segmentace na úrovni struktur. Během tohoto procesu je to jen struktura zdrojového souboru,
+                     která je použitá na vytvoření segmentů.
+                  </p>
+                  <p>Například mohou být textové soubory segmentovány podle zlomů řádků, prázdných řádků nebo vůbec nemusí být segmentovány na
+                     strukturální úrovni. Soubory s formátováním (OpenOffice.org, HTML, atd.) jsou segmentovány na úrovni tagů bloků (odstavce).
+                     Atributy přeložitelných objektů v souborech XHTML nebo HTML lze extrahovat jako samostatné segmenty.
+                  </p>
+               </dd>
+               <dt><span class="term"><a class="indexterm" name="d0e6594"></a>Segmentace na úrovni vět</span></dt>
+               <dd>
+                  <p>Po segmentaci zdrojového souboru podle logických jednotek, bude <span class="application">OmegaT</span> dále segmentovat tyto bloky do vět.
+                  </p>
+               </dd>
+            </dl>
+         </div>
+         <div class="section" title="1.&nbsp;Pravidla segmentace">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="segmentation.rules"></a>1.&nbsp;Pravidla segmentace<a class="indexterm" name="d0e6609"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <p>Průběh segmentace lze znázornit následovně: kurzor se pohybuje v textu, vždy po jednom znaku. Pravidlo pozice kurzoru, se
+               skládá ze vzoru <span class="bold"><strong>Před</strong></span> a <span class="bold"><strong>Za</strong></span>, jsou aplikovány v daném pořadí, aby se tak ověřilo, jestli některý ze vzorů <span class="bold"><strong>Před</strong></span> je platný pro text vlevo, a stejným způsobem vzor <span class="bold"><strong>Za</strong></span> pro text vpravo od kurzoru. Pokud pravidlo lze aplikovat, tak se kurzor buď pohne bez vložení zalomení segmentu (v případě
+               výjimky pravidla) nebo je vytvořeno zalomení segmentu na aktuální pozici kurzoru (v případě aplikování pravidla pro zalomení).
+            </p>
+            <p>Tyto dva typy pravidel se chovají následovně:</p>
+            <div class="variablelist">
+               <dl>
+                  <dt><span class="term"><a class="indexterm" name="d0e6633"></a>Pravidla zalomení</span></dt>
+                  <dd>
+                     <p>Rozdělí zdrojový text na segmenty. Například: „<span class="emphasis"><em>Did it make sense? I was not sure.“</em></span> by mělo být rozděleno na dva segmenty. Aby se tak stalo, mělo by tu být pravidlo zalomení pro „?“, po kterém následuje mezera
+                        a slovo začínající velkým písmenem. Když chcete definovat pravidlo jako pravidlo zalomení, zaškrtněte zaškrtávací políčko
+                        Zlom/Výjimka.
+                     </p>
+                  </dd>
+               </dl>
+            </div>
+            <div class="variablelist">
+               <dl>
+                  <dt><span class="term"><a class="indexterm" name="d0e6650"></a>Pravidlo výjimky</span></dt>
+                  <dd>
+                     <p>specifikuje, které části textu by NEMĚLY být rozděleny. Nehledě na tečku v <span class="emphasis"><em>„Mrs. Dalloway“</em></span> by zde neměl být text rozdělen, tzn. mělo by být založeno pravidlo výjimky pro Mrs (stejně tak Mr a Dr a prof atd.), což
+                        je normálně následováno tečkou Když chcete definovat pravidlo jakožto výjimku, nechte zaškrtávací políčko Zlom/Výjimka prázdné.
+                     </p>
+                  </dd>
+               </dl>
+            </div>
+            <p>Předdefinovaná pravidla zalomení by měla být dostatečná pro většinu evropských jazyků a Japonštinu. Vzhledem k flexibilitě,
+               můžete zvážit definování více pravidel pro výjimky pro jazyk ze kterého překládáte, abyste získali smysluplnější a souvislejší
+               segmenty.
+            </p>
+         </div>
+         <div class="section" title="2.&nbsp;Pravidla přednosti">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="rules.priority"></a>2.&nbsp;Pravidla přednosti<a class="indexterm" name="d0e6669"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <p>Všechny sady pravidel segmentace pro odpovídající vzor jazyka jsou použité v daném pořadí priority, takže pravidla pro konkrétní
+               jazyk by měla být vyšší než ta z výchozího nastavení. Tak například, pravidla pro kanadskou francouzštinu (FR-CA) by měla
+               být ve výchozím nastavení výše než pravidla pro francouzštinu (FR.*), a výše než (.*). Takže v průběhu překladu z kanadské
+               francouzštiny bude váš projekt používat jako první pravidla pro kanadskou francouzštinu (pokud jsou tedy definována), pak
+               se vychází z pravidel pro francouzštinu, a nakonec v pořadí se uplatní pravidla výchozího nastavení
+            </p>
+         </div>
+         <div class="section" title="3.&nbsp;Vytváření nového pravidla">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="creating.new.rule"></a>3.&nbsp;Vytváření nového pravidla<a class="indexterm" name="d0e6679"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <p>Obecně by se neměly provádět změny pravidel segmentace, obzvláště po kompletaci prvního konceptu, ale drobné změny, jako je
+               přidání rozpoznané zkratky, mohou být prospěšné. 
+            </p>
+            <p>Pro úpravu nebo rozšíření již existující sady pravidel, jednoduše klikněte na danou sadu v horní tabulce. Pravidla dané sady
+               se objeví v dolní půlce okna.
+            </p>
+            <p>Pro vytvoření prázdné sady pravidel pro nový jazykový vzor klikněte na <span class="bold"><strong>Přidat</strong></span> v horní polovině dialogového okna. Ve spodní části horní tabulky se objeví prázdný řádek (abyste jej viděli, budete asi muset
+               srolovat dolů). Změňte název sady pravidel a vzor jazyka pro daný jazyk a jeho kód (viz <a class="xref" href="appendix.languages.html" title="Appendix&nbsp;E.&nbsp;Jazyky - seznam kódů ISO 639">Appendix&nbsp;E, <i>Jazyky - seznam kódů ISO 639
+                       
+                       
+                       </i></a> seznam jazykových kódů). Syntaxe vzoru jazyka odpovídá syntaxi regulárních výrazů. Pokud vaše sada pravidel platí pro pár
+               jazyk-země, doporučujeme posunout ji nahoru pomocí tlačítka <span class="bold"><strong>Přesunout nahoru</strong></span>.
+            </p>
+            <p>Přidejte vzory <span class="bold"><strong>Před</strong></span> a <span class="bold"><strong>Za</strong></span> Pro kontrolu jejich syntaxe a použitelnosti, je vhodné použít nástroje, které vám umožní vidět jejich účinek přímo. Viz kapitlou
+               <a class="link" href="chapter.regexp.html" title="Chapter&nbsp;16.&nbsp;Regulární výrazy">Regulární výrazy</a>. Dobrým výchozím bodem vždy bude již existující pravidlo.
+            </p>
+         </div>
+         <div class="section" title="4.&nbsp;Pár jednoduchých příkladů">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="few.simple.examples"></a>4.&nbsp;<a class="indexterm" name="d0e6713"></a>Pár jednoduchých příkladů
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <div class="informaltable">
+               <table border="1">
+                  <colgroup>
+                     <col width="150" align="left">
+                     <col width="60" align="center">
+                     <col width="60" align="center">
+                     <col width="190" align="left">
+                  </colgroup>
+                  <thead>
+                     <tr>
+                        <th align="left">Cíl</th>
+                        <th align="center">Vzor před</th>
+                        <th align="center">Vzor za</th>
+                        <th align="left">Poznámka</th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                     <tr>
+                        <td align="left">nastavit segment po tečce (‚.‘) a před mezerou</td>
+                        <td align="center">\.</td>
+                        <td align="center">\s</td>
+                        <td align="left">„\.“ znamená znak „.“ „\s“ znamená jakýkoliv netisknutelný znak (mezera, tabulátor, nová stránka, atd.).</td>
+                     </tr>
+                     <tr>
+                        <td align="left">Nesegmentovat po Mr.</td>
+                        <td align="center">Mr\.</td>
+                        <td align="center">\s</td>
+                        <td align="left">Toto je pravidlo výjimky, takže zaškrtávací políčko pravidla musí zůstat neoznačeno</td>
+                     </tr>
+                     <tr>
+                        <td align="left">segmentovat po „。“ (japonská tečka)</td>
+                        <td align="center">。</td>
+                        <td align="center">&nbsp;</td>
+                        <td align="left">Všimněte si, že políčko <code class="literal">Vzor za</code> je prázdné 
+                        </td>
+                     </tr>
+                     <tr>
+                        <td align="left">Nesegmentovat po M. Mr. Mrs. a Ms.</td>
+                        <td align="center">Mr??s??\.</td>
+                        <td align="center">\s</td>
+                        <td align="left">Pravidlo výjimky - viz použití znaku ‚?‘ v regulárních výrazech</td>
+                     </tr>
+                  </tbody>
+               </table>
+            </div>
+         </div>
+      </div>
+      <div class="navfooter">
+         <hr>
+         <table width="100%" summary="Navigation footer">
+            <tr>
+               <td width="40%" align="left"><a accesskey="p" href="chapter.translation.memories.html">Prev</a>&nbsp;
+               </td>
+               <td width="20%" align="center">&nbsp;</td>
+               <td width="40%" align="right">&nbsp;<a accesskey="n" href="chapter.searches.html">Next</a></td>
+            </tr>
+            <tr>
+               <td width="40%" align="left" valign="top">Chapter&nbsp;13.&nbsp;Překladové paměti&nbsp;</td>
+               <td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
+               <td width="40%" align="right" valign="top">&nbsp;Chapter&nbsp;15.&nbsp;Vyhledávání</td>
+            </tr>
+         </table>
+      </div>
+   </body>
+</html>

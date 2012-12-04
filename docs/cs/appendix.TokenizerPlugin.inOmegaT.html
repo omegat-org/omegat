@@ -1,0 +1,184 @@
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <title>Appendix&nbsp;A.&nbsp;Plugin Tokenizer</title>
+      <link rel="stylesheet" type="text/css" href="OmegaT.css">
+      <meta name="generator" content="DocBook XSL Stylesheets V1.76.1">
+      <link rel="home" href="index.html" title="Uživatelská skupina OmegaT">
+      <link rel="up" href="index.html" title="Uživatelská skupina OmegaT">
+      <link rel="prev" href="chapter.misc.html" title="Chapter&nbsp;21.&nbsp;Různá témata">
+      <link rel="next" href="appendix.LanguageToolPlugin.inOmegaT.html" title="Appendix&nbsp;B.&nbsp;Plugin LanguageTool">
+   </head>
+   <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+      <div class="navheader">
+         <table width="100%" summary="Navigation header">
+            <tr>
+               <th colspan="3" align="center">Appendix&nbsp;A.&nbsp;Plugin Tokenizer</th>
+            </tr>
+            <tr>
+               <td width="20%" align="left"><a accesskey="p" href="chapter.misc.html">Prev</a>&nbsp;
+               </td>
+               <th width="60%" align="center">&nbsp;</th>
+               <td width="20%" align="right">&nbsp;<a accesskey="n" href="appendix.LanguageToolPlugin.inOmegaT.html">Next</a></td>
+            </tr>
+         </table>
+         <hr>
+      </div>
+      <div class="appendix" title="Appendix&nbsp;A.&nbsp;Plugin Tokenizer">
+         <div class="titlepage">
+            <div>
+               <div>
+                  <h2 class="title"><a name="appendix.TokenizerPlugin.inOmegaT"></a>Appendix&nbsp;A.&nbsp;Plugin Tokenizer<a class="indexterm" name="d0e8564"></a></h2>
+               </div>
+            </div>
+         </div>
+         <div class="toc">
+            <dl>
+               <dt><span class="section"><a href="appendix.TokenizerPlugin.inOmegaT.html#d0e8569">1. Úvod</a></span></dt>
+               <dt><span class="section"><a href="appendix.TokenizerPlugin.inOmegaT.html#d0e8598">2. Instalace a použití v prostředí příkazového řádku</a></span></dt>
+               <dt><span class="section"><a href="appendix.TokenizerPlugin.inOmegaT.html#d0e8615">3. Specifika Mac OS X</a></span></dt>
+               <dt><span class="section"><a href="appendix.TokenizerPlugin.inOmegaT.html#d0e8629">4. Odstraňování problémů</a></span></dt>
+            </dl>
+         </div>
+         <div class="section" title="1.&nbsp;Úvod">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e8569"></a>1.&nbsp;Úvod<a class="indexterm" name="d0e8572"></a><a class="indexterm" name="d0e8577"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <p>Tokenzier (též zvaný ‚stemmer‛, čili nástroj, který umí poznat slovo pojde jeho kořene/kmene) zvyšuje kvalitu nálezů při rozpoznání
+               konkrétních slov ve zdrojovém textu a v datech překladové paměti. Stejně tak umí zlepšit hledání v glosáři.
+            </p>
+            <p>Napříkld stemmer pro angličtinu by měl identifikovat řetězec „cats“ (a stejně „catlike“, „catty“, atd.) protože vychází z
+               kmene „cat“, a slova „stemmer“, „stemming“ a „stemmed“ mají kořen „stem“. Algoritmus pro nalezení kořene redukuje slova jako
+               „fishing“, „fished“, „fish“ a „fisher“ na kořen slova „fish“. Toto je obzvláště užitečné u jazyků, které používají předpony
+               a přípony pro odvozování nových slov z kořene. Uveďme si ještě jeden příklad ze slovinštiny, zde jsou různé formy pro anglické
+               „good“:
+            </p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" type="disc">
+                  <li class="listitem">
+                     <p>lep, lepa, lepo - jednotné číslo, mužský, ženský a střední rod</p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" type="disc">
+                  <li class="listitem">
+                     <p>lepši, lepša, lepše . - komparativ, první pád, mužský, ženský a střední rod, resp. forma množného čísla přídavného jména</p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" type="disc">
+                  <li class="listitem">
+                     <p>najlepših - superlativ, množné číslo, druhý pád pro mužský, ženský a střední rod.</p>
+                  </li>
+               </ul>
+            </div>
+         </div>
+         <div class="section" title="2.&nbsp;Instalace a použití v prostředí příkazového řádku">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e8598"></a>2.&nbsp;Instalace a použití v prostředí příkazového řádku
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>Balíček tokenizeru, který vychází z projektu Lucene je distribuován jako plugin pro OmegaT na adrese http://sourceforge.net/projects/omegat-plugins/files/.
+                Stáhněte si nejaktuálnější soubory (v době psaní tohoto textu je nejenovější OmegaT-tokenizers_0.4_2-2.1.zip)
+            </p>
+            <p>Pro instalaci tokenizeru vytvořte v adresáři, kde je instalován soubor OmegaT.jar, adresář s názvem „plugins“ a do tohoto
+               nového adresáře rozbalte nahoře zmíněný zip soubor.
+            </p>
+            <p>Aby bylo možno spouštět OmegaT s tokenizerem, potřebujete specifikovat, který tokenizer budete používat pro zdrojový jazyk
+               a který tokenizer budete používat pro jazyk překladu. Syntax takového příkazu je následující:
+            </p>
+            <p><code class="literal">java -jar OmegaT.jar --ITokenizer=[jméno tokenzieru pro zdrojový jazyk] --ITokenizerTarget=[jméno tokenizeru pro jazyk překladu]</code></p>
+            <p>Jména tokenizerů jsou zadány v souboru Readme.txt, který se stáhne současně se soubory tokenizeru. Například, pokud budete
+               chtít použít tokenizer Lucene CJK pro zdrojový jazyk a tokenzer Lucene French pro jazyk překladu, váš příkaz pro spuštění
+               bude vypadat takto:
+            </p>
+            <p><code class="literal">java -jar OmegaT.jar --ITokenizer=org.omegat.plugins.
+                      tokenizer.LuceneCJKTokenizer --ITokenizerTarget=org.omegat.plugins.
+                      tokenizer.LuceneFrenchTokenizer</code></p>
+         </div>
+         <div class="section" title="3.&nbsp;Specifika Mac OS X">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e8615"></a>3.&nbsp;Specifika Mac OS X
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>Pokud chcete používat tokenizery s balíčkem Mac OS X OmegaT.app, tak platí instalace popsaná nahoře (abyste nalezli umístění
+               OmegaT.jar, klikněte pravým tlačítkem myši na OmegaT.app), ale budete muset specifikovat názvy tokenizerů v souboru <code class="filename">info.plist </code>který obsahuje možností spouštění Javy. Následujte výše uvedené pokyny ke zpracování souboru <code class="filename">info.plist</code>  a upravte jek, aby vypadal následovně pro výše uvedený příklad:
+            </p>
+            <div class="literallayout">
+               <p><code class="code"><br>
+                     &lt;key&gt;VMOptions&lt;/key&gt;<br>
+                     &lt;string&gt;-Xmx1024M&lt;/string&gt;<br>
+                     <br>
+                     &lt;key&gt;Arguments&lt;/key&gt;<br>
+                     &lt;array&gt;<br>
+                     &nbsp;&nbsp;&lt;string&gt;--ITokenizer=org.omegat.plugins.tokenizer.LuceneCJKTokenizer&lt;/string&gt;<br>
+                     &nbsp;&nbsp;&lt;string&gt;--ITokenizerTarget=org.omegat.plugins.tokenizer.<br>
+                     &nbsp;&nbsp;LuceneFrenchTokenizer&lt;/string&gt;<br>
+                     &lt;/array&gt;</code></p>
+            </div>
+         </div>
+         <div class="section" title="4.&nbsp;Odstraňování problémů">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e8629"></a>4.&nbsp;Odstraňování problémů
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>Abyste se ujistili, že tokenizery se používají, otevřete projekt a přes příkazový řádek zkontrolujte informace v logu (v protokolu
+               příkazového řádku). S výše zmíněným příkladem by to mělo vypadat takto:
+            </p>
+            <div class="literallayout">
+               <p><code class="code"><br>
+                     84528:&nbsp;Info:&nbsp;Source&nbsp;tokenizer:&nbsp;org.omegat.plugins.tokenizer.LuceneCJKTokenizer&nbsp;<br>
+                     84528:&nbsp;Info:&nbsp;Target&nbsp;tokenizer:&nbsp;org.omegat.plugins.tokenizer.LuceneFrenchTokenizer&nbsp;<br>
+                     </code></p>
+            </div>
+            <p>Číslice vlevo asi budou na vašem systému odlišné, ale hlavně se ujistěte, že názvy tokenizerů pro zdroj a překlad, které specifikujete
+               v možnostech spouštění, odpovídají tomu, co najdete v logu. Pokud tokenizery nejsou správně spuštěny, log bude vypadat podobně:
+            </p>
+            <div class="literallayout">
+               <p><code class="code"><br>
+                     12719:&nbsp;Info:&nbsp;Source&nbsp;tokenizer:&nbsp;org.omegat.core.matching.Tokenizer&nbsp;<br>
+                     12719:&nbsp;Info:&nbsp;Target&nbsp;tokenizer:&nbsp;org.omegat.core.matching.Tokenizer&nbsp;<br>
+                     </code></p>
+            </div>
+            <p>S balíčkem Mac OS X OmegaT.app, budete muset dvakrát kliknout na soubor <code class="literal">JavaApplicationStub</code>,který najdete v /OmegaT.app/Contents/MacOS/ (přístup je popsán výše), a spustíte tak OmegaT z příkazového řádku a máte tak
+               přímý přístup k logu.
+            </p>
+         </div>
+      </div>
+      <div class="navfooter">
+         <hr>
+         <table width="100%" summary="Navigation footer">
+            <tr>
+               <td width="40%" align="left"><a accesskey="p" href="chapter.misc.html">Prev</a>&nbsp;
+               </td>
+               <td width="20%" align="center">&nbsp;</td>
+               <td width="40%" align="right">&nbsp;<a accesskey="n" href="appendix.LanguageToolPlugin.inOmegaT.html">Next</a></td>
+            </tr>
+            <tr>
+               <td width="40%" align="left" valign="top">Chapter&nbsp;21.&nbsp;Různá témata&nbsp;</td>
+               <td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
+               <td width="40%" align="right" valign="top">&nbsp;Appendix&nbsp;B.&nbsp;Plugin LanguageTool</td>
+            </tr>
+         </table>
+      </div>
+   </body>
+</html>

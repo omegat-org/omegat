@@ -1,0 +1,672 @@
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <title>Appendix&nbsp;G.&nbsp;Přizpůsobení klávesových zkratek</title>
+      <link rel="stylesheet" type="text/css" href="OmegaT.css">
+      <meta name="generator" content="DocBook XSL Stylesheets V1.76.1">
+      <link rel="home" href="index.html" title="Uživatelská skupina OmegaT">
+      <link rel="up" href="index.html" title="Uživatelská skupina OmegaT">
+      <link rel="prev" href="appendix.keyboard.html" title="Appendix&nbsp;F.&nbsp;Klávesové zkratky v editoru">
+      <link rel="next" href="appendix.legal.notices.html" title="Appendix&nbsp;H.&nbsp;Právní poznámky">
+   </head>
+   <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+      <div class="navheader">
+         <table width="100%" summary="Navigation header">
+            <tr>
+               <th colspan="3" align="center">Appendix&nbsp;G.&nbsp;Přizpůsobení klávesových zkratek</th>
+            </tr>
+            <tr>
+               <td width="20%" align="left"><a accesskey="p" href="appendix.keyboard.html">Prev</a>&nbsp;
+               </td>
+               <th width="60%" align="center">&nbsp;</th>
+               <td width="20%" align="right">&nbsp;<a accesskey="n" href="appendix.legal.notices.html">Next</a></td>
+            </tr>
+         </table>
+         <hr>
+      </div>
+      <div class="appendix" title="Appendix&nbsp;G.&nbsp;Přizpůsobení klávesových zkratek">
+         <div class="titlepage">
+            <div>
+               <div>
+                  <h2 class="title"><a name="appendix.shortcut.custom"></a>Appendix&nbsp;G.&nbsp;Přizpůsobení klávesových zkratek
+                  </h2>
+               </div>
+            </div>
+         </div>
+         <div class="toc">
+            <dl>
+               <dt><span class="section"><a href="appendix.shortcut.custom.html#ch04.shortcuts.customization">1. Přizpůsobení klávesových zkratek</a></span></dt>
+               <dt><span class="section"><a href="appendix.shortcut.custom.html#ch04.shortcuts.ProjectMenu">2. Nabídka ‚Projekt‛</a></span></dt>
+               <dt><span class="section"><a href="appendix.shortcut.custom.html#ch04.shortcuts.EditMenu">3. Nabídka ‚Upravit‛</a></span></dt>
+               <dt><span class="section"><a href="appendix.shortcut.custom.html#ch04.shortcuts.GoToMenu">4. Nabídka ‚Přejít‛</a></span></dt>
+               <dt><span class="section"><a href="appendix.shortcut.custom.html#ch04.shortcuts.ViewMenu">5. Nabídka ‚Zobrazit‛</a></span></dt>
+               <dt><span class="section"><a href="appendix.shortcut.custom.html#ch04.shortcuts.ToolsMenu">6. Nabídka ‚Nástroje‛</a></span></dt>
+               <dt><span class="section"><a href="appendix.shortcut.custom.html#ch04.shortcuts.OptionsMenu">7. Nabídka ‚Možnosti‛</a></span></dt>
+               <dt><span class="section"><a href="appendix.shortcut.custom.html#ch04.shortcuts.HelpMenu">8. Nabídka ‚Nápověda‛</a></span></dt>
+            </dl>
+         </div>
+         <div class="section" title="1.&nbsp;Přizpůsobení klávesových zkratek">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="ch04.shortcuts.customization"></a>1.&nbsp;<a class="indexterm" name="d0e10497"></a>Přizpůsobení klávesových zkratek
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>Většině položek, které jsou dostupné v hlavní nabídce může být přiřazena nová klávesová zkratka. Jen ty nejčastěji používané
+               položky nabídky mají přiřazené klávesové zkratky již ve výchozím nastavení programu. Můžete změnit již přiřazené klávesové
+               zkratky a přidat nové zkratky tak, že přidáte soubor definic klávesových zkratek do svého adresáře OmegaT (<a class="link" href="chapter.files.and.directories.html#user.files.location">Umístění souborů uživatele</a>).
+            </p>
+            <p>Soubor definic klávesových zkratek musí být pojmenován <code class="filename">MainMenuShortcuts.properties</code> a musí obsahovat nanejvýš jednu definici klávesové zkratky na jednom řádku. Prázdné řádky jsou akceptovány a řádky s komentářem
+               musí začínat dvěma lomítky „//“.  Cokoliv za „//“ bude ignorováno.
+            </p>
+            <p>Jakmile upravíte soubor <code class="filename">MainMenuShortcuts.properties</code>, je pak nutno <span class="application">OmegaT</span> restartovat, aby se načetlo nastavení nových klávesových zkratek.
+            </p>
+            <p>Syntaxe definice klávesové zkratky je tato: <code class="code">&lt;kód položky nabídky&gt;=&lt;klávesová zkratka&gt;</code>, kde <span class="emphasis"><em>&lt;kód položky nabídky&gt;</em></span> je kód, který si vezmete z tabulek níže a <span class="emphasis"><em>&lt;klávesová zkratka&gt;</em></span> je kombinace kláves definovaná uživatele.<sup>[<a name="d0e10532" href="#ftn.d0e10532" class="footnote">2</a>]</sup>.
+            </p>
+            <p>&lt;klávesová zkratka&gt; musí mít jednu z následujících podob:0 nebo více <code class="code">&lt;modifikátor&gt;</code> následován 0 nebo 1 <code class="code">&lt;událost&gt;</code> následován 1 <code class="code">&lt;klávesa&gt;</code>, kde:
+            </p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" type="disc">
+                  <li class="listitem">
+                     <p><code class="code">&lt;modifikátor&gt;</code> může být: <span class="emphasis"><em>shift</em></span>, <span class="emphasis"><em>control</em></span>, <span class="emphasis"><em>ctrl</em></span>, <span class="emphasis"><em>meta</em></span><sup>[<a name="d0e10566" href="#ftn.d0e10566" class="footnote">3</a>]</sup>, <span class="emphasis"><em>alt</em></span>,
+                                  <span class="emphasis"><em>altGraph</em></span></p>
+                  </li>
+                  <li class="listitem">
+                     <p><code class="code">&lt;událost&gt;</code> může být: <span class="emphasis"><em>jednorázový stisk klávesy</em></span>, <span class="emphasis"><em>podržení stisknuté klávesy</em></span>, <span class="emphasis"><em>uvolnění klávesy</em></span></p>
+                  </li>
+                  <li class="listitem">
+                     <p>a <code class="code">&lt;klávesa&gt;</code> může být jakákoliv klávesa dostupná na vaší klávesnici<sup>[<a name="d0e10600" href="#ftn.d0e10600" class="footnote">4</a>]</sup>.
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <p>Například se podívejme na výchozí klávesové zkratky OmegaT<sup>[<a name="d0e10608" href="#ftn.d0e10608" class="footnote">5</a>]</sup>nalezneme zde:
+            </p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" type="disc">
+                  <li class="listitem">
+                     <p><code class="code">projectOpenMenuItem=ctrl O</code></p>
+                  </li>
+                  <li class="listitem">
+                     <p><code class="code">editCreateGlossaryEntryMenuItem=ctrl shift G</code></p>
+                  </li>
+               </ul>
+            </div>
+            <p>První je klávesová zkratka pro otevření projektu <span class="guimenuitem">Otevřít</span>, druhá odpovídá <span class="guimenuitem">Vytvořit nový záznam Glosáře</span>.
+            </p>
+            <p>Pokud byste chtěli použít <span class="keycap"><strong>Shift</strong></span>+<span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>O</strong></span> k otevření projektu, upravte příslušný řádek v souboru <code class="filename">MainMenuShortcuts.properties</code> následovně: <code class="code">
+                      </code></p>
+            <p><code class="code">projectOpenMenuItem=shift ctrl O</code>.
+            </p>
+            <p>Pokud používáte Mac a chcete přidat klávesovou zkratku <span class="keycap"><strong>Shift</strong></span>+<span class="keycap"><strong>Command</strong></span>+<span class="keycap"><strong>S</strong></span> položce <span class="guimenu">Nástroje</span> → <span class="guimenuitem">Statistika</span>, přidejte do souboru <code class="filename">MainMenuShortcuts.properties</code> tento řádek:<code class="code"></code></p>
+            <p><code class="code"> toolsShowStatisticsStandardMenuItem=shift meta
+                      S</code></p>
+            <p>Uložte soubor a restartujte <span class="application">OmegaT</span>. Vaše nová zkratka by se teď měla již objevit vedle položky nabídky, kterou jste upravili. Když nové zkratky nebudou kolidovat
+               se systémovými zkratkami, budou v rámci OmegaT k dispozici.
+            </p>
+         </div>
+         <div class="section" title="2.&nbsp;Nabídka ‚Projekt‛">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="ch04.shortcuts.ProjectMenu"></a>2.&nbsp;Nabídka ‚Projekt‛
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <div class="table"><a name="d0e10685"></a><p class="title"><b>Table&nbsp;G.1.&nbsp;Nabídka ‚Projekt‛</b></p>
+               <div class="table-contents"><a class="indexterm" name="d0e10688"></a><table summary="Nabídka ‚Projekt‛" border="1">
+                     <colgroup>
+                        <col width="120" align="left" class="1">
+                        <col width="80" align="left" class="2">
+                        <col align="left" class="3">
+                     </colgroup>
+                     <thead>
+                        <tr>
+                           <th align="left">Položka nabídky</th>
+                           <th align="left">Výchozí klávesová zkratka</th>
+                           <th align="left">Kód položky nabídky</th>
+                        </tr>
+                     </thead>
+                     <tbody>
+                        <tr>
+                           <td align="left">Nový</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">projectNewMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Otevřít</td>
+                           <td align="left"><span class="keycap"><strong>Ctrl+O</strong></span></td>
+                           <td align="left">projectOpenMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Importovat zdrojové soubory...</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">projectImportMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Import z MediaWiki...</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">projectWikiImportMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Znovu načíst</td>
+                           <td align="left"><span class="keycap"><strong>F5</strong></span></td>
+                           <td align="left">projectReloadMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Zavřít</td>
+                           <td align="left"><span class="keycap"><strong>Ctrl+Shift+W</strong></span></td>
+                           <td align="left">projectCloseMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Uložit</td>
+                           <td align="left"><span class="keycap"><strong>Ctrl+S</strong></span></td>
+                           <td align="left">projectSaveMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Vytvořit přeložené dokumenty</td>
+                           <td align="left"><span class="keycap"><strong>Ctrl+D</strong></span></td>
+                           <td align="left">projectCompileMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Vlastnosti...</td>
+                           <td align="left"><span class="keycap"><strong>Ctrl+E</strong></span></td>
+                           <td align="left">projectEditMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Soubory projektu...</td>
+                           <td align="left"><span class="keycap"><strong>Ctrl+L</strong></span></td>
+                           <td align="left">viewFileListMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Konec</td>
+                           <td align="left"><span class="keycap"><strong>Ctrl+Q</strong></span></td>
+                           <td align="left">projectExitMenuItem</td>
+                        </tr>
+                     </tbody>
+                  </table>
+               </div>
+            </div><br class="table-break"></div>
+         <div class="section" title="3.&nbsp;Nabídka ‚Upravit‛">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="ch04.shortcuts.EditMenu"></a>3.&nbsp;Nabídka ‚Upravit‛
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <div class="table"><a name="d0e10791"></a><p class="title"><b>Table&nbsp;G.2.&nbsp;Nabídka ‚Upravit‛</b></p>
+               <div class="table-contents"><a class="indexterm" name="d0e10794"></a><table summary="Nabídka ‚Upravit‛" border="1">
+                     <colgroup>
+                        <col width="120" align="left" class="1">
+                        <col width="80" align="left" class="2">
+                        <col align="left" class="3">
+                     </colgroup>
+                     <thead>
+                        <tr>
+                           <th align="left">Položka nabídky</th>
+                           <th align="left">Výchozí klávesová zkratka</th>
+                           <th align="left">Kód položky nabídky</th>
+                        </tr>
+                     </thead>
+                     <tbody>
+                        <tr>
+                           <td align="left">Zpět</td>
+                           <td align="left"><span class="keycap"><strong>Ctrl+Z</strong></span></td>
+                           <td align="left">editUndoMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Obnovit</td>
+                           <td align="left"><span class="keycap"><strong>Ctrl+Y</strong></span></td>
+                           <td align="left">editRedoMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Přepsat nalezeným překladem</td>
+                           <td align="left"><span class="keycap"><strong>Ctrl+R</strong></span></td>
+                           <td align="left">editOverwriteTranslationMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Vložit nalezený překlad</td>
+                           <td align="left"><span class="keycap"><strong>Ctrl+I</strong></span></td>
+                           <td align="left">editInsertTranslationMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Přepsat strojovým překladem</td>
+                           <td align="left"><span class="keycap"><strong>Ctrl+M</strong></span></td>
+                           <td align="left">editOverwriteMachineTranslationMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Přepsat zdrojem</td>
+                           <td align="left"><span class="keycap"><strong>Shift+Ctrl+R</strong></span></td>
+                           <td align="left">editOverwriteSourceMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Vložit zdroj</td>
+                           <td align="left"><span class="keycap"><strong>Shift+Ctrl+I</strong></span></td>
+                           <td align="left">editInsertSourceMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Vložit tagy zdroje</td>
+                           <td align="left"><span class="keycap"><strong>Shift+Ctrl+T</strong></span></td>
+                           <td align="left">editTagPainterMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Exportovat výběr</td>
+                           <td align="left"><span class="keycap"><strong>Shift+Ctrl+C</strong></span></td>
+                           <td align="left">editExportSelectionMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Vytvořit nový záznam Glosáře</td>
+                           <td align="left"><span class="keycap"><strong>Shift+Ctrl+G</strong></span></td>
+                           <td align="left">editCreateGlossaryEntryMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Hledat v projektu</td>
+                           <td align="left"><span class="keycap"><strong>Ctrl+F</strong></span></td>
+                           <td align="left">editFindInProjectMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Označit přibližný překlad #1</td>
+                           <td align="left"><span class="keycap"><strong>Ctrl+1</strong></span></td>
+                           <td align="left">editSelectFuzzy1MenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Označit přibližný překlad #2</td>
+                           <td align="left"><span class="keycap"><strong>Ctrl+2</strong></span></td>
+                           <td align="left">editSelectFuzzy2MenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Označit přibližný překlad #3</td>
+                           <td align="left"><span class="keycap"><strong>Ctrl+3</strong></span></td>
+                           <td align="left">editSelectFuzzy3MenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Označit přibližný překlad #4</td>
+                           <td align="left"><span class="keycap"><strong>Ctrl+4</strong></span></td>
+                           <td align="left">editSelectFuzzy4MenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Označit přibližný překlad #5</td>
+                           <td align="left"><span class="keycap"><strong>Ctrl+5</strong></span></td>
+                           <td align="left">editSelectFuzzy5MenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">malá písmena</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">lowerCaseMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">VELKÁ PÍSMENA</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">upperCaseMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Velká První Písmena</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">titleCaseMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Přepnout velikost písma</td>
+                           <td align="left"><span class="keycap"><strong>Shift+F3</strong></span></td>
+                           <td align="left">cycleSwitchCaseMenuItem</td>
+                        </tr>
+                     </tbody>
+                  </table>
+               </div>
+            </div><br class="table-break"></div>
+         <div class="section" title="4.&nbsp;Nabídka ‚Přejít‛">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="ch04.shortcuts.GoToMenu"></a>4.&nbsp;Nabídka ‚Přejít‛
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <div class="table"><a name="d0e10969"></a><p class="title"><b>Table&nbsp;G.3.&nbsp;Nabídka ‚Přejít‛</b></p>
+               <div class="table-contents"><a class="indexterm" name="d0e10972"></a><table summary="Nabídka ‚Přejít‛" border="1">
+                     <colgroup>
+                        <col width="120" align="left" class="1">
+                        <col width="80" align="left" class="2">
+                        <col align="left" class="3">
+                     </colgroup>
+                     <thead>
+                        <tr>
+                           <th align="left">Položka nabídky</th>
+                           <th align="left">Výchozí klávesová zkratka</th>
+                           <th align="left">Kód položky nabídky</th>
+                        </tr>
+                     </thead>
+                     <tbody>
+                        <tr>
+                           <td align="left">Další nepřeložený segment</td>
+                           <td align="left"><span class="keycap"><strong>Ctrl+U</strong></span></td>
+                           <td align="left">gotoNextUntranslatedMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Další segment</td>
+                           <td align="left"><span class="keycap"><strong>&lt;Ctrl+N&gt;</strong></span> nebo <span class="keycap"><strong>&lt;Enter&gt;</strong></span> nebo <span class="keycap"><strong>&lt;TAB&gt;</strong></span></td>
+                           <td align="left">gotoNextSegmentMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Předchozí segment</td>
+                           <td align="left"><span class="keycap"><strong>&lt;Ctrl+P&gt;</strong></span> nebo <span class="keycap"><strong>&lt;Ctrl+Enter&gt;</strong></span> nebo <span class="keycap"><strong>&lt;Ctrl+TAB&gt;</strong></span></td>
+                           <td align="left">gotoPreviousSegmentMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Segment číslo...</td>
+                           <td align="left"><span class="keycap"><strong>Ctrl+J</strong></span></td>
+                           <td align="left">gotoSegmentMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Zpět v historii</td>
+                           <td align="left"><span class="keycap"><strong>Ctrl+Shift+P</strong></span></td>
+                           <td align="left">gotoHistoryForwardMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Vpřed v historii</td>
+                           <td align="left"><span class="keycap"><strong>Ctrl+Shift+N</strong></span></td>
+                           <td align="left">gotoHistoryBackMenuItem</td>
+                        </tr>
+                     </tbody>
+                  </table>
+               </div>
+            </div><br class="table-break"></div>
+         <div class="section" title="5.&nbsp;Nabídka ‚Zobrazit‛">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="ch04.shortcuts.ViewMenu"></a>5.&nbsp;Nabídka ‚Zobrazit‛
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <div class="table"><a name="d0e11053"></a><p class="title"><b>Table&nbsp;G.4.&nbsp;Nabídka ‚Zobrazit‛</b></p>
+               <div class="table-contents"><a class="indexterm" name="d0e11056"></a><table summary="Nabídka ‚Zobrazit‛" border="1">
+                     <colgroup>
+                        <col width="120" align="left" class="1">
+                        <col width="80" align="left" class="2">
+                        <col align="left" class="3">
+                     </colgroup>
+                     <thead>
+                        <tr>
+                           <th align="left">Položka nabídky</th>
+                           <th align="left">Výchozí klávesová zkratka</th>
+                           <th align="left">Kód položky nabídky</th>
+                        </tr>
+                     </thead>
+                     <tbody>
+                        <tr>
+                           <td align="left">Označit přeložené segmenty</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">viewMarkTranslatedSegmentsCheckBoxMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Označit nepřeložené segmenty</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">viewMarkUntranslatedSegmentsCheckBoxMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Ukázat zdrojové segmenty</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">viewDisplaySegmentSourceCheckBoxMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Označit nejedinečné segmenty</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">viewMarkNonUniqueSegmentsCheckBoxMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Informace k úpravám/Nezobrazovat žádné</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">viewDisplayModificationInfoNoneRadioButtonMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Informace k úpravám/Zobrazovat u otevřeného segmentu</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">viewDisplayModificationInfoSelectedRadioButtonMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Informace k úpravám/Zobrazovat pro všechny segmenty</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">viewDisplayModificationInfoAllRadioButtonMenuItem</td>
+                        </tr>
+                     </tbody>
+                  </table>
+               </div>
+            </div><br class="table-break"></div>
+         <div class="section" title="6.&nbsp;Nabídka ‚Nástroje‛">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="ch04.shortcuts.ToolsMenu"></a>6.&nbsp;Nabídka ‚Nástroje‛
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <div class="table"><a name="d0e11119"></a><p class="title"><b>Table&nbsp;G.5.&nbsp;Nabídka ‚Nástroje‛</b></p>
+               <div class="table-contents"><a class="indexterm" name="d0e11122"></a><table summary="Nabídka ‚Nástroje‛" border="1">
+                     <colgroup>
+                        <col width="120" align="left" class="1">
+                        <col width="80" align="left" class="2">
+                        <col align="left" class="3">
+                     </colgroup>
+                     <thead>
+                        <tr>
+                           <th align="left">Položka nabídky</th>
+                           <th align="left">Výchozí klávesová zkratka</th>
+                           <th align="left">Kód položky nabídky</th>
+                        </tr>
+                     </thead>
+                     <tbody>
+                        <tr>
+                           <td align="left">Ověření tagů</td>
+                           <td align="left"><span class="keycap"><strong>Ctrl +T</strong></span></td>
+                           <td align="left">toolsValidateTagsMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Statistika</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">toolsShowStatisticsStandardMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Statistika shody</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">toolsShowStatisticsMatchesMenuItem</td>
+                        </tr>
+                     </tbody>
+                  </table>
+               </div>
+            </div><br class="table-break"></div>
+         <div class="section" title="7.&nbsp;Nabídka ‚Možnosti‛">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="ch04.shortcuts.OptionsMenu"></a>7.&nbsp;Nabídka ‚Možnosti‛
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <div class="table"><a name="d0e11163"></a><p class="title"><b>Table&nbsp;G.6.&nbsp;Nabídka ‚Možnosti‛</b></p>
+               <div class="table-contents"><a class="indexterm" name="d0e11166"></a><table summary="Nabídka ‚Možnosti‛" border="1">
+                     <colgroup>
+                        <col width="120" align="left" class="1">
+                        <col width="80" align="left" class="2">
+                        <col align="left" class="3">
+                     </colgroup>
+                     <thead>
+                        <tr>
+                           <th align="left">Položka nabídky</th>
+                           <th align="left">Výchozí klávesová zkratka</th>
+                           <th align="left">Kód položky nabídky</th>
+                        </tr>
+                     </thead>
+                     <tbody>
+                        <tr>
+                           <td align="left">Použít TAB pro postup</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">optionsTabAdvanceCheckBoxMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Vždy potvrdit ukončení</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">optionsAlwaysConfirmQuitCheckBoxMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Strojový překlad</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">&nbsp;</td>
+                        </tr>
+                        <tr>
+                           <td align="left">TransTips/Povolit TransTips</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">optionsTransTipsEnableMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">TransTips/Přesná shoda</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">optionsTransTipsExactMatchMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Písmo...</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">optionsFontSelectionMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Filtry souborů...</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">optionsSetupFileFiltersMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Segmentace...</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">optionsSentsegMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Kontrola pravopisu</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">optionsSpellCheckMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Nastavení editace</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">optionsWorkflowMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Ověření tagů...</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">optionsTagValidationMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Tým...</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">optionsTeamMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Externí soubory TMX</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">optionsExtTMXMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Zobrazit...</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">optionsViewOptionsMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Ukládat automaticky...</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">optionsSaveOptionsMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Proxy přihlášení ...</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">optionsViewOptionsMenuLoginItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Obnovit Hlavní okno</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">optionsRestoreGUIMenuItem</td>
+                        </tr>
+                     </tbody>
+                  </table>
+               </div>
+            </div><br class="table-break"></div>
+         <div class="section" title="8.&nbsp;Nabídka ‚Nápověda‛">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="ch04.shortcuts.HelpMenu"></a>8.&nbsp;Nabídka ‚Nápověda‛
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <div class="table"><a name="d0e11288"></a><p class="title"><b>Table&nbsp;G.7.&nbsp;Nabídka ‚Nápověda‛</b></p>
+               <div class="table-contents"><a class="indexterm" name="d0e11291"></a><table summary="Nabídka ‚Nápověda‛" border="1">
+                     <colgroup>
+                        <col width="120" align="left" class="1">
+                        <col width="80" align="left" class="2">
+                        <col align="left" class="3">
+                     </colgroup>
+                     <thead>
+                        <tr>
+                           <th align="left">Položka nabídky</th>
+                           <th align="left">Výchozí klávesová zkratka</th>
+                           <th align="left">Kód položky nabídky</th>
+                        </tr>
+                     </thead>
+                     <tbody>
+                        <tr>
+                           <td align="left">Uživatelská příručka...</td>
+                           <td align="left"><span class="keycap"><strong>F1</strong></span></td>
+                           <td align="left">helpContentsMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">O aplikaci...</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">helpAboutMenuItem</td>
+                        </tr>
+                     </tbody>
+                  </table>
+               </div>
+            </div><br class="table-break"></div>
+         <div class="footnotes"><br><hr width="100" align="left">
+            <div class="footnote">
+               <p><sup>[<a id="ftn.d0e10532" href="#d0e10532" class="para">2</a>] </sup>Kompletní syntax stisku kláves (klávesových zkratek) je definovaná v následující dokumentaci Java 1.6 od Oracle (na konci
+                  stránky): <a class="ulink" href="http://docs.oracle.com/javase/6/docs/api/javax/swing/KeyStroke.html" target="_top">Java 1.6 klávesové zkratky</a></p>
+            </div>
+            <div class="footnote">
+               <p><sup>[<a id="ftn.d0e10566" href="#d0e10566" class="para">3</a>] </sup>Na počítačích Mac je nutno použít modifikátor <span class="emphasis"><em>meta</em></span>, aby se specifikovala klávesa <span class="emphasis"><em>command</em></span>.
+               </p>
+            </div>
+            <div class="footnote">
+               <p><sup>[<a id="ftn.d0e10600" href="#d0e10600" class="para">4</a>] </sup>Možné události (reakce kláves) jsou uvedeny v následující dokumentaci Java 1.6 od Oracle: <a class="ulink" href="http://docs.oracle.com/javase/6/docs/api/java/awt/event/KeyEvent.html" target="_top">Popis klávesových událostí Java 1.6</a></p>
+            </div>
+            <div class="footnote">
+               <p><sup>[<a id="ftn.d0e10608" href="#d0e10608" class="para">5</a>] </sup>Výchozí klávesové zkratky OmegaT jsou dostupné přes Sourceforge: <a class="ulink" href="http://omegat.svn.sourceforge.net/viewvc/omegat/branches/release-2-5/src/org/omegat/gui/main/MainMenuShortcuts.properties" target="_top">Výchozí klávesové zkratky OmegaT</a></p>
+               <p>Výchozí klávesové zkratky OmegaT pro Mac jsou také dostupné přes Sourceforge, všechny používají „meta“ místo „ctrl“: <a class="ulink" href="http://omegat.svn.sourceforge.net/viewvc/omegat//branches/release-2-5/src/org/omegat/gui/main/MainMenuShortcuts.mac.properties" target="_top">Výchozí klávesové zkratky OmegaT pro Mac</a></p>
+            </div>
+         </div>
+      </div>
+      <div class="navfooter">
+         <hr>
+         <table width="100%" summary="Navigation footer">
+            <tr>
+               <td width="40%" align="left"><a accesskey="p" href="appendix.keyboard.html">Prev</a>&nbsp;
+               </td>
+               <td width="20%" align="center">&nbsp;</td>
+               <td width="40%" align="right">&nbsp;<a accesskey="n" href="appendix.legal.notices.html">Next</a></td>
+            </tr>
+            <tr>
+               <td width="40%" align="left" valign="top">Appendix&nbsp;F.&nbsp;Klávesové zkratky v editoru&nbsp;</td>
+               <td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
+               <td width="40%" align="right" valign="top">&nbsp;Appendix&nbsp;H.&nbsp;Právní poznámky</td>
+            </tr>
+         </table>
+      </div>
+   </body>
+</html>

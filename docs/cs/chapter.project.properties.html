@@ -1,0 +1,152 @@
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <title>Chapter&nbsp;6.&nbsp;Vlastnosti projektu</title>
+      <link rel="stylesheet" type="text/css" href="OmegaT.css">
+      <meta name="generator" content="DocBook XSL Stylesheets V1.76.1">
+      <link rel="home" href="index.html" title="Uživatelská skupina OmegaT">
+      <link rel="up" href="index.html" title="Uživatelská skupina OmegaT">
+      <link rel="prev" href="chapter.menu.html" title="Chapter&nbsp;5.&nbsp;Hlavní nabídka a Klávesové zkratky">
+      <link rel="next" href="chapter.file.filters.html" title="Chapter&nbsp;7.&nbsp;Filtry souborů">
+   </head>
+   <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+      <div class="navheader">
+         <table width="100%" summary="Navigation header">
+            <tr>
+               <th colspan="3" align="center">Chapter&nbsp;6.&nbsp;Vlastnosti projektu</th>
+            </tr>
+            <tr>
+               <td width="20%" align="left"><a accesskey="p" href="chapter.menu.html">Prev</a>&nbsp;
+               </td>
+               <th width="60%" align="center">&nbsp;</th>
+               <td width="20%" align="right">&nbsp;<a accesskey="n" href="chapter.file.filters.html">Next</a></td>
+            </tr>
+         </table>
+         <hr>
+      </div>
+      <div class="chapter" title="Chapter&nbsp;6.&nbsp;Vlastnosti projektu">
+         <div class="titlepage">
+            <div>
+               <div>
+                  <h2 class="title"><a name="chapter.project.properties"></a>Chapter&nbsp;6.&nbsp;Vlastnosti projektu<a class="indexterm" name="d0e4019"></a></h2>
+               </div>
+            </div>
+         </div>
+         <div class="toc">
+            <dl>
+               <dt><span class="section"><a href="chapter.project.properties.html#properties.dialog">1. Dialogové okno Vlastnosti projektu</a></span></dt>
+            </dl>
+         </div>
+         <p></p>
+         <div class="section" title="1.&nbsp;Dialogové okno Vlastnosti projektu">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="properties.dialog"></a>1.&nbsp;Dialogové okno Vlastnosti projektu
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>Toto dialogové okno <span class="guimenu">Vlastnosti</span> → <span class="guimenuitem">projektu</span> (<span class="shortcut"><strong><span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>E</strong></span></strong></span>) se používá pro úpravu adresářů a jazyků projektu.
+            </p>
+            <p>Během práce na překladu je možné upravovat vlastnosti projektu. Nezapomeňte, že změny v nastavení projektu mohou mít následky,
+               obzvláště, když je projekt již otevřen. Dokud nemá uživatel aspoň nějaké zkušenosti s OmegaT, je nejlepší po startu projektu
+               považovat veškerá nastavení za definitivní - až na případ, že byste si uvědomili, že se při nastavení naskytla zásadní chyba.
+               V části Prevence ztráty dat najdete způsoby a prostředky jak svou práci chránit.
+            </p>
+            <div class="figure"><a name="d0e4044"></a><p class="title"><b>Figure&nbsp;6.1.&nbsp;Okno Vlastnosti projektu</b></p>
+               <div class="figure-contents">
+                  <div class="mediaobject"><img src="images/NewProject_25.png" alt="Okno Vlastnosti projektu"></div>
+               </div>
+            </div><br class="figure-break"><p>Obsahuje:</p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" type="disc">
+                  <li class="listitem">
+                     <p><span class="bold"><strong>Oblast pro nastavení zdrojového a cílového jazyka projektu </strong></span></p>
+                     <p>Jazyky můžete zadat buď ručně, nebo použít rozbalovací nabídky. Mějte na paměti, že po změně jazyků mohou být aktuálně používané
+                        překladové paměti nepoužitelné, obzvláště když se pak už neshodují s nově nastavenými jazyky.
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" type="disc">
+                  <li class="listitem">
+                     <p><span class="bold"><strong><span class="guilabel">Zapnout segmentaci na úrovni vět</span> </strong></span> zaškrtávací políčko
+                     </p><a class="indexterm" name="d0e4069"></a><p>Nastavení segmentace upravuje způsob, jakým <span class="application">OmegaT</span> nakládá se zdrojovými soubory. Segmentace na úrovni vět představuje hlavní způsob segmentování zdroje, takže toto zaškrtávací
+                        políčko by mělo v normálním případě zůstat označené.
+                     </p>
+                     <p>V některých málo častých případech je možno upřednostnit alternativu, tj. segmentování podle odstavců. Změna statusu tohoto
+                        zaškrtávacího pole nezmění segmentaci již existujících překladových pamětí. Pokud se během překladu rozhodnete změnit segmentaci
+                        na úrovni vět na segmentaci po odstavcích, pak vnitřní překladová paměť projektu nebude změněna (OmegaT může aktualizovat
+                        staré překladové paměti, které nepoužívaly segmentaci na úrovni vět, ale ne naopak).
+                     </p>
+                     <p>Změna nastavení segmentace může vést k tomu, že již přeložené segmenty budou nově rozděleny nebo spojeny. To je prakticky
+                        navrátí do „nepřeloženého“ stavu, protože neodpovídají segmentům uloženým v paměti projektu, dokonce i přesto, že dřívější
+                        a teď nekorespondující překlad tam stále je.
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" type="disc">
+                  <li class="listitem">
+                     <p>Tlačítko <span class="bold"><strong><span class="guibutton">Segmentace</span> </strong></span><a class="indexterm" name="d0e4091"></a></p>
+                     <p>Pravidla segmentace obecně platí ve všech projektech. Nicméně uživatel může potřebovat si vytvořit několik pravidel, která
+                        jsou specifická pro konkrétní projekt. Použijte toto tlačítko pro otevření dialogového okna, aktivujte zaškrtávací políčko
+                        <span class="guimenuitem">Upravit pravidla segmentace podle konkrétního projektu</span>, pak si dle vlastní potřeby upravte segmentační pravidla. Nová sada pravidel bude uložena spolu s projektem a nebude odporovat
+                        obecným pravidlům segmentace. Až budete chtít smazat pravidla segmentace specifická pro daný projekt, zrušte označení tohoto
+                        zaškrtávacího políčka. V kapitole <a class="link" href="chapter.segmentation.html" title="Chapter&nbsp;14.&nbsp;Segmentace zdroje">Segmentace zdroje</a> naleznete více informací k pravidlům segmentace.<span class="emphasis"><em></em></span></p>
+                     <p><span class="emphasis"><em>Tip:</em></span> sada pravidel segmentace pro daný projekt je uložena v <code class="filename">project/omegat/segmentation.conf.</code></p>
+                  </li>
+                  <li class="listitem">
+                     <p>Tlačítko<span class="bold"><strong><span class="guibutton">Filtry souborů...</span> </strong></span><a class="indexterm" name="d0e4118"></a></p>
+                     <p>Podobně jak je výše popsáno si může uživatel vytvořit projektově specifické Filtry souborů, které budou uloženy spolu s projektem,
+                        a které budou platné jen pro daný projekt. Projektově specifickou sadu filtrů souborů vytvoříte kliknutím na tlačítko <span class="guibutton">Filtry souborů...</span>, pak v zobrazeném okně aktivujte zaškrtávací políčko <span class="guimenuitem">Upravit nastavení filtru souborů podle konkrétního projektu</span>. Kopie nastavení filtrů se případě uloží s projektem. Až budete chtít smazat specifické filtry souborů, zrušte označení tohoto
+                        zaškrtávacího políčka. Za poznámku stojí, že v nabídce <span class="guimenuitem">Možnosti -&gt; Filtry souborů</span> se mění obecné uživatelské filtry, ne filtry specifické pro daný projekt. Více informací k tomuto tématu najdete v kapitole
+                        <a class="link" href="chapter.file.filters.html" title="Chapter&nbsp;7.&nbsp;Filtry souborů">Filtry souborů </a><span class="emphasis"><em></em></span></p>
+                     <p><span class="emphasis"><em>Tip:</em></span> sada filtrů souborů pro daný projekt je uložena v <code class="filename">project/omegat/filters.xml.</code></p>
+                  </li>
+                  <li class="listitem">
+                     <p>Zaškrtávací políčko <span class="bold"><strong>Automatické upřednostnění</strong></span><span class="bold"><strong><a class="indexterm" name="d0e4149"></a></strong></span></p>
+                     <p>V případě, že ve zdrojovém dokumentu jsou nejedinečné segmenty, nabízí zaškrtávací políčko Automatické upřednostnění následující
+                        dvě možnosti týkající se automatického překladu: pokud je zaškrtnuto, první přeložený segment bude považován za výchozí překlad
+                        a jeho cílový text bude automaticky použit pro pozdější shody během překladového procesu. Segmenty, které byly takto chybně
+                        přeloženy, je možno samozřejmě opravit později ručně použitím <span class="guimenuitem">Vytvořit alternativní překlad</span>. Pokud ale zaškrtávací políčko Automatické upřednostnění není zaškrtnuto, pak segmenty nabízející alternativní překlad zůstanou
+                        nepřeloženy, dokud uživatel sám nerozhodne, který překlad použít.
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" type="disc">
+                  <li class="listitem">
+                     <p><span class="bold"><strong>Oblast pro nastavení adresářů projektu</strong></span><a class="indexterm" name="d0e4164"></a><a class="indexterm" name="d0e4169"></a></p>
+                     <p>Zde můžete vybrat různé podadresáře, například podadresář se zdrojovými soubory, podadresář se soubory překladu atd. pokud
+                        vložíte názvy adresářů, které dosud neexistují, <span class="application">OmegaT</span> je pro vás vytvoří. Pokud se rozhodnete změnit projektové adresáře, nezapomeňte na to, že takto nepřesunete existující soubory
+                        ze starých adresářů na novou pozici.
+                     </p>
+                  </li>
+               </ul>
+            </div>
+         </div>
+      </div>
+      <div class="navfooter">
+         <hr>
+         <table width="100%" summary="Navigation footer">
+            <tr>
+               <td width="40%" align="left"><a accesskey="p" href="chapter.menu.html">Prev</a>&nbsp;
+               </td>
+               <td width="20%" align="center">&nbsp;</td>
+               <td width="40%" align="right">&nbsp;<a accesskey="n" href="chapter.file.filters.html">Next</a></td>
+            </tr>
+            <tr>
+               <td width="40%" align="left" valign="top">Chapter&nbsp;5.&nbsp;Hlavní nabídka a Klávesové zkratky&nbsp;</td>
+               <td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
+               <td width="40%" align="right" valign="top">&nbsp;Chapter&nbsp;7.&nbsp;Filtry souborů</td>
+            </tr>
+         </table>
+      </div>
+   </body>
+</html>

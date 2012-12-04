@@ -1,0 +1,278 @@
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <title>Chapter&nbsp;12.&nbsp;Práce s formátovaným textem</title>
+      <link rel="stylesheet" type="text/css" href="OmegaT.css">
+      <meta name="generator" content="DocBook XSL Stylesheets V1.76.1">
+      <link rel="home" href="index.html" title="Uživatelská skupina OmegaT">
+      <link rel="up" href="index.html" title="Uživatelská skupina OmegaT">
+      <link rel="prev" href="chapter.plain.text.html" title="Chapter&nbsp;11.&nbsp;Práce s prostým textem">
+      <link rel="next" href="chapter.translation.memories.html" title="Chapter&nbsp;13.&nbsp;Překladové paměti">
+   </head>
+   <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+      <div class="navheader">
+         <table width="100%" summary="Navigation header">
+            <tr>
+               <th colspan="3" align="center">Chapter&nbsp;12.&nbsp;Práce s formátovaným textem</th>
+            </tr>
+            <tr>
+               <td width="20%" align="left"><a accesskey="p" href="chapter.plain.text.html">Prev</a>&nbsp;
+               </td>
+               <th width="60%" align="center">&nbsp;</th>
+               <td width="20%" align="right">&nbsp;<a accesskey="n" href="chapter.translation.memories.html">Next</a></td>
+            </tr>
+         </table>
+         <hr>
+      </div>
+      <div class="chapter" title="Chapter&nbsp;12.&nbsp;Práce s formátovaným textem">
+         <div class="titlepage">
+            <div>
+               <div>
+                  <h2 class="title"><a name="chapter.formatted.text"></a>Chapter&nbsp;12.&nbsp;Práce s formátovaným textem<a class="indexterm" name="d0e5845"></a><a class="indexterm" name="d0e5850"></a></h2>
+               </div>
+            </div>
+         </div>
+         <div class="toc">
+            <dl>
+               <dt><span class="section"><a href="chapter.formatted.text.html#formatting.tags">1. Formátovací tagy</a></span></dt>
+               <dt><span class="section"><a href="chapter.formatted.text.html#tag.operations">2. Operace s tagy</a></span></dt>
+               <dt><span class="section"><a href="chapter.formatted.text.html#tag.group.nesting">3. Vnořování skupiny tagů</a></span></dt>
+               <dt><span class="section"><a href="chapter.formatted.text.html#tag.group.overlapping">4. Překrývání skupiny tagů</a></span></dt>
+               <dt><span class="section"><a href="chapter.formatted.text.html#d0e5995">5. Možnosti Ověření tagů</a></span></dt>
+               <dt><span class="section"><a href="chapter.formatted.text.html#tag.group.validation">6. Ověření skupiny tagů</a></span></dt>
+               <dt><span class="section"><a href="chapter.formatted.text.html#hints.for.tag.management">7. Tipy pro správu tagů</a></span></dt>
+            </dl>
+         </div>
+         <p>Formátovací informace obsažené ve zdrojovém souboru obvykle musí být opakovány v cílovém souboru. Formátovací informace, které
+            jsou „in-line“, tzn. v řádku, budou u podporovaných formátů (konkrétně jde v době psaní tohoto textu o DocBook, HTML, XHTML,
+            Open Document (OpenOffice.org) a Office Open XML (MS Office 2007 a novější) v aplikaci OmegaT zobrazeny jako tagy.  Běžně
+            jsou tagy ignorovány s ohledem na podobnost mezi různými texty používanými pro porovnání. Tagy, které vložíte do přeloženého
+            segmentu, budou přítomné v přeloženém dokumentu.
+         </p>
+         <div class="section" title="1.&nbsp;Formátovací tagy">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="formatting.tags"></a>1.&nbsp;Formátovací tagy<a class="indexterm" name="d0e5860"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <p><a class="indexterm" name="d0e5864"></a><span class="bold"><strong>Pojmenování tagů:</strong></span></p>
+            <p>Tagy se skládají z jednoho až tří písmen a čísla. Jedinečné číslování umožňuje vzájemně si odpovídající tagy seskupovat do
+               skupin a rozlišovat mezi tagy, které mají stejné písmeno v názvu, ale ve skutečnosti zastupují jinou vlastnost. Znaky mohou,
+               ale nemusí odrážet hodnotu formátování, kterou reprezentují tagy (např. tučně (‚b‛ pro ‚bold‛), kurzíva (‚i‛ pro ‚italics‛),
+               atd.)
+            </p>
+            <p><a class="indexterm" name="d0e5874"></a><span class="bold"><strong>Číslování tagů:</strong></span></p>
+            <p>Tagy jsou číslovány postupně, vždy podle jednotlivých skupin. „Skupiny tagů“ reprezentují v tomto kontextu ucelené tagy (jako
+               například &lt;i0&gt; a &lt;/i0&gt;). Uvnitř segmentu pak první skupina (párový nebo samostatný tag) obdrží číslo 0, druhá číslo 1 atd.
+               První příklad uvedený níže má tři skupiny tagů (pár, samostatný a pak další pár), druhý příklad má jen jednu skupinu (pár).
+            </p>
+            <p><a class="indexterm" name="d0e5884"></a><span class="bold"><strong>Párové a nepárové:</strong></span></p>
+            <p>Tagy jsou vždy buď  párové nebo nepárové. Nepárové / jednoduché tagy označují formátovací informaci, která neovlivňuje okolní
+               text (např. mezera navíc nebo zalomení řádku)
+            </p>
+            <p><code class="literal">&lt;b0&gt;&lt;Ctr+N&gt;&lt;/b0&gt;,
+                      &lt;br1&gt;&lt;b2&gt;&lt;Enter&gt;&lt;/b2&gt;&lt;segment 2132&gt;
+                      </code></p>
+            <p>&lt;br1&gt; je nepárový tag a neovlivňuje okolní text. Párové tagy obvykle označují informace o stylu, které se vztahují na text
+               mezi otevíracím a uzavíracím tagem. &lt;b0&gt; a &lt;/b0&gt; jsou párové tagy, které se vztahují k textu log.txt. Je nutno dbát na to,
+               aby otevírací tag byl vždy umístěn před uzavíracím tagem:
+            </p>
+            <p><code class="literal">Soubor protokolu (&lt;b0&gt;log.txt&lt;/b0&gt;), ve kterém se zaznamenávají akce a chyby.&lt;segment 3167&gt;</code></p>
+            <p><span class="application">OmegaT</span> vytváří své tagy ještě před zpracováním větné segmentace. V závislost na pravidlech segmentace, párové tagy tak mohou být
+               rozděleny do dvou po sobě jdoucích segmentů a při ověřování tagů bude hlášena chyba a tyto dva segmenty budou označeny.
+            </p>
+         </div>
+         <div class="section" title="2.&nbsp;Operace s tagy">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="tag.operations"></a>2.&nbsp;Operace s tagy<a class="indexterm" name="d0e5908"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <p>S tagy se musí zacházet opatrně. Když je náhodou změníte, můžete tak poškodit formátování cílového dokumentu. Základní pravidlo
+               zní, že sekvence tagů se musí zachovat ve stejném pořadí. Nicméně je možné, pokud pevně dodržujete určitá pravidla, se od
+               tohoto základního pravidla odchýlit.
+            </p>
+            <p><span class="bold"><strong><a class="indexterm" name="d0e5917"></a>Duplikace tagů:</strong></span></p>
+            <p>Skupiny tagů můžete duplikovat prostým nakopírováním na pozici dle vašeho výběru. Pamatujte ale, že v rámci páru musí být
+               otevírací tag umístěn před uzavíracím. Formátování zapsané pomocí duplikované skupiny bude uplatněno obě části textu.
+            </p>
+            <p>Příklad:</p>
+            <p><code class="literal">&lt;b0&gt;Toto formátování&lt;/b0&gt; bude duplikováno sem.&lt;segment 0001&gt;</code></p>
+            <p>Po duplikaci:</p>
+            <p><code class="literal">&lt;b0&gt;Toto formátování&lt;/b0&gt; bylo &lt;b0&gt;duplikováno sem&lt;/b0&gt;.&lt;segment 0001&gt;</code></p>
+            <p><span class="bold"><strong><a class="indexterm" name="d0e5937"></a>Smazání skupiny tagů:</strong></span></p>
+            <p>Skupinu tagů smažete jejím prostým odstraněním ze segmentu. Nezapomeňte, že u párových tagů musí být smazán jak příslušný
+               otevírací a také příslušný ukončovací tag, a jenom tak se zajistí, že jsou řádně odebrány všechny stopy formátování, jinak
+               může dojít k poškození přeloženého souboru. Vymazáním skupiny tagů odstraníte příslušné formátování z přeloženého souboru.
+            </p>
+            <p>Příklad:</p>
+            <p><code class="literal">&lt;b0&gt;Toto formátování&lt;/b0&gt; bude smazáno.&lt;segment 0001&gt;</code></p>
+            <p>Po smazání:</p>
+            <p><code class="literal">Toto formátování bylo smazáno.&lt;segment 0001&gt;</code></p>
+         </div>
+         <div class="section" title="3.&nbsp;Vnořování skupiny tagů">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="tag.group.nesting"></a>3.&nbsp;Vnořování skupiny tagů<a class="indexterm" name="d0e5958"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <p>Úpravy pořadí párových tagů mohou vyústit do vnořování skupiny tagů do jiné skupiny tagů. Toto bude fungovat do té doby, dokud
+               budou páry řádně uzavírány a nebudou se křížit. Jinými slovy, když budete manipulovat s párovými tagy, tak se ujistěte, že
+               oba - jak otevírající, tak uzavírající tag - jsou oba buď uvnitř nebo vně jiného párového tagu, jinak může dojít k poškození
+               přeloženého souboru a ten by pak nešel otevřít.
+            </p>
+            <p>Příklad:</p>
+            <p><code class="literal">&lt;b0&gt;Formátování&lt;/b0&gt; &lt;b1&gt;jedna&lt;/b1&gt; bude vnořeno do formátování nula.</code></p>
+            <p>Po vnoření:</p>
+            <p><code class="literal">&lt;b0&gt;Formátování&lt;b1&gt;jedna&lt;/b1&gt;  &lt;/b0&gt; bylo vnořeno do formátování nula.</code></p>
+         </div>
+         <div class="section" title="4.&nbsp;Překrývání skupiny tagů">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="tag.group.overlapping"></a>4.&nbsp;Překrývání skupiny tagů<a class="indexterm" name="d0e5978"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <p>K překrývání dochází v důsledku chybné manipulace s párovými tagy a tak určitě vyústí v poškození formátování a někdy může
+               být přeložený soubor poškozen do takové míry, že už nepůjde otevřít.
+            </p>
+            <p>Příklad:</p>
+            <p><code class="literal">&lt;b0&gt;Formátování&lt;/b0&gt; &lt;b1&gt;jedna&lt;/b1&gt; bude zpřeházeno.&lt;segment 0001&gt;</code></p>
+            <p>Po chybné manipulaci</p>
+            <p><code class="literal">&lt;b0&gt;Formátování&lt;b1&gt; jedna &lt;/b0&gt; &lt;/b1&gt;je teď zcela špatně.&lt;segment 0001&gt;</code></p>
+         </div>
+         <div class="section" title="5.&nbsp;Možnosti Ověření tagů">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e5995"></a>5.&nbsp;Možnosti Ověření tagů
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>Sami si pro lepší přizpůsobení práce s tagy můžete nastavit pravidla v okně <span class="guimenuitem">Možnosti &gt; Ověření tagů...</span>:
+            </p>
+            <div class="mediaobject"><img src="images/OptionsTabValidation_25.png"></div>
+            <p>Nastavení, které je tu ukázané, platí pro všechny zdrojové soubory a ne jen pro některé typy souborů, jako je tomu u formátovaného
+               textu.
+            </p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" type="disc">
+                  <li class="listitem">
+                     <p><span class="bold"><strong>Proměnné printf - nekontrolovat, kontrolovat jednoduché, kontrolovat všechny.</strong></span></p>
+                     <p>OmegaT také může kontrolovat programové proměnné (proměnné jako %s) jak ve zdrojovém, tak i v přeloženém textu.. Můžete se
+                        rozhodnout pro možnost nekontrolovat nic, kontrolovat jen jednoduché proměnné printf (jako %s %d atd.) nebo proměnné printf
+                        všech typů. .
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" type="disc">
+                  <li class="listitem">
+                     <p><span class="bold"><strong>Zkontrolovat prosté vzory java MessageFormat</strong></span></p>
+                     <p>Když bude toto zaškrtávací políčko aktivní, bude OmegaT kontrolovat, zda jsou prosté tagy java MessageFormat (like {0}) zpracovány
+                        správně.
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" type="disc">
+                  <li class="listitem">
+                     <p><span class="bold"><strong>Políčko ‚Přizpůsobit regulární výraz tagu/tagů‛</strong></span></p>
+                     <p>Když sem vložíte regulární výraz, tak OmegaT bude zacházet s nalezenými případy jako se specificky definovanými tagy. Zkontroluje,
+                        jestli počet a pořadí tagů je identický, stejně jako je tomu v případě pro tagy omegat.
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" type="disc">
+                  <li class="listitem">
+                     <p><span class="bold"><strong>Fragmenty, které mají být odstraněny z překladu</strong></span></p>
+                     <p>Můžete vložit regulární výraz pro nežádoucí obsah v překladu. Jakákoliv shoda v cílovém segmentu pak bude zobrazena červeně,
+                        tj. tak, aby mohla být snadno identifikována a opravena.
+                     </p>
+                  </li>
+               </ul>
+            </div>
+         </div>
+         <div class="section" title="6.&nbsp;Ověření skupiny tagů">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="tag.group.validation"></a>6.&nbsp;Ověření skupiny tagů<a class="indexterm" name="d0e6039"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <p>Funkce Ověření tagů detekuje změny v sekvenci tagů (a už byli změněny cíleně nebo nechtěně) a ukáže dotyčný segment. Spuštění
+               této funkce - stiskem <span class="guimenuitem">Ctrl+T<a class="indexterm" name="d0e6048"></a></span> - otevřete okno obsahující všechny segmenty souboru, které obsahují pravděpodobně poškozené nebo chybné tagy v překladu.
+               Za použití funkce Ověření tagů je oprava tagů a opětovné vytvoření cílových dokumentů opravdu jednoduché. Okno, které se otevře
+               po stisku <span class="guimenuitem">Ctrl+T</span> obsahuje tabulku se třemi sloupci, které obsahují odkaz na segment, původní segment a segment s překladem.
+            </p>
+            <div class="figure"><a name="tag.validation"></a><p class="title"><b>Figure&nbsp;12.1.&nbsp;Záznam ověření tagů</b></p>
+               <div class="figure-contents">
+                  <div class="mediaobject"><img src="images/TagValidation.png" alt="Záznam ověření tagů"></div>
+               </div>
+            </div><br class="figure-break"><p>Tagy jsou zvýrazněné tučným modrým písmem a lze snadno srovnat původní obsah s obsahem přeloženým. Klikněte na odkaz pro přejití
+               na segment v Editoru. Pokud je to nutné, opravte chybu (ve výše uvedeném případe je to chybějící pár &lt;i2&gt;&lt;/i2&gt;) a stiskněte
+               <span class="guimenuitem">Ctrl+T</span> pro návrat k oknu ověření tagů a tak můžete opravit případné další chyby. Chyby tagů představují sekvence tagů v překladu,
+               které nereflektují stejný pořádek a počet tagů, po vzoru původního segmentu. Některé změny tagů jsou nutné a neškodné, oproti
+               tomu některé zapříčiní problémy při vytváření přeložených dokumentů.
+            </p>
+         </div>
+         <div class="section" title="7.&nbsp;Tipy pro správu tagů">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="hints.for.tag.management"></a>7.&nbsp;Tipy pro správu tagů<a class="indexterm" name="d0e6073"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <p><span class="bold"><strong>Zjednodušení výchozího textu</strong></span></p>
+            <p>Tagy všeobecně představují nějaký druh formátování v původním textu. Zjednodušení formátování původního textu ve velké míře
+               přispívá ke snížení počtu tagů. Tam kde to okolnosti povolují, zkuste zvážit sjednocení použitého písma, velikosti písma,
+               barev, atd., protože tak vám to může zjednodušit překlad a snížit potencionální množství chyb tagů. Přečtěte si část ‚Operace
+               s tagy‛, zjistíte tam, co všechno se dá s tagy provádět. Pamatujte, že pokud vás tagy ruší a formátování není v daném překladu
+               extrémně důležité, tak odstranění tagů může být nejjednodušší cesta ven z problémů.
+            </p>
+            <p><span class="bold"><strong>Věnujte zvýšenou pozornost párovým tagům.</strong></span></p>
+            <p>Pokud potřebujete vidět tagy v aplikaci OmegaT ale nemusíte zachovat většinou formátování v přeloženém dokumentu, tak se můžete
+               volně rozhodnout, zda tagy do překladu zařadíte. V tomto případě věnujte zvýšenou pozornost párovým tagům, protože jak se
+               smaže jedna část a ne obě, tak si jistě poškodíte formátování dokumentu. Vzhledem k tomu, že tagy jsou obsaženy v samotném
+               textu, je možné použít Pravidla segmentace k vytvoření segmentů s méně tagy. Toto je již pokročilé nastavení a k dobrým výsledkům
+               bude zapotřebí mít určitou zkušenost.
+            </p>
+            <p>OmegaT zatím neumí odhalit chyby ve formátování zcela automaticky, takže vás neupozorní, pokud uděláte chybu nebo změníte
+               formátování tak, aby lépe vyhovovalo vašemu cílovému jazyku. Nicméně někdy může váš přeložený soubor vypadat podivně a - v
+               nejhorším případě - třeba nepůjde vůbec otevřít.
+            </p>
+         </div>
+      </div>
+      <div class="navfooter">
+         <hr>
+         <table width="100%" summary="Navigation footer">
+            <tr>
+               <td width="40%" align="left"><a accesskey="p" href="chapter.plain.text.html">Prev</a>&nbsp;
+               </td>
+               <td width="20%" align="center">&nbsp;</td>
+               <td width="40%" align="right">&nbsp;<a accesskey="n" href="chapter.translation.memories.html">Next</a></td>
+            </tr>
+            <tr>
+               <td width="40%" align="left" valign="top">Chapter&nbsp;11.&nbsp;Práce s prostým textem&nbsp;</td>
+               <td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
+               <td width="40%" align="right" valign="top">&nbsp;Chapter&nbsp;13.&nbsp;Překladové paměti</td>
+            </tr>
+         </table>
+      </div>
+   </body>
+</html>

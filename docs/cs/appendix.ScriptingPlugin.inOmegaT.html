@@ -1,0 +1,178 @@
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <title>Appendix&nbsp;C.&nbsp;Plugin Scripting</title>
+      <link rel="stylesheet" type="text/css" href="OmegaT.css">
+      <meta name="generator" content="DocBook XSL Stylesheets V1.76.1">
+      <link rel="home" href="index.html" title="Uživatelská skupina OmegaT">
+      <link rel="up" href="index.html" title="Uživatelská skupina OmegaT">
+      <link rel="prev" href="appendix.LanguageToolPlugin.inOmegaT.html" title="Appendix&nbsp;B.&nbsp;Plugin LanguageTool">
+      <link rel="next" href="appendix.website.html" title="Appendix&nbsp;D.&nbsp;OmegaT na webu">
+   </head>
+   <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+      <div class="navheader">
+         <table width="100%" summary="Navigation header">
+            <tr>
+               <th colspan="3" align="center">Appendix&nbsp;C.&nbsp;Plugin Scripting</th>
+            </tr>
+            <tr>
+               <td width="20%" align="left"><a accesskey="p" href="appendix.LanguageToolPlugin.inOmegaT.html">Prev</a>&nbsp;
+               </td>
+               <th width="60%" align="center">&nbsp;</th>
+               <td width="20%" align="right">&nbsp;<a accesskey="n" href="appendix.website.html">Next</a></td>
+            </tr>
+         </table>
+         <hr>
+      </div>
+      <div class="appendix" title="Appendix&nbsp;C.&nbsp;Plugin Scripting">
+         <div class="titlepage">
+            <div>
+               <div>
+                  <h2 class="title"><a name="appendix.ScriptingPlugin.inOmegaT"></a>Appendix&nbsp;C.&nbsp;Plugin Scripting<a class="indexterm" name="d0e8694"></a></h2>
+               </div>
+            </div>
+         </div>
+         <div class="toc">
+            <dl>
+               <dt><span class="section"><a href="appendix.ScriptingPlugin.inOmegaT.html#d0e8699">1. Úvod</a></span></dt>
+               <dt><span class="section"><a href="appendix.ScriptingPlugin.inOmegaT.html#d0e8704">2. Instalace a použití</a></span></dt>
+            </dl>
+         </div>
+         <div class="section" title="1.&nbsp;Úvod">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e8699"></a>1.&nbsp;Úvod
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>OmegaT-Scripting umožňuje spouštět skripty v rámci OmegaT napsané v různých skriptovacích jazycích.</p>
+         </div>
+         <div class="section" title="2.&nbsp;Instalace a použití">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e8704"></a>2.&nbsp;Instalace a použití
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>Plugin Scriptiong si pro OmegaT stáhnete ze stránek určených pro stahování pluginů (<a class="ulink" href="???" target="_top">http://sourceforge.net/projects/omegat-plugins/files/</a>). Rozbalte soubory a  vložte je všechny do adresáře „plugins“, který se nachází v instalačním adresáři OmegaT, čili v adresáří,
+               kde je uložen soubor OmegaT.jar. Pokud adresář „plugins“ neexistuje, tak jej vytvořte.
+            </p>
+            <p>Tímto krokem přidáte další podnabídku <span class="guisubmenu">Nástroje</span><span class="guisubmenu">Skriptování.</span> Pod podnabídkou <span class="guisubmenu">Skriptování</span> naleznete pět řádků, kterým můžete přiřadit skripty. Kliknutím na <span class="guisubmenu">Skriptování</span> otevřete podokno Skriptování:
+            </p>
+            <div class="screenshot">
+               <div class="mediaobject"><img src="images/ScriptingDialog.png"></div>
+            </div>
+            <p>V podokně Skriptování můžete nahrát již existující skript do textového pole a spustit jej v právě otevřeném projektu. Pro
+               přizpůsobení vlastností skriptu proveďte následující kroky:
+            </p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" type="disc">
+                  <li class="listitem">
+                     <p>Nahrejte skript do editoru kliknutím na jméno skriptu v seznamu v levém panelu.</p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" type="disc">
+                  <li class="listitem">
+                     <p>Klikněte pravým tlačítkem myši ve spodním panelu na tlačítko od „&lt;1&gt;“ do „&lt;5&gt;“ a potvrďte možnost „Přidat skript“. V uvedeném
+                        příkladě jsou dva skripty (pozice 1 a 2) již přiřazeny.
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" type="disc">
+                  <li class="listitem">
+                     <p>Když kliknete na číslo levým tlačítkem myši, vybraný skript bude spuštěn. Stejně tak můžete spouštět vybraná makra z hlavního
+                        menu, a to použitím jejich záznamů v nabídce <span class="guisubmenu">Nástroje </span> nebo aktivováním zkratky <span class="keycap"><strong>Ctrl+Alt+F#</strong></span> (kde # odpovídá 1 až 5).
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <p>Zařazeny jsou následující skriptovací jazyky:</p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" type="disc">
+                  <li class="listitem">
+                     <p><span class="bold"><strong>NetRexx</strong></span> (http://www.netrexx.org/): podporuje klasickou REXX syntaxi, bez vyhrazených klíčových slov, spolu s významnými dodatky pro
+                        podporu objektově orientovaného programování, které je kompatibilní s objektovým modelem Javy. Všechny existující knihovny
+                        Java class lze použít v nezměněné podobě bez zvláštního nastavení; současně může programátor Java zvolit, aby se používala
+                        jen třída Rexx z běhového balíčku z vylepšeného řetězce, který působí ve zdrojových programech syntaxe Javy.
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" type="disc">
+                  <li class="listitem">
+                     <p><span class="bold"><strong>XSLT</strong></span> (Extensible Stylesheet Language Transformations): je deklarativní, jazyk založený na XML používaný pro transformaci XML dokumentů.
+                        Původní dokument není změněn; spíše je vytvořen nový dokument založený na obsahu toho již existujícího. Nový dokument může
+                        být změněn (výstup) zpracovávajícím programem do standardní XML syntaxe nebo jiného formátu, jako je HTML nebo prostý text.
+                        XSLT se nejčastěji používá k převodu dat mezi různými XML schématy nebo pro převod XML dat na webové stránky nebo PDF dokumenty.
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" type="disc">
+                  <li class="listitem">
+                     <p><span class="bold"><strong>Groovy</strong></span> (http://groovy.codehaus.org): je dynamický jazyk pro Java Virtual machine. Je vystavěn na silných stránkách Javy, ale má
+                        dodatečné silné vlastnosti, které převzal z jazyků jako Python, Ruby a Smalltalk.
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" type="disc">
+                  <li class="listitem">
+                     <p><span class="bold"><strong>JavaScript</strong></span>  (někdy se zkracuje jako JS, nezaměňovat s Javou): je skrptovací jazyk založený na prototypech, je dynamický, používá krátký
+                        zápis a nabízí prvotřídní funkce. Je to multiplatformní jazyk, podporuje objektově orientované, imperativní a funkční programovací
+                        styly. Je jazykem, který stojí za populárním software jako Firefox a představuje tak známý a často využívaný programovací
+                        nástroj v oblasti open source.
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <p>Všechny jazyky mají přístup do objektového modelu OmegaT, kde projekt představuje hlavní objekt. Následující ukázka kódu v
+               groovy prochází všechny segmenty ve všech souborech aktuálního projektu:
+            </p>
+            <p><em class="parameter"><code>files = project.projectFiles;</code></em></p>
+            <p><em class="parameter"><code>for (i in 0 ..&lt; files.size())</code></em></p>
+            <p><em class="parameter"><code>{</code></em></p>
+            <p><em class="parameter"><code> for (j in 0 ..&lt;
+                         files[i].entries.size())</code></em></p>
+            <p><em class="parameter"><code> {</code></em></p>
+            <p><em class="parameter"><code> currsegment = files[i].entries[j];</code></em></p>
+            <p><em class="parameter"><code> source = currsegment.getSrcText();</code></em></p>
+            <p><em class="parameter"><code> if (project.getTranslationInfo(ste))</code></em></p>
+            <p><em class="parameter"><code> target =
+                         project.getTranslationInfo(currsegment).translation;</code></em></p>
+            <p><em class="parameter"><code> else</code></em></p>
+            <p><em class="parameter"><code> target = null;</code></em></p>
+            <p><em class="parameter"><code> }</code></em></p>
+            <p><em class="parameter"><code>}</code></em></p>
+         </div>
+      </div>
+      <div class="navfooter">
+         <hr>
+         <table width="100%" summary="Navigation footer">
+            <tr>
+               <td width="40%" align="left"><a accesskey="p" href="appendix.LanguageToolPlugin.inOmegaT.html">Prev</a>&nbsp;
+               </td>
+               <td width="20%" align="center">&nbsp;</td>
+               <td width="40%" align="right">&nbsp;<a accesskey="n" href="appendix.website.html">Next</a></td>
+            </tr>
+            <tr>
+               <td width="40%" align="left" valign="top">Appendix&nbsp;B.&nbsp;Plugin LanguageTool&nbsp;</td>
+               <td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
+               <td width="40%" align="right" valign="top">&nbsp;Appendix&nbsp;D.&nbsp;OmegaT na webu</td>
+            </tr>
+         </table>
+      </div>
+   </body>
+</html>

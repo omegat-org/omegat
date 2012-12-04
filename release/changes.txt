@@ -189,6 +189,19 @@ to write in the repository anymore
   http://sourceforge.net/support/tracker.php?aid=2960656
 
 ----------------------------------------------------------------------
+ OmegaT 2.5.5 update 4
+----------------------------------------------------------------------
+   0 Enhancement
+   0 Bug fix
+   1 Localisation update
+----------------------------------------------------------------------
+2.5.5 update 4 vs. 2.5.5 update 3
+
+  Localisation updates:
+
+  - Russian localization updated to 2.5.5 (UI, documentation, readme)
+
+----------------------------------------------------------------------
  OmegaT 2.5.5 update 3
 ----------------------------------------------------------------------
    2 Enhancements

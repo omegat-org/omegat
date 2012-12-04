@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<chapter id="chapter.plain.text">
+  <title>Práce s prostým textem<indexterm class="singular">
+      <primary>Zdrojové soubory</primary> <secondary>Prosté textové soubory</secondary>
+    </indexterm></title>
+
+  <section id="default.encoding">
+    <title>Výchozí kódování<indexterm class="singular">
+        <primary>Výchozí kódování</primary> <secondary>Prosté textové soubory</secondary>
+      </indexterm><indexterm class="singular">
+        <primary>Zdrojové soubory</primary> <secondary>Výchozí kódování</secondary>
+      </indexterm></title>
+
+    <para>Prosté textové soubory - ve většině případů s koncovkou txt - obsahují výhradně textové informace a nabízí tak nejasně definovaný způsob jak počítač informovat o tom, jaký jazyk obsahují. Maximum, co může OmegaT s takovém případě udělat je, že bude předpokládat, že text je napsán ve stejném jazyce, jaký používá sám počítač. Toto pak není žádný problém pro soubory kódované v Unicode užívající 16-ti bitovou sadu kódování znaků. Pokud je text kódován 8 bity, pak se můžete setkat s následující nepříjemnou situací: místo zobrazení textu psaného japonskými znaky ... </para>
+
+    <mediaobject>
+      <imageobject role="html">
+        <imagedata fileref="images/OmT_Japanese.png"/>
+      </imageobject>
+
+      <imageobject role="fo">
+        <imagedata fileref="images/OmT_Japanese.png" width="60%"/>
+      </imageobject>
+    </mediaobject>
+
+    <para>... systém zobrazí např. něco podobného:</para>
+
+    <mediaobject>
+      <imageobject role="html">
+        <imagedata fileref="images/OmT_Cyrillic.png"/>
+      </imageobject>
+
+      <imageobject role="fo">
+        <imagedata fileref="images/OmT_Cyrillic.png" width="60%"/>
+      </imageobject>
+    </mediaobject>
+
+    <para>Počítač, na kterém je spuštěna OmegaT, má výchozí jazyk ruštinu, a proto zobrazuje znaky v azbuce, nikoliv kanji.</para>
+  </section>
+
+  <section id="OmegaT.solution">
+    <title>Řešení pomocí <application>OmegaT</application> <indexterm class="singular">
+        <primary>Výchozí kódování</primary> <secondary>Řešení OmegaT</secondary>
+      </indexterm></title>
+
+    <para><application>OmegaT</application> má v podstatě k dispozici tři způsoby jak na věc. Všechny zahrnují použití filtrů souborů z nabídky  <emphasis role="bold">Možnosti</emphasis>.</para>
+
+    <variablelist>
+      <varlistentry>
+        <term>Změňte kódování svých souborů na Unicode</term>
+
+        <listitem>
+          <para>otevřete zdrojový soubor v textovém editoru, který správně interpretuje použité kódování a uložte soubor s kódováním <emphasis role="bold">„UTF-8“</emphasis>. Změňte koncovku souboru z <literal>.txt</literal> na <literal>.utf8.</literal> <application>OmegaT</application> bude soubor automaticky interpretovat jako soubor v kódování UTF-8. Toto je nejběžnější alternativa, která vám nakonec ušetří spoustu problémů. </para>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+
+    <variablelist>
+      <varlistentry>
+        <term>Specifikace kódování v prostých textových souborech.</term>
+
+        <listitem>
+          <para>- tj. soubory s koncovkou <filename>.txt </filename> -: - : v části <emphasis role="bold">Textové soubory</emphasis> dialogového okna Filtry souborů, změňte <emphasis role="bold">Kódování zdrojového souboru</emphasis> z &lt;auto&gt; na kódování odpovídající vašemu zdrojovému souboru <filename>.txt</filename>, např. na .jp dle nahoře uvedeného příkladu.</para>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+
+    <variablelist>
+      <varlistentry>
+        <term>Změňte koncovky vašich prostých textových souborů.</term>
+
+        <listitem>
+          <para>například z <filename>.txt</filename> na <filename>.jp</filename> pro prosté textové soubory v japonštině: v části <emphasis role="bold">Textové soubory</emphasis> okna Filtry souborů, přidejte nový  <emphasis role="bold">Vzor pro názvy zdrojových souborů</emphasis> (např. <filename>*.jp</filename> v tomto případě) a vyberte vhodné parametry pro kódování zdroje a cíle.</para>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+
+    <para>Ve výchozím nastavení má <application>OmegaT</application> k dispozici následující krátký seznam, aby pro vás bylo jednodušší zpracovávat některé prosté textové soubory:</para>
+
+    <itemizedlist>
+      <listitem>
+        <para>Soubory s koncovkou <literal>.txt</literal> jsou v <application>OmegaT</application> automaticky (&lt;auto&gt;) interpretovány jako kódované v předvoleném kódování počítače.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Soubory s koncovkou <literal>.txt1</literal> jsou soubory v ISO-8859-1, kryjící většinu jazyků <emphasis role="bold">Západní Evropy</emphasis>.<indexterm class="singular">
+            <primary>Výchozí kódování</primary> <secondary>Western (západní)</secondary>
+          </indexterm></para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Soubory s koncovkou <literal>.txt2</literal> jsou soubory v ISO-8859-2, což kryje většinu jazyků <emphasis role="bold">Střední a Východní Evropy</emphasis>).<indexterm class="singular">
+            <primary>Výchozí kódování</primary> <secondary>Central and Eastern European (Centrální a Východní Evropa)</secondary>
+          </indexterm></para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Soubory s koncovkou <literal>.utf8</literal> jsou v <application>OmegaT</application> interpretovány jako v kódování UTF-8 (kódování, které pokrývá téměř všechny jazyky světa).<indexterm class="singular">
+            <primary>Výchozí kódování</primary> <secondary>Unicode</secondary>
+          </indexterm></para>
+      </listitem>
+    </itemizedlist>
+
+    <para>Můžete si to ověřit sami tak, že označíte položku <emphasis role="bold">Filtry souborů</emphasis> v nabídce <emphasis role="bold">Možnosti</emphasis>. Například když máte textový soubor v češtině (velmi pravděpodobně napsaný v kódování <emphasis role="bold">ISO-8859-2</emphasis>), pak jednoduše potřebujete jen změnit koncovku <literal>.txt</literal> na <literal>.txt2</literal>a <application>OmegaT</application> bude interpretovat obsah souboru správně. A zajisté, když si chcete být zcela jistí, převeďte tyto soubory do kódování Unicode, t.j. do souborového formátu <literal>.utf8</literal>.</para>
+  </section>
+</chapter>

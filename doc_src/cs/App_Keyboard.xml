@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<appendix id="appendix.keyboard">
+  <title>Klávesové zkratky v editoru</title>
+
+  <para>Tento krátký text popisuje akce vyvolané klávesami v podokně Editoru. Pojem „Přesunout se do segmentu“ znamená, že kurzor se přesune na začátek segmentu, pokud se nachází před segmentem, a na konec segmentu, pokud se nachází za segmentem.</para>
+
+  <table>
+    <title>Akce v okně editoru vyvolané klávesami
+</title>
+
+    <tgroup cols="2">
+      <colspec align="left" colnum="1" colwidth="90"/>
+
+      <colspec align="left" colnum="2" colwidth="300"/>
+
+      <thead>
+        <row>
+          <entry align="left">Kombinace kláves</entry>
+
+          <entry align="left">Akce</entry>
+        </row>
+      </thead>
+
+      <tbody>
+        <row>
+          <entry><emphasis role="bold">Vlevo:</emphasis></entry>
+
+          <entry>posunout o znak vlevo, ale ne dále než za začátek segmentu</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">Vpravo:</emphasis></entry>
+
+          <entry>posunout o znak vpravo, ale ne dále než za konec segmentu</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">Ctrl+Vlevo:</emphasis></entry>
+
+          <entry>posunout o slovo vlevo, ale ne dále než za začátek segmentu</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">Ctrl+Vpravo:</emphasis></entry>
+
+          <entry>posunout o slovo vpravo, ale ne dále než za začátek segmentu</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">PgUp: </emphasis></entry>
+
+          <entry>posunout o stránku v dokumentu nahoru</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">PgDn: </emphasis></entry>
+
+          <entry>posunout o stránku v dokumentu dolů</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">Home*</emphasis></entry>
+
+          <entry>posunout na začátek řádku v segmentu</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">End*</emphasis></entry>
+
+          <entry>posunout na konec řádku v segmentu</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">Ctrl+Home</emphasis></entry>
+
+          <entry>posunout na začátek segmentu</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">Ctrl+End</emphasis></entry>
+
+          <entry>posunout na konec segmentu</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">Ctrl+PgUp</emphasis></entry>
+
+          <entry>posunout na začátek dokumentu (Mac: <emphasis role="bold">Cmd+PgUp</emphasis>)</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">Ctrl+PgDn</emphasis></entry>
+
+          <entry>posunout na konec dokumentu (Mac: <emphasis role="bold">Cmd+PgDn</emphasis>)</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">Backspace*</emphasis></entry>
+
+          <entry>odstranit znak před kurzorem</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">Delete*</emphasis></entry>
+
+          <entry>odstranit znak za kurzorem</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">Ctrl+Backspace</emphasis></entry>
+
+          <entry>odstranit znaky až na začátek právě zpracovávaného slova (Mac: <emphasis role="bold">Alt+Backspace</emphasis>)</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">Ctrl+Delete</emphasis></entry>
+
+          <entry>odstranit znaky až po začátek dalšího slova (Mac: <emphasis role="bold">Alt+Delete</emphasis>)</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">Ctrl+Enter</emphasis></entry>
+
+          <entry>otevřít předchozí segment (Mac: <emphasis role="bold">Cmd+Enter</emphasis>)</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">Ctrl+A</emphasis></entry>
+
+          <entry>označit celý segment (Mac: <emphasis role="bold">Cmd+A</emphasis>)</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">Ctrl+Shift+O</emphasis></entry>
+
+          <entry>změna směru záznamu mezi RTL-LTR (zprava doleva-zleva doprava)</entry>
+        </row>
+      </tbody>
+    </tgroup>
+  </table>
+
+  <para>* Tyto klávesy vyvolají jinou akci pokud je kurzor mimo editovatelný segment:</para>
+
+  <itemizedlist>
+    <listitem>
+      <para><emphasis role="bold">Home: </emphasis>kurzor na začátek aktivního segmentu</para>
+    </listitem>
+
+    <listitem>
+      <para><emphasis role="bold">End: </emphasis>kurzor na konec aktivního segmentu</para>
+    </listitem>
+
+    <listitem>
+      <para><emphasis role="bold">Backspace: </emphasis>nic</para>
+    </listitem>
+
+    <listitem>
+      <para><emphasis role="bold">Delete: </emphasis>nic</para>
+    </listitem>
+
+    <listitem>
+      <para><emphasis role="bold">Jakákoliv klávesa, </emphasis>když je kurzor mimo editovatelný segment, akce je ignorována.</para>
+    </listitem>
+  </itemizedlist>
+
+  <para>Klávesa „Shift“ sama o sobě nevyvolá žádné speciální reakce pohybu kurzoru: když je stisknuta klávesa „Shift“, všechny klávesy pohybují kurzorem obvyklým způsobem.</para>
+
+  <para>Obecné příkazy systému: Vložit (<emphasis role="bold">Ctrl+V</emphasis> nebo <emphasis role="bold">Ctrl+Insert</emphasis>), Kopírovat (<emphasis role="bold">Ctrl+X</emphasis> nebo <emphasis role="bold">Ctrl+C)</emphasis>, Vložit přibližný překlad <emphasis role="bold">(Ctrl+I</emphasis>) a Vložit zdroj (<emphasis role="bold">Ctrl+Shift+I</emphasis>) v zásadě reaguje na jakýkoliv výběr, včetně výběru textu nacházejícího se mimo aktuální segment. Pokud je kurzor mimo právě otevřený segment, pak se vkládaný text stejně vloží dovnitř otevřeného segmentu.</para>
+</appendix>

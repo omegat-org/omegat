@@ -1,0 +1,1250 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<chapter id="chapter.menu">
+  <title>Hlavní nabídka a Klávesové zkratky</title>
+
+  <section id="ch04.main.menu">
+    <title><indexterm class="singular">
+        <primary>Hlavní nabídka</primary>
+      </indexterm>Hlavní nabídka</title>
+
+    <indexterm class="singular">
+      <primary>Klávesové zkratky</primary> <secondary>Hlavní nabídka</secondary>
+    </indexterm>
+
+    <para>Všechny funkce OmegaT jsou dostupné přes lištu nabídky v horní části okna Editoru. Většina funkcí je také dostupná přes klávesové zkratky. Zkratky se aktivují stisknutím <keycap>Ctrl</keycap> a písmena. Některé zkratky obsahují jiné klávesy. Kvůli lepší čitelnosti jsou zde písmena ze zkratek vypsána jako kapitálky. <keycap>Ctrl</keycap> se používá u Windows, UNIXu a UNIXových operačních systémů s klávesnicemi obsahující klávesu <keycap>Ctrl</keycap> / <keycap>Control</keycap>. Uživatelé Maců místo toho čtou <keycombo><keycap>Cmd</keycap><keycap>klávesa</keycap> </keycombo>. Klávesa „Cmd“ má na klávesnicích Apple buď označení „command“, nebo obrázek jablka.</para>
+
+    <para>Podle konkrétních potřeb je možné stávající klávesové zkratky upravit nebo přidat nové. <link linkend="ch04.shortcuts.customization">Viz Příloha - Přizpůsobení zkratek</link></para>
+
+    <table colsep="1" id="table.main.menu">
+      <title>Hlavní nabídka</title>
+
+      <tgroup cols="7" colsep="1">
+        <tbody>
+          <row>
+            <entry><guimenuitem>Projekt</guimenuitem></entry>
+
+            <entry><guimenuitem>Upravit</guimenuitem></entry>
+
+            <entry><guimenuitem>Přejít</guimenuitem></entry>
+
+            <entry><guimenuitem>Zobrazit</guimenuitem></entry>
+
+            <entry><guimenuitem>Nástroje</guimenuitem></entry>
+
+            <entry><guimenuitem>Možnosti</guimenuitem></entry>
+
+            <entry><guimenuitem>Nápověda</guimenuitem></entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+
+    <section id="submenu.Project">
+      <title>Projekt<indexterm class="singular">
+          <primary>Hlavní nabídka</primary> <secondary>Projekt</secondary>
+        </indexterm></title>
+
+      <table colsep="1">
+        <title>Nabídka ‚Projekt‛</title>
+
+        <tgroup cols="3" colsep="1">
+          <colspec align="left" colnum="1" colwidth="100"/>
+
+          <colspec align="left" colnum="2" colwidth="100"/>
+
+          <tbody>
+            <row>
+              <entry><guimenuitem>Nový</guimenuitem></entry>
+
+              <entry/>
+
+              <entry>Vytvoří a otevře nový projekt. Dialogové okno pro vytvoření projektu je stejné jako u Vlastnosti projektu. Viz<xref linkend="chapter.project.properties"/></entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Otevřít</guimenuitem></entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>O</keycap>
+                </keycombo></entry>
+
+              <entry>Otevírá dříve vytvořený projekt.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Importovat zdrojové soubory...</guimenuitem></entry>
+
+              <entry/>
+
+              <entry>Zkopíruje vybrané soubory do zdrojového adresáře <filename>/source</filename> a znovu načte projekt pro načtení nových souborů.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Import z MediaWiki...</guimenuitem></entry>
+
+              <entry/>
+
+              <entry>Importuje jednotky ze stránek MediaWiki založené na vloženém URL.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Znovu načíst</guimenuitem></entry>
+
+              <entry><keycap>F5</keycap></entry>
+
+              <entry>Znovu načte projekt, aby se zohlednily externí úpravy ve zdrojových souborech, starších překladových pamětech, glosářích a nastavení projektu.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Zavřít</guimenuitem></entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>Shift</keycap>
+
+                  <keycap>W</keycap>
+                </keycombo></entry>
+
+              <entry>Uloží překlad a zavře projekt.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Uložit</guimenuitem></entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>S</keycap>
+                </keycombo></entry>
+
+              <entry>Uloží interní překladovou paměť na pevný disk. OmegaT automaticky ukládá překlad každých 10 minut, stejně tak při zavření projektu, nebo při ukončení OmegaT.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Vytvořit přeložené dokumenty</guimenuitem></entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>D</keycap>
+                </keycombo></entry>
+
+              <entry>Vytvoří cílové dokumenty založené na vašem překladu dokumentu. Přeložené dokumenty budou umístěné v adresáři překladu <filename>/target</filename>.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Vlastnosti...</guimenuitem></entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>E</keycap>
+                </keycombo></entry>
+
+              <entry>Zobrazí dialogové okno <link linkend="chapter.project.properties">Vlastnosti projektu</link> pro úpravu jazyků projektu a umístění projektu.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Soubory projektu...</guimenuitem></entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>L</keycap>
+                </keycombo></entry>
+
+              <entry>Zavře nebo otevře okno <link linkend="section.project.files">Soubory projektu</link> (záleží to na tom, zda je toto okno právě otevřené či zavřené).</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Konec</guimenuitem></entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>Q</keycap>
+                </keycombo></entry>
+
+              <entry>Uloží projekt a ukončí <application>OmegaT</application>. Pokud jste projekt dosud neuložili, budete požádáni ukončení programu ručně potvrdit.</entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+    </section>
+
+    <section>
+      <title>Upravit<indexterm class="singular">
+          <primary>Hlavní nabídka</primary> <secondary>Upravit</secondary>
+        </indexterm></title>
+
+      <para>Poznámka: Položky, které lze nalézt ve většině aplikací (kopírovat/vyjmout/vložit) nejsou v této nabídce zobrazeny, ale jsou přístupné prostřednictvím klávesových zkratek vašeho operačního systému. Například:</para>
+
+      <table colsep="1">
+        <title>Klávesové zkratky pro kopírovat/vyjmout/vložit</title>
+
+        <tgroup cols="3" colsep="1">
+          <colspec align="left" colnum="1" colwidth="100"/>
+
+          <colspec align="left" colnum="2" colwidth="100"/>
+
+          <tbody>
+            <row>
+              <entry><guimenuitem>Kopírovat</guimenuitem></entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>C</keycap>
+                </keycombo></entry>
+
+              <entry>Zkopíruje vybraný text do schránky.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Vyjmout</guimenuitem></entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>X</keycap>
+                </keycombo></entry>
+
+              <entry>Zkopíruje vybraný text do schránky a původní vybraný text v dokumentu smaže.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Vložit</guimenuitem></entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>V</keycap>
+                </keycombo></entry>
+
+              <entry>Vloží text ze schránky na pozici kurzoru.</entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+
+      <para>Nabídka ‚Upravit‛ sama o sobě obsahuje následující položky</para>
+
+      <table colsep="1">
+        <title>Nabídka ‚Upravit‛</title>
+
+        <tgroup cols="3" colsep="1">
+          <colspec align="left" colnum="1" colwidth="100"/>
+
+          <colspec align="left" colnum="2" colwidth="100"/>
+
+          <tbody>
+            <row>
+              <entry><guimenuitem>Zpět</guimenuitem></entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>Z</keycap>
+                </keycombo></entry>
+
+              <entry>Obnoví stav před poslední úpravou. Tento příkaz nebude fungovat, jakmile potvrdíte upravovaný segment.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Obnovit</guimenuitem></entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>Y</keycap>
+                </keycombo></entry>
+
+              <entry>Obnoví stav před tím, než byla poslední akce zrušena. Tento příkaz nebude fungovat, jakmile potvrdíte upravovaný segment.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Přepsat nalezeným překladem</guimenuitem></entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>R</keycap>
+                </keycombo></entry>
+
+              <entry>Přepíše celý cílový segment vybraným přibližným překladem (ve výchozím nastavení je vybraný první přibližný překlad).</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Vložit nalezený překlad</guimenuitem></entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>I</keycap>
+                </keycombo></entry>
+
+              <entry>Vloží vybraný přibližný překlad na pozici kurzoru. Pokud je část cílového segmentu zvýrazněna výběrem, tato funkce přepíše vybranou část.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Přepsat strojovým překladem</guimenuitem></entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>M</keycap>
+                </keycombo></entry>
+
+              <entry>Přepíše cílový segment překladem, který nabízí služba Strojového překladu. Nebude provedena žádná akce, pokud služba Strojového překladu není aktivní (viz Nabídka &gt; Možnosti níže).</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Přepsat zdrojem</guimenuitem></entry>
+
+              <entry><keycombo>
+                  <keycap>Shift</keycap>
+
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>R</keycap>
+                </keycombo></entry>
+
+              <entry>Přepíše celý cílový segment zdrojem.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Vložit zdroj</guimenuitem></entry>
+
+              <entry><keycombo>
+                  <keycap>Shift</keycap>
+
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>I</keycap>
+                </keycombo></entry>
+
+              <entry>Vloží zdroj na pozici kurzoru.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Vložit tagy zdroje</guimenuitem></entry>
+
+              <entry><keycombo>
+                  <keycap>Shift</keycap>
+
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>T</keycap>
+                </keycombo></entry>
+
+              <entry><indexterm class="singular">
+                  <primary>Tagy</primary> <secondary>Vložit tagy zdroje</secondary>
+                </indexterm>Vloží tagy zdroje na pozici kurzoru. Všechny důležité tagy ve zdroji - tj. nejen tagy OmegaT, ale i vlastní, Java, printf, atp. - budou vloženy do aktuálního cílového segmentu, nehledě na to, zda tam již jsou vloženy nebo ne. Texty a závorky u tagů budou nahrazeny mezerami: <literal>&lt;f0&gt;&lt;f1&gt;Tento text&lt;/f0&gt;&lt;/f1&gt;</literal>bude zkopírován jako<literal>&lt;f0&gt;&lt;f1&gt;jedna mezera&lt;/f0&gt;&lt;/f1&gt;</literal></entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Exportovat výběr</guimenuitem></entry>
+
+              <entry><keycombo>
+                  <keycap>Shift</keycap>
+
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>C</keycap>
+                </keycombo></entry>
+
+              <entry>Exportuje aktuální výběr do textového souboru k dalšímu zpracování. Pokud nebyl vybrán žádný text, bude do tohoto souboru zapsán aktuální zdrojový segment. Když uživatel zavře <application>OmegaT</application> tento soubor nebude smazán, jak je tomu zvykem s běžným chováním schránky v operačním systému. Exportovaný obsah je zkopírován do souboru <filename>selection.txt</filename>, který se nachází v adresáři dle předvoleb uživatele (viz <xref linkend="chapter.files.and.directories"/>).</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Vytvořit nový záznam Glosáře</guimenuitem></entry>
+
+              <entry><keycombo>
+                  <keycap>Shift</keycap>
+
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>G</keycap>
+                </keycombo></entry>
+
+              <entry>Umožňuje uživateli vytvořit záznam ve výchozím souboru glosáře.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Hledat v projektu</guimenuitem></entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>F</keycap>
+                </keycombo></entry>
+
+              <entry>Otevře nové okno <link linkend="section.search.window">Hledat</link>.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Přepnout velikost písma</guimenuitem></entry>
+
+              <entry><keycombo>
+                  <keycap>Shift</keycap>
+
+                  <keycap>F3</keycap>
+                </keycombo> (see text)</entry>
+
+              <entry>Změní velikost písmen zvýrazněného textu v cílovém segmentu podle vybrané možnosti (malá písmena, VELKÁ PÍSMENA, Velká První Písmena). Tyto tři možnosti můžete cyklicky procházet opakovaným tisknutím Shift+F3<indexterm>
+                  <primary>Klávesové zkratky</primary> <secondary>Shift+F3 - Výběr velikosti písma</secondary>
+                </indexterm>. Pokud není vybrán žádný text, <application>OmegaT</application> vybere slovo, které se zprava dotýká kurzoru.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Označit přibližný překlad #N</guimenuitem></entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>#N</keycap>
+                </keycombo></entry>
+
+              <entry>(#N představuje číslici 1 až 5) - Vybere N-tý přibližný překlad zobrazený v podokně Přibližné překlady a nahradí obsah nebo bude vložen do otevřeného segmentu. <xref linkend="match.viewer"/> popisuje barvu kódování podrobněji.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Použít jako výchozí překlad</guimenuitem></entry>
+
+              <entry/>
+
+              <entry>Pokud existuje několik alternativních překladu aktivního segmentu, můžete označit vybranou alternativu jako výchozí překlad. Pokud je k dispozici jen jeden překlad, bude záznam zašeděn.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Vytvořit alternativní překlad</guimenuitem></entry>
+
+              <entry/>
+
+              <entry>Jeden a ten samý segment může, v závislosti na kontextu, vyžadovat různé překlady. Vyberte tuto položku v nabídce, pokud se aktuální segment nehodí a vložte alternativní překlad.</entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+    </section>
+
+    <section id="submenu.GoTo">
+      <title>Přejít<indexterm class="singular">
+          <primary>Hlavní nabídka</primary> <secondary>Přejít</secondary>
+        </indexterm></title>
+
+      <table colsep="1">
+        <title>Nabídka ‚Přejít‛</title>
+
+        <tgroup cols="3" colsep="1">
+          <colspec align="left" colnum="1" colwidth="100"/>
+
+          <colspec align="left" colnum="2" colwidth="100"/>
+
+          <tbody>
+            <row>
+              <entry><guimenuitem>Další nepřeložený segment</guimenuitem></entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>U</keycap>
+                </keycombo></entry>
+
+              <entry>Přesune se na následující segment, který nemá v překladové paměti žádný ekvivalent.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Další segment</guimenuitem></entry>
+
+              <entry><keycombo> <keycap>Ctrl</keycap> <keycap>N</keycap> </keycombo> nebo <keycap>Enter</keycap> nebo <keycap>TAB</keycap></entry>
+
+              <entry>Přesune se na další segment. Pokud je aktuální segment posledním v souboru, přesune se na první segment dalšího souboru.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Předchozí segment</guimenuitem></entry>
+
+              <entry><keycombo> <keycap>Ctrl</keycap> <keycap>P</keycap> </keycombo> nebo <keycombo> <keycap>Ctrl</keycap> <keycap>Enter</keycap> </keycombo> nebo <keycombo> <keycap>Ctrl</keycap> <keycap>Tab</keycap> </keycombo></entry>
+
+              <entry>Přesune se na předchozí segment. Pokud je aktuální segment prvním v souboru, přesune se na poslední segment předchozího souboru.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Segment číslo...</guimenuitem></entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>J</keycap>
+                </keycombo></entry>
+
+              <entry>Po zadání čísla segmentu bude daný segment otevřen.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Další poznámka</guimenuitem></entry>
+
+              <entry/>
+
+              <entry>Otevře další segment s přiloženou poznámkou.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Předchozí poznámka</guimenuitem></entry>
+
+              <entry/>
+
+              <entry>Otevře předchozí segment s poznámkou.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Vpřed v historii</guimenuitem></entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>Shift</keycap>
+
+                  <keycap>N</keycap>
+                </keycombo></entry>
+
+              <entry><application>OmegaT</application> si pamatuje zpracovávané segmenty. Tímto příkazem můžete přejít na segment, který jste v předchozím kroku opustili příkazem <guimenuitem>Zpět v historii</guimenuitem></entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Zpět v historii</guimenuitem></entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>Shift</keycap>
+
+                  <keycap>P</keycap>
+                </keycombo></entry>
+
+              <entry>Tímto příkazem se můžete přesunout zpět o jeden segment, a vrátit se zpět na aktuální segment použitím příkazu <guimenuitem>Vpřed v historii</guimenuitem>. </entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+    </section>
+
+    <section id="submenu.View">
+      <title>Zobrazit<indexterm class="singular">
+          <primary>Hlavní nabídka</primary> <secondary>Zobrazit</secondary>
+        </indexterm></title>
+
+      <table colsep="1">
+        <title>Nabídka ‚Zobrazit‛</title>
+
+        <tgroup cols="2" colsep="1">
+          <colspec align="left" colnum="1" colwidth="100"/>
+
+          <tbody>
+            <row>
+              <entry><guimenuitem>Označit přeložené segmenty</guimenuitem></entry>
+
+              <entry>Pokud je tato možnost vybraná, přeložené segmenty budou označeny žlutým zvýrazněním.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Označit nepřeložené segmenty</guimenuitem></entry>
+
+              <entry>Pokud je tato možnost vybraná, nepřeložené segmenty budou označeny fialovým zvýrazněním.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Ukázat zdrojové segmenty</guimenuitem></entry>
+
+              <entry>Pokud je tato možnost vybraná, budou zdrojové segmenty zobrazeny se zeleným zvýrazněním. Pokud tato možnost vybraná není, zdrojové segmenty nebudou takto zobrazovány.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Označit nejedinečné segmenty</guimenuitem></entry>
+
+              <entry>Pokud je tato možnost vybraná, nejedinečné segmenty budou označeny světle šedou.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Označit segmenty s Poznámkami</guimenuitem></entry>
+
+              <entry>Pokud je tato možnost vybraná, segmenty s poznámkami budou označeny modrozeleně. Toto označení má přednost před volbami Označit přeložené segmenty a Označit nepřeložené segmenty.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Označit nezlomitelné mezery</guimenuitem></entry>
+
+              <entry>Pokud je tato možnost vybraná, pak budou nezlomitelné mezery v segmentech označeny s šedým pozadím.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Informace k úpravám</guimenuitem></entry>
+
+              <entry>Když v možnosti zobrazit informace k úpravám vyberete volbu <emphasis>Zobrazovat u otevřeného segmentu</emphasis> bude zobrazen čas a autor poslední změny u aktuálně otevřeného segmentu. Když vyberete volbu <emphasis>Zobrazovat pro všechny segmenty</emphasis>, bude tato informace u všech segmentů a volba <emphasis>Nezobrazovat žádné</emphasis> zobrazování vypne.</entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+    </section>
+
+    <section id="submenu.Tools">
+      <title>Nástroje<indexterm class="singular">
+          <primary>Hlavní nabídka</primary> <secondary>Nástroje</secondary>
+        </indexterm></title>
+
+      <table colsep="1">
+        <title>Nabídka ‚Nástroje‛</title>
+
+        <indexterm class="singular">
+          <primary>Shody</primary> <secondary>Statistika shody</secondary>
+        </indexterm>
+
+        <indexterm class="singular">
+          <primary>Projekt</primary> <secondary>Statistika shody</secondary>
+        </indexterm>
+
+        <indexterm class="singular">
+          <primary>Projekt</primary> <secondary>Statistika</secondary>
+        </indexterm>
+
+        <tgroup cols="2" colsep="1">
+          <colspec align="left" colnum="1" colwidth="100"/>
+
+          <tbody>
+            <row>
+              <entry><guimenuitem>Ověření tagů</guimenuitem></entry>
+
+              <entry><guimenu>Ctrl+T</guimenu>Zkontroluje chybějící nebo nesprávně umístěné tagy ve formátovaných souborech. Zobrazí seznam segmentů s chybnými tagy a možnými nesrovnalostmi. Viz <link linkend="section.tag.validation">Ověření tagů</link> a <xref linkend="chapter.formatted.text"/>.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Odstranit tagy</guimenuitem></entry>
+
+              <entry>Pokud aktivováno, všechny formátovací tagy budou ze zdrojových segmentů odstraněny. Tato funkce je užitečná zvláště při práci s texty, kde vnitřní formátování nemá žádné skutečné využití (např. PDF rozpoznané pomocí OCR, špatně zkonvertované .odt nebo .docx, atd). Odstraněny budou jen vnitřní tagy, takže běžně by neměl být žádný problém s otevíráním přeložených dokumentů. Neviditelné formátování (tj. takové, které se nezobrazí jako tagy v editoru OmegaT) v přeloženém dokumentu zůstane.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Statistika</guimenuitem></entry>
+
+              <entry>Otevře nové okno a zobrazí statistiku projektu, tj. celkové hodnoty projektu a hodnoty pro každý soubor v projektu.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Statistika shody</guimenuitem></entry>
+
+              <entry>Zobrazí Statistiku shody pro projekt: počty opakování, přesné shody, přibližných překladů a nulové shody pro segmenty, slova a znaky.</entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+    </section>
+
+    <section id="submenu.Options">
+      <title><indexterm class="singular">
+          <primary>Hlavní nabídka</primary> <secondary>Možnosti</secondary>
+        </indexterm>Možnosti</title>
+
+      <table colsep="1">
+        <title>Nabídka ‚Možnosti‛</title>
+
+        <tgroup cols="2" colsep="1">
+          <colspec align="left" colnum="1" colwidth="100"/>
+
+          <tbody>
+            <row>
+              <entry><guimenuitem>Použít TAB pro postup</guimenuitem></entry>
+
+              <entry>Nastaví klíč potvrzení segmentu na <guimenuitem>TAB</guimenuitem> místo přednastaveného <guimenuitem>Enter</guimenuitem>. Tato možnost je užitečná pro některé čínské, japonské nebo korejské znakové vstupní systémy.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Vždy potvrdit ukončení</guimenuitem></entry>
+
+              <entry>Program si před ukončením vyžádá potvrzení.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Strojový překlad</guimenuitem></entry>
+
+              <entry>Umožní vám aktivovat/deaktivovat nabízené nástroje Strojového překladu. Pokud je toto aktivní, zkratkou <keycombo> <keycap>Ctrl</keycap> <keycap>M</keycap> </keycombo> vložíte návrh do cílové části aktivního segmentu.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Glosář</guimenuitem></entry>
+
+              <entry>rezervováno pro budoucí použití pluginů.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>TransTips</guimenuitem></entry>
+
+              <entry>Umožňuje aktivovat/deaktivovat funkci <emphasis>TransTips</emphasis> a nastavit její možnosti <emphasis>přesné shody.</emphasis> Když je   <emphasis>TransTips</emphasis> aktivní, stačí kliknout pravým tlačítkem na zvýrazněné slovo ve zdroji a otevře se malá nabídka se záznamy z glosáře pro to slovo, které jste naklikli. Pak můžete kliknout na vybraný překlad a vložit jej tak do cílového segmentu na pozici kurzoru. Pokud je označeno<emphasis>TransTips/Přesná shoda</emphasis>, budou se vyhledávat jen celá slova, jinak bude program vyhledávat i podle částí slov.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Písmo...</guimenuitem></entry>
+
+              <entry>Zobrazí dialogové okno pro změnu písma zobrazování písma. Uživatelé starších počítačů, kde je změna velikosti okna pomalá, mohou vyzkoušet změnu písma. Viz nastavení písma v <link linkend="chapter.misc">Různé</link></entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Filtry souborů...</guimenuitem></entry>
+
+              <entry>Zobrazí dialogové okno <link linkend="chapter.file.filters">Filtry souborů</link> pro konfiguraci práce se soubory a jejich zpracování.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Segmentace...</guimenuitem></entry>
+
+              <entry>Otevře dialogové okno <link linkend="chapter.segmentation">Nastavení segmentace</link> pro nastavení segmentace textu.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Kontrola pravopisu</guimenuitem></entry>
+
+              <entry>Otevře okno <link linkend="chapter.spellchecker">Nastavení kontroly pravopisu</link> a uživatel tak může instalovat, nastavovat a aktivovat slovníky kontroly pravopisu.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Nastavení editace</guimenuitem></entry>
+
+              <entry>Zobrazí okno <link linkend="chapter.translation.editing">Volby nastavení editace</link> pro další konfiguraci možností.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Ověření tagů...</guimenuitem></entry>
+
+              <entry>Pro programátory: Umožňuje vám konfigurovat možnosti validátoru tagů tak, aby kontroloval i programovací proměnné (%...).</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Tým...</guimenuitem></entry>
+
+              <entry>Vloží se vaše jméno a to bude přiloženo ke každému segmentu, který přeložíte.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Externí soubory TMX</guimenuitem></entry>
+
+              <entry>Umožní uživateli rozhodnout, jak zacházet s tagy v cizích souborech TMX (tj. TMX, které nevygeneroval program OmgegaT).</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Zobrazit...</guimenuitem></entry>
+
+              <entry>Obsahuje možnost zobrazit všechny segmenty tučně a označit první nejedinečný segment.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Ukládat automaticky...</guimenuitem></entry>
+
+              <entry>Zde si uživatel může vybrat interval - v minutách a sekundách - mezi průběžným automatickým ukládáním projektu. Minimum je 10 sekund.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Proxy přihlášení ...</guimenuitem></entry>
+
+              <entry>Vložte své uživatelské jména a heslo pokud používáte proxy k přístupu ke svým projektům.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Obnovit Hlavní okno</guimenuitem></entry>
+
+              <entry>Obnovit výchozí nastavení všech komponent hlavního okna OmegaT. Tuto vlastnost využijete, když jste odpojili, přesunuli nebo skryli jednu nebo více komponent a nedaří se vám obnovit jejich žádané rozestavění. Je možno toto použít také když se podokna nezobrazují správně po upgradu OmegaT.</entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+    </section>
+
+    <section id="submenu.Help">
+      <title>Nápověda<indexterm class="singular">
+          <primary>Hlavní nabídka</primary> <secondary>Nápověda</secondary>
+        </indexterm></title>
+
+      <table colsep="1">
+        <title>Nabídka ‚Nápověda‛</title>
+
+        <tgroup cols="2" colsep="1">
+          <colspec align="left" colnum="1" colwidth="100"/>
+
+          <tbody>
+            <row>
+              <entry><guimenuitem>Uživatelská příručka...</guimenuitem></entry>
+
+              <entry><keycap>F1:</keycap> Otevře prohlížeč nápovědy, který zobrazí uživatelskou příručku v samostatném okně.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>O aplikaci...</guimenuitem></entry>
+
+              <entry>Zobrazí informace o autorských právech, poděkování a licenci.</entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+    </section>
+  </section>
+
+  <section id="keyboard.shortcuts">
+    <title>Klávesové zkratky<indexterm class="singular">
+        <primary>Klávesové zkratky</primary>
+      </indexterm></title>
+
+    <para>Následující klávesové zkratky jsou dostupné v hlavním okně. Pokud je v popředí jiné okno, klikněte na Hlavní okno, a přesuňte jej na popředí, nebo stiskem <keycap>Esc</keycap>  zavřee to jiné okno.</para>
+
+    <para>Zkratky se aktivují stisknutím <keycap>Ctrl</keycap> a písmena. Některé zkratky obsahují jiné klávesy. Kvůli lepší čitelnosti jsou zde písmena ze zkratek vypsána jako kapitálky.</para>
+
+    <para>Ctrl se používá u Windows, UNIXu a UNIXových operačních systémů s klávesnicemi obsahující klávesu <keycap>Ctrl</keycap> / <keycap>Control</keycap>. Uživatelé Maců místo toho používají kombinaci <guimenuitem>cmd+klávesa.</guimenuitem> Na klávesnicích Applu má klávesa <guimenuitem>cmd</guimenuitem> na sobě buď popisek command nebo ikonu jablka.</para>
+
+    <itemizedlist>
+      <listitem>
+        <para>Správa projektu</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Upravit</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Pohyb mezi segmenty</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Referenční okna</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Ostatní</para>
+      </listitem>
+    </itemizedlist>
+
+    <section>
+      <title id="keyboard.project.management"><indexterm class="singular">
+          <primary>Klávesové zkratky</primary> <secondary>Projekt</secondary>
+        </indexterm>Správa projektu<indexterm class="singular">
+          <primary>Projekt</primary> <secondary>Klávesové zkratky pro Správu projektu</secondary>
+        </indexterm></title>
+
+      <table colsep="1">
+        <title>Klávesové zkratky pro Správu projektu</title>
+
+        <tgroup cols="3" colsep="1">
+          <colspec align="left" colnum="1" colwidth="100"/>
+
+          <colspec align="left" colnum="2" colwidth="100"/>
+
+          <tbody>
+            <row>
+              <entry>Otevřít projekt</entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>O</keycap>
+                </keycombo></entry>
+
+              <entry>Zobrazí dialogové okno pro výběr již existujícího projektu.</entry>
+            </row>
+
+            <row>
+              <entry>Uložit</entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>S</keycap>
+                </keycombo></entry>
+
+              <entry>Uloží aktuální práci do interní překladové paměti (soubor project_save.tmx, který je umístěný v adresáři projektu <filename>omegat</filename>). </entry>
+            </row>
+
+            <row>
+              <entry>Zavřít projekt</entry>
+
+              <entry><keycombo>
+                  <keycap>Shift</keycap>
+
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>W</keycap>
+                </keycombo></entry>
+
+              <entry>Zavře aktuální projekt.</entry>
+            </row>
+
+            <row>
+              <entry>Vytvořit přeložené dokumenty</entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>D</keycap>
+                </keycombo></entry>
+
+              <entry>Vytvoří přeložené dokumenty a uloží je do cílového adresáře projektu a vytvoří soubory překladové paměti (soubory tmx level1, level2 a omegat) v hlavním adresáři projektu.</entry>
+            </row>
+
+            <row>
+              <entry>Vlastnosti projektu</entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>E</keycap>
+                </keycombo></entry>
+
+              <entry>Zobrazí okno Vlastnosti projektu, kde je možno v případě potřeby provádět změny.</entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+    </section>
+
+    <section id="keyboard.editing">
+      <title><indexterm class="singular">
+          <primary>Klávesové zkratky</primary> <secondary>Upravit</secondary>
+        </indexterm>Upravit<indexterm class="singular">
+          <primary>Klávesové zkratky</primary> <secondary>Přejít</secondary>
+        </indexterm></title>
+
+      <table colsep="1">
+        <title>Klávesové zkratky nabídky ‚Upravit‛</title>
+
+        <tgroup cols="3" colsep="1">
+          <colspec align="left" colnum="1" colwidth="100"/>
+
+          <colspec align="left" colnum="2" colwidth="100"/>
+
+          <tbody>
+            <row>
+              <entry>Zpět</entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>Z</keycap>
+                </keycombo></entry>
+
+              <entry>Zruší poslední akci editace v aktuálním segmentu.</entry>
+            </row>
+
+            <row>
+              <entry>Obnovit</entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>Y</keycap>
+                </keycombo></entry>
+
+              <entry>V aktuálním cílovém segmentu obnoví krok editace, který byl právě zrušen.</entry>
+            </row>
+
+            <row>
+              <entry>Označit přibližný překlad #N</entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>#N</keycap>
+                </keycombo></entry>
+
+              <entry>#N představuje číslici od 1 do 5. Vybere N-tý shodný výraz v okně shody (ve výchozím nastavení je vybraný první shodný výraz).</entry>
+            </row>
+
+            <row>
+              <entry>Přepsat nalezeným překladem</entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>R</keycap>
+                </keycombo></entry>
+
+              <entry>Přepíše obsah aktuálního cílového segmentu vybraným shodným výrazem (ve výchozím nastavení je vybraný první shodný výraz).</entry>
+            </row>
+
+            <row>
+              <entry>Vložit nalezený překlad</entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>I</keycap>
+                </keycombo></entry>
+
+              <entry>Vloží vybraný shodný výraz na pozici kurzoru v aktuálním cílovém segmentu (ve výchozím nastavení je vybraný první shodný výraz).</entry>
+            </row>
+
+            <row>
+              <entry>Přepsat zdrojem</entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>Shift+R</keycap>
+                </keycombo></entry>
+
+              <entry>Přepíše obsah aktuálního cílového segmentu obsahem zdrojového textu.</entry>
+            </row>
+
+            <row>
+              <entry>Vložit zdroj</entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>Shift+I</keycap>
+                </keycombo></entry>
+
+              <entry>Vloží textový obsah zdroje do cílového segmentu na pozici kurzoru.</entry>
+            </row>
+
+            <row>
+              <entry>Vložit tagy zdroje</entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>Shift+T</keycap>
+                </keycombo></entry>
+
+              <entry>Vloží tagy zdroje do cílového segmentu na pozici kurzoru.</entry>
+            </row>
+
+            <row>
+              <entry>Hledat v projektu</entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>F</keycap>
+                </keycombo></entry>
+
+              <entry>Zobrazí dialogové okno pro provedení hledání v projektu.</entry>
+            </row>
+
+            <row>
+              <entry>Přepsat strojovým překladem</entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>M</keycap>
+                </keycombo></entry>
+
+              <entry>Nahradí cílový segment strojovým překladem zdroje. Neprovede žádnou akci, pokud je strojový překlad deaktivován (viz Hlavní nabídka &gt; Možnosti &gt; Strojový překlad)</entry>
+            </row>
+
+            <row>
+              <entry>Exportovat výběr</entry>
+
+              <entry><keycombo>
+                  <keycap>Shift</keycap>
+
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>C</keycap>
+                </keycombo></entry>
+
+              <entry>Exportuje aktuální výběr do textového souboru k dalšímu zpracování.</entry>
+            </row>
+
+            <row>
+              <entry>Vytvořit nový záznam Glosáře</entry>
+
+              <entry><keycombo>
+                  <keycap>Shift</keycap>
+
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>G</keycap>
+                </keycombo></entry>
+
+              <entry>Umožňuje uživateli vytvořit záznam ve výchozím souboru glosáře.</entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+    </section>
+
+    <section id="keyboard.moving.around">
+      <title><indexterm class="singular">
+          <primary>Klávesové zkratky</primary> <secondary>Přejít</secondary>
+        </indexterm>Pohyb mezi segmenty</title>
+
+      <table colsep="1">
+        <title>Klávesové zkratky pro Pohyb mezi segmenty</title>
+
+        <tgroup cols="3" colsep="1">
+          <colspec align="left" colnum="1" colwidth="100"/>
+
+          <colspec align="left" colnum="2" colwidth="100"/>
+
+          <tbody>
+            <row>
+              <entry>Další nepřeložený segment</entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>U</keycap>
+                </keycombo></entry>
+
+              <entry>Přesune pole editace na následující segment, který není registrovaný v překladové paměti projektu.</entry>
+            </row>
+
+            <row>
+              <entry>Další segment</entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>N</keycap>
+                </keycombo>, <keycap>Enter</keycap> or
+              <keycap>Return</keycap></entry>
+
+              <entry>Přesune pole editace na následující segment.</entry>
+            </row>
+
+            <row>
+              <entry>Předchozí segment</entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>P</keycap>
+                </keycombo></entry>
+
+              <entry>Přesune pole editace na předcházející segment.</entry>
+            </row>
+
+            <row>
+              <entry>Segment číslo...</entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>J</keycap>
+                </keycombo></entry>
+
+              <entry>Přesune na číslo zadaného segmentu.</entry>
+            </row>
+
+            <row>
+              <entry>Zpět v historii</entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>Shift+P</keycap>
+                </keycombo></entry>
+
+              <entry>Přejde v historii o jeden segment zpět.</entry>
+            </row>
+
+            <row>
+              <entry>Vpřed v historii</entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>Shift+N</keycap>
+                </keycombo></entry>
+
+              <entry>Přejde v historii o jeden segment vpřed.</entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+    </section>
+
+    <section id="keyboard.other">
+      <title><indexterm class="singular">
+          <primary>Klávesové zkratky</primary> <secondary>Ostatní</secondary>
+        </indexterm>Ostatní</title>
+
+      <table colsep="1">
+        <title>Různé klávesové zkratky</title>
+
+        <tgroup cols="3" colsep="1">
+          <colspec align="left" colnum="1" colwidth="100"/>
+
+          <colspec align="left" colnum="2" colwidth="100"/>
+
+          <tbody>
+            <row>
+              <entry>Seznam souborů projektu</entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>L</keycap>
+                </keycombo></entry>
+
+              <entry>Zobrazí seznam Souborů projektu.</entry>
+            </row>
+
+            <row>
+              <entry>Ověření tagů</entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>T</keycap>
+                </keycombo></entry>
+
+              <entry>Otevře okno funkce Ověření tagů.</entry>
+            </row>
+
+            <row>
+              <entry>Exportovat výběr</entry>
+
+              <entry><keycombo>
+                  <keycap>Shift</keycap>
+
+                  <keycap>Ctrl+C</keycap>
+                </keycombo></entry>
+
+              <entry>Exportuje aktuální výběr nebo když není nic vybráno, přesune aktuální zdroj. Text je exportován do prostého textového souboru.</entry>
+            </row>
+
+            <row>
+              <entry>Hledat v projektu</entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>F</keycap>
+                </keycombo></entry>
+
+              <entry>Otevře nové okno Hledat.</entry>
+            </row>
+
+            <row>
+              <entry>Soubory Nápovědy</entry>
+
+              <entry><keycap>F1</keycap></entry>
+
+              <entry>Zobrazí soubory Nápovědy aplikace <application>OmegaT</application> v samostatném okně.</entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+    </section>
+  </section>
+</chapter>

@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<chapter id="chapter.misc">
+  <title>Různá témata<indexterm class="singular">
+      <primary>Různé</primary>
+    </indexterm></title>
+
+  <section id="omegat.misc.console.mode">
+    <title><application><indexterm class="singular">
+        <primary>OmegaT v režimu příkazového řádku</primary> <seealso>Různé</seealso>
+      </indexterm>OmegaT</application> Režim příkazového řádku<indexterm class="singular">
+        <primary>Různé</primary> <secondary>OmegaT v režimu příkazového řádku</secondary>
+      </indexterm></title>
+
+    <note>
+      <para>Tato část bude zajímat asi jen pokročilé uživatele.</para>
+    </note>
+
+    <para>Účel režimu příkazového řádku (tj. terminál/konzole) je povolit použití <application>OmegaT</application> jako překladatelský nástroj ve skriptovém prostředí. Když aplikaci spustíte v příkazovém řádku, nenahraje se žádné grafické prostředí (je možné pracovat v jakémkoliv typu příkazovém řádku) a daný projekt je přeložen automaticky. Jako příklad poslouží softwarový projekt, kde je uživatelské prostředí lokalizováno do množství jazyků. Použitím režimu příkazového řádku je možno zařadit generování lokalizovaného prostředí do procesu sestavení softwaru.</para>
+
+    <section id="misc.console.mode.prerequisites">
+      <title>Co budeme potřebovat</title>
+
+      <para>Aby šlo spustit aplikaci OmegaT, musíme mít platný projekt OmegaT. Umístění není důležité, protože se tento údaj se musí zadat přesně v příkazovém řádku při startu.</para>
+
+      <para>Pokud budete potřebovat nestandardní nastavení, musíte mít odpovídající  konfigurační soubory (<literal>filters.conf</literal> a <literal>segmentation.conf)</literal>. Toho lze dosáhnout dvěma způsoby:</para>
+
+      <itemizedlist>
+        <listitem>
+          <para>Spusťte aplikaci <application>OmegaT</application> běžným způsobem (přes grafické uživatelské prostředí / GUI) a zvolte vhodné nastavení. Když <application>OmegaT</application> spustíte v režimu příkazového řádku, tak bude použito zadané nastavení.</para>
+        </listitem>
+
+        <listitem>
+          <para>Když nejde <application>OmegaT</application> spustit běžným způsobem (není dostupné žádné grafické prostředí): zkopírujte do patřičného adresáře soubory nastavení z jiné instalace aplikace <application>OmegaT</application> na jiném počítači. Umístění není důležité, protože se tento údaj může zadat v příkazovém řádku při startu (vizte níže). Důležité soubory <literal>filters.conf</literal> a <literal>segmentation.conf</literal> můžete je najít v domovském adresáři daného uživatele (např. <literal>C:\Dokumenty a nastavení\%Uživatel%\<application>OmegaT</application></literal> ve Windows, <literal>%uživatel%/.omegat/</literal> v Linuxu)</para>
+        </listitem>
+      </itemizedlist>
+    </section>
+
+    <section id="starting.in.misc.console.mode">
+      <title>Spouštění OmegaT v režimu příkazového řádku.</title>
+
+      <para>Pro spuštění OmegaT v režimu příkazového řádku je nutné při startu specifikovat dodatečné parametry. Nejdůležitější z nich je <literal>&lt;project-dir&gt;</literal>, a volitelně <literal>--config-dir=&lt;config-dir&gt;. </literal>Příklad:</para>
+
+      <para><literal>$&gt; java -jar <application>OmegaT</application>.jar
+      /path/to/project \</literal></para>
+
+      <para><literal>--config-dir=/cesta/ke/konfiguracnim-souborum/ \</literal></para>
+
+      <para><literal> --mode=console-translate \</literal></para>
+
+      <para><literal> --source-pattern={regexp} \</literal></para>
+
+      <para><literal> --tag-validation=[block|warn] </literal></para>
+
+      <para><emphasis role="bold">Vysvětlení:</emphasis></para>
+
+      <itemizedlist>
+        <listitem>
+          <para><literal>&lt;project-dir&gt;</literal> prozradí aplikaci <application>OmegaT</application> kde najít projekt, který má být překládán. Pokud je to tedy zadáno, <application>OmegaT</application> startuje v režimu příkazového řádku a přeloží zadaný projekt.</para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para><literal>--config-dir=&lt;config-dir&gt;</literal> umožňuje sdělit aplikaci, ve kterém adresáři jsou uloženy konfigurační soubory. Když není zadáno, OmegaT se vrátí k výchozím hodnotám (adresář OmegaT v domovské složce uživatele, nebo když není dostupné: adresář, ve kterém se právě pracuje).</para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para><literal>--mode=console-translate </literal> <application>OmegaT</application> startuje v režimu příkazového řádku a přeloží zadaný projekt. </para>
+        </listitem>
+
+        <listitem>
+          <para><literal>--source-pattern={regexp} </literal> Tímto způsobem je možno specifikovat soubory, které se mají překládat. Tady je příklad regulárního výrazu: <filename>test\.html</filename></para>
+        </listitem>
+
+        <listitem>
+          <para><literal>--tag-validation=[abort|warn] </literal> Když je aktivní hodnota ‚abort‛ (‚přerušit‛), pak v případě nalezení chyby při ověřování tagů bude běh programu přerušen. Když je aktivní hodnota ‚warn‛ (‚varovat‛), vypíšou se chyby tagů a program pokračuje v běhu. Jinak ověřování tagů není provedeno.</para>
+        </listitem>
+      </itemizedlist>
+    </section>
+
+    <section id="misc.console.mode.option.quiet">
+      <title>Možnost Quiet (‚Tichý chod‛)</title>
+
+      <para>Dodatečný parametr příkazového řádku režimu příkazového řádku: <literal>--quiet.</literal> V „quiet“ („tichém“) režimu se na obrazovce zobrazuje méně informací. Hlášení, která byste obvykle nalezli ve stavové liště se nebudou zobrazovat.</para>
+
+      <para>Příklad použití: <literal>java -jar <application>OmegaT</application>.jar /path/to/project --mode=console-translate --quiet</literal></para>
+    </section>
+
+    <section id="misc.console.mode.option.validatetags">
+      <title>Možnosti Ověření tagů</title>
+
+      <para>Další dodatečný parametr příkazového řádku režimu příkazového řádku: <literal>--tag-validation=[abort|warn].</literal> Když přidáte tento parametr, pak bude ověření tagů provedeno před překladem/alignováním. Pokud je aktivní hodnota  <literal>abort</literal> (‚přerušit‛), pak se v případě chyby tagu zobrazí daná chyba a program bude ukončen. Pokud je aktivní hodnota <literal>warn</literal> (‚varovat‛), pak bude chyba vypsaná a OmegaT pokračuje v běhu.</para>
+
+      <para>Příklad použití: <literal>java -jar <application>OmegaT</application>.jar /path/to/project --mode=console-translate --tag-validation=abort</literal></para>
+    </section>
+  </section>
+
+  <section>
+    <title>Automatický aligner pro vlastnosti Java<indexterm class="singular">
+        <primary>Různé</primary> <secondary>Automatický aligner pro vlastnosti Java</secondary> <seealso>Různé</seealso>
+      </indexterm></title>
+
+    <para>OmegaT umí v režimu příkazového řádku zarovnat / alignovat Java .properties. Pokud máte zdrojový soubor a jeho překlad Properties se stejným obsahem ve vašem jazykovém páru, tento postup vytvoří pro tyto obsahy odpovídající soubor tmx. Používání:</para>
+
+    <para><literal>java -jar OmegaT.jar --mode=console-align /my-project-dir
+    --alignDir=/translatedFiles/ </literal></para>
+
+    <para><filename>alignDir</filename> musí obsahovat překlad v cílovém jazyce projektu. Např. pokud se jedná o projekt EN-&gt;FR, adresář alignDir musí obsahovat balíček končící na _fr. Výsledná tmx je uložena v adresáři <literal>omegat </literal> s názvem <filename>align.tmx</filename>.</para>
+  </section>
+
+  <section id="font.settings">
+    <title>Nastavení písma<indexterm class="singular">
+        <primary>Různé</primary> <secondary>Nastavení písma</secondary>
+      </indexterm></title>
+
+    <para>V tomto dialogovém okně je možno definovat písmo, které <application>OmegaT</application> používá v následujících oknech a podoknech. </para>
+
+    <itemizedlist>
+      <listitem>
+        <para>Hlavní okno <application>OmegaT</application>  (Editor, Přibližné překlady, Glosář)</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Okno Hledat v textu</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Okno Ověření tagů</para>
+      </listitem>
+    </itemizedlist>
+
+    <para>Dialogové okno můžete zobrazit přes položku Hlavní nabídky <indexterm class="singular">
+        <primary>Nabídka Možnosti</primary> <secondary>Písmo...</secondary>
+      </indexterm><menuchoice> <guimenu>Možnosti</guimenu> <guimenuitem>Písmo...</guimenuitem> </menuchoice> Dialogové okno obsahuje:</para>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis role="bold">Písmo</emphasis> v rozbalovacím menu si vyberte z písem dostupných ve vašem počítači.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis role="bold">Velikost:</emphasis> změnou ovlivníte velikost písma</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis role="bold">Ukázkový text:</emphasis> v tomto políčku bezprostředně uvidíte ukázku vybraného písma</para>
+      </listitem>
+    </itemizedlist>
+
+    <para><emphasis role="bold">Poznámka:</emphasis>&lt; V některých případech to může trvat delší dobu, než OmegaT zaktualizuje zobrazování po změně nastavení písma. Toto se může stát hlavně v případě, když je v Editoru otevřený značně velký soubor obsahuje spousty segmentů, anebo je používám pomalý hardware. Také některé fonty jsou pro některé páry jazyků vhodnější než pro jiné. Když překládáte mezi dvěma jazyky užívajícími různé abecedy/systémy zápisu (jako např. ruština a japonština), zde je pak obzvlášť nutné pečlivě vybrat písmo, které může být použito pro oba jazyky.</para>
+  </section>
+
+  <section id="preventing.data.loss">
+    <title>Prevence ztráty dat<indexterm class="singular">
+        <primary>Různé</primary> <secondary>Prevence ztráty dat</secondary>
+      </indexterm></title>
+
+    <para><application>OmegaT</application> je robustní aplikace. Nicméně byste měli při používání programu <application>OmegaT</application> dbát na preventivní opatření proti ztrátě dat stejně, jako byste to činili s jakoukoliv jinou aplikací. Když překládáte své soubory ukládá <application>OmegaT</application> celý váš postup do překladové paměti <literal>project_save.tmx</literal>, která se nachází v podadresáři projektu <literal>/omegat</literal>.</para>
+
+    <para>Do stejného adresáře zálohuje OmegaT překladovou paměť project_save.tmx.YEARMMDDHHNN.bak, a to při každém otevření nebo znovunačtení projektu. YEAR představuje 4-ciferně rok, MM je měsíc, DD den měsíce, HH a NN jsou hodiny a minuty, kdy byla uložena předcházející překladová paměť.</para>
+
+    <para>Pokud se domníváte, že jste přišli o svůj překlad, zkuste následující postup k obnovení projektu do takového stavu, kdy byl naposledy uložen, ve většině případů to bude v rámci 10 minut od posledních úprav:</para>
+
+    <orderedlist>
+      <listitem>
+        <para>zavřete projekt</para>
+      </listitem>
+
+      <listitem>
+        <para>přejmenujte aktuální soubor <filename>project_save.tmx </filename> na něco, co si budete pamatovat (např. <filename>project_save.tmx.nahradni</filename>)</para>
+      </listitem>
+
+      <listitem>
+        <para>označte zálohovou překladovou paměť, u které je nejpravděpodobnější, že obsahuje vámi hledaná data</para>
+      </listitem>
+
+      <listitem>
+        <para>přejmenujte ji na <literal>project_save.tmx</literal></para>
+      </listitem>
+
+      <listitem>
+        <para>otevřete projekt</para>
+      </listitem>
+    </orderedlist>
+
+    <para>Jak se vyhnout ztrátě importovaných dat:</para>
+
+    <itemizedlist>
+      <listitem>
+        <para>Pravidelně si pořizujte kopii souboru /omegat/project_save.tmx na záložní médium, jako je CD nebo DVD.</para>
+      </listitem>
+
+      <listitem>
+        <para>Dokud se dobře neseznámíte s programem <application>OmegaT</application>, pravidelně vytvářejte přeložené soubory a kontrolujte, zda přeložený soubor obsahuje nejnovější verzi vašeho překladu.</para>
+      </listitem>
+
+      <listitem>
+        <para>Během práce na projektu buďte obzvláště opatrní při provádění jakýchkoliv změn v souborech v <literal>/source</literal>. Když změníte zdrojový soubor po té, co jste začali práci na překladu, může se stát, že <application>OmegaT</application> nebude sto nalézt již přeložený segment.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Do začátku využívejte tyto texty Nápovědy. Pokud narazíte na problémy, zeptejte se v <ulink url="http://tech.groups.yahoo.com/group/Omegat/">Uživatelské skupině <application>OmegaT</application></ulink>. Neváhejte se zeptat v jazyce, který nejlépe ovládáte.</para>
+      </listitem>
+    </itemizedlist>
+  </section>
+</chapter>

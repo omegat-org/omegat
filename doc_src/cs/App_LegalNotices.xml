@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<appendix id="appendix.legal.notices">
+  <title><indexterm class="singular">
+      <primary>Právní poznámky</primary>
+    </indexterm>Právní poznámky</title>
+
+  <section id="legal.notices.for.documentation">
+    <title>Pro dokumentaci<indexterm class="singular">
+        <primary>Právní poznámky</primary> <secondary>Pro dokumentaci</secondary>
+      </indexterm></title>
+
+    <para><emphasis role="bold">Copyright</emphasis></para>
+
+    <para>Dokumentace distribuovaná s aplikací <application>OmegaT</application> obsahuje Uživatelskou příručku a dokument readme.txt. Dokumentace je chráněná autorským právem Copyright ©2009 Vito Smolej. Autor kapitoly <emphasis>Naučte se používat aplikaci OmegaT za 5 minut!</emphasis> je Samuel Murray, Copyright ©2005-2012.</para>
+
+    <para><emphasis role="bold">Distribuce a změny</emphasis></para>
+
+    <para>Dokumentace je svobodným dokumentem; můžete ho šířit anebo upravovat za podmínek uvedených v licenci GNU General Public Licence jak ji uveřejnila nadace Free Software Foundation; buď verze 2 této Licence, nebo (dle vaší volby) jakékoliv novější verze. </para>
+
+    <para><emphasis role="bold">Záruka</emphasis></para>
+
+    <para>Tato dokumentace je šířena v naději, že bude užitečná, ale BEZ JAKÉKOLIV ZÁRUKY; dokonce bez implicitní záruky PRODEJNOSTI nebo VHODNOSTI NA KONKRÉTNÍ ÚČEL. Více podrobností naleznete v licenci GNU General Public License.</para>
+  </section>
+
+  <section id="legal.ntices.for.application">
+    <title>Pro aplikaci<indexterm class="singular">
+        <primary>Právní poznámky</primary> <secondary>Pro aplikaci</secondary>
+      </indexterm></title>
+
+    <para><emphasis role="bold">Copyright</emphasis></para>
+
+    <para><emphasis role="bold"><application>OmegaT</application> 2.5</emphasis> je chráněna autorským právem Copyright © 2000-2012 těchto osob Keith Godfrey, Maxym Mykhalchuk, Zoltan Bartko, Didier Briel, Kim Bruning, Alex Buloichik, Thomas Cordonnier, Sandra Jean Chua, Martin Fleurke, Jean-Christophe Helary, Thomas Huriaux, Hans-Peter Jacobs, Ibai Lakunza Velasco, Guido Leenders, Fabián Mandelbaum, John Moran, Arno Peters, Henry Pijffers, Briac Pilpré, Tiago Saboga, Andrzej Sawuła, Benjamin Siband, Rashid Umarov, Antonio Vilei, Martin Wunderlich a Michael Zakharov. </para>
+
+    <para><emphasis role="bold">Distribuce a změny</emphasis></para>
+
+    <para><emphasis role="bold">O</emphasis><emphasis role="bold">megaT 2.5</emphasis> je svobodným software; můžete ho šířit anebo upravovat za podmínek uvedených v licenci GNU General Public Licence jak ji uveřejnila nadace Free Software Foundation; buď verze 2 této Licence, nebo (dle vaší volby) jakékoliv novější verze. 
+</para>
+
+    <para><emphasis role="bold">Záruka</emphasis></para>
+
+    <para>Program <emphasis role="bold"> <application>OmegaT</application> 2.5 </emphasis>je šířený v naději, že bude užitečný, ale BEZ JAKÉKOLIV ZÁRUKY; dokonce bez implicitní záruky PRODEJNOSTI nebo VHODNOSTI NA KONKRÉTNÍ ÚČEL. Více podrobností naleznete v licenci GNU General Public License.</para>
+  </section>
+</appendix>

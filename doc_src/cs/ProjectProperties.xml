@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<chapter id="chapter.project.properties">
+  <title>Vlastnosti projektu<indexterm class="singular">
+      <primary>Projekt</primary> <secondary>Vlastnosti</secondary>
+    </indexterm></title>
+
+  <para/>
+
+  <section id="properties.dialog">
+    <title>Dialogové okno Vlastnosti projektu</title>
+
+    <para>Toto dialogové okno <menuchoice> <shortcut> <keycombo> <keycap>Ctrl</keycap> <keycap>E</keycap> </keycombo> </shortcut> <guimenu>Vlastnosti</guimenu> <guimenuitem>projektu</guimenuitem> </menuchoice> se používá pro úpravu adresářů a jazyků projektu.</para>
+
+    <para>Během práce na překladu je možné upravovat vlastnosti projektu. Nezapomeňte, že změny v nastavení projektu mohou mít následky, obzvláště, když je projekt již otevřen. Dokud nemá uživatel aspoň nějaké zkušenosti s OmegaT, je nejlepší po startu projektu považovat veškerá nastavení za definitivní - až na případ, že byste si uvědomili, že se při nastavení naskytla zásadní chyba. V části Prevence ztráty dat najdete způsoby a prostředky jak svou práci chránit.</para>
+
+    <figure>
+      <title>Okno Vlastnosti projektu</title>
+
+      <mediaobject>
+        <imageobject role="html">
+          <imagedata fileref="images/NewProject_25.png"/>
+        </imageobject>
+
+        <imageobject role="fo">
+          <imagedata fileref="images/NewProject_25.png" width="80%"/>
+        </imageobject>
+      </mediaobject>
+    </figure>
+
+    <para>Obsahuje:</para>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis role="bold">Oblast pro nastavení zdrojového a cílového jazyka projektu </emphasis></para>
+
+        <para>Jazyky můžete zadat buď ručně, nebo použít rozbalovací nabídky. Mějte na paměti, že po změně jazyků mohou být aktuálně používané překladové paměti nepoužitelné, obzvláště když se pak už neshodují s nově nastavenými jazyky.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis role="bold"><guilabel>Zapnout segmentaci na úrovni vět</guilabel> </emphasis> zaškrtávací políčko</para>
+
+        <indexterm class="singular">
+          <primary>Projekt</primary> <secondary>Zapnout segmentaci na úrovni vět</secondary>
+        </indexterm>
+
+        <para>Nastavení segmentace upravuje způsob, jakým <application>OmegaT</application> nakládá se zdrojovými soubory. Segmentace na úrovni vět představuje hlavní způsob segmentování zdroje, takže toto zaškrtávací políčko by mělo v normálním případě zůstat označené.</para>
+
+        <para>V některých málo častých případech je možno upřednostnit alternativu, tj. segmentování podle odstavců. Změna statusu tohoto zaškrtávacího pole nezmění segmentaci již existujících překladových pamětí. Pokud se během překladu rozhodnete změnit segmentaci na úrovni vět na segmentaci po odstavcích, pak vnitřní překladová paměť projektu nebude změněna (OmegaT může aktualizovat staré překladové paměti, které nepoužívaly segmentaci na úrovni vět, ale ne naopak).</para>
+
+        <para>Změna nastavení segmentace může vést k tomu, že již přeložené segmenty budou nově rozděleny nebo spojeny. To je prakticky navrátí do „nepřeloženého“ stavu, protože neodpovídají segmentům uloženým v paměti projektu, dokonce i přesto, že dřívější a teď nekorespondující překlad tam stále je.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Tlačítko <emphasis role="bold"><guibutton>Segmentace</guibutton> </emphasis><indexterm class="singular">
+            <primary>Segmentace</primary> <secondary>obecná pravidla vs. pravidla projektu</secondary>
+          </indexterm></para>
+
+        <para>Pravidla segmentace obecně platí ve všech projektech. Nicméně uživatel může potřebovat si vytvořit několik pravidel, která jsou specifická pro konkrétní projekt. Použijte toto tlačítko pro otevření dialogového okna, aktivujte zaškrtávací políčko <guimenuitem>Upravit pravidla segmentace podle konkrétního projektu</guimenuitem>, pak si dle vlastní potřeby upravte segmentační pravidla. Nová sada pravidel bude uložena spolu s projektem a nebude odporovat obecným pravidlům segmentace. Až budete chtít smazat pravidla segmentace specifická pro daný projekt, zrušte označení tohoto zaškrtávacího políčka. V kapitole <link linkend="chapter.segmentation">Segmentace zdroje</link> naleznete více informací k pravidlům segmentace.<emphasis/></para>
+
+        <para><emphasis>Tip:</emphasis> sada pravidel segmentace pro daný projekt je uložena v <filename>project/omegat/segmentation.conf.</filename></para>
+      </listitem>
+
+      <listitem>
+        <para>Tlačítko<emphasis role="bold"><guibutton>Filtry souborů...</guibutton> </emphasis><indexterm class="singular">
+            <primary>Filtry souborů</primary> <secondary>obecné vs. filtry souborů projektu</secondary>
+          </indexterm></para>
+
+        <para>Podobně jak je výše popsáno si může uživatel vytvořit projektově specifické Filtry souborů, které budou uloženy spolu s projektem, a které budou platné jen pro daný projekt. Projektově specifickou sadu filtrů souborů vytvoříte kliknutím na tlačítko <guibutton>Filtry souborů...</guibutton>, pak v zobrazeném okně aktivujte zaškrtávací políčko <guimenuitem>Upravit nastavení filtru souborů podle konkrétního projektu</guimenuitem>. Kopie nastavení filtrů se případě uloží s projektem. Až budete chtít smazat specifické filtry souborů, zrušte označení tohoto zaškrtávacího políčka. Za poznámku stojí, že v nabídce <guimenuitem>Možnosti -&gt; Filtry souborů</guimenuitem> se mění obecné uživatelské filtry, ne filtry specifické pro daný projekt. Více informací k tomuto tématu najdete v kapitole <link linkend="chapter.file.filters">Filtry souborů </link><emphasis/></para>
+
+        <para><emphasis>Tip:</emphasis> sada filtrů souborů pro daný projekt je uložena v <filename>project/omegat/filters.xml.</filename></para>
+      </listitem>
+
+      <listitem>
+        <para>Zaškrtávací políčko <emphasis role="bold">Automatické upřednostnění</emphasis><emphasis role="bold"><indexterm class="singular">
+            <primary>Projekt</primary> <secondary>Možnost automatického upřednostnění</secondary>
+          </indexterm></emphasis></para>
+
+        <para>V případě, že ve zdrojovém dokumentu jsou nejedinečné segmenty, nabízí zaškrtávací políčko Automatické upřednostnění následující dvě možnosti týkající se automatického překladu: pokud je zaškrtnuto, první přeložený segment bude považován za výchozí překlad a jeho cílový text bude automaticky použit pro pozdější shody během překladového procesu. Segmenty, které byly takto chybně přeloženy, je možno samozřejmě opravit později ručně použitím <guimenuitem>Vytvořit alternativní překlad</guimenuitem>. Pokud ale zaškrtávací políčko Automatické upřednostnění není zaškrtnuto, pak segmenty nabízející alternativní překlad zůstanou nepřeloženy, dokud uživatel sám nerozhodne, který překlad použít.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis role="bold">Oblast pro nastavení adresářů projektu</emphasis><indexterm class="singular">
+            <primary>Projekt</primary> <secondary>Změna adresářové struktury</secondary>
+          </indexterm><indexterm class="singular">
+            <primary>Glosáře</primary> <secondary>Umístění zapisovatelného souboru glosáře</secondary>
+          </indexterm></para>
+
+        <para>Zde můžete vybrat různé podadresáře, například podadresář se zdrojovými soubory, podadresář se soubory překladu atd. pokud vložíte názvy adresářů, které dosud neexistují, <application>OmegaT</application> je pro vás vytvoří. Pokud se rozhodnete změnit projektové adresáře, nezapomeňte na to, že takto nepřesunete existující soubory ze starých adresářů na novou pozici.</para>
+      </listitem>
+    </itemizedlist>
+  </section>
+</chapter>

@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<chapter id="chapter.translation.editing">
+  <title>Nastavení editace<indexterm class="singular">
+      <primary>Nabídka ‚Možnosti‛</primary> <secondary>Nastavení editace...</secondary>
+    </indexterm></title>
+
+  <para>Dialogové okno <menuchoice> <guimenu>Možnosti</guimenu> <guimenuitem>Nastavení editace...</guimenuitem> </menuchoice> umožňuje uživateli vybrat si, jak bude aktuální segment v editoru rozpoznán a zpracován.</para>
+
+  <figure id="editing.behavior.options">
+    <title>Možnosti Nastavení editace</title>
+
+    <mediaobject>
+      <imageobject role="html">
+        <imagedata fileref="images/EditingBehaviourOptions25.png"/>
+      </imageobject>
+    </mediaobject>
+  </figure>
+
+  <para/>
+
+  <para>Při překladu svých souborů zpracováváte segmenty jeden za druhým, v daném okamžiku je pro úpravu aktivní jen jeden segment. Při přechodu na další segment možná budete chtít, aby bylo pole editace vyplněno buď dostupným překladem z podokna Přibližné překlady, nebo zdrojovým textem. V položce <menuchoice> <guimenu>Možnosti</guimenu> <guimenuitem>Nastavení editace...</guimenuitem> </menuchoice> vám <application>OmegaT</application> nabízí následující volby:</para>
+
+  <variablelist>
+    <varlistentry>
+      <term>Zdrojový text</term>
+
+      <listitem>
+        <para>Je možno nechat automaticky vložit zdrojový text do pole editace. Toto se hodí u textů, které obsahují spousty obchodních značek nebo vlastních jmen, které musí zůstat nezměněny.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Ponechat segment prázdný<indexterm class="singular">
+          <primary>Nastavení editace</primary> <secondary>Prázdný překlad</secondary>
+        </indexterm></term>
+
+      <listitem>
+        <para>OmegaT ponechá pole editace prázdné. Tato možnost vám umožní překládat bez potřeby odstraňovat zdrojový text, a tak vám ušetří množství přebytečných stisků kláves při mazání (<emphasis role="bold">Ctrl+A </emphasis>a <emphasis role="bold">Del). </emphasis> Prázdné překlady jsou tímto povoleny. V Editoru jsou zobrazeny s označením &lt;EMPTY&gt;. Prázdný překlad vytvoříte tak, že kliknete pravým tlačítkem na segment, a vyberete možnost „<emphasis role="bold">Použít prázdný překlad</emphasis>&quot; Položka <emphasis role="bold">Odstranit překlad</emphasis> v téže pop up nabídce také umožňuje smazat stávající překlad v aktuálním segmentu. Stejného efektu dosáhnete smazáním cílového segmentu a stiskem <guibutton>Enter.</guibutton></para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Vložit nejpřibližnější překlad<indexterm class="singular">
+          <primary>Nastavení editace</primary> <secondary>Vkládání přibližných překladů</secondary>
+        </indexterm></term>
+
+      <listitem>
+        <para>OmegaT vloží překlad řetězce, který nejlépe odpovídá aktuálnímu zdroji, ovšem jen tedy, pokud je podobnost nad prahem výše zmíněné podobnosti, která je nastavena v tomto dialogovém okně. Předpona (ve výchozím nastavení prázdné) může být použita k dodatečnému označení překladů, což se děje např. při automatickém vkládání přibližných překladů. Když přidáte předponu (například [přibližně]), můžete tyto překlady později jednoduše najít a zkontrolovat, jestli jsou správně.</para>
+      </listitem>
+    </varlistentry>
+  </variablelist>
+
+  <para>Zaškrtávací políčka v dolní polovině dialogového okna slouží těmto účelům:</para>
+
+  <variablelist>
+    <varlistentry>
+      <term>Pokusit se převést čísla při vkládání přibližného překladu.<indexterm class="singular">
+          <primary>Nastavení editace</primary> <secondary>Převod čísel</secondary>
+        </indexterm></term>
+
+      <listitem>
+        <para>Když je tato možnost zaškrtnuta, tak při vložení přibližného překladu, buď ručně nebo automaticky, se OmegaT pokusí převést čísla v daném přibližném překladu, a to tak, že se místo stávajícího čísla použije číslo ze zdroje. Je tu ale celá kupa omezení.</para>
+        <itemizedlist>
+          <listitem>Počet čísel musí být stejný ve zdroji a v přibližném překladu.</listitem>
+          <listitem>Čísla musí být stejná mezi dvěma shodami.</listitem>
+          <listitem>Jen celá čísla a dvojičky (nelokalizované anglické dvojičky, např. 5.4, jak je známe z číslování kapitol) jsou rozpoznány jako čísla.</listitem>
+        </itemizedlist>
+      </listitem>
+    </varlistentry>
+  </variablelist>
+
+  <variablelist>
+    <varlistentry>
+      <term>Povolit překlad rovnající se zdroji<indexterm class="singular">
+          <primary>Nastavení editace</primary> <secondary>Překlad rovnající se zdroji</secondary>
+        </indexterm></term>
+
+      <listitem>
+        <para>Překládaný dokument může obsahovat obchodní značky, označení nebo vlastní jména, která zůstanou ve stejném tvaru v přeloženém dokumentu. Existují dva postupy pro segmenty, které obsahují jen takový neměnitelný text.</para>
+
+        <para>Můžete se rozhodnout takové segmenty vůbec nepřekládat. OmegaT bude pak takové segmenty reportovat jako nepřeložené. Toto odpovídá výchozímu nastavení. Alternativa je vložit překlad, který je identický se zdrojovým textem. OmegaT je schopna rozeznat, že jste toto provedli. Aby to bylo možné, přejděte na  <menuchoice> <guimenu>Možnosti</guimenu> <guimenuitem>Nastavení editace...</guimenuitem> </menuchoice> a zaškrtněte políčko <emphasis role="bold">Povolit překlad rovnající se zdroji</emphasis>.</para>
+      </listitem>
+    </varlistentry>
+  </variablelist>
+
+  <variablelist>
+    <varlistentry>
+      <term>Exportovat segment do textového souboru<indexterm class="singular">
+          <primary>Nastavení editace</primary> <secondary>Export aktuálního segmentu</secondary>
+        </indexterm></term>
+
+      <listitem>
+        <para>Funkce exportu textu exportuje data z aktuálního projektu <application>OmegaT</application> do prostého textového souboru. Data jsou exportována jen tehdy, když je daný segment otevřený. Tento soubor bude uložen v podadresáři /script v uživatelském adresáři OmegaT a obsahuje</para>
+
+        <itemizedlist>
+          <listitem>
+            <para>Obsah zdrojového segmentu (<filename>source.txt</filename>).</para>
+          </listitem>
+
+          <listitem>
+            <para>Obsah segmentu s překladem (<filename>target.txt</filename>).</para>
+          </listitem>
+
+          <listitem>
+            <para>Text zvýrazněný uživatelem, tj. když stisknete <keycap>Ctrl-Shift-C</keycap>  nebo vyberete možnost <guimenuitem>Upravit &gt; Exportovat výběr</guimenuitem> (<filename>selection.txt</filename>).</para>
+          </listitem>
+        </itemizedlist>
+
+        <para>Obsah těchto souborů bude přepsán buď když otevřete nový segment (source.txt a target.txt) nebo když exportujete nový výběr (selection.txt) Jedná se o textové soubory s neformátovaným prostým textem. Celý proces je možno řídit a ovládat přes skriptování založené na Tck/Tcl. Pro specifika, příklady a návrhy viz <ulink url="http://www.omegat.org/en/howtos/text_export.html">OmegaT - použití funkce export textu</ulink>.</para>
+      </listitem>
+    </varlistentry>
+  </variablelist>
+
+  <variablelist>
+    <varlistentry>
+      <term>Funkce ‚Přejít na další nepřeložený segment‛ se zastaví, když narazí na segment s minimálně jedním alternativním překladem.<indexterm class="singular">
+          <primary>Nastavení editace</primary> <secondary>Zastavit funkci ‚Přejít na další nepřeložený segment‛ na segmentu s alternativním překladem.</secondary>
+        </indexterm></term>
+
+      <listitem>
+        <para>Pokud chcete zabránit chybným překladům v případě, kdy se u segmentů nabízí několik možných překladů, zaškrtnutí tohoto políčka způsobí, že funkce <emphasis role="bold">Přejít na další nepřeložený segment</emphasis> se zastaví u dalšího takového segmentu, nehledě na to, jestli již byl přeložený nebo ne.</para>
+      </listitem>
+    </varlistentry>
+  </variablelist>
+</chapter>

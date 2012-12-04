@@ -1,0 +1,565 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<chapter id="chapter.regexp">
+  <title>Regulární výrazy<indexterm class="singular">
+      <primary>Regulární výrazy</primary> <seealso>Segmentace</seealso> <seealso>Vyhledávání</seealso>
+    </indexterm></title>
+
+  <para>Regulární výrazy (uváděné i zkráceně jako ‚regex‘ - z anglického ‚REGular EXpressions‘) používané při vyhledávání a v segmentačních pravidlech jsou právě ty, které podporuje Java. Pokud potřebujete bližší informace, navštivte stránku <ulink url="http://download.oracle.com/javase/1.5.0/docs/api/java/util/regex/Pattern.html">Java Regex documentation</ulink>. Projděte si dodatečné odkazy a příklady níže.</para>
+
+  <note>
+    <para>Tato kapitola se obrací především na pokročilé uživatele, který potřebují definovat vlastní varianty pravidel segmentace nebo chtějí získat komplexnější a účinnější nástroj při vyhledávání.</para>
+  </note>
+
+  <table>
+    <title>Regulární výrazy - Označení</title>
+
+    <tgroup align="left" cols="2" rowsep="1">
+      <colspec align="left" colnum="1" colwidth="100"/>
+
+      <thead>
+        <row>
+          <entry align="left">Pojem ...</entry>
+
+          <entry align="left">... znamená:</entry>
+        </row>
+      </thead>
+
+      <tbody>
+        <row>
+          <entry>(?i)</entry>
+
+          <entry>Umožňuje hledání bez ohledu na velikost písmen (ve výchozím nastavení se rozlišují velká a malá písmena).</entry>
+        </row>
+      </tbody>
+    </tgroup>
+  </table>
+
+  <table>
+    <title>Regulární výrazy - Znak</title>
+
+    <tgroup align="left" cols="2" rowsep="1">
+      <colspec align="left" colnum="1" colwidth="100"/>
+
+      <thead>
+        <row>
+          <entry align="left">Pojem ...</entry>
+
+          <entry align="left">... znamená:</entry>
+        </row>
+      </thead>
+
+      <tbody>
+        <row>
+          <entry>x</entry>
+
+          <entry>Znak x, s výjimkou následujících...</entry>
+        </row>
+
+        <row>
+          <entry>\uhhhh</entry>
+
+          <entry>Znak s hexadecimální/šestnáctkovou hodnotou 0xhhhh</entry>
+        </row>
+
+        <row>
+          <entry>\t</entry>
+
+          <entry>Znak tabulátoru (‚\u0009‘)</entry>
+        </row>
+
+        <row>
+          <entry>\n</entry>
+
+          <entry>Znak nového řádku (konce řádku) (‚\u000A‘)</entry>
+        </row>
+
+        <row>
+          <entry>\r</entry>
+
+          <entry>Znak návratu vozíku (‚\u000D‘)</entry>
+        </row>
+
+        <row>
+          <entry>\f</entry>
+
+          <entry>Znak posunu o stránku (‚\u000C‘)</entry>
+        </row>
+
+        <row>
+          <entry>\a</entry>
+
+          <entry>Znak zvukové signalizace (‚\u0007‘)</entry>
+        </row>
+
+        <row>
+          <entry>\e</entry>
+
+          <entry>Znak změny (‚\u001B‘)</entry>
+        </row>
+
+        <row>
+          <entry>\cx</entry>
+
+          <entry>Řídící znak odpovídající x</entry>
+        </row>
+
+        <row>
+          <entry>\0n</entry>
+
+          <entry>Znak s oktalovou/osmičkovou hodnotou 0n  (0 &lt;= n &lt;= 7)</entry>
+        </row>
+
+        <row>
+          <entry>\0nn</entry>
+
+          <entry>Znak s oktalovou/osmičkovou hodnotou 0n  (0 &lt;= n &lt;= 7)</entry>
+        </row>
+
+        <row>
+          <entry>\0mnn</entry>
+
+          <entry>Znak s oktalovou/osmičkovou hodnotou 0mnn (0 &lt;= m &lt;= 3, 0 &lt;= n &lt;= 7)</entry>
+        </row>
+
+        <row>
+          <entry>\xhh</entry>
+
+          <entry>Znak s hexadecimální/šestnáctkovou hodnotou 0xhh</entry>
+        </row>
+      </tbody>
+    </tgroup>
+  </table>
+
+  <table>
+    <title>Regulární výrazy - Uvozování</title>
+
+    <tgroup align="left" cols="2" rowsep="1">
+      <colspec align="left" colnum="1" colwidth="100"/>
+
+      <thead>
+        <row>
+          <entry align="left">Pojem ...</entry>
+
+          <entry align="left">... znamená:</entry>
+        </row>
+      </thead>
+
+      <tbody>
+        <row>
+          <entry>\</entry>
+
+          <entry>Lomítko samo o sobě neznamená nic, jen uvozuje následující znak. Je vyžadováno, pokud byste chtěli zadání metaznaků !$()*+.&lt;&gt;?[\]^{|} tak, aby odpovídaly samy sobě.</entry>
+        </row>
+
+        <row>
+          <entry>\\</entry>
+
+          <entry>Například toto je znak pro hledání zpětného lomítka</entry>
+        </row>
+
+        <row>
+          <entry>\Q</entry>
+
+          <entry>Nic neznamená, vymezuje všechny znaky až po \E</entry>
+        </row>
+
+        <row>
+          <entry>\E</entry>
+
+          <entry>Nic neznamená, ukončuje vymezení započaté pomocí \Q</entry>
+        </row>
+      </tbody>
+    </tgroup>
+  </table>
+
+  <table>
+    <title>Regulární výrazy - Třídy pro bloky a kategorie Unicode</title>
+
+    <tgroup align="left" cols="2" rowsep="1">
+      <colspec align="left" colnum="1" colwidth="100"/>
+
+      <thead>
+        <row>
+          <entry align="left">Pojem ...</entry>
+
+          <entry align="left">... znamená:</entry>
+        </row>
+      </thead>
+
+      <tbody>
+        <row>
+          <entry>\p{řecky}</entry>
+
+          <entry>Znak v řecké sadě (jednoduchá <ulink url="http://download.oracle.com/javase/1.5.0/docs/api/java/util/regex/Pattern.html#ubc">sada</ulink>)</entry>
+        </row>
+
+        <row>
+          <entry>\p{Lu}</entry>
+
+          <entry>Velké písmeno (jednoduchá <ulink url="http://download.oracle.com/javase/1.5.0/docs/api/java/util/regex/Pattern.html#ubc">kategorie</ulink>)</entry>
+        </row>
+
+        <row>
+          <entry>\p{Sc}</entry>
+
+          <entry>Symbol měny</entry>
+        </row>
+
+        <row>
+          <entry>\p{řecky}</entry>
+
+          <entry>Jakýkoliv znak mimo nějakého z Řecké sady (negace)</entry>
+        </row>
+
+        <row>
+          <entry>[\p{L}&amp;&amp;[^\p{Lu}]]</entry>
+
+          <entry>Jakékoliv písmeno mimo velkých (odečítání)</entry>
+        </row>
+      </tbody>
+    </tgroup>
+  </table>
+
+  <table>
+    <title>Regulární výrazy - Třídy znaků</title>
+
+    <tgroup align="left" cols="2" rowsep="1">
+      <colspec align="left" colnum="1" colwidth="100"/>
+
+      <thead>
+        <row>
+          <entry align="left">Pojem ...</entry>
+
+          <entry align="left">... znamená:</entry>
+        </row>
+      </thead>
+
+      <tbody>
+        <row>
+          <entry>[abc]</entry>
+
+          <entry>a, b, nebo c  (jednoduchá třída)</entry>
+        </row>
+
+        <row>
+          <entry>[^abc]</entry>
+
+          <entry>Jakýkoliv znak mimo a, b, nebo c (negace)</entry>
+        </row>
+
+        <row>
+          <entry>[a-zA-Z]</entry>
+
+          <entry>a až po z nebo A až po Z, včetně (rozsah)</entry>
+        </row>
+      </tbody>
+    </tgroup>
+  </table>
+
+  <table>
+    <title>Regulární výrazy - Předdefinované třídy znaků</title>
+
+    <tgroup align="left" cols="2" rowsep="1">
+      <colspec align="left" colnum="1" colwidth="100"/>
+
+      <thead>
+        <row>
+          <entry align="left">Pojem ...</entry>
+
+          <entry align="left">... znamená:</entry>
+        </row>
+      </thead>
+
+      <tbody>
+        <row>
+          <entry>.</entry>
+
+          <entry>Jakýkoliv znak (kromě znaků ukončujících řádek)</entry>
+        </row>
+
+        <row>
+          <entry>\d</entry>
+
+          <entry>Číslice: [0-9]</entry>
+        </row>
+
+        <row>
+          <entry>\D</entry>
+
+          <entry>Ne-číslice: [^0-9]</entry>
+        </row>
+
+        <row>
+          <entry>\s</entry>
+
+          <entry>Netisknutelný znak (např. mezera): [ \t\n\x0B\f\r]</entry>
+        </row>
+
+        <row>
+          <entry>\S</entry>
+
+          <entry>Negace bílého znaku (např. ne-mezera): [^\s]</entry>
+        </row>
+
+        <row>
+          <entry>\w</entry>
+
+          <entry>Znak slova: [a-zA-Z_0-9]</entry>
+        </row>
+
+        <row>
+          <entry>\W</entry>
+
+          <entry>Znak ne-slova: [^\w]</entry>
+        </row>
+      </tbody>
+    </tgroup>
+  </table>
+
+  <table>
+    <title>Regulární výrazy - Označení hranic</title>
+
+    <tgroup align="left" cols="2" rowsep="1">
+      <colspec align="left" colnum="1" colwidth="100"/>
+
+      <thead>
+        <row>
+          <entry align="left">Pojem ...</entry>
+
+          <entry align="left">... znamená:</entry>
+        </row>
+      </thead>
+
+      <tbody>
+        <row>
+          <entry>^</entry>
+
+          <entry>Začátek řádku</entry>
+        </row>
+
+        <row>
+          <entry>$</entry>
+
+          <entry>Konec řádku</entry>
+        </row>
+
+        <row>
+          <entry>\b</entry>
+
+          <entry>Hranice slova</entry>
+        </row>
+
+        <row>
+          <entry>\B</entry>
+
+          <entry>Hranice ne-slova</entry>
+        </row>
+      </tbody>
+    </tgroup>
+  </table>
+
+  <table>
+    <title>Regulární výrazy - Hladové kvantifikátory</title>
+
+    <tgroup align="left" cols="2" rowsep="1">
+      <colspec align="left" colnum="1" colwidth="100"/>
+
+      <thead>
+        <row>
+          <entry align="left">Pojem ...</entry>
+
+          <entry align="left">... znamená:</entry>
+        </row>
+      </thead>
+
+      <tbody>
+        <row>
+          <entry>X<emphasis>?</emphasis></entry>
+
+          <entry>X, jednou nebo vůbec</entry>
+        </row>
+
+        <row>
+          <entry>X<emphasis>*</emphasis></entry>
+
+          <entry>X, nula nebo vícekrát</entry>
+        </row>
+
+        <row>
+          <entry>X<emphasis>+</emphasis></entry>
+
+          <entry>X, jednou nebo vícekrát</entry>
+        </row>
+      </tbody>
+    </tgroup>
+  </table>
+
+  <note>
+    <para>hladové kvantifikátory se budou snažit najít tolik shody, jak je to jen možné Například: <emphasis>a+?</emphasis> bude odpovídat aaa v <emphasis>aaabbb</emphasis></para>
+  </note>
+
+  <table>
+    <title>Regulární výrazy - Líné kvantifikátory</title>
+
+    <tgroup align="left" cols="2" rowsep="1">
+      <colspec align="left" colnum="1" colwidth="100"/>
+
+      <thead>
+        <row>
+          <entry align="left">Pojem ...</entry>
+
+          <entry align="left">... znamená:</entry>
+        </row>
+      </thead>
+
+      <tbody>
+        <row>
+          <entry>X??</entry>
+
+          <entry>X, jednou nebo vůbec</entry>
+        </row>
+
+        <row>
+          <entry>X*?</entry>
+
+          <entry>X, nula nebo vícekrát</entry>
+        </row>
+
+        <row>
+          <entry>X+?</entry>
+
+          <entry>X, jednou nebo vícekrát</entry>
+        </row>
+      </tbody>
+    </tgroup>
+  </table>
+
+  <note>
+    <para>líné kvantifikátory se budou snažit najít co nejmíň shody, jak je to jen možné Například: <emphasis>a+?</emphasis> bude odpovídat prvnímu <emphasis>a</emphasis> v <emphasis>aaabbb</emphasis></para>
+  </note>
+
+  <table>
+    <title>Regulární výrazy - Logické operátory</title>
+
+    <tgroup align="left" cols="2" rowsep="1">
+      <colspec align="left" colnum="1" colwidth="100"/>
+
+      <thead>
+        <row>
+          <entry align="left">Pojem ...</entry>
+
+          <entry align="left">... znamená:</entry>
+        </row>
+      </thead>
+
+      <tbody>
+        <row>
+          <entry>XY</entry>
+
+          <entry>X následované Y</entry>
+        </row>
+
+        <row>
+          <entry>X|Y</entry>
+
+          <entry>Buď  X anebo Y</entry>
+        </row>
+
+        <row>
+          <entry>(XY)</entry>
+
+          <entry>XY jako samostatná skupina</entry>
+        </row>
+      </tbody>
+    </tgroup>
+  </table>
+
+  <section id="regex.tools.and.examples.of.use">
+    <title><indexterm class="singular">
+        <primary>Regulární výrazy</primary> <secondary>Nástroje</secondary>
+      </indexterm>Nástroje regex a příklady použití<indexterm class="singular">
+        <primary>Regulární výrazy</primary> <secondary>Příklady použití</secondary>
+      </indexterm></title>
+
+    <para>Existuje množství interaktivních nástrojů dostupných pro vývoj a testování regulárních výrazů. Všechny obecně postupují dle stejného vzoru (vizte níže příklad ve formě pluginu pro Firefox: Regular Expression Tester): regulární výraz (záznam nahoře) zkoumá hledaný text (textové pole uprostřed), ukazuje výsledky v poli pro výsledky.</para>
+
+    <figure id="regerx.tester">
+      <title>Regex Tester</title>
+
+      <mediaobject>
+        <imageobject role="html">
+          <imagedata fileref="images/RegexTester.png"/>
+        </imageobject>
+
+        <imageobject role="fo">
+          <imagedata fileref="images/RegexTester.png" width="80%"/>
+        </imageobject>
+      </mediaobject>
+    </figure>
+
+    <para>Můžete také vyzkoušet trenažer <ulink url="http://weitz.de/regex-coach/">The Regex Coach</ulink> jako samostatný nástroj pro Windows, Linux, Mac, FreeBSD, jedná se o samostatný nástroj. Je podobný předchozímu příkladu.</para>
+
+    <para>Malá sbírka užitečných regulárních výrazů se nachází přímo v aplikaci <application>OmegaT</application> (vizte Možnosti &gt; Segmentace). Následující seznam zahrnuje výrazy, které se mohou hodit při prohledávání překladové paměti:</para>
+
+    <table>
+      <title>Regulární výrazy - Příklady regulárních výrazů v překladech</title>
+
+      <tgroup align="left" cols="2" rowsep="1">
+        <colspec align="left" colnum="1" colwidth="100"/>
+
+        <thead>
+          <row>
+            <entry>Regulární výraz</entry>
+
+            <entry>najde následující:</entry>
+          </row>
+        </thead>
+
+        <tbody>
+          <row>
+            <entry>(\b\w+\b)\s\1\b</entry>
+
+            <entry>zdvojený výskyt slova</entry>
+          </row>
+
+          <row>
+            <entry>[\.,]\s*[\.,]+</entry>
+
+            <entry>čárka nebo tečka následovaná mezerou a další čárkou nebo mezerou</entry>
+          </row>
+
+          <row>
+            <entry>\. \s+$</entry>
+
+            <entry>mezery navíc, za nimiž je tečka na konci řádku</entry>
+          </row>
+
+          <row>
+            <entry>\s+a\s+[aeiou]</entry>
+
+            <entry>Pro angličtinu: u slov začínajících na samohlásku se užívá neurčitý člen „an“, ne „a“</entry>
+          </row>
+
+          <row>
+            <entry>\s+an\s+[^aeiou]</entry>
+
+            <entry>Pro angličtinu: stejná kontrola jako nahoře, ale pro souhlásky („a“, ne „an“)</entry>
+          </row>
+
+          <row>
+            <entry>\s\s+</entry>
+
+            <entry>víc než jedna mezera</entry>
+          </row>
+
+          <row>
+            <entry>\.[A-Z]</entry>
+
+            <entry>Tečka následovaná slovem s prvním velkým písmenem - pravděpodobně chybí mezera mezi tečkou a začátkem nové věty?</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+  </section>
+</chapter>

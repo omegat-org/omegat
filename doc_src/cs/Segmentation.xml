@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<chapter id="chapter.segmentation">
+  <title>Segmentace zdroje</title>
+
+  <para>Nástroje pro práci s překladovými paměťmi pracují s textovými jednotkami nazývanými segmenty. <application>OmegaT</application> nabízí dva způsoby segmentace textu: segmentace podle odstavců nebo segmentace na úrovni vět (také zvaná jako „rule-based segmentation“). Pro výběr typu segmentace, označte <menuchoice> <guimenu><indexterm class="singular">
+          <primary>Projekt</primary> <secondary>Vlastnosti</secondary>
+        </indexterm>Projekt</guimenu> <guimenuitem>Vlastnosti...</guimenuitem> </menuchoice>  z hlavní nabídky a zaškrtněte, nebo zrušte zaškrtnutí nabízeného zaškrtávacího políčka. Segmentace podle odstavců je výhodná jen v určitých případech, jako jsou velmi kreativní nebo stylové překlady, ve kterých překladatel asi bude chtít změnit pořadí celých vět; nicméně ve většině projektů je upřednostňovanou volbou právě segmentace podle vět, protože tato poskytuje lepší shody s předchozími překlady. Pokud je vybráno Segmentace na úrovni vět, pak můžete nastavit pravidla vybráním položky <menuchoice> <guimenu><indexterm class="singular">
+          <primary>Projekt</primary> <secondary>Možnosti</secondary>
+        </indexterm>Možnosti</guimenu> <guimenuitem>Segmentace...</guimenuitem> </menuchoice> v hlavní nabídce.</para>
+
+  <para>Spolehlivá pravidla segmentace jsou dostupná pro spoustu jazyků, takže pravděpodobně nebudete potřebovat si psát vlastní pravidla segmentace. Na druhou stranu tato funkce může být velmi užitečná ve speciálních případech, kdy můžete zvýšit svou produktivitu úpravou segmentačních pravidel u textu, který máte překládat.</para>
+
+  <para><emphasis role="bold">Upozornění</emphasis>: protože po změně možností filtrů bude text segmentován odlišně, je možné, že bude nutné začít překlad zase doslova od nuly. Současně se dřívější platné segmenty v překladové paměti změní na nespárované segmenty. Pokud změníte volby segmentace ve chvíli, kdy je otevřený nějaký projekt, budete muset projekt znovu načíst, aby se změny projevily.</para>
+
+  <para><application>OmegaT</application> používá následující sled kroků:</para>
+
+  <variablelist>
+    <varlistentry>
+      <term><indexterm class="singular">
+          <primary>Segmentace</primary> <secondary>Segmentace na úrovni zdroje</secondary>
+        </indexterm>Segmentace na úrovni struktury</term>
+
+      <listitem>
+        <para><application>OmegaT</application> nejprve zpracuje text pomocí segmentace na úrovni struktur. Během tohoto procesu je to jen struktura zdrojového souboru, která je použitá na vytvoření segmentů.</para>
+
+        <para>Například mohou být textové soubory segmentovány podle zlomů řádků, prázdných řádků nebo vůbec nemusí být segmentovány na strukturální úrovni. Soubory s formátováním (OpenOffice.org, HTML, atd.) jsou segmentovány na úrovni tagů bloků (odstavce). Atributy přeložitelných objektů v souborech XHTML nebo HTML lze extrahovat jako samostatné segmenty.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term><indexterm class="singular">
+          <primary>Segmentace</primary> <secondary>Segmentace na úrovni vět</secondary>
+        </indexterm>Segmentace na úrovni vět</term>
+
+      <listitem>
+        <para>Po segmentaci zdrojového souboru podle logických jednotek, bude <application>OmegaT</application> dále segmentovat tyto bloky do vět.</para>
+      </listitem>
+    </varlistentry>
+  </variablelist>
+
+  <section id="segmentation.rules">
+    <title>Pravidla segmentace<indexterm class="singular">
+        <primary>Pravidla segmentace</primary> <secondary>Pravidla</secondary>
+      </indexterm></title>
+
+    <para>Průběh segmentace lze znázornit následovně: kurzor se pohybuje v textu, vždy po jednom znaku. Pravidlo pozice kurzoru, se skládá ze vzoru <emphasis role="bold">Před</emphasis> a <emphasis role="bold">Za</emphasis>, jsou aplikovány v daném pořadí, aby se tak ověřilo, jestli některý ze vzorů <emphasis role="bold">Před</emphasis> je platný pro text vlevo, a stejným způsobem vzor <emphasis role="bold">Za</emphasis> pro text vpravo od kurzoru. Pokud pravidlo lze aplikovat, tak se kurzor buď pohne bez vložení zalomení segmentu (v případě výjimky pravidla) nebo je vytvořeno zalomení segmentu na aktuální pozici kurzoru (v případě aplikování pravidla pro zalomení).</para>
+
+    <para>Tyto dva typy pravidel se chovají následovně:</para>
+
+    <variablelist>
+      <varlistentry>
+        <term><indexterm class="singular">
+            <primary>Segmentace</primary> <secondary>Pravidla</secondary> <tertiary>Pravidlo zalomení</tertiary>
+          </indexterm>Pravidla zalomení</term>
+
+        <listitem>
+          <para>Rozdělí zdrojový text na segmenty. Například: „<emphasis>Did it make sense? I was not sure.“</emphasis> by mělo být rozděleno na dva segmenty. Aby se tak stalo, mělo by tu být pravidlo zalomení pro „?“, po kterém následuje mezera a slovo začínající velkým písmenem. Když chcete definovat pravidlo jako pravidlo zalomení, zaškrtněte zaškrtávací políčko Zlom/Výjimka.</para>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+
+    <variablelist>
+      <varlistentry>
+        <term><indexterm class="singular">
+            <primary>Segmentace</primary> <secondary>Pravidla</secondary><tertiary>Pravidlo výjimky</tertiary>
+          </indexterm>Pravidlo výjimky</term>
+
+        <listitem>
+          <para>specifikuje, které části textu by NEMĚLY být rozděleny. Nehledě na tečku v <emphasis>„Mrs. Dalloway“</emphasis> by zde neměl být text rozdělen, tzn. mělo by být založeno pravidlo výjimky pro Mrs (stejně tak Mr a Dr a prof atd.), což je normálně následováno tečkou Když chcete definovat pravidlo jakožto výjimku, nechte zaškrtávací políčko Zlom/Výjimka prázdné.</para>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+
+    <para>Předdefinovaná pravidla zalomení by měla být dostatečná pro většinu evropských jazyků a Japonštinu. Vzhledem k flexibilitě, můžete zvážit definování více pravidel pro výjimky pro jazyk ze kterého překládáte, abyste získali smysluplnější a souvislejší segmenty.</para>
+  </section>
+
+  <section id="rules.priority">
+    <title>Pravidla přednosti<indexterm class="singular">
+        <primary>Segmentace</primary> <secondary>Pravidla přednosti</secondary>
+      </indexterm></title>
+
+    <para>Všechny sady pravidel segmentace pro odpovídající vzor jazyka jsou použité v daném pořadí priority, takže pravidla pro konkrétní jazyk by měla být vyšší než ta z výchozího nastavení. Tak například, pravidla pro kanadskou francouzštinu (FR-CA) by měla být ve výchozím nastavení výše než pravidla pro francouzštinu (FR.*), a výše než (.*). Takže v průběhu překladu z kanadské francouzštiny bude váš projekt používat jako první pravidla pro kanadskou francouzštinu (pokud jsou tedy definována), pak se vychází z pravidel pro francouzštinu, a nakonec v pořadí se uplatní pravidla výchozího nastavení</para>
+  </section>
+
+  <section id="creating.new.rule">
+    <title>Vytváření nového pravidla<indexterm class="singular">
+        <primary>Segmentace</primary> <secondary>Vytváření nového pravidla</secondary> <seealso>Regulární výrazy</seealso>
+      </indexterm></title>
+
+    <para>Obecně by se neměly provádět změny pravidel segmentace, obzvláště po kompletaci prvního konceptu, ale drobné změny, jako je přidání rozpoznané zkratky, mohou být prospěšné. </para>
+
+    <para>Pro úpravu nebo rozšíření již existující sady pravidel, jednoduše klikněte na danou sadu v horní tabulce. Pravidla dané sady se objeví v dolní půlce okna.</para>
+
+    <para>Pro vytvoření prázdné sady pravidel pro nový jazykový vzor klikněte na <emphasis role="bold">Přidat</emphasis> v horní polovině dialogového okna. Ve spodní části horní tabulky se objeví prázdný řádek (abyste jej viděli, budete asi muset srolovat dolů). Změňte název sady pravidel a vzor jazyka pro daný jazyk a jeho kód (viz <xref linkend="appendix.languages"/> seznam jazykových kódů). Syntaxe vzoru jazyka odpovídá syntaxi regulárních výrazů. Pokud vaše sada pravidel platí pro pár jazyk-země, doporučujeme posunout ji nahoru pomocí tlačítka <emphasis role="bold">Přesunout nahoru</emphasis>.</para>
+
+    <para>Přidejte vzory <emphasis role="bold">Před</emphasis> a <emphasis role="bold">Za</emphasis> Pro kontrolu jejich syntaxe a použitelnosti, je vhodné použít nástroje, které vám umožní vidět jejich účinek přímo. Viz kapitlou <link linkend="chapter.regexp">Regulární výrazy</link>. Dobrým výchozím bodem vždy bude již existující pravidlo.</para>
+  </section>
+
+  <section id="few.simple.examples">
+    <title><indexterm class="singular">
+        <primary>Segmentace</primary> <secondary>Příklady</secondary>
+      </indexterm>Pár jednoduchých příkladů</title>
+
+    <informaltable>
+      <tgroup cols="4">
+        <colspec align="left" colnum="1" colwidth="150"/>
+
+        <colspec align="center" colnum="2" colwidth="60"/>
+
+        <colspec align="center" colnum="3" colwidth="60"/>
+
+        <colspec align="left" colnum="4" colwidth="190"/>
+
+        <thead>
+          <row>
+            <entry>Cíl</entry>
+
+            <entry align="center">Vzor před</entry>
+
+            <entry align="center">Vzor za</entry>
+
+            <entry>Poznámka</entry>
+          </row>
+        </thead>
+
+        <tbody>
+          <row>
+            <entry>nastavit segment po tečce (‚.‘) a před mezerou</entry>
+
+            <entry align="center">\.</entry>
+
+            <entry align="center">\s</entry>
+
+            <entry>„\.“ znamená znak „.“ „\s“ znamená jakýkoliv netisknutelný znak (mezera, tabulátor, nová stránka, atd.).</entry>
+          </row>
+
+          <row>
+            <entry>Nesegmentovat po Mr.</entry>
+
+            <entry align="center">Mr\.</entry>
+
+            <entry align="center">\s</entry>
+
+            <entry>Toto je pravidlo výjimky, takže zaškrtávací políčko pravidla musí zůstat neoznačeno</entry>
+          </row>
+
+          <row>
+            <entry>segmentovat po „。“ (japonská tečka)</entry>
+
+            <entry align="center">。</entry>
+
+            <entry align="center"/>
+
+            <entry>Všimněte si, že políčko <literal>Vzor za</literal> je prázdné </entry>
+          </row>
+
+          <row>
+            <entry>Nesegmentovat po M. Mr. Mrs. a Ms.</entry>
+
+            <entry align="center">Mr??s??\.</entry>
+
+            <entry align="center">\s</entry>
+
+            <entry>Pravidlo výjimky - viz použití znaku ‚?‘ v regulárních výrazech</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </informaltable>
+  </section>
+</chapter>

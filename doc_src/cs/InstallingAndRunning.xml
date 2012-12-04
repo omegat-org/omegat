@@ -1,0 +1,646 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<chapter id="chapter.installing.and.running">
+  <title>Instalace a provoz programu <application>OmegaT</application></title>
+
+  <section>
+    <title id="Windows.users">Uživatelé Windows<indexterm class="singular">
+        <primary>Instalace programu OmegaT</primary> <secondary>Windows</secondary>
+      </indexterm></title>
+
+    <section>
+      <title id="which.package.to.download.windows">Stažení balíčku</title>
+
+      <para>Máte prostředí Java kompatibilní s Java 1.5 JRE od Oracle?</para>
+
+      <itemizedlist>
+        <listitem>
+          <para><emphasis role="bold">Ano: </emphasis>stáhněte si verzi bez Javy <emphasis>OmegaT_2.5.x_Windows_without_JRE.exe</emphasis>.</para>
+        </listitem>
+
+        <listitem>
+          <para><emphasis role="bold">Ne / Nevím:</emphasis> stáhněte si<emphasis> OmegaT_2.5.x_Windows.exe.</emphasis></para>
+
+          <para>Tento balík obsahuje prostředí Oracle Java Runtime Environment. Toto JRE nebude kolidovat s jinými implementacemi Java, které již mohou být nainstalovány ve vašem systému.</para>
+        </listitem>
+      </itemizedlist>
+    </section>
+
+    <section id="OmegaT.installation.Windows">
+      <title><application>Instalace programu OmegaT</application></title>
+
+      <para>Instalaci <application>OmegaT</application> zahájíte dvojím kliknutím na soubor, který jste si stáhli, a následujte instrukce.</para>
+    </section>
+
+    <section id="adding.OmegaT.to.the.start.menu.or.desktop">
+      <title>Přidání <application>OmegaT</application> do menu start nebo na plochu<indexterm class="singular">
+          <primary>Přizpůsobení OmegaT</primary> <secondary>Windows</secondary>
+        </indexterm></title>
+
+      <para>Během instalace se vás instalační průvodce zeptá, jestli chcete vytvořit složku v menu <emphasis>start</emphasis>, a jestli chcete vytvořit zástupce na ploše a v panelu rychlého spuštění.</para>
+
+      <para>Zástupce můžete vytvořit i dodatečně, a to přetažením <emphasis><application>OmegaT</application>.exe</emphasis> na plochu nebo do menu start a vytvořit tak z dané pozice odkaz.</para>
+    </section>
+
+    <section id="running.OmegaT.Windows">
+      <title>Spouštění <application>OmegaT<indexterm class="singular">
+          <primary>Spouštění OmegaT</primary> <secondary>Windows</secondary>
+        </indexterm></application></title>
+
+      <para>Když je <application>OmegaT</application> nainstalována, můžete kliknout na <emphasis><application>OmegaT</application>.jar</emphasis> a spustit ji přímo, nebo program spustíte přímo z příkazové řádky.</para>
+
+      <para>Nejjednodušším způsobem je ale spouštět program přes <emphasis> <application>OmegaT</application>.exe</emphasis>. <indexterm class="singular">
+          <primary>Spouštění OmegaT</primary> <secondary>Windows</secondary> <tertiary>soubor INI</tertiary>
+        </indexterm>Možnosti pro startování programu budou v tomto případě načteny ze souboru<emphasis><application>OmegaT</application>.l4J.ini</emphasis>, který se nachází ve stejném adresáři, jako soubor exe, a který můžete upravit, aby tak odpovídal vašemu nastavení. Následující příklad souboru INI rezervuje 1GB paměti, zadá francouzštinu jako uživatelský jazyk a Kanadu jako zemi:</para>
+
+      <literallayout><code># OmegaT.exe runtime configuration # To use a parameter, remove the '#' before the '-' (configurace běhu Omega.exe; pokud chcete použít zadaný parametr, smažte znak '#' před '-') # Memory -Xmx1024M # Language -Duser.language=FR # Country -Duser.country=CA</code></literallayout>
+    </section>
+
+    <section>
+      <title>Aktualizace OmegaT<indexterm class="singular">
+          <primary>Aktualizace OmegaT</primary> <secondary>Windows</secondary>
+        </indexterm></title>
+
+      <para><emphasis>Tato informace platí jen pro „tradiční“ verze OmegaT pod Windows. Neplatí to pro verzi Web Start, která je aktualizována automaticky, a taky to neplatí pro verze pro různé platformy, která je instalována pod Windows.</emphasis></para>
+
+      <para>Pokud již máte verzi OmegaT instalovanou na svém PC a chcete ji aktualizovat na novější verzi, máte dvě možnosti:</para>
+
+      <itemizedlist>
+        <listitem>
+          <para><emphasis role="bold">Instalovat přes existující instalaci. </emphasis>To se dělá tak, že při instalování nové verze jednoduše vyberete stejný adresář pro instalaci jako je ten, kde je umístěna existující instalace. „Stará“ verze OmegaT bude přepsána, ale její nastavení zůstanou zachována. Toto se týká také nastavení učiněná přímo v prostředí OmegaT, jakékoliv změny, které jste provedli v souboru <filename> OmegaT.l4J.ini</filename>, a také ve spouštěcím skriptu (soubor .bat), jestli jej vůbec používáte.</para>
+        </listitem>
+      </itemizedlist>
+
+      <para>Při použití této metody si můžete také stáhnout verzi „Windows bez JRE“, nová instalace bude používat vaše již existující JRE.</para>
+
+      <itemizedlist>
+        <listitem>
+          <para><emphasis role="bold">Instalace do nového adresáře. </emphasis>Tímto způsobem je možno zachovat obě verze vedle sebe, což se může hodit tehdy, pokud si starou verzi chcete nechat, než se sžijete s tou novou. Tato metoda bude tedy používat předvolby a nastavení, která jste provedli v prostředí OmegaT. Nicméně v tomto případě:</para>
+
+          <itemizedlist>
+            <listitem>
+              <para>Pokud jste provedli změny ve svém souboru <filename>OmegaT.l4J.ini</filename> anebo používáte soubor .bat, musíte jej nakopírovat i do nového adresáře instalace.</para>
+            </listitem>
+          </itemizedlist>
+
+          <itemizedlist>
+            <listitem>
+              <para>Jestliže je stávající instalace OmegaT verze „Windows s JRE“, nová verze musí být také verzí „Windows s JRE“. </para>
+            </listitem>
+          </itemizedlist>
+        </listitem>
+      </itemizedlist>
+    </section>
+  </section>
+
+  <section id="Linux.Intel.users">
+    <title>Uživatelé Linuxu (Intel)<indexterm class="singular">
+        <primary>Instalace OmegaT</primary> <secondary>Linux</secondary>
+      </indexterm></title>
+
+    <section id="which.package.to.download.Linux">
+      <title>Stažení správného balíčku</title>
+
+      <para>Máte prostředí Java kompatibilní s Java 1.5 JRE od Oracle?</para>
+
+      <itemizedlist>
+        <listitem>
+          <para><emphasis role="bold">Ano:</emphasis> stáhněte si verzi bez Javy <emphasis>OmegaT_2.5.x_Without_JRE.zip</emphasis>.</para>
+        </listitem>
+
+        <listitem>
+          <para><emphasis role="bold">Ne / Nevím:</emphasis> stáhněte si<emphasis> OmegaT_2.5.x_Linux.tar.bz2.</emphasis></para>
+
+          <para>Tento balík obsahuje prostředí Oracle Java Runtime Environment. Toto JRE nebude kolidovat s jinými implementacemi Java, které již mohou být nainstalovány ve vašem systému.</para>
+        </listitem>
+      </itemizedlist>
+    </section>
+
+    <section id="OmegaT.installation.Linux">
+      <title><application>Instalace programu OmegaT</application></title>
+
+      <para>Rozbalte stažený soubor. Toto vytvoří adresář omegat/, je to pracovní adresář, ve kterém naleznete všechny soubory potřebné k provozu <application>OmegaT</application>. Postup rozbalení souboru <emphasis>.tar.gz</emphasis>:</para>
+
+      <para><emphasis>$ tar xf stazeny_soubor.tar.gz</emphasis></para>
+    </section>
+
+    <section id="adding.OmegaT.to.your.menus.or.panels">
+      <title>Přidání <application>OmegaT</application> do vašeho menu (KDE) či panelu (Gnome)</title>
+
+      <section id="KDE.users">
+        <title>Uživatelé KDE 4<indexterm class="singular">
+            <primary>Přizpůsobení OmegaT</primary> <secondary>KDE 4</secondary>
+          </indexterm></title>
+
+        <para>Do svého menu můžete přidat aplikaci <application>OmegaT</application> následovně:</para>
+
+        <itemizedlist>
+          <listitem>
+            <para>Stiskem <emphasis role="bold"> <keysym>Alt+F2</keysym> </emphasis> zobrazíte KRunner. Napište příkaz <emphasis>kmenuedit+enter</emphasis>. Zobrazí se KMenuEditor. V KMenuEditor vyberte <emphasis>Soubor -&gt; Nová položka.</emphasis></para>
+          </listitem>
+
+          <listitem>
+            <para>Jakmile označíte vhodné menu, přidejte submenu/položku prostřednictvím <emphasis>Soubor - Nové submenu</emphasis> a <emphasis>Soubor - Nová položka</emphasis>. Jako název nové položky vložte <application>OmegaT</application>.</para>
+          </listitem>
+
+          <listitem>
+            <para>V poli „Command“, použijte navigační tlačítko k nalezení svého  spouštěcího skriptu <application>OmegaT</application> (soubor se v nerozbaleném adresáři jmenuje <application>OmegaT</application>) a označte jej.</para>
+          </listitem>
+
+          <listitem>
+            <para>Klikněte na ikonu (vpravo od Name/Description/Comment fields)</para>
+          </listitem>
+
+          <listitem>
+            <para>Other Icons - Browse, a přejděte k podadresáři /images v adresáři aplikace <application>OmegaT</application>. Vyberte ikonu <application>OmegaT</application>.png.</para>
+          </listitem>
+
+          <listitem>
+            <para>Nakonec uložte změny <emphasis>Soubor - Uložit</emphasis>.</para>
+          </listitem>
+        </itemizedlist>
+      </section>
+
+      <section id="GNOME.users">
+        <title>Uživatelé Gnome<indexterm class="singular">
+            <primary>Přizpůsobení OmegaT</primary> <secondary>GNOME</secondary>
+          </indexterm></title>
+
+        <para>Do svého menu můžete přidat aplikaci <application>OmegaT</application> následovně:</para>
+
+        <itemizedlist>
+          <listitem>
+            <para>Klikněte pravým tlačítkem myši na panel: <emphasis>Přidat na panel... </emphasis> pak volba Vlastní spouštěč aplikace</para>
+          </listitem>
+
+          <listitem>
+            <para>Vložte „<application>OmegaT</application>“ do pole „Název“; v poli „Příkaz“ použijte navigační tlačítko k nalezení svého <application>OmegaT</application> spouštěcího skriptu (soubor se v rozbaleném adresáři jmenuje <application>OmegaT</application>). Označte jej a operaci potvrďte OK.</para>
+          </listitem>
+
+          <listitem>
+            <para>Klikněte na tlačítko ikony, pak <emphasis>Procházet...</emphasis> a přejděte k podadresáři /images v adresáři aplikace <application>OmegaT</application>. Vyberte ikonu <emphasis><application>OmegaT</application>.png</emphasis>. V GNOME může selhat zobrazení souborů ikon v dostupném formátu, protože očekává soubor SVG, ale jakmile je vybrán adresář, soubory by se měly zobrazit a můžete vybrat <application>OmegaT</application>.png.</para>
+          </listitem>
+        </itemizedlist>
+      </section>
+    </section>
+
+    <section id="running.OmegaT.Linux">
+      <title>Spouštění <application>OmegaT<indexterm class="singular">
+          <primary>Spouštění OmegaT</primary> <secondary>Linux</secondary>
+        </indexterm></application></title>
+
+      <para>OmegaT můžete spouštět z příkazového řádku přes skript, který obsahuje startovací možnosti nebo pro přímý start klikněte na <emphasis><application>OmegaT</application>.jar</emphasis>. Metody se liší v závislosti na distribuci. Ujistěte se, že vaše nastavení <emphasis>CESTY k souborům</emphasis> jsou správná a že soubory <emphasis>.jar</emphasis> jsou řádně asociovány se spouštěčem Javy. Pro více informací čtěte dále v části „Spouštění z příkazové řádky“.</para>
+    </section>
+  </section>
+
+  <section id="MAC.OSX.users">
+    <title>Uživatelé Mac OS X<indexterm class="singular">
+        <primary>OS X</primary> <secondary>Instalace OmegaT</secondary>
+      </indexterm><indexterm class="singular">
+        <primary>Instalace OMegaT</primary> <secondary>OS X</secondary>
+      </indexterm></title>
+
+    <section id="which.package.to.download.OSX">
+      <title>Stažení balíčku</title>
+
+      <para><application>OmegaT</application> 2.5 vyžaduje ke spuštění Javu 1.5 Pro aktualizaci vaší verze Javy zadejte z Apple menu „Software Update...“</para>
+
+      <para>Stáhněte si <emphasis>OmegaT_2.5.x_Mac.zip.</emphasis></para>
+    </section>
+
+    <section id="OmegaT.installation.OSX">
+      <title><application>Instalace programu OmegaT</application></title>
+
+      <para>Dvojitým kliknutím rozbalte <emphasis>OmegaT_2.5.x_Mac.zip</emphasis>. Tak vytvoříte adresář nazvaný <emphasis> <application>OmegaT</application> </emphasis>. Adresář obsahuje 2 soubory: index.html a <emphasis><application>OmegaT</application>.app.</emphasis>. Zkopírujte tento adresář do lepšího umístění (např. Applications). Poté můžete soubor <emphasis>OmegaT_2.5.x_Mac.zip</emphasis> smazat.</para>
+    </section>
+
+    <section id="adding.OmegaT.to.the.dock">
+      <title>Přidání <application>OmegaT</application> na panel Dock<indexterm class="singular">
+          <primary>OS X</primary> <secondary>Přidání OmegaT do Docku</secondary> <seealso>Přizpůsobení OmegaT</seealso>
+        </indexterm></title>
+
+      <para>Přetáhněte soubor <emphasis><application>OmegaT</application>.app</emphasis> na Dock.</para>
+    </section>
+
+    <section id="running.OmegaT.OSX">
+      <title>Spouštění <application>OmegaT<indexterm class="singular">
+          <primary>OS X</primary> <secondary>Spouštění OmegaT</secondary>
+        </indexterm><indexterm class="singular">
+          <primary>Spouštění</primary> <secondary>OS X</secondary>
+        </indexterm></application></title>
+
+      <para>Klikněte dvakrát na <emphasis> <application>OmegaT</application>.app</emphasis> nebo klikněte na ikonu na Docku.</para>
+
+      <para>Pro přístup k obsahu <application><emphasis>Info.plist</emphasis></application>, klikněte pravým tlačítkem myši na  <emphasis><application>OmegaT</application>.app</emphasis>  a vyberte „Ukázat obsah balíčku“, pak tevřete soubor kliknutím pravým tlačítkem myši na tento soubor a vyberte textový editor dle vlastní volby. Také můžete přejít přes příkazový řádek do tohoto adresáře přes „cd“ a otevřít <application><emphasis>Info.plist</emphasis> v editoru příkazového řádku, jako např. emacs nebo vi</application>.<emphasis> <indexterm class="singular">
+          <primary>OS X</primary> <secondary>Přizůsobení OmegaT</secondary> <tertiary>Parametry spouštění</tertiary>
+        </indexterm><indexterm class="singular">
+          p<primary>OS X</primary> <secondary>Přizpůsobení OmegaT</secondary>
+        </indexterm></emphasis></para>
+
+      <para>Můžete upravit jak část <emphasis>Properties</emphasis> (Vlastnosti), tak i <emphasis>VMOptions</emphasis> (Možnosti VM).</para>
+
+      <para>Pokud chcete přidat hodnoty do <emphasis>VMOptions</emphasis>, tak mezi ně vložte mezeru.  Například <filename>-Xmx1024M -Duser.language=ja</filename> spustí aplikaci <application>OmegaT</application> s pamětí 1024MG a japonským uživatelským prostředím.</para>
+
+      <para>Pokud potřebujete spustit více instancí <emphasis><application>OmegaT</application>.app</emphasis>, klikněte dvakrát na soubor <emphasis>JavaApplicationStub</emphasis>, který je umístěn v <emphasis><application>OmegaT</application>.app/ Contents/MacOS/</emphasis>.</para>
+
+      <para><emphasis><application> </application></emphasis>Použijte tedy soubor <emphasis><application>OmegaT</application>.jar</emphasis> (je umístěný v <emphasis><application>OmegaT</application>.app/Contents/Resources/Java/</emphasis>) ke spuštění <application>OmegaT</application> z příkazového řádku.
+ Pro více informací čtěte dále v části „Spouštění z příkazové řádky“.</para>
+    </section>
+
+    <section id="Mac.OSX.goodies">
+      <title>Uživatelé Mac OS X</title>
+
+      <para><emphasis><application>OmegaT</application>.app</emphasis> může být dosažitelná z Mac OS X Services. Můžete tedy označit slovo kdekoliv v <application>OmegaT</application> a použít ‚Services‛ pro hledání tohoto slova, například ve Spotlight nebo Google. Můžete také použít AppleScript nebo Automator k vytvoření Služby (‚Services‛) nebo skriptu, které zautomatizují často používané činnosti.</para>
+    </section>
+  </section>
+
+  <section id="other.systems">
+    <title>Ostatní systémy<indexterm class="singular">
+        <primary>Instalace OmegaT</primary> <secondary>Ostatní systémy</secondary>
+      </indexterm></title>
+
+    <para>Tyto informace se vztahují na systémy jako je Solaris SPARC/x86/x64, Linux x64/PowerPC, Windows x64</para>
+
+    <section>
+      <title id="which.package.to.download.other">Stažení správného balíčku</title>
+
+      <para><application>OmegaT</application> je dostupná ve spojení s Oracle Java JRE pro Linux (Intel x86) a platformy Windows. Aby bylo možno <application>OmegaT</application> používat u jiných platforem (Linux PowerPC, Linux x64, Solaris SPARC/x86/x64, Windows x64 atd.) musí uživatelé na svém systému mít a provozovat kompatibilní prostředí Java JRE.</para>
+
+      <para>Máte prostředí Java kompatibilní s Java 1.5 JRE od Oracle?</para>
+
+      <itemizedlist>
+        <listitem>
+          <para><emphasis role="bold">Ano: </emphasis>stáhněte si verzi bez Javy <emphasis>OmegaT_2.5.x_Windows_without_JRE.exe</emphasis>. Tento balík může být použit na platformě, kde je instalováno JRE kompatibilní s Java 1.5 JRE.</para>
+        </listitem>
+
+        <listitem>
+          <para><emphasis role="bold">Nevím:</emphasis> otevřete terminál a napište „java -version“  Pokud se vám zobrazí hlášení „command not found“  („příkaz nenalezen“) nebo podobně, pravděpodobně na vašem systému Java není instalována.</para>
+        </listitem>
+
+        <listitem>
+          <para><emphasis role="bold">Ne:</emphasis> doplňte si prostředí Java JRE pro svůj systém (vizte níže) a stáhněte <emphasis>OmegaT_2.5.x_Without_JRE.zip</emphasis>.</para>
+
+          <para>Oracle poskytuje prostředí JRE pro Solaris SPARC/x86 (Java 1.5) a pro Linux x64, Solaris x64, Windows x64 (Java 1.5):<ulink url="http://www.oracle.com/technetwork/java/archive-139210.html">http://java.sun.com/products/archive/</ulink>.</para>
+
+          <para>IBM poskytuje JRE pro Linux PowerPC na adrese: <ulink url="http://www.ibm.com/developerworks/java/jdk/linux/download.html">http://www.ibm.com/developerworks/java/jdk/linux/download.htm</ulink> </para>
+
+          <para>Použijte instalační instrukce balíku vhodného pro váš systém.</para>
+        </listitem>
+      </itemizedlist>
+    </section>
+
+    <section id="OmegaT.installation.other">
+      <title><application>Instalace programu OmegaT</application><indexterm class="singular">
+          <primary>Instalace OmegaT</primary> <secondary>Ostatní systémy</secondary>
+        </indexterm></title>
+
+      <para>Pro instalaci <application>OmegaT</application> jednoduše rozbalte stažený archív <emphasis role="bold">OmegaT_2.5.x_Without_JRE.zip</emphasis>. Toto vytvoří adresář <emphasis>./OmegaT_2.5.x_Without_JRE/</emphasis> a pracovním adresáři, včetně všech souborů potřebných pro chod aplikace <application>OmegaT</application>.</para>
+    </section>
+
+    <section id="installing.convenient.shortcuts">
+      <title>Instalace zástupců pro spuštění</title>
+
+      <para>Postupujte podle instrukcí svého systému pro instalaci zástupců <application>OmegaT</application> na příhodném místě vaší volby.</para>
+    </section>
+
+    <section id="running.OmegaT.other">
+      <title>Spouštění <application>OmegaT<indexterm class="singular">
+          <primary>Spouštění OmegaT</primary> <secondary>Ostatní systémy</secondary>
+        </indexterm></application></title>
+
+      <para>Jakmile je <application>OmegaT</application> nainstalována, můžete ji spouštět přímo z příkazového řádku, můžete vytvořit skript, který zahrnuje spouštěcí parametry pro příkazový řádek nebo můžete program spouštět přímo kliknutím na <emphasis><application>OmegaT</application>.jar</emphasis>. Metody se liší v závislosti na distribuci. Ujistěte se, že vaše nastavení <emphasis>PATH</emphasis> (tedy nastavení cesty) jsou správná a že soubory <emphasis>.jar</emphasis> jsou řádně asociovány s Javou. Pro více informací čtěte dále v části „Spouštění z příkazové řádky“.</para>
+    </section>
+  </section>
+
+  <section id="using.Java.Web.Start">
+    <title>Použití Java Web Start<indexterm class="singular">
+        <primary>Spouštění OmegaT</primary> <secondary>Použití Java Web Start</secondary>
+      </indexterm></title>
+
+    <para>Technologie Java Web Start (součást verze Java 1.5 a vyšší), může být použita pro začlenění samostatné softwarové aplikace Javy spustitelné prostým kliknutím přes síť. Přes Java Web Start je zajištěn jak přístup k aktuální verzi aplikace, tak i ke správné verzi prostředí Java Runtime Environment (JRE). Pro první spuštění aplikace OmegaT prostřednictvím Java Web Start si zadejte a načtěte ve vašem prohlížeči následující URL:</para>
+
+    <para><emphasis>http://omegat.sourceforge.net/webstart/<application>OmegaT</application>.jnlp</emphasis></para>
+
+    <para>Stáhněte si soubor<emphasis> <application>OmegaT</application> .jnlp</emphasis> a klikněte na něj. V závislosti na operačním systému se může během instalace objevit několik bezpečnostních výstrah. Práva, která udělíte této verzi (která lze nazývat jako „neomezený přístup k počítači“) jsou identická s právy, která jste přidělili lokální verzi, tato práva povolí přístup na pevný disk počítače. Při pozdějším kliknutí na soubor <emphasis><application>OmegaT</application>.jnlp</emphasis> dojde (pokud jste online) ke kontrole verze a když je vydána novější verze, nainstaluje ji a posléze program  <application>OmegaT</application> spustí. Po první instalaci můžete samozřejmě soubor <emphasis><application>OmegaT</application>.jnlp</emphasis> spouštět i v režimu offline.</para>
+
+    <para><emphasis role="bold">Poznámka</emphasis>: <application>OmegaT</application> Java Web Start neukládá žádné informace mimo počítač, na kterém je spuštěna. Aplikace běží pouze na vašem přístroji. Vaše dokumenty a překladové paměti zůstávají na vašem počítači a projekt <application>OmegaT</application> nemá žádný přístup k vaší práci nebo informacím. </para>
+
+    <para>Mějte na paměti, že pokud potřebujete nějaké parametry ke spouštěcímu příkazu (vizte výše), musíte používat běžnou instalaci.</para>
+  </section>
+
+  <section>
+    <title>&gt;Spouštění z příkazového řádku<indexterm class="singular">
+        <primary>Spouštění OmegaT</primary> <secondary>Spouštění z příkazového řádku</secondary>
+      </indexterm></title>
+
+    <para>Za normálních okolností není nutné spouštět <application>OmegaT</application> z příkazového řádku. Nicméně alternativa příkazového řádku umožňuje uživateli ovládat a upravovat chování programu. K dispozici máme dva způsoby spuštění <application>OmegaT</application> přes příkazovou řádku.</para>
+
+    <section id="method1.opening.commandline.window">
+      <title>Otevření okna s příkazovým řádkem</title>
+
+      <para>Okno s příkazovým řádkem se může též nazývat „terminálové okno“. Pod Windows se nazývá „okno MS-DOS“ a je dostupné z nabídky Start, mezi Programy, přes položku „MS-DOS“ (nebo Start &gt; Spustit &gt; napište „cmd“ + Enter). Obdobu u Mac OS X představuje aplikace Terminál, která je umístěná v Aplikace → Nástroje.</para>
+
+      <para>Pro spuštění <application>OmegaT</application> se za normálních okolností zadají dva příkazy. První z nich je:</para>
+
+      <para><emphasis> <literal>cd {adresář}</literal> </emphasis></para>
+
+      <para>kde <emphasis>{adresář}</emphasis> představuje název adresáře s kompletní cestou, ve kterém je program <application>OmegaT</application> umístěn - doslova tedy, kde je umístěn soubor <emphasis><application>OmegaT</application>.jar</emphasis>. V praxi to vypadá tak, že příkaz bude vypadat asi takto:</para>
+
+      <para>Pod Windows:</para>
+
+      <para><emphasis> <literal>cd C:\Program
+      Files\<application>OmegaT</application></literal> </emphasis></para>
+
+      <para>Na Mac OS X</para>
+
+      <para><literal> <literal>cd &lt;umístění <application>OmegaT</application>.app&gt;/<application>OmegaT</application>.app/Contents/Resources/Java/</literal>
+      </literal></para>
+
+      <para>V Linuxu</para>
+
+      <para><literal>cd /usr/local/omegat</literal></para>
+
+      <para>Příkaz změní adresář na adresář obsahující spouštěcí soubor <application>OmegaT</application>. Druhý příkaz je příkaz, který skutečně spustí aplikaci <application>OmegaT</application>. Ve své základní podobě příkaz vypadá takto:</para>
+
+      <para><literal>java -jar
+      <application>OmegaT</application>.jar</literal></para>
+
+      <para>Věnujte pozornost psaní velkých a malých písmen - program nebude spuštěn, pokud zadáte <emphasis>omegat</emphasis> místo <emphasis>OmegaT</emphasis>!</para>
+
+      <para>Tato metoda může konkrétně pomoci při nalezení příčiny problému: pokud se objeví chyba během práce s programem, bude v příkazovém řádku vypsáno chybové hlášení, které může obsahovat užitečné informace o příčině chyby.</para>
+
+      <para>Uvedená metoda představuje poněkud nepraktický způsob běžného spouštění programu. Z toho důvodu jsou oba nahoře popsané příkazy obsaženy v jednom souboru („skript“, taky nazýváno soubor „.bat“ u systému Windows).</para>
+
+      <para>Když je tento soubor spuštěn, tak jsou automaticky provedeny obsažené příkazy. Z toho plyne, že pro změnu těchto příkazů stačí upravit tento soubor.</para>
+    </section>
+
+    <section id="launch.command.arguments">
+      <title>Parametry spouštěcího příkazu<indexterm class="singular">
+          <primary>Spouštění OmegaT</primary> <secondary>Parametry spouštěcího skriptu</secondary>
+        </indexterm></title>
+
+      <para>Základní příkaz byl již popsán výše. Změny v tomto příkazu zahrnují doplnění „parametrů“. Jednotlivé parametry se přidávají za počáteční <emphasis>„java“</emphasis> a před část <emphasis>„-jar <application>OmegaT</application>.jar“</emphasis>. Povšimněte si, že ve Windows budete měnit soubor <emphasis><application>OmegaT</application>.l4J.ini</emphasis> a tak definovat své priority. Pod Mac OS X, budete za stejným účelem měnit soubor <emphasis>Info.plist</emphasis>, který je umístěn v <emphasis><application>OmegaT</application>.app/Contents/</emphasis>.</para>
+
+      <para>Seznam možných parametrů je uveden níže. Pokročilí uživatelé získají více informací o parametrech zadáním příkazu <emphasis>man java</emphasis> do okna terminálu.</para>
+
+      <itemizedlist>
+        <listitem>
+          <para><emphasis role="bold">Jazyk uživatelského rozhraní</emphasis></para>
+
+          <para><emphasis role="bold">-Duser.language=XX</emphasis><indexterm class="singular">
+              <primary>Spouštění OmegaT</primary> <secondary>Parametry spouštěcího skriptu</secondary> <tertiary>Jazyk uživatelského rozhraní</tertiary>
+            </indexterm> Běžně, tj. když se <application>OmegaT</application> spouští bez jakýchkoliv parametrů, program první detekuje jazyk uživatelova operačního systému. Pokud je uživatelské prostředí v tomto jazyce k dispozici, tak ho <application>OmegaT</application> použije. To znamená, že když je uživatelův operační systém v ruštině a <application>OmegaT</application> byla lokalizována do ruštiny, bude <application>OmegaT</application> zobrazena s ruským uživatelským prostředím, ruskými menu, atd. Pokud jazyk uživatelova systému není k dispozici, <application>OmegaT</application> použije jako výchozí jazyk angličtinu. Toto je tedy standardní chování programu.</para>
+
+          <para>Parametr <emphasis>„-Duser.language=XX“</emphasis> způsobí, že <application>OmegaT</application> použije definovaný jazyk, a ne jazyk uživatelova operačního systému. Zástupné označení „XX“ v příkazu znamená dvouznakový kód požadovaného jazyka. Pro spuštění <application>OmegaT</application> s francouzským prostředím (např. v ruském operačním systému) bude příkaz vypadat takto:</para>
+
+          <para><literal>java -Duser.language=fr -jar
+          <application>OmegaT</application>.jar</literal></para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para><emphasis role="bold">Země uživatele</emphasis></para>
+
+          <para><emphasis role="bold">-Duser.country=XX</emphasis><indexterm class="singular">
+              <primary>Spouštění OmegaT</primary> <secondary>Parametry spouštěcího skriptu</secondary> <tertiary>Země uživatele</tertiary>
+            </indexterm> Vedle jazyka můžete specifikovat i zemi, např. CN nebo TW v případě čínštiny. Abyste zobrazili Stručného úvodního průvodce ve správném jazyce, je nutno specifikovat jak jazyk, tak i zemi. Toto je důležité dokonce i tehdy, když je k dispozici jen jedna varianta, např. pt_BR v případě portugalštiny v Brazílii.</para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para><emphasis role="bold">Vyhlazování písma</emphasis> - (pouze Java 1.5)</para>
+
+          <para><emphasis role="bold">-Dswing.aatext=true<indexterm class="singular">
+              <primary>Spouštění OmegaT</primary> <secondary>Parametry spouštěcího skriptu</secondary> <tertiary>Vyhlazování písma</tertiary>
+            </indexterm></emphasis> Tento parametr má se stará o vyhlazování písma, tím zlepšíte zobrazování textu.</para>
+        </listitem>
+
+        <listitem>
+          <para><emphasis role="bold">Přiřazení množství paměti</emphasis></para>
+
+          <para><emphasis role="bold">-XmxZZM </emphasis><indexterm class="singular">
+              <primary>Spouštění OmegaT</primary> <secondary>Parametry spouštěcího skriptu</secondary> <tertiary>Přiřazení množství paměti</tertiary>
+            </indexterm> Tento příkaz přiřadí více paměti programu <application>OmegaT</application>. Výchozí nastavení je přiřazeno 512 MB, takže asi bude nevýhodné nastavovat menší hodnotu. Zástupné znaky „ZZ“ reprezentují část paměti zadávanou v megabytech. Příkaz pro spouštění <application>OmegaT</application> s nastavením 1024 MB (1 gigabyte) paměti je tedy:</para>
+
+          <para><literal>java -Xmx1024M -jar
+          <application>OmegaT</application>.jar</literal></para>
+        </listitem>
+
+        <listitem>
+          <para><emphasis role="bold">Adresa hostitelského IP Proxy</emphasis></para>
+
+          <para><emphasis role="bold"><emphasis role="bold">-Dhttp.proxyHost=nnn.nnn.nnn.nnn</emphasis> <indexterm class="singular">
+              <primary>Spouštění OmegaT</primary> <secondary>Parametry spouštěcího skriptu</secondary> <tertiary>Adresa hostitelského IP Proxy</tertiary>
+            </indexterm></emphasis> Adresa IP vašeho proxy serveru, pokud výš systém používá proxy.</para>
+        </listitem>
+
+        <listitem>
+          <para><emphasis role="bold">Číslo hostitelského portu Proxy</emphasis></para>
+
+          <para><emphasis role="bold">-Dhttp.proxyPort=NNNN</emphasis> <indexterm class="singular">
+              <primary>Spouštění OmegaT</primary> <secondary> </secondary>Parametry spouštěcího skriptu<tertiary>Číslo hostitelského portu Proxy</tertiary>
+            </indexterm> Číslo portu, který váš systém používá pro přístup k proxy serveru.</para>
+        </listitem>
+
+        <listitem>
+          <para><emphasis role="bold">Google Překladač V2</emphasis></para>
+
+          <para><emphasis role="bold">-Dgoogle.api.key=A123456789B123456789C123456789D12345678 </emphasis><emphasis role="bold"><indexterm class="singular">
+              <primary>Spouštění OmegaT</primary> <secondary>Parametry spouštěcího skriptu</secondary> <tertiary>Google Překladač V2</tertiary>
+            </indexterm></emphasis> Pokud jste se zaregistrovali do služeb Google Překladač, pak sem zadejte svůj Google API klíč. Berte na vědomí, že tento klíč má 38 znaků.</para>
+        </listitem>
+      </itemizedlist>
+
+      <para>Parametry lze kombinovat: pro spuštění aplikace <application>OmegaT</application> se všemi výše uvedenými příklady bude příkaz vypadat následovně:</para>
+
+      <para><literal>java -Dswing.aatext=true -Duser.language=pt
+      -Duser.country=BR -Xmx1024M <application>-DDhttp.proxyHost=192.168.1.1
+      -Dhttp.proxyport<emphasis role="bold">=</emphasis>3128 -jar
+      -OmegaT</application>.jar</literal></para>
+    </section>
+
+    <section id="omegat.command.arguments">
+      <title>OmegaT v režimu příkazového řádku<indexterm class="singular">
+          <primary>Spouštění OmegaT</primary> <secondary>Režim příkazového řádku</secondary>
+        </indexterm></title>
+
+      <para>Důvod proč využívat příkazový řádek (konzoli) je použití aplikace OmegaT jako překladatelský nástroj ve skriptovacím prostředí. Když aplikaci spustíte v příkazovém řádku, nenahraje se žádné grafické prostředí (je možné pracovat v jakémkoliv typu příkazovém řádku) a daný projekt je přeložen automaticky dle zadaných parametrů.</para>
+
+      <section id="console.mode.prerequisites">
+        <title>Co budeme potřebovat</title>
+
+        <para>Aby šlo spustit <application>OmegaT</application> v režimu příkazového řádku, je nutné, aby existoval platný <application>OmegaT</application> projekt. Umístění není důležité, protože se tento údaj stejně musí zadat v příkazovém řádku při startu.</para>
+
+        <para>Pokud budete chtít změnit nastavení, musíte mít konfigurační soubory. Toho lze dosáhnout dvěma způsoby:</para>
+
+        <itemizedlist>
+          <listitem>
+            <para>Spusťte aplikaci <application>OmegaT</application> běžným způsobem (přes grafické uživatelské prostředí / GUI) a zvolte vhodné nastavení. Když <application>OmegaT</application> běží v režimu příkazového řádku, tak bude použito stejné nastavení.</para>
+          </listitem>
+
+          <listitem>
+            <para>Když nejde <application>OmegaT</application> spustit běžným způsobem (není dostupné žádné grafické prostředí): zkopírujte do patřičného adresáře soubory nastavení z jiné instalace aplikace <application>OmegaT</application> na jiném počítači. Umístění není důležité, protože se tento údaj může zadat v příkazovém řádku při startu. Důležité soubory jsou <literal>filters.conf</literal> a <literal>segmentation.conf</literal> a můžete je najít v adresáři home daného uživatele (např. <literal>C:\Dokumenty a nastavení\%Uživatel%\<application>OmegaT</application></literal> ve Windows, <literal>%uzivatel%/.omegat/</literal> v Linuxu)</para>
+          </listitem>
+        </itemizedlist>
+      </section>
+
+      <section id="starting.in.console.mode">
+        <title>Spouštění aplikace v režimu příkazového řádku</title>
+
+        <para>Pro spuštění aplikace <application>OmegaT</application> v režimu příkazového řádku musíte při startu nastavit pár parametrů navíc. Nejdůležitější z nich je <literal>&lt;project-dir&gt;</literal>, a volitelně <literal>--config-dir=&lt;config-dir&gt;. </literal>Příklad:</para>
+
+        <para><literal>java -jar <application>OmegaT</application>.jar /cesta/k/projektu \</literal></para>
+
+        <para><literal>--config-dir=/cesta/ke/konfiguracnim-souborum/ \</literal></para>
+
+        <para><literal>
+        --mode=console-translate|console-createpseudotranslatetmx|console-align</literal></para>
+
+        <para><literal>--source-pattern={regulární výraz}</literal></para>
+
+        <para>Všimněte si, že všechny parametry začínají dvojitým znakem pomlčky.</para>
+
+        <para><emphasis role="bold">Vysvětlení:</emphasis></para>
+
+        <itemizedlist>
+          <listitem>
+            <para><literal>&lt;project-dir&gt;</literal> prozradí aplikaci <application>OmegaT</application> kde najít projekt, který má být překládán. Pokud je to tedy zadáno, <application>OmegaT</application> startuje v režimu příkazového řádku a přeloží zadaný projekt.</para>
+          </listitem>
+        </itemizedlist>
+
+        <itemizedlist>
+          <listitem>
+            <para><literal>--config-dir=&lt;config-dir&gt;</literal> prozradí <application>OmegaT</application>, ve kterém adresáři jsou uloženy konfigurační soubory. Když není zadáno, <application>OmegaT</application> se vrátí k výchozím hodnotám (adresář <application>OmegaT</application> v domovské složce  uživatele, nebo když není dostupné, pak adresář, ve kterém se právě pracuje). Všimněte si dvojitého znaku pomlčky.</para>
+          </listitem>
+        </itemizedlist>
+
+        <itemizedlist>
+          <listitem>
+            <para><emphasis><literal>--mode</literal>=...-</emphasis> <application>OmegaT</application> startuje v režimu příkazového řádku a vykoná tak jednu z následujících služeb automaticky</para>
+
+            <itemizedlist>
+              <listitem>
+                <para><emphasis><emphasis><literal>--mode=console-translate</literal></emphasis></emphasis></para>
+
+                <para>V tomto režimu se OmegaT pokusí přeložit soubory z adresáře /source/ za pomoci dostupných překladových pamětí. Toto je užitečné při spouštění OmegaT na serveru, kdy jsou soubory TMX automaticky přidány do projektu.</para>
+              </listitem>
+
+              <listitem>
+                <para><literal>--mode=console-createpseudotranslatetmx</literal></para>
+
+                <para>V tomto režimu vytvoří OmegaT soubory překladové paměti pro celý projekt, zakládající se pouze na zdrojových souborech. Sami si určíte soubor překladové paměti (TMX), který má být vytvořen</para>
+
+                <para><literal>--pseudotranslatetmx=allsegments.tmx
+                --pseudotranslatetype=[equal|empty]</literal></para>
+
+                <para>Parametr <emphasis>pseudotranslatetype</emphasis> určuje, zda se mají cílové segmenty rovnat zdroji, nebo jestli mají zůstat prázdné.</para>
+              </listitem>
+
+              <listitem>
+                <para><literal>--mode=console-align</literal></para>
+
+                <para>V tomto režimu, vezme OmegaT soubory Java properties, které nalezne v adresáři <literal>/source/</literal> a alignuje je s obsahy nalezenými na zadaném umístění. Výsledná tmx je uložena v adresáři <filename>omegat </filename> s názvem <filename>align.tmx</filename>.</para>
+
+                <para>V takovém případě je nutno zadat dodatečné parametry určující umístění cílových dat:</para>
+
+                <para><literal>--alignDir={umistění přeložených souborů}</literal></para>
+
+                <para><filename>alignDir</filename> musí obsahovat překlad v cílovém jazyce projektu. Např. pokud se jedná o projekt EN-&gt;FR, adresář alignDir musí obsahovat balíček ‚bundle‛ končící na _fr. Výsledná paměť tmx je uložena v adresáři <literal>omegat </literal> s názvem <filename>align.tmx</filename>.</para>
+              </listitem>
+            </itemizedlist>
+          </listitem>
+
+          <listitem>
+            <para><literal>--source-pattern={regulární výraz}</literal></para>
+
+            <para>Při použití tohoto režimu, tato možnost blíže určí, které soubory mají být automaticky zpracovány. Pokud tento parametr není blíže určen, budou zpracovány všechny soubory. Tady je pár typických příkladů jak vymezit výběr:</para>
+
+            <itemizedlist>
+              <listitem>
+                <para><emphasis><literal>.*\.html</literal></emphasis></para>
+
+                <para>Přeloženy budou všechny soubory HTML - povšimněte si, že tečka v běžném výrazu *.html se musí maskovat (\.) jak je tomu určeno pravidly regulárních výrazů.</para>
+              </listitem>
+
+              <listitem>
+                <para><literal>test\.html</literal></para>
+
+                <para>Přeložen bude jen soubor test.html, který se nachází na hlavní úrovni zdrojového adresáře. Pokud se nachází jiné soubory s názvem test.html v jiných adresářích, tak tyto budou ignorovány.</para>
+              </listitem>
+
+              <listitem>
+                <para><literal>dir-10\\test\.html</literal></para>
+
+                <para>Zpracován bude jen soubor test.html v adresáři dir-10. Opět si povšimněte zpětného lomítka, které musí být také maskováno jiným zpětným lomítkem.</para>
+              </listitem>
+            </itemizedlist>
+          </listitem>
+
+          <listitem>
+            <para><literal>--output-tag-validation-={regulární výraz}</literal></para>
+
+            <para>Při použití tohoto režimu, tato možnost blíže určí, které soubory mají být automaticky zpracovány. Pokud tento parametr není blíže určen, budou zpracovány všechny soubory. Tady je pár typických příkladů jak vymezit výběr:</para>
+
+            <itemizedlist>
+              <listitem>
+                <para><emphasis><literal>.*\.html</literal></emphasis></para>
+
+                <para>Přeloženy budou všechny soubory HTML - povšimněte si, že tečka v běžném výrazu *.html se musí maskovat (\.) jak je tomu určeno pravidly regulárních výrazů.</para>
+              </listitem>
+
+              <listitem>
+                <para><literal>test\.html</literal></para>
+
+                <para>Přeložen bude jen soubor test.html, který se nachází na hlavní úrovni zdrojového adresáře. Pokud se nachází jiné soubory s názvem test.html v jiných adresářích, tak tyto budou ignorovány.</para>
+              </listitem>
+
+              <listitem>
+                <para><literal>dir-10\\test\.html</literal></para>
+
+                <para>Zpracován bude jen soubor test.html v adresáři dir-10. Opět si povšimněte zpětného lomítka, které musí být také maskováno jiným zpětným lomítkem.</para>
+              </listitem>
+            </itemizedlist>
+          </listitem>
+
+          <listitem>
+            <para><literal>--tag-validation=[abort|warn]</literal><parameter> NazevSouboruProVystup</parameter></para>
+
+            <para><parameter>a výstup bude obsahovat zbývající chyby při ověření tagů, které tak mohou být vráceny překladateli.</parameter></para>
+
+            <para>Tato možnost dovoluje zpracovat ověření tagů po menších částech. Pokud je zvolena možnost ‚abort‛ (‚přerušit‛), ověřování tagů bude zastaveno při prvním neplatným segmentem. Když je ale zadáno ‚warn‛ (‚varovat‛), ověřování tagů zpracuje všechny segmenty a až nakonec vypíše do zadaného souboru upozornění na segmenty, které obsahují neplatné tagy.</para>
+          </listitem>
+        </itemizedlist>
+      </section>
+
+      <section id="console.mode.option.quiet">
+        <title>Možnost Quiet (‚Tichý chod‛)</title>
+
+        <para>Dodatečný parametr příkazového řádku režimu příkazového řádku: <literal>--quiet.</literal> V „quiet“ („tichém“) režimu se na obrazovce zobrazuje méně informací. Hlášení, která byste obvykle nalezli ve stavové liště se nebudou zobrazovat.</para>
+
+        <para>Příklad použití: <literal>java -jar <application>OmegaT</application>.jar /path/to/project --mode=console-translate --quiet</literal></para>
+      </section>
+
+      <section id="console.mode.option.validatetags">
+        <title>Možnosti Ověření tagů</title>
+
+        <para>Další dodatečný parametr příkazového řádku režimu příkazového řádku: <literal>--tag-validation=[abort|warn].</literal> Když přidáte tento parametr, pak bude ověření tagů provedeno před překladem/alignováním. Pokud je aktivní hodnota  <literal>abort</literal> (‚přerušit‛), pak se v případě chyby tagu zobrazí daná chyba a program bude ukončen. Pokud je aktivní hodnota <literal>warn</literal> (‚varovat‛), pak bude chyba vypsaná a OmegaT pokračuje v běhu.</para>
+
+        <para>Příklad použití: <literal>java -jar <application>OmegaT</application>.jar /path/to/project --mode=console-translate --tag-validation=abort</literal></para>
+      </section>
+    </section>
+  </section>
+
+  <section id="building.OmegaT.from.source">
+    <title>Sestavení <application>OmegaT</application> ze zdrojového kódu<indexterm class="singular">
+        <primary>Spouštění OmegaT</primary> <secondary>Sestavení OmegaT ze zdrojového kódu</secondary>
+      </indexterm></title>
+
+    <para>Mějte na paměti, že pro sestavení vlastní verzi OmegaT budete potřebovat program ant (<emphasis>http://ant.apache.org/bindownload.cgi</emphasis>). Rozbalte soubor <emphasis>OmegaT_2.5.x_Source.zip</emphasis> a přejděte do adresáře OmegaT_2.5.x_Source nebo do adresáře <emphasis>./omegat/</emphasis> zkontrolovaného kódu SVN.  Prosím, ujistěte se, že v tomto adresáři je soubor build.xml. Pak napište do příkazového řádku:</para>
+
+    <para><literal>$ ant jar release</literal></para>
+
+    <para>Tímto vytvoříte kompletní distribuci programu <application>OmegaT</application> v adresáři ./dist/, ve kterém naleznete všechny soubory potřebné k provozu <application>OmegaT</application>.</para>
+  </section>
+</chapter>

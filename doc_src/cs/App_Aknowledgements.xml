@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE appendix PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<appendix id="appendix.acknowledgements">
+  <title>Poděkování</title>
+
+  <section>
+    <title>Děkuji vám všem!</title>
+
+    <para>Ať už v současné verzi naleznete různé nesrovnalosti, opomenutí anebo přímo chyby, všechno beru na sebe. Nicméně tato příručka by nevznikla bez pomoci a podpory celé řady lidí. Explicitní díky:</para>
+
+    <itemizedlist>
+      <listitem>
+        <para>Mark Prior: oprava mého prvního návrhu byla projevem lásky k programu OmegaT a anglickému jazyku. </para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Didier Brielov: Bez Didierovy trpělivé a trvalé pomoci bych si neporadil se složitostmi DocBook. Nemluvě o jeho péči a pracovitosti při údržbě repozitářů, aby zůstaly v neporušeném a dobrém stavu.</para>
+      </listitem>
+
+      <listitem>
+        <para>Samuel Murray: za úvodní kapitolu „Naučte se používat aplikaci OmegaT za 5 minut!“.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Will Helton: jeho konečné čtení mi ušetřilo spoustu překvapení. Člověk se může jen divit, na kolika místech může v anglickém textu chybět určitý a neurčitý člen, kdybych neměl tuto neocenitelnou pomoc.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Jean-Christophe Helary: zvláštní poděkování patří JC za jeho stručný popis provozu OmegaT, paramterů příkazového řádku a všech ostatních detailů, kterých jsem si dosud nevšiml.</para>
+      </listitem>
+
+      <listitem>
+        <para>V neposlední řadě: děkuji všem přispěvatelům do <ulink url="http://sourceforge.net/tracker/?group_id=68187&amp;atid=912617">trackeru dokumentace OmegaT</ulink> za nahlášení všech zjištěných nesrovnalostí v předchozích verzích dokumentace. Jen tak dále!</para>
+      </listitem>
+    </itemizedlist>
+  </section>
+</appendix>

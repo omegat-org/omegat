@@ -1,0 +1,651 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<chapter id="chapter.user.interface">
+  <title>Uživatelské rozhraní</title>
+
+  <section id="user.interface.items">
+    <title>Hlavní okno OmegaT, ostatní okna a dialogová okna.</title>
+
+    <para>Hlavní okno OmegaT se skládá z Hlavní nabídky, stavové lišty a několika podoken. Dále je možno se setkat s dodatečnými okny, stejně jako dialogy, které se používají pro změnu nastavení projektu OmegaT. Níže uvedená informace shrnuje jejich použití a jak je vlastně otevřít.</para>
+
+    <table colsep="0" rowsep="0">
+      <title>Hlavní okno OmegaT<indexterm class="singular">
+          <primary>Uživatelské prostředí</primary> <secondary>Hlavní okno OmegaT</secondary>
+        </indexterm></title>
+
+      <tgroup cols="2" colsep="0" rowsep="1" title="Main OMegaT window">
+        <colspec align="left" colnum="1" colwidth="90"/>
+
+        <colspec align="left" colnum="2" colwidth=""/>
+
+        <tbody>
+          <row>
+            <entry><guimenuitem>Podokno Editoru</guimenuitem></entry>
+
+            <entry>sem vpisujete a zde upravujete překlad</entry>
+          </row>
+
+          <row>
+            <entry><guimenuitem>Okno Přibližné překlady</guimenuitem></entry>
+
+            <entry>zobrazuje nejpřibližnější segmenty z paměti překladu</entry>
+          </row>
+
+          <row>
+            <entry><guimenuitem>Okno Glosář</guimenuitem></entry>
+
+            <entry>zobrazuje nalezenou terminologii pro položky v právě aktivním segmentu</entry>
+          </row>
+
+          <row>
+            <entry><guimenuitem>Podokno Slovník</guimenuitem></entry>
+
+            <entry>zobrazuje slovníkové záznamy, které jsou nalezeny pro položky v právě aktivním segmentu</entry>
+          </row>
+
+          <row>
+            <entry><guimenuitem>Podokno Strojový překlad</guimenuitem></entry>
+
+            <entry>zobrazuje překlad tak, jak jej poskytují služby Strojového překladu</entry>
+          </row>
+
+          <row>
+            <entry><guimenuitem>Podokno Poznámky</guimenuitem></entry>
+
+            <entry>poznámky, které se pojí k právě otevřenému segmentu, tj. alternativní překlady nebo aktuální klíč v případě souborového formátu klíč=hodnota (key=value)</entry>
+          </row>
+
+          <row>
+            <entry><guimenuitem>Podokno Komentáře</guimenuitem></entry>
+
+            <entry>Komentáře autorů souborů PO, nebo jméno atributu, který je překládán (v XHTML)</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+
+    <table colsep="0" rowsep="0">
+      <title>Další okna<indexterm class="singular">
+          <primary>Uživatelské prostředí</primary> <secondary>Další okna</secondary>
+        </indexterm></title>
+
+      <tgroup cols="2" colsep="0" rowsep="1" title="Other windows">
+        <colspec align="left" colnum="1" colwidth="90"/>
+
+        <colspec align="left" colnum="2" colwidth=""/>
+
+        <tbody>
+          <row>
+            <entry><guimenuitem><indexterm class="singular">
+                <primary>Klávesové zkratky </primary> <secondary>Ctrl+T - okno Ověření tagů </secondary>
+              </indexterm>Okno Ověření tagů</guimenuitem></entry>
+
+            <entry><para>Dá se otevřít zkratkou <keycombo> <keycap>Ctrl</keycap> <keycap>T</keycap> </keycombo>, a zavřít <keycap>Esc</keycap>.</para></entry>
+          </row>
+
+          <row>
+            <entry><guimenuitem><indexterm class="singular">
+                <primary>Klávesové zkratky</primary>F1 - Nápověda<secondary> </secondary>
+              </indexterm>Prohlížeč Nápovědy</guimenuitem></entry>
+
+            <entry><para>Používá se pro zobrazení Uživatelské příručky (otevřete jej stiskem <keycap>F1</keycap>, zavřete přes <keycap>Esc)</keycap> </para></entry>
+          </row>
+
+          <row>
+            <entry><guimenuitem>Okno Statistika</guimenuitem></entry>
+
+            <entry><para>Používá se k zobrazení okna se statistikami projektu, otevřete jej přes nabídku <menuchoice> <guimenu><indexterm class="singular">
+                    <primary>Nabídka ‚Nástroje‛</primary> <secondary>Statistika </secondary>
+                  </indexterm>Nástroje</guimenu> <guimenuitem>Statistika.</guimenuitem> </menuchoice></para></entry>
+          </row>
+
+          <row>
+            <entry><guimenuitem>Okno Statistika shody</guimenuitem></entry>
+
+            <entry><para>Slouží k zobrazení statistiky shody v projektech, pro otevření vyberte <menuchoice> <guimenu><indexterm class="singular">
+                    <primary>Nabídka ‚Nástroje‛</primary> <secondary>Statistika shody</secondary>
+                  </indexterm>Nástroje</guimenu> <guimenuitem>Statistika shody</guimenuitem> </menuchoice></para></entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+
+    <table border="0" colsep="0" rowsep="0">
+      <title>Dialogy nastavení<indexterm class="singular">
+          <primary>Uživatelské prostředí</primary> <secondary>Dialog nastavení</secondary> <seealso>Nastavení projektu</seealso>
+        </indexterm></title>
+
+      <tgroup cols="2" colsep="0" rowsep="1" title="Settings dialogs">
+        <colspec align="left" colnum="1" colwidth="90"/>
+
+        <colspec align="left" colnum="2" colwidth=""/>
+
+        <tbody>
+          <row>
+            <entry><guimenuitem>Vlastnosti projektu<indexterm class="singular">
+                <primary>Nabídka ‚Projekt‛</primary> <secondary>Vlastnosti</secondary>
+              </indexterm></guimenuitem> <indexterm class="singular">
+                <primary>Klávesové zkratky</primary> <secondary>Ctrl+E - Vlastnosti projektu</secondary>
+              </indexterm></entry>
+
+            <entry>Používá se pro upravení adresářů a jazyků projektu (přístup přes zkratku <guimenuitem>Ctrl+E </guimenuitem> nebo <menuchoice> <guimenu>Projekt</guimenu> <guimenuitem>Vlastnosti...</guimenuitem> </menuchoice>, zavřete jej stiskem <keycap>Esc)</keycap></entry>
+          </row>
+
+          <row>
+            <entry><guimenuitem>Písmo<indexterm class="singular">
+                <primary>Nastavení projektu</primary> <secondary>Písmo</secondary>
+              </indexterm></guimenuitem></entry>
+
+            <entry><para>slouží k úpravě písma, které <application>OmegaT</application> používá pro zobrazení zdroje, překladu, shodných výrazů a pojmů v glosáři, otevírá se přes <menuchoice> <guimenu>Možnosti</guimenu> <guimenuitem>Písmo...</guimenuitem> </menuchoice>, zavírá se stiskem <keycap>Esc</keycap><keycap>)</keycap></para></entry>
+          </row>
+
+          <row>
+            <entry><guimenuitem>Filtry souborů<indexterm class="singular">
+                <primary>Nastavení projektu</primary> <secondary>Filtry souborů</secondary>
+              </indexterm><indexterm class="singular">
+                <primary>Nabídka ‚Možnosti‛</primary> <secondary>Filtry souborů</secondary>
+              </indexterm></guimenuitem></entry>
+
+            <entry>Nabízí přizpůsobení si práce s podporovanými formáty souborů (spouští se přes <menuchoice> <guimenu>Možnosti</guimenu> <guimenuitem>Filtry souborů...</guimenuitem> </menuchoice>, zavírá se stiskem <keycap>Esc</keycap>)</entry>
+          </row>
+
+          <row>
+            <entry><guimenuitem>Segmentace<indexterm class="singular">
+                <primary>Nastavení projektu</primary> <secondary>Segmentace</secondary>
+              </indexterm><indexterm class="singular">
+                <primary>Nabídka ‚Možnosti‛</primary> <secondary>Segmentace</secondary>
+              </indexterm></guimenuitem></entry>
+
+            <entry>Umožňuje změnu způsobu, jakým je váš text segmentovaný do vět, spouští se přes <menuchoice> <guimenu>Možnosti</guimenu> <guimenuitem>Segmentace</guimenuitem> </menuchoice>, zavírá se stiskem <keycap>Esc</keycap>)</entry>
+          </row>
+
+          <row>
+            <entry><guimenuitem>Nastavení editace<indexterm class="singular">
+                <primary>Nabídka ‚Možnosti‛</primary> <secondary>Nastavení editace...</secondary>
+              </indexterm><indexterm class="singular">
+                <primary>Nastavení projektu</primary> <secondary>Nastavení editace</secondary>
+              </indexterm></guimenuitem></entry>
+
+            <entry>Slouží pro změnu toho, jak  <application>OmegaT</application> reaguje, když přecházíte mezi segmenty, spouští se přes <menuchoice> <guimenu>Možnosti</guimenu> <guimenuitem>Nastavení editace...</guimenuitem> </menuchoice>, zavřete jej stiskem <keycap>Esc</keycap>)</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+  </section>
+
+  <section id="OmegaT.main.window">
+    <title>Hlavní okno <application>OmegaT</application><indexterm class="singular">
+        <primary>Okna a podokna v OmegaT</primary> <secondary>Hlavní okno</secondary> <tertiary>- obrázek</tertiary>
+      </indexterm><indexterm class="singular">
+        <primary>Okna a podokna v OmegaT</primary> <secondary>Hlavní okno</secondary>
+      </indexterm></title>
+
+    <figure id="OmegaT.main.window.figure">
+      <title>Hlavní okno OmegaT</title>
+
+      <mediaobject>
+        <imageobject role="html">
+          <imagedata fileref="images/OmegaT_panes_25.png" scale="100"/>
+        </imageobject>
+
+        <imageobject role="fo">
+          <imagedata fileref="images/OmegaT_panes_25.png" width="80%"/>
+        </imageobject>
+      </mediaobject>
+    </figure>
+
+    <para>Hlavní okno sestává z několika podoken, hlavní nabídky a stavové lišty Můžete měnit pozici jakéhokoliv podokna nebo dokonce jej odpojit a získat tak samostatné okno tím, že dané podokno nakliknete a potáhnete za jeho název.  V závislosti na stavu podokna se mohou v horním pravém rohu podokna objevovat různé znaky:</para>
+
+    <table>
+      <title>Tlačítka podoken<indexterm class="singular">
+          <primary>Okna a podokna v OmegaT</primary> <secondary>Tlačítka podoken</secondary>
+        </indexterm></title>
+
+      <tgroup cols="2">
+        <colspec align="left" colnum="1" colwidth="60"/>
+
+        <tbody>
+          <row>
+            <entry><inlinemediaobject>
+                <imageobject role="html">
+                  <imagedata fileref="images/Minimize.gif" width="60%"/>
+                </imageobject>
+
+                <imageobject role="fo">
+                  <imagedata fileref="images/Minimize.gif" width="40%"/>
+                </imageobject>
+              </inlinemediaobject></entry>
+
+            <entry>minimalizuje podokno, takže pak je ve spodní čísti okna vidět jen název minimalizovaného podokna.</entry>
+          </row>
+
+          <row>
+            <entry><inlinemediaobject>
+                <imageobject role="html">
+                  <imagedata fileref="images/Maximize.gif" width="60%"/>
+                </imageobject>
+
+                <imageobject role="fo">
+                  <imagedata fileref="images/Maximize.gif" width="40%"/>
+                </imageobject>
+              </inlinemediaobject></entry>
+
+            <entry>maximalizuje podokno</entry>
+          </row>
+
+          <row>
+            <entry><inlinemediaobject>
+                <imageobject role="html">
+                  <imagedata fileref="images/restore.gif" width="60%"/>
+                </imageobject>
+
+                <imageobject role="fo">
+                  <imagedata fileref="images/restore.gif" width="40%"/>
+                </imageobject>
+              </inlinemediaobject></entry>
+
+            <entry>obnoví nastavení vzhledu před krokem maximalizace</entry>
+          </row>
+
+          <row>
+            <entry><inlinemediaobject>
+                <imageobject role="html">
+                  <imagedata fileref="images/undock.gif" width="60%"/>
+                </imageobject>
+
+                <imageobject role="fo">
+                  <imagedata fileref="images/undock.gif" width="40%"/>
+                </imageobject>
+              </inlinemediaobject></entry>
+
+            <entry>odpojí podokno z hlavního okna</entry>
+          </row>
+
+          <row>
+            <entry><inlinemediaobject>
+                <imageobject role="html">
+                  <imagedata fileref="images/dock.gif" width="60%"/>
+                </imageobject>
+
+                <imageobject role="fo">
+                  <imagedata fileref="images/dock.gif" width="40%"/>
+                </imageobject>
+              </inlinemediaobject></entry>
+
+            <entry>vrátí podokno zpět do hlavního okna.</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+
+    <para>Pokud chcete, okna se můžou i překrývat. V takovém případě zobrazí podokno v horní části záložky. Oddělovače mezi podokny je možno táhnout a docílit tak změnu velikosti podoken. Pokud ztratíte přehled o změnách zobrazení podoken v uživatelském prostředí, můžete použít možnost <guimenuitem><indexterm class="singular">
+        <primary>Okna OmegaT</primary> <seealso>Okna a podokna v OmegaT</seealso>
+      </indexterm> <indexterm class="singular">
+        <primary>Okna OmegaT</primary> <secondary>Obnovení továrního nastavení</secondary>
+      </indexterm>Možnosti → Obnovit hlavní okno</guimenuitem> a kdykoliv tak vrátit původní rozestavění.</para>
+
+    <para>Počitadla v dolním pravém rohu sledují proces překladu (čísla v levém sloupci odkazují na výše uvedený obrázek):</para>
+
+    <table>
+      <title>Hlavní okno - počitadla<indexterm class="singular">
+          <primary>Okna a podokna v OmegaT</primary> <secondary>Počitadla </secondary>
+        </indexterm></title>
+
+      <tgroup cols="2">
+        <colspec align="left" colnum="1" colwidth="60"/>
+
+        <tbody>
+          <row>
+            <entry>33/33</entry>
+
+            <entry>počet segmentů - přeložených vs. celkový počet v aktuálním souboru</entry>
+          </row>
+
+          <row>
+            <entry>2780/2780</entry>
+
+            <entry>počet jedinečných (nepárových) segmentů - přeložených vs. celkový počet v projektu</entry>
+          </row>
+
+          <row>
+            <entry>3760</entry>
+
+            <entry>celkový počet segmentů (včetně opakujících se) v projektu</entry>
+          </row>
+
+          <row>
+            <entry>126/127</entry>
+
+            <entry>počet znaků ve zdroji a překladu v aktuálním segmentu</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+
+    <para>Z praktického pohledu se dá říci, že nejdůležitější číselný pár je ten druhý: informuje o tom, kolik z překladu jste již zvládli vhledem k celkovému počtu segmentů (spárovaných nebo jedinečných). Projekt ukázaný v příkladě je zjevně již kompletní, protože ukazuje, že všechny jedinečné segmenty byly přeloženy.</para>
+
+    <section id="editor.pane">
+      <title>Podokno Editoru<indexterm class="singular">
+          <primary>Okna a podokna v OmegaT</primary> <secondary>Podokno Editoru</secondary>
+        </indexterm></title>
+
+      <para>sem vpisujete a zde upravujete překlad Podokno editoru zobrazuje text částečně přeloženého dokumentu, tzn. text, který je už přeložený je také jako přeložený zobrazen, a text, který ještě není přeložený se zobrazuje v původním jazyce.  Zobrazený text je rozdělený do segmentů a překladatel může přecházet dokumentem na kterýkoliv segment a editovat jej. Ve výše uvedeném případě, jsou již přeložené segmenty zobrazeny žlutě.</para>
+
+      <para>Jeden z nahoře ukázaných segmentů představuje aktivní segment. Je to ten segment, který je v zobrazení rozdělen na dvě části. Horní část je v jazyce zdroje, tučným písmem a na zeleném pozadí, spodní část je pole editace, které je ukončené značkou: <indexterm class="singular">
+          <primary>Označování segmentů</primary>
+        </indexterm>značka je <literal>&lt;segment nnnn&gt;</literal>, kde nnnn představuje číslo segmentu v daném projektu. Horní část se používá jako reference a nahrazuje či upravuje se obsah editačního pole, které obsahuje vlastní překlad.</para>
+
+      <para>V závislosti na nastavení hodnot u Nastavení editace, může být editační pole pro nepřeložený segment prázdné, obsahovat zdrojový text nebo překladový řetězec nejpřibližnější k tomu, který právě překládáte.  Jakmile přejdete na jiný segment, překlad bude validován a uložen. Pokud chcete, aby se překlad rovnal zdroji, jednoduše vyprázdněte editační pole odstraněním veškerého textu (vyberte vše stiskem <keycap>Ctrl+A</keycap> a smažte pomocí <keycap>Del</keycap>). OmegaT umí uložit překlad, který je identický se zdrojem. Toto je užitečné u dokumentů, které obsahují obchodní značky, názvy nebo jiné vlastní jména, nebo části ve třetím jazyce, které nevyžadují překlad. Více podrobností najdete v části <emphasis>Editace překladu</emphasis>.</para>
+
+      <para>Když kliknete pravým tlačítkem myši do Editoru, otevře se vyskakovací nabídka, která nabízí možnosti <emphasis role="bold"> Vyjmout, Kopírovat, Vložit</emphasis> (tj. stejné funkce jako <keycombo> <keycap>Ctrl</keycap> <keycap>X</keycap> </keycombo>, <keycombo> <keycap>Ctrl</keycap> <keycap>C</keycap> </keycombo> a <keycombo> <keycap>Ctrl</keycap> <keycap>V</keycap> </keycombo>) a funkce <emphasis role="bold">Přejít na segment</emphasis>. </para>
+    </section>
+
+    <section id="match.viewer">
+      <title>Podokno Přibližné překlady<indexterm class="singular">
+          <primary>Okna a podokna v OmegaT</primary> <secondary>Podokno Přibližné překlady</secondary>
+        </indexterm></title>
+
+      <para><figure id="matches.pane">
+          <title><indexterm class="singular">
+              <primary>Shody / Přibližné překlady</primary> <secondary>obrázek - Podokno Přibližné překlady</secondary>
+            </indexterm><indexterm class="singular">
+              <primary>Windows and panes in OmegaT</primary> <secondary>obrázek - Podokno Přibližné překlady</secondary>
+            </indexterm>Okno Přibližné překlady</title>
+
+          <mediaobject>
+            <imageobject role="html">
+              <imagedata fileref="images/MatchesPane_25.png"/>
+            </imageobject>
+
+            <imageobject role="fo">
+              <imagedata fileref="images/MatchesPane_25.png" width="80%"/>
+            </imageobject>
+          </mediaobject>
+        </figure></para>
+
+      <para>Podokno přibližných překladů ukazuje nejvíce podobné segmenty z překladových pamětí, jednak z interní překladové paměti projektu vytvořeného během překládání vašeho projektu, za další i ze starších překladových pamětí, které importuje z vašich předchozích zakázek, nebo je můžete získat od vašeho klienta či překladatelské agentury.</para>
+
+      <para>Když se přesunete na následující segment, první přibližný překlad (ten s nejvyšší mírou shody) je již vybraný automaticky. Můžete vybrat další překlad stiskem <guimenuitem>Ctrl+2, 3, 4, or 5</guimenuitem>.<indexterm>
+          <primary>Klávesové zkratky</primary> <secondary>Ctrl+N - Výběr dané shody </secondary>
+        </indexterm>  Nicméně pokud není dostupný návrh č. 5, stiskem  <keycombo> <keycap>Ctrl</keycap> <keycap>5</keycap> </keycombo> ničeho nedocílíte. Pro použití vybraného shodného výrazu ve vašem překladu, stiskněte <guimenuitem>Ctrl+R</guimenuitem><indexterm class="singular">
+          <primary>Klávesové zkratky</primary> <secondary>Ctrl+R - Nahradit text</secondary>
+        </indexterm> pro nahrazení cílového pole nalezeným výrazem, nebo stiskněte <guimenuitem>Ctrl+I <indexterm class="singular">
+          <primary>Klávesové zkratky</primary> <secondary>Ctrl+I - Vložit text</secondary>
+        </indexterm></guimenuitem> pro jeho vložení na pozici kurzoru.</para>
+
+      <para>Míra shody je zhruba vypočítávána z počtu společných slov v nalezeném a původním segmentu, děleno počtem slov v tom delším. Označený přibližný překlad bude zvýrazněn tučně, slova, která v překládaném segmentu chybí, budou zbarvena modře a slova sousedící s chybějícími částmi se zobrazí zeleně. Ve výše uvedeném příkladě zdrojový segment obsahuje tento text <emphasis role="bold">Context menu command</emphasis>.  Nejvyšší shoda je 100%, protože se všechna slova shodují. Stejně jsou na tom další dvě shody a shoda č. 4 je podobná, ale přece odlišná. Na řádku, kde je vypsáno procento shody, je také uveden název překladové paměti <indexterm class="singular">
+          <primary>Překladové paměti</primary> <secondary>Shodné položky</secondary>
+        </indexterm> obsahující danou shodu. Pokud není zobrazen žádný název souboru, znamená to, že zdroj pochází z výchozí překladové paměti projektu. Nespárované (osiřelé) segmenty<indexterm class="singular">
+          <primary>Překladové paměti</primary> <secondary>Nespárované segmenty</secondary>
+        </indexterm> (shoda č. 2) představují takové segmenty ve výchozí překladové paměti, které nemají odpovídajícího zdrojové segmenty v aktuálním projektu.</para>
+
+      <para>Ve skutečnosti jsou tu uvedeny tři odhady (66/66/30, jak v příkladě nahoře uvádí případ shody č. 4) Jsou definovány následovně:</para>
+
+      <itemizedlist>
+        <listitem>
+          <para>procento shody, když je používán plugin tokenizer</para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para>výchozí shoda OmegaT - číslo shodujících slov - kdy se ignorují číslovky a tagy - děleno celkovým počtem slov</para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para>shoda OmegaT, včetně čísel a tagů</para>
+        </listitem>
+      </itemizedlist>
+    </section>
+
+    <section>
+      <title>Okno Glosář<indexterm class="singular">
+          <primary>Okna a podokna v OmegaT</primary> <secondary>Podokno glosáře</secondary>
+        </indexterm></title>
+
+      <para>Podokno Glosář umožňuje přístup k vlastní, soukromé sbírce výrazů a zvláštní terminologie, kterou jste si vytvořili v souborech glosáře. Ukazuje překlad termínů, které jsou nalezeny v aktuálním segmentu. Zdrojový segment v příkladě níže byl „<emphasis>Context menu command</emphasis>“, jako v příkladě Přibližného překladu v případě nahoře, a zobrazená slova nalezená v dostupných glosářích (Terminologická sbírka Microsoft a Slovinský glosář Linuxové uživatelské skupiny).</para>
+
+      <figure id="multiword.pane">
+        <title><indexterm class="singular">
+            <primary>Glosáře</primary> <secondary>obrázek - víceslovné záznamy v glosáři</secondary>
+          </indexterm>víceslovné záznamy v glosáři</title>
+
+        <mediaobject>
+          <imageobject role="html">
+            <imagedata fileref="images/GlossaryPane_25.png"/>
+          </imageobject>
+
+          <imageobject role="fo">
+            <imagedata fileref="images/GlossaryPane_25.png" width="80%"/>
+          </imageobject>
+        </mediaobject>
+      </figure>
+
+      <para>Pokud jste si aktivovali možnost TransTips (<guimenuitem>Možnosti → Transtips</guimenuitem>), klikněte pravým tlačítkem myši na zvýrazněné slovo ve zdrojovém segmentu a otevře se tak  nabídka s navrhovaným překladem, stejně jako je to nabízeno přímo v glosáři. Když vyberete jeden z navrhovaných záznamů, pak bude tento překlad vložen na aktuální pozici kurzoru v segmentu s překladem. Podobně můžete postupovat, když zvýrazníte a zkopírujete upřednostněnou variantu v podokně glosáře, a vložíte ji do cílového segmentu (příp. stačí zvýraznit a pak pravý klik (nebo klik kolečkem) v cílovém segmentu, kam to chcete vložit).</para>
+    </section>
+
+    <section id="dictionaries">
+      <title>Podokno Slovník<indexterm class="singular">
+          <primary>Okna a podokna v OmegaT</primary> <secondary>Podokno Slovník</secondary>
+        </indexterm></title>
+
+      <para>Slovníky představují elektronický ekvivalent tištěných slovníků, jako Merriam Webster, Duden, Larousse, atd., které máte na svém stole. Více informací k tomuto tématu najdete v kapitole o <link linkend="chapter.dictionaries">Slovnících</link>.</para>
+    </section>
+
+    <section id="Multiple.Translations">
+      <title>Podokno pro překlad s více významy<indexterm class="singular">
+          <primary>Okna a podokna v OmegaT</primary> <secondary>Podokno pro překlad s více významy</secondary>
+        </indexterm></title>
+
+      <para>Daný zdrojový segment může vykazovat různé možnosti překladu, vždy v závislosti na kontextu. Pokud se v konkrétní situaci nehodí určitý překlad, uživatel může vybrat položku nabídky <guisubmenu>Upravit → Vytvořit alternativní překlad</guisubmenu>. S text překladu, který vložíte po tomto kroku, se bude zacházet jako s alternativním překladem zdrojového segmentu. Můžete pak vybrat jeden z alternativních překladů (např. nejpravděpodobnější mezi nimi) jako výchozí překlad, vyberte <guisubmenu>Upravit → Použít jako výchozí překlad</guisubmenu></para>
+    </section>
+
+    <section>
+      <title>Podokno Poznámky</title>
+
+      <para>Překladatel může přidávat poznámky k otevřenému segmentu, například když se chce později vrátit k segmentu a předělat překlad, zkontrolovat správnost alternativního překladu nebo se zeptat kolegů na jejich názor. Poznámkami můžete procházet použitím položek nabídky <guisubmenu>Přejít → Další poznámka</guisubmenu> a <guisubmenu>Přejít → Předchozí poznámka.</guisubmenu></para>
+    </section>
+
+    <section>
+      <title>Podokno Komentáře</title>
+
+      <para>Některé souborové formáty, specializované pro práci s překladem, jako např. PO, povolují zahrnout komentáře. Tímto způsobem je možno překladateli poskytnout kontext o překládaném segmentu. V příkladě níže vidíme, že autor souboru PO zahrnul varování pro překladatele, aby zkontroloval délku překladu:</para>
+
+      <figure id="comments.pane">
+        <title><indexterm class="singular">
+            <primary>Komentáře</primary> <secondary>Podokno Komentáře</secondary>
+          </indexterm></title>
+
+        <mediaobject>
+          <imageobject role="html">
+            <imagedata fileref="images/Comments_25.png" width=""/>
+          </imageobject>
+
+          <imageobject role="fo">
+            <imagedata fileref="images/Comments_25.png" width="80%"/>
+          </imageobject>
+        </mediaobject>
+      </figure>
+    </section>
+
+    <section id="Google.Translate">
+      <title>Podokno Strojový překlad<indexterm class="singular">
+          <primary>Okna a podokna v OmegaT</primary> <secondary>Podokno Strojový překlad</secondary>
+        </indexterm></title>
+
+      <para>Když je otevřeno podokno Strojový překlad, tak se zde zobrazují návrhy překladu aktuálního segmentu zprostředkované z nástrojů strojového překladu.  Když stisknete klávesovou zkratku <keysym>Ctrl+M </keysym>, nahradíte překlad aktuálního segmentu navrženým překladem.  Více informací naleznete v kapitole <link linkend="chapter.machine.translate">Strojový překlad</link>.</para>
+    </section>
+
+    <section>
+      <title id="main.menu">Hlavní nabídka</title>
+
+      <para>Hlavní nabídka umožňuje přístup ke všem funkcím <application>OmegaT</application> Úplný popis všech nabídek a jejich položek se nachází v příloze k <emphasis>Hlavní nabídce</emphasis>. Nejpoužívanější funkce jsou dostupné pomocí klávesových zkratek, takže když si na ně zvyknete, nebudete už dále potřebovat v průběhu překládání na menu přecházet. Detailní popis zkratek najdete v kapitole <link linkend="chapter.menu">Hlavní nabídka a Klávesové zkratky</link></para>
+    </section>
+
+    <section id="status.bar">
+      <title>Stavová lišta</title>
+
+      <para>Stavová lišta zobrazuje zprávy vztahující se k běhu práce ve spodní části hlavního okna. Tato lišta podává uživateli zpětnou vazbu o specifických operacích, které právě probíhají. Také zobrazuje počet přibližných překladů a nalezených položek v glosáři pro aktuální segment.</para>
+    </section>
+  </section>
+
+  <section id="other.windows">
+    <title>Další okna</title>
+
+    <section id="section.project.files">
+      <title>Soubory projektu<indexterm class="singular">
+          <primary>Okna a podokna v OmegaT</primary> <secondary>Soubory projektu</secondary>
+        </indexterm></title>
+
+      <para>Okno Soubory projektu zobrazuje seznam souborů projektu a udává ostatní informace o projektu. Zobrazuje se automaticky, když OmegaT načítá projekt. Dialogové okno otevřete stiskem <guimenuitem>Ctrl+L<indexterm class="singular">
+          <primary>Klávesová zkratka</primary> <secondary>Ctrl+L - Seznam souborů projektu</secondary>
+        </indexterm></guimenuitem> a přes klávesu <keycap>Esc</keycap> jej zavřete. Okno Soubory projektu zobrazuje následující informace:</para>
+
+      <itemizedlist>
+        <listitem>
+          <para>seznam všech přeložitelných souborů v projektu. Toto jsou soubory nacházející se v adresáři zdrojových souborů, a ve formátech, které OmegaT umí zpracovávat. Kliknutí na jakýkoliv soubor jej otevře a překlad může začít</para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para>Soubor, který je zrovna dostupný v podokně Editoru je zvýrazněn modrým pozadím. Stiskem klávesy <keycap>Enter</keycap> se v podokně Editor načte vybraný soubor.</para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para>Počet segmentů v každém souboru se zobrazuje vedle názvu souboru.</para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para>Ve spodní části tabulky jsou zobrazeny údaje o celkovém počtu segmentů, počtu jedinečných segmentů v celém projektu a počet jedinečných segmentů, které jsou již přeloženy.</para>
+        </listitem>
+      </itemizedlist>
+
+      <para>Sada <emphasis role="bold">Jedinečných</emphasis> segmentů se počítá ze souhrnu všech segmentů a odstraněním všech duplicitních segmentů. (Definice pro „jedinečné“ vychází z rozlišování velikosti písmen: „Run“ a „run“ jsou brány jako dva záznamy.)</para>
+
+      <para>Rozdíl mezi „Počtem segmentů“ a „Počtem jedinečných segmentů“ poskytuje přibližný přehled o tom, kolik opakování máte v textu. Povšimněte si, že čísla poskytují jen orientační údaje, o tom, jak podstatná ta která opakování jsou: segmenty by mohly být poměrně dlouhé věty opakované několikrát (máte štěstí!) nebo jednoduchá klíčová slova zaplňující tabulku (pak už nemáte až takové štěstí...). Soubor <filename>project_stats.txt</filename> umístěný v adresáři /omegat vašeho projektu obsahuje detailnější informace o segmentech vždy podle souboru.</para>
+
+      <para>Dodatečná úprava pravidel segmentace může ovlivnit počet segmentů / jedinečných segmentů. Takovémuto kroku byste se měli po započetí práce na projektu obecně vyhnout. Více informací najdete v části <emphasis>Pravidla segmentace</emphasis>.</para>
+
+      <para><emphasis role="bold"><indexterm class="singular">
+          <primary>Zdrojové soubory</primary> <secondary>Přidání souborů do projektu</secondary>
+        </indexterm>Přidání souborů do projektu:</emphasis> soubory do projektu můžete přidat kliknutím na tlačítko <guimenuitem>„Importovat zdrojové soubory“</guimenuitem>. Tímto zkopírujete vybrané soubory do adresáře <filename>source</filename>, projekt bude znovu načten a je možno importovat nové soubory.  Můžete přidat zdrojové soubory z internetových stránek, napsaných v MediaWiki, kliknutím na tlačítko <guimenuitem>„Import z Mediawiki“</guimenuitem> a zadáním odpovídající URL.</para>
+    </section>
+
+    <section id="section.search.window">
+      <title>Okno Hledat v textu<indexterm class="singular">
+          <primary>Okna a podokna v OmegaT</primary> <secondary>Okno Hledat v textu</secondary>
+        </indexterm></title>
+
+      <para>Okno Hledat v textu můžete použít k vyhledání specifických segmentů uvnitř projektu. Současně může být otevřeno několik oken hledání. Nové okno hledání otevřete z hlavního okna stiskem klávesové zkratky <keycombo><keycap>Ctrl</keycap> <keycap>F</keycap> </keycombo>.  Okno Hledat se skládá z textového pole pro zadávání hledaných řetězců nebo klíčových slov, zaškrtávacích polí a přepínacích tlačítek  V kapitole <emphasis> <link linkend="chapter.user.interface">Vyhledávání</link> </emphasis> naleznete více informací k oknu Hledat v textu.</para>
+    </section>
+
+    <section id="section.tag.validation">
+      <title>Ověření tagů<indexterm class="singular">
+          <primary>Ověřování tagů</primary> <seealso>Klávesové zkratky, tagy</seealso>
+        </indexterm><indexterm class="singular">
+          <primary>Okna a podokna v OmegaT</primary> <secondary>Ověření tagů</secondary> <seealso>Tagy</seealso>
+        </indexterm></title>
+
+      <para>Okno Ověření tagů detekuje chyby a nesrovnalosti tagů v přeložených dokumentů a zobrazí je. Klávesovou zkratkou <guimenuitem>Ctrl+T otevřete okno Ověření tagů. </guimenuitem>Okno obsahuje tabulku o třech sloupcích s odkazy na segmenty a jejich textem zdroje a překladu:</para>
+
+      <para><figure id="tag.validator.window">
+          <title><indexterm class="singular">
+              <primary>Ověření tagů</primary> <secondary>obrázek - Okno</secondary> <seealso>Tagy</seealso>
+            </indexterm>Okno Ověření tagů</title>
+
+          <mediaobject>
+            <imageobject role="html">
+              <imagedata fileref="images/TagValidator.png"/>
+            </imageobject>
+
+            <imageobject role="fo">
+              <imagedata fileref="images/TagValidator.png" width="60%"/>
+            </imageobject>
+          </mediaobject>
+        </figure></para>
+
+      <para>Tagy jsou zvýrazněné tučným modrým písmem a lze snadno srovnat původní obsah s obsahem přeloženým. Klikněte na odkaz pro přejití na segment v Editoru. Pokud je to nutné, opravte chybu a stiskněte <guimenuitem>Ctrl+T</guimenuitem> pro návrat k oknu Ověření tagů a tak můžete opravit případné další chyby. V prvním a třetím případě v uvedeném příkladě jsou tagy spárovány chybně, a ve druhém případě chybí v otevíracím tagu znaménko &lt;.</para>
+
+      <para>Chyby tagů představují takové případy, které nereflektují stejný pořádek a počet tagů v překladu po vzoru původního segmentu. Některé případy zobrazené v okně ověření tagů sice vyžadují opravu, nicméně jsou neškodné, jiné mohou způsobit problémy při vytváření přeložených dokumentů. Tagy všeobecně představují nějaký druh formátování v původním textu. Zjednodušení formátování původního textu před započetím práce na překladu může značně přispět ke snížení počtu tagů.</para>
+    </section>
+
+    <section>
+      <title>Statistika<indexterm class="singular">
+          <primary>Statistika</primary> <seealso>Nabídka ‚Nástroje‛</seealso>
+        </indexterm></title>
+
+      <para>Okno statistiky (zobrazené přes <emphasis role="bold">Nástroje&gt;Statistika</emphasis>) ukazuje statistiku aktuálního projektu OmegaT, a to jak ve formě shrnutí, tak i detailního rozpisu pro každý překládaný soubor. Ukázaná statistika je dostupná jako soubor s hodnotami oddělenými tabulátorem  <filename>project_stats.txt</filename> (podadresář <filename>omegat</filename>), můžete jej otevřít pro lepší čitelnost v libovolném tabulkovém procesoru. Obsah můžete zkopírovat/vložit i za použití klávesových zkratek <guimenuitem>Ctrl+A <indexterm class="singular">
+          <primary>Klávesové zkratky</primary>Ctrl+A - vybrat vše<secondary> </secondary>
+        </indexterm></guimenuitem><guimenuitem>, Ctrl+C <indexterm class="singular">
+          <primary>Klávesové zkratky</primary>&gt;Ctrl+C - zkopírovat text<secondary> </secondary>
+        </indexterm></guimenuitem>, <guimenuitem>Ctrl+V <indexterm class="singular">
+          <primary>Klávesové zkratky</primary> <secondary>Ctrl+V - vložit text</secondary>
+        </indexterm></guimenuitem>.<figure id="ProjectStatistic.Window">
+          <title>Statistika projektu</title>
+
+          <mediaobject>
+            <imageobject role="html">
+              <imagedata fileref="images/StatisticsWindow_25.png"/>
+            </imageobject>
+            <imageobject role="fo">
+              <imagedata fileref="images/StatisticsWindow_25.png" width="60%"/>
+            </imageobject>
+          </mediaobject>
+        </figure></para>
+    </section>
+
+    <section>
+      <title>Statistika shody<indexterm class="singular">
+          <primary>Statistika shody</primary> <seealso>Nabídka ‚Nástroje‛</seealso>
+        </indexterm></title>
+
+      <para>Statistiku shody najdete pod <guimenuitem>Nástroje&gt;Statistika shody.</guimenuitem> Zpracování statistiky je náročné na možnosti CPU a může nějakou dobu trvat, proto se během zpracování zobrazí ukazatel průběhu. Pracuje se tu s určitými kategoriemi, které de facto představují průmyslový standard při klasifikaci shody na následující skupiny: Přesná shoda 95%-100%, 85%-94%, 75%-84%, 50%-74% a Žádná shoda. Počet slov, shodný s počtem z okna Soubory projektu, se přísně zakládá na metodě počítání OmegaT, s několika odlišnostmi v terminologii, když se berou v úvahu různé koncepty. Tato informace je počítána jak pro segmenty, tak i pro slova a znaky (bez a s mezerami).<figure>
+          <title>Statistika shody</title>
+
+          <mediaobject>
+            <imageobject role="html">
+              <imagedata fileref="images/MatchStatistics.png"/>
+            </imageobject>
+            <imageobject role="fo">
+              <imagedata fileref="images/MatchStatistics.png" width="80%"/>
+            </imageobject>
+          </mediaobject>
+        </figure></para>
+
+      <para>Mějte na paměti, že tyto počty představují dobrý (tzn. tak dobrý  jak jen může být) průměr práce vložené do projektu a proto může sloužit jako základ pro výpočet vašich nákladů a cen.</para>
+
+      <para>Mezery mezi segmenty se nezahrnují do počtu v posledním sloupci. Opakování znamená identické segmenty vyskytující se v textu několikrát. První segment a jeho obsah se klasifikuje jako „žádná shoda“, a zbytek se považuje za opakování prvního. Pokud v překladové paměti projektu již existuje překlad pro několik identických zdrojových segmentů, pak budou takovéto segmenty, spolu s ostatními již přeloženými jedinečnými segmenty, klasifikovány jako „Přesná shoda“. Počet jedinečných segmentů, pokud je zapotřebí, je dostupný v běžném okně statistiky, nehledě na to, zda byly přeloženy nebo ne.</para>
+
+      <para>Zbytek kategorií (50-100%) zahrnuje nepřeložené segmenty včetně přibližných překladů. Přibližné překlady mohou také pocházet z adresáře <filename>/tm</filename>, nejen z interní překladové paměti v adresáři  <filename>/omegaT,</filename> jak je tomu v případě opakování a přesné shody. Jediný rozdíl se shodami z překladové paměti <filename>project_save</filename>  je ten, že externí překladová paměť nemůže poskytovat přesné shody, ale jen 100%.  Pokud nechcete použít externí překladovou paměť pro propočty statistiky, pak buď vyprázdněte adresář /tm nebo změňte (dočasně) nastavení projektu, takže hodnota místo /tm bude nasměřována na jinou pozici.</para>
+
+      <para>Data statistiky shody jsou odděleny tabulátory a můžete použít  <guimenuitem>Ctrl+A <indexterm class="singular">
+          <primary>Klávesové zkratky</primary>Ctrl+A - vybrat vše<secondary> </secondary>
+        </indexterm></guimenuitem><guimenuitem>, Ctrl+C <indexterm class="singular">
+          <primary>Klávesové zkratky</primary>&gt;Ctrl+C - zkopírovat text<secondary> </secondary>
+        </indexterm></guimenuitem>, <guimenuitem>Ctrl+V <indexterm class="singular">
+          <primary>Klávesové zkratky</primary> <secondary>Ctrl+V - vložit text</secondary>
+        </indexterm></guimenuitem> ke zkopírování/vložení údajů, například do tabulkového procesoru nebo do aplikace pro výpočet ceny. Jakmile je proveden výpočet, pak jsou data dostupná v souboru <filename>omegat/project_stats_match.txt.</filename>. Soubor obsahuje časovou identifikaci, protože výpočet (oproti běžné statistice) se neprovádí průběžně a rychle může zastarat.</para>
+    </section>
+
+    <section>
+      <title>Prohlížeč Nápovědy<indexterm class="singular">
+          <primary>Nabídka ‚Nápověda‛</primary> <secondary>Prohlížeč Nápovědy.</secondary>
+        </indexterm></title>
+
+      <para>Prohlížeč nápovědy (který zobrazuje tuto příručku) může být otevřen stiskem klávesy <keycap><indexterm class="singular">
+          <primary>Klávesové zkratky</primary>F1 - Nápověda<secondary> </secondary>
+        </indexterm>F1</keycap> nebo přes hlavní nabídku <guimenuitem><indexterm class="singular">
+          <primary>Nabídka ‚Nápověda‛</primary> <secondary>Uživatelská příručka...</secondary>
+        </indexterm>Nápověda → Uživatelská příručka Manual...</guimenuitem> V novém okně se zobrazí příručka a dvě tlačítka: Zpět a Obsah. Uživatelská příručka je HTML dokument s odkazy na různé kapitoly. Kliknutím na odkaz, stejně jak je to běžné ve webovém prohlížeči, zobrazí požadovanou stránku.</para>
+
+      <para>Uživatelská příručka se nachází v podadresáři docs v instalačním adresáři OmegaT, takže si můžete prohlížet například anglickou dokumentaci otevřením souboru <filename>docs/en/index.hmtl</filename> ve svém internetovém prohlížeči. Tímto způsobem budete moci zobrazovat i externí odkazy, protože vestavěný prohlížeč nápovědy externí internetové odkazy nepřijímá.</para>
+    </section>
+  </section>
+</chapter>

@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<chapter id="chapter.glossaries">
+  <title>Glosáře / Vlastní slovníky<indexterm class="singular">
+      <primary>Okna a podokna v OmegaT</primary> <secondary>Podokno glosáře</secondary>
+    </indexterm><indexterm class="singular">
+      <primary>Glosáře / Vlastní slovníky</primary>
+    </indexterm></title>
+
+  <para>Glosáře představují soubory, které jsou pro použití v <application>OmegaT</application>. tvořené a aktualizované ručně.</para>
+
+  <para>Pokud projekt <application>OmegaT</application> obsahuje jeden či více glosář, jakékoliv termíny v glosáři, pokud jsou nalezené v aktuálním segmentu, budou automaticky zobrazené v okně Glosář.</para>
+
+  <para>Sami si zvolíte jeho umístění a název v dialogovém okně Vlastnosti projektu. Koncovka musí být <filename>.txt </filename> (pokud chybí, bude přidána). Umístění tohoto souboru musí být  v adresáři <filename>/glossary </filename>, ale zato může být na jakékoliv nižší úrovni (např. <filename>glossary/sub/glossary.txt</filename>). Soubor glosáře nemusí existovat v době vytváření adresáře, samotný soubor glosáře bude vytvořen (pokud nutno) přidáním prvního záznamu. Pokud už máte soubor glosáře k dispozici, program nebude ověřovat formát nebo znakovou sadu: nové záznamy budou vždy ve formátu, kdy jsou záznamy od sebe odděleny tabulátorem a kódování bude UTF-8. Protože se nezasahuje do již existujícího obsahu, je též omezena možnost poškození již existujícího souboru.</para>
+
+  <section>
+    <title>Používání</title>
+
+    <para>Dostupný glosář začněte používat tak, že jej po vytvoření projektu jednoduše umístíte do adresáře <indexterm class="singular">
+        <primary>Soubory projektu</primary> <secondary>Podadresář glosáře</secondary>
+      </indexterm><filename>/glossary</filename>. Když je projekt otevřený, <application>OmegaT</application> v tomto adresáři soubory glosáře automaticky detekuje. Výrazy aktuálního segmentu, které <application>OmegaT</application> najde v souboru (souborech) glosáře, se zobrazují v okně Glosář:</para>
+
+    <indexterm class="singular">
+      <primary>Okno Glosář</primary>
+    </indexterm>
+
+    <figure>
+      <title>Okno Glosář</title>
+
+      <mediaobject>
+        <imageobject role="html">
+          <imagedata fileref="images/Glossarypane_25.png"/>
+        </imageobject>
+
+        <imageobject role="fo">
+          <imagedata fileref="images/Glossarypane_25.png" width="60%"/>
+        </imageobject>
+      </mediaobject>
+    </figure>
+
+    <para>Slovo před znakem rovnítka (=) je termín zdrojového jazyka a jeho překlad (překlady) jsou za rovnítkem. K záznamu v glosáři můžete přidat komentář (např. „transitive verb“ u druhé položky). Funkce glosáře nalezne jen takové výrazy, pokud se záznam v glosáři přesně shoduje se slovem v překládaném textu (např. nenalezne skloňované tvary atd.). Nové záznamy mohou být přidané do souboru / souborů glosáře v průběhu překladu manuálně (např. v textovém editoru), ale nově vložené pojmy budou rozpoznané až po novém načtení projektu.</para>
+
+    <para>Termín ve zdrojovém jazyce nemusí být položka o jednom slovu, jak to vidíme na příkladě:</para>
+
+    <figure>
+      <title>záznamy o více slovech v glosáři - příklad<indexterm class="singular">
+          <primary>Podokno Glosář - záznamy o více slovech</primary>
+        </indexterm></title>
+
+      <mediaobject>
+        <imageobject role="html">
+          <imagedata fileref="images/MultiTerm_Glossary_25.png"/>
+        </imageobject>
+
+        <imageobject role="fo">
+          <imagedata fileref="images/MultiTerm_Glossary_25.png" width="80%"/>
+        </imageobject>
+      </mediaobject>
+    </figure>
+
+    <para>Podtržené slovo „pop-up menu“ může být v glosáři nalezeno jako „pojavni menu“. V glosáři nalezený záznam vložíte do překladu tak, že označíte termín v podokně Glosáře a kliknete pravým tlačítkem (nebo kolečkem) myši do cílového segmentu.<footnote>
+        <para>Ve výše uvedeném případě jsme si k věci neřekli vše, protože cílový jazyk (zde slovinština) používá deklinaci. Takže vložený výraz „pojavni menu“ musí být změněno na „pojavnem meniju“. Jinými slovy, v takovýchto případech je lepší slovo ručně vypsat ve správném tvaru a nezdržovat se zvýrazňováním, vkládáním a opravou.</para>
+      </footnote></para>
+  </section>
+
+  <section>
+    <title><indexterm class="singular">
+        <primary>Glosáře</primary> <secondary>Formát souboru</secondary>
+      </indexterm>Formát souboru<indexterm class="singular">
+        <primary>Soubory projektu</primary> <secondary>Uživatelské soubory</secondary> <seealso>Glosáře</seealso>
+      </indexterm></title>
+
+    <para>Soubory glosáře představují jednoduché soubory v prostém textu a obsahují tři tabulátorem oddělené sloupce, ve kterých se nachází zdrojový (první sloupec) a cílový (druhý sloupec) výraz. Třetí sloupec může být použit pro dodatečné informace. Také můžete mít záznamy, kde chybí sloupec s překladem, tj, záznamy jen s nějakým pojmem a příslušný komentář.</para>
+
+    <para>Soubory glosáře mohou být buď  ve výchozím kódování systému (a mít koncovku .tab) nebo v kódování UTF-8 (s koncovkou .utf8). Právě kvůli své univerzálnosti se upřednostňuje kódování Unicode (UTF-8). Formát CSV je také podporován. Tento formát je prakticky to samé jako když jsou položky odděleny tabulátorem: zdrojový výraz, cílový výraz. Pole s komentářem je odděleno čárkou ','. Jednotlivé řetězce mohou být ohraničeny uvozovkami &quot;, což umožňuje použít čárku uvnitř řetězce.</para>
+
+    <para><literal>&quot;Toto je zdrojový výraz, který obsahuje čárku&quot;,&quot;c'est un terme, qui contient une virgule&quot;</literal></para>
+
+    <para>Vedle prostého textového formátu je podporován <indexterm class="singular">
+        <primary>Glosáře</primary> <secondary>formát TBX</secondary>
+      </indexterm> formát TBX. TBX - Term Base eXchange - je otevřený standard založený na XML a slouží k výměně strukturovaných dat, TBX se osvědčil jako mezinárodní standard organizací LISA<indexterm class="singular">
+        <primary>LISA -</primary> <secondary>Formát souboru</secondary>
+      </indexterm> a ISO. Pokud používáte systém na správu terminologie - např. MultiTerm - je docela možné, že bude nabízet export terminologických dat do formátu TBX. <ulink url="http://www.microsoft.com/Language/en-US/Terminology.aspx">Sbírka terminologických slovníčků pro Microsoft</ulink> <indexterm class="singular">
+        <primary>Glosáře</primary> <secondary>Sbírka terminologických slovníčků pro Microsoft</secondary>
+      </indexterm> nabízí ke stažení terminologii v téměř stech jazycích a slouží jako základ IT glosáře.</para>
+  </section>
+
+  <section>
+    <title>Jak glosáře vytvořit<indexterm class="singular">
+        <primary>Glosáře</primary> <secondary>Vytvoření glosáře</secondary>
+      </indexterm></title>
+
+    <para>Při nastavování projektu je možno zadat název pro zapisovatelný soubor glosáře (viz začátek této kapitoly) Přidávání nových záznamů se děje prostřednictvím klávesové zkratky <keycap>Ctrl+Shift+G .</keycap> Otevře se dialogové okno, kde můžete zadat výraz zdrojového jazyka, překlad a libovolný komentář: </para>
+
+    <mediaobject role="html">
+      <imageobject>
+        <imagedata fileref="images/GlossaryEntry_25.png"/>
+      </imageobject>
+
+      <imageobject role="fo">
+        <imagedata fileref="images/GlossaryEntry_25.png" width="80%"/>
+      </imageobject>
+    </mediaobject>
+
+    <para>obsah souboru glosáře je přístupný v paměti a je nahrán když se otevírá nebo znovu načítá projekt. Aktualizace glosáře je zcela jednoduchá: stiskněte <keycap>Ctrl+Shift+G </keycap> a zadejte nový termín, jeho překlad a příslušný komentář (ujistěte se, že jste stiskli tabulátor pro přechod mezi jednotlivými poli) a soubor uložte. Současně bude aktualizován obsah podokna Glosář.</para>
+
+    <para><indexterm class="singular">
+        <primary>Glosáře</primary> <secondary>Umístění zapisovatelného souboru glosáře</secondary>
+      </indexterm>Umístění zapisovatelného souboru glosáře si můžete nastavit přes dialog Projekt &gt; Vlastnosti... Rozeznatelné koncovky jsou <filename>TXT</filename> a <filename>UTF8</filename>.</para>
+
+    <para><emphasis role="bold">Poznámka:</emphasis> Jistě že jsou tu i jiné způsoby a prostředky jak vytvořit prostý soubor se záznamy oddělenými tabulátorem. Pro tyto účely můžete používat například Notepad++ pod Windows, GEdit na Linuxu nebo nějaký tabulkový procesor: jakákoliv aplikace, která umí pracovat s UTF8, a která umí zobrazit netisknutelné znaky (takže vám nebude chybět značka tabulátoru <keycap>TAB</keycap>).</para>
+  </section>
+
+  <section>
+    <title><indexterm class="singular">
+        <primary>Glosáře</primary> <secondary>Trados MultiTerm</secondary>
+      </indexterm>Použití Trados Multiterm</title>
+
+    <para>Data, která jsou exportována z Trados MutliTerm můžete použít jako glosáře <application>OmegaT</application> bez dalších úprav, tedy jestliže mají koncovku <filename>.tab</filename> a pole pro zdroj a překlad jsou prvními dvěma poli (v tomto pořadí).  Když exportujete data použitím možnosti „Tab-delimited export“, budete muset smazat prvních 5 sloupců (Seq. Nr, Date created etc). Novější verze MultiTerm podporuje export ve formátu TBX.</para>
+  </section>
+
+  <section>
+    <title><indexterm class="singular">
+        <primary>Glosáře</primary> <secondary>Problémy s glosáři</secondary>
+      </indexterm>Obecné problémy glosáře</title>
+
+    <para><emphasis role="bold">Problém: Nezobrazují se žádné termíny z glosáře.</emphasis></para>
+
+    <itemizedlist>
+      <listitem>
+        <para>v adresáři „glossary“ není umístěn žádný glosář.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Soubor glosáře je prázdný.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Položky glosáře nejsou od sebe odděleny tabulátorem.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>soubor glosáře nemá správnou koncovku (.tab nebo .utf8).</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Není nalezena PŘESNÁ shoda mezi záznamem v glosáři a zdrojovým textem ve vašem dokumentu - například když je daná položka v množném čísle.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Soubor glosáře nemá správné kódování.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>V aktuálním segmentu nejsou žádné termíny, které se kryjí s termíny v glosáři.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Jeden nebo více z nahoře zmíněných problémů byl vyřešen, ale projekt nebyl nově načten.</para>
+      </listitem>
+    </itemizedlist>
+
+    <para><emphasis role="bold">Problém: V podokně Glosář se některé znaky nezobrazují správně </emphasis></para>
+
+    <itemizedlist>
+      <listitem>
+        <para>... ale stejné znaky v okně Editoru jsou zobrazeny správě: koncovka a kódování si neodpovídají.</para>
+      </listitem>
+    </itemizedlist>
+  </section>
+</chapter>

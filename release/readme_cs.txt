@@ -1,9 +1,9 @@
-Tento překlad vypracoval [Josef Molnár], copyright© [2011].
+Tento překlad vypracoval [Josef Molnár], copyright© [2012].
 
 ==============================================================================
   OmegaT 2.0, soubor Read Me / Čti mě
 
-  1.  Informace o aplikaci OmegaT 
+  1.  Informace o aplikaci OmegaT
   2.  Co je OmegaT?
   3.  Instalace programu OmegaT
   4.  Podpora projektu OmegaT
@@ -11,7 +11,7 @@ Tento překlad vypracoval [Josef Molnár], copyright© [2011].
   6.  Podrobnosti k vydání
 
 ==============================================================================
-  1.  Informace o aplikaci OmegaT 
+  1.  Informace o aplikaci OmegaT
 
 
 Nejaktuálnější informace o aplikaci OmegaT naleznete na adrese:
@@ -43,31 +43,43 @@ Hlavní znaky programu:
   - podpora glosářů, tj. vlastních slovníků (kontrola terminologie) 
   - podpora průběžné kontroly pravopisu na základě OpenSource
   - podpora slovníků StarDict
-  - podpora služby strojového překladu Google Translate (Google překladač)
+  - podpora služby strojového překladu Google Překladač
   - jasná a ucelená dokumentace a návod k programu
   - lokalizace do spousty jazyků.
 
 OmegaT bez problémů zvládá zpracovat následující formáty:
-  - prostý text
-  - HTML a XHTML
-  - soubory HTML Help Compiler
-  - soubory OpenDocument/OpenOffice.org
+
+- formáty prostých textových souborů
+
+  - text ASCII (.txt, atd.)
+  - Kódovaný text (*.UTF8)
   - lokalizační balíčky Java resource bundles (.properties)
-  - soubory INI (soubory obsahující páry key=value (klíč=hodnota) v libovolném kódování)
-  - soubory PO
-  - formát dokumentace DocBook
-  - soubory Microsoft OpenXML
-  - jednojazyčné soubory Okapi XLIFF
-  - QuarkXPress CopyFlowGold
-  - soubory titulků (SRT)
-  - ResX
-  Soubory Android Resource
-  - LaTeX
-  - Typo3 LocManager
-  - Soubory Nápovědy & Příručky
-  - zdroje Windows RC
-  - Mozilla DTD
-  - DokuWiki
+  - Soubory PO (.po)
+  - Soubory INI (klíč=hodnota) (*.ini)
+  - Soubory DTD (*.DTD)
+  - Soubory DocuWiki (*.txt)
+  - Soubory titulků SubRip (*.srt)
+  - Magento CE Locale CSV (*.csv)
+
+- různé formáty souborů obsahující tagy
+
+  - OpenOffice.org / OpenDocument (*.odt, *.ott, *.ods, *.ots, *.odp, *.otp)
+  - Microsoft Open XML (*.docx, *.xlsx, *.pptx)
+  - (X)HTML (*.html, *.xhtml,*.xht)
+  - HTML Help Compiler (*.hhc, *.hhk)
+  - DocBook (*.xml)
+  - jednojazyčné XLIFF (*.xlf, *.xliff, *.sdlxliff)
+  - QuarkXPress CopyFlowGold (*.tag, *.xtg)
+  - ResX files (*.resx)
+  - Zdrojové soubory pro Android (.*xml)
+  - LaTex (*.tex, *.latex)
+  - Soubory Nápovědy (*.xml) a Příručky (*.hmxp)
+  - Typo3 LocManager (*.xml)
+  - WiX Localization (*.wxl)
+  - Iceni Infix (*.xml)
+  - Flash XML export (*.xml)
+  - Wordfast TXML (*.txml)
+  - Camtasia pro soubory Windows (*.camproj)
 
 Aplikaci OmegaT lze stejně dobře přizpůsobit i jiným formátům.
 
@@ -81,9 +93,9 @@ Uživatelská příručka je v balíčku, který jste právě stáhli, po spušt
  3. Instalace programu OmegaT
 
 3.1 Obecné informace
-Ke spuštění vyžaduje OmegaT ve vašem systému nainstalované prostředí Java Runtime Environment (JRE) verzi 1.5 nebo vyšší. OmegaT je v současnosti nabízena ve standardním provedení již s JRE, aby se uživatelům ušetřily potíže s výběrem, získáním a instalací vhodného prostředí. 
+Ke spuštění vyžaduje OmegaT ve vašem systému nainstalované prostředí Java Runtime Environment (JRE) verzi 1.5 nebo vyšší. Balíčky OmegaT, které obsahují běhové prostředí Java jsou dostupné a ušetří tak uživatelům problémy s výběrem, získáním prostředí a jeho instalací. 
 
-Jestliže Javu již máte, nejjednodušší způsob instalace aktuální verze programu OmegaT je použití Java Web Start. 
+Jestliže Javu již máte, jeden způsob instalace aktuální verze programu OmegaT je použití Java Web Start. 
 V takovém případě stačí stáhnout následující soubor a spustit jej:
 
    http://omegat.sourceforge.net/webstart/OmegaT.jnlp
@@ -96,59 +108,66 @@ Práva, která udělíte této verzi (která lze nazývat jako „neomezený př
 Jiné způsoby stahování a instalace programu OmegaT si ukážeme později. 
 
 Pro uživatele Windows a Linuxu: jestli jste si jisti, že váš systém má již vhodnou verzi JRE nainstalovánu, můžete instalovat verzi programu OmegaT bez JRE (to je naznačeno v samotném názvu verze, „Without_JRE“, tedy bez Javy). 
-Pokud máte jakékoliv pochybnosti, doporučujeme použít „standardní“ verzi, tj. s JRE. Tato volba je bezpečná, dokonce i když už máte JRE ve vašem systému instalováno, tato verze s tímto již nainstalovaným prostředím nebude kolidovat.
+Pokud máte jakékoliv pochybnosti, doporučujeme použít  verzi s JRE. Tato volba je bezpečná, dokonce i když už máte JRE ve vašem systému instalováno, tato verze s tímto již nainstalovaným prostředím nebude kolidovat.
 
-Pro uživatele Linuxu: věnujte pozornost skutečnosti, že OmegaT nebude spolupracovat se svobodnými/open-source implementacemi Javy, které se dodávají s mnohými distribucemi Linuxu (například Ubuntu), protože tyto mohou být buď zastaralé, nebo neúplné. Stažení a instalace
-Stahujte Java Runtime Environment (JRE) od firmy Sun přes výše uvedený odkaz,
-nebo si stáhněte a instalujte balík OmegaT, který obsahuje JRE (balík .tar.gz označený výrazem „Linux“).
+Uživatelé Linuxu: OmegaT bude běžet i na otevřené implementaci balíčku Java, který je dodáván se spoustou Linuxových distribucí (například Ubuntu), ale mohou se vyskytnout chyby, zobrazovat problémy nebo některé vlastnosti nebudou dostupné. Proto doporučujeme, abyste si stáhli a instalovali buď JRE od Oracle nebo balíček OmegaT, který obsahuje JRE (archiv .tar.bz2), je to balíček s označením „Linux“. Když instalujete verzi Javy na úrovni systému, musíte se buď ujistit, že je správně přiřazena při startu, nebo ji explicitně vyvolat při spouštění OmegaT. Pokud si ale v Linuxu nejste natolik jistí, pak vám doporučujeme instalovat verzi OmegaT, kde je JRE obsaženo. Je to bezpečná volba, neboť „místní“ JRE se nebude rušit s jakýmkoliv jiným JRE, které je instalováno na vašem systému. 
 
-Uživatelé Maců: JRE je na Mac OS X už instalováno.
+Uživatelé Maců: JRE je na Mac OS X (před verzí OS X „Lion“) už instalováno. Uživatele verze Lion systém sám vyzve při prvním spuštění aplikace, která vyžaduje Javu a případně ji automaticky stáhne a instaluje.
 
 Pro uživatele provozující Linux na systémech PowerPC: bude zapotřebí stáhnout JRE od IBM,
 protože Sun neposkytuje JRE pro systémy PPC. V tomto případě stahujte z adresy:
 
-    http://www-128. ibm.com/developerworks/java/jdk/linux/download.html 
+    http://www.ibm.com/developerworks/java/jdk/linux/download.html 
 
 
 3.2 Instalace
 * uživatelé Windows: Jednoduše spusťte instalátor. Pokud budete chtít, instalátor může vytvořit zástupce pro spouštění programu OmegaT.
-* Ostatní uživatelé: Pro instalaci programu OmegaT vytvořte odpovídající adresář pro program OmegaT (např. v Linuxu /usr/local/lib). Zkopírujte archív OmegaT zip nebo tar.gz do tohoto adresáře a zde jej také rozbalte.
 
-3.3 Spuštění programu OmegaT
-Program OmegaT lze spouštět několika způsoby.
+* Uživatelé Linuxu:
+uložte archív do vhodného adresáře a archív zde rozbalte; OmegaT je připravena ke spuštění. Nicméně úhlednější a přívětivější instalaci spustíte použitím instalačního skriptu (linux-install.sh). Abyste spustili tento skript, otevřete okno terminálu (konzole), změňte aktivní adresář na adresář, který obsahuje OmegaT.jar a skript linux-install.sh, a spusťe skript příkazem ./linux-install.sh. 
 
-* uživatelé Windows: dvojitým kliknutím na soubor OmegaT.exe. Pokud ve vašem Správci souborů vidíte soubor OmegaT a ne OmegaT.exe (Průzkumník Windows), změňte nastavení tak, aby byly zobrazovány přípony souborů.
+* Uživatelé Maců:
+zkopírujte archiv OmegaT.zip na vhodnou pozici a rozbalte jej zde, získáte tak adresář, který obsahuje soubor index HTML dokumentace a samotný soubor apliace OmegaT.app.
 
-* dvojitým kliknutím na soubor OmegaT.jar. Toto bude fungovat, jen když je ve vašem systému typ souboru .jar asociován s Javou.
+* Ostatní (např. Solaris, FreeBSD):
+Aby šlo nainstalovat OmegaT, tak jednoduše vytvořte vhodný adresář pro tuto aplikaci. Zkopírujte archív OmegaT .zip nebo tar.bz2 do tohoto umístění a rozbalte jej zde.
 
-* Přes příkazovou řádku. Příkaz ke spuštění OmegaT je:
+3.3 Spouštění OmegaT
+Spouštějte OmegaT následujícím způsobem.
+
+* Uživatelé Windows:
+Pokud jste během instalace vytvořili ikonu na ploše, stačí na ni dvakrát kliknout. Nebo dvojklik na soubor OmegaT.exe. Pokud ve vašem Správci souborů vidíte soubor OmegaT a ne OmegaT.exe (Průzkumník Windows), změňte nastavení tak, aby byly zobrazovány přípony souborů.
+
+* Uživatelé Linuxu:
+Pokud jste použili instalaci přes skript, mělo by stačit spouštět OmegaT přes zkratku Alt+F2 a pak zadat: omegat
+
+* Mac uživatelé:
+Dvojklik na soubor OmegaT.app.
+
+* Z vašeho správce souborů (všechny systémy):
+Dvojklik na soubor OmegaT.jar. Toto bude fungovat, jen když je ve vašem systému typ souboru .jar asociován s Javou.
+
+* Z příkazového řádku (všechny systémy):
+příkaz pro spuštění OmegaT je:
 
 cd <adresář, kde je uložený soubor OmegaT.jar>
 
 <jméno a cesta k souboru spustitelného Javou> -jar OmegaT.jar
 
 (Soubor spustitelný Javou je soubor „java“ v Linuxu a „java.exe“ ve Windows.
-Pokud je Java instalována na úrovni systému, nemusíte vkládat úplnou cestu.)
+Pokud je Java instalována na úrovni systému, a když je také zadaná cesta v příkazu pro spouštění, nemusíte vkládat úplnou cestu.)
+
+Přizpůsobení spouštění OmegaT:
 
 * uživatelé Windows: Instalátor může vytvořit zástupce v menu Start, na Ploše nebo v panelu Snadného spuštění. Stejně tak můžete ručně přetáhnout soubor OmegaT.exe do menu Start, na Plochu nebo na panel Snadné spuštění.
 
-* uživatelé Linuxu KDE: program OmegaT můžete přidat do svých menu následovně:
+* uživatelé Linuxu:
+Přívětivější způsob spouštění OmegaT nabízí skript Kaptain (omegat.kaptn), který je součástí staženého balíčku. Aby šlo tento skript spouštět, je nutno první instalovat Kaptain. Spouštěcí skript Kaptain pak můžete spouštět přes Alt+F2 omegat.kaptn
 
-Control Center - Desktop - Panels - Menus - Edit K Menu - File - New Item/New Submenu.
+Více informací ke skriptu Kaptain a přidání položek do nabídky systému a k spouštěcím ikonám v Linuxu, najdete v nápovědě v tématu OmegaT pod Linuxem.
 
-Jakmile označíte vhodnou nabídku, přidejte položku podnabídky prostřednictvím File - New 
-Submenu a File - New Item. Jako název nové položky vložte OmegaT.
-
-V „příkazovém“ poli, použijte navigační tlačítko k tomu, abyste nalezli svůj spouštěcí OmegaT skript, a označte jej. 
-
-Klikněte na ikonu (vpravo od Name/Description/Comment fields)
-- Other Icons - Browse, a přejděte k podadresáři /images v adresáři aplikace OmegaT. Označte ikonu OmegaT.png.
-
-Nakonec uložte změny -> Soubor - Uložit.
-
-* uživatelé Linuxu GNOME: můžete přidat OmegaT na svůj panel (lišta v horní části obrazovky) následovně:
-
-Klikněte pravým tlačítkem myši na panel: Přidat na panel...  pak volba Vlastní spouštěč aplikace Vložte „OmegaT“ do pole „Název“; v poli „Příkaz“, použijte navigační tlačítko k nalezení svého spouštěcího skriptu aplikace OmegaT. Označte jej a operaci potvrďte OK.
+Uživatelé Mac:
+Přetáhněte OmegaT.app na svůj Dock nebo do nástrojové lišty v okně Finder, a tak můžete OmegaT spouštět z různých lokací. Stejně tak můžete postupovat přes vyhledávací políčko Spotlight.
 
 ==============================================================================
  4. Jak se zapojit do projektu OmegaT
@@ -177,24 +196,31 @@ Mezi dřívější přispěvatele patří:
 Do kódu přispěli
   Zoltan Bartko
   Volker Berlin
-  Didier Briel (správce vývoje / development manager)
+  Didier Briel (správce vývoje)
   Kim Bruning
   Alex Buloichik (vedoucí vývojář)
   Sandra Jean Chua
+  Thomas Cordonnier
   Martin Fleurke  
   Wildrich Fourie
+  Jean-Christophe Helary
   Thomas Huriaux
+  Hans-Peter Jacobs
+  Guido Leenders
   Ibai Lakunza Velasco
   Fabián Mandelbaum
+  John Moran
   Maxym Mykhalchuk 
   Arno Peters
   Henry Pijffers 
+  Briac Pilpré
   Tiago Saboga
   Andrzej Sawuła
   Benjamin Siband
   Rashid Umarov  
   Antonio Vilei
   Martin Wunderlich
+  Michael Zakharov
 
 Ostatní přispěvatelé
   Sabine Cretella
@@ -203,7 +229,7 @@ Ostatní přispěvatelé
   Vito Smolej (správce dokumentace)
   Samuel Murray
   Marc Prior 
-  a mnoho, mnoho dalších velmi užitečných lidí
+  a mnoho, mnoho dalších velmi nápomocných lidí
 
 (Pokud si myslíte, že jste významně přispěli k projektu OmegaT,
 ale své jméno nevidíte v těchto záznamech, klidně nás kontaktujte.)
@@ -256,7 +282,7 @@ Abyste byli informování o tom, co se děje s vaším hlášením o chybě, mů
 ==============================================================================
 6.   Podrobnosti k vydání
 
-Podrobné informace o změnách v tomto a všech předcházejících vydáních naleznete v souborech 'changes.txt'.
+Podrobné informace o změnách v tomto a všech předcházejících vydáních naleznete v souborech ‚changes.txt‛.
 
 
 ==============================================================================

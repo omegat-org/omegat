@@ -1,0 +1,187 @@
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <title>Приложение A. Модуль «tokenizer»</title>
+      <link rel="stylesheet" type="text/css" href="OmegaT.css">
+      <meta name="generator" content="DocBook XSL Stylesheets V1.76.1">
+      <link rel="home" href="index.html" title="Руководство пользователя ОмегаТ">
+      <link rel="up" href="index.html" title="Руководство пользователя ОмегаТ">
+      <link rel="prev" href="chapter.misc.html" title="Глава 21. Темы, не вошедшие в другие разделы">
+      <link rel="next" href="appendix.LanguageToolPlugin.inOmegaT.html" title="Приложение B. Модуль «LanguageTool»">
+   </head>
+   <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+      <div class="navheader">
+         <table width="100%" summary="Navigation header">
+            <tr>
+               <th colspan="3" align="center">Приложение A. Модуль «tokenizer»</th>
+            </tr>
+            <tr>
+               <td width="20%" align="left"><a accesskey="p" href="chapter.misc.html">Пред.</a>&nbsp;
+               </td>
+               <th width="60%" align="center">&nbsp;</th>
+               <td width="20%" align="right">&nbsp;<a accesskey="n" href="appendix.LanguageToolPlugin.inOmegaT.html">След.</a></td>
+            </tr>
+         </table>
+         <hr>
+      </div>
+      <div class="appendix" title="Приложение A. Модуль «tokenizer»">
+         <div class="titlepage">
+            <div>
+               <div>
+                  <h2 class="title"><a name="appendix.TokenizerPlugin.inOmegaT"></a>Приложение A. Модуль «tokenizer»<a class="indexterm" name="d0e8498"></a></h2>
+               </div>
+            </div>
+         </div>
+         <div class="toc">
+            <dl>
+               <dt><span class="section"><a href="appendix.TokenizerPlugin.inOmegaT.html#d0e8503">1. Введение</a></span></dt>
+               <dt><span class="section"><a href="appendix.TokenizerPlugin.inOmegaT.html#d0e8532">2. Установка и использование из командной строки</a></span></dt>
+               <dt><span class="section"><a href="appendix.TokenizerPlugin.inOmegaT.html#d0e8549">3. Инструкции для Mac OS X</a></span></dt>
+               <dt><span class="section"><a href="appendix.TokenizerPlugin.inOmegaT.html#d0e8563">4. Если модуль не работает</a></span></dt>
+            </dl>
+         </div>
+         <div class="section" title="1. Введение">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e8503"></a>1. Введение<a class="indexterm" name="d0e8506"></a><a class="indexterm" name="d0e8511"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <p>Модуль морфологического поиска (называемый также алгоритмом выделения корней) используется для улучшения нахождения совпадений
+               за счёт выделения в исходных сегментах и переводе склоняемых слов. Также модуль улучшает поиск в глоссарии.
+            </p>
+            <p>Например, модуль морфологического поиска для английского языка определит, что строка «cats» (и, возможно, «catlike», «catty»
+               и т. д.) имеет корень «cat», а «stemmer», «stemming», «stemmed» образованы от «stem». Алгоритм выделит в словах «fishing»,
+               «fished», «fish», и «fisher» общий корень «fish». Этот модуль особенно полезен для языков, в которых активно используются
+               приставки, суффиксы и окончания. В качестве примера рассмотрим склонение слова «хороший» в словенском языке:
+            </p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" type="disc">
+                  <li class="listitem">
+                     <p>lep, lepa, lepo — единственное число, мужской, женский и средний род</p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" type="disc">
+                  <li class="listitem">
+                     <p>lepši, lepša, lepše . — сравнительная степень, именительный падеж, мужской, женский и средний род соответственно. Во множественном
+                        числе:
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" type="disc">
+                  <li class="listitem">
+                     <p>najlepših — превосходная степень, множественное число, родительный падеж, мужской, женский и средний род.</p>
+                  </li>
+               </ul>
+            </div>
+         </div>
+         <div class="section" title="2. Установка и использование из командной строки">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e8532"></a>2. Установка и использование из командной строки
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>Модуль «Tokenizer», адаптированный для ОмегаТ из проекта Lucene можно загрузить с официального сайта модулей ОмегаТ (http://sourceforge.net/projects/omegat-plugins/files/).
+               Загрузите самую новую версию (OmegaT-tokenizers_0.4_2-2.1.zip на момент написания этого руководства).
+            </p>
+            <p>Для установки, в главном каталоге ОмегаТ (каталоге, содержащем OmegaT.jar) создайте подкаталог «plugins» и распакуйте в него
+               архив с модулем.
+            </p>
+            <p>Для запуска ОмегаТ с модулем «Tokenizer» необходимо указать алгоритмы выделения корней для исходного языка и языка перевода.
+               Команда запуска должна выглядеть так:
+            </p>
+            <p><code class="literal">java -jar OmegaT.jar --ITokenizer=[алгоритм для языка исходных файлов] --ITokenizerTarget=[алгоритм для языка переведённых
+                  файлов]</code></p>
+            <p>Названия алгоритмов для различных языков приведены в файле «Readme.txt», распространяемом в архиве, вместе с самим модулем.
+               Например, если вы хотите использовать алгоритм Lucene CJK для исходного текста и Lucene French для переведённого текста, команда
+               запуска должна выглядеть примерно так:
+            </p>
+            <p><code class="literal">java -jar OmegaT.jar --ITokenizer=org.omegat.plugins.
+                      tokenizer.LuceneCJKTokenizer --ITokenizerTarget=org.omegat.plugins.
+                      tokenizer.LuceneFrenchTokenizer</code></p>
+         </div>
+         <div class="section" title="3. Инструкции для Mac OS X">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e8549"></a>3. Инструкции для Mac OS X
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>Если вы хотите использовать модуль морфологического поиска в ОмегаТ, запущенной на Mac OS X, следуйте приведённым выше инструкциям
+               (чтобы узнать расположение OmegaT.jar, щёлкните правой кнопкой мыши по OmegaT.app), с той лишь разницей, что названия алгоритмов
+               следует указывать в файле <code class="filename">info.plist</code>, который содержит опции запуска Java. Откройте <code class="filename">info.plist</code> и отредактируйте его нужным образом. Вот как этот файл должен выглядеть для примера выше:
+            </p>
+            <div class="literallayout">
+               <p><code class="code"><br>
+                     &lt;key&gt;VMOptions&lt;/key&gt;<br>
+                     &lt;string&gt;-Xmx1024M&lt;/string&gt;<br>
+                     <br>
+                     &lt;key&gt;Arguments&lt;/key&gt;<br>
+                     &lt;array&gt;<br>
+                     &nbsp;&nbsp;&lt;string&gt;--ITokenizer=org.omegat.plugins.tokenizer.LuceneCJKTokenizer&lt;/string&gt;<br>
+                     &nbsp;&nbsp;&lt;string&gt;--ITokenizerTarget=org.omegat.plugins.tokenizer.<br>
+                     &nbsp;&nbsp;LuceneFrenchTokenizer&lt;/string&gt;<br>
+                     &lt;/array&gt;</code></p>
+            </div>
+         </div>
+         <div class="section" title="4. Если модуль не работает">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e8563"></a>4. Если модуль не работает
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>Чтобы убедится, что алгоритмы для обоих языков заданы правильно, запустите ОмегаТ из командной строки, откройте проект и посмотрите
+               на сообщения, которые появятся в окне терминала. Для вышеприведённого примера они должны выглядеть так:
+            </p>
+            <div class="literallayout">
+               <p><code class="code"><br>
+                     84528:&nbsp;Info:&nbsp;Source&nbsp;tokenizer:&nbsp;org.omegat.plugins.tokenizer.LuceneCJKTokenizer&nbsp;<br>
+                     84528:&nbsp;Info:&nbsp;Target&nbsp;tokenizer:&nbsp;org.omegat.plugins.tokenizer.LuceneFrenchTokenizer&nbsp;<br>
+                     </code></p>
+            </div>
+            <p>Цифры слева скорее всего будут отличаться, главное убедиться в том, что заданные имена алгоритмов для исходного и переведённого
+               текстов совпадают с именами, появившимися в окне терминала. Если алгоритмы указаны неправильно, сообщения будут выглядеть
+               примерно так:
+            </p>
+            <div class="literallayout">
+               <p><code class="code"><br>
+                     12719:&nbsp;Info:&nbsp;Source&nbsp;tokenizer:&nbsp;org.omegat.core.matching.Tokenizer&nbsp;<br>
+                     12719:&nbsp;Info:&nbsp;Target&nbsp;tokenizer:&nbsp;org.omegat.core.matching.Tokenizer&nbsp;<br>
+                     </code></p>
+            </div>
+            <p>Для запуска ОмегаТ из командной строки в Mac OS X, дважды щёлкните мышью по файлу <code class="literal">JavaApplicationStub</code>, расположенному в «/OmegaT.app/Contents/MacOS/».
+            </p>
+         </div>
+      </div>
+      <div class="navfooter">
+         <hr>
+         <table width="100%" summary="Navigation footer">
+            <tr>
+               <td width="40%" align="left"><a accesskey="p" href="chapter.misc.html">Пред.</a>&nbsp;
+               </td>
+               <td width="20%" align="center">&nbsp;</td>
+               <td width="40%" align="right">&nbsp;<a accesskey="n" href="appendix.LanguageToolPlugin.inOmegaT.html">След.</a></td>
+            </tr>
+            <tr>
+               <td width="40%" align="left" valign="top">Глава 21. Темы, не вошедшие в другие разделы&nbsp;</td>
+               <td width="20%" align="center"><a accesskey="h" href="index.html">Начало</a></td>
+               <td width="40%" align="right" valign="top">&nbsp;Приложение B. Модуль «LanguageTool»</td>
+            </tr>
+         </table>
+      </div>
+   </body>
+</html>

@@ -1,0 +1,435 @@
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <title>Глава 9. Файлы для перевода</title>
+      <link rel="stylesheet" type="text/css" href="OmegaT.css">
+      <meta name="generator" content="DocBook XSL Stylesheets V1.76.1">
+      <link rel="home" href="index.html" title="Руководство пользователя ОмегаТ">
+      <link rel="up" href="index.html" title="Руководство пользователя ОмегаТ">
+      <link rel="prev" href="chapter.files.and.directories.html" title="Глава 8. Файлы и каталоги ОмегаТ">
+      <link rel="next" href="chapter.translation.editing.html" title="Глава 10. Параметры редактирования">
+   </head>
+   <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+      <div class="navheader">
+         <table width="100%" summary="Navigation header">
+            <tr>
+               <th colspan="3" align="center">Глава 9. Файлы для перевода</th>
+            </tr>
+            <tr>
+               <td width="20%" align="left"><a accesskey="p" href="chapter.files.and.directories.html">Пред.</a>&nbsp;
+               </td>
+               <th width="60%" align="center">&nbsp;</th>
+               <td width="20%" align="right">&nbsp;<a accesskey="n" href="chapter.translation.editing.html">След.</a></td>
+            </tr>
+         </table>
+         <hr>
+      </div>
+      <div class="chapter" title="Глава 9. Файлы для перевода">
+         <div class="titlepage">
+            <div>
+               <div>
+                  <h2 class="title"><a name="chapter.files.to.translate"></a>Глава 9. Файлы для перевода
+                  </h2>
+               </div>
+            </div>
+         </div>
+         <div class="toc">
+            <dl>
+               <dt><span class="section"><a href="chapter.files.to.translate.html#file.formats">1. Форматы файлов</a></span></dt>
+               <dd>
+                  <dl>
+                     <dt><span class="section"><a href="chapter.files.to.translate.html#d0e5036">1.1. Простые текстовые файлы</a></span></dt>
+                     <dt><span class="section"><a href="chapter.files.to.translate.html#d0e5115">1.2. Текстовые файлы с форматированием</a></span></dt>
+                  </dl>
+               </dd>
+               <dt><span class="section"><a href="chapter.files.to.translate.html#other.file.formats">2. Другие форматы файлов</a></span></dt>
+               <dt><span class="section"><a href="chapter.files.to.translate.html#right.to.left.languages">3. Языки с письмом справа налево</a></span></dt>
+               <dd>
+                  <dl>
+                     <dt><span class="section"><a href="chapter.files.to.translate.html#d0e5332">3.1. Комбинирование строк с разным направлением письма в одном сегменте</a></span></dt>
+                     <dt><span class="section"><a href="chapter.files.to.translate.html#d0e5355">3.2. Теги <span class="application">ОмегаТ</span> в сегментах с письмом справа налево</a></span></dt>
+                     <dt><span class="section"><a href="chapter.files.to.translate.html#d0e5370">3.3. Создание переведённых документов с письмом справа налево</a></span></dt>
+                  </dl>
+               </dd>
+            </dl>
+         </div>
+         <div class="section" title="1. Форматы файлов">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="file.formats"></a>1. Форматы файлов<a class="indexterm" name="d0e5022"></a><a class="indexterm" name="d0e5027"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <p><span class="application">При помощи ОмегаТ</span> можно переводить файлы нескольких форматов. В целом есть два типа форматов файлов: простые текстовые файлы и текстовые файлы
+               с форматированием.
+            </p>
+            <div class="section" title="1.1. Простые текстовые файлы">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="d0e5036"></a>1.1. Простые текстовые файлы<a class="indexterm" name="d0e5039"></a><a class="indexterm" name="d0e5044"></a></h3>
+                     </div>
+                  </div>
+               </div>
+               <p>Простые текстовые содержат только текст. Их переводить проще всего —&nbsp;нужно просто сесть и ввести перевод. Есть несколько способов
+                  указать кодировку текста исходного документа, чтобы его содержание корректно отображалось в <span class="application">ОмегаТ</span>. В простых текстовых файлах, чтобы выравнять текст, расставить абзацы и разрывы страниц не используется никаких специальных
+                  символов форматирования, кроме пробелов и табуляций. В них не содержится никакой информации о цвете текста или использованном
+                  шрифте. В настоящее время <span class="application">ОмегаТ</span> поддерживает следующие форматы простых текстовых файлов:<a class="indexterm" name="d0e5057"></a></p>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" type="disc">
+                     <li class="listitem">
+                        <p>Тексты ASCII (.txt и т.п.)</p>
+                     </li>
+                  </ul>
+               </div>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" type="disc">
+                     <li class="listitem">
+                        <p>Кодированный текст (*.UTF8)</p>
+                     </li>
+                  </ul>
+               </div>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" type="disc">
+                     <li class="listitem">
+                        <p>Пакеты Java resource (*.properties)</p>
+                     </li>
+                  </ul>
+               </div>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" type="disc">
+                     <li class="listitem">
+                        <p>Файлы PO (*.po)</p>
+                     </li>
+                  </ul>
+               </div>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" type="disc">
+                     <li class="listitem">
+                        <p>Файлы INI (ключ=значение) (*.ini)</p>
+                     </li>
+                  </ul>
+               </div>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" type="disc">
+                     <li class="listitem">
+                        <p>Файлы DTD (*.DTD)</p>
+                     </li>
+                     <li class="listitem">
+                        <p>Файлы DocuWiki (*.txt)</p>
+                     </li>
+                  </ul>
+               </div>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" type="disc">
+                     <li class="listitem">
+                        <p>Файлы субтитров SubRip (*.srt)</p>
+                     </li>
+                  </ul>
+               </div>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" type="disc">
+                     <li class="listitem">
+                        <p>Файлы локализации Magneto CE (*.csv)</p>
+                     </li>
+                  </ul>
+               </div>
+               <p>Другие типы текстовых файлов также могут быть обработаны в <span class="application">ОмегаТ</span> через привязку их расширения с поддерживаемым типом файлов (например, POD-файлы можно привязать к фильтру ASCII текстов)
+                  и через разбиение по специфическим правилам сегментации.
+               </p>
+               <p>Файлы PO<a class="indexterm" name="d0e5106"></a> одновременно содержат и исходный, и переведённый текст. С этой точки зрения они представляют собой простые текстовые файлы
+                  <span class="emphasis"><em>плюс</em></span> память переводов. Если для текущего сегмента в главной памяти проекта («project_save.tmx») перевода нет, перевод из PO-файла
+                  сохраняется в «project_save.tmx» как перевод по умолчанию. Если же таковой перевод уже существует, вариант из PO-файла сохраняется
+                  как альтернативный.
+               </p>
+            </div>
+            <div class="section" title="1.2. Текстовые файлы с форматированием">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="d0e5115"></a>1.2. Текстовые файлы с форматированием<a class="indexterm" name="d0e5118"></a><a class="indexterm" name="d0e5125"></a></h3>
+                     </div>
+                  </div>
+               </div>
+               <p>Файлы с форматированным текстом содержат сам текст и информацию о начертании, размере и цвете шрифта и т. п. Обычно их создают
+                  в текстовых процессорах или HTML-редакторах. Эти файлы специально разработаны для того, чтобы хранить информацию о форматировании
+                  текста. Информация может храниться в простом формате, например, «это полужирный шрифт» или сложном, например, таблицы с разными
+                  размерами, цветами и расположением шрифтов и т. п. В большинстве переводческих задач требуется, чтобы переведённый документ
+                  был отформатирован также как оригинал. ОмегаТ позволяет добиться этого, размечая символы и слова с форматированием особыми
+                  тегами. Упрощение форматирования исходного текста уменьшает количество тегов. Если это возможно, постарайтесь унифицировать
+                  используемые шрифты, размеры, цвета и т. п., так как это упрощает перевод и уменьшает количество возможных ошибок, связанных
+                  с тегами. В ОмегаТ каждый тип файлов обрабатывается по-своему. Специфические настройки можно задать в файловых фильтрах. В
+                  настоящее время ОмегаТ поддерживает следующие форматы текстовых файлов с форматированием.<a class="indexterm" name="d0e5132"></a></p>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" type="disc">
+                     <li class="listitem">
+                        <p>Файлы OpenOffice.org / OpenDocument (*.odt, *.ott, *.ods, *.ots, *.odp, *.otp)</p>
+                     </li>
+                  </ul>
+               </div>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" type="disc">
+                     <li class="listitem">
+                        <p>Файлы Microsoft Open XML (*.docx, *.dotx, *.xlsx, *.xltx, *.pptx)</p>
+                     </li>
+                  </ul>
+               </div>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" type="disc">
+                     <li class="listitem">
+                        <p>Файлы (X)HTML (*.html, *.xhtml,*.xht)</p>
+                     </li>
+                  </ul>
+               </div>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" type="disc">
+                     <li class="listitem">
+                        <p>Файлы HTML Help Compiler (*.hhc, *.hhk)</p>
+                     </li>
+                  </ul>
+               </div>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" type="disc">
+                     <li class="listitem">
+                        <p>Файлы DocBook (*.xml)</p>
+                     </li>
+                  </ul>
+               </div>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" type="disc">
+                     <li class="listitem">
+                        <p>Файлы XLIFF типа исходный-текст=перевод (*.xlf, *.xliff, *.sdlxliff)</p>
+                     </li>
+                  </ul>
+               </div>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" type="disc">
+                     <li class="listitem">
+                        <p>Файлы QuarkXPress CopyFlowGold (*.tag, *.xtg)</p>
+                     </li>
+                  </ul>
+               </div>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" type="disc">
+                     <li class="listitem">
+                        <p>Файлы ResX (*.resx)</p>
+                     </li>
+                  </ul>
+               </div>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" type="disc">
+                     <li class="listitem">
+                        <p>Файлы ресурсов Android (*.xml)</p>
+                     </li>
+                  </ul>
+               </div>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" type="disc">
+                     <li class="listitem">
+                        <p>Файлы LaTex (*.tex, *.latex)</p>
+                     </li>
+                     <li class="listitem">
+                        <p>Файлы Помощи (*.xml) и Руководства (*.hmxp)</p>
+                     </li>
+                     <li class="listitem">
+                        <p>Файлы Typo3 LocManager (*.xml)</p>
+                     </li>
+                  </ul>
+               </div>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" type="disc">
+                     <li class="listitem">
+                        <p>Файлы WiX Localization (*.wxl)</p>
+                     </li>
+                     <li class="listitem">
+                        <p>Файлы Iceni Infix (*.xml)</p>
+                     </li>
+                     <li class="listitem">
+                        <p>Файлы Flash XML export (*.xml)</p>
+                     </li>
+                     <li class="listitem">
+                        <p>Файлы Wordfast TXML (*.txml)</p>
+                     </li>
+                     <li class="listitem">
+                        <p>Файлы Camtasia для Windows (*.camproj)</p>
+                     </li>
+                     <li class="listitem">
+                        <p>Файлы Visio (*.vxd)</p>
+                     </li>
+                  </ul>
+               </div>
+               <p>Другие типы файлов с форматированием также могут быть обработаны в ОмегаТ через привязку их расширения к поддерживаемым типам
+                  файлов и разбиение по специфическим правилам сегментации.
+               </p>
+            </div>
+         </div>
+         <div class="section" title="2. Другие форматы файлов">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="other.file.formats"></a>2. Другие форматы файлов<a class="indexterm" name="d0e5210"></a><a class="indexterm" name="d0e5215"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <p>ОмегаТ также может работать с другими типами простых и форматированных текстовых файлов.</p>
+            <p><a class="indexterm" name="d0e5223"></a>Для преобразования файлов в поддерживаемые форматы существуют сторонние программы. После перевода полученные файлы нужно преобразовать
+               обратно в исходный формат. Например, если у вас установлена устаревшая версия Microsoft Word, которая не поддерживает формат
+               ODT, существует обходной путь для перевода DOC-файлов:
+            </p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" type="disc">
+                  <li class="listitem">
+                     <p>Импортируйте файл в OpenOffice.org writer</p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" type="disc">
+                  <li class="listitem">
+                     <p>сохраните файл в формате ODT</p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" type="disc">
+                  <li class="listitem">
+                     <p>переведите его и создайте переведённый ODT-файл</p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" type="disc">
+                  <li class="listitem">
+                     <p>откройте переведённый документ в OpenOffice.org writer</p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" type="disc">
+                  <li class="listitem">
+                     <p>сохраните его как DOC-файл</p>
+                  </li>
+               </ul>
+            </div>
+            <p>Качество форматирования переведённого файла зависит от качества преобразования форматов. Перед проведением подобных преобразований,
+               убедитесь, что вы испробовали все возможные варианты. На <a class="ulink" href="http://www.omegat.org" target="_top">сайте ОмегаТ</a> можно найти постоянно обновляемый список программ, которые могут быть полезны при переводе.
+            </p>
+         </div>
+         <div class="section" title="3. Языки с письмом справа налево">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="right.to.left.languages"></a>3. Языки с письмом справа налево<a class="indexterm" name="d0e5257"></a><a class="indexterm" name="d0e5260"></a><a class="indexterm" name="d0e5265"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <p>Выравнивание исходного и переведённого сегментов зависит от настройки языков проекта. По умолчанию для языков с письменностью
+               слева направо выравнивание текста осуществляется по левому краю, и, соответственно для языков с письменностью справа налево
+               текст выравнивается по правому краю. Переключаться между разными режимами выравнивания можно нажатием сочетания клавиш <span class="keycap"><strong>SHIFT</strong></span>+<span class="keycap"><strong>CTRL</strong></span>+<span class="keycap"><strong>O</strong></span> (буква «О», а не цифра «0»). Переключение по <span class="keycap"><strong>SHIFT</strong></span>+<span class="keycap"><strong>CTRL</strong></span>+<span class="keycap"><strong>O</strong></span> проходит между тремя режимами:
+            </p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" type="disc">
+                  <li class="listitem">
+                     <p>выравнивание по умолчанию, как определено для заданного языка</p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" type="disc">
+                  <li class="listitem">
+                     <p>выравнивание по левому краю</p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" type="disc">
+                  <li class="listitem">
+                     <p>выравнивание по правому краю</p>
+                  </li>
+               </ul>
+            </div>
+            <p>Использование режима выравнивания в <span class="application">ОмегаТ</span> никак не влияет на выравнивание текста в переведённых документах. Его нужно изменять при помощи приложения, которое вы обычно
+               используете для их просмотра или редактирования (обратитесь за подробностями к соответствующим руководствам). Сочетание клавиш
+               <span class="keycap"><strong>SHIFT</strong></span>+<span class="keycap"><strong>CTRL</strong></span>+<span class="keycap"><strong>O</strong></span> переключает и ввод и отображение текста в <span class="application">ОмегаТ</span>. Переключение можно выполнять на всех областях главного окна ОмегаТ (области редактирования, нечётких совпадений и глоссария).
+               Для этого нужно щёлкнуть левой кнопкой по области и затем переключить режим выравнивания текста. Кроме того, это сочетание
+               клавиш можно использовать во всех окнах ввода <span class="application">ОмегаТ</span> (поиск, правила сегментации и т.д.).
+            </p>
+            <p>Примечание для пользователей Mac OS X: используйте именно сочетание клавиш <span class="keycap"><strong>SHIFT</strong></span>+<span class="keycap"><strong>CTRL</strong></span>+<span class="keycap"><strong>O</strong></span>, а <span class="bold"><strong>не </strong></span>SHIFT+CMD+O.
+            </p>
+            <div class="section" title="3.1. Комбинирование строк с разным направлением письма в одном сегменте">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="d0e5332"></a>3.1. Комбинирование строк с разным направлением письма в одном сегменте<a class="indexterm" name="d0e5335"></a><a class="indexterm" name="d0e5340"></a><a class="indexterm" name="d0e5345"></a></h3>
+                     </div>
+                  </div>
+               </div>
+               <p>Когда вы вводите текст исключительно на языке с письмом справа налево, можно использовать режим выравнивания слева направо.
+                  Тем не менее, во многих случаях необходимо вставить фрагмент, написанный слева направо в текст, написанный справа налево.
+                  Например, нужно вставлять теги ОмегаТ, названия продуктов, которые должны оставаться неизменными, шаблоны в файлах локализации
+                  и числа. В таких случаях необходимо переключиться в режим письма справа налево, чтобы написанный таким образом текст (на самом
+                  деле, двунаправленный) правильно отображался. Когда <span class="application">ОмегаТ</span> находится в режиме отображения справа налево, этот режим применяется для отображения и текста оригинала, и текста перевода.
+                  Это означает, что если язык оригинала использует письмо слева направо, а язык перевода - справа налево (или наоборот), то
+                  может быть необходимо переключаться между режимами отображения, чтобы удобно просматривать оригинал и вводить перевод в соответствующем
+                  режиме.
+               </p>
+            </div>
+            <div class="section" title="3.2. Теги ОмегаТ в сегментах с письмом справа налево">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="d0e5355"></a>3.2. Теги <span class="application">ОмегаТ</span> в сегментах с письмом справа налево<a class="indexterm" name="d0e5361"></a></h3>
+                     </div>
+                  </div>
+               </div>
+               <p>Как уже было сказано выше, теги ОмегаТ — это строки с письмом слева направо. При переводе с языка с письмом справа налево
+                  на язык с письмом слева направо для корректного прочтения тегов оригинала и правильного ввода их в перевод может потребоваться
+                  неоднократное переключение режимов отображения.
+               </p>
+               <p>Если ваш проект это позволяет, мы настоятельно рекомендуем убрать из исходного документа всю стилевую информацию, чтобы в
+                  ОмегаТ появлялось как можно меньше тегов. Следуйте указаниям, которые даются в разделе «Подсказки по управлению тегами». Чаще
+                  проверяйте теги (см. раздел «Проверка тегов») и регулярно создавайте переведённые документы (см. ниже и раздел «Меню»), чтобы
+                  вовремя отследить возможные проблемы. Примечание: возможно окажется проще сначала перевести текст, скопированный в обычный
+                  текстовый файл без форматирования, а затем скопировать перевод обратно в соответствующее приложение и добавить нужный стиль.
+               </p>
+            </div>
+            <div class="section" title="3.3. Создание переведённых документов с письмом справа налево">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="d0e5370"></a>3.3. Создание переведённых документов с письмом справа налево<a class="indexterm" name="d0e5373"></a><a class="indexterm" name="d0e5378"></a><a class="indexterm" name="d0e5383"></a></h3>
+                     </div>
+                  </div>
+               </div>
+               <p>Переведённый документ создаётся с тем же направлением письма, что и исходный. Если в исходном документе направление письма
+                  было слева направо, в переведённом документе направление письма нужно изменить вручную в соответствующем редакторе. Каждый
+                  формат имеет свою специфику отображения текста с письмом справа налево; обратитесь к руководству соответствующего приложения
+                  за более подробной информацией.
+               </p>
+               <p>Чтобы не менять параметры выравнивания переведённых файлов при каждом обращении к ним, можно попробовать изменить параметры
+                  выравнивания исходного файла, чтобы переведённый файл унаследовал их. Такие изменения, к примеру, можно делать с файлами OpenOffice.org.
+               </p>
+            </div>
+         </div>
+      </div>
+      <div class="navfooter">
+         <hr>
+         <table width="100%" summary="Navigation footer">
+            <tr>
+               <td width="40%" align="left"><a accesskey="p" href="chapter.files.and.directories.html">Пред.</a>&nbsp;
+               </td>
+               <td width="20%" align="center">&nbsp;</td>
+               <td width="40%" align="right">&nbsp;<a accesskey="n" href="chapter.translation.editing.html">След.</a></td>
+            </tr>
+            <tr>
+               <td width="40%" align="left" valign="top">Глава 8. Файлы и каталоги <span class="application">ОмегаТ</span>&nbsp;
+               </td>
+               <td width="20%" align="center"><a accesskey="h" href="index.html">Начало</a></td>
+               <td width="40%" align="right" valign="top">&nbsp;Глава 10. Параметры редактирования</td>
+            </tr>
+         </table>
+      </div>
+   </body>
+</html>

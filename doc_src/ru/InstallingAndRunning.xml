@@ -1,0 +1,645 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<chapter id="chapter.installing.and.running">
+  <title>Установка и запуск <application>ОмегаТ</application></title>
+
+  <section>
+    <title id="Windows.users">Для пользователей Windows<indexterm class="singular">
+        <primary>Установка ОмегаТ</primary> <secondary>Windows</secondary>
+      </indexterm></title>
+
+    <section>
+      <title id="which.package.to.download.windows">Загрузка пакета</title>
+
+      <para>Установлена ли у вас версия Java, совместимая с Oracle Java 1.5 JRE?</para>
+
+      <itemizedlist>
+        <listitem>
+          <para><emphasis role="bold">Да: </emphasis>загрузите <emphasis>OmegaT_2.5.x_Windows_without_JRE.exe</emphasis>.</para>
+        </listitem>
+
+        <listitem>
+          <para><emphasis role="bold">Нет / не знаю:</emphasis> загрузите<emphasis> OmegaT_2.5.x_Windows.exe.</emphasis></para>
+
+          <para>В этот пакет включена Oracle Java Runtime Environment. Эта JRE не будет конфликтовать с другими реализациями Java, которые могут быть уже установлены на вашей системе.</para>
+        </listitem>
+      </itemizedlist>
+    </section>
+
+    <section id="OmegaT.installation.Windows">
+      <title><application>Установка ОмегаТ</application></title>
+
+      <para>Для установки <application>ОмегаТ</application>, дважды щёлкните по загруженной программе и следуйте инструкциям.</para>
+    </section>
+
+    <section id="adding.OmegaT.to.the.start.menu.or.desktop">
+      <title>Добавление <application>ОмегаТ</application> в меню «Пуск» или на рабочий стол<indexterm class="singular">
+          <primary>Настройка ОмегаТ</primary> <secondary>Windows</secondary>
+        </indexterm></title>
+
+      <para>Во время установки программа спросит вас, хотите ли вы создать папку в меню <emphasis>«Пуск»</emphasis>, а также ярлыки на рабочем столе и панели быстрого запуска.</para>
+
+      <para>Вы можете создать ярлык и позднее, перетащив <emphasis><application>OmegaT</application>.exe</emphasis> на рабочий стол или в меню «Пуск».</para>
+    </section>
+
+    <section id="running.OmegaT.Windows">
+      <title>Запуск <application>ОмегаТ<indexterm class="singular">
+          <primary>Запуск ОмегаТ</primary> <secondary>Windows</secondary>
+        </indexterm></application></title>
+
+      <para>После установки <application>ОмегаТ</application> вы можете щёлкнуть мышкой на файле <emphasis><application>OmegaT</application>.jar</emphasis>, чтобы запустить программу напрямую, или же запускать её из командной строки.</para>
+
+      <para>Однако, проще всего — запустить программу<emphasis> <application>OmegaT</application>.exe</emphasis>. <indexterm class="singular">
+          <primary>Запуск ОмегаТ</primary> <secondary>Windows</secondary> <tertiary>Файл INI</tertiary>
+        </indexterm>В этом случае параметры будут считываться из файла <emphasis><application>OmegaT</application>.l4J.ini </emphasis>, который находится в том же каталоге, что и файл exe. Вы можете изменить его так, как посчитаете нужным. В нижеприведённом примере, в файле INI для ОмегаТ резервируется 1 Гб памяти, в качестве языка интерфейса устанавливается французский, а в качестве страны пользователя выбирается Португалия.</para>
+
+      <literallayout><code># OmegaT.exe runtime configuration
+# To use a parameter, remove the '#' before the '-'
+# Memory 
+-Xmx1024M 
+# Language 
+-Duser.language=FR
+# Country 
+-Duser.country=CA </code></literallayout>
+    </section>
+
+    <section>
+      <title>Обновление ОмегаТ<indexterm class="singular">
+          <primary>Обновление ОмегаТ</primary> <secondary>Windows</secondary>
+        </indexterm></title>
+
+      <para><emphasis>Информация ниже относится только к «традиционным» Windows версиям ОмегаТ. Она не относится ни к Web Start версиям, которые обновляются автоматически, ни к установленным в Windows кросс-платформенным версиям.</emphasis></para>
+
+      <para>Если ОмегаТ уже установлена на вашем компьютере и вы хотите обновить её до более новой версии, у вас есть два варианта:</para>
+
+      <itemizedlist>
+        <listitem>
+          <para><emphasis role="bold">Установка «поверх» предыдущей версии. </emphasis>Для этого просто выберите для установки каталог, в который ранее уже была установлена ОмегаТ. «Старая» версия ОмегаТ будет перезаписана, но все настройки будут сохранены. (Настройки сделанные в самой ОмегаТ, любые изменения в файле <filename>OmegaT.l4J.ini</filename>, а также все пользовательские скрипты запуска).</para>
+        </listitem>
+      </itemizedlist>
+
+      <para>Если вы выбрали этот метод, то в качестве новой версии ОмегаТ можно использовать сборку «Windows без JRE», так как будет задействована уже установленная JRE.</para>
+
+      <itemizedlist>
+        <listitem>
+          <para><emphasis role="bold">Установить в новую папку. </emphasis>Благодаря этому методу, можно параллельно использовать две версии ОмегаТ, пока вы не привыкнете к новой версии. При использовании этого метода, все настройки которые были сделаны в самой ОмегаТ будут сохранены. Однако, в этом случае:</para>
+
+          <itemizedlist>
+            <listitem>
+              <para>Если вы вносили какие-либо изменения в файл <filename> OmegaT.l4J.ini</filename> или используете BAT-файл, необходимо сделать их резервные копии.</para>
+            </listitem>
+          </itemizedlist>
+
+          <itemizedlist>
+            <listitem>
+              <para>Если для предыдущей установки вы использовали версию «Windows с JRE», новая версия ОмегаТ тоже должна быть «Windows с JRE».</para>
+            </listitem>
+          </itemizedlist>
+        </listitem>
+      </itemizedlist>
+    </section>
+  </section>
+
+  <section id="Linux.Intel.users">
+    <title>Для пользователей GNU/Linux (Intel)<indexterm class="singular">
+        <primary>Установка ОмегаТ</primary> <secondary>GNU/Linux</secondary>
+      </indexterm></title>
+
+    <section id="which.package.to.download.Linux">
+      <title>Загрузка нужного пакета</title>
+
+      <para>Установлена ли у вас версия Java, совместимая с Oracle Java 1.5 JRE?</para>
+
+      <itemizedlist>
+        <listitem>
+          <para><emphasis role="bold">Да: </emphasis>загрузите <emphasis>OmegaT_2.5.x_Without_JRE.zip</emphasis>.</para>
+        </listitem>
+
+        <listitem>
+          <para><emphasis role="bold">Нет / не знаю:</emphasis> загрузите<emphasis> OmegaT_2.5.x_Linux.tar.bz2.</emphasis></para>
+
+          <para>В этот пакет включена Oracle Java Runtime Environment. Эта JRE не будет конфликтовать с другими реализациями Java, которые могут быть уже установлены на вашей системе.</para>
+        </listitem>
+      </itemizedlist>
+    </section>
+
+    <section id="OmegaT.installation.Linux">
+      <title><application>Установка ОмегаТ</application></title>
+
+      <para>Распакуйте загруженный файл. В текущей папке будет создан каталог omegat/, в котором будут находиться все файлы, необходимые для запуска <application>ОмегаТ</application>. Чтобы распаковать файл <emphasis>.tar.gz</emphasis>:</para>
+
+      <para><emphasis>$ tar xf загруженный_файл.tar.gz</emphasis></para>
+    </section>
+
+    <section id="adding.OmegaT.to.your.menus.or.panels">
+      <title>Добавление <application>ОмегаТ</application> в меню (KDE) и на панель (Gnome).</title>
+
+      <section id="KDE.users">
+        <title>Для пользователей KDE 4<indexterm class="singular">
+            <primary>Настройка ОмегаТ</primary> <secondary>GNU/Linux</secondary>
+          </indexterm></title>
+
+        <para>Вы можете добавить <application>ОмегаТ</application> в меню следующим образом:</para>
+
+        <itemizedlist>
+          <listitem>
+            <para>Нажмите <emphasis role="bold"> <keysym>ALT+F2</keysym> </emphasis>, чтобы запустить KRunner. Введите команду: <emphasis>kmenuedit+ВВОД</emphasis>. Загрузится KMenuEditor. В KMenuEditor выберите <emphasis>Файл -&gt; Новый пункт.</emphasis></para>
+          </listitem>
+
+          <listitem>
+            <para>Затем, после выбора подходящего меню, добавьте подменю/пункт нажав <emphasis>Файл - Новое подменю</emphasis> и <emphasis>Файл - Новый пункт</emphasis>. В качестве имени нового элемента введите <application>ОмегаТ</application>.</para>
+          </listitem>
+
+          <listitem>
+            <para>В поле «Команда» с помощью кнопки навигации найдите скрипт, запускающий <application>ОмегаТ</application> (файл с именем <application>OmegaT</application> в распакованном каталоге), и выберите его.</para>
+          </listitem>
+
+          <listitem>
+            <para>Нажмите кнопку выбора значка (справа от полей «Имя»/«Описание»/«Комментарий»).</para>
+          </listitem>
+
+          <listitem>
+            <para> Прочие значки - Обзор и перейдите в подкаталог /image в главного каталога программы <application>ОмегаТ</application>. Выберите значок «<application>OmegaT</application>.png».</para>
+          </listitem>
+
+          <listitem>
+            <para>Сохраните изменения, щёлкнув <emphasis>Файл - Сохранить.</emphasis></para>
+          </listitem>
+        </itemizedlist>
+      </section>
+
+      <section id="GNOME.users">
+        <title>Для пользователей Gnome</title>
+
+        <para>Вы можете добавить <application>ОмегаТ</application> в меню следующим образом:</para>
+
+        <itemizedlist>
+          <listitem>
+            <para>Щёлкните правой кнопкой мыши по панели и выберите команду <emphasis>«Добавить на панель».</emphasis></para>
+          </listitem>
+
+          <listitem>
+            <para>В поле «Имя» введите «<application>ОмегаТ</application>»; используйте кнопку обзора, чтобы ввести путь к скрипту запуска <application>ОмегаТ</application> в поле «Команда». Выделите скрипт и нажмите «ОК».</para>
+          </listitem>
+
+          <listitem>
+            <para>Нажмите кнопку выбора значка, затем нажмите <emphasis>«Обзор...»</emphasis> и перейдите в подкаталог «/images» папки <application>OmegaT</application>. Выберите значок <emphasis><application>OmegaT</application>.png</emphasis>. Возможно, Gnome не покажет файлы со значками, так как по умолчанию ожидает SVG-файлы, однако, если всё-таки выбрать папку, значки будут отображены и файл «<application>OmegaT</application>.png» можно будет выбрать.</para>
+          </listitem>
+        </itemizedlist>
+      </section>
+    </section>
+
+    <section id="running.OmegaT.Linux">
+      <title>Запуск <application>ОмегаТ<indexterm class="singular">
+          <primary>Запуск ОмегаТ</primary> <secondary>GNU/Linux</secondary>
+        </indexterm></application></title>
+
+      <para>Вы можете запустить ОмегаТ из командной строки с помощью скрипта, который задаёт нужные параметры, или напрямую, щёлкнув по файлу <emphasis><application>OmegaT</application>.jar</emphasis>. Конкретный способ зависит от дистрибутива. Убедитесь, что у вас корректно настроена переменная <emphasis>PATH </emphasis> и что файлы .<emphasis>jar</emphasis> ассоциированы с исполняемым файлом Java. Более подробная информация приведена далее, в разделе «Запуск из командной строки».</para>
+    </section>
+  </section>
+
+  <section id="MAC.OSX.users">
+    <title>Для пользователей Mac OS X<indexterm class="singular">
+        <primary>Установка ОмегаТ</primary> <secondary>OS X</secondary>
+      </indexterm></title>
+
+    <section id="which.package.to.download.OSX">
+      <title>Загрузка пакета</title>
+
+      <para>Для запуска <application>ОмегаТ</application> 2.5 требуется Java 1.5. Для того, чтобы обновить Java, нужно воспользоваться пунктом «Обновление программ...» из меню Apple.</para>
+
+      <para>Загрузите <emphasis>OmegaT_2.5.x_Mac.zip.</emphasis></para>
+    </section>
+
+    <section id="OmegaT.installation.OSX">
+      <title><application>Установка ОмегаТ</application></title>
+
+      <para>Дважды щёлкните на файле <emphasis>OmegaT_2.5.x_Mac.zip</emphasis>, чтобы распаковать его. Будет создана папка <emphasis> <application>OmegaT</application> </emphasis>. В папке находятся 2 файла: «index.html» и <emphasis><application>OmegaT</application>.app.</emphasis> Скопируйте папку в подходящее место (например, в «Applications»). После этого можно удалить файл <emphasis>OmegaT_2.5.x_Mac.zip</emphasis>, он вам больше не понадобится.</para>
+    </section>
+
+    <section id="adding.OmegaT.to.the.dock">
+      <title>Добавление <application>ОмегаТ</application> в Док</title>
+
+      <para>Перетащите файл <emphasis><application>OmegaT</application>.app</emphasis> в Док.</para>
+    </section>
+
+    <section id="running.OmegaT.OSX">
+      <title>Запуск <application>ОмегаТ<indexterm class="singular">
+          <primary>Запуск ОмегаТ</primary> <secondary>OS X</secondary>
+        </indexterm></application></title>
+
+      <para>Дважды щёлкните на <emphasis> <application>OmegaT</application>.app</emphasis> или на его ярлыке в Доке.</para>
+
+      <para>Чтобы получить доступ к <application><emphasis>Info.plist</emphasis></application>, щёлкните правой кнопкой мыши по <emphasis><application>OmegaT</application>.app</emphasis> и выберите «Показать содержимое пакета», а затем откройте файл, снова щёлкнув правой кнопкой мыши и выбрав предпочитаемый текстовый редактор. Также в командной строке вы можете выполнить команду «cd», чтобы перейти в нужную папку и открыть <application><emphasis>Info.plist</emphasis> в каком-нибудь консольном редакторе, например, Emacs или vi</application>.<emphasis> <indexterm class="singular">
+          <primary>Настройка ОмегаТ</primary> <secondary>OS X</secondary> <tertiary>Параметры запуска</tertiary>
+        </indexterm></emphasis></para>
+
+      <para>Можно редактировать разделы <emphasis>Properties</emphasis> и <emphasis>VMOptions</emphasis>.</para>
+
+      <para>Если будете добавлять какие-то значения в <emphasis>VMOptions</emphasis>, ставьте между ними пробел. К примеру, параметры <filename>-Xmx1024M -Duser.language=ja</filename> запустят <application>ОмегаТ</application> с 1024 Мб выделенной памяти и японским языком пользовательского интерфейса.</para>
+
+      <para>Чтобы одновременно запустить несколько копий <emphasis><application>OmegaT</application>.app</emphasis>, отредактируйте файл <emphasis>JavaApplicationStub</emphasis>, расположенный в <emphasis><application>OmegaT</application>.app/ Contents/MacOS/</emphasis>.</para>
+
+      <para><emphasis><application> </application></emphasis>Для запуска <application>ОмегаТ</application> из командной строки, используйте файл <emphasis><application>OmegaT</application>.jar</emphasis>, находящийся в каталоге <emphasis><application>OmegaT</application>.app/Contents/Resources/Java/</emphasis>. Более подробная информация приведена далее, в разделе «Запуск из командной строки».</para>
+    </section>
+
+    <section id="Mac.OSX.goodies">
+      <title>«Плюшки» для Mac OS X</title>
+
+      <para><emphasis><application>OmegaT</application>.app</emphasis> может взаимодействовать с Mac OS X Services. Т. е., можно выделить любое слово в окне <application>ОмегаТ</application> и использовать Services, чтобы поискать его в Spotlight или Google. Также, для автоматизации часто повторяющихся действий можно использовать AppleScript или Automator.</para>
+    </section>
+  </section>
+
+  <section id="other.systems">
+    <title>Другие системы<indexterm class="singular">
+        <primary>Установка ОмегаТ</primary> <secondary>Другие системы</secondary>
+      </indexterm></title>
+
+    <para>Представленная ниже информация относится к системам SPARC/x86/x64, GNU/Linux x64/PowerPC, Windows x64</para>
+
+    <section>
+      <title id="which.package.to.download.other">Загрузка нужного пакета</title>
+
+      <para>Пакеты <application>ОмегаТ</application> со встроенной Oracle Java JRE существуют для только платформ GNU/Linux (Intel x86) и Windows. Пользователи других платформ (GNU/Linux PowerPC, GNU/Linux x64, Solaris SPARC/x86/x64, Windows x64 и т.д.) должны удостовериться, что в их системе установлена подходящая реализация Java JRE.</para>
+
+      <para>Установлена ли у вас версия Java, совместимая с Oracle Java 1.5 JRE?</para>
+
+      <itemizedlist>
+        <listitem>
+          <para><emphasis role="bold">Да: </emphasis>загрузите <emphasis>OmegaT_2.5.x_Windows_without_JRE.</emphasis>zip. Этот пакет можно использовать на любой платформе, где установлена версия JRE, совместимая с Java 1.5 JRE.</para>
+        </listitem>
+
+        <listitem>
+          <para><emphasis role="bold">Не знаю:</emphasis> откройте терминал и введите «java -version». Если появилось сообщение типа «command not found», то скорее всего, Java в вашей системе не установлена.</para>
+        </listitem>
+
+        <listitem>
+          <para><emphasis role="bold">Нет:</emphasis> установите версию Java JRE для вашей платформы (смотри ниже) и загрузите пакет <emphasis>OmegaT_2.5.x_Without_JRE.zip</emphasis>.</para>
+
+          <para>Oracle предоставляет пакеты с JRE для Solaris SPARC/x86 (Java 1.5) и GNU/Linux x64, Solaris x64, Windows x64 (Java 1.5): <ulink url="http://www.oracle.com/technetwork/java/archive-139210.html">http://www.oracle.com/technetwork/java/archive-139210.html</ulink>.</para>
+
+          <para>IBM предоставляет JRE для GNU/Linux PowerPC: <ulink url="http://www.ibm.com/developerworks/java/jdk/linux/download.html">http://www.ibm.com/developerworks/java/jdk/linux/download.htm</ulink></para>
+
+          <para>Следуйте инструкциям по установке необходимого вам пакета.</para>
+        </listitem>
+      </itemizedlist>
+    </section>
+
+    <section id="OmegaT.installation.other">
+      <title><application>Установка ОмегаТ</application><indexterm class="singular">
+          <primary>Установка ОмегаТ</primary> <secondary>Другие системы</secondary>
+        </indexterm></title>
+
+      <para>Чтобы установить <application>ОмегаТ</application>, просто распакуйте файл <emphasis role="bold">OmegaT_2.5.x_Without_JRE.zip</emphasis>. В текущей папке будет создан каталог <emphasis>./OmegaT_2.5.x_Without_JRE/</emphasis>, в котором вы найдёте все файлы, необходимые для запуска <application>ОмегаТ</application>.</para>
+    </section>
+
+    <section id="installing.convenient.shortcuts">
+      <title>Установка удобных ярлыков запуска</title>
+
+      <para>Следуйте инструкциям к вашей системе, чтобы установить ярлыки запуска <application>ОмегаТ</application> в нужных вам местах.</para>
+    </section>
+
+    <section id="running.OmegaT.other">
+      <title>Запуск <application>ОмегаТ<indexterm class="singular">
+          <primary>Запуск ОмегаТ</primary> <secondary>Другие системы</secondary>
+        </indexterm></application></title>
+
+      <para>После установки <application>ОмегаТ</application> вы можете запускать программу напрямую из командной строки, создать скрипт с параметрами запуска или просто щёлкнуть мышкой на файле <emphasis><application>OmegaT</application>.jar</emphasis>. Конкретный способ зависит от дистрибутива. Убедитесь, что у вас корректно настроена переменная <emphasis>PATH</emphasis> и что файлы <emphasis>.jar </emphasis> ассоциированы с исполняемым файлом Java. Более подробная информация приведена далее, в разделе «Запуск из командной строки».</para>
+    </section>
+  </section>
+
+  <section id="using.Java.Web.Start">
+    <title>Использование Java Web Start<indexterm class="singular">
+        <primary>Запуск ОмегаТ</primary> <secondary>Использование Java Web Start</secondary>
+      </indexterm></title>
+
+    <para>С помощью технологии Java Web Start (часть Java 1.5 и выше) приложения Java можно установить напрямую из Интернета всего одним щелчком мыши. Java Web Start обеспечивает установку самой последней версии приложения и нужной версии Java Runtime Environment (JRE). Чтобы установить ОмегаТ с помощью Java Web Start, перейдите по следующей ссылке:</para>
+
+    <para><emphasis>http://omegat.sourceforge.net/webstart/<application>OmegaT</application>.jnlp</emphasis></para>
+
+    <para>Загрузите файл <emphasis> <application>OmegaT</application>.jnlp</emphasis> и щёлкните по нему. Во время установки, в зависимости от операционной системы, могут появиться несколько предупреждений системы безопасности. Права, которые вы даёте этой версии (они могут быть сформулированы, например, как: «неограниченный доступ к компьютеру»), идентичны правам, которые есть у локально установленной версии, а именно: разрешается доступ к жёсткому диску вашего компьютера. При последующих запусках <emphasis><application>OmegaT</application>.jnlp</emphasis> будут загружены и установлены обновления (если они есть, конечно), и лишь затем запустится <application>ОмегаТ</application>. После проведения установки повторный запуск <emphasis><application>OmegaT</application>.jnlp</emphasis> запустит программу, даже если соединение с Интернет отсутствует.</para>
+
+    <para><emphasis role="bold">Примечание относительно конфиденциальности данных</emphasis>: <application>ОмегаТ</application> Java Web Start не хранит никакую вашу информацию нигде, кроме компьютера, на котором вы её запускаете. Программа работает только на вашем компьютере. Ваши документы и файлы памяти переводов хранятся на вашем компьютере и ни один участник проекта <application>ОмегаТ</application> не имеет к ним доступа.</para>
+
+    <para>Чтобы запускать ОмегаТ из командной строки с дополнительными параметрами (смотри выше), нужно провести установку стандартными средствами.</para>
+  </section>
+
+  <section>
+    <title>Запуск ОмегаТ из командной строки<indexterm class="singular">
+        <primary>Запуск ОмегаТ</primary> <secondary>Запуск из командной строки</secondary>
+      </indexterm></title>
+
+    <para>Как правило, необходимости запускать <application>ОмегаТ</application> из командной строки нет. Однако запуск из командной строки позволяет контролировать и изменять поведение программы. Из командной строки <application>ОмегаТ</application> можно запустить двумя способами:</para>
+
+    <section id="method1.opening.commandline.window">
+      <title>Открытие окна командной строки</title>
+
+      <para>Окно командной строки также часто называют «окно терминала». В Windows оно называется «Сеанс MS-DOS» и его можно запустить через меню «Пуск» — «Программы» — «Сеанс MS-DOS». Его эквивалентом под Mac OS X является приложение Terminal, расположенное в «Applications → Utilities».</para>
+
+      <para>Чтобы запустить <application>ОмегаТ</application>, обычно нужно ввести две команды. Первая:</para>
+
+      <para><emphasis> <literal>cd {папка}</literal> </emphasis></para>
+
+      <para>где <emphasis>{папка}</emphasis> — это имя папки (с полным путём к ней), где находится <application>OmegaT</application> — точнее, файл <emphasis><application>OmegaT</application>.jar</emphasis>. У вас эта команда будет выглядеть примерно так:</para>
+
+      <para>В Windows</para>
+
+      <para><emphasis> <literal>cd C:\Program
+      Files\<application>OmegaT</application></literal> </emphasis></para>
+
+      <para>В Mac OS X</para>
+
+      <para><literal> <literal>cd &lt;<application>OmegaT</application>.app
+      location&gt;/<application>OmegaT</application>.app/Contents/Resources/Java/</literal>
+      </literal></para>
+
+      <para>В GNU/Linux</para>
+
+      <para><literal>cd /usr/local/omegat</literal></para>
+
+      <para>Эта команда изменяет текущую папку на папку, содержащую исполняемый файл <application>ОмегаТ</application>. Вторая команда собственно запускает <application>ОмегаТ</application>. В самом простом виде она выглядит так:</para>
+
+      <para><literal>java -jar
+      <application>OmegaT</application>.jar</literal></para>
+
+      <para>Обратите внимание на регистр букв — программа не запустится, если вы введёте <emphasis>omegat</emphasis> вместо <emphasis>OmegaT </emphasis>!</para>
+
+      <para>Этот способ удобен при отладке: если во время работы произошла ошибка, то сообщение о ней выводится в окно терминала, что может быть очень полезно.</para>
+
+      <para>Однако этот метод не очень удобен для повседневного запуска программы. Поэтому две вышеупомянутые команды содержатся в файле («скрипте», на Windows-системах также известен как «BAT-файл»).</para>
+
+      <para>Когда запускается этот файл, все записанные в нём команды выполняются автоматически. Соответственно, чтобы изменить команду запуска, достаточно изменить этот файл.</para>
+    </section>
+
+    <section id="launch.command.arguments">
+      <title>Аргументы команды запуска<indexterm class="singular">
+          <primary>Запуск ОмегаТ</primary> <secondary>Аргументы скрипта запуска</secondary>
+        </indexterm></title>
+
+      <para>Основные команды уже были перечислены выше. Изменения этих команд подразумевают добавление к ним «аргументов». Аргументы добавляются после команды <emphasis>java</emphasis> и перед <emphasis>-jar <application>OmegaT</application>.jar</emphasis>. В Windows настройки можно также изменять путём правки <emphasis><application>OmegaT</application>.l4J.ini</emphasis>. В Mac OSX в этих же целях можно изменить файл <emphasis>Info.plist</emphasis>, который находится в каталоге <emphasis><application>OmegaT</application>.app/Contents/</emphasis>.</para>
+
+      <para>Ниже приведён список возможных аргументов. Опытные пользователи могут получить более подробную информацию об аргументах командной строки, введя в окне терминала <emphasis>man java</emphasis>.</para>
+
+      <itemizedlist>
+        <listitem>
+          <para><emphasis role="bold">Язык пользовательского интерфейса</emphasis></para>
+
+          <para><emphasis role="bold">-Duser.language=XX</emphasis><indexterm class="singular">
+              <primary>Запуск ОмегаТ</primary> <secondary>Аргументы скрипта запуска</secondary> <tertiary>Язык пользовательского интерфейса</tertiary>
+            </indexterm> Обычно, то есть когда <application>ОмегаТ</application> запускается без каких-либо аргументов, программа сама определяет язык операционной системы пользователя. Если перевод интерфейса на этот язык уже кем-то выполнен, то <application>ОмегаТ</application> будет использовать его. Таким образом, если язык операционной системы русский и <application>ОмегаТ</application> была локализована на этот язык, то будет использоваться русский пользовательский интерфейс, русские меню и т.д. Если перевода интерфейса на язык операционной системы нет, <application>ОмегаТ</application> будет использовать английский, как язык по умолчанию. Таково стандартное поведение программы.</para>
+
+          <para>Аргумент <emphasis>-Duser.language=XX</emphasis> указывает <application>ОмегаТ</application> использовать не язык операционной системы, а заданный язык. «XX» в этой команде надо заменить на буквенный код предпочтительного языка. Итак, например, чтобы запустить <application>ОмегаТ</application> с французским интерфейсом в русской операционной системе, нам понадобится следующая команда:</para>
+
+          <para><literal>java -Duser.language=fr -jar
+          <application>OmegaT</application>.jar</literal></para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para><emphasis role="bold">Страна пользователя</emphasis></para>
+
+          <para><emphasis role="bold">-Duser.country=XX</emphasis><indexterm class="singular">
+              <primary>Запуск ОмегаТ</primary> <secondary>Аргументы скрипта запуска</secondary> <tertiary>Страна пользователя</tertiary>
+            </indexterm> Помимо языка интерфейса вы также можете указать страну пользователя, например, CN или TW для китайского языка. Чтобы руководство по быстрому старту отображалось на нужном языке, вам нужно указать и язык, и страну. Это необходимо, даже если доступна лишь одна комбинация, например, pt_BR в случае с португальским бразильским.</para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para><emphasis role="bold">Сглаживание шрифтов</emphasis> - (только для Java 1.5)</para>
+
+          <para><emphasis role="bold">-Dswing.aatext=true<indexterm class="singular">
+              <primary>Запуск ОмегаТ</primary> <secondary>Аргументы скрипта запуска</secondary> <tertiary>Сглаживание шрифтов</tertiary>
+            </indexterm></emphasis> Этот аргумент включает сглаживание (anti-aliasing) шрифтов, тем самым улучшая их внешний вид.</para>
+        </listitem>
+
+        <listitem>
+          <para><emphasis role="bold">Выделение памяти</emphasis></para>
+
+          <para><emphasis role="bold">-XmxZZM </emphasis><indexterm class="singular">
+              <primary>Запуск ОмегаТ</primary> <secondary>Аргументы скрипта запуска</secondary> <tertiary>Выделение памяти</tertiary>
+            </indexterm> Эта команда выделяет <application>ОмегаТ</application> больше памяти. По умолчанию выделяется 512 МБ, так что назначать меньше нет никакого смысла. «ZZ» надо заменить на объём назначаемой памяти в мегабайтах. Таким образом, чтобы запустить <application>ОмегаТ</application> с 1024 MБ (1 гигабайт) памяти, нужно отдать следующую команду:</para>
+
+          <para><literal>java -Xmx1024M -jar
+          <application>OmegaT</application>.jar</literal></para>
+        </listitem>
+
+        <listitem>
+          <para><emphasis role="bold">IP-адрес прокси-сервера</emphasis></para>
+
+          <para><emphasis role="bold"><emphasis role="bold">-Dhttp.proxyHost=nnn.nnn.nnn.nnn</emphasis> <indexterm class="singular">
+              <primary>Запуск ОмегаТ</primary> <secondary>Аргументы скрипта запуска</secondary> <tertiary>IP-адрес прокси-сервера</tertiary>
+            </indexterm></emphasis> IP-адрес вашего прокси-сервера (если вы используете прокси).</para>
+        </listitem>
+
+        <listitem>
+          <para><emphasis role="bold">Номер порта прокси</emphasis></para>
+
+          <para><emphasis role="bold">-Dhttp.proxyPort=NNNN</emphasis> <indexterm class="singular">
+              <primary>Запуск ОмегаТ</primary> <secondary>Аргументы скрипта запуска</secondary> <tertiary>Номер порта прокси</tertiary>
+            </indexterm> Номер порта, по которому ваша система соединяется с прокси-сервером.</para>
+        </listitem>
+
+        <listitem>
+          <para><emphasis role="bold">Google Translate V2 </emphasis></para>
+
+          <para><emphasis role="bold">-Dgoogle.api.key=A123456789B123456789C123456789D12345678 </emphasis><emphasis role="bold"><indexterm class="singular">
+              <primary>Запуск ОмегаТ</primary> <secondary>Аргументы скрипта запуска</secondary> <tertiary>Google Translate V2</tertiary>
+            </indexterm></emphasis> Если у вас есть подписка на сервис Google Translate, введите ваш личный ключ Google API. Обратите внимание, длина ключа составляет 38 символов.</para>
+        </listitem>
+      </itemizedlist>
+
+      <para>Аргументы можно комбинировать: чтобы запустить <application>ОмегаТ</application> со всеми вышеперечисленными аргументами, нужно ввести команду:</para>
+
+      <para><literal>java -Dswing.aatext=true -Duser.language=pt
+      -Duser.country=BR -Xmx1024M <application>-DDhttp.proxyHost=192.168.1.1
+      -Dhttp.proxyport<emphasis role="bold">=</emphasis>3128 -jar
+      -OmegaT</application>.jar</literal></para>
+    </section>
+
+    <section id="omegat.command.arguments">
+      <title>ОмегаТ в режиме командной строки<indexterm class="singular">
+          <primary>Запуск ОмегаТ</primary> <secondary>Режим командной строки</secondary>
+        </indexterm></title>
+
+      <para>Режим работы ОмегаТ в командной строке задуман для того, чтобы программу можно было использовать как средство выполнение перевода в скриптовом окружении. После запуска ОмегаТ в режиме командной строки графический интерфейс не загружается (таким образом, программа работает в любой командной строке) и указанный проект обрабатывается автоматически.</para>
+
+      <section id="console.mode.prerequisites">
+        <title>Что для этого нужно</title>
+
+        <para>Прежде всего нужен проект в формате <application>ОмегаТ</application>. Месторасположение проекта не важно, так как при запуске вы всё равно указываете путь к нему.</para>
+
+        <para>Если нужно изменить какие-либо настройки, необходим соответствующий файл конфигурации. Этого можно достичь двумя способами:</para>
+
+        <itemizedlist>
+          <listitem>
+            <para>Запустить <application>ОмегаТ</application> в нормальном режиме (с графическим интерфейсом) и сделать необходимые настройки. После этого <application>ОмегаТ</application> будет использовать указанные настройки и в режиме командной строки.</para>
+          </listitem>
+
+          <listitem>
+            <para>Если же запустить <application>ОмегаТ</application> в нормальном режиме не получается (отсутствует графическое окружение): скопируйте файлы конфигурации <application>ОмегаТ</application> с другого компьютера в соответствующий каталог. Куда вы их скопируете — тоже не имеет значения, так как путь к файлу конфигурации можно указать в командной строке при запуске. Нужные вам файлы <literal>filters.conf</literal> и <literal>segmentation.conf</literal> находятся в домашнем каталоге пользователя (например, <literal>C:\Documents and Settings\%User%\<application>OmegaT</application></literal> в Windows, <literal>/home/%user%/.omegat/</literal> в GNU/Linux).</para>
+          </listitem>
+        </itemizedlist>
+      </section>
+
+      <section id="starting.in.console.mode">
+        <title>Запуск в режиме командной строки</title>
+
+        <para>Для того, чтобы запустить <application>ОмегаТ</application> в консольном режиме, при запуске нужно передать ей несколько параметров. Самый важный из них — <literal>&lt;project-dir&gt;</literal>, <literal> --config-dir=&lt;config-dir&gt;</literal> можно не указывать. Пример:</para>
+
+        <para><literal>java -jar <application>OmegaT</application>.jar
+        /path/to/project \</literal></para>
+
+        <para><literal>--config-dir=/путь/к/файлам-конфигурации/ \</literal></para>
+
+        <para><literal>
+        --mode=console-translate|console-createpseudotranslatetmx|console-align</literal></para>
+
+        <para><literal>--source-pattern={регулярное выражение}</literal></para>
+
+        <para>Заметьте, что все параметры начинаются с двух знаков «-».</para>
+
+        <para><emphasis role="bold">Пояснение:</emphasis></para>
+
+        <itemizedlist>
+          <listitem>
+            <para><literal>&lt;project-dir&gt;</literal> указывает <application>ОмегаТ</application>, где находится проект перевода. Если этот параметр задан, <application>ОмегаТ</application> запускается в режиме командной строки и переводит указанный проект.</para>
+          </listitem>
+        </itemizedlist>
+
+        <itemizedlist>
+          <listitem>
+            <para><literal>--config-dir=&lt;config-dir&gt;</literal> сообщает <application>ОмегаТ</application>, в каком каталоге находятся файлы конфигурации. Если этот параметр не передается при запуске, <application>ОмегаТ</application> использует настройки по умолчанию (находящиеся в каталоге <application>OmegaT</application> в домашнем каталоге пользователя, или, если они там не найдены — в текущем рабочем каталоге). Обратите внимание на два знака «-».</para>
+          </listitem>
+        </itemizedlist>
+
+        <itemizedlist>
+          <listitem>
+            <para><emphasis><literal>--mode</literal>=...-</emphasis> <application>ОмегаТ</application> запускается в режиме командной строки и автоматически выполняет следующие действия:</para>
+
+            <itemizedlist>
+              <listitem>
+                <para><emphasis><emphasis><literal>--mode=console-translate</literal></emphasis></emphasis></para>
+
+                <para>В этом режиме, ОмегаТ производит попытку автоматического перевода файлов из каталога «source», основываясь на имеющихся файлах памяти переводов. Этот режим может быть полезным при использовании ОмегаТ на сервере, с автоматической подачей TMX-файлов.</para>
+              </listitem>
+
+              <listitem>
+                <para><literal>--mode=console-createpseudotranslatetmx</literal></para>
+
+                <para>В этом режиме ОмегаТ создаёт TMX файл для всего проекта, основываясь только на исходных файлах. Необходимо задать имя создаваемого TMX-файла.</para>
+
+                <para><literal>--pseudotranslatetmx=allsegments.tmx
+                --pseudotranslatetype=[equal|empty]</literal></para>
+
+                <para>Аргумент <emphasis>pseudotranslatetype</emphasis> указывает способ заполнения сегментов перевода в файле памяти псевдо-переводов, следует ли создавать переводы, идентичные оригинальным сегментам, или переводы нужно оставить пустыми.</para>
+              </listitem>
+
+              <listitem>
+                <para><literal>--mode=console-align</literal></para>
+
+                <para>В этом режиме ОмегаТ выравнивает файлы Java properties из каталога проекта <literal>/source/</literal> относительно переведённых файлов из заданного каталога. Полученный TMX-файл будет размещён в каталоге <filename>/omegat/</filename> под именем <filename>align.tmx</filename>.</para>
+
+                <para>В этом случае потребуется дополнительный параметр, указывающий расположение переведённых файлов:</para>
+
+                <para><literal>--alignDir={расположение переведённых файлов}</literal></para>
+
+                <para><filename>alignDir</filename> указывает расположение файлов, на языке перевода проекта. Т. е., если в проекте производится перевод с английского на французский, имя bundle-файла должно иметь окончание «_fr». Полученный TMX-файл будет размещён в каталоге <literal>omegat</literal> под именем <filename>align.tmx</filename>.</para>
+              </listitem>
+            </itemizedlist>
+          </listitem>
+
+          <listitem>
+            <para><literal>--source-pattern={регулярное выражение}</literal></para>
+
+            <para>В этом режиме, данный параметр позволяет задать файлы для автоматической обработки. Если параметр не задан, будут обработаны все файлы. Вот несколько типичных примеров, которые могут вам пригодиться:</para>
+
+            <itemizedlist>
+              <listitem>
+                <para><emphasis><literal>.*\.html</literal></emphasis></para>
+
+                <para>Будут переведены все HTML-файлы. Заметьте, что точку в «*.html» следует экранировать («\,»), в соответствии с правилами регулярных выражений.</para>
+              </listitem>
+
+              <listitem>
+                <para><literal>test\.html</literal></para>
+
+                <para>Будет переведён только файл «test.html», находящийся в корне директории «source». Если в других директориях тоже есть файлы с именем «test.html», они будут проигнорированы.</para>
+              </listitem>
+
+              <listitem>
+                <para><literal>dir-10\\test\.html</literal></para>
+
+                <para>Будет обработан только файл «test.html», находящийся в каталоге «dir-10». Опять же, отметьте использование обратной косой черты для экранирования.</para>
+              </listitem>
+            </itemizedlist>
+          </listitem>
+
+          <listitem>
+            <para><literal>--output-tag-validation-={регулярное выражение}</literal></para>
+
+            <para>В этом режиме, данный параметр позволяет задать файлы для автоматической обработки. Если параметр не задан, будут обработаны все файлы. Вот несколько типичных примеров, которые могут вам пригодиться:</para>
+
+            <itemizedlist>
+              <listitem>
+                <para><emphasis><literal>.*\.html</literal></emphasis></para>
+
+                <para>Будут переведены все HTML-файлы. Заметьте, что точку в «*.html» следует экранировать («\,»), в соответствии с правилами регулярных выражений.</para>
+              </listitem>
+
+              <listitem>
+                <para><literal>test\.html</literal></para>
+
+                <para>Будет переведён только файл «test.html», находящийся в корне директории «source». Если в других директориях тоже есть файлы с именем «test.html», они будут проигнорированы.</para>
+              </listitem>
+
+              <listitem>
+                <para><literal>dir-10\\test\.html</literal></para>
+
+                <para>Будет обработан только файл «test.html», находящийся в каталоге «dir-10». Опять же, отметьте использование обратной косой черты для экранирования.</para>
+              </listitem>
+            </itemizedlist>
+          </listitem>
+
+          <listitem>
+            <para><literal>--tag-validation=[abort|warn]</literal><parameter>
+            outputFileName</parameter></para>
+
+            <para><parameter>В стандартный поток вывода будут направлены все оставшиеся ошибки тегов, которые затем могут быть исправлены переводчиком.</parameter></para>
+
+            <para>Благодаря этому параметру теги можно проверять в пакетном режиме. Если установлен режим «abort», проверка тегов будет приостановлена на первом же сегменте с ошибками. Если установлен режим «warn», проверка тегов обработает все сегменты и выведет все сообщения об ошибках.</para>
+          </listitem>
+        </itemizedlist>
+      </section>
+
+      <section id="console.mode.option.quiet">
+        <title>Параметр «quiet»</title>
+
+        <para>Для режима командной строки также предусмотрен ещё один параметр: <literal>--quiet</literal>. В режиме «quiet» или в «тихом» режиме на экран выводится меньше информации. Сообщения, обычно выводящиеся в строку состояния, показываться не будут.</para>
+
+        <para>Использовать параметр можно так: <literal>java -jar <application>OmegaT</application>.jar /путь/к/проекту --mode=console-translate --quiet</literal></para>
+      </section>
+
+      <section id="console.mode.option.validatetags">
+        <title>Параметр проверки тегов</title>
+
+        <para>Для режима командной строки также предусмотрен ещё один параметр: <literal>--tag-validation=[abort|warn].</literal> Если он задан, перед переводом проводится проверка тегов. Если задано <literal>abort</literal>, ошибки будут напечатаны и программа завершит работу. Если задано <literal>warn</literal>, ошибки будут напечатаны, но работа будет продолжена.</para>
+
+        <para>Использование: <literal>java -jar <application>OmegaT</application>.jar /путь/к/проекту --mode=console-translate --tag-validation=abort</literal></para>
+      </section>
+    </section>
+  </section>
+
+  <section id="building.OmegaT.from.source">
+    <title>Сборка <application>ОмегаТ</application> из исходного кода<indexterm class="singular">
+        <primary>Запуск ОмегаТ</primary> <secondary>Сборка ОмегаТ из исходного кода</secondary>
+      </indexterm></title>
+
+    <para>Для сборки ОмегаТ из исходного кода вам понадобится утилита ant (<emphasis>http://ant.apache.org/bindownload.cgi</emphasis>). Распакуйте файл <emphasis>OmegaT_2.5.x_Source.zip</emphasis> и перейдите в каталог OmegaT_2.5.x_Source или в каталог <emphasis>./omegat/</emphasis>, если вы загрузили исходные коды из SVN. Проверьте, есть ли в этом каталоге файл «build.xml». Затем в командной строке наберите:</para>
+
+    <para><literal>$ ant jar release</literal></para>
+
+    <para>Эта команда создаст полный пакет <application>OmegaT</application> в каталоге «./dist/», где вы найдёте все файлы, необходимые для запуска <application>ОмегаТ</application>.</para>
+  </section>
+</chapter>

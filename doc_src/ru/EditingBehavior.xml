@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<chapter id="chapter.translation.editing">
+  <title>Параметры редактирования<indexterm class="singular">
+      <primary>Меню</primary> <secondary>Параметры</secondary> <tertiary>Параметры редактирования...</tertiary>
+    </indexterm></title>
+
+  <para>В диалоговом окне, появляющемся при выборе пукта меню <menuchoice> <guimenu>«Параметры</guimenu> <guimenuitem>Параметры редактирования...»</guimenuitem> </menuchoice> пользователь может настроить способ представления и обработки текущего сегмента в поле редактирования.</para>
+
+  <figure id="editing.behavior.options">
+    <title>Настройка параметров редактирования</title>
+
+    <mediaobject>
+      <imageobject role="html">
+        <imagedata fileref="images/EditingBehaviourOptions25.png"/>
+      </imageobject>
+    </mediaobject>
+  </figure>
+
+  <para/>
+
+  <para>Вы переводите файлы, перемещаясь от сегмента к сегменту и редактируя текущий сегмент. Вы можете захотеть, чтобы поле редактирования заполнялось уже существующим переводом или исходным текстом. В меню <menuchoice> <guimenu>«Параметры</guimenu> <guimenuitem>Параметры редактирования...»</guimenuitem> </menuchoice> <application>ОмегаТ</application> предлагает вам выбор из следующих вариантов:</para>
+
+  <variablelist>
+    <varlistentry>
+      <term>Текст оригинала</term>
+
+      <listitem>
+        <para>Вы можете автоматически заполнять поле редактирования текстом оригинала. Это полезно при переводе текста, содержащего много торговых марок или других имён собственных, которые нужно оставить как есть.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Оставить сегмент пустым<indexterm class="singular">
+          <primary>Менб «Параметры»</primary> <secondary>Параметры редактирования</secondary> <tertiary>Оставить сегмент пустым</tertiary>
+        </indexterm></term>
+
+      <listitem>
+        <para>ОмегаТ оставит поле редактирования пустым. Эта настройка позволяет вам вводить перевод сразу, без необходимости удалять текст оригинала, то есть избавляет вас от двух нажатий клавиш (<emphasis role="bold">CTRL+A </emphasis>и <emphasis role="bold">DEL). </emphasis> Теперь, можно задавать «пустые» переводы (переводы, в которых вообще нет текста). В области редактирования они отображаются как «&lt;пустой перевод&gt;» Чтобы пометить сегмент как содержащий «пустой» перевод, щёлкните по нему правой кнопкой мыши и выберите «<emphasis role="bold">Установить пустой перевод</emphasis>». Пункт <emphasis role="bold">Удалить перевод</emphasis> в том же меню позволяет удалить перевод текущего сегмента. Того же эффекта можно достичь, просто удалив перевод и нажав <guibutton>ВВОД</guibutton>.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Вставлять лучшее нечёткое совпадение<indexterm class="singular">
+          <primary>Меню «Параметры»</primary> <secondary>Параметры редактирования</secondary> <tertiary>Вставка нечётких совпадений</tertiary>
+        </indexterm></term>
+
+      <listitem>
+        <para>ОмегаТ вставит перевод строки, наиболее похожей на текущий оригинал, если эта строка превышает настраиваемый тут же порог схожести. Чтобы отмечать переводы, полученные из нечётких совпадений, можно использовать специальный префикс (по умолчанию он пуст). Если задать префикс (например, [нечёткое совпадение]), то позднее созданные таким образом переводы можно будет легко найти и проверить.</para>
+      </listitem>
+    </varlistentry>
+  </variablelist>
+
+  <para>В нижней части окна можно включить следующие функции:</para>
+
+  <variablelist>
+    <varlistentry>
+      <term>Попытаться преобразовать числа при вставке нечёткого совпадения<indexterm class="singular">
+          <primary>Меню «Параметры»</primary> <secondary>Параметры редактирования</secondary> <tertiary>Преобразование чисел</tertiary>
+        </indexterm></term>
+
+      <listitem>
+        <para>Если флажок установлен, при вставке нечёткого совпадения, ОмегаТ попытается преобразовать числа из нечёткого совпадения таким образом, чтобы они совпали с числами из исходного сегмента. Существует несколько ограничений:</para>
+
+        <itemizedlist>
+          <listitem>
+            <para>Количество чисел в оригинальном сегменте и в совпадении должно совпадать.</para>
+          </listitem>
+        
+          <listitem>
+            <para>Также, должен совпадать формат чисел.</para>
+          </listitem>
+        
+          <listitem>
+            <para>В качестве чисел рассматриваются только целые числа и числа с плавающей точкой (но не числа с плавающей запятой, т. е. 5.4, но не 5,4).</para>
+          </listitem>
+        </itemizedlist>
+      </listitem>
+    </varlistentry>
+  </variablelist>
+
+  <variablelist>
+    <varlistentry>
+      <term>Разрешить перевод, идентичный оригиналу<indexterm class="singular">
+          <primary>Меню «Параметры»</primary> <secondary>Параметры редактирования</secondary> <tertiary>Перевод, идентичный оригиналу</tertiary>
+        </indexterm></term>
+
+      <listitem>
+        <para>Ваши документы могут содержать торговые марки или имена собственные, которые в переведённых документах должны оставаться неизменными. Для обработки сегментов, которые содержат такой неизменяемый текст есть две стратегии.</para>
+
+        <para>Вы можете решить вообще не переводить такие сегменты. ОмегаТ будет помечать их как непереведённые. Это поведение по умолчанию. Другой способ подразумевает, что вы вводите перевод, идентичный оригинальному тексту. ОмегаТ способна распознавать, что вы выбрали именно этот вариант. Для этого в диалоговом окне <menuchoice> <guimenu>«Параметры</guimenu> <guimenuitem>Параметры редактирования...»</guimenuitem> </menuchoice> поставьте флажок <emphasis role="bold">Разрешить перевод, идентичный оригиналу</emphasis>.</para>
+      </listitem>
+    </varlistentry>
+  </variablelist>
+
+  <variablelist>
+    <varlistentry>
+      <term>Экспортировать сегмент в текстовый файл<indexterm class="singular">
+          <primary>Меню «Параметры»</primary> <secondary>Параметры редактирования</secondary> <tertiary>Экспорт текущего сегмента</tertiary>
+        </indexterm></term>
+
+      <listitem>
+        <para>Функция экспорта текста позволяет сохранять части текущего проекта <application>ОмегаТ</application> в простые текстовые файлы. Экспорт происходит при переходе к очередному сегменту. В подкаталоге «/script» в папке файлов пользователя ОмегаТ появляются файлы со следующим содержимым:</para>
+
+        <itemizedlist>
+          <listitem>
+            <para>Исходный текст текущего сегмента (<filename>source.txt</filename>).</para>
+          </listitem>
+
+          <listitem>
+            <para>Текст перевода текущего сегмента (<filename>target.txt</filename>).</para>
+          </listitem>
+
+          <listitem>
+            <para>Текст, который пользователь выделил, а затем либо нажал <keycap>CTRL+SHIFT+C</keycap>, либо выбрал пункт меню <guimenuitem>«Правка &gt; Экспортировать выделенный текст»</guimenuitem> (<filename>selection.txt</filename>).</para>
+          </listitem>
+        </itemizedlist>
+
+        <para>Содержимое этих файлов перезаписывается либо при открытии нового сегмента (source.txt и target.txt), либо при экспортировании другого выделения (selection.txt). Во всех трёх файлах содержится только простой, не форматированный текст. Процесс экспорта контролируется скриптами Tcl/Tk. Более подробную информацию, а также примеры, можно найти в HowTo <ulink url="http://www.omegat.org/en/howtos/text_export.html">Использование функции экспорта текста в ОмегаТ</ulink></para>
+      </listitem>
+    </varlistentry>
+  </variablelist>
+
+  <variablelist>
+    <varlistentry>
+      <term>Переход к следующему непереведённому сегменту приостанавливается, если есть хотя бы один альтернативный вариант перевода<indexterm class="singular">
+          <primary>Меню «Параметры»</primary> <secondary>Параметры редактирования</secondary> <tertiary>Сегменты с альтернативными вариантами перевода</tertiary>
+        </indexterm></term>
+
+      <listitem>
+        <para>Если вы хотите избежать возможных ошибок при переводе идентичных сегментов, для которых есть разные варианты перевода, установите этот флажок, и переход на <emphasis role="bold">Следующий непереведённый сегменты</emphasis> будет затрагивать и идентичные сегменты, вне зависимости от того, были они переведены или нет.</para>
+      </listitem>
+    </varlistentry>
+  </variablelist>
+</chapter>

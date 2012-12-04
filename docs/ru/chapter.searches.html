@@ -1,0 +1,259 @@
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <title>Глава 15. Поиск</title>
+      <link rel="stylesheet" type="text/css" href="OmegaT.css">
+      <meta name="generator" content="DocBook XSL Stylesheets V1.76.1">
+      <link rel="home" href="index.html" title="Руководство пользователя ОмегаТ">
+      <link rel="up" href="index.html" title="Руководство пользователя ОмегаТ">
+      <link rel="prev" href="chapter.segmentation.html" title="Глава 14. Сегментация исходного текста">
+      <link rel="next" href="chapter.regexp.html" title="Глава 16. Регулярные выражения">
+   </head>
+   <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+      <div class="navheader">
+         <table width="100%" summary="Navigation header">
+            <tr>
+               <th colspan="3" align="center">Глава 15. Поиск</th>
+            </tr>
+            <tr>
+               <td width="20%" align="left"><a accesskey="p" href="chapter.segmentation.html">Пред.</a>&nbsp;
+               </td>
+               <th width="60%" align="center">&nbsp;</th>
+               <td width="20%" align="right">&nbsp;<a accesskey="n" href="chapter.regexp.html">След.</a></td>
+            </tr>
+         </table>
+         <hr>
+      </div>
+      <div class="chapter" title="Глава 15. Поиск">
+         <div class="titlepage">
+            <div>
+               <div>
+                  <h2 class="title"><a name="chapter.searches"></a>Глава 15. Поиск<a class="indexterm" name="d0e6720"></a></h2>
+               </div>
+            </div>
+         </div>
+         <div class="toc">
+            <dl>
+               <dt><span class="section"><a href="chapter.searches.html#search.window">1. Окно поиска</a></span></dt>
+               <dd>
+                  <dl>
+                     <dt><span class="section"><a href="chapter.searches.html#d0e6742">1.1. Поиск</a></span></dt>
+                     <dt><span class="section"><a href="chapter.searches.html#d0e6766">1.2. Где искать</a></span></dt>
+                  </dl>
+               </dd>
+               <dt><span class="section"><a href="chapter.searches.html#using.wild.cards">2. Использование шаблонов</a></span></dt>
+               <dt><span class="section"><a href="chapter.searches.html#search.methoids">3. Способы и параметры поиска</a></span></dt>
+               <dt><span class="section"><a href="chapter.searches.html#search.result.display">4. Показ результатов поиска</a></span></dt>
+            </dl>
+         </div>
+         <div class="section" title="1. Окно поиска">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="search.window"></a>1. Окно поиска
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <div class="figure"><a name="text.search.window"></a><p class="title"><b>Рисунок 15.1. Окно поиска текста<a class="indexterm" name="d0e6729"></a></b></p>
+               <div class="figure-contents">
+                  <div class="mediaobject"><img src="images/TextSearch25.png" alt="Окно поиска текстаОкно поискаПример"></div>
+               </div>
+            </div><br class="figure-break"><div class="note" title="Примечание" style="margin-left: 0.5in; margin-right: 0.5in;">
+               <h3 class="title">Примечание</h3>
+               <p>В примере выше выполняется поиск сегментов, в переводах которых содержатся символы, не используемые в языке перевода (словенском).</p>
+            </div>
+            <div class="section" title="1.1. Поиск">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="d0e6742"></a>1.1. Поиск<a class="indexterm" name="d0e6745"></a></h3>
+                     </div>
+                  </div>
+               </div>
+               <p><span class="application">ОмегаТ</span> предоставляет широкий диапазон возможностей для выполнения поиска. Откройте окно Поиска при помощи <span class="keycap"><strong>CTRL</strong></span>+<span class="keycap"><strong>F</strong></span> и введите слово или фразу, которую вы хотите найти, в поле «Что искать:». Кроме того, в окне редактора можно выделить слово
+                  или фразу в поле перевода активного сегмента и нажать <span class="keycap"><strong>CTRL</strong></span>+<span class="keycap"><strong>F</strong></span>. Слово или фраза автоматически появятся в поле «Что искать:». Одновременно могут быть открыты несколько окон поиска, но не
+                  забывайте закрывать их, чтобы они не захламляли ваш рабочий стол.
+               </p>
+            </div>
+            <div class="section" title="1.2. Где искать">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="d0e6766"></a>1.2. Где искать
+                        </h3>
+                     </div>
+                  </div>
+               </div>
+               <p>По умолчанию поиск производится как в файлах оригинала, так и в файлах перевода, но вы можете ограничить поиск только сегментами
+                  оригинала, или только сегментами перевода. Вы можете искать
+               </p>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" type="disc">
+                     <li class="listitem">
+                        <p>только в проекте (установка по умолчанию)</p>
+                     </li>
+                  </ul>
+               </div>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" type="disc">
+                     <li class="listitem">
+                        <p>в проекте и в файлах памяти переводов из каталога /tm/ (см. <span class="emphasis"><em>Поиск в памяти переводов</em></span>)
+                        </p>
+                     </li>
+                  </ul>
+               </div>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" type="disc">
+                     <li class="listitem">
+                        <p>в одном файле или в каталоге, содержащем набор файлов (см. <span class="emphasis"><em>Поиск в файлах</em></span>)
+                        </p>
+                     </li>
+                  </ul>
+               </div>
+               <p>При поиске по файлам (в отличие от поиска по памяти переводов), <span class="application">ОмегаТ</span> будет искать только в тех из них, для которых имеются соответствующие файловые фильтры. Например, несмотря на то, что ОмегаТ
+                  замечательно работает с файлами <code class="filename"> TMX</code>, в поиск они включены не будут. Если вы нажмёте кнопку <span class="bold"><strong><a class="indexterm" name="d0e6798"></a>Дополнительно</strong></span>, появятся настройки, позволяющие ограничивать поиск по сегментам, переведённым определённым автором, или с определённой датой
+                  последнего изменения.
+               </p>
+            </div>
+         </div>
+         <div class="section" title="2. Использование шаблонов">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="using.wild.cards"></a>2. Использование шаблонов<a class="indexterm" name="d0e6808"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <p>Как при точном поиске, так и при поиске по ключевым словам, можно использовать шаблоны «*» и «?». Их значение уже знакомо
+               пользователям Word:
+            </p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" type="disc">
+                  <li class="listitem">
+                     <p>«*» соответствует любому количеству символов (включая ноль), от текущей позиции и до конца слова. Например, условие поиска
+                        <code class="literal">«run*»</code> соответствует словам <code class="literal">«run»</code>, <code class="literal">«runs»</code> и <code class="literal">«running»</code>.
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" type="disc">
+                  <li class="listitem">
+                     <p>«?» соответствует одному и только одному символу (любому).  Например, <code class="literal">«run?» </code>соответствует слову <code class="literal">«runs»</code> и <code class="literal">«runn»</code> в слове <code class="literal">«running».</code></p>
+                  </li>
+               </ul>
+            </div>
+            <p>Соответствия будут выделены полужирным шрифтом и синим цветом. Заметьте, что символы «*» и «?» имеют другое значение в регулярных
+               выражениях, так что описанный здесь поиск по шаблонам применим только к точному поиску и поиску по ключевым словам (см. ниже).
+            </p>
+         </div>
+         <div class="section" title="3. Способы и параметры поиска">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="search.methoids"></a>3. Способы и параметры поиска<a class="indexterm" name="d0e6851"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <p>Выберите метод, используя переключатели. Вы можете выбрать один из двух методов поиска:</p>
+            <div class="variablelist">
+               <dl>
+                  <dt><span class="term">точный поиск</span></dt>
+                  <dd>
+                     <p>Поиск сегментов, содержащих указанную вами строку. Точный поиск позволяет найти фразу, то есть, если введены несколько слов,
+                        они будут найдены только в случае, если они располагаются точно в указанной последовательности. Поисковый запрос <code class="literal">файл открыт</code> найдёт все сегменты, содержащие строку <span class="emphasis"><em><code class="literal">файл открыт</code></em></span>, но не строку <span class="emphasis"><em><code class="literal">открыть файл</code></em></span> или <span class="emphasis"><em><code class="literal">открыт новый файл</code></em></span>.
+                     </p>
+                  </dd>
+                  <dt><span class="term">поиск по ключевым словам</span></dt>
+                  <dd>
+                     <p>Поиск сегментов, содержащих все ключевые слова, которые вы указали, в любом порядке. Выберите поиск по ключевым словам, чтобы
+                        искать любое число отдельных слов, в любом порядке. ОмегаТ покажет список всех сегментов, в которых встречаются все эти слова.
+                        Поиск по ключевым словам аналогичен опции «искать все слова» в поисковых системах в Интернете, таких как Google (логическое
+                        И). Поиск по ключевым словам <span class="emphasis"><em><code class="literal">файл открыт</code></em></span> найдёт все сегменты, содержащие строки <span class="emphasis"><em><code class="literal">файл открыт</code>,</em></span> <span class="emphasis"><em><code class="literal">открытый файл</code>, <code class="literal">открыт файл для записи</code>, <code class="literal">файл был открыт с ошибками</code></em></span>, и т. д..
+                     </p>
+                  </dd>
+                  <dt><span class="term"><span class="bold"><strong>регулярные выражения</strong></span></span></dt>
+                  <dd>
+                     <p>Строка поиска рассматривается как регулярное выражение. Поисковый запрос из примера выше ([a-zA-Z]+[öäüqwß]) ищет все сегменты,
+                        в переводах которых встречаются символы, характерные для немецкого языка. Регулярных выражения — это мощный способ найти нужные
+                        строки. За более подробной информацией обратитесь к разделу <a class="link" href="chapter.regexp.html" title="Глава 16. Регулярные выражения">Регулярные выражения</a>.
+                     </p>
+                  </dd>
+               </dl>
+            </div>
+            <p>Для всех методов поиска вы можете задать три дополнительных параметра:</p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" type="disc">
+                  <li class="listitem">
+                     <p><span class="bold"><strong>Учитывать регистр</strong></span>: будет произведён поиск вашей строки как она есть, т. е. написание прописными и/или строчными буквами будет учитываться.
+                     </p>
+                  </li>
+                  <li class="listitem">
+                     <p><span class="bold"><strong>В оригиналах: </strong></span>поиск в сегментах оригинала
+                     </p>
+                  </li>
+                  <li class="listitem">
+                     <p><span class="bold"><strong>В переводах: </strong></span>поиск в переводах сегментов
+                     </p>
+                  </li>
+                  <li class="listitem">
+                     <p><span class="bold"><strong>В примечаниях: </strong></span>поиск в примечаниях к сегментам
+                     </p>
+                  </li>
+                  <li class="listitem">
+                     <p><span class="bold"><strong>В памяти переводов</strong></span>: поиск по файлам памяти переводов из каталога <code class="filename">tm</code>.
+                     </p>
+                  </li>
+                  <li class="listitem">
+                     <p><span class="bold"><strong>Показать все результаты:</strong></span> если флажок не установлен, ОмегаТ покажет лишь первый результат поиска, даже если результатов гораздо больше.
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <p>Если нажать на кнопку <span class="guibutton">Дополнительно</span>, появится возможность задания ещё нескольких критериев поиска (поиск по переводам определённого автора, по переводам с определённой
+               датой изменений и т. д.).
+            </p>
+         </div>
+         <div class="section" title="4. Показ результатов поиска">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="search.result.display"></a>4. Показ результатов поиска
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>Нажатие кнопки поиска после ввода строки в форму выведет все сегменты проекта, которые содержат заданную строку. Поскольку
+               <span class="application">ОмегаТ</span> считает идентичные сегменты одним целым, будут показаны только первые уникальные сегменты. Сегменты показываются в порядке
+               их появления в проекте. Переведённые сегменты показываются с исходным текстом сверху и текстом перевода снизу, непереведённые
+               сегменты — на языке оригинала.
+            </p>
+            <p>Если щёлкнуть по сегменту мышью, он будет открыт в редакторе и в него можно будет внести изменения. Затем можно переключиться
+               обратно в окно поиска и перейти к следующему найденному сегменту, например, чтобы проконтролировать и при необходимости исправить
+               используемую терминологию.
+            </p>
+            <p>Одновременно могут быть открыты несколько окон поиска. Вы можете легко понять, что содержится в каждом окне по заголовкам:
+               в них содержатся поисковые запросы.
+            </p>
+         </div>
+      </div>
+      <div class="navfooter">
+         <hr>
+         <table width="100%" summary="Navigation footer">
+            <tr>
+               <td width="40%" align="left"><a accesskey="p" href="chapter.segmentation.html">Пред.</a>&nbsp;
+               </td>
+               <td width="20%" align="center">&nbsp;</td>
+               <td width="40%" align="right">&nbsp;<a accesskey="n" href="chapter.regexp.html">След.</a></td>
+            </tr>
+            <tr>
+               <td width="40%" align="left" valign="top">Глава 14. Сегментация исходного текста&nbsp;</td>
+               <td width="20%" align="center"><a accesskey="h" href="index.html">Начало</a></td>
+               <td width="40%" align="right" valign="top">&nbsp;Глава 16. Регулярные выражения</td>
+            </tr>
+         </table>
+      </div>
+   </body>
+</html>

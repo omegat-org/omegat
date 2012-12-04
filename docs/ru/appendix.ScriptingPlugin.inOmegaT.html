@@ -1,0 +1,180 @@
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <title>Приложение C. Модуль «Scripting»</title>
+      <link rel="stylesheet" type="text/css" href="OmegaT.css">
+      <meta name="generator" content="DocBook XSL Stylesheets V1.76.1">
+      <link rel="home" href="index.html" title="Руководство пользователя ОмегаТ">
+      <link rel="up" href="index.html" title="Руководство пользователя ОмегаТ">
+      <link rel="prev" href="appendix.LanguageToolPlugin.inOmegaT.html" title="Приложение B. Модуль «LanguageTool»">
+      <link rel="next" href="appendix.website.html" title="Приложение D. ОмегаТ в Интернете">
+   </head>
+   <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+      <div class="navheader">
+         <table width="100%" summary="Navigation header">
+            <tr>
+               <th colspan="3" align="center">Приложение C. Модуль «Scripting»</th>
+            </tr>
+            <tr>
+               <td width="20%" align="left"><a accesskey="p" href="appendix.LanguageToolPlugin.inOmegaT.html">Пред.</a>&nbsp;
+               </td>
+               <th width="60%" align="center">&nbsp;</th>
+               <td width="20%" align="right">&nbsp;<a accesskey="n" href="appendix.website.html">След.</a></td>
+            </tr>
+         </table>
+         <hr>
+      </div>
+      <div class="appendix" title="Приложение C. Модуль «Scripting»">
+         <div class="titlepage">
+            <div>
+               <div>
+                  <h2 class="title"><a name="appendix.ScriptingPlugin.inOmegaT"></a>Приложение C. Модуль «Scripting»<a class="indexterm" name="d0e8628"></a></h2>
+               </div>
+            </div>
+         </div>
+         <div class="toc">
+            <dl>
+               <dt><span class="section"><a href="appendix.ScriptingPlugin.inOmegaT.html#d0e8633">1. Введение</a></span></dt>
+               <dt><span class="section"><a href="appendix.ScriptingPlugin.inOmegaT.html#d0e8638">2. Установка и использование</a></span></dt>
+            </dl>
+         </div>
+         <div class="section" title="1. Введение">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e8633"></a>1. Введение
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>Модуль «Scripting» позволяет запускать в ОмегаТ скрипты, написанные на различных языках.</p>
+         </div>
+         <div class="section" title="2. Установка и использование">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e8638"></a>2. Установка и использование
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>Модуль «Scripting» для ОмегаТ можно загрузить с официального сайта модулей ОмегаТ (<a class="ulink" href="???" target="_top">http://sourceforge.net/projects/omegat-plugins/files/</a>). Разархивируйте файлы и скопируйте их в подкаталог «plugins» основного каталога ОмегаТ (это каталог, в котором хранится
+               «OmegaT.jar»). Если каталога «plugins» нет, создайте его.
+            </p>
+            <p>В меню <span class="guisubmenu">«Инструменты»</span> появится новый пункт <span class="guisubmenu">«Скрипты».</span> Чуть ниже находятся пять неактивных пунктов меню, на которые можно назначить различные скрипты. Выбор пункта меню <span class="guisubmenu">Скрипты</span> приводит к появлению одноимённого диалогового окна:
+            </p>
+            <div class="screenshot">
+               <div class="mediaobject"><img src="images/ScriptingDialog.png"></div>
+            </div>
+            <p>Диалоговое окно «Скрипты» позволяет загружать в текстовую область код доступных скриптов, и запускать их для текущего проекта.
+               Для настройки системы скриптов нужно сделать следующее:
+            </p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" type="disc">
+                  <li class="listitem">
+                     <p>Выбрав скрипт из списка, на панели слева, загрузите его в редактор скриптов.</p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" type="disc">
+                  <li class="listitem">
+                     <p>Щёлкните правой кнопкой мыши на любой из располагающихся внизу окна кнопок 1...5 и выберите пункт «Добавить скрипт». В вышеприведённом
+                        примере, на слоты 1 и 2 уже назначены скрипты.
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" type="disc">
+                  <li class="listitem">
+                     <p>Если щёлкнуть левой кнопкой мыши по кнопке с номером, запустится ассоциированный с этой кнопкой скрипт. Также выбранный скрипт
+                        можно запустить, выбрав соответствующий пункт в меню <span class="guisubmenu">«Инструменты»</span>, или нажав <span class="keycap"><strong> CTRL+ALT+F#</strong></span> (где «#» — цифра от 1 до 5).
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <p>Доступны следующие скриптовые языки:</p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" type="disc">
+                  <li class="listitem">
+                     <p>Язык <span class="bold"><strong>NetRexx</strong></span> (http://www.netrexx.org/) поддерживает классический REXX-синтаксис, но без зарезервированных ключевых слов, а также содержит
+                        значительные улучшения, направленные на поддержку объектно-ориентированного программирования, совместимого с объектной моделью
+                        Java. Существующие библиотеки классов Java могут использоваться без изменений и какой-либо специальной установки; с другой
+                        стороны, программист на Java может предпочесть использовать класс Rexx во время выполнения программы на языке с Java-синтаксисом
+                        для улучшенной обработки строк.
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" type="disc">
+                  <li class="listitem">
+                     <p><span class="bold"><strong>XSLT</strong></span> (Extensible Stylesheet Language Transformations): декларативный, основанный на XML язык, предназначенный для преобразования
+                        XML-документов. Исходный документ не изменяется, вместо этого на основе его содержимого создаётся новый документ. Новый документ
+                        может быть сериализован процессором в стандартный XML-синтаксис, или в другой формат, например в HTML или простой текст. Чаще
+                        всего XSLT используется для преобразования данных между различными схемами XML или для преобразования данных из XML в веб-страницы
+                        и документы PDF.
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" type="disc">
+                  <li class="listitem">
+                     <p><span class="bold"><strong>Groovy</strong></span> (http://groovy.codehaus.org): динамический язык для виртуальной машины Java. Groovy сочетает сильные стороны Java с мощными
+                        возможностями, взятыми из языков Python, Ruby и Smalltalk.
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" type="disc">
+                  <li class="listitem">
+                     <p><span class="bold"><strong>JavaScript</strong></span> (иногда сокращается до JS, не путайте с Java): прототипно-ориентированный скриптовый язык программирования с динамической,
+                        слабой типизацией и функциями как объектами первого класса. Это кросс-платформенный язык, поддерживающий объектно-ориентированный,
+                        императивный и функциональный стили программирования. На JavaScript частично написан популярный веб-браузер Firefox, этот
+                        язык хорошо известен и широко применяется в свободных программах.
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <p>Все языки имеют доступ к объектной модели ОмегаТ, в которой главным объектом является проект. Например, нижеприведённый код
+               на Groovy считывает содержимое всех сегментов всех файлов текущего проекта.
+            </p>
+            <p><em class="parameter"><code>files = project.projectFiles;</code></em></p>
+            <p><em class="parameter"><code>for (i in 0 ..&lt; files.size())</code></em></p>
+            <p><em class="parameter"><code>{</code></em></p>
+            <p><em class="parameter"><code> for (j in 0 ..&lt;
+                         files[i].entries.size())</code></em></p>
+            <p><em class="parameter"><code> {</code></em></p>
+            <p><em class="parameter"><code> currsegment = files[i].entries[j];</code></em></p>
+            <p><em class="parameter"><code> source = currsegment.getSrcText();</code></em></p>
+            <p><em class="parameter"><code> if (project.getTranslationInfo(ste))</code></em></p>
+            <p><em class="parameter"><code> target =
+                         project.getTranslationInfo(currsegment).translation;</code></em></p>
+            <p><em class="parameter"><code> else</code></em></p>
+            <p><em class="parameter"><code> target = null;</code></em></p>
+            <p><em class="parameter"><code> }</code></em></p>
+            <p><em class="parameter"><code>}</code></em></p>
+         </div>
+      </div>
+      <div class="navfooter">
+         <hr>
+         <table width="100%" summary="Navigation footer">
+            <tr>
+               <td width="40%" align="left"><a accesskey="p" href="appendix.LanguageToolPlugin.inOmegaT.html">Пред.</a>&nbsp;
+               </td>
+               <td width="20%" align="center">&nbsp;</td>
+               <td width="40%" align="right">&nbsp;<a accesskey="n" href="appendix.website.html">След.</a></td>
+            </tr>
+            <tr>
+               <td width="40%" align="left" valign="top">Приложение B. Модуль «LanguageTool»&nbsp;</td>
+               <td width="20%" align="center"><a accesskey="h" href="index.html">Начало</a></td>
+               <td width="40%" align="right" valign="top">&nbsp;Приложение D. ОмегаТ в Интернете</td>
+            </tr>
+         </table>
+      </div>
+   </body>
+</html>

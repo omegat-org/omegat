@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<chapter id="chapter.glossaries">
+  <title>Глоссарии<indexterm class="singular">
+      <primary>Окна и области в ОмегаТ</primary> <secondary>Область просмотра глоссария</secondary>
+    </indexterm><indexterm class="singular">
+      <primary>Глоссарии</primary>
+    </indexterm></title>
+
+  <para>Файлы глоссариев для <application>ОмегаТ</application> можно создавать и обновлять вручную.</para>
+
+  <para>Если в проекте <application>ОмегаТ</application> есть один или более глоссариев, то любой термин глоссария, который найден в активном сегменте, будет автоматически показан в области просмотра глоссария.</para>
+
+  <para>В диалоговом окне «Свойства проекта» можно задать расположение и имя глоссария. Расширение файла должно быть <filename>.txt </filename> (если это не так, то расширение будет добавлено автоматически). Файл должен находиться внутри каталога <filename>/glossary</filename>, возможно, в одном из его подкаталогов (например, <filename>glossary/sub/glossary.txt</filename>). Если файл с этим именем не существует, при первой записи в глоссарий он будет создан автоматически. Если файл уже существует, проверка формата и кодировки уже записанных в него данных проводиться не будет, новые записи будут всегда вноситься разделёнными табуляцией и в кодировке UTF-8. Так как ранее записанные данные изменяться не будут, возможность серьёзного повреждения существующего файла весьма маловероятна.</para>
+
+  <section>
+    <title>Использование</title>
+
+    <para>Чтобы использовать уже имеющийся глоссарий, после создания проекта, просто поместите его в папку <indexterm class="singular">
+        <primary>Файлы проекта</primary> <secondary>Подкаталог глоссариев</secondary>
+      </indexterm> <filename>/glossary</filename>. Когда проект будет открыт, <application>ОмегаТ</application> автоматически найдёт все файлы глоссариев в этой папке. Термины из активного сегмента, которые <application>ОмегаТ</application> найдёт в этих файлах, будут отображены в области просмотра глоссария:</para>
+
+    <indexterm class="singular">
+      <primary>Глоссарии, Область просмотра глоссария</primary>
+    </indexterm>
+
+    <figure>
+      <title>Область просмотра глоссария</title>
+
+      <mediaobject>
+        <imageobject role="html">
+          <imagedata fileref="images/Glossarypane_25.png"/>
+        </imageobject>
+
+        <imageobject role="fo">
+          <imagedata fileref="images/Glossarypane_25.png" width="60%"/>
+        </imageobject>
+      </mediaobject>
+    </figure>
+
+    <para>Слово перед знаком «=» — это термин на языке оригинала, его перевод находится после «=». К словарной статье можно добавить примечание (см. «transitive verb» для второго слова в примере). Функция глоссария ищет только точные совпадения со статьёй глоссария (например, не учитывает склонение слова и т.п.). Новые термины можно вручную внести в файл(ы) глоссария во время перевода (например, в текстовом редакторе), но вновь добавленные термины будут распознаваться только после перезагрузки проекта.</para>
+
+    <para>Как видно на следующем примере, термин не обязательно должен быть представлен одним словом:</para>
+
+    <figure>
+      <title>термин глоссария, состоящий из нескольких слов - пример<indexterm class="singular">
+          <primary>Глоссарии</primary> <secondary>Область просмотра глоссария</secondary> <tertiary>термин состоящий из нескольких слов</tertiary>
+        </indexterm></title>
+
+      <mediaobject>
+        <imageobject role="html">
+          <imagedata fileref="images/MultiTerm_Glossary_25.png"/>
+        </imageobject>
+
+        <imageobject role="fo">
+          <imagedata fileref="images/MultiTerm_Glossary_25.png" width="80%"/>
+        </imageobject>
+      </mediaobject>
+    </figure>
+
+    <para>Подчёркнутый элемент текста «pop-up menu» переведён в области просмотра глоссария как «pojavni menu». Если перевод из области просмотра глоссария выделить, а затем щёлкнуть правой кнопкой мыши, он автоматически вставится за текущей позицией курсора в строке редактирования текущего сегмента.<footnote>
+        <para>Заметьте, что в вышеприведённом примере этого не достаточно, так как в языке перевода (словенском) «pojavni menu» склоняется. Таким образом, вставленный фрагмент следует исправить на «pojavnem meniju». Проще говоря, в некоторых случаях бывает проще ввести перевод термина с клавиатуры, не утруждая себя выделением и щелчками мышью.</para>
+      </footnote></para>
+  </section>
+
+  <section>
+    <title><indexterm class="singular">
+        <primary>Глоссарии</primary> <secondary>Форматы файлов</secondary>
+      </indexterm>Форматы файлов<indexterm class="singular">
+        <primary>Файлы проекта</primary> <secondary>Файлы пользователя</secondary> <seealso>Глоссарии</seealso>
+      </indexterm></title>
+
+    <para>Файлы глоссария — это простые текстовые файлы, содержащие списки из трёх столбцов, разделённых табуляциями, где в первом столбце находятся исходные термины, а во втором — их переводы. Третий столбец можно использовать для дополнительной информации (комментариев). У некоторых записей в глоссарии может отсутствовать перевод, т. е. они содержат только исходный термин и комментарий.</para>
+
+    <para>Файлы глоссария могут быть как в системной кодировке (с расширением «.tab»), так и в UTF-8 (с расширением «.utf8»). По очевидным причинам, предпочитаемой кодировкой является Юникод (UTF-8). Также поддерживается формат CSV. В целом, формат напоминает описанный ранее: исходный термин, перевод. Комментарии отделяются запятой «,». Строки могут быть заключены в кавычки &quot;, что позволяет включать в строки запятые:</para>
+
+    <para><literal>&quot;Это исходный термин, в котором есть запятая&quot;, &quot;c'est un terme, qui contient une virgule&quot;</literal></para>
+
+    <para>Помимо простых текстовых файлов, поддерживаются глоссарии в формате TBX<indexterm class="singular">
+        <primary>Глоссарии</primary> <secondary>Формат TBX</secondary>
+      </indexterm>. TBX - Term Base eXchange — открытый, основанный на XML стандарт обмена структурированными терминологическими базами, TBX был утверждён LISA и ISO как международный стандарт. Если вы используете какую-нибудь систему управления терминологией, например, MultiTerm, вполне возможно, что она может сохранять терминологическую базу в формате TBX. <ulink url="http://www.microsoft.com/Language/en-US/Terminology.aspx">Microsoft Terminology Collection</ulink> <indexterm class="singular">
+        <primary>Глоссарии</primary> <secondary>Microsoft Terminology collection</secondary>
+      </indexterm> можно загрузить почти для 100 языков и использовать как отличный глоссарий по ИТ тематике.</para>
+  </section>
+
+  <section>
+    <title>Как создавать глоссарии<indexterm class="singular">
+        <primary>Глоссарии</primary> <secondary>Создание глоссария</secondary>
+      </indexterm></title>
+
+    <para>В диалоговом окне «Свойства проекта» можно задать имя файла глоссария для записи (см. начало раздела). Чтобы добавить в глоссарий новый термин, нужно нажать сочетание клавиш <keycap>CTRL+SHIFT+G</keycap>. Откроется диалоговое окно, в котором можно ввести исходный термин, перевод и комментарий:</para>
+
+    <mediaobject role="html">
+      <imageobject>
+        <imagedata fileref="images/GlossaryEntry_25.png"/>
+      </imageobject>
+
+      <imageobject role="fo">
+        <imagedata fileref="images/GlossaryEntry_25.png" width="80%"/>
+      </imageobject>
+    </mediaobject>
+
+    <para>Содержимое файлов глоссария хранится в памяти. Считывание файлов происходит при каждом открытии или перезагрузке проекта. Обновление файла глоссария происходит довольно просто: нажмите <keycap>CTRL+SHIFT+G</keycap> и введите новый термин, его перевод и любой комментарий (вводя каждый элемент нажимайте TAB), а затем сохраните файл. Содержимое области глоссария также будет обновлено.</para>
+
+    <para><indexterm class="singular">
+        <primary>Глоссарии</primary> <secondary>Расположение файла глоссария для записи</secondary>
+      </indexterm>Расположение файла глоссария для записи настраивается в диалоговом окне <guimenuitem>«Проект &gt; Свойства…»</guimenuitem>. Расширение должно быть либо <filename>TXT</filename>, либо <filename>UTF8</filename></para>
+
+    <para><emphasis role="bold">Примечание:</emphasis> конечно, есть и другие способы создать простой текстовый файл с разделением табуляцией. Никто не запрещает использовать Notepad++ на Windows, GEdit на GNU/Linux или какой-нибудь редактор электронных таблиц: подойдёт любая программа, которая умеет рабоать с UTF8 и может отображать пробелы (чтобы вы не пропустили символы <keycap>TAB</keycap>).</para>
+  </section>
+
+  <section>
+    <title><indexterm class="singular">
+        <primary>Глоссарии</primary> <secondary>Trados MultiTerm</secondary>
+      </indexterm>Использование Trados MultiTerm</title>
+
+    <para>Глоссарии, созданные приложением Multiterm из пакета Trados, можно использовать в качестве глоссариев для <application>ОмегаТ</application> без дополнительных изменений, если им дать расширение имени файла <filename>.tab</filename>, при этом исходные термины и переводы должны быть в первых двух полях соответственно. Если вы экспортировали глоссарий, используя функцию «Экспорт текста, разделённого табуляцией», то вам придётся удалить первые 5 столбцов (Seq. Nr, Date created и так далее) перед собственно терминами. Новые версии MultiTerm поддерживают экспорт в формат TBX.</para>
+  </section>
+
+  <section>
+    <title><indexterm class="singular">
+        <primary>Глоссарии</primary> <secondary>Проблемы с глоссариями</secondary>
+      </indexterm>Возможные проблемы с глоссариями</title>
+
+    <para><emphasis role="bold">Проблема: термины глоссария не показываются, возможные причины:</emphasis></para>
+
+    <itemizedlist>
+      <listitem>
+        <para>В каталоге «glossary» не найдено файлов глоссария.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Файл глоссария пуст</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Термины не разделены табуляцией.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>У файла глоссария неправильное расширение (не .tab и не .utf8)</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Нет ТОЧНОГО совпадения между словарной статьёй и текстом вашего документа — например, слово употреблено во множественном числе.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>У файла глоссария неправильная кодировка</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>В активном сегменте нет терминов, которые совпадают с терминами в глоссарии</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Проект не перезагрузили после решения вышеупомянутых проблем.</para>
+      </listitem>
+    </itemizedlist>
+
+    <para><emphasis role="bold">Проблема: некоторые символы неправильно отображаются в области глоссария</emphasis></para>
+
+    <itemizedlist>
+      <listitem>
+        <para>...но те же символы корректно отображаются в области редактирования: расширение и кодировка файла не совпадают.</para>
+      </listitem>
+    </itemizedlist>
+  </section>
+</chapter>

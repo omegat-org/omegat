@@ -1,0 +1,565 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<chapter id="chapter.regexp">
+  <title>Регулярные выражения<indexterm class="singular">
+      <primary>Регулярные выражения</primary> <seealso>Сегментация</seealso> <seealso>Поиск</seealso>
+    </indexterm></title>
+
+  <para>При поиске и создании правил сегментации используются регулярные выражения, поддерживаемые платформой Java. Более подробную информацию можно найти в <ulink url="http://download.oracle.com/javase/1.5.0/docs/api/java/util/regex/Pattern.html">документации Java</ulink>. Ниже приведены несколько примеров и ссылок.</para>
+
+  <note>
+    <para>Этот раздел предназначен для опытных пользователей, которым требуется создавать собственные правила сегментации или использовать сложные и мощные функции поиска.</para>
+  </note>
+
+  <table>
+    <title>Регулярные выражения - Модификаторы</title>
+
+    <tgroup align="left" cols="2" rowsep="1">
+      <colspec align="left" colnum="1" colwidth="100"/>
+
+      <thead>
+        <row>
+          <entry align="left">Выражение</entry>
+
+          <entry align="left">... соответствует</entry>
+        </row>
+      </thead>
+
+      <tbody>
+        <row>
+          <entry>(?i)</entry>
+
+          <entry>Включает поиск совпадений независимо от регистра символов (по умолчанию все шаблоны чувствительны к регистру)</entry>
+        </row>
+      </tbody>
+    </tgroup>
+  </table>
+
+  <table>
+    <title>Регулярные выражения - Символы</title>
+
+    <tgroup align="left" cols="2" rowsep="1">
+      <colspec align="left" colnum="1" colwidth="100"/>
+
+      <thead>
+        <row>
+          <entry align="left">Выражение</entry>
+
+          <entry align="left">... соответствует</entry>
+        </row>
+      </thead>
+
+      <tbody>
+        <row>
+          <entry>x</entry>
+
+          <entry>Символ «x», за исключением следующих случаев…</entry>
+        </row>
+
+        <row>
+          <entry>\uhhhh</entry>
+
+          <entry>Символ с шестнадцатеричным значением 0xhhhh</entry>
+        </row>
+
+        <row>
+          <entry>\t</entry>
+
+          <entry>Символ табуляции («\u0009»)</entry>
+        </row>
+
+        <row>
+          <entry>\n</entry>
+
+          <entry>Символ новой строки («\u000A»)</entry>
+        </row>
+
+        <row>
+          <entry>\r</entry>
+
+          <entry>Символ возврата каретки («\u000D»)</entry>
+        </row>
+
+        <row>
+          <entry>\f</entry>
+
+          <entry>Символ конца страницы (команда подачи страницы для принтера) («\u000C»)</entry>
+        </row>
+
+        <row>
+          <entry>\a</entry>
+
+          <entry>Символ звонка (оповещения) («\u0007»)</entry>
+        </row>
+
+        <row>
+          <entry>\e</entry>
+
+          <entry>Символ Escape («\u001B»)</entry>
+        </row>
+
+        <row>
+          <entry>\cx</entry>
+
+          <entry>Управляющий символ, соответствующий «x»</entry>
+        </row>
+
+        <row>
+          <entry>\0n</entry>
+
+          <entry>Символ с восьмеричным значением 0n (0 ≤ n ≤ 7)</entry>
+        </row>
+
+        <row>
+          <entry>\0nn</entry>
+
+          <entry>Символ с восьмеричным значением 0nn (0 ≤ n ≤ 7)</entry>
+        </row>
+
+        <row>
+          <entry>\0mnn</entry>
+
+          <entry>Символ с восьмеричным значением 0mnn (0 ≤ m ≤ 3, 0 ≤ n ≤ 7)</entry>
+        </row>
+
+        <row>
+          <entry>\xhh</entry>
+
+          <entry>Символ с шестнадцатеричным значением 0xhh</entry>
+        </row>
+      </tbody>
+    </tgroup>
+  </table>
+
+  <table>
+    <title>Регулярные выражения - Экранирование</title>
+
+    <tgroup align="left" cols="2" rowsep="1">
+      <colspec align="left" colnum="1" colwidth="100"/>
+
+      <thead>
+        <row>
+          <entry align="left">Выражение</entry>
+
+          <entry align="left">... соответствует</entry>
+        </row>
+      </thead>
+
+      <tbody>
+        <row>
+          <entry>\</entry>
+
+          <entry>не соответствует ничему, только экранирует следующий за ним символ. Это нужно, если вы хотите ввести метасимволы !$()*+.&lt;&gt;?[\]^{|} в качестве их буквальных значений.</entry>
+        </row>
+
+        <row>
+          <entry>\\</entry>
+
+          <entry>Например, это будет обратная косая черта.</entry>
+        </row>
+
+        <row>
+          <entry>\Q</entry>
+
+          <entry>не соответствует ничему, только экранирует все символы вплоть до \E</entry>
+        </row>
+
+        <row>
+          <entry>\E</entry>
+
+          <entry>не соответствует ничему, только прекращает экранирование, начатое \Q</entry>
+        </row>
+      </tbody>
+    </tgroup>
+  </table>
+
+  <table>
+    <title>Регулярные выражения - Классы блоков и категорий Юникода</title>
+
+    <tgroup align="left" cols="2" rowsep="1">
+      <colspec align="left" colnum="1" colwidth="100"/>
+
+      <thead>
+        <row>
+          <entry align="left">Выражение</entry>
+
+          <entry align="left">... соответствует</entry>
+        </row>
+      </thead>
+
+      <tbody>
+        <row>
+          <entry>\p{InGreek}</entry>
+
+          <entry>Символ из греческого блока (простой <ulink url="http://download.oracle.com/javase/1.5.0/docs/api/java/util/regex/Pattern.html#ubc">блок</ulink>)</entry>
+        </row>
+
+        <row>
+          <entry>\p{Lu}</entry>
+
+          <entry>Прописная буква (см. <ulink url="http://download.oracle.com/javase/1.5.0/docs/api/java/util/regex/Pattern.html#ubc">категории</ulink>)</entry>
+        </row>
+
+        <row>
+          <entry>\p{Sc}</entry>
+
+          <entry>Обозначение денежной единицы</entry>
+        </row>
+
+        <row>
+          <entry>\P{InGreek}</entry>
+
+          <entry>Любой символ, кроме символов из греческого блока (исключение)</entry>
+        </row>
+
+        <row>
+          <entry>[\p{L}&amp;&amp;[^\p{Lu}]]</entry>
+
+          <entry>Любая буква, кроме прописных (исключение)</entry>
+        </row>
+      </tbody>
+    </tgroup>
+  </table>
+
+  <table>
+    <title>Регулярные выражения - Наборы символов</title>
+
+    <tgroup align="left" cols="2" rowsep="1">
+      <colspec align="left" colnum="1" colwidth="100"/>
+
+      <thead>
+        <row>
+          <entry align="left">Выражение</entry>
+
+          <entry align="left">... соответствует</entry>
+        </row>
+      </thead>
+
+      <tbody>
+        <row>
+          <entry>[abc]</entry>
+
+          <entry>a, b, или c (простой набор)</entry>
+        </row>
+
+        <row>
+          <entry>[^abc]</entry>
+
+          <entry>Любой символ кроме a, b, или c (исключение)</entry>
+        </row>
+
+        <row>
+          <entry>[a-zA-Z]</entry>
+
+          <entry>Любые символы латинского алфавита, от a до z и от A до Z включительно</entry>
+        </row>
+      </tbody>
+    </tgroup>
+  </table>
+
+  <table>
+    <title>Регулярные выражения - Предустановленные наборы символов</title>
+
+    <tgroup align="left" cols="2" rowsep="1">
+      <colspec align="left" colnum="1" colwidth="100"/>
+
+      <thead>
+        <row>
+          <entry align="left">Выражение</entry>
+
+          <entry align="left">... соответствует</entry>
+        </row>
+      </thead>
+
+      <tbody>
+        <row>
+          <entry>.</entry>
+
+          <entry>Любой символ (кроме символов конца строки)</entry>
+        </row>
+
+        <row>
+          <entry>\d</entry>
+
+          <entry>Цифра: [0-9]</entry>
+        </row>
+
+        <row>
+          <entry>\D</entry>
+
+          <entry>Не цифра: [^0-9]</entry>
+        </row>
+
+        <row>
+          <entry>\s</entry>
+
+          <entry>Любой пробельный символ: [ \t\n\x0B\f\r]</entry>
+        </row>
+
+        <row>
+          <entry>\S</entry>
+
+          <entry>Любой не пробельный символ: [^\s]</entry>
+        </row>
+
+        <row>
+          <entry>\w</entry>
+
+          <entry>Любой буквенный или цифровой символ, а также знак подчёркивания: [a-zA-Z_0-9]</entry>
+        </row>
+
+        <row>
+          <entry>\W</entry>
+
+          <entry>Любой символ кроме буквенного и цифрового, а также знака подчёркивания: [^\w]</entry>
+        </row>
+      </tbody>
+    </tgroup>
+  </table>
+
+  <table>
+    <title>Регулярные выражения - Границы</title>
+
+    <tgroup align="left" cols="2" rowsep="1">
+      <colspec align="left" colnum="1" colwidth="100"/>
+
+      <thead>
+        <row>
+          <entry align="left">Выражение</entry>
+
+          <entry align="left">... соответствует</entry>
+        </row>
+      </thead>
+
+      <tbody>
+        <row>
+          <entry>^</entry>
+
+          <entry>Начало строки</entry>
+        </row>
+
+        <row>
+          <entry>$</entry>
+
+          <entry>Конец строки</entry>
+        </row>
+
+        <row>
+          <entry>\b</entry>
+
+          <entry>Граница слова</entry>
+        </row>
+
+        <row>
+          <entry>\B</entry>
+
+          <entry>Не граница слова</entry>
+        </row>
+      </tbody>
+    </tgroup>
+  </table>
+
+  <table>
+    <title>Регулярные выражения - Жадные кванторы</title>
+
+    <tgroup align="left" cols="2" rowsep="1">
+      <colspec align="left" colnum="1" colwidth="100"/>
+
+      <thead>
+        <row>
+          <entry align="left">Выражение</entry>
+
+          <entry align="left">... соответствует</entry>
+        </row>
+      </thead>
+
+      <tbody>
+        <row>
+          <entry>X<emphasis>?</emphasis></entry>
+
+          <entry>X, один раз или ни разу</entry>
+        </row>
+
+        <row>
+          <entry>X<emphasis>*</emphasis></entry>
+
+          <entry>X, ноль или более раз</entry>
+        </row>
+
+        <row>
+          <entry>X<emphasis>+</emphasis></entry>
+
+          <entry>X, один или более раз</entry>
+        </row>
+      </tbody>
+    </tgroup>
+  </table>
+
+  <note>
+    <para>жадные кванторы будут искать как можно больше совпадений. Например, <emphasis>a+</emphasis> для последовательности <emphasis>aaabbb</emphasis> выдаст «ааа».</para>
+  </note>
+
+  <table>
+    <title>Регулярные выражения - Ленивые кванторы</title>
+
+    <tgroup align="left" cols="2" rowsep="1">
+      <colspec align="left" colnum="1" colwidth="100"/>
+
+      <thead>
+        <row>
+          <entry align="left">Выражение</entry>
+
+          <entry align="left">... соответствует</entry>
+        </row>
+      </thead>
+
+      <tbody>
+        <row>
+          <entry>X??</entry>
+
+          <entry>X, один раз или ни разу</entry>
+        </row>
+
+        <row>
+          <entry>X*?</entry>
+
+          <entry>X, ноль или более раз</entry>
+        </row>
+
+        <row>
+          <entry>X+?</entry>
+
+          <entry>X, один или более раз</entry>
+        </row>
+      </tbody>
+    </tgroup>
+  </table>
+
+  <note>
+    <para>ленивые кванторы будут искать как можно меньше совпадений. Например, <emphasis>a+?</emphasis> для последовательности <emphasis>aaabbb</emphasis> выдаст только <emphasis>a</emphasis>.</para>
+  </note>
+
+  <table>
+    <title>Регулярные выражения - Логические операторы</title>
+
+    <tgroup align="left" cols="2" rowsep="1">
+      <colspec align="left" colnum="1" colwidth="100"/>
+
+      <thead>
+        <row>
+          <entry align="left">Выражение</entry>
+
+          <entry align="left">... соответствует</entry>
+        </row>
+      </thead>
+
+      <tbody>
+        <row>
+          <entry>XY</entry>
+
+          <entry>X, за которым идёт Y</entry>
+        </row>
+
+        <row>
+          <entry>X|Y</entry>
+
+          <entry>Либо X, либо Y</entry>
+        </row>
+
+        <row>
+          <entry>(XY)</entry>
+
+          <entry>XY как отдельная группа</entry>
+        </row>
+      </tbody>
+    </tgroup>
+  </table>
+
+  <section id="regex.tools.and.examples.of.use">
+    <title><indexterm class="singular">
+        <primary>Регулярные выражения</primary> <secondary>Инструменты</secondary>
+      </indexterm>Инструменты для работы с регулярными выражениями и примеры использования<indexterm class="singular">
+        <primary>Регулярные выражения</primary> <secondary>Примеры использования</secondary>
+      </indexterm></title>
+
+    <para>Существует несколько программ для разработки и тестирования регулярных выражений. В общем и целом они работают по одному и тому же принципу (пример работы программы Regular Expression Tester смотри ниже): регулярное выражение (в верхнем поле) применяется к некоему тексту (в поле посередине), результаты работы показываются в нижнем поле.</para>
+
+    <figure id="regerx.tester">
+      <title>Regex Tester</title>
+
+      <mediaobject>
+        <imageobject role="html">
+          <imagedata fileref="images/RegexTester.png"/>
+        </imageobject>
+
+        <imageobject role="fo">
+          <imagedata fileref="images/RegexTester.png" width="80%"/>
+        </imageobject>
+      </mediaobject>
+    </figure>
+
+    <para>Программа <ulink url="http://weitz.de/regex-coach/">The Regex Coach</ulink> для Windows, GNU/Linux и FreeBSD. Работает по описанному выше принципу.</para>
+
+    <para>Большое количество полезных примеров регулярных выражений можно найти и в самой <application>ОмегаТ</application> (смотри «Параметры» &gt; «Сегментация»). В списке ниже приведены регулярные выражения, которые могут оказаться полезными при поиске по памяти перевода:</para>
+
+    <table>
+      <title>Регулярные выражения - Примеры использования регулярных выражений при поиске по переводам</title>
+
+      <tgroup align="left" cols="2" rowsep="1">
+        <colspec align="left" colnum="1" colwidth="100"/>
+
+        <thead>
+          <row>
+            <entry>Регулярное выражение</entry>
+
+            <entry>Результат поиска:</entry>
+          </row>
+        </thead>
+
+        <tbody>
+          <row>
+            <entry>(\b\w+\b)\s\1\b</entry>
+
+            <entry>слова, написанные дважды</entry>
+          </row>
+
+          <row>
+            <entry>[\.,]\s*[\.,]+</entry>
+
+            <entry>точка или запятая, за которой следуют пробелы, а потом ещё одна точка или запятая</entry>
+          </row>
+
+          <row>
+            <entry>\. \s+$</entry>
+
+            <entry>лишние пробелы после точки в конце строки</entry>
+          </row>
+
+          <row>
+            <entry>\s+a\s+[aeiou]</entry>
+
+            <entry>для английского языка: как правило, перед словами, начинающимися с гласных, нужно ставить «an», а не «a»</entry>
+          </row>
+
+          <row>
+            <entry>\s+an\s+[^aeiou]</entry>
+
+            <entry>для английского языка: проверка подобная предыдущей, но на слова, начинающиеся с согласных («a», а не «an»)</entry>
+          </row>
+
+          <row>
+            <entry>\s\s+</entry>
+
+            <entry>больше, чем один пробел подряд</entry>
+          </row>
+
+          <row>
+            <entry>\.[A-Z]</entry>
+
+            <entry>Точка, за которой следует прописная буква, возможно, перед началом нового предложения пропущен пробел?</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+  </section>
+</chapter>

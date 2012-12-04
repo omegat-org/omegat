@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<chapter id="chapter.searches">
+  <title>Поиск<indexterm class="singular">
+      <primary>Поиск</primary>
+    </indexterm></title>
+
+  <section id="search.window">
+    <title>Окно поиска</title>
+
+    <figure id="text.search.window">
+      <title>Окно поиска текста<indexterm class="singular">
+          <primary>Окно поиска</primary> <secondary>Пример</secondary>
+        </indexterm></title>
+
+      <mediaobject>
+        <imageobject role="html">
+          <imagedata fileref="images/TextSearch25.png"/>
+        </imageobject>
+
+        <imageobject role="fo">
+          <imagedata fileref="images/TextSearch25.png" width="90%"/>
+        </imageobject>
+      </mediaobject>
+    </figure>
+
+    <note>
+      <para>В примере выше выполняется поиск сегментов, в переводах которых содержатся символы, не используемые в языке перевода (словенском).</para>
+    </note>
+
+    <section>
+      <title>Поиск<indexterm class="singular">
+          <primary>Сочетания клавиш</primary> <secondary>Поиск - CTRL+F</secondary>
+        </indexterm></title>
+
+      <para><application>ОмегаТ</application> предоставляет широкий диапазон возможностей для выполнения поиска. Откройте окно Поиска при помощи <keycombo> <keycap>CTRL</keycap> <keycap>F</keycap> </keycombo> и введите слово или фразу, которую вы хотите найти, в поле «Что искать:». Кроме того, в окне редактора можно выделить слово или фразу в поле перевода активного сегмента и нажать <keycombo> <keycap>CTRL</keycap> <keycap>F</keycap> </keycombo>. Слово или фраза автоматически появятся в поле «Что искать:». Одновременно могут быть открыты несколько окон поиска, но не забывайте закрывать их, чтобы они не захламляли ваш рабочий стол.</para>
+    </section>
+
+    <section>
+      <title>Где искать</title>
+
+      <para>По умолчанию поиск производится как в файлах оригинала, так и в файлах перевода, но вы можете ограничить поиск только сегментами оригинала, или только сегментами перевода. Вы можете искать</para>
+
+      <itemizedlist>
+        <listitem>
+          <para>только в проекте (установка по умолчанию)</para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para>в проекте и в файлах памяти переводов из каталога /tm/ (см. <emphasis>Поиск в памяти переводов</emphasis>)</para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para>в одном файле или в каталоге, содержащем набор файлов (см. <emphasis>Поиск в файлах</emphasis>)</para>
+        </listitem>
+      </itemizedlist>
+
+      <para>При поиске по файлам (в отличие от поиска по памяти переводов), <application>ОмегаТ</application> будет искать только в тех из них, для которых имеются соответствующие файловые фильтры. Например, несмотря на то, что ОмегаТ замечательно работает с файлами <filename> TMX</filename>, в поиск они включены не будут. Если вы нажмёте кнопку <emphasis role="bold"><indexterm class="singular">
+          <primary>Поиск</primary> <secondary>Дополнительные параметры</secondary>
+        </indexterm>Дополнительно</emphasis>, появятся настройки, позволяющие ограничивать поиск по сегментам, переведённым определённым автором, или с определённой датой последнего изменения.</para>
+    </section>
+  </section>
+
+  <section id="using.wild.cards">
+    <title>Использование шаблонов<indexterm class="singular">
+        <primary>Поиск</primary> <secondary>Использование шаблонов</secondary>
+      </indexterm></title>
+
+    <para>Как при точном поиске, так и при поиске по ключевым словам, можно использовать шаблоны «*» и «?». Их значение уже знакомо пользователям Word:</para>
+
+    <itemizedlist>
+      <listitem>
+        <para>«*» соответствует любому количеству символов (включая ноль), от текущей позиции и до конца слова. Например, условие поиска <literal>«run*»</literal> соответствует словам <literal>«run»</literal>, <literal>«runs»</literal> и <literal>«running»</literal>.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>«?» соответствует одному и только одному символу (любому).  Например, <literal>«run?» </literal>соответствует слову <literal>«runs»</literal> и <literal>«runn»</literal> в слове <literal>«running».</literal></para>
+      </listitem>
+    </itemizedlist>
+
+    <para>Соответствия будут выделены полужирным шрифтом и синим цветом. Заметьте, что символы «*» и «?» имеют другое значение в регулярных выражениях, так что описанный здесь поиск по шаблонам применим только к точному поиску и поиску по ключевым словам (см. ниже).</para>
+  </section>
+
+  <section id="search.methoids">
+    <title>Способы и параметры поиска<indexterm class="singular">
+        <primary>Поиск</primary> <secondary>Способы и параметры</secondary>
+      </indexterm></title>
+
+    <para>Выберите метод, используя переключатели. Вы можете выбрать один из двух методов поиска:</para>
+
+    <variablelist>
+      <varlistentry>
+        <term>точный поиск</term>
+
+        <listitem>
+          <para>Поиск сегментов, содержащих указанную вами строку. Точный поиск позволяет найти фразу, то есть, если введены несколько слов, они будут найдены только в случае, если они располагаются точно в указанной последовательности. Поисковый запрос <literal>файл открыт</literal> найдёт все сегменты, содержащие строку <emphasis><literal>файл открыт</literal></emphasis>, но не строку <emphasis><literal>открыть файл</literal></emphasis> или <emphasis><literal>открыт новый файл</literal></emphasis>.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>поиск по ключевым словам</term>
+
+        <listitem>
+          <para>Поиск сегментов, содержащих все ключевые слова, которые вы указали, в любом порядке. Выберите поиск по ключевым словам, чтобы искать любое число отдельных слов, в любом порядке. ОмегаТ покажет список всех сегментов, в которых встречаются все эти слова. Поиск по ключевым словам аналогичен опции «искать все слова» в поисковых системах в Интернете, таких как Google (логическое И). Поиск по ключевым словам <emphasis><literal>файл открыт</literal></emphasis> найдёт все сегменты, содержащие строки <emphasis><literal>файл открыт</literal>,</emphasis> <emphasis><literal>открытый файл</literal>, <literal>открыт файл для записи</literal>, <literal>файл был открыт с ошибками</literal></emphasis>, и т. д..</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><emphasis role="bold">регулярные выражения</emphasis></term>
+
+        <listitem>
+          <para>Строка поиска рассматривается как регулярное выражение. Поисковый запрос из примера выше ([a-zA-Z]+[öäüqwß]) ищет все сегменты, в переводах которых встречаются символы, характерные для немецкого языка. Регулярных выражения — это мощный способ найти нужные строки. За более подробной информацией обратитесь к разделу <link linkend="chapter.regexp">Регулярные выражения</link>.</para>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+
+    <para>Для всех методов поиска вы можете задать три дополнительных параметра:</para>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis role="bold">Учитывать регистр</emphasis>: будет произведён поиск вашей строки как она есть, т. е. написание прописными и/или строчными буквами будет учитываться.</para>
+      </listitem>
+
+      <listitem>
+        <para><emphasis role="bold">В оригиналах: </emphasis>поиск в сегментах оригинала</para>
+      </listitem>
+
+      <listitem>
+        <para><emphasis role="bold">В переводах: </emphasis>поиск в переводах сегментов</para>
+      </listitem>
+
+      <listitem>
+        <para><emphasis role="bold">В примечаниях: </emphasis>поиск в примечаниях к сегментам</para>
+      </listitem>
+
+      <listitem>
+        <para><emphasis role="bold">В памяти переводов</emphasis>: поиск по файлам памяти переводов из каталога <filename>tm</filename>.</para>
+      </listitem>
+
+      <listitem>
+        <para><emphasis role="bold">Показать все результаты:</emphasis> если флажок не установлен, ОмегаТ покажет лишь первый результат поиска, даже если результатов гораздо больше.</para>
+      </listitem>
+    </itemizedlist>
+
+    <para>Если нажать на кнопку <guibutton>Дополнительно</guibutton>, появится возможность задания ещё нескольких критериев поиска (поиск по переводам определённого автора, по переводам с определённой датой изменений и т. д.).</para>
+  </section>
+
+  <section id="search.result.display">
+    <title>Показ результатов поиска</title>
+
+    <para>Нажатие кнопки поиска после ввода строки в форму выведет все сегменты проекта, которые содержат заданную строку. Поскольку <application>ОмегаТ</application> считает идентичные сегменты одним целым, будут показаны только первые уникальные сегменты. Сегменты показываются в порядке их появления в проекте. Переведённые сегменты показываются с исходным текстом сверху и текстом перевода снизу, непереведённые сегменты — на языке оригинала.</para>
+
+    <para>Если щёлкнуть по сегменту мышью, он будет открыт в редакторе и в него можно будет внести изменения. Затем можно переключиться обратно в окно поиска и перейти к следующему найденному сегменту, например, чтобы проконтролировать и при необходимости исправить используемую терминологию.</para>
+
+    <para>Одновременно могут быть открыты несколько окон поиска. Вы можете легко понять, что содержится в каждом окне по заголовкам: в них содержатся поисковые запросы.</para>
+  </section>
+</chapter>

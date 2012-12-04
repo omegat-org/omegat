@@ -1,0 +1,503 @@
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <title>Глава 16. Регулярные выражения</title>
+      <link rel="stylesheet" type="text/css" href="OmegaT.css">
+      <meta name="generator" content="DocBook XSL Stylesheets V1.76.1">
+      <link rel="home" href="index.html" title="Руководство пользователя ОмегаТ">
+      <link rel="up" href="index.html" title="Руководство пользователя ОмегаТ">
+      <link rel="prev" href="chapter.searches.html" title="Глава 15. Поиск">
+      <link rel="next" href="chapter.dictionaries.html" title="Глава 17. Словари">
+   </head>
+   <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+      <div class="navheader">
+         <table width="100%" summary="Navigation header">
+            <tr>
+               <th colspan="3" align="center">Глава 16. Регулярные выражения</th>
+            </tr>
+            <tr>
+               <td width="20%" align="left"><a accesskey="p" href="chapter.searches.html">Пред.</a>&nbsp;
+               </td>
+               <th width="60%" align="center">&nbsp;</th>
+               <td width="20%" align="right">&nbsp;<a accesskey="n" href="chapter.dictionaries.html">След.</a></td>
+            </tr>
+         </table>
+         <hr>
+      </div>
+      <div class="chapter" title="Глава 16. Регулярные выражения">
+         <div class="titlepage">
+            <div>
+               <div>
+                  <h2 class="title"><a name="chapter.regexp"></a>Глава 16. Регулярные выражения<a class="indexterm" name="d0e6971"></a></h2>
+               </div>
+            </div>
+         </div>
+         <div class="toc">
+            <dl>
+               <dt><span class="section"><a href="chapter.regexp.html#regex.tools.and.examples.of.use">1. Инструменты для работы с регулярными выражениями и примеры использования</a></span></dt>
+            </dl>
+         </div>
+         <p>При поиске и создании правил сегментации используются регулярные выражения, поддерживаемые платформой Java. Более подробную
+            информацию можно найти в <a class="ulink" href="http://download.oracle.com/javase/1.5.0/docs/api/java/util/regex/Pattern.html" target="_top">документации Java</a>. Ниже приведены несколько примеров и ссылок.
+         </p>
+         <div class="note" title="Примечание" style="margin-left: 0.5in; margin-right: 0.5in;">
+            <h3 class="title">Примечание</h3>
+            <p>Этот раздел предназначен для опытных пользователей, которым требуется создавать собственные правила сегментации или использовать
+               сложные и мощные функции поиска.
+            </p>
+         </div>
+         <div class="table"><a name="d0e6986"></a><p class="title"><b>Таблица 16.1. Регулярные выражения - Модификаторы</b></p>
+            <div class="table-contents">
+               <table summary="Регулярные выражения - Модификаторы" border="1">
+                  <colgroup>
+                     <col width="100" align="left">
+                     <col>
+                  </colgroup>
+                  <thead>
+                     <tr>
+                        <th align="left">Выражение</th>
+                        <th align="left">... соответствует</th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                     <tr>
+                        <td align="left">(?i)</td>
+                        <td align="left">Включает поиск совпадений независимо от регистра символов (по умолчанию все шаблоны чувствительны к регистру)</td>
+                     </tr>
+                  </tbody>
+               </table>
+            </div>
+         </div><br class="table-break"><div class="table"><a name="d0e7003"></a><p class="title"><b>Таблица 16.2. Регулярные выражения - Символы</b></p>
+            <div class="table-contents">
+               <table summary="Регулярные выражения - Символы" border="1">
+                  <colgroup>
+                     <col width="100" align="left">
+                     <col>
+                  </colgroup>
+                  <thead>
+                     <tr>
+                        <th align="left">Выражение</th>
+                        <th align="left">... соответствует</th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                     <tr>
+                        <td align="left">x</td>
+                        <td align="left">Символ «x», за исключением следующих случаев…</td>
+                     </tr>
+                     <tr>
+                        <td align="left">\uhhhh</td>
+                        <td align="left">Символ с шестнадцатеричным значением 0xhhhh</td>
+                     </tr>
+                     <tr>
+                        <td align="left">\t</td>
+                        <td align="left">Символ табуляции («\u0009»)</td>
+                     </tr>
+                     <tr>
+                        <td align="left">\n</td>
+                        <td align="left">Символ новой строки («\u000A»)</td>
+                     </tr>
+                     <tr>
+                        <td align="left">\r</td>
+                        <td align="left">Символ возврата каретки («\u000D»)</td>
+                     </tr>
+                     <tr>
+                        <td align="left">\f</td>
+                        <td align="left">Символ конца страницы (команда подачи страницы для принтера) («\u000C»)</td>
+                     </tr>
+                     <tr>
+                        <td align="left">\a</td>
+                        <td align="left">Символ звонка (оповещения) («\u0007»)</td>
+                     </tr>
+                     <tr>
+                        <td align="left">\e</td>
+                        <td align="left">Символ Escape («\u001B»)</td>
+                     </tr>
+                     <tr>
+                        <td align="left">\cx</td>
+                        <td align="left">Управляющий символ, соответствующий «x»</td>
+                     </tr>
+                     <tr>
+                        <td align="left">\0n</td>
+                        <td align="left">Символ с восьмеричным значением 0n (0 ≤ n ≤ 7)</td>
+                     </tr>
+                     <tr>
+                        <td align="left">\0nn</td>
+                        <td align="left">Символ с восьмеричным значением 0nn (0 ≤ n ≤ 7)</td>
+                     </tr>
+                     <tr>
+                        <td align="left">\0mnn</td>
+                        <td align="left">Символ с восьмеричным значением 0mnn (0 ≤ m ≤ 3, 0 ≤ n ≤ 7)</td>
+                     </tr>
+                     <tr>
+                        <td align="left">\xhh</td>
+                        <td align="left">Символ с шестнадцатеричным значением 0xhh</td>
+                     </tr>
+                  </tbody>
+               </table>
+            </div>
+         </div><br class="table-break"><div class="table"><a name="d0e7080"></a><p class="title"><b>Таблица 16.3. Регулярные выражения - Экранирование</b></p>
+            <div class="table-contents">
+               <table summary="Регулярные выражения - Экранирование" border="1">
+                  <colgroup>
+                     <col width="100" align="left">
+                     <col>
+                  </colgroup>
+                  <thead>
+                     <tr>
+                        <th align="left">Выражение</th>
+                        <th align="left">... соответствует</th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                     <tr>
+                        <td align="left">\</td>
+                        <td align="left">не соответствует ничему, только экранирует следующий за ним символ. Это нужно, если вы хотите ввести метасимволы !$()*+.&lt;&gt;?[\]^{|}
+                           в качестве их буквальных значений.
+                        </td>
+                     </tr>
+                     <tr>
+                        <td align="left">\\</td>
+                        <td align="left">Например, это будет обратная косая черта.</td>
+                     </tr>
+                     <tr>
+                        <td align="left">\Q</td>
+                        <td align="left">не соответствует ничему, только экранирует все символы вплоть до \E</td>
+                     </tr>
+                     <tr>
+                        <td align="left">\E</td>
+                        <td align="left">не соответствует ничему, только прекращает экранирование, начатое \Q</td>
+                     </tr>
+                  </tbody>
+               </table>
+            </div>
+         </div><br class="table-break"><div class="table"><a name="d0e7112"></a><p class="title"><b>Таблица 16.4. Регулярные выражения - Классы блоков и категорий Юникода</b></p>
+            <div class="table-contents">
+               <table summary="Регулярные выражения - Классы блоков и категорий Юникода" border="1">
+                  <colgroup>
+                     <col width="100" align="left">
+                     <col>
+                  </colgroup>
+                  <thead>
+                     <tr>
+                        <th align="left">Выражение</th>
+                        <th align="left">... соответствует</th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                     <tr>
+                        <td align="left">\p{InGreek}</td>
+                        <td align="left">Символ из греческого блока (простой <a class="ulink" href="http://download.oracle.com/javase/1.5.0/docs/api/java/util/regex/Pattern.html#ubc" target="_top">блок</a>)
+                        </td>
+                     </tr>
+                     <tr>
+                        <td align="left">\p{Lu}</td>
+                        <td align="left">Прописная буква (см. <a class="ulink" href="http://download.oracle.com/javase/1.5.0/docs/api/java/util/regex/Pattern.html#ubc" target="_top">категории</a>)
+                        </td>
+                     </tr>
+                     <tr>
+                        <td align="left">\p{Sc}</td>
+                        <td align="left">Обозначение денежной единицы</td>
+                     </tr>
+                     <tr>
+                        <td align="left">\P{InGreek}</td>
+                        <td align="left">Любой символ, кроме символов из греческого блока (исключение)</td>
+                     </tr>
+                     <tr>
+                        <td align="left">[\p{L}&amp;&amp;[^\p{Lu}]]</td>
+                        <td align="left">Любая буква, кроме прописных (исключение)</td>
+                     </tr>
+                  </tbody>
+               </table>
+            </div>
+         </div><br class="table-break"><div class="table"><a name="d0e7155"></a><p class="title"><b>Таблица 16.5. Регулярные выражения - Наборы символов</b></p>
+            <div class="table-contents">
+               <table summary="Регулярные выражения - Наборы символов" border="1">
+                  <colgroup>
+                     <col width="100" align="left">
+                     <col>
+                  </colgroup>
+                  <thead>
+                     <tr>
+                        <th align="left">Выражение</th>
+                        <th align="left">... соответствует</th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                     <tr>
+                        <td align="left">[abc]</td>
+                        <td align="left">a, b, или c (простой набор)</td>
+                     </tr>
+                     <tr>
+                        <td align="left">[^abc]</td>
+                        <td align="left">Любой символ кроме a, b, или c (исключение)</td>
+                     </tr>
+                     <tr>
+                        <td align="left">[a-zA-Z]</td>
+                        <td align="left">Любые символы латинского алфавита, от a до z и от A до Z включительно</td>
+                     </tr>
+                  </tbody>
+               </table>
+            </div>
+         </div><br class="table-break"><div class="table"><a name="d0e7182"></a><p class="title"><b>Таблица 16.6. Регулярные выражения - Предустановленные наборы символов</b></p>
+            <div class="table-contents">
+               <table summary="Регулярные выражения - Предустановленные наборы символов" border="1">
+                  <colgroup>
+                     <col width="100" align="left">
+                     <col>
+                  </colgroup>
+                  <thead>
+                     <tr>
+                        <th align="left">Выражение</th>
+                        <th align="left">... соответствует</th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                     <tr>
+                        <td align="left">.</td>
+                        <td align="left">Любой символ (кроме символов конца строки)</td>
+                     </tr>
+                     <tr>
+                        <td align="left">\d</td>
+                        <td align="left">Цифра: [0-9]</td>
+                     </tr>
+                     <tr>
+                        <td align="left">\D</td>
+                        <td align="left">Не цифра: [^0-9]</td>
+                     </tr>
+                     <tr>
+                        <td align="left">\s</td>
+                        <td align="left">Любой пробельный символ: [ \t\n\x0B\f\r]</td>
+                     </tr>
+                     <tr>
+                        <td align="left">\S</td>
+                        <td align="left">Любой не пробельный символ: [^\s]</td>
+                     </tr>
+                     <tr>
+                        <td align="left">\w</td>
+                        <td align="left">Любой буквенный или цифровой символ, а также знак подчёркивания: [a-zA-Z_0-9]</td>
+                     </tr>
+                     <tr>
+                        <td align="left">\W</td>
+                        <td align="left">Любой символ кроме буквенного и цифрового, а также знака подчёркивания: [^\w]</td>
+                     </tr>
+                  </tbody>
+               </table>
+            </div>
+         </div><br class="table-break"><div class="table"><a name="d0e7229"></a><p class="title"><b>Таблица 16.7. Регулярные выражения - Границы</b></p>
+            <div class="table-contents">
+               <table summary="Регулярные выражения - Границы" border="1">
+                  <colgroup>
+                     <col width="100" align="left">
+                     <col>
+                  </colgroup>
+                  <thead>
+                     <tr>
+                        <th align="left">Выражение</th>
+                        <th align="left">... соответствует</th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                     <tr>
+                        <td align="left">^</td>
+                        <td align="left">Начало строки</td>
+                     </tr>
+                     <tr>
+                        <td align="left">$</td>
+                        <td align="left">Конец строки</td>
+                     </tr>
+                     <tr>
+                        <td align="left">\b</td>
+                        <td align="left">Граница слова</td>
+                     </tr>
+                     <tr>
+                        <td align="left">\B</td>
+                        <td align="left">Не граница слова</td>
+                     </tr>
+                  </tbody>
+               </table>
+            </div>
+         </div><br class="table-break"><div class="table"><a name="d0e7261"></a><p class="title"><b>Таблица 16.8. Регулярные выражения - Жадные кванторы</b></p>
+            <div class="table-contents">
+               <table summary="Регулярные выражения - Жадные кванторы" border="1">
+                  <colgroup>
+                     <col width="100" align="left">
+                     <col>
+                  </colgroup>
+                  <thead>
+                     <tr>
+                        <th align="left">Выражение</th>
+                        <th align="left">... соответствует</th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                     <tr>
+                        <td align="left">X<span class="emphasis"><em>?</em></span></td>
+                        <td align="left">X, один раз или ни разу</td>
+                     </tr>
+                     <tr>
+                        <td align="left">X<span class="emphasis"><em>*</em></span></td>
+                        <td align="left">X, ноль или более раз</td>
+                     </tr>
+                     <tr>
+                        <td align="left">X<span class="emphasis"><em>+</em></span></td>
+                        <td align="left">X, один или более раз</td>
+                     </tr>
+                  </tbody>
+               </table>
+            </div>
+         </div><br class="table-break"><div class="note" title="Примечание" style="margin-left: 0.5in; margin-right: 0.5in;">
+            <h3 class="title">Примечание</h3>
+            <p>жадные кванторы будут искать как можно больше совпадений. Например, <span class="emphasis"><em>a+</em></span> для последовательности <span class="emphasis"><em>aaabbb</em></span> выдаст «ааа».
+            </p>
+         </div>
+         <div class="table"><a name="d0e7303"></a><p class="title"><b>Таблица 16.9. Регулярные выражения - Ленивые кванторы</b></p>
+            <div class="table-contents">
+               <table summary="Регулярные выражения - Ленивые кванторы" border="1">
+                  <colgroup>
+                     <col width="100" align="left">
+                     <col>
+                  </colgroup>
+                  <thead>
+                     <tr>
+                        <th align="left">Выражение</th>
+                        <th align="left">... соответствует</th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                     <tr>
+                        <td align="left">X??</td>
+                        <td align="left">X, один раз или ни разу</td>
+                     </tr>
+                     <tr>
+                        <td align="left">X*?</td>
+                        <td align="left">X, ноль или более раз</td>
+                     </tr>
+                     <tr>
+                        <td align="left">X+?</td>
+                        <td align="left">X, один или более раз</td>
+                     </tr>
+                  </tbody>
+               </table>
+            </div>
+         </div><br class="table-break"><div class="note" title="Примечание" style="margin-left: 0.5in; margin-right: 0.5in;">
+            <h3 class="title">Примечание</h3>
+            <p>ленивые кванторы будут искать как можно меньше совпадений. Например, <span class="emphasis"><em>a+?</em></span> для последовательности <span class="emphasis"><em>aaabbb</em></span> выдаст только <span class="emphasis"><em>a</em></span>.
+            </p>
+         </div>
+         <div class="table"><a name="d0e7342"></a><p class="title"><b>Таблица 16.10. Регулярные выражения - Логические операторы</b></p>
+            <div class="table-contents">
+               <table summary="Регулярные выражения - Логические операторы" border="1">
+                  <colgroup>
+                     <col width="100" align="left">
+                     <col>
+                  </colgroup>
+                  <thead>
+                     <tr>
+                        <th align="left">Выражение</th>
+                        <th align="left">... соответствует</th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                     <tr>
+                        <td align="left">XY</td>
+                        <td align="left">X, за которым идёт Y</td>
+                     </tr>
+                     <tr>
+                        <td align="left">X|Y</td>
+                        <td align="left">Либо X, либо Y</td>
+                     </tr>
+                     <tr>
+                        <td align="left">(XY)</td>
+                        <td align="left">XY как отдельная группа</td>
+                     </tr>
+                  </tbody>
+               </table>
+            </div>
+         </div><br class="table-break"><div class="section" title="1. Инструменты для работы с регулярными выражениями и примеры использования">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="regex.tools.and.examples.of.use"></a>1. <a class="indexterm" name="d0e7371"></a>Инструменты для работы с регулярными выражениями и примеры использования<a class="indexterm" name="d0e7377"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <p>Существует несколько программ для разработки и тестирования регулярных выражений. В общем и целом они работают по одному и
+               тому же принципу (пример работы программы Regular Expression Tester смотри ниже): регулярное выражение (в верхнем поле) применяется
+               к некоему тексту (в поле посередине), результаты работы показываются в нижнем поле.
+            </p>
+            <div class="figure"><a name="regerx.tester"></a><p class="title"><b>Рисунок 16.1. Regex Tester</b></p>
+               <div class="figure-contents">
+                  <div class="mediaobject"><img src="images/RegexTester.png" alt="Regex Tester"></div>
+               </div>
+            </div><br class="figure-break"><p>Программа <a class="ulink" href="http://weitz.de/regex-coach/" target="_top">The Regex Coach</a>&nbsp;для Windows, GNU/Linux и FreeBSD. Работает по описанному выше принципу.
+            </p>
+            <p>Большое количество полезных примеров регулярных выражений можно найти и в самой <span class="application">ОмегаТ</span> (смотри «Параметры» &gt; «Сегментация»). В списке ниже приведены регулярные выражения, которые могут оказаться полезными при
+               поиске по памяти перевода:
+            </p>
+            <div class="table"><a name="d0e7402"></a><p class="title"><b>Таблица 16.11. Регулярные выражения - Примеры использования регулярных выражений при поиске по переводам</b></p>
+               <div class="table-contents">
+                  <table summary="Регулярные выражения - Примеры использования регулярных выражений при поиске по переводам" border="1">
+                     <colgroup>
+                        <col width="100" align="left">
+                        <col>
+                     </colgroup>
+                     <thead>
+                        <tr>
+                           <th align="left">Регулярное выражение</th>
+                           <th align="left">Результат поиска:</th>
+                        </tr>
+                     </thead>
+                     <tbody>
+                        <tr>
+                           <td align="left">(\b\w+\b)\s\1\b</td>
+                           <td align="left">слова, написанные дважды</td>
+                        </tr>
+                        <tr>
+                           <td align="left">[\.,]\s*[\.,]+</td>
+                           <td align="left">точка или запятая, за которой следуют пробелы, а потом ещё одна точка или запятая</td>
+                        </tr>
+                        <tr>
+                           <td align="left">\. \s+$</td>
+                           <td align="left">лишние пробелы после точки в конце строки</td>
+                        </tr>
+                        <tr>
+                           <td align="left">\s+a\s+[aeiou]</td>
+                           <td align="left">для английского языка:&nbsp;как правило, перед словами, начинающимися с гласных, нужно ставить «an», а не «a»</td>
+                        </tr>
+                        <tr>
+                           <td align="left">\s+an\s+[^aeiou]</td>
+                           <td align="left">для английского языка: проверка подобная предыдущей, но на слова, начинающиеся с согласных («a», а не «an»)</td>
+                        </tr>
+                        <tr>
+                           <td align="left">\s\s+</td>
+                           <td align="left">больше, чем один пробел подряд</td>
+                        </tr>
+                        <tr>
+                           <td align="left">\.[A-Z]</td>
+                           <td align="left">Точка, за которой следует прописная буква, возможно, перед началом нового предложения пропущен пробел?</td>
+                        </tr>
+                     </tbody>
+                  </table>
+               </div>
+            </div><br class="table-break"></div>
+      </div>
+      <div class="navfooter">
+         <hr>
+         <table width="100%" summary="Navigation footer">
+            <tr>
+               <td width="40%" align="left"><a accesskey="p" href="chapter.searches.html">Пред.</a>&nbsp;
+               </td>
+               <td width="20%" align="center">&nbsp;</td>
+               <td width="40%" align="right">&nbsp;<a accesskey="n" href="chapter.dictionaries.html">След.</a></td>
+            </tr>
+            <tr>
+               <td width="40%" align="left" valign="top">Глава 15. Поиск&nbsp;</td>
+               <td width="20%" align="center"><a accesskey="h" href="index.html">Начало</a></td>
+               <td width="40%" align="right" valign="top">&nbsp;Глава 17. Словари</td>
+            </tr>
+         </table>
+      </div>
+   </body>
+</html>

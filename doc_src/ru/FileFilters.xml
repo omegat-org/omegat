@@ -1,0 +1,370 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<chapter id="chapter.file.filters">
+  <title>Файловые фильтры</title>
+
+  <para>В ОмегаТ есть система настраиваемых фильтров, которая позволяет вносить изменения практически в любой аспект их работы. Файловые фильтры — это маленькие подпрограммы, которые могут:</para>
+
+  <itemizedlist>
+    <listitem>
+      <para>Прочитать документ в каком-либо формате. Например, текстовые файлы.</para>
+    </listitem>
+  </itemizedlist>
+
+  <itemizedlist>
+    <listitem>
+      <para>Выделить из файла текст, который нужно переводить.</para>
+    </listitem>
+  </itemizedlist>
+
+  <itemizedlist>
+    <listitem>
+      <para>Автоматизировать изменение имён файлов переведённых документов посредством замены содержимого, подлежащего переводу, собственно переводом.</para>
+    </listitem>
+  </itemizedlist>
+
+  <para>Чтобы посмотреть, какие форматы файлов поддерживаются ОмегаТ, выберите пункт меню <guimenuitem>Параметры &gt; Файловые фильтры... </guimenuitem></para>
+
+  <para>Большинству пользователей должны подойти настройки фильтров по умолчанию. Если к вам это не относится, откройте диалоговое окно, выбрав в главном меню пункт <emphasis role="bold">Опции → Файловые фильтры...</emphasis>. Вы также можете внести некоторые настройки файловых фильтров, которые будут использоваться только в текущем проекте, нажав кнопку <emphasis role="bold">Файловые фильтры...</emphasis> в диалоговом окне «Свойства проекта».</para>
+
+  <para>В диалоговом окне <emphasis role="bold">Проект → Свойства...</emphasis> можно включить использование в проекте специальных файловых фильтров. Нажмите кнопку <guibutton>«Файловые фильтры»</guibutton> и установите флажок <guimenuitem>«Использовать настройки файловых фильтров только в этом проекте»</guimenuitem><indexterm class="singular">
+      <primary>Файловые фильтры</primary> <secondary>Файловые фильтры, используемые только в одном проекте</secondary>
+    </indexterm>. Теперь все настройки файловых фильтров будут храниться вместе с проектом. Если позднее вы внесёте изменения в настройки, то будут обновлены только фильтры данного проекта, настройки файловых фильтров пользователя останутся неизменными.</para>
+
+  <para>
+<emphasis role="bold">Обратите внимание!</emphasis> Если вы изменяете настройки фильтров при открытом проекте, то, чтобы изменения вступили в силу, вам придётся перезагрузить его.</para>
+
+  <section id="file.filters.dialog">
+    <title>Диалоговое окно «Файловые фильтры»<indexterm class="singular">
+        <primary>Файловые фильтры</primary> <secondary>Диалоговое окно</secondary>
+      </indexterm></title>
+
+    <para>Это окно показывает список доступных файловых фильтров. Если вы хотите, чтобы ОмегаТ не переводила файлы определённого типа, вы можете отключить фильтр, убрав флажок возле его названия. После этого ОмегаТ будет пропускать соответствующие файлы при загрузке проектов и скопирует их нетронутыми в каталог с файлами перевода. Если позже вы снова захотите использовать этот фильтр, просто поставьте флажок обратно. Чтобы сбросить настройки фильтров к стандартным, нажмите кнопку <emphasis role="bold">По умолчанию</emphasis> Чтобы настроить, какие файлы и в каких кодировках будет обрабатывать фильтр, выберите его из списка и нажмите кнопку <emphasis role="bold">«Изменить».</emphasis></para>
+  </section>
+
+  <section id="filters.options">
+    <title>Параметры фильтров<indexterm class="singular">
+        <primary>Файловые фильтры</primary> <secondary>Параметры</secondary>
+      </indexterm></title>
+
+    <para>У пяти фильтров (текстовые файлы, файлы XHTML, файлы HTML и XHTML, файлы OpenDocument/OpenOffice.org и файлы Microsoft Open XML) есть свои настройки. Чтобы изменить их, выберите фильтр из списка и нажмите кнопку <emphasis role="bold">Параметры</emphasis>. Доступны следующие настройки:</para>
+
+    <para><emphasis role="bold">Текстовые файлы</emphasis></para>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis>Сегментировать текст на абзацы по разрывам строк, пустым строкам или никогда:</emphasis></para>
+
+        <para>если включена сегментация по предложениям, то далее текст будет сегментироваться согласно этим настройкам.</para>
+      </listitem>
+    </itemizedlist>
+
+    <para><emphasis role="bold">Файлы PO</emphasis></para>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis>Разрешить пустые переводы в переведённых файлах:</emphasis></para>
+
+        <para>При установленном флажке, если сегмент (который может оказаться целым абзацем) в файле PO не переведён, в конечном файле перевод этого сегмента будет пуст. Технически, в полученном PO-файле у соответствующего сегмента будет пуст атрибут <code>msgstr</code>. Это стандартное поведение для PO-файлов, поэтому по умолчанию флажок установлен. Если эта настройка отключена, в поле перевода будет скопирован исходный сегмент.</para>
+      </listitem>
+    </itemizedlist>
+
+    <para><emphasis role="bold">XHTML-файлы</emphasis></para>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis>Переводить следующие атрибуты </emphasis>— выбранные атрибуты будут показаны как сегменты в области редактирования.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis>Начинать новый абзац по: &lt;br&gt;</emphasis> тег HTML будет использоваться для определения начала нового сегмента.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis>Пропускать текст, соответствующий регулярному выражению:</emphasis> текст, соответствующий регулярному выражению, будет пропущен фильтром. При проверке тегов этот текст будет выделяться красным цветом. Часть исходного сегмента, соответствующая регулярному выражению, выделяется курсивом.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis>Не переводить атрибут содержимого у мета-тегов...:</emphasis> следующие мета-теги не будут переводиться.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis>Не переводить содержимое тегов со следующими парами «ключ-значение» (разделённых запятыми)</emphasis>: если пара «ключ-значение» находится в списке, содержимое тегов переводиться не будет.</para>
+
+        <para>Иногда полезно пометить некоторые теги как непереводимые, основываясь на значениях атрибутов. Например, <literal>&lt;div class=&quot;hide&quot;&gt; &lt;span translate=&quot;no&quot;&gt;</literal> Вы можете определить пары «ключ-значение» для тегов, которые не будут переводиться. Для приведённого выше примера в поле списка надо выписать: <literal>class=hide, translate=no </literal></para>
+      </listitem>
+    </itemizedlist>
+
+    <para><emphasis role="bold">Файлы Microsoft Office Open XML</emphasis></para>
+
+    <para>Вы можете выбрать, переводить или нет следующие элементы. Они будут отображаться как отдельные сегменты.</para>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis role="bold">Word:</emphasis> скрытый текст, комментарии, сноски, концевые сноски, колонтитулы</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis role="bold">Excel: </emphasis>комментарии, названия листов</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis role="bold">Power Point:</emphasis> комментарии, образцы слайдов, макеты слайдов</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis role="bold">Global:</emphasis> графики, диаграммы, рисунки, объекты WordArt</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis role="bold">Другие параметры:</emphasis></para>
+
+        <itemizedlist>
+          <listitem>
+            <para><emphasis>Объединять теги:</emphasis> если флажок установлен, теги, между которыми нет переводимого текста, будут объединяться в один тег.</para>
+          </listitem>
+
+          <listitem>
+            <para><emphasis>Сохранять пробелы для всех тегов:</emphasis> если флажок установлен, «пробельные символы» (т.е., пробелы и переводы строк) будут сохранены, даже если технически они в документе не установлены.</para>
+          </listitem>
+        </itemizedlist>
+      </listitem>
+    </itemizedlist>
+
+    <para><emphasis role="bold">HTML- и XHTML-файлы</emphasis></para>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis>Добавлять или изменять объявление кодировки в HTML- и XHTML-файлах:</emphasis>: всегда (по умолчанию), только если (X)HTML-файле есть заголовок, только если в (X)HTML-файл есть объявление кодировки, никогда</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis>Переводить следующие атрибуты:</emphasis> выбранные атрибуты будут показаны как сегменты в области редактирования.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis>Начинать новый абзац по:</emphasis> тег HTML &lt;br&gt; будет использоваться для определения начала нового сегмента.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis>Пропускать текст, соответствующий регулярному выражению:</emphasis> текст, соответствующий этому регулярному выражению, будет пропущен фильтром.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis>Не переводить атрибут содержимого у мета-тегов...:</emphasis> следующие мета-теги не будут переводиться.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis>Не переводить содержимое тегов со следующими парами «ключ-значение» (разделённых запятыми)</emphasis>: если пара «ключ-значение» находится в списке, содержимое тегов переводиться не будет.</para>
+      </listitem>
+    </itemizedlist>
+
+    <para><emphasis role="bold">Текстовые файлы</emphasis></para>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis>Сегментировать текст на абзацы по разрывам строк, пустым строкам или никогда:</emphasis></para>
+
+        <para>если включена сегментация по предложениям, то далее текст будет сегментироваться согласно этим настройкам.</para>
+      </listitem>
+    </itemizedlist>
+
+    <para><emphasis role="bold">Файлы OpenDocument/OpenOffice.org</emphasis></para>
+
+    <itemizedlist>
+      <listitem>
+        <para>Вы можете выбрать, переводить или нет следующие элементы:</para>
+
+        <para>индексы, закладки, ссылки на закладки, примечания, комментарии, примечания к презентациям, ссылки (URL), названия листов</para>
+      </listitem>
+    </itemizedlist>
+  </section>
+
+  <section id="edit.filter.dialog">
+    <title>Диалоговое окно «Редактирование фильтра»<indexterm class="singular">
+        <primary>Файловые фильтры</primary> <secondary>Редактирование</secondary>
+      </indexterm></title>
+
+    <para>Это окно позволяет настроить шаблоны имён исходных файлов, которые будет обрабатывать фильтр, определить имена переведённых файлов и выбрать кодировки для загрузки исходных файлов и сохранения их переводов. Чтобы изменить шаблон файлового фильтра, отредактируйте непосредственно поля или нажмите кнопку <emphasis role="bold">Изменить.</emphasis> Чтобы добавить новый шаблон, нажмите кнопку <emphasis role="bold">Добавить</emphasis>. Для добавления и редактирования шаблона используется одно и то же окно. Оно полезно тем, что включает специальный редактор шаблонов имени переведённых файлов, который позволяет настроить имена выводимых файлов.</para>
+
+    <section id="source.filetype.and.filename.pattern">
+      <title><indexterm class="singular">
+          <primary>Исходные файлы</primary> <secondary>Тип фала и шаблон имени файла</secondary>
+        </indexterm>Тип исходного файла, шаблон имени файла<indexterm class="singular">
+          <primary>Файловые фильтры</primary> <secondary>Тип фала и шаблон имени файла</secondary>
+        </indexterm></title>
+
+      <para>Когда ОмегаТ обнаруживает файл в папке исходными документами, она пытается выбрать фильтр исходя из его расширения. Точнее, ОмегаТ сопоставляет шаблоны имён файлов из фильтра с именем нового файла. Например, шаблону <literal>*.xhtml </literal>соответствуют любые файлы с расширением <literal>.xhtml</literal>. Если подходящий фильтр найден, файл передаётся ему для обработки. Так, по умолчанию для обработки файлов с расширением .xhtml будет использован фильтр XHTML. Вы можете изменять и добавлять шаблоны имён файлов, которые будет обрабатывать тот или иной фильтр. Шаблоны имён исходных файлов используют те же символы шаблонов, что и окно <emphasis role="bold">Поиск. </emphasis>Символ «*» соответствует любому количеству символов (включая ноль). Символ «?» соответствует ровно одному символу. Все остальные символы соответствуют сами себе. Например, если вы хотите, чтобы текстовый фильтр обрабатывал файлы readme (<literal>readme, read.me</literal>, и <literal>readme.txt</literal>), вам нужно использовать шаблон <literal>read*</literal>.</para>
+    </section>
+
+    <section id="source.and.target.files.encoding">
+      <title>Кодировки исходного и переведённого файлов</title>
+
+      <indexterm class="singular">
+        <primary>Исходные файлы</primary> <secondary>Кодировка</secondary>
+      </indexterm>
+
+      <indexterm class="singular">
+        <primary>Переведённые файлы</primary> <secondary>Кодировка</secondary>
+      </indexterm>
+
+      <indexterm class="singular">
+        <primary>Файловые фильтры</primary> <secondary>Кодировки исходного и переведённого файлов</secondary>
+      </indexterm>
+
+      <para>Лишь в немногих форматах файлов явно прописывается кодировка. Для форматов, в которых это не делается, будет использоваться кодировка, установленная для файлов с этим расширением. Например, по умолчанию файлы с расширением <literal>.txt</literal> будут загружены в стандартной кодировке вашей операционной системы. Вы можете изменить кодировку для любого шаблона имени исходного файла. Кроме того, такие файлы могут быть сохранены в любой кодировке. По умолчанию кодировка переведённого файла остаётся той же, что и у исходного. Поля выбора кодировки оригинала и перевода содержат меню со списком всех поддерживаемых кодировок. &lt;auto&gt; оставляет выбор кодировки за <application>ОмегаТ</application>. Вот как это работает:</para>
+
+      <itemizedlist>
+        <listitem>
+          <para>Если в файле присутствует прямое указание кодировки (HTML-файлы, XML-файлы), ОмегаТ использует её.</para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para>Для некоторых форматов ОмегаТ настроена на использование заранее заданных кодировок (например, для файлов Java properties и т.д.).</para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para>Для текстовых файлов ОмегаТ использует кодировку операционной системы по умолчанию.</para>
+        </listitem>
+      </itemizedlist>
+    </section>
+
+    <section id="target.name">
+      <title>Имя переведённого файла<indexterm class="singular">
+          <primary>Переведённые файлы</primary> <secondary>Имена файлов</secondary>
+        </indexterm></title>
+
+      <para>Иногда нужно автоматически переименовывать переведённые файлы, например, добавлять после имени файла код языка. Шаблоны имён переведённых файлов используют особый синтаксис, поэтому если вам нужно редактировать это поле, вам придётся нажать на кнопку <emphasis role="bold">Изменить...</emphasis> и использовать <indexterm class="singular">
+          <primary>Файловые фильтры</primary> <secondary>Диалоговое окно</secondary>
+        </indexterm>диалоговое окно редактирования шаблона. Если нужно вернуться к изначальной конфигурации фильтра, нажмите кнопку <emphasis role="bold">По умолчанию.</emphasis> Также изменять имя можно и напрямую, дважды щёлкнув в поле шаблона имени файла перевода в диалогом окне файловых фильтров. Диалог редактирования шаблонов предлагает следующие настройки:</para>
+
+      <itemizedlist>
+        <listitem>
+          <para>По умолчанию установлен шаблон <literal>${filename}</literal> — полное имя исходного файла с расширением, то есть имя переведённого файла совпадает с именем исходного файла.</para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para><literal>${nameOnly}</literal> — позволяет вставить только имя исходного файла без расширения.</para>
+        </listitem>
+
+        <listitem>
+          <para><literal>${extension} </literal> — расширение исходного файла.</para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para><literal>${targetLocale}</literal> — код локали перевода (в формате «xx_YY»).</para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para><literal>${targetLanguage}</literal> — коды языка перевода и страны вместе (в форме «XX-YY»).</para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para><literal>${targetLanguageCode}</literal> — код языка перевода («XX»).</para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para><literal>${targetCountryCode}</literal> — код страны («YY»).</para>
+        </listitem>
+
+        <listitem>
+          <para><literal>$(timestamp-????)</literal> — различные шаблоны представления системного времени на момент создания переведённых файлов.</para>
+
+          <para>Примеры шаблонов «SimpleDateFormat» можно найти в <ulink url="http://docs.oracle.com/javase/1.4.2/docs/api/java/text/SimpleDateFormat.html">документации Oracle</ulink>.</para>
+        </listitem>
+
+        <listitem>
+          <para>${system-os-name} — установленная на компьютере переводчика операционная система</para>
+        </listitem>
+
+        <listitem>
+          <para>${system-user-name) — имя пользователя в операционной системе</para>
+        </listitem>
+
+        <listitem>
+          <para>${system-host-name} — название машины (hostname)</para>
+        </listitem>
+
+        <listitem>
+          <para>${file-source-encoding} — кодировка исходного файла</para>
+        </listitem>
+
+        <listitem>
+          <para>${file-target-encoding} — кодировка переведённого файла</para>
+        </listitem>
+
+        <listitem>
+          <para>${targetLocaleLCID) — локаль переведённого файла Microsoft</para>
+        </listitem>
+      </itemizedlist>
+
+      <para>Для шаблонов ${nameOnly} и ${Extension} доступны различные варианты. Если имя файла состоит из нескольких разделённых точками элементов, можно использовать шаблоны вида <literal>$(name only</literal><emphasis>-число расширений</emphasis>) and <literal>${extension</literal>-<emphasis>число расширений} </emphasis>. Например, если исходный документ назывался «Document.xx.docx», с помощью шаблонов можно получить следующие результаты:</para>
+
+      <itemizedlist>
+        <listitem>
+          <para>${nameOnly-0} Document</para>
+        </listitem>
+
+        <listitem>
+          <para>${nameOnly-1} Document.xx</para>
+        </listitem>
+
+        <listitem>
+          <para>${nameOnly-2} Document.xx.docx</para>
+        </listitem>
+
+        <listitem>
+          <para>${extension-0} docx</para>
+        </listitem>
+
+        <listitem>
+          <para>${extension-1} xx.docx</para>
+        </listitem>
+
+        <listitem>
+          <para>${extension-2} Document.xx.docx</para>
+        </listitem>
+      </itemizedlist>
+    </section>
+  </section>
+</chapter>

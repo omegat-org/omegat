@@ -1,0 +1,227 @@
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <title>Глава 19. Машинный перевод</title>
+      <link rel="stylesheet" type="text/css" href="OmegaT.css">
+      <meta name="generator" content="DocBook XSL Stylesheets V1.76.1">
+      <link rel="home" href="index.html" title="Руководство пользователя ОмегаТ">
+      <link rel="up" href="index.html" title="Руководство пользователя ОмегаТ">
+      <link rel="prev" href="chapter.glossaries.html" title="Глава 18. Глоссарии">
+      <link rel="next" href="chapter.spellchecker.html" title="Глава 20. Проверка орфографии">
+   </head>
+   <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+      <div class="navheader">
+         <table width="100%" summary="Navigation header">
+            <tr>
+               <th colspan="3" align="center">Глава 19. Машинный перевод</th>
+            </tr>
+            <tr>
+               <td width="20%" align="left"><a accesskey="p" href="chapter.glossaries.html">Пред.</a>&nbsp;
+               </td>
+               <th width="60%" align="center">&nbsp;</th>
+               <td width="20%" align="right">&nbsp;<a accesskey="n" href="chapter.spellchecker.html">След.</a></td>
+            </tr>
+         </table>
+         <hr>
+      </div>
+      <div class="chapter" title="Глава 19. Машинный перевод">
+         <div class="titlepage">
+            <div>
+               <div>
+                  <h2 class="title"><a name="chapter.machine.translate"></a>Глава 19. Машинный перевод<a class="indexterm" name="d0e7835"></a></h2>
+               </div>
+            </div>
+         </div>
+         <div class="toc">
+            <dl>
+               <dt><span class="section"><a href="chapter.machine.translate.html#d0e7838">1. Введение</a></span></dt>
+               <dt><span class="section"><a href="chapter.machine.translate.html#introduction">2. Google Translate</a></span></dt>
+               <dt><span class="section"><a href="chapter.machine.translate.html#d0e7879">3. Пользователи <span class="application">ОмегаТ</span> и Google Translate</a></span></dt>
+               <dt><span class="section"><a href="chapter.machine.translate.html#d0e7932">4. Belazar</a></span></dt>
+               <dt><span class="section"><a href="chapter.machine.translate.html#d0e7944">5. Apertium</a></span></dt>
+               <dt><span class="section"><a href="chapter.machine.translate.html#Google.Translate.troubleshooting">6. Машинный перевод - решение проблем</a></span></dt>
+            </dl>
+         </div>
+         <div class="section" title="1. Введение">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e7838"></a>1. Введение<a class="indexterm" name="d0e7841"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <p>В отличие от систем, использующих память перевода, которую создают пользователи (как в случае <span class="application">ОмегаТ</span>), системы машинного перевода основаны на наборах лингвистических правил. Для построения модели перевода используются статистические
+               технологии обучения, основанные на исходных и переведённых текстах. В результате некоторых исследовательских работ, качество
+               работы сервисов машинного перевода неуклонно повышается.
+            </p>
+            <p>Чтобы использовать какой-либо из сервисов машинного перевода, в меню <span class="guimenuitem">«Параметры» &gt; «Машинный перевод»</span> установите флажок напротив названия нужного сервиса. Заметьте, что для использования этих сервисов требуется подключение
+               к Интернету.
+            </p>
+         </div>
+         <div class="section" title="2. Google Translate">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="introduction"></a>2. Google Translate<a class="indexterm" name="d0e7859"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <p>Google Translate — это платный сервис от Google, для перевода предложений, веб-сайтов и целых текстов между всё увеличивающимся
+               набором языков. На момент написания этого руководства список включал более 50 языков, от албанского до идиш, и в том числе,
+               конечно, все основные мировые языки. Стоимость услуги зависит от объёма переводимых текстов, на момент написания документации,
+               20 долларов США за миллион символов.<span class="bold"><strong></strong></span></p>
+            <p><span class="bold"><strong>Внимание: </strong></span>прежде чем начать использовать сервис Google Translate, в вашей учётной записи необходимо указать номер счёта (для получения
+               более подробной информации, посетите страницу <a class="ulink" href="http://code.google.com/intl/en-US/apis/language/translate/v2/pricing.html" target="_top">Pricing and Terms of Service</a>). Чтобы идентифицировать себя как пользователя сервисов Google, надо воспользоваться уникальным персональным ключом, выданным
+               вам Google при регистрации. Подробную информацию о том, как передать ключ ОмегаТ, можно найти в разделе <a class="link" href="chapter.installing.and.running.html" title="Глава 3. Установка и запуск ОмегаТ">Установка и запуск</a>, подраздел «Аргументы команды запуска».
+            </p>
+            <p>Конечно, качество перевода зависит, с одной стороны, от набора текстов на языке перевода и доступности их двуязычных версий,
+               а с другой стороны — от качества сконструированных моделей. Очевидно, что хотя в некоторых случаях такого качества будет недостаточно,
+               со временем оно будет только улучшаться.
+            </p>
+         </div>
+         <div class="section" title="3. Пользователи ОмегаТ и Google Translate">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e7879"></a>3. Пользователи <span class="application">ОмегаТ</span> и Google Translate
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>Пользователи <span class="application">ОмегаТ</span> не обязаны использовать Google Translate. Даже если вы решите воспользоваться этим сервисом, информация о том, воспользовался
+               ли пользователь предложенным вариантом перевода и каков окончательный перевод сегмента, в Google отсылаться не будет. На иллюстрации
+               ниже показаны: оригинал на английском языке, перевод на испанский язык и машинный перевод на словенский язык, выполненный
+               Google Translate.
+            </p>
+            <div class="figure"><a name="moby.dick"></a><p class="title"><b>Рисунок 19.1. Google Translate - пример</b></p>
+               <div class="figure-contents">
+                  <div class="mediaobject"><img src="images/MobyDick.png" alt="Google Translate - пример"></div>
+               </div>
+            </div><br class="figure-break"><p>Испанский перевод лучше, чем словенский. Обратите внимание на слова <span class="emphasis"><em>interesar</em></span> и <span class="emphasis"><em> navegar</em></span> в испанском тексте, которые являются корректными переводами глаголов «interest» &nbsp;и «sail». В словенской версии оба слова
+               были переведены существительными. Вполне возможно, что испанский перевод хотя бы частично основан на переводе схожего предложения
+               другим человеком.
+            </p>
+            <p>После того, как вы подключили сервис, при каждом переходе к новому сегменту в области машинного перевода будут появляться
+               соответствующие подсказки/варианты перевода. Если предложенный перевод кажется вам удачным, нажмите <span class="keycap"><strong><a class="indexterm" name="d0e7910"></a>CTRL</strong></span>+<span class="keycap"><strong>M</strong></span>, и он будет вставлен в поле редактирования перевода текущего сегмента. Например, в сегменте, приведённом на иллюстрации выше,
+               при нажатии <span class="keycap"><strong>CTRL</strong></span>+<span class="keycap"><strong>M</strong></span> испанский перевод будет заменён на словенский.
+            </p>
+            <p>Если вы не хотите, чтобы <span class="application">ОмегаТ</span> отсылала в Google переводимые вами сегменты, в меню «Параметры» снимите флажок «Google Translate».
+            </p>
+            <p>Заметьте, что в сервисы машинного перевода посылаются только исходные сегменты! Онлайн версия Google Translate позволяет пользователю
+               править перевод и отсылать в Google скорректированный вариант. Однако в ОмегаТ подобная возможность не реализована.
+            </p>
+         </div>
+         <div class="section" title="4. Belazar">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e7932"></a>4. Belazar<a class="indexterm" name="d0e7935"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <p><a class="ulink" href="http://belsoft.tut.by/belazar/" target="_top">Belazar</a> — система машинного перевода для языковой пары русский-белорусский.
+            </p>
+         </div>
+         <div class="section" title="5. Apertium">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e7944"></a>5. Apertium<a class="indexterm" name="d0e7947"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <p><a class="ulink" href="http://www.apertium.org/" target="_top">Apertium</a> — это свободная платформа машинного перевода, изначально разрабатывавшаяся для перевода между родственными языками, такими
+               как каталонский, испанский, галисийский, португальский, окситанский и французский, однако недавно её возможности были расширены
+               для охвата более различающихся языковых пар (например, языковой пары английский - каталонский). Список доступных для перевода
+               языковых пар можно найти на веб-сайте Apertium.
+            </p>
+            <p>Платформа предоставляет следующее:</p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" type="disc">
+                  <li class="listitem">
+                     <p>ядро системы машинного перевода, независящей от языковой пары;</p>
+                  </li>
+                  <li class="listitem">
+                     <p>инструменты для управления лингвистическими данными для построения системы машинного перевода;</p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" type="disc">
+                  <li class="listitem">
+                     <p>лингвистические данные для всё расширяющегося списка языковых пар.</p>
+                  </li>
+               </ul>
+            </div>
+            <p>Ядро Apertium использует конечные преобразователи для последовательной обработки исходного текста: сначала убирается форматирование,
+               затем происходит морфологический анализ, выделение частей речи, структурное преобразование, лексическое преобразование, морфологическое
+               преобразование и, наконец, восстанавливается форматирование.
+            </p>
+            <p>На базе Apertium можно создать систему машинного перевода для многих языковых пар, в Apertium используются простые XML-файлы
+               с нужными лингвистическими данными, которые затем преобразовываются специальными утилитами в формат, пригодный для быстрой
+               обработки ядром.
+            </p>
+         </div>
+         <div class="section" title="6. Машинный перевод - решение проблем">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="Google.Translate.troubleshooting"></a>6. Машинный перевод - решение проблем<a class="indexterm" name="d0e7976"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <p>Если в области машинного перевода не показывается ничего, проверьте:</p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" type="disc">
+                  <li class="listitem">
+                     <p>Подключены ли вы к Интернету? Чтобы использовать Google Translate, необходимо подключение к Интернету.</p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" type="disc">
+                  <li class="listitem">
+                     <p>С какого и на какой язык осуществляется перевод? Убедитесь, что сервис машинного перевода поддерживает эту языковую пару.</p>
+                  </li>
+                  <li class="listitem">
+                     <p>Google Translate v2 не работает: подключили ли вы <a class="ulink" href="https://developers.google.com/translate/v2/faq" target="_top">Translate API</a>? Заметьте, что сервис Google Translate не бесплатен, более подробную информацию можно найти в разделе <a class="link" href="chapter.installing.and.running.html" title="Глава 3. Установка и запуск ОмегаТ">Установка и запуск ОмегаТ</a> (аргументы команды запуска).
+                     </p>
+                  </li>
+                  <li class="listitem">
+                     <p>«Google Translate returned with HTTP response code: 403 ...»: убедитесь, что в pinfo.list введён правильный ключ, длиной 38
+                        символов. Убедитесь, что задан <a class="ulink" href="https://developers.google.com/translate/v2/faq" target="_top">API-ключ</a>.
+                     </p>
+                  </li>
+                  <li class="listitem">
+                     <p>Google Translate v2 не работает, хотя задан правильный API ключ. Убедитесь что в меню Параметры &gt; Машинный перевод, установлен
+                        флажок Google Translate V2.
+                     </p>
+                  </li>
+                  <li class="listitem">
+                     <p>Google Translate v2 отвечает «Bad request» - проверьте языки исходных и переведённых файлов проекта. Подобный ответ возникает,
+                        если языки не установлены.
+                     </p>
+                  </li>
+               </ul>
+            </div>
+         </div>
+      </div>
+      <div class="navfooter">
+         <hr>
+         <table width="100%" summary="Navigation footer">
+            <tr>
+               <td width="40%" align="left"><a accesskey="p" href="chapter.glossaries.html">Пред.</a>&nbsp;
+               </td>
+               <td width="20%" align="center">&nbsp;</td>
+               <td width="40%" align="right">&nbsp;<a accesskey="n" href="chapter.spellchecker.html">След.</a></td>
+            </tr>
+            <tr>
+               <td width="40%" align="left" valign="top">Глава 18. Глоссарии&nbsp;</td>
+               <td width="20%" align="center"><a accesskey="h" href="index.html">Начало</a></td>
+               <td width="40%" align="right" valign="top">&nbsp;Глава 20. Проверка орфографии</td>
+            </tr>
+         </table>
+      </div>
+   </body>
+</html>

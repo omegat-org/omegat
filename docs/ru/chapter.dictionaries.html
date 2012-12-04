@@ -1,0 +1,163 @@
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <title>Глава 17. Словари</title>
+      <link rel="stylesheet" type="text/css" href="OmegaT.css">
+      <meta name="generator" content="DocBook XSL Stylesheets V1.76.1">
+      <link rel="home" href="index.html" title="Руководство пользователя ОмегаТ">
+      <link rel="up" href="index.html" title="Руководство пользователя ОмегаТ">
+      <link rel="prev" href="chapter.regexp.html" title="Глава 16. Регулярные выражения">
+      <link rel="next" href="chapter.glossaries.html" title="Глава 18. Глоссарии">
+   </head>
+   <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+      <div class="navheader">
+         <table width="100%" summary="Navigation header">
+            <tr>
+               <th colspan="3" align="center">Глава 17. Словари</th>
+            </tr>
+            <tr>
+               <td width="20%" align="left"><a accesskey="p" href="chapter.regexp.html">Пред.</a>&nbsp;
+               </td>
+               <th width="60%" align="center">&nbsp;</th>
+               <td width="20%" align="right">&nbsp;<a accesskey="n" href="chapter.glossaries.html">След.</a></td>
+            </tr>
+         </table>
+         <hr>
+      </div>
+      <div class="chapter" title="Глава 17. Словари">
+         <div class="titlepage">
+            <div>
+               <div>
+                  <h2 class="title"><a name="chapter.dictionaries"></a>Глава 17. <a class="indexterm" name="d0e7451"></a>Словари
+                  </h2>
+               </div>
+            </div>
+         </div>
+         <div class="toc">
+            <dl>
+               <dt><span class="section"><a href="chapter.dictionaries.html#d0e7456">1. Как загрузить и установить словари</a></span></dt>
+               <dt><span class="section"><a href="chapter.dictionaries.html#d0e7559">2. Проблемы со словарями</a></span></dt>
+            </dl>
+         </div>
+         <p></p>
+         <div class="section" title="1. Как загрузить и установить словари">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e7456"></a>1. Как загрузить и установить словари<a class="indexterm" name="d0e7459"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <p>Словари в <span class="application">ОмегаТ</span> основаны на платформе StarDict. Чтобы установить словари, нужно сделать следующее:
+            </p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" type="disc">
+                  <li class="listitem">
+                     <p>Найдите словарь для необходимой пары языков —&nbsp;к примеру на сайте <a class="ulink" href="http://stardict.sourceforge.net/index.php" target="_top"><a class="indexterm" name="d0e7474"></a>StartDict Platform</a>, указанном выше, или на сайте <a class="ulink" href="http://www.freedict.org/en/list.html" target="_top">FreeDict</a></p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" type="disc">
+                  <li class="listitem">
+                     <p>Загрузите файл — он будет представлять собой архив <code class="filename">tarball</code> (файл с расширением <span class="emphasis"><em>tar.bz</em></span> или <span class="emphasis"><em>tar.bz2</em></span>).
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" type="disc">
+                  <li class="listitem">
+                     <p>С помощью команды untar (или аналогичной, к примеру, <code class="filename"> winrar</code> в Windows)&nbsp; извлеките содержимое архива в папку «dictionary» текущего проекта. В архиве обычно содержатся 3 файла с расширениями
+                        <span class="emphasis"><em>dz, idx </em></span>и <span class="emphasis"><em>ifo</em></span>.
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <p>Помимо двуязычных словарей с помощью области словаря можно также просматривать, и одноязычные словари, например:</p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" type="disc">
+                  <li class="listitem">
+                     <p><a class="indexterm" name="d0e7514"></a>Webster's Revised Unabridged Dictionary (1913)
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" type="disc">
+                  <li class="listitem">
+                     <p><a class="indexterm" name="d0e7523"></a>Longman Dictionary of Contemporary English
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" type="disc">
+                  <li class="listitem">
+                     <p><a class="indexterm" name="d0e7532"></a>Энциклопедия Британника
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" type="disc">
+                  <li class="listitem">
+                     <p>и так далее...</p>
+                  </li>
+               </ul>
+            </div>
+            <p>Некоторые словари являются «свободными к использованию», некоторые, в том числе и названные выше, выпущены под лицензией GPL.
+               На иллюстрации внизу можно увидеть использование словаря Merrian Webster:
+            </p>
+            <div class="figure"><a name="Dict.Merriam.Webster"></a><p class="title"><b>Рисунок 17.1. <a class="indexterm" name="d0e7546"></a>Использование словаря Merriam Webster</b></p>
+               <div class="figure-contents">
+                  <div class="mediaobject"><img src="images/DictMerriamWebster.png" alt="СловариMerriam WebsterСловариИспользование словаря Merriam Webster"></div>
+               </div>
+            </div><br class="figure-break"></div>
+         <div class="section" title="2. Проблемы со словарями">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e7559"></a>2. <a class="indexterm" name="d0e7561"></a>Проблемы со словарями
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" type="disc">
+                  <li class="listitem">
+                     <p>Убедитесь, что файлы словаря лежат в правильном каталоге (или подкаталоге правильного каталога). Проверьте <span class="guimenu">«Проект</span> → <span class="guimenuitem">Свойства»</span> (<span class="shortcut"><strong><span class="keycap"><strong><a class="indexterm" name="d0e7575"></a>CTRL</strong></span>+<span class="keycap"><strong>E</strong></span></strong></span>).
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" type="disc">
+                  <li class="listitem">
+                     <p>Содержит ли каталог словаря три файла с одинаковыми именами, но разными расширениями? Если там всего один файл, проверьте
+                        его расширение. Если это архив <span class="emphasis"><em>tar.bz</em></span>, то вы просто забыли его распаковать.
+                     </p>
+                  </li>
+               </ul>
+            </div>
+         </div>
+      </div>
+      <div class="navfooter">
+         <hr>
+         <table width="100%" summary="Navigation footer">
+            <tr>
+               <td width="40%" align="left"><a accesskey="p" href="chapter.regexp.html">Пред.</a>&nbsp;
+               </td>
+               <td width="20%" align="center">&nbsp;</td>
+               <td width="40%" align="right">&nbsp;<a accesskey="n" href="chapter.glossaries.html">След.</a></td>
+            </tr>
+            <tr>
+               <td width="40%" align="left" valign="top">Глава 16. Регулярные выражения&nbsp;</td>
+               <td width="20%" align="center"><a accesskey="h" href="index.html">Начало</a></td>
+               <td width="40%" align="right" valign="top">&nbsp;Глава 18. Глоссарии</td>
+            </tr>
+         </table>
+      </div>
+   </body>
+</html>

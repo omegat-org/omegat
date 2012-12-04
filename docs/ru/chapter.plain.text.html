@@ -1,0 +1,154 @@
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <title>Глава 11. Работа с простыми текстовыми файлами</title>
+      <link rel="stylesheet" type="text/css" href="OmegaT.css">
+      <meta name="generator" content="DocBook XSL Stylesheets V1.76.1">
+      <link rel="home" href="index.html" title="Руководство пользователя ОмегаТ">
+      <link rel="up" href="index.html" title="Руководство пользователя ОмегаТ">
+      <link rel="prev" href="chapter.translation.editing.html" title="Глава 10. Параметры редактирования">
+      <link rel="next" href="chapter.formatted.text.html" title="Глава 12. Работа с форматированным текстом">
+   </head>
+   <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+      <div class="navheader">
+         <table width="100%" summary="Navigation header">
+            <tr>
+               <th colspan="3" align="center">Глава 11. Работа с простыми текстовыми файлами</th>
+            </tr>
+            <tr>
+               <td width="20%" align="left"><a accesskey="p" href="chapter.translation.editing.html">Пред.</a>&nbsp;
+               </td>
+               <th width="60%" align="center">&nbsp;</th>
+               <td width="20%" align="right">&nbsp;<a accesskey="n" href="chapter.formatted.text.html">След.</a></td>
+            </tr>
+         </table>
+         <hr>
+      </div>
+      <div class="chapter" title="Глава 11. Работа с простыми текстовыми файлами">
+         <div class="titlepage">
+            <div>
+               <div>
+                  <h2 class="title"><a name="chapter.plain.text"></a>Глава 11. Работа с простыми текстовыми файлами<a class="indexterm" name="d0e5593"></a></h2>
+               </div>
+            </div>
+         </div>
+         <div class="toc">
+            <dl>
+               <dt><span class="section"><a href="chapter.plain.text.html#default.encoding">1. Кодировка по умолчанию</a></span></dt>
+               <dt><span class="section"><a href="chapter.plain.text.html#OmegaT.solution">2. Подход <span class="application">ОмегаТ</span></a></span></dt>
+            </dl>
+         </div>
+         <div class="section" title="1. Кодировка по умолчанию">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="default.encoding"></a>1. Кодировка по умолчанию<a class="indexterm" name="d0e5601"></a><a class="indexterm" name="d0e5606"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <p>Простые текстовые файлы, в большинстве случаев имеющие расширение «txt», содержат только текст, и нет чёткого способа сообщить
+               компьютеру, на каком языке этот текст написан. Самое большее, что ОмегаТ может сделать в этом случае, это считать, что текст
+               написан на том же языке, что и язык, используемый операционной системой. Для файлов в 16-битной Юникод-кодировке такой проблемы
+               не существует. Однако, если файл имеет 8-битную кодировку, может возникнуть следующая неприятная ситуация: вместо отображения
+               текста на японском языке...
+            </p>
+            <div class="mediaobject"><img src="images/OmT_Japanese.png"></div>
+            <p>...программа покажет следующее:</p>
+            <div class="mediaobject"><img src="images/OmT_Cyrillic.png"></div>
+            <p>Компьютер, на котором установлена ОмегаТ, работает на русском языке, и, соответственно, вместо иероглифов кандзи, программа
+               пытается использовать кириллицу.
+            </p>
+         </div>
+         <div class="section" title="2. Подход ОмегаТ">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="OmegaT.solution"></a>2. Подход <span class="application">ОмегаТ</span></h2>
+                  </div>
+               </div>
+            </div>
+            <p>В целом, в <span class="application">ОмегаТ</span> есть три метода борьбы с этой проблемой. Все они основываются на использовании файловых фильтров в меню <span class="bold"><strong>Параметры</strong></span>.
+            </p>
+            <div class="variablelist">
+               <dl>
+                  <dt><span class="term">Измените кодировку исходных файлов на Юникод.</span></dt>
+                  <dd>
+                     <p>откройте исходный файл в текстовом редакторе, который корректно распознаёт кодировку и сохраните файл в кодировке <span class="bold"><strong>«UTF-8»</strong></span>. Измените расширения файла с <code class="literal">.txt</code> на <code class="literal">.utf8.</code> <span class="application">ОмегаТ</span> автоматически распознает его как UTF-8 файл. Этот подход наиболее разумен, так как позволяет избавиться от многих проблем
+                        в дальнейшем.
+                     </p>
+                  </dd>
+               </dl>
+            </div>
+            <div class="variablelist">
+               <dl>
+                  <dt><span class="term">Укажите кодировку текстовых файлов</span></dt>
+                  <dd>
+                     <p>то есть файлов с расширением <code class="filename">.txt </code>:&nbsp;в секции <span class="bold"><strong>Текстовые файлы</strong></span> диалогового окна «Файловые фильтры» измените <span class="bold"><strong>кодировку исходных файлов</strong></span> с «&lt;auto&gt;» на кодировку, соответствующую вашим исходным <code class="filename">.txt</code>-файлам, например, на «.jp» для примера выше.
+                     </p>
+                  </dd>
+               </dl>
+            </div>
+            <div class="variablelist">
+               <dl>
+                  <dt><span class="term">Измените расширение исходных текстовых файлов</span></dt>
+                  <dd>
+                     <p>например, для японских текстовых файлов с <code class="filename">.txt</code> на <code class="filename">.jp</code>:&nbsp;в секции <span class="bold"><strong>Текстовые файлы</strong></span> диалогового окна «Файловые фильтры» добавьте новый <span class="bold"><strong>Шаблон имени исходного файла</strong></span> (например, на <code class="filename">*.jp</code> для вышеприведённого примера) и выберите необходимые кодировки оригинала и перевода.
+                     </p>
+                  </dd>
+               </dl>
+            </div>
+            <p>По умолчанию в <span class="application">ОмегаТ</span> включены следующие настройки, чтобы вам было легче работать с некоторыми текстовыми файлами:
+            </p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" type="disc">
+                  <li class="listitem">
+                     <p>файлы <code class="literal">.txt</code> автоматически («&lt;auto&gt;») считаются сохранёнными в кодировке компьютера по умолчанию.
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" type="disc">
+                  <li class="listitem">
+                     <p>файлы <code class="literal">.txt1</code> считаются сохранёнными в кодировке ISO-8859-1, которая покрывает большинство языков <span class="bold"><strong>Западной Европы</strong></span>.<a class="indexterm" name="d0e5722"></a></p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" type="disc">
+                  <li class="listitem">
+                     <p>файлы <code class="literal">.txt2</code> считаются сохранёнными в кодировке ISO-8859-2, которая покрывает большинство языков <span class="bold"><strong>Центральной и Восточной Европы</strong></span>.<a class="indexterm" name="d0e5737"></a></p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" type="disc">
+                  <li class="listitem">
+                     <p>файлы <code class="literal">.utf8</code> считаются сохранёнными в кодировке UTF-8 (она покрывает почти все языки мира).<a class="indexterm" name="d0e5749"></a></p>
+                  </li>
+               </ul>
+            </div>
+            <p>Вы можете проверить эти настройки, выбрав пункт <span class="bold"><strong>Файловые фильтры</strong></span> в меню <span class="bold"><strong>Параметры</strong></span>. Например, если у вас есть текстовый файл на чешском (скорее всего, сохранённый в кодировке <span class="bold"><strong>ISO-8859-2</strong></span>), вам нужно просто сменить расширение с <code class="literal"> .txt</code> на <code class="literal">.txt2 </code> и <span class="application">ОмегаТ</span> корректно распознает его содержимое. И, конечно, если вы хотите навсегда избавиться от этих проблем, подумайте о возможности
+               сохранения таких файлов в Юникоде, то есть в формате <code class="literal">.utf8 </code>.
+            </p>
+         </div>
+      </div>
+      <div class="navfooter">
+         <hr>
+         <table width="100%" summary="Navigation footer">
+            <tr>
+               <td width="40%" align="left"><a accesskey="p" href="chapter.translation.editing.html">Пред.</a>&nbsp;
+               </td>
+               <td width="20%" align="center">&nbsp;</td>
+               <td width="40%" align="right">&nbsp;<a accesskey="n" href="chapter.formatted.text.html">След.</a></td>
+            </tr>
+            <tr>
+               <td width="40%" align="left" valign="top">Глава 10. Параметры редактирования&nbsp;</td>
+               <td width="20%" align="center"><a accesskey="h" href="index.html">Начало</a></td>
+               <td width="40%" align="right" valign="top">&nbsp;Глава 12. Работа с форматированным текстом</td>
+            </tr>
+         </table>
+      </div>
+   </body>
+</html>

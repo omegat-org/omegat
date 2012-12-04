@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<appendix id="appendix.keyboard">
+  <title>Сочетания клавиш для редактирования текста</title>
+
+  <para>В этом небольшом разделе описывается использование сочетаний клавиш в области редактирования текста. Термин «переместить курсор в сегмент» означает, что курсор перемещается в начало сегмента, если до этого он находился перед сегментом и в конец сегмента, если до этого он находился за ним.</para>
+
+  <table>
+    <title>Сочетания клавиш для редактирования текста</title>
+
+    <tgroup cols="2">
+      <colspec align="left" colnum="1" colwidth="90"/>
+
+      <colspec align="left" colnum="2" colwidth="300"/>
+
+      <thead>
+        <row>
+          <entry align="left">Сочетание клавиш</entry>
+
+          <entry align="left">Действие</entry>
+        </row>
+      </thead>
+
+      <tbody>
+        <row>
+          <entry><emphasis role="bold">СТРЕЛКА ВЛЕВО:</emphasis></entry>
+
+          <entry>переместить курсор на один символ влево, но не дальше начала сегмента</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">СТРЕЛКА ВПРАВО:</emphasis></entry>
+
+          <entry>переместить курсор на один символ вправо, но не дальше конца сегмента</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">CTRL+СТРЕЛКА ВЛЕВО:</emphasis></entry>
+
+          <entry>переместить курсор на одно слово влево, но не дальше начала сегмента</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">CTRL+СТРЕЛКА ВПРАВО:</emphasis></entry>
+
+          <entry>переместить курсор на одно слово вправо, но не дальше конца сегмента</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">PGUP:</emphasis></entry>
+
+          <entry>перейти на одну страницу вверх, оставаясь внутри документа</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">PGDN:</emphasis></entry>
+
+          <entry>перейти на одну страницу вниз, оставаясь внутри документа</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">HOME*</emphasis></entry>
+
+          <entry>переместить курсор на начало строки внутри сегмента</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">END*</emphasis></entry>
+
+          <entry>переместить курсор в конец строки внутри сегмента</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">CTRL+HOME</emphasis></entry>
+
+          <entry>переместить курсор в начало сегмента</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">CTRL+END</emphasis></entry>
+
+          <entry>переместить курсор в конец сегмента</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">CTRL+PGUP</emphasis></entry>
+
+          <entry>переместить курсор в начало документа (на Mac: <emphasis role="bold">CMD+PGUP</emphasis>)</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">CTRL+PGDN</emphasis></entry>
+
+          <entry>переместить курсор в конец документа (на Mac: <emphasis role="bold">CMD+PGDN</emphasis>)</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">BACKSPACE*</emphasis></entry>
+
+          <entry>удалить символ перед курсором</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">DELETE*</emphasis></entry>
+
+          <entry>удалить символ после курсора</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">CTRL+BACKSPACE</emphasis></entry>
+
+          <entry>удалить все символы, вплоть до начала текущего слова (Mac: <emphasis role="bold">ALT+BACKSPACE</emphasis>)</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">CTRL+DELETE</emphasis></entry>
+
+          <entry>удалить все символы, вплоть до начала следующего слова (Mac: <emphasis role="bold">ALT+DELETE</emphasis>)</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">CTRL+ВВОД</emphasis></entry>
+
+          <entry>перейти к предыдущему сегменту (для Mac: <emphasis role="bold">CMD+ВВОД</emphasis>)</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">CTRL+A</emphasis></entry>
+
+          <entry>выделить весь сегмент (для Mac: <emphasis role="bold">CMD+A</emphasis>)</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">CTRL+SHIFT+O</emphasis></entry>
+
+          <entry>переключение письма справа налево и слева направо</entry>
+        </row>
+      </tbody>
+    </tgroup>
+  </table>
+
+  <para>* Если курсор находится вне редактируемого сегмента, поведение этих сочетаний клавиш отличается:</para>
+
+  <itemizedlist>
+    <listitem>
+      <para><emphasis role="bold">HOME: </emphasis> переместить курсор в начало активного сегмента</para>
+    </listitem>
+
+    <listitem>
+      <para><emphasis role="bold">END: </emphasis> переместить курсор в конец активного сегмента</para>
+    </listitem>
+
+    <listitem>
+      <para><emphasis role="bold">BACKSPACE: </emphasis>не делает ничего</para>
+    </listitem>
+
+    <listitem>
+      <para><emphasis role="bold">DELETE: </emphasis>не делает ничего</para>
+    </listitem>
+
+    <listitem>
+      <para><emphasis role="bold">Любые другие клавиши,</emphasis> нажимаемые, когда курсор находится вне редактируемого сегмента, будут проигнорированы.</para>
+    </listitem>
+  </itemizedlist>
+
+  <para>Клавиша «SHIFT» никак не влияет на поведение сочетаний клавиш, когда она зажата, управление курсором производится так, как описано выше.</para>
+
+  <para>Системные сочетания клавиш «Вставить» (<emphasis role="bold">CTRL+V</emphasis> или <emphasis role="bold">CTRL+INSERT</emphasis>), «Вырезать» (<emphasis role="bold">CTRL+X</emphasis> или <emphasis role="bold">CTRL+C)</emphasis>, «Вставить совпадение» <emphasis role="bold">(CTRL+I</emphasis>) и «Вставить оригинал» (<emphasis role="bold">CTRL+SHIFT+I</emphasis>) работают для любого выделенного текста, даже для выделения, находящегося вне текущего сегмента. Однако операции вставки и замены, конечно же работают только в границах выделенного сегмента.</para>
+</appendix>

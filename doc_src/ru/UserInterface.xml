@@ -1,0 +1,651 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<chapter id="chapter.user.interface">
+  <title>Пользовательский интерфейс</title>
+
+  <section id="user.interface.items">
+    <title>Главное окно ОмегаТ и другие окна и диалоги</title>
+
+    <para>Главное окно ОмегаТ содержит главное меню, строку состояния и несколько областей. Также, есть несколько дополнительных окон и диалогов, которые используются для изменения настроек проекта. Ниже описывается их использование.</para>
+
+    <table colsep="0" rowsep="0">
+      <title>Главное окно ОмегаТ<indexterm class="singular">
+          <primary>Пользовательский интерфейс</primary> <secondary>Главное окно ОмегаТ</secondary>
+        </indexterm></title>
+
+      <tgroup cols="2" colsep="0" rowsep="1" title="Main OMegaT window">
+        <colspec align="left" colnum="1" colwidth="90"/>
+
+        <colspec align="left" colnum="2" colwidth=""/>
+
+        <tbody>
+          <row>
+            <entry><guimenuitem>Область редактирования</guimenuitem></entry>
+
+            <entry>здесь вы набираете и редактируете перевод</entry>
+          </row>
+
+          <row>
+            <entry><guimenuitem>Область просмотра совпадений</guimenuitem></entry>
+
+            <entry>показывает наиболее похожие сегменты из памяти переводов</entry>
+          </row>
+
+          <row>
+            <entry><guimenuitem>Область просмотра глоссария</guimenuitem></entry>
+
+            <entry>показывает терминологическую справку для текущего сегмента</entry>
+          </row>
+
+          <row>
+            <entry><guimenuitem>Область просмотра словарей</guimenuitem></entry>
+
+            <entry>показывает словарные статьи, касающиеся слов и выражений из текущего сегмента</entry>
+          </row>
+
+          <row>
+            <entry><guimenuitem>Область машинного перевода</guimenuitem></entry>
+
+            <entry>показывает перевод, выполненный системами машинного перевода </entry>
+          </row>
+
+          <row>
+            <entry><guimenuitem>Область просмотра примечаний</guimenuitem></entry>
+
+            <entry>примечания к текущему сегменту, например, варианты перевода или ключ для пары ключ=значение</entry>
+          </row>
+
+          <row>
+            <entry><guimenuitem>Область просмотра комментариев</guimenuitem></entry>
+
+            <entry>комментарии автора в PO-файлах, или название переводимого атрибута (в XHTML)</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+
+    <table colsep="0" rowsep="0">
+      <title>Другие окна<indexterm class="singular">
+          <primary>Пользовательский интерфейс</primary> <secondary>Другие окна</secondary>
+        </indexterm></title>
+
+      <tgroup cols="2" colsep="0" rowsep="1" title="Other windows">
+        <colspec align="left" colnum="1" colwidth="90"/>
+
+        <colspec align="left" colnum="2" colwidth=""/>
+
+        <tbody>
+          <row>
+            <entry><guimenuitem><indexterm class="singular">
+                <primary>Сочетания клавиш</primary> <secondary>Проверка тегов - CTRL+T</secondary>
+              </indexterm>Окно проверки тегов</guimenuitem></entry>
+
+            <entry><para>Используется для проверки тегов (чтобы открыть, нажмите <keycombo> <keycap>CTRL</keycap> <keycap>T</keycap> </keycombo>, чтобы закрыть — нажмите <keycap>ESC</keycap>)</para></entry>
+          </row>
+
+          <row>
+            <entry><guimenuitem><indexterm class="singular">
+                <primary>Сочетания клавиш</primary> <secondary>Справка - F1</secondary>
+              </indexterm>Система помощи</guimenuitem></entry>
+
+            <entry><para>Используется для чтения руководства пользователя (чтобы открыть, нажмите <keycap>F1</keycap>, чтобы закрыть — нажмите <keycap>ESC</keycap>)</para></entry>
+          </row>
+
+          <row>
+            <entry><guimenuitem>Окно статистики</guimenuitem></entry>
+
+            <entry><para>Используется для просмотра статистики по проекту, чтобы открыть его, выберите пункт меню <menuchoice> <guimenu><indexterm class="singular">
+                    <primary>Меню «Инструменты»</primary> <secondary>статистика</secondary>
+                  </indexterm>«Инструменты</guimenu> <guimenuitem>Статистика».</guimenuitem> </menuchoice></para></entry>
+          </row>
+
+          <row>
+            <entry><guimenuitem>Окно статистики по совпадениям</guimenuitem></entry>
+
+            <entry><para>Используется для просмотра статистики совпадений по проекту, чтобы открыть его, выберите пункт меню <menuchoice> <guimenu><indexterm class="singular">
+                    <primary>Меню «Инструменты»</primary> <secondary>Статистика по совпадениям</secondary>
+                  </indexterm>«Инструменты</guimenu> <guimenuitem>Статистика по совпадениям»</guimenuitem> </menuchoice>.</para></entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+
+    <table border="0" colsep="0" rowsep="0">
+      <title>Диалоги настроек<indexterm class="singular">
+          <primary>Пользовательский интерфейс</primary> <secondary>Диалоги настроек</secondary> <seealso>Свойства проекта</seealso>
+        </indexterm></title>
+
+      <tgroup cols="2" colsep="0" rowsep="1" title="Settings dialogs">
+        <colspec align="left" colnum="1" colwidth="90"/>
+
+        <colspec align="left" colnum="2" colwidth=""/>
+
+        <tbody>
+          <row>
+            <entry><guimenuitem>Свойства проекта<indexterm class="singular">
+                <primary>Меню «Проект»</primary> <secondary>Свойства...</secondary>
+              </indexterm></guimenuitem> <indexterm class="singular">
+                <primary>Сочетания клавиш</primary> <secondary>Свойства проекта - CTRL+E</secondary>
+              </indexterm></entry>
+
+            <entry>Используется для изменения языков и каталогов проекта (чтобы открыть, нажмите сочетание клавиш<guimenuitem>CTRL+E </guimenuitem> или выберите пункт меню <menuchoice> <guimenu>«Проект</guimenu> <guimenuitem>Свойства...»</guimenuitem> </menuchoice>, чтобы закрыть — нажмите <keycap>ESC)</keycap></entry>
+          </row>
+
+          <row>
+            <entry><guimenuitem>Шрифт<indexterm class="singular">
+                <primary>Свойства проекта</primary> <secondary>Шрифт</secondary>
+              </indexterm></guimenuitem></entry>
+
+            <entry><para>Используется для изменения шрифта, <application>применяемого ОмегаТ</application> для показа оригинала, перевода, совпадений и терминов в глоссарии (чтобы открыть, выберите пункт меню <menuchoice> <guimenu>«Параметры</guimenu> <guimenuitem>Шрифт...»</guimenuitem> </menuchoice>, чтобы закрыть — нажмите <keycap>ESC</keycap><keycap>)</keycap></para></entry>
+          </row>
+
+          <row>
+            <entry><guimenuitem>Файловые фильтры<indexterm class="singular">
+                <primary>Свойства проекта</primary> <secondary>Файловые фильтры</secondary>
+              </indexterm><indexterm class="singular">
+                <primary>Меню «Параметры»</primary> <secondary>Файловые фильтры</secondary>
+              </indexterm></guimenuitem></entry>
+
+            <entry>Используется для настройки обработки поддерживаемых форматов файлов (чтобы открыть, выберите пункт меню <menuchoice> <guimenu>«Параметры</guimenu> <guimenuitem>Файловые фильтры...»</guimenuitem> </menuchoice>, чтобы закрыть — нажмите <keycap>ESC</keycap>)</entry>
+          </row>
+
+          <row>
+            <entry><guimenuitem>Сегментация<indexterm class="singular">
+                <primary>Свойства проекта</primary> <secondary>Сегментация</secondary>
+              </indexterm><indexterm class="singular">
+                <primary>Меню «Параметры»</primary> <secondary>Сегментация</secondary>
+              </indexterm></guimenuitem></entry>
+
+            <entry>Используется для изменения способа разделения текста на предложения (чтобы открыть выберите пункт меню <menuchoice> <guimenu>«Параметры</guimenu> <guimenuitem>Сегментация»</guimenuitem> </menuchoice>, чтобы закрыть нажмите <keycap>ESC</keycap>)</entry>
+          </row>
+
+          <row>
+            <entry><guimenuitem>Параметры редактирования<indexterm class="singular">
+                <primary>Меню «Параметры»</primary> <secondary>Параметры редактирования</secondary>
+              </indexterm><indexterm class="singular">
+                <primary>Свойства проекта</primary> <secondary>Параметры редактирования</secondary>
+              </indexterm></guimenuitem></entry>
+
+            <entry>Используется для настройки поведения <application>ОмегаТ</application> при смене сегмента (чтобы открыть выберите пункт меню <menuchoice> <guimenu>«Параметры</guimenu> <guimenuitem>Параметры редактирования...»</guimenuitem> </menuchoice>, чтобы закрыть нажмите <keycap>ESC</keycap>)</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+  </section>
+
+  <section id="OmegaT.main.window">
+    <title>Главное окно <application>ОмегаТ</application><indexterm class="singular">
+        <primary>Окна и области в ОмегаТ</primary> <secondary>Главное окно</secondary>
+      </indexterm></title>
+
+    <figure id="OmegaT.main.window.figure">
+      <title>Главное окно ОмегаТ</title>
+
+      <mediaobject>
+        <imageobject role="html">
+          <imagedata fileref="images/OmegaT_panes_25.png" scale="100"/>
+        </imageobject>
+
+        <imageobject role="fo">
+          <imagedata fileref="images/OmegaT_panes_25.png" width="80%"/>
+        </imageobject>
+      </mediaobject>
+    </figure>
+
+    <para>Главное окно состоит из нескольких областей, главного меню и строки состояния. Вы можете изменить положение любой области и даже выделить её в самостоятельное окно, просто потянув её за заголовок. В зависимости от статуса области, в её верхнем правом углу могут находиться различные кнопки:</para>
+
+    <table>
+      <title>Кнопки на заголовках областей<indexterm class="singular">
+          <primary>Окна и области в ОмегаТ</primary> <secondary>Кнопки на заголовках областей</secondary>
+        </indexterm></title>
+
+      <tgroup cols="2">
+        <colspec align="left" colnum="1" colwidth="60"/>
+
+        <tbody>
+          <row>
+            <entry><inlinemediaobject>
+                <imageobject role="html">
+                  <imagedata fileref="images/Minimize.gif" width="60%"/>
+                </imageobject>
+
+                <imageobject role="fo">
+                  <imagedata fileref="images/Minimize.gif" width="40%"/>
+                </imageobject>
+              </inlinemediaobject></entry>
+
+            <entry>сворачивает область, так что остаётся только её заголовок внизу возле строки состояния</entry>
+          </row>
+
+          <row>
+            <entry><inlinemediaobject>
+                <imageobject role="html">
+                  <imagedata fileref="images/Maximize.gif" width="60%"/>
+                </imageobject>
+
+                <imageobject role="fo">
+                  <imagedata fileref="images/Maximize.gif" width="40%"/>
+                </imageobject>
+              </inlinemediaobject></entry>
+
+            <entry>разворачивает область на всё доступное пространство</entry>
+          </row>
+
+          <row>
+            <entry><inlinemediaobject>
+                <imageobject role="html">
+                  <imagedata fileref="images/restore.gif" width="60%"/>
+                </imageobject>
+
+                <imageobject role="fo">
+                  <imagedata fileref="images/restore.gif" width="40%"/>
+                </imageobject>
+              </inlinemediaobject></entry>
+
+            <entry>возвращает область в состояние до разворачивания</entry>
+          </row>
+
+          <row>
+            <entry><inlinemediaobject>
+                <imageobject role="html">
+                  <imagedata fileref="images/undock.gif" width="60%"/>
+                </imageobject>
+
+                <imageobject role="fo">
+                  <imagedata fileref="images/undock.gif" width="40%"/>
+                </imageobject>
+              </inlinemediaobject></entry>
+
+            <entry>отделяет область от главного окна в собственное окно</entry>
+          </row>
+
+          <row>
+            <entry><inlinemediaobject>
+                <imageobject role="html">
+                  <imagedata fileref="images/dock.gif" width="60%"/>
+                </imageobject>
+
+                <imageobject role="fo">
+                  <imagedata fileref="images/dock.gif" width="40%"/>
+                </imageobject>
+              </inlinemediaobject></entry>
+
+            <entry>возвращает область обратно в главное окно</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+
+    <para>Если хотите, области можно разместить так, чтобы они перекрывали друг друга. В этом случае в верхней части областей будут показаны вкладки. Разделители между областями можно перемещать, чтобы изменять размер областей. Если вы чересчур переусердствуете с выбором расположения областей, вы всегда можете выбрать пункт меню <guimenuitem><indexterm class="singular">
+        <primary>Окна ОмегаТ</primary> <seealso>Окна и области в ОмегаТ</seealso>
+      </indexterm> <indexterm class="singular">
+        <primary>Окна ОмегаТ</primary> <secondary>Возврат к расположению областей по умолчанию</secondary>
+      </indexterm>«Параметры → Восстановить главное окно»</guimenuitem>, чтобы вернуться к расположению областей по умолчанию.</para>
+
+    <para>Счётчики в нижнем правом углу отображают прогресс перевода (числа в левой колонке взяты с приведённой выше иллюстрации).</para>
+
+    <table>
+      <title>Главное окно - счётчики<indexterm class="singular">
+          <primary>Окна и области в ОмегаТ</primary> <secondary>Счётчики</secondary>
+        </indexterm></title>
+
+      <tgroup cols="2">
+        <colspec align="left" colnum="1" colwidth="60"/>
+
+        <tbody>
+          <row>
+            <entry>33/33</entry>
+
+            <entry>число сегментов - переведённые/всего в текущем документе</entry>
+          </row>
+
+          <row>
+            <entry>2780/2780</entry>
+
+            <entry>число уникальных сегментов - переведено/всего уникальных сегментов в проекте</entry>
+          </row>
+
+          <row>
+            <entry>3760</entry>
+
+            <entry>общее число сегментов (включая не уникальные) в проекте</entry>
+          </row>
+
+          <row>
+            <entry>126/127</entry>
+
+            <entry>число знаков в оригинале и переводе текущего сегмента</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+
+    <para>С практической точки зрения наибольший интерес представляет вторая пара чисел: она показывает, насколько вы продвинулись в переводе по отношению ко всему объёму проекта. Очевидно, что проект в данном переводе полностью завершён и все уникальные сегменты переведены.</para>
+
+    <section id="editor.pane">
+      <title>Область редактирования<indexterm class="singular">
+          <primary>Окна и области в ОмегаТ</primary> <secondary>Область редактирования</secondary>
+        </indexterm></title>
+
+      <para>Здесь вы набираете и редактируете ваш перевод. Область редактирования показывает текст частично переведённого документа: для переведённого текста показывается перевод, непереведённый текст показывается на языке оригинала. Показываемый текст разбит на сегменты: вы можете полистать документ и дважды щёлкнуть на любом сегменте, чтобы отредактировать его. На приведённой выше иллюстрации, уже переведённые сегменты выделены жёлтым.</para>
+
+      <para>Один из сегментов является активным. Он представлен в виде двух отдельных строк. Верхняя строка представлена на языке оригинала, полужирным шрифтом на зелёном фоне, а нижняя строка является полем редактирования, в конце ограниченная маркером: <indexterm class="singular">
+          <primary>Маркер конца сегмента</primary>
+        </indexterm>маркер — это <literal>&lt;сегмент nnnn&gt;</literal>, где «nnnn» соответствует номеру сегмента в проекте. Используйте верхнюю часть для справки и замените содержание строки редактирования вашим переводом.</para>
+
+      <para>В зависимости от предпочитаемых настроек, поле редактирования непереведённого сегмента может быть пустым, содержать текст оригинала или содержать перевод строки, наиболее похожей на ту, что вы собираетесь переводить. Когда вы переходите к следующему сегменту, программа проверяет ваш перевод и сохраняет его в памяти. Если вы хотите, чтобы сегмент оставался непереведённым, просто удалите весь текст из поля редактирования (выберите всё при помощи <keycap>CTRL+A</keycap> и удалите при помощи клавиши <keycap>DEL</keycap>). ОмегаТ может сохранить перевод, идентичный оригиналу. Это может быть полезно для документов, содержащих торговые марки, имена собственные или сегменты на третьем языке, которые не требуют перевода. За более подробной информацией обратитесь к разделу <emphasis>Редактирование перевода</emphasis>.</para>
+
+      <para>Если в области редактирования щёлкнуть правой кнопкой мыши, появится всплывающее меню с пунктами <emphasis role="bold"> Вырезать, Копировать, Вставить</emphasis> (выбор этих пунктов аналогичен нажатию сочетаний клавиш <keycombo> <keycap>CTRL</keycap> <keycap>X</keycap> </keycombo>, <keycombo> <keycap>CTRL</keycap> <keycap>C</keycap> </keycombo> и <keycombo> <keycap>CTRL</keycap> <keycap>V</keycap> </keycombo>) и с некоторыми пунктами меню <emphasis role="bold">Переход</emphasis>.</para>
+    </section>
+
+    <section id="match.viewer">
+      <title>Область просмотра нечётких совпадений<indexterm class="singular">
+          <primary>Окна и области в ОмегаТ</primary> <secondary>Область просмотра нечётких совпадений</secondary>
+        </indexterm></title>
+
+      <para><figure id="matches.pane">
+          <title><indexterm class="singular">
+              <primary>Совпадения</primary> <secondary>Область просмотра совпадений - иллюстрация</secondary>
+            </indexterm><indexterm class="singular">
+              <primary>Окна и области в ОмегаТ</primary> <secondary>Область просмотра совпадений - иллюстрация</secondary>
+            </indexterm>Область просмотра совпадений</title>
+
+          <mediaobject>
+            <imageobject role="html">
+              <imagedata fileref="images/MatchesPane_25.png"/>
+            </imageobject>
+
+            <imageobject role="fo">
+              <imagedata fileref="images/MatchesPane_25.png" width="80%"/>
+            </imageobject>
+          </mediaobject>
+        </figure></para>
+
+      <para>Область просмотра совпадений отображает наиболее похожие сегменты из памяти переводов — как из памяти переводов проекта, создающейся по мере того, как вы переводите проект, так и из внешних файлов памяти, которые вы можете взять из своих предыдущих проектов или получить от клиента или бюро переводов.</para>
+
+      <para>Когда вы перемещаетесь на следующий сегмент, автоматически выбирается первое нечёткое совпадение (с наибольшим процентом схожести). Вы можете выбрать другое совпадение, нажав <guimenuitem>CTRL+2, 3, 4 или 5</guimenuitem>.<indexterm>
+          <primary>Сочетания клавиш</primary> <secondary>Выбор совпадения - CTRL+N</secondary>
+        </indexterm> Естественно, нажатие <keycombo> <keycap>CTRL</keycap> <keycap>5</keycap> </keycombo> не возымеет никакого эффекта, если совпадения №5 не существует. Чтобы использовать выбранное совпадение в вашем переводе, нажмите <guimenuitem>CTRL+R</guimenuitem><indexterm class="singular">
+          <primary>Сочетания клавиш</primary> <secondary>Заменить - CTRL+R</secondary>
+        </indexterm> — и совпадение появится в поле перевода; или нажмите <guimenuitem>CTRL+I <indexterm class="singular">
+          <primary>Сочетания клавиш</primary> <secondary>Вставить - CTRL+I</secondary>
+        </indexterm></guimenuitem>, чтобы вставить совпадение в текущую позицию курсора.</para>
+
+      <para>Грубо говоря, процент совпадения вычисляется так: берётся число слов, общих для обоих сегментов и делится на число слов в самом длинном из них. Выбранное нечёткое совпадение будет выделено полужирным шрифтом, слова, отсутствующие в переводимом сегменте, будут отмечены синим, а слова, находящиеся рядом с отсутствующими — зелёным. В приведённом выше примере исходный сегмент — <emphasis role="bold">Context menu command</emphasis>. Наилучшее совпадение подходит на 100%, так как совпадают все слова. Точно так же подходят и 2 следующих совпадения, но не совпадение №4, которое хоть и похоже, но немного отличается. В строке с процентами также показывается имя файла памяти переводов, <indexterm class="singular">
+          <primary>Память переводов</primary> <secondary>Совпадения</secondary>
+        </indexterm>в котором найдено это совпадение. Если имя не указано, то источником совпадения является память переводов самого проекта. Ничейные сегменты<indexterm class="singular">
+          <primary>Память переводов</primary> <secondary>Ничейные сегменты</secondary>
+        </indexterm> (совпадение №2) — это сегменты в памяти переводов проекта без соответствующего сегмента на языке оригинала.</para>
+
+      <para>Вообще говоря, ОмегаТ поддерживает три варианта расчёта процента совпадений (66/66/30 для совпадения №4 из примера выше). Они определяются следующим образом:</para>
+
+      <itemizedlist>
+        <listitem>
+          <para>процент совпадений при использовании модуля «tokenizer»</para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para>процент совпадений, рассчитываемый ОмегаТ по умолчанию — количество совпадающих слов (без чисел и тегов), делённое на общее число слов</para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para>аналогично предыдущему, но с учётом чисел и тегов</para>
+        </listitem>
+      </itemizedlist>
+    </section>
+
+    <section>
+      <title>Область просмотра глоссария<indexterm class="singular">
+          <primary>Окна и области в ОмегаТ</primary> <secondary>Область просмотра глоссария</secondary>
+        </indexterm></title>
+
+      <para>Область просмотра глоссария даёт вам доступ к вашему личному набору выражений и терминов, который вы собрали в файлах глоссариев. Оно отображает перевод найденных в текущем сегменте терминов. На иллюстрации ниже, исходный сегмент — «<emphasis>Context menu command</emphasis>», термины из области глоссария были найдены в Microsoft Term Collection и в глоссарии словенской группы пользователей GNU/Linux.</para>
+
+      <figure id="multiword.pane">
+        <title><indexterm class="singular">
+            <primary>Глоссарии</primary>
+          </indexterm>термин глоссария, состоящий из нескольких слов</title>
+
+        <mediaobject>
+          <imageobject role="html">
+            <imagedata fileref="images/GlossaryPane_25.png"/>
+          </imageobject>
+
+          <imageobject role="fo">
+            <imagedata fileref="images/GlossaryPane_25.png" width="80%"/>
+          </imageobject>
+        </mediaobject>
+      </figure>
+
+      <para>Если опция «Советы» включена (<guimenuitem>«Параметры → Советы»</guimenuitem>), при щелчке правой кнопкой мыши по подчёркнутому слову в исходном сегменте будет появляться контекстное меню с соответствующими вариантами перевода из глоссария. Щёлкните по одному из вариантов, и он будет вставлен в перевод. Также можно выделить предпочитаемый вариант в области просмотра глоссария и вставить его в перевод, просто щёлкнув по выделению правой кнопкой мыши.</para>
+    </section>
+
+    <section id="dictionaries">
+      <title>Область просмотра словарей<indexterm class="singular">
+          <primary>Окна и области в ОмегаТ</primary> <secondary>Область просмотра словарей</secondary>
+        </indexterm></title>
+
+      <para>Словари — это электронные версии обычных, бумажных словарей, вроде словарей Уэбстера, Дудена, Ларусса и т.д., которые возможно лежат у вас на столе. Более подробно использование словарей описано в разделе <link linkend="chapter.dictionaries">Словари</link></para>
+    </section>
+
+    <section id="Multiple.Translations">
+      <title>Область просмотра вариантов перевода<indexterm class="singular">
+          <primary>Окна и области в ОмегаТ</primary> <secondary>Область просмотра вариантов перевода</secondary>
+        </indexterm></title>
+
+      <para>Некоторые сегменты нужно переводить по разному, в зависимости от контекста. Если текущий перевод сегмента не подходит, пользователь может выбрать пункт меню <guisubmenu>«Правка → Создать вариант перевода»</guisubmenu>. Введённый затем перевод будет рассматриваться как альтернативный вариант перевода исходного сегмента. Вы можете выбрать один из вариантов, например, наиболее общий, как вариант по умолчанию нажав <guisubmenu>«Правка → Использовать как перевод по умолчанию»</guisubmenu>.</para>
+    </section>
+
+    <section>
+      <title>Область просмотра примечаний</title>
+
+      <para>Вы можете добавлять небольшие примечания к текущему сегменту, например, чтобы вернуться к нему позднее и переделать перевод, проверить различные варианты или обсудить его с коллегами. Примечания можно просматривать с помощью пунктов меню <guisubmenu>Переход → Следующее примечание</guisubmenu> и <guisubmenu>Переход → Предыдущее примечание</guisubmenu>.</para>
+    </section>
+
+    <section>
+      <title>Область просмотра комментариев</title>
+
+      <para>Некоторые форматы файлов, специально разработанные для переводческой работы, например, PO, позволяют добавлять комментарии. Таким образом переводчик получает контекст для текущего сегмента. В примере ниже автор PO-файла добавил предупреждение для переводчика, чтобы тот проверил длину перевода:</para>
+
+      <figure id="comments.pane">
+        <title><indexterm class="singular">
+            <primary>Комментарии</primary> <secondary>Область просмотра комментариев</secondary>
+          </indexterm></title>
+
+        <mediaobject>
+          <imageobject role="html">
+            <imagedata fileref="images/Comments_25.png" width=""/>
+          </imageobject>
+
+          <imageobject role="fo">
+            <imagedata fileref="images/Comments_25.png" width="80%"/>
+          </imageobject>
+        </mediaobject>
+      </figure>
+    </section>
+
+    <section id="Google.Translate">
+      <title>Область машинного перевода<indexterm class="singular">
+          <primary>Окна и области в ОмегаТ</primary> <secondary>Область машинного перевода</secondary>
+        </indexterm></title>
+
+      <para>Когда область машинного перевода не скрыта, в ней показывается перевод текущего сегмента, выполненный сервисами машинного перевода. Чтобы заменить перевод текущего сегмента на машинный, нажмите <keysym>CTRL+M</keysym>. Более подробно это описано в разделе <link linkend="chapter.machine.translate">Машинный перевод</link></para>
+    </section>
+
+    <section>
+      <title id="main.menu">Главное меню</title>
+
+      <para>Главное меню предоставляет доступ ко всем возможностям <application>ОмегаТ</application>. Полное описание всех меню и их пунктов можно найти в приложении <emphasis>Главное меню</emphasis>. Наиболее часто используемые функции доступны через сочетания клавиш, так что, как только вы привыкнете к ним, вам больше не придётся использовать меню при переводе. Более подробная информация представлена в разделе <link linkend="chapter.menu">Меню и сочетания клавиш</link></para>
+    </section>
+
+    <section id="status.bar">
+      <title>Строка состояния</title>
+
+      <para>Строка состояния внизу главного окна отображает сообщения о ходе работы. С её помощью ОмегаТ сообщает пользователю представление об операциях, которые происходят в данный момент. Кроме того, она показывает количество нечётких и словарных совпадений для текущего сегмента.</para>
+    </section>
+  </section>
+
+  <section id="other.windows">
+    <title>Другие окна</title>
+
+    <section id="section.project.files">
+      <title>Файлы проекта<indexterm class="singular">
+          <primary>Окна и области в ОмегаТ</primary> <secondary>Файлы проекта</secondary>
+        </indexterm></title>
+
+      <para>Окно «Файлы проекта» отображает файлы для перевода и другую информацию о проекте. Оно автоматически открывается, когда ОмегаТ загружает проект. Чтобы открыть его, нажмите <guimenuitem>CTRL+L<indexterm class="singular">
+          <primary>Сочетания клавиш</primary> <secondary>Список файлов проекта - CTRL+L</secondary>
+        </indexterm></guimenuitem>, а чтобы закрыть, нажмите <keycap>ESC</keycap>. В окне «Файлы проекта» показывается следующая информация:</para>
+
+      <itemizedlist>
+        <listitem>
+          <para>список всех переводимых файлов в проекте. Это файлы в каталоге исходных файлов, которые ОмегаТ может обработать. Щелчок на любом из этих файлов откроет его для перевода</para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para>файл, открытый в области редактирования в настоящее время, выделен синим цветом. Нажатие клавиши <keycap>ВВОД</keycap> приведёт к открытию выбранного файла в области редактирования.</para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para>напротив имён файлов показано количество сегментов в каждом из них</para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para>внизу показывается общее число сегментов, число уникальных сегментов во всём проекте и число уже переведённых уникальных сегментов</para>
+        </listitem>
+      </itemizedlist>
+
+      <para>Количество <emphasis role="bold">уникальных</emphasis> сегментов вычисляется путём вычитания из общего количества сегментов всех дубликатов. (При определении «уникальности» учитывается регистр: «Бег» и «бег» — это разные сегменты)</para>
+
+      <para>Разница между количеством сегментов и количеством уникальных сегментов даёт представление о степени повторяемости текста. Следует иметь в виду, что эти числа ничего не говорят о том, насколько релевантными являются повторения: они могут означать относительно длинные предложения, которые повторяются несколько раз (очень удачно!), а могут и таблицу из ключевых слов (не так удачно...). Файл <filename>project_stats.txt</filename>, расположенный в подкаталоге «omegat» вашего проекта, содержит более подробную информацию о сегментах каждого файла.</para>
+
+      <para>Изменение правил сегментации может повлиять на подсчёт числа сегментов/уникальных сегментов. Однако, после начала перевода таких изменений стоит избегать. За более подробной информацией обратитесь к разделу <emphasis>Правила сегментации</emphasis>.</para>
+
+      <para><emphasis role="bold"><indexterm class="singular">
+          <primary>Исходные файлы</primary> <secondary>Добавление файлов в проект</secondary>
+        </indexterm>Добавление файлов в проект: </emphasis>Вы можете добавить в проект исходные файлы, нажав кнопку «<guimenuitem>Импортировать исходные файлы...»</guimenuitem>. Программа скопирует выбранные файлы в папку <filename>/source</filename> и перезагрузит проект, чтобы отобразить новые файлы. Кроме того, можно добавлять интернет-страницы, работающие на движке MediaWiki (например, страницы Википедии), щёлкнув на кнопке <guimenuitem>«Импорт из MediaWiki»</guimenuitem> и введя адрес страницы.</para>
+    </section>
+
+    <section id="section.search.window">
+      <title>Окно поиска<indexterm class="singular">
+          <primary>Окна и области в ОмегаТ</primary> <secondary>Окно поиска</secondary>
+        </indexterm></title>
+
+      <para>Окно поиска используется для поиска конкретных сегментов в проекте. Одновременно могут быть открыты несколько окон поиска. Чтобы открыть новое окно, нажмите сочетание клавиш <keycombo> <keycap>CTRL</keycap> <keycap>F</keycap> </keycombo>. Окно поиска состоит из текстового поля для ввода строк или ключевых слов, переключателей настроек поиска и области отображения результатов поиска. За более подробной информацией обратитесь к разделу <emphasis> <link linkend="chapter.user.interface">Поиск</link> </emphasis>.</para>
+    </section>
+
+    <section id="section.tag.validation">
+      <title>Проверка тегов<indexterm class="singular">
+          <primary>Проверка тегов</primary> <seealso>Сочетания клавиш, Теги</seealso>
+        </indexterm><indexterm class="singular">
+          <primary>Окна и области в ОмегаТ</primary> <secondary>Проверка тегов</secondary> <seealso>Теги</seealso>
+        </indexterm></title>
+
+      <para>Окно проверки тегов определяет ошибки и несоответствия, связанные с тегами. Чтобы открыть это окно, нажмите на <guimenuitem>CTRL+T. </guimenuitem>Окно представляет собой таблицу из трёх столбцов: столбец со ссылкой на сегмент, с текстом оригинала и с текстом перевода.</para>
+
+      <para><figure id="tag.validator.window">
+          <title><indexterm class="singular">
+              <primary>Проверка тегов</primary> <secondary>Окно - иллюстрация</secondary> <seealso>Теги</seealso>
+            </indexterm>Окно проверки тегов</title>
+
+          <mediaobject>
+            <imageobject role="html">
+              <imagedata fileref="images/TagValidator.png"/>
+            </imageobject>
+
+            <imageobject role="fo">
+              <imagedata fileref="images/TagValidator.png" width="60%"/>
+            </imageobject>
+          </mediaobject>
+        </figure></para>
+
+      <para>Теги выделены полужирным шрифтом и синим цветом, чтобы можно было легко сравнить содержимое оригинала и перевода. Щёлкните по ссылке, чтобы перейти к сегменту в окне редактирования. При необходимости исправьте ошибку и нажмите <guimenuitem>CTRL+T</guimenuitem>, чтобы вернуться к окну проверки тегов для исправления других ошибок. В примере выше, в первом и третьем случае ошибка состоит в некорректной группировке тегов, а во втором случае в начальном теге нет символа «&lt;».</para>
+
+      <para>Ошибки тегов возникают, если количество и порядок тегов в переводе не совпадают с количеством и порядком тегов в оригинале. Некоторые ошибки тегов обусловлены особенностями перевода и их можно оставить как есть, а вот другие ошибки могут привести к проблемам после создания переведённых файлов. Как правило, теги являют собой условное представление форматирования оригинального текста. Упрощение форматирования исходного файла перед началом перевода сильно уменьшает количество тегов.</para>
+    </section>
+
+    <section>
+      <title>Статистика<indexterm class="singular">
+          <primary>Статистика</primary> <seealso>Меню «Инструменты»</seealso>
+        </indexterm></title>
+
+      <para>Окно статистики, которое можно открыть выбрав пункт меню <emphasis role="bold">Инструменты&gt;Статистика</emphasis>, позволяет просматривать различные данные, как по проекту в целом, так и по отдельным файлам. Также, эти данные можно найти в файле <filename>project_stats.txt</filename> (в подкаталоге <filename>omegat</filename>), который, при желании, можно легко загрузить в любой редактор электронных таблиц. Для копирования содержимого можно использовать сочетания клавиш <guimenuitem>CTRL+A <indexterm class="singular">
+          <primary>Сочетания клавиш</primary> <secondary>Выделить всё - CTRL+A</secondary>
+        </indexterm></guimenuitem><guimenuitem>, CTRL+C <indexterm class="singular">
+          <primary>Сочетания клавиш</primary> <secondary>Копировать - CTRL+C</secondary>
+        </indexterm></guimenuitem>, <guimenuitem>CTRL+V <indexterm class="singular">
+          <primary>Сочетания клавиш</primary> <secondary>Вставить - CTRL+V</secondary>
+        </indexterm></guimenuitem>.<figure id="ProjectStatistic.Window">
+          <title>статистика проекта</title>
+
+          <mediaobject>
+            <imageobject role="html">
+              <imagedata fileref="images/StatisticsWindow_25.png"/>
+            </imageobject>
+
+            <imageobject role="fo">
+              <imagedata fileref="images/StatisticsWindow_25.png" width="60%"/>
+            </imageobject>
+          </mediaobject>
+        </figure></para>
+    </section>
+
+    <section>
+      <title>Статистика по совпадениям<indexterm class="singular">
+          <primary>Статистика по совпадениям</primary> <seealso>Меню «Инструменты»</seealso>
+        </indexterm></title>
+
+      <para>Статистику по совпадениям можно просмотреть, выбрав пункт меню <guimenuitem>«Инструменты&gt;Статистика по совпадениям».</guimenuitem> Расчёт совпадений довольно интенсивно нагружает процессор и может занять некоторое время, поэтому во время расчётов показывается индикатор выполнения. Стандартом де-факто является разбиение совпадений на следующие группы: точные совпадения, 95%-100%, 85%-94%, 75%-84%, 50%-74% и без совпадений. При подсчёте количества слов (количество слов, показываемое в окне «Файлы проекта», рассчитывается аналогично), используется специфический для ОмегаТ метод, в целом схожий с подсчётом количества сегментов. Расчёт данных проводится для сегментов, слов и символов (с пробелами и без).<figure>
+          <title>Статистика по совпадениям</title>
+
+          <mediaobject>
+            <imageobject role="html">
+              <imagedata fileref="images/MatchStatistics.png"/>
+            </imageobject>
+
+            <imageobject role="fo">
+              <imagedata fileref="images/MatchStatistics.png" width="80%"/>
+            </imageobject>
+          </mediaobject>
+        </figure></para>
+
+      <para>Стоит отметить, что статистические данные по проекту в целом можно использовать для оценки сложности задачи и исходя из этого определять цену перевода.</para>
+
+      <para>При расчёте последнего столбца пробелы между сегментами игнорируются. Несколько идентичных сегментов в тексте считаются повторениями. Первый экземпляр повторяющегося сегмента и составляющие его слова и символы будут считаться «уникальными», а все последующие экземпляры — копиями первого. Если перевод нескольких идентичных сегментов уже имеется в памяти переводов проекта, эти сегменты, вместе с уже переведёнными уникальными сегментами, попадают в категорию «точные совпадения». Если необходимо, число уникальных сегментов, как переведённых, так и не переведённых, можно посмотреть в окне статистики.</para>
+
+      <para>В остальных группах (50—100 %) учитываются не переведённые сегменты, для которых есть нечёткие совпадения. При этом, в отличии от расчёта числа повторений и точных совпадений, нечёткие совпадения ищутся не только во внутренней памяти проекта из каталога <filename>«/omegat»</filename>, но и в файлах памяти переводов из каталога <filename>«/tm»</filename>. Разница между внешними файлами памяти переводов и <filename>project_save.tmx</filename> в том, что внешние файлы не могут давать точных совпадений, только 100 %. Если вы не хотите, чтобы при подсчёте статистики учитывались внешние файлы памяти переводов, то вы можете либо удалить все файлы из каталога «/tm», либо в настройках проекта временно указать другой (пустой) каталог файлов памяти переводов.</para>
+
+      <para>Содержимое окна со статистикой по совпадениям можно легко скопировать, например, в электронную таблицу или в программу автоматизации бухгалтерского учёта с помощью сочетаний клавиш <guimenuitem>CTRL+A <indexterm class="singular">
+          <primary>Сочетания клавиш</primary> <secondary>Выделить всё - CTRL+A</secondary>
+        </indexterm></guimenuitem><guimenuitem>, CTRL+C <indexterm class="singular">
+          <primary>Сочетания клавиш</primary> <secondary>Копировать - CTRL+C</secondary>
+        </indexterm></guimenuitem>, <guimenuitem>CTRL+V <indexterm class="singular">
+          <primary>Сочетания клавиш</primary> <secondary>Вставить - CTRL+V</secondary>
+        </indexterm></guimenuitem>. Сразу после расчёта данные сохраняются в файл <filename>omegat/project_stats_match.txt.</filename> Обратите внимание на время создания файла, так как расчёты (в отличие от расчётов обычной статистики) проводятся не постоянно, данные могут быстро устареть.</para>
+    </section>
+
+    <section>
+      <title>Система помощи<indexterm class="singular">
+          <primary>Меню «Справка»</primary> <secondary>Система помощи</secondary>
+        </indexterm></title>
+
+      <para>Систему помощи (которая отображает данное руководство) можно вызвать нажатием клавиши <keycap><indexterm class="singular">
+          <primary>Сочетания клавиш</primary> <secondary>Справка - F1</secondary>
+        </indexterm>F1</keycap> или через <guimenuitem><indexterm class="singular">
+          <primary>Меню «Справка»</primary> <secondary>Руководство пользователя</secondary>
+        </indexterm>«Справка → Руководство пользователя...»</guimenuitem> в главном меню. В окне вы увидите само руководство и две кнопки: «Назад» и «Содержание». Руководство пользователя представляет собой HTML-документ со ссылками на различные разделы. Если вы щёлкнете по ссылке (так же, как в веб-браузере), в окне появится нужная страница.</para>
+
+      <para>Руководство пользователя расположено в подкаталоге «docs», внутри каталога, в который установлена ОмегаТ. Вы можете просмотреть, например, англоязычную документацию, открыв в вашем браузере файл <filename>docs/en/index.html</filename>. Таким образом вы сможете использовать и внешние ссылки (встроенная система помощи их не обрабатывает).</para>
+    </section>
+  </section>
+</chapter>

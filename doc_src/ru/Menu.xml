@@ -1,0 +1,1111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<chapter id="chapter.menu">
+  <title>Меню и сочетания клавиш</title>
+
+  <section id="ch04.main.menu">
+    <title><indexterm class="singular">
+        <primary>Меню</primary>
+      </indexterm>Главное меню</title>
+
+    <para>Все функции ОмегаТ доступны через меню, которое расположено выше окна редактирования. Кроме того большинство функций доступны через сочетания клавиш. Сочетания клавиш реализованы как нажатие клавиши <keycap>CTRL</keycap> и буквы. Некоторые сочетания включают и другие клавиши. Для удобства чтения в руководстве все буквы в сочетаниях клавиш приведены в верхнем регистре. <keycap>CTRL</keycap> используется на Windows, UNIX и UNIX-подобных операционных системах с клавиатурами, оснащёнными клавишей <keycap>CTRL</keycap> или <keycap>CONTROL</keycap>. Пользователи Mac должны использовать вместо неё клавишу <keycombo> <keycap>CMD</keycap> </keycombo>. Клавиша «CMD» на клавиатурах фирмы Apple помечена либо как «COMMAND» либо значком яблока.</para>
+
+    <para>Вы можете настраивать существующие сочетания клавиш или добавлять новые, в соответствии со своими предпочтениями. <link linkend="ch04.shortcuts.customization">См. Приложение – Настройка сочетаний клавиш</link></para>
+
+    <table colsep="1" id="table.main.menu">
+      <title>Главное меню</title>
+
+      <tgroup cols="7" colsep="1">
+        <tbody>
+          <row>
+            <entry><guimenuitem>Проект</guimenuitem></entry>
+
+            <entry><guimenuitem>Правка</guimenuitem></entry>
+
+            <entry><guimenuitem>Переход</guimenuitem></entry>
+
+            <entry><guimenuitem>Вид</guimenuitem></entry>
+
+            <entry><guimenuitem>Инструменты</guimenuitem></entry>
+
+            <entry><guimenuitem>Параметры</guimenuitem></entry>
+
+            <entry><guimenuitem>Справка</guimenuitem></entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+
+    <section id="submenu.Project">
+      <title>Проект<indexterm class="singular">
+          <primary>Меню</primary> <secondary>Проект</secondary>
+        </indexterm></title>
+
+      <table colsep="1">
+        <title>Меню «Проект»</title>
+
+        <tgroup cols="3" colsep="1">
+          <colspec align="left" colnum="1" colwidth="100"/>
+
+          <colspec align="left" colnum="2" colwidth="100"/>
+
+          <tbody>
+            <row>
+              <entry><guimenuitem>Создать</guimenuitem></entry>
+
+              <entry/>
+
+              <entry>Создаёт и открывает новый проект. Диалог создания проекта аналогичен диалогу редактирования проекта. См. <xref linkend="chapter.project.properties"/></entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Открыть</guimenuitem></entry>
+
+              <entry><keycombo>
+                  <keycap>CTRL</keycap> <keycap>O</keycap>
+                </keycombo></entry>
+
+              <entry>Открывает ранее созданный проект.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Импортировать исходные файлы...</guimenuitem></entry>
+
+              <entry/>
+
+              <entry>Копирует выбранные файлы в каталог <filename>source</filename> и перезагружает проект, чтобы загрузить новые файлы.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Импортировать из MediaWiki...</guimenuitem></entry>
+
+              <entry/>
+
+              <entry>Импортирует материалы со страниц MediaWiki по заданному URL.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Перезагрузить</guimenuitem></entry>
+
+              <entry><keycap>F5</keycap></entry>
+
+              <entry>Перезагружает проект, чтобы обработать изменения в файлах оригинала, памяти переводов, глоссариях или в настройках проекта.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Закрыть</guimenuitem></entry>
+
+              <entry><keycombo>
+                  <keycap>CTRL</keycap> <keycap>SHIFT</keycap> <keycap>W</keycap>
+                </keycombo></entry>
+
+              <entry>Сохраняет перевод и закрывает проект.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Сохранить</guimenuitem></entry>
+
+              <entry><keycombo>
+                  <keycap>CTRL</keycap> <keycap>S</keycap>
+                </keycombo></entry>
+
+              <entry>Сохраняет внутреннюю память переводов в файл. ОмегаТ автоматически сохраняет перевод каждые 10 минут, а также когда вы закрываете проект или выходите из программы.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Создать переведённые документы</guimenuitem></entry>
+
+              <entry><keycombo>
+                  <keycap>CTRL</keycap> <keycap>D</keycap>
+                </keycombo></entry>
+
+              <entry>Создаёт переведённые документы на основе вашего перевода. Документы будут находиться в папке <filename>/target</filename>.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Свойства...</guimenuitem></entry>
+
+              <entry><keycombo>
+                  <keycap>CTRL</keycap> <keycap>E</keycap>
+                </keycombo></entry>
+
+              <entry>Показывает диалоговое окно <link linkend="chapter.project.properties">Свойства проекта</link> для изменения языка и месторасположения папок проекта.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Файлы проекта...</guimenuitem></entry>
+
+              <entry><keycombo>
+                  <keycap>CTRL</keycap> <keycap>L</keycap>
+                </keycombo></entry>
+
+              <entry>Закрывает или открывает окно <link linkend="section.project.files">Файлы проекта</link> (в зависимости от того, открыто оно или закрыто).</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Выход</guimenuitem></entry>
+
+              <entry><keycombo>
+                  <keycap>CTRL</keycap> <keycap>Q</keycap>
+                </keycombo></entry>
+
+              <entry>Сохраняет проект и закрывает <application>ОмегаТ</application>. Если вы не сохранили проект вручную, то программа уточнит, действительно ли вы хотите выйти.</entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+    </section>
+
+    <section>
+      <title>Правка<indexterm class="singular">
+          <primary>Меню</primary> <secondary>Правка</secondary>
+        </indexterm></title>
+
+      <para>Примечание: команды, которые в других приложениях обычно находятся в этом меню (копировать/вырезать/вставить), в ОмегаТ не показываются, но доступны через сочетания клавиш вашей операционной системы. Например:</para>
+
+      <table colsep="1">
+        <title>Сочетания клавиш для копирования/вырезания/вставки текста</title>
+
+        <tgroup cols="3" colsep="1">
+          <colspec align="left" colnum="1" colwidth="100"/>
+
+          <colspec align="left" colnum="2" colwidth="100"/>
+
+          <tbody>
+            <row>
+              <entry><guimenuitem>Копировать</guimenuitem></entry>
+
+              <entry><keycombo>
+                  <keycap>CTRL</keycap> <keycap>C</keycap>
+                </keycombo></entry>
+
+              <entry>Копирует выделенный текст в буфер обмена.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Вырезать</guimenuitem></entry>
+
+              <entry><keycombo>
+                  <keycap>CTRL</keycap> <keycap>X</keycap>
+                </keycombo></entry>
+
+              <entry>Копирует выделенный текст в буфер обмена и удаляет его.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Вставить</guimenuitem></entry>
+
+              <entry><keycombo>
+                  <keycap>CTRL</keycap> <keycap>V</keycap>
+                </keycombo></entry>
+
+              <entry>Вставляет текст из буфера обмена в позицию курсора.</entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+
+      <para>Само меню «Правка» содержит следующие пункты:</para>
+
+      <table colsep="1">
+        <title>Меню «Правка»</title>
+
+        <tgroup cols="3" colsep="1">
+          <colspec align="left" colnum="1" colwidth="100"/>
+
+          <colspec align="left" colnum="2" colwidth="100"/>
+
+          <tbody>
+            <row>
+              <entry><guimenuitem>Отменить последнее действие</guimenuitem></entry>
+
+              <entry><keycombo>
+                  <keycap>CTRL</keycap> <keycap>Z</keycap>
+                </keycombo></entry>
+
+              <entry>Возвращает в состояние до того, как было проделано последнее действие по редактированию. Не работает после того, как изменённый сегмент был отправлен в память переводов.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Повторить последнее действие</guimenuitem></entry>
+
+              <entry><keycombo>
+                  <keycap>CTRL</keycap> <keycap>Y</keycap>
+                </keycombo></entry>
+
+              <entry>Возвращает в состояние до того, как последнее действие по редактированию было отменено. Не работает после того, как изменённый сегмент был отправлен в память переводов.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Заменить на совпадение</guimenuitem></entry>
+
+              <entry><keycombo>
+                  <keycap>CTRL</keycap> <keycap>R</keycap>
+                </keycombo></entry>
+
+              <entry>Заменяет весь сегмент перевода текущим нечётким совпадением (по умолчанию выбирается первое совпадение).</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Вставить совпадение</guimenuitem></entry>
+
+              <entry><keycombo>
+                  <keycap>CTRL</keycap> <keycap>I</keycap>
+                </keycombo></entry>
+
+              <entry>Вставляет выбранное нечёткое совпадение в позицию курсора. Если часть уже существующего перевода была выделена, эта функция заменит только её.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Заменить на машинный перевод</guimenuitem></entry>
+
+              <entry><keycombo>
+                  <keycap>CTRL</keycap> <keycap>M</keycap>
+                </keycombo></entry>
+
+              <entry>Перезаписывает весь текущий перевод на машинный. Эта функция работает, только если активирована хотя бы одна система машинного перевода (см. ниже «Меню &gt; Параметры»).</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Заменить на оригинал</guimenuitem></entry>
+
+              <entry><keycombo>
+                  <keycap>SHIFT</keycap> <keycap>CTRL</keycap> <keycap>R</keycap>
+                </keycombo></entry>
+
+              <entry>Заменяет весь сегмент перевода исходным сегментом.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Вставить оригинал</guimenuitem></entry>
+
+              <entry><keycombo>
+                  <keycap>SHIFT</keycap> <keycap>CTRL</keycap> <keycap>I</keycap>
+                </keycombo></entry>
+
+              <entry>Вставляет текст оригинала в позицию курсора.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Вставить теги оригинала</guimenuitem></entry>
+
+              <entry><keycombo>
+                  <keycap>SHIFT</keycap> <keycap>CTRL</keycap> <keycap>T</keycap>
+                </keycombo></entry>
+
+              <entry><indexterm class="singular">
+                  <primary>Теги</primary> <secondary>Вставка тегов оригинала</secondary>
+                </indexterm>Вставляет теги оригинала в позицию курсора. Все теги исходного сегмента, т.е. все теги ОмегаТ, а также специальные теги, теги Java, printf и т.д., будут вставлены в текущую позицию курсора, вне зависимости от того, используются ли они уже в переводе или нет. Элементы текста находившиеся между тегами заменяются пробелами: <literal>&lt;f0&gt;&lt;f1&gt;Этот текст&lt;/f0&gt;&lt;/f1&gt;</literal> будет заменён <literal>&lt;f0&gt;&lt;f1&gt;одним_пробелом&lt;/f0&gt;&lt;/f1&gt;</literal></entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Экспортировать выделенный текст</guimenuitem></entry>
+
+              <entry><keycombo>
+                  <keycap>SHIFT</keycap> <keycap>CTRL</keycap> <keycap>C</keycap>
+                </keycombo></entry>
+
+              <entry>Экспортирует выделенный текст в файл для дальнейшей обработки. Если ничего не выделено, то экспортируется текущий сегмент целиком. Когда пользователь закрывает <application>ОмегаТ</application>, содержимое этого файла не стирается, по аналогии с обычным поведением буфера обмена. Экспортированный фрагмент копируется в файл <filename>selection.txt</filename>, расположенный в папке с пользовательскими настройками (см. раздел <xref linkend="chapter.files.and.directories"/>).</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Добавить в глоссарий</guimenuitem></entry>
+
+              <entry><keycombo>
+                  <keycap>SHIFT</keycap> <keycap>CTRL</keycap> <keycap>G</keycap>
+                </keycombo></entry>
+
+              <entry>Позволяет пользователю добавить запись в глоссарий по умолчанию.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Поиск в проекте...</guimenuitem></entry>
+
+              <entry><keycombo>
+                  <keycap>CTRL</keycap> <keycap>F</keycap>
+                </keycombo></entry>
+
+              <entry>Открывает новое <link linkend="section.search.window">окно поиска</link>.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Сменить регистр на...</guimenuitem></entry>
+
+              <entry><keycombo> <keycap>SHIFT</keycap> <keycap>F3</keycap> </keycombo> (см. описание)</entry>
+
+              <entry>Изменяет регистр выделенного текста в сегменте перевода по одному из выбранных шаблонов (строчные буквы, прописные буквы, каждое слово с прописной буквы). Используйте SHIFT + F3 <indexterm>
+                  <primary>Сочетания клавиш</primary> <secondary>Выбор регистра - SHIFT+F3</secondary>
+                </indexterm>чтобы циклически изменять регистр. Если ничего не выделено, то <application>ОмегаТ</application> выделяет слово, содержащее букву, которая находится справа от курсора.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Выбрать совпадение №</guimenuitem></entry>
+
+              <entry><keycombo>
+                  <keycap>CTRL</keycap> <keycap>№ N</keycap>
+                </keycombo></entry>
+
+              <entry>(№ N - это число от 1 до 5) Выбирает нечёткое совпадение с соответствующим номером в области просмотра совпадений, чтобы использовать его для замены или вставки в текущий сегмент. В <xref linkend="match.viewer"/> подробно описывается цветовое кодирование.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Использовать как перевод по умолчанию</guimenuitem></entry>
+
+              <entry/>
+
+              <entry>Если для текущего сегмента имеется несколько вариантов перевода, вы можете пометить выбранный вариант как перевод по умолчанию. Если доступен только один вариант, сегмент будет затенён серым цветом.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Создать вариант перевода</guimenuitem></entry>
+
+              <entry/>
+
+              <entry>Один и тот же сегмент, в зависимости от контекста, может переводится по-разному. Если текущий вариант перевода не подходит, выберите этот пункт меню и введите новый вариант.</entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+    </section>
+
+    <section id="submenu.GoTo">
+      <title>Переход<indexterm class="singular">
+          <primary>Меню</primary> <secondary>Переход</secondary>
+        </indexterm></title>
+
+      <table colsep="1">
+        <title>Меню «Переход»</title>
+
+        <tgroup cols="3" colsep="1">
+          <colspec align="left" colnum="1" colwidth="100"/>
+
+          <colspec align="left" colnum="2" colwidth="100"/>
+
+          <tbody>
+            <row>
+              <entry><guimenuitem>Следующий непереведённый сегмент</guimenuitem></entry>
+
+              <entry><keycombo>
+                  <keycap>CTRL</keycap> <keycap>U</keycap>
+                </keycombo></entry>
+
+              <entry>Переход к следующему сегменту, который не имеет эквивалента в памяти переводов.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Следующий сегмент</guimenuitem></entry>
+
+              <entry><keycombo> <keycap>CTRL</keycap> <keycap>N</keycap> </keycombo> или <keycap>ВВОД</keycap> или <keycap>TAB</keycap></entry>
+
+              <entry>Переход к следующему сегменту. Если текущий сегмент является последним в файле, то происходит переход к первому сегменту следующего файла.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Предыдущий сегмент</guimenuitem></entry>
+
+              <entry><keycombo> <keycap>CTRL</keycap> <keycap>P</keycap> </keycombo> или <keycombo> <keycap>CTRL</keycap> <keycap>ВВОД</keycap> </keycombo> или <keycombo> <keycap>CTRL</keycap> <keycap>TAB</keycap> </keycombo></entry>
+
+              <entry>Переход к предыдущему сегменту. Если текущий сегмент является первым в файле, то происходит переход к последнему сегменту предыдущего файла.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Сегмент с номером...</guimenuitem></entry>
+
+              <entry><keycombo>
+                  <keycap>CTRL</keycap> <keycap>J</keycap>
+                </keycombo></entry>
+
+              <entry>Открывает сегмент с заданным номером.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Следующее примечание</guimenuitem></entry>
+
+              <entry/>
+
+              <entry>Открывает следующий сегмент с примечанием.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Предыдущее примечание</guimenuitem></entry>
+
+              <entry/>
+
+              <entry>Открывает предыдущий сегмент с примечанием.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Вперёд...</guimenuitem></entry>
+
+              <entry><keycombo>
+                  <keycap>CTRL</keycap> <keycap>SHIFT</keycap> <keycap>N</keycap>
+                </keycombo></entry>
+
+              <entry><application>ОмегаТ</application> запоминает последовательность работы с сегментами. С помощью этой команды вы можете перейти к сегменту, с которым вы работали ранее, но переключились на другой командной <guimenuitem>«Назад...»</guimenuitem>.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Назад...</guimenuitem></entry>
+
+              <entry><keycombo>
+                  <keycap>CTRL</keycap> <keycap>SHIFT</keycap> <keycap>P</keycap>
+                </keycombo></entry>
+
+              <entry>С помощью этой команды вы можете вернуться назад, на сегмент с которым работали ранее, чтобы переключится на текущий сегмент позднее, с помощью описанной выше команды <guimenuitem>«Вперёд...»</guimenuitem>. </entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+    </section>
+
+    <section id="submenu.View">
+      <title>Вид<indexterm class="singular">
+          <primary>Меню</primary> <secondary>Вид</secondary>
+        </indexterm></title>
+
+      <table colsep="1">
+        <title>Меню «Вид»</title>
+
+        <tgroup cols="2" colsep="1">
+          <colspec align="left" colnum="1" colwidth="100"/>
+
+          <tbody>
+            <row>
+              <entry><guimenuitem>Выделить переведённые сегменты</guimenuitem></entry>
+
+              <entry>Если флажок установлен, переведённые сегменты будут выделяться жёлтым.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Выделить непереведённые сегменты</guimenuitem></entry>
+
+              <entry>Если флажок установлен, непереведённые сегменты будут выделяться фиолетовым.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Показать сегменты оригинала</guimenuitem></entry>
+
+              <entry>Если флажок установлен, ОмегаТ покажет все исходные сегменты (даже переведённые) и выделит их зелёным. Если флажок снят, исходные сегменты показываться не будут.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Выделить не уникальные сегменты</guimenuitem></entry>
+
+              <entry>Если флажок установлен, не уникальные сегменты будут затеняться серым.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Выделить сегменты с примечаниями</guimenuitem></entry>
+
+              <entry>Если флажок установлен, сегменты с примечаниями будут выделяться голубым. Сегменты будут выделяться голубым вне зависимости от флажков «Выделять переведённые сегменты» и «Выделять непереведённые сегменты».</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Выделить неразрывные пробелы</guimenuitem></entry>
+
+              <entry>Если флажок установлен, неразрывные пробелы в сегменте будут показаны серым фоном.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Сведения об изменении</guimenuitem></entry>
+
+              <entry>Если выбрать пункт <emphasis>Показать для выбранного сегмента</emphasis>, то над текущим сегментом будут показаны время и автор его последнего изменения. Если выбрать пункт <emphasis>Показать для всех сегментов</emphasis>, то эта информация появится над всеми сегментами, а при выборе пункта <emphasis>Ничего не показывать</emphasis>, то она будет скрыта.</entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+    </section>
+
+    <section id="submenu.Tools">
+      <title>Инструменты<indexterm class="singular">
+          <primary>Меню</primary> <secondary>Инструменты</secondary>
+        </indexterm></title>
+
+      <table colsep="1">
+        <title>Меню «Инструменты»</title>
+
+        <indexterm class="singular">
+          <primary>Совпадения</primary> <secondary>Статистика по совпадениям</secondary>
+        </indexterm>
+
+        <indexterm class="singular">
+          <primary>Проект</primary> <secondary>Статистика по совпадениям</secondary>
+        </indexterm>
+
+        <indexterm class="singular">
+          <primary>Проект</primary> <secondary>Статистика</secondary>
+        </indexterm>
+
+        <tgroup cols="2" colsep="1">
+          <colspec align="left" colnum="1" colwidth="100"/>
+
+          <tbody>
+            <row>
+              <entry><guimenuitem>Проверить теги</guimenuitem></entry>
+
+              <entry><guimenu>CTRL+T</guimenu>: Проверяет отсутствующие или неправильные теги в файлах с форматированием. Показывает список сегментов с ошибками и несоответствиями тегов. См. раздел <link linkend="section.tag.validation">Проверка тегов</link> и <xref linkend="chapter.formatted.text"/>.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Удалить теги</guimenuitem></entry>
+
+              <entry>Если флажок установлен, все теги удаляются из исходных сегментов. Эта опция полезна при работе с документами, в которых внутреннее форматирование предложений не играет особо важной роли (например, в сканированных PDF-файлах, плохо преобразованных ODF- и DOCX-файлах и т.д.). Удаляются только теги внутри предложений, так что проблем с открытием переведённых документов возникать не должно. Невидимое форматирование (т.е. такое, которое не показывается в области редактирования ОмегаТ в виде тегов) в переведённых документах сохраняется.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Статистика</guimenuitem></entry>
+
+              <entry>Открывает новое окно и показывает статистику по проекту, т.е. статистику по проекту в целом и по каждому отдельному файлу в проекте.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Статистика по совпадениям</guimenuitem></entry>
+
+              <entry>Отображает статистику проекта по совпадениям: для сегментов, слов и символов показывается число повторений, точных совпадений и нечётких совпадений.</entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+    </section>
+
+    <section id="submenu.Options">
+      <title><indexterm class="singular">
+          <primary>Меню</primary> <secondary>Параметры</secondary>
+        </indexterm>Параметры</title>
+
+      <table colsep="1">
+        <title>Меню «Параметры»</title>
+
+        <tgroup cols="2" colsep="1">
+          <colspec align="left" colnum="1" colwidth="100"/>
+
+          <tbody>
+            <row>
+              <entry><guimenuitem>Использовать TAB для перехода</guimenuitem></entry>
+
+              <entry>Использовать для перехода на следующий сегмент клавишу <guimenuitem>TAB</guimenuitem> вместо стандартного <guimenuitem>ВВОД</guimenuitem>. Это полезно, например, при работе с китайской, японской или корейской системами письма.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Всегда подтверждать выход</guimenuitem></entry>
+
+              <entry>Всегда уточнять, действительно ли вы хотите выйти.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Машинный перевод</guimenuitem></entry>
+
+              <entry>Позволяет включать и отключать использование систем машинного перевода. Если какая-либо система используется, при нажатии сочетания клавиш <keycombo> <keycap>CTRL</keycap> <keycap>M</keycap> </keycombo> в поле редактирования будет вставляться машинный перевод текущего сегмента.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Глоссарий</guimenuitem></entry>
+
+              <entry>Пункт меню зарезервирован, для последующего использования каким-либо модулем.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Советы</guimenuitem></entry>
+
+              <entry>Позволяет включать/выключать <emphasis>Советы </emphasis> с параметром <emphasis> Точное совпадение.</emphasis> Если <emphasis>Советы </emphasis> включены, при щелчке правой кнопкой мыши по подчёркнутому слову в исходном сегменте будет появляться контекстное меню с соответствующей записью из глоссария. Вы можете щёлкнуть по предпочитаемому переводу и вставить его в перевод, рядом с текущей позицией курсора. Если включён параметр <emphasis>Советы/Точное совпадение </emphasis>, будут проверяться только слова целиком, в противном случае программа будет также проверять части слов.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Шрифт...</guimenuitem></entry>
+
+              <entry>Показывает диалог для выбора шрифта программы. Если у вас очень старый компьютер и изменение размера окон происходит очень медленно, попробуйте сменить шрифт. Более подробно настройки шрифтов описаны в разделе <link linkend="chapter.misc">Разное</link></entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Файловые фильтры...</guimenuitem></entry>
+
+              <entry>Показывает диалог <link linkend="chapter.file.filters">Файловые фильтры</link> для настройки параметров обработки файлов.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Сегментация...</guimenuitem></entry>
+
+              <entry>Открывает диалоговое окно <link linkend="chapter.segmentation">Параметры сегментации</link> для настройки сегментации текста.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Проверка орфографии...</guimenuitem></entry>
+
+              <entry>Показывает окно <link linkend="chapter.spellchecker">Параметры проверки орфографии</link>, которое позволяет установить, настроить и включить проверку орфографии.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Параметры редактирования...</guimenuitem></entry>
+
+              <entry>Показывает диалог <link linkend="chapter.translation.editing">Настройка параметров редактирования</link>.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Проверка тегов...</guimenuitem></entry>
+
+              <entry>Для программистов: позволяет изменять параметры проверки тегов и включать в проверку различные программные (%...) переменные.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Команда...</guimenuitem></entry>
+
+              <entry>Введите ваше имя и оно будет использоваться для подписи переведённых вами сегментов.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Внешние TMX...</guimenuitem></entry>
+
+              <entry>Это диалоговое окно позволяет настроить обработку тегов из внешних (т.е. созданных не ОмегаТ) TMX-файлов.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Вид...</guimenuitem></entry>
+
+              <entry>Позволяет настроить отображение исходных сегментов полужирным шрифтом и затенять первые экземпляры не уникальных сегментов.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Сохранить</guimenuitem></entry>
+
+              <entry>Позволяет пользователю задать интервал, в минутах и секундах, между автоматическими сохранениями проекта. Минимальный интервал составляет 10 секунд.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Прокси...</guimenuitem></entry>
+
+              <entry>Если для доступа к проектам используется прокси, в этом диалоговом окне нужно ввести имя пользователя и пароль.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Восстановить главное окно</guimenuitem></entry>
+
+              <entry>Возвращает компоненты главного окна ОмегаТ к расстановке по умолчанию. Используйте эту функцию в случае, если вы переместили, скрыли или отсоединили компоненты окна и не можете вернуть их в желаемое состояние. Также эту функцию стоит использовать, если после обновления ОмегаТ некоторые области расположены не так, как ожидалось.</entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+    </section>
+
+    <section id="submenu.Help">
+      <title>Справка<indexterm class="singular">
+          <primary>Меню</primary> <secondary>Справка</secondary>
+        </indexterm></title>
+
+      <table colsep="1">
+        <title>Меню «Справка»</title>
+
+        <tgroup cols="2" colsep="1">
+          <colspec align="left" colnum="1" colwidth="100"/>
+
+          <tbody>
+            <row>
+              <entry><guimenuitem>Руководство пользователя...</guimenuitem></entry>
+
+              <entry><keycap>F1:</keycap> Открывает в отдельном окне систему помощи с этим руководством.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>О программе...</guimenuitem></entry>
+
+              <entry>Показывает информацию об авторских правах, создателях и лицензии.</entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+    </section>
+  </section>
+
+  <section id="keyboard.shortcuts">
+    <title>Сочетания клавиш<indexterm class="singular">
+        <primary>Сочетания клавиш</primary>
+      </indexterm></title>
+
+    <para>Нижеописанные сочетания клавиш доступны из главного окна. Когда на переднем плане находится другое окно, щёлкните по главному окну, чтобы вернуть его на передний план или нажмите <keycap>ESC</keycap> чтобы закрыть другое окно.</para>
+
+    <para>Сочетания клавиш реализованы как нажатие клавиши <keycap>CTRL</keycap> и буквы. Некоторые сочетания включают и другие клавиши. Для удобства чтения в руководстве все буквы в сочетаниях клавиш приведены в верхнем регистре.</para>
+
+    <para>CTRL используется на Windows, UNIX и UNIX-подобных операционных системах с клавиатурами, оснащёнными клавишей <keycap>CTRL</keycap> или <keycap>CONTROL</keycap>. Пользователи Mac должны вместо него использовать сочетания клавиш <guimenuitem>CMD+клавиша.</guimenuitem> На клавиатурах Apple вместо клавиши <guimenuitem>CMD</guimenuitem> используется клавиша «COMMAND» или клавиша с изображением яблока.</para>
+
+    <itemizedlist>
+      <listitem>
+        <para>Управление проектом</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Редактирование</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Перемещение</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Информационные окна</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Другие</para>
+      </listitem>
+    </itemizedlist>
+
+    <section>
+      <title id="keyboard.project.management"><indexterm class="singular">
+          <primary>Сочетания клавиш</primary> <secondary>Проект</secondary>
+        </indexterm>Управление проектом<indexterm class="singular">
+          <primary>Проекта</primary> <secondary>Сочетания клавиш для управления проектом</secondary>
+        </indexterm></title>
+
+      <table colsep="1">
+        <title>Сочетания клавиш для управления проектом</title>
+
+        <tgroup cols="3" colsep="1">
+          <colspec align="left" colnum="1" colwidth="100"/>
+
+          <colspec align="left" colnum="2" colwidth="100"/>
+
+          <tbody>
+            <row>
+              <entry>Открыть проект</entry>
+
+              <entry><keycombo>
+                  <keycap>CTRL</keycap> <keycap>O</keycap>
+                </keycombo></entry>
+
+              <entry>Показывает диалог открытия существующего проекта.</entry>
+            </row>
+
+            <row>
+              <entry>Сохранить</entry>
+
+              <entry><keycombo>
+                  <keycap>CTRL</keycap> <keycap>S</keycap>
+                </keycombo></entry>
+
+              <entry>Сохраняет текущий перевод во внутренней памяти переводов (файле «project_save.tmx», расположенном в папке <filename>omegat</filename> вашего проекта).</entry>
+            </row>
+
+            <row>
+              <entry>Закрыть проект</entry>
+
+              <entry><keycombo>
+                  <keycap>SHIFT</keycap> <keycap>CTRL</keycap> <keycap>W</keycap>
+                </keycombo></entry>
+
+              <entry>Закрывает текущий проект</entry>
+            </row>
+
+            <row>
+              <entry>Создать переведённые документы</entry>
+
+              <entry><keycombo>
+                  <keycap>CTRL</keycap> <keycap>D</keycap>
+                </keycombo></entry>
+
+              <entry>Создаёт переведённые документы в папке «target» вашего проекта, а также создаёт файлы памяти переводов (TMX-файлы «level1», «level2» и «omegat») в корневом каталоге проекта.</entry>
+            </row>
+
+            <row>
+              <entry>Свойства проекта</entry>
+
+              <entry><keycombo>
+                  <keycap>CTRL</keycap> <keycap>E</keycap>
+                </keycombo></entry>
+
+              <entry>Показывает настройки проекта для редактирования.</entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+    </section>
+
+    <section id="keyboard.editing">
+      <title><indexterm class="singular">
+          <primary>Сочетания клавиш</primary> <secondary>Редактирование</secondary>
+        </indexterm>Редактирование<indexterm class="singular">
+          <primary>Сочетания клавиш</primary> <secondary>Переход</secondary>
+        </indexterm></title>
+
+      <table colsep="1">
+        <title>Сочетания клавиш для редактирования текста</title>
+
+        <tgroup cols="3" colsep="1">
+          <colspec align="left" colnum="1" colwidth="100"/>
+
+          <colspec align="left" colnum="2" colwidth="100"/>
+
+          <tbody>
+            <row>
+              <entry>Отменить последнее действие</entry>
+
+              <entry><keycombo>
+                  <keycap>CTRL</keycap> <keycap>Z</keycap>
+                </keycombo></entry>
+
+              <entry>Отменяет последнее изменение перевода текущего сегмента</entry>
+            </row>
+
+            <row>
+              <entry>Повторить последнее действие</entry>
+
+              <entry><keycombo>
+                  <keycap>CTRL</keycap> <keycap>Y</keycap>
+                </keycombo></entry>
+
+              <entry>Повторяет последнее отменённое изменение перевода текущего сегмента</entry>
+            </row>
+
+            <row>
+              <entry>Выбрать совпадение № N</entry>
+
+              <entry><keycombo>
+                  <keycap>CTRL</keycap> <keycap>№ N</keycap>
+                </keycombo></entry>
+
+              <entry>№ N - это номер от 1 до 5. Эта комбинация выбирает соответствующее номеру совпадение, показанное в окне просмотра совпадений (по умолчанию выбирается первое совпадение)</entry>
+            </row>
+
+            <row>
+              <entry>Заменить на совпадение</entry>
+
+              <entry><keycombo>
+                  <keycap>CTRL</keycap> <keycap>R</keycap>
+                </keycombo></entry>
+
+              <entry>Заменяет весь перевод сегмента выбранным нечётким совпадением (по умолчанию выбирается первое совпадение)</entry>
+            </row>
+
+            <row>
+              <entry>Вставить совпадение</entry>
+
+              <entry><keycombo>
+                  <keycap>CTRL</keycap> <keycap>I</keycap>
+                </keycombo></entry>
+
+              <entry>Вставляет выбранное совпадение в позицию курсора в текущем переводе сегмента (по умолчанию вставляется первое совпадение)</entry>
+            </row>
+
+            <row>
+              <entry>Заменить на оригинал</entry>
+
+              <entry><keycombo>
+                  <keycap>CTRL</keycap> <keycap>SHIFT+R</keycap>
+                </keycombo></entry>
+
+              <entry>Перезаписывает весь текущий перевода содержимым исходного сегмента</entry>
+            </row>
+
+            <row>
+              <entry>Вставить оригинал</entry>
+
+              <entry><keycombo>
+                  <keycap>CTRL</keycap> <keycap>SHIFT+I</keycap>
+                </keycombo></entry>
+
+              <entry>Вставляет теги оригинала в позицию курсора</entry>
+            </row>
+
+            <row>
+              <entry>Вставить теги оригинала</entry>
+
+              <entry><keycombo>
+                  <keycap>CTRL</keycap> <keycap>SHIFT+T</keycap>
+                </keycombo></entry>
+
+              <entry>Вставляет теги оригинала в позицию курсора</entry>
+            </row>
+
+            <row>
+              <entry>Поиск в проекте</entry>
+
+              <entry><keycombo>
+                  <keycap>CTRL</keycap> <keycap>F</keycap>
+                </keycombo></entry>
+
+              <entry>Показывает диалог поиска в проекте</entry>
+            </row>
+
+            <row>
+              <entry>Заменить на машинный перевод</entry>
+
+              <entry><keycombo>
+                  <keycap>CTRL</keycap> <keycap>M</keycap>
+                </keycombo></entry>
+
+              <entry>Перезаписывает текущий перевод на машинный. Эта функция работает, только если функция машинного перевода включена (см. «Меню &gt; Параметры &gt; Машинный перевод»).</entry>
+            </row>
+
+            <row>
+              <entry>Экспортировать выделенный текст</entry>
+
+              <entry><keycombo>
+                  <keycap>SHIFT</keycap> <keycap>CTRL</keycap> <keycap>C</keycap>
+                </keycombo></entry>
+
+              <entry>Экспортирует выделенный текст в файл для дальнейшей обработки.</entry>
+            </row>
+
+            <row>
+              <entry>Добавить в глоссарий</entry>
+
+              <entry><keycombo>
+                  <keycap>SHIFT</keycap> <keycap>CTRL</keycap> <keycap>G</keycap>
+                </keycombo></entry>
+
+              <entry>Позволяет пользователю добавить запись в глоссарий по умолчанию.</entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+    </section>
+
+    <section id="keyboard.moving.around">
+      <title><indexterm class="singular">
+          <primary>Сочетания клавиш</primary> <secondary>Переход</secondary>
+        </indexterm>Перемещение</title>
+
+      <table colsep="1">
+        <title>Сочетания клавиш для перемещения</title>
+
+        <tgroup cols="3" colsep="1">
+          <colspec align="left" colnum="1" colwidth="100"/>
+
+          <colspec align="left" colnum="2" colwidth="100"/>
+
+          <tbody>
+            <row>
+              <entry>Следующий непереведённый сегмент</entry>
+
+              <entry><keycombo>
+                  <keycap>CTRL</keycap> <keycap>U</keycap>
+                </keycombo></entry>
+
+              <entry>Переход к следующему сегменту, который не зарегистрирован в памяти переводов проекта.</entry>
+            </row>
+
+            <row>
+              <entry>Следующий сегмент</entry>
+
+              <entry><keycombo> <keycap>CTRL</keycap> <keycap>N</keycap> </keycombo> или <keycap>ВВОД</keycap></entry>
+
+              <entry>Переход к следующему сегменту.</entry>
+            </row>
+
+            <row>
+              <entry>Предыдущий сегмент</entry>
+
+              <entry><keycombo>
+                  <keycap>CTRL</keycap> <keycap>P</keycap>
+                </keycombo></entry>
+
+              <entry>Переход к предыдущему сегменту.</entry>
+            </row>
+
+            <row>
+              <entry>Сегмент с номером...</entry>
+
+              <entry><keycombo>
+                  <keycap>CTRL</keycap> <keycap>J</keycap>
+                </keycombo></entry>
+
+              <entry>Переход к сегменту с указанным номером</entry>
+            </row>
+
+            <row>
+              <entry>Назад...</entry>
+
+              <entry><keycombo>
+                  <keycap>CTRL</keycap> <keycap>SHIFT+P</keycap>
+                </keycombo></entry>
+
+              <entry>Переход к предыдущему сегменту в истории</entry>
+            </row>
+
+            <row>
+              <entry>Вперёд...</entry>
+
+              <entry><keycombo>
+                  <keycap>CTRL</keycap> <keycap>SHIFT+N</keycap>
+                </keycombo></entry>
+
+              <entry>Переход к следующему сегменту в истории</entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+    </section>
+
+    <section id="keyboard.other">
+      <title><indexterm class="singular">
+          <primary>Сочетания клавиш</primary> <secondary>Другие</secondary>
+        </indexterm>Другие</title>
+
+      <table colsep="1">
+        <title>Различные сочетания клавиш</title>
+
+        <tgroup cols="3" colsep="1">
+          <colspec align="left" colnum="1" colwidth="100"/>
+
+          <colspec align="left" colnum="2" colwidth="100"/>
+
+          <tbody>
+            <row>
+              <entry>Список файлов проекта</entry>
+
+              <entry><keycombo>
+                  <keycap>CTRL</keycap> <keycap>L</keycap>
+                </keycombo></entry>
+
+              <entry>Показывает список файлов проекта.</entry>
+            </row>
+
+            <row>
+              <entry>Проверить теги</entry>
+
+              <entry><keycombo>
+                  <keycap>CTRL</keycap> <keycap>T</keycap>
+                </keycombo></entry>
+
+              <entry>Открывает окно проверки тегов</entry>
+            </row>
+
+            <row>
+              <entry>Экспортировать выделенный текст</entry>
+
+              <entry><keycombo>
+                  <keycap>SHIFT</keycap> <keycap>CTRL+C</keycap>
+                </keycombo></entry>
+
+              <entry>Экспортирует выделенный текст или весь исходный сегмент. Текст экспортируется в простой текстовый файл.</entry>
+            </row>
+
+            <row>
+              <entry>Поиск в проекте</entry>
+
+              <entry><keycombo>
+                  <keycap>CTRL</keycap> <keycap>F</keycap>
+                </keycombo></entry>
+
+              <entry>Открывает новое окно поиска.</entry>
+            </row>
+
+            <row>
+              <entry>Файлы помощи</entry>
+
+              <entry><keycap>F1</keycap></entry>
+
+              <entry>Показывает в отдельном окне систему помощи <application>ОмегаТ</application>.</entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+    </section>
+  </section>
+</chapter>

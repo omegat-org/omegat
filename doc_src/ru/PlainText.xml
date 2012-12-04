@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<chapter id="chapter.plain.text">
+  <title>Работа с простыми текстовыми файлами<indexterm class="singular">
+      <primary>Исходные файлы</primary> <secondary>Простые текстовые файлы</secondary>
+    </indexterm></title>
+
+  <section id="default.encoding">
+    <title>Кодировка по умолчанию<indexterm class="singular">
+        <primary>Кодировка</primary> <secondary>Простые текстовые файлы</secondary>
+      </indexterm><indexterm class="singular">
+        <primary>Исходные файлы</primary> <secondary>Кодировка</secondary>
+      </indexterm></title>
+
+    <para>Простые текстовые файлы, в большинстве случаев имеющие расширение «txt», содержат только текст, и нет чёткого способа сообщить компьютеру, на каком языке этот текст написан. Самое большее, что ОмегаТ может сделать в этом случае, это считать, что текст написан на том же языке, что и язык, используемый операционной системой. Для файлов в 16-битной Юникод-кодировке такой проблемы не существует. Однако, если файл имеет 8-битную кодировку, может возникнуть следующая неприятная ситуация: вместо отображения текста на японском языке...</para>
+
+    <mediaobject>
+      <imageobject role="html">
+        <imagedata fileref="images/OmT_Japanese.png"/>
+      </imageobject>
+
+      <imageobject role="fo">
+        <imagedata fileref="images/OmT_Japanese.png" width="60%"/>
+      </imageobject>
+    </mediaobject>
+
+    <para>...программа покажет следующее:</para>
+
+    <mediaobject>
+      <imageobject role="html">
+        <imagedata fileref="images/OmT_Cyrillic.png"/>
+      </imageobject>
+
+      <imageobject role="fo">
+        <imagedata fileref="images/OmT_Cyrillic.png" width="60%"/>
+      </imageobject>
+    </mediaobject>
+
+    <para>Компьютер, на котором установлена ОмегаТ, работает на русском языке, и, соответственно, вместо иероглифов кандзи, программа пытается использовать кириллицу.</para>
+  </section>
+
+  <section id="OmegaT.solution">
+    <title>Подход <application>ОмегаТ</application></title>
+
+    <para>В целом, в <application>ОмегаТ</application> есть три метода борьбы с этой проблемой. Все они основываются на использовании файловых фильтров в меню <emphasis role="bold">Параметры</emphasis>.</para>
+
+    <variablelist>
+      <varlistentry>
+        <term>Измените кодировку исходных файлов на Юникод.</term>
+
+        <listitem>
+          <para>откройте исходный файл в текстовом редакторе, который корректно распознаёт кодировку и сохраните файл в кодировке <emphasis role="bold">«UTF-8»</emphasis>. Измените расширения файла с <literal>.txt</literal> на <literal>.utf8.</literal> <application>ОмегаТ</application> автоматически распознает его как UTF-8 файл. Этот подход наиболее разумен, так как позволяет избавиться от многих проблем в дальнейшем.</para>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+
+    <variablelist>
+      <varlistentry>
+        <term>Укажите кодировку текстовых файлов</term>
+
+        <listitem>
+          <para>то есть файлов с расширением <filename>.txt </filename>: в секции <emphasis role="bold">Текстовые файлы</emphasis> диалогового окна «Файловые фильтры» измените <emphasis role="bold">кодировку исходных файлов</emphasis> с «&lt;auto&gt;» на кодировку, соответствующую вашим исходным <filename>.txt</filename>-файлам, например, на «.jp» для примера выше.</para>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+
+    <variablelist>
+      <varlistentry>
+        <term>Измените расширение исходных текстовых файлов</term>
+
+        <listitem>
+          <para>например, для японских текстовых файлов с <filename>.txt</filename> на <filename>.jp</filename>: в секции <emphasis role="bold">Текстовые файлы</emphasis> диалогового окна «Файловые фильтры» добавьте новый <emphasis role="bold">Шаблон имени исходного файла</emphasis> (например, на <filename>*.jp</filename> для вышеприведённого примера) и выберите необходимые кодировки оригинала и перевода.</para>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+
+    <para>По умолчанию в <application>ОмегаТ</application> включены следующие настройки, чтобы вам было легче работать с некоторыми текстовыми файлами:</para>
+
+    <itemizedlist>
+      <listitem>
+        <para>файлы <literal>.txt</literal> автоматически («&lt;auto&gt;») считаются сохранёнными в кодировке компьютера по умолчанию.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>файлы <literal>.txt1</literal> считаются сохранёнными в кодировке ISO-8859-1, которая покрывает большинство языков <emphasis role="bold">Западной Европы</emphasis>.<indexterm class="singular">
+            <primary>Кодировка</primary> <secondary>Западноевропейская</secondary>
+          </indexterm></para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>файлы <literal>.txt2</literal> считаются сохранёнными в кодировке ISO-8859-2, которая покрывает большинство языков <emphasis role="bold">Центральной и Восточной Европы</emphasis>.<indexterm class="singular">
+            <primary>Кодировка</primary> <secondary>Восточноевропейская</secondary>
+          </indexterm></para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>файлы <literal>.utf8</literal> считаются сохранёнными в кодировке UTF-8 (она покрывает почти все языки мира).<indexterm class="singular">
+            <primary>Кодировка</primary> <secondary>Юникод</secondary>
+          </indexterm></para>
+      </listitem>
+    </itemizedlist>
+
+    <para>Вы можете проверить эти настройки, выбрав пункт <emphasis role="bold">Файловые фильтры</emphasis> в меню <emphasis role="bold">Параметры</emphasis>. Например, если у вас есть текстовый файл на чешском (скорее всего, сохранённый в кодировке <emphasis role="bold">ISO-8859-2</emphasis>), вам нужно просто сменить расширение с <literal> .txt</literal> на <literal>.txt2 </literal> и <application>ОмегаТ</application> корректно распознает его содержимое. И, конечно, если вы хотите навсегда избавиться от этих проблем, подумайте о возможности сохранения таких файлов в Юникоде, то есть в формате <literal>.utf8 </literal>.</para>
+  </section>
+</chapter>

@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<appendix id="appendix.ScriptingPlugin.inOmegaT">
+  <title>Модуль «Scripting»<indexterm class="singular">
+      <primary>Модули</primary> <secondary>Scripting</secondary>
+    </indexterm></title>
+
+  <section>
+    <title>Введение</title>
+
+    <para>Модуль «Scripting» позволяет запускать в ОмегаТ скрипты, написанные на различных языках.</para>
+  </section>
+
+  <section>
+    <title>Установка и использование</title>
+
+    <para>Модуль «Scripting» для ОмегаТ можно загрузить с официального сайта модулей ОмегаТ (<ulink url="???">http://sourceforge.net/projects/omegat-plugins/files/</ulink>). Разархивируйте файлы и скопируйте их в подкаталог «plugins» основного каталога ОмегаТ (это каталог, в котором хранится «OmegaT.jar»). Если каталога «plugins» нет, создайте его.</para>
+
+    <para>В меню <guisubmenu>«Инструменты»</guisubmenu> появится новый пункт <guisubmenu>«Скрипты».</guisubmenu> Чуть ниже находятся пять неактивных пунктов меню, на которые можно назначить различные скрипты. Выбор пункта меню <guisubmenu>Скрипты</guisubmenu> приводит к появлению одноимённого диалогового окна:<screenshot> <screeninfo>Диалоговое окно «Скрипты»</screeninfo> <mediaobject> <imageobject> <imagedata fileref="images/ScriptingDialog.png"/> </imageobject> </mediaobject> </screenshot></para>
+
+    <para>Диалоговое окно «Скрипты» позволяет загружать в текстовую область код доступных скриптов, и запускать их для текущего проекта. Для настройки системы скриптов нужно сделать следующее:</para>
+
+    <itemizedlist>
+      <listitem>
+        <para>Выбрав скрипт из списка, на панели слева, загрузите его в редактор скриптов.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Щёлкните правой кнопкой мыши на любой из располагающихся внизу окна кнопок 1...5 и выберите пункт «Добавить скрипт». В вышеприведённом примере, на слоты 1 и 2 уже назначены скрипты.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Если щёлкнуть левой кнопкой мыши по кнопке с номером, запустится ассоциированный с этой кнопкой скрипт. Также выбранный скрипт можно запустить, выбрав соответствующий пункт в меню <guisubmenu>«Инструменты»</guisubmenu>, или нажав <keycap> CTRL+ALT+F#</keycap> (где «#» — цифра от 1 до 5).</para>
+      </listitem>
+    </itemizedlist>
+
+    <para>Доступны следующие скриптовые языки:</para>
+
+    <para><itemizedlist>
+        <listitem>
+          <para>Язык <emphasis role="bold">NetRexx</emphasis> (http://www.netrexx.org/) поддерживает классический REXX-синтаксис, но без зарезервированных ключевых слов, а также содержит значительные улучшения, направленные на поддержку объектно-ориентированного программирования, совместимого с объектной моделью Java. Существующие библиотеки классов Java могут использоваться без изменений и какой-либо специальной установки; с другой стороны, программист на Java может предпочесть использовать класс Rexx во время выполнения программы на языке с Java-синтаксисом для улучшенной обработки строк.</para>
+        </listitem>
+      </itemizedlist><itemizedlist>
+        <listitem>
+          <para><emphasis role="bold">XSLT</emphasis> (Extensible Stylesheet Language Transformations): декларативный, основанный на XML язык, предназначенный для преобразования XML-документов. Исходный документ не изменяется, вместо этого на основе его содержимого создаётся новый документ. Новый документ может быть сериализован процессором в стандартный XML-синтаксис, или в другой формат, например в HTML или простой текст. Чаще всего XSLT используется для преобразования данных между различными схемами XML или для преобразования данных из XML в веб-страницы и документы PDF.</para>
+        </listitem>
+      </itemizedlist><itemizedlist>
+        <listitem>
+          <para><emphasis role="bold">Groovy</emphasis> (http://groovy.codehaus.org): динамический язык для виртуальной машины Java. Groovy сочетает сильные стороны Java с мощными возможностями, взятыми из языков Python, Ruby и Smalltalk.</para>
+        </listitem>
+      </itemizedlist><itemizedlist>
+        <listitem>
+          <para><emphasis role="bold">JavaScript</emphasis> (иногда сокращается до JS, не путайте с Java): прототипно-ориентированный скриптовый язык программирования с динамической, слабой типизацией и функциями как объектами первого класса. Это кросс-платформенный язык, поддерживающий объектно-ориентированный, императивный и функциональный стили программирования. На JavaScript частично написан популярный веб-браузер Firefox, этот язык хорошо известен и широко применяется в свободных программах.</para>
+        </listitem>
+      </itemizedlist>Все языки имеют доступ к объектной модели ОмегаТ, в которой главным объектом является проект. Например, нижеприведённый код на Groovy считывает содержимое всех сегментов всех файлов текущего проекта.</para>
+
+    <para><parameter>files = project.projectFiles;</parameter></para>
+
+    <para><parameter>for (i in 0 ..&lt; files.size())</parameter></para>
+
+    <para><parameter>{</parameter></para>
+
+    <para><parameter> for (j in 0 ..&lt;
+    files[i].entries.size())</parameter></para>
+
+    <para><parameter> {</parameter></para>
+
+    <para><parameter> currsegment = files[i].entries[j];</parameter></para>
+
+    <para><parameter> source = currsegment.getSrcText();</parameter></para>
+
+    <para><parameter> if (project.getTranslationInfo(ste))</parameter></para>
+
+    <para><parameter> target =
+    project.getTranslationInfo(currsegment).translation;</parameter></para>
+
+    <para><parameter> else</parameter></para>
+
+    <para><parameter> target = null;</parameter></para>
+
+    <para><parameter> }</parameter></para>
+
+    <para><parameter>}</parameter></para>
+  </section>
+</appendix>

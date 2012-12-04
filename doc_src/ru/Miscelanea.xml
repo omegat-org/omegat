@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<chapter id="chapter.misc">
+  <title>Темы, не вошедшие в другие разделы<indexterm class="singular">
+      <primary>Разное</primary>
+    </indexterm></title>
+
+  <section id="omegat.misc.console.mode">
+    <title><application><indexterm class="singular">
+        <primary>ОмегаТ в режиме командной строки</primary> <seealso>Разное</seealso>
+      </indexterm>ОмегаТ</application> в режиме командной строки<indexterm class="singular">
+        <primary>Разное</primary> <secondary>ОмегаТ в режиме командной строки</secondary>
+      </indexterm></title>
+
+    <note>
+      <para>Этот раздел предназначен для опытных пользователей!</para>
+    </note>
+
+    <para>Режим работы <application>ОмегаТ</application> в командной строке задуман для того, чтобы программу можно было использовать как средство выполнение перевода в скриптовом окружении. После запуска ОмегаТ в режиме командной строки графический интерфейс не будет загружаться (таким образом, программа работает любой в командной строке) и указанный проект переводится автоматически. В качестве примера можно привести программный продукт, чей графический интерфейс переведён на несколько языков. В этом случае, режим командной строки можно использовать для автоматизированного создания переведённого интерфейса в рамках общего процесса сборки программы.</para>
+
+    <section id="misc.console.mode.prerequisites">
+      <title>Что для этого нужно</title>
+
+      <para>Прежде всего нужен проект в формате ОмегаТ. Его расположение не важно, так как оно явно указывается в командной строке при запуске.</para>
+
+      <para>Если нужны не стандартные настройки для работы, нужно, чтобы имелись соответствующие файлы конфигурации (<literal>filters.conf</literal> и <literal>segmentation.conf)</literal>. Этого можно достичь двумя способами:</para>
+
+      <itemizedlist>
+        <listitem>
+          <para>Запустить <application>ОмегаТ</application> в нормальном режиме (с графическим интерфейсом) и настроить её так, как нужно. После этого <application>ОмегаТ</application> будет использовать указанные настройки и в режиме командной строки.</para>
+        </listitem>
+
+        <listitem>
+          <para>Если же запустить <application>ОмегаТ</application> в нормальном режиме не получается (отсутствует графическое окружение): скопируйте в соответствующий каталог файлы конфигурации <application>ОмегаТ</application> с другого компьютера. Куда вы их скопируете — тоже не имеет значения, так как путь к файлу конфигурации можно указать в командной строке при запуске (см. ниже). Нужные вам файлы <literal>filters.conf</literal> и <literal>segmentation.conf</literal> находятся в домашнем каталоге пользователя (например, <literal>C:\Documents and Settings\%Имя пользователя%\<application>OmegaT</application></literal> в Windows, <literal>/home/%Имя пользователя%/.omegat/</literal> в GNU/Linux).</para>
+        </listitem>
+      </itemizedlist>
+    </section>
+
+    <section id="starting.in.misc.console.mode">
+      <title>Запуск ОмегаТ в режиме командной строки</title>
+
+      <para>Для того, чтобы запустить ОмегаТ в режиме командной строки, нужно передать ей при запуске несколько параметров. Самый важный из них — <literal>&lt;project-dir&gt;</literal>, <literal> --config-dir=&lt;config-dir&gt;</literal> можно не указывать. Пример:</para>
+
+      <para><literal>$&gt; java -jar <application>OmegaT</application>.jar /путь/к/проекту \</literal></para>
+
+      <para><literal>--config-dir=/путь/к/файлам-конфигурации/ \</literal></para>
+
+      <para><literal> --mode=console-translate \</literal></para>
+
+      <para><literal>--source-pattern={регулярное выражение} \</literal></para>
+
+      <para><literal> --tag-validation=[block|warn] </literal></para>
+
+      <para><emphasis role="bold">Пояснение:</emphasis></para>
+
+      <itemizedlist>
+        <listitem>
+          <para><literal>&lt;project-dir&gt;</literal> указывает <application>ОмегаТ</application>, где находится проект перевода. Если этот параметр задан, при запуске в режиме командной строки <application>ОмегаТ</application> переводит данный проект.</para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para><literal>--config-dir=&lt;папка с файлами конфигурации&gt;</literal> указывает ОмегаТ, в каком каталоге находятся файлы конфигурации. Если этот параметр не задан, ОмегаТ использует настройки по умолчанию (находящиеся в каталоге OmegaT в домашнем каталоге пользователя, или, если они там не найдены — в текущем рабочем каталоге).</para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para><literal>--mode=console-translate </literal> указывает <application>ОмегаТ</application> запуститься в режиме командной строки и перевести указанный проект</para>
+        </listitem>
+
+        <listitem>
+          <para><literal>--source-pattern={регулярное выражение} </literal> так можно указать файлы для перевода. Пример регулярного выражения: <filename>test\.html</filename></para>
+        </listitem>
+
+        <listitem>
+          <para><literal>--tag-validation=[abort|warn] </literal> Если в качестве значения параметра задано «abort», при нахождении ошибок тегов, программа будет автоматически завершена. Если задано «warn», ошибки будут напечатаны, но программа продолжит работу. Если параметр не задан, проверки тегов не происходит.</para>
+        </listitem>
+      </itemizedlist>
+    </section>
+
+    <section id="misc.console.mode.option.quiet">
+      <title>Параметр «quiet»</title>
+
+      <para>Для режима командной строки также предусмотрен ещё один параметр: <literal>--quiet</literal>. В режиме «quiet» или в «тихом» режиме на экран выводится меньше информации. Сообщения, обычно выводящиеся в строку состояния, показываться не будут.</para>
+
+      <para>Использовать параметр можно так: <literal>java -jar <application>OmegaT</application>.jar /путь/к/проекту --mode=console-translate --quiet</literal></para>
+    </section>
+
+    <section id="misc.console.mode.option.validatetags">
+      <title>Параметр проверки тегов</title>
+
+      <para>Для режима командной строки также предусмотрен ещё один параметр: <literal>--tag-validation=[abort|warn].</literal> Если он задан, перед переводом проводится проверка тегов. Если задано <literal>abort</literal>, ошибки будут напечатаны и программа завершит работу. Если задано <literal>warn</literal>, ошибки будут напечатаны, но работа будет продолжена.</para>
+
+      <para>Использование: <literal>java -jar <application>OmegaT</application>.jar /путь/к/проекту --mode=console-translate --tag-validation=abort</literal></para>
+    </section>
+  </section>
+
+  <section>
+    <title>Автоматическое выравнивание файлов Java properties<indexterm class="singular">
+        <primary>Разное</primary> <secondary>Автоматическое выравнивание файлов Java properties</secondary>
+      </indexterm></title>
+
+    <para>ОмегаТ в режиме командной строки может выравнивать *.properties-файлы Java. Если у вас есть исходный и переведённый Properties-файлы для нужной языковой пары, то, используя их содержимое, вы можете создать TMX-файл. Использование:</para>
+
+    <para><literal>java -jar OmegaT.jar --mode=console-align /каталог-проекта --alignDir=/переведённыеФайлы/</literal></para>
+
+    <para>в каталоге <filename>alignDir </filename> должен находится файл на языке, используемом в проекте как язык перевода. Т. е., если в проекте производится перевод с английского на французский, имя bundle-файла должно иметь окончание «_fr». Полученный TMX-файл будет размещён в каталоге <literal>omegat</literal> под именем <filename>align.tmx</filename>.</para>
+  </section>
+
+  <section id="font.settings">
+    <title>Настройки шрифтов<indexterm class="singular">
+        <primary>Разное</primary> <secondary>Настройки шрифтов</secondary>
+      </indexterm></title>
+
+    <para>Это диалоговое окно позволяет вам изменить шрифт, который <application>ОмегаТ</application> использует в следующих окнах:</para>
+
+    <itemizedlist>
+      <listitem>
+        <para>Главное окно <application>ОмегаТ</application> (область редактирования, область просмотра совпадений, область глоссария)</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Окно поиска</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Окно проверки тегов</para>
+      </listitem>
+    </itemizedlist>
+
+    <para>Это диалоговое окно можно вызвать, выбрав пункт меню <indexterm class="singular">
+        <primary>Меню «Параметры»</primary> <secondary>Шрифт...</secondary>
+      </indexterm><menuchoice> <guimenu>«Параметры</guimenu> <guimenuitem>Шрифт...»</guimenuitem> </menuchoice> Это диалоговое окно содержит:</para>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis role="bold">Шрифт:</emphasis> меню выбора шрифтов, доступных на вашем компьютере;</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis role="bold">Размер:</emphasis> поле для изменения размера шрифта;</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis role="bold">Образец текста:</emphasis> область предварительного просмотра выбранного шрифта.</para>
+      </listitem>
+    </itemizedlist>
+
+    <para><emphasis role="bold">Примечание:</emphasis> в некоторых случаях ОмегаТ может потребоваться довольно значительное время, чтобы обновить окна после изменения настроек шрифта. Это особенно заметно, если на слабом компьютере открыт большой документ со множеством сегментов. Кроме того, имейте в виду, что некоторым языковым парам одни шрифты подходят больше, а другие — меньше. Если вы переводите текст на язык с другим алфавитом/системой письма (например, с русского на японский), нужно выбрать шрифт, поддерживающий оба языка.</para>
+  </section>
+
+  <section id="preventing.data.loss">
+    <title>Предотвращение потери данных<indexterm class="singular">
+        <primary>Разное</primary> <secondary>Предотвращение потери данных</secondary>
+      </indexterm></title>
+
+    <para><application>ОмегаТ</application> — довольно стабильное приложение. Тем не менее, как и при использовании любой другой программы, во время работы с <application>ОмегаТ</application> необходимо заботиться о сохранности ваших данных. Когда вы переводите свои файлы, <application>ОмегаТ</application> сохраняет наработки в памяти переводов <literal>project_save.tmx</literal>, которая находится в папке <literal>/omegat </literal> вашего проекта.</para>
+
+    <para>Кроме того, ОмегаТ сохраняет резервные копии памяти переводов в файлах «project_save.tmx.ГГГММДДЧЧНН.bak» в той же папке при каждом открытии или перезагрузке проекта. «ГГГГ» это год (4 цифры), «ММ» — это месяц, «ДД» — число, «ЧЧ» и «НН» — это часы и минуты, когда была сохранена предыдущая память переводов.</para>
+
+    <para>Если вы потеряли часть перевода, вы можете восстановить проект до предыдущей сохранённой копии (как правило, они не старше 10 минут) следующим образом:</para>
+
+    <orderedlist>
+      <listitem>
+        <para>закройте проект</para>
+      </listitem>
+
+      <listitem>
+        <para>переименуйте текущий файл <filename>project_save.tmx</filename> (например, <filename>project_save.tmx.temporary</filename>)</para>
+      </listitem>
+
+      <listitem>
+        <para>выберите резервную копию, которая скорее всего содержит нужные вам данные</para>
+      </listitem>
+
+      <listitem>
+        <para>переименуйте её в <literal>project_save.tmx</literal></para>
+      </listitem>
+
+      <listitem>
+        <para>откройте проект</para>
+      </listitem>
+    </orderedlist>
+
+    <para>Чтобы предотвратить потерю важных данных:</para>
+
+    <itemizedlist>
+      <listitem>
+        <para>Регулярно делайте копии файла «/omegat/project_save.tmx» на резервные носители, например, CD или DVD.</para>
+      </listitem>
+
+      <listitem>
+        <para>Пока не освоитесь с <application>ОмегаТ</application>, регулярно создавайте файлы перевода и проверяйте, чтобы они содержали последнюю версию перевода.</para>
+      </listitem>
+
+      <listitem>
+        <para>После начала перевода будьте особенно аккуратны при любых изменениях файлов в каталоге <literal>/source</literal>. Если исходный файл изменяется после начала перевода, <application>ОмегаТ</application> может не найти сегмент, который вы уже перевели.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Чтобы побыстрее освоиться, почаще обращайтесь к этому руководству. Если возникнут проблемы, напишите в <ulink url="http://tech.groups.yahoo.com/group/Omegat/">список рассылки пользователей <application>ОмегаТ</application></ulink>. Пишите на том языке, на котором изъясняетесь лучше всего.</para>
+      </listitem>
+    </itemizedlist>
+  </section>
+</chapter>

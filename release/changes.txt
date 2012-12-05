@@ -21,7 +21,7 @@
 
   - Support for gzipped (.tmx.gz) external TMXs
 
-  - Alignment (for filters that support it) now segments into sentences is 
+  - Alignment (for filters that support it) now segments into sentences if 
 segmentation is enabled in the project
 
   - Git submodule support added

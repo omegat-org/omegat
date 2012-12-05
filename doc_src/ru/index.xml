@@ -5782,15 +5782,15 @@
       </listitem>
 
       <listitem>
-        <para>Google Translate v2 не работает: подключили ли вы <ulink url="https://developers.google.com/translate/v2/faq">Translate API</ulink>? Заметьте, что сервис Google Translate не бесплатен, более подробную информацию можно найти в разделе <link linkend="chapter.installing.and.running">Установка и запуск ОмегаТ</link> (аргументы команды запуска).</para>
+        <para>Google Translate не работает: подключили ли вы <ulink url="https://developers.google.com/translate/v2/faq">Translate API</ulink>? Заметьте, что сервис Google Translate не бесплатен, более подробную информацию можно найти в разделе <link linkend="chapter.installing.and.running">Установка и запуск ОмегаТ</link> (аргументы команды запуска).</para>
       </listitem>
 
       <listitem>
-        <para>«Google Translate returned with HTTP response code: 403 ...»: убедитесь, что в pinfo.list введён правильный ключ, длиной 38 символов. Убедитесь, что задан <ulink url="https://developers.google.com/translate/v2/faq">API-ключ</ulink>.</para>
+        <para>«Google Translate returned HTTP response code: 403 ...»: убедитесь, что в pinfo.list введён правильный ключ, длиной 38 символов. Убедитесь, что задан <ulink url="https://developers.google.com/translate/v2/faq">API-ключ</ulink>.</para>
       </listitem>
 
       <listitem>
-        <para>Google Translate v2 не работает, хотя задан правильный API ключ. Убедитесь что в меню Параметры &gt; Машинный перевод, установлен флажок Google Translate V2.</para>
+        <para>Google Translate не работает, хотя задан правильный API ключ. Убедитесь что в меню Параметры &gt; Машинный перевод, установлен флажок Google Translate V2.</para>
       </listitem>
 
       <listitem>
@@ -6234,8 +6234,8 @@
     <para>Если флажок «<guimenuitem>Параметры &gt; Проверка грамматики</guimenuitem>» установлен, ОмегаТ автоматически начнёт использовать модуль, сразу после его установки. Применяемые правила зависят от используемой в проекте языковой пары. Если правило нарушается, в области редактирования соответствующая фраза подчёркивается синим (см. <emphasis>«also» </emphasis>и <emphasis>«I didn't do nothing»</emphasis> на иллюстрации выше). Если на подчёркнутую фразу навести курсор, будет показано краткое пояснение.</para>
   </section>
 </appendix>
- 
-   <appendix id="appendix.ScriptingPlugin.inOmegaT">
+  
+  <appendix id="appendix.ScriptingPlugin.inOmegaT">
   <title>Модуль «Scripting»<indexterm class="singular">
       <primary>Модули</primary> <secondary>Scripting</secondary>
     </indexterm></title>

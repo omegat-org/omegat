@@ -62,8 +62,8 @@
   <xi:include href="App_Tokenizer_plugin.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
   
   <xi:include href="App_LanguageTool_plugin.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
- 
-   <xi:include href="App_Scripting_plugin.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+  
+  <xi:include href="App_Scripting_plugin.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
 
   <xi:include href="App_Website.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
 

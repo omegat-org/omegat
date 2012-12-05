@@ -95,13 +95,10 @@ So, if you have your DocBook documentation source files in:
 The /docbook-xml-4.5/ folder should be copied inside /branches/:
 /path/to/omegat/branches/docbook-xml-4.5/
 
-Line 28 of build.xml should read:
+Both doc_src_paths.xml and docbook-utf8.xsl must be copied at the same level as /docbook-xml-4.5/.
 
-    <include file="./doc_src_paths.xml"/>   
+The ones available in doc_src are only there for reference.
 
-Line 133 of build.xml should read:
-
-     <arg value="./docbook-utf8.xsl" />
 
 
 ***Usage***

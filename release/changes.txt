@@ -3,7 +3,7 @@
 ----------------------------------------------------------------------
   10 Enhancements
    7 Bug fixes
-   3 Localisations updates
+   4 Localisation updates
 ----------------------------------------------------------------------
 2.6.1 update 2 vs. 2.6.1 update 1
 
@@ -63,6 +63,7 @@ and doesn't show files any more.
   - Japanese localisation updated to 2.6.0 update 1 (UI)
   - Italian localisation updated to 2.6.1 (UI)
   - Czech localization updated to 2.6.0 update 2 (UI, documentation, readme)
+  - Russian  localization updated to 2.6.1 (UI, documentation, readme)
 
 ----------------------------------------------------------------------
  OmegaT 2.6.1 update 1

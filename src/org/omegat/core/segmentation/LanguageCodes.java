@@ -40,28 +40,32 @@ import org.omegat.util.OStrings;
 public final class LanguageCodes {
     // Language Codes
     public static final String CATALAN_CODE = "Catalan";
+    public static final String GERMAN_CODE = "German";
     public static final String ENGLISH_CODE = "English";
     public static final String SPANISH_CODE = "Spanish";
-    public static final String GERMAN_CODE = "German";
+    public static final String FRENCH_CODE = "French";
     public static final String ITALIAN_CODE = "Italian";
     public static final String JAPANESE_CODE = "Japanese";
     public static final String DUTCH_CODE = "Dutch";
     public static final String POLISH_CODE = "Polish";
     public static final String RUSSIAN_CODE = "Russian";
+    public static final String SWEDISH_CODE = "Swedish";
     public static final String DEFAULT_CODE = "Default";
     public static final String F_TEXT_CODE = "Text";
     public static final String F_HTML_CODE = "HTML";
 
     // Language Keys from Resource Bundle
     public static final String CATALAN_KEY = "CORE_SRX_RULES_LANG_CATALAN";
+    public static final String GERMAN_KEY = "CORE_SRX_RULES_LANG_GERMAN";
     public static final String ENGLISH_KEY = "CORE_SRX_RULES_LANG_ENGLISH";
     public static final String SPANISH_KEY = "CORE_SRX_RULES_LANG_SPANISH";
-    public static final String GERMAN_KEY = "CORE_SRX_RULES_LANG_GERMAN";
+    public static final String FRENCH_KEY = "CORE_SRX_RULES_LANG_FRENCH";
     public static final String ITALIAN_KEY = "CORE_SRX_RULES_LANG_ITALIAN";
     public static final String JAPANESE_KEY = "CORE_SRX_RULES_LANG_JAPANESE";
     public static final String DUTCH_KEY = "CORE_SRX_RULES_LANG_DUTCH";
     public static final String POLISH_KEY = "CORE_SRX_RULES_LANG_POLISH";
     public static final String RUSSIAN_KEY = "CORE_SRX_RULES_LANG_RUSSIAN";
+    public static final String SWEDISH_KEY = "CORE_SRX_RULES_LANG_SWEDISH";
     public static final String DEFAULT_KEY = "CORE_SRX_RULES_LANG_DEFAULT";
     public static final String F_TEXT_KEY = "CORE_SRX_RULES_FORMATTING_TEXT";
     public static final String F_HTML_KEY = "CORE_SRX_RULES_FORMATTING_HTML";
@@ -71,9 +75,10 @@ public final class LanguageCodes {
 
     static {
         codeKeyHash.put(CATALAN_CODE, CATALAN_KEY);
+        codeKeyHash.put(GERMAN_CODE, GERMAN_KEY);
         codeKeyHash.put(ENGLISH_CODE, ENGLISH_KEY);
         codeKeyHash.put(SPANISH_CODE, SPANISH_KEY);
-        codeKeyHash.put(GERMAN_CODE, GERMAN_KEY);
+        codeKeyHash.put(FRENCH_CODE, FRENCH_KEY);
         codeKeyHash.put(ITALIAN_CODE, ITALIAN_KEY);
         codeKeyHash.put(JAPANESE_CODE, JAPANESE_KEY);
         codeKeyHash.put(DUTCH_CODE, DUTCH_KEY);

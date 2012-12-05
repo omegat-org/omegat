@@ -3,7 +3,7 @@
           with fuzzy matching, translation memory, keyword search, 
           glossaries, and translation leveraging into updated projects.
 
- Copyright (C) 2012 Alex Buloichik
+ Copyright (C) 2012 Alex Buloichik, Didier Briel
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -42,6 +42,7 @@ import org.omegat.util.WikiGet;
  * http://msdn.microsoft.com/en-us/library/ff512421.aspx
  * 
  * @author Alex Buloichik (alex73mail@gmail.com)
+ * @author Didier Briel
  */
 public class MicrosoftTranslate extends BaseTranslate {
     protected static final String URL_TOKEN = "https://datamarket.accesscontrol.windows.net/v2/OAuth2-13/";
@@ -62,8 +63,8 @@ public class MicrosoftTranslate extends BaseTranslate {
     @Override
     protected synchronized String translate(Language sLang, Language tLang, String text) throws Exception {
         text = text.length() > 10000 ? text.substring(0, 9997) + "..." : text;
-        String langFrom = sLang.getLanguageCode();
-        String langTo = tLang.getLanguageCode();
+        String langFrom = checkMSLang(sLang);
+        String langTo = checkMSLang(tLang);
         try {
             if (accessToken == null) {
                 requestToken();
@@ -88,6 +89,23 @@ public class MicrosoftTranslate extends BaseTranslate {
         }
     }
 
+    /**
+     * Converts language codes to Microsoft ones.
+     * @param language
+     *              a project language
+     * @return either a language code, or a Chinese language code plus a Microsoft variant
+     */
+    private String checkMSLang(Language language) {
+        if (language.getLanguage().compareToIgnoreCase("zh-cn") == 0){
+            return "zh-CHS";
+        } else if ((language.getLanguage().compareToIgnoreCase("zh-tw") == 0) ||
+                   (language.getLanguage().compareToIgnoreCase("zh-hk") == 0)) {
+            return "zh-CHT";
+        } else {
+            return language.getLanguageCode();         
+        }
+        
+    }
     private void requestToken() throws Exception {
         Map<String, String> p = new TreeMap<String, String>();
 
@@ -116,7 +134,10 @@ public class MicrosoftTranslate extends BaseTranslate {
         String r = WikiGet.get(URL_TRANSLATE, p, null);
         Matcher m = RE_RESPONSE.matcher(r);
         if (m.matches()) {
-            return m.group(1);
+            String translatedText = m.group(1);
+            translatedText = translatedText.replace("&lt;", "<");
+            translatedText = translatedText.replace("&gt;", ">");
+            return translatedText;
         } else {
             Log.logWarningRB("MT_ENGINE_MICROSOFT_WRONG_RESPONSE");
             return null;
@@ -145,7 +166,7 @@ public class MicrosoftTranslate extends BaseTranslate {
             }
             mustBe(',');
         }
-
+     
         return result;
     }
 

@@ -60,7 +60,7 @@ and doesn't show files any more.
 
   Localisation updates:
 
-  - Japanese localisation updated to 2.6.0 update 1 (UI)
+  - Japanese localisation updated to 2.6.1 update 2 (UI)
   - Italian localisation updated to 2.6.1 (UI)
   - Czech localization updated to 2.6.0 update 2 (UI, documentation, readme)
   - Russian localization updated to 2.6.1 (UI, documentation, readme)

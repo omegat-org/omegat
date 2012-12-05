@@ -1,0 +1,188 @@
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <title>Bijlage A. plug-in Tokenizer</title>
+      <link rel="stylesheet" type="text/css" href="OmegaT.css">
+      <meta name="generator" content="DocBook XSL Stylesheets V1.76.1">
+      <link rel="home" href="index.html" title="OmegaT - Gebruikershandleiding">
+      <link rel="up" href="index.html" title="OmegaT - Gebruikershandleiding">
+      <link rel="prev" href="chapter.misc.html" title="Hoofdstuk 21. Diverse onderwerpen">
+      <link rel="next" href="appendix.LanguageToolPlugin.inOmegaT.html" title="Bijlage B. plugin LanguageTool">
+   </head>
+   <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+      <div class="navheader">
+         <table width="100%" summary="Navigation header">
+            <tr>
+               <th colspan="3" align="center">Bijlage A. plug-in Tokenizer</th>
+            </tr>
+            <tr>
+               <td width="20%" align="left"><a accesskey="p" href="chapter.misc.html">Terug</a>&nbsp;
+               </td>
+               <th width="60%" align="center">&nbsp;</th>
+               <td width="20%" align="right">&nbsp;<a accesskey="n" href="appendix.LanguageToolPlugin.inOmegaT.html">Volgende</a></td>
+            </tr>
+         </table>
+         <hr>
+      </div>
+      <div class="appendix" title="Bijlage A. plug-in Tokenizer">
+         <div class="titlepage">
+            <div>
+               <div>
+                  <h2 class="title"><a name="appendix.TokenizerPlugin.inOmegaT"></a>Bijlage A. plug-in Tokenizer<a class="indexterm" name="d0e8542"></a></h2>
+               </div>
+            </div>
+         </div>
+         <div class="toc">
+            <dl>
+               <dt><span class="section"><a href="appendix.TokenizerPlugin.inOmegaT.html#d0e8547">1. Introductie</a></span></dt>
+               <dt><span class="section"><a href="appendix.TokenizerPlugin.inOmegaT.html#d0e8576">2. Installatie en gebruik van de opdrachtregel</a></span></dt>
+               <dt><span class="section"><a href="appendix.TokenizerPlugin.inOmegaT.html#d0e8593">3. Specifiek voor Mac OSX</a></span></dt>
+               <dt><span class="section"><a href="appendix.TokenizerPlugin.inOmegaT.html#d0e8607">4. Probleemoplossing</a></span></dt>
+            </dl>
+         </div>
+         <div class="section" title="1. Introductie">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e8547"></a>1. Introductie<a class="indexterm" name="d0e8550"></a><a class="indexterm" name="d0e8555"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <p>Tokenizers (of stemmers) verbeteren de kwaliteit van de overeenkomsten door het herkennen va betrokken woorden in de bron
+               en gegevens in de vertaalgeheugens. Zij verbeteren ook de overeenkomsten voor de woordenlijsten.
+            </p>
+            <p>Een stemmer voor bijvoorbeeld Engels zou de tekenreeks "cats" identificeren (en mogelijk "catlike", "catty" etc.) omdat die
+               is gebaseerd op de stam "cat", en "stemmer", "stemming", "stemmed" omdat die is gebaseerd op "stem". Een stemming algoritme
+               reduceert de woorden "fishing", "fished", "fish", en "fisher" tot de stam van het woord: "fish". Dit is speciaal bijzonder
+               handig in het geval van talen die vormen voor voor- en achtervoegsel voor de stamwoorden gebruiken. Lenen we een voorbeeld
+               uit het Sloveens, hier "good" in alle mogelijke grammaticaal juiste vormen:
+            </p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" type="disc">
+                  <li class="listitem">
+                     <p>lep, lepa, lepo - enkelvoud, mannelijk, vrouwelijk, neutraal</p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" type="disc">
+                  <li class="listitem">
+                     <p>lepši, lepša, lepše . - comparatief, nominatief, mannelijk, vrouwelijk, neutraal, resp. meervoudsvorm van het bijvoeglijk
+                        naamwoord
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" type="disc">
+                  <li class="listitem">
+                     <p>najlepših - superlatief, meervoud, genitief voor M,F,N</p>
+                  </li>
+               </ul>
+            </div>
+         </div>
+         <div class="section" title="2. Installatie en gebruik van de opdrachtregel">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e8576"></a>2. Installatie en gebruik van de opdrachtregel
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>Een tokenizerpakket dat is afgeleid van het Luceneproject wordt gedistribueerd als een OmegaT plug-in op http://sourceforge.net/projects/omegat-plugins/files/.
+               Download de meest recente bestanden (OmegaT-tokenizers_0.4_2-2.1.zip op het moment van schrijven).
+            </p>
+            <p>Maak een map met de naam "plugins" in de map waar OmegaT.jar staat en pas de bovenstaande bestanden in die map uit om de tokenizer
+               te installeren.
+            </p>
+            <p>U moet de tokenizer specificeren die u zal gaan gebruiken voor de brontaal en welke tokenizer u zult gaan gebruiken voor de
+               doeltaal om OmegaT uit te voeren. De syntaxis is als volgt:
+            </p>
+            <p><code class="literal">java -jar OmegaT.jar --ITokenizer=[brontaal naam tokenizer] --ITokenizerTarget=[doeltaal naam tokenizer]</code></p>
+            <p>De namen van de tokenizers zijn vermeld in het bestand Readme.txt dat wordt gedistribueerd met de bestanden van de tokenizer.
+               Als u bijvoorbeeld de Lucene CJK tokenizer wilt gebruiken voor de brontaal en de Lucene French tokenizer in de doeltaal, zal
+               uw opdracht er als volgt uitzien:
+            </p>
+            <p><code class="literal">java -jar OmegaT.jar --ITokenizer=org.omegat.plugins.
+                      tokenizer.LuceneCJKTokenizer --ITokenizerTarget=org.omegat.plugins.
+                      tokenizer.LuceneFrenchTokenizer</code></p>
+         </div>
+         <div class="section" title="3. Specifiek voor Mac OSX">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e8593"></a>3. Specifiek voor Mac OSX
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>Indien u de tokenizers wilt gebruiken met het Mac OSX OmegaT.app pakket is de installatie van de tokenizer zoals die hierboven
+               is vermeld van toepassing (klik met rechts op de OmegaT.app om de locatie van OmegaT.jar te vinden), maar u zult de namen
+               van de tokenizers moeten specificeren in <code class="filename">info.plist </code>dat de startopties voor Java bevat. Volg bovenstaande instructies om toegang te krijgen tot het bestand <code class="filename">info.plist</code> en bewerk het zodanig dat het er als volgt uitziet voor het voorbeeld dat we zojuist gaven:
+            </p>
+            <div class="literallayout">
+               <p><code class="code"><br>
+                     &lt;key&gt;VMOptions&lt;/key&gt;<br>
+                     &lt;string&gt;-Xmx1024M&lt;/string&gt;<br>
+                     <br>
+                     &lt;key&gt;Arguments&lt;/key&gt;<br>
+                     &lt;array&gt;<br>
+                     &nbsp;&nbsp;&lt;string&gt;--ITokenizer=org.omegat.plugins.tokenizer.LuceneCJKTokenizer&lt;/string&gt;<br>
+                     &nbsp;&nbsp;&lt;string&gt;--ITokenizerTarget=org.omegat.plugins.tokenizer.<br>
+                     &nbsp;&nbsp;LuceneFrenchTokenizer&lt;/string&gt;<br>
+                     &lt;/array&gt;</code></p>
+            </div>
+         </div>
+         <div class="section" title="4. Probleemoplossing">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e8607"></a>4. Probleemoplossing
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>Open een project en controleer de informatie in het log van de console om er voor te zorgen dat de tokenizers ook echt worden
+               gebruikt. Met het bovenstaande voorbeeld zou dat er uitzien als:
+            </p>
+            <div class="literallayout">
+               <p><code class="code"><br>
+                     84528:&nbsp;Info:&nbsp;Source&nbsp;tokenizer:&nbsp;org.omegat.plugins.tokenizer.LuceneCJKTokenizer&nbsp;<br>
+                     84528:&nbsp;Info:&nbsp;Target&nbsp;tokenizer:&nbsp;org.omegat.plugins.tokenizer.LuceneFrenchTokenizer&nbsp;<br>
+                     </code></p>
+            </div>
+            <p>De getallen aan de linkerzijde zijn waarschijnlijk anders op uw systeem dus zorg er voor dat de namen voor de tokenizers voor
+               de bron- en de doeltaal, gespecificeerd in de startopties, overeenkomend met wat het log weergeeft. Als de tokenizers niet
+               juist zijn geactiveerd, zal het log er als volgt uitzien:
+            </p>
+            <div class="literallayout">
+               <p><code class="code"><br>
+                     12719:&nbsp;Info:&nbsp;Source&nbsp;tokenizer:&nbsp;org.omegat.core.matching.Tokenizer&nbsp;<br>
+                     12719:&nbsp;Info:&nbsp;Target&nbsp;tokenizer:&nbsp;org.omegat.core.matching.Tokenizer&nbsp;<br>
+                     </code></p>
+            </div>
+            <p>Met het Mac OSX OmegaT.app pakket moet u dubbelklikken op de <code class="literal">JavaApplicationStub</code> die is geplaatst in /OmegaT.app/Contents/MacOS/ (kijk hierboven om toegang te verkrijgen) om OmegaT te starten vanuit de
+               console en direct toegang te hebben tot het log.
+            </p>
+         </div>
+      </div>
+      <div class="navfooter">
+         <hr>
+         <table width="100%" summary="Navigation footer">
+            <tr>
+               <td width="40%" align="left"><a accesskey="p" href="chapter.misc.html">Terug</a>&nbsp;
+               </td>
+               <td width="20%" align="center">&nbsp;</td>
+               <td width="40%" align="right">&nbsp;<a accesskey="n" href="appendix.LanguageToolPlugin.inOmegaT.html">Volgende</a></td>
+            </tr>
+            <tr>
+               <td width="40%" align="left" valign="top">Hoofdstuk 21. Diverse onderwerpen&nbsp;</td>
+               <td width="20%" align="center"><a accesskey="h" href="index.html">Begin</a></td>
+               <td width="40%" align="right" valign="top">&nbsp;Bijlage B. plugin LanguageTool</td>
+            </tr>
+         </table>
+      </div>
+   </body>
+</html>

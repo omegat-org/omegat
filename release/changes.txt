@@ -197,13 +197,15 @@ to write in the repository anymore
 ----------------------------------------------------------------------
    0 Enhancement
    0 Bug fix
-   1 Localisation update
+   3 Localisation updates
 ----------------------------------------------------------------------
 2.5.5 update 4 vs. 2.5.5 update 3
 
   Localisation updates:
 
+  - Dutch localization updated to 2.5.5 (UI, documentation, readme)
   - Russian localization updated to 2.5.5 (UI, documentation, readme)
+  - Czech localization updated to 2.5 (documentation, backported from 2.6)
 
 ----------------------------------------------------------------------
  OmegaT 2.5.5 update 3

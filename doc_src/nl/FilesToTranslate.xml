@@ -63,19 +63,23 @@
         </listitem>
       </itemizedlist>
 
-        <itemizedlist>
-          <listitem>
-            <para>SubRip titelbestanden (*.srt)</para>
-          </listitem>
-        </itemizedlist>
-        
-       <itemizedlist>
+      <itemizedlist>
+        <listitem>
+          <para>SubRip titelbestanden (*.srt)</para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
         <listitem>
           <para>Magento CE Locale CSV-bestanden (*.csv)</para>
         </listitem>
       </itemizedlist>
 
       <para>Andere platte-tekst bestanden kunnen worden behandeld door <application>OmegaT</application> door hun bestandstype te koppelen aan een ondersteund bestandstype (bijvoorbeeld .pod-bestanden zouden kunnen worden gekoppeld aan het ASCII tekstfilter) en ze voor te bewerken met specifieke segmentatieregels.</para>
+
+      <para>PO-bestanden<indexterm class="singular">
+          <primary>Bronbestanden</primary> <secondary>PO als tweetalige bestanden</secondary>
+        </indexterm> mogen zowel bron- als doeltekst bevatten. Vanuit dit oogpunt zijn zij platte tekstbestanden<emphasis> plus</emphasis> vertaalgeheugens. Indien voor een opgegeven bronsegment, als er geen bestaande vertaling in het vertaalgeheugen van het project (project_save.tmx). De vertaling wordt opgeslagen in project_save.tmx als de standaard vertaling. In het geval dat hetzelfde bronsegment al bestaat, maar met een andere vertaling, wordt de nieuwe vertaling geladen als een alternatief.</para>
     </section>
 
     <section>
@@ -113,7 +117,7 @@
           </listitem>
         </itemizedlist><itemizedlist>
           <listitem>
-            <para>XLIFF (*.xlf, *.xliff, *.sdlxliff) - eentalig, d.i. één taalcombinatie mogelijk voor een bepaald project</para>
+            <para>XLIFF (*.xlf, *.xliff, *.sdlxliff) - van de variëteit bron=doel</para>
           </listitem>
         </itemizedlist><itemizedlist>
           <listitem>
@@ -151,13 +155,14 @@
           <listitem>
             <para>Flash XML exporteren (*.xml)</para>
           </listitem>
+
           <listitem>
             <para>Wordfast TXML (*.txml)</para>
           </listitem>
+
           <listitem>
             <para>Camtasia voor Windows (*.camproj)</para>
           </listitem>
-
         </itemizedlist></para>
 
       <para>Andere opgemaakte tekst-bestanden kunnen worden afgehandeld door OmegaT door hun bestandstype te koppelen aan een ondersteund bestandstype, er van uitgaande dat de overeenkomende segmentatieregels ze juist zullen segmenteren.</para>
@@ -207,7 +212,7 @@
       </listitem>
     </itemizedlist>
 
-    <para>De kwaliteit van het vertaalde bestand zal afhankelijk zijn van de kwaliteit van het heen-en-weer converteren. Voor het uitvoeren van dergelijke conversies: zorg er voor dat alle opties zijn uitgeprobeerd. Controleer de <ulink url="http://www.omegat.org/">OmegaT homepage</ulink> voor een bijgewerkte lijst van hulpprogramma's voor vertalingen.</para>
+    <para>De kwaliteit van het vertaalde bestand zal afhankelijk zijn van de kwaliteit van het heen-en-weer converteren. Voor het uitvoeren van dergelijke conversies: zorg er voor dat alle opties zijn uitgeprobeerd. Controleer de <ulink url="http://www.omegat.org/">thuispagina van OmegaT</ulink> voor een bijgewerkte lijst van hulpprogramma's voor vertalingen.</para>
   </section>
 
   <section id="right.to.left.languages">

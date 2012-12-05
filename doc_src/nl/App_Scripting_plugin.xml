@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<appendix id="appendix.ScriptingPlugin.inOmegaT">
+  <title>plug-in Scripting<indexterm class="singular">
+      <primary>Plug-ins</primary> <secondary>Scripting</secondary>
+    </indexterm></title>
+
+  <section>
+    <title>Introductie</title>
+
+    <para>OmegaT-Scripting maakt het mogelijk in OmegaT scripts uit te voeren die zijn geschreven in verschillende scripttalen.</para>
+  </section>
+
+  <section>
+    <title>Installatie en gebruik</title>
+
+    <para>De plug-in Scripting voor OmegaT kan worden gedownload vanaf de downloadsite voor OmegaT plug-ins (<ulink url="???">http://sourceforge.net/projects/omegat-plugins/files/</ulink>). Pak de bestanden uit en plaats ze allemaal in de map &quot;plugins&quot; die zich bevindt in de installatiemap van OmegaT, dat is de map waarin OmegaT.jar staat. Maak eerst de map &quot;plugins&quot; als die niet bestaat.</para>
+
+    <para>Dit voegt een nieuw submenu<guisubmenu> Extra &gt; </guisubmenu><guisubmenu>Scripten toe.</guisubmenu> Onder het submenu <guisubmenu>Scripting</guisubmenu> zijn vijf tijdelijke plaatsaanduidingen beschikbaar voor scripts. Klikken op <guisubmenu>Scripten</guisubmenu> opent het dialoogvenster Scripten:<screenshot> <screeninfo>dialoogvenster Scripten</screeninfo> <mediaobject> <imageobject> <imagedata fileref="images/ScriptingDialog.png"/> </imageobject> </mediaobject> </screenshot></para>
+
+    <para>Het dialoogvenster Scripten maakt het voor u mogelijk om een bestaand script in het tekstgebied te laden en het uit te voeren tegen het huidige geopende project. Doe het volgende om de mogelijkheid voor scripten aan te passen:</para>
+
+    <itemizedlist>
+      <listitem>
+        <para>Laadt een script in het bewerkingsvenster door op de naam ervan te klikken in de lijst in het venster links.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Klik met rechts op een knop van &quot;&lt;1&gt;&quot; tot en met &quot;&lt;5&gt;&quot; in het onderste venster en selecteer &quot;Toevoegen&quot;. In het voorbeeld hierboven zijn al twee scripts (positie 1 en 2) toegevoegd.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Als u met links klikt op het cijfer zal het geselecteerde script worden uitgevoerd. U kunt de geselecteerde macro's ook starten vanuit het hoofdmenu door hun items te gebruiken in het menu <guisubmenu>Extra </guisubmenu> of door te drukken op<keycap> Ctrl+Alt+F#</keycap> (# 1 tot en met 5).</para>
+      </listitem>
+    </itemizedlist>
+
+    <para>De volgende scripttalen zijn geïmplementeerd:</para>
+
+    <para><itemizedlist>
+        <listitem>
+          <para><emphasis role="bold">NetRexx</emphasis> (http://www.netrexx.org/): het ondersteunt een klassieke REXX-syntaxis, zonder gereserveerde sleutelwoorden, naast aanzienlijke aanvulingen voor ondersteuning van object-georiënteerd programmeren op een manier die compatibel is met het objectmodel van Java. Alle bestaande Java klassebibliotheken kunnen ongewijzigd en zonder speciale instellingen gebruikt worden; tegelijkertijd kan een Java-programmeur er voor kiezen om slechts de Rexx-klasse uit het uitvoeringspakket te gebruiken voor verbeterde afhandeling van tekenreeksen in bronprogramma's met Java-syntaxis.</para>
+        </listitem>
+      </itemizedlist><itemizedlist>
+        <listitem>
+          <para><emphasis role="bold">XSLT</emphasis> (Extensible Stylesheet Language Transformations): is een declarabele, op XML gebaseerde taal die wordt gebruikt voor de transformatie van XMLdocumenten. Het originele document wordt niet gewijzigd; in plaats daarvan wordt een nieuw document gemaakt, gebaseerd op de inhoud van een bestaand. Het nieuwe document kan door de processor worden geserialiseerd (uitvoer) in standaard XML-syntaxis of in een andere indeling, zoals HTML of platte tekst. XSLT wordt vaak gebruikt om gegevens te converteren tussen verschillende schema's van XML of om XML-gegevens te converteren naar webpagina's of PDF-documenten.</para>
+        </listitem>
+      </itemizedlist><itemizedlist>
+        <listitem>
+          <para><emphasis role="bold">Groovy</emphasis> (http://groovy.codehaus.org): is een dynamische taal voor de Java Virtual machine. Het bouwt op de sterke punten van Java maar heeft aanvullende krachtige mogelijkheden, geïnspireerd op talen als Python, Ruby en Smalltalk.</para>
+        </listitem>
+      </itemizedlist><itemizedlist>
+        <listitem>
+          <para><emphasis role="bold">JavaScript</emphasis> (soms afgekort tot JS, niet te verwarren met Java): is een op prototype gebaseerde scripttaal die dynamisch is, zwak getypeerd en eersteklas functies heeft. Het is een taal met meerdere paradigma's, ondersteund object-georiënteerde, imperatieve en functionele programmeerstijlen. Omdat het de taal is achter de populaire software zoals Firefox is het met voorkeur een bekend gereedschap om te programmeren in het domein van open-source .</para>
+        </listitem>
+      </itemizedlist>Alle talen hebben toegang tot het objectmodel van OmegaT, met het project als het hoogste object. De volgende code in groovy bijvoorbeeld scant door alle segmenten in alle bestanden in het huidige project:</para>
+
+    <para><parameter>files = project.projectFiles;</parameter></para>
+
+    <para><parameter>for (i in 0 ..&lt; files.size())</parameter></para>
+
+    <para><parameter>{</parameter></para>
+
+    <para><parameter> for (j in 0 ..&lt;
+    files[i].entries.size())</parameter></para>
+
+    <para><parameter> {</parameter></para>
+
+    <para><parameter> currsegment = files[i].entries[j];</parameter></para>
+
+    <para><parameter> source = currsegment.getSrcText();</parameter></para>
+
+    <para><parameter> if (project.getTranslationInfo(ste))</parameter></para>
+
+    <para><parameter> target =
+    project.getTranslationInfo(currsegment).translation;</parameter></para>
+
+    <para><parameter> else</parameter></para>
+
+    <para><parameter> target = null;</parameter></para>
+
+    <para><parameter> }</parameter></para>
+
+    <para><parameter>}</parameter></para>
+  </section>
+</appendix>

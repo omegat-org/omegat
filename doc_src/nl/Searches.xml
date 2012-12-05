@@ -15,17 +15,17 @@
 
       <mediaobject>
         <imageobject role="html">
-          <imagedata fileref="images/TextSearch.png"/>
+          <imagedata fileref="images/TextSearch25.png"/>
         </imageobject>
 
         <imageobject role="fo">
-          <imagedata fileref="images/TextSearch.png" width="95%"/>
+          <imagedata fileref="images/TextSearch25.png" width="90%"/>
         </imageobject>
       </mediaobject>
     </figure>
 
     <note>
-      <para>De bovenstaande zoekactie vindt alle doelsegmenten waarin twee of meer witruimten - \s\s+ - voorkomen.</para>
+      <para>Bovenstaande zoekactie vindt alle doelsegmenten die tekens bevatten die zeer onwaarschijnlijk zijn voor de doeltaal - d.i. Sloveens.</para>
     </note>
 
     <section>
@@ -70,7 +70,7 @@
         <primary>Zoeken</primary> <secondary>Jokertekens gebruiken</secondary>
       </indexterm></title>
 
-    <para>In zowel exact zoeken als zoeken naar sleutelwoorden kunnen de jokertekens '*' en '?' worden gebruikt. Zorg ervoor dat de optie reguliere uitdrukkingen niet is geselecteerd om jokertekens te gebruiken, omdat '*' en '?' een speciale betekenis hebben in reguliere uitdrukkingen.</para>
+    <para>In zowel exact zoeken als zoeken naar sleutelwoorden kunnen de jokertekens '*' en '?' worden gebruikt. Zij betekenen, bekend voor gebruikers van Word:</para>
 
     <itemizedlist>
       <listitem>
@@ -84,12 +84,12 @@
       </listitem>
     </itemizedlist>
 
-    <para>De overeenkomsten zullen in vet blauw worden weergegeven.</para>
+    <para>De overeenkomsten zullen in vet blauw worden weergegeven. Onthoud dat '*' en '?' een speciale betekenis hebben in reguliere uitdrukkingen, dus zoeken met jokertekens, zoals hier beschreven, is alleen van toepassing voor exacte zoekacties en zoekacties met sleutelwoorden (zie hieronder).</para>
   </section>
 
   <section id="search.methoids">
-    <title>Zoeken methodes<indexterm class="singular">
-        <primary>Zoeken</primary> <secondary>methoden</secondary>
+    <title>Zoekmethoden en opties<indexterm class="singular">
+        <primary>Zoeken</primary> <secondary>Methoden en opties</secondary>
       </indexterm></title>
 
     <para>Selecteer de methode met behulp van de optieknoppen. U kunt kiezen uit twee methodes om te zoeken:</para>
@@ -110,9 +110,17 @@
           <para>Zoekt naar segmenten die alle sleutelwoorden bevatten die u heeft opgegeven, in willekeurige volgorde. Selecteer Sleutelwoorden zoeken om te zoeken naar een willekeurig aantal individuele woorden, in willekeurige volgorde. OmegaT zal een lijst weergeven waarin alle segmenten staan waarin alle gespecificeerde woorden voorkomen. Zoeken met sleutelwoord is hetzelfde als zoekacties &quot;met alle woorden&quot; in een internetzoekmachine zoals Google (logische EN). Zoeken met sleutelwoorden naar <emphasis><literal>geopend bestand</literal></emphasis> zal dus alle entiteiten van de tekenreeks <emphasis><literal>open file</literal></emphasis> vinden, en ook <emphasis><literal>bestand geopend</literal>, <literal>geopend invoer bestand</literal>, <literal>bestand kan gevaarlijk zijn als geopend</literal></emphasis>, etc..</para>
         </listitem>
       </varlistentry>
+
+      <varlistentry>
+        <term><emphasis role="bold">reguliere uitdrukkingen</emphasis></term>
+
+        <listitem>
+          <para>De zoekterm zal worden behandeld als een reguliere uitdrukking. De zoekterm - [a-zA-Z]+[öäüqwß] - in het voorbeeld hierboven bijvoorbeeld zoekt naar woorden in het doelsegment die twijfelachtige tekens bevatten vanaf het Duitse toetsenbord. Reguliere uitdrukkingen zijn een krachtige manier om naar items van een tekenreeks te zoeken. Bekijk meer in het hoofdstuk<link linkend="chapter.regexp"> Reguliere uitdrukkingen.</link></para>
+        </listitem>
+      </varlistentry>
     </variablelist>
 
-    <para>Voor elk van deze twee methoden kunt u de volgende drie opties kiezen:</para>
+    <para>Aanvullend op een van de methoden hierboven kunt u het volgende selecteren:</para>
 
     <itemizedlist>
       <listitem>
@@ -120,22 +128,36 @@
       </listitem>
 
       <listitem>
-        <para><emphasis role="bold">reguliere uitdrukkingen:</emphasis> de tekenreeks zal worden behandeld als een reguliere uitdrukking. Een zoekactie met reguliere uitdrukkingen is een krachtig middel om te zoeken naar tekenreeksen. Het komt overeen met zoeken met jokertekens, maar is veel meer flexibel. De reguliere uitdrukkingen die worden gebruikt in zoekacties zijn die welke worden ondersteund door Java. Zie verder het hoofdstuk over Reguliere uitdrukkingen.</para>
+        <para><emphasis role="bold">in bron: </emphasis>zoek in de bronsegmenten</para>
+      </listitem>
+
+      <listitem>
+        <para><emphasis role="bold">in vertaling: </emphasis>zoek in de doelsegmenten</para>
+      </listitem>
+
+      <listitem>
+        <para><emphasis role="bold">in notities: </emphasis>zoek in notities van segmenten</para>
       </listitem>
 
       <listitem>
         <para><emphasis role="bold">zoeken in TM's</emphasis>: vertaalgeheugens in de map <filename>tm</filename> worden opgenomen in de zoekactie.</para>
       </listitem>
+
+      <listitem>
+        <para><emphasis role="bold">Alle resultaten weergeven: </emphasis>niet selecteren van dit keuzevak zorgt er voor dat OmegaT alleen het eerst voorkomende item weergeeft van een hit, als er meerdere hits bestaan</para>
+      </listitem>
     </itemizedlist>
+
+    <para>Als u klikt op de knop <guibutton>Gevorderde opties</guibutton> kunnen aanvullende criteria (auteur van de vertaling, datum van vertaling etc), zoals in het in de afbeelding hierboven weergegeven, worden geselecteerd.</para>
   </section>
 
   <section id="search.result.display">
     <title>Zoekresultaten weergeven</title>
 
-    <para>Door op de knop Zoeken te drukken na het invoeren van een tekenreeks in het zoekveld zullen alle segmenten in het project, die de gezochte tekenreeks bevatten, worden weergegeven. Omdat <application>OmegaT</application> identieke segmenten behandelt als één entiteit wordt alleen het eerste unieke segment getoond.</para>
-
-    <para>De segmenten worden weergegeven in de volgorde waarin zij in het project voorkomen. Vertaalde segmenten worden weergegeven met de originele tekst boven en de vertaalde tekst eronder, niet-vertaalde segmenten worden alleen als bron weergegeven.</para>
+    <para>Door op de knop Zoeken te drukken na het invoeren van een tekenreeks in het zoekveld zullen alle segmenten in het project, die de gezochte tekenreeks bevatten, worden weergegeven. Omdat <application>OmegaT</application> identieke segmenten behandelt als één entiteit wordt alleen het eerste unieke segment getoond. De segmenten worden weergegeven in de volgorde waarin zij in het project voorkomen. Vertaalde segmenten worden weergegeven met de originele tekst boven en de vertaalde tekst eronder, niet-vertaalde segmenten worden alleen als bron weergegeven.</para>
 
     <para>Klikken op een segment opent het in het venster Bewerken om het aan te kunnen passen. Daarna kunt u teruggaan naar het venster Zoeken en naar het volgende gevonden segment gaan, bijvoorbeeld om het te controleren en, indien nodig, de terminologie aan te passen.</para>
+
+    <para>U kunt meerdere vensters Tekst zoeken tegelijkertijd geopend hebben. U kunt hun inhoud snel zien door te kijken naar hun titel: het zal de gebruikte zoekterm bevatten.</para>
   </section>
 </chapter>

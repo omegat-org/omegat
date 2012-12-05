@@ -21,7 +21,7 @@
         <listitem>
           <para><emphasis role="bold">Nee / Ik weet het niet:</emphasis> download<emphasis> OmegaT_2.5.x_Windows.exe.</emphasis></para>
 
-          <para>Dit pakket is gebundeld met Oracle's  Java Runtime Environment. Deze JRE zal geen problemen veroorzaken met andere Java-implementaties die misschien al op uw systeem geïnstalleerd zijn.</para>
+          <para>Dit pakket is gebundeld met Oracle's Java Runtime Environment. Deze JRE zal geen problemen veroorzaken met andere Java-implementaties die misschien al op uw systeem geïnstalleerd zijn.</para>
         </listitem>
       </itemizedlist>
     </section>
@@ -29,7 +29,7 @@
     <section id="OmegaT.installation.Windows">
       <title><application>Installeren van OmegaT</application></title>
 
-      <para>Dubbelklik op het programma dat u hebt gedownload en volg de instructies om <application>OmegaT</application> te installeren. </para>
+      <para>Dubbelklik op het programma dat u hebt gedownload en volg de instructies om <application>OmegaT</application> te installeren.</para>
     </section>
 
     <section id="adding.OmegaT.to.the.start.menu.or.desktop">
@@ -92,7 +92,7 @@
 
           <itemizedlist>
             <listitem>
-              <para>Als uw bestaande installatie van OmegaT  een &quot;Windows with JRE&quot;-versie is, moet de nieuwe versie ook een &quot;Windows with JRE&quot;-versie zijn.</para>
+              <para>Als uw bestaande installatie van OmegaT een &quot;Windows with JRE&quot;-versie is, moet de nieuwe versie ook een &quot;Windows with JRE&quot;-versie zijn.</para>
             </listitem>
           </itemizedlist>
         </listitem>
@@ -118,7 +118,7 @@
         <listitem>
           <para><emphasis role="bold">Nee / Ik weet het niet:</emphasis> download <emphasis>OmegaT_2.5.x_Linux.tar.bz2.</emphasis></para>
 
-          <para>Dit pakket is gebundeld met Oracle's  Java Runtime Environment. Deze JRE zal geen problemen veroorzaken met andere Java-implementaties die misschien al op uw systeem geïnstalleerd zijn.</para>
+          <para>Dit pakket is gebundeld met Oracle's Java Runtime Environment. Deze JRE zal geen problemen veroorzaken met andere Java-implementaties die misschien al op uw systeem geïnstalleerd zijn.</para>
         </listitem>
       </itemizedlist>
     </section>
@@ -143,7 +143,7 @@
 
         <itemizedlist>
           <listitem>
-            <para>Druk op <emphasis role="bold"> <keysym>Alt+F2</keysym> </emphasis> om KRunner weer te geven. Typ <emphasis>kmenuedit+enter</emphasis> om de opdracht uit te voeren. De KMenuEditor verschijnt. Selecteer in KMenuEditor  <emphasis>Bestand -&gt; Nieuw item.</emphasis></para>
+            <para>Druk op <emphasis role="bold"> <keysym>Alt+F2</keysym> </emphasis> om KRunner weer te geven. Typ <emphasis>kmenuedit+enter</emphasis> om de opdracht uit te voeren. De KMenuEditor verschijnt. Selecteer in KMenuEditor <emphasis>Bestand -&gt; Nieuw item.</emphasis></para>
           </listitem>
 
           <listitem>
@@ -185,7 +185,7 @@
           </listitem>
 
           <listitem>
-            <para>Klik op de pictogramknop, en druk dan op <emphasis>Bladeren...</emphasis> en navigeer naar de submap /images in de toepassingenmap <application>OmegaT</application>. Selecteer het pictogram <emphasis><application>OmegaT</application>.png</emphasis>. GNOME kan weigeren om de pictogrambestanden weer te geven in de beschikbare indelingen en in het begin een SVGbestand verwachten, maar als de map wordt geselecteerd, zouden de bestanden moeten verschijnen en kan <application>OmegaT</application>.png worden geselecteerd.</para>
+            <para>Klik op de pictogramknop, en druk dan op <emphasis>Bladeren...</emphasis> en navigeer naar de submap /images in de toepassingsmap <application>OmegaT</application>. Selecteer het pictogram <emphasis><application>OmegaT</application>.png</emphasis>. GNOME kan weigeren om de pictogrambestanden weer te geven in de beschikbare indelingen en in het begin een SVGbestand verwachten, maar als de map wordt geselecteerd, zouden de bestanden moeten verschijnen en kan <application>OmegaT</application>.png worden geselecteerd.</para>
           </listitem>
         </itemizedlist>
       </section>
@@ -394,7 +394,7 @@
           <para><emphasis role="bold">Taal van de gebruikersinterface</emphasis></para>
 
           <para><emphasis role="bold">-Duser.language=XX</emphasis><indexterm class="singular">
-              <primary>OmegaT uitvoeren</primary> <secondary>Argumenten voor bestand om op te starten</secondary> <tertiary>User.language</tertiary>
+              <primary>OmegaT uitvoeren</primary> <secondary>Argumenten voor bestand om op te starten</secondary> <tertiary>Taal gebruikersinterface</tertiary>
             </indexterm> Normaal gesproken, d.i. als <application>OmegaT</application> wordt gestart zonder enig argument, detecteert het programma eerst de taal van het besturingssysteem van de gebruiker. Als een gebruikersinterface in deze taal beschikbaar is gebruikt <application>OmegaT</application> die. Dus, als het besturingssysteem van de gebruiker Russisch is en <application>OmegaT</application> is vertaald in het Russisch, wordt <application>OmegaT</application> weergegeven met een Russische gebruikersinterface, Russische menu's, etc. Als de taal van het besturingssysteem van de gebruiker niet beschikbaar is gebruikt <application>OmegaT</application> standaard Engels. Dit is het standaard gedrag.</para>
 
           <para>Het argument <emphasis>&quot;-Duser.language=XX&quot;</emphasis> zorgt ervoor dat <application>OmegaT</application> de gespecificeerde taal gebruikt, in plaats van de taal van het besturingssysteem van de gebruiker. &quot;XX&quot; in de opdracht staat voor de code van twee letters van de gewenste taal. De opdracht, om <application>OmegaT</application> te starten met een Franse interface (bijvoorbeeld op een Russisch besturingssysteem), zou daarom zijn:</para>
@@ -406,10 +406,10 @@
 
       <itemizedlist>
         <listitem>
-          <para><emphasis role="bold">Instellen land gebruiker</emphasis></para>
+          <para><emphasis role="bold">Land gebruiker</emphasis></para>
 
           <para><emphasis role="bold">-Duser.country=XX</emphasis><indexterm class="singular">
-              <primary>OmegaT uitvoeren</primary> <secondary>Argumenten voor bestand om op te starten</secondary> <tertiary>User.country</tertiary>
+              <primary>OmegaT uitvoeren</primary> <secondary>Argumenten voor bestand om op te starten</secondary> <tertiary>Land gebruiker</tertiary>
             </indexterm> Naast de taal kunt u ook het land specificeren, bijvoorbeeld CN of TW in geval van de Chinese taal. U moet zowel de taal als het land specificeren om de gids Snel starten in de gewenste taal weer te geven. Dit is zelfs nodig als er slechts één combinatie beschikbaar is, zoals pt_BR in geval van Portugees / Braziliaans.</para>
         </listitem>
       </itemizedlist>
@@ -428,7 +428,7 @@
 
           <para><emphasis role="bold">-XmxZZM </emphasis><indexterm class="singular">
               <primary>OmegaT uitvoeren</primary> <secondary>Argumenten voor bestand om op te starten</secondary> <tertiary>Toewijzen van geheugen</tertiary>
-            </indexterm>Deze opdracht wijst meer geheugen toe aan <application>OmegaT</application>. Standaard wordt 256 Mb toegewezen, dus er is geen voordeel te behalen door minder dan dit getal toe te wijzen. &quot;ZZ&quot; staat voor de toegewezen geheugenruimte in megabytes. De opdracht om <application>OmegaT</application> te starten met toewijzing van 1024 Mb (1 gigabyte) aan geheugen luidt dan ook:</para>
+            </indexterm>Deze opdracht wijst meer geheugen toe aan <application>OmegaT</application>. Standaard wordt 512 Mb toegewezen, dus er is geen voordeel te behalen door minder dan dit getal toe te wijzen. &quot;ZZ&quot; staat voor de toegewezen geheugenruimte in megabytes. De opdracht om <application>OmegaT</application> te starten met toewijzing van 1024 Mb (1 gigabyte) aan geheugen luidt dan ook:</para>
 
           <para><literal>java -Xmx1024M -jar
           <application>OmegaT</application>.jar</literal></para>
@@ -438,15 +438,15 @@
           <para><emphasis role="bold">Proxy host IP-adres</emphasis></para>
 
           <para><emphasis role="bold"><emphasis role="bold">-Dhttp.proxyHost=nnn.nnn.nnn.nnn</emphasis> <indexterm class="singular">
-              <primary>OmegaT uitvoeren</primary> <secondary>Argumenten voor bestand om op te starten</secondary> <tertiary>Proxyserver IP-adres</tertiary>
+              <primary>OmegaT uitvoeren</primary> <secondary>Argumenten voor bestand om op te starten</secondary> <tertiary>Proxyhost IP-adres</tertiary>
             </indexterm></emphasis> Het IP-adres van uw proxyserver, als uw systeem een proxy gebruikt</para>
         </listitem>
 
         <listitem>
-          <para><emphasis role="bold">Proxyserver poortnummer</emphasis></para>
+          <para><emphasis role="bold">Proxyhost poortnummer</emphasis></para>
 
           <para><emphasis role="bold">Dhttp.proxyPort=NNNN</emphasis> <indexterm class="singular">
-              <primary>OmegaT uitvoeren</primary> <secondary>Argumenten voor bestand om op te starten</secondary> <tertiary>Proxyserver - Poortnummer</tertiary>
+              <primary>OmegaT uitvoeren</primary> <secondary>Argumenten voor bestand om op te starten</secondary> <tertiary>Proxyhost - Poortnummer</tertiary>
             </indexterm>Het poortnummer dat uw systeem gebruikt om toegang te krijgen tot de proxyserver.</para>
         </listitem>
 
@@ -583,17 +583,52 @@
               </listitem>
             </itemizedlist>
           </listitem>
+
+          <listitem>
+            <para><literal>--output-tag-validation-={reguliere uitdrukking}</literal></para>
+
+            <para>Als deze modus werd gebruikt, zal deze optie de bestanden specificeren die automatisch moeten worden verwerkt. Als de parameter niet is gespecificeerd, zullen alle bestanden worden verwerkt. Hier zijn een paar typische voorbeelden om uw keuze te beperken:</para>
+
+            <itemizedlist>
+              <listitem>
+                <para><emphasis><literal>.*\.html</literal></emphasis></para>
+
+                <para>Alle HTML-bestanden zullen worden vertaald - merk op dat de punt in het gebruikelijke *.html moet worden vooraf gegaan door een backslash (\.) zoals gespecificeerd door de regels voor reguliere uitdrukkingen</para>
+              </listitem>
+
+              <listitem>
+                <para><literal>test\.html</literal></para>
+
+                <para>Alleen het bestand test.html aan het begin van de map source zal worden vertaald. Indien er andere bestanden, genaamd test.html, in andere mappen staan, worden die genegeerd.</para>
+              </listitem>
+
+              <listitem>
+                <para><literal>dir-10\\test\.html</literal></para>
+
+                <para>Alleen het bestand test.html in de map dir-10 zal worden verwerkt. Merk opnieuw op dat ook de backslash moet worden voorafgegaan door een backslash.</para>
+              </listitem>
+            </itemizedlist>
+          </listitem>
+
+          <listitem>
+            <para><literal>--tag-validation=[abort|warn]</literal><parameter>
+            outputFileName</parameter></para>
+
+            <para><parameter>en de uitvoer zal de resterende fouten voor het valideren van tags bevatten die teruggegeven zouden kunnen worden aan de vertaler.</parameter></para>
+
+            <para>Deze optie maakt het mogelijk het valideren van tags in modus batch uit te voeren. Als abort is geselecteerd zal het valideren van tags stoppen bij het eerste ongeldige segment. Als warn is gespecificeerd zal het valideren van tags alle segmenten verwerken en waarschuwingen over segmenten met ongeldige tags in het gespecificeerde bestand schrijven.</para>
+          </listitem>
         </itemizedlist>
       </section>
 
       <section id="console.mode.option.quiet">
         <title>optie Quiet</title>
 
-        <para>Een extra parameter voor de opdrachtregel, specifiek voor de console-modus:  <literal>--quiet.</literal>In de modus quiet, wordt er minder informatie gelogd op het scherm. De berichten die u normaal gesproken zou vinden in de statusbalk worden niet weergegeven.</para>
+        <para>Een extra parameter voor de opdrachtregel, specifiek voor de console-modus: <literal>--quiet.</literal> In de modus quiet, wordt er minder informatie gelogd op het scherm. De berichten die u normaal gesproken zou vinden in de statusbalk worden niet weergegeven.</para>
 
         <para>Gebruik: <literal>java -jar <application>OmegaT</application>.jar /pad/naar/project --mode=console-translate --quiet</literal></para>
       </section>
-      
+
       <section id="console.mode.option.validatetags">
         <title>Optie Tags valideren</title>
 

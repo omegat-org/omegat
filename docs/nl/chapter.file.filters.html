@@ -3,8 +3,8 @@
       <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
    
       <title>Hoofdstuk 7. Bestandsfilters</title>
-      <link rel="stylesheet" href="OmegaT.css" type="text/css">
-      <meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+      <link rel="stylesheet" type="text/css" href="OmegaT.css">
+      <meta name="generator" content="DocBook XSL Stylesheets V1.76.1">
       <link rel="home" href="index.html" title="OmegaT - Gebruikershandleiding">
       <link rel="up" href="index.html" title="OmegaT - Gebruikershandleiding">
       <link rel="prev" href="chapter.project.properties.html" title="Hoofdstuk 6. Projecteigenschappen">
@@ -74,9 +74,14 @@
                </li>
             </ul>
          </div>
+         <p>Bekijk het menu <span class="guimenuitem">Opties &gt; Bestandsfilters ... </span> om te zien welke bestandsindelingen kunnen worden afgehandeld door OmegaT.
+         </p>
          <p>De meeste gebruikers zullen tevreden zijn met de standaard ingestelde opties. Als u dat niet bent opent u het hoofd dialoogvenster
             door in het hoofdmenu<span class="bold"><strong> Opties → Bestandsfilters...</strong></span> te selecteren. U kunt ook project-specifieke bestandsfilters inschakelen, die alleen zullen worden gebruikt voor het huidige
             project, door de optie <span class="bold"><strong>Bestandsfilters...</strong></span> in Project → Eigenschappen te selecteren.
+         </p>
+         <p>U kunt projectspecifieke filters inschakelen via <span class="bold"><strong>Opties → Eigenschappen...</strong></span> . Klik op de knop <span class="guibutton">Bestandsfilters</span> en activeer het keuzevak <span class="guimenuitem">Projectspecifieke filters inschakelen</span><a class="indexterm" name="d0e4206"></a>. Een kopie van de configuratie van de filters zal in dit geval met het project worden opgeslagen. Indien u later filters
+            wijzigt zullen alleen de projectfilters worden bijgewerkt, waarbij de filters voor de gebruikers ongewijzigd zullen blijven.
          </p>
          <p><span class="bold"><strong>Waarschuwing!</strong></span> Als u de segmentatie-opties wijzigt als een project geopend is moet u het project herladen vóórdat de wijzigingen effect
             hebben.
@@ -85,7 +90,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="file.filters.dialog"></a>1. dialoogvenster Bestandsfilters<a class="indexterm" name="d0e4095"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="file.filters.dialog"></a>1. dialoogvenster Bestandsfilters<a class="indexterm" name="d0e4219"></a></h2>
                   </div>
                </div>
             </div>
@@ -99,7 +104,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="filters.options"></a>2. Filteropties<a class="indexterm" name="d0e4111"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="filters.options"></a>2. Filteropties<a class="indexterm" name="d0e4235"></a></h2>
                   </div>
                </div>
             </div>
@@ -151,7 +156,8 @@
             <div class="itemizedlist">
                <ul class="itemizedlist" type="disc">
                   <li class="listitem">
-                     <p><span class="emphasis"><em>Tekst die overeenkomt met reguliere uitdrukking overslaan</em></span>: De tekst die overeenkomt met de reguliere uitdrukking zal worden overgeslagen.
+                     <p><span class="emphasis"><em>Tekst die overeenkomt met reguliere uitdrukking overslaan</em></span>: De tekst die overeenkomt met de reguliere uitdrukking wordt overgeslagen. Dit wordt in de tagvalidatie in rood weergegeven.
+                        Tekst in het bronsegment die overeenkomt wordt cursiefweergegeven.
                      </p>
                   </li>
                </ul>
@@ -159,8 +165,18 @@
             <div class="itemizedlist">
                <ul class="itemizedlist" type="disc">
                   <li class="listitem">
-                     <p><span class="emphasis"><em>Vertaal het attribuut 'content' van metatags niet: ... :</em></span> de 'sleutel-waarden'-paren van het attribuut, gescheiden door komma's, zullen niet vertaald worden
+                     <p><span class="emphasis"><em>Vertaal het attribuut 'content' van metatags niet: ... :</em></span> De volgende metatags zullen niet worden vertaald.
                      </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" type="disc">
+                  <li class="listitem">
+                     <p><span class="emphasis"><em>Vertaal NIET de inhoud van tags met de volgende paren van sleutels en waarden voor attributen (door komma's gescheiden):</em></span>: een overeenkomst in de lijst met sleutel-waardenparen zorgt er voor dat de inhoud van tags zal worden genegeerd
+                     </p>
+                     <p>Het is soms handig om enkele tags niet te vertalen te maken, gebaseerd op de waarde van attributen. Bijv: <code class="literal">&lt;div class="hide"&gt; &lt;span translate="no"&gt;</code> U kunt sleutel-waardenparen diefiniëren voor for tags die niet vertaald moeten worden. Voor het voorbeeld hierboven zou het
+                        veld bevatten: <code class="literal">class=hide, translate=no </code></p>
                   </li>
                </ul>
             </div>
@@ -255,7 +271,15 @@
             <div class="itemizedlist">
                <ul class="itemizedlist" type="disc">
                   <li class="listitem">
-                     <p><span class="emphasis"><em>Vertaal het attribuut 'content' van metatags niet</em></span> ...: de 'sleutel-waarden'-paren van het attribuut, gescheiden door komma's, zullen niet vertaald worden
+                     <p><span class="emphasis"><em>Vertaal het attribuut 'content' van metatags niet: ... :</em></span> De volgende metatags zullen niet worden vertaald.
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" type="disc">
+                  <li class="listitem">
+                     <p><span class="emphasis"><em>Vertaal NIET de inhoud van tags met de volgende paren van sleutels en waarden voor attributen (door komma's gescheiden):</em></span>: een overeenkomst in de lijst met sleutel-waardenparen zorgt er voor dat de inhoud van tags zal worden genegeerd
                      </p>
                   </li>
                </ul>
@@ -288,7 +312,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="edit.filter.dialog"></a>3. dialoogvenster Filter bewerken<a class="indexterm" name="d0e4273"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="edit.filter.dialog"></a>3. dialoogvenster Filter bewerken<a class="indexterm" name="d0e4416"></a></h2>
                   </div>
                </div>
             </div>
@@ -302,7 +326,7 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="source.filetype.and.filename.pattern"></a>3.1. <a class="indexterm" name="d0e4288"></a>Type bronbestand, patroon voor bestandsnaam<a class="indexterm" name="d0e4294"></a></h3>
+                        <h3 class="title"><a name="source.filetype.and.filename.pattern"></a>3.1. <a class="indexterm" name="d0e4431"></a>Type bronbestand, patroon voor bestandsnaam<a class="indexterm" name="d0e4437"></a></h3>
                      </div>
                   </div>
                </div>
@@ -322,7 +346,7 @@
                         </h3>
                      </div>
                   </div>
-               </div><a class="indexterm" name="d0e4322"></a><a class="indexterm" name="d0e4327"></a><a class="indexterm" name="d0e4332"></a><p>Slechts een beperkt aantal bestandsformaten specificeren een voorgeschreven codering. Bestandsformaten die hun codering niet
+               </div><a class="indexterm" name="d0e4465"></a><a class="indexterm" name="d0e4470"></a><a class="indexterm" name="d0e4475"></a><p>Slechts een beperkt aantal bestandsformaten specificeren een voorgeschreven codering. Bestandsformaten die hun codering niet
                   specificeren zullen de codering gebruiken die u instelt voor de extensie die overeenkomt met hun naam. Standaard zullen bijvoorbeeld
                   <code class="literal">.txt</code>-bestanden worden geladen met behulp van de standaard codering van uw besturingssysteem. U kunt de broncodering voor elk verschillend
                   bronbestandsnaam-patroon wijzigen. Zulke bestanden kunnen ook in elke codering worden weggeschreven. Als standaard heeft het
@@ -348,8 +372,7 @@
                <div class="itemizedlist">
                   <ul class="itemizedlist" type="disc">
                      <li class="listitem">
-                        <p><span class="application">OmegaT</span> gebruikt de standaard codering van het besturingssysteem voor tekstbestanden.
-                        </p>
+                        <p>OmegaT gebruikt de standaard codering van het besturingssysteem voor tekstbestanden.</p>
                      </li>
                   </ul>
                </div>
@@ -358,14 +381,14 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="target.name"></a>3.3. Doelbestandsnaam<a class="indexterm" name="d0e4362"></a></h3>
+                        <h3 class="title"><a name="target.name"></a>3.3. Doelbestandsnaam<a class="indexterm" name="d0e4503"></a></h3>
                      </div>
                   </div>
                </div>
                <p>Soms wilt u misschien de bestanden die u vertaalde automatisch hernoemen, bijvoorbeeld door een taalcode achter de bestandsnaam
-                  te zetten. Doelbestandsnaam-patronen gebruiken een speciale syntaxis, dus als u dit veld zou willen bewerken, moet u op <span class="bold"><strong>Bewerken...</strong></span> klikken en het dialoogvenster <a class="indexterm" name="d0e4372"></a>Patroon bewerken gebruiken. Klik op <span class="bold"><strong>Standaardinstellingen</strong></span> als u terug wilt keren naar de standaard configuratie van het filter. U kunt de naam ook direct aanpassen in het veld voor
-                  het patroon van het doelbestand of het dialoogvenster Bestandsfilters. Het dialoogvenster Patroon bewerken biedt de volgende
-                  opties:
+                  te zetten. Doelbestandsnaam-patronen gebruiken een speciale syntaxis, dus als u dit veld zou willen bewerken, moet u op <span class="bold"><strong>Bewerken...</strong></span> klikken en het dialoogvenster <a class="indexterm" name="d0e4513"></a>Patroon bewerken gebruiken. Klik op <span class="bold"><strong>Standaardinstellingen</strong></span> als u terug wilt keren naar de standaard configuratie van het filter. U kunt de naam ook direct aanpassen in het veld voor
+                  het patroon van het doelbestand of het dialoogvenster Bestandsfilters. Het dialoogvenster Patroon bewerken biedt, naast andere,
+                  de volgende opties:
                </p>
                <div class="itemizedlist">
                   <ul class="itemizedlist" type="disc">
@@ -380,6 +403,10 @@
                   <ul class="itemizedlist" type="disc">
                      <li class="listitem">
                         <p><code class="literal">${nameOnly}</code> - laat u alleen de naam van het bronbestand invoegen zonder de extensie.
+                        </p>
+                     </li>
+                     <li class="listitem">
+                        <p><code class="literal">${extension} </code>- de originele bestandsextensie
                         </p>
                      </li>
                   </ul>
@@ -403,7 +430,7 @@
                <div class="itemizedlist">
                   <ul class="itemizedlist" type="disc">
                      <li class="listitem">
-                        <p><code class="literal">${targetLanguageCode}</code> - alleen de doeltaal ("XX").
+                        <p><code class="literal">${targetLanguageCode}</code> - de doeltaal - alleen "XX"
                         </p>
                      </li>
                   </ul>
@@ -411,8 +438,58 @@
                <div class="itemizedlist">
                   <ul class="itemizedlist" type="disc">
                      <li class="listitem">
-                        <p><code class="literal">${targetCoutryCode}</code> - alleen de doel-landcode ("YY").
+                        <p><code class="literal">${targetCoutryCode}</code> - de doel-landcode - alleen "YY"
                         </p>
+                     </li>
+                     <li class="listitem">
+                        <p><code class="literal">$(timestamp-????)</code> - datum en tijd van het systeem op het moment van genereren in verschillende patronen
+                        </p>
+                        <p>Bekijk <a class="ulink" href="http://docs.oracle.com/javase/1.4.2/docs/api/java/text/SimpleDateFormat.html" target="_top">documentatie van Oracle</a> vpor voorbeelden van de patronen voor "SimpleDateFormat"
+                        </p>
+                     </li>
+                     <li class="listitem">
+                        <p>${system-os-name} - besturingssysteem van de gebruikte computer</p>
+                     </li>
+                     <li class="listitem">
+                        <p>${system-user-name) - systeem gebruikersnaam</p>
+                     </li>
+                     <li class="listitem">
+                        <p>${system-host-name} - systeem hostnaam</p>
+                     </li>
+                     <li class="listitem">
+                        <p>${file-source-encoding} - codering bronbestand</p>
+                     </li>
+                     <li class="listitem">
+                        <p>${file-target-encoding} - codering doelbestand</p>
+                     </li>
+                     <li class="listitem">
+                        <p>${targetLocaleLCID) - Microsoft locale voor doel</p>
+                     </li>
+                  </ul>
+               </div>
+               <p>Aanvullende varianten zijn beschikbaar voor variabelen ${nameOnly} en ${Extension}. In het geval dat de bestandsnaam een niet
+                  unieke naam heeft, kan men variabelen in de vorm <code class="literal">$(name only</code><span class="emphasis"><em>-aantal extensies</em></span>) en <code class="literal">${extension</code>-<span class="emphasis"><em>aantal extensies} </em></span> toepassen. Als bijvoorbeeld het originele bestand is genaamd Document.xx.docx, zullen de volgende variabelen de volgende
+                  resultaten geven:
+               </p>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" type="disc">
+                     <li class="listitem">
+                        <p>${nameOnly-0} Document</p>
+                     </li>
+                     <li class="listitem">
+                        <p>${nameOnly-1} Document.xx</p>
+                     </li>
+                     <li class="listitem">
+                        <p>${nameOnly-2} Document.xx.docx</p>
+                     </li>
+                     <li class="listitem">
+                        <p>${extension-0} docx</p>
+                     </li>
+                     <li class="listitem">
+                        <p>${extension-1} xx.docx</p>
+                     </li>
+                     <li class="listitem">
+                        <p>${extension-2} Document.xx.docx</p>
                      </li>
                   </ul>
                </div>

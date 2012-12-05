@@ -47,7 +47,9 @@
 
       <para><literal> --mode=console-translate \</literal></para>
 
-      <para><literal>--source-pattern={reguliere uitdrukking}</literal></para>
+      <para><literal>--source-pattern={reguliere uitdrukking} \</literal></para>
+
+      <para><literal> --tag-validation=[block|warn] </literal></para>
 
       <para><emphasis role="bold">Uitleg:</emphasis></para>
 
@@ -69,7 +71,11 @@
         </listitem>
 
         <listitem>
-          <para>--source-pattern={reguliere uitdrukking} De bestanden die moeten worden vertaald kunnen op deze manier worden gespecificeerd. Hier is een voorbeeld van de reguliere uitdrukking: <filename>test\.html</filename></para>
+          <para><literal>--source-pattern={reguliere uitdrukking} </literal>De bestanden die moeten worden vertaald kunnen op deze manier worden gespecificeerd. Hier is een voorbeeld van de reguliere uitdrukking: <filename>test\.html</filename></para>
+        </listitem>
+
+        <listitem>
+          <para><literal>--tag-validation=[abort|warn] </literal> Bij abort wordt het programma onderbroken als bij Tags valideren fouten worden gevonden. Bij warn worden de fouten afgedrukt maar gaat het programma door. In alle andere gevallen worden de tags niet gevalideerd.</para>
         </listitem>
       </itemizedlist>
     </section>
@@ -77,7 +83,7 @@
     <section id="misc.console.mode.option.quiet">
       <title>optie Quiet</title>
 
-      <para>Een extra parameter voor de opdrachtregel, specifiek voor de console-modus:  <literal>--quiet.</literal>In de modus quiet, wordt er minder informatie gelogd op het scherm. De berichten die u normaal gesproken zou vinden in de statusbalk worden niet weergegeven.</para>
+      <para>Een extra parameter voor de opdrachtregel, specifiek voor de console-modus: <literal>--quiet.</literal> In de modus quiet, wordt er minder informatie gelogd op het scherm. De berichten die u normaal gesproken zou vinden in de statusbalk worden niet weergegeven.</para>
 
       <para>Gebruik: <literal>java -jar <application>OmegaT</application>.jar /pad/naar/project --mode=console-translate --quiet</literal></para>
     </section>
@@ -96,7 +102,7 @@
         <primary>Diversen</primary> <secondary>Automatisch vergelijken van Java-eigenschappen</secondary> <seealso>diversen</seealso>
       </indexterm></title>
 
-    <para>OmegaT kan Java .properties vergelijken in modus console. Indien u de Properties-bestanden voor bron en doel voor één en dezelfde inhoud in uw taalpaar hebt, zal deze procedure een overeenkomend tmx-bestand maken voor deze inhoud. Gebruik: </para>
+    <para>OmegaT kan Java .properties vergelijken in modus console. Indien u de Properties-bestanden voor bron en doel voor één en dezelfde inhoud in uw taalpaar hebt, zal deze procedure een overeenkomend tmx-bestand maken voor deze inhoud. Gebruik:</para>
 
     <para><literal>java -jar OmegaT.jar --mode=console-align /my-project-dir
     --alignDir=/translatedFiles/ </literal></para>
@@ -129,7 +135,7 @@
       </listitem>
     </itemizedlist>
 
-    <para>Het dialoogvenster kan worden aangeroepen door het item in het hoofdmenu  <indexterm class="singular">
+    <para>Het dialoogvenster kan worden aangeroepen door het item in het hoofdmenu <indexterm class="singular">
         <primary>menu Opties</primary> <secondary>Lettertype...</secondary>
       </indexterm><menuchoice> <guimenu>Opties</guimenu> <guimenuitem>Lettertype...</guimenuitem> </menuchoice>. Het dialoogvenster bevat:</para>
 

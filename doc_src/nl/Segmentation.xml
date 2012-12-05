@@ -55,7 +55,7 @@
           </indexterm>Afbreekregel</term>
 
         <listitem>
-          <para>Verdeelt de brontekst in segmenten. Voorbeeld: &quot;<emphasis>Begrijpt u dat? Ik was er niet zeker van.</emphasis>&quot; zou moeten worden gescheiden in twee segmenten.  Wat betekent dat er een afbreekregel zou moeten zijn voor &quot;?&quot;, indien die wordt gevolgd door spaties en een woord met een hoofdletter. Selecteer het keuzevak Afbreken/Uitzondering om een regel te definiëren als een Afbreekregel.</para>
+          <para>Verdeelt de brontekst in segmenten. Voorbeeld: &quot;<emphasis>Begrijpt u dat? Ik was er niet zeker van.</emphasis>&quot; zou moeten worden gescheiden in twee segmenten. Wat betekent dat er een afbreekregel zou moeten zijn voor &quot;?&quot;, indien die wordt gevolgd door spaties en een woord met een hoofdletter. Selecteer het keuzevak Afbreken/Uitzondering om een regel te definiëren als een Afbreekregel.</para>
         </listitem>
       </varlistentry>
     </variablelist>

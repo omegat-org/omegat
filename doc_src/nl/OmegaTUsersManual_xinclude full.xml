@@ -37,19 +37,17 @@
 
   <xi:include href="EditingBehavior.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
 
-  <xi:include href="Font.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>            
-
-  <xi:include href="FormattedText.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
-
   <xi:include href="PlainText.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+
+ <xi:include href="FormattedText.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
 
   <xi:include href="TranslationMemories.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
 
   <xi:include href="Segmentation.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
 
-  <xi:include href="Regexp.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
-
   <xi:include href="Searches.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+
+  <xi:include href="Regexp.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
 
   <xi:include href="Dictionaries.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
 
@@ -60,14 +58,20 @@
   <xi:include href="Spellchecker.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
 
   <xi:include href="Miscelanea.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+  
+  <xi:include href="App_Tokenizer_plugin.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+  
+  <xi:include href="App_LanguageTool_plugin.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+  
+  <xi:include href="App_Scripting_plugin.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
 
   <xi:include href="App_Website.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
 
   <xi:include href="App_Languages.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
 
   <xi:include href="App_Keyboard.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
-	
-	<xi:include href="App_ShortCutCustomization.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+  
+  <xi:include href="App_ShortCutCustomization.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
 
   <xi:include href="App_LegalNotices.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
 

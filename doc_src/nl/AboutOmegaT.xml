@@ -26,7 +26,7 @@
 
     <itemizedlist>
       <listitem>
-        <para><emphasis role="bold">Proces van vertalingen:</emphasis> Veronderstel dat u iets moet vertalen, van één enkel bestand tot een map die submappen bevat met meerdere bestanden in verschillende indelingen. Als u OmegaT laat weten welke bestanden u moet vertalen, zal het kijken naar de  bestanden die het begrijpt, gebaseerd op regels voor bestandsfiltering, de tekstdelen daarin herkennen, de tekstgroepen opsplitsen op basis van segmentatieregels, en de segmenten één voor één tonen zodat u door kunt gaan met de vertaling. OmegaT slaat uw vertalingen op en stelt mogelijke vertalingen voor vanuit overeenkomende segmenten in eerdere vertaalgeheugens. Als u klaar bent om het uiteindelijke product te bekijken, kunt u de vertaalde bestanden exporteren, ze openen in het gewenste programma en zien hoe de vertaling er in de uiteindelijke indeling uitziet.</para>
+        <para><emphasis role="bold">Proces van vertalingen:</emphasis> Veronderstel dat u iets moet vertalen, van één enkel bestand tot een map die submappen bevat met meerdere bestanden in verschillende indelingen. Als u OmegaT laat weten welke bestanden u moet vertalen, zal het kijken naar de bestanden die het begrijpt, gebaseerd op regels voor bestandsfiltering, de tekstdelen daarin herkennen, de tekstgroepen opsplitsen op basis van segmentatieregels, en de segmenten één voor één tonen zodat u door kunt gaan met de vertaling. OmegaT slaat uw vertalingen op en stelt mogelijke vertalingen voor vanuit overeenkomende segmenten in eerdere vertaalgeheugens. Als u klaar bent om het uiteindelijke product te bekijken, kunt u de vertaalde bestanden exporteren, ze openen in het gewenste programma en zien hoe de vertaling er in de uiteindelijke indeling uitziet.</para>
       </listitem>
     </itemizedlist>
   </section>
@@ -86,7 +86,7 @@
       </listitem>
 
       <listitem>
-        <para><emphasis role="bold">Woordenboeken, Woordenlijsten</emphasis>, <emphasis role="bold">Machinevertaling</emphasis> en <emphasis role="bold">Spellingscontrole:</emphasis> in OmegaT kunnen woordenboeken en woordenlijsten worden uitgebreid. Als een internetverbinding beschikbaar is, kunnen diverse services voor machinevertaling  zoals Google Translate worden gebruikt vanuit OmegaT. Indien spellingscontrole is geactiveerd, worden spelfouten en typefouten herkend en kunnen die gecorrigeerd worden tijdens de vertaling.</para>
+        <para><emphasis role="bold">Woordenboeken, Woordenlijsten</emphasis>, <emphasis role="bold">Machinevertaling</emphasis> en <emphasis role="bold">Spellingscontrole:</emphasis> in OmegaT kunnen woordenboeken en woordenlijsten worden uitgebreid. Als een internetverbinding beschikbaar is, kunnen diverse services voor machinevertaling zoals Google Translate worden gebruikt vanuit OmegaT. Indien spellingscontrole is geactiveerd, worden spelfouten en typefouten herkend en kunnen die gecorrigeerd worden tijdens de vertaling.</para>
       </listitem>
 
       <listitem>

@@ -23,7 +23,13 @@
     </listitem>
   </itemizedlist>
 
+  <para>Bekijk het menu <guimenuitem>Opties &gt; Bestandsfilters ... </guimenuitem> om te zien welke bestandsindelingen kunnen worden afgehandeld door OmegaT.</para>
+
   <para>De meeste gebruikers zullen tevreden zijn met de standaard ingestelde opties. Als u dat niet bent opent u het hoofd dialoogvenster door in het hoofdmenu<emphasis role="bold"> Opties → Bestandsfilters...</emphasis> te selecteren. U kunt ook project-specifieke bestandsfilters inschakelen, die alleen zullen worden gebruikt voor het huidige project, door de optie <emphasis role="bold">Bestandsfilters...</emphasis> in Project → Eigenschappen te selecteren.</para>
+
+  <para>U kunt projectspecifieke filters inschakelen via <emphasis role="bold">Opties → Eigenschappen...</emphasis> . Klik op de knop <guibutton>Bestandsfilters</guibutton> en activeer het keuzevak <guimenuitem>Projectspecifieke filters inschakelen</guimenuitem><indexterm class="singular">
+      <primary>Bestandsfilters</primary> <secondary>projectspecifieke bestandsfilters</secondary>
+    </indexterm>. Een kopie van de configuratie van de filters zal in dit geval met het project worden opgeslagen. Indien u later filters wijzigt zullen alleen de projectfilters worden bijgewerkt, waarbij de filters voor de gebruikers ongewijzigd zullen blijven.</para>
 
   <para><emphasis role="bold">Waarschuwing!</emphasis> Als u de segmentatie-opties wijzigt als een project geopend is moet u het project herladen vóórdat de wijzigingen effect hebben.</para>
 
@@ -78,13 +84,20 @@
 
     <itemizedlist>
       <listitem>
-        <para><emphasis>Tekst die overeenkomt met reguliere uitdrukking overslaan</emphasis>: De tekst die overeenkomt met de reguliere uitdrukking zal worden overgeslagen.</para>
+        <para><emphasis>Tekst die overeenkomt met reguliere uitdrukking overslaan</emphasis>: De tekst die overeenkomt met de reguliere uitdrukking wordt overgeslagen. Dit wordt in de tagvalidatie in rood weergegeven. Tekst in het bronsegment die overeenkomt wordt cursiefweergegeven.</para>
       </listitem>
     </itemizedlist>
 
     <itemizedlist>
       <listitem>
-        <para><emphasis>Vertaal het attribuut 'content' van metatags niet: ... :</emphasis> de 'sleutel-waarden'-paren van het attribuut, gescheiden door komma's, zullen niet vertaald worden</para>
+        <para><emphasis>Vertaal het attribuut 'content' van metatags niet: ... :</emphasis> De volgende metatags zullen niet worden vertaald.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis>Vertaal NIET de inhoud van tags met de volgende paren van sleutels en waarden voor attributen (door komma's gescheiden):</emphasis>: een overeenkomst in de lijst met sleutel-waardenparen zorgt er voor dat de inhoud van tags zal worden genegeerd</para>
+        <para>Het is soms handig om enkele tags niet te vertalen te maken, gebaseerd op de waarde van attributen. Bijv: <literal>&lt;div class=&quot;hide&quot;&gt; &lt;span translate=&quot;no&quot;&gt;</literal> U kunt sleutel-waardenparen diefiniëren voor for tags die niet vertaald moeten worden. Voor het voorbeeld hierboven zou het veld bevatten: <literal>class=hide, translate=no </literal></para>
       </listitem>
     </itemizedlist>
 
@@ -160,7 +173,13 @@
 
     <itemizedlist>
       <listitem>
-        <para><emphasis>Vertaal het attribuut 'content' van metatags niet</emphasis> ...: de 'sleutel-waarden'-paren van het attribuut, gescheiden door komma's, zullen niet vertaald worden</para>
+         <para><emphasis>Vertaal het attribuut 'content' van metatags niet: ... :</emphasis> De volgende metatags zullen niet worden vertaald.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis>Vertaal NIET de inhoud van tags met de volgende paren van sleutels en waarden voor attributen (door komma's gescheiden):</emphasis>: een overeenkomst in de lijst met sleutel-waardenparen zorgt er voor dat de inhoud van tags zal worden genegeerd</para>
       </listitem>
     </itemizedlist>
 
@@ -233,7 +252,7 @@
 
       <itemizedlist>
         <listitem>
-          <para><application>OmegaT</application> gebruikt de standaard codering van het besturingssysteem voor tekstbestanden.</para>
+          <para>OmegaT gebruikt de standaard codering van het besturingssysteem voor tekstbestanden.</para>
         </listitem>
       </itemizedlist>
     </section>
@@ -245,7 +264,7 @@
 
       <para>Soms wilt u misschien de bestanden die u vertaalde automatisch hernoemen, bijvoorbeeld door een taalcode achter de bestandsnaam te zetten. Doelbestandsnaam-patronen gebruiken een speciale syntaxis, dus als u dit veld zou willen bewerken, moet u op <emphasis role="bold">Bewerken...</emphasis> klikken en het dialoogvenster <indexterm class="singular">
           <secondary>dialoogvenster</secondary> <primary>Bestandsfilters</primary>
-        </indexterm>Patroon bewerken gebruiken. Klik op <emphasis role="bold">Standaardinstellingen</emphasis> als u terug wilt keren naar de standaard configuratie van het filter. U kunt de naam ook direct aanpassen in het veld voor het patroon van het doelbestand of het dialoogvenster Bestandsfilters. Het dialoogvenster Patroon bewerken biedt de volgende opties:</para>
+        </indexterm>Patroon bewerken gebruiken. Klik op <emphasis role="bold">Standaardinstellingen</emphasis> als u terug wilt keren naar de standaard configuratie van het filter. U kunt de naam ook direct aanpassen in het veld voor het patroon van het doelbestand of het dialoogvenster Bestandsfilters. Het dialoogvenster Patroon bewerken biedt, naast andere, de volgende opties:</para>
 
       <itemizedlist>
         <listitem>
@@ -256,6 +275,10 @@
       <itemizedlist>
         <listitem>
           <para><literal>${nameOnly}</literal> - laat u alleen de naam van het bronbestand invoegen zonder de extensie.</para>
+        </listitem>
+
+        <listitem>
+          <para><literal>${extension} </literal>- de originele bestandsextensie</para>
         </listitem>
       </itemizedlist>
 
@@ -273,13 +296,71 @@
 
       <itemizedlist>
         <listitem>
-          <para><literal>${targetLanguageCode}</literal> - alleen de doeltaal (&quot;XX&quot;).</para>
+          <para><literal>${targetLanguageCode}</literal> - de doeltaal - alleen &quot;XX&quot;</para>
         </listitem>
       </itemizedlist>
 
       <itemizedlist>
         <listitem>
-          <para><literal>${targetCoutryCode}</literal> - alleen de doel-landcode (&quot;YY&quot;).</para>
+          <para><literal>${targetCoutryCode}</literal> - de doel-landcode - alleen &quot;YY&quot;</para>
+        </listitem>
+
+        <listitem>
+          <para><literal>$(timestamp-????)</literal> - datum en tijd van het systeem op het moment van genereren in verschillende patronen</para>
+
+          <para>Bekijk <ulink url="http://docs.oracle.com/javase/1.4.2/docs/api/java/text/SimpleDateFormat.html">documentatie van Oracle</ulink> vpor voorbeelden van de patronen voor &quot;SimpleDateFormat&quot;</para>
+        </listitem>
+
+        <listitem>
+          <para>${system-os-name} - besturingssysteem van de gebruikte computer</para>
+        </listitem>
+
+        <listitem>
+          <para>${system-user-name) - systeem gebruikersnaam</para>
+        </listitem>
+
+        <listitem>
+          <para>${system-host-name} - systeem hostnaam</para>
+        </listitem>
+
+        <listitem>
+          <para>${file-source-encoding} - codering bronbestand</para>
+        </listitem>
+
+        <listitem>
+          <para>${file-target-encoding} - codering doelbestand</para>
+        </listitem>
+
+        <listitem>
+          <para>${targetLocaleLCID) - Microsoft locale voor doel</para>
+        </listitem>
+      </itemizedlist>
+
+      <para>Aanvullende varianten zijn beschikbaar voor variabelen ${nameOnly} en ${Extension}. In het geval dat de bestandsnaam een niet unieke naam heeft, kan men variabelen in de vorm <literal>$(name only</literal><emphasis>-aantal extensies</emphasis>) en <literal>${extension</literal>-<emphasis>aantal extensies} </emphasis> toepassen. Als bijvoorbeeld het originele bestand is genaamd Document.xx.docx, zullen de volgende variabelen de volgende resultaten geven:</para>
+
+      <itemizedlist>
+        <listitem>
+          <para>${nameOnly-0} Document</para>
+        </listitem>
+
+        <listitem>
+          <para>${nameOnly-1} Document.xx</para>
+        </listitem>
+
+        <listitem>
+          <para>${nameOnly-2} Document.xx.docx</para>
+        </listitem>
+
+        <listitem>
+          <para>${extension-0} docx</para>
+        </listitem>
+
+        <listitem>
+          <para>${extension-1} xx.docx</para>
+        </listitem>
+
+        <listitem>
+          <para>${extension-2} Document.xx.docx</para>
         </listitem>
       </itemizedlist>
     </section>

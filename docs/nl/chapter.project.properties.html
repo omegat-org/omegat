@@ -3,8 +3,8 @@
       <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
    
       <title>Hoofdstuk 6. Projecteigenschappen</title>
-      <link rel="stylesheet" href="OmegaT.css" type="text/css">
-      <meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+      <link rel="stylesheet" type="text/css" href="OmegaT.css">
+      <meta name="generator" content="DocBook XSL Stylesheets V1.76.1">
       <link rel="home" href="index.html" title="OmegaT - Gebruikershandleiding">
       <link rel="up" href="index.html" title="OmegaT - Gebruikershandleiding">
       <link rel="prev" href="chapter.menu.html" title="Hoofdstuk 5. Sneltoetsen voor menu en het toetsenbord">
@@ -29,14 +29,13 @@
          <div class="titlepage">
             <div>
                <div>
-                  <h2 class="title"><a name="chapter.project.properties"></a>Hoofdstuk 6. Projecteigenschappen<a class="indexterm" name="d0e3956"></a></h2>
+                  <h2 class="title"><a name="chapter.project.properties"></a>Hoofdstuk 6. Projecteigenschappen<a class="indexterm" name="d0e4007"></a></h2>
                </div>
             </div>
          </div>
          <div class="toc">
             <dl>
                <dt><span class="section"><a href="chapter.project.properties.html#properties.dialog">1. dialoogvenster Eigenschappen</a></span></dt>
-               <dt><span class="section"><a href="chapter.project.properties.html#language.modification">2. Projecteigenschappen aanpassen</a></span></dt>
             </dl>
          </div>
          <p></p>
@@ -51,7 +50,13 @@
             </div>
             <p>Het dialoogvenster <span class="guimenu">Project</span> → <span class="guimenuitem">eigenschappen...</span> (<span class="shortcut"><strong><span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>E</strong></span></strong></span>) wordt gebruikt om de projectmappen en talen te definiëren en aan te passen.
             </p>
-            <div class="figure"><a name="d0e3979"></a><p class="title"><b>Figuur 6.1. venster Projecteigenschappen</b></p>
+            <p>Het is mogelijk om de projecteigenschappen gedurende een vertaalsessie aan te passen. Onthoud dat wijzigen van de instellingen
+               voor het project consequenties kan hebben, in het bijzonder als het project al is opgestart. De veiligste manier is echter
+               om, totdat u wat meer ervaring hebt met OmegaT, alle instellingen als vast te beschouwen als de vertaling eenmaal is begonnen
+               - tenzij u zich natuurlijk realiseert dat er een grote vergissing is gemaakt. Zie het gedeelte Gegevensverlies voorkomen voor
+               manieren om uw werk te beveiligen.
+            </p>
+            <div class="figure"><a name="d0e4032"></a><p class="title"><b>Afbeelding 6.1. venster Projecteigenschappen</b></p>
                <div class="figure-contents">
                   <div class="mediaobject"><img src="images/NewProject_25.png" alt="venster Projecteigenschappen"></div>
                </div>
@@ -59,73 +64,69 @@
             <div class="itemizedlist">
                <ul class="itemizedlist" type="disc">
                   <li class="listitem">
-                     <p>Een gebied om de bron- en doeltalen van het project met keuzelijsten in te stellen</p>
+                     <p><span class="bold"><strong>Een gebied om de bron- en doeltalen van het project in te stellen</strong></span></p>
+                     <p>U kunt de bron- en doeltalen handmatig instellen of het menu met de keuzelijsten gebruiken. Onthoud goed dat het wijzigen
+                        van de talen er voor kan zorgen dat het de huidige gebruikte vertaalgeheugens onbruikbaar kan maken omdat hun taal niet meer
+                        overeenkomt met de nieuwe talen.
+                     </p>
                   </li>
                </ul>
             </div>
             <div class="itemizedlist">
                <ul class="itemizedlist" type="disc">
                   <li class="listitem">
-                     <p>Een vlag voor de instellingen van de segmentatie</p>
+                     <p>Keuzevak <span class="bold"><strong><span class="guilabel">Inschakelen segmentering op zin-niveau</span> </strong></span></p><a class="indexterm" name="d0e4057"></a><p>De instellingen voor segmentatie hebben alleen betrekking op de manier waarop de bronbestanden door <span class="application">OmegaT</span> worden afgehandeld. De vooringestelde manier van het segmenteren van de bronnen is de segmentering op zin-niveau, dus dit
+                        keuzevak zou in normale gevallen geselecteerd moeten worden gelaten.
+                     </p>
+                     <p>In sommige uitzonderlijke gevallen kan het alternatief, d.i. segmenteren op alinea's, de voorkeur genieten. Wijzigen van deze
+                        vlag past niet de segmentatie van de reeds bestaande vertaalgeheugens aan. Indien u gedurende de vertaling besluit om te schakelen
+                        van zin- naar alinea-vertaling, zal het interne vertaalgeheugen van het project niet worden gewijzigd (OmegaT kan oude vertaalgeheugens
+                        bijwerken die geen gebruik maakten van zin-segmentatie, maar niet andersom).
+                     </p>
+                     <p>Wijzigen van de instellingen voor segmentatie kunnen er voor zorgen dat sommige reeds vertaalde segmenten opgedeeld of samengevoegd
+                        worden. Zij zullen dan effectief terugkeren naar de status "niet vertaald" omdat zij niet overeenkomen met de opgenomen segmenten
+                        in het projectgeheugen, zelfs als de originele vertaling daar nog steeds in staat.
+                     </p>
                   </li>
                </ul>
             </div>
             <div class="itemizedlist">
                <ul class="itemizedlist" type="disc">
                   <li class="listitem">
-                     <p>Een gebied voor het instellen van de projectmappen</p>
+                     <p>Knop <span class="bold"><strong><span class="guibutton">Segmentatie...</span></strong></span><a class="indexterm" name="d0e4078"></a></p>
+                     <p>De segmentatieregels zijn in het algemeen geldig voor alle projecten. De gebruiker echter wil misschien een set regels genereren,
+                        specifiek voor het betreffende project. Gebruik deze knop om een dialoogvenster te openen dat het keuzevak <span class="guimenuitem">Projectspecifieke segmentatieregels</span> activeert, en ga dan door met het aanpassen van de segmentatieregels, zoals gewenst. De nieuwe set regels zal worden opgeslagen
+                        tezamen met het project en zal niet botsen met de algemene set segmentatieregels. Deselecteer het keuzevak om projectspecifieke
+                        segmentatieregels te verwijderen. Bekijk hoofdstuk <a class="link" href="chapter.segmentation.html" title="Hoofdstuk 14. Bronsegmentatie">Bronsegmentatie</a> voor meer informatie over segmentatieregels.<span class="emphasis"><em></em></span></p>
+                     <p><span class="emphasis"><em>Hint:</em></span> de set segmentatieregels voor een bepaald project wordt opgeslagen als <code class="filename">project/omegat/segmentation.conf.</code></p>
+                  </li>
+                  <li class="listitem">
+                     <p>Knop <span class="bold"><strong><span class="guibutton">Bestandsfilters...</span></strong></span><a class="indexterm" name="d0e4104"></a></p>
+                     <p>Op eenzelfde manier als hierboven kan de gebruiker project-specifieke bestandsfilters maken, die tezamen met het project zullen
+                        worden opgeslagen en alleen geldig zullen zijn voor het huidige project. Klik op de knop <span class="guibutton">Bestandsfilters ... </span>, en activeer het keuzevak <span class="guimenuitem">Projectspecifieke filters inschakelen</span> in het venster dat opent om een set projectspecifieke bestandsfilters te maken. Een kopie van de gewijzigde configuratie
+                        van de filters zal met het project worden opgeslagen. Deselecteer het keuzevak om projectspecifieke bestandsfilters te verwijderen.
+                        Onthoud dat in het menu <span class="guimenuitem">Opties-&gt;Bestandsfilters</span>, de globale filters voor de gebruikers worden gewijzigd, niet de filters voor het project. Bekijk hoofdstuk<a class="link" href="chapter.file.filters.html" title="Hoofdstuk 7. Bestandsfilters"> Bestandsfilters </a>voor meer over het onderwerp.<span class="emphasis"><em></em></span></p>
+                     <p><span class="emphasis"><em>Hint:</em></span> de set bestandsfilters voor een bepaald project wordt opgeslagen als <code class="filename">project/omegat/filters.xml.</code></p>
+                  </li>
+                  <li class="listitem">
+                     <p>Keuzevak <span class="bold"><strong>Automatisch vergroten van vertaling</strong></span><span class="bold"><strong><a class="indexterm" name="d0e4136"></a></strong></span></p>
+                     <p>In het geval dat er niet-unieke segmenten in brondocumenten staan biedt het keuzevak Automatisch vergroten van vertaling de
+                        gebruiker de volgende twee mogelijkheden met betrekking tot automatische vertaling: indien geselecteerd zal het eerste vertaalde
+                        segment worden beschouwd als de standaard vertaling en de tekst van het doel zal automatisch worden gebruikt voor latere hits
+                        gedurende het vertaalproces. Foutief vertaalde segmenten kunnen natuurlijk later handmatig worden gecorrigeerd met behulp
+                        van<span class="guimenuitem">Alternatieve vertaling maken</span>. Als het keuzevak Automatisch vergroten van vertaling niet is geselecteerd zullen de segmenten met alternatieve vertalingen
+                        niet vertaald worden totdat de gebruiker heeft bepaald welke vertaling moet worden gebruikt.
+                     </p>
                   </li>
                </ul>
             </div>
-            <p>Alle velden zijn te bewerken. U kunt de talen handmatig instellen of het menu met de keuzelijst gebruiken. Indien u namen
-               voor mappen invoert die nog niet bestaan, zal <span class="application">OmegaT</span> ze voor u maken.
-            </p>
-         </div>
-         <div class="section" title="2. Projecteigenschappen aanpassen">
-            <div class="titlepage">
-               <div>
-                  <div>
-                     <h2 class="title" style="clear: both"><a name="language.modification"></a>2. Projecteigenschappen aanpassen
-                     </h2>
-                  </div>
-               </div>
-            </div>
-            <p>Onthoud dat wijzigen van de instellingen voor het project consequenties kan hebben, in het bijzonder als het project al is
-               opgestart.
-            </p>
             <div class="itemizedlist">
                <ul class="itemizedlist" type="disc">
                   <li class="listitem">
-                     <p><span class="bold"><strong>Wijzigen van bron- en doeltalen:<a class="indexterm" name="d0e4016"></a></strong></span></p>
-                     <p>Onthoud goed dat het wijzigen van de talen er voor kan zorgen dat het de huidige gebruikte vertaalgeheugens onbruikbaar kan
-                        maken omdat hun taal niet meer overeenkomt met de nieuwe talen.
-                     </p>
-                  </li>
-                  <li class="listitem">
-                     <p><span class="bold"><strong>Aanpassen van segmentatie:<a class="indexterm" name="d0e4027"></a></strong></span></p>
-                     <p>De instellingen voor segmentatie hebben alleen betrekking op de manier waarop de bronbestanden door <span class="application">OmegaT</span> worden afgehandeld. Zij passen niet de segmentatie van de reeds bestaande vertaalgeheugens aan.
-                     </p>
-                     <p>Wijzigingen aan de instellingen voor segmentatie kunnen er voor zorgen dat sommige reeds vertaalde segmenten opgedeeld of
-                        samengevoegd worden. Zij zullen dan effectief terugkeren naar de status "niet vertaald" omdat zij niet overeenkomen met de
-                        opgenomen segmenten in het projectgeheugen, zelfs als de originele vertaling daar nog steeds in staat.
-                     </p>
-                     <p>OmegaT kan oude vertaalgeheugens bijwerken die geen gebruik maakten van zin-segmentatie, maar niet andersom. Indien u gedurende
-                        de vertaling besluit om te schakelen van zin- naar alinea-vertaling, zal het interne vertaalgeheugen van het project niet
-                        worden gewijzigd.
-                     </p>
-                  </li>
-                  <li class="listitem">
-                     <p><span class="bold"><strong>Wijzigen van de mappenstructuur:<a class="indexterm" name="d0e4045"></a></strong></span></p>
-                     <p>Voor het geval u van plan bent de projectmappen aan te passen, onthoudt dan dat daarmee niet de bestanden uit oude mappen
-                        naar de nieuwe worden verplaatst.
-                     </p>
-                  </li>
-                  <li class="listitem">
-                     <p><span class="bold"><strong>Aanpassen van projecteigenschappen tijdens de sessie<a class="indexterm" name="d0e4056"></a></strong></span></p>
-                     <p>Het is mogelijk om de projecteigenschappen gedurende een vertaalsessie aan te passen. De veiligste manier is echter om, totdat
-                        u wat meer ervaring hebt met OmegaT, alle instellingen als vast te beschouwen als de vertaling eenmaal is begonnen - tenzij
-                        u zich natuurlijk realiseert dat er een grote vergissing is gemaakt. Zie het gedeelte Gegevensverlies voorkomen voor manieren
-                        om uw werk te beveiligen.
+                     <p><span class="bold"><strong>Een gebied voor het instellen van de projectmappen</strong></span><a class="indexterm" name="d0e4151"></a><a class="indexterm" name="d0e4156"></a></p>
+                     <p>Hier kunt u verschillende submappen selecteren, bijvoorbeeld de submap met bronbestanden, submap voor doelbestanden etc. Indien
+                        u namen voor mappen invoert die nog niet bestaan, zal <span class="application">OmegaT</span> ze voor u maken. Voor het geval u van plan bent de projectmappen aan te passen, onthoudt dan dat daarmee niet de bestanden
+                        uit oude mappen naar de nieuwe locatie worden verplaatst.
                      </p>
                   </li>
                </ul>

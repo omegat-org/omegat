@@ -343,7 +343,7 @@
 
               <entry><indexterm class="singular">
                   <primary>Tags</primary> <secondary>Brontags invoegen</secondary>
-                </indexterm>Voegt de brontags in op de cursorpositie. Alle tags in de brontekst zullen worden ingevoegd in het huidige segment, ongeacht of ze daar al staan of niet. Tekst, omsloten door tags, wordt vervangen door spaties: <literal>&lt;f0&gt;&lt;f1&gt;Dit is tekst&lt;/f0&gt;&lt;/f1&gt;</literal> dus zal worden gekopieerd als <literal>&lt;f0&gt;&lt;f1&gt;één_spatie&lt;/f0&gt;&lt;/f1&gt;</literal></entry>
+                </indexterm>Voegt de brontags in op de cursorpositie. Alle tags in de brontekst - d.i. OmegaT zowel als aangepaste, Java, printf etc tags - zullen worden ingevoegd in het huidige segment, ongeacht of ze daar al staan of niet. Tekst, omsloten door tags, wordt vervangen door spaties: <literal>&lt;f0&gt;&lt;f1&gt;Dit is tekst&lt;/f0&gt;&lt;/f1&gt;</literal> dus zal worden gekopieerd als <literal>&lt;f0&gt;&lt;f1&gt;één_spatie&lt;/f0&gt;&lt;/f1&gt;</literal></entry>
             </row>
 
             <row>
@@ -479,7 +479,7 @@
                   <keycap>J</keycap>
                 </keycombo></entry>
 
-              <entry>Het segment wordt geopend  als zijn segmentnummer wordt ingevoerd.</entry>
+              <entry>Het segment wordt geopend als zijn segmentnummer wordt ingevoerd.</entry>
             </row>
 
             <row>
@@ -569,7 +569,7 @@
             <row>
               <entry><guimenuitem>Segmenten met opmerkingen markeren</guimenuitem></entry>
 
-              <entry>In aangevinkt zullen segmenten met opmerkingen cyaankleurig worden gemarkeerd.</entry>
+              <entry>In aangevinkt zullen segmenten met opmerkingen cyaankleurig worden gemarkeerd. Deze markering heeft prioriteit boven Vertaalde segmenten markeren en Niet-vertaalde segmenten markeren.</entry>
             </row>
 
             <row>
@@ -673,7 +673,7 @@
             <row>
               <entry><guimenuitem>Woordenlijst</guimenuitem></entry>
 
-              <entry/>
+              <entry>gereserveerd voor toekomstig gebruik door plugins</entry>
             </row>
 
             <row>
@@ -685,7 +685,7 @@
             <row>
               <entry><guimenuitem>Lettertype...</guimenuitem></entry>
 
-              <entry>Toont het dialoogvenster om het lettertype voor de weergave van de tekst aan te passen. Gebruikers van oudere computers die het aanpassen van de venstergrootte heel traag vinden kunnen proberen om het lettertype te wijzigen. Zie <xref linkend="chapter.font"/>.</entry>
+              <entry>Toont het dialoogvenster om het lettertype voor de weergave van de tekst aan te passen. Gebruikers van oudere computers die het aanpassen van de venstergrootte heel traag vinden kunnen proberen om het lettertype te wijzigen. Bekijk Lettertype-instellingen in <link linkend="chapter.misc">Diverse onderwerpen</link></entry>
             </row>
 
             <row>
@@ -715,7 +715,7 @@
             <row>
               <entry><guimenuitem>Tags valideren...</guimenuitem></entry>
 
-              <entry>Voor programmeurs: Stelt u in staat om de opties voor Tags valideren te configureren en ook variabelen in het programma (%...)  te controleren.</entry>
+              <entry>Voor programmeurs: Stelt u in staat om de opties voor Tags valideren te configureren en ook variabelen in het programma (%...) te controleren.</entry>
             </row>
 
             <row>
@@ -734,6 +734,12 @@
               <entry><guimenuitem>Weergave...</guimenuitem></entry>
 
               <entry>Bevat de optie om alle bronsegmenten in vet weer te geven en het eerste niet-unieke segment te markeren.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Opslaan...</guimenuitem></entry>
+
+              <entry>Stelt de gebruiker in staat om de interval te selecteren - in minuten en seconden - tussen het opeenvolgende automatisch opslaan van het project. Het minimum is 10 seconden.</entry>
             </row>
 
             <row>

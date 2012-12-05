@@ -2,7 +2,7 @@ Deze vertaling is het werk van Dick Groskamp, copyright© 2012
 
 ==============================================================================
   ==============================================================================
-  OmegaT 2.0, Lees Mij-bestand
+OmegaT 2.0, Lees Mij-bestand
 
   1.  Informatie over OmegaT
   2.
@@ -104,7 +104,7 @@ Download voor dit doel het volgende bestand en voer het uit:
 
    http://omegat.sourceforge.net/webstart/OmegaT.jnlp
 
-Het zal de juiste omgeving voor uw computer installeren en de toepassing zelf bij de eerste keer dat het wordt uitgevoerd. Latere aanroepen behoeven niet on line te worden gedaan.
+Het zal de juiste omgeving voor uw computer installeren en de toepassing zelf bij de eerste keer dat het wordt uitgevoerd. Latere aanroepen behoeven niet online te worden gedaan.
 
 Gedurende de installatie, afhankelijk van uw besturingssysteem, zou u verschillende beveiligingswaarschuwingen kunnen ontvangen. Het certificaat is zelf-ondertekend door "Didier Briel". 
 De rechten die u aan deze versie geeft (welke kunnen worden omschreven als een "onbeperkte toegang tot de computer") zijn identiek aan de rechten die u geeft voor de locale versie, zoals die door een procedure geïnstalleerd wordt: zij geven toegang tot de harde schijf van de computer. Opvolgende klikken op OmegaT.jnlp zal leiden tot het controleren op upgrades, als u on line bent, ze installeren als ze er zijn, en dan OmegaT starten. 
@@ -179,7 +179,7 @@ Het installatieprogramma kan voor u snelkoppelingen maken in het start
 menu, op het bureaublad en in het gebied voor snel starten. U kunt ook handmatig het bestand OmegaT.exe naar het startmenu, op het bureaublad en in het gebied voor snel starten slepen om het van daaruit te koppelen.
 
 * Linuxgebruikers:
-Voor een meer gebruikersvriendelijker manier om OmegaT op te straten kunt u gebruik maken van het meegeleverde Kaptain-script  (omegat.kaptn). U moet eerst Kaptain installeren om dit script te kunnen gebruiken. U kunt dan het Kaptain opstartscript starten met
+Voor een meer gebruikersvriendelijker manier om OmegaT op te straten kunt u gebruik maken van het meegeleverde Kaptain-script (omegat.kaptn). U moet eerst Kaptain installeren om dit script te kunnen gebruiken. U kunt dan het Kaptain opstartscript starten met
 Alt+F2
 omegat.kaptn
 
@@ -278,7 +278,7 @@ OmegaT gebruikt de volgende bibliotheken:
 ==============================================================================
  5.  Heeft u problemen met OmegaT ? Heeft u hulp nodig?
 
-Overtuig u ervan dat u de documentatie zorgvuldig heeft doorgenomen voordat u een probleem rapporteert. Wat u meemaakt kan in feite een karakteristiek iets van OmegaT zijn dat u net heeft ontdekt. Als u het OmegaT-log controleert  en u ziet woorden zoals "Fout", "Waarschuwing", "Uitzondering" of "onverwacht afgebroken" dan heeft u waarschijnlijk een echt probleem ontdekt (het bestand log.txt is geplaatst in de map met gebruikersvoorkeuren. Zie de handleiding voor de juiste locatie).
+Overtuig u ervan dat u de documentatie zorgvuldig heeft doorgenomen voordat u een probleem rapporteert. Wat u meemaakt kan in feite een karakteristiek iets van OmegaT zijn dat u net heeft ontdekt. Als u het OmegaT-log controleert en u ziet woorden zoals "Fout", "Waarschuwing", "Uitzondering" of "onverwacht afgebroken" dan heeft u waarschijnlijk een echt probleem ontdekt (het bestand log.txt is geplaatst in de map met gebruikersvoorkeuren. Zie de handleiding voor de juiste locatie).
 
 Het volgende wat u zou moeten doen is dat wat u gevonden heeft bevestigd te krijgen van andere gebruikers om er zeker van te zijn dat dit al niet reeds gerapporteerd is. U kunt de foutenrapport ook verifiëren op de pagina van SourceForge. Alleen als u er zeker van bent dat u de eerste bent die een opnieuw te produceren reeks van gebeurtenissen heeft ontdekt die leidt tot iets wat niet zou moeten gebeuren zou u een foutenrapport moeten indienen.
 

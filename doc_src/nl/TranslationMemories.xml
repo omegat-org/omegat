@@ -60,7 +60,7 @@
 
             <para>De inhoud van vertaalgeheugens in de submap tm dienen om suggesties te genereren voor de tekst(en) om te worden vertaald. Elke tekst, reeds vertaald en opgeslagen in deze bestanden, zal tussen de overeenkomsten verschijnen, indien het voldoende overeenkomt met de tekst die momenteel wordt vertaald.</para>
 
-            <para>Indien het bronsegment in één van de aanvullende TM's identiek is aan de tekst die wordt vertaald, gedraagt OmegaT zich zoals gedefinieerd is in het dialoogvenster  <menuchoice> <guimenu>Opties</guimenu> <guimenuitem>Bewerken (gedrag)...</guimenuitem> </menuchoice>. Bijvoorbeeld (als de standaard is geaccepteerd) zal de vertaling vanuit de aanvullende TM worden geaccepteerd en worden vooraf gegaan door<emphasis> [fuzzy]</emphasis>, zodat de vertaler de vertalingen op een later tijdstip kan nakijken en controleren of segmenten die op deze manier zijn getagd, juist zijn vertaald (zie het hoofdstuk <link linkend="chapter.translation.editing">Bewerken (gedrag)</link>) <menuchoice> <guimenu>.</guimenu> </menuchoice></para>
+            <para>Indien het bronsegment in één van de aanvullende TM's identiek is aan de tekst die wordt vertaald, gedraagt OmegaT zich zoals gedefinieerd is in het dialoogvenster <menuchoice> <guimenu>Opties</guimenu> <guimenuitem>Bewerken (gedrag)...</guimenuitem> </menuchoice>. Bijvoorbeeld (als de standaard is geaccepteerd) zal de vertaling vanuit de aanvullende TM worden geaccepteerd en worden vooraf gegaan door<emphasis> [fuzzy]</emphasis>, zodat de vertaler de vertalingen op een later tijdstip kan nakijken en controleren of segmenten die op deze manier zijn getagd, juist zijn vertaald (zie het hoofdstuk <link linkend="chapter.translation.editing">Bewerken (gedrag)</link>) <menuchoice> <guimenu>.</guimenu> </menuchoice></para>
           </listitem>
         </varlistentry>
 
@@ -129,7 +129,7 @@
           <primary>Vertaalgeheugens</primary> <secondary>taal</secondary>
         </indexterm></title>
 
-      <para>TMX-bestanden bevatten vertaaleenheden die zijn gemaakt van een aantal equivalente segmenten in verschillende talen. Een vertaaleenheid bestaat uit ten minste twee variaties van een vertaaleenheid  (tuv). Beide kunnen als bron of doel worden gebruikt.</para>
+      <para>TMX-bestanden bevatten vertaaleenheden die zijn gemaakt van een aantal equivalente segmenten in verschillende talen. Een vertaaleenheid bestaat uit ten minste twee variaties van een vertaaleenheid (tuv). Beide kunnen als bron of doel worden gebruikt.</para>
 
       <para>De instellingen in uw project geven aan wat de bron- en wat de doeltaal is. OmegaT neemt dus de tuv-segmenten die overeenkomen met de taalcodes van de bron en het doel in het project en gebruiken ze respectievelijk als de bron- en doelsegmenten. OmegaT herkent de taalcodes met behulp van de twee volgende standaard conventies:</para>
 
@@ -144,6 +144,10 @@
       </itemizedlist>
 
       <para>Als de taalcodes en de TMX-taalcodes voor het project volledig overeenkomen worden de segmenten in het geheugen geladen. Als de taal overeenkomt, maar niet de landcode worden de segmenten toch geladen. Als de taalcode, noch de landcode overeenkomen zullen de segmenten worden genegeerd.</para>
+
+      <para><indexterm class="singular">
+          <primary>Vertaalgeheugens</primary> <secondary>meertalige, afhandelen van</secondary>
+        </indexterm>TMX/bestanden kunnen over het algemeen vertaaleenheden bevatten voor verschillende kandidaat-talen. Indien er voor een opgegeven bronsegment geen item is voor de geselecteerde doeltaal, worden alle andere doelsegmenten geladen, ongeacht hun taal. Als bijvoorbeeld het taalpaar voor het project DE-FR is, kan het nog steeds hulp bieden om hits te zien in de vertaling DE-EN, als er in het DE-FR-paar geen aanwezig is.</para>
     </section>
 
     <section>
@@ -164,7 +168,7 @@
 
     <para>In het begin, dat is als het project wordt gemaakt, is de hoofd-TM van het project, <filename>project_save.tmx</filename>, leeg. Deze TM wordt gedurende de vertaling gevuld. Bestaande vertalingen kunnen worden gebruikt om dit proces te versnellen. Indien een bepaalde zin al eens is vertaald, en juist is vertaald, bestaat er geen reden om die opnieuw te gaan vertalen. Vertaalgeheugens kunnen ook vertaalgeheugens als verwijzingen bevatten: meertalige wetgeving, zoals van de Europese Gemeenschap is daarvan een typisch voorbeeld.</para>
 
-    <para>Wanneer u de doeldocumenten maakt in een project van  <application>OmegaT</application>, wordt het vertaalgeheugen van het project uitgevoerd in de vorm van drie bestanden in de hoofdmap van uw project van <application>OmegaT</application> (zie de bovenstaande beschrijving). U kunt deze drie TMX-bestanden, (-<filename>omegat.tmx</filename>&quot;, &quot;<filename>-level1.tmx</filename>&quot; en &quot;<filename>-level2.tmx</filename>&quot;), beschouwen als een &quot;exporteerbaar vertaalgeheugen&quot;, dat is: een export van de inhoud van uw huidige project in tweetalige vorm.</para>
+    <para>Wanneer u de doeldocumenten maakt in een project van <application>OmegaT</application>, wordt het vertaalgeheugen van het project uitgevoerd in de vorm van drie bestanden in de hoofdmap van uw project van <application>OmegaT</application> (zie de bovenstaande beschrijving). U kunt deze drie TMX-bestanden, (-<filename>omegat.tmx</filename>&quot;, &quot;<filename>-level1.tmx</filename>&quot; en &quot;<filename>-level2.tmx</filename>&quot;), beschouwen als een &quot;exporteerbaar vertaalgeheugen&quot;, dat is: een export van de inhoud van uw huidige project in tweetalige vorm.</para>
 
     <para>Indien u een vertaalgeheugen uit een vorig project zou willen gebruiken (bijvoorbeeld omdat het nieuwe project overeenkomt met het eerdere project, of terminologie gebruikt die eerder gebruikt is), kunt u deze vertaalgeheugens gebruiken als &quot;invoer vertaalgeheugens&quot;, dat is: om in uw nieuwe project te importeren. In dit geval plaats u de vertaalgeheugens die u wilt gebruiken in de mappen <emphasis>\tm</emphasis> of <emphasis>\tm</emphasis>\auto van uw nieuwe project: in het eerste geval zult u hits van deze vertaalgeheugens in het venster Overeenkomsten krijgen en in het laatste geval zullen deze TM's worden gebruikt om uw brontekst vooraf te vertalen.</para>
 
@@ -197,7 +201,7 @@
 
       <para>OmegaT volgt zeer strikte procedures bij het laden van bestanden van vertaalgeheugens (TMX-bestanden). Als een fout in een dergelijk bestand wordt gevonden zal OmegaT de positie aangeven binnen het defecte bestand waarin de fout zich bevindt.</para>
 
-      <para>Sommige programma's staan er om bekend dat zij onder bepaalde omstandigheden ongeldige TMX-bestanden maken. Als u dergelijke bestanden als verwijzingen voor vertalingen in OmegaT wilt gebruiken, moeten zij worden gerepareerd  of OmegaT zal een fout rapporteren en het weigeren te laden. Reparaties zijn kleine bewerkingen en OmegaT assisteert bij het oplossen van problemen met het gerelateerde foutbericht. U kunt advies aan de gebruikersgroep vragen als u problemen ondervindt.</para>
+      <para>Sommige programma's staan er om bekend dat zij onder bepaalde omstandigheden ongeldige TMX-bestanden maken. Als u dergelijke bestanden als verwijzingen voor vertalingen in OmegaT wilt gebruiken, moeten zij worden gerepareerd of OmegaT zal een fout rapporteren en het weigeren te laden. Reparaties zijn kleine bewerkingen en OmegaT assisteert bij het oplossen van problemen met het gerelateerde foutbericht. U kunt advies aan de gebruikersgroep vragen als u problemen ondervindt.</para>
 
       <para><application/>OmegaT exporteert versie 1.4 TMX-bestanden (zowel niveau 1 en niveau 2). De export van niveau 2 komt niet volledig overeen met de standaard van niveau 2 maar is goed genoeg en zal correcte overeenkomsten genereren in andere programma's met vertaalgeheugens die TMX niveau 2 ondersteunen. Als u alleen tekstuele informatie wilt (en geen opmaakinformatie) gebruik dan het bestand van niveau 1 dat OmegaT heeft gemaakt.</para>
     </section>

@@ -111,6 +111,52 @@
     <para><literal>&lt;b0&gt;Opmaak &lt;b1&gt;een&lt;/b0&gt; &lt;/b1&gt;is nu zeer verminkt.&lt;end segment 0001&gt;</literal></para>
   </section>
 
+  <section>
+    <title>Opties voor valideren van tags</title>
+
+    <para>Men kan enkele van de regels in het venster <guimenuitem>Opties &gt; Tags valideren...</guimenuitem> instellen om het werken met tags aan te passen:</para>
+
+    <mediaobject>
+      <imageobject>
+        <imagedata fileref="images/OptionsTabValidation_25.png"/>
+      </imageobject>
+    </mediaobject>
+
+    <para>Het hier vermelde gedrag is van toepassing op alle bronbestanden en niet op slechts enkele van de bestandstypen, zoals opgemaakte tekst.</para>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis role="bold">Printf-variabelen - niet controleren, eenvoudige controleren, alle controleren</emphasis></para>
+
+        <para>OmegaT kan controleren of variabelen voor programmeren (zoals bijvoorbeeld %s) in de bron bestaan in de vertaling. U kunt bepalen om ze helemaal niet te controleren, de eenvoudige printf-variabelen te controleren (zoals %s %d etc) of alle typen printf-variabelen. .</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis role="bold">Eenvoudige Java MessageFormat-patronen controleren</emphasis></para>
+
+        <para>Activeren van dit keuzevak zal er voor zorgen dat OmegaT controleert of eenvoudige tags voor Java MessageFormat (zoals {0}) juist worden verwerkt.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis role="bold">Tekstveld Aangepaste tags</emphasis></para>
+
+        <para>Het hier invoeren van een reguliere uitdrukking zal er voor zorgen dat OmegaT de gedetecteerde items behandelt als een aangepaste tag. Indien het is geselecteerd en het aantal tags en hun volgorde identiek is, net zoals dat het geval is als voor tags van OmegaT.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis role="bold">Fragmenten die zouden moeten worden verwijderd uit de vertaling</emphasis></para>
+
+        <para>Men kan een reguliere uitdrukking invoeren voor ongewenste inhoud in het doel. Aanwezige overeenkomsten in het doelsegment zullen dan rood gekleurd worden, d.i. eenvoudig te identificeren en te corrigeren.</para>
+      </listitem>
+    </itemizedlist>
+  </section>
+
   <section id="tag.group.validation">
     <title>Taggroep validatie<indexterm class="singular">
         <primary>Tags</primary> <secondary>groep valideren</secondary>
@@ -144,7 +190,7 @@
 
     <para><emphasis role="bold">Vereenvoudig de originele tekst</emphasis></para>
 
-    <para>Tags vertegenwoordigen over het algemeen een bepaalde vorm van opmaak van de originele tekst. Vereenvoudigen van de originele opmaak draagt bij aan het verminderen van het aantal tags. Waar de omstandigheden dat toestaan, zou het gelijk maken van gebruikte lettertypen, lettertype-afmetingen, kleuren etc. moeten worden overwogen, omdat  het het vertalen vereenvoudigt en mogelijke fouten in tags vermindert. Lees het gedeelte Tagbewerkingen om te zien wat er met tags gedaan kan worden. Onthoud dat als u tags een probleem vindt in OmegaT en de opmaak niet buitengewoon relevant is voor de huidige vertaling, het verwijderen van tags de eenvoudigste manier kan zijn om uit de problemen te geraken.</para>
+    <para>Tags vertegenwoordigen over het algemeen een bepaalde vorm van opmaak van de originele tekst. Vereenvoudigen van de originele opmaak draagt bij aan het verminderen van het aantal tags. Waar de omstandigheden dat toestaan, zou het gelijk maken van gebruikte lettertypen, lettertype-afmetingen, kleuren etc. moeten worden overwogen, omdat het het vertalen vereenvoudigt en mogelijke fouten in tags vermindert. Lees het gedeelte Tagbewerkingen om te zien wat er met tags gedaan kan worden. Onthoud dat als u tags een probleem vindt in OmegaT en de opmaak niet buitengewoon relevant is voor de huidige vertaling, het verwijderen van tags de eenvoudigste manier kan zijn om uit de problemen te geraken.</para>
 
     <para><emphasis role="bold">Wees extra voorzichtig met tagparen.</emphasis></para>
 

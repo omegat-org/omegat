@@ -2,34 +2,34 @@
    <head>
       <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
    
-      <title>Hoofdstuk 22. Diverse onderwerpen</title>
-      <link rel="stylesheet" href="OmegaT.css" type="text/css">
-      <meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+      <title>Hoofdstuk 21. Diverse onderwerpen</title>
+      <link rel="stylesheet" type="text/css" href="OmegaT.css">
+      <meta name="generator" content="DocBook XSL Stylesheets V1.76.1">
       <link rel="home" href="index.html" title="OmegaT - Gebruikershandleiding">
       <link rel="up" href="index.html" title="OmegaT - Gebruikershandleiding">
-      <link rel="prev" href="chapter.spellchecker.html" title="Hoofdstuk 21. Spellingscontrole">
-      <link rel="next" href="appendix.website.html" title="Bijlage A. OmegaT op het web">
+      <link rel="prev" href="chapter.spellchecker.html" title="Hoofdstuk 20. Spellingscontrole">
+      <link rel="next" href="appendix.TokenizerPlugin.inOmegaT.html" title="Bijlage A. plug-in Tokenizer">
    </head>
    <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
       <div class="navheader">
          <table width="100%" summary="Navigation header">
             <tr>
-               <th colspan="3" align="center">Hoofdstuk 22. Diverse onderwerpen</th>
+               <th colspan="3" align="center">Hoofdstuk 21. Diverse onderwerpen</th>
             </tr>
             <tr>
                <td width="20%" align="left"><a accesskey="p" href="chapter.spellchecker.html">Terug</a>&nbsp;
                </td>
                <th width="60%" align="center">&nbsp;</th>
-               <td width="20%" align="right">&nbsp;<a accesskey="n" href="appendix.website.html">Volgende</a></td>
+               <td width="20%" align="right">&nbsp;<a accesskey="n" href="appendix.TokenizerPlugin.inOmegaT.html">Volgende</a></td>
             </tr>
          </table>
          <hr>
       </div>
-      <div class="chapter" title="Hoofdstuk 22. Diverse onderwerpen">
+      <div class="chapter" title="Hoofdstuk 21. Diverse onderwerpen">
          <div class="titlepage">
             <div>
                <div>
-                  <h2 class="title"><a name="chapter.misc"></a>Hoofdstuk 22. Diverse onderwerpen<a class="indexterm" name="d0e7885"></a></h2>
+                  <h2 class="title"><a name="chapter.misc"></a>Hoofdstuk 21. Diverse onderwerpen<a class="indexterm" name="d0e8192"></a></h2>
                </div>
             </div>
          </div>
@@ -44,7 +44,7 @@
                      <dt><span class="section"><a href="chapter.misc.html#misc.console.mode.option.validatetags">1.4. Optie Tags valideren</a></span></dt>
                   </dl>
                </dd>
-               <dt><span class="section"><a href="chapter.misc.html#d0e8054">2. Automatisch vergelijken van Java-eigenschappen</a></span></dt>
+               <dt><span class="section"><a href="chapter.misc.html#d0e8371">2. Automatisch vergelijken van Java-eigenschappen</a></span></dt>
                <dt><span class="section"><a href="chapter.misc.html#font.settings">3. Lettertype-instellingen</a></span></dt>
                <dt><span class="section"><a href="chapter.misc.html#preventing.data.loss">4. Gegevensverlies voorkomen</a></span></dt>
             </dl>
@@ -53,7 +53,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="omegat.misc.console.mode"></a>1. <span class="application"><a class="indexterm" name="d0e7891"></a>OmegaT</span> modus Console<a class="indexterm" name="d0e7898"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="omegat.misc.console.mode"></a>1. <span class="application"><a class="indexterm" name="d0e8198"></a>OmegaT</span> modus Console<a class="indexterm" name="d0e8205"></a></h2>
                   </div>
                </div>
             </div>
@@ -110,7 +110,8 @@
                <p><code class="literal">$&gt;java -jar <span class="application">OmegaT</span>.jar /pad/naar/project \</code></p>
                <p><code class="literal">--config-dir=/pad/naar/config-bestanden/ \</code></p>
                <p><code class="literal"> --mode=console-translate \</code></p>
-               <p><code class="literal">--source-pattern={reguliere uitdrukking}</code></p>
+               <p><code class="literal">--source-pattern={reguliere uitdrukking} \</code></p>
+               <p><code class="literal"> --tag-validation=[block|warn] </code></p>
                <p><span class="bold"><strong>Uitleg:</strong></span></p>
                <div class="itemizedlist">
                   <ul class="itemizedlist" type="disc">
@@ -137,8 +138,13 @@
                         </p>
                      </li>
                      <li class="listitem">
-                        <p>--source-pattern={reguliere uitdrukking} De bestanden die moeten worden vertaald kunnen op deze manier worden gespecificeerd.
-                           Hier is een voorbeeld van de reguliere uitdrukking: <code class="filename">test\.html</code></p>
+                        <p><code class="literal">--source-pattern={reguliere uitdrukking} </code>De bestanden die moeten worden vertaald kunnen op deze manier worden gespecificeerd. Hier is een voorbeeld van de reguliere
+                           uitdrukking: <code class="filename">test\.html</code></p>
+                     </li>
+                     <li class="listitem">
+                        <p><code class="literal">--tag-validation=[abort|warn] </code> Bij abort wordt het programma onderbroken als bij Tags valideren fouten worden gevonden. Bij warn worden de fouten afgedrukt
+                           maar gaat het programma door. In alle andere gevallen worden de tags niet gevalideerd.
+                        </p>
                      </li>
                   </ul>
                </div>
@@ -152,7 +158,7 @@
                      </div>
                   </div>
                </div>
-               <p>Een extra parameter voor de opdrachtregel, specifiek voor de console-modus:  <code class="literal">--quiet.</code>In de modus quiet, wordt er minder informatie gelogd op het scherm. De berichten die u normaal gesproken zou vinden in de
+               <p>Een extra parameter voor de opdrachtregel, specifiek voor de console-modus: <code class="literal">--quiet.</code> In de modus quiet, wordt er minder informatie gelogd op het scherm. De berichten die u normaal gesproken zou vinden in de
                   statusbalk worden niet weergegeven.
                </p>
                <p>Gebruik: <code class="literal">java -jar <span class="application">OmegaT</span>.jar /pad/naar/project --mode=console-translate --quiet</code></p>
@@ -176,12 +182,12 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="d0e8054"></a>2. Automatisch vergelijken van Java-eigenschappen<a class="indexterm" name="d0e8057"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="d0e8371"></a>2. Automatisch vergelijken van Java-eigenschappen<a class="indexterm" name="d0e8374"></a></h2>
                   </div>
                </div>
             </div>
             <p>OmegaT kan Java .properties vergelijken in modus console. Indien u de Properties-bestanden voor bron en doel voor één en dezelfde
-               inhoud in uw taalpaar hebt, zal deze procedure een overeenkomend tmx-bestand maken voor deze inhoud. Gebruik: 
+               inhoud in uw taalpaar hebt, zal deze procedure een overeenkomend tmx-bestand maken voor deze inhoud. Gebruik:
             </p>
             <p><code class="literal">java -jar OmegaT.jar --mode=console-align /my-project-dir
                       --alignDir=/translatedFiles/ </code></p>
@@ -193,7 +199,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="font.settings"></a>3. Lettertype-instellingen<a class="indexterm" name="d0e8082"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="font.settings"></a>3. Lettertype-instellingen<a class="indexterm" name="d0e8399"></a></h2>
                   </div>
                </div>
             </div>
@@ -221,7 +227,7 @@
                   </li>
                </ul>
             </div>
-            <p>Het dialoogvenster kan worden aangeroepen door het item in het hoofdmenu  <a class="indexterm" name="d0e8108"></a><span class="guimenu">Opties</span> → <span class="guimenuitem">Lettertype...</span>. Het dialoogvenster bevat:
+            <p>Het dialoogvenster kan worden aangeroepen door het item in het hoofdmenu <a class="indexterm" name="d0e8425"></a><span class="guimenu">Opties</span> → <span class="guimenuitem">Lettertype...</span>. Het dialoogvenster bevat:
             </p>
             <div class="itemizedlist">
                <ul class="itemizedlist" type="disc">
@@ -258,7 +264,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="preventing.data.loss"></a>4. Gegevensverlies voorkomen<a class="indexterm" name="d0e8144"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="preventing.data.loss"></a>4. Gegevensverlies voorkomen<a class="indexterm" name="d0e8461"></a></h2>
                   </div>
                </div>
             </div>
@@ -326,12 +332,12 @@
                <td width="40%" align="left"><a accesskey="p" href="chapter.spellchecker.html">Terug</a>&nbsp;
                </td>
                <td width="20%" align="center">&nbsp;</td>
-               <td width="40%" align="right">&nbsp;<a accesskey="n" href="appendix.website.html">Volgende</a></td>
+               <td width="40%" align="right">&nbsp;<a accesskey="n" href="appendix.TokenizerPlugin.inOmegaT.html">Volgende</a></td>
             </tr>
             <tr>
-               <td width="40%" align="left" valign="top">Hoofdstuk 21. Spellingscontrole&nbsp;</td>
+               <td width="40%" align="left" valign="top">Hoofdstuk 20. Spellingscontrole&nbsp;</td>
                <td width="20%" align="center"><a accesskey="h" href="index.html">Begin</a></td>
-               <td width="40%" align="right" valign="top">&nbsp;Bijlage A. OmegaT op het web</td>
+               <td width="40%" align="right" valign="top">&nbsp;Bijlage A. plug-in Tokenizer</td>
             </tr>
          </table>
       </div>

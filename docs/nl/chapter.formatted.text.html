@@ -3,12 +3,12 @@
       <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
    
       <title>Hoofdstuk 12. Werken met opgemaakte tekst</title>
-      <link rel="stylesheet" href="OmegaT.css" type="text/css">
-      <meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+      <link rel="stylesheet" type="text/css" href="OmegaT.css">
+      <meta name="generator" content="DocBook XSL Stylesheets V1.76.1">
       <link rel="home" href="index.html" title="OmegaT - Gebruikershandleiding">
       <link rel="up" href="index.html" title="OmegaT - Gebruikershandleiding">
-      <link rel="prev" href="chapter.font.html" title="Hoofdstuk 11. Lettertype-instellingen">
-      <link rel="next" href="chapter.plain.text.html" title="Hoofdstuk 13. Werken met platte tekst">
+      <link rel="prev" href="chapter.plain.text.html" title="Hoofdstuk 11. Werken met platte tekst">
+      <link rel="next" href="chapter.translation.memories.html" title="Hoofdstuk 13. Vertaalgeheugens">
    </head>
    <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
       <div class="navheader">
@@ -17,10 +17,10 @@
                <th colspan="3" align="center">Hoofdstuk 12. Werken met opgemaakte tekst</th>
             </tr>
             <tr>
-               <td width="20%" align="left"><a accesskey="p" href="chapter.font.html">Terug</a>&nbsp;
+               <td width="20%" align="left"><a accesskey="p" href="chapter.plain.text.html">Terug</a>&nbsp;
                </td>
                <th width="60%" align="center">&nbsp;</th>
-               <td width="20%" align="right">&nbsp;<a accesskey="n" href="chapter.plain.text.html">Volgende</a></td>
+               <td width="20%" align="right">&nbsp;<a accesskey="n" href="chapter.translation.memories.html">Volgende</a></td>
             </tr>
          </table>
          <hr>
@@ -29,7 +29,7 @@
          <div class="titlepage">
             <div>
                <div>
-                  <h2 class="title"><a name="chapter.formatted.text"></a>Hoofdstuk 12. Werken met opgemaakte tekst<a class="indexterm" name="d0e5409"></a><a class="indexterm" name="d0e5414"></a></h2>
+                  <h2 class="title"><a name="chapter.formatted.text"></a>Hoofdstuk 12. Werken met opgemaakte tekst<a class="indexterm" name="d0e5827"></a><a class="indexterm" name="d0e5832"></a></h2>
                </div>
             </div>
          </div>
@@ -39,8 +39,9 @@
                <dt><span class="section"><a href="chapter.formatted.text.html#tag.operations">2. Tag-bewerkingen</a></span></dt>
                <dt><span class="section"><a href="chapter.formatted.text.html#tag.group.nesting">3. Taggroep nesten</a></span></dt>
                <dt><span class="section"><a href="chapter.formatted.text.html#tag.group.overlapping">4. Taggroep overlappen</a></span></dt>
-               <dt><span class="section"><a href="chapter.formatted.text.html#tag.group.validation">5. Taggroep validatie</a></span></dt>
-               <dt><span class="section"><a href="chapter.formatted.text.html#hints.for.tag.management">6. Hints voor tagbeheer</a></span></dt>
+               <dt><span class="section"><a href="chapter.formatted.text.html#d0e5978">5. Opties voor valideren van tags</a></span></dt>
+               <dt><span class="section"><a href="chapter.formatted.text.html#tag.group.validation">6. Taggroep validatie</a></span></dt>
+               <dt><span class="section"><a href="chapter.formatted.text.html#hints.for.tag.management">7. Hints voor tagbeheer</a></span></dt>
             </dl>
          </div>
          <p>Informatie over opmaak die aanwezig is in het bronbestand moet meestal worden gereproduceerd in het doelbestand. De in-regelige
@@ -53,22 +54,22 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="formatting.tags"></a>1. Tags voor opmaak<a class="indexterm" name="d0e5424"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="formatting.tags"></a>1. Tags voor opmaak<a class="indexterm" name="d0e5842"></a></h2>
                   </div>
                </div>
             </div>
-            <p><a class="indexterm" name="d0e5428"></a><span class="bold"><strong>Namen van tags:</strong></span></p>
+            <p><a class="indexterm" name="d0e5846"></a><span class="bold"><strong>Namen van tags:</strong></span></p>
             <p>De tags bestaan uit één tot drie tekens en een getal. Met unieke nummers kunnen de tags die met elkaar overeenkomen worden
                gegroepeerd en onderscheiden zich van de tags die dezelfde tekencombinatie hebben, maar in feite verschillend zijn. De gebruikte
                tekens in de tags proberen de onderliggende betekenis van de tag weer te geven (bijv. b voor vet, i voor cursief, etc.)
             </p>
-            <p><a class="indexterm" name="d0e5438"></a><span class="bold"><strong>Nummering van tags:</strong></span></p>
+            <p><a class="indexterm" name="d0e5856"></a><span class="bold"><strong>Nummering van tags:</strong></span></p>
             <p>Tags worden oplopend genummerd per groep van tags. "Taggroepen" in deze context zijn één enkele tag (zoals &lt;i0&gt; en &lt;/i0&gt;).
                Binnen een segment krijgt de eerste groep (paar of enkele) het nummer 0, de tweede het nummer 1, etc. Het eerste voorbeeld
                hieronder heeft 3 tag-groepen (een paar, een enkele en dan nog een ander paar), het tweede voorbeeld heeft slechts één groep
                (een paar).
             </p>
-            <p><a class="indexterm" name="d0e5448"></a><span class="bold"><strong>Paren en enkele:</strong></span></p>
+            <p><a class="indexterm" name="d0e5866"></a><span class="bold"><strong>Paren en enkele:</strong></span></p>
             <p>Tags zijn altijd óf enkel óf gepaard. Enkele tags geven informatie over de opmaak aan die niet van invloed is op de tekst
                er omheen (een extra spatie of regeleinde bijvoorbeeld).
             </p>
@@ -89,7 +90,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="tag.operations"></a>2. Tag-bewerkingen<a class="indexterm" name="d0e5473"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="tag.operations"></a>2. Tag-bewerkingen<a class="indexterm" name="d0e5891"></a></h2>
                   </div>
                </div>
             </div>
@@ -97,7 +98,7 @@
                worden. De basisregel is dat de volgorde van de tags in dezelfde volgorde moet worden behouden. Het is echter mogelijk, als
                bepaalde regels strikt worden gevolgd, om van deze basisregel af te wijken.
             </p>
-            <p><span class="bold"><strong><a class="indexterm" name="d0e5482"></a>Tags dupliceren:</strong></span></p>
+            <p><span class="bold"><strong><a class="indexterm" name="d0e5900"></a>Tags dupliceren:</strong></span></p>
             <p>Kopieer ze eenvoudigweg naar de positie van uw keuze om tags te dupliceren. Onthoud dat in een paar de openingstag vóór de
                sluitingstag moet komen. De opmaak die wordt vertegenwoordigd door de groep die u dupliceerde zal op beide gedeelten worden
                toegepast.
@@ -106,7 +107,7 @@
             <p><code class="literal">&lt;b0&gt;Deze opmaak&lt;/b0&gt; zal hier worden gedupliceerd.&lt;segment 0001&gt;</code></p>
             <p>Na het dupliceren:</p>
             <p><code class="literal">&lt;b0&gt;Deze opmaak&lt;/b0&gt; is &lt;b0&gt;hier gedupliceerd&lt;/b0&gt;.&lt;segment 0001&gt;</code></p>
-            <p><span class="bold"><strong><a class="indexterm" name="d0e5502"></a>Verwijderen van taggroepen:</strong></span></p>
+            <p><span class="bold"><strong><a class="indexterm" name="d0e5920"></a>Verwijderen van taggroepen:</strong></span></p>
             <p>Verwijder ze eenvoudigweg uit het segment om taggroepen te verwijderen. Onthoud dat van een paar zowel de openings- als de
                sluitingstag moet worden verwijderd om er voor te zorgen dat alle sporen van de opmaak correct worden uitgewist, anders zou
                het vertaalde bestand mogelijk beschadigd kunnen raken. Door een taggroep te verwijderen verwijdert u de gerelateerde opmaak
@@ -121,7 +122,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="tag.group.nesting"></a>3. Taggroep nesten<a class="indexterm" name="d0e5523"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="tag.group.nesting"></a>3. Taggroep nesten<a class="indexterm" name="d0e5941"></a></h2>
                   </div>
                </div>
             </div>
@@ -139,7 +140,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="tag.group.overlapping"></a>4. Taggroep overlappen<a class="indexterm" name="d0e5543"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="tag.group.overlapping"></a>4. Taggroep overlappen<a class="indexterm" name="d0e5961"></a></h2>
                   </div>
                </div>
             </div>
@@ -151,20 +152,78 @@
             <p>Na een slechte bewerking:</p>
             <p><code class="literal">&lt;b0&gt;Opmaak &lt;b1&gt;een&lt;/b0&gt; &lt;/b1&gt;is nu zeer verminkt.&lt;end segment 0001&gt;</code></p>
          </div>
-         <div class="section" title="5. Taggroep validatie">
+         <div class="section" title="5. Opties voor valideren van tags">
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="tag.group.validation"></a>5. Taggroep validatie<a class="indexterm" name="d0e5563"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="d0e5978"></a>5. Opties voor valideren van tags
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>Men kan enkele van de regels in het venster <span class="guimenuitem">Opties &gt; Tags valideren...</span> instellen om het werken met tags aan te passen:
+            </p>
+            <div class="mediaobject"><img src="images/OptionsTabValidation_25.png"></div>
+            <p>Het hier vermelde gedrag is van toepassing op alle bronbestanden en niet op slechts enkele van de bestandstypen, zoals opgemaakte
+               tekst.
+            </p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" type="disc">
+                  <li class="listitem">
+                     <p><span class="bold"><strong>Printf-variabelen - niet controleren, eenvoudige controleren, alle controleren</strong></span></p>
+                     <p>OmegaT kan controleren of variabelen voor programmeren (zoals bijvoorbeeld %s) in de bron bestaan in de vertaling. U kunt
+                        bepalen om ze helemaal niet te controleren, de eenvoudige printf-variabelen te controleren (zoals %s %d etc) of alle typen
+                        printf-variabelen. .
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" type="disc">
+                  <li class="listitem">
+                     <p><span class="bold"><strong>Eenvoudige Java MessageFormat-patronen controleren</strong></span></p>
+                     <p>Activeren van dit keuzevak zal er voor zorgen dat OmegaT controleert of eenvoudige tags voor Java MessageFormat (zoals {0})
+                        juist worden verwerkt.
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" type="disc">
+                  <li class="listitem">
+                     <p><span class="bold"><strong>Tekstveld Aangepaste tags</strong></span></p>
+                     <p>Het hier invoeren van een reguliere uitdrukking zal er voor zorgen dat OmegaT de gedetecteerde items behandelt als een aangepaste
+                        tag. Indien het is geselecteerd en het aantal tags en hun volgorde identiek is, net zoals dat het geval is als voor tags van
+                        OmegaT.
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" type="disc">
+                  <li class="listitem">
+                     <p><span class="bold"><strong>Fragmenten die zouden moeten worden verwijderd uit de vertaling</strong></span></p>
+                     <p>Men kan een reguliere uitdrukking invoeren voor ongewenste inhoud in het doel. Aanwezige overeenkomsten in het doelsegment
+                        zullen dan rood gekleurd worden, d.i. eenvoudig te identificeren en te corrigeren.
+                     </p>
+                  </li>
+               </ul>
+            </div>
+         </div>
+         <div class="section" title="6. Taggroep validatie">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="tag.group.validation"></a>6. Taggroep validatie<a class="indexterm" name="d0e6022"></a></h2>
                   </div>
                </div>
             </div>
             <p>De functie Tags valideren detecteert gewijzigde tags (of dat met opzet is gedaan of per ongeluk) en toont de betrokken segmenten.
-               Het activeren van deze functie – <span class="guimenuitem">Ctrl+T<a class="indexterm" name="d0e5572"></a></span> - zal een venster openen dat alle segmenten uit het bestand, waarvan wordt vermoed dat ze zijn verbroken of slechte tags
+               Het activeren van deze functie – <span class="guimenuitem">Ctrl+T<a class="indexterm" name="d0e6031"></a></span> - zal een venster openen dat alle segmenten uit het bestand, waarvan wordt vermoed dat ze zijn verbroken of slechte tags
                zijn, bevat. Repareren van de tags en het opnieuw samenstellen van de doeldocumenten is eenvoudig met de functie Tags valideren.
                Het venster, dat wordt geopend door te drukken op <span class="guimenuitem">Ctrl+T</span>, heeft een kolom met 3 tabellen met een koppeling naar het segment, het originele segment en het doelsegment
             </p>
-            <div class="figure"><a name="tag.validation"></a><p class="title"><b>Figuur 12.1. Invoer bij tagvalidatie</b></p>
+            <div class="figure"><a name="tag.validation"></a><p class="title"><b>Afbeelding 12.1. Invoer bij tagvalidatie</b></p>
                <div class="figure-contents">
                   <div class="mediaobject"><img src="images/TagValidation.png" alt="Invoer bij tagvalidatie"></div>
                </div>
@@ -175,18 +234,18 @@
                zijn noodzakelijk en zijn goedaardig, sommige zullen problemen veroorzaken als het vertaalde document wordt gemaakt.
             </p>
          </div>
-         <div class="section" title="6. Hints voor tagbeheer">
+         <div class="section" title="7. Hints voor tagbeheer">
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="hints.for.tag.management"></a>6. Hints voor tagbeheer<a class="indexterm" name="d0e5597"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="hints.for.tag.management"></a>7. Hints voor tagbeheer<a class="indexterm" name="d0e6056"></a></h2>
                   </div>
                </div>
             </div>
             <p><span class="bold"><strong>Vereenvoudig de originele tekst</strong></span></p>
             <p>Tags vertegenwoordigen over het algemeen een bepaalde vorm van opmaak van de originele tekst. Vereenvoudigen van de originele
                opmaak draagt bij aan het verminderen van het aantal tags. Waar de omstandigheden dat toestaan, zou het gelijk maken van gebruikte
-               lettertypen, lettertype-afmetingen, kleuren etc. moeten worden overwogen, omdat  het het vertalen vereenvoudigt en mogelijke
+               lettertypen, lettertype-afmetingen, kleuren etc. moeten worden overwogen, omdat het het vertalen vereenvoudigt en mogelijke
                fouten in tags vermindert. Lees het gedeelte Tagbewerkingen om te zien wat er met tags gedaan kan worden. Onthoud dat als
                u tags een probleem vindt in OmegaT en de opmaak niet buitengewoon relevant is voor de huidige vertaling, het verwijderen
                van tags de eenvoudigste manier kan zijn om uit de problemen te geraken.
@@ -208,15 +267,15 @@
          <hr>
          <table width="100%" summary="Navigation footer">
             <tr>
-               <td width="40%" align="left"><a accesskey="p" href="chapter.font.html">Terug</a>&nbsp;
+               <td width="40%" align="left"><a accesskey="p" href="chapter.plain.text.html">Terug</a>&nbsp;
                </td>
                <td width="20%" align="center">&nbsp;</td>
-               <td width="40%" align="right">&nbsp;<a accesskey="n" href="chapter.plain.text.html">Volgende</a></td>
+               <td width="40%" align="right">&nbsp;<a accesskey="n" href="chapter.translation.memories.html">Volgende</a></td>
             </tr>
             <tr>
-               <td width="40%" align="left" valign="top">Hoofdstuk 11. Lettertype-instellingen&nbsp;</td>
+               <td width="40%" align="left" valign="top">Hoofdstuk 11. Werken met platte tekst&nbsp;</td>
                <td width="20%" align="center"><a accesskey="h" href="index.html">Begin</a></td>
-               <td width="40%" align="right" valign="top">&nbsp;Hoofdstuk 13. Werken met platte tekst</td>
+               <td width="40%" align="right" valign="top">&nbsp;Hoofdstuk 13. Vertaalgeheugens</td>
             </tr>
          </table>
       </div>

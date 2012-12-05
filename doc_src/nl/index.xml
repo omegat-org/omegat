@@ -1147,7 +1147,7 @@
                 </imageobject>
               </inlinemediaobject></entry>
 
-            <entry>maximaliseert het venster</entry>
+            <entry>maximaliseert het venster.</entry>
           </row>
 
           <row>
@@ -1356,7 +1356,7 @@
           <primary>Vensters in OmegaT</primary> <secondary>venster Meerdere vertalingen</secondary>
         </indexterm></title>
 
-      <para>Een bepaald bronsegment kan verschillende vertalingen vereisen, afhankelijk van de context. Als de huidige vertaling van het segment niet past, kan de gebruiker <guisubmenu>Bewerken → Alternatieve vertaling maken</guisubmenu> selecteren. De doeltekst die daarna wordt ingevoerd zal worden behandeld als een alternatieve vertaling van het bronsegment. U kunt één van de alternatieven - bijvoorbeeld die welke het meest waarschijnlijk is - als de standaard vertaling instellen door te selecteren <guisubmenu>Bewerken → Als standaard vertaling gebruiken</guisubmenu></para>
+      <para>Een bepaald bronsegment kan verschillende vertalingen vereisen, afhankelijk van de context. Als de huidige vertaling van het segment niet past, kan de gebruiker <guisubmenu>Bewerken → Alternatieve vertaling maken</guisubmenu> selecteren. De doeltekst die daarna wordt ingevoerd zal wordne behandeld als een alternatieve vertaling van het bronsegment. U kunt één van de alternatieven - bijvoorbeeld die welke het meest waarschijnlijk is - als de standaard vertaling instellen door te selecteren <guisubmenu>Bewerken → Als standaard vertaling gebruiken</guisubmenu></para>
     </section>
 
     <section>
@@ -1428,7 +1428,7 @@
 
       <itemizedlist>
         <listitem>
-          <para>Het bestand dat momenteel beschikbaar is in het venster Bewerken is geaccentueerd met een blauwe achtergrond. Drukken op <keycap>Enter</keycap> zal het venster Bewerken verplaatsen naar het begin van het geselecteerde bestand</para>
+          <para>het bestand dat momenteel beschikbaar is in het venster Bewerken is geaccentueerd met een blauwe achtergrond. Drukken op <keycap>Enter</keycap> zal het venster Bewerken verplaatsen naar het begin van het geselecteerde bestand</para>
         </listitem>
       </itemizedlist>
 
@@ -2363,7 +2363,7 @@
 
     <para>Sneltoetsen worden geactiveerd door te drukken op <keycap>Ctrl</keycap> en een letter. Sommige sneltoetsen gebruiken ook andere toetsen. Voor de leesbaarheid worden letters hier geschreven als hoofdletters.</para>
 
-    <para>Ctrl wordt gebruikt op Windows, UNIX en UNIX-achtige besturingssystemen die een toetsenbord hebben met de <keycap>Ctrl</keycap> / <keycap>Control</keycap>-toets. Mac-gebruikers zouden in plaats daarvan de <guimenuitem>cmd+toets</guimenuitem> moeten gebruiken. Op toetsenborden van Apple heeft de <guimenuitem>cmd</guimenuitem>-toets een label "command" of een Apple-merkteken er op.</para>
+    <para>Ctrl wordt gebruikt op Windows, UNIX en UNIX-achtige besturingssystemen die een toetsenbord hebben met de <keycap>Ctrl</keycap> / <keycap>Control</keycap>-toets. Mac-gebrukers zouden in plaats daarvan de <guimenuitem>cmd+toets</guimenuitem> moeten gebruiken. Op toetsenborden van Apple heeft de <guimenuitem>cmd</guimenuitem>-toets een label "command" of een Apple-merkteken er op.</para>
 
     <itemizedlist>
       <listitem>
@@ -2934,7 +2934,7 @@
 
   <para>U kunt projectspecifieke filters inschakelen via <emphasis role="bold">Opties → Eigenschappen...</emphasis> . Klik op de knop <guibutton>Bestandsfilters</guibutton> en activeer het keuzevak <guimenuitem>Projectspecifieke filters inschakelen</guimenuitem><indexterm class="singular">
       <primary>Bestandsfilters</primary> <secondary>projectspecifieke bestandsfilters</secondary>
-    </indexterm>. Een kopie van de configuratie van de filters zal in dit geval met het project worden opgeslagen. Indien u later filters wijzigt zullen alleen de filters voor het project worden bijgewerkt, waarbij de filters voor de gebruikers ongewijzigd zullen blijven.</para>
+    </indexterm>. Een kopie van de configuratie van de filters zal in dit geval met het project worden opgeslagen. Indien u later filters wijzigt zullen alleen de projectfilters worden bijgewerkt, waarbij de filters voor de gebruikers ongewijzigd zullen blijven.</para>
 
   <para><emphasis role="bold">Waarschuwing!</emphasis> Als u de segmentatie-opties wijzigt als een project geopend is moet u het project herladen vóórdat de wijzigingen effect hebben.</para>
 
@@ -2989,7 +2989,7 @@
 
     <itemizedlist>
       <listitem>
-        <para><emphasis>Tekst die overeenkomt met reguliere uitdrukking overslaan</emphasis>: De tekst die overeenkomt met de reguliere uitdrukking wordt overgeslagen. Dit wordt in de tagvalidatie in rood weergegeven. Tekst in het bronsegment die overeenkomt wordt cursief weergegeven.</para>
+        <para><emphasis>Tekst die overeenkomt met reguliere uitdrukking overslaan</emphasis>: De tekst die overeenkomt met de reguliere uitdrukking wordt overgeslagen. Dit wordt in de tagvalidatie in rood weergegeven. Tekst in het bronsegment die overeenkomt wordt cursiefweergegeven.</para>
       </listitem>
     </itemizedlist>
 
@@ -3001,8 +3001,8 @@
 
     <itemizedlist>
       <listitem>
-        <para><emphasis>Vertaal NIET de inhoud van tags met de volgende paren van sleutels en waarden voor attributen (door komma's gescheiden):</emphasis>: een overeenkomst in de lijst met "sleutel-waarden"-paren zorgt er voor dat de inhoud van tags zal worden genegeerd</para>
-        <para>Het is soms handig om enkele tags niet te vertalen te maken, gebaseerd op de waarde van attributen. Bijv: <literal>&lt;div class="hide"&gt; &lt;span translate="no"&gt;</literal> U kunt "sleutel-waarden"-paren definiëren voor tags die niet vertaald moeten worden. Voor het voorbeeld hierboven zou het veld bevatten: <literal>class=hide, translate=no </literal></para>
+        <para><emphasis>Vertaal NIET de inhoud van tags met de volgende paren van sleutels en waarden voor attributen (door komma's gescheiden):</emphasis>: een overeenkomst in de lijst met sleutel-waardenparen zorgt er voor dat de inhoud van tags zal worden genegeerd</para>
+        <para>Het is soms handig om enkele tags niet te vertalen te maken, gebaseerd op de waarde van attributen. Bijv: <literal>&lt;div class="hide"&gt; &lt;span translate="no"&gt;</literal> U kunt sleutel-waardenparen diefiniëren voor for tags die niet vertaald moeten worden. Voor het voorbeeld hierboven zou het veld bevatten: <literal>class=hide, translate=no </literal></para>
       </listitem>
     </itemizedlist>
 
@@ -3084,7 +3084,7 @@
 
     <itemizedlist>
       <listitem>
-        <para><emphasis>Vertaal NIET de inhoud van tags met de volgende paren van sleutels en waarden voor attributen (door komma's gescheiden):</emphasis>: een overeenkomst in de lijst met "sleutel-waarden"-paren zorgt er voor dat de inhoud van tags zal worden genegeerd</para>
+        <para><emphasis>Vertaal NIET de inhoud van tags met de volgende paren van sleutels en waarden voor attributen (door komma's gescheiden):</emphasis>: een overeenkomst in de lijst met sleutel-waardenparen zorgt er voor dat de inhoud van tags zal worden genegeerd</para>
       </listitem>
     </itemizedlist>
 
@@ -3213,7 +3213,7 @@
         <listitem>
           <para><literal>$(timestamp-????)</literal> - datum en tijd van het systeem op het moment van genereren in verschillende patronen</para>
 
-          <para>Bekijk <ulink url="http://docs.oracle.com/javase/1.4.2/docs/api/java/text/SimpleDateFormat.html">documentatie van Oracle</ulink> voor voorbeelden van de patronen voor "SimpleDateFormat"</para>
+          <para>Bekijk <ulink url="http://docs.oracle.com/javase/1.4.2/docs/api/java/text/SimpleDateFormat.html">documentatie van Oracle</ulink> vpor voorbeelden van de patronen voor "SimpleDateFormat"</para>
         </listitem>
 
         <listitem>
@@ -3299,9 +3299,7 @@
     <title>Projectbestanden vertaling</title>
 
     <indexterm class="singular">
-      <primary>Project files</primary>
-
-      <secondary>Translation project files</secondary>
+      <primary>Projectbestanden</primary> <secondary>Projectbestanden voor vertaling</secondary>
     </indexterm>
 
     <para>Een <application>OmegaT</application> vertaalproject bestaat uit een aantal bestanden en mappen.</para>
@@ -3359,7 +3357,7 @@
           <primary>Projectbestanden</primary> <secondary>Submap omegat</secondary>
         </indexterm></title>
 
-      <para>De submap <emphasis role="bold">omegat</emphasis> bevat ten minste één en mogelijk meerdere andere bestanden. Het meest belangrijke bestand is hier <filename>project_save.tmx, </filename>dat het werkende vertaalgeheugen voor het project is. Back-ups van dit bestand (met de extensie bak) worden progressief toegevoegd aan deze map, eerst aan het begin van de vertaalsessie, aan het einde daarvan en als de vertaling vordert. Op deze manier wordt een onbedoeld verlies van gegevens vermeden - bekijk Gegevensverlies voorkomen in hoofdstuk <link linkend="chapter.misc">Diverse onderwerpen.</link></para>
+      <para>De submap <emphasis role="bold">omegat</emphasis> bevat ten minste één en mogelijk meerdere andere bestanden. Het meest belangrijke bestand is hier <filename>project_save.tmx, </filename>dat het werkende vertaalgehuegen voor het project is. Back-ups van dit bestand (met de extensie bak) worden progressief toegevoegdaan deze map, eerst aan het begin van de vertaalsessie, aan het einde daarvan en als de vertaling vordert. Op deze manier wordt een onbedoeld verlies van gegevens vermeden - bekijk Gegevensverlies voorkomen in hoofdstuk <link linkend="chapter.misc">Diverse onderwerpen.</link></para>
 
       <para>Gedurende de vertaling kunnen als volgt aanvullende bestanden in deze map worden gecreëerd</para>
 
@@ -3905,7 +3903,7 @@
 
       <para>Zoals hierboven vermeld zijn OmegaT-tags LTR-tekenreeksen. Bij het vertalen tussen RTL- en LTR-talen kan het nodig zijn dat de vertaler, om de tags juist te lezen uit de bron en om ze dan juist in te voeren in het doel, vele malen moet schakelen tussen de modi LTR en RTL.</para>
 
-      <para>Indien het document het toelaat wordt het de vertaler sterk aangeraden om informatie over de opmaak uit het originele document te verwijderen zodat er zo weinig mogelijk tags als nodig is in de OmegaT-interface verschijnen. Volg de aanwijzingen die worden gegeven in Hints voor het beheren van tags. Valideer de tags regelmatig (zie Tag-validatie) en maak met regelmatige tussenpozen vertaalde documenten (zie hieronder en Menu) om het eenvoudiger te maken om problemen te zien die opkomen. Een hint: vertalen van een 'platte tekst'-versie van de tekst en het op een later moment toevoegen van het noodzakelijke opmaakprofiel in de relevante toepassing zou misschien minder problematisch blijken te zijn.</para>
+      <para>Indien het document het toelaat wordt het de vertaler sterk aangeraden om informatie over de opmaak uit het originele document te verwijderen zodat er zo weinig mogelijk tags als nodig is in de OmegaT-interface verschijnen. Volg de aanwijzingen die worden gegeven in Hints voor tagbeheer. Valideer de tags regelmatig (zie Tag-validatie) en maak met regelmatige tussenpozen vertaalde documenten (zie hieronder en Menu) om het eenvoudiger te maken om problemen te zien die opkomen. Een hint: vertalen van een 'platte tekst'-versie van de tekst en het op een later moment toevoegen van het noodzakelijke opmaakprofiel in de relevante toepassing zou misschien minder problematisch blijken te zijn.</para>
     </section>
 
     <section>
@@ -3960,7 +3958,7 @@
         </indexterm></term>
 
       <listitem>
-        <para>OmegaT laat het bewerkingsveld leeg. Deze optie stelt u in staat om de vertaling in te voeren zonder de brontekst te hoeven verwijderen, hetgeen u een aantal toetsaanslagen scheelt (<emphasis role="bold">Ctrl+A </emphasis>en <emphasis role="bold">Del). </emphasis> Lege vertalingen zijn nu toegestaan. Zij worden als &lt;LEEG&gt; weergegeven in het bewerkingsvenster. Klik met rechts in een segment en selecteer "<emphasis role="bold">Lege vertaling instellen</emphasis>" om er een te maken. Het item <emphasis role="bold">Vertaling verwijderen</emphasis> in hetzelfde pop-upmenu maakt het ook mogelijk om de bestaande vertaling van het huidige segment te verwijderen. U bereikt hetzelfde door het doelsegment leeg te maken en te drukken op <guibutton>Enter.</guibutton></para>
+        <para>OmegaT laat het bewerkingsveld leeg. Deze optie stelt u in staat om de vertaling in te voeren zonder de brontekst te hoeven verwijderen, hetgeen u een aantal toetsaanslagen scheelt (<emphasis role="bold">Ctrl+A </emphasis>en <emphasis role="bold">Del). </emphasis> Lege vertalingen zijn nu toegestaan. Zij worden als &lt;LEEG&gt; weergegeven in het bewerkingsvenster. To create one, right-click in a segment, and select "<emphasis role="bold">Set empty translation</emphasis>". The entry <emphasis role="bold">Remove translation</emphasis> in the same popup menu also allows to delete the existing translation of the current segment. U bereikt hetzelfde door het doelsegment leeg te maken en te drukken op <guibutton>Enter.</guibutton></para>
       </listitem>
     </varlistentry>
 
@@ -4320,7 +4318,7 @@
 
   <section id="tag.group.validation">
     <title>Taggroep validatie<indexterm class="singular">
-        <primary>Tags</primary> <secondary>Groep valideren</secondary>
+        <primary>Tags</primary> <secondary>groep valideren</secondary>
       </indexterm></title>
 
     <para>De functie Tags valideren detecteert gewijzigde tags (of dat met opzet is gedaan of per ongeluk) en toont de betrokken segmenten. Het activeren van deze functie – <guimenuitem>Ctrl+T<indexterm class="singular">
@@ -4345,7 +4343,7 @@
   </section>
 
   <section id="hints.for.tag.management">
-    <title>Hints voor beheren van tags<indexterm class="singular">
+    <title>Hints voor tagbeheer<indexterm class="singular">
         <primary>Tags</primary> <secondary>hints</secondary>
       </indexterm></title>
 
@@ -4703,7 +4701,7 @@
 
     <para>Klik op <emphasis role="bold">Toevoegen</emphasis> in het bovenste gedeelte van het dialoogvenster, om een lege verzameling van regels te maken voor een nieuw taalpatroon. Een lege regel zal aan de onderzijde van de bovenste tabel verschijnen (u moet misschien naar beneden scrollen om die te zien). Wijzig de naam van de regelverzameling en het taalpatroon naar die van de betrokken taal en de code daarvan (zie <xref linkend="appendix.languages"/> voor een lijst van taalcodes). De syntaxis van het taalpatroon komt overeen met de syntaxis voor reguliere uitdrukkingen. Als uw regelverzameling een taal/land-paar betreft raden wij u aan om het naar boven te verplaatsen met de knop <emphasis role="bold">Naar boven</emphasis>.</para>
 
-    <para>Voeg de patronen <emphasis role="bold">Voor</emphasis> en<emphasis role="bold"> Na</emphasis> toe. Het wordt aangeraden om programma's te gebruiken die het mogelijk maken de effecten direct te zien om de syntaxis en de toepasbaarheid te controleren. Bekijk het hoofdstuk over <link linkend="chapter.regexp">Reguliere uitdrukkingen</link>. Een goed startpunt zullen altijd de bestaande regels zijn.</para>
+    <para>Voeg de patronen <emphasis role="bold">Voor</emphasis> en<emphasis role="bold"> Na</emphasis> toe. Het wordt aangeraden om programma's te gebruiken die het mogelijk maken de effecten direct te zien om de syntaxis en de toepasbaarheid te controleren. Zie het hoofdstuk over <link linkend="chapter.regexp">Reguliere uitdrukkingen</link>. Een goed startpunt zullen altijd de bestaande regels zijn.</para>
   </section>
 
   <section id="few.simple.examples">
@@ -4886,7 +4884,7 @@
         <term>Sleutelwoorden zoeken</term>
 
         <listitem>
-          <para>Zoekt naar segmenten die alle sleutelwoorden bevatten die u heeft opgegeven, in willekeurige volgorde. Selecteer Sleutelwoorden zoeken om te zoeken naar een willekeurig aantal individuele woorden, in willekeurige volgorde. OmegaT zal een lijst weergeven waarin alle segmenten staan waarin alle gespecificeerde woorden voorkomen. Zoeken met sleutelwoord is hetzelfde als zoekacties "met alle woorden" in een internetzoekmachine zoals Google (logische EN). Zoeken met sleutelwoorden naar <emphasis><literal>geopend bestand</literal></emphasis> zal dus alle entiteiten van de tekenreeks <emphasis><literal>open file</literal></emphasis> vinden, en ook <emphasis><literal>bestand geopend</literal>, <literal>geopend invoer bestand</literal>, <literal>bestand kan gevaarlijk zijn als geopend</literal></emphasis>, etc.</para>
+          <para>Zoekt naar segmenten die alle sleutelwoorden bevatten die u heeft opgegeven, in willekeurige volgorde. Selecteer Sleutelwoorden zoeken om te zoeken naar een willekeurig aantal individuele woorden, in willekeurige volgorde. OmegaT zal een lijst weergeven waarin alle segmenten staan waarin alle gespecificeerde woorden voorkomen. Zoeken met sleutelwoord is hetzelfde als zoekacties "met alle woorden" in een internetzoekmachine zoals Google (logische EN). Zoeken met sleutelwoorden naar <emphasis><literal>geopend bestand</literal></emphasis> zal dus alle entiteiten van de tekenreeks <emphasis><literal>open file</literal></emphasis> vinden, en ook <emphasis><literal>bestand geopend</literal>, <literal>geopend invoer bestand</literal>, <literal>bestand kan gevaarlijk zijn als geopend</literal></emphasis>, etc..</para>
         </listitem>
       </varlistentry>
 
@@ -4919,7 +4917,7 @@
       </listitem>
 
       <listitem>
-        <para><emphasis role="bold">Zoeken in TM's</emphasis>: vertaalgeheugens in de map <filename>tm</filename> worden opgenomen in de zoekactie.</para>
+        <para><emphasis role="bold">zoeken in TM's</emphasis>: vertaalgeheugens in de map <filename>tm</filename> worden opgenomen in de zoekactie.</para>
       </listitem>
 
       <listitem>
@@ -4943,7 +4941,7 @@
 
   <chapter id="chapter.regexp">
   <title>Reguliere uitdrukkingen<indexterm class="singular">
-      <primary>Reguliere uitdrukkingen</primary> <seealso>Segmentatie</seealso> <seealso>Zoeken</seealso>
+      <primary>Reguliere uitdrukkingen</primary> <seealso>segmentatie</seealso> <seealso>zoeken</seealso>
     </indexterm></title>
 
   <para>De reguliere uitdrukkingen (of afgekort regex) die worden gebruikt in zoekacties en segmentatieregels zijn die welke worden ondersteund door Java. Als u meer specifieke informatie nodig heeft raadpleeg dan <ulink url="http://download.oracle.com/javase/1.5.0/docs/api/java/util/regex/Pattern.html">documentatie voor Java Regex</ulink>. Bekijk de aanvullende verwijzingen en voorbeelden hieronder.</para>
@@ -5734,7 +5732,7 @@
 
   <section>
     <title><indexterm class="singular">
-        <primary>Woordenlijsten</primary> <secondary>Problemen met woordenlijsten</secondary>
+        <primary>Woordenlijsten</primary> <secondary>problemen met woordenlijsten</secondary>
       </indexterm>Algemene problemen met woordenlijsten</title>
 
     <para><emphasis role="bold">Probleem: Er worden geen items van de woordenlijst weergegeven - mogelijke oorzaken:</emphasis></para>
@@ -5968,11 +5966,13 @@
         <imageobject role="html">
           <imagedata fileref="images/SpellcheckerSetup_25.png"/>
         </imageobject>
+      </mediaobject>
+
+      <mediaobject>
         <imageobject role="fo">
           <imagedata fileref="images/SpellcheckerSetup_25.png" width="80%"/>
         </imageobject>
       </mediaobject>
-
     </figure>
 
     <para>Klikken op de knop <guibutton>Nieuw woordenboek installeren</guibutton> zal het installatievenster Woordenboek openen, waar u de woordenboeken kunt selecteren die u wilt installeren. Zorg er voor dat de taalcode van de doelbestanden correspondeert met de taalcode van het woordenboek: een FR-FR woordenboek zal niet werken met de instelling FR voor het doel. U zult de instelling naar FR-FR moeten wijzigen om de spellingscontrole het juiste woordenboek voor uw doel te laten herkennen. Zoek naar bestanden met de naam, verwijzend naar de gebruikte taal en die de extensies <emphasis>aff</emphasis> en <emphasis>dic.</emphasis> hebben.</para>
@@ -6280,7 +6280,7 @@
 
     <para>Een tokenizerpakket dat is afgeleid van het Luceneproject wordt gedistribueerd als een OmegaT plug-in op http://sourceforge.net/projects/omegat-plugins/files/. Download de meest recente bestanden (OmegaT-tokenizers_0.4_2-2.1.zip op het moment van schrijven).</para>
 
-    <para>Maak een map met de naam "plugins" in de map waar OmegaT.jar staat en pas de bovenstaande bestanden in die map uit om de tokenizer te installeren.</para>
+    <para>Maak een map met de naam "plug-ins" in de map waar OmegaT.jar staat en pas de bovenstaande bestanden in die map uit om de tokenizer te installeren.</para>
 
     <para>U moet de tokenizer specificeren die u zal gaan gebruiken voor de brontaal en welke tokenizer u zult gaan gebruiken voor de doeltaal om OmegaT uit te voeren. De syntaxis is als volgt:</para>
 
@@ -6363,11 +6363,11 @@
 
     <para>De plug-in LanguageTool voor OmegaT kan worden gedownload vanaf de downloadsite voor OmegaT plug-ins (<ulink url="???">http://sourceforge.net/projects/omegat-plugins/files/</ulink>). Pak de bestanden uit en plaats ze allemaal in de map "plugins" die zich bevindt in de installatiemap van OmegaT, dat is de map waarin OmegaT.jar staat. Maak eerst de map "plugins" als die niet bestaat.</para>
 
-    <para>Eenmaal geïnstalleerd zal de plug-in automatisch worden gebruikt door OmegaT, als <guimenuitem>Opties &gt; Taalcontrole</guimenuitem> is aangevinkt. De toegepaste regels (indien aanwezig) zullen afhankelijk zijn van de bron- en doeltaal van het project. Wanneer een regel wordt geactiveerd zal de overeenkomende frase met blauw worden onderstreept in het Bewerkingsvenster (bekijk <emphasis>ook </emphasis>en <emphasis>Ik deed niets</emphasis> in de afbeelding hierboven). Indien met de muis over een onderstreepte frase wordt gegaan, zal een omschrijving verschijnen.</para>
+    <para>Eenmaal geïnstalleerd zal de plug-in automatisch worden gebruikt door OmegaT, als <guimenuitem>Opties &gt; Taalcontrole</guimenuitem> is aangevinkt. De toegepaste regels (indien aanwezig) zullen afhankelijk zijn van de bron- en doeltaal van het project. Wanneer een regel wordt gecativeerd zal de overeenkomende frase met blauw worden onderstreept in het Bewerkingsvenster (bekijk <emphasis>ook </emphasis>en <emphasis>Ik deed niets</emphasis> in de afbeelding hierboven). Indien met de muis over een onderstreepte frase wordt gegaan, zal een omschrijving verschijnen.</para>
   </section>
 </appendix>
- 
-   <appendix id="appendix.ScriptingPlugin.inOmegaT">
+  
+  <appendix id="appendix.ScriptingPlugin.inOmegaT">
   <title>plug-in Scripting<indexterm class="singular">
       <primary>Plug-ins</primary> <secondary>Scripting</secondary>
     </indexterm></title>
@@ -8482,7 +8482,7 @@
 
     <para><emphasis role="bold">Distributie en aanpassingen</emphasis></para>
 
-    <para>De documentatie is een vrij document; u mag het opnieuw distriberen en/of aanpassen onder de bepalingen van de GNU General Public License zoals die is gepubliceerd door de Free Software Foundation; ofwel versie 2 van die License, of (naar uw eigen inzicht) enige latere versie.</para>
+    <para>De documentatie is een vrij document; u mag het opnieuw distribueren en/of aanpassen onder de bepalingen van de GNU General Public License zoals die is gepubliceerd door de Free Software Foundation; ofwel versie 2 van die License, of (naar uw eigen inzicht) enige latere versie.</para>
 
     <para><emphasis role="bold">Garantie</emphasis></para>
 

@@ -11,7 +11,7 @@
 
   <para>Als een project in <application>OmegaT</application> één of meer woordenlijsten bevat, worden termen uit de woordenlijst die ook worden gevonden in het huidige segment automatisch weergegeven in het venster Woordenlijst.</para>
 
-  <para>U definieert de locatie ervan in het dialoogvenster Projecteigenschappen. De extensie moet <filename>.txt</filename> zijn (indien niet zal die worden toegevoegd). De locatie van het bestand moet liggen binnen de map <filename>/glossary </filename>, maar het mag in een diepere map staan (bijv. <filename>glossary/sub/glossary.txt</filename>). Het bestand hoeft niet te bestaan als het wordt ingesteld, het zal worden gemaakt (indien nodig) bij het toevoegen van een item voor de woordenlijst. Als het bestand al bestaat, wordt er geen poging gedaan om de indeling of de tekenset van het bestand te verifiëren: de nieuwe items zullen altijd in de indeling tab-gescheiden en UTF-8 zijn. Omdat de bestaande inhoud niet wordt geraakt, zal schade aan een bestaand bestand beperkt zijn.</para>
+  <para>U definieert de locatie ervan in het dialoogvenster Projecteigenschappen. De extensie moet <filename>.txt </filename>zijn (indien niet zal die worden toegevoegd). De locatie van het bestand moet liggen binnen de map <filename>/glossary</filename>, maar het mag in een diepere map staan (bijv. <filename>glossary/sub/glossary.txt</filename>). Het bestand hoeft niet te bestaan als het wordt ingesteld, het zal worden gemaakt (indien nodig) bij het toevoegen van een item voor de woordenlijst. Als het bestand al bestaat, wordt er geen poging gedaan om de indeling of de tekenset van het bestand te verifiëren: de nieuwe items zullen altijd in de indeling tab-gescheiden en UTF-8 zijn. Omdat de bestaande inhoud niet wordt geraakt, zal schade aan een bestaand bestand beperkt zijn.</para>
 
   <section>
     <title>Gebruik</title>
@@ -29,11 +29,11 @@
 
       <mediaobject>
         <imageobject role="html">
-          <imagedata fileref="images/GlossaryPane_25.png"/>
+          <imagedata fileref="images/Glossarypane_25.png"/>
         </imageobject>
 
         <imageobject role="fo">
-          <imagedata fileref="images/GlossaryPane_25.png" width="60%"/>
+          <imagedata fileref="images/Glossarypane_25.png" width="60%"/>
         </imageobject>
       </mediaobject>
     </figure>
@@ -59,7 +59,7 @@
     </figure>
 
     <para>Het onderstreepte item &quot;pop-upmenu&quot; kan worden gevonden in het venster Woordenlijst als &quot;pojavni menu&quot;. Door het te accentueren in het venster Woordenlijst en er dan met rechts op te klikken voegt het in op de cursorpositie in het doelsegment.<footnote>
-        <para>Onthoud dat in het bovenstaande geval, dit slechts het halve verhaal (of zelfs nog minder is) is, omdat de doeltaal (Sloveens) verbuigingen gebruikt. Het ingevoegde &quot;pojavni meni&quot; moet dus worden gewijzigd naar &quot;pojavcnem meniju&quot;. Met andere woorden: het typen van de juiste term, zonder te accentueren en met rechts te klikken, is waarschijnlijk sneller.</para>
+        <para>Onthoud dat in het bovenstaande geval, dit slechts het halve verhaal (of zelfs nog minder is) is, omdat de doeltaal (Sloveens) verbuigingen gebruikt. Het ingevoegde &quot;pojavni meni&quot; moet dus worden gewijzigd naar &quot;pojavnem meniju&quot;. Met andere woorden: het typen van de juiste term, zonder te accentueren en met rechts te klikken, is waarschijnlijk sneller.</para>
       </footnote></para>
   </section>
 
@@ -70,13 +70,13 @@
         <primary>Projectbestanden</primary> <secondary>gebruikersbestanden</secondary> <seealso>woordenlijsten</seealso>
       </indexterm></title>
 
-    <para>Woordenlijstbestanden zijn eenvoudige platte tekst-bestanden die drie-kolommen, tabgescheiden lijsten bevatten met de bron- en doeltermen in respectievelijk de eerste en tweede kolom. De derde kolom kan worden gebruikt voor aanvullende informatie. Woordenlijstbestanden kunnen of in de standaard systeemcodering (en aangegeven door de extensie .tab) zijn of in UTF-8 (de extensie .utf8). De codering Unicode (UTF8) wordt om voor de hand liggende redenen geprefereerd.</para>
+    <para>Woordenlijstbestanden zijn eenvoudige platte tekst-bestanden die drie-kolommen, tabgescheiden lijsten bevatten met de bron- en doeltermen in respectievelijk de eerste en tweede kolom. De derde kolom kan worden gebruikt voor aanvullende informatie. Er kunnen items zijn waarin de doelkolom ontbreekt, d.i. bevatten slechts de bronterm en de opmerking.</para>
 
-    <para>Ook het CSV-formaat wordt ondersteund. Dit formaat is hetzelfde als de tabgescheiden: bronterm, doelterm. Velden met opmerkingen worden gescheiden door een komma ','. Tekenreeksen kunnen worden omsloten door aanhalingstekens &quot;, die het mogelijk maken een komma binnen een tekenreeks te hebben:</para>
+    <para>Woordenlijstbestanden kunnen of in de standaard systeemcodering (en aangegeven door de extensie .tab) zijn of in UTF-8 (de extensie .utf8). De codering Unicode (UTF8) wordt om voor de hand liggende redenen geprefereerd. Ook het CSV-formaat wordt ondersteund. Dit formaat is hetzelfde als de tabgescheiden: bronterm, doelterm. Velden met opmerkingen worden gescheiden door een komma ','. Tekenreeksen kunnen worden omsloten door aanhalingstekens &quot;, die het mogelijk maken een komma binnen een tekenreeks te hebben:</para>
 
     <para><literal>&quot;This is a source term, which contains a comma&quot;,&quot;Dit is een bronterm, die een komma bevat&quot;</literal></para>
 
-    <para>In aanvulling op het platte tekst-formaat, wordt TBX-formaat  <indexterm class="singular">
+    <para>In aanvulling op het platte tekst-formaat, wordt TBX-formaat <indexterm class="singular">
         <primary>Woordenlijsten</primary> <secondary>TBX-formaat</secondary>
       </indexterm> ook ondersteund. TBX - Term Base eXchange - is de open, op XML gebaseerde standaard voor de uitwisseling van gestructureerde terminologische gegevens. TBX is goedgekeurd als een internationale standaard door LISA<indexterm class="singular">
         <primary>LISA-</primary><secondary>bestandsformaat</secondary>
@@ -90,27 +90,31 @@
         <primary>Woordenlijsten</primary> <secondary>een woordenlijst maken</secondary>
       </indexterm></title>
 
-    <para>De projectinstellingen maken het mogelijk een naam in te voeren voor een te beschrijven woordenlijstbestand (zie het begin van dit hoofdstuk). Toevoegen van nieuwe items wordt gedaan met behulp van de sneltoets voor het toetsenbord <keycap>Ctrl+Shift+G</keycap>. Een dialoogvenster opent en maakt het u mogelijk maken een bronterm, doelterm en opmerkingen die u zou kunnen hebben in te voeren:</para>
+    <para>De projectinstellingen maken het mogelijk een naam in te voeren voor een te beschrijven woordenlijstbestand (zie het begin van dit hoofdstuk). Nieuwe items toevoegen wordt gedaan met behulp van de sneltoets voor het toetsenbord <keycap>Ctrl+Shift+G</keycap>. Een dialoogvenster opent en maakt het u mogelijk maken een bronterm, doelterm en opmerkingen die u zou kunnen hebben in te voeren:</para>
 
     <mediaobject role="html">
-        <imageobject>
-          <imagedata fileref="images/GlossaryEntry_25.png"/>
-        </imageobject>
+      <imageobject>
+        <imagedata fileref="images/GlossaryEntry_25.png"/>
+      </imageobject>
 
-        <imageobject role="fo">
-          <imagedata fileref="images/GlossaryEntry_25.png" width="80%"/>
-        </imageobject>
-      </mediaobject>
+      <imageobject role="fo">
+        <imagedata fileref="images/GlossaryEntry_25.png" width="80%"/>
+      </imageobject>
+    </mediaobject>
 
     <para>De inhoud van bestanden met woordenlijsten worden in het geheugen bewaard en geladen als het project wordt geopend of opnieuw geladen. Bijwerken van een woordenlijstbestand is dus vrij eenvoudig: druk op <keycap>Ctrl+Shift+G</keycap> en voer de nieuwe term in, de vertaling ervan en opmerkingen die u zou kunnen hebben (zorg er voor dat u op 'tab' drukt tussen de velden) en sla het bestand op. De inhoud van het venster Woordenlijst zal overeenkomstig worden bijgewerkt.</para>
 
-    <para><emphasis role="bold">Opmerking: </emphasis>Natuurlijk zijn er andere wegen en manieren om een eenvoudig bestand met tabgescheiden items te maken, en zij zijn allemaal eenvoudiger, en veel er van een heel stuk eenvoudiger dan bovenstaande suggestie. Men kan bijvoorbeeld de inhoud hierboven exporteren als een <filename>CSV</filename>, in plaats van als een <filename>UTF8</filename>-tekstbestand. Er is niets tegen het gebruiken van Notepad++ op Windows of GEdit op Linux bijvoorbeeld: elke tekstverwerker die UTF8 kan afhandelen en witruimte weer kan geven (zodat de vereiste <keycap>TAB</keycap>-tekens u niet ontgaan) kan worden gebruikt.</para>
+    <para><indexterm class="singular">
+        <primary>Woordenlijsten</primary> <secondary>Locatie van het te beschrijven bestand voor de woordenlijst</secondary>
+      </indexterm>De locatie van het te beschrijven bestand voor de woordenlijst kan worden ingesteld in het dialoogvenster Project &gt; Eigenschappen .... De te herkennen extensies zijn <filename>TXT</filename> en <filename>UTF8</filename>.</para>
+
+    <para><emphasis role="bold">Opmerking: </emphasis>Natuurlijk zijn er andere manieren en mogelijkheden om een eenvoudig bestand met tabgescheiden items te maken. Er is niets tegen het gebruiken van Notepad++ op Windows of GEdit op Linux of een werkbladprogramma voor dit doel: elk programma dat UTF8 kan afhandelen en witruimte weer kan geven (zodat de vereiste <keycap>TAB</keycap>-tekens u niet ontgaan) kan worden gebruikt.</para>
   </section>
 
   <section>
     <title><indexterm class="singular">
         <primary>Woordenlijsten</primary> <secondary>Trados MultiTerm</secondary>
-      </indexterm>Gebruik van Trados Multiterm</title>
+      </indexterm>Trados Multiterm gebruiken</title>
 
     <para>Woordenlijsten die zijn geëxporteerd vanuit Trados Multiterm kunnen zonder verdere aanpassingen worden gebruikt als woordenlijsten voor <application>OmegaT</application>, vooropgesteld dat zij de bestandsextensie <filename>.tab</filename> hebben gekregen en de velden voor bron- en doelterm respectievelijk de eerste twee velden zijn. Indien u exporteert met behulp van de systeemoptie &quot;Tabgescheiden exporteren&quot;, moet u de eerste 5 kolommen verwijderen (Seq. Nr, Date created etc). De nieuwere versies van MultiTerm ondersteunen het exporteren naar TBX-formaat.</para>
   </section>

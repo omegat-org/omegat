@@ -200,11 +200,18 @@ to write in the repository anymore
 ----------------------------------------------------------------------
  OmegaT 2.5.5 update 4
 ----------------------------------------------------------------------
-   0 Enhancement
+   4 Enhancements
    0 Bug fix
    4 Localisation updates
 ----------------------------------------------------------------------
 2.5.5 update 4 vs. 2.5.5 update 3
+
+  Other enhancements:
+
+  - Swedish segmentation rules
+  - French segmentation rules
+  - Finnish segmentation rules
+  - Japanese segmentation rules modifications
 
   Localisation updates:
 

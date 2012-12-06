@@ -60,7 +60,7 @@ mode.
   - Create/download project dialog accepts empty folder besides new folder as project location, 
 and doesn't show files any more.
 
-  - Multiple save commands could interfere, causing you to loose all translations in team project.
+  - Multiple save commands could interfere, causing you to lose all translations in team project.
 
   Localisation updates:
 

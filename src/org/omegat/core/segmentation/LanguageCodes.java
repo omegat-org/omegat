@@ -43,6 +43,7 @@ public final class LanguageCodes {
     public static final String GERMAN_CODE = "German";
     public static final String ENGLISH_CODE = "English";
     public static final String SPANISH_CODE = "Spanish";
+    public static final String FINNISH_CODE = "Finnish";
     public static final String FRENCH_CODE = "French";
     public static final String ITALIAN_CODE = "Italian";
     public static final String JAPANESE_CODE = "Japanese";
@@ -59,6 +60,7 @@ public final class LanguageCodes {
     public static final String GERMAN_KEY = "CORE_SRX_RULES_LANG_GERMAN";
     public static final String ENGLISH_KEY = "CORE_SRX_RULES_LANG_ENGLISH";
     public static final String SPANISH_KEY = "CORE_SRX_RULES_LANG_SPANISH";
+    public static final String FINNISH_KEY = "CORE_SRX_RULES_LANG_FINNISH";
     public static final String FRENCH_KEY = "CORE_SRX_RULES_LANG_FRENCH";
     public static final String ITALIAN_KEY = "CORE_SRX_RULES_LANG_ITALIAN";
     public static final String JAPANESE_KEY = "CORE_SRX_RULES_LANG_JAPANESE";
@@ -78,6 +80,7 @@ public final class LanguageCodes {
         codeKeyHash.put(GERMAN_CODE, GERMAN_KEY);
         codeKeyHash.put(ENGLISH_CODE, ENGLISH_KEY);
         codeKeyHash.put(SPANISH_CODE, SPANISH_KEY);
+        codeKeyHash.put(FINNISH_CODE, FINNISH_KEY);
         codeKeyHash.put(FRENCH_CODE, FRENCH_KEY);
         codeKeyHash.put(ITALIAN_CODE, ITALIAN_KEY);
         codeKeyHash.put(JAPANESE_CODE, JAPANESE_KEY);

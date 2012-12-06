@@ -30,8 +30,8 @@
 <header></header>
   <body>
     <languagerules>
-      <!-- Catalan segmentation rules
-        Contributed by Benjamin Kolz -->
+      <!-- CA
+      Catalan non-break rules, contributed by Benjamin Kolz -->
 
       <languagerule languagerulename="Catalan">
         <rule break="no">
@@ -240,11 +240,10 @@
         </rule>
       </languagerule>
 
-      <!-- Extensive set of exceptions for segmenting German language -->
+      <!-- DE
+      German non-break rules, contributed by Martin Kempf -->
 
       <languagerule languagerulename="German">
-        <!-- Rules contributed by Martin Kempf -->
-
         <rule break="no">
           <beforebreak>www\.</beforebreak>
           <afterbreak>.*</afterbreak>
@@ -1749,6 +1748,10 @@
           <beforebreak>u\.v\.m\.</beforebreak>
           <afterbreak>\s</afterbreak>
         </rule>
+
+      <!-- DE
+      German break rules  -->
+
         <rule break="yes">
           <beforebreak>\.\"</beforebreak>
           <afterbreak>\s</afterbreak>
@@ -1767,7 +1770,11 @@
         </rule>
       </languagerule>
 
-      <!-- English exceptions -->
+      <!-- EN
+      English non-break rules
+      including http://sourceforge.net/support/tracker.php?aid=1856354
+      			http://sourceforge.net/support/tracker.php?aid=2493485  -->
+
 
       <languagerule languagerulename="English">
         <rule break="no">
@@ -1818,10 +1825,6 @@
           <beforebreak>\stel\.</beforebreak>
           <afterbreak>\s</afterbreak>
         </rule>
-
-        <!-- Following rules contributed by Jean-Christophe Helary
-     http://sourceforge.net/support/tracker.php?aid=1856354  -->
-
         <rule break="no">
           <beforebreak>(?i)fig\.</beforebreak>
           <afterbreak>\s</afterbreak>
@@ -1834,9 +1837,6 @@
           <beforebreak>\s[A-Z]\.</beforebreak>
           <afterbreak>\s</afterbreak>
         </rule>
-
-        <!--http://sourceforge.net/support/tracker.php?aid=2371683-->
-
         <rule break="no">
           <beforebreak>[apAP]\.?[mM]\.</beforebreak>
           <afterbreak>\s[a-z]</afterbreak>
@@ -1861,17 +1861,14 @@
           <beforebreak>\d\ssec\.</beforebreak>
           <afterbreak>\s</afterbreak>
         </rule>
-
-        <!--http://sourceforge.net/support/tracker.php?aid=2493485-->
-
         <rule break="no">
           <beforebreak>\s[vV][sS]?\.</beforebreak>
           <afterbreak>\s</afterbreak>
         </rule>
       </languagerule>
 
-      <!-- Spanish segmentation rules
-        Contributed by Benjamin Kolz -->
+      <!-- ES
+      Spanish non-break rules, contributed by Benjamin Kolz -->
 
       <languagerule languagerulename="Spanish">
         <rule break="no">
@@ -2068,8 +2065,63 @@
         </rule>
       </languagerule>
 
-      <!-- French segmentation rules
-        Contributed by Kerry Swatridge -->
+
+      <!-- FI
+      Finnish non-break rules, contributed by Petri Tapola  -->
+
+      <languagerule languagerulename="Finnish">
+        <rule break="no">
+          <beforebreak>ao\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule>
+        <rule break="no">
+          <beforebreak>em\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule>
+        <rule break="no">
+          <beforebreak>esim\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule>
+        <rule break="no">
+          <beforebreak>ks\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule>
+        <rule break="no">
+          <beforebreak>mm\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule>
+        <rule break="no">
+          <beforebreak>nk\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule>
+        <rule break="no">
+          <beforebreak>ns\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule>
+        <rule break="no">
+          <beforebreak>prof\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule>
+        <rule break="no">
+          <beforebreak>\so.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule>
+        <rule break="no">
+          <beforebreak>synt\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule>
+        <rule break="no">
+          <beforebreak>ts\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule>
+        <rule break="no">
+          <beforebreak>vrt\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule>
+      </languagerule>
+
+      <!-- FR
+      French non-break rules, contributed by Kerry Swatridge  -->
 
       <languagerule languagerulename="French">
         <rule break="no">
@@ -2186,11 +2238,10 @@
         </rule>
       </languagerule>
 
-      <!-- Set of exceptions for segmenting Italian language -->
+      <!-- IT
+      Italian non-break rules, contributed by Marco Cevoli -->
 
       <languagerule languagerulename="Italian">
-        <!-- List contributed by Marco Cevoli, rules contributed by Jean-Christophe Helary -->
-
         <rule break="no">
           <beforebreak>\sa\.C\.</beforebreak>
           <afterbreak>\s</afterbreak>
@@ -2673,25 +2724,29 @@
         </rule>
       </languagerule>
 
-      <!-- A bit of Japanese segmentation -->
+      <!-- JA
+      Japanese non-break rules -->
 
       <languagerule languagerulename="Japanese">
         <rule break="no">
           <beforebreak>[。．？！]</beforebreak>
           <afterbreak>[）)]</afterbreak>
         </rule>
+
+      <!-- JA
+      Japanese break rules -->
+
         <rule break="yes">
           <beforebreak>[。．？！]</beforebreak>
           <afterbreak>.</afterbreak>
         </rule>
       </languagerule>
 
-      <!-- Extensive set of exceptions for segmenting Dutch language -->
+      <!-- NL
+      Dutch non-break rules, contributed by Arno Peters
+      based on http://nl.wikipedia.org/wiki/Lijst_van_afkortingen  -->
 
       <languagerule languagerulename="Dutch">
-        <!-- Rules contributed by Arno Peters based on
-	 http://nl.wikipedia.org/wiki/Lijst_van_afkortingen -->
-
         <rule break="no">
           <beforebreak>\saanh\.</beforebreak>
           <afterbreak>\s</afterbreak>
@@ -4190,8 +4245,8 @@
         </rule>
       </languagerule>
 
-      <!-- Polish exceptions
-       Contributed by Jimmy O Regan -->
+      <!-- PL
+      Polish non-break rules, contributed by Jimmy O Regan -->
 
       <languagerule languagerulename="Polish">
         <rule break="no">
@@ -4240,8 +4295,8 @@
         </rule>
       </languagerule>
       
-      <!-- Swedish segmentation rules
-        Contributed by Per Tunedal -->
+      <!-- SV
+      Swedish non-break rules, contributed by Per Tunedal -->
 
       <languagerule languagerulename="Swedish">
         <rule break="no">
@@ -4538,7 +4593,9 @@
         </rule>
       </languagerule>
 
-      <!-- Some Russian examples -->
+      <!-- RU
+      Russian non-break rules
+      including http://sourceforge.net/support/tracker.php?aid=2835535 -->
 
       <languagerule languagerulename="Russian">
         <rule break="no">
@@ -4549,9 +4606,6 @@
           <beforebreak>(?i)т\.к\.</beforebreak>
           <afterbreak>\s</afterbreak>
         </rule>
-
-        <!-- http://sourceforge.net/support/tracker.php?aid=2835535 -->
-
         <rule break="no">
           <beforebreak>рт\.ст\.</beforebreak>
           <afterbreak>\s</afterbreak>
@@ -4567,20 +4621,17 @@
       <languagerule languagerulename="Default">
         <rule break="no">
           <!-- ... exception -->
-
           <beforebreak>\.\.\.</beforebreak>
           <afterbreak>\s+\P{Lu}</afterbreak>
         </rule>
         <rule break="yes">
           <!--numbered headers break rule 
          based on an idea by Jean-Christophe Helary -->
-
           <beforebreak>^\s*\p{Nd}+[\p{Nd}\.\)\]]+\s+</beforebreak>
           <afterbreak>\p{Lu}</afterbreak>
         </rule>
         <rule break="yes">
           <!-- .?! break rule -->
-
           <beforebreak>[\.\?\!]+</beforebreak>
           <afterbreak>\s</afterbreak>
         </rule>
@@ -4616,6 +4667,7 @@
       <languagemap languagepattern="DE.*" languagerulename="German"/>
       <languagemap languagepattern="EN.*" languagerulename="English"/>
       <languagemap languagepattern="ES.*" languagerulename="Spanish"/>
+      <languagemap languagepattern="FI.*" languagerulename="Finnish"/>
       <languagemap languagepattern="FR.*" languagerulename="French"/>
       <languagemap languagepattern="IT.*" languagerulename="Italian"/>
       <languagemap languagepattern="JA.*" languagerulename="Japanese"/>

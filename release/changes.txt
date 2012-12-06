@@ -51,7 +51,7 @@ The connection continues to be tested on each save. When the connection
 comes back, a message informs the user that the project is back in online
 mode.
 
-  - Git end of lines where not handled correctly under Windows
+  - Git end of lines were not handled correctly under Windows
 
   - If writable glossary file does not exist, it is created when an entry is added.
 

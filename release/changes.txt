@@ -36,8 +36,8 @@ If not defined, the default for the language is used just like before.
   - New "--no-team" command line option, to be able to use a team project without
 OmegaT attempting to synchronise it
 
-  - Microsoft Translator added. Requires Dmicrosoft.api.client_id=xxxxxx and
-Dmicrosoft.api.client_secret=xxxx to be set. Identifiers can be obtained from
+  - Microsoft Translator added. Requires -Dmicrosoft.api.client_id=xxxxxx and
+-Dmicrosoft.api.client_secret=xxxx to be set. Identifiers can be obtained from
 the Windows Azure Marketplace.
 
   Bug fixes:

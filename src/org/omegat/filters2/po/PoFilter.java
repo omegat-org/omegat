@@ -382,19 +382,19 @@ public class PoFilter extends AbstractFilter {
             if (COMMENT_FUZZY.matcher(s).matches()) {
                 currentPlural = 0;
                 fuzzy = true;
-                flushTranslation(currentMode, fc, plurals);
+                flushTranslation(currentMode, fc);
                 continue;
             } else if (COMMENT_FUZZY_OTHER.matcher(s).matches()) {
                 currentPlural = 0;
                 fuzzy = true;
-                flushTranslation(currentMode, fc, plurals);
+                flushTranslation(currentMode, fc);
                 s = s.replaceAll("(.*), fuzzy(.*)", "$1$2");
             }
 
             // FSM for po files
             if (COMMENT_NOWRAP.matcher(s).matches()) {
                 currentPlural = 0;
-                flushTranslation(currentMode, fc, plurals);
+                flushTranslation(currentMode, fc);
                 /*
                  * Read the no-wrap comment, indicating that the creator of the po-file did not want long
                  * messages to be wrapped on multiple lines. See 5.6.2 no-wrap of http://docs.oasis-open
@@ -413,7 +413,7 @@ public class PoFilter extends AbstractFilter {
                     // non-plural ID ('msg_id')
                     //we can start a new translation. Flush current translation. This has not happened when no empty lines are in between 'segments'.
                     if (sources[0].length() > 0) {
-                        flushTranslation(currentMode, fc, plurals);
+                        flushTranslation(currentMode, fc);
                     }
                     currentMode = MODE.MSGID;
                     sources[0].append(text);
@@ -506,10 +506,10 @@ public class PoFilter extends AbstractFilter {
                 continue;
             }
 
-            flushTranslation(currentMode, fc, plurals);
+            flushTranslation(currentMode, fc);
             eol(s);
         }
-        flushTranslation(currentMode, fc, plurals);
+        flushTranslation(currentMode, fc);
     }
 
     protected void eol(String s) throws IOException {
@@ -572,7 +572,7 @@ public class PoFilter extends AbstractFilter {
         }
     }
 
-    protected void flushTranslation(MODE currentMode, FilterContext fc, int nrOfPlurals) throws IOException {
+    protected void flushTranslation(MODE currentMode, FilterContext fc) throws IOException {
         if (sources[0].length() == 0) {
             if (targets[0].length() == 0) {
                 // there is no text to translate yet
@@ -625,12 +625,12 @@ public class PoFilter extends AbstractFilter {
                 // plurals
                 if (out != null) {
                     out.write("msgstr[0] " + getTranslation(sources[0], allowBlank, false, fc, 0) + "\n");
-                    for (int i=1;i<nrOfPlurals;i++) {
+                    for (int i=1;i<plurals;i++) {
                         out.write("msgstr["+i+"] " + getTranslation(sources[1], allowBlank, false, fc, i) + "\n");
                     }
                 } else {
                     align(0);
-                    for (int i=1;i<nrOfPlurals;i++) {
+                    for (int i=1;i<plurals;i++) {
                         align(i);
                     }
                 }
@@ -639,7 +639,7 @@ public class PoFilter extends AbstractFilter {
         }
         sources[0].setLength(0);
         sources[1].setLength(0);
-        for (int i=0;i<nrOfPlurals;i++) {
+        for (int i=0;i<plurals;i++) {
             targets[i].setLength(0);
         }
         path = null;

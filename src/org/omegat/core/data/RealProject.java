@@ -504,10 +504,10 @@ public class RealProject implements IProject {
                 try {
                     saveProjectProperties();
 
-                    Core.getMainWindow().showStatusMessageRB("TEAM_SYNCHRONIZE");
                     projectTMX.save(m_config, s, isProjectModified());
 
                     if (repository != null) {
+                        Core.getMainWindow().showStatusMessageRB("TEAM_SYNCHRONIZE");
                         rebaseProject();
                     }
 

@@ -55,6 +55,11 @@ public interface IRemoteRepository {
     boolean isChanged(File file) throws Exception;
 
     /**
+     * Check is file under version control.
+     */
+    boolean isUnderVersionControl(File file) throws Exception;
+
+    /**
      * Update full project from remote repository.
      * PRE: no local changes if you don't want conflicts
      */

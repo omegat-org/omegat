@@ -597,17 +597,16 @@ public class RealProject implements IProject {
         //tmx is already in memory, as 'this.projectTMX'
         //Writable glossary is also in memory, but 'outside our reach' and may change if we mess with the file on disk.
         //Therefore load glossary in memory from file:
-        if (repository.isChanged(glossaryFile)) {
-            //glossary is under version control and changed.
-            needUpload = true;
+        if (repository.isUnderVersionControl(glossaryFile)) {
+            //glossary is under version control
             glossaryEntries = GlossaryReaderTSV.read(glossaryFile);
-            updateGlossary = true;
             modifiedFiles = new File[]{projectTMXFile, glossaryFile};
+            updateGlossary = true;
         } else {
             modifiedFiles = new File[]{projectTMXFile};
             updateGlossary = false;
         }
-        if (isProjectModified() || !needUpload && repository.isChanged(projectTMXFile)) {
+        if (isProjectModified() || repository.isChanged(glossaryFile) || repository.isChanged(projectTMXFile)) {
             needUpload = true;
         }
 

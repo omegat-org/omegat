@@ -85,6 +85,15 @@ public class SVNRemoteRepository implements IRemoteRepository {
         return statusType != SVNStatusType.STATUS_NORMAL && statusType != SVNStatusType.STATUS_UNVERSIONED && statusType != SVNStatusType.STATUS_NONE;
     }
 
+    public boolean isUnderVersionControl(File file) throws Exception {
+        SVNStatus status = ourClientManager.getStatusClient().doStatus(file, false);
+        //if file not under version control, then return false.
+        if (status == null) return false;
+        SVNStatusType statusType = status.getContentsStatus();
+        //hmm, if file not under version control, status is STATUS_NONE, and not STATUS_UNVERSIONED?
+        return statusType != SVNStatusType.STATUS_UNVERSIONED && statusType != SVNStatusType.STATUS_NONE;
+    }
+
     public void setCredentials(String username, String password, boolean forceSacePlainPassword) {
         ourClientManager.dispose();
 

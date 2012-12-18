@@ -156,6 +156,12 @@ public class GITRemoteRepository implements IRemoteRepository {
         return status.getModified().contains(relativeFile);
     }
 
+    public boolean isUnderVersionControl(File file) throws Exception {
+        String relativeFile = FileUtil.computeRelativePath(repository.getWorkTree(), file);
+        Status status = new Git(repository).status().call();
+        return status.getUntracked().contains(relativeFile);
+    }
+
     public void setCredentials(String username, String password, boolean forceSavePlainPassword) {
         //we use internal credentials provider, so this function is never called. Nothing to implement.
         //if this function IS called, then we should implement myCredentialsProvider.setUsername/password()

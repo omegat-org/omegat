@@ -648,7 +648,6 @@ public class RealProject implements IProject {
         //Note that we can replace restoreBase with reset for the same functionality.
         //Here I keep a separate call, just to make it clear what and why we are doing
         //and to allow to make this feature optional in future releases
-        //and because the reset command has not been tested by me yet for SVN.
         try {
             repository.reset();
         } catch (Exception e) {

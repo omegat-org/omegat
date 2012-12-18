@@ -2,7 +2,7 @@
  OmegaT 2.6.1 update 3
 ----------------------------------------------------------------------
    0 Enhancement
-   1 Bug fix
+   2 Bug fixes
    0 Localisation update
 ----------------------------------------------------------------------
 2.6.1 update 3 vs. 2.6.1 update 2
@@ -11,6 +11,9 @@
 
   - PO filter: there was an error when loading PO files with a target
 language with 1 plural form
+
+  - Team projects: changes were not calculated correctly, which resulted
+in duplicate entries
 
 ----------------------------------------------------------------------
  OmegaT 2.6.1 update 2

@@ -48,6 +48,29 @@ public class GlossaryEntry {
         return m_com;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if ( o == null || o.getClass() != this.getClass() ) return false;
+        GlossaryEntry otherGlossaryEntry = (GlossaryEntry)o;
+        if ((otherGlossaryEntry.m_src == null && this.m_src == null || otherGlossaryEntry.m_src != null && otherGlossaryEntry.m_src.equals(this.m_src)) 
+         && (otherGlossaryEntry.m_loc == null && this.m_loc == null || otherGlossaryEntry.m_loc != null && otherGlossaryEntry.m_loc.equals(this.m_loc))
+         && (otherGlossaryEntry.m_com == null && this.m_com == null || otherGlossaryEntry.m_com != null && otherGlossaryEntry.m_com.equals(this.m_com))
+           ) {
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 98;
+        hash = hash * 17 + (m_src == null ? 0 : m_src.hashCode());
+        hash = hash * 31 + (m_loc == null ? 0 : m_loc.hashCode());
+        hash = hash * 13 + (m_com == null ? 0 : m_com.hashCode());
+        return hash;
+    }
+
     private String m_src;
     private String m_loc;
     private String m_com;

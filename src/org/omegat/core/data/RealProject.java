@@ -708,12 +708,10 @@ public class RealProject implements IProject {
                 baseGlossaryEntries = null;
             } else {
                 headGlossaryEntries = GlossaryReaderTSV.read(glossaryFile);
-
-                List<GlossaryEntry> deltaAddedGlossaryLocal = glossaryEntries;
+                List<GlossaryEntry> deltaAddedGlossaryLocal = new ArrayList<GlossaryEntry>(glossaryEntries);
                 deltaAddedGlossaryLocal.removeAll(baseGlossaryEntries);
-                List<GlossaryEntry> deltaRemovedGlossaryLocal = baseGlossaryEntries;
+                List<GlossaryEntry> deltaRemovedGlossaryLocal = new ArrayList<GlossaryEntry>(baseGlossaryEntries);
                 deltaRemovedGlossaryLocal.removeAll(glossaryEntries);
-
                 headGlossaryEntries.addAll(deltaAddedGlossaryLocal);
                 headGlossaryEntries.removeAll(deltaRemovedGlossaryLocal);
 

@@ -77,8 +77,16 @@ public class SVNRemoteRepository implements IRemoteRepository {
     }
 
     public boolean isChanged(File file) throws Exception {
-        SVNStatus status = ourClientManager.getStatusClient().doStatus(file, false);
-        //if file not under version control, then return false.
+        SVNStatus status = null;
+        try {
+            status = ourClientManager.getStatusClient().doStatus(file, false);
+        } catch (SVNException e) {
+            if (e.getErrorMessage().getErrorCode().getCode()==155007) {
+                //file is outside repository, so not under version control.
+                return false;
+            } else throw e;
+        }
+        //if file does not exist and not under version control, then return false.
         if (status == null) return false;
         SVNStatusType statusType = status.getContentsStatus();
         //hmm, if file not under version control, status is STATUS_NONE, and not STATUS_UNVERSIONED?
@@ -86,8 +94,16 @@ public class SVNRemoteRepository implements IRemoteRepository {
     }
 
     public boolean isUnderVersionControl(File file) throws Exception {
-        SVNStatus status = ourClientManager.getStatusClient().doStatus(file, false);
-        //if file not under version control, then return false.
+        SVNStatus status = null;
+        try {
+            status = ourClientManager.getStatusClient().doStatus(file, false);
+        } catch (SVNException e) {
+            if (e.getErrorMessage().getErrorCode().getCode()==155007) {
+                //file is outside repository, so not under version control.
+                return false;
+            } else throw e;
+        }
+        //if file does not exist and not under version control, then return false.
         if (status == null) return false;
         SVNStatusType statusType = status.getContentsStatus();
         //hmm, if file not under version control, status is STATUS_NONE, and not STATUS_UNVERSIONED?

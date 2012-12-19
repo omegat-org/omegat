@@ -2,7 +2,7 @@
  OmegaT 2.6.1 update 3
 ----------------------------------------------------------------------
    0 Enhancement
-   2 Bug fixes
+   3 Bug fixes
    0 Localisation update
 ----------------------------------------------------------------------
 2.6.1 update 3 vs. 2.6.1 update 2
@@ -14,6 +14,11 @@ language with 1 plural form
 
   - Team projects: changes were not calculated correctly, which resulted
 in duplicate entries
+
+  - Team projects: when the writeable glossary was not inside the 
+working copy, it was not possible to synchronise the project. Now, if
+the writeable glossary is outside the working copy, no attempt is done 
+to synchronise it.
 
 ----------------------------------------------------------------------
  OmegaT 2.6.1 update 2

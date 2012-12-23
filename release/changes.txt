@@ -3,7 +3,7 @@
 ----------------------------------------------------------------------
    0 Enhancement
    3 Bug fixes
-   0 Localisation update
+   1 Localisation update
 ----------------------------------------------------------------------
 2.6.1 update 3 vs. 2.6.1 update 2
 
@@ -19,6 +19,11 @@ in duplicate entries
 working copy, it was not possible to synchronise the project. Now, if
 the writeable glossary is outside the working copy, no attempt is done 
 to synchronise it.
+
+  Localisation updates:
+
+  - Slovenian localisation updated to 2.6.1 update 2 (UI)
+
 
 ----------------------------------------------------------------------
  OmegaT 2.6.1 update 2

@@ -103,6 +103,12 @@
     spelling of text</guilabel> check box (see above).</para>
 
     <figure id="spellchecker.in.action">
+      <title><indexterm class="singular">
+          <primary>Spell checker</primary>
+
+          <secondary>Spell checker in action</secondary>
+        </indexterm>Spellchecker in action</title>
+
         <mediaobject>
         <imageobject role="html">
           <imagedata fileref="images/SpellcheckingText.png"/>

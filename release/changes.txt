@@ -23,6 +23,7 @@ to synchronise it.
   Localisation updates:
 
   - Slovenian localisation updated to 2.6.1 update 2 (UI)
+  - Dutch localization updated to 2.6.1 update 2 (UI, documentation, readme)
 
 
 ----------------------------------------------------------------------

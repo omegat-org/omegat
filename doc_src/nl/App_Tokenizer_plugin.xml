@@ -58,9 +58,9 @@
   </section>
 
   <section>
-    <title>Specifiek voor Mac OSX</title>
+    <title>Mac OS X specifieken</title>
 
-    <para>Indien u de tokenizers wilt gebruiken met het Mac OSX OmegaT.app pakket is de installatie van de tokenizer zoals die hierboven is vermeld van toepassing (klik met rechts op de OmegaT.app om de locatie van OmegaT.jar te vinden), maar u zult de namen van de tokenizers moeten specificeren in <filename>info.plist </filename>dat de startopties voor Java bevat. Volg bovenstaande instructies om toegang te krijgen tot het bestand <filename>info.plist</filename> en bewerk het zodanig dat het er als volgt uitziet voor het voorbeeld dat we zojuist gaven:</para>
+    <para>Indien u de tokenizers wilt gebruiken met het Mac OS X OmegaT.app pakket is de installatie van de tokenizer zoals die hierboven is vermeld van toepassing (klik met rechts op de OmegaT.app om de locatie van OmegaT.jar te vinden), maar u zult de namen van de tokenizers moeten specificeren in <filename>info.plist </filename>dat de startopties voor Java bevat. Volg bovenstaande instructies om toegang te krijgen tot het bestand <filename>info.plist</filename> en bewerk het zodanig dat het er als volgt uitziet voor het voorbeeld dat we zojuist gaven:</para>
 
     <literallayout><code>
 &lt;key&gt;VMOptions&lt;/key&gt;
@@ -91,6 +91,6 @@
 12719: Info: Target tokenizer: org.omegat.core.matching.Tokenizer 
 </code></literallayout>
 
-    <para>Met het Mac OSX OmegaT.app pakket moet u dubbelklikken op de <literal>JavaApplicationStub</literal> die is geplaatst in /OmegaT.app/Contents/MacOS/ (kijk hierboven om toegang te verkrijgen) om OmegaT te starten vanuit de console en direct toegang te hebben tot het log.</para>
+    <para>Met het Mac OS X OmegaT.app pakket moet u dubbelklikken op de <literal>JavaApplicationStub</literal> die is geplaatst in /OmegaT.app/Contents/MacOS/ (kijk hierboven om toegang te verkrijgen) om OmegaT te starten vanuit de console en direct toegang te hebben tot het log.</para>
   </section>
 </appendix>

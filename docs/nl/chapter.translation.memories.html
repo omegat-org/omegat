@@ -29,7 +29,7 @@
          <div class="titlepage">
             <div>
                <div>
-                  <h2 class="title"><a name="chapter.translation.memories"></a>Hoofdstuk 13. Vertaalgeheugens<a class="indexterm" name="d0e6076"></a></h2>
+                  <h2 class="title"><a name="chapter.translation.memories"></a>Hoofdstuk 13. Vertaalgeheugens<a class="indexterm" name="d0e6056"></a><a class="indexterm" name="d0e6059"></a></h2>
                </div>
             </div>
          </div>
@@ -41,13 +41,13 @@
                      <dt><span class="section"><a href="chapter.translation.memories.html#tmx.files.location.and.purpose">1.1. mappen tmx - locatie en doel</a></span></dt>
                      <dt><span class="section"><a href="chapter.translation.memories.html#tmx.backup">1.2. TMX back-up</a></span></dt>
                      <dt><span class="section"><a href="chapter.translation.memories.html#tmx.files.and.language">1.3. TMX-bestanden en taal</a></span></dt>
-                     <dt><span class="section"><a href="chapter.translation.memories.html#d0e6345">1.4. Wezen-segmenten</a></span></dt>
+                     <dt><span class="section"><a href="chapter.translation.memories.html#d0e6335">1.4. Wezen-segmenten</a></span></dt>
                   </dl>
                </dd>
                <dt><span class="section"><a href="chapter.translation.memories.html#using.translation.memories.from.previous.projects">2. Vertaalgeheugens opnieuw gebruiken</a></span></dt>
                <dd>
                   <dl>
-                     <dt><span class="section"><a href="chapter.translation.memories.html#d0e6429">2.1. Importeren en exporteren van vertaalgeheugens</a></span></dt>
+                     <dt><span class="section"><a href="chapter.translation.memories.html#d0e6419">2.1. Importeren en exporteren van vertaalgeheugens</a></span></dt>
                   </dl>
                </dd>
                <dt><span class="section"><a href="chapter.translation.memories.html#pseudo.translated.memory">3. Pseudo-vertaald geheugen</a></span></dt>
@@ -76,13 +76,13 @@
                </p>
                <div class="variablelist">
                   <dl>
-                     <dt><span class="term"><a class="indexterm" name="d0e6093"></a>map omegat</span></dt>
+                     <dt><span class="term"><a class="indexterm" name="d0e6078"></a>map omegat</span></dt>
                      <dd>
                         <p>De map omegat bevat <code class="filename">project_save.tmx</code> en mogelijk een aantal back-ups van TMX-bestanden. Het bestand <code class="filename">project_save.tmx</code> bevat alle segmenten die in het geheugen zijn opgenomen sinds u het project startte. Dit bestand bestaat altijd in een project.
                            De inhoud ervan zal altijd alfabetisch worden gesorteerd op het bronsegment.
                         </p>
                      </dd>
-                     <dt><span class="term"><a class="indexterm" name="d0e6112"></a>hoofdmap project</span></dt>
+                     <dt><span class="term"><a class="indexterm" name="d0e6097"></a>hoofdmap project</span></dt>
                      <dd>
                         <p>De hoofdmap van het project bevat 3 tmx-bestanden, <code class="filename">project_naam-omegat.tmx</code>, <code class="filename">project_naam-level1.tmx</code> en <code class="filename">project_naam-level2.tmx</code> (waarin project_naam de naam is van uw project).
                         </p>
@@ -106,7 +106,7 @@
                            gewijzigde namen, zodat de inhoud ervan steeds kan worden geïdentificeerd, indien elders gebruikt, bijvoorbeeld in de submap<code class="filename"> tm</code> van een ander project (zie hieronder).
                         </p>
                      </dd>
-                     <dt><span class="term">map <code class="filename"><a class="indexterm" name="d0e6167"></a>tm</code></span></dt>
+                     <dt><span class="term">map <code class="filename"><a class="indexterm" name="d0e6152"></a>tm</code></span></dt>
                      <dd>
                         <p>De map /tm/ kan een willekeurig aantal aanvullende vertaalgeheugens bevatten - d.i. tmx-bestanden. Zulke bestanden kunnen
                            worden gemaakt in elk van de drie hierboven aangegeven variëteiten. Onthoud dat andere CAT-programma's tmx-bestanden kunnen
@@ -121,8 +121,12 @@
                            gedefinieerd is in het dialoogvenster <span class="guimenu">Opties</span> → <span class="guimenuitem">Bewerken (gedrag)...</span>. Bijvoorbeeld (als de standaard is geaccepteerd) zal de vertaling vanuit de aanvullende TM worden geaccepteerd en worden
                            vooraf gegaan door<span class="emphasis"><em> [fuzzy]</em></span>, zodat de vertaler de vertalingen op een later tijdstip kan nakijken en controleren of segmenten die op deze manier zijn
                            getagd, juist zijn vertaald (zie het hoofdstuk <a class="link" href="chapter.translation.editing.html" title="Hoofdstuk 10. Bewerken (gedrag)">Bewerken (gedrag)</a>) <span class="guimenu">.</span></p>
+                        <p>Het kan gebeuren dat vertaalgeheugens, beschikbaar in de submap<code class="filename"> tm</code>, segmenten met identieke brontekst bevatten, maar afwijkende doelen. TMX-bestanden worden, gesorteerd op hun naam, gelezen
+                           en segmenten binnen een bepaald TMX-bestand regel na regel. Het laatste segment met de identieke brontekst zal dus worden
+                           gekozen (Opmerking: natuurlijk is het verstandiger om dit in de eerste plaats in zijn geheel te vermijden).
+                        </p>
                      </dd>
-                     <dt><span class="term"><a class="indexterm" name="d0e6199"></a>map tm/auto<a class="indexterm" name="d0e6207"></a></span></dt>
+                     <dt><span class="term"><a class="indexterm" name="d0e6189"></a>map tm/auto<a class="indexterm" name="d0e6197"></a></span></dt>
                      <dd>
                         <p>Als het vanaf het begin duidelijk is dat de vertalingen in een bepaald TM (of TM's) allemaal juist zijn, kan één van hen in
                            de map<span class="bold"><strong> tm/auto</strong></span> worden geplaatst en heel veel van de gevallen van bevestiging met<span class="emphasis"><em> [fuzzy]</em></span> worden voorkomen. Dit zal de brontekst effectief <span class="bold"><strong>vooraf vertalen </strong></span>: alle segmenten in de brontekst, waarvoor vertalingen kunnen worden gevonden in deze "auto"-TM's, zullen zonder interventie
@@ -156,7 +160,7 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="tmx.backup"></a>1.2. TMX back-up<a class="indexterm" name="d0e6266"></a></h3>
+                        <h3 class="title"><a name="tmx.backup"></a>1.2. TMX back-up<a class="indexterm" name="d0e6256"></a></h3>
                      </div>
                   </div>
                </div>
@@ -193,7 +197,7 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="tmx.files.and.language"></a>1.3. TMX-bestanden en taal<a class="indexterm" name="d0e6318"></a></h3>
+                        <h3 class="title"><a name="tmx.files.and.language"></a>1.3. TMX-bestanden en taal<a class="indexterm" name="d0e6308"></a></h3>
                      </div>
                   </div>
                </div>
@@ -222,7 +226,7 @@
                   de taal overeenkomt, maar niet de landcode worden de segmenten toch geladen. Als de taalcode, noch de landcode overeenkomen
                   zullen de segmenten worden genegeerd.
                </p>
-               <p><a class="indexterm" name="d0e6339"></a>TMX/bestanden kunnen over het algemeen vertaaleenheden bevatten voor verschillende kandidaat-talen. Indien er voor een opgegeven
+               <p><a class="indexterm" name="d0e6329"></a>TMX/bestanden kunnen over het algemeen vertaaleenheden bevatten voor verschillende kandidaat-talen. Indien er voor een opgegeven
                   bronsegment geen item is voor de geselecteerde doeltaal, worden alle andere doelsegmenten geladen, ongeacht hun taal. Als
                   bijvoorbeeld het taalpaar voor het project DE-FR is, kan het nog steeds hulp bieden om hits te zien in de vertaling DE-EN,
                   als er in het DE-FR-paar geen aanwezig is.
@@ -232,7 +236,7 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="d0e6345"></a>1.4. Wezen-segmenten<a class="indexterm" name="d0e6348"></a></h3>
+                        <h3 class="title"><a name="d0e6335"></a>1.4. Wezen-segmenten<a class="indexterm" name="d0e6338"></a></h3>
                      </div>
                   </div>
                </div>
@@ -246,7 +250,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="using.translation.memories.from.previous.projects"></a>2. Vertaalgeheugens opnieuw gebruiken<a class="indexterm" name="d0e6364"></a><a class="indexterm" name="d0e6369"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="using.translation.memories.from.previous.projects"></a>2. Vertaalgeheugens opnieuw gebruiken<a class="indexterm" name="d0e6354"></a><a class="indexterm" name="d0e6359"></a></h2>
                   </div>
                </div>
             </div>
@@ -260,11 +264,11 @@
             </p>
             <p>Indien u een vertaalgeheugen uit een vorig project zou willen gebruiken (bijvoorbeeld omdat het nieuwe project overeenkomt
                met het eerdere project, of terminologie gebruikt die eerder gebruikt is), kunt u deze vertaalgeheugens gebruiken als "invoer
-               vertaalgeheugens", dat is: om in uw nieuwe project te importeren. In dit geval plaats u de vertaalgeheugens die u wilt gebruiken
-               in de mappen <span class="emphasis"><em>\tm</em></span> of <span class="emphasis"><em>\tm</em></span>\auto van uw nieuwe project: in het eerste geval zult u hits van deze vertaalgeheugens in het venster Overeenkomsten krijgen
+               vertaalgeheugens", dat is: om in uw nieuwe project te importeren. In dit geval plaatst u de vertaalgeheugens die u wilt gebruiken
+               in de mappen <span class="emphasis"><em>/tm</em></span> of <span class="emphasis"><em>/tm</em></span>/auto van uw nieuwe project: in het eerste geval zult u hits van deze vertaalgeheugens in het venster Overeenkomsten krijgen
                en in het laatste geval zullen deze TM's worden gebruikt om uw brontekst vooraf te vertalen.
             </p>
-            <p>Standaard staat de map \tm onder de hoofdmap van het project (bijvoorbeeld ...<span class="emphasis"><em>\MijnProject\tm</em></span>), maar u kunt een andere map kiezen in het dialoogvenster Projecteigenschappen als u dat wilt. Dit is handig als u regelmatig
+            <p>Standaard staat de map /tm onder de hoofdmap van het project (bijvoorbeeld ...<span class="emphasis"><em>/MijnProject/tm</em></span>), maar u kunt in het dialoogvenster Projecteigenschappen een andere map kiezen als u dat wilt. Dit is handig als u regelmatig
                eerder gemaakte vertaalgeheugens gebruikt, bijvoorbeeld omdat zij over hetzelfde onderwerp gaan of voor dezelfde klant zijn.
                In dit geval zou een handige procedure zijn:
             </p>
@@ -303,7 +307,7 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="d0e6429"></a>2.1. Importeren en exporteren van vertaalgeheugens
+                        <h3 class="title"><a name="d0e6419"></a>2.1. Importeren en exporteren van vertaalgeheugens
                         </h3>
                      </div>
                   </div>
@@ -333,7 +337,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="pseudo.translated.memory"></a>3. Pseudo-vertaald geheugen<a class="indexterm" name="d0e6444"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="pseudo.translated.memory"></a>3. Pseudo-vertaald geheugen<a class="indexterm" name="d0e6434"></a></h2>
                   </div>
                </div>
             </div>
@@ -370,11 +374,11 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="upgrading.translation.memories"></a>4. Vertaalgeheugens bijwerken<a class="indexterm" name="d0e6496"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="upgrading.translation.memories"></a>4. Vertaalgeheugens bijwerken<a class="indexterm" name="d0e6486"></a></h2>
                   </div>
                </div>
             </div>
-            <p>Hele vroege versies van <span class="application">OmegaT</span> waren slechts in staat bronbestanden in alinea's te segmenteren en nummerden de opmaaktags in HTML- en Open Document-bestanden
+            <p>Hele vroege versies van <span class="application">OmegaT</span> waren slechts in staat bronbestanden in alinea's te segmenteren en nummerden de tags voor opmaak in HTML- en Open Document-bestanden
                niet consistent. <span class="application">OmegaT</span> 2.5 kan dergelijke TMX-bestanden herkennen en direct bijwerken om de kwaliteit van de fuzzy overeenkomsten te vergroten en
                uw vertaling op peil te brengen, zodat u dat werk niet handmatig hoeft te doen.
             </p>

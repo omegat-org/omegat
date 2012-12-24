@@ -46,7 +46,7 @@
           <primary>Project</primary> <secondary>Inschakelen segmentering op zin-niveau</secondary>
         </indexterm>
 
-        <para>De instellingen voor segmentatie hebben alleen betrekking op de manier waarop de bronbestanden door <application>OmegaT</application> worden afgehandeld. De vooringestelde manier van het segmenteren van de bronnen is de segmentering op zin-niveau, dus dit keuzevak zou in normale gevallen geselecteerd moeten worden gelaten.</para>
+        <para>De instellingen voor segmentatie hebben alleen betrekking op de manier waarop de bronbestanden door <application>OmegaT</application> worden afgehandeld. De vooraf ingestelde manier van het segmenteren van de bronnen is de segmentering op zin-niveau, dus dit keuzevak zou in normale gevallen geselecteerd moeten worden gelaten.</para>
 
         <para>In sommige uitzonderlijke gevallen kan het alternatief, d.i. segmenteren op alinea's, de voorkeur genieten. Wijzigen van deze vlag past niet de segmentatie van de reeds bestaande vertaalgeheugens aan. Indien u gedurende de vertaling besluit om te schakelen van zin- naar alinea-vertaling, zal het interne vertaalgeheugen van het project niet worden gewijzigd (OmegaT kan oude vertaalgeheugens bijwerken die geen gebruik maakten van zin-segmentatie, maar niet andersom).</para>
 
@@ -67,7 +67,7 @@
 
       <listitem>
         <para>Knop <emphasis role="bold"><guibutton>Bestandsfilters...</guibutton></emphasis><indexterm class="singular">
-            <primary>Bestandsfilters</primary> <secondary>globaal versus projectspecifieke bestandsfilters</secondary>
+            <primary>Bestandsfilters</primary> <secondary>globale versus projectspecifieke bestandsfilters</secondary>
           </indexterm></para>
 
         <para>Op eenzelfde manier als hierboven kan de gebruiker project-specifieke bestandsfilters maken, die tezamen met het project zullen worden opgeslagen en alleen geldig zullen zijn voor het huidige project. Klik op de knop <guibutton>Bestandsfilters ... </guibutton>, en activeer het keuzevak <guimenuitem>Projectspecifieke filters inschakelen</guimenuitem> in het venster dat opent om een set projectspecifieke bestandsfilters te maken. Een kopie van de gewijzigde configuratie van de filters zal met het project worden opgeslagen. Deselecteer het keuzevak om projectspecifieke bestandsfilters te verwijderen. Onthoud dat in het menu <guimenuitem>Opties-&gt;Bestandsfilters</guimenuitem>, de globale filters voor de gebruikers worden gewijzigd, niet de filters voor het project. Bekijk hoofdstuk<link linkend="chapter.file.filters"> Bestandsfilters </link>voor meer over het onderwerp.<emphasis/></para>
@@ -89,10 +89,10 @@
         <para><emphasis role="bold">Een gebied voor het instellen van de projectmappen</emphasis><indexterm class="singular">
             <primary>Project</primary> <secondary>Wijzigen van de mappenstructuur</secondary>
           </indexterm><indexterm class="singular">
-            <primary>Glossary</primary> <secondary>Locatie van het te beschrijven bestand voor de woordenlijst</secondary>
+            <primary>Woordenlijsten</primary> <secondary>Locatie van het te beschrijven bestand voor de woordenlijst</secondary>
           </indexterm></para>
 
-        <para>Hier kunt u verschillende submappen selecteren, bijvoorbeeld de submap met bronbestanden, submap voor doelbestanden etc. Indien u namen voor mappen invoert die nog niet bestaan, zal <application>OmegaT</application> ze voor u maken. Voor het geval u van plan bent de projectmappen aan te passen, onthoudt dan dat daarmee niet de bestanden uit oude mappen naar de nieuwe locatie worden verplaatst.</para>
+        <para>Hier kunt u verschillende submappen selecteren, bijvoorbeeld de submap met bronbestanden, submap voor doelbestanden etc. Indien u namen voor mappen invoert die nog niet bestaan, zal <application>OmegaT</application> die voor u maken. Voor het geval u van plan bent de projectmappen aan te passen, onthoudt dan dat daarmee niet de bestanden uit oude mappen naar de nieuwe locatie worden verplaatst.</para>
       </listitem>
     </itemizedlist>
   </section>

@@ -27,8 +27,8 @@
 
   <para>De meeste gebruikers zullen tevreden zijn met de standaard ingestelde opties. Als u dat niet bent opent u het hoofd dialoogvenster door in het hoofdmenu<emphasis role="bold"> Opties → Bestandsfilters...</emphasis> te selecteren. U kunt ook project-specifieke bestandsfilters inschakelen, die alleen zullen worden gebruikt voor het huidige project, door de optie <emphasis role="bold">Bestandsfilters...</emphasis> in Project → Eigenschappen te selecteren.</para>
 
-  <para>U kunt projectspecifieke filters inschakelen via <emphasis role="bold">Opties → Eigenschappen...</emphasis> . Klik op de knop <guibutton>Bestandsfilters</guibutton> en activeer het keuzevak <guimenuitem>Projectspecifieke filters inschakelen</guimenuitem><indexterm class="singular">
-      <primary>Bestandsfilters</primary> <secondary>projectspecifieke bestandsfilters</secondary>
+  <para>U kunt projectspecifieke filters inschakelen via <emphasis role="bold">Opties → Eigenschappen...</emphasis>. Klik op de knop <guibutton>Bestandsfilters</guibutton> en activeer het keuzevak <guimenuitem>Projectspecifieke filters inschakelen</guimenuitem><indexterm class="singular">
+      <primary>Bestandsfilters</primary> <secondary>Projectspecifieke bestandsfilters</secondary>
     </indexterm>. Een kopie van de configuratie van de filters zal in dit geval met het project worden opgeslagen. Indien u later filters wijzigt zullen alleen de projectfilters worden bijgewerkt, waarbij de filters voor de gebruikers ongewijzigd zullen blijven.</para>
 
   <para><emphasis role="bold">Waarschuwing!</emphasis> Als u de segmentatie-opties wijzigt als een project geopend is moet u het project herladen vóórdat de wijzigingen effect hebben.</para>
@@ -84,7 +84,7 @@
 
     <itemizedlist>
       <listitem>
-        <para><emphasis>Tekst die overeenkomt met reguliere uitdrukking overslaan</emphasis>: De tekst die overeenkomt met de reguliere uitdrukking wordt overgeslagen. Dit wordt in de tagvalidatie in rood weergegeven. Tekst in het bronsegment die overeenkomt wordt cursiefweergegeven.</para>
+        <para><emphasis>Tekst die overeenkomt met reguliere uitdrukking overslaan</emphasis>: De tekst die overeenkomt met de reguliere uitdrukking wordt overgeslagen. Dit wordt in de tagvalidatie in rood weergegeven. Tekst in het bronsegment die overeenkomt wordt cursief weergegeven.</para>
       </listitem>
     </itemizedlist>
 
@@ -97,7 +97,8 @@
     <itemizedlist>
       <listitem>
         <para><emphasis>Vertaal NIET de inhoud van tags met de volgende paren van sleutels en waarden voor attributen (door komma's gescheiden):</emphasis>: een overeenkomst in de lijst met sleutel-waardenparen zorgt er voor dat de inhoud van tags zal worden genegeerd</para>
-        <para>Het is soms handig om enkele tags niet te vertalen te maken, gebaseerd op de waarde van attributen. Bijv: <literal>&lt;div class=&quot;hide&quot;&gt; &lt;span translate=&quot;no&quot;&gt;</literal> U kunt sleutel-waardenparen diefiniëren voor for tags die niet vertaald moeten worden. Voor het voorbeeld hierboven zou het veld bevatten: <literal>class=hide, translate=no </literal></para>
+
+        <para>Het is soms handig om enkele tags niet te vertalen te maken, gebaseerd op de waarde van attributen. Bijvoorbeeld: <literal>&lt;div class=&quot;hide&quot;&gt; &lt;span translate=&quot;no&quot;&gt;</literal> U kunt sleutel-waardenparen definiëren voor tags die niet vertaald moeten worden. Voor het voorbeeld hierboven zou het veld bevatten: <literal>class=hide, translate=no </literal></para>
       </listitem>
     </itemizedlist>
 
@@ -173,7 +174,7 @@
 
     <itemizedlist>
       <listitem>
-         <para><emphasis>Vertaal het attribuut 'content' van metatags niet: ... :</emphasis> De volgende metatags zullen niet worden vertaald.</para>
+        <para><emphasis>Vertaal het attribuut 'content' van metatags niet: ... :</emphasis> De volgende metatags zullen niet worden vertaald.</para>
       </listitem>
     </itemizedlist>
 
@@ -213,9 +214,9 @@
 
     <section id="source.filetype.and.filename.pattern">
       <title><indexterm class="singular">
-          <primary>Bronbestanden</primary> <secondary>Bestandstype, patroon bestandsnaam</secondary>
+          <primary>Bronbestanden</primary> <secondary>Bestandstype en patroon voor naam</secondary>
         </indexterm>Type bronbestand, patroon voor bestandsnaam<indexterm class="singular">
-          <primary>Bronbestanden</primary> <secondary>Bestandstype bron, bestandsnaam</secondary>
+          <primary>Bronbestanden</primary> <secondary>Bestandstype en patroon voor naam</secondary>
         </indexterm></title>
 
       <para>Als OmegaT een bestand tegenkomt in zijn bronmap, probeert dat het filter te selecteren gebaseerd op de extensie van het bestand. Meer precies: OmegaT probeert of van elk filter het patroon van de bestandsnaam overeenkomt met de bestandsnaam. Het <literal>*.xhtml</literal>-patroon zal bijvoorbeeld overeenkomen met elk bestand met de extensie <literal>.xhtml</literal>. Als het juiste filter is gevonden wordt dat voor verdere verwerking toegepast op het betreffende bestand. Standaard zal bijvoorbeeld het XHTML-filter worden gebruikt bij het verwerken van bestanden met de extensie .xhtml. U kunt bestandsnaam-patronen toevoegen of wijzigen voor bestanden die door elk filter worden afgehandeld. Patronen voor bronbestandsnamen gebruiken jokertekens die overeenkomen met die in <emphasis role="bold">Zoeken. </emphasis>Het teken '*' komt overeen met nul of meer tekens. Het teken '?' komt overeen met exact één teken. Alle andere tekens vertegenwoordigen zichzelf. Als u bijvoorbeeld wilt dat het tekstfilter readme-bestanden (<literal>readme, read.me</literal> en <literal>readme.txt</literal>) afhandelt, zou u het patroon <literal>read*</literal> moeten gebruiken.</para>
@@ -233,7 +234,7 @@
       </indexterm>
 
       <indexterm class="singular">
-        <primary>Bestandsfilters</primary> <secondary>coderen bron, doel</secondary>
+        <primary>Bestandsfilters</primary> <secondary>Bron, doel - coderen</secondary>
       </indexterm>
 
       <para>Slechts een beperkt aantal bestandsformaten specificeren een voorgeschreven codering. Bestandsformaten die hun codering niet specificeren zullen de codering gebruiken die u instelt voor de extensie die overeenkomt met hun naam. Standaard zullen bijvoorbeeld <literal>.txt</literal>-bestanden worden geladen met behulp van de standaard codering van uw besturingssysteem. U kunt de broncodering voor elk verschillend bronbestandsnaam-patroon wijzigen. Zulke bestanden kunnen ook in elke codering worden weggeschreven. Als standaard heeft het vertaalde bestand dezelfde codering als de codering van het bronbestand. Velden voor bron- en doelcodering gebruiken combinatievakken waarin alle ondersteunde coderingen zijn opgenomen. &lt;auto&gt; laat de keuze van de codering aan <application>OmegaT</application> over. Zo werkt het:</para>

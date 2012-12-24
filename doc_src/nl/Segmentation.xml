@@ -88,7 +88,7 @@
         <primary>Segmentatie</primary> <secondary>een nieuwe regel maken</secondary> <seealso>reguliere uitdrukkingen</seealso>
       </indexterm></title>
 
-    <para>Grote wijzigingen aan de segmentatieregels zouden in het algemeen moeten wordne vermeden, speciaal na het voltooien van een eerste gang, maar kleinere wijzigingen, zoals het toevoegen van een herkende afkorting, kan voordelen bieden.</para>
+    <para>Grote wijzigingen aan de segmentatieregels zouden in het algemeen moeten worden vermeden, speciaal na het voltooien van een eerste gang, maar kleinere wijzigingen, zoals het toevoegen van een herkende afkorting, kan voordelen bieden.</para>
 
     <para>Klik eenvoudigweg op een verzameling van regels in de bovenste tabel om die te bewerken of uit te breiden. De regels voor die verzameling zullen in het onderste gedeelte van het venster verschijnen.</para>
 
@@ -126,13 +126,13 @@
 
         <tbody>
           <row>
-            <entry>Stel een segment in na een punt ('.') en vóór een spatie</entry>
+            <entry>Stel een segment in na een punt ('.') gevolgd door een spatie, tab ...</entry>
 
             <entry align="center">\.</entry>
 
             <entry align="center">\s</entry>
 
-            <entry>&quot;\.&quot; betekent het teken &quot;.&quot; &quot;\s&quot; betekent elk teken voor witruimte ((spatie, tab, nieuw pagina etc.)</entry>
+            <entry>&quot;\.&quot; staat voor het teken punt. &quot;\s&quot; betekent elk teken voor witruimte (spatie, tab, nieuwe pagina etc.)</entry>
           </row>
 
           <row>

@@ -17,10 +17,8 @@
     <itemizedlist>
       <listitem>
         <para>Zoek naar de gewenste taalcombinatie -bijvoorbeeld op het <ulink url="http://stardict.sourceforge.net/index.php"><indexterm class="singular">
-            <primary>FreeDict</primary> <seealso>woordenboeken</seealso>
-          </indexterm>StartDict Platform</ulink> hierboven of op <ulink url="http://www.freedict.org/en/list.html">FreeDict<indexterm class="singular">
-            <primary>Stardict</primary> <seealso>woordenboeken</seealso>
-          </indexterm></ulink></para>
+            <primary>Woordenboeken</primary> <secondary>StarDict, FreeDict</secondary>
+          </indexterm>StartDict Platform</ulink> hierboven of op <ulink url="http://www.freedict.org/en/list.html">FreeDict</ulink></para>
       </listitem>
     </itemizedlist>
 
@@ -41,7 +39,7 @@
     <itemizedlist>
       <listitem>
         <para><indexterm class="singular">
-            <primary>Webster</primary> <seealso>woordenboeken</seealso>
+            <primary>Woordenboeken</primary> <secondary>Webster</secondary>
           </indexterm>Webster's Revised Unabridged Dictionary (1913)</para>
       </listitem>
     </itemizedlist>
@@ -49,7 +47,7 @@
     <itemizedlist>
       <listitem>
         <para><indexterm class="singular">
-            <primary>Longman</primary> <seealso>woordenboeken</seealso>
+            <primary>Woordenboeken</primary> <secondary>Longman</secondary>
           </indexterm>Longman Dictionary of Contemporary English</para>
       </listitem>
     </itemizedlist>
@@ -57,8 +55,8 @@
     <itemizedlist>
       <listitem>
         <para><indexterm class="singular">
-            <primary>Britannica</primary> <seealso>woordenboeken</seealso>
-          </indexterm>The Britannica Concise Encyclopedia</para>
+            <primary>Woordenboeken</primary> <secondary>Britannica</secondary>
+          </indexterm>De Britannica Concise Encyclopedia</para>
       </listitem>
     </itemizedlist>
 
@@ -72,7 +70,7 @@
 
     <figure id="Dict.Merriam.Webster">
       <title><indexterm class="singular">
-          <primary>woordenboek</primary> <secondary>Merriam Webster - afbeelding</secondary> <seealso>woordenboeken</seealso>
+          <primary>Woordenboeken</primary> <secondary>Merriam Webster</secondary> <seealso>Woordenboeken</seealso>
         </indexterm>Merriam Webster woordenboek - gebruiken</title>
 
       <mediaobject>
@@ -95,7 +93,7 @@
     <itemizedlist>
       <listitem>
         <para>Controleer of uw bestanden van het woordenboek in de juiste map (of in één van de submappen daarvan) staan. Controleer in <menuchoice> <shortcut> <keycombo> <keycap><indexterm class="singular">
-                    <primary>Sneltoetsen</primary> <secondary>Ctrl+E - Projecteigenschappen</secondary>
+                    <primary>Sneltoetsen</primary> <secondary>Projecteigenschappen - Ctrl+E</secondary>
                   </indexterm>Ctrl</keycap> <keycap>E</keycap> </keycombo> </shortcut> <guimenu>Project</guimenu><guimenuitem>eigenschappen</guimenuitem> </menuchoice>.</para>
       </listitem>
     </itemizedlist>

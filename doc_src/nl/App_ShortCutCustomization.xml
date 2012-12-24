@@ -5,7 +5,7 @@
 
   <section id="ch04.shortcuts.customization">
     <title><indexterm class="singular">
-        <primary>Sneltoetsen - aanpassen</primary> <secondary>Aanpassen</secondary>
+        <primary>Sneltoetsen van toetsenbord</primary> <secondary>aanpassen</secondary>
       </indexterm>Aanpassen van sneltoetsen toetsenbord</title>
 
     <para>Aan de meeste items die verschijnen in het hoofdmenu kan een sneltoets worden toegewezen. Alleen aan de meest algemeen gebruikte menuitems zijn standaard sneltoetsen toegewezen. U kunt de reeds toegewezen sneltoetsen wijzigen en nieuwe sneltoetsen toevoegen door een bestand met definities voor de sneltoetsen in uw map voor voorkeuren voor OmegaT te plaatsen (zie <link linkend="user.files.location">Locatie gebruikersbestanden</link>).</para>
@@ -73,10 +73,6 @@
 
     <table>
       <title>menu Project</title>
-
-      <indexterm class="singular">
-        <primary>Sneltoetsen aanpassen</primary> <secondary>menu Project</secondary>
-      </indexterm>
 
       <tgroup cols="3" colsep="1">
         <colspec align="left" colname="1" colnum="1" colwidth="120"/>
@@ -193,10 +189,6 @@
 
     <table>
       <title>menu Bewerken</title>
-
-      <indexterm class="singular">
-        <primary>Sneltoetsen aanpassen</primary> <secondary>menu Bewerken</secondary>
-      </indexterm>
 
       <tgroup cols="3" colsep="1">
         <colspec align="left" colname="1" colnum="1" colwidth="120"/>
@@ -386,9 +378,6 @@
     <table>
       <title>menu Ga naar</title>
 
-      <indexterm class="singular">
-        <primary>Sneltoetsen aanpassen</primary> <secondary>menu Ga naar</secondary>
-      </indexterm>
 
       <tgroup cols="3" colsep="1">
         <colspec align="left" colname="1" colnum="1" colwidth="120"/>
@@ -554,9 +543,6 @@
     <table>
       <title>menu Extra</title>
 
-      <indexterm class="singular">
-        <primary>Sneltoetsen aanpassen</primary> <secondary>menu Extra</secondary>
-      </indexterm>
 
       <tgroup cols="3" colsep="1">
         <colspec align="left" colname="1" colnum="1" colwidth="120"/>
@@ -610,9 +596,6 @@
     <table>
       <title>menu Opties</title>
 
-      <indexterm class="singular">
-        <primary>Sneltoetsen aanpassen</primary> <secondary>menu Opties Menu</secondary>
-      </indexterm>
 
       <tgroup cols="3" colsep="1">
         <colspec align="left" colname="1" colnum="1" colwidth="120"/>
@@ -777,10 +760,6 @@
 
     <table>
       <title>menu Help</title>
-
-      <indexterm class="singular">
-        <primary>Sneltoetsen aanpassen</primary> <secondary>menu Help</secondary>
-      </indexterm>
 
       <tgroup cols="3" colsep="1">
         <colspec align="left" colname="1" colnum="1" colwidth="120"/>

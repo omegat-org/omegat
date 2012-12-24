@@ -16,7 +16,7 @@
 
     <para>De plug-in Scripting voor OmegaT kan worden gedownload vanaf de downloadsite voor OmegaT plug-ins (<ulink url="???">http://sourceforge.net/projects/omegat-plugins/files/</ulink>). Pak de bestanden uit en plaats ze allemaal in de map &quot;plugins&quot; die zich bevindt in de installatiemap van OmegaT, dat is de map waarin OmegaT.jar staat. Maak eerst de map &quot;plugins&quot; als die niet bestaat.</para>
 
-    <para>Dit voegt een nieuw submenu<guisubmenu> Extra &gt; </guisubmenu><guisubmenu>Scripten toe.</guisubmenu> Onder het submenu <guisubmenu>Scripting</guisubmenu> zijn vijf tijdelijke plaatsaanduidingen beschikbaar voor scripts. Klikken op <guisubmenu>Scripten</guisubmenu> opent het dialoogvenster Scripten:<screenshot> <screeninfo>dialoogvenster Scripten</screeninfo> <mediaobject> <imageobject> <imagedata fileref="images/ScriptingDialog.png"/> </imageobject> </mediaobject> </screenshot></para>
+    <para>Dit voegt een nieuw submenu<guisubmenu> Extra &gt; </guisubmenu><guisubmenu>Scripten</guisubmenu> toe. Onder het submenu <guisubmenu>Scripten</guisubmenu> zijn vijf tijdelijke plaatsaanduidingen beschikbaar voor scripts. Klikken op <guisubmenu>Scripten</guisubmenu> opent het dialoogvenster Scripten:<screenshot> <screeninfo>dialoogvenster Scripten</screeninfo> <mediaobject> <imageobject> <imagedata fileref="images/ScriptingDialog.png"/> </imageobject> </mediaobject> </screenshot></para>
 
     <para>Het dialoogvenster Scripten maakt het voor u mogelijk om een bestaand script in het tekstgebied te laden en het uit te voeren tegen het huidige geopende project. Doe het volgende om de mogelijkheid voor scripten aan te passen:</para>
 

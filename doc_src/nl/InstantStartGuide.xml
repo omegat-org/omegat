@@ -38,6 +38,7 @@
       <imageobject role="html">
         <imagedata align="left" fileref="images/InstantGuide_1.png"/>
       </imageobject>
+
       <imageobject role="fo">
         <imagedata align="left" fileref="images/InstantGuide_1.png" width="40%"/>
       </imageobject>
@@ -53,11 +54,12 @@
       <imageobject role="html">
         <imagedata align="left" fileref="images/InstantGuide_2.png"/>
       </imageobject>
+
       <imageobject role="fo">
         <imagedata align="left" fileref="images/InstantGuide_2.png" width="45%"/>
       </imageobject>
     </mediaobject>
-    
+
     <para/>
 
     <para>De tags in OmegaT zijn grijs, zodat zij eenvoudig te herkennen zijn. Zij zijn niet beveiligd, zodat u ze kunt verwijderen, ze handmatig kunt invoeren of ze kunt verplaatsen in de doelzin. Indien u echter fouten maakte bij het typen van de tags voor de opmaak, kan het zijn dat uw vertaalde bestand niet wil openen. Druk daarom op <keycap>Ctrl+T</keycap> vóórdat uw uw vertaalde document genereert, om te valideren dat uw tags juist zijn.</para>
@@ -74,7 +76,7 @@
 
     <itemizedlist>
       <listitem>
-        <para>Indien een bestand niet wordt geladen in het venster Bewerken, dan zou het kunnen zijn dat uw bronbestand in een indeling is die niet werkt in OmegaT. Zie hoofdstuk 7: Bestandsfilters in de Gebruikershandleiding voor een lijst van bestandsindelingen die OmegaT kan afhandelen. Indien een bestand niet wordt geladen in het venster Bewerken, dan zou het kunnen zijn dat uw bronbestand in een indeling is die niet werkt in OmegaT. Zie hoofdstuk 7: Bestandsfilters in de Gebruikershandleiding voor een lijst van bestandsindelingen die OmegaT kan afhandelen.</para>
+        <para>Indien een bestand niet wordt geladen in het venster Bewerken, dan zou het kunnen zijn dat uw bronbestand in een indeling is die niet werkt in OmegaT. Zie hoofdstuk 7: Bestandsfilters in de Gebruikershandleiding voor een lijst van bestandsindelingen die OmegaT kan afhandelen.</para>
       </listitem>
     </itemizedlist>
 

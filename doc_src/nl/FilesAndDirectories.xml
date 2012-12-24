@@ -46,7 +46,7 @@
 
     <para>Alternatieve locaties voor sommige mappen kunnen worden gekozen bij het maken van het project of tijdens de vertaling. Het is daarom mogelijk om bestaande mappen te kiezen of mappen te maken op locaties die passen bij uw eigen werkwijze en projectbeheer. Open <guimenuitem>Project &gt; Eigenschappen...</guimenuitem> of met <guibutton>Ctrl+E</guibutton> en maak de nodige aanpassingen om de locaties van de mappen te wijzigen nadat een project is gemaakt.</para>
 
-    <para>In een bestandsbeheerder ziet een vertaalproject er precies z uit als elke andere map en gedraagt zich ook zo. In het volgende voorbeeld bevat de map <filename>mijn projecten</filename> drie projecten van OmegaT:</para>
+    <para>In een bestandsbeheerder ziet een vertaalproject er precies zo uit als elke andere map en gedraagt zich ook zo. In het volgende voorbeeld bevat de map <filename>mijn projecten</filename> drie projecten van OmegaT:</para>
 
     <para><figure id="OmegaT.projects.and.subdirectories">
         <title>OmegaT projecten en mappen</title>
@@ -85,7 +85,7 @@
           <primary>Projectbestanden</primary> <secondary>Submap omegat</secondary>
         </indexterm></title>
 
-      <para>De submap <emphasis role="bold">omegat</emphasis> bevat ten minste één en mogelijk meerdere andere bestanden. Het meest belangrijke bestand is hier <filename>project_save.tmx, </filename>dat het werkende vertaalgehuegen voor het project is. Back-ups van dit bestand (met de extensie bak) worden progressief toegevoegdaan deze map, eerst aan het begin van de vertaalsessie, aan het einde daarvan en als de vertaling vordert. Op deze manier wordt een onbedoeld verlies van gegevens vermeden - bekijk Gegevensverlies voorkomen in hoofdstuk <link linkend="chapter.misc">Diverse onderwerpen.</link></para>
+      <para>De submap <emphasis role="bold">omegat</emphasis> bevat ten minste één en mogelijk meerdere andere bestanden. Het meest belangrijke bestand is hier <filename>project_save.tmx, </filename>dat het werkende vertaalgeheugen voor het project is. Back-ups van dit bestand (met de extensie bak) worden progressief toegevoegd aan deze map, eerst aan het begin van de vertaalsessie, aan het einde daarvan en als de vertaling vordert. Op deze manier wordt een onbedoeld verlies van gegevens vermeden - bekijk Gegevensverlies voorkomen in hoofdstuk <link linkend="chapter.misc">Diverse onderwerpen.</link></para>
 
       <para>Gedurende de vertaling kunnen als volgt aanvullende bestanden in deze map worden gecreëerd</para>
 
@@ -154,7 +154,7 @@
         <primary>Projectbestanden</primary> <secondary>Bestanden met gebruikersinstellingen</secondary>
       </indexterm></title>
 
-    <para>Gebruikersbestanden bevatten de informatie die van toepassing is voor alle projecten voor ene bepaalde gebruiker;</para>
+    <para>Gebruikersbestanden bevatten de informatie die van toepassing is voor alle projecten voor een bepaalde gebruiker;</para>
 
     <informaltable>
       <tgroup align="left" cols="2" rowsep="1">
@@ -232,7 +232,7 @@
           </row>
 
           <row>
-            <entry>MAC OSX</entry>
+            <entry>MAC OS X</entry>
 
             <entry><filename>&lt;gebruiker Home&gt;/Library/Preferences/<application>OmegaT</application></filename></entry>
           </row>
@@ -252,7 +252,7 @@
         <primary>Projectbestanden</primary> <secondary>toepassingsbestanden</secondary>
       </indexterm></title>
 
-    <para>OmegaT wordt uitgegeven als een pakket dat u kunt downloaden vanaf SourceForge. Hier wordt een platform-onafhankelijk pakket in een standaard Java-vorm overwogen. Alternatieven bevatten een Linux .tar-pakket, een Windows-installatieprogramma - met of zonder een Java Runtime Environment -, een MacOSX-installatieprogramma en een broncodepakket voor ontwikkelaars.</para>
+    <para>OmegaT wordt uitgegeven als een pakket dat u kunt downloaden vanaf SourceForge. Hier wordt een platform-onafhankelijk pakket in een standaard Java-vorm overwogen. Alternatieven bevatten een Linux .tar-pakket, een Windows-installatieprogramma - met of zonder een Java Runtime Environment -, een Mac OS X-installatieprogramma en een broncodepakket voor ontwikkelaars.</para>
 
     <para>Het platform onafhankelijke pakket kan worden gebruikt op elk platform met een werkende Java 1.5 runtime omgeving, inclusief de platforms waarvoor een specifiek pakket bestaat. Het wordt geleverd als een gecomprimeerd bestand (zip- of tar-archief) dat u in de map van uw keuze moet uitpakken om te installeren. Het bestand kan gewoonlijk worden uitgepakt door op het gedownloade pakket te dubbelklikken. Als het archief is uitgepakt zal een map zijn gemaakt met de volgende inhoud:</para>
 
@@ -288,7 +288,7 @@
           <row>
             <entry><filename>join.html</filename></entry>
 
-            <entry>Dit is een normaal html-bestand dat, eenmaal geopend in uw internetbrowser, u naar de OmegaT gebruikersgroep brengt die wordt gehost op Yahoo Groups. Abonneren is niet noodzakelijk maar geeft u toegang tot aanvullende services, zoals bestanden en onregelmatige polls, daarnaast kunt u deelnemen aan discussies die zijn gerelateerd aan OmegaT. De groepsarchieven zijn publiek en het raadplegen daarvan vereist geen abonnement op de groep.</entry>
+            <entry>Dit is een normaal html-bestand dat, eenmaal geopend in uw internetbrowser, u naar de OmegaT gebruikersgroep brengt die wordt gehost op Yahoo! Groups. Abonneren is niet noodzakelijk maar geeft u toegang tot aanvullende services, zoals bestanden en onregelmatige polls, daarnaast kunt u deelnemen aan discussies die zijn gerelateerd aan OmegaT. De archieven van de groep zijn openbaar en het raadplegen daarvan vereist geen abonnement op de groep.</entry>
           </row>
 
           <row>
@@ -337,7 +337,7 @@
           <row>
             <entry/>
 
-            <entry>Linux- en OSX-gebruikers zouden dit handig kunnen vinden. Maak het uitvoerbaar (chmod +x OmegaT) vanaf de opdrachtregel nadat u zich er van overtuigd hebt dat u in de map /OmegaT_2.5/ bent. U kunt dan OmegaT starten door dit bestand vanaf de opdrachtregel uit te voeren.</entry>
+            <entry>Linux- en OS X-gebruikers zouden dit handig kunnen vinden. Maak het uitvoerbaar (chmod +x OmegaT) vanaf de opdrachtregel nadat u zich er van overtuigd hebt dat u in de map /OmegaT_2.5/ bent. U kunt dan OmegaT starten door dit bestand vanaf de opdrachtregel uit te voeren.</entry>
           </row>
 
           <row>

@@ -136,7 +136,7 @@
 
       <section id="KDE.users">
         <title>KDE 4-gebruikers<indexterm class="singular">
-            <primary>OmegaT aanpassen</primary> <secondary>KDE 4</secondary>
+            <primary>OmegaT aanpassen</primary> <secondary>Linux</secondary>
           </indexterm></title>
 
         <para>U kunt <application>OmegaT</application> als volgt aan uw menu's toevoegen:</para>
@@ -169,9 +169,7 @@
       </section>
 
       <section id="GNOME.users">
-        <title>Gnome-gebruikers<indexterm class="singular">
-            <primary>OmegaT aanpassen</primary> <secondary>GNOME</secondary>
-          </indexterm></title>
+        <title>Gnome-gebruikers</title>
 
         <para>U kunt <application>OmegaT</application> als volgt aan uw menu's toevoegen:</para>
 
@@ -202,8 +200,6 @@
 
   <section id="MAC.OSX.users">
     <title>Mac OS X-gebruikers<indexterm class="singular">
-        <primary>OS X</primary> <secondary>Installeren van OmegaT</secondary>
-      </indexterm><indexterm class="singular">
         <primary>Installeren van OmegaT</primary> <secondary>OS X</secondary>
       </indexterm></title>
 
@@ -222,26 +218,20 @@
     </section>
 
     <section id="adding.OmegaT.to.the.dock">
-      <title><application>OmegaT</application> toevoegen aan het dock<indexterm class="singular">
-          <primary>OS X</primary> <secondary>OmegaT toevoegen aan het dock</secondary> <seealso>OmegaT aanpassen</seealso>
-        </indexterm></title>
+      <title><application>OmegaT</application> toevoegen aan het dock</title>
 
       <para>Sleep en zet <emphasis><application>OmegaT</application>.app</emphasis> op het Dock neer.</para>
     </section>
 
     <section id="running.OmegaT.OSX">
       <title><application>OmegaT<indexterm class="singular">
-          <primary>OS X</primary> <secondary>OmegaT uitvoeren</secondary>
-        </indexterm><indexterm class="singular">
           <primary>OmegaT uitvoeren</primary> <secondary>OS X</secondary>
         </indexterm></application> uitvoeren</title>
 
       <para>Dubbelklik op<emphasis> <application>OmegaT</application>.app</emphasis> of klik op zijn locatie in het dock</para>
 
       <para>Klik met rechts op <emphasis><application>OmegaT</application>.app</emphasis> en selecteer &quot;Pakketinhoud weergeven&quot; om toegang te krijgen tot <application><emphasis>Info.plist</emphasis></application>, en open het bestand door er met rechts op te klikken en selecteer uw tekstverwerker van uw keuze. U kunt ook met &quot;cd&quot; daar rechtstreeks naartoe gaan vanaf de opdrachtregel en <application><emphasis>Info.plist</emphasis> openen in een verwerker voor de opdrachtregel zoals emacs of vi</application>.<emphasis> <indexterm class="singular">
-          <primary>OS X</primary> <secondary>OmegaT aanpassen</secondary> <tertiary>Startparameters</tertiary>
-        </indexterm><indexterm class="singular">
-          <primary>OS X</primary> <secondary>OmegaT aanpassen</secondary>
+          <primary>OmegaT aanpassen</primary> <secondary>OS X</secondary> <tertiary>Startparameters</tertiary>
         </indexterm></emphasis></para>
 
       <para>U kunt het gedeelte <emphasis>Properties</emphasis> en ook het gedeelte <emphasis>VMOptions</emphasis> aanpassen.</para>

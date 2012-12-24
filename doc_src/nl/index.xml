@@ -103,7 +103,7 @@
       </listitem>
 
       <listitem>
-        <para><emphasis role="bold">Woordenboeken, Woordenlijsten</emphasis>, <emphasis role="bold">Machinevertaling</emphasis> en <emphasis role="bold">Spellingscontrole:</emphasis> in OmegaT kunnen woordenboeken en woordenlijsten worden uitgebreid. Als een internetverbinding beschikbaar is, kunnen diverse services voor machinevertaling zoals Google Translate worden gebruikt vanuit OmegaT. Indien spellingscontrole is geactiveerd, worden spelfouten en typefouten herkend en kunnen die gecorrigeerd worden tijdens de vertaling.</para>
+        <para><emphasis role="bold">Woordenboeken, Woordenlijsten</emphasis>, <emphasis role="bold">Machinevertaling</emphasis> en <emphasis role="bold">Spellingscontrole:</emphasis> OmegaT maakt uitgebreid gebruik van woordenboeken en woordenlijsten mogelijk. Als een internetverbinding beschikbaar is, kunnen diverse services voor machinevertaling zoals Google Translate worden gebruikt vanuit OmegaT. Indien spellingscontrole is geactiveerd, worden spelfouten en typefouten herkend en kunnen die gecorrigeerd worden tijdens de vertaling.</para>
       </listitem>
 
       <listitem>
@@ -187,6 +187,7 @@
       <imageobject role="html">
         <imagedata align="left" fileref="images/InstantGuide_1.png"/>
       </imageobject>
+
       <imageobject role="fo">
         <imagedata align="left" fileref="images/InstantGuide_1.png" width="40%"/>
       </imageobject>
@@ -202,11 +203,12 @@
       <imageobject role="html">
         <imagedata align="left" fileref="images/InstantGuide_2.png"/>
       </imageobject>
+
       <imageobject role="fo">
         <imagedata align="left" fileref="images/InstantGuide_2.png" width="45%"/>
       </imageobject>
     </mediaobject>
-    
+
     <para/>
 
     <para>De tags in OmegaT zijn grijs, zodat zij eenvoudig te herkennen zijn. Zij zijn niet beveiligd, zodat u ze kunt verwijderen, ze handmatig kunt invoeren of ze kunt verplaatsen in de doelzin. Indien u echter fouten maakte bij het typen van de tags voor de opmaak, kan het zijn dat uw vertaalde bestand niet wil openen. Druk daarom op <keycap>Ctrl+T</keycap> vóórdat uw uw vertaalde document genereert, om te valideren dat uw tags juist zijn.</para>
@@ -223,7 +225,7 @@
 
     <itemizedlist>
       <listitem>
-        <para>Indien een bestand niet wordt geladen in het venster Bewerken, dan zou het kunnen zijn dat uw bronbestand in een indeling is die niet werkt in OmegaT. Zie hoofdstuk 7: Bestandsfilters in de Gebruikershandleiding voor een lijst van bestandsindelingen die OmegaT kan afhandelen. Indien een bestand niet wordt geladen in het venster Bewerken, dan zou het kunnen zijn dat uw bronbestand in een indeling is die niet werkt in OmegaT. Zie hoofdstuk 7: Bestandsfilters in de Gebruikershandleiding voor een lijst van bestandsindelingen die OmegaT kan afhandelen.</para>
+        <para>Indien een bestand niet wordt geladen in het venster Bewerken, dan zou het kunnen zijn dat uw bronbestand in een indeling is die niet werkt in OmegaT. Zie hoofdstuk 7: Bestandsfilters in de Gebruikershandleiding voor een lijst van bestandsindelingen die OmegaT kan afhandelen.</para>
       </listitem>
     </itemizedlist>
 
@@ -401,7 +403,7 @@
 
       <section id="KDE.users">
         <title>KDE 4-gebruikers<indexterm class="singular">
-            <primary>OmegaT aanpassen</primary> <secondary>KDE 4</secondary>
+            <primary>OmegaT aanpassen</primary> <secondary>Linux</secondary>
           </indexterm></title>
 
         <para>U kunt <application>OmegaT</application> als volgt aan uw menu's toevoegen:</para>
@@ -434,9 +436,7 @@
       </section>
 
       <section id="GNOME.users">
-        <title>Gnome-gebruikers<indexterm class="singular">
-            <primary>OmegaT aanpassen</primary> <secondary>GNOME</secondary>
-          </indexterm></title>
+        <title>Gnome-gebruikers</title>
 
         <para>U kunt <application>OmegaT</application> als volgt aan uw menu's toevoegen:</para>
 
@@ -467,8 +467,6 @@
 
   <section id="MAC.OSX.users">
     <title>Mac OS X-gebruikers<indexterm class="singular">
-        <primary>OS X</primary> <secondary>Installeren van OmegaT</secondary>
-      </indexterm><indexterm class="singular">
         <primary>Installeren van OmegaT</primary> <secondary>OS X</secondary>
       </indexterm></title>
 
@@ -487,26 +485,20 @@
     </section>
 
     <section id="adding.OmegaT.to.the.dock">
-      <title><application>OmegaT</application> toevoegen aan het dock<indexterm class="singular">
-          <primary>OS X</primary> <secondary>OmegaT toevoegen aan het dock</secondary> <seealso>OmegaT aanpassen</seealso>
-        </indexterm></title>
+      <title><application>OmegaT</application> toevoegen aan het dock</title>
 
       <para>Sleep en zet <emphasis><application>OmegaT</application>.app</emphasis> op het Dock neer.</para>
     </section>
 
     <section id="running.OmegaT.OSX">
       <title><application>OmegaT<indexterm class="singular">
-          <primary>OS X</primary> <secondary>OmegaT uitvoeren</secondary>
-        </indexterm><indexterm class="singular">
           <primary>OmegaT uitvoeren</primary> <secondary>OS X</secondary>
         </indexterm></application> uitvoeren</title>
 
       <para>Dubbelklik op<emphasis> <application>OmegaT</application>.app</emphasis> of klik op zijn locatie in het dock</para>
 
       <para>Klik met rechts op <emphasis><application>OmegaT</application>.app</emphasis> en selecteer "Pakketinhoud weergeven" om toegang te krijgen tot <application><emphasis>Info.plist</emphasis></application>, en open het bestand door er met rechts op te klikken en selecteer uw tekstverwerker van uw keuze. U kunt ook met "cd" daar rechtstreeks naartoe gaan vanaf de opdrachtregel en <application><emphasis>Info.plist</emphasis> openen in een verwerker voor de opdrachtregel zoals emacs of vi</application>.<emphasis> <indexterm class="singular">
-          <primary>OS X</primary> <secondary>OmegaT aanpassen</secondary> <tertiary>Startparameters</tertiary>
-        </indexterm><indexterm class="singular">
-          <primary>OS X</primary> <secondary>OmegaT aanpassen</secondary>
+          <primary>OmegaT aanpassen</primary> <secondary>OS X</secondary> <tertiary>Startparameters</tertiary>
         </indexterm></emphasis></para>
 
       <para>U kunt het gedeelte <emphasis>Properties</emphasis> en ook het gedeelte <emphasis>VMOptions</emphasis> aanpassen.</para>
@@ -994,7 +986,7 @@
         <tbody>
           <row>
             <entry><guimenuitem><indexterm class="singular">
-                <primary>Sneltoetsen</primary> <secondary>Ctrl+T - venster Tags valideren</secondary>
+                <primary>Sneltoetsen</primary> <secondary>Tagvalidatie - Ctrl+T</secondary>
               </indexterm>venster Tags valideren</guimenuitem></entry>
 
             <entry><para>Gebruikt om de gebruikershandleiding te lezen (openen met <keycombo> <keycap>Ctrl</keycap> <keycap>T</keycap> </keycombo>, sluiten met <keycap>Esc</keycap>)</para></entry>
@@ -1002,7 +994,7 @@
 
           <row>
             <entry><guimenuitem><indexterm class="singular">
-                <primary>Sneltoetsen</primary> <secondary>F1 - Help</secondary>
+                <primary>Sneltoetsen</primary> <secondary>Help - F1</secondary>
               </indexterm>Help-browser</guimenuitem></entry>
 
             <entry><para>Gebruikt om de gebruikershandleiding weer te geven (openen met <keycap>F1</keycap>, sluiten met <keycap>Esc</keycap>)</para></entry>
@@ -1042,7 +1034,7 @@
             <entry><guimenuitem>Projecteigenschappen<indexterm class="singular">
                 <primary>menu Project</primary> <secondary>Eigenschappen</secondary>
               </indexterm></guimenuitem> <indexterm class="singular">
-                <primary>Sneltoetsen</primary> <secondary>Ctrl+E - Projecteigenschappen</secondary>
+                <primary>Sneltoetsen</primary> <secondary>Projecteigenschappen - Ctrl+E</secondary>
               </indexterm></entry>
 
             <entry>Gebruikt om de projectmappen en talen aan te passen, (openen met sneltoets <guimenuitem>Ctrl+E</guimenuitem> of <menuchoice> <guimenu>Project</guimenu><guimenuitem>eigenschappen...</guimenuitem> </menuchoice>, sluiten met <keycap>Esc)</keycap></entry>
@@ -1092,8 +1084,6 @@
 
   <section id="OmegaT.main.window">
     <title><application>OmegaT</application> hoofdvenster<indexterm class="singular">
-        <primary>Vensters in OmegaT</primary> <secondary>hoofdvenster</secondary> <tertiary>- afbeelding</tertiary>
-      </indexterm><indexterm class="singular">
         <primary>Vensters in OmegaT</primary> <secondary>hoofdvenster</secondary>
       </indexterm></title>
 
@@ -1113,9 +1103,13 @@
 
     <para>Het hoofdvenster bestaat uit verschillende vensters, het hoofdmenu en een statusbalk. U kunt de positie van elk venster wijzigen of het zelfs losmaken en er een zelfstandig venster van maken door het venster te slepen aan zijn naam. Afhankelijk van de status van het venster kunnen verschillende tekens verschijnen in de rechterbovenhoek ervan.</para>
 
+    <note>
+      <para>Als u niet alle vensters kunt zien (als ze zijn geopend of geminimaliseerd), zal drukken op <guisubmenu> Opties &gt; Hoofdvenster herstellen </guisubmenu> ze herstellen naar de status zoals die is gedefinieerd bij de installatie.</para>
+    </note>
+
     <table>
       <title>pictogrammen voor vensters<indexterm class="singular">
-          <primary>Vensters in OmegaT</primary> <secondary>pictogrammen voor vensters</secondary>
+          <primary>Vensters in OmegaT</primary> <secondary>Pictogrammen voor vensters</secondary>
         </indexterm></title>
 
       <tgroup cols="2">
@@ -1283,11 +1277,11 @@
       <para>Het venster Overeenkomsten toont de meest overeenkomende segmenten uit de vertaalgeheugens, zowel uit het interne vertaalgeheugen dat werd gemaakt terwijl u uw project vertaalde als uit aanvullende vertaalgeheugens die u importeerde uit eerder werk of die u heeft gekregen van uw cliënt of vertaalbureau.</para>
 
       <para>Als u doorgaat naar het volgende segment wordt de eerste overeenkomst (die met het hoogste percentage van overeenkomst) automatisch geselecteerd. U kunt een andere overeenkomst selecteren door te drukken op <guimenuitem>Ctrl+2, 3, 4 of 5</guimenuitem>.<indexterm>
-          <primary>Sneltoetsen</primary> <secondary>Ctrl+N - Selecteren van de overeenkomst</secondary>
+          <primary>Sneltoetsen</primary> <secondary>Overeenkomst selecteren - Ctrl+N</secondary>
         </indexterm> Uiteraard zal het drukken op <keycombo> <keycap>Ctrl</keycap> <keycap>5</keycap> </keycombo> geen effect hebben als er geen overeenkomst #5 is. Gebruik <guimenuitem>Ctrl+R</guimenuitem><indexterm class="singular">
-          <primary>Sneltoetsen</primary> <secondary>Ctrl+R - Tekst vervangen</secondary>
+          <primary>Sneltoetsen</primary> <secondary>Tekst vervangen - Ctrl+R</secondary>
         </indexterm> om het doelveld te vervangen door die overeenkomst of <guimenuitem>Ctrl+I <indexterm class="singular">
-          <primary>Sneltoetsen</primary> <secondary>Ctrl+I - Tekst invoegen</secondary>
+          <primary>Sneltoetsen</primary> <secondary>Tekst invoegen - Ctrl+I</secondary>
         </indexterm></guimenuitem> om die in te voegen op de cursorpositie, om de geselecteerde overeenkomst in uw vertaling te gebruiken.</para>
 
       <para>Het percentage voor de overeenkomst is ruwweg het equivalent van het aantal meest voorkomende woorden in het vergeleken en het overeenkomende segment, gedeeld door het aantal woorden in de langste van de twee. De geselecteerde overeenkomst zal worden geaccentueerd in vet, woorden die ontbreken in het segment dat u vertaald zullen blauw gekleurd zijn en woorden die aansluiten aan ontbrekende gedeelten zullen groen zijn. In het bovenstaande voorbeeld is het bronsegment <emphasis role="bold">Context menu command</emphasis>. De bovenste overeenkomst is 100%, omdat alle woorden overeenkomen. Hetzelfde geldt voor de twee volgende overeenkomsten en de overeenkomst #4 is soortgelijk, maar verschilt. De regel met het percentage van overeenkomst bevat ook de naam van het vertaalgeheugen <indexterm class="singular">
@@ -1326,7 +1320,7 @@
 
       <figure id="multiword.pane">
         <title><indexterm class="singular">
-            <primary>Woordenlijsten</primary> <secondary>item met meerdere woorden in de woordenlijst - afbeelding</secondary>
+            <primary>Woordenlijsten</primary>
           </indexterm>item met meerdere woorden in de woordenlijst</title>
 
         <mediaobject>
@@ -1340,7 +1334,7 @@
         </mediaobject>
       </figure>
 
-      <para>Als u de optie TransTips hebt geactiveerd <guimenuitem>Opties → Transtips</guimenuitem>), kunt u met rechts klikken op het geaccentueerde woord om een keuzelijst te openen met de voorgestelde vertalingen, zoals die worden aangeboden door uw woordenlijst. Selecteren van een er van zal het invoegen op de huidige positie in het doelsegment. U kunt ook uw geprefereerde alternatief accentueren in het venster Woordenlijst en het invoegen in het doel door met rechts op de selectie te klikken.</para>
+      <para>Als u de optie TransTips hebt geactiveerd <guimenuitem>Opties → Transtips</guimenuitem>), kunt u met rechts klikken op het geaccentueerde woord om een keuzelijst te openen met de voorgestelde vertalingen, zoals die worden aangeboden door uw woordenlijst. Selecteren van één er van zal het invoegen op de huidige positie van de cursor in het doelsegment. U kunt ook uw geprefereerde alternatief accentueren in het venster Woordenlijst en het invoegen in het doel door met rechts op de selectie te klikken.</para>
     </section>
 
     <section id="dictionaries">
@@ -1356,7 +1350,7 @@
           <primary>Vensters in OmegaT</primary> <secondary>venster Meerdere vertalingen</secondary>
         </indexterm></title>
 
-      <para>Een bepaald bronsegment kan verschillende vertalingen vereisen, afhankelijk van de context. Als de huidige vertaling van het segment niet past, kan de gebruiker <guisubmenu>Bewerken → Alternatieve vertaling maken</guisubmenu> selecteren. De doeltekst die daarna wordt ingevoerd zal wordne behandeld als een alternatieve vertaling van het bronsegment. U kunt één van de alternatieven - bijvoorbeeld die welke het meest waarschijnlijk is - als de standaard vertaling instellen door te selecteren <guisubmenu>Bewerken → Als standaard vertaling gebruiken</guisubmenu></para>
+      <para>Een bepaald bronsegment kan verschillende vertalingen vereisen, afhankelijk van de context. Als de huidige vertaling van het segment niet past, kan de gebruiker <guisubmenu>Bewerken → Alternatieve vertaling maken</guisubmenu> selecteren. De doeltekst die daarna wordt ingevoerd zal worden behandeld als een alternatieve vertaling van het bronsegment. U kunt één van de alternatieven - bijvoorbeeld die welke het meest waarschijnlijk is - als de standaard vertaling instellen door te selecteren <guisubmenu>Bewerken → Als standaard vertaling gebruiken</guisubmenu></para>
     </section>
 
     <section>
@@ -1372,7 +1366,7 @@
 
       <figure id="comments.pane">
         <title><indexterm class="singular">
-            <primary>Opmerkingen</primary> <secondary>venster Opmerkingen - afbeelding</secondary>
+            <primary>Opmerkingen</primary> <secondary>venster Opmerkingen</secondary>
           </indexterm></title>
 
         <mediaobject>
@@ -1417,7 +1411,7 @@
         </indexterm></title>
 
       <para>Het venster Projectbestanden somt de projectbestanden op en geeft andere informatie over het project weer. Het wordt automatisch weergegeven als OmegaT een project laadt. Gebruik <guimenuitem>Ctrl+L<indexterm class="singular">
-          <primary>Sneltoetsen</primary> <secondary>Ctrl+L - lijst projectbestanden</secondary>
+          <primary>Sneltoetsen</primary> <secondary>Lijst projectbestanden - Ctrl+L</secondary>
         </indexterm></guimenuitem> om het te openen en <keycap>Esc</keycap> om het te sluiten. Het venster Projectbestanden geeft de volgende informatie weer:</para>
 
       <itemizedlist>
@@ -1499,11 +1493,11 @@
         </indexterm></title>
 
       <para>Het venster Statistieken - te benaderen via <emphasis role="bold">Extra &gt; Statistieken </emphasis>- geeft de statistieken voor het huidige project van OmegaT weer, zowel in de vorm van een overzicht als in detail voor elk bestand dat moet worden vertaald. De weergegeven statistieken zijn beschikbaar als een tab-gescheiden bestand <filename>project_stats.txt</filename> (submap <filename>omegat</filename>), klaar om te worden geladen in een programma met rekenbladen dat de gebruiker wil gebruiken. U kunt <guimenuitem>Ctrl+A <indexterm class="singular">
-          <primary>Sneltoetsen</primary> <secondary>Ctrl+A - alles selecteren</secondary>
+          <primary>Sneltoetsen</primary> <secondary>Alles selecteren - Ctrl+A</secondary>
         </indexterm></guimenuitem><guimenuitem>, Ctrl+C <indexterm class="singular">
-          <primary>Sneltoetsen</primary> <secondary>Ctrl+C - tekst kopiëren</secondary>
+          <primary>Sneltoetsen</primary> <secondary>Tekst kopiëren - Ctrl+C</secondary>
         </indexterm></guimenuitem>, <guimenuitem>Ctrl+V <indexterm class="singular">
-          <primary>Sneltoetsen</primary> <secondary>Ctrl+V - tekst plakken</secondary>
+          <primary>Sneltoetsen</primary> <secondary>Tekst plakken - Ctrl+V</secondary>
         </indexterm></guimenuitem> gebruiken om de inhoud te kopiëren en te plakken.<figure id="ProjectStatistic.Window">
           <title>projectstatistieken</title>
 
@@ -1511,6 +1505,7 @@
             <imageobject role="html">
               <imagedata fileref="images/StatisticsWindow_25.png"/>
             </imageobject>
+
             <imageobject role="fo">
               <imagedata fileref="images/StatisticsWindow_25.png" width="60%"/>
             </imageobject>
@@ -1523,31 +1518,32 @@
           <primary>Statistieken voor overeenkomsten</primary> <seealso>menu Extra</seealso>
         </indexterm></title>
 
-      <para>Toegang tot de statistieken voor overeenkomsten gaat via<guimenuitem>Extra &gt; Statistieken voor overeenkomsten.</guimenuitem> De evaluatie vergt nogal wat gebruik van de CPU en kan nogal wat tijd vergen, dus wordt er een voortgangsbalk weergegevn gedurende de berekening. Voorzover het categorieën betreft, de de facto industriestandaard voor het classificeren van overeenkomsten in de volgende groepen wordt gebruikt: Exacte overeenkomst, 95%-100%, 85%-94%, 75%-84%, 50%-74% en Geen overeenkomst. De tellingen van woorden, identiek aan tellingen in het venster Projectbestanden, are strikt gebaseerd op de methode van tellen van OmegaT, met een aantal verschillen in terminologie om rekening te houden met conceptuele verschillen. Deze informatie wordt berekend voor zowel segmenten als voor woorden en voor tekens (zonder en met spaties).<figure>
+      <para>Toegang tot de statistieken voor overeenkomsten gaat via<guimenuitem>Extra &gt; Statistieken voor overeenkomsten.</guimenuitem> De evaluatie vergt nogal wat gebruik van de CPU en kan nogal wat tijd vergen, dus wordt er een voortgangsbalk weergegeven gedurende de berekening. Voorzover het categorieën betreft, de de facto industriestandaard voor het classificeren van overeenkomsten in de volgende groepen wordt gebruikt: Exacte overeenkomst, 95%-100%, 85%-94%, 75%-84%, 50%-74% en Geen overeenkomst. De tellingen van woorden, identiek aan tellingen in het venster Projectbestanden, are strikt gebaseerd op de methode van tellen van OmegaT, met een aantal verschillen in terminologie om rekening te houden met conceptuele verschillen. Deze informatie wordt berekend voor zowel segmenten als voor woorden en voor tekens (zonder en met spaties).<figure>
           <title>Statistieken voor overeenkomsten</title>
 
           <mediaobject>
             <imageobject role="html">
               <imagedata fileref="images/MatchStatistics.png"/>
             </imageobject>
+
             <imageobject role="fo">
               <imagedata fileref="images/MatchStatistics.png" width="80%"/>
             </imageobject>
           </mediaobject>
         </figure></para>
 
-      <para>Onthoud dat deze totalen een goede (of zo-goed-als-maar-kan-zijn) benadering zijn van het betrokken werk in het project en dus kan dienen als een basis voor uw berekeningen van kosten en prijzen.</para>
+      <para>Onthoud dat deze totalen een goede (of 'zo goed als maar kan zijn') benadering zijn van het betrokken werk in het project en dus kan dienen als een basis voor uw berekeningen van kosten en prijzen.</para>
 
       <para>Met spaties tussen segmenten wordt geen rekening gehouden in de laatste kolom. Herhalingen staan voor identieke segmenten die meerdere malen aanwezig zijn in de tekst. Het eerste segment en de inhoud daarvan zullen worden geclassificeerd als "geen overeenkomst", en de rest van hen als een herhaling van de eerste. Als de vertaling voor verschillende identieke bronsegmenten al bestaat in het vertaalgeheugen van het project, zullen deze segmenten, samen met andere, reeds vertaalde unieke segmenten, worden geclassificeerd als een "Exacte overeenkomst". Het aantal unieke segmenten die, indien nodig, worden verschaft in het standaard venster met statistieken, ongeacht of zij zijn vertaald of niet.</para>
 
       <para>De rest van de categorieën (50-100%) behelst niet-vertaalde segmenten met een fuzzy overeenkomst. Fuzzy overeenkomsten kunnen ook vanuit de map <filename>/tm</filename> komen - en niet alleen vanuit het interne vertaalgeheugen in <filename>/omegaT,</filename> zoals het geval is voor herhalingen en exacte overeenkomsten. Het enige verschil met overeenkomsten vanuit het vertaalgeheugen <filename>project_save</filename> is dat externe TM's geen exacte overeenkomsten kunnen geven, alleen 100%. Indien men geen externe TM's wil gebruiken voor het tellen, moet men de map /tm leeg maken of de instelling van het project wijzigen (tijdelijk) zodat de waarde voor /tm naar een andere locatie verwijst.</para>
 
       <para>De overeenkomsten voor statistieken zijn tab-gescheiden en u kunt <guimenuitem>Ctrl+A <indexterm class="singular">
-          <primary>Sneltoetsen</primary> <secondary>Ctrl+A - alles selecteren</secondary>
+          <primary>Sneltoetsen</primary> <secondary>Alles selecteren - Ctrl+A</secondary>
         </indexterm></guimenuitem><guimenuitem>, Ctrl+C <indexterm class="singular">
-          <primary>Sneltoetsen</primary> <secondary>Ctrl+C - tekst kopiëren</secondary>
+          <primary>Sneltoetsen</primary> <secondary>Tekst kopiëren - Ctrl+C</secondary>
         </indexterm></guimenuitem>, <guimenuitem>Ctrl+V <indexterm class="singular">
-          <primary>Sneltoetsen</primary> <secondary>Ctrl+V - tekst plakken</secondary>
+          <primary>Sneltoetsen</primary> <secondary>Tekst plakken - Ctrl+V</secondary>
         </indexterm></guimenuitem> gebruiken om ze te kopiëren/plakken, bijvoorbeeld in een werkblad of in uw toepassing voor kostenberekening. Eenmaal berekend zijn de gegevens ook beschikbaar in <filename>omegat/project_stats_match.txt.</filename> Onthoud dat het bestand voorzien is van een tijdstempel, omdat de berekening (in tegenstelling tot de standaard statistieken) is niet onmiddellijk wordt uitgevoerd en dus snel niet meer van toepassing is.</para>
     </section>
 
@@ -1557,7 +1553,7 @@
         </indexterm></title>
 
       <para>De Help-browser (die deze handleiding weergeeft) kan worden opgeroepen door op <keycap><indexterm class="singular">
-          <primary>Sneltoetsen</primary> <secondary>F1 - Help</secondary>
+          <primary>Sneltoetsen</primary> <secondary>Help - F1</secondary>
         </indexterm>F1</keycap> te drukken of door te navigeren naar <guimenuitem><indexterm class="singular">
           <primary>menu Help</primary> <secondary>Gebruikershandleiding...</secondary>
         </indexterm>Help → Gebruikershandleiding...</guimenuitem> in het hoofdmenu. In het venster worden de handleiding en twee knoppen weergegeven: Terug en Inhoud. De gebruikershandleiding is een HTML-document met koppelingen naar de verschillende hoofdstukken. Klikken op een koppeling, zoals u in een webbrowser zou doen, brengt de gewenste pagina op de voorgrond.</para>
@@ -1572,12 +1568,8 @@
 
   <section id="ch04.main.menu">
     <title><indexterm class="singular">
-        <primary>Hoofdmenu</primary>
+        <primary>Menu</primary>
       </indexterm>Hoofdmenu</title>
-
-    <indexterm class="singular">
-      <primary>Sneltoetsen</primary> <secondary>Hoofdmenu</secondary>
-    </indexterm>
 
     <para>Alle functionaliteiten van OmegaT zijn beschikbaar via de menubalk boven het venster Bewerken. De meeste functies zijn ook beschikbaar via sneltoetsen voor het toetsenbord. Sneltoetsen worden geactiveerd door te drukken op <keycap>Ctrl</keycap> en een letter. Sommige sneltoetsen gebruiken ook andere toetsen. Voor de leesbaarheid worden letters hier geschreven als hoofdletters. <keycap>Ctrl</keycap> wordt gebruikt op Windows, UNIX en UNIX-achtige besturingssystemen die een toetsenbord hebben met de <keycap>Ctrl</keycap>- of <keycap>Control</keycap>-toets. Mac-gebruikers moeten in plaats daarvan de <keycombo> <keycap>cmd</keycap><keycap>-toets</keycap> </keycombo> gebruiken. De "Cmd"-toets heeft ofwel een label "command" of een Apple-merkteken op toetsenborden van Apple.</para>
 
@@ -1609,7 +1601,9 @@
 
     <section id="submenu.Project">
       <title>Project<indexterm class="singular">
-          <primary>Hoofdmenu</primary> <secondary>Project</secondary>
+          <primary>Menu</primary>
+
+          <secondary>Project</secondary>
         </indexterm></title>
 
       <table colsep="1">
@@ -1745,7 +1739,7 @@
 
     <section>
       <title>Bewerken<indexterm class="singular">
-          <primary>Hoofdmenu</primary> <secondary>Bewerken</secondary>
+          <primary>Menu</primary> <secondary>Bewerken</secondary>
         </indexterm></title>
 
       <para>Opmerking: Items die in de meeste toepassingen aanwezig zijn (kopiëren/knippen/plakken) worden in dit menu niet weergegeven maar zijn beschikbaar met de sneltoetsen van uw systeem. Bijvoorbeeld:</para>
@@ -1959,7 +1953,7 @@
               <entry><keycombo> <keycap>Shift</keycap> <keycap>F3</keycap> </keycombo> (zie tekst)</entry>
 
               <entry>Wijzigt hoofd-/kleine letters van de geaccentueerde tekst in het doelsegment naar de geselecteerde optie (Kleine letters, Hoofdletters of Alle woorden hoofdletters). Gebruik Shift+F3 <indexterm>
-                  <primary>Sneltoetsen</primary> <secondary>Shift+F3 - Selectie Hoofd-/kleine letters</secondary>
+                  <primary>Sbeltoetsen</primary> <secondary>Selectie hoofd-/kleine letters - Shift+F3</secondary>
                 </indexterm>om tussen de drie keuzes te schakelen. Indien geen tekst is geselecteerd, selecteert <application>OmegaT</application> het woord dat de letter bevat direct rechts naast de cursor.</entry>
             </row>
 
@@ -1997,7 +1991,7 @@
 
     <section id="submenu.GoTo">
       <title>Ga naar<indexterm class="singular">
-          <primary>Hoofdmenu</primary> <secondary>Ga naar</secondary>
+          <primary>Menu</primary> <secondary>Ga naar</secondary>
         </indexterm></title>
 
       <table colsep="1">
@@ -2099,7 +2093,7 @@
 
     <section id="submenu.View">
       <title>Weergave<indexterm class="singular">
-          <primary>Hoofdmenu</primary> <secondary>Weergave</secondary>
+          <primary>Menu</primary> <secondary>Weergave</secondary>
         </indexterm></title>
 
       <table colsep="1">
@@ -2157,7 +2151,7 @@
 
     <section id="submenu.Tools">
       <title>Extra<indexterm class="singular">
-          <primary>Hoofdmenu</primary> <secondary>Extra</secondary>
+          <primary>Menu</primary> <secondary>Extra</secondary>
         </indexterm></title>
 
       <table colsep="1">
@@ -2188,7 +2182,7 @@
             <row>
               <entry><guimenuitem>Tags verwijderen</guimenuitem></entry>
 
-              <entry>Indien ingeschakeld worden alle tags voor opmaak verwijderd uit de bronsegmenten. Dit is handig als teksten worden afgehandeld waarin in-regelige opmaak geen echt nut heeft (bijv. ge-OCRde PDF, slecht geconverteerde .odt of .docx, etc.) Alleen in-regelige tags worden verwijderd, dus normaal gesproken zou er geen probleem moeten zijn met het openen van de doeldocumenten. Niet-zichtbare opmaak (d.i. die niet als tags verschijnen in de bewerker van OmegaT) wordt in het doeldocument behouden.</entry>
+              <entry>Indien ingeschakeld worden alle tags voor opmaak verwijderd uit de bronsegmenten. Dit is handig als teksten worden afgehandeld waarin in-regelige opmaak geen echt nut heeft (bijv. ge-OCRde pdf, slecht geconverteerde .odt of .docx, etc.) Alleen in-regelige tags worden verwijderd, dus normaal gesproken zou er geen probleem moeten zijn met het openen van de doeldocumenten. Niet-zichtbare opmaak (d.i. die niet als tags verschijnen in de bewerker van OmegaT) wordt in het doeldocument behouden.</entry>
             </row>
 
             <row>
@@ -2209,7 +2203,7 @@
 
     <section id="submenu.Options">
       <title><indexterm class="singular">
-          <primary>Hoofdmenu</primary> <secondary>Opties</secondary>
+          <primary>Menu</primary> <secondary>Opties</secondary>
         </indexterm>Opties</title>
 
       <table colsep="1">
@@ -2246,7 +2240,7 @@
             <row>
               <entry><guimenuitem>TransTips</guimenuitem></entry>
 
-              <entry>Stelt u in staat de mogelijkheid <emphasis>TransTips </emphasis>te activeren/deactiveren en stelt de optie er van in op<emphasis> Exacte overeenkomst.</emphasis> Met de geactiveerde <emphasis>TransTips</emphasis> zal een klik met rechts op een geaccentueerd woord in de brion een pop-upmenu openen met de items van de woordenlijst voor het woord waarop u hebt geklikt. U kunt dan op de geprefereerde vertaling klikken om die in te voegen in het doelsegment op de huidige positie. Met <emphasis>TransTips/Exacte overeenkomst </emphasis> ingeschakeld, zullen alleen volledige woorden worden gecontroleerd, anders zullen ook gedeelten van woorden overeenkomen.</entry>
+              <entry>Stelt u in staat de mogelijkheid <emphasis>TransTips </emphasis>te activeren/deactiveren en stelt de optie er van in op<emphasis> Exacte overeenkomst.</emphasis> Met de geactiveerde <emphasis>TransTips</emphasis> zal een klik met rechts op een geaccentueerd woord in de bron een pop-upmenu openen met de items van de woordenlijst voor het woord waarop u hebt geklikt. U kunt dan op de geprefereerde vertaling klikken om die in te voegen in het doelsegment op de huidige positie. Met <emphasis>TransTips/Exacte overeenkomst </emphasis> ingeschakeld, zullen alleen volledige woorden worden gecontroleerd, anders zullen ook gedeelten van woorden overeenkomen.</entry>
             </row>
 
             <row>
@@ -2327,7 +2321,9 @@
 
     <section id="submenu.Help">
       <title>Help<indexterm class="singular">
-          <primary>Hoofdmenu</primary> <secondary>Help</secondary>
+          <primary>Menu</primary>
+
+          <secondary>Help</secondary>
         </indexterm></title>
 
       <table colsep="1">
@@ -2363,7 +2359,7 @@
 
     <para>Sneltoetsen worden geactiveerd door te drukken op <keycap>Ctrl</keycap> en een letter. Sommige sneltoetsen gebruiken ook andere toetsen. Voor de leesbaarheid worden letters hier geschreven als hoofdletters.</para>
 
-    <para>Ctrl wordt gebruikt op Windows, UNIX en UNIX-achtige besturingssystemen die een toetsenbord hebben met de <keycap>Ctrl</keycap> / <keycap>Control</keycap>-toets. Mac-gebrukers zouden in plaats daarvan de <guimenuitem>cmd+toets</guimenuitem> moeten gebruiken. Op toetsenborden van Apple heeft de <guimenuitem>cmd</guimenuitem>-toets een label "command" of een Apple-merkteken er op.</para>
+    <para>Ctrl wordt gebruikt op Windows, UNIX en UNIX-achtige besturingssystemen die een toetsenbord hebben met de <keycap>Ctrl</keycap> / <keycap>Control</keycap>-toets. Mac-gebruikers zouden in plaats daarvan de <guimenuitem>cmd+toets</guimenuitem> moeten gebruiken. Op toetsenborden van Apple heeft de <guimenuitem>cmd</guimenuitem>-toets een label "command" of een merkteken van Apple er op.</para>
 
     <itemizedlist>
       <listitem>
@@ -2853,7 +2849,7 @@
           <primary>Project</primary> <secondary>Inschakelen segmentering op zin-niveau</secondary>
         </indexterm>
 
-        <para>De instellingen voor segmentatie hebben alleen betrekking op de manier waarop de bronbestanden door <application>OmegaT</application> worden afgehandeld. De vooringestelde manier van het segmenteren van de bronnen is de segmentering op zin-niveau, dus dit keuzevak zou in normale gevallen geselecteerd moeten worden gelaten.</para>
+        <para>De instellingen voor segmentatie hebben alleen betrekking op de manier waarop de bronbestanden door <application>OmegaT</application> worden afgehandeld. De vooraf ingestelde manier van het segmenteren van de bronnen is de segmentering op zin-niveau, dus dit keuzevak zou in normale gevallen geselecteerd moeten worden gelaten.</para>
 
         <para>In sommige uitzonderlijke gevallen kan het alternatief, d.i. segmenteren op alinea's, de voorkeur genieten. Wijzigen van deze vlag past niet de segmentatie van de reeds bestaande vertaalgeheugens aan. Indien u gedurende de vertaling besluit om te schakelen van zin- naar alinea-vertaling, zal het interne vertaalgeheugen van het project niet worden gewijzigd (OmegaT kan oude vertaalgeheugens bijwerken die geen gebruik maakten van zin-segmentatie, maar niet andersom).</para>
 
@@ -2874,7 +2870,7 @@
 
       <listitem>
         <para>Knop <emphasis role="bold"><guibutton>Bestandsfilters...</guibutton></emphasis><indexterm class="singular">
-            <primary>Bestandsfilters</primary> <secondary>globaal versus projectspecifieke bestandsfilters</secondary>
+            <primary>Bestandsfilters</primary> <secondary>globale versus projectspecifieke bestandsfilters</secondary>
           </indexterm></para>
 
         <para>Op eenzelfde manier als hierboven kan de gebruiker project-specifieke bestandsfilters maken, die tezamen met het project zullen worden opgeslagen en alleen geldig zullen zijn voor het huidige project. Klik op de knop <guibutton>Bestandsfilters ... </guibutton>, en activeer het keuzevak <guimenuitem>Projectspecifieke filters inschakelen</guimenuitem> in het venster dat opent om een set projectspecifieke bestandsfilters te maken. Een kopie van de gewijzigde configuratie van de filters zal met het project worden opgeslagen. Deselecteer het keuzevak om projectspecifieke bestandsfilters te verwijderen. Onthoud dat in het menu <guimenuitem>Opties-&gt;Bestandsfilters</guimenuitem>, de globale filters voor de gebruikers worden gewijzigd, niet de filters voor het project. Bekijk hoofdstuk<link linkend="chapter.file.filters"> Bestandsfilters </link>voor meer over het onderwerp.<emphasis/></para>
@@ -2896,10 +2892,10 @@
         <para><emphasis role="bold">Een gebied voor het instellen van de projectmappen</emphasis><indexterm class="singular">
             <primary>Project</primary> <secondary>Wijzigen van de mappenstructuur</secondary>
           </indexterm><indexterm class="singular">
-            <primary>Glossary</primary> <secondary>Locatie van het te beschrijven bestand voor de woordenlijst</secondary>
+            <primary>Woordenlijsten</primary> <secondary>Locatie van het te beschrijven bestand voor de woordenlijst</secondary>
           </indexterm></para>
 
-        <para>Hier kunt u verschillende submappen selecteren, bijvoorbeeld de submap met bronbestanden, submap voor doelbestanden etc. Indien u namen voor mappen invoert die nog niet bestaan, zal <application>OmegaT</application> ze voor u maken. Voor het geval u van plan bent de projectmappen aan te passen, onthoudt dan dat daarmee niet de bestanden uit oude mappen naar de nieuwe locatie worden verplaatst.</para>
+        <para>Hier kunt u verschillende submappen selecteren, bijvoorbeeld de submap met bronbestanden, submap voor doelbestanden etc. Indien u namen voor mappen invoert die nog niet bestaan, zal <application>OmegaT</application> die voor u maken. Voor het geval u van plan bent de projectmappen aan te passen, onthoudt dan dat daarmee niet de bestanden uit oude mappen naar de nieuwe locatie worden verplaatst.</para>
       </listitem>
     </itemizedlist>
   </section>
@@ -2932,8 +2928,8 @@
 
   <para>De meeste gebruikers zullen tevreden zijn met de standaard ingestelde opties. Als u dat niet bent opent u het hoofd dialoogvenster door in het hoofdmenu<emphasis role="bold"> Opties → Bestandsfilters...</emphasis> te selecteren. U kunt ook project-specifieke bestandsfilters inschakelen, die alleen zullen worden gebruikt voor het huidige project, door de optie <emphasis role="bold">Bestandsfilters...</emphasis> in Project → Eigenschappen te selecteren.</para>
 
-  <para>U kunt projectspecifieke filters inschakelen via <emphasis role="bold">Opties → Eigenschappen...</emphasis> . Klik op de knop <guibutton>Bestandsfilters</guibutton> en activeer het keuzevak <guimenuitem>Projectspecifieke filters inschakelen</guimenuitem><indexterm class="singular">
-      <primary>Bestandsfilters</primary> <secondary>projectspecifieke bestandsfilters</secondary>
+  <para>U kunt projectspecifieke filters inschakelen via <emphasis role="bold">Opties → Eigenschappen...</emphasis>. Klik op de knop <guibutton>Bestandsfilters</guibutton> en activeer het keuzevak <guimenuitem>Projectspecifieke filters inschakelen</guimenuitem><indexterm class="singular">
+      <primary>Bestandsfilters</primary> <secondary>Projectspecifieke bestandsfilters</secondary>
     </indexterm>. Een kopie van de configuratie van de filters zal in dit geval met het project worden opgeslagen. Indien u later filters wijzigt zullen alleen de projectfilters worden bijgewerkt, waarbij de filters voor de gebruikers ongewijzigd zullen blijven.</para>
 
   <para><emphasis role="bold">Waarschuwing!</emphasis> Als u de segmentatie-opties wijzigt als een project geopend is moet u het project herladen vóórdat de wijzigingen effect hebben.</para>
@@ -2989,7 +2985,7 @@
 
     <itemizedlist>
       <listitem>
-        <para><emphasis>Tekst die overeenkomt met reguliere uitdrukking overslaan</emphasis>: De tekst die overeenkomt met de reguliere uitdrukking wordt overgeslagen. Dit wordt in de tagvalidatie in rood weergegeven. Tekst in het bronsegment die overeenkomt wordt cursiefweergegeven.</para>
+        <para><emphasis>Tekst die overeenkomt met reguliere uitdrukking overslaan</emphasis>: De tekst die overeenkomt met de reguliere uitdrukking wordt overgeslagen. Dit wordt in de tagvalidatie in rood weergegeven. Tekst in het bronsegment die overeenkomt wordt cursief weergegeven.</para>
       </listitem>
     </itemizedlist>
 
@@ -3002,7 +2998,8 @@
     <itemizedlist>
       <listitem>
         <para><emphasis>Vertaal NIET de inhoud van tags met de volgende paren van sleutels en waarden voor attributen (door komma's gescheiden):</emphasis>: een overeenkomst in de lijst met sleutel-waardenparen zorgt er voor dat de inhoud van tags zal worden genegeerd</para>
-        <para>Het is soms handig om enkele tags niet te vertalen te maken, gebaseerd op de waarde van attributen. Bijv: <literal>&lt;div class="hide"&gt; &lt;span translate="no"&gt;</literal> U kunt sleutel-waardenparen diefiniëren voor for tags die niet vertaald moeten worden. Voor het voorbeeld hierboven zou het veld bevatten: <literal>class=hide, translate=no </literal></para>
+
+        <para>Het is soms handig om enkele tags niet te vertalen te maken, gebaseerd op de waarde van attributen. Bijvoorbeeld: <literal>&lt;div class="hide"&gt; &lt;span translate="no"&gt;</literal> U kunt sleutel-waardenparen definiëren voor tags die niet vertaald moeten worden. Voor het voorbeeld hierboven zou het veld bevatten: <literal>class=hide, translate=no </literal></para>
       </listitem>
     </itemizedlist>
 
@@ -3078,7 +3075,7 @@
 
     <itemizedlist>
       <listitem>
-         <para><emphasis>Vertaal het attribuut 'content' van metatags niet: ... :</emphasis> De volgende metatags zullen niet worden vertaald.</para>
+        <para><emphasis>Vertaal het attribuut 'content' van metatags niet: ... :</emphasis> De volgende metatags zullen niet worden vertaald.</para>
       </listitem>
     </itemizedlist>
 
@@ -3118,9 +3115,9 @@
 
     <section id="source.filetype.and.filename.pattern">
       <title><indexterm class="singular">
-          <primary>Bronbestanden</primary> <secondary>Bestandstype, patroon bestandsnaam</secondary>
+          <primary>Bronbestanden</primary> <secondary>Bestandstype en patroon voor naam</secondary>
         </indexterm>Type bronbestand, patroon voor bestandsnaam<indexterm class="singular">
-          <primary>Bronbestanden</primary> <secondary>Bestandstype bron, bestandsnaam</secondary>
+          <primary>Bronbestanden</primary> <secondary>Bestandstype en patroon voor naam</secondary>
         </indexterm></title>
 
       <para>Als OmegaT een bestand tegenkomt in zijn bronmap, probeert dat het filter te selecteren gebaseerd op de extensie van het bestand. Meer precies: OmegaT probeert of van elk filter het patroon van de bestandsnaam overeenkomt met de bestandsnaam. Het <literal>*.xhtml</literal>-patroon zal bijvoorbeeld overeenkomen met elk bestand met de extensie <literal>.xhtml</literal>. Als het juiste filter is gevonden wordt dat voor verdere verwerking toegepast op het betreffende bestand. Standaard zal bijvoorbeeld het XHTML-filter worden gebruikt bij het verwerken van bestanden met de extensie .xhtml. U kunt bestandsnaam-patronen toevoegen of wijzigen voor bestanden die door elk filter worden afgehandeld. Patronen voor bronbestandsnamen gebruiken jokertekens die overeenkomen met die in <emphasis role="bold">Zoeken. </emphasis>Het teken '*' komt overeen met nul of meer tekens. Het teken '?' komt overeen met exact één teken. Alle andere tekens vertegenwoordigen zichzelf. Als u bijvoorbeeld wilt dat het tekstfilter readme-bestanden (<literal>readme, read.me</literal> en <literal>readme.txt</literal>) afhandelt, zou u het patroon <literal>read*</literal> moeten gebruiken.</para>
@@ -3138,7 +3135,7 @@
       </indexterm>
 
       <indexterm class="singular">
-        <primary>Bestandsfilters</primary> <secondary>coderen bron, doel</secondary>
+        <primary>Bestandsfilters</primary> <secondary>Bron, doel - coderen</secondary>
       </indexterm>
 
       <para>Slechts een beperkt aantal bestandsformaten specificeren een voorgeschreven codering. Bestandsformaten die hun codering niet specificeren zullen de codering gebruiken die u instelt voor de extensie die overeenkomt met hun naam. Standaard zullen bijvoorbeeld <literal>.txt</literal>-bestanden worden geladen met behulp van de standaard codering van uw besturingssysteem. U kunt de broncodering voor elk verschillend bronbestandsnaam-patroon wijzigen. Zulke bestanden kunnen ook in elke codering worden weggeschreven. Als standaard heeft het vertaalde bestand dezelfde codering als de codering van het bronbestand. Velden voor bron- en doelcodering gebruiken combinatievakken waarin alle ondersteunde coderingen zijn opgenomen. &lt;auto&gt; laat de keuze van de codering aan <application>OmegaT</application> over. Zo werkt het:</para>
@@ -3318,7 +3315,7 @@
 
     <para>Alternatieve locaties voor sommige mappen kunnen worden gekozen bij het maken van het project of tijdens de vertaling. Het is daarom mogelijk om bestaande mappen te kiezen of mappen te maken op locaties die passen bij uw eigen werkwijze en projectbeheer. Open <guimenuitem>Project &gt; Eigenschappen...</guimenuitem> of met <guibutton>Ctrl+E</guibutton> en maak de nodige aanpassingen om de locaties van de mappen te wijzigen nadat een project is gemaakt.</para>
 
-    <para>In een bestandsbeheerder ziet een vertaalproject er precies z uit als elke andere map en gedraagt zich ook zo. In het volgende voorbeeld bevat de map <filename>mijn projecten</filename> drie projecten van OmegaT:</para>
+    <para>In een bestandsbeheerder ziet een vertaalproject er precies zo uit als elke andere map en gedraagt zich ook zo. In het volgende voorbeeld bevat de map <filename>mijn projecten</filename> drie projecten van OmegaT:</para>
 
     <para><figure id="OmegaT.projects.and.subdirectories">
         <title>OmegaT projecten en mappen</title>
@@ -3357,7 +3354,7 @@
           <primary>Projectbestanden</primary> <secondary>Submap omegat</secondary>
         </indexterm></title>
 
-      <para>De submap <emphasis role="bold">omegat</emphasis> bevat ten minste één en mogelijk meerdere andere bestanden. Het meest belangrijke bestand is hier <filename>project_save.tmx, </filename>dat het werkende vertaalgehuegen voor het project is. Back-ups van dit bestand (met de extensie bak) worden progressief toegevoegdaan deze map, eerst aan het begin van de vertaalsessie, aan het einde daarvan en als de vertaling vordert. Op deze manier wordt een onbedoeld verlies van gegevens vermeden - bekijk Gegevensverlies voorkomen in hoofdstuk <link linkend="chapter.misc">Diverse onderwerpen.</link></para>
+      <para>De submap <emphasis role="bold">omegat</emphasis> bevat ten minste één en mogelijk meerdere andere bestanden. Het meest belangrijke bestand is hier <filename>project_save.tmx, </filename>dat het werkende vertaalgeheugen voor het project is. Back-ups van dit bestand (met de extensie bak) worden progressief toegevoegd aan deze map, eerst aan het begin van de vertaalsessie, aan het einde daarvan en als de vertaling vordert. Op deze manier wordt een onbedoeld verlies van gegevens vermeden - bekijk Gegevensverlies voorkomen in hoofdstuk <link linkend="chapter.misc">Diverse onderwerpen.</link></para>
 
       <para>Gedurende de vertaling kunnen als volgt aanvullende bestanden in deze map worden gecreëerd</para>
 
@@ -3426,7 +3423,7 @@
         <primary>Projectbestanden</primary> <secondary>Bestanden met gebruikersinstellingen</secondary>
       </indexterm></title>
 
-    <para>Gebruikersbestanden bevatten de informatie die van toepassing is voor alle projecten voor ene bepaalde gebruiker;</para>
+    <para>Gebruikersbestanden bevatten de informatie die van toepassing is voor alle projecten voor een bepaalde gebruiker;</para>
 
     <informaltable>
       <tgroup align="left" cols="2" rowsep="1">
@@ -3504,7 +3501,7 @@
           </row>
 
           <row>
-            <entry>MAC OSX</entry>
+            <entry>MAC OS X</entry>
 
             <entry><filename>&lt;gebruiker Home&gt;/Library/Preferences/<application>OmegaT</application></filename></entry>
           </row>
@@ -3524,7 +3521,7 @@
         <primary>Projectbestanden</primary> <secondary>toepassingsbestanden</secondary>
       </indexterm></title>
 
-    <para>OmegaT wordt uitgegeven als een pakket dat u kunt downloaden vanaf SourceForge. Hier wordt een platform-onafhankelijk pakket in een standaard Java-vorm overwogen. Alternatieven bevatten een Linux .tar-pakket, een Windows-installatieprogramma - met of zonder een Java Runtime Environment -, een MacOSX-installatieprogramma en een broncodepakket voor ontwikkelaars.</para>
+    <para>OmegaT wordt uitgegeven als een pakket dat u kunt downloaden vanaf SourceForge. Hier wordt een platform-onafhankelijk pakket in een standaard Java-vorm overwogen. Alternatieven bevatten een Linux .tar-pakket, een Windows-installatieprogramma - met of zonder een Java Runtime Environment -, een Mac OS X-installatieprogramma en een broncodepakket voor ontwikkelaars.</para>
 
     <para>Het platform onafhankelijke pakket kan worden gebruikt op elk platform met een werkende Java 1.5 runtime omgeving, inclusief de platforms waarvoor een specifiek pakket bestaat. Het wordt geleverd als een gecomprimeerd bestand (zip- of tar-archief) dat u in de map van uw keuze moet uitpakken om te installeren. Het bestand kan gewoonlijk worden uitgepakt door op het gedownloade pakket te dubbelklikken. Als het archief is uitgepakt zal een map zijn gemaakt met de volgende inhoud:</para>
 
@@ -3560,7 +3557,7 @@
           <row>
             <entry><filename>join.html</filename></entry>
 
-            <entry>Dit is een normaal html-bestand dat, eenmaal geopend in uw internetbrowser, u naar de OmegaT gebruikersgroep brengt die wordt gehost op Yahoo Groups. Abonneren is niet noodzakelijk maar geeft u toegang tot aanvullende services, zoals bestanden en onregelmatige polls, daarnaast kunt u deelnemen aan discussies die zijn gerelateerd aan OmegaT. De groepsarchieven zijn publiek en het raadplegen daarvan vereist geen abonnement op de groep.</entry>
+            <entry>Dit is een normaal html-bestand dat, eenmaal geopend in uw internetbrowser, u naar de OmegaT gebruikersgroep brengt die wordt gehost op Yahoo! Groups. Abonneren is niet noodzakelijk maar geeft u toegang tot aanvullende services, zoals bestanden en onregelmatige polls, daarnaast kunt u deelnemen aan discussies die zijn gerelateerd aan OmegaT. De archieven van de groep zijn openbaar en het raadplegen daarvan vereist geen abonnement op de groep.</entry>
           </row>
 
           <row>
@@ -3609,7 +3606,7 @@
           <row>
             <entry/>
 
-            <entry>Linux- en OSX-gebruikers zouden dit handig kunnen vinden. Maak het uitvoerbaar (chmod +x OmegaT) vanaf de opdrachtregel nadat u zich er van overtuigd hebt dat u in de map /OmegaT_2.5/ bent. U kunt dan OmegaT starten door dit bestand vanaf de opdrachtregel uit te voeren.</entry>
+            <entry>Linux- en OS X-gebruikers zouden dit handig kunnen vinden. Maak het uitvoerbaar (chmod +x OmegaT) vanaf de opdrachtregel nadat u zich er van overtuigd hebt dat u in de map /OmegaT_2.5/ bent. U kunt dan OmegaT starten door dit bestand vanaf de opdrachtregel uit te voeren.</entry>
           </row>
 
           <row>
@@ -3655,7 +3652,7 @@
           <primary>Bronbestanden</primary> <secondary>Platte tekst-bestanden</secondary>
         </indexterm></title>
 
-      <para>Platte tekst-bestanden bevatten alleen maar tekst, zodat hun vertaling zo eenvoudig is als het typen van die vertaling. Er zijn meerdere methoden om de codering van een bestand te specificeren zodat de inhoud niet door elkaar wordt gegooid bij het openen in <application>OmegaT</application>. Zulke bestanden hebben geen informatie over opmaak naast de "witte ruimte" die wordt gebruikt om tekst uit te lijnen, alinea's aan te geven of paginaeinden in te voegen. Zij zijn niet in staat informatie te bevatten / te behouden met betrekking tot de kleur, lettertype etc. van de tekst. Momenteel ondersteunt <application>OmegaT</application> de volgende platte tekst-formaten:<indexterm class="singular">
+      <para>Platte tekst-bestanden bevatten alleen maar tekst, zodat hun vertaling zo eenvoudig is als het typen van die vertaling. Er zijn meerdere methoden om de codering van een bestand te specificeren zodat de inhoud niet door elkaar wordt gegooid bij het openen in <application>OmegaT</application>. Zulke bestanden hebben geen informatie over opmaak naast de "witte ruimte" die wordt gebruikt om tekst uit te lijnen, alinea's aan te geven of pagina-einden in te voegen. Zij zijn niet in staat informatie te bevatten / te behouden met betrekking tot de kleur, lettertype etc. van de tekst. Momenteel ondersteunt <application>OmegaT</application> de volgende platte tekst-formaten:<indexterm class="singular">
           <primary>Bestandsformaten</primary> <secondary>niet opgemaakte</secondary> <seealso>bronbestanden</seealso>
         </indexterm></para>
 
@@ -3715,7 +3712,7 @@
 
       <para>PO-bestanden<indexterm class="singular">
           <primary>Bronbestanden</primary> <secondary>PO als tweetalige bestanden</secondary>
-        </indexterm> mogen zowel bron- als doeltekst bevatten. Vanuit dit oogpunt zijn zij platte tekstbestanden<emphasis> plus</emphasis> vertaalgeheugens. Indien voor een opgegeven bronsegment, als er geen bestaande vertaling in het vertaalgeheugen van het project (project_save.tmx). De vertaling wordt opgeslagen in project_save.tmx als de standaard vertaling. In het geval dat hetzelfde bronsegment al bestaat, maar met een andere vertaling, wordt de nieuwe vertaling geladen als een alternatief.</para>
+        </indexterm> mogen zowel bron- als doeltekst bevatten. Vanuit dit oogpunt zijn zij platte tekstbestanden<emphasis> plus</emphasis> vertaalgeheugens. Indien voor een opgegeven bronsegment nog geen bestaande vertaling in het vertaalgeheugen van het project (project_save.tmx) aanwezig is, zal de huidige vertaling in project_save.tmx worden opgeslagen als de standaard vertaling. In het geval dat hetzelfde bronsegment echter al bestaat, maar met een andere vertaling, wordt de nieuwe vertaling opgeslagen als een alternatief.</para>
     </section>
 
     <section>
@@ -3798,6 +3795,10 @@
 
           <listitem>
             <para>Camtasia voor Windows (*.camproj)</para>
+          </listitem>
+
+          <listitem>
+            <para>Visio (*.vxd)</para>
           </listitem>
         </itemizedlist></para>
 
@@ -3924,7 +3925,7 @@
 
   <chapter id="chapter.translation.editing">
   <title>Bewerken (gedrag)<indexterm class="singular">
-      <primary>menu Opties</primary> <secondary>Bewerken (gedrag)...</secondary>
+      <primary>Menu</primary> <secondary>Opties</secondary> <tertiary>Bewerken (gedrag)...</tertiary>
     </indexterm></title>
 
   <para>Het dialoogvenster in <menuchoice> <guimenu>Opties</guimenu> <guimenuitem>Bewerken (gedrag)...</guimenuitem> </menuchoice> laat de gebruiker bepalen hoe het huidige segment wordt geïnitialiseerd en afgehandeld.</para>
@@ -3954,17 +3955,17 @@
 
     <varlistentry>
       <term>Segment leeg laten<indexterm class="singular">
-          <primary>Bewerken (gedrag)</primary> <secondary>Lege vertaling</secondary>
+          <primary>Menu Opties</primary> <secondary>Bewerken (gedrag)</secondary> <tertiary>Lege vertaling</tertiary>
         </indexterm></term>
 
       <listitem>
-        <para>OmegaT laat het bewerkingsveld leeg. Deze optie stelt u in staat om de vertaling in te voeren zonder de brontekst te hoeven verwijderen, hetgeen u een aantal toetsaanslagen scheelt (<emphasis role="bold">Ctrl+A </emphasis>en <emphasis role="bold">Del). </emphasis> Lege vertalingen zijn nu toegestaan. Zij worden als &lt;LEEG&gt; weergegeven in het bewerkingsvenster. To create one, right-click in a segment, and select "<emphasis role="bold">Set empty translation</emphasis>". The entry <emphasis role="bold">Remove translation</emphasis> in the same popup menu also allows to delete the existing translation of the current segment. U bereikt hetzelfde door het doelsegment leeg te maken en te drukken op <guibutton>Enter.</guibutton></para>
+        <para>OmegaT laat het bewerkingsveld leeg. Deze optie stelt u in staat om de vertaling in te voeren zonder de brontekst te hoeven verwijderen, hetgeen u een aantal toetsaanslagen scheelt (<emphasis role="bold">Ctrl+A </emphasis>en <emphasis role="bold">Del). </emphasis> Lege vertalingen zijn nu toegestaan. Zij worden als &lt;LEEG&gt; weergegeven in het bewerkingsvenster. Klik met rechts in een segment en selecteer "<emphasis role="bold">Lege vertaling instellen</emphasis>". Het item <emphasis role="bold">Vertaling verwijderen</emphasis> in hetzelfde pop-upmenu maakt het ook mogelijk de bestaande vertaling van het huidige segment te verwijderen. U bereikt hetzelfde door het doelsegment leeg te maken en te drukken op <guibutton>Enter.</guibutton></para>
       </listitem>
     </varlistentry>
 
     <varlistentry>
       <term>Beste overeenkomst invoegen<indexterm class="singular">
-          <primary>Bewerken (gedrag)</primary> <secondary>Fuzzy overeenkomsten invoegen</secondary>
+          <primary>Menu Opties</primary> <secondary>Bewerken (gedrag)</secondary> <tertiary>Fuzzy overeenkomsten invoegen</tertiary>
         </indexterm></term>
 
       <listitem>
@@ -3978,15 +3979,24 @@
   <variablelist>
     <varlistentry>
       <term>Poging om nummers te converteren bij het invoegen van een overeenkomst<indexterm class="singular">
-          <primary>Bewerken (gedrag)</primary> <secondary>getallen converteren</secondary>
+          <primary>Menu Opties</primary> <secondary>Bewerken (gedrag)</secondary> <tertiary>Getallen converteren</tertiary>
         </indexterm></term>
 
       <listitem>
-        <para>Als deze optie is geselecteerd probeert OmegaT, als een fuzzy overeenkomst is ingevoegd, handmatig of automatisch, om de getallen in de fuzzy overeenkomst te converteren, zodat in plaats daarvan het getal van de bronsegmenten worden gebruikt. Er zijn een aantal beperkingen.</para>
+        <para>If this option is checked, when a fuzzy match is inserted, either manually or automatically, OmegaT attempts to convert the numbers in the fuzzy matches according to the source contents. Er zijn een aantal beperkingen:</para>
+
         <itemizedlist>
-          <listitem>Het getal of de getallen moet hetzelfde zijn in het bronsegment en in beide overeenkomsten.</listitem>
-          <listitem>De getallen moeten exact hetzelfde zijn in de twee overeenkomsten.</listitem>
-          <listitem>Alleen hele getallen en eenvoudige doubles (geen gelocaliseerde Engelse doubles, bijv. 5.4) worden als getallen beschouwd.</listitem>
+          <listitem>
+            <para>Het bronsegment en de fuzzy overeenkomsten moeten dezelfde lijst met getallen bevatten</para>
+          </listitem>
+        
+          <listitem>
+            <para>De getallen moeten exact hetzelfde zijn tussen de bron en de overeenkomsten voor het doel.</para>
+          </listitem>
+        
+          <listitem>
+            <para>Alleen gehele getallen en eenvoudige getallen met zwevende komma (die de punt als decimaal scheidingsteken gebruiken, bijv. 5.4, maar niet 5,4 of 54E-01) worden in overweging genomen.</para>
+          </listitem>
         </itemizedlist>
       </listitem>
     </varlistentry>
@@ -3995,7 +4005,7 @@
   <variablelist>
     <varlistentry>
       <term>Vertaling mag gelijk zijn aan brontekst<indexterm class="singular">
-          <primary>Bewerken (gedrag)</primary> <secondary>Vertaling gelijk aan brontekst</secondary>
+          <primary>Menu Opties</primary> <secondary>Bewerken (gedrag)</secondary> <tertiary>Vertaling gelijk aan bron</tertiary>
         </indexterm></term>
 
       <listitem>
@@ -4009,7 +4019,7 @@
   <variablelist>
     <varlistentry>
       <term>Segment naar tekstbestanden exporteren<indexterm class="singular">
-          <primary>Bewerken (gedrag)</primary> <secondary>Het huidige segment exporteren</secondary>
+          <primary>Menu Opties</primary> <secondary>Bewerken (gedrag)</secondary> <tertiary>Het huidige segment exporteren</tertiary>
         </indexterm></term>
 
       <listitem>
@@ -4037,7 +4047,7 @@
   <variablelist>
     <varlistentry>
       <term>Ga naar volgende niet-vertaalde segment stopt wanneer er ten minste één alternatieve vertaling is.<indexterm class="singular">
-          <primary>Bewerken (gedrag)</primary> <secondary>Ga naar stoppen bij segment met alternatieve vertaling</secondary>
+          <primary>Menu Opties</primary> <secondary>Bewerken (gedrag)</secondary> <tertiary>Segmenten met alternatieve vertaling</tertiary>
         </indexterm></term>
 
       <listitem>
@@ -4054,9 +4064,9 @@
 
   <section id="default.encoding">
     <title>Standaard codering<indexterm class="singular">
-        <primary>Standaard codering</primary> <secondary>'platte tekst'-bestanden</secondary>
+        <primary>Codering</primary> <secondary>Platte tekstbestanden</secondary>
       </indexterm><indexterm class="singular">
-        <primary>Bronbestanden</primary> <secondary>Standaard codering</secondary>
+        <primary>Bronbestanden</primary> <secondary>coderen</secondary>
       </indexterm></title>
 
     <para>'Platte-tekst'-bestanden - meestal met de extensie .txt - bevatten slechts tekstuele informatie en bieden geen helder gedefinieerde manier om de computer te vertellen welke taal zij bevatten. Het beste dat OmegaT in zo'n geval kan doen, is er van uitgaan dat de tekst is geschreven in de taal die de computer zelf gebruikt. Dit is geen probleem voor bestanden die zijn gecodeerd in Unicode met behulp van een 16-bit tekenset voor codering. Al de tekst echter werd gecodeerd in 8-bit, kan men worden geconfronteerd met de volgende vervelende situatie: in plaats van de tekst weer te geven voor Japanse tekens...</para>
@@ -4087,9 +4097,7 @@
   </section>
 
   <section id="OmegaT.solution">
-    <title>De <application>OmegaT</application>-oplossing<indexterm class="singular">
-        <primary>Standaard codering</primary> <secondary>OmegaT oplossing</secondary>
-      </indexterm></title>
+    <title>De <application>OmegaT</application>-oplossing</title>
 
     <para>Er bestaan in principe drie manieren om dit op te lossen in <application>OmegaT</application>. Zij behelzen allemaal het gebruik van de bestandsfilters in het menu <emphasis role="bold">Opties</emphasis>.</para>
 
@@ -4134,7 +4142,7 @@
     <itemizedlist>
       <listitem>
         <para><literal>.txt1</literal>-bestanden zijn bestanden in ISO-8859-1, geschikt voor de meeste <emphasis role="bold">West-Europese</emphasis> talen.<indexterm class="singular">
-            <primary>Standaard codering</primary> <secondary>Westers</secondary>
+            <primary>Codering</primary> <secondary>Westers</secondary>
           </indexterm></para>
       </listitem>
     </itemizedlist>
@@ -4142,7 +4150,7 @@
     <itemizedlist>
       <listitem>
         <para><literal>.txt2</literal>-bestanden zijn bestanden in ISO-8859-2, die de meeste <emphasis role="bold">Centraal- en Oost-Europese</emphasis> talen ondervangt)<indexterm class="singular">
-            <primary>Standaard codering</primary> <secondary>Centraal- en Oost-Europees</secondary>
+            <primary>Codering</primary> <secondary>Centraal- en Oost-Europees</secondary>
           </indexterm></para>
       </listitem>
     </itemizedlist>
@@ -4150,7 +4158,7 @@
     <itemizedlist>
       <listitem>
         <para><literal>.utf8</literal> bestanden worden door <application>OmegaT</application> geïnterpreteerd als zijnde gecodeerd in UTF-8 (een codering die bijna alle talen in de wereld ondervangt).<indexterm class="singular">
-            <primary>Standaard codering</primary> <secondary>Unicode</secondary>
+            <primary>Codering</primary> <secondary>Unicode</secondary>
           </indexterm></para>
       </listitem>
     </itemizedlist>
@@ -4322,7 +4330,7 @@
       </indexterm></title>
 
     <para>De functie Tags valideren detecteert gewijzigde tags (of dat met opzet is gedaan of per ongeluk) en toont de betrokken segmenten. Het activeren van deze functie – <guimenuitem>Ctrl+T<indexterm class="singular">
-        <primary>Sneltoetsen</primary> <secondary>Ctrl+T - Tagvalidatie</secondary>
+        <primary>Sneltoetsen</primary> <secondary>Tagvalidatie - Ctrl+T</secondary>
       </indexterm></guimenuitem> - zal een venster openen dat alle segmenten uit het bestand, waarvan wordt vermoed dat ze zijn verbroken of slechte tags zijn, bevat. Repareren van de tags en het opnieuw samenstellen van de doeldocumenten is eenvoudig met de functie Tags valideren. Het venster, dat wordt geopend door te drukken op <guimenuitem>Ctrl+T</guimenuitem>, heeft een kolom met 3 tabellen met een koppeling naar het segment, het originele segment en het doelsegment</para>
 
     <figure id="tag.validation">
@@ -4362,6 +4370,8 @@
   <chapter id="chapter.translation.memories">
   <title>Vertaalgeheugens<indexterm class="singular">
       <primary>Vertaalgeheugens</primary>
+    </indexterm><indexterm class="singular">
+      <primary>TMX</primary> <see>Vertaalgeheugens</see>
     </indexterm></title>
 
   <section id="OmegaT.and.tmx.files">
@@ -4420,12 +4430,14 @@
             <para>De inhoud van vertaalgeheugens in de submap tm dienen om suggesties te genereren voor de tekst(en) om te worden vertaald. Elke tekst, reeds vertaald en opgeslagen in deze bestanden, zal tussen de overeenkomsten verschijnen, indien het voldoende overeenkomt met de tekst die momenteel wordt vertaald.</para>
 
             <para>Indien het bronsegment in één van de aanvullende TM's identiek is aan de tekst die wordt vertaald, gedraagt OmegaT zich zoals gedefinieerd is in het dialoogvenster <menuchoice> <guimenu>Opties</guimenu> <guimenuitem>Bewerken (gedrag)...</guimenuitem> </menuchoice>. Bijvoorbeeld (als de standaard is geaccepteerd) zal de vertaling vanuit de aanvullende TM worden geaccepteerd en worden vooraf gegaan door<emphasis> [fuzzy]</emphasis>, zodat de vertaler de vertalingen op een later tijdstip kan nakijken en controleren of segmenten die op deze manier zijn getagd, juist zijn vertaald (zie het hoofdstuk <link linkend="chapter.translation.editing">Bewerken (gedrag)</link>) <menuchoice> <guimenu>.</guimenu> </menuchoice></para>
+
+            <para>Het kan gebeuren dat vertaalgeheugens, beschikbaar in de submap<filename> tm</filename>, segmenten met identieke brontekst bevatten, maar afwijkende doelen. TMX-bestanden worden, gesorteerd op hun naam, gelezen en segmenten binnen een bepaald TMX-bestand regel na regel. Het laatste segment met de identieke brontekst zal dus worden gekozen (Opmerking: natuurlijk is het verstandiger om dit in de eerste plaats in zijn geheel te vermijden).</para>
           </listitem>
         </varlistentry>
 
         <varlistentry>
           <term><indexterm class="singular">
-              <primary>Vertaalgeheugens</primary> <secondary>submap tm/auto</secondary> <seealso>projectbestanden</seealso>
+              <primary>Vertaalgeheugens</primary> <secondary>Submap tm/auto</secondary> <seealso>Projectbestanden</seealso>
             </indexterm>map tm/auto<indexterm class="singular">
               <primary>Project</primary> <secondary>vooraf vertalen</secondary>
             </indexterm></term>
@@ -4529,9 +4541,9 @@
 
     <para>Wanneer u de doeldocumenten maakt in een project van <application>OmegaT</application>, wordt het vertaalgeheugen van het project uitgevoerd in de vorm van drie bestanden in de hoofdmap van uw project van <application>OmegaT</application> (zie de bovenstaande beschrijving). U kunt deze drie TMX-bestanden, (-<filename>omegat.tmx</filename>", "<filename>-level1.tmx</filename>" en "<filename>-level2.tmx</filename>"), beschouwen als een "exporteerbaar vertaalgeheugen", dat is: een export van de inhoud van uw huidige project in tweetalige vorm.</para>
 
-    <para>Indien u een vertaalgeheugen uit een vorig project zou willen gebruiken (bijvoorbeeld omdat het nieuwe project overeenkomt met het eerdere project, of terminologie gebruikt die eerder gebruikt is), kunt u deze vertaalgeheugens gebruiken als "invoer vertaalgeheugens", dat is: om in uw nieuwe project te importeren. In dit geval plaats u de vertaalgeheugens die u wilt gebruiken in de mappen <emphasis>\tm</emphasis> of <emphasis>\tm</emphasis>\auto van uw nieuwe project: in het eerste geval zult u hits van deze vertaalgeheugens in het venster Overeenkomsten krijgen en in het laatste geval zullen deze TM's worden gebruikt om uw brontekst vooraf te vertalen.</para>
+    <para>Indien u een vertaalgeheugen uit een vorig project zou willen gebruiken (bijvoorbeeld omdat het nieuwe project overeenkomt met het eerdere project, of terminologie gebruikt die eerder gebruikt is), kunt u deze vertaalgeheugens gebruiken als "invoer vertaalgeheugens", dat is: om in uw nieuwe project te importeren. In dit geval plaatst u de vertaalgeheugens die u wilt gebruiken in de mappen <emphasis>/tm</emphasis> of <emphasis>/tm</emphasis>/auto van uw nieuwe project: in het eerste geval zult u hits van deze vertaalgeheugens in het venster Overeenkomsten krijgen en in het laatste geval zullen deze TM's worden gebruikt om uw brontekst vooraf te vertalen.</para>
 
-    <para>Standaard staat de map \tm onder de hoofdmap van het project (bijvoorbeeld ...<emphasis>\MijnProject\tm</emphasis>), maar u kunt een andere map kiezen in het dialoogvenster Projecteigenschappen als u dat wilt. Dit is handig als u regelmatig eerder gemaakte vertaalgeheugens gebruikt, bijvoorbeeld omdat zij over hetzelfde onderwerp gaan of voor dezelfde klant zijn. In dit geval zou een handige procedure zijn:</para>
+    <para>Standaard staat de map /tm onder de hoofdmap van het project (bijvoorbeeld ...<emphasis>/MijnProject/tm</emphasis>), maar u kunt in het dialoogvenster Projecteigenschappen een andere map kiezen als u dat wilt. Dit is handig als u regelmatig eerder gemaakte vertaalgeheugens gebruikt, bijvoorbeeld omdat zij over hetzelfde onderwerp gaan of voor dezelfde klant zijn. In dit geval zou een handige procedure zijn:</para>
 
     <itemizedlist>
       <listitem>
@@ -4601,7 +4613,7 @@
         <primary>Vertaalgeheugens</primary> <secondary>bijwerken naar zinsegmentatie</secondary>
       </indexterm></title>
 
-    <para>Hele vroege versies van <application>OmegaT</application> waren slechts in staat bronbestanden in alinea's te segmenteren en nummerden de opmaaktags in HTML- en Open Document-bestanden niet consistent. <application>OmegaT</application> 2.5 kan dergelijke TMX-bestanden herkennen en direct bijwerken om de kwaliteit van de fuzzy overeenkomsten te vergroten en uw vertaling op peil te brengen, zodat u dat werk niet handmatig hoeft te doen.</para>
+    <para>Hele vroege versies van <application>OmegaT</application> waren slechts in staat bronbestanden in alinea's te segmenteren en nummerden de tags voor opmaak in HTML- en Open Document-bestanden niet consistent. <application>OmegaT</application> 2.5 kan dergelijke TMX-bestanden herkennen en direct bijwerken om de kwaliteit van de fuzzy overeenkomsten te vergroten en uw vertaling op peil te brengen, zodat u dat werk niet handmatig hoeft te doen.</para>
 
     <para>De TMX van een project wordt maar één keer bijgewerkt en zal in de bijgewerkte vorm worden weggeschreven in <filename>project-save.tmx</filename>; eerder gemaakte TMX-bestanden worden, elke keer als het project wordt geladen, direct bijgewerkt. Wees er attent op dat sommige wijzigingen in bestandsfilters in <application>OmegaT</application> 2.5 zouden kunnen leiden tot totaal afwijkende segmentatie; als resultaat daarvan moet u in zulke zeer uitzonderlijke gevallen uw vertaling handmatig bijwerken.</para>
   </section>
@@ -4695,7 +4707,7 @@
         <primary>Segmentatie</primary> <secondary>een nieuwe regel maken</secondary> <seealso>reguliere uitdrukkingen</seealso>
       </indexterm></title>
 
-    <para>Grote wijzigingen aan de segmentatieregels zouden in het algemeen moeten wordne vermeden, speciaal na het voltooien van een eerste gang, maar kleinere wijzigingen, zoals het toevoegen van een herkende afkorting, kan voordelen bieden.</para>
+    <para>Grote wijzigingen aan de segmentatieregels zouden in het algemeen moeten worden vermeden, speciaal na het voltooien van een eerste gang, maar kleinere wijzigingen, zoals het toevoegen van een herkende afkorting, kan voordelen bieden.</para>
 
     <para>Klik eenvoudigweg op een verzameling van regels in de bovenste tabel om die te bewerken of uit te breiden. De regels voor die verzameling zullen in het onderste gedeelte van het venster verschijnen.</para>
 
@@ -4733,13 +4745,13 @@
 
         <tbody>
           <row>
-            <entry>Stel een segment in na een punt ('.') en vóór een spatie</entry>
+            <entry>Stel een segment in na een punt ('.') gevolgd door een spatie, tab ...</entry>
 
             <entry align="center">\.</entry>
 
             <entry align="center">\s</entry>
 
-            <entry>"\." betekent het teken "." "\s" betekent elk teken voor witruimte ((spatie, tab, nieuw pagina etc.)</entry>
+            <entry>"\." staat voor het teken punt. "\s" betekent elk teken voor witruimte (spatie, tab, nieuwe pagina etc.)</entry>
           </row>
 
           <row>
@@ -4807,7 +4819,7 @@
 
     <section>
       <title>Zoeken<indexterm class="singular">
-          <primary>Sneltoetsen</primary> <secondary>Ctrl+F - Zoeken</secondary>
+          <primary>Sneltoetsen</primary> <secondary>Zoeken - Ctrl+F</secondary>
         </indexterm></title>
 
       <para><application>OmegaT</application> verschaft een groot scala aan zoekfuncties. Open het venster Zoeken met <keycombo> <keycap>Ctrl</keycap> <keycap>F</keycap> </keycombo> en voer het woord of de frase waarnaar u wilt zoeken in het vak "Zoeken naar" in. Als alternatief: selecteer een woord of frase ergens in het bewerkingsveld en druk op <keycombo> <keycap>Ctrl</keycap> <keycap>F</keycap> </keycombo>. Het woord of de frase wordt automatisch ingevoegd in het vak "Zoeken naar". U kunt verschillende vensters Zoeken tegelijkertijd geopend hebben, maar sluit ze als u ze niet langer nodig hebt zodat zij uw bureaublad niet vol zetten.</para>
@@ -5520,10 +5532,8 @@
     <itemizedlist>
       <listitem>
         <para>Zoek naar de gewenste taalcombinatie -bijvoorbeeld op het <ulink url="http://stardict.sourceforge.net/index.php"><indexterm class="singular">
-            <primary>FreeDict</primary> <seealso>woordenboeken</seealso>
-          </indexterm>StartDict Platform</ulink> hierboven of op <ulink url="http://www.freedict.org/en/list.html">FreeDict<indexterm class="singular">
-            <primary>Stardict</primary> <seealso>woordenboeken</seealso>
-          </indexterm></ulink></para>
+            <primary>Woordenboeken</primary> <secondary>StarDict, FreeDict</secondary>
+          </indexterm>StartDict Platform</ulink> hierboven of op <ulink url="http://www.freedict.org/en/list.html">FreeDict</ulink></para>
       </listitem>
     </itemizedlist>
 
@@ -5544,7 +5554,7 @@
     <itemizedlist>
       <listitem>
         <para><indexterm class="singular">
-            <primary>Webster</primary> <seealso>woordenboeken</seealso>
+            <primary>Woordenboeken</primary> <secondary>Webster</secondary>
           </indexterm>Webster's Revised Unabridged Dictionary (1913)</para>
       </listitem>
     </itemizedlist>
@@ -5552,7 +5562,7 @@
     <itemizedlist>
       <listitem>
         <para><indexterm class="singular">
-            <primary>Longman</primary> <seealso>woordenboeken</seealso>
+            <primary>Woordenboeken</primary> <secondary>Longman</secondary>
           </indexterm>Longman Dictionary of Contemporary English</para>
       </listitem>
     </itemizedlist>
@@ -5560,8 +5570,8 @@
     <itemizedlist>
       <listitem>
         <para><indexterm class="singular">
-            <primary>Britannica</primary> <seealso>woordenboeken</seealso>
-          </indexterm>The Britannica Concise Encyclopedia</para>
+            <primary>Woordenboeken</primary> <secondary>Britannica</secondary>
+          </indexterm>De Britannica Concise Encyclopedia</para>
       </listitem>
     </itemizedlist>
 
@@ -5575,7 +5585,7 @@
 
     <figure id="Dict.Merriam.Webster">
       <title><indexterm class="singular">
-          <primary>woordenboek</primary> <secondary>Merriam Webster - afbeelding</secondary> <seealso>woordenboeken</seealso>
+          <primary>Woordenboeken</primary> <secondary>Merriam Webster</secondary> <seealso>Woordenboeken</seealso>
         </indexterm>Merriam Webster woordenboek - gebruiken</title>
 
       <mediaobject>
@@ -5598,7 +5608,7 @@
     <itemizedlist>
       <listitem>
         <para>Controleer of uw bestanden van het woordenboek in de juiste map (of in één van de submappen daarvan) staan. Controleer in <menuchoice> <shortcut> <keycombo> <keycap><indexterm class="singular">
-                    <primary>Sneltoetsen</primary> <secondary>Ctrl+E - Projecteigenschappen</secondary>
+                    <primary>Sneltoetsen</primary> <secondary>Projecteigenschappen - Ctrl+E</secondary>
                   </indexterm>Ctrl</keycap> <keycap>E</keycap> </keycombo> </shortcut> <guimenu>Project</guimenu><guimenuitem>eigenschappen</guimenuitem> </menuchoice>.</para>
       </listitem>
     </itemizedlist>
@@ -5632,7 +5642,7 @@
       </indexterm> <filename>/glossary</filename>, na het maken van het project, om die te gebruiken. <application>OmegaT</application> detecteert automatisch woordenlijstbestanden in deze map als een project wordt geopend. Termen in het huidige segment die <application>OmegaT</application> vindt in het/de woordenlijstbestand(en) worden weergegeven in het venster Woordenlijst:</para>
 
     <indexterm class="singular">
-      <primary>venster Woordenlijst</primary>
+      <primary>Woordenlijsten, venster Woordenlijst</primary>
     </indexterm>
 
     <figure>
@@ -5640,22 +5650,22 @@
 
       <mediaobject>
         <imageobject role="html">
-          <imagedata fileref="images/Glossarypane_25.png"/>
+          <imagedata fileref="images/GlossaryPane_25.png"/>
         </imageobject>
 
         <imageobject role="fo">
-          <imagedata fileref="images/Glossarypane_25.png" width="60%"/>
+          <imagedata fileref="images/GlossaryPane_25.png" width="60%"/>
         </imageobject>
       </mediaobject>
     </figure>
 
-    <para>Het woord voor het =-teken is de bronterm en de vertaling is (of zijn) de woorden na =. Het woordenlijst-item kan een opmerking toegevoegd hebben (zie "bedrijvend werkwoord" voor het tweede item). De functie woordenlijst vindt alleen exacte overeenkomsten met het woordenlijst-item (bijv. vindt geen afgeleide vormen etc.). Nieuwe termen kunnen handmatig aan de woordenlijstbestanden worden toegevoegd tijdens het vertalen (bijvoorbeeld in een tekstverwerkingsprogramma), maar nieuw toegevoegde termen worden niet herkend totdat het project opnieuw wordt geladen.</para>
+    <para>Het woord voor het =-teken is de bronterm en de vertaling is (of zijn) de woorden na =. Het woordenlijst-item kan een opmerking toegevoegd hebben (zie "bedrijvend werkwoord" voor het tweede item). De functie woordenlijst vindt alleen exacte overeenkomsten met het woordenlijst-item (bijv. vindt geen afgeleide vormen etc.). Nieuwe termen kunnen handmatig aan de bestanden voor de woordenlijst worden toegevoegd tijdens het vertalen,bijvoorbeeld in een tekstverwerkingsprogramma. Nieuw toegevoegde termen worden niet herkend vóórdat de wijzigingen in het tekstbestand zijn opgeslagen.</para>
 
     <para>De bronterm behoeft geen item met één woord te zijn, zoals het volgende voorbeeld laat zien:</para>
 
     <figure>
       <title>items met meerdere woorden in woordenlijsten - voorbeeld<indexterm class="singular">
-          <primary>venster Woordenlijst - items met meerdere woorden</primary>
+          <primary>Woordenlijsten</primary> <secondary>venster Woordenlijst</secondary> <tertiary>items met meerdere woorden</tertiary>
         </indexterm></title>
 
       <mediaobject>
@@ -5670,7 +5680,7 @@
     </figure>
 
     <para>Het onderstreepte item "pop-upmenu" kan worden gevonden in het venster Woordenlijst als "pojavni menu". Door het te accentueren in het venster Woordenlijst en er dan met rechts op te klikken voegt het in op de cursorpositie in het doelsegment.<footnote>
-        <para>Onthoud dat in het bovenstaande geval, dit slechts het halve verhaal (of zelfs nog minder is) is, omdat de doeltaal (Sloveens) verbuigingen gebruikt. Het ingevoegde "pojavni meni" moet dus worden gewijzigd naar "pojavnem meniju". Met andere woorden: het typen van de juiste term, zonder te accentueren en met rechts te klikken, is waarschijnlijk sneller.</para>
+        <para>Onthoud dat in het bovenstaande geval, dit slechts het halve verhaal (of zelfs nog minder is) is, omdat de doeltaal (Sloveens) verbuigingen gebruikt. Dus het ingevoegde "pojavni meni" in de nominatieve vorm - moet worden gewijzigd naar "pojavnem meniju", d.i. naar de locatief. Dus is het waarschijnlijk sneller om de term direct correct in te typen zonder u bezig te houden met de woordenlijst en de sneltoetsen daarvan.</para>
       </footnote></para>
   </section>
 
@@ -5689,9 +5699,7 @@
 
     <para>In aanvulling op het platte tekst-formaat, wordt TBX-formaat <indexterm class="singular">
         <primary>Woordenlijsten</primary> <secondary>TBX-formaat</secondary>
-      </indexterm> ook ondersteund. TBX - Term Base eXchange - is de open, op XML gebaseerde standaard voor de uitwisseling van gestructureerde terminologische gegevens. TBX is goedgekeurd als een internationale standaard door LISA<indexterm class="singular">
-        <primary>LISA-</primary><secondary>bestandsformaat</secondary>
-      </indexterm> en ISO. Als u een bestaand systeem hebt voor de afhandeling van terminologie - MultiTerm bijvoorbeeld - is het zeer wel mogelijk dat het de mogelijkheid biedt om gegevens van terminologie in TBX-formaat te exporteren. <ulink url="http://www.microsoft.com/Language/en-US/Terminology.aspx">Microsoft Terminology Collection</ulink> <indexterm class="singular">
+      </indexterm> ook ondersteund. TBX - Term Base eXchange - is de open, op XML gebaseerde standaard voor de uitwisseling van gestructureerde terminologische gegevens. TBX is goedgekeurd als een internationale standaard door LISA en ISO. Als u een bestaand systeem hebt voor de afhandeling van terminologie - MultiTerm bijvoorbeeld - is het zeer wel mogelijk dat het de mogelijkheid biedt om gegevens van terminologie in TBX-formaat te exporteren. <ulink url="http://www.microsoft.com/Language/en-US/Terminology.aspx">Microsoft Terminology Collection</ulink> <indexterm class="singular">
         <primary>Woordenlijsten</primary> <secondary>Microsoft Terminology collectie</secondary>
       </indexterm>kan worden gedownload in bijna 100 talen en kan dienen als hoeksteen IT-woordenlijst.</para>
   </section>
@@ -5701,7 +5709,7 @@
         <primary>Woordenlijsten</primary> <secondary>een woordenlijst maken</secondary>
       </indexterm></title>
 
-    <para>De projectinstellingen maken het mogelijk een naam in te voeren voor een te beschrijven woordenlijstbestand (zie het begin van dit hoofdstuk). Nieuwe items toevoegen wordt gedaan met behulp van de sneltoets voor het toetsenbord <keycap>Ctrl+Shift+G</keycap>. Een dialoogvenster opent en maakt het u mogelijk maken een bronterm, doelterm en opmerkingen die u zou kunnen hebben in te voeren:</para>
+    <para>De projectinstellingen maken het mogelijk een naam in te voeren voor een te beschrijven woordenlijstbestand (zie het begin van dit hoofdstuk). Nieuwe items toevoegen wordt gedaan met behulp van de sneltoets voor het toetsenbord <keycap>Ctrl+Shift+G</keycap>. Een dialoogvenster opent en maakt het u mogelijk de bronterm, doelterm en opmerkingen die u zou kunnen hebben in te voeren:</para>
 
     <mediaobject role="html">
       <imageobject>
@@ -5717,7 +5725,7 @@
 
     <para><indexterm class="singular">
         <primary>Woordenlijsten</primary> <secondary>Locatie van het te beschrijven bestand voor de woordenlijst</secondary>
-      </indexterm>De locatie van het te beschrijven bestand voor de woordenlijst kan worden ingesteld in het dialoogvenster Project &gt; Eigenschappen .... De te herkennen extensies zijn <filename>TXT</filename> en <filename>UTF8</filename>.</para>
+      </indexterm>De locatie van het te beschrijven bestand voor de woordenlijst kan worden ingesteld in het dialoogvenster <guimenuitem>Project &gt; Eigenschappen ...</guimenuitem>. De te herkennen extensies zijn <filename>TXT</filename> en <filename>UTF8</filename>.</para>
 
     <para><emphasis role="bold">Opmerking: </emphasis>Natuurlijk zijn er andere manieren en mogelijkheden om een eenvoudig bestand met tabgescheiden items te maken. Er is niets tegen het gebruiken van Notepad++ op Windows of GEdit op Linux of een werkbladprogramma voor dit doel: elk programma dat UTF8 kan afhandelen en witruimte weer kan geven (zodat de vereiste <keycap>TAB</keycap>-tekens u niet ontgaan) kan worden gebruikt.</para>
   </section>
@@ -5844,7 +5852,7 @@
     <para>De Spaanse vertaling is beter dan de Sloveense. Merk op dat <emphasis>interesar</emphasis> en<emphasis> navegar</emphasis> in het Spaans correct zijn vertaald als respectievelijk de werkwoorden interest en sail. In de Sloveense versie worden beide woorden vertaald als zelfstandige naamwoorden. Het is eigenlijk zeer waarschijnlijk dat de Spaanse vertaling, ten minste gedeeltelijk, is gebaseerd op de actuele vertaling van het boek.</para>
 
     <para>Vanaf het moment dat de service is geactiveerd zal er een suggestie voor de vertaling verschijnen in het venster Machinevertaling voor elk nieuw bronsegment dat wordt geopend. Indien u de suggestie acceptabel vindt, druk op <keycombo> <keycap><indexterm class="singular">
-            <primary>Sneltoetsen</primary> <secondary>Ctrl+M - Machinevertaling</secondary>
+            <primary>Sneltoetsen</primary> <secondary>Machinevertaling - Ctrl+M</secondary>
           </indexterm>Ctrl</keycap> <keycap>M</keycap> </keycombo> om het doelgedeelte van het geopende segment te vervangen. In het segment hierboven, bijvoorbeeld, zou <keycombo> <keycap>Ctrl</keycap> <keycap>M</keycap> </keycombo> de Spaanse versie overschrijven met de Sloveense suggestie.</para>
 
     <para>Indien u niet wilt dat <application>OmegaT</application> uw bronsegmenten verstuurt naar Google om te worden vertaald, verwijdert u het vinkje vóór het menuitem Google Translate in Opties.</para>
@@ -5909,7 +5917,7 @@
       </listitem>
 
       <listitem>
-        <para>Google Translate werkt niet: heeft u <ulink url="https://developers.google.com/translate/v2/faq">Translate API service</ulink> toegepast? Onthoud dat de service Google Translate niet gratis is. Bekijk hoofdstuk <link linkend="chapter.installing.and.running">Installeren en uitvoeren</link> (parameters voor runtime) voor meer daarover.</para>
+        <para>Google Translate werkt niet: heeft u <ulink url="https://developers.google.com/translate/v2/faq">Translate API service</ulink> toegepast? Onthoud dat de service Google Translate niet gratis is, bekijk hoofdstuk <link linkend="chapter.installing.and.running">Installeren en uitvoeren</link> (parameters voor runtime) voor meer daarover.</para>
       </listitem>
 
       <listitem>
@@ -5918,6 +5926,10 @@
 
       <listitem>
         <para>Google Translate werkt niet: - met de sleutel voor de Google API ingevoerd zoals vereist. Controleer in Opties &gt; Machinevertaling of Google Translate V2 is geselecteerd.</para>
+      </listitem>
+
+      <listitem>
+        <para>Google Translate V2 rapporteert "Bad request" - controleer de bron- en doeltalen voor uw project. Het niet gedefinieerd hebben van talen leidt tot een dergelijk soort antwoord.</para>
       </listitem>
     </itemizedlist>
   </section>
@@ -5944,7 +5956,7 @@
     <itemizedlist>
       <listitem>
         <para>Selecteer, in OmegaT, <guisubmenu><indexterm class="singular">
-            <primary>menu Opties</primary> <secondary>spellingscontrole...</secondary>
+            <primary>Menu Opties</primary> <secondary>Spellingscontrole</secondary>
           </indexterm></guisubmenu><guimenuitem>Opties &gt; Spellingscontrole</guimenuitem>, en klik dan op <guibutton>Kiezen </guibutton>naast het veld map Woordenboek-bestand. Navigeer naar en selecteer de map die u hebt gemaakt voor de woordenboeken.</para>
       </listitem>
     </itemizedlist>
@@ -5959,23 +5971,21 @@
 
     <figure id="spellchecker.setup">
       <title><indexterm class="singular">
-          <primary>Instellen spellingscontrole</primary> <secondary>Instellen spellingscontrole - afbeelding</secondary>
+          <primary>Spellingscontrole</primary> <secondary>Spellingscontrole instellen </secondary>
         </indexterm>Spellingscontrole instellen</title>
 
       <mediaobject>
         <imageobject role="html">
           <imagedata fileref="images/SpellcheckerSetup_25.png"/>
         </imageobject>
-      </mediaobject>
 
-      <mediaobject>
         <imageobject role="fo">
           <imagedata fileref="images/SpellcheckerSetup_25.png" width="80%"/>
         </imageobject>
       </mediaobject>
     </figure>
 
-    <para>Klikken op de knop <guibutton>Nieuw woordenboek installeren</guibutton> zal het installatievenster Woordenboek openen, waar u de woordenboeken kunt selecteren die u wilt installeren. Zorg er voor dat de taalcode van de doelbestanden correspondeert met de taalcode van het woordenboek: een FR-FR woordenboek zal niet werken met de instelling FR voor het doel. U zult de instelling naar FR-FR moeten wijzigen om de spellingscontrole het juiste woordenboek voor uw doel te laten herkennen. Zoek naar bestanden met de naam, verwijzend naar de gebruikte taal en die de extensies <emphasis>aff</emphasis> en <emphasis>dic.</emphasis> hebben.</para>
+    <para>Klikken op de knop <guibutton>Nieuw woordenboek installeren</guibutton> zal het installatievenster Woordenboek openen, waar u de woordenboeken kunt selecteren die u wilt installeren. Zorg er voor dat de taalcode van de doelbestanden correspondeert met de taalcode van het woordenboek: een FR-FR woordenboek zal niet werken met de instelling FR voor het doel U zult de instelling naar FR-FR moeten wijzigen om de spellingscontrole het juiste woordenboek voor uw doel te laten herkennen. Zoek naar bestanden met de naam, verwijzend naar de gebruikte taal en die de extensies <emphasis>aff</emphasis> en <emphasis>dic.</emphasis> hebben.</para>
   </section>
 
   <section>
@@ -5986,11 +5996,7 @@
     <para>Selecteer <guimenuitem>Opties &gt; Spellingscontrole</guimenuitem> en selecteer het keuzevak <guilabel>Automatische spellingscontrole</guilabel> (zie boven) om de spellingscontrole in te schakelen.</para>
 
     <figure id="spellchecker.in.action">
-      <title><indexterm class="singular">
-          <primary>Spellingscontrole</primary> <secondary>Spellingscontrole - afbeelding</secondary>
-        </indexterm>Spellingscontrole in actie</title>
-
-      <mediaobject>
+        <mediaobject>
         <imageobject role="html">
           <imagedata fileref="images/SpellcheckingText.png"/>
         </imageobject>
@@ -6118,7 +6124,7 @@
 
   <section>
     <title>Automatisch vergelijken van Java-eigenschappen<indexterm class="singular">
-        <primary>Diversen</primary> <secondary>Automatisch vergelijken van Java-eigenschappen</secondary> <seealso>diversen</seealso>
+        <primary>Diversen</primary> <secondary>Automatisch vergelijken van Java-eigenschappen</secondary>
       </indexterm></title>
 
     <para>OmegaT kan Java .properties vergelijken in modus console. Indien u de Properties-bestanden voor bron en doel voor één en dezelfde inhoud in uw taalpaar hebt, zal deze procedure een overeenkomend tmx-bestand maken voor deze inhoud. Gebruik:</para>
@@ -6294,9 +6300,9 @@
   </section>
 
   <section>
-    <title>Specifiek voor Mac OSX</title>
+    <title>Mac OS X specifieken</title>
 
-    <para>Indien u de tokenizers wilt gebruiken met het Mac OSX OmegaT.app pakket is de installatie van de tokenizer zoals die hierboven is vermeld van toepassing (klik met rechts op de OmegaT.app om de locatie van OmegaT.jar te vinden), maar u zult de namen van de tokenizers moeten specificeren in <filename>info.plist </filename>dat de startopties voor Java bevat. Volg bovenstaande instructies om toegang te krijgen tot het bestand <filename>info.plist</filename> en bewerk het zodanig dat het er als volgt uitziet voor het voorbeeld dat we zojuist gaven:</para>
+    <para>Indien u de tokenizers wilt gebruiken met het Mac OS X OmegaT.app pakket is de installatie van de tokenizer zoals die hierboven is vermeld van toepassing (klik met rechts op de OmegaT.app om de locatie van OmegaT.jar te vinden), maar u zult de namen van de tokenizers moeten specificeren in <filename>info.plist </filename>dat de startopties voor Java bevat. Volg bovenstaande instructies om toegang te krijgen tot het bestand <filename>info.plist</filename> en bewerk het zodanig dat het er als volgt uitziet voor het voorbeeld dat we zojuist gaven:</para>
 
     <literallayout><code>
 &lt;key&gt;VMOptions&lt;/key&gt;
@@ -6327,12 +6333,12 @@
 12719: Info: Target tokenizer: org.omegat.core.matching.Tokenizer 
 </code></literallayout>
 
-    <para>Met het Mac OSX OmegaT.app pakket moet u dubbelklikken op de <literal>JavaApplicationStub</literal> die is geplaatst in /OmegaT.app/Contents/MacOS/ (kijk hierboven om toegang te verkrijgen) om OmegaT te starten vanuit de console en direct toegang te hebben tot het log.</para>
+    <para>Met het Mac OS X OmegaT.app pakket moet u dubbelklikken op de <literal>JavaApplicationStub</literal> die is geplaatst in /OmegaT.app/Contents/MacOS/ (kijk hierboven om toegang te verkrijgen) om OmegaT te starten vanuit de console en direct toegang te hebben tot het log.</para>
   </section>
 </appendix>
   
   <appendix id="appendix.LanguageToolPlugin.inOmegaT">
-  <title>plugin LanguageTool<indexterm class="singular">
+  <title>plug-in LanguageTool<indexterm class="singular">
       <primary>Plugins</primary>
 
       <secondary>LanguageTool</secondary>
@@ -6341,7 +6347,7 @@
   <section>
     <title>Introductie</title>
 
-    <para>LanguageTool is een Open Source-programma om stijl en grammatica proef te lezen voor Engels, Frans, Duits, Pools, Nederlands, Roemeens, en nog heel veel andere talen - bekijk de lijst met ondersteunde talen op (<ulink url="???">http://www.languagetool.org/languages/</ulink>) .</para>
+    <para>LanguageTool is een Open Source-programma om stijl en grammatica proef te lezen voor Engels, Frans, Duits, Pools, Nederlands, Roemeens en nog heel veel andere talen - bekijk de lijst met ondersteunde talen op (<ulink url="???">http://www.languagetool.org/languages/</ulink>) .</para>
 
     <para>U kunt LanguageTool bekijken als een programma om fouten op te sporen die een eenvoudige spellingscontrole niet kan ontdekken, bijv. verwisselen van hen/hun, no/now etc. Het kan ook enkele grammaticale fouten opsporen. Het bevat geen spellingscontrole. LanguageTool zal fouten vinden waarvoor een regel is gedefinieerd in zijn taalspecifieke configuratiebestanden.</para>
 
@@ -6363,7 +6369,7 @@
 
     <para>De plug-in LanguageTool voor OmegaT kan worden gedownload vanaf de downloadsite voor OmegaT plug-ins (<ulink url="???">http://sourceforge.net/projects/omegat-plugins/files/</ulink>). Pak de bestanden uit en plaats ze allemaal in de map "plugins" die zich bevindt in de installatiemap van OmegaT, dat is de map waarin OmegaT.jar staat. Maak eerst de map "plugins" als die niet bestaat.</para>
 
-    <para>Eenmaal geïnstalleerd zal de plug-in automatisch worden gebruikt door OmegaT, als <guimenuitem>Opties &gt; Taalcontrole</guimenuitem> is aangevinkt. De toegepaste regels (indien aanwezig) zullen afhankelijk zijn van de bron- en doeltaal van het project. Wanneer een regel wordt gecativeerd zal de overeenkomende frase met blauw worden onderstreept in het Bewerkingsvenster (bekijk <emphasis>ook </emphasis>en <emphasis>Ik deed niets</emphasis> in de afbeelding hierboven). Indien met de muis over een onderstreepte frase wordt gegaan, zal een omschrijving verschijnen.</para>
+    <para>Eenmaal geïnstalleerd zal de plug-in automatisch worden gebruikt door OmegaT, als <guimenuitem>Opties &gt; Taalcontrole</guimenuitem> is aangevinkt. De toegepaste regels (indien aanwezig) zullen afhankelijk zijn van de bron- en doeltaal van het project. Wanneer een regel wordt geactiveerd zal de overeenkomende frase met blauw worden onderstreept in het Bewerkingsvenster (bekijk <emphasis>ook </emphasis>en <emphasis>Ik deed niets</emphasis> in de afbeelding hierboven). Indien met de muis over een onderstreepte frase wordt gegaan, zal een omschrijving verschijnen.</para>
   </section>
 </appendix>
   
@@ -6383,7 +6389,7 @@
 
     <para>De plug-in Scripting voor OmegaT kan worden gedownload vanaf de downloadsite voor OmegaT plug-ins (<ulink url="???">http://sourceforge.net/projects/omegat-plugins/files/</ulink>). Pak de bestanden uit en plaats ze allemaal in de map "plugins" die zich bevindt in de installatiemap van OmegaT, dat is de map waarin OmegaT.jar staat. Maak eerst de map "plugins" als die niet bestaat.</para>
 
-    <para>Dit voegt een nieuw submenu<guisubmenu> Extra &gt; </guisubmenu><guisubmenu>Scripten toe.</guisubmenu> Onder het submenu <guisubmenu>Scripting</guisubmenu> zijn vijf tijdelijke plaatsaanduidingen beschikbaar voor scripts. Klikken op <guisubmenu>Scripten</guisubmenu> opent het dialoogvenster Scripten:<screenshot> <screeninfo>dialoogvenster Scripten</screeninfo> <mediaobject> <imageobject> <imagedata fileref="images/ScriptingDialog.png"/> </imageobject> </mediaobject> </screenshot></para>
+    <para>Dit voegt een nieuw submenu<guisubmenu> Extra &gt; </guisubmenu><guisubmenu>Scripten</guisubmenu> toe. Onder het submenu <guisubmenu>Scripten</guisubmenu> zijn vijf tijdelijke plaatsaanduidingen beschikbaar voor scripts. Klikken op <guisubmenu>Scripten</guisubmenu> opent het dialoogvenster Scripten:<screenshot> <screeninfo>dialoogvenster Scripten</screeninfo> <mediaobject> <imageobject> <imagedata fileref="images/ScriptingDialog.png"/> </imageobject> </mediaobject> </screenshot></para>
 
     <para>Het dialoogvenster Scripten maakt het voor u mogelijk om een bestaand script in het tekstgebied te laden en het uit te voeren tegen het huidige geopende project. Doe het volgende om de mogelijkheid voor scripten aan te passen:</para>
 
@@ -6465,7 +6471,7 @@
         <primary>OmegaT op het web</primary> <secondary>SourceForge Project</secondary>
       </indexterm></title>
 
-    <para>De<ulink url="http://www.omegat.org/"> <application>OmegaT</application>-website </ulink>bevat koppelingen naar verschillende bronnen voor <application>OmegaT</application>. Ondersteuning voor gebruikers wordt gegeven op vrijwillige basis op de <ulink url="http://groups.yahoo.com/group/omegat/"><application>OmegaT</application> Yahoo gebruikersgroep</ulink>. De <ulink url="http://tech.groups.yahoo.com/group/omegat/database?method=reportRows&amp;amp;tbl=1">FAQ </ulink> is een goed beginpunt om antwoorden te vinden op vragen die u misschien hebt. Bekijk de downloadpagina op www.omegat.org voor de laatste versie van OmegaT. U kunt ook <ulink url="http://sourceforge.net/tracker/?group_id=68187&amp;amp;atid=520347">foutenrapporten</ulink> en <ulink url="http://sourceforge.net/tracker/?group_id=68187&amp;amp;atid=52035">verzoeken voor verbeteringen</ulink> indienen.</para>
+    <para>De<ulink url="http://www.omegat.org/"> <application>OmegaT</application>-website </ulink>bevat koppelingen naar verschillende bronnen voor <application>OmegaT</application>. Ondersteuning voor gebruikers wordt op vrijwillige basis gegeven op de <ulink url="http://groups.yahoo.com/group/omegat/"><application>OmegaT</application> Yahoo! gebruikersgroep</ulink>. De <ulink url="http://tech.groups.yahoo.com/group/omegat/database?method=reportRows&amp;amp;tbl=1">FAQ </ulink> is een goed beginpunt om antwoorden te vinden op vragen die u misschien hebt. Bekijk de downloadpagina op www.omegat.org voor de laatste versie van OmegaT. U kunt ook <ulink url="http://sourceforge.net/tracker/?group_id=68187&amp;amp;atid=520347">foutenrapporten</ulink> en <ulink url="http://sourceforge.net/tracker/?group_id=68187&amp;amp;atid=52035">verzoeken voor verbeteringen</ulink> indienen.</para>
   </section>
 
   <section id="bug.reports">
@@ -7649,7 +7655,7 @@
 
   <section id="ch04.shortcuts.customization">
     <title><indexterm class="singular">
-        <primary>Sneltoetsen - aanpassen</primary> <secondary>Aanpassen</secondary>
+        <primary>Sneltoetsen van toetsenbord</primary> <secondary>aanpassen</secondary>
       </indexterm>Aanpassen van sneltoetsen toetsenbord</title>
 
     <para>Aan de meeste items die verschijnen in het hoofdmenu kan een sneltoets worden toegewezen. Alleen aan de meest algemeen gebruikte menuitems zijn standaard sneltoetsen toegewezen. U kunt de reeds toegewezen sneltoetsen wijzigen en nieuwe sneltoetsen toevoegen door een bestand met definities voor de sneltoetsen in uw map voor voorkeuren voor OmegaT te plaatsen (zie <link linkend="user.files.location">Locatie gebruikersbestanden</link>).</para>
@@ -7717,10 +7723,6 @@
 
     <table>
       <title>menu Project</title>
-
-      <indexterm class="singular">
-        <primary>Sneltoetsen aanpassen</primary> <secondary>menu Project</secondary>
-      </indexterm>
 
       <tgroup cols="3" colsep="1">
         <colspec align="left" colname="1" colnum="1" colwidth="120"/>
@@ -7837,10 +7839,6 @@
 
     <table>
       <title>menu Bewerken</title>
-
-      <indexterm class="singular">
-        <primary>Sneltoetsen aanpassen</primary> <secondary>menu Bewerken</secondary>
-      </indexterm>
 
       <tgroup cols="3" colsep="1">
         <colspec align="left" colname="1" colnum="1" colwidth="120"/>
@@ -8030,9 +8028,6 @@
     <table>
       <title>menu Ga naar</title>
 
-      <indexterm class="singular">
-        <primary>Sneltoetsen aanpassen</primary> <secondary>menu Ga naar</secondary>
-      </indexterm>
 
       <tgroup cols="3" colsep="1">
         <colspec align="left" colname="1" colnum="1" colwidth="120"/>
@@ -8198,9 +8193,6 @@
     <table>
       <title>menu Extra</title>
 
-      <indexterm class="singular">
-        <primary>Sneltoetsen aanpassen</primary> <secondary>menu Extra</secondary>
-      </indexterm>
 
       <tgroup cols="3" colsep="1">
         <colspec align="left" colname="1" colnum="1" colwidth="120"/>
@@ -8254,9 +8246,6 @@
     <table>
       <title>menu Opties</title>
 
-      <indexterm class="singular">
-        <primary>Sneltoetsen aanpassen</primary> <secondary>menu Opties Menu</secondary>
-      </indexterm>
 
       <tgroup cols="3" colsep="1">
         <colspec align="left" colname="1" colnum="1" colwidth="120"/>
@@ -8422,10 +8411,6 @@
     <table>
       <title>menu Help</title>
 
-      <indexterm class="singular">
-        <primary>Sneltoetsen aanpassen</primary> <secondary>menu Help</secondary>
-      </indexterm>
-
       <tgroup cols="3" colsep="1">
         <colspec align="left" colname="1" colnum="1" colwidth="120"/>
 
@@ -8496,7 +8481,7 @@
 
     <para><emphasis role="bold">Auteursrechten</emphasis></para>
 
-    <para><emphasis role="bold"><application>OmegaT</application> 2.5</emphasis> is Copyright © 2000-2012 Keith Godfrey, Maxym Mykhalchuk, Zoltan Bartko, Didier Briel, Kim Bruning, Alex Buloichik, Thomas Cordonnier, Sandra Jean Chua, Martin Fleurke, Jean-Christophe Helary, Thomas Huriaux, Hans-Peter Jacobs, Ibai Lakunza Velasco, Guido Leenders, Fabián Mandelbaum, John Moran, Arno Peters, Henry Pijffers, Briac Pilpré, Tiago Saboga, Andrzej Sawuła, Benjamin Siband, Rashid Umarov, Antonio Vilei, Martin Wunderlich en Michael Zakharov.</para>
+    <para><emphasis role="bold"><application>OmegaT</application> 2.5</emphasis> is Copyright © 2000-2012 Keith Godfrey, Maxym Mykhalchuk, Zoltan Bartko, Didier Briel, Kim Bruning, Alex Buloichik, Thomas Cordonnier, Sandra Jean Chua, Martin Fleurke, Phillip Hall, Jean-Christophe Helary, Thomas Huriaux, Hans-Peter Jacobs, Ibai Lakunza Velasco, Guido Leenders, Aaron Madlon-Kay, Fabián Mandelbaum, John Moran, Arno Peters, Henry Pijffers, Briac Pilpré, Tiago Saboga, Andrzej Sawuła, Benjamin Siband, Rashid Umarov, Antonio Vilei, Martin Wunderlich en Michael Zakharov.</para>
 
     <para><emphasis role="bold">Distributie en aanpassingen</emphasis></para>
 

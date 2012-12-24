@@ -77,7 +77,7 @@
         <tbody>
           <row>
             <entry><guimenuitem><indexterm class="singular">
-                <primary>Sneltoetsen</primary> <secondary>Ctrl+T - venster Tags valideren</secondary>
+                <primary>Sneltoetsen</primary> <secondary>Tagvalidatie - Ctrl+T</secondary>
               </indexterm>venster Tags valideren</guimenuitem></entry>
 
             <entry><para>Gebruikt om de gebruikershandleiding te lezen (openen met <keycombo> <keycap>Ctrl</keycap> <keycap>T</keycap> </keycombo>, sluiten met <keycap>Esc</keycap>)</para></entry>
@@ -85,7 +85,7 @@
 
           <row>
             <entry><guimenuitem><indexterm class="singular">
-                <primary>Sneltoetsen</primary> <secondary>F1 - Help</secondary>
+                <primary>Sneltoetsen</primary> <secondary>Help - F1</secondary>
               </indexterm>Help-browser</guimenuitem></entry>
 
             <entry><para>Gebruikt om de gebruikershandleiding weer te geven (openen met <keycap>F1</keycap>, sluiten met <keycap>Esc</keycap>)</para></entry>
@@ -125,7 +125,7 @@
             <entry><guimenuitem>Projecteigenschappen<indexterm class="singular">
                 <primary>menu Project</primary> <secondary>Eigenschappen</secondary>
               </indexterm></guimenuitem> <indexterm class="singular">
-                <primary>Sneltoetsen</primary> <secondary>Ctrl+E - Projecteigenschappen</secondary>
+                <primary>Sneltoetsen</primary> <secondary>Projecteigenschappen - Ctrl+E</secondary>
               </indexterm></entry>
 
             <entry>Gebruikt om de projectmappen en talen aan te passen, (openen met sneltoets <guimenuitem>Ctrl+E</guimenuitem> of <menuchoice> <guimenu>Project</guimenu><guimenuitem>eigenschappen...</guimenuitem> </menuchoice>, sluiten met <keycap>Esc)</keycap></entry>
@@ -175,8 +175,6 @@
 
   <section id="OmegaT.main.window">
     <title><application>OmegaT</application> hoofdvenster<indexterm class="singular">
-        <primary>Vensters in OmegaT</primary> <secondary>hoofdvenster</secondary> <tertiary>- afbeelding</tertiary>
-      </indexterm><indexterm class="singular">
         <primary>Vensters in OmegaT</primary> <secondary>hoofdvenster</secondary>
       </indexterm></title>
 
@@ -196,9 +194,13 @@
 
     <para>Het hoofdvenster bestaat uit verschillende vensters, het hoofdmenu en een statusbalk. U kunt de positie van elk venster wijzigen of het zelfs losmaken en er een zelfstandig venster van maken door het venster te slepen aan zijn naam. Afhankelijk van de status van het venster kunnen verschillende tekens verschijnen in de rechterbovenhoek ervan.</para>
 
+    <note>
+      <para>Als u niet alle vensters kunt zien (als ze zijn geopend of geminimaliseerd), zal drukken op <guisubmenu> Opties &gt; Hoofdvenster herstellen </guisubmenu> ze herstellen naar de status zoals die is gedefinieerd bij de installatie.</para>
+    </note>
+
     <table>
       <title>pictogrammen voor vensters<indexterm class="singular">
-          <primary>Vensters in OmegaT</primary> <secondary>pictogrammen voor vensters</secondary>
+          <primary>Vensters in OmegaT</primary> <secondary>Pictogrammen voor vensters</secondary>
         </indexterm></title>
 
       <tgroup cols="2">
@@ -366,11 +368,11 @@
       <para>Het venster Overeenkomsten toont de meest overeenkomende segmenten uit de vertaalgeheugens, zowel uit het interne vertaalgeheugen dat werd gemaakt terwijl u uw project vertaalde als uit aanvullende vertaalgeheugens die u importeerde uit eerder werk of die u heeft gekregen van uw cliënt of vertaalbureau.</para>
 
       <para>Als u doorgaat naar het volgende segment wordt de eerste overeenkomst (die met het hoogste percentage van overeenkomst) automatisch geselecteerd. U kunt een andere overeenkomst selecteren door te drukken op <guimenuitem>Ctrl+2, 3, 4 of 5</guimenuitem>.<indexterm>
-          <primary>Sneltoetsen</primary> <secondary>Ctrl+N - Selecteren van de overeenkomst</secondary>
+          <primary>Sneltoetsen</primary> <secondary>Overeenkomst selecteren - Ctrl+N</secondary>
         </indexterm> Uiteraard zal het drukken op <keycombo> <keycap>Ctrl</keycap> <keycap>5</keycap> </keycombo> geen effect hebben als er geen overeenkomst #5 is. Gebruik <guimenuitem>Ctrl+R</guimenuitem><indexterm class="singular">
-          <primary>Sneltoetsen</primary> <secondary>Ctrl+R - Tekst vervangen</secondary>
+          <primary>Sneltoetsen</primary> <secondary>Tekst vervangen - Ctrl+R</secondary>
         </indexterm> om het doelveld te vervangen door die overeenkomst of <guimenuitem>Ctrl+I <indexterm class="singular">
-          <primary>Sneltoetsen</primary> <secondary>Ctrl+I - Tekst invoegen</secondary>
+          <primary>Sneltoetsen</primary> <secondary>Tekst invoegen - Ctrl+I</secondary>
         </indexterm></guimenuitem> om die in te voegen op de cursorpositie, om de geselecteerde overeenkomst in uw vertaling te gebruiken.</para>
 
       <para>Het percentage voor de overeenkomst is ruwweg het equivalent van het aantal meest voorkomende woorden in het vergeleken en het overeenkomende segment, gedeeld door het aantal woorden in de langste van de twee. De geselecteerde overeenkomst zal worden geaccentueerd in vet, woorden die ontbreken in het segment dat u vertaald zullen blauw gekleurd zijn en woorden die aansluiten aan ontbrekende gedeelten zullen groen zijn. In het bovenstaande voorbeeld is het bronsegment <emphasis role="bold">Context menu command</emphasis>. De bovenste overeenkomst is 100%, omdat alle woorden overeenkomen. Hetzelfde geldt voor de twee volgende overeenkomsten en de overeenkomst #4 is soortgelijk, maar verschilt. De regel met het percentage van overeenkomst bevat ook de naam van het vertaalgeheugen <indexterm class="singular">
@@ -409,7 +411,7 @@
 
       <figure id="multiword.pane">
         <title><indexterm class="singular">
-            <primary>Woordenlijsten</primary> <secondary>item met meerdere woorden in de woordenlijst - afbeelding</secondary>
+            <primary>Woordenlijsten</primary>
           </indexterm>item met meerdere woorden in de woordenlijst</title>
 
         <mediaobject>
@@ -423,7 +425,7 @@
         </mediaobject>
       </figure>
 
-      <para>Als u de optie TransTips hebt geactiveerd <guimenuitem>Opties → Transtips</guimenuitem>), kunt u met rechts klikken op het geaccentueerde woord om een keuzelijst te openen met de voorgestelde vertalingen, zoals die worden aangeboden door uw woordenlijst. Selecteren van een er van zal het invoegen op de huidige positie in het doelsegment. U kunt ook uw geprefereerde alternatief accentueren in het venster Woordenlijst en het invoegen in het doel door met rechts op de selectie te klikken.</para>
+      <para>Als u de optie TransTips hebt geactiveerd <guimenuitem>Opties → Transtips</guimenuitem>), kunt u met rechts klikken op het geaccentueerde woord om een keuzelijst te openen met de voorgestelde vertalingen, zoals die worden aangeboden door uw woordenlijst. Selecteren van één er van zal het invoegen op de huidige positie van de cursor in het doelsegment. U kunt ook uw geprefereerde alternatief accentueren in het venster Woordenlijst en het invoegen in het doel door met rechts op de selectie te klikken.</para>
     </section>
 
     <section id="dictionaries">
@@ -439,7 +441,7 @@
           <primary>Vensters in OmegaT</primary> <secondary>venster Meerdere vertalingen</secondary>
         </indexterm></title>
 
-      <para>Een bepaald bronsegment kan verschillende vertalingen vereisen, afhankelijk van de context. Als de huidige vertaling van het segment niet past, kan de gebruiker <guisubmenu>Bewerken → Alternatieve vertaling maken</guisubmenu> selecteren. De doeltekst die daarna wordt ingevoerd zal wordne behandeld als een alternatieve vertaling van het bronsegment. U kunt één van de alternatieven - bijvoorbeeld die welke het meest waarschijnlijk is - als de standaard vertaling instellen door te selecteren <guisubmenu>Bewerken → Als standaard vertaling gebruiken</guisubmenu></para>
+      <para>Een bepaald bronsegment kan verschillende vertalingen vereisen, afhankelijk van de context. Als de huidige vertaling van het segment niet past, kan de gebruiker <guisubmenu>Bewerken → Alternatieve vertaling maken</guisubmenu> selecteren. De doeltekst die daarna wordt ingevoerd zal worden behandeld als een alternatieve vertaling van het bronsegment. U kunt één van de alternatieven - bijvoorbeeld die welke het meest waarschijnlijk is - als de standaard vertaling instellen door te selecteren <guisubmenu>Bewerken → Als standaard vertaling gebruiken</guisubmenu></para>
     </section>
 
     <section>
@@ -455,7 +457,7 @@
 
       <figure id="comments.pane">
         <title><indexterm class="singular">
-            <primary>Opmerkingen</primary> <secondary>venster Opmerkingen - afbeelding</secondary>
+            <primary>Opmerkingen</primary> <secondary>venster Opmerkingen</secondary>
           </indexterm></title>
 
         <mediaobject>
@@ -500,7 +502,7 @@
         </indexterm></title>
 
       <para>Het venster Projectbestanden somt de projectbestanden op en geeft andere informatie over het project weer. Het wordt automatisch weergegeven als OmegaT een project laadt. Gebruik <guimenuitem>Ctrl+L<indexterm class="singular">
-          <primary>Sneltoetsen</primary> <secondary>Ctrl+L - lijst projectbestanden</secondary>
+          <primary>Sneltoetsen</primary> <secondary>Lijst projectbestanden - Ctrl+L</secondary>
         </indexterm></guimenuitem> om het te openen en <keycap>Esc</keycap> om het te sluiten. Het venster Projectbestanden geeft de volgende informatie weer:</para>
 
       <itemizedlist>
@@ -582,11 +584,11 @@
         </indexterm></title>
 
       <para>Het venster Statistieken - te benaderen via <emphasis role="bold">Extra &gt; Statistieken </emphasis>- geeft de statistieken voor het huidige project van OmegaT weer, zowel in de vorm van een overzicht als in detail voor elk bestand dat moet worden vertaald. De weergegeven statistieken zijn beschikbaar als een tab-gescheiden bestand <filename>project_stats.txt</filename> (submap <filename>omegat</filename>), klaar om te worden geladen in een programma met rekenbladen dat de gebruiker wil gebruiken. U kunt <guimenuitem>Ctrl+A <indexterm class="singular">
-          <primary>Sneltoetsen</primary> <secondary>Ctrl+A - alles selecteren</secondary>
+          <primary>Sneltoetsen</primary> <secondary>Alles selecteren - Ctrl+A</secondary>
         </indexterm></guimenuitem><guimenuitem>, Ctrl+C <indexterm class="singular">
-          <primary>Sneltoetsen</primary> <secondary>Ctrl+C - tekst kopiëren</secondary>
+          <primary>Sneltoetsen</primary> <secondary>Tekst kopiëren - Ctrl+C</secondary>
         </indexterm></guimenuitem>, <guimenuitem>Ctrl+V <indexterm class="singular">
-          <primary>Sneltoetsen</primary> <secondary>Ctrl+V - tekst plakken</secondary>
+          <primary>Sneltoetsen</primary> <secondary>Tekst plakken - Ctrl+V</secondary>
         </indexterm></guimenuitem> gebruiken om de inhoud te kopiëren en te plakken.<figure id="ProjectStatistic.Window">
           <title>projectstatistieken</title>
 
@@ -594,6 +596,7 @@
             <imageobject role="html">
               <imagedata fileref="images/StatisticsWindow_25.png"/>
             </imageobject>
+
             <imageobject role="fo">
               <imagedata fileref="images/StatisticsWindow_25.png" width="60%"/>
             </imageobject>
@@ -606,31 +609,32 @@
           <primary>Statistieken voor overeenkomsten</primary> <seealso>menu Extra</seealso>
         </indexterm></title>
 
-      <para>Toegang tot de statistieken voor overeenkomsten gaat via<guimenuitem>Extra &gt; Statistieken voor overeenkomsten.</guimenuitem> De evaluatie vergt nogal wat gebruik van de CPU en kan nogal wat tijd vergen, dus wordt er een voortgangsbalk weergegevn gedurende de berekening. Voorzover het categorieën betreft, de de facto industriestandaard voor het classificeren van overeenkomsten in de volgende groepen wordt gebruikt: Exacte overeenkomst, 95%-100%, 85%-94%, 75%-84%, 50%-74% en Geen overeenkomst. De tellingen van woorden, identiek aan tellingen in het venster Projectbestanden, are strikt gebaseerd op de methode van tellen van OmegaT, met een aantal verschillen in terminologie om rekening te houden met conceptuele verschillen. Deze informatie wordt berekend voor zowel segmenten als voor woorden en voor tekens (zonder en met spaties).<figure>
+      <para>Toegang tot de statistieken voor overeenkomsten gaat via<guimenuitem>Extra &gt; Statistieken voor overeenkomsten.</guimenuitem> De evaluatie vergt nogal wat gebruik van de CPU en kan nogal wat tijd vergen, dus wordt er een voortgangsbalk weergegeven gedurende de berekening. Voorzover het categorieën betreft, de de facto industriestandaard voor het classificeren van overeenkomsten in de volgende groepen wordt gebruikt: Exacte overeenkomst, 95%-100%, 85%-94%, 75%-84%, 50%-74% en Geen overeenkomst. De tellingen van woorden, identiek aan tellingen in het venster Projectbestanden, are strikt gebaseerd op de methode van tellen van OmegaT, met een aantal verschillen in terminologie om rekening te houden met conceptuele verschillen. Deze informatie wordt berekend voor zowel segmenten als voor woorden en voor tekens (zonder en met spaties).<figure>
           <title>Statistieken voor overeenkomsten</title>
 
           <mediaobject>
             <imageobject role="html">
               <imagedata fileref="images/MatchStatistics.png"/>
             </imageobject>
+
             <imageobject role="fo">
               <imagedata fileref="images/MatchStatistics.png" width="80%"/>
             </imageobject>
           </mediaobject>
         </figure></para>
 
-      <para>Onthoud dat deze totalen een goede (of zo-goed-als-maar-kan-zijn) benadering zijn van het betrokken werk in het project en dus kan dienen als een basis voor uw berekeningen van kosten en prijzen.</para>
+      <para>Onthoud dat deze totalen een goede (of 'zo goed als maar kan zijn') benadering zijn van het betrokken werk in het project en dus kan dienen als een basis voor uw berekeningen van kosten en prijzen.</para>
 
       <para>Met spaties tussen segmenten wordt geen rekening gehouden in de laatste kolom. Herhalingen staan voor identieke segmenten die meerdere malen aanwezig zijn in de tekst. Het eerste segment en de inhoud daarvan zullen worden geclassificeerd als &quot;geen overeenkomst&quot;, en de rest van hen als een herhaling van de eerste. Als de vertaling voor verschillende identieke bronsegmenten al bestaat in het vertaalgeheugen van het project, zullen deze segmenten, samen met andere, reeds vertaalde unieke segmenten, worden geclassificeerd als een &quot;Exacte overeenkomst&quot;. Het aantal unieke segmenten die, indien nodig, worden verschaft in het standaard venster met statistieken, ongeacht of zij zijn vertaald of niet.</para>
 
       <para>De rest van de categorieën (50-100%) behelst niet-vertaalde segmenten met een fuzzy overeenkomst. Fuzzy overeenkomsten kunnen ook vanuit de map <filename>/tm</filename> komen - en niet alleen vanuit het interne vertaalgeheugen in <filename>/omegaT,</filename> zoals het geval is voor herhalingen en exacte overeenkomsten. Het enige verschil met overeenkomsten vanuit het vertaalgeheugen <filename>project_save</filename> is dat externe TM's geen exacte overeenkomsten kunnen geven, alleen 100%. Indien men geen externe TM's wil gebruiken voor het tellen, moet men de map /tm leeg maken of de instelling van het project wijzigen (tijdelijk) zodat de waarde voor /tm naar een andere locatie verwijst.</para>
 
       <para>De overeenkomsten voor statistieken zijn tab-gescheiden en u kunt <guimenuitem>Ctrl+A <indexterm class="singular">
-          <primary>Sneltoetsen</primary> <secondary>Ctrl+A - alles selecteren</secondary>
+          <primary>Sneltoetsen</primary> <secondary>Alles selecteren - Ctrl+A</secondary>
         </indexterm></guimenuitem><guimenuitem>, Ctrl+C <indexterm class="singular">
-          <primary>Sneltoetsen</primary> <secondary>Ctrl+C - tekst kopiëren</secondary>
+          <primary>Sneltoetsen</primary> <secondary>Tekst kopiëren - Ctrl+C</secondary>
         </indexterm></guimenuitem>, <guimenuitem>Ctrl+V <indexterm class="singular">
-          <primary>Sneltoetsen</primary> <secondary>Ctrl+V - tekst plakken</secondary>
+          <primary>Sneltoetsen</primary> <secondary>Tekst plakken - Ctrl+V</secondary>
         </indexterm></guimenuitem> gebruiken om ze te kopiëren/plakken, bijvoorbeeld in een werkblad of in uw toepassing voor kostenberekening. Eenmaal berekend zijn de gegevens ook beschikbaar in <filename>omegat/project_stats_match.txt.</filename> Onthoud dat het bestand voorzien is van een tijdstempel, omdat de berekening (in tegenstelling tot de standaard statistieken) is niet onmiddellijk wordt uitgevoerd en dus snel niet meer van toepassing is.</para>
     </section>
 
@@ -640,7 +644,7 @@
         </indexterm></title>
 
       <para>De Help-browser (die deze handleiding weergeeft) kan worden opgeroepen door op <keycap><indexterm class="singular">
-          <primary>Sneltoetsen</primary> <secondary>F1 - Help</secondary>
+          <primary>Sneltoetsen</primary> <secondary>Help - F1</secondary>
         </indexterm>F1</keycap> te drukken of door te navigeren naar <guimenuitem><indexterm class="singular">
           <primary>menu Help</primary> <secondary>Gebruikershandleiding...</secondary>
         </indexterm>Help → Gebruikershandleiding...</guimenuitem> in het hoofdmenu. In het venster worden de handleiding en twee knoppen weergegeven: Terug en Inhoud. De gebruikershandleiding is een HTML-document met koppelingen naar de verschillende hoofdstukken. Klikken op een koppeling, zoals u in een webbrowser zou doen, brengt de gewenste pagina op de voorgrond.</para>

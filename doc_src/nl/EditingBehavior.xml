@@ -2,7 +2,7 @@
 <!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
 <chapter id="chapter.translation.editing">
   <title>Bewerken (gedrag)<indexterm class="singular">
-      <primary>menu Opties</primary> <secondary>Bewerken (gedrag)...</secondary>
+      <primary>Menu</primary> <secondary>Opties</secondary> <tertiary>Bewerken (gedrag)...</tertiary>
     </indexterm></title>
 
   <para>Het dialoogvenster in <menuchoice> <guimenu>Opties</guimenu> <guimenuitem>Bewerken (gedrag)...</guimenuitem> </menuchoice> laat de gebruiker bepalen hoe het huidige segment wordt geïnitialiseerd en afgehandeld.</para>
@@ -32,17 +32,17 @@
 
     <varlistentry>
       <term>Segment leeg laten<indexterm class="singular">
-          <primary>Bewerken (gedrag)</primary> <secondary>Lege vertaling</secondary>
+          <primary>Menu Opties</primary> <secondary>Bewerken (gedrag)</secondary> <tertiary>Lege vertaling</tertiary>
         </indexterm></term>
 
       <listitem>
-        <para>OmegaT laat het bewerkingsveld leeg. Deze optie stelt u in staat om de vertaling in te voeren zonder de brontekst te hoeven verwijderen, hetgeen u een aantal toetsaanslagen scheelt (<emphasis role="bold">Ctrl+A </emphasis>en <emphasis role="bold">Del). </emphasis> Lege vertalingen zijn nu toegestaan. Zij worden als &lt;LEEG&gt; weergegeven in het bewerkingsvenster. To create one, right-click in a segment, and select &quot;<emphasis role="bold">Set empty translation</emphasis>&quot;. The entry <emphasis role="bold">Remove translation</emphasis> in the same popup menu also allows to delete the existing translation of the current segment. U bereikt hetzelfde door het doelsegment leeg te maken en te drukken op <guibutton>Enter.</guibutton></para>
+        <para>OmegaT laat het bewerkingsveld leeg. Deze optie stelt u in staat om de vertaling in te voeren zonder de brontekst te hoeven verwijderen, hetgeen u een aantal toetsaanslagen scheelt (<emphasis role="bold">Ctrl+A </emphasis>en <emphasis role="bold">Del). </emphasis> Lege vertalingen zijn nu toegestaan. Zij worden als &lt;LEEG&gt; weergegeven in het bewerkingsvenster. Klik met rechts in een segment en selecteer &quot;<emphasis role="bold">Lege vertaling instellen</emphasis>&quot;. Het item <emphasis role="bold">Vertaling verwijderen</emphasis> in hetzelfde pop-upmenu maakt het ook mogelijk de bestaande vertaling van het huidige segment te verwijderen. U bereikt hetzelfde door het doelsegment leeg te maken en te drukken op <guibutton>Enter.</guibutton></para>
       </listitem>
     </varlistentry>
 
     <varlistentry>
       <term>Beste overeenkomst invoegen<indexterm class="singular">
-          <primary>Bewerken (gedrag)</primary> <secondary>Fuzzy overeenkomsten invoegen</secondary>
+          <primary>Menu Opties</primary> <secondary>Bewerken (gedrag)</secondary> <tertiary>Fuzzy overeenkomsten invoegen</tertiary>
         </indexterm></term>
 
       <listitem>
@@ -56,15 +56,24 @@
   <variablelist>
     <varlistentry>
       <term>Poging om nummers te converteren bij het invoegen van een overeenkomst<indexterm class="singular">
-          <primary>Bewerken (gedrag)</primary> <secondary>getallen converteren</secondary>
+          <primary>Menu Opties</primary> <secondary>Bewerken (gedrag)</secondary> <tertiary>Getallen converteren</tertiary>
         </indexterm></term>
 
       <listitem>
-        <para>Als deze optie is geselecteerd probeert OmegaT, als een fuzzy overeenkomst is ingevoegd, handmatig of automatisch, om de getallen in de fuzzy overeenkomst te converteren, zodat in plaats daarvan het getal van de bronsegmenten worden gebruikt. Er zijn een aantal beperkingen.</para>
+        <para>If this option is checked, when a fuzzy match is inserted, either manually or automatically, OmegaT attempts to convert the numbers in the fuzzy matches according to the source contents. Er zijn een aantal beperkingen:</para>
+
         <itemizedlist>
-          <listitem>Het getal of de getallen moet hetzelfde zijn in het bronsegment en in beide overeenkomsten.</listitem>
-          <listitem>De getallen moeten exact hetzelfde zijn in de twee overeenkomsten.</listitem>
-          <listitem>Alleen hele getallen en eenvoudige doubles (geen gelocaliseerde Engelse doubles, bijv. 5.4) worden als getallen beschouwd.</listitem>
+          <listitem>
+            <para>Het bronsegment en de fuzzy overeenkomsten moeten dezelfde lijst met getallen bevatten</para>
+          </listitem>
+        
+          <listitem>
+            <para>De getallen moeten exact hetzelfde zijn tussen de bron en de overeenkomsten voor het doel.</para>
+          </listitem>
+        
+          <listitem>
+            <para>Alleen gehele getallen en eenvoudige getallen met zwevende komma (die de punt als decimaal scheidingsteken gebruiken, bijv. 5.4, maar niet 5,4 of 54E-01) worden in overweging genomen.</para>
+          </listitem>
         </itemizedlist>
       </listitem>
     </varlistentry>
@@ -73,7 +82,7 @@
   <variablelist>
     <varlistentry>
       <term>Vertaling mag gelijk zijn aan brontekst<indexterm class="singular">
-          <primary>Bewerken (gedrag)</primary> <secondary>Vertaling gelijk aan brontekst</secondary>
+          <primary>Menu Opties</primary> <secondary>Bewerken (gedrag)</secondary> <tertiary>Vertaling gelijk aan bron</tertiary>
         </indexterm></term>
 
       <listitem>
@@ -87,7 +96,7 @@
   <variablelist>
     <varlistentry>
       <term>Segment naar tekstbestanden exporteren<indexterm class="singular">
-          <primary>Bewerken (gedrag)</primary> <secondary>Het huidige segment exporteren</secondary>
+          <primary>Menu Opties</primary> <secondary>Bewerken (gedrag)</secondary> <tertiary>Het huidige segment exporteren</tertiary>
         </indexterm></term>
 
       <listitem>
@@ -115,7 +124,7 @@
   <variablelist>
     <varlistentry>
       <term>Ga naar volgende niet-vertaalde segment stopt wanneer er ten minste één alternatieve vertaling is.<indexterm class="singular">
-          <primary>Bewerken (gedrag)</primary> <secondary>Ga naar stoppen bij segment met alternatieve vertaling</secondary>
+          <primary>Menu Opties</primary> <secondary>Bewerken (gedrag)</secondary> <tertiary>Segmenten met alternatieve vertaling</tertiary>
         </indexterm></term>
 
       <listitem>

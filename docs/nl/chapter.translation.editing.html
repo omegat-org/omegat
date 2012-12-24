@@ -29,7 +29,7 @@
          <div class="titlepage">
             <div>
                <div>
-                  <h2 class="title"><a name="chapter.translation.editing"></a>Hoofdstuk 10. Bewerken (gedrag)<a class="indexterm" name="d0e5452"></a></h2>
+                  <h2 class="title"><a name="chapter.translation.editing"></a>Hoofdstuk 10. Bewerken (gedrag)<a class="indexterm" name="d0e5420"></a></h2>
                </div>
             </div>
          </div>
@@ -52,14 +52,14 @@
                      woorden met hoofdletters bevat die intact gelaten moeten worden.
                   </p>
                </dd>
-               <dt><span class="term">Segment leeg laten<a class="indexterm" name="d0e5493"></a></span></dt>
+               <dt><span class="term">Segment leeg laten<a class="indexterm" name="d0e5463"></a></span></dt>
                <dd>
                   <p>OmegaT laat het bewerkingsveld leeg. Deze optie stelt u in staat om de vertaling in te voeren zonder de brontekst te hoeven
-                     verwijderen, hetgeen u een aantal toetsaanslagen scheelt (<span class="bold"><strong>Ctrl+A </strong></span>en <span class="bold"><strong>Del). </strong></span> Lege vertalingen zijn nu toegestaan. Zij worden als &lt;LEEG&gt; weergegeven in het bewerkingsvenster. To create one, right-click
-                     in a segment, and select "<span class="bold"><strong>Set empty translation</strong></span>". The entry <span class="bold"><strong>Remove translation</strong></span> in the same popup menu also allows to delete the existing translation of the current segment. U bereikt hetzelfde door het
-                     doelsegment leeg te maken en te drukken op <span class="guibutton">Enter.</span></p>
+                     verwijderen, hetgeen u een aantal toetsaanslagen scheelt (<span class="bold"><strong>Ctrl+A </strong></span>en <span class="bold"><strong>Del). </strong></span> Lege vertalingen zijn nu toegestaan. Zij worden als &lt;LEEG&gt; weergegeven in het bewerkingsvenster. Klik met rechts in een segment
+                     en selecteer "<span class="bold"><strong>Lege vertaling instellen</strong></span>". Het item <span class="bold"><strong>Vertaling verwijderen</strong></span> in hetzelfde pop-upmenu maakt het ook mogelijk de bestaande vertaling van het huidige segment te verwijderen. U bereikt hetzelfde
+                     door het doelsegment leeg te maken en te drukken op <span class="guibutton">Enter.</span></p>
                </dd>
-               <dt><span class="term">Beste overeenkomst invoegen<a class="indexterm" name="d0e5518"></a></span></dt>
+               <dt><span class="term">Beste overeenkomst invoegen<a class="indexterm" name="d0e5490"></a></span></dt>
                <dd>
                   <p>OmegaT voegt de vertaling van de tekenreeks in die het meeste lijkt op de huidige bron, indien die boven de drempel van het
                      percentage van overeenkomst komt dat in het dialoogvenster is ingesteld. Het voorvoegsel (is standaard leeg) kan worden gebruikt
@@ -72,17 +72,24 @@
          <p>De keuzevakken in het onderste gedeelte van het dialoogvenster dienen het volgende doel:</p>
          <div class="variablelist">
             <dl>
-               <dt><span class="term">Poging om nummers te converteren bij het invoegen van een overeenkomst<a class="indexterm" name="d0e5532"></a></span></dt>
+               <dt><span class="term">Poging om nummers te converteren bij het invoegen van een overeenkomst<a class="indexterm" name="d0e5506"></a></span></dt>
                <dd>
-                  <p>Als deze optie is geselecteerd probeert OmegaT, als een fuzzy overeenkomst is ingevoegd, handmatig of automatisch, om de getallen
-                     in de fuzzy overeenkomst te converteren, zodat in plaats daarvan het getal van de bronsegmenten worden gebruikt. Er zijn een
-                     aantal beperkingen.
+                  <p>If this option is checked, when a fuzzy match is inserted, either manually or automatically, OmegaT attempts to convert the
+                     numbers in the fuzzy matches according to the source contents. Er zijn een aantal beperkingen:
                   </p>
                   <div class="itemizedlist">
                      <ul class="itemizedlist" type="disc">
-                        <li class="listitem">Het getal of de getallen moet hetzelfde zijn in het bronsegment en in beide overeenkomsten.</li>
-                        <li class="listitem">De getallen moeten exact hetzelfde zijn in de twee overeenkomsten.</li>
-                        <li class="listitem">Alleen hele getallen en eenvoudige doubles (geen gelocaliseerde Engelse doubles, bijv. 5.4) worden als getallen beschouwd.</li>
+                        <li class="listitem">
+                           <p>Het bronsegment en de fuzzy overeenkomsten moeten dezelfde lijst met getallen bevatten</p>
+                        </li>
+                        <li class="listitem">
+                           <p>De getallen moeten exact hetzelfde zijn tussen de bron en de overeenkomsten voor het doel.</p>
+                        </li>
+                        <li class="listitem">
+                           <p>Alleen gehele getallen en eenvoudige getallen met zwevende komma (die de punt als decimaal scheidingsteken gebruiken, bijv.
+                              5.4, maar niet 5,4 of 54E-01) worden in overweging genomen.
+                           </p>
+                        </li>
                      </ul>
                   </div>
                </dd>
@@ -90,7 +97,7 @@
          </div>
          <div class="variablelist">
             <dl>
-               <dt><span class="term">Vertaling mag gelijk zijn aan brontekst<a class="indexterm" name="d0e5551"></a></span></dt>
+               <dt><span class="term">Vertaling mag gelijk zijn aan brontekst<a class="indexterm" name="d0e5530"></a></span></dt>
                <dd>
                   <p>Te vertalen documenten kunnen handelsnamen, namen of andere woorden met hoofdletters bevatten die hetzelfde moeten blijven
                      in vertaalde documenten. Er zijn twee strategieën voor segmenten die slechts zulke onveranderlijke tekst bevatten.
@@ -104,7 +111,7 @@
          </div>
          <div class="variablelist">
             <dl>
-               <dt><span class="term">Segment naar tekstbestanden exporteren<a class="indexterm" name="d0e5574"></a></span></dt>
+               <dt><span class="term">Segment naar tekstbestanden exporteren<a class="indexterm" name="d0e5555"></a></span></dt>
                <dd>
                   <p>De functie Tekst exporteren exporteert gegevens vanuit het huidige <span class="application">OmegaT</span>project naar platte tekst-bestanden. De gegevens worden geëxporteerd als het segment wordt geopend. De bestanden verschijnen
                      in de submap /script in de map met gebruikersbestanden van OmegaT, en bevatten:
@@ -134,7 +141,7 @@
          </div>
          <div class="variablelist">
             <dl>
-               <dt><span class="term">Ga naar volgende niet-vertaalde segment stopt wanneer er ten minste één alternatieve vertaling is.<a class="indexterm" name="d0e5619"></a></span></dt>
+               <dt><span class="term">Ga naar volgende niet-vertaalde segment stopt wanneer er ten minste één alternatieve vertaling is.<a class="indexterm" name="d0e5602"></a></span></dt>
                <dd>
                   <p>Als we foutieve vertalingen willen vermijden in het geval van segmenten met verschillende mogelijke inhoud voor het doel,
                      zal het selecteren van dit keuzevak er voor zorgen dat <span class="bold"><strong>&nbsp;Ga naar volgende niet-vertaalde segment</strong></span> stopt bij het volgende dergelijke segment, ongeacht of het al is vertaald of niet.

@@ -163,7 +163,7 @@
       </indexterm></title>
 
     <para>De functie Tags valideren detecteert gewijzigde tags (of dat met opzet is gedaan of per ongeluk) en toont de betrokken segmenten. Het activeren van deze functie – <guimenuitem>Ctrl+T<indexterm class="singular">
-        <primary>Sneltoetsen</primary> <secondary>Ctrl+T - Tagvalidatie</secondary>
+        <primary>Sneltoetsen</primary> <secondary>Tagvalidatie - Ctrl+T</secondary>
       </indexterm></guimenuitem> - zal een venster openen dat alle segmenten uit het bestand, waarvan wordt vermoed dat ze zijn verbroken of slechte tags zijn, bevat. Repareren van de tags en het opnieuw samenstellen van de doeldocumenten is eenvoudig met de functie Tags valideren. Het venster, dat wordt geopend door te drukken op <guimenuitem>Ctrl+T</guimenuitem>, heeft een kolom met 3 tabellen met een koppeling naar het segment, het originele segment en het doelsegment</para>
 
     <figure id="tag.validation">

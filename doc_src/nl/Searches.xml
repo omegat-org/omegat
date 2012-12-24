@@ -30,7 +30,7 @@
 
     <section>
       <title>Zoeken<indexterm class="singular">
-          <primary>Sneltoetsen</primary> <secondary>Ctrl+F - Zoeken</secondary>
+          <primary>Sneltoetsen</primary> <secondary>Zoeken - Ctrl+F</secondary>
         </indexterm></title>
 
       <para><application>OmegaT</application> verschaft een groot scala aan zoekfuncties. Open het venster Zoeken met <keycombo> <keycap>Ctrl</keycap> <keycap>F</keycap> </keycombo> en voer het woord of de frase waarnaar u wilt zoeken in het vak &quot;Zoeken naar&quot; in. Als alternatief: selecteer een woord of frase ergens in het bewerkingsveld en druk op <keycombo> <keycap>Ctrl</keycap> <keycap>F</keycap> </keycombo>. Het woord of de frase wordt automatisch ingevoegd in het vak &quot;Zoeken naar&quot;. U kunt verschillende vensters Zoeken tegelijkertijd geopend hebben, maar sluit ze als u ze niet langer nodig hebt zodat zij uw bureaublad niet vol zetten.</para>

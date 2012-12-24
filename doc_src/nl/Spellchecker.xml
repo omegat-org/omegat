@@ -21,7 +21,7 @@
     <itemizedlist>
       <listitem>
         <para>Selecteer, in OmegaT, <guisubmenu><indexterm class="singular">
-            <primary>menu Opties</primary> <secondary>spellingscontrole...</secondary>
+            <primary>Menu Opties</primary> <secondary>Spellingscontrole</secondary>
           </indexterm></guisubmenu><guimenuitem>Opties &gt; Spellingscontrole</guimenuitem>, en klik dan op <guibutton>Kiezen </guibutton>naast het veld map Woordenboek-bestand. Navigeer naar en selecteer de map die u hebt gemaakt voor de woordenboeken.</para>
       </listitem>
     </itemizedlist>
@@ -36,23 +36,21 @@
 
     <figure id="spellchecker.setup">
       <title><indexterm class="singular">
-          <primary>Instellen spellingscontrole</primary> <secondary>Instellen spellingscontrole - afbeelding</secondary>
+          <primary>Spellingscontrole</primary> <secondary>Spellingscontrole instellen </secondary>
         </indexterm>Spellingscontrole instellen</title>
 
       <mediaobject>
         <imageobject role="html">
           <imagedata fileref="images/SpellcheckerSetup_25.png"/>
         </imageobject>
-      </mediaobject>
 
-      <mediaobject>
         <imageobject role="fo">
           <imagedata fileref="images/SpellcheckerSetup_25.png" width="80%"/>
         </imageobject>
       </mediaobject>
     </figure>
 
-    <para>Klikken op de knop <guibutton>Nieuw woordenboek installeren</guibutton> zal het installatievenster Woordenboek openen, waar u de woordenboeken kunt selecteren die u wilt installeren. Zorg er voor dat de taalcode van de doelbestanden correspondeert met de taalcode van het woordenboek: een FR-FR woordenboek zal niet werken met de instelling FR voor het doel. U zult de instelling naar FR-FR moeten wijzigen om de spellingscontrole het juiste woordenboek voor uw doel te laten herkennen. Zoek naar bestanden met de naam, verwijzend naar de gebruikte taal en die de extensies <emphasis>aff</emphasis> en <emphasis>dic.</emphasis> hebben.</para>
+    <para>Klikken op de knop <guibutton>Nieuw woordenboek installeren</guibutton> zal het installatievenster Woordenboek openen, waar u de woordenboeken kunt selecteren die u wilt installeren. Zorg er voor dat de taalcode van de doelbestanden correspondeert met de taalcode van het woordenboek: een FR-FR woordenboek zal niet werken met de instelling FR voor het doel U zult de instelling naar FR-FR moeten wijzigen om de spellingscontrole het juiste woordenboek voor uw doel te laten herkennen. Zoek naar bestanden met de naam, verwijzend naar de gebruikte taal en die de extensies <emphasis>aff</emphasis> en <emphasis>dic.</emphasis> hebben.</para>
   </section>
 
   <section>
@@ -63,11 +61,7 @@
     <para>Selecteer <guimenuitem>Opties &gt; Spellingscontrole</guimenuitem> en selecteer het keuzevak <guilabel>Automatische spellingscontrole</guilabel> (zie boven) om de spellingscontrole in te schakelen.</para>
 
     <figure id="spellchecker.in.action">
-      <title><indexterm class="singular">
-          <primary>Spellingscontrole</primary> <secondary>Spellingscontrole - afbeelding</secondary>
-        </indexterm>Spellingscontrole in actie</title>
-
-      <mediaobject>
+        <mediaobject>
         <imageobject role="html">
           <imagedata fileref="images/SpellcheckingText.png"/>
         </imageobject>

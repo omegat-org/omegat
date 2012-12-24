@@ -3,6 +3,8 @@
 <chapter id="chapter.translation.memories">
   <title>Vertaalgeheugens<indexterm class="singular">
       <primary>Vertaalgeheugens</primary>
+    </indexterm><indexterm class="singular">
+      <primary>TMX</primary> <see>Vertaalgeheugens</see>
     </indexterm></title>
 
   <section id="OmegaT.and.tmx.files">
@@ -61,12 +63,14 @@
             <para>De inhoud van vertaalgeheugens in de submap tm dienen om suggesties te genereren voor de tekst(en) om te worden vertaald. Elke tekst, reeds vertaald en opgeslagen in deze bestanden, zal tussen de overeenkomsten verschijnen, indien het voldoende overeenkomt met de tekst die momenteel wordt vertaald.</para>
 
             <para>Indien het bronsegment in één van de aanvullende TM's identiek is aan de tekst die wordt vertaald, gedraagt OmegaT zich zoals gedefinieerd is in het dialoogvenster <menuchoice> <guimenu>Opties</guimenu> <guimenuitem>Bewerken (gedrag)...</guimenuitem> </menuchoice>. Bijvoorbeeld (als de standaard is geaccepteerd) zal de vertaling vanuit de aanvullende TM worden geaccepteerd en worden vooraf gegaan door<emphasis> [fuzzy]</emphasis>, zodat de vertaler de vertalingen op een later tijdstip kan nakijken en controleren of segmenten die op deze manier zijn getagd, juist zijn vertaald (zie het hoofdstuk <link linkend="chapter.translation.editing">Bewerken (gedrag)</link>) <menuchoice> <guimenu>.</guimenu> </menuchoice></para>
+
+            <para>Het kan gebeuren dat vertaalgeheugens, beschikbaar in de submap<filename> tm</filename>, segmenten met identieke brontekst bevatten, maar afwijkende doelen. TMX-bestanden worden, gesorteerd op hun naam, gelezen en segmenten binnen een bepaald TMX-bestand regel na regel. Het laatste segment met de identieke brontekst zal dus worden gekozen (Opmerking: natuurlijk is het verstandiger om dit in de eerste plaats in zijn geheel te vermijden).</para>
           </listitem>
         </varlistentry>
 
         <varlistentry>
           <term><indexterm class="singular">
-              <primary>Vertaalgeheugens</primary> <secondary>submap tm/auto</secondary> <seealso>projectbestanden</seealso>
+              <primary>Vertaalgeheugens</primary> <secondary>Submap tm/auto</secondary> <seealso>Projectbestanden</seealso>
             </indexterm>map tm/auto<indexterm class="singular">
               <primary>Project</primary> <secondary>vooraf vertalen</secondary>
             </indexterm></term>
@@ -170,9 +174,9 @@
 
     <para>Wanneer u de doeldocumenten maakt in een project van <application>OmegaT</application>, wordt het vertaalgeheugen van het project uitgevoerd in de vorm van drie bestanden in de hoofdmap van uw project van <application>OmegaT</application> (zie de bovenstaande beschrijving). U kunt deze drie TMX-bestanden, (-<filename>omegat.tmx</filename>&quot;, &quot;<filename>-level1.tmx</filename>&quot; en &quot;<filename>-level2.tmx</filename>&quot;), beschouwen als een &quot;exporteerbaar vertaalgeheugen&quot;, dat is: een export van de inhoud van uw huidige project in tweetalige vorm.</para>
 
-    <para>Indien u een vertaalgeheugen uit een vorig project zou willen gebruiken (bijvoorbeeld omdat het nieuwe project overeenkomt met het eerdere project, of terminologie gebruikt die eerder gebruikt is), kunt u deze vertaalgeheugens gebruiken als &quot;invoer vertaalgeheugens&quot;, dat is: om in uw nieuwe project te importeren. In dit geval plaats u de vertaalgeheugens die u wilt gebruiken in de mappen <emphasis>\tm</emphasis> of <emphasis>\tm</emphasis>\auto van uw nieuwe project: in het eerste geval zult u hits van deze vertaalgeheugens in het venster Overeenkomsten krijgen en in het laatste geval zullen deze TM's worden gebruikt om uw brontekst vooraf te vertalen.</para>
+    <para>Indien u een vertaalgeheugen uit een vorig project zou willen gebruiken (bijvoorbeeld omdat het nieuwe project overeenkomt met het eerdere project, of terminologie gebruikt die eerder gebruikt is), kunt u deze vertaalgeheugens gebruiken als &quot;invoer vertaalgeheugens&quot;, dat is: om in uw nieuwe project te importeren. In dit geval plaatst u de vertaalgeheugens die u wilt gebruiken in de mappen <emphasis>/tm</emphasis> of <emphasis>/tm</emphasis>/auto van uw nieuwe project: in het eerste geval zult u hits van deze vertaalgeheugens in het venster Overeenkomsten krijgen en in het laatste geval zullen deze TM's worden gebruikt om uw brontekst vooraf te vertalen.</para>
 
-    <para>Standaard staat de map \tm onder de hoofdmap van het project (bijvoorbeeld ...<emphasis>\MijnProject\tm</emphasis>), maar u kunt een andere map kiezen in het dialoogvenster Projecteigenschappen als u dat wilt. Dit is handig als u regelmatig eerder gemaakte vertaalgeheugens gebruikt, bijvoorbeeld omdat zij over hetzelfde onderwerp gaan of voor dezelfde klant zijn. In dit geval zou een handige procedure zijn:</para>
+    <para>Standaard staat de map /tm onder de hoofdmap van het project (bijvoorbeeld ...<emphasis>/MijnProject/tm</emphasis>), maar u kunt in het dialoogvenster Projecteigenschappen een andere map kiezen als u dat wilt. Dit is handig als u regelmatig eerder gemaakte vertaalgeheugens gebruikt, bijvoorbeeld omdat zij over hetzelfde onderwerp gaan of voor dezelfde klant zijn. In dit geval zou een handige procedure zijn:</para>
 
     <itemizedlist>
       <listitem>
@@ -242,7 +246,7 @@
         <primary>Vertaalgeheugens</primary> <secondary>bijwerken naar zinsegmentatie</secondary>
       </indexterm></title>
 
-    <para>Hele vroege versies van <application>OmegaT</application> waren slechts in staat bronbestanden in alinea's te segmenteren en nummerden de opmaaktags in HTML- en Open Document-bestanden niet consistent. <application>OmegaT</application> 2.5 kan dergelijke TMX-bestanden herkennen en direct bijwerken om de kwaliteit van de fuzzy overeenkomsten te vergroten en uw vertaling op peil te brengen, zodat u dat werk niet handmatig hoeft te doen.</para>
+    <para>Hele vroege versies van <application>OmegaT</application> waren slechts in staat bronbestanden in alinea's te segmenteren en nummerden de tags voor opmaak in HTML- en Open Document-bestanden niet consistent. <application>OmegaT</application> 2.5 kan dergelijke TMX-bestanden herkennen en direct bijwerken om de kwaliteit van de fuzzy overeenkomsten te vergroten en uw vertaling op peil te brengen, zodat u dat werk niet handmatig hoeft te doen.</para>
 
     <para>De TMX van een project wordt maar één keer bijgewerkt en zal in de bijgewerkte vorm worden weggeschreven in <filename>project-save.tmx</filename>; eerder gemaakte TMX-bestanden worden, elke keer als het project wordt geladen, direct bijgewerkt. Wees er attent op dat sommige wijzigingen in bestandsfilters in <application>OmegaT</application> 2.5 zouden kunnen leiden tot totaal afwijkende segmentatie; als resultaat daarvan moet u in zulke zeer uitzonderlijke gevallen uw vertaling handmatig bijwerken.</para>
   </section>

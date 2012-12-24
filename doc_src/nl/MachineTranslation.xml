@@ -49,7 +49,7 @@
     <para>De Spaanse vertaling is beter dan de Sloveense. Merk op dat <emphasis>interesar</emphasis> en<emphasis> navegar</emphasis> in het Spaans correct zijn vertaald als respectievelijk de werkwoorden interest en sail. In de Sloveense versie worden beide woorden vertaald als zelfstandige naamwoorden. Het is eigenlijk zeer waarschijnlijk dat de Spaanse vertaling, ten minste gedeeltelijk, is gebaseerd op de actuele vertaling van het boek.</para>
 
     <para>Vanaf het moment dat de service is geactiveerd zal er een suggestie voor de vertaling verschijnen in het venster Machinevertaling voor elk nieuw bronsegment dat wordt geopend. Indien u de suggestie acceptabel vindt, druk op <keycombo> <keycap><indexterm class="singular">
-            <primary>Sneltoetsen</primary> <secondary>Ctrl+M - Machinevertaling</secondary>
+            <primary>Sneltoetsen</primary> <secondary>Machinevertaling - Ctrl+M</secondary>
           </indexterm>Ctrl</keycap> <keycap>M</keycap> </keycombo> om het doelgedeelte van het geopende segment te vervangen. In het segment hierboven, bijvoorbeeld, zou <keycombo> <keycap>Ctrl</keycap> <keycap>M</keycap> </keycombo> de Spaanse versie overschrijven met de Sloveense suggestie.</para>
 
     <para>Indien u niet wilt dat <application>OmegaT</application> uw bronsegmenten verstuurt naar Google om te worden vertaald, verwijdert u het vinkje vóór het menuitem Google Translate in Opties.</para>
@@ -114,7 +114,7 @@
       </listitem>
 
       <listitem>
-        <para>Google Translate werkt niet: heeft u <ulink url="https://developers.google.com/translate/v2/faq">Translate API service</ulink> toegepast? Onthoud dat de service Google Translate niet gratis is. Bekijk hoofdstuk <link linkend="chapter.installing.and.running">Installeren en uitvoeren</link> (parameters voor runtime) voor meer daarover.</para>
+        <para>Google Translate werkt niet: heeft u <ulink url="https://developers.google.com/translate/v2/faq">Translate API service</ulink> toegepast? Onthoud dat de service Google Translate niet gratis is, bekijk hoofdstuk <link linkend="chapter.installing.and.running">Installeren en uitvoeren</link> (parameters voor runtime) voor meer daarover.</para>
       </listitem>
 
       <listitem>
@@ -123,6 +123,10 @@
 
       <listitem>
         <para>Google Translate werkt niet: - met de sleutel voor de Google API ingevoerd zoals vereist. Controleer in Opties &gt; Machinevertaling of Google Translate V2 is geselecteerd.</para>
+      </listitem>
+
+      <listitem>
+        <para>Google Translate V2 rapporteert &quot;Bad request&quot; - controleer de bron- en doeltalen voor uw project. Het niet gedefinieerd hebben van talen leidt tot een dergelijk soort antwoord.</para>
       </listitem>
     </itemizedlist>
   </section>

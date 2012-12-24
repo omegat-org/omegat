@@ -99,7 +99,7 @@
 
   <section>
     <title>Automatisch vergelijken van Java-eigenschappen<indexterm class="singular">
-        <primary>Diversen</primary> <secondary>Automatisch vergelijken van Java-eigenschappen</secondary> <seealso>diversen</seealso>
+        <primary>Diversen</primary> <secondary>Automatisch vergelijken van Java-eigenschappen</secondary>
       </indexterm></title>
 
     <para>OmegaT kan Java .properties vergelijken in modus console. Indien u de Properties-bestanden voor bron en doel voor één en dezelfde inhoud in uw taalpaar hebt, zal deze procedure een overeenkomend tmx-bestand maken voor deze inhoud. Gebruik:</para>

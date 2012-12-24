@@ -21,7 +21,7 @@ OmegaT 2.0, Lees Mij-bestand
 De meest recente informatie over OmegaT is te vinden op
       http://www.omegat.org/
 
-Gebruikersondersteuning op de Yahoo gebruikersgroep (meertalig), waar zonder abonnement de archieven kunnen worden doorzocht:
+Gebruikersondersteuning op de Yahoo! gebruikersgroep (meertalig), waar zonder abonnement de archieven kunnen worden doorzocht:
      http://groups.yahoo.com/group/OmegaT/
 
 Verzoeken tot verbeteringen (in het Engels) op de SourceForge-website:
@@ -83,6 +83,7 @@ OmegaT ondersteunt direct de volgende bestandsformaten:
   - Flash XML exporteren (*.xml)
   - Wordfast TXML (*.txml)
   - Camtasia voor Windows (*.camproj)
+  - Visio (*.vxd)
 
 OmegaT kan worden aangepast om ook andere bestandsindelingen te ondersteunen.
 
@@ -97,7 +98,7 @@ De gebruikershandleiding zit in het pakket dat u zojuist heeft gedownload. U kun
 
 3.1 Algemeen
 OmegaT vereist dat een Java Runtime Environment (JRE) versie 
-1.5 of hoger is geïnstalleerd op uw systeem om uitgevoerd te kunnen worden. OmegaT pakketten die de Java Runtime Environment bevatten zijn nu beschikbaar om gebruikers de moeite van het selecteren. verkrijgen en installeren te besparen. 
+1.5 of hoger is geïnstalleerd op uw systeem om uitgevoerd te kunnen worden. OmegaT pakketten die de Java Runtime Environment bevatten zijn nu beschikbaar om gebruikers de moeite van het selecteren, verkrijgen en installeren te besparen. 
 
 Als u al Java hebt is één manier om de huidige versie van OmegaT te installeren het gebruiken van Java Web Start. 
 Download voor dit doel het volgende bestand en voer het uit:
@@ -224,11 +225,13 @@ Code is bijgedragen door
   Thomas Cordonnier
   Martin Fleurke  
   Wildrich Fourie
+  Phillip Hall
   Jean-Christophe Helary
   Thomas Huriaux
   Hans-Peter Jacobs
-  Guido Leenders
   Ibai Lakunza Velasco
+  Guido Leenders
+  Aaron Madlon-Kay
   Fabián Mandelbaum
   John Moran
   Maxym Mykhalchuk 
@@ -255,25 +258,23 @@ Andere bijdragen door
 (Als u denkt dat u een significante bijdrage heeft geleverd aan het OmegaT-project, maar ziet u uw naam niet op deze lijst, neem dan alstublieft contact met ons op.)
 
 OmegaT gebruikt de volgende bibliotheken:
-
-  HTMLParser van Somik Raha, Derrick Oswald en anderen (LGPL-licentie)
-  http://sourceforge.net/projects/htmlparser
-
+  HTMLParser 1.6 van Somik Raha, Derrick Oswald en anderen (LGPL License)
   MRJ Adapter 1.0.8 door Steve Roy (LGPL License)
-  http://homepage.mac.com/sroy/mrjadapter/
-
   VLDocking Framework 2.1.4 van VLSolutions (CeCILL-licentie)
-  http://www.vlsolutions.com/en/products/docking/
-
   Hunspell van László Németh en anderen (LGPL-licentie)
-
   JNA van Todd Fast, Timothy Wall en anderen (LGPL-licentie)
-
   Swing-Layout 1.0.2 (LGPL-licentie)
-
   Jmyspell 2.1.4 (LGPL-licentie)
-
-  JAXB 2.1.7 (GPLv2 + klassenpad uitzondering)
+  JAXB (GPLv2 + klassenpad uitzondering)
+  SJXP 1.0.2 (GPL v2)
+  SVNKit 1.7.5 (TMate License)
+  Sequence Library (Sequence Library License)
+  ANTLR 3.4 (ANTLR 3 licentie)
+  SQLJet 1.1.3 (GPL v2)
+  JGit (Eclipse Distribution License)
+  JSch (JSch License)
+  Base64 (publieke domein)
+  Diff (GPL)
 
 ==============================================================================
  5.  Heeft u problemen met OmegaT ? Heeft u hulp nodig?

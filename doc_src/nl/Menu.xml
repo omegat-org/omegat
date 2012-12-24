@@ -5,12 +5,8 @@
 
   <section id="ch04.main.menu">
     <title><indexterm class="singular">
-        <primary>Hoofdmenu</primary>
+        <primary>Menu</primary>
       </indexterm>Hoofdmenu</title>
-
-    <indexterm class="singular">
-      <primary>Sneltoetsen</primary> <secondary>Hoofdmenu</secondary>
-    </indexterm>
 
     <para>Alle functionaliteiten van OmegaT zijn beschikbaar via de menubalk boven het venster Bewerken. De meeste functies zijn ook beschikbaar via sneltoetsen voor het toetsenbord. Sneltoetsen worden geactiveerd door te drukken op <keycap>Ctrl</keycap> en een letter. Sommige sneltoetsen gebruiken ook andere toetsen. Voor de leesbaarheid worden letters hier geschreven als hoofdletters. <keycap>Ctrl</keycap> wordt gebruikt op Windows, UNIX en UNIX-achtige besturingssystemen die een toetsenbord hebben met de <keycap>Ctrl</keycap>- of <keycap>Control</keycap>-toets. Mac-gebruikers moeten in plaats daarvan de <keycombo> <keycap>cmd</keycap><keycap>-toets</keycap> </keycombo> gebruiken. De &quot;Cmd&quot;-toets heeft ofwel een label &quot;command&quot; of een Apple-merkteken op toetsenborden van Apple.</para>
 
@@ -42,7 +38,9 @@
 
     <section id="submenu.Project">
       <title>Project<indexterm class="singular">
-          <primary>Hoofdmenu</primary> <secondary>Project</secondary>
+          <primary>Menu</primary>
+
+          <secondary>Project</secondary>
         </indexterm></title>
 
       <table colsep="1">
@@ -178,7 +176,7 @@
 
     <section>
       <title>Bewerken<indexterm class="singular">
-          <primary>Hoofdmenu</primary> <secondary>Bewerken</secondary>
+          <primary>Menu</primary> <secondary>Bewerken</secondary>
         </indexterm></title>
 
       <para>Opmerking: Items die in de meeste toepassingen aanwezig zijn (kopiëren/knippen/plakken) worden in dit menu niet weergegeven maar zijn beschikbaar met de sneltoetsen van uw systeem. Bijvoorbeeld:</para>
@@ -392,7 +390,7 @@
               <entry><keycombo> <keycap>Shift</keycap> <keycap>F3</keycap> </keycombo> (zie tekst)</entry>
 
               <entry>Wijzigt hoofd-/kleine letters van de geaccentueerde tekst in het doelsegment naar de geselecteerde optie (Kleine letters, Hoofdletters of Alle woorden hoofdletters). Gebruik Shift+F3 <indexterm>
-                  <primary>Sneltoetsen</primary> <secondary>Shift+F3 - Selectie Hoofd-/kleine letters</secondary>
+                  <primary>Sbeltoetsen</primary> <secondary>Selectie hoofd-/kleine letters - Shift+F3</secondary>
                 </indexterm>om tussen de drie keuzes te schakelen. Indien geen tekst is geselecteerd, selecteert <application>OmegaT</application> het woord dat de letter bevat direct rechts naast de cursor.</entry>
             </row>
 
@@ -430,7 +428,7 @@
 
     <section id="submenu.GoTo">
       <title>Ga naar<indexterm class="singular">
-          <primary>Hoofdmenu</primary> <secondary>Ga naar</secondary>
+          <primary>Menu</primary> <secondary>Ga naar</secondary>
         </indexterm></title>
 
       <table colsep="1">
@@ -532,7 +530,7 @@
 
     <section id="submenu.View">
       <title>Weergave<indexterm class="singular">
-          <primary>Hoofdmenu</primary> <secondary>Weergave</secondary>
+          <primary>Menu</primary> <secondary>Weergave</secondary>
         </indexterm></title>
 
       <table colsep="1">
@@ -590,7 +588,7 @@
 
     <section id="submenu.Tools">
       <title>Extra<indexterm class="singular">
-          <primary>Hoofdmenu</primary> <secondary>Extra</secondary>
+          <primary>Menu</primary> <secondary>Extra</secondary>
         </indexterm></title>
 
       <table colsep="1">
@@ -621,7 +619,7 @@
             <row>
               <entry><guimenuitem>Tags verwijderen</guimenuitem></entry>
 
-              <entry>Indien ingeschakeld worden alle tags voor opmaak verwijderd uit de bronsegmenten. Dit is handig als teksten worden afgehandeld waarin in-regelige opmaak geen echt nut heeft (bijv. ge-OCRde PDF, slecht geconverteerde .odt of .docx, etc.) Alleen in-regelige tags worden verwijderd, dus normaal gesproken zou er geen probleem moeten zijn met het openen van de doeldocumenten. Niet-zichtbare opmaak (d.i. die niet als tags verschijnen in de bewerker van OmegaT) wordt in het doeldocument behouden.</entry>
+              <entry>Indien ingeschakeld worden alle tags voor opmaak verwijderd uit de bronsegmenten. Dit is handig als teksten worden afgehandeld waarin in-regelige opmaak geen echt nut heeft (bijv. ge-OCRde pdf, slecht geconverteerde .odt of .docx, etc.) Alleen in-regelige tags worden verwijderd, dus normaal gesproken zou er geen probleem moeten zijn met het openen van de doeldocumenten. Niet-zichtbare opmaak (d.i. die niet als tags verschijnen in de bewerker van OmegaT) wordt in het doeldocument behouden.</entry>
             </row>
 
             <row>
@@ -642,7 +640,7 @@
 
     <section id="submenu.Options">
       <title><indexterm class="singular">
-          <primary>Hoofdmenu</primary> <secondary>Opties</secondary>
+          <primary>Menu</primary> <secondary>Opties</secondary>
         </indexterm>Opties</title>
 
       <table colsep="1">
@@ -679,7 +677,7 @@
             <row>
               <entry><guimenuitem>TransTips</guimenuitem></entry>
 
-              <entry>Stelt u in staat de mogelijkheid <emphasis>TransTips </emphasis>te activeren/deactiveren en stelt de optie er van in op<emphasis> Exacte overeenkomst.</emphasis> Met de geactiveerde <emphasis>TransTips</emphasis> zal een klik met rechts op een geaccentueerd woord in de brion een pop-upmenu openen met de items van de woordenlijst voor het woord waarop u hebt geklikt. U kunt dan op de geprefereerde vertaling klikken om die in te voegen in het doelsegment op de huidige positie. Met <emphasis>TransTips/Exacte overeenkomst </emphasis> ingeschakeld, zullen alleen volledige woorden worden gecontroleerd, anders zullen ook gedeelten van woorden overeenkomen.</entry>
+              <entry>Stelt u in staat de mogelijkheid <emphasis>TransTips </emphasis>te activeren/deactiveren en stelt de optie er van in op<emphasis> Exacte overeenkomst.</emphasis> Met de geactiveerde <emphasis>TransTips</emphasis> zal een klik met rechts op een geaccentueerd woord in de bron een pop-upmenu openen met de items van de woordenlijst voor het woord waarop u hebt geklikt. U kunt dan op de geprefereerde vertaling klikken om die in te voegen in het doelsegment op de huidige positie. Met <emphasis>TransTips/Exacte overeenkomst </emphasis> ingeschakeld, zullen alleen volledige woorden worden gecontroleerd, anders zullen ook gedeelten van woorden overeenkomen.</entry>
             </row>
 
             <row>
@@ -760,7 +758,9 @@
 
     <section id="submenu.Help">
       <title>Help<indexterm class="singular">
-          <primary>Hoofdmenu</primary> <secondary>Help</secondary>
+          <primary>Menu</primary>
+
+          <secondary>Help</secondary>
         </indexterm></title>
 
       <table colsep="1">
@@ -796,7 +796,7 @@
 
     <para>Sneltoetsen worden geactiveerd door te drukken op <keycap>Ctrl</keycap> en een letter. Sommige sneltoetsen gebruiken ook andere toetsen. Voor de leesbaarheid worden letters hier geschreven als hoofdletters.</para>
 
-    <para>Ctrl wordt gebruikt op Windows, UNIX en UNIX-achtige besturingssystemen die een toetsenbord hebben met de <keycap>Ctrl</keycap> / <keycap>Control</keycap>-toets. Mac-gebrukers zouden in plaats daarvan de <guimenuitem>cmd+toets</guimenuitem> moeten gebruiken. Op toetsenborden van Apple heeft de <guimenuitem>cmd</guimenuitem>-toets een label &quot;command&quot; of een Apple-merkteken er op.</para>
+    <para>Ctrl wordt gebruikt op Windows, UNIX en UNIX-achtige besturingssystemen die een toetsenbord hebben met de <keycap>Ctrl</keycap> / <keycap>Control</keycap>-toets. Mac-gebruikers zouden in plaats daarvan de <guimenuitem>cmd+toets</guimenuitem> moeten gebruiken. Op toetsenborden van Apple heeft de <guimenuitem>cmd</guimenuitem>-toets een label &quot;command&quot; of een merkteken van Apple er op.</para>
 
     <itemizedlist>
       <listitem>

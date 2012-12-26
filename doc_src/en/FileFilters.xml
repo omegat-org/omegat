@@ -318,7 +318,7 @@
           class="singular">
           <primary>File filters</primary>
 
-          <secondary>File type and name patterne</secondary>
+          <secondary>File type and name pattern</secondary>
         </indexterm></title>
 
       <para>When OmegaT encounters a file in its source folder, it attempts to

@@ -19,15 +19,13 @@
     your files, such as your source file, translation memories, glossaries,
     and eventually your translated file. In the <guimenu>Project</guimenu>
     menu, select <menuchoice>
-        <guimenu/>
-
         <guimenuitem>New...</guimenuitem>
       </menuchoice><indexterm class="singular">
         <primary>Menu Project</primary>
 
         <secondary>New...</secondary>
-      </indexterm> type a name for your project. Remember where you create the
-    project, because you will later need to return to it.</para>
+      </indexterm> and type a name for your project. Remember where you are
+    creating the project, because you will need to return to it later.</para>
 
     <para>After you give your project a name, the Create New Project dialog
     will open. At the top of that dialog, select your source file's language

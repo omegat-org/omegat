@@ -66,8 +66,8 @@
     only finds exact matches with the glossary entry (e.g. does not find
     inflected forms etc.). New terms can be added manually to the glossary
     file(s) during translation, for example in a text editor. Newly added
-    terms will not be recognized once the changes is the text file have been
-    saved. </para>
+    terms will not be recognized once the changes in the text file have been
+    saved.</para>
 
     <para>The source term does not have to be a single-word item, as the next
     example shows:</para>

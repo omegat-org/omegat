@@ -13,7 +13,7 @@
     <itemizedlist>
       <listitem>
         <para><emphasis role="bold">Translation
-        memory:</emphasis><application> </application>OmegaT stores your
+        memory:</emphasis><application> OmegaT</application> stores your
         translations in a translation memory file. At the same time, it can
         use memories files from previous translations for reference.
         Translation memories can be very useful in a translation where there

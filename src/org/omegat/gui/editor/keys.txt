@@ -1,50 +1,51 @@
 This short text describes key behavior in the editor.
 
 Terms:
- "move to inside segment" means, what caret will be moved to the begin of segment if previous position was before segment, and to the end of segment, if previous position was after segment
+ "move to inside segment" means that caret will be moved to the begin of segment if previous position was before segment, and to the end of segment, if previous position was after segment.
 
 Keys definitions:
+ Keys between parenthesis indicate Mac specific keys.
 
  Left: one char left, but not earlier than segment's begin
  Right: one char right, but not later than segment's end
- Ctrl+Left: one word left, but stay within the segment
- Ctrl+Right: one word right, but stay within the segment
+ Ctrl+Left (Alt+Left): one word left, but stay within the segment (Mac: the caret moves to the leftmost side of the word)
+ Ctrl+Right (Alt+Right): one word right, but stay within the segment (Mac: as above)
 
- PgUp: move to one page up
- PgDn: move to one page down
+ PgUp (Fn+Up): move to one page up
+ PgDn (Fn+Down): move to one page down
 
- Home: to the begin of segment's line
- End: to the end of segment's line
- Ctrl+Home: to the beginning of the segment
- Ctrl+End: to the ending of the segment
- Ctrl+PgUp: to the beginning of the document(Mac: Cmd+PgUp)
- Ctrl+PgDn: to the ending of the document(Mac: Cmd+PgDn)
+ Home (Cmd+Left): to the begin of segment's line
+ End (Cmd+Right): to the end of segment's line
+ Ctrl+Home (Cmd+Up): to the beginning of the segment
+ Ctrl+End (Cmd+Down): to the end of the segment
+ Ctrl+PgUp (Cmd+Fn+Up): to the beginning of the document
+ Ctrl+PgDn (Cmd+Fn+Down): to the end of the document
 
 
- Backspace: remove char before caret
- Delete: remove char after caret
- Ctrl+Backspace: remove to the begin of word(Mac: Alt+Backspace)
- Ctrl+Delete: remove to the begin of next word(Mac: Alt+Delete)
+ Backspace (Delete): remove char before caret
+ Delete (Fn+Delete / "Delete ⌦" on full keyboards): remove char after caret
+ Ctrl+Backspace (Alt+Delete): remove to the begin of word
+ Ctrl+Delete (Alt+Fn+Delete / Alt+"Delete ⌦"): remove to the begin of next word
 
- Ctrl+Enter: previous segment(Mac: Cmd+Enter)
- Ctrl+A: select full editable segment(Mac: Cmd+A)
- Ctrl+Shift+O: RTL-LTR switch
+ Ctrl (Cmd)+Enter: previous segment
+ Ctrl (Cmd)+A: select full editable segment
+ Shift+Ctrl+O: RTL-LTR switch
 
 Keys definitions, which behavior differ than caret outside editable segment behavior:
 
- Home: "move to inside segment"
- End: "move to inside segment"
+ Home (Up): "move to inside segment"
+ End (Down): "move to inside segment"
 
- Backspace: nothing
- Delete: nothing
+ Backspace (Delete): nothing
+ Delete (Fn+Delete / "Delete ⌦"): nothing
  Any char key, if clicked outside editable segment, will be ignored.
 
 
  "Shift" key doesn't have own behavior - it just add selection from old to new caret position.
 All keys should move caret with the "Shift", like without "Shift"
 
-  Commands, which works even current selection is outside from editable segment. In this case selection will be corrected to segment's boundaries:
-1. Paste (Ctrl+V or Ctrl+Insert)
-2. Cut (Ctrl+X or Ctrl+Delete)
-3. Insert match (Ctrl+I)
-4. Insert source (Ctrl+Shift+I)  
+  Commands, which works even if current selection is outside the editable segment. In this case selection will be corrected to segment's boundaries:
+ Paste: Ctrl (Cmd)+V / Ctrl+Insert (No Insert key on Mac)
+ Cut: Ctrl (Cmd)+X / Ctrl+Delete  (No effect on Mac)
+ Insert match: Ctrl (Cmd)+I
+ Insert source: Shift+Ctrl (Cmd)+I

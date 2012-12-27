@@ -54,6 +54,8 @@ public class EditorSettings {
     private boolean markNonUniqueSegments;
     private boolean markNoted;
     private boolean markNBSP;
+    private boolean markWhitespace;
+    private boolean markBidi;
     private String displayModificationInfo;
     private boolean autoSpellChecking;
     private boolean viewSourceBold;
@@ -74,6 +76,8 @@ public class EditorSettings {
         markNonUniqueSegments = Preferences.isPreference(Preferences.MARK_NON_UNIQUE_SEGMENTS);
         markNoted = Preferences.isPreference(Preferences.MARK_NOTED_SEGMENTS);
         markNBSP  = Preferences.isPreference(Preferences.MARK_NBSP);
+        markWhitespace  = Preferences.isPreference(Preferences.MARK_WHITESPACE);
+        markBidi  = Preferences.isPreference(Preferences.MARK_BIDI);
         displayModificationInfo = Preferences.getPreferenceDefault(Preferences.DISPLAY_MODIFICATION_INFO,
                 DISPLAY_MODIFICATION_INFO_NONE);
         autoSpellChecking = Preferences.isPreference(Preferences.ALLOW_AUTO_SPELLCHECKING);
@@ -156,6 +160,20 @@ public class EditorSettings {
     public boolean isMarkNBSP() {
         return markNBSP;
     }
+    /**
+     * mark whitespace?
+     * @return true when set, false otherwise
+     */
+    public boolean isMarkWhitespace() {
+        return markWhitespace;
+    }
+    /**
+     * mark Bidirectional control characters
+     * @return true when set, false otherwise
+     */
+    public boolean isMarkBidi() {
+        return markBidi;
+    }
 
     public void setDisplaySegmentSources(boolean displaySegmentSources) {
         UIThreadsUtil.mustBeSwingThread();
@@ -206,6 +224,32 @@ public class EditorSettings {
 
         this.markNBSP = markNBSP;
         Preferences.setPreference(Preferences.MARK_NBSP, markNBSP);
+
+        if (Core.getProject().isProjectLoaded()) {
+            parent.loadDocument();
+            parent.activateEntry();
+        }
+    }
+    public void setMarkWhitespace(boolean markWhitespace) {
+        UIThreadsUtil.mustBeSwingThread();
+
+        parent.commitAndDeactivate();
+
+        this.markWhitespace = markWhitespace;
+        Preferences.setPreference(Preferences.MARK_WHITESPACE, markWhitespace);
+
+        if (Core.getProject().isProjectLoaded()) {
+            parent.loadDocument();
+            parent.activateEntry();
+        }
+    }
+    public void setMarkBidi(boolean markBidi) {
+        UIThreadsUtil.mustBeSwingThread();
+
+        parent.commitAndDeactivate();
+
+        this.markBidi = markBidi;
+        Preferences.setPreference(Preferences.MARK_BIDI, markBidi);
 
         if (Core.getProject().isProjectLoaded()) {
             parent.loadDocument();

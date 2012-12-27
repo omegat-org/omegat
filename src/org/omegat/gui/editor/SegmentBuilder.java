@@ -608,6 +608,7 @@ public class SegmentBuilder {
             //and that is shown partly in RTL as " Blah|<em>%s</em>|, Blah.".
             //Note the first space is displayed to the left of the word.
             //To prevent this, the formatting is not done when the editor is in RTL.
+            //(markers are used for formatting in this case, which is a little less beautiful)
             return;
         }
         //first remove any formatting
@@ -627,15 +628,6 @@ public class SegmentBuilder {
             Matcher removeMatcher = removePattern.matcher(text);
             while (removeMatcher.find()) {
                 doc.setCharacterAttributes(start+removeMatcher.start(), removeMatcher.end()-removeMatcher.start(), attrRemove, true);
-            }
-        }
-        //format non-breakable spaces
-        AttributeSet attrNBSP = attrs(isSource, false, false, true);
-        Pattern nbspPattern = PatternConsts.NBSP;
-        if (nbspPattern != null) {
-            Matcher nbspMatcher = nbspPattern.matcher(text);
-            while (nbspMatcher.find()) {
-                doc.setCharacterAttributes(start+nbspMatcher.start(), nbspMatcher.end()-nbspMatcher.start(), attrNBSP, true);
             }
         }
     }

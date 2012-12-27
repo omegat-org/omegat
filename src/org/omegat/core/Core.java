@@ -40,7 +40,12 @@ import org.omegat.gui.comments.CommentsTextArea;
 import org.omegat.gui.dictionaries.DictionariesTextArea;
 import org.omegat.gui.editor.EditorController;
 import org.omegat.gui.editor.IEditor;
+import org.omegat.gui.editor.mark.BidiMarkerFactory;
 import org.omegat.gui.editor.mark.IMarker;
+import org.omegat.gui.editor.mark.NBSPMarker;
+import org.omegat.gui.editor.mark.RemoveTagMarker;
+import org.omegat.gui.editor.mark.TagMarker;
+import org.omegat.gui.editor.mark.WhitespaceMarkerFactory;
 import org.omegat.gui.exttrans.MachineTranslateTextArea;
 import org.omegat.gui.glossary.GlossaryTextArea;
 import org.omegat.gui.main.ConsoleWindow;
@@ -166,6 +171,18 @@ public class Core {
         // 2. Initialize application frame
         MainWindow me = new MainWindow();
         mainWindow = me;
+
+        Core.registerMarker(new TagMarker());
+        Core.registerMarker(new RemoveTagMarker());
+        Core.registerMarker(new NBSPMarker());
+        Core.registerMarker(new WhitespaceMarkerFactory.SpaceMarker());
+        Core.registerMarker(new WhitespaceMarkerFactory.TabMarker());
+        Core.registerMarker(new WhitespaceMarkerFactory.LFMarker());
+        Core.registerMarker(new BidiMarkerFactory.RLMMarker());
+        Core.registerMarker(new BidiMarkerFactory.LRMMarker());
+        Core.registerMarker(new BidiMarkerFactory.PDFMarker());
+        Core.registerMarker(new BidiMarkerFactory.LROMarker());
+        Core.registerMarker(new BidiMarkerFactory.RLOMarker());
 
         // 3. Initialize other components. They add themselves to the main window.
         editor = new EditorController(me);

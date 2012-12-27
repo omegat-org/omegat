@@ -12,6 +12,10 @@
   - git team git server fingerprint will be stored in plain text file if
 you also store credentials. Acceptance of fingerprint will be remembered.
 
+  - markers for whitespace (space, tab, newline) and Bidi-characters.
+
+  - tag colouring for RTL languages / orientation
+
   Bug fixes:
 
   - PO filter: there was an error when loading PO files with a target

@@ -48,6 +48,8 @@ public final class Styles {
     public static final Color COLOR_PLACEHOLDER = new Color(150, 150, 150);
     public static final Color COLOR_REMOVETEXT_TARGET = new Color(255, 0, 0);
     public static final Color COLOR_NBSP = new Color(200, 200, 200);
+    public static final Color COLOR_WHITESPACE = new Color(200, 200, 200);
+    public static final Color COLOR_BIDIMARKERS = new Color(200, 0, 0);
 
     /**
      * Construct required attributes set.

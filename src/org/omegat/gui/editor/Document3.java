@@ -42,7 +42,7 @@ import javax.swing.text.StyleConstants;
  */
 @SuppressWarnings("serial")
 public class Document3 extends DefaultStyledDocument {
-    enum ORIENTATION {
+    public enum ORIENTATION {
         /** All text is left-to-right oriented. */
         ALL_LTR,
         /** All text is right-to-left oriented. */

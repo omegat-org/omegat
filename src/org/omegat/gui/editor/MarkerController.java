@@ -31,6 +31,7 @@ import javax.swing.text.BadLocationException;
 import javax.swing.text.Highlighter;
 import javax.swing.text.Highlighter.HighlightPainter;
 
+import org.omegat.core.Core;
 import org.omegat.filters2.master.PluginUtils;
 import org.omegat.gui.editor.mark.CalcMarkersThread;
 import org.omegat.gui.editor.mark.EntryMarks;
@@ -78,6 +79,10 @@ public class MarkerController {
                 Log.logErrorRB(ex, "PLUGIN_MARKER_INITIALIZE", mc.getName());
             }
         }
+        for (IMarker marker : Core.getMarkers()) {
+            ms.add(marker);
+        }
+
         markerThreads = new CalcMarkersThread[ms.size()];
         markerNames = new String[ms.size()];
         painters = new HighlightPainter[ms.size()];

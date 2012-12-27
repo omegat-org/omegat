@@ -149,6 +149,10 @@ public class Preferences {
     
     /** Mark the non-breakable spaces with a different color */
     public static final String MARK_NBSP = "mark_nbsp";
+    /** Mark whitespace as symbols */
+    public static final String MARK_WHITESPACE = "mark_whitespace";
+    /** Mark Bidi controls as symbols */
+    public static final String MARK_BIDI = "mark_bidi";
 
     /** Mark the translated segments with a different color */
     public static final String MARK_TRANSLATED_SEGMENTS = "mark_translated_segments";

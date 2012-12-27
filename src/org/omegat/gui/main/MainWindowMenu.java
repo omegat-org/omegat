@@ -265,6 +265,8 @@ public class MainWindowMenu implements ActionListener, IMainMenu {
         viewMenu.add(viewMarkNonUniqueSegmentsCheckBoxMenuItem = createCheckboxMenuItem("MW_VIEW_MENU_MARK_NON_UNIQUE_SEGMENTS"));
         viewMenu.add(viewMarkNotedSegmentsCheckBoxMenuItem = createCheckboxMenuItem("MW_VIEW_MENU_MARK_NOTED_SEGMENTS"));
         viewMenu.add(viewMarkNBSPCheckBoxMenuItem = createCheckboxMenuItem("MW_VIEW_MENU_MARK_NBSP"));
+        viewMenu.add(viewMarkWhitespaceCheckBoxMenuItem = createCheckboxMenuItem("MW_VIEW_MENU_MARK_WHITESPACE"));
+        viewMenu.add(viewMarkBidiCheckBoxMenuItem = createCheckboxMenuItem("MW_VIEW_MENU_MARK_BIDI"));
         viewMenu.add(viewModificationInfoMenu = createMenu("MW_VIEW_MENU_MODIFICATION_INFO"));
         ButtonGroup viewModificationInfoMenuBG = new ButtonGroup();
         viewModificationInfoMenu
@@ -283,6 +285,8 @@ public class MainWindowMenu implements ActionListener, IMainMenu {
         viewMarkNonUniqueSegmentsCheckBoxMenuItem.setIcon(getViewMenuMarkTextIcon(Styles.COLOR_NON_UNIQUE));
         viewMarkNotedSegmentsCheckBoxMenuItem.setIcon(getViewMenuMarkBGIcon(Styles.COLOR_NOTED));
         viewMarkNBSPCheckBoxMenuItem.setIcon(getViewMenuMarkBGIcon(Styles.COLOR_NBSP));
+        viewMarkWhitespaceCheckBoxMenuItem.setIcon(getViewMenuMarkBGIcon(Styles.COLOR_WHITESPACE));
+        viewMarkBidiCheckBoxMenuItem.setIcon(getViewMenuMarkBGIcon(Styles.COLOR_BIDIMARKERS));
         viewModificationInfoMenu.setIcon(getViewMenuMarkBGIcon(null));
 
         toolsMenu.add(toolsValidateTagsMenuItem = createMenuItem("TF_MENU_TOOLS_VALIDATE"));
@@ -375,6 +379,10 @@ public class MainWindowMenu implements ActionListener, IMainMenu {
                 .isMarkNotedSegments());
         viewMarkNBSPCheckBoxMenuItem.setSelected(Core.getEditor().getSettings()
                 .isMarkNBSP());
+        viewMarkWhitespaceCheckBoxMenuItem.setSelected(Core.getEditor().getSettings()
+                .isMarkWhitespace());
+        viewMarkBidiCheckBoxMenuItem.setSelected(Core.getEditor().getSettings()
+                .isMarkBidi());
 
         viewDisplayModificationInfoNoneRadioButtonMenuItem
                 .setSelected(EditorSettings.DISPLAY_MODIFICATION_INFO_NONE.equals(Core.getEditor()
@@ -612,6 +620,8 @@ public class MainWindowMenu implements ActionListener, IMainMenu {
     JCheckBoxMenuItem viewMarkNonUniqueSegmentsCheckBoxMenuItem;
     JCheckBoxMenuItem viewMarkNotedSegmentsCheckBoxMenuItem;
     JCheckBoxMenuItem viewMarkNBSPCheckBoxMenuItem;
+    JCheckBoxMenuItem viewMarkWhitespaceCheckBoxMenuItem;
+    JCheckBoxMenuItem viewMarkBidiCheckBoxMenuItem;
     JMenu viewModificationInfoMenu;
     JRadioButtonMenuItem viewDisplayModificationInfoNoneRadioButtonMenuItem;
     JRadioButtonMenuItem viewDisplayModificationInfoSelectedRadioButtonMenuItem;

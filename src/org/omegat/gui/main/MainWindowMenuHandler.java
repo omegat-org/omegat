@@ -529,6 +529,18 @@ public class MainWindowMenuHandler {
                 .setMarkNBSP(
                         mainWindow.menu.viewMarkNBSPCheckBoxMenuItem.isSelected());
     }
+    public void viewMarkWhitespaceCheckBoxMenuItemActionPerformed(){
+        Core.getEditor()
+                .getSettings()
+                .setMarkWhitespace(
+                        mainWindow.menu.viewMarkWhitespaceCheckBoxMenuItem.isSelected());
+    }
+    public void viewMarkBidiCheckBoxMenuItemActionPerformed(){
+        Core.getEditor()
+                .getSettings()
+                .setMarkBidi(
+                        mainWindow.menu.viewMarkBidiCheckBoxMenuItem.isSelected());
+    }
 
     public void viewDisplayModificationInfoNoneRadioButtonMenuItemActionPerformed() {
         Core.getEditor().getSettings()

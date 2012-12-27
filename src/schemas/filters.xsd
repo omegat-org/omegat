@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:jaxb="http://java.sun.com/xml/ns/jaxb" jaxb:version="2.1"
 	elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<xs:element name="filters">
 		<xs:annotation>
@@ -9,7 +10,13 @@
 		</xs:annotation>
 		<xs:complexType>
 			<xs:sequence>
-				<xs:element ref="filter" minOccurs="0" maxOccurs="unbounded" />
+				<xs:element ref="filter" minOccurs="0" maxOccurs="unbounded">
+					<xs:annotation>
+						<xs:appinfo>
+							<jaxb:property name="filters"/>
+						</xs:appinfo>
+					</xs:annotation>
+				</xs:element>
 			</xs:sequence>
 		</xs:complexType>
 	</xs:element>

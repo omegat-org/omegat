@@ -24,6 +24,7 @@
 				<xs:element name="target_lang" type="xs:string"/>
 				<xs:element name="sentence_seg" type="xs:boolean" minOccurs="0"/>
 				<xs:element name="support_default_translations" type="xs:boolean" minOccurs="0"/>
+				<xs:element name="remove_tags" type="xs:boolean" minOccurs="0"/>
 			</xs:all>
 			<xs:attribute name="version" type="xs:string" use="required"/>
 		</xs:complexType>

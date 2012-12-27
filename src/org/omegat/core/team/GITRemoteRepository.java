@@ -29,6 +29,8 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Properties;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.swing.JOptionPane;
 
@@ -338,6 +340,7 @@ public class GITRemoteRepository implements IRemoteRepository {
          */
         private final String pkey_username = "username";
         private final String pkey_password = "password";
+        private final String pkey_fingerprint = "RSAkeyfingerprint";
 
         /**
          * Currently used username
@@ -348,9 +351,23 @@ public class GITRemoteRepository implements IRemoteRepository {
          */
         private char[] password;
 
+        /**
+         * Fingerprint of git server.
+         */
+        private String fingerprint;
+
+        private boolean saveCredentialsToPlainText = false;
+
         public MyCredentialsProvider(GITRemoteRepository repo) {
             super();
             this.gitRemoteRepository = repo;
+            readCredentials();
+        }
+
+        /**
+         * reads username, password and host fingerprint from plain text file.
+         */
+        private void readCredentials() {
             credentialsFilename = gitRemoteRepository.localDirectory+File.separator+"credentials.properties";
             File credentialsFile = new File(credentialsFilename);
             if (credentialsFile.canRead()) {
@@ -359,11 +376,36 @@ public class GITRemoteRepository implements IRemoteRepository {
                     p.load(new FileInputStream(credentialsFile));
                     username = p.getProperty(pkey_username);
                     password = p.getProperty(pkey_password).toCharArray();
+                    fingerprint = p.getProperty(pkey_fingerprint);
+                    saveCredentialsToPlainText = true;
                 } catch (FileNotFoundException e) {
                     e.printStackTrace();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
+            }
+        }
+
+        /**
+         * Saves username, password and fingerprint (if known) to plain text file.
+         */
+        private void saveCredentialsToPlainTextFile() {
+            Properties p = new Properties();
+            p.setProperty(pkey_username, username);
+            p.setProperty(pkey_password, String.valueOf(password));
+            if (fingerprint != null) {
+                p.setProperty(pkey_fingerprint, fingerprint);
+            }
+            File credentialsFile = new File(credentialsFilename);
+            try {
+                if (!credentialsFile.exists()) {
+                    credentialsFile.createNewFile();
+                }
+                p.store(new FileOutputStream(credentialsFile), "git remote access credentials for OmegaT project");
+            } catch (FileNotFoundException e) {
+                Core.getMainWindow().displayErrorRB(e, "TEAM_ERROR_SAVE_CREDENTIALS", null, "TF_ERROR");
+            } catch (IOException e) {
+                Core.getMainWindow().displayErrorRB(e, "TEAM_ERROR_SAVE_CREDENTIALS", null, "TF_ERROR");
             }
         }
 
@@ -408,9 +450,31 @@ public class GITRemoteRepository implements IRemoteRepository {
                         continue;
                     }
                 } else if (i instanceof CredentialItem.YesNoType) {
-                    int choice = Core.getMainWindow().showConfirmDialog(i.getPromptText(), null, JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+                    //e.g.: The authenticity of host 'mygitserver' can't be established.
+                    //RSA key fingerprint is e2:d3:84:d5:86:e7:68:69:a0:aa:a6:ad:a3:a0:ab:a2.
+                    //Are you sure you want to continue connecting?
+                    String promptText = i.getPromptText();
+                    String promptedFingerprint = null;
+                    Pattern p = Pattern.compile("The authenticity of host '.*' can't be established\\.\\nRSA key fingerprint is (([0-9a-f]{2}:){15}[0-9a-f]{2})\\.\\nAre you sure you want to continue connecting\\?");
+                    Matcher fingerprintMatcher = p.matcher(promptText);
+                    if (fingerprintMatcher.find()) {
+                        int start = fingerprintMatcher.start(1);
+                        int end = fingerprintMatcher.end(1);
+                        promptedFingerprint = promptText.substring(start, end);
+                        if (promptedFingerprint.equals(this.fingerprint)) {
+                            ((CredentialItem.YesNoType) i).setValue(true);
+                            continue;
+                        }
+                    }
+                    int choice = Core.getMainWindow().showConfirmDialog(promptText, null, JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
                     if (choice==JOptionPane.YES_OPTION) {
                         ((CredentialItem.YesNoType) i).setValue(true);
+                        if (promptedFingerprint != null) {
+                            this.fingerprint = promptedFingerprint;
+                        }
+                        if (saveCredentialsToPlainText) {
+                            saveCredentialsToPlainTextFile();
+                        }
                     } else {
                         ((CredentialItem.YesNoType) i).setValue(false);
                     }
@@ -464,21 +528,9 @@ public class GITRemoteRepository implements IRemoteRepository {
                 username = userPassDialog.userText.getText();
                 password = userPassDialog.passwordField.getPassword();
                 gitRemoteRepository.setReadOnly(userPassDialog.cbReadOnly.isSelected());
-                if (userPassDialog.cbForceSavePlainPassword.isSelected()) {
-                    Properties p = new Properties();
-                    p.setProperty(pkey_username, username);
-                    p.setProperty(pkey_password, String.valueOf(password));
-                    File credentialsFile = new File(credentialsFilename);
-                    try {
-                        if (!credentialsFile.exists()) {
-                            credentialsFile.createNewFile();
-                        }
-                        p.store(new FileOutputStream(credentialsFile), "git remote access credentials for OmegaT project");
-                    } catch (FileNotFoundException e) {
-                        Core.getMainWindow().displayErrorRB(e, "TEAM_ERROR_SAVE_CREDENTIALS", null, "TF_ERROR");
-                    } catch (IOException e) {
-                        Core.getMainWindow().displayErrorRB(e, "TEAM_ERROR_SAVE_CREDENTIALS", null, "TF_ERROR");
-                    }
+                saveCredentialsToPlainText = userPassDialog.cbForceSavePlainPassword.isSelected();
+                if (saveCredentialsToPlainText) {
+                    saveCredentialsToPlainTextFile();
                 }
                 return true;
             } else {

@@ -7,6 +7,11 @@
 ----------------------------------------------------------------------
 2.6.1 update 3 vs. 2.6.1 update 2
 
+  Enhancements:
+  
+  - git team git server fingerprint will be stored in plain text file if
+you also store credentials. Acceptance of fingerprint will be remembered.
+
   Bug fixes:
 
   - PO filter: there was an error when loading PO files with a target

@@ -106,7 +106,7 @@
 
     <para><literal>java -jar OmegaT.jar --mode=console-align /каталог-проекта --alignDir=/переведённыеФайлы/</literal></para>
 
-    <para>в каталоге <filename>alignDir </filename> должен находится файл на языке, используемом в проекте как язык перевода. Т. е., если в проекте производится перевод с английского на французский, имя bundle-файла должно иметь окончание «_fr». Полученный TMX-файл будет размещён в каталоге <literal>omegat</literal> под именем <filename>align.tmx</filename>.</para>
+    <para>в каталоге <filename>alignDir </filename> должен находится файл на языке, используемом в проекте как язык перевода. Т. е., если в проекте производится перевод с английского на французский, имя bundle-файла должно иметь окончание «_fr». Полученный TMX-файл будет размещён в каталоге <literal>omegat</literal> под именем <filename>align.tmx</filename>.</para>
   </section>
 
   <section id="font.settings">

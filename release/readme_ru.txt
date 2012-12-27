@@ -50,7 +50,7 @@
 
 - Текстовые фалы (plain text)
 
-  - тексты ASCII (.txt и т.п. )
+  - тексты ASCII (.txt и т. п.)
   - кодированный текст (*.UTF8)
   - пакеты Java resource (*.properties);
   - файлы PO (*.po)
@@ -64,7 +64,7 @@
 
   - файлы OpenOffice.org / OpenDocument (*.odt, *.ott, *.ods, *.ots, *.odp, *.otp)
   - файлы Microsoft Open XML
-  - файлы (X)HTML (*.html, *.xhtml,*.xht)
+  - файлы (X)HTML (*.html, *.xhtml, *.xht)
   - файлы HTML Help Compiler (*.hhc, *.hhk)
   - файлы DocBook (*.xml)
   - одноязычные XLIFF (*.xlf, *.xliff, *.sdlxliff)
@@ -215,8 +215,9 @@ omegat.kaptn
   Жан-Кристоф Хелари (Jean-Christophe Helary);
   Томас Хюрио (Thomas Huriaux);
   Ганс-Питер Якобс (Hans-Peter Jacobs);
-  Гвидо Линдерс (Guido Leenders);
   Ибай Лакунза Веласко (Ibai Lakunza Velasco);
+  Гвидо Линдерс (Guido Leenders);
+  Аарон Мадлон-Кай (Aaron Madlon-Kay)
   Фабьен Мальденбаум (Fabián Mandelbaum);
   Джон Моран (John Moran);
   Максим Михальчук (Maxym Mykhalchuk); 
@@ -243,25 +244,23 @@ omegat.kaptn
 (Если вы считаете, что серьёзно помогли проекту ОмегаТ, но не видите вашего имени в списке, пожалуйста, сообщите нам об этом).
 
 ОмегаТ использует следующие библиотеки:
-
-  HTMLParser. Авторы: Сомик Раха (Somik Raha), Деррик Освальд (Derrick Oswald) и другие (лицензия LGPL)
-  http://sourceforge.net/projects/htmlparser
-
+  HTMLParser 1.6 (авторы: Somik Raha, Derrick Oswald и другие; лицензия: LGPL)
   MRJ Adapter 1.0.8. Автор — Стив Рой (Steve Roy) (лицензия LGPL)
-  http://homepage.mac.com/sroy/mrjadapter/
-
   Инфраструктура VLDocking Framework 2.1.4. Производство VLSolutions (лицензия CeCILL)
-  http://www.vlsolutions.com/en/products/docking/
-
   Hunspell. Авторы: Ласло Немет (László Németh) и другие (лицензия LGPL)
-
   JNA. Авторы: Тодд Фаст (Todd Fast), Тимоти Уолл (Timothy Wall) и другие (лицензия LGPL)
-
   Swing-Layout 1.0.2 (лицензия LGPL)
-
   Jmyspell 2.1.4 (лицензия LGPL)
-
-  JAXB 2.1.7 (лицензия GPLv2 + classpath exception)
+  JAXB (лицензия GPLv2 + classpath exception)
+  SJXP 1.0.2 (лицензия GPLv2)
+  SVNKit 1.3.7 (лицензия TMate)
+  Sequence Library (лицензия Sequence Library)
+  ANTLR 3.4 (лицензия ANTLR 3)
+  SQLJet 1.1.3 (лицензия GPL v2)
+  JGit (лицензия Eclipse Distribution)
+  JSch (лицензия JSch)
+  Base64 (общественное достояние)
+  Diff (лицензия GPL)
 
 ==============================================================================
  5.  ОмегаТ работает неправильно? Нужна помощь?

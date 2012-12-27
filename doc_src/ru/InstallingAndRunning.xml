@@ -159,7 +159,7 @@
           </listitem>
 
           <listitem>
-            <para> Прочие значки - Обзор и перейдите в подкаталог /image в главного каталога программы <application>ОмегаТ</application>. Выберите значок «<application>OmegaT</application>.png».</para>
+            <para>Прочие значки - Обзор и перейдите в подкаталог /image в главного каталога программы <application>ОмегаТ</application>. Выберите значок «<application>OmegaT</application>.png».</para>
           </listitem>
 
           <listitem>
@@ -246,7 +246,7 @@
     <section id="Mac.OSX.goodies">
       <title>«Плюшки» для Mac OS X</title>
 
-      <para><emphasis><application>OmegaT</application>.app</emphasis> может взаимодействовать с Mac OS X Services. Т. е., можно выделить любое слово в окне <application>ОмегаТ</application> и использовать Services, чтобы поискать его в Spotlight или Google. Также, для автоматизации часто повторяющихся действий можно использовать AppleScript или Automator.</para>
+      <para><emphasis><application>OmegaT</application>.app</emphasis> может взаимодействовать с Mac OS X Services. Т. е., можно выделить любое слово в окне <application>ОмегаТ</application> и использовать Services, чтобы поискать его в Spotlight или Google. Также, для автоматизации часто повторяющихся действий можно использовать AppleScript или Automator.</para>
     </section>
   </section>
 
@@ -260,7 +260,7 @@
     <section>
       <title id="which.package.to.download.other">Загрузка нужного пакета</title>
 
-      <para>Пакеты <application>ОмегаТ</application> со встроенной Oracle Java JRE существуют для только платформ GNU/Linux (Intel x86) и Windows. Пользователи других платформ (GNU/Linux PowerPC, GNU/Linux x64, Solaris SPARC/x86/x64, Windows x64 и т.д.) должны удостовериться, что в их системе установлена подходящая реализация Java JRE.</para>
+      <para>Пакеты <application>ОмегаТ</application> со встроенной Oracle Java JRE существуют для только платформ GNU/Linux (Intel x86) и Windows. Пользователи других платформ (GNU/Linux PowerPC, GNU/Linux x64, Solaris SPARC/x86/x64, Windows x64 и т. д.) должны удостовериться, что в их системе установлена подходящая реализация Java JRE.</para>
 
       <para>Установлена ли у вас версия Java, совместимая с Oracle Java 1.5 JRE?</para>
 
@@ -386,7 +386,7 @@
 
           <para><emphasis role="bold">-Duser.language=XX</emphasis><indexterm class="singular">
               <primary>Запуск ОмегаТ</primary> <secondary>Аргументы скрипта запуска</secondary> <tertiary>Язык пользовательского интерфейса</tertiary>
-            </indexterm> Обычно, то есть когда <application>ОмегаТ</application> запускается без каких-либо аргументов, программа сама определяет язык операционной системы пользователя. Если перевод интерфейса на этот язык уже кем-то выполнен, то <application>ОмегаТ</application> будет использовать его. Таким образом, если язык операционной системы русский и <application>ОмегаТ</application> была локализована на этот язык, то будет использоваться русский пользовательский интерфейс, русские меню и т.д. Если перевода интерфейса на язык операционной системы нет, <application>ОмегаТ</application> будет использовать английский, как язык по умолчанию. Таково стандартное поведение программы.</para>
+            </indexterm> Обычно, то есть когда <application>ОмегаТ</application> запускается без каких-либо аргументов, программа сама определяет язык операционной системы пользователя. Если перевод интерфейса на этот язык уже кем-то выполнен, то <application>ОмегаТ</application> будет использовать его. Таким образом, если язык операционной системы русский и <application>ОмегаТ</application> была локализована на этот язык, то будет использоваться русский пользовательский интерфейс, русские меню и т. д. Если перевода интерфейса на язык операционной системы нет, <application>ОмегаТ</application> будет использовать английский, как язык по умолчанию. Таково стандартное поведение программы.</para>
 
           <para>Аргумент <emphasis>-Duser.language=XX</emphasis> указывает <application>ОмегаТ</application> использовать не язык операционной системы, а заданный язык. «XX» в этой команде надо заменить на буквенный код предпочтительного языка. Итак, например, чтобы запустить <application>ОмегаТ</application> с французским интерфейсом в русской операционной системе, нам понадобится следующая команда:</para>
 
@@ -545,7 +545,7 @@
 
                 <para><literal>--alignDir={расположение переведённых файлов}</literal></para>
 
-                <para><filename>alignDir</filename> указывает расположение файлов, на языке перевода проекта. Т. е., если в проекте производится перевод с английского на французский, имя bundle-файла должно иметь окончание «_fr». Полученный TMX-файл будет размещён в каталоге <literal>omegat</literal> под именем <filename>align.tmx</filename>.</para>
+                <para><filename>alignDir</filename> указывает расположение файлов, на языке перевода проекта. Т. е., если в проекте производится перевод с английского на французский, имя bundle-файла должно иметь окончание «_fr». Полученный TMX-файл будет размещён в каталоге <literal>omegat</literal> под именем <filename>align.tmx</filename>.</para>
               </listitem>
             </itemizedlist>
           </listitem>

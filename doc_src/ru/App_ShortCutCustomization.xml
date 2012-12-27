@@ -297,7 +297,7 @@
           </row>
 
           <row>
-            <entry>Выбрать совпадение №1</entry>
+            <entry>Выбрать совпадение № 1</entry>
 
             <entry><keycap>CTRL+1</keycap></entry>
 
@@ -305,7 +305,7 @@
           </row>
 
           <row>
-            <entry>Выбрать совпадение №2</entry>
+            <entry>Выбрать совпадение № 2</entry>
 
             <entry><keycap>CTRL+2</keycap></entry>
 
@@ -313,7 +313,7 @@
           </row>
 
           <row>
-            <entry>Выбрать совпадение №3</entry>
+            <entry>Выбрать совпадение № 3</entry>
 
             <entry><keycap>CTRL+3</keycap></entry>
 
@@ -321,7 +321,7 @@
           </row>
 
           <row>
-            <entry>Выбрать совпадение №4</entry>
+            <entry>Выбрать совпадение № 4</entry>
 
             <entry><keycap>CTRL+4</keycap></entry>
 
@@ -329,7 +329,7 @@
           </row>
 
           <row>
-            <entry>Выбрать совпадение №5</entry>
+            <entry>Выбрать совпадение № 5</entry>
 
             <entry><keycap>CTRL+5</keycap></entry>
 
@@ -349,7 +349,7 @@
 
             <entry/>
 
-            <entry></entry>
+            <entry>upperCaseMenuItem</entry>
           </row>
 
           <row>
@@ -640,7 +640,7 @@
           </row>
 
           <row>
-            <entry>Советы/Показывать советы</entry>
+            <entry>Подсказки/Показывать подсказки</entry>
 
             <entry/>
 
@@ -648,7 +648,7 @@
           </row>
 
           <row>
-            <entry>Советы/Точное совпадение</entry>
+            <entry>Подсказки/Точное совпадение</entry>
 
             <entry/>
 

@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 2.6.1 update 3
 ----------------------------------------------------------------------
-   0 Enhancement
+   3 Enhancements
    3 Bug fixes
    3 Localisation updates
 ----------------------------------------------------------------------
@@ -9,12 +9,13 @@
 
   Enhancements:
   
-  - git team git server fingerprint will be stored in plain text file if
-you also store credentials. Acceptance of fingerprint will be remembered.
+  - Git team git server fingerprint will be stored in plain text file if
+credentials are also stored. Acceptance of fingerprint will be remembered.
 
-  - markers for whitespace (space, tab, newline) and Bidi-characters.
+  - Markers for whitespace (space, tab, newline) and Bidi-characters in the 
+View menu
 
-  - tag colouring for RTL languages / orientation
+  - Tag colouring for RTL languages/orientation
 
   Bug fixes:
 

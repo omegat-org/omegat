@@ -91,6 +91,7 @@ public class TransTipsPopup implements IPopupMenuConstructor {
         for (GlossaryEntry ge : GlossaryTextArea.nowEntries) {
             TransTips.search(sb.getSourceText(), ge, callback);
         }
+	    menu.addSeparator();
     }
 
     /**
@@ -137,6 +138,5 @@ public class TransTipsPopup implements IPopupMenuConstructor {
         result.add(term.toString());
         return result.toArray(new String[result.size()]);
     }
-
 
 }

@@ -118,7 +118,7 @@ public class GlossaryTextArea extends EntryInfoThreadPane<List<GlossaryEntry>> {
 
         addMouseListener(mouseListener);
 
-        Core.getEditor().registerPopupMenuConstructors(200, new TransTipsPopup());
+        Core.getEditor().registerPopupMenuConstructors(300, new TransTipsPopup());
     }
 
     @Override

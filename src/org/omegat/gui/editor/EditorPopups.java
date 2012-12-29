@@ -47,9 +47,10 @@ import org.omegat.core.spellchecker.SpellCheckerMarker;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
 import org.omegat.util.gui.UIThreadsUtil;
+import org.omegat.gui.glossary.TransTipsPopup;
 
 /**
- * Some standard editor poups.
+ * Some standard editor popups.
  * 
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Wildrich Fourie
@@ -57,10 +58,10 @@ import org.omegat.util.gui.UIThreadsUtil;
  */
 public class EditorPopups {
     public static void init(EditorController ec) {
-        ec.registerPopupMenuConstructors(10, new DefaultPopup());
-        ec.registerPopupMenuConstructors(20, new SpellCheckerPopup(ec));
-        ec.registerPopupMenuConstructors(30, new GoToSegmentPopup(ec));
-        ec.registerPopupMenuConstructors(40, new EmptyNoneTranslationPopup(ec));
+        ec.registerPopupMenuConstructors(100, new SpellCheckerPopup(ec));
+        ec.registerPopupMenuConstructors(200, new GoToSegmentPopup(ec));
+        ec.registerPopupMenuConstructors(400, new DefaultPopup());
+        ec.registerPopupMenuConstructors(500, new EmptyNoneTranslationPopup(ec));
     }
 
     /**
@@ -128,7 +129,7 @@ public class EditorPopups {
                         });
                     }
 
-                    menu.add(new JSeparator());
+            menu.addSeparator();
 
                     // let us ignore it
                     JMenuItem item = menu.add(OStrings.getString("SC_IGNORE_ALL"));
@@ -145,6 +146,9 @@ public class EditorPopups {
                             addIgnoreWord(word, wordStart, true);
                         }
                     });
+                    
+            menu.addSeparator();
+
                 }
             } catch (BadLocationException ex) {
                 Log.log(ex);
@@ -239,6 +243,17 @@ public class EditorPopups {
             }
 
             menu.addSeparator();
+            
+			// Add glossary entry
+			JMenuItem item = menu.add(OStrings.getString("GUI_GLOSSARYWINDOW_addentry"));
+            item.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                Core.getGlossary().showCreateGlossaryEntryDialog();
+                 }
+            });
+
+            menu.addSeparator();
+
         }
     }
 
@@ -266,6 +281,7 @@ public class EditorPopups {
                     ec.goToSegmentAtLocation(comp.getCaretPosition());
                 }
             });
+            menu.addSeparator();
         }
     }
 

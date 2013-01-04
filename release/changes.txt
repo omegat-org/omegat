@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 2.6.1 update 3
 ----------------------------------------------------------------------
-   3 Enhancements
+   4 Enhancements
    3 Bug fixes
    3 Localisation updates
 ----------------------------------------------------------------------
@@ -16,6 +16,8 @@ credentials are also stored. Acceptance of fingerprint will be remembered.
 View menu
 
   - Tag colouring for RTL languages/orientation
+
+  - The right-click popup menu has been reorganised
 
   Bug fixes:
 

@@ -41,11 +41,11 @@
 
       <mediaobject>
         <imageobject role="html">
-          <imagedata fileref="images/NewProject_25.png"/>
+          <imagedata fileref="images/NewProject_26.png"/>
         </imageobject>
 
         <imageobject role="fo">
-          <imagedata fileref="images/NewProject_25.png" width="80%"/>
+          <imagedata fileref="images/NewProject_26.png" width="80%"/>
         </imageobject>
       </mediaobject>
     </figure>
@@ -167,6 +167,23 @@
         checked, the segments with alternative translations are left
         untranslated until the user has decided which translation is to be
         used.</para>
+      </listitem>
+
+      <listitem>
+        <para><emphasis role="bold">Remove tags</emphasis> check box
+        <indexterm class="singular">
+            <primary>Project</primary>
+
+            <secondary>Remove tags option</secondary>
+          </indexterm></para>
+
+        <para>When enabled, all the formatting tags are removed from source
+        segments. This is especially useful when dealing with texts where
+        inline formatting is not really useful (e.g., OCRed PDF, bad converted
+        .odt or .docx, etc.) In a normal case it should always be possible to
+        open the target documents, as only inline tags are removed..
+        Non-visible formatting (i.e., which doesn't appear as tags in the
+        OmegaT editor) is retained in target documents.</para>
       </listitem>
     </itemizedlist>
 

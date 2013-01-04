@@ -39,25 +39,21 @@
       <title><application>Installing OmegaT</application></title>
 
       <para>To install <application>OmegaT</application>, double-click on the
-      program you have downloaded, and follow the instructions</para>
-    </section>
+      program you have downloaded.</para>
 
-    <section id="adding.OmegaT.to.the.start.menu.or.desktop">
-      <title>Adding <application>OmegaT</application> to the start menu or
-      desktop<indexterm class="singular">
-          <primary>Customizing OmegaT</primary>
-
-          <secondary>Windows</secondary>
-        </indexterm></title>
-
-      <para>During the installation, the setup program asks you whether you
-      wish to create a folder in the <emphasis>start</emphasis> menu, and
-      whether you wish to create a shortcut on the desktop and in the quick
-      launch bar.</para>
-
-      <para>You can still create a shortcut later by dragging
+      <para>At the beginning of the installation you can select the language
+      to be used during the installation. In the following window you can
+      indicate that the language selected is to be used in OmegaT. If you
+      check the corresponding checkbox, the OmegaT.l4J.ini file is modified to
+      use the language selected (see next section for details). Later, after
+      you have accepted the license agreement, the setup program asks you
+      whether you wish to create a folder in the <emphasis>start</emphasis>
+      menu, and whether you wish to create a shortcut on the desktop and in
+      the quick launch bar - you can create these shortcuts later by dragging
       <emphasis><application>OmegaT</application>.exe</emphasis> to the
-      desktop or start menu to link it from there.</para>
+      desktop or to the start menu to link it from there. The last frame
+      offers you to have a look at the readme and changes files for the
+      version you have installed.</para>
     </section>
 
     <section id="running.OmegaT.Windows">
@@ -776,6 +772,32 @@
             </indexterm></emphasis> If you have signed up for the Google
           Translate services, enter your private Google API key here. Note
           that the key is 38 characters long.</para>
+        </listitem>
+
+        <listitem>
+          <para><emphasis role="bold">Microsoft
+          Translator</emphasis><indexterm class="singular">
+              <primary>Running OmegaT</primary>
+
+              <secondary>Launch script arguments</secondary>
+
+              <tertiary>Microsoft Translator</tertiary>
+            </indexterm> </para>
+
+          <para>Make sure that you have a free Microsoft account. You’ll need
+          this to sign-in to <ulink url="???">Windows Azure
+          Marketplace</ulink> and use the Translator service. Note that up to
+          2M characters per month are free of charge. the two entries required
+          are available in your <ulink
+          url="https://datamarket.azure.com/account">account page</ulink>
+          under Primary account key and Customer-ID:</para>
+
+          <para><emphasis
+          role="bold">-Dmicrosoft.api.client_id=</emphasis><emphasis
+          role="bold">XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX</emphasis></para>
+
+          <para>-<emphasis
+          role="bold">Dmicrosoft.api.client_secret=XXXX9xXxX9xXXxxXXX9xxX99xXXXX9xx9XXxXxXXXXX=</emphasis></para>
         </listitem>
       </itemizedlist>
 

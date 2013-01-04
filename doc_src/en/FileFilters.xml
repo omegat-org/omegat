@@ -112,11 +112,47 @@
       </listitem>
     </itemizedlist>
 
+    <itemizedlist>
+      <listitem>
+        <para><emphasis>Skip PO header</emphasis></para>
+
+        <para><emphasis><emphasis>PO header will be skipped and left
+        unchanged, if this option is not checked.
+        </emphasis></emphasis></para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis>Auto replace 'nplurals=INTEGER; plural=EXPRESSION;' in
+        header</emphasis></para>
+
+        <para><emphasis><emphasis>PO file format allows alternative
+        translations for one and the same source in plural. If this option is
+        selected, the first translated case for plurals will be propagated
+        through the alternatives. </emphasis></emphasis></para>
+      </listitem>
+    </itemizedlist>
+
     <para><emphasis role="bold">XHTML Files</emphasis></para>
 
     <itemizedlist>
       <listitem>
-        <para><emphasis>Translate the following attributes </emphasis>- the
+        <para><emphasis>Add or rewrite encoding declaration in HTML and XHTML
+        files: <emphasis>frequently the target files must have the encoding
+        character set different from the one in the the source file (be it
+        explicitely defined or implied). Using this option the translator can
+        specify, whether the target files are to have the encoding declaration
+        included. For instance, if the file filter specifies UTF8 as the
+        encoding scheme for the target files, selecting Always will assure
+        that this information is included in the translated files.
+        </emphasis></emphasis></para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis>Translate the following attributes</emphasis>: the
         selected attributes will appear as segments in the Editor
         window.</para>
       </listitem>

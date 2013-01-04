@@ -293,7 +293,7 @@
     <note>
       <para>If you can not see all the panes (be it opened or minimized),
       pressing <guisubmenu> Options &gt; Restore Main Window </guisubmenu>will
-      restore them to the state, defined in the installation..</para>
+      restore them to the state, defined in the installation.</para>
     </note>
 
     <table>
@@ -605,6 +605,140 @@
           <para>OmegaT match, including numbers, tags</para>
         </listitem>
       </itemizedlist>
+
+      <section>
+        <title>Customizing the Fuzzy matches pane<indexterm class="singular">
+            <primary>Windows and panes in OmegaT</primary>
+
+            <secondary>Fuzzy matches pane</secondary>
+
+            <tertiary>Customizing</tertiary>
+          </indexterm></title>
+
+        <para>In <guimenu>Options &gt; External TMXs</guimenu>, a number of
+        variables allow to configure the display of the match pane:</para>
+
+        <figure id="matches.pane.setup">
+          <title><indexterm class="singular">
+              <primary>Matches</primary>
+
+              <secondary>Matches pane setup - figure</secondary>
+            </indexterm><indexterm class="singular">
+              <primary>Windows and panes in OmegaT</primary>
+
+              <secondary>Matches pane setup - figure</secondary>
+            </indexterm>Matches pane setup</title>
+
+          <mediaobject>
+            <imageobject>
+              <imagedata fileref="images/MatchesPaneSetup.png"/>
+            </imageobject>
+
+            <imageobject role="fo">
+              <imagedata fileref="images/MatchesPaneSetup.png" width="50%"/>
+            </imageobject>
+          </mediaobject>
+        </figure>
+
+        <para>The figure above shows the default match display template. The
+        contents can be customized using following variables:</para>
+
+        <table colsep="0" rowsep="0">
+          <title>Match pane setup<indexterm class="singular">
+              <primary>User Interface</primary>
+
+              <secondary>Match pane setup</secondary>
+            </indexterm></title>
+
+          <tgroup cols="2" colsep="1" rowsep="1" title="Match pane setup">
+            <colspec align="left" colnum="1" colwidth="90"/>
+
+            <colspec align="left" colnum="2" colwidth=""/>
+
+            <tbody>
+              <row>
+                <entry><literal>${id}</literal></entry>
+
+                <entry>Number of the match from 1 to 5</entry>
+              </row>
+
+              <row>
+                <entry><literal>${sourceText}</literal></entry>
+
+                <entry>Source text of the match</entry>
+              </row>
+
+              <row>
+                <entry><literal>${targetText}</literal></entry>
+
+                <entry>Target text of the match</entry>
+              </row>
+
+              <row>
+                <entry><literal>${diff}</literal></entry>
+
+                <entry>String showing the differences between the source and
+                the match</entry>
+              </row>
+
+              <row>
+                <entry><literal>${score}</literal></entry>
+
+                <entry>Percentage with tokenizer</entry>
+              </row>
+
+              <row>
+                <entry><literal>${noStemScore}</literal></entry>
+
+                <entry>Percentage without numbers and tags</entry>
+              </row>
+
+              <row>
+                <entry><literal>${adjustedScore}</literal></entry>
+
+                <entry>Percentage adjusted</entry>
+              </row>
+
+              <row>
+                <entry><literal>${fileNameOnly}</literal></entry>
+
+                <entry>Name of the TMX</entry>
+              </row>
+
+              <row>
+                <entry><literal>${filePath}</literal></entry>
+
+                <entry>Full path of the TMX</entry>
+              </row>
+
+              <row>
+                <entry><literal>${fileShortPath}</literal></entry>
+
+                <entry>Path of the TMX starting from the root of /tm</entry>
+              </row>
+
+              <row>
+                <entry><literal>${creationID}</literal></entry>
+
+                <entry>Author of the match</entry>
+              </row>
+
+              <row>
+                <entry><literal>${creationDate}</literal></entry>
+
+                <entry>Date of the match</entry>
+              </row>
+
+              <row>
+                <entry><literal>${fuzzyFlag}</literal></entry>
+
+                <entry>Indicate that this match is fuzzy (currently only for
+                translations from PO files with the #fuzzy mark)</entry>
+              </row>
+            </tbody>
+          </tgroup>
+        </table>
+      </section>
     </section>
 
     <section>
@@ -791,8 +925,8 @@
 
       <itemizedlist>
         <listitem>
-          <para>the number of segments in each file is shown next to the file
-          name</para>
+          <para>File entries include their names, file filter types, their
+          encoding and the number of segments each file contains</para>
         </listitem>
       </itemizedlist>
 
@@ -938,7 +1072,7 @@
           class="singular">
           <primary>Shortcuts</primary>
 
-          <secondary>copy text - Ctrl+C</secondary>
+          <secondary>Copy text - Ctrl+C</secondary>
         </indexterm></guimenuitem>, <guimenuitem>Ctrl+V <indexterm
           class="singular">
           <primary>Shortcuts</primary>

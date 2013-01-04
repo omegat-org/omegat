@@ -199,7 +199,7 @@
 
     <mediaobject>
       <imageobject>
-        <imagedata fileref="images/OptionsTabValidation_25.png"/>
+        <imagedata fileref="images/OptionsTabValidation_26.png"/>
       </imageobject>
     </mediaobject>
 
@@ -230,23 +230,27 @@
 
     <itemizedlist>
       <listitem>
-        <para><emphasis role="bold">Text field Custom tags</emphasis></para>
+        <para><emphasis role="bold">Custom tag(s) regular
+        expression</emphasis></para>
 
-        <para>Entering a regular expression here will cause OmegaT treat the
-        detected instances as a customer tag. It is checked if the number of
-        tags and their order is identical, just like it is the case for
+        <para>A regular expression entered here will cause OmegaT treat the
+        detected instances as customer tags. It checks that the number of tags
+        and their order is identical, just like it is the case for
         omegat-tags.</para>
       </listitem>
     </itemizedlist>
 
     <itemizedlist>
       <listitem>
-        <para><emphasis role="bold">Fragments that should be removed from the
-        translation</emphasis></para>
+        <para><emphasis role="bold">Fragment(s) that should be removed from
+        the translation regular expressiom</emphasis></para>
 
         <para>One can enter a regular expression for unwanted contents in the
         target. Any matches in the target segment will then be painted red,
-        i.e. easy to identify and correct. </para>
+        i.e. easy to identify and correct. When looking for fuzzy matches the
+        remove pattern is ignored. A fixed penalty of 5 is added if the
+        removed part does not match some other segment, so the match does not
+        show up as 100%</para>
       </listitem>
     </itemizedlist>
   </section>

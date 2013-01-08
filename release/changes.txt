@@ -3,7 +3,7 @@
 ----------------------------------------------------------------------
    4 Enhancements
    3 Bug fixes
-   3 Localisation updates
+   4 Localisation updates
 ----------------------------------------------------------------------
 2.6.1 update 3 vs. 2.6.1 update 2
 
@@ -37,6 +37,7 @@ to synchronise it.
   - Slovenian localisation updated to 2.6.1 update 2 (UI)
   - Dutch localization updated to 2.6.1 update 2 (UI, documentation, readme)
   - Russian localization updated to 2.6.1 update 2 (UI, documentation, readme)
+  - Italian localisation updated to 2.6.1 update 2 (UI)
 
 
 ----------------------------------------------------------------------

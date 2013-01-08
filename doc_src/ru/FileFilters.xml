@@ -3,7 +3,7 @@
 <chapter id="chapter.file.filters">
   <title>Файловые фильтры</title>
 
-  <para>В ОмегаТ есть система настраиваемых фильтров, которая позволяет вносить изменения практически в любой аспект их работы. Файловые фильтры — это маленькие подпрограммы, которые могут:</para>
+  <para>В ОмегаТ есть система настраиваемых фильтров, которая позволяет вносить изменения практически в любой аспект их работы. Файловые фильтры — это маленькие подпрограммы, которые могут:</para>
 
   <itemizedlist>
     <listitem>
@@ -269,71 +269,71 @@
 
       <itemizedlist>
         <listitem>
-          <para>По умолчанию установлен шаблон <literal>${filename}</literal> — полное имя исходного файла с расширением, то есть имя переведённого файла совпадает с именем исходного файла.</para>
+          <para>По умолчанию установлен шаблон <literal>${filename}</literal> — полное имя исходного файла с расширением, то есть имя переведённого файла совпадает с именем исходного файла.</para>
         </listitem>
       </itemizedlist>
 
       <itemizedlist>
         <listitem>
-          <para><literal>${nameOnly}</literal> — позволяет вставить только имя исходного файла без расширения.</para>
+          <para><literal>${nameOnly}</literal> — позволяет вставить только имя исходного файла без расширения.</para>
         </listitem>
 
         <listitem>
-          <para><literal>${extension} </literal> — расширение исходного файла.</para>
-        </listitem>
-      </itemizedlist>
-
-      <itemizedlist>
-        <listitem>
-          <para><literal>${targetLocale}</literal> — код локали перевода (в формате «xx_YY»).</para>
+          <para><literal>${extension} </literal> — расширение исходного файла.</para>
         </listitem>
       </itemizedlist>
 
       <itemizedlist>
         <listitem>
-          <para><literal>${targetLanguage}</literal> — коды языка перевода и страны вместе (в форме «XX-YY»).</para>
+          <para><literal>${targetLocale}</literal> — код локали перевода (в формате «xx_YY»).</para>
         </listitem>
       </itemizedlist>
 
       <itemizedlist>
         <listitem>
-          <para><literal>${targetLanguageCode}</literal> — код языка перевода («XX»).</para>
+          <para><literal>${targetLanguage}</literal> — коды языка перевода и страны вместе (в форме «XX-YY»).</para>
         </listitem>
       </itemizedlist>
 
       <itemizedlist>
         <listitem>
-          <para><literal>${targetCountryCode}</literal> — код страны («YY»).</para>
+          <para><literal>${targetLanguageCode}</literal> — код языка перевода («XX»).</para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para><literal>${targetCountryCode}</literal> — код страны («YY»).</para>
         </listitem>
 
         <listitem>
-          <para><literal>$(timestamp-????)</literal> — различные шаблоны представления системного времени на момент создания переведённых файлов.</para>
+          <para><literal>$(timestamp-????)</literal> — различные шаблоны представления системного времени на момент создания переведённых файлов.</para>
 
           <para>Примеры шаблонов «SimpleDateFormat» можно найти в <ulink url="http://docs.oracle.com/javase/1.4.2/docs/api/java/text/SimpleDateFormat.html">документации Oracle</ulink>.</para>
         </listitem>
 
         <listitem>
-          <para>${system-os-name} — установленная на компьютере переводчика операционная система</para>
+          <para>${system-os-name} — установленная на компьютере переводчика операционная система</para>
         </listitem>
 
         <listitem>
-          <para>${system-user-name) — имя пользователя в операционной системе</para>
+          <para>${system-user-name) — имя пользователя в операционной системе</para>
         </listitem>
 
         <listitem>
-          <para>${system-host-name} — название машины (hostname)</para>
+          <para>${system-host-name} — название машины (hostname)</para>
         </listitem>
 
         <listitem>
-          <para>${file-source-encoding} — кодировка исходного файла</para>
+          <para>${file-source-encoding} — кодировка исходного файла</para>
         </listitem>
 
         <listitem>
-          <para>${file-target-encoding} — кодировка переведённого файла</para>
+          <para>${file-target-encoding} — кодировка переведённого файла</para>
         </listitem>
 
         <listitem>
-          <para>${targetLocaleLCID) — локаль переведённого файла Microsoft</para>
+          <para>${targetLocaleLCID) — локаль переведённого файла Microsoft</para>
         </listitem>
       </itemizedlist>
 

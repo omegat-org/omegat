@@ -16,7 +16,7 @@
 
     <itemizedlist>
       <listitem>
-        <para>Найдите словарь для необходимой пары языков — к примеру на сайте <ulink url="http://stardict.sourceforge.net/index.php"><indexterm class="singular">
+        <para>Найдите словарь для необходимой пары языков — к примеру на сайте <ulink url="http://stardict.sourceforge.net/index.php"><indexterm class="singular">
             <primary>Словари</primary> <secondary>StarDict, FreeDict</secondary>
           </indexterm>StartDict Platform</ulink>, указанном выше, или на сайте <ulink url="http://www.freedict.org/en/list.html">FreeDict</ulink></para>
       </listitem>
@@ -24,7 +24,7 @@
 
     <itemizedlist>
       <listitem>
-        <para>Загрузите файл — он будет представлять собой архив <filename>tarball</filename> (файл с расширением <emphasis>tar.bz</emphasis> или <emphasis>tar.bz2</emphasis>).</para>
+        <para>Загрузите файл — он будет представлять собой архив <filename>tarball</filename> (файл с расширением <emphasis>tar.bz</emphasis> или <emphasis>tar.bz2</emphasis>).</para>
       </listitem>
     </itemizedlist>
 

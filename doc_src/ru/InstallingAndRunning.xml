@@ -49,7 +49,7 @@
 
       <para>После установки <application>ОмегаТ</application> вы можете щёлкнуть мышкой на файле <emphasis><application>OmegaT</application>.jar</emphasis>, чтобы запустить программу напрямую, или же запускать её из командной строки.</para>
 
-      <para>Однако, проще всего — запустить программу<emphasis> <application>OmegaT</application>.exe</emphasis>. <indexterm class="singular">
+      <para>Однако, проще всего — запустить программу<emphasis> <application>OmegaT</application>.exe</emphasis>. <indexterm class="singular">
           <primary>Запуск ОмегаТ</primary> <secondary>Windows</secondary> <tertiary>Файл INI</tertiary>
         </indexterm>В этом случае параметры будут считываться из файла <emphasis><application>OmegaT</application>.l4J.ini </emphasis>, который находится в том же каталоге, что и файл exe. Вы можете изменить его так, как посчитаете нужным. В нижеприведённом примере, в файле INI для ОмегаТ резервируется 1 Гб памяти, в качестве языка интерфейса устанавливается французский, а в качестве страны пользователя выбирается Португалия.</para>
 
@@ -334,13 +334,13 @@
     <section id="method1.opening.commandline.window">
       <title>Открытие окна командной строки</title>
 
-      <para>Окно командной строки также часто называют «окно терминала». В Windows оно называется «Сеанс MS-DOS» и его можно запустить через меню «Пуск» — «Программы» — «Сеанс MS-DOS». Его эквивалентом под Mac OS X является приложение Terminal, расположенное в «Applications → Utilities».</para>
+      <para>Окно командной строки также часто называют «окно терминала». В Windows оно называется «Сеанс MS-DOS» и его можно запустить через меню «Пуск» — «Программы» — «Сеанс MS-DOS». Его эквивалентом под Mac OS X является приложение Terminal, расположенное в «Applications → Utilities».</para>
 
       <para>Чтобы запустить <application>ОмегаТ</application>, обычно нужно ввести две команды. Первая:</para>
 
       <para><emphasis> <literal>cd {папка}</literal> </emphasis></para>
 
-      <para>где <emphasis>{папка}</emphasis> — это имя папки (с полным путём к ней), где находится <application>OmegaT</application> — точнее, файл <emphasis><application>OmegaT</application>.jar</emphasis>. У вас эта команда будет выглядеть примерно так:</para>
+      <para>где <emphasis>{папка}</emphasis> — это имя папки (с полным путём к ней), где находится <application>OmegaT</application> — точнее, файл <emphasis><application>OmegaT</application>.jar</emphasis>. У вас эта команда будет выглядеть примерно так:</para>
 
       <para>В Windows</para>
 
@@ -362,7 +362,7 @@
       <para><literal>java -jar
       <application>OmegaT</application>.jar</literal></para>
 
-      <para>Обратите внимание на регистр букв — программа не запустится, если вы введёте <emphasis>omegat</emphasis> вместо <emphasis>OmegaT </emphasis>!</para>
+      <para>Обратите внимание на регистр букв — программа не запустится, если вы введёте <emphasis>omegat</emphasis> вместо <emphasis>OmegaT </emphasis>!</para>
 
       <para>Этот способ удобен при отладке: если во время работы произошла ошибка, то сообщение о ней выводится в окно терминала, что может быть очень полезно.</para>
 
@@ -478,7 +478,7 @@
           </listitem>
 
           <listitem>
-            <para>Если же запустить <application>ОмегаТ</application> в нормальном режиме не получается (отсутствует графическое окружение): скопируйте файлы конфигурации <application>ОмегаТ</application> с другого компьютера в соответствующий каталог. Куда вы их скопируете — тоже не имеет значения, так как путь к файлу конфигурации можно указать в командной строке при запуске. Нужные вам файлы <literal>filters.conf</literal> и <literal>segmentation.conf</literal> находятся в домашнем каталоге пользователя (например, <literal>C:\Documents and Settings\%User%\<application>OmegaT</application></literal> в Windows, <literal>/home/%user%/.omegat/</literal> в GNU/Linux).</para>
+            <para>Если же запустить <application>ОмегаТ</application> в нормальном режиме не получается (отсутствует графическое окружение): скопируйте файлы конфигурации <application>ОмегаТ</application> с другого компьютера в соответствующий каталог. Куда вы их скопируете — тоже не имеет значения, так как путь к файлу конфигурации можно указать в командной строке при запуске. Нужные вам файлы <literal>filters.conf</literal> и <literal>segmentation.conf</literal> находятся в домашнем каталоге пользователя (например, <literal>C:\Documents and Settings\%User%\<application>OmegaT</application></literal> в Windows, <literal>/home/%user%/.omegat/</literal> в GNU/Linux).</para>
           </listitem>
         </itemizedlist>
       </section>
@@ -486,7 +486,7 @@
       <section id="starting.in.console.mode">
         <title>Запуск в режиме командной строки</title>
 
-        <para>Для того, чтобы запустить <application>ОмегаТ</application> в консольном режиме, при запуске нужно передать ей несколько параметров. Самый важный из них — <literal>&lt;project-dir&gt;</literal>, <literal> --config-dir=&lt;config-dir&gt;</literal> можно не указывать. Пример:</para>
+        <para>Для того, чтобы запустить <application>ОмегаТ</application> в консольном режиме, при запуске нужно передать ей несколько параметров. Самый важный из них — <literal>&lt;project-dir&gt;</literal>, <literal> --config-dir=&lt;config-dir&gt;</literal> можно не указывать. Пример:</para>
 
         <para><literal>java -jar <application>OmegaT</application>.jar
         /path/to/project \</literal></para>
@@ -510,7 +510,7 @@
 
         <itemizedlist>
           <listitem>
-            <para><literal>--config-dir=&lt;config-dir&gt;</literal> сообщает <application>ОмегаТ</application>, в каком каталоге находятся файлы конфигурации. Если этот параметр не передается при запуске, <application>ОмегаТ</application> использует настройки по умолчанию (находящиеся в каталоге <application>OmegaT</application> в домашнем каталоге пользователя, или, если они там не найдены — в текущем рабочем каталоге). Обратите внимание на два знака «-».</para>
+            <para><literal>--config-dir=&lt;config-dir&gt;</literal> сообщает <application>ОмегаТ</application>, в каком каталоге находятся файлы конфигурации. Если этот параметр не передается при запуске, <application>ОмегаТ</application> использует настройки по умолчанию (находящиеся в каталоге <application>OmegaT</application> в домашнем каталоге пользователя, или, если они там не найдены — в текущем рабочем каталоге). Обратите внимание на два знака «-».</para>
           </listitem>
         </itemizedlist>
 

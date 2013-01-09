@@ -6,7 +6,7 @@
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
                2008-2009 Alex Buloichik
                2011 Martin Fleurke
-               2012 Didier Briel
+               2012 Didier Briel, Aaron Madlon-Kay
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -55,6 +55,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.KeyStroke;
+import javax.swing.UIManager;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.EtchedBorder;
@@ -92,6 +93,7 @@ import org.openide.awt.Mnemonics;
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Martin Fleurke
  * @author Didier Briel
+ * @author Aaron Madlon-Kay
  */
 @SuppressWarnings("serial")
 public class ProjectPropertiesDialog extends JDialog {
@@ -245,6 +247,30 @@ public class ProjectPropertiesDialog extends JDialog {
         bRT.add(m_removeTagsCheckBox);
         bRT.add(Box.createHorizontalGlue());
         optionsBox.add(bRT);
+        
+        //Post-processing
+        JLabel m_externalCommandLabel = new JLabel();
+        Box bEC = Box.createHorizontalBox();
+        bEC.setBorder(emptyBorder);
+        bEC.add(m_externalCommandLabel);
+        bEC.add(Box.createHorizontalGlue());
+        optionsBox.add(bEC);
+        final JTextArea m_externalCommandTextArea = new JTextArea();
+        m_externalCommandTextArea.setRows(2);
+        m_externalCommandTextArea.setLineWrap(true);
+        m_externalCommandTextArea.setText(projectProperties.getExternalCommand());
+        if (Preferences.isPreference(Preferences.ALLOW_PROJECT_EXTERN_CMD)) {
+        	Mnemonics.setLocalizedText(m_externalCommandLabel, OStrings.getString("PP_EXTERNAL_COMMAND"));
+            m_externalCommandTextArea.setToolTipText(OStrings.getString("EXTERNAL_COMMAND_TOOLTIP"));
+        } else {
+        	Mnemonics.setLocalizedText(m_externalCommandLabel, OStrings.getString("PP_EXTERN_CMD_DISABLED"));
+            m_externalCommandTextArea.setEditable(false);
+            m_externalCommandTextArea.setToolTipText(OStrings.getString("PP_EXTERN_CMD_DISABLED_TOOLTIP"));
+            m_externalCommandTextArea.setBackground(UIManager.getDefaults().getColor("Label.background"));
+        }
+        final JScrollPane m_externalCommandScrollPane = new JScrollPane();
+        m_externalCommandScrollPane.setViewportView(m_externalCommandTextArea);
+        optionsBox.add(m_externalCommandScrollPane);
 
         centerBox.add(optionsBox, BorderLayout.WEST);
 
@@ -356,7 +382,7 @@ public class ProjectPropertiesDialog extends JDialog {
             public void actionPerformed(ActionEvent e) {
                 doOK(m_sourceLocaleField, m_targetLocaleField, m_sentenceSegmentingCheckBox, m_srcRootField,
                         m_locRootField, m_glosRootField, m_writeableGlosField, m_tmRootField, m_dictRootField,
-                        m_allowDefaultsCheckBox, m_removeTagsCheckBox);
+                        m_allowDefaultsCheckBox, m_removeTagsCheckBox, m_externalCommandTextArea);
             }
         });
 
@@ -701,7 +727,7 @@ public class ProjectPropertiesDialog extends JDialog {
     private void doOK(JComboBox m_sourceLocaleField, JComboBox m_targetLocaleField,
             JCheckBox m_sentenceSegmentingCheckBox, JTextField m_srcRootField, JTextField m_locRootField,
             JTextField m_glosRootField, JTextField m_writeableGlosField, JTextField m_tmRootField, JTextField m_dictRootField,
-            JCheckBox m_allowDefaultsCheckBox, JCheckBox m_removeTagsCheckBox) {
+            JCheckBox m_allowDefaultsCheckBox, JCheckBox m_removeTagsCheckBox, JTextArea m_customCommandTextArea) {
         if (!ProjectProperties.verifySingleLangCode(m_sourceLocaleField.getSelectedItem().toString())) {
             JOptionPane.showMessageDialog(
                     this,
@@ -729,6 +755,8 @@ public class ProjectPropertiesDialog extends JDialog {
         projectProperties.setSupportDefaultTranslations(m_allowDefaultsCheckBox.isSelected());
 
         projectProperties.setRemoveTags(m_removeTagsCheckBox.isSelected());
+        
+        projectProperties.setExternalCommand(m_customCommandTextArea.getText());
 
         projectProperties.setSourceRoot(m_srcRootField.getText());
         if (!projectProperties.getSourceRoot().endsWith(File.separator))

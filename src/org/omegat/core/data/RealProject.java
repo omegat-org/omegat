@@ -8,6 +8,7 @@
                2008 Alex Buloichik
                2009-2010 Didier Briel
                2012 Alex Buloichik, Guido Leenders, Didier Briel, Martin Fleurke
+               2013 Aaron Madlon-Kay
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -42,6 +43,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -62,6 +64,7 @@ import org.omegat.core.statistics.Statistics;
 import org.omegat.core.statistics.StatisticsInfo;
 import org.omegat.core.team.IRemoteRepository;
 import org.omegat.core.team.RepositoryUtils;
+import org.omegat.core.threads.CommandMonitor;
 import org.omegat.filters2.FilterContext;
 import org.omegat.filters2.IAlignCallback;
 import org.omegat.filters2.IFilter;
@@ -99,6 +102,7 @@ import org.xml.sax.SAXParseException;
  * @author Didier Briel
  * @author Guido Leenders
  * @author Martin Fleurke
+ * @author Aaron Madlon-Kay
  */
 public class RealProject implements IProject {
 
@@ -150,6 +154,12 @@ public class RealProject implements IProject {
     private static final TMXEntry EMPTY_TRANSLATION = new TMXEntry("", null, null, 0, null, true);
     
     private boolean allowTranslationEqualToSource = Preferences.isPreference(Preferences.ALLOW_TRANS_EQUAL_TO_SRC);
+
+    /**
+     * A list of external processes. Allows previously-started, hung or long-running processes to be
+     * forcibly terminated when compiling the project anew or when closing the project.
+     */
+    private LinkedList<Process> processCache = new LinkedList<Process>();
 
     /**
      * Create new project instance. It required to call {@link #createProject() createProject} or
@@ -356,6 +366,7 @@ public class RealProject implements IProject {
      * thread shouldn't throw any error.
      */
     public void closeProject() {
+        flushProcessCache();
         tmMonitor.fin();
         tmOtherLanguagesMonitor.fin();
         unlockProject();
@@ -405,6 +416,7 @@ public class RealProject implements IProject {
 
     /**
      * Builds translated files corresponding to sourcePattern and creates fresh TM files.
+     * Convenience method. Assumes we want to run external post-processing commands.
      * 
      * @param sourcePattern
      *            The regexp of files to create
@@ -412,6 +424,20 @@ public class RealProject implements IProject {
      * @throws TranslationException
      */
     public void compileProject(String sourcePattern) throws IOException, TranslationException {
+        compileProject(sourcePattern, true);
+    }
+    
+    /**
+     * Builds translated files corresponding to sourcePattern and creates fresh TM files.
+     * 
+     * @param sourcePattern
+     *            The regexp of files to create
+     * @param doPostProcessing
+     *            Whether or not we should perform external post-processing.
+     * @throws IOException
+     * @throws TranslationException
+     */
+    public void compileProject(String sourcePattern, boolean doPostProcessing) throws IOException, TranslationException {
         Log.logInfoRB("LOG_DATAENGINE_COMPILE_START");
         UIThreadsUtil.mustNotBeSwingThread();
 
@@ -483,8 +509,67 @@ public class RealProject implements IProject {
         Core.getMainWindow().showStatusMessageRB("CT_COMPILE_DONE_MX");
 
         CoreEvents.fireProjectChange(IProjectEventListener.PROJECT_CHANGE_TYPE.COMPILE);
+        
+        if (doPostProcessing) {
 
+            // Kill any processes still not complete
+            flushProcessCache();
+
+            if (Preferences.isPreference(Preferences.ALLOW_PROJECT_EXTERN_CMD)) {
+                doExternalCommand(m_config.getExternalCommand());
+            }
+            doExternalCommand(Preferences.getPreference(Preferences.EXTERNAL_COMMAND));
+        }
+        
         Log.logInfoRB("LOG_DATAENGINE_COMPILE_END");
+    }
+    
+    /**
+     * Set up and execute the user-specified external command.
+     * @param command Command to execute
+     */
+    private void doExternalCommand(String command) {
+        
+        if (command == null || command.length() == 0) {
+            return;
+        }
+        
+        Core.getMainWindow().showStatusMessageRB("CT_START_EXTERNAL_CMD");
+        
+        CommandVarExpansion expander = new CommandVarExpansion(command);
+        command = expander.expandVariables(m_config);
+        Log.log("Executing command: " + command);
+        try {
+            Process p = Runtime.getRuntime().exec(command);
+            processCache.push(p);
+            CommandMonitor stdout = CommandMonitor.StdoutMonitor(p);
+            CommandMonitor stderr = CommandMonitor.StderrMonitor(p);
+            stdout.start();
+            stderr.start();
+        } catch (IOException e) {
+            String message;
+            Throwable cause = e.getCause();
+            if (cause == null) {
+                message = e.getLocalizedMessage();
+            } else {
+                message = cause.getLocalizedMessage();
+            }
+            Core.getMainWindow().showStatusMessageRB("CT_ERROR_STARTING_EXTERNAL_CMD", message);
+        }
+    }
+
+    /**
+     * Clear cache of previously run external processes, terminating any that haven't finished.
+     */
+    private void flushProcessCache() {
+        while (!processCache.isEmpty()) {
+            Process p = processCache.pop();
+            try {
+                p.exitValue();
+            } catch (IllegalThreadStateException ex) {
+                p.destroy();
+            }
+        }
     }
 
     /** Saves the translation memory and preferences */

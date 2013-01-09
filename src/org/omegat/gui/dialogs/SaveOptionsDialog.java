@@ -4,7 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
-               2012 Didier Briel
+               2012 Didier Briel, Aaron Madlon-Kay
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -43,6 +43,7 @@ import org.omegat.util.Preferences;
  * 
  * @author Maxym Mykhalchuk
  * @author Didier Briel
+ * @author Aaron Madlon-Kay
  */
 @SuppressWarnings("serial")
 public class SaveOptionsDialog extends JDialog {
@@ -79,6 +80,9 @@ public class SaveOptionsDialog extends JDialog {
         minutesSpinner.setValue(saveInterval / 60);
         secondsSpinner.setValue(saveInterval % 60);
 
+        externalCommandTextArea.setText(Preferences.getPreference(Preferences.EXTERNAL_COMMAND));
+        allowProjectCmdCheckBox.setSelected(Preferences.isPreference(Preferences.ALLOW_PROJECT_EXTERN_CMD));
+
         invalidate();
         pack();
     }
@@ -102,9 +106,13 @@ public class SaveOptionsDialog extends JDialog {
         minutesSpinner = new javax.swing.JSpinner();
         secondsLabel = new javax.swing.JLabel();
         secondsSpinner = new javax.swing.JSpinner();
-        descriptionTextArea = new javax.swing.JTextArea();
+        intervalDescriptionTextArea = new javax.swing.JTextArea();
         okButton = new javax.swing.JButton();
         cancelButton = new javax.swing.JButton();
+        externalCmdDescriptionTextArea = new javax.swing.JTextArea();
+        externalCommandScrollPane = new javax.swing.JScrollPane();
+        externalCommandTextArea = new javax.swing.JTextArea();
+        allowProjectCmdCheckBox = new javax.swing.JCheckBox();
 
         setTitle(OStrings.getString("SAVE_DIALOG_TITLE")); // NOI18N
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -135,7 +143,7 @@ public class SaveOptionsDialog extends JDialog {
         gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
         getContentPane().add(minutesSpinner, gridBagConstraints);
 
-        secondsLabel.setLabelFor(minutesSpinner);
+        secondsLabel.setLabelFor(secondsSpinner);
         org.openide.awt.Mnemonics.setLocalizedText(secondsLabel, OStrings.getString("SAVE_DIALOG_SECONDS")); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -156,12 +164,12 @@ public class SaveOptionsDialog extends JDialog {
         gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
         getContentPane().add(secondsSpinner, gridBagConstraints);
 
-        descriptionTextArea.setBackground(javax.swing.UIManager.getDefaults().getColor("Label.background"));
-        descriptionTextArea.setEditable(false);
-        descriptionTextArea.setFont(new JLabel().getFont());
-        descriptionTextArea.setLineWrap(true);
-        descriptionTextArea.setText(OStrings.getString("SAVE_DIALOG_DESCRIPTION")); // NOI18N
-        descriptionTextArea.setWrapStyleWord(true);
+        intervalDescriptionTextArea.setEditable(false);
+        intervalDescriptionTextArea.setBackground(javax.swing.UIManager.getDefaults().getColor("Label.background"));
+        intervalDescriptionTextArea.setFont(new JLabel().getFont());
+        intervalDescriptionTextArea.setLineWrap(true);
+        intervalDescriptionTextArea.setText(OStrings.getString("SAVE_DIALOG_DESCRIPTION")); // NOI18N
+        intervalDescriptionTextArea.setWrapStyleWord(true);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
@@ -170,7 +178,7 @@ public class SaveOptionsDialog extends JDialog {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTH;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
-        getContentPane().add(descriptionTextArea, gridBagConstraints);
+        getContentPane().add(intervalDescriptionTextArea, gridBagConstraints);
 
         org.openide.awt.Mnemonics.setLocalizedText(okButton, OStrings.getString("BUTTON_OK")); // NOI18N
         okButton.addActionListener(new java.awt.event.ActionListener() {
@@ -199,6 +207,41 @@ public class SaveOptionsDialog extends JDialog {
         gridBagConstraints.weighty = 1.0;
         gridBagConstraints.insets = new java.awt.Insets(14, 4, 4, 4);
         getContentPane().add(cancelButton, gridBagConstraints);
+
+        externalCmdDescriptionTextArea.setEditable(false);
+        externalCmdDescriptionTextArea.setBackground(javax.swing.UIManager.getDefaults().getColor("Label.background"));
+        externalCmdDescriptionTextArea.setFont(new JLabel().getFont());
+        externalCmdDescriptionTextArea.setLineWrap(true);
+        externalCmdDescriptionTextArea.setText(OStrings.getString("EXTERNAL_COMMAND_DESCRIPTION")); // NOI18N
+        externalCmdDescriptionTextArea.setWrapStyleWord(true);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 6;
+        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTH;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+        getContentPane().add(externalCmdDescriptionTextArea, gridBagConstraints);
+
+        externalCommandTextArea.setColumns(20);
+        externalCommandTextArea.setLineWrap(true);
+        externalCommandTextArea.setRows(5);
+        externalCommandTextArea.setToolTipText(OStrings.getString("EXTERNAL_COMMAND_TOOLTIP")); // NOI18N
+        externalCommandScrollPane.setViewportView(externalCommandTextArea);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 7;
+        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTH;
+        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+        getContentPane().add(externalCommandScrollPane, gridBagConstraints);
+
+        allowProjectCmdCheckBox.setFont(new JLabel().getFont());
+        org.openide.awt.Mnemonics.setLocalizedText(allowProjectCmdCheckBox, OStrings.getString("ALLOW_PROJECT_EXTERN_CMD")); // NOI18N
+        getContentPane().add(allowProjectCmdCheckBox, new java.awt.GridBagConstraints());
 
         pack();
         java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
@@ -231,6 +274,9 @@ public class SaveOptionsDialog extends JDialog {
         
         Preferences.setPreference(Preferences.AUTO_SAVE_INTERVAL, saveInterval);
 
+        Preferences.setPreference(Preferences.EXTERNAL_COMMAND, externalCommandTextArea.getText());
+        Preferences.setPreference(Preferences.ALLOW_PROJECT_EXTERN_CMD, allowProjectCmdCheckBox.isSelected());
+
         doClose(RET_OK);
     }// GEN-LAST:event_okButtonActionPerformed
 
@@ -252,8 +298,12 @@ public class SaveOptionsDialog extends JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JCheckBox allowProjectCmdCheckBox;
     private javax.swing.JButton cancelButton;
-    private javax.swing.JTextArea descriptionTextArea;
+    private javax.swing.JTextArea externalCmdDescriptionTextArea;
+    private javax.swing.JScrollPane externalCommandScrollPane;
+    private javax.swing.JTextArea externalCommandTextArea;
+    private javax.swing.JTextArea intervalDescriptionTextArea;
     private javax.swing.JLabel minutesLabel;
     private javax.swing.JSpinner minutesSpinner;
     private javax.swing.JButton okButton;

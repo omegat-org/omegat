@@ -5,6 +5,7 @@
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
                2012 Guido Leenders, Didier Briel
+               2013 Aaron Madlon-Kay
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -44,6 +45,7 @@ import org.omegat.util.StringUtil;
  * @author Maxym Mykhalchuk
  * @author Guido Leenders
  * @author Didier Briel
+ * @author Aaron Madlon-Kay
  */
 public class ProjectProperties {
 
@@ -281,6 +283,14 @@ public class ProjectProperties {
     public void setProjectFilters(Filters projectFilters) {
         this.projectFilters = projectFilters;
     }
+    
+    public String getExternalCommand() {
+        return externalCommand;
+    }
+
+    public void setExternalCommand(String command) {
+        this.externalCommand = command;
+    }
 
     public boolean isProjectValid() {
         boolean returnValue;
@@ -403,4 +413,6 @@ public class ProjectProperties {
 
     private SRX projectSRX;
     private Filters projectFilters;
+    
+    private String externalCommand;
 }

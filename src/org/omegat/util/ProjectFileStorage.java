@@ -6,7 +6,7 @@
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
                2008 Didier Briel, Alex Buloichik
                2009 Didier Briel
-               2012 Didier Briel
+               2012 Didier Briel, Aaron Madlon-Kay
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -47,6 +47,7 @@ import org.omegat.filters2.TranslationException;
  * @author Maxym Mykhalchuk
  * @author Didier Briel
  * @author Alex Buloichik (alex73mail@gmail.com)
+ * @author Aaron Madlon-Kay
  */
 public class ProjectFileStorage {
 
@@ -125,6 +126,9 @@ public class ProjectFileStorage {
         if (om.getProject().isRemoveTags() != null) {
             result.setRemoveTags(om.getProject().isRemoveTags());
         }
+        if (om.getProject().getExternalCommand() != null) {
+            result.setExternalCommand(om.getProject().getExternalCommand());
+        }
 
         return result;
     }
@@ -178,6 +182,7 @@ public class ProjectFileStorage {
         om.getProject().setSentenceSeg(props.isSentenceSegmentingEnabled());
         om.getProject().setSupportDefaultTranslations(props.isSupportDefaultTranslations());
         om.getProject().setRemoveTags(props.isRemoveTags());
+        om.getProject().setExternalCommand(props.getExternalCommand());
 
         Marshaller m = CONTEXT.createMarshaller();
         m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);

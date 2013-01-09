@@ -8,7 +8,8 @@
                2008-2009 Didier Briel
                2010 Wildrich Fourie, Antonio Vilei, Didier Briel
                2011 John Moran, Didier Briel
-               2012 Martin Fleurke, Wildrich Fourie, Didier Briel, Thomas Cordonnier
+               2012 Martin Fleurke, Wildrich Fourie, Didier Briel, Thomas Cordonnier,
+                    Aaron Madlon-Kay
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -58,6 +59,7 @@ import org.omegat.util.xml.XMLStreamReader;
  * @author Antonio Vilei
  * @author Martin Fleurke
  * @author John Moran
+ * @author Aaron Madlon-Kay
  */
 public class Preferences {
     /** OmegaT-wide Preferences Filename */
@@ -268,6 +270,12 @@ public class Preferences {
 
     /** Default number of seconds to auto save project */
     public static final String AUTO_SAVE_DEFAULT = "180";
+    
+    /** Custom external command for post-processing */
+    public static final String EXTERNAL_COMMAND = "external_command";
+    
+    /** Allow per-project external commands */
+    public static final String ALLOW_PROJECT_EXTERN_CMD = "allow_project_extern_cmd";
 
     /**
      * Version of file filters. Unfortunately cannot put it into filters itself

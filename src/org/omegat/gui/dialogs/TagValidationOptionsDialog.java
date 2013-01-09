@@ -222,7 +222,6 @@ public class TagValidationOptionsDialog extends JDialog {
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.insets = new java.awt.Insets(4, 6, 0, 4);
         getContentPane().add(jLabelCustomPattern, gridBagConstraints);
-
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 6;
@@ -232,7 +231,7 @@ public class TagValidationOptionsDialog extends JDialog {
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.insets = new java.awt.Insets(4, 6, 4, 4);
         getContentPane().add(customPatternRegExpTF, gridBagConstraints);
-        
+
         org.openide.awt.Mnemonics.setLocalizedText(jLabelRemovePattern, OStrings.getString("TV_OPTION_REMOVEPATTERN")); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -242,7 +241,6 @@ public class TagValidationOptionsDialog extends JDialog {
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.insets = new java.awt.Insets(4, 6, 0, 4);
         getContentPane().add(jLabelRemovePattern, gridBagConstraints);
-
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 8;
@@ -312,17 +310,17 @@ public class TagValidationOptionsDialog extends JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cancelButton;
+    private javax.swing.JTextField customPatternRegExpTF;
     private javax.swing.JTextArea descriptionTextArea;
     private javax.swing.JRadioButton fullCheckRadio;
+    private javax.swing.JLabel jLabelCustomPattern;
+    private javax.swing.JLabel jLabelRemovePattern;
+    private javax.swing.JCheckBox javaPatternCheckBox;
     private javax.swing.JRadioButton noCheckRadio;
     private javax.swing.JButton okButton;
     private javax.swing.ButtonGroup ourButtonGroup;
-    private javax.swing.JRadioButton simpleCheckRadio;
-    private javax.swing.JCheckBox javaPatternCheckBox;
-    private javax.swing.JLabel jLabelCustomPattern;
-    private javax.swing.JTextField customPatternRegExpTF;
-    private javax.swing.JLabel jLabelRemovePattern;
     private javax.swing.JTextField removePatternRegExpTF;
+    private javax.swing.JRadioButton simpleCheckRadio;
     // End of variables declaration//GEN-END:variables
 
     private int returnStatus = RET_CANCEL;

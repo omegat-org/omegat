@@ -352,7 +352,7 @@ public class EditorTextArea3 extends JEditorPane {
 
         //there are issues when formatting rtl text. Don't do it, we use markers in that case.
         //for slightly better performance, check here on orientation.
-        if (trans != null && controller.currentOrientation != Document3.ORIENTATION.ALL_LTR) {
+        if (trans != null && controller.currentOrientation == Document3.ORIENTATION.ALL_LTR) {
             //prevent the formatting to become an undoable thing, by removing the undomanager temporary
             getOmDocument().removeUndoableEditListener(undoManager);
 

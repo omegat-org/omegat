@@ -43,6 +43,7 @@ import javax.swing.AbstractAction;
 import javax.swing.Action;
 import javax.swing.BorderFactory;
 import javax.swing.Box;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
@@ -61,6 +62,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.EtchedBorder;
 
 import org.omegat.core.Core;
+import org.omegat.core.data.CommandVarExpansion;
 import org.omegat.core.data.ProjectProperties;
 import org.omegat.core.segmentation.SRX;
 import org.omegat.filters2.master.FilterMaster;
@@ -261,7 +263,6 @@ public class ProjectPropertiesDialog extends JDialog {
         m_externalCommandTextArea.setText(projectProperties.getExternalCommand());
         if (Preferences.isPreference(Preferences.ALLOW_PROJECT_EXTERN_CMD)) {
         	Mnemonics.setLocalizedText(m_externalCommandLabel, OStrings.getString("PP_EXTERNAL_COMMAND"));
-            m_externalCommandTextArea.setToolTipText(OStrings.getString("EXTERNAL_COMMAND_TOOLTIP"));
         } else {
         	Mnemonics.setLocalizedText(m_externalCommandLabel, OStrings.getString("PP_EXTERN_CMD_DISABLED"));
             m_externalCommandTextArea.setEditable(false);
@@ -271,6 +272,26 @@ public class ProjectPropertiesDialog extends JDialog {
         final JScrollPane m_externalCommandScrollPane = new JScrollPane();
         m_externalCommandScrollPane.setViewportView(m_externalCommandTextArea);
         optionsBox.add(m_externalCommandScrollPane);
+        // Add variable insertion controls only if project external commands are enabled.
+        if (Preferences.isPreference(Preferences.ALLOW_PROJECT_EXTERN_CMD)) {
+            Box bIC = Box.createHorizontalBox();
+            bIC.setBorder(emptyBorder);
+            final JLabel m_variablesLabel = new javax.swing.JLabel();
+            Mnemonics.setLocalizedText(m_variablesLabel, OStrings.getString("EXT_TMX_MATCHES_TEMPLATE_VARIABLES"));
+            bIC.add(m_variablesLabel);
+            final JComboBox m_variablesList = new javax.swing.JComboBox(CommandVarExpansion.COMMAND_VARIABLES);
+            bIC.add(m_variablesList);
+            final JButton m_insertButton = new javax.swing.JButton();
+            Mnemonics.setLocalizedText(m_insertButton, OStrings.getString("BUTTON_INSERT"));
+            m_insertButton.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    insertButtonActionPerformed(m_externalCommandTextArea, m_variablesList);
+                }
+            });
+            bIC.add(m_insertButton);
+            bIC.add(Box.createHorizontalGlue());
+            optionsBox.add(bIC);
+        }
 
         centerBox.add(optionsBox, BorderLayout.WEST);
 
@@ -845,6 +866,10 @@ public class ProjectPropertiesDialog extends JDialog {
 
         m_dialogCancelled = true;
         setVisible(false);
+    }
+    
+    private void insertButtonActionPerformed(JTextArea area, JComboBox box) {
+        area.insert(box.getSelectedItem().toString(), area.getCaretPosition());
     }
 
     private void updateUIText(JTextArea m_messageArea) {

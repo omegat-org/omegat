@@ -49,6 +49,21 @@ public class CommandVarExpansion extends VarExpansion<ProjectProperties> {
     public static final String SOURCE_LANGUAGE = "${sourceLang}";
     public static final String TARGET_LANGUAGE = "${targetLang}";
     
+    public static final String[] COMMAND_VARIABLES = {
+        PROJECT_NAME, 
+        PROJECT_ROOT,
+        SOURCE_ROOT,
+        TARGET_ROOT, 
+        GLOSSARY_ROOT,
+        WRITABLE_GLOSSARY_FILE,
+        TM_ROOT,
+        TM_AUTO_ROOT,
+        DICT_ROOT,
+        TM_OTHER_LANG_ROOT,
+        SOURCE_LANGUAGE,
+        TARGET_LANGUAGE
+    };
+    
     public CommandVarExpansion(String template) {
         super(template);
     }

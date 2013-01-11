@@ -24,6 +24,9 @@
 
 package org.omegat.core.data;
 
+import java.util.ArrayList;
+import java.util.Map.Entry;
+
 import org.omegat.util.VarExpansion;
 
 /**
@@ -49,20 +52,7 @@ public class CommandVarExpansion extends VarExpansion<ProjectProperties> {
     public static final String SOURCE_LANGUAGE = "${sourceLang}";
     public static final String TARGET_LANGUAGE = "${targetLang}";
     
-    public static final String[] COMMAND_VARIABLES = {
-        PROJECT_NAME, 
-        PROJECT_ROOT,
-        SOURCE_ROOT,
-        TARGET_ROOT, 
-        GLOSSARY_ROOT,
-        WRITABLE_GLOSSARY_FILE,
-        TM_ROOT,
-        TM_AUTO_ROOT,
-        DICT_ROOT,
-        TM_OTHER_LANG_ROOT,
-        SOURCE_LANGUAGE,
-        TARGET_LANGUAGE
-    };
+    public static final String[] COMMAND_VARIABLES;
     
     public CommandVarExpansion(String template) {
         super(template);
@@ -83,7 +73,35 @@ public class CommandVarExpansion extends VarExpansion<ProjectProperties> {
         localTemplate = localTemplate.replace(TM_OTHER_LANG_ROOT, props.getTMOtherLangRoot());
         localTemplate = localTemplate.replace(SOURCE_LANGUAGE, props.getSourceLanguage().getLanguage());
         localTemplate = localTemplate.replace(TARGET_LANGUAGE, props.getTargetLanguage().getLanguage());
+        for (Entry<String, String> e : System.getenv().entrySet()) {
+            localTemplate = localTemplate.replace(fixEnvarName(e.getKey()), e.getValue());
+        }
         
         return localTemplate;
+    }
+    
+    private static String fixEnvarName(String varname) {
+        return String.format("${%s}", varname);
+    }
+    
+    static {
+        ArrayList<String> vars = new ArrayList<String>();
+        vars.add(PROJECT_NAME);
+        vars.add(PROJECT_ROOT);
+        vars.add(SOURCE_ROOT);
+        vars.add(TARGET_ROOT);
+        vars.add(GLOSSARY_ROOT);
+        vars.add(WRITABLE_GLOSSARY_FILE);
+        vars.add(TM_ROOT);
+        vars.add(TM_AUTO_ROOT);
+        vars.add(DICT_ROOT);
+        vars.add(TM_OTHER_LANG_ROOT);
+        vars.add(SOURCE_LANGUAGE);
+        vars.add(TARGET_LANGUAGE);
+        for (Entry<String, String> e : System.getenv().entrySet()) {
+            vars.add(fixEnvarName(e.getKey()));
+        }
+        
+        COMMAND_VARIABLES = vars.toArray(new String[0]);
     }
 }

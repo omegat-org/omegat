@@ -43,11 +43,11 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
+import java.util.Stack;
 import java.util.TreeMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -159,7 +159,7 @@ public class RealProject implements IProject {
      * A list of external processes. Allows previously-started, hung or long-running processes to be
      * forcibly terminated when compiling the project anew or when closing the project.
      */
-    private LinkedList<Process> processCache = new LinkedList<Process>();
+    private Stack<Process> processCache = new Stack<Process>();
 
     /**
      * Create new project instance. It required to call {@link #createProject() createProject} or

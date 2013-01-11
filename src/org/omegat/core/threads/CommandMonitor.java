@@ -44,20 +44,23 @@ public class CommandMonitor extends Thread {
     
     private static final Logger LOGGER = Logger.getLogger(CommandMonitor.class.getName());
     
-    private InputStream stream = null;
-    private Process process = null;
+    private final InputStream stream;
+    private final Process process;
+    private final boolean isStdErr;
+    private String message = null;
     
     public static CommandMonitor StdoutMonitor(Process process) {
-        return new CommandMonitor(process.getInputStream(), process);
+        return new CommandMonitor(process, false);
     }
     
     public static CommandMonitor StderrMonitor(Process process) {
-        return new CommandMonitor(process.getErrorStream(), null);
+        return new CommandMonitor(process, true);
     }
     
-    private CommandMonitor(InputStream stream, Process process) {
-        this.stream = stream;
+    private CommandMonitor(Process process, boolean isStdErr) {
+        this.isStdErr = isStdErr;
         this.process = process;
+        this.stream = isStdErr ? process.getErrorStream() : process.getInputStream();
         setName("CommandMonitor");
     }
         
@@ -68,25 +71,37 @@ public class CommandMonitor extends Thread {
         try {
             String line = null;
             while ((line = br.readLine()) != null) {
-                if (process == null) {
+                if (isStdErr) {
                     LOGGER.warning(line);
                 } else {
                     LOGGER.info(line);
                 }
+                message = line;
             }
         } catch (IOException e) {
             Core.getMainWindow().showStatusMessageRB("CT_ERROR_MONITORING_EXTERNAL_CMD");
         }
         
-        if (process != null) {
-            String value = "?";
-            try {
-                process.waitFor();
-                value = String.format("%s", process.exitValue());
-            } catch (Exception e) {
-                // Do nothing
+        int exitValue = -1;
+        try {
+            exitValue = process.waitFor();
+        } catch (Exception e) {
+            // Do nothing
+        }
+        if (isStdErr) {
+            if (exitValue > 0 && message == null) {
+                Core.getMainWindow().showStatusMessageRB("CT_EXTERNAL_CMD_ERROR", exitValue);
+            } else if (exitValue > 0) {
+                Core.getMainWindow().showStatusMessageRB("CT_EXTERNAL_CMD_ERROR_MSG", exitValue, message);
+            } else if (exitValue < 0) {
+                Core.getMainWindow().showStatusMessageRB("CT_EXTERNAL_CMD_INTERRUPTED");
             }
-            Core.getMainWindow().showStatusMessageRB("CT_EXTERNAL_CMD_DONE", value);
+        } else if (exitValue == 0) {
+            if (message == null) {
+                Core.getMainWindow().showStatusMessageRB("CT_EXTERNAL_CMD_SUCCESS", exitValue);
+            } else {
+                Core.getMainWindow().showStatusMessageRB("CT_EXTERNAL_CMD_SUCCESS_MSG", exitValue, message);
+            }
         }
     }
 }

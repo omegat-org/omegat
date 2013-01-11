@@ -29,8 +29,8 @@ View menu
   - PO filter: there was an error when loading PO files with a target
 language with 1 plural form
 
-  - Team projects: changes were not calculated correctly, which resulted
-in duplicate entries
+  - Team projects: changes in the writable glossary were not calculated 
+correctly, which resulted in duplicate entries
 
   - Team projects: when the writeable glossary was not inside the 
 working copy, it was not possible to synchronise the project. Now, if

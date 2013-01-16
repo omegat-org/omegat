@@ -7,6 +7,7 @@
                2007 Didier Briel, Zoltan Bartko, Alex Buloichik
                2008 - 2011 Didier Briel
                2012 Martin Fleurke, Didier Briel
+               2013 Aaron Madlon-Kay
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -56,6 +57,7 @@ import java.util.regex.Pattern;
  * @author Zoltan Bartko - bartkozoltan@bartkozoltan.com
  * @author Alex Buloichik
  * @author Martin Fleurke
+ * @author Aaron Madlon-Kay
  */
 public class StaticUtils {
     /**
@@ -115,6 +117,64 @@ public class StaticUtils {
             res += placeholderMatcher.group(0);
         }
         return res;
+    }
+
+    /**
+     * Indicates the type of a tag, e.g.:
+     * <ul>
+     * <li>&lt;foo> = START</li>
+     * <li>&lt;/foo> = END</li>
+     * <li>&lt;bar/> = SINGLE</li>
+     * </ul>
+     */
+    public static enum TagType {
+        START, END, SINGLE
+    }
+
+    /**
+     * Detect the type of a tag, e.g. one of {@link TagType}.
+     * @param tag String containing full text of tag
+     * @return The type of the tag
+     */
+    public static TagType getTagType(String tag) {
+        if (tag.length() < 4 || (!tag.startsWith("<") && !tag.endsWith(">"))) {
+            return TagType.SINGLE;
+        }
+        
+        if (tag.startsWith("</")) {
+            return TagType.END;
+        } else if (tag.endsWith("/>")) {
+            return TagType.SINGLE;
+        }
+
+        return TagType.START;
+    }
+
+    /**
+     * Retrieve info about a tag.
+     * @param tag String containing full text of tag
+     * @return A {@link TagInfo} with tag's name and type
+     */
+    public static TagInfo getTagInfo(String tag) {
+        Matcher m = PatternConsts.OMEGAT_TAG_DECOMPILE.matcher(tag);
+        String name = m.find() ? m.group(2) + m.group(3) : tag;
+        return new TagInfo(name, getTagType(tag));
+    }
+
+    /**
+     * A tuple containing 
+     * <ul><li>A tag's name</li>
+     * <li>The tag's {@link TagType} type</li>
+     * </ul>
+     */
+    public static class TagInfo {
+        public final TagType type;
+        public final String name;
+        
+        public TagInfo (String name, TagType type) {
+            this.name = name;
+            this.type = type;
+        }
     }
 
     /**

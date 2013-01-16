@@ -10,6 +10,7 @@
                2011 John Moran, Didier Briel
                2012 Martin Fleurke, Wildrich Fourie, Didier Briel, Thomas Cordonnier,
                     Aaron Madlon-Kay
+               2013 Aaron Madlon-Kay
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -284,6 +285,8 @@ public class Preferences {
     public static final String FILTERS_VERSION = "filters_version";
 
     public static final String LT_DISABLED = "lt_disabled";
+
+    public static final String LOOSE_TAG_ORDERING = "loose_tag_ordering";
 
     /** Private constructor, because this file is singleton */
     static {

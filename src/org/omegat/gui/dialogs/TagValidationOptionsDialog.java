@@ -5,6 +5,7 @@
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
                2009 Martin Fleurke
+               2013 Aaron Madlon-Kay
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -48,6 +49,7 @@ import org.omegat.util.Preferences;
  * 
  * @author Maxym Mykhalchuk
  * @author Martin Fleurke
+ * @author Aaron Madlon-Kay
  */
 @SuppressWarnings("serial")
 public class TagValidationOptionsDialog extends JDialog {
@@ -83,6 +85,7 @@ public class TagValidationOptionsDialog extends JDialog {
         javaPatternCheckBox.setSelected(Preferences.isPreference(Preferences.CHECK_JAVA_PATTERN_TAGS));
         customPatternRegExpTF.setText(Preferences.getPreferenceDefaultAllowEmptyString(Preferences.CHECK_CUSTOM_PATTERN));
         removePatternRegExpTF.setText(Preferences.getPreferenceDefaultAllowEmptyString(Preferences.CHECK_REMOVE_PATTERN));
+        looseTagOrderCheckBox.setSelected(Preferences.isPreference(Preferences.LOOSE_TAG_ORDERING));
 
         invalidate();
         pack();
@@ -115,6 +118,8 @@ public class TagValidationOptionsDialog extends JDialog {
         customPatternRegExpTF = new javax.swing.JTextField();
         jLabelRemovePattern = new javax.swing.JLabel();
         removePatternRegExpTF = new javax.swing.JTextField();
+        looseTagOrderCheckBox = new javax.swing.JCheckBox();
+        looseTagOrderWarningTextArea = new javax.swing.JTextArea();
 
         setTitle(OStrings.getString("GUI_TITLE_TagValidation_Options")); // NOI18N
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -124,8 +129,8 @@ public class TagValidationOptionsDialog extends JDialog {
         });
         getContentPane().setLayout(new java.awt.GridBagLayout());
 
-        descriptionTextArea.setBackground(javax.swing.UIManager.getDefaults().getColor("Label.background"));
         descriptionTextArea.setEditable(false);
+        descriptionTextArea.setBackground(javax.swing.UIManager.getDefaults().getColor("Label.background"));
         descriptionTextArea.setFont(new JLabel().getFont());
         descriptionTextArea.setLineWrap(true);
         descriptionTextArea.setText(OStrings.getString("GUI_TAGVALIDATION_DESCRIPTION")); // NOI18N
@@ -148,7 +153,7 @@ public class TagValidationOptionsDialog extends JDialog {
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 9;
+        gridBagConstraints.gridy = 11;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.SOUTHEAST;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.weighty = 1.0;
@@ -163,7 +168,7 @@ public class TagValidationOptionsDialog extends JDialog {
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
-        gridBagConstraints.gridy = 9;
+        gridBagConstraints.gridy = 11;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.SOUTHEAST;
         gridBagConstraints.weighty = 1.0;
         gridBagConstraints.insets = new java.awt.Insets(14, 4, 4, 4);
@@ -216,7 +221,7 @@ public class TagValidationOptionsDialog extends JDialog {
         org.openide.awt.Mnemonics.setLocalizedText(jLabelCustomPattern, OStrings.getString("TV_OPTION_CUSTOMPATTERN")); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 5;
+        gridBagConstraints.gridy = 7;
         gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.weightx = 1.0;
@@ -224,7 +229,7 @@ public class TagValidationOptionsDialog extends JDialog {
         getContentPane().add(jLabelCustomPattern, gridBagConstraints);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 6;
+        gridBagConstraints.gridy = 8;
         gridBagConstraints.gridwidth = 4;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
@@ -235,7 +240,7 @@ public class TagValidationOptionsDialog extends JDialog {
         org.openide.awt.Mnemonics.setLocalizedText(jLabelRemovePattern, OStrings.getString("TV_OPTION_REMOVEPATTERN")); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 7;
+        gridBagConstraints.gridy = 9;
         gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.weightx = 1.0;
@@ -243,13 +248,38 @@ public class TagValidationOptionsDialog extends JDialog {
         getContentPane().add(jLabelRemovePattern, gridBagConstraints);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 8;
+        gridBagConstraints.gridy = 10;
         gridBagConstraints.gridwidth = 4;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.insets = new java.awt.Insets(4, 6, 4, 4);
         getContentPane().add(removePatternRegExpTF, gridBagConstraints);
+
+        org.openide.awt.Mnemonics.setLocalizedText(looseTagOrderCheckBox, OStrings.getString("TV_OPTION_LOOSE_TAG_ORDER")); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 5;
+        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(4, 6, 0, 4);
+        getContentPane().add(looseTagOrderCheckBox, gridBagConstraints);
+
+        looseTagOrderWarningTextArea.setEditable(false);
+        looseTagOrderWarningTextArea.setBackground(javax.swing.UIManager.getDefaults().getColor("Label.background"));
+        looseTagOrderWarningTextArea.setFont(new JLabel().getFont());
+        looseTagOrderWarningTextArea.setLineWrap(true);
+        looseTagOrderWarningTextArea.setText(OStrings.getString("TV_OPTION_LOOSE_TAG_WARNING")); // NOI18N
+        looseTagOrderWarningTextArea.setWrapStyleWord(true);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 6;
+        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.insets = new java.awt.Insets(0, 24, 4, 24);
+        getContentPane().add(looseTagOrderWarningTextArea, gridBagConstraints);
 
         pack();
         java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
@@ -285,6 +315,7 @@ public class TagValidationOptionsDialog extends JDialog {
             Preferences.setPreference(Preferences.CHECK_JAVA_PATTERN_TAGS, javaPatternCheckBox.isSelected());
             Preferences.setPreference(Preferences.CHECK_CUSTOM_PATTERN, customPatternRegExpTF.getText());
             Preferences.setPreference(Preferences.CHECK_REMOVE_PATTERN, removePatternRegExpTF.getText());
+            Preferences.setPreference(Preferences.LOOSE_TAG_ORDERING, looseTagOrderCheckBox.isSelected());
             PatternConsts.updatePlaceholderPattern();
             PatternConsts.updateRemovePattern();
             doClose(RET_OK);
@@ -316,6 +347,8 @@ public class TagValidationOptionsDialog extends JDialog {
     private javax.swing.JLabel jLabelCustomPattern;
     private javax.swing.JLabel jLabelRemovePattern;
     private javax.swing.JCheckBox javaPatternCheckBox;
+    private javax.swing.JCheckBox looseTagOrderCheckBox;
+    private javax.swing.JTextArea looseTagOrderWarningTextArea;
     private javax.swing.JRadioButton noCheckRadio;
     private javax.swing.JButton okButton;
     private javax.swing.ButtonGroup ourButtonGroup;

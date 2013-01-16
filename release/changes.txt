@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 2.6.2
 ----------------------------------------------------------------------
-   5 Enhancements
+   6 Enhancements
    3 Bug fixes
    4 Localisation updates
 ----------------------------------------------------------------------
@@ -11,6 +11,9 @@
 
   - External post-processing command
   http://sourceforge.net/support/tracker.php?aid=3600209
+
+  - Tag partial verification
+  http://sourceforge.net/support/tracker.php?aid=1545637
 
   Other enhancements:
   

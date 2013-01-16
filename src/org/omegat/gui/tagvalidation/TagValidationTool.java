@@ -5,6 +5,7 @@
 
  Copyright (C) 2008 Alex Buloichik, Martin Fleurke
                2009 Martin Fleurke
+               2013 Aaron Madlon-Kay
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -29,6 +30,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Stack;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -46,12 +48,14 @@ import org.omegat.util.OStrings;
 import org.omegat.util.PatternConsts;
 import org.omegat.util.Preferences;
 import org.omegat.util.StaticUtils;
+import org.omegat.util.StaticUtils.TagInfo;
 
 /**
  * Class for show tag validation results.
  * 
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Martin Fleurke
+ * @author Aaron Madlon-Kay
  */
 public class TagValidationTool implements ITagValidation, IProjectEventListener {
     private TagValidationFrame m_tagWin;
@@ -139,6 +143,7 @@ public class TagValidationTool implements ITagValidation, IProjectEventListener 
         TMXEntry te;
         List<String> srcTags = new ArrayList<String>(32);
         List<String> locTags = new ArrayList<String>(32);
+        Stack<String> tagStack = new Stack<String>();
         List<SourceTextEntry> suspects = new ArrayList<SourceTextEntry>(16);
 
         // programming language validation: pattern to detect printf variables
@@ -241,6 +246,7 @@ public class TagValidationTool implements ITagValidation, IProjectEventListener 
                 // OmegaT tags and custom tags check: order and number should be equal
                 srcTags.clear();
                 locTags.clear();
+                tagStack.clear();
                 // extract tags from src and loc string
                 StaticUtils.buildTagList(s, srcTags);
                 StaticUtils.buildTagList(te.translation, locTags);
@@ -256,21 +262,54 @@ public class TagValidationTool implements ITagValidation, IProjectEventListener 
                         locTags.add(customTagPatternMatcher.group(0));
                     }
                 }
-                // make sure lists match
-                // for now, insist on exact match
+                
+                // Compare tag lists
                 if (srcTags.size() != locTags.size()) {
                     suspects.add(ste);
                     continue;
                 } else {
                     boolean added = false;
-                    // compare one by one
-                    for (j = 0; j < srcTags.size(); j++) {
-                        s = srcTags.get(j);
-                        String t = locTags.get(j);
-                        if (!s.equals(t)) {
+                    // Compare one by one.
+                    if (!Preferences.isPreference(Preferences.LOOSE_TAG_ORDERING)) {
+                        for (j = 0; j < srcTags.size(); j++) {
+                            s = srcTags.get(j);
+                            String t = locTags.get(j);
+                            if (!s.equals(t)) {
+                                suspects.add(ste);
+                                added = true;
+                                break;
+                            }
+                        }
+                    } else {
+                        // Perform loose tag matching (allow well-formed, but out-of-order tags).
+                        TagInfo info;
+                        for (String tag : locTags) {
+                            // Make sure tag exists in source.
+                            if (!srcTags.contains(tag)) {
+                                suspects.add(ste);
+                                added = true;
+                                break;
+                            }
+                            info = StaticUtils.getTagInfo(tag);
+                            // Build stack of tags to check well-formedness.
+                            switch (info.type) {
+                            case START:
+                                tagStack.push(info.name);
+                                break;
+                            case END:
+                                if (!tagStack.isEmpty() && tagStack.peek().equals(info.name)) {
+                                    tagStack.pop();
+                                }
+                                break;
+                            case SINGLE:
+                                // Ignore
+                            }
+                        }
+                        
+                        // If the stack isn't empty, the tags are malformed.
+                        if (!added && !tagStack.isEmpty()) {
                             suspects.add(ste);
                             added = true;
-                            break;
                         }
                     }
                     if (added) continue;

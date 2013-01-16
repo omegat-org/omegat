@@ -161,6 +161,25 @@ public class StaticUtils {
         return new TagInfo(name, getTagType(tag));
     }
 
+        
+    /**
+     * For a given tag, retrieve its pair e.g. &lt;/foo> for &lt;foo>.
+     * @param info A {@link TagInfo} describing the tag
+     * @return The tag's pair as a string, or null for self-contained tags
+     */
+    public static String getPairedTag(TagInfo info) {
+        switch(info.type) {
+        case START:
+            return String.format("</%s>", info.name);
+        case END:
+            return String.format("<%s>", info.name);
+        case SINGLE:
+        default:
+            return null;
+        }
+    }
+
+    
     /**
      * A tuple containing 
      * <ul><li>A tag's name</li>

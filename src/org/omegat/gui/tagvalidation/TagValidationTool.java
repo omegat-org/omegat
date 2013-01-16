@@ -294,7 +294,9 @@ public class TagValidationTool implements ITagValidation, IProjectEventListener 
                             // Build stack of tags to check well-formedness.
                             switch (info.type) {
                             case START:
-                                tagStack.push(info.name);
+                                if (srcTags.contains(StaticUtils.getPairedTag(info))) {
+                                    tagStack.push(info.name);
+                                }
                                 break;
                             case END:
                                 if (!tagStack.isEmpty() && tagStack.peek().equals(info.name)) {

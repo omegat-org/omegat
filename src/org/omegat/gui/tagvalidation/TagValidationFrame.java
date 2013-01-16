@@ -6,6 +6,7 @@
  Copyright (C) 2000-2006 Keith Godfrey, Maxym Mykhalchuk, Henry Pijffers
                2007 Didier Briel
                2008-2009 Martin Fleurke
+               2013 Aaron Madlon-Kay
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -64,6 +65,7 @@ import org.openide.awt.Mnemonics;
  * @author Henry Pijffers (henry.pijffers@saxnot.com)
  * @author Didier Briel
  * @author Martin Fleurke
+ * @author Aaron Madlon-Kay
  */
 @SuppressWarnings("serial")
 public class TagValidationFrame extends JFrame {
@@ -255,12 +257,15 @@ public class TagValidationFrame extends JFrame {
         output.append("            font-family: " + getFont().getName() + ";\n");
         output.append("            font-size: " + getFont().getSize() + "pt;\n");
         output.append("    }\n");
+        output.append("    td {\n");
+        output.append("            border: 1px solid gray;\n");
+        output.append("    }\n");
         output.append("    -->\n");
         output.append("</style>\n");
         output.append("</head>\n");
         output.append("<body>\n");
 
-        output.append("<table BORDER COLS=3 WIDTH=\"100%\" NOSAVE>\n");
+        output.append("<table border=\"1\" cellspacing=\"1\" cellpadding=\"2\" width=\"100%\">\n");
         for (SourceTextEntry ste : stringList) {
             String src = ste.getSrcText();
             TMXEntry trans = Core.getProject().getTranslationInfo(ste);

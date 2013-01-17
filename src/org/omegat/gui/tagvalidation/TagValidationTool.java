@@ -143,7 +143,6 @@ public class TagValidationTool implements ITagValidation, IProjectEventListener 
         TMXEntry te;
         List<String> srcTags = new ArrayList<String>(32);
         List<String> locTags = new ArrayList<String>(32);
-        Stack<String> tagStack = new Stack<String>();
         List<SourceTextEntry> suspects = new ArrayList<SourceTextEntry>(16);
 
         // programming language validation: pattern to detect printf variables
@@ -246,7 +245,6 @@ public class TagValidationTool implements ITagValidation, IProjectEventListener 
                 // OmegaT tags and custom tags check: order and number should be equal
                 srcTags.clear();
                 locTags.clear();
-                tagStack.clear();
                 // extract tags from src and loc string
                 StaticUtils.buildTagList(s, srcTags);
                 StaticUtils.buildTagList(te.translation, locTags);
@@ -263,58 +261,31 @@ public class TagValidationTool implements ITagValidation, IProjectEventListener 
                     }
                 }
                 
-                // Compare tag lists
+                // Compare tag list sizes
                 if (srcTags.size() != locTags.size()) {
                     suspects.add(ste);
                     continue;
-                } else {
-                    boolean added = false;
-                    // Compare one by one.
-                    if (!Preferences.isPreference(Preferences.LOOSE_TAG_ORDERING)) {
-                        for (j = 0; j < srcTags.size(); j++) {
-                            s = srcTags.get(j);
-                            String t = locTags.get(j);
-                            if (!s.equals(t)) {
-                                suspects.add(ste);
-                                added = true;
-                                break;
-                            }
-                        }
-                    } else {
-                        // Perform loose tag matching (allow well-formed, but out-of-order tags).
-                        TagInfo info;
-                        for (String tag : locTags) {
-                            // Make sure tag exists in source.
-                            if (!srcTags.contains(tag)) {
-                                suspects.add(ste);
-                                added = true;
-                                break;
-                            }
-                            info = StaticUtils.getTagInfo(tag);
-                            // Build stack of tags to check well-formedness.
-                            switch (info.type) {
-                            case START:
-                                if (srcTags.contains(StaticUtils.getPairedTag(info))) {
-                                    tagStack.push(info.name);
-                                }
-                                break;
-                            case END:
-                                if (!tagStack.isEmpty() && tagStack.peek().equals(info.name)) {
-                                    tagStack.pop();
-                                }
-                                break;
-                            case SINGLE:
-                                // Ignore
-                            }
-                        }
-                        
-                        // If the stack isn't empty, the tags are malformed.
-                        if (!added && !tagStack.isEmpty()) {
-                            suspects.add(ste);
-                            added = true;
-                        }
+                }
+                
+                // Compare tags one by one.
+                boolean tagsAreIdentical = true;
+                for (j = 0; j < srcTags.size(); j++) {
+                    s = srcTags.get(j);
+                    String t = locTags.get(j);
+                    if (!s.equals(t)) {
+                        tagsAreIdentical = false;
+                        break;
                     }
-                    if (added) continue;
+                }
+                
+                if (!tagsAreIdentical) {
+                    // If we are doing strict validation only, or if the tags are malformed,
+                    // finish this TU now.
+                    if (!Preferences.isPreference(Preferences.LOOSE_TAG_ORDERING)
+                            || !tagsAreWellFormed(srcTags, locTags)) {
+                        suspects.add(ste);
+                        continue;
+                    }
                 }
 
                 // Java MessageFormat pattern checks: order can change, number should be equal.
@@ -349,5 +320,59 @@ public class TagValidationTool implements ITagValidation, IProjectEventListener 
             } //end loop over entries
         } //end loop over files
         return suspects;
+    }
+
+    /**
+     * Check that translated tags are well-formed. 
+     * In order to accommodate tags orphaned by segmenting,
+     * unmatched tags are allowed, but only if they don't interfere with
+     * non-orphaned tags.
+     * @param srcTags A list of tags in the source text
+     * @param locTags A list of tags in the translated text
+     * @return Well-formed or not
+     */
+    private boolean tagsAreWellFormed(List<String> srcTags, List<String> locTags) {
+        
+        Stack<TagInfo> tagStack = new Stack<TagInfo>();
+        
+        TagInfo info;
+        for (String tag : locTags) {
+            // Make sure tag exists in source.
+            if (!srcTags.contains(tag)) {
+                return false;
+            }
+            info = StaticUtils.getTagInfo(tag);
+            // Build stack of tags to check well-formedness.
+            switch (info.type) {
+            case START:
+                tagStack.push(info);
+                break;
+            case END:
+                if (tagStack.isEmpty()) {
+                    // This is an orphaned end tag. Allow this.
+                    // (If it's not really orphaned but merely order-swapped,
+                    // then the opening tag will be caught in the stack.)
+                } else if (tagStack.peek().name.equals(info.name)) {
+                    // Closing a tag normally.
+                    tagStack.pop();
+                } else {
+                    // Closing the wrong opening tag. Disallow this.
+                    return false;
+                }
+                break;
+            case SINGLE:
+                // Ignore
+            }
+        }
+        
+        // Check the stack to see if there are straggling open tags.
+        while (!tagStack.isEmpty()) {
+            // Allow stragglers only if they're orphans.
+            if (srcTags.contains(StaticUtils.getPairedTag(tagStack.pop()))) {
+                return false;
+            }
+        }
+        
+        return true;
     }
 }

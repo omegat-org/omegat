@@ -4,7 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
-               2007-2012 Didier Briel
+               2007-2013 Didier Briel
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -315,7 +315,11 @@ public class OpenXMLFilter extends AbstractFilter {
 
     /** Extensions... */
     public Instance[] getDefaultInstances() {
-        return new Instance[] { new Instance("*.doc?"), new Instance("*.xls?"), new Instance("*.ppt?"), };
+        return new Instance[] { 
+            new Instance("*.doc?"), 
+            new Instance("*.dotx"), 
+            new Instance("*.xls?"), 
+            new Instance("*.ppt?"), };
     }
 
     /** Source encoding cannot be varied by the user. */

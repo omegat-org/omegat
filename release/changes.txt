@@ -248,6 +248,18 @@ to write in the repository anymore
   http://sourceforge.net/support/tracker.php?aid=2960656
 
 ----------------------------------------------------------------------
+ OmegaT 2.5.5 update 5
+----------------------------------------------------------------------
+   1 Enhancement
+   0 Bug fix
+   0 Localisation update
+----------------------------------------------------------------------
+2.5.5 update 5 vs. 2.5.5 update 4
+
+  Other enhancements:
+
+  - .dotx has been added as a default extension in the Open XML filter
+
  OmegaT 2.5.5 update 4
 ----------------------------------------------------------------------
    4 Enhancements

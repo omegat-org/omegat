@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 2.6.2
 ----------------------------------------------------------------------
-   6 Enhancements
+   7 Enhancements
    3 Bug fixes
    4 Localisation updates
 ----------------------------------------------------------------------
@@ -14,6 +14,9 @@
 
   - Tag partial verification
   http://sourceforge.net/support/tracker.php?aid=1545637
+
+  - In OpenXML filtter, add xml:space="preserve" to w:t elts
+  http://sourceforge.net/support/tracker.php?aid=3556996
 
   Other enhancements:
   

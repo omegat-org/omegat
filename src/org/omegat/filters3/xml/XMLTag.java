@@ -4,6 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
+               2013 Didier Briel
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -24,12 +25,14 @@
 
 package org.omegat.filters3.xml;
 
+import org.omegat.filters3.Attribute;
 import org.omegat.filters3.Tag;
 
 /**
  * XML Tag.
  * 
  * @author Maxym Mykhalchuk
+ * @author Didier Briel
  */
 public class XMLTag extends Tag {
     /** Creates a new instance of XML Tag */
@@ -40,6 +43,7 @@ public class XMLTag extends Tag {
     /**
      * Returns the tag in its original form as it was in original document. E.g.
      * for &lt;strong&gt; tag should return &lt;strong&gt;.
+     * Do specific processing for Open XML documents
      */
     public String toOriginal() {
         StringBuffer buf = new StringBuffer();
@@ -49,6 +53,22 @@ public class XMLTag extends Tag {
             buf.append("/");
         buf.append(getTag());
         buf.append(getAttributes().toString());
+        
+        // If that's an Open XML document, we preserve spaces for all <w:t> tags 
+        if (getTag().equalsIgnoreCase("w:t") && TYPE_BEGIN == getType()) {
+            Boolean preserve = false;
+            for (int i = 0; i < getAttributes().size(); i++) {
+                Attribute oneAttribute = getAttributes().get(i);
+                if (oneAttribute.getName().equalsIgnoreCase("xml:space")) { // If XML:space is already there
+                    preserve = true; // We do nothing
+                    break;
+                }
+            }
+            if (!preserve) {
+                 buf.append(" xml:space=\"preserve\"");
+            }
+        }    
+        
         if (TYPE_ALONE == getType())
             buf.append("/");
         buf.append(">");

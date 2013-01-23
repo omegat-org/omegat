@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 2.6.2
 ----------------------------------------------------------------------
-   7 Enhancements
+   8 Enhancements
    3 Bug fixes
    4 Localisation updates
 ----------------------------------------------------------------------
@@ -29,6 +29,9 @@ View menu
   - Tag colouring for RTL languages/orientation
 
   - The right-click popup menu has been reorganised
+
+  - When translating a Word (.docx) document and the target language
+is RTL, the paragraphs are set automatically to RTL in the target document
 
   Bug fixes:
 

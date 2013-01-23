@@ -4,6 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
+               2013 Didier Briel
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -30,12 +31,14 @@ import java.io.File;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 
+import org.omegat.util.Language;
 import org.xml.sax.Attributes;
 
 /**
  * The interface to specify the method a Handler can use to translate text.
  * 
  * @author Maxym Mykhalchuk
+ * @author Didier Briel
  */
 interface Translator {
     /**
@@ -107,4 +110,6 @@ interface Translator {
      * Process text.
      */
     void text(String text);
+    
+    Language getTargetLanguage();
 }

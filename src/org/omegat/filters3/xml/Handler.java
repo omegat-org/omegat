@@ -8,6 +8,7 @@
                2009 Didier Briel
                2010 Antonio Vilei
                2011 Didier Briel
+               2013 Didier Briel
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -410,9 +411,9 @@ class Handler extends DefaultHandler implements LexicalHandler, DeclHandler {
             xmltag = intacttag;
             intacttagName = tag;
             intacttagAttributes = XMLUtils.convertAttributes(attributes);
-        } else
-            xmltag = new XMLTag(tag, getShortcut(tag), Tag.TYPE_BEGIN, attributes);
-
+        } else {
+            xmltag = new XMLTag(tag, getShortcut(tag), Tag.TYPE_BEGIN, attributes, this.translator.getTargetLanguage());
+        }
         currEntry().add(xmltag);
 
         if (intacttag != null)
@@ -440,7 +441,7 @@ class Handler extends DefaultHandler implements LexicalHandler, DeclHandler {
                         len - 1)).getType() == Tag.TYPE_BEGIN) && !isClosingTagRequired()) {
             ((XMLTag) currEntry().get(len - 1)).setType(Tag.TYPE_ALONE);
         } else {
-            currEntry().add(new XMLTag(tag, getShortcut(tag), Tag.TYPE_END, null));
+            currEntry().add(new XMLTag(tag, getShortcut(tag), Tag.TYPE_END, null, this.translator.getTargetLanguage()));
         }
     }
 

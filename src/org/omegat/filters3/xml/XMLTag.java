@@ -27,6 +27,8 @@ package org.omegat.filters3.xml;
 
 import org.omegat.filters3.Attribute;
 import org.omegat.filters3.Tag;
+import org.omegat.gui.editor.EditorUtils;
+import org.omegat.util.Language;
 
 /**
  * XML Tag.
@@ -36,10 +38,12 @@ import org.omegat.filters3.Tag;
  */
 public class XMLTag extends Tag {
     /** Creates a new instance of XML Tag */
-    public XMLTag(String tag, String shortcut, int type, org.xml.sax.Attributes attributes) {
-        super(tag, shortcut, type, XMLUtils.convertAttributes(attributes));
+    public XMLTag(String tag, String shortcut, int type, org.xml.sax.Attributes attributes, Language targetLanguage) {
+        super(tag, shortcut, type, XMLUtils.convertAttributes(attributes));     
+        this.targetLanguage = targetLanguage;
     }
 
+    private Language targetLanguage;
     /**
      * Returns the tag in its original form as it was in original document. E.g.
      * for &lt;strong&gt; tag should return &lt;strong&gt;.
@@ -69,8 +73,15 @@ public class XMLTag extends Tag {
             }
         }    
         
-        if (TYPE_ALONE == getType())
+        // If the target language is RTL and the document is a .doxc, we insert <w:bidi/> after each <w:pPr>
+        if (EditorUtils.isRTL(targetLanguage.getLanguageCode())) {
+            if (getTag().equalsIgnoreCase("w:pPr") && TYPE_BEGIN == getType()) {
+                buf.append("><w:bidi/");
+            }
+        }
+        if (TYPE_ALONE == getType()) {
             buf.append("/");
+        }
         buf.append(">");
 
         return buf.toString();

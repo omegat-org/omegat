@@ -5,6 +5,7 @@
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
                2007-2008 Didier Briel
+               2013 Didier Briel
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -41,6 +42,7 @@ import javax.xml.parsers.SAXParserFactory;
 import org.omegat.filters2.AbstractFilter;
 import org.omegat.filters2.FilterContext;
 import org.omegat.filters2.TranslationException;
+import org.omegat.util.Language;
 import org.omegat.util.Log;
 import org.omegat.util.OConsts;
 import org.omegat.util.PatternConsts;
@@ -130,6 +132,17 @@ public abstract class XMLFilter extends AbstractFilter implements Translator {
             return new BufferedWriter(new XMLWriter(outFile, outEncoding));
     }
 
+    /**
+     * Target language of the project
+     */
+    private Language targetLanguage;
+    
+    /**
+     * @return The target language of the project
+     */
+    public Language getTargetLanguage() {
+        return targetLanguage;
+    }
     /** Processes an XML file. */
     @Override
     public void processFile(File inFile, File outFile, FilterContext fc) throws IOException,
@@ -137,6 +150,7 @@ public abstract class XMLFilter extends AbstractFilter implements Translator {
         try {
             BufferedReader inReader = createReader(inFile, fc.getInEncoding());
             inEncodingLastParsedFile = this.encoding;
+            targetLanguage = fc.getTargetLang();
             InputSource source = new InputSource(inReader);
             source.setSystemId("file:///" + inFile.getCanonicalPath().replace(File.separatorChar, '/'));
             SAXParser parser = parserFactory.newSAXParser();

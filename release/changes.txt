@@ -31,7 +31,9 @@ View menu
   - The right-click popup menu has been reorganised
 
   - When translating a Word (.docx) document and the target language
-is RTL, the paragraphs are set automatically to RTL in the target document
+is RTL, a number of changes are done to the target document:
+- Paragraphs, sections and tables are set to bidi
+- Runs (text elements) are set to RTL
 
   Bug fixes:
 

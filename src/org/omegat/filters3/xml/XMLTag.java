@@ -73,13 +73,26 @@ public class XMLTag extends Tag {
             }
         }    
         
-        // If the target language is RTL and the document is a .doxc, we insert <w:bidi/> after each <w:pPr>
+        boolean alreadyClosed = false;
+        
+        // If the target language is RTL and the document is a .doxc 
+        // we do a number of tag insertions
         if (EditorUtils.isRTL(targetLanguage.getLanguageCode())) {
             if (getTag().equalsIgnoreCase("w:pPr") && TYPE_BEGIN == getType()) {
                 buf.append("><w:bidi/");
+            } else if (getTag().equalsIgnoreCase("w:sectPr") && TYPE_BEGIN == getType()) {
+                buf.append("><w:bidi/");
+            } else if (getTag().equalsIgnoreCase("w:rPr") && TYPE_BEGIN == getType()) {
+                buf.append("><w:rtl/");
+            } else if (getTag().equalsIgnoreCase("w:tblPr") && TYPE_BEGIN == getType()) {
+                buf.append("><w:bidiVisual/");
+            } else if (getTag().equalsIgnoreCase("w:tblStyle") && TYPE_ALONE == getType()) {
+                buf.append("/><w:bidiVisual/"); 
+                alreadyClosed = true;
             }
         }
-        if (TYPE_ALONE == getType()) {
+
+        if (TYPE_ALONE == getType() && !alreadyClosed) {
             buf.append("/");
         }
         buf.append(">");

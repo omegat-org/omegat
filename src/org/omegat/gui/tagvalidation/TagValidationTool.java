@@ -333,13 +333,27 @@ public class TagValidationTool implements ITagValidation, IProjectEventListener 
      */
     private boolean tagsAreWellFormed(List<String> srcTags, List<String> locTags) {
         
+        // Check source tags for any missing from translation.
+        for (String tag : srcTags) {
+            if (!locTags.contains(tag)) {
+                return false;
+            }
+        }
+        
         Stack<TagInfo> tagStack = new Stack<TagInfo>();
+        HashSet<String> cache = new HashSet<String>();
         
         TagInfo info;
         for (String tag : locTags) {
             // Make sure tag exists in source.
             if (!srcTags.contains(tag)) {
                 return false;
+            }
+            // Check tag against cache to find duplicates.
+            if (cache.contains(tag)) {
+                return false;
+            } else {
+                cache.add(tag);
             }
             info = StaticUtils.getTagInfo(tag);
             // Build stack of tags to check well-formedness.

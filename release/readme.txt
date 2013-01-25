@@ -290,6 +290,7 @@ Code has been contributed by
   Tiago Saboga
   Andrzej Sawuła
   Benjamin Siband
+  Yu Tang
   Rashid Umarov  
   Antonio Vilei
   Martin Wunderlich

@@ -1,7 +1,7 @@
-Ce document a été traduit par Didier Briel et Jean-Christophe Helary, copyright© 2007-2012.
+Ce document a été traduit par Didier Briel et Jean-Christophe Helary, copyright© 2007-2013.
 
 ==============================================================================
-  OmegaT 2.0, fichier « Lisez-moi »
+  OmegaT 2.0, fichier « Lisez-moi »
 
   1.  Informations à propos d'OmegaT
   2.  Qu'est ce qu'OmegaT ?
@@ -230,6 +230,7 @@ Contributions au code :
   Tiago Saboga
   Andrzej Sawuła
   Benjamin Siband
+  Yu Tang
   Rashid Umarov  
   Antonio Vilei
   Martin Wunderlich

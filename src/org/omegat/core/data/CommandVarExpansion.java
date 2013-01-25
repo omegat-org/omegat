@@ -3,7 +3,7 @@
           with fuzzy matching, translation memory, keyword search, 
           glossaries, and translation leveraging into updated projects.
 
- Copyright (C) 2013 Aaron Madlon-Kay
+ Copyright (C) 2013 Aaron Madlon-Kay, Yu Tang
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -26,6 +26,8 @@ package org.omegat.core.data;
 
 import java.util.ArrayList;
 import java.util.Map.Entry;
+import org.omegat.core.Core;
+import org.omegat.util.StringUtil;
 
 import org.omegat.util.VarExpansion;
 
@@ -33,7 +35,8 @@ import org.omegat.util.VarExpansion;
  * Expand variables representing project properties.
  * Intended for use in preparing external commands for execution.
  * 
- * @author aaron.madlon-kay
+ * @author Aaron Madlon-Kay
+ * @author Yu Tang
  */
 public class CommandVarExpansion extends VarExpansion<ProjectProperties> {
 
@@ -77,6 +80,12 @@ public class CommandVarExpansion extends VarExpansion<ProjectProperties> {
             localTemplate = localTemplate.replace(fixEnvarName(e.getKey()), e.getValue());
         }
         
+        String currentFile = Core.getEditor().getCurrentFile();
+        if (!StringUtil.isEmpty(currentFile)) {
+            String sourceRoot = props.getSourceRoot();
+            localTemplate = expandFileName(localTemplate, sourceRoot + currentFile, sourceRoot);
+        }
+        
         return localTemplate;
     }
     
@@ -98,6 +107,11 @@ public class CommandVarExpansion extends VarExpansion<ProjectProperties> {
         vars.add(TM_OTHER_LANG_ROOT);
         vars.add(SOURCE_LANGUAGE);
         vars.add(TARGET_LANGUAGE);
+        vars.add(VarExpansion.VAR_FILE_PATH);
+        vars.add(VarExpansion.VAR_FILE_SHORT_PATH);
+        vars.add(VarExpansion.VAR_FILE_NAME);
+        vars.add(VarExpansion.VAR_FILE_NAME_ONLY);
+        vars.add(VarExpansion.VAR_FILE_EXTENSION);
         for (Entry<String, String> e : System.getenv().entrySet()) {
             vars.add(fixEnvarName(e.getKey()));
         }

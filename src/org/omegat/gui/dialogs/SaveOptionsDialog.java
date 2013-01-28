@@ -117,6 +117,7 @@ public class SaveOptionsDialog extends JDialog {
         variablesLabel = new javax.swing.JLabel();
         variablesList = new javax.swing.JComboBox();
         insertButton = new javax.swing.JButton();
+        externalCommandLabel = new javax.swing.JLabel();
 
         setTitle(OStrings.getString("SAVE_DIALOG_TITLE")); // NOI18N
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -190,7 +191,7 @@ public class SaveOptionsDialog extends JDialog {
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 10;
+        gridBagConstraints.gridy = 11;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.SOUTHEAST;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.weighty = 1.0;
@@ -205,7 +206,7 @@ public class SaveOptionsDialog extends JDialog {
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
-        gridBagConstraints.gridy = 10;
+        gridBagConstraints.gridy = 11;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.SOUTHEAST;
         gridBagConstraints.weighty = 1.0;
         gridBagConstraints.insets = new java.awt.Insets(14, 4, 4, 4);
@@ -219,12 +220,12 @@ public class SaveOptionsDialog extends JDialog {
         externalCmdDescriptionTextArea.setWrapStyleWord(true);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 6;
+        gridBagConstraints.gridy = 7;
         gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.weightx = 1.0;
-        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+        gridBagConstraints.insets = new java.awt.Insets(4, 8, 4, 4);
         getContentPane().add(externalCmdDescriptionTextArea, gridBagConstraints);
 
         externalCommandTextArea.setColumns(20);
@@ -234,7 +235,7 @@ public class SaveOptionsDialog extends JDialog {
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 7;
+        gridBagConstraints.gridy = 8;
         gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
@@ -244,7 +245,7 @@ public class SaveOptionsDialog extends JDialog {
         org.openide.awt.Mnemonics.setLocalizedText(allowProjectCmdCheckBox, OStrings.getString("ALLOW_PROJECT_EXTERN_CMD")); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 9;
+        gridBagConstraints.gridy = 10;
         gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.insets = new java.awt.Insets(6, 4, 4, 4);
@@ -253,7 +254,7 @@ public class SaveOptionsDialog extends JDialog {
         org.openide.awt.Mnemonics.setLocalizedText(variablesLabel, OStrings.getString("EXT_TMX_MATCHES_TEMPLATE_VARIABLES")); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 8;
+        gridBagConstraints.gridy = 9;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
         getContentPane().add(variablesLabel, gridBagConstraints);
@@ -261,7 +262,7 @@ public class SaveOptionsDialog extends JDialog {
         variablesList.setModel(new DefaultComboBoxModel(org.omegat.core.data.CommandVarExpansion.COMMAND_VARIABLES));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 8;
+        gridBagConstraints.gridy = 9;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         getContentPane().add(variablesList, gridBagConstraints);
 
@@ -277,6 +278,19 @@ public class SaveOptionsDialog extends JDialog {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.weightx = 1.0;
         getContentPane().add(insertButton, gridBagConstraints);
+
+        externalCommandLabel.setLabelFor(externalCommandTextArea);
+        org.openide.awt.Mnemonics.setLocalizedText(externalCommandLabel, OStrings.getString("EXTERNAL_COMMAND_LABEL")); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 6;
+        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(6, 4, 0, 4);
+        getContentPane().add(externalCommandLabel, gridBagConstraints);
+
 
         pack();
         java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
@@ -341,6 +355,7 @@ public class SaveOptionsDialog extends JDialog {
     private javax.swing.JCheckBox allowProjectCmdCheckBox;
     private javax.swing.JButton cancelButton;
     private javax.swing.JTextArea externalCmdDescriptionTextArea;
+    private javax.swing.JLabel externalCommandLabel;
     private javax.swing.JScrollPane externalCommandScrollPane;
     private javax.swing.JTextArea externalCommandTextArea;
     private javax.swing.JButton insertButton;

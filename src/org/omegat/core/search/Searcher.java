@@ -7,6 +7,7 @@
                2006 Henry Pijffers
                2009 Didier Briel
                2010 Martin Fleurke, Antonio Vilei, Alex Buloichik, Didier Briel
+               2013 Aaron Madlon-Kay
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -69,6 +70,7 @@ import org.omegat.util.StaticUtils;
  * @author Martin Fleurke
  * @author Antonio Vilei
  * @author Alex Buloichik (alex73mail@gmail.com)
+ * @author Aaron Madlon-Kay
  */
 public class Searcher {
 
@@ -496,8 +498,17 @@ public class Searcher {
         if (te == null || m_author == null)
             return false;
         String author = te.changer;
-        if (author == null)
+        
+        if (author == null) {
+            // Handle search for null author.
+            if (te.translation != null && m_author.pattern().pattern().equals("")) {
+                return true;
+            }
             return false;
+        } else if (m_author.pattern().pattern().equals("")) {
+            // Don't match non-null authors when searching for null author.
+            return false;
+        }
 
         // check the text against the author matcher
         m_author.reset(author);

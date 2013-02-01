@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 2.6.2
 ----------------------------------------------------------------------
-   8 Enhancements
+   9 Enhancements
    4 Bug fixes
    4 Localisation updates
 ----------------------------------------------------------------------
@@ -34,6 +34,9 @@ View menu
 is RTL, a number of changes are done to the target document:
 - Paragraphs, sections and tables are set to bidi
 - Runs (text elements) are set to RTL
+
+  - In the Search window, it is now possible to search for segments
+where the author is unknown
 
   Bug fixes:
 

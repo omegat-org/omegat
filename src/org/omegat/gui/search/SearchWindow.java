@@ -8,6 +8,7 @@
                2009 Didier Briel
                2010 Martin Fleurke, Antonio Vilei, Didier Briel
                2012 Didier Briel
+               2013 Aaron Madlon-Kay
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -28,12 +29,16 @@
 
 package org.omegat.gui.search;
 
+import java.awt.Color;
 import java.awt.Container;
+import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowEvent;
@@ -93,6 +98,7 @@ import org.openide.awt.Mnemonics;
  * @author Didier Briel
  * @author Martin Fleurke
  * @author Antonio Vilei
+ * @author Aaron Madlon-Kay
  */
 @SuppressWarnings("serial")
 public class SearchWindow extends JFrame {
@@ -169,6 +175,7 @@ public class SearchWindow extends JFrame {
         m_authorCB = new JCheckBox();
         m_authorField = new MFindField();
         m_authorField.setEditable(false);
+        m_authorField.setDefaultText(OStrings.getString("TF_CUR_SEGMENT_UNKNOWN_AUTHOR"));
         bAB = Box.createHorizontalBox();
         bAB.add(m_authorCB);
         bAB.add(m_authorField);
@@ -997,7 +1004,10 @@ public class SearchWindow extends JFrame {
         });
     }
 
-    class MFindField extends JTextField {
+    /**
+     * "Default text" feature inspired by http://stackoverflow.com/a/1739037/448068
+     */
+    class MFindField extends JTextField implements FocusListener {
         public MFindField() {
             // Handle undo (CtrlCmd+Z);
             KeyStroke undo = StaticUtils.onMacOSX() ? KeyStroke.getKeyStroke(KeyEvent.VK_Z,
@@ -1022,6 +1032,27 @@ public class SearchWindow extends JFrame {
             };
             getInputMap().put(redo, "REDO");
             getActionMap().put("REDO", redoAction);
+            
+            defaultText = null;
+            normalFont = getFont();
+            defaultTextFont = normalFont.deriveFont(Font.ITALIC);
+            normalColor = getForeground();
+            isDirty = false;
+            addFocusListener(this);
+        }
+
+        public void setDefaultText(String text) {
+            defaultText = text;
+            if (getText().length() == 0) {
+                showDefaultText();
+            }
+        }
+        
+        private void showDefaultText() {
+            setText(defaultText);
+            setFont(defaultTextFont);
+            setForeground(getDisabledTextColor());
+            isDirty = false;
         }
 
         @Override
@@ -1041,19 +1072,60 @@ public class SearchWindow extends JFrame {
             } else {
                 super.processKeyEvent(e);
             }
+            if (e.getID() == KeyEvent.KEY_TYPED) {
+                isDirty = true;
+            }
         }
 
         protected void undo() {
-            if (undoManager.canUndo())
+            if (undoManager.canUndo()) {
                 undoManager.undo();
+            }
         }
 
         protected void redo() {
-            if (undoManager.canRedo())
+            if (undoManager.canRedo()) {
                 undoManager.redo();
+            }
+        }
+
+        public void focusGained(FocusEvent e) {
+            if (defaultText != null && isEditable() && getText().length() == 0) {
+                setText("");
+            }
+        }
+
+        public void focusLost(FocusEvent e) {
+            if (defaultText != null && isEditable() && getText().length() == 0) {
+                showDefaultText();
+            }
+        }
+
+        @Override
+        public String getText() {
+            String content = super.getText();
+            if (!isDirty && defaultText != null && content.equals(defaultText)) {
+                return "";
+            }
+            return content;
+        }
+        
+        @Override
+        public void setText(String t) {
+            setFont(normalFont);
+            setForeground(normalColor);
+            if (t.length() > 0) {
+                isDirty = true;
+            }
+            super.setText(t);
         }
 
         private UndoManager undoManager;
+        private Font normalFont;
+        private Font defaultTextFont;
+        private Color normalColor;
+        private String defaultText;
+        private boolean isDirty;
     }
 
     private MainWindow m_parent;
@@ -1078,7 +1150,7 @@ public class SearchWindow extends JFrame {
 
     private Box bAB;
     private JCheckBox m_authorCB;
-    private JTextField m_authorField;
+    private MFindField m_authorField;
 
     private Box bDB;
     private JCheckBox m_dateFromCB;

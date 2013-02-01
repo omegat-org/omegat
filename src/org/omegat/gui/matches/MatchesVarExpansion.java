@@ -4,6 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2012 Thomas Cordonnier, Aaron Madlon-Kay
+               2013 Aaron Madlon-Kay
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -32,6 +33,8 @@ import org.omegat.core.matching.NearString;
 import java.util.List;
 import java.util.Map;
 import java.util.Date;
+import java.util.Map.Entry;
+import java.util.TreeMap;
 import java.text.DateFormat;
 import java.util.regex.Pattern;
 import java.util.regex.Matcher;
@@ -81,6 +84,24 @@ public class MatchesVarExpansion extends VarExpansion<NearString> {
     public static final Pattern patternSingleProperty = Pattern.compile("@\\{(.+?)\\}");
     public static final Pattern patternPropertyGroup = Pattern.compile("@\\[(.+?)\\]\\[(.+?)\\]\\[(.+?)\\]"); 
     
+    private static Replacer sourceTextReplacer = new Replacer() {
+        public void replace(Result R, NearString match) {
+            R.sourcePos = R.text.indexOf(VAR_SOURCE_TEXT);
+            R.text = R.text.replace(VAR_SOURCE_TEXT, match.source);
+        }
+    };
+    
+    private static Replacer diffReplacer = new Replacer() {
+        public void replace(Result R, NearString match) {
+            R.diffPos = R.text.indexOf(VAR_DIFF);
+            if (R.diffPos != -1) {
+                Render diffRender = DiffDriver.render(match.source, Core.getEditor().getCurrentEntry().getSrcText());
+                R.diffInfo = diffRender.formatting;
+                R.text = R.text.replace(VAR_DIFF, diffRender.text);
+            }
+        }
+    };
+    
     // ------------------------------ subclasses -------------------
     
     /** Class to store formatted text and indications for other treatments **/
@@ -91,8 +112,16 @@ public class MatchesVarExpansion extends VarExpansion<NearString> {
 	public int diffPos;
     }
     
+    /** A simple interface for making anonymous functions that perform string replacements. */
+    private interface Replacer {
+        public void replace(Result R, NearString match);
+    }
+
     // ------------------------------ non-static part -------------------
-        
+
+    /** A sorted map that ensures styled replacements are performed in the order of appearance. */
+    private Map<Integer, Replacer> styledComponents = new TreeMap<Integer, Replacer>();
+
     public MatchesVarExpansion (String template) {
         super(template);
         
@@ -153,6 +182,7 @@ public class MatchesVarExpansion extends VarExpansion<NearString> {
     
     public Result apply(NearString match, int id) {
         Result R = new Result();
+        styledComponents.clear();
         
         // Variables
         R.text = this.expandVariables(match);
@@ -165,19 +195,14 @@ public class MatchesVarExpansion extends VarExpansion<NearString> {
             R.text = R.text.replaceAll(patternSingleProperty.pattern(), "");
             R.text = R.text.replaceAll(patternPropertyGroup.pattern(), "");            
         }
-                
-        // Source : must be the last one to ensure sourcePos is well-positionned
-        R.sourcePos = R.text.indexOf(VAR_SOURCE_TEXT);
-        R.text = R.text.replace(VAR_SOURCE_TEXT, match.source);
-        
-        R.diffPos = R.text.indexOf(VAR_DIFF);
-        if (R.diffPos != -1) {
-            Render diffRender = DiffDriver.render(match.source, Core.getEditor().getCurrentEntry().getSrcText());
-            R.diffInfo = diffRender.formatting;
-            R.text = R.text.replace(VAR_DIFF, diffRender.text);
+
+        styledComponents.put(R.text.indexOf(VAR_SOURCE_TEXT), sourceTextReplacer);
+        styledComponents.put(R.text.indexOf(VAR_DIFF), diffReplacer);
+
+        for (Entry<Integer, Replacer> e : styledComponents.entrySet()) {
+            e.getValue().replace(R, match);
         }
         
         return R;
     }
-
 }

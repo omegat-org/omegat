@@ -5,7 +5,7 @@
  OmegaT - Java based Computer Assisted Translation (CAT) tool
  Copyright (C) 2000-2007 Keith Godfrey and Maxym Mykhalchuk
                2008-2010 Didier Briel, Alex Buloichik
-               2012 Didier Briel
+               2012-2013 Didier Briel
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -26,6 +26,9 @@
 -->
 
 <project name="OmegaT" default="all" basedir=".">
+    <!-- Use an empty string for non-beta versions  and _Beta for beta versions -->
+    <property name="beta" value="_Beta" />
+    
     <description>Builds, tests, and runs the project OmegaT.</description>
     <import file="nbproject/build-impl.xml"/>
     <import file="nbproject/profiler-build-impl.xml"/>
@@ -135,7 +138,7 @@
     <!-- Builds a source distribution -->    
     <target name="src" depends="init" description="Build source distribution">
         <mkdir dir="dist2"/>
-        <zip destfile="dist2/OmegaT_${distversion}_Source.zip" basedir="." 
+        <zip destfile="dist2/OmegaT_${distversion}${beta}_Source.zip" basedir="." 
                 includes="addons/** docs/** images/** lib/** nbproject/** lib-mnemonics/** release/** src/** test/** gen/** manifest-template.mf build.xml native/** doc_src/** docs_devel/**"
                 excludes="**/nbproject/private/** **/build/** **/dist/**" />
     </target>
@@ -185,7 +188,7 @@
     <!-- Builds a ZIP distribution -->    
     <target name="zip" description="Build Zip distro" depends="jar,release">
         <mkdir dir="dist2"/>
-        <zip destfile="dist2/OmegaT_${distversion}_Without_JRE.zip">
+        <zip destfile="dist2/OmegaT_${distversion}${beta}_Without_JRE.zip">
             <zipfileset dir="dist" excludes="OmegaT OmegaT-JRE linux-install.sh omegat.kaptn OmegaT.exe OmegaT.iss OmegaT-JRE.iss OmegaT.l4J.ini l10n-project"/>
             <zipfileset dir="dist" includes="OmegaT linux-install.sh omegat.kaptn" filemode="755"/>
         </zip>
@@ -206,7 +209,7 @@
             <tarfileset dir="dist2/linux" excludes="OmegaT/OmegaT OmegaT/linux-install.sh OmegaT/omegat.kaptn OmegaT/jre/bin/java"/>           
             <tarfileset dir="dist2/linux" includes="OmegaT/OmegaT OmegaT/linux-install.sh OmegaT/omegat.kaptn OmegaT/jre/bin/java" filemode="755"/>
         </tar>
-        <bzip2 zipfile="dist2/OmegaT_${distversion}_Linux.tar.bz2" src="dist2/OmegaT_${distversion}_Linux.tar"/>
+        <bzip2 zipfile="dist2/OmegaT_${distversion}${beta}_Linux.tar.bz2" src="dist2/OmegaT_${distversion}_Linux.tar"/>
    </target>
 
     <!-- Creates a Windows Installer -->
@@ -216,7 +219,7 @@ Custom strings from release\win32-specific must be added manually to the languag
         <copy todir="dist" file="release/win32-specific/OmegaT.l4J.ini"/>
  
         <delete file="dist/OmegaT.iss"/>
-        <filter token="VERSION_NUMBER_SUBST" value="${distversion}"/>
+        <filter token="VERSION_NUMBER_SUBST" value="${distversion}${beta}"/>
         <copy todir="dist" file="release/win32-specific/OmegaT.iss" filtering="on"/>
         
         <mkdir dir="dist2"/>
@@ -232,7 +235,7 @@ Custom strings from release\win32-specific must be added manually to the languag
         <copy todir="dist" file="release/win32-specific/OmegaT.l4J.ini"/>
         
         <delete file="dist/OmegaT-JRE.iss"/>
-        <filter token="VERSION_NUMBER_SUBST" value="${distversion}"/>
+        <filter token="VERSION_NUMBER_SUBST" value="${distversion}${beta}"/>
         <copy todir="dist" file="release/win32-specific/OmegaT-JRE.iss" filtering="on"/>
         <exec executable="${iscc.exe}">
             <arg file="dist/OmegaT-JRE.iss"/>
@@ -262,7 +265,7 @@ Custom strings from release\win32-specific must be added manually to the languag
             <fileset dir="dist" excludes="OmegaT OmegaT-JRE linux-install.sh omegat.kaptn OmegaT.exe OmegaT.bat OmegaT.iss OmegaT-JRE.iss OmegaT.l4J.ini l10n-project"/> 
         </copy>
 
-        <zip destfile="dist2/OmegaT_${distversion}_Mac.zip">
+        <zip destfile="dist2/OmegaT_${distversion}${beta}_Mac.zip">
             <zipfileset dir="dist2/mac/" excludes="OmegaT.app/Contents/MacOS/JavaApplicationStub"/>
             <zipfileset dir="dist2/mac/" includes="OmegaT.app/Contents/MacOS/JavaApplicationStub" filemode="755"/>
         </zip>

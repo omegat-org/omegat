@@ -3,8 +3,8 @@
       <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
    
       <title>Глава 7. Файловые фильтры</title>
-      <link rel="stylesheet" type="text/css" href="OmegaT.css">
-      <meta name="generator" content="DocBook XSL Stylesheets V1.76.1">
+      <link rel="stylesheet" href="OmegaT.css" type="text/css">
+      <meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
       <link rel="home" href="index.html" title="Руководство пользователя ОмегаТ">
       <link rel="up" href="index.html" title="Руководство пользователя ОмегаТ">
       <link rel="prev" href="chapter.project.properties.html" title="Глава 6. Свойства проекта">
@@ -49,7 +49,7 @@
             </dl>
          </div>
          <p>В ОмегаТ есть система настраиваемых фильтров, которая позволяет вносить изменения практически в любой аспект их работы. Файловые
-            фильтры — это маленькие подпрограммы, которые могут:
+            фильтры&nbsp;— это маленькие подпрограммы, которые могут:
          </p>
          <div class="itemizedlist">
             <ul class="itemizedlist" type="disc">
@@ -378,7 +378,7 @@
                <div class="itemizedlist">
                   <ul class="itemizedlist" type="disc">
                      <li class="listitem">
-                        <p>По умолчанию установлен шаблон <code class="literal">${filename}</code> — полное имя исходного файла с расширением, то есть имя переведённого файла совпадает с именем исходного файла.
+                        <p>По умолчанию установлен шаблон <code class="literal">${filename}</code>&nbsp;— полное имя исходного файла с расширением, то есть имя переведённого файла совпадает с именем исходного файла.
                         </p>
                      </li>
                   </ul>
@@ -386,19 +386,11 @@
                <div class="itemizedlist">
                   <ul class="itemizedlist" type="disc">
                      <li class="listitem">
-                        <p><code class="literal">${nameOnly}</code> — позволяет вставить только имя исходного файла без расширения.
+                        <p><code class="literal">${nameOnly}</code>&nbsp;— позволяет вставить только имя исходного файла без расширения.
                         </p>
                      </li>
                      <li class="listitem">
-                        <p><code class="literal">${extension} </code> — расширение исходного файла.
-                        </p>
-                     </li>
-                  </ul>
-               </div>
-               <div class="itemizedlist">
-                  <ul class="itemizedlist" type="disc">
-                     <li class="listitem">
-                        <p><code class="literal">${targetLocale}</code> — код локали перевода (в формате «xx_YY»).
+                        <p><code class="literal">${extension} </code>&nbsp;— расширение исходного файла.
                         </p>
                      </li>
                   </ul>
@@ -406,7 +398,7 @@
                <div class="itemizedlist">
                   <ul class="itemizedlist" type="disc">
                      <li class="listitem">
-                        <p><code class="literal">${targetLanguage}</code> — коды языка перевода и страны вместе (в форме «XX-YY»).
+                        <p><code class="literal">${targetLocale}</code>&nbsp;— код локали перевода (в формате «xx_YY»).
                         </p>
                      </li>
                   </ul>
@@ -414,7 +406,7 @@
                <div class="itemizedlist">
                   <ul class="itemizedlist" type="disc">
                      <li class="listitem">
-                        <p><code class="literal">${targetLanguageCode}</code> — код языка перевода («XX»).
+                        <p><code class="literal">${targetLanguage}</code>&nbsp;— коды языка перевода и страны вместе (в форме «XX-YY»).
                         </p>
                      </li>
                   </ul>
@@ -422,32 +414,40 @@
                <div class="itemizedlist">
                   <ul class="itemizedlist" type="disc">
                      <li class="listitem">
-                        <p><code class="literal">${targetCountryCode}</code> — код страны («YY»).
+                        <p><code class="literal">${targetLanguageCode}</code>&nbsp;— код языка перевода («XX»).
+                        </p>
+                     </li>
+                  </ul>
+               </div>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" type="disc">
+                     <li class="listitem">
+                        <p><code class="literal">${targetCountryCode}</code>&nbsp;— код страны («YY»).
                         </p>
                      </li>
                      <li class="listitem">
-                        <p><code class="literal">$(timestamp-????)</code> — различные шаблоны представления системного времени на момент создания переведённых файлов.
+                        <p><code class="literal">$(timestamp-????)</code>&nbsp;— различные шаблоны представления системного времени на момент создания переведённых файлов.
                         </p>
                         <p>Примеры шаблонов «SimpleDateFormat» можно найти в <a class="ulink" href="http://docs.oracle.com/javase/1.4.2/docs/api/java/text/SimpleDateFormat.html" target="_top">документации Oracle</a>.
                         </p>
                      </li>
                      <li class="listitem">
-                        <p>${system-os-name} — установленная на компьютере переводчика операционная система</p>
+                        <p>${system-os-name}&nbsp;— установленная на компьютере переводчика операционная система</p>
                      </li>
                      <li class="listitem">
-                        <p>${system-user-name) — имя пользователя в операционной системе</p>
+                        <p>${system-user-name)&nbsp;— имя пользователя в операционной системе</p>
                      </li>
                      <li class="listitem">
-                        <p>${system-host-name} — название машины (hostname)</p>
+                        <p>${system-host-name}&nbsp;— название машины (hostname)</p>
                      </li>
                      <li class="listitem">
-                        <p>${file-source-encoding} — кодировка исходного файла</p>
+                        <p>${file-source-encoding}&nbsp;— кодировка исходного файла</p>
                      </li>
                      <li class="listitem">
-                        <p>${file-target-encoding} — кодировка переведённого файла</p>
+                        <p>${file-target-encoding}&nbsp;— кодировка переведённого файла</p>
                      </li>
                      <li class="listitem">
-                        <p>${targetLocaleLCID) — локаль переведённого файла Microsoft</p>
+                        <p>${targetLocaleLCID)&nbsp;— локаль переведённого файла Microsoft</p>
                      </li>
                   </ul>
                </div>

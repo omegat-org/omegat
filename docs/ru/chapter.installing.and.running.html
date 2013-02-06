@@ -3,8 +3,8 @@
       <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
    
       <title>Глава 3. Установка и запуск ОмегаТ</title>
-      <link rel="stylesheet" type="text/css" href="OmegaT.css">
-      <meta name="generator" content="DocBook XSL Stylesheets V1.76.1">
+      <link rel="stylesheet" href="OmegaT.css" type="text/css">
+      <meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
       <link rel="home" href="index.html" title="Руководство пользователя ОмегаТ">
       <link rel="up" href="index.html" title="Руководство пользователя ОмегаТ">
       <link rel="prev" href="chapter.instant.start.guide.html" title="Глава 2. Научитесь работать с ОмегаТ за 5 минут!">
@@ -152,7 +152,7 @@
                </div>
                <p>После установки <span class="application">ОмегаТ</span> вы можете щёлкнуть мышкой на файле <span class="emphasis"><em><span class="application">OmegaT</span>.jar</em></span>, чтобы запустить программу напрямую, или же запускать её из командной строки.
                </p>
-               <p>Однако, проще всего — запустить программу<span class="emphasis"><em> <span class="application">OmegaT</span>.exe</em></span>. <a class="indexterm" name="d0e443"></a>В этом случае параметры будут считываться из файла <span class="emphasis"><em><span class="application">OmegaT</span>.l4J.ini </em></span>, который находится в том же каталоге, что и файл exe. Вы можете изменить его так, как посчитаете нужным. В нижеприведённом
+               <p>Однако, проще всего&nbsp;— запустить программу<span class="emphasis"><em> <span class="application">OmegaT</span>.exe</em></span>. <a class="indexterm" name="d0e443"></a>В этом случае параметры будут считываться из файла <span class="emphasis"><em><span class="application">OmegaT</span>.l4J.ini </em></span>, который находится в том же каталоге, что и файл exe. Вы можете изменить его так, как посчитаете нужным. В нижеприведённом
                   примере, в файле INI для ОмегаТ резервируется 1 Гб памяти, в качестве языка интерфейса устанавливается французский, а в качестве
                   страны пользователя выбирается Португалия.
                </p>
@@ -556,13 +556,13 @@
                   </div>
                </div>
                <p>Окно командной строки также часто называют «окно терминала». В Windows оно называется «Сеанс MS-DOS» и его можно запустить
-                  через меню «Пуск» — «Программы» —&nbsp;«Сеанс MS-DOS». Его эквивалентом под Mac OS X является приложение Terminal, расположенное
+                  через меню «Пуск»&nbsp;— «Программы»&nbsp;—&nbsp;«Сеанс MS-DOS». Его эквивалентом под Mac OS X является приложение Terminal, расположенное
                   в «Applications → Utilities».
                </p>
                <p>Чтобы запустить <span class="application">ОмегаТ</span>, обычно нужно ввести две команды. Первая:
                </p>
                <p><span class="emphasis"><em> <code class="literal">cd {папка}</code> </em></span></p>
-               <p>где <span class="emphasis"><em>{папка}</em></span> — это имя папки (с полным путём к ней), где находится <span class="application">OmegaT</span> — точнее, файл <span class="emphasis"><em><span class="application">OmegaT</span>.jar</em></span>. У вас эта команда будет выглядеть примерно так:
+               <p>где <span class="emphasis"><em>{папка}</em></span>&nbsp;— это имя папки (с полным путём к ней), где находится <span class="application">OmegaT</span>&nbsp;— точнее, файл <span class="emphasis"><em><span class="application">OmegaT</span>.jar</em></span>. У вас эта команда будет выглядеть примерно так:
                </p>
                <p>В Windows</p>
                <p><span class="emphasis"><em> <code class="literal">cd C:\Program
@@ -577,7 +577,7 @@
                </p>
                <p><code class="literal">java -jar
                            <span class="application">OmegaT</span>.jar</code></p>
-               <p>Обратите внимание на регистр букв — программа не запустится, если вы введёте <span class="emphasis"><em>omegat</em></span> вместо <span class="emphasis"><em>OmegaT </em></span>!
+               <p>Обратите внимание на регистр букв&nbsp;— программа не запустится, если вы введёте <span class="emphasis"><em>omegat</em></span> вместо <span class="emphasis"><em>OmegaT </em></span>!
                </p>
                <p>Этот способ удобен при отладке: если во время работы произошла ошибка, то сообщение о ней выводится в окно терминала, что
                   может быть очень полезно.
@@ -702,7 +702,7 @@
                            </p>
                         </li>
                         <li class="listitem">
-                           <p>Если же запустить <span class="application">ОмегаТ</span> в нормальном режиме не получается (отсутствует графическое окружение): скопируйте файлы конфигурации <span class="application">ОмегаТ</span> с другого компьютера в соответствующий каталог. Куда вы их скопируете — тоже не имеет значения, так как путь к файлу конфигурации
+                           <p>Если же запустить <span class="application">ОмегаТ</span> в нормальном режиме не получается (отсутствует графическое окружение): скопируйте файлы конфигурации <span class="application">ОмегаТ</span> с другого компьютера в соответствующий каталог. Куда вы их скопируете&nbsp;— тоже не имеет значения, так как путь к файлу конфигурации
                               можно указать в командной строке при запуске. Нужные вам файлы <code class="literal">filters.conf</code> и <code class="literal">segmentation.conf</code> находятся в домашнем каталоге пользователя (например, <code class="literal">C:\Documents and Settings\%User%\<span class="application">OmegaT</span></code> в Windows, <code class="literal">/home/%user%/.omegat/</code> в GNU/Linux).
                            </p>
                         </li>
@@ -718,7 +718,7 @@
                         </div>
                      </div>
                   </div>
-                  <p>Для того, чтобы запустить <span class="application">ОмегаТ</span> в консольном режиме, при запуске нужно передать ей несколько параметров. Самый важный из них — <code class="literal">&lt;project-dir&gt;</code>, <code class="literal"> --config-dir=&lt;config-dir&gt;</code> можно не указывать. Пример:
+                  <p>Для того, чтобы запустить <span class="application">ОмегаТ</span> в консольном режиме, при запуске нужно передать ей несколько параметров. Самый важный из них&nbsp;— <code class="literal">&lt;project-dir&gt;</code>, <code class="literal"> --config-dir=&lt;config-dir&gt;</code> можно не указывать. Пример:
                   </p>
                   <p><code class="literal">java -jar <span class="application">OmegaT</span>.jar
                                 /path/to/project \</code></p>
@@ -739,7 +739,7 @@
                   <div class="itemizedlist">
                      <ul class="itemizedlist" type="disc">
                         <li class="listitem">
-                           <p><code class="literal">--config-dir=&lt;config-dir&gt;</code> сообщает <span class="application">ОмегаТ</span>, в каком каталоге находятся файлы конфигурации. Если этот параметр не передается при запуске, <span class="application">ОмегаТ</span> использует настройки по умолчанию (находящиеся в каталоге <span class="application">OmegaT</span> в домашнем каталоге пользователя, или, если они там не найдены —&nbsp;в текущем рабочем каталоге). Обратите внимание на два знака
+                           <p><code class="literal">--config-dir=&lt;config-dir&gt;</code> сообщает <span class="application">ОмегаТ</span>, в каком каталоге находятся файлы конфигурации. Если этот параметр не передается при запуске, <span class="application">ОмегаТ</span> использует настройки по умолчанию (находящиеся в каталоге <span class="application">OmegaT</span> в домашнем каталоге пользователя, или, если они там не найдены&nbsp;—&nbsp;в текущем рабочем каталоге). Обратите внимание на два знака
                               «-».
                            </p>
                         </li>

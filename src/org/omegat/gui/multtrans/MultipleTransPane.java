@@ -48,6 +48,7 @@ import org.omegat.gui.editor.SegmentBuilder;
 import org.omegat.gui.main.DockableScrollPane;
 import org.omegat.util.OStrings;
 import org.omegat.util.StringUtil;
+import org.omegat.util.gui.AlwaysVisibleCaret;
 import org.omegat.util.gui.UIThreadsUtil;
 
 /**
@@ -70,6 +71,7 @@ public class MultipleTransPane extends EntryInfoThreadPane<List<MultipleTransFou
         Core.getMainWindow().addDockable(new DockableScrollPane("MULTIPLE_TRANS", title, this, true));
 
         setEditable(false);
+        AlwaysVisibleCaret.apply(this);
         this.setText(EXPLANATION);
         setMinimumSize(new Dimension(100, 50));
 

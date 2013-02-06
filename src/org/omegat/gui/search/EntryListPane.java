@@ -46,6 +46,7 @@ import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
 import org.omegat.util.StaticUtils;
+import org.omegat.util.gui.AlwaysVisibleCaret;
 import org.omegat.util.gui.Styles;
 import org.omegat.util.gui.UIThreadsUtil;
 
@@ -101,6 +102,7 @@ class EntryListPane extends JTextPane {
         });
 
         setEditable(false);
+        AlwaysVisibleCaret.apply(this);
     }
 
     /**

@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 2.6.2
 ----------------------------------------------------------------------
-   9 Enhancements
+  10 Enhancements
    4 Bug fixes
    4 Localisation updates
 ----------------------------------------------------------------------
@@ -17,6 +17,9 @@
 
   - In OpenXML filtter, add xml:space="preserve" to w:t elts
   http://sourceforge.net/support/tracker.php?aid=3556996
+
+  - Showing cursor in Search window and other panes
+  http://sourceforge.net/support/tracker.php?aid=3586905
 
   Other enhancements:
   

@@ -58,6 +58,7 @@ import org.omegat.gui.main.DockableScrollPane;
 import org.omegat.util.OStrings;
 import org.omegat.util.StaticUtils;
 import org.omegat.util.Token;
+import org.omegat.util.gui.AlwaysVisibleCaret;
 import org.omegat.util.gui.UIThreadsUtil;
 
 /**
@@ -90,6 +91,7 @@ public class DictionariesTextArea extends EntryInfoThreadPane<List<DictionaryEnt
         addMouseListener(mouseCallback);
 
         setEditable(false);
+        AlwaysVisibleCaret.apply(this);
         this.setText(EXPLANATION);
         setMinimumSize(new Dimension(100, 50));
 

@@ -41,6 +41,7 @@ import org.omegat.gui.main.DockableScrollPane;
 import org.omegat.util.Language;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
+import org.omegat.util.gui.AlwaysVisibleCaret;
 import org.omegat.util.gui.UIThreadsUtil;
 
 /**
@@ -63,6 +64,7 @@ public class MachineTranslateTextArea extends EntryInfoThreadPane<MachineTransla
         super(true);
 
         setEditable(false);
+        AlwaysVisibleCaret.apply(this);
         this.setText(EXPLANATION);
         setMinimumSize(new Dimension(100, 50));
 

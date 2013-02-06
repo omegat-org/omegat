@@ -694,6 +694,7 @@ public class SearchWindow extends JFrame {
                 m_resultsLabel.setText(StaticUtils.format(OStrings.getString("SW_NR_OF_RESULTS"),
                         new Object[] { new Integer(m_viewer.getNrEntries()) }));
                 m_filterButton.setEnabled(true);
+                m_viewer.requestFocus();
             }
         });
     }

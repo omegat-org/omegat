@@ -59,6 +59,7 @@ import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
 import org.omegat.util.StringUtil;
 import org.omegat.util.Token;
+import org.omegat.util.gui.AlwaysVisibleCaret;
 import org.omegat.util.gui.Styles;
 import org.omegat.util.gui.UIThreadsUtil;
 
@@ -109,6 +110,7 @@ public class MatchesTextArea extends EntryInfoThreadPane<List<NearString>> imple
         Core.getMainWindow().addDockable(new DockableScrollPane("MATCHES", title, this, true));
 
         setEditable(false);
+        AlwaysVisibleCaret.apply(this);
         this.setText(EXPLANATION);
         setMinimumSize(new Dimension(100, 50));
 

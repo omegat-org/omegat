@@ -54,9 +54,9 @@ import javax.swing.undo.CannotUndoException;
 
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
+import org.omegat.core.data.EntryKey;
 import org.omegat.core.data.IProject;
 import org.omegat.core.data.IProject.FileInfo;
-import org.omegat.core.data.EntryKey;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.data.TMXEntry;
 import org.omegat.core.events.IEntryEventListener;
@@ -67,7 +67,6 @@ import org.omegat.gui.editor.mark.Mark;
 import org.omegat.gui.help.HelpFrame;
 import org.omegat.gui.main.DockableScrollPane;
 import org.omegat.gui.main.MainWindow;
-import org.omegat.util.FileUtil;
 import org.omegat.util.Log;
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
@@ -147,8 +146,12 @@ public class EditorController implements IEditor {
 
     private boolean emptyTranslation = false;
 
+    private SegmentExportImport segmentExportImport;
+
     public EditorController(final MainWindow mainWindow) {
         this.mw = mainWindow;
+
+        segmentExportImport = new SegmentExportImport(this);
 
         editor = new EditorTextArea3(this);
         setFont(Core.getMainWindow().getApplicationFont());
@@ -543,7 +546,7 @@ public class EditorController implements IEditor {
         showLengthMessage();
 
         if (Preferences.isPreference(Preferences.EXPORT_CURRENT_SEGMENT)) {
-            exportCurrentSegment(ste);
+            segmentExportImport.exportCurrentSegment(ste);
         }
 
         scrollForDisplayNearestSegments(editor.getOmDocument().getTranslationStart());
@@ -661,18 +664,6 @@ public class EditorController implements IEditor {
                 } // eating silently
             }
         });
-    }
-
-    /**
-     * Export the current source and target segments in text files.
-     */
-    private void exportCurrentSegment(final SourceTextEntry ste) {
-        String s1 = ste.getSrcText();
-        TMXEntry te = Core.getProject().getTranslationInfo(ste);
-        String s2 = te.isTranslated() ? te.translation : "";
-
-        FileUtil.writeScriptFile(s1, OConsts.SOURCE_EXPORT);
-        FileUtil.writeScriptFile(s2, OConsts.TARGET_EXPORT);
     }
 
     /**
@@ -807,6 +798,8 @@ public class EditorController implements IEditor {
      */
     protected void deactivateWithoutCommit() {
         UIThreadsUtil.mustBeSwingThread();
+
+        segmentExportImport.exportCurrentSegment(null);
 
         Document3 doc = editor.getOmDocument();
 

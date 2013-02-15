@@ -26,12 +26,16 @@
 
 package org.omegat.util;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileFilter;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.io.StringWriter;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -93,13 +97,15 @@ public class FileUtil {
      * @param fileName
      *            The file name without path
      */
-    public static void writeScriptFile(String textToWrite, String fileName) {
+    public static File writeScriptFile(String textToWrite, String fileName) {
 
+        File outFile = new File(StaticUtils.getScriptDir(), fileName);
+        File outFileTemp = new File(StaticUtils.getScriptDir(), fileName + ".temp");
+        outFile.delete();
         BufferedWriter bw = null;
         try {
-            fileName = StaticUtils.getScriptDir() + fileName;
             textToWrite = textToWrite.replaceAll("\n", System.getProperty("line.separator"));
-            bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(fileName), OConsts.UTF8));
+            bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(outFileTemp), OConsts.UTF8));
             bw.write(textToWrite);
         } catch (Exception ex) {
             // Eat exception silently
@@ -111,7 +117,25 @@ public class FileUtil {
                 ex.printStackTrace();
             }
         }
+        outFileTemp.renameTo(outFile);
+        return outFile;
+    }
 
+    public static String readScriptFile(File file) {
+        try {
+            BufferedReader rd = new BufferedReader(new InputStreamReader(new FileInputStream(file), OConsts.UTF8));
+
+            try {
+                StringWriter out = new StringWriter();
+                LFileCopy.copy(rd, out);
+                return out.toString().replace(System.getProperty("line.separator"), "\n");
+            } finally {
+                rd.close();
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return null;
+        }
     }
 
     /**

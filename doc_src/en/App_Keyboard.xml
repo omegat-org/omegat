@@ -13,9 +13,9 @@
     <title>Key behavior in the editor</title>
 
     <tgroup cols="2">
-      <colspec align="left" colnum="1" colwidth="90" />
+      <colspec align="left" colnum="1" colwidth="90"/>
 
-      <colspec align="left" colnum="2" colwidth="300" />
+      <colspec align="left" colnum="2" colwidth="300"/>
 
       <thead>
         <row>
@@ -182,15 +182,19 @@
   </itemizedlist>
 
   <para>The "Shift" key doesn't exhibit any special behavior per se: when the
-  "Shift" key is pressed, all keys move the cursor in their usual
-  manner.</para>
+  "Shift" key is pressed, all keys move the cursor in their usual manner,
+  except in the case of the <literal>Shift+Enter</literal> combination, that
+  inserts a line brak into the text.</para>
 
-  <para>System-wide commands: Paste (<emphasis role="bold">Ctrl+V</emphasis>
-  or <emphasis role="bold">Ctrl+Insert</emphasis>), Cut (<emphasis
-  role="bold">Ctrl+X</emphasis> or <emphasis role="bold">Ctrl+C)</emphasis>,
-  Insert match <emphasis role="bold">(Ctrl+I</emphasis>) and Insert source
-  (<emphasis role="bold">Ctrl+Shift+I</emphasis>) act in principle on any
-  selection, including those that extend beyond the current segment. In such a
-  case the selection will of course be pared down to segment
-  boundaries.</para>
+  <para>System-wide commands Select All (<keycap>Ctrl+A</keycap>), Paste
+  (<emphasis role="bold">Ctrl+V</emphasis>), Cut (<emphasis
+  role="bold">Ctrl+X</emphasis>), copy (<emphasis
+  role="bold">Ctrl+C)</emphasis>, Insert match <emphasis
+  role="bold">(Ctrl+I</emphasis>) and Insert source (<emphasis
+  role="bold">Ctrl+Shift+I</emphasis>) act in principle on the text within the
+  currently open segment only.</para>
+
+  <para>Note that you can reassign the shortcuts to your own preferences. See
+  <link linkend="ch04.shortcuts.customization">Appendix ShortCut
+  Customization</link></para>
 </appendix>

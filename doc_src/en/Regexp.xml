@@ -27,7 +27,7 @@
     <title>Regex - Flags</title>
 
     <tgroup align="left" cols="2" rowsep="1">
-      <colspec align="left" colnum="1" colwidth="100" />
+      <colspec align="left" colnum="1" colwidth="100"/>
 
       <thead>
         <row>
@@ -52,7 +52,7 @@
     <title>Regex - Character</title>
 
     <tgroup align="left" cols="2" rowsep="1">
-      <colspec align="left" colnum="1" colwidth="100" />
+      <colspec align="left" colnum="1" colwidth="100"/>
 
       <thead>
         <row>
@@ -150,7 +150,7 @@
     <title>Regex - Quotation</title>
 
     <tgroup align="left" cols="2" rowsep="1">
-      <colspec align="left" colnum="1" colwidth="100" />
+      <colspec align="left" colnum="1" colwidth="100"/>
 
       <thead>
         <row>
@@ -194,7 +194,7 @@
     <title>Regex - Classes for Unicode blocks and categories</title>
 
     <tgroup align="left" cols="2" rowsep="1">
-      <colspec align="left" colnum="1" colwidth="100" />
+      <colspec align="left" colnum="1" colwidth="100"/>
 
       <thead>
         <row>
@@ -247,7 +247,7 @@
     <title>Regex - Character classes</title>
 
     <tgroup align="left" cols="2" rowsep="1">
-      <colspec align="left" colnum="1" colwidth="100" />
+      <colspec align="left" colnum="1" colwidth="100"/>
 
       <thead>
         <row>
@@ -283,7 +283,7 @@
     <title>Regex - Predefined character classes</title>
 
     <tgroup align="left" cols="2" rowsep="1">
-      <colspec align="left" colnum="1" colwidth="100" />
+      <colspec align="left" colnum="1" colwidth="100"/>
 
       <thead>
         <row>
@@ -343,7 +343,7 @@
     <title>Regex - Boundary matchers</title>
 
     <tgroup align="left" cols="2" rowsep="1">
-      <colspec align="left" colnum="1" colwidth="100" />
+      <colspec align="left" colnum="1" colwidth="100"/>
 
       <thead>
         <row>
@@ -385,7 +385,7 @@
     <title>Regex - Greedy quantifiers</title>
 
     <tgroup align="left" cols="2" rowsep="1">
-      <colspec align="left" colnum="1" colwidth="100" />
+      <colspec align="left" colnum="1" colwidth="100"/>
 
       <thead>
         <row>
@@ -427,7 +427,7 @@
     <title>Regex - Reluctant (non-greedy) quantifiers</title>
 
     <tgroup align="left" cols="2" rowsep="1">
-      <colspec align="left" colnum="1" colwidth="100" />
+      <colspec align="left" colnum="1" colwidth="100"/>
 
       <thead>
         <row>
@@ -469,7 +469,7 @@
     <title>Regex - Logical operators</title>
 
     <tgroup align="left" cols="2" rowsep="1">
-      <colspec align="left" colnum="1" colwidth="100" />
+      <colspec align="left" colnum="1" colwidth="100"/>
 
       <thead>
         <row>
@@ -523,11 +523,11 @@
 
       <mediaobject>
         <imageobject role="html">
-          <imagedata fileref="images/RegexTester.png" />
+          <imagedata fileref="images/RegexTester.png"/>
         </imageobject>
 
         <imageobject role="fo">
-          <imagedata fileref="images/RegexTester.png" width="80%" />
+          <imagedata fileref="images/RegexTester.png" width="80%"/>
         </imageobject>
       </mediaobject>
     </figure>
@@ -545,7 +545,7 @@
       <title>Regex - Examples of regular expressions in translations</title>
 
       <tgroup align="left" cols="2" rowsep="1">
-        <colspec align="left" colnum="1" colwidth="100" />
+        <colspec align="left" colnum="1" colwidth="100"/>
 
         <thead>
           <row>
@@ -591,7 +591,7 @@
           </row>
 
           <row>
-            <entry>\s\s+</entry>
+            <entry>\s{2,}</entry>
 
             <entry>more than one space</entry>
           </row>
@@ -602,6 +602,12 @@
             <entry>Period, followed by an upper-case letter - possibly a space
             is missing between the period and the start of a new
             sentence?</entry>
+          </row>
+
+          <row>
+            <entry>\bis\b</entry>
+
+            <entry>search for “is”, not “this” or “isn't” etc.</entry>
           </row>
         </tbody>
       </tgroup>

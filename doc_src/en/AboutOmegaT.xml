@@ -168,13 +168,14 @@
 
       <listitem>
         <para><emphasis role="bold">Dictionaries, Glossaries</emphasis>,
-        <emphasis role="bold">Machine translation</emphasis> and <emphasis
-        role="bold">Spellchecker:</emphasis> OmegaT allows one an extensive
-        use of dictionaries and glossaries. If an Internet connection is
-        available, various MT services such as Google Translate can be
-        utilized from within OmegaT. If spell checking is activated, spelling
-        mistakes and typos are recognized and can be corrected during
-        translation.</para>
+        <emphasis role="bold">Machine translation</emphasis> , <emphasis
+        role="bold">Spellchecker, LanguageTool:</emphasis> OmegaT supports an
+        extensive use of dictionaries and glossaries. If an Internet
+        connection is available, various MT services such as Google Translate
+        and Microsoft Translator can be used from within OmegaT. If spell
+        checking is activated, spelling mistakes and typos are recognized and
+        can be corrected during translation. The openSource LanguageTool can
+        be used to correct common grammatical and stylistic mistakes.</para>
       </listitem>
 
       <listitem>
@@ -195,8 +196,8 @@
 
         <itemizedlist>
           <listitem>
-            <para><emphasis role="bold">Languages:</emphasis> contains the ISO
-            list of languages and language codes</para>
+            <para><emphasis role="bold">Languages:</emphasis> the ISO list of
+            languages and language codes is provided. </para>
           </listitem>
         </itemizedlist>
 
@@ -207,15 +208,27 @@
           </listitem>
 
           <listitem>
-            <para><emphasis role="bold">Shortcuts
-            customization:</emphasis>shortcuts can be customized to suit your
-            personal preferences</para>
+            <para><emphasis role="bold">Shortcuts customization:</emphasis>
+            shortcuts can be customized to your personal preferences</para>
           </listitem>
         </itemizedlist>
 
         <itemizedlist>
           <listitem>
-            <para><emphasis role="bold">Legal notices</emphasis></para>
+            <para><emphasis role="bold">Introduction into Tokenizer and
+            Scripting plugins</emphasis></para>
+          </listitem>
+
+          <listitem>
+            <para><emphasis role="bold">Team Projects - in
+            preparation</emphasis></para>
+          </listitem>
+        </itemizedlist>
+
+        <itemizedlist>
+          <listitem>
+            <para><emphasis role="bold">Legal notices and
+            Acknowledgements</emphasis></para>
           </listitem>
         </itemizedlist>
       </listitem>

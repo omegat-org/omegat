@@ -18,12 +18,11 @@
   <section>
     <title>Installation and Use</title>
 
-    <para>The Scripting plugin for OmegaT can be downloaded from the OmegaT
-    plugins download site (<ulink
-    url="???">http://sourceforge.net/projects/omegat-plugins/files/</ulink>).
-    Unzip the files, and put them all in the "plugins" folder located in
-    OmegaT installation folder, that is the folder that contains the
-    OmegaT.jar. Create the "plugins" folder first, if it does not
+    <para>The Scripting plugin for OmegaT can be downloaded from the <ulink
+    url="http://sourceforge.net/projects/omegat-plugins/files">OmegaT plugins
+    download site</ulink>. Unzip the files, and put them all in the "plugins"
+    folder located in OmegaT installation folder, that is the folder that
+    contains the OmegaT.jar. Create the "plugins" folder first, if it does not
     exist.</para>
 
     <para>This adds a new submenu<guisubmenu> Tools &gt;
@@ -116,34 +115,22 @@
       </itemizedlist>All the languages have access to the OmegaT object model,
     with the project as the top object. The following code snippet in groovy
     for instance scans through all the segments in all files in the current
-    project:</para>
+    project and, if the translatione xists, prints out the source and the
+    target of the segment:</para>
 
-    <para><parameter>files = project.projectFiles;</parameter></para>
-
-    <para><parameter>for (i in 0 ..&lt; files.size())</parameter></para>
-
-    <para><parameter>{</parameter></para>
-
-    <para><parameter> for (j in 0 ..&lt;
-    files[i].entries.size())</parameter></para>
-
-    <para><parameter> {</parameter></para>
-
-    <para><parameter> currsegment = files[i].entries[j];</parameter></para>
-
-    <para><parameter> source = currsegment.getSrcText();</parameter></para>
-
-    <para><parameter> if (project.getTranslationInfo(ste))</parameter></para>
-
-    <para><parameter> target =
-    project.getTranslationInfo(currsegment).translation;</parameter></para>
-
-    <para><parameter> else</parameter></para>
-
-    <para><parameter> target = null;</parameter></para>
-
-    <para><parameter> }</parameter></para>
-
-    <para><parameter>}</parameter></para>
+    <programlisting>    files = project.projectFiles;
+    for (i in 0 ..&lt; files.size())
+    {
+        for (j in 0 ..&lt; files[i].entries.size())
+        {
+            currSegment = files[i].entries[j];
+            if (project.getTranslationInfo(currSegment))
+            {
+                source = currSegment.getSrcText();
+                target = project.getTranslationInfo(currSegment).translation;
+                console.println(source + " &gt;&gt;&gt;&gt; " + target);
+            }     
+        }
+    }</programlisting>
   </section>
 </appendix>

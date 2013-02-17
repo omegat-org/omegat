@@ -62,12 +62,11 @@
 
     <para>The word before the = sign is the source term, and its translation
     is (or are) the words after =. The vocabulary entry can have a comment
-    added (see "transitive verb" for the second item). The glossary function
-    only finds exact matches with the glossary entry (e.g. does not find
-    inflected forms etc.). New terms can be added manually to the glossary
-    file(s) during translation, for example in a text editor. Newly added
-    terms will not be recognized once the changes in the text file have been
-    saved.</para>
+    added. The glossary function only finds exact matches with the glossary
+    entry (e.g. does not find inflected forms etc.). New terms can be added
+    manually to the glossary file(s) during translation, for example in a text
+    editor. Newly added terms will not be recognized once the changes in the
+    text file have been saved.</para>
 
     <para>The source term does not have to be a single-word item, as the next
     example shows:</para>
@@ -163,8 +162,8 @@
       </indexterm></title>
 
     <para>The project setting allows one can enter a name for a writable
-    glossary file (see beginning of this chapter). Adding new entries is done
-    by using the keyboard shortcut <keycap>Ctrl+Shift+G</keycap>. A dialog
+    glossary file (see beginning of this chapter). Right-click in the glossary
+    pane or press <keycap>Ctrl+Shift+G</keycap> to add a new entry. A dialog
     opens, allowing you to enter the source term, target term and any comments
     you may have:</para>
 

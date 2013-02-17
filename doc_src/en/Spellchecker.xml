@@ -7,9 +7,9 @@
     </indexterm></title>
 
   <para>OmegaT has a built-in spell checker based on the spelling checker used
-  in OpenOffice.org, Firefox and Thunderbird. It is consequently able to use
-  the huge range of free spelling dictionaries available for these
-  applications.</para>
+  in the Apache OpenOffice, LibreOffice, Firefox and Thunderbird. It is
+  consequently able to use the huge range of free spelling dictionaries
+  available for these applications.</para>
 
   <section>
     <title>Installing spelling dictionaries</title>
@@ -54,10 +54,10 @@
     </itemizedlist>
 
     <para>Copying the files manually makes sense if you already have suitable
-    dictionary files on your system, for instance as part of your
-    OpenOffice.org or Thunderbird installation. It is simpler, however, to
-    look for dictionaries online, using the <emphasis role="bold">URL of
-    online dictionaries</emphasis> field:</para>
+    dictionary files on your system, for instance as part of your OpenOffice,
+    Firefox or Thunderbird installation. It is simpler, however, to look for
+    dictionaries online, using the <emphasis role="bold">URL of online
+    dictionaries</emphasis> field:</para>
 
     <figure id="spellchecker.setup">
       <title><indexterm class="singular">
@@ -79,13 +79,17 @@
 
     <para>Clicking on <guibutton>Install new dictionary</guibutton> button
     will open the Dictionary installer window, where you can select the
-    dictionaries you want to install. Make sure the language code of your
-    target files corresponds to the dictionary's language code: an FR-FR
-    dictionary will not work with an FR target setting. You need to change the
-    setting to FR-FR to have the spell checker recognize the correct
-    dictionary for your target. Look for files with the name, indicating the
-    language used and having extensions <emphasis>aff</emphasis> and
-    <emphasis>dic.</emphasis></para>
+    dictionaries you want to install.</para>
+
+    <para>The names of the files must correspond to the language code of your
+    target language as defined in the project properties dialog
+    (<guimenu>Project &gt; Properties</guimenu>). For example, if you have
+    selected ES-MX (Mexican Spanish) as the target language, the dictionary
+    files must be named es_MX.dic and es_MX.aff. If you only have a standard
+    Spanish dictionary available, with file names es_es.dic and es_es.aff for
+    instance, you can copy these files to es_MX.dic and es_MX.aff, and the
+    spelling dictionary will work. Note that this will of course check for the
+    standard (Castillian) rather than for Mexican Spanish.</para>
   </section>
 
   <section>
@@ -103,13 +107,9 @@
     spelling of text</guilabel> check box (see above).</para>
 
     <figure id="spellchecker.in.action">
-      <title><indexterm class="singular">
-          <primary>Spell checker</primary>
+      <title>Using spellchecker</title>
 
-          <secondary>Spell checker in action</secondary>
-        </indexterm>Spellchecker in action</title>
-
-        <mediaobject>
+      <mediaobject>
         <imageobject role="html">
           <imagedata fileref="images/SpellcheckingText.png"/>
         </imageobject>

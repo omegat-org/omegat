@@ -82,7 +82,7 @@
         </listitem>
 
         <listitem>
-          <para>DocuWiki files (*.txt)</para>
+          <para>DokuWiki files (*.txt)</para>
         </listitem>
       </itemizedlist>
 
@@ -156,8 +156,8 @@
 
       <para><itemizedlist>
           <listitem>
-            <para>OpenOffice.org / OpenDocument (*.ods, *.ots, *.odt, *.ott,
-            *.odp, *.otp)</para>
+            <para>ODF - OASIS Open Document Format (*.ods, *.ots, *.odt,
+            *.ott, *.odp, *.otp)</para>
           </listitem>
         </itemizedlist><itemizedlist>
           <listitem>
@@ -264,7 +264,7 @@
 
     <itemizedlist>
       <listitem>
-        <para>import the file into OpenOffice.org writer</para>
+        <para>import the file into ODF writer</para>
       </listitem>
     </itemizedlist>
 
@@ -282,7 +282,7 @@
 
     <itemizedlist>
       <listitem>
-        <para>load the target file in OpenOffice.org writer</para>
+        <para>load the target file in ODF writer</para>
       </listitem>
     </itemizedlist>
 
@@ -452,8 +452,7 @@
       <para>To avoid changing the target files display parameters each time
       the files are opened, it may be possible to change the source file
       display parameters such that such parameters are inherited by the target
-      files. Such modifications are possible in OpenOffice.org files for
-      example.</para>
+      files. Such modifications are possible in ODF files for example.</para>
     </section>
   </section>
 </chapter>

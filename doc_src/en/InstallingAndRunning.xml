@@ -782,13 +782,14 @@
               <secondary>Launch script arguments</secondary>
 
               <tertiary>Microsoft Translator</tertiary>
-            </indexterm> </para>
+            </indexterm></para>
 
           <para>Make sure that you have a free Microsoft account. You’ll need
-          this to sign-in to <ulink url="???">Windows Azure
-          Marketplace</ulink> and use the Translator service. Note that up to
-          2M characters per month are free of charge. the two entries required
-          are available in your <ulink
+          this to sign-in to <ulink
+          url="http://datamarket.azure.com/dataset/bing/microsofttranslator#schema">Windows
+          Azure Marketplace</ulink> and use the Translator service. Note that
+          up to 2M characters per month are free of charge. the two entries
+          required are available in your <ulink
           url="https://datamarket.azure.com/account">account page</ulink>
           under Primary account key and Customer-ID:</para>
 
@@ -798,6 +799,21 @@
 
           <para>-<emphasis
           role="bold">Dmicrosoft.api.client_secret=XXXX9xXxX9xXXxxXXX9xxX99xXXXX9xx9XXxXxXXXXX=</emphasis></para>
+        </listitem>
+
+        <listitem>
+          <para><emphasis role="bold">Team project option<parameter><indexterm
+              class="singular">
+              <primary>Running OmegaT</primary>
+
+              <secondary>Launch script arguments</secondary>
+
+              <tertiary>no-team option</tertiary>
+            </indexterm></parameter></emphasis></para>
+
+          <para><emphasis role="bold">-no-team</emphasis> addresses projects
+          set up for team work. Use it if OmegaT is not to synchronize the
+          project contents.</para>
         </listitem>
       </itemizedlist>
 

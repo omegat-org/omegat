@@ -422,7 +422,7 @@
           </row>
 
           <row>
-            <entry>Switch case to...</entry>
+            <entry>Cycle case to...</entry>
 
             <entry><keycap>Shift+F3</keycap></entry>
 
@@ -438,7 +438,6 @@
 
     <table>
       <title>GoTo Menu</title>
-
 
       <tgroup cols="3" colsep="1">
         <colspec align="left" colname="1" colnum="1" colwidth="120"/>
@@ -608,7 +607,6 @@
     <table>
       <title>Tools Menu</title>
 
-
       <tgroup cols="3" colsep="1">
         <colspec align="left" colname="1" colnum="1" colwidth="120"/>
 
@@ -660,7 +658,6 @@
 
     <table>
       <title>Options Menu</title>
-
 
       <tgroup cols="3" colsep="1">
         <colspec align="left" colname="1" colnum="1" colwidth="120"/>

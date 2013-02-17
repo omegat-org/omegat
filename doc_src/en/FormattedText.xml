@@ -15,7 +15,7 @@
   <para>Formatting information present in the source file usually needs to be
   reproduced in the target file. The in-line formatting information made
   possible by the supported formats (in particular DocBook, HTML, XHTML, Open
-  Document (OpenOffice.org) and Office Open XML (MS Office 2007 and later) at
+  Document Format(ODF) and Office Open XML (MS Office 2007 and later) at
   the time of writing) is presented as tags in OmegaT. Normally tags are
   ignored when considering the similarity between different texts for matching
   purposes. Tags reproduced in the translated segment will be present in the
@@ -187,7 +187,7 @@
     <para>After a bad manipulation:</para>
 
     <para><literal>&lt;b0&gt;Formatting &lt;b1&gt;one&lt;/b0&gt; &lt;/b1&gt;is
-    very messed up now.&lt;end segment 0001&gt;</literal></para>
+    very messed up now.&lt;segment 0001&gt;</literal></para>
   </section>
 
   <section>
@@ -199,7 +199,7 @@
 
     <mediaobject>
       <imageobject>
-        <imagedata fileref="images/OptionsTabValidation_26.png"/>
+        <imagedata fileref="images/OptionsTagValidation_26.png"/>
       </imageobject>
     </mediaobject>
 
@@ -214,7 +214,7 @@
         <para>OmegaT can check that programming variables (like %s for
         instance) in the source exist in the translation. You can decide not
         to check at all, check for simple printf variables (like %s %d etc) or
-        for print variables of all types. .</para>
+        for print variables of all types.</para>
       </listitem>
     </itemizedlist>
 

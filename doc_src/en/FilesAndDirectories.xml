@@ -55,10 +55,13 @@
 
       <mediaobject>
         <imageobject role="html">
-          <imagedata fileref="images/Omegatproject.png"/>
+		          <imagedata fileref="images/Omegatproject.png"/>
+       </imageobject>
+      <imageobject role="fo">
+          <imagedata fileref="images/Omegatproject.png" width="60%"/>
         </imageobject>
       </mediaobject>
-    </figure>
+	  </figure>
 
     <para>Alternate locations for some of the folders can be chosen at project
     creation or during the translation. It is therefore possible to select

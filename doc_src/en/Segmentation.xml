@@ -64,7 +64,7 @@
 
         <para>For example, text files may be segmented on line breaks, empty
         lines, or not be segmented at all. Files containing formatting
-        (OpenOffice.org documents, HTML documents, etc.) are segmented on the
+        (ODF documents, HTML documents, etc.) are segmented on the
         block-level (paragraph) tags. Translatable object attributes in XHTML
         or HTML files can be extracted as separate segments.</para>
       </listitem>

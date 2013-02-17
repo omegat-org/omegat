@@ -134,6 +134,13 @@
             line. The last segment with the identical source text will thus
             prevail (Note: of course it makes more sense to avoid this to
             happen in the first place).</para>
+
+            <para>Note that the TMX files in the tm folder can be compressed
+            with gzip.<indexterm class="singular">
+                <primary>Translation memories</primary>
+
+                <secondary>compressed</secondary>
+              </indexterm></para>
           </listitem>
         </varlistentry>
 
@@ -161,6 +168,28 @@
             main TM of the project without any user intervention.</para>
           </listitem>
         </varlistentry>
+
+        <varlistentry>
+          <term><indexterm class="singular">
+              <primary>Translation memories</primary>
+
+              <secondary>Subfolders tm/penalty-xxx</secondary>
+
+              <seealso>Project files</seealso>
+            </indexterm>tm/penalty-xxx folders</term>
+
+          <listitem>
+            <para>Sometimes, it is useful to distinguish between high-quality
+            translation memories and those that are, because of the subject
+            matter, client, revision status, etc., less reliable. For
+            translation memories in folders with a name "penalty-xxx" (with
+            xxx between 0 and 100), matches will be degraded according to the
+            name of the folder: a 100% match in any of TMs, residing in a
+            folder called Penalty-30 for instance, will be lowered to a 70%
+            match. The penalty applies to all three match percentages: matches
+            75, 80, 90 will in this case be lowered to 45, 50, 60.</para>
+          </listitem>
+        </varlistentry>
       </variablelist>
 
       <para>Optionally, you can let <application>OmegaT</application> have an
@@ -169,8 +198,8 @@
       pseudo-translated memory below.</para>
 
       <para>Note that all the translation memories are loaded into memory when
-      the project is opened. Back-ups are produced regularly of the project
-      translation memory (see next chapter), and
+      the project is opened. Back-ups of the project translation memory are
+      produced regularly (see next chapter), and
       <filename>project_save.tmx</filename> is also saved/updated when the
       project is closed or loaded again. This means for instance that you do
       not need to exit a project you are currently working on if you decide to
@@ -179,7 +208,7 @@
 
       <para>The locations of the various different translation memories for a
       given project are user-defined (see Project dialog window in <link
-      linkend="chapter.instant.start.guide">Instant start guide)</link></para>
+      linkend="chapter.project.properties">Project properties)</link></para>
 
       <para>Depending on the situation, different strategies are thus
       possible, for instance:</para>
@@ -260,9 +289,9 @@
           <secondary>Language</secondary>
         </indexterm></title>
 
-      <para>tmx files contain translation units, made of a number of
+      <para>Tmx files contain translation units, made of a number of
       equivalent segments in several languages. A translation unit comprises
-      at least two translation unit variants (TUV). Either can be used as
+      at least two translation unit variations (TUV). Either can be used as
       the source or target.</para>
 
       <para>The settings in your project indicate which is the source and
@@ -321,10 +350,6 @@
     <title>Reusing translation memories<indexterm class="singular">
         <primary>Translation memories</primary>
 
-        <secondary>Import and export</secondary>
-      </indexterm><indexterm class="singular">
-        <primary>Translation memories</primary>
-
         <secondary>Reusing translation memories</secondary>
       </indexterm></title>
 
@@ -339,7 +364,7 @@
 
     <para>When you create the target documents in an
     <application>OmegaT</application> project, the translation memory of the
-    project is outputted in the form of three files in the root folder of your
+    project is output in the form of three files in the root folder of your
     <application>OmegaT</application> project (see the above description). You
     can regard these three tmx files (<filename>-omegat.tmx</filename>,
     <filename>-level1.tmx</filename> and <filename>-level2.tmx</filename>) as
@@ -396,8 +421,13 @@
     removing those that are not required any more, once you have used their
     contents to fill up the <filename>project-save.tmx </filename>file.</para>
 
-    <section>
-      <title>Importing and exporting translation memories</title>
+    <section id="importing.and.exporting.translation.memories">
+      <title>Importing and exporting translation memories<indexterm
+          class="singular">
+          <primary>Translation memories</primary>
+
+          <secondary>Importing and exporting</secondary>
+        </indexterm></title>
 
       <para>OmegaT supports imported tmx versions 1.1-1.4b (both level 1 and
       level 2). This enables the translation memories produced by other tools
@@ -419,13 +449,154 @@
       troubleshooting with the related error message. You can ask the user
       group for advice if you have problems.</para>
 
-      <para><application/>OmegaT exports version 1.4 TMX files (both level 1
-      and level 2). The level 2 export is not fully compliant with the level 2
-      standard, but is sufficiently close and will generate correct matches in
-      other translation memory tools supporting TMX Level 2. If you only need
+      <para>OmegaT exports version 1.4 TMX files (both level 1 and level 2).
+      The level 2 export is not fully compliant with the level 2 standard, but
+      is sufficiently close and will generate correct matches in other
+      translation memory tools supporting TMX Level 2. If you only need
       textual information (and not formatting information), use the level 1
       file that OmegaT has created.</para>
     </section>
+
+    <section id="Creating.a.translation.memory.for.selected.documents">
+      <title>Creating a translation memory for selected documents</title>
+
+      <para>In case translators need like to share their TMX bases while
+      excluding some of their parts or including just translations of certain
+      files, sharing the complete <filename>ProjectName-omegat.tmx</filename>
+      is out of question. The following recipee is just one of the
+      possibilities, but simple enough to follow and without any dangers for
+      the assets.</para>
+
+      <itemizedlist>
+        <listitem>
+          <para>Create a project, separate for other projects, in the desired
+          language pair, with an appropriate name - note that the TMXs created
+          will include this name.</para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para>Copy the documents, you need the translation memory for, into
+          the source folder of the project</para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para>Copy the translation memories, containing the translations of
+          the documents above, into<filename> tm\auto</filename> subfolder of
+          the new project</para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para>Start the project. Check for possible Tag errors with
+          <keycap>Ctrl+T </keycap>and untranslated segments with
+          <keycap>Ctrl+U</keycap>. To check everything is as expected, you may
+          press <keycap>Ctrl+D</keycap> to create the target documents and
+          check their contents.</para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para>When you exit the project. the TMX files in the main project
+          folder (see above) now contain the transltions in the selected
+          language pair, for the files, you have copied into the source
+          folder. Copy them to a safe place for future referrals.</para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para>To avoid reusing the project and thus possibly poluting future
+          cases, delete the project folder or archive it away from your
+          workplace.</para>
+        </listitem>
+      </itemizedlist>
+    </section>
+
+    <section id="sharing.translation.memories">
+      <title>Sharing translation memories<indexterm class="singular">
+          <primary>Translation memories</primary>
+
+          <secondary>Sharing</secondary>
+
+          <seealso>Project,Download Team Project...</seealso>
+        </indexterm></title>
+
+      <para>In cases where a team of translators is involved, translators will
+      prefer to share common translation memories rather than distribute their
+      local versions.</para>
+
+      <para>OmegaT interfaces to SVN and Git, two common team software
+      versioning and revision control systems (RCS), available under an open
+      source license. In case of OmegaT complete project folders - in other
+      words the translation memories involved as well as source folders,
+      project settings etc - are managed by the selected RCS. see more in
+      Chapter</para>
+    </section>
+
+    <section>
+      <title>Using TMX with alternative language pairs<indexterm
+          class="singular">
+          <primary>Translation memories</primary>
+
+          <secondary>Alternative language pairs</secondary>
+        </indexterm></title>
+
+      <para>There may be cases where you have done a project with e.g. Dutch
+      sources, and a translation in say English. Then you need a translation
+      in e.g. Chinese, but your translator does not understand Dutch; she,
+      however, understands perfectly English. In this case NL-EN translation
+      memory can serve as a go-between to help generate NL-ZH
+      translation.</para>
+
+      <para>The solution in our example is to copy the existing translation
+      memory into the tm subfolder and rename it ZH_CN.tmx to indicate the
+      target language of the tmx. The translator will be shown English
+      translations for source segments in Dutch and use them to create the
+      Chinese translaiton.</para>
+
+      <para><emphasis role="bold">Important: </emphasis>the supporting TMX
+      must be renamed XX_YY.tmx, where XX_YY is the target language of the
+      tmx, for instance to ZH_CN.tmx in the example above. The project and TMX
+      source languages should of course be identical - NL in our example. Note
+      that only one TMX for a given language pair is possible, so If several
+      translation memories should be involved, you will need to merge them all
+      into the XX_YY.tmx.</para>
+    </section>
+  </section>
+
+  <section>
+    <title>Sources with existing translations<indexterm class="singular">
+        <primary>Translation memories</primary>
+
+        <secondary>PO and OKAPI TTX files</secondary>
+
+        <seealso>Translation memories Subfolder tm/auto</seealso>
+      </indexterm></title>
+
+    <para>Some types of source files (for instance PO, TTX, etc.) are
+    bilingual, i.e. they serve both as a source and as a translation memory.
+    In such cases, an existing translation, found in the file, is included in
+    the <filename>project_save.tmx</filename>. It is treated as a default
+    translation, if no match has been found, or as an alternative translation,
+    in case the same source segment exists, but with a target text. The result
+    will thus depend on the order in which the source segments have been
+    loaded.</para>
+
+    <para>All translations from source documents are also displayed in the
+    Comment pane, in addition to the Match pane. In case of PO files, a 20%
+    penalty applied to the alternative translation (i.e., a 100% match becomes
+    an 80% match). The word [Fuzzy] is displayed on the source segment.</para>
+
+    <para>When you load a segmented TTX file, segments with source = target
+    will be included, if "Allow translation to be equal to source" in Options
+    → Editing Behavior... has been checked. This may be confusing, so you may
+    consider unchecking this option in this case.</para>
   </section>
 
   <section id="pseudo.translated.memory">

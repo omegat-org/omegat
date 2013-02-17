@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE appendix PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
 "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
-<appendix>
+<appendix id="appendix.TeamProjects">
   <title>OmegaT Team Projects<indexterm class="singular">
       <primary>OmegaT</primary>
 
@@ -211,13 +211,16 @@
       client folder on your disk. Create an empty folder, where you will keep
       your project and right/click on it. Select<guilabel> TortoiseSVN &gt;
       Checkout.</guilabel> The following dialog appears:</para>
-
+ 
       <mediaobject>
-        <imageobject>
+        <imageobject role="html">
           <imagedata fileref="images/Team_projects_checkout.png"/>
         </imageobject>
+		<imageobject role="fo">
+          <imagedata fileref="images/Team_projects_checkout.png" width="80%"/>
+        </imageobject>
       </mediaobject>
-
+ 
       <para>Enter the URL, provided by the ProjectLocker, into the field
       <emphasis role="bold">URL of repository</emphasis>. Make sure the field
       <emphasis role="bold">Checkout directory</emphasis> is correct, i.e.
@@ -279,33 +282,42 @@
           Add.</guilabel> In the dialog that opens, leave all options as per
           default and click<guilabel> OK</guilabel>. The Add Finished! window,
           similar to the one below will appear:</para>
-
-          <mediaobject>
-            <imageobject>
-              <imagedata fileref="images/Team_projects_Add.png"/>
-            </imageobject>
-          </mediaobject>
-
+ 
+      <mediaobject>
+        <imageobject role="html">
+          <imagedata fileref="images/images/Team_projects_Add.png"/>
+        </imageobject>
+		<imageobject role="fo">
+          <imagedata fileref="images/images/Team_projects_Add.png" width="80%"/>
+        </imageobject>
+      </mediaobject>
+	  
           <para>The contents of the checkout directory will be marked
           accordingly:</para>
 
           <mediaobject>
-            <imageobject>
+            <imageobject role="html">
               <imagedata fileref="images/Team_projects_checkoutAddFolder.png"/>
             </imageobject>
+			<imageobject role="fo">
+              <imagedata fileref="images/Team_projects_checkoutAddFolder.png" width="80%"/>
+            </imageobject>
           </mediaobject>
-        </listitem>
 
+        </listitem>
         <listitem>
           <para><emphasis role="bold">commit local changes to the server:
           </emphasis>right-click on the local checkout directory and select
           <guilabel>SVN Commit....</guilabel> The Commit window - see below
           opens. Check the changes to be made - i.e. the folders and files
           added in this case.</para>
-
+ 
           <mediaobject>
-            <imageobject>
+            <imageobject role="html">
               <imagedata fileref="images/Team_projects_initialCommit.png"/>
+            </imageobject>
+	          <imageobject role="fo">
+              <imagedata fileref="images/Team_projects_initialCommit.png" width="80%"/>
             </imageobject>
           </mediaobject>
 
@@ -328,8 +340,11 @@
           the latest server version:</para>
 
           <mediaobject>
-            <imageobject>
+            <imageobject role="html">
               <imagedata fileref="images/Team_projects_checkoutSVNupdate.png"/>
+            </imageobject>
+	          <imageobject role="fo">
+              <imagedata fileref="images/Team_projects_checkoutSVNupdate.png" width="80%"/>
             </imageobject>
           </mediaobject>
         </listitem>

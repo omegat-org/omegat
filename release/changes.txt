@@ -2,7 +2,7 @@
  OmegaT 2.6.2
 ----------------------------------------------------------------------
    1 Enhancement
-   0 Bug fix
+   1 Bug fix
    0 Localisation update
 ----------------------------------------------------------------------
 2.6.2 vs. 2.6.1 update 2
@@ -11,6 +11,11 @@
 
   - Import from exported script files
   http://sourceforge.net/support/tracker.php?aid=2957819
+
+  Bug fixes:
+
+  - Git team projects: an issue was fixed with line ending on non-Windows
+machines
 
 ----------------------------------------------------------------------
  OmegaT 2.6.2

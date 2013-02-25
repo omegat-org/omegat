@@ -131,9 +131,21 @@ public class GITRemoteRepository implements IRemoteRepository {
         new Git(repository).submoduleInit().call();
         new Git(repository).submoduleUpdate().call();
 
-        // set core.autocrlf
+        //Deal with line endings. A normalized repo has LF line endings. 
+        //OmegaT uses line endings of OS for storing tmx files.
+        //To do auto converting, we need to change a setting:
         StoredConfig config = repository.getConfig();
-        config.setBoolean("core", null, "autocrlf", true);
+        if ("\r\n".equals(FileUtil.LINE_SEPARATOR)) {
+            //on windows machines, convert text files to CRLF
+            config.setBoolean("core", null, "autocrlf", true);
+        } else {
+            //on Linux/Mac machines (using LF), don't convert text files
+            //but use input format, unchanged.
+            //NB: I don't know correct setting for OS'es like MacOS <= 9, 
+            // which uses CR. Git manual only speaks about converting from/to
+            //CRLF, so for CR, you probably don't want conversion either.
+            config.setString("core", null, "autocrlf", "input");
+        }
         config.save();
     }
 

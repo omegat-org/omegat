@@ -291,8 +291,8 @@
 
       <para>Tmx files contain translation units, made of a number of
       equivalent segments in several languages. A translation unit comprises
-      at least two translation unit variations (TUV). Either can be used as
-      the source or target.</para>
+      at least two translation unit variants (TUV). Either can be used as the
+      source or target.</para>
 
       <para>The settings in your project indicate which is the source and
       which the target language. OmegaT thus takes the TUV segments

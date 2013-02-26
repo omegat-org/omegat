@@ -45,7 +45,7 @@
     <para><emphasis role="bold">Important: </emphasis>Google Translate API v2
     requires billing information for all accounts before you can start using
     the service (see <ulink
-    url="http://code.google.com/intl/en-US/apis/language/translate/v2/pricing.html">Pricing
+    url="https://developers.google.com/translate/v2/pricing?hl=en-US">Pricing
     and Terms of Service</ulink> for more). To identify yourself as a valid
     user for the Google services, you use your private unique key sent to you
     by Google, when you have registered for the service. See chapter <link

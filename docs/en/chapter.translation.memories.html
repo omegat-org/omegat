@@ -29,7 +29,7 @@
          <div class="titlepage">
             <div>
                <div>
-                  <h2 class="title"><a name="chapter.translation.memories"></a>Chapter&nbsp;13.&nbsp;Translation memories<a class="indexterm" name="d0e6233"></a><a class="indexterm" name="d0e6236"></a></h2>
+                  <h2 class="title"><a name="chapter.translation.memories"></a>Chapter&nbsp;13.&nbsp;Translation memories<a class="indexterm" name="d0e6268"></a><a class="indexterm" name="d0e6271"></a></h2>
                </div>
             </div>
          </div>
@@ -41,17 +41,21 @@
                      <dt><span class="section"><a href="chapter.translation.memories.html#tmx.files.location.and.purpose">1.1. tmx folders - location and purpose</a></span></dt>
                      <dt><span class="section"><a href="chapter.translation.memories.html#tmx.backup">1.2. tmx backup</a></span></dt>
                      <dt><span class="section"><a href="chapter.translation.memories.html#tmx.files.and.language">1.3. tmx files and language</a></span></dt>
-                     <dt><span class="section"><a href="chapter.translation.memories.html#d0e6511">1.4. Orphan segments</a></span></dt>
+                     <dt><span class="section"><a href="chapter.translation.memories.html#d0e6566">1.4. Orphan segments</a></span></dt>
                   </dl>
                </dd>
                <dt><span class="section"><a href="chapter.translation.memories.html#using.translation.memories.from.previous.projects">2. Reusing translation memories</a></span></dt>
                <dd>
                   <dl>
-                     <dt><span class="section"><a href="chapter.translation.memories.html#d0e6595">2.1. Importing and exporting translation memories</a></span></dt>
+                     <dt><span class="section"><a href="chapter.translation.memories.html#importing.and.exporting.translation.memories">2.1. Importing and exporting translation memories</a></span></dt>
+                     <dt><span class="section"><a href="chapter.translation.memories.html#Creating.a.translation.memory.for.selected.documents">2.2. Creating a translation memory for selected documents</a></span></dt>
+                     <dt><span class="section"><a href="chapter.translation.memories.html#sharing.translation.memories">2.3. Sharing translation memories</a></span></dt>
+                     <dt><span class="section"><a href="chapter.translation.memories.html#d0e6719">2.4. Using TMX with alternative language pairs</a></span></dt>
                   </dl>
                </dd>
-               <dt><span class="section"><a href="chapter.translation.memories.html#pseudo.translated.memory">3. Pseudo-translated memory</a></span></dt>
-               <dt><span class="section"><a href="chapter.translation.memories.html#upgrading.translation.memories">4. Upgrading translation memories</a></span></dt>
+               <dt><span class="section"><a href="chapter.translation.memories.html#d0e6735">3. Sources with existing translations</a></span></dt>
+               <dt><span class="section"><a href="chapter.translation.memories.html#pseudo.translated.memory">4. Pseudo-translated memory</a></span></dt>
+               <dt><span class="section"><a href="chapter.translation.memories.html#upgrading.translation.memories">5. Upgrading translation memories</a></span></dt>
             </dl>
          </div>
          <div class="section" title="1.&nbsp;Translation memories in OmegaT">
@@ -78,7 +82,7 @@
                </p>
                <div class="variablelist">
                   <dl>
-                     <dt><span class="term"><a class="indexterm" name="d0e6254"></a>omegat folder</span></dt>
+                     <dt><span class="term"><a class="indexterm" name="d0e6289"></a>omegat folder</span></dt>
                      <dd>
                         <p>The omegat folder contains the
                                        <code class="filename">project_save.tmx</code> and possibly a number of
@@ -89,7 +93,7 @@
                                        segment.
                         </p>
                      </dd>
-                     <dt><span class="term"><a class="indexterm" name="d0e6273"></a>main project folder</span></dt>
+                     <dt><span class="term"><a class="indexterm" name="d0e6308"></a>main project folder</span></dt>
                      <dd>
                         <p>The main project folder contains 3 tmx files,
                                        <code class="filename">project_name-omegat.tmx</code>,
@@ -130,7 +134,7 @@
                                        below).
                         </p>
                      </dd>
-                     <dt><span class="term"><code class="filename"><a class="indexterm" name="d0e6327"></a>tm</code> folder</span></dt>
+                     <dt><span class="term"><code class="filename"><a class="indexterm" name="d0e6362"></a>tm</code> folder</span></dt>
                      <dd>
                         <p>The /tm/ folder can contain any number of ancillary
                                        translation memories - i.e. tmx files. Such files can be created
@@ -148,7 +152,7 @@
                         </p>
                         <p>If the source segment in one of the ancillary TMs is
                                        identical to the text being translated, OmegaT acts as defined in
-                                       the <span class="guimenu">Options</span> → <span class="guimenuitem">Editing Behavior...</span> dialogue window. For instance (if the default is
+                                       the <span class="guimenu">Options</span> → <span class="guimenuitem">Editing Behavior...</span> dialog window. For instance (if the default is
                                        accepted), the translation from the ancillary TM is accepted and
                                        prefixed with<span class="emphasis"><em> [fuzzy]</em></span>, so that the translator
                                        can review the translations at a later stage and check whether the
@@ -163,8 +167,10 @@
                                        prevail (Note: of course it makes more sense to avoid this to
                                        happen in the first place).
                         </p>
+                        <p>Note that the TMX files in the tm folder can be compressed
+                                       with gzip.<a class="indexterm" name="d0e6400"></a></p>
                      </dd>
-                     <dt><span class="term"><a class="indexterm" name="d0e6365"></a>tm/auto folder<a class="indexterm" name="d0e6373"></a></span></dt>
+                     <dt><span class="term"><a class="indexterm" name="d0e6407"></a>tm/auto folder<a class="indexterm" name="d0e6415"></a></span></dt>
                      <dd>
                         <p>If it is clear from the very start, that translations in a
                                        given TM (or TMs) are all correct, one can put them into
@@ -176,6 +182,19 @@
                                        main TM of the project without any user intervention.
                         </p>
                      </dd>
+                     <dt><span class="term"><a class="indexterm" name="d0e6434"></a>tm/penalty-xxx folders</span></dt>
+                     <dd>
+                        <p>Sometimes, it is useful to distinguish between high-quality
+                                       translation memories and those that are, because of the subject
+                                       matter, client, revision status, etc., less reliable. For
+                                       translation memories in folders with a name "penalty-xxx" (with
+                                       xxx between 0 and 100), matches will be degraded according to the
+                                       name of the folder: a 100% match in any of TMs, residing in a
+                                       folder called Penalty-30 for instance, will be lowered to a 70%
+                                       match. The penalty applies to all three match percentages: matches
+                                       75, 80, 90 will in this case be lowered to 45, 50, 60.
+                        </p>
+                     </dd>
                   </dl>
                </div>
                <p>Optionally, you can let <span class="application">OmegaT</span> have an
@@ -184,8 +203,8 @@
                         pseudo-translated memory below.
                </p>
                <p>Note that all the translation memories are loaded into memory when
-                        the project is opened. Back-ups are produced regularly of the project
-                        translation memory (see next chapter), and
+                        the project is opened. Back-ups of the project translation memory are
+                        produced regularly (see next chapter), and
                         <code class="filename">project_save.tmx</code> is also saved/updated when the
                         project is closed or loaded again. This means for instance that you do
                         not need to exit a project you are currently working on if you decide to
@@ -193,7 +212,7 @@
                         changes you have made will be included.
                </p>
                <p>The locations of the various different translation memories for a
-                        given project are user-defined (see Project dialog window in <a class="link" href="chapter.instant.start.guide.html" title="Chapter&nbsp;2.&nbsp;Learn to use OmegaT in 5 minutes!">Instant start guide)</a></p>
+                        given project are user-defined (see Project dialog window in <a class="link" href="chapter.project.properties.html" title="Chapter&nbsp;6.&nbsp;Project properties">Project properties)</a></p>
                <p>Depending on the situation, different strategies are thus
                         possible, for instance:
                </p>
@@ -224,7 +243,7 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="tmx.backup"></a>1.2.&nbsp;tmx backup<a class="indexterm" name="d0e6432"></a></h3>
+                        <h3 class="title"><a name="tmx.backup"></a>1.2.&nbsp;tmx backup<a class="indexterm" name="d0e6487"></a></h3>
                      </div>
                   </div>
                </div>
@@ -270,14 +289,14 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="tmx.files.and.language"></a>1.3.&nbsp;tmx files and language<a class="indexterm" name="d0e6484"></a></h3>
+                        <h3 class="title"><a name="tmx.files.and.language"></a>1.3.&nbsp;tmx files and language<a class="indexterm" name="d0e6539"></a></h3>
                      </div>
                   </div>
                </div>
-               <p>tmx files contain translation units, made of a number of
+               <p>Tmx files contain translation units, made of a number of
                         equivalent segments in several languages. A translation unit comprises
-                        at least two translation unit variants (TUV). Either can be used as
-                        the source or target.
+                        at least two translation unit variants (TUV). Either can be used as the
+                        source or target.
                </p>
                <p>The settings in your project indicate which is the source and
                         which the target language. OmegaT thus takes the TUV segments
@@ -292,7 +311,7 @@
                      </li>
                      <li class="listitem">
                         <p>2- or 3-letter language code followed by the 2-letter country
-                                     code (e.g. EN-US - See <a class="xref" href="appendix.languages.html" title="Appendix&nbsp;E.&nbsp;Languages - ISO 639 code list">Appendix&nbsp;E, <i>Languages - ISO 639 code list
+                                     code (e.g. EN-US - See <a class="xref" href="appendix.languages.html" title="Appendix&nbsp;A.&nbsp;Languages - ISO 639 code list">Appendix&nbsp;A, <i>Languages - ISO 639 code list
                                    
                                    
                                    
@@ -307,7 +326,7 @@
                         country, the segments still get loaded. If neither the language code not
                         the country code match, the segments will be ignored.
                </p>
-               <p><a class="indexterm" name="d0e6505"></a>TMX files can generally contain translation units with
+               <p><a class="indexterm" name="d0e6560"></a>TMX files can generally contain translation units with
                         several candidate languages. If for a given source segment there is no
                         entry for the selected target language, all other target segments are
                         loaded, regardless of the language. For instance, if the language pair
@@ -319,7 +338,7 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="d0e6511"></a>1.4.&nbsp;Orphan segments<a class="indexterm" name="d0e6514"></a></h3>
+                        <h3 class="title"><a name="d0e6566"></a>1.4.&nbsp;Orphan segments<a class="indexterm" name="d0e6569"></a></h3>
                      </div>
                   </div>
                </div>
@@ -337,7 +356,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="using.translation.memories.from.previous.projects"></a>2.&nbsp;Reusing translation memories<a class="indexterm" name="d0e6530"></a><a class="indexterm" name="d0e6535"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="using.translation.memories.from.previous.projects"></a>2.&nbsp;Reusing translation memories<a class="indexterm" name="d0e6585"></a></h2>
                   </div>
                </div>
             </div>
@@ -352,7 +371,7 @@
             </p>
             <p>When you create the target documents in an
                    <span class="application">OmegaT</span> project, the translation memory of the
-                   project is outputted in the form of three files in the root folder of your
+                   project is output in the form of three files in the root folder of your
                    <span class="application">OmegaT</span> project (see the above description). You
                    can regard these three tmx files (<code class="filename">-omegat.tmx</code>,
                    <code class="filename">-level1.tmx</code> and <code class="filename">-level2.tmx</code>) as
@@ -419,8 +438,7 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="d0e6595"></a>2.1.&nbsp;Importing and exporting translation memories
-                        </h3>
+                        <h3 class="title"><a name="importing.and.exporting.translation.memories"></a>2.1.&nbsp;Importing and exporting translation memories<a class="indexterm" name="d0e6648"></a></h3>
                      </div>
                   </div>
                </div>
@@ -444,20 +462,177 @@
                         troubleshooting with the related error message. You can ask the user
                         group for advice if you have problems.
                </p>
-               <p><span class="application"></span>OmegaT exports version 1.4 TMX files (both level 1
-                        and level 2). The level 2 export is not fully compliant with the level 2
-                        standard, but is sufficiently close and will generate correct matches in
-                        other translation memory tools supporting TMX Level 2. If you only need
+               <p>OmegaT exports version 1.4 TMX files (both level 1 and level 2).
+                        The level 2 export is not fully compliant with the level 2 standard, but
+                        is sufficiently close and will generate correct matches in other
+                        translation memory tools supporting TMX Level 2. If you only need
                         textual information (and not formatting information), use the level 1
                         file that OmegaT has created.
                </p>
             </div>
+            <div class="section" title="2.2.&nbsp;Creating a translation memory for selected documents">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="Creating.a.translation.memory.for.selected.documents"></a>2.2.&nbsp;Creating a translation memory for selected documents
+                        </h3>
+                     </div>
+                  </div>
+               </div>
+               <p>In case translators need like to share their TMX bases while
+                        excluding some of their parts or including just translations of certain
+                        files, sharing the complete <code class="filename">ProjectName-omegat.tmx</code>
+                        is out of question. The following recipee is just one of the
+                        possibilities, but simple enough to follow and without any dangers for
+                        the assets.
+               </p>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" type="disc">
+                     <li class="listitem">
+                        <p>Create a project, separate for other projects, in the desired
+                                     language pair, with an appropriate name - note that the TMXs created
+                                     will include this name.
+                        </p>
+                     </li>
+                  </ul>
+               </div>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" type="disc">
+                     <li class="listitem">
+                        <p>Copy the documents, you need the translation memory for, into
+                                     the source folder of the project
+                        </p>
+                     </li>
+                  </ul>
+               </div>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" type="disc">
+                     <li class="listitem">
+                        <p>Copy the translation memories, containing the translations of
+                                     the documents above, into<code class="filename"> tm\auto</code> subfolder of
+                                     the new project
+                        </p>
+                     </li>
+                  </ul>
+               </div>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" type="disc">
+                     <li class="listitem">
+                        <p>Start the project. Check for possible Tag errors with
+                                     <span class="keycap"><strong>Ctrl+T </strong></span>and untranslated segments with
+                                     <span class="keycap"><strong>Ctrl+U</strong></span>. To check everything is as expected, you may
+                                     press <span class="keycap"><strong>Ctrl+D</strong></span> to create the target documents and
+                                     check their contents.
+                        </p>
+                     </li>
+                  </ul>
+               </div>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" type="disc">
+                     <li class="listitem">
+                        <p>When you exit the project. the TMX files in the main project
+                                     folder (see above) now contain the transltions in the selected
+                                     language pair, for the files, you have copied into the source
+                                     folder. Copy them to a safe place for future referrals.
+                        </p>
+                     </li>
+                  </ul>
+               </div>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" type="disc">
+                     <li class="listitem">
+                        <p>To avoid reusing the project and thus possibly polluting future
+                                     cases, delete the project folder or archive it away from your
+                                     workplace.
+                        </p>
+                     </li>
+                  </ul>
+               </div>
+            </div>
+            <div class="section" title="2.3.&nbsp;Sharing translation memories">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="sharing.translation.memories"></a>2.3.&nbsp;Sharing translation memories<a class="indexterm" name="d0e6708"></a></h3>
+                     </div>
+                  </div>
+               </div>
+               <p>In cases where a team of translators is involved, translators will
+                        prefer to share common translation memories rather than distribute their
+                        local versions.
+               </p>
+               <p>OmegaT interfaces to SVN and Git, two common team software
+                        versioning and revision control systems (RCS), available under an open
+                        source license. In case of OmegaT complete project folders - in other
+                        words the translation memories involved as well as source folders,
+                        project settings etc - are managed by the selected RCS. see more in
+                        Chapter
+               </p>
+            </div>
+            <div class="section" title="2.4.&nbsp;Using TMX with alternative language pairs">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="d0e6719"></a>2.4.&nbsp;Using TMX with alternative language pairs<a class="indexterm" name="d0e6722"></a></h3>
+                     </div>
+                  </div>
+               </div>
+               <p>There may be cases where you have done a project with e.g. Dutch
+                        sources, and a translation in say English. Then you need a translation
+                        in e.g. Chinese, but your translator does not understand Dutch; she,
+                        however, understands perfectly English. In this case NL-EN translation
+                        memory can serve as a go-between to help generate NL-ZH
+                        translation.
+               </p>
+               <p>The solution in our example is to copy the existing translation
+                        memory into the tm subfolder and rename it ZH_CN.tmx to indicate the
+                        target language of the tmx. The translator will be shown English
+                        translations for source segments in Dutch and use them to create the
+                        Chinese translaiton.
+               </p>
+               <p><span class="bold"><strong>Important: </strong></span>the supporting TMX
+                        must be renamed XX_YY.tmx, where XX_YY is the target language of the
+                        tmx, for instance to ZH_CN.tmx in the example above. The project and TMX
+                        source languages should of course be identical - NL in our example. Note
+                        that only one TMX for a given language pair is possible, so If several
+                        translation memories should be involved, you will need to merge them all
+                        into the XX_YY.tmx.
+               </p>
+            </div>
          </div>
-         <div class="section" title="3.&nbsp;Pseudo-translated memory">
+         <div class="section" title="3.&nbsp;Sources with existing translations">
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="pseudo.translated.memory"></a>3.&nbsp;Pseudo-translated memory<a class="indexterm" name="d0e6610"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="d0e6735"></a>3.&nbsp;Sources with existing translations<a class="indexterm" name="d0e6738"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <p>Some types of source files (for instance PO, TTX, etc.) are
+                   bilingual, i.e. they serve both as a source and as a translation memory.
+                   In such cases, an existing translation, found in the file, is included in
+                   the <code class="filename">project_save.tmx</code>. It is treated as a default
+                   translation, if no match has been found, or as an alternative translation,
+                   in case the same source segment exists, but with a target text. The result
+                   will thus depend on the order in which the source segments have been
+                   loaded.
+            </p>
+            <p>All translations from source documents are also displayed in the
+                   Comment pane, in addition to the Match pane. In case of PO files, a 20%
+                   penalty applied to the alternative translation (i.e., a 100% match becomes
+                   an 80% match). The word [Fuzzy] is displayed on the source segment.
+            </p>
+            <p>When you load a segmented TTX file, segments with source = target
+                   will be included, if "Allow translation to be equal to source" in Options
+                   → Editing Behavior... has been checked. This may be confusing, so you may
+                   consider unchecking this option in this case.
+            </p>
+         </div>
+         <div class="section" title="4.&nbsp;Pseudo-translated memory">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="pseudo.translated.memory"></a>4.&nbsp;Pseudo-translated memory<a class="indexterm" name="d0e6757"></a></h2>
                   </div>
                </div>
             </div>
@@ -502,11 +677,11 @@
                    project.
             </p>
          </div>
-         <div class="section" title="4.&nbsp;Upgrading translation memories">
+         <div class="section" title="5.&nbsp;Upgrading translation memories">
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="upgrading.translation.memories"></a>4.&nbsp;Upgrading translation memories<a class="indexterm" name="d0e6662"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="upgrading.translation.memories"></a>5.&nbsp;Upgrading translation memories<a class="indexterm" name="d0e6809"></a></h2>
                   </div>
                </div>
             </div>

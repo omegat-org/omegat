@@ -39,17 +39,17 @@
                <dt><span class="section"><a href="chapter.files.to.translate.html#file.formats">1. File formats</a></span></dt>
                <dd>
                   <dl>
-                     <dt><span class="section"><a href="chapter.files.to.translate.html#d0e5236">1.1. Plain text files</a></span></dt>
-                     <dt><span class="section"><a href="chapter.files.to.translate.html#d0e5315">1.2. Formatted text files</a></span></dt>
+                     <dt><span class="section"><a href="chapter.files.to.translate.html#d0e5269">1.1. Plain text files</a></span></dt>
+                     <dt><span class="section"><a href="chapter.files.to.translate.html#d0e5348">1.2. Formatted text files</a></span></dt>
                   </dl>
                </dd>
                <dt><span class="section"><a href="chapter.files.to.translate.html#other.file.formats">2. Other file formats</a></span></dt>
                <dt><span class="section"><a href="chapter.files.to.translate.html#right.to.left.languages">3. Right to left languages</a></span></dt>
                <dd>
                   <dl>
-                     <dt><span class="section"><a href="chapter.files.to.translate.html#d0e5535">3.1. Mixing RTL and LTR strings in segments</a></span></dt>
-                     <dt><span class="section"><a href="chapter.files.to.translate.html#d0e5558">3.2. <span class="application">OmegaT</span> tags in RTL segments</a></span></dt>
-                     <dt><span class="section"><a href="chapter.files.to.translate.html#d0e5572">3.3. Creating translated RTL documents</a></span></dt>
+                     <dt><span class="section"><a href="chapter.files.to.translate.html#d0e5568">3.1. Mixing RTL and LTR strings in segments</a></span></dt>
+                     <dt><span class="section"><a href="chapter.files.to.translate.html#d0e5591">3.2. <span class="application">OmegaT</span> tags in RTL segments</a></span></dt>
+                     <dt><span class="section"><a href="chapter.files.to.translate.html#d0e5605">3.3. Creating translated RTL documents</a></span></dt>
                   </dl>
                </dd>
             </dl>
@@ -58,7 +58,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="file.formats"></a>1.&nbsp;File formats<a class="indexterm" name="d0e5222"></a><a class="indexterm" name="d0e5227"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="file.formats"></a>1.&nbsp;File formats<a class="indexterm" name="d0e5255"></a><a class="indexterm" name="d0e5260"></a></h2>
                   </div>
                </div>
             </div>
@@ -70,7 +70,7 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="d0e5236"></a>1.1.&nbsp;Plain text files<a class="indexterm" name="d0e5239"></a><a class="indexterm" name="d0e5244"></a></h3>
+                        <h3 class="title"><a name="d0e5269"></a>1.1.&nbsp;Plain text files<a class="indexterm" name="d0e5272"></a><a class="indexterm" name="d0e5277"></a></h3>
                      </div>
                   </div>
                </div>
@@ -82,7 +82,7 @@
                         indicate paragraphs or insert page breaks. They are not able to contain
                         or retain information regarding the color, font etc of the text.
                         Currently, <span class="application">OmegaT</span> supports the following
-                        plain text formats:<a class="indexterm" name="d0e5257"></a></p>
+                        plain text formats:<a class="indexterm" name="d0e5290"></a></p>
                <div class="itemizedlist">
                   <ul class="itemizedlist" type="disc">
                      <li class="listitem">
@@ -124,7 +124,7 @@
                         <p>DTD files (*.DTD)</p>
                      </li>
                      <li class="listitem">
-                        <p>DocuWiki files (*.txt)</p>
+                        <p>DokuWiki files (*.txt)</p>
                      </li>
                   </ul>
                </div>
@@ -148,7 +148,7 @@
                         ASCII text filter) and by pre-processing them with specific segmentation
                         rules.
                </p>
-               <p>PO files<a class="indexterm" name="d0e5306"></a> can contain both the source and the target text. Seen
+               <p>PO files<a class="indexterm" name="d0e5339"></a> can contain both the source and the target text. Seen
                         from this point of view, they are plain text files<span class="emphasis"><em>
                               plus</em></span> translation memories. If for a given source segment
                         there is as yet no existing translation in the project translation
@@ -162,7 +162,7 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="d0e5315"></a>1.2.&nbsp;Formatted text files<a class="indexterm" name="d0e5318"></a><a class="indexterm" name="d0e5325"></a></h3>
+                        <h3 class="title"><a name="d0e5348"></a>1.2.&nbsp;Formatted text files<a class="indexterm" name="d0e5351"></a><a class="indexterm" name="d0e5358"></a></h3>
                      </div>
                   </div>
                </div>
@@ -181,12 +181,12 @@
                         number of tag errors. Each file type is handled differently in OmegaT.
                         Specific behavior can be set up in the file filters. At the time of
                         writing, OmegaT supports the following formatted text formats:
-                        <a class="indexterm" name="d0e5332"></a></p>
+                        <a class="indexterm" name="d0e5365"></a></p>
                <div class="itemizedlist">
                   <ul class="itemizedlist" type="disc">
                      <li class="listitem">
-                        <p>OpenOffice.org / OpenDocument (*.ods, *.ots, *.odt, *.ott,
-                                       *.odp, *.otp)
+                        <p>ODF - OASIS Open Document Format (*.ods, *.ots, *.odt,
+                                       *.ott, *.odp, *.otp)
                         </p>
                      </li>
                   </ul>
@@ -297,14 +297,14 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="other.file.formats"></a>2.&nbsp;Other file formats<a class="indexterm" name="d0e5410"></a><a class="indexterm" name="d0e5415"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="other.file.formats"></a>2.&nbsp;Other file formats<a class="indexterm" name="d0e5443"></a><a class="indexterm" name="d0e5448"></a></h2>
                   </div>
                </div>
             </div>
             <p>Other plain text or formatted text file formats suitable for
                    processing in OmegaT may also exist.
             </p>
-            <p><a class="indexterm" name="d0e5423"></a>External tools can be used to convert files to supported
+            <p><a class="indexterm" name="d0e5456"></a>External tools can be used to convert files to supported
                    formats. The translated files will then need to be converted back to the
                    original format. For example, if you have an outdated Microsoft Word
                    version, that does not handle the ODT format, here's a round trip for Word
@@ -313,7 +313,7 @@
             <div class="itemizedlist">
                <ul class="itemizedlist" type="disc">
                   <li class="listitem">
-                     <p>import the file into OpenOffice.org writer</p>
+                     <p>import the file into ODF writer</p>
                   </li>
                </ul>
             </div>
@@ -334,7 +334,7 @@
             <div class="itemizedlist">
                <ul class="itemizedlist" type="disc">
                   <li class="listitem">
-                     <p>load the target file in OpenOffice.org writer</p>
+                     <p>load the target file in ODF writer</p>
                   </li>
                </ul>
             </div>
@@ -355,7 +355,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="right.to.left.languages"></a>3.&nbsp;Right to left languages<a class="indexterm" name="d0e5457"></a><a class="indexterm" name="d0e5460"></a><a class="indexterm" name="d0e5465"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="right.to.left.languages"></a>3.&nbsp;Right to left languages<a class="indexterm" name="d0e5490"></a><a class="indexterm" name="d0e5493"></a><a class="indexterm" name="d0e5498"></a></h2>
                   </div>
                </div>
             </div>
@@ -404,7 +404,7 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="d0e5535"></a>3.1.&nbsp;Mixing RTL and LTR strings in segments<a class="indexterm" name="d0e5538"></a><a class="indexterm" name="d0e5543"></a><a class="indexterm" name="d0e5548"></a></h3>
+                        <h3 class="title"><a name="d0e5568"></a>3.1.&nbsp;Mixing RTL and LTR strings in segments<a class="indexterm" name="d0e5571"></a><a class="indexterm" name="d0e5576"></a><a class="indexterm" name="d0e5581"></a></h3>
                      </div>
                   </div>
                </div>
@@ -426,7 +426,7 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="d0e5558"></a>3.2.&nbsp;<span class="application">OmegaT</span> tags in RTL segments<a class="indexterm" name="d0e5563"></a></h3>
+                        <h3 class="title"><a name="d0e5591"></a>3.2.&nbsp;<span class="application">OmegaT</span> tags in RTL segments<a class="indexterm" name="d0e5596"></a></h3>
                      </div>
                   </div>
                </div>
@@ -450,7 +450,7 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="d0e5572"></a>3.3.&nbsp;Creating translated RTL documents<a class="indexterm" name="d0e5575"></a><a class="indexterm" name="d0e5580"></a><a class="indexterm" name="d0e5585"></a></h3>
+                        <h3 class="title"><a name="d0e5605"></a>3.3.&nbsp;Creating translated RTL documents<a class="indexterm" name="d0e5608"></a><a class="indexterm" name="d0e5613"></a><a class="indexterm" name="d0e5618"></a></h3>
                      </div>
                   </div>
                </div>
@@ -464,8 +464,7 @@
                <p>To avoid changing the target files display parameters each time
                         the files are opened, it may be possible to change the source file
                         display parameters such that such parameters are inherited by the target
-                        files. Such modifications are possible in OpenOffice.org files for
-                        example.
+                        files. Such modifications are possible in ODF files for example.
                </p>
             </div>
          </div>

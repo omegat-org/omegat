@@ -84,9 +84,9 @@
               the current project, by selecting the <span class="bold"><strong>File
                     Filters...</strong></span> option in Project Properties.
          </p>
-         <p>You can enable project specific filters via the <span class="bold"><strong>Options → Properties...</strong></span>. Click on <span class="guibutton">File
+         <p>You can enable project specific filters via the <span class="bold"><strong>Project → Properties...</strong></span>. Click on <span class="guibutton">File
                  Filters</span> button and activate the check box <span class="guimenuitem">Enable
-                 project specific filters</span><a class="indexterm" name="d0e4324"></a>. A copy of the filters configuration will be stored with the
+                 project specific filters</span><a class="indexterm" name="d0e4357"></a>. A copy of the filters configuration will be stored with the
               project in this case. If you later change filters, only the project filters
               will be updated, while the user filters stay unchanged.
          </p>
@@ -98,7 +98,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="file.filters.dialog"></a>1.&nbsp;File filters dialog<a class="indexterm" name="d0e4337"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="file.filters.dialog"></a>1.&nbsp;File filters dialog<a class="indexterm" name="d0e4370"></a></h2>
                   </div>
                </div>
             </div>
@@ -115,15 +115,15 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="filters.options"></a>2.&nbsp;Filter options<a class="indexterm" name="d0e4352"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="filters.options"></a>2.&nbsp;Filter options<a class="indexterm" name="d0e4385"></a></h2>
                   </div>
                </div>
             </div>
-            <p>Five filters (Text files, XHTML files, HTML and XHTML files,
-                   OpenDocument/OpenOffice.org files and Microsoft Open XML files) have one
-                   or more specific options. To modify the options select the filter from the
-                   list and click on <span class="bold"><strong>Options</strong></span>. The available
-                   options are:
+            <p>Several filters (Text files, XHTML files, HTML and XHTML files,
+                   OpenDocument files and Microsoft Open XML files) have one or more specific
+                   options. To modify the options select the filter from the list and click
+                   on <span class="bold"><strong>Options</strong></span>. The available options
+                   are:
             </p>
             <p><span class="bold"><strong>Text files</strong></span></p>
             <div class="itemizedlist">
@@ -158,9 +158,9 @@
                <ul class="itemizedlist" type="disc">
                   <li class="listitem">
                      <p><span class="emphasis"><em>Skip PO header</em></span></p>
-                     <p><span class="emphasis"><em><span class="emphasis"><em>PO header will be skipped and left
-                                            unchanged, if this option is not checked.
-                                            </em></span></em></span></p>
+                     <p>PO header will be skipped and left unchanged, if this option is
+                                checked.
+                     </p>
                   </li>
                </ul>
             </div>
@@ -169,10 +169,9 @@
                   <li class="listitem">
                      <p><span class="emphasis"><em>Auto replace 'nplurals=INTEGER; plural=EXPRESSION;' in
                                       header</em></span></p>
-                     <p><span class="emphasis"><em><span class="emphasis"><em>PO file format allows alternative
-                                            translations for one and the same source in plural. If this option is
-                                            selected, the first translated case for plurals will be propagated
-                                            through the alternatives. </em></span></em></span></p>
+                     <p><span class="emphasis"><em><span class="emphasis"><em>The option allows OmegaT to override the
+                                            specification in the PO file header and use the default for the
+                                            selected target language. </em></span></em></span></p>
                   </li>
                </ul>
             </div>
@@ -182,8 +181,8 @@
                   <li class="listitem">
                      <p><span class="emphasis"><em>Add or rewrite encoding declaration in HTML and XHTML
                                       files: <span class="emphasis"><em>frequently the target files must have the encoding
-                                            character set different from the one in the the source file (be it
-                                            explicitely defined or implied). Using this option the translator can
+                                            character set different from the one in the source file (wether it is
+                                            explicitly defined or implied). Using this option the translator can
                                             specify, whether the target files are to have the encoding declaration
                                             included. For instance, if the file filter specifies UTF8 as the
                                             encoding scheme for the target files, selecting Always will assure
@@ -386,7 +385,7 @@
                   </li>
                </ul>
             </div>
-            <p><span class="bold"><strong>OpenDocument/OpenOffice.org
+            <p><span class="bold"><strong>Open Document Format (ODF)
                          files</strong></span></p>
             <div class="itemizedlist">
                <ul class="itemizedlist" type="disc">
@@ -405,7 +404,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="edit.filter.dialog"></a>3.&nbsp;Edit filter dialog<a class="indexterm" name="d0e4558"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="edit.filter.dialog"></a>3.&nbsp;Edit filter dialog<a class="indexterm" name="d0e4589"></a></h2>
                   </div>
                </div>
             </div>
@@ -423,7 +422,7 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="source.filetype.and.filename.pattern"></a>3.1.&nbsp;<a class="indexterm" name="d0e4573"></a>Source file type, filename pattern<a class="indexterm" name="d0e4579"></a></h3>
+                        <h3 class="title"><a name="source.filetype.and.filename.pattern"></a>3.1.&nbsp;<a class="indexterm" name="d0e4604"></a>Source file type, filename pattern<a class="indexterm" name="d0e4610"></a></h3>
                      </div>
                   </div>
                </div>
@@ -452,7 +451,7 @@
                         </h3>
                      </div>
                   </div>
-               </div><a class="indexterm" name="d0e4607"></a><a class="indexterm" name="d0e4612"></a><a class="indexterm" name="d0e4617"></a><p>Only a limited number of file formats specify a mandatory
+               </div><a class="indexterm" name="d0e4638"></a><a class="indexterm" name="d0e4643"></a><a class="indexterm" name="d0e4648"></a><p>Only a limited number of file formats specify a mandatory
                         encoding. File formats that do not specify their encoding will use the
                         encoding you set up for the extension that matches their name. For
                         example, by default <code class="literal">.txt</code> files will be loaded using
@@ -497,14 +496,14 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="target.name"></a>3.3.&nbsp;Target filename<a class="indexterm" name="d0e4645"></a></h3>
+                        <h3 class="title"><a name="target.name"></a>3.3.&nbsp;Target filename<a class="indexterm" name="d0e4676"></a></h3>
                      </div>
                   </div>
                </div>
                <p>Sometimes you may wish to rename the files you translate
                         automatically, for example adding a language code after the file name.
                         The target filename pattern uses a special syntax, so if you wish to
-                        edit this field, you must click <span class="bold"><strong>Edit...</strong></span>and use the <a class="indexterm" name="d0e4655"></a>Edit Pattern Dialog. If you wish to revert to default
+                        edit this field, you must click <span class="bold"><strong>Edit...</strong></span>and use the <a class="indexterm" name="d0e4686"></a>Edit Pattern Dialog. If you wish to revert to default
                         configuration of the filter, click <span class="bold"><strong>Defaults.</strong></span> You may also modify the name directly
                         in the target filename pattern field of the file filters dialog. The
                         Edit Pattern Dialog offers among others the following options:
@@ -600,11 +599,11 @@
                </div>
                <p>Additional variants are available for variables ${nameOnly} and
                         ${Extension}. In case the file name has ambivalent name, one can apply
-                        variables of the form <code class="literal">$(name only</code><span class="emphasis"><em>-number of
-                              extensions</em></span>) and
-                        <code class="literal">${extension</code>-<span class="emphasis"><em>number of extensions}
-                              </em></span>. If for example the original file is named Document.xx.docx,
-                        the following variables will give the following results:
+                        variables of the form <code class="literal">${name only</code><span class="emphasis"><em>-extension
+                              number</em></span>) and
+                        <code class="literal">${extension</code>-<span class="emphasis"><em>extension number} </em></span>.
+                        If for example the original file is named Document.xx.docx, the
+                        following variables will give the following results:
                </p>
                <div class="itemizedlist">
                   <ul class="itemizedlist" type="disc">

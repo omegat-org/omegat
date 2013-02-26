@@ -2,19 +2,19 @@
    <head>
       <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
    
-      <title>Appendix&nbsp;C.&nbsp;Scripting plugin</title>
+      <title>Appendix&nbsp;F.&nbsp;Scripting plugin</title>
       <link rel="stylesheet" href="OmegaT.css" type="text/css">
       <meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
       <link rel="home" href="index.html" title="OmegaT - User's Guide">
       <link rel="up" href="index.html" title="OmegaT - User's Guide">
-      <link rel="prev" href="appendix.LanguageToolPlugin.inOmegaT.html" title="Appendix&nbsp;B.&nbsp;LanguageTool plugin">
-      <link rel="next" href="appendix.website.html" title="Appendix&nbsp;D.&nbsp;OmegaT on the web">
+      <link rel="prev" href="appendix.LanguageToolPlugin.inOmegaT.html" title="Appendix&nbsp;E.&nbsp;LanguageTool plugin">
+      <link rel="next" href="appendix.website.html" title="Appendix&nbsp;G.&nbsp;OmegaT on the web">
    </head>
    <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
       <div class="navheader">
          <table width="100%" summary="Navigation header">
             <tr>
-               <th colspan="3" align="center">Appendix&nbsp;C.&nbsp;Scripting plugin</th>
+               <th colspan="3" align="center">Appendix&nbsp;F.&nbsp;Scripting plugin</th>
             </tr>
             <tr>
                <td width="20%" align="left"><a accesskey="p" href="appendix.LanguageToolPlugin.inOmegaT.html">Prev</a>&nbsp;
@@ -25,25 +25,25 @@
          </table>
          <hr>
       </div>
-      <div class="appendix" title="Appendix&nbsp;C.&nbsp;Scripting plugin">
+      <div class="appendix" title="Appendix&nbsp;F.&nbsp;Scripting plugin">
          <div class="titlepage">
             <div>
                <div>
-                  <h2 class="title"><a name="appendix.ScriptingPlugin.inOmegaT"></a>Appendix&nbsp;C.&nbsp;Scripting plugin<a class="indexterm" name="d0e8831"></a></h2>
+                  <h2 class="title"><a name="appendix.ScriptingPlugin.inOmegaT"></a>Appendix&nbsp;F.&nbsp;Scripting plugin<a class="indexterm" name="d0e10810"></a></h2>
                </div>
             </div>
          </div>
          <div class="toc">
             <dl>
-               <dt><span class="section"><a href="appendix.ScriptingPlugin.inOmegaT.html#d0e8836">1. Introduction</a></span></dt>
-               <dt><span class="section"><a href="appendix.ScriptingPlugin.inOmegaT.html#d0e8841">2. Installation and Use</a></span></dt>
+               <dt><span class="section"><a href="appendix.ScriptingPlugin.inOmegaT.html#d0e10815">1. Introduction</a></span></dt>
+               <dt><span class="section"><a href="appendix.ScriptingPlugin.inOmegaT.html#d0e10820">2. Installation and Use</a></span></dt>
             </dl>
          </div>
          <div class="section" title="1.&nbsp;Introduction">
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="d0e8836"></a>1.&nbsp;Introduction
+                     <h2 class="title" style="clear: both"><a name="d0e10815"></a>1.&nbsp;Introduction
                      </h2>
                   </div>
                </div>
@@ -56,16 +56,15 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="d0e8841"></a>2.&nbsp;Installation and Use
+                     <h2 class="title" style="clear: both"><a name="d0e10820"></a>2.&nbsp;Installation and Use
                      </h2>
                   </div>
                </div>
             </div>
-            <p>The Scripting plugin for OmegaT can be downloaded from the OmegaT
-                   plugins download site (<a class="ulink" href="???" target="_top">http://sourceforge.net/projects/omegat-plugins/files/</a>).
-                   Unzip the files, and put them all in the "plugins" folder located in
-                   OmegaT installation folder, that is the folder that contains the
-                   OmegaT.jar. Create the "plugins" folder first, if it does not
+            <p>The Scripting plugin for OmegaT can be downloaded from the <a class="ulink" href="http://sourceforge.net/projects/omegat-plugins/files" target="_top">OmegaT plugins
+                      download site</a>. Unzip the files, and put them all in the "plugins"
+                   folder located in OmegaT installation folder, that is the folder that
+                   contains the OmegaT.jar. Create the "plugins" folder first, if it does not
                    exist.
             </p>
             <p>This adds a new submenu<span class="guisubmenu"> Tools &gt;
@@ -174,24 +173,22 @@
             <p>All the languages have access to the OmegaT object model,
                    with the project as the top object. The following code snippet in groovy
                    for instance scans through all the segments in all files in the current
-                   project:
-            </p>
-            <p><em class="parameter"><code>files = project.projectFiles;</code></em></p>
-            <p><em class="parameter"><code>for (i in 0 ..&lt; files.size())</code></em></p>
-            <p><em class="parameter"><code>{</code></em></p>
-            <p><em class="parameter"><code> for (j in 0 ..&lt;
-                         files[i].entries.size())</code></em></p>
-            <p><em class="parameter"><code> {</code></em></p>
-            <p><em class="parameter"><code> currsegment = files[i].entries[j];</code></em></p>
-            <p><em class="parameter"><code> source = currsegment.getSrcText();</code></em></p>
-            <p><em class="parameter"><code> if (project.getTranslationInfo(ste))</code></em></p>
-            <p><em class="parameter"><code> target =
-                         project.getTranslationInfo(currsegment).translation;</code></em></p>
-            <p><em class="parameter"><code> else</code></em></p>
-            <p><em class="parameter"><code> target = null;</code></em></p>
-            <p><em class="parameter"><code> }</code></em></p>
-            <p><em class="parameter"><code>}</code></em></p>
-         </div>
+                   project and, if the translatione xists, prints out the source and the
+                   target of the segment:
+            </p><pre class="programlisting">    files = project.projectFiles;
+    for (i in 0 ..&lt; files.size())
+    {
+        for (j in 0 ..&lt; files[i].entries.size())
+        {
+            currSegment = files[i].entries[j];
+            if (project.getTranslationInfo(currSegment))
+            {
+                source = currSegment.getSrcText();
+                target = project.getTranslationInfo(currSegment).translation;
+                console.println(source + " &gt;&gt;&gt;&gt; " + target);
+            }     
+        }
+    }</pre></div>
       </div>
       <div class="navfooter">
          <hr>
@@ -203,9 +200,9 @@
                <td width="40%" align="right">&nbsp;<a accesskey="n" href="appendix.website.html">Next</a></td>
             </tr>
             <tr>
-               <td width="40%" align="left" valign="top">Appendix&nbsp;B.&nbsp;LanguageTool plugin&nbsp;</td>
+               <td width="40%" align="left" valign="top">Appendix&nbsp;E.&nbsp;LanguageTool plugin&nbsp;</td>
                <td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
-               <td width="40%" align="right" valign="top">&nbsp;Appendix&nbsp;D.&nbsp;OmegaT on the web</td>
+               <td width="40%" align="right" valign="top">&nbsp;Appendix&nbsp;G.&nbsp;OmegaT on the web</td>
             </tr>
          </table>
       </div>

@@ -29,27 +29,27 @@
          <div class="titlepage">
             <div>
                <div>
-                  <h2 class="title"><a name="chapter.spellchecker"></a>Chapter&nbsp;20.&nbsp;Spell checker<a class="indexterm" name="d0e8213"></a></h2>
+                  <h2 class="title"><a name="chapter.spellchecker"></a>Chapter&nbsp;20.&nbsp;Spell checker<a class="indexterm" name="d0e8365"></a></h2>
                </div>
             </div>
          </div>
          <div class="toc">
             <dl>
-               <dt><span class="section"><a href="chapter.spellchecker.html#d0e8218">1. Installing spelling dictionaries</a></span></dt>
-               <dt><span class="section"><a href="chapter.spellchecker.html#d0e8278">2. Using spelling dictionaries</a></span></dt>
+               <dt><span class="section"><a href="chapter.spellchecker.html#d0e8370">1. Installing spelling dictionaries</a></span></dt>
+               <dt><span class="section"><a href="chapter.spellchecker.html#d0e8430">2. Using spelling dictionaries</a></span></dt>
                <dt><span class="section"><a href="chapter.spellchecker.html#hints">3. Hints</a></span></dt>
             </dl>
          </div>
          <p>OmegaT has a built-in spell checker based on the spelling checker used
-              in OpenOffice.org, Firefox and Thunderbird. It is consequently able to use
-              the huge range of free spelling dictionaries available for these
-              applications.
+            in the Apache OpenOffice, LibreOffice, Firefox and Thunderbird. It is
+              consequently able to use the huge range of free spelling dictionaries
+              available for these applications.
          </p>
          <div class="section" title="1.&nbsp;Installing spelling dictionaries">
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="d0e8218"></a>1.&nbsp;Installing spelling dictionaries
+                     <h2 class="title" style="clear: both"><a name="d0e8370"></a>1.&nbsp;Installing spelling dictionaries
                      </h2>
                   </div>
                </div>
@@ -71,7 +71,7 @@
             <div class="itemizedlist">
                <ul class="itemizedlist" type="disc">
                   <li class="listitem">
-                     <p>In OmegaT, select <span class="guisubmenu"><a class="indexterm" name="d0e8232"></a></span><span class="guimenuitem">Options &gt; Spell
+                     <p>In OmegaT, select <span class="guisubmenu"><a class="indexterm" name="d0e8384"></a></span><span class="guimenuitem">Options &gt; Spell
                                    Checking</span>, then click <span class="guibutton">Choose
                                    </span>beside the Dictionary file folder field. Navigate to and
                                 select the folder you created for dictionaries.
@@ -96,30 +96,35 @@
                </ul>
             </div>
             <p>Copying the files manually makes sense if you already have suitable
-                   dictionary files on your system, for instance as part of your
-                   OpenOffice.org or Thunderbird installation. It is simpler, however, to
-                   look for dictionaries online, using the <span class="bold"><strong>URL of
-                         online dictionaries</strong></span> field:
+                   dictionary files on your system, for instance as part of your OpenOffice,
+                   Firefox or Thunderbird installation. It is simpler, however, to look for
+                   dictionaries online, using the <span class="bold"><strong>URL of online
+                         dictionaries</strong></span> field:
             </p>
-            <div class="figure"><a name="spellchecker.setup"></a><p class="title"><b>Figure&nbsp;20.1.&nbsp;<a class="indexterm" name="d0e8257"></a>Spellchecker setup</b></p>
+            <div class="figure"><a name="spellchecker.setup"></a><p class="title"><b>Figure&nbsp;20.1.&nbsp;<a class="indexterm" name="d0e8409"></a>Spellchecker setup</b></p>
                <div class="figure-contents">
                   <div class="mediaobject"><img src="images/SpellcheckerSetup_25.png" alt="Spell checkerSpell checker setupSpellchecker setup"></div>
                </div>
             </div><br class="figure-break"><p>Clicking on <span class="guibutton">Install new dictionary</span> button
                    will open the Dictionary installer window, where you can select the
-                   dictionaries you want to install. Make sure the language code of your
-                   target files corresponds to the dictionary's language code: an FR-FR
-                   dictionary will not work with an FR target setting. You need to change the
-                   setting to FR-FR to have the spell checker recognize the correct
-                   dictionary for your target. Look for files with the name, indicating the
-                   language used and having extensions <span class="emphasis"><em>aff</em></span> and
-                   <span class="emphasis"><em>dic.</em></span></p>
+                   dictionaries you want to install.
+            </p>
+            <p>The names of the files must correspond to the language code of your
+                   target language as defined in the project properties dialog
+                   (<span class="guimenu">Project &gt; Properties</span>). For example, if you have
+                   selected ES-MX (Mexican Spanish) as the target language, the dictionary
+                   files must be named es_MX.dic and es_MX.aff. If you only have a standard
+                   Spanish dictionary available, with file names es_es.dic and es_es.aff for
+                   instance, you can copy these files to es_MX.dic and es_MX.aff, and the
+                   spelling dictionary will work. Note that this will of course check for the
+                   standard (Castillian) rather than for Mexican Spanish.
+            </p>
          </div>
          <div class="section" title="2.&nbsp;Using spelling dictionaries">
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="d0e8278"></a>2.&nbsp;Using spelling dictionaries
+                     <h2 class="title" style="clear: both"><a name="d0e8430"></a>2.&nbsp;Using spelling dictionaries
                      </h2>
                   </div>
                </div>
@@ -135,9 +140,9 @@
                       Checking</span> and tick the <span class="guilabel">Automatically check the
                       spelling of text</span> check box (see above).
             </p>
-            <div class="figure"><a name="spellchecker.in.action"></a><p class="title"><b>Figure&nbsp;20.2.&nbsp;<a class="indexterm" name="d0e8293"></a>Spellchecker in action</b></p>
+            <div class="figure"><a name="spellchecker.in.action"></a><p class="title"><b>Figure&nbsp;20.2.&nbsp;Using spellchecker</b></p>
                <div class="figure-contents">
-                  <div class="mediaobject"><img src="images/SpellcheckingText.png" alt="Spell checkerSpell checker in actionSpellchecker in action"></div>
+                  <div class="mediaobject"><img src="images/SpellcheckingText.png" alt="Using spellchecker"></div>
                </div>
             </div><br class="figure-break"><p>Right-clicking on an underlined word (Artund in the figure above)
                    opens a drop-down menu listing suggestions for the correction (Art und).
@@ -149,7 +154,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="hints"></a>3.&nbsp;Hints<a class="indexterm" name="d0e8309"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="hints"></a>3.&nbsp;Hints<a class="indexterm" name="d0e8456"></a></h2>
                   </div>
                </div>
             </div>
@@ -170,8 +175,8 @@
                    checker's language code (you specified pt_BR as the language, but there
                    are no pt_BR vocabularies, for instance) you can simply copy the two
                    corresponding files and rename them (e.g. from
-                   <span class="emphasis"><em>pt_PT.arr</em></span> and <span class="emphasis"><em>pt_PT.dic</em></span> to
-                   <span class="emphasis"><em>pt._BR.arr</em></span> and <span class="emphasis"><em>pt_BR.dic</em></span>). Of
+                   <span class="emphasis"><em>pt_PT.aff</em></span> and <span class="emphasis"><em>pt_PT.dic</em></span> to
+                   <span class="emphasis"><em>pt._BR.aff</em></span> and <span class="emphasis"><em>pt_BR.dic</em></span>). Of
                    course it is much wiser, to take a short break and download the correct
                    versions of the spell checker.
             </p>

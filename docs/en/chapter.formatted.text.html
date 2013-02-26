@@ -29,7 +29,7 @@
          <div class="titlepage">
             <div>
                <div>
-                  <h2 class="title"><a name="chapter.formatted.text"></a>Chapter&nbsp;12.&nbsp;Working with formatted text<a class="indexterm" name="d0e5984"></a><a class="indexterm" name="d0e5989"></a></h2>
+                  <h2 class="title"><a name="chapter.formatted.text"></a>Chapter&nbsp;12.&nbsp;Working with formatted text<a class="indexterm" name="d0e6019"></a><a class="indexterm" name="d0e6024"></a></h2>
                </div>
             </div>
          </div>
@@ -39,7 +39,7 @@
                <dt><span class="section"><a href="chapter.formatted.text.html#tag.operations">2. Tag operations</a></span></dt>
                <dt><span class="section"><a href="chapter.formatted.text.html#tag.group.nesting">3. Tag group nesting</a></span></dt>
                <dt><span class="section"><a href="chapter.formatted.text.html#tag.group.overlapping">4. Tag group overlapping</a></span></dt>
-               <dt><span class="section"><a href="chapter.formatted.text.html#d0e6135">5. Tag validation options</a></span></dt>
+               <dt><span class="section"><a href="chapter.formatted.text.html#d0e6170">5. Tag validation options</a></span></dt>
                <dt><span class="section"><a href="chapter.formatted.text.html#tag.group.validation">6. Tag group validation</a></span></dt>
                <dt><span class="section"><a href="chapter.formatted.text.html#hints.for.tag.management">7. Hints for tags management</a></span></dt>
             </dl>
@@ -47,7 +47,7 @@
          <p>Formatting information present in the source file usually needs to be
             reproduced in the target file. The in-line formatting information made
             possible by the supported formats (in particular DocBook, HTML, XHTML, Open
-            Document (OpenOffice.org) and Office Open XML (MS Office 2007 and later) at
+            Document Format(ODF) and Office Open XML (MS Office 2007 and later) at
               the time of writing) is presented as tags in OmegaT. Normally tags are
               ignored when considering the similarity between different texts for matching
               purposes. Tags reproduced in the translated segment will be present in the
@@ -57,11 +57,11 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="formatting.tags"></a>1.&nbsp;Formatting tags<a class="indexterm" name="d0e5999"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="formatting.tags"></a>1.&nbsp;Formatting tags<a class="indexterm" name="d0e6034"></a></h2>
                   </div>
                </div>
             </div>
-            <p><a class="indexterm" name="d0e6003"></a><span class="bold"><strong>Tag naming:</strong></span></p>
+            <p><a class="indexterm" name="d0e6038"></a><span class="bold"><strong>Tag naming:</strong></span></p>
             <p>The tags consist of one to three characters and a number. Unique
                    numbering allows tags, corresponding to each other to be grouped together
                    and differentiates between tags, that have the same shortcut character,
@@ -69,7 +69,7 @@
                    underlying meaning of the tag (e.g. b for bold, i for italics,
                    etc.)
             </p>
-            <p><a class="indexterm" name="d0e6013"></a><span class="bold"><strong>Tag numbering:</strong></span></p>
+            <p><a class="indexterm" name="d0e6048"></a><span class="bold"><strong>Tag numbering:</strong></span></p>
             <p>Tags are numbered incrementally by tag group. "Tag groups" in this
                    context are a single tag (such as &lt;i0&gt; and &lt;/i0&gt;). Within a
                    segment, the first group (pair or single) receives the number 0, the
@@ -77,7 +77,7 @@
                    a single, and then another pair), the second example has one group only (a
                    pair).
             </p>
-            <p><a class="indexterm" name="d0e6023"></a><span class="bold"><strong>Pairs and singles:</strong></span></p>
+            <p><a class="indexterm" name="d0e6058"></a><span class="bold"><strong>Pairs and singles:</strong></span></p>
             <p>Tags are always either singles or paired. Single tags indicate
                    formatting information that does not affect the surrounding text (an extra
                    space or line break for example).
@@ -104,7 +104,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="tag.operations"></a>2.&nbsp;Tag operations<a class="indexterm" name="d0e6048"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="tag.operations"></a>2.&nbsp;Tag operations<a class="indexterm" name="d0e6083"></a></h2>
                   </div>
                </div>
             </div>
@@ -114,7 +114,7 @@
                    possible, if certain rules are strictly followed, to deviate from this
                    basic rule.
             </p>
-            <p><span class="bold"><strong><a class="indexterm" name="d0e6057"></a>Tag duplication: </strong></span></p>
+            <p><span class="bold"><strong><a class="indexterm" name="d0e6092"></a>Tag duplication: </strong></span></p>
             <p>To duplicate tag groups, just copy them in the position of your
                    choice. Keep in mind that in a pair group, the opening tag must come
                    before the closing tag. The formatting represented by the group you have
@@ -127,7 +127,7 @@
             <p><code class="literal">&lt;b0&gt;This formatting&lt;/b0&gt; has been
                       &lt;b0&gt;duplicated here&lt;/b0&gt;.&lt;segment 0001&gt;
                       </code></p>
-            <p><span class="bold"><strong><a class="indexterm" name="d0e6077"></a>Tag group deletion:</strong></span></p>
+            <p><span class="bold"><strong><a class="indexterm" name="d0e6112"></a>Tag group deletion:</strong></span></p>
             <p>To delete tag groups, just remove them from the segment. Keep in
                    mind that a pair group must have both its opening and its closing tag
                    deleted to ensure that all traces of the formatting are properly erased,
@@ -146,7 +146,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="tag.group.nesting"></a>3.&nbsp;Tag group nesting<a class="indexterm" name="d0e6098"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="tag.group.nesting"></a>3.&nbsp;Tag group nesting<a class="indexterm" name="d0e6133"></a></h2>
                   </div>
                </div>
             </div>
@@ -170,7 +170,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="tag.group.overlapping"></a>4.&nbsp;Tag group overlapping<a class="indexterm" name="d0e6118"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="tag.group.overlapping"></a>4.&nbsp;Tag group overlapping<a class="indexterm" name="d0e6153"></a></h2>
                   </div>
                </div>
             </div>
@@ -183,13 +183,13 @@
                       going to be messed up.&lt;segment 0001&gt; </code></p>
             <p>After a bad manipulation:</p>
             <p><code class="literal">&lt;b0&gt;Formatting &lt;b1&gt;one&lt;/b0&gt; &lt;/b1&gt;is
-                      very messed up now.&lt;end segment 0001&gt;</code></p>
+                      very messed up now.&lt;segment 0001&gt;</code></p>
          </div>
          <div class="section" title="5.&nbsp;Tag validation options">
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="d0e6135"></a>5.&nbsp;Tag validation options
+                     <h2 class="title" style="clear: both"><a name="d0e6170"></a>5.&nbsp;Tag validation options
                      </h2>
                   </div>
                </div>
@@ -198,7 +198,7 @@
                    in the <span class="guimenuitem">Options &gt; Tag validation...</span>
                    window:
             </p>
-            <div class="mediaobject"><img src="images/OptionsTabValidation_26.png"></div>
+            <div class="mediaobject"><img src="images/OptionsTagValidation_26.png"></div>
             <p>The behaviour, stated here, applies to all the source files and not
                    just to some of the file types, like formatted text.
             </p>
@@ -210,7 +210,7 @@
                      <p>OmegaT can check that programming variables (like %s for
                                 instance) in the source exist in the translation. You can decide not
                                 to check at all, check for simple printf variables (like %s %d etc) or
-                                for print variables of all types. .
+                                for print variables of all types.
                      </p>
                   </li>
                </ul>
@@ -259,13 +259,13 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="tag.group.validation"></a>6.&nbsp;Tag group validation<a class="indexterm" name="d0e6179"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="tag.group.validation"></a>6.&nbsp;Tag group validation<a class="indexterm" name="d0e6214"></a></h2>
                   </div>
                </div>
             </div>
             <p>The validate tags function detects changes to tag sequences (whether
                    deliberate or accidental), and shows the affected segments. Launching this
-                   function – <span class="guimenuitem">Ctrl+T<a class="indexterm" name="d0e6188"></a></span> - opens a window containing all segments in
+                   function – <span class="guimenuitem">Ctrl+T<a class="indexterm" name="d0e6223"></a></span> - opens a window containing all segments in
                    the file containing suspected broken or bad tags in the translation.
                    Repairing the tags and recreating the target documents is easy with the
                    validate tags function. The window that opens when
@@ -292,7 +292,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="hints.for.tag.management"></a>7.&nbsp;Hints for tags management<a class="indexterm" name="d0e6213"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="hints.for.tag.management"></a>7.&nbsp;Hints for tags management<a class="indexterm" name="d0e6248"></a></h2>
                   </div>
                </div>
             </div>

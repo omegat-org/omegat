@@ -117,7 +117,7 @@
                 <guimenu>Options</guimenu>
 
                 <guimenuitem>Editing Behavior...</guimenuitem>
-              </menuchoice> dialogue window. For instance (if the default is
+              </menuchoice> dialog window. For instance (if the default is
             accepted), the translation from the ancillary TM is accepted and
             prefixed with<emphasis> [fuzzy]</emphasis>, so that the translator
             can review the translations at a later stage and check whether the
@@ -511,7 +511,7 @@
 
       <itemizedlist>
         <listitem>
-          <para>To avoid reusing the project and thus possibly poluting future
+          <para>To avoid reusing the project and thus possibly polluting future
           cases, delete the project folder or archive it away from your
           workplace.</para>
         </listitem>

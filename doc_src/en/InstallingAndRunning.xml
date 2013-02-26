@@ -595,9 +595,9 @@
       <para><literal>java -jar
       <application>OmegaT</application>.jar</literal></para>
 
-      <para>Pay attention to the capitalization - the program will not start,
-      if you enter <emphasis>omegat</emphasis> instead of <emphasis>OmegaT
-      </emphasis>!</para>
+      <para>Pay attention to the capitalization - in OS other than Windows,
+      the program will not start, if you enter <emphasis>omegat</emphasis>
+      instead of <emphasis>OmegaT </emphasis>!</para>
 
       <para>This method has a particular benefit of being suitable for finding
       causes of problems: if an error occurs during use of the program, an
@@ -1047,15 +1047,12 @@
             <para><literal>--tag-validation=[abort|warn]</literal><parameter>
             outputFileName</parameter></para>
 
-            <para><parameter>and the output would contain remaining tag
-            validation errors that could be given back to the
-            translator.</parameter></para>
-
-            <para>This option allows batch mode validation of tags. If abort
-            is selected, the tag validator will stop on the first invalid
-            segment. If warn is specified, the tag validator will process all
-            segments and write warnings about any segments with invalid tags
-            into the file specified.</para>
+            <para>This option allows the tag validation in a batch mode. If
+            <literal>abort </literal>is selected, the tag validator will stop
+            on the first invalid segment. If <literal>warn</literal> is
+            specified, the tag validator will process all segments and write
+            warnings about any segments with invalid tags into the file
+            specified.</para>
           </listitem>
         </itemizedlist>
       </section>

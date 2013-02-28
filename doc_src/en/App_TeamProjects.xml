@@ -18,13 +18,13 @@
     </note>
 
     <para>The collaborative translation offered by OmegaT is based on the
-    functionality of Version or revision Control, widely used by software
+    functionality of version or revision control, widely used by the software
     community to maintain control of changes to the code of a program and
     allow unimpeded collaboration within the development team. OmegaT supports
-    two of the popular Revision Control Systems (RCS for short) , the <ulink
+    two of the popular version control systems (VCS for short) , the <ulink
     url="http://subversion.apache.org">Apache Subversion</ulink> (often
     abbreviated SVN, after the command name svn) and <ulink
-    url="http://git-scm.com/">GIT. </ulink>The advantages of an RCS system for
+    url="http://git-scm.com/">GIT. </ulink>The advantages of a VC system for
     a team of translators can be summarized as follows:</para>
 
     <itemizedlist>
@@ -60,7 +60,7 @@
 
     <itemizedlist>
       <listitem>
-        <para><emphasis role="bold">RCS server - </emphasis>i.e. SVN or GIT
+        <para><emphasis role="bold">VCS server - </emphasis>i.e. SVN or GIT
         server is the environment where the common material is kept and
         maintained on the net. The server can exist in the local network but
         in the majority of cases it will be available on internet, i.e. via
@@ -68,13 +68,10 @@
         to be acquainted with handling the server side i.e. the job of setting
         up the environment, importing the OmegaT project, assigning the access
         rights for the team members, resolving the conflicts etc.</para>
-
-        <para>Note that OmegaT developers' team is offering these services at
-        no charge - see later text.</para>
       </listitem>
 
       <listitem>
-        <para><emphasis role="bold">RCS client: </emphasis>To interface with
+        <para><emphasis role="bold">VCS client: </emphasis>To interface with
         the server an SVN or GIT client must be installed on computers,
         involved in the OmegaT project. Very popular clients for Windows
         environment are <ulink
@@ -86,7 +83,7 @@
       <listitem>
         <para><emphasis role="bold">repository: </emphasis>the place where the
         shared material is saved and maintained, either on a local access
-        network or in Internet. Team members connect with it via their RCS
+        network or in Internet. Team members connect with it via their VCS
         client.</para>
       </listitem>
 
@@ -133,10 +130,6 @@
     outside of your direct control. Alternatively, to avoid this issue you can
     set a private SVN server, for example if you already have an Apache server
     that includes the software in question (e.g. VisualSVN).</para>
-
-    <para>OmegaT developers' team offers a hosted service. Contact them on the
-    <ulink url="http://tech.groups.yahoo.com/group/OmegaT/">OmegaT discussion
-    group</ulink></para>
 
     <para>Once the SVN server is available, the members of the team must
     locally install a SVN client, in order to manage the project contents on

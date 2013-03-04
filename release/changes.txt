@@ -284,6 +284,7 @@ to write in the repository anymore
   http://sourceforge.net/support/tracker.php?aid=2960656
 
 ----------------------------------------------------------------------
+----------------------------------------------------------------------
  OmegaT 2.5.5 update 5
 ----------------------------------------------------------------------
    1 Enhancement
@@ -301,6 +302,7 @@ to write in the repository anymore
   - Launcher issue on linux with space in folder name
   http://sourceforge.net/support/tracker.php?aid=3605953
 
+----------------------------------------------------------------------
  OmegaT 2.5.5 update 4
 ----------------------------------------------------------------------
    4 Enhancements

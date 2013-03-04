@@ -1,0 +1,367 @@
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <title>Appendix&nbsp;C.&nbsp;OmegaT Team Projects</title>
+      <link rel="stylesheet" href="OmegaT.css" type="text/css">
+      <meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+      <link rel="home" href="index.html" title="OmegaT - User's Guide">
+      <link rel="up" href="index.html" title="OmegaT - User's Guide">
+      <link rel="prev" href="appendix.keyboard.html" title="Appendix&nbsp;B.&nbsp;Keyboard shortcuts in the editor">
+      <link rel="next" href="appendix.TokenizerPlugin.inOmegaT.html" title="Appendix&nbsp;D.&nbsp;Tokenizer plugin">
+   </head>
+   <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+      <div class="navheader">
+         <table width="100%" summary="Navigation header">
+            <tr>
+               <th colspan="3" align="center">Appendix&nbsp;C.&nbsp;OmegaT Team Projects</th>
+            </tr>
+            <tr>
+               <td width="20%" align="left"><a accesskey="p" href="appendix.keyboard.html">Prev</a>&nbsp;
+               </td>
+               <th width="60%" align="center">&nbsp;</th>
+               <td width="20%" align="right">&nbsp;<a accesskey="n" href="appendix.TokenizerPlugin.inOmegaT.html">Next</a></td>
+            </tr>
+         </table>
+         <hr>
+      </div>
+      <div class="appendix" title="Appendix&nbsp;C.&nbsp;OmegaT Team Projects">
+         <div class="titlepage">
+            <div>
+               <div>
+                  <h2 class="title"><a name="appendix.TeamProjects"></a>Appendix&nbsp;C.&nbsp;OmegaT Team Projects<a class="indexterm" name="d0e10383"></a></h2>
+               </div>
+            </div>
+         </div>
+         <div class="toc">
+            <dl>
+               <dt><span class="section"><a href="appendix.TeamProjects.html#d0e10390">1. Version control - introduction</a></span></dt>
+               <dt><span class="section"><a href="appendix.TeamProjects.html#d0e10464">2. Sharing a project using SVN</a></span></dt>
+               <dd>
+                  <dl>
+                     <dt><span class="section"><a href="appendix.TeamProjects.html#d0e10484">2.1. Creating a repository</a></span></dt>
+                     <dt><span class="section"><a href="appendix.TeamProjects.html#d0e10538">2.2. Importing the project to SVN repository - Windows</a></span></dt>
+                  </dl>
+               </dd>
+            </dl>
+         </div>
+         <div class="section" title="1.&nbsp;Version control - introduction">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e10390"></a>1.&nbsp;Version control - introduction
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <div class="note" title="Note" style="margin-left: 0.5in; margin-right: 0.5in;">
+               <h3 class="title">Note</h3>
+               <p>This is a preliminary, unfinished material - feb 17th 2013</p>
+            </div>
+            <p>The collaborative translation offered by OmegaT is based on the
+                   functionality of version or revision control, widely used by the software
+                   community to maintain control of changes to the code of a program and
+                   allow unimpeded collaboration within the development team. OmegaT supports
+                   two of the popular version control systems (VCS for short) , the <a class="ulink" href="http://subversion.apache.org" target="_top">Apache Subversion</a> (often
+                   abbreviated SVN, after the command name svn) and <a class="ulink" href="http://git-scm.com/" target="_top">GIT. </a>The advantages of a VC system for
+                   a team of translators can be summarized as follows:
+            </p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" type="disc">
+                  <li class="listitem">
+                     <p>Several team members can work on the translation project
+                                simultaneously without interfering with each other
+                     </p>
+                  </li>
+                  <li class="listitem">
+                     <p>They can share common material, like project translation memory
+                                and its glossary
+                     </p>
+                  </li>
+                  <li class="listitem">
+                     <p>Once any team member terminates the current translation session,
+                                an updated version of data shared is available to the rest of the
+                                team
+                     </p>
+                  </li>
+                  <li class="listitem">
+                     <p>The system maintains versioning for data shared</p>
+                  </li>
+                  <li class="listitem">
+                     <p>Conflicts - for instance alternative translations of the same
+                                segment or glossary entry - can be monitored, resolved and
+                                merged
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <p>The following terms, to be used in the text below, deserve a short
+                   explanation:
+            </p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" type="disc">
+                  <li class="listitem">
+                     <p><span class="bold"><strong>VCS server - </strong></span>i.e. SVN or GIT
+                                server is the environment where the common material is kept and
+                                maintained on the net. The server can exist in the local network but
+                                in the majority of cases it will be available on internet, i.e. via
+                                URL address. One member of the team, the project administrator, needs
+                                to be acquainted with handling the server side i.e. the job of setting
+                                up the environment, importing the OmegaT project, assigning the access
+                                rights for the team members, resolving the conflicts etc.
+                     </p>
+                  </li>
+                  <li class="listitem">
+                     <p><span class="bold"><strong>VCS client: </strong></span>To interface with
+                                the server an SVN or GIT client must be installed on computers,
+                                involved in the OmegaT project. Very popular clients for Windows
+                                environment are <a class="ulink" href="http://tortoisesvn.net/" target="_top">TortoiseSVN</a> and <a class="ulink" href="http://code.google.com/p/tortoisegit/" target="_top">TortoiseGIT. </a>Other
+                                operating systems (Linux, OS X) offer similar packages.
+                     </p>
+                  </li>
+                  <li class="listitem">
+                     <p><span class="bold"><strong>repository: </strong></span>the place where the
+                                shared material is saved and maintained, either on a local access
+                                network or in Internet. Team members connect with it via their VCS
+                                client.
+                     </p>
+                  </li>
+                  <li class="listitem">
+                     <p><span class="bold"><strong>checkout:</strong></span> the operation that
+                                creates a working copy from the repository to your local computer. The
+                                server keeps the information on checkouts, so that later commits (see
+                                below) can be performed in an orderly fashion.
+                     </p>
+                  </li>
+                  <li class="listitem">
+                     <p><span class="bold"><strong>commit: </strong></span>once a new local
+                                version of the checked-out material is ready, it can be committed to
+                                the repository and thus made available to the rest of the team. The
+                                server makes sure that any conflicting changes, due to two members
+                                working on the same checked-out contents, will be resolved.
+                     </p>
+                  </li>
+                  <li class="listitem">
+                     <p><span class="bold"><strong>administrator: </strong></span>the person
+                                resposible for the creation and maintaining of the repository, i.e.
+                                taking care of the server side of the task. To avoid any problems, one
+                                person only should have these rightsm at least initially.
+                     </p>
+                  </li>
+                  <li class="listitem">
+                     <p><span class="bold"><strong>user</strong></span>: a member of the team,
+                                collaborating on the common project.
+                     </p>
+                  </li>
+               </ul>
+            </div>
+         </div>
+         <div class="section" title="2.&nbsp;Sharing a project using SVN">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e10464"></a>2.&nbsp;Sharing a project using SVN<a class="indexterm" name="d0e10467"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <p>There's two possibilities to run an SVN server: you can install SVN
+                   on your own server or you can use a hosted service. When using an external
+                   service you must be aware of the possible implications in terms of
+                   confidentiality, since you are loading the original document on a server
+                   outside of your direct control. Alternatively, to avoid this issue you can
+                   set a private SVN server, for example if you already have an Apache server
+                   that includes the software in question (e.g. VisualSVN).
+            </p>
+            <p>Once the SVN server is available, the members of the team must
+                   locally install a SVN client, in order to manage the project contents on
+                   their computers. For Windows we recommend <a class="ulink" href="http://tortoisesvn.net/" target="_top">TortoiseSVN</a>. For Mac you can
+                   download the client for instance from the <a class="ulink" href="https://sourceforge.net/projects/macsvn/" target="_top">SourceForge</a>, For
+                   Linux see <a class="ulink" href="www.yolinux.com/TUTORIALS/Subversion.html" target="_top">Subversion Commands and
+                      Scripts. </a></p>
+            <div class="section" title="2.1.&nbsp;Creating a repository">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="d0e10484"></a>2.1.&nbsp;Creating a repository<a class="indexterm" name="d0e10487"></a></h3>
+                     </div>
+                  </div>
+               </div>
+               <p>The procedure presented here relies on the free SVN server
+                        (limited to 2 users) offered by <a class="ulink" href="http://zfer.us/JgymT" target="_top">ProjectLocker.</a> Note that the creator
+                        of the repository has implicitely the administrator rights for the
+                        repository created. Sign in to the site first or - if it is your first
+                        time on the site, register for it and note your user name and password
+                        for the future projects.
+               </p>
+               <div class="orderedlist">
+                  <ol class="orderedlist" type="1">
+                     <li class="listitem">
+                        <p>Create a new project on ProjectLocker</p>
+                     </li>
+                     <li class="listitem">
+                        <p>Type the name and description of the repository. (
+                                     <code class="literal">OmegaT</code> and <code class="literal">OmegaT SL Localization
+                                        </code>in the example used here)
+                        </p>
+                     </li>
+                     <li class="listitem">
+                        <p>Choose<span class="guibutton"> SVN.</span></p>
+                     </li>
+                     <li class="listitem">
+                        <p>Click <span class="guibutton">Create Project</span></p>
+                     </li>
+                  </ol>
+               </div>
+               <p>Open the<span class="bold"><strong> Projects</strong></span> view for your
+                        account. The URL shown under Project Services will be used by SVN to
+                        connect clients to the SVN server you have just established. This is
+                        also the place to add members of the team to the project and assign them
+                        their rights. Note that the team members have to be registered first,
+                        before you can add them to the project (Note: in the free version of
+                        ProjectLocker you are allowed only two users per project).
+               </p>
+               <p>Projects can be managed according to your development style and
+                        needs. Similar as in the case of OmegaT projects, you will need to have
+                        separate repositories for different language pairs. Within a given
+                        language pair it is best to keep different subjects and/or clients as
+                        separate repositories as well. The alternative is to have one single
+                        repository with subfolders <code class="literal">Project1, Project2</code> etc,
+                        and share the common material via common <code class="literal">tm, glossary</code>
+                        and <code class="literal">dictionary</code> folders.
+               </p>
+               <p>For the example shown here we decided for the one OmegaT project -
+                        one single repository for the simplicity reasons. .
+               </p>
+            </div>
+            <div class="section" title="2.2.&nbsp;Importing the project to SVN repository - Windows">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="d0e10538"></a>2.2.&nbsp;Importing the project to SVN repository - Windows
+                        </h3>
+                     </div>
+                  </div>
+               </div>
+               <p>The repository is empty at this moment. You create first an empty
+                        client folder on your disk. Create an empty folder, where you will keep
+                        your project and right/click on it. Select<span class="guilabel"> TortoiseSVN &gt;
+                           Checkout.</span> The following dialog appears:
+               </p>
+               <div class="mediaobject"><img src="images/Team_projects_checkout.png"></div>
+               <p>Enter the URL, provided by the ProjectLocker, into the field
+                        <span class="bold"><strong>URL of repository</strong></span>. Make sure the field
+                        <span class="bold"><strong>Checkout directory</strong></span> is correct, i.e.
+                        specifies the empty folder you have created, and press <span class="bold"><strong>OK</strong></span>. Once the operation has finished, you can
+                        check the said folder: it should now contain a subdirectory .svn and a
+                        green OK badge on its icon will show, that the contents of the folder
+                        are up-to-date:
+               </p>
+               <p>In the next step, we will add the OmegaT files to the local
+                        directory. The following files are to be shared among the members of the
+                        team and thus have to be included in any case:
+               </p>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" type="disc">
+                     <li class="listitem">
+                        <p>the omegat project file -
+                                     <code class="filename">omegat.project</code></p>
+                     </li>
+                     <li class="listitem">
+                        <p>the translation memory -
+                                     <code class="filename">omegat\project_save.tmx</code></p>
+                     </li>
+                     <li class="listitem">
+                        <p>the contents of the source folder</p>
+                     </li>
+                     <li class="listitem">
+                        <p>the project-specific filters definition -
+                                     <code class="filename">omegat\filters.xml</code></p>
+                     </li>
+                  </ul>
+               </div>
+               <p>The administrator may decide to include following folders and
+                        their contents as well: <code class="filename">tm, glossary</code> and
+                        <code class="filename">dictionary.</code> Also
+                        <code class="filename">ignored_words.txt</code> and
+                        <code class="filename">learned_words.txt</code> in the <code class="filename">omegat
+                           </code>folder may be worth sharing and maintaining on the team
+                        level. Avoid in any case is adding <code class="filename">bak </code>files,
+                        <code class="filename">project_stats.txt</code> and
+                        <code class="filename">project_stats_match.txt,</code>in omegat subfolder, as
+                        they would without any need or profit just bloat the repository, The
+                        same applies to the<code class="filename"> target</code> folder and its
+                        contents.
+               </p>
+               <p>After copying the required files into the checkout directory you
+                        will notice that its icon has changed: the green OK badge has changed to
+                        a red exclamation sign, signifying the change in the local copy of the
+                        repository. The following two steps will bring the server version up to
+                        date:
+               </p>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" type="disc">
+                     <li class="listitem">
+                        <p><span class="bold"><strong>add the copied files to the local
+                                           version of the repository:</strong></span> right-click on the local
+                                     checkout directory and select <span class="guilabel">TortoiseSCN &gt;
+                                        Add.</span> In the dialog that opens, leave all options as per
+                                     default and click<span class="guilabel"> OK</span>. The Add Finished! window,
+                                     similar to the one below will appear:
+                        </p>
+                        <div class="mediaobject"><img src="images/images/Team_projects_Add.png"></div>
+                        <p>The contents of the checkout directory will be marked
+                                     accordingly:
+                        </p>
+                        <div class="mediaobject"><img src="images/Team_projects_checkoutAddFolder.png"></div>
+                     </li>
+                     <li class="listitem">
+                        <p><span class="bold"><strong>commit local changes to the server:
+                                           </strong></span>right-click on the local checkout directory and select
+                                     <span class="guilabel">SVN Commit....</span> The Commit window - see below
+                                     opens. Check the changes to be made - i.e. the folders and files
+                                     added in this case.
+                        </p>
+                        <div class="mediaobject"><img src="images/Team_projects_initialCommit.png"></div>
+                        <p>Enter an appropriate message into the message window and press
+                                     <span class="guilabel">OK</span>. The Commit window will open and show the
+                                     progress of the commit command. It will first commit the current
+                                     contents to the server repository and then update the local copy of
+                                     the repository - i.e. the contents of .svn subfolder - so that it is
+                                     up to date with the latest repository version.
+                        </p>
+                     </li>
+                     <li class="listitem">
+                        <p><span class="bold"><strong>update local files from the local
+                                           repository copy</strong></span> - the changes received from the server
+                                     repository reside within the .svn subfolder but not yet in the files
+                                     and folders themselves. To update the local files, right/click on
+                                     the checkout directory and select <span class="guilabel">SVN Update</span>.
+                                     Check the contents of the folder to confirm that the local copy of
+                                     the repository and the correspoding files and folders correspond to
+                                     the latest server version:
+                        </p>
+                        <div class="mediaobject"><img src="images/Team_projects_checkoutSVNupdate.png"></div>
+                     </li>
+                  </ul>
+               </div>
+            </div>
+         </div>
+      </div>
+      <div class="navfooter">
+         <hr>
+         <table width="100%" summary="Navigation footer">
+            <tr>
+               <td width="40%" align="left"><a accesskey="p" href="appendix.keyboard.html">Prev</a>&nbsp;
+               </td>
+               <td width="20%" align="center">&nbsp;</td>
+               <td width="40%" align="right">&nbsp;<a accesskey="n" href="appendix.TokenizerPlugin.inOmegaT.html">Next</a></td>
+            </tr>
+            <tr>
+               <td width="40%" align="left" valign="top">Appendix&nbsp;B.&nbsp;Keyboard shortcuts in the editor&nbsp;</td>
+               <td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
+               <td width="40%" align="right" valign="top">&nbsp;Appendix&nbsp;D.&nbsp;Tokenizer plugin</td>
+            </tr>
+         </table>
+      </div>
+   </body>
+</html>

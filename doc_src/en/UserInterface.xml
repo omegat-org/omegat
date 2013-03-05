@@ -411,28 +411,28 @@
 
         <tbody>
           <row>
-            <entry>33/33</entry>
+            <entry>27/27</entry>
 
             <entry>number of segments - translated vs total for the current
             file</entry>
           </row>
 
           <row>
-            <entry>2780/2780</entry>
+            <entry>9319/16338</entry>
 
             <entry>number of unique segments - translated vs total in the
             project</entry>
           </row>
 
           <row>
-            <entry>3760</entry>
+            <entry>31175</entry>
 
             <entry>total number of segments (including repeats) in the
             project</entry>
           </row>
 
           <row>
-            <entry>126/127</entry>
+            <entry>103/114</entry>
 
             <entry>number of source and target characters in the current
             segment</entry>

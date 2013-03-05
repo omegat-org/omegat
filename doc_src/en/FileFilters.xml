@@ -137,14 +137,13 @@
     <itemizedlist>
       <listitem>
         <para><emphasis>Add or rewrite encoding declaration in HTML and XHTML
-        files: <emphasis>frequently the target files must have the encoding
+        files</emphasis>: frequently the target files must have the encoding
         character set different from the one in the source file (wether it is
         explicitly defined or implied). Using this option the translator can
         specify, whether the target files are to have the encoding declaration
         included. For instance, if the file filter specifies UTF8 as the
         encoding scheme for the target files, selecting Always will assure
-        that this information is included in the translated files.
-        </emphasis></emphasis></para>
+        that this information is included in the translated files.</para>
       </listitem>
     </itemizedlist>
 

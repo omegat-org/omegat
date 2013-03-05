@@ -97,7 +97,7 @@
                 <secondary>Tag validation - Ctrl+T</secondary>
               </indexterm>Tag Validation window</guimenuitem></entry>
 
-            <entry><para>Used to read the user manual (open with <keycombo>
+            <entry><para>Used to validate tags (open with <keycombo>
                 <keycap>Ctrl</keycap>
 
                 <keycap>T</keycap>

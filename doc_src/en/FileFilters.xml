@@ -497,7 +497,7 @@
         </listitem>
 
         <listitem>
-          <para><literal>$(timestamp-????)</literal> - system date time at
+          <para><literal>$(timestamp-????)</literal> – system date time at
           generation time in various patterns</para>
 
           <para>See <ulink
@@ -507,28 +507,28 @@
         </listitem>
 
         <listitem>
-          <para>${system-os-name} - operating system of the computer
+          <para><literal>${system-os-name}</literal> - operating system of the computer
           used</para>
         </listitem>
 
         <listitem>
-          <para>${system-user-name) - system user name</para>
+          <para><literal>${system-user-name)</literal> - system user name</para>
         </listitem>
 
         <listitem>
-          <para>${system-host-name} - system host name</para>
+          <para><literal>${system-host-name}</literal> - system host name</para>
         </listitem>
 
         <listitem>
-          <para>${file-source-encoding} - source file encoding</para>
+          <para><literal>${file-source-encoding}</literal> - source file encoding</para>
         </listitem>
 
         <listitem>
-          <para>${file-target-encoding} - target file encoding</para>
+          <para><literal>${file-target-encoding}</literal> - target file encoding</para>
         </listitem>
 
         <listitem>
-          <para>${targetLocaleLCID) - Microsoft target locale</para>
+          <para><literal>${targetLocaleLCID)</literal> - Microsoft target locale</para>
         </listitem>
       </itemizedlist>
 
@@ -542,27 +542,27 @@
 
       <itemizedlist>
         <listitem>
-          <para>${nameOnly-0} Document</para>
+          <para><literal>${nameOnly-0}</literal> Document</para>
         </listitem>
 
         <listitem>
-          <para>${nameOnly-1} Document.xx</para>
+          <para><literal>${nameOnly-1}</literal> Document.xx</para>
         </listitem>
 
         <listitem>
-          <para>${nameOnly-2} Document.xx.docx</para>
+          <para><literal>${nameOnly-2}</literal> Document.xx.docx</para>
         </listitem>
 
         <listitem>
-          <para>${extension-0} docx</para>
+          <para><literal>${extension-0}</literal> docx</para>
         </listitem>
 
         <listitem>
-          <para>${extension-1} xx.docx</para>
+          <para><literal>${extension-1}</literal> xx.docx</para>
         </listitem>
 
         <listitem>
-          <para>${extension-2} Document.xx.docx</para>
+          <para><literal>${extension-2}</literal> Document.xx.docx</para>
         </listitem>
       </itemizedlist>
     </section>

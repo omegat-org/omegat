@@ -16,7 +16,7 @@
       </indexterm></title>
 
     <para>Dictionaries in <application>OmegaT</application> are based on the
-    StartDict Platform. To install the necessary files, proceed as
+    StarDict Platform. To install the necessary files, proceed as
     follows:</para>
 
     <itemizedlist>
@@ -27,7 +27,7 @@
             <primary>Dictionaries</primary>
 
             <secondary>StarDict, FreeDict</secondary>
-          </indexterm>StartDict Platform</ulink> above or on <ulink
+          </indexterm>StarDict Platform</ulink> above or on <ulink
         url="http://www.freedict.org/en/list.html">FreeDict</ulink></para>
       </listitem>
     </itemizedlist>

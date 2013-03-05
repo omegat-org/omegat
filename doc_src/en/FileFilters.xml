@@ -497,7 +497,7 @@
         </listitem>
 
         <listitem>
-          <para><literal>$(timestamp-????)</literal> – system date time at
+          <para><literal>${timestamp-????}</literal> – system date time at
           generation time in various patterns</para>
 
           <para>See <ulink
@@ -535,7 +535,7 @@
       <para>Additional variants are available for variables ${nameOnly} and
       ${Extension}. In case the file name has ambivalent name, one can apply
       variables of the form <literal>${name only</literal><emphasis>-extension
-      number</emphasis>) and
+      number</emphasis>} and
       <literal>${extension</literal>-<emphasis>extension number} </emphasis>.
       If for example the original file is named Document.xx.docx, the
       following variables will give the following results:</para>

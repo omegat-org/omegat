@@ -190,14 +190,14 @@
                 <secondary>Font</secondary>
               </indexterm></guimenuitem></entry>
 
-            <entry><para>Used to modify the font <application>used by
-            OmegaT</application> to display source, translation, matches and
+            <entry><para>Used to modify the font used by
+            <application>OmegaT</application> to display source, translation, matches and
             glossary terms, (access via <menuchoice>
                 <guimenu>Options</guimenu>
 
                 <guimenuitem>Font...</guimenuitem>
               </menuchoice>, close via
-            <keycap>Esc</keycap><keycap>)</keycap></para></entry>
+            <keycap>Esc</keycap>)</para></entry>
           </row>
 
           <row>

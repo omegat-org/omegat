@@ -86,7 +86,7 @@
          </p>
          <p>You can enable project specific filters via the <span class="bold"><strong>Project → Properties...</strong></span>. Click on <span class="guibutton">File
                  Filters</span> button and activate the check box <span class="guimenuitem">Enable
-                 project specific filters</span><a class="indexterm" name="d0e4357"></a>. A copy of the filters configuration will be stored with the
+                 project specific filters</span><a class="indexterm" name="d0e4356"></a>. A copy of the filters configuration will be stored with the
               project in this case. If you later change filters, only the project filters
               will be updated, while the user filters stay unchanged.
          </p>
@@ -98,7 +98,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="file.filters.dialog"></a>1.&nbsp;File filters dialog<a class="indexterm" name="d0e4370"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="file.filters.dialog"></a>1.&nbsp;File filters dialog<a class="indexterm" name="d0e4369"></a></h2>
                   </div>
                </div>
             </div>
@@ -115,7 +115,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="filters.options"></a>2.&nbsp;Filter options<a class="indexterm" name="d0e4385"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="filters.options"></a>2.&nbsp;Filter options<a class="indexterm" name="d0e4384"></a></h2>
                   </div>
                </div>
             </div>
@@ -180,14 +180,14 @@
                <ul class="itemizedlist" type="disc">
                   <li class="listitem">
                      <p><span class="emphasis"><em>Add or rewrite encoding declaration in HTML and XHTML
-                                      files: <span class="emphasis"><em>frequently the target files must have the encoding
-                                            character set different from the one in the source file (wether it is
-                                            explicitly defined or implied). Using this option the translator can
-                                            specify, whether the target files are to have the encoding declaration
-                                            included. For instance, if the file filter specifies UTF8 as the
-                                            encoding scheme for the target files, selecting Always will assure
-                                            that this information is included in the translated files.
-                                            </em></span></em></span></p>
+                                      files</em></span>: frequently the target files must have the encoding
+                                character set different from the one in the source file (wether it is
+                                explicitly defined or implied). Using this option the translator can
+                                specify, whether the target files are to have the encoding declaration
+                                included. For instance, if the file filter specifies UTF8 as the
+                                encoding scheme for the target files, selecting Always will assure
+                                that this information is included in the translated files.
+                     </p>
                   </li>
                </ul>
             </div>
@@ -404,7 +404,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="edit.filter.dialog"></a>3.&nbsp;Edit filter dialog<a class="indexterm" name="d0e4589"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="edit.filter.dialog"></a>3.&nbsp;Edit filter dialog<a class="indexterm" name="d0e4587"></a></h2>
                   </div>
                </div>
             </div>
@@ -422,7 +422,7 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="source.filetype.and.filename.pattern"></a>3.1.&nbsp;<a class="indexterm" name="d0e4604"></a>Source file type, filename pattern<a class="indexterm" name="d0e4610"></a></h3>
+                        <h3 class="title"><a name="source.filetype.and.filename.pattern"></a>3.1.&nbsp;<a class="indexterm" name="d0e4602"></a>Source file type, filename pattern<a class="indexterm" name="d0e4608"></a></h3>
                      </div>
                   </div>
                </div>
@@ -451,7 +451,7 @@
                         </h3>
                      </div>
                   </div>
-               </div><a class="indexterm" name="d0e4638"></a><a class="indexterm" name="d0e4643"></a><a class="indexterm" name="d0e4648"></a><p>Only a limited number of file formats specify a mandatory
+               </div><a class="indexterm" name="d0e4636"></a><a class="indexterm" name="d0e4641"></a><a class="indexterm" name="d0e4646"></a><p>Only a limited number of file formats specify a mandatory
                         encoding. File formats that do not specify their encoding will use the
                         encoding you set up for the extension that matches their name. For
                         example, by default <code class="literal">.txt</code> files will be loaded using
@@ -496,14 +496,14 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="target.name"></a>3.3.&nbsp;Target filename<a class="indexterm" name="d0e4676"></a></h3>
+                        <h3 class="title"><a name="target.name"></a>3.3.&nbsp;Target filename<a class="indexterm" name="d0e4674"></a></h3>
                      </div>
                   </div>
                </div>
                <p>Sometimes you may wish to rename the files you translate
                         automatically, for example adding a language code after the file name.
                         The target filename pattern uses a special syntax, so if you wish to
-                        edit this field, you must click <span class="bold"><strong>Edit...</strong></span>and use the <a class="indexterm" name="d0e4686"></a>Edit Pattern Dialog. If you wish to revert to default
+                        edit this field, you must click <span class="bold"><strong>Edit...</strong></span>and use the <a class="indexterm" name="d0e4684"></a>Edit Pattern Dialog. If you wish to revert to default
                         configuration of the filter, click <span class="bold"><strong>Defaults.</strong></span> You may also modify the name directly
                         in the target filename pattern field of the file filters dialog. The
                         Edit Pattern Dialog offers among others the following options:
@@ -567,7 +567,7 @@
                         </p>
                      </li>
                      <li class="listitem">
-                        <p><code class="literal">$(timestamp-????)</code> - system date time at
+                        <p><code class="literal">${timestamp-????}</code> – system date time at
                                      generation time in various patterns
                         </p>
                         <p>See <a class="ulink" href="http://docs.oracle.com/javase/1.4.2/docs/api/java/text/SimpleDateFormat.html" target="_top">Oracle
@@ -576,31 +576,36 @@
                         </p>
                      </li>
                      <li class="listitem">
-                        <p>${system-os-name} - operating system of the computer
+                        <p><code class="literal">${system-os-name}</code> - operating system of the computer
                                      used
                         </p>
                      </li>
                      <li class="listitem">
-                        <p>${system-user-name) - system user name</p>
+                        <p><code class="literal">${system-user-name)</code> - system user name
+                        </p>
                      </li>
                      <li class="listitem">
-                        <p>${system-host-name} - system host name</p>
+                        <p><code class="literal">${system-host-name}</code> - system host name
+                        </p>
                      </li>
                      <li class="listitem">
-                        <p>${file-source-encoding} - source file encoding</p>
+                        <p><code class="literal">${file-source-encoding}</code> - source file encoding
+                        </p>
                      </li>
                      <li class="listitem">
-                        <p>${file-target-encoding} - target file encoding</p>
+                        <p><code class="literal">${file-target-encoding}</code> - target file encoding
+                        </p>
                      </li>
                      <li class="listitem">
-                        <p>${targetLocaleLCID) - Microsoft target locale</p>
+                        <p><code class="literal">${targetLocaleLCID)</code> - Microsoft target locale
+                        </p>
                      </li>
                   </ul>
                </div>
                <p>Additional variants are available for variables ${nameOnly} and
                         ${Extension}. In case the file name has ambivalent name, one can apply
                         variables of the form <code class="literal">${name only</code><span class="emphasis"><em>-extension
-                              number</em></span>) and
+                              number</em></span>} and
                         <code class="literal">${extension</code>-<span class="emphasis"><em>extension number} </em></span>.
                         If for example the original file is named Document.xx.docx, the
                         following variables will give the following results:
@@ -608,22 +613,28 @@
                <div class="itemizedlist">
                   <ul class="itemizedlist" type="disc">
                      <li class="listitem">
-                        <p>${nameOnly-0} Document</p>
+                        <p><code class="literal">${nameOnly-0}</code> Document
+                        </p>
                      </li>
                      <li class="listitem">
-                        <p>${nameOnly-1} Document.xx</p>
+                        <p><code class="literal">${nameOnly-1}</code> Document.xx
+                        </p>
                      </li>
                      <li class="listitem">
-                        <p>${nameOnly-2} Document.xx.docx</p>
+                        <p><code class="literal">${nameOnly-2}</code> Document.xx.docx
+                        </p>
                      </li>
                      <li class="listitem">
-                        <p>${extension-0} docx</p>
+                        <p><code class="literal">${extension-0}</code> docx
+                        </p>
                      </li>
                      <li class="listitem">
-                        <p>${extension-1} xx.docx</p>
+                        <p><code class="literal">${extension-1}</code> xx.docx
+                        </p>
                      </li>
                      <li class="listitem">
-                        <p>${extension-2} Document.xx.docx</p>
+                        <p><code class="literal">${extension-2}</code> Document.xx.docx
+                        </p>
                      </li>
                   </ul>
                </div>

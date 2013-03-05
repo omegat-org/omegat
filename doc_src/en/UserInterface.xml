@@ -1110,7 +1110,7 @@
       Statistics.</guimenuitem> The evaluation is rather CPU intensive and can
       be time-consuming, so a progress bar is shown during the calculation. As
       far as categories are concerned, the de facto industry standard of
-      classifying matches into the following groups is used: Exact match,
+      classifying matches into the following groups is used: Repetitions, Exact match,
       95%-100%, 85%-94%, 75%-84%, 50%-74% and No match. This information is
       computed for segments as well as for words and for characters (without
       and including spaces). Note that there could be minor differences

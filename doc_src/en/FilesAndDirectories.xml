@@ -474,7 +474,7 @@
           </row>
 
           <row>
-            <entry rowsep="0"><application>OmegaT</application></entry>
+            <entry rowsep="0"><literal>OmegaT</literal></entry>
 
             <entry rowsep="0">A text file containing two lines:</entry>
           </row>
@@ -499,11 +499,11 @@
             executable (chmod +x OmegaT) from the command line after making
             sure you are in the /OmegaT_2.5/ directory. You will then be able
             to launch OmegaT by executing this file from the command
-            line</entry>
+            line.</entry>
           </row>
 
           <row>
-            <entry rowsep="0"><application>OmegaT</application>.bat</entry>
+            <entry rowsep="0"><literal>OmegaT.bat</literal></entry>
 
             <entry rowsep="0">A batch file, used to launch
             <application>OmegaT</application> from the Windows command line.
@@ -513,12 +513,12 @@
           <row>
             <entry/>
 
-            <entry><literal>java -jar <application>OmegaT</application>.jar
+            <entry><literal>java -jar OmegaT.jar
             %*</literal></entry>
           </row>
 
           <row>
-            <entry><application>OmegaT</application>.jar</entry>
+            <entry><literal>OmegaT.jar</literal></entry>
 
             <entry>The main OmegaT application. To launch OmegaT, you must
             launch this file either from the command line or from your file

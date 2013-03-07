@@ -38,7 +38,7 @@
 
       <para>If you need non-standard settings, the corresponding configuration
       files (<literal>filters.conf</literal> and
-      <literal>segmentation.conf)</literal> must be present. This can be
+      <literal>segmentation.conf</literal>) must be present. This can be
       achieved in two ways:</para>
 
       <itemizedlist>
@@ -69,8 +69,8 @@
       <para>To launch OmegaT in console mode, additional parameters must be
       specified at launch. The most important of these is
       <literal>&lt;project-dir&gt;</literal>, and
-      optionally<literal>--config-dir=&lt;config-dir&gt;.
-      </literal>Example:</para>
+      optionally<literal>--config-dir=&lt;config-dir&gt;</literal>.
+      Example:</para>
 
       <para><literal>$&gt; java -jar <application>OmegaT</application>.jar
       /path/to/project \</literal></para>
@@ -130,7 +130,7 @@
       <title>Quiet option</title>
 
       <para>An extra command line parameter specific to console mode:
-      <literal>--quiet.</literal> In the quiet mode, less info is logged to
+      <literal>--quiet</literal>. In the quiet mode, less info is logged to
       the screen. The messages you would usually find in the status bar are
       not displayed.</para>
 
@@ -142,7 +142,7 @@
       <title>Tag validation option</title>
 
       <para>Another extra command line parameter specific to console mode:
-      <literal>--tag-validation=[abort|warn].</literal> When this parameter is
+      <literal>--tag-validation=[abort|warn]</literal>. When this parameter is
       added, tag validation is done prior to translation/aligning. If the
       value is <literal>abort</literal>, then on tag errors the errors are
       printed and the program stops. If the value is <literal>warn</literal>
@@ -258,7 +258,7 @@
     When you translate your files, <application>OmegaT</application> stores
     all your progress in the translation memory
     <literal>project_save.tmx</literal> that resides in the project's
-    <literal>/omegat </literal>subfolder.</para>
+    <literal>/omegat</literal> subfolder.</para>
 
     <para>OmegaT also backs up the translation memory to
     project_save.tmx.YEARMMDDHHNN.bak in the same subfolder each time a
@@ -311,7 +311,7 @@
 
       <listitem>
         <para>Take particular care when making changes to the files in
-        <literal>/source </literal>while in the middle of a project. If the
+        <literal>/source</literal> while in the middle of a project. If the
         source file is modified after you have begun translating,
         <application>OmegaT</application> may be unable to find a segment that
         you have already translated.</para>

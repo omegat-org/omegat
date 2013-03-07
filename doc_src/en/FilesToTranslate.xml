@@ -448,6 +448,13 @@
       changed manually to RTL in its viewing application. Each output format
       has specific ways of dealing with RTL display; check the relevant
       application manuals for details.</para>
+      
+      <para>For .docx files, a number of changes are however done automatically:
+      <itemizedlist>
+      <listitem>Paragraphs, sections and tables are set to bidi</listitem>
+      <listitem>Runs (text elements) are set to RTL</listitem>     
+      </itemizedlist>
+      </para>
 
       <para>To avoid changing the target files display parameters each time
       the files are opened, it may be possible to change the source file

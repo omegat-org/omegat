@@ -16,8 +16,8 @@
     <para><emphasis role="bold">Copyright</emphasis></para>
 
     <para>The documentation distributed with <application>OmegaT</application>
-    2.5 includes the User Manual and the readme.txt document. The
-    documentation is Copyright ©2012 Vito Smolej. The author of the Chapter
+    2.6 includes the User Manual and the readme.txt document. The
+    documentation is Copyright ©2013 Vito Smolej. The author of the Chapter
     <emphasis>Learn to use OmegaT in 5 minutes!</emphasis> is Samuel Murray,
     Copyright ©2005-2012.</para>
 
@@ -47,26 +47,27 @@
     <para><emphasis role="bold">Copyright</emphasis></para>
 
     <para><emphasis role="bold"><application>OmegaT</application>
-    2.5</emphasis> is Copyright © 2000-2012 Keith Godfrey, Maxym Mykhalchuk,
-    Zoltan Bartko, Didier Briel, Kim Bruning, Alex Buloichik, Thomas
-    Cordonnier, Sandra Jean Chua, Martin Fleurke, Phillip Hall,
-    Jean-Christophe Helary, Thomas Huriaux, Hans-Peter Jacobs, Ibai Lakunza Velasco, 
-    Guido Leenders, Aaron Madlon-Kay, Fabián Mandelbaum, John Moran, Arno Peters, Henry Pijffers, 
-    Briac Pilpré, Tiago Saboga, Andrzej Sawuła, Benjamin Siband, Rashid Umarov, Antonio
-    Vilei, Martin Wunderlich and Michael Zakharov.</para>
+    2.6</emphasis> is Copyright © 2000-2013 Keith Godfrey, Zoltan Bartko, Volker Berlin, 
+    Didier Briel, Kim Bruning, Alex Buloichik, Sandra Jean Chua, Thomas Cordonnier, 
+    Martin Fleurke, Wildrich Fourie, Phillip Hall, Jean-Christophe Helary, 
+    Thomas Huriaux, Hans-Peter Jacobs, Ibai Lakunza Velasco, Guido Leenders, 
+    Aaron Madlon-Kay, Fabian Mandelbaum, John Moran, Maxym Mykhalchuk, 
+    Arno Peters, Henry Pijffers, Briac Pilpré, Tiago Saboga, 
+    Andrzej Sawula, Benjamin Siband, Yu Tang, Rashid Umarov, 
+    Antonio Vilei and Martin Wunderlich</para>
 
     <para><emphasis role="bold">Distribution and
     modifications</emphasis></para>
 
-    <para><emphasis role="bold">O</emphasis><emphasis role="bold">megaT
-    2.5</emphasis> is free software; you can redistribute it and/or modify it
+    <para><emphasis role="bold">OmegaT
+    2.6</emphasis> is free software; you can redistribute it and/or modify it
     under the terms of the GNU General Public License as published by the Free
     Software Foundation; either version 2 of the License, or (if you prefer)
     any later version.</para>
 
     <para><emphasis role="bold">Warranty</emphasis></para>
 
-    <para><emphasis role="bold"> <application>OmegaT</application> 2.5
+    <para><emphasis role="bold"> <application>OmegaT</application> 2.6
     </emphasis>is distributed in the hope that it will be useful, but WITHOUT
     ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
     FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for

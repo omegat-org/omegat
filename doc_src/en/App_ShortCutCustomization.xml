@@ -15,7 +15,7 @@
     shortcut assigned. Only the most commonly used menu items are assigned a
     shortcut by default. You can change the already assigned shortcuts and add
     new shortcuts by putting a shortcut definition file in your OmegaT
-    preferences folder (see <link linkend="user.files.location">User files
+    preferences folder (see <link linkend="user.files">User files
     location</link>).</para>
 
     <para>The shortcut definition file must be named

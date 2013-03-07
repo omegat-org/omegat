@@ -114,7 +114,7 @@
     <itemizedlist>
       <listitem>
         <para>'*' matches zero or more characters, from the current position
-        in a given word to its end. The search term<literal>'run*'</literal>
+        in a given word to its end. The search term <literal>'run*'</literal>
         for example would match words <literal>'run'</literal>,
         <literal>'runs'</literal> and <literal>'running'</literal>.</para>
       </listitem>
@@ -122,10 +122,10 @@
 
     <itemizedlist>
       <listitem>
-        <para>'?' matches any single character. For instance, <literal>'run?'
-        </literal>would match the word <literal>'runs'</literal> and
+        <para>'?' matches any single character. For instance, <literal>'run?'</literal> 
+        would match the word <literal>'runs'</literal> and
         <literal>'runn'</literal> in the word
-        <literal>'running'.</literal></para>
+        <literal>'running'</literal>.</para>
       </listitem>
     </itemizedlist>
 

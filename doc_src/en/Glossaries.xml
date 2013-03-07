@@ -18,9 +18,9 @@
   segment will be automatically displayed in the Glossary viewer.</para>
 
   <para>You define its location and name in the project properties dialog. The
-  extension must be <filename>.txt </filename>(if not, it will be added). The
-  location of the file must be within the <filename>/glossary
-  </filename>folder, but it can be in a deeper directory (e.g.,
+  extension must be <filename>.txt</filename>(if not, it will be added). The
+  location of the file must be within the <filename>/glossary</filename>folder, 
+  but it can be in a deeper directory (e.g.,
   <filename>glossary/sub/glossary.txt</filename>). The file does not need to
   exist when setting it, it will be created (if necessary) when adding a
   glossary entry. If the file already exists, no attempt is done to verify the
@@ -133,7 +133,7 @@
     string:</para>
 
     <para><literal>"This is a source term, which contains a comma","c'est un
-    terme, qui contient une virgule" </literal></para>
+    terme, qui contient une virgule"</literal></para>
 
     <para>In addition to the plain text format, TBX format <indexterm
         class="singular">
@@ -179,7 +179,7 @@
 
     <para>The contents of glossary files are kept in memory and are loaded
     when the project is opened or reloaded. Updating a glossary file is thus
-    rather simple: press <keycap>Ctrl+Shift+G </keycap> and enter the new
+    rather simple: press <keycap>Ctrl+Shift+G</keycap> and enter the new
     term, its translation and any comments you may have (ensuring you press
     tab between the fields) and save the file. The contents of the glossary
     pane will be updated accordingly.</para>

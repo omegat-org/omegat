@@ -16,8 +16,7 @@
       </indexterm></title>
 
     <para>Dictionaries in <application>OmegaT</application> are based on the
-    StarDict Platform. To install the necessary files, proceed as
-    follows:</para>
+    StarDict or on the Lingvo DSL format. To install the necessary files for the StarDict format, proceed as follows:</para>
 
     <itemizedlist>
       <listitem>
@@ -26,9 +25,8 @@
             class="singular">
             <primary>Dictionaries</primary>
 
-            <secondary>StarDict, FreeDict</secondary>
-          </indexterm>StarDict Platform</ulink> above or on <ulink
-        url="http://www.freedict.org/en/list.html">FreeDict</ulink></para>
+            <secondary>StarDict</secondary>
+          </indexterm>StarDict Platform</ulink> above.</para>
       </listitem>
     </itemizedlist>
 
@@ -147,7 +145,7 @@
     <itemizedlist>
       <listitem>
         <para>Does the folder contain three files of the same name, with
-        extensions ? If only one file is present, check its extension. If it
+        extensions? If only one file is present, check its extension. If it
         is <emphasis>tar.bz</emphasis>, you have forgotten to unpack (untar)
         it.</para>
       </listitem>

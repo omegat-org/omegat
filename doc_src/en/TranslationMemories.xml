@@ -82,7 +82,7 @@
             translation memory, excluding the so-called orphan segments. They
             carry appropriately changed names, so that its contents still
             remain identifiable, when used elsewhere, for instance in
-            the<filename> tm</filename> subfolder of some other project (see
+            the <filename>tm</filename> subfolder of some other project (see
             below).</para>
           </listitem>
         </varlistentry>
@@ -128,7 +128,7 @@
               </menuchoice></para>
 
             <para>It may happen, that translation memories, available in
-            the<filename> tm</filename> subfolder, contain segments with
+            the <filename>tm</filename> subfolder, contain segments with
             identical source text, but differing targets. TMX files are read
             sorted by their names and segments within a given TMX file line by
             line. The last segment with the identical source text will thus
@@ -419,7 +419,7 @@
     the project is opened, so putting all different TMs you may have on hand
     into this folder may unnecessarily slow OmegaT down. You may even consider
     removing those that are not required any more, once you have used their
-    contents to fill up the <filename>project-save.tmx </filename>file.</para>
+    contents to fill up the <filename>project-save.tmx</filename> file.</para>
 
     <section id="importing.and.exporting.translation.memories">
       <title>Importing and exporting translation memories<indexterm
@@ -478,15 +478,15 @@
       <itemizedlist>
         <listitem>
           <para>Copy the documents, you need the translation memory for, into
-          the source folder of the project</para>
+          the source folder of the project.</para>
         </listitem>
       </itemizedlist>
 
       <itemizedlist>
         <listitem>
           <para>Copy the translation memories, containing the translations of
-          the documents above, into<filename> tm\auto</filename> subfolder of
-          the new project</para>
+          the documents above, into <filename>tm/auto</filename> subfolder of
+          the new project.</para>
         </listitem>
       </itemizedlist>
 

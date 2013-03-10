@@ -210,7 +210,7 @@
         </imageobject>
       </mediaobject>
  
-      <para>Enter the URL, provided by the ProjectLocker, into the field
+      <para>Enter the URL, provided by ProjectLocker, into the field
       <emphasis role="bold">URL of repository</emphasis>. Make sure the field
       <emphasis role="bold">Checkout directory</emphasis> is correct, i.e.
       specifies the empty folder you have created, and press <emphasis

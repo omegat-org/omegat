@@ -1397,8 +1397,9 @@ public class RealProject implements IProject {
         /**
          * {@inheritDoc}
          */
-        protected void addSegment(String id, short segmentIndex, String segmentSource, String segmentTranslation,
-                boolean segmentTranslationFuzzy, String comment, String prevSegment, String nextSegment, String path) {
+        protected void addSegment(String id, short segmentIndex, String segmentSource,
+                Map<String, String> shortcutDetails, String segmentTranslation, boolean segmentTranslationFuzzy,
+                String comment, String prevSegment, String nextSegment, String path) {
             // if the source string is empty, don't add it to TM
             if (segmentSource.length() == 0 || segmentSource.trim().length() == 0) {
                 throw new RuntimeException("Segment must not be empty");
@@ -1407,7 +1408,7 @@ public class RealProject implements IProject {
             EntryKey ek = new EntryKey(entryKeyFilename, segmentSource, id, prevSegment, nextSegment, path);
 
             SourceTextEntry srcTextEntry = new SourceTextEntry(ek, allProjectEntries.size() + 1, comment,
-                    segmentTranslation);
+                    segmentTranslation, shortcutDetails);
             srcTextEntry.setSourceTranslationFuzzy(segmentTranslationFuzzy);
             allProjectEntries.add(srcTextEntry);
             fileInfo.entries.add(srcTextEntry);

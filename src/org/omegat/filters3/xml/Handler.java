@@ -41,6 +41,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Stack;
+import java.util.TreeMap;
 
 import org.omegat.filters2.TranslationException;
 import org.omegat.filters3.Attribute;
@@ -514,7 +515,7 @@ class Handler extends DefaultHandler implements LexicalHandler, DeclHandler {
         if (currEntry().size() == 0)
             return;
 
-        Map<String, String> shortcutDetails = new HashMap<String, String>();
+        Map<String, String> shortcutDetails = new TreeMap<String, String>();
         boolean tagsAggregation = isTagsAggregationEnabled();
         String src = currEntry().sourceToShortcut(tagsAggregation, dialect, shortcutDetails);
         Element lead = currEntry().get(0);

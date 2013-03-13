@@ -68,25 +68,29 @@ public class SourceTextEntry {
     /**
      * Protected parts(shortcuts) in keys, details of full content in values(for tooltips).
      */
-    Map<String, String> protectedParts = new HashMap<String, String>();
+    Map<String, String> protectedParts;
 
     /**
      * Creates a new source text entry.
      * 
-     * @param file
-     *            Source file name
-     * @param id
-     *            ID in source file
-     * @param str
-     *            unique StringEntry that holds source and translation of this entry.
+     * @param key
+     *            entry key
      * @param entryNum
-     *            the number of this entry in a project.
+     *            the number of this entry in a project
+     * @param comment
+     *            entry comment
+     * @param sourceTranslation
+     *            translation from source file
+     * @param protectedParts
+     *            tags shortcuts
      */
-    public SourceTextEntry(EntryKey key, int entryNum, String comment, String sourceTranslation) {
+    public SourceTextEntry(EntryKey key, int entryNum, String comment, String sourceTranslation,
+            Map<String, String> protectedParts) {
         this.key = key;
         m_entryNum = entryNum;
         this.comment = comment;
         this.sourceTranslation = sourceTranslation;
+        this.protectedParts = protectedParts;
     }
 
     public EntryKey getKey() {

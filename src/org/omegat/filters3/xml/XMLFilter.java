@@ -197,7 +197,13 @@ public abstract class XMLFilter extends AbstractFilter implements Translator {
      * The method the Handler would call to pass translatable content to OmegaT core and receive translation.
      */
     public String translate(String entry, Map<String, String> shortcutDetails) {
-        return super.processEntry(entry);
+        if (entryParseCallback != null) {
+            entryParseCallback.addEntry(null, entry, null, false, null, null, this, shortcutDetails);
+            return entry;
+        } else {
+            String translation = entryTranslateCallback.getTranslation(null, entry, null);
+            return translation != null ? translation : entry;
+        }
     }
 
     /**

@@ -33,6 +33,7 @@ package org.omegat.core.data;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 
 import org.omegat.core.data.IProject.FileInfo;
 import org.omegat.core.segmentation.Rule;
@@ -73,7 +74,7 @@ public abstract class ParseEntry implements IParseCallback {
          * Flush queue.
          */
         for (ParseEntryQueueItem item : parseQueue) {
-            addSegment(item.id, item.segmentIndex, item.segmentSource, item.segmentTranslation,
+            addSegment(item.id, item.segmentIndex, item.segmentSource, item.shortcutDetails, item.segmentTranslation,
                     item.segmentTranslationFuzzy, item.comment, item.prevSegment, item.nextSegment, item.path);
         }
 
@@ -142,21 +143,36 @@ public abstract class ParseEntry implements IParseCallback {
             translation = stripSomeChars(translation, tmp, m_config.isRemoveTags());
         }
 
+        if (shortcutDetails != null && shortcutDetails.isEmpty()) {
+            // don't need to store empty map - will use less memory
+            shortcutDetails = null;
+        }
         if (m_config.isSentenceSegmentingEnabled()) {
             List<StringBuffer> spaces = new ArrayList<StringBuffer>();
             List<Rule> brules = new ArrayList<Rule>();
             Language sourceLang = m_config.getSourceLanguage();
             List<String> segments = Segmenter.segment(sourceLang, source, spaces, brules);
             if (segments.size() == 1) {
-                internalAddSegment(id, (short) 0, segments.get(0), translation, isFuzzy, comment, path);
+                internalAddSegment(id, (short) 0, segments.get(0), translation, isFuzzy, comment, path, shortcutDetails);
             } else {
                 for (short i = 0; i < segments.size(); i++) {
                     String onesrc = segments.get(i);
-                    internalAddSegment(id, i, onesrc, null, false, comment, path);
+                    Map<String, String> segmentShortcutDetails;
+                    if (shortcutDetails != null) {
+                        segmentShortcutDetails = new TreeMap<String, String>();
+                        for (String sh : shortcutDetails.keySet()) {
+                            if (onesrc.contains(sh)) {
+                                segmentShortcutDetails.put(sh, shortcutDetails.get(sh));
+                            }
+                        }
+                    } else {
+                        segmentShortcutDetails = null;
+                    }
+                    internalAddSegment(id, i, onesrc, null, false, comment, path, segmentShortcutDetails);
                 }
             }
         } else {
-            internalAddSegment(id, (short) 0, source, translation, isFuzzy, comment, path);
+            internalAddSegment(id, (short) 0, source, translation, isFuzzy, comment, path, shortcutDetails);
         }
     }
 
@@ -189,7 +205,7 @@ public abstract class ParseEntry implements IParseCallback {
      * Add segment to queue because we possible need to link prev/next segments.
      */
     private void internalAddSegment(String id, short segmentIndex, String segmentSource, String segmentTranslation,
-            boolean segmentTranslationFuzzy, String comment, String path) {
+            boolean segmentTranslationFuzzy, String comment, String path, Map<String, String> shortcutDetails) {
         if (segmentSource.length() == 0 || segmentSource.trim().length() == 0) {
             // skip empty segments
             return;
@@ -198,6 +214,7 @@ public abstract class ParseEntry implements IParseCallback {
         item.id = id;
         item.segmentIndex = segmentIndex;
         item.segmentSource = segmentSource;
+        item.shortcutDetails = shortcutDetails;
         item.segmentTranslation = segmentTranslation;
         item.segmentTranslationFuzzy = segmentTranslationFuzzy;
         item.comment = comment;
@@ -206,7 +223,8 @@ public abstract class ParseEntry implements IParseCallback {
     }
 
     /**
-     * Adds a segment to the project. If a translation is given, it it added to the projects TMX.
+     * Adds a segment to the project. If a translation is given, it it added to
+     * the projects TMX.
      * 
      * @param id
      *            ID of entry, if format supports it
@@ -214,10 +232,13 @@ public abstract class ParseEntry implements IParseCallback {
      *            Number of the segment-part of the original source string.
      * @param segmentSource
      *            Translatable source string
+     * @param shortcutDetails
+     *            shortcut details
      * @param segmentTranslation
      *            translation of the source string, if format supports it
      * @param segmentTranslationFuzzy
-     *            fuzzy flag of translation of the source string, if format supports it
+     *            fuzzy flag of translation of the source string, if format
+     *            supports it
      * @param comment
      *            entry's comment, if format supports it
      * @param prevSegment
@@ -227,8 +248,9 @@ public abstract class ParseEntry implements IParseCallback {
      * @param path
      *            path of segment
      */
-    protected abstract void addSegment(String id, short segmentIndex, String segmentSource, String segmentTranslation,
-            boolean segmentTranslationFuzzy, String comment, String prevSegment, String nextSegment, String path);
+    protected abstract void addSegment(String id, short segmentIndex, String segmentSource,
+            Map<String, String> shortcutDetails, String segmentTranslation, boolean segmentTranslationFuzzy,
+            String comment, String prevSegment, String nextSegment, String path);
 
     /**
      * Strip some chars for represent string in UI.
@@ -306,6 +328,7 @@ public abstract class ParseEntry implements IParseCallback {
         String id;
         short segmentIndex;
         String segmentSource;
+        Map<String, String> shortcutDetails;
         String segmentTranslation;
         boolean segmentTranslationFuzzy;
         String comment;

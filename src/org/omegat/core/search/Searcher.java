@@ -45,17 +45,19 @@ import org.omegat.core.Core;
 import org.omegat.core.data.EntryKey;
 import org.omegat.core.data.ExternalTMX;
 import org.omegat.core.data.IProject;
+import org.omegat.core.data.IProject.FileInfo;
 import org.omegat.core.data.ParseEntry;
 import org.omegat.core.data.ProjectProperties;
 import org.omegat.core.data.ProjectTMX;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.data.TMXEntry;
-import org.omegat.core.data.IProject.FileInfo;
 import org.omegat.filters2.FilterContext;
 import org.omegat.filters2.IParseCallback;
 import org.omegat.filters2.TranslationException;
 import org.omegat.filters2.master.FilterMaster;
+import org.omegat.gui.glossary.GlossaryEntry;
 import org.omegat.util.Language;
+import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
 import org.omegat.util.StaticUtils;
 
@@ -96,6 +98,7 @@ public class Searcher {
      */
     public List<SearchResultEntry> getSearchResults(SearchExpression expression) throws TranslationException,
             PatternSyntaxException, IOException {
+        m_searchExpression = expression;
         String text = expression.text;
         String author = expression.author;
 
@@ -108,7 +111,6 @@ public class Searcher {
 
         m_searchDir = expression.rootDir;
         m_searchRecursive = expression.recursive;
-        m_tmSearch = expression.tm;
         m_allResults = expression.allResults;
         m_searchSource = expression.searchSource;
         m_searchTarget = expression.searchTarget;
@@ -226,27 +228,25 @@ public class Searcher {
         // reset the number of search hits
         m_numFinds = 0;
 
-        // search through all project entries
-        IProject dataEngine = m_project;
-        for (int i = 0; i < m_project.getAllEntries().size(); i++) {
-            // stop searching if the max. nr of hits has been reached
-            if (m_numFinds >= m_maxResults) {
-                break;
-            }
-            // get the source and translation of the next entry
-            SourceTextEntry ste = dataEngine.getAllEntries().get(i);
-            String srcText = ste.getSrcText();
-            TMXEntry te = m_project.getTranslationInfo(ste);
-            String locText = te.isTranslated() ? te.translation : "";
+        // search the Memory, if requested
+        if (m_searchExpression.memory) {
+            // search through all project entries
+            IProject dataEngine = m_project;
+            for (int i = 0; i < m_project.getAllEntries().size(); i++) {
+                // stop searching if the max. nr of hits has been reached
+                if (m_numFinds >= m_maxResults) {
+                    return;
+                }
+                // get the source and translation of the next entry
+                SourceTextEntry ste = dataEngine.getAllEntries().get(i);
+                TMXEntry te = m_project.getTranslationInfo(ste);
 
-            checkEntry(srcText, locText, te, i, null);
-            if (stopCallback.isStopped()) {
-                return;
+                checkEntry(ste.getSrcText(), te.translation, te, i, null);
+                if (stopCallback.isStopped()) {
+                    return;
+                }
             }
-        }
 
-        // search the TM, if requested
-        if (m_tmSearch) {
             // search in orphaned
             
             m_project.iterateByDefaultTranslations(new IProject.DefaultTranslationsIterator() {
@@ -282,7 +282,10 @@ public class Searcher {
                     }
                 }
             });
+        }
 
+        // search the TM, if requested
+        if (m_searchExpression.tm) {
             // Search TM entries, unless we search for date or author.
             // They are not loaded from external TM, so skip the search in
             // that case.
@@ -290,13 +293,34 @@ public class Searcher {
                 for (Map.Entry<String, ExternalTMX> tmEn : m_project.getTransMemories().entrySet()) {
                     final String fileTM = tmEn.getKey();
                     if (!searchEntries(tmEn.getValue().getEntries(), fileTM, false)) return;
+                    if (stopCallback.isStopped()) {
+                        return;
+                    }
                 }
                 for (Map.Entry<Language, ProjectTMX> tmEn : m_project.getOtherTargetLanguageTMs().entrySet()) {
                     final Language langTM = tmEn.getKey();
                     if (!searchEntries(tmEn.getValue().getDefaults(), langTM.getLanguage(), true)) return;
                     if (!searchEntries(tmEn.getValue().getAlternatives(), langTM.getLanguage(), true)) return;
+                    if (stopCallback.isStopped()) {
+                        return;
+                    }
                 }
+            }
+        }
 
+        // search the TM, if requested
+        if (m_searchExpression.glossary) {
+            String intro = OStrings.getString("SW_GLOSSARY_RESULT");
+            List<GlossaryEntry> entries = Core.getGlossaryManager().getGlossaryEntries(m_searchExpression.text);
+            for (GlossaryEntry en : entries) {
+                checkEntry(en.getSrcText(), en.getLocText(), null, -1, intro);
+                // stop searching if the max. nr of hits has been reached
+                if (m_numFinds >= m_maxResults) {
+                    return;
+                }
+                if (stopCallback.isStopped()) {
+                    return;
+                }
             }
         }
     }
@@ -366,6 +390,11 @@ public class Searcher {
             }
         }
 
+        if (m_searchExpression.searchTranslatedOnly) {
+            if (locText == null) {
+                return;
+            }
+        }
         // if the search expression is satisfied, report the hit
         if ((srcMatches != null || targetMatches != null || noteMatches != null)
                 && (!m_searchAuthor || entry != null && searchAuthor(entry))
@@ -424,7 +453,7 @@ public class Searcher {
         @Override
         protected void addSegment(String id, short segmentIndex, String segmentSource, String segmentTranslation,
                 boolean segmentTranslationFuzzy, String comment, String prevSegment, String nextSegment, String path) {
-            searchText(segmentSource, filename);
+            searchText(segmentSource, segmentTranslation, filename);
         }
     }
 
@@ -523,7 +552,7 @@ public class Searcher {
     // ///////////////////////////////////////////////////////////////
     // interface used by FileHandlers
 
-    public void searchText(String seg, String filename) {
+    public void searchText(String seg, String translation, String filename) {
         // don't look further if the max. nr of hits has been reached
         if (m_numFinds >= m_maxResults)
             return;
@@ -532,6 +561,11 @@ public class Searcher {
             return;
         }
 
+        if (m_searchExpression.searchTranslatedOnly) {
+            if (translation == null) {
+                return;
+            }
+        }
         if (searchString(seg)) {
             SearchMatch[] matches = foundMatches.toArray(new SearchMatch[foundMatches.size()]);
             // found a match - do something about it
@@ -547,7 +581,6 @@ public class Searcher {
     private IProject m_project;
     private String m_searchDir;
     private boolean m_searchRecursive;
-    private boolean m_tmSearch;
     private boolean m_allResults;
     private boolean m_searchSource;
     private boolean m_searchTarget;
@@ -566,6 +599,8 @@ public class Searcher {
 
     private int m_numFinds;
     private int m_maxResults;
+
+    private SearchExpression m_searchExpression;
 
     private final ISearchCheckStop stopCallback;
     private final List<SearchMatch> foundMatches = new ArrayList<SearchMatch>();

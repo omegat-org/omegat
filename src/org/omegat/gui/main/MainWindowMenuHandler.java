@@ -310,7 +310,6 @@ public class MainWindowMenuHandler {
             selection.trim();
 
         SearchWindowController search = new SearchWindowController(mainWindow, selection);
-        search.setVisible(true);
         mainWindow.addSearchWindow(search);
     }
 

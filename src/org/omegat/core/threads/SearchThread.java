@@ -56,56 +56,15 @@ public class SearchThread extends Thread implements Searcher.ISearchCheckStop {
      * 
      * @param window
      *            search window for display results
-     * @param text
-     *            string to search for
-     * @param rootDir
-     *            folder to search in
-     * @param recursive
-     *            search in subfolders of rootDir too
-     * @param exact
-     *            search for a substring, including wildcards (*?)
-     * @param keyword
-     *            search for keywords, including wildcards (*?)
-     * @param regex
-     *            search based on regular expressions
-     * @param caseSensitive
-     *            search case sensitive
-     * @param tm
-     *            search in legacy and orphan TM strings too
-     * @param allResults
-     *            include duplicate results
-     * @param searchSource
-     *            search in source text
-     * @param searchTarget
-     *            search in target text
-     * @param searchAuthor
-     *            search for tmx segments modified by author id/name
-     * @param author
-     *            string to search for in TMX attribute modificationId
-     * @param searchDateAfter
-     *            search for translation segments modified after the given date
-     * @param dateAfter
-     *            the date after which the modification date has to be
-     * @param searchDateBefore
-     *            search for translation segments modified before the given date
-     * @param dateBefore
-     *            the date before which the modification date has to be
-     * @param numberOfResults
-     *            the maximum number of results returned by the thread
+     * @param expression
+     *            search expression
      * @internal The main loop (in the run method) waits for the variable
      *           m_searching to be set to true. This variable is set to true in
      *           this function on successful setting of the search parameters.
      */
-    public SearchThread(SearchWindowController window, String text, String rootDir, boolean recursive, boolean exact,
-            boolean keyword, boolean regex, boolean caseSensitive, boolean tm, boolean allResults,
-            boolean searchSource, boolean searchTarget, boolean searchNotes, boolean searchAuthor, String author,
-            boolean searchDateAfter, long dateAfter, boolean searchDateBefore, long dateBefore,
-            int numberOfResults) {
+    public SearchThread(SearchWindowController window, SearchExpression expression) {
         m_window = window;
-
-        m_searchExpression = new SearchExpression(text, rootDir, recursive, exact, keyword, regex,
-                caseSensitive, tm, allResults, searchSource, searchTarget, searchNotes, searchAuthor, author,
-                searchDateAfter, dateAfter, searchDateBefore, dateBefore, numberOfResults);
+        m_searchExpression = expression;
     }
 
     // /////////////////////////////////////////////////////////

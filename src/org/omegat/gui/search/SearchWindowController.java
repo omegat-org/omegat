@@ -8,7 +8,7 @@
                2009 Didier Briel
                2010 Martin Fleurke, Antonio Vilei, Didier Briel
                2012 Didier Briel
-               2013 Aaron Madlon-Kay
+               2013 Aaron Madlon-Kay, Alex Buloichik
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -29,18 +29,10 @@
 
 package org.omegat.gui.search;
 
-import java.awt.Color;
-import java.awt.Container;
-import java.awt.Font;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.FocusEvent;
-import java.awt.event.FocusListener;
-import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
+import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.File;
 import java.text.ParseException;
@@ -51,30 +43,16 @@ import java.util.List;
 
 import javax.swing.AbstractAction;
 import javax.swing.Action;
-import javax.swing.Box;
-import javax.swing.ButtonGroup;
-import javax.swing.JButton;
-import javax.swing.JCheckBox;
 import javax.swing.JComponent;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JRadioButton;
-import javax.swing.JScrollPane;
-import javax.swing.JSpinner;
-import javax.swing.JTextField;
 import javax.swing.KeyStroke;
 import javax.swing.SpinnerDateModel;
-import javax.swing.SpinnerModel;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
-import javax.swing.text.Document;
-import javax.swing.text.PlainDocument;
-import javax.swing.text.StringContent;
-import javax.swing.undo.UndoManager;
 
 import org.omegat.core.Core;
+import org.omegat.core.search.SearchExpression;
 import org.omegat.core.search.SearchResultEntry;
 import org.omegat.core.threads.SearchThread;
 import org.omegat.gui.main.MainWindow;
@@ -86,7 +64,6 @@ import org.omegat.util.StaticUtils;
 import org.omegat.util.StringUtil;
 import org.omegat.util.gui.OmegaTFileChooser;
 import org.omegat.util.gui.UIThreadsUtil;
-import org.openide.awt.Mnemonics;
 
 /**
  * This is a window that appears when user'd like to search for something. For
@@ -99,86 +76,22 @@ import org.openide.awt.Mnemonics;
  * @author Martin Fleurke
  * @author Antonio Vilei
  * @author Aaron Madlon-Kay
+ * @author Alex Buloichik (alex73mail@gmail.com)
  */
-@SuppressWarnings("serial")
-public class SearchWindowController extends JFrame {
-    // public SearchWindow(MainWindow par, SearchThread th, String startText)
+public class SearchWindowController {
+
+    SearchWindowForm form;
+
     public SearchWindowController(MainWindow par, String startText) {
-        // super(par, false);
+        form = new SearchWindowForm();
+
         m_parent = par;
 
         m_dateFormat = new SimpleDateFormat(SAVED_DATE_FORMAT);
 
-        // box Search bSearch
-        m_searchLabel = new JLabel();
-        m_searchField = new MFindField();
-
-        if (startText != null)
-            m_searchField.setText(startText);
-        m_searchButton = new JButton();
-        Box bSearch = Box.createHorizontalBox();
-        bSearch.add(m_searchLabel);
-        bSearch.add(m_searchField);
-        bSearch.add(Box.createHorizontalStrut(H_MARGIN));
-        bSearch.add(m_searchButton);
-
-        m_exactSearchRB = new JRadioButton();
-        m_keywordSearchRB = new JRadioButton();
-        m_regexpSearchRB = new JRadioButton();
-        m_resultsLabel = new JLabel();
-
-        ButtonGroup bg = new ButtonGroup();
-        bg.add(m_exactSearchRB);
-        bg.add(m_keywordSearchRB);
-        bg.add(m_regexpSearchRB);
-
-        // box Radio Box bRB
-        Box bRB = Box.createHorizontalBox();
-        bRB.add(m_exactSearchRB);
-        bRB.add(Box.createHorizontalStrut(H_MARGIN));
-        bRB.add(m_keywordSearchRB);
-        bRB.add(Box.createHorizontalStrut(H_MARGIN));
-        bRB.add(m_regexpSearchRB);
-        bRB.add(Box.createHorizontalStrut(H_MARGIN));
-        bRB.add(m_resultsLabel);
-        bRB.add(Box.createHorizontalGlue());
-
-        m_caseCB = new JCheckBox();
-        m_searchSourceCB = new JCheckBox();
-        m_searchTargetCB = new JCheckBox();
-        m_searchNotesCB = new JCheckBox();
-        m_tmSearchCB = new JCheckBox();
-        m_allResultsCB = new JCheckBox();
-
-        // box OptionsBox bOB
-        Box bOB = Box.createHorizontalBox();
-        bOB.add(m_caseCB);
-        bOB.add(Box.createHorizontalStrut(H_MARGIN));
-        bOB.add(m_searchSourceCB);
-        bOB.add(Box.createHorizontalStrut(H_MARGIN));
-        bOB.add(m_searchTargetCB);
-        bOB.add(Box.createHorizontalStrut(H_MARGIN));
-        bOB.add(m_searchNotesCB);
-        bOB.add(Box.createHorizontalStrut(H_MARGIN));
-        bOB.add(m_tmSearchCB);
-        bOB.add(Box.createHorizontalStrut(H_MARGIN));
-        bOB.add(m_allResultsCB);
-
-        m_advancedButton = new JButton();
-
-        // Box for advanced options button
-        Box bAO = Box.createHorizontalBox();
-        bAO.add(m_advancedButton);
-        bAO.add(Box.createHorizontalGlue());
-
-        // box AuthorBox
-        m_authorCB = new JCheckBox();
-        m_authorField = new MFindField();
-        m_authorField.setEditable(false);
-        m_authorField.setDefaultText(OStrings.getString("TF_CUR_SEGMENT_UNKNOWN_AUTHOR"));
-        bAB = Box.createHorizontalBox();
-        bAB.add(m_authorCB);
-        bAB.add(m_authorField);
+        if (startText != null) {
+            form.m_searchField.setText(startText);
+        }
 
         // box DateBox
         Calendar calendar = Calendar.getInstance();
@@ -186,198 +99,115 @@ public class SearchWindowController extends JFrame {
         calendar.add(Calendar.YEAR, -100);
         Date earliestDate = calendar.getTime();
         Date latestDate = initDate;
+
         m_dateFromModel = new SpinnerDateModel(initDate, earliestDate, latestDate, Calendar.YEAR);
-        m_dateFromCB = new JCheckBox();
-        m_dateFromSpinner = new JSpinner(m_dateFromModel);
-        m_dateFromButton = new JButton();
-        bDB = Box.createHorizontalBox();
-        bDB.add(m_dateFromCB);
-        bDB.add(m_dateFromSpinner);
-        bDB.add(m_dateFromButton);
-        bDB.add(Box.createHorizontalStrut(H_MARGIN));
-        bDB.add(Box.createHorizontalGlue());
+        form.m_dateFromSpinner.setModel(m_dateFromModel);
 
         m_dateToModel = new SpinnerDateModel(initDate, earliestDate, latestDate, Calendar.YEAR);
-        m_dateToCB = new JCheckBox();
-        m_dateToSpinner = new JSpinner(m_dateToModel);
-        m_dateToButton = new JButton();
-        bDB.add(m_dateToCB);
-        bDB.add(m_dateToSpinner);
-        bDB.add(m_dateToButton);
+        form.m_dateToSpinner.setModel(m_dateToModel);
 
         // Box Number of results
-        m_numberModel = new SpinnerNumberModel(OConsts.ST_MAX_SEARCH_RESULTS, 1, Integer.MAX_VALUE, 1);
-        m_numberOfResults = new JSpinner(m_numberModel);
-        m_numberLabel = new JLabel();
-        bNbr = Box.createHorizontalBox();
-        bNbr.add(m_numberLabel);
-        bNbr.add(m_numberOfResults);
-        bNbr.add(Box.createHorizontalStrut(H_MARGIN));
-        bNbr.add(Box.createHorizontalGlue());
-        // Dummy field to limit previous field size
-        m_dummy = new JSpinner();
-        m_dummy.setVisible(false);
-        bNbr.add(m_dummy);
-        bNbr.add(Box.createHorizontalStrut(H_MARGIN));
-        bNbr.add(Box.createHorizontalGlue());
-        bNbr.add(m_dummy);
+        SpinnerNumberModel m_numberModel = new SpinnerNumberModel(OConsts.ST_MAX_SEARCH_RESULTS, 1, Integer.MAX_VALUE,
+                1);
+        form.m_numberOfResults.setModel(m_numberModel);
 
-        m_viewer = new EntryListPane();
-        JScrollPane viewerScroller = new JScrollPane(m_viewer);
+        loadPreferences();
 
-        // box Directory bDir
-        m_dirLabel = new JLabel();
-        m_dirField = new JTextField();
-        m_dirField.setEditable(false);
-        m_dirButton = new JButton();
-        Box bDir = Box.createHorizontalBox();
-        bDir.add(m_dirLabel);
-        bDir.add(m_dirField);
-        bDir.add(Box.createHorizontalStrut(H_MARGIN));
-        bDir.add(m_dirButton);
+        ((EntryListPane) form.m_viewer).setFont(); // Otherwise, the
+                                                   // user-defined font is not
+                                                   // used
 
-        m_dirCB = new JCheckBox();
-        m_dirCB.setSelected(false);
-        m_recursiveCB = new JCheckBox();
-        m_recursiveCB.setSelected(true);
-        m_recursiveCB.setEnabled(false);
+        if (!Core.getProject().isProjectLoaded()) {
+            // restrict user to file only access
+            form.m_dirCB.setSelected(true);
+            form.m_dirCB.setEnabled(false);
+            form.m_cbSearchInGlossaries.setSelected(false);
+            form.m_cbSearchInGlossaries.setEnabled(false);
+            form.m_cbSearchInMemory.setSelected(false);
+            form.m_cbSearchInMemory.setEnabled(false);
+            form.m_cbSearchInTMs.setSelected(false);
+            form.m_cbSearchInTMs.setEnabled(false);
+            form.m_dirField.setEditable(true);
 
-        m_removeFilterButton = new JButton();
-        m_removeFilterButton.setEnabled(false);
-        m_filterButton = new JButton();
-        m_filterButton.setEnabled(false);
-        m_dismissButton = new JButton();
+            // update enabled/selected status of options
+            updateOptionStatus();
+        }
 
-        // box CheckBox
-        Box bCB = Box.createHorizontalBox();
-        bCB.add(m_dirCB);
-        bCB.add(Box.createHorizontalStrut(H_MARGIN));
-        bCB.add(m_recursiveCB);
-        bCB.add(Box.createHorizontalGlue());
-        bCB.add(m_removeFilterButton);
-        bCB.add(m_filterButton);
-        bCB.add(m_dismissButton);
+        form.m_searchField.requestFocus();
 
-        // ////////////////////////////////////
-        // layout container
-        Container cp = getContentPane();
-        GridBagLayout gridbag = new GridBagLayout();
-        GridBagConstraints c = new GridBagConstraints();
-        cp.setLayout(gridbag);
+        initActions();
 
-        c.insets = new Insets(3, 3, 3, 3);
-        c.anchor = GridBagConstraints.NORTHWEST;
-        c.weighty = 0.0;
-        c.weightx = 1.0;
-        c.fill = GridBagConstraints.HORIZONTAL;
-        c.gridwidth = GridBagConstraints.REMAINDER;
+        form.setVisible(true);
+    }
 
-        // search controls
-        gridbag.setConstraints(bSearch, c);
-        cp.add(bSearch);
-
-        // search type (exact/keyword/regex) + results counter
-        gridbag.setConstraints(bRB, c);
-        cp.add(bRB);
-
-        // search options (case/source/target/TM/all results)
-        gridbag.setConstraints(bOB, c);
-        cp.add(bOB);
-
-        // author search
-        gridbag.setConstraints(bAB, c);
-        cp.add(bAB);
-
-        // date search
-        gridbag.setConstraints(bDB, c);
-        cp.add(bDB);
-
-        // number of results
-        gridbag.setConstraints(bNbr, c);
-        cp.add(bNbr);
-
-        // advanced options button
-        gridbag.setConstraints(bAO, c);
-        cp.add(bAO);
-
-        // view pane
-        c.weighty = 3.0;
-        c.fill = GridBagConstraints.BOTH;
-        gridbag.setConstraints(viewerScroller, c);
-        cp.add(viewerScroller);
-
-        // directory controls
-        c.weighty = 0.0;
-        c.fill = GridBagConstraints.HORIZONTAL;
-        c.anchor = GridBagConstraints.SOUTHWEST;
-        gridbag.setConstraints(bDir, c);
-        cp.add(bDir);
-
-        // directory checkboxes
-        gridbag.setConstraints(bCB, c);
-        cp.add(bCB);
+    void initActions() {
 
         // ///////////////////////////////////
         // action listeners
-        m_dismissButton.addActionListener(new ActionListener() {
+        form.m_dismissButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 doCancel();
             }
         });
-        m_filterButton.addActionListener(new ActionListener() {
+        form.m_filterButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 doFilter();
             }
         });
-        m_removeFilterButton.addActionListener(new ActionListener() {
+        form.m_removeFilterButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 doRemoveFilter();
             }
         });
 
-        m_searchButton.addActionListener(new ActionListener() {
+        form.m_searchButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 doSearch();
             }
         });
+        ((MFindField) form.m_searchField).enterActionListener = new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                doSearch();
+            }
+        };
 
-        m_advancedButton.addActionListener(new ActionListener() {
+        form.m_advancedButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 toggleAdvancedOptions();
             }
         });
 
-        m_authorCB.addActionListener(new ActionListener() {
+        form.m_authorCB.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 enableDisableAuthor();
             }
         });
 
-        m_dateToCB.addActionListener(new ActionListener() {
+        form.m_dateToCB.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 enableDisableDateTo();
             }
         });
 
-        m_dateToButton.addActionListener(new ActionListener() {
+        form.m_dateToButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 doResetDateTo();
             }
         });
 
-        m_dateFromButton.addActionListener(new ActionListener() {
+        form.m_dateFromButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 doResetDateFrom();
             }
         });
 
-        m_dateFromCB.addActionListener(new ActionListener() {
+        form.m_dateFromCB.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 enableDisableDateFrom();
             }
         });
 
-        m_dirButton.addActionListener(new ActionListener() {
+        form.m_dirButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 doBrowseDirectory();
             }
@@ -390,8 +220,8 @@ public class SearchWindowController extends JFrame {
                 doCancel();
             }
         };
-        getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(escape, "ESCAPE");
-        getRootPane().getActionMap().put("ESCAPE", escapeAction);
+        form.getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(escape, "ESCAPE");
+        form.getRootPane().getActionMap().put("ESCAPE", escapeAction);
 
         // need to control check boxes and radio buttons manually
         //
@@ -401,112 +231,67 @@ public class SearchWindowController extends JFrame {
         //
         // keep track of settings and only show what are valid choices
 
-        m_exactSearchRB.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                // move focus to search edit field
-                m_searchField.requestFocus();
+        form.m_exactSearchRB.addActionListener(searchFieldRequestFocus);
 
-            }
-        });
+        form.m_keywordSearchRB.addActionListener(searchFieldRequestFocus);
 
-        m_keywordSearchRB.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                // move focus to search edit field
-                m_searchField.requestFocus();
-            }
-        });
+        form.m_regexpSearchRB.addActionListener(searchFieldRequestFocus);
 
-        m_regexpSearchRB.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                // move focus to search edit field
-                m_searchField.requestFocus();
-            }
-        });
+        form.m_caseCB.addActionListener(searchFieldRequestFocus);
 
-        m_caseCB.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                // move focus to search edit field
-                m_searchField.requestFocus();
-            }
-        });
+        form.m_searchSourceCB.addActionListener(searchFieldRequestFocus);
 
-        m_searchSourceCB.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                // move focus to search edit field
-                m_searchField.requestFocus();
-            }
-        });
+        form.m_searchTargetCB.addActionListener(searchFieldRequestFocus);
 
-        m_searchTargetCB.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                // move focus to search edit field
-                m_searchField.requestFocus();
-            }
-        });
-        
-        m_searchNotesCB.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                // move focus to search edit field
-                m_searchField.requestFocus();
-            }
-        });
+        form.m_searchNotesCB.addActionListener(searchFieldRequestFocus);
 
-        m_tmSearchCB.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                m_tmSearch = m_tmSearchCB.isSelected();
+        form.m_cbSearchInGlossaries.addActionListener(searchFieldRequestFocus);
+        form.m_cbSearchInMemory.addActionListener(searchFieldRequestFocus);
+        form.m_cbSearchInTMs.addActionListener(searchFieldRequestFocus);
 
-                // move focus to search edit field
-                m_searchField.requestFocus();
-            }
-        });
+        form.m_allResultsCB.addActionListener(searchFieldRequestFocus);
 
-        m_allResultsCB.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                // move focus to search edit field
-                m_searchField.requestFocus();
-            }
-        });
-
-        m_dirCB.addActionListener(new ActionListener() {
+        form.m_dirCB.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 updateOptionStatus();
 
                 // move focus to dir edit field if dir search is selected
                 // otherwise move focus to search field
-                if (m_dirCB.isSelected())
-                    m_dirField.requestFocus();
+                if (form.m_dirCB.isSelected())
+                    form.m_dirField.requestFocus();
                 else
-                    m_searchField.requestFocus();
+                    form.m_searchField.requestFocus();
             }
         });
 
-        m_numberOfResults.addChangeListener(new ChangeListener() {
+        form.m_numberOfResults.addChangeListener(new ChangeListener() {
             public void stateChanged(ChangeEvent e) {
                 // move focus to search edit field
-                m_searchField.requestFocus();
+                form.m_searchField.requestFocus();
             }
         });
 
-        updateUIText();
-        loadPreferences();
+        form.addWindowListener(new WindowAdapter() {
+            public void windowClosed(WindowEvent e) {
+                // save user preferences
+                savePreferences();
 
-        m_viewer.setFont(); // Otherwise, the user-defined font is not used
-        m_viewer.setText(OStrings.getString("SW_VIEWER_TEXT"));
+                // notify main window
+                m_parent.removeSearchWindow(SearchWindowController.this);
 
-        if (!Core.getProject().isProjectLoaded()) {
-            // restrict user to file only access
-            m_dirCB.setSelected(true);
-            m_dirCB.setEnabled(false);
-            m_tmSearchCB.setSelected(false);
-            m_tmSearchCB.setEnabled(false);
-            m_dirField.setEditable(true);
-
-            // update enabled/selected status of options
-            updateOptionStatus();
-        }
-
-        m_searchField.requestFocus();
+                if (m_thread != null) {
+                    m_thread.fin();
+                }
+            }
+        });
     }
+
+    ActionListener searchFieldRequestFocus = new ActionListener() {
+        public void actionPerformed(ActionEvent e) {
+            // move focus to search edit field
+            form.m_searchField.requestFocus();
+        }
+    };
 
     /**
      * Loads the position and size of the search window and the button selection
@@ -519,75 +304,54 @@ public class SearchWindowController extends JFrame {
             String dy = Preferences.getPreference(Preferences.SEARCHWINDOW_Y);
             int x = Integer.parseInt(dx);
             int y = Integer.parseInt(dy);
-            setLocation(x, y);
+            form.setLocation(x, y);
             String dw = Preferences.getPreference(Preferences.SEARCHWINDOW_WIDTH);
             String dh = Preferences.getPreference(Preferences.SEARCHWINDOW_HEIGHT);
             int w = Integer.parseInt(dw);
             int h = Integer.parseInt(dh);
-            setSize(w, h);
+            form.setSize(w, h);
         } catch (NumberFormatException nfe) {
             // set default size and position
-            setSize(800, 700);
+            form.setSize(800, 700);
         }
 
         // search dir options
-        String searchFiles = Preferences.getPreference(Preferences.SEARCHWINDOW_SEARCH_FILES);
-        if (StringUtil.isEmpty(searchFiles))
-            searchFiles = "false";
-        m_dirCB.setSelected(Boolean.valueOf(searchFiles).booleanValue());
-        String searchDir = Preferences.getPreference(Preferences.SEARCHWINDOW_DIR);
-        if (!StringUtil.isEmpty(searchDir))
-            m_dirField.setText(searchDir);
-        m_dirField.setEditable(m_dirCB.isSelected());
-        String recursive = Preferences.getPreference(Preferences.SEARCHWINDOW_RECURSIVE);
-        if (StringUtil.isEmpty(recursive))
-            recursive = "true";
-        m_recursiveCB.setSelected(Boolean.valueOf(recursive).booleanValue());
-        m_recursiveCB.setEnabled(m_dirCB.isSelected());
+        form.m_dirCB.setSelected(Preferences.isPreferenceDefault(Preferences.SEARCHWINDOW_SEARCH_FILES, false));
+        form.m_dirField.setText(Preferences.getPreferenceDefault(Preferences.SEARCHWINDOW_DIR, ""));
+        form.m_dirField.setEditable(form.m_dirCB.isSelected());
+        form.m_recursiveCB.setSelected(Preferences.isPreferenceDefault(Preferences.SEARCHWINDOW_RECURSIVE, true));
+        form.m_recursiveCB.setEnabled(form.m_dirCB.isSelected());
 
         // search type
-        String searchType = Preferences.getPreference(Preferences.SEARCHWINDOW_SEARCH_TYPE);
-        if (StringUtil.isEmpty(searchType))
-            searchType = SEARCH_TYPE_EXACT;
-        m_exactSearchRB.setSelected(searchType.equals(SEARCH_TYPE_EXACT));
-        m_keywordSearchRB.setSelected(searchType.equals(SEARCH_TYPE_KEYWORD));
-        m_regexpSearchRB.setSelected(searchType.equals(SEARCH_TYPE_REGEXP));
+        String searchType = Preferences.getPreferenceDefault(Preferences.SEARCHWINDOW_SEARCH_TYPE, SEARCH_TYPE_EXACT);
+        form.m_exactSearchRB.setSelected(searchType.equals(SEARCH_TYPE_EXACT));
+        form.m_keywordSearchRB.setSelected(searchType.equals(SEARCH_TYPE_KEYWORD));
+        form.m_regexpSearchRB.setSelected(searchType.equals(SEARCH_TYPE_REGEXP));
 
         // case sensitivity
-        String caseSens = Preferences.getPreference(Preferences.SEARCHWINDOW_CASE_SENSITIVE);
-        if (StringUtil.isEmpty(caseSens))
-            caseSens = "false";
-        m_caseCB.setSelected(Boolean.valueOf(caseSens).booleanValue());
+        form.m_caseCB.setSelected(Preferences.isPreferenceDefault(Preferences.SEARCHWINDOW_CASE_SENSITIVE, false));
 
         // search source
-        String searchSource = Preferences.getPreference(Preferences.SEARCHWINDOW_SEARCH_SOURCE);
-        if (StringUtil.isEmpty(searchSource))
-            searchSource = "true";
-        m_searchSourceCB.setSelected(Boolean.valueOf(searchSource).booleanValue());
+        form.m_searchSourceCB
+                .setSelected(Preferences.isPreferenceDefault(Preferences.SEARCHWINDOW_SEARCH_SOURCE, true));
 
         // search target
-        String searchTarget = Preferences.getPreference(Preferences.SEARCHWINDOW_SEARCH_TARGET);
-        if (StringUtil.isEmpty(searchTarget))
-            searchTarget = "true";
-        m_searchTargetCB.setSelected(Boolean.valueOf(searchTarget).booleanValue());
-        
-        String searchNotes = Preferences.getPreference(Preferences.SEARCHWINDOW_SEARCH_NOTES);
-        if (StringUtil.isEmpty(searchNotes))
-            searchNotes = "true";
-        m_searchNotesCB.setSelected(Boolean.valueOf(searchNotes).booleanValue());
+        form.m_searchTargetCB
+                .setSelected(Preferences.isPreferenceDefault(Preferences.SEARCHWINDOW_SEARCH_TARGET, true));
 
-        // TM search
-        String tmSearch = Preferences.getPreference(Preferences.SEARCHWINDOW_TM_SEARCH);
-        if (StringUtil.isEmpty(tmSearch))
-            tmSearch = "true";
-        m_tmSearchCB.setSelected(Boolean.valueOf(tmSearch).booleanValue());
-        m_tmSearch = Boolean.valueOf(tmSearch).booleanValue();
+        form.m_cbTranslated.setSelected(Preferences.isPreferenceDefault(Preferences.SEARCHWINDOW_SEARCH_TRANSLATED,
+                false));
+
+        form.m_searchNotesCB.setSelected(Preferences.isPreferenceDefault(Preferences.SEARCHWINDOW_SEARCH_NOTES, true));
+
+        form.m_cbSearchInGlossaries.setSelected(Preferences.isPreferenceDefault(
+                Preferences.SEARCHWINDOW_GLOSSARY_SEARCH, true));
+        form.m_cbSearchInMemory.setSelected(Preferences.isPreferenceDefault(Preferences.SEARCHWINDOW_MEMORY_SEARCH,
+                true));
+        form.m_cbSearchInTMs.setSelected(Preferences.isPreferenceDefault(Preferences.SEARCHWINDOW_TM_SEARCH, true));
 
         // all results
-        String allResults = Preferences.getPreference(Preferences.SEARCHWINDOW_ALL_RESULTS);
-        if (StringUtil.isEmpty(allResults))
-            allResults = "false";
-        m_allResultsCB.setSelected(Boolean.valueOf(allResults).booleanValue());
+        form.m_allResultsCB.setSelected(Preferences.isPreferenceDefault(Preferences.SEARCHWINDOW_ALL_RESULTS, false));
 
         // update the enabled/selected status of normal options
         updateOptionStatus();
@@ -604,58 +368,48 @@ public class SearchWindowController extends JFrame {
      */
     private void savePreferences() {
         // window size and position
-        Preferences.setPreference(Preferences.SEARCHWINDOW_WIDTH, getWidth());
-        Preferences.setPreference(Preferences.SEARCHWINDOW_HEIGHT, getHeight());
-        Preferences.setPreference(Preferences.SEARCHWINDOW_X, getX());
-        Preferences.setPreference(Preferences.SEARCHWINDOW_Y, getY());
+        Preferences.setPreference(Preferences.SEARCHWINDOW_WIDTH, form.getWidth());
+        Preferences.setPreference(Preferences.SEARCHWINDOW_HEIGHT, form.getHeight());
+        Preferences.setPreference(Preferences.SEARCHWINDOW_X, form.getX());
+        Preferences.setPreference(Preferences.SEARCHWINDOW_Y, form.getY());
 
         // search type
-        if (m_exactSearchRB.isSelected())
+        if (form.m_exactSearchRB.isSelected())
             Preferences.setPreference(Preferences.SEARCHWINDOW_SEARCH_TYPE, SEARCH_TYPE_EXACT);
-        else if (m_keywordSearchRB.isSelected())
+        else if (form.m_keywordSearchRB.isSelected())
             Preferences.setPreference(Preferences.SEARCHWINDOW_SEARCH_TYPE, SEARCH_TYPE_KEYWORD);
-        else if (m_regexpSearchRB.isSelected())
+        else if (form.m_regexpSearchRB.isSelected())
             Preferences.setPreference(Preferences.SEARCHWINDOW_SEARCH_TYPE, SEARCH_TYPE_REGEXP);
 
         // search options
-        Preferences.setPreference(Preferences.SEARCHWINDOW_CASE_SENSITIVE,
-                Boolean.toString(m_caseCB.isSelected()));
-        Preferences.setPreference(Preferences.SEARCHWINDOW_SEARCH_SOURCE,
-                Boolean.toString(m_searchSourceCB.isSelected()));
-        Preferences.setPreference(Preferences.SEARCHWINDOW_SEARCH_TARGET,
-                Boolean.toString(m_searchTargetCB.isSelected()));
-        Preferences.setPreference(Preferences.SEARCHWINDOW_SEARCH_NOTES,
-                Boolean.toString(m_searchNotesCB.isSelected()));
-        Preferences.setPreference(Preferences.SEARCHWINDOW_TM_SEARCH, Boolean.toString(m_tmSearch)); // don't
-                                                                                                     // use
-                                                                                                     // radio
-                                                                                                     // button
-                                                                                                     // status!
-        Preferences.setPreference(Preferences.SEARCHWINDOW_ALL_RESULTS,
-                Boolean.toString(m_allResultsCB.isSelected()));
+        Preferences.setPreference(Preferences.SEARCHWINDOW_CASE_SENSITIVE, form.m_caseCB.isSelected());
+        Preferences.setPreference(Preferences.SEARCHWINDOW_SEARCH_SOURCE, form.m_searchSourceCB.isSelected());
+        Preferences.setPreference(Preferences.SEARCHWINDOW_SEARCH_TARGET, form.m_searchTargetCB.isSelected());
+        Preferences.setPreference(Preferences.SEARCHWINDOW_SEARCH_TRANSLATED, form.m_cbTranslated.isSelected());
+
+        Preferences.setPreference(Preferences.SEARCHWINDOW_SEARCH_NOTES, form.m_searchNotesCB.isSelected());
+
+        Preferences.setPreference(Preferences.SEARCHWINDOW_GLOSSARY_SEARCH, form.m_cbSearchInGlossaries.isSelected());
+        Preferences.setPreference(Preferences.SEARCHWINDOW_MEMORY_SEARCH, form.m_cbSearchInMemory.isSelected());
+        Preferences.setPreference(Preferences.SEARCHWINDOW_TM_SEARCH, form.m_cbSearchInTMs.isSelected());
+
+        Preferences.setPreference(Preferences.SEARCHWINDOW_ALL_RESULTS, form.m_allResultsCB.isSelected());
         // advanced search options
-        Preferences.setPreference(Preferences.SEARCHWINDOW_ADVANCED_VISIBLE,
-                Boolean.toString(m_advancedVisible));
-        Preferences.setPreference(Preferences.SEARCHWINDOW_SEARCH_AUTHOR,
-                Boolean.toString(m_authorCB.isSelected()));
-        Preferences.setPreference(Preferences.SEARCHWINDOW_AUTHOR_NAME, m_authorField.getText());
-        Preferences.setPreference(Preferences.SEARCHWINDOW_DATE_FROM,
-                Boolean.toString(m_dateFromCB.isSelected()));
+        Preferences.setPreference(Preferences.SEARCHWINDOW_ADVANCED_VISIBLE, form.m_advancedVisiblePane.isVisible());
+        Preferences.setPreference(Preferences.SEARCHWINDOW_SEARCH_AUTHOR, form.m_authorCB.isSelected());
+        Preferences.setPreference(Preferences.SEARCHWINDOW_AUTHOR_NAME, form.m_authorField.getText());
+        Preferences.setPreference(Preferences.SEARCHWINDOW_DATE_FROM, form.m_dateFromCB.isSelected());
         Preferences.setPreference(Preferences.SEARCHWINDOW_DATE_FROM_VALUE,
                 m_dateFormat.format(m_dateFromModel.getDate()));
-        Preferences
-                .setPreference(Preferences.SEARCHWINDOW_DATE_TO, Boolean.toString(m_dateToCB.isSelected()));
-        Preferences.setPreference(Preferences.SEARCHWINDOW_DATE_TO_VALUE,
-                m_dateFormat.format(m_dateToModel.getDate()));
+        Preferences.setPreference(Preferences.SEARCHWINDOW_DATE_TO, form.m_dateToCB.isSelected());
+        Preferences.setPreference(Preferences.SEARCHWINDOW_DATE_TO_VALUE, m_dateFormat.format(m_dateToModel.getDate()));
         Preferences.setPreference(Preferences.SEARCHWINDOW_NUMBER_OF_RESULTS,
-                ((Integer) m_numberOfResults.getValue()));
+                ((Integer) form.m_numberOfResults.getValue()));
 
         // search dir options
-        Preferences.setPreference(Preferences.SEARCHWINDOW_DIR, m_dirField.getText());
-        Preferences.setPreference(Preferences.SEARCHWINDOW_SEARCH_FILES,
-                Boolean.toString(m_dirCB.isSelected()));
-        Preferences.setPreference(Preferences.SEARCHWINDOW_RECURSIVE,
-                Boolean.toString(m_recursiveCB.isSelected()));
+        Preferences.setPreference(Preferences.SEARCHWINDOW_DIR, form.m_dirField.getText());
+        Preferences.setPreference(Preferences.SEARCHWINDOW_SEARCH_FILES, form.m_dirCB.isSelected());
+        Preferences.setPreference(Preferences.SEARCHWINDOW_RECURSIVE, form.m_recursiveCB.isSelected());
 
         // need to explicitly save preferences
         // because project might not be open
@@ -673,12 +427,15 @@ public class SearchWindowController extends JFrame {
      */
     private void updateOptionStatus() {
         // disable TM search when searching through dirs
-        m_tmSearchCB.setEnabled(!m_dirCB.isSelected());
-        m_tmSearchCB.setSelected(!m_dirCB.isSelected() && m_tmSearch);
+        boolean enabled = !form.m_dirCB.isSelected();
+        form.m_SearchInPane.setEnabled(enabled);
+        form.m_cbSearchInGlossaries.setEnabled(enabled);
+        form.m_cbSearchInMemory.setEnabled(enabled);
+        form.m_cbSearchInTMs.setEnabled(enabled);
 
         // set dir search options
-        m_recursiveCB.setEnabled(m_dirCB.isSelected());
-        m_dirField.setEditable(m_dirCB.isSelected());
+        form.m_recursiveCB.setEnabled(form.m_dirCB.isSelected());
+        form.m_dirField.setEditable(form.m_dirCB.isSelected());
     }
 
     // //////////////////////////////////////////////////////////////
@@ -690,11 +447,12 @@ public class SearchWindowController extends JFrame {
     public void displaySearchResult(final List<SearchResultEntry> entries) {
         UIThreadsUtil.executeInSwingThread(new Runnable() {
             public void run() {
-                m_viewer.displaySearchResult(entries, ((Integer) m_numberOfResults.getValue()));
-                m_resultsLabel.setText(StaticUtils.format(OStrings.getString("SW_NR_OF_RESULTS"),
-                        new Object[] { new Integer(m_viewer.getNrEntries()) }));
-                m_filterButton.setEnabled(true);
-                m_viewer.requestFocus();
+                EntryListPane viewer = (EntryListPane) form.m_viewer;
+                viewer.displaySearchResult(entries, ((Integer) form.m_numberOfResults.getValue()));
+                form.m_resultsLabel.setText(StaticUtils.format(OStrings.getString("SW_NR_OF_RESULTS"),
+                        new Object[] { new Integer(viewer.getNrEntries()) }));
+                form.m_filterButton.setEnabled(true);
+                viewer.requestFocus();
             }
         });
     }
@@ -702,30 +460,13 @@ public class SearchWindowController extends JFrame {
     // /////////////////////////////////////////////////////////////
     // internal functions
 
-    @Override
-    public void processWindowEvent(WindowEvent w) {
-        int evt = w.getID();
-        if (evt == WindowEvent.WINDOW_CLOSING || evt == WindowEvent.WINDOW_CLOSED) {
-            // save user preferences
-            savePreferences();
-
-            // notify main window
-            m_parent.removeSearchWindow(this);
-
-            if (m_thread != null) {
-                m_thread.fin();
-            }
-        }
-        super.processWindowEvent(w);
-    }
-
     private void doBrowseDirectory() {
         OmegaTFileChooser browser = new OmegaTFileChooser();
         // String str = OStrings.getString("BUTTON_SELECT");
         // browser.setApproveButtonText(str);
         browser.setDialogTitle(OStrings.getString("SW_TITLE"));
         browser.setFileSelectionMode(OmegaTFileChooser.DIRECTORIES_ONLY);
-        String curDir = m_dirField.getText();
+        String curDir = form.m_dirField.getText();
 
         if (!curDir.equals("")) {
             File dir = new File(curDir);
@@ -734,22 +475,23 @@ public class SearchWindowController extends JFrame {
             }
         }
 
-        browser.showOpenDialog(this);
+        browser.showOpenDialog(form);
         File dir = browser.getSelectedFile();
         if (dir == null)
             return;
 
         String str = dir.getAbsolutePath() + File.separator;
-        m_dirField.setText(str);
+        form.m_dirField.setText(str);
     }
 
     private void doFilter() {
-        Core.getEditor().addFilter(m_viewer.getEntryList());
-        m_removeFilterButton.setEnabled(true);
+        EntryListPane viewer = (EntryListPane) form.m_viewer;
+        Core.getEditor().addFilter(viewer.getEntryList());
+        form.m_removeFilterButton.setEnabled(true);
     }
 
     private void doRemoveFilter() {
-        m_removeFilterButton.setEnabled(false);
+        form.m_removeFilterButton.setEnabled(false);
         Core.getEditor().removeFilter();
     }
 
@@ -760,20 +502,22 @@ public class SearchWindowController extends JFrame {
             m_thread.fin();
         }
 
-        m_searchField.requestFocus();
+        EntryListPane viewer = (EntryListPane) form.m_viewer;
 
-        m_viewer.reset();
+        form.m_searchField.requestFocus();
+
+        viewer.reset();
         String root = null;
-        if (m_dirCB.isSelected()) {
+        if (form.m_dirCB.isSelected()) {
             // make sure it's a valid directory name
-            root = m_dirField.getText();
+            root = form.m_dirField.getText();
             if (!root.endsWith(File.separator))
                 root += File.separator;
             File f = new File(root);
             if (!f.exists() || !f.isDirectory()) {
                 String error = StaticUtils.format(OStrings.getString("SW_ERROR_BAD_DIR"),
-                        new Object[] { m_dirField.getText() });
-                m_viewer.setText(error);
+                        new Object[] { form.m_dirField.getText() });
+                form.m_viewer.setText(error);
                 Log.log(error);
                 return;
             }
@@ -788,21 +532,38 @@ public class SearchWindowController extends JFrame {
         // save user preferences
         savePreferences();
 
-        if (StringUtil.isEmpty(m_searchField.getText())) {
-            setTitle(OStrings.getString("SW_TITLE"));
+        if (StringUtil.isEmpty(form.m_searchField.getText())) {
+            form.setTitle(OStrings.getString("SW_TITLE"));
         } else {
-            setTitle(m_searchField.getText() + " - OmegaT");
+            form.setTitle(form.m_searchField.getText() + " - OmegaT");
         }
 
-        // start the search in a separate thread
-        m_thread = new SearchThread(this, m_searchField.getText(), root, m_recursiveCB.isSelected(),
-                m_exactSearchRB.isSelected(), m_keywordSearchRB.isSelected(), m_regexpSearchRB.isSelected(),
-                m_caseCB.isSelected(), m_tmSearchCB.isSelected(), m_allResultsCB.isSelected(),
-                m_searchSourceCB.isSelected(), m_searchTargetCB.isSelected(), m_searchNotesCB.isSelected(), m_authorCB.isSelected(),
-                m_authorField.getText(), m_dateFromCB.isSelected(), m_dateFromModel.getDate().getTime(),
-                m_dateToCB.isSelected(), m_dateToModel.getDate().getTime(),
-                ((Integer) m_numberOfResults.getValue()));
+        SearchExpression s = new SearchExpression();
+        s.text = form.m_searchField.getText();
+        s.rootDir = root;
+        s.recursive = form.m_recursiveCB.isSelected();
+        s.exact = form.m_exactSearchRB.isSelected();
+        s.keyword = form.m_keywordSearchRB.isSelected();
+        s.regex = form.m_regexpSearchRB.isSelected();
+        s.caseSensitive = form.m_caseCB.isSelected();
+        s.glossary = form.m_cbSearchInGlossaries.isSelected();
+        s.memory = form.m_cbSearchInMemory.isSelected();
+        s.tm = form.m_cbSearchInTMs.isSelected();
+        s.allResults = form.m_allResultsCB.isSelected();
+        s.searchSource = form.m_searchSourceCB.isSelected();
+        s.searchTarget = form.m_searchTargetCB.isSelected();
+        s.searchTranslatedOnly = form.m_cbTranslated.isSelected();
+        s.searchNotes = form.m_searchNotesCB.isSelected();
+        s.searchAuthor = form.m_authorCB.isSelected();
+        s.author = form.m_authorField.getText();
+        s.searchDateAfter = form.m_dateFromCB.isSelected();
+        s.dateAfter = m_dateFromModel.getDate().getTime();
+        s.searchDateBefore = form.m_dateToCB.isSelected();
+        s.dateBefore = m_dateToModel.getDate().getTime();
+        s.numberOfResults = ((Integer) form.m_numberOfResults.getValue());
 
+        // start the search in a separate thread
+        m_thread = new SearchThread(this, s);
         m_thread.start();
     }
 
@@ -811,38 +572,42 @@ public class SearchWindowController extends JFrame {
         if (m_thread != null) {
             m_thread.fin();
         }
-        dispose();
+        form.dispose();
+    }
+
+    public void dispose() {
+        form.dispose();
     }
 
     private void toggleAdvancedOptions() {
-        m_advancedVisible = !m_advancedVisible;
+        form.m_advancedVisiblePane.setVisible(!form.m_advancedVisiblePane.isVisible());
         updateAdvancedOptionStatus();
     }
 
     private void enableDisableAuthor() {
-        boolean editable = m_authorCB.isSelected();
-        m_authorField.setEditable(editable);
+        boolean editable = form.m_authorCB.isSelected();
+        form.m_authorField.setEditable(editable);
 
         if (editable) {
             // move focus to author field
-            m_authorField.requestFocus();
+            form.m_authorField.requestFocus();
         } else {
             // move focus to search edit field
-            m_searchField.requestFocus();
+            form.m_searchField.requestFocus();
         }
     }
 
     private void enableDisableDateFrom() {
-        boolean enable = m_dateFromCB.isSelected();
-        m_dateFromSpinner.setEnabled(enable);
-        m_dateFromButton.setEnabled(enable);
+        boolean enable = form.m_dateFromCB.isSelected();
+        form.m_dateFromSpinner.setEnabled(enable);
+        form.m_dateFromButton.setEnabled(enable);
 
         if (enable) {
             // move focus to date spinner
-            m_dateFromSpinner.requestFocus();
+            form.m_dateFromSpinner.requestFocus();
         } else {
             // move focus to search edit field
-            m_searchField.requestFocus();
+            form.m_searchField.requestFocus();
         }
     }
 
@@ -861,16 +626,16 @@ public class SearchWindowController extends JFrame {
     }
 
     private void enableDisableDateTo() {
-        boolean enable = m_dateToCB.isSelected();
-        m_dateToSpinner.setEnabled(enable);
-        m_dateToButton.setEnabled(enable);
+        boolean enable = form.m_dateToCB.isSelected();
+        form.m_dateToSpinner.setEnabled(enable);
+        form.m_dateToButton.setEnabled(enable);
 
         if (enable) {
             // move focus to date spinner
-            m_dateToSpinner.requestFocus();
+            form.m_dateToSpinner.requestFocus();
         } else {
             // move focus to search edit field
-            m_searchField.requestFocus();
+            form.m_searchField.requestFocus();
         }
     }
 
@@ -879,16 +644,16 @@ public class SearchWindowController extends JFrame {
         String advancedVisible = Preferences.getPreference(Preferences.SEARCHWINDOW_ADVANCED_VISIBLE);
         if (StringUtil.isEmpty(advancedVisible))
             advancedVisible = "false";
-        m_advancedVisible = Boolean.valueOf(advancedVisible).booleanValue();
+        form.m_advancedVisiblePane.setVisible(Boolean.valueOf(advancedVisible).booleanValue());
 
         // author options
         String searchAuthor = Preferences.getPreference(Preferences.SEARCHWINDOW_SEARCH_AUTHOR);
         if (StringUtil.isEmpty(searchAuthor))
             searchAuthor = "false";
-        m_authorCB.setSelected(Boolean.valueOf(searchAuthor).booleanValue());
+        form.m_authorCB.setSelected(Boolean.valueOf(searchAuthor).booleanValue());
         String authorName = Preferences.getPreference(Preferences.SEARCHWINDOW_AUTHOR_NAME);
         if (!StringUtil.isEmpty(authorName))
-            m_authorField.setText(authorName);
+            form.m_authorField.setText(authorName);
 
         // date options
         try {
@@ -896,7 +661,7 @@ public class SearchWindowController extends JFrame {
             String dateFrom = Preferences.getPreference(Preferences.SEARCHWINDOW_DATE_FROM);
             if (StringUtil.isEmpty(dateFrom))
                 dateFrom = "false";
-            m_dateFromCB.setSelected(Boolean.valueOf(dateFrom).booleanValue());
+            form.m_dateFromCB.setSelected(Boolean.valueOf(dateFrom).booleanValue());
             String dateFromValue = Preferences.getPreference(Preferences.SEARCHWINDOW_DATE_FROM_VALUE);
             if (!StringUtil.isEmpty(dateFromValue))
                 m_dateFromModel.setValue(m_dateFormat.parse(dateFromValue));
@@ -905,75 +670,34 @@ public class SearchWindowController extends JFrame {
             String dateTo = Preferences.getPreference(Preferences.SEARCHWINDOW_DATE_TO);
             if (StringUtil.isEmpty(dateTo))
                 dateTo = "false";
-            m_dateToCB.setSelected(Boolean.valueOf(dateTo).booleanValue());
+            form.m_dateToCB.setSelected(Boolean.valueOf(dateTo).booleanValue());
             String dateToValue = Preferences.getPreference(Preferences.SEARCHWINDOW_DATE_TO_VALUE);
             if (!StringUtil.isEmpty(dateToValue))
                 m_dateToModel.setValue(m_dateFormat.parse(dateToValue));
         } catch (ParseException e) {
             // use safe settings in case of parsing error
-            m_dateFromCB.setSelected(false);
-            m_dateToCB.setSelected(false);
+            form.m_dateFromCB.setSelected(false);
+            form.m_dateToCB.setSelected(false);
         }
 
         // Number of results
-        m_numberOfResults.setValue(Preferences.getPreferenceDefault(
-                Preferences.SEARCHWINDOW_NUMBER_OF_RESULTS, OConsts.ST_MAX_SEARCH_RESULTS));
+        form.m_numberOfResults.setValue(Preferences.getPreferenceDefault(Preferences.SEARCHWINDOW_NUMBER_OF_RESULTS,
+                OConsts.ST_MAX_SEARCH_RESULTS));
 
         // if advanced options are enabled (e.g. author/date search),
         // let the user see them anyway. This is important because
         // search results will be affected by these settings
-        if (m_authorCB.isSelected() || m_dateFromCB.isSelected() || m_dateToCB.isSelected()) {
-            m_advancedVisible = true;
+        if (form.m_authorCB.isSelected() || form.m_dateFromCB.isSelected() || form.m_dateToCB.isSelected()) {
+            form.m_advancedVisiblePane.setVisible(true);
         }
     }
 
     private void updateAdvancedOptionStatus() {
-
-        bAB.setVisible(m_advancedVisible);
-        bDB.setVisible(m_advancedVisible);
-        bNbr.setVisible(m_advancedVisible);
-
-        m_authorField.setEditable(m_authorCB.isSelected());
-        m_dateFromSpinner.setEnabled(m_dateFromCB.isSelected());
-        m_dateFromButton.setEnabled(m_dateFromCB.isSelected());
-        m_dateToSpinner.setEnabled(m_dateToCB.isSelected());
-        m_dateToButton.setEnabled(m_dateToCB.isSelected());
-    }
-
-    private void updateUIText() {
-        setTitle(OStrings.getString("SW_TITLE"));
-
-        Mnemonics.setLocalizedText(m_searchLabel, OStrings.getString("SW_SEARCH_TEXT"));
-        Mnemonics.setLocalizedText(m_searchButton, OStrings.getString("BUTTON_SEARCH"));
-
-        Mnemonics.setLocalizedText(m_exactSearchRB, OStrings.getString("SW_EXACT_SEARCH"));
-        Mnemonics.setLocalizedText(m_keywordSearchRB, OStrings.getString("SW_WORD_SEARCH"));
-        Mnemonics.setLocalizedText(m_regexpSearchRB, OStrings.getString("SW_REGEXP_SEARCH"));
-
-        Mnemonics.setLocalizedText(m_searchSourceCB, OStrings.getString("SW_SEARCH_SOURCE"));
-        Mnemonics.setLocalizedText(m_searchTargetCB, OStrings.getString("SW_SEARCH_TARGET"));
-        Mnemonics.setLocalizedText(m_searchNotesCB, OStrings.getString("SW_SEARCH_NOTES"));
-
-        Mnemonics.setLocalizedText(m_advancedButton, OStrings.getString("SW_ADVANCED_OPTIONS"));
-        Mnemonics.setLocalizedText(m_authorCB, OStrings.getString("SW_AUTHOR"));
-        Mnemonics.setLocalizedText(m_dateFromButton, OStrings.getString("SW_NOW"));
-        Mnemonics.setLocalizedText(m_dateFromCB, OStrings.getString("SW_CHANGED_AFTER"));
-        Mnemonics.setLocalizedText(m_dateToCB, OStrings.getString("SW_CHANGED_BEFORE"));
-        Mnemonics.setLocalizedText(m_dateToButton, OStrings.getString("SW_NOW"));
-        Mnemonics.setLocalizedText(m_numberLabel, OStrings.getString("SW_NUMBER"));
-
-        Mnemonics.setLocalizedText(m_caseCB, OStrings.getString("SW_CASE_SENSITIVE"));
-        Mnemonics.setLocalizedText(m_tmSearchCB, OStrings.getString("SW_SEARCH_TM"));
-        Mnemonics.setLocalizedText(m_allResultsCB, OStrings.getString("SW_ALL_RESULTS"));
-
-        Mnemonics.setLocalizedText(m_dirLabel, OStrings.getString("SW_LOCATION"));
-        Mnemonics.setLocalizedText(m_dirCB, OStrings.getString("SW_DIR_SEARCH"));
-        Mnemonics.setLocalizedText(m_recursiveCB, OStrings.getString("SW_DIR_RECURSIVE"));
-        Mnemonics.setLocalizedText(m_dirButton, OStrings.getString("SW_BROWSE"));
-
-        Mnemonics.setLocalizedText(m_dismissButton, OStrings.getString("BUTTON_CLOSE"));
-        Mnemonics.setLocalizedText(m_filterButton, OStrings.getString("BUTTON_FILTER"));
-        Mnemonics.setLocalizedText(m_removeFilterButton, OStrings.getString("BUTTON_REMOVEFILTER"));
+        form.m_authorField.setEditable(form.m_authorCB.isSelected());
+        form.m_dateFromSpinner.setEnabled(form.m_dateFromCB.isSelected());
+        form.m_dateFromButton.setEnabled(form.m_dateFromCB.isSelected());
+        form.m_dateToSpinner.setEnabled(form.m_dateToCB.isSelected());
+        form.m_dateToButton.setEnabled(form.m_dateToCB.isSelected());
     }
 
     /**
@@ -999,194 +723,15 @@ public class SearchWindowController extends JFrame {
                 String fulltext = msg;
                 if (ex != null)
                     fulltext += "\n" + ex.getLocalizedMessage();
-                JOptionPane.showMessageDialog(SearchWindowController.this, fulltext, OStrings.getString("TF_ERROR"),
-                        JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(form, fulltext, OStrings.getString("TF_ERROR"), JOptionPane.ERROR_MESSAGE);
             }
         });
     }
 
-    /**
-     * "Default text" feature inspired by http://stackoverflow.com/a/1739037/448068
-     */
-    class MFindField extends JTextField implements FocusListener {
-        public MFindField() {
-            // Handle undo (CtrlCmd+Z);
-            KeyStroke undo = StaticUtils.onMacOSX() ? KeyStroke.getKeyStroke(KeyEvent.VK_Z,
-                    InputEvent.META_MASK, false) : KeyStroke.getKeyStroke(KeyEvent.VK_Z,
-                    InputEvent.CTRL_MASK, false);
-            Action undoAction = new AbstractAction() {
-                public void actionPerformed(ActionEvent e) {
-                    undo();
-                }
-            };
-            getInputMap().put(undo, "UNDO");
-            getActionMap().put("UNDO", undoAction);
-
-            // Handle redo (CtrlCmd+Y);
-            KeyStroke redo = StaticUtils.onMacOSX() ? KeyStroke.getKeyStroke(KeyEvent.VK_Y,
-                    InputEvent.META_MASK, false) : KeyStroke.getKeyStroke(KeyEvent.VK_Y,
-                    InputEvent.CTRL_MASK, false);
-            Action redoAction = new AbstractAction() {
-                public void actionPerformed(ActionEvent e) {
-                    redo();
-                }
-            };
-            getInputMap().put(redo, "REDO");
-            getActionMap().put("REDO", redoAction);
-            
-            defaultText = null;
-            normalFont = getFont();
-            defaultTextFont = normalFont.deriveFont(Font.ITALIC);
-            normalColor = getForeground();
-            isDirty = false;
-            addFocusListener(this);
-        }
-
-        public void setDefaultText(String text) {
-            defaultText = text;
-            if (getText().length() == 0) {
-                showDefaultText();
-            }
-        }
-        
-        private void showDefaultText() {
-            setText(defaultText);
-            setFont(defaultTextFont);
-            setForeground(getDisabledTextColor());
-            isDirty = false;
-        }
-
-        @Override
-        protected Document createDefaultModel() {
-            PlainDocument doc = new PlainDocument(new StringContent());
-            // doc.addDocumentListener(this);
-            undoManager = new UndoManager();
-            doc.addUndoableEditListener(undoManager);
-            return doc;
-        }
-
-        @Override
-        protected void processKeyEvent(KeyEvent e) {
-            if (e.getKeyCode() == KeyEvent.VK_ENTER && e.getID() == KeyEvent.KEY_PRESSED) {
-                if (!getText().equals(""))
-                    doSearch();
-            } else {
-                super.processKeyEvent(e);
-            }
-            if (e.getID() == KeyEvent.KEY_TYPED) {
-                isDirty = true;
-            }
-        }
-
-        protected void undo() {
-            if (undoManager.canUndo()) {
-                undoManager.undo();
-            }
-        }
-
-        protected void redo() {
-            if (undoManager.canRedo()) {
-                undoManager.redo();
-            }
-        }
-
-        public void focusGained(FocusEvent e) {
-            if (defaultText != null && isEditable() && getText().length() == 0) {
-                setText("");
-            }
-        }
-
-        public void focusLost(FocusEvent e) {
-            if (defaultText != null && isEditable() && getText().length() == 0) {
-                showDefaultText();
-            }
-        }
-
-        @Override
-        public String getText() {
-            String content = super.getText();
-            if (!isDirty && defaultText != null && content.equals(defaultText)) {
-                return "";
-            }
-            return content;
-        }
-        
-        @Override
-        public void setText(String t) {
-            setFont(normalFont);
-            setForeground(normalColor);
-            if (t.length() > 0) {
-                isDirty = true;
-            }
-            super.setText(t);
-        }
-
-        private UndoManager undoManager;
-        private Font normalFont;
-        private Font defaultTextFont;
-        private Color normalColor;
-        private String defaultText;
-        private boolean isDirty;
-    }
-
-    private MainWindow m_parent;
+    MainWindow m_parent;
 
     private SimpleDateFormat m_dateFormat;
-
-    private JLabel m_searchLabel;
-    private JTextField m_searchField;
-    private JButton m_searchButton;
-
-    private JRadioButton m_exactSearchRB;
-    private JRadioButton m_keywordSearchRB;
-    private JRadioButton m_regexpSearchRB;
-    private JLabel m_resultsLabel;
-    private JButton m_advancedButton;
-
-    private JCheckBox m_searchSourceCB;
-    private JCheckBox m_searchTargetCB;
-    private JCheckBox m_searchNotesCB;
-
-    private boolean m_advancedVisible;
-
-    private Box bAB;
-    private JCheckBox m_authorCB;
-    private MFindField m_authorField;
-
-    private Box bDB;
-    private JCheckBox m_dateFromCB;
-    private JButton m_dateFromButton;
-    private JSpinner m_dateFromSpinner;
-    private SpinnerDateModel m_dateFromModel;
-
-    private JCheckBox m_dateToCB;
-    private JButton m_dateToButton;
-    private JSpinner m_dateToSpinner;
-    private SpinnerDateModel m_dateToModel;
-
-    private Box bNbr;
-    private JLabel m_numberLabel;
-    private JSpinner m_numberOfResults;
-    private SpinnerModel m_numberModel;
-    private JSpinner m_dummy;
-
-    private JCheckBox m_caseCB;
-    private JCheckBox m_tmSearchCB;
-    private JCheckBox m_allResultsCB;
-
-    private boolean m_tmSearch = true;
-
-    private JLabel m_dirLabel;
-    private JTextField m_dirField;
-    private JButton m_dirButton;
-    private JCheckBox m_dirCB;
-    private JCheckBox m_recursiveCB;
-
-    private JButton m_dismissButton;
-    private JButton m_filterButton;
-    private JButton m_removeFilterButton;
-
-    private EntryListPane m_viewer;
+    private SpinnerDateModel m_dateFromModel, m_dateToModel;
 
     private SearchThread m_thread;
 
@@ -1196,5 +741,4 @@ public class SearchWindowController extends JFrame {
 
     private final static String SAVED_DATE_FORMAT = "yyyy/MM/dd HH:mm";
 
-    private final static int H_MARGIN = 10;
 }

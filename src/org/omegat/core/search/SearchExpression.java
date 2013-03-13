@@ -7,6 +7,7 @@
                2006 Henry Pijffers
                2009 Didier Briel
                2010 Martin Fleurke, Antonio Vilei, Didier Briel
+               2013 Alex Buloichik
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -38,125 +39,29 @@ import org.omegat.util.OConsts;
  * @author Didier Briel
  * @author Martin Fleurke
  * @author Antonio Vilei
+ * @author Alex Buloichik (alex73mail@gmail.com)
  */
 public class SearchExpression {
-
-    /**
-     * Creates a new search expression based on a given search text.
-     * 
-     * @param text
-     *            The text to search for
-     */
-    public SearchExpression(String text) {
-        this.text = text;
-
-        // set default search conditions
-        this.rootDir = null;
-        this.recursive = true;
-        this.exact = true;
-        this.keyword = false;
-        this.regex = false;
-        this.caseSensitive = false;
-        this.tm = true;
-        this.allResults = false;
-        this.searchSource = true;
-        this.searchTarget = true;
-        this.searchNotes = true;
-        this.searchAuthor = false;
-        this.author = "";
-        this.searchDateAfter = false;
-        this.dateAfter = 0;
-        this.searchDateBefore = false;
-        this.dateBefore = 0;
-        this.numberOfResults = OConsts.ST_MAX_SEARCH_RESULTS;
-
-    }
-
-    /**
-     * Creates a new search expression based on specified search text and
-     * options.
-     * 
-     * @param text
-     *            The text to search for
-     * @param rootDir
-     *            The folder to search in
-     * @param recursive
-     *            Allow searching in subfolders of rootDir
-     * @param exact
-     *            Search for a substring, including wildcards (*?)
-     * @param keyword
-     *            Search for keywords, including wildcards (*?)
-     * @param regex
-     *            Search based on regular expressions
-     * @param caseSensitive
-     *            Search case sensitive
-     * @param tm
-     *            Search also in legacy and orphan TM strings
-     * @param allResults
-     *            Include duplicate results
-     * @param searchSource
-     *            Search in source text
-     * @param searchTarget
-     *            Search in target text
-     * @param searchNotes
-     *            Search in notes
-     * @param searchAuthor
-     *            Search for tmx segments modified by author id/name
-     * @param author
-     *            String to search for in TMX attribute modificationId
-     * @param searchDateAfter
-     *            Search for translation segments modified after the given date
-     * @param dateAfter
-     *            The date after which the modification date has to be
-     * @param searchDateBefore
-     *            Search for translation segments modified before the given date
-     * @param dateBefore
-     *            The date before which the modification date has to be
-     * @param The
-     *            maximum number of results
-     */
-    public SearchExpression(String text, String rootDir, boolean recursive, boolean exact, boolean keyword,
-            boolean regex, boolean caseSensitive, boolean tm, boolean allResults, boolean searchSource,
-            boolean searchTarget, boolean searchNotes, boolean searchAuthor, String author, boolean searchDateAfter,
-            long dateAfter, boolean searchDateBefore, long dateBefore, int numberOfResults) {
-        this.text = text;
-        this.rootDir = rootDir;
-        this.recursive = recursive;
-        this.exact = exact;
-        this.keyword = keyword;
-        this.regex = regex;
-        this.caseSensitive = caseSensitive;
-        this.tm = tm;
-        this.allResults = allResults;
-        this.searchSource = searchSource;
-        this.searchTarget = searchTarget;
-        this.searchNotes = searchNotes;
-        this.searchAuthor = searchAuthor;
-        this.author = author;
-        this.searchDateAfter = searchDateAfter;
-        this.dateAfter = dateAfter;
-        this.searchDateBefore = searchDateBefore;
-        this.dateBefore = dateBefore;
-        this.numberOfResults = numberOfResults;
-    }
-
     public String text;
     public String rootDir;
-    public boolean recursive;
-    public boolean exact;
-    public boolean keyword;
-    public boolean regex;
-    public boolean caseSensitive;
-    public boolean tm;
-    public boolean allResults;
-    public boolean searchSource;
-    public boolean searchTarget;
-    public boolean searchNotes;
-    public boolean searchAuthor;
-    public String author;
-    public boolean searchDateAfter;
+    public boolean recursive = true;
+    public boolean exact = true;
+    public boolean keyword = false;
+    public boolean regex = false;
+    public boolean caseSensitive = false;
+    public boolean glossary = true;
+    public boolean memory = true;
+    public boolean tm = true;
+    public boolean allResults = false;
+    public boolean searchSource = true;
+    public boolean searchTarget = true;
+    public boolean searchTranslatedOnly = false;
+    public boolean searchNotes = true;
+    public boolean searchAuthor = false;
+    public String author = "";
+    public boolean searchDateAfter = false;
     public long dateAfter;
-    public boolean searchDateBefore;
+    public boolean searchDateBefore = false;
     public long dateBefore;
-    public int numberOfResults;
+    public int numberOfResults = OConsts.ST_MAX_SEARCH_RESULTS;
 }

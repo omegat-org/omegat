@@ -58,7 +58,7 @@ import org.omegat.gui.editor.EditorSettings;
 import org.omegat.gui.editor.IEditor;
 import org.omegat.gui.filters2.FiltersCustomizer;
 import org.omegat.gui.help.HelpFrame;
-import org.omegat.gui.search.SearchWindow;
+import org.omegat.gui.search.SearchWindowController;
 import org.omegat.gui.segmentation.SegmentationCustomizer;
 import org.omegat.gui.stat.StatisticsWindow;
 import org.omegat.util.FileUtil;
@@ -309,7 +309,7 @@ public class MainWindowMenuHandler {
         if (selection != null)
             selection.trim();
 
-        SearchWindow search = new SearchWindow(mainWindow, selection);
+        SearchWindowController search = new SearchWindowController(mainWindow, selection);
         search.setVisible(true);
         mainWindow.addSearchWindow(search);
     }

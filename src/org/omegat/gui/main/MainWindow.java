@@ -53,7 +53,7 @@ import org.omegat.core.events.IApplicationEventListener;
 import org.omegat.core.events.IProjectEventListener;
 import org.omegat.core.matching.NearString;
 import org.omegat.gui.filelist.ProjectFrame;
-import org.omegat.gui.search.SearchWindow;
+import org.omegat.gui.search.SearchWindowController;
 import org.omegat.util.LFileCopy;
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
@@ -96,7 +96,7 @@ public class MainWindow extends JFrame implements IMainWindow {
     private Font m_font;
 
     /** Set of all open search windows. */
-    private final Set<SearchWindow> m_searches = new HashSet<SearchWindow>();
+    private final Set<SearchWindowController> m_searches = new HashSet<SearchWindowController>();
 
     protected JLabel lengthLabel;
     protected JLabel progressLabel;
@@ -239,13 +239,13 @@ public class MainWindow extends JFrame implements IMainWindow {
         }
     }
 
-    protected void addSearchWindow(SearchWindow newSearchWindow) {
+    protected void addSearchWindow(SearchWindowController newSearchWindow) {
         synchronized (m_searches) {
             m_searches.add(newSearchWindow);
         }
     }
 
-    public void removeSearchWindow(SearchWindow searchWindow) {
+    public void removeSearchWindow(SearchWindowController searchWindow) {
         synchronized (m_searches) {
             m_searches.remove(searchWindow);
         }
@@ -254,7 +254,7 @@ public class MainWindow extends JFrame implements IMainWindow {
     private void closeSearchWindows() {
         synchronized (m_searches) {
             // dispose other windows
-            for (SearchWindow sw : m_searches) {
+            for (SearchWindowController sw : m_searches) {
                 sw.dispose();
             }
             m_searches.clear();

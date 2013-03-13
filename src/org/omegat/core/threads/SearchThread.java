@@ -36,7 +36,7 @@ import org.omegat.core.search.SearchExpression;
 import org.omegat.core.search.SearchResultEntry;
 import org.omegat.core.search.Searcher;
 import org.omegat.filters2.TranslationException;
-import org.omegat.gui.search.SearchWindow;
+import org.omegat.gui.search.SearchWindowController;
 import org.omegat.util.Log;
 
 /**
@@ -96,7 +96,7 @@ public class SearchThread extends Thread implements Searcher.ISearchCheckStop {
      *           m_searching to be set to true. This variable is set to true in
      *           this function on successful setting of the search parameters.
      */
-    public SearchThread(SearchWindow window, String text, String rootDir, boolean recursive, boolean exact,
+    public SearchThread(SearchWindowController window, String text, String rootDir, boolean recursive, boolean exact,
             boolean keyword, boolean regex, boolean caseSensitive, boolean tm, boolean allResults,
             boolean searchSource, boolean searchTarget, boolean searchNotes, boolean searchAuthor, String author,
             boolean searchDateAfter, long dateAfter, boolean searchDateBefore, long dateBefore,
@@ -155,6 +155,6 @@ public class SearchThread extends Thread implements Searcher.ISearchCheckStop {
     }
 
     private boolean stopped;
-    private SearchWindow m_window;
+    private SearchWindowController m_window;
     private SearchExpression m_searchExpression;
 }

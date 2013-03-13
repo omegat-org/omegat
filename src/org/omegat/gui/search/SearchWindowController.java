@@ -101,9 +101,9 @@ import org.openide.awt.Mnemonics;
  * @author Aaron Madlon-Kay
  */
 @SuppressWarnings("serial")
-public class SearchWindow extends JFrame {
+public class SearchWindowController extends JFrame {
     // public SearchWindow(MainWindow par, SearchThread th, String startText)
-    public SearchWindow(MainWindow par, String startText) {
+    public SearchWindowController(MainWindow par, String startText) {
         // super(par, false);
         m_parent = par;
 
@@ -999,7 +999,7 @@ public class SearchWindow extends JFrame {
                 String fulltext = msg;
                 if (ex != null)
                     fulltext += "\n" + ex.getLocalizedMessage();
-                JOptionPane.showMessageDialog(SearchWindow.this, fulltext, OStrings.getString("TF_ERROR"),
+                JOptionPane.showMessageDialog(SearchWindowController.this, fulltext, OStrings.getString("TF_ERROR"),
                         JOptionPane.ERROR_MESSAGE);
             }
         });

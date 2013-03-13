@@ -29,6 +29,7 @@ import java.util.TreeMap;
 
 import org.junit.Test;
 import org.omegat.core.data.IProject;
+import org.omegat.core.data.SourceTextEntry;
 import org.omegat.filters2.ITranslateCallback;
 import org.omegat.filters3.xml.xliff.XLIFFFilter;
 import org.omegat.util.FileUtil;
@@ -58,11 +59,17 @@ public class XLIFFFilterTest extends TestFilterBase {
         String f = "test/data/filters/xliff/file-XLIFFFilter-tags.xlf";
         IProject.FileInfo fi = loadSourceFiles(new XLIFFFilter(), f);
 
+        SourceTextEntry ste;
         checkMultiStart(fi, f);
         checkMultiNoPrevNext("Link to <m0>http://localhost</m0>.", null, null, null); // #1988732
         checkMultiNoPrevNext("About <b0>Gandalf</b0>", null, null, null); // #1988732
         checkMultiNoPrevNext("<i0>Tags</i0> translation zz<i1>2</i1>z <b2>-NONTRANSLATED", null, null, null);
         checkMultiNoPrevNext("one <a0> two </b1> three <c2> four </d3> five", null, null, null);
+        ste = checkMultiNoPrevNext("About <m0>Gandalf</m0> and <m1>other</m1>.", null, null, null);
+        assertEquals(3, ste.getProtectedParts().size());
+        assertEquals("<mrk mtype=\"other\">", ste.getProtectedParts().get("<m1>"));
+        assertEquals("</mrk>", ste.getProtectedParts().get("</m1>"));
+        assertEquals("<mrk mtype=\"protected\">Gandalf</mrk>", ste.getProtectedParts().get("<m0>Gandalf</m0>"));
         checkMultiEnd();
 
         File inFile = new File("test/data/filters/xliff/file-XLIFFFilter-tags.xlf");

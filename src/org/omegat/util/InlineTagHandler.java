@@ -114,7 +114,7 @@ public class InlineTagHandler {
      * 
      * @return shortcut index
      */
-    public Integer endIT() {
+    public int endIT() {
         int result = tagIndex;
         tagIndex++;
         return result;
@@ -125,7 +125,7 @@ public class InlineTagHandler {
      * 
      * @return shortcut index
      */
-    public Integer endOTHER() {
+    public int endOTHER() {
         int result = tagIndex;
         tagIndex++;
         return result;

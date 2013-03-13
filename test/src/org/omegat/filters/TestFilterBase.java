@@ -320,12 +320,14 @@ public abstract class TestFilterBase extends TestCore {
         fiCount++;
     }
 
-    protected void checkMultiNoPrevNext(String sourceText, String id, String path, String comment) {
-        assertEquals(path, fi.entries.get(fiCount).getKey().path);
-        assertEquals(id, fi.entries.get(fiCount).getKey().id);
-        assertEquals(sourceText, fi.entries.get(fiCount).getKey().sourceText);
-        assertEquals(comment, fi.entries.get(fiCount).getComment());
+    protected SourceTextEntry checkMultiNoPrevNext(String sourceText, String id, String path, String comment) {
+        SourceTextEntry ste = fi.entries.get(fiCount);
+        assertEquals(path, ste.getKey().path);
+        assertEquals(id, ste.getKey().id);
+        assertEquals(sourceText, ste.getKey().sourceText);
+        assertEquals(comment, ste.getComment());
         fiCount++;
+        return ste;
     }
 
     protected void skipMulti() {

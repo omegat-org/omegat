@@ -284,6 +284,10 @@ public class DefaultXMLDialect implements XMLDialect {
         return false;
     }
 
+    public Boolean validateContentBasedTag(String tag, Attributes atts) {
+        return null;
+    }
+
     /**
      * For a given tag, return wether the content of this tag should be
      * translated, depending on the content of one attribute and the presence or

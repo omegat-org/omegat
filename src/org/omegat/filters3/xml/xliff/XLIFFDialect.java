@@ -29,7 +29,6 @@ package org.omegat.filters3.xml.xliff;
 import java.util.List;
 import java.util.Map;
 
-import org.omegat.filters3.Attribute;
 import org.omegat.filters3.Attributes;
 import org.omegat.filters3.Element;
 import org.omegat.filters3.Tag;
@@ -54,12 +53,12 @@ public class XLIFFDialect extends DefaultXMLDialect {
 
         defineIntactTags(new String[] { "source", "header", "bin-unit", "prop-group", "count-group",
                 "alt-trans", "note",
-                // "mrk", only <mrk mtype="protected"> should be an intact tag
-                "ph", "bpt", "ept", "it", "context", "seg-source", });
+                "ph", "context", "seg-source", });
 
         defineContentBasedTag("bpt", Tag.Type.BEGIN);
         defineContentBasedTag("ept", Tag.Type.END);
         defineContentBasedTag("it", Tag.Type.ALONE);
+        // "mrk", only <mrk mtype="protected"> is content-based tag. see validateContentBasedTag
     }
 
     /**
@@ -113,6 +112,15 @@ public class XLIFFDialect extends DefaultXMLDialect {
     }
 
     @Override
+    public Boolean validateContentBasedTag(String tag, Attributes atts) {
+        if ("mrk".equals(tag) && atts != null && "protected".equals(atts.getValueByName("mtype"))) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    @Override
     public String constructShortcuts(List<Element> elements, Map<String, String> shortcutDetails) {
         InlineTagHandler tagHandler = new InlineTagHandler();
 
@@ -133,7 +141,7 @@ public class XLIFFDialect extends DefaultXMLDialect {
                     shortcut = "</" + tag.getShortcut() + tagIndex + '>';
                 } else if ("it".equals(tag.getTag())) {
                     tagHandler.startIT(tag.getAttribute("pos"));
-                    String tagIndex = tagHandler.endIT().toString();
+                    String tagIndex = Integer.toString(tagHandler.endIT());
                     // XLIFF specification requires 'open/close' values,
                     // but some tools may use 'begin/end' values like for TMX
                     if ("close".equals(tagHandler.getCurrentPos()) || "end".equals(tagHandler.getCurrentPos())) {
@@ -141,6 +149,11 @@ public class XLIFFDialect extends DefaultXMLDialect {
                     } else {
                         shortcut = "<" + tag.getShortcut() + tagIndex + '>';
                     }
+                } else if ("mrk".equals(tag.getTag())) {
+                    tagHandler.startOTHER();
+                    int tagIndex = tagHandler.endOTHER();
+                    shortcut = "<m" + tagIndex + ">" + tag.getIntactContents().sourceToOriginal() + "</m" + tagIndex
+                            + ">";
                 }
                 tag.setShortcut(shortcut);
                 r.append(shortcut);

@@ -18,6 +18,10 @@
                 <source>source</source>
                 <target>one <it pos="begin">&lt;a></it> two <it pos="end">&lt;b></it> three <it pos="open">&lt;c></it> four <it pos="close">&lt;d></it> five</target>
             </trans-unit>
+            <trans-unit>
+                <source>source</source>
+                <target>About <mrk mtype="protected">Gandalf</mrk> and <mrk mtype="other">other</mrk>.</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

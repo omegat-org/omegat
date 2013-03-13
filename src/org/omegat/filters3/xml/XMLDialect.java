@@ -126,6 +126,19 @@ public interface XMLDialect {
     /**
      * For a given tag, return wether the content of this tag should be
      * translated, depending on the content of one attribute and the presence or
+     * absence of other attributes.
+     * 
+     * @param tag
+     *            The tag that could be translated
+     * @param atts
+     *            The list of the tag attributes
+     * @return <code>true</code> or <code>false</code>
+     */
+    Boolean validateContentBasedTag(String tag, Attributes atts);
+
+    /**
+     * For a given tag, return wether the content of this tag should be
+     * translated, depending on the content of one attribute and the presence or
      * absence of other attributes. For instance, in the Typo3 filter, tags
      * should be translated when the attribute locazible="1".
      * 

@@ -404,21 +404,25 @@ class Handler extends DefaultHandler implements LexicalHandler, DeclHandler {
     }
 
     private void queueTag(String tag, Attributes attributes) {
-        Tag xmltag;
+        Tag xmltag = null;
         XMLIntactTag intacttag = null;
         setTranslatableTag(tag, XMLUtils.convertAttributes(attributes));
         setSpacePreservingTag(XMLUtils.convertAttributes(attributes));
-        if (!collectingIntactText() && isIntactTag(tag, XMLUtils.convertAttributes(attributes))) {
-            if (isContentBasedTag(tag)) {
+        if (!collectingIntactText()) {
+            if (isContentBasedTag(tag, XMLUtils.convertAttributes(attributes))) {
                 intacttag = new XMLContentBasedTag(tag, getShortcut(tag), dialect.getContentBasedTags().get(tag),
                         attributes);
-            } else {
+                xmltag = intacttag;
+                intacttagName = tag;
+                intacttagAttributes = XMLUtils.convertAttributes(attributes);
+            } else if (isIntactTag(tag, XMLUtils.convertAttributes(attributes))) {
                 intacttag = new XMLIntactTag(tag, getShortcut(tag), attributes);
+                xmltag = intacttag;
+                intacttagName = tag;
+                intacttagAttributes = XMLUtils.convertAttributes(attributes);
             }
-            xmltag = intacttag;
-            intacttagName = tag;
-            intacttagAttributes = XMLUtils.convertAttributes(attributes);
-        } else {
+        }
+        if (xmltag == null) {
             xmltag = new XMLTag(tag, getShortcut(tag), Tag.Type.BEGIN, attributes, this.translator.getTargetLanguage());
         }
         currEntry().add(xmltag);
@@ -485,7 +489,8 @@ class Handler extends DefaultHandler implements LexicalHandler, DeclHandler {
 
     /** Is called when the tag is ended. */
     private void end(String tag) throws SAXException, TranslationException {
-        if (collectingIntactText() && isIntactTag(tag, null) && tag.equals(intacttagName)) {
+        if (collectingIntactText() && tag.equals(intacttagName)
+                && (isIntactTag(tag, null) || isContentBasedTag(tag, null))) {
             intacttagEntry = null;
             intacttagName = null;
             intacttagAttributes = null;
@@ -609,11 +614,16 @@ class Handler extends DefaultHandler implements LexicalHandler, DeclHandler {
      *            A tag
      * @return <code>true</code> or <code>false</false>
      */
-    private boolean isContentBasedTag(String tag) {
+    private boolean isContentBasedTag(String tag, org.omegat.filters3.Attributes atts) {
         if (dialect.getContentBasedTags() != null && dialect.getContentBasedTags().containsKey(tag))
             return true;
         else {
-            return false;
+            if (atts == null) {
+                if (tag.equals(intacttagName))
+                    atts = intacttagAttributes; // Restore attributes
+            }
+
+            return dialect.validateContentBasedTag(tag, atts);
         }
     }
 

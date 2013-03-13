@@ -36,6 +36,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.StringWriter;
+import java.io.Writer;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -135,6 +136,33 @@ public class FileUtil {
         } catch (Exception ex) {
             ex.printStackTrace();
             return null;
+        }
+    }
+
+    /**
+     * Read file as UTF-8 text.
+     */
+    public static String readTextFile(File file) throws IOException {
+        BufferedReader rd = new BufferedReader(new InputStreamReader(new FileInputStream(file), OConsts.UTF8));
+
+        try {
+            StringWriter out = new StringWriter();
+            LFileCopy.copy(rd, out);
+            return out.toString();
+        } finally {
+            rd.close();
+        }
+    }
+
+    /**
+     * Write text in file using UTF-8.
+     */
+    public static void writeTextFile(File file, String text) throws IOException {
+        Writer wr = new OutputStreamWriter(new FileOutputStream(file), OConsts.UTF8);
+        try {
+            wr.write(text);
+        } finally {
+            wr.close();
         }
     }
 

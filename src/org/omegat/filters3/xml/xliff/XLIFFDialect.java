@@ -123,11 +123,11 @@ public class XLIFFDialect extends DefaultXMLDialect {
                 XMLContentBasedTag tag = (XMLContentBasedTag) el;
                 String shortcut = null;
                 if ("bpt".equals(tag.getTag())) {
-                    tagHandler.startBPT(tag.getAttribute("rid"), tag.getAttribute("id"));
+                    tagHandler.startBPT(tag.getAttribute("rid"), tag.getAttribute("id"), tag.getAttribute("i"));
                     String tagIndex = tagHandler.endBPT().toString();
                     shortcut = '<' + tag.getShortcut() + tagIndex + '>';
                 } else if ("ept".equals(tag.getTag())) {
-                    tagHandler.startEPT(tag.getAttribute("rid"), tag.getAttribute("id"));
+                    tagHandler.startEPT(tag.getAttribute("rid"), tag.getAttribute("id"), tag.getAttribute("i"));
                     String tagIndex = tagHandler.endEPT().toString();
                     shortcut = "</" + tag.getShortcut() + tagIndex + '>';
                 } else if ("it".equals(tag.getTag())) {

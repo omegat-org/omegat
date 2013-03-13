@@ -5,6 +5,7 @@
 
  Copyright (C) 2010 Alex Buloichik
                2012 Thomas Cordonnier
+               2013 Alex Buloichik
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -90,8 +91,7 @@ public class TMXReader2 {
     StringBuilder noteContent = new StringBuilder();
     StringBuilder segContent = new StringBuilder();
     StringBuilder segInlineTag = new StringBuilder();
-    // map of 'i' attributes to tag numbers
-    Map<String, Integer> pairTags = new TreeMap<String, Integer>();
+    InlineTagHandler inlineTagHandler = new InlineTagHandler();
 
     public TMXReader2() {
         factory = XMLInputFactory.newInstance();
@@ -372,12 +372,9 @@ public class TMXReader2 {
     protected void parseSegExtLevel2() throws Exception {
         segContent.setLength(0);
         segInlineTag.setLength(0);
-        pairTags.clear();
+        inlineTagHandler.reset();
 
-        int tagNumber = 0;
         int inlineLevel = 0;
-        String currentI = null;
-        String currentPos = null;
 
         while (true) {
             XMLEvent e = xml.nextEvent();
@@ -391,15 +388,13 @@ public class TMXReader2 {
                 inlineLevel++;
                 segInlineTag.setLength(0);
                 if ("bpt".equals(eStart.getName().getLocalPart())) {
-                    currentI = getAttributeValue(eStart, "i");
-                    pairTags.put(currentI, tagNumber);
-                    tagNumber++;
+                    inlineTagHandler.startBPT(getAttributeValue(eStart, "i"));
                 } else if ("ept".equals(eStart.getName().getLocalPart())) {
-                    currentI = getAttributeValue(eStart, "i");
+                    inlineTagHandler.startEPT(getAttributeValue(eStart, "i"));
                 } else if ("it".equals(eStart.getName().getLocalPart())) {
-                    currentPos = getAttributeValue(eStart, "pos");
+                    inlineTagHandler.startIT(getAttributeValue(eStart, "pos"));
                 } else {
-                    currentI = null;
+                    inlineTagHandler.startOTHER();
                 }
                 break;
             case XMLEvent.END_ELEMENT:
@@ -414,16 +409,19 @@ public class TMXReader2 {
                 }
                 boolean slashBefore = false;
                 boolean slashAfter = false;
-                char tagName = getFirstLetter(segInlineTag);
+                char tagName = StringUtil.getFirstLetterLowercase(segInlineTag);
+                if (tagName == 0) {
+                    tagName = 'f';
+                }
                 Integer tagN;
                 if ("bpt".equals(eEnd.getName().getLocalPart())) {
-                    tagN = pairTags.get(currentI);
+                    tagN = inlineTagHandler.endBPT();
                 } else if ("ept".equals(eEnd.getName().getLocalPart())) {
                     slashBefore = true;
-                    tagN = pairTags.get(currentI);
+                    tagN = inlineTagHandler.endEPT();
                 } else if ("it".equals(eEnd.getName().getLocalPart())) {
-                    tagN = tagNumber;
-                    if ("end".equals(currentPos)) {
+                    tagN = inlineTagHandler.endIT();
+                    if ("end".equals(inlineTagHandler.getCurrentPos())) {
                         slashBefore = true;
                     } else {
                         if (useSlash) {
@@ -431,7 +429,7 @@ public class TMXReader2 {
                         }
                     }
                 } else {
-                    tagN = tagNumber;
+                    tagN = inlineTagHandler.endOTHER();
                     if (useSlash) {
                         slashAfter = true;
                     }
@@ -476,19 +474,6 @@ public class TMXReader2 {
                 break;
             }
         }
-    }
-
-    protected static char getFirstLetter(StringBuilder s) {
-        char f = 0;
-
-        for (int i = 0; i < s.length(); i++) {
-            if (Character.isLetter(s.charAt(i))) {
-                f = Character.toLowerCase(s.charAt(i));
-                break;
-            }
-        }
-
-        return f != 0 ? f : 'f';
     }
 
     /**

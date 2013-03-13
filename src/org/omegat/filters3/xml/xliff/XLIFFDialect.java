@@ -5,7 +5,7 @@
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
                2007-2010 Didier Briel
- 
+               2013 Alex Buloichik 
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -26,14 +26,21 @@
 
 package org.omegat.filters3.xml.xliff;
 
+import java.util.List;
+
 import org.omegat.filters3.Attribute;
 import org.omegat.filters3.Attributes;
+import org.omegat.filters3.Element;
+import org.omegat.filters3.Tag;
 import org.omegat.filters3.xml.DefaultXMLDialect;
+import org.omegat.filters3.xml.XMLContentBasedTag;
+import org.omegat.util.InlineTagHandler;
 
 /**
  * This class specifies XLIFF XML Dialect.
  * 
  * @author Didier Briel
+ * @author Alex Buloichik (alex73mail@gmail.com)
  */
 public class XLIFFDialect extends DefaultXMLDialect {
     public XLIFFDialect() {
@@ -46,9 +53,8 @@ public class XLIFFDialect extends DefaultXMLDialect {
                 // "mrk", only <mrk mtype="protected"> should be an intact tag
                 "ph", "bpt", "ept", "it", "context", "seg-source", });
 
+        defineContentBasedTags(new String[] { "bpt", "ept", "it" });
     }
-
-
 
     /**
      * In the XLIFF filter, the tag &lt;mrk&gt; is a preformat tag when the
@@ -107,4 +113,43 @@ public class XLIFFDialect extends DefaultXMLDialect {
         return false;
     }
 
+    @Override
+    public String constructShortcuts(List<Element> elements) {
+        InlineTagHandler tagHandler = new InlineTagHandler();
+
+        StringBuilder r = new StringBuilder();
+        for (Element el : elements) {
+            if (el instanceof XMLContentBasedTag) {
+                XMLContentBasedTag tag = (XMLContentBasedTag) el;
+                String shortcut = null;
+                if ("bpt".equals(tag.getTag())) {
+                    tagHandler.startBPT(tag.getAttribute("rid"), tag.getAttribute("id"));
+                    String tagIndex = tagHandler.endBPT().toString();
+                    shortcut = '<' + tag.getShortcut() + tagIndex + '>';
+                } else if ("ept".equals(tag.getTag())) {
+                    tagHandler.startEPT(tag.getAttribute("rid"), tag.getAttribute("id"));
+                    String tagIndex = tagHandler.endEPT().toString();
+                    shortcut = "</" + tag.getShortcut() + tagIndex + '>';
+                } else if ("it".equals(tag.getTag())) {
+                    tagHandler.startIT(tag.getAttribute("pos"));
+                    String tagIndex = tagHandler.endIT().toString();
+                    if ("end".equals(tagHandler.getCurrentPos())) {
+                        shortcut = "</" + tag.getShortcut() + tagIndex + '>';
+                    } else {
+                        shortcut = "<" + tag.getShortcut() + tagIndex + '>';
+                    }
+                }
+                tag.setShortcut(shortcut);
+                r.append(shortcut);
+            } else if (el instanceof Tag) {
+                Tag tag = (Tag) el;
+                tagHandler.startOTHER();
+                String tagIndex = tagHandler.endOTHER().toString();
+                r.append('<').append(tag.getShortcut()).append(tagIndex).append('>');
+            } else {
+                r.append(el.toShortcut());
+            }
+        }
+        return r.toString();
+    }
 }

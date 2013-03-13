@@ -600,6 +600,21 @@ class Handler extends DefaultHandler implements LexicalHandler, DeclHandler {
     }
 
     /**
+     * Returns whether the tag is content based.
+     * 
+     * @param tag
+     *            A tag
+     * @return <code>true</code> or <code>false</false>
+     */
+    private boolean isContentBasedTag(String tag) {
+        if (dialect.getContentBasedTags() != null && dialect.getContentBasedTags().contains(tag))
+            return true;
+        else {
+            return false;
+        }
+    }
+
+    /**
      * Returns whether the tag surrounds preformatted block of text.
      * 
      * @param tag

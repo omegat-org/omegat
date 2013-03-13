@@ -28,11 +28,13 @@
 
 package org.omegat.filters3.xml;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.regex.Pattern;
 
 import org.omegat.filters3.Attributes;
+import org.omegat.filters3.Element;
 import org.omegat.util.MultiMap;
 import org.xml.sax.InputSource;
 
@@ -59,6 +61,11 @@ public interface XMLDialect {
     Set<String> getPreformatTags();
 
     /**
+     * Returns the set of content based tags.
+     */
+    Set<String> getContentBasedTags();
+
+    /**
      * Returns the set of tags that surround intact portions of document, that
      * should not be translated at all.
      * <p>
@@ -74,6 +81,14 @@ public interface XMLDialect {
      * Each entry in a set should be a String class.
      */
     Set<String> getOutOfTurnTags();
+
+    /**
+     * Returns shortcut string representation of the entry source. This is what
+     * the user translates. E.g. for
+     * <code>Here's &lt;b&gt;bold text&lt;/b&gt;</code> should return
+     * <code>Here's &lt;b0&gt;bold text&lt;/b0&gt;</code>.
+     */
+    String constructShortcuts(List<Element> elements);
 
     /**
      * Returns the multimap of translatable attributes of each tag.

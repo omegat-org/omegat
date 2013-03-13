@@ -32,7 +32,7 @@ import org.omegat.filters3.Tag;
  * @author Maxym Mykhalchuk
  */
 public class XMLIntactTag extends Tag {
-    private XMLIntactEntry intactContents = new XMLIntactEntry();
+    protected XMLIntactEntry intactContents = new XMLIntactEntry();
 
     /** Returns the entry to collect text surrounded by intact tag. */
     public XMLIntactEntry getIntactContents() {

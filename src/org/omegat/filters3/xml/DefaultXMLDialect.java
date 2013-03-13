@@ -8,6 +8,7 @@
                2009 Didier Briel
                2010 Antonio Vilei
                2011 Didier Briel
+               2013 Alex Buloichik
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -30,11 +31,13 @@ package org.omegat.filters3.xml;
 
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.regex.Pattern;
 
 import org.omegat.filters3.Attributes;
+import org.omegat.filters3.Element;
 import org.omegat.util.MultiMap;
 import org.xml.sax.InputSource;
 
@@ -44,6 +47,7 @@ import org.xml.sax.InputSource;
  * @author Maxym Mykhalchuk
  * @author Martin Fleurke
  * @author Didier Briel
+ * @author Alex Buloichik (alex73mail@gmail.com)
  */
 public class DefaultXMLDialect implements XMLDialect {
     /** The set of defined paragraph tags. */
@@ -58,6 +62,19 @@ public class DefaultXMLDialect implements XMLDialect {
     public void defineParagraphTags(String[] tags) {
         for (String tag : tags)
             defineParagraphTag(tag);
+    }
+
+    /** The set of defined content based tags. */
+    private Set<String> contentBasedTags = new HashSet<String>();
+
+    public void defineContentBasedTags(String[] tags) {
+        for (String tag : tags) {
+            defineContentBasedTag(tag);
+        }
+    }
+
+    public void defineContentBasedTag(String tag) {
+        contentBasedTags.add(tag);
     }
 
     /** The set of defined tags that surround preformatted text. */
@@ -205,6 +222,13 @@ public class DefaultXMLDialect implements XMLDialect {
      */
     public Set<String> getParagraphTags() {
         return paragraphTags;
+    }
+
+    /**
+     * Returns the set of content based tags.
+     */
+    public Set<String> getContentBasedTags() {
+        return contentBasedTags;
     }
 
     /**

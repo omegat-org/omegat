@@ -2,6 +2,10 @@
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.1">
     <file target-language="be" source-language="en" original="text.txt">
         <body>
+            <trans-unit>
+                <source>source</source>
+                <target>Link to <mrk mtype="protected">http://localhost</mrk>.</target>
+            </trans-unit>
             <trans-unit id="7" resname="7">
                 <source xml:lang="EN-US">About <bpt id="1">&lt;b&gt;</bpt>Gandalf<ept id="1">&lt;/b&gt;</ept></source>
                 <target xml:lang="FR-FR">About <bpt id="1">&lt;b&gt;</bpt>Gandalf<ept id="1">&lt;/b&gt;</ept></target>

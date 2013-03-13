@@ -27,6 +27,8 @@ package org.omegat.util;
 import java.util.Map;
 import java.util.TreeMap;
 
+import org.omegat.filters3.Tag;
+
 /**
  * This class handles inline tags, i.e. helps to replace all tags into
  * shortcuts. It handles bpt,ept,it tags numeration.
@@ -36,6 +38,7 @@ import java.util.TreeMap;
 public class InlineTagHandler {
     /** map of 'i' attributes to tag numbers */
     Map<String, Integer> pairTags = new TreeMap<String, Integer>();
+    Map<String, Integer> pairedOtherTags = new TreeMap<String, Integer>();
     String currentI;
     String currentPos;
     int tagIndex;
@@ -126,6 +129,36 @@ public class InlineTagHandler {
         int result = tagIndex;
         tagIndex++;
         return result;
+    }
+
+    /**
+     * Handle paired tag end.
+     * 
+     * @return shortcut index
+     */
+    public int paired(String tagName, Tag.Type tagType) {
+        int result;
+        switch (tagType) {
+        case BEGIN:
+            result = tagIndex;
+            pairedOtherTags.put(tagName, result);
+            tagIndex++;
+            return result;
+        case END:
+            Integer index = pairedOtherTags.get(tagName);
+            if (index == null) {
+                index = tagIndex;
+                tagIndex++;
+            }
+            pairedOtherTags.remove(tagName);
+            return index;
+        case ALONE:
+            result = tagIndex;
+            tagIndex++;
+            return result;
+        default:
+            throw new RuntimeException("Impossible tag type");
+        }
     }
 
     /**

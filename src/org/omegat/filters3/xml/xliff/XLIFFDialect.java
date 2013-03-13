@@ -78,11 +78,8 @@ public class XLIFFDialect extends DefaultXMLDialect {
             return false;
 
         if (atts != null) {
-            for (int i = 0; i < atts.size(); i++) {
-                Attribute oneAttribute = atts.get(i);
-                if (oneAttribute.getName().equalsIgnoreCase("mtype")
-                        && oneAttribute.getValue().equalsIgnoreCase("seg"))
-                    return true;
+            if ("seg".equalsIgnoreCase(atts.getValueByName("mtype"))) {
+                return true;
             }
         }
         return false;
@@ -107,12 +104,8 @@ public class XLIFFDialect extends DefaultXMLDialect {
         }
 
         if (atts != null) {
-            for (int i = 0; i < atts.size(); i++) {
-                Attribute oneAttribute = atts.get(i);
-                if ( oneAttribute.getName().equalsIgnoreCase("translate") &&
-                        oneAttribute.getValue().equalsIgnoreCase("no")) {
-                    return true;
-                }
+            if ("no".equalsIgnoreCase(atts.getValueByName("translate"))) {
+                return false;
             }
         }
         return false;
@@ -152,10 +145,9 @@ public class XLIFFDialect extends DefaultXMLDialect {
                 r.append(shortcut);
             } else if (el instanceof Tag) {
                 Tag tag = (Tag) el;
-                tagHandler.startOTHER();
-                int tagIndex = tagHandler.endOTHER();
+                int tagIndex = tagHandler.paired(tag.getTag(), tag.getType());
                 tag.setIndex(tagIndex);
-                r.append(tag.getShortcut());
+                r.append(tag.toShortcut());
             } else {
                 r.append(el.toShortcut());
             }

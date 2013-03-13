@@ -49,7 +49,24 @@ public class Attributes {
     public Attribute get(int index) {
         return list.get(index);
     }
-    
+
+    /**
+     * Find attribute value by name.
+     * 
+     * @param attrName
+     *            attribute name, case insensitive
+     * @return attribute value, or null if not found
+     */
+    public String getValueByName(String attrName) {
+        for (int i = 0; i < list.size(); i++) {
+            Attribute oneAttribute = list.get(i);
+            if (attrName.equalsIgnoreCase(oneAttribute.getName())) {
+                return oneAttribute.getValue();
+            }
+        }
+        return null;
+    }
+
     /**
      * Returns a string representation of the list of attributes. '
      * name1="value1" name2="value2" ...'

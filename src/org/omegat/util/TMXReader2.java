@@ -60,6 +60,9 @@ import org.xml.sax.SAXException;
 /**
  * Helper for read TMX files, using StAX.
  * 
+ * TMX 1.4b specification:
+ * http://www.gala-global.org/oscarStandards/tmx/tmx14b.html
+ * 
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
 public class TMXReader2 {

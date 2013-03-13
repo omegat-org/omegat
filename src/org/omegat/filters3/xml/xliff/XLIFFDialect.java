@@ -39,6 +39,9 @@ import org.omegat.util.InlineTagHandler;
 /**
  * This class specifies XLIFF XML Dialect.
  * 
+ * XLIFF 1.2 specification:
+ * http://docs.oasis-open.org/xliff/xliff-core/xliff-core.html
+ * 
  * @author Didier Briel
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
@@ -125,6 +128,8 @@ public class XLIFFDialect extends DefaultXMLDialect {
                 XMLContentBasedTag tag = (XMLContentBasedTag) el;
                 String shortcut = null;
                 if ("bpt".equals(tag.getTag())) {
+                    // XLIFF specification requires 'rid' and 'id' attributes,
+                    // but some tools uses 'i' attribute like for TMX
                     tagHandler.startBPT(tag.getAttribute("rid"), tag.getAttribute("id"), tag.getAttribute("i"));
                     String tagIndex = tagHandler.endBPT().toString();
                     shortcut = '<' + tag.getShortcut() + tagIndex + '>';
@@ -135,7 +140,9 @@ public class XLIFFDialect extends DefaultXMLDialect {
                 } else if ("it".equals(tag.getTag())) {
                     tagHandler.startIT(tag.getAttribute("pos"));
                     String tagIndex = tagHandler.endIT().toString();
-                    if ("end".equals(tagHandler.getCurrentPos())) {
+                    // XLIFF specification requires 'open/close' values,
+                    // but some tools may use 'begin/end' values like for TMX
+                    if ("close".equals(tagHandler.getCurrentPos()) || "end".equals(tagHandler.getCurrentPos())) {
                         shortcut = "</" + tag.getShortcut() + tagIndex + '>';
                     } else {
                         shortcut = "<" + tag.getShortcut() + tagIndex + '>';

@@ -156,8 +156,8 @@ public abstract class TmxComplianceBase extends TestCase {
                     String comment, IFilter filter) {
             }
 
-            public void addEntry(String id, String source, String translation, boolean isFuzzy,
-                    String comment, String path, IFilter filter) {
+            public void addEntry(String id, String source, String translation, boolean isFuzzy, String comment,
+                    String path, IFilter filter, Map<String, String> shortcutDetails) {
                 result.addAll(Segmenter.segment(context.getSourceLang(), source, null, null));
             }
 

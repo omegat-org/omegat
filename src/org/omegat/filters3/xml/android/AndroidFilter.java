@@ -27,6 +27,7 @@ package org.omegat.filters3.xml.android;
 
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 import org.omegat.filters2.Instance;
@@ -101,7 +102,7 @@ public class AndroidFilter extends XMLFilter {
     /**
      * Filter-specific chars processing.
      */
-    public String translate(String entry) {
+    public String translate(String entry, Map<String, String> shortcutDetails) {
         /**
          * Android sources has some entries without translatable="false" but with this comment. Yes, it's
          * dirty hack, but there is no other way.
@@ -113,7 +114,7 @@ public class AndroidFilter extends XMLFilter {
         String e = entry.replace("\\'", "'");
         String r = null;
         if (entryParseCallback != null) {
-            entryParseCallback.addEntry(id, e, null, false, idComment, null, this);
+            entryParseCallback.addEntry(id, e, null, false, idComment, null, this, shortcutDetails);
             r = e;
         } else if (entryTranslateCallback != null) {
             r = entryTranslateCallback.getTranslation(id, e, null);

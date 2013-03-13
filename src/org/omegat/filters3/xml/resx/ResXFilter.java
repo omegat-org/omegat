@@ -26,6 +26,8 @@
 
 package org.omegat.filters3.xml.resx;
 
+import java.util.Map;
+
 import org.omegat.filters2.Instance;
 import org.omegat.filters3.xml.XMLFilter;
 import org.omegat.util.OStrings;
@@ -117,7 +119,7 @@ public class ResXFilter extends XMLFilter {
             comment = text;
         } else if ("/root/data".equals(path)) {
             if (entryParseCallback != null) {
-                entryParseCallback.addEntry(id, entryText, null, false, comment, null, this);
+                entryParseCallback.addEntry(id, entryText, null, false, comment, null, this, null);
             }
             id = null;
             entryText = null;
@@ -131,7 +133,7 @@ public class ResXFilter extends XMLFilter {
     }
 
     @Override
-    public String translate(String entry) {
+    public String translate(String entry, Map<String, String> shortcutDetails) {
         if (entryParseCallback != null) {
             entryText = entry;
             return entry;

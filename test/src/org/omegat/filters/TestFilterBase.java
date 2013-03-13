@@ -88,15 +88,13 @@ public abstract class TestFilterBase extends TestCore {
         filter.parseFile(new File(filename), new TreeMap<String, String>(), context, new IParseCallback() {
             public void addEntry(String id, String source, String translation, boolean isFuzzy,
                     String comment, IFilter filter) {
-                addEntry(id, source, translation, isFuzzy, comment, null, filter);
-            }
-            public void addEntry(String id, String source, String translation, boolean isFuzzy,
-                    String comment, String path, IFilter filter) {
-                if (source.length() > 0)
-                    result.add(source);
+                addEntry(id, source, translation, isFuzzy, comment, null, filter, null);
             }
 
-            public void addFileTMXEntry(String source, String translation) {
+            public void addEntry(String id, String source, String translation, boolean isFuzzy, String comment,
+                    String path, IFilter filter, Map<String, String> shortcutDetails) {
+                if (source.length() > 0)
+                    result.add(source);
             }
 
             public void linkPrevNextSegments() {
@@ -113,15 +111,13 @@ public abstract class TestFilterBase extends TestCore {
         filter.parseFile(new File(filename), options, context, new IParseCallback() {
             public void addEntry(String id, String source, String translation, boolean isFuzzy,
                     String comment, IFilter filter) {
-                addEntry(id, source, translation, isFuzzy, comment, null, filter);
-            }
-            public void addEntry(String id, String source, String translation, boolean isFuzzy,
-                    String comment, String path, IFilter filter) {
-                if (source.length() > 0)
-                    result.add(source);
+                addEntry(id, source, translation, isFuzzy, comment, null, filter, null);
             }
 
-            public void addFileTMXEntry(String source, String translation) {
+            public void addEntry(String id, String source, String translation, boolean isFuzzy, String comment,
+                    String path, IFilter filter, Map<String, String> shortcutDetails) {
+                if (source.length() > 0)
+                    result.add(source);
             }
 
             public void linkPrevNextSegments() {
@@ -137,10 +133,11 @@ public abstract class TestFilterBase extends TestCore {
         filter.parseFile(new File(filename), new TreeMap<String, String>(), context, new IParseCallback() {
             public void addEntry(String id, String source, String translation, boolean isFuzzy,
                     String comment, IFilter filter) {
-                addEntry(id, source, translation, isFuzzy, comment, null, filter);
+                addEntry(id, source, translation, isFuzzy, comment, null, filter, null);
             }
-            public void addEntry(String id, String source, String translation, boolean isFuzzy,
-                    String comment, String path, IFilter filter) {
+
+            public void addEntry(String id, String source, String translation, boolean isFuzzy, String comment,
+                    String path, IFilter filter, Map<String, String> shortcutDetails) {
                 String segTranslation = isFuzzy ? null : translation;
                 result.put(source, segTranslation);
                 if (translation != null) {
@@ -166,10 +163,10 @@ public abstract class TestFilterBase extends TestCore {
         filter.parseFile(new File(filename), options, context, new IParseCallback() {
             public void addEntry(String id, String source, String translation, boolean isFuzzy,
                     String comment, IFilter filter) {
-                addEntry(id, source, translation, isFuzzy, comment, null, filter);
+                addEntry(id, source, translation, isFuzzy, comment, null, filter, null);
             }
             public void addEntry(String id, String source, String translation, boolean isFuzzy,
-                    String comment, String path, IFilter filter) {
+                    String comment, String path, IFilter filter, Map<String, String> shortcutDetails) {
                 if (source.length() == 0) {
                     return;
                 }

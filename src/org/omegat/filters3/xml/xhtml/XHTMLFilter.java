@@ -133,7 +133,7 @@ public class XHTMLFilter extends XMLFilter {
      * translate items that match regular expression.
      */
     @Override
-    public String translate(String entry) {
+    public String translate(String entry, Map<String, String> shortcutDetails) {
         if (do_not_send_to_core)
             return entry;
         else {
@@ -143,7 +143,7 @@ public class XHTMLFilter extends XMLFilter {
                     return entry;
                 }
             }
-            return super.translate(entry);
+            return super.translate(entry, shortcutDetails);
         }
     }
 

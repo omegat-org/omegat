@@ -433,7 +433,7 @@ class Handler extends DefaultHandler implements LexicalHandler, DeclHandler {
                         && dialect.validateTranslatableTagAttribute(tag, attr.getName(),
                                 xmltag.getAttributes())) {
                     attr.setValue(StaticUtils.makeValidXML(
-                            translator.translate(StaticUtils.entitiesToCharacters(attr.getValue()))));
+                            translator.translate(StaticUtils.entitiesToCharacters(attr.getValue()), null)));
                 }
             }
         }

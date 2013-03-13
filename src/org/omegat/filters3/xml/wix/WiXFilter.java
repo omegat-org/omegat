@@ -26,6 +26,8 @@
 
 package org.omegat.filters3.xml.wix;
 
+import java.util.Map;
+
 import org.omegat.filters2.Instance;
 import org.omegat.filters3.xml.XMLFilter;
 import org.omegat.util.OStrings;
@@ -79,9 +81,9 @@ public class WiXFilter extends XMLFilter {
     }
 
     @Override
-    public String translate(String entry) {
+    public String translate(String entry, Map<String, String> shortcutDetails) {
         if (entryParseCallback != null) {
-            entryParseCallback.addEntry(id, entry, null, false, null, null, this);
+            entryParseCallback.addEntry(id, entry, null, false, null, null, this, shortcutDetails);
             return entry;
         } else {
             String trans = entryTranslateCallback.getTranslation(id, entry, null);

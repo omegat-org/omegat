@@ -32,6 +32,7 @@ package org.omegat.core.data;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.omegat.core.data.IProject.FileInfo;
 import org.omegat.core.segmentation.Rule;
@@ -120,11 +121,15 @@ public abstract class ParseEntry implements IParseCallback {
      *            reference during translation.
      * @param comment
      *            entry's comment, if format supports it
+     * @param path
+     *            path of entry infile
      * @param filter
      *            filter which produces entry
+     * @param shortcutDetails
+     *            shortcuts details
      */
-    public void addEntry(String id, String source, String translation, boolean isFuzzy, String comment,
-            String path, IFilter filter) {
+    public void addEntry(String id, String source, String translation, boolean isFuzzy, String comment, String path,
+            IFilter filter, Map<String, String> shortcutDetails) {
         if (StringUtil.isEmpty(source)) {
             // empty string - not need to save
             return;
@@ -177,7 +182,7 @@ public abstract class ParseEntry implements IParseCallback {
      */
     public void addEntry(String id, String source, String translation, boolean isFuzzy, String comment,
             IFilter filter) {
-        addEntry(id, source, translation, isFuzzy, comment, null, filter);
+        addEntry(id, source, translation, isFuzzy, comment, null, filter, null);
     }
 
     /**

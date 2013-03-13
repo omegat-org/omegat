@@ -59,7 +59,8 @@ public class XLIFFFilterTest extends TestFilterBase {
         IProject.FileInfo fi = loadSourceFiles(new XLIFFFilter(), f);
 
         checkMultiStart(fi, f);
-        checkMulti("zz<i0>Tags</i0> translation zz<i1>2</i1>z <b2>-NONTRANSLATED", null, null, "", "", null);
+        checkMultiNoPrevNext("About <b0>Gandalf</b0>", null, null, null); // #1988732
+        checkMultiNoPrevNext("<i0>Tags</i0> translation zz<i1>2</i1>z <b2>-NONTRANSLATED", null, null, null);
         checkMultiEnd();
 
         File inFile = new File("test/data/filters/xliff/file-XLIFFFilter-tags.xlf");

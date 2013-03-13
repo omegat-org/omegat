@@ -32,6 +32,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.omegat.filters2.TranslationException;
+import org.omegat.filters3.xml.XMLContentBasedTag;
 import org.omegat.filters3.xml.XMLDialect;
 import org.omegat.util.PatternConsts;
 
@@ -166,6 +167,16 @@ public class Entry {
             Element elem = get(i);
             if ((elem instanceof Text) && ((Text) elem).isMeaningful()) {
                 textStart = i;
+                break;
+            }
+            if (elem instanceof XMLContentBasedTag) {
+                textStart = i;
+                break;
+            }
+        }
+        for (int i = 0; i < size(); i++) {
+            Element elem = get(i);
+            if ((elem instanceof Text) && ((Text) elem).isMeaningful()) {
                 textInstance = (Text) elem;
                 break;
             }
@@ -182,6 +193,10 @@ public class Entry {
         for (int i = size() - 1; i >= 0; i--) {
             Element elem = get(i);
             if ((elem instanceof Text) && ((Text) elem).isMeaningful()) {
+                textEnd = i;
+                break;
+            }
+            if (elem instanceof XMLContentBasedTag) {
                 textEnd = i;
                 break;
             }

@@ -65,16 +65,10 @@ public class DefaultXMLDialect implements XMLDialect {
     }
 
     /** The set of defined content based tags. */
-    private Set<String> contentBasedTags = new HashSet<String>();
+    private Map<String, Integer> contentBasedTags = new HashMap<String, Integer>();
 
-    public void defineContentBasedTags(String[] tags) {
-        for (String tag : tags) {
-            defineContentBasedTag(tag);
-        }
-    }
-
-    public void defineContentBasedTag(String tag) {
-        contentBasedTags.add(tag);
+    public void defineContentBasedTag(String tag, int type) {
+        contentBasedTags.put(tag, type);
     }
 
     /** The set of defined tags that surround preformatted text. */
@@ -227,7 +221,7 @@ public class DefaultXMLDialect implements XMLDialect {
     /**
      * Returns the set of content based tags.
      */
-    public Set<String> getContentBasedTags() {
+    public Map<String, Integer> getContentBasedTags() {
         return contentBasedTags;
     }
 

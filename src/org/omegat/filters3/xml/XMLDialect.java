@@ -61,9 +61,9 @@ public interface XMLDialect {
     Set<String> getPreformatTags();
 
     /**
-     * Returns the set of content based tags.
+     * Returns the map of content based tags where key is tag name, value is tag type.
      */
-    Set<String> getContentBasedTags();
+    Map<String, Integer> getContentBasedTags();
 
     /**
      * Returns the set of tags that surround intact portions of document, that

@@ -57,6 +57,7 @@ import org.omegat.filters2.IParseCallback;
 import org.omegat.filters2.ITranslateCallback;
 import org.omegat.util.LFileCopy;
 import org.omegat.util.Language;
+import org.omegat.util.StringUtil;
 import org.omegat.util.TMXReader2;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
@@ -318,6 +319,14 @@ public abstract class TestFilterBase extends TestCore {
             String comment) {
         assertEquals(new EntryKey(fi.filePath, sourceText, id, prev, next, path), fi.entries.get(fiCount)
                 .getKey());
+        assertEquals(comment, fi.entries.get(fiCount).getComment());
+        fiCount++;
+    }
+
+    protected void checkMultiNoPrevNext(String sourceText, String id, String path, String comment) {
+        assertEquals(path, fi.entries.get(fiCount).getKey().path);
+        assertEquals(id, fi.entries.get(fiCount).getKey().id);
+        assertEquals(sourceText, fi.entries.get(fiCount).getKey().sourceText);
         assertEquals(comment, fi.entries.get(fiCount).getComment());
         fiCount++;
     }

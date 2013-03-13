@@ -409,7 +409,8 @@ class Handler extends DefaultHandler implements LexicalHandler, DeclHandler {
         setSpacePreservingTag(XMLUtils.convertAttributes(attributes));
         if (!collectingIntactText() && isIntactTag(tag, XMLUtils.convertAttributes(attributes))) {
             if (isContentBasedTag(tag)) {
-                intacttag = new XMLContentBasedTag(tag, getShortcut(tag), attributes);
+                intacttag = new XMLContentBasedTag(tag, getShortcut(tag), dialect.getContentBasedTags().get(tag),
+                        attributes);
             } else {
                 intacttag = new XMLIntactTag(tag, getShortcut(tag), attributes);
             }
@@ -607,7 +608,7 @@ class Handler extends DefaultHandler implements LexicalHandler, DeclHandler {
      * @return <code>true</code> or <code>false</false>
      */
     private boolean isContentBasedTag(String tag) {
-        if (dialect.getContentBasedTags() != null && dialect.getContentBasedTags().contains(tag))
+        if (dialect.getContentBasedTags() != null && dialect.getContentBasedTags().containsKey(tag))
             return true;
         else {
             return false;

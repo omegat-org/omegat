@@ -202,6 +202,9 @@ public class Preferences {
     /** Tag Validation Option: check target for text that should have been removed according to regexp.*/
     public static final String CHECK_REMOVE_PATTERN = "tagValidation_removePattern";
 
+    /** Tag Validation Option: allow tag editing in editor. */
+    public static final String ALLOW_TAG_EDITING = "allowTagEditing";
+
     /** Team option: author ID */
     public static final String TEAM_AUTHOR = "team_Author";
 

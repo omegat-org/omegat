@@ -99,6 +99,7 @@ public class WorkflowOptionsDialog extends JDialog {
         stopOnAlternativeTranslation.setSelected(Preferences.
                 isPreference(Preferences.STOP_ON_ALTERNATIVE_TRANSLATION));
         convertNumbers.setSelected(Preferences.isPreference(Preferences.CONVERT_NUMBERS));
+        allowTagEditing.setSelected(Preferences.isPreference(Preferences.ALLOW_TAG_EDITING));
         invalidate();
         pack();
     }
@@ -133,6 +134,7 @@ public class WorkflowOptionsDialog extends JDialog {
         insertFuzzyCheckBox = new javax.swing.JCheckBox();
         exportCurrentSegment = new javax.swing.JCheckBox();
         stopOnAlternativeTranslation = new javax.swing.JCheckBox();
+        allowTagEditing = new javax.swing.JCheckBox();
 
         setTitle(OStrings.getString("GUI_TITLE_Workflow_Options")); // NOI18N
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -189,7 +191,7 @@ public class WorkflowOptionsDialog extends JDialog {
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 10;
+        gridBagConstraints.gridy = 11;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.SOUTHEAST;
         gridBagConstraints.weighty = 1.0;
         gridBagConstraints.insets = new java.awt.Insets(14, 4, 4, 4);
@@ -203,7 +205,7 @@ public class WorkflowOptionsDialog extends JDialog {
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
-        gridBagConstraints.gridy = 10;
+        gridBagConstraints.gridy = 11;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.SOUTHEAST;
         gridBagConstraints.weighty = 1.0;
         gridBagConstraints.insets = new java.awt.Insets(14, 4, 4, 4);
@@ -235,7 +237,6 @@ public class WorkflowOptionsDialog extends JDialog {
         defaultRadio.setSelected(true);
         org.openide.awt.Mnemonics.setLocalizedText(defaultRadio, OStrings.getString("WF_OPTION_INSERT_SOURCE")); // NOI18N
         defaultRadio.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 0));
-        defaultRadio.setMargin(new java.awt.Insets(0, 0, 0, 0));
         defaultRadio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 radiosActionPerformed(evt);
@@ -253,7 +254,6 @@ public class WorkflowOptionsDialog extends JDialog {
         ourButtonGroup.add(leaveEmptyRadio);
         org.openide.awt.Mnemonics.setLocalizedText(leaveEmptyRadio, OStrings.getString("WF_OPTION_INSERT_NOTHTHING")); // NOI18N
         leaveEmptyRadio.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 0));
-        leaveEmptyRadio.setMargin(new java.awt.Insets(0, 0, 0, 0));
         leaveEmptyRadio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 radiosActionPerformed(evt);
@@ -325,6 +325,17 @@ public class WorkflowOptionsDialog extends JDialog {
         gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
         getContentPane().add(stopOnAlternativeTranslation, gridBagConstraints);
 
+        org.openide.awt.Mnemonics.setLocalizedText(allowTagEditing, "Allow tag editing");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 10;
+        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
+        gridBagConstraints.ipadx = 1;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+        getContentPane().add(allowTagEditing, gridBagConstraints);
+
         pack();
         java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
         java.awt.Dimension dialogSize = getSize();
@@ -356,6 +367,7 @@ public class WorkflowOptionsDialog extends JDialog {
         Preferences.setPreference(Preferences.STOP_ON_ALTERNATIVE_TRANSLATION,
                 stopOnAlternativeTranslation.isSelected());
         Preferences.setPreference(Preferences.CONVERT_NUMBERS, convertNumbers.isSelected());
+        Preferences.setPreference(Preferences.ALLOW_TAG_EDITING, allowTagEditing.isSelected());
 
         doClose(RET_OK);
     }// GEN-LAST:event_okButtonActionPerformed
@@ -378,6 +390,7 @@ public class WorkflowOptionsDialog extends JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JCheckBox allowTagEditing;
     private javax.swing.JCheckBox allowTranslationEqualToSource;
     private javax.swing.JButton cancelButton;
     private javax.swing.JCheckBox convertNumbers;

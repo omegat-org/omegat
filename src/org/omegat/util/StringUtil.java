@@ -7,7 +7,7 @@
                2007 Didier Briel and Tiago Saboga
                2007 Zoltan Bartko - bartkozoltan@bartkozoltan.com
                2008 Andrzej Sawula
-               2010 Alex Buloichik
+               2010-2013 Alex Buloichik
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 

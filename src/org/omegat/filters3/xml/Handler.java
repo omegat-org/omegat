@@ -514,8 +514,9 @@ class Handler extends DefaultHandler implements LexicalHandler, DeclHandler {
         if (currEntry().size() == 0)
             return;
 
+        Map<String, String> shortcutDetails = new HashMap<String, String>();
         boolean tagsAggregation = isTagsAggregationEnabled();
-        String src = currEntry().sourceToShortcut(tagsAggregation, dialect);
+        String src = currEntry().sourceToShortcut(tagsAggregation, dialect, shortcutDetails);
         Element lead = currEntry().get(0);
         String translation = src;
         if ((lead instanceof Tag)
@@ -524,17 +525,17 @@ class Handler extends DefaultHandler implements LexicalHandler, DeclHandler {
              && isTranslatableTag()
              && !StringUtil.isEmpty(src)) {
             resetSpacePreservingTag();
-            translation = translator.translate(src);
+            translation = translator.translate(src, shortcutDetails);
         } else {
             String compressed = StaticUtils.compressSpaces(src);
             if (isTranslatableTag())
-                translation = translator.translate(compressed);
+                translation = translator.translate(compressed, shortcutDetails);
             // untranslated is written out uncompressed
             if (compressed.equals(translation))
                 translation = src;
         }
 
-        currEntry().setTranslation(translation, dialect);
+        currEntry().setTranslation(translation, dialect, shortcutDetails);
     }
 
     /**

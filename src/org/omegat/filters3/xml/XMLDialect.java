@@ -89,7 +89,7 @@ public interface XMLDialect {
      * <code>Here's &lt;b&gt;bold text&lt;/b&gt;</code> should return
      * <code>Here's &lt;b0&gt;bold text&lt;/b0&gt;</code>.
      */
-    String constructShortcuts(List<Element> elements);
+    String constructShortcuts(List<Element> elements, Map<String, String> shortcutDetails);
 
     /**
      * Returns the multimap of translatable attributes of each tag.

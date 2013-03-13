@@ -30,6 +30,7 @@ package org.omegat.filters3;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.omegat.filters2.TranslationException;
 import org.omegat.filters3.xml.XMLContentBasedTag;
@@ -334,8 +335,12 @@ public class Entry {
      * 
      * @param tagsAggregation
      *            Whether tags of this entry can be aggregated.
+     * @param xmlDialect
+     *            dialect for processing shortcuts
+     * @param shortcutDetails
+     *            shortcuts details
      */
-    public String sourceToShortcut(boolean tagsAggregation, XMLDialect xmlDialect) {
+    public String sourceToShortcut(boolean tagsAggregation, XMLDialect xmlDialect, Map<String, String> shortcutDetails) {
         if (tagsAggregation != this.tagsAggregationEnabled) {
             this.tagsAggregationEnabled = tagsAggregation;
             // Each change to tags aggregation setting resets detected tags
@@ -343,14 +348,14 @@ public class Entry {
         }
 
         if (getFirstGood() <= getLastGood()) {
-            return xmlDialect.constructShortcuts(elements.subList(getFirstGood(), getLastGood() + 1));
+            return xmlDialect.constructShortcuts(elements.subList(getFirstGood(), getLastGood() + 1), shortcutDetails);
         } else {
             return "";
         }
     }
 
-    private String sourceToShortcut(XMLDialect xmlDialect) {
-        return sourceToShortcut(tagsAggregationEnabled, xmlDialect);
+    private String sourceToShortcut(XMLDialect xmlDialect, Map<String, String> shortcutDetails) {
+        return sourceToShortcut(tagsAggregationEnabled, xmlDialect, shortcutDetails);
     }
 
     /**
@@ -414,8 +419,9 @@ public class Entry {
      * @throws TranslationException
      *             -- if any tag is missing or tags are ordered incorrectly.
      */
-    public void setTranslation(String translation, XMLDialect xmlDialect) throws TranslationException {
-        if (!sourceToShortcut(xmlDialect).equals(translation)) {
+    public void setTranslation(String translation, XMLDialect xmlDialect, Map<String, String> shortcutDetails)
+            throws TranslationException {
+        if (!sourceToShortcut(xmlDialect, shortcutDetails).equals(translation)) {
             checkAndRecoverTags(translation);
             this.translation = translation;
         }

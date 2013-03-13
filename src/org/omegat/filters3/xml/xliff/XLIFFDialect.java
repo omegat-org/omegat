@@ -27,6 +27,7 @@
 package org.omegat.filters3.xml.xliff;
 
 import java.util.List;
+import java.util.Map;
 
 import org.omegat.filters3.Attribute;
 import org.omegat.filters3.Attributes;
@@ -112,7 +113,7 @@ public class XLIFFDialect extends DefaultXMLDialect {
     }
 
     @Override
-    public String constructShortcuts(List<Element> elements) {
+    public String constructShortcuts(List<Element> elements, Map<String, String> shortcutDetails) {
         InlineTagHandler tagHandler = new InlineTagHandler();
 
         StringBuilder r = new StringBuilder();
@@ -143,11 +144,16 @@ public class XLIFFDialect extends DefaultXMLDialect {
                 }
                 tag.setShortcut(shortcut);
                 r.append(shortcut);
+                String details = tag.toOriginal();
+                shortcutDetails.put(shortcut, details);
             } else if (el instanceof Tag) {
                 Tag tag = (Tag) el;
                 int tagIndex = tagHandler.paired(tag.getTag(), tag.getType());
                 tag.setIndex(tagIndex);
-                r.append(tag.toShortcut());
+                String shortcut = tag.toShortcut();
+                r.append(shortcut);
+                String details = tag.toOriginal();
+                shortcutDetails.put(shortcut, details);
             } else {
                 r.append(el.toShortcut());
             }

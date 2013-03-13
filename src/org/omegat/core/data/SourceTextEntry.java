@@ -4,7 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
-               2009-2010 Alex Buloichik
+               2009-2013 Alex Buloichik
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -25,7 +25,10 @@
 
 package org.omegat.core.data;
 
-/*
+import java.util.HashMap;
+import java.util.Map;
+
+/**
  * Source text entry represents an individual segment for
  * translation pulled directly from the input files.
  * There can be many SourceTextEntries having identical source
@@ -61,6 +64,11 @@ public class SourceTextEntry {
 
     /** Holds the number of this entry in a project. */
     private int m_entryNum;
+
+    /**
+     * Protected parts(shortcuts) in keys, details of full content in values(for tooltips).
+     */
+    Map<String, String> protectedParts = new HashMap<String, String>();
 
     /**
      * Creates a new source text entry.

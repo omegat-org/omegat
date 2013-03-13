@@ -39,6 +39,7 @@ import java.util.regex.Pattern;
 import org.omegat.filters3.Attributes;
 import org.omegat.filters3.Element;
 import org.omegat.filters3.Tag;
+import org.omegat.filters3.Text;
 import org.omegat.util.MultiMap;
 import org.xml.sax.InputSource;
 
@@ -446,10 +447,15 @@ public class DefaultXMLDialect implements XMLDialect {
     /**
      * {@inheritDoc}
      */
-    public String constructShortcuts(List<Element> elements) {
+    public String constructShortcuts(List<Element> elements, Map<String, String> shortcutDetails) {
         StringBuilder r = new StringBuilder();
         for (Element el : elements) {
-            r.append(el.toShortcut());
+            String shortcut = el.toShortcut();
+            r.append(shortcut);
+            if (!(el instanceof Text)) {
+                String details = el.toOriginal();
+                shortcutDetails.put(shortcut, details);
+            }
         }
         return r.toString();
     }

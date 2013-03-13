@@ -123,7 +123,7 @@ public class INIFilter extends AbstractFilter {
             if (entryAlignCallback != null) {
                 align.put(key, value);
             } else if (entryParseCallback != null) {
-                entryParseCallback.addEntry(key, value, null, false, null, null, this);
+                entryParseCallback.addEntry(key, value, null, false, null, null, this, null);
             } else if (entryTranslateCallback != null) {
                 String trans = entryTranslateCallback.getTranslation(key, value, null);
                 if (trans == null) {

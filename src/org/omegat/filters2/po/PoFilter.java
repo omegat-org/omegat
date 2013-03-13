@@ -559,7 +559,7 @@ public class PoFilter extends AbstractFilter {
             translation = null;
         }
         if (entryParseCallback != null) {
-            entryParseCallback.addEntry(id, source, translation, fuzzy, comments, path, this);
+            entryParseCallback.addEntry(id, source, translation, fuzzy, comments, path, this, null);
         } else if (entryAlignCallback != null) {
             entryAlignCallback.addTranslation(id, source, translation, fuzzy, null, this);
         }
@@ -568,7 +568,7 @@ public class PoFilter extends AbstractFilter {
     protected void alignHeader(String header, FilterContext fc) {
         if (entryParseCallback != null && !PoFilter.skipHeader) {
             header = autoFillInPluralStatement(header, fc);
-            entryParseCallback.addEntry(null, unescape(header), null, false, null, path, this);
+            entryParseCallback.addEntry(null, unescape(header), null, false, null, path, this, null);
         }
     }
 

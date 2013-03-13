@@ -18,6 +18,9 @@
 					</xs:annotation>
 				</xs:element>
 			</xs:sequence>
+			<xs:attribute name="removeTags" type="xs:boolean" use="optional" default="true" />
+			<xs:attribute name="removeSpacesNonseg" type="xs:boolean" use="optional" default="true" />
+			<xs:attribute name="preserveSpaces" type="xs:boolean" use="optional" default="false" />
 		</xs:complexType>
 	</xs:element>
 	<xs:element name="filter">

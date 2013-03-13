@@ -632,6 +632,9 @@ public class FilterMaster {
      */
     public static Filters cloneConfig(Filters orig) {
         Filters c = new Filters();
+        c.setRemoveTags(orig.isRemoveTags());
+        c.setRemoveSpacesNonseg(orig.isRemoveSpacesNonseg());
+        c.setPreserveSpaces(orig.isPreserveSpaces());
         for (Filter f : orig.getFilters()) {
             c.getFilters().add(cloneFilter(f));
         }

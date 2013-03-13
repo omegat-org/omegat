@@ -73,6 +73,18 @@ public abstract class Tag implements Element {
         return attributes;
     }
 
+    /**
+     * Returns attribute value by name.
+     */
+    public String getAttribute(String name) {
+        for (Attribute a : attributes.list) {
+            if (name.equals(a.getName())) {
+                return a.getValue();
+            }
+        }
+        return null;
+    }
+
     private int index;
 
     /** Returns the index of this tag in the entry. */

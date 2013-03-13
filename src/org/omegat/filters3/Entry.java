@@ -7,6 +7,7 @@
                2007 Didier Briel
                2010 Antonio Vilei
                2012 Didier Briel
+               2013 Alex Buloichik
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -31,6 +32,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.omegat.filters2.TranslationException;
+import org.omegat.filters3.xml.XMLDialect;
 import org.omegat.util.PatternConsts;
 
 /**
@@ -39,6 +41,7 @@ import org.omegat.util.PatternConsts;
  * 
  * @author Maxym Mykhalchuk
  * @author Didier Briel
+ * @author Alex Buloichik (alex73mail@gmail.com)
  */
 public class Entry {
     /**
@@ -317,22 +320,22 @@ public class Entry {
      * @param tagsAggregation
      *            Whether tags of this entry can be aggregated.
      */
-    public String sourceToShortcut(boolean tagsAggregation) {
-        StringBuffer buf = new StringBuffer();
-
+    public String sourceToShortcut(boolean tagsAggregation, XMLDialect xmlDialect) {
         if (tagsAggregation != this.tagsAggregationEnabled) {
             this.tagsAggregationEnabled = tagsAggregation;
             // Each change to tags aggregation setting resets detected tags
             tagsDetected = false;
         }
 
-        for (int i = getFirstGood(); i <= getLastGood(); i++)
-            buf.append(get(i).toShortcut());
-        return buf.toString();
+        if (getFirstGood() <= getLastGood()) {
+            return xmlDialect.constructShortcuts(elements.subList(getFirstGood(), getLastGood() + 1));
+        } else {
+            return "";
+        }
     }
 
-    private String sourceToShortcut() {
-        return sourceToShortcut(tagsAggregationEnabled);
+    private String sourceToShortcut(XMLDialect xmlDialect) {
+        return sourceToShortcut(tagsAggregationEnabled, xmlDialect);
     }
 
     /**
@@ -396,8 +399,8 @@ public class Entry {
      * @throws TranslationException
      *             -- if any tag is missing or tags are ordered incorrectly.
      */
-    public void setTranslation(String translation) throws TranslationException {
-        if (!sourceToShortcut().equals(translation)) {
+    public void setTranslation(String translation, XMLDialect xmlDialect) throws TranslationException {
+        if (!sourceToShortcut(xmlDialect).equals(translation)) {
             checkAndRecoverTags(translation);
             this.translation = translation;
         }
@@ -490,18 +493,6 @@ public class Entry {
                 tag.append(c);
         }
         return res;
-    }
-
-    /**
-     * Returns shortcut string representation of the entry. E.g. for
-     * <code>Here's &lt;b&gt;bold text&lt;/b&gt;</code> should return
-     * <code>Here's &lt;b0&gt;bold text&lt;/b0&gt;</code>.
-     * // TODO: This method doesn't seem to be used
-     */
-    public String translationToShortcut() {
-        if (translation.length() == 0)
-            return sourceToShortcut();
-        return translation;
     }
 
     /**

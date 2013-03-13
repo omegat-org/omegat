@@ -424,4 +424,14 @@ public class DefaultXMLDialect implements XMLDialect {
         forceSpacePreserving = onOff;
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    public String constructShortcuts(List<Element> elements) {
+        StringBuilder r = new StringBuilder();
+        for (Element el : elements) {
+            r.append(el.toShortcut());
+        }
+        return r.toString();
+    }
 }

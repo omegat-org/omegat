@@ -8,7 +8,7 @@
                2009 Didier Briel
                2010 Antonio Vilei
                2011 Didier Briel
-               2013 Didier Briel
+               2013 Didier Briel, Alex Buloichik
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -65,6 +65,7 @@ import org.xml.sax.helpers.DefaultHandler;
  * @author Maxym Mykhalchuk
  * @author Martin Fleurke
  * @author Didier Briel
+ * @author Alex Buloichik (alex73mail@gmail.com)
  */
 class Handler extends DefaultHandler implements LexicalHandler, DeclHandler {
     private Translator translator;
@@ -407,7 +408,11 @@ class Handler extends DefaultHandler implements LexicalHandler, DeclHandler {
         setTranslatableTag(tag, XMLUtils.convertAttributes(attributes));
         setSpacePreservingTag(XMLUtils.convertAttributes(attributes));
         if (!collectingIntactText() && isIntactTag(tag, XMLUtils.convertAttributes(attributes))) {
-            intacttag = new XMLIntactTag(tag, getShortcut(tag), attributes);
+            if (isContentBasedTag(tag)) {
+                intacttag = new XMLContentBasedTag(tag, getShortcut(tag), attributes);
+            } else {
+                intacttag = new XMLIntactTag(tag, getShortcut(tag), attributes);
+            }
             xmltag = intacttag;
             intacttagName = tag;
             intacttagAttributes = XMLUtils.convertAttributes(attributes);
@@ -509,7 +514,7 @@ class Handler extends DefaultHandler implements LexicalHandler, DeclHandler {
             return;
 
         boolean tagsAggregation = isTagsAggregationEnabled();
-        String src = currEntry().sourceToShortcut(tagsAggregation);
+        String src = currEntry().sourceToShortcut(tagsAggregation, dialect);
         Element lead = currEntry().get(0);
         String translation = src;
         if ((lead instanceof Tag)
@@ -528,7 +533,7 @@ class Handler extends DefaultHandler implements LexicalHandler, DeclHandler {
                 translation = src;
         }
 
-        currEntry().setTranslation(translation);
+        currEntry().setTranslation(translation, dialect);
     }
 
     /**

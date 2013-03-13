@@ -30,6 +30,7 @@ public class SearchWindowForm extends javax.swing.JFrame {
         java.awt.GridBagConstraints gridBagConstraints;
 
         buttonGroup1 = new javax.swing.ButtonGroup();
+        buttonGroup2 = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         m_searchLabel = new javax.swing.JLabel();
         m_searchField = new MFindField();
@@ -57,13 +58,20 @@ public class SearchWindowForm extends javax.swing.JFrame {
         filler9 = new javax.swing.Box.Filler(new java.awt.Dimension(10, 0), new java.awt.Dimension(10, 0), new java.awt.Dimension(10, 32767));
         m_allResultsCB = new javax.swing.JCheckBox();
         filler11 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
-        m_SearchInPane = new javax.swing.JPanel();
+        m_SearchInProjectPane = new javax.swing.JPanel();
+        m_rbProject = new javax.swing.JRadioButton();
         m_cbSearchInMemory = new javax.swing.JCheckBox();
-        filler15 = new javax.swing.Box.Filler(new java.awt.Dimension(10, 0), new java.awt.Dimension(10, 0), new java.awt.Dimension(10, 32767));
         m_cbSearchInTMs = new javax.swing.JCheckBox();
-        filler16 = new javax.swing.Box.Filler(new java.awt.Dimension(10, 0), new java.awt.Dimension(10, 0), new java.awt.Dimension(10, 32767));
         m_cbSearchInGlossaries = new javax.swing.JCheckBox();
-        filler17 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
+        jPanel9 = new javax.swing.JPanel();
+        m_SearchInDirPane = new javax.swing.JPanel();
+        jPanel10 = new javax.swing.JPanel();
+        m_rbDir = new javax.swing.JRadioButton();
+        filler15 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
+        m_recursiveCB = new javax.swing.JCheckBox();
+        m_dirLabel = new javax.swing.JLabel();
+        m_dirField = new javax.swing.JTextField();
+        m_dirButton = new javax.swing.JButton();
         m_advancedVisiblePane = new javax.swing.JPanel();
         m_authorCB = new javax.swing.JCheckBox();
         m_authorField = new javax.swing.JTextField();
@@ -82,13 +90,8 @@ public class SearchWindowForm extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         m_viewer = new EntryListPane();
         jPanel8 = new javax.swing.JPanel();
-        m_dirLabel = new javax.swing.JLabel();
-        m_dirField = new javax.swing.JTextField();
         filler13 = new javax.swing.Box.Filler(new java.awt.Dimension(10, 0), new java.awt.Dimension(10, 0), new java.awt.Dimension(10, 32767));
-        m_dirButton = new javax.swing.JButton();
         jPanel7 = new javax.swing.JPanel();
-        m_dirCB = new javax.swing.JCheckBox();
-        m_recursiveCB = new javax.swing.JCheckBox();
         filler12 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
         m_removeFilterButton = new javax.swing.JButton();
         m_filterButton = new javax.swing.JButton();
@@ -182,29 +185,107 @@ public class SearchWindowForm extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(3, 3, 3, 3);
         getContentPane().add(jPanel3, gridBagConstraints);
 
-        m_SearchInPane.setBorder(javax.swing.BorderFactory.createTitledBorder(OStrings.getString("SW_SEARCH_IN_BOX"))); // NOI18N
-        m_SearchInPane.setLayout(new javax.swing.BoxLayout(m_SearchInPane, javax.swing.BoxLayout.LINE_AXIS));
+        m_SearchInProjectPane.setBorder(javax.swing.BorderFactory.createTitledBorder(OStrings.getString("SW_SEARCH_IN_BOX"))); // NOI18N
+        m_SearchInProjectPane.setLayout(new java.awt.GridBagLayout());
+
+        buttonGroup2.add(m_rbProject);
+        org.openide.awt.Mnemonics.setLocalizedText(m_rbProject, OStrings.getString("SW_PROJECT_SEARCH")); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        m_SearchInProjectPane.add(m_rbProject, gridBagConstraints);
 
         m_cbSearchInMemory.setSelected(true);
         org.openide.awt.Mnemonics.setLocalizedText(m_cbSearchInMemory, OStrings.getString("SW_SEARCH_IN_MEMORY")); // NOI18N
-        m_SearchInPane.add(m_cbSearchInMemory);
-        m_SearchInPane.add(filler15);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.insets = new java.awt.Insets(3, 3, 3, 3);
+        m_SearchInProjectPane.add(m_cbSearchInMemory, gridBagConstraints);
 
         m_cbSearchInTMs.setSelected(true);
         org.openide.awt.Mnemonics.setLocalizedText(m_cbSearchInTMs, OStrings.getString("SW_SEARCH_IN_TMS")); // NOI18N
-        m_SearchInPane.add(m_cbSearchInTMs);
-        m_SearchInPane.add(filler16);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.insets = new java.awt.Insets(3, 3, 3, 3);
+        m_SearchInProjectPane.add(m_cbSearchInTMs, gridBagConstraints);
 
         m_cbSearchInGlossaries.setSelected(true);
         org.openide.awt.Mnemonics.setLocalizedText(m_cbSearchInGlossaries, OStrings.getString("SW_SEARCH_IN_GLOSSARIES")); // NOI18N
-        m_SearchInPane.add(m_cbSearchInGlossaries);
-        m_SearchInPane.add(filler17);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.insets = new java.awt.Insets(3, 3, 3, 3);
+        m_SearchInProjectPane.add(m_cbSearchInGlossaries, gridBagConstraints);
+
+        jPanel9.setOpaque(false);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 5;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.weightx = 1.0;
+        m_SearchInProjectPane.add(jPanel9, gridBagConstraints);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.weightx = 1.0;
-        getContentPane().add(m_SearchInPane, gridBagConstraints);
+        getContentPane().add(m_SearchInProjectPane, gridBagConstraints);
+
+        m_SearchInDirPane.setBorder(javax.swing.BorderFactory.createTitledBorder(OStrings.getString("SW_SEARCH_IN_BOX"))); // NOI18N
+        m_SearchInDirPane.setLayout(new java.awt.GridBagLayout());
+
+        jPanel10.setOpaque(false);
+        jPanel10.setLayout(new javax.swing.BoxLayout(jPanel10, javax.swing.BoxLayout.LINE_AXIS));
+
+        buttonGroup2.add(m_rbDir);
+        org.openide.awt.Mnemonics.setLocalizedText(m_rbDir, OStrings.getString("SW_DIR_SEARCH")); // NOI18N
+        jPanel10.add(m_rbDir);
+        jPanel10.add(filler15);
+
+        m_recursiveCB.setSelected(true);
+        org.openide.awt.Mnemonics.setLocalizedText(m_recursiveCB, OStrings.getString("SW_DIR_RECURSIVE")); // NOI18N
+        m_recursiveCB.setEnabled(false);
+        jPanel10.add(m_recursiveCB);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.weightx = 1.0;
+        m_SearchInDirPane.add(jPanel10, gridBagConstraints);
+
+        org.openide.awt.Mnemonics.setLocalizedText(m_dirLabel, OStrings.getString("SW_LOCATION")); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.insets = new java.awt.Insets(3, 3, 3, 3);
+        m_SearchInDirPane.add(m_dirLabel, gridBagConstraints);
+
+        m_dirField.setEditable(false);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(3, 3, 3, 3);
+        m_SearchInDirPane.add(m_dirField, gridBagConstraints);
+
+        org.openide.awt.Mnemonics.setLocalizedText(m_dirButton, OStrings.getString("SW_BROWSE")); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.insets = new java.awt.Insets(3, 3, 3, 3);
+        m_SearchInDirPane.add(m_dirButton, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        getContentPane().add(m_SearchInDirPane, gridBagConstraints);
 
         m_advancedVisiblePane.setLayout(new java.awt.GridBagLayout());
 
@@ -313,16 +394,7 @@ public class SearchWindowForm extends javax.swing.JFrame {
         getContentPane().add(jScrollPane1, gridBagConstraints);
 
         jPanel8.setLayout(new javax.swing.BoxLayout(jPanel8, javax.swing.BoxLayout.LINE_AXIS));
-
-        org.openide.awt.Mnemonics.setLocalizedText(m_dirLabel, OStrings.getString("SW_LOCATION")); // NOI18N
-        jPanel8.add(m_dirLabel);
-
-        m_dirField.setEditable(false);
-        jPanel8.add(m_dirField);
         jPanel8.add(filler13);
-
-        org.openide.awt.Mnemonics.setLocalizedText(m_dirButton, OStrings.getString("SW_BROWSE")); // NOI18N
-        jPanel8.add(m_dirButton);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -331,14 +403,6 @@ public class SearchWindowForm extends javax.swing.JFrame {
         getContentPane().add(jPanel8, gridBagConstraints);
 
         jPanel7.setLayout(new javax.swing.BoxLayout(jPanel7, javax.swing.BoxLayout.LINE_AXIS));
-
-        org.openide.awt.Mnemonics.setLocalizedText(m_dirCB, OStrings.getString("SW_DIR_SEARCH")); // NOI18N
-        jPanel7.add(m_dirCB);
-
-        m_recursiveCB.setSelected(true);
-        org.openide.awt.Mnemonics.setLocalizedText(m_recursiveCB, OStrings.getString("SW_DIR_RECURSIVE")); // NOI18N
-        m_recursiveCB.setEnabled(false);
-        jPanel7.add(m_recursiveCB);
         jPanel7.add(filler12);
 
         org.openide.awt.Mnemonics.setLocalizedText(m_removeFilterButton, OStrings.getString("BUTTON_REMOVEFILTER")); // NOI18N
@@ -404,6 +468,7 @@ public class SearchWindowForm extends javax.swing.JFrame {
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     javax.swing.ButtonGroup buttonGroup1;
+    javax.swing.ButtonGroup buttonGroup2;
     javax.swing.Box.Filler filler1;
     javax.swing.Box.Filler filler10;
     javax.swing.Box.Filler filler11;
@@ -411,8 +476,6 @@ public class SearchWindowForm extends javax.swing.JFrame {
     javax.swing.Box.Filler filler13;
     javax.swing.Box.Filler filler14;
     javax.swing.Box.Filler filler15;
-    javax.swing.Box.Filler filler16;
-    javax.swing.Box.Filler filler17;
     javax.swing.Box.Filler filler2;
     javax.swing.Box.Filler filler3;
     javax.swing.Box.Filler filler4;
@@ -422,14 +485,17 @@ public class SearchWindowForm extends javax.swing.JFrame {
     javax.swing.Box.Filler filler8;
     javax.swing.Box.Filler filler9;
     javax.swing.JPanel jPanel1;
+    javax.swing.JPanel jPanel10;
     javax.swing.JPanel jPanel2;
     javax.swing.JPanel jPanel3;
     javax.swing.JPanel jPanel4;
     javax.swing.JPanel jPanel6;
     javax.swing.JPanel jPanel7;
     javax.swing.JPanel jPanel8;
+    javax.swing.JPanel jPanel9;
     javax.swing.JScrollPane jScrollPane1;
-    javax.swing.JPanel m_SearchInPane;
+    javax.swing.JPanel m_SearchInDirPane;
+    javax.swing.JPanel m_SearchInProjectPane;
     javax.swing.JButton m_advancedButton;
     javax.swing.JPanel m_advancedVisiblePane;
     javax.swing.JCheckBox m_allResultsCB;
@@ -447,7 +513,6 @@ public class SearchWindowForm extends javax.swing.JFrame {
     javax.swing.JCheckBox m_dateToCB;
     javax.swing.JSpinner m_dateToSpinner;
     javax.swing.JButton m_dirButton;
-    javax.swing.JCheckBox m_dirCB;
     javax.swing.JTextField m_dirField;
     javax.swing.JLabel m_dirLabel;
     javax.swing.JButton m_dismissButton;
@@ -456,6 +521,8 @@ public class SearchWindowForm extends javax.swing.JFrame {
     javax.swing.JRadioButton m_keywordSearchRB;
     javax.swing.JLabel m_numberLabel;
     javax.swing.JSpinner m_numberOfResults;
+    javax.swing.JRadioButton m_rbDir;
+    javax.swing.JRadioButton m_rbProject;
     javax.swing.JCheckBox m_recursiveCB;
     javax.swing.JRadioButton m_regexpSearchRB;
     javax.swing.JButton m_removeFilterButton;

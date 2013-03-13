@@ -29,6 +29,8 @@
 
 package org.omegat.gui.search;
 
+import java.awt.Component;
+import java.awt.Container;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -119,19 +121,13 @@ public class SearchWindowController {
 
         if (!Core.getProject().isProjectLoaded()) {
             // restrict user to file only access
-            form.m_dirCB.setSelected(true);
-            form.m_dirCB.setEnabled(false);
-            form.m_cbSearchInGlossaries.setSelected(false);
-            form.m_cbSearchInGlossaries.setEnabled(false);
-            form.m_cbSearchInMemory.setSelected(false);
-            form.m_cbSearchInMemory.setEnabled(false);
-            form.m_cbSearchInTMs.setSelected(false);
-            form.m_cbSearchInTMs.setEnabled(false);
-            form.m_dirField.setEditable(true);
-
-            // update enabled/selected status of options
-            updateOptionStatus();
+            form.m_rbDir.setSelected(true);
+            form.m_rbProject.setEnabled(false);
+        } else {
+            form.m_rbProject.setSelected(true);
         }
+        // update enabled/selected status of options
+        updateOptionStatus();
 
         form.m_searchField.requestFocus();
 
@@ -251,16 +247,22 @@ public class SearchWindowController {
 
         form.m_allResultsCB.addActionListener(searchFieldRequestFocus);
 
-        form.m_dirCB.addActionListener(new ActionListener() {
+        form.m_rbDir.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 updateOptionStatus();
 
                 // move focus to dir edit field if dir search is selected
                 // otherwise move focus to search field
-                if (form.m_dirCB.isSelected())
+                if (form.m_rbDir.isSelected())
                     form.m_dirField.requestFocus();
                 else
                     form.m_searchField.requestFocus();
+            }
+        });
+        form.m_rbProject.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                updateOptionStatus();
+                form.m_searchField.requestFocus();
             }
         });
 
@@ -316,11 +318,13 @@ public class SearchWindowController {
         }
 
         // search dir options
-        form.m_dirCB.setSelected(Preferences.isPreferenceDefault(Preferences.SEARCHWINDOW_SEARCH_FILES, false));
+        if (Preferences.isPreferenceDefault(Preferences.SEARCHWINDOW_SEARCH_FILES, false)) {
+            form.m_rbDir.setSelected(true);
+        } else {
+            form.m_rbProject.setSelected(true);
+        }
         form.m_dirField.setText(Preferences.getPreferenceDefault(Preferences.SEARCHWINDOW_DIR, ""));
-        form.m_dirField.setEditable(form.m_dirCB.isSelected());
         form.m_recursiveCB.setSelected(Preferences.isPreferenceDefault(Preferences.SEARCHWINDOW_RECURSIVE, true));
-        form.m_recursiveCB.setEnabled(form.m_dirCB.isSelected());
 
         // search type
         String searchType = Preferences.getPreferenceDefault(Preferences.SEARCHWINDOW_SEARCH_TYPE, SEARCH_TYPE_EXACT);
@@ -408,7 +412,7 @@ public class SearchWindowController {
 
         // search dir options
         Preferences.setPreference(Preferences.SEARCHWINDOW_DIR, form.m_dirField.getText());
-        Preferences.setPreference(Preferences.SEARCHWINDOW_SEARCH_FILES, form.m_dirCB.isSelected());
+        Preferences.setPreference(Preferences.SEARCHWINDOW_SEARCH_FILES, form.m_rbDir.isSelected());
         Preferences.setPreference(Preferences.SEARCHWINDOW_RECURSIVE, form.m_recursiveCB.isSelected());
 
         // need to explicitly save preferences
@@ -418,24 +422,12 @@ public class SearchWindowController {
 
     /**
      * Updates the enabled/selected status of the options in the dialog.
-     * 
-     * Called when the search type (exact/regex/keyword) is changed, when the
-     * "search files" option is (de)selected, or when the preferences have been
-     * loaded after the search dialog is first shown.
-     * 
-     * @author Henry Pijffers (henry.pijffers@saxnot.com)
      */
     private void updateOptionStatus() {
-        // disable TM search when searching through dirs
-        boolean enabled = !form.m_dirCB.isSelected();
-        form.m_SearchInPane.setEnabled(enabled);
-        form.m_cbSearchInGlossaries.setEnabled(enabled);
-        form.m_cbSearchInMemory.setEnabled(enabled);
-        form.m_cbSearchInTMs.setEnabled(enabled);
-
-        // set dir search options
-        form.m_recursiveCB.setEnabled(form.m_dirCB.isSelected());
-        form.m_dirField.setEditable(form.m_dirCB.isSelected());
+        setEnabled(form.m_SearchInProjectPane, form.m_rbProject.isSelected());
+        form.m_rbProject.setEnabled(true);
+        setEnabled(form.m_SearchInDirPane, form.m_rbDir.isSelected());
+        form.m_rbDir.setEnabled(true);
     }
 
     // //////////////////////////////////////////////////////////////
@@ -508,7 +500,7 @@ public class SearchWindowController {
 
         viewer.reset();
         String root = null;
-        if (form.m_dirCB.isSelected()) {
+        if (form.m_rbDir.isSelected()) {
             // make sure it's a valid directory name
             root = form.m_dirField.getText();
             if (!root.endsWith(File.separator))
@@ -698,6 +690,23 @@ public class SearchWindowController {
         form.m_dateFromButton.setEnabled(form.m_dateFromCB.isSelected());
         form.m_dateToSpinner.setEnabled(form.m_dateToCB.isSelected());
         form.m_dateToButton.setEnabled(form.m_dateToCB.isSelected());
+    }
+
+    /**
+     * Set enabled/disabled component and all his children.
+     * 
+     * @param component
+     * @param enabled
+     */
+    private void setEnabled(Container component, boolean enabled) {
+        component.setEnabled(enabled);
+        for (int i = 0; i < component.getComponentCount(); i++) {
+            Component c = component.getComponent(i);
+            c.setEnabled(enabled);
+            if (c instanceof Container) {
+                setEnabled((Container) c, enabled);
+            }
+        }
     }
 
     /**

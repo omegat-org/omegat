@@ -699,7 +699,14 @@ public class EditorController implements IEditor {
         Core.getMainWindow().showProgressMessage(pMsg);
     }
 
-    protected void goToSegmentAtLocation(int location) {
+    /**
+     * Go to segment at specified location.
+     * 
+     * @param location
+     *            location
+     * @return true if segment changed, false if location inside current segment
+     */
+    protected boolean goToSegmentAtLocation(int location) {
         // clicked segment
 
         int segmentAtLocation = getSegmentIndexAtLocation(location);
@@ -707,6 +714,9 @@ public class EditorController implements IEditor {
             doChangeSegmentActions();
             displayedEntryIndex = segmentAtLocation;
             activateEntry();
+            return true;
+        } else {
+            return false;
         }
     }
 

@@ -56,6 +56,7 @@ import javax.swing.text.ViewFactory;
 import javax.swing.undo.UndoManager;
 
 import org.omegat.core.CoreEvents;
+import org.omegat.core.data.SourceTextEntry;
 import org.omegat.util.StaticUtils;
 import org.omegat.util.gui.DockingUI;
 
@@ -141,7 +142,12 @@ public class EditorTextArea3 extends JEditorPane {
         @Override
         public void mouseClicked(MouseEvent e) {
             if (e.getButton() == MouseEvent.BUTTON1 && e.getClickCount() == 2) {
-                controller.goToSegmentAtLocation(getCaretPosition());
+                boolean changed = controller.goToSegmentAtLocation(getCaretPosition());
+                if (!changed) {
+                    if (selectTag(getCaretPosition())) {
+                        e.consume();
+                    }
+                }
             }
             if (e.isPopupTrigger() || e.getButton() == MouseEvent.BUTTON3) {
                 PopupMenuConstructorInfo[] cons;
@@ -306,6 +312,18 @@ public class EditorTextArea3 extends JEditorPane {
             // Ctrl+PgDn - to the end of document(Cmd+PgDn for MacOS)
             setCaretPosition(getOmDocument().getLength());
             processed = true;
+        } else if ((!mac && isKey(e, KeyEvent.VK_LEFT, KeyEvent.CTRL_MASK))
+                || (mac && isKey(e, KeyEvent.VK_LEFT, KeyEvent.META_MASK))
+                || (!mac && isKey(e, KeyEvent.VK_LEFT, KeyEvent.CTRL_MASK | KeyEvent.SHIFT_MASK))
+                || (mac && isKey(e, KeyEvent.VK_LEFT, KeyEvent.META_MASK | KeyEvent.SHIFT_MASK))) {
+            // Ctrl+Left - skip to the end of tag
+            processed = moveCursorOverTag((e.getModifiers() & KeyEvent.SHIFT_MASK) != 0, false);
+        } else if ((!mac && isKey(e, KeyEvent.VK_RIGHT, KeyEvent.CTRL_MASK))
+                || (mac && isKey(e, KeyEvent.VK_RIGHT, KeyEvent.META_MASK))
+                || (!mac && isKey(e, KeyEvent.VK_RIGHT, KeyEvent.CTRL_MASK | KeyEvent.SHIFT_MASK))
+                || (mac && isKey(e, KeyEvent.VK_RIGHT, KeyEvent.META_MASK | KeyEvent.SHIFT_MASK))) {
+            // Ctrl+Right - skip to the end of tag
+            processed = moveCursorOverTag((e.getModifiers() & KeyEvent.SHIFT_MASK) != 0, true);
         }
 
         // leave standard processing if need
@@ -341,6 +359,84 @@ public class EditorTextArea3 extends JEditorPane {
                     checkAndFixCaret(); //works only in after-processing if translation length (start and end position) has not changed, because start and end position are not updated yet.
             }
         }
+    }
+
+    /**
+     * Move cursor over tag(possible, with selection)
+     * 
+     * @param withShift
+     *            true if selection need
+     * @param checkTagStart
+     *            true if check tag start, false if check tag end
+     * @return true if tag processed
+     */
+    boolean moveCursorOverTag(boolean withShift, boolean checkTagStart) {
+        Document3 doc = getOmDocument();
+        SourceTextEntry ste = doc.controller.getCurrentEntry();
+        if (ste != null && ste.getProtectedParts() != null) {
+            String text = doc.extractTranslation();
+            int off = getCaretPosition() - doc.getTranslationStart();
+            for (String tag : ste.getProtectedParts().keySet()) {
+                int pos = -1;
+                while ((pos = text.indexOf(tag, pos + 1)) >= 0) {
+                    if ((checkTagStart && pos == off) || (!checkTagStart && pos + tag.length() == off)) {
+                        pos += doc.getTranslationStart();
+                        if (checkTagStart) {
+                            pos += tag.length();
+                        }
+                        if (withShift) {
+                            getCaret().moveDot(pos);
+                        } else {
+                            getCaret().setDot(pos);
+                        }
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Try to select full tag on specified position, in the source and
+     * translation part of segment.
+     * 
+     * @param pos
+     *            position
+     * @return true if selected
+     */
+    boolean selectTag(int pos) {
+        int s = controller.getSegmentIndexAtLocation(pos);
+        if (s < 0) {
+            return false;
+        }
+        SegmentBuilder segment = controller.m_docSegList[s];
+        if (pos < segment.getStartPosition() || pos >= segment.getEndPosition()) {
+            return false;
+        }
+        SourceTextEntry ste = getOmDocument().controller.getCurrentEntry();
+        if (ste != null && ste.getProtectedParts() != null) {
+            try {
+                String text = getOmDocument().getText(segment.getStartPosition(),
+                        segment.getEndPosition() - segment.getStartPosition());
+                int off = pos - segment.getStartPosition();
+                if (off < 0 || off >= text.length()) {
+                    return false;
+                }
+                for (String tag : ste.getProtectedParts().keySet()) {
+                    int p = -1;
+                    while ((p = text.indexOf(tag, p + 1)) >= 0) {
+                        if (p <= off && off <= p + tag.length()) {
+                            p += segment.getStartPosition();
+                            select(p, p + tag.length());
+                            return true;
+                        }
+                    }
+                }
+            } catch (BadLocationException ex) {
+            }
+        }
+        return false;
     }
 
     /**

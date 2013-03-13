@@ -8,8 +8,8 @@ Keys definitions:
 
  Left: one char left, but not earlier than segment's begin
  Right: one char right, but not later than segment's end
- Ctrl+Left (Alt+Left): one word left, but stay within the segment (Mac: the caret moves to the leftmost side of the word)
- Ctrl+Right (Alt+Right): one word right, but stay within the segment (Mac: as above)
+ Ctrl+Left (Alt+Left): one word(or tag) left, but stay within the segment (Mac: the caret moves to the leftmost side of the word)
+ Ctrl+Right (Alt+Right): one word(or tag) right, but stay within the segment (Mac: as above)
 
  PgUp (Fn+Up): move to one page up
  PgDn (Fn+Down): move to one page down

@@ -117,22 +117,16 @@ public class SegmentBuilder {
      * RTL/LTR embedded direction chars. Otherwise - will not insert, since JDK
      * 1.6 has bug with performance with embedded directions chars.
      */
-    protected boolean hasRTL;
+    protected final boolean hasRTL;
 
-    public SegmentBuilder(final EditorController controller, final Document3 doc,
-            final EditorSettings settings, final SourceTextEntry ste, final int segmentNumberInProject) {
+    public SegmentBuilder(final EditorController controller, final Document3 doc, final EditorSettings settings,
+            final SourceTextEntry ste, final int segmentNumberInProject, final boolean hasRTL) {
         this.controller = controller;
         this.doc = doc;
         this.settings = settings;
         this.ste = ste;
         this.segmentNumberInProject = segmentNumberInProject;
-
-        hasRTL = controller.sourceLangIsRTL || controller.targetLangIsRTL || EditorUtils.localeIsRTL()
-                || controller.currentOrientation != Document3.ORIENTATION.ALL_LTR;
-        Map<Language,ProjectTMX> otherLanguageTMs = Core.getProject().getOtherTargetLanguageTMs();
-        for (Map.Entry<Language,ProjectTMX> entry : otherLanguageTMs.entrySet()) {
-            hasRTL = hasRTL || EditorUtils.isRTL(entry.getKey().getLanguageCode().toLowerCase());
-        }
+        this.hasRTL = hasRTL;
     }
 
     public boolean isDefaultTranslation() {

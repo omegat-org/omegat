@@ -40,6 +40,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -56,6 +57,7 @@ import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
 import org.omegat.core.data.EntryKey;
 import org.omegat.core.data.IProject;
+import org.omegat.core.data.ProjectTMX;
 import org.omegat.core.data.IProject.FileInfo;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.data.TMXEntry;
@@ -67,6 +69,7 @@ import org.omegat.gui.editor.mark.Mark;
 import org.omegat.gui.help.HelpFrame;
 import org.omegat.gui.main.DockableScrollPane;
 import org.omegat.gui.main.MainWindow;
+import org.omegat.util.Language;
 import org.omegat.util.Log;
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
@@ -445,13 +448,21 @@ public class EditorController implements IEditor {
             file = Core.getProject().getProjectFiles().get(0);
         }
 
+        // check if RTL support required for document
+        boolean hasRTL = sourceLangIsRTL || targetLangIsRTL || EditorUtils.localeIsRTL()
+                || currentOrientation != Document3.ORIENTATION.ALL_LTR;
+        Map<Language, ProjectTMX> otherLanguageTMs = Core.getProject().getOtherTargetLanguageTMs();
+        for (Map.Entry<Language, ProjectTMX> entry : otherLanguageTMs.entrySet()) {
+            hasRTL = hasRTL || EditorUtils.isRTL(entry.getKey().getLanguageCode().toLowerCase());
+        }
+
         Document3 doc = new Document3(this);
 
         ArrayList<SegmentBuilder> temp_docSegList2 = new ArrayList<SegmentBuilder>(file.entries.size());
         for (int i = 0; i < file.entries.size(); i++) {
             SourceTextEntry ste = file.entries.get(i);
             if (isInFilter(new Integer(ste.entryNum()))) {
-                SegmentBuilder sb = new SegmentBuilder(this, doc, settings, ste, ste.entryNum());
+                SegmentBuilder sb = new SegmentBuilder(this, doc, settings, ste, ste.entryNum(), hasRTL);
                 temp_docSegList2.add(sb);
 
                 sb.createSegmentElement(false);

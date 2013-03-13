@@ -126,7 +126,7 @@ public class Entry {
             if (elem instanceof Tag) {
                 // Add this tag to the aggregated tag
                 if (aggregated == null) {
-                    aggregated = new AggregatedTag("tag", null, Tag.TYPE_ALONE, new Attributes());
+                    aggregated = new AggregatedTag("tag", null, Tag.Type.ALONE, new Attributes());
                 }
                 aggregated.add((Tag) elem);
             } else {
@@ -212,7 +212,7 @@ public class Entry {
                 continue;
 
             Tag good = (Tag) goodElem;
-            if (Tag.TYPE_BEGIN != good.getType())
+            if (Tag.Type.BEGIN != good.getType())
                 continue;
 
             // trying to test
@@ -222,9 +222,9 @@ public class Entry {
                 if (candElement instanceof Tag) {
                     Tag cand = (Tag) candElement;
                     if (cand.getTag().equals(good.getTag())) {
-                        if (Tag.TYPE_BEGIN == cand.getType())
+                        if (Tag.Type.BEGIN == cand.getType())
                             recursion++;
-                        else if (Tag.TYPE_END == cand.getType()) {
+                        else if (Tag.Type.END == cand.getType()) {
                             recursion--;
                             if (recursion == 0) {
                                 if (i > textStart)
@@ -252,7 +252,7 @@ public class Entry {
                 continue;
 
             Tag good = (Tag) goodElem;
-            if (Tag.TYPE_END != good.getType())
+            if (Tag.Type.END != good.getType())
                 continue;
 
             // trying to test
@@ -262,9 +262,9 @@ public class Entry {
                 if (candElement instanceof Tag) {
                     Tag cand = (Tag) candElement;
                     if (cand.getTag().equals(good.getTag())) {
-                        if (Tag.TYPE_END == cand.getType())
+                        if (Tag.Type.END == cand.getType())
                             recursion++;
-                        else if (Tag.TYPE_BEGIN == cand.getType()) {
+                        else if (Tag.Type.BEGIN == cand.getType()) {
                             recursion--;
                             if (recursion == 0) {
                                 if (i < textEnd)
@@ -292,10 +292,10 @@ public class Entry {
             Element elem = get(i);
             if (elem instanceof Tag) {
                 Tag tag = (Tag) elem;
-                if (Tag.TYPE_ALONE == tag.getType() || Tag.TYPE_BEGIN == tag.getType()) {
+                if (Tag.Type.ALONE == tag.getType() || Tag.Type.BEGIN == tag.getType()) {
                     tag.setIndex(n);
                     n++;
-                } else if (Tag.TYPE_END == tag.getType()) {
+                } else if (Tag.Type.END == tag.getType()) {
                     tag.setIndex(-1); // indication of an error
                     // trying to lookup for appropriate starting tag
                     int recursion = 1;
@@ -304,9 +304,9 @@ public class Entry {
                         if (otherElem instanceof Tag) {
                             Tag other = (Tag) otherElem;
                             if (other.getTag().equals(tag.getTag())) {
-                                if (Tag.TYPE_END == other.getType())
+                                if (Tag.Type.END == other.getType())
                                     recursion++;
-                                else if (Tag.TYPE_BEGIN == other.getType()) {
+                                else if (Tag.Type.BEGIN == other.getType()) {
                                     recursion--;
                                     if (recursion == 0) {
                                         tag.setIndex(other.getIndex());

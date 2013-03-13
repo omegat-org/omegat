@@ -418,7 +418,7 @@ class Handler extends DefaultHandler implements LexicalHandler, DeclHandler {
             intacttagName = tag;
             intacttagAttributes = XMLUtils.convertAttributes(attributes);
         } else {
-            xmltag = new XMLTag(tag, getShortcut(tag), Tag.TYPE_BEGIN, attributes, this.translator.getTargetLanguage());
+            xmltag = new XMLTag(tag, getShortcut(tag), Tag.Type.BEGIN, attributes, this.translator.getTargetLanguage());
         }
         currEntry().add(xmltag);
 
@@ -444,10 +444,10 @@ class Handler extends DefaultHandler implements LexicalHandler, DeclHandler {
         if (len > 0
                 && (currEntry().get(len - 1) instanceof XMLTag)
                 && (((XMLTag) currEntry().get(len - 1)).getTag().equals(tag) && ((XMLTag) currEntry().get(
-                        len - 1)).getType() == Tag.TYPE_BEGIN) && !isClosingTagRequired()) {
-            ((XMLTag) currEntry().get(len - 1)).setType(Tag.TYPE_ALONE);
+                        len - 1)).getType() == Tag.Type.BEGIN) && !isClosingTagRequired()) {
+            ((XMLTag) currEntry().get(len - 1)).setType(Tag.Type.ALONE);
         } else {
-            currEntry().add(new XMLTag(tag, getShortcut(tag), Tag.TYPE_END, null, this.translator.getTargetLanguage()));
+            currEntry().add(new XMLTag(tag, getShortcut(tag), Tag.Type.END, null, this.translator.getTargetLanguage()));
         }
     }
 

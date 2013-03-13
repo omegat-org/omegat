@@ -46,7 +46,7 @@ public abstract class OutOfTurnTag extends Tag {
      * collected text.
      */
     public OutOfTurnTag(String tag, String shortcut, Attributes attributes) {
-        super(tag, shortcut, Tag.TYPE_ALONE, attributes);
+        super(tag, shortcut, Tag.Type.ALONE, attributes);
         entry = new Entry();
     }
 

@@ -40,7 +40,7 @@ import java.util.List;
 public class AggregatedTag extends Tag {
 
     /** Creates a new instance of Aggregated Tag */
-    public AggregatedTag(String tag, String shortcut, int type, Attributes attributes) {
+    public AggregatedTag(String tag, String shortcut, Type type, Attributes attributes) {
         super(tag, shortcut, type, attributes);
     }
 

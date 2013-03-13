@@ -38,6 +38,7 @@ import java.util.regex.Pattern;
 
 import org.omegat.filters3.Attributes;
 import org.omegat.filters3.Element;
+import org.omegat.filters3.Tag;
 import org.omegat.util.MultiMap;
 import org.xml.sax.InputSource;
 
@@ -65,9 +66,9 @@ public class DefaultXMLDialect implements XMLDialect {
     }
 
     /** The set of defined content based tags. */
-    private Map<String, Integer> contentBasedTags = new HashMap<String, Integer>();
+    private Map<String, Tag.Type> contentBasedTags = new HashMap<String, Tag.Type>();
 
-    public void defineContentBasedTag(String tag, int type) {
+    public void defineContentBasedTag(String tag, Tag.Type type) {
         contentBasedTags.put(tag, type);
     }
 
@@ -221,7 +222,7 @@ public class DefaultXMLDialect implements XMLDialect {
     /**
      * Returns the set of content based tags.
      */
-    public Map<String, Integer> getContentBasedTags() {
+    public Map<String, Tag.Type> getContentBasedTags() {
         return contentBasedTags;
     }
 

@@ -56,9 +56,9 @@ public class XLIFFDialect extends DefaultXMLDialect {
                 // "mrk", only <mrk mtype="protected"> should be an intact tag
                 "ph", "bpt", "ept", "it", "context", "seg-source", });
 
-        defineContentBasedTag("bpt", Tag.TYPE_BEGIN);
-        defineContentBasedTag("ept", Tag.TYPE_END);
-        defineContentBasedTag("it", Tag.TYPE_ALONE);
+        defineContentBasedTag("bpt", Tag.Type.BEGIN);
+        defineContentBasedTag("ept", Tag.Type.END);
+        defineContentBasedTag("it", Tag.Type.ALONE);
     }
 
     /**

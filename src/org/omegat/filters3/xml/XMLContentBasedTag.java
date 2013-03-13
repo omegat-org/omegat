@@ -35,7 +35,7 @@ public class XMLContentBasedTag extends XMLIntactTag {
     private String shortcut;
 
     /** Creates a new instance of XML Tag */
-    public XMLContentBasedTag(String tag, String shortcut, int type, org.xml.sax.Attributes attributes) {
+    public XMLContentBasedTag(String tag, String shortcut, Type type, org.xml.sax.Attributes attributes) {
         super(tag, shortcut, type, attributes);
     }
 

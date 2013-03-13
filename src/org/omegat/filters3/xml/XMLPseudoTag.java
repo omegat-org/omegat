@@ -38,6 +38,6 @@ import org.omegat.filters3.Tag;
 public abstract class XMLPseudoTag extends Tag {
     /** Creates a new instance of XMLPseudoTag */
     public XMLPseudoTag() {
-        super("!", "cp", TYPE_ALONE, new Attributes());
+        super("!", "cp", Type.ALONE, new Attributes());
     }
 }

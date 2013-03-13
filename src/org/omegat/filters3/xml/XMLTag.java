@@ -38,7 +38,7 @@ import org.omegat.util.Language;
  */
 public class XMLTag extends Tag {
     /** Creates a new instance of XML Tag */
-    public XMLTag(String tag, String shortcut, int type, org.xml.sax.Attributes attributes, Language targetLanguage) {
+    public XMLTag(String tag, String shortcut, Type type, org.xml.sax.Attributes attributes, Language targetLanguage) {
         super(tag, shortcut, type, XMLUtils.convertAttributes(attributes));     
         this.targetLanguage = targetLanguage;
     }
@@ -53,13 +53,13 @@ public class XMLTag extends Tag {
         StringBuffer buf = new StringBuffer();
 
         buf.append("<");
-        if (TYPE_END == getType())
+        if (Type.END == getType())
             buf.append("/");
         buf.append(getTag());
         buf.append(getAttributes().toString());
         
         // If that's an Open XML document, we preserve spaces for all <w:t> tags 
-        if (getTag().equalsIgnoreCase("w:t") && TYPE_BEGIN == getType()) {
+        if (getTag().equalsIgnoreCase("w:t") && Type.BEGIN == getType()) {
             Boolean preserve = false;
             for (int i = 0; i < getAttributes().size(); i++) {
                 Attribute oneAttribute = getAttributes().get(i);
@@ -78,21 +78,21 @@ public class XMLTag extends Tag {
         // If the target language is RTL and the document is a .doxc 
         // we do a number of tag insertions
         if (EditorUtils.isRTL(targetLanguage.getLanguageCode())) {
-            if (getTag().equalsIgnoreCase("w:pPr") && TYPE_BEGIN == getType()) {
+            if (getTag().equalsIgnoreCase("w:pPr") && Type.BEGIN == getType()) {
                 buf.append("><w:bidi/");
-            } else if (getTag().equalsIgnoreCase("w:sectPr") && TYPE_BEGIN == getType()) {
+            } else if (getTag().equalsIgnoreCase("w:sectPr") && Type.BEGIN == getType()) {
                 buf.append("><w:bidi/");
-            } else if (getTag().equalsIgnoreCase("w:rPr") && TYPE_BEGIN == getType()) {
+            } else if (getTag().equalsIgnoreCase("w:rPr") && Type.BEGIN == getType()) {
                 buf.append("><w:rtl/");
-            } else if (getTag().equalsIgnoreCase("w:tblPr") && TYPE_BEGIN == getType()) {
+            } else if (getTag().equalsIgnoreCase("w:tblPr") && Type.BEGIN == getType()) {
                 buf.append("><w:bidiVisual/");
-            } else if (getTag().equalsIgnoreCase("w:tblStyle") && TYPE_ALONE == getType()) {
+            } else if (getTag().equalsIgnoreCase("w:tblStyle") && Type.ALONE == getType()) {
                 buf.append("/><w:bidiVisual/"); 
                 alreadyClosed = true;
             }
         }
 
-        if (TYPE_ALONE == getType() && !alreadyClosed) {
+        if (Type.ALONE == getType() && !alreadyClosed) {
             buf.append("/");
         }
         buf.append(">");

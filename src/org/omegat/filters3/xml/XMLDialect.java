@@ -35,6 +35,7 @@ import java.util.regex.Pattern;
 
 import org.omegat.filters3.Attributes;
 import org.omegat.filters3.Element;
+import org.omegat.filters3.Tag;
 import org.omegat.util.MultiMap;
 import org.xml.sax.InputSource;
 
@@ -63,7 +64,7 @@ public interface XMLDialect {
     /**
      * Returns the map of content based tags where key is tag name, value is tag type.
      */
-    Map<String, Integer> getContentBasedTags();
+    Map<String, Tag.Type> getContentBasedTags();
 
     /**
      * Returns the set of tags that surround intact portions of document, that

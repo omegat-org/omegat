@@ -285,7 +285,7 @@ public class DefaultXMLDialect implements XMLDialect {
     }
 
     public Boolean validateContentBasedTag(String tag, Attributes atts) {
-        return null;
+        return false;
     }
 
     /**

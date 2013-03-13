@@ -47,6 +47,7 @@ import org.omegat.gui.editor.mark.RemoveTagMarker;
 import org.omegat.gui.editor.mark.TagMarker;
 import org.omegat.gui.editor.mark.WhitespaceMarkerFactory;
 import org.omegat.gui.exttrans.MachineTranslateTextArea;
+import org.omegat.gui.glossary.GlossaryManager;
 import org.omegat.gui.glossary.GlossaryTextArea;
 import org.omegat.gui.main.ConsoleWindow;
 import org.omegat.gui.main.IMainWindow;
@@ -85,6 +86,7 @@ public class Core {
     private static IAutoSave saveThread;
 
     private static GlossaryTextArea glossary;
+    private static GlossaryManager glossaryManager;
     private static MachineTranslateTextArea machineTranslatePane;
     @SuppressWarnings("unused")
     private static DictionariesTextArea dictionaries;
@@ -153,7 +155,11 @@ public class Core {
     public static GlossaryTextArea getGlossary() {
         return glossary;
     }
-    
+
+    public static GlossaryManager getGlossaryManager() {
+        return glossaryManager;
+    }
+
     /** Get notes instance. */
     public static INotes getNotes() {
         return notes;
@@ -189,6 +195,7 @@ public class Core {
         tagValidation = new TagValidationTool(me);
         matcher = new MatchesTextArea(me);
         glossary = new GlossaryTextArea();
+        glossaryManager = new GlossaryManager(glossary);
         notes = new NotesTextArea(me);
         comments = new CommentsTextArea(me);
         machineTranslatePane = new MachineTranslateTextArea();

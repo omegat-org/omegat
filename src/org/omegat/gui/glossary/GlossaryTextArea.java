@@ -75,9 +75,6 @@ public class GlossaryTextArea extends EntryInfoThreadPane<List<GlossaryEntry>> {
 
     private static final String EXPLANATION = OStrings.getString("GUI_GLOSSARYWINDOW_explanation");
 
-    /** Glossary manager instance. */
-    protected final GlossaryManager manager = new GlossaryManager(this);
-
     /**
      * Currently processed entry. Used to detect if user moved into new entry. In this case, new find should
      * be started.
@@ -126,19 +123,19 @@ public class GlossaryTextArea extends EntryInfoThreadPane<List<GlossaryEntry>> {
     @Override
     protected void onProjectOpen() {
         clear();
-        manager.start();
+        Core.getGlossaryManager().start();
     }
 
     @Override
     protected void onProjectClose() {
         clear();
         this.setText(EXPLANATION);
-        manager.stop();
+        Core.getGlossaryManager().stop();
     }
 
     @Override
     protected void startSearchThread(SourceTextEntry newEntry) {
-        new FindGlossaryThread(GlossaryTextArea.this, newEntry, manager).start();
+        new FindGlossaryThread(GlossaryTextArea.this, newEntry, Core.getGlossaryManager()).start();
     }
 
     /**

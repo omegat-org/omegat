@@ -29,6 +29,8 @@ import javax.swing.text.BadLocationException;
 import javax.swing.text.Document;
 import javax.swing.text.DocumentFilter;
 
+import org.omegat.core.data.SourceTextEntry;
+import org.omegat.util.Preferences;
 import org.omegat.util.gui.UIThreadsUtil;
 
 /**
@@ -47,8 +49,7 @@ public class DocumentFilter3 extends DocumentFilter {
     }
 
     @Override
-    public void insertString(FilterBypass fb, int offset, String string, AttributeSet attr)
-            throws BadLocationException {
+    public void insertString(FilterBypass fb, int offset, String string, AttributeSet attr) throws BadLocationException {
         UIThreadsUtil.mustBeSwingThread();
         if (isPossible(fb.getDocument(), offset, 0)) {
             super.insertString(fb, offset, string, attr);
@@ -64,7 +65,7 @@ public class DocumentFilter3 extends DocumentFilter {
         }
     }
 
-    private boolean isPossible(Document d, int offset, int length) {
+    private boolean isPossible(Document d, int offset, int length) throws BadLocationException {
         Document3 doc = (Document3) d;
         if (doc.trustedChangesInProgress) {
             // this call created by internal changes
@@ -76,7 +77,37 @@ public class DocumentFilter3 extends DocumentFilter {
             return false;
         }
 
-        // Is inside translation ?
-        return (offset >= doc.getTranslationStart() && offset + length <= doc.getTranslationEnd());
+        if (offset < doc.getTranslationStart() || offset + length > doc.getTranslationEnd()) {
+            // Is inside translation ?
+            return false;
+        }
+
+        // check protected parts
+        if (Preferences.isPreference(Preferences.ALLOW_TAG_EDITING)) {
+            // no need to protect
+            return false;
+        }
+
+        SourceTextEntry ste = doc.controller.getCurrentEntry();
+        if (ste == null) {
+            // there is no current active entry
+            return false;
+        }
+        // check if inside tag
+        String text = doc.getText(doc.getTranslationStart(), doc.getTranslationEnd() - doc.getTranslationStart());
+        int off = offset - doc.getTranslationStart();
+        for (String tag : ste.getProtectedParts().keySet()) {
+            int pos = -1;
+            while ((pos = text.indexOf(tag, pos + 1)) >= 0) {
+                if (off > pos && off < pos + tag.length()) {
+                    return false;
+                }
+                if (off + length > pos && off + length < pos + tag.length()) {
+                    return false;
+                }
+            }
+        }
+
+        return true;
     }
 }

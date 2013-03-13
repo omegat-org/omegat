@@ -66,9 +66,9 @@ public class SourceTextEntry {
     private int m_entryNum;
 
     /**
-     * Protected parts(shortcuts) in keys, details of full content in values(for tooltips).
+     * Protected parts(shortcuts) in keys, details of full content in values(for tooltips). It can be null.
      */
-    Map<String, String> protectedParts;
+    private Map<String, String> protectedParts;
 
     /**
      * Creates a new source text entry.
@@ -131,5 +131,9 @@ public class SourceTextEntry {
     
     public void setSourceTranslationFuzzy(boolean sourceTranslationFuzzy) {
         this.sourceTranslationFuzzy = sourceTranslationFuzzy;
+    }
+
+    public Map<String, String> getProtectedParts() {
+        return protectedParts;
     }
 }

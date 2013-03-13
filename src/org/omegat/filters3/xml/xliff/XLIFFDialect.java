@@ -144,8 +144,9 @@ public class XLIFFDialect extends DefaultXMLDialect {
             } else if (el instanceof Tag) {
                 Tag tag = (Tag) el;
                 tagHandler.startOTHER();
-                String tagIndex = tagHandler.endOTHER().toString();
-                r.append('<').append(tag.getShortcut()).append(tagIndex).append('>');
+                int tagIndex = tagHandler.endOTHER();
+                tag.setIndex(tagIndex);
+                r.append(tag.getShortcut());
             } else {
                 r.append(el.toShortcut());
             }

@@ -55,7 +55,7 @@ public class TMXReaderTest extends TestCore {
     public void testLeveL2() throws Exception {
         final Map<String, String> tr = new TreeMap<String, String>();
         new TMXReader2().readTMX(new File("test/data/tmx/test-level2.tmx"), new Language("en-US"),
-                new Language("be"), false, false, false, false, new TMXReader2.LoadCallback() {
+                new Language("be"), false, false, true, false, new TMXReader2.LoadCallback() {
                     public boolean onEntry(TMXReader2.ParsedTu tu, TMXReader2.ParsedTuv tuvSource,
                             TMXReader2.ParsedTuv tuvTarget, boolean isParagraphSegtype) {
                         tr.put(tuvSource.text, tuvTarget.text);
@@ -63,6 +63,7 @@ public class TMXReaderTest extends TestCore {
                     }
                 });
         assertEquals("betuv", tr.get("entuv"));
+        assertEquals("tr3", tr.get("<a0> zz <b1>xx</c1>"));
     }
 
     public void testInvalidTMX() throws Exception {

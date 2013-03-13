@@ -2,10 +2,10 @@
 <!DOCTYPE tmx SYSTEM "tmx14.dtd">
 <tmx version="1.4">
   <header
-    creationtool="OmegaT"
+    creationtool="Other"
     creationtoolversion="2.1.3"
     segtype="paragraph"
-    o-tmf="OmegaT TMX"
+    o-tmf="Other"
     adminlang="EN-US"
     srclang="en"
     datatype="plaintext"
@@ -35,7 +35,7 @@
         <seg><it>&lt;a></it> zz <bpt i="5">&lt;b></bpt>xx<ept i="5">&lt;/c></ept></seg>
       </tuv>
       <tuv xml:lang="be">
-        <seg>First <ph x="1">{\test internal /&gt;}</ph> tr.</seg>
+        <seg>tr3</seg>
       </tuv>
     </tu>
     

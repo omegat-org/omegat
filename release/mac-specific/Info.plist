@@ -32,10 +32,6 @@
 			<string>$JAVAROOT/lib/jmyspell-core-1.0.0-beta-2.jar</string>
 			<string>$JAVAROOT/lib/jna.jar</string>
 			<string>$JAVAROOT/lib/swing-layout-1.0.jar</string>
-			<string>$JAVAROOT/lib/activation.jar</string>
-			<string>$JAVAROOT/lib/jaxb-api.jar</string>
-			<string>$JAVAROOT/lib/jaxb-impl.jar</string>
-			<string>$JAVAROOT/lib/jsr173_1.0_api.jar</string>
 			<string>$JAVAROOT/lib/svnkit-1.7.5.jar</string>
 			<string>$JAVAROOT/lib/antlr-runtime-3.4.jar</string>
 			<string>$JAVAROOT/lib/sqljet-1.1.3.jar</string>
@@ -46,7 +42,7 @@
 			<string>$JAVAROOT/native/libhunspell-macos32.dylib</string>
 		</array>
 		<key>JVMVersion</key>
-		<string>1.5+</string>
+		<string>1.6+</string>
 		<key>MainClass</key>
 		<string>org.omegat.Main</string>
 		<key>Properties</key>

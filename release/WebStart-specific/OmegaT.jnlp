@@ -27,54 +27,7 @@
 	</security>
 
 	<resources>
-		<j2se version="1.5*"
-			href="http://java.sun.com/products/autodl/j2se">
-			<resources>
-				<jar href="OmegaT.jar" />
-				<jar href="docs.jar" />
-				<jar href="htmlparser.jar" />
-				<jar href="jmyspell-core-1.0.0-beta-2.jar" />
-				<jar href="jna.jar" />
-				<jar href="lib-mnemonics.jar" />
-				<jar href="MRJAdapter.jar" />
-				<jar href="swing-layout-1.0.jar" />
-				<jar href="vldocking_2.1.4.jar" />
-				<jar href="activation.jar" />
-				<jar href="jaxb-api.jar" />
-				<jar href="jaxb-impl.jar" />
-				<jar href="sjsxp-1.0.2.jar" />
-				<jar href="svnkit-1.7.5.jar" />
-				<jar href="antlr-runtime-3.4.jar" />
-				<jar href="sqljet-1.1.3.jar" />
-				<jar href="sequence-library-1.0.2.jar" />
-				<jar href="org.eclipse.jgit-2.1.0.201209190230-r.jar" />
-				<jar href="jsch-0.1.49.jar" />
-                <jar href="jsr173_1.0_api.jar" />
-                <jar href="swing-worker-1.2.jar" />
-			</resources>
-            <resources os="Linux" arch="amd64">
-                <nativelib href="hunspell-linux64.jar" />
-            </resources>
-            <resources os="Linux" arch="i386">
-                <nativelib href="hunspell-linux32.jar" />
-            </resources>
-            <resources os="MacOS" arch="x86_64">
-                <nativelib href="hunspell-macos64.jar" />
-            </resources>
-            <resources os="MacOS" arch="i386">
-                <nativelib href="hunspell-macos32.jar" />
-            </resources>
-            <resources os="Windows" arch="amd64">
-                <nativelib href="hunspell-win64.jar" />
-            </resources>
-            <resources os="Windows" arch="x86">
-                <nativelib href="hunspell-win32.jar" />
-            </resources>
-		</j2se>
-	</resources>
-	<resources>
-		<j2se version="1.6+"
-			href="http://java.sun.com/products/autodl/j2se">
+		<j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se">
 			<resources>
 				<jar href="OmegaT.jar" />
 				<jar href="docs.jar" />
@@ -91,67 +44,26 @@
 				<jar href="sequence-library-1.0.2.jar" />
 				<jar href="org.eclipse.jgit-2.1.0.201209190230-r.jar" />
 				<jar href="jsch-0.1.49.jar" />
-                <jar href="swing-worker-1.2.jar" />
+				<jar href="swing-worker-1.2.jar" />
 			</resources>
-            <resources os="Linux" arch="amd64">
-                <nativelib href="hunspell-linux64.jar" />
-            </resources>
-            <resources os="Linux" arch="i386">
-                <nativelib href="hunspell-linux32.jar" />
-            </resources>
-            <resources os="MacOS" arch="x86_64">
-                <nativelib href="hunspell-macos64.jar" />
-            </resources>
-            <resources os="MacOS" arch="i386">
-                <nativelib href="hunspell-macos32.jar" />
-            </resources>
-            <resources os="Windows" arch="amd64">
-                <nativelib href="hunspell-win64.jar" />
-            </resources>
-            <resources os="Windows" arch="x86">
-                <nativelib href="hunspell-win32.jar" />
-            </resources>
-		</j2se>
-	</resources>
-	<resources>
-		<j2se version="1.7+"
-			href="http://java.sun.com/products/autodl/j2se">
-			<resources>
-				<jar href="OmegaT.jar" />
-				<jar href="docs.jar" />
-				<jar href="htmlparser.jar" />
-				<jar href="jmyspell-core-1.0.0-beta-2.jar" />
-				<jar href="jna.jar" />
-				<jar href="lib-mnemonics.jar" />
-				<jar href="MRJAdapter.jar" />
-				<jar href="swing-layout-1.0.jar" />
-				<jar href="vldocking_2.1.4.jar" />
-				<jar href="svnkit-1.7.5.jar" />
-				<jar href="antlr-runtime-3.4.jar" />
-				<jar href="sqljet-1.1.3.jar" />
-				<jar href="sequence-library-1.0.2.jar" />
-				<jar href="org.eclipse.jgit-2.1.0.201209190230-r.jar" />
-				<jar href="jsch-0.1.49.jar" />
-                <jar href="swing-worker-1.2.jar" />
+			<resources os="Linux" arch="amd64">
+				<nativelib href="hunspell-linux64.jar" />
 			</resources>
-            <resources os="Linux" arch="amd64">
-                <nativelib href="hunspell-linux64.jar" />
-            </resources>
-            <resources os="Linux" arch="i386">
-                <nativelib href="hunspell-linux32.jar" />
-            </resources>
-            <resources os="MacOS" arch="x86_64">
-                <nativelib href="hunspell-macos64.jar" />
-            </resources>
-            <resources os="MacOS" arch="i386">
-                <nativelib href="hunspell-macos32.jar" />
-            </resources>
-            <resources os="Windows" arch="amd64">
-                <nativelib href="hunspell-win64.jar" />
-            </resources>
-            <resources os="Windows" arch="x86">
-                <nativelib href="hunspell-win32.jar" />
-            </resources>
+			<resources os="Linux" arch="i386">
+				<nativelib href="hunspell-linux32.jar" />
+			</resources>
+			<resources os="MacOS" arch="x86_64">
+				<nativelib href="hunspell-macos64.jar" />
+			</resources>
+			<resources os="MacOS" arch="i386">
+				<nativelib href="hunspell-macos32.jar" />
+			</resources>
+			<resources os="Windows" arch="amd64">
+				<nativelib href="hunspell-win64.jar" />
+			</resources>
+			<resources os="Windows" arch="x86">
+				<nativelib href="hunspell-win32.jar" />
+			</resources>
 		</j2se>
 	</resources>
 	<application-desc main-class="org.omegat.Main" />

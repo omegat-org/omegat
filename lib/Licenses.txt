@@ -32,19 +32,8 @@ jmyspell-core-1.0.0-beta-2-1.4.jar is distributed under the
 GNU Lesser General Public License version 2.1 and greater
 Sources are available in OmegaT sources, in the directory lib/sources
 
-activation.jar, jaxb-api.jar, jaxb-impl.jar and jsr173_1.0_api.jar 
-are part of JAXB, and are distributed under the 
-Common Development and Distribution License (CDDL) v1.0 / GPLv2 + classpath 
-exception dual license
-Sources are available in OmegaT sources, in the directory lib/sources/JAXB
-Complete JAXB sources are available from https://jaxb.dev.java.net/2.1.7/
-
 swing-worker-1.2.jar is distributed under the GNU Lesser General Public License  
 version 2.1.
-Sources are available in OmegaT sources, in the directory lib/sources
-
-sjsxp-1.0.2.jar is distributed under the 
-Common Development and Distribution License (CDDL) v1.0 / GPLv2 dual license
 Sources are available in OmegaT sources, in the directory lib/sources
 
 svnkit-1.7.5.jar is distributed under the

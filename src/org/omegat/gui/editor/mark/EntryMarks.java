@@ -26,6 +26,7 @@ package org.omegat.gui.editor.mark;
 
 import java.util.List;
 
+import org.omegat.core.data.SourceTextEntry;
 import org.omegat.gui.editor.SegmentBuilder;
 
 /**
@@ -39,6 +40,7 @@ public class EntryMarks {
     public SegmentBuilder builder;
     public long entryVersion;
     List<Mark> result;
+    SourceTextEntry ste;
     String sourceText, translationText;
     final boolean isActive;
 
@@ -47,6 +49,7 @@ public class EntryMarks {
         this.builder = builder;
         this.entryVersion = entryVersion;
         this.isActive = builder.isActive();
+        this.ste = builder.getSourceTextEntry();
         this.sourceText = builder.getSourceTextEntry().getSrcText();
         this.translationText = builder.getTranslationText();
     }

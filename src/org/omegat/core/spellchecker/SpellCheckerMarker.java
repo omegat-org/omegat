@@ -31,6 +31,7 @@ import java.util.List;
 import javax.swing.text.Highlighter.HighlightPainter;
 
 import org.omegat.core.Core;
+import org.omegat.core.data.SourceTextEntry;
 import org.omegat.gui.editor.UnderlineFactory;
 import org.omegat.gui.editor.mark.IMarker;
 import org.omegat.gui.editor.mark.Mark;
@@ -49,7 +50,8 @@ public class SpellCheckerMarker implements IMarker {
         return PAINTER;
     }
 
-    public List<Mark> getMarksForEntry(String sourceText, String translationText, boolean isActive)
+    @Override
+    public List<Mark> getMarksForEntry(SourceTextEntry ste, String sourceText, String translationText, boolean isActive)
             throws Exception {
         if (translationText == null) {
             // translation not displayed

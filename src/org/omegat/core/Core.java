@@ -43,6 +43,7 @@ import org.omegat.gui.editor.IEditor;
 import org.omegat.gui.editor.mark.BidiMarkerFactory;
 import org.omegat.gui.editor.mark.IMarker;
 import org.omegat.gui.editor.mark.NBSPMarker;
+import org.omegat.gui.editor.mark.ProtectedPartsMarker;
 import org.omegat.gui.editor.mark.RemoveTagMarker;
 import org.omegat.gui.editor.mark.TagMarker;
 import org.omegat.gui.editor.mark.WhitespaceMarkerFactory;
@@ -178,6 +179,7 @@ public class Core {
         MainWindow me = new MainWindow();
         mainWindow = me;
 
+        Core.registerMarker(new ProtectedPartsMarker());
         Core.registerMarker(new TagMarker());
         Core.registerMarker(new RemoveTagMarker());
         Core.registerMarker(new NBSPMarker());

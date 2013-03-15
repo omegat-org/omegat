@@ -28,6 +28,8 @@ import java.util.List;
 
 import javax.swing.text.Highlighter.HighlightPainter;
 
+import org.omegat.core.data.SourceTextEntry;
+
 /**
  * Interface for calculate marks in editor.
  * 
@@ -47,6 +49,9 @@ public interface IMarker {
      * Calculate marks for inactive entry.
      * 
      * Method will be called NOT in Swing thread.
+     * 
+     * @return null if nothing changed, or list of new marks. Empty list must be
+     *         returned if marks shouldn't be displayed
      */
-    List<Mark> getMarksForEntry(String sourceText, String translationText, boolean isActive) throws Exception;
+    List<Mark> getMarksForEntry(SourceTextEntry ste, String sourceText, String translationText, boolean isActive) throws Exception;
 }

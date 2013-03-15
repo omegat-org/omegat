@@ -117,7 +117,7 @@ public class CalcMarkersThread extends Thread {
                         // already changed
                         continue;
                     }
-                    ev.result = marker.getMarksForEntry(ev.sourceText, ev.translationText, ev.isActive);
+                    ev.result = marker.getMarksForEntry(ev.ste, ev.sourceText, ev.translationText, ev.isActive);
                     if (ev.result == null) {
                         // null returned - not need to change anything
                         continue;

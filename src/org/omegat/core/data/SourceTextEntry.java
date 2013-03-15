@@ -25,6 +25,7 @@
 
 package org.omegat.core.data;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -39,13 +40,13 @@ import java.util.Map;
  */
 public class SourceTextEntry {
     /** Storage for full entry's identifiers, including source text. */
-    private EntryKey key;
+    private final EntryKey key;
 
     /** Comment in source file. */
-    private String comment;
+    private final String comment;
     
     /** Translation from source files. */
-    private String sourceTranslation;
+    private final String sourceTranslation;
     
     /** Translation from source files is fuzzy. */
     private boolean sourceTranslationFuzzy;
@@ -63,12 +64,14 @@ public class SourceTextEntry {
     DUPLICATE duplicate;
 
     /** Holds the number of this entry in a project. */
-    private int m_entryNum;
+    private final int m_entryNum;
 
     /**
-     * Protected parts(shortcuts) in keys, details of full content in values(for tooltips). It can be null.
+     * Protected parts(shortcuts) in keys, details of full content in values(for
+     * tooltips). Read-only map, may be accessible from any threads. It can be
+     * null.
      */
-    private Map<String, String> protectedParts;
+    private final Map<String, String> protectedParts;
 
     /**
      * Creates a new source text entry.
@@ -90,7 +93,7 @@ public class SourceTextEntry {
         m_entryNum = entryNum;
         this.comment = comment;
         this.sourceTranslation = sourceTranslation;
-        this.protectedParts = protectedParts;
+        this.protectedParts = protectedParts != null ? Collections.unmodifiableMap(protectedParts) : null;
     }
 
     public EntryKey getKey() {

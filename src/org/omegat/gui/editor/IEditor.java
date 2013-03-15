@@ -287,4 +287,9 @@ public interface IEditor {
      * Removes the current filter.
      */
     void removeFilter();
+
+    /**
+     * Returns current translation or null.
+     */
+    String getCurrentTranslation();
 }

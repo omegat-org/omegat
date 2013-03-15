@@ -1333,6 +1333,10 @@ public class EditorController implements IEditor {
         editor.replaceSelection(text);
     }
 
+    public String getCurrentTranslation() {
+        return editor.getOmDocument().extractTranslation();
+    }
+
     /**
      * {@inheritDoc}
      */

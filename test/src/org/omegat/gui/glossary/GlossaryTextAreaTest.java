@@ -189,6 +189,9 @@ public class GlossaryTextAreaTest extends TestCore {
             public void prevEntryWithNote() {
                 throw new UnsupportedOperationException("Not supported yet.");
             }
+            public String getCurrentTranslation() {
+                return null;
+            }
         });
     }
 }

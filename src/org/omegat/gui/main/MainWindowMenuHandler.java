@@ -30,9 +30,14 @@
 
 package org.omegat.gui.main;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.util.Map;
 
 import javax.swing.JDialog;
+import javax.swing.JMenu;
+import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 
 import org.jdesktop.swingworker.SwingWorker;
@@ -564,12 +569,52 @@ public class MainWindowMenuHandler {
      * Identify all the placeholders in the source text and automatically inserts them into the target text.
      */
     public void editTagPainterMenuItemActionPerformed() {
+        // insert tags
+        SourceTextEntry ste = Core.getEditor().getCurrentEntry();
+        if (ste != null && ste.getProtectedParts() != null) {
+            for (String tag : ste.getProtectedParts().keySet()) {
+                Core.getEditor().insertText(tag);
+            }
+        }
 
+        // insert other placeholders
         String sourceText = Core.getEditor().getCurrentEntry().getSrcText();
         String placeholderString = StaticUtils.buildPaintPlaceholderList(sourceText);
 
         if (!placeholderString.equals("")) {
             Core.getEditor().insertText(placeholderString);
+        }
+    }
+
+    public void editTagNextMissedMenuItemActionPerformed() {
+        String trans = Core.getEditor().getCurrentTranslation();
+        if (trans == null) {
+            return;
+        }
+        SourceTextEntry ste = Core.getEditor().getCurrentEntry();
+        if (ste != null && ste.getProtectedParts() != null) {
+            for (String tag : ste.getProtectedParts().keySet()) {
+                if (!trans.contains(tag)) {
+                    Core.getEditor().insertText(tag);
+                    break;
+                }
+            }
+        }
+    }
+
+    public void editTagInsertNMenuMenuSelected(JMenu menu) {
+        menu.removeAll();
+        SourceTextEntry ste = Core.getEditor().getCurrentEntry();
+        if (ste != null && ste.getProtectedParts() != null) {
+            for (final String tag : ste.getProtectedParts().keySet()) {
+                JMenuItem item = new JMenuItem(tag);
+                item.addActionListener(new ActionListener() {
+                    public void actionPerformed(ActionEvent e) {
+                        Core.getEditor().insertText(tag);
+                    }
+                });
+                menu.add(item);
+            }
         }
     }
 

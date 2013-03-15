@@ -48,6 +48,8 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JRadioButtonMenuItem;
 import javax.swing.JSeparator;
+import javax.swing.event.MenuEvent;
+import javax.swing.event.MenuListener;
 
 import net.roydesign.mac.MRJAdapter;
 
@@ -78,7 +80,7 @@ import org.openide.awt.Mnemonics;
  * @author Wildrich Fourie
  * @author Martin Fleurke
  */
-public class MainWindowMenu implements ActionListener, IMainMenu {
+public class MainWindowMenu implements ActionListener, MenuListener, IMainMenu {
     private static final Logger LOGGER = Logger.getLogger(MainWindowMenu.class.getName());
 
     /** MainWindow instance. */
@@ -149,6 +151,7 @@ public class MainWindowMenu implements ActionListener, IMainMenu {
      * @param evt
      *            event info
      */
+    @Override
     public void actionPerformed(ActionEvent evt) {
         // Item what perform event.
         JMenuItem menuItem = (JMenuItem) evt.getSource();
@@ -177,6 +180,49 @@ public class MainWindowMenu implements ActionListener, IMainMenu {
             LOGGER.log(Level.SEVERE, "Error execute method", ex);
             throw new IncompatibleClassChangeError("Error invoke method handler for main menu");
         }
+    }
+
+    /**
+     * Code for dispatching events from components to event handlers.
+     * 
+     * @param evt
+     *            event info
+     */
+    @Override
+    public void menuSelected(MenuEvent evt) {
+        // Item what perform event.
+        JMenu menu = (JMenu) evt.getSource();
+
+        // Get item name from actionCommand.
+        String action = menu.getActionCommand();
+
+        Log.logInfoRB("LOG_MENU_CLICK", action);
+
+        // Find method by item name.
+        String methodName = action + "MenuSelected";
+        Method method = null;
+        try {
+            method = mainWindowMenuHandler.getClass().getMethod(methodName, JMenu.class);
+        } catch (NoSuchMethodException ex) {
+            // method not declared
+            return;
+        }
+
+        // Call ...MenuMenuSelected method.
+        try {
+            method.invoke(mainWindowMenuHandler, menu);
+        } catch (IllegalAccessException ex) {
+            throw new IncompatibleClassChangeError("Error invoke method handler for main menu");
+        } catch (InvocationTargetException ex) {
+            LOGGER.log(Level.SEVERE, "Error execute method", ex);
+            throw new IncompatibleClassChangeError("Error invoke method handler for main menu");
+        }
+    }
+
+    public void menuCanceled(MenuEvent e) {
+    }
+
+    public void menuDeselected(MenuEvent e) {
     }
 
     /**
@@ -226,6 +272,8 @@ public class MainWindowMenu implements ActionListener, IMainMenu {
         editMenu.add(editInsertSourceMenuItem = createMenuItem("TF_MENU_EDIT_SOURCE_INSERT"));
         editMenu.add(new JSeparator());
         editMenu.add(editTagPainterMenuItem = createMenuItem("TF_MENU_EDIT_TAGPAINT"));
+        editMenu.add(editTagNextMissedMenuItem = createMenuItem("TF_MENU_EDIT_TAG_NEXT_MISSED"));
+        editMenu.add(editTagInsertNMenu = createMenu("TF_MENU_EDIT_TAG_INSERT_N"));
         editMenu.add(new JSeparator());
         editMenu.add(editExportSelectionMenuItem = createMenuItem("TF_MENU_EDIT_EXPORT_SELECTION"));
         editMenu.add(editCreateGlossaryEntryMenuItem = createMenuItem("TF_MENU_EDIT_CREATE_GLOSSARY_ENTRY"));
@@ -426,6 +474,7 @@ public class MainWindowMenu implements ActionListener, IMainMenu {
     private JMenu createMenu(final String titleKey) {
         JMenu result = new JMenu();
         Mnemonics.setLocalizedText(result, OStrings.getString(titleKey));
+        result.addMenuListener(this);
         return result;
     }
 
@@ -479,7 +528,7 @@ public class MainWindowMenu implements ActionListener, IMainMenu {
     protected void setActionCommands() {
         try {
             for (Field f : this.getClass().getDeclaredFields()) {
-                if (JMenuItem.class.isAssignableFrom(f.getType()) && f.getType() != JMenu.class) {
+                if (JMenuItem.class.isAssignableFrom(f.getType())) {
                     JMenuItem menuItem = (JMenuItem) f.get(this);
                     menuItem.setActionCommand(f.getName());
                 }
@@ -561,6 +610,8 @@ public class MainWindowMenu implements ActionListener, IMainMenu {
     public JMenuItem editMultipleAlternate;
     JMenuItem editUndoMenuItem;
     JMenuItem editTagPainterMenuItem;
+    JMenuItem editTagNextMissedMenuItem;
+    JMenu editTagInsertNMenu;
     JMenuItem editExportSelectionMenuItem;
     JMenuItem editCreateGlossaryEntryMenuItem;
     public JMenuItem gotoHistoryBackMenuItem;

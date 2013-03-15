@@ -70,17 +70,17 @@ public class TagValidationTool implements ITagValidation, IProjectEventListener 
         CoreEvents.registerProjectChangeListener(this);
     }
 
-    public boolean validateTags() {
-        List<SourceTextEntry> suspects = listInvalidTags();
+    @Override
+    public void displayTagValidationErrors(List<SourceTextEntry> suspects) {
         if (mainWindow != null) {
-            return showTagResultsInGui(suspects);
+            showTagResultsInGui(suspects);
         } else {
-            return showTagResultsInConsole(suspects);
+            showTagResultsInConsole(suspects);
         }
     }
 
-    private boolean showTagResultsInGui(List<SourceTextEntry> suspects) {
-        if (suspects.size() > 0) {
+    private void showTagResultsInGui(List<SourceTextEntry> suspects) {
+        if (suspects != null && suspects.size() > 0) {
             // create a tag validation window if necessary
             if (m_tagWin == null) {
                 m_tagWin = new TagValidationFrame(mainWindow);
@@ -93,7 +93,6 @@ public class TagValidationTool implements ITagValidation, IProjectEventListener 
             // display list of suspect strings
             m_tagWin.setVisible(true);
             m_tagWin.displayStringList(suspects);
-            return false;
         } else {
             // close tag validation window if present
             if (m_tagWin != null)
@@ -103,12 +102,11 @@ public class TagValidationTool implements ITagValidation, IProjectEventListener 
             JOptionPane.showMessageDialog(Core.getMainWindow().getApplicationFrame(),
                     OStrings.getString("TF_NOTICE_OK_TAGS"), OStrings.getString("TF_NOTICE_TITLE_TAGS"),
                     JOptionPane.INFORMATION_MESSAGE);
-            return true;
         }
     }
     
-    private boolean showTagResultsInConsole(List<SourceTextEntry> suspects) {
-        if (suspects.size() > 0) {
+    private void showTagResultsInConsole(List<SourceTextEntry> suspects) {
+        if (suspects != null && suspects.size() > 0) {
             for (SourceTextEntry ste : suspects) {
                 String src = ste.getSrcText();
                 TMXEntry trans = Core.getProject().getTranslationInfo(ste);
@@ -118,9 +116,6 @@ public class TagValidationTool implements ITagValidation, IProjectEventListener 
                     System.out.println(trans.translation);
                 }
             }
-            return false;
-        } else {
-            return true;
         }
     }
 
@@ -137,7 +132,8 @@ public class TagValidationTool implements ITagValidation, IProjectEventListener 
      * Scans project and builds the list of entries which are suspected of
      * having changed (possibly invalid) tag structures.
      */
-    private List<SourceTextEntry> listInvalidTags() {
+    @Override
+    public List<SourceTextEntry> listInvalidTags() {
         int j;
         String s;
         TMXEntry te;
@@ -319,7 +315,7 @@ public class TagValidationTool implements ITagValidation, IProjectEventListener 
 
             } //end loop over entries
         } //end loop over files
-        return suspects;
+        return suspects.isEmpty() ? null : suspects;
     }
 
     /**

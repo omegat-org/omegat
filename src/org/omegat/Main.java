@@ -272,16 +272,18 @@ public class Main {
 
         if ("abort".equalsIgnoreCase(tagValidation)) {
             System.out.println(OStrings.getString("CONSOLE_VALIDATING_TAGS"));
-            ITagValidation aTagValidation = Core.getTagValidation();
-            if (!aTagValidation.validateTags()) {
+            List<SourceTextEntry> stes = Core.getTagValidation().listInvalidTags();
+            if (stes != null) {
+                Core.getTagValidation().displayTagValidationErrors(stes);
                 System.out.println(OStrings.getString("CONSOLE_TAGVALIDATION_FAIL"));
                 System.out.println(OStrings.getString("CONSOLE_TAGVALIDATION_ABORT"));
                 System.exit(1);
             }
         } else if ("warn".equalsIgnoreCase(tagValidation)) {
             System.out.println(OStrings.getString("CONSOLE_VALIDATING_TAGS"));
-            ITagValidation aTagValidation = Core.getTagValidation();
-            if (!aTagValidation.validateTags()) {
+            List<SourceTextEntry> stes = Core.getTagValidation().listInvalidTags();
+            if (stes != null) {
+                Core.getTagValidation().displayTagValidationErrors(stes);
                 System.out.println(OStrings.getString("CONSOLE_TAGVALIDATION_FAIL"));
             }
         } else {

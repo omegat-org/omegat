@@ -33,7 +33,7 @@ package org.omegat.gui.main;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
-import java.util.Map;
+import java.util.List;
 
 import javax.swing.JDialog;
 import javax.swing.JMenu;
@@ -153,6 +153,14 @@ public class MainWindowMenuHandler {
      * Create translated documents.
      */
     public void projectCompileMenuItemActionPerformed() {
+        if (Preferences.isPreference(Preferences.TAGS_VALID_REQUIRED)) {
+            List<SourceTextEntry> stes = Core.getTagValidation().listInvalidTags();
+            if (stes != null) {
+                Core.getTagValidation().displayTagValidationErrors(stes);
+                return;
+            }
+        }
+
         ProjectUICommands.projectCompile();
     }
 
@@ -562,7 +570,7 @@ public class MainWindowMenuHandler {
     }
 
     public void toolsValidateTagsMenuItemActionPerformed() {
-        Core.getTagValidation().validateTags();
+        Core.getTagValidation().displayTagValidationErrors(Core.getTagValidation().listInvalidTags());
     }
 
     /**

@@ -294,6 +294,8 @@ public class Preferences {
 
     public static final String LOOSE_TAG_ORDERING = "loose_tag_ordering";
 
+    public static final String TAGS_VALID_REQUIRED = "tags_valid_required";
+
     /** Private constructor, because this file is singleton */
     static {
         m_loaded = false;

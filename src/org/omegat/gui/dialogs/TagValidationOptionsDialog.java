@@ -86,6 +86,7 @@ public class TagValidationOptionsDialog extends JDialog {
         customPatternRegExpTF.setText(Preferences.getPreferenceDefaultAllowEmptyString(Preferences.CHECK_CUSTOM_PATTERN));
         removePatternRegExpTF.setText(Preferences.getPreferenceDefaultAllowEmptyString(Preferences.CHECK_REMOVE_PATTERN));
         looseTagOrderCheckBox.setSelected(Preferences.isPreference(Preferences.LOOSE_TAG_ORDERING));
+        cbTagsValidRequired.setSelected(Preferences.isPreference(Preferences.TAGS_VALID_REQUIRED));
 
         invalidate();
         pack();
@@ -108,18 +109,19 @@ public class TagValidationOptionsDialog extends JDialog {
 
         ourButtonGroup = new javax.swing.ButtonGroup();
         descriptionTextArea = new javax.swing.JTextArea();
-        okButton = new javax.swing.JButton();
-        cancelButton = new javax.swing.JButton();
         noCheckRadio = new javax.swing.JRadioButton();
         simpleCheckRadio = new javax.swing.JRadioButton();
         fullCheckRadio = new javax.swing.JRadioButton();
         javaPatternCheckBox = new javax.swing.JCheckBox();
+        looseTagOrderCheckBox = new javax.swing.JCheckBox();
+        looseTagOrderWarningTextArea = new javax.swing.JTextArea();
+        cbTagsValidRequired = new javax.swing.JCheckBox();
         jLabelCustomPattern = new javax.swing.JLabel();
         customPatternRegExpTF = new javax.swing.JTextField();
         jLabelRemovePattern = new javax.swing.JLabel();
         removePatternRegExpTF = new javax.swing.JTextField();
-        looseTagOrderCheckBox = new javax.swing.JCheckBox();
-        looseTagOrderWarningTextArea = new javax.swing.JTextArea();
+        okButton = new javax.swing.JButton();
+        cancelButton = new javax.swing.JButton();
 
         setTitle(OStrings.getString("GUI_TITLE_TagValidation_Options")); // NOI18N
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -129,21 +131,125 @@ public class TagValidationOptionsDialog extends JDialog {
         });
         getContentPane().setLayout(new java.awt.GridBagLayout());
 
-        descriptionTextArea.setEditable(false);
         descriptionTextArea.setBackground(javax.swing.UIManager.getDefaults().getColor("Label.background"));
+        descriptionTextArea.setEditable(false);
         descriptionTextArea.setFont(new JLabel().getFont());
         descriptionTextArea.setLineWrap(true);
         descriptionTextArea.setText(OStrings.getString("GUI_TAGVALIDATION_DESCRIPTION")); // NOI18N
         descriptionTextArea.setWrapStyleWord(true);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 0;
         gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTH;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
         getContentPane().add(descriptionTextArea, gridBagConstraints);
+
+        ourButtonGroup.add(noCheckRadio);
+        noCheckRadio.setSelected(true);
+        org.openide.awt.Mnemonics.setLocalizedText(noCheckRadio, OStrings.getString("TV_OPTION_NO_CHECK")); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(4, 6, 0, 4);
+        getContentPane().add(noCheckRadio, gridBagConstraints);
+
+        ourButtonGroup.add(simpleCheckRadio);
+        org.openide.awt.Mnemonics.setLocalizedText(simpleCheckRadio, OStrings.getString("TV_OPTION_SIMPLE_CHECK")); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(0, 6, 0, 4);
+        getContentPane().add(simpleCheckRadio, gridBagConstraints);
+
+        ourButtonGroup.add(fullCheckRadio);
+        org.openide.awt.Mnemonics.setLocalizedText(fullCheckRadio, OStrings.getString("TV_OPTION_FULL_CHECK")); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(0, 6, 4, 4);
+        getContentPane().add(fullCheckRadio, gridBagConstraints);
+
+        org.openide.awt.Mnemonics.setLocalizedText(javaPatternCheckBox, OStrings.getString("TV_OPTION_JAVA_PATTERN")); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(4, 6, 4, 4);
+        getContentPane().add(javaPatternCheckBox, gridBagConstraints);
+
+        org.openide.awt.Mnemonics.setLocalizedText(looseTagOrderCheckBox, OStrings.getString("TV_OPTION_LOOSE_TAG_ORDER")); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(4, 6, 0, 4);
+        getContentPane().add(looseTagOrderCheckBox, gridBagConstraints);
+
+        looseTagOrderWarningTextArea.setBackground(javax.swing.UIManager.getDefaults().getColor("Label.background"));
+        looseTagOrderWarningTextArea.setEditable(false);
+        looseTagOrderWarningTextArea.setFont(new JLabel().getFont());
+        looseTagOrderWarningTextArea.setLineWrap(true);
+        looseTagOrderWarningTextArea.setText(OStrings.getString("TV_OPTION_LOOSE_TAG_WARNING")); // NOI18N
+        looseTagOrderWarningTextArea.setWrapStyleWord(true);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.insets = new java.awt.Insets(0, 24, 4, 24);
+        getContentPane().add(looseTagOrderWarningTextArea, gridBagConstraints);
+
+        org.openide.awt.Mnemonics.setLocalizedText(cbTagsValidRequired, OStrings.getString("TV_OPTION_TAGS_VALID_REQUIRED")); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.insets = new java.awt.Insets(4, 6, 0, 4);
+        getContentPane().add(cbTagsValidRequired, gridBagConstraints);
+
+        org.openide.awt.Mnemonics.setLocalizedText(jLabelCustomPattern, OStrings.getString("TV_OPTION_CUSTOMPATTERN")); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(4, 6, 0, 4);
+        getContentPane().add(jLabelCustomPattern, gridBagConstraints);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridwidth = 4;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(4, 6, 4, 4);
+        getContentPane().add(customPatternRegExpTF, gridBagConstraints);
+
+        org.openide.awt.Mnemonics.setLocalizedText(jLabelRemovePattern, OStrings.getString("TV_OPTION_REMOVEPATTERN")); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(4, 6, 0, 4);
+        getContentPane().add(jLabelRemovePattern, gridBagConstraints);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridwidth = 4;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(4, 6, 4, 4);
+        getContentPane().add(removePatternRegExpTF, gridBagConstraints);
 
         org.openide.awt.Mnemonics.setLocalizedText(okButton, OStrings.getString("BUTTON_OK")); // NOI18N
         okButton.addActionListener(new java.awt.event.ActionListener() {
@@ -153,7 +259,6 @@ public class TagValidationOptionsDialog extends JDialog {
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 11;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.SOUTHEAST;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.weighty = 1.0;
@@ -168,118 +273,10 @@ public class TagValidationOptionsDialog extends JDialog {
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
-        gridBagConstraints.gridy = 11;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.SOUTHEAST;
         gridBagConstraints.weighty = 1.0;
         gridBagConstraints.insets = new java.awt.Insets(14, 4, 4, 4);
         getContentPane().add(cancelButton, gridBagConstraints);
-
-        ourButtonGroup.add(noCheckRadio);
-        noCheckRadio.setSelected(true);
-        org.openide.awt.Mnemonics.setLocalizedText(noCheckRadio, OStrings.getString("TV_OPTION_NO_CHECK")); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 1;
-        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        gridBagConstraints.weightx = 1.0;
-        gridBagConstraints.insets = new java.awt.Insets(4, 6, 0, 4);
-        getContentPane().add(noCheckRadio, gridBagConstraints);
-
-        ourButtonGroup.add(simpleCheckRadio);
-        org.openide.awt.Mnemonics.setLocalizedText(simpleCheckRadio, OStrings.getString("TV_OPTION_SIMPLE_CHECK")); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 2;
-        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        gridBagConstraints.weightx = 1.0;
-        gridBagConstraints.insets = new java.awt.Insets(0, 6, 0, 4);
-        getContentPane().add(simpleCheckRadio, gridBagConstraints);
-
-        ourButtonGroup.add(fullCheckRadio);
-        org.openide.awt.Mnemonics.setLocalizedText(fullCheckRadio, OStrings.getString("TV_OPTION_FULL_CHECK")); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 3;
-        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        gridBagConstraints.weightx = 1.0;
-        gridBagConstraints.insets = new java.awt.Insets(0, 6, 4, 4);
-        getContentPane().add(fullCheckRadio, gridBagConstraints);
-
-        org.openide.awt.Mnemonics.setLocalizedText(javaPatternCheckBox, OStrings.getString("TV_OPTION_JAVA_PATTERN")); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 4;
-        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        gridBagConstraints.weightx = 1.0;
-        gridBagConstraints.insets = new java.awt.Insets(4, 6, 4, 4);
-        getContentPane().add(javaPatternCheckBox, gridBagConstraints);
-
-        org.openide.awt.Mnemonics.setLocalizedText(jLabelCustomPattern, OStrings.getString("TV_OPTION_CUSTOMPATTERN")); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 7;
-        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        gridBagConstraints.weightx = 1.0;
-        gridBagConstraints.insets = new java.awt.Insets(4, 6, 0, 4);
-        getContentPane().add(jLabelCustomPattern, gridBagConstraints);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 8;
-        gridBagConstraints.gridwidth = 4;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        gridBagConstraints.weightx = 1.0;
-        gridBagConstraints.insets = new java.awt.Insets(4, 6, 4, 4);
-        getContentPane().add(customPatternRegExpTF, gridBagConstraints);
-
-        org.openide.awt.Mnemonics.setLocalizedText(jLabelRemovePattern, OStrings.getString("TV_OPTION_REMOVEPATTERN")); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 9;
-        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        gridBagConstraints.weightx = 1.0;
-        gridBagConstraints.insets = new java.awt.Insets(4, 6, 0, 4);
-        getContentPane().add(jLabelRemovePattern, gridBagConstraints);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 10;
-        gridBagConstraints.gridwidth = 4;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        gridBagConstraints.weightx = 1.0;
-        gridBagConstraints.insets = new java.awt.Insets(4, 6, 4, 4);
-        getContentPane().add(removePatternRegExpTF, gridBagConstraints);
-
-        org.openide.awt.Mnemonics.setLocalizedText(looseTagOrderCheckBox, OStrings.getString("TV_OPTION_LOOSE_TAG_ORDER")); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 5;
-        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        gridBagConstraints.weightx = 1.0;
-        gridBagConstraints.insets = new java.awt.Insets(4, 6, 0, 4);
-        getContentPane().add(looseTagOrderCheckBox, gridBagConstraints);
-
-        looseTagOrderWarningTextArea.setEditable(false);
-        looseTagOrderWarningTextArea.setBackground(javax.swing.UIManager.getDefaults().getColor("Label.background"));
-        looseTagOrderWarningTextArea.setFont(new JLabel().getFont());
-        looseTagOrderWarningTextArea.setLineWrap(true);
-        looseTagOrderWarningTextArea.setText(OStrings.getString("TV_OPTION_LOOSE_TAG_WARNING")); // NOI18N
-        looseTagOrderWarningTextArea.setWrapStyleWord(true);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 6;
-        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        gridBagConstraints.insets = new java.awt.Insets(0, 24, 4, 24);
-        getContentPane().add(looseTagOrderWarningTextArea, gridBagConstraints);
 
         pack();
         java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
@@ -316,6 +313,7 @@ public class TagValidationOptionsDialog extends JDialog {
             Preferences.setPreference(Preferences.CHECK_CUSTOM_PATTERN, customPatternRegExpTF.getText());
             Preferences.setPreference(Preferences.CHECK_REMOVE_PATTERN, removePatternRegExpTF.getText());
             Preferences.setPreference(Preferences.LOOSE_TAG_ORDERING, looseTagOrderCheckBox.isSelected());
+            Preferences.setPreference(Preferences.TAGS_VALID_REQUIRED, cbTagsValidRequired.isSelected());
             PatternConsts.updatePlaceholderPattern();
             PatternConsts.updateRemovePattern();
             doClose(RET_OK);
@@ -341,6 +339,7 @@ public class TagValidationOptionsDialog extends JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cancelButton;
+    private javax.swing.JCheckBox cbTagsValidRequired;
     private javax.swing.JTextField customPatternRegExpTF;
     private javax.swing.JTextArea descriptionTextArea;
     private javax.swing.JRadioButton fullCheckRadio;

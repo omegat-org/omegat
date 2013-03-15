@@ -3,7 +3,7 @@
           with fuzzy matching, translation memory, keyword search, 
           glossaries, and translation leveraging into updated projects.
 
- Copyright (C) 2008 Alex Buloichik
+ Copyright (C) 2008-2013 Alex Buloichik
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -24,6 +24,10 @@
 
 package org.omegat.gui.tagvalidation;
 
+import java.util.List;
+
+import org.omegat.core.data.SourceTextEntry;
+
 /**
  * Interface for tag validation.
  * 
@@ -31,8 +35,18 @@ package org.omegat.gui.tagvalidation;
  */
 public interface ITagValidation {
     /**
-     * Get invalid tags list and show them.
-     * @return true when all tags are valid, false otherwise
+     * Get invalid tags list.
+     * 
+     * @return list of entries with invalid tags, or null if all entries are
+     *         valid
      */
-    boolean validateTags();
+    List<SourceTextEntry> listInvalidTags();
+
+    /**
+     * Show invalid tags entries.
+     * 
+     * @param invalidTagsEntries
+     *            list of invalid tags entries(from listInvalidTags() method)
+     */
+    void displayTagValidationErrors(List<SourceTextEntry> invalidTagsEntries);
 }

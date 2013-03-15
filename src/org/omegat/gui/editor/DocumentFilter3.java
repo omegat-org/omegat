@@ -83,27 +83,27 @@ public class DocumentFilter3 extends DocumentFilter {
         }
 
         // check protected parts
-        if (Preferences.isPreference(Preferences.ALLOW_TAG_EDITING)) {
-            // no need to protect
-            return false;
-        }
-
-        SourceTextEntry ste = doc.controller.getCurrentEntry();
-        if (ste == null) {
-            // there is no current active entry
-            return false;
-        }
-        // check if inside tag
-        String text = doc.getText(doc.getTranslationStart(), doc.getTranslationEnd() - doc.getTranslationStart());
-        int off = offset - doc.getTranslationStart();
-        for (String tag : ste.getProtectedParts().keySet()) {
-            int pos = -1;
-            while ((pos = text.indexOf(tag, pos + 1)) >= 0) {
-                if (off > pos && off < pos + tag.length()) {
-                    return false;
-                }
-                if (off + length > pos && off + length < pos + tag.length()) {
-                    return false;
+        if (!Preferences.isPreference(Preferences.ALLOW_TAG_EDITING)) {
+            SourceTextEntry ste = doc.controller.getCurrentEntry();
+            if (ste == null) {
+                // there is no current active entry
+                return false;
+            }
+            // check if inside tag
+            if (ste.getProtectedParts() != null) {
+                String text = doc.getText(doc.getTranslationStart(),
+                        doc.getTranslationEnd() - doc.getTranslationStart());
+                int off = offset - doc.getTranslationStart();
+                for (String tag : ste.getProtectedParts().keySet()) {
+                    int pos = -1;
+                    while ((pos = text.indexOf(tag, pos + 1)) >= 0) {
+                        if (off > pos && off < pos + tag.length()) {
+                            return false;
+                        }
+                        if (off + length > pos && off + length < pos + tag.length()) {
+                            return false;
+                        }
+                    }
                 }
             }
         }

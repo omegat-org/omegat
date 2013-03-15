@@ -1,4 +1,23 @@
 ----------------------------------------------------------------------
+ OmegaT 2.7.0
+----------------------------------------------------------------------
+   1 Enhancement
+   1 Bug fix
+   0 Localisation update
+----------------------------------------------------------------------
+2.7.0 vs. 2.6.3
+
+  Implemented requests:
+
+  - Have glossary search in Find dialog
+  http://sourceforge.net/support/tracker.php?aid=3385415
+
+  Bug fixes:
+
+  - XLIFF Filter: <ept> not recognized in relation with <bpt>
+  http://sourceforge.net/support/tracker.php?aid=1988732
+
+----------------------------------------------------------------------
  OmegaT 2.6.3
 ----------------------------------------------------------------------
    3 Enhancements

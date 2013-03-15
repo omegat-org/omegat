@@ -12,6 +12,9 @@
   - Have glossary search in Find dialog
   http://sourceforge.net/support/tracker.php?aid=3385415
 
+  - Grey out more options with Search Files
+  http://sourceforge.net/support/tracker.php?aid=3385348
+
   Bug fixes:
 
   - XLIFF Filter: <ept> not recognized in relation with <bpt>

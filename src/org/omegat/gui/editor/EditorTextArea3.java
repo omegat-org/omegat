@@ -58,6 +58,7 @@ import javax.swing.undo.UndoManager;
 import org.omegat.core.CoreEvents;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.util.StaticUtils;
+import org.omegat.util.StringUtil;
 import org.omegat.util.gui.DockingUI;
 
 /**
@@ -276,14 +277,17 @@ public class EditorTextArea3 extends JEditorPane {
                 || (mac && isKey(e, KeyEvent.VK_BACK_SPACE, KeyEvent.ALT_MASK))) {
             // handle Ctrl+Backspace (Alt+Backspace for MacOS)
             try {
-                int offset = getCaretPosition();
-                int prevWord = Utilities.getPreviousWord(this, offset);
-                int c = Math.max(prevWord, doc.getTranslationStart());
-                setSelectionStart(c);
-                setSelectionEnd(offset);
-                replaceSelection("");
+                processed = wholeTagDelete(false);
+                if (!processed) {
+                    int offset = getCaretPosition();
+                    int prevWord = Utilities.getPreviousWord(this, offset);
+                    int c = Math.max(prevWord, doc.getTranslationStart());
+                    setSelectionStart(c);
+                    setSelectionEnd(offset);
+                    replaceSelection("");
 
-                processed = true;
+                    processed = true;
+                }
             } catch (BadLocationException ex) {
                 // do nothing
             }
@@ -291,14 +295,17 @@ public class EditorTextArea3 extends JEditorPane {
                 || (mac && isKey(e, KeyEvent.VK_DELETE, KeyEvent.ALT_MASK))) {
             // handle Ctrl+Backspace (Alt+Delete for MacOS)
             try {
-                int offset = getCaretPosition();
-                int nextWord = Utilities.getNextWord(this, offset);
-                int c = Math.min(nextWord, doc.getTranslationEnd());
-                setSelectionStart(offset);
-                setSelectionEnd(c);
-                replaceSelection("");
+                processed = wholeTagDelete(true);
+                if (!processed) {
+                    int offset = getCaretPosition();
+                    int nextWord = Utilities.getNextWord(this, offset);
+                    int c = Math.min(nextWord, doc.getTranslationEnd());
+                    setSelectionStart(offset);
+                    setSelectionEnd(c);
+                    replaceSelection("");
 
-                processed = true;
+                    processed = true;
+                }
             } catch (BadLocationException ex) {
                 // do nothing
             }
@@ -377,18 +384,56 @@ public class EditorTextArea3 extends JEditorPane {
             String text = doc.extractTranslation();
             int off = getCaretPosition() - doc.getTranslationStart();
             for (String tag : ste.getProtectedParts().keySet()) {
-                int pos = -1;
-                while ((pos = text.indexOf(tag, pos + 1)) >= 0) {
-                    if ((checkTagStart && pos == off) || (!checkTagStart && pos + tag.length() == off)) {
-                        pos += doc.getTranslationStart();
-                        if (checkTagStart) {
-                            pos += tag.length();
-                        }
+                if (checkTagStart) {
+                    if (StringUtil.isSubstringAfter(text, off, tag)) {
+                        int pos = off + doc.getTranslationStart() + tag.length();
                         if (withShift) {
                             getCaret().moveDot(pos);
                         } else {
                             getCaret().setDot(pos);
                         }
+                        return true;
+                    }
+                } else {
+                    if (StringUtil.isSubstringBefore(text, off, tag)) {
+                        int pos = off + doc.getTranslationStart() - tag.length();
+                        if (withShift) {
+                            getCaret().moveDot(pos);
+                        } else {
+                            getCaret().setDot(pos);
+                        }
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Whole tag delete before or after cursor
+     * 
+     * @param checkTagStart
+     *            true if check tag start, false if check tag end
+     * @return true if tag deleted
+     */
+    boolean wholeTagDelete(boolean checkTagStart) throws BadLocationException {
+        Document3 doc = getOmDocument();
+        SourceTextEntry ste = doc.controller.getCurrentEntry();
+        if (ste != null && ste.getProtectedParts() != null) {
+            String text = doc.extractTranslation();
+            int off = getCaretPosition() - doc.getTranslationStart();
+            for (String tag : ste.getProtectedParts().keySet()) {
+                if (checkTagStart) {
+                    if (StringUtil.isSubstringAfter(text, off, tag)) {
+                        int pos = off + doc.getTranslationStart();
+                        doc.remove(pos, tag.length());
+                        return true;
+                    }
+                } else {
+                    if (StringUtil.isSubstringBefore(text, off, tag)) {
+                        int pos = off + doc.getTranslationStart() - tag.length();
+                        doc.remove(pos, tag.length());
                         return true;
                     }
                 }

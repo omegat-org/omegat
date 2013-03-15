@@ -158,4 +158,24 @@ public class StringUtil {
 
         return f;
     }
+
+    /**
+     * Checks if text contains substring after specified position.
+     */
+    public static boolean isSubstringAfter(String text, int pos, String substring) {
+        if (pos + substring.length() > text.length()) {
+            return false;
+        }
+        return substring.equals(text.substring(pos, pos + substring.length()));
+    }
+
+    /**
+     * Checks if text contains substring before specified position.
+     */
+    public static boolean isSubstringBefore(String text, int pos, String substring) {
+        if (pos - substring.length() < 0) {
+            return false;
+        }
+        return substring.equals(text.substring(pos - substring.length(), pos));
+    }
 }

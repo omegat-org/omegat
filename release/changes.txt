@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 2.7.0
 ----------------------------------------------------------------------
-   1 Enhancement
+   4 Enhancements
    1 Bug fix
    0 Localisation update
 ----------------------------------------------------------------------
@@ -14,6 +14,12 @@
 
   - Grey out more options with Search Files
   http://sourceforge.net/support/tracker.php?aid=3385348
+
+  - Put "Search files" option at top of Search window
+  http://sourceforge.net/support/tracker.php?aid=2610166
+
+  - Adding content (e.g., glossaries) search options
+  http://sourceforge.net/support/tracker.php?aid=1587706
 
   Bug fixes:
 

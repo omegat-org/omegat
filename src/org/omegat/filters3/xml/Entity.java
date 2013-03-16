@@ -4,6 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
+               2013 Alex Buloichik
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -30,6 +31,7 @@ package org.omegat.filters3.xml;
  * <code>&lt;!ENTITY % dbnotn.module "INCLUDE"&gt;</code> is internal one.
  * 
  * @author Maxym Mykhalchuk
+ * @author Alex Buloichik
  */
 public class Entity {
     private boolean internal;
@@ -46,11 +48,16 @@ public class Entity {
         return parameter;
     }
 
-    private String name;
+    private String name, originalName;
 
     /** Returns entity's name. */
     public String getName() {
         return name;
+    }
+
+    /** Returns entity's original name, with '%' for parameter entities. */
+    public String getOriginalName() {
+        return originalName;
     }
 
     private String value;
@@ -75,6 +82,7 @@ public class Entity {
     }
 
     private void setName(String name) {
+        originalName = name;
         if (name.charAt(0) == '%') {
             parameter = true;
             this.name = name.substring(1);

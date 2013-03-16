@@ -27,6 +27,20 @@
   http://sourceforge.net/support/tracker.php?aid=1988732
 
 ----------------------------------------------------------------------
+ OmegaT 2.6.3 update 1
+----------------------------------------------------------------------
+   0 Enhancement
+   1 Bug fix
+   0 Localisation update
+----------------------------------------------------------------------
+2.6.3 update 1 vs. 2.6.3
+
+  Bug fixes:
+
+  - When an XML document (e.g., DocBook), contained both internal and 
+external entities, the target files could be empty
+
+----------------------------------------------------------------------
  OmegaT 2.6.3
 ----------------------------------------------------------------------
    3 Enhancements

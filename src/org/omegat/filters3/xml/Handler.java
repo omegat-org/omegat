@@ -63,6 +63,10 @@ import org.xml.sax.helpers.DefaultHandler;
  * The part of XML filter that actually does the job. This class is called back
  * by SAXParser.
  * 
+ * Entities described on
+ * http://www.ibm.com/developerworks/xml/library/x-entities/
+ * http://xmlwriter.net/xml_guide/entity_declaration.shtml
+ * 
  * @author Maxym Mykhalchuk
  * @author Martin Fleurke
  * @author Didier Briel
@@ -318,13 +322,19 @@ class Handler extends DefaultHandler implements LexicalHandler, DeclHandler {
     private void doEndEntity(String name) throws SAXException, TranslationException, IOException {
         if (inDTD || extEntity == null)
             return;
-        if (extEntity.getName().equals(name)) {
+        if (extEntity.getOriginalName().equals(name)) {
+            boolean parameterEntiry = extEntity.isParameter();
             extEntity = null;
             translateAndFlush();
             extWriter.close();
             extWriter = null;
-            mainWriter.write('&' + name + ';');
+            if (parameterEntiry) {
+                mainWriter.write(name + ';');
+            } else {
+                mainWriter.write('&' + name + ';');
+            }
         }
+
     }
 
     /**

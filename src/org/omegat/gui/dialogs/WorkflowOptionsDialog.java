@@ -100,6 +100,7 @@ public class WorkflowOptionsDialog extends JDialog {
                 isPreference(Preferences.STOP_ON_ALTERNATIVE_TRANSLATION));
         convertNumbers.setSelected(Preferences.isPreference(Preferences.CONVERT_NUMBERS));
         allowTagEditing.setSelected(Preferences.isPreference(Preferences.ALLOW_TAG_EDITING));
+        tagValidateOnLeave.setSelected(Preferences.isPreference(Preferences.TAG_VALIDATE_ON_LEAVE));
         invalidate();
         pack();
     }
@@ -135,6 +136,7 @@ public class WorkflowOptionsDialog extends JDialog {
         exportCurrentSegment = new javax.swing.JCheckBox();
         stopOnAlternativeTranslation = new javax.swing.JCheckBox();
         allowTagEditing = new javax.swing.JCheckBox();
+        tagValidateOnLeave = new javax.swing.JCheckBox();
 
         setTitle(OStrings.getString("GUI_TITLE_Workflow_Options")); // NOI18N
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -191,7 +193,7 @@ public class WorkflowOptionsDialog extends JDialog {
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 11;
+        gridBagConstraints.gridy = 12;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.SOUTHEAST;
         gridBagConstraints.weighty = 1.0;
         gridBagConstraints.insets = new java.awt.Insets(14, 4, 4, 4);
@@ -205,7 +207,7 @@ public class WorkflowOptionsDialog extends JDialog {
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
-        gridBagConstraints.gridy = 11;
+        gridBagConstraints.gridy = 12;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.SOUTHEAST;
         gridBagConstraints.weighty = 1.0;
         gridBagConstraints.insets = new java.awt.Insets(14, 4, 4, 4);
@@ -325,7 +327,7 @@ public class WorkflowOptionsDialog extends JDialog {
         gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
         getContentPane().add(stopOnAlternativeTranslation, gridBagConstraints);
 
-        org.openide.awt.Mnemonics.setLocalizedText(allowTagEditing, "Allow tag editing");
+        org.openide.awt.Mnemonics.setLocalizedText(allowTagEditing, OStrings.getString("WF_TAG_EDITING")); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 10;
@@ -335,6 +337,17 @@ public class WorkflowOptionsDialog extends JDialog {
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
         getContentPane().add(allowTagEditing, gridBagConstraints);
+
+        org.openide.awt.Mnemonics.setLocalizedText(tagValidateOnLeave, OStrings.getString("WG_TAG_VALIDATE_ON_LEAVE")); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 11;
+        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
+        gridBagConstraints.ipadx = 1;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+        getContentPane().add(tagValidateOnLeave, gridBagConstraints);
 
         pack();
         java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
@@ -368,6 +381,7 @@ public class WorkflowOptionsDialog extends JDialog {
                 stopOnAlternativeTranslation.isSelected());
         Preferences.setPreference(Preferences.CONVERT_NUMBERS, convertNumbers.isSelected());
         Preferences.setPreference(Preferences.ALLOW_TAG_EDITING, allowTagEditing.isSelected());
+        Preferences.setPreference(Preferences.TAG_VALIDATE_ON_LEAVE, tagValidateOnLeave.isSelected());
 
         doClose(RET_OK);
     }// GEN-LAST:event_okButtonActionPerformed
@@ -406,6 +420,7 @@ public class WorkflowOptionsDialog extends JDialog {
     private javax.swing.JLabel similarityLabel;
     private javax.swing.JSpinner similaritySpinner;
     private javax.swing.JCheckBox stopOnAlternativeTranslation;
+    private javax.swing.JCheckBox tagValidateOnLeave;
     // End of variables declaration//GEN-END:variables
 
     private int returnStatus = RET_CANCEL;

@@ -35,12 +35,21 @@ import org.omegat.core.data.SourceTextEntry;
  */
 public interface ITagValidation {
     /**
-     * Get invalid tags list.
+     * Get invalid tags entries.
      * 
      * @return list of entries with invalid tags, or null if all entries are
      *         valid
      */
     List<SourceTextEntry> listInvalidTags();
+
+    /**
+     * Checks invalid tags for one entry.
+     * 
+     * @param ste
+     *            entry
+     * @return true if all tags are valid
+     */
+    boolean checkInvalidTags(SourceTextEntry ste);
 
     /**
      * Show invalid tags entries.

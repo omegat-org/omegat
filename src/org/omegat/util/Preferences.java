@@ -205,6 +205,9 @@ public class Preferences {
     /** Tag Validation Option: allow tag editing in editor. */
     public static final String ALLOW_TAG_EDITING = "allowTagEditing";
 
+    /** Tag Validation Option: allow tag editing in editor. */
+    public static final String TAG_VALIDATE_ON_LEAVE = "tagValidateOnLeave";
+
     /** Team option: author ID */
     public static final String TEAM_AUTHOR = "team_Author";
 

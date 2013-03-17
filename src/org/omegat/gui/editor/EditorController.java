@@ -53,12 +53,13 @@ import javax.swing.text.BadLocationException;
 import javax.swing.undo.CannotRedoException;
 import javax.swing.undo.CannotUndoException;
 
+import org.jdesktop.swingworker.SwingWorker;
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
 import org.omegat.core.data.EntryKey;
 import org.omegat.core.data.IProject;
-import org.omegat.core.data.ProjectTMX;
 import org.omegat.core.data.IProject.FileInfo;
+import org.omegat.core.data.ProjectTMX;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.data.TMXEntry;
 import org.omegat.core.events.IEntryEventListener;
@@ -69,6 +70,7 @@ import org.omegat.gui.editor.mark.Mark;
 import org.omegat.gui.help.HelpFrame;
 import org.omegat.gui.main.DockableScrollPane;
 import org.omegat.gui.main.MainWindow;
+import org.omegat.gui.tagvalidation.ITagValidation;
 import org.omegat.util.Language;
 import org.omegat.util.Log;
 import org.omegat.util.OConsts;
@@ -763,10 +765,11 @@ public class EditorController implements IEditor {
         String newTrans = doc.extractTranslation();
         doc.stopEditMode();
 
+        SourceTextEntry entry = null;
         if (newTrans != null) {
             // segment was active
             SegmentBuilder sb = m_docSegList[displayedEntryIndex];
-            SourceTextEntry entry = sb.ste;
+            entry = sb.ste;
             
             TMXEntry oldTE = Core.getProject().getTranslationInfo(entry);
             
@@ -812,6 +815,20 @@ public class EditorController implements IEditor {
         markerController.process(displayedEntryIndex, m_docSegList[displayedEntryIndex]);
 
         editor.cancelUndo();
+
+        // validate tags if required
+        if (entry != null && Preferences.isPreference(Preferences.TAG_VALIDATE_ON_LEAVE)) {
+            final SourceTextEntry ste = entry;
+            new SwingWorker<Object, Void>() {
+                protected Object doInBackground() throws Exception {
+                    ITagValidation tv = Core.getTagValidation();
+                    if (!tv.checkInvalidTags(ste)) {
+                        tv.displayTagValidationErrors(tv.listInvalidTags());
+                    }
+                    return null;
+                }
+            }.execute();
+        }
     }
 
     /**

@@ -5,7 +5,7 @@
 
  Copyright (C) 2008 Alex Buloichik, Martin Fleurke
                2009 Martin Fleurke
-               2013 Aaron Madlon-Kay
+               2013 Aaron Madlon-Kay, Alex Buloichik
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -53,6 +53,9 @@ import org.omegat.util.StaticUtils.TagInfo;
 /**
  * Class for show tag validation results.
  * 
+ * Class is synchronized around one check iteration, because it need to use some
+ * local variables.
+ * 
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Martin Fleurke
  * @author Aaron Madlon-Kay
@@ -60,6 +63,16 @@ import org.omegat.util.StaticUtils.TagInfo;
 public class TagValidationTool implements ITagValidation, IProjectEventListener {
     private TagValidationFrame m_tagWin;
     private MainWindow mainWindow;
+
+    // variables for one check iteration, by all entries or only by one entry
+    private Pattern printfPattern = null;
+    private Pattern javaMessageFormatPattern = null;
+    private Pattern customTagPattern = null;
+    private Pattern removePattern;
+    private List<String> srcTags = new ArrayList<String>(32);
+    private List<String> locTags = new ArrayList<String>(32);
+    private HashSet<String> printfSourceSet = new HashSet<String>();
+    private HashSet<String> printfTargetSet = new HashSet<String>();
 
     public TagValidationTool(final MainWindow mainWindow) {
         this.mainWindow = mainWindow;
@@ -71,7 +84,7 @@ public class TagValidationTool implements ITagValidation, IProjectEventListener 
     }
 
     @Override
-    public void displayTagValidationErrors(List<SourceTextEntry> suspects) {
+    public synchronized void displayTagValidationErrors(List<SourceTextEntry> suspects) {
         if (mainWindow != null) {
             showTagResultsInGui(suspects);
         } else {
@@ -104,7 +117,7 @@ public class TagValidationTool implements ITagValidation, IProjectEventListener 
                     JOptionPane.INFORMATION_MESSAGE);
         }
     }
-    
+
     private void showTagResultsInConsole(List<SourceTextEntry> suspects) {
         if (suspects != null && suspects.size() > 0) {
             for (SourceTextEntry ste : suspects) {
@@ -128,217 +141,235 @@ public class TagValidationTool implements ITagValidation, IProjectEventListener 
         }
     }
 
-    /**
-     * Scans project and builds the list of entries which are suspected of
-     * having changed (possibly invalid) tag structures.
-     */
-    @Override
-    public List<SourceTextEntry> listInvalidTags() {
-        int j;
-        String s;
-        TMXEntry te;
-        List<String> srcTags = new ArrayList<String>(32);
-        List<String> locTags = new ArrayList<String>(32);
-        List<SourceTextEntry> suspects = new ArrayList<SourceTextEntry>(16);
+    private void initCheck() {
+        printfPattern = null;
+        javaMessageFormatPattern = null;
+        customTagPattern = null;
+        removePattern = null;
+        srcTags.clear();
+        locTags.clear();
+        printfSourceSet.clear();
+        printfTargetSet.clear();
 
         // programming language validation: pattern to detect printf variables
         // (%s and %n$s)
-        Pattern printfPattern = null;
+
         if ("true".equalsIgnoreCase(Preferences.getPreference(Preferences.CHECK_ALL_PRINTF_TAGS))) {
             printfPattern = PatternConsts.PRINTF_VARS;
         } else if ("true".equalsIgnoreCase(Preferences.getPreference(Preferences.CHECK_SIMPLE_PRINTF_TAGS))) {
             printfPattern = PatternConsts.SIMPLE_PRINTF_VARS;
         }
-        Pattern javaMessageFormatPattern = null;
         if ("true".equalsIgnoreCase(Preferences.getPreference(Preferences.CHECK_JAVA_PATTERN_TAGS))) {
             javaMessageFormatPattern = PatternConsts.SIMPLE_JAVA_MESSAGEFORMAT_PATTERN_VARS;
         }
-        Pattern customTagPattern = null;
         String customRegExp = Preferences.getPreferenceDefaultAllowEmptyString(Preferences.CHECK_CUSTOM_PATTERN);
         if (!"".equalsIgnoreCase(customRegExp)) {
             customTagPattern = Pattern.compile(customRegExp);
         }
-        Pattern RemovePattern = PatternConsts.getRemovePattern();
-
-        for (FileInfo fi : Core.getProject().getProjectFiles()) {
-            for (SourceTextEntry ste : fi.entries) {
-                s = ste.getSrcText();
-                te = Core.getProject().getTranslationInfo(ste);
-
-                // if there's no translation, skip the string
-                // bugfix for
-                // http://sourceforge.net/support/tracker.php?aid=1209839
-                if (!te.isTranslated()) {
-                    continue;
-                }
-
-                if (printfPattern != null) {
-                    // printf variables should be equal in number, 
-                    // but order can change
-                    // (and with that also notation: e.g. from '%s' to '%1$s') 
-                    // We check this by adding the string "index+type specifier"
-                    // of every found variable to a set.
-                    // If the sets of the source and target are not equal, then
-                    // there is a problem: either missing or extra variables, 
-                    // or the type specifier has changed for the variable at the 
-                    // given index.
-                    HashSet<String> printfSourceSet = new HashSet<String>();
-                    Matcher printfMatcher = printfPattern.matcher(s);
-                    int index = 1;
-                    while (printfMatcher.find()) {
-                        String printfVariable = printfMatcher.group(0);
-                        String argumentswapspecifier = printfMatcher.group(1);
-                        if (argumentswapspecifier != null && argumentswapspecifier.endsWith("$")) {
-                            printfSourceSet.add(""
-                                    + argumentswapspecifier.substring(0, argumentswapspecifier.length() - 1)
-                                    + printfVariable.substring(printfVariable.length() - 1,
-                                            printfVariable.length()));
-                        } else {
-                            printfSourceSet.add(""
-                                    + index
-                                    + printfVariable.substring(printfVariable.length() - 1,
-                                            printfVariable.length()));
-                            index++;
-                        }
-                    }
-                    HashSet<String> printfTargetSet = new HashSet<String>();
-                    printfMatcher = printfPattern.matcher(te.translation);
-                    index = 1;
-                    while (printfMatcher.find()) {
-                        String printfVariable = printfMatcher.group(0);
-                        String argumentswapspecifier = printfMatcher.group(1);
-                        if (argumentswapspecifier != null && argumentswapspecifier.endsWith("$")) {
-                            printfTargetSet.add(""
-                                    + argumentswapspecifier.substring(0, argumentswapspecifier.length() - 1)
-                                    + printfVariable.substring(printfVariable.length() - 1,
-                                            printfVariable.length()));
-                        } else {
-                            printfTargetSet.add(""
-                                    + index
-                                    + printfVariable.substring(printfVariable.length() - 1,
-                                            printfVariable.length()));
-                            index++;
-                        }
-                    }
-                    if (!printfSourceSet.equals(printfTargetSet)) {
-                        suspects.add(ste);
-                        continue;
-                    }
-                }
-                // Extra checks for PO files:
-                if (fi.filterClass.equals(PoFilter.class)) {
-                    // check PO line start:
-                    if (s.startsWith("\n") != te.translation.startsWith("\n") ) {
-                        suspects.add(ste);
-                        continue;
-                    }
-                    // check PO line ending:
-                    if (s.endsWith("\n") != te.translation.endsWith("\n")) {
-                        suspects.add(ste);
-                        continue;
-                    }
-                }
-                // OmegaT tags and custom tags check: order and number should be equal
-                srcTags.clear();
-                locTags.clear();
-                // extract tags from src and loc string
-                StaticUtils.buildTagList(s, srcTags);
-                StaticUtils.buildTagList(te.translation, locTags);
-                // custom pattern checks: order and number should be equal
-                if (customTagPattern != null) {
-                    // extract tags from src and loc string
-                    Matcher customTagPatternMatcher = customTagPattern.matcher(s);
-                    while (customTagPatternMatcher.find()) {
-                        srcTags.add(customTagPatternMatcher.group(0));
-                    }
-                    customTagPatternMatcher = customTagPattern.matcher(te.translation);
-                    while (customTagPatternMatcher.find()) {
-                        locTags.add(customTagPatternMatcher.group(0));
-                    }
-                }
-                
-                // Compare tag list sizes
-                if (srcTags.size() != locTags.size()) {
-                    suspects.add(ste);
-                    continue;
-                }
-                
-                // Compare tags one by one.
-                boolean tagsAreIdentical = true;
-                for (j = 0; j < srcTags.size(); j++) {
-                    s = srcTags.get(j);
-                    String t = locTags.get(j);
-                    if (!s.equals(t)) {
-                        tagsAreIdentical = false;
-                        break;
-                    }
-                }
-                
-                if (!tagsAreIdentical) {
-                    // If we are doing strict validation only, or if the tags are malformed,
-                    // finish this TU now.
-                    if (!Preferences.isPreference(Preferences.LOOSE_TAG_ORDERING)
-                            || !tagsAreWellFormed(srcTags, locTags)) {
-                        suspects.add(ste);
-                        continue;
-                    }
-                }
-
-                // Java MessageFormat pattern checks: order can change, number should be equal.
-                if (javaMessageFormatPattern != null) {
-                    srcTags.clear();
-                    locTags.clear();
-                    Matcher javaMessageFormatMatcher = javaMessageFormatPattern.matcher(s);
-                    while (javaMessageFormatMatcher.find()) {
-                        srcTags.add(javaMessageFormatMatcher.group(0));
-                    }
-                    javaMessageFormatMatcher = javaMessageFormatPattern.matcher(te.translation);
-                    while (javaMessageFormatMatcher.find()) {
-                        locTags.add(javaMessageFormatMatcher.group(0));
-                    }
-                    Collections.sort(srcTags);
-                    Collections.sort(locTags);
-                    if (!srcTags.equals(locTags)) {
-                        suspects.add(ste);
-                        continue;
-                    }
-                }
-
-                //check translation for stuff that should have been removed.
-                if (RemovePattern != null) {
-                    Matcher removeMatcher = RemovePattern.matcher(te.translation);
-                    if (removeMatcher.find()) {
-                        suspects.add(ste);
-                        continue;
-                    }
-                }
-
-            } //end loop over entries
-        } //end loop over files
-        return suspects.isEmpty() ? null : suspects;
+        removePattern = PatternConsts.getRemovePattern();
     }
 
     /**
-     * Check that translated tags are well-formed. 
-     * In order to accommodate tags orphaned by segmenting,
-     * unmatched tags are allowed, but only if they don't interfere with
-     * non-orphaned tags.
-     * @param srcTags A list of tags in the source text
-     * @param locTags A list of tags in the translated text
+     * Scans project and builds the list of entries which are suspected of
+     * having changed (possibly invalid) tag structures.
+     */
+    @Override
+    public synchronized List<SourceTextEntry> listInvalidTags() {
+        initCheck();
+
+        List<SourceTextEntry> suspects = new ArrayList<SourceTextEntry>(16);
+        for (FileInfo fi : Core.getProject().getProjectFiles()) {
+            for (SourceTextEntry ste : fi.entries) {
+                if (!checkEntry(fi, ste)) {
+                    suspects.add(ste);
+                }
+            } // end loop over entries
+        } // end loop over files
+        return suspects.isEmpty() ? null : suspects;
+    }
+
+    @Override
+    public synchronized boolean checkInvalidTags(SourceTextEntry ste) {
+        initCheck();
+
+        // find FileInfo
+        for (FileInfo fi : Core.getProject().getProjectFiles()) {
+            for (SourceTextEntry s : fi.entries) {
+                if (s == ste) {
+                    return checkEntry(fi, ste);
+                }
+            }
+        }
+
+        throw new RuntimeException("Invalid SourceTextEntry storage for tag validation");
+    }
+
+    /**
+     * Checks entry for valid tags.
+     * 
+     * @param ste
+     * @return true if entry is valid, false if entry if not valid
+     */
+    private boolean checkEntry(FileInfo fi, SourceTextEntry ste) {
+        String s = ste.getSrcText();
+        TMXEntry te = Core.getProject().getTranslationInfo(ste);
+
+        // if there's no translation, skip the string
+        // bugfix for
+        // http://sourceforge.net/support/tracker.php?aid=1209839
+        if (!te.isTranslated()) {
+            return true;
+        }
+
+        if (printfPattern != null) {
+            // printf variables should be equal in number,
+            // but order can change
+            // (and with that also notation: e.g. from '%s' to '%1$s')
+            // We check this by adding the string "index+type specifier"
+            // of every found variable to a set.
+            // If the sets of the source and target are not equal, then
+            // there is a problem: either missing or extra variables,
+            // or the type specifier has changed for the variable at the
+            // given index.
+            Matcher printfMatcher = printfPattern.matcher(s);
+            int index = 1;
+            while (printfMatcher.find()) {
+                String printfVariable = printfMatcher.group(0);
+                String argumentswapspecifier = printfMatcher.group(1);
+                if (argumentswapspecifier != null && argumentswapspecifier.endsWith("$")) {
+                    printfSourceSet.add("" + argumentswapspecifier.substring(0, argumentswapspecifier.length() - 1)
+                            + printfVariable.substring(printfVariable.length() - 1, printfVariable.length()));
+                } else {
+                    printfSourceSet.add("" + index
+                            + printfVariable.substring(printfVariable.length() - 1, printfVariable.length()));
+                    index++;
+                }
+            }
+            printfMatcher = printfPattern.matcher(te.translation);
+            index = 1;
+            while (printfMatcher.find()) {
+                String printfVariable = printfMatcher.group(0);
+                String argumentswapspecifier = printfMatcher.group(1);
+                if (argumentswapspecifier != null && argumentswapspecifier.endsWith("$")) {
+                    printfTargetSet.add("" + argumentswapspecifier.substring(0, argumentswapspecifier.length() - 1)
+                            + printfVariable.substring(printfVariable.length() - 1, printfVariable.length()));
+                } else {
+                    printfTargetSet.add("" + index
+                            + printfVariable.substring(printfVariable.length() - 1, printfVariable.length()));
+                    index++;
+                }
+            }
+            if (!printfSourceSet.equals(printfTargetSet)) {
+                return false;
+            }
+        }
+        // Extra checks for PO files:
+        if (fi.filterClass.equals(PoFilter.class)) {
+            // check PO line start:
+            if (s.startsWith("\n") != te.translation.startsWith("\n")) {
+                return false;
+            }
+            // check PO line ending:
+            if (s.endsWith("\n") != te.translation.endsWith("\n")) {
+                return false;
+            }
+        }
+        // OmegaT tags and custom tags check: order and number should be equal
+        // extract tags from src and loc string
+        StaticUtils.buildTagList(s, srcTags);
+        StaticUtils.buildTagList(te.translation, locTags);
+        // custom pattern checks: order and number should be equal
+        if (customTagPattern != null) {
+            // extract tags from src and loc string
+            Matcher customTagPatternMatcher = customTagPattern.matcher(s);
+            while (customTagPatternMatcher.find()) {
+                srcTags.add(customTagPatternMatcher.group(0));
+            }
+            customTagPatternMatcher = customTagPattern.matcher(te.translation);
+            while (customTagPatternMatcher.find()) {
+                locTags.add(customTagPatternMatcher.group(0));
+            }
+        }
+
+        // Compare tag list sizes
+        if (srcTags.size() != locTags.size()) {
+            return false;
+        }
+
+        // Compare tags one by one.
+        boolean tagsAreIdentical = true;
+        for (int j = 0; j < srcTags.size(); j++) {
+            s = srcTags.get(j);
+            String t = locTags.get(j);
+            if (!s.equals(t)) {
+                tagsAreIdentical = false;
+                break;
+            }
+        }
+
+        if (!tagsAreIdentical) {
+            // If we are doing strict validation only, or if the tags are
+            // malformed,
+            // finish this TU now.
+            if (!Preferences.isPreference(Preferences.LOOSE_TAG_ORDERING) || !tagsAreWellFormed(srcTags, locTags)) {
+                return false;
+            }
+        }
+
+        // Java MessageFormat pattern checks: order can change, number should be
+        // equal.
+        if (javaMessageFormatPattern != null) {
+            srcTags.clear();
+            locTags.clear();
+            Matcher javaMessageFormatMatcher = javaMessageFormatPattern.matcher(s);
+            while (javaMessageFormatMatcher.find()) {
+                srcTags.add(javaMessageFormatMatcher.group(0));
+            }
+            javaMessageFormatMatcher = javaMessageFormatPattern.matcher(te.translation);
+            while (javaMessageFormatMatcher.find()) {
+                locTags.add(javaMessageFormatMatcher.group(0));
+            }
+            Collections.sort(srcTags);
+            Collections.sort(locTags);
+            if (!srcTags.equals(locTags)) {
+                return false;
+            }
+        }
+
+        // check translation for stuff that should have been removed.
+        if (removePattern != null) {
+            Matcher removeMatcher = removePattern.matcher(te.translation);
+            if (removeMatcher.find()) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    /**
+     * Check that translated tags are well-formed. In order to accommodate tags
+     * orphaned by segmenting, unmatched tags are allowed, but only if they
+     * don't interfere with non-orphaned tags.
+     * 
+     * @param srcTags
+     *            A list of tags in the source text
+     * @param locTags
+     *            A list of tags in the translated text
      * @return Well-formed or not
      */
     private boolean tagsAreWellFormed(List<String> srcTags, List<String> locTags) {
-        
+
         // Check source tags for any missing from translation.
         for (String tag : srcTags) {
             if (!locTags.contains(tag)) {
                 return false;
             }
         }
-        
+
         Stack<TagInfo> tagStack = new Stack<TagInfo>();
         HashSet<String> cache = new HashSet<String>();
-        
+
         TagInfo info;
         for (String tag : locTags) {
             // Make sure tag exists in source.
@@ -374,7 +405,7 @@ public class TagValidationTool implements ITagValidation, IProjectEventListener 
                 // Ignore
             }
         }
-        
+
         // Check the stack to see if there are straggling open tags.
         while (!tagStack.isEmpty()) {
             // Allow stragglers only if they're orphans.
@@ -382,7 +413,7 @@ public class TagValidationTool implements ITagValidation, IProjectEventListener 
                 return false;
             }
         }
-        
+
         return true;
     }
 }

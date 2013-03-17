@@ -97,7 +97,7 @@ public abstract class TranslateEntry implements ITranslateCallback {
         // has been enabled.
         String tags = null;
         if(m_config.isRemoveTags())
-            tags = StaticUtils.buildTagList(origSource);
+            tags = StaticUtils.buildTagListForRemove(origSource);
         
         final String source = ParseEntry.stripSomeChars(origSource, spr, m_config.isRemoveTags());
         

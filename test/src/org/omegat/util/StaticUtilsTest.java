@@ -25,6 +25,9 @@
 package org.omegat.util;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Map;
+import java.util.TreeMap;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
@@ -63,16 +66,27 @@ public class StaticUtilsTest extends TestCase
     /**
      * Test of buildTagList method, of class org.omegat.util.StaticUtils.
      */
-    public void testBuildTagList()
-    {
+    public void testBuildTagList() {
         // TODO add your test code below by replacing the default call to fail.
         String str = "Tag <test> case <b0>one</b0>.";
         ArrayList<String> tagList = new ArrayList<String>();
-        StaticUtils.buildTagList(str, tagList);
-        if (tagList.size()!=2 ||
-                (! tagList.get(0).toString().equals("<b0>")) ||
-                (! tagList.get(1).toString().equals("</b0>")) )
-            fail("Wrong tags found in '"+str+"': " + tagList.toString());
+        StaticUtils.buildTagList(str, null, tagList);
+
+        assertEquals("Wrong tags found in '" + str + "'", Arrays.asList("<b0>", "</b0>"), tagList);
+
+        tagList.clear();
+        Map<String, String> pp = new TreeMap<String, String>();
+        pp.put("<b0>", "");
+        pp.put("</b0>", "");
+        StaticUtils.buildTagList(str, pp, tagList);
+        assertEquals("Wrong tags found in '" + str + "'", Arrays.asList("<b0>", "</b0>"), tagList);
+
+        str = "Tag <test>case</test>.";
+        tagList.clear();
+        pp.clear();
+        pp.put("<test>case</test>", "");
+        StaticUtils.buildTagList(str, pp, tagList);
+        assertEquals("Wrong tags found in '" + str + "'", Arrays.asList("<test>case</test>"), tagList);
     }
 
     public void testCompressSpace()

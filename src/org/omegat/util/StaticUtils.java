@@ -40,8 +40,12 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.text.MessageFormat;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Enumeration;
 import java.util.List;
+import java.util.Map;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 import java.util.regex.Matcher;
@@ -94,13 +98,40 @@ public class StaticUtils {
 
     /**
      * Builds a list of format tags within the supplied string. Format tags are
-     * OmegaT style tags: &lt;xx02&gt; or &lt;/yy01&gt;.
+     * 'protected parts' and OmegaT style tags: &lt;xx02&gt; or &lt;/yy01&gt;.
      */
-    public static void buildTagList(String str, List<String> tagList) {
+    public static void buildTagList(String str, Map<String, String> protectedParts, List<String> tagList) {
+        List<TagOrder> tags = new ArrayList<TagOrder>();
+        if (protectedParts != null) {
+            for (String tag : protectedParts.keySet()) {
+                int pos = -1;
+                while ((pos = str.indexOf(tag, pos + 1)) >= 0) {
+                    tags.add(new TagOrder(pos, tag));
+                }
+            }
+        }
+
+        // add tags which not a 'protected parts' but looks like tags
         Pattern placeholderPattern = PatternConsts.OMEGAT_TAG;
         Matcher placeholderMatcher = placeholderPattern.matcher(str);
         while (placeholderMatcher.find()) {
-            tagList.add(placeholderMatcher.group(0));
+            String foundTag = placeholderMatcher.group(0);
+            if (protectedParts == null || !protectedParts.containsKey(foundTag)) {
+                tagList.add(foundTag);
+            }
+        }
+
+        if (tags.isEmpty()) {
+            return;
+        }
+        Collections.sort(tags, new Comparator<TagOrder>() {
+            @Override
+            public int compare(TagOrder o1, TagOrder o2) {
+                return o1.pos - o2.pos;
+            }
+        });
+        for (TagOrder t : tags) {
+            tagList.add(t.tag);
         }
     }
 
@@ -109,7 +140,7 @@ public class StaticUtils {
      * OmegaT style tags: &lt;xx02&gt; or &lt;/yy01&gt;.
      * @return a string containing the tags
      */
-    public static String buildTagList(String str) {
+    public static String buildTagListForRemove(String str) {
         String res = "";
         Pattern placeholderPattern = PatternConsts.OMEGAT_TAG;
         Matcher placeholderMatcher = placeholderPattern.matcher(str);
@@ -117,6 +148,16 @@ public class StaticUtils {
             res += placeholderMatcher.group(0);
         }
         return res;
+    }
+
+    static class TagOrder {
+        final int pos;
+        final String tag;
+
+        public TagOrder(int pos, String tag) {
+            this.pos = pos;
+            this.tag = tag;
+        }
     }
 
     /**

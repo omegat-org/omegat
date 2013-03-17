@@ -146,10 +146,6 @@ public class TagValidationTool implements ITagValidation, IProjectEventListener 
         javaMessageFormatPattern = null;
         customTagPattern = null;
         removePattern = null;
-        srcTags.clear();
-        locTags.clear();
-        printfSourceSet.clear();
-        printfTargetSet.clear();
 
         // programming language validation: pattern to detect printf variables
         // (%s and %n$s)
@@ -211,6 +207,11 @@ public class TagValidationTool implements ITagValidation, IProjectEventListener 
      * @return true if entry is valid, false if entry if not valid
      */
     private boolean checkEntry(FileInfo fi, SourceTextEntry ste) {
+        srcTags.clear();
+        locTags.clear();
+        printfSourceSet.clear();
+        printfTargetSet.clear();
+
         String s = ste.getSrcText();
         TMXEntry te = Core.getProject().getTranslationInfo(ste);
 
@@ -276,8 +277,8 @@ public class TagValidationTool implements ITagValidation, IProjectEventListener 
         }
         // OmegaT tags and custom tags check: order and number should be equal
         // extract tags from src and loc string
-        StaticUtils.buildTagList(s, srcTags);
-        StaticUtils.buildTagList(te.translation, locTags);
+        StaticUtils.buildTagList(s, ste.getProtectedParts(), srcTags);
+        StaticUtils.buildTagList(te.translation, ste.getProtectedParts(), locTags);
         // custom pattern checks: order and number should be equal
         if (customTagPattern != null) {
             // extract tags from src and loc string

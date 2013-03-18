@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 2.7.0
 ----------------------------------------------------------------------
-   4 Enhancements
+   5 Enhancements
    1 Bug fix
    0 Localisation update
 ----------------------------------------------------------------------
@@ -20,6 +20,9 @@
 
   - Adding content (e.g., glossaries) search options
   http://sourceforge.net/support/tracker.php?aid=1587706
+
+  - Go to Next **Translated** Segment
+  http://sourceforge.net/support/tracker.php?aid=3181098
 
   Bug fixes:
 

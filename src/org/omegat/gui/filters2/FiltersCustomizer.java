@@ -4,6 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
+               2013 Alex Buloichik
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -55,6 +56,7 @@ import org.omegat.util.OStrings;
  * different supported file formats. E.g. HTML, OpenOffice etc.
  * 
  * @author Maxym Mykhalchuk
+ * @author Alex Buloichik
  */
 @SuppressWarnings("serial")
 public class FiltersCustomizer extends JDialog implements ListSelectionListener {
@@ -252,8 +254,8 @@ public class FiltersCustomizer extends JDialog implements ListSelectionListener 
         gridBagConstraints.insets = new java.awt.Insets(3, 3, 3, 3);
         getContentPane().add(filtersScrollPane, gridBagConstraints);
 
-        description.setBackground(javax.swing.UIManager.getDefaults().getColor("Label.background"));
         description.setEditable(false);
+        description.setBackground(javax.swing.UIManager.getDefaults().getColor("Label.background"));
         description.setFont(new JLabel().getFont());
         description.setLineWrap(true);
         description.setText(OStrings.getString("FILTERSCUSTOMIZER_DESCRIPTION")); // NOI18N

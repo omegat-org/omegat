@@ -147,6 +147,9 @@ public class GlossaryTextAreaTest extends TestCore {
 
             public void nextUntranslatedEntry() {
             }
+            
+            public void nextTranslatedEntry() {
+            }
 
             public void prevEntry() {
             }

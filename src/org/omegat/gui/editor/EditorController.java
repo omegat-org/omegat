@@ -10,6 +10,7 @@
                2009 Didier Briel
                2011 Alex Buloichik, Martin Fleurke, Didier Briel
                2012 Guido Leenders, Didier Briel
+               2013 Zoltan Bartko
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -946,9 +947,10 @@ public class EditorController implements IEditor {
     }
 
     /**
-     * Finds the next untranslated entry in the document.
+     * Find the next (un)translated entry.
+     * @param findTranslated should the next entry be translated or not.
      */
-    public void nextUntranslatedEntry() {
+    private void nextTranslatedEntry(boolean findTranslated) {
         UIThreadsUtil.mustBeSwingThread();
 
         // check if a document is loaded
@@ -985,8 +987,15 @@ public class EditorController implements IEditor {
             if (displayedFileIndex == startFileIndex && displayedEntryIndex == startEntryIndex) {
                 break; // not found
             }
-            if (!Core.getProject().getTranslationInfo(ste).isTranslated()) {
-                break;// non-translated
+            
+            if (!findTranslated) {
+                if (!Core.getProject().getTranslationInfo(ste).isTranslated()) {
+                    break;// non-translated
+                }
+            } else {
+                if (Core.getProject().getTranslationInfo(ste).isTranslated()) {
+                    break;// translated
+                }
             }
             if (Preferences.isPreference(Preferences.STOP_ON_ALTERNATIVE_TRANSLATION)) {
                 // when there is at least one alternative translation, then we can consider that segment is
@@ -1003,6 +1012,20 @@ public class EditorController implements IEditor {
         activateEntry();
 
         this.editor.setCursor(oldCursor);
+    }
+    
+    /**
+     * Finds the next untranslated entry in the document.
+     */
+    public void nextUntranslatedEntry() {
+        nextTranslatedEntry(false);
+    }
+
+    /**
+     * Finds the next translated entry in the document.
+     */
+    public void nextTranslatedEntry() {
+        nextTranslatedEntry(true);
     }
 
     /**

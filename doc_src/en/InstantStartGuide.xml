@@ -48,7 +48,8 @@
 
     <para>OmegaT will present one segment at a time for you to translate.
     After you have translated each segment, press <keycap>Ctrl+U </keycap>to
-    move to the next untranslated segment. Whenever you want to see what your
+    move to the next untranslated segment (or <keycap>Ctrl+Shift+U </keycap>to
+    move to the next translated segment). Whenever you want to see what your
     translation will look like in its final format, press
     <keycap>Ctrl+D</keycap> to generate the translated document, which will be
     created in the /target/ subfolder of your project folder. During

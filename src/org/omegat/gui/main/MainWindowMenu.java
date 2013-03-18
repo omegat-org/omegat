@@ -11,6 +11,7 @@
                2010 Wildrich Fourie, Didier Briel
                2011 Didier Briel
                2012 Wildrich Fourie, Guido Leenders, Martin Fleurke, Didier Briel
+               2013 Zoltan Bartko
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -298,6 +299,7 @@ public class MainWindowMenu implements ActionListener, MenuListener, IMainMenu {
         switchCaseSubMenu.add(cycleSwitchCaseMenuItem = createMenuItem("TF_EDIT_MENU_SWITCH_CASE_CYCLE"));
 
         gotoMenu.add(gotoNextUntranslatedMenuItem = createMenuItem("TF_MENU_EDIT_UNTRANS"));
+        gotoMenu.add(gotoNextTranslatedMenuItem = createMenuItem("TF_MENU_EDIT_TRANS"));
         gotoMenu.add(gotoNextSegmentMenuItem = createMenuItem("TF_MENU_EDIT_NEXT"));
         gotoMenu.add(gotoPreviousSegmentMenuItem = createMenuItem("TF_MENU_EDIT_PREV"));
         gotoMenu.add(gotoSegmentMenuItem = createMenuItem("TF_MENU_EDIT_GOTO"));
@@ -619,6 +621,7 @@ public class MainWindowMenu implements ActionListener, MenuListener, IMainMenu {
     JMenu gotoMenu;
     JMenuItem gotoNextSegmentMenuItem;
     JMenuItem gotoNextUntranslatedMenuItem;
+    JMenuItem gotoNextTranslatedMenuItem;
     JMenuItem gotoPreviousSegmentMenuItem;
     JMenuItem gotoSegmentMenuItem;
     JMenuItem gotoNextNoteMenuItem;

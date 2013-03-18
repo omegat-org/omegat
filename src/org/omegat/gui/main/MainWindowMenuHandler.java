@@ -10,6 +10,7 @@
                2009 Didier Briel, Alex Buloichik
                2010 Wildrich Fourie, Didier Briel
                2012 Wildrich Fourie, Guido Leenders, Didier Briel
+               2013 Zoltan Bartko
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -377,6 +378,10 @@ public class MainWindowMenuHandler {
 
     public void gotoNextUntranslatedMenuItemActionPerformed() {
         Core.getEditor().nextUntranslatedEntry();
+    }
+
+    public void gotoNextTranslatedMenuItemActionPerformed() {
+        Core.getEditor().nextTranslatedEntry();
     }
 
     public void gotoNextSegmentMenuItemActionPerformed() {

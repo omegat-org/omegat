@@ -6,6 +6,7 @@
  Copyright (C) 2008-2010 Alex Buloichik
                2011 Alex Buloichik, Didier Briel
                2012 Guido Leenders, Didier Briel
+               2013 Zoltan Bartko
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -141,6 +142,13 @@ public interface IEditor {
      */
     void nextUntranslatedEntry();
 
+    /**
+     * Move to next translated entry.
+     * 
+     * Must be called only from UI thread.
+     */
+    void nextTranslatedEntry();
+    
     /**
      * Goto first entry in specified file.
      * 

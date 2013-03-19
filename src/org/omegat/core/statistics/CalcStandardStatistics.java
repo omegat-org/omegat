@@ -53,6 +53,7 @@ import org.omegat.util.gui.TextUtil;
  * @author Arno Peters
  */
 public class CalcStandardStatistics extends LongProcessThread {
+    protected static final boolean EXCLUDE_PROTECTED_PARTS = true;
 
     private static final String[] htHeaders = new String[] { "", OStrings.getString("CT_STATS_Segments"),
             OStrings.getString("CT_STATS_Words"), OStrings.getString("CT_STATS_Characters_NOSP"),
@@ -126,6 +127,9 @@ public class CalcStandardStatistics extends LongProcessThread {
         Set<String> translated = new HashSet<String>();
         for (SourceTextEntry ste : project.getAllEntries()) {
             String src = ste.getSrcText();
+            if (EXCLUDE_PROTECTED_PARTS) {
+                src = StaticUtils.stripProtectedParts(src, ste);
+            }
             Integer count = uniqueSegment.get(src);
             if (count == null) {
                 uniqueSegment.put(src, 1);
@@ -137,22 +141,22 @@ public class CalcStandardStatistics extends LongProcessThread {
                 translated.add(src);
             }
         }
-        for (String src : uniqueSegment.keySet()) {
-            int words = Statistics.numberOfWords(src);
-            String noTags = StaticUtils.stripTags(src);
+        for (String noTags : uniqueSegment.keySet()) {
+            int words = Statistics.numberOfWords(noTags);
             int charsNoSpaces = Statistics.numberOfCharactersWithoutSpaces(noTags);
+            int charsWithSpaces = Statistics.numberOfCharactersWithSpaces(noTags);
 
             // add to unique
             unique.segments++;
             unique.words += words;
             unique.charsWithoutSpaces += charsNoSpaces;
-            unique.charsWithSpaces += noTags.length();
+            unique.charsWithSpaces += charsWithSpaces;
             // add to unique remaining
-            if (!translated.contains(src)) {
+            if (!translated.contains(noTags)) {
                 remainingUnique.segments++;
                 remainingUnique.words += words;
                 remainingUnique.charsWithoutSpaces += charsNoSpaces;
-                remainingUnique.charsWithSpaces += noTags.length();
+                remainingUnique.charsWithSpaces += charsWithSpaces;
             }
         }
 
@@ -164,11 +168,13 @@ public class CalcStandardStatistics extends LongProcessThread {
             counts.add(numbers);
             for (SourceTextEntry ste : file.entries) {
                 String src = ste.getSrcText();
+                if (EXCLUDE_PROTECTED_PARTS) {
+                    src = StaticUtils.stripProtectedParts(src, ste);
+                }
 
                 int words = Statistics.numberOfWords(src);
-                String noTags = StaticUtils.stripTags(src);
-                int charsNoSpaces = Statistics.numberOfCharactersWithoutSpaces(noTags);
-                int chars = noTags.length();
+                int charsNoSpaces = Statistics.numberOfCharactersWithoutSpaces(src);
+                int chars = Statistics.numberOfCharactersWithSpaces(src);
 
                 // add to total
                 total.segments++;

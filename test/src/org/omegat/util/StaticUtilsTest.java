@@ -33,6 +33,8 @@ import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
+import org.omegat.core.data.SourceTextEntry;
+
 /**
  * Tests for (some) static utility methods.
  *
@@ -68,18 +70,18 @@ public class StaticUtilsTest extends TestCase
      */
     public void testBuildTagList() {
         // TODO add your test code below by replacing the default call to fail.
-        String str = "Tag <test> case <b0>one</b0>.";
+        String str = "Tag <test> case <b0>one</b0>.<b0>";
         ArrayList<String> tagList = new ArrayList<String>();
         StaticUtils.buildTagList(str, null, tagList);
 
-        assertEquals("Wrong tags found in '" + str + "'", Arrays.asList("<b0>", "</b0>"), tagList);
+        assertEquals("Wrong tags found in '" + str + "'", Arrays.asList("<b0>", "</b0>", "<b0>"), tagList);
 
         tagList.clear();
         Map<String, String> pp = new TreeMap<String, String>();
         pp.put("<b0>", "");
         pp.put("</b0>", "");
         StaticUtils.buildTagList(str, pp, tagList);
-        assertEquals("Wrong tags found in '" + str + "'", Arrays.asList("<b0>", "</b0>"), tagList);
+        assertEquals("Wrong tags found in '" + str + "'", Arrays.asList("<b0>", "</b0>", "<b0>"), tagList);
 
         str = "Tag <test>case</test>.";
         tagList.clear();
@@ -95,4 +97,12 @@ public class StaticUtilsTest extends TestCase
         if ( !"Six seven".equals(StaticUtils.compressSpaces("Six\tseven")) ) fail("Space wrongly compressed");
     }
 
+    public void testStripTags() {
+        Map<String, String> protectedParts = new TreeMap<String, String>();
+        protectedParts.put("#part#", "zz");
+        SourceTextEntry ste = new SourceTextEntry(null, 0, null, null, protectedParts);
+        assertEquals("1\b2", StaticUtils.stripProtectedParts("1#part#2", ste));
+        protectedParts.clear();
+        assertEquals("1#part#2", StaticUtils.stripProtectedParts("1#part#2", ste));
+    }
 }

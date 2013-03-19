@@ -51,6 +51,8 @@ import java.util.jar.JarFile;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.omegat.core.data.SourceTextEntry;
+
 /**
  * Static functions taken from CommandThread to reduce file size.
  *
@@ -83,6 +85,12 @@ public class StaticUtils {
      * Script directory
      */
     private final static String SCRIPT_DIR = "script";
+
+    /**
+     * Char which should be used instead protected parts. It should be
+     * non-letter char, to be able to have correct words counter.
+     */
+    public static final char TAG_REPLACEMENT = '\b';
 
     /**
      * Contains the location of the directory containing the configuration
@@ -684,13 +692,35 @@ public class StaticUtils {
         }
 
         return os.equals("Mac OS X");
-
     }
 
     /**
-     * Strips all XML tags (converts to plain text).
+     * Strips all protected parts.
+     * 
+     * @param str
+     *            source string
+     * @param ste
+     *            info about protected parts
+     * @param changeToReplacement
+     *            true if should be replaced by special char, false if should be
+     *            just removed
      */
-    public static String stripTags(String xml) {
+    public static String stripProtectedParts(String str, SourceTextEntry ste) {
+        if (ste.getProtectedParts() == null) {
+            return str;
+        }
+        String s = str;
+        for (String tag : ste.getProtectedParts().keySet()) {
+            s = s.replace(tag, TAG_REPLACEMENT + "");
+        }
+        return s;
+    }
+
+    /**
+     * Strips all XML tags (converts to plain text). Tags detected only by
+     * pattern. Protected parts are not used.
+     */
+    public static String stripXmlTags(String xml) {
         return PatternConsts.OMEGAT_TAG.matcher(xml).replaceAll("");
     }
 

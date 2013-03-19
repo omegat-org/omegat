@@ -175,7 +175,7 @@ public class TMXWriter2 {
         if (entry.note != null && !entry.note.equals("")) {
             String note = StaticUtils.fixChars(entry.note);
             if (forceValidTMX) {
-                note = StaticUtils.stripTags(note);
+                note = StaticUtils.stripXmlTags(note);
             }
             xml.writeCharacters("      ");
             xml.writeStartElement("note");
@@ -187,7 +187,7 @@ public class TMXWriter2 {
         // write source segment
         source = StaticUtils.fixChars(source);
         if (forceValidTMX) {
-            source = StaticUtils.stripTags(source);
+            source = StaticUtils.stripXmlTags(source);
         }
         xml.writeCharacters("      ");
         xml.writeStartElement("tuv");
@@ -211,7 +211,7 @@ public class TMXWriter2 {
         if (translation != null) {
             translation = StaticUtils.fixChars(translation);
             if (forceValidTMX) {
-                translation = StaticUtils.stripTags(translation);
+                translation = StaticUtils.stripXmlTags(translation);
             }
 
             xml.writeCharacters("      ");

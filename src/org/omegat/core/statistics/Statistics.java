@@ -38,11 +38,13 @@ import org.omegat.core.Core;
 import org.omegat.core.data.EntryKey;
 import org.omegat.core.data.ExternalTMX;
 import org.omegat.core.data.IProject;
+import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.data.TMXEntry;
 import org.omegat.core.matching.Tokenizer;
 import org.omegat.util.Log;
 import org.omegat.util.OConsts;
 import org.omegat.util.PatternConsts;
+import org.omegat.util.StaticUtils;
 import org.omegat.util.Token;
 
 /**
@@ -60,7 +62,7 @@ public class Statistics {
 
     protected static final int PERCENT_EXACT_MATCH = 101;
     protected static final int PERCENT_REPETITIONS = 102;
-    
+
     /**
      * Pre-builds a map with external TMX and orphaned translations
      * in order to eliminate dupplicates
@@ -112,12 +114,32 @@ public class Statistics {
         return result;
     }
 
-    /** Computes the number of characters excluding spaces in a string. */
+    /**
+     * Computes the number of characters excluding spaces in a string. Special
+     * char for tag replacement not calculated.
+     */
     public static int numberOfCharactersWithoutSpaces(String str) {
         int chars = 0;
         for (int i = 0; i < str.length(); i++) {
-            if (!Character.isSpaceChar(str.charAt(i)))
+            char c = str.charAt(i);
+            if (c != StaticUtils.TAG_REPLACEMENT && !Character.isSpaceChar(c)) {
                 chars++;
+            }
+        }
+        return chars;
+    }
+
+    /**
+     * Computes the number of characters with spaces in a string. Special char
+     * for tag replacement not calculated.
+     */
+    public static int numberOfCharactersWithSpaces(String str) {
+        int chars = 0;
+        for (int i = 0; i < str.length(); i++) {
+            char c = str.charAt(i);
+            if (c != StaticUtils.TAG_REPLACEMENT) {
+                chars++;
+            }
         }
         return chars;
     }
@@ -171,5 +193,4 @@ public class Statistics {
             Log.log(ex);
         }
     }
-
 }

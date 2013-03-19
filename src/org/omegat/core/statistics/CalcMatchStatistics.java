@@ -52,6 +52,7 @@ import org.omegat.util.gui.TextUtil;
  * @author Thomas Cordonnier
  */
 public class CalcMatchStatistics extends LongProcessThread {
+    protected static final boolean EXCLUDE_PROTECTED_PARTS = true;
 
     private String[] header = new String[] { "", OStrings.getString("CT_STATS_Segments"),
             OStrings.getString("CT_STATS_Words"), OStrings.getString("CT_STATS_Characters_NOSP"),
@@ -91,29 +92,31 @@ public class CalcMatchStatistics extends LongProcessThread {
         int percent = 0, treated = 0;
         for (int i = 0; i < allEntries.size(); i++) {
             SourceTextEntry ste = allEntries.get(i);
-            
-            boolean isFirst = alreadyProcessed.add(ste.getSrcText());
+            String src = ste.getSrcText();
+            if (EXCLUDE_PROTECTED_PARTS) {
+                src = StaticUtils.stripProtectedParts(src, ste);
+            }
+
+            boolean isFirst = alreadyProcessed.add(src);
             if (Core.getProject().getTranslationInfo(ste).isTranslated()) {
                 // segment has translation - should be calculated as
                 // "Exact matched"
                 result[1].segments++;
-                result[1].words += Statistics.numberOfWords(ste.getSrcText());
-                String charWithoutTags = StaticUtils.stripTags(ste.getSrcText());
-                result[1].charsWithoutSpaces += Statistics.numberOfCharactersWithoutSpaces(charWithoutTags);
-                result[1].charsWithSpaces += charWithoutTags.length();
+                result[1].words += Statistics.numberOfWords(src);
+                result[1].charsWithoutSpaces += Statistics.numberOfCharactersWithoutSpaces(src);
+                result[1].charsWithSpaces += Statistics.numberOfCharactersWithSpaces(src);
                 treated ++;
             }
             else if (!isFirst) {
                 // already processed - repetition
                 result[0].segments++;
                 result[0].words += Statistics.numberOfWords(ste.getSrcText());
-                String charWithoutTags = StaticUtils.stripTags(ste.getSrcText());
-                result[0].charsWithoutSpaces += Statistics.numberOfCharactersWithoutSpaces(charWithoutTags);
-                result[0].charsWithSpaces += charWithoutTags.length();
+                result[0].charsWithoutSpaces += Statistics.numberOfCharactersWithoutSpaces(src);
+                result[0].charsWithSpaces += Statistics.numberOfCharactersWithSpaces(src);
                 treated ++;
             }
             else {
-                untranslatedEntries.add (ste.getSrcText());
+                untranslatedEntries.add(src);
             }
 
 
@@ -151,9 +154,8 @@ public class CalcMatchStatistics extends LongProcessThread {
             int row = getRowByPercent(maxSimilarity);
             result[row].segments++;
             result[row].words += Statistics.numberOfWords(source);
-            String charWithoutTags = StaticUtils.stripTags(source);
-            result[row].charsWithoutSpaces += Statistics.numberOfCharactersWithoutSpaces(charWithoutTags);
-            result[row].charsWithSpaces += charWithoutTags.length();
+            result[row].charsWithoutSpaces += Statistics.numberOfCharactersWithoutSpaces(source);
+            result[row].charsWithSpaces += Statistics.numberOfCharactersWithSpaces(source);
             treated ++;
 
             if (isStopped) {

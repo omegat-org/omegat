@@ -63,7 +63,8 @@ public class TMXReaderTest extends TestCore {
                     }
                 });
         assertEquals("betuv", tr.get("entuv"));
-        assertEquals("tr3", tr.get("<a0> zz <b1>xx</c1>"));
+        assertEquals("tr", tr.get("2 <a0> zz <t1>xx</t1>"));
+        assertEquals("tr", tr.get("3 <n0>xx</n0>"));
     }
 
     public void testInvalidTMX() throws Exception {

@@ -147,6 +147,10 @@ public class StringUtil {
      * Returns first letter in lowercase. Usually used for create tag shortcuts.
      */
     public static char getFirstLetterLowercase(CharSequence s) {
+        if (s == null) {
+            return 0;
+        }
+
         char f = 0;
 
         for (int i = 0; i < s.length(); i++) {

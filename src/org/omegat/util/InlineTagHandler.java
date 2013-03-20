@@ -39,6 +39,7 @@ public class InlineTagHandler {
     /** map of 'i' attributes to tag numbers */
     Map<String, Integer> pairTags = new TreeMap<String, Integer>();
     Map<String, Integer> pairedOtherTags = new TreeMap<String, Integer>();
+    Map<String, Character> shortcutLetters = new TreeMap<String, Character>();
     String currentI;
     String currentPos;
     int tagIndex;
@@ -62,6 +63,28 @@ public class InlineTagHandler {
     public void startBPT(String... attributeValues) {
         currentI = nvl(attributeValues);
         pairTags.put(currentI, tagIndex++);
+    }
+
+    /**
+     * Store shortcut letter for current 'i' value.
+     * 
+     * @param letter
+     *            letter to store
+     */
+    public void setTagShortcutLetter(char letter) {
+        if (letter != 0) {
+            shortcutLetters.put(currentI, letter);
+        }
+    }
+
+    /**
+     * Get stored shortcut letter for current 'i' value.
+     * 
+     * @return
+     */
+    public char getTagShortcutLetter() {
+        Character c = shortcutLetters.get(currentI);
+        return c != null ? c.charValue() : 0;
     }
 
     /**

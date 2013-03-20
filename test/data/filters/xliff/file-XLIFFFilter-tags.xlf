@@ -22,6 +22,10 @@
                 <source>source</source>
                 <target>About <mrk mtype="protected">Gandalf</mrk> and <mrk mtype="other">other</mrk>.</target>
             </trans-unit>
+            <trans-unit>
+                <source>source</source>
+                <target>one <bpt type="other" i="2"/>two<ept i="2"/> three</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

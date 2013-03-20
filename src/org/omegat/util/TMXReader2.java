@@ -378,12 +378,13 @@ public class TMXReader2 {
         inlineTagHandler.reset();
 
         int inlineLevel = 0;
-
+        StartElement currentElement;
         while (true) {
             XMLEvent e = xml.nextEvent();
             switch (e.getEventType()) {
             case XMLEvent.START_ELEMENT:
                 StartElement eStart = e.asStartElement();
+                currentElement = eStart;
                 if ("hi".equals(eStart.getName().getLocalPart())) {
                     // tag should be skipped
                     break;
@@ -392,6 +393,8 @@ public class TMXReader2 {
                 segInlineTag.setLength(0);
                 if ("bpt".equals(eStart.getName().getLocalPart())) {
                     inlineTagHandler.startBPT(getAttributeValue(eStart, "i"));
+                    inlineTagHandler.setTagShortcutLetter(StringUtil.getFirstLetterLowercase(getAttributeValue(eStart,
+                            "type")));
                 } else if ("ept".equals(eStart.getName().getLocalPart())) {
                     inlineTagHandler.startEPT(getAttributeValue(eStart, "i"));
                 } else if ("it".equals(eStart.getName().getLocalPart())) {
@@ -413,14 +416,17 @@ public class TMXReader2 {
                 boolean slashBefore = false;
                 boolean slashAfter = false;
                 char tagName = StringUtil.getFirstLetterLowercase(segInlineTag);
-                if (tagName == 0) {
-                    tagName = 'f';
-                }
                 Integer tagN;
                 if ("bpt".equals(eEnd.getName().getLocalPart())) {
+                    if (tagName != 0) {
+                        inlineTagHandler.setTagShortcutLetter(tagName);
+                    } else {
+                        tagName = inlineTagHandler.getTagShortcutLetter();
+                    }
                     tagN = inlineTagHandler.endBPT();
                 } else if ("ept".equals(eEnd.getName().getLocalPart())) {
                     slashBefore = true;
+                    tagName = inlineTagHandler.getTagShortcutLetter();
                     tagN = inlineTagHandler.endEPT();
                 } else if ("it".equals(eEnd.getName().getLocalPart())) {
                     tagN = inlineTagHandler.endIT();
@@ -436,6 +442,9 @@ public class TMXReader2 {
                     if (useSlash) {
                         slashAfter = true;
                     }
+                }
+                if (tagName == 0) {
+                    tagName = 'f';
                 }
                 if (tagN == null) {
                     // check error of TMX reading

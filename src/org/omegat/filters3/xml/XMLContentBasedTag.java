@@ -24,8 +24,6 @@
 
 package org.omegat.filters3.xml;
 
-import org.omegat.util.StringUtil;
-
 /**
  * XML content based tag for create shortcuts based on content, not on tag name.
  * 
@@ -37,21 +35,6 @@ public class XMLContentBasedTag extends XMLIntactTag {
     /** Creates a new instance of XML Tag */
     public XMLContentBasedTag(String tag, String shortcut, Type type, org.xml.sax.Attributes attributes) {
         super(tag, shortcut, type, attributes);
-    }
-
-    /** Returns the short form of this tag, most often -- the first letter. */
-    public String getShortcut() {
-        char shortcut;
-        if (intactContents.size() > 0 && (intactContents.get(0) instanceof XMLText)) {
-            XMLText xmlText = (XMLText) intactContents.get(0);
-            shortcut = StringUtil.getFirstLetterLowercase(xmlText.getText());
-            if (shortcut == 0) {
-                shortcut = 'f';
-            }
-        } else {
-            shortcut = getTag().charAt(0);
-        }
-        return Character.toString(shortcut);
     }
 
     public void setShortcut(String shortcut) {

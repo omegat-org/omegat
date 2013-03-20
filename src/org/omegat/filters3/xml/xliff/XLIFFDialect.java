@@ -34,7 +34,9 @@ import org.omegat.filters3.Element;
 import org.omegat.filters3.Tag;
 import org.omegat.filters3.xml.DefaultXMLDialect;
 import org.omegat.filters3.xml.XMLContentBasedTag;
+import org.omegat.filters3.xml.XMLText;
 import org.omegat.util.InlineTagHandler;
+import org.omegat.util.StringUtil;
 
 /**
  * This class specifies XLIFF XML Dialect.
@@ -122,6 +124,7 @@ public class XLIFFDialect extends DefaultXMLDialect {
 
     @Override
     public String constructShortcuts(List<Element> elements, Map<String, String> shortcutDetails) {
+        // create shortcuts
         InlineTagHandler tagHandler = new InlineTagHandler();
 
         StringBuilder r = new StringBuilder();
@@ -133,21 +136,25 @@ public class XLIFFDialect extends DefaultXMLDialect {
                     // XLIFF specification requires 'rid' and 'id' attributes,
                     // but some tools uses 'i' attribute like for TMX
                     tagHandler.startBPT(tag.getAttribute("rid"), tag.getAttribute("id"), tag.getAttribute("i"));
+                    char shortcutLetter = calcBptShortcutLetter(tag);
+                    tagHandler.setTagShortcutLetter(shortcutLetter);
                     String tagIndex = tagHandler.endBPT().toString();
-                    shortcut = '<' + tag.getShortcut() + tagIndex + '>';
+                    shortcut = "<" + (shortcutLetter != 0 ? shortcutLetter : 'f') + tagIndex + '>';
                 } else if ("ept".equals(tag.getTag())) {
                     tagHandler.startEPT(tag.getAttribute("rid"), tag.getAttribute("id"), tag.getAttribute("i"));
                     String tagIndex = tagHandler.endEPT().toString();
-                    shortcut = "</" + tag.getShortcut() + tagIndex + '>';
+                    char shortcutLetter = tagHandler.getTagShortcutLetter();
+                    shortcut = "</" + (shortcutLetter != 0 ? shortcutLetter : 'f') + tagIndex + '>';
                 } else if ("it".equals(tag.getTag())) {
                     tagHandler.startIT(tag.getAttribute("pos"));
                     String tagIndex = Integer.toString(tagHandler.endIT());
                     // XLIFF specification requires 'open/close' values,
                     // but some tools may use 'begin/end' values like for TMX
+                    char shortcutLetter = calcBptShortcutLetter(tag);
                     if ("close".equals(tagHandler.getCurrentPos()) || "end".equals(tagHandler.getCurrentPos())) {
-                        shortcut = "</" + tag.getShortcut() + tagIndex + '>';
+                        shortcut = "</" + (shortcutLetter != 0 ? shortcutLetter : 'f') + tagIndex + '>';
                     } else {
-                        shortcut = "<" + tag.getShortcut() + tagIndex + '>';
+                        shortcut = "<" + (shortcutLetter != 0 ? shortcutLetter : 'f') + tagIndex + '>';
                     }
                 } else if ("mrk".equals(tag.getTag())) {
                     tagHandler.startOTHER();
@@ -172,5 +179,21 @@ public class XLIFFDialect extends DefaultXMLDialect {
             }
         }
         return r.toString();
+    }
+
+    private char calcBptShortcutLetter(XMLContentBasedTag tag) {
+        char s;
+        if (tag.getIntactContents().size() > 0 && (tag.getIntactContents().get(0) instanceof XMLText)) {
+            XMLText xmlText = (XMLText) tag.getIntactContents().get(0);
+            s = StringUtil.getFirstLetterLowercase(xmlText.getText());
+        } else {
+            String type = StringUtil.nvl(tag.getAttribute("ctype"), tag.getAttribute("type"));
+            if (type != null) {
+                s = StringUtil.getFirstLetterLowercase(type);
+            } else {
+                s = 0;
+            }
+        }
+        return s;
     }
 }

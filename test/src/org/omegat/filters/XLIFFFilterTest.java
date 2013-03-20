@@ -70,6 +70,7 @@ public class XLIFFFilterTest extends TestFilterBase {
         assertEquals("<mrk mtype=\"other\">", ste.getProtectedParts().get("<m1>"));
         assertEquals("</mrk>", ste.getProtectedParts().get("</m1>"));
         assertEquals("<mrk mtype=\"protected\">Gandalf</mrk>", ste.getProtectedParts().get("<m0>Gandalf</m0>"));
+        checkMultiNoPrevNext("one <o0>two</o0> three", null, null, null);
         checkMultiEnd();
 
         File inFile = new File("test/data/filters/xliff/file-XLIFFFilter-tags.xlf");

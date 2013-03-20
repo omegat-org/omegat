@@ -8,6 +8,7 @@
                2010 Didier Briel
                2011 Didier Briel, Martin Fleurke
                2012 Didier Briel, Martin Fleurke
+               2013 Didier Briel
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -44,6 +45,7 @@ import org.htmlparser.Remark;
 import org.htmlparser.Tag;
 import org.htmlparser.Text;
 import org.htmlparser.visitors.NodeVisitor;
+import org.omegat.core.Core;
 import org.omegat.util.OStrings;
 import org.omegat.util.PatternConsts;
 import org.omegat.util.StaticUtils;
@@ -525,7 +527,12 @@ public class FilterVisitor extends NodeVisitor {
                     break;
                 }
             }
-            compressed = StaticUtils.compressSpaces(uncompressed);
+            
+            if (Core.getFilterMaster().getConfig().isRemoveSpacesNonseg()) {
+                compressed = StaticUtils.compressSpaces(uncompressed);
+            } else {
+                compressed = uncompressed;
+            }
         }
 
         // getting the translation

@@ -42,6 +42,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Stack;
 import java.util.TreeMap;
+import org.omegat.core.Core;
 
 import org.omegat.filters2.TranslationException;
 import org.omegat.filters3.Attribute;
@@ -543,7 +544,10 @@ class Handler extends DefaultHandler implements LexicalHandler, DeclHandler {
             resetSpacePreservingTag();
             translation = translator.translate(src, shortcutDetails);
         } else {
-            String compressed = StaticUtils.compressSpaces(src);
+            String compressed = src;
+            if (Core.getFilterMaster().getConfig().isRemoveSpacesNonseg()) {
+                compressed = StaticUtils.compressSpaces(src);
+            } 
             if (isTranslatableTag())
                 translation = translator.translate(compressed, shortcutDetails);
             // untranslated is written out uncompressed

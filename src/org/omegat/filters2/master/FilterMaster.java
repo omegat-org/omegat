@@ -12,6 +12,7 @@
                2010 Alex Buloichik
                2011 Alex Buloichik, Didier Briel
                2012 Guido Leenders, Thomas Cordonnier
+               2013 Alex Buloichik
 
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
@@ -120,6 +121,10 @@ public class FilterMaster {
      */
     public FilterMaster(Filters config) {
         this.config = config;
+    }
+
+    public Filters getConfig() {
+        return config;
     }
 
     /**

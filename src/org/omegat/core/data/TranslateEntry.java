@@ -5,6 +5,7 @@
 
  Copyright (C) 2011 Alex Buloichik
                2012 Wildrich Fourie
+               2013 Didier Briel
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -27,6 +28,7 @@ package org.omegat.core.data;
 
 import java.util.ArrayList;
 import java.util.List;
+import org.omegat.core.Core;
 
 import org.omegat.core.segmentation.Rule;
 import org.omegat.core.segmentation.Segmenter;
@@ -43,6 +45,7 @@ import org.omegat.util.StringUtil;
  * 
  * @author Alex Buloichik <alex73mail@gmail.com>
  * @author Wildrich Fourie
+ * @author Didier Briel
  */
 public abstract class TranslateEntry implements ITranslateCallback {
 
@@ -89,6 +92,7 @@ public abstract class TranslateEntry implements ITranslateCallback {
      * @param source
      *            source text
      */
+    @Override
     public String getTranslation(final String id, final String origSource, final String path) {
         ParseEntry.ParseEntryResult spr = new ParseEntry.ParseEntryResult();
 
@@ -99,7 +103,8 @@ public abstract class TranslateEntry implements ITranslateCallback {
         if(m_config.isRemoveTags())
             tags = StaticUtils.buildTagListForRemove(origSource);
         
-        final String source = ParseEntry.stripSomeChars(origSource, spr, m_config.isRemoveTags());
+        boolean removeSpaces = Core.getFilterMaster().getConfig().isRemoveSpacesNonseg();
+        final String source = ParseEntry.stripSomeChars(origSource, spr, m_config.isRemoveTags(), removeSpaces);
         
         StringBuffer res = new StringBuffer();
 

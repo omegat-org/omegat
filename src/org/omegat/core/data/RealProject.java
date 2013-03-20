@@ -8,7 +8,7 @@
                2008 Alex Buloichik
                2009-2010 Didier Briel
                2012 Alex Buloichik, Guido Leenders, Didier Briel, Martin Fleurke
-               2013 Aaron Madlon-Kay
+               2013 Aaron Madlon-Kay, Didier Briel
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -331,7 +331,7 @@ public class RealProject implements IProject {
     public Map<String, TMXEntry> align(final ProjectProperties props, final File translatedDir)
             throws Exception {
         FilterMaster fm = Core.getFilterMaster();
-
+        
         List<String> srcFileList = new ArrayList<String>();
         File root = new File(m_config.getSourceRoot());
         StaticUtils.buildFileList(srcFileList, root, true);
@@ -1450,12 +1450,14 @@ public class RealProject implements IProject {
         Map<String, TMXEntry> data = new HashMap<String, TMXEntry>();
         private ProjectProperties config;
 
+        @Override
         public void addTranslation(String id, String source, String translation, boolean isFuzzy, String path,
                 IFilter filter) {
             if (source != null && translation != null) {
                 ParseEntry.ParseEntryResult spr = new ParseEntry.ParseEntryResult();
-                String sourceS = ParseEntry.stripSomeChars(source, spr, config.isRemoveTags());
-                String transS = ParseEntry.stripSomeChars(translation, spr, config.isRemoveTags());
+                boolean removeSpaces = Core.getFilterMaster().getConfig().isRemoveSpacesNonseg();
+                String sourceS = ParseEntry.stripSomeChars(source, spr, config.isRemoveTags(), removeSpaces);
+                String transS = ParseEntry.stripSomeChars(translation, spr, config.isRemoveTags(), removeSpaces);
                 if (config.isSentenceSegmentingEnabled()) {
                     List<String> segmentsSource = Segmenter.segment(config.getSourceLanguage(), sourceS, null, null);
                     List<String> segmentsTranslation = Segmenter

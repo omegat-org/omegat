@@ -10,6 +10,7 @@
                2008 Martin Fleurke
                2011 Alex Buloichik
                2012 Wildrich Fourie
+               2013 Didier Briel
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -34,6 +35,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
+import org.omegat.core.Core;
 
 import org.omegat.core.data.IProject.FileInfo;
 import org.omegat.core.segmentation.Rule;
@@ -138,9 +140,10 @@ public abstract class ParseEntry implements IParseCallback {
 
         ParseEntryResult tmp = new ParseEntryResult();
 
-        source = stripSomeChars(source, tmp, m_config.isRemoveTags());
+        boolean removeSpaces = Core.getFilterMaster().getConfig().isRemoveSpacesNonseg();
+        source = stripSomeChars(source, tmp, m_config.isRemoveTags(), removeSpaces);
         if (translation != null) {
-            translation = stripSomeChars(translation, tmp, m_config.isRemoveTags());
+            translation = stripSomeChars(translation, tmp, m_config.isRemoveTags(), removeSpaces);
         }
 
         if (shortcutDetails != null && shortcutDetails.isEmpty()) {
@@ -259,7 +262,7 @@ public abstract class ParseEntry implements IParseCallback {
      *            source string to strip chars
      * @return result
      */
-    static String stripSomeChars(final String src, final ParseEntryResult per, boolean removeTags) {
+    static String stripSomeChars(final String src, final ParseEntryResult per, boolean removeTags, boolean removeSpaces) {
         String r = src;
 
         /**
@@ -275,16 +278,20 @@ public abstract class ParseEntry implements IParseCallback {
          */
         int len = r.length();
         int b = 0;
-        while (b < len && (Character.isWhitespace(r.charAt(b)) || r.charAt(b) == '\u00A0')) {
-            b++;
+        if (removeSpaces) {
+            while (b < len && (Character.isWhitespace(r.charAt(b)) || r.charAt(b) == '\u00A0')) {
+                b++;
+            }
         }
         per.spacesAtBegin = b;
 
         int pos = len - 1;
         int e = 0;
-        while (pos >= b && (Character.isWhitespace(r.charAt(pos)) || r.charAt(pos) == '\u00A0')) {
-            pos--;
-            e++;
+        if (removeSpaces) {
+            while (pos >= b && (Character.isWhitespace(r.charAt(pos)) || r.charAt(pos) == '\u00A0')) {
+                pos--;
+                e++;
+            }
         }
         per.spacesAtEnd = e;
 

@@ -274,7 +274,6 @@ public class MainWindowMenu implements ActionListener, MenuListener, IMainMenu {
         editMenu.add(new JSeparator());
         editMenu.add(editTagPainterMenuItem = createMenuItem("TF_MENU_EDIT_TAGPAINT"));
         editMenu.add(editTagNextMissedMenuItem = createMenuItem("TF_MENU_EDIT_TAG_NEXT_MISSED"));
-        editMenu.add(editTagInsertNMenu = createMenu("TF_MENU_EDIT_TAG_INSERT_N"));
         editMenu.add(new JSeparator());
         editMenu.add(editExportSelectionMenuItem = createMenuItem("TF_MENU_EDIT_EXPORT_SELECTION"));
         editMenu.add(editCreateGlossaryEntryMenuItem = createMenuItem("TF_MENU_EDIT_CREATE_GLOSSARY_ENTRY"));
@@ -613,7 +612,6 @@ public class MainWindowMenu implements ActionListener, MenuListener, IMainMenu {
     JMenuItem editUndoMenuItem;
     JMenuItem editTagPainterMenuItem;
     JMenuItem editTagNextMissedMenuItem;
-    JMenu editTagInsertNMenu;
     JMenuItem editExportSelectionMenuItem;
     JMenuItem editCreateGlossaryEntryMenuItem;
     public JMenuItem gotoHistoryBackMenuItem;

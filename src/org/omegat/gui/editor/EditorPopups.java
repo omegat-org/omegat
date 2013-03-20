@@ -33,6 +33,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 
+import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
 import javax.swing.JSeparator;
@@ -46,6 +47,7 @@ import org.omegat.core.data.TMXEntry;
 import org.omegat.core.spellchecker.SpellCheckerMarker;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
+import org.omegat.util.StaticUtils;
 import org.omegat.util.gui.UIThreadsUtil;
 import org.omegat.gui.glossary.TransTipsPopup;
 
@@ -62,6 +64,7 @@ public class EditorPopups {
         ec.registerPopupMenuConstructors(200, new GoToSegmentPopup(ec));
         ec.registerPopupMenuConstructors(400, new DefaultPopup());
         ec.registerPopupMenuConstructors(500, new EmptyNoneTranslationPopup(ec));
+        ec.registerPopupMenuConstructors(600, new InsertTagsPopup(ec));
     }
 
     /**
@@ -329,6 +332,39 @@ public class EditorPopups {
                     prevTrans.defaultTranslation);
             Core.getEditor().replaceEditText("");
             Core.getEditor().commitAndLeave();
+        }
+    }
+
+    public static class InsertTagsPopup implements IPopupMenuConstructor {
+        protected final EditorController ec;
+
+        public InsertTagsPopup(EditorController ec) {
+            this.ec = ec;
+        }
+
+        public void addItems(JPopupMenu menu, final JTextComponent comp, final int mousepos, boolean isInActiveEntry,
+                boolean isInActiveTranslation, SegmentBuilder sb) {
+            if (!isInActiveTranslation) {
+                return;
+            }
+
+            SourceTextEntry ste = Core.getEditor().getCurrentEntry();
+            if (ste == null || ste.getProtectedParts() == null) {
+                return;
+            }
+            String tr = Core.getEditor().getCurrentTranslation();
+            for (final String tag : ste.getProtectedParts().keySet()) {
+                if (tr.contains(tag)) {
+                    continue;
+                }
+                JMenuItem item = menu.add(StaticUtils.format(OStrings.getString("TF_MENU_EDIT_TAG_INSERT_N"), tag));
+                item.addActionListener(new ActionListener() {
+                    public void actionPerformed(ActionEvent e) {
+                        Core.getEditor().insertText(tag);
+                    }
+                });
+            }
+            menu.addSeparator();
         }
     }
 }

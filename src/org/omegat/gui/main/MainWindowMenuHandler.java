@@ -618,22 +618,6 @@ public class MainWindowMenuHandler {
         }
     }
 
-    public void editTagInsertNMenuMenuSelected(JMenu menu) {
-        menu.removeAll();
-        SourceTextEntry ste = Core.getEditor().getCurrentEntry();
-        if (ste != null && ste.getProtectedParts() != null) {
-            for (final String tag : ste.getProtectedParts().keySet()) {
-                JMenuItem item = new JMenuItem(tag);
-                item.addActionListener(new ActionListener() {
-                    public void actionPerformed(ActionEvent e) {
-                        Core.getEditor().insertText(tag);
-                    }
-                });
-                menu.add(item);
-            }
-        }
-    }
-
     public void toolsShowStatisticsStandardMenuItemActionPerformed() {
         new StatisticsWindow(StatisticsWindow.STAT_TYPE.STANDARD).setVisible(true);
     }

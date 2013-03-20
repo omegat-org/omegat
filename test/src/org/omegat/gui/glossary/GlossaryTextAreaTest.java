@@ -166,6 +166,8 @@ public class GlossaryTextAreaTest extends TestCore {
 
             public void replaceEditText(String text) {
             }
+            public void replaceEditTextAndMark(String text) {
+            }
 
             public void requestFocus() {
             }

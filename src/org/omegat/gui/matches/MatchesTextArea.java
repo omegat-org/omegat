@@ -331,7 +331,7 @@ public class MatchesTextArea extends EntryInfoThreadPane<List<NearString>> imple
                         translation = 
                             substituteNumbers(currentEntry.getSrcText(), thebest.source, thebest.translation);
                     }
-                    Core.getEditor().replaceEditText(prefix + translation);
+                    Core.getEditor().replaceEditTextAndMark(prefix + translation);
                 }
             }
         }

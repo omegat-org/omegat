@@ -268,7 +268,7 @@ public class MainWindowMenuHandler {
     public void editOverwriteMachineTranslationMenuItemActionPerformed() {
         String tr = Core.getMachineTranslatePane().getDisplayedTranslation();
         if (!StringUtil.isEmpty(tr)) {
-            Core.getEditor().replaceEditText(tr);
+            Core.getEditor().replaceEditTextAndMark(tr);
         }
     }
 

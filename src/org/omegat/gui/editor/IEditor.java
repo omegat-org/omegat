@@ -191,6 +191,14 @@ public interface IEditor {
     void replaceEditText(String text);
 
     /**
+     * Replaces the entire edit area with a given text and mark for to be
+     * changed by translator, i.e. background of segment should be marked
+     * 
+     * Must be called only from UI thread.
+     */
+    void replaceEditTextAndMark(String text);
+
+    /**
      * Defines the current translation as empty.
      * This is reset after each going out of a segment.
      */

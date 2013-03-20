@@ -51,6 +51,13 @@ public final class Styles {
     public static final Color COLOR_WHITESPACE = new Color(128, 128, 128);
     public static final Color COLOR_BIDIMARKERS = new Color(200, 0, 0);
 
+    public static final MutableAttributeSet ADDITIONAL_MARK_FOR_EDIT;
+
+    static {
+        ADDITIONAL_MARK_FOR_EDIT = new SimpleAttributeSet();
+        StyleConstants.setBackground(ADDITIONAL_MARK_FOR_EDIT, Color.RED);
+    }
+
     /**
      * Construct required attributes set.
      * 

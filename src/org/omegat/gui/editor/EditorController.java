@@ -80,6 +80,7 @@ import org.omegat.util.Preferences;
 import org.omegat.util.StaticUtils;
 import org.omegat.util.StringUtil;
 import org.omegat.util.Token;
+import org.omegat.util.gui.Styles;
 import org.omegat.util.gui.UIThreadsUtil;
 
 import com.vlsolutions.swing.docking.DockingDesktop;
@@ -1361,6 +1362,7 @@ public class EditorController implements IEditor {
     /**
      * {@inheritDoc}
      */
+    @Override
     public void replaceEditText(final String text) {
         UIThreadsUtil.mustBeSwingThread();
 
@@ -1371,6 +1373,27 @@ public class EditorController implements IEditor {
         // remove text
         editor.select(start, end);
         editor.replaceSelection(text);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void replaceEditTextAndMark(String text) {
+        UIThreadsUtil.mustBeSwingThread();
+
+        // build local offsets
+        int start = editor.getOmDocument().getTranslationStart();
+        int end = editor.getOmDocument().getTranslationEnd();
+
+        // remove text
+        editor.select(start, end);
+        editor.replaceSelection(text);
+
+        // mark background as red
+        start = editor.getOmDocument().getTranslationStart();
+        end = editor.getOmDocument().getTranslationEnd();
+        editor.getOmDocument().setCharacterAttributes(start, end - start, Styles.ADDITIONAL_MARK_FOR_EDIT, false);
     }
 
     public String getCurrentTranslation() {

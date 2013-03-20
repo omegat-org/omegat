@@ -585,8 +585,11 @@ public class MainWindowMenuHandler {
         // insert tags
         SourceTextEntry ste = Core.getEditor().getCurrentEntry();
         if (ste != null && ste.getProtectedParts() != null) {
+            String tr = Core.getEditor().getCurrentTranslation();
             for (String tag : ste.getProtectedParts().keySet()) {
-                Core.getEditor().insertText(tag);
+                if (!tr.contains(tag)) {
+                    Core.getEditor().insertText(tag);
+                }
             }
         }
 

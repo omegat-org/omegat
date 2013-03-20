@@ -43,6 +43,7 @@ public class InlineTagHandler {
     String currentI;
     String currentPos;
     int tagIndex;
+    char otherTagShortcutLetter;
 
     /**
      * Reset stored info for process new part of XML.
@@ -88,6 +89,25 @@ public class InlineTagHandler {
     }
 
     /**
+     * Store shortcut letter for current other tag.
+     * 
+     * @param letter
+     *            letter to store
+     */
+    public void setOtherTagShortcutLetter(char letter) {
+        otherTagShortcutLetter = letter;
+    }
+
+    /**
+     * Get stored shortcut letter for current other tag.
+     * 
+     * @return
+     */
+    public char getOtherTagShortcutLetter() {
+        return otherTagShortcutLetter;
+    }
+
+    /**
      * Handle "ept" tag start.
      * 
      * @param attributeValues
@@ -95,16 +115,6 @@ public class InlineTagHandler {
      */
     public void startEPT(String... attributeValues) {
         currentI = nvl(attributeValues);
-    }
-
-    /**
-     * Handle "it" tag start.
-     * 
-     * @param posValue
-     *            begin/end value
-     */
-    public void startIT(String posValue) {
-        currentPos = posValue;
     }
 
     /**
@@ -130,17 +140,6 @@ public class InlineTagHandler {
      */
     public Integer endEPT() {
         return pairTags.get(currentI);
-    }
-
-    /**
-     * Handle "it" tag end.
-     * 
-     * @return shortcut index
-     */
-    public int endIT() {
-        int result = tagIndex;
-        tagIndex++;
-        return result;
     }
 
     /**
@@ -182,6 +181,13 @@ public class InlineTagHandler {
         default:
             throw new RuntimeException("Impossible tag type");
         }
+    }
+
+    /**
+     * Remember current begin/end mark of "it" tag.
+     */
+    public void setCurrentPos(String currentPos) {
+        this.currentPos = currentPos;
     }
 
     /**

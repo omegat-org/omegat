@@ -26,6 +26,14 @@
                 <source>source</source>
                 <target>one <bpt type="other" i="2"/>two<ept i="2"/> three</target>
             </trans-unit>
+            <trans-unit>
+                <source>source</source>
+                <target>one <ph type="w">two</ph> three</target>
+            </trans-unit>
+            <trans-unit>
+                <source>source</source>
+                <target>one <ph type="w"/> three</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

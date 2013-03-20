@@ -60,6 +60,7 @@ public class XLIFFDialect extends DefaultXMLDialect {
         defineContentBasedTag("bpt", Tag.Type.BEGIN);
         defineContentBasedTag("ept", Tag.Type.END);
         defineContentBasedTag("it", Tag.Type.ALONE);
+        defineContentBasedTag("ph", Tag.Type.ALONE);
         // "mrk", only <mrk mtype="protected"> is content-based tag. see validateContentBasedTag
     }
 
@@ -136,7 +137,7 @@ public class XLIFFDialect extends DefaultXMLDialect {
                     // XLIFF specification requires 'rid' and 'id' attributes,
                     // but some tools uses 'i' attribute like for TMX
                     tagHandler.startBPT(tag.getAttribute("rid"), tag.getAttribute("id"), tag.getAttribute("i"));
-                    char shortcutLetter = calcBptShortcutLetter(tag);
+                    char shortcutLetter = calcTagShortcutLetter(tag);
                     tagHandler.setTagShortcutLetter(shortcutLetter);
                     String tagIndex = tagHandler.endBPT().toString();
                     shortcut = "<" + (shortcutLetter != 0 ? shortcutLetter : 'f') + tagIndex + '>';
@@ -146,16 +147,22 @@ public class XLIFFDialect extends DefaultXMLDialect {
                     char shortcutLetter = tagHandler.getTagShortcutLetter();
                     shortcut = "</" + (shortcutLetter != 0 ? shortcutLetter : 'f') + tagIndex + '>';
                 } else if ("it".equals(tag.getTag())) {
-                    tagHandler.startIT(tag.getAttribute("pos"));
-                    String tagIndex = Integer.toString(tagHandler.endIT());
+                    tagHandler.startOTHER();
+                    tagHandler.setCurrentPos(tag.getAttribute("pos"));
+                    String tagIndex = Integer.toString(tagHandler.endOTHER());
                     // XLIFF specification requires 'open/close' values,
                     // but some tools may use 'begin/end' values like for TMX
-                    char shortcutLetter = calcBptShortcutLetter(tag);
+                    char shortcutLetter = calcTagShortcutLetter(tag);
                     if ("close".equals(tagHandler.getCurrentPos()) || "end".equals(tagHandler.getCurrentPos())) {
                         shortcut = "</" + (shortcutLetter != 0 ? shortcutLetter : 'f') + tagIndex + '>';
                     } else {
                         shortcut = "<" + (shortcutLetter != 0 ? shortcutLetter : 'f') + tagIndex + '>';
                     }
+                } else if ("ph".equals(tag.getTag())) {
+                    tagHandler.startOTHER();
+                    String tagIndex = Integer.toString(tagHandler.endOTHER());
+                    char shortcutLetter = calcTagShortcutLetter(tag);
+                    shortcut = "<" + (shortcutLetter != 0 ? shortcutLetter : 'f') + tagIndex + "/>";
                 } else if ("mrk".equals(tag.getTag())) {
                     tagHandler.startOTHER();
                     int tagIndex = tagHandler.endOTHER();
@@ -181,7 +188,7 @@ public class XLIFFDialect extends DefaultXMLDialect {
         return r.toString();
     }
 
-    private char calcBptShortcutLetter(XMLContentBasedTag tag) {
+    private char calcTagShortcutLetter(XMLContentBasedTag tag) {
         char s;
         if (tag.getIntactContents().size() > 0 && (tag.getIntactContents().get(0) instanceof XMLText)) {
             XMLText xmlText = (XMLText) tag.getIntactContents().get(0);

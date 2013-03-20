@@ -177,8 +177,9 @@ public class FilterVisitor extends NodeVisitor {
             if (isParagraphTag(tag) && text)
                 endup();
 
-            if (isPreformattingTag(tag))
+            if (isPreformattingTag(tag) || Core.getFilterMaster().getConfig().isPreserveSpaces()) {
                 preformatting = true;
+            }
             // Translate attributes of tags if they are not null.
             maybeTranslateAttribute(tag, "abbr");
             maybeTranslateAttribute(tag, "alt");

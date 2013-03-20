@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 2.7.0
 ----------------------------------------------------------------------
-   6 Enhancements
+   7 Enhancements
    1 Bug fix
    0 Localisation update
 ----------------------------------------------------------------------
@@ -26,6 +26,9 @@
 
   - Do not remove leading and trailing spaces
   http://sourceforge.net/support/tracker.php?aid=3608611
+
+  - Preserve spaces for all tags
+  http://sourceforge.net/support/tracker.php?aid=3608615
 
   Bug fixes:
 

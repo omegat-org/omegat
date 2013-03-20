@@ -142,7 +142,11 @@ class Handler extends DefaultHandler implements LexicalHandler, DeclHandler {
     }
 
     private boolean isSpacePreservingTag() {
-        return spacePreserve;
+        if (Core.getFilterMaster().getConfig().isPreserveSpaces()) { // Preserve spaces for all tags
+            return true;
+        } else {
+            return spacePreserve;
+        }
     }
     
     private void resetSpacePreservingTag() {

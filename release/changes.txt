@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 2.7.0
 ----------------------------------------------------------------------
-  14 Enhancements
+  16 Enhancements
    1 Bug fix
    0 Localisation update
 ----------------------------------------------------------------------
@@ -41,6 +41,12 @@
 
   - Validate tags after each segment
   http://sourceforge.net/support/tracker.php?aid=3608715
+
+  - Tag protection
+  http://sourceforge.net/support/tracker.php?aid=3608720
+
+  - Protected text in XLIFF
+  http://sourceforge.net/support/tracker.php?aid=3608725
 
   Other enhancements:
 

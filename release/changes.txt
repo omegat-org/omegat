@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 2.7.0
 ----------------------------------------------------------------------
-   9 Enhancements
+  10 Enhancements
    1 Bug fix
    0 Localisation update
 ----------------------------------------------------------------------
@@ -35,6 +35,9 @@
 
   - Show the content of tags in tooltips
   http://sourceforge.net/support/tracker.php?aid=3573166
+
+  - Validate tags when creating target files
+  http://sourceforge.net/support/tracker.php?aid=1398289
 
   Bug fixes:
 

@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 2.7.0
 ----------------------------------------------------------------------
-  10 Enhancements
+  14 Enhancements
    1 Bug fix
    0 Localisation update
 ----------------------------------------------------------------------
@@ -38,6 +38,20 @@
 
   - Validate tags when creating target files
   http://sourceforge.net/support/tracker.php?aid=1398289
+
+  - Validate tags after each segment
+  http://sourceforge.net/support/tracker.php?aid=3608715
+
+  Other enhancements:
+
+  - Insert Source Tags become Insert Missing Source Tags. It only adds
+the tags missing in the segment.
+
+  - Edit > Insert Next Missing Tag inserts the next tag missing in the
+target segment
+
+  - In the right-click menu of the current segment, missing tags
+appear in the contextual menu, and can be inserted individually.
 
   Bug fixes:
 

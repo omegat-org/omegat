@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 2.7.0
 ----------------------------------------------------------------------
-   7 Enhancements
+   9 Enhancements
    1 Bug fix
    0 Localisation update
 ----------------------------------------------------------------------
@@ -29,6 +29,12 @@
 
   - Preserve spaces for all tags
   http://sourceforge.net/support/tracker.php?aid=3608615
+
+  - Moving between tags with a single keystroke
+  http://sourceforge.net/support/tracker.php?aid=3579784
+
+  - Show the content of tags in tooltips
+  http://sourceforge.net/support/tracker.php?aid=3573166
 
   Bug fixes:
 

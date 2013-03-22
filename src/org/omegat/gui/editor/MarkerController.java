@@ -148,7 +148,9 @@ public class MarkerController {
             MarkInfo[] me = m[i];
             if (me != null) {
                 for (int j = 0; j < me.length; j++) {
-                    highlighter.removeHighlight(me[j].underscore);
+                    if (me[j] != null && me[j].underscore != null) {
+                        highlighter.removeHighlight(me[j].underscore);
+                    }
                 }
             }
             marks[entryIndex][i] = null;
@@ -258,8 +260,16 @@ public class MarkerController {
         }
         for (int i = 0; i < newMarks.size(); i++) {
             Mark m = newMarks.get(i);
-            int startOffset = m.entryPart == Mark.ENTRY_PART.SOURCE ? sourceStartOffset
-                    : translationStartOffset;
+            int startOffset;
+            if (m.entryPart == Mark.ENTRY_PART.SOURCE) {
+                if (sb.getSourceText() == null)    {
+                    // what if no sources are required
+                    continue;
+                }
+                startOffset = sourceStartOffset;
+            } else {
+                startOffset = translationStartOffset;
+            }
             try {
                 nm[i] = new MarkInfo();
                 nm[i].underscore = (Highlighter.Highlight) highlighter.addHighlight(startOffset

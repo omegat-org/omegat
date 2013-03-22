@@ -41,8 +41,6 @@ import java.util.List;
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
 import javax.swing.text.AttributeSet;
-import javax.swing.text.BadLocationException;
-import javax.swing.text.Highlighter;
 import javax.swing.text.StyledDocument;
 
 import org.omegat.core.Core;
@@ -54,7 +52,6 @@ import org.omegat.core.matching.DiffDriver.TextRun;
 import org.omegat.core.matching.ITokenizer;
 import org.omegat.core.matching.NearString;
 import org.omegat.gui.common.EntryInfoThreadPane;
-import org.omegat.gui.editor.mark.TransparentHighlightPainter;
 import org.omegat.gui.main.DockableScrollPane;
 import org.omegat.gui.main.MainWindow;
 import org.omegat.util.Log;
@@ -84,17 +81,15 @@ public class MatchesTextArea extends EntryInfoThreadPane<List<NearString>> imple
     private static final String EXPLANATION = OStrings.getString("GUI_MATCHWINDOW_explanation");
 
     private static final AttributeSet ATTRIBUTES_EMPTY = Styles.createAttributeSet(null, null, null, null);
-    private static final AttributeSet ATTRIBUTES_CHANGED = Styles.createAttributeSet(Styles.COLOR_DARK_BLUE, null, null,true);
-    private static final AttributeSet ATTRIBUTES_UNCHANGED = Styles.createAttributeSet(Styles.COLOR_DARK_GREEN, null, null, false);
-    private static final AttributeSet ATTRIBUTES_SELECTED_SOURCE = Styles.createAttributeSet(null, null, true, null);
-    private static final AttributeSet ATTRIBUTES_SELECTED_TARGET = Styles.createAttributeSet(null, null, false, null);
-    private static final AttributeSet ATTRIBUTES_SELECTED_OTHER = Styles.createAttributeSet(Color.gray, null, null, true);
+    private static final AttributeSet ATTRIBUTES_CHANGED = Styles.createAttributeSet(Color.blue, null, null,
+            null);
+    private static final AttributeSet ATTRIBUTES_UNCHANGED = Styles.createAttributeSet(Color.green, null, null,
+            null);
+    private static final AttributeSet ATTRIBUTES_SELECTED = Styles.createAttributeSet(null, null, true, null);
     private static final AttributeSet ATTRIBUTES_DELETED_ACTIVE = Styles.createAttributeSet(null, null, true, null, true, null);
     private static final AttributeSet ATTRIBUTES_DELETED_INACTIVE = Styles.createAttributeSet(null, null, null, null, true, null);
-    private static final AttributeSet ATTRIBUTES_INSERTED_ACTIVE = Styles.createAttributeSet(Styles.COLOR_DARK_BLUE, null, true, null, null, true);
+    private static final AttributeSet ATTRIBUTES_INSERTED_ACTIVE = Styles.createAttributeSet(Color.blue, null, true, null, null, true);
     private static final AttributeSet ATTRIBUTES_INSERTED_INACTIVE = Styles.createAttributeSet(Color.gray, null, null, null, null, true);
-    
-    protected static final Highlighter.HighlightPainter PAINTER = new TransparentHighlightPainter(Styles.COLOR_NBSP, 0.3F);
     
     private final List<NearString> matches = new ArrayList<NearString>();
 
@@ -357,7 +352,6 @@ public class MatchesTextArea extends EntryInfoThreadPane<List<NearString>> imple
 
         StyledDocument doc = (StyledDocument) getDocument();
         doc.setCharacterAttributes(0, doc.getLength(), ATTRIBUTES_EMPTY, true);
-        getHighlighter().removeAllHighlights();
 
         int start = delimiters.get(activeMatch);
         int end = delimiters.get(activeMatch + 1);
@@ -411,18 +405,7 @@ public class MatchesTextArea extends EntryInfoThreadPane<List<NearString>> imple
 	    	}
         }
 
-        try {
-            int sourceLength = match.source.length()+3; // 3 = "n) " length
-            int targetLength = match.translation.length();
-            doc.setCharacterAttributes(start, sourceLength, ATTRIBUTES_SELECTED_SOURCE, false);
-            int otherStart = start + sourceLength;
-            doc.setCharacterAttributes(otherStart, targetLength, ATTRIBUTES_SELECTED_TARGET, false);
-            otherStart = otherStart + targetLength + 1;
-            doc.setCharacterAttributes(otherStart, end - otherStart, ATTRIBUTES_SELECTED_OTHER, false);
-            getHighlighter().addHighlight(start, end, PAINTER);
-        } catch (BadLocationException ex) {
-            Log.log(ex);
-        }
+        doc.setCharacterAttributes(start, end - start, ATTRIBUTES_SELECTED, false);
         setCaretPosition(end - 2); // two newlines
         final int fstart = start;
 

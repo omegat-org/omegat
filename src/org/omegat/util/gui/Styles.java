@@ -4,7 +4,6 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2010 Alex Buloichik, Aaron Madlon-Kay
-               2013 Zoltan Bartko
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -37,7 +36,6 @@ import javax.swing.text.StyleConstants;
  * 
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Aaron Madlon-Kay
- * @author Zoltan Bartko (bartkozoltan@bartkozoltan.com)
  */
 public final class Styles {
 
@@ -53,10 +51,6 @@ public final class Styles {
     public static final Color COLOR_WHITESPACE = new Color(128, 128, 128);
     public static final Color COLOR_BIDIMARKERS = new Color(200, 0, 0);
 
-    public static final Color COLOR_ACTIVE_MATCH = new Color(200, 200, 200);
-    public static final Color COLOR_DARK_BLUE = new Color(0x00,0x00,0xA0);
-    public static final Color COLOR_DARK_GREEN = new Color(0x00,0x80, 0x00);
-    
     public static final MutableAttributeSet ADDITIONAL_MARK_FOR_EDIT;
 
     static {

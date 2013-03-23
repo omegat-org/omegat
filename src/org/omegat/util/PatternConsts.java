@@ -204,7 +204,7 @@ public class PatternConsts {
      */
     public static Pattern getPlaceholderPattern() {
         if (PLACEHOLDERS == null) {
-            String regexp = "[!]";
+            String regexp = RE_OMEGAT_TAG;
             if ("true".equalsIgnoreCase(Preferences.getPreference(Preferences.CHECK_ALL_PRINTF_TAGS))) {
                 regexp += "|"+RE_PRINTF_VARS;
             } else if ("true".equalsIgnoreCase(Preferences.getPreference(Preferences.CHECK_SIMPLE_PRINTF_TAGS))) {

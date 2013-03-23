@@ -3,7 +3,7 @@
           with fuzzy matching, translation memory, keyword search, 
           glossaries, and translation leveraging into updated projects.
 
- Copyright (C) 2010 Alex Buloichik
+ Copyright (C) 2010-2013 Alex Buloichik
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -26,8 +26,6 @@ package org.omegat.gui.editor.mark;
 
 import java.util.List;
 
-import javax.swing.text.Highlighter.HighlightPainter;
-
 import org.omegat.core.data.SourceTextEntry;
 
 /**
@@ -37,21 +35,13 @@ import org.omegat.core.data.SourceTextEntry;
  */
 public interface IMarker {
     /**
-     * Get painter for specified marker.
-     * 
-     * Painter should be instantiated once, then returns always.
-     * 
-     * @return painter
-     */
-    HighlightPainter getPainter();
-
-    /**
-     * Calculate marks for inactive entry.
+     * Calculate marks for specific entry.
      * 
      * Method will be called NOT in Swing thread.
      * 
      * @return null if nothing changed, or list of new marks. Empty list must be
      *         returned if marks shouldn't be displayed
      */
-    List<Mark> getMarksForEntry(SourceTextEntry ste, String sourceText, String translationText, boolean isActive) throws Exception;
+    List<Mark> getMarksForEntry(SourceTextEntry ste, String sourceText, String translationText, boolean isActive)
+            throws Exception;
 }

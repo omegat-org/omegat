@@ -620,9 +620,17 @@ public class EditorController implements IEditor {
      */
     void onTextChanged() {
         Document3 doc = editor.getOmDocument();
+        if (doc.trustedChangesInProgress) {
+            return;
+        }
         if (doc.isEditMode()) {
             m_docSegList[displayedEntryIndex].onActiveEntryChanged();
-            markerController.process(displayedEntryIndex, m_docSegList[displayedEntryIndex]);
+
+            SwingUtilities.invokeLater(new Runnable() {
+                public void run() {
+                    markerController.process(displayedEntryIndex, m_docSegList[displayedEntryIndex]);
+                }
+            });
         }
     }
 

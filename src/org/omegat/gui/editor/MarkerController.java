@@ -27,9 +27,10 @@ package org.omegat.gui.editor;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.Highlighter;
-import javax.swing.text.Highlighter.HighlightPainter;
+import javax.swing.text.Position;
 
 import org.omegat.core.Core;
 import org.omegat.filters2.master.PluginUtils;
@@ -59,8 +60,6 @@ public class MarkerController {
     /** List of marker's class names. */
     private final String[] markerNames;
 
-    private final HighlightPainter[] painters;
-
     /** Threads for each marker. */
     protected final CalcMarkersThread[] markerThreads;
 
@@ -85,11 +84,9 @@ public class MarkerController {
 
         markerThreads = new CalcMarkersThread[ms.size()];
         markerNames = new String[ms.size()];
-        painters = new HighlightPainter[ms.size()];
         for (int i = 0; i < ms.size(); i++) {
             IMarker m = ms.get(i);
             markerNames[i] = m.getClass().getName();
-            painters[i] = m.getPainter();
             markerThreads[i] = new CalcMarkersThread(this, m, i);
             markerThreads[i].start();
         }
@@ -148,8 +145,8 @@ public class MarkerController {
             MarkInfo[] me = m[i];
             if (me != null) {
                 for (int j = 0; j < me.length; j++) {
-                    if (me[j] != null && me[j].underscore != null) {
-                        highlighter.removeHighlight(me[j].underscore);
+                    if (me[j] != null && me[j].highlight != null) {
+                        highlighter.removeHighlight(me[j].highlight);
                     }
                 }
             }
@@ -176,7 +173,9 @@ public class MarkerController {
             MarkInfo[] me = marks[i][markerIndex];
             if (me != null) {
                 for (int j = 0; j < me.length; j++) {
-                    highlighter.removeHighlight(me[j].underscore);
+                    if (me[j] != null && me[j].highlight != null) {
+                        highlighter.removeHighlight(me[j].highlight);
+                    }
                 }
             }
             marks[i][markerIndex] = null;
@@ -185,9 +184,10 @@ public class MarkerController {
     }
 
     /**
-     * Add entry to processign queue. Used on one entry changed.
+     * Add entry to processing queue. Used on one entry changed.
      */
     public void process(int entryIndex, SegmentBuilder entryBuilder) {
+        entryBuilder.resetTextAttributes();
         for (CalcMarkersThread th : markerThreads) {
             th.add(entryIndex, entryBuilder);
         }
@@ -214,11 +214,11 @@ public class MarkerController {
             }
             for (MarkInfo t : marks[entryIndex][i]) {
                 if (t != null && t.tooltip != null) {
-                    if (t.underscore.getStartOffset() <= pos && t.underscore.getEndOffset() >= pos) {
+                    if (t.tooltip.p0.getOffset() <= pos && t.tooltip.p1.getOffset() >= pos) {
                         if (res.length() > 0) {
                             res.append("<br>");
                         }
-                        res.append(t.tooltip);
+                        res.append(t.tooltip.text);
                     }
                 }
             }
@@ -236,12 +236,17 @@ public class MarkerController {
      * Set marks for specified entry and marker.
      */
     public void setEntryMarks(int entryIndex, SegmentBuilder sb, List<Mark> newMarks, int markerIndex) {
+        UIThreadsUtil.mustBeSwingThread();
+
         // remove old marks for specified entry and marker
         MarkInfo[][] markInfo = marks[entryIndex];
         MarkInfo[] me = markInfo[markerIndex];
         if (me != null) {
+            // remove highlighters
             for (int j = 0; j < me.length; j++) {
-                highlighter.removeHighlight(me[j].underscore);
+                if (me[j] != null && me[j].highlight != null) {
+                    highlighter.removeHighlight(me[j].highlight);
+                }
             }
         }
         marks[entryIndex][markerIndex] = null;
@@ -250,11 +255,12 @@ public class MarkerController {
             // there is no marks
             return;
         }
+        Document3 doc = ec.editor.getOmDocument();
         MarkInfo[] nm = new MarkInfo[newMarks.size()];
         int sourceStartOffset = sb.getStartSourcePosition();
         int translationStartOffset;
         if (sb.isActive()) {
-            translationStartOffset = ec.editor.getOmDocument().getTranslationStart();
+            translationStartOffset = doc.getTranslationStart();
         } else {
             translationStartOffset = sb.getStartTranslationPosition();
         }
@@ -272,9 +278,23 @@ public class MarkerController {
             }
             try {
                 nm[i] = new MarkInfo();
-                nm[i].underscore = (Highlighter.Highlight) highlighter.addHighlight(startOffset
-                        + m.startOffset, startOffset + m.endOffset, painters[markerIndex]);
-                nm[i].tooltip = m.toolTipText;
+                if (m.painter != null) {
+                    nm[i].highlight = (Highlighter.Highlight) highlighter.addHighlight(startOffset + m.startOffset,
+                            startOffset + m.endOffset, m.painter);
+                }
+                if (m.toolTipText != null) {
+                    nm[i].tooltip = new Tooltip(doc, startOffset + m.startOffset, startOffset + m.endOffset,
+                            m.toolTipText);
+                }
+                if (m.attributes != null) {
+                    doc.trustedChangesInProgress = true;
+                    try {
+                        doc.setCharacterAttributes(startOffset + m.startOffset, m.endOffset - m.startOffset,
+                                m.attributes, false);
+                    } finally {
+                        doc.trustedChangesInProgress = false;
+                    }
+                }
             } catch (BadLocationException ex) {
                 Log.log(ex);
             }
@@ -299,7 +319,19 @@ public class MarkerController {
      * Class for store info about displayed mark.
      */
     protected static class MarkInfo {
-        Highlighter.Highlight underscore;
-        String tooltip;
+        Highlighter.Highlight highlight;
+        Tooltip tooltip;
+        AttributeSet attributes;
+    }
+
+    protected static class Tooltip {
+        Position p0, p1;
+        String text;
+
+        public Tooltip(Document3 doc, int start, int end, String text) throws BadLocationException {
+            p0 = doc.createPosition(start);
+            p1 = doc.createPosition(end);
+            this.text = text;
+        }
     }
 }

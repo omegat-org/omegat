@@ -3,7 +3,7 @@
           with fuzzy matching, translation memory, keyword search, 
           glossaries, and translation leveraging into updated projects.
 
- Copyright (C) 2010 Alex Buloichik
+ Copyright (C) 2010-2013 Alex Buloichik
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -24,6 +24,9 @@
 
 package org.omegat.gui.editor.mark;
 
+import javax.swing.text.AttributeSet;
+import javax.swing.text.Highlighter.HighlightPainter;
+
 /**
  * Class for store information about one mark.
  * 
@@ -36,7 +39,23 @@ public class Mark {
 
     public final ENTRY_PART entryPart;
     public final int startOffset, endOffset;
+
+    /**
+     * Painter for specific Mark. For better performance, Painter should be
+     * instantiated once, then used always. It could be created in IMarker
+     * constructor.
+     */
+    public HighlightPainter painter;
+    /**
+     * Tooltip text for specific Mark. Will be displayed when mouse will moving
+     * over Mark.
+     */
     public String toolTipText;
+    /**
+     * Text attributes for specific Mark. Will be added to text by
+     * Document.setCharacterAttributes() without replacement.
+     */
+    public AttributeSet attributes;
 
     public Mark(ENTRY_PART entryPart, int start, int end) {
         this.entryPart = entryPart;

@@ -32,7 +32,9 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowEvent;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -180,9 +182,11 @@ public class TagValidationFrame extends JFrame {
      * Replace tags with &lt;font
      * color="color"&gt;&lt;b&gt;&lt;tag&gt;&lt;/b&gt;&lt;/font&gt;
      */
-    private String colorTags(String str, String color, Pattern placeholderPattern, Pattern removePattern) {
+    private String colorTags(String str, String color, Pattern placeholderPattern, Pattern removePattern,
+            Map<String, String> protectedParts) {
         // show OmegaT tags in bold and color, and to-remove text also
-        String htmlResult = formatRemoveTagsAndPlaceholders(str, color, placeholderPattern, removePattern);
+        String htmlResult = formatRemoveTagsAndPlaceholders(str, color, placeholderPattern, removePattern,
+                protectedParts);
 
         // show linefeed as symbol
         Matcher lfMatch = PatternConsts.HTML_BR.matcher(htmlResult);
@@ -199,17 +203,75 @@ public class TagValidationFrame extends JFrame {
      * @param placeholderPattern the pattern to decide what is a placeholder
      * @return html text
      */
-    private String formatPlaceholders(String str, String color, Pattern placeholderPattern) {
-        Matcher placeholderMatcher = placeholderPattern.matcher(str);
-        String htmlResult="";
-        int pos=0;
-        while (placeholderMatcher.find()) {
-            htmlResult += htmlize(str.substring(pos, placeholderMatcher.start()));
-            htmlResult += "<font color=\"" + color + "\"><b>"+htmlize(placeholderMatcher.group(0))+"</b></font>";
-            pos = placeholderMatcher.end(); 
+    private String formatPlaceholders(String str, String color, Pattern placeholderPattern,
+            Map<String, String> protectedParts) {
+        List<TextPart> text = new ArrayList<TextPart>();
+        text.add(new TextPart(str, false));
+        while (true) {
+            boolean updated = false;
+            if (protectedParts != null) {
+                for (String p : protectedParts.keySet()) {
+                    for (int i = 0; i < text.size(); i++) {
+                        TextPart tp = text.get(i);
+                        if (tp.highlighted) {
+                            continue;
+                        }
+                        int pos = tp.text.indexOf(p);
+                        if (pos >= 0) {
+                            split(text, i, pos, pos + p.length());
+                            updated = true;
+                        }
+                    }
+                }
+            }
+            for (int i = 0; i < text.size(); i++) {
+                TextPart tp = text.get(i);
+                if (tp.highlighted) {
+                    continue;
+                }
+                Matcher placeholderMatcher = placeholderPattern.matcher(str);
+                if (placeholderMatcher.find()) {
+                    split(text, i, placeholderMatcher.start(), placeholderMatcher.end());
+                    updated = true;
+                }
+            }
+            if (!updated) {
+                break;
+            }
         }
-        htmlResult += htmlize(str.substring(pos));
-        return htmlResult;
+        StringBuilder htmlResult = new StringBuilder();
+        for (TextPart tp : text) {
+            if (tp.highlighted) {
+                htmlResult.append("<font color=\"" + color + "\"><b>").append(htmlize(tp.text)).append("</b></font>");
+            } else {
+                htmlResult.append(htmlize(tp.text));
+            }
+        }
+        return htmlResult.toString();
+    }
+
+    private void split(List<TextPart> text, int index, int beg, int end) {
+        int i = index;
+        String tpText = text.remove(i).text;
+        if (beg > 0) {
+            text.add(i, new TextPart(tpText.substring(0, beg), false));
+            i++;
+        }
+        text.add(i, new TextPart(tpText.substring(beg, end), true));
+        i++;
+        if (end < tpText.length()) {
+            text.add(i, new TextPart(tpText.substring(end), false));
+        }
+    }
+
+    protected static class TextPart {
+        String text;
+        boolean highlighted;
+
+        public TextPart(String text, boolean highlighted) {
+            this.text = text;
+            this.highlighted = highlighted;
+        }
     }
 
     /**
@@ -220,20 +282,22 @@ public class TagValidationFrame extends JFrame {
      * @param removePattern the pattern to decide what text had to be removed.
      * @return html text
      */
-    private String formatRemoveTagsAndPlaceholders(String str, String color, Pattern placeholderPattern, Pattern removePattern) {
+    private String formatRemoveTagsAndPlaceholders(String str, String color, Pattern placeholderPattern,
+            Pattern removePattern, Map<String, String> protectedParts) {
         if (removePattern != null) {
             Matcher removeMatcher = removePattern.matcher(str);
             String htmlResult="";
             int pos=0;
             while (removeMatcher.find()) {
-                htmlResult += formatPlaceholders(str.substring(pos, removeMatcher.start()), color, placeholderPattern);
+                htmlResult += formatPlaceholders(str.substring(pos, removeMatcher.start()), color, placeholderPattern,
+                        protectedParts);
                 htmlResult += "<font color=\"red\"><b>"+htmlize(removeMatcher.group(0))+"</b></font>";
                 pos = removeMatcher.end();
             }
-            htmlResult += formatPlaceholders(str.substring(pos), color, placeholderPattern);
+            htmlResult += formatPlaceholders(str.substring(pos), color, placeholderPattern, protectedParts);
             return htmlResult;
         } else {
-            return formatPlaceholders(str, color, placeholderPattern);
+            return formatPlaceholders(str, color, placeholderPattern, protectedParts);
         }
     }
 
@@ -281,10 +345,10 @@ public class TagValidationFrame extends JFrame {
                 output.append("</a>");
                 output.append("</td>");
                 output.append("<td>");
-                output.append(colorTags(src, "blue", placeholderPattern, null));
+                output.append(colorTags(src, "blue", placeholderPattern, null, ste.getProtectedParts()));
                 output.append("</td>");
                 output.append("<td>");
-                output.append(colorTags(trans.translation, "blue", placeholderPattern, removePattern));
+                output.append(colorTags(trans.translation, "blue", placeholderPattern, removePattern, ste.getProtectedParts()));
                 output.append("</td>");
                 output.append("</tr>\n");
             }

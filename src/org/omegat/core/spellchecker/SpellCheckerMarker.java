@@ -46,10 +46,6 @@ import org.omegat.util.Token;
 public class SpellCheckerMarker implements IMarker {
     protected static final HighlightPainter PAINTER = new UnderlineFactory.WaveUnderline(Color.RED);
 
-    public HighlightPainter getPainter() {
-        return PAINTER;
-    }
-
     @Override
     public List<Mark> getMarksForEntry(SourceTextEntry ste, String sourceText, String translationText, boolean isActive)
             throws Exception {
@@ -67,7 +63,9 @@ public class SpellCheckerMarker implements IMarker {
             int en = tok.getOffset() + tok.getLength();
             String word = translationText.substring(st, en);
             if (!Core.getSpellChecker().isCorrect(word)) {
-                result.add(new Mark(Mark.ENTRY_PART.TRANSLATION, st, en));
+                Mark m = new Mark(Mark.ENTRY_PART.TRANSLATION, st, en);
+                m.painter = PAINTER;
+                result.add(m);
             }
         }
         return result;

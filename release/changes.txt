@@ -1,12 +1,19 @@
 ----------------------------------------------------------------------
  OmegaT 2.6.3 update 1
 ----------------------------------------------------------------------
-   0 Enhancement
+   1 Enhancement
    1 Bug fix
    0 Localisation update
 ----------------------------------------------------------------------
 2.6.3 update 1 vs. 2.6.3
 
+
+  Other enhancements:
+
+  - All documentation images were converted to 256 colours, giving
+a significant size decrease without a noticeable change in image 
+clarity
+  
   Bug fixes:
 
   - When an XML document (e.g., DocBook), contained both internal and 
@@ -26,6 +33,8 @@ external entities, the target files could be empty
   - Import from exported script files
   http://sourceforge.net/support/tracker.php?aid=2957819
 
+  Other enhancements:
+  
   - More flexible parsing for external commands arguments
 
   - Updated documentation

@@ -833,7 +833,7 @@ public class EditorController implements IEditor {
                 protected Object doInBackground() throws Exception {
                     ITagValidation tv = Core.getTagValidation();
                     if (!tv.checkInvalidTags(ste)) {
-                        tv.displayTagValidationErrors(tv.listInvalidTags());
+                        tv.displayTagValidationErrors(tv.listInvalidTags(), null);
                     }
                     return null;
                 }

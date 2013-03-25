@@ -84,15 +84,15 @@ public class TagValidationTool implements ITagValidation, IProjectEventListener 
     }
 
     @Override
-    public synchronized void displayTagValidationErrors(List<SourceTextEntry> suspects) {
+    public synchronized void displayTagValidationErrors(List<SourceTextEntry> suspects, String message) {
         if (mainWindow != null) {
-            showTagResultsInGui(suspects);
+            showTagResultsInGui(suspects, message);
         } else {
             showTagResultsInConsole(suspects);
         }
     }
 
-    private void showTagResultsInGui(List<SourceTextEntry> suspects) {
+    private void showTagResultsInGui(List<SourceTextEntry> suspects, String message) {
         if (suspects != null && suspects.size() > 0) {
             // create a tag validation window if necessary
             if (m_tagWin == null) {
@@ -105,6 +105,7 @@ public class TagValidationTool implements ITagValidation, IProjectEventListener 
 
             // display list of suspect strings
             m_tagWin.setVisible(true);
+            m_tagWin.setMessage(message);
             m_tagWin.displayStringList(suspects);
         } else {
             // close tag validation window if present

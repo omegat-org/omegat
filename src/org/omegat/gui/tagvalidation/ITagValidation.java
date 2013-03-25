@@ -57,5 +57,5 @@ public interface ITagValidation {
      * @param invalidTagsEntries
      *            list of invalid tags entries(from listInvalidTags() method)
      */
-    void displayTagValidationErrors(List<SourceTextEntry> invalidTagsEntries);
+    void displayTagValidationErrors(List<SourceTextEntry> invalidTagsEntries, String message);
 }

@@ -157,7 +157,7 @@ public class MainWindowMenuHandler {
         if (Preferences.isPreference(Preferences.TAGS_VALID_REQUIRED)) {
             List<SourceTextEntry> stes = Core.getTagValidation().listInvalidTags();
             if (stes != null) {
-                Core.getTagValidation().displayTagValidationErrors(stes);
+                Core.getTagValidation().displayTagValidationErrors(stes, OStrings.getString("TF_MESSAGE_COMPILE"));
                 return;
             }
         }
@@ -575,7 +575,7 @@ public class MainWindowMenuHandler {
     }
 
     public void toolsValidateTagsMenuItemActionPerformed() {
-        Core.getTagValidation().displayTagValidationErrors(Core.getTagValidation().listInvalidTags());
+        Core.getTagValidation().displayTagValidationErrors(Core.getTagValidation().listInvalidTags(), null);
     }
 
     /**

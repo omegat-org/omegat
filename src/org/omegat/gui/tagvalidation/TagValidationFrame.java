@@ -229,7 +229,7 @@ public class TagValidationFrame extends JFrame {
                 if (tp.highlighted) {
                     continue;
                 }
-                Matcher placeholderMatcher = placeholderPattern.matcher(str);
+                Matcher placeholderMatcher = placeholderPattern.matcher(tp.text);
                 if (placeholderMatcher.find()) {
                     split(text, i, placeholderMatcher.start(), placeholderMatcher.end());
                     updated = true;
@@ -328,6 +328,9 @@ public class TagValidationFrame extends JFrame {
         output.append("</style>\n");
         output.append("</head>\n");
         output.append("<body>\n");
+        if (message != null) {
+            output.append("<b>" + message + "</b>");
+        }
 
         output.append("<table border=\"1\" cellspacing=\"1\" cellpadding=\"2\" width=\"100%\">\n");
         for (SourceTextEntry ste : stringList) {
@@ -359,8 +362,14 @@ public class TagValidationFrame extends JFrame {
 
         m_editorPane.setContentType("text/html");
         m_editorPane.setText(output.toString());
+        m_editorPane.setCaretPosition(0);
     }
 
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
+    private String message;
     private JEditorPane m_editorPane;
     private List<SourceTextEntry> stringList;
 }

@@ -264,40 +264,45 @@ public class MarkerController {
         } else {
             translationStartOffset = sb.getStartTranslationPosition();
         }
-        for (int i = 0; i < newMarks.size(); i++) {
-            Mark m = newMarks.get(i);
-            int startOffset;
-            if (m.entryPart == Mark.ENTRY_PART.SOURCE) {
-                if (sb.getSourceText() == null)    {
-                    // what if no sources are required
-                    continue;
-                }
-                startOffset = sourceStartOffset;
-            } else {
-                startOffset = translationStartOffset;
-            }
-            try {
-                nm[i] = new MarkInfo();
-                if (m.painter != null) {
-                    nm[i].highlight = (Highlighter.Highlight) highlighter.addHighlight(startOffset + m.startOffset,
-                            startOffset + m.endOffset, m.painter);
-                }
-                if (m.toolTipText != null) {
-                    nm[i].tooltip = new Tooltip(doc, startOffset + m.startOffset, startOffset + m.endOffset,
-                            m.toolTipText);
-                }
-                if (m.attributes != null) {
-                    doc.trustedChangesInProgress = true;
-                    try {
-                        doc.setCharacterAttributes(startOffset + m.startOffset, m.endOffset - m.startOffset,
-                                m.attributes, false);
-                    } finally {
-                        doc.trustedChangesInProgress = false;
+        doc.removeUndoableEditListener(ec.editor.undoManager);
+        try {
+            for (int i = 0; i < newMarks.size(); i++) {
+                Mark m = newMarks.get(i);
+                int startOffset;
+                if (m.entryPart == Mark.ENTRY_PART.SOURCE) {
+                    if (sb.getSourceText() == null) {
+                        // what if no sources are required
+                        continue;
                     }
+                    startOffset = sourceStartOffset;
+                } else {
+                    startOffset = translationStartOffset;
                 }
-            } catch (BadLocationException ex) {
-                Log.log(ex);
+                try {
+                    nm[i] = new MarkInfo();
+                    if (m.painter != null) {
+                        nm[i].highlight = (Highlighter.Highlight) highlighter.addHighlight(startOffset + m.startOffset,
+                                startOffset + m.endOffset, m.painter);
+                    }
+                    if (m.toolTipText != null) {
+                        nm[i].tooltip = new Tooltip(doc, startOffset + m.startOffset, startOffset + m.endOffset,
+                                m.toolTipText);
+                    }
+                    if (m.attributes != null) {
+                        doc.trustedChangesInProgress = true;
+                        try {
+                            doc.setCharacterAttributes(startOffset + m.startOffset, m.endOffset - m.startOffset,
+                                    m.attributes, false);
+                        } finally {
+                            doc.trustedChangesInProgress = false;
+                        }
+                    }
+                } catch (BadLocationException ex) {
+                    Log.log(ex);
+                }
             }
+        } finally {
+            doc.addUndoableEditListener(ec.editor.undoManager);
         }
         marks[entryIndex][markerIndex] = nm;
     }

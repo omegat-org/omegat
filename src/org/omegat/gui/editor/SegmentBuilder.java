@@ -587,6 +587,7 @@ public class SegmentBuilder {
     }
 
     public void resetTextAttributes() {
+        doc.removeUndoableEditListener(controller.editor.undoManager);
         doc.trustedChangesInProgress = true;
         try {
             if (posSourceBeg != null) {
@@ -610,6 +611,7 @@ public class SegmentBuilder {
             }
         } finally {
             doc.trustedChangesInProgress = false;
+            doc.addUndoableEditListener(controller.editor.undoManager);
         }
     }
 

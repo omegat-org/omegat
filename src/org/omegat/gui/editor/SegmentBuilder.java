@@ -30,6 +30,7 @@ import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.util.Date;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicLong;
 
 import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
@@ -41,6 +42,7 @@ import org.omegat.core.Core;
 import org.omegat.core.data.ProjectTMX;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.data.TMXEntry;
+import org.omegat.gui.editor.MarkerController.MarkInfo;
 import org.omegat.util.Language;
 import org.omegat.util.Log;
 import org.omegat.util.OConsts;
@@ -68,6 +70,8 @@ public class SegmentBuilder {
     private static final DateFormat dateFormat = DateFormat.getDateInstance();
     private static final DateFormat timeFormat = DateFormat.getTimeInstance();
 
+    static AtomicLong globalVersions = new AtomicLong();
+
     final SourceTextEntry ste;
     final int segmentNumberInProject;
 
@@ -76,7 +80,7 @@ public class SegmentBuilder {
      * thread, like spell checking. Version changed(in Swing thread only) each
      * time when entry drawn, and when user edits it (for active entry).
      */
-    private long displayVersion;
+    private volatile long displayVersion;
     /** Source text of entry, or null if not displayed. */
     private String sourceText;
     /** Translation text of entry, or null if not displayed. */
@@ -110,6 +114,13 @@ public class SegmentBuilder {
 
     /** current offset in document to insert new stuff*/
     protected int offset;
+
+    /**
+     * Markers for this segment.
+     * 
+     * Array of displayed marks. 1nd dimension - marker, 2nd dimension - marks
+     */
+    protected MarkInfo[][] marks;
 
     /**
      * True if source OR target languages is RTL. In this case, we will insert
@@ -146,7 +157,7 @@ public class SegmentBuilder {
     public void createSegmentElement(final boolean isActive) {
         UIThreadsUtil.mustBeSwingThread();
 
-        displayVersion++;
+        displayVersion = globalVersions.incrementAndGet();
         this.active = isActive;
 
         doc.trustedChangesInProgress = true;
@@ -560,7 +571,7 @@ public class SegmentBuilder {
      */
     void onActiveEntryChanged() {
         translationText = doc.extractTranslation();
-        displayVersion++;
+        displayVersion = globalVersions.incrementAndGet();
     }
 
     /**

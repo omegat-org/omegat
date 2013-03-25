@@ -3,7 +3,7 @@
           with fuzzy matching, translation memory, keyword search, 
           glossaries, and translation leveraging into updated projects.
 
- Copyright (C) 2010 Alex Buloichik
+ Copyright (C) 2010-2013 Alex Buloichik
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -29,8 +29,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 
-import javax.swing.SwingUtilities;
-
 import org.omegat.gui.editor.MarkerController;
 import org.omegat.gui.editor.SegmentBuilder;
 import org.omegat.util.Log;
@@ -45,11 +43,10 @@ import org.omegat.util.Log;
 public class CalcMarkersThread extends Thread {
 
     private final Queue<EntryMarks> forCheck = new LinkedList<EntryMarks>();
-    private final Queue<EntryMarks> forOutput = new LinkedList<EntryMarks>();
 
     private final MarkerController mController;
     private final int markerIndex;
-    private final IMarker marker;
+    public final IMarker marker;
 
     public CalcMarkersThread(MarkerController mc, IMarker marker, int markerIndex) {
         this.mController = mc;
@@ -61,16 +58,13 @@ public class CalcMarkersThread extends Thread {
         synchronized (forCheck) {
             forCheck.clear();
         }
-        synchronized (forOutput) {
-            forOutput.clear();
-        }
     }
 
     public void add(SegmentBuilder[] entryBuilders) {
         List<EntryMarks> vers = new ArrayList<EntryMarks>(entryBuilders.length);
 
         for (int i = 0; i < entryBuilders.length; i++) {
-            EntryMarks v = new EntryMarks(i, entryBuilders[i], entryBuilders[i].getDisplayVersion());
+            EntryMarks v = new EntryMarks(entryBuilders[i], entryBuilders[i].getDisplayVersion(), markerIndex);
             vers.add(v);
         }
 
@@ -80,8 +74,8 @@ public class CalcMarkersThread extends Thread {
         }
     }
 
-    public void add(int entryIndex, SegmentBuilder entryBuilder) {
-        EntryMarks v = new EntryMarks(entryIndex, entryBuilder, entryBuilder.getDisplayVersion());
+    public void add(SegmentBuilder entryBuilder) {
+        EntryMarks v = new EntryMarks(entryBuilder, entryBuilder.getDisplayVersion(), markerIndex);
 
         synchronized (forCheck) {
             forCheck.add(v);
@@ -92,8 +86,7 @@ public class CalcMarkersThread extends Thread {
     @Override
     public void run() {
         Thread.currentThread().setPriority(Thread.MIN_PRIORITY);
-        Thread.currentThread().setName(
-                this.getClass().getSimpleName() + " - " + marker.getClass().getSimpleName());
+        Thread.currentThread().setName(this.getClass().getSimpleName() + " - " + marker.getClass().getSimpleName());
 
         try {
             while (true) {
@@ -101,8 +94,6 @@ public class CalcMarkersThread extends Thread {
                 synchronized (forCheck) {
                     ev = forCheck.poll();
                     if (ev == null) {
-                        // there is no strings in queue - output all
-                        showOutput();
                         // wait next
                         forCheck.wait();
                     }
@@ -113,7 +104,7 @@ public class CalcMarkersThread extends Thread {
 
                 // Calculate only if entry not changed yet
                 try {
-                    if (mController.isEntryChanged(ev)) {
+                    if (ev.isSegmentChanged()) {
                         // already changed
                         continue;
                     }
@@ -122,14 +113,11 @@ public class CalcMarkersThread extends Thread {
                         // null returned - not need to change anything
                         continue;
                     }
-                    if (mController.isEntryChanged(ev)) {
+                    if (ev.isSegmentChanged()) {
                         // already changed
                         continue;
                     }
-                    synchronized (forOutput) {
-                        // output marks
-                        forOutput.add(ev);
-                    }
+                    mController.queueMarksOutput(ev);
                 } catch (Exception ex) {
                     Log.log(ex);
                 }
@@ -137,28 +125,5 @@ public class CalcMarkersThread extends Thread {
         } catch (InterruptedException ex) {
             Log.log(ex);
         }
-    }
-
-    /**
-     * Show marks in Swing thread.
-     */
-    protected void showOutput() {
-        SwingUtilities.invokeLater(new Runnable() {
-            public void run() {
-                while (true) {
-                    EntryMarks ev;
-                    synchronized (forOutput) {
-                        ev = forOutput.poll();
-                    }
-                    if (ev == null) {
-                        // end of queue
-                        return;
-                    }
-                    if (!mController.isEntryChanged(ev)) {
-                        mController.setEntryMarks(ev.entryIndex, ev.builder, ev.result, markerIndex);
-                    }
-                }
-            }
-        });
     }
 }

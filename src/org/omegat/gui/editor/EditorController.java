@@ -10,7 +10,7 @@
                2009 Didier Briel
                2011 Alex Buloichik, Martin Fleurke, Didier Briel
                2012 Guido Leenders, Didier Briel
-               2013 Zoltan Bartko
+               2013 Zoltan Bartko, Alex Buloichik
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -67,6 +67,7 @@ import org.omegat.core.events.IEntryEventListener;
 import org.omegat.core.events.IFontChangedEventListener;
 import org.omegat.core.events.IProjectEventListener;
 import org.omegat.core.statistics.StatisticsInfo;
+import org.omegat.gui.editor.mark.EntryMarks;
 import org.omegat.gui.editor.mark.Mark;
 import org.omegat.gui.help.HelpFrame;
 import org.omegat.gui.main.DockableScrollPane;
@@ -198,13 +199,13 @@ public class EditorController implements IEditor {
                     } else {
                         showType = SHOW_TYPE.EMPTY_PROJECT;
                     }
-                    markerController.reset(0);
+                    markerController.removeAll();
                     setInitialOrientation();
                     break;
                 case CLOSE:
                     history.clear();
                     removeFilter();
-                    markerController.reset(0);
+                    markerController.removeAll();
                     showType = SHOW_TYPE.INTRO;
                     deactivateWithoutCommit();
                     break;
@@ -452,6 +453,11 @@ public class EditorController implements IEditor {
             file = Core.getProject().getProjectFiles().get(0);
         }
 
+        // remove old segments
+        if (m_docSegList != null) {
+            markerController.removeAll();
+        }
+
         // check if RTL support required for document
         boolean hasRTL = sourceLangIsRTL || targetLangIsRTL || EditorUtils.localeIsRTL()
                 || currentOrientation != Document3.ORIENTATION.ALL_LTR;
@@ -503,9 +509,6 @@ public class EditorController implements IEditor {
             }
         });
 
-        markerController.reset(m_docSegList.length);
-
-        // call all markers
         markerController.process(m_docSegList);
 
         editor.repaint();
@@ -541,14 +544,12 @@ public class EditorController implements IEditor {
             return;
 
         // forget about old marks
-        markerController.resetEntryMarks(displayedEntryIndex);
-
         m_docSegList[displayedEntryIndex].createSegmentElement(true);
         
         Core.getNotes().setNoteText(Core.getProject().getTranslationInfo(ste).note);
 
         // then add new marks
-        markerController.process(displayedEntryIndex, m_docSegList[displayedEntryIndex]);
+        markerController.reprocessImmediately(m_docSegList[displayedEntryIndex]);
 
         editor.cancelUndo();
 
@@ -628,7 +629,7 @@ public class EditorController implements IEditor {
 
             SwingUtilities.invokeLater(new Runnable() {
                 public void run() {
-                    markerController.process(displayedEntryIndex, m_docSegList[displayedEntryIndex]);
+                    markerController.reprocessImmediately(m_docSegList[displayedEntryIndex]);
                 }
             });
         }
@@ -769,9 +770,6 @@ public class EditorController implements IEditor {
             return;
         }
 
-        // forget about old marks
-        markerController.resetEntryMarks(displayedEntryIndex);
-
         String newTrans = doc.extractTranslation();
         doc.stopEditMode();
 
@@ -822,7 +820,7 @@ public class EditorController implements IEditor {
         Core.getNotes().clear();
 
         // then add new marks
-        markerController.process(displayedEntryIndex, m_docSegList[displayedEntryIndex]);
+        markerController.reprocessImmediately(m_docSegList[displayedEntryIndex]);
 
         editor.cancelUndo();
 
@@ -1542,7 +1540,7 @@ public class EditorController implements IEditor {
      */
     public void remarkOneMarker(final String markerClassName) {
         int mi = markerController.getMarkerIndex(markerClassName);
-        markerController.process(m_docSegList, mi);
+        markerController.reprocess(m_docSegList, mi);
     }
 
     /**
@@ -1564,7 +1562,10 @@ public class EditorController implements IEditor {
         }
 
         int mi = markerController.getMarkerIndex(markerClassName);
-        markerController.setEntryMarks(displayedEntryIndex, m_docSegList[displayedEntryIndex], marks, mi);
+        EntryMarks ev = new EntryMarks(m_docSegList[displayedEntryIndex],
+                m_docSegList[displayedEntryIndex].getDisplayVersion(), mi);
+        ev.result = marks;
+        markerController.queueMarksOutput(ev);
     }
 
     public void registerPopupMenuConstructors(int priority, IPopupMenuConstructor constructor) {

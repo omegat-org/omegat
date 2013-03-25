@@ -3,7 +3,7 @@
           with fuzzy matching, translation memory, keyword search, 
           glossaries, and translation leveraging into updated projects.
 
- Copyright (C) 2010 Alex Buloichik
+ Copyright (C) 2010-2013 Alex Buloichik
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -36,21 +36,28 @@ import org.omegat.gui.editor.SegmentBuilder;
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
 public class EntryMarks {
-    public int entryIndex;
     public SegmentBuilder builder;
-    public long entryVersion;
-    List<Mark> result;
-    SourceTextEntry ste;
-    String sourceText, translationText;
-    final boolean isActive;
+    public final int markerIndex;
+    private final long entryVersion;
+    public List<Mark> result;
+    public final SourceTextEntry ste;
+    public final String sourceText, translationText;
+    public final boolean isActive;
 
-    public EntryMarks(int entryIndex, SegmentBuilder builder, long entryVersion) {
-        this.entryIndex = entryIndex;
+    public EntryMarks(SegmentBuilder builder, long entryVersion, int markerIndex) {
         this.builder = builder;
         this.entryVersion = entryVersion;
+        this.markerIndex = markerIndex;
         this.isActive = builder.isActive();
         this.ste = builder.getSourceTextEntry();
         this.sourceText = builder.getSourceTextEntry().getSrcText();
         this.translationText = builder.getTranslationText();
+    }
+
+    /**
+     * Check if entry changed.
+     */
+    public boolean isSegmentChanged() {
+        return builder.getDisplayVersion() != entryVersion;
     }
 }

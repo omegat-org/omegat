@@ -102,6 +102,9 @@ OmegaT-Plugin: tokenizer
 Name: org.omegat.gui.glossary.TransTipsMarker
 OmegaT-Plugin: Marker
 
+Name: org.omegat.gui.editor.mark.ComesFromTMMarker
+OmegaT-Plugin: Marker
+
 Name: org.omegat.core.spellchecker.SpellCheckerMarker
 OmegaT-Plugin: Marker
 

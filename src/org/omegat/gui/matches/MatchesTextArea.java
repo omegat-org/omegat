@@ -331,7 +331,11 @@ public class MatchesTextArea extends EntryInfoThreadPane<List<NearString>> imple
                         translation = 
                             substituteNumbers(currentEntry.getSrcText(), thebest.source, thebest.translation);
                     }
-                    Core.getEditor().replaceEditTextAndMark(prefix + translation);
+                    if (thebest.comesFrom == NearString.MATCH_SOURCE.TM) {
+                        Core.getEditor().replaceEditTextAndMark(prefix + translation);
+                    } else {
+                        Core.getEditor().replaceEditTextAndMark(prefix + translation);
+                    }
                 }
             }
         }

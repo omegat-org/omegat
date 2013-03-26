@@ -36,12 +36,18 @@ import java.util.Map;
  * @author Keith Godfrey
  */
 public class NearString {
-    public NearString(final EntryKey key, final String source, final String translation, final boolean fuzzyMark, 
-			final int nearScore, final int nearScoreNoStem, final int adjustedScore, final byte[] nearData, 
-			final String projName, final String creator, final long creationDate, final Map<String,String> props) {
+    public enum MATCH_SOURCE {
+        MEMORY, TM, FILES
+    };
+
+    public NearString(final EntryKey key, final String source, final String translation, MATCH_SOURCE comesFrom,
+            final boolean fuzzyMark, final int nearScore, final int nearScoreNoStem, final int adjustedScore,
+            final byte[] nearData, final String projName, final String creator, final long creationDate,
+            final Map<String, String> props) {
         this.key = key;
         this.source = source;
         this.translation = translation;
+        this.comesFrom = comesFrom;
         this.fuzzyMark = fuzzyMark;
         score = nearScore;
         scoreNoStem = nearScoreNoStem;
@@ -57,6 +63,7 @@ public class NearString {
     public EntryKey key;
     public String source;
     public String translation;
+    public MATCH_SOURCE comesFrom;
     
     public boolean fuzzyMark;
 

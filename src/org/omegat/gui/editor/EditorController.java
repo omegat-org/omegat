@@ -67,6 +67,8 @@ import org.omegat.core.events.IEntryEventListener;
 import org.omegat.core.events.IFontChangedEventListener;
 import org.omegat.core.events.IProjectEventListener;
 import org.omegat.core.statistics.StatisticsInfo;
+import org.omegat.gui.editor.mark.CalcMarkersThread;
+import org.omegat.gui.editor.mark.ComesFromTMMarker;
 import org.omegat.gui.editor.mark.EntryMarks;
 import org.omegat.gui.editor.mark.Mark;
 import org.omegat.gui.help.HelpFrame;
@@ -1386,20 +1388,14 @@ public class EditorController implements IEditor {
      */
     @Override
     public void replaceEditTextAndMark(String text) {
-        UIThreadsUtil.mustBeSwingThread();
+        replaceEditText(text);
 
-        // build local offsets
-        int start = editor.getOmDocument().getTranslationStart();
-        int end = editor.getOmDocument().getTranslationEnd();
-
-        // remove text
-        editor.select(start, end);
-        editor.replaceSelection(text);
-
-        // mark background as red
-        start = editor.getOmDocument().getTranslationStart();
-        end = editor.getOmDocument().getTranslationEnd();
-        editor.getOmDocument().setCharacterAttributes(start, end - start, Styles.ADDITIONAL_MARK_FOR_EDIT, false);
+        // mark as comes from TM
+        SegmentBuilder sb = m_docSegList[displayedEntryIndex];
+        CalcMarkersThread thread = markerController.markerThreads[markerController
+                .getMarkerIndex(ComesFromTMMarker.class.getName())];
+        ((ComesFromTMMarker) thread.marker).addMark(sb.getSourceTextEntry(), text);
+        markerController.reprocessImmediately(sb);
     }
 
     public String getCurrentTranslation() {

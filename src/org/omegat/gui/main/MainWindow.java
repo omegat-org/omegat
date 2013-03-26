@@ -235,7 +235,11 @@ public class MainWindow extends JFrame implements IMainWindow {
                             Core.getMatcher().getActiveMatch().source,
                             Core.getMatcher().getActiveMatch().translation);
             }
-            Core.getEditor().replaceEditTextAndMark(translation);
+            if (Core.getMatcher().getActiveMatch().comesFrom == NearString.MATCH_SOURCE.TM) {
+                Core.getEditor().replaceEditTextAndMark(translation);
+            } else {
+                Core.getEditor().replaceEditText(translation);
+            }
         }
     }
 

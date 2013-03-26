@@ -40,15 +40,7 @@ import org.omegat.gui.editor.mark.Mark;
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
 public class TransTipsMarker implements IMarker {
-    protected final HighlightPainter transTipsUnderliner = new UnderlineFactory.SolidBoldUnderliner(
-            Color.blue);
-
-    public HighlightPainter getPainter() {
-        return transTipsUnderliner;
-    }
-
-    public void reset() {
-    }
+    protected static final HighlightPainter transTipsUnderliner = new UnderlineFactory.SolidBoldUnderliner(Color.blue);
 
     @Override
     public List<Mark> getMarksForEntry(SourceTextEntry ste, String sourceText, String translationText, boolean isActive) {

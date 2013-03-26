@@ -195,7 +195,9 @@ public class GlossaryTextArea extends EntryInfoThreadPane<List<GlossaryEntry>> {
 
             TransTips.Search callback = new TransTips.Search() {
                 public void found(GlossaryEntry ge, int start, int end) {
-                    marks.add(new Mark(Mark.ENTRY_PART.SOURCE, start, end));
+                    Mark m = new Mark(Mark.ENTRY_PART.SOURCE, start, end);
+                    m.painter = TransTipsMarker.transTipsUnderliner;
+                    marks.add(m);
                 }
             };
 

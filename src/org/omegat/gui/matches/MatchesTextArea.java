@@ -7,6 +7,7 @@
                2007 Zoltan Bartko
                2011 John Moran
                2012 Alex Buloichik, Jean-Christophe Helary, Didier Briel, Thomas Cordonnier, Aaron Madlon-Kay
+               2013 Zoltan Bartko
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -533,5 +534,25 @@ public class MatchesTextArea extends EntryInfoThreadPane<List<NearString>> imple
         }
 
         popup.show(this, clickedPoint.x, clickedPoint.y);
+    }
+    
+    /**
+     * Make the next match active
+     */
+    @Override
+    public void setNextActiveMatch() {
+        if (activeMatch < matches.size()-1) {
+            setActiveMatch(activeMatch+1);
+}
+    }
+
+    /**
+     * Make the previous match active
+     */
+    @Override
+    public void setPrevActiveMatch() {
+        if (activeMatch > 0) {
+            setActiveMatch(activeMatch-1);
+        }
     }
 }

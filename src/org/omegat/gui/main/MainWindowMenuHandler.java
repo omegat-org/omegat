@@ -352,6 +352,16 @@ public class MainWindowMenuHandler {
         Core.getMatcher().setActiveMatch(4);
     }
 
+    /** Set active match to the next one */
+    public void editSelectFuzzyNextMenuItemActionPerformed() {
+        Core.getMatcher().setNextActiveMatch();
+    }
+    
+    /** Set active match to the previous one */
+    public void editSelectFuzzyPrevMenuItemActionPerformed() {
+        Core.getMatcher().setPrevActiveMatch();
+    }
+
     public void editMultipleDefaultActionPerformed() {
         Core.getEditor().setAlternateTranslationForCurrentEntry(false);
     }

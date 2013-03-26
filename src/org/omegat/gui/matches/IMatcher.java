@@ -4,6 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2008 Alex Buloichik
+               2013 Zoltan Bartko
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -29,6 +30,7 @@ import org.omegat.core.matching.NearString;
  * Interface for access to editor functionality.
  * 
  * @author Alex Buloichik (alex73mail@gmail.com)
+ * @author Zoltan Bartko
  */
 public interface IMatcher {
     /**
@@ -49,4 +51,14 @@ public interface IMatcher {
     void setActiveMatch(int index);
     
     String substituteNumbers(String source, String sourceMatch, String targetMatch);
+
+    /**
+     * Make the next match active
+     */
+    public void setNextActiveMatch();
+
+    /**
+     * Make the previous match active
+     */
+    public void setPrevActiveMatch();
 }

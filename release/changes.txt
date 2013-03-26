@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 2.7.0
 ----------------------------------------------------------------------
-  16 Enhancements
+  17 Enhancements
    1 Bug fix
    0 Localisation update
 ----------------------------------------------------------------------
@@ -47,6 +47,9 @@
 
   - Protected text in XLIFF
   http://sourceforge.net/support/tracker.php?aid=3608725
+
+  - Move active match selection up/down
+  http://sourceforge.net/support/tracker.php?aid=3608814
 
   Other enhancements:
 

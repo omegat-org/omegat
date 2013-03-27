@@ -32,11 +32,13 @@ import java.awt.datatransfer.Transferable;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
-import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
-import javax.swing.JSeparator;
 import javax.swing.text.AbstractDocument;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.JTextComponent;
@@ -47,9 +49,9 @@ import org.omegat.core.data.TMXEntry;
 import org.omegat.core.spellchecker.SpellCheckerMarker;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
+import org.omegat.util.PatternConsts;
 import org.omegat.util.StaticUtils;
 import org.omegat.util.gui.UIThreadsUtil;
-import org.omegat.gui.glossary.TransTipsPopup;
 
 /**
  * Some standard editor popups.
@@ -348,21 +350,34 @@ public class EditorPopups {
                 return;
             }
 
+            Set<String> allTags = new TreeSet<String>();
+
+            // insert tags
             SourceTextEntry ste = Core.getEditor().getCurrentEntry();
-            if (ste == null || ste.getProtectedParts() == null) {
-                return;
-            }
             String tr = Core.getEditor().getCurrentTranslation();
-            for (final String tag : ste.getProtectedParts().keySet()) {
-                if (tr.contains(tag)) {
-                    continue;
+            if (ste != null && ste.getProtectedParts() != null) {
+                allTags.addAll(ste.getProtectedParts().keySet());
+            }
+
+            // insert other placeholders
+            // TODO: need to change after all filters will support protected
+            // parts
+            String sourceText = Core.getEditor().getCurrentEntry().getSrcText();
+            Pattern placeholderPattern = PatternConsts.getPlaceholderPattern();
+            Matcher placeholderMatcher = placeholderPattern.matcher(sourceText);
+            while (placeholderMatcher.find()) {
+                allTags.add(placeholderMatcher.group(0));
+            }
+
+            for (final String tag : allTags) {
+                if (!tr.contains(tag)) {
+                    JMenuItem item = menu.add(StaticUtils.format(OStrings.getString("TF_MENU_EDIT_TAG_INSERT_N"), tag));
+                    item.addActionListener(new ActionListener() {
+                        public void actionPerformed(ActionEvent e) {
+                            Core.getEditor().insertText(tag);
+                        }
+                    });
                 }
-                JMenuItem item = menu.add(StaticUtils.format(OStrings.getString("TF_MENU_EDIT_TAG_INSERT_N"), tag));
-                item.addActionListener(new ActionListener() {
-                    public void actionPerformed(ActionEvent e) {
-                        Core.getEditor().insertText(tag);
-                    }
-                });
             }
             menu.addSeparator();
         }

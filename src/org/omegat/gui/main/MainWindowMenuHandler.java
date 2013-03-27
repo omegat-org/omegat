@@ -31,16 +31,14 @@
 
 package org.omegat.gui.main;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import javax.swing.JDialog;
-import javax.swing.JMenu;
-import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 
 import org.jdesktop.swingworker.SwingWorker;
@@ -595,15 +593,13 @@ public class MainWindowMenuHandler {
      * Identify all the placeholders in the source text and automatically inserts them into the target text.
      */
     public void editTagPainterMenuItemActionPerformed() {
+        Set<String> allTags = new TreeSet<String>();
+
         // insert tags
         SourceTextEntry ste = Core.getEditor().getCurrentEntry();
+        String tr = Core.getEditor().getCurrentTranslation();
         if (ste != null && ste.getProtectedParts() != null) {
-            String tr = Core.getEditor().getCurrentTranslation();
-            for (String tag : ste.getProtectedParts().keySet()) {
-                if (!tr.contains(tag)) {
-                    Core.getEditor().insertText(tag);
-                }
-            }
+            allTags.addAll(ste.getProtectedParts().keySet());
         }
 
         // insert other placeholders
@@ -612,12 +608,13 @@ public class MainWindowMenuHandler {
         Pattern placeholderPattern = PatternConsts.getPlaceholderPattern();
         Matcher placeholderMatcher = placeholderPattern.matcher(sourceText);
         while (placeholderMatcher.find()) {
-            if (ste != null && ste.getProtectedParts() != null) {
-                if (ste.getProtectedParts().containsKey(placeholderMatcher.group(0))) {
-                    continue;
-                }
+            allTags.add(placeholderMatcher.group(0));
+        }
+
+        for (String tag : allTags) {
+            if (!tr.contains(tag)) {
+                Core.getEditor().insertText(tag);
             }
-            Core.getEditor().insertText(placeholderMatcher.group(0));
         }
     }
 

@@ -53,6 +53,10 @@ public class CopyrightTest extends TestCase {
                 // skip jaxb generated files
                 continue;
             }
+            if (f.getPath().replace('\\', '/').endsWith("util/Base64.java")) {
+                // skip Base64.java (public domain)
+                continue;
+            }
             LFileCopy.copy(f, fdata);
             String data = fdata.toString("ISO-8859-1");
             checkNote(f, data);

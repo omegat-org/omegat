@@ -55,6 +55,7 @@ import org.omegat.filters2.IAlignCallback;
 import org.omegat.filters2.IFilter;
 import org.omegat.filters2.IParseCallback;
 import org.omegat.filters2.ITranslateCallback;
+import org.omegat.filters2.master.FilterMaster;
 import org.omegat.util.LFileCopy;
 import org.omegat.util.Language;
 import org.omegat.util.StringUtil;
@@ -77,6 +78,7 @@ public abstract class TestFilterBase extends TestCore {
         super.setUp();
 
         Core.initializeConsole(new TreeMap<String, String>());
+        Core.setFilterMaster(new FilterMaster(FilterMaster.createDefaultFiltersConfig()));
 
         outFile = new File("build/testdata/OmegaT_test-" + getClass().getName() + "-" + getName());
         outFile.getParentFile().mkdirs();

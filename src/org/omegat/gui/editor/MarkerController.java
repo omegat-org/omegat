@@ -181,7 +181,7 @@ public class MarkerController {
                 if (ev.result != null) {
                     evs.add(ev);
                 }
-            } catch (Exception ex) {
+            } catch (Throwable ex) {
                 Log.log(ex);
             }
         }

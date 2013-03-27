@@ -2,7 +2,7 @@
  OmegaT 2.7.0
 ----------------------------------------------------------------------
   17 Enhancements
-   1 Bug fix
+   2 Bug fixes
    0 Localisation update
 ----------------------------------------------------------------------
 2.7.0 vs. 2.6.3
@@ -66,6 +66,9 @@ appear in the contextual menu, and can be inserted individually.
 
   - XLIFF Filter: <ept> not recognized in relation with <bpt>
   http://sourceforge.net/support/tracker.php?aid=1988732
+
+  - When the custom shortcut file was containing non-existent shortcuts,
+OmegaT failed to load the valid ones
 
 ----------------------------------------------------------------------
  OmegaT 2.6.3 update 1

@@ -1378,6 +1378,10 @@ public class EditorController implements IEditor {
         int start = editor.getOmDocument().getTranslationStart();
         int end = editor.getOmDocument().getTranslationEnd();
 
+        CalcMarkersThread thread = markerController.markerThreads[markerController
+                .getMarkerIndex(ComesFromTMMarker.class.getName())];
+        ((ComesFromTMMarker) thread.marker).setMark(null, null);
+
         // remove text
         editor.select(start, end);
         editor.replaceSelection(text);
@@ -1394,7 +1398,7 @@ public class EditorController implements IEditor {
         SegmentBuilder sb = m_docSegList[displayedEntryIndex];
         CalcMarkersThread thread = markerController.markerThreads[markerController
                 .getMarkerIndex(ComesFromTMMarker.class.getName())];
-        ((ComesFromTMMarker) thread.marker).addMark(sb.getSourceTextEntry(), text);
+        ((ComesFromTMMarker) thread.marker).setMark(sb.getSourceTextEntry(), text);
         markerController.reprocessImmediately(sb);
     }
 

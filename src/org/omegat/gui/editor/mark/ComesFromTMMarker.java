@@ -29,7 +29,9 @@ import java.util.List;
 
 import javax.swing.text.Highlighter.HighlightPainter;
 
+import org.omegat.core.CoreEvents;
 import org.omegat.core.data.SourceTextEntry;
+import org.omegat.core.events.IEntryEventListener;
 import org.omegat.util.gui.Styles;
 
 /**
@@ -43,15 +45,34 @@ public class ComesFromTMMarker implements IMarker {
     private SourceTextEntry markedSte;
     private String markedText;
 
-    public void addMark(SourceTextEntry ste, String text) {
-        markedSte = ste;
-        markedText = text;
+    public ComesFromTMMarker() {
+        CoreEvents.registerEntryEventListener(new IEntryEventListener() {
+            public void onNewFile(String activeFileName) {
+            }
+
+            public void onEntryActivated(SourceTextEntry newEntry) {
+                synchronized (ComesFromTMMarker.this) {
+                    markedSte = null;
+                    markedText = null;
+                }
+            }
+        });
+    }
+
+    public void setMark(SourceTextEntry ste, String text) {
+        synchronized (this) {
+            markedSte = ste;
+            markedText = text;
+        }
     }
 
     @Override
-    public List<Mark> getMarksForEntry(SourceTextEntry ste, String sourceText, String translationText, boolean isActive) {
-        if (!isActive || ste != markedSte || !translationText.equals(markedText)) {
-            return null;
+    public synchronized List<Mark> getMarksForEntry(SourceTextEntry ste, String sourceText, String translationText,
+            boolean isActive) {
+        synchronized (this) {
+            if (!isActive || ste != markedSte || !translationText.equals(markedText)) {
+                return null;
+            }
         }
         Mark m = new Mark(Mark.ENTRY_PART.TRANSLATION, 0, translationText.length());
         m.painter = PAINTER;

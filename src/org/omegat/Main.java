@@ -207,6 +207,7 @@ public class Main {
         try {
             Core.initializeGUI(params);
         } catch (Throwable ex) {
+            Log.log(ex);
             showError(ex);
         }
 

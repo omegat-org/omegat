@@ -623,13 +623,29 @@ public class MainWindowMenuHandler {
         if (trans == null) {
             return;
         }
+
+        Set<String> allTags = new TreeSet<String>();
+
+        // insert tags
         SourceTextEntry ste = Core.getEditor().getCurrentEntry();
+        String tr = Core.getEditor().getCurrentTranslation();
         if (ste != null && ste.getProtectedParts() != null) {
-            for (String tag : ste.getProtectedParts().keySet()) {
-                if (!trans.contains(tag)) {
-                    Core.getEditor().insertText(tag);
-                    break;
-                }
+            allTags.addAll(ste.getProtectedParts().keySet());
+        }
+
+        // insert other placeholders
+        // TODO: need to change after all filters will support protected parts
+        String sourceText = Core.getEditor().getCurrentEntry().getSrcText();
+        Pattern placeholderPattern = PatternConsts.getPlaceholderPattern();
+        Matcher placeholderMatcher = placeholderPattern.matcher(sourceText);
+        while (placeholderMatcher.find()) {
+            allTags.add(placeholderMatcher.group(0));
+        }
+
+        for (String tag : allTags) {
+            if (!tr.contains(tag)) {
+                Core.getEditor().insertText(tag);
+                break;
             }
         }
     }

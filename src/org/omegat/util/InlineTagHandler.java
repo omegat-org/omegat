@@ -3,7 +3,7 @@
           with fuzzy matching, translation memory, keyword search, 
           glossaries, and translation leveraging into updated projects.
 
- Copyright (C) 2013 Alex Buloichik
+ Copyright (C) 2013 Alex Buloichik, Aaron Madlon-Kay
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -24,6 +24,7 @@
 
 package org.omegat.util;
 
+import java.util.ArrayDeque;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -34,11 +35,12 @@ import org.omegat.filters3.Tag;
  * shortcuts. It handles bpt,ept,it tags numeration.
  * 
  * @author Alex Buloichik (alex73mail@gmail.com)
+ * @author Aaron Madlon-Kay
  */
 public class InlineTagHandler {
     /** map of 'i' attributes to tag numbers */
     Map<String, Integer> pairTags = new TreeMap<String, Integer>();
-    Map<String, Integer> pairedOtherTags = new TreeMap<String, Integer>();
+    Map<String, ArrayDeque<Integer>> pairedOtherTags = new TreeMap<String, ArrayDeque<Integer>>();
     Map<String, Character> shortcutLetters = new TreeMap<String, Character>();
     String currentI;
     String currentPos;
@@ -50,6 +52,7 @@ public class InlineTagHandler {
      */
     public void reset() {
         pairTags.clear();
+        pairedOtherTags.clear();
         currentI = null;
         currentPos = null;
         tagIndex = 0;
@@ -163,16 +166,15 @@ public class InlineTagHandler {
         switch (tagType) {
         case BEGIN:
             result = tagIndex;
-            pairedOtherTags.put(tagName, result);
+            cacheTagIndex(tagName, result);
             tagIndex++;
             return result;
         case END:
-            Integer index = pairedOtherTags.get(tagName);
+            Integer index = getCachedTagIndex(tagName);
             if (index == null) {
                 index = tagIndex;
                 tagIndex++;
             }
-            pairedOtherTags.remove(tagName);
             return index;
         case ALONE:
             result = tagIndex;
@@ -181,6 +183,23 @@ public class InlineTagHandler {
         default:
             throw new RuntimeException("Impossible tag type");
         }
+    }
+
+    private void cacheTagIndex(String tagName, int result) {
+        ArrayDeque<Integer> cache = pairedOtherTags.get(tagName);
+        if (cache == null) {
+            cache = new ArrayDeque<Integer>();
+            pairedOtherTags.put(tagName, cache);
+        }
+        cache.addFirst(result);
+    }
+
+    private Integer getCachedTagIndex(String tagName) {
+        ArrayDeque<Integer> cache = pairedOtherTags.get(tagName);
+        if (cache == null) {
+            return null;
+        }
+        return cache.pollFirst();
     }
 
     /**

@@ -36,6 +36,7 @@ import javax.swing.JMenuItem;
 import javax.swing.KeyStroke;
 
 import org.omegat.util.StaticUtils;
+import org.omegat.util.StringUtil;
 
 /**
  * Class for set shortcuts to main menu.
@@ -83,7 +84,7 @@ public class MainWindowMenuShortcuts {
      *            shortcut text
      */
     private static void setAccelerator(final JMenuItem item, final String shortcut) {
-        if (shortcut == null) {
+        if (StringUtil.isEmpty(shortcut)) {
             return;
         }
 

@@ -35,6 +35,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.swing.JEditorPane;
 import javax.swing.JPopupMenu;
@@ -57,6 +59,7 @@ import javax.swing.undo.UndoManager;
 
 import org.omegat.core.CoreEvents;
 import org.omegat.core.data.SourceTextEntry;
+import org.omegat.util.PatternConsts;
 import org.omegat.util.StaticUtils;
 import org.omegat.util.StringUtil;
 import org.omegat.util.gui.DockingUI;
@@ -379,9 +382,10 @@ public class EditorTextArea3 extends JEditorPane {
     boolean moveCursorOverTag(boolean withShift, boolean checkTagStart) {
         Document3 doc = getOmDocument();
         SourceTextEntry ste = doc.controller.getCurrentEntry();
+        String text = doc.extractTranslation();
+        int off = getCaretPosition() - doc.getTranslationStart();
+        // iterate by 'protected parts'
         if (ste != null && ste.getProtectedParts() != null) {
-            String text = doc.extractTranslation();
-            int off = getCaretPosition() - doc.getTranslationStart();
             for (String tag : ste.getProtectedParts().keySet()) {
                 if (checkTagStart) {
                     if (StringUtil.isSubstringAfter(text, off, tag)) {
@@ -406,6 +410,33 @@ public class EditorTextArea3 extends JEditorPane {
                 }
             }
         }
+        // iterate by tags by patterns
+        Pattern placeholderPattern = PatternConsts.getPlaceholderPattern();
+        Matcher placeholderMatcher = placeholderPattern.matcher(text);
+        while (placeholderMatcher.find()) {
+            String tag = placeholderMatcher.group(0);
+            if (checkTagStart) {
+                if (StringUtil.isSubstringAfter(text, off, tag)) {
+                    int pos = off + doc.getTranslationStart() + tag.length();
+                    if (withShift) {
+                        getCaret().moveDot(pos);
+                    } else {
+                        getCaret().setDot(pos);
+                    }
+                    return true;
+                }
+            } else {
+                if (StringUtil.isSubstringBefore(text, off, tag)) {
+                    int pos = off + doc.getTranslationStart() - tag.length();
+                    if (withShift) {
+                        getCaret().moveDot(pos);
+                    } else {
+                        getCaret().setDot(pos);
+                    }
+                    return true;
+                }
+            }
+        }
         return false;
     }
 
@@ -419,9 +450,10 @@ public class EditorTextArea3 extends JEditorPane {
     boolean wholeTagDelete(boolean checkTagStart) throws BadLocationException {
         Document3 doc = getOmDocument();
         SourceTextEntry ste = doc.controller.getCurrentEntry();
+        String text = doc.extractTranslation();
+        int off = getCaretPosition() - doc.getTranslationStart();
+        // iterate by 'protected parts'
         if (ste != null && ste.getProtectedParts() != null) {
-            String text = doc.extractTranslation();
-            int off = getCaretPosition() - doc.getTranslationStart();
             for (String tag : ste.getProtectedParts().keySet()) {
                 if (checkTagStart) {
                     if (StringUtil.isSubstringAfter(text, off, tag)) {
@@ -435,6 +467,25 @@ public class EditorTextArea3 extends JEditorPane {
                         doc.remove(pos, tag.length());
                         return true;
                     }
+                }
+            }
+        }
+        // iterate by tags by patterns
+        Pattern placeholderPattern = PatternConsts.getPlaceholderPattern();
+        Matcher placeholderMatcher = placeholderPattern.matcher(text);
+        while (placeholderMatcher.find()) {
+            String tag = placeholderMatcher.group(0);
+            if (checkTagStart) {
+                if (StringUtil.isSubstringAfter(text, off, tag)) {
+                    int pos = off + doc.getTranslationStart();
+                    doc.remove(pos, tag.length());
+                    return true;
+                }
+            } else {
+                if (StringUtil.isSubstringBefore(text, off, tag)) {
+                    int pos = off + doc.getTranslationStart() - tag.length();
+                    doc.remove(pos, tag.length());
+                    return true;
                 }
             }
         }

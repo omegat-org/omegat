@@ -246,31 +246,6 @@ public class StaticUtils {
     }
 
     /**
-     * Lists all OmegaT-style tags and other placeholders within the supplied string. Everything that
-     * looks like <code>&lt;xx0&gt;</code>, <code>&lt;yy1/&gt;</code> or
-     * <code>&lt;/zz2&gt;</code>, or other placeholder (according to tag-validation options) is considered to probably be a tag.
-     *
-     * @return a string containing the tags, and with
-     *         a space between tags if there is text between them.
-     */
-    public static String buildPaintPlaceholderList(String str) {
-        String res = "";
-
-        Pattern placeholderPattern = PatternConsts.getPlaceholderPattern();
-        Matcher placeholderMatcher = placeholderPattern.matcher(str);
-        int last=0;
-        while (placeholderMatcher.find()) {
-            int rs = placeholderMatcher.start();
-            if (rs != last && last !=0) { // We don't insert a space before the first tag
-                res += " ";
-            }
-            res += placeholderMatcher.group(0);
-            last = placeholderMatcher.end();
-        }
-        return res;
-    }
-
-    /**
      * Returns a list of all files under the root directory by absolute path.
      */
     public static void buildFileList(List<String> lst, File rootDir, boolean recursive) {

@@ -35,6 +35,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.swing.JDialog;
 import javax.swing.JMenu;
@@ -72,6 +74,7 @@ import org.omegat.util.Language;
 import org.omegat.util.Log;
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
+import org.omegat.util.PatternConsts;
 import org.omegat.util.Preferences;
 import org.omegat.util.StaticUtils;
 import org.omegat.util.StringUtil;
@@ -604,11 +607,17 @@ public class MainWindowMenuHandler {
         }
 
         // insert other placeholders
+        // TODO: need to change after all filters will support protected parts
         String sourceText = Core.getEditor().getCurrentEntry().getSrcText();
-        String placeholderString = StaticUtils.buildPaintPlaceholderList(sourceText);
-
-        if (!placeholderString.equals("")) {
-            Core.getEditor().insertText(placeholderString);
+        Pattern placeholderPattern = PatternConsts.getPlaceholderPattern();
+        Matcher placeholderMatcher = placeholderPattern.matcher(sourceText);
+        while (placeholderMatcher.find()) {
+            if (ste != null && ste.getProtectedParts() != null) {
+                if (ste.getProtectedParts().containsKey(placeholderMatcher.group(0))) {
+                    continue;
+                }
+            }
+            Core.getEditor().insertText(placeholderMatcher.group(0));
         }
     }
 

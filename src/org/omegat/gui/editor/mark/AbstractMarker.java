@@ -41,7 +41,7 @@ public abstract class AbstractMarker implements IMarker {
     public List<Mark> getMarksForEntry(SourceTextEntry ste, String sourceText, String translationText, boolean isActive)
             throws Exception {
 
-        if (!isEnabled()) {
+        if (!isEnabled() || pattern == null) {
             return Collections.emptyList();
         }
 

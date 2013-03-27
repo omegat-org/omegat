@@ -36,6 +36,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -45,6 +46,7 @@ import javax.swing.text.AttributeSet;
 import javax.swing.text.StyledDocument;
 
 import org.omegat.core.Core;
+import org.omegat.core.data.ExternalTMX;
 import org.omegat.core.data.IProject;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.data.StringData;
@@ -332,7 +334,10 @@ public class MatchesTextArea extends EntryInfoThreadPane<List<NearString>> imple
                         translation = 
                             substituteNumbers(currentEntry.getSrcText(), thebest.source, thebest.translation);
                     }
-                    if (thebest.comesFrom == NearString.MATCH_SOURCE.TM) {
+                    if (thebest.comesFrom == NearString.MATCH_SOURCE.TM
+                            && ExternalTMX.isInPath(
+                                    new File(Core.getProject().getProjectProperties().getTMRoot(), "mt"), new File(
+                                            thebest.proj))) {
                         Core.getEditor().replaceEditTextAndMark(prefix + translation);
                     } else {
                         Core.getEditor().replaceEditTextAndMark(prefix + translation);

@@ -49,6 +49,7 @@ import javax.swing.WindowConstants;
 
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
+import org.omegat.core.data.ExternalTMX;
 import org.omegat.core.events.IApplicationEventListener;
 import org.omegat.core.events.IProjectEventListener;
 import org.omegat.core.matching.NearString;
@@ -229,13 +230,12 @@ public class MainWindow extends JFrame implements IMainWindow {
         if (near != null) {
             String translation = near.translation;
             if (Preferences.isPreference(Preferences.CONVERT_NUMBERS)) {
-                translation =
-                        Core.getMatcher().substituteNumbers(
-                            Core.getEditor().getCurrentEntry().getSrcText(),
-                            Core.getMatcher().getActiveMatch().source,
-                            Core.getMatcher().getActiveMatch().translation);
+                translation = Core.getMatcher().substituteNumbers(Core.getEditor().getCurrentEntry().getSrcText(),
+                        near.source, near.translation);
             }
-            if (Core.getMatcher().getActiveMatch().comesFrom == NearString.MATCH_SOURCE.TM) {
+            if (near.comesFrom == NearString.MATCH_SOURCE.TM
+                    && ExternalTMX.isInPath(new File(Core.getProject().getProjectProperties().getTMRoot(), "mt"),
+                            new File(near.proj))) {
                 Core.getEditor().replaceEditTextAndMark(translation);
             } else {
                 Core.getEditor().replaceEditText(translation);

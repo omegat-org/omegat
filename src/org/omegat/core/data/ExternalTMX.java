@@ -25,10 +25,12 @@
 package org.omegat.core.data;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.omegat.core.segmentation.Segmenter;
+import org.omegat.util.FileUtil;
 import org.omegat.util.StringUtil;
 import org.omegat.util.TMXReader2;
 
@@ -104,5 +106,17 @@ public class ExternalTMX {
 
     public List<TMXEntry> getEntries() {
         return entries;
+    }
+
+    /**
+     * Check if TMX is in specified path.
+     */
+    public static boolean isInPath(File path, File tmxFile) {
+        try {
+            FileUtil.computeRelativePath(path, tmxFile);
+            return true;
+        } catch (IOException ex) {
+            return false;
+        }
     }
 }

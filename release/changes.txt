@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 2.7.0
 ----------------------------------------------------------------------
-  18 Enhancements
+  19 Enhancements
    2 Bug fixes
    0 Localisation update
 ----------------------------------------------------------------------
@@ -63,7 +63,11 @@ the tags missing in the segment.
 target segment
 
   - In the right-click menu of the current segment, missing tags
-appear in the contextual menu, and can be inserted individually.
+appear in the contextual menu, and can be inserted individually
+
+  - When a match is inserted from a TMX contained in a folder named
+"mt", the background of the active segment is changed to red. The
+background is restored to normal when the segment is left.
 
   Bug fixes:
 

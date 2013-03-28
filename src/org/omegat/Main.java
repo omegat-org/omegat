@@ -6,6 +6,7 @@
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
                2009 Martin Fleurke, Alex Buloichik, Didier Briel
                2012 Aaron Madlon-Kay
+               2013 Kyle Katarn
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -26,8 +27,10 @@
 
 package org.omegat;
 
+import java.awt.Toolkit;
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.Field;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -50,7 +53,6 @@ import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.data.TMXEntry;
 import org.omegat.filters2.master.PluginUtils;
 import org.omegat.gui.main.ProjectUICommands;
-import org.omegat.gui.tagvalidation.ITagValidation;
 import org.omegat.util.Log;
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
@@ -62,7 +64,7 @@ import org.omegat.util.TMXWriter;
 
 import com.vlsolutions.swing.docking.DockingDesktop;
 
-/**
+/**	
  * The main OmegaT class, used to launch the program.
  * 
  * @author Keith Godfrey
@@ -70,6 +72,7 @@ import com.vlsolutions.swing.docking.DockingDesktop;
  * @author Alex Buloichik
  * @author Didier Briel
  * @author Aaron Madlon-Kay
+ * @author Kyle Katarn
  */
 public class Main {
     /** Application execution mode. */
@@ -192,6 +195,25 @@ public class Main {
 
         Log.log("Docking Framework version: " + DockingDesktop.getDockingFrameworkVersion());
         Log.log("");
+
+        // Set X11 application class name to make some desktop user interfaces
+        // (like Gnome Shell) recognize OmegaT
+        Toolkit toolkit = Toolkit.getDefaultToolkit();
+        Class<?> cls = toolkit.getClass();
+        try
+        {
+            if (cls.getName().equals("sun.awt.X11.XToolkit"))
+            {
+                Field field = cls.getDeclaredField("awtAppClassName");
+                field.setAccessible(true);
+                field.set(toolkit, "OmegaT");
+            }
+        }
+        catch (Exception e)
+        {
+            // do nothing
+        }
+
         try {
             // Workaround for JDK bug 6389282 (OmegaT bug bug 1555809)
             // it should be called before setLookAndFeel() for GTK LookandFeel

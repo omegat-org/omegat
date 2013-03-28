@@ -28,6 +28,7 @@ import java.io.File;
 import java.util.TreeMap;
 
 import org.junit.Test;
+import org.omegat.core.Core;
 import org.omegat.core.data.IProject;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.filters2.ITranslateCallback;
@@ -98,5 +99,28 @@ public class XLIFFFilterTest extends TestFilterBase {
         text = text.replace("NONTRANSLATED", "TRANSLATED");
         FileUtil.writeTextFile(trFile, text);
         compareXML(trFile, outFile);
+    }
+
+    @Test
+    public void testTagOptimization() throws Exception {
+        String f = "test/data/filters/xliff/file-XLIFFFilter-tags-optimization.xlf";
+
+        Core.getFilterMaster().getConfig().setRemoveTags(false);
+        IProject.FileInfo fi = loadSourceFiles(new XLIFFFilter(), f);
+
+        checkMultiStart(fi, f);
+        checkMultiNoPrevNext("<b0>The text of a segment<b1>.<b2>", null, null, null);
+        checkMultiNoPrevNext("<b0>The text of a segment<b1>.<b2><b3><b4>", null, null, null);
+        checkMultiNoPrevNext("<b0>Link to a <a1>reference</a1></b0>", null, null, null);
+        checkMultiEnd();
+
+        Core.getFilterMaster().getConfig().setRemoveTags(true);
+        fi = loadSourceFiles(new XLIFFFilter(), f);
+
+        checkMultiStart(fi, f);
+        checkMultiNoPrevNext("The text of a segment<b1>.", null, null, null);
+        checkMultiNoPrevNext("The text of a segment<b1>.", null, null, null);
+        checkMultiNoPrevNext("Link to a <a1>reference</a1>", null, null, null);
+        checkMultiEnd();
     }
 }

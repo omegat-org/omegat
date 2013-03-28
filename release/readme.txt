@@ -278,6 +278,7 @@ Code has been contributed by
   Jean-Christophe Helary
   Thomas Huriaux
   Hans-Peter Jacobs
+  Kyle Katarn
   Ibai Lakunza Velasco
   Guido Leenders
   Aaron Madlon-Kay

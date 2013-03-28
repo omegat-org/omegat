@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 2.7.0
 ----------------------------------------------------------------------
-  17 Enhancements
+  18 Enhancements
    2 Bug fixes
    0 Localisation update
 ----------------------------------------------------------------------
@@ -50,6 +50,9 @@
 
   - Move active match selection up/down
   http://sourceforge.net/support/tracker.php?aid=3608814
+
+  - Gnome Shell integration
+  http://sourceforge.net/support/tracker.php?aid=3609146
 
   Other enhancements:
 

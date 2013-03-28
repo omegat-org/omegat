@@ -1,7 +1,7 @@
 ﻿@@TRANSLATION_NOTICE@@
 
 ==============================================================================
-  OmegaT 2.0, Read Me file
+  OmegaT 2.7, Read Me file
 
   1.  Information about OmegaT
   2.  What is OmegaT?
@@ -317,8 +317,6 @@ OmegaT uses the following libraries:
   JNA by Todd Fast, Timothy Wall and others (LGPL License)
   Swing-Layout 1.0.2 (LGPL License)
   Jmyspell 2.1.4 (LGPL License)
-  JAXB (GPLv2 + classpath exception)
-  SJXP 1.0.2 (GPL v2)
   SVNKit 1.7.5 (TMate License)
   Sequence Library (Sequence Library License)
   ANTLR 3.4 (ANTLR 3 license)
@@ -327,6 +325,7 @@ OmegaT uses the following libraries:
   JSch (JSch License)
   Base64 (public domain)
   Diff (GPL)
+  JSAP (LGPL)
 
 ==============================================================================
  5.  Is OmegaT bugging you? Do you need help?

@@ -68,6 +68,7 @@ import org.omegat.core.threads.CommandMonitor;
 import org.omegat.filters2.FilterContext;
 import org.omegat.filters2.IAlignCallback;
 import org.omegat.filters2.IFilter;
+import org.omegat.filters2.Shortcuts;
 import org.omegat.filters2.TranslationException;
 import org.omegat.filters2.master.FilterMaster;
 import org.omegat.filters2.master.PluginUtils;
@@ -1398,7 +1399,7 @@ public class RealProject implements IProject {
          * {@inheritDoc}
          */
         protected void addSegment(String id, short segmentIndex, String segmentSource,
-                Map<String, String> shortcutDetails, String segmentTranslation, boolean segmentTranslationFuzzy,
+                Shortcuts shortcutDetails, String segmentTranslation, boolean segmentTranslationFuzzy,
                 String comment, String prevSegment, String nextSegment, String path) {
             // if the source string is empty, don't add it to TM
             if (segmentSource.length() == 0 || segmentSource.trim().length() == 0) {

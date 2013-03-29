@@ -32,6 +32,7 @@ import java.util.regex.Pattern;
 
 import org.omegat.filters2.FilterContext;
 import org.omegat.filters2.Instance;
+import org.omegat.filters2.Shortcuts;
 import org.omegat.filters3.xml.XMLFilter;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
@@ -133,7 +134,7 @@ public class XHTMLFilter extends XMLFilter {
      * translate items that match regular expression.
      */
     @Override
-    public String translate(String entry, Map<String, String> shortcutDetails) {
+    public String translate(String entry, Shortcuts shortcutDetails) {
         if (do_not_send_to_core)
             return entry;
         else {

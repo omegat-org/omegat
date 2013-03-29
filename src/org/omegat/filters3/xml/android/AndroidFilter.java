@@ -27,10 +27,10 @@ package org.omegat.filters3.xml.android;
 
 import java.util.Arrays;
 import java.util.HashSet;
-import java.util.Map;
 import java.util.Set;
 
 import org.omegat.filters2.Instance;
+import org.omegat.filters2.Shortcuts;
 import org.omegat.filters3.xml.XMLFilter;
 import org.omegat.util.OStrings;
 import org.xml.sax.Attributes;
@@ -102,7 +102,7 @@ public class AndroidFilter extends XMLFilter {
     /**
      * Filter-specific chars processing.
      */
-    public String translate(String entry, Map<String, String> shortcutDetails) {
+    public String translate(String entry, Shortcuts shortcutDetails) {
         /**
          * Android sources has some entries without translatable="false" but with this comment. Yes, it's
          * dirty hack, but there is no other way.

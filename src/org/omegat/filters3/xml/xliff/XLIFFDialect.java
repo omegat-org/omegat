@@ -27,8 +27,8 @@
 package org.omegat.filters3.xml.xliff;
 
 import java.util.List;
-import java.util.Map;
 
+import org.omegat.filters2.Shortcuts;
 import org.omegat.filters3.Attributes;
 import org.omegat.filters3.Element;
 import org.omegat.filters3.Tag;
@@ -124,7 +124,8 @@ public class XLIFFDialect extends DefaultXMLDialect {
     }
 
     @Override
-    public String constructShortcuts(List<Element> elements, Map<String, String> shortcutDetails) {
+    public String constructShortcuts(List<Element> elements, Shortcuts shortcutDetails) {
+        shortcutDetails.clear();
         // create shortcuts
         InlineTagHandler tagHandler = new InlineTagHandler();
 

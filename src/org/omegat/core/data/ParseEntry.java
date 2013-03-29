@@ -33,15 +33,14 @@ package org.omegat.core.data;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
-import org.omegat.core.Core;
 
+import org.omegat.core.Core;
 import org.omegat.core.data.IProject.FileInfo;
 import org.omegat.core.segmentation.Rule;
 import org.omegat.core.segmentation.Segmenter;
 import org.omegat.filters2.IFilter;
 import org.omegat.filters2.IParseCallback;
+import org.omegat.filters2.Shortcuts;
 import org.omegat.util.Language;
 import org.omegat.util.PatternConsts;
 import org.omegat.util.StaticUtils;
@@ -132,7 +131,7 @@ public abstract class ParseEntry implements IParseCallback {
      *            shortcuts details
      */
     public void addEntry(String id, String source, String translation, boolean isFuzzy, String comment, String path,
-            IFilter filter, Map<String, String> shortcutDetails) {
+            IFilter filter, Shortcuts shortcutDetails) {
         if (StringUtil.isEmpty(source)) {
             // empty string - not need to save
             return;
@@ -160,14 +159,9 @@ public abstract class ParseEntry implements IParseCallback {
             } else {
                 for (short i = 0; i < segments.size(); i++) {
                     String onesrc = segments.get(i);
-                    Map<String, String> segmentShortcutDetails;
+                    Shortcuts segmentShortcutDetails;
                     if (shortcutDetails != null) {
-                        segmentShortcutDetails = new TreeMap<String, String>();
-                        for (String sh : shortcutDetails.keySet()) {
-                            if (onesrc.contains(sh)) {
-                                segmentShortcutDetails.put(sh, shortcutDetails.get(sh));
-                            }
-                        }
+                        segmentShortcutDetails = shortcutDetails.extractFor(onesrc);
                     } else {
                         segmentShortcutDetails = null;
                     }
@@ -208,7 +202,7 @@ public abstract class ParseEntry implements IParseCallback {
      * Add segment to queue because we possible need to link prev/next segments.
      */
     private void internalAddSegment(String id, short segmentIndex, String segmentSource, String segmentTranslation,
-            boolean segmentTranslationFuzzy, String comment, String path, Map<String, String> shortcutDetails) {
+            boolean segmentTranslationFuzzy, String comment, String path, Shortcuts shortcutDetails) {
         if (segmentSource.length() == 0 || segmentSource.trim().length() == 0) {
             // skip empty segments
             return;
@@ -252,7 +246,7 @@ public abstract class ParseEntry implements IParseCallback {
      *            path of segment
      */
     protected abstract void addSegment(String id, short segmentIndex, String segmentSource,
-            Map<String, String> shortcutDetails, String segmentTranslation, boolean segmentTranslationFuzzy,
+            Shortcuts shortcutDetails, String segmentTranslation, boolean segmentTranslationFuzzy,
             String comment, String prevSegment, String nextSegment, String path);
 
     /**
@@ -335,7 +329,7 @@ public abstract class ParseEntry implements IParseCallback {
         String id;
         short segmentIndex;
         String segmentSource;
-        Map<String, String> shortcutDetails;
+        Shortcuts shortcutDetails;
         String segmentTranslation;
         boolean segmentTranslationFuzzy;
         String comment;

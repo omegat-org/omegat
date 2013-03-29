@@ -385,8 +385,8 @@ public class EditorTextArea3 extends JEditorPane {
         String text = doc.extractTranslation();
         int off = getCaretPosition() - doc.getTranslationStart();
         // iterate by 'protected parts'
-        if (ste != null && ste.getProtectedParts() != null) {
-            for (String tag : ste.getProtectedParts().keySet()) {
+        if (ste != null) {
+            for (String tag : ste.getProtectedParts().getParts()) {
                 if (checkTagStart) {
                     if (StringUtil.isSubstringAfter(text, off, tag)) {
                         int pos = off + doc.getTranslationStart() + tag.length();
@@ -453,8 +453,8 @@ public class EditorTextArea3 extends JEditorPane {
         String text = doc.extractTranslation();
         int off = getCaretPosition() - doc.getTranslationStart();
         // iterate by 'protected parts'
-        if (ste != null && ste.getProtectedParts() != null) {
-            for (String tag : ste.getProtectedParts().keySet()) {
+        if (ste != null) {
+            for (String tag : ste.getProtectedParts().getParts()) {
                 if (checkTagStart) {
                     if (StringUtil.isSubstringAfter(text, off, tag)) {
                         int pos = off + doc.getTranslationStart();
@@ -510,7 +510,7 @@ public class EditorTextArea3 extends JEditorPane {
             return false;
         }
         SourceTextEntry ste = getOmDocument().controller.getCurrentEntry();
-        if (ste != null && ste.getProtectedParts() != null) {
+        if (ste != null) {
             try {
                 String text = getOmDocument().getText(segment.getStartPosition(),
                         segment.getEndPosition() - segment.getStartPosition());
@@ -518,7 +518,7 @@ public class EditorTextArea3 extends JEditorPane {
                 if (off < 0 || off >= text.length()) {
                     return false;
                 }
-                for (String tag : ste.getProtectedParts().keySet()) {
+                for (String tag : ste.getProtectedParts().getParts()) {
                     int p = -1;
                     while ((p = text.indexOf(tag, p + 1)) >= 0) {
                         if (p <= off && off <= p + tag.length()) {

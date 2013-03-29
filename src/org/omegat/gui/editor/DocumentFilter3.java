@@ -90,19 +90,16 @@ public class DocumentFilter3 extends DocumentFilter {
                 return false;
             }
             // check if inside tag
-            if (ste.getProtectedParts() != null) {
-                String text = doc.getText(doc.getTranslationStart(),
-                        doc.getTranslationEnd() - doc.getTranslationStart());
-                int off = offset - doc.getTranslationStart();
-                for (String tag : ste.getProtectedParts().keySet()) {
-                    int pos = -1;
-                    while ((pos = text.indexOf(tag, pos + 1)) >= 0) {
-                        if (off > pos && off < pos + tag.length()) {
-                            return false;
-                        }
-                        if (off + length > pos && off + length < pos + tag.length()) {
-                            return false;
-                        }
+            String text = doc.getText(doc.getTranslationStart(), doc.getTranslationEnd() - doc.getTranslationStart());
+            int off = offset - doc.getTranslationStart();
+            for (String tag : ste.getProtectedParts().getParts()) {
+                int pos = -1;
+                while ((pos = text.indexOf(tag, pos + 1)) >= 0) {
+                    if (off > pos && off < pos + tag.length()) {
+                        return false;
+                    }
+                    if (off + length > pos && off + length < pos + tag.length()) {
+                        return false;
                     }
                 }
             }

@@ -31,9 +31,9 @@ import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.Transferable;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
-import java.util.Set;
-import java.util.TreeSet;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -350,15 +350,10 @@ public class EditorPopups {
                 return;
             }
 
-            Set<String> allTags = new TreeSet<String>();
-
+            List<String> allTags = new ArrayList<String>();
             // insert tags
             SourceTextEntry ste = Core.getEditor().getCurrentEntry();
-            String tr = Core.getEditor().getCurrentTranslation();
-            if (ste != null && ste.getProtectedParts() != null) {
-                allTags.addAll(ste.getProtectedParts().keySet());
-            }
-
+            allTags.addAll(Arrays.asList(ste.getProtectedParts().getParts()));
             // insert other placeholders
             // TODO: need to change after all filters will support protected
             // parts
@@ -366,9 +361,12 @@ public class EditorPopups {
             Pattern placeholderPattern = PatternConsts.getPlaceholderPattern();
             Matcher placeholderMatcher = placeholderPattern.matcher(sourceText);
             while (placeholderMatcher.find()) {
-                allTags.add(placeholderMatcher.group(0));
+                if (!allTags.contains(placeholderMatcher.group(0))) {
+                    allTags.add(placeholderMatcher.group(0));
+                }
             }
 
+            String tr = Core.getEditor().getCurrentTranslation();
             for (final String tag : allTags) {
                 if (!tr.contains(tag)) {
                     JMenuItem item = menu.add(StaticUtils.format(OStrings.getString("TF_MENU_EDIT_TAG_INSERT_N"), tag));

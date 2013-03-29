@@ -26,14 +26,13 @@ package org.omegat.util;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Map;
-import java.util.TreeMap;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
 import org.omegat.core.data.SourceTextEntry;
+import org.omegat.filters2.Shortcuts;
 
 /**
  * Tests for (some) static utility methods.
@@ -77,17 +76,17 @@ public class StaticUtilsTest extends TestCase
         assertEquals("Wrong tags found in '" + str + "'", Arrays.asList("<b0>", "</b0>", "<b0>"), tagList);
 
         tagList.clear();
-        Map<String, String> pp = new TreeMap<String, String>();
+        Shortcuts pp = new Shortcuts();
         pp.put("<b0>", "");
         pp.put("</b0>", "");
-        StaticUtils.buildTagList(str, pp, tagList);
+        StaticUtils.buildTagList(str, new SourceTextEntry(null, 0, null, null, pp).getProtectedParts(), tagList);
         assertEquals("Wrong tags found in '" + str + "'", Arrays.asList("<b0>", "</b0>", "<b0>"), tagList);
 
         str = "Tag <test>case</test>.";
         tagList.clear();
         pp.clear();
         pp.put("<test>case</test>", "");
-        StaticUtils.buildTagList(str, pp, tagList);
+        StaticUtils.buildTagList(str, new SourceTextEntry(null, 0, null, null, pp).getProtectedParts(), tagList);
         assertEquals("Wrong tags found in '" + str + "'", Arrays.asList("<test>case</test>"), tagList);
     }
 
@@ -98,7 +97,7 @@ public class StaticUtilsTest extends TestCase
     }
 
     public void testStripTags() {
-        Map<String, String> protectedParts = new TreeMap<String, String>();
+        Shortcuts protectedParts = new Shortcuts();
         protectedParts.put("#part#", "zz");
         SourceTextEntry ste = new SourceTextEntry(null, 0, null, null, protectedParts);
         assertEquals("1\b2", StaticUtils.stripProtectedParts("1#part#2", ste));

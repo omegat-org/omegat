@@ -45,7 +45,6 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.Enumeration;
 import java.util.List;
-import java.util.Map;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 import java.util.regex.Matcher;
@@ -108,10 +107,10 @@ public class StaticUtils {
      * Builds a list of format tags within the supplied string. Format tags are
      * 'protected parts' and OmegaT style tags: &lt;xx02&gt; or &lt;/yy01&gt;.
      */
-    public static void buildTagList(String str, Map<String, String> protectedParts, List<String> tagList) {
+    public static void buildTagList(String str, SourceTextEntry.ProtectedParts protectedParts, List<String> tagList) {
         List<TagOrder> tags = new ArrayList<TagOrder>();
         if (protectedParts != null) {
-            for (String tag : protectedParts.keySet()) {
+            for (String tag : protectedParts.getParts()) {
                 int pos = -1;
                 while ((pos = str.indexOf(tag, pos + 1)) >= 0) {
                     tags.add(new TagOrder(pos, tag));
@@ -124,7 +123,7 @@ public class StaticUtils {
         Matcher placeholderMatcher = placeholderPattern.matcher(str);
         while (placeholderMatcher.find()) {
             String foundTag = placeholderMatcher.group(0);
-            if (protectedParts == null || !protectedParts.containsKey(foundTag)) {
+            if (protectedParts == null || !protectedParts.contains(foundTag)) {
                 tagList.add(foundTag);
             }
         }
@@ -681,11 +680,8 @@ public class StaticUtils {
      *            just removed
      */
     public static String stripProtectedParts(String str, SourceTextEntry ste) {
-        if (ste.getProtectedParts() == null) {
-            return str;
-        }
         String s = str;
-        for (String tag : ste.getProtectedParts().keySet()) {
+        for (String tag : ste.getProtectedParts().getParts()) {
             s = s.replace(tag, TAG_REPLACEMENT + "");
         }
         return s;

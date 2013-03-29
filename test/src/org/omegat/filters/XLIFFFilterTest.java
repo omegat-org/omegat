@@ -67,10 +67,10 @@ public class XLIFFFilterTest extends TestFilterBase {
         checkMultiNoPrevNext("<i0>Tags</i0> translation zz<i1>2</i1>z <b2>-NONTRANSLATED", null, null, null);
         checkMultiNoPrevNext("one <a0> two </b1> three <c2> four </d3> five", null, null, null);
         ste = checkMultiNoPrevNext("About <m0>Gandalf</m0> and <m1>other</m1>.", null, null, null);
-        assertEquals(3, ste.getProtectedParts().size());
-        assertEquals("<mrk mtype=\"other\">", ste.getProtectedParts().get("<m1>"));
-        assertEquals("</mrk>", ste.getProtectedParts().get("</m1>"));
-        assertEquals("<mrk mtype=\"protected\">Gandalf</mrk>", ste.getProtectedParts().get("<m0>Gandalf</m0>"));
+        assertEquals(3, ste.getProtectedParts().getParts().length);
+        assertEquals("<mrk mtype=\"other\">", ste.getProtectedParts().getDetail("<m1>"));
+        assertEquals("</mrk>", ste.getProtectedParts().getDetail("</m1>"));
+        assertEquals("<mrk mtype=\"protected\">Gandalf</mrk>", ste.getProtectedParts().getDetail("<m0>Gandalf</m0>"));
         checkMultiNoPrevNext("one <o0>two</o0> three", null, null, null);
         checkMultiNoPrevNext("one <t0/> three", null, null, null);
         checkMultiNoPrevNext("one <w0/> three", null, null, null);

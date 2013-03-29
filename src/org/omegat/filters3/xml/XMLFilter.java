@@ -32,7 +32,6 @@ import java.io.File;
 import java.io.IOException;
 import java.io.StringWriter;
 import java.io.UnsupportedEncodingException;
-import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -42,6 +41,7 @@ import javax.xml.parsers.SAXParserFactory;
 
 import org.omegat.filters2.AbstractFilter;
 import org.omegat.filters2.FilterContext;
+import org.omegat.filters2.Shortcuts;
 import org.omegat.filters2.TranslationException;
 import org.omegat.util.Language;
 import org.omegat.util.Log;
@@ -196,7 +196,7 @@ public abstract class XMLFilter extends AbstractFilter implements Translator {
     /**
      * The method the Handler would call to pass translatable content to OmegaT core and receive translation.
      */
-    public String translate(String entry, Map<String, String> shortcutDetails) {
+    public String translate(String entry, Shortcuts shortcutDetails) {
         if (entryParseCallback != null) {
             entryParseCallback.addEntry(null, entry, null, false, null, null, this, shortcutDetails);
             return entry;

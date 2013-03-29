@@ -32,9 +32,9 @@
 package org.omegat.gui.main;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
-import java.util.Set;
-import java.util.TreeSet;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -593,24 +593,23 @@ public class MainWindowMenuHandler {
      * Identify all the placeholders in the source text and automatically inserts them into the target text.
      */
     public void editTagPainterMenuItemActionPerformed() {
-        Set<String> allTags = new TreeSet<String>();
-
+        List<String> allTags = new ArrayList<String>();
         // insert tags
         SourceTextEntry ste = Core.getEditor().getCurrentEntry();
-        String tr = Core.getEditor().getCurrentTranslation();
-        if (ste != null && ste.getProtectedParts() != null) {
-            allTags.addAll(ste.getProtectedParts().keySet());
-        }
-
+        allTags.addAll(Arrays.asList(ste.getProtectedParts().getParts()));
         // insert other placeholders
-        // TODO: need to change after all filters will support protected parts
+        // TODO: need to change after all filters will support protected
+        // parts
         String sourceText = Core.getEditor().getCurrentEntry().getSrcText();
         Pattern placeholderPattern = PatternConsts.getPlaceholderPattern();
         Matcher placeholderMatcher = placeholderPattern.matcher(sourceText);
         while (placeholderMatcher.find()) {
-            allTags.add(placeholderMatcher.group(0));
+            if (!allTags.contains(placeholderMatcher.group(0))) {
+                allTags.add(placeholderMatcher.group(0));
+            }
         }
 
+        String tr = Core.getEditor().getCurrentTranslation();
         for (String tag : allTags) {
             if (!tr.contains(tag)) {
                 Core.getEditor().insertText(tag);
@@ -624,24 +623,23 @@ public class MainWindowMenuHandler {
             return;
         }
 
-        Set<String> allTags = new TreeSet<String>();
-
+        List<String> allTags = new ArrayList<String>();
         // insert tags
         SourceTextEntry ste = Core.getEditor().getCurrentEntry();
-        String tr = Core.getEditor().getCurrentTranslation();
-        if (ste != null && ste.getProtectedParts() != null) {
-            allTags.addAll(ste.getProtectedParts().keySet());
-        }
-
+        allTags.addAll(Arrays.asList(ste.getProtectedParts().getParts()));
         // insert other placeholders
-        // TODO: need to change after all filters will support protected parts
+        // TODO: need to change after all filters will support protected
+        // parts
         String sourceText = Core.getEditor().getCurrentEntry().getSrcText();
         Pattern placeholderPattern = PatternConsts.getPlaceholderPattern();
         Matcher placeholderMatcher = placeholderPattern.matcher(sourceText);
         while (placeholderMatcher.find()) {
-            allTags.add(placeholderMatcher.group(0));
+            if (!allTags.contains(placeholderMatcher.group(0))) {
+                allTags.add(placeholderMatcher.group(0));
+            }
         }
 
+        String tr = Core.getEditor().getCurrentTranslation();
         for (String tag : allTags) {
             if (!tr.contains(tag)) {
                 Core.getEditor().insertText(tag);

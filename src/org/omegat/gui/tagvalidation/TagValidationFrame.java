@@ -34,7 +34,6 @@ import java.awt.event.KeyEvent;
 import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -183,7 +182,7 @@ public class TagValidationFrame extends JFrame {
      * color="color"&gt;&lt;b&gt;&lt;tag&gt;&lt;/b&gt;&lt;/font&gt;
      */
     private String colorTags(String str, String color, Pattern placeholderPattern, Pattern removePattern,
-            Map<String, String> protectedParts) {
+            SourceTextEntry.ProtectedParts protectedParts) {
         // show OmegaT tags in bold and color, and to-remove text also
         String htmlResult = formatRemoveTagsAndPlaceholders(str, color, placeholderPattern, removePattern,
                 protectedParts);
@@ -204,13 +203,13 @@ public class TagValidationFrame extends JFrame {
      * @return html text
      */
     private String formatPlaceholders(String str, String color, Pattern placeholderPattern,
-            Map<String, String> protectedParts) {
+            SourceTextEntry.ProtectedParts protectedParts) {
         List<TextPart> text = new ArrayList<TextPart>();
         text.add(new TextPart(str, false));
         while (true) {
             boolean updated = false;
             if (protectedParts != null) {
-                for (String p : protectedParts.keySet()) {
+                for (String p : protectedParts.getParts()) {
                     for (int i = 0; i < text.size(); i++) {
                         TextPart tp = text.get(i);
                         if (tp.highlighted) {
@@ -283,7 +282,7 @@ public class TagValidationFrame extends JFrame {
      * @return html text
      */
     private String formatRemoveTagsAndPlaceholders(String str, String color, Pattern placeholderPattern,
-            Pattern removePattern, Map<String, String> protectedParts) {
+            Pattern removePattern, SourceTextEntry.ProtectedParts protectedParts) {
         if (removePattern != null) {
             Matcher removeMatcher = removePattern.matcher(str);
             String htmlResult="";

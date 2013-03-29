@@ -30,8 +30,8 @@ package org.omegat.filters3;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
+import org.omegat.filters2.Shortcuts;
 import org.omegat.filters2.TranslationException;
 import org.omegat.filters3.xml.XMLContentBasedTag;
 import org.omegat.filters3.xml.XMLDialect;
@@ -340,7 +340,7 @@ public class Entry {
      * @param shortcutDetails
      *            shortcuts details
      */
-    public String sourceToShortcut(boolean tagsAggregation, XMLDialect xmlDialect, Map<String, String> shortcutDetails) {
+    public String sourceToShortcut(boolean tagsAggregation, XMLDialect xmlDialect, Shortcuts shortcutDetails) {
         if (tagsAggregation != this.tagsAggregationEnabled) {
             this.tagsAggregationEnabled = tagsAggregation;
             // Each change to tags aggregation setting resets detected tags
@@ -354,7 +354,7 @@ public class Entry {
         }
     }
 
-    private String sourceToShortcut(XMLDialect xmlDialect, Map<String, String> shortcutDetails) {
+    private String sourceToShortcut(XMLDialect xmlDialect, Shortcuts shortcutDetails) {
         return sourceToShortcut(tagsAggregationEnabled, xmlDialect, shortcutDetails);
     }
 
@@ -419,7 +419,7 @@ public class Entry {
      * @throws TranslationException
      *             -- if any tag is missing or tags are ordered incorrectly.
      */
-    public void setTranslation(String translation, XMLDialect xmlDialect, Map<String, String> shortcutDetails)
+    public void setTranslation(String translation, XMLDialect xmlDialect, Shortcuts shortcutDetails)
             throws TranslationException {
         if (!sourceToShortcut(xmlDialect, shortcutDetails).equals(translation)) {
             checkAndRecoverTags(translation);

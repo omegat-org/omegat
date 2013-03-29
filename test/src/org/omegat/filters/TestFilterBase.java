@@ -28,7 +28,6 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -48,17 +47,16 @@ import org.omegat.core.data.IProject;
 import org.omegat.core.data.ProjectProperties;
 import org.omegat.core.data.RealProject;
 import org.omegat.core.data.SourceTextEntry;
-import org.omegat.core.data.TMXEntry;
 import org.omegat.filters2.AbstractFilter;
 import org.omegat.filters2.FilterContext;
 import org.omegat.filters2.IAlignCallback;
 import org.omegat.filters2.IFilter;
 import org.omegat.filters2.IParseCallback;
 import org.omegat.filters2.ITranslateCallback;
+import org.omegat.filters2.Shortcuts;
 import org.omegat.filters2.master.FilterMaster;
 import org.omegat.util.LFileCopy;
 import org.omegat.util.Language;
-import org.omegat.util.StringUtil;
 import org.omegat.util.TMXReader2;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
@@ -94,7 +92,7 @@ public abstract class TestFilterBase extends TestCore {
             }
 
             public void addEntry(String id, String source, String translation, boolean isFuzzy, String comment,
-                    String path, IFilter filter, Map<String, String> shortcutDetails) {
+                    String path, IFilter filter, Shortcuts shortcutDetails) {
                 if (source.length() > 0)
                     result.add(source);
             }
@@ -117,7 +115,7 @@ public abstract class TestFilterBase extends TestCore {
             }
 
             public void addEntry(String id, String source, String translation, boolean isFuzzy, String comment,
-                    String path, IFilter filter, Map<String, String> shortcutDetails) {
+                    String path, IFilter filter, Shortcuts shortcutDetails) {
                 if (source.length() > 0)
                     result.add(source);
             }
@@ -139,7 +137,7 @@ public abstract class TestFilterBase extends TestCore {
             }
 
             public void addEntry(String id, String source, String translation, boolean isFuzzy, String comment,
-                    String path, IFilter filter, Map<String, String> shortcutDetails) {
+                    String path, IFilter filter, Shortcuts shortcutDetails) {
                 String segTranslation = isFuzzy ? null : translation;
                 result.put(source, segTranslation);
                 if (translation != null) {
@@ -168,7 +166,7 @@ public abstract class TestFilterBase extends TestCore {
                 addEntry(id, source, translation, isFuzzy, comment, null, filter, null);
             }
             public void addEntry(String id, String source, String translation, boolean isFuzzy,
-                    String comment, String path, IFilter filter, Map<String, String> shortcutDetails) {
+                    String comment, String path, IFilter filter, Shortcuts shortcutDetails) {
                 if (source.length() == 0) {
                     return;
                 }

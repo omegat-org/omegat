@@ -24,7 +24,6 @@
 
 package org.omegat.filters2;
 
-import java.util.Map;
 
 /**
  * Callback for parse files.
@@ -53,7 +52,7 @@ public interface IParseCallback {
      *            shortcuts of source text details
      */
     void addEntry(String id, String source, String translation, boolean isFuzzy, String comment, String path,
-            IFilter filter, Map<String, String> shortcutDetails);
+            IFilter filter, Shortcuts shortcutDetails);
 
     /**
      * Old call without path, for compatibility 

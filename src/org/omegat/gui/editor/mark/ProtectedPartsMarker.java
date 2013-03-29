@@ -26,7 +26,6 @@ package org.omegat.gui.editor.mark;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -70,33 +69,31 @@ public class ProtectedPartsMarker implements IMarker {
         List<Mark> r = new ArrayList<Mark>();
 
         // find protected parts
-        if (ste.getProtectedParts() != null) {
-            for (String tag : ste.getProtectedParts().keySet()) {
-                int pos = -1;
-                while ((pos = sourceText.indexOf(tag, pos + 1)) >= 0) {
-                    Mark m = new Mark(Mark.ENTRY_PART.SOURCE, pos, pos + tag.length());
+        for (String tag : ste.getProtectedParts().getParts()) {
+            int pos = -1;
+            while ((pos = sourceText.indexOf(tag, pos + 1)) >= 0) {
+                Mark m = new Mark(Mark.ENTRY_PART.SOURCE, pos, pos + tag.length());
+                m.painter = painter;
+                m.attributes = attrs;
+                m.toolTipText = escapeHtml(ste.getProtectedParts().getDetail(tag));
+                r.add(m);
+            }
+            if (translationText != null) {
+                pos = -1;
+                while ((pos = translationText.indexOf(tag, pos + 1)) >= 0) {
+                    Mark m = new Mark(Mark.ENTRY_PART.TRANSLATION, pos, pos + tag.length());
                     m.painter = painter;
                     m.attributes = attrs;
-                    m.toolTipText = escapeHtml(ste.getProtectedParts().get(tag));
+                    m.toolTipText = escapeHtml(ste.getProtectedParts().getDetail(tag));
                     r.add(m);
-                }
-                if (translationText != null) {
-                    pos = -1;
-                    while ((pos = translationText.indexOf(tag, pos + 1)) >= 0) {
-                        Mark m = new Mark(Mark.ENTRY_PART.TRANSLATION, pos, pos + tag.length());
-                        m.painter = painter;
-                        m.attributes = attrs;
-                        m.toolTipText = escapeHtml(ste.getProtectedParts().get(tag));
-                        r.add(m);
-                    }
                 }
             }
         }
         // find painters which not in protected parts
-        if (isActive || Core.getEditor().getSettings().isDisplaySegmentSources() || translationText == null) {//TODO
+        if (isActive || Core.getEditor().getSettings().isDisplaySegmentSources() || translationText == null) {
             Matcher match = tagPattern.matcher(sourceText);
             while (match.find()) {
-                if (isInProtectedParts(match.group(), ste.getProtectedParts())) {
+                if (ste.getProtectedParts().contains(match.group())) {
                     continue;
                 }
                 Mark m = new Mark(Mark.ENTRY_PART.SOURCE, match.start(), match.end());
@@ -109,7 +106,7 @@ public class ProtectedPartsMarker implements IMarker {
         if (translationText != null) {
             Matcher match = tagPattern.matcher(translationText);
             while (match.find()) {
-                if (isInProtectedParts(match.group(), ste.getProtectedParts())) {
+                if (ste.getProtectedParts().contains(match.group())) {
                     continue;
                 }
                 Mark m = new Mark(Mark.ENTRY_PART.TRANSLATION, match.start(), match.end());
@@ -121,17 +118,6 @@ public class ProtectedPartsMarker implements IMarker {
         }
 
         return r;
-    }
-
-    private boolean isInProtectedParts(String tag, Map<String, String> protectedParts) {
-        if (protectedParts != null) {
-            for (String pp : protectedParts.keySet()) {
-                if (pp.contains(tag)) {
-                    return true;
-                }
-            }
-        }
-        return false;
     }
 
     private String escapeHtml(String s) {

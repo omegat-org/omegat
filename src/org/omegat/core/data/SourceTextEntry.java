@@ -25,29 +25,34 @@
 
 package org.omegat.core.data;
 
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
+import org.omegat.filters2.Shortcuts;
 
 /**
- * Source text entry represents an individual segment for
- * translation pulled directly from the input files.
- * There can be many SourceTextEntries having identical source
- * language strings
- *
+ * Source text entry represents an individual segment for translation pulled
+ * directly from the input files. There can be many SourceTextEntries having
+ * identical source language strings
+ * 
  * @author Keith Godfrey
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
 public class SourceTextEntry {
+
+    private static ProtectedParts EMPTY_PROTECTED_PARTS;
+    static {
+        EMPTY_PROTECTED_PARTS = new ProtectedParts();
+        EMPTY_PROTECTED_PARTS.parts = new String[0];
+        EMPTY_PROTECTED_PARTS.details = new String[0];
+    }
+
     /** Storage for full entry's identifiers, including source text. */
     private final EntryKey key;
 
     /** Comment in source file. */
     private final String comment;
-    
+
     /** Translation from source files. */
     private final String sourceTranslation;
-    
+
     /** Translation from source files is fuzzy. */
     private boolean sourceTranslationFuzzy;
 
@@ -67,11 +72,10 @@ public class SourceTextEntry {
     private final int m_entryNum;
 
     /**
-     * Protected parts(shortcuts) in keys, details of full content in values(for
-     * tooltips). Read-only map, may be accessible from any threads. It can be
-     * null.
+     * Protected parts(shortcuts) and details of full content (for tooltips).
+     * Read-only info, cat be accessible from any threads. It can't be null.
      */
-    private final Map<String, String> protectedParts;
+    private final ProtectedParts protectedParts;
 
     /**
      * Creates a new source text entry.
@@ -84,16 +88,25 @@ public class SourceTextEntry {
      *            entry comment
      * @param sourceTranslation
      *            translation from source file
-     * @param protectedParts
+     * @param shortcuts
      *            tags shortcuts
      */
-    public SourceTextEntry(EntryKey key, int entryNum, String comment, String sourceTranslation,
-            Map<String, String> protectedParts) {
+    public SourceTextEntry(EntryKey key, int entryNum, String comment, String sourceTranslation, Shortcuts shortcuts) {
         this.key = key;
         m_entryNum = entryNum;
         this.comment = comment;
         this.sourceTranslation = sourceTranslation;
-        this.protectedParts = protectedParts != null ? Collections.unmodifiableMap(protectedParts) : null;
+        if (shortcuts == null || shortcuts.isEmpty()) {
+            this.protectedParts = EMPTY_PROTECTED_PARTS;
+        } else {
+            if (shortcuts.shortcuts.size() != shortcuts.shortcutDetails.size()) {
+                throw new RuntimeException("Wrong shortcuts info");
+            }
+            this.protectedParts = new ProtectedParts();
+            this.protectedParts.parts = shortcuts.shortcuts.toArray(new String[shortcuts.shortcuts.size()]);
+            this.protectedParts.details = shortcuts.shortcutDetails
+                    .toArray(new String[shortcuts.shortcutDetails.size()]);
+        }
     }
 
     public EntryKey getKey() {
@@ -101,7 +114,8 @@ public class SourceTextEntry {
     }
 
     /**
-     * Returns the source text (shortcut for <code>getStrEntry().getSrcText()</code>).
+     * Returns the source text (shortcut for
+     * <code>getStrEntry().getSrcText()</code>).
      */
     public String getSrcText() {
         return key.sourceText;
@@ -123,20 +137,50 @@ public class SourceTextEntry {
     public DUPLICATE getDuplicate() {
         return duplicate;
     }
-    
+
     public String getSourceTranslation() {
         return sourceTranslation;
     }
-    
+
     public boolean isSourceTranslationFuzzy() {
         return sourceTranslationFuzzy;
     }
-    
+
     public void setSourceTranslationFuzzy(boolean sourceTranslationFuzzy) {
         this.sourceTranslationFuzzy = sourceTranslationFuzzy;
     }
 
-    public Map<String, String> getProtectedParts() {
+    public ProtectedParts getProtectedParts() {
         return protectedParts;
+    }
+
+    /**
+     * Class for store protected parts info.
+     */
+    public static class ProtectedParts {
+        protected String[] parts;
+        protected String[] details;
+
+        public String[] getParts() {
+            return parts;
+        }
+
+        public boolean contains(String s) {
+            for (int i = 0; i < parts.length; i++) {
+                if (s.equals(parts[i])) {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        public String getDetail(String part) {
+            for (int i = 0; i < parts.length; i++) {
+                if (part.equals(parts[i])) {
+                    return details[i];
+                }
+            }
+            return null;
+        }
     }
 }

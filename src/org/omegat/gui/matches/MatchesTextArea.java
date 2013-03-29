@@ -334,14 +334,7 @@ public class MatchesTextArea extends EntryInfoThreadPane<List<NearString>> imple
                         translation = 
                             substituteNumbers(currentEntry.getSrcText(), thebest.source, thebest.translation);
                     }
-                    if (thebest.comesFrom == NearString.MATCH_SOURCE.TM
-                            && ExternalTMX.isInPath(
-                                    new File(Core.getProject().getProjectProperties().getTMRoot(), "mt"), new File(
-                                            thebest.proj))) {
-                        Core.getEditor().replaceEditTextAndMark(prefix + translation);
-                    } else {
-                        Core.getEditor().replaceEditTextAndMark(prefix + translation);
-                    }
+                    Core.getEditor().replaceEditText(prefix + translation);
                 }
             }
         }

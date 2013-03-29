@@ -5,7 +5,7 @@
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
                2007-2010 Didier Briel
-               2013 Alex Buloichik 
+               2013 Alex Buloichik, Didier Briel
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -49,19 +49,38 @@ import org.omegat.util.StringUtil;
  */
 public class XLIFFDialect extends DefaultXMLDialect {
     public XLIFFDialect() {
+    }
+    
+
+    /**
+     * Actually defines the dialect. It cannot be done during creation, because
+     * options are not known at that step.
+     */
+    public void defineDialect(XLIFFOptions options) {
+    
+        
         defineParagraphTags(new String[] { "source", "target", });
 
         defineOutOfTurnTags(new String[] { "sub", });
 
-        defineIntactTags(new String[] { "source", "header", "bin-unit", "prop-group", "count-group",
-                "alt-trans", "note",
-                "ph", "context", "seg-source", });
+        if (options.get26Compatibility()) { // Old tag handling compatible with 2.6
+            defineIntactTags(new String[] { "source", "header", "bin-unit", "prop-group", "count-group",
+                    "alt-trans", "note",
+                    "ph", "bpt", "ept", "it", "context", "seg-source", });
 
-        defineContentBasedTag("bpt", Tag.Type.BEGIN);
-        defineContentBasedTag("ept", Tag.Type.END);
-        defineContentBasedTag("it", Tag.Type.ALONE);
-        defineContentBasedTag("ph", Tag.Type.ALONE);
-        // "mrk", only <mrk mtype="protected"> is content-based tag. see validateContentBasedTag
+        } else { // New tag handling
+            defineIntactTags(new String[] { "source", "header", "bin-unit", "prop-group", "count-group",
+                    "alt-trans", "note",
+                    "context", "seg-source", });
+            
+            defineContentBasedTag("bpt", Tag.Type.BEGIN);
+            defineContentBasedTag("ept", Tag.Type.END);
+            defineContentBasedTag("it", Tag.Type.ALONE);
+            defineContentBasedTag("ph", Tag.Type.ALONE);
+            // "mrk", only <mrk mtype="protected"> is content-based tag. see validateContentBasedTag
+
+        }
+
     }
 
     /**

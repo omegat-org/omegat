@@ -200,10 +200,13 @@ public abstract class XMLFilter extends AbstractFilter implements Translator {
         if (entryParseCallback != null) {
             entryParseCallback.addEntry(null, entry, null, false, null, null, this, shortcutDetails);
             return entry;
-        } else {
+        } else if (entryTranslateCallback != null) {
             String translation = entryTranslateCallback.getTranslation(null, entry, null);
             return translation != null ? translation : entry;
+        } else { // We're not supposed to be there,  (parsing called from inside isFileSupported, for instance)
+            return entry; // so what we return is not important
         }
+            
     }
 
     /**

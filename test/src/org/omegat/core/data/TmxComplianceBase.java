@@ -64,6 +64,8 @@ public abstract class TmxComplianceBase extends TestCase {
 
     @Before
     public void setUp() throws Exception {
+        Core.setFilterMaster(new FilterMaster(FilterMaster.createDefaultFiltersConfig()));
+
         outFile = new File("build/testdata/" + getClass().getSimpleName() + "-" + getName() + ".out");
         outFile.getParentFile().mkdirs();
         if (outFile.exists()) {

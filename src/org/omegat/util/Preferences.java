@@ -144,6 +144,8 @@ public class Preferences {
     public static final String ALLOW_APERTIUM_TRANSLATE = "allow_apertium_translate";
 
     public static final String ALLOW_MICROSOFT_TRANSLATE = "allow_microsoft_translate";
+    
+    public static final String ALLOW_MYMEMORY_TRANSLATE = "allow_mymemory_translate";
 
     /** Enable TransTips */
     public static final String TRANSTIPS = "transtips";

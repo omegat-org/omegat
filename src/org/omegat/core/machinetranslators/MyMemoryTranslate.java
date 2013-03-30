@@ -4,6 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2010 Alex Buloichik, Ibai Lakunza Velasco, Didier Briel
+               2013 Martin Wunderlich
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -66,6 +67,7 @@ public class MyMemoryTranslate extends BaseTranslate {
     	return Preferences.ALLOW_MYMEMORY_TRANSLATE;
     }
 
+    @Override
     public String getName() {
         return OStrings.getString("MT_ENGINE_MYMEMORY");
     }
@@ -86,19 +88,20 @@ public class MyMemoryTranslate extends BaseTranslate {
 
     @Override
     protected String translate(Language sLang, Language tLang, String text) throws Exception {
-        String bestTranslation = "";
-        String tmxResponse = "";
+        String bestTranslation;
+        String tmxResponse;
         	
         // Get MyMemory response in TMX format
         try {
-        	tmxResponse = getMyMemoryResponse(sLang, tLang, text, "tmx");
+            tmxResponse = getMyMemoryResponse(sLang, tLang, text, "tmx");
         }
         catch(Exception e)
         {
-        	return e.getLocalizedMessage();
+            return e.getLocalizedMessage();
         }
         
-        // Adjust DTD location and bug in entity encoding; the second line should be removed as soon as the bug is fixed by MyMemory; TODO: Use local DTD
+        // Adjust DTD location and bug in entity encoding; the second line should be removed as soon as the bug is 
+        // fixed by MyMemory; TODO: Use local DTD
         tmxResponse = tmxResponse.replace("<!DOCTYPE tmx SYSTEM \"tmx11.dtd\">", "");
         tmxResponse = tmxResponse.replace("&", "&amp;");
         
@@ -135,36 +138,39 @@ public class MyMemoryTranslate extends BaseTranslate {
 			String text, XPath xpath, NodeList allTUs)
 			throws XPathExpressionException {
 		
-		XPathExpression expr;
-		int lowestEditDistance = 999999; 
-        int dist = 0; 
-        Node tu = null;
-        String sourceSeg = "";
-        String targetSeg = "";
-        String targetSegQueryString = XPATH_QUERY.replace("#langCode#", tLang.getLanguageCode()).replace("#countryCode#", tLang.getCountryCode()); 
-        String sourceSegQueryString = XPATH_QUERY.replace("#langCode#", sLang.getLanguageCode()).replace("#countryCode#", sLang.getCountryCode()); 
-        String bestTranslation = "";
+            XPathExpression expr;
+            int lowestEditDistance = 999999; 
+            int dist; 
+            Node tu;
+            String sourceSeg;
+            String targetSeg;
+            String targetSegQueryString = 
+                XPATH_QUERY.replace("#langCode#", tLang.getLanguageCode()).replace("#countryCode#", tLang.getCountryCode()); 
+            String sourceSegQueryString = 
+                XPATH_QUERY.replace("#langCode#", sLang.getLanguageCode()).replace("#countryCode#", sLang.getCountryCode()); 
+            String bestTranslation = "";
         
-        // Loop over TUs to get best matching source segment and its translation
-		for (int i = 0; i < allTUs.getLength(); i++) {
-        	tu = allTUs.item(i);
+            // Loop over TUs to get best matching source segment and its translation
+            for (int i = 0; i < allTUs.getLength(); i++) {
+                tu = allTUs.item(i);
         	
-        	expr = xpath.compile(sourceSegQueryString);
-        	sourceSeg = ((NodeList) expr.evaluate(tu, XPathConstants.NODESET)).item(0).getNodeValue();       	
-           	expr = xpath.compile(targetSegQueryString);
-            targetSeg = ((NodeList) expr.evaluate(tu, XPathConstants.NODESET)).item(0).getNodeValue();
-        	
-           	dist = getLevensteinDistance(text, sourceSeg);
-            
-            if( dist < lowestEditDistance && !sourceSeg.isEmpty() && !targetSeg.isEmpty() )
-            {
-            	lowestEditDistance = dist;
-            	bestTranslation = targetSeg; 
-            }        
-            
-            if( dist == 0 ) break; // Can't find a better match than this one, so let's stop the loop here. 
-        }
-		return bestTranslation;
+                expr = xpath.compile(sourceSegQueryString);
+                sourceSeg = ((NodeList) expr.evaluate(tu, XPathConstants.NODESET)).item(0).getNodeValue();       	
+                expr = xpath.compile(targetSegQueryString);
+                targetSeg = ((NodeList) expr.evaluate(tu, XPathConstants.NODESET)).item(0).getNodeValue();
+
+                dist = getLevensteinDistance(text, sourceSeg);
+
+                if( dist < lowestEditDistance && !sourceSeg.isEmpty() && !targetSeg.isEmpty() ) {
+                    lowestEditDistance = dist;
+                    bestTranslation = targetSeg; 
+                }        
+
+                if( dist == 0 ) {
+                    break; // Can't find a better match than this one, so let's stop the loop here. 
+                } 
+            }
+            return bestTranslation;
 	}
 
 	/**
@@ -173,38 +179,37 @@ public class MyMemoryTranslate extends BaseTranslate {
 	 * @return
 	 */
 	private int getLevensteinDistance(String text, String sourceSeg) {
-		int dist;
-		LevenshteinDistance leven = new LevenshteinDistance(); 
-		Token textToken = new Token(text, 0);
-		Token sourceSegToken = new Token(sourceSeg, 0);
-		Token[] textTokenArray = {textToken};
-		Token[] sourceSegTokenArray = {sourceSegToken};
+            int dist;
+            LevenshteinDistance leven = new LevenshteinDistance(); 
+            Token textToken = new Token(text, 0);
+            Token sourceSegToken = new Token(sourceSeg, 0);
+            Token[] textTokenArray = {textToken};
+            Token[] sourceSegTokenArray = {sourceSegToken};
 		
-		dist = leven.compute(textTokenArray, sourceSegTokenArray);
-		return dist;
+            dist = leven.compute(textTokenArray, sourceSegTokenArray);
+            return dist;
 	}
     
 	private String getMyMemoryResponse(Language sLang, Language tLang, String text, String format)
-	throws UnsupportedEncodingException, IOException 
-	{
-		// Build URL for the JSON query
-		String sourceLang = mymemoryCode(sLang);
-		String targetLang = mymemoryCode(tLang);
-		String url2 = GT_URL2.replace("#sourceLang#", sourceLang).replace("#targetLang#", targetLang).replace("#format#", format);
-		String url = GT_URL + URLEncoder.encode(text, "UTF-8") + url2;
+	throws UnsupportedEncodingException, IOException {
+            // Build URL for the JSON query
+            String sourceLang = mymemoryCode(sLang);
+            String targetLang = mymemoryCode(tLang);
+            String url2 = GT_URL2.replace("#sourceLang#", sourceLang).replace("#targetLang#", targetLang).replace("#format#", format);
+            String url = GT_URL + URLEncoder.encode(text, "UTF-8") + url2;
 
-		// Get the results from MyMemory
-		String myMemoryRepsonse = "";
-		try {
-			myMemoryRepsonse = WikiGet.getURL(url);
-		} catch (IOException e) {
-		    throw e;
-		}
-
-		return myMemoryRepsonse;
+            // Get the results from MyMemory
+            String myMemoryRepsonse = "";
+            try {
+                myMemoryRepsonse = WikiGet.getURL(url);
+            } catch (IOException e) {
+                throw e;
+            }
+            
+            return myMemoryRepsonse;
 	}
     
-    // Note: This is method is not used, because it requires the JSON Simple library, which is under Apache license (http://code.google.com/p/json-simple/). 
+    // Note: This method is not used, because it requires the JSON Simple library, which is under Apache license (http://code.google.com/p/json-simple/). 
     // Apache license is not compatible with GPLv2 strict, which OmegaT has to use, because it is linked with JAXB which is GPLv2 strict.
 	// The method is kep here in case the license compatibility changes at some point in the future. 
     /*

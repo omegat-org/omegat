@@ -33,8 +33,8 @@ import org.omegat.filters3.OutOfTurnTag;
  */
 public class XMLOutOfTurnTag extends OutOfTurnTag {
     /** Creates a new instance of XML Tag */
-    public XMLOutOfTurnTag(String tag, String shortcut, org.xml.sax.Attributes attributes) {
-        super(tag, shortcut, XMLUtils.convertAttributes(attributes));
+    public XMLOutOfTurnTag(XMLDialect xmlDialect, String tag, String shortcut, org.xml.sax.Attributes attributes) {
+        super(xmlDialect, tag, shortcut, XMLUtils.convertAttributes(attributes));
     }
 
     /**

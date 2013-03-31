@@ -31,6 +31,7 @@ package org.omegat.filters3;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.omegat.core.Core;
 import org.omegat.filters2.Shortcuts;
 import org.omegat.filters2.TranslationException;
 import org.omegat.filters3.xml.XMLContentBasedTag;
@@ -46,6 +47,12 @@ import org.omegat.util.PatternConsts;
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
 public class Entry {
+    final XMLDialect xmlDialect;
+
+    public Entry(XMLDialect xmlDialect) {
+        this.xmlDialect = xmlDialect;
+    }
+
     /**
      * Cleans up this entry.
      */
@@ -282,6 +289,56 @@ public class Entry {
         }
         if (!found)
             lastGood = textEnd;
+
+        // remove tags at begin and end, if required
+        boolean removeTags = Core.getFilterMaster().getConfig().isRemoveTags();
+        if (removeTags) {
+            xmlDialect.constructShortcuts(elements.subList(firstGood, lastGood + 1), new Shortcuts());
+            boolean modified = true;
+            while (modified) {
+                // iterate by tags at begin and end
+                modified = false;
+                if (firstGood <= lastGood) {
+                    Element eBeg = get(firstGood);
+                    Element eEnd = get(lastGood);
+                    // check for remove paired tag
+                    if (firstGood != lastGood && eBeg instanceof XMLContentBasedTag
+                            && eEnd instanceof XMLContentBasedTag) {
+                        XMLContentBasedTag tBeg = (XMLContentBasedTag) eBeg;
+                        XMLContentBasedTag tEnd = (XMLContentBasedTag) eEnd;
+                        if (tBeg.getType() == Tag.Type.BEGIN && tEnd.getType() == Tag.Type.END
+                                && tBeg.getShortcutLetter() == tEnd.getShortcutLetter()
+                                && tBeg.getShortcutIndex() == tEnd.getShortcutIndex()) {
+                            // paired
+                            firstGood++;
+                            lastGood--;
+                            modified = true;
+                            continue;
+                        }
+                    }
+                    // check for remove alone tag at begin
+                    if (eBeg instanceof Tag) {
+                        Tag tBeg = (Tag) eBeg;
+                        if (tBeg.getType() == Tag.Type.ALONE) {
+                            // alone
+                            firstGood++;
+                            modified = true;
+                            continue;
+                        }
+                    }
+                    // check for remove alone tag at end
+                    if (eEnd instanceof Tag) {
+                        Tag tEnd = (Tag) eEnd;
+                        if (tEnd.getType() == Tag.Type.ALONE) {
+                            // alone
+                            lastGood--;
+                            modified = true;
+                            continue;
+                        }
+                    }
+                }
+            }
+        }
     }
 
     /**
@@ -433,7 +490,7 @@ public class Entry {
      * {@link #setTranslation(String)} for details.
      */
     private void checkAndRecoverTags(String translation) throws TranslationException {
-        translatedEntry = new Entry();
+        translatedEntry = new Entry(xmlDialect);
 
         // /////////////////////////////////////////////////////////////////////
         // recovering tags

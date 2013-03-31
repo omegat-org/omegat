@@ -132,9 +132,9 @@ public class XLIFFFilterTest extends TestFilterBase {
         fi = loadSourceFiles(filter, f);
 
         checkMultiStart(fi, f);
-        checkMultiNoPrevNext("The text of a segment<b1>.", null, null, null);
-        checkMultiNoPrevNext("The text of a segment<b1>.", null, null, null);
-        checkMultiNoPrevNext("Link to a <a1>reference</a1>", null, null, null);
+        checkMultiNoPrevNext("The text of a segment<b0>.", null, null, null);
+        checkMultiNoPrevNext("The text of a segment<b0>.", null, null, null);
+        checkMultiNoPrevNext("Link to a <a0>reference</a0>", null, null, null);
         checkMultiEnd();
     }
 }

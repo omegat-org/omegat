@@ -425,13 +425,13 @@ class Handler extends DefaultHandler implements LexicalHandler, DeclHandler {
         setSpacePreservingTag(XMLUtils.convertAttributes(attributes));
         if (!collectingIntactText()) {
             if (isContentBasedTag(tag, XMLUtils.convertAttributes(attributes))) {
-                intacttag = new XMLContentBasedTag(tag, getShortcut(tag), dialect.getContentBasedTags().get(tag),
+                intacttag = new XMLContentBasedTag(dialect, tag, getShortcut(tag), dialect.getContentBasedTags().get(tag),
                         attributes);
                 xmltag = intacttag;
                 intacttagName = tag;
                 intacttagAttributes = XMLUtils.convertAttributes(attributes);
             } else if (isIntactTag(tag, XMLUtils.convertAttributes(attributes))) {
-                intacttag = new XMLIntactTag(tag, getShortcut(tag), attributes);
+                intacttag = new XMLIntactTag(dialect, tag, getShortcut(tag), attributes);
                 xmltag = intacttag;
                 intacttagName = tag;
                 intacttagAttributes = XMLUtils.convertAttributes(attributes);
@@ -490,7 +490,7 @@ class Handler extends DefaultHandler implements LexicalHandler, DeclHandler {
         translatorTagStart(tag, attributes);
         
         if (isOutOfTurnTag(tag)) {
-            XMLOutOfTurnTag ootTag = new XMLOutOfTurnTag(tag, getShortcut(tag), attributes);
+            XMLOutOfTurnTag ootTag = new XMLOutOfTurnTag(dialect, tag, getShortcut(tag), attributes);
             currEntry().add(ootTag);
             outofturnEntries.push(ootTag.getEntry());
         } else {
@@ -890,7 +890,7 @@ class Handler extends DefaultHandler implements LexicalHandler, DeclHandler {
             throw new SAXException(e);
         }
 
-        entry = new Entry();
+        entry = new Entry(dialect);
     }
 
     /** Receive notification of the end of the document. */

@@ -32,6 +32,10 @@ import org.omegat.filters3.Entry;
  * @author Maxym Mykhalchuk
  */
 public class XMLIntactEntry extends Entry {
+    public XMLIntactEntry(XMLDialect xmlDialect) {
+        super(xmlDialect);
+    }
+
     /**
      * Intact text cannot be translated, so returns an empty string.
      */

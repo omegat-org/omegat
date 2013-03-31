@@ -153,26 +153,28 @@ public class XLIFFDialect extends DefaultXMLDialect {
             if (el instanceof XMLContentBasedTag) {
                 XMLContentBasedTag tag = (XMLContentBasedTag) el;
                 String shortcut = null;
+                char shortcutLetter;
+                int tagIndex;
                 if ("bpt".equals(tag.getTag())) {
                     // XLIFF specification requires 'rid' and 'id' attributes,
                     // but some tools uses 'i' attribute like for TMX
                     tagHandler.startBPT(tag.getAttribute("rid"), tag.getAttribute("id"), tag.getAttribute("i"));
-                    char shortcutLetter = calcTagShortcutLetter(tag);
+                    shortcutLetter = calcTagShortcutLetter(tag);
                     tagHandler.setTagShortcutLetter(shortcutLetter);
-                    String tagIndex = tagHandler.endBPT().toString();
+                    tagIndex = tagHandler.endBPT();
                     shortcut = "<" + (shortcutLetter != 0 ? shortcutLetter : 'f') + tagIndex + '>';
                 } else if ("ept".equals(tag.getTag())) {
                     tagHandler.startEPT(tag.getAttribute("rid"), tag.getAttribute("id"), tag.getAttribute("i"));
-                    String tagIndex = tagHandler.endEPT().toString();
-                    char shortcutLetter = tagHandler.getTagShortcutLetter();
+                    tagIndex = tagHandler.endEPT();
+                    shortcutLetter = tagHandler.getTagShortcutLetter();
                     shortcut = "</" + (shortcutLetter != 0 ? shortcutLetter : 'f') + tagIndex + '>';
                 } else if ("it".equals(tag.getTag())) {
                     tagHandler.startOTHER();
                     tagHandler.setCurrentPos(tag.getAttribute("pos"));
-                    String tagIndex = Integer.toString(tagHandler.endOTHER());
+                    tagIndex = tagHandler.endOTHER();
                     // XLIFF specification requires 'open/close' values,
                     // but some tools may use 'begin/end' values like for TMX
-                    char shortcutLetter = calcTagShortcutLetter(tag);
+                    shortcutLetter = calcTagShortcutLetter(tag);
                     if ("close".equals(tagHandler.getCurrentPos()) || "end".equals(tagHandler.getCurrentPos())) {
                         shortcut = "</" + (shortcutLetter != 0 ? shortcutLetter : 'f') + tagIndex + '>';
                     } else {
@@ -180,15 +182,21 @@ public class XLIFFDialect extends DefaultXMLDialect {
                     }
                 } else if ("ph".equals(tag.getTag())) {
                     tagHandler.startOTHER();
-                    String tagIndex = Integer.toString(tagHandler.endOTHER());
-                    char shortcutLetter = calcTagShortcutLetter(tag);
+                    tagIndex = tagHandler.endOTHER();
+                    shortcutLetter = calcTagShortcutLetter(tag);
                     shortcut = "<" + (shortcutLetter != 0 ? shortcutLetter : 'f') + tagIndex + "/>";
                 } else if ("mrk".equals(tag.getTag())) {
                     tagHandler.startOTHER();
-                    int tagIndex = tagHandler.endOTHER();
+                    tagIndex = tagHandler.endOTHER();
+                    shortcutLetter = 'm';
                     shortcut = "<m" + tagIndex + ">" + tag.getIntactContents().sourceToOriginal() + "</m" + tagIndex
                             + ">";
+                } else {
+                    shortcutLetter = 'f';
+                    tagIndex = -1;
                 }
+                tag.setShortcutLetter(shortcutLetter);
+                tag.setShortcutIndex(tagIndex);
                 tag.setShortcut(shortcut);
                 r.append(shortcut);
                 String details = tag.toOriginal();

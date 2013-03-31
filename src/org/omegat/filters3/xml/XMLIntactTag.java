@@ -32,7 +32,7 @@ import org.omegat.filters3.Tag;
  * @author Maxym Mykhalchuk
  */
 public class XMLIntactTag extends Tag {
-    protected XMLIntactEntry intactContents = new XMLIntactEntry();
+    protected XMLIntactEntry intactContents;
 
     /** Returns the entry to collect text surrounded by intact tag. */
     public XMLIntactEntry getIntactContents() {
@@ -40,13 +40,15 @@ public class XMLIntactTag extends Tag {
     }
 
     /** Creates a new instance of XML Tag */
-    public XMLIntactTag(String tag, String shortcut, org.xml.sax.Attributes attributes) {
+    public XMLIntactTag(XMLDialect xmlDialect, String tag, String shortcut, org.xml.sax.Attributes attributes) {
         super(tag, shortcut, Type.ALONE, XMLUtils.convertAttributes(attributes));
+        this.intactContents = new XMLIntactEntry(xmlDialect);
     }
 
     /** Creates a new instance of XML Tag */
-    public XMLIntactTag(String tag, String shortcut, Type type, org.xml.sax.Attributes attributes) {
+    public XMLIntactTag(XMLDialect xmlDialect, String tag, String shortcut, Type type, org.xml.sax.Attributes attributes) {
         super(tag, shortcut, type, XMLUtils.convertAttributes(attributes));
+        this.intactContents = new XMLIntactEntry(xmlDialect);
     }
 
     /**

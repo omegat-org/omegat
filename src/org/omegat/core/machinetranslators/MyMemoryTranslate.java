@@ -61,7 +61,8 @@ public class MyMemoryTranslate extends BaseTranslate {
     protected static String GT_URL2 = "&langpair=#sourceLang#|#targetLang#&of=#format#&mt=0";
     protected static String MYMEMORYLABEL_TRANSLATION = "translation";
     protected static String MYMEMORYLABEL_MATCHQUALITYPERCENTAGE = "match";
-    protected static String XPATH_QUERY = "//tuv[@lang='#langCode#-#countryCode#']/seg/text()";
+    protected static String XPATH_QUERY_1 = "//tuv[@lang='#langCode#-#countryCode#']/seg/text()"; // used for standard 4-letter locale codes in the search query
+    protected static String XPATH_QUERY_2 = "//tuv[starts-with(@lang, '#langCode#')]/seg/text()"; // used for when no country code is provided; this is needed, because MyMemory always returns a 4-letter locale code, even when the query contains a language code only
     @Override
     protected String getPreferenceName() {
     	return Preferences.ALLOW_MYMEMORY_TRANSLATE;
@@ -144,10 +145,11 @@ public class MyMemoryTranslate extends BaseTranslate {
             Node tu;
             String sourceSeg;
             String targetSeg;
-            String targetSegQueryString = 
-                XPATH_QUERY.replace("#langCode#", tLang.getLanguageCode()).replace("#countryCode#", tLang.getCountryCode()); 
-            String sourceSegQueryString = 
-                XPATH_QUERY.replace("#langCode#", sLang.getLanguageCode()).replace("#countryCode#", sLang.getCountryCode()); 
+            String sourceCountryCode = sLang.getCountryCode(); 
+            String targetCountryCode = tLang.getCountryCode(); 
+            String targetSegQueryString = buildSegmentQueryString(tLang, targetCountryCode);
+            String sourceSegQueryString = buildSegmentQueryString(sLang, sourceCountryCode);
+            
             String bestTranslation = "";
         
             // Loop over TUs to get best matching source segment and its translation
@@ -171,6 +173,27 @@ public class MyMemoryTranslate extends BaseTranslate {
                 } 
             }
             return bestTranslation;
+	}
+
+	/**
+	 * @param tLang
+	 * @param targetCountryCode
+	 * @return
+	 */
+	private String buildSegmentQueryString(Language tLang,
+			String targetCountryCode) {
+		String segQueryString = "";
+		
+		if(targetCountryCode != "" )
+		{
+			segQueryString = XPATH_QUERY_1.replace("#langCode#", tLang.getLanguageCode());
+			segQueryString = segQueryString.replace("#countryCode#", targetCountryCode); 
+		}
+		else 
+		{
+			segQueryString = XPATH_QUERY_2.replace("#langCode#", tLang.getLanguageCode());
+		}
+		return segQueryString;
 	}
 
 	/**

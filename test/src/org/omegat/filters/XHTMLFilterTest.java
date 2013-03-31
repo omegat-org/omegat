@@ -28,26 +28,38 @@ import java.io.File;
 import java.util.TreeMap;
 
 import org.junit.Test;
+import org.omegat.core.Core;
 import org.omegat.core.data.IProject;
 import org.omegat.filters2.FilterContext;
 import org.omegat.filters3.xml.xhtml.XHTMLFilter;
 import org.omegat.util.Language;
 
 public class XHTMLFilterTest extends TestFilterBase {
+    @Test
     public void testParse() throws Exception {
-        parse(new XHTMLFilter(), "test/data/filters/xhtml/file-XHTMLFilter.html");
+        String f = "test/data/filters/xhtml/file-XHTMLFilter.html";
+        XHTMLFilter filter = new XHTMLFilter();
+        filter.isFileSupported(new File(f), new TreeMap<String, String>(), new FilterContext(new Language("en"),
+                new Language("be"), false));
+
+        parse(filter, f);
     }
 
+    @Test
     public void testTranslate() throws Exception {
-        // translateXML(new XHTMLFilter(), "test/data/filters/xhtml/file-XHTMLFilter.html");
+        String f = "test/data/filters/xhtml/file-XHTMLFilter.html";
+        XHTMLFilter filter = new XHTMLFilter();
+        filter.isFileSupported(new File(f), new TreeMap<String, String>(), new FilterContext(new Language("en"),
+                new Language("be"), false));
+        translateXML(filter, f);
     }
 
     @Test
     public void testLoad() throws Exception {
         String f = "test/data/filters/xhtml/file-XHTMLFilter.html";
         XHTMLFilter filter = new XHTMLFilter();
-        filter.isFileSupported(new File(f), new TreeMap<String, String>(), new FilterContext(new Language(
-                "en"), new Language("be"), false));
+        filter.isFileSupported(new File(f), new TreeMap<String, String>(), new FilterContext(new Language("en"),
+                new Language("be"), false));
         IProject.FileInfo fi = loadSourceFiles(filter, f);
 
         checkMultiStart(fi, f);
@@ -56,5 +68,33 @@ public class XHTMLFilterTest extends TestFilterBase {
         checkMulti("XHTML 1.0 Example", null, null, "en", "Extensible HyperText Markup Language", null);
         checkMulti("Extensible HyperText Markup Language", null, null, "XHTML 1.0 Example",
                 "http://www.w3.org/Icons/valid-xhtml10", null);
+    }
+
+    @Test
+    public void testTagsOptimization() throws Exception {
+        String f = "test/data/filters/xhtml/file-XHTMLFilter-tags-optimization.html";
+        XHTMLFilter filter = new XHTMLFilter();
+
+        Core.getFilterMaster().getConfig().setRemoveTags(false);
+        filter.isFileSupported(new File(f), new TreeMap<String, String>(), new FilterContext(new Language("en"),
+                new Language("be"), false));
+        IProject.FileInfo fi = loadSourceFiles(filter, f);
+
+        checkMultiStart(fi, f);
+        checkMultiNoPrevNext("en", null, null, null);
+        checkMultiNoPrevNext("en", null, null, null);
+        checkMultiNoPrevNext("<i0/><b1><c2>This</c2> is <i3>first</i3> line.</b1>", null, null, null);
+        translateXML(filter, f);
+
+        Core.getFilterMaster().getConfig().setRemoveTags(true);
+        filter.isFileSupported(new File(f), new TreeMap<String, String>(), new FilterContext(new Language("en"),
+                new Language("be"), false));
+        fi = loadSourceFiles(filter, f);
+
+        checkMultiStart(fi, f);
+        checkMultiNoPrevNext("en", null, null, null);
+        checkMultiNoPrevNext("en", null, null, null);
+        checkMultiNoPrevNext("<c0>This</c0> is <i1>first</i1> line.", null, null, null);
+        translateXML(filter, f);
     }
 }

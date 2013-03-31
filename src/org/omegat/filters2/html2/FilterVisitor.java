@@ -435,15 +435,6 @@ public class FilterVisitor extends NodeVisitor {
             firstgood++;
         }
 
-        // writing out all tags before the "first good" one
-        for (int i = 0; i < firstgood; i++) {
-            Node node = all.get(i);
-            if (node instanceof Tag)
-                writeout("<" + node.getText() + ">");
-            else
-                writeout(compressWhitespace(node.getText()));
-        }
-
         // detecting the last ending tag in 'afters'
         // that has its starting in the paragraph
         // all after this "last good" is simply writen out
@@ -486,6 +477,21 @@ public class FilterVisitor extends NodeVisitor {
             if (found)
                 break;
             lastgood--;
+        }
+
+        boolean removeTags = Core.getFilterMaster().getConfig().isRemoveTags();
+        if (!removeTags) {
+            firstgood = 0;
+            lastgood = all.size() - 1;
+        }
+
+        // writing out all tags before the "first good" one
+        for (int i = 0; i < firstgood; i++) {
+            Node node = all.get(i);
+            if (node instanceof Tag)
+                writeout("<" + node.getText() + ">");
+            else
+                writeout(compressWhitespace(node.getText()));
         }
 
         // appending all tags until "last good" one to paragraph text

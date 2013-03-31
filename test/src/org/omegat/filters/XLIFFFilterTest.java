@@ -127,6 +127,7 @@ public class XLIFFFilterTest extends TestFilterBase {
         checkMultiNoPrevNext("<b0>The text of a segment<b1>.<b2><b3><b4>", null, null, null);
         checkMultiNoPrevNext("<b0>Link to a <a1>reference</a1></b0>", null, null, null);
         checkMultiEnd();
+        translateXML(filter, f);
 
         Core.getFilterMaster().getConfig().setRemoveTags(true);
         fi = loadSourceFiles(filter, f);
@@ -136,5 +137,6 @@ public class XLIFFFilterTest extends TestFilterBase {
         checkMultiNoPrevNext("The text of a segment<b0>.", null, null, null);
         checkMultiNoPrevNext("Link to a <a0>reference</a0>", null, null, null);
         checkMultiEnd();
+        translateXML(filter, f);
     }
 }

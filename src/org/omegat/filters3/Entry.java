@@ -115,7 +115,7 @@ public class Entry {
             }
             detectTags();
             tagsDetected = true;
-            enumerateTags();
+            enumerateTags(getFirstGood(), getLastGood());
         }
     }
 
@@ -290,9 +290,13 @@ public class Entry {
         if (!found)
             lastGood = textEnd;
 
+        firstGood = Math.min(1, firstGood);
+        lastGood = Math.max(size() - 2, lastGood);
+
         // remove tags at begin and end, if required
         boolean removeTags = Core.getFilterMaster().getConfig().isRemoveTags();
         if (removeTags) {
+            enumerateTags(firstGood, lastGood);
             xmlDialect.constructShortcuts(elements.subList(firstGood, lastGood + 1), new Shortcuts());
             boolean modified = true;
             while (modified) {
@@ -309,6 +313,17 @@ public class Entry {
                         if (tBeg.getType() == Tag.Type.BEGIN && tEnd.getType() == Tag.Type.END
                                 && tBeg.getShortcutLetter() == tEnd.getShortcutLetter()
                                 && tBeg.getShortcutIndex() == tEnd.getShortcutIndex()) {
+                            // paired
+                            firstGood++;
+                            lastGood--;
+                            modified = true;
+                            continue;
+                        }
+                    } else if (firstGood != lastGood && eBeg instanceof Tag && eEnd instanceof Tag) {
+                        Tag tBeg = (Tag) eBeg;
+                        Tag tEnd = (Tag) eEnd;
+                        if (tBeg.getType() == Tag.Type.BEGIN && tEnd.getType() == Tag.Type.END
+                                && tBeg.getShortcut().equals(tEnd.getShortcut()) && tBeg.getIndex() == tEnd.getIndex()) {
                             // paired
                             firstGood++;
                             lastGood--;
@@ -344,9 +359,9 @@ public class Entry {
     /**
      * Enumerates tags to be properly shortcut.
      */
-    private void enumerateTags() {
+    private void enumerateTags(int firstGood, int lastGood) {
         int n = 0;
-        for (int i = getFirstGood(); i <= getLastGood(); i++) {
+        for (int i = firstGood; i <= lastGood; i++) {
             Element elem = get(i);
             if (elem instanceof Tag) {
                 Tag tag = (Tag) elem;
@@ -357,7 +372,7 @@ public class Entry {
                     tag.setIndex(-1); // indication of an error
                     // trying to lookup for appropriate starting tag
                     int recursion = 1;
-                    for (int j = i - 1; j >= getFirstGood(); j--) {
+                    for (int j = i - 1; j >= firstGood; j--) {
                         Element otherElem = get(j);
                         if (otherElem instanceof Tag) {
                             Tag other = (Tag) otherElem;

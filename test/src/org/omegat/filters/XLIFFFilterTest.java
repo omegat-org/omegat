@@ -32,22 +32,36 @@ import org.omegat.core.Core;
 import org.omegat.core.data.IProject;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.filters2.ITranslateCallback;
+import org.omegat.filters3.xml.xliff.XLIFFDialect;
 import org.omegat.filters3.xml.xliff.XLIFFFilter;
+import org.omegat.filters3.xml.xliff.XLIFFOptions;
 import org.omegat.util.FileUtil;
 
 public class XLIFFFilterTest extends TestFilterBase {
-    public void testParse() throws Exception {
-        parse(new XLIFFFilter(), "test/data/filters/xliff/file-XLIFFFilter.xlf");
+    XLIFFFilter filter;
+
+    @Override
+    protected void setUp() throws Exception {
+        super.setUp();
+        filter = new XLIFFFilter();
+        XLIFFDialect dialect = (XLIFFDialect) filter.getDialect();
+        dialect.defineDialect(new XLIFFOptions(new TreeMap<String, String>()));
     }
 
+    @Test
+    public void testParse() throws Exception {
+        parse(filter, "test/data/filters/xliff/file-XLIFFFilter.xlf");
+    }
+
+    @Test
     public void testTranslate() throws Exception {
-        translateXML(new XLIFFFilter(), "test/data/filters/xliff/file-XLIFFFilter.xlf");
+        translateXML(filter, "test/data/filters/xliff/file-XLIFFFilter.xlf");
     }
 
     @Test
     public void testLoad() throws Exception {
         String f = "test/data/filters/xliff/file-XLIFFFilter.xlf";
-        IProject.FileInfo fi = loadSourceFiles(new XLIFFFilter(), f);
+        IProject.FileInfo fi = loadSourceFiles(filter, f);
 
         checkMultiStart(fi, f);
         checkMulti("tr1=This is test", null, null, "", "tr2=test2", null);
@@ -58,7 +72,7 @@ public class XLIFFFilterTest extends TestFilterBase {
     @Test
     public void testTags() throws Exception {
         String f = "test/data/filters/xliff/file-XLIFFFilter-tags.xlf";
-        IProject.FileInfo fi = loadSourceFiles(new XLIFFFilter(), f);
+        IProject.FileInfo fi = loadSourceFiles(filter, f);
 
         SourceTextEntry ste;
         checkMultiStart(fi, f);
@@ -78,7 +92,7 @@ public class XLIFFFilterTest extends TestFilterBase {
         checkMultiEnd();
 
         File inFile = new File("test/data/filters/xliff/file-XLIFFFilter-tags.xlf");
-        new XLIFFFilter().translateFile(inFile, outFile, new TreeMap<String, String>(), context,
+        filter.translateFile(inFile, outFile, new TreeMap<String, String>(), context,
                 new ITranslateCallback() {
                     public String getTranslation(String id, String source, String path) {
                         return source.replace("NONTRANSLATED", "TRANSLATED");
@@ -106,7 +120,7 @@ public class XLIFFFilterTest extends TestFilterBase {
         String f = "test/data/filters/xliff/file-XLIFFFilter-tags-optimization.xlf";
 
         Core.getFilterMaster().getConfig().setRemoveTags(false);
-        IProject.FileInfo fi = loadSourceFiles(new XLIFFFilter(), f);
+        IProject.FileInfo fi = loadSourceFiles(filter, f);
 
         checkMultiStart(fi, f);
         checkMultiNoPrevNext("<b0>The text of a segment<b1>.<b2>", null, null, null);
@@ -115,7 +129,7 @@ public class XLIFFFilterTest extends TestFilterBase {
         checkMultiEnd();
 
         Core.getFilterMaster().getConfig().setRemoveTags(true);
-        fi = loadSourceFiles(new XLIFFFilter(), f);
+        fi = loadSourceFiles(filter, f);
 
         checkMultiStart(fi, f);
         checkMultiNoPrevNext("The text of a segment<b1>.", null, null, null);

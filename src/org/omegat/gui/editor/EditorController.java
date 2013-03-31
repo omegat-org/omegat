@@ -51,8 +51,6 @@ import javax.swing.SwingUtilities;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.text.BadLocationException;
-import javax.swing.undo.CannotRedoException;
-import javax.swing.undo.CannotUndoException;
 
 import org.jdesktop.swingworker.SwingWorker;
 import org.omegat.core.Core;
@@ -83,7 +81,6 @@ import org.omegat.util.Preferences;
 import org.omegat.util.StaticUtils;
 import org.omegat.util.StringUtil;
 import org.omegat.util.Token;
-import org.omegat.util.gui.Styles;
 import org.omegat.util.gui.UIThreadsUtil;
 
 import com.vlsolutions.swing.docking.DockingDesktop;
@@ -491,7 +488,7 @@ public class EditorController implements IEditor {
 
         editor.setDocument(doc);
 
-        doc.addUndoableEditListener(editor.undoManager);
+        editor.undoManager.reset();
 
         doc.addDocumentListener(new DocumentListener() {
             //we cannot edit the document here, only other stuff.
@@ -553,7 +550,7 @@ public class EditorController implements IEditor {
         // then add new marks
         markerController.reprocessImmediately(m_docSegList[displayedEntryIndex]);
 
-        editor.cancelUndo();
+        editor.undoManager.reset();
 
         history.insertNew(m_docSegList[displayedEntryIndex].segmentNumberInProject);
         
@@ -627,6 +624,7 @@ public class EditorController implements IEditor {
             return;
         }
         if (doc.isEditMode()) {
+            editor.undoManager.changed();
             m_docSegList[displayedEntryIndex].onActiveEntryChanged();
 
             SwingUtilities.invokeLater(new Runnable() {
@@ -824,7 +822,7 @@ public class EditorController implements IEditor {
         // then add new marks
         markerController.reprocessImmediately(m_docSegList[displayedEntryIndex]);
 
-        editor.cancelUndo();
+        editor.undoManager.reset();
 
         // validate tags if required
         if (entry != null && Preferences.isPreference(Preferences.TAG_VALIDATE_ON_LEAVE)) {
@@ -1454,13 +1452,7 @@ public class EditorController implements IEditor {
     public void undo() {
         UIThreadsUtil.mustBeSwingThread();
 
-        try {
-            if (editor.undoManager.canUndo()) {
-                editor.undoManager.undo();
-            }
-        } catch (CannotUndoException cue) {
-            Log.log(cue);
-        }
+        editor.undoManager.undo();
     }
 
     /**
@@ -1469,13 +1461,7 @@ public class EditorController implements IEditor {
     public void redo() {
         UIThreadsUtil.mustBeSwingThread();
 
-        try {
-            if (editor.undoManager.canRedo()) {
-                editor.undoManager.redo();
-            }
-        } catch (CannotRedoException cue) {
-            Log.log(cue);
-        }
+        editor.undoManager.redo();
     }
 
     /**

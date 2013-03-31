@@ -273,7 +273,6 @@ public class MarkerController {
             return;
         }
         Document3 doc = ec.editor.getOmDocument();
-        doc.removeUndoableEditListener(ec.editor.undoManager);
         doc.trustedChangesInProgress = true;
         try {
             for (int i = 0; i < evs.size(); i++) {
@@ -295,7 +294,6 @@ public class MarkerController {
             }
         } finally {
             doc.trustedChangesInProgress = false;
-            doc.addUndoableEditListener(ec.editor.undoManager);
         }
     }
 

@@ -55,7 +55,6 @@ import javax.swing.text.StyledEditorKit;
 import javax.swing.text.Utilities;
 import javax.swing.text.View;
 import javax.swing.text.ViewFactory;
-import javax.swing.undo.UndoManager;
 
 import org.omegat.core.CoreEvents;
 import org.omegat.core.data.SourceTextEntry;
@@ -75,7 +74,7 @@ import org.omegat.util.gui.DockingUI;
 public class EditorTextArea3 extends JEditorPane {
 
     /** Undo Manager to store edits */
-    protected final UndoManager undoManager = new UndoManager();
+    protected final TranslationUndoManager undoManager = new TranslationUndoManager(this);
 
     protected final EditorController controller;
 
@@ -122,11 +121,6 @@ public class EditorTextArea3 extends JEditorPane {
             }
         });
         setToolTipText("");
-    }
-
-    /** Orders to cancel all Undoable edits. */
-    public void cancelUndo() {
-        undoManager.die();
     }
 
     /**

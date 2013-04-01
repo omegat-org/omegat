@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 2.7.0
 ----------------------------------------------------------------------
-  19 Enhancements
+  20 Enhancements
    2 Bug fixes
    0 Localisation update
 ----------------------------------------------------------------------
@@ -68,6 +68,9 @@ appear in the contextual menu, and can be inserted individually
   - When a match is inserted from a TMX contained in a folder named
 "mt", the background of the active segment is changed to red. The
 background is restored to normal when the segment is left.
+
+  - OmegaT has now a machine translation connecter for MyMemory.
+To use it, check Options > Machine Translation > MyMemory
 
   Bug fixes:
 

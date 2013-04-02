@@ -2,7 +2,7 @@
  OmegaT 2.7.0
 ----------------------------------------------------------------------
   20 Enhancements
-   2 Bug fixes
+   4 Bug fixes
    0 Localisation update
 ----------------------------------------------------------------------
 2.7.0 vs. 2.6.3
@@ -76,6 +76,12 @@ To use it, check Options > Machine Translation > MyMemory
 
   - XLIFF Filter: <ept> not recognized in relation with <bpt>
   http://sourceforge.net/support/tracker.php?aid=1988732
+
+  - Problem with Undo after entering Japanese with IME
+  http://sourceforge.net/support/tracker.php?aid=3586912
+
+  - Infinite loop of exceptions when using Undo function
+  http://sourceforge.net/support/tracker.php?aid=3540091
 
   - When the custom shortcut file was containing non-existent shortcuts,
 OmegaT failed to load the valid ones

@@ -36,6 +36,7 @@ import org.omegat.filters2.Shortcuts;
 import org.omegat.filters2.TranslationException;
 import org.omegat.filters3.xml.XMLContentBasedTag;
 import org.omegat.filters3.xml.XMLDialect;
+import org.omegat.filters3.xml.XMLText;
 import org.omegat.util.PatternConsts;
 
 /**
@@ -295,6 +296,7 @@ public class Entry {
 
         // remove tags at begin and end, if required
         boolean removeTags = Core.getFilterMaster().getConfig().isRemoveTags();
+        boolean removeSpacesAround = Core.getFilterMaster().getConfig().isRemoveSpacesNonseg();
         if (removeTags) {
             enumerateTags(firstGood, lastGood);
             xmlDialect.constructShortcuts(elements.subList(firstGood, lastGood + 1), new Shortcuts());
@@ -305,6 +307,25 @@ public class Entry {
                 if (firstGood <= lastGood) {
                     Element eBeg = get(firstGood);
                     Element eEnd = get(lastGood);
+                    if (removeSpacesAround) {
+                        // remove spaces around text
+                        if (eBeg instanceof Text) {
+                            Text tElem = (Text) eBeg;
+                            if (!tElem.isMeaningful()) {
+                                firstGood++;
+                                modified = true;
+                                continue;
+                            }
+                        }
+                        if (eEnd instanceof Text) {
+                            Text tElem = (Text) eEnd;
+                            if (!tElem.isMeaningful()) {
+                                lastGood--;
+                                modified = true;
+                                continue;
+                            }
+                        }
+                    }
                     // check for remove paired tag
                     if (firstGood != lastGood && eBeg instanceof XMLContentBasedTag
                             && eEnd instanceof XMLContentBasedTag) {

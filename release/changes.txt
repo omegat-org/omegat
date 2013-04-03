@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 2.7.0
 ----------------------------------------------------------------------
-  20 Enhancements
+  22 Enhancements
    4 Bug fixes
    0 Localisation update
 ----------------------------------------------------------------------
@@ -53,6 +53,12 @@
 
   - Gnome Shell integration
   http://sourceforge.net/support/tracker.php?aid=3609146
+
+  - Do not remove leading and trailing tags
+  http://sourceforge.net/support/tracker.php?aid=3574760
+
+  - Not adding extra space on Insert Missing Source Tags
+  http://sourceforge.net/support/tracker.php?aid=3370310
 
   Other enhancements:
 

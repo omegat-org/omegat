@@ -64,3 +64,5 @@ Sources are available in OmegaT sources, in the directory lib/sources
 
 JSAP-2.1.jar is distributed under the GNU Lesser General Public License version 
 Sources are available in OmegaT sources, in the directory lib/sources
+
+orion-ssh2-214.jar is distributed under the Orion SSH for Java license

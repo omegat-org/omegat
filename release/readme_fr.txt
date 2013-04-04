@@ -1,7 +1,7 @@
 Ce document a été traduit par Didier Briel et Jean-Christophe Helary, copyright© 2007-2013.
 
 ==============================================================================
-  OmegaT 2.0, fichier « Lisez-moi »
+  OmegaT 2.7, fichier « Lisez-moi »
 
   1.  Informations à propos d'OmegaT
   2.  Qu'est ce qu'OmegaT ?
@@ -218,6 +218,7 @@ Contributions au code :
   Jean-Christophe Helary
   Thomas Huriaux
   Hans-Peter Jacobs
+  Kyle Katarn
   Ibai Lakunza Velasco
   Guido Leenders
   Aaron Madlon-Kay
@@ -255,8 +256,6 @@ OmegaT utilise les bibliothèques suivantes :
   JNA par Todd Fast, Timothy Wall et d'autres personnes (licence LGPL)
   Swing-Layout 1.0.2 (licence LGPL)
   Jmyspell 2.1.4 (licence LGPL)
-  JAXB (GPLv2 + classpath exception)
-  SJXP 1.0.2 (GPL v2)
   SVNKit 1.7.5 (licence TMate)
   Sequence Library (licence Sequence Library)
   ANTLR 3.4 (licence ANTLR 3)
@@ -265,6 +264,8 @@ OmegaT utilise les bibliothèques suivantes :
   JSch (licence JSch)
   Base64 (domaine public)
   Diff (GPL)
+  JSAP (LGPL)
+  orion-ssh2-214 (licence Orion SSH for Java)
 
 ==============================================================================
  5.  Est-ce qu'OmegaT vous pose problème ? Avez-vous besoin d'aide ?

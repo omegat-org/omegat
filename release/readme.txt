@@ -326,6 +326,7 @@ OmegaT uses the following libraries:
   Base64 (public domain)
   Diff (GPL)
   JSAP (LGPL)
+  orion-ssh2-214 (Orion SSH for Java license)
 
 ==============================================================================
  5.  Is OmegaT bugging you? Do you need help?

@@ -2,7 +2,7 @@
  OmegaT 2.7.0
 ----------------------------------------------------------------------
   22 Enhancements
-   4 Bug fixes
+   5 Bug fixes
    0 Localisation update
 ----------------------------------------------------------------------
 2.7.0 vs. 2.6.3
@@ -91,6 +91,8 @@ To use it, check Options > Machine Translation > MyMemory
 
   - When the custom shortcut file was containing non-existent shortcuts,
 OmegaT failed to load the valid ones
+
+  - OmegaT team projects were not working behind some firewalls
 
 ----------------------------------------------------------------------
  OmegaT 2.6.3 update 1

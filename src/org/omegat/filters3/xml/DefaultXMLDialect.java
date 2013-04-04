@@ -453,6 +453,7 @@ public class DefaultXMLDialect implements XMLDialect {
      * {@inheritDoc}
      */
     public String constructShortcuts(List<Element> elements, Shortcuts shortcutDetails) {
+        shortcutDetails.clear();
         StringBuilder r = new StringBuilder();
         for (Element el : elements) {
             String shortcut = el.toShortcut();

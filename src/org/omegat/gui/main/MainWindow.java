@@ -7,6 +7,7 @@
                          Benjamin Siband, and Kim Bruning
                2007 Zoltan Bartko
                2008 Andrzej Sawula, Alex Buloichik, Didier Briel
+               2013 Yu Tang
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -70,6 +71,7 @@ import com.vlsolutions.swing.docking.Dockable;
 import com.vlsolutions.swing.docking.DockableState;
 import com.vlsolutions.swing.docking.DockingDesktop;
 import com.vlsolutions.swing.docking.FloatingDialog;
+import java.awt.Image;
 
 /**
  * The main window of OmegaT application (unless the application is started in
@@ -83,6 +85,7 @@ import com.vlsolutions.swing.docking.FloatingDialog;
  * @author Zoltan Bartko - bartkozoltan@bartkozoltan.com
  * @author Andrzej Sawula
  * @author Alex Buloichik (alex73mail@gmail.com)
+ * @author Yu Tang
  */
 @SuppressWarnings("serial")
 public class MainWindow extends JFrame implements IMainWindow {
@@ -131,7 +134,12 @@ public class MainWindow extends JFrame implements IMainWindow {
 
         getContentPane().add(MainWindowUI.initDocking(this), BorderLayout.CENTER);
 
-        setIconImage(ResourcesUtil.getIcon("/org/omegat/gui/resources/OmegaT_small.gif").getImage());
+        // set two icons, 16x16 and 32x32
+        final List<Image> icons = new ArrayList<Image>();
+        final String RESOURCES = "/org/omegat/gui/resources/";
+        icons.add(ResourcesUtil.getIcon(RESOURCES + "OmegaT_small.gif").getImage());
+        icons.add(ResourcesUtil.getIcon(RESOURCES + "OmegaT.gif").getImage());
+        setIconImages(icons);
 
         CoreEvents.registerProjectChangeListener(new IProjectEventListener() {
             public void onProjectChanged(PROJECT_CHANGE_TYPE eventType) {

@@ -316,16 +316,16 @@ public class EditorTextArea3 extends JEditorPane {
             setCaretPosition(getOmDocument().getLength());
             processed = true;
         } else if ((!mac && isKey(e, KeyEvent.VK_LEFT, KeyEvent.CTRL_MASK))
-                || (mac && isKey(e, KeyEvent.VK_LEFT, KeyEvent.META_MASK))
+                || (mac && isKey(e, KeyEvent.VK_LEFT, KeyEvent.ALT_MASK))
                 || (!mac && isKey(e, KeyEvent.VK_LEFT, KeyEvent.CTRL_MASK | KeyEvent.SHIFT_MASK))
-                || (mac && isKey(e, KeyEvent.VK_LEFT, KeyEvent.META_MASK | KeyEvent.SHIFT_MASK))) {
-            // Ctrl+Left - skip to the end of tag
+                || (mac && isKey(e, KeyEvent.VK_LEFT, KeyEvent.ALT_MASK | KeyEvent.SHIFT_MASK))) {
+            // Ctrl+Left - skip to the end of tag (Alt+Left for MacOS)
             processed = moveCursorOverTag((e.getModifiers() & KeyEvent.SHIFT_MASK) != 0, false);
         } else if ((!mac && isKey(e, KeyEvent.VK_RIGHT, KeyEvent.CTRL_MASK))
-                || (mac && isKey(e, KeyEvent.VK_RIGHT, KeyEvent.META_MASK))
+                || (mac && isKey(e, KeyEvent.VK_RIGHT, KeyEvent.ALT_MASK))
                 || (!mac && isKey(e, KeyEvent.VK_RIGHT, KeyEvent.CTRL_MASK | KeyEvent.SHIFT_MASK))
-                || (mac && isKey(e, KeyEvent.VK_RIGHT, KeyEvent.META_MASK | KeyEvent.SHIFT_MASK))) {
-            // Ctrl+Right - skip to the end of tag
+                || (mac && isKey(e, KeyEvent.VK_RIGHT, KeyEvent.ALT_MASK | KeyEvent.SHIFT_MASK))) {
+            // Ctrl+Right - skip to the end of tag (Alt+Right for MacOS)
             processed = moveCursorOverTag((e.getModifiers() & KeyEvent.SHIFT_MASK) != 0, true);
         }
 

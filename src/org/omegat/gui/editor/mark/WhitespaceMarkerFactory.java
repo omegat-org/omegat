@@ -25,7 +25,6 @@
 
 package org.omegat.gui.editor.mark;
 
-import java.util.regex.Pattern;
 import org.omegat.core.Core;
 import org.omegat.util.OStrings;
 import org.omegat.util.gui.Styles;
@@ -46,7 +45,7 @@ public class WhitespaceMarkerFactory {
         public SpaceMarker() throws Exception {
             PAINTER = new SymbolPainter(Styles.COLOR_WHITESPACE, "\u00B7"); //·•
             toolTip = null; //don't overdo it. Space occurs many times.
-            pattern = Pattern.compile(" ");
+            patternChar = ' ';
         }
         protected boolean isEnabled() {
             return Core.getEditor().getSettings().isMarkWhitespace();
@@ -60,7 +59,7 @@ public class WhitespaceMarkerFactory {
         public TabMarker() throws Exception {
             PAINTER = new SymbolPainter(Styles.COLOR_WHITESPACE, "\u00BB"); //»
             toolTip = OStrings.getString("MARKER_TAB");
-            pattern = Pattern.compile("\\t");
+            patternChar = '\t';
         }
         protected boolean isEnabled() {
             return Core.getEditor().getSettings().isMarkWhitespace();
@@ -78,7 +77,7 @@ public class WhitespaceMarkerFactory {
         public LFMarker() throws Exception {
             PAINTER = new SymbolPainter(Styles.COLOR_WHITESPACE, "\u00B6"); //¶␊
             toolTip = "LF";
-            pattern = Pattern.compile("\\n");
+            patternChar = '\n';
         }
         protected boolean isEnabled() {
             return Core.getEditor().getSettings().isMarkWhitespace();

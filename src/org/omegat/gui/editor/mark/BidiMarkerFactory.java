@@ -25,7 +25,6 @@
 
 package org.omegat.gui.editor.mark;
 
-import java.util.regex.Pattern;
 import org.omegat.core.Core;
 import org.omegat.util.gui.Styles;
 
@@ -44,7 +43,7 @@ public class BidiMarkerFactory {
         public RLMMarker() throws Exception {
             PAINTER = new BidiPainter(Styles.COLOR_BIDIMARKERS, "\u200F");
             toolTip = "RLM";
-            pattern = Pattern.compile("\u200F");
+            patternChar = '\u200F';
         }
         protected boolean isEnabled() {
             return Core.getEditor().getSettings().isMarkBidi();
@@ -58,7 +57,7 @@ public class BidiMarkerFactory {
         public LRMMarker() throws Exception {
             PAINTER = new BidiPainter(Styles.COLOR_BIDIMARKERS, "\u200E");
             toolTip = "LRM";
-            pattern = Pattern.compile("\u200E");
+            patternChar = '\u200E';
         }
         protected boolean isEnabled() {
             return Core.getEditor().getSettings().isMarkBidi();
@@ -72,7 +71,7 @@ public class BidiMarkerFactory {
         public LREMarker() throws Exception {
             PAINTER = new BidiPainter(Styles.COLOR_BIDIMARKERS, "\u202A");
             toolTip = "LRE";
-            pattern = Pattern.compile("\u202A");
+            patternChar = '\u202A';
         }
         protected boolean isEnabled() {
             return Core.getEditor().getSettings().isMarkBidi();
@@ -86,7 +85,7 @@ public class BidiMarkerFactory {
         public RLEMarker() throws Exception {
             PAINTER = new BidiPainter(Styles.COLOR_BIDIMARKERS, "\u202B");
             toolTip = "RLE";
-            pattern = Pattern.compile("\u202B");
+            patternChar = '\u202B';
         }
         protected boolean isEnabled() {
             return Core.getEditor().getSettings().isMarkBidi();
@@ -100,7 +99,7 @@ public class BidiMarkerFactory {
         public PDFMarker() throws Exception {
             PAINTER = new BidiPainter(Styles.COLOR_BIDIMARKERS, "\u202C");
             toolTip = "PDF";
-            pattern = Pattern.compile("\u202C");
+            patternChar = '\u202C';
         }
         protected boolean isEnabled() {
             return Core.getEditor().getSettings().isMarkBidi();
@@ -114,7 +113,7 @@ public class BidiMarkerFactory {
         public LROMarker() throws Exception {
             PAINTER = new BidiPainter(Styles.COLOR_BIDIMARKERS, "\u202D");
             toolTip = "LRO";
-            pattern = Pattern.compile("\u202D");
+            patternChar = '\u202D';
         }
         protected boolean isEnabled() {
             return Core.getEditor().getSettings().isMarkBidi();
@@ -128,7 +127,7 @@ public class BidiMarkerFactory {
         public RLOMarker() throws Exception {
             PAINTER = new BidiPainter(Styles.COLOR_BIDIMARKERS, "\u202E");
             toolTip = "RLO";
-            pattern = Pattern.compile("\u202E");
+            patternChar = '\u202E';
         }
         protected boolean isEnabled() {
             return Core.getEditor().getSettings().isMarkBidi();

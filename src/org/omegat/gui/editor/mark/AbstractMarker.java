@@ -26,7 +26,6 @@
 package org.omegat.gui.editor.mark;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -49,7 +48,10 @@ public abstract class AbstractMarker implements IMarker {
     protected HighlightPainter PAINTER;
     protected String toolTip;
     protected AttributeSet ATTRIBUTES;
+    /** Regexp for mark. */
     protected Pattern pattern;
+    /** char for mark. */
+    protected char patternChar;
 
     public AbstractMarker() throws Exception {
     }
@@ -66,32 +68,59 @@ public abstract class AbstractMarker implements IMarker {
     public List<Mark> getMarksForEntry(SourceTextEntry ste, String sourceText, String translationText, boolean isActive)
             throws Exception {
 
-        if (!isEnabled() || pattern == null) {
-            return Collections.emptyList();
+        if (!isEnabled()) {
+            return null;
+        }
+        if (pattern == null && patternChar == 0) {
+            return null;
         }
 
         List<Mark> r = new ArrayList<Mark>();
         Matcher match;
         if (isActive || Core.getEditor().getSettings().isDisplaySegmentSources() || translationText == null) {// TODO
             initDrawers(true, isActive);
-            match = pattern.matcher(sourceText);
-            while (match.find()) {
-                Mark m = new Mark(Mark.ENTRY_PART.SOURCE, match.start(), match.end());
-                m.painter = PAINTER;
-                m.toolTipText = toolTip;
-                m.attributes = ATTRIBUTES;
-                r.add(m);
+            if (pattern != null) {
+                match = pattern.matcher(sourceText);
+                while (match.find()) {
+                    Mark m = new Mark(Mark.ENTRY_PART.SOURCE, match.start(), match.end());
+                    m.painter = PAINTER;
+                    m.toolTipText = toolTip;
+                    m.attributes = ATTRIBUTES;
+                    r.add(m);
+                }
+            }
+            if (patternChar != 0) {
+                int pos = -1;
+                while ((pos = sourceText.indexOf(patternChar, pos + 1)) >= 0) {
+                    Mark m = new Mark(Mark.ENTRY_PART.SOURCE, pos, pos + 1);
+                    m.painter = PAINTER;
+                    m.toolTipText = toolTip;
+                    m.attributes = ATTRIBUTES;
+                    r.add(m);
+                }
             }
         }
         if (translationText != null) {
             initDrawers(false, isActive);
-            match = pattern.matcher(translationText);
-            while (match.find()) {
-                Mark m = new Mark(Mark.ENTRY_PART.TRANSLATION, match.start(), match.end());
-                m.painter = PAINTER;
-                m.toolTipText = toolTip;
-                m.attributes = ATTRIBUTES;
-                r.add(m);
+            if (pattern != null) {
+                match = pattern.matcher(translationText);
+                while (match.find()) {
+                    Mark m = new Mark(Mark.ENTRY_PART.TRANSLATION, match.start(), match.end());
+                    m.painter = PAINTER;
+                    m.toolTipText = toolTip;
+                    m.attributes = ATTRIBUTES;
+                    r.add(m);
+                }
+            }
+            if (patternChar != 0) {
+                int pos = -1;
+                while ((pos = translationText.indexOf(patternChar, pos + 1)) >= 0) {
+                    Mark m = new Mark(Mark.ENTRY_PART.TRANSLATION, pos, pos + 1);
+                    m.painter = PAINTER;
+                    m.toolTipText = toolTip;
+                    m.attributes = ATTRIBUTES;
+                    r.add(m);
+                }
             }
         }
 

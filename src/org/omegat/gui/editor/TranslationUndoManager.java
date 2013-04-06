@@ -27,19 +27,29 @@ package org.omegat.gui.editor;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.event.UndoableEditEvent;
+import javax.swing.event.UndoableEditListener;
+
 import org.omegat.util.gui.UIThreadsUtil;
 
 /**
  * Class for process undo/redo operations.
  * 
+ * We can't use standard UndoManager because OmegaT changes text attributes,
+ * which affects on standard UndoManager. Instead, TranslationUndoManager
+ * remember only text changes. But changed text should be stored only on
+ * UndoableEditEvent, because composed text chars(Japanese, Chinese) should be
+ * stored as one char.
+ * 
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
-public class TranslationUndoManager {
+public class TranslationUndoManager implements UndoableEditListener {
     private final EditorTextArea3 editor;
     private final List<Change> undos = new ArrayList<Change>();
     private final List<Change> redos = new ArrayList<Change>();
     private Change currentState;
     private boolean inProgress;
+    private String changedText;
 
     public TranslationUndoManager(EditorTextArea3 editor) {
         this.editor = editor;
@@ -53,6 +63,7 @@ public class TranslationUndoManager {
             redos.clear();
             currentState = null;
         }
+        remember();
     }
 
     public void undo() {
@@ -109,24 +120,51 @@ public class TranslationUndoManager {
     }
 
     /**
-     * Remember change.
+     * Executed on each text changed for remember
      */
-    public void changed() {
+    public void onTextChanged() {
+        UIThreadsUtil.mustBeSwingThread();
+
         if (inProgress) {
             return;
         }
-        if (currentState != null) {
-            currentState.caretPos = editor.getCaretPosition() - editor.getOmDocument().getTranslationStart();
+        if (!editor.getOmDocument().isEditMode()) {
+            return;
         }
-        Change ch = new Change();
-        ch.text = editor.getOmDocument().extractTranslation();
         synchronized (this) {
+            if (currentState != null) {
+                currentState.caretPos = editor.getCaretPosition() - editor.getOmDocument().getTranslationStart();
+            }
+            // remember text, but don't consider it as 'undoable'
+            changedText = editor.getOmDocument().extractTranslation();
+        }
+    }
+
+    /**
+     * Remember change.
+     */
+    public void remember() {
+        UIThreadsUtil.mustBeSwingThread();
+
+        synchronized (this) {
+            if (changedText == null) {
+                return;
+            }
+            Change ch = new Change();
+            ch.text = changedText;
+            changedText = null;
             if (currentState != null) {
                 undos.add(currentState);
             }
             currentState = ch;
             redos.clear();
         }
+    }
+
+    public void undoableEditHappened(UndoableEditEvent e) {
+        UIThreadsUtil.mustBeSwingThread();
+
+        remember();
     }
 
     protected static final class Change {

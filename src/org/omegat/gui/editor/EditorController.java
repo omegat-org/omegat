@@ -488,6 +488,7 @@ public class EditorController implements IEditor {
 
         editor.setDocument(doc);
 
+        doc.addUndoableEditListener(editor.undoManager);
         editor.undoManager.reset();
 
         doc.addDocumentListener(new DocumentListener() {
@@ -624,7 +625,7 @@ public class EditorController implements IEditor {
             return;
         }
         if (doc.isEditMode()) {
-            editor.undoManager.changed();
+            editor.undoManager.onTextChanged();
             m_docSegList[displayedEntryIndex].onActiveEntryChanged();
 
             SwingUtilities.invokeLater(new Runnable() {

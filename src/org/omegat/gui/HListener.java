@@ -4,6 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
+               2013 Aaron Madlon-Kay
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -30,6 +31,7 @@ import javax.swing.event.HyperlinkListener;
 
 import org.omegat.core.Core;
 import org.omegat.gui.main.MainWindow;
+import org.omegat.gui.tagvalidation.TagValidationFrame;
 
 /**
  * A listener for old Hyperlink-like style
@@ -37,18 +39,25 @@ import org.omegat.gui.main.MainWindow;
  * @author Keith Godfrey
  */
 public class HListener implements HyperlinkListener {
-    public HListener(MainWindow t, boolean grabFocus) {
+    public HListener(MainWindow t, TagValidationFrame f, boolean grabFocus) {
         m_transFrame = t;
+        m_tagValFrame = f;
         m_grabFocus = grabFocus;
     }
 
     public void hyperlinkUpdate(HyperlinkEvent e) {
         if (e.getEventType() == HyperlinkEvent.EventType.ACTIVATED) {
-            final String s = e.getDescription();
+            final String desc = e.getDescription();
             SwingUtilities.invokeLater(new Runnable() {
                 public void run() {
                     try {
-                        Core.getEditor().gotoEntry(Integer.parseInt(s));
+                        if (desc.startsWith(TagValidationFrame.FIX_URL_PREFIX)) {
+                            int entry = Integer.parseInt(desc.substring(TagValidationFrame.FIX_URL_PREFIX.length()));
+                            String fixedSource = m_tagValFrame.fixEntry(entry);
+                            Core.getEditor().gotoEntryAfterFix(entry, fixedSource);
+                        } else {
+                            Core.getEditor().gotoEntry(Integer.parseInt(desc));
+                        }
                     } catch (NumberFormatException ex) {
                     }
                 }
@@ -62,4 +71,5 @@ public class HListener implements HyperlinkListener {
 
     private MainWindow m_transFrame;
     private boolean m_grabFocus;
+    private TagValidationFrame m_tagValFrame;
 }

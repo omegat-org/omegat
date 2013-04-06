@@ -194,8 +194,15 @@ public class GlossaryTextAreaTest extends TestCore {
             public void prevEntryWithNote() {
                 throw new UnsupportedOperationException("Not supported yet.");
             }
+
             public String getCurrentTranslation() {
                 return null;
+            }
+
+            public void gotoEntryAfterFix(int fixedEntry, String fixedSource) {
+            }
+
+            public void refreshViewAfterFix(List<Integer> fixedEntries) {
             }
         });
     }

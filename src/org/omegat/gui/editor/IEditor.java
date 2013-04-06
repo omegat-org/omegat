@@ -6,7 +6,7 @@
  Copyright (C) 2008-2010 Alex Buloichik
                2011 Alex Buloichik, Didier Briel
                2012 Guido Leenders, Didier Briel
-               2013 Zoltan Bartko
+               2013 Zoltan Bartko, Aaron Madlon-Kay
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -40,6 +40,7 @@ import org.omegat.gui.editor.mark.Mark;
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Didier Briel
  * @author Guido Leenders
+ * @author Aaron Madlon-Kay
  */
 public interface IEditor {
     enum CHANGE_CASE_TO {
@@ -166,6 +167,28 @@ public interface IEditor {
      *            Must be called only from UI thread.
      */
     void gotoEntry(int entryNum);
+
+    /**
+     * Goto entry with specified number while avoiding clobbering the tag fixes.
+     * 
+     * @param fixedEntry
+     *            entry number, starts from 1
+     * @param fixedSource
+     *            The source of the entry that was fixed
+     * 
+     *            Must be called only from UI thread.
+     */
+    void gotoEntryAfterFix(int fixedEntry, String fixedSource);
+
+    /**
+     * Refresh the current editor view while avoiding clobbering any tag fixes.
+     * 
+     * @param fixedEntries
+     *            A list of all entries that were altered
+     * 
+     *            Must be called only from UI thread.
+     */
+    void refreshViewAfterFix(List<Integer> fixedEntries);
 
     /**
      * Set current focus to editor.

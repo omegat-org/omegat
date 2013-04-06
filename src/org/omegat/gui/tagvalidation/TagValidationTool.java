@@ -27,10 +27,12 @@
 package org.omegat.gui.tagvalidation;
 
 import java.util.ArrayList;
-import java.util.Collections;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Stack;
+import java.util.TreeMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -44,6 +46,7 @@ import org.omegat.core.data.TMXEntry;
 import org.omegat.core.events.IProjectEventListener;
 import org.omegat.filters2.po.PoFilter;
 import org.omegat.gui.main.MainWindow;
+import org.omegat.gui.tagvalidation.ErrorReport.TagError;
 import org.omegat.util.OStrings;
 import org.omegat.util.PatternConsts;
 import org.omegat.util.Preferences;
@@ -84,7 +87,7 @@ public class TagValidationTool implements ITagValidation, IProjectEventListener 
     }
 
     @Override
-    public synchronized void displayTagValidationErrors(List<SourceTextEntry> suspects, String message) {
+    public synchronized void displayTagValidationErrors(List<ErrorReport> suspects, String message) {
         if (mainWindow != null) {
             showTagResultsInGui(suspects, message);
         } else {
@@ -92,7 +95,7 @@ public class TagValidationTool implements ITagValidation, IProjectEventListener 
         }
     }
 
-    private void showTagResultsInGui(List<SourceTextEntry> suspects, String message) {
+    private void showTagResultsInGui(List<ErrorReport> suspects, String message) {
         if (suspects != null && suspects.size() > 0) {
             // create a tag validation window if necessary
             if (m_tagWin == null) {
@@ -106,7 +109,7 @@ public class TagValidationTool implements ITagValidation, IProjectEventListener 
             // display list of suspect strings
             m_tagWin.setVisible(true);
             m_tagWin.setMessage(message);
-            m_tagWin.displayStringList(suspects);
+            m_tagWin.displayErrorList(suspects);
         } else {
             // close tag validation window if present
             if (m_tagWin != null)
@@ -119,15 +122,21 @@ public class TagValidationTool implements ITagValidation, IProjectEventListener 
         }
     }
 
-    private void showTagResultsInConsole(List<SourceTextEntry> suspects) {
+    private void showTagResultsInConsole(List<ErrorReport> suspects) {
         if (suspects != null && suspects.size() > 0) {
-            for (SourceTextEntry ste : suspects) {
-                String src = ste.getSrcText();
-                TMXEntry trans = Core.getProject().getTranslationInfo(ste);
-                if (src.length() > 0 && trans.isTranslated()) {
-                    System.out.println(ste.entryNum());
-                    System.out.println(src);
-                    System.out.println(trans.translation);
+            for (ErrorReport report : suspects) {
+                System.out.println(report.entryNum);
+                System.out.println(report.source);
+                System.out.println(report.translation);
+                for (Map.Entry<TagError, List<String>> e : report.inverseReport().entrySet()) {
+                    System.out.print("  ");
+                    System.out.print(ErrorReport.localizedTagError(e.getKey()));
+                    System.out.print(": ");
+                    for (String tag : e.getValue()) {
+                        System.out.print(tag);
+                        System.out.print(" ");
+                    }
+                    System.out.println();
                 }
             }
         }
@@ -171,14 +180,15 @@ public class TagValidationTool implements ITagValidation, IProjectEventListener 
      * having changed (possibly invalid) tag structures.
      */
     @Override
-    public synchronized List<SourceTextEntry> listInvalidTags() {
+    public synchronized List<ErrorReport> listInvalidTags() {
         initCheck();
 
-        List<SourceTextEntry> suspects = new ArrayList<SourceTextEntry>(16);
+        List<ErrorReport> suspects = new ArrayList<>(16);
         for (FileInfo fi : Core.getProject().getProjectFiles()) {
             for (SourceTextEntry ste : fi.entries) {
-                if (!checkEntry(fi, ste)) {
-                    suspects.add(ste);
+                ErrorReport err = checkEntry(fi, ste);
+                if (err != null) {
+                    suspects.add(err);
                 }
             } // end loop over entries
         } // end loop over files
@@ -193,7 +203,8 @@ public class TagValidationTool implements ITagValidation, IProjectEventListener 
         for (FileInfo fi : Core.getProject().getProjectFiles()) {
             for (SourceTextEntry s : fi.entries) {
                 if (s == ste) {
-                    return checkEntry(fi, ste);
+                    ErrorReport err = checkEntry(fi, ste);
+                    return err == null;
                 }
             }
         }
@@ -207,7 +218,7 @@ public class TagValidationTool implements ITagValidation, IProjectEventListener 
      * @param ste
      * @return true if entry is valid, false if entry if not valid
      */
-    private boolean checkEntry(FileInfo fi, SourceTextEntry ste) {
+    private ErrorReport checkEntry(FileInfo fi, SourceTextEntry ste) {
         srcTags.clear();
         locTags.clear();
         printfSourceSet.clear();
@@ -217,136 +228,236 @@ public class TagValidationTool implements ITagValidation, IProjectEventListener 
         TMXEntry te = Core.getProject().getTranslationInfo(ste);
 
         // if there's no translation, skip the string
-        // bugfix for
+        // bugfix for:
         // http://sourceforge.net/support/tracker.php?aid=1209839
-        if (!te.isTranslated()) {
-            return true;
+        if (!te.isTranslated() || s.length() == 0) {
+            return null;
+        }
+        ErrorReport report = new ErrorReport(ste, te.translation);
+
+        // Check printf variables
+        inspectPrintfVariables(printfPattern, report);
+
+        // Extra checks for PO files:
+        inspectPOWhitespace(fi.filterClass, report);
+
+        inspectOmegaTTags(ste, customTagPattern, report);
+
+        inspectJavaMessageFormat(javaMessageFormatPattern, report);
+
+        inspectRemovePattern(removePattern, report);
+
+        return report.isEmpty() ? null : report;
+    }
+
+    private static void inspectJavaMessageFormat(Pattern javaMessageFormatPattern, ErrorReport report) {
+
+        if (javaMessageFormatPattern == null) {
+            return;
         }
 
-        if (printfPattern != null) {
-            // printf variables should be equal in number,
-            // but order can change
-            // (and with that also notation: e.g. from '%s' to '%1$s')
-            // We check this by adding the string "index+type specifier"
-            // of every found variable to a set.
-            // If the sets of the source and target are not equal, then
-            // there is a problem: either missing or extra variables,
-            // or the type specifier has changed for the variable at the
-            // given index.
-            Matcher printfMatcher = printfPattern.matcher(s);
-            int index = 1;
-            while (printfMatcher.find()) {
-                String printfVariable = printfMatcher.group(0);
-                String argumentswapspecifier = printfMatcher.group(1);
-                if (argumentswapspecifier != null && argumentswapspecifier.endsWith("$")) {
-                    printfSourceSet.add("" + argumentswapspecifier.substring(0, argumentswapspecifier.length() - 1)
-                            + printfVariable.substring(printfVariable.length() - 1, printfVariable.length()));
-                } else {
-                    printfSourceSet.add("" + index
-                            + printfVariable.substring(printfVariable.length() - 1, printfVariable.length()));
-                    index++;
-                }
+        List<String> srcTags = new ArrayList<String>();
+        List<String> locTags = new ArrayList<String>();
+        Matcher javaMessageFormatMatcher = javaMessageFormatPattern.matcher(report.source);
+        while (javaMessageFormatMatcher.find()) {
+            srcTags.add(javaMessageFormatMatcher.group(0));
+        }
+        javaMessageFormatMatcher = javaMessageFormatPattern.matcher(report.translation);
+        while (javaMessageFormatMatcher.find()) {
+            locTags.add(javaMessageFormatMatcher.group(0));
+        }
+        inspectUnorderedTags(srcTags, locTags, report);
+    }
+
+    private static void inspectPrintfVariables(Pattern printfPattern, ErrorReport report) {
+        if (printfPattern == null) {
+            return;
+        }
+        // printf variables should be equal in number,
+        // but order can change
+        // (and with that also notation: e.g. from '%s' to '%1$s')
+        // We check this by adding the string "index+type specifier"
+        // of every found variable to a set.
+        // (Actually a map, so we can keep track of the original
+        // variable for display purposes.)
+        // If the sets (map keys) of the source and target are not equal, then
+        // there is a problem: either missing or extra variables,
+        // or the type specifier has changed for the variable at the
+        // given index.
+        Map<String, String> srcTags = extractPrintfVars(printfPattern, report.source);
+        Map<String, String> locTags = extractPrintfVars(printfPattern, report.translation);
+
+        if (!srcTags.keySet().equals(locTags.keySet())) {
+            for (Map.Entry<String, String> e : srcTags.entrySet()) {
+                report.srcErrors.put(e.getValue(), TagError.UNSPECIFIED);
             }
-            printfMatcher = printfPattern.matcher(te.translation);
-            index = 1;
-            while (printfMatcher.find()) {
-                String printfVariable = printfMatcher.group(0);
-                String argumentswapspecifier = printfMatcher.group(1);
-                if (argumentswapspecifier != null && argumentswapspecifier.endsWith("$")) {
-                    printfTargetSet.add("" + argumentswapspecifier.substring(0, argumentswapspecifier.length() - 1)
-                            + printfVariable.substring(printfVariable.length() - 1, printfVariable.length()));
-                } else {
-                    printfTargetSet.add("" + index
-                            + printfVariable.substring(printfVariable.length() - 1, printfVariable.length()));
-                    index++;
-                }
-            }
-            if (!printfSourceSet.equals(printfTargetSet)) {
-                return false;
+            for (Map.Entry<String, String> e : locTags.entrySet()) {
+                report.transErrors.put(e.getValue(), TagError.UNSPECIFIED);
             }
         }
-        // Extra checks for PO files:
-        if (fi.filterClass.equals(PoFilter.class)) {
-            // check PO line start:
-            if (s.startsWith("\n") != te.translation.startsWith("\n")) {
-                return false;
-            }
-            // check PO line ending:
-            if (s.endsWith("\n") != te.translation.endsWith("\n")) {
-                return false;
+    }
+
+    private static Map<String, String> extractPrintfVars(Pattern printfPattern, String translation) {
+        Matcher printfMatcher = printfPattern.matcher(translation);
+        Map<String, String> nameMapping = new HashMap<String, String>();
+        int index = 1;
+        while (printfMatcher.find()) {
+            String printfVariable = printfMatcher.group(0);
+            String argumentswapspecifier = printfMatcher.group(1);
+            if (argumentswapspecifier != null && argumentswapspecifier.endsWith("$")) {
+                String normalized = "" + argumentswapspecifier.substring(0, argumentswapspecifier.length() - 1)
+                        + printfVariable.substring(printfVariable.length() - 1, printfVariable.length());
+                nameMapping.put(normalized, printfVariable);
+
+            } else {
+                String normalized = "" + index
+                        + printfVariable.substring(printfVariable.length() - 1, printfVariable.length());
+                nameMapping.put(normalized, printfVariable);
+                index++;
             }
         }
-        // OmegaT tags and custom tags check: order and number should be equal
+        return nameMapping;
+    }
+
+    private static void inspectPOWhitespace(Class filterClass, ErrorReport report) {
+        if (!filterClass.equals(PoFilter.class)) {
+            return;
+        }
+        // check PO line start:
+        if (report.source.startsWith("\n") != report.translation.startsWith("\n")) {
+            report.transErrors.put("^\\n", TagError.WHITESPACE);
+            report.srcErrors.put("^\\n", TagError.WHITESPACE);
+        }
+        // check PO line ending:
+        if (report.source.endsWith("\n") != report.translation.endsWith("\n")) {
+            report.transErrors.put("\\n$", TagError.WHITESPACE);
+            report.srcErrors.put("\\n$", TagError.WHITESPACE);
+        }
+    }
+
+    /**
+     * Check that translated tags are well-formed. 
+     * In order to accommodate tags orphaned by segmenting,
+     * unmatched tags are allowed, but only if they don't interfere with
+     * non-orphaned tags.
+     * @param srcTags A list of tags in the source text
+     * @param locTags A list of tags in the translated text
+     * @return Well-formed or not
+     */
+    private static void inspectOmegaTTags(SourceTextEntry ste, Pattern customTagPattern, ErrorReport report) {
+
+        List<String> srcTags = new ArrayList<String>();
+        List<String> locTags = new ArrayList<String>();
         // extract tags from src and loc string
-        StaticUtils.buildTagList(s, ste.getProtectedParts(), srcTags);
-        StaticUtils.buildTagList(te.translation, ste.getProtectedParts(), locTags);
-        // custom pattern checks: order and number should be equal
+        StaticUtils.buildTagList(report.source, ste.getProtectedParts(), srcTags);
+        StaticUtils.buildTagList(report.translation, ste.getProtectedParts(), locTags);
+        // custom pattern checks
         if (customTagPattern != null) {
             // extract tags from src and loc string
-            Matcher customTagPatternMatcher = customTagPattern.matcher(s);
+            Matcher customTagPatternMatcher = customTagPattern.matcher(report.source);
             while (customTagPatternMatcher.find()) {
                 srcTags.add(customTagPatternMatcher.group(0));
             }
-            customTagPatternMatcher = customTagPattern.matcher(te.translation);
+            customTagPatternMatcher = customTagPattern.matcher(report.translation);
             while (customTagPatternMatcher.find()) {
                 locTags.add(customTagPatternMatcher.group(0));
             }
         }
 
-        // Compare tag list sizes
-        if (srcTags.size() != locTags.size()) {
-            return false;
+        // Early-out if the tags are identical between source and translation
+        if (srcTags.equals(locTags)) {
+            return;
         }
 
-        // Compare tags one by one.
-        boolean tagsAreIdentical = true;
-        for (int j = 0; j < srcTags.size(); j++) {
-            s = srcTags.get(j);
-            String t = locTags.get(j);
-            if (!s.equals(t)) {
-                tagsAreIdentical = false;
+        // If we're doing strict validation, pre-fill the report with warnings
+        // about out-of-order tags.
+        if (!Preferences.isPreference(Preferences.LOOSE_TAG_ORDERING)) {
+            List<String> commonTagsSrc = new ArrayList<String>(srcTags);
+            commonTagsSrc.retainAll(locTags);
+            List<String> commonTagsLoc = new ArrayList<String>(locTags);
+            commonTagsLoc.retainAll(srcTags);
+
+            for (int i = 0; i < commonTagsSrc.size(); i++) {
+                String tag = commonTagsLoc.get(i);
+                if (!tag.equals(commonTagsSrc.get(i))) {
+                    report.transErrors.put(tag, TagError.ORDER);
+                    commonTagsSrc.remove(tag);
+                    commonTagsLoc.remove(i);
+                    i--;
+                }
+            }
+        }
+
+        // Check source tags for any missing from translation.
+        for (String tag : srcTags) {
+            if (!locTags.contains(tag)) {
+                report.srcErrors.put(tag, TagError.MISSING);
+            }
+        }
+
+        // Check translation tags.
+        Stack<TagInfo> tagStack = new Stack<TagInfo>();
+        HashSet<String> cache = new HashSet<String>();
+        for (String tag : locTags) {
+            // Make sure tag exists in source.
+            if (!srcTags.contains(tag)) {
+                report.transErrors.put(tag, TagError.EXTRANEOUS);
+                continue;
+            }
+            // Check tag against cache to find duplicates.
+            if (cache.contains(tag)) {
+                report.transErrors.put(tag, TagError.DUPLICATE);
+                continue;
+            } else {
+                cache.add(tag);
+            }
+
+            // Build stack of tags to check well-formedness.
+            TagInfo info = StaticUtils.getTagInfo(tag);
+            switch (info.type) {
+            case START:
+                tagStack.push(info);
                 break;
+            case END:
+                if (!tagStack.isEmpty() && tagStack.peek().name.equals(info.name)) {
+                    // Closing a tag normally.
+                    tagStack.pop();
+                } else {
+                    while (!tagStack.isEmpty()) {
+                        // Closing the wrong opening tag.
+                        // Rewind stack until we find its pair. Report everything along
+                        // the way as malformed.
+                        TagInfo last = tagStack.pop();
+                        report.transErrors.put(StaticUtils.getOriginalTag(last),
+                                TagError.MALFORMED);
+                        if (last.name.equals(info.name)) break;
+                    }
+                    // If the stack was empty to begin with or we emptied it above,
+                    // report the tag, but only if it's not a valid orphan.
+                    if (tagStack.isEmpty()) {
+                        String pair = StaticUtils.getPairedTag(info);
+                        if (srcTags.contains(pair)) {
+                            report.transErrors.put(tag,
+                                    locTags.contains(pair) ? TagError.MALFORMED : TagError.ORPHANED);
+                        }
+                    }
+                }
+                break;
+            case SINGLE:
+                // Ignore
             }
         }
 
-        if (!tagsAreIdentical) {
-            // If we are doing strict validation only, or if the tags are
-            // malformed,
-            // finish this TU now.
-            if (!Preferences.isPreference(Preferences.LOOSE_TAG_ORDERING) || !tagsAreWellFormed(srcTags, locTags)) {
-                return false;
+        // Check the stack to see if there are straggling open tags.
+        while (!tagStack.isEmpty()) {
+            // Allow stragglers only if they're orphans.
+            TagInfo info = tagStack.pop();
+            String pair = StaticUtils.getPairedTag(info);
+            if (srcTags.contains(pair)) {
+                report.transErrors.put(StaticUtils.getOriginalTag(info),
+                        locTags.contains(pair) ? TagError.MALFORMED : TagError.ORPHANED);
             }
         }
-
-        // Java MessageFormat pattern checks: order can change, number should be
-        // equal.
-        if (javaMessageFormatPattern != null) {
-            srcTags.clear();
-            locTags.clear();
-            Matcher javaMessageFormatMatcher = javaMessageFormatPattern.matcher(s);
-            while (javaMessageFormatMatcher.find()) {
-                srcTags.add(javaMessageFormatMatcher.group(0));
-            }
-            javaMessageFormatMatcher = javaMessageFormatPattern.matcher(te.translation);
-            while (javaMessageFormatMatcher.find()) {
-                locTags.add(javaMessageFormatMatcher.group(0));
-            }
-            Collections.sort(srcTags);
-            Collections.sort(locTags);
-            if (!srcTags.equals(locTags)) {
-                return false;
-            }
-        }
-
-        // check translation for stuff that should have been removed.
-        if (removePattern != null) {
-            Matcher removeMatcher = removePattern.matcher(te.translation);
-            if (removeMatcher.find()) {
-                return false;
-            }
-        }
-
-        return true;
     }
 
     /**
@@ -417,5 +528,128 @@ public class TagValidationTool implements ITagValidation, IProjectEventListener 
         }
 
         return true;
+    }
+
+    private static void inspectRemovePattern(Pattern removePattern, ErrorReport report) {
+        if (removePattern == null) {
+            return;
+        }
+        Matcher removeMatcher = removePattern.matcher(report.translation);
+        while (removeMatcher.find()) {
+            report.transErrors.put(removeMatcher.group(), TagError.EXTRANEOUS);
+        }
+    }
+
+    private static void inspectUnorderedTags(List<String> srcTags, List<String> locTags, ErrorReport report) {
+        for (String tag : srcTags) {
+            if (!locTags.contains(tag)) {
+                report.srcErrors.put(tag, TagError.MISSING);
+            }
+        }
+        for (String tag : locTags) {
+            if (!srcTags.contains(tag)) {
+                report.transErrors.put(tag, TagError.EXTRANEOUS);
+            }
+        }
+    }
+
+    /**
+     * Fix all errors indicated in a given ErrorReport.
+     * 
+     * @param report
+     *            The report indicating the segment and errors to fix
+     * @return The fixed translation string, or null if one of the errors is of
+     *         type UNSPECIFIED.
+     */
+    public static String fixErrors(ErrorReport report) {
+        // Don't try to fix unspecified errors.
+        if (report.srcErrors.containsValue(TagError.UNSPECIFIED)
+                || report.transErrors.containsValue(TagError.UNSPECIFIED)) {
+            return null;
+        }
+
+        // Sort the map first to ensure that fixing works properly.
+        Map<String, TagError> sortedErrors = new TreeMap<String, TagError>(new StaticUtils.TagComparator(
+                report.source));
+        sortedErrors.putAll(report.srcErrors);
+        sortedErrors.putAll(report.transErrors);
+
+        StringBuilder sb = new StringBuilder(report.translation);
+
+        for (Map.Entry<String, TagError> e : sortedErrors.entrySet()) {
+            fixTag(report.ste, e.getKey(), e.getValue(), sb, report.source);
+        }
+
+        return sb.toString();
+    }
+
+    private static void fixTag(SourceTextEntry ste, String tag, TagError error, StringBuilder translation, String source) {
+        switch (error) {
+        case DUPLICATE:
+        case ORDER:
+        case MALFORMED:
+            fixMalformed(ste, translation, source, tag);
+            break;
+        case MISSING:
+            fixMissing(ste, translation, source, tag);
+            break;
+        case EXTRANEOUS:
+            fixExtraneous(translation, tag);
+            break;
+        case ORPHANED:
+            // This is fixed by fixing MISSING.
+            break;
+        case WHITESPACE:
+            fixWhitespace(translation, source);
+            break;
+        default:
+            break;
+        }
+    }
+
+    private static void fixWhitespace(StringBuilder translation, String source) {
+        if (source.startsWith("\n") && translation.charAt(0) != '\n') {
+            translation.insert(0, '\n');
+        } else if (!source.startsWith("\n") && translation.charAt(0) == '\n') {
+            translation.deleteCharAt(0);
+        }
+        if (source.endsWith("\n") && translation.charAt(0) != '\n') {
+            translation.append('\n');
+        } else if (!source.endsWith("\n") && translation.charAt(translation.length() - 1) == '\n') {
+            translation.deleteCharAt(translation.length() - 1);
+        }
+    }
+
+    private static void fixMalformed(SourceTextEntry ste, StringBuilder text, String source, String tag) {
+        fixExtraneous(text, tag);
+        fixMissing(ste, text, source, tag);
+    }
+
+    private static void fixMissing(SourceTextEntry ste, StringBuilder text, String source, String tag) {
+        // Generate ordered list of source tags.
+        List<String> tags = new ArrayList<String>();
+        StaticUtils.buildTagList(source, ste.getProtectedParts(), tags);
+
+        // Insert missing tag.
+        int index = tags.indexOf(tag);
+        if (index > 0) {
+            // Insert after a preceding tag.
+            String preceding = tags.get(index - 1);
+            text.insert(text.indexOf(preceding) + preceding.length(), tag);
+        } else if (tags.size() > 1) {
+            // Insert before a proceeding tag.
+            String proceeding = tags.get(index + 1);
+            text.insert(text.indexOf(proceeding), tag);
+        } else {
+            // Nothing before or after; append to end.
+            text.append(tag);
+        }
+    }
+
+    private static void fixExtraneous(StringBuilder text, String tag) {
+        int i = 0;
+        while ((i = text.indexOf(tag, i)) != -1) {
+            text.delete(i, i + tag.length());
+        }
     }
 }

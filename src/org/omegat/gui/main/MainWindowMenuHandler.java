@@ -67,6 +67,7 @@ import org.omegat.gui.help.HelpFrame;
 import org.omegat.gui.search.SearchWindowController;
 import org.omegat.gui.segmentation.SegmentationCustomizer;
 import org.omegat.gui.stat.StatisticsWindow;
+import org.omegat.gui.tagvalidation.ErrorReport;
 import org.omegat.util.FileUtil;
 import org.omegat.util.Language;
 import org.omegat.util.Log;
@@ -156,7 +157,7 @@ public class MainWindowMenuHandler {
      */
     public void projectCompileMenuItemActionPerformed() {
         if (Preferences.isPreference(Preferences.TAGS_VALID_REQUIRED)) {
-            List<SourceTextEntry> stes = Core.getTagValidation().listInvalidTags();
+            List<ErrorReport> stes = Core.getTagValidation().listInvalidTags();
             if (stes != null) {
                 Core.getTagValidation().displayTagValidationErrors(stes, OStrings.getString("TF_MESSAGE_COMPILE"));
                 return;

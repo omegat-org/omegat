@@ -10,7 +10,7 @@
                2009 Didier Briel
                2011 Alex Buloichik, Martin Fleurke, Didier Briel
                2012 Guido Leenders, Didier Briel
-               2013 Zoltan Bartko, Alex Buloichik
+               2013 Zoltan Bartko, Alex Buloichik, Aaron Madlon-Kay
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -104,6 +104,7 @@ import com.vlsolutions.swing.docking.event.DockableSelectionListener;
  * @author Didier Briel
  * @author Martin Fleurke
  * @author Guido Leenders
+ * @Author Aaron Madlon-Kay
  */
 public class EditorController implements IEditor {
 
@@ -1221,6 +1222,31 @@ public class EditorController implements IEditor {
         }
         activateEntry();
         this.editor.setCursor(oldCursor);
+    }
+
+    public void gotoEntryAfterFix(final int entryNum, final String fixedSource) {
+        UIThreadsUtil.mustBeSwingThread();
+
+        // Don't commit the current translation text if we fixed this entry
+        // or one of its duplicates (the fixed version will be clobbered).
+        if (entryNum == getCurrentEntryNumber() || getCurrentEntry().getSrcText().equals(fixedSource)) {
+            deactivateWithoutCommit();
+        }
+        gotoFile(displayedFileIndex);
+        gotoEntry(entryNum);
+    }
+
+    public void refreshViewAfterFix(List<Integer> fixedEntries) {
+        UIThreadsUtil.mustBeSwingThread();
+
+        // Don't commit the current translation text if we fixed this entry
+        // or one of its duplicates (the fixed version will be clobbered).
+        if (fixedEntries != null && fixedEntries.contains(getCurrentEntryNumber())) {
+            deactivateWithoutCommit();
+        }
+        int currentEntry = getCurrentEntryNumber();
+        gotoFile(displayedFileIndex);
+        gotoEntry(currentEntry);
     }
 
     /**

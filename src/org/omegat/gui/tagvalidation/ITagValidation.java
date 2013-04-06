@@ -40,7 +40,7 @@ public interface ITagValidation {
      * @return list of entries with invalid tags, or null if all entries are
      *         valid
      */
-    List<SourceTextEntry> listInvalidTags();
+    List<ErrorReport> listInvalidTags();
 
     /**
      * Checks invalid tags for one entry.
@@ -57,5 +57,5 @@ public interface ITagValidation {
      * @param invalidTagsEntries
      *            list of invalid tags entries(from listInvalidTags() method)
      */
-    void displayTagValidationErrors(List<SourceTextEntry> invalidTagsEntries, String message);
+    void displayTagValidationErrors(List<ErrorReport> invalidTagsEntries, String message);
 }

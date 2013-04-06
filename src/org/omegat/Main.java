@@ -53,6 +53,7 @@ import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.data.TMXEntry;
 import org.omegat.filters2.master.PluginUtils;
 import org.omegat.gui.main.ProjectUICommands;
+import org.omegat.gui.tagvalidation.ErrorReport;
 import org.omegat.util.Log;
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
@@ -295,7 +296,7 @@ public class Main {
 
         if ("abort".equalsIgnoreCase(tagValidation)) {
             System.out.println(OStrings.getString("CONSOLE_VALIDATING_TAGS"));
-            List<SourceTextEntry> stes = Core.getTagValidation().listInvalidTags();
+            List<ErrorReport> stes = Core.getTagValidation().listInvalidTags();
             if (stes != null) {
                 Core.getTagValidation().displayTagValidationErrors(stes, null);
                 System.out.println(OStrings.getString("CONSOLE_TAGVALIDATION_FAIL"));
@@ -304,7 +305,7 @@ public class Main {
             }
         } else if ("warn".equalsIgnoreCase(tagValidation)) {
             System.out.println(OStrings.getString("CONSOLE_VALIDATING_TAGS"));
-            List<SourceTextEntry> stes = Core.getTagValidation().listInvalidTags();
+            List<ErrorReport> stes = Core.getTagValidation().listInvalidTags();
             if (stes != null) {
                 Core.getTagValidation().displayTagValidationErrors(stes, null);
                 System.out.println(OStrings.getString("CONSOLE_TAGVALIDATION_FAIL"));

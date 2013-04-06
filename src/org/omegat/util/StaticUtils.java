@@ -939,6 +939,7 @@ public class StaticUtils {
                 out.close();
             }
         }
+        jar.close();
     }
 
     /**
@@ -966,6 +967,47 @@ public class StaticUtils {
             result[i] = c;
         }
         return new String(result);
+    }
+
+    /**
+     * Reconstruct a tag from its {@link TagInfo}.
+     * 
+     * @param info
+     *            Description of tag
+     * @return Reconstructed original tag
+     */
+    public static String getOriginalTag(TagInfo info) {
+        switch (info.type) {
+        case START:
+            return String.format("<%s>", info.name);
+        case END:
+            return String.format("</%s>", info.name);
+        case SINGLE:
+            return String.format("<%s/>", info.name);
+        }
+        return null;
+    }
+
+    /**
+     * Sort tags by order of their appearance in a reference string.
+     */
+    public static class TagComparator implements Comparator<String> {
+
+        private final String source;
+
+        public TagComparator(String source) {
+            super();
+            this.source = source;
+        }
+
+        public int compare(String tag1, String tag2) {
+            int index1 = source.indexOf(tag1);
+            int index2 = source.indexOf(tag2);
+            if (index1 == index2) {
+                return 0;
+            }
+            return index1 > index2 ? 1 : -1;
+        }
     }
 
 } // StaticUtils

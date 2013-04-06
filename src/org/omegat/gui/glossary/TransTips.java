@@ -28,8 +28,6 @@ package org.omegat.gui.glossary;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.text.JTextComponent;
-
 import org.omegat.util.Preferences;
 
 /**
@@ -41,9 +39,6 @@ import org.omegat.util.Preferences;
  * @author Didier Briel
  */
 public class TransTips {
-    // The current textComponent on which the lines should be drawn
-    protected JTextComponent comp;
-
     // List containing the characters that may be found at the end of a word,
     // that
     // might result in the word not being underlined

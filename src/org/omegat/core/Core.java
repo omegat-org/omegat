@@ -49,6 +49,7 @@ import org.omegat.gui.editor.mark.WhitespaceMarkerFactory;
 import org.omegat.gui.exttrans.MachineTranslateTextArea;
 import org.omegat.gui.glossary.GlossaryManager;
 import org.omegat.gui.glossary.GlossaryTextArea;
+import org.omegat.gui.glossary.TransTipsMarker;
 import org.omegat.gui.main.ConsoleWindow;
 import org.omegat.gui.main.IMainWindow;
 import org.omegat.gui.main.MainWindow;
@@ -181,6 +182,7 @@ public class Core {
         Core.registerMarker(new ProtectedPartsMarker());
         Core.registerMarker(new RemoveTagMarker());
         Core.registerMarker(new NBSPMarker());
+        Core.registerMarker(new TransTipsMarker());
         Core.registerMarker(new WhitespaceMarkerFactory.SpaceMarker());
         Core.registerMarker(new WhitespaceMarkerFactory.TabMarker());
         Core.registerMarker(new WhitespaceMarkerFactory.LFMarker());

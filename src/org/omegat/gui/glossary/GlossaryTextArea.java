@@ -51,7 +51,6 @@ import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.data.StringEntry;
 import org.omegat.gui.common.EntryInfoThreadPane;
 import org.omegat.gui.dialogs.CreateGlossaryEntry;
-import org.omegat.gui.editor.mark.Mark;
 import org.omegat.gui.main.DockableScrollPane;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
@@ -161,14 +160,13 @@ public class GlossaryTextArea extends EntryInfoThreadPane<List<GlossaryEntry>> {
             return;
         }
 
+        nowEntries = entries;
+
         // If the TransTips is enabled then underline all the matched glossary
         // entries
         if (Preferences.isPreference(Preferences.TRANSTIPS)) {
-            // TODO move marks construction into search thread
-            highlightTransTips(en, entries);
+            Core.getEditor().remarkOneMarker(TransTipsMarker.class.getName());
         }
-
-        nowEntries = entries;
 
         StringBuffer buf = new StringBuffer();
         for (GlossaryEntry entry : entries) {
@@ -185,27 +183,8 @@ public class GlossaryTextArea extends EntryInfoThreadPane<List<GlossaryEntry>> {
         setText("");
     }
 
-    /** {@inheritDoc} */
-    public void highlightTransTips(SourceTextEntry en, List<GlossaryEntry> entries) {
-        if (!entries.isEmpty()) {
-            final List<Mark> marks = new ArrayList<Mark>();
-            // Get the index of the current segment in the whole document
-            String sourceText = en.getSrcText();
-            sourceText = sourceText.toLowerCase();
-
-            TransTips.Search callback = new TransTips.Search() {
-                public void found(GlossaryEntry ge, int start, int end) {
-                    Mark m = new Mark(Mark.ENTRY_PART.SOURCE, start, end);
-                    m.painter = TransTipsMarker.transTipsUnderliner;
-                    marks.add(m);
-                }
-            };
-
-            for (GlossaryEntry ent : entries) {
-                TransTips.search(en.getSrcText(), ent, callback);
-            }
-            Core.getEditor().markActiveEntrySource(en, marks, TransTipsMarker.class.getName());
-        }
+    List<GlossaryEntry> getDisplayedEntries() {
+        return nowEntries;
     }
 
     /**

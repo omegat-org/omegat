@@ -25,25 +25,63 @@
 package org.omegat.gui.glossary;
 
 import java.awt.Color;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.text.Highlighter.HighlightPainter;
 
+import org.omegat.core.Core;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.gui.editor.UnderlineFactory;
 import org.omegat.gui.editor.mark.IMarker;
 import org.omegat.gui.editor.mark.Mark;
+import org.omegat.util.Preferences;
 
 /**
- * Stub for marker, for be able to add marks.
+ * Marker for TransTips.
  * 
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
 public class TransTipsMarker implements IMarker {
     protected static final HighlightPainter transTipsUnderliner = new UnderlineFactory.SolidBoldUnderliner(Color.blue);
+    protected SourceTextEntry cachedSte;
+    protected List<Mark> cachedMarks;
 
     @Override
     public List<Mark> getMarksForEntry(SourceTextEntry ste, String sourceText, String translationText, boolean isActive) {
-        return null;
+        if (!isActive) {
+            return null;
+        }
+        if (!Preferences.isPreference(Preferences.TRANSTIPS)) {
+            return null;
+        }
+        List<GlossaryEntry> glossaryEntries = Core.getGlossary().getDisplayedEntries();
+        if (glossaryEntries == null || glossaryEntries.isEmpty()) {
+            cachedSte = null;
+            cachedMarks = null;
+            return null;
+        }
+        if (cachedSte == ste) {
+            return cachedMarks;
+        }
+
+        final List<Mark> marks = new ArrayList<Mark>();
+        // Get the index of the current segment in the whole document
+        sourceText = sourceText.toLowerCase();
+
+        TransTips.Search callback = new TransTips.Search() {
+            public void found(GlossaryEntry ge, int start, int end) {
+                Mark m = new Mark(Mark.ENTRY_PART.SOURCE, start, end);
+                m.painter = TransTipsMarker.transTipsUnderliner;
+                marks.add(m);
+            }
+        };
+
+        for (GlossaryEntry ent : glossaryEntries) {
+            TransTips.search(sourceText, ent, callback);
+        }
+        cachedSte = ste;
+        cachedMarks = marks;
+        return marks;
     }
 }

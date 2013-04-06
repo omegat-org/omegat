@@ -139,10 +139,12 @@ public class EditorTextArea3 extends JEditorPane {
     protected MouseListener mouseListener = new MouseAdapter() {
         @Override
         public void mouseClicked(MouseEvent e) {
+            // where is the mouse
+            int mousepos = viewToModel(e.getPoint());
             if (e.getButton() == MouseEvent.BUTTON1 && e.getClickCount() == 2) {
                 boolean changed = controller.goToSegmentAtLocation(getCaretPosition());
                 if (!changed) {
-                    if (selectTag(getCaretPosition())) {
+                    if (selectTag(mousepos)) {
                         e.consume();
                     }
                 }
@@ -157,8 +159,6 @@ public class EditorTextArea3 extends JEditorPane {
                     cons = popupConstructors.toArray(new PopupMenuConstructorInfo[popupConstructors.size()]);
                 }
 
-                // where is the mouse
-                int mousepos = viewToModel(e.getPoint());
                 boolean isInActiveTranslation = mousepos >= getOmDocument().getTranslationStart()
                         && mousepos <= getOmDocument().getTranslationEnd();
                 boolean isInActiveEntry;

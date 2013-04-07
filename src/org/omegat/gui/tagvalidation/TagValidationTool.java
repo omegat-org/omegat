@@ -183,7 +183,7 @@ public class TagValidationTool implements ITagValidation, IProjectEventListener 
     public synchronized List<ErrorReport> listInvalidTags() {
         initCheck();
 
-        List<ErrorReport> suspects = new ArrayList<>(16);
+        List<ErrorReport> suspects = new ArrayList<ErrorReport>(16);
         for (FileInfo fi : Core.getProject().getProjectFiles()) {
             for (SourceTextEntry ste : fi.entries) {
                 ErrorReport err = checkEntry(fi, ste);

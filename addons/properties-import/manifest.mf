@@ -1,3 +1,0 @@
-Manifest-Version: 1.0
-Class-Path: lib/lib-mnemonics.jar
-Main-Class: org.omegat.tools.align.bundles.ImportBundles

@@ -62,9 +62,6 @@
         <delete file="log.txt"/>
         <delete file="manifest.mf"/>
         <delete dir="dist2"/>
-        <ant antfile="addons/nbedge-filter/build.xml" target="clean" inheritall="false" />
-        <ant antfile="addons/properties-import/build.xml" target="clean" inheritall="false" />
-        <ant antfile="addons/sentseg-tmx/build.xml" target="clean" inheritall="false" />
     </target>
     
     <target name="-post-jar">
@@ -140,7 +137,7 @@
     <target name="src" depends="init" description="Build source distribution">
         <mkdir dir="dist2"/>
         <zip destfile="dist2/OmegaT_${distversion}${beta}_Source.zip" basedir="." 
-                includes="addons/** docs/** images/** lib/** nbproject/** lib-mnemonics/** release/** src/** test/** gen/** manifest-template.mf build.xml native/** doc_src/** docs_devel/**"
+                includes="docs/** images/** lib/** nbproject/** lib-mnemonics/** release/** src/** test/** gen/** manifest-template.mf build.xml native/** doc_src/** docs_devel/**"
                 excludes="**/nbproject/private/** **/build/** **/dist/**" />
     </target>
 
@@ -305,16 +302,6 @@ Custom strings from release\win32-specific must be added manually to the languag
         <ant dir="release/WebStart-specific" antfile="build.xml"/>
     </target>
 
-    <!-- Builds and copies to dist2 all addons -->
-    <target name="addons">
-        <ant antfile="addons/properties-import/build.xml" target="dist" inheritall="false"/>
-        <copy file="addons/properties-import/import_properties_1.3.zip" todir="dist2"/>
-        <ant antfile="addons/sentseg-tmx/build.xml" target="dist" inheritall="false"/>
-	<copy file="addons/sentseg-tmx/sentseg_tmx_1.1.zip" todir="dist2"/>
-	<!--
-        <ant antfile="addons/nbedge-filter/build.xml" target="jar" inheritall="false"/>
-	-->
-    </target>
         
     <!-- Builds all OmegaT products -->
     <target name="all" depends="l10n-pack,src,jar,zip,win,linux,mac" />

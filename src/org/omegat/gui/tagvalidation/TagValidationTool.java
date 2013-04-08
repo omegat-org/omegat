@@ -632,14 +632,14 @@ public class TagValidationTool implements ITagValidation, IProjectEventListener 
 
         // Insert missing tag.
         int index = tags.indexOf(tag);
-        if (index > 0) {
+        String prev = index > 0 ? tags.get(index - 1) : null;
+        String next = index + 1 < tags.size() ? tags.get(index + 1) : null;
+        if (prev != null && text.indexOf(prev) > -1) {
             // Insert after a preceding tag.
-            String preceding = tags.get(index - 1);
-            text.insert(text.indexOf(preceding) + preceding.length(), tag);
-        } else if (tags.size() > 1) {
+            text.insert(text.indexOf(prev) + prev.length(), tag);
+        } else if (next != null && text.indexOf(next) > -1) {
             // Insert before a proceeding tag.
-            String proceeding = tags.get(index + 1);
-            text.insert(text.indexOf(proceeding), tag);
+            text.insert(text.indexOf(next), tag);
         } else {
             // Nothing before or after; append to end.
             text.append(tag);

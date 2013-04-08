@@ -5,7 +5,8 @@
  OmegaT - Java based Computer Assisted Translation (CAT) tool
  Copyright (C) 2000-2007 Keith Godfrey and Maxym Mykhalchuk
                2008-2010 Didier Briel, Alex Buloichik
-               2012-2013 Didier Briel
+               2012 Didier Briel
+               2013 Didier Briel, Aaron Madlon-Kay
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -324,48 +325,53 @@ Custom strings from release\win32-specific must be added manually to the languag
     </target>
 
 
-	<target name="gen">
-		<taskdef name="xjc" classname="com.sun.tools.xjc.XJCTask">
-			<classpath>
-				<fileset dir="lib" includes="**/*.jar" />
-				<fileset dir="gen/lib" includes="**/*.jar" />
-			</classpath>
-		</taskdef>
+    <target name="gen">
+        <exec executable="xjc">
+            <arg line="-d src"/>
+            <arg line="-p gen.core.segmentation"/>
+            <arg value="src/schemas/srx20.xsd"/>
+        </exec>
+        <exec executable="xjc">
+            <arg line="-d src"/>
+            <arg line="-p gen.core.filters"/>
+            <arg value="src/schemas/filters.xsd"/>
+        </exec>
+        <exec executable="xjc">
+            <arg line="-d src"/>
+            <arg line="-p gen.core.tbx"/>
+            <arg value="src/schemas/tbx.xsd"/>
+        </exec>
+        <exec executable="xjc">
+            <arg line="-d src"/>
+            <arg line="-p gen.core.project"/>
+            <arg value="src/schemas/project_properties.xsd"/>
+        </exec>
+        <exec executable="xjc">
+            <arg line="-d src"/>
+            <arg line="-p gen.core.tmx14"/>
+            <arg line="-b src/schemas/tmx14.xjb"/>
+            <arg value="src/schemas/tmx14.xsd"/>
+        </exec>
+    </target>
 
-		<xjc schema="src/schemas/srx20.xsd" destdir="src" package="gen.core.segmentation" />
-		<xjc schema="src/schemas/filters.xsd" destdir="src" package="gen.core.filters" />	
-		<xjc schema="src/schemas/tbx.xsd" destdir="src" package="gen.core.tbx" />	
-		<xjc schema="src/schemas/project_properties.xsd" destdir="src" package="gen.core.project" />	
-		<!--
-		<xjc schema="src/schemas/tmx11.dtd" destdir="src" package="gen.core.tmx11"> 	
-      <arg value="-dtd" />
-    </xjc>
-    -->
-    <!--
-    do not forget to change xml:lang:
-    @XmlAttribute(name = "lang", namespace="http://www.w3.org/XML/1998/namespace", required = true)
-		-->
-		<xjc schema="src/schemas/tmx14.xsd" binding="src/schemas/tmx14.xjb" destdir="src" package="gen.core.tmx14" /> 	
-	</target>
+    <target name="docindexgen" depends="jar">
+        <mkdir dir="build/genclasses" />
+        <javac srcdir="gen/src" destdir="build/genclasses">
+            <classpath>
+                <fileset dir="lib" includes="**/*.jar" />
+                <pathelement path="build/classes" />
+            </classpath>
+        </javac>
+        <copy todir="build/genclasses">
+            <fileset dir="gen/src" excludes="**/*.java"/>
+        </copy>
 
-	<target name="docindexgen" depends="jar">
-		<mkdir dir="build/genclasses" />
-		<javac srcdir="gen/src" destdir="build/genclasses">
-			<classpath>
-				<fileset dir="lib" includes="**/*.jar" />
-				<pathelement path="build/classes" />
-			</classpath>
-		</javac>
-		<copy todir="build/genclasses">
-			<fileset dir="gen/src" excludes="**/*.java"/>
-		</copy>
-
-		<java classname="util.CreateDocIndexUtil">
-			<classpath>
-				<pathelement path="build/genclasses" />
-				<pathelement path="build/classes" />
-			</classpath>
-		</java>
-	</target>
-	
+        <java classname="util.CreateDocIndexUtil">
+            <classpath>
+                <pathelement path="build/genclasses" />
+                <pathelement path="build/classes" />
+            </classpath>
+        </java>
+    </target>
+    
 </project>

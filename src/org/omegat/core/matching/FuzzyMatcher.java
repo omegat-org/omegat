@@ -26,6 +26,7 @@
 package org.omegat.core.matching;
 
 import org.omegat.core.data.StringData;
+import org.omegat.tokenizer.DefaultTokenizer;
 import org.omegat.util.Token;
 
 /**
@@ -49,10 +50,10 @@ public class FuzzyMatcher {
             Token righttoken = null;
             if (i + 1 < len)
                 righttoken = matchTokens[i + 1];
-            boolean rightfound = (i + 1 == len) || Tokenizer.isContains(sourceTokens, righttoken);
+            boolean rightfound = (i + 1 == len) || DefaultTokenizer.isContains(sourceTokens, righttoken);
 
             Token token = matchTokens[i];
-            boolean found = Tokenizer.isContains(sourceTokens, token);
+            boolean found = DefaultTokenizer.isContains(sourceTokens, token);
 
             if (found && (!leftfound || !rightfound))
                 result[i] = StringData.PAIR;

@@ -30,9 +30,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import org.omegat.core.matching.ITokenizer;
 import org.omegat.core.statistics.StatisticsInfo;
 import org.omegat.core.team.IRemoteRepository;
+import org.omegat.tokenizer.ITokenizer;
 import org.omegat.util.Language;
 
 /**

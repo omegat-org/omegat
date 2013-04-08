@@ -57,8 +57,6 @@ import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
 import org.omegat.core.KnownException;
 import org.omegat.core.events.IProjectEventListener;
-import org.omegat.core.matching.ITokenizer;
-import org.omegat.core.matching.Tokenizer;
 import org.omegat.core.segmentation.Segmenter;
 import org.omegat.core.statistics.CalcStandardStatistics;
 import org.omegat.core.statistics.Statistics;
@@ -72,9 +70,10 @@ import org.omegat.filters2.IFilter;
 import org.omegat.filters2.Shortcuts;
 import org.omegat.filters2.TranslationException;
 import org.omegat.filters2.master.FilterMaster;
-import org.omegat.filters2.master.PluginUtils;
 import org.omegat.gui.glossary.GlossaryEntry;
 import org.omegat.gui.glossary.GlossaryReaderTSV;
+import org.omegat.tokenizer.DefaultTokenizer;
+import org.omegat.tokenizer.ITokenizer;
 import org.omegat.util.DirectoryMonitor;
 import org.omegat.util.FileUtil;
 import org.omegat.util.Language;
@@ -182,8 +181,10 @@ public class RealProject implements IProject {
         m_config = props;
         this.repository = repository;
 
-        sourceTokenizer = createTokenizer(true);
-        targetTokenizer = createTokenizer(false);
+        sourceTokenizer = createTokenizer(Core.getParams().get(ITokenizer.CLI_PARAM_SOURCE), props.getSourceTokenizer());
+        Log.log("Source tokenizer: " + sourceTokenizer.getClass().getName());
+        targetTokenizer = createTokenizer(Core.getParams().get(ITokenizer.CLI_PARAM_TARGET), props.getTargetTokenizer());
+        Log.log("Target tokenizer: " + targetTokenizer.getClass().getName());
     }
     
     public IRemoteRepository getRepository() {
@@ -1302,45 +1303,33 @@ public class RealProject implements IProject {
     }
 
     /**
-     * Create tokenizer by class specified in command line, or by default class.
+     * Create tokenizer class. Classes are prioritized:
+     * <ol><li>Class specified on command line via <code>--ITokenizer</code>
+     * and <code>--ITokenizerTarget</code></li>
+     * <li>Class specified in project settings</li>
+     * <li>{@link DefaultTokenizer}</li>
+     * </ol>
      * 
-     * @param forSource
-     *            true if tokenizer for source language
-     * @return tokenizer implementation
+     * @param cmdLine Tokenizer class specified on command line
+     * @return Tokenizer implementation
      */
-    protected ITokenizer createTokenizer(final boolean forSource) {
-        String className;
-        if (forSource) {
-            className = Core.getParams().get("ITokenizer");
-        } else {
-            className = Core.getParams().get("ITokenizerTarget");
+    protected ITokenizer createTokenizer(String cmdLine, Class<?> projectPref) {
+        if (cmdLine != null && cmdLine.length() > 0) {
+            try {
+                return (ITokenizer) this.getClass().getClassLoader().loadClass(cmdLine).newInstance();
+            } catch (ClassNotFoundException e) {
+                Log.log(e.toString());
+            } catch (Throwable e) {
+                throw new RuntimeException(e);
+            }
         }
-        ITokenizer t = null;
         try {
-            if (className != null) {
-                for (Class<?> c : PluginUtils.getTokenizerClasses()) {
-                    if (c.getName().equals(className)) {
-                        t = (ITokenizer) c.newInstance();
-                        break;
-                    }
-                }
-            }
-        } catch (Exception ex) {
-            Log.log(ex);
+            return (ITokenizer) projectPref.newInstance();
+        } catch (Throwable e) {
+            Log.log(e.getMessage());
         }
-        if (t == null) {
-            if (forSource) {
-                t = new Tokenizer();
-            } else {
-                t = sourceTokenizer;
-            }
-        }
-        if (forSource) {
-            Log.log("Source tokenizer: " + t.getClass().getName());
-        } else {
-            Log.log("Target tokenizer: " + t.getClass().getName());
-        }
-        return t;
+        
+        return new DefaultTokenizer();
     }
 
     /**

@@ -22,5 +22,10 @@
 	<classpathentry kind="lib" path="lib/diff.jar"/>
 	<classpathentry kind="lib" path="lib/JSAP-2.1.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.6"/>
+	<classpathentry kind="lib" path="lib/lucene-analyzers-3.6.2.jar"/>
+	<classpathentry kind="lib" path="lib/lucene-core-3.6.2.jar"/>
+	<classpathentry kind="lib" path="lib/lucene-kuromoji-3.6.2.jar"/>
+	<classpathentry kind="lib" path="lib/lucene-smartcn-3.6.2.jar"/>
+	<classpathentry kind="lib" path="lib/tinysegmenter.jar"/>
 	<classpathentry kind="output" path="classes"/>
 </classpath>

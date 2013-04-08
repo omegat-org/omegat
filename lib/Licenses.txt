@@ -66,3 +66,11 @@ JSAP-2.1.jar is distributed under the GNU Lesser General Public License version
 Sources are available in OmegaT sources, in the directory lib/sources
 
 orion-ssh2-214.jar is distributed under the Orion SSH for Java license
+
+lucene-*.jar are distributed under the Apache License 2.0
+
+The English tokenizers (org.omegat.tokenizer.SnowballEnglishTokenizer and
+org.omegat.tokenizer.LuceneEnglishTokenizer) use stop words from Okapi
+(http://okapi.sourceforge.net) under the LGPL license.
+
+tinysegmenter.jar is distributed under the Modified BSD license

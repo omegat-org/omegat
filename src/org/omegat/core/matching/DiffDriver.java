@@ -29,6 +29,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import org.omegat.core.Core;
+import org.omegat.tokenizer.ITokenizer;
 import org.omegat.util.Token;
 
 import bmsi.util.Diff;

@@ -41,7 +41,7 @@ import org.omegat.core.data.ExternalTMX;
 import org.omegat.core.data.IProject;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.data.TMXEntry;
-import org.omegat.core.matching.Tokenizer;
+import org.omegat.tokenizer.DefaultTokenizer;
 import org.omegat.util.Log;
 import org.omegat.util.OConsts;
 import org.omegat.util.PatternConsts;
@@ -151,7 +151,7 @@ public class Statistics {
         if (len == 0)
             return 0;
         int nTokens = 0;
-        BreakIterator breaker = Tokenizer.getWordBreaker();
+        BreakIterator breaker = DefaultTokenizer.getWordBreaker();
         breaker.setText(str);
 
         String tokenStr = new String();

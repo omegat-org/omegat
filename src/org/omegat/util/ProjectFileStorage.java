@@ -7,6 +7,7 @@
                2008 Didier Briel, Alex Buloichik
                2009 Didier Briel
                2012 Didier Briel, Aaron Madlon-Kay
+               2013 Aaron Madlon-Kay
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -40,6 +41,7 @@ import javax.xml.bind.Marshaller;
 import org.omegat.core.data.ProjectProperties;
 import org.omegat.core.segmentation.SRX;
 import org.omegat.filters2.TranslationException;
+import org.omegat.filters2.master.PluginUtils;
 
 /**
  * Class that reads and saves project definition file.
@@ -118,6 +120,9 @@ public class ProjectFileStorage {
         result.setSourceLanguage(om.getProject().getSourceLang());
         result.setTargetLanguage(om.getProject().getTargetLang());
 
+        result.setSourceTokenizer(loadTokenizer(om.getProject().getSourceTok(), result.getSourceLanguage()));
+        result.setTargetTokenizer(loadTokenizer(om.getProject().getTargetTok(), result.getTargetLanguage()));
+        
         if (om.getProject().isSentenceSeg() != null) {
             result.setSentenceSegmentingEnabled(om.getProject().isSentenceSeg());
         }
@@ -180,6 +185,8 @@ public class ProjectFileStorage {
                 computeRelativePath(m_root, props.getDictRoot(), OConsts.DEFAULT_DICT));
         om.getProject().setSourceLang(props.getSourceLanguage().toString());
         om.getProject().setTargetLang(props.getTargetLanguage().toString());
+        om.getProject().setSourceTok(props.getSourceTokenizer().getCanonicalName());
+        om.getProject().setTargetTok(props.getTargetTokenizer().getCanonicalName());
         om.getProject().setSentenceSeg(props.isSentenceSegmentingEnabled());
         om.getProject().setSupportDefaultTranslations(props.isSupportDefaultTranslations());
         om.getProject().setRemoveTags(props.isRemoveTags());
@@ -276,5 +283,22 @@ public class ProjectFileStorage {
         } catch (IOException e) {
             return absolutePath.replace(File.separatorChar, '/');
         }
+    }
+    
+    /**
+     * Load a tokenizer class from its canonical name.
+     * @param className Name of tokenizer class
+     * @return Class object of specified tokenizer, or of fallback tokenizer
+     * if the specified one could not be loaded for whatever reason.
+     */
+    private static Class<?> loadTokenizer(String className, Language fallback) {
+        if (className != null && className.length() > 0) {
+            try {
+                return ProjectFileStorage.class.getClassLoader().loadClass(className);
+            } catch (ClassNotFoundException e) {
+                Log.log(e.toString());
+            }
+        }
+        return PluginUtils.getTokenizerClassForLanguage(fallback);
     }
 }

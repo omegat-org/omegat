@@ -7,6 +7,7 @@
                2008-2009 Alex Buloichik
                2011 Martin Fleurke
                2012 Didier Briel, Aaron Madlon-Kay
+               2013 Aaron Madlon-Kay
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -39,12 +40,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.io.File;
+import java.util.Collections;
 
 import javax.swing.AbstractAction;
 import javax.swing.Action;
 import javax.swing.BorderFactory;
 import javax.swing.Box;
-import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
@@ -67,8 +68,10 @@ import org.omegat.core.data.CommandVarExpansion;
 import org.omegat.core.data.ProjectProperties;
 import org.omegat.core.segmentation.SRX;
 import org.omegat.filters2.master.FilterMaster;
+import org.omegat.filters2.master.PluginUtils;
 import org.omegat.gui.filters2.FiltersCustomizer;
 import org.omegat.gui.segmentation.SegmentationCustomizer;
+import org.omegat.tokenizer.ITokenizer;
 import org.omegat.util.Language;
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
@@ -77,6 +80,7 @@ import org.omegat.util.StaticUtils;
 import org.omegat.util.StringUtil;
 import org.omegat.util.gui.LanguageComboBoxRenderer;
 import org.omegat.util.gui.OmegaTFileChooser;
+import org.omegat.util.gui.TokenizerComboBoxRenderer;
 import org.openide.awt.Mnemonics;
 
 /**
@@ -166,41 +170,122 @@ public class ProjectPropertiesDialog extends JDialog {
         bMes.add(Box.createHorizontalGlue());
         centerBox.add(bMes);
 
-        // source and target languages
-        Box localesBox = Box.createVerticalBox();
+        // Source and target languages and tokenizers
+        Box localesBox = Box.createHorizontalBox();
         localesBox.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), OStrings.getString("PP_LANGUAGES") ));
 
+        // Languages box
+        Box bL = Box.createVerticalBox();
+        localesBox.add(bL);
+
+        // Source language label
         JLabel m_sourceLocaleLabel = new JLabel();
         Mnemonics.setLocalizedText(m_sourceLocaleLabel, OStrings.getString("PP_SRC_LANG"));
         Box bSL = Box.createHorizontalBox();
         bSL.setBorder(emptyBorder);
         bSL.add(m_sourceLocaleLabel);
         bSL.add(Box.createHorizontalGlue());
-        localesBox.add(bSL);
+        bL.add(bSL);
 
+        // Source language field
         final JComboBox m_sourceLocaleField = new JComboBox(Language.LANGUAGES);
         if (m_sourceLocaleField.getMaximumRowCount() < 20)
             m_sourceLocaleField.setMaximumRowCount(20);
         m_sourceLocaleField.setEditable(true);
         m_sourceLocaleField.setRenderer(new LanguageComboBoxRenderer());
         m_sourceLocaleField.setSelectedItem(projectProperties.getSourceLanguage());
-        localesBox.add(m_sourceLocaleField);
+        bL.add(m_sourceLocaleField);
 
+        // Target language label
         JLabel m_targetLocaleLabel = new JLabel();
         Mnemonics.setLocalizedText(m_targetLocaleLabel, OStrings.getString("PP_LOC_LANG"));
         Box bLL = Box.createHorizontalBox();
         bLL.setBorder(emptyBorder);
         bLL.add(m_targetLocaleLabel);
         bLL.add(Box.createHorizontalGlue());
-        localesBox.add(bLL);
+        bL.add(bLL);
 
+        // Target language field
         final JComboBox m_targetLocaleField = new JComboBox(Language.LANGUAGES);
         if (m_targetLocaleField.getMaximumRowCount() < 20)
             m_targetLocaleField.setMaximumRowCount(20);
         m_targetLocaleField.setEditable(true);
         m_targetLocaleField.setRenderer(new LanguageComboBoxRenderer());
         m_targetLocaleField.setSelectedItem(projectProperties.getTargetLanguage());
-        localesBox.add(m_targetLocaleField);
+        bL.add(m_targetLocaleField);
+
+        // Tokenizers box
+        Box bT = Box.createVerticalBox();
+        localesBox.add(bT);
+        Object[] tokenizers = PluginUtils.getTokenizerClasses().toArray();
+
+        // Source tokenizer label
+        JLabel m_sourceTokenizerLabel = new JLabel();
+        Mnemonics.setLocalizedText(m_sourceTokenizerLabel, OStrings.getString("PP_SRC_TOK"));
+        Box bST = Box.createHorizontalBox();
+        bST.setBorder(emptyBorder);
+        bST.add(m_sourceTokenizerLabel);
+        bST.add(Box.createHorizontalGlue());
+        bT.add(bST);
+
+        // Source tokenizer field
+        final JComboBox m_sourceTokenizerField = new JComboBox(tokenizers);
+        if (m_sourceTokenizerField.getMaximumRowCount() < 20)
+            m_sourceTokenizerField.setMaximumRowCount(20);
+        m_sourceTokenizerField.setEditable(false);
+        m_sourceTokenizerField.setRenderer(new TokenizerComboBoxRenderer());
+        m_sourceTokenizerField.setSelectedItem(projectProperties.getSourceTokenizer());
+        bT.add(m_sourceTokenizerField);
+
+        String cliTokSrc = Core.getParams().get(ITokenizer.CLI_PARAM_SOURCE);
+        if (cliTokSrc != null) {
+            m_sourceTokenizerField.setEnabled(false);
+            m_sourceTokenizerField.addItem(cliTokSrc);
+            m_sourceTokenizerField.setSelectedItem(cliTokSrc);
+        }
+
+        m_sourceLocaleField.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (!m_sourceLocaleField.isEnabled()) return;
+                Language newLang = (Language) m_sourceLocaleField.getSelectedItem();
+                Class<?> newTok = PluginUtils.getTokenizerClassForLanguage(newLang);
+                m_sourceTokenizerField.setSelectedItem(newTok);
+            }});
+
+        // Target tokenizer label
+        JLabel m_targetTokenizerLabel = new JLabel();
+        Mnemonics.setLocalizedText(m_targetTokenizerLabel, OStrings.getString("PP_LOC_TOK"));
+        Box bTT = Box.createHorizontalBox();
+        bTT.setBorder(emptyBorder);
+        bTT.add(m_targetTokenizerLabel);
+        bTT.add(Box.createHorizontalGlue());
+        bT.add(bTT);
+
+        // Target tokenizer field
+        final JComboBox m_targetTokenizerField = new JComboBox(tokenizers);
+        if (m_targetTokenizerField.getMaximumRowCount() < 20)
+            m_targetTokenizerField.setMaximumRowCount(20);
+        m_targetTokenizerField.setEditable(false);
+        m_targetTokenizerField.setRenderer(new TokenizerComboBoxRenderer());
+        m_targetTokenizerField.setSelectedItem(projectProperties.getTargetTokenizer());
+        bT.add(m_targetTokenizerField);
+
+        String cliTokTrg = Core.getParams().get(ITokenizer.CLI_PARAM_TARGET);
+        if (cliTokTrg != null) {
+            m_targetTokenizerField.setEnabled(false);
+            m_targetTokenizerField.addItem(cliTokTrg);
+            m_targetTokenizerField.setSelectedItem(cliTokTrg);
+        }
+
+        m_targetLocaleField.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (!m_targetLocaleField.isEnabled()) return;
+                Language newLang = (Language) m_targetLocaleField.getSelectedItem();
+                Class<?> newTok = PluginUtils.getTokenizerClassForLanguage(newLang);
+                m_targetTokenizerField.setSelectedItem(newTok);
+            }});
 
         centerBox.add(localesBox);
 
@@ -402,9 +487,10 @@ public class ProjectPropertiesDialog extends JDialog {
 
         m_okButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                doOK(m_sourceLocaleField, m_targetLocaleField, m_sentenceSegmentingCheckBox, m_srcRootField,
-                        m_locRootField, m_glosRootField, m_writeableGlosField, m_tmRootField, m_dictRootField,
-                        m_allowDefaultsCheckBox, m_removeTagsCheckBox, m_externalCommandTextArea);
+                doOK(m_sourceLocaleField, m_targetLocaleField, m_sourceTokenizerField, m_targetTokenizerField,
+                        m_sentenceSegmentingCheckBox, m_srcRootField, m_locRootField, m_glosRootField,
+                        m_writeableGlosField, m_tmRootField, m_dictRootField, m_allowDefaultsCheckBox,
+                        m_removeTagsCheckBox, m_externalCommandTextArea);
             }
         });
 
@@ -492,8 +578,6 @@ public class ProjectPropertiesDialog extends JDialog {
         m_writeableGlosField.setText(projectProperties.getWriteableGlossary());
         m_tmRootField.setText(projectProperties.getTMRoot());
         m_dictRootField.setText(projectProperties.getDictRoot());
-        m_sourceLocaleField.setSelectedItem(projectProperties.getSourceLanguage());
-        m_targetLocaleField.setSelectedItem(projectProperties.getTargetLanguage());
         m_sentenceSegmentingCheckBox.setSelected(projectProperties.isSentenceSegmentingEnabled());
         m_allowDefaultsCheckBox.setSelected(projectProperties.isSupportDefaultTranslations());
         m_removeTagsCheckBox.setSelected(projectProperties.isRemoveTags());
@@ -503,6 +587,8 @@ public class ProjectPropertiesDialog extends JDialog {
             // disabling some of the controls
             m_sourceLocaleField.setEnabled(false);
             m_targetLocaleField.setEnabled(false);
+            m_sourceTokenizerField.setEnabled(false);
+            m_targetTokenizerField.setEnabled(false);
             m_sentenceSegmentingCheckBox.setEnabled(false);
 
             // marking missing folder RED
@@ -747,6 +833,7 @@ public class ProjectPropertiesDialog extends JDialog {
     }
 
     private void doOK(JComboBox m_sourceLocaleField, JComboBox m_targetLocaleField,
+            JComboBox m_sourceTokenizerField, JComboBox m_targetTokenizerField,
             JCheckBox m_sentenceSegmentingCheckBox, JTextField m_srcRootField, JTextField m_locRootField,
             JTextField m_glosRootField, JTextField m_writeableGlosField, JTextField m_tmRootField, JTextField m_dictRootField,
             JCheckBox m_allowDefaultsCheckBox, JCheckBox m_removeTagsCheckBox, JTextArea m_customCommandTextArea) {
@@ -771,6 +858,14 @@ public class ProjectPropertiesDialog extends JDialog {
             return;
         }
         projectProperties.setTargetLanguage(m_targetLocaleField.getSelectedItem().toString());
+
+        if (m_sourceTokenizerField.isEnabled()) {
+            projectProperties.setSourceTokenizer((Class<?>)m_sourceTokenizerField.getSelectedItem());
+        }
+
+        if (m_targetTokenizerField.isEnabled()) {
+            projectProperties.setTargetTokenizer((Class<?>)m_targetTokenizerField.getSelectedItem());
+        }
 
         projectProperties.setSentenceSegmentingEnabled(m_sentenceSegmentingCheckBox.isSelected());
 

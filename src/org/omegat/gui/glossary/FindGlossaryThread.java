@@ -34,9 +34,9 @@ import java.util.List;
 
 import org.omegat.core.Core;
 import org.omegat.core.data.SourceTextEntry;
-import org.omegat.core.matching.ITokenizer;
-import org.omegat.core.matching.Tokenizer;
 import org.omegat.gui.common.EntryInfoSearchThread;
+import org.omegat.tokenizer.DefaultTokenizer;
+import org.omegat.tokenizer.ITokenizer;
 import org.omegat.util.Token;
 
 /**
@@ -97,7 +97,7 @@ public class FindGlossaryThread extends EntryInfoSearchThread<List<GlossaryEntry
                 if (glosTokensN == 0)
                     continue;
 
-                if (Tokenizer.isContainsAll(strTokens, glosTokens)) {
+                if (DefaultTokenizer.isContainsAll(strTokens, glosTokens)) {
                     result.add(glosEntry);
                 }
             }

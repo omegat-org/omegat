@@ -32,6 +32,7 @@ import gen.core.filters.Filters;
 import java.io.File;
 
 import org.omegat.core.segmentation.SRX;
+import org.omegat.filters2.master.PluginUtils;
 import org.omegat.util.Language;
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
@@ -89,6 +90,9 @@ public class ProjectProperties {
         }
 
         projectSRX = SRX.loadSRX(new File(getProjectInternal(), SRX.CONF_SENTSEG));
+
+        setSourceTokenizer(PluginUtils.getTokenizerClassForLanguage(getSourceLanguage()));
+        setTargetTokenizer(PluginUtils.getTokenizerClassForLanguage(getTargetLanguage()));
     }
 
 	/** Returns The Target (Compiled) Files Directory */
@@ -238,6 +242,38 @@ public class ProjectProperties {
      */
     public void setTargetLanguage(String targetLanguage) {
         this.targetLanguage = new Language(targetLanguage);
+    }
+
+    /**
+     * Returns the class name of the source language tokenizer for the Project.
+     */
+    public Class<?> getSourceTokenizer() {
+        if (sourceTokenizer == null) {
+            Class<?> cls = PluginUtils.getTokenizerClassForLanguage(getSourceLanguage());
+            setSourceTokenizer(cls);
+        }
+        return sourceTokenizer;
+    }
+
+    /**
+     * Sets the class name of the source language tokenizer for the Project.
+     */
+    public void setSourceTokenizer(Class<?> sourceTokenizer) {
+        this.sourceTokenizer = sourceTokenizer;
+    }
+
+    /**
+     * Returns the class name of the target language tokenizer for the Project.
+     */
+    public Class<?> getTargetTokenizer() {
+        return targetTokenizer;
+    }
+
+    /**
+     * Sets the class name of the target language tokenizer for the Project.
+     */
+    public void setTargetTokenizer(Class<?> targetTokenizer) {
+        this.targetTokenizer = targetTokenizer;
     }
 
     /**
@@ -407,6 +443,9 @@ public class ProjectProperties {
 
     private Language sourceLanguage;
     private Language targetLanguage;
+
+    private Class<?> sourceTokenizer;
+    private Class<?> targetTokenizer;
 
     private boolean sentenceSegmentingOn;
     private boolean supportDefaultTranslations;

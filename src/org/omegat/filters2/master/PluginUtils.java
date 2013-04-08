@@ -33,6 +33,8 @@ import java.io.InputStream;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Enumeration;
 import java.util.List;
 import java.util.Locale;
@@ -40,7 +42,10 @@ import java.util.Map;
 import java.util.jar.Attributes;
 import java.util.jar.Manifest;
 
+import org.omegat.tokenizer.DefaultTokenizer;
+import org.omegat.tokenizer.Tokenizer;
 import org.omegat.util.FileUtil;
+import org.omegat.util.Language;
 import org.omegat.util.Log;
 import org.omegat.util.StaticUtils;
 
@@ -88,7 +93,7 @@ public final class PluginUtils {
             }
             boolean foundMain = false;
             // look on all manifests
-            cls = new URLClassLoader(urls, PluginUtils.class.getClassLoader());
+            cls = new URLClassLoader(urls);
             for (Enumeration<URL> mlist = cls.getResources("META-INF/MANIFEST.MF"); mlist.hasMoreElements();) {
                 URL mu = mlist.nextElement();
                 InputStream in = mu.openStream();
@@ -125,6 +130,14 @@ public final class PluginUtils {
             Log.log(ex);
         }
         
+        // Sort tokenizer list for display in Project Properties dialog.
+        Collections.sort(tokenizerClasses, new Comparator<Class<?>>() {
+            @Override
+            public int compare(Class<?> c1, Class<?> c2) {
+                return c1.getName().compareTo(c2.getName());
+            }
+        });
+        
         // run base plugins
         for (Class<?> pl : basePluginClasses) {
             try {
@@ -141,6 +154,43 @@ public final class PluginUtils {
 
     public static List<Class<?>> getTokenizerClasses() {
         return tokenizerClasses;
+    }
+
+    public static Class<?> getTokenizerClassForLanguage(Language lang) {
+        if (lang == null) return DefaultTokenizer.class;
+        
+        // Prefer an exact match on the full ISO language code (XX-YY).
+        Class<?> result = searchForTokenizer(lang.getLanguage());
+        if (result != null) return result;
+        
+        // Otherwise return a match for the language only (XX).
+        result = searchForTokenizer(lang.getLanguageCode());
+        if (result != null) return result;
+        
+        return DefaultTokenizer.class;
+    }
+
+    private static Class<?> searchForTokenizer(String lang) {
+        if (lang.length() < 1) return null;
+        
+        lang = lang.toLowerCase();
+        
+        // Choose first relevant tokenizer as fallback if no
+        // "default" tokenizer is found.
+        Class<?> fallback = null;
+        
+        for (Class<?> c : tokenizerClasses) {
+            Tokenizer ann = c.getAnnotation(Tokenizer.class);
+            if (ann == null) continue;
+            for (String s : ann.languages()) {
+                if (lang.equals(s)) {
+                    if (ann.isDefault()) return c; // Return best possible match.
+                    else if (fallback == null) fallback = c;
+                }
+            }
+        }
+        
+        return fallback;
     }
 
     public static List<Class<?>> getMarkerClasses() {

@@ -3,7 +3,16 @@ Main-Class: org.omegat.Main
 License: GNU Public License version 3 or later
 Specification-Version: 1
 Implementation-Version: @version@
-Class-Path: lib/lib-mnemonics.jar lib/htmlparser.jar lib/MRJAdapter.jar lib/vldocking_2.1.4.jar lib/jna.jar lib/swing-layout-1.0.jar lib/jmyspell-core-1.0.0-beta-2.jar lib/swing-worker-1.2.jar lib/svnkit-1.7.5.jar lib/antlr-runtime-3.4.jar lib/sqljet-1.1.3.jar lib/sequence-library-1.0.2.jar lib/org.eclipse.jgit-2.1.0.201209190230-r.jar lib/jsch-0.1.49.jar lib/diff.jar lib/JSAP-2.1.jar
+Class-Path: lib/lib-mnemonics.jar lib/htmlparser.jar lib/MRJAdapter.jar 
+ lib/vldocking_2.1.4.jar lib/jna.jar lib/swing-layout-1.0.jar 
+ lib/jmyspell-core-1.0.0-beta-2.jar lib/activation.jar lib/jaxb-api.jar 
+ lib/jaxb-impl.jar lib/jsr173_1.0_api.jar lib/swing-worker-1.2.jar 
+ lib/sjsxp-1.0.2.jar lib/svnkit-1.7.5.jar lib/antlr-runtime-3.4.jar 
+ lib/sqljet-1.1.3.jar lib/sequence-library-1.0.2.jar 
+ lib/org.eclipse.jgit-2.1.0.201209190230-r.jar lib/jsch-0.1.49.jar 
+ lib/diff.jar lib/JSAP-2.1.jar lib/lucene-analyzers-3.6.2.jar 
+ lib/lucene-core-3.6.2.jar lib/lucene-kuromoji-3.6.2.jar 
+ lib/lucene-smartcn-3.6.2.jar lib/tinysegmenter.jar
 OmegaT-Plugin: true
 
 Name: org.omegat.filters3.xml.android.AndroidFilter
@@ -96,7 +105,163 @@ OmegaT-Plugin: filter
 Name: org.omegat.filters3.xml.visio.VisioFilter
 OmegaT-Plugin: filter
 
-Name: org.omegat.core.matching.Tokenizer
+Name: org.omegat.tokenizer.DefaultTokenizer
+OmegaT-Plugin: tokenizer
+
+Name: org.omegat.tokenizer.LuceneArabicTokenizer
+OmegaT-Plugin: tokenizer
+
+Name: org.omegat.tokenizer.LuceneArmenianTokenizer
+OmegaT-Plugin: tokenizer
+
+Name: org.omegat.tokenizer.LuceneBasqueTokenizer
+OmegaT-Plugin: tokenizer
+
+Name: org.omegat.tokenizer.LuceneBrazilianTokenizer
+OmegaT-Plugin: tokenizer
+
+Name: org.omegat.tokenizer.LuceneBulgarianTokenizer
+OmegaT-Plugin: tokenizer
+
+Name: org.omegat.tokenizer.LuceneCatalanTokenizer
+OmegaT-Plugin: tokenizer
+
+Name: org.omegat.tokenizer.LuceneChineseTokenizer
+OmegaT-Plugin: tokenizer
+
+Name: org.omegat.tokenizer.LuceneCJKTokenizer
+OmegaT-Plugin: tokenizer
+
+Name: org.omegat.tokenizer.LuceneCzechTokenizer
+OmegaT-Plugin: tokenizer
+
+Name: org.omegat.tokenizer.LuceneDanishTokenizer
+OmegaT-Plugin: tokenizer
+
+Name: org.omegat.tokenizer.LuceneDutchTokenizer
+OmegaT-Plugin: tokenizer
+
+Name: org.omegat.tokenizer.LuceneEnglishTokenizer
+OmegaT-Plugin: tokenizer
+
+Name: org.omegat.tokenizer.LuceneFinnishTokenizer
+OmegaT-Plugin: tokenizer
+
+Name: org.omegat.tokenizer.LuceneFrenchTokenizer
+OmegaT-Plugin: tokenizer
+
+Name: org.omegat.tokenizer.LuceneGalicianTokenizer
+OmegaT-Plugin: tokenizer
+
+Name: org.omegat.tokenizer.LuceneGermanTokenizer
+OmegaT-Plugin: tokenizer
+
+Name: org.omegat.tokenizer.LuceneGreekTokenizer
+OmegaT-Plugin: tokenizer
+
+Name: org.omegat.tokenizer.LuceneHindiTokenizer
+OmegaT-Plugin: tokenizer
+
+Name: org.omegat.tokenizer.LuceneHungarianTokenizer
+OmegaT-Plugin: tokenizer
+
+Name: org.omegat.tokenizer.LuceneIndonesianTokenizer
+OmegaT-Plugin: tokenizer
+
+Name: org.omegat.tokenizer.LuceneIrishTokenizer
+OmegaT-Plugin: tokenizer
+
+Name: org.omegat.tokenizer.LuceneItalianTokenizer
+OmegaT-Plugin: tokenizer
+
+Name: org.omegat.tokenizer.LuceneJapaneseTokenizer
+OmegaT-Plugin: tokenizer
+
+Name: org.omegat.tokenizer.LuceneLatvianTokenizer
+OmegaT-Plugin: tokenizer
+
+Name: org.omegat.tokenizer.LuceneNorwegianTokenizer
+OmegaT-Plugin: tokenizer
+
+Name: org.omegat.tokenizer.LucenePersianTokenizer
+OmegaT-Plugin: tokenizer
+
+Name: org.omegat.tokenizer.LucenePortugueseTokenizer
+OmegaT-Plugin: tokenizer
+
+Name: org.omegat.tokenizer.LuceneRomanianTokenizer
+OmegaT-Plugin: tokenizer
+
+Name: org.omegat.tokenizer.LuceneRussianTokenizer
+OmegaT-Plugin: tokenizer
+
+Name: org.omegat.tokenizer.LuceneSmartChineseTokenizer
+OmegaT-Plugin: tokenizer
+
+Name: org.omegat.tokenizer.LuceneSpanishTokenizer
+OmegaT-Plugin: tokenizer
+
+Name: org.omegat.tokenizer.LuceneSwedishTokenizer
+OmegaT-Plugin: tokenizer
+
+Name: org.omegat.tokenizer.LuceneThaiTokenizer
+OmegaT-Plugin: tokenizer
+
+Name: org.omegat.tokenizer.LuceneTurkishTokenizer
+OmegaT-Plugin: tokenizer
+
+Name: org.omegat.tokenizer.SnowballDanishTokenizer
+OmegaT-Plugin: tokenizer
+
+Name: org.omegat.tokenizer.SnowballDutchTokenizer
+OmegaT-Plugin: tokenizer
+
+Name: org.omegat.tokenizer.SnowballEnglishTokenizer
+OmegaT-Plugin: tokenizer
+
+Name: org.omegat.tokenizer.SnowballFinnishTokenizer
+OmegaT-Plugin: tokenizer
+
+Name: org.omegat.tokenizer.SnowballFrenchTokenizer
+OmegaT-Plugin: tokenizer
+
+Name: org.omegat.tokenizer.SnowballGerman2Tokenizer
+OmegaT-Plugin: tokenizer
+
+Name: org.omegat.tokenizer.SnowballGermanTokenizer
+OmegaT-Plugin: tokenizer
+
+Name: org.omegat.tokenizer.SnowballHungarianTokenizer
+OmegaT-Plugin: tokenizer
+
+Name: org.omegat.tokenizer.SnowballItalianTokenizer
+OmegaT-Plugin: tokenizer
+
+Name: org.omegat.tokenizer.SnowballNorwegianTokenizer
+OmegaT-Plugin: tokenizer
+
+Name: org.omegat.tokenizer.SnowballPorterTokenizer
+OmegaT-Plugin: tokenizer
+
+Name: org.omegat.tokenizer.SnowballPortugueseTokenizer
+OmegaT-Plugin: tokenizer
+
+Name: org.omegat.tokenizer.SnowballRomanianTokenizer
+OmegaT-Plugin: tokenizer
+
+Name: org.omegat.tokenizer.SnowballRussianTokenizer
+OmegaT-Plugin: tokenizer
+
+Name: org.omegat.tokenizer.SnowballSpanishTokenizer
+OmegaT-Plugin: tokenizer
+
+Name: org.omegat.tokenizer.SnowballSwedishTokenizer
+OmegaT-Plugin: tokenizer
+
+Name: org.omegat.tokenizer.SnowballTurkishTokenizer
+OmegaT-Plugin: tokenizer
+
+Name: org.omegat.tokenizer.TinySegmenterJapaneseTokenizer
 OmegaT-Plugin: tokenizer
 
 Name: org.omegat.gui.glossary.TransTipsMarker

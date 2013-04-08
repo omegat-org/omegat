@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 3.0.0
 ----------------------------------------------------------------------
-  23 Enhancements
+  24 Enhancements
    5 Bug fixes
    0 Localisation update
 ----------------------------------------------------------------------
@@ -62,6 +62,9 @@
 
   - Better OmegaT icon resolution
   http://sourceforge.net/support/tracker.php?aid=3603928
+
+  - Integrate tokenizers in OmegaT 
+  https://sourceforge.net/p/omegat/feature-requests/844/
 
   Other enhancements:
 

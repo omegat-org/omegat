@@ -382,7 +382,7 @@ public class TagValidationFrame extends JFrame {
                 output.append("<br/>");
             }
             if (!allErrors.contains(TagError.UNSPECIFIED)) {
-                output.append("<p align=\"right\">&rArr; <a href=\"fix:");
+                output.append("<p align=\"right\">&rArr;&nbsp;<a href=\"fix:");
                 output.append(report.entryNum);
                 output.append("\">");
                 output.append(OStrings.getString("TAG_FIX_COMMAND"));

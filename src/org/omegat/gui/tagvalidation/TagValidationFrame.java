@@ -423,7 +423,7 @@ public class TagValidationFrame extends JFrame {
             case ORPHANED:
                 text = String.format("<u>%s</u>", text);
             case ORDER:
-                color = "orange";
+                color = "#FF8C00"; // Orange. Pre-1.7 Java doesn't recognize the name "orange".
                 break;
             case UNSPECIFIED:
                 color = "blue";

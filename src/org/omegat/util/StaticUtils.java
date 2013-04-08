@@ -1001,10 +1001,29 @@ public class StaticUtils {
         }
 
         public int compare(String tag1, String tag2) {
+            // Check for equality
+            if (tag1.equals(tag2)) {
+                return 0;
+            }
+            // Check to see if one tag encompases the other
+            if (tag1.startsWith(tag2)) {
+                return -1;
+            } else if (tag2.startsWith(tag1)) {
+                return 1;
+            }
+            // Check which tag comes first
             int index1 = source.indexOf(tag1);
             int index2 = source.indexOf(tag2);
             if (index1 == index2) {
-                return 0;
+                int len1 = tag1.length();
+                int len2 = tag2.length();
+                if (len1 > len2) {
+                    return -1;
+                } else if (len2 > len1) {
+                    return 1;
+                } else {
+                    return tag1.compareTo(tag2);
+                }
             }
             return index1 > index2 ? 1 : -1;
         }

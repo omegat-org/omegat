@@ -61,6 +61,9 @@ public class OConsts {
     public static final String HELP_DIR = "docs";
     public static final String HELP_LANG_INDEX = "languageIndex.html";
 
+    // licenses
+    public static final String LICENSE_FILE = "license.txt";
+
     // status file consts
     public static final String STATUS_EXTENSION = "project_save.tmx";
     public static final String STATUS_RECOVER_EXTENSION = ".recover";

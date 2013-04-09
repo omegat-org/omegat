@@ -268,7 +268,7 @@ public class HelpFrame extends JFrame {
     }
 
     // immortalize the BeOS 404 messages (some modified a bit for context)
-    private String errorHaiku() {
+    public static String errorHaiku() {
         int id = new Random().nextInt(11) + 1;
         return OStrings.getString("HF_HAIKU_" + id);
     }

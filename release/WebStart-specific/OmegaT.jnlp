@@ -45,6 +45,11 @@
 				<jar href="org.eclipse.jgit-2.1.0.201209190230-r.jar" />
 				<jar href="jsch-0.1.49.jar" />
 				<jar href="swing-worker-1.2.jar" />
+				<jar href="lucene-analyzers-3.6.2.jar" />
+				<jar href="lucene-core-3.6.2.jar" />
+				<jar href="lucene-kuromoji-3.6.2.jar" />
+				<jar href="lucene-smartcn-3.6.2.jar" />
+				<jar href="tinysegmenter.jar" />
 			</resources>
 			<resources os="Linux" arch="amd64">
 				<nativelib href="hunspell-linux64.jar" />

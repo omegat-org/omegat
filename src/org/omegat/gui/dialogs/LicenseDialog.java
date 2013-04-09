@@ -131,8 +131,7 @@ public class LicenseDialog extends javax.swing.JDialog {
     }
 
     /**
-     * Load license from file "license.txt" from help. This method doesn't check
-     * help version, but just load license.txt using current locale..
+     * Load license from file "license.txt" from the installation dir
      */
     private String loadLicense() {
 

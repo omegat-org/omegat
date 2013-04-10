@@ -30,6 +30,9 @@ import java.io.IOException;
 import java.io.StringReader;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.omegat.util.Language;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
@@ -62,8 +65,8 @@ public class MyMemoryTranslate extends BaseTranslate {
     protected static String GT_URL2 = "&langpair=#sourceLang#|#targetLang#&of=#format#&mt=0";
     protected static String MYMEMORYLABEL_TRANSLATION = "translation";
     protected static String MYMEMORYLABEL_MATCHQUALITYPERCENTAGE = "match";
-    protected static String XPATH_QUERY_1 = "//tuv[@lang='#langCode#-#countryCode#']/seg/text()"; // used for standard 4-letter locale codes in the search query
-    protected static String XPATH_QUERY_2 = "//tuv[starts-with(@lang, '#langCode#')]/seg/text()"; // used for when no country code is provided; this is needed, because MyMemory always returns a 4-letter locale code, even when the query contains a language code only
+    protected static String XPATH_QUERY_1 = "child::tuv[@lang='#langCode#-#countryCode#']/seg/text()"; // used for standard 4-letter locale codes in the search query
+    protected static String XPATH_QUERY_2 = "child::tuv[starts-with(@lang, '#langCode#')]/seg/text()"; // used for when no country code is provided; this is needed, because MyMemory always returns a 4-letter locale code, even when the query contains a language code only
     @Override
     protected String getPreferenceName() {
     	return Preferences.ALLOW_MYMEMORY_TRANSLATE;
@@ -136,16 +139,12 @@ public class MyMemoryTranslate extends BaseTranslate {
 	 * @return
 	 * @throws XPathExpressionException
 	 */
-	private String getBestTranslation(Language sLang, Language tLang,
-			String text, XPath xpath, NodeList allTUs)
-			throws XPathExpressionException {
-		
-            XPathExpression expr;
-            int lowestEditDistance = 999999; 
-            int dist; 
-            Node tu;
-            String sourceSeg;
-            String targetSeg;
+	private String getBestTranslation(Language sLang, Language tLang, String text, XPath xpath, NodeList allTUs) throws XPathExpressionException {
+			int lowestEditDistance = 999999; 
+            int dist = 0; 
+            Node tu = null;
+            String sourceSeg = "";
+            String targetSeg = "";
             String sourceCountryCode = sLang.getCountryCode(); 
             String targetCountryCode = tLang.getCountryCode(); 
             String targetSegQueryString = buildSegmentQueryString(tLang, targetCountryCode);
@@ -156,12 +155,10 @@ public class MyMemoryTranslate extends BaseTranslate {
             // Loop over TUs to get best matching source segment and its translation
             for (int i = 0; i < allTUs.getLength(); i++) {
                 tu = allTUs.item(i);
-        	
-                expr = xpath.compile(sourceSegQueryString);
-                sourceSeg = ((NodeList) expr.evaluate(tu, XPathConstants.NODESET)).item(0).getNodeValue();       	
-                expr = xpath.compile(targetSegQueryString);
-                targetSeg = ((NodeList) expr.evaluate(tu, XPathConstants.NODESET)).item(0).getNodeValue();
-
+  
+                sourceSeg = xpath.evaluate(sourceSegQueryString, tu);
+                targetSeg = xpath.evaluate(targetSegQueryString, tu);
+                
                 dist = getLevensteinDistance(text, sourceSeg);
 
                 if( dist < lowestEditDistance && !sourceSeg.isEmpty() && !targetSeg.isEmpty() ) {
@@ -173,7 +170,19 @@ public class MyMemoryTranslate extends BaseTranslate {
                     break; // Can't find a better match than this one, so let's stop the loop here. 
                 } 
             }
+            
+            bestTranslation = cleanUpText(bestTranslation);
+            
             return bestTranslation;
+	}
+
+	private String cleanUpText(String str) {
+	       str = str.replace("&quot;", "\"");
+	       str = str.replace("&nbsp;", "\u00A0");
+	       str = str.replace("&amp;", "&");
+	       str = str.replace("&apos;", "'");
+	       
+		return str;
 	}
 
 	/**
@@ -205,15 +214,30 @@ public class MyMemoryTranslate extends BaseTranslate {
 	private int getLevensteinDistance(String text, String sourceSeg) {
             int dist;
             LevenshteinDistance leven = new LevenshteinDistance(); 
-            Token textToken = new Token(text, 0);
-            Token sourceSegToken = new Token(sourceSeg, 0);
-            Token[] textTokenArray = {textToken};
-            Token[] sourceSegTokenArray = {sourceSegToken};
+            char[] txtChars = text.toCharArray();
+            char[] srcChars = sourceSeg.toCharArray(); 
+            Token[] textTokenArray = convertCharArrayToTokenArray(txtChars);
+            Token[] sourceSegTokenArray = convertCharArrayToTokenArray(srcChars);
 		
             dist = leven.compute(textTokenArray, sourceSegTokenArray);
             return dist;
 	}
     
+	private Token[] convertCharArrayToTokenArray(char[] chars) {
+		Token[] emptyArrayForConversion = {};
+		List <Token> tok = new ArrayList<Token>();
+		int i = 0; 
+		
+		for( char c : chars) 
+		{
+			Token myToken = new Token(String.valueOf(c), i);
+			tok.add(myToken);
+			i++;
+		}
+		
+		return (Token[]) tok.toArray(emptyArrayForConversion);
+	}
+
 	private String getMyMemoryResponse(Language sLang, Language tLang, String text, String format)
 	throws UnsupportedEncodingException, IOException {
             // Build URL for the JSON query

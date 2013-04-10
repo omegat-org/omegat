@@ -29,10 +29,10 @@ package org.omegat.gui.dialogs;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.StringWriter;
+import java.net.URL;
 
 import javax.swing.AbstractAction;
 import javax.swing.Action;
@@ -40,10 +40,9 @@ import javax.swing.JComponent;
 import javax.swing.KeyStroke;
 
 import org.omegat.gui.help.HelpFrame;
-import org.omegat.util.FileUtil;
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
-import org.omegat.util.StaticUtils;
+import org.omegat.util.LFileCopy;
 import org.openide.awt.Mnemonics;
 
 /**
@@ -131,29 +130,29 @@ public class LicenseDialog extends javax.swing.JDialog {
     }
 
     /**
-     * Load license from file "license.txt" from the installation dir
+     * Load license from file "license.txt" from the root of help.
      */
     private String loadLicense() {
 
-        // Check if there's a licence file
-        String text = "";
-
-        File license = new File(StaticUtils.installDir() + File.separator + OConsts.LICENSE_FILE);
-        if (!license.isFile()) {
-            return text;
+        // Get the license
+        URL url = HelpFrame.getHelpFileURL(null, OConsts.LICENSE_FILE);
+        if (url == null) {
+            return HelpFrame.errorHaiku();
         }
 
         try {
-            BufferedReader rd = new BufferedReader(new InputStreamReader(new FileInputStream(license), OConsts.UTF8));
+            BufferedReader rd = new BufferedReader(new InputStreamReader(url.openStream(), OConsts.UTF8));
             try {
-                text = FileUtil.readScriptFile(license);
+                StringWriter out = new StringWriter();
+                LFileCopy.copy(rd, out);
+                return out.toString();
             } finally {
                 rd.close();
-                return text;
             }
         } catch (IOException ex) {
             return HelpFrame.errorHaiku();
         }
+
     }
 
     private void okButtonActionPerformed(java.awt.event.ActionEvent evt) {

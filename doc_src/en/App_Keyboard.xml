@@ -13,9 +13,9 @@
     <title>Key behavior in the editor</title>
 
     <tgroup cols="2">
-      <colspec align="left" colnum="1" colwidth="90"/>
+      <colspec align="left" colnum="1"/>
 
-      <colspec align="left" colnum="2" colwidth="300"/>
+      <colspec align="left" colnum="2"/>
 
       <thead>
         <row>

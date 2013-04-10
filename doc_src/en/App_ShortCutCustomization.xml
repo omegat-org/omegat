@@ -135,9 +135,9 @@
       <title>Project Menu</title>
 
       <tgroup cols="3" colsep="1">
-        <colspec align="left" colname="1" colnum="1" colwidth="120"/>
+        <colspec align="left" colname="1" colnum="1"/>
 
-        <colspec align="left" colname="2" colnum="2" colwidth="80"/>
+        <colspec align="left" colname="2" colnum="2"/>
 
         <colspec align="left" colname="3" colnum="3"/>
 
@@ -259,9 +259,9 @@
       <title>Edit Menu</title>
 
       <tgroup cols="3" colsep="1">
-        <colspec align="left" colname="1" colnum="1" colwidth="120"/>
+        <colspec align="left" colname="1" colnum="1"/>
 
-        <colspec align="left" colname="2" colnum="2" colwidth="80"/>
+        <colspec align="left" colname="2" colnum="2"/>
 
         <colspec align="left" colname="3" colnum="3"/>
 
@@ -464,9 +464,9 @@
       <title>GoTo Menu</title>
 
       <tgroup cols="3" colsep="1">
-        <colspec align="left" colname="1" colnum="1" colwidth="120"/>
+        <colspec align="left" colname="1" colnum="1"/>
 
-        <colspec align="left" colname="2" colnum="2" colwidth="80"/>
+        <colspec align="left" colname="2" colnum="2"/>
 
         <colspec align="left" colname="3" colnum="3"/>
 
@@ -564,9 +564,9 @@
       </indexterm>
 
       <tgroup cols="3" colsep="1">
-        <colspec align="left" colname="1" colnum="1" colwidth="120"/>
+        <colspec align="left" colname="1" colnum="1"/>
 
-        <colspec align="left" colname="2" colnum="2" colwidth="80"/>
+        <colspec align="left" colname="2" colnum="2"/>
 
         <colspec align="left" colname="3" colnum="3"/>
 
@@ -680,9 +680,9 @@
       <title>Tools Menu</title>
 
       <tgroup cols="3" colsep="1">
-        <colspec align="left" colname="1" colnum="1" colwidth="120"/>
+        <colspec align="left" colname="1" colnum="1"/>
 
-        <colspec align="left" colname="2" colnum="2" colwidth="80"/>
+        <colspec align="left" colname="2" colnum="2"/>
 
         <colspec align="left" colname="3" colnum="3"/>
 
@@ -732,9 +732,9 @@
       <title>Options Menu</title>
 
       <tgroup cols="3" colsep="1">
-        <colspec align="left" colname="1" colnum="1" colwidth="120"/>
+        <colspec align="left" colname="1" colnum="1"/>
 
-        <colspec align="left" colname="2" colnum="2" colwidth="80"/>
+        <colspec align="left" colname="2" colnum="2"/>
 
         <colspec align="left" colname="3" colnum="3"/>
 
@@ -896,9 +896,9 @@
       <title>Help Menu</title>
 
       <tgroup cols="3" colsep="1">
-        <colspec align="left" colname="1" colnum="1" colwidth="120"/>
+        <colspec align="left" colname="1" colnum="1"/>
 
-        <colspec align="left" colname="2" colnum="2" colwidth="80"/>
+        <colspec align="left" colname="2" colnum="2"/>
 
         <colspec align="left" colname="3" colnum="3"/>
 

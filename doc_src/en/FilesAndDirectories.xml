@@ -148,7 +148,7 @@
 
       <para><informaltable>
           <tgroup align="left" cols="2" rowsep="1">
-            <colspec align="left" colnum="1" colwidth="120"/>
+            <colspec align="left" colnum="1"/>
 
             <tbody>
               <row>
@@ -267,7 +267,7 @@
 
     <informaltable>
       <tgroup align="left" cols="2" rowsep="1">
-        <colspec align="left" colnum="1" colwidth="100"/>
+        <colspec align="left" colnum="1"/>
 
         <tbody>
           <row>
@@ -320,7 +320,7 @@
 
     <informaltable>
       <tgroup align="left" cols="2" rowsep="1">
-        <colspec align="left" colnum="1" colwidth="100"/>
+        <colspec align="left" colnum="1"/>
 
         <tbody>
           <row>
@@ -394,7 +394,7 @@
 
     <informaltable>
       <tgroup align="left" cols="2" rowsep="1">
-        <colspec align="left" colnum="1" colwidth="100"/>
+        <colspec align="left" colnum="1"/>
 
         <tbody>
           <row>

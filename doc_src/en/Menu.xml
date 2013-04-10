@@ -62,9 +62,9 @@
         <title>Project menu</title>
 
         <tgroup cols="3" colsep="1">
-          <colspec align="left" colnum="1" colwidth="100"/>
+          <colspec align="left" colnum="1"/>
 
-          <colspec align="left" colnum="2" colwidth="100"/>
+          <colspec align="left" colnum="2"/>
 
           <tbody>
             <row>
@@ -224,9 +224,9 @@
         <title>Copy/cut/paste shortcuts</title>
 
         <tgroup cols="3" colsep="1">
-          <colspec align="left" colnum="1" colwidth="100"/>
+          <colspec align="left" colnum="1"/>
 
-          <colspec align="left" colnum="2" colwidth="100"/>
+          <colspec align="left" colnum="2"/>
 
           <tbody>
             <row>
@@ -276,9 +276,9 @@
         <title>Edit menu</title>
 
         <tgroup cols="3" colsep="1">
-          <colspec align="left" colnum="1" colwidth="100"/>
+          <colspec align="left" colnum="1"/>
 
-          <colspec align="left" colnum="2" colwidth="100"/>
+          <colspec align="left" colnum="2"/>
 
           <tbody>
             <row>
@@ -532,9 +532,9 @@
         <title>Go To menu</title>
 
         <tgroup cols="3" colsep="1">
-          <colspec align="left" colnum="1" colwidth="100"/>
+          <colspec align="left" colnum="1"/>
 
-          <colspec align="left" colnum="2" colwidth="100"/>
+          <colspec align="left" colnum="2"/>
 
           <tbody>
             <row>
@@ -667,7 +667,7 @@
         <title>View menu</title>
 
         <tgroup cols="2" colsep="1">
-          <colspec align="left" colnum="1" colwidth="100"/>
+          <colspec align="left" colnum="1"/>
 
           <tbody>
             <row>
@@ -764,7 +764,7 @@
         </indexterm>
 
         <tgroup cols="2" colsep="1">
-          <colspec align="left" colnum="1" colwidth="100"/>
+          <colspec align="left" colnum="1"/>
 
           <tbody>
             <row>
@@ -821,7 +821,7 @@
         <title>Options menu</title>
 
         <tgroup cols="2" colsep="1">
-          <colspec align="left" colnum="1" colwidth="100"/>
+          <colspec align="left" colnum="1"/>
 
           <tbody>
             <row>
@@ -983,7 +983,7 @@
         <title>Help menu</title>
 
         <tgroup cols="2" colsep="1">
-          <colspec align="left" colnum="1" colwidth="100"/>
+          <colspec align="left" colnum="1"/>
 
           <tbody>
             <row>
@@ -1071,9 +1071,9 @@
         <title>Project management shortcuts</title>
 
         <tgroup cols="3" colsep="1">
-          <colspec align="left" colnum="1" colwidth="100"/>
+          <colspec align="left" colnum="1"/>
 
-          <colspec align="left" colnum="2" colwidth="100"/>
+          <colspec align="left" colnum="2"/>
 
           <tbody>
             <row>
@@ -1163,9 +1163,9 @@
         <title>Editing shortcuts</title>
 
         <tgroup cols="3" colsep="1">
-          <colspec align="left" colnum="1" colwidth="100"/>
+          <colspec align="left" colnum="1"/>
 
-          <colspec align="left" colnum="2" colwidth="100"/>
+          <colspec align="left" colnum="2"/>
 
           <tbody>
             <row>
@@ -1346,9 +1346,9 @@
         <title>Moving around shortcuts</title>
 
         <tgroup cols="3" colsep="1">
-          <colspec align="left" colnum="1" colwidth="100"/>
+          <colspec align="left" colnum="1"/>
 
-          <colspec align="left" colnum="2" colwidth="100"/>
+          <colspec align="left" colnum="2"/>
 
           <tbody>
             <row>
@@ -1440,9 +1440,9 @@
         <title>Various shortcuts</title>
 
         <tgroup cols="3" colsep="1">
-          <colspec align="left" colnum="1" colwidth="100"/>
+          <colspec align="left" colnum="1"/>
 
-          <colspec align="left" colnum="2" colwidth="100"/>
+          <colspec align="left" colnum="2"/>
 
           <tbody>
             <row>

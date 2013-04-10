@@ -12,8 +12,7 @@
       </indexterm>Shortcuts customization</title>
 
     <para>Most of the items that appear in the main menu can have a new
-    shortcut assigned. Only the most commonly used menu items are assigned a
-    shortcut by default. You can change the already assigned shortcuts and add
+    shortcut assigned. You can change the already assigned shortcuts and add
     new shortcuts by putting a shortcut definition file in your OmegaT
     preferences folder (see <link linkend="user.files">User files
     location</link>).</para>
@@ -39,7 +38,7 @@
         1.6 keystrokes shortcuts</ulink></para>
       </footnote>.</para>
 
-    <para>&lt;shortcut&gt; must be of the following form:0 or more
+    <para>&lt;shortcut&gt; must be of the following form: 0 or more
     <code>&lt;modifier&gt;</code> followed by 0 or 1
     <code>&lt;event&gt;</code> followed by 1 <code>&lt;key&gt;</code>,
     where:<itemizedlist>
@@ -72,12 +71,12 @@
     <para>For example, in the default OmegaT shortcuts<footnote>
         <para>The default OmegaT shortcuts are available from Sourceforge:
         <ulink
-        url="http://omegat.svn.sourceforge.net/viewvc/omegat/branches/release-2-5/src/org/omegat/gui/main/MainMenuShortcuts.properties">Default
+        url="http://omegat.svn.sourceforge.net/viewvc/omegat/branches/release-2-6/src/org/omegat/gui/main/MainMenuShortcuts.properties">Default
         OmegaT Shortcuts</ulink></para>
 
         <para>The default OmegaT shortcuts for the Mac are also available from
         Sourceforge, they all use "meta" instead of "ctrl": <ulink
-        url="http://omegat.svn.sourceforge.net/viewvc/omegat//branches/release-2-5/src/org/omegat/gui/main/MainMenuShortcuts.mac.properties">Default
+        url="http://omegat.svn.sourceforge.net/viewvc/omegat/branches/release-2-6/src/org/omegat/gui/main/MainMenuShortcuts.mac.properties">Default
         OmegaT Shortcuts for the Mac</ulink></para>
       </footnote>, one can find:</para>
 
@@ -167,6 +166,14 @@
             <entry><keycap>Ctrl+O</keycap></entry>
 
             <entry>projectOpenMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Download Team Project</entry>
+
+            <entry/>
+
+            <entry>projectTeamNewMenuItem</entry>
           </row>
 
           <row>
@@ -398,7 +405,7 @@
           </row>
 
           <row>
-            <entry>Lower Case</entry>
+            <entry>Switch Case to/Lower Case</entry>
 
             <entry/>
 
@@ -406,7 +413,7 @@
           </row>
 
           <row>
-            <entry>Upper Case</entry>
+            <entry>Switch Case to/Upper Case</entry>
 
             <entry/>
 
@@ -414,7 +421,7 @@
           </row>
 
           <row>
-            <entry>Title Case</entry>
+            <entry>Switch Case to/Title Case</entry>
 
             <entry/>
 
@@ -428,6 +435,23 @@
 
             <entry>cycleSwitchCaseMenuItem</entry>
           </row>
+
+          <row>
+            <entry>Use as Default Translation</entry>
+
+            <entry/>
+
+            <entry>editMultipleDefault</entry>
+          </row>
+
+          <row>
+            <entry>Create Alternative Translation</entry>
+
+            <entry/>
+
+            <entry>editMultipleAlternate</entry>
+          </row>
+
         </tbody>
       </tgroup>
     </table>
@@ -492,17 +516,33 @@
           </row>
 
           <row>
-            <entry>Back in history...</entry>
+            <entry>Next Note</entry>
 
-            <entry><keycap>Ctrl+Shift+P</keycap></entry>
+            <entry/>
 
-            <entry>gotoHistoryForwardMenuItem</entry>
+            <entry>gotoNextNoteMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Previous Note</entry>
+
+            <entry/>
+
+            <entry>gotoPreviousNoteMenuItem</entry>
           </row>
 
           <row>
             <entry>Forward in history...</entry>
 
             <entry><keycap>Ctrl+Shift+N</keycap></entry>
+
+            <entry>gotoHistoryForwardMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Back in history...</entry>
+
+            <entry><keycap>Ctrl+Shift+P</keycap></entry>
 
             <entry>gotoHistoryBackMenuItem</entry>
           </row>
@@ -574,6 +614,38 @@
           </row>
 
           <row>
+            <entry>Mark Segments with Notes</entry>
+
+            <entry/>
+
+            <entry>viewMarkNotedSegmentsCheckBoxMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Mark Non-breakable Spaces</entry>
+
+            <entry/>
+
+            <entry>viewMarkNBSPCheckBoxMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Mark Whitespace</entry>
+
+            <entry/>
+
+            <entry>viewMarkWhitespaceCheckBoxMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Mark Bidirectional Algorithm Control Characters</entry>
+
+            <entry/>
+
+            <entry>viewMarkBidiCheckBoxMenuItem</entry>
+          </row>
+
+           <row>
             <entry>Modification Info/Display None</entry>
 
             <entry/>
@@ -581,7 +653,7 @@
             <entry>viewDisplayModificationInfoNoneRadioButtonMenuItem</entry>
           </row>
 
-          <row>
+         <row>
             <entry>Modification Info/Display Selected</entry>
 
             <entry/>
@@ -790,7 +862,7 @@
           </row>
 
           <row>
-            <entry>Save...</entry>
+            <entry>Saving and Output...</entry>
 
             <entry/>
 

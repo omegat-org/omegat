@@ -174,9 +174,6 @@
                 <filter token="TRANSLATION_NOTICE" value=""/>
             </filterset>
         </copy>
-        <copy todir="dist/docs">
-            <fileset dir="release" includes="license.txt doc-license.txt" />
-        </copy>
         <mkdir dir="dist/images"/>
         <copy todir="dist/images">
             <fileset dir="images"/>
@@ -375,6 +372,9 @@ Custom strings from release\win32-specific must be added manually to the languag
                 <pathelement path="build/classes" />
             </classpath>
         </java>
+        <copy todir="docs">
+            <fileset dir="release" includes="license.txt doc-license.txt" />
+        </copy>
     </target>
     
 </project>

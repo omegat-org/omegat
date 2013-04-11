@@ -38,6 +38,11 @@
 			<string>$JAVAROOT/lib/sequence-library-1.0.2.jar</string>
 			<string>$JAVAROOT/lib/org.eclipse.jgit-2.1.0.201209190230-r.jar</string>
 			<string>$JAVAROOT/lib/jsch-0.1.49.jar</string>
+			<string>$JAVAROOT/lib/lucene-analyzers-3.6.2.jar</string>
+			<string>$JAVAROOT/lib/lucene-core-3.6.2.jar</string>
+			<string>$JAVAROOT/lib/lucene-kuromoji-3.6.2.jar</string>
+			<string>$JAVAROOT/lib/lucene-smartcn-3.6.2.jar</string>
+			<string>$JAVAROOT/lib/tinysegmenter.jar</string>
 			<string>$JAVAROOT/native/libhunspell-macos64.dylib</string>
 			<string>$JAVAROOT/native/libhunspell-macos32.dylib</string>
 		</array>

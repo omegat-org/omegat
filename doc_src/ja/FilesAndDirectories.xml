@@ -1,0 +1,371 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<chapter id="chapter.files.and.directories">
+  <title><application>OmegaT</application> ファイルとフォルダー</title>
+
+  <para><application>OmegaT</application> は大きく分けて３種類のファイルを扱います。</para>
+
+  <itemizedlist>
+    <listitem>
+      <para>翻訳プロジェクトファイル：翻訳プロジェクトを構成するファイル群です。これらが欠けると、プロジェクトの整合性が失われ、作業を完了できなくなることがあります。プロジェクトファイルは <application>OmegaT</application> の中でも最も重要です。翻訳中、常に使用することになるファイルです。</para>
+    </listitem>
+  </itemizedlist>
+
+  <itemizedlist>
+    <listitem>
+      <para>個人設定ファイル：OmegaT の設定がユーザーによって変更されたときに作成されるファイルです。これらのファイルが失われると、OmegaT はいわゆる 「工場出荷時の（つまりデフォルトの）設定」に戻ることになります。この状態だと、翻訳途中で若干の問題が起きることもあります。</para>
+    </listitem>
+  </itemizedlist>
+
+  <itemizedlist>
+    <listitem>
+      <para>プログラム ファイル：ダウンロードしたパッケージに含まれるファイルです。ほとんどのファイルは、OmegaT を正常に動作させるために必要です。これらのファイルが何らかの理由で消失するか破損してしまった場合は、修復するために OmegaT を（必要であれば）再ダウンロードして、再インストールしてください。</para>
+    </listitem>
+  </itemizedlist>
+
+  <section id="translation.project.files">
+    <title>翻訳プロジェクトファイル</title>
+
+    <indexterm class="singular">
+      <primary>プロジェクトファイル</primary> <secondary>翻訳プロジェクトファイル</secondary>
+    </indexterm>
+
+    <para><application>OmegaT</application> の翻訳プロジェクトは、複数のファイルとフォルダーから構成されています。</para>
+
+    <para>翻訳プロジェクトを作成すると、OmegaT は指定された名前のフォルダーを自動作成し、さらにその配下にいくつかのフォルダーを作成します：</para>
+
+    <figure id="OmegaT.project">
+      <title>OmegaT プロジェクト</title>
+
+      <mediaobject>
+        <imageobject role="html">
+		          <imagedata fileref="images/Omegatproject.png"/>
+       </imageobject>
+      <imageobject role="fo">
+          <imagedata fileref="images/Omegatproject.png" width="60%"/>
+        </imageobject>
+      </mediaobject>
+	  </figure>
+
+    <para>フォルダーの中には、プロジェクト作成時や翻訳作業の途中で、デフォルトから別の場所に変更できるものもあります。変更先のフォルダーは、各自のワークフローとプロジェクト管理習慣に応じて、既存の場所を指定したり、新規作成したりできます。プロジェクト作成後に場所を変更するときは、メニューから<guimenuitem>［プロジェクト］→［プロジェクト設定...］</guimenuitem> を選ぶか、ショートカット <guibutton>Ctrl+E</guibutton> で設定ダイアログを開き、必要な変更を行ってください。</para>
+
+    <para>OmegaT 以外のファイルマネージャーで見ると、翻訳プロジェクトは他のフォルダーと特に区別無く表示されます。下の図は OmegaT での表示例ですが、<filename>マイ プロジェクト</filename>フォルダーに３つの OmegaT プロジェクトが含まれていることが分かります。</para>
+
+    <para><figure id="OmegaT.projects.and.subdirectories">
+        <title>OmegaT プロジェクトと通常のフォルダー</title>
+
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="images/OmegaT_projects_and_subdirectories.png"/>
+          </imageobject>
+        </mediaobject>
+      </figure></para>
+
+    <para>OmegaT アイコンをダブルクリックすると、プロジェクトが開きます。新規プロジェクトをデフォルトの設定で作成した場合、以下の構成で新しいフォルダー群が作成されます。</para>
+
+    <section id="file.omegat.project">
+      <title>トップ フォルダー<indexterm class="singular">
+          <primary>プロジェクトファイル</primary> <secondary>omegat.project ファイル</secondary>
+        </indexterm></title>
+
+      <para>トップ フォルダーには、必ず <filename>OmegaT.Project</filename> ファイルが存在します。このファイルには、プロジェクトの設定ウィンドウ（<guimenuitem>［プロジェクト］→［プロジェクトの設定...］</guimenuitem>）で設定された値が保存されています。翻訳作業を開始すると、このフォルダーにいくつかのファイル（<filename>プロジェクト名-omegat.tmx</filename>、<filename>プロジェクト名-level1.tmx</filename>、<filename>プロジェクト名-level2.tmx</filename>）が作成され、翻訳作業のあいだ絶えず更新されていきます。これらのファイルには、将来のプロジェクトで再利用できるように、まったく同じ翻訳メモリの同一の内容が、それぞれ異なる形式で記録されます。</para>
+    </section>
+
+    <section>
+      <title>dictionary フォルダー</title>
+
+      <para>このフォルダーは、最初は空の状態です。プロジェクトに辞書を追加する際、辞書ファイルの置き場所になります。詳しくは<link linkend="chapter.dictionaries">辞書</link>の章を参照してください。</para>
+    </section>
+
+    <section>
+      <title>glossary フォルダー</title>
+
+      <para>このフォルダーは、最初は空の状態です。プロジェクトで使用する用語集ファイルの置き場所になります。詳しくは<link linkend="chapter.glossaries">用語集</link>の章を参照してください。</para>
+    </section>
+
+    <section id="folder.OmegaT">
+      <title>omegat フォルダー<indexterm class="singular">
+          <primary>プロジェクトファイル</primary> <secondary>omegat フォルダー</secondary>
+        </indexterm></title>
+
+      <para><emphasis role="bold">omegat</emphasis> フォルダーには最低でも１つ、場合によってはそれ以上のファイルが存在します。ここで最も重要なのは、<filename>project_save.tmx</filename> でしょう。このファイルこそ、プロジェクトの作業用翻訳メモリになります。このファイルのバックアップ ファイル（拡張子が .bak）が、定期的に追加されていきます。保存されるタイミングは、翻訳作業の開始時、終了時、そして作業中など、随時です。これにより、データはどこへ消えた？という事態を未然に防ぐことができます。詳しくは<link linkend="chapter.misc">その他</link>の章に収録されている『データを失わないために』を参照してください。</para>
+
+      <para>他にも、翻訳作業中に必要に応じて以下のファイルが作成される場合があります。</para>
+
+      <para><informaltable>
+          <tgroup align="left" cols="2" rowsep="1">
+            <colspec align="left" colnum="1" colwidth="120"/>
+
+            <tbody>
+              <row>
+                <entry>stats.txt</entry>
+
+                <entry><indexterm class="singular">
+                    <primary>プロジェクトファイル</primary> <secondary>翻訳状況ファイル</secondary>
+                  </indexterm>現在のプロジェクトの翻訳状況が記録されます。<guimenuitem>メニューの［ツール］→［翻訳状況］</guimenuitem>から参照できます。</entry>
+              </row>
+
+              <row>
+                <entry>ignored_words.txt. learned_words.txt</entry>
+
+                <entry><indexterm class="singular">
+                    <primary>プロジェクトファイル</primary> <secondary>ignored_words と learned_words</secondary>プロジェクトファイル
+                  </indexterm>綴り確認機能によって作成・使用されます。綴り確認機能に無視してほしい、あるいは学習させたい単語があれば、<filename>omegat</filename> フォルダーの対応する２ファイルに入力しておきます。</entry>
+              </row>
+
+              <row>
+                <entry>project_stats_match.txt</entry>
+
+                <entry>現在のプロジェクトの参考訳文の一致率が記録されます。<guimenuitem>メニューの［ツール］→［参考訳文の一致率］</guimenuitem>を選ぶと、作成されます。</entry>
+              </row>
+
+              <row>
+                <entry>segmentation.conf</entry>
+
+                <entry>このファイルが存在する場合は、<guimenuitem>［プロジェクト］→［プロジェクトの設定...］</guimenuitem>で設定されたプロジェクト専用の分節化規則が含まれています。詳しくは<link linkend="chapter.project.properties">プロジェクトの設定</link>の章を参照してください。</entry>
+              </row>
+
+              <row>
+                <entry>filters.xml</entry>
+
+                <entry>このファイルが存在する場合は、<guimenuitem>［プロジェクト］→［プロジェクトの設定...］</guimenuitem>で設定されたプロジェクト専用のファイルフィルターが含まれています。詳しくは<link linkend="chapter.project.properties">プロジェクトの設定</link>の章を参照してください。</entry>
+              </row>
+            </tbody>
+          </tgroup>
+        </informaltable></para>
+    </section>
+
+    <section id="folder.source">
+      <title>source フォルダー<indexterm class="singular">
+          <primary>プロジェクトファイル</primary> <secondary>source フォルダー</secondary>
+        </indexterm></title>
+
+      <para>source フォルダーには、翻訳したいファイルを置きます。ファイルは、後からでも追加できます。source フォルダー内部の階層構造をどうするかについては、完全にユーザーに任されています。翻訳したいファイルが（ウェブサイトのような）あるツリー構造の一部に入っている場合は、そのツリーの最上位のフォルダーを指定してください。そうすると OmegaT はツリー構造を保ったまま、全体を source フォルダーにコピーします。</para>
+    </section>
+
+    <section id="folder.target">
+      <title>target フォルダー<indexterm class="singular">
+          <primary>プロジェクトファイル</primary> <secondary>target フォルダー</secondary>
+        </indexterm></title>
+
+      <para>このフォルダーは、最初は空の状態です。メニュー<menuchoice> <shortcut> <keycombo> <keycap>Ctrl</keycap> <keycap>D</keycap> </keycombo> </shortcut> <guimenu>プロジェクト</guimenu> <guimenuitem>訳文ファイルを生成</guimenuitem> </menuchoice>を選ぶと、この場所に訳文ファイルが生成されます。<filename>source</filename> フォルダーの中のファイルは、翻訳対象かどうかを問わずすべて生成されます。またフォルダーの階層構造もそのまま再現されます。生成されるファイルは、その時点の翻訳作業の進行状況を反映した内容になります。つまり、<emphasis role="bold">/omegat/project_save.tmx</emphasis> に保存された翻訳メモリの内容が反映されます。未翻訳分節は、原文のままです。</para>
+    </section>
+  </section>
+
+  <section id="user.files">
+    <title>個人設定ファイル<indexterm class="singular">
+        <primary>プロジェクトファイル</primary> <secondary>個人設定ファイル</secondary>
+      </indexterm></title>
+
+    <para>個人設定ファイルには、ユーザー固有の情報が格納されています。これはすべてのプロジェクト共通で使用されます。</para>
+
+    <informaltable>
+      <tgroup align="left" cols="2" rowsep="1">
+        <colspec align="left" colnum="1" colwidth="100"/>
+
+        <tbody>
+          <row>
+            <entry>logs/OmegaT.log</entry>
+
+            <entry><application>OmegaT</application> 実行中の Java エラーメッセージが記録されます。もし OmegaT の動作がおかしいと思ったら、バグ報告の際に、このファイル自体または関連する箇所を抜き出して含めると、大いに役立ちます。</entry>
+          </row>
+
+          <row>
+            <entry>script/</entry>
+
+            <entry>スクリプト プラグインをインストールした場合は、このフォルダーにスクリプト ファイルを置きます。</entry>
+          </row>
+
+          <row>
+            <entry>filters.xml</entry>
+
+            <entry>ユーザー デフォルトのファイルフィルターです。</entry>
+          </row>
+
+          <row>
+            <entry>omegat.prefs</entry>
+
+            <entry>OmegaT の設定ファイルです。</entry>
+          </row>
+
+          <row>
+            <entry>segmentation.conf</entry>
+
+            <entry>ユーザー デフォルトの分節化規則です。</entry>
+          </row>
+
+          <row>
+            <entry>uiLayout.xml</entry>
+
+            <entry>GUI に関する情報（ウィンドウのレイアウト）が記録された XML ファイルです。</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </informaltable>
+
+    <para>デフォルトの分節化規則とファイルフィルターよりも、プロジェクト専用の設定（前述）が存在した場合は、そちらが優先されます。個人設定ファイルの場所は、使用するプラットフォームによって異なります：</para>
+
+    <informaltable>
+      <tgroup align="left" cols="2" rowsep="1">
+        <colspec align="left" colnum="1" colwidth="100"/>
+
+        <tbody>
+          <row>
+            <entry>Windows 2000 および Windows XP</entry>
+
+            <entry><literal>Documents and Settings\&lt;User
+            Name&gt;\Application
+            Data\<application>OmegaT</application></literal></entry>
+          </row>
+
+          <row>
+            <entry>Windows Vista および Windows 7</entry>
+
+            <entry><literal>Users\&lt;User
+            Name&gt;\AppData\Roaming\<application>OmegaT</application></literal></entry>
+          </row>
+
+          <row>
+            <entry>上記以外の Windows</entry>
+
+            <entry><literal>&lt;Something&gt;\<application>OmegaT</application></literal>（&lt;Something&gt; は Java が認識する「home」フォルダーの場所です）</entry>
+          </row>
+
+          <row>
+            <entry>Linux/Solaris/FreeBSD</entry>
+
+            <entry><literal>&lt;ユーザーホームフォルダー&gt;/.omegat</literal>（.omegat はフォルダーで、先頭にドットがあるため、ls -a やそれに準じるコマンドでなければ一覧表示されません）</entry>
+          </row>
+
+          <row>
+            <entry>MAC OS X</entry>
+
+            <entry><filename>&lt;ユーザーホームフォルダー&gt;/Library/Preferences/<application>OmegaT</application></filename></entry>
+          </row>
+
+          <row>
+            <entry>その他</entry>
+
+            <entry><filename>&lt;ユーザーホームフォルダー&gt;</filename></entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </informaltable>
+  </section>
+
+  <section id="application.files">
+    <title>プログラムファイル<indexterm class="singular">
+        <primary>プロジェクトファイル</primary> <secondary>プログラムファイル</secondary>
+      </indexterm></title>
+
+    <para>OmegaT は SourceForge サイトからダウンロードできるパッケージファイルとして提供されます。ここでは、標準的な Java 形式のプログラムを含んだプラットフォーム非依存のパッケージについて説明します。他のパッケージとしては、Linux 版の .tar パッケージ、Windows 版インストーラー（Java 実行環境ありまたはなし）、Mac OS X 版インストーラー、開発者向けソースコードなどがあります。</para>
+
+    <para>プラットフォーム非依存パッケージは、Java 実行環境（JRE）バージョン 1.5 が動くプラットフォームであれば、どこでも使用できます。そのプラットフォーム専用のパッケージがインストール済みの場合でも、共存できます。プラットフォーム非依存パッケージは圧縮ファイル（zip または TAR アーカイブ）で提供されているため、インストール先に選んだフォルダーに解凍する必要があります。たいていはダウンロードしたパッケージファイルをダブルクリックすれば、解凍できます。圧縮ファイルを解凍すると、以下の内容を含むフォルダーが生成されます：</para>
+
+    <informaltable>
+      <tgroup align="left" cols="2" rowsep="1">
+        <colspec align="left" colnum="1" colwidth="100"/>
+
+        <tbody>
+          <row>
+            <entry><emphasis role="bold">ファイル/ フォルダー</emphasis></entry>
+
+            <entry><emphasis role="bold">内容</emphasis></entry>
+          </row>
+
+          <row>
+            <entry><filename>docs/</filename></entry>
+
+            <entry>取扱説明書の全ファイルを格納します。取扱説明書に含まれる外部リンクへアクセスする場合は、これらのファイルをウェブブラウザーで開いてください。</entry>
+          </row>
+
+          <row>
+            <entry><filename>images/</filename></entry>
+
+            <entry>アイコンとロゴ画像を格納します。</entry>
+          </row>
+
+          <row>
+            <entry><filename>lib/</filename></entry>
+
+            <entry><application>OmegaT</application> を利用するために必要な Java のファイルを格納します。</entry>
+          </row>
+
+          <row>
+            <entry><filename>join.html</filename></entry>
+
+            <entry>通常の HTML ファイルです。ウェブブラウザーで開くと、Yahoo! の OmegaT ユーザーグループへリダイレクトされます。参加は必須ではありませんが、もし参加すれば、OmegaT に関するディスカッションに加われるほか、別途準備されたファイルの入手や、不定期に行われる調査などに参加することが可能になります。過去ログは公開されており、閲覧するだけなら参加登録は必要ありません。</entry>
+          </row>
+
+          <row>
+            <entry><filename>changes.txt</filename></entry>
+
+            <entry>過去のバージョンから現在のバージョンまでの変更点の詳細が記されています。</entry>
+          </row>
+
+          <row>
+            <entry><filename>license.txt</filename></entry>
+
+            <entry>GNU GENERAL PUBLIC LICENSE（GNU 一般公衆利用許諾契約書）です。このライセンスにより、改変や再配布を含めた <application>OmegaT</application> の自由な利用が認められています。<application>OmegaT</application> の改変や再配布に興味がある場合は、それを実行する前にこの文書を慎重に読み、内容をよく理解しておいてください。不明点がある場合は、SourceForge サイト経由でメールを送るか、またはユーザーグループへ投稿して、プロジェクトのメンバーに問い合わせてください。</entry>
+          </row>
+
+          <row>
+            <entry><filename>doc-license.txt</filename></entry>
+
+            <entry>GNU GENERAL PUBLIC LICENSE（GNU 一般公衆利用許諾契約書）です。こちらは、取扱説明書に関するライセンスとなります。注意点は、上と同じです。</entry>
+          </row>
+
+          <row>
+            <entry><filename>readme.txt</filename></entry>
+
+            <entry>このファイルは、大変重要なファイルです。OmegaT を使用する前に必ず読み、内容を理解しておいてください。このファイルには、追加情報の入手先や、貢献方法など、OmegaT に関する全般的な内容が含まれています。このファイルは多くの言語に翻訳されています。</entry>
+          </row>
+
+          <row>
+            <entry rowsep="0"><literal>OmegaT</literal></entry>
+
+            <entry rowsep="0">以下の 2 行からなるテキストファイルです：</entry>
+          </row>
+
+          <row>
+            <entry rowsep="0"/>
+
+            <entry rowsep="0"><literal>#!/bin/bash java</literal></entry>
+          </row>
+
+          <row>
+            <entry rowsep="0"/>
+
+            <entry rowsep="0"><literal>java -jar
+            <application>OmegaT</application>.jar $*</literal></entry>
+          </row>
+
+          <row>
+            <entry/>
+
+            <entry>Linux および Mac OS X のユーザーでしたら、役に立つことでしょう。コマンドラインで OmegaT_2.6 フォルダーに移動してから、このファイルに実行権限をつけてください（chmod +x OmegaT）。このファイルをコマンドラインから実行することで、OmegaT を起動できます。</entry>
+          </row>
+
+          <row>
+            <entry rowsep="0"><literal>OmegaT.bat</literal></entry>
+
+            <entry rowsep="0">Windows の コマンドライン（コマンドプロンプト）から <application>OmegaT</application> を実行する際に使用するバッチファイルです。内容は以下の行のみです：</entry>
+          </row>
+
+          <row>
+            <entry/>
+
+            <entry><literal>java -jar OmegaT.jar
+            %*</literal></entry>
+          </row>
+
+          <row>
+            <entry><literal>OmegaT.jar</literal></entry>
+
+            <entry>主要な OmegaT のプログラムファイルです。OmegaT を起動するには、このファイルをコマンドライン上から実行するか、ファイルマネージャー上から（多くの場合そのアイコンをダブルクリックすることで）実行します。</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </informaltable>
+  </section>
+</chapter>

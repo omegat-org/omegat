@@ -1,0 +1,571 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<chapter id="chapter.regexp">
+  <title>正規表現<indexterm class="singular">
+      <primary>正規表現</primary> <seealso>分節化</seealso> <seealso>検索</seealso>
+    </indexterm></title>
+
+  <para>文字列検索と分節化規則で使用する正規表現は、Java がサポートしているものです。より詳細な情報については <ulink url="http://docs.oracle.com/javase/jp/1.5.0/api/java/util/regex/Pattern.html">Java の正規表現に関する技術文書</ulink>を参照してください。以下の構文一覧と使用例も参照してください。</para>
+
+  <note>
+    <para>この章は上級者のユーザーを対象にしています。独自の分節化規則を定義したり、こみいった条件での検索を必要とする場合に、参照してください。</para>
+  </note>
+
+  <table>
+    <title>正規表現 - フラグ</title>
+
+    <tgroup align="left" cols="2" rowsep="1">
+      <colspec align="left" colnum="1" colwidth="100"/>
+
+      <thead>
+        <row>
+          <entry align="left">構文</entry>
+
+          <entry align="left">一致対象</entry>
+        </row>
+      </thead>
+
+      <tbody>
+        <row>
+          <entry>(?i)</entry>
+
+          <entry>大文字と小文字を区別しない一致を有効にします（デフォルトでは大文字と小文字を区別します）</entry>
+        </row>
+      </tbody>
+    </tgroup>
+  </table>
+
+  <table>
+    <title>正規表現 - 文字</title>
+
+    <tgroup align="left" cols="2" rowsep="1">
+      <colspec align="left" colnum="1" colwidth="100"/>
+
+      <thead>
+        <row>
+          <entry align="left">構文</entry>
+
+          <entry align="left">一致対象</entry>
+        </row>
+      </thead>
+
+      <tbody>
+        <row>
+          <entry>x</entry>
+
+          <entry>文字 x（以下に示すもの以外）</entry>
+        </row>
+
+        <row>
+          <entry>\uhhhh</entry>
+
+          <entry>16 進値 0xhhhh を持つ文字</entry>
+        </row>
+
+        <row>
+          <entry>\t</entry>
+
+          <entry>タブ文字（'\u0009'）</entry>
+        </row>
+
+        <row>
+          <entry>\n</entry>
+
+          <entry>改行（ラインフィード、LF）文字（'\u000A'）</entry>
+        </row>
+
+        <row>
+          <entry>\r</entry>
+
+          <entry>キャリッジリターン（CR）文字（'\u000D'）</entry>
+        </row>
+
+        <row>
+          <entry>\f</entry>
+
+          <entry>用紙送り文字（'\u000C'）</entry>
+        </row>
+
+        <row>
+          <entry>\a</entry>
+
+          <entry>警告 (ベル) 文字（'\u0007'）</entry>
+        </row>
+
+        <row>
+          <entry>\e</entry>
+
+          <entry>エスケープ文字（'\u001B'）</entry>
+        </row>
+
+        <row>
+          <entry>\cx</entry>
+
+          <entry>x に対応する制御文字</entry>
+        </row>
+
+        <row>
+          <entry>\0n</entry>
+
+          <entry>8 進値 0n を持つ文字（0 &lt;= n &lt;= 7）</entry>
+        </row>
+
+        <row>
+          <entry>\0nn</entry>
+
+          <entry>8 進値 0nn を持つ文字（0 &lt;= n &lt;= 7）</entry>
+        </row>
+
+        <row>
+          <entry>\0mnn</entry>
+
+          <entry>8 進値 0mnn を持つ文字（0 &lt;= m &lt;= 3、0 &lt;= n &lt;= 7）</entry>
+        </row>
+
+        <row>
+          <entry>\xhh</entry>
+
+          <entry>16 進値 0xhh を持つ文字</entry>
+        </row>
+      </tbody>
+    </tgroup>
+  </table>
+
+  <table>
+    <title>正規表現 - 引用</title>
+
+    <tgroup align="left" cols="2" rowsep="1">
+      <colspec align="left" colnum="1" colwidth="100"/>
+
+      <thead>
+        <row>
+          <entry align="left">構文</entry>
+
+          <entry align="left">一致対象</entry>
+        </row>
+      </thead>
+
+      <tbody>
+        <row>
+          <entry>\</entry>
+
+          <entry>次の文字をエスケープします。以下のメタ文字（!$()*+.&lt;&gt;?[\]^{|}）自体を一致対象としたい場合に入力が必要です</entry>
+        </row>
+
+        <row>
+          <entry>\\</entry>
+
+          <entry>たとえば、この構文ではバックスラッシュ文字を表します</entry>
+        </row>
+
+        <row>
+          <entry>\Q</entry>
+
+          <entry>\E までのすべての文字をエスケープします</entry>
+        </row>
+
+        <row>
+          <entry>\E</entry>
+
+          <entry>\Q で開始された引用をエスケープします</entry>
+        </row>
+      </tbody>
+    </tgroup>
+  </table>
+
+  <table>
+    <title>正規表現 - Unicode ブロックとカテゴリのクラス</title>
+
+    <tgroup align="left" cols="2" rowsep="1">
+      <colspec align="left" colnum="1" colwidth="100"/>
+
+      <thead>
+        <row>
+          <entry align="left">構文</entry>
+
+          <entry align="left">一致対象</entry>
+        </row>
+      </thead>
+
+      <tbody>
+        <row>
+          <entry>\p{InGreek}</entry>
+
+          <entry>ギリシャ語ブロックの文字（単純 <ulink url="http://docs.oracle.com/javase/jp/1.5.0/api/java/util/regex/Pattern.html#ubc">ブロック</ulink>）</entry>
+        </row>
+
+        <row>
+          <entry>\p{Lu}</entry>
+
+          <entry>大文字（単純 <ulink url="http://docs.oracle.com/javase/jp/1.5.0/api/java/util/regex/Pattern.html#ubc">カテゴリ</ulink>）</entry>
+        </row>
+
+        <row>
+          <entry>\p{Sc}</entry>
+
+          <entry>通貨記号</entry>
+        </row>
+
+        <row>
+          <entry>\P{InGreek}</entry>
+
+          <entry>ギリシャ語ブロック以外の文字（否定）</entry>
+        </row>
+
+        <row>
+          <entry>[\p{L}&amp;&amp;[^\p{Lu}]]</entry>
+
+          <entry>大文字以外の文字（減算）</entry>
+        </row>
+      </tbody>
+    </tgroup>
+  </table>
+
+  <table>
+    <title>正規表現 - 文字クラス</title>
+
+    <tgroup align="left" cols="2" rowsep="1">
+      <colspec align="left" colnum="1" colwidth="100"/>
+
+      <thead>
+        <row>
+          <entry align="left">構文</entry>
+
+          <entry align="left">一致対象</entry>
+        </row>
+      </thead>
+
+      <tbody>
+        <row>
+          <entry>[abc]</entry>
+
+          <entry>a、b または c（単純クラス）</entry>
+        </row>
+
+        <row>
+          <entry>[^abc]</entry>
+
+          <entry>a、b、c 以外の文字（否定）</entry>
+        </row>
+
+        <row>
+          <entry>[a-zA-Z]</entry>
+
+          <entry>a 〜 z または A から Z（範囲）</entry>
+        </row>
+      </tbody>
+    </tgroup>
+  </table>
+
+  <table>
+    <title>正規表現 - 定義済みの文字クラス</title>
+
+    <tgroup align="left" cols="2" rowsep="1">
+      <colspec align="left" colnum="1" colwidth="100"/>
+
+      <thead>
+        <row>
+          <entry align="left">構文</entry>
+
+          <entry align="left">一致対象</entry>
+        </row>
+      </thead>
+
+      <tbody>
+        <row>
+          <entry>.</entry>
+
+          <entry>任意の文字（行末記号を除く）</entry>
+        </row>
+
+        <row>
+          <entry>\d</entry>
+
+          <entry>数字：[0-9]</entry>
+        </row>
+
+        <row>
+          <entry>\D</entry>
+
+          <entry>数字以外：[^0-9]</entry>
+        </row>
+
+        <row>
+          <entry>\s</entry>
+
+          <entry>空白文字：[ \t\n\x0B\f\r]</entry>
+        </row>
+
+        <row>
+          <entry>\S</entry>
+
+          <entry>非空白文字：[^\s]</entry>
+        </row>
+
+        <row>
+          <entry>\w</entry>
+
+          <entry>単語構成文字：[a-zA-Z_0-9]</entry>
+        </row>
+
+        <row>
+          <entry>\W</entry>
+
+          <entry>非単語文字：[^\w]</entry>
+        </row>
+      </tbody>
+    </tgroup>
+  </table>
+
+  <table>
+    <title>正規表現 - 境界正規表現エンジン</title>
+
+    <tgroup align="left" cols="2" rowsep="1">
+      <colspec align="left" colnum="1" colwidth="100"/>
+
+      <thead>
+        <row>
+          <entry align="left">構文</entry>
+
+          <entry align="left">一致対象</entry>
+        </row>
+      </thead>
+
+      <tbody>
+        <row>
+          <entry>^</entry>
+
+          <entry>行の先頭</entry>
+        </row>
+
+        <row>
+          <entry>$</entry>
+
+          <entry>行の末尾</entry>
+        </row>
+
+        <row>
+          <entry>\b</entry>
+
+          <entry>単語境界</entry>
+        </row>
+
+        <row>
+          <entry>\B</entry>
+
+          <entry>非単語境界</entry>
+        </row>
+      </tbody>
+    </tgroup>
+  </table>
+
+  <table>
+    <title>正規表現 - 最長一致数量子</title>
+
+    <tgroup align="left" cols="2" rowsep="1">
+      <colspec align="left" colnum="1" colwidth="100"/>
+
+      <thead>
+        <row>
+          <entry align="left">構文</entry>
+
+          <entry align="left">一致対象</entry>
+        </row>
+      </thead>
+
+      <tbody>
+        <row>
+          <entry>X<emphasis>?</emphasis></entry>
+
+          <entry>X、1 または 0 回</entry>
+        </row>
+
+        <row>
+          <entry>X<emphasis>*</emphasis></entry>
+
+          <entry>X、0 回以上</entry>
+        </row>
+
+        <row>
+          <entry>X<emphasis>+</emphasis></entry>
+
+          <entry>X、1 回以上</entry>
+        </row>
+      </tbody>
+    </tgroup>
+  </table>
+
+  <note>
+    <para>最長一致数量子は、指定した文字となるべく多い文字数で一致します。たとえば <emphasis>a+?</emphasis> は文字列 <emphasis>aaabbb</emphasis> にある <emphasis>aaa</emphasis> と一致します。</para>
+  </note>
+
+  <table>
+    <title>正規表現 - 最短一致数量子</title>
+
+    <tgroup align="left" cols="2" rowsep="1">
+      <colspec align="left" colnum="1" colwidth="100"/>
+
+      <thead>
+        <row>
+          <entry align="left">構文</entry>
+
+          <entry align="left">一致対象</entry>
+        </row>
+      </thead>
+
+      <tbody>
+        <row>
+          <entry>X??</entry>
+
+          <entry>X、1 または 0 回</entry>
+        </row>
+
+        <row>
+          <entry>X*?</entry>
+
+          <entry>X、0 回以上</entry>
+        </row>
+
+        <row>
+          <entry>X+?</entry>
+
+          <entry>X、1 回以上</entry>
+        </row>
+      </tbody>
+    </tgroup>
+  </table>
+
+  <note>
+    <para>最短一致数量子は、指定した文字となるべく少ない文字数で一致します。たとえば <emphasis>a+?</emphasis> は文字列 <emphasis>aaabbb</emphasis> にある最初の <emphasis>a</emphasis> と一致します。</para>
+  </note>
+
+  <table>
+    <title>正規表現 - 論理演算子</title>
+
+    <tgroup align="left" cols="2" rowsep="1">
+      <colspec align="left" colnum="1" colwidth="100"/>
+
+      <thead>
+        <row>
+          <entry align="left">構文</entry>
+
+          <entry align="left">一致対象</entry>
+        </row>
+      </thead>
+
+      <tbody>
+        <row>
+          <entry>XY</entry>
+
+          <entry>X の直後に Y</entry>
+        </row>
+
+        <row>
+          <entry>X|Y</entry>
+
+          <entry>X または Y</entry>
+        </row>
+
+        <row>
+          <entry>(XY)</entry>
+
+          <entry>XY を 1 つのグループとして扱います</entry>
+        </row>
+      </tbody>
+    </tgroup>
+  </table>
+
+  <section id="regex.tools.and.examples.of.use">
+    <title><indexterm class="singular">
+        <primary>正規表現</primary> <secondary>関連ツール</secondary>
+      </indexterm>正規表現関連ツールとその使用例<indexterm class="singular">
+        <primary>正規表現</primary> <secondary>使用例</secondary>
+      </indexterm></title>
+
+    <para>正規表現の作成やテストを行える対話式のツールは、たくさんあります。それらのツールは、たいてい同じ使い方ができます（実例は、下の Regular Expression Tester を参照してください）。入力した正規表現（図では最上段の「Regular Expression」）にしたがって対象テキスト（中段の「Search Text」）を検索し、その結果（下段の「Result」）を表示します。</para>
+
+    <figure id="regerx.tester">
+      <title>Regex Tester</title>
+
+      <mediaobject>
+        <imageobject role="html">
+          <imagedata fileref="images/RegexTester.png"/>
+        </imageobject>
+
+        <imageobject role="fo">
+          <imagedata fileref="images/RegexTester.png" width="80%"/>
+        </imageobject>
+      </mediaobject>
+    </figure>
+
+    <para>Windows、Linux、FreeBSD 向けの単体ツールを探しているなら、<ulink url="http://weitz.de/regex-coach/">The Regex Coach</ulink> を確認してみてください。このツールは、上の例（Firefox アドオン）とほとんど同じように使えます。</para>
+
+    <para>正規表現の便利な構文例は、<application>OmegaT</application> 自体にも含まれています（［設定］→［分節化規則...］を参照してください）。以下は、特に翻訳メモリを検索する場合に便利な正規表現の一覧です：</para>
+
+    <table>
+      <title>正規表現 - 翻訳で使える正規表現例</title>
+
+      <tgroup align="left" cols="2" rowsep="1">
+        <colspec align="left" colnum="1" colwidth="100"/>
+
+        <thead>
+          <row>
+            <entry>正規表現</entry>
+
+            <entry>検索対象</entry>
+          </row>
+        </thead>
+
+        <tbody>
+          <row>
+            <entry>(\b\w+\b)\s\1\b</entry>
+
+            <entry>重複している単語</entry>
+          </row>
+
+          <row>
+            <entry>[\.,]\s*[\.,]+</entry>
+
+            <entry>カンマまたはピリオドの後ろに、０個以上のスペースが続いて、再びカンマまたはピリオド</entry>
+          </row>
+
+          <row>
+            <entry>\. \s+$</entry>
+
+            <entry>行末で、ピリオドの後ろに余分なスペースがある箇所</entry>
+          </row>
+
+          <row>
+            <entry>\s+a\s+[aeiou]</entry>
+
+            <entry>英語：母音で始まる単語の前に「an」でなく「a」がある箇所</entry>
+          </row>
+
+          <row>
+            <entry>\s+an\s+[^aeiou]</entry>
+
+            <entry>英語：子音で始まる単語の前に「a」でなく「an」がある箇所</entry>
+          </row>
+
+          <row>
+            <entry>\s{2,}</entry>
+
+            <entry>2 個以上の空白</entry>
+          </row>
+
+          <row>
+            <entry>\.[A-Z]</entry>
+
+            <entry>ピリオドの直後に大文字が続く箇所 - 新しい文章の前の空白が欠落している可能性あり？</entry>
+          </row>
+
+          <row>
+            <entry>\bis\b</entry>
+
+            <entry>「is」を検索（「this」や「isn't」などに一致させない）</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+  </section>
+</chapter>

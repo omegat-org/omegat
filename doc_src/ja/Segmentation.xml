@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<chapter id="chapter.segmentation">
+  <title>原文の分節化</title>
+
+  <para>翻訳メモリツールは、分節と呼ばれるテキスト単位で処理を行います。<application>OmegaT</application> がテキストを分節化する方法は２つあります。段落単位の分節化と、文単位の分節化（「ルールベースの分節化」とも呼ばれます）です。分節化の方法を選択するには、メインメニューから<menuchoice><guimenu><indexterm class="singular">
+          <primary>プロジェクト</primary> <secondary>プロジェクト設定</secondary>
+        </indexterm>［プロジェクト］</guimenu><guimenuitem>［プロジェクト設定...］</guimenuitem></menuchoice>を開き、表示されるチェックボックスを使用してください。段落単位の分節化は、高度に文学的または芸術的な翻訳のような、一部のケースでは有用です。これらの翻訳では、文脈に応じて翻訳者が文の順番を入れ替えることがあるためです。しかし大半のプロジェクトでは、文単位の分節化が望ましいでしょう。その方が、過去の翻訳と一致しやすい（再利用しやすい）ためです。文単位の分節化を選択した場合、分節化規則は、メインメニューの<menuchoice><guimenu><indexterm class="singular">
+          <primary>プロジェクト</primary> <secondary>設定</secondary>
+        </indexterm>［設定］</guimenu><guimenuitem>［分節化...］</guimenuitem></menuchoice>で設定できます。</para>
+
+  <para>信頼できる分節化規則が多くの言語で設定済みのため、新たな独自規則を作成する必要は、あまりないでしょう。一方で、特定の状況では、翻訳する原文に合わせて分節化規則を調整することで、大きく生産性を上げることができるようになります。</para>
+
+  <para><emphasis role="bold">警告：</emphasis>ファイルフィルターの設定を変更すると、分節が変化することがあります。場合によっては、翻訳を一からやり直すことになるかもしれません。このとき、以前は有効だった翻訳済みの分節は、翻訳メモリ内で、現在の原文に存在しない分節になります。またプロジェクトを開いているときに分節化の設定を変更すると、変更を適用するためにプロジェクトの再読み込みが必要になります。</para>
+
+  <para><application>OmegaT</application> は下記の通りに一連の処理を実施します：</para>
+
+  <variablelist> <varlistentry> <term> <indexterm class="singular">
+          <primary>分節化</primary> <secondary>構造単位の分節化</secondary>
+        </indexterm>構造単位の分節化</term>
+
+      <listitem>
+        <para><application>OmegaT</application> は、まず構造単位の分節化を行うため、文書の構文を解析します。この処理のあいだ、分節作成のために参照される内容は、原文ファイルの構造のみです。</para>
+
+        <para>たとえば、テキストファイルの場合は、改行で分節化するか、空行で分節化するか、または、まったく分節化しないかのいずれかです。見映えの情報を持ったファイル（ODF 文書、HTML 文書など）は、ブロックレベル（段落）のタグを基準に分節化されます。XHTML や HTML ファイルでは、オブジェクトの属性も翻訳の対象になることがあります。このような場合は、属性値だけを分節として取り出します。</para>
+      </listitem>
+    </varlistentry> <varlistentry> <term> <indexterm class="singular">
+          <primary>分節化</primary> <secondary>文単位の分節化</secondary>
+        </indexterm>文単位の分節化</term>
+
+      <listitem>
+        <para>原文ファイルを論理的な区切りで分節化した後、<application>OmegaT</application> はさらにそれらを文単位で分節化します。</para>
+      </listitem>
+    </varlistentry>
+  </variablelist>
+
+  <section id="segmentation.rules">
+    <title>分節化規則<indexterm class="singular">
+        <primary>分節化</primary> <secondary>規則</secondary>
+      </indexterm></title>
+
+    <para>分節化の流れは以下のように示すことができます：テキスト中を 1 文字ずつ動くカーソルをイメージしてください。それぞれのカーソル位置について、規則を適用できるかどうか、決められた順序で確認します。すなわち、カーソル位置の左側にあるテキスト全体が、<emphasis role="bold">分節前の</emphasis> 構成例に合致するかどうか。合致した場合はさらに、カーソル位置の右側にあるテキストが、<emphasis role="bold">分節後の</emphasis> 構成例に合致するかどうか。適用できる規則が見つかれば、そのカーソル位置についてはそれ以上規則を確認しません。見つかった規則が「例外」の場合は、何もせずにカーソルを次へ進めます。「分節」の場合は、カーソル位置で改節してから、カーソルを次へ進めます。</para>
+
+    <para>規則には、次に示す２種類があります：</para>
+
+    <variablelist> <varlistentry> <term><indexterm class="singular">
+            <primary>分節化</primary> <secondary>規則</secondary> <tertiary>分節規則</tertiary>
+          </indexterm>分節規則</term>
+
+        <listitem>
+          <para>原文テキストを２つの分節に分割します。たとえば「<emphasis>Did it make sense? I was not sure.</emphasis>」というテキストは、意味的に２つの分節に分けられるべきです。そのためには「?」に関する分節規則（後ろにスペースと大文字で始まる単語が続く場合、という条件付きで）があるほうがよいでしょう。改節するための規則を定義する場合は、［分節 または 例外］チェックボックスにチェックを入れます。</para>
+        </listitem>
+      </varlistentry> </variablelist> <variablelist> <varlistentry> <term><indexterm class="singular">
+            <primary>分節化</primary> <secondary>規則</secondary> <tertiary>例外規則</tertiary>
+          </indexterm>例外規則</term>
+
+        <listitem>
+          <para>分けられるべき「でない」テキストを指定します。「<emphasis>Mrs. Dalloway</emphasis>」というテキストはピリオドを含みますが、２つに分節化されるべきではありません。したがって、ピリオドの前に「Mrs」（他に Mr、Dr、prof など）がある場合についての例外規則が必要になります。改節を禁止するための規則を定義する場合は、［分節 または 例外］チェックボックスにチェックを入れずにおきます。</para>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+
+    <para>ほとんどのヨーロッパ言語と日本語については、定義済みの分節規則で十分なはずです。翻訳しようとする言語に対して、より意味のあるわかりやすい分節化を行うために、さらに柔軟に例外規則を追加してもよいでしょう。</para>
+  </section>
+
+  <section id="rules.priority">
+    <title>規則の優先順位<indexterm class="singular">
+        <primary>分節化</primary> <secondary>規則の優先順位</secondary>
+      </indexterm></title>
+
+    <para>言語の構成例について一致する分節化規則は、すべて与えられた優先順で適用されます。したがって、特定の言語のために設定した規則は、デフォルトのものより高い優先順位を与えるほうがよいでしょう。たとえば、カナダフランス語（FR-CA）用の規則は、フランス語（FR.*）用の規則よりも優先順位を高くし、なおかつデフォルト（.*）の規則よりも高くしておきます。こうしておけば、カナダフランス語を原文とするプロジェクトでは、まずカナダフランス語用の規則、次にフランス語用の規則、最後にデフォルトの規則、という順序で適用されます。</para>
+  </section>
+
+  <section id="creating.new.rule">
+    <title>規則の新規作成<indexterm class="singular">
+        <primary>分節化</primary> <secondary>規則の新規作成</secondary> <seealso>正規表現</seealso>
+      </indexterm></title>
+
+    <para>分節化規則を大きく変更することは、特に最初の下訳が終わった後では、避けるべきです。しかし略称を認識させるために規則を追加するような、限定的な変更であれば、それは改善に値します。</para>
+
+    <para>規則集を編集するには、［分節化規則の設定］ウィンドウ上部にある表から、目的の項目をクリックします。するとウィンドウ下部に、選択した規則集の内容が表示されます。</para>
+
+    <para>新しい言語コード構成例を追加するには、上部の表の横にある <emphasis role="bold">［追加］</emphasis> をクリックしてください。表の最下部に新しい行が作成されます（確認のために下までスクロールさせる必要があるでしょう）。言語名と、言語コード構成例を変更してください（言語コードの一覧は「<xref linkend="appendix.languages"/>」を参照してください）。定義する構成例の文法は正規表現の文法に従います。作成する規則群が、言語-国ペアに対するものである場合、<emphasis role="bold">［上へ］</emphasis> ボタンを使って、先頭に移動させておくことをおすすめします。</para>
+
+    <para><emphasis role="bold">分節前の構成例</emphasis>と<emphasis role="bold">分節後の構成例</emphasis>を追加する追加する構成例が文法的に正しいか、また意図する対象にちゃんと適用されるか確認するためには、正規表現をその場でテストできるような支援ツールの使用をお勧めします。詳しくは「<link linkend="chapter.regexp">正規表現</link>」の章を参照してください。手始めに、既存の規則を参考に真似してみるのも良いでしょう。</para>
+  </section>
+
+  <section id="few.simple.examples">
+    <title><indexterm class="singular">
+        <primary>分節化</primary> <secondary>設定例</secondary>
+      </indexterm>簡単な設定例</title>
+
+    <informaltable>
+      <tgroup cols="4">
+        <colspec align="left" colnum="1" colwidth="150"/>
+
+        <colspec align="center" colnum="2" colwidth="60"/>
+
+        <colspec align="center" colnum="3" colwidth="60"/>
+
+        <colspec align="left" colnum="4" colwidth="190"/>
+
+        <thead>
+          <row>
+            <entry>目的</entry>
+
+            <entry align="center">分節前の構成例</entry>
+
+            <entry align="center">分節後の構成例</entry>
+
+            <entry>備考</entry>
+          </row>
+        </thead>
+
+        <tbody>
+          <row>
+            <entry>ピリオド（「.」）の後ろと、それに続くスペースやタブの前で分節を作る</entry>
+
+            <entry align="center">\.</entry>
+
+            <entry align="center">\s</entry>
+
+            <entry>正規表現「\.」は、文字「.」を表します。正規表現「\s」は任意の空白文字（スペース、タブ、改行など）を表します。</entry>
+          </row>
+
+          <row>
+            <entry>「Mr.」の後では分節化しない</entry>
+
+            <entry align="center">Mr\.</entry>
+
+            <entry align="center">\s</entry>
+
+            <entry>これは例外規則です。［分節 または 例外］チェックボックスには、チェックを入れずにおきます。</entry>
+          </row>
+
+          <row>
+            <entry>「。」（日本語の句点）の後ろで分節化する</entry>
+
+            <entry align="center">。</entry>
+
+            <entry align="center"/>
+
+            <entry><literal>［分節後の構成例］</literal> は空欄としておいてください。</entry>
+          </row>
+
+          <row>
+            <entry>「M.」、「Mr.」、「Mrs.」、「Ms.」の後ろでは分節化しない</entry>
+
+            <entry align="center">Mr??s??\.</entry>
+
+            <entry align="center">\s</entry>
+
+            <entry>例外規則です。? 文字の使用方法については「正規表現」の章を参照してください。</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </informaltable>
+  </section>
+</chapter>

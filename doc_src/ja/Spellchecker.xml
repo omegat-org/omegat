@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<chapter id="chapter.spellchecker">
+  <title>綴り確認<indexterm class="singular">
+      <primary>綴り確認</primary>
+    </indexterm></title>
+
+  <para>OmegaT は組み込みの綴り確認機能を備えています。これは Apache OpenOffice や LibreOffice、Firefox、Thunderbird で使われているものと同じ機能です。そのため、これらのプログラム向けに広く提供されているフリーの綴り確認用辞書を、OmegaT でも利用することができます。</para>
+
+  <section>
+    <title>綴り確認用辞書の組み込み</title>
+
+    <para>綴り確認機能を使うためには、まず初めに適切な辞書（たとえば訳文言語用の）を組み込んでおく必要があります。辞書は、次の手順で組み込んでください：</para>
+
+    <itemizedlist>
+      <listitem>
+        <para>ファイルマネージャー上から、辞書を格納するための新しいフォルダーを適切な場所に作成します。以下の図では、「D:\Translations\spellcheckers」を指定しています。</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>OmegaT で <guisubmenu><indexterm class="singular">
+            <primary>設定メニュー</primary> <secondary>綴り確認</secondary>
+          </indexterm></guisubmenu><guimenuitem>［設定］→［綴り確認...］</guimenuitem> を選び、辞書ファイルフォルダー欄の横にある<guibutton>［参照...］</guibutton>ボタンをクリックします。先ほど作成した辞書用フォルダーを指定します。</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>使いたい辞書ファイルを、そのフォルダーに配置します。これには基本的に２つの方法があります。ひとつは手動でファイルをコピーする方法です。コンピューター内の他の場所からファイルマネージャーを使ってコピーするとか、OmegaT の<emphasis role="bold">［新しい辞書を組み込み］</emphasis>ボタンを押して、利用可能な辞書の一覧から選ぶという形になります。後者の組み込みには、インターネットへの接続が必要になります。選んだ言語の辞書が組み込まれると、［綴り確認機能の設定］ウィンドウの［組み込まれた辞書］欄に表示されます（表示されるまでしばらく時間がかかります）。</para>
+      </listitem>
+    </itemizedlist>
+
+    <para>手動でファイルをコピーする方法は、コンピューター内のどこかに使いたい辞書ファイルがある場合に適しています。たとえば OpenOffice や Firefox、Thunderbird をインストール済みの場合が該当します。もっとも、<emphasis role="bold">オンライン辞書の URL</emphasis> 欄を使って、インターネット上から辞書を探すほうが、簡単かもしれません。</para>
+
+    <figure id="spellchecker.setup">
+      <title><indexterm class="singular">
+          <primary>綴り確認</primary> <secondary>綴り確認機能の設定</secondary>
+        </indexterm>綴り確認機能の設定</title>
+
+      <mediaobject>
+        <imageobject role="html">
+          <imagedata fileref="images/SpellcheckerSetup_25.png"/>
+        </imageobject>
+
+        <imageobject role="fo">
+          <imagedata fileref="images/SpellcheckerSetup_25.png" width="80%"/>
+        </imageobject>
+      </mediaobject>
+    </figure>
+
+    <para><guibutton>［新しい辞書を組み込み］</guibutton>ボタンをクリックして［辞書の組み込み］ウィンドウを表示し、組み込みたい辞書を選んでください。</para>
+
+    <para>ファイル名は、プロジェクトの設定ダイアログ（<guimenu>［プロジェクト］→［プロジェクト設定...］</guimenu>）で設定されている訳文言語に対応した言語コードと同じ名前にしてください。たとえば、訳文言語が「ES-MX」（メキシコスペイン語）の場合、辞書ファイル名を「es_MX.dic」と「es_MX.aff」にする必要があります。もし通常のスペイン語辞書しか入手できなかった場合は、ファイル名を「es_es.dic」と「 es_es.aff」から、「es_MX.dic」と「es_MX.aff」に変更してください。そうすれば、綴り確認用辞書として使うことができます。この場合はもちろん、メキシコスペイン語ではなく、標準のスペイン語として綴りを確認することになる点に注意してください。</para>
+  </section>
+
+  <section>
+    <title>綴り確認用辞書の使用</title>
+
+    <para>OmegaT に、どの辞書を使うか指示する必要はありません。OmegaT はプロジェクトの言語設定に基づいて、正しい言語用の辞書を使います。しかし、言語コードと同一の辞書ファイルが存在するかどうかは、確認してもいいでしょう。たとえばプロジェクトの訳文言語が「FR」に設定されている場合、「FR-FR」の辞書ファイルは使われません。必要であれば、辞書ファイルの名前を変更するか、または逆にプロジェクトの言語設定を変更してください。</para>
+
+    <para>綴り確認機能を有効にするには、<guimenuitem>［設定］→［綴り確認...］</guimenuitem>を選び、<guilabel>［テキストの綴り確認を自動で行う］</guilabel>チェックボックスにチェックを入れます（上図を参照してください）。</para>
+
+    <figure id="spellchecker.in.action">
+      <title>綴り確認機能の使用</title>
+
+      <mediaobject>
+        <imageobject role="html">
+          <imagedata fileref="images/SpellcheckingText.png"/>
+        </imageobject>
+
+        <imageobject role="fo">
+          <imagedata fileref="images/SpellcheckingText.png" width="80%"/>
+        </imageobject>
+      </mediaobject>
+    </figure>
+
+    <para>下線が引かれた単語（上図では「Artund」）の上で右クリックすると、訂正候補（上図では「Art und」）が表示されます。加えて、検出された単語を［すべて無視］（Ignore all）させることもできますし、［辞書へ追加］（Add to dictionary）することもできます。</para>
+  </section>
+
+  <section id="hints">
+    <title>使用時のヒント<indexterm class="singular">
+        <primary>綴り確認</primary> <secondary>使用時のヒント</secondary>
+      </indexterm></title>
+
+    <para>綴り確認機能が動作しない場合は、まず［綴り確認機能の設定］ダイアログ（<guisubmenu>［設定］→［綴り確認...］</guisubmenu>）の<guilabel>［テキストの綴り確認を自動で行う］</guilabel>チェックボックスにチェックが入っているか確認してください。</para>
+
+    <para>また、プロジェクトの設定から、訳文の言語コードと辞書の言語が一致しているかを確認してください。綴り確認機能は、訳文の言語コードから使用する言語を判別します。たとえば、訳文言語がブラジルポルトガル語（PT_BR）である場合、辞書が存在するフォルダーには次の２つのファイル <emphasis>pt_br.aff</emphasis> と <emphasis>pt_br.dic</emphasis> が存在する必要があります。</para>
+
+    <para>すでにテキストの大部分を翻訳した後で、プロジェクト設定中の訳文の言語コードが辞書の言語と一致していないことに気づいた場合（たとえば言語コードが pt_BR であるのに、pt_BR 用の辞書が存在しない場合）は、単純に２つの辞書ファイルの名前を変更すれば問題ありません（<emphasis>pt_PT.aff</emphasis> と <emphasis>pt_PT.dic</emphasis> をそれぞれ <emphasis>pt_BR.aff</emphasis> と <emphasis>pt_BR.dic</emphasis> に変更）。もちろん、少し休憩を取ってから、適切な辞書ファイルをダウンロードしたほうがより賢明です。</para>
+
+    <para><filename>［削除］</filename>ボタンを押すと、選択した辞書は物理的に削除されます。その辞書を他のプログラムと共有していた場合は、他のプログラムからも参照できなくなってしまいます。理由はさておき、ときどき削除をするのであれば、念のため別のフォルダーにファイルのコピーを取っておいたほうがよいでしょう。</para>
+  </section>
+</chapter>

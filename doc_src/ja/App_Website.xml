@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<appendix id="appendix.website">
+  <title><indexterm class="singular">
+      <primary>ウェブ上の OmegaT 情報</primary>
+    </indexterm>ウェブ上の <application>OmegaT</application> 情報</title>
+
+  <section id="OmegaT.sites.and.OmegaT.SourceForge.project">
+    <title><application>OmegaT</application> のウェブサイトと SourceForge プロジェクトについて<indexterm class="singular">
+        <primary>ウェブ上の OmegaT 情報</primary> <secondary>SourceForge プロジェクト</secondary>
+      </indexterm></title>
+
+    <para><ulink url="http://www.omegat.org/"><application>OmegaT</application> のウェブサイト</ulink>には <application>OmegaT</application> に関するさまざまな情報へのリンクがあります。またボランティアによるユーザーサポートが、<ulink url="http://groups.yahoo.com/group/omegat/"><application>OmegaT</application> Yahoo! ユーザーグループ</ulink>で提供されています。<ulink url="http://tech.groups.yahoo.com/group/omegat/database?method=reportRows&amp;amp;tbl=1">よくある質問（FAQ）ページ</ulink>はあなたの疑問に答えてくれる出発点になるでしょう。OmegaT の最新版については、www.omegat.org のダウンロード ページを参照してください。<ulink url="http://sourceforge.net/tracker/?group_id=68187&amp;amp;atid=520347">バグ報告</ulink>や<ulink url="http://sourceforge.net/tracker/?group_id=68187&amp;amp;atid=52035">機能改善リクエスト</ulink>も行えます。</para>
+  </section>
+
+  <section id="bug.reports">
+    <title>バグ報告<indexterm class="singular">
+        <primary>ウェブ上の OmegaT 情報</primary> <secondary>バグ報告</secondary>
+      </indexterm></title>
+
+    <para>良いバグ報告には、次の３点が含まれていることを覚えておいてください：</para>
+
+    <itemizedlist>
+      <listitem>
+        <para>再現するまでの手順</para>
+      </listitem>
+
+      <listitem>
+        <para>その操作によって期待される動作</para>
+      </listitem>
+
+      <listitem>
+        <para>実際の動作</para>
+      </listitem>
+    </itemizedlist>
+
+    <para>詳しくは、Joel Spolsky の<ulink url="http://www.joelonsoftware.com/articles/fog0000000029.html">『やさしいバグトラッキング（Painless Bug Tracking）』</ulink>（日本語訳は http://japanese.joelonsoftware.com/Articles/PainlessBugTracking.html）を見てください。</para>
+
+    <para>開発者がバグを発見し、修正するのに助けとなる情報を添付してください。たとえば、該当ファイルやログの一部、スクリーンショットなどです。バグ報告や機能改善の要望は公開されますので、機密を含むファイルは追加しないでください。報告するバグの経過を知りたいときは、SourceForge ユーザー登録後、ログインしてから報告するか、報告ページ上部の Monitor をクリックしてください。</para>
+  </section>
+
+  <section id="contributing.to.omegat.project">
+    <title><application>OmegaT</application> プロジェクトに貢献する<indexterm class="singular">
+        <primary>ウェブ上の OmegaT 情報</primary> <secondary>OmegaT へ貢献する</secondary>
+      </indexterm></title>
+
+    <para><emphasis role="bold"><application>OmegaT</application> に貢献するには：</emphasis></para>
+
+    <para>まず<ulink url="http://groups.yahoo.com/group/omegat/">ユーザーグループ</ulink>に参加してください（ウェブから登録するか、または <ulink url="mailto:OmegaT-subscribe@yahoogroups.com"><application>OmegaT</application>-subscribe@yahoogroups.com</ulink> 宛にメールを送信してください）。<application>OmegaT</application> の開発に協力したい場合は、開発者グループへ参加してください。ウェブから登録するか、または「subscribe」という件名のメールを <ulink url="mailto:omegat-development-request@list.sourceforge.net?subject=subscribe">omegat-development-request@lists.sourceforge.net</ulink> に送信してください。</para>
+
+    <para><emphasis role="bold"><application>OmegaT</application> のユーザーインターフェースや取扱説明書、その他関連文書を翻訳するには：</emphasis></para>
+
+    <para>まず <ulink url="http://www.omegat.org/en/howtos/localizing_omegat.php"><application>OmegaT</application> をあなたの言語に翻訳するには</ulink>をお読みいただき、<application>OmegaT</application> 翻訳者グループに参加してください（ウェブから登録するか、または「subscribe」という件名のメールを <ulink url="mailto:omegat-development-request@lists.sourceforge.net?subject=subscribe">omegat-l10n-request@lists.sourceforge.net</ulink> 宛てに送信してください）。</para>
+
+    <indexterm class="singular">
+      <primary>ウェブ上の OmegaT 情報</primary> <secondary>開発、地域化</secondary>
+    </indexterm>
+
+    <para>OmegaT プロジェクトを財政面から支援するには：<indexterm class="singular">
+        <primary>ウェブ上の OmegaT 情報</primary> <secondary>資金援助</secondary>
+      </indexterm></para>
+
+    <para>OmegaT の継続的な開発をサポートしたい場合は、こちらのリンクをクリックして <ulink url="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&amp;hosted_button_id=9UB6Y2BBF99LL">OmegaT PayPal アカウント</ulink>へ寄付していただければ幸いです。</para>
+
+    <indexterm class="singular">
+      <primary>ウェブ上の OmegaT 情報</primary> <secondary>OmegaT への寄付</secondary>
+    </indexterm>
+  </section>
+</appendix>

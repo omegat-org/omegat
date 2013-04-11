@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<chapter id="chapter.glossaries">
+  <title>用語集 (Glossaries)<indexterm class="singular">
+      <primary>OmegaT のウィンドウ</primary> <secondary>用語集ウィンドウ</secondary>
+    </indexterm><indexterm class="singular">
+      <primary>用語集 (Glossaries)</primary>
+    </indexterm></title>
+
+  <para>用語集は <application>OmegaT</application> から参照用として使用できるファイルで、作成と更新は手動で行います。</para>
+
+  <para>ある <application>OmegaT</application> のプロジェクトに１つ以上の用語集がある場合、現在の分節中に見つかった用語が、用語集ウィンドウに自動的に表示されます。</para>
+
+  <para>用語集ファイルの場所と名前は、プロジェクト設定ダイアログで設定できます。拡張子は必ず <filename>.txt</filename> にしてください（拡張子を指定しなければ、自動的に付加されます）。ファイルの場所は <filename>glossary</filename> フォルダー内を指定する必要があります。ただし、直下ではなくもっと深い階層に置いてもかまいません（たとえば <filename>glossary/sub/glossary.txt</filename>）。場所を指定した時点では、ファイルが必ずしも存在する必要はありません。用語を追加するときに、（必要であれば）自動的に作成されます。ファイルがすでに存在した場合、その形式と文字コードに問題が無ければ、特にメッセージは表示されません。新しい用語は常にタブ区切り形式の文字コード UTF-8 で追加されます。このとき、既存の内容は変更されません。したがって、既存のファイルへの影響は最小限に留まります。</para>
+
+  <section>
+    <title>使い方</title>
+
+    <para>すでにある用語集を使用する場合は、プロジェクトを作成後、<indexterm class="singular">
+        <primary>プロジェクトファイル</primary> <secondary>用語集フォルダー</secondary>
+      </indexterm><filename>glossary</filename> フォルダーにそのファイルを置いてください。<application>OmegaT</application> はプロジェクトを開いた際、自動的にそのファイルを検出します。用語集のファイルにある用語が現在の分節中に見つかれば、用語集ウィンドウに表示されます：</para>
+
+    <indexterm class="singular">
+      <primary>用語集、用語集ウィンドウ</primary>
+    </indexterm>
+
+    <figure>
+      <title>用語集ウィンドウ</title>
+
+      <mediaobject>
+        <imageobject role="html">
+          <imagedata fileref="images/GlossaryPane_25.png"/>
+        </imageobject>
+
+        <imageobject role="fo">
+          <imagedata fileref="images/GlossaryPane_25.png" width="60%"/>
+        </imageobject>
+      </mediaobject>
+    </figure>
+
+    <para>「=（等号）」の前にあるものが原文の用語です。「=」の後ろに対応した訳文が表示されます。見出し語ごとにコメントを追加できます（上の図の「意味：」で始まる行がコメントです）用語集が機能するのは、用語集の項目と完全一致する部分のみです（その活用形などは検索されません）。（訳注：トークナイザー プラグインを使用すると、改善される場合があります。詳細は付録 A を参照してください）新しい用語は、翻訳中でも手動で（テキストエディターなどを別途用いて）用語集ファイルに追加することができます。追加した用語は、用語集ファイルの変更を保存するまでは反映されません。</para>
+
+    <para>用語は、必ずしも１つの単語である必要はありません。次の例を見てください。</para>
+
+    <figure>
+      <title>用語集における複数単語による項目 - 例<indexterm class="singular">
+          <primary>用語集</primary> <secondary>用語集ウィンドウ</secondary> <tertiary>複数単語による項目</tertiary>
+        </indexterm></title>
+
+      <mediaobject>
+        <imageobject role="html">
+          <imagedata fileref="images/MultiTerm_Glossary_25.png"/>
+        </imageobject>
+
+        <imageobject role="fo">
+          <imagedata fileref="images/MultiTerm_Glossary_25.png" width="80%"/>
+        </imageobject>
+      </mediaobject>
+    </figure>
+
+    <para>下線が引かれた項目「pop-up menu」は、用語集ウィンドウに「pojavni menu」の見出しで表示されています。用語集ウィンドウでテキストを選択し、その選択範囲内を右クリックすると、訳文分節のカーソル（キャレット）位置に選択テキストが挿入されます。<footnote>
+        <para>このとき、もし訳文が語形変化のある言語（図の場合はスロベニア語）だった場合、作業はこれで終わりません。挿入する用語「pojavni menu」は主格の表現ですが、これをたとえば所格の「pojavnem meniju」などに変える必要があるかもしれないのです。だから時には、用語集やそのショートカットを使うよりも、最初から正しい用語を手入力した方が早い場合もあるでしょう。</para>
+      </footnote></para>
+  </section>
+
+  <section>
+    <title><indexterm class="singular">
+        <primary>用語集</primary> <secondary>ファイル形式</secondary>
+      </indexterm>ファイル形式<indexterm class="singular">
+        <primary>プロジェクトファイル</primary> <secondary>個人設定ファイル</secondary> <seealso>用語集</seealso>
+      </indexterm></title>
+
+    <para>用語集ファイルは単純なテキストファイルで、タブ区切りの３つの列（カラム）からなるリストの形をしています。最初の列と２番目の列はそれぞれ原文、訳文の用語が入ります。３番目の列には追加情報を入れることができます。訳文用の列は、空にしておくこともできます。つまり、原文の用語とコメントのみを含む登録も可能です。</para>
+
+    <para>用語集ファイルの文字エンコードには、システムのデフォルト（拡張子を .tab とします）または UTF-8 （拡張子を .utf8　または .txt とします）のいずれかを使用できます。エンコーディングはユニコード（UTF8）が明らかに好まれています。また CSV 形式にも対応しています。この形式は、タブ区切りと同じように、原文の用語、訳文の用語、そしてコメントの列から構成されます。ただし列は、カンマ記号「,」で区切られます。また文字列は引用符「&quot;」で括られます。そのため、列区切りと区別して、文字列内にカンマを含むことができます。</para>
+
+    <para><literal>&quot;This is a source term, which contains a comma&quot;,&quot;これは訳文の用語です, カンマも含みます&quot;</literal></para>
+
+    <para>プレーンテキストファイルだけでなく、TBX 形式<indexterm class="singular">
+        <primary>用語集</primary> <secondary>TBX 形式</secondary>
+      </indexterm>にも対応しています。TBX（Term Base eXchange）は、オープンな XML ベースの標準規格で、構造化された用語集データの互換を目的としています。TBX は国際標準規格として、LISA と ISO によって承認されています。もし何か用語を扱うシステム（たとえば MultiTerm）を使っているなら、用語集データを TBX 形式で出力できる機能を備えている可能性が十分にあります。<ulink url="https://www.microsoft.com/Language/ja-JP/Terminology.aspx">マイクロソフト用語集</ulink> <indexterm class="singular">
+        <primary>用語集</primary> <secondary>マイクロソフト用語集</secondary>
+      </indexterm>は 100 種類近くの言語でダウンロード提供されており、基本的な IT 用語集として使うことができます。</para>
+  </section>
+
+  <section>
+    <title>用語集の作成手順<indexterm class="singular">
+        <primary>用語集</primary> <secondary>用語集の作成</secondary>
+      </indexterm></title>
+
+    <para>プロジェクト設定では、書き込み可能な用語集ファイルの名前を入力することができます（本章の最初を参照してください）。用語集ウィンドウを右クリックするか、<keycap>Ctrl+Shift+G</keycap> を押して、新しい用語を追加します。ダイアログが開くので、そこで原文の用語、対応する訳文、任意のコメントを入力してください。</para>
+
+    <mediaobject role="html">
+      <imageobject>
+        <imagedata fileref="images/GlossaryEntry_25.png"/>
+      </imageobject>
+
+      <imageobject role="fo">
+        <imagedata fileref="images/GlossaryEntry_25.png" width="80%"/>
+      </imageobject>
+    </mediaobject>
+
+    <para>用語集ファイルの内容はプロジェクトを開いたときと再読み込み時に読み込まれ、メモリ上に保持されます。用語集ファイルの更新は、とても簡単です。<keycap>Ctrl+Shift+G</keycap> を押して、新しい用語、その訳文、任意のコメントを入力（入力欄は TAB キーで移動できます）し、保存するだけです。用語集ウィンドウの内容は、すぐに更新されます。</para>
+
+    <para><indexterm class="singular">
+        <primary>用語集</primary> <secondary>書き込み可能な用語集ファイルの場所</secondary>
+      </indexterm>書き込み可能な用語集ファイルの場所は、<guimenuitem>［プロジェクト］→［プロジェクトの設定...］</guimenuitem>で表示されるダイアログで設定できます。有効な拡張子は、<filename>.txt</filename> と <filename>.utf8</filename> です。</para>
+
+    <para><emphasis role="bold">注意：</emphasis>もちろん、タブ区切り形式の単純なファイルを作るには、他にもいろいろなやり方があります。Windows 上で Notepad++ を使ったり、Linux 上で GEdit を使ったり、表計算ソフトを使うことだって、あるでしょう。UTF8 を正しく扱えて、空白文字（ホワイトスペース）を表示できる（<keycap>TAB</keycap> 記号を見落とさずに済みます）プログラムなら、何を使っても構いません。</para>
+  </section>
+
+  <section>
+    <title><indexterm class="singular">
+        <primary>用語集</primary> <secondary>Trados MultiTerm</secondary>
+      </indexterm>TRADOS Multiterm の使用</title>
+
+    <para>TRADOS Multiterm のテキスト出力機能を用いて作成した用語集は、拡張子を <filename>.tab</filename> として、最初のフィールドを原文の用語、２番目を訳文の用語としておけば、特に修正を加えることなく <application>OmegaT</application> で使用することができます。システムオプションで［タブ区切り出力］を用いた場合は、残したい２つの項目の前にある、先頭の５つの列（Seq. Nr、Date created など）を削除する必要があります。MultiTerm の新しいバージョンでは、TBX 形式での出力に対応しています。</para>
+  </section>
+
+  <section>
+    <title><indexterm class="singular">
+        <primary>用語集</primary> <secondary>用語集に関するトラブルシューティング</secondary>
+      </indexterm>用語集に関するよくある問題</title>
+
+    <para><emphasis role="bold">問題：用語が何も表示されません。</emphasis></para>
+
+    <itemizedlist>
+      <listitem>
+        <para>glossary フォルダーに用語集ファイルがない</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>用語集ファイルが空である</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>項目がタブ文字で区切られていない</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>用語集ファイルが有効な拡張子（.tab、.utf8、.txt）ではない</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>原文の項目と「完全に」一致する用語が用語集にない - たとえばその項目が複数形である場合</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>用語集ファイルが有効な文字エンコーディングで保存されていない</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>現在の分節に、用語集と一致する用語が１つもない</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>以上のうち１つまたは複数の原因を解決したものの、プロジェクトを再読み込みしていない</para>
+      </listitem>
+    </itemizedlist>
+
+    <para><emphasis role="bold">問題：用語集ウィンドウの中で、いくつかの文字が適切に表示されない（しかし同じ文字が編集ウィンドウには適切に表示されている）</emphasis></para>
+
+    <itemizedlist>
+      <listitem>
+        <para>拡張子とファイルの文字エンコーディングが一致していない</para>
+      </listitem>
+    </itemizedlist>
+  </section>
+</chapter>

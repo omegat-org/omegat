@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<chapter id="chapter.translation.editing">
+  <title>翻訳入力行<indexterm class="singular">
+      <primary>メニュー</primary> <secondary>設定</secondary> <tertiary>翻訳入力行...</tertiary>
+    </indexterm></title>
+
+  <para><menuchoice><guimenu>［設定］</guimenu><guimenuitem>［翻訳入力行...］</guimenuitem></menuchoice>を選ぶと表示されるダイアログで、未翻訳の分節に移動した場合の翻訳入力行の初期値や、訳文の処理方法などを設定することができます：</para>
+
+  <figure id="editing.behavior.options">
+    <title>翻訳入力行の設定</title>
+
+    <mediaobject>
+      <imageobject role="html">
+        <imagedata fileref="images/EditingBehaviourOptions25.png"/>
+      </imageobject>
+	  <imageobject role="fo">
+        <imagedata fileref="images/EditingBehaviourOptions25.png"/>
+      </imageobject>
+    </mediaobject>
+  </figure>
+
+  <para/>
+
+  <para>翻訳作業は、分節間を行き来しながら、分節を編集することで進めていきます。分節を移動したときは、参考訳文を挿入することもできますし、原文のままにしておくこともできます。<menuchoice><guimenu>［設定］</guimenu><guimenuitem>［翻訳入力行...］</guimenuitem></menuchoice>から、以下の設定ができます：</para>
+
+  <variablelist> <varlistentry> <term>原文を挿入</term>
+
+      <listitem>
+        <para>翻訳入力行に、対応する原文を入力した状態にします。商標や固有名詞など、あえて翻訳しない部分を多く含んでいるような文書の場合に非常に便利です。</para>
+      </listitem>
+    </varlistentry> <varlistentry> <term>原文を挿入しない<indexterm class="singular">
+          <primary>設定メニュー</primary> <secondary>翻訳入力行</secondary> <tertiary>空訳文</tertiary>
+        </indexterm></term>
+
+      <listitem>
+        <para>OmegaT は翻訳入力行を空欄にします。翻訳入力の前に、原文を削除するキー入力の手間（つまり <emphasis role="bold">Ctrl+A</emphasis> と <emphasis role="bold">Del</emphasis>）が省けます。この状態で、空訳文として残すこともできます。このような訳文は、未翻訳分節と区別するために、編集ウィンドウ上では &lt;空訳文&gt; と表示されます。空訳文に設定するには、分節を右クリックして「<emphasis role="bold">訳文を&lt;空訳文&gt;にする</emphasis>」を選びます。同じポップアップメニューに表示される「<emphasis role="bold">訳文を削除</emphasis>」という項目を選ぶと、現在の分節に入力済みの訳文を削除することもできます。これは <guibutton>Ctrl+A</guibutton> と <guibutton>Del</guibutton> キーの組み合わせで翻訳入力行をクリアするのと、同じことです。</para>
+      </listitem>
+    </varlistentry> <varlistentry> <term>最も一致率の高い参考訳文を自動で挿入<indexterm class="singular">
+          <primary>設定メニュー</primary> <secondary>翻訳入力行</secondary> <tertiary>参考訳文の挿入</tertiary>
+        </indexterm></term>
+
+      <listitem>
+        <para>OmegaT はその原文に最も近い参考訳文を自動挿入します。挿入するかどうかの一致率のしきい値（最小一致率）は、このダイアログで変更できます。先頭に付加する文字列（デフォルトでは何も付加しません）は、訳文が参考訳文の自動挿入によるものであることを示す目印に利用することができます。何らかの文字列（たとえば [参考] のような）を先頭に付加しておくと、参考訳文が適切かどうか後で確認する際に、自動挿入以外の訳文と区別しやすくなります。</para>
+      </listitem>
+    </varlistentry>
+  </variablelist>
+
+  <para>ダイアログの下半分に並んでいるチェックボックスは、次の目的で用いられます：</para>
+
+  <variablelist> <varlistentry> <term>参考訳文挿入の場合は数値を変更する<indexterm class="singular">
+          <primary>設定メニュー</primary> <secondary>翻訳入力行</secondary> <tertiary>数値の変更</tertiary>
+        </indexterm></term>
+
+      <listitem>
+        <para>この設定にチェックを入れると、参考訳文を挿入する際に（それが手動でも自動でも）、OmegaT は参考訳文に含まれる数値を、挿入先の原文に照らして変更しようとします。ただし、いくつかの制約があります：</para>
+
+        <itemizedlist>
+          <listitem>
+            <para>編集中の原文分節と参考訳文は、同じ個数の数値を含んでいること</para>
+          </listitem>
+        
+          <listitem>
+            <para>参考訳文とその原文に含まれる数値は、完全に一致していること</para>
+          </listitem>
+        
+          <listitem>
+            <para>整数と単純な小数（小数点の記号としてピリオドを使うこと。たとえば 5.4 は小数とみなすが、5,4 や 54E-01 は小数とみなさない）だけを対象とする</para>
+          </listitem>
+        </itemizedlist>
+      </listitem>
+    </varlistentry> </variablelist> <variablelist> <varlistentry> <term>原文と同じ訳文を許可<indexterm class="singular">
+          <primary>設定メニュー</primary> <secondary>翻訳入力行</secondary> <tertiary>原文と同じ訳文</tertiary>
+        </indexterm></term>
+
+      <listitem>
+        <para>文書によっては、商標、名称、その他の固有名詞など、原文と同じ状態で残す必要のある箇所を含んでいる場合があります。変更すべきでないテキストを残しておくには 2 通りの方法があります。</para>
+
+        <para>まず、そのような箇所をまったく翻訳せずに残しておくことができます。OmegaT としては未翻訳の分節として残すことになります。こちらが初期設定です。もう１つの方法として、原文とまったく同じ訳文を入力することができます。OmegaT にはそこを翻訳したものとして記憶させることができます。そうする場合は、 <menuchoice><guimenu>［設定］</guimenu> <guimenuitem>［翻訳入力行...］</guimenuitem></menuchoice>でで表示される画面の<emphasis role="bold">［原文と同じ訳文を許可］</emphasis>をチェックしてください。</para>
+      </listitem>
+    </varlistentry> </variablelist> <variablelist> <varlistentry> <term>分節をテキストファイルへ出力<indexterm class="singular">
+          <primary>設定メニュー</primary> <secondary>翻訳入力行</secondary> <tertiary>現在分節を出力</tertiary>
+        </indexterm></term>
+
+      <listitem>
+        <para>テキスト出力機能は、現在作業中の <application>OmegaT</application> プロジェクトのデータをプレーンテキストファイルに出力するものです。データは、分節に移動したタイミングで出力されます。ファイルは OmegaT の個人設定フォルダー配下の script フォルダーに作成されます。内容は、次の通りです：</para>
+
+        <itemizedlist>
+          <listitem>
+            <para>編集中の分節の原文テキスト（<filename>source.txt</filename>）</para>
+          </listitem>
+
+          <listitem>
+            <para>編集中の分節の訳文テキスト（<filename>target.txt</filename>）</para>
+          </listitem>
+
+          <listitem>
+            <para><keycap>Ctrl+Shift+C</keycap> キーを押すか、またはメニュー<guimenuitem>［編集］→［選択領域を出力］</guimenuitem>を選んだ時点で選択されているテキスト（<filename>selection.txt</filename>）</para>
+          </listitem>
+        </itemizedlist>
+
+        <para>ファイルの内容は、新しい分節に移動するタイミング（source.txt と target.txt）または新しい選択領域を出力するタイミング（selection.txt）で上書きされます。ファイル形式は、整形されないプレーンテキストファイルです。このプロセス全体を、Tck/Tcl ベースのスクリプトを介して操作・制御することができます。詳しくは『<ulink url="http://www.omegat.org/en/howtos/text_export.html">OmegaT テキスト出力機能を使う</ulink>』（英語）を参照してください。</para>
+      </listitem>
+    </varlistentry> </variablelist> <variablelist> <varlistentry> <term>既定値訳文と違う新しい訳文がある場合［次の未翻訳分節］でその訳文へ移動する<indexterm class="singular">
+          <primary>設定メニュー</primary> <secondary>翻訳入力行</secondary> <tertiary>新しい訳文が入力された分節</tertiary>
+        </indexterm></term>
+
+      <listitem>
+        <para>たとえば同一の原文に対して、いくつかの異なる訳文が対応する場合があります。このような分節が存在していて、翻訳を慎重に進めたい場合は、このチェックボックスにチェックを入れてください。<emphasis role="bold">［次の未翻訳分節］</emphasis>で分節を移動するときに、翻訳済みか未翻訳かに関わらず、このような複数訳文に該当する分節で止まります。</para>
+      </listitem>
+    </varlistentry>
+  </variablelist>
+</chapter>

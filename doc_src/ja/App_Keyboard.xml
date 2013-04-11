@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<appendix id="appendix.keyboard">
+  <title>編集ウィンドウのキーボードショートカット</title>
+
+  <para>ここでは、編集ウィンドウ上で使用できる、各キーに割り当てられた動作について説明します。以下で「分節内に移動します」という説明が出てきた場合は、カーソルが分節よりも前にあれば、分節の先頭に移動することを、カーソルが分節の後にあれば、分節の末尾に移動することを指しています。</para>
+
+  <table>
+    <title>編集ウィンドウのキー動作</title>
+
+    <tgroup cols="2">
+      <colspec align="left" colnum="1" colwidth="90"/>
+
+      <colspec align="left" colnum="2" colwidth="300"/>
+
+      <thead>
+        <row>
+          <entry align="left">キーの組み合わせ</entry>
+
+          <entry align="left">動作</entry>
+        </row>
+      </thead>
+
+      <tbody>
+        <row>
+          <entry><emphasis role="bold">Left</emphasis></entry>
+
+          <entry>一文字分、左に移動します。ただし分節の先頭よりも左には移動しません。</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">Right</emphasis></entry>
+
+          <entry>一文字分、右に移動します。ただし分節の末尾よりも右には移動しません。</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">Ctrl+Left</emphasis></entry>
+
+          <entry>一単語分、左に移動します。ただし分節の先頭よりも左には移動しません。</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">Ctrl+Right</emphasis></entry>
+
+          <entry>一単語分、右に移動します。ただし分節の末尾よりも右には移動しません。</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">PgUp</emphasis></entry>
+
+          <entry>文書を一画面分、上方向にスクロールします。</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">PgDn</emphasis></entry>
+
+          <entry>文書を一画面分、下方向にスクロールします。</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">Home*</emphasis></entry>
+
+          <entry>分節内で、行頭に移動します。</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">End*</emphasis></entry>
+
+          <entry>分節内で、行末に移動します。</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">Ctrl+Home</emphasis></entry>
+
+          <entry>分節の先頭に移動します。</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">Ctrl+End</emphasis></entry>
+
+          <entry>分節の末尾に移動します。</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">Ctrl+PgUp</emphasis></entry>
+
+          <entry>文書の先頭に移動します（Mac：<emphasis role="bold">Cmd+PgUp</emphasis>）。</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">Ctrl+PgDn</emphasis></entry>
+
+          <entry>文書の末尾に移動します（Mac：<emphasis role="bold">Cmd+PgDn</emphasis>）。</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">Backspace*</emphasis></entry>
+
+          <entry>カーソルの直前の文字を削除します。</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">Delete*</emphasis></entry>
+
+          <entry>カーソルの直後の文字を削除します。</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">Ctrl+Backspace</emphasis></entry>
+
+          <entry>カーソルの直前から現在の単語の先頭の文字までを削除します（Mac：<emphasis role="bold">Alt+Backspace</emphasis>）。</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">Ctrl+Delete</emphasis></entry>
+
+          <entry>カーソルの直後から次の単語の直前の文字までを削除します（Mac：<emphasis role="bold">Alt+Delete</emphasis>）。</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">Ctrl+Enter</emphasis></entry>
+
+          <entry>前の分節へ移動します（Mac：<emphasis role="bold">Cmd+Enter</emphasis>）。</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">Ctrl+A</emphasis></entry>
+
+          <entry>分節全体を選択します（Mac：<emphasis role="bold">Cmd+A</emphasis>）。</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">Ctrl+Shift+O</emphasis></entry>
+
+          <entry>文字列の方向（右から左、左から右）の切り替え</entry>
+        </row>
+      </tbody>
+    </tgroup>
+  </table>
+
+  <para>* これらのキーでは、カーソルが編集中の分節の外側にあると、動作が異なります：</para>
+
+  <itemizedlist>
+    <listitem>
+      <para><emphasis role="bold">Home：</emphasis>編集中の分節の先頭に移動します。</para>
+    </listitem>
+
+    <listitem>
+      <para><emphasis role="bold">End：</emphasis>編集中の分節の末尾に移動します。</para>
+    </listitem>
+
+    <listitem>
+      <para><emphasis role="bold">Backspace：</emphasis>何もしません。</para>
+    </listitem>
+
+    <listitem>
+      <para><emphasis role="bold">Delete：</emphasis>何もしません。</para>
+    </listitem>
+
+    <listitem>
+      <para><emphasis role="bold">任意の文字キー：</emphasis>カーソルが編集中の分節の外側にある場合は、無視されます。</para>
+    </listitem>
+  </itemizedlist>
+
+  <para>［Shift］キー自体は、特に機能を持ちません。［Shift］キーを押しながら何かのキーを押しても、そのキー本来の動作をするだけです。ただし <literal>Shift+Enter</literal> の組み合わせに限っては、テキストに改行を挿入します。</para>
+
+  <para>システム共通のコマンド：すべて選択（<keycap>Ctrl+A</keycap>）、貼り付け（<emphasis role="bold">Ctrl+V</emphasis>）、切り取り（<emphasis role="bold">Ctrl+X</emphasis>）、コピー（<emphasis role="bold">Ctrl+C</emphasis>）、参考訳文を挿入（<emphasis role="bold">Ctrl+I</emphasis>）、原文を挿入（<emphasis role="bold">Ctrl+Shift+I</emphasis>）は、原理的に現在編集中の分節内のテキストに対してだけ実行されます。</para>
+
+  <para>ショートカットは個人設定でカスタマイズできることに注意してください。詳しくは<link linkend="ch04.shortcuts.customization">付録 ショートカットのカスタマイズ</link>を参照してください。</para>
+</appendix>

@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE appendix PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<appendix id="appendix.TeamProjects">
+  <title>OmegaT チームプロジェクト<indexterm class="singular">
+      <primary>OmegaT</primary> <secondary>チームプロジェクト</secondary> <seealso>チームプロジェクト</seealso>
+    </indexterm></title>
+
+  <section>
+    <title>バージョン管理 - はじめに</title>
+
+    <para>OmegaT はバージョン管理に基づいた共同翻訳機能を提供します。バージョン管理はソフトウェアの分野で広く使われている手法で、プログラムのソースコードに関する変更を維持・管理し、チームによる共同開発作業を強力に支援します。OmegaT は非常に普及している２つのバージョン管理システム（以下、VCS）に対応しています。<ulink url="http://subversion.apache.org/">Apache Subversion</ulink>（コマンド名が svn であることから、しばしば SVN の略称で呼ばれる）と、<ulink url="http://git-scm.com/">Git</ulink> です。翻訳者のチームが VCS を使うことには、次のような利点があります：</para>
+
+    <itemizedlist>
+      <listitem>
+        <para>複数のチームメンバーが、お互いに邪魔することなく、同じ翻訳プロジェクトで同時に作業できます</para>
+      </listitem>
+
+      <listitem>
+        <para>プロジェクトの翻訳メモリや用語集などを、共有できます</para>
+      </listitem>
+
+      <listitem>
+        <para>デフォルトでは３分ごとに、最新データがチームメンバーに共有されます。</para>
+      </listitem>
+
+      <listitem>
+        <para>システムが、共有データのバージョン管理を行います</para>
+      </listitem>
+
+      <listitem>
+        <para>競合（たとえば、同じ分節や用語を複数人が同時に編集している状態）を監視して、マージし、解決できます</para>
+      </listitem>
+    </itemizedlist>
+
+    <para>以下は、本章で使用される用語の簡単な説明です：</para>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis role="bold">VCS サーバー：</emphasis>ここでは、SVN や Git のサーバーを指します。ネットワーク上で共有データを維持・管理する環境です。サーバーはローカルネットワーク上にも存在できますが、たいていの場合はインターネット上に存在し、URL を指定してアクセスします。少なくともチームの誰か一人は、プロジェクトの管理者として、サーバー側の管理に通じている必要があります。環境設定や OmegaT プロジェクトのインポート、メンバーに対するアクセス権の賦与、競合の解決などが仕事です。</para>
+      </listitem>
+
+      <listitem>
+        <para><emphasis role="bold">VCS クライアント：</emphasis>サーバーへのインターフェースです。プロジェクトの管理者は、SVN または Git 用のクライアントをコンピューターにインストールして、OmegaT プロジェクトを管理します。Windows 向けの汎用クライアントとしては、 <ulink url="http://tortoisesvn.net/">TortoiseSVN</ulink> や <ulink url="http://code.google.com/p/tortoisegit/">TortoiseGit</ulink> が有名です。Linux や Mac OS X など、他の OS 向けにも同様のパッケージが存在します。</para>
+      </listitem>
+
+      <listitem>
+        <para><emphasis role="bold">リポジトリ：</emphasis>データを維持・管理する場所の単位です。ローカルネットワークに存在する場合もあれば、インターネット上の場合もあります。プロジェクトメンバーが、VCS クライアントを介して接続する先がこれになります。</para>
+      </listitem>
+
+      <listitem>
+        <para><emphasis role="bold">チェックアウト：</emphasis>リポジトリの作業コピーをローカルコンピューター上に作成する操作を指します。サーバーは、チェックアウト情報を保持します。これによって、後でコミット（下記を参照）がうまく機能します。</para>
+      </listitem>
+
+      <listitem>
+        <para><emphasis role="bold">コミット：</emphasis>チェックアウトしたデータをローカルで編集して、あるていどの区切りが付いたら、リポジトリにコミットします。これによって、チームの他のメンバーにも最新のデータを共有可能になります。すべての衝突や競合（複数のメンバーがチェックアウトした同じデータを編集している状態）が解決されるまで、サーバーはコミットを受け付けません。</para>
+      </listitem>
+
+      <listitem>
+        <para><emphasis role="bold">管理者：</emphasis>リポジトリの作成と維持の責任者。サーバー側の作業を担当します。問題を避けるために、最初のうちは決まったひとりの人が担当するとよいでしょう。</para>
+      </listitem>
+
+      <listitem>
+        <para><emphasis role="bold">ユーザー：</emphasis>プロジェクトで共同翻訳するチームのメンバー。</para>
+      </listitem>
+    </itemizedlist>
+  </section>
+
+  <section>
+    <title>SVN でプロジェクトを共有する<indexterm class="singular">
+        <primary>チームプロジェクト</primary> <secondary>Subversion</secondary>
+      </indexterm></title>
+
+    <para>SVN サーバーを使うには、２つの選択肢があります。自前のサーバーに SVN をインストールするか、ホスティングサービスを利用するか、です。外部サービスを利用するなら、元の文書を外部のサーバーにアップロードする前に、機密保持の観点から問題が無いか、よく検討した方が良いでしょう。この問題を避けるために、プライベートな SVN サーバーを立てるという手もあります。たとえば、すでに Apache サーバーを管理しているのであれば、VisualSVN のようなプログラムをインストールすれば済むかもしれません。</para>
+
+    <para>SVN サーバーを利用可能になったら、プロジェクト用のファイルを管理できます。管理者はそのために、SVN クライアントをローカルコンピューター上にインストールしておく必要があります。Windows 向けには、<ulink url="http://tortoisesvn.net/">TortoiseSVN</ulink> を勧めます。Mac 向けのクライアントは <ulink url="https://sourceforge.net/projects/macsvn/">SourceForge</ulink> などで見つけることができます。Linux 向けの情報は、『<ulink url="www.yolinux.com/TUTORIALS/Subversion.html">Subversion Commands and Scripts</ulink>』（英語）を参照してください。</para>
+
+    <section>
+      <title>リポジトリの作成<indexterm class="singular">
+          <primary>チームプロジェクト</primary> <secondary>SVN リポジトリの作成</secondary>
+        </indexterm></title>
+
+      <para>ここでの説明には、<ulink url="http://projectlocker.com/">ProjectLocker</ulink>（フリープランは２ユーザーまで）の SVN サーバーを例に取ることにします。（日本語訳注：日本語で使える同様のサービスには、フリープランが 10 ユーザーまでの Backlog（www.backlog.jp）などがあります）リポジトリの作成者は、暗黙的に管理者権限を持つことになりますので、注意してください。まずサイトにログインします。サイトを利用するのがはじめての場合は、ユーザー登録をしましょう。後で必要になるので、ユーザー名とパスワードは忘れないようにしてください。</para>
+
+      <orderedlist>
+        <listitem>
+          <para>ProjectLocker で新しいプロジェクトを作成します</para>
+        </listitem>
+
+        <listitem>
+          <para>リポジトリの名前と説明を入力します（この例では「<literal>OmegaT</literal>」と「<literal>OmegaT SL Localization</literal>」と入力したものとします）</para>
+        </listitem>
+
+        <listitem>
+          <para>「<guibutton>SVN</guibutton>」を選びます</para>
+        </listitem>
+
+        <listitem>
+          <para>「<guibutton>Create Project</guibutton>」をクリックします</para>
+        </listitem>
+      </orderedlist>
+
+      <para>自分のアカウントの <emphasis role="bold">Projects</emphasis> ビューを開きましょう。プロジェクトサービスの下に表示されている URL は、SVN クライアントからサーバーに接続する際に使います。同じ画面から、チームメンバーを追加したり、権限を割り当てることができます。チームメンバーを追加するには、そのメンバーが先にユーザー登録を済ませている必要があります。ProjectLocker のフリープランは、１プロジェクト２ユーザーまでなので、注意してください。</para>
+
+      <para>プロジェクトは、自分のニーズと開発スタイルに合わせて管理できます。OmegaT プロジェクトの場合と同様に、言語ペアごとにリポジトリを分けてもかまいません。言語ペアが同じであっても、依頼主や案件が違うなら、やはりリポジトリを分けた方がよいでしょう。あるいは、ひとつのリポジトリ内で「<literal>Project1</literal>」、「<literal>Project2</literal>」のようにサブフォルダーを作って分ける方法もあります（日本語訳註：この方法は、SVN でのみ有効です。Git では１リポジトリを部分使用できないため、たとえば前述の Backlog ではフリープランでも Git のリポジトリ数は制限されません）。そして共有したいデータを <literal>tm</literal> フォルダー、<literal>glossary</literal> フォルダー、<literal>dictionary</literal> フォルダーに置きます。</para>
+
+      <para>以下では、説明を単純にするために、ひとつの OmegaT プロジェクトに対してひとつのリポジトリを使うことにします。</para>
+    </section>
+
+    <section>
+      <title>SVN リポジトリにプロジェクトをインポートする - Windows の場合</title>
+
+      <para>先ほど作成したリポジトリは、まだ空の状態です。では、まずローカルコンピューターのディスク上に空のフォルダーを作成しましょう。プロジェクトを配置するための空のフォルダーを作成したら、その上で右クリックします。TortoiseSVN をインストールしてあれば、コンテキストメニューに<guilabel>［SVN チェックアウト(K)...］</guilabel>というコマンドが出てきます。それを選ぶと、下図のようなダイアログが表示されます。</para>
+ 
+      <mediaobject>
+        <imageobject role="html">
+          <imagedata fileref="images/Team_projects_checkout.png"/>
+        </imageobject>
+		<imageobject role="fo">
+          <imagedata fileref="images/Team_projects_checkout.png" width="80%"/>
+        </imageobject>
+      </mediaobject>
+ 
+      <para>ProjectLocker から取得した URL を［<emphasis role="bold">リポジトリのURL</emphasis>］欄に入力します。［<emphasis role="bold">チェックアウト先のディレクトリ</emphasis>］欄が正しい（先ほど作成した空のフォルダーが指定されている）ことを確認し、［<emphasis role="bold">OK</emphasis>］ボタンを押します。この操作が完了すると、フォルダーは作業コピーとなって、サーバーの最新の状態に同期されます。フォルダーのアイコンの上には、緑色の OK バッジが重なって表示されます。またフォルダーの中には、管理用の .svn フォルダーが作成されています（ただし隠しフォルダーなので、シェルの設定によっては表示されません）。</para>
+
+      <para>次の手順として、作業コピーフォルダーに OmegaT のファイルを追加しましょう。以下は、チームメンバーと共有するファイルです。チームプロジェクトは、これらのファイルを含みます：</para>
+
+      <itemizedlist>
+        <listitem>
+          <para>omegat プロジェクトファイル -- <filename>omegat.project</filename></para>
+        </listitem>
+
+        <listitem>
+          <para>翻訳メモリファイル -- <filename>omegat\project_save.tmx</filename></para>
+        </listitem>
+
+        <listitem>
+          <para>source フォルダー内の原文ファイル</para>
+        </listitem>
+
+        <listitem>
+          <para>プロジェクト専用のフィルター定義ファイル（省略可）-- <filename>omegat\filters.xml</filename></para>
+        </listitem>
+      </itemizedlist>
+
+      <para>管理者は、次のフォルダーとその内容についても、同様に含めることができます：<filename>tm</filename> フォルダー、<filename>glossary</filename> フォルダー、<filename>dictionary</filename> フォルダー。また <filename>omegat</filename> フォルダーの中の <filename>ignored_words.txt</filename> と <filename>learned_words.txt</filename> も、チームで共有して維持していくに値します。<filename>omegat</filename> フォルダー内の <filename>.bak</filename> ファイルと <filename>project_stats.txt</filename> および <filename>project_stats_match.txt</filename> は、いかなる場合においても含めるべきではありません。これらのファイルを含めても、リポジトリが無意味に肥大化するだけで、何の役にも立ちません。<filename>target</filename> フォルダーとその内容についても、同じ方針でよいでしょう。</para>
+
+      <para>作業コピーフォルダーに必要なファイルをコピーしたら、フォルダーのアイコンが変化することに気づくでしょう。緑の OK バッジだったものが、作業コピーが変更されたことを示す赤い感嘆符に変わったはずです。次の２つの手順で、作業コピーの変更をサーバーに反映させます：</para>
+
+      <itemizedlist>
+        <listitem>
+          <para><emphasis role="bold">作業コピーフォルダーにコピーしたファイルを「追加」します：</emphasis>作業コピーフォルダーにファイルやフォルダーをコピーしただけでは、SVN の管理下に入りません。そのファイル/フォルダーを SVN が管理するよう、明示的に指定する必要があります。この操作を「追加」と呼びます。「追加」するには、ローカルにチェックアウトしたフォルダーを右クリックして、<guilabel>［TortoiseSVN］→［追加(A)...］</guilabel>を選びます。ダイアログが開くので、デフォルトの設定のまま<guilabel>［OK］</guilabel>ボタンをクリックします。（日本語訳註：右ドラッグでコピーすれば、一回の操作で追加まで完了します）「追加」が完了すると、下図のようなウィンドウが開きます。</para>
+ 
+      <mediaobject>
+        <imageobject role="html">
+          <imagedata fileref="images/Team_projects_Add.png"/>
+        </imageobject>
+		<imageobject role="fo">
+          <imagedata fileref="images/Team_projects_Add.png" width="80%"/>
+        </imageobject>
+      </mediaobject>
+	  
+          <para>チェックアウトしたフォルダーの中身は、次のような状態になります。</para>
+
+          <mediaobject>
+            <imageobject role="html">
+              <imagedata fileref="images/Team_projects_checkoutAddFolder.png"/>
+            </imageobject>
+			<imageobject role="fo">
+              <imagedata fileref="images/Team_projects_checkoutAddFolder.png" width="80%"/>
+            </imageobject>
+          </mediaobject>
+
+        </listitem>
+        <listitem>
+          <para><emphasis role="bold">ローカルの変更をサーバーにコミットします：</emphasis>作業コピーフォルダーを右クリックして、<guilabel>［SVN コミット(C)...］</guilabel>を選びます。下図のようなウィンドウが開きます。同期したい変更にチェックを付けます。この場合は、追加したファイルとフォルダーが対象です。</para>
+ 
+          <mediaobject>
+            <imageobject role="html">
+              <imagedata fileref="images/Team_projects_initialCommit.png"/>
+            </imageobject>
+	          <imageobject role="fo">
+              <imagedata fileref="images/Team_projects_initialCommit.png" width="80%"/>
+            </imageobject>
+          </mediaobject>
+
+          <para>適切なログメッセージを入力して、<guilabel>［OK］</guilabel>ボタンを押します。コミットウィンドウが開き、処理の経過が表示されます。これはサーバー側のリポジトリに対する、はじめてのコミットになります。</para>
+        </listitem>
+
+        <listitem>
+          <para><emphasis role="bold">ローカルの作業コピーを「更新」します：</emphasis>「更新」とは、作業コピーに対してリポジトリの最新状態を反映させる操作を指します。作業コピーフォルダーの上で右クリックして、<guilabel>［SVN 更新(U)...］</guilabel>を選びます。作業コピーフォルダーを開き、リポジトリの最新の状態が反映されたことを確認してください。</para>
+
+          <mediaobject>
+            <imageobject role="html">
+              <imagedata fileref="images/Team_projects_checkoutSVNupdate.png"/>
+            </imageobject>
+	          <imageobject role="fo">
+              <imagedata fileref="images/Team_projects_checkoutSVNupdate.png" width="80%"/>
+            </imageobject>
+          </mediaobject>
+        </listitem>
+      </itemizedlist>
+    </section>
+  </section>
+  <section>
+  <title>OmegaT でチームプロジェクトを使う</title>
+  <para>管理者がチームプロジェクトの設定を済ませたら、メンバーに必要なのは <application>OmegaT</application> でそのチームプロジェクトをダウンロードすることだけです。初回は、メニューから<guilabel>［プロジェクト］→［チームプロジェクトをダウンロード...］</guilabel>を選びます。この操作によって、実際にはプロジェクトがローカルフォルダーにチェックアウトされます。認証情報は記憶されます。毎回入力する必要は、ありません。Linux の場合、もし <application>OmegaT</application> が認証情報の入力を毎回促してくるようであれば、［<guilabel>パスワードを暗号化しないで保存する</guilabel>］チェックボックスにチェックを入れてみてください。</para>
+  <para>２回目以降に使用する場合は、他の <application>OmegaT</application> プロジェクトとまったく同じように、チームプロジェクトを開くだけです。OmegaT はそれがチームプロジェクトであることを識別して、デフォルトでは３分ごとにすべて自動で同期します。</para>
+  </section>
+</appendix>

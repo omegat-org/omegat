@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<appendix id="appendix.ScriptingPlugin.inOmegaT">
+  <title>スクリプト プラグイン<indexterm class="singular">
+      <primary>プラグイン</primary> <secondary>スクリプト</secondary>
+    </indexterm></title>
+
+  <section>
+    <title>はじめに</title>
+
+    <para>スクリプト プラグインを使うと、さまざまなスクリプト言語で書かれたスクリプトを OmegaT で実行することができます。</para>
+  </section>
+
+  <section>
+    <title>インストールと使い方</title>
+
+    <para>OmegaT 用のスクリプト プラグインは、<ulink url="http://sourceforge.net/projects/omegat-plugins/files">OmegaT プラグインのダウンロードサイト</ulink>から入手できます。Zip 圧縮ファイルを解凍して、展開されたすべてのファイルを「plugins」フォルダーに移動してください。「plugins」フォルダーは通常、OmegaT のインストール先フォルダー（OmegaT.jar ファイルを含む）の配下にあります。もし「plugins」フォルダーが見当たらなければ、先にフォルダーを作成してください。</para>
+
+    <para>インストールが完了すると、<guisubmenu>［ツール］</guisubmenu>メニューに新たに<guisubmenu>［スクリプト...］</guisubmenu>サブメニューが追加されます。また<guisubmenu>［スクリプト...］</guisubmenu>サブメニューの下には、スクリプト用の五つのプレースホルダーも追加されます。<guisubmenu>［スクリプト...］</guisubmenu> をクリックすると、スクリプト ダイアログが開きます：<screenshot> <screeninfo>スクリプト ダイアログ</screeninfo> <mediaobject> <imageobject> <imagedata fileref="images/ScriptingDialog.png"/> </imageobject> </mediaobject> </screenshot></para>
+
+    <para>スクリプト ダイアログ上では、既存のスクリプトをテキスト欄に読み込んだり、それをいま開いているプロジェクトに対して実行したりできます。スクリプトをカスタマイズする手順は、次の通りです：</para>
+
+    <itemizedlist>
+      <listitem>
+        <para>左側のスクリプト一覧から目的のスクリプト名をクリックして、編集ウィンドウに読み込みます。</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>下部にある「1」から「5」のどれかのボタンの上で右クリックし、［スクリプトを設定］を選びます。上の画像では、２つのスクリプトがすでに（ボタン「&lt;1&gt;」と「&lt;2&gt;」に）設定済みです。</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>数値ボタンを左クリックすると、そこに設定されているスクリプトを実行できます。また<guisubmenu>［ツール］</guisubmenu>メニューからスクリプトを選んだり、割り当てられたショートカットキー <keycap>Ctrl+Alt+F#</keycap>（# は 1 から 5）を使うことでも、同じようにスクリプトを実行できます。</para>
+      </listitem>
+    </itemizedlist>
+
+    <para>以下のスクリプト言語は、最初から使える状態になっています：</para>
+
+    <para><itemizedlist>
+        <listitem>
+          <para><emphasis role="bold">NetRexx</emphasis>（http://www.netrexx.org/）： 旧来の REXX 構文を利用できます。予約キーワードはありません。Java のオブジェクト モデルと互換性のある形でオブジェクト指向プログラミングをサポートするため、多くの拡張が施されています。環境に存在するすべての Java クラスライブラリを、特別な設定をすることなくそのまま利用できます。あるいは Java プログラマーであれば、Java のソースプログラムからランタイム パッケージ経由で単純に Rexx クラスを呼び出し、強力な文字列処理を行うこともできます。</para>
+        </listitem>
+      </itemizedlist><itemizedlist>
+        <listitem>
+          <para><emphasis role="bold">XSLT</emphasis>（Extensible Stylesheet Language Transformations）：XML 文書を変換するために用いられる、宣言的な XML ベースの言語です。原文書には一切変更を加えません。既存の文書を元に、新しい文書を作成します。プロセッサーは、文書を標準的な XML 形式や、HTML、プレーンテキストなどの形式に変換（出力）できます。XSLT は、異なる XML スキーマ間での変換や、XML データをウェブページや PDF 文書などに変換する用途で、最もよく使われています。</para>
+        </listitem>
+      </itemizedlist><itemizedlist>
+        <listitem>
+          <para><emphasis role="bold">Groovy</emphasis>（http://groovy.codehaus.org）：Java 仮想マシン向けの動的言語です。構文的に Java との互換性を最大限に保った上で、さらに Python や Ruby、Smalltalk に触発された強力な拡張機能を持ちます。</para>
+        </listitem>
+      </itemizedlist><itemizedlist>
+        <listitem>
+          <para><emphasis role="bold">JavaScript</emphasis>（JS と略すこともあり、Java とは無関係）：プロトタイプ ベースのスクリプト言語です。動的で、弱い型付け、 ファーストクラス関数などの特徴を持ちます。オブジェクト指向、命令型、および関数型プログラミングのスタイルをサポートする、マルチパラダイム言語です。Firefox のような人気のあるプログラムで利用されていることから、とりわけオープンソースの分野で普及し好まれています。</para>
+        </listitem>
+      </itemizedlist>すべての言語から、プロジェクトを先頭のオブジェクトとする OmegaT のオブジェクトモデルにアクセスできます。次に示すコードスニペットは、現在のプロジェクトから全ファイルの全分節を走査する groovy スクリプトの例です。このスクリプトは、もし訳文が存在していれば、その分節の原文と訳文を出力します：</para>
+
+    <programlisting>    files = project.projectFiles;
+    for (i in 0 ..&lt; files.size())
+    {
+        for (j in 0 ..&lt; files[i].entries.size())
+        {
+            currsegment = files[i].entries[j];
+            if (project.getTranslationInfo(currSegment))
+            {
+                source = currsegment.getSrcText();
+                target = project.getTranslationInfo(currsegment).translation;
+                console.println(source + &quot; &gt;&gt;&gt;&gt; &quot; + target);
+            }     
+        }
+    }</programlisting>
+  </section>
+</appendix>

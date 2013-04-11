@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<chapter id="chapter.about.OmegaT">
+  <title><application>OmegaT</application> について - はじめに</title>
+
+  <section id="OmegaT-Highlists">
+    <title>OmegaT の特徴</title>
+
+    <para><application>OmegaT</application> は、自由に使用できる、マルチプラットフォームのコンピューター翻訳支援ツール です。主に以下のような特徴があります：</para>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis role="bold">翻訳メモリ：</emphasis> <application>OmegaT</application> は、単語や分節をどのように翻訳したかを翻訳メモリに記憶していきます。同時に、それまでに記憶した翻訳内容をメモリから参照することができます。翻訳メモリは、同じ分節の繰り返しや、似通った表現が多く現れる翻訳に非常に便利です。OmegaT は翻訳メモリを使用して、以前行った翻訳内容を記憶し、翻訳しようとしている文章にもっとも適した翻訳の提案を行います。</para>
+
+        <para>翻訳メモリは、以前翻訳した文書を更新するときに非常に便利です。 変更されていない文章は、自動的に翻訳されます。更新された文章は未翻訳として扱われますが、翻訳済みの文章の中から翻訳候補が表示されるようになります。従って、元の文書の翻訳修正という点でも、とても簡単に扱えます。たとえば、翻訳会社や顧客から以前の翻訳メモリを受け取った場合、OmegaT はそれを参照用として使用できます。</para>
+
+        <para>OmegaT が使用する翻訳メモリファイルは標準的な TMX フォーマットです。このファイル形式をサポートする他の翻訳ツールであれば、翻訳資産を相互使用できます。</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis role="bold">用語管理：</emphasis>翻訳の一貫性を保つ上で、用語管理は重要です。OmegaT には用語集（glossary）の機能があり、（たとえば特定分野向けの）2 言語間の対訳集として、1 単語または短いフレーズの対訳を翻訳中に参照することができます。現在翻訳している文章中にそれらの単語が現れた場合、用語集ウィンドウにその対訳が表示されます。</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis role="bold">翻訳作業の流れ：</emphasis>翻訳対象は、ファイル１つのこともあれば、いろいろな形式のファイルを含んだたくさんのフォルダー、という場合もあるでしょう。OmegaT は、指定された翻訳対象ファイル群をファイルフィルター機能によって識別し、各ファイルのテキスト部分を抽出します。さらに、分節化機能によってそのテキスト部分を複数のまとまりに分割し、翻訳作業を行いやすいように順に表示します。翻訳中は、その翻訳内容を記憶し、以前の翻訳メモリからよく似た分節を探し出して提示します。翻訳し終えたら、訳文ファイルを生成して、適切なプログラムで開き、翻訳結果を完成形で見る…という具合です。</para>
+      </listitem>
+    </itemizedlist>
+  </section>
+
+  <section id="OmegaT.chapters.summary">
+    <title>各章の概要</title>
+
+    <para>この説明書は、チュートリアルとリファレンス両方の役割を兼ねることを意図しています。ここで簡単に、各章の概要をご紹介しましょう。</para>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis role="bold">5 分でわかる！ OmegaT の使い方：</emphasis>初心者と「とりあえずインストールしてみた」人を対象にした、お手軽なスタートガイドです。新しいプロジェクトの作成から翻訳完了まで、一通りの流れを見ることができます。</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis role="bold">OmegaT のインストールと実行：</emphasis>この章は、OmegaT を最初に使いはじめるときに役立つでしょう。OmegaT のインストールと Windows、Mac OS X、Linux 各 OS 上での実行について、詳しい手順がここにあります。また上級者向けの話題として、コマンドラインモードとその可能性についても説明しています。</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis role="bold">ユーザーインターフェース</emphasis>、<emphasis role="bold">メニューとキーボードショートカット：</emphasis>この２つの章は、OmegaT のユーザーインターフェースおよび、メニューとキーボードショートカットから利用できる機能について、説明しています。おそらく頻繁に参照されるでしょう。</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis role="bold">プロジェクトの設定</emphasis>、<emphasis role="bold"><application>OmegaT</application> のファイルとフォルダー：</emphasis>OmegaT にとってプロジェクトとは、コンピューター翻訳支援ツールとして OmegaT が取り扱う作業単位を指します。最初の章では、たとえば原文と訳文の言語設定のような、プロジェクトの設定について説明しています。もうひとつの章では、翻訳プロジェクトが含むさまざまなフォルダーやファイルとその役割について取り上げています。また OmegaT に関連付けられた個人設定ファイルとプログラムファイルについても、説明しています。</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis role="bold">翻訳入力行の動作：</emphasis>未翻訳の分節に関する翻訳入力行の動作設定をどのように行うか説明した、短い章です。</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis role="bold">プレーンテキストを扱う</emphasis>と<emphasis role="bold">整形されたテキストを扱う：</emphasis>この２つの章は、翻訳するテキストに関するいくつかの重要な点について説明しています。たとえば、文字エンコーディング（プレーンテキストファイルの場合）や、タグの取り扱い（整形されたテキストの場合）などです。</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis role="bold">翻訳メモリ：</emphasis>翻訳メモリを配置できるさまざまなフォルダーの役割について説明するとともに、翻訳メモリに関連する多彩な情報を提供します。</para>
+      </listitem>
+
+      <listitem>
+        <para><emphasis role="bold">原文の分節化：</emphasis>翻訳メモリツールは、分節と呼ばれるテキスト単位で処理を行います。OmegaT の分節は、段落単位か、あるいは分節化規則に基づく文単位です。段落単位の分節化はあまり使いませんが、いわゆる「文学的」なテキストの場合は役に立ちます。規則に基づく分節化は、たいていの場合、文単位の分節化を意味しています。分節化規則集には最初から多くの規則が定義されていますが、この章で説明される通り、ユーザーが独自に規則を追加することもできます。</para>
+      </listitem>
+
+      <listitem>
+        <para><emphasis role="bold">検索</emphasis>と<emphasis role="bold">正規表現：</emphasis>OmegaT の検索は「<emphasis>『カンガルー』という単語を含む分節を一覧表示</emphasis>」といった感じで、簡単に使えます。<emphasis></emphasis>その一方で、複雑な条件にも対応しています。たとえば、２個以上の連続するスペース文字を含む分節を検索したい、としましょう。この場合、「\s\s+」という正規表現パターンを使うことによって、問題の分節を検索することができます。正規表現は、分節化規則でも頻繁に使われています。</para>
+      </listitem>
+
+      <listitem>
+        <para><emphasis role="bold">用語集</emphasis>、<emphasis role="bold">辞書</emphasis>、<emphasis role="bold">機械翻訳</emphasis>、<emphasis role="bold">綴り確認</emphasis>、<emphasis role="bold">LanguageTool：</emphasis>OmegaT では辞書と用語集を幅広く活用できます。インターネットに接続していれば、Google Translate や Microsoft Translator のような機械翻訳サービスを OmegaT の中から利用できます。綴り確認機能を使うと、誤字脱字を検知し、翻訳中に修正することができます。オープンソースのツール LanguageTool は、文法や文体のありがちなミスを教えてくれます。</para>
+      </listitem>
+
+      <listitem>
+        <para><emphasis role="bold">その他：</emphasis>「データを失わないために」など、その他の興味深い話題を扱います。</para>
+      </listitem>
+
+      <listitem>
+        <para><emphasis role="bold">付録</emphasis>は以下の情報を含みます</para>
+
+        <itemizedlist>
+          <listitem>
+            <para><emphasis role="bold">ウェブ上の OmegaT 情報：</emphasis>OmegaT のオンライン リソースに関する情報</para>
+          </listitem>
+        </itemizedlist>
+
+        <itemizedlist>
+          <listitem>
+            <para><emphasis role="bold">使用言語と言語コード：</emphasis>言語名と言語コードの ISO コード表</para>
+          </listitem>
+        </itemizedlist>
+
+        <itemizedlist>
+          <listitem>
+            <para><emphasis role="bold">編集ウィンドウのキーボードショートカット：</emphasis>編集ウィンドウで使えるショートカットの一覧</para>
+          </listitem>
+
+          <listitem>
+            <para><emphasis role="bold">ショートカットのカスタマイズ：</emphasis>ショートカットをあなた好みにカスタマイズしましょう</para>
+          </listitem>
+        </itemizedlist>
+
+        <itemizedlist>
+          <listitem>
+            <para><emphasis role="bold">トークナイザー プラグインとスクリプト プラグインの導入</emphasis></para>
+          </listitem>
+
+          <listitem>
+            <para><emphasis role="bold">チームプロジェクト</emphasis></para>
+          </listitem>
+        </itemizedlist>
+
+        <itemizedlist>
+          <listitem>
+            <para><emphasis role="bold">法律上の表示と謝辞</emphasis></para>
+          </listitem>
+        </itemizedlist>
+      </listitem>
+
+      <listitem>
+        <para><emphasis role="bold">キーワード索引：</emphasis>関連情報を探しやすいように、充実したキーワード索引つきです。</para>
+      </listitem>
+    </itemizedlist>
+  </section>
+</chapter>

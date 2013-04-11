@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<appendix id="appendix.LanguageToolPlugin.inOmegaT">
+  <title>LanguageTool プラグイン<indexterm class="singular">
+      <primary>プラグイン</primary> <secondary>LanguageTool</secondary>
+    </indexterm></title>
+
+  <section>
+    <title>はじめに</title>
+
+    <para><ulink url="http://www.languagetool.org/">LanguageTool</ulink> はオープンソースのスタイルと文法チェックツールです。英語、フランス語、ドイツ語、ポーランド語、オランダ語、ルーマニア語など数多くの言語に対応しています。詳しくは<ulink url="http://www.languagetool.org/languages/">対応する言語の一覧</ulink>を参照してください。</para>
+
+    <para>LanguageTool は、単純な綴り確認機能では検出できないような間違いを検出するためのプログラムです。たとえば、there と their、no と now の取り違えなどが該当します。また、ある種の文法上の間違いも検出できます。綴り確認機能は含みません。LanguageTool は、言語固有の設定ファイルであらかじめ定義された規則に基づいて、間違いを見つけます。</para>
+
+    <figure>
+      <title>LanguageTool を OmegaT に組み込む</title>
+
+      <screenshot>
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="images/LanguageToolExample.png"/>
+          </imageobject>
+        </mediaobject>
+      </screenshot>
+    </figure>
+  </section>
+
+  <section>
+    <title>インストールと使い方</title>
+
+    <para>OmegaT 用の LanguageTool プラグインは、<ulink url="http://sourceforge.net/projects/omegat-plugins/files">OmegaT プラグインのダウンロードサイト</ulink>から入手できます。Zip 圧縮ファイルを解凍して、展開されたすべてのファイルを「plugins」フォルダーに移動してください。「plugins」フォルダーは通常、OmegaT のインストール先フォルダー（OmegaT.jar ファイルを含む）の配下にあります。もし「plugins」フォルダーが見当たらなければ、先にフォルダーを作成してください。</para>
+
+    <para>これでインストールは完了です。<guimenuitem>［設定］→［言語チェッカー］</guimenuitem>にチェックを入れておくと、OmegaT はプラグインを自動的に利用します。プロジェクトの原文と訳文の言語に応じて、規則が（もしあれば）適用されます。規則が適用されると、編集ウィンドウ上の対応する語句には青い下線が引かれます（上の画像の「<emphasis>also</emphasis>」と「<emphasis>I didn't do nothing</emphasis>」に注目してください）。下線が引かれた語句の上にマウスカーソルをかざすと、説明が表示されます。</para>
+  </section>
+</appendix>

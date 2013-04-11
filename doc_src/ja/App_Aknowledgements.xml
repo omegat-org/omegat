@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE appendix PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<appendix id="appendix.acknowledgements">
+  <title>謝辞</title>
+
+  <section>
+    <title>みなさん、ありがとう！</title>
+
+    <para>現行のバージョンに存在する矛盾や記載漏れ、誤記などはすべて、筆者がその責を負うものです。この取扱説明書は、多くの人たちからの助けと支え無しには、存在し得ませんでした。とりわけ、次の方々に感謝します：</para>
+
+    <itemizedlist>
+      <listitem>
+        <para>Mark Prior へ。わたしの最初の下書きを校正してくれたとき、OmegaT と英語に対する彼の深い愛情を思い知りました。</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Didier Briel へ。彼の忍耐と、DocBook の厄介な問題に対する不断の助力が無ければ、本文書は完成しなかったでしょう。もちろん、リポジトリを完全な状態に維持するための、彼の注意深さと働きぶりは、言うまでもありません。</para>
+      </listitem>
+
+      <listitem>
+        <para>Samuel Murray へ。初心者向けの章「5 分でわかる！ OmegaT の使い方」に対して。</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Will Helton へ。彼が下書きの最終チェックをしてくれたおかげで、多くの恥をさらす事態を免れました。彼の貴重な助けがなかったら、いったい幾つの前置詞 the や a が欠落していたことやら。</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Jean-Christophe Helary へ。わたしの知らない OmegaT の実行とコマンドライン引数、その他もろもろに関する簡潔な説明に、深く感謝します。</para>
+      </listitem>
+
+      <listitem>
+        <para>最後に、旧版の不備を見つけて <ulink url="http://sourceforge.net/tracker/?group_id=68187&amp;atid=912617">OmegaT 文書管理システム</ulink>に報告してくれた、すべての貢献者の皆さんへ。引き続き、よろしくお願いします！</para>
+      </listitem>
+    </itemizedlist>
+  </section>
+</appendix>

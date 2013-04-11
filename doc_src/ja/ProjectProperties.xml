@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<chapter id="chapter.project.properties">
+  <title>プロジェクト設定<indexterm class="singular">
+      <primary>プロジェクト</primary> <secondary>プロジェクト設定</secondary>
+    </indexterm></title>
+
+  <para/>
+
+  <section id="properties.dialog">
+    <title>プロジェクト設定変更ダイアログ</title>
+
+    <para><menuchoice><shortcut><keycombo><keycap>Ctrl</keycap> <keycap>E</keycap></keycombo></shortcut> <guimenu>プロジェクト</guimenu> <guimenuitem>プロジェクト設定...</guimenuitem></menuchoice> ダイアログは、プロジェクトの言語や使用フォルダーを変更する場合に使用します。</para>
+
+    <para>翻訳作業の途中でプロジェクトの設定を変更することも、可能ではありますが、そのような変更は、予期しない結果をもたらすことがあります。特に翻訳作業が始まってからの変更には、注意してください。OmegaT であるていど経験を積むまでは、一度翻訳を開始したら、何か致命的な誤りに気づいたのでない限り、設定を変えずにおくことがもっとも安全です。作業中のデータを守る対策については「データを失わないために」の項を参照してください。</para>
+
+    <figure>
+      <title>プロジェクト設定ウィンドウ</title>
+
+      <mediaobject>
+        <imageobject role="html">
+          <imagedata fileref="images/NewProject_26.png"/>
+        </imageobject>
+
+        <imageobject role="fo">
+          <imagedata fileref="images/NewProject_26.png" width="80%"/>
+        </imageobject>
+      </mediaobject>
+    </figure>
+
+    <para>次の要素から構成されます：</para>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis role="bold">プロジェクトの原文言語と訳文言語の設定</emphasis></para>
+
+        <para>原文言語と訳文言語は、リストから選択するか、または直接入力で指定します。もし翻訳途中で言語設定を変更すると、変更前後の言語間で一致が取れなくなり、翻訳メモリが使い物にならなくなることがあるので注意してください。</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis role="bold"><guilabel>文単位の分節化を有効にする</guilabel> </emphasis>チェックボックス</para>
+
+        <indexterm class="singular">
+          <primary>プロジェクト</primary> <secondary>文単位の分節化を有効にする</secondary>
+        </indexterm>
+
+        <para>分節化の設定は、原文ファイルの取り扱い方法にのみ関係します。原文の分節化は、文単位で行うのが一般的です。したがって通常は、このチェックボックスにチェックを入れておくのがよいでしょう。</para>
+
+        <para>めったにないことですが、段落単位での分節化のような、別の方法が必要とされることもあります。このフラグを変更しても、翻訳メモリにすでに記録された分節は変更されません。たとえば、翻訳の途中で分節化を文単位から段落単位に変更しても、そのプロジェクトの内部翻訳メモリは何も変わりません。OmegaT は段落単位でしか分節化できなかった旧形式の翻訳メモリをアップグレードしますが、その逆はできないのです。</para>
+
+        <para>分節化設定を変更した場合、翻訳済みの分節が分割されたり、結合されることがあります。これにより、たとえ分割や結合前の翻訳がまだ翻訳メモリに残っていたとしても、実質的に「未翻訳」の状態に戻ることになります。</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis role="bold"><guibutton>分節化規則...</guibutton> </emphasis>ボタン<indexterm class="singular">
+            <primary>分節化</primary> <secondary>ユーザーレベル vs プロジェクト専用規則</secondary>
+          </indexterm></para>
+
+        <para>分節化規則は、ほとんどの場合、すべてのプロジェクトに共通で適用されます。しかし特定のプロジェクトに特化した分節化規則が必要になることもあるでしょう。その場合は、このボタンを押してダイアログを開き、<guimenuitem>［分節化規則をプロジェクト専用にする］</guimenuitem>チェックボックスにチェックを入れてから、分節化規則を必要な状態に変更してください。新しい規則集は、プロジェクトと共に保存されます。またプログラム共通の分節化規則集には干渉しません。プロジェクト専用の分節化規則を削除したい場合は、チェックボックスのチェックを外してください。分節化規則の詳細については「<link linkend="chapter.segmentation">原文の分節化</link>」の章を参照してください。<emphasis/></para>
+
+        <para><emphasis>ヒント：</emphasis>プロジェクト専用の分節化規則集は <filename>project/omegat/segmentation.conf</filename> に保存されます。</para>
+      </listitem>
+
+      <listitem>
+        <para><emphasis role="bold"><guibutton>ファイルフィルター...</guibutton> </emphasis>ボタン<indexterm class="singular">
+            <primary>ファイルフィルター</primary> <secondary>ユーザーレベル vs プロジェクト専用フィルター</secondary>
+          </indexterm></para>
+
+        <para>前の項と同じように、プロジェクト専用のファイルフィルター設定を作成できます。この設定はプロジェクトと共に保存され、現在のプロジェクトにのみ適用されます。プロジェクト専用のファイルフィルター設定を作成するには、<guibutton>［ファイルフィルター...］ </guibutton>ボタンをクリックし、開いたウィンドウの<guimenuitem>［ファイルフィルター設定をプロジェクト専用にする］</guimenuitem>チェックボックスにチェックを入れてください。これにより、変更されたフィルター設定のコピーがプロジェクトと共に保存されるようにます。プロジェクト専用のファイルフィルター設定を削除するには、チェックボックスのチェックを外してください。<guimenuitem>［設定］→［ファイルフィルター...］</guimenuitem>メニューからユーザーレベルのファイルフィルター設定を変更しても、プロジェクト専用のファイルフィルター設定は変更されないことに注意してください。詳しくは<link linkend="chapter.file.filters">ファイルフィルター</link>の章を参照してください。<emphasis/></para>
+
+        <para><emphasis>ヒント：</emphasis>プロジェクト専用のファイルフィルター設定は <filename>project/omegat/filters.xml</filename> に保存されます。</para>
+      </listitem>
+
+      <listitem>
+        <para><emphasis role="bold">翻訳自動反映</emphasis> チェックボックス<emphasis role="bold"><indexterm class="singular">
+            <primary>プロジェクト</primary> <secondary>翻訳を自動反映する設定</secondary>
+          </indexterm></emphasis></para>
+
+        <para>同じ内容の分節が何箇所か原文に存在する場合、［翻訳自動反映］チェックボックスにチェックを入れると、最初にその内容を一箇所翻訳した時点で、それが既定値訳文に設定され、他の訳文分節にも同じ内容が設定されます。原文が同じでも、文脈によっては他と同じ内容が適さない分節があるかもしれません。その場合はもちろん、後で<guimenuitem>［新しい訳文を登録］</guimenuitem>コマンドを使って手修正することができます。［翻訳自動反映］チェックボックスにチェックを入れないと、原文が同じ他の分節は未翻訳のまま残されます。通常の分節と同じように、その分節に移動して都度、翻訳することになります。</para>
+      </listitem>
+
+      <listitem>
+        <para><emphasis role="bold">タグを削除</emphasis> チェックボックス<indexterm class="singular">
+            <primary>プロジェクト</primary> <secondary>タグを削除する設定</secondary>
+          </indexterm></para>
+
+        <para>この設定にチェックを入れると、原文分節からすべての整形用のタグを削除します。これはインラインの整形を実際には使わないテキスト（たとえば OCR ソフトが出力した PDF ファイルや、変換精度の低い .odt ファイルや .docx ファイルなど）を扱う場合に役に立ちます。削除されるのはインラインのタグのみです。したがって通常は、訳文ファイルを開くのに特に支障は無いでしょう。非視覚的な整形（OmegaT の編集画面上には表示されません）は、訳文ファイルに引き継がれます。</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis role="bold">プロジェクトが使用するフォルダーの指定</emphasis><indexterm class="singular">
+            <primary>プロジェクト</primary> <secondary>フォルダー構造の変更</secondary>
+          </indexterm><indexterm class="singular">
+            <primary>用語集</primary> <secondary>書き込み可能な用語集ファイルの場所</secondary>
+          </indexterm></para>
+
+        <para>ここで、プロジェクトフォルダーの場所を変更することができます。たとえば、原文ファイルフォルダーや、訳文ファイルフォルダーなどです。フォルダー名を直接入力して、そのフォルダーがまだ存在しなければ、<application>OmegaT</application> がそのフォルダーを作成します。プロジェクトフォルダーの場所を変更しても、既存のファイルが古いフォルダーから新しいフォルダーに移動されたりはしませんので、注意してください。</para>
+      </listitem>
+    </itemizedlist>
+  </section>
+</chapter>

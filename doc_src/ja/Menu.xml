@@ -1,0 +1,1237 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<chapter id="chapter.menu">
+  <title>メニューとキーボードショートカット</title>
+
+  <section id="ch04.main.menu">
+    <title><indexterm class="singular">
+        <primary>メニュー</primary>
+      </indexterm>メインメニュー</title>
+
+    <para>OmegaT のすべての機能は、編集ウィンドウ上部にあるメニューから実行できます。多くの機能にキーボードショートカットが割り当てられており、それを用いて実行することもできます。ショートカットは<keycap>［Ctrl］</keycap>キーと文字キーを同時に押します。他のキーを含めて使用するものもあります。判別しやすいよう、文字キーは大文字で表記します。<keycap>［Ctrl］</keycap>キーは Windows で使用します。UNIX や UNIX 系のオペレーティングシステムでは<keycap>［Ctrl］</keycap> または <keycap>［Control］</keycap>キーが該当します。Mac ユーザーは<keycombo><keycap>［cmd］</keycap>+<keycap>キー</keycap></keycombo>と読み替えてください。Apple キーボードでは、「cmd」キーには「command」またはリンゴ マークが記されています。</para>
+
+    <para>必要であれば、既存のショートカットをカスタマイズしたり、新しいショートカットを追加することもできます。詳しくは<link linkend="ch04.shortcuts.customization">付録 - ショートカットのカスタマイズ</link>を参照してください。</para>
+
+    <table colsep="1" id="table.main.menu">
+      <title>メインメニュー</title>
+
+      <tgroup cols="7" colsep="1">
+        <tbody>
+          <row>
+            <entry><guimenuitem>プロジェクト</guimenuitem></entry>
+
+            <entry><guimenuitem>編集</guimenuitem></entry>
+
+            <entry><guimenuitem>移動</guimenuitem></entry>
+
+            <entry><guimenuitem>表示</guimenuitem></entry>
+
+            <entry><guimenuitem>ツール</guimenuitem></entry>
+
+            <entry><guimenuitem>設定</guimenuitem></entry>
+
+            <entry><guimenuitem>ヘルプ</guimenuitem></entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+
+    <section id="submenu.Project">
+      <title>プロジェクト<indexterm class="singular">
+          <primary>メニュー</primary> <secondary>プロジェクト</secondary>
+        </indexterm></title>
+
+      <table colsep="1">
+        <title>プロジェクトメニュー</title>
+
+        <tgroup cols="3" colsep="1">
+          <colspec align="left" colnum="1" colwidth="100"/>
+
+          <colspec align="left" colnum="2" colwidth="100"/>
+
+          <tbody>
+            <row>
+              <entry><guimenuitem>新規作成...</guimenuitem></entry>
+
+              <entry/>
+
+              <entry>新しいプロジェクトを作成し、開きます。ここで表示されるウィンドウは［プロジェクト設定］ダイアログ（詳細は右リンク先を参照）と同じです。<xref linkend="chapter.project.properties"/></entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>開く...</guimenuitem></entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>O</keycap>
+                </keycombo></entry>
+
+              <entry>すでに作成したプロジェクトを開きます。</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>原文ファイルを追加...</guimenuitem></entry>
+
+              <entry/>
+
+              <entry>選択したファイルをプロジェクトの <filename>source</filename> フォルダーにコピーし、その新しいファイルを読み込むために、プロジェクトを再読み込みします。</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>MediaWiki から原文ファイルを追加...</guimenuitem></entry>
+
+              <entry/>
+
+              <entry>入力した URL をもとに MediaWiki 形式のページを開き、編集可能な部分を原文として追加します。</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>再読み込み</guimenuitem></entry>
+
+              <entry><keycap>F5</keycap></entry>
+
+              <entry>外部からの原文ファイルの変更や、過去資産の翻訳メモリ、用語集、プロジェクト設定の変更を認識させるために、プロジェクト全体を再読み込みします。</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>閉じる</guimenuitem></entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>Shift</keycap>
+
+                  <keycap>W</keycap>
+                </keycombo></entry>
+
+              <entry>それまでの翻訳内容を保存し、プロジェクトを閉じます。</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>保存</guimenuitem></entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>S</keycap>
+                </keycombo></entry>
+
+              <entry>内部翻訳メモリをハードディスクに保存します。OmegaT はデフォルトで 10 分ごとに翻訳を自動保存します。プロジェクトを閉じる時や、OmegaT の終了時も同様です。</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>訳文ファイルを生成</guimenuitem></entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>D</keycap>
+                </keycombo></entry>
+
+              <entry>それまで翻訳した内容をもとに訳文ファイルを生成します。訳文ファイルは、<filename>target</filename> フォルダーに保存されます。</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>プロジェクト設定...</guimenuitem></entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>E</keycap>
+                </keycombo></entry>
+
+              <entry>プロジェクトの言語や使用フォルダーを変更するため<link linkend="chapter.project.properties">プロジェクト設定</link>ダイアログを表示します。</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>翻訳対象ファイル一覧...</guimenuitem></entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>L</keycap>
+                </keycombo></entry>
+
+              <entry><link linkend="section.project.files">翻訳対象ファイル一覧</link>ウィンドウを開くか、あるいは閉じます（どの動作をするかは、その時点でウィンドウが開いているかどうかによります）。</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>終了</guimenuitem></entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>Q</keycap>
+                </keycombo></entry>
+
+              <entry>プロジェクトを保存し <application>OmegaT</application> を終了します。まだ一度も手動で保存していなかった場合は、本当に閉じてもよいかどうか確認メッセージが表示されます。</entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+    </section>
+
+    <section>
+      <title>編集<indexterm class="singular">
+          <primary>メニュー</primary> <secondary>編集</secondary>
+        </indexterm></title>
+
+      <para>多くのプログラムで使える機能（コピー、切り取り、貼り付け）は、このメニューに表示されていませんが、システムのショートカットとして OmegaT でも使用できます。たとえば：</para>
+
+      <table colsep="1">
+        <title>コピー／切り取り／貼り付けのショートカット</title>
+
+        <tgroup cols="3" colsep="1">
+          <colspec align="left" colnum="1" colwidth="100"/>
+
+          <colspec align="left" colnum="2" colwidth="100"/>
+
+          <tbody>
+            <row>
+              <entry><guimenuitem>コピー</guimenuitem></entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>C</keycap>
+                </keycombo></entry>
+
+              <entry>選択したテキストをクリップボードにコピーします。</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>切り取り</guimenuitem></entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>X</keycap>
+                </keycombo></entry>
+
+              <entry>選択したテキストを削除し、クリップボードにコピーします。</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>貼り付け</guimenuitem></entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>V</keycap>
+                </keycombo></entry>
+
+              <entry>現在のカーソル位置に、クリップボードにあるテキストを貼り付けます。</entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+
+      <para>編集メニューに存在するのは以下の項目です：</para>
+
+      <table colsep="1">
+        <title>編集メニュー</title>
+
+        <tgroup cols="3" colsep="1">
+          <colspec align="left" colnum="1" colwidth="100"/>
+
+          <colspec align="left" colnum="2" colwidth="100"/>
+
+          <tbody>
+            <row>
+              <entry><guimenuitem>取り消す</guimenuitem></entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>Z</keycap>
+                </keycombo></entry>
+
+              <entry>直前の編集が行われる前の状態に戻します。分節の編集が確定された後の場合は、機能しません。</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>やり直す</guimenuitem></entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>Y</keycap>
+                </keycombo></entry>
+
+              <entry>直前の編集が取り消される前の状態に戻します。分節の編集が確定された後の場合は、機能しません。</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>参考訳文に置換</guimenuitem></entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>R</keycap>
+                </keycombo></entry>
+
+              <entry>現在の訳文分節の全体を、選択されている参考訳文で置き換えます（デフォルトでは最初の参考訳文が選択されています）。</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>参考訳文を挿入</guimenuitem></entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>I</keycap>
+                </keycombo></entry>
+
+              <entry>現在のカーソル位置に、選択されている参考訳文を挿入します。もし訳文の一部を選択した状態であれば、その部分を上書きします。</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>機械翻訳に置換</guimenuitem></entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>M</keycap>
+                </keycombo></entry>
+
+              <entry>訳文分節を選択した機械翻訳サービスによる翻訳内容に置換します。機械翻訳サービスが有効になっていない場合は、何も行いません（メニューの［設定］→［機械翻訳］を確認してください）。</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>原文に置換</guimenuitem></entry>
+
+              <entry><keycombo>
+                  <keycap>Shift</keycap>
+
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>R</keycap>
+                </keycombo></entry>
+
+              <entry>現在の訳文分節を、原文の内容に置換します。</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>原文を挿入</guimenuitem></entry>
+
+              <entry><keycombo>
+                  <keycap>Shift</keycap>
+
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>I</keycap>
+                </keycombo></entry>
+
+              <entry>現在の訳文分節のカーソル位置に、原文の内容を挿入します。</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>原文のタグを挿入</guimenuitem></entry>
+
+              <entry><keycombo>
+                  <keycap>Shift</keycap>
+
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>T</keycap>
+                </keycombo></entry>
+
+              <entry><indexterm class="singular">
+                  <primary>タグ</primary> <secondary>原文のタグを挿入</secondary>
+                </indexterm>現在の訳文分節のカーソル位置に、原文のタグを挿入します。原文中の関連するタグすべて（設定しだいで、独自タグや Java、printf 関数の指定子もタグとして扱います）が対象になります。このとき、挿入先の訳文分節にすでにタグが存在していても、関係なく挿入されます。原文中の、タグに囲まれたテキストは、スペース文字に置き換えられます。たとえば <literal>&lt;f0&gt;&lt;f1&gt;これはテキストです&lt;/f0&gt;&lt;/f1&gt;</literal> は <literal>&lt;f0&gt;&lt;f1&gt;スペース文字１個&lt;/f0&gt;&lt;/f1&gt;</literal> としてコピーされます。</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>選択領域を出力</guimenuitem></entry>
+
+              <entry><keycombo>
+                  <keycap>Shift</keycap>
+
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>C</keycap>
+                </keycombo></entry>
+
+              <entry>選択した領域を別のテキストファイルに出力します。選択領域がない場合、現在開いている原文がこのファイルに書き込まれます。<application>OmegaT</application> を閉じるとき、このファイルは空の状態ではなく、通常のクリップボードと同じように機能します。出力された内容は、個人設定フォルダー（「<xref linkend="chapter.files.and.directories"/>」を参照してください）の <filename>selection.txt</filename> というファイルにコピーされます。</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>用語の追加</guimenuitem></entry>
+
+              <entry><keycombo>
+                  <keycap>Shift</keycap>
+
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>G</keycap>
+                </keycombo></entry>
+
+              <entry>デフォルトの用語集ファイルに項目を追加します。</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>プロジェクトを検索...</guimenuitem></entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>F</keycap>
+                </keycombo></entry>
+
+              <entry>［<link linkend="section.search.window">検索</link>］ウィンドウを新しく開きます。</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>大/小文字設定</guimenuitem></entry>
+
+              <entry><keycombo> <keycap>Shift</keycap> <keycap>F3</keycap> </keycombo>（右を参照）</entry>
+
+              <entry>訳文分節中の選択したテキストに対し、ケースを変更します（すべて小文字→すべて大文字→Title case：単語先頭のみ大文字）。［Shift+F3］<indexterm>
+                  <primary>ショートカット</primary> <secondary>大/小文字設定 - Shift+F3</secondary>
+                </indexterm>で、上記３通りを順に切り替えて実行します。テキストを何も選択していない場合、<application>OmegaT</application> はカーソル右にある単語をその場で選択して実行します。</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>参考訳文 #N を選択</guimenuitem></entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>#N</keycap>
+                </keycombo></entry>
+
+              <entry>参考訳文ウィンドウに表示された N 番目の参考訳文を選択します（#N は 1 から 5 の数字）。選択された参考訳文は、現在の分節に対して置換または挿入できます。<xref linkend="match.viewer"/>に、色表示を含めた詳細の説明があります。</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>既定値訳文として使用</guimenuitem></entry>
+
+              <entry/>
+
+              <entry>現在の原文分節に対して複数の対訳が存在し、かつ現在の訳文分節が既定値ではない場合に、現在の訳文分節を既定値に設定します。現在の原文分節に対して１つの対訳しか存在しない場合は、この項目はグレーアウトして選択できません。</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>新しい訳文を登録</guimenuitem></entry>
+
+              <entry/>
+
+              <entry>同じ内容の原文分節が複数存在し、それぞれの文脈に応じて異なる対訳が必要になることがあります。このメニュー項目を選ぶと、その訳文は現在の分節固有のものになります。同じ内容の他の原文分節には影響を与えません。</entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+    </section>
+
+    <section id="submenu.GoTo">
+      <title>移動<indexterm class="singular">
+          <primary>メニュー</primary> <secondary>移動</secondary>
+        </indexterm></title>
+
+      <table colsep="1">
+        <title>移動メニュー</title>
+
+        <tgroup cols="3" colsep="1">
+          <colspec align="left" colnum="1" colwidth="100"/>
+
+          <colspec align="left" colnum="2" colwidth="100"/>
+
+          <tbody>
+            <row>
+              <entry><guimenuitem>次の未翻訳分節</guimenuitem></entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>U</keycap>
+                </keycombo></entry>
+
+              <entry>プロジェクトの翻訳メモリにまだ存在していない（未翻訳の）次の分節に移動します。</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>次の分節</guimenuitem></entry>
+
+              <entry><keycombo> <keycap>Ctrl</keycap> <keycap>N</keycap> </keycombo> または <keycap>Enter</keycap> または <keycap>Tab</keycap></entry>
+
+              <entry>次の分節に移動します。現在の分節がファイル末尾である場合は、次のファイルの最初の分節へ移動します。</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>前の分節</guimenuitem></entry>
+
+              <entry><keycombo> <keycap>Ctrl</keycap> <keycap>P</keycap> </keycombo> または <keycombo> <keycap>Ctrl</keycap> <keycap>Enter</keycap> </keycombo> または <keycombo> <keycap>Ctrl</keycap> <keycap>Tab</keycap> </keycombo></entry>
+
+              <entry>一つ前の分節に移動します。現在の分節がファイル先頭である場合は、前のファイルの末尾の分節へ移動します。</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>分節番号を指定...</guimenuitem></entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>J</keycap>
+                </keycombo></entry>
+
+              <entry>指定した番号の分節を開きます。</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>次のメモ</guimenuitem></entry>
+
+              <entry/>
+
+              <entry>メモが添付された次の分節を開きます。</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>前のメモ</guimenuitem></entry>
+
+              <entry/>
+
+              <entry>メモが添付された前の分節を開きます。</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>分節の選択履歴を進む</guimenuitem></entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>Shift</keycap>
+
+                  <keycap>N</keycap>
+                </keycombo></entry>
+
+              <entry><application>OmegaT</application> は分節を選択した履歴を記憶しています。このコマンドを実行すると、<guimenuitem>［分節の選択履歴を戻る］</guimenuitem>コマンドによって移動した履歴をたどり、戻る前に選択していた分節へ移動できます。</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>分節の選択履歴を戻る</guimenuitem></entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>Shift</keycap>
+
+                  <keycap>P</keycap>
+                </keycombo></entry>
+
+              <entry>１つ前に選択していた分節へ戻ることができます。後で現在の分節に復帰するには、上にある<guimenuitem>［分節の選択履歴を進む］</guimenuitem>コマンドを使います。</entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+    </section>
+
+    <section id="submenu.View">
+      <title>表示<indexterm class="singular">
+          <primary>メニュー</primary> <secondary>表示</secondary>
+        </indexterm></title>
+
+      <table colsep="1">
+        <title>表示メニュー</title>
+
+        <tgroup cols="2" colsep="1">
+          <colspec align="left" colnum="1" colwidth="100"/>
+
+          <tbody>
+            <row>
+              <entry><guimenuitem>翻訳済み分節を色づけ</guimenuitem></entry>
+
+              <entry>チェックがある場合、翻訳済みの分節が黄色でハイライト表示されます。</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>未翻訳分節を色づけ</guimenuitem></entry>
+
+              <entry>チェックがある場合、未翻訳の分節が紫色でハイライト表示されます。</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>原文を表示</guimenuitem></entry>
+
+              <entry>チェックがある場合、各分節に対応した原文が緑色にハイライト表示されます。チェックがない場合、原文の分節は表示されません。</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>繰り返しのある分節を色づけ</guimenuitem></entry>
+
+              <entry>チェックがある場合、繰り返しのある分節が淡い灰色の文字色で表示されます。</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>メモ付き分節を色付け</guimenuitem></entry>
+
+              <entry>チェックがある場合、メモ付きの分節が水色でハイライト表示されます。この色付けは、［翻訳済み分節を色づけ］や［未翻訳分節を色づけ］よりも優先度が上です。</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>ノーブレークスペースを色付け</guimenuitem></entry>
+
+              <entry>チェックがある場合、ノーブレークスペース（自動改行しないスペース文字）を含む分節が灰色の背景色で表示されます。</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>更新情報を表示</guimenuitem></entry>
+
+              <entry>更新情報の表示に関するオプション設定です。<emphasis>［現在の分節で表示］</emphasis>を選ぶと、現在の分節を最後に更新した作業者と更新日時の情報を表示します。<emphasis>［すべての分節で表示」</emphasis>を選ぶと、すべての分節について同様の情報を表示します。<emphasis>［表示しない」</emphasis>を選ぶと、何も表示しません。</entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+    </section>
+
+    <section id="submenu.Tools">
+      <title>ツール<indexterm class="singular">
+          <primary>メニュー</primary> <secondary>ツール</secondary>
+        </indexterm></title>
+
+      <table colsep="1">
+        <title>ツールメニュー</title>
+
+        <indexterm class="singular">
+          <primary>参考訳文</primary> <secondary>参考訳文の一致率</secondary>
+        </indexterm>
+
+        <indexterm class="singular">
+          <primary>プロジェクト</primary> <secondary>参考訳文の一致率</secondary>
+        </indexterm>
+
+        <indexterm class="singular">
+          <primary>プロジェクト</primary> <secondary>翻訳状況</secondary>
+        </indexterm>
+
+        <tgroup cols="2" colsep="1">
+          <colspec align="left" colnum="1" colwidth="100"/>
+
+          <tbody>
+            <row>
+              <entry><guimenuitem>タグ検証</guimenuitem></entry>
+
+              <entry><guimenu>Ctrl+T</guimenu>：整形されたファイルの中で、タグが欠けていたり、位置が変わったりしている箇所がないかを調べます。タグの間違いや不整合の可能性がある分節の一覧が表示されます。詳しくは「<link linkend="section.tag.validation">タグ検証</link>」および「<xref linkend="chapter.formatted.text"/>」を参照してください。</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>タグを削除</guimenuitem></entry>
+
+              <entry>この設定にチェックを入れると、原文分節からすべての整形用のタグを削除します。これはインラインの整形を実際には使わないテキスト（たとえば OCR ソフトが出力した PDF ファイルや、変換精度の低い .odt ファイルや .docx ファイルなど）を扱う場合に役に立ちます。削除されるのはインラインのタグのみです。したがって通常は、訳文ファイルを開くのに特に支障は無いでしょう。非視覚的な整形（OmegaT の編集画面上には表示されません）は、訳文ファイルに引き継がれます。</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>翻訳状況</guimenuitem></entry>
+
+              <entry>新しいウィンドウに、プロジェクトの翻訳状況を表示します。これには、プロジェクト全体の翻訳状況と、ファイルごとの翻訳状況が含まれます。</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>参考訳文の一致率</guimenuitem></entry>
+
+              <entry>プロジェクトにおける参考訳文の一致率を表示します。これは繰り返し、完全に一致、部分的に一致、一致しないといった基準で分類されており、それぞれについて分節数、単語数、文字数を集計しています。</entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+    </section>
+
+    <section id="submenu.Options">
+      <title><indexterm class="singular">
+          <primary>メニュー</primary> <secondary>設定</secondary>
+        </indexterm>設定</title>
+
+      <table colsep="1">
+        <title>設定メニュー</title>
+
+        <tgroup cols="2" colsep="1">
+          <colspec align="left" colnum="1" colwidth="100"/>
+
+          <tbody>
+            <row>
+              <entry><guimenuitem>TAB キーで次の分節へ</guimenuitem></entry>
+
+              <entry>編集する分節を次へ進めるキーを、デフォルトの<guimenuitem>［Enter］</guimenuitem>キーの代わりに<guimenuitem>［Tab］</guimenuitem>キーとします。この設定は、中国語、日本語、または朝鮮語のような入力システムの場合に便利です。</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>終了時に常に確認</guimenuitem></entry>
+
+              <entry>OmegaT を終了する前に、常に確認ダイアログを表示します。</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>機械翻訳</guimenuitem></entry>
+
+              <entry>機械翻訳ツールを有効または無効にします。有効な場合、<keycombo><keycap>Ctrl</keycap> <keycap>M</keycap></keycombo> を押すと、現在の分節に機械翻訳の結果を挿入します。</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>用語集</guimenuitem></entry>
+
+              <entry>プラグイン用に予約されています。</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>用語ヒント</guimenuitem></entry>
+
+              <entry><emphasis>用語ヒント</emphasis>機能と、そのオプションの<emphasis>完全一致</emphasis>を有効または無効にします。<emphasis>用語ヒント</emphasis>が有効な状態では、原文分節に含まれる用語に下線が引かれ、その上で右クリックするとポップアップメニューに用語の対訳が表示されます。対訳をクリックすると、訳文分節のカーソル位置に対訳が挿入されます。<emphasis>［用語ヒント］→［完全一致］</emphasis>にチェックを入れると、語句が完全に一致する用語のみ表示されます。チェックを入れないと、部分一致する用語も表示されます。</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>字体...</guimenuitem></entry>
+
+              <entry>表示用の字体を設定するダイアログを表示します。古いコンピュータを使用しており、ウィンドウのサイズ変更が非常に遅いと感じるユーザーは、字体の変更を試してください。詳しくは「<link linkend="chapter.misc">その他</link>」の「字体の設定」を参照してください。</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>ファイルフィルター...</guimenuitem></entry>
+
+              <entry>ファイルの取り扱いを設定する［<link linkend="chapter.file.filters">ファイルフィルター</link>］ダイアログを表示します。</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>分節化規則...</guimenuitem></entry>
+
+              <entry>テキストの分節化を設定する［<link linkend="chapter.segmentation">分節化規則の設定</link>］ダイアログを表示します。</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>綴り確認...</guimenuitem></entry>
+
+              <entry>綴り確認機能を組み込み、設定するための［<link linkend="chapter.spellchecker">綴り確認機能の設定</link>］ダイアログを表示します。</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>翻訳入力行...</guimenuitem></entry>
+
+              <entry>［<link linkend="chapter.translation.editing">翻訳入力行の設定</link>］ダイアログを表示します。</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>タグ検証...</guimenuitem></entry>
+
+              <entry>プログラマーの方へ：タグ検証機能はオプションで、プログラミング用の変数（書式指定子）も検証するよう設定することができます。</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>チーム...</guimenuitem></entry>
+
+              <entry>翻訳した分節の更新情報に記録する更新者名を入力します。</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>外部 TMX ファイル...</guimenuitem></entry>
+
+              <entry>外部の（OmegaT が生成したものではない）TMX ファイルのタグをどのように扱うか、設定します。</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>表示...</guimenuitem></entry>
+
+              <entry>表示に関する設定です。［原文を太字で表示］と［繰り返しのある分節を色づけする場合、最初の分節を含む］の有効と無効を切り替えます。</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>保存...</guimenuitem></entry>
+
+              <entry>プロジェクトを自動的に保存する間隔を、分と秒で指定します。設定可能な最小間隔は、10 秒です。</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>プロキシ認証...</guimenuitem></entry>
+
+              <entry>プロキシサーバーを使う場合は、ここでユーザー名とパスワードを設定します。</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>ウインドウを初期位置に復元</guimenuitem></entry>
+
+              <entry>OmegaT で使用する各ウィンドウを、初期位置に戻します。切り離されたり、移動したり、隠れてしまったウィンドウを元の状態に戻したいときに、使用してください。また、OmegaT をバージョンアップし、いくつかのウィンドウが表示されなくなったような場合にも、使用できます。</entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+    </section>
+
+    <section id="submenu.Help">
+      <title>ヘルプ<indexterm class="singular">
+          <primary>メニュー</primary> <secondary>ヘルプ</secondary>
+        </indexterm></title>
+
+      <table colsep="1">
+        <title>ヘルプメニュー</title>
+
+        <tgroup cols="2" colsep="1">
+          <colspec align="left" colnum="1" colwidth="100"/>
+
+          <tbody>
+            <row>
+              <entry><guimenuitem>取扱説明書...</guimenuitem></entry>
+
+              <entry><keycap>F1：</keycap>取扱説明書を独立したウィンドウで開きます。</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>OmegaT について...</guimenuitem></entry>
+
+              <entry>著作権やクレジット、ライセンス情報を表示します。</entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+    </section>
+  </section>
+
+  <section id="keyboard.shortcuts">
+    <title>キーボードショートカット<indexterm class="singular">
+        <primary>キーボードショートカット</primary>
+      </indexterm></title>
+
+    <para>以下のショートカットは、メインウィンドウ上で使用できます。他のウィンドウが前面に表示されている場合、<keycap>［Esc］</keycap>を押してそのウィンドウを閉じるか、メインウィンドウを一度クリックして、前面に出してください。</para>
+
+    <para><keycap>［Ctrl］</keycap>キーと文字キーを同時に押すと、ショートカットが動作します。他のキーを含めて使用するものもあります。判別しやすいよう、文字キーは大文字で表記します。</para>
+
+    <para>［Ctrl］キーは Windows で使用します。UNIX や UNIX 系のオペレーティングシステムでは<keycap>［Ctrl］</keycap> または <keycap>［Control］</keycap>キーが該当します。Mac ユーザーは <guimenuitem>［cmd］+キー</guimenuitem>と読み替えてください。Apple キーボードでは、<guimenuitem>［cmd］</guimenuitem>キーには <guimenuitem>command</guimenuitem> または <guimenuitem>リンゴ</guimenuitem> マークが記されています。</para>
+
+    <itemizedlist>
+      <listitem>
+        <para>プロジェクト</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>編集</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>移動</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>ウィンドウの参照</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>その他</para>
+      </listitem>
+    </itemizedlist>
+
+    <section>
+      <title id="keyboard.project.management"><indexterm class="singular">
+          <primary>キーボードショートカット</primary> <secondary>プロジェクト</secondary>
+        </indexterm>プロジェクト<indexterm class="singular">
+          <primary>プロジェクト</primary> <secondary>キーボードショートカット</secondary>
+        </indexterm></title>
+
+      <table colsep="1">
+        <title>プロジェクトのショートカット</title>
+
+        <tgroup cols="3" colsep="1">
+          <colspec align="left" colnum="1" colwidth="100"/>
+
+          <colspec align="left" colnum="2" colwidth="100"/>
+
+          <tbody>
+            <row>
+              <entry>開く</entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>O</keycap>
+                </keycombo></entry>
+
+              <entry>既存のプロジェクトを選択するウィンドウを表示します。</entry>
+            </row>
+
+            <row>
+              <entry>保存</entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>S</keycap>
+                </keycombo></entry>
+
+              <entry>現在の翻訳内容を、内部翻訳メモリ（プロジェクトの <filename>omegat</filename> フォルダーにある project_save.tmx）に保存します。</entry>
+            </row>
+
+            <row>
+              <entry>閉じる</entry>
+
+              <entry><keycombo>
+                  <keycap>Shift</keycap>
+
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>W</keycap>
+                </keycombo></entry>
+
+              <entry>現在のプロジェクトを閉じます。</entry>
+            </row>
+
+            <row>
+              <entry>訳文ファイルを生成</entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>D</keycap>
+                </keycombo></entry>
+
+              <entry>プロジェクトの target フォルダーに訳文ファイルを生成します。また翻訳メモリファイル（level1、level2 および omegat 形式の TMX ファイル）をプロジェクトのルートフォルダーに生成します。</entry>
+            </row>
+
+            <row>
+              <entry>プロジェクト設定</entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>E</keycap>
+                </keycombo></entry>
+
+              <entry>プロジェクト設定ダイアログを表示します。設定の変更も行えます。</entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+    </section>
+
+    <section id="keyboard.editing">
+      <title><indexterm class="singular">
+          <primary>キーボードショートカット</primary> <secondary>編集</secondary>
+        </indexterm>編集<indexterm class="singular">
+          <primary>キーボードショートカット</primary> <secondary>移動</secondary>
+        </indexterm></title>
+
+      <table colsep="1">
+        <title>編集のショートカット</title>
+
+        <tgroup cols="3" colsep="1">
+          <colspec align="left" colnum="1" colwidth="100"/>
+
+          <colspec align="left" colnum="2" colwidth="100"/>
+
+          <tbody>
+            <row>
+              <entry>取り消す</entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>Z</keycap>
+                </keycombo></entry>
+
+              <entry>現在の訳文分節において、直前の編集が行われる前の状態に戻します。</entry>
+            </row>
+
+            <row>
+              <entry>やり直す</entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>Y</keycap>
+                </keycombo></entry>
+
+              <entry>現在の訳文分節において、直前の編集操作を再度行います。</entry>
+            </row>
+
+            <row>
+              <entry>参考訳文 #N を選択</entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>#N</keycap>
+                </keycombo></entry>
+
+              <entry>#N は１から５までの数字です。現在の分節に対して置換または挿入するために、参考訳文ウィンドウに表示された N 番目の候補を選択します。</entry>
+            </row>
+
+            <row>
+              <entry>参考訳文に置換</entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>R</keycap>
+                </keycombo></entry>
+
+              <entry>現在の訳文分節の内容を、選択されている参考訳文に置換します（デフォルトでは最初の参考訳文が選択されています）。</entry>
+            </row>
+
+            <row>
+              <entry>参考訳文を挿入</entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>I</keycap>
+                </keycombo></entry>
+
+              <entry>現在の訳文分節のカーソル位置に、選択されている参考訳文を挿入します（デフォルトでは最初の参考訳文が選択されています）。</entry>
+            </row>
+
+            <row>
+              <entry>原文に置換</entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>Shift+R</keycap>
+                </keycombo></entry>
+
+              <entry>現在の訳文分節を原文の内容に置換します。</entry>
+            </row>
+
+            <row>
+              <entry>原文を挿入</entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>Shift+I</keycap>
+                </keycombo></entry>
+
+              <entry>現在の訳文分節のカーソル位置に、原文の内容を挿入します。</entry>
+            </row>
+
+            <row>
+              <entry>原文のタグを挿入</entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>Shift+T</keycap>
+                </keycombo></entry>
+
+              <entry>現在の訳文分節のカーソル位置に、原文のタグを挿入します。</entry>
+            </row>
+
+            <row>
+              <entry>プロジェクトを検索...</entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>F</keycap>
+                </keycombo></entry>
+
+              <entry>検索ウィンドウを表示します。</entry>
+            </row>
+
+            <row>
+              <entry>機械翻訳に置換</entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>M</keycap>
+                </keycombo></entry>
+
+              <entry>現在の訳文分節を、機械翻訳エンジンによる機械翻訳に置換します。機械翻訳が有効になっていない場合は、何も行いません（メニューの［設定］→［機械翻訳］を確認してください）。</entry>
+            </row>
+
+            <row>
+              <entry>選択領域を出力</entry>
+
+              <entry><keycombo>
+                  <keycap>Shift</keycap>
+
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>C</keycap>
+                </keycombo></entry>
+
+              <entry>選択した領域を別のテキストファイルに出力します。</entry>
+            </row>
+
+            <row>
+              <entry>用語の追加</entry>
+
+              <entry><keycombo>
+                  <keycap>Shift</keycap>
+
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>G</keycap>
+                </keycombo></entry>
+
+              <entry>デフォルトの用語集ファイルに項目を追加します。</entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+    </section>
+
+    <section id="keyboard.moving.around">
+      <title><indexterm class="singular">
+          <primary>キーボードショートカット</primary> <secondary>移動</secondary>
+        </indexterm>移動</title>
+
+      <table colsep="1">
+        <title>移動のショートカット</title>
+
+        <tgroup cols="3" colsep="1">
+          <colspec align="left" colnum="1" colwidth="100"/>
+
+          <colspec align="left" colnum="2" colwidth="100"/>
+
+          <tbody>
+            <row>
+              <entry>次の未翻訳分節</entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>U</keycap>
+                </keycombo></entry>
+
+              <entry>編集入力行を、プロジェクトの翻訳メモリにまだ存在していない（未翻訳の）次の分節に移動させます。</entry>
+            </row>
+
+            <row>
+              <entry>次の分節</entry>
+
+              <entry><keycombo> <keycap>Ctrl</keycap> <keycap>N</keycap> </keycombo>、<keycap>Enter</keycap> または <keycap>Return</keycap></entry>
+
+              <entry>翻訳入力行を、次の分節に移動させます。</entry>
+            </row>
+
+            <row>
+              <entry>前の分節</entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>P</keycap>
+                </keycombo></entry>
+
+              <entry>翻訳入力行を、１つ前の分節に移動させます。</entry>
+            </row>
+
+            <row>
+              <entry>分節番号を指定...</entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>J</keycap>
+                </keycombo></entry>
+
+              <entry>翻訳入力行を、指定した分節番号に移動させます。</entry>
+            </row>
+
+            <row>
+              <entry>分節の選択履歴を戻る</entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>Shift+P</keycap>
+                </keycombo></entry>
+
+              <entry>分節移動の履歴をたどり、１つ前に戻ります。</entry>
+            </row>
+
+            <row>
+              <entry>分節の選択履歴を進む</entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>Shift+N</keycap>
+                </keycombo></entry>
+
+              <entry>分節移動の履歴をたどり、１つ次に進みます。</entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+    </section>
+
+    <section id="keyboard.other">
+      <title><indexterm class="singular">
+          <primary>キーボードショートカット</primary> <secondary>その他</secondary>
+        </indexterm>その他</title>
+
+      <table colsep="1">
+        <title>その他のショートカット</title>
+
+        <tgroup cols="3" colsep="1">
+          <colspec align="left" colnum="1" colwidth="100"/>
+
+          <colspec align="left" colnum="2" colwidth="100"/>
+
+          <tbody>
+            <row>
+              <entry>翻訳対象ファイル一覧...</entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>L</keycap>
+                </keycombo></entry>
+
+              <entry>プロジェクト内の翻訳対象となるファイルを一覧表示します。</entry>
+            </row>
+
+            <row>
+              <entry>タグ検証</entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>T</keycap>
+                </keycombo></entry>
+
+              <entry>タグ検証ウィンドウを開きます。</entry>
+            </row>
+
+            <row>
+              <entry>選択領域を出力</entry>
+
+              <entry><keycombo>
+                  <keycap>Shift</keycap>
+
+                  <keycap>Ctrl+C</keycap>
+                </keycombo></entry>
+
+              <entry>選択領域（または何も選択されていなければ原文分節）を出力します。テキストはプレーンテキストファイルとして出力されます。</entry>
+            </row>
+
+            <row>
+              <entry>プロジェクトを検索...</entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>F</keycap>
+                </keycombo></entry>
+
+              <entry>新しい検索ウィンドウを開きます。</entry>
+            </row>
+
+            <row>
+              <entry>ヘルプ</entry>
+
+              <entry><keycap>F1</keycap></entry>
+
+              <entry><application>OmegaT</application> 取扱説明書を別ウィンドウで表示します。</entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+    </section>
+  </section>
+</chapter>

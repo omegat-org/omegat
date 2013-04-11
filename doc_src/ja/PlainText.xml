@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<chapter id="chapter.plain.text">
+  <title>プレーンテキストを扱う<indexterm class="singular">
+      <primary>原文ファイル</primary> <secondary>プレーンテキストファイル</secondary>
+    </indexterm></title>
+
+  <section id="default.encoding">
+    <title>デフォルトエンコーディング<indexterm class="singular">
+        <primary>エンコーディング</primary> <secondary>プレーンテキストファイル</secondary>
+      </indexterm><indexterm class="singular">
+        <primary>原文ファイル</primary> <secondary>エンコーディング</secondary>
+      </indexterm></title>
+
+    <para>プレーンテキストファイル（拡張子 .txt の場合が多い）には、本文テキストしか含まれていません。どういった言語なのかをコンピューターに伝える方法は、明確に定義されていません。このような場合、OmegaT はテキストがコンピューターの言語設定と同じ言語で書かれているものとみなします。ファイルが 16 ビットでエンコードされたユニコード文字セットの場合は、特に問題は起きません。同じユニコードでも、8 ビットでエンコードされていた場合は、厄介な問題に直面します。たとえば次のような日本語のテキストがあった場合…</para>
+
+    <mediaobject>
+      <imageobject role="html">
+        <imagedata fileref="images/OmT_Japanese.png"/>
+      </imageobject>
+
+      <imageobject role="fo">
+        <imagedata fileref="images/OmT_Japanese.png" width="60%"/>
+      </imageobject>
+    </mediaobject>
+
+    <para>… OS によっては、次のように表示されるかもしれません：</para>
+
+    <mediaobject>
+      <imageobject role="html">
+        <imagedata fileref="images/OmT_Cyrillic.png"/>
+      </imageobject>
+
+      <imageobject role="fo">
+        <imagedata fileref="images/OmT_Cyrillic.png" width="60%"/>
+      </imageobject>
+    </mediaobject>
+
+    <para>OmegaT を実行しているコンピューターがデフォルトの言語をロシア語に設定していた場合、テキストは日本語の文字ではなくキリル文字のアルファベットで表示されてしまいます。</para>
+  </section>
+
+  <section id="OmegaT.solution">
+    <title><application>OmegaT</application> での解決方法</title>
+
+    <para><application>OmegaT</application> には、主に３つの解決策があります。いずれも<emphasis role="bold">設定</emphasis>メニューにあるファイルフィルターを利用します。</para>
+
+    <variablelist> <varlistentry> <term>ファイルのエンコーディングをユニコードに変更する</term>
+
+        <listitem>
+          <para>原文ファイルをテキストエディターで開き、エンコーディング <emphasis role="bold">UTF-8</emphasis> で保存しなおします。このとき、拡張子を <literal>.txt</literal> から <literal>.utf8</literal> に変更してください。OmegaT はこのファイルを UTF-8 ファイルとして自動的に認識します。 これは最も理にかなった解決策で、あなたを厄介ごとから救ってくれます。</para>
+        </listitem>
+      </varlistentry> </variablelist> <variablelist> <varlistentry> <term>プレーンテキストファイルのエンコーディングを指定する</term>
+
+        <listitem>
+          <para>拡張子 <filename>.txt </filename> のファイルを例に取ります。ファイルフィルターダイアログから<emphasis role="bold">テキストファイル</emphasis>のフィルターを編集し、<emphasis role="bold">原文ファイルのエンコーディング</emphasis>を「&lt;自動&gt;」から対象の <filename>.txt</filename> ファイルに適したエンコーディングに変更します。たとえば上の例で言えば、日本語に対応したエンコーディングに変更します。</para>
+        </listitem>
+      </varlistentry> </variablelist> <variablelist> <varlistentry> <term>プレーンテキストファイルの拡張子を変更する</term>
+
+        <listitem>
+          <para>たとえば日本語のファイルであれば、拡張子を <filename>.txt</filename> から <filename>.jp</filename> に変えます。次に、ファイルフィルターダイアログから<emphasis role="bold">テキストファイル</emphasis>のフィルターを編集し、<emphasis role="bold">原文ファイル名の構成例</emphasis>を新しく追加します。例の場合は「<filename>*.jp</filename>」とします。エンコーディングには、適切な値を設定してください。</para>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+
+    <para><application>OmegaT</application> は、プレーンテキストの取り扱いを簡単にするために、デフォルトで次の拡張子に対応しています。</para>
+
+    <itemizedlist>
+      <listitem>
+        <para><literal>.txt</literal> ファイルは、エンコーディングを「&lt;自動&gt;」で認識します。これは、コンピューターのデフォルトのエンコーディングに合わせることを意味します。 </para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para><literal>.txt1</literal> ファイルは<emphasis role="bold">西ヨーロッパ</emphasis>言語のほとんどに対応する ISO-8859-1 エンコーディングとして解釈されます。<indexterm class="singular">
+            <primary>エンコーディング</primary> <secondary>西ヨーロッパ言語</secondary>
+          </indexterm></para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para><literal>.txt2</literal> ファイルは<emphasis role="bold">中央、東ヨーロッパ</emphasis>の言語のほとんどに対応する ISO-8859-2 エンコーディングとして解釈されます。<indexterm class="singular">
+            <primary>エンコーディング</primary> <secondary>中央、東ヨーロッパ言語</secondary>
+          </indexterm></para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para><literal>.utf8</literal> ファイルは <application>OmegaT</application> によって、（世界中ほぼすべての言語に対応する）UTF-8 エンコーディングとして解釈されます。<indexterm class="singular">
+            <primary>エンコーディング</primary> <secondary>ユニコード</secondary>
+          </indexterm></para>
+      </listitem>
+    </itemizedlist>
+
+    <para>これらは<emphasis role="bold">［設定］</emphasis>メニューの<emphasis role="bold">［ファイルフィルター］</emphasis>一覧で［テキストファイル］を選択し、［編集...］を押すと［フィルターの編集］一覧で確認できます。たとえば、チェコ語で書かれたテキストファイル（ほとんどの場合 <emphasis role="bold">ISO-9959-2</emphasis> で書かれているでしょう）を扱う場合、拡張子を <literal>.txt</literal> から <literal>.txt2</literal> に変更するたけで、<application>OmegaT</application> は内容を正しく解釈します。もちろん、安全のため、こうしたファイルはユニコード形式（ここでは <literal>.utf8</literal> ファイル）への変換を検討してもいいでしょう。</para>
+  </section>
+</chapter>

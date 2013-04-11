@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<chapter id="chapter.dictionaries">
+  <title><indexterm class="singular">
+      <primary>辞書</primary>
+    </indexterm>辞書</title>
+
+  <para/>
+
+  <section>
+    <title>辞書のダウンロードとインストール方法<indexterm class="singular">
+        <primary>辞書</primary> <secondary>ダウンロードとインストール</secondary>
+      </indexterm></title>
+
+    <para><application>OmegaT</application> は、StarDict 形式および Lingvo DSL 形式の辞書に対応しています。StarDict 形式の辞書は、次の手順でインストールしてください：</para>
+
+    <itemizedlist>
+      <listitem>
+        <para>必要な言語の組み合わせの辞書を探します。辞書を提供している場所には、たとえば <ulink url="http://stardict.sourceforge.net/index.php"><indexterm class="singular">
+            <primary>辞書</primary> <secondary>StarDict</secondary>
+          </indexterm>StarDict プラットフォーム</ulink>があります。</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>辞書ファイルをダウンロードします。これは <filename>TAR アーカイブ</filename>（拡張子 <emphasis>tar.bz</emphasis> または <emphasis>tar.bz2</emphasis>）である必要があります。</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>untar コマンド（Windows であれば、たとえば <filename>WinRAR</filename> などのユーティリティ）で、そのファイルを展開します。展開先は、プロジェクトフォルダー配下の「dictionary」フォルダーの中です。展開すると、拡張子が <emphasis>dz</emphasis>、<emphasis>idx </emphasis>、<emphasis>ifo</emphasis> の３つのファイルができるはずです。</para>
+      </listitem>
+    </itemizedlist>
+
+    <para>利用できるのは、対訳形式の辞書に限りません。この辞書機能を使って、多種多様な情報を参照できます。たとえば：</para>
+
+    <itemizedlist>
+      <listitem>
+        <para><indexterm class="singular">
+            <primary>辞書</primary> <secondary>Webster</secondary>
+          </indexterm>Webster's Revised Unabridged Dictionary (1913)</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para><indexterm class="singular">
+            <primary>辞書</primary> <secondary>Longman</secondary>
+          </indexterm>Longman Dictionary of Contemporary English</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para><indexterm class="singular">
+            <primary>辞書</primary> <secondary>Britannica</secondary>
+          </indexterm>The Britannica Concise Encyclopedia</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>…などです。</para>
+      </listitem>
+    </itemizedlist>
+
+    <para>辞書の中には文書が何も付属していないものがありますが、これは自由に使用できます。一方、上記に挙げたような辞書は GPL ライセンスに従います。以下は、Merriam Webster 10th dictionary を実際に参照している様子です：</para>
+
+    <figure id="Dict.Merriam.Webster">
+      <title><indexterm class="singular">
+          <primary>辞書</primary> <secondary>Merriam Webster</secondary> <seealso>辞書</seealso>
+        </indexterm>Merriam Webster 10th dictionary - 使用中の様子</title>
+
+      <mediaobject>
+        <imageobject role="html">
+          <imagedata fileref="images/DictMerriamWebster.png"/>
+        </imageobject>
+
+        <imageobject role="fo">
+          <imagedata fileref="images/DictMerriamWebster.png" width="60%"/>
+        </imageobject>
+      </mediaobject>
+    </figure>
+  </section>
+
+  <section>
+    <title><indexterm class="singular">
+        <primary>辞書</primary> <secondary>トラブルシューティング</secondary>
+      </indexterm>辞書に関するトラブルシューティング</title>
+
+    <itemizedlist>
+      <listitem>
+        <para>プロジェクト設定で指定したフォルダー（もしくはそのサブフォルダー）中に、辞書ファイルが存在しますか？メニュー<menuchoice> <shortcut> <keycombo> <keycap><indexterm class="singular">
+                    <primary>ショートカット</primary> <secondary>プロジェクト設定 - Ctrl+E</secondary>
+                  </indexterm>Ctrl</keycap> <keycap>E</keycap> </keycombo> </shortcut> <guimenu>［プロジェクト］</guimenu> <guimenuitem>［プロジェクト設定...］</guimenuitem></menuchoice>で、辞書フォルダーの場所を確認できます。</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>そのフォルダーには同じ名前のファイルが３つ（拡張子違いで）存在していますか？もし１つしか見当たらなければ、拡張子を確認してみましょう。<emphasis>tar.bz</emphasis> か <emphasis>tar.bz2</emphasis>だったら、圧縮ファイルを展開し忘れています。</para>
+      </listitem>
+    </itemizedlist>
+  </section>
+</chapter>

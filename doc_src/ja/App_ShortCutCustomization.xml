@@ -1,0 +1,797 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE appendix PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<appendix id="appendix.shortcut.custom">
+  <title>ショートカットのカスタマイズ</title>
+
+  <section id="ch04.shortcuts.customization">
+    <title><indexterm class="singular">
+        <primary>ショートカット</primary> <secondary>カスタマイズ</secondary>
+      </indexterm>ショートカットのカスタマイズ</title>
+
+    <para>メインメニューに表示されるほとんどの項目には、新しいショートカットを割り当てることができます。デフォルトでは、最もよく使われると思われるメニュー項目にだけ、ショートカットが割り当てられています。OmegaT の個人設定フォルダー（詳しくは<link linkend="user.files">個人設定ファイル</link>を参照のこと）にショートカット定義ファイルを配置することによって、既存のショートカットを変更したり、新しいショートカットを追加することができるようになります。</para>
+
+    <para>ショートカット定義ファイルには必ず <filename>MainMenuShortcuts.properties</filename> という名前を付け、ショートカット定義を少なくとも一行は記述しておく必要があります。空行も含めることができます。また「//」で始まる行はコメント行として扱われます。「//」から行末までは、すべて無視されます。</para>
+
+    <para><filename>MainMenuShortcuts.properties</filename> ファイルを修正した場合は、新しいショートカット設定を反映させるために、忘れず <application>OmegaT</application> を再起動してください。</para>
+
+    <para>ショートカット定義構文は、次の通りです：<code>&lt;メニュー項目コード&gt;=&lt;ショートカット&gt;</code>。<emphasis>&lt;メニュー項目コード&gt;</emphasis> の値は、後述する表を参照してください。<emphasis>&lt;ショートカット&gt;</emphasis> には割り当てたいキーの組み合わせを指定します<footnote>
+        <para>キーストローク（ショートカット）の完全な構文定義は、Oracle による次の Java 1.6 技術文書（ページの最後）を参照してください：<ulink url="http://docs.oracle.com/javase/jp/6/api/javax/swing/KeyStroke.html">Java 1.6 keystrokes shortcuts</ulink></para>
+      </footnote>.</para>
+
+    <para>&lt;ショートカット&gt; は次の形式に従います：０個以上の <code>&lt;修飾子&gt;</code>、続いて０個または１個の <code>&lt;イベント&gt;</code>、続いて１個の <code>&lt;キー&gt;</code>。ただし：<itemizedlist>
+        <listitem>
+          <para><code>&lt;修飾子&gt;</code> は次の値を取ります：<emphasis>shift</emphasis>、<emphasis>control</emphasis>、<emphasis>ctrl</emphasis>、<emphasis>meta</emphasis><footnote>
+              <para>Mac では、修飾子 <emphasis>meta</emphasis> の代わりに <emphasis>command</emphasis> キーを指定します。</para>
+            </footnote>, <emphasis>alt</emphasis>,
+          <emphasis>altGraph</emphasis></para>
+        </listitem>
+
+        <listitem>
+          <para><code>&lt;イベント&gt;</code> は次の値を取ります：<emphasis>typed</emphasis>、<emphasis>pressed</emphasis>、<emphasis>released</emphasis></para>
+        </listitem>
+
+        <listitem>
+          <para>そして <code>&lt;キー&gt;</code> には、キーボード上で利用可能な任意のキーを指定できます<footnote>
+              <para>利用できるキーイベント（キー）の一覧は、Oracle による次の Java 1.6 技術文書を参照してください：<ulink url="http://docs.oracle.com/javase/jp/6/api/java/awt/event/KeyEvent.html">Java 1.6 keyEvents description</ulink></para>
+            </footnote>.</para>
+        </listitem>
+      </itemizedlist></para>
+
+    <para>例として、OmegaT のデフォルトのショートカット<footnote>
+        <para>デフォルトの OmegaT のショートカット定義ファイルは Sourceforge から入手できます：<ulink url="http://omegat.svn.sourceforge.net/viewvc/omegat/branches/release-2-5/src/org/omegat/gui/main/MainMenuShortcuts.properties">デフォルトの OmegaT ショートカット</ulink></para>
+
+        <para>Mac 向けのデフォルトの OmegaT のショートカット定義ファイルも Sourceforge から入手できます。それらはすべて「ctrl」の代わりに「meta」を使用しています：<ulink url="http://omegat.svn.sourceforge.net/viewvc/omegat/branches/release-2-5/src/org/omegat/gui/main/MainMenuShortcuts.mac.properties">デフォルトの Mac 向け OmegaT ショートカット</ulink></para>
+      </footnote>は次のようになっています：</para>
+
+    <itemizedlist>
+      <listitem>
+        <para><code>projectOpenMenuItem=ctrl O</code></para>
+      </listitem>
+
+      <listitem>
+        <para><code>editCreateGlossaryEntryMenuItem=ctrl shift G</code></para>
+      </listitem>
+    </itemizedlist>
+
+    <para>最初のショートカットは（プロジェクトを）<guimenuitem>［開く...］</guimenuitem>用で、その次は<guimenuitem>［用語の追加］</guimenuitem>用です。</para>
+
+    <para>プロジェクトを開くために <keycombo><keycap>Shift</keycap> <keycap>Ctrl</keycap> <keycap>O</keycap></keycombo> を使いたいと思ったら、<filename>MainMenuShortcuts.properties</filename> ファイルを次のように修正してください：<code></code></para>
+
+    <para><code>projectOpenMenuItem=shift ctrl O</code></para>
+
+    <para>Mac 向けに<menuchoice><guimenu>［ツール］</guimenu> <guimenuitem>［翻訳状況］</guimenuitem></menuchoice>を <keycombo><keycap>Shift</keycap> <keycap>Command</keycap> <keycap>S</keycap></keycombo> のショートカットで開けるようにしたければ、<filename>MainMenuShortcuts.properties</filename> ファイルに次の行を追加してください：<code/></para>
+
+    <para><code> toolsShowStatisticsStandardMenuItem=shift meta
+    S</code></para>
+
+    <para>ファイルを保存したら、<application>OmegaT</application> を再起動してください。新しいショートカットが、修正したメニュー項目の隣に表示されるはずです。システム用のショートカットと衝突しない限り、新しいショートカットは OmegaT で機能するでしょう。</para>
+  </section>
+
+  <section id="ch04.shortcuts.ProjectMenu">
+    <title>プロジェクトメニュー</title>
+
+    <table>
+      <title>プロジェクトメニュー</title>
+
+      <tgroup cols="3" colsep="1">
+        <colspec align="left" colname="1" colnum="1" colwidth="120"/>
+
+        <colspec align="left" colname="2" colnum="2" colwidth="80"/>
+
+        <colspec align="left" colname="3" colnum="3"/>
+
+        <thead>
+          <row>
+            <entry>メニュー項目</entry>
+
+            <entry>デフォルトのショートカット</entry>
+
+            <entry>メニュー項目コード</entry>
+          </row>
+        </thead>
+
+        <tbody>
+          <row>
+            <entry>新規作成...</entry>
+
+            <entry/>
+
+            <entry>projectNewMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>開く...</entry>
+
+            <entry><keycap>Ctrl+O</keycap></entry>
+
+            <entry>projectOpenMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>原文ファイルを追加...</entry>
+
+            <entry/>
+
+            <entry>projectImportMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>MediaWiki から原文ファイルを追加...</entry>
+
+            <entry/>
+
+            <entry>projectWikiImportMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>再読み込み</entry>
+
+            <entry><keycap>F5</keycap></entry>
+
+            <entry>projectReloadMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>閉じる</entry>
+
+            <entry><keycap>Ctrl+Shift+W</keycap></entry>
+
+            <entry>projectCloseMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>保存</entry>
+
+            <entry><keycap>Ctrl+S</keycap></entry>
+
+            <entry>projectSaveMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>訳文ファイルを生成</entry>
+
+            <entry><keycap>Ctrl+D</keycap></entry>
+
+            <entry>projectCompileMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>プロジェクト設定...</entry>
+
+            <entry><keycap>Ctrl+E</keycap></entry>
+
+            <entry>projectEditMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>翻訳対象ファイル一覧...</entry>
+
+            <entry><keycap>Ctrl+L</keycap></entry>
+
+            <entry>viewFileListMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>終了</entry>
+
+            <entry><keycap>Ctrl+Q</keycap></entry>
+
+            <entry>projectExitMenuItem</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+  </section>
+
+  <section id="ch04.shortcuts.EditMenu">
+    <title>編集メニュー</title>
+
+    <table>
+      <title>編集メニュー</title>
+
+      <tgroup cols="3" colsep="1">
+        <colspec align="left" colname="1" colnum="1" colwidth="120"/>
+
+        <colspec align="left" colname="2" colnum="2" colwidth="80"/>
+
+        <colspec align="left" colname="3" colnum="3"/>
+
+        <thead>
+          <row>
+            <entry>メニュー項目</entry>
+
+            <entry>デフォルトのショートカット</entry>
+
+            <entry>メニュー項目コード</entry>
+          </row>
+        </thead>
+
+        <tbody>
+          <row>
+            <entry>取り消す</entry>
+
+            <entry><keycap>Ctrl+Z</keycap></entry>
+
+            <entry>editUndoMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>やり直す</entry>
+
+            <entry><keycap>Ctrl+Z</keycap></entry>
+
+            <entry>editRedoMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>参考訳文に置換</entry>
+
+            <entry><keycap>Ctrl+R</keycap></entry>
+
+            <entry>editOverwriteTranslationMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>参考訳文を挿入</entry>
+
+            <entry><keycap>Ctrl+I</keycap></entry>
+
+            <entry>editInsertTranslationMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>機械翻訳に置換</entry>
+
+            <entry><keycap>Ctrl+M</keycap></entry>
+
+            <entry>editOverwriteMachineTranslationMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>原文に置換</entry>
+
+            <entry><keycap>Shift+Ctrl+R</keycap></entry>
+
+            <entry>editOverwriteSourceMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>原文を挿入</entry>
+
+            <entry><keycap>Shift+Ctrl+I</keycap></entry>
+
+            <entry>editInsertSourceMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>原文のタグを挿入</entry>
+
+            <entry><keycap>Shift+Ctrl+T</keycap></entry>
+
+            <entry>editTagPainterMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>選択領域を出力</entry>
+
+            <entry><keycap>Shift+Ctrl+C</keycap></entry>
+
+            <entry>editExportSelectionMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>用語の追加</entry>
+
+            <entry><keycap>Shift+Ctrl+G</keycap></entry>
+
+            <entry>editCreateGlossaryEntryMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>プロジェクトを検索...</entry>
+
+            <entry><keycap>Ctrl+F</keycap></entry>
+
+            <entry>editFindInProjectMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>参考訳文 1 を選択</entry>
+
+            <entry><keycap>Ctrl+1</keycap></entry>
+
+            <entry>editSelectFuzzy1MenuItem</entry>
+          </row>
+
+          <row>
+            <entry>参考訳文 2 を選択</entry>
+
+            <entry><keycap>Ctrl+2</keycap></entry>
+
+            <entry>editSelectFuzzy2MenuItem</entry>
+          </row>
+
+          <row>
+            <entry>参考訳文 3 を選択</entry>
+
+            <entry><keycap>Ctrl+3</keycap></entry>
+
+            <entry>editSelectFuzzy3MenuItem</entry>
+          </row>
+
+          <row>
+            <entry>参考訳文 4 を選択</entry>
+
+            <entry><keycap>Ctrl+4</keycap></entry>
+
+            <entry>editSelectFuzzy4MenuItem</entry>
+          </row>
+
+          <row>
+            <entry>参考訳文 5 を選択</entry>
+
+            <entry><keycap>Ctrl+5</keycap></entry>
+
+            <entry>editSelectFuzzy5MenuItem</entry>
+          </row>
+
+          <row>
+            <entry>すべて小文字に</entry>
+
+            <entry/>
+
+            <entry>lowerCaseMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>すべて大文字に</entry>
+
+            <entry/>
+
+            <entry>upperCaseMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Title case（単語の先頭を大文字）に</entry>
+
+            <entry/>
+
+            <entry>titleCaseMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>上記を順に切り替え</entry>
+
+            <entry><keycap>Shift+F3</keycap></entry>
+
+            <entry>cycleSwitchCaseMenuItem</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+  </section>
+
+  <section id="ch04.shortcuts.GoToMenu">
+    <title>移動メニュー</title>
+
+    <table>
+      <title>移動メニュー</title>
+
+      <tgroup cols="3" colsep="1">
+        <colspec align="left" colname="1" colnum="1" colwidth="120"/>
+
+        <colspec align="left" colname="2" colnum="2" colwidth="80"/>
+
+        <colspec align="left" colname="3" colnum="3"/>
+
+        <thead>
+          <row>
+            <entry>メニュー項目</entry>
+
+            <entry>デフォルトのショートカット</entry>
+
+            <entry>メニュー項目コード</entry>
+          </row>
+        </thead>
+
+        <tbody>
+          <row>
+            <entry>次の未翻訳分節</entry>
+
+            <entry><keycap>Ctrl+U</keycap></entry>
+
+            <entry>gotoNextUntranslatedMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>次の分節</entry>
+
+            <entry><keycap>Ctrl+N</keycap> または <keycap>Enter</keycap> または <keycap>Tab</keycap></entry>
+
+            <entry>gotoNextSegmentMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>前の分節</entry>
+
+            <entry><keycap>Ctrl+P</keycap> または <keycap>Ctrl+Enter</keycap> または <keycap>Ctrl+Tab</keycap></entry>
+
+            <entry>gotoPreviousSegmentMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>分節番号を指定...</entry>
+
+            <entry><keycap>Ctrl+J</keycap></entry>
+
+            <entry>gotoSegmentMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>分節の選択履歴を戻る</entry>
+
+            <entry><keycap>Ctrl+Shift+P</keycap></entry>
+
+            <entry>gotoHistoryForwardMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>分節の選択履歴を進む</entry>
+
+            <entry><keycap>Ctrl+Shift+N</keycap></entry>
+
+            <entry>gotoHistoryBackMenuItem</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+  </section>
+
+  <section id="ch04.shortcuts.ViewMenu">
+    <title>表示メニュー</title>
+
+    <table>
+      <title>表示メニュー</title>
+
+      <indexterm class="singular">
+        <primary>ショートカットのカスタマイズ</primary> <secondary>表示メニュー</secondary>
+      </indexterm>
+
+      <tgroup cols="3" colsep="1">
+        <colspec align="left" colname="1" colnum="1" colwidth="120"/>
+
+        <colspec align="left" colname="2" colnum="2" colwidth="80"/>
+
+        <colspec align="left" colname="3" colnum="3"/>
+
+        <thead>
+          <row>
+            <entry>メニュー項目</entry>
+
+            <entry>デフォルトのショートカット</entry>
+
+            <entry>メニュー項目コード</entry>
+          </row>
+        </thead>
+
+        <tbody>
+          <row>
+            <entry>翻訳済み分節を色づけ</entry>
+
+            <entry/>
+
+            <entry>viewMarkTranslatedSegmentsCheckBoxMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>未翻訳分節を色づけ</entry>
+
+            <entry/>
+
+            <entry>viewMarkUntranslatedSegmentsCheckBoxMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>原文を表示</entry>
+
+            <entry/>
+
+            <entry>viewDisplaySegmentSourceCheckBoxMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>繰り返しのある分節を色づけ</entry>
+
+            <entry/>
+
+            <entry>viewMarkNonUniqueSegmentsCheckBoxMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>更新情報を表示 / 表示しない</entry>
+
+            <entry/>
+
+            <entry>viewDisplayModificationInfoNoneRadioButtonMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>更新情報を表示 / 現在の分節で表示</entry>
+
+            <entry/>
+
+            <entry>viewDisplayModificationInfoSelectedRadioButtonMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>更新情報を表示 / すべての分節で表示</entry>
+
+            <entry/>
+
+            <entry>viewDisplayModificationInfoAllRadioButtonMenuItem</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+  </section>
+
+  <section id="ch04.shortcuts.ToolsMenu">
+    <title>ツールメニュー</title>
+
+    <table>
+      <title>ツールメニュー</title>
+
+      <tgroup cols="3" colsep="1">
+        <colspec align="left" colname="1" colnum="1" colwidth="120"/>
+
+        <colspec align="left" colname="2" colnum="2" colwidth="80"/>
+
+        <colspec align="left" colname="3" colnum="3"/>
+
+        <thead>
+          <row>
+            <entry>メニュー項目</entry>
+
+            <entry>デフォルトのショートカット</entry>
+
+            <entry>メニュー項目コード</entry>
+          </row>
+        </thead>
+
+        <tbody>
+          <row>
+            <entry>タグ検証</entry>
+
+            <entry><keycap>Ctrl +T</keycap></entry>
+
+            <entry>toolsValidateTagsMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>翻訳状況</entry>
+
+            <entry/>
+
+            <entry>toolsShowStatisticsStandardMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>参考訳文の一致率</entry>
+
+            <entry/>
+
+            <entry>toolsShowStatisticsMatchesMenuItem</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+  </section>
+
+  <section id="ch04.shortcuts.OptionsMenu">
+    <title>設定メニュー</title>
+
+    <table>
+      <title>設定メニュー</title>
+
+      <tgroup cols="3" colsep="1">
+        <colspec align="left" colname="1" colnum="1" colwidth="120"/>
+
+        <colspec align="left" colname="2" colnum="2" colwidth="80"/>
+
+        <colspec align="left" colname="3" colnum="3"/>
+
+        <thead>
+          <row>
+            <entry>メニュー項目</entry>
+
+            <entry>デフォルトのショートカット</entry>
+
+            <entry>メニュー項目コード</entry>
+          </row>
+        </thead>
+
+        <tbody>
+          <row>
+            <entry>TAB キーで次の分節へ</entry>
+
+            <entry/>
+
+            <entry>optionsTabAdvanceCheckBoxMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>終了時に常に確認</entry>
+
+            <entry/>
+
+            <entry>optionsAlwaysConfirmQuitCheckBoxMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>機械翻訳</entry>
+
+            <entry/>
+
+            <entry/>
+          </row>
+
+          <row>
+            <entry>用語ヒント / 用語ヒントを有効化</entry>
+
+            <entry/>
+
+            <entry>optionsTransTipsEnableMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>用語ヒント / 完全一致</entry>
+
+            <entry/>
+
+            <entry>optionsTransTipsExactMatchMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>字体...</entry>
+
+            <entry/>
+
+            <entry>optionsFontSelectionMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>ファイルフィルター...</entry>
+
+            <entry/>
+
+            <entry>optionsSetupFileFiltersMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>分節化規則...</entry>
+
+            <entry/>
+
+            <entry>optionsSentsegMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>綴り確認...</entry>
+
+            <entry/>
+
+            <entry>optionsSpellCheckMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>翻訳入力行...</entry>
+
+            <entry/>
+
+            <entry>optionsWorkflowMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>タグ検証...</entry>
+
+            <entry/>
+
+            <entry>optionsTagValidationMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>チーム...</entry>
+
+            <entry/>
+
+            <entry>optionsTeamMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>外部 TMX ファイル...</entry>
+
+            <entry/>
+
+            <entry>optionsExtTMXMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>表示...</entry>
+
+            <entry/>
+
+            <entry>optionsViewOptionsMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>保存...</entry>
+
+            <entry/>
+
+            <entry>optionsSaveOptionsMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>プロキシ認証...</entry>
+
+            <entry/>
+
+            <entry>optionsViewOptionsMenuLoginItem</entry>
+          </row>
+
+          <row>
+            <entry>ウインドウを初期位置に復元</entry>
+
+            <entry/>
+
+            <entry>optionsRestoreGUIMenuItem</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+  </section>
+
+  <section id="ch04.shortcuts.HelpMenu">
+    <title>ヘルプメニュー</title>
+
+    <table>
+      <title>ヘルプメニュー</title>
+
+      <tgroup cols="3" colsep="1">
+        <colspec align="left" colname="1" colnum="1" colwidth="120"/>
+
+        <colspec align="left" colname="2" colnum="2" colwidth="80"/>
+
+        <colspec align="left" colname="3" colnum="3"/>
+
+        <thead>
+          <row>
+            <entry>メニュー項目</entry>
+
+            <entry>デフォルトのショートカット</entry>
+
+            <entry>メニュー項目コード</entry>
+          </row>
+        </thead>
+
+        <tbody>
+          <row>
+            <entry>取扱説明書...</entry>
+
+            <entry><keycap>F1</keycap></entry>
+
+            <entry>helpContentsMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>OmegaT について...</entry>
+
+            <entry/>
+
+            <entry>helpAboutMenuItem</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+  </section>
+</appendix>

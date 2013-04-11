@@ -93,7 +93,7 @@ public final class PluginUtils {
             }
             boolean foundMain = false;
             // look on all manifests
-            cls = new URLClassLoader(urls);
+            cls = new URLClassLoader(urls, PluginUtils.class.getClassLoader());
             for (Enumeration<URL> mlist = cls.getResources("META-INF/MANIFEST.MF"); mlist.hasMoreElements();) {
                 URL mu = mlist.nextElement();
                 InputStream in = mu.openStream();

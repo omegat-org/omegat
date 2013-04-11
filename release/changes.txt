@@ -21,7 +21,7 @@ external entities, the target files could be empty
 
   Localisation updates:
 
-  - Japanese localisation updated to 2.6.3 (Documentation)
+  - Japanese localisation updated to 2.6.3 (UI, Documentation)
 
 ----------------------------------------------------------------------
  OmegaT 2.6.3

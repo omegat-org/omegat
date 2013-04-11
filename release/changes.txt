@@ -81,7 +81,7 @@ appear in the contextual menu, and can be inserted individually
 "mt", the background of the active segment is changed to red. The
 background is restored to normal when the segment is left.
 
-  - OmegaT has now a machine translation connecter for MyMemory.
+  - OmegaT has now a machine translation connector for MyMemory.
 To use it, check Options > Machine Translation > MyMemory
 
   Bug fixes:

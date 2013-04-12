@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 2.6.3 update 1
 ----------------------------------------------------------------------
-   1 Enhancement
+   2 Enhancements
    1 Bug fix
    1 Localisation update
 ----------------------------------------------------------------------
@@ -13,6 +13,8 @@
   - All documentation images were converted to 256 colours, giving
 a significant size decrease without a noticeable change in image 
 clarity
+
+  - Linux: improved Kaptain launcher, with updated tokenizers
   
   Bug fixes:
 

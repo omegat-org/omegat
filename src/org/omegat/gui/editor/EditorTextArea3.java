@@ -516,7 +516,7 @@ public class EditorTextArea3 extends JEditorPane {
                 for (String tag : ste.getProtectedParts().getParts()) {
                     int p = -1;
                     while ((p = text.indexOf(tag, p + 1)) >= 0) {
-                        if (p <= off && off <= p + tag.length()) {
+                        if (p <= off && off < p + tag.length()) {
                             p += segment.getStartPosition();
                             select(p, p + tag.length());
                             return true;

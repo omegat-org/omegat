@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 3.0.0
 ----------------------------------------------------------------------
-  24 Enhancements
+  25 Enhancements
    5 Bug fixes
    0 Localisation update
 ----------------------------------------------------------------------
@@ -83,6 +83,11 @@ background is restored to normal when the segment is left.
 
   - OmegaT has now a machine translation connector for MyMemory.
 To use it, check Options > Machine Translation > MyMemory
+
+  - Import Source Files was renamed to Copy Files to Source Folder
+and Import From MediaWiki was renamed to Download MediaWiki Page
+to clarify the fact that no import process occurs, and that files
+are just copied
 
   Bug fixes:
 

@@ -140,8 +140,10 @@ public class EditorTextArea3 extends JEditorPane {
     protected MouseListener mouseListener = new MouseAdapter() {
         @Override
         public void mouseClicked(MouseEvent e) {
+            // where is the mouse
+            int mousepos = viewToModel(e.getPoint());
             if (e.getButton() == MouseEvent.BUTTON1 && e.getClickCount() == 2) {
-                controller.goToSegmentAtLocation(getCaretPosition());
+                controller.goToSegmentAtLocation(mousepos);
             }
             if (e.isPopupTrigger() || e.getButton() == MouseEvent.BUTTON3) {
                 PopupMenuConstructorInfo[] cons;
@@ -153,8 +155,6 @@ public class EditorTextArea3 extends JEditorPane {
                     cons = popupConstructors.toArray(new PopupMenuConstructorInfo[popupConstructors.size()]);
                 }
 
-                // where is the mouse
-                int mousepos = viewToModel(e.getPoint());
                 boolean isInActiveTranslation = mousepos >= getOmDocument().getTranslationStart()
                         && mousepos <= getOmDocument().getTranslationEnd();
                 boolean isInActiveEntry;

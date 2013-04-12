@@ -63,6 +63,9 @@ public class OConsts {
 
     // licenses
     public static final String LICENSE_FILE = "OmegaT-license.txt";
+    
+    // Last changes
+    public static final String LAST_CHANGES_FILE = "changes.txt";
 
     // status file consts
     public static final String STATUS_EXTENSION = "project_save.tmx";

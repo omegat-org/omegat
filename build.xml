@@ -373,7 +373,7 @@ Custom strings from release\win32-specific must be added manually to the languag
             </classpath>
         </java>
         <copy todir="docs">
-            <fileset dir="release" includes="OmegaT-license.txt doc-license.txt" />
+            <fileset dir="release" includes="OmegaT-license.txt doc-license.txt changes.txt" />
         </copy>
     </target>
     

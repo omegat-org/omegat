@@ -54,6 +54,7 @@ import org.omegat.filters2.master.FilterMaster;
 import org.omegat.gui.dialogs.AboutDialog;
 import org.omegat.gui.dialogs.ExternalTMXMatchesDialog;
 import org.omegat.gui.dialogs.FontSelectionDialog;
+import org.omegat.gui.dialogs.LastChangesDialog;
 import org.omegat.gui.dialogs.SaveOptionsDialog;
 import org.omegat.gui.dialogs.SpellcheckerConfigurationDialog;
 import org.omegat.gui.dialogs.TagValidationOptionsDialog;
@@ -857,6 +858,13 @@ public class MainWindowMenuHandler {
      */
     public void helpAboutMenuItemActionPerformed() {
         new AboutDialog(mainWindow).setVisible(true);
+    }
+
+    /**
+     * Shows Last changes
+     */
+    public void helpLastChangesMenuItemActionPerformed() {
+        new LastChangesDialog(mainWindow).setVisible(true);
     }
 
     /**

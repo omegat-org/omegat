@@ -38,12 +38,14 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.StringWriter;
 import java.io.Writer;
+import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
+import org.omegat.gui.help.HelpFrame;
 
 /**
  * Files processing utilities.
@@ -235,4 +237,32 @@ public class FileUtil {
         }
         return fileAbs.substring(rootAbs.length());
     }
+    
+    /**
+     * Load a text file from the root of help.
+     * @param The name of the text file
+     * @return The content of the text file
+     */
+    public static String loadTextFileFromDoc(String textFile) {
+
+        // Get the license
+        URL url = HelpFrame.getHelpFileURL(null, textFile);
+        if (url == null) {
+            return HelpFrame.errorHaiku();
+        }
+
+        try {
+            BufferedReader rd = new BufferedReader(new InputStreamReader(url.openStream(), OConsts.UTF8));
+            try {
+                StringWriter out = new StringWriter();
+                LFileCopy.copy(rd, out);
+                return out.toString();
+            } finally {
+                rd.close();
+            }
+        } catch (IOException ex) {
+            return HelpFrame.errorHaiku();
+        }
+
+    }        
 }

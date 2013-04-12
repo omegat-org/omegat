@@ -4,7 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
-               2013 Alex Buloichik, Didier Briel
+               2013 Didier Briel
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -26,45 +26,39 @@
 
 package org.omegat.gui.dialogs;
 
+import java.awt.Frame;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.StringWriter;
-import java.net.URL;
 
 import javax.swing.AbstractAction;
 import javax.swing.Action;
 import javax.swing.JComponent;
+import javax.swing.JDialog;
 import javax.swing.KeyStroke;
 
-import org.omegat.gui.help.HelpFrame;
+import org.omegat.util.FileUtil;
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
-import org.omegat.util.LFileCopy;
 import org.openide.awt.Mnemonics;
-import org.omegat.util.FileUtil;
 
 /**
- * Dialog showing GNU Public License.
+ * Dialog showing Last changes.
  * 
  * @author Maxym Mykhalchuk
- * @author Alex Buloichik
  * @author Didier Briel
  */
 @SuppressWarnings("serial")
-public class LicenseDialog extends javax.swing.JDialog {
+public class LastChangesDialog extends JDialog {
     /** A return status code - returned if Cancel button has been pressed */
     public static final int RET_CANCEL = 0;
     /** A return status code - returned if OK button has been pressed */
     public static final int RET_OK = 1;
 
-    /** Creates new form LicenseDialog */
-    public LicenseDialog(java.awt.Dialog parent) {
+    /** Creates new form LastChanges */
+    public LastChangesDialog(Frame parent) {
         super(parent, true);
         initComponents();
-        licenseTextPane.setCaretPosition(0);
+        lastChangesTextPane.setCaretPosition(0);
     }
 
     /**
@@ -81,11 +75,12 @@ public class LicenseDialog extends javax.swing.JDialog {
         buttonPanel = new javax.swing.JPanel();
         okButton = new javax.swing.JButton();
         scroll = new javax.swing.JScrollPane();
-        licenseTextPane = new javax.swing.JTextPane();
+        lastChangesTextPane = new javax.swing.JTextPane();
 
-        setTitle(OStrings.getString("LICENSEDIALOG_TITLE"));
+        setTitle(OStrings.getString("LASTCHANGESDIALOG_TITLE"));
         setResizable(true);
         addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 closeDialog(evt);
             }
@@ -95,6 +90,7 @@ public class LicenseDialog extends javax.swing.JDialog {
         // Handle escape key to close the window
         KeyStroke escape = KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0, false);
         Action escapeAction = new AbstractAction() {
+            @Override
             public void actionPerformed(ActionEvent e) {
                 dispose();
             }
@@ -107,6 +103,7 @@ public class LicenseDialog extends javax.swing.JDialog {
 
         Mnemonics.setLocalizedText(okButton, OStrings.getString("BUTTON_OK"));
         okButton.addActionListener(new java.awt.event.ActionListener() {
+            @Override
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 okButtonActionPerformed(evt);
             }
@@ -116,13 +113,10 @@ public class LicenseDialog extends javax.swing.JDialog {
 
         getContentPane().add(buttonPanel, java.awt.BorderLayout.SOUTH);
 
-        licenseTextPane.setEditable(false);
-        licenseTextPane
-                .setText("===================================================\n\n"
-                        + OStrings.getString("LICENSEDIALOG_PREFACE")
-                        + "\n\n===================================================\n\n"
-                        + FileUtil.loadTextFileFromDoc(OConsts.LICENSE_FILE));
-        scroll.setViewportView(licenseTextPane);
+        lastChangesTextPane.setEditable(false);
+        lastChangesTextPane
+                .setText(FileUtil.loadTextFileFromDoc(OConsts.LAST_CHANGES_FILE));
+        scroll.setViewportView(lastChangesTextPane);
 
         getContentPane().add(scroll, java.awt.BorderLayout.CENTER);
 
@@ -130,31 +124,6 @@ public class LicenseDialog extends javax.swing.JDialog {
         setBounds((screenSize.width - 600) / 2, (screenSize.height - 400) / 2, 600, 400);
     }
 
-    /**
-     * Load license from file "license.txt" from the root of help.
-     */
-    private String loadLicense() {
-
-        // Get the license
-        URL url = HelpFrame.getHelpFileURL(null, OConsts.LICENSE_FILE);
-        if (url == null) {
-            return HelpFrame.errorHaiku();
-        }
-
-        try {
-            BufferedReader rd = new BufferedReader(new InputStreamReader(url.openStream(), OConsts.UTF8));
-            try {
-                StringWriter out = new StringWriter();
-                LFileCopy.copy(rd, out);
-                return out.toString();
-            } finally {
-                rd.close();
-            }
-        } catch (IOException ex) {
-            return HelpFrame.errorHaiku();
-        }
-
-    }
 
     private void okButtonActionPerformed(java.awt.event.ActionEvent evt) {
         doClose(RET_OK);
@@ -173,7 +142,7 @@ public class LicenseDialog extends javax.swing.JDialog {
 
     private javax.swing.JPanel buttonPanel;
     private javax.swing.JScrollPane scroll;
-    private javax.swing.JTextPane licenseTextPane;
+    private javax.swing.JTextPane lastChangesTextPane;
     private javax.swing.JButton okButton;
 
     private int returnStatus = RET_CANCEL;

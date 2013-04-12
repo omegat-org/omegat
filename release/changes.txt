@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 3.0.0
 ----------------------------------------------------------------------
-  25 Enhancements
+  26 Enhancements
    5 Bug fixes
    0 Localisation update
 ----------------------------------------------------------------------
@@ -88,6 +88,9 @@ To use it, check Options > Machine Translation > MyMemory
 and Import From MediaWiki was renamed to Download MediaWiki Page
 to clarify the fact that no import process occurs, and that files
 are just copied
+
+  - Last changes can be displayed in the Help menu
+(Help > Last Changes)
 
   Bug fixes:
 

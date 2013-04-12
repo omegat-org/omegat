@@ -378,6 +378,8 @@ public class MainWindowMenu implements ActionListener, MenuListener, IMainMenu {
 
         helpMenu.add(helpContentsMenuItem = createMenuItem("TF_MENU_HELP_CONTENTS"));
         helpMenu.add(helpAboutMenuItem = createMenuItem("TF_MENU_HELP_ABOUT"));
+        helpMenu.add(helpLastChangesMenuItem = createMenuItem("TF_MENU_HELP_LAST_CHANGES"));
+        
 
         // Grayed out if there is no glossary plugins. Plugin can enable it.
         optionsGlossaryMenu.setEnabled(false);
@@ -633,6 +635,7 @@ public class MainWindowMenu implements ActionListener, MenuListener, IMainMenu {
     JMenuItem gotoPreviousNoteMenuItem;
     JMenuItem helpAboutMenuItem;
     JMenuItem helpContentsMenuItem;
+    JMenuItem helpLastChangesMenuItem;
     JMenu helpMenu;
     JMenuItem lowerCaseMenuItem;
     JMenuBar mainMenu;

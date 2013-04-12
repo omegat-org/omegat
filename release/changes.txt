@@ -103,16 +103,29 @@ OmegaT failed to load the valid ones
 ----------------------------------------------------------------------
  OmegaT 2.6.3 update 1
 ----------------------------------------------------------------------
-   0 Enhancement
+   2 Enhancements
    1 Bug fix
-   0 Localisation update
+   1 Localisation update
 ----------------------------------------------------------------------
 2.6.3 update 1 vs. 2.6.3
 
+
+  Other enhancements:
+
+  - All documentation images were converted to 256 colours, giving
+a significant size decrease without a noticeable change in image 
+clarity
+
+  - Linux: improved Kaptain launcher, with updated tokenizers
+  
   Bug fixes:
 
   - When an XML document (e.g., DocBook), contained both internal and 
 external entities, the target files could be empty
+
+  Localisation updates:
+
+  - Japanese localisation updated to 2.6.3 (UI, Documentation)
 
 ----------------------------------------------------------------------
  OmegaT 2.6.3

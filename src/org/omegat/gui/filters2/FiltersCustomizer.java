@@ -366,6 +366,7 @@ public class FiltersCustomizer extends JDialog implements ListSelectionListener 
         } else {
             filtersTable.setEnabled(false);
             filtersTable.setFocusable(false);
+            filtersTable.getSelectionModel().clearSelection();
         }
     }//GEN-LAST:event_projectSpecificCBActionPerformed
 

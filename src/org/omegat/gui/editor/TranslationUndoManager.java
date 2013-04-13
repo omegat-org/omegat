@@ -63,6 +63,7 @@ public class TranslationUndoManager implements UndoableEditListener {
             undos.clear();
             redos.clear();
             currentState = null;
+            changedText = editor.getOmDocument().extractTranslation();
         }
         remember();
     }

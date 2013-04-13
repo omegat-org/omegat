@@ -112,7 +112,7 @@ OmegaT failed to load the valid ones
  OmegaT 2.6.3 update 1
 ----------------------------------------------------------------------
    2 Enhancements
-   1 Bug fix
+   2 Bug fixes
    1 Localisation update
 ----------------------------------------------------------------------
 2.6.3 update 1 vs. 2.6.3
@@ -130,6 +130,8 @@ clarity
 
   - When an XML document (e.g., DocBook), contained both internal and 
 external entities, the target files could be empty
+
+  - Word selection with a double-click could sometimes be off
 
   Localisation updates:
 

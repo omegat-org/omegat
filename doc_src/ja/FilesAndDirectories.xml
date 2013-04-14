@@ -47,7 +47,7 @@
       </mediaobject>
 	  </figure>
 
-    <para>フォルダーの中には、プロジェクト作成時や翻訳作業の途中で、デフォルトから別の場所に変更できるものもあります。変更先のフォルダーは、各自のワークフローとプロジェクト管理習慣に応じて、既存の場所を指定したり、新規作成したりできます。プロジェクト作成後に場所を変更するときは、メニューから<guimenuitem>［プロジェクト］→［プロジェクト設定...］</guimenuitem> を選ぶか、ショートカット <guibutton>Ctrl+E</guibutton> で設定ダイアログを開き、必要な変更を行ってください。</para>
+    <para>フォルダーの中には、プロジェクト作成時や翻訳作業の途中で、デフォルトから別の場所に変更できるものもあります。変更先のフォルダーは、各自のワークフローとプロジェクト管理習慣に応じて、既存の場所を指定したり、新規作成したりできます。プロジェクト作成後に場所を変更するときは、メニューから<guimenuitem>［プロジェクト］→［プロジェクト設定...］</guimenuitem> を選ぶか、ショートカット［<guibutton>Ctrl+E</guibutton>］で設定ダイアログを開き、必要な変更を行ってください。</para>
 
     <para>OmegaT 以外のファイルマネージャーで見ると、翻訳プロジェクトは他のフォルダーと特に区別無く表示されます。下の図は OmegaT での表示例ですが、<filename>マイ プロジェクト</filename>フォルダーに３つの OmegaT プロジェクトが含まれていることが分かります。</para>
 
@@ -94,7 +94,7 @@
 
       <para><informaltable>
           <tgroup align="left" cols="2" rowsep="1">
-            <colspec align="left" colnum="1" colwidth="120"/>
+            <colspec align="left" colnum="1"/>
 
             <tbody>
               <row>
@@ -161,7 +161,7 @@
 
     <informaltable>
       <tgroup align="left" cols="2" rowsep="1">
-        <colspec align="left" colnum="1" colwidth="100"/>
+        <colspec align="left" colnum="1"/>
 
         <tbody>
           <row>
@@ -207,7 +207,7 @@
 
     <informaltable>
       <tgroup align="left" cols="2" rowsep="1">
-        <colspec align="left" colnum="1" colwidth="100"/>
+        <colspec align="left" colnum="1"/>
 
         <tbody>
           <row>
@@ -264,7 +264,7 @@
 
     <informaltable>
       <tgroup align="left" cols="2" rowsep="1">
-        <colspec align="left" colnum="1" colwidth="100"/>
+        <colspec align="left" colnum="1"/>
 
         <tbody>
           <row>

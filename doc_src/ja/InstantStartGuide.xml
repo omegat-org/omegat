@@ -30,7 +30,7 @@
   <section>
     <title>タグを検証する</title>
 
-    <para>もし原文ファイルが、Microsoft Word や LibreOffice Writer、HTML などの見映えの情報を持つファイル形式だった場合、OmegaT はその情報をタグに変換し、対象テキストをタグで括った形式で表示します。また文書には、見映えとはまったく関係ないけれど、やはり重要なタグが含まれることがあります。原文ファイル（と訳文ファイル）では、原文は次のように見えるはずです。</para>
+    <para>もし原文ファイルが、Microsoft Word や LibreOffice Writer、HTML などの書式情報を持つファイル形式だった場合、OmegaT はその情報をタグに変換し、対象テキストをタグで括った形式で表示します。また文書には、書式とはまったく関係ないけれど、やはり重要なタグが含まれることがあります。原文ファイル（と訳文ファイル）では、原文は次のように見えるはずです。</para>
 
     <para/>
 
@@ -100,7 +100,7 @@
 
     <itemizedlist>
       <listitem>
-        <para><guibutton>Ctrl+Shift+G</guibutton> キーを押すと、用語を追加することができます。また既存の用語集ファイルをプロジェクトの  <filename>glossary</filename> フォルダーにコピーしておくと、OmegaT はそこから用語を自動的に検索するようになります。</para>
+        <para><guibutton>Ctrl+Shift+G</guibutton> キーを押すと、用語を追加することができます。また既存の用語集ファイルをプロジェクトの <filename>glossary</filename> フォルダーにコピーしておくと、OmegaT はそこから用語を自動的に検索するようになります。</para>
       </listitem>
     </itemizedlist>
 

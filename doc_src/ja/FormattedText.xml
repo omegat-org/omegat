@@ -56,11 +56,11 @@
 
     <para>例：</para>
 
-    <para><literal>&lt;b0&gt;この見映え設定&lt;/b0&gt;は、こちらにも適用させましょう。&lt;分節 0001&gt;</literal></para>
+    <para><literal>&lt;b0&gt;この書式&lt;/b0&gt;を、こちらにも適用しましょう。&lt;分節 0001&gt;</literal></para>
 
     <para>複製後：</para>
 
-    <para><literal>&lt;b0&gt;この見映え設定&lt;/b0&gt;は、&lt;b0&gt;こちらにも適用&lt;/b0&gt;されました。&lt;分節 0001&gt;</literal></para>
+    <para><literal>&lt;b0&gt;この書式&lt;/b0&gt;を、&lt;b0&gt;こちらにも適用&lt;/b0&gt;しました。&lt;分節 0001&gt;</literal></para>
 
     <para><emphasis role="bold"><indexterm class="singular">
         <primary>タグ</primary> <secondary>グループの削除</secondary>
@@ -70,11 +70,11 @@
 
     <para>例：</para>
 
-    <para><literal>&lt;b0&gt;この見映え設定&lt;/b0&gt;は削除されます。&lt;分節 0001&gt;</literal></para>
+    <para><literal>&lt;b0&gt;この書式&lt;/b0&gt;を削除します。&lt;分節 0001&gt;</literal></para>
 
     <para>削除後：</para>
 
-    <para><literal>この見映え設定は削除されました。&lt;分節 0001&gt;</literal></para>
+    <para><literal>この書式を削除しました。&lt;分節 0001&gt;</literal></para>
   </section>
 
   <section id="tag.group.nesting">
@@ -86,11 +86,11 @@
 
     <para>例：</para>
 
-    <para><literal>&lt;b0&gt;見映え設定&lt;/b0&gt;&lt;b1&gt;１番&lt;/b1&gt;は、見映え設定０番の入れ子にしましょう。&lt;分節 0001&gt;</literal></para>
+    <para><literal>&lt;b0&gt;書式設定&lt;/b0&gt;&lt;b1&gt;１番&lt;/b1&gt;を、書式設定０番の入れ子にしましょう。&lt;分節 0001&gt;</literal></para>
 
     <para>入れ子になった後：</para>
 
-    <para><literal>&lt;b0&gt;見映え設定&lt;b1&gt;１番&lt;/b1&gt;&lt;/b0&gt;は、見映え設定０番の入れ子になりました。&lt;分節 0001&gt;</literal></para>
+    <para><literal>&lt;b0&gt;書式設定&lt;b1&gt;１番&lt;/b1&gt;&lt;/b0&gt;は、書式設定０番の入れ子になりました。&lt;分節 0001&gt;</literal></para>
   </section>
 
   <section id="tag.group.overlapping">
@@ -102,11 +102,11 @@
 
     <para>例：</para>
 
-    <para><literal>&lt;b0&gt;見映え設定&lt;/b0&gt;&lt;b1&gt;１番&lt;/b1&gt;は、大変なことになります！&lt;分節 0001&gt;</literal></para>
+    <para><literal>&lt;b0&gt;書式設定&lt;/b0&gt;&lt;b1&gt;１番&lt;/b1&gt;は、大変なことになります！&lt;分節 0001&gt;</literal></para>
 
     <para>誤った操作後：</para>
 
-    <para><literal>&lt;b0&gt;見映え設定&lt;b1&gt;１番&lt;/b0&gt;&lt;/b1&gt;は、大変なことになりました！&lt;分節 0001&gt;</literal></para>
+    <para><literal>&lt;b0&gt;書式設定&lt;b1&gt;１番&lt;/b0&gt;&lt;/b1&gt;は、大変なことになりました！&lt;分節 0001&gt;</literal></para>
   </section>
 
   <section>
@@ -194,6 +194,6 @@
 
     <para>原文のタグを確認する必要はあるが、翻訳後の文書に整形情報を含む必要があまりないのであれば、訳文にタグを入れる必要はありません。この場合、ペアになっているタグには特に注意を払ってください。片方のタグだけ削除してしまうと文書の整形情報が壊れてしまうからです。タグはテキストの中に含まれているので、分節化規則を使ってタグの少ない分節を生成することが可能です。これは比較的高度な機能であり、うまく使いこなすにはあるていどの経験が必要です。</para>
 
-    <para>OmegaT はまだ整形に関する誤りを、すべて自動で見つけだすことはできません。何か間違いがあったり、訳文言語にあうよう整形情報を変えたにもかかわらず、検出できないこともあります。したがって、タグのエラーが見過ごされた時には、生成した訳文ファイルが何かおかしかったり、最悪の場合は、ファイルを開くことができなくなるおそれもあります。</para>
+    <para>OmegaT は今のところ、整形に関する誤りをすべて自動で見つけだすことはできません。また、それが間違いなのか、訳文言語にあうよう意図的に整形情報を改善したものなのか、区別することもできないでしょう。したがって、タグのエラーが見過ごされた時には、生成した訳文ファイルが何かおかしかったり、最悪の場合は、ファイルを開くことができなくなるおそれもあります。</para>
   </section>
 </chapter>

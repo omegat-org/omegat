@@ -8,7 +8,7 @@
         <primary>メニュー</primary>
       </indexterm>メインメニュー</title>
 
-    <para>OmegaT のすべての機能は、編集ウィンドウ上部にあるメニューから実行できます。多くの機能にキーボードショートカットが割り当てられており、それを用いて実行することもできます。ショートカットは<keycap>［Ctrl］</keycap>キーと文字キーを同時に押します。他のキーを含めて使用するものもあります。判別しやすいよう、文字キーは大文字で表記します。<keycap>［Ctrl］</keycap>キーは Windows で使用します。UNIX や UNIX 系のオペレーティングシステムでは<keycap>［Ctrl］</keycap> または <keycap>［Control］</keycap>キーが該当します。Mac ユーザーは<keycombo><keycap>［cmd］</keycap>+<keycap>キー</keycap></keycombo>と読み替えてください。Apple キーボードでは、「cmd」キーには「command」またはリンゴ マークが記されています。</para>
+    <para>OmegaT のすべての機能は、編集ウィンドウ上部にあるメニューから実行できます。多くの機能にキーボードショートカットが割り当てられており、それを用いて実行することもできます。ショートカットは<keycap>［Ctrl］</keycap>キーと文字キーを同時に押します。他のキーを含めて使用するものもあります。判別しやすいよう、文字キーは大文字で表記します。<keycap>［Ctrl］</keycap>キーは Windows で使用します。UNIX や UNIX 系のオペレーティングシステムでは<keycap>［Ctrl］</keycap> または <keycap>［Control］</keycap>キーが該当します。Mac ユーザーは<keycombo><keycap>［cmd］</keycap>+<keycap>キー</keycap></keycombo>と読み替えてください。Apple キーボードでは、［cmd］キーには「command」またはリンゴ マークが記されています。</para>
 
     <para>必要であれば、既存のショートカットをカスタマイズしたり、新しいショートカットを追加することもできます。詳しくは<link linkend="ch04.shortcuts.customization">付録 - ショートカットのカスタマイズ</link>を参照してください。</para>
 
@@ -45,9 +45,9 @@
         <title>プロジェクトメニュー</title>
 
         <tgroup cols="3" colsep="1">
-          <colspec align="left" colnum="1" colwidth="100"/>
+          <colspec align="left" colnum="1"/>
 
-          <colspec align="left" colnum="2" colwidth="100"/>
+          <colspec align="left" colnum="2"/>
 
           <tbody>
             <row>
@@ -183,9 +183,9 @@
         <title>コピー／切り取り／貼り付けのショートカット</title>
 
         <tgroup cols="3" colsep="1">
-          <colspec align="left" colnum="1" colwidth="100"/>
+          <colspec align="left" colnum="1"/>
 
-          <colspec align="left" colnum="2" colwidth="100"/>
+          <colspec align="left" colnum="2"/>
 
           <tbody>
             <row>
@@ -233,9 +233,9 @@
         <title>編集メニュー</title>
 
         <tgroup cols="3" colsep="1">
-          <colspec align="left" colnum="1" colwidth="100"/>
+          <colspec align="left" colnum="1"/>
 
-          <colspec align="left" colnum="2" colwidth="100"/>
+          <colspec align="left" colnum="2"/>
 
           <tbody>
             <row>
@@ -433,9 +433,9 @@
         <title>移動メニュー</title>
 
         <tgroup cols="3" colsep="1">
-          <colspec align="left" colnum="1" colwidth="100"/>
+          <colspec align="left" colnum="1"/>
 
-          <colspec align="left" colnum="2" colwidth="100"/>
+          <colspec align="left" colnum="2"/>
 
           <tbody>
             <row>
@@ -535,7 +535,7 @@
         <title>表示メニュー</title>
 
         <tgroup cols="2" colsep="1">
-          <colspec align="left" colnum="1" colwidth="100"/>
+          <colspec align="left" colnum="1"/>
 
           <tbody>
             <row>
@@ -605,13 +605,13 @@
         </indexterm>
 
         <tgroup cols="2" colsep="1">
-          <colspec align="left" colnum="1" colwidth="100"/>
+          <colspec align="left" colnum="1"/>
 
           <tbody>
             <row>
               <entry><guimenuitem>タグ検証</guimenuitem></entry>
 
-              <entry><guimenu>Ctrl+T</guimenu>：整形されたファイルの中で、タグが欠けていたり、位置が変わったりしている箇所がないかを調べます。タグの間違いや不整合の可能性がある分節の一覧が表示されます。詳しくは「<link linkend="section.tag.validation">タグ検証</link>」および「<xref linkend="chapter.formatted.text"/>」を参照してください。</entry>
+              <entry><guimenu>Ctrl+T</guimenu>：整形されたファイルの中で、タグが欠けていたり、位置が変わったりしている箇所がないかを調べます。タグの間違いや不整合の可能性がある分節の一覧が表示されます。詳しくは「<link linkend="section.tag.validation">タグ検証</link>」および<xref linkend="chapter.formatted.text"/>を参照してください。</entry>
             </row>
 
             <row>
@@ -645,7 +645,7 @@
         <title>設定メニュー</title>
 
         <tgroup cols="2" colsep="1">
-          <colspec align="left" colnum="1" colwidth="100"/>
+          <colspec align="left" colnum="1"/>
 
           <tbody>
             <row>
@@ -663,7 +663,7 @@
             <row>
               <entry><guimenuitem>機械翻訳</guimenuitem></entry>
 
-              <entry>機械翻訳ツールを有効または無効にします。有効な場合、<keycombo><keycap>Ctrl</keycap> <keycap>M</keycap></keycombo> を押すと、現在の分節に機械翻訳の結果を挿入します。</entry>
+              <entry>機械翻訳ツールを有効または無効にします。有効な場合、［<keycombo><keycap>Ctrl</keycap><keycap>M</keycap></keycombo>］を押すと、現在の分節に機械翻訳の結果を挿入します。</entry>
             </row>
 
             <row>
@@ -763,13 +763,13 @@
         <title>ヘルプメニュー</title>
 
         <tgroup cols="2" colsep="1">
-          <colspec align="left" colnum="1" colwidth="100"/>
+          <colspec align="left" colnum="1"/>
 
           <tbody>
             <row>
               <entry><guimenuitem>取扱説明書...</guimenuitem></entry>
 
-              <entry><keycap>F1：</keycap>取扱説明書を独立したウィンドウで開きます。</entry>
+              <entry><keycap>［F1］</keycap>キーを押すと、取扱説明書を独立したウィンドウで開きます。</entry>
             </row>
 
             <row>
@@ -792,7 +792,7 @@
 
     <para><keycap>［Ctrl］</keycap>キーと文字キーを同時に押すと、ショートカットが動作します。他のキーを含めて使用するものもあります。判別しやすいよう、文字キーは大文字で表記します。</para>
 
-    <para>［Ctrl］キーは Windows で使用します。UNIX や UNIX 系のオペレーティングシステムでは<keycap>［Ctrl］</keycap> または <keycap>［Control］</keycap>キーが該当します。Mac ユーザーは <guimenuitem>［cmd］+キー</guimenuitem>と読み替えてください。Apple キーボードでは、<guimenuitem>［cmd］</guimenuitem>キーには <guimenuitem>command</guimenuitem> または <guimenuitem>リンゴ</guimenuitem> マークが記されています。</para>
+    <para>［Ctrl］キーは Windows で使用します。UNIX や UNIX 系のオペレーティングシステムでは<keycap>［Ctrl］</keycap>または<keycap>［Control］</keycap>キーが該当します。Mac ユーザーは<guimenuitem>［cmd］+キー</guimenuitem>と読み替えてください。Apple キーボードでは、<guimenuitem>［cmd］</guimenuitem>キーには「<guimenuitem>command</guimenuitem>」または <guimenuitem>リンゴ</guimenuitem> マークが記されています。</para>
 
     <itemizedlist>
       <listitem>
@@ -835,9 +835,9 @@
         <title>プロジェクトのショートカット</title>
 
         <tgroup cols="3" colsep="1">
-          <colspec align="left" colnum="1" colwidth="100"/>
+          <colspec align="left" colnum="1"/>
 
-          <colspec align="left" colnum="2" colwidth="100"/>
+          <colspec align="left" colnum="2"/>
 
           <tbody>
             <row>
@@ -861,7 +861,7 @@
                   <keycap>S</keycap>
                 </keycombo></entry>
 
-              <entry>現在の翻訳内容を、内部翻訳メモリ（プロジェクトの <filename>omegat</filename> フォルダーにある project_save.tmx）に保存します。</entry>
+              <entry>現在の翻訳内容を、内部翻訳メモリ（プロジェクトの <filename>omegat</filename> フォルダーにある <filename>project_save.tmx</filename>）に保存します。</entry>
             </row>
 
             <row>
@@ -917,9 +917,9 @@
         <title>編集のショートカット</title>
 
         <tgroup cols="3" colsep="1">
-          <colspec align="left" colnum="1" colwidth="100"/>
+          <colspec align="left" colnum="1"/>
 
-          <colspec align="left" colnum="2" colwidth="100"/>
+          <colspec align="left" colnum="2"/>
 
           <tbody>
             <row>
@@ -1083,9 +1083,9 @@
         <title>移動のショートカット</title>
 
         <tgroup cols="3" colsep="1">
-          <colspec align="left" colnum="1" colwidth="100"/>
+          <colspec align="left" colnum="1"/>
 
-          <colspec align="left" colnum="2" colwidth="100"/>
+          <colspec align="left" colnum="2"/>
 
           <tbody>
             <row>
@@ -1169,9 +1169,9 @@
         <title>その他のショートカット</title>
 
         <tgroup cols="3" colsep="1">
-          <colspec align="left" colnum="1" colwidth="100"/>
+          <colspec align="left" colnum="1"/>
 
-          <colspec align="left" colnum="2" colwidth="100"/>
+          <colspec align="left" colnum="2"/>
 
           <tbody>
             <row>

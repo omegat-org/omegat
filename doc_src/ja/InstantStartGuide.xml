@@ -24,13 +24,13 @@
   <section id="translate.the.segments.one.by.one">
     <title>ファイルを翻訳する</title>
 
-    <para>OmegaT は翻訳のために、原文を「分節」という単位に分割して表示します。ひとつの分節を翻訳し終えたら、<keycap>Ctrl+U</keycap> キーを押して、次の未翻訳分節へと移動します。翻訳の成果を確認したくなったら、<keycap>Ctrl+D</keycap> キーを押して、いつでも訳文ファイルを生成できます。訳文ファイルは、プロジェクトの target フォルダー内に作成されます。翻訳作業のあいだ、［<guimenu>編集</guimenu>］メニューおよび［<guimenu>移動</guimenu>］メニューから、さまざまな役に立つ機能を利用することができます。</para>
+    <para>OmegaT は翻訳のために、原文を「分節」という単位に分割して表示します。ひとつの分節を翻訳し終えたら、<keycap>Ctrl+U</keycap> キーを押して、次の未翻訳分節へと移動します（<keycap>Ctrl+Shift+U </keycap> キーを押すと、次の翻訳済み分節へ移動します）。翻訳の成果を確認したくなったら、<keycap>Ctrl+D</keycap> キーを押して、いつでも訳文ファイルを生成できます。訳文ファイルは、プロジェクトの target フォルダー内に作成されます。翻訳作業のあいだ、［<guimenu>編集</guimenu>］メニューおよび［<guimenu>移動</guimenu>］メニューから、さまざまな役に立つ機能を利用することができます。</para>
   </section>
 
   <section>
     <title>タグを検証する</title>
 
-    <para>もし原文ファイルが、Microsoft Word や LibreOffice Writer、HTML などの見映えの情報を持つファイル形式だった場合、OmegaT はその情報をタグに変換し、対象テキストをタグで括った形式で表示します。また文書には、見映えとはまったく関係ないけれど、やはり重要なタグが含まれることがあります。原文ファイル（と訳文ファイル）では、原文は次のように見えるはずです。</para>
+    <para>もし原文ファイルが、Microsoft Word や LibreOffice Writer、HTML などの書式情報を持つファイル形式だった場合、OmegaT はその情報をタグに変換し、対象テキストをタグで括った形式で表示します。また文書には、書式とはまったく関係ないけれど、やはり重要なタグが含まれることがあります。原文ファイル（と訳文ファイル）では、原文は次のように見えるはずです。</para>
 
     <para/>
 
@@ -100,7 +100,7 @@
 
     <itemizedlist>
       <listitem>
-        <para><guibutton>Ctrl+Shift+G</guibutton> キーを押すと、用語を追加することができます。また既存の用語集ファイルをプロジェクトの  <filename>glossary</filename> フォルダーにコピーしておくと、OmegaT はそこから用語を自動的に検索するようになります。</para>
+        <para><guibutton>Ctrl+Shift+G</guibutton> キーを押すと、用語を追加することができます。また既存の用語集ファイルをプロジェクトの <filename>glossary</filename> フォルダーにコピーしておくと、OmegaT はそこから用語を自動的に検索するようになります。</para>
       </listitem>
     </itemizedlist>
 

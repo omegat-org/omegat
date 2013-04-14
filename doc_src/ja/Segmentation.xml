@@ -15,16 +15,21 @@
 
   <para><application>OmegaT</application> は下記の通りに一連の処理を実施します：</para>
 
-  <variablelist> <varlistentry> <term> <indexterm class="singular">
+  <variablelist>
+    <varlistentry>
+      <term><indexterm class="singular">
           <primary>分節化</primary> <secondary>構造単位の分節化</secondary>
         </indexterm>構造単位の分節化</term>
 
       <listitem>
         <para><application>OmegaT</application> は、まず構造単位の分節化を行うため、文書の構文を解析します。この処理のあいだ、分節作成のために参照される内容は、原文ファイルの構造のみです。</para>
 
-        <para>たとえば、テキストファイルの場合は、改行で分節化するか、空行で分節化するか、または、まったく分節化しないかのいずれかです。見映えの情報を持ったファイル（ODF 文書、HTML 文書など）は、ブロックレベル（段落）のタグを基準に分節化されます。XHTML や HTML ファイルでは、オブジェクトの属性も翻訳の対象になることがあります。このような場合は、属性値だけを分節として取り出します。</para>
+        <para>たとえば、テキストファイルの場合は、改行で分節化するか、空行で分節化するか、または、まったく分節化しないかのいずれかです。整形情報を持ったファイル（ODF 文書、HTML 文書など）は、ブロックレベル（段落）のタグを基準に分節化されます。XHTML や HTML ファイルでは、オブジェクトの属性も翻訳の対象になることがあります。このような場合は、属性値だけを分節として取り出します。</para>
       </listitem>
-    </varlistentry> <varlistentry> <term> <indexterm class="singular">
+    </varlistentry>
+
+    <varlistentry>
+      <term><indexterm class="singular">
           <primary>分節化</primary> <secondary>文単位の分節化</secondary>
         </indexterm>文単位の分節化</term>
 
@@ -43,14 +48,21 @@
 
     <para>規則には、次に示す２種類があります：</para>
 
-    <variablelist> <varlistentry> <term><indexterm class="singular">
+    <variablelist>
+      <varlistentry>
+        <term><indexterm class="singular">
             <primary>分節化</primary> <secondary>規則</secondary> <tertiary>分節規則</tertiary>
           </indexterm>分節規則</term>
 
         <listitem>
           <para>原文テキストを２つの分節に分割します。たとえば「<emphasis>Did it make sense? I was not sure.</emphasis>」というテキストは、意味的に２つの分節に分けられるべきです。そのためには「?」に関する分節規則（後ろにスペースと大文字で始まる単語が続く場合、という条件付きで）があるほうがよいでしょう。改節するための規則を定義する場合は、［分節 または 例外］チェックボックスにチェックを入れます。</para>
         </listitem>
-      </varlistentry> </variablelist> <variablelist> <varlistentry> <term><indexterm class="singular">
+      </varlistentry>
+    </variablelist>
+
+    <variablelist>
+      <varlistentry>
+        <term><indexterm class="singular">
             <primary>分節化</primary> <secondary>規則</secondary> <tertiary>例外規則</tertiary>
           </indexterm>例外規則</term>
 
@@ -73,14 +85,14 @@
 
   <section id="creating.new.rule">
     <title>規則の新規作成<indexterm class="singular">
-        <primary>分節化</primary> <secondary>規則の新規作成</secondary> <seealso>正規表現</seealso>
+        <primary>分節化</primary> <secondary>規則の新規作成</secondary> &lt;t2&gt;正規表現&lt;/t2&gt;
       </indexterm></title>
 
     <para>分節化規則を大きく変更することは、特に最初の下訳が終わった後では、避けるべきです。しかし略称を認識させるために規則を追加するような、限定的な変更であれば、それは改善に値します。</para>
 
     <para>規則集を編集するには、［分節化規則の設定］ウィンドウ上部にある表から、目的の項目をクリックします。するとウィンドウ下部に、選択した規則集の内容が表示されます。</para>
 
-    <para>新しい言語コード構成例を追加するには、上部の表の横にある <emphasis role="bold">［追加］</emphasis> をクリックしてください。表の最下部に新しい行が作成されます（確認のために下までスクロールさせる必要があるでしょう）。言語名と、言語コード構成例を変更してください（言語コードの一覧は「<xref linkend="appendix.languages"/>」を参照してください）。定義する構成例の文法は正規表現の文法に従います。作成する規則群が、言語-国ペアに対するものである場合、<emphasis role="bold">［上へ］</emphasis> ボタンを使って、先頭に移動させておくことをおすすめします。</para>
+    <para>新しい言語コード構成例を追加するには、上部の表の横にある<emphasis role="bold">［追加］</emphasis>をクリックしてください。表の最下部に新しい行が作成されます（確認のために下までスクロールさせる必要があるでしょう）。言語名と、言語コード構成例を変更してください（言語コードの一覧は<xref linkend="appendix.languages"/>を参照してください）。定義する構成例の文法は正規表現の文法に従います。作成する規則群が、言語-国ペアに対するものである場合、<emphasis role="bold">［上へ］</emphasis>ボタンを使って、先頭に移動させておくことをおすすめします。</para>
 
     <para><emphasis role="bold">分節前の構成例</emphasis>と<emphasis role="bold">分節後の構成例</emphasis>を追加する追加する構成例が文法的に正しいか、また意図する対象にちゃんと適用されるか確認するためには、正規表現をその場でテストできるような支援ツールの使用をお勧めします。詳しくは「<link linkend="chapter.regexp">正規表現</link>」の章を参照してください。手始めに、既存の規則を参考に真似してみるのも良いでしょう。</para>
   </section>
@@ -92,13 +104,13 @@
 
     <informaltable>
       <tgroup cols="4">
-        <colspec align="left" colnum="1" colwidth="150"/>
+        <colspec align="left" colnum="1"/>
 
-        <colspec align="center" colnum="2" colwidth="60"/>
+        <colspec align="center" colnum="2"/>
 
-        <colspec align="center" colnum="3" colwidth="60"/>
+        <colspec align="center" colnum="3"/>
 
-        <colspec align="left" colnum="4" colwidth="190"/>
+        <colspec align="left" colnum="4"/>
 
         <thead>
           <row>
@@ -140,7 +152,7 @@
 
             <entry align="center"/>
 
-            <entry><literal>［分節後の構成例］</literal> は空欄としておいてください。</entry>
+            <entry><literal>［分節後の構成例］</literal>は空欄としておいてください。</entry>
           </row>
 
           <row>

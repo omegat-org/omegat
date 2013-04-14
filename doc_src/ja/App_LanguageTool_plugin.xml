@@ -8,7 +8,7 @@
   <section>
     <title>はじめに</title>
 
-    <para><ulink url="http://www.languagetool.org/">LanguageTool</ulink> はオープンソースのスタイルと文法チェックツールです。英語、フランス語、ドイツ語、ポーランド語、オランダ語、ルーマニア語など数多くの言語に対応しています。詳しくは<ulink url="http://www.languagetool.org/languages/">対応する言語の一覧</ulink>を参照してください。</para>
+    <para>LanguageTool はオープンソースのスタイルと文法チェックツールです。英語、フランス語、ドイツ語、ポーランド語、オランダ語、ルーマニア語など数多くの言語に対応しています。詳しくは<ulink url="http://www.languagetool.org/">対応する言語の一覧</ulink>を参照してください。</para>
 
     <para>LanguageTool は、単純な綴り確認機能では検出できないような間違いを検出するためのプログラムです。たとえば、there と their、no と now の取り違えなどが該当します。また、ある種の文法上の間違いも検出できます。綴り確認機能は含みません。LanguageTool は、言語固有の設定ファイルであらかじめ定義された規則に基づいて、間違いを見つけます。</para>
 

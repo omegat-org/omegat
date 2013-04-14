@@ -8,7 +8,7 @@
         <primary>ショートカット</primary> <secondary>カスタマイズ</secondary>
       </indexterm>ショートカットのカスタマイズ</title>
 
-    <para>メインメニューに表示されるほとんどの項目には、新しいショートカットを割り当てることができます。デフォルトでは、最もよく使われると思われるメニュー項目にだけ、ショートカットが割り当てられています。OmegaT の個人設定フォルダー（詳しくは<link linkend="user.files">個人設定ファイル</link>を参照のこと）にショートカット定義ファイルを配置することによって、既存のショートカットを変更したり、新しいショートカットを追加することができるようになります。</para>
+    <para>メインメニューに表示されるほとんどの項目には、新しいショートカットを割り当てることができます。OmegaT の個人設定フォルダー（詳しくは<link linkend="user.files">個人設定ファイル</link>を参照のこと）にショートカット定義ファイルを配置することによって、既存のショートカットを変更したり、新しいショートカットを追加することができるようになります。</para>
 
     <para>ショートカット定義ファイルには必ず <filename>MainMenuShortcuts.properties</filename> という名前を付け、ショートカット定義を少なくとも一行は記述しておく必要があります。空行も含めることができます。また「//」で始まる行はコメント行として扱われます。「//」から行末までは、すべて無視されます。</para>
 
@@ -16,14 +16,13 @@
 
     <para>ショートカット定義構文は、次の通りです：<code>&lt;メニュー項目コード&gt;=&lt;ショートカット&gt;</code>。<emphasis>&lt;メニュー項目コード&gt;</emphasis> の値は、後述する表を参照してください。<emphasis>&lt;ショートカット&gt;</emphasis> には割り当てたいキーの組み合わせを指定します<footnote>
         <para>キーストローク（ショートカット）の完全な構文定義は、Oracle による次の Java 1.6 技術文書（ページの最後）を参照してください：<ulink url="http://docs.oracle.com/javase/jp/6/api/javax/swing/KeyStroke.html">Java 1.6 keystrokes shortcuts</ulink></para>
-      </footnote>.</para>
+      </footnote></para>
 
     <para>&lt;ショートカット&gt; は次の形式に従います：０個以上の <code>&lt;修飾子&gt;</code>、続いて０個または１個の <code>&lt;イベント&gt;</code>、続いて１個の <code>&lt;キー&gt;</code>。ただし：<itemizedlist>
         <listitem>
           <para><code>&lt;修飾子&gt;</code> は次の値を取ります：<emphasis>shift</emphasis>、<emphasis>control</emphasis>、<emphasis>ctrl</emphasis>、<emphasis>meta</emphasis><footnote>
               <para>Mac では、修飾子 <emphasis>meta</emphasis> の代わりに <emphasis>command</emphasis> キーを指定します。</para>
-            </footnote>, <emphasis>alt</emphasis>,
-          <emphasis>altGraph</emphasis></para>
+            </footnote>、<emphasis>alt</emphasis>、<emphasis>altGraph</emphasis></para>
         </listitem>
 
         <listitem>
@@ -33,14 +32,14 @@
         <listitem>
           <para>そして <code>&lt;キー&gt;</code> には、キーボード上で利用可能な任意のキーを指定できます<footnote>
               <para>利用できるキーイベント（キー）の一覧は、Oracle による次の Java 1.6 技術文書を参照してください：<ulink url="http://docs.oracle.com/javase/jp/6/api/java/awt/event/KeyEvent.html">Java 1.6 keyEvents description</ulink></para>
-            </footnote>.</para>
+            </footnote>。</para>
         </listitem>
       </itemizedlist></para>
 
     <para>例として、OmegaT のデフォルトのショートカット<footnote>
-        <para>デフォルトの OmegaT のショートカット定義ファイルは Sourceforge から入手できます：<ulink url="http://omegat.svn.sourceforge.net/viewvc/omegat/branches/release-2-5/src/org/omegat/gui/main/MainMenuShortcuts.properties">デフォルトの OmegaT ショートカット</ulink></para>
+        <para>デフォルトの OmegaT のショートカット定義ファイルは Sourceforge から入手できます：<ulink url="http://omegat.svn.sourceforge.net/viewvc/omegat/branches/release-2-6/src/org/omegat/gui/main/MainMenuShortcuts.properties">デフォルトの OmegaT ショートカット</ulink></para>
 
-        <para>Mac 向けのデフォルトの OmegaT のショートカット定義ファイルも Sourceforge から入手できます。それらはすべて「ctrl」の代わりに「meta」を使用しています：<ulink url="http://omegat.svn.sourceforge.net/viewvc/omegat/branches/release-2-5/src/org/omegat/gui/main/MainMenuShortcuts.mac.properties">デフォルトの Mac 向け OmegaT ショートカット</ulink></para>
+        <para>Mac 向けのデフォルトの OmegaT のショートカット定義ファイルも Sourceforge から入手できます。それらはすべて「ctrl」の代わりに「meta」を使用しています：<ulink url="http://omegat.svn.sourceforge.net/viewvc/omegat/branches/release-2-6/src/org/omegat/gui/main/MainMenuShortcuts.mac.properties">デフォルトの Mac 向け OmegaT ショートカット</ulink></para>
       </footnote>は次のようになっています：</para>
 
     <itemizedlist>
@@ -55,7 +54,8 @@
 
     <para>最初のショートカットは（プロジェクトを）<guimenuitem>［開く...］</guimenuitem>用で、その次は<guimenuitem>［用語の追加］</guimenuitem>用です。</para>
 
-    <para>プロジェクトを開くために <keycombo><keycap>Shift</keycap> <keycap>Ctrl</keycap> <keycap>O</keycap></keycombo> を使いたいと思ったら、<filename>MainMenuShortcuts.properties</filename> ファイルを次のように修正してください：<code></code></para>
+    <para>プロジェクトを開くために <keycombo><keycap>Shift</keycap> <keycap>Ctrl</keycap> <keycap>O</keycap></keycombo> を使いたいと思ったら、<filename>MainMenuShortcuts.properties</filename> ファイルを次のように修正してください：<code>
+    </code></para>
 
     <para><code>projectOpenMenuItem=shift ctrl O</code></para>
 
@@ -74,9 +74,9 @@
       <title>プロジェクトメニュー</title>
 
       <tgroup cols="3" colsep="1">
-        <colspec align="left" colname="1" colnum="1" colwidth="120"/>
+        <colspec align="left" colname="1" colnum="1"/>
 
-        <colspec align="left" colname="2" colnum="2" colwidth="80"/>
+        <colspec align="left" colname="2" colnum="2"/>
 
         <colspec align="left" colname="3" colnum="3"/>
 
@@ -105,6 +105,14 @@
             <entry><keycap>Ctrl+O</keycap></entry>
 
             <entry>projectOpenMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>チームプロジェクトをダウンロード</entry>
+
+            <entry/>
+
+            <entry>projectTeamNewMenuItem</entry>
           </row>
 
           <row>
@@ -190,9 +198,9 @@
       <title>編集メニュー</title>
 
       <tgroup cols="3" colsep="1">
-        <colspec align="left" colname="1" colnum="1" colwidth="120"/>
+        <colspec align="left" colname="1" colnum="1"/>
 
-        <colspec align="left" colname="2" colnum="2" colwidth="80"/>
+        <colspec align="left" colname="2" colnum="2"/>
 
         <colspec align="left" colname="3" colnum="3"/>
 
@@ -336,7 +344,7 @@
           </row>
 
           <row>
-            <entry>すべて小文字に</entry>
+            <entry>大/小文字設定→すべて小文字に</entry>
 
             <entry/>
 
@@ -344,7 +352,7 @@
           </row>
 
           <row>
-            <entry>すべて大文字に</entry>
+            <entry>大/小文字設定→すべて大文字に</entry>
 
             <entry/>
 
@@ -352,7 +360,7 @@
           </row>
 
           <row>
-            <entry>Title case（単語の先頭を大文字）に</entry>
+            <entry>大/小文字設定→Title case（単語の先頭を大文字）に</entry>
 
             <entry/>
 
@@ -366,6 +374,23 @@
 
             <entry>cycleSwitchCaseMenuItem</entry>
           </row>
+
+          <row>
+            <entry>既定値訳文として使用</entry>
+
+            <entry/>
+
+            <entry>editMultipleDefault</entry>
+          </row>
+
+          <row>
+            <entry>新しい訳文を登録</entry>
+
+            <entry/>
+
+            <entry>editMultipleAlternate</entry>
+          </row>
+
         </tbody>
       </tgroup>
     </table>
@@ -378,9 +403,9 @@
       <title>移動メニュー</title>
 
       <tgroup cols="3" colsep="1">
-        <colspec align="left" colname="1" colnum="1" colwidth="120"/>
+        <colspec align="left" colname="1" colnum="1"/>
 
-        <colspec align="left" colname="2" colnum="2" colwidth="80"/>
+        <colspec align="left" colname="2" colnum="2"/>
 
         <colspec align="left" colname="3" colnum="3"/>
 
@@ -428,17 +453,33 @@
           </row>
 
           <row>
-            <entry>分節の選択履歴を戻る</entry>
+            <entry>次のメモ</entry>
 
-            <entry><keycap>Ctrl+Shift+P</keycap></entry>
+            <entry/>
 
-            <entry>gotoHistoryForwardMenuItem</entry>
+            <entry>gotoNextNoteMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>前のメモ</entry>
+
+            <entry/>
+
+            <entry>gotoPreviousNoteMenuItem</entry>
           </row>
 
           <row>
             <entry>分節の選択履歴を進む</entry>
 
             <entry><keycap>Ctrl+Shift+N</keycap></entry>
+
+            <entry>gotoHistoryForwardMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>分節の選択履歴を戻る</entry>
+
+            <entry><keycap>Ctrl+Shift+P</keycap></entry>
 
             <entry>gotoHistoryBackMenuItem</entry>
           </row>
@@ -458,9 +499,9 @@
       </indexterm>
 
       <tgroup cols="3" colsep="1">
-        <colspec align="left" colname="1" colnum="1" colwidth="120"/>
+        <colspec align="left" colname="1" colnum="1"/>
 
-        <colspec align="left" colname="2" colnum="2" colwidth="80"/>
+        <colspec align="left" colname="2" colnum="2"/>
 
         <colspec align="left" colname="3" colnum="3"/>
 
@@ -508,6 +549,38 @@
           </row>
 
           <row>
+            <entry>メモ付き分節を色付け</entry>
+
+            <entry/>
+
+            <entry>viewMarkNotedSegmentsCheckBoxMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>ノーブレークスペースを色付け</entry>
+
+            <entry/>
+
+            <entry>viewMarkNBSPCheckBoxMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>空白文字を色付け</entry>
+
+            <entry/>
+
+            <entry>viewMarkWhitespaceCheckBoxMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>双方向アルゴリズム制御文字を色付け</entry>
+
+            <entry/>
+
+            <entry>viewMarkBidiCheckBoxMenuItem</entry>
+          </row>
+
+           <row>
             <entry>更新情報を表示 / 表示しない</entry>
 
             <entry/>
@@ -515,7 +588,7 @@
             <entry>viewDisplayModificationInfoNoneRadioButtonMenuItem</entry>
           </row>
 
-          <row>
+         <row>
             <entry>更新情報を表示 / 現在の分節で表示</entry>
 
             <entry/>
@@ -542,9 +615,9 @@
       <title>ツールメニュー</title>
 
       <tgroup cols="3" colsep="1">
-        <colspec align="left" colname="1" colnum="1" colwidth="120"/>
+        <colspec align="left" colname="1" colnum="1"/>
 
-        <colspec align="left" colname="2" colnum="2" colwidth="80"/>
+        <colspec align="left" colname="2" colnum="2"/>
 
         <colspec align="left" colname="3" colnum="3"/>
 
@@ -594,9 +667,9 @@
       <title>設定メニュー</title>
 
       <tgroup cols="3" colsep="1">
-        <colspec align="left" colname="1" colnum="1" colwidth="120"/>
+        <colspec align="left" colname="1" colnum="1"/>
 
-        <colspec align="left" colname="2" colnum="2" colwidth="80"/>
+        <colspec align="left" colname="2" colnum="2"/>
 
         <colspec align="left" colname="3" colnum="3"/>
 
@@ -724,7 +797,7 @@
           </row>
 
           <row>
-            <entry>保存...</entry>
+            <entry>保存と訳文ファイル生成</entry>
 
             <entry/>
 
@@ -758,9 +831,9 @@
       <title>ヘルプメニュー</title>
 
       <tgroup cols="3" colsep="1">
-        <colspec align="left" colname="1" colnum="1" colwidth="120"/>
+        <colspec align="left" colname="1" colnum="1"/>
 
-        <colspec align="left" colname="2" colnum="2" colwidth="80"/>
+        <colspec align="left" colname="2" colnum="2"/>
 
         <colspec align="left" colname="3" colnum="3"/>
 

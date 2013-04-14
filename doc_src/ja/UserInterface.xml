@@ -14,9 +14,9 @@
         </indexterm></title>
 
       <tgroup cols="2" colsep="0" rowsep="1" title="Main OMegaT window">
-        <colspec align="left" colnum="1" colwidth="90"/>
+        <colspec align="left" colnum="1"/>
 
-        <colspec align="left" colnum="2" colwidth=""/>
+        <colspec align="left" colnum="2"/>
 
         <tbody>
           <row>
@@ -70,9 +70,9 @@
         </indexterm></title>
 
       <tgroup cols="2" colsep="0" rowsep="1" title="Other windows">
-        <colspec align="left" colnum="1" colwidth="90"/>
+        <colspec align="left" colnum="1"/>
 
-        <colspec align="left" colnum="2" colwidth=""/>
+        <colspec align="left" colnum="2"/>
 
         <tbody>
           <row>
@@ -80,7 +80,7 @@
                 <primary>ショートカット</primary> <secondary>タグ検証 - Ctrl+T</secondary>
               </indexterm>タグ検証ウィンドウ</guimenuitem></entry>
 
-            <entry><para>タグ検証の結果を閲覧できます。<keycombo><keycap>Ctrl</keycap> <keycap>T</keycap></keycombo> で開き、<keycap>Esc</keycap> で閉じます。</para></entry>
+            <entry><para>タグ検証の結果を閲覧できます。［<keycombo><keycap>Ctrl</keycap> <keycap>T</keycap></keycombo>］で開き、［<keycap>Esc</keycap>］で閉じます。</para></entry>
           </row>
 
           <row>
@@ -88,7 +88,7 @@
                 <primary>ショートカット</primary> <secondary>ヘルプ - F1</secondary>
               </indexterm>ヘルプウィンドウ</guimenuitem></entry>
 
-            <entry><para>取扱説明書を閲覧できます。<keycap>F1</keycap> で開き、<keycap>［Esc］</keycap> で閉じます。</para></entry>
+            <entry><para>取扱説明書を閲覧できます。［<keycap>F1</keycap>］で開き、［<keycap>Esc</keycap>］で閉じます。</para></entry>
           </row>
 
           <row>
@@ -96,7 +96,7 @@
 
             <entry><para>プロジェクトの翻訳状況を表示します。<menuchoice><guimenu><indexterm class="singular">
                     <primary>ツールメニュー</primary> <secondary>翻訳状況</secondary>
-                  </indexterm>ツール</guimenu> <guimenuitem>翻訳状況</guimenuitem></menuchoice> からウィンドウを開きます。</para></entry>
+                  </indexterm>［ツール］</guimenu><guimenuitem>［翻訳状況］</guimenuitem></menuchoice>からウィンドウを開きます。</para></entry>
           </row>
 
           <row>
@@ -104,7 +104,7 @@
 
             <entry><para>プロジェクトの参考訳文の一致率を閲覧できます。<menuchoice><guimenu><indexterm class="singular">
                     <primary>ツールメニュー</primary> <secondary>参考訳文の一致率</secondary>
-                  </indexterm>ツール</guimenu> <guimenuitem>参考訳文の一致率</guimenuitem></menuchoice> からウィンドウを開きます。</para></entry>
+                  </indexterm>［ツール］</guimenu><guimenuitem>［参考訳文の一致率］</guimenuitem></menuchoice>からウィンドウを開きます。</para></entry>
           </row>
         </tbody>
       </tgroup>
@@ -116,9 +116,9 @@
         </indexterm></title>
 
       <tgroup cols="2" colsep="0" rowsep="1" title="Settings dialogs">
-        <colspec align="left" colnum="1" colwidth="90"/>
+        <colspec align="left" colnum="1"/>
 
-        <colspec align="left" colnum="2" colwidth=""/>
+        <colspec align="left" colnum="2"/>
 
         <tbody>
           <row>
@@ -128,7 +128,7 @@
                 <primary>ショートカット</primary> <secondary>プロジェクト設定 - Ctrl+E</secondary>
               </indexterm></entry>
 
-            <entry>プロジェクトで使用する言語とフォルダー構成を変更できます。ショートカット<guimenuitem>［Ctrl+E］</guimenuitem>または<menuchoice><guimenu>プロジェクト</guimenu> <guimenuitem>プロジェクト設定...</guimenuitem></menuchoice>で開き、<keycap>［Esc］</keycap>で閉じます。</entry>
+            <entry>プロジェクトで使用する言語とフォルダー構成を変更できます。ショートカット<guimenuitem>［Ctrl+E］</guimenuitem>または<menuchoice><guimenu>［プロジェクト］</guimenu><guimenuitem>［プロジェクト設定...］</guimenuitem></menuchoice>で開き、<keycap>［Esc］</keycap>で閉じます。</entry>
           </row>
 
           <row>
@@ -136,7 +136,7 @@
                 <primary>プロジェクト設定</primary> <secondary>字体設定</secondary>
               </indexterm></guimenuitem></entry>
 
-            <entry><para><application>OmegaT</application> が使用する字体を変更します。原文、訳文、参考訳文、用語集の表示に使用されます。メインメニューの<menuchoice><guimenu>設定</guimenu> <guimenuitem>字体...</guimenuitem></menuchoice>で開き、 <keycap>［Esc］</keycap> で閉じます。</para></entry>
+            <entry><para><application>OmegaT</application> が使用する字体を変更します。原文、訳文、参考訳文、用語集の表示に使用されます。メインメニューの<menuchoice><guimenu>［設定］</guimenu><guimenuitem>［字体...］</guimenuitem></menuchoice>で開き、 <keycap>［Esc］</keycap> で閉じます。</para></entry>
           </row>
 
           <row>
@@ -146,7 +146,7 @@
                 <primary>設定メニュー</primary> <secondary>ファイルフィルター</secondary>
               </indexterm></guimenuitem></entry>
 
-            <entry>OmegaT が対応するファイル形式の取り扱い方を設定します。<menuchoice><guimenu>設定</guimenu> <guimenuitem>ファイルフイルター...</guimenuitem></menuchoice>で開き、<keycap>［Esc］</keycap>で閉じます。</entry>
+            <entry>OmegaT が対応するファイル形式の取り扱い方を設定します。<menuchoice><guimenu>［設定］</guimenu><guimenuitem>［ファイルフイルター...］</guimenuitem></menuchoice>で開き、<keycap>［Esc］</keycap>で閉じます。</entry>
           </row>
 
           <row>
@@ -156,7 +156,7 @@
                 <primary>設定メニュー</primary> <secondary>分節化規則...</secondary>
               </indexterm></guimenuitem></entry>
 
-            <entry>文章を分節化する方法を設定します。<menuchoice><guimenu>設定</guimenu> <guimenuitem>分節化規則...</guimenuitem></menuchoice>で開き、<keycap>［Esc］</keycap>で閉じます。</entry>
+            <entry>文章を分節化する方法を設定します。<menuchoice><guimenu>［設定］</guimenu><guimenuitem>［分節化規則...］</guimenuitem></menuchoice>で開き、<keycap>［Esc］</keycap>で閉じます。</entry>
           </row>
 
           <row>
@@ -166,7 +166,7 @@
                 <primary>プロジェクト設定</primary> <secondary>翻訳入力行</secondary>
               </indexterm></guimenuitem></entry>
 
-            <entry>分節を移動する際の <application>OmegaT</application> の挙動を設定します。<menuchoice><guimenu>設定</guimenu> <guimenuitem>翻訳入力行...</guimenuitem></menuchoice>で開き、<keycap>［Esc］</keycap>で閉じます。</entry>
+            <entry>分節を移動する際の <application>OmegaT</application> の挙動を設定します。<menuchoice><guimenu>［設定］</guimenu><guimenuitem>［翻訳入力行...］</guimenuitem></menuchoice>で開き、<keycap>［Esc］</keycap>で閉じます。</entry>
           </row>
         </tbody>
       </tgroup>
@@ -195,7 +195,7 @@
     <para>メインウィンドウは、いくつかのウィンドウ、メインメニュー、ステータスバーからなります。ウィンドウの名称部分をドラッグすると、表示位置を変更したり、独立したウィンドウとして表示させることができます。各ウィンドウの右上角には、その表示状態によって異なる、以下のようなボタンが表示されます。</para>
 
     <note>
-      <para>本来、開いていたり最小化していたりするはずのウィンドウが見当たらない場合は、<guisubmenu> ［設定］→［ウィンドウを初期値に復元］</guisubmenu>を選んでください。ウィンドウの配置をインストール直後の状態に復元します。</para>
+      <para>本来、開いていたり最小化していたりするはずのウィンドウが見当たらない場合は、<guisubmenu>［設定］→［ウィンドウを初期値に復元］</guisubmenu>を選んでください。ウィンドウの配置をインストール直後の状態に復元します。</para>
     </note>
 
     <table>
@@ -204,7 +204,7 @@
         </indexterm></title>
 
       <tgroup cols="2">
-        <colspec align="left" colnum="1" colwidth="60"/>
+        <colspec align="left" colnum="1"/>
 
         <tbody>
           <row>
@@ -294,7 +294,7 @@
         </indexterm></title>
 
       <tgroup cols="2">
-        <colspec align="left" colnum="1" colwidth="60"/>
+        <colspec align="left" colnum="1"/>
 
         <tbody>
           <row>
@@ -339,7 +339,7 @@
 
       <para>翻訳入力行の設定により、未翻訳の分節の編集領域は、空欄になっているか、原文と同じテキスト、または最も一致率の高い参考訳文が入った状態になります。別の分節に移ると、入力した訳文が確定され、翻訳メモリに蓄積されます。その分節の訳文を原文と同じにしたいときは、編集領域のテキストを削除して空欄にしておいてください（<keycap>［Ctrl+A］</keycap>で全選択して<keycap>［Del］</keycap>で削除するか、右クリックから<keycap>［訳文を削除］</keycap>を選びます）OmegaT は訳文が原文とまったく同じ状態でも記憶することができます。これは商標や固有名詞、第３の言語の一部など、翻訳の必要がない部分を残しておきたいときに便利です。詳細は、「<emphasis>翻訳入力行の設定</emphasis>」を参照してください。</para>
 
-      <para>編集ウィンドウ上で右クリックした場合はポップアップメニューが開き、<emphasis role="bold">切り取り</emphasis>、<emphasis role="bold">コピー</emphasis>、<emphasis role="bold">貼り付け</emphasis>（ショートカットの <keycombo><keycap>Ctrl</keycap> <keycap>X</keycap></keycombo>、<keycombo><keycap>Ctrl</keycap> <keycap>C</keycap></keycombo>、<keycombo><keycap>Ctrl</keycap> <keycap>V</keycap></keycombo> と同じ）および<emphasis role="bold">分節へ移動</emphasis>コマンドを利用できます。</para>
+      <para>編集ウィンドウ上で右クリックした場合はポップアップメニューが開き、<emphasis role="bold">［切り取り］</emphasis>、<emphasis role="bold">［コピー］</emphasis>、<emphasis role="bold">［貼り付け］</emphasis>（ショートカットの ［<keycombo><keycap>Ctrl</keycap><keycap>X</keycap></keycombo>］、［<keycombo><keycap>Ctrl</keycap><keycap>C</keycap></keycombo>］、［<keycombo><keycap>Ctrl</keycap><keycap>V</keycap></keycombo>］と同じ）および<emphasis role="bold">［分節へ移動］</emphasis>コマンドを利用できます。</para>
     </section>
 
     <section id="match.viewer">
@@ -371,9 +371,9 @@
           <primary>ショートカット</primary> <secondary>参考訳文の選択 - Ctrl+#N</secondary>
         </indexterm>もちろん、５番目の参考訳文が存在しないときに［<keycombo><keycap>Ctrl</keycap> <keycap>5</keycap></keycombo>］を押しても、何も起こりません。選択した（太字で表示された）参考訳文を、現在編集中の訳文と置換して使用するには<guimenuitem>Ctrl+R</guimenuitem><indexterm class="singular">
           <primary>ショートカット</primary> <secondary>参考訳文に置換 - Ctrl+R</secondary>
-        </indexterm> を押します。現在のカーソル位置に挿入する場合は <guimenuitem>Ctrl+I <indexterm class="singular">
+        </indexterm> を押します。現在のカーソル位置に挿入する場合は［<guimenuitem>Ctrl+I <indexterm class="singular">
           <primary>ショートカット</primary> <secondary>参考訳文を挿入 - Ctrl+I</secondary>
-        </indexterm></guimenuitem> を押します。</para>
+        </indexterm></guimenuitem>］を押します。</para>
 
       <para>一致率は、簡単に言えば、比較する分節どうしで共通している単語数を、長い方の分節の単語数で割ったものです。選択された状態の参考訳文は太字で表示されます。翻訳しようとしている分節に存在しない単語は青字で、それに隣接する単語は緑字で表示されます。上記の例では、「<emphasis role="bold">Context menu command</emphasis>」が原文分節です。先頭の参考訳文は、一致率 100% です。すべての単語が一致しています。続く２つの参考訳文も同じ一致率ですが、４番目は似て非なるものです。一致率を表示している行には他にも、その参考訳文を収録している翻訳メモリ<indexterm class="singular">
           <primary>翻訳メモリ</primary> <secondary>参考訳文</secondary>
@@ -436,9 +436,9 @@
             </indexterm></title>
 
           <tgroup cols="2" colsep="1" rowsep="1" title="Match pane setup">
-            <colspec align="left" colnum="1" colwidth="90"/>
+            <colspec align="left" colnum="1"/>
 
-            <colspec align="left" colnum="2" colwidth=""/>
+            <colspec align="left" colnum="2"/>
 
             <tbody>
               <row>
@@ -569,7 +569,7 @@
     <section>
       <title>メモウィンドウ</title>
 
-      <para>翻訳者は現在の分節にメモを添付することができます。後で現在の分節に戻って翻訳しなおしたい場合や、複数訳文の他の値を確認してまわる場合、同僚に意見を聞きたい場合などに使います。メモを見るには、<guisubmenu>［移動］→［次のメモ］</guisubmenu> and <guisubmenu>［移動］→［前のメモ］</guisubmenu>を使います。</para>
+      <para>翻訳者は現在の分節にメモを添付することができます。後で現在の分節に戻って翻訳しなおしたい場合や、複数訳文の他の値を確認してまわる場合、同僚に意見を聞きたい場合などに使います。メモを見るには、<guisubmenu>［移動］→［次のメモ］</guisubmenu>か<guisubmenu>［移動］→［前のメモ］</guisubmenu>を使います。</para>
     </section>
 
     <section>
@@ -623,9 +623,9 @@
           <primary>OmegaT のウィンドウ</primary> <secondary>翻訳対象ファイル一覧</secondary>
         </indexterm></title>
 
-      <para>翻訳対象ファイル一覧ウィンドウには、プロジェクトに含まれるファイル一式と、プロジェクトに関する情報が表示されます。OmegaT がプロジェクトを読み込むと、翻訳対象ファイル一覧が自動的に表示されます。<guimenuitem>［Ctrl+L］<indexterm class="singular">
+      <para>翻訳対象ファイル一覧ウィンドウには、プロジェクトに含まれるファイル一式と、プロジェクトに関する情報が表示されます。OmegaT がプロジェクトを読み込むと、翻訳対象ファイル一覧が自動的に表示されます。<keycap><guimenuitem>［Ctrl+L］<indexterm class="singular">
           <primary>ショートカット</primary> <secondary>翻訳対象ファイル一覧 - Ctrl+L</secondary>
-        </indexterm></guimenuitem>で開き、<keycap>［Esc］</keycap>で閉じます。翻訳対象ファイル一覧ウィンドウは、次の情報を表示します：</para>
+        </indexterm></guimenuitem></keycap>で開き、<keycap>［Esc］</keycap>で閉じます。翻訳対象ファイル一覧ウィンドウは、次の情報を表示します：</para>
 
       <itemizedlist>
         <listitem>
@@ -635,7 +635,7 @@
 
       <itemizedlist>
         <listitem>
-          <para>現在、編集ウィンドウで開かれているファイルは、青い背景色でハイライト表示されます。<keycap>Enter</keycap> キーを押すと、編集ウィンドウに遷移して、選択したファイルの先頭に移動します。</para>
+          <para>現在、編集ウィンドウで開かれているファイルは、青い背景色でハイライト表示されます。［<keycap>Enter</keycap>］キーを押すと、編集ウィンドウに遷移して、選択したファイルの先頭に移動します。</para>
         </listitem>
       </itemizedlist>
 
@@ -659,7 +659,7 @@
 
       <para><emphasis role="bold"><indexterm class="singular">
           <primary>原文ファイル</primary> <secondary>プロジェクトへのファイル追加</secondary>
-        </indexterm>プロジェクトへのファイル追加：</emphasis><guimenuitem>［原文ファイル追加...］</guimenuitem>ボタンをクリックして、原文ファイルを追加できます。これを行うと、選択したファイルが <filename>source</filename> フォルダーへ追加され、プロジェクトが再読み込みされます。<guimenuitem>［MediaWiki から原文ファイルを追加...］</guimenuitem>ボタンを押して URL を指定すると、MediaWiki 形式で記述されたウェブページを原文ファイルとして追加することができます。</para>
+        </indexterm>プロジェクトへのファイル追加：</emphasis><guimenuitem>［原文ファイル追加...］</guimenuitem>ボタンをクリックして、原文ファイルを追加できます。選択したファイルは <filename>source</filename> フォルダーへ追加され、プロジェクトが再読み込みされます。<guimenuitem>［MediaWiki から原文ファイルを追加...］</guimenuitem>ボタンを押して URL を指定すると、MediaWiki 形式で記述されたウェブページを原文ファイルとして追加することができます。</para>
     </section>
 
     <section id="section.search.window">
@@ -667,7 +667,7 @@
           <primary>OmegaT のウィンドウ</primary> <secondary>検索ウィンドウ</secondary>
         </indexterm></title>
 
-      <para>プロジェクト内のある分節を見つけるために、検索ウィンドウを活用できます。同時に複数の検索ウィンドウを開くこともできます。新しい検索ウィンドウは、メインウィンドウ上で <keycombo><keycap>Ctrl</keycap> <keycap>F</keycap></keycombo> を押すと開きます。検索ウィンドウは、検索文字列またはキーワードを入力するテキスト領域と、検索の設定を行うラジオボタンやチェックボックス、そしてその下の検索結果を表示する領域からなります。検索ウィンドウの詳細については「<emphasis><link linkend="chapter.user.interface">検索</link></emphasis>」の章を参照してください。</para>
+      <para>プロジェクト内のある分節を見つけるために、検索ウィンドウを活用できます。同時に複数の検索ウィンドウを開くこともできます。新しい検索ウィンドウは、メインウィンドウ上で［<keycombo><keycap>Ctrl</keycap><keycap>F</keycap></keycombo>］を押すと開きます。検索ウィンドウは、検索文字列またはキーワードを入力するテキスト領域と、検索の設定を行うラジオボタンやチェックボックス、そしてその下の検索結果を表示する領域からなります。検索ウィンドウの詳細については「<emphasis><link linkend="chapter.user.interface">検索</link></emphasis>」の章を参照してください。</para>
     </section>
 
     <section id="section.tag.validation">
@@ -697,7 +697,7 @@
 
       <para>原文と訳文で比較しやすいよう、タグは青い太字で強調表示されます。分節番号をクリックすると、編集ウィンドウにその分節を表示できます。必要に応じて訳文を修正し、 <guimenuitem>［Ctrl+T］</guimenuitem>を押すと再度タグ検証ウィンドウに戻り、その他のエラーを表示します。上図の例のうち、１番目と３番目はタグの組み合わせが間違っている例で、２番目は開始タグの &lt; 文字が抜けている例です。</para>
 
-      <para>タグエラーは、タグ操作によって、原文の分節にあるタグの登場順序や数が、訳文と一致しない場合におこります。タグ操作には、必要なもの、行っても問題ないものもありますが、中には翻訳後の文書を作成した際に問題となるものもあります。タグがあるということは、多くの場合、ある種のフォーマット・整形がそこで行われているということを表します。原文テキストの整形を単純にしておくと、タグは減ります。</para>
+      <para>タグエラーは、タグ操作によって、原文の分節にあるタグの登場順序や数が、訳文と一致しない場合におこります。タグ操作には、必要なもの、行っても問題ないものもありますが、中には翻訳後の文書を作成した際に問題となるものもあります。タグがあるということは、多くの場合、ある種の書式整形がそこで行われているということを表します。原文テキストの整形を単純にしておくと、タグは減ります。</para>
     </section>
 
     <section>
@@ -731,7 +731,7 @@
           <primary>参考訳文の一致率</primary> <seealso>ツールメニュー</seealso>
         </indexterm></title>
 
-      <para>参考訳文の一致率は、<guimenuitem>［ツール］→［参考訳文の一致率］</guimenuitem>から開きます。値の計算には CPU を多く使用し、時間がかかることがあります。そのため、処理中にはプログレスバーが表示されます。一致率は、事実上の業界標準にしたがい、次のグループに分類されます：繰り返し、完全に一致、95% - 100%、85% - 94%、75% - 84%、50% - 74%、一致しない。この情報は、文節数、単語数、文字数（空白を除く）、文字数（空白を含む）それぞれについて、計算されます。OmegaT と他の翻訳支援ツールでは、一致率に相違が見られる場合がありますので、注意してください。<figure>
+      <para>参考訳文の一致率は、<guimenuitem>［ツール］→［参考訳文の一致率］</guimenuitem>から開きます。値の計算には CPU を多く使用し、時間がかかることがあります。そのため、処理中にはプログレスバーが表示されます。一致率は、事実上の業界標準にしたがい、次のグループに分類されます：繰り返し、完全に一致、95% - 100%、85% - 94%、75% - 84%、50% - 74%、一致しない。この情報は、分節数、単語数、文字数（空白を除く）、文字数（空白を含む）それぞれについて、計算されます。OmegaT と他の翻訳支援ツールでは、一致率に相違が見られる場合がありますので、注意してください。<figure>
           <title>参考訳文の一致率</title>
 
           <mediaobject>
@@ -745,7 +745,7 @@
           </mediaobject>
         </figure></para>
 
-      <para>これらの合計値は、そのプロジェクトに必要な作業を示す、かなり（少なくとも可能な限り）良い指標になります。したがって、翻訳の費用と価格を見積もるための基礎資料として使うことができます。</para>
+      <para>これらの合計値は、そのプロジェクトに必要な作業を示す、かなり（少なくとも可能な限り）良い指標になります。これを、翻訳にかかる経費や料金を見積もるための基礎資料として使うことができるでしょう。</para>
 
       <para>最終列の「文字数（空白を含む）」の値には、分節と分節のあいだの空白文字は含まれていません。「繰り返し」は、同一内容の分節が何度も使用されている場合を表しています。最初の分節とその内容は「一致しない」に分類されます。そして残りは、最初の分節の「繰り返し」として分類されます。プロジェクトの翻訳メモリの中に、同一の複数分節に対応する翻訳が存在する場合、これらの分節は、他の翻訳済みの繰り返しの無い分節と一緒に、「完全に一致」に分類されます。繰り返しの無い分節数が必要であれば、翻訳済みか否かにかかわらず、翻訳状況ウィンドウの方で確認できます。</para>
 
@@ -771,7 +771,7 @@
           <primary>ヘルプメニュー</primary> <secondary>取扱説明書...</secondary>
         </indexterm>［ヘルプ］→［取扱説明書...］</guimenuitem>を選びます。ウィンドウには［戻る］と［目次］の２つのボタンがあります。この取扱説明書は、章から章へリンクした HTML 形式の文書です。ウェブブラウザー上での操作と同様に、各リンクをクリックすると対応したページを表示できます。</para>
 
-      <para>取扱説明書は OmegaT のインストールフォルダー内の docs フォルダーにあります。たとえば英語版を見たければ <filename>docs/en/index.html</filename> ファイルをウェブブラウザーで開けば閲覧できます。こうすることで、OmegaT 組み込みのヘルプブラウザーからは開けない外部サイトへのリンクも、たどって開くことができます。</para>
+      <para>取扱説明書は OmegaT のインストールフォルダー内の <filename>docs</filename> フォルダーにあります。たとえば英語版を見たければ <filename>docs/en/index.html</filename> ファイルをウェブブラウザーで開けば閲覧できます。こうすることで、OmegaT 組み込みのヘルプブラウザーからは開けない外部サイトへのリンクも、たどって開くことができます。</para>
     </section>
   </section>
 </chapter>

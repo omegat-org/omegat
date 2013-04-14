@@ -17,9 +17,9 @@
   <table id="table.language.code.list">
     <title>ISO 639-1/639-2 言語コード一覧</title>
     <tgroup cols="3" align="left" colsep="1" rowsep="1">
-      <colspec align="left" colnum="1" colwidth="200"/>
-      <colspec align="left" colnum="2" colwidth="100"/>
-      <colspec align="left" colnum="3" colwidth="100"/>
+      <colspec align="left" colnum="1"/>
+      <colspec align="left" colnum="2"/>
+      <colspec align="left" colnum="3"/>
       <thead>
         <row>
           <entry align="left">言語名</entry>

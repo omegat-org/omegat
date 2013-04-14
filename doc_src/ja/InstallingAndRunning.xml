@@ -41,9 +41,7 @@
 
       <para>いったん <application>OmegaT</application> をインストールしたならば、<emphasis><application>OmegaT</application>.jar</emphasis> をクリックして直接起動することができます。また、コマンドラインから起動することもできます。</para>
 
-      <para>しかし、一番簡単なのはプログラム <emphasis><application>OmegaT</application>.exe</emphasis> を実行することです。<indexterm class="singular">
-          <primary>OmegaT の実行</primary> <secondary>Windows</secondary> <tertiary>INI ファイル</tertiary>
-        </indexterm>この場合の起動時の引数は、OmegaT.exe ファイルと同じ場所にある <emphasis><application>OmegaT</application>.l4J.ini</emphasis> ファイルから読み込まれます。このファイルを編集することで起動引数を変更できます。以下に示した INI ファイルは、最大で 1GB のメモリを確保し、ユーザー言語として日本語を、国に日本を指定した例です：</para>
+      <para>しかし、一番簡単なのはプログラム <emphasis><application>OmegaT</application>.exe</emphasis> を実行することです。この場合の起動時の引数は、OmegaT.exe ファイルと同じ場所にある <emphasis><application>OmegaT</application>.l4J.ini</emphasis> ファイルから読み込まれます。このファイルを編集することで起動引数を変更できます。以下に示した INI ファイルは、最大で 1GB のメモリを確保し、ユーザー言語として日本語を、国に日本を指定した例です：</para>
 
       <literallayout><code># OmegaT.exe runtime configuration
 # To use a parameter, remove the '#' before the '-'
@@ -52,7 +50,10 @@
 # Language
 -Duser.language=JA
 # Country
--Duser.country=JP </code></literallayout> </section> <section>
+-Duser.country=JP</code></literallayout>
+    </section>
+
+    <section>
       <title>OmegaT のアップグレード<indexterm class="singular">
           <primary>OmegaT のアップグレード</primary> <secondary>Windows</secondary>
         </indexterm></title>
@@ -63,7 +64,7 @@
 
       <itemizedlist>
         <listitem>
-          <para><emphasis role="bold">上書きインストール</emphasis>新しいバージョンをインストールする際、単純にインストール先として既存の OmegaT と同じフォルダーを指定します。「古い」バージョンの OmegaT は上書きされますが、個人設定は引き継がれます。この中には、OmegaT の各種設定、<filename> OmegaT.l4J.ini</filename> ファイルに対する変更、そして（もしあれば）独自に作成した起動スクリプト（バッチファイル）が含まれます。</para>
+          <para><emphasis role="bold">上書きインストール：</emphasis>新しいバージョンをインストールする際、単純にインストール先として既存の OmegaT と同じフォルダーを指定します。「古い」バージョンの OmegaT は上書きされますが、個人設定は引き継がれます。この中には、OmegaT の各種設定、<filename> OmegaT.l4J.ini</filename> ファイルに対する変更、そして（もしあれば）独自に作成した起動スクリプト（バッチファイル）が含まれます。</para>
         </listitem>
       </itemizedlist>
 
@@ -71,7 +72,7 @@
 
       <itemizedlist>
         <listitem>
-          <para><emphasis role="bold">新しいフォルダーへインストール</emphasis>この方法を使うと、古いバージョンと新しいバージョンを共存させることができます。新しいバージョンに慣れるまでは、古いバージョンも使い続けたいという場合に、適しています。この方法でも、OmegaT の設定を引き継ぐことができます。ただし、次のような制限があります：</para>
+          <para><emphasis role="bold">新しいフォルダーへインストール：</emphasis>この方法を使うと、古いバージョンと新しいバージョンを共存させることができます。新しいバージョンに慣れるまでは、古いバージョンも使い続けたいという場合に、適しています。この方法でも、OmegaT の設定を引き継ぐことができます。ただし、次のような制限があります：</para>
 
           <itemizedlist>
             <listitem>
@@ -121,7 +122,7 @@
     </section>
 
     <section id="adding.OmegaT.to.your.menus.or.panels">
-      <title>メニュー（KDE）またはパネル（GNOME）への <application>OmegaT</application> の追加</title>
+      <title>メニュー（KDE）またはパネル（GNOME）への OmegaT の追加</title>
 
       <section id="KDE.users">
         <title>KDE 4 ユーザー<indexterm class="singular">
@@ -132,7 +133,7 @@
 
         <itemizedlist>
           <listitem>
-            <para><emphasis role="bold"><keysym>Alt+F2</keysym></emphasis> を押して KRunner を表示します。<emphasis>kmenuedit+enter</emphasis> と入力し、コマンドを実行します。KMenuEditor が表示されます。KMenuEditor から<emphasis>［ファイル］→［新規アイテム］</emphasis>を選びます。</para>
+            <para><emphasis role="bold"><keysym>Alt+F2</keysym></emphasis> を押して KRunner を表示します。<emphasis>kmenuedit+enter</emphasis> と入力し、コマンドを実行します。KMenuEditor が表示されます。KMenuEditor から［ファイル］→［新規アイテム］を選びます。</para>
           </listitem>
 
           <listitem>
@@ -168,7 +169,7 @@
           </listitem>
 
           <listitem>
-            <para>［名前］欄に <application>OmegaT</application> と入力します。［コマンド］欄には、ナビゲーションボタンを使用して <application>OmegaT</application> 起動スクリプト（展開したフォルダの中にある <application>OmegaT</application> という名称のファイル）を指定します。最後に［OK］をクリックします。</para>
+            <para>［名前］欄に <application>OmegaT</application> と入力します。［コマンド］欄には、ナビゲーションボタンを使用して OmegaT 起動スクリプト（展開したフォルダの中にある OmegaT という名称のファイル）を指定します。最後に［OK］をクリックします。</para>
           </listitem>
 
           <listitem>
@@ -229,13 +230,13 @@
 
       <para><emphasis><application>OmegaT</application>.app</emphasis> を複数起動したい場合は、代わりに <emphasis><application>OmegaT</application>.app/Contents/MacOS/</emphasis> にある <emphasis>JavaApplicationStub</emphasis> ファイルをダブルクリックしてください。</para>
 
-      <para><emphasis><application> </application></emphasis><application>OmegaT</application> をコマンドラインから起動する場合は、<emphasis>OmegaT.app/Contents/Resources/Java/</emphasis> にある <emphasis>OmegaT.jar</emphasis> ファイルを指定してください。詳細は「コマンドラインから OmegaT を起動する」を参照してください。</para>
+      <para><emphasis><application> </application></emphasis><application>OmegaT</application> をコマンドラインから起動する場合は、<emphasis><application>OmegaT</application>.app/Contents/Resources/Java/</emphasis> にある <emphasis><application>OmegaT</application>.jar</emphasis> ファイルを指定してください。詳細は「コマンドラインから OmegaT を起動する」を参照してください。</para>
     </section>
 
     <section id="Mac.OSX.goodies">
       <title>Max OS X での利点</title>
 
-      <para><emphasis><application>OmegaT</application>.app</emphasis> は Mac OS X の「サービス」を利用できます。Spotlight や Google などをサービスとして登録しておくと、<application>OmegaT</application> で選択した任意の単語をサービスで検索することができます。また AppleScript や Automator を使用して、よく行う作業をサービスやスクリプトとして登録しておくこともできます。</para>
+      <para><emphasis><application>OmegaT</application>.app</emphasis> は Mac OS X の「サービス」を利用できます。Spotlight や Google などをサービスとして登録しておくと、OmegaT で選択した任意の単語をサービスで検索することができます。また AppleScript や Automator を使用して、よく行う作業をサービスやスクリプトとして登録しておくこともできます。</para>
     </section>
   </section>
 
@@ -399,7 +400,7 @@
 
           <para><emphasis role="bold">-Dswing.aatext=true<indexterm class="singular">
               <primary>OmegaT の実行</primary> <secondary>起動スクリプトの引数</secondary> <tertiary>字体のアンチエイリアス</tertiary>
-            </indexterm></emphasis> この引数は、字体のアンチエイリアスを有効にするかどうかを設定します。有効にすると、字体の見た目を改善できます。</para>
+            </indexterm></emphasis> この引数は、字体のアンチエイリアスを有効にするかどうかを設定します。有効にすると、字体の見た目を改善できます。（日本語訳註：この方法は OmegaT 2.6.x までです。OmegaT 2.7 から Java 1.6 に移行したため「-Dawt.useSystemAAFontSettings=on」の方を使います）</para>
         </listitem>
 
         <listitem>

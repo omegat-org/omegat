@@ -15,14 +15,19 @@
 
       <para><application>OmegaT</application> のプロジェクトは、翻訳メモリファイル（拡張子 tmx）を４箇所に配置します。</para>
 
-      <variablelist> <varlistentry> <term><indexterm class="singular">
+      <variablelist>
+        <varlistentry>
+          <term><indexterm class="singular">
               <primary>翻訳メモリ</primary> <secondary>omegat フォルダー</secondary> <seealso>プロジェクトファイル</seealso>
             </indexterm>omegat フォルダー</term>
 
           <listitem>
             <para>omegat フォルダーには、<filename>project_save.tmx</filename> と、おそらく複数のバックアップファイルが含まれています。<filename>project_save.tmx</filename> ファイルには、プロジェクトを開始してから記録されたすべての分節が含まれています。このファイルはプロジェクトに必ず存在します。内容は、常に原文分節のアルファベット順に並べ替えされています。</para>
           </listitem>
-        </varlistentry> <varlistentry> <term><indexterm class="singular">
+        </varlistentry>
+
+        <varlistentry>
+          <term><indexterm class="singular">
               <primary>翻訳メモリ</primary> <secondary>メインプロジェクトフォルダー</secondary>
             </indexterm>メインプロジェクトフォルダー</term>
 
@@ -35,17 +40,20 @@
               </listitem>
 
               <listitem>
-                <para>level2 ファイルには、<application>OmegaT</application> 特有のタグが適切な TMX タグにカプセル化されて含まれます。したがってそのフォーマット情報は、TMX レベル2の翻訳メモリに対応した他の翻訳ツールや、<application>OmegaT</application> 自身で使用することができます。</para>
+                <para>level2 ファイルには、<application>OmegaT</application> 特有のタグが適切な TMX タグに変換された状態で含まれます。したがって整形情報は、TMX レベル 2 の翻訳メモリに対応した他の翻訳ツールや、<application>OmegaT</application> 自身で使用することができます。</para>
               </listitem>
 
               <listitem>
-                <para><application>OmegaT</application> ファイルには、<application>OmegaT</application> 特有のフォーマットを持ったタグが含まれるので、他の <application>OmegaT</application> プロジェクトで使用できます。</para>
+                <para><application>OmegaT</application> ファイルには、<application>OmegaT</application> 特有の整形情報を持ったタグが含まれるので、他の <application>OmegaT</application> プロジェクトで使用できます。</para>
               </listitem>
             </itemizedlist>
 
             <para>これらのファイルは、プロジェクトの内部翻訳メモリ <filename>project_save.tmx</filename> の複製と言えます。ただし、現在の原文に存在しない分節は含みません。これらのファイルは名前が変わっただけで、その内容については同一性を保っています。そのため、別のプロジェクトの <filename>tm</filename> フォルダーにコピーして使うことができます（次の項を参照してください）。</para>
           </listitem>
-        </varlistentry> <varlistentry> <term><filename><indexterm class="singular">
+        </varlistentry>
+
+        <varlistentry>
+          <term><filename><indexterm class="singular">
               <primary>翻訳メモリ</primary> <secondary>tm フォルダー</secondary> <seealso>プロジェクトファイル</seealso>
             </indexterm>tm</filename> フォルダー</term>
 
@@ -54,7 +62,7 @@
 
             <para>tm フォルダーに配置された翻訳メモリの内容は、参考訳文の候補を探す際に参照されます。これらのファイルに記録された翻訳済みの分節情報は、現在の原文分節とじゅうぶん一致した場合、参考訳文ウィンドウに表示されます。</para>
 
-            <para>また補助的な翻訳メモリの中の原文分節と、翻訳中のテキストとが同一の場合の挙動を、<menuchoice><guimenu>設定</guimenu> <guimenuitem>翻訳入力行...</guimenuitem></menuchoice> ダイアログで設定できます。たとえば、デフォルト設定のままであれば、補助的な翻訳メモリから自動挿入された訳文には、先頭に「<emphasis>[fuzzy]</emphasis>」という接頭辞が付きます。これにより、翻訳者が後から翻訳を見直すときに、その訳文が参考訳文のままなのかどうかを簡単に識別できます（「<link linkend="chapter.translation.editing">翻訳入力行</link>」の章を参照してください）。</para>
+            <para>また補助的な翻訳メモリの中の原文分節と、翻訳中のテキストとが同一の場合の挙動を、<menuchoice><guimenu>設定</guimenu> <guimenuitem>翻訳入力行...</guimenuitem></menuchoice> ダイアログで設定できます。たとえば、デフォルト設定のままであれば、補助的な翻訳メモリから自動挿入された訳文には、先頭に「<emphasis>[参考]</emphasis>」という接頭辞が付きます。これにより、翻訳者が後から翻訳を見直すときに、その訳文が参考訳文のままなのかどうかを簡単に識別できます（「<link linkend="chapter.translation.editing">翻訳入力行</link>」の章を参照してください）。</para>
 
             <para><filename>tm</filename> フォルダーの翻訳メモリに、同一の原文分節が複数存在し、しかもそれぞれの訳文が異なる、という事態はじゅうぶんに起こりえることです。複数の TMX ファイルは、そのファイル名の順番で読み込まれます。また TMX ファイル内の分節は、一行ずつ順次読み込まれます。この場合、原文分節が一致する最後の分節が、優先的に使われることになります（注意：もちろん、そもそもこのような事態が起こらないようにできるなら、それが一番望ましい対応です）。</para>
 
@@ -62,16 +70,22 @@
                 <primary>翻訳メモリ</primary> <secondary>圧縮</secondary>
               </indexterm></para>
           </listitem>
-        </varlistentry> <varlistentry> <term><indexterm class="singular">
+        </varlistentry>
+
+        <varlistentry>
+          <term><indexterm class="singular">
               <primary>翻訳メモリ</primary> <secondary>tm/auto フォルダー</secondary> <seealso>プロジェクトファイル</seealso>
             </indexterm>tm/auto フォルダー<indexterm class="singular">
               <primary>プロジェクト</primary> <secondary>下訳</secondary>
             </indexterm></term>
 
           <listitem>
-            <para>補助的な翻訳メモリの内容がすべて正しい、ということがあらかじめはっきりと分かっている場合は、そのファイルを <emphasis role="bold">tm/auto</emphasis> フォルダーに置いてください。そこから自動挿入される訳文には、「<emphasis>[fuzzy]</emphasis>」という接頭辞が付きません。この方法は、効率の良い<emphasis role="bold">下訳</emphasis>になります。「auto」の翻訳メモリから原文が一致する分節が見つかった箇所は、ユーザーの手を一切わずらわせることなく、すべてプロジェクトのメイン翻訳メモリに移し替えられます。</para>
+            <para>補助的な翻訳メモリの内容がすべて正しい、ということがあらかじめはっきりと分かっている場合は、そのファイルを <emphasis role="bold">tm/auto</emphasis> フォルダーに置いてください。そこから自動挿入される訳文には、「<emphasis>[参考]</emphasis>」という接頭辞が付きません。この方法は、効率の良い<emphasis role="bold">下訳</emphasis>になります。「auto」の翻訳メモリから原文が一致する分節が見つかった箇所は、ユーザーの手を一切わずらわせることなく、すべてプロジェクトのメイン翻訳メモリに移し替えられます。</para>
           </listitem>
-        </varlistentry> <varlistentry> <term><indexterm class="singular">
+        </varlistentry>
+
+        <varlistentry>
+          <term><indexterm class="singular">
               <primary>翻訳メモリ</primary> <secondary>tm/penalty-xxx フォルダー</secondary> <seealso>プロジェクトファイル</seealso>
             </indexterm>tm/penalty-xxx フォルダー</term>
 
@@ -81,7 +95,7 @@
         </varlistentry>
       </variablelist>
 
-      <para>必要に応じて、プロジェクト内の翻訳可能な全分節を含む TMX ファイル（<application>OmegaT</application> 形式）を、指定した場所に作成することもできます。下記「疑似翻訳メモリ」の項を参照してください。</para>
+      <para>必要に応じて、プロジェクト内の翻訳可能な全分節を含む TMX ファイル（<application>OmegaT</application> 形式）を、指定した場所に作成することもできます。下記「4. 疑似翻訳メモリ」の項を参照してください。</para>
 
       <para>すべての翻訳メモリはプロジェクトを開いた時点でメモリ上に読み込まれます。プロジェクトのメイン翻訳メモリについては、バックアップが定期的に作成されます（次章を参照）。そして <filename>project_save.tmx</filename> もまた、プロジェクトを閉じるか再読み込みした時点で保存または更新されます。したがって、翻訳作業の途中で補助的な翻訳メモリをフォルダーに追加した場合でも、それを使うために作業中のプロジェクトをいったん終了する必要はありません。単純にプロジェクトを再読み込みしてください。そうすれば、追加した翻訳メモリを使えるようになります。</para>
 
@@ -207,7 +221,7 @@
 
       <para>一部で、不正な TMX ファイルを生成してしまうツールがあることが確認されています。そのような翻訳メモリを OmegaT に参照させるには、事前にファイルを修復しておく必要があります。でなければ、OmegaT はエラーでそのファイルを読み込めないでしょう。修正は簡単な操作で行えることが多く、OmegaT が出力するエラーメッセージはじゅうぶんその助けになります。不明な点があればユーザーグループに問い合わせてください。</para>
 
-      <para>OmegaT はバージョン 1.4 の TMX ファイル（レベル 1、レベル 2 とも）を出力します。出力されたレベル 2 TMXファイルは、レベル 2 の仕様に完全に準拠してはいませんが、それに近い水準です。TMX レベル 2 に対応した他の翻訳ツールは、このファイルから参考訳文を問題なく利用できます。もし、テキスト情報のみが必要な場合（整形情報が必要でない場合）は、OmegaT が作成したレベル 1 ファイルの方を使用してください。</para>
+      <para>OmegaT はバージョン 1.4 の TMX ファイル（レベル 1、レベル 2 とも）を出力します。出力されたレベル 2 TMX ファイルは、レベル 2 の仕様に完全に準拠してはいませんが、それに近い水準です。TMX レベル 2 に対応した他の翻訳ツールは、このファイルから参考訳文を問題なく利用できます。もし、テキスト情報のみが必要な場合（整形情報が必要でない場合）は、OmegaT が作成したレベル 1 ファイルの方を使用してください。</para>
     </section>
 
     <section id="Creating.a.translation.memory.for.selected.documents">
@@ -267,7 +281,7 @@
           <primary>翻訳メモリ</primary> <secondary>代替言語ペア</secondary>
         </indexterm></title>
 
-      <para>ここに、完了したプロジェクト（たとえばオランダ語の原文を英語に翻訳したもの）があるとします。次に、これを中国語に翻訳する必要が発生しました。翻訳者はオランダ語を解しませんが、英語であれば理解できます。このような状況では、蘭中翻訳を、蘭英の翻訳メモリを介して行うことができます。</para>
+      <para>ここに、完了したプロジェクト（たとえばオランダ語の原文を英語に翻訳したもの）があるとします。次に、これを中国語に翻訳する必要が発生しました。翻訳者はオランダ語を解しませんが、英語であれば理解できます。このような状況では、蘭中翻訳を、蘭英の翻訳メモリを介して行うしかありません。</para>
 
       <para>この例における解決策は、既存の翻訳メモリを tm フォルダーにコピーし、訳文言語を示すために ZH_CN.tmx とリネームすることです。編集ウィンドウの現在分節には、オランダ語の原文分節と共に英語の対訳も表示されます。翻訳者は両方を見ながら、中国語の訳文を作成することができます。</para>
 
@@ -282,7 +296,7 @@
 
     <para>ある種の原文ファイル（PO ファイルや TTX ファイルなど）は二ヶ国語形式、すなわち原文と翻訳メモリを兼ねた状態になっています。この場合、原文ファイルに付属する対訳は、<filename>project_save.tmx</filename> に移行されます。翻訳メモリ内に他に一致する分節がなければ、移行された翻訳は、デフォルトの翻訳になります。翻訳メモリ内に他の一致する分節が記録済みの場合、移行された翻訳は、複数訳文の「新しい訳文」の方として扱われます。複数訳文になる場合、翻訳が「既定値訳文」になるか「新しい訳文」になるかは、原文分節の読み込まれる順番に依存します。</para>
 
-    <para>原文ファイルに付属する対訳情報はすべて、コメントウィンドウと参考訳文ウィンドウにも表示されます。PO ファイルの場合は、複数訳文の「新しい訳文」扱いになった対訳情報に対して 20% のペナルティが課せられます（たとえば 100% 一致しても、80% に減点されます）。また原文分節に「[Fuzzy]」と表示されます。</para>
+    <para>原文ファイルに付属する対訳情報はすべて、コメントウィンドウと参考訳文ウィンドウにも表示されます。PO ファイルの場合は、複数訳文の「新しい訳文」扱いになった対訳情報に対して 20% のペナルティが課せられます（たとえば 100% 一致しても、80% に減点されます）。また原文分節に「[参考]」と表示されます。</para>
 
     <para>分節化された TTX ファイルを読み込む際は、［設定］→［翻訳入力行...］の［原文と同じ訳文を許可］にチェックが入っていれば、原文＝訳文の状態で表示されます。この状態は混乱を招きやすいので、TTX ファイルの場合はチェックを外しておく方が良いかもしれません。</para>
   </section>
@@ -322,7 +336,7 @@
         <primary>翻訳メモリ</primary> <secondary>翻訳メモリの更新</secondary>
       </indexterm></title>
 
-    <para>ごく初期のバージョンの <application>OmegaT</application> は、段落単位でしか原文を分節化できず、また HTML と Open Document ファイルに対しては、フォーマットタグに対する番号付けを適切に行えない場合がありました。<application>OmegaT</application> 2.6 では、参考訳文の品質を向上し、すでに存在する翻訳内容をより活用するため、このような古い形式の TMX ファイルを見つけると、その場で新しい形式に更新します。そのために手作業で何かを行う必要はありません。</para>
+    <para>ごく初期のバージョンの <application>OmegaT</application> は、段落単位でしか原文を分節化できず、また HTML と Open Document ファイルに対しては、整形用のタグに対する番号付けを適切に行えない場合がありました。<application>OmegaT</application> 2.6 では、参考訳文の品質を向上し、すでに存在する翻訳内容をより活用するため、このような古い形式の TMX ファイルを見つけると、その場で新しい形式に更新します。そのために手作業で何かを行う必要はありません。</para>
 
     <para>プロジェクトのメインの TMX ファイルがバージョンアップされるのは１度だけです。最新の形式で <filename>project-save.tmx</filename> に書き込まれます。それ以外の以前の TMX ファイルは、プロジェクトが読み込まれるたびにその場で更新されます。<application>OmegaT</application> 2.6 ではファイルフィルターに変更が加えられたため、分節化の内容がまったく異なる可能性があります。ごくまれに、翻訳メモリを手動で更新する必要があるかもしれませんので、注意してください。</para>
   </section>

@@ -100,7 +100,7 @@
 
     <itemizedlist>
       <listitem>
-        <para>そのフォルダーには同じ名前のファイルが３つ（拡張子違いで）存在していますか？もし１つしか見当たらなければ、拡張子を確認してみましょう。<emphasis>tar.bz</emphasis> か <emphasis>tar.bz2</emphasis>だったら、圧縮ファイルを展開し忘れています。</para>
+        <para>そのフォルダーには同じ名前のファイルが３つ（拡張子違いで）存在していますか？　もし１つしか見当たらなければ、拡張子を確認してみましょう。<emphasis>tar.bz</emphasis> か <emphasis>tar.bz2</emphasis>だったら、圧縮ファイルを展開し忘れています。</para>
       </listitem>
     </itemizedlist>
   </section>

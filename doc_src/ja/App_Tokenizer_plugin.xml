@@ -38,7 +38,7 @@
   <section>
     <title>インストールとコマンドラインの使い方</title>
 
-    <para>Lucene プロジェクトを組み込んだトークナイザーのパッケージは、OmegaT プラグインのダウンロードサイト（http://sourceforge.net/projects/omegat-plugins/files/）から入手できます。最新のファイルをダウンロードしてください（執筆時点では、OmegaT-tokenizers_0.4_2-2.1.zip が最新です）。</para>
+    <para>Lucene プロジェクトを組み込んだトークナイザーのパッケージは、OmegaT プラグインのダウンロードサイト（http://sourceforge.net/projects/omegat-plugins/files/）から入手できます。最新のファイルをダウンロードしてください（執筆時点では、OmegaT-tokenizers_0.5-2.1.zip が最新です）。</para>
 
     <para>トークナイザーをインストールするには、OmegaT.jar が配置されているフォルダー配下に「plugins」という名前のフォルダーを（まだ無ければ）作成し、そのフォルダー内にパッケージを解凍します。</para>
 
@@ -46,9 +46,9 @@
 
     <para><literal>java -jar OmegaT.jar --ITokenizer=[原文言語のトークナイザー名] --ITokenizerTarget=[訳文言語のトークナイザー名]</literal></para>
 
-    <para>トークナイザー名は、トークナイザーのファイルと一緒に配布される Readme.txt ファイルに一覧が記載されています。たとえば、原文言語に TinySegmenter Japanese tokenizer を、訳文言語に Lucene French tokenizer を使う場合のコマンドは、次のようになります：</para>
+    <para>トークナイザー名は、トークナイザーのファイルと一緒に配布される Readme.txt ファイルに一覧が記載されています。たとえば、原文言語に Lucene Japanese tokenizer を、訳文言語に Lucene French tokenizer を使う場合のコマンドは、次のようになります：</para>
 
-    <para><literal>java -jar OmegaT.jar --ITokenizer=org.omegat.plugins.tokenizer.TinySegmenterJapaneseTokenizer --ITokenizerTarget=org.omegat.plugins.tokenizer.LuceneFrenchTokenizer</literal></para>
+    <para><literal>java -jar OmegaT.jar --ITokenizer=org.omegat.plugins.tokenizer.LuceneJapaneseTokenizer --ITokenizerTarget=org.omegat.plugins.tokenizer.LuceneFrenchTokenizer</literal></para>
   </section>
 
   <section>
@@ -56,13 +56,12 @@
 
     <para>Mac OS X の OmegaT.app パッケージでトークナイザーを使う場合、トークナイザーのインストールは上記で説明されている通りです（OmegaT.app を右クリックすれば、OmegaT.jar の場所が分かります）。ただし、使用するトークナイザー名は Java 起動オプションに含まれる <filename>info.plist</filename> で指定する必要があります。上記の説明通り、<filename>info.plist</filename> ファイルを探して編集します。先ほどの例を使うと、次のようになります：</para>
 
-    <literallayout><code>
-&lt;key&gt;VMOptions&lt;/key&gt;
+    <literallayout><code>&lt;key&gt;VMOptions&lt;/key&gt;
 &lt;string&gt;-Xmx1024M&lt;/string&gt;
 
 &lt;key&gt;Arguments&lt;/key&gt;
 &lt;array&gt;
-  &lt;string&gt;--ITokenizer=org.omegat.plugins.tokenizer.LuceneCJKTokenizer&lt;/string&gt;
+  &lt;string&gt;--ITokenizer=org.omegat.plugins.tokenizer.LuceneJapaneseTokenizer&lt;/string&gt;
   &lt;string&gt;--ITokenizerTarget=org.omegat.plugins.tokenizer.LuceneFrenchTokenizer&lt;/string&gt;
 &lt;/array&gt;</code></literallayout>
   </section>
@@ -72,7 +71,7 @@
 
     <para>指定したトークナイザーが本当に使われているかどうかを確認するには、プロジェクトを開き、コンソール ウィンドウに出力されるログをチェックしてください。たとえば、それはこんな風に出力されるはずです：</para>
 
-    <literallayout><code>84528: Info: Source tokenizer: org.omegat.plugins.tokenizer.LuceneCJKTokenizer
+    <literallayout><code>84528: Info: Source tokenizer: org.omegat.plugins.tokenizer.LuceneJapaneseTokenizer
 84528: Info: Target tokenizer: org.omegat.plugins.tokenizer.LuceneFrenchTokenizer</code></literallayout>
 
     <para>行頭の数値はシステムによって異なりますので、気にする必要はありません。Source tokenizer と target tokenizer の名前を確認してください。起動オプションで指定した名前が、ログに表示されます。トークナイザーが正常起動しなかった場合は、次のようなログになります：</para>

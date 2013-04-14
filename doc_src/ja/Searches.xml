@@ -94,17 +94,25 @@
 
     <para>ラジオボタンで検索方法を選択してください。以下の検索方法を利用できます：</para>
 
-    <variablelist> <varlistentry> <term>完全一致検索</term>
+    <variablelist>
+      <varlistentry>
+        <term>完全一致検索</term>
 
         <listitem>
           <para>指定した文字列をそのまま含む分節を検索します。完全一致検索は、指定された文字列を「語句」として検索します。つまり、複数の単語を指定した場合、それらの単語の並びまで同じ語句を含む検索結果のみが表示されます。文字列「<literal>open file</literal>」を検索した場合、「<emphasis><literal>open file</literal></emphasis>」とは一致しますが、「<emphasis><literal>file opened</literal></emphasis>」や「<emphasis><literal>open input file</literal></emphasis>」とは一致しません。</para>
         </listitem>
-      </varlistentry> <varlistentry> <term>キーワード検索</term>
+      </varlistentry>
+
+      <varlistentry>
+        <term>キーワード検索</term>
 
         <listitem>
           <para>指定したすべてのキーワードを含む分節を検索します。指定した順序は問いません。複数の単語の登場順を問わないような検索を行いたい場合は、それらの単語を空白で区切って入力し、［キーワード検索］を選択してください。OmegaT は、指定した単語をすべて含む、すべての分節の一覧を表示します。キーワード検索は、Google などのインターネット検索エンジンにおける「すべてを含む」検索（AND 検索）に似ています。キーワード「<emphasis><literal>open file</literal></emphasis>」を検索した場合、「<emphasis><literal>open file</literal></emphasis>」と一致するのはもちろんですが、「<emphasis><literal>file opened</literal></emphasis>」や「<emphasis><literal>open input file</literal></emphasis>」「<emphasis><literal>file may not be safe to open</literal></emphasis>」などとも同じように一致します。</para>
         </listitem>
-      </varlistentry> <varlistentry> <term><emphasis role="bold">正規表現</emphasis></term>
+      </varlistentry>
+
+      <varlistentry>
+        <term><emphasis role="bold">正規表現</emphasis></term>
 
         <listitem>
           <para>検索文字列が正規表現として扱われます。たとえば上の図で指定されている「[a-zA-Z]+[öäüqwß]」という検索文字列は、ドイツ語配列のキーボードでは不自然な文字が使われている箇所を訳文から検索しています。正規表現は、文字列を検索するにあたって、とても効果的な方法です。詳しくは「<link linkend="chapter.regexp">正規表現</link>」の章を参照してください。</para>

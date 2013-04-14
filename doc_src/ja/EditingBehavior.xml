@@ -24,19 +24,27 @@
 
   <para>翻訳作業は、分節間を行き来しながら、分節を編集することで進めていきます。分節を移動したときは、参考訳文を挿入することもできますし、原文のままにしておくこともできます。<menuchoice><guimenu>［設定］</guimenu><guimenuitem>［翻訳入力行...］</guimenuitem></menuchoice>から、以下の設定ができます：</para>
 
-  <variablelist> <varlistentry> <term>原文を挿入</term>
+  <variablelist>
+    <varlistentry>
+      <term>原文を挿入</term>
 
       <listitem>
         <para>翻訳入力行に、対応する原文を入力した状態にします。商標や固有名詞など、あえて翻訳しない部分を多く含んでいるような文書の場合に非常に便利です。</para>
       </listitem>
-    </varlistentry> <varlistentry> <term>原文を挿入しない<indexterm class="singular">
+    </varlistentry>
+
+    <varlistentry>
+      <term>原文を挿入しない<indexterm class="singular">
           <primary>設定メニュー</primary> <secondary>翻訳入力行</secondary> <tertiary>空訳文</tertiary>
         </indexterm></term>
 
       <listitem>
         <para>OmegaT は翻訳入力行を空欄にします。翻訳入力の前に、原文を削除するキー入力の手間（つまり <emphasis role="bold">Ctrl+A</emphasis> と <emphasis role="bold">Del</emphasis>）が省けます。この状態で、空訳文として残すこともできます。このような訳文は、未翻訳分節と区別するために、編集ウィンドウ上では &lt;空訳文&gt; と表示されます。空訳文に設定するには、分節を右クリックして「<emphasis role="bold">訳文を&lt;空訳文&gt;にする</emphasis>」を選びます。同じポップアップメニューに表示される「<emphasis role="bold">訳文を削除</emphasis>」という項目を選ぶと、現在の分節に入力済みの訳文を削除することもできます。これは <guibutton>Ctrl+A</guibutton> と <guibutton>Del</guibutton> キーの組み合わせで翻訳入力行をクリアするのと、同じことです。</para>
       </listitem>
-    </varlistentry> <varlistentry> <term>最も一致率の高い参考訳文を自動で挿入<indexterm class="singular">
+    </varlistentry>
+
+    <varlistentry>
+      <term>最も一致率の高い参考訳文を自動で挿入<indexterm class="singular">
           <primary>設定メニュー</primary> <secondary>翻訳入力行</secondary> <tertiary>参考訳文の挿入</tertiary>
         </indexterm></term>
 
@@ -48,7 +56,9 @@
 
   <para>ダイアログの下半分に並んでいるチェックボックスは、次の目的で用いられます：</para>
 
-  <variablelist> <varlistentry> <term>参考訳文挿入の場合は数値を変更する<indexterm class="singular">
+  <variablelist>
+    <varlistentry>
+      <term>参考訳文挿入の場合は数値を変更する<indexterm class="singular">
           <primary>設定メニュー</primary> <secondary>翻訳入力行</secondary> <tertiary>数値の変更</tertiary>
         </indexterm></term>
 
@@ -69,7 +79,12 @@
           </listitem>
         </itemizedlist>
       </listitem>
-    </varlistentry> </variablelist> <variablelist> <varlistentry> <term>原文と同じ訳文を許可<indexterm class="singular">
+    </varlistentry>
+  </variablelist>
+
+  <variablelist>
+    <varlistentry>
+      <term>原文と同じ訳文を許可<indexterm class="singular">
           <primary>設定メニュー</primary> <secondary>翻訳入力行</secondary> <tertiary>原文と同じ訳文</tertiary>
         </indexterm></term>
 
@@ -78,7 +93,12 @@
 
         <para>まず、そのような箇所をまったく翻訳せずに残しておくことができます。OmegaT としては未翻訳の分節として残すことになります。こちらが初期設定です。もう１つの方法として、原文とまったく同じ訳文を入力することができます。OmegaT にはそこを翻訳したものとして記憶させることができます。そうする場合は、 <menuchoice><guimenu>［設定］</guimenu> <guimenuitem>［翻訳入力行...］</guimenuitem></menuchoice>でで表示される画面の<emphasis role="bold">［原文と同じ訳文を許可］</emphasis>をチェックしてください。</para>
       </listitem>
-    </varlistentry> </variablelist> <variablelist> <varlistentry> <term>分節をテキストファイルへ出力<indexterm class="singular">
+    </varlistentry>
+  </variablelist>
+
+  <variablelist>
+    <varlistentry>
+      <term>分節をテキストファイルへ出力<indexterm class="singular">
           <primary>設定メニュー</primary> <secondary>翻訳入力行</secondary> <tertiary>現在分節を出力</tertiary>
         </indexterm></term>
 
@@ -99,9 +119,14 @@
           </listitem>
         </itemizedlist>
 
-        <para>ファイルの内容は、新しい分節に移動するタイミング（source.txt と target.txt）または新しい選択領域を出力するタイミング（selection.txt）で上書きされます。ファイル形式は、整形されないプレーンテキストファイルです。このプロセス全体を、Tck/Tcl ベースのスクリプトを介して操作・制御することができます。詳しくは『<ulink url="http://www.omegat.org/en/howtos/text_export.html">OmegaT テキスト出力機能を使う</ulink>』（英語）を参照してください。</para>
+        <para>ファイルの内容は、新しい分節に移動するタイミング（source.txt と target.txt）または新しい選択領域を出力するタイミング（selection.txt）で上書きされます。ファイル形式は、整形されないプレーンテキストファイルです。このプロセス全体を、Tck/Tcl ベースのスクリプトを介して操作・制御することができます。詳しくは『<ulink url="http://www.omegat.org/en/howtos/text_export.html">OmegaT のテキスト出力機能を使う</ulink>』（英語）を参照してください。</para>
       </listitem>
-    </varlistentry> </variablelist> <variablelist> <varlistentry> <term>既定値訳文と違う新しい訳文がある場合［次の未翻訳分節］でその訳文へ移動する<indexterm class="singular">
+    </varlistentry>
+  </variablelist>
+
+  <variablelist>
+    <varlistentry>
+      <term>既定値訳文と違う新しい訳文がある場合［次の未翻訳分節］でその訳文へ移動する<indexterm class="singular">
           <primary>設定メニュー</primary> <secondary>翻訳入力行</secondary> <tertiary>新しい訳文が入力された分節</tertiary>
         </indexterm></term>
 

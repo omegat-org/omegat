@@ -44,17 +44,29 @@
 
     <para><application>OmegaT</application> には、主に３つの解決策があります。いずれも<emphasis role="bold">設定</emphasis>メニューにあるファイルフィルターを利用します。</para>
 
-    <variablelist> <varlistentry> <term>ファイルのエンコーディングをユニコードに変更する</term>
+    <variablelist>
+      <varlistentry>
+        <term>ファイルのエンコーディングをユニコードに変更する</term>
 
         <listitem>
           <para>原文ファイルをテキストエディターで開き、エンコーディング <emphasis role="bold">UTF-8</emphasis> で保存しなおします。このとき、拡張子を <literal>.txt</literal> から <literal>.utf8</literal> に変更してください。OmegaT はこのファイルを UTF-8 ファイルとして自動的に認識します。 これは最も理にかなった解決策で、あなたを厄介ごとから救ってくれます。</para>
         </listitem>
-      </varlistentry> </variablelist> <variablelist> <varlistentry> <term>プレーンテキストファイルのエンコーディングを指定する</term>
+      </varlistentry>
+    </variablelist>
+
+    <variablelist>
+      <varlistentry>
+        <term>プレーンテキストファイルのエンコーディングを指定する</term>
 
         <listitem>
           <para>拡張子 <filename>.txt </filename> のファイルを例に取ります。ファイルフィルターダイアログから<emphasis role="bold">テキストファイル</emphasis>のフィルターを編集し、<emphasis role="bold">原文ファイルのエンコーディング</emphasis>を「&lt;自動&gt;」から対象の <filename>.txt</filename> ファイルに適したエンコーディングに変更します。たとえば上の例で言えば、日本語に対応したエンコーディングに変更します。</para>
         </listitem>
-      </varlistentry> </variablelist> <variablelist> <varlistentry> <term>プレーンテキストファイルの拡張子を変更する</term>
+      </varlistentry>
+    </variablelist>
+
+    <variablelist>
+      <varlistentry>
+        <term>プレーンテキストファイルの拡張子を変更する</term>
 
         <listitem>
           <para>たとえば日本語のファイルであれば、拡張子を <filename>.txt</filename> から <filename>.jp</filename> に変えます。次に、ファイルフィルターダイアログから<emphasis role="bold">テキストファイル</emphasis>のフィルターを編集し、<emphasis role="bold">原文ファイル名の構成例</emphasis>を新しく追加します。例の場合は「<filename>*.jp</filename>」とします。エンコーディングには、適切な値を設定してください。</para>

@@ -8,7 +8,7 @@
         <primary>Сочетания клавиш</primary> <secondary>Настройка</secondary>
       </indexterm>Настройка сочетаний клавиш</title>
 
-    <para>Для большинства элементов главного меню можно настроить сочетание клавиш. По умолчанию, сочетания клавиш присвоены только наиболее используемым пунктам меню. Вы можете изменить сочетания клавиш по умолчанию и добавить новые, поместив в каталог настроек ОмегаТ файл с соответствующими определениями (см. раздел <link linkend="user.files.location">Расположение пользовательских файлов</link>).</para>
+    <para>Для большинства элементов главного меню можно настроить сочетание клавиш. По умолчанию, сочетания клавиш присвоены только наиболее используемым пунктам меню. Вы можете изменить сочетания клавиш по умолчанию и добавить новые, поместив в каталог настроек ОмегаТ файл с соответствующими определениями (см. раздел <link linkend="user.files">Расположение пользовательских файлов</link>).</para>
 
     <para>Файл с определениями сочетаний клавиш должен называться <filename>MainMenuShortcuts.properties</filename> и содержать не более одного сочетания в каждой строке. Допускается наличие пустых строк и строк комментария, которые начинаются с «//». Все символы после знака «//» будут проигнорированы.</para>
 
@@ -21,7 +21,7 @@
     <para>&lt;сочетание клавиш&gt; имеет следующий формат: 0 или 1 <code>&lt;модификатор&gt;</code>, затем 0 или 1 <code>&lt;состояние&gt;</code> и 1 <code>&lt;клавиша&gt;</code>, где:<itemizedlist>
         <listitem>
           <para><code>&lt;модификатор&gt;</code> может принимать значения: <emphasis>shift</emphasis>, <emphasis>control</emphasis>, <emphasis>ctrl</emphasis>, <emphasis>meta</emphasis><footnote>
-              <para>На Mac OS X модификатор <emphasis>meta</emphasis> используется для обозначения клавиши <emphasis>COMMAND</emphasis>.</para>
+              <para>На Mac OS X модификатор <emphasis>meta</emphasis> используется для обозначения клавиши <emphasis>COMMAND</emphasis>.</para>
             </footnote>, <emphasis>alt</emphasis>,
           <emphasis>altGraph</emphasis></para>
         </listitem>
@@ -361,7 +361,7 @@
           </row>
 
           <row>
-            <entry>Сменить регистр на...</entry>
+            <entry>Изменять регистр в цикле…</entry>
 
             <entry><keycap>SHIFT+F3</keycap></entry>
 
@@ -377,7 +377,6 @@
 
     <table>
       <title>Меню «Переход»</title>
-
 
       <tgroup cols="3" colsep="1">
         <colspec align="left" colname="1" colnum="1" colwidth="120"/>
@@ -543,7 +542,6 @@
     <table>
       <title>Меню «Инструменты»</title>
 
-
       <tgroup cols="3" colsep="1">
         <colspec align="left" colname="1" colnum="1" colwidth="120"/>
 
@@ -595,7 +593,6 @@
 
     <table>
       <title>Меню «Параметры»</title>
-
 
       <tgroup cols="3" colsep="1">
         <colspec align="left" colname="1" colnum="1" colwidth="120"/>

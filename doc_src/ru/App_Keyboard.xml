@@ -163,7 +163,9 @@
     </listitem>
   </itemizedlist>
 
-  <para>Клавиша «SHIFT» никак не влияет на поведение сочетаний клавиш, когда она зажата, управление курсором производится так, как описано выше.</para>
+  <para>Клавиша «SHIFT» никак не влияет на поведение сочетаний клавиш, когда она зажата, управление курсором производится так, как описано выше, за исключением сочетания <literal>SHIFT+ВВОД</literal>, которое вставляет символ разрыва строки.</para>
 
-  <para>Системные сочетания клавиш «Вставить» (<emphasis role="bold">CTRL+V</emphasis> или <emphasis role="bold">CTRL+INSERT</emphasis>), «Вырезать» (<emphasis role="bold">CTRL+X</emphasis> или <emphasis role="bold">CTRL+C)</emphasis>, «Вставить совпадение» <emphasis role="bold">(CTRL+I</emphasis>) и «Вставить оригинал» (<emphasis role="bold">CTRL+SHIFT+I</emphasis>) работают для любого выделенного текста, даже для выделения, находящегося вне текущего сегмента. Однако операции вставки и замены, конечно же работают только в границах выделенного сегмента.</para>
+  <para>Системные сочетания клавиш «Выбрать всё» (<keycap>CTRL+A</keycap>), «Вставить» (<emphasis role="bold">CTRL+V</emphasis>), «Вырезать» (<emphasis role="bold">CTRL+X</emphasis>), «Копировать» (<emphasis role="bold">CTRL+C)</emphasis>, «Вставить совпадение» <emphasis role="bold">(CTRL+I</emphasis>) и «Вставить оригинал» (<emphasis role="bold">CTRL+SHIFT+I</emphasis>) действуют в пределах текущего открытого сегмента.</para>
+
+  <para>Заметьте, что вы можете настроить сочетания клавиш в соответствии с вашими предпочтениями. См. <link linkend="ch04.shortcuts.customization">Приложения – Настройка сочетаний клавиш</link></para>
 </appendix>

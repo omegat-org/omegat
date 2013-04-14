@@ -548,7 +548,7 @@
           </row>
 
           <row>
-            <entry>\s\s+</entry>
+            <entry>\s{2,}</entry>
 
             <entry>больше, чем один пробел подряд</entry>
           </row>
@@ -557,6 +557,12 @@
             <entry>\.[A-Z]</entry>
 
             <entry>Точка, за которой следует прописная буква, возможно, перед началом нового предложения пропущен пробел?</entry>
+          </row>
+
+          <row>
+            <entry>\bis\b</entry>
+
+            <entry>поиск «is», но не «this» или «isn't» и т. д.</entry>
           </row>
         </tbody>
       </tgroup>

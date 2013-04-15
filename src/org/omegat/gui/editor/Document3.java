@@ -4,6 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2009 Alex Buloichik
+               2013 Aaron Madlon-Kay
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -40,6 +41,7 @@ import javax.swing.text.StyleConstants;
  * We need to redefine some standard document behavior.
  * 
  * @author Alex Buloichik (alex73mail@gmail.com)
+ * @author Aaron Madlon-Kay
  */
 @SuppressWarnings("serial")
 public class Document3 extends DefaultStyledDocument {
@@ -62,6 +64,12 @@ public class Document3 extends DefaultStyledDocument {
      * acceptable.
      */
     protected boolean trustedChangesInProgress = false;
+    
+    /**
+     * Flag to indicate that text is currently being composed (should
+     * not be considered to have been input yet) by an IME.
+     */
+    protected boolean textBeingComposed = false;
 
     public Document3(final EditorController controller) {
         this.controller = controller;

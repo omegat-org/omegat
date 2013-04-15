@@ -623,7 +623,7 @@ public class EditorController implements IEditor {
      */
     void onTextChanged() {
         Document3 doc = editor.getOmDocument();
-        if (doc.trustedChangesInProgress) {
+        if (doc.trustedChangesInProgress || doc.textBeingComposed) {
             return;
         }
         if (doc.isEditMode()) {

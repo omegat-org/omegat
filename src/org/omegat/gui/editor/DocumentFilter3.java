@@ -4,6 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2008 Alex Buloichik
+               2013 Aaron Madlon-Kay
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -29,6 +30,7 @@ import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.Document;
 import javax.swing.text.DocumentFilter;
+import javax.swing.text.StyleConstants;
 
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.util.Preferences;
@@ -39,6 +41,7 @@ import org.omegat.util.gui.UIThreadsUtil;
  * text outside translation.
  * 
  * @author Alex Buloichik (alex73mail@gmail.com)
+ * @author Aaron Madlon-Kay
  */
 public class DocumentFilter3 extends DocumentFilter {
     @Override
@@ -52,6 +55,11 @@ public class DocumentFilter3 extends DocumentFilter {
     @Override
     public void insertString(FilterBypass fb, int offset, String string, AttributeSet attr) throws BadLocationException {
         UIThreadsUtil.mustBeSwingThread();
+
+        if (attr != null) {
+            ((Document3)fb.getDocument()).textBeingComposed = attr.isDefined(StyleConstants.ComposedTextAttribute);
+        }
+
         if (isPossible(fb.getDocument(), offset, 0)) {
             super.insertString(fb, offset, string, attr);
         }
@@ -61,6 +69,11 @@ public class DocumentFilter3 extends DocumentFilter {
     public void replace(FilterBypass fb, int offset, int length, String text, AttributeSet attrs)
             throws BadLocationException {
         UIThreadsUtil.mustBeSwingThread();
+
+        if (attrs != null) {
+            ((Document3)fb.getDocument()).textBeingComposed = attrs.isDefined(StyleConstants.ComposedTextAttribute);
+        }
+
         if (isPossible(fb.getDocument(), offset, length)) {
             super.replace(fb, offset, length, text, attrs);
         }

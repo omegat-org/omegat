@@ -40,7 +40,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.io.File;
-import java.util.Collections;
 
 import javax.swing.AbstractAction;
 import javax.swing.Action;
@@ -248,8 +247,11 @@ public class ProjectPropertiesDialog extends JDialog {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (!m_sourceLocaleField.isEnabled()) return;
-                Language newLang = (Language) m_sourceLocaleField.getSelectedItem();
-                Class<?> newTok = PluginUtils.getTokenizerClassForLanguage(newLang);
+                Object newLang = m_sourceLocaleField.getSelectedItem();
+                if (newLang instanceof String) {
+                    newLang = new Language((String)newLang);
+                }
+                Class<?> newTok = PluginUtils.getTokenizerClassForLanguage((Language)newLang);
                 m_sourceTokenizerField.setSelectedItem(newTok);
             }});
 
@@ -282,8 +284,11 @@ public class ProjectPropertiesDialog extends JDialog {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (!m_targetLocaleField.isEnabled()) return;
-                Language newLang = (Language) m_targetLocaleField.getSelectedItem();
-                Class<?> newTok = PluginUtils.getTokenizerClassForLanguage(newLang);
+                Object newLang = m_targetLocaleField.getSelectedItem();
+                if (newLang instanceof String) {
+                    newLang = new Language((String)newLang);
+                }
+                Class<?> newTok = PluginUtils.getTokenizerClassForLanguage((Language)newLang);
                 m_targetTokenizerField.setSelectedItem(newTok);
             }});
 

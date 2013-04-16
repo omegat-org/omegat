@@ -111,7 +111,7 @@ OmegaT failed to load the valid ones
 ----------------------------------------------------------------------
  OmegaT 2.6.3 update 1
 ----------------------------------------------------------------------
-   2 Enhancements
+   3 Enhancements
    2 Bug fixes
    1 Localisation update
 ----------------------------------------------------------------------
@@ -132,6 +132,8 @@ clarity
 external entities, the target files could be empty
 
   - Word selection with a double-click could sometimes be off
+
+  - Java (for Windows and Linux with JRE) updated to 1.6.0_43-b01
 
   Localisation updates:
 

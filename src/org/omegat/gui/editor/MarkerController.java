@@ -158,9 +158,7 @@ public class MarkerController {
         for (SegmentBuilder sb : entryBuilders) {
             remove(sb, markerIndex);
         }
-        for (CalcMarkersThread th : markerThreads) {
-            th.add(entryBuilders);
-        }
+        markerThreads[markerIndex].add(entryBuilders);
     }
 
     /**

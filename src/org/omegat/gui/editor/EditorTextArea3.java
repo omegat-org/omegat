@@ -50,7 +50,6 @@ import javax.swing.text.ComponentView;
 import javax.swing.text.Element;
 import javax.swing.text.IconView;
 import javax.swing.text.MutableAttributeSet;
-import javax.swing.text.ParagraphView;
 import javax.swing.text.StyleConstants;
 import javax.swing.text.StyledEditorKit;
 import javax.swing.text.Utilities;
@@ -521,6 +520,16 @@ public class EditorTextArea3 extends JEditorPane {
                             select(p, p + tag.length());
                             return true;
                         }
+                    }
+                }
+                Pattern placeholderPattern = PatternConsts.getPlaceholderPattern();
+                Matcher placeholderMatcher = placeholderPattern.matcher(text);
+                while (placeholderMatcher.find()) {
+                    if (placeholderMatcher.start() <= off && off < placeholderMatcher.end()) {
+                        int pb = segment.getStartPosition() + placeholderMatcher.start();
+                        int pe = segment.getStartPosition() + placeholderMatcher.end();
+                        select(pb, pe);
+                        return true;
                     }
                 }
             } catch (BadLocationException ex) {

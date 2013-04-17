@@ -654,7 +654,7 @@ public class EditorTextArea3 extends JEditorPane {
                 if (kind.equals(AbstractDocument.ContentElementName)) {
                     return new ViewLabel(elem);
                 } else if (kind.equals(AbstractDocument.ParagraphElementName)) {
-                    return new ParagraphView(elem);
+                    return new ViewParagraph(elem);
                 } else if (kind.equals(AbstractDocument.SectionElementName)) {
                     return new BoxView(elem, View.Y_AXIS);
                 } else if (kind.equals(StyleConstants.ComponentElementName)) {

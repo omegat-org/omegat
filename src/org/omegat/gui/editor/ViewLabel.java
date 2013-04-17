@@ -3,7 +3,7 @@
           with fuzzy matching, translation memory, keyword search, 
           glossaries, and translation leveraging into updated projects.
 
- Copyright (C) 2007 - Zoltan Bartko - bartkozoltan@bartkozoltan.com
+ Copyright (C) 2007, 2013 - Zoltan Bartko - bartkozoltan@bartkozoltan.com
                2009 Alex Buloichik
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
@@ -32,6 +32,7 @@ import java.awt.Shape;
 
 import javax.swing.text.Element;
 import javax.swing.text.LabelView;
+import javax.swing.text.View;
 
 /**
  * Custom implementation of view.
@@ -42,6 +43,8 @@ import javax.swing.text.LabelView;
 public class ViewLabel extends LabelView {
     /** Maximum font height for display labels. */
     protected static int fontHeight;
+
+    boolean isResetBreakSpots = false;
 
     public ViewLabel(final Element el) {
         super(el);
@@ -63,13 +66,45 @@ public class ViewLabel extends LabelView {
         }
     }
 
+    @Override
     public float getPreferredSpan(int axis) {
         if (fontHeight > 0 && axis == ViewLabel.Y_AXIS) {
-            // System.out.println("Calculated: " + super.getPreferredSpan(axis)
-            // + " height: " + fontHeight);
             return fontHeight;
         } else {
             return super.getPreferredSpan(axis);
+        }
+    }
+
+    @Override
+    public float getMinimumSpan(int axis) {
+        switch (axis) {
+        case View.X_AXIS:
+            return 0;
+        case View.Y_AXIS:
+            return super.getMinimumSpan(axis);
+        default:
+            throw new IllegalArgumentException("Invalid axis: " + axis);
+        }
+    }
+
+    @Override
+    public View breakView(int axis, int p0, float pos, float len) {
+        if (axis == View.X_AXIS) {
+            resetBreakSpots();
+        }
+        return super.breakView(axis, p0, pos, len);
+    }
+
+    public void resetBreakSpots() {
+        isResetBreakSpots = true;
+        removeUpdate(null, null, null);
+        isResetBreakSpots = false;
+    }
+
+    @Override
+    public void preferenceChanged(View child, boolean width, boolean height) {
+        if (!isResetBreakSpots) {
+            super.preferenceChanged(child, width, height);
         }
     }
 }

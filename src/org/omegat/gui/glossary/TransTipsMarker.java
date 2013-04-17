@@ -45,8 +45,6 @@ import org.omegat.util.Preferences;
  */
 public class TransTipsMarker implements IMarker {
     protected static final HighlightPainter transTipsUnderliner = new UnderlineFactory.SolidBoldUnderliner(Color.blue);
-    protected SourceTextEntry cachedSte;
-    protected List<Mark> cachedMarks;
 
     @Override
     public List<Mark> getMarksForEntry(SourceTextEntry ste, String sourceText, String translationText, boolean isActive) {
@@ -58,12 +56,7 @@ public class TransTipsMarker implements IMarker {
         }
         List<GlossaryEntry> glossaryEntries = Core.getGlossary().getDisplayedEntries();
         if (glossaryEntries == null || glossaryEntries.isEmpty()) {
-            cachedSte = null;
-            cachedMarks = null;
             return null;
-        }
-        if (cachedSte == ste) {
-            return cachedMarks;
         }
 
         final List<Mark> marks = new ArrayList<Mark>();
@@ -81,8 +74,6 @@ public class TransTipsMarker implements IMarker {
         for (GlossaryEntry ent : glossaryEntries) {
             TransTips.search(sourceText, ent, callback);
         }
-        cachedSte = ste;
-        cachedMarks = marks;
         return marks;
     }
 }

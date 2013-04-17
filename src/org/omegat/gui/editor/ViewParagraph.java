@@ -33,6 +33,14 @@ import javax.swing.text.View;
 import javax.swing.text.ViewFactory;
 
 /**
+ * Custom breakspots processing required only for word wrapping issue fix: on
+ * the editing line with wordwrap, add a new line at the beginning of the line
+ * and write something, the word wrapping behaves in a strange way. If you paste
+ * a long line (wrapped one), the word wrap disappears and the line gets looong.
+ * 
+ * JDK bug 6539700(http://bugs.sun.com/view_bug.do?bug_id=6539700) : JTextPane
+ * line wrap radically different from previous versions in jre 1.5.0_10+. Fixed
+ * in Java 7b70.
  * 
  * @author bartkoz
  */

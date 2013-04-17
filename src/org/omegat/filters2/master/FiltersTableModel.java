@@ -29,6 +29,8 @@ import gen.core.filters.Filter;
 import gen.core.filters.Filters;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
@@ -62,6 +64,14 @@ public class FiltersTableModel extends AbstractTableModel {
                 filterNames.put(f.getClassName(), fi.getFileFormatName());
             }
         }
+        Collections.sort(filters, new Comparator<Filter>() {
+            @Override
+            public int compare(Filter o1, Filter o2) {
+                String s1 = filterNames.get(o1.getClassName());
+                String s2 = filterNames.get(o2.getClassName());
+                return s1.compareToIgnoreCase(s2);
+            }
+        });
     }
 
     // ////////////////////////////////////////////////////////////////////////

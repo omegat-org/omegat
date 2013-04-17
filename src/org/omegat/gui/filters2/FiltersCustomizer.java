@@ -123,11 +123,17 @@ public class FiltersCustomizer extends JDialog implements ListSelectionListener 
             filtersTable.setEnabled(false);
             filtersTable.setFocusable(false);
             toDefaultsButton.setEnabled(false);
+            cbRemoveTags.setEnabled(false);
+            cbRemoveSpacesNonseg.setEnabled(false);
+            cbPreserveSpaces.setEnabled(false);
         } else {
             if (projectSpecific) projectSpecificCB.setSelected(true);
             filtersTable.setEnabled(true);
             filtersTable.setFocusable(true);
             toDefaultsButton.setEnabled(true);
+            cbRemoveTags.setEnabled(true);
+            cbRemoveSpacesNonseg.setEnabled(true);
+            cbPreserveSpaces.setEnabled(true);
         }
         cbRemoveTags.setSelected(editableFilters.isRemoveTags());
         cbRemoveSpacesNonseg.setSelected(editableFilters.isRemoveSpacesNonseg());
@@ -363,10 +369,16 @@ public class FiltersCustomizer extends JDialog implements ListSelectionListener 
         if (projectSpecificCB.isSelected()) {
             filtersTable.setEnabled(true);
             filtersTable.setFocusable(true);
+            cbRemoveTags.setEnabled(true);
+            cbRemoveSpacesNonseg.setEnabled(true);
+            cbPreserveSpaces.setEnabled(true);
         } else {
             filtersTable.setEnabled(false);
             filtersTable.setFocusable(false);
             filtersTable.getSelectionModel().clearSelection();
+            cbRemoveTags.setEnabled(false);
+            cbRemoveSpacesNonseg.setEnabled(false);
+            cbPreserveSpaces.setEnabled(false);
         }
     }//GEN-LAST:event_projectSpecificCBActionPerformed
 

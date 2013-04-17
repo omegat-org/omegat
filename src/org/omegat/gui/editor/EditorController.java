@@ -627,7 +627,6 @@ public class EditorController implements IEditor {
             return;
         }
         if (doc.isEditMode()) {
-            editor.undoManager.onTextChanged();
             m_docSegList[displayedEntryIndex].onActiveEntryChanged();
 
             SwingUtilities.invokeLater(new Runnable() {

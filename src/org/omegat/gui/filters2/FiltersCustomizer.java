@@ -100,6 +100,7 @@ public class FiltersCustomizer extends JDialog implements ListSelectionListener 
         // Handle escape key to close the window
         KeyStroke escape = KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0, false);
         Action escapeAction = new AbstractAction() {
+            @Override
             public void actionPerformed(ActionEvent e) {
                 dispose();
             }
@@ -145,6 +146,7 @@ public class FiltersCustomizer extends JDialog implements ListSelectionListener 
         return returnStatus;
     }
 
+    @Override
     public void valueChanged(ListSelectionEvent e) {
         if (e.getValueIsAdjusting())
             return;

@@ -4,7 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2008 Alex Buloichik
-               2013 Aaron Madlon-Kay
+               2013 Aaron Madlon-Kay, Alex Buloichik
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -125,7 +125,7 @@ public class DocumentFilter3 extends DocumentFilter {
             Pattern placeholderPattern = PatternConsts.getPlaceholderPattern();
             Matcher placeholderMatcher = placeholderPattern.matcher(text);
             while (placeholderMatcher.find()) {
-                if (placeholderMatcher.start() <= off && off < placeholderMatcher.end()) {
+                if (placeholderMatcher.start() < off && off < placeholderMatcher.end()) {
                     return false;
                 }
             }

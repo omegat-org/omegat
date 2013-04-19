@@ -119,22 +119,12 @@ public class FiltersCustomizer extends JDialog implements ListSelectionListener 
         } else {
             projectSpecificCB.setVisible(false);
         }
-        if (projectSpecific && projectFilters == null) {
-            filtersTable.setEnabled(false);
-            filtersTable.setFocusable(false);
-            toDefaultsButton.setEnabled(false);
-            cbRemoveTags.setEnabled(false);
-            cbRemoveSpacesNonseg.setEnabled(false);
-            cbPreserveSpaces.setEnabled(false);
-        } else {
-            if (projectSpecific) projectSpecificCB.setSelected(true);
-            filtersTable.setEnabled(true);
-            filtersTable.setFocusable(true);
-            toDefaultsButton.setEnabled(true);
-            cbRemoveTags.setEnabled(true);
-            cbRemoveSpacesNonseg.setEnabled(true);
-            cbPreserveSpaces.setEnabled(true);
+
+        if (projectSpecific) {
+            projectSpecificCB.setSelected(projectFilters != null);
         }
+        projectSpecificCBActionPerformed(null);
+
         cbRemoveTags.setSelected(editableFilters.isRemoveTags());
         cbRemoveSpacesNonseg.setSelected(editableFilters.isRemoveSpacesNonseg());
         cbPreserveSpaces.setSelected(editableFilters.isPreserveSpaces());
@@ -372,6 +362,7 @@ public class FiltersCustomizer extends JDialog implements ListSelectionListener 
             cbRemoveTags.setEnabled(true);
             cbRemoveSpacesNonseg.setEnabled(true);
             cbPreserveSpaces.setEnabled(true);
+            toDefaultsButton.setEnabled(true);
         } else {
             filtersTable.setEnabled(false);
             filtersTable.setFocusable(false);
@@ -379,6 +370,7 @@ public class FiltersCustomizer extends JDialog implements ListSelectionListener 
             cbRemoveTags.setEnabled(false);
             cbRemoveSpacesNonseg.setEnabled(false);
             cbPreserveSpaces.setEnabled(false);
+            toDefaultsButton.setEnabled(false);
         }
     }//GEN-LAST:event_projectSpecificCBActionPerformed
 

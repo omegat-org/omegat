@@ -26,6 +26,9 @@
 
 package org.omegat.gui.editor;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.Document;
@@ -33,6 +36,7 @@ import javax.swing.text.DocumentFilter;
 import javax.swing.text.StyleConstants;
 
 import org.omegat.core.data.SourceTextEntry;
+import org.omegat.util.PatternConsts;
 import org.omegat.util.Preferences;
 import org.omegat.util.gui.UIThreadsUtil;
 
@@ -115,6 +119,14 @@ public class DocumentFilter3 extends DocumentFilter {
                     if (off + length > pos && off + length < pos + tag.length()) {
                         return false;
                     }
+                }
+            }
+            // check if inside tag by pattern
+            Pattern placeholderPattern = PatternConsts.getPlaceholderPattern();
+            Matcher placeholderMatcher = placeholderPattern.matcher(text);
+            while (placeholderMatcher.find()) {
+                if (placeholderMatcher.start() <= off && off < placeholderMatcher.end()) {
+                    return false;
                 }
             }
         }

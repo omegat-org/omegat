@@ -358,7 +358,7 @@ public class FiltersCustomizer extends JDialog implements ListSelectionListener 
     }// </editor-fold>//GEN-END:initComponents
 
     private void projectSpecificCBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_projectSpecificCBActionPerformed
-        if (projectSpecificCB.isSelected()) {
+        if (projectSpecificCB.isSelected() || !isProjectSpecific) {
             filtersTable.setEnabled(true);
             filtersTable.setFocusable(true);
             cbRemoveTags.setEnabled(true);
@@ -405,6 +405,9 @@ public class FiltersCustomizer extends JDialog implements ListSelectionListener 
     {// GEN-HEADEREND:event_toDefaultsButtonActionPerformed
         editableFilters = FilterMaster.cloneConfig(defaultFilters);
         filtersTable.setModel(new FiltersTableModel(editableFilters));
+        cbRemoveTags.setSelected(editableFilters.isRemoveTags());
+        cbRemoveSpacesNonseg.setSelected(editableFilters.isRemoveSpacesNonseg());
+        cbPreserveSpaces.setSelected(editableFilters.isPreserveSpaces());
     }// GEN-LAST:event_toDefaultsButtonActionPerformed
 
     private void editButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_editButtonActionPerformed

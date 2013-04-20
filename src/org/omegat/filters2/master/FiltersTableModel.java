@@ -64,14 +64,14 @@ public class FiltersTableModel extends AbstractTableModel {
                 filterNames.put(f.getClassName(), fi.getFileFormatName());
             }
         }
-        Collections.sort(filters, new Comparator<Filter>() {
+        /*Collections.sort(filters, new Comparator<Filter>() {
             @Override
             public int compare(Filter o1, Filter o2) {
                 String s1 = filterNames.get(o1.getClassName());
                 String s2 = filterNames.get(o2.getClassName());
                 return s1.compareToIgnoreCase(s2);
             }
-        });
+        });*/
     }
 
     // ////////////////////////////////////////////////////////////////////////

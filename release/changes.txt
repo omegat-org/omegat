@@ -133,6 +133,8 @@ a significant size decrease without a noticeable change in image
 clarity
 
   - Linux: improved Kaptain launcher, with updated tokenizers
+
+  - Java (for Windows and Linux with JRE) updated to 1.6.0_43-b01
   
   Bug fixes:
 
@@ -140,8 +142,6 @@ clarity
 external entities, the target files could be empty
 
   - Word selection with a double-click could sometimes be off
-
-  - Java (for Windows and Linux with JRE) updated to 1.6.0_43-b01
 
   Localisation updates:
 

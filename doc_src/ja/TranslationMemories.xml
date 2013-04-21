@@ -125,7 +125,7 @@
         </listitem>
 
         <listitem>
-          <para>現在の <filename>project_save.tmx</filename> ファイルの名前を一時的に変更する（たとえば <filename>project_save.tmx.temporary</filename> ）</para>
+          <para>現在の <filename>project_save.tmx</filename> ファイルの名前を一時的に変更する（たとえば <filename>project_save.tmx.temporary</filename>）</para>
         </listitem>
 
         <listitem>
@@ -215,7 +215,7 @@
           <primary>翻訳メモリ</primary> <secondary>インポートとエクスポート</secondary>
         </indexterm></title>
 
-      <para>OmegaT は TMX バージョン 1.1 から 1.4b （レベル 1 と レベル 2 の両方）をインポートすることができます。これにより、他のツールで作成された翻訳メモリを、OmegaT で読み込むことができます。しかし、OmegaT はレベル 2 の（文書情報だけでなく、整形情報も含む） TMX ファイルに完全には対応していません。 それでも、レベル 2 の TMX ファイルをインポートして、テキスト情報を OmegaT で利用することは可能です。ただし参考訳文の一致率は多少下がるかもしれません。</para>
+      <para>OmegaT は TMX バージョン 1.1 から 1.4b（レベル 1 と レベル 2 の両方）をインポートすることができます。これにより、他のツールで作成された翻訳メモリを、OmegaT で読み込むことができます。しかし、OmegaT はレベル 2 の（文書情報だけでなく、整形情報も含む）TMX ファイルに完全には対応していません。それでも、レベル 2 の TMX ファイルをインポートして、テキスト情報を OmegaT で利用することは可能です。ただし参考訳文の一致率は多少下がるかもしれません。</para>
 
       <para>OmegaT が翻訳メモリファイル（TMX ファイル）を読み込む際には、非常に厳密な処理が行われます。ファイルに何かのエラーを見つけると、OmegaT はその場所を通知します。</para>
 

@@ -136,7 +136,7 @@
                 <primary>プロジェクト設定</primary> <secondary>字体設定</secondary>
               </indexterm></guimenuitem></entry>
 
-            <entry><para><application>OmegaT</application> が使用する字体を変更します。原文、訳文、参考訳文、用語集の表示に使用されます。メインメニューの<menuchoice><guimenu>［設定］</guimenu><guimenuitem>［字体...］</guimenuitem></menuchoice>で開き、 <keycap>［Esc］</keycap> で閉じます。</para></entry>
+            <entry><para><application>OmegaT</application> が使用する字体を変更します。原文、訳文、参考訳文、用語集の表示に使用されます。メインメニューの<menuchoice><guimenu>［設定］</guimenu><guimenuitem>［字体...］</guimenuitem></menuchoice>で開き、<keycap>［Esc］</keycap> で閉じます。</para></entry>
           </row>
 
           <row>
@@ -695,7 +695,7 @@
           </mediaobject>
         </figure></para>
 
-      <para>原文と訳文で比較しやすいよう、タグは青い太字で強調表示されます。分節番号をクリックすると、編集ウィンドウにその分節を表示できます。必要に応じて訳文を修正し、 <guimenuitem>［Ctrl+T］</guimenuitem>を押すと再度タグ検証ウィンドウに戻り、その他のエラーを表示します。上図の例のうち、１番目と３番目はタグの組み合わせが間違っている例で、２番目は開始タグの &lt; 文字が抜けている例です。</para>
+      <para>原文と訳文で比較しやすいよう、タグは青い太字で強調表示されます。分節番号をクリックすると、編集ウィンドウにその分節を表示できます。必要に応じて訳文を修正し、<guimenuitem>［Ctrl+T］</guimenuitem>を押すと再度タグ検証ウィンドウに戻り、その他のエラーを表示します。上図の例のうち、１番目と３番目はタグの組み合わせが間違っている例で、２番目は開始タグの &lt; 文字が抜けている例です。</para>
 
       <para>タグエラーは、タグ操作によって、原文の分節にあるタグの登場順序や数が、訳文と一致しない場合におこります。タグ操作には、必要なもの、行っても問題ないものもありますが、中には翻訳後の文書を作成した際に問題となるものもあります。タグがあるということは、多くの場合、ある種の書式整形がそこで行われているということを表します。原文テキストの整形を単純にしておくと、タグは減ります。</para>
     </section>

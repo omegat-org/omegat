@@ -263,7 +263,7 @@
 
       <itemizedlist>
         <listitem>
-          <para>原文ファイルにエンコーディング宣言があれば、それに従います（HTML ファイル、 XML ベースのファイルの場合）</para>
+          <para>原文ファイルにエンコーディング宣言があれば、それに従います（HTML ファイル、XML ベースのファイルの場合）</para>
         </listitem>
       </itemizedlist>
 
@@ -291,7 +291,7 @@
 
       <itemizedlist>
         <listitem>
-          <para>デフォルトは <literal>${filename}</literal> です。 -- 拡張子を伴った完全な原文ファイル名で、これを指定すると、訳文ファイル名は原文ファイル名と同じになります。</para>
+          <para>デフォルトは <literal>${filename}</literal> です。-- 拡張子を伴った完全な原文ファイル名で、これを指定すると、訳文ファイル名は原文ファイル名と同じになります。</para>
         </listitem>
       </itemizedlist>
 

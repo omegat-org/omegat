@@ -91,7 +91,7 @@
       <listitem>
         <para>文書によっては、商標、名称、その他の固有名詞など、原文と同じ状態で残す必要のある箇所を含んでいる場合があります。変更すべきでないテキストを残しておくには 2 通りの方法があります。</para>
 
-        <para>まず、そのような箇所をまったく翻訳せずに残しておくことができます。OmegaT としては未翻訳の分節として残すことになります。こちらが初期設定です。もう１つの方法として、原文とまったく同じ訳文を入力することができます。OmegaT にはそこを翻訳したものとして記憶させることができます。そうする場合は、 <menuchoice><guimenu>［設定］</guimenu> <guimenuitem>［翻訳入力行...］</guimenuitem></menuchoice>でで表示される画面の<emphasis role="bold">［原文と同じ訳文を許可］</emphasis>をチェックしてください。</para>
+        <para>まず、そのような箇所をまったく翻訳せずに残しておくことができます。OmegaT としては未翻訳の分節として残すことになります。こちらが初期設定です。もう１つの方法として、原文とまったく同じ訳文を入力することができます。OmegaT にはそこを翻訳したものとして記憶させることができます。そうする場合は、<menuchoice><guimenu>［設定］</guimenu> <guimenuitem>［翻訳入力行...］</guimenuitem></menuchoice>でで表示される画面の<emphasis role="bold">［原文と同じ訳文を許可］</emphasis>をチェックしてください。</para>
       </listitem>
     </varlistentry>
   </variablelist>

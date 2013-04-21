@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<appendix id="appendix.LanguageToolPlugin.inOmegaT">
+  <title>Plugin LanguageTool<indexterm class="singular">
+      <primary>Plugin</primary> <secondary>LanguageTool</secondary>
+    </indexterm></title>
+
+  <section>
+    <title>Introduzione</title>
+
+    <para><ulink url="http://www.languagetool.org">LanguageTool</ulink> è un software open source di analisi grammaticale e sintattica per Inglese, Francese, Tedesco, Polacco, Olandese, Rumeno e varie altre lingue: vedere l'<ulink url="http://www.languagetool.org/languages/">elenco delle lingue supportate</ulink>.</para>
+
+    <para>Si può pensare a LanguageTool come un programma per individuare errori che un analizzatore ortografico non riesce a rilevare, per esempio, la confusione tra le/lei, no/non, e via discorrendo. Può anche individuare alcuni errori grammaticali. Non include la correzione ortografica. LanguageTool individuerà errori grazie alla regola definita nei file di configurazione per una determinata lingua.</para>
+
+    <figure>
+      <title>LanguageTool in OmegaT</title>
+
+      <screenshot>
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="images/LanguageToolExample.png"/>
+          </imageobject>
+        </mediaobject>
+      </screenshot>
+    </figure>
+  </section>
+
+  <section>
+    <title>Installazione e uso</title>
+
+    <para>Il plugin di LanguageTool per OmegaT è scaricabile dal <ulink url="http://sourceforge.net/projects/omegat-plugins/files">sito di download dei plugin di OmegaT</ulink>. Decomprimere i file e posizionarli nella cartella &quot;plugins&quot; che si trova nella cartella di installazione di OmegaT, ossia quella in cui è presente OmegaT.jar. Se la cartella &quot;plugins&quot; non esiste, crearla.</para>
+
+    <para>Una volta installato, il plugin sarà usato automaticamente da OmegaT, se l'opzione presente <guimenuitem>Opzioni &gt; Correzione ortografica</guimenuitem> è attivata. Le regole applicate (se presenti) dipenderanno dalla lingua di partenza e di arrivo del progetto. Quando viene attivata una regola, la frase corrispondente sarà sottolineata in blu all'interno dell'editor (vedere <emphasis>also </emphasis>e <emphasis>I didn't do nothing</emphasis> nell'immagine sopra). Una spiegazione apparirà quando si passa il mouse sopra la frase sottolineata.</para>
+  </section>
+</appendix>

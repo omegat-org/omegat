@@ -1,0 +1,265 @@
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <title>Chapter&nbsp;15.&nbsp;Ricerche</title>
+      <link rel="stylesheet" type="text/css" href="OmegaT.css">
+      <meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
+      <link rel="home" href="index.html" title="OmegaT - Manuale dell'Utente">
+      <link rel="up" href="index.html" title="OmegaT - Manuale dell'Utente">
+      <link rel="prev" href="chapter.segmentation.html" title="Chapter&nbsp;14.&nbsp;Segmentazione del documento originale">
+      <link rel="next" href="chapter.regexp.html" title="Chapter&nbsp;16.&nbsp;Espressioni regolari">
+   </head>
+   <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+      <div class="navheader">
+         <table width="100%" summary="Navigation header">
+            <tr>
+               <th colspan="3" align="center">Chapter&nbsp;15.&nbsp;Ricerche</th>
+            </tr>
+            <tr>
+               <td width="20%" align="left"><a accesskey="p" href="chapter.segmentation.html">Prev</a>&nbsp;
+               </td>
+               <th width="60%" align="center">&nbsp;</th>
+               <td width="20%" align="right">&nbsp;<a accesskey="n" href="chapter.regexp.html">Next</a></td>
+            </tr>
+         </table>
+         <hr>
+      </div>
+      <div class="chapter">
+         <div class="titlepage">
+            <div>
+               <div>
+                  <h1 class="title"><a name="chapter.searches"></a>Chapter&nbsp;15.&nbsp;Ricerche<a class="indexterm" name="d0e7089"></a></h1>
+               </div>
+            </div>
+         </div>
+         <div class="toc">
+            <dl class="toc">
+               <dt><span class="section"><a href="chapter.searches.html#search.window">1. Finestra di ricerca</a></span></dt>
+               <dd>
+                  <dl>
+                     <dt><span class="section"><a href="chapter.searches.html#d0e7111">1.1. Ricerca nel progetto</a></span></dt>
+                     <dt><span class="section"><a href="chapter.searches.html#d0e7135">1.2. Posizione di ricerca</a></span></dt>
+                  </dl>
+               </dd>
+               <dt><span class="section"><a href="chapter.searches.html#using.wild.cards">2. Uso dei caratteri jolly</a></span></dt>
+               <dt><span class="section"><a href="chapter.searches.html#search.methoids">3. Metodi e opzioni di ricerca</a></span></dt>
+               <dt><span class="section"><a href="chapter.searches.html#search.result.display">4. Visualizzazione dei risultati</a></span></dt>
+            </dl>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="search.window"></a>1.&nbsp;Finestra di ricerca
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <div class="figure"><a name="text.search.window"></a><p class="title"><b>Figure&nbsp;15.1.&nbsp;Finestra di ricerca testo<a class="indexterm" name="d0e7098"></a></b></p>
+               <div class="figure-contents">
+                  <div class="mediaobject"><img src="images/TextSearch25.png" alt="Finestra di ricerca testo"></div>
+               </div>
+            </div><br class="figure-break"><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;">
+               <h3 class="title">Note</h3>
+               <p>La ricerca sopra indicata trova tutti i segmenti di destinazione che contengono caratteri, piuttosto improbabile nella lingua
+                  di destinazione, per esempio lo Sloveno.
+               </p>
+            </div>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="d0e7111"></a>1.1.&nbsp;Ricerca nel progetto<a class="indexterm" name="d0e7114"></a></h3>
+                     </div>
+                  </div>
+               </div>
+               <p><span class="application">OmegaT</span> mette a disposizione un'ampia gamma di funzioni di ricerca. Aprire la finestra “Cerca” tramite la combinazione da tastiera
+                  <span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>F</strong></span> e inserire nel campo “Cerca” la parola o la frase che si desidera trovare. In alternativa, selezionare una parola o una frase
+                  in un punto qualsiasi nella finestra dell'Editor (il testo di destinazione del segmento attivo) e premere <span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>F</strong></span>. La parola o la frase selezionata viene automaticamente immessa all'interno del campo “Cerca”. È possibile mantenere aperte
+                  contemporaneamente più finestre di ricerca, ma è preferibile chiuderle quando non sono più necessarie, per non intasare lo
+                  spazio di lavoro in cui si sta lavorando.
+               </p>
+            </div>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="d0e7135"></a>1.2.&nbsp;Posizione di ricerca
+                        </h3>
+                     </div>
+                  </div>
+               </div>
+               <p>Per impostazione predefinita, le ricerche vengono effettuate sia nella sezione dei segmenti di partenza, sia in quella di
+                  destinazione, ma è possibile limitare la ricerca solo al testo originario o alla traduzione. È possibile eseguire la ricerca
+               </p>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
+                     <li class="listitem">
+                        <p>solo nel progetto (impostazione predefinita)</p>
+                     </li>
+                  </ul>
+               </div>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
+                     <li class="listitem">
+                        <p>nel progetto e nelle memorie di traduzione di riferimento contenute nella cartella /tm/ (attivare la casella <span class="emphasis"><em>Nella TM)</em></span></p>
+                     </li>
+                  </ul>
+               </div>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
+                     <li class="listitem">
+                        <p>in un singolo file o in una particolare cartella che contiene una serie di file (attivare la casella <span class="emphasis"><em>Ricerca file</em></span>)
+                        </p>
+                     </li>
+                  </ul>
+               </div>
+               <p>Quando si esegue una ricerca all'interno dei file (al contrario delle memorie di traduzione), <span class="application">OmegaT</span> restringe la ricerca ai file nei formati di file di partenza. Di conseguenza, sebbene OmegaT sia perfettamente in grado di
+                  gestire i file <code class="filename"> tmx</code>, non li include durante la ricerca all'interno dei file. Quando si attivano le <span class="bold"><strong><a class="indexterm" name="d0e7166"></a>Opzioni avanzate</strong></span>, è possibile combinare la ricerca col nome dell'autore della traduzione e la data dell'ultima modifica apportata.
+               </p>
+            </div>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="using.wild.cards"></a>2.&nbsp;Uso dei caratteri jolly<a class="indexterm" name="d0e7176"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <p>Sia le ricerche esatte, sia quelle di parole chiave consentono di utilizzare i caratteri jolly '*' and '?'. Il loro significato
+               è familiare agli utenti di Word:
+            </p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>'*' corrisponde a zero caratteri o più caratteri consecutivi, dalla posizione attuale in una parola data fino alla sua fine.
+                        Il termine di ricerca <code class="literal">'mobil*'</code>, per esempio, potrebbe estrarre le parole <code class="literal">'mobile'</code>, <code class="literal">'mobili'</code> e <code class="literal">'mobilità'</code>.
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>'?' corrisponde a qualsiasi singolo carattere. Per esempio, <code class="literal">'run?'</code> estrarrà le parole <code class="literal">'runs'</code> e <code class="literal">'runn'</code> all'interno della parola <code class="literal">'running'</code>.
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <p>Le corrispondenze verranno visualizzate in grassetto blu. Si noti che '*' e '?' possiedono un significato speciale nelle espressioni
+               regolari, dunque la ricerca con caratteri jolly, come qui descritta, è valida solo per la ricerca di parole chiave e la ricerca
+               esatta (vedere sotto).
+            </p>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="search.methoids"></a>3.&nbsp;Metodi e opzioni di ricerca<a class="indexterm" name="d0e7220"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <p>Selezionare il metodo di ricerca tramite i pulsanti di scelta. Sono disponibili i seguenti metodi di ricerca:</p>
+            <div class="variablelist">
+               <dl class="variablelist">
+                  <dt><span class="term">ricerca esatta</span></dt>
+                  <dd>
+                     <p>Avvia la ricerca dei segmenti contenenti esattamente la stringa specificata. Una ricerca esatta di una frase, per esempio
+                        se vengono inserite varie parole, darà un risultato solo se le parole immesse verranno individuate in quella medesima sequenza.
+                        Ricercare <code class="literal">open file</code> individuerà dunque tutte le occorrenze della stringa <span class="emphasis"><em><code class="literal">open file</code></em></span>, ma non <span class="emphasis"><em><code class="literal">file opened</code></em></span> o <span class="emphasis"><em><code class="literal">open input file</code></em></span>.
+                     </p>
+                  </dd>
+                  <dt><span class="term">ricerca con parole chiave</span></dt>
+                  <dd>
+                     <p>Avvia la ricerca dei segmenti contenenti tutte le parole specificate, indipendentemente dall'ordine di immissione. Selezionare
+                        la ricerca con parole chiave per eseguire una ricerca su un qualsiasi numero di parole intere singole, in qualsiasi ordine.
+                        OmegaT proporrà un elenco di tutti i segmenti contenente tutte le parole specificate. Le ricerche di parole chiave sono simili
+                        alle ricerche di “tutte le parole” di un motore di ricerca Internet, come Google (in base a un operatore logico AND). L'uso
+                        di una ricerca con parole chiave con <span class="emphasis"><em><code class="literal">open file</code></em></span> individuerà tutte le occorrenze della stringa <span class="emphasis"><em><code class="literal">open file</code>,</em></span>, come pure <span class="emphasis"><em><code class="literal">file opened</code>, <code class="literal">open input file</code>, <code class="literal">file may not be safe to open</code></em></span>, e via discorrendo.
+                     </p>
+                  </dd>
+                  <dt><span class="term"><span class="bold"><strong>espressioni regolari</strong></span></span></dt>
+                  <dd>
+                     <p>La stringa immessa nel campo “Cerca” verrà considerata come un'espressione regolare. La stringa di ricerca - [a-zA-Z]+[öäüqwß]
+                        - nell'esempio sopra, ricerca parole nel segmento di destinazione, contenenti caratteri dubbi provenienti dalla tastiera tedesca.
+                        Le espressioni regolari sono un sistema particolarmente valido per reperire alcuni elementi di un segmento. Ulteriori informazioni
+                        sono consultabili nel capitolo <a class="link" href="chapter.regexp.html" title="Chapter&nbsp;16.&nbsp;Espressioni regolari"> Espressioni regolari.</a></p>
+                  </dd>
+               </dl>
+            </div>
+            <p>Oltre a uno di questi metodi, si avrà la possibilità di selezionare tra le seguenti opzioni:</p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p><span class="bold"><strong>maiuscole/minuscole</strong></span>: verrà ricercata l'esatta corrispondenza della stringa immessa nel campo “Cerca”; per esempio, si controllerà la presenza
+                        di lettere maiuscole.
+                     </p>
+                  </li>
+                  <li class="listitem">
+                     <p><span class="bold"><strong>nei file di partenza: </strong></span>si eseguirà la ricerca nei segmenti di origine
+                     </p>
+                  </li>
+                  <li class="listitem">
+                     <p><span class="bold"><strong>nelle traduzioni: </strong></span>si eseguirà la ricerca nei segmenti di destinazione
+                     </p>
+                  </li>
+                  <li class="listitem">
+                     <p><span class="bold"><strong>nelle note: </strong></span>si eseguirà la ricerca nelle note dei segmenti
+                     </p>
+                  </li>
+                  <li class="listitem">
+                     <p><span class="bold"><strong>nelle TM</strong></span>: le memorie di traduzione contenute nella cartella <code class="filename">tm</code> saranno incluse nella ricerca.
+                     </p>
+                  </li>
+                  <li class="listitem">
+                     <p><span class="bold"><strong>mostra tutti i risultati: </strong></span>disattivando questa casella OmegaT mostrerà solo la prima occorrenza di un risultato, se ne sono presenti diversi.
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <p>Premendo il pulsante <span class="guibutton">Opzioni avanzate</span> potranno essere selezionati criteri di ricerca aggiuntivi (autore, data della traduzione, ecc.), come mostrato nell'immagine
+               sopra.
+            </p>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="search.result.display"></a>4.&nbsp;Visualizzazione dei risultati
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>La pressione del pulsante “Cerca”, dopo aver immesso una stringa nel campo del testo da trovare, genera la visualizzazione
+               di tutti i segmenti del progetto contenenti la stringa digitata. Dato che <span class="application">OmegaT</span> gestisce i segmenti identici come una singola entità, viene mostrato solo il primo segmento univoco. I segmenti vengono visualizzati
+               in ordine di comparsa all'interno del progetto. I segmenti tradotti vengono visualizzati con sopra il testo originale e sotto
+               il testo tradotto; per i segmenti non tradotti viene, invece, visualizzato solo come testo sorgente.
+            </p>
+            <p>Quando si fa clic sul segmento, esso viene aperto nella finestra dell'Editor per le modifiche. A questo punto si può tornare
+               alla finestra “Cerca” e passare al successivo segmento estratto, per eseguire il controllo e apportare le eventuali modifiche.
+            </p>
+            <p>Si potranno aprire insieme più finestre di ricerca. È possibile visualizzare rapidamente il loro contenuto leggendone il titolo,
+               che contiene il termine di ricerca utilizzato.
+            </p>
+         </div>
+      </div>
+      <div class="navfooter">
+         <hr>
+         <table width="100%" summary="Navigation footer">
+            <tr>
+               <td width="40%" align="left"><a accesskey="p" href="chapter.segmentation.html">Prev</a>&nbsp;
+               </td>
+               <td width="20%" align="center">&nbsp;</td>
+               <td width="40%" align="right">&nbsp;<a accesskey="n" href="chapter.regexp.html">Next</a></td>
+            </tr>
+            <tr>
+               <td width="40%" align="left" valign="top">Chapter&nbsp;14.&nbsp;Segmentazione del documento originale&nbsp;</td>
+               <td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
+               <td width="40%" align="right" valign="top">&nbsp;Chapter&nbsp;16.&nbsp;Espressioni regolari</td>
+            </tr>
+         </table>
+      </div>
+   </body>
+</html>

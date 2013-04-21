@@ -1,0 +1,391 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<chapter id="chapter.file.filters">
+  <title>Filtri dei file</title>
+
+  <para>OmegaT mette a disposizione una serie di filtri altamente personalizzabile che consente di configurare molti aspetti. I filtri dei file sono parti di codice in grado di:</para>
+
+  <itemizedlist>
+    <listitem>
+      <para>Leggere il documento in un particolare formato di file. Per esempio, file di solo testo.</para>
+    </listitem>
+  </itemizedlist>
+
+  <itemizedlist>
+    <listitem>
+      <para>Estrarre dal file il contenuto che dovrà essere tradotto.</para>
+    </listitem>
+  </itemizedlist>
+
+  <itemizedlist>
+    <listitem>
+      <para>Automatizzare le modifiche dei nomi dei file documento tradotti, sostituendo il contenuto traducibile con la traduzione effettuata.</para>
+    </listitem>
+  </itemizedlist>
+
+  <para>Per vedere quali formati di file sono gestiti da OmegaT, consultare il menu <guimenuitem>Opzioni &gt; Filtri dei file... </guimenuitem></para>
+
+  <para>La maggior parte degli utenti dovrebbe trovare soddisfacenti le opzioni predefinite dei filtri dei file. Se necessario, tuttavia, si potrà aprire la finestra principale selezionando il comando <emphasis role="bold"> Opzioni → Filtri dei file...</emphasis> dalla barra dei menu. Si possono anche abilitare specifici filtri dei file per il progetto, che verranno utilizzati solo in quello attivo, selezionando l'opzione <emphasis role="bold">Filtri dei file...</emphasis> nelle Proprietà del progetto.</para>
+
+  <para>Si possono abilitare specifici filtri dei file per il progetto tramite <emphasis role="bold">Progetto → Proprietà...</emphasis>. Premere il pulsante <guibutton>Filtri dei file</guibutton> e attivare l'opzione <guimenuitem>Rendi specifiche del progetto le impostazioni dei filtri dei file</guimenuitem><indexterm class="singular">
+      <primary>Filtri dei file</primary> <secondary>Filtri dei file specifici del progetto</secondary>
+    </indexterm>. In questo caso, una copia della configurazione dei filtri verrà memorizzata all'interno del progetto. Se i filtri verrano modificati in seguito, solo quelli del progetto saranno aggiornati, lasciando inalterati quelli dell'utente.</para>
+
+  <para><emphasis role="bold">Attenzione!</emphasis> Se si modificano le opzioni dei filtri mentre un progetto è aperto, affinché le modifiche siano attivate il progetto va ricaricato.</para>
+
+  <section id="file.filters.dialog">
+    <title>Finestra di dialogo &quot;Filtri dei file&quot;<indexterm class="singular">
+        <secondary>Finestra di dialogo</secondary> <primary>Filtri dei file</primary>
+      </indexterm></title>
+
+    <para>Questa finestra contiene un elenco dei filtri dei file disponibili. Se non si desidera utilizzare OmegaT per tradurre i file di un certo tipo, sarà sufficiente togliere la spunta alla casella corrispondente al tipo di file, presente nella colonna &quot;Abilitato&quot;. In questo caso, OmegaT, quando caricherà i progetti, ignorerà questo tipo di file e, quando creerà i documenti di arrivo, li copierà senza apportarvi alcuna modifica. Se si desidera utilizzare di nuovo questo filtro, sarà sufficiente attivare la casella di controllo corrispondente. Fate clic sul pulsante <emphasis role="bold">Predefiniti</emphasis> per riportare i filtri dei file alle impostazioni predefinite. Per modificare il modo in cui il filtro interviene sui file e sulla loro codifica, selezionare dall'elenco il filtro e fare clic su <emphasis role="bold">Modifica</emphasis>.</para>
+  </section>
+
+  <section id="filters.options">
+    <title>Opzioni dei filtri<indexterm class="singular">
+        <secondary>Opzioni</secondary> <primary>Filtri dei file</primary>
+      </indexterm></title>
+
+    <para>Diversi filtri (file di testo, file XHTML, file HTML e XHTML, file OpenDocument Microsoft Open XML) hanno una o più opzioni particolari. Per modificare le opzioni selezionare il filtro dall'elenco e premere il pulsante <emphasis role="bold">Opzioni</emphasis>. Le opzioni disponibili sono:</para>
+
+    <para><emphasis role="bold">File di testo</emphasis></para>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis>Segmentazione a livello di paragrafo in corrispondenza delle interruzioni di riga, in base alle righe vuote oppure nessuna segmentazione:</emphasis></para>
+
+        <para>se le regole di segmentazione a livello di frase sono attive, il testo verrà ulteriormente segmentato in base all'opzione qui selezionata.</para>
+      </listitem>
+    </itemizedlist>
+
+    <para><emphasis role="bold">File PO</emphasis></para>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis>Consenti traduzioni vuote nei file tradotti</emphasis>:</para>
+
+        <para>se attivata, la traduzione del file di arrivo risulterà vuota se un segmento PO (che può essere un intero paragrafo) non viene tradotto. In gergo tecnico, il segmento <code>msgstr</code> nel file PO di arrivo, se creato, sarà lasciato vuoto. poiché questo è il comportamento usuale per i file PO, l'opzione è attiva in modo predefinito. se l'opzione è disattivata, il testo di partenza verrà copiato nel segmento di arrivo.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis>Salta l'intestazione PO</emphasis></para>
+
+        <para>Se questa opzione viene attivata, l'intestazione PO sarà saltata e non modificata.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis>Sostituisci automaticamente 'nplurals=INTEGER; plural=EXPRESSION;' nell'intestazione</emphasis></para>
+
+        <para><emphasis><emphasis>L'opzione permette a OmegaT di non tenere conto delle specifiche contenute nell'intestazione del file PO e usare le impostazioni predefinite per la lingua di destinazione selezionata.</emphasis></emphasis></para>
+      </listitem>
+    </itemizedlist>
+
+    <para><emphasis role="bold">File XHTML</emphasis></para>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis>Aggiungi o riscrivi la dichiarazione di codifica nei file HTML e XHTML</emphasis>: spesso i file di destinazione devono contenere una codifica dei caratteri diversa da quella specificata nei file di partenza (che sia definita o no esplicitamente). Tramite l'uso di questa opzione il traduttore può specificare se i file di destinazione debbano includere la dichiarazione di codifica. Per esempio, se il filtro dei file specifica UTF8 come schema di codifica per i file di destinazione, selezionare &quot;Sempre&quot; consentirà di includere tale informazione all'interno dei file tradotti.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis>Traduci i seguenti attributi</emphasis>: gli attributi selezionati appariranno come segmenti nella finestra dell'Editor.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis>Avvia un nuovo paragrafo con: il tag HTML &lt;br&gt;</emphasis> costituirà un paragrafo per scopi di segmentazione.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis>Salta l'espressione regolare che corrisponde al testo</emphasis>: il testo che corrisponde all'espressione regolare viene saltato. Viene mostrato in colore rosso nella convalida dei tag. Il testo nel segmento di origine che corrisponde viene mostrato in corsivo.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis>Non tradurre l'attributo di contenuto dei metatag... :</emphasis> i metatag indicati non verranno tradotti.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis>Non tradurre il contenuto dei tag con la seguente coppia di valori-chiave di attributo (separati da virgole)</emphasis>: la corrispondenza all'interno dell'elenco delle coppie di valori-chiave farà sì che il contenuto dei tag venga ignorato</para>
+
+        <para>A volte potrebbe essere utile rendere non traducibili certi tag basati sul valore degli attributi. Per esempio, <literal>&lt;div class=&quot;hide&quot;&gt; &lt;span translate=&quot;no&quot;&gt;</literal> È possibile definire coppie di valori-chiave per i tag da non tradurre. L'esempio sopra conterrebbe: <literal>class=hide, translate=no </literal></para>
+      </listitem>
+    </itemizedlist>
+
+    <para><emphasis role="bold">File Microsoft Office Open XML</emphasis></para>
+
+    <para>È possibile selezionare quali elementi devono essere tradotti. Essi appariranno come segmenti separati nella traduzione.</para>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis role="bold">Word:</emphasis> testo di istruzioni non visibile, commenti, note a piè pagina, note a fine documento, piè di pagina</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis role="bold">Excel: </emphasis>commenti, nomi dei fogli</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis role="bold">Power Point</emphasis>: commenti, master e layout della presentazione</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis role="bold">Globale:</emphasis> grafici, diagrammi, disegni, WordArt</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis role="bold">Altre opzioni:</emphasis></para>
+
+        <itemizedlist>
+          <listitem>
+            <para><emphasis>Tag complessivi</emphasis>: se selezionato, i tag senza testo traducibile verranno aggregati in singoli tag.</para>
+          </listitem>
+
+          <listitem>
+            <para><emphasis>Preserva spazi per tutti i tag</emphasis>: se selezionato, lo &quot;spazio vuoto&quot; (per es., gli spazi e le nuove righe) sarà preservato, anche se non impostato tecnicamente all'interno del documento</para>
+          </listitem>
+        </itemizedlist>
+      </listitem>
+    </itemizedlist>
+
+    <para><emphasis role="bold">File HTML e XHTML</emphasis></para>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis>Aggiungi o riscrivi la dichiarazione di codifica nei file HTML e XHTML</emphasis>: sempre (impostazione predefinita), Solo se il file (X)HTML contiene un'intestazione, Solo se il file (X)HTML contiene una dichiarazione di codifica, Mai</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis>Traduci i seguenti attributi</emphasis>: gli attributi selezionati appariranno come segmenti nella finestra dell'Editor.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis>Avvia un nuovo paragrafo con</emphasis>: il tag HTML &lt;br&gt; costituirà un paragrafo per scopi di segmentazione.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis>Salta l'espressione regolare che corrisponde al testo</emphasis>: il testo che corrisponde all'espressione regolare sarà saltata.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis>Non tradurre l'attributo di contenuto dei metatag... :</emphasis> i metatag indicati non verranno tradotti.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis>Non tradurre il contenuto dei tag con la seguente coppia di valori-chiave di attributo (separati da virgole)</emphasis>: la corrispondenza all'interno dell'elenco delle coppie di valori-chiave farà sì che il contenuto dei tag venga ignorato</para>
+      </listitem>
+    </itemizedlist>
+
+    <para><emphasis role="bold">File di testo</emphasis></para>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis>Segmentazione a livello di paragrafo in corrispondenza delle interruzioni di riga, in base alle righe vuote oppure nessuna segmentazione</emphasis>:</para>
+
+        <para>se le regole di segmentazione a livello di frase sono attive, il testo verrà ulteriormente segmentato in base all'opzione qui selezionata.</para>
+      </listitem>
+    </itemizedlist>
+
+    <para><emphasis role="bold">File Open Document Format (ODF)</emphasis></para>
+
+    <itemizedlist>
+      <listitem>
+        <para>È possibile selezionare quali tra i seguenti elementi devono essere tradotti:</para>
+
+        <para>voci di indici, segnalibri, collegamenti a segnalibri, note, commenti, note di presentazione, collegamenti (URL), nomi dei fogli</para>
+      </listitem>
+    </itemizedlist>
+  </section>
+
+  <section id="edit.filter.dialog">
+    <title>Finestra di dialogo &quot;Modifica filtro&quot;<indexterm class="singular">
+        <secondary>Modifica</secondary> <primary>Filtri dei file</primary> 
+      </indexterm></title>
+
+    <para>Questa finestra di dialogo consente di impostare i modelli dei nomi dei file di partenza per quei file che dovranno essere elaborati dal filtro, di personalizzare i nomi dei file tradotti e di selezionare la codifica da adottare quando viene caricato il file di partenza e salvato quello di arrivo tradotto. Per modificare un modello di filtro dei file, modificare direttamente i campi o fare clic su <emphasis role="bold">Modifica</emphasis>. Per aggiungerne uno nuovo, fare clic su <emphasis role="bold">Aggiungi</emphasis>. Sia che si desideri aggiungere un nuovo modello o modificarne uno esistente, verrà comunque usata la stessa finestra di dialogo. La finestra è utile perché include uno speciale editor dei modelli del nome del file di arrivo, che permette di personalizzare i nomi dei file prodotti.</para>
+
+    <section id="source.filetype.and.filename.pattern">
+      <title><indexterm class="singular">
+          <primary>File di partenza</primary> <secondary>Tipo di file e modello del nome</secondary>
+        </indexterm>Tipo del file di partenza, modello del nome del file<indexterm class="singular">
+          <primary>Filtri dei file</primary> <secondary>Tipo di file e nome del modello</secondary>
+        </indexterm></title>
+
+      <para>Quando OmegaT apre un file dalla propria cartella di partenza, cerca di selezionare il filtro servendosi dell'estensione associata allo stesso file. Più precisamente, OmegaT tenta di associare i modelli del nome del file di partenza di ciascun filtro al nome dello stesso file. Per esempio, il modello <literal>*.xhtml</literal> è associato ai file con estensione <literal>.xhtml</literal>. Se viene trovato il filtro appropriato, il file viene assegnato ad esso per essere lavorato. Per esempio, per impostazione predefinita, per lavorare sui file con estensione .xhtml viene utilizzato il filtro XHTML. È possibile modificare o aggiungere modelli di nome del file per quei file che dovranno essere gestiti da ciascun filtro. I modelli di nome del file di partenza usano i caratteri jolly simili a quelli usati nelle <emphasis role="bold">Ricerche. </emphasis>Il carattere '*' corrisponde a zero caratteri o più caratteri consecutivi. Il carattere '?' corrisponde esattamente a un carattere. Tutti gli altri caratteri rappresentano se stessi. Per esempio, se si desidera utilizzare il filtro di testo per la gestione dei file &quot;leggimi&quot; (<literal>leggimi, leggi.mi</literal>, e <literal>leggimi.txt</literal>) si dovrebbe usare il modello <literal>leggi*</literal>.</para>
+    </section>
+
+    <section id="source.and.target.files.encoding">
+      <title>File di codifica di partenza e di arrivo</title>
+
+      <indexterm class="singular">
+        <primary>File di partenza</primary> <secondary>Codifica</secondary>
+      </indexterm>
+
+      <indexterm class="singular">
+        <primary>File di arrivo</primary> <secondary>Codifica</secondary>
+      </indexterm>
+
+      <indexterm class="singular">
+        <primary>Filtri dei file</primary> <secondary>Partenza, arrivo - codifica</secondary>
+      </indexterm>
+
+      <para>Solo un numero limitato di formati di file specifica una codifica obbligatoria. I formati di file che non specificano la loro codifica useranno la codifica impostata dall'utente per l'estensione che corrisponde al loro nome. Per esempio, per impostazione predefinita, i file <literal>.txt</literal> verranno caricati utilizzando la codifica predefinita del sistema operativo. Per ogni modello di nome dei file di partenza si ha la possibilità di modificare la codifica originaria. Tali file possono anche venire scritti utilizzando una qualsiasi codifica. Per impostazione predefinita, la codifica del file tradotto è la stessa di quella del file di partenza. I campi di codifica del file di partenza e di quello di arrivo utilizzano caselle combinate, contenenti tutte le codifiche riconosciute. &lt;auto&gt; lascia la scelta della codifica a <application>OmegaT</application>. Ecco come funziona:</para>
+
+      <itemizedlist>
+        <listitem>
+          <para>OmegaT identifica la codifica del file di partenza utilizzando la sua dichiarazione di codifica, se presente (file HTML, file basati su XML)</para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para>OmegaT è impostato per utilizzare una codifica obbligatoria per alcuni formati di file (Java properties, ecc.)</para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para>OmegaT utilizza la codifica predefinita adottata dal sistema operativo per i file di solo testo.</para>
+        </listitem>
+      </itemizedlist>
+    </section>
+
+    <section id="target.name">
+      <title>Nome del file di arrivo<indexterm class="singular">
+          <primary>File di arrivo</primary> <secondary>Nomi dei file</secondary>
+        </indexterm></title>
+
+      <para>A volte, potrebbe essere necessario assegnare automaticamente un nuovo nome al file, o ai file, che vengono tradotti; è il caso, per esempio, dell'aggiunta di un codice di lingua al nome del file finale. Il modello del nome del file di arrivo utilizza una sintassi particolare; pertanto, se si desidera intervenire su questo campo, si deve fare clic su <emphasis role="bold">Modifica...</emphasis> e usare la finestra di dialogo <indexterm class="singular">
+          <secondary>Finestra di dialogo</secondary> <primary>Filtri dei file</primary>
+        </indexterm>Modifica filtro. Se si vuole tornare alla configurazione predefinita del filtro, fare clic su <emphasis role="bold">Predefiniti.</emphasis> È possibile anche modificare direttamente il nome nel campo del modello del nome del file di arrivo della finestra di dialogo dei filtri dei file. La finestra di dialogo &quot;Modifica modello&quot; offre, tra le altre, le opzioni seguenti:</para>
+
+      <itemizedlist>
+        <listitem>
+          <para>Come predefinito viene assunto il valore <literal>${filename}</literal>, ovvero il nome del file di partenza completo dell'estensione associata: in questo modo il nome del file tradotto sarà uguale a quello del file di partenza.</para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para><literal>${nameOnly}</literal>– consente di inserire solo il nome del file di partenza senza associarlo all'estensione.</para>
+        </listitem>
+
+        <listitem>
+          <para><literal>${extension} </literal>- l'estensione del file originale</para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para><literal>${targetLocale}</literal>– codice locale di arrivo (nella forma &quot;xx_YY&quot;).</para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para><literal>${targetLanguage}</literal>– lingua e codice nazione di arrivo (nella forma &quot;XX-YY&quot;).</para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para><literal>${targetLanguageCode}</literal> – il codice della lingua di arrivo - solo nella forma &quot;XX&quot;</para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para><literal>${targetCountryCode}</literal>– il codice della nazione di arrivo - solo nella forma &quot;YY&quot;</para>
+        </listitem>
+
+        <listitem>
+          <para><literal>${timestamp-????}</literal> – la data e l'ora di sistema al momento della generazione, in vari modelli</para>
+
+          <para>Per esempi di modelli di &quot;SimpleDateFormat&quot;, consultare la <ulink url="http://docs.oracle.com/javase/1.4.2/docs/api/java/text/SimpleDateFormat.html">documentazione Oracle</ulink></para>
+        </listitem>
+
+        <listitem>
+          <para><literal>${system-os-name}</literal> - il sistema operativo del computer usato</para>
+        </listitem>
+
+        <listitem>
+          <para><literal>${system-user-name)</literal> - il nome utente di sistema</para>
+        </listitem>
+
+        <listitem>
+          <para><literal>${system-host-name}</literal> - il nome host di sistema</para>
+        </listitem>
+
+        <listitem>
+          <para><literal>${file-source-encoding}</literal> - la codifica del file di partenza</para>
+        </listitem>
+
+        <listitem>
+          <para><literal>${file-target-encoding}</literal> - la codifica del file di arrivo</para>
+        </listitem>
+
+        <listitem>
+          <para><literal>${targetLocaleLCID)</literal> - l locale di destinazione Microsoft</para>
+        </listitem>
+      </itemizedlist>
+
+      <para>Sono disponibili ulteriori varianti per le variabili ${nameOnly} e ${Extension}. Nel caso in cui il nome_file possieda nome ambivalente, si possono applicare variabili della forma <literal>${name only</literal><emphasis>-numero delle estensioni</emphasis>} e <literal>${extension</literal>-<emphasis>numero delle estensioni} </emphasis>. Se, per esempio, il file originale si chiama Documento.xx.docx, le variabili seguenti restituiranno i risultati seguenti:</para>
+
+      <itemizedlist>
+        <listitem>
+          <para><literal>${nameOnly-0}</literal> Documento</para>
+        </listitem>
+
+        <listitem>
+          <para><literal>${nameOnly-1}</literal> Documento.xx</para>
+        </listitem>
+
+        <listitem>
+          <para><literal>${nameOnly-2}</literal> Documento.xx.docx</para>
+        </listitem>
+
+        <listitem>
+          <para><literal>${extension-0}</literal> docx</para>
+        </listitem>
+
+        <listitem>
+          <para><literal>${extension-1}</literal> xx.docx</para>
+        </listitem>
+
+        <listitem>
+          <para><literal>${extension-2}</literal> Documento.xx.docx</para>
+        </listitem>
+      </itemizedlist>
+    </section>
+  </section>
+</chapter>

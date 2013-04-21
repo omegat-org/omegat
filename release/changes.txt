@@ -3,7 +3,7 @@
 ----------------------------------------------------------------------
    3 Enhancements
    2 Bug fixes
-   2 Localisation updates
+   3 Localisation updates
 ----------------------------------------------------------------------
 2.6.3 update 1 vs. 2.6.3
 
@@ -27,6 +27,7 @@ external entities, the target files could be empty
 
   Localisation updates:
 
+  - Italian localisation updated to 2.6.3 (UI, Readme, Documentation)
   - Japanese localisation updated to 2.6.3 (UI, Documentation)
   - Russian localisation updated to 2.6.3 (UI, , Readme, Documentation)
 

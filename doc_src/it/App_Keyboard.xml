@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<appendix id="appendix.keyboard">
+  <title>Sistemi rapidi da tastiera nell'editor</title>
+
+  <para>Questa parte descrive brevemente l'uso dei tasti nella finestra dell'editor. La frase &quot;Sposta al segmento interno&quot; significa che il cursore si sposta all'inizio del segmento se si trovava in precedenza prima del segmento, e alla fine di esso se in precedenza si trovava dopo.</para>
+
+  <table>
+    <title>Uso dei tasti nell'editor</title>
+
+    <tgroup cols="2">
+      <colspec align="left" colnum="1" colwidth="90"/>
+
+      <colspec align="left" colnum="2" colwidth="300"/>
+
+      <thead>
+        <row>
+          <entry align="left">Combinazione di tasti</entry>
+
+          <entry align="left">Azione</entry>
+        </row>
+      </thead>
+
+      <tbody>
+        <row>
+          <entry><emphasis role="bold">Freccia sinistra:</emphasis></entry>
+
+          <entry>un carattere a sinistra, ma non oltre l'inizio del segmento</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">Freccia destra:</emphasis></entry>
+
+          <entry>un carattere a destra, ma non oltre la fine del segmento</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">Ctrl+freccia sinistra:</emphasis></entry>
+
+          <entry>una parola a sinistra, ma non oltre l'inizio del segmento</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">Ctrl+freccia destra:</emphasis></entry>
+
+          <entry>una parola a destra, ma non oltre la fine del segmento</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">PagSu:</emphasis></entry>
+
+          <entry>su di una pagina nel documento</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">PagGiù:</emphasis></entry>
+
+          <entry>giù di una pagina nel documento</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">Home*</emphasis></entry>
+
+          <entry>si sposta all'inizio della riga all'interno del segmento</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">Fine*</emphasis></entry>
+
+          <entry>si sposta alla fine della riga all'interno del segmento</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">Ctrl+Home</emphasis></entry>
+
+          <entry>si sposta all'inizio del segmento</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">Ctrl+Fine</emphasis></entry>
+
+          <entry>si sposta alla fine del segmento</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">Ctrl+PagSu</emphasis></entry>
+
+          <entry>si sposta all'inizio del documento (Mac: <emphasis role="bold">Cmd+PagSu</emphasis>)</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">Ctrl+PagGiù</emphasis></entry>
+
+          <entry>si sposta alla fine del documento (Mac: <emphasis role="bold">Cmd+PagGiù</emphasis>)</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">Backspace*</emphasis></entry>
+
+          <entry>elimina il carattere che si trova prima del cursore</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">Canc*</emphasis></entry>
+
+          <entry>elimina il carattere che si trova dopo il cursore</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">Ctrl+Backspace</emphasis></entry>
+
+          <entry>elimina i caratteri fino all'inizio della parola corrente (Mac: <emphasis role="bold">Alt+Backspace</emphasis>)</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">Ctrl+Canc</emphasis></entry>
+
+          <entry>elimina i caratteri fino all'inizio della parola successiva (Mac: <emphasis role="bold">Alt+Canc</emphasis>)</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">Ctrl+Invio</emphasis></entry>
+
+          <entry>apre il segmento successivo (Mac: <emphasis role="bold">Cmd+Invio</emphasis>)</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">Ctrl+A</emphasis></entry>
+
+          <entry>seleziona tutto il segmento (Mac: <emphasis role="bold">Cmd+A</emphasis>)</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">Ctrl+Maiusc+O</emphasis></entry>
+
+          <entry>alterna la direzione RTL-LTR</entry>
+        </row>
+      </tbody>
+    </tgroup>
+  </table>
+
+  <para>* Questi tasti hanno un comportamento differente se il cursore si trova al di fuori del segmento modificabile:</para>
+
+  <itemizedlist>
+    <listitem>
+      <para><emphasis role="bold">Home: </emphasis> il cursore va all'inizio del segmento attivo</para>
+    </listitem>
+
+    <listitem>
+      <para><emphasis role="bold">Fine: </emphasis> il cursore va alla fine del segmento attivo</para>
+    </listitem>
+
+    <listitem>
+      <para><emphasis role="bold">Backspace: </emphasis>nulla</para>
+    </listitem>
+
+    <listitem>
+      <para><emphasis role="bold">Canc: </emphasis>nulla</para>
+    </listitem>
+
+    <listitem>
+      <para><emphasis role="bold">Tutti i tasti carattere,</emphasis> se premuti al di fuori del segmento modificabile, verranno ignorati.</para>
+    </listitem>
+  </itemizedlist>
+
+  <para>Il tasto &quot;Maiusc&quot; non presenta, di per sé, speciali comportamenti: se premuto, tutti i tasti spostano il cursore in base alla funzione attribuita loro, ad eccezione della combinazione <literal>Maiusc+Invio</literal>, che inserisce un'interruzione di riga nel testo.</para>
+
+  <para>Comandi di tipo globale Seleziona tutto (<keycap>Ctrl+A</keycap>), Incolla (<emphasis role="bold">Ctrl+V</emphasis>), Taglia (<emphasis role="bold">Ctrl+X</emphasis>), Copia (<emphasis role="bold">Ctrl+C)</emphasis>, Inserisci corrispondenza <emphasis role="bold">(Ctrl+I</emphasis>) e Inserisci il testo di partenza (<emphasis role="bold">Ctrl+Maiusc+I</emphasis>) agiscono, in linea di principio, sul testo all'interno del solo segmento correntemente aperto.</para>
+
+  <para>Si noti che è possibile riassegnare le scorciatoie in base alle proprie preferenze. <link linkend="ch04.shortcuts.customization">Vedere Appendice - Personalizzazione delle scorciatoie</link></para>
+</appendix>

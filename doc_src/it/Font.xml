@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<chapter id="chapter.font">
+  <title>Impostazioni dei caratteri</title>
+  
+  <section id="section.font.settings">
+    <title>Impostazioni dei caratteri</title>
+    <indexterm class="singular">
+      <primary>Impostazioni dei caratteri</primary>
+    </indexterm>
+    
+    <para>In questa finestra di dialogo si può impostare il carattere usato da OmegaT nelle seguenti finestre:</para>
+    
+    <itemizedlist>
+      <listitem>
+        <para>Finestra principale di OmegaT (ad eccezione del visualizzatore del Dizionario)</para>
+      </listitem>
+      <listitem>
+        <para>Finestra di ricerca</para>
+      </listitem>
+      <listitem>
+        <para>Finestra di convalida dei tag</para>
+      </listitem>
+    </itemizedlist>
+
+    <para>Si può accedere alla finestra tramite l'elemento contenuto nel menu dell'applicazione. La finestra di dialogo contiene: <menuchoice> <guimenu>Opzioni</guimenu> <guimenuitem>Tipo di carattere...</guimenuitem> </menuchoice>
+    <indexterm class="singular">
+      <primary>Menu Opzioni</primary> <secondary>Tipo di carattere...</secondary>
+    </indexterm>
+    </para>
+
+    <itemizedlist>
+      <listitem>
+        <formalpara>
+	  <title>Tipo di carattere</title>
+	  <para>Usare la casella a discesa per selezionare uno dei caratteri a disposizione nel proprio sistema.</para>
+	</formalpara>
+      </listitem>
+      <listitem>
+        <formalpara>
+	  <title>Dimensione</title>
+	  <para>Modificare la dimensione del carattere.</para>
+	</formalpara>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <formalpara>
+	  <title>Testo di prova</title>
+	  <para>Anteprima immediata del carattere selezionato.</para>
+	</formalpara>
+      </listitem>
+    </itemizedlist>
+
+    <formalpara>
+      <title>Nota</title>
+      <para>L'aggiornamento della visualizzazione può richiedere diverso tempo se il numero dei segmenti da visualizzare è consistente. Inoltre, alcuni tipi di caratteri potrebbero mostrare un comportamento migliore rispetto ad altri, a seconda delle coppie di lingue.</para>
+    </formalpara>
+  </section>
+</chapter>

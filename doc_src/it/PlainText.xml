@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<chapter id="chapter.plain.text">
+  <title>Lavorazione di file di solo testo<indexterm class="singular">
+      <primary>File di partenza</primary> <secondary>File di solo testo</secondary>
+    </indexterm></title>
+
+  <section id="default.encoding">
+    <title>Codifica predefinita<indexterm class="singular">
+        <primary>Codifica</primary> <secondary>File di solo testo</secondary>
+      </indexterm><indexterm class="singular">
+        <primary>File di partenza</primary> <secondary>Codifica</secondary>
+      </indexterm></title>
+
+    <para>I file di solo testo - nella maggior parte dei casi sono file con un'estensione .txt - contengono solo informazioni di tipo testuale e non offrono al computer un metodo chiaro per capire quale lingua è in essi contenuta. Tutto quello che OmegaT può fare, in tali casi, è presupporre che il testo sia scritto nello stessa lingua usata dal sistema operativo. Questo non è un problema per i file con un set di caratteri a codifica in Unicode 16 bit. Tuttavia, se il testo è codificato a 8 bit, è possibile trovarsi di fronte alla seguente difficile situazione: anziché visualizzare, per i caratteri giapponesi, il testo...</para>
+
+    <mediaobject>
+      <imageobject role="html">
+        <imagedata fileref="images/OmT_Japanese.png"/>
+      </imageobject>
+
+      <imageobject role="fo">
+        <imagedata fileref="images/OmT_Japanese.png" width="60%"/>
+      </imageobject>
+    </mediaobject>
+
+    <para>...il sistema lo mostrerà come questo, per esempio:</para>
+
+    <mediaobject>
+      <imageobject role="html">
+        <imagedata fileref="images/OmT_Cyrillic.png"/>
+      </imageobject>
+
+      <imageobject role="fo">
+        <imagedata fileref="images/OmT_Cyrillic.png" width="60%"/>
+      </imageobject>
+    </mediaobject>
+
+    <para>Il computer che esegue OmegaT ha come lingua predefinita il Russo, dunque presenta i caratteri nell'alfabeto cirillico e non in Kanji.</para>
+  </section>
+
+  <section id="OmegaT.solution">
+    <title>La soluzione <application>OmegaT</application></title>
+
+    <para>Ci sono fondamentalmente tre modi per affrontare questo problema in <application>OmegaT</application>. Tutti comportano l'applicazione di filtri di file nel menu <emphasis role="bold"> Opzioni</emphasis>.</para>
+
+    <variablelist>
+      <varlistentry>
+        <term>Modificare la codifica dei propri file in Unicode</term>
+
+        <listitem>
+          <para>aprire il file sorgente in un editor di testo che interpreta correttamente la sua codifica e salvare il file nella codifica <emphasis role="bold">&quot;UTF-8&quot;</emphasis>. Modificare l'estensione del file da <literal>.txt</literal> a <literal>.utf8.</literal> <application>OmegaT</application> lo interpreterà automaticamente come file con codifica UTF-8. Questo è il sistema più comune, che permette di evitare problemi nel lungo periodo.</para>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+
+    <variablelist>
+      <varlistentry>
+        <term>Specificare la codifica per i file di solo testo</term>
+
+        <listitem>
+          <para>- ad es., i file con estensione <filename>.txt</filename> - : nella sezione <emphasis role="bold">File di testo</emphasis> della finestra di dialogo Filtri dei file, modificare <emphasis role="bold">Codifica del file sorgente</emphasis> da &lt;auto&gt; a quella corrispondente al file <filename>.txt</filename> originale, per esempio a .jp, in base all'esempio sopra riportato.</para>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+
+    <variablelist>
+      <varlistentry>
+        <term>Modificare l'estensione dei file di solo testo di partenza</term>
+
+        <listitem>
+          <para>per esempio, da <filename>.txt</filename> a <filename>.jp</filename> per i file di solo testo in Giapponese: nella sezione <emphasis role="bold">File di testo</emphasis> della finestra di dialogo dei filtri dei file, aggiungere un nuovo <emphasis role="bold">Modello del nome del file sorgente</emphasis> (<filename>*.jp</filename> per questo esempio) e selezionare i corretti parametri per la codifica dei file di partenza e di arrivo.</para>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+
+    <para>Per impostazione predefinita <application>OmegaT</application> mette a disposizione il seguente breve elenco che facilita la gestione di alcuni tipi di file di solo testo:</para>
+
+    <itemizedlist>
+      <listitem>
+        <para>i file <literal>.txt</literal> sono automaticamente (&lt;auto&gt;) interpretati da <application>OmegaT</application> come se fossero codificati con la codifica predefinita del computer.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>i file <literal>.txt1</literal> sono in ISO-8859-1, che copre la maggior parte delle lingue dell'<emphasis role="bold">Europa occidentale</emphasis>.<indexterm class="singular">
+            <primary>Codifica</primary> <secondary>Occidentale</secondary>
+          </indexterm></para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>i file <literal>.txt2</literal> sono in ISO-8859-2, che copre la maggior parte delle lingue dell'<emphasis role="bold">Europa centrale e orientale</emphasis><indexterm class="singular">
+            <primary>Codifica</primary> <secondary>Europeo centrale e orientale</secondary>
+          </indexterm></para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>i file <literal>.utf8</literal> sono interpretati da <application>OmegaT</application> come se fossero codificati in UTF-8 (codifica che copre quasi tutte le lingue del mondo).<indexterm class="singular">
+            <primary>Codifica</primary> <secondary>Unicode</secondary>
+          </indexterm></para>
+      </listitem>
+    </itemizedlist>
+
+    <para>Lo si potrà verificare di persona selezionando il comando <emphasis role="bold">Filtri dei file</emphasis> del menu <emphasis role="bold">Opzioni</emphasis>. Ad esempio, se si ha un file di testo scritto in Ceco (molto probabilmente con codifica <emphasis role="bold">ISO-8859-2</emphasis>), basta modificare l'estensione <literal> .txt</literal> in <literal>.txt2</literal> affinché <application>OmegaT</application> interpreti correttamente il suo contenuto. Naturalmente, per non correre rischi, si prenda in considerazione di convertire questi tipi di file in Unicode, per esempio nel formato di file <literal>.utf8</literal>.</para>
+  </section>
+</chapter>

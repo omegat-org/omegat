@@ -1,0 +1,168 @@
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <title>Chapter&nbsp;17.&nbsp;Dizionari</title>
+      <link rel="stylesheet" type="text/css" href="OmegaT.css">
+      <meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
+      <link rel="home" href="index.html" title="OmegaT - Manuale dell'Utente">
+      <link rel="up" href="index.html" title="OmegaT - Manuale dell'Utente">
+      <link rel="prev" href="chapter.regexp.html" title="Chapter&nbsp;16.&nbsp;Espressioni regolari">
+      <link rel="next" href="chapter.glossaries.html" title="Chapter&nbsp;18.&nbsp;Glossari">
+   </head>
+   <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+      <div class="navheader">
+         <table width="100%" summary="Navigation header">
+            <tr>
+               <th colspan="3" align="center">Chapter&nbsp;17.&nbsp;Dizionari</th>
+            </tr>
+            <tr>
+               <td width="20%" align="left"><a accesskey="p" href="chapter.regexp.html">Prev</a>&nbsp;
+               </td>
+               <th width="60%" align="center">&nbsp;</th>
+               <td width="20%" align="right">&nbsp;<a accesskey="n" href="chapter.glossaries.html">Next</a></td>
+            </tr>
+         </table>
+         <hr>
+      </div>
+      <div class="chapter">
+         <div class="titlepage">
+            <div>
+               <div>
+                  <h1 class="title"><a name="chapter.dictionaries"></a>Chapter&nbsp;17.&nbsp;<a class="indexterm" name="d0e7822"></a>Dizionari
+                  </h1>
+               </div>
+            </div>
+         </div>
+         <div class="toc">
+            <dl class="toc">
+               <dt><span class="section"><a href="chapter.dictionaries.html#d0e7827">1. Come scaricare e installare dizionari</a></span></dt>
+               <dt><span class="section"><a href="chapter.dictionaries.html#d0e7928">2. Problemi con i dizionari</a></span></dt>
+            </dl>
+         </div>
+         <p></p>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e7827"></a>1.&nbsp;Come scaricare e installare dizionari<a class="indexterm" name="d0e7830"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <p>I dizionari in <span class="application">OmegaT</span> sono basati sul formato StarDict o quello Lingvo DSL. Per installare i file necessari per il formato StarDict procedere come
+               illustrato di seguito:
+            </p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>Cercare la combinazione di lingua richiesta - per esempio sulla <a class="ulink" href="http://stardict.sourceforge.net/index.php" target="_top">Piattaforma StarDict</a> citata sopra.
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>Scaricare il file - deve essere un archivio <code class="filename">tarball</code> (estensione <span class="emphasis"><em>tar.bz</em></span> o <span class="emphasis"><em>tar.bz2</em></span>).
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>Usare untar (o il suo equivalente, per esempio, <code class="filename"> winrar</code> in Windows) per estrarre il suo contenuto nella cartella del progetto "Dictionary". Ci devono essere tre file, con le estensioni
+                        <span class="emphasis"><em>dz, idx </em></span>e <span class="emphasis"><em>ifo</em></span>.
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <p>Si noti che in aggiunta dizionari "origine-destinazione" è possibile, utilizzando la funzione Dizionario, avere accesso a
+               informazioni tipo:
+            </p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p><a class="indexterm" name="d0e7883"></a>Webster's Revised Unabridged Dictionary (1913)
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p><a class="indexterm" name="d0e7892"></a>Longman Dictionary of Contemporary English
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p><a class="indexterm" name="d0e7901"></a>The Britannica Concise Encyclopedia
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>e via discorrendo...</p>
+                  </li>
+               </ul>
+            </div>
+            <p>Alcuni dizionari non hanno stringhe allegate: per esempio, sono "liberamente consultabili" e altri, come la selezione indicata
+               sopra, sono pubblicati sotto licenza GPL Il seguente esempio mostra il dizionario Merriam Webster 10th "in azione":
+            </p>
+            <div class="figure"><a name="Dict.Merriam.Webster"></a><p class="title"><b>Figure&nbsp;17.1.&nbsp;<a class="indexterm" name="d0e7915"></a>Dizionario Merriam Webster - uso</b></p>
+               <div class="figure-contents">
+                  <div class="mediaobject"><img src="images/DictMerriamWebster.png" alt="Dizionario Merriam Webster - uso"></div>
+               </div>
+            </div><br class="figure-break"></div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e7928"></a>2.&nbsp;<a class="indexterm" name="d0e7930"></a>Problemi con i dizionari
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>Verificare che i file di dizionario siano presenti nella cartella corretta (o in una delle sue cartelle secondarie). Verificare
+                        <span class="guimenuitem">Proprietà</span> (<span class="shortcut"><strong><span class="keycap"><strong><a class="indexterm" name="d0e7944"></a>Ctrl</strong></span>+<span class="keycap"><strong>E</strong></span></strong></span>) del <span class="guimenu">progetto</span>.
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>La cartella contiene tre file con lo stesso nome, con estensioni? Se solo un file è presente, verificarne l'estensione. Se
+                        si presenta come <span class="emphasis"><em>tar.bz</em></span>, allora ci si è dimenticati di scompattarlo (untar).
+                     </p>
+                  </li>
+               </ul>
+            </div>
+         </div>
+      </div>
+      <div class="navfooter">
+         <hr>
+         <table width="100%" summary="Navigation footer">
+            <tr>
+               <td width="40%" align="left"><a accesskey="p" href="chapter.regexp.html">Prev</a>&nbsp;
+               </td>
+               <td width="20%" align="center">&nbsp;</td>
+               <td width="40%" align="right">&nbsp;<a accesskey="n" href="chapter.glossaries.html">Next</a></td>
+            </tr>
+            <tr>
+               <td width="40%" align="left" valign="top">Chapter&nbsp;16.&nbsp;Espressioni regolari&nbsp;</td>
+               <td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
+               <td width="40%" align="right" valign="top">&nbsp;Chapter&nbsp;18.&nbsp;Glossari</td>
+            </tr>
+         </table>
+      </div>
+   </body>
+</html>

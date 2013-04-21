@@ -1,0 +1,351 @@
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <title>Chapter&nbsp;21.&nbsp;Argomenti vari</title>
+      <link rel="stylesheet" type="text/css" href="OmegaT.css">
+      <meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
+      <link rel="home" href="index.html" title="OmegaT - Manuale dell'Utente">
+      <link rel="up" href="index.html" title="OmegaT - Manuale dell'Utente">
+      <link rel="prev" href="chapter.spellchecker.html" title="Chapter&nbsp;20.&nbsp;Correttore ortografico">
+      <link rel="next" href="appendix.languages.html" title="Appendix&nbsp;A.&nbsp;Lingue - elenco codice ISO 639">
+   </head>
+   <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+      <div class="navheader">
+         <table width="100%" summary="Navigation header">
+            <tr>
+               <th colspan="3" align="center">Chapter&nbsp;21.&nbsp;Argomenti vari</th>
+            </tr>
+            <tr>
+               <td width="20%" align="left"><a accesskey="p" href="chapter.spellchecker.html">Prev</a>&nbsp;
+               </td>
+               <th width="60%" align="center">&nbsp;</th>
+               <td width="20%" align="right">&nbsp;<a accesskey="n" href="appendix.languages.html">Next</a></td>
+            </tr>
+         </table>
+         <hr>
+      </div>
+      <div class="chapter">
+         <div class="titlepage">
+            <div>
+               <div>
+                  <h1 class="title"><a name="chapter.misc"></a>Chapter&nbsp;21.&nbsp;Argomenti vari<a class="indexterm" name="d0e8519"></a></h1>
+               </div>
+            </div>
+         </div>
+         <div class="toc">
+            <dl class="toc">
+               <dt><span class="section"><a href="chapter.misc.html#omegat.misc.console.mode">1. Modalità console di OmegaT</a></span></dt>
+               <dd>
+                  <dl>
+                     <dt><span class="section"><a href="chapter.misc.html#misc.console.mode.prerequisites">1.1. Prerequisiti</a></span></dt>
+                     <dt><span class="section"><a href="chapter.misc.html#starting.in.misc.console.mode">1.2. Avvio di OmegaT in modalità console</a></span></dt>
+                     <dt><span class="section"><a href="chapter.misc.html#misc.console.mode.option.quiet">1.3. Opzione quiet</a></span></dt>
+                     <dt><span class="section"><a href="chapter.misc.html#misc.console.mode.option.validatetags">1.4. Opzione di convalida dei tag</a></span></dt>
+                  </dl>
+               </dd>
+               <dt><span class="section"><a href="chapter.misc.html#d0e8700">2. Allineamento automatico delle proprietà Java</a></span></dt>
+               <dt><span class="section"><a href="chapter.misc.html#font.settings">3. Impostazioni dei caratteri</a></span></dt>
+               <dt><span class="section"><a href="chapter.misc.html#preventing.data.loss">4. Come evitare la perdita di dati</a></span></dt>
+            </dl>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="omegat.misc.console.mode"></a>1.&nbsp;Modalità console di <span class="application"><a class="indexterm" name="d0e8526"></a>OmegaT</span><a class="indexterm" name="d0e8532"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;">
+               <h3 class="title">Note</h3>
+               <p>Rivolto solo agli utenti avanzati!</p>
+            </div>
+            <p>Lo scopo della modalità console (per es., la riga di comando) è consentire l'uso di <span class="application">OmegaT</span> come strumento di traduzione in un ambiente di scripting. Quando è avviato in modalità console, non viene caricata alcuna
+               interfaccia grafica (dunque funzionerà in qualsiasi console) e il progetto dato viene tradotto automaticamente. Un esempio
+               potrebbe essere un progetto software, con l'interfaccia localizzata in più lingue. Tramite la modalità console, è possibile
+               generare un'interfaccia localizzata come parte del processo di creazione.
+            </p>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="misc.console.mode.prerequisites"></a>1.1.&nbsp;Prerequisiti
+                        </h3>
+                     </div>
+                  </div>
+               </div>
+               <p>Per avviare OmegaT, deve essere disponibile un progetto OmegaT valido. La posizione non è importante, poiché è possibile specificarla
+                  nella riga di comando all'avvio.
+               </p>
+               <p>Se si necessitano impostazioni non standard, devono essere presenti i file di configurazione (<code class="literal">filters.conf</code> e <code class="literal">segmentation.conf)</code>. Questo può essere eseguito in due modi:
+               </p>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
+                     <li class="listitem">
+                        <p>Avviare normalmente <span class="application">OmegaT</span> (con l'interfaccia grafica) e regolare le impostazioni. Se si avvia <span class="application">OmegaT</span> in modalità console, esso userà le impostazioni che sono state configurate.
+                        </p>
+                     </li>
+                     <li class="listitem">
+                        <p>Se non si riesce ad avviare normalmente <span class="application">OmegaT</span> (non è disponibile un ambiente grafico): copiare i file delle impostazioni da qualche altra installazione di <span class="application">OmegaT</span>, presente in un'altra macchina, in una cartella specifica. Non importa la posizione, poiché è possibile aggiungerla alla
+                           riga di comando all'avvio (vedere sotto). I file importanti <code class="literal">filters.conf</code> e <code class="literal">segmentation.conf</code> si possono trovare nella cartella principale dell'utente (per es., <code class="literal">C:\Documents and Settings\%User%\<span class="application">OmegaT</span></code> in Windows, <code class="literal">%user%/.omegat/</code> in Linux)
+                        </p>
+                     </li>
+                  </ul>
+               </div>
+            </div>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="starting.in.misc.console.mode"></a>1.2.&nbsp;Avvio di OmegaT in modalità console
+                        </h3>
+                     </div>
+                  </div>
+               </div>
+               <p>Per avviare OmegaT in modalità console, all'avvio devono essere specificati alcuni parametri aggiuntivi. Il più importante
+                  di questi è <code class="literal">&lt;project-dir&gt;</code> e, facoltativamente, <code class="literal">--config-dir=&lt;config-dir&gt;</code>. Esempio:
+               </p>
+               <p><code class="literal">$&gt; java -jar <span class="application">OmegaT</span>.jar /percorso/al/progetto \</code></p>
+               <p><code class="literal">--config-dir=/percorso/ai/file-di-configurazione/ \</code></p>
+               <p><code class="literal"> --mode=console-translate \</code></p>
+               <p><code class="literal"> --source-pattern={regexp} \</code></p>
+               <p><code class="literal"> --tag-validation=[block|warn] </code></p>
+               <p><span class="bold"><strong>Spiegazione:</strong></span></p>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
+                     <li class="listitem">
+                        <p><code class="literal">&lt;project-dir&gt;</code> dice a <span class="application">OmegaT</span> <code class="literal"> dove trovare il progetto da tradurre. Se indicato, <span class="application">OmegaT</span> si avvia in modalità console e traduce il progetto dato.</code></p>
+                     </li>
+                  </ul>
+               </div>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
+                     <li class="listitem">
+                        <p><code class="literal">--config-dir=&lt;config-dir&gt;</code> abilita OmegaT ad accettare informazioni su quale cartella sono memorizzati i file di configurazione. Se non specificato,
+                           OmegaT torna ai valori predefiniti (la cartella OmegaT nella cartella principale dell'utente o, se non disponibile, quella
+                           di lavoro corrente).
+                        </p>
+                     </li>
+                  </ul>
+               </div>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
+                     <li class="listitem">
+                        <p><code class="literal">--mode=console-translate </code> <span class="application">OmegaT</span> si avvia in modalità console e traduce il progetto dato
+                        </p>
+                     </li>
+                     <li class="listitem">
+                        <p><code class="literal">--source-pattern={regexp} </code>I file da tradurre possono essere specificati in questo modo. Ecco un esempio dell'espressione regolare: <code class="filename">test\.html</code></p>
+                     </li>
+                     <li class="listitem">
+                        <p><code class="literal">--tag-validation=[abort|warn] </code> Con "abort", il programma viene interrotto se la convalida dei tag trova errori. Con "warn", gli errori vengono visualizzati
+                           ma OmegaT continua. In tutti gli altri casi la convalida dei tag non viene eseguita.
+                        </p>
+                     </li>
+                  </ul>
+               </div>
+            </div>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="misc.console.mode.option.quiet"></a>1.3.&nbsp;Opzione quiet
+                        </h3>
+                     </div>
+                  </div>
+               </div>
+               <p>Parametro di riga di comando aggiuntivo specifico della modalità console: <code class="literal">--quiet</code>. Nella modalità quiet vengono registrate meno informazioni a video. I messaggi che di solito si leggono nella barra di stato
+                  non vengono mostrati.
+               </p>
+               <p>Uso: <code class="literal">java -jar <span class="application">OmegaT</span>.jar /percorso/al/progetto --mode=console-translate --quiet</code></p>
+            </div>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="misc.console.mode.option.validatetags"></a>1.4.&nbsp;Opzione di convalida dei tag
+                        </h3>
+                     </div>
+                  </div>
+               </div>
+               <p>Altro parametro di riga di comando aggiuntivo specifico della modalità console: <code class="literal">--tag-validation=[abort|warn]</code>. Quando viene aggiunto questo parametro, la convalida dei tag viene eseguita prima della traduzione/allineamento. Se il valore
+                  è <code class="literal">abort</code> ("ferma"), allora se si incontrano errori nei tag, gli errori vengono visualizzati e il programma si blocca. Se il valore
+                  è <code class="literal">warn</code> ("avvisa"), allora gli errori vengono visualizzati ma OmegaT continua.
+               </p>
+               <p>Uso: <code class="literal">java -jar <span class="application">OmegaT</span>.jar /percorso/al/progetto --mode=console-translate --tag-validation=abort</code></p>
+            </div>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e8700"></a>2.&nbsp;Allineamento automatico delle proprietà Java<a class="indexterm" name="d0e8703"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <p>OmegaT, in modalità console, può allineare le Java .properties. Se si possiedono i file Properties di partenza e di arrivo
+               per uno e lo stesso contenuto nella propria coppia linguistica, questa procedura creerà un file tmx corrispondente per tale
+               contenuto. Uso:
+            </p>
+            <p><code class="literal">java -jar OmegaT.jar --mode=console-align /cartella-mio-progetto --alignDir=/FileTradotti/</code></p>
+            <p><code class="filename">alignDir </code>deve contenere una traduzione nella lingua di arrivo del progetto. Per esempio, se il progetto è EN-&gt;IT, alignDir deve contenere
+               il suffisso _it nella sua parte terminale. La tmx prodotta viene memorizzata nella cartella <code class="literal">omegat</code> con il nome <code class="filename">align.tmx</code>.
+            </p>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="font.settings"></a>3.&nbsp;Impostazioni dei caratteri<a class="indexterm" name="d0e8726"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <p>In questa finestra di dialogo si può impostare il carattere usato da <span class="application">OmegaT</span> nelle seguenti finestre:
+            </p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>Finestra principale di <span class="application">OmegaT</span> (editor, concordanze e glossario)
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>Finestra di ricerca</p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>Finestra di convalida dei tag</p>
+                  </li>
+               </ul>
+            </div>
+            <p>Si può accedere alla finestra tramite l'elemento <a class="indexterm" name="d0e8753"></a><span class="guimenu">Opzioni</span> → <span class="guimenuitem">Tipo di carattere...</span> nel menu principale. La finestra di dialogo contiene:
+            </p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p><span class="bold"><strong>Carattere:</strong></span> usare la casella a discesa per selezionare uno dei caratteri a disposizione nel proprio sistema
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p><span class="bold"><strong>Dimensione:</strong></span> modificare la dimensione del carattere
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p><span class="bold"><strong>Testo di esempio:</strong></span> campo per l'anteprima immediata del carattere selezionato
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <p><span class="bold"><strong>Nota: </strong></span> in alcuni casi, dopo aver modificato le impostazioni del carattere, OmegaT potrebbe richiedere un po' di tempo per visualizzare
+               le modifiche apportate. Questo avviene, in particolare, quando nella finestra dell'Editor è aperto un file di grosse dimensioni
+               composto da molti segmenti e, o in alternativa, viene usato hardware lento. Inoltre, è necessario notare che per alcune coppie
+               di lingue, alcuni tipi di carattere si comportano meglio di altri. In particolare, se si sta lavorando con due lingue appartenenti
+               a due sistemi di scrittura/alfabeto diversi (come il Russo e il Giapponese), bisogna selezionare un tipo di carattere che
+               possa essere usato da entrambe le lingue.
+            </p>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="preventing.data.loss"></a>4.&nbsp;Come evitare la perdita di dati<a class="indexterm" name="d0e8789"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <p><span class="application">OmegaT</span> è un'applicazione stabile. Tuttavia, sarebbe bene adottare le opportune precauzioni per evitare, quando si lavora con <span class="application">OmegaT</span>, la possibile perdita dei dati, proprio come si dovrebbe fare con una qualsiasi altra applicazione. Quando si traducono i
+               file, <span class="application">OmegaT</span> memorizza tutte le modifiche nella memoria di traduzione <code class="literal">project_save.tmx</code> nella sottocartella <code class="literal">/omegat</code> del progetto.
+            </p>
+            <p>OmegaT, inoltre, nella stessa sottocartella, e ogni volta che un progetto viene aperto o ricaricato, crea anche file di backup
+               della memoria di traduzione, ai quali assegna il nome project_save.tmx.ANNOMMGGHHNN.bak. ANNO è l'anno espresso in 4 cifre,
+               MM è il mese, GG è il giorno del mese, HH e NN corrispondono alle ore e ai minuti in cui è stata salvata la precedente memoria
+               di traduzione.
+            </p>
+            <p>Se si ritiene di aver perso i dati di traduzione, è possibile seguire la procedura seguente, che permetterà di ripristinare
+               il progetto al punto di salvataggio più recente, in genere non più vecchio di circa dieci minuti:
+            </p>
+            <div class="orderedlist">
+               <ol class="orderedlist" type="1">
+                  <li class="listitem">
+                     <p>chiudere il progetto</p>
+                  </li>
+                  <li class="listitem">
+                     <p>rinominare l'attuale file <code class="filename">project_save.tmx </code> (per esempio in <code class="filename">project_save.tmx.temporaneo</code>)
+                     </p>
+                  </li>
+                  <li class="listitem">
+                     <p>selezionare la copia di sicurezza della memoria di traduzione che si ritiene essere quella più probabile a contenere i dati
+                        che si stanno cercando
+                     </p>
+                  </li>
+                  <li class="listitem">
+                     <p>rinominarla in <code class="literal">project_save.tmx</code></p>
+                  </li>
+                  <li class="listitem">
+                     <p>aprire il progetto</p>
+                  </li>
+               </ol>
+            </div>
+            <p>Per evitare di perdere dati importanti:</p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>Effettuare regolarmente copie del file /omegat/project_save.tmx su periferiche di backup, come CD o DVD.</p>
+                  </li>
+                  <li class="listitem">
+                     <p>Fino a quando non si sarà familiarizzato con <span class="application">OmegaT</span>, creare file finali a intervalli regolari e controllare che contengano l'ultima versione della traduzione.
+                     </p>
+                  </li>
+                  <li class="listitem">
+                     <p>Prestare particolare attenzione quando si apportano modifiche ai file contenuti nella cartella <code class="literal">/source</code> mentre ci si trova a un livello intermedio del lavoro di traduzione. Se il file originale viene modificato dopo aver iniziato
+                        la traduzione, <span class="application">OmegaT</span> potrebbe non essere più in grado di reperire un segmento che è stato precedentemente tradotto.
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>Per le prime nozioni, usare questa guida. Nel caso in cui si dovessero presentare problemi, inviare un messaggio al <a class="ulink" href="http://tech.groups.yahoo.com/group/Omegat/" target="_top">Gruppo utenti di <span class="application">OmegaT</span></a>. Non esitare a inviare un messaggio nella lingua che vi è più familiare.
+                     </p>
+                  </li>
+               </ul>
+            </div>
+         </div>
+      </div>
+      <div class="navfooter">
+         <hr>
+         <table width="100%" summary="Navigation footer">
+            <tr>
+               <td width="40%" align="left"><a accesskey="p" href="chapter.spellchecker.html">Prev</a>&nbsp;
+               </td>
+               <td width="20%" align="center">&nbsp;</td>
+               <td width="40%" align="right">&nbsp;<a accesskey="n" href="appendix.languages.html">Next</a></td>
+            </tr>
+            <tr>
+               <td width="40%" align="left" valign="top">Chapter&nbsp;20.&nbsp;Correttore ortografico&nbsp;</td>
+               <td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
+               <td width="40%" align="right" valign="top">&nbsp;Appendix&nbsp;A.&nbsp;Lingue - elenco codice ISO 639
+                    
+                    
+                    
+               </td>
+            </tr>
+         </table>
+      </div>
+   </body>
+</html>

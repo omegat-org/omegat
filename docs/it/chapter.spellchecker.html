@@ -1,0 +1,170 @@
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <title>Chapter&nbsp;20.&nbsp;Correttore ortografico</title>
+      <link rel="stylesheet" type="text/css" href="OmegaT.css">
+      <meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
+      <link rel="home" href="index.html" title="OmegaT - Manuale dell'Utente">
+      <link rel="up" href="index.html" title="OmegaT - Manuale dell'Utente">
+      <link rel="prev" href="chapter.machine.translate.html" title="Chapter&nbsp;19.&nbsp;Traduzione automatica">
+      <link rel="next" href="chapter.misc.html" title="Chapter&nbsp;21.&nbsp;Argomenti vari">
+   </head>
+   <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+      <div class="navheader">
+         <table width="100%" summary="Navigation header">
+            <tr>
+               <th colspan="3" align="center">Chapter&nbsp;20.&nbsp;Correttore ortografico</th>
+            </tr>
+            <tr>
+               <td width="20%" align="left"><a accesskey="p" href="chapter.machine.translate.html">Prev</a>&nbsp;
+               </td>
+               <th width="60%" align="center">&nbsp;</th>
+               <td width="20%" align="right">&nbsp;<a accesskey="n" href="chapter.misc.html">Next</a></td>
+            </tr>
+         </table>
+         <hr>
+      </div>
+      <div class="chapter">
+         <div class="titlepage">
+            <div>
+               <div>
+                  <h1 class="title"><a name="chapter.spellchecker"></a>Chapter&nbsp;20.&nbsp;Correttore ortografico<a class="indexterm" name="d0e8385"></a></h1>
+               </div>
+            </div>
+         </div>
+         <div class="toc">
+            <dl class="toc">
+               <dt><span class="section"><a href="chapter.spellchecker.html#d0e8390">1. Installazione dei dizionari ortografici</a></span></dt>
+               <dt><span class="section"><a href="chapter.spellchecker.html#d0e8450">2. Uso dei dizionari ortografici</a></span></dt>
+               <dt><span class="section"><a href="chapter.spellchecker.html#hints">3. Consigli</a></span></dt>
+            </dl>
+         </div>
+         <p>OmegaT possiede un correttore ortografico incorporato che si basa su quello usato in Apache OpenOffice, LibreOffice, Firefox
+            e Thunderbird. È dunque in grado di utilizzare l'ampia gamma di dizionari ortografici gratuiti disponibile per queste applicazioni.
+         </p>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e8390"></a>1.&nbsp;Installazione dei dizionari ortografici
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>Per utilizzare la funzione di correzione ortografica devono essere installati uno o più dizionari (per es., per la lingua
+               di destinazione). Per installare i dizionari ortografici, seguire questa procedura:
+            </p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>Creare, nel proprio gestore di file, una nuova cartella in cui memorizzare i dizionari ortografici (D:\Translations\spellcheckers
+                        nell'esempio sotto riportato).
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>In OmegaT, selezionare <span class="guisubmenu"><a class="indexterm" name="d0e8404"></a></span><span class="guimenuitem">Opzioni &gt; Correzione ortografica</span>, poi premere il pulsante <span class="guibutton">Scegli </span>situato affianco al campo della posizione del dizionario. Navigare fino alla cartella creata per i dizionari.
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>Copiare i file di dizionario da usare all'interno di questa cartella. Esistono fondamentalmente due modi per eseguire questa
+                        operazione. O si copiano manualmente i file da un punto qualsiasi del proprio sistema, oppure si può usare la funzione <span class="bold"><strong>"Installa nuovo dizionario"</strong></span> di OmegaT, che fornisce un elenco dei dizionari disponibili da cui attingere. Si noti che la funzione "Installa" richiede
+                        una connessione Internet. Verranno installate le lingue selezionate, le quali potranno eventualmente apparire nella finestra
+                        di configurazione del correttore ortografico (ciò potrebbe richiedere del tempo).
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <p>La copiatura manuale dei file ha senso se nel proprio sistema si possiedono già file di dizionario adatti allo scopo, per
+               esempio, quelli che fanno parte dell'installazione di OpenOffice, Firefox o Thunderbird. È tuttavia più semplice cercare i
+               dizionari su Internet, utilizzando il campo <span class="bold"><strong>URL per i dizionari in linea</strong></span>:
+            </p>
+            <div class="figure"><a name="spellchecker.setup"></a><p class="title"><b>Figure&nbsp;20.1.&nbsp;<a class="indexterm" name="d0e8429"></a>Impostazioni del correttore ortografico</b></p>
+               <div class="figure-contents">
+                  <div class="mediaobject"><img src="images/SpellcheckerSetup_25.png" alt="Impostazioni del correttore ortografico"></div>
+               </div>
+            </div><br class="figure-break"><p>Premendo il pulsante <span class="guibutton">Installa nuovo dizionario</span> si apre la finestra di installazione del dizionario, in cui poter scegliere i dizionari da installare.
+            </p>
+            <p>I nomi dei file devono corrispondere ai codici di lingua della lingua di destinazione, come definito nella finestra di dialogo
+               di proprietà del progetto (<span class="guimenu">Progetto &gt; Proprietà</span>). Ad esempio, se avete selezionato ES-MX (spagnolo messicano) come la lingua di destinazione, i file di dizionario devono
+               essere denominati es_MX.dic ed es_MX.aff. Se si dispone solo di un dizionario di Spagnolo standard, con i nomi file, per esempio,
+               es_es.dic e es_es.aff, è possibile copiare questi file in es_MX.dic e es_MX.aff, e il correttore ortografico funzionerà. Si
+               noti che questo eseguirà i controlli per lo Spagnolo standard (castigliano) piuttosto che per quello messicano.
+            </p>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e8450"></a>2.&nbsp;Uso dei dizionari ortografici
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>Non è necessario impartire particolari istruzioni a OmegaT per usare uno specifico dizionario ortografico; OmegaT userà il
+               dizionario di lingua corretto basandosi sui codici di lingua del progetto. Verificare comunque che i codici di lingua siano
+               uguali: un dizionario IT-IT, ad esempio, non funzionerà con un codice di arrivo impostato a IT. Modificare, se necessario,
+               i nomi dei file del dizionario, oppure cambiare le impostazioni linguistiche del proprio progetto.
+            </p>
+            <p>Per abilitare il correttore ortografico, selezionare <span class="guimenuitem">Opzioni &gt; Correzione ortografica</span> e spuntare la casella <span class="guilabel">Controlla automaticamente l'ortografia</span> (vedere sopra).
+            </p>
+            <div class="figure"><a name="spellchecker.in.action"></a><p class="title"><b>Figure&nbsp;20.2.&nbsp;Uso del correttore ortografico</b></p>
+               <div class="figure-contents">
+                  <div class="mediaobject"><img src="images/SpellcheckingText.png" alt="Uso del correttore ortografico"></div>
+               </div>
+            </div><br class="figure-break"><p>Il clic col pulsante destro del mouse su una parola sottolineata (Artund nella figura sopra) apre un menu a discesa che elenca
+               i suggerimenti per la correzione (Art und). È pure possibile istruire il correttore a ignorare tutte le occorrenze della parola
+               evidenziata, oppure ad aggiungerla al dizionario.
+            </p>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="hints"></a>3.&nbsp;Consigli<a class="indexterm" name="d0e8476"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <p>Se il correttore non funziona, assicurarsi prima di tutto che la casella <span class="guilabel">"Controlla automaticamente l'ortografia"</span>, nella finestra di dialogo della correzione ortografica (<span class="guisubmenu">Opzioni &gt; Correzione ortografica...)</span>, sia attivata.
+            </p>
+            <p>Confrontare anche il codice della lingua di destinazione del proprio progetto con i dizionari disponibili all'interno della
+               finestra di configurazione. Il correttore ortografico usa il codice della lingua di destinazione per determinare la lingua
+               da usare: se quest'ultima è il Portoghese brasiliano (PT_BR), la sottocartella contenente i vocabolari deve contenere due
+               file di dizionario chiamati rispettivamente <span class="emphasis"><em>pt_br.aff</em></span> e <span class="emphasis"><em>pt_br.dic</em></span>.
+            </p>
+            <p>Se si è già tradotta un'ampia porzione di testo e ci si accorge che il codice della lingua di destinazione non corrisponde
+               a quello della lingua del correttore ortografico (poiché è stata specificata pt_BR come lingua, per esempio, ma non è presente
+               alcun dizionario pt_BR), basta copiare e rinominare i due file corrispondenti (per esempio, da <span class="emphasis"><em>pt_PT.aff</em></span> e <span class="emphasis"><em>pt_PT.dic</em></span> a <span class="emphasis"><em>pt._BR.aff</em></span> e <span class="emphasis"><em>pt_BR.dic</em></span>). Sarebbe più opportuno, naturalmente, prendersi una pausa e scaricare la versione corretta del correttore ortografico.
+            </p>
+            <p>Si noti che il comando <code class="filename">Rimuovi</code> elimina fisicamente i dizionari selezionati. Se essi sono utilizzati da qualche altra applicazione del sistema, scompariranno
+               anche da quella applicazione. Se, per una qualsiasi ragione, si dovesse eseguire di tanto in tanto questa operazione, si dovrebbero
+               copiare i file coinvolti in una cartella diversa, riservata solo all'uso di OmegaT.
+            </p>
+         </div>
+      </div>
+      <div class="navfooter">
+         <hr>
+         <table width="100%" summary="Navigation footer">
+            <tr>
+               <td width="40%" align="left"><a accesskey="p" href="chapter.machine.translate.html">Prev</a>&nbsp;
+               </td>
+               <td width="20%" align="center">&nbsp;</td>
+               <td width="40%" align="right">&nbsp;<a accesskey="n" href="chapter.misc.html">Next</a></td>
+            </tr>
+            <tr>
+               <td width="40%" align="left" valign="top">Chapter&nbsp;19.&nbsp;Traduzione automatica&nbsp;</td>
+               <td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
+               <td width="40%" align="right" valign="top">&nbsp;Chapter&nbsp;21.&nbsp;Argomenti vari</td>
+            </tr>
+         </table>
+      </div>
+   </body>
+</html>

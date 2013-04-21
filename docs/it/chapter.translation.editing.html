@@ -1,0 +1,172 @@
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <title>Chapter&nbsp;10.&nbsp;Comportamento di modifica</title>
+      <link rel="stylesheet" type="text/css" href="OmegaT.css">
+      <meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
+      <link rel="home" href="index.html" title="OmegaT - Manuale dell'Utente">
+      <link rel="up" href="index.html" title="OmegaT - Manuale dell'Utente">
+      <link rel="prev" href="chapter.files.to.translate.html" title="Chapter&nbsp;9.&nbsp;File da tradurre">
+      <link rel="next" href="chapter.plain.text.html" title="Chapter&nbsp;11.&nbsp;Lavorazione di file di solo testo">
+   </head>
+   <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+      <div class="navheader">
+         <table width="100%" summary="Navigation header">
+            <tr>
+               <th colspan="3" align="center">Chapter&nbsp;10.&nbsp;Comportamento di modifica</th>
+            </tr>
+            <tr>
+               <td width="20%" align="left"><a accesskey="p" href="chapter.files.to.translate.html">Prev</a>&nbsp;
+               </td>
+               <th width="60%" align="center">&nbsp;</th>
+               <td width="20%" align="right">&nbsp;<a accesskey="n" href="chapter.plain.text.html">Next</a></td>
+            </tr>
+         </table>
+         <hr>
+      </div>
+      <div class="chapter">
+         <div class="titlepage">
+            <div>
+               <div>
+                  <h1 class="title"><a name="chapter.translation.editing"></a>Chapter&nbsp;10.&nbsp;Comportamento di modifica<a class="indexterm" name="d0e5644"></a></h1>
+               </div>
+            </div>
+         </div>
+         <p>La finestra di dialogo presente in <span class="guimenu">Opzioni</span> → <span class="guimenuitem">Comportamento di modifica...</span> consente all'utente di scegliere come deve inizializzato e gestito il segmento attivo, all'interno del campo di modifica:
+         </p>
+         <div class="figure"><a name="editing.behavior.options"></a><p class="title"><b>Figure&nbsp;10.1.&nbsp;Opzioni del comportamento di modifica</b></p>
+            <div class="figure-contents">
+               <div class="mediaobject"><img src="images/EditingBehaviourOptions25.png" alt="Opzioni del comportamento di modifica"></div>
+            </div>
+         </div><br class="figure-break"><p></p>
+         <p>Un file viene tradotto passando da un segmento all'altro e modificando, di volta in volta, ciascun segmento attivo. Quando
+            ci si sposta tra i segmenti, si potrà scegliere se il campo di modifica debba essere riempito con la traduzione esistente,
+            contenuta nel pannello delle concordanze parziali, o col testo di partenza. In <span class="guimenu">Opzioni</span> → <span class="guimenuitem">Comportamento di modifica...</span> <span class="application">OmegaT</span> permette le seguenti alternative:
+         </p>
+         <div class="variablelist">
+            <dl class="variablelist">
+               <dt><span class="term">Il testo di partenza</span></dt>
+               <dd>
+                  <p>È possibile inserire automaticamente il testo di partenza all'interno del campo di modifica. Si tratta di una possibilità
+                     molto utile quando si è in presenza di testi contenenti molti nomi di marchi di fabbrica o altri nomi propri che non necessitano
+                     di traduzione.
+                  </p>
+               </dd>
+               <dt><span class="term">Lascia il segmento vuoto<a class="indexterm" name="d0e5689"></a></span></dt>
+               <dd>
+                  <p>OmegaT lascia vuoto il campo di modifica. Questa opzione consente di inserire la propria traduzione senza aver necessità di
+                     eliminare il testo di partenza, facendo così risparmiare due pressioni di tasti (<span class="bold"><strong>Ctrl+A </strong></span>e <span class="bold"><strong>Canc). </strong></span> Ora è possibile usare traduzioni vuote. Esse saranno visualizzate come &lt;VUOTA&gt; all'interno dell'Editor. Per crearne una,
+                     fare clic col destro all'interno di un segmento e selezionare "<span class="bold"><strong>Imposta traduzione vuota</strong></span>". Nello stesso menu contestuale, la voce <span class="bold"><strong>Rimuovi traduzione</strong></span> permette di eliminare la traduzione esistente del segmento attivo. È possibile eseguire la stessa azione cancellando il segmento
+                     di destinazione e premendo il tasto <span class="guibutton">Invio.</span></p>
+               </dd>
+               <dt><span class="term">Inserisci la concordanza parziale migliore<a class="indexterm" name="d0e5716"></a></span></dt>
+               <dd>
+                  <p>OmegaT inserirà la traduzione della stringa più simile a quella di partenza attiva, se è sopra la soglia di somiglianza selezionata
+                     nella finestra di dialogo. Per etichettare le traduzioni eseguite tramite concordanze parziali, può essere utilizzato il prefisso,
+                     che per impostazione predefinita è impostato vuoto. Se si aggiunge un prefisso (per esempio [fuzzy]) è possibile recuperare
+                     tali traduzioni in una fase successiva e controllare la loro correttezza.
+                  </p>
+               </dd>
+            </dl>
+         </div>
+         <p>Le opzioni nella metà inferiore della finestra di dialogo hanno le seguenti funzioni:</p>
+         <div class="variablelist">
+            <dl class="variablelist">
+               <dt><span class="term">Tenta di convertire i numeri quando si inserisce una concordanza parziale (fuzzy)<a class="indexterm" name="d0e5732"></a></span></dt>
+               <dd>
+                  <p>Se l'opzione è attivata, quando viene inserita, in modo automatico o manualmente, una concordanza parziale, OmegaT tenta di
+                     convertire i numeri contenuti nelle concordanze parziali in base al contenuto del segmento di partenza. Esistono alcune limitazioni:
+                  </p>
+                  <div class="itemizedlist">
+                     <ul class="itemizedlist" style="list-style-type: disc; ">
+                        <li class="listitem">
+                           <p>Il segmento di origine e le concordanze parziali devono possedere lo stesso elenco di numeri</p>
+                        </li>
+                        <li class="listitem">
+                           <p>I numeri devono essere esattamente gli stessi tra le concordanze di partenza e quelle di destinazione.</p>
+                        </li>
+                        <li class="listitem">
+                           <p>Sono considerati solo gli interi e le virgole mobili semplici (utilizzando il punto come carattere decimale, per es., 5.4,
+                              ma non 5,4 o 54E-01).
+                           </p>
+                        </li>
+                     </ul>
+                  </div>
+               </dd>
+            </dl>
+         </div>
+         <div class="variablelist">
+            <dl class="variablelist">
+               <dt><span class="term">Permetti traduzione uguale all'originale<a class="indexterm" name="d0e5756"></a></span></dt>
+               <dd>
+                  <p>I documenti da tradurre possono contenere nomi di marchi di fabbrica, nomi propri, e via discorrendo, che devono essere lasciati
+                     inalterati (ovvero non richiedono traduzione) nel documento tradotto. Vi sono due sistemi per operare sui segmenti che contengono
+                     solo testo che deve rimanere inalterato.
+                  </p>
+                  <p>Si può decidere di non tradurre proprio tali segmenti. OmegaT segnalerà dunque questi segmenti come "non tradotti". Questa
+                     è l'impostazione predefinita. L'alternativa è inserire una traduzione identica al testo di origine. OmegaT è in grado di riconoscere
+                     se è stata compiuta questa azione. Per attivare questa opzione, andare in <span class="guimenu">Opzioni</span> → <span class="guimenuitem">Comportamento di modica...</span> e spuntare la casella <span class="bold"><strong>Permetti traduzione uguale all'originale</strong></span>.
+                  </p>
+               </dd>
+            </dl>
+         </div>
+         <div class="variablelist">
+            <dl class="variablelist">
+               <dt><span class="term">Esporta il segmento in file di testo<a class="indexterm" name="d0e5781"></a></span></dt>
+               <dd>
+                  <p>La funzione di esportazione testo esporta i dati dall'interno del progetto <span class="application">OmegaT</span> attivo in file solo testo. I dati vengono esportati quando il segmento viene aperto. I file vengono scritti nella cartella
+                     secondaria /script all'interno della cartella dei file principale di OmegaT e includono:
+                  </p>
+                  <div class="itemizedlist">
+                     <ul class="itemizedlist" style="list-style-type: disc; ">
+                        <li class="listitem">
+                           <p>Il contenuto del testo del segmento di partenza (<code class="filename">source.txt</code>).
+                           </p>
+                        </li>
+                        <li class="listitem">
+                           <p>Il contenuto del testo del segmento di arrivo (<code class="filename">target.txt</code>).
+                           </p>
+                        </li>
+                        <li class="listitem">
+                           <p>Il testo evidenziato dall'utente viene selezionato quando si preme <span class="keycap"><strong>Ctrl+Maiusc+C</strong></span> o è selezionato il comando <span class="guimenuitem">Modifica &gt; Esporta la selezione</span> (<code class="filename">selection.txt</code>).
+                           </p>
+                        </li>
+                     </ul>
+                  </div>
+                  <p>Il contenuto dei file viene sovrascritto se si apre un nuovo segmento (source.txt e target.txt) o si esporta una nuova selezione
+                     (selection.txt). I file sono di solo testo. L'intero processo può essere manovrato e controllato tramite script basato su
+                     Tck/Tcl. Consultare <a class="ulink" href="http://www.omegat.org/en/howtos/text_export.html" target="_top">Uso della funzione di esportazione testo di OmegaT</a> per specifiche, esempi e suggerimenti.
+                  </p>
+               </dd>
+            </dl>
+         </div>
+         <div class="variablelist">
+            <dl class="variablelist">
+               <dt><span class="term">"Vai al prossimo segmento non tradotto" si ferma nel punto in cui esiste almeno una traduzione alternativa<a class="indexterm" name="d0e5828"></a></span></dt>
+               <dd>
+                  <p>Per evitare traduzioni sbagliate, nel caso siano presenti segmenti che presentano la possibilità di più traduzioni, si può
+                     attivare l'opzione che ferma il comando <span class="bold"><strong>&nbsp;Vai al prossimo segmento non tradotto</strong></span> segmento uguale successivo, a prescindere che esso sia stato o no tradotto.
+                  </p>
+               </dd>
+            </dl>
+         </div>
+      </div>
+      <div class="navfooter">
+         <hr>
+         <table width="100%" summary="Navigation footer">
+            <tr>
+               <td width="40%" align="left"><a accesskey="p" href="chapter.files.to.translate.html">Prev</a>&nbsp;
+               </td>
+               <td width="20%" align="center">&nbsp;</td>
+               <td width="40%" align="right">&nbsp;<a accesskey="n" href="chapter.plain.text.html">Next</a></td>
+            </tr>
+            <tr>
+               <td width="40%" align="left" valign="top">Chapter&nbsp;9.&nbsp;File da tradurre&nbsp;</td>
+               <td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
+               <td width="40%" align="right" valign="top">&nbsp;Chapter&nbsp;11.&nbsp;Lavorazione di file di solo testo</td>
+            </tr>
+         </table>
+      </div>
+   </body>
+</html>

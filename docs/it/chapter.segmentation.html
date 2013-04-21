@@ -1,0 +1,237 @@
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <title>Chapter&nbsp;14.&nbsp;Segmentazione del documento originale</title>
+      <link rel="stylesheet" type="text/css" href="OmegaT.css">
+      <meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
+      <link rel="home" href="index.html" title="OmegaT - Manuale dell'Utente">
+      <link rel="up" href="index.html" title="OmegaT - Manuale dell'Utente">
+      <link rel="prev" href="chapter.translation.memories.html" title="Chapter&nbsp;13.&nbsp;Memorie di traduzione">
+      <link rel="next" href="chapter.searches.html" title="Chapter&nbsp;15.&nbsp;Ricerche">
+   </head>
+   <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+      <div class="navheader">
+         <table width="100%" summary="Navigation header">
+            <tr>
+               <th colspan="3" align="center">Chapter&nbsp;14.&nbsp;Segmentazione del documento originale</th>
+            </tr>
+            <tr>
+               <td width="20%" align="left"><a accesskey="p" href="chapter.translation.memories.html">Prev</a>&nbsp;
+               </td>
+               <th width="60%" align="center">&nbsp;</th>
+               <td width="20%" align="right">&nbsp;<a accesskey="n" href="chapter.searches.html">Next</a></td>
+            </tr>
+         </table>
+         <hr>
+      </div>
+      <div class="chapter">
+         <div class="titlepage">
+            <div>
+               <div>
+                  <h1 class="title"><a name="chapter.segmentation"></a>Chapter&nbsp;14.&nbsp;Segmentazione del documento originale
+                  </h1>
+               </div>
+            </div>
+         </div>
+         <div class="toc">
+            <dl class="toc">
+               <dt><span class="section"><a href="chapter.segmentation.html#segmentation.rules">1. Regole di segmentazione</a></span></dt>
+               <dt><span class="section"><a href="chapter.segmentation.html#rules.priority">2. Priorità delle regole</a></span></dt>
+               <dt><span class="section"><a href="chapter.segmentation.html#creating.new.rule">3. Creazione di una nuova regola</a></span></dt>
+               <dt><span class="section"><a href="chapter.segmentation.html#few.simple.examples">4. Alcuni semplici esempi</a></span></dt>
+            </dl>
+         </div>
+         <p>Gli strumenti della memoria di traduzione operano su unità di testo definite “segmenti”. <span class="application">OmegaT</span> utilizza due metodi per segmentare un testo: la segmentazione a livello di paragrafo e quella a livello di frase (chiamata
+            anche “segmentazione basata su regole”). Per selezionare il tipo di segmentazione, selezionare <span class="guimenu"><a class="indexterm" name="d0e6858"></a>Progetto</span> → <span class="guimenuitem">Proprietà...</span> dalla barra dei menu e attivare o disattivare l'appropriata casella di controllo. La segmentazione a livello di paragrafo
+            è utile in alcune situazioni, per esempio nelle traduzioni con stile o altamente creative, in cui il traduttore ritiene di
+            dover cambiare l'ordine di intere frasi: per la maggior parte dei progetti, tuttavia, la segmentazione a livello di frase
+            è da preferirsi, dato che restituisce concordanze migliori dalle traduzioni precedenti. Se si seleziona la segmentazione a
+            livello di frase, è possibile impostarne le regole dal menu principale <span class="guimenu"><a class="indexterm" name="d0e6869"></a>Opzioni</span> → <span class="guimenuitem">Segmentazione...</span>.
+         </p>
+         <p>Sono già disponibili regole di segmentazione affidabili per molte lingue, dunque molto probabilmente non si dovrà impegnare
+            tempo a scrivere le proprie regole di segmentazione. D'altro lato, questa funzionalità può essere molto utile nei particolari
+            casi in cui è possibile incrementare la propria produttività regolando le regole di segmentazione in base al testo da tradurre.
+         </p>
+         <p><span class="bold"><strong>Attenzione: </strong></span>dato che il testo verrà segmentato in modo diverso dopo aver modificato le opzioni dei filtri, è possibile dover iniziare
+            da zero la traduzione. Allo stesso tempo, i segmenti precedenti ritenuti validi, nella memoria di traduzione del progetto
+            verranno trasformati in segmenti orfani. Se si modificano le opzioni di segmentazione mentre un progetto è aperto, affinché
+            le modifiche siano attivate il progetto va ricaricato.
+         </p>
+         <p><span class="application">OmegaT</span> usa i seguenti passaggi:
+         </p>
+         <div class="variablelist">
+            <dl class="variablelist">
+               <dt><span class="term"><a class="indexterm" name="d0e6891"></a>Segmentazione a livello di struttura</span></dt>
+               <dd>
+                  <p><span class="application">OmegaT</span> prima analizza il testo alla ricerca di una segmentazione a livello della struttura. Nel corso di questo processo, per la
+                     generazione dei segmenti, viene utilizzata solo la struttura del testo di partenza.
+                  </p>
+                  <p>Per esempio, i file di testo possono essere segmentati in corrispondenza delle interruzioni di riga, in base alle righe vuote
+                     oppure potrebbero non venire affatto segmentati. I file contenenti formattazione (documenti ODF, HTML, ecc.) sono segmentati
+                     in base ai tag a livello di blocco (paragrafi). Gli attributi dell'oggetto traducibile nei file XHTML o HTML possono essere
+                     estratti come segmenti separati.
+                  </p>
+               </dd>
+               <dt><span class="term"><a class="indexterm" name="d0e6906"></a>Segmentazione a livello di frase</span></dt>
+               <dd>
+                  <p>Dopo aver ultimato la segmentazione del file di partenza in unità strutturali, <span class="application">OmegaT</span> avvierà un'ulteriore segmentazione di tali blocchi in frasi.
+                  </p>
+               </dd>
+            </dl>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="segmentation.rules"></a>1.&nbsp;Regole di segmentazione<a class="indexterm" name="d0e6921"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <p>Il processo di segmentazione può essere raffigurato nel modo seguente: il cursore si sposta lungo il testo, un carattere alla
+               volta. Ad ogni posizione del cursore vengono applicate le regole, che consistono di un modello <span class="bold"><strong>Prima</strong></span> e <span class="bold"><strong>Dopo</strong></span>, nell'ordine dato al fine di verificare se tutti i modelli <span class="bold"><strong> Prima</strong></span> sono validi per il testo alla sinistra del cursore e il corrispondente modello <span class="bold"><strong>Dopo</strong></span> per il testo alla destra del cursore. Se esiste una corrispondenza con la regola, o il cursore passa oltre senza inserire
+               un'interruzione di segmento (per una regola di eccezione), oppure viene creata una nuova interruzione di segmento alla posizione
+               attuale del cursore (per la regola di interruzione).
+            </p>
+            <p>Le due regole si comportano nel modo spiegato di seguito:</p>
+            <div class="variablelist">
+               <dl class="variablelist">
+                  <dt><span class="term"><a class="indexterm" name="d0e6945"></a>Regola di interruzione</span></dt>
+                  <dd>
+                     <p>Separa il testo di origine in segmenti. Per esempio, la frase "<span class="emphasis"><em>Did it make sense? I was not sure</em></span>." dovrebbe essere divisa in due segmenti. Affinché questo accada, deve esserci una regola di interruzione per "?", quando
+                        seguito da spazi e una parola che inizia per maiuscola. Per definire una regola d'interruzione, spuntare la casella Interruzione/Eccezione.
+                     </p>
+                  </dd>
+               </dl>
+            </div>
+            <div class="variablelist">
+               <dl class="variablelist">
+                  <dt><span class="term"><a class="indexterm" name="d0e6962"></a>Regola di eccezione</span></dt>
+                  <dd>
+                     <p>definisce quali parti del testo NON devono essere separate. Nonostante il punto, <span class="emphasis"><em>"Sig. Rossi"</em></span> non dovrebbe essere separato in due segmenti e dovrebbe essere una regola di eccezione per Sig (come pure per Dott., Ing.
+                        Avv. e via discorrendo), seguita da un punto. Per definire una regola d'interruzione, lasciare disattivata la casella Interruzione/Eccezione.
+                     </p>
+                  </dd>
+               </dl>
+            </div>
+            <p>Le regole d'interruzione predefinite dovrebbero essere sufficienti per la maggior parte delle lingue europee e per il giapponese.
+               Data la loro flessibilità, è possibile considerare di definire ulteriori regole di eccezione per la lingua da cui si traduce,
+               al fine di ottenere segmenti più comprensibili e coerenti.
+            </p>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="rules.priority"></a>2.&nbsp;Priorità delle regole<a class="indexterm" name="d0e6981"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <p>Tutte le serie di regole di segmentazione corrispondenti a un modello linguistico sono attive e applicate in un ordine di
+               priorità specifico e, pertanto, sarà necessario che le lingue dalle quali comunemente si traduce si trovino in una posizione
+               precedente rispetto a quelle presenti in modo predefinito. Per esempio, le regole per il francese del Canada (FR-CA) dovrebbero
+               precedere quelle per il francese comune (FR.*) e anche quelle predefinite (.*). Ossia, quando si traduce dal francese del
+               Canada, le regole relative, se presenti, dovranno essere applicate per prime, seguite da quelle per il francese comune e,
+               infine, da quelle predefinite.
+            </p>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="creating.new.rule"></a>3.&nbsp;Creazione di una nuova regola<a class="indexterm" name="d0e6991"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <p>In genere si dovrebbe evitare di apportare grosse modifiche alle regole di segmentazione, in particolar modo dopo il completamento
+               di una prima bozza di traduzione, ma potrebbero essere utili modifiche minori, come l'aggiunta di un'abbreviazione riconosciuta.
+            </p>
+            <p>Per modificare o espandere un gruppo esistente di regole, basta farvi clic sopra nella tabella in alto. Le regole di quel
+               gruppo verranno visualizzate nella metà inferiore della finestra di dialogo.
+            </p>
+            <p>Per creare un gruppo vuoto di regole per un nuovo modello linguistico, fare clic sul pulsante <span class="bold"><strong>Aggiungi</strong></span> nella metà superiore della finestra di dialogo. Apparirà una riga vuota nel fondo della tabella superiore (potrebbe rendersi
+               necessario scorrere la tabella per visualizzare la riga). Cambiare il nome del gruppo di regole e del modello linguistico
+               nella lingua interessata e il suo codice di lingua (vedere <a class="xref" href="appendix.languages.html" title="Appendix&nbsp;A.&nbsp;Lingue - elenco codice ISO 639">Appendix&nbsp;A, <i>Lingue - elenco codice ISO 639
+                       
+                       
+                       </i></a> per l'elenco dei codici). La sintassi del modello della lingua è conforme a quella delle espressioni regolari. Nel caso in
+               cui la serie di regole gestisca una coppia lingua-nazione, si consiglia di usare il pulsante <span class="bold"><strong>Sposta in alto</strong></span>.
+            </p>
+            <p>Aggiungere i modelli <span class="bold"><strong>Prima</strong></span> e <span class="bold"><strong>Dopo</strong></span>. Per verificare la loro sintassi e applicabilità, è opportuno usare strumenti che consentono di osservare direttamente il
+               loro risultato. Si veda il capitolo sulle <a class="link" href="chapter.regexp.html" title="Chapter&nbsp;16.&nbsp;Espressioni regolari">Espressioni regolari</a>. Un buon punto di partenza sono sempre le regole esistenti.
+            </p>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="few.simple.examples"></a>4.&nbsp;<a class="indexterm" name="d0e7025"></a>Alcuni semplici esempi
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <div class="informaltable">
+               <table border="1">
+                  <colgroup>
+                     <col width="150" align="left">
+                     <col width="60" align="center">
+                     <col width="60" align="center">
+                     <col width="190" align="left">
+                  </colgroup>
+                  <thead>
+                     <tr>
+                        <th align="left">Scopo</th>
+                        <th align="center">Prima</th>
+                        <th align="center">Dopo</th>
+                        <th align="left">Nota</th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                     <tr>
+                        <td align="left">Impostare il segmento di inizio dopo un punto ('.') seguito da uno spazio, tabulazione...</td>
+                        <td align="center">\.</td>
+                        <td align="center">\s</td>
+                        <td align="left">"\." indica il carattere punto. "\s" indica qualsiasi carattere di spazio vuoto (spazio, tabulazione, nuova pagina, ecc.)</td>
+                     </tr>
+                     <tr>
+                        <td align="left">Non segmentare dopo Sig.</td>
+                        <td align="center">Sig\.</td>
+                        <td align="center">\s</td>
+                        <td align="left">Questa è una regola di eccezione, dunque la casella non deve essere spuntata</td>
+                     </tr>
+                     <tr>
+                        <td align="left">Impostare un segmento dopo "。" (punto giapponese)</td>
+                        <td align="center">。</td>
+                        <td align="center">&nbsp;</td>
+                        <td align="left">Si noti che <code class="literal">dopo</code> è vuoto
+                        </td>
+                     </tr>
+                     <tr>
+                        <td align="left">Non segmentare dopo M. Mr. Mrs. e Ms.</td>
+                        <td align="center">Mr??s??\.</td>
+                        <td align="center">\s</td>
+                        <td align="left">Regola di eccezione - si veda l'uso di ? nelle espressioni regolari</td>
+                     </tr>
+                  </tbody>
+               </table>
+            </div>
+         </div>
+      </div>
+      <div class="navfooter">
+         <hr>
+         <table width="100%" summary="Navigation footer">
+            <tr>
+               <td width="40%" align="left"><a accesskey="p" href="chapter.translation.memories.html">Prev</a>&nbsp;
+               </td>
+               <td width="20%" align="center">&nbsp;</td>
+               <td width="40%" align="right">&nbsp;<a accesskey="n" href="chapter.searches.html">Next</a></td>
+            </tr>
+            <tr>
+               <td width="40%" align="left" valign="top">Chapter&nbsp;13.&nbsp;Memorie di traduzione&nbsp;</td>
+               <td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
+               <td width="40%" align="right" valign="top">&nbsp;Chapter&nbsp;15.&nbsp;Ricerche</td>
+            </tr>
+         </table>
+      </div>
+   </body>
+</html>

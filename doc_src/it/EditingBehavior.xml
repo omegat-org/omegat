@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<chapter id="chapter.translation.editing">
+  <title>Comportamento di modifica<indexterm class="singular">
+      <primary>Menu</primary> <secondary>Opzioni</secondary> <tertiary>Comportamento di modifica...</tertiary>
+    </indexterm></title>
+
+  <para>La finestra di dialogo presente in <menuchoice> <guimenu>Opzioni</guimenu> <guimenuitem>Comportamento di modifica...</guimenuitem> </menuchoice> consente all'utente di scegliere come deve inizializzato e gestito il segmento attivo, all'interno del campo di modifica:</para>
+
+  <figure id="editing.behavior.options">
+    <title>Opzioni del comportamento di modifica</title>
+
+    <mediaobject>
+      <imageobject role="html">
+        <imagedata fileref="images/EditingBehaviourOptions25.png"/>
+      </imageobject>
+	  <imageobject role="fo">
+        <imagedata fileref="images/EditingBehaviourOptions25.png"/>
+      </imageobject>
+    </mediaobject>
+  </figure>
+
+  <para/>
+
+  <para>Un file viene tradotto passando da un segmento all'altro e modificando, di volta in volta, ciascun segmento attivo. Quando ci si sposta tra i segmenti, si potrà scegliere se il campo di modifica debba essere riempito con la traduzione esistente, contenuta nel pannello delle concordanze parziali, o col testo di partenza. In <menuchoice> <guimenu>Opzioni</guimenu> <guimenuitem>Comportamento di modifica...</guimenuitem> </menuchoice> <application>OmegaT</application> permette le seguenti alternative:</para>
+
+  <variablelist>
+    <varlistentry>
+      <term>Il testo di partenza</term>
+
+      <listitem>
+        <para>È possibile inserire automaticamente il testo di partenza all'interno del campo di modifica. Si tratta di una possibilità molto utile quando si è in presenza di testi contenenti molti nomi di marchi di fabbrica o altri nomi propri che non necessitano di traduzione.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Lascia il segmento vuoto<indexterm class="singular">
+          <primary>Menu Opzioni</primary> <secondary>Comportamento di modifica</secondary> <tertiary>Traduzione vuota</tertiary>
+        </indexterm></term>
+
+      <listitem>
+        <para>OmegaT lascia vuoto il campo di modifica. Questa opzione consente di inserire la propria traduzione senza aver necessità di eliminare il testo di partenza, facendo così risparmiare due pressioni di tasti (<emphasis role="bold">Ctrl+A </emphasis>e <emphasis role="bold">Canc). </emphasis> Ora è possibile usare traduzioni vuote. Esse saranno visualizzate come &lt;VUOTA&gt; all'interno dell'Editor. Per crearne una, fare clic col destro all'interno di un segmento e selezionare &quot;<emphasis role="bold">Imposta traduzione vuota</emphasis>&quot;. Nello stesso menu contestuale, la voce <emphasis role="bold">Rimuovi traduzione</emphasis> permette di eliminare la traduzione esistente del segmento attivo. È possibile eseguire la stessa azione cancellando il segmento di destinazione e premendo il tasto <guibutton>Invio.</guibutton></para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Inserisci la concordanza parziale migliore<indexterm class="singular">
+          <primary>Menu Opzioni</primary> <secondary>Comportamento di modifica</secondary> <tertiary>Inserire concordanze parziali</tertiary>
+        </indexterm></term>
+
+      <listitem>
+        <para>OmegaT inserirà la traduzione della stringa più simile a quella di partenza attiva, se è sopra la soglia di somiglianza selezionata nella finestra di dialogo. Per etichettare le traduzioni eseguite tramite concordanze parziali, può essere utilizzato il prefisso, che per impostazione predefinita è impostato vuoto. Se si aggiunge un prefisso (per esempio [fuzzy]) è possibile recuperare tali traduzioni in una fase successiva e controllare la loro correttezza.</para>
+      </listitem>
+    </varlistentry>
+  </variablelist>
+
+  <para>Le opzioni nella metà inferiore della finestra di dialogo hanno le seguenti funzioni:</para>
+
+  <variablelist>
+    <varlistentry>
+      <term>Tenta di convertire i numeri quando si inserisce una concordanza parziale (fuzzy)<indexterm class="singular">
+          <primary>Menu Opzioni</primary> <secondary>Comportamento di modifica</secondary> <tertiary>Conversione dei numeri</tertiary>
+        </indexterm></term>
+
+      <listitem>
+        <para>Se l'opzione è attivata, quando viene inserita, in modo automatico o manualmente, una concordanza parziale, OmegaT tenta di convertire i numeri contenuti nelle concordanze parziali in base al contenuto del segmento di partenza. Esistono alcune limitazioni:</para>
+
+        <itemizedlist>
+          <listitem>
+            <para>Il segmento di origine e le concordanze parziali devono possedere lo stesso elenco di numeri</para>
+          </listitem>
+        
+          <listitem>
+            <para>I numeri devono essere esattamente gli stessi tra le concordanze di partenza e quelle di destinazione.</para>
+          </listitem>
+        
+          <listitem>
+            <para>Sono considerati solo gli interi e le virgole mobili semplici (utilizzando il punto come carattere decimale, per es., 5.4, ma non 5,4 o 54E-01).</para>
+          </listitem>
+        </itemizedlist>
+      </listitem>
+    </varlistentry>
+  </variablelist>
+
+  <variablelist>
+    <varlistentry>
+      <term>Permetti traduzione uguale all'originale<indexterm class="singular">
+          <primary>Menu Opzioni</primary> <secondary>Comportamento di modifica</secondary> <tertiary>Traduzione uguale all'originale</tertiary>
+        </indexterm></term>
+
+      <listitem>
+        <para>I documenti da tradurre possono contenere nomi di marchi di fabbrica, nomi propri, e via discorrendo, che devono essere lasciati inalterati (ovvero non richiedono traduzione) nel documento tradotto. Vi sono due sistemi per operare sui segmenti che contengono solo testo che deve rimanere inalterato.</para>
+
+        <para>Si può decidere di non tradurre proprio tali segmenti. OmegaT segnalerà dunque questi segmenti come &quot;non tradotti&quot;. Questa è l'impostazione predefinita. L'alternativa è inserire una traduzione identica al testo di origine. OmegaT è in grado di riconoscere se è stata compiuta questa azione. Per attivare questa opzione, andare in <menuchoice> <guimenu>Opzioni</guimenu> <guimenuitem>Comportamento di modica...</guimenuitem> </menuchoice> e spuntare la casella <emphasis role="bold">Permetti traduzione uguale all'originale</emphasis>.</para>
+      </listitem>
+    </varlistentry>
+  </variablelist>
+
+  <variablelist>
+    <varlistentry>
+      <term>Esporta il segmento in file di testo<indexterm class="singular">
+          <primary>Menu Opzioni</primary> <secondary>Comportamento di modifica</secondary> <tertiary>Esportare il segmento attivo</tertiary>
+        </indexterm></term>
+
+      <listitem>
+        <para>La funzione di esportazione testo esporta i dati dall'interno del progetto <application>OmegaT</application> attivo in file solo testo. I dati vengono esportati quando il segmento viene aperto. I file vengono scritti nella cartella secondaria /script all'interno della cartella dei file principale di OmegaT e includono:</para>
+
+        <itemizedlist>
+          <listitem>
+            <para>Il contenuto del testo del segmento di partenza (<filename>source.txt</filename>).</para>
+          </listitem>
+
+          <listitem>
+            <para>Il contenuto del testo del segmento di arrivo (<filename>target.txt</filename>).</para>
+          </listitem>
+
+          <listitem>
+            <para>Il testo evidenziato dall'utente viene selezionato quando si preme <keycap>Ctrl+Maiusc+C</keycap> o è selezionato il comando <guimenuitem>Modifica &gt; Esporta la selezione</guimenuitem> (<filename>selection.txt</filename>).</para>
+          </listitem>
+        </itemizedlist>
+
+        <para>Il contenuto dei file viene sovrascritto se si apre un nuovo segmento (source.txt e target.txt) o si esporta una nuova selezione (selection.txt). I file sono di solo testo. L'intero processo può essere manovrato e controllato tramite script basato su Tck/Tcl. Consultare <ulink url="http://www.omegat.org/en/howtos/text_export.html">Uso della funzione di esportazione testo di OmegaT</ulink> per specifiche, esempi e suggerimenti.</para>
+      </listitem>
+    </varlistentry>
+  </variablelist>
+
+  <variablelist>
+    <varlistentry>
+      <term>&quot;Vai al prossimo segmento non tradotto&quot; si ferma nel punto in cui esiste almeno una traduzione alternativa<indexterm class="singular">
+          <primary>Menu Opzioni</primary> <secondary>Comportamento di modifica</secondary> <tertiary>Segmenti con traduzione alternativa</tertiary>
+        </indexterm></term>
+
+      <listitem>
+        <para>Per evitare traduzioni sbagliate, nel caso siano presenti segmenti che presentano la possibilità di più traduzioni, si può attivare l'opzione che ferma il comando <emphasis role="bold"> Vai al prossimo segmento non tradotto</emphasis> segmento uguale successivo, a prescindere che esso sia stato o no tradotto.</para>
+      </listitem>
+    </varlistentry>
+  </variablelist>
+</chapter>

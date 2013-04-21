@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<chapter id="chapter.segmentation">
+  <title>Segmentazione del documento originale</title>
+
+  <para>Gli strumenti della memoria di traduzione operano su unità di testo definite “segmenti”. <application>OmegaT</application> utilizza due metodi per segmentare un testo: la segmentazione a livello di paragrafo e quella a livello di frase (chiamata anche “segmentazione basata su regole”). Per selezionare il tipo di segmentazione, selezionare <menuchoice> <guimenu><indexterm class="singular">
+          <primary>Progetto</primary> <secondary>Proprietà</secondary>
+        </indexterm>Progetto</guimenu> <guimenuitem>Proprietà...</guimenuitem> </menuchoice> dalla barra dei menu e attivare o disattivare l'appropriata casella di controllo. La segmentazione a livello di paragrafo è utile in alcune situazioni, per esempio nelle traduzioni con stile o altamente creative, in cui il traduttore ritiene di dover cambiare l'ordine di intere frasi: per la maggior parte dei progetti, tuttavia, la segmentazione a livello di frase è da preferirsi, dato che restituisce concordanze migliori dalle traduzioni precedenti. Se si seleziona la segmentazione a livello di frase, è possibile impostarne le regole dal menu principale <menuchoice> <guimenu><indexterm class="singular">
+          <primary>Progetto</primary> <secondary>Opzioni</secondary>
+        </indexterm>Opzioni</guimenu> <guimenuitem>Segmentazione...</guimenuitem> </menuchoice>.</para>
+
+  <para>Sono già disponibili regole di segmentazione affidabili per molte lingue, dunque molto probabilmente non si dovrà impegnare tempo a scrivere le proprie regole di segmentazione. D'altro lato, questa funzionalità può essere molto utile nei particolari casi in cui è possibile incrementare la propria produttività regolando le regole di segmentazione in base al testo da tradurre.</para>
+
+  <para><emphasis role="bold">Attenzione: </emphasis>dato che il testo verrà segmentato in modo diverso dopo aver modificato le opzioni dei filtri, è possibile dover iniziare da zero la traduzione. Allo stesso tempo, i segmenti precedenti ritenuti validi, nella memoria di traduzione del progetto verranno trasformati in segmenti orfani. Se si modificano le opzioni di segmentazione mentre un progetto è aperto, affinché le modifiche siano attivate il progetto va ricaricato.</para>
+
+  <para><application>OmegaT</application> usa i seguenti passaggi:</para>
+
+  <variablelist>
+    <varlistentry>
+      <term><indexterm class="singular">
+          <primary>Segmentazione</primary> <secondary>Segmentazione a livello del documento originale</secondary>
+        </indexterm>Segmentazione a livello di struttura</term>
+
+      <listitem>
+        <para><application>OmegaT</application> prima analizza il testo alla ricerca di una segmentazione a livello della struttura. Nel corso di questo processo, per la generazione dei segmenti, viene utilizzata solo la struttura del testo di partenza.</para>
+
+        <para>Per esempio, i file di testo possono essere segmentati in corrispondenza delle interruzioni di riga, in base alle righe vuote oppure potrebbero non venire affatto segmentati. I file contenenti formattazione (documenti ODF, HTML, ecc.) sono segmentati in base ai tag a livello di blocco (paragrafi). Gli attributi dell'oggetto traducibile nei file XHTML o HTML possono essere estratti come segmenti separati.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term><indexterm class="singular">
+          <primary>Segmentazione</primary> <secondary>Segmentazione a livello di frase</secondary>
+        </indexterm>Segmentazione a livello di frase</term>
+
+      <listitem>
+        <para>Dopo aver ultimato la segmentazione del file di partenza in unità strutturali, <application>OmegaT</application> avvierà un'ulteriore segmentazione di tali blocchi in frasi.</para>
+      </listitem>
+    </varlistentry>
+  </variablelist>
+
+  <section id="segmentation.rules">
+    <title>Regole di segmentazione<indexterm class="singular">
+        <primary>Segmentazione</primary> <secondary>Regole</secondary>
+      </indexterm></title>
+
+    <para>Il processo di segmentazione può essere raffigurato nel modo seguente: il cursore si sposta lungo il testo, un carattere alla volta. Ad ogni posizione del cursore vengono applicate le regole, che consistono di un modello <emphasis role="bold">Prima</emphasis> e <emphasis role="bold">Dopo</emphasis>, nell'ordine dato al fine di verificare se tutti i modelli <emphasis role="bold"> Prima</emphasis> sono validi per il testo alla sinistra del cursore e il corrispondente modello <emphasis role="bold">Dopo</emphasis> per il testo alla destra del cursore. Se esiste una corrispondenza con la regola, o il cursore passa oltre senza inserire un'interruzione di segmento (per una regola di eccezione), oppure viene creata una nuova interruzione di segmento alla posizione attuale del cursore (per la regola di interruzione).</para>
+
+    <para>Le due regole si comportano nel modo spiegato di seguito:</para>
+
+    <variablelist>
+      <varlistentry>
+        <term><indexterm class="singular">
+            <primary>Segmentazione</primary> <secondary>Regole</secondary> <tertiary>Regola di interruzione</tertiary>
+          </indexterm>Regola di interruzione</term>
+
+        <listitem>
+          <para>Separa il testo di origine in segmenti. Per esempio, la frase &quot;<emphasis>Did it make sense? I was not sure</emphasis>.&quot; dovrebbe essere divisa in due segmenti. Affinché questo accada, deve esserci una regola di interruzione per &quot;?&quot;, quando seguito da spazi e una parola che inizia per maiuscola. Per definire una regola d'interruzione, spuntare la casella Interruzione/Eccezione.</para>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+
+    <variablelist>
+      <varlistentry>
+        <term><indexterm class="singular">
+            <primary>Segmentazione</primary> <secondary>Regole</secondary> <tertiary>Regola di eccezione</tertiary>
+          </indexterm>Regola di eccezione</term>
+
+        <listitem>
+          <para>definisce quali parti del testo NON devono essere separate. Nonostante il punto, <emphasis>&quot;Sig. Rossi&quot;</emphasis> non dovrebbe essere separato in due segmenti e dovrebbe essere una regola di eccezione per Sig (come pure per Dott., Ing. Avv. e via discorrendo), seguita da un punto. Per definire una regola d'interruzione, lasciare disattivata la casella Interruzione/Eccezione.</para>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+
+    <para>Le regole d'interruzione predefinite dovrebbero essere sufficienti per la maggior parte delle lingue europee e per il giapponese. Data la loro flessibilità, è possibile considerare di definire ulteriori regole di eccezione per la lingua da cui si traduce, al fine di ottenere segmenti più comprensibili e coerenti.</para>
+  </section>
+
+  <section id="rules.priority">
+    <title>Priorità delle regole<indexterm class="singular">
+        <primary>Segmentazione</primary> <secondary>Priorità delle regole</secondary>
+      </indexterm></title>
+
+    <para>Tutte le serie di regole di segmentazione corrispondenti a un modello linguistico sono attive e applicate in un ordine di priorità specifico e, pertanto, sarà necessario che le lingue dalle quali comunemente si traduce si trovino in una posizione precedente rispetto a quelle presenti in modo predefinito. Per esempio, le regole per il francese del Canada (FR-CA) dovrebbero precedere quelle per il francese comune (FR.*) e anche quelle predefinite (.*). Ossia, quando si traduce dal francese del Canada, le regole relative, se presenti, dovranno essere applicate per prime, seguite da quelle per il francese comune e, infine, da quelle predefinite.</para>
+  </section>
+
+  <section id="creating.new.rule">
+    <title>Creazione di una nuova regola<indexterm class="singular">
+        <primary>Segmentazione</primary> <secondary>Creazione di una nuova regola</secondary> <seealso>Espressioni regolari</seealso>
+      </indexterm></title>
+
+    <para>In genere si dovrebbe evitare di apportare grosse modifiche alle regole di segmentazione, in particolar modo dopo il completamento di una prima bozza di traduzione, ma potrebbero essere utili modifiche minori, come l'aggiunta di un'abbreviazione riconosciuta.</para>
+
+    <para>Per modificare o espandere un gruppo esistente di regole, basta farvi clic sopra nella tabella in alto. Le regole di quel gruppo verranno visualizzate nella metà inferiore della finestra di dialogo.</para>
+
+    <para>Per creare un gruppo vuoto di regole per un nuovo modello linguistico, fare clic sul pulsante <emphasis role="bold">Aggiungi</emphasis> nella metà superiore della finestra di dialogo. Apparirà una riga vuota nel fondo della tabella superiore (potrebbe rendersi necessario scorrere la tabella per visualizzare la riga). Cambiare il nome del gruppo di regole e del modello linguistico nella lingua interessata e il suo codice di lingua (vedere <xref linkend="appendix.languages"/> per l'elenco dei codici). La sintassi del modello della lingua è conforme a quella delle espressioni regolari. Nel caso in cui la serie di regole gestisca una coppia lingua-nazione, si consiglia di usare il pulsante <emphasis role="bold">Sposta in alto</emphasis>.</para>
+
+    <para>Aggiungere i modelli <emphasis role="bold">Prima</emphasis> e <emphasis role="bold">Dopo</emphasis>. Per verificare la loro sintassi e applicabilità, è opportuno usare strumenti che consentono di osservare direttamente il loro risultato. Si veda il capitolo sulle <link linkend="chapter.regexp">Espressioni regolari</link>. Un buon punto di partenza sono sempre le regole esistenti.</para>
+  </section>
+
+  <section id="few.simple.examples">
+    <title><indexterm class="singular">
+        <primary>Segmentazione</primary> <secondary>Esempi</secondary>
+      </indexterm>Alcuni semplici esempi</title>
+
+    <informaltable>
+      <tgroup cols="4">
+        <colspec align="left" colnum="1" colwidth="150"/>
+
+        <colspec align="center" colnum="2" colwidth="60"/>
+
+        <colspec align="center" colnum="3" colwidth="60"/>
+
+        <colspec align="left" colnum="4" colwidth="190"/>
+
+        <thead>
+          <row>
+            <entry>Scopo</entry>
+
+            <entry align="center">Prima</entry>
+
+            <entry align="center">Dopo</entry>
+
+            <entry>Nota</entry>
+          </row>
+        </thead>
+
+        <tbody>
+          <row>
+            <entry>Impostare il segmento di inizio dopo un punto ('.') seguito da uno spazio, tabulazione...</entry>
+
+            <entry align="center">\.</entry>
+
+            <entry align="center">\s</entry>
+
+            <entry>&quot;\.&quot; indica il carattere punto. &quot;\s&quot; indica qualsiasi carattere di spazio vuoto (spazio, tabulazione, nuova pagina, ecc.)</entry>
+          </row>
+
+          <row>
+            <entry>Non segmentare dopo Sig.</entry>
+
+            <entry align="center">Sig\.</entry>
+
+            <entry align="center">\s</entry>
+
+            <entry>Questa è una regola di eccezione, dunque la casella non deve essere spuntata</entry>
+          </row>
+
+          <row>
+            <entry>Impostare un segmento dopo &quot;。&quot; (punto giapponese)</entry>
+
+            <entry align="center">。</entry>
+
+            <entry align="center"/>
+
+            <entry>Si noti che <literal>dopo</literal> è vuoto</entry>
+          </row>
+
+          <row>
+            <entry>Non segmentare dopo M. Mr. Mrs. e Ms.</entry>
+
+            <entry align="center">Mr??s??\.</entry>
+
+            <entry align="center">\s</entry>
+
+            <entry>Regola di eccezione - si veda l'uso di ? nelle espressioni regolari</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </informaltable>
+  </section>
+</chapter>

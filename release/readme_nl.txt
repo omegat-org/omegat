@@ -1,8 +1,8 @@
-Deze vertaling is het werk van Dick Groskamp, copyrightÂ© 2012
+ï»¿@@TRANSLATION_NOTICE@@
 
 ==============================================================================
   ==============================================================================
-OmegaT 2.0, Lees Mij-bestand
+OmegaT 3.0, Lees Mij-bestand
 
   1.  Informatie over OmegaT
   2.
@@ -42,7 +42,7 @@ De belangrijkste mogelijkheden van OmegaT zijn:
   - zoekacties in het project en de vertaalgeheugens die als verwijzingen worden gebruikt
   - zoekacties in bestanden in ondersteunde formaten in elke map 
   - fuzzy overeenkomsten
-  - slimme afhandeling van projecten inclusief complexe hiÃ«rarchieÃ«n van mappen
+  - slimme afhandeling van projecten inclusief complexe hiërarchieën van mappen
   - ondersteuning voor woordenlijsten (controle van terminologie) 
   - ondersteuning voor OpenSource spellingscontrole terwijl u werkt
   - ondersteuning voor woordenboeken van StarDict
@@ -71,7 +71,7 @@ OmegaT ondersteunt direct de volgende bestandsformaten:
   - (X)HTML (*.html, *.xhtml,*.xht)
   - HTML Help Compiler (*.hhc, *.hhk)
   - DocBook (*.xml)
-  - Ã©Ã©ntalige XLIFF (*.xlf, *.xliff, *.sdlxliff)
+  - ééntalige XLIFF (*.xlf, *.xliff, *.sdlxliff)
   - QuarkXPress CopyFlowGold (*.tag, *.xtg)
   - ResX-bestanden (*.resx)
   - Android-bronbestanden (*.xml)
@@ -87,7 +87,7 @@ OmegaT ondersteunt direct de volgende bestandsformaten:
 
 OmegaT kan worden aangepast om ook andere bestandsindelingen te ondersteunen.
 
-OmegaT zal automatisch zelfs de meest complexe bronmap-hiÃ«rarchieÃ«n parsen om toegang te krijgen tot alle ondersteunde bestanden en een doelmap maken met precies dezelfde structuur, inclusief kopieÃ«n van niet-ondersteunde bestanden.
+OmegaT zal automatisch zelfs de meest complexe bronmap-hiërarchieën parsen om toegang te krijgen tot alle ondersteunde bestanden en een doelmap maken met precies dezelfde structuur, inclusief kopieën van niet-ondersteunde bestanden.
 
 Voor een handleiding om snel te kunnen beginnen, start OmegaT en lees de weergegeven handleiding Snel starten.
 
@@ -98,9 +98,9 @@ De gebruikershandleiding zit in het pakket dat u zojuist heeft gedownload. U kun
 
 3.1 Algemeen
 OmegaT vereist dat een Java Runtime Environment (JRE) versie 
-1.5 of hoger is geÃ¯nstalleerd op uw systeem om uitgevoerd te kunnen worden. OmegaT pakketten die de Java Runtime Environment bevatten zijn nu beschikbaar om gebruikers de moeite van het selecteren, verkrijgen en installeren te besparen. 
+1.5 of hoger is geïnstalleerd op uw systeem om uitgevoerd te kunnen worden. OmegaT pakketten die de Java Runtime Environment bevatten zijn nu beschikbaar om gebruikers de moeite van het selecteren, verkrijgen en installeren te besparen. 
 
-Als u al Java hebt is Ã©Ã©n manier om de huidige versie van OmegaT te installeren het gebruiken van Java Web Start. 
+Als u al Java hebt is één manier om de huidige versie van OmegaT te installeren het gebruiken van Java Web Start. 
 Download voor dit doel het volgende bestand en voer het uit:
 
    http://omegat.sourceforge.net/webstart/OmegaT.jnlp
@@ -108,20 +108,20 @@ Download voor dit doel het volgende bestand en voer het uit:
 Het zal de juiste omgeving voor uw computer installeren en de toepassing zelf bij de eerste keer dat het wordt uitgevoerd. Latere aanroepen behoeven niet online te worden gedaan.
 
 Gedurende de installatie, afhankelijk van uw besturingssysteem, zou u verschillende beveiligingswaarschuwingen kunnen ontvangen. Het certificaat is zelf-ondertekend door "Didier Briel". 
-De rechten die u aan deze versie geeft (welke kunnen worden omschreven als een "onbeperkte toegang tot de computer") zijn identiek aan de rechten die u geeft voor de locale versie, zoals die door een procedure geÃ¯nstalleerd wordt: zij geven toegang tot de harde schijf van de computer. Opvolgende klikken op OmegaT.jnlp zal leiden tot het controleren op upgrades, als u on line bent, ze installeren als ze er zijn, en dan OmegaT starten. 
+De rechten die u aan deze versie geeft (welke kunnen worden omschreven als een "onbeperkte toegang tot de computer") zijn identiek aan de rechten die u geeft voor de locale versie, zoals die door een procedure geïnstalleerd wordt: zij geven toegang tot de harde schijf van de computer. Opvolgende klikken op OmegaT.jnlp zal leiden tot het controleren op upgrades, als u on line bent, ze installeren als ze er zijn, en dan OmegaT starten. 
 
 De alternatieve manieren en mogelijkheden voor het downloaden en installeren van OmegaT worden hieronder weergegeven. 
 
-Windows- en Linuxgebruikers: als u er van overtuigd bent dat op uw systeem al een passende versie van de JRE is geÃ¯nstalleerd, dan kunt u de versie van OmegaT zonder de JRE installeren (dit wordt aangegeven in de naam van de versie, namelijk "Without_JRE"). 
-Als u twijfelt raden wij u aan om de versie die wordt geleverd met de JRE te gebruiken. Dat is veilig omdat, zelfs als er al een JRE op uw systeem geÃ¯nstalleerd is, deze versie die niet zal beÃ¯nvloeden.
+Windows- en Linuxgebruikers: als u er van overtuigd bent dat op uw systeem al een passende versie van de JRE is geïnstalleerd, dan kunt u de versie van OmegaT zonder de JRE installeren (dit wordt aangegeven in de naam van de versie, namelijk "Without_JRE"). 
+Als u twijfelt raden wij u aan om de versie die wordt geleverd met de JRE te gebruiken. Dat is veilig omdat, zelfs als er al een JRE op uw systeem geïnstalleerd is, deze versie die niet zal beïnvloeden.
 
 Linuxgebruikers: 
 OmegaT kan worden uitgevoerd op de open-implementatie bron Java die is verpakt in vele Linuxdistributies (bijvoorbeeld Ubuntu), maar het kan zijn dat u problemen, problemen met de weergave of ontbrekende mogelijkheden ervaart. We raden daarom aan om ofwel de Oracle Java Runtime Environment (JRE) 
 of het OmegaT-pakket, gebundeld met JRE (de .tar.bz2-bundel gemarkeerd 
-"Linux") te downloaden en te installeren. Indien u een versie van Java installeert op systeemniveau moet u er ofwel voor zorgen dat het is vermeld in uw pad voor opstarten, of het expliciet aanroepen bij het opstarten van OmegaT. Indien u niet echt bekend bent met Linux raden we u aan om een versie van OmegaT te installeren waarin de JRE is opgenomen. Dit is veilig omdat deze "lokale" JRE geen problemen zal veroorzaken met andere Java-implementaties die misschien al op uw systeem geÃ¯nstalleerd zijn.
+"Linux") te downloaden en te installeren. Indien u een versie van Java installeert op systeemniveau moet u er ofwel voor zorgen dat het is vermeld in uw pad voor opstarten, of het expliciet aanroepen bij het opstarten van OmegaT. Indien u niet echt bekend bent met Linux raden we u aan om een versie van OmegaT te installeren waarin de JRE is opgenomen. Dit is veilig omdat deze "lokale" JRE geen problemen zal veroorzaken met andere Java-implementaties die misschien al op uw systeem geïnstalleerd zijn.
 
 Macgebruikers: 
-De JRE is al geÃ¯nstalleerd op Mac OS X vÃ³Ã³r Mac OS X 10.7 
+De JRE is al geïnstalleerd op Mac OS X vóór Mac OS X 10.7 
 (Lion). Liongebruikers zullen er door het systeem naar worden gevraagd als zij voor de eerste keer een toepassing starten die java vereist en het systeem zal het eventueel 
 automatisch downloaden en installeren.
 
@@ -171,7 +171,7 @@ cd <map waar het bestand OmegaT.jar is opgeslagen>
 <naam en pad van het uitvoerbare Java-bestand> -jar OmegaT.jar
 
 (Het uitvoerbare Java-bestand is het bestand java op Linux en java.exe op Windows.
-Indien Java is geÃ¯nstalleerd op systeemniveau en in het pad voor de opdracht staat, hoeft niet het volledige pad te worden ingevoerd.)
+Indien Java is geïnstalleerd op systeemniveau en in het pad voor de opdracht staat, hoeft niet het volledige pad te worden ingevoerd.)
 
 Het starten van OmegaT aanpassen:
 
@@ -210,7 +210,7 @@ Voor het op andere manieren bijdragen abonneert u zich eerst op de gebruikersgro
 en krijg daar een indruk van wat er gaande is in de wereld van OmegaT...
 
   OmegaT is van origine het werk van Keith Godfrey.
-  Marc Prior is de coÃ¶rdinator van het OmegaT-project.
+  Marc Prior is de coördinator van het OmegaT-project.
 
 Eerdere bijdragen van:
 (alfabetische volgorde)
@@ -229,18 +229,20 @@ Code is bijgedragen door
   Jean-Christophe Helary
   Thomas Huriaux
   Hans-Peter Jacobs
+  Kyle Katarn
   Ibai Lakunza Velasco
   Guido Leenders
   Aaron Madlon-Kay
-  FabiÃ¡n Mandelbaum
+  Fabián Mandelbaum
   John Moran
   Maxym Mykhalchuk 
   Arno Peters
   Henry Pijffers 
-  Briac PilprÃ©
+  Briac Pilpré
   Tiago Saboga
-  Andrzej SawuÅ‚a
+  Andrzej Sawu?a
   Benjamin Siband
+  Yu Tang
   Rashid Umarov  
   Antonio Vilei
   Martin Wunderlich
@@ -261,12 +263,10 @@ OmegaT gebruikt de volgende bibliotheken:
   HTMLParser 1.6 van Somik Raha, Derrick Oswald en anderen (LGPL License)
   MRJ Adapter 1.0.8 door Steve Roy (LGPL License)
   VLDocking Framework 2.1.4 van VLSolutions (CeCILL-licentie)
-  Hunspell van LÃ¡szlÃ³ NÃ©meth en anderen (LGPL-licentie)
+  Hunspell van László Németh en anderen (LGPL-licentie)
   JNA van Todd Fast, Timothy Wall en anderen (LGPL-licentie)
   Swing-Layout 1.0.2 (LGPL-licentie)
   Jmyspell 2.1.4 (LGPL-licentie)
-  JAXB (GPLv2 + klassenpad uitzondering)
-  SJXP 1.0.2 (GPL v2)
   SVNKit 1.7.5 (TMate License)
   Sequence Library (Sequence Library License)
   ANTLR 3.4 (ANTLR 3 licentie)
@@ -275,20 +275,22 @@ OmegaT gebruikt de volgende bibliotheken:
   JSch (JSch License)
   Base64 (publieke domein)
   Diff (GPL)
+  JSAP (LGPL)
+  orion-ssh2-214 (Orion SSH voor Java-licentie)
 
 ==============================================================================
  5.  Heeft u problemen met OmegaT ? Heeft u hulp nodig?
 
 Overtuig u ervan dat u de documentatie zorgvuldig heeft doorgenomen voordat u een probleem rapporteert. Wat u meemaakt kan in feite een karakteristiek iets van OmegaT zijn dat u net heeft ontdekt. Als u het OmegaT-log controleert en u ziet woorden zoals "Fout", "Waarschuwing", "Uitzondering" of "onverwacht afgebroken" dan heeft u waarschijnlijk een echt probleem ontdekt (het bestand log.txt is geplaatst in de map met gebruikersvoorkeuren. Zie de handleiding voor de juiste locatie).
 
-Het volgende wat u zou moeten doen is dat wat u gevonden heeft bevestigd te krijgen van andere gebruikers om er zeker van te zijn dat dit al niet reeds gerapporteerd is. U kunt de foutenrapport ook verifiÃ«ren op de pagina van SourceForge. Alleen als u er zeker van bent dat u de eerste bent die een opnieuw te produceren reeks van gebeurtenissen heeft ontdekt die leidt tot iets wat niet zou moeten gebeuren zou u een foutenrapport moeten indienen.
+Het volgende wat u zou moeten doen is dat wat u gevonden heeft bevestigd te krijgen van andere gebruikers om er zeker van te zijn dat dit al niet reeds gerapporteerd is. U kunt de foutenrapport ook verifiëren op de pagina van SourceForge. Alleen als u er zeker van bent dat u de eerste bent die een opnieuw te produceren reeks van gebeurtenissen heeft ontdekt die leidt tot iets wat niet zou moeten gebeuren zou u een foutenrapport moeten indienen.
 
 Elk goed foutenrapport heeft exact drie dingen nodig.
   - Stappen om het te reproduceren,
   - Wat u verwachtte te zien, en
   - Wat u in plaats daarvan zag.
 
-U kunt kopieÃ«n van bestanden, delen uit het logbestand, schermafdrukken of iets waarvan u denkt dat dat de ontwikkelaars zal helpen bij het oplossen van uw probleem, toevoegen.
+U kunt kopieën van bestanden, delen uit het logbestand, schermafdrukken of iets waarvan u denkt dat dat de ontwikkelaars zal helpen bij het oplossen van uw probleem, toevoegen.
 
 Bladeren door de archieven van de gebruikersgroep kunt u via:
      http://groups.yahoo.com/group/OmegaT/

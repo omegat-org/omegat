@@ -3,7 +3,7 @@
 ----------------------------------------------------------------------
   26 Enhancements
    5 Bug fixes
-   0 Localisation update
+   1 Localisation update
 ----------------------------------------------------------------------
 3.0.0 vs. 2.6.3
 
@@ -107,6 +107,10 @@ are just copied
 OmegaT failed to load the valid ones
 
   - OmegaT team projects were not working behind some firewalls
+
+  Localisation updates:
+
+  - Brazilian Portuguese localisation updated to 3.0.0 (UI, Instant Start)
 
 ----------------------------------------------------------------------
  OmegaT 2.6.3 update 1

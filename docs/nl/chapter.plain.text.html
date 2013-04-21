@@ -3,8 +3,8 @@
       <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
    
       <title>Hoofdstuk 11. Werken met platte tekst</title>
-      <link rel="stylesheet" href="OmegaT.css" type="text/css">
-      <meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+      <link rel="stylesheet" type="text/css" href="OmegaT.css">
+      <meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
       <link rel="home" href="index.html" title="OmegaT - Gebruikershandleiding">
       <link rel="up" href="index.html" title="OmegaT - Gebruikershandleiding">
       <link rel="prev" href="chapter.translation.editing.html" title="Hoofdstuk 10. Bewerken (gedrag)">
@@ -25,25 +25,25 @@
          </table>
          <hr>
       </div>
-      <div class="chapter" title="Hoofdstuk 11. Werken met platte tekst">
+      <div class="chapter">
          <div class="titlepage">
             <div>
                <div>
-                  <h2 class="title"><a name="chapter.plain.text"></a>Hoofdstuk 11. Werken met platte tekst<a class="indexterm" name="d0e5618"></a></h2>
+                  <h1 class="title"><a name="chapter.plain.text"></a>Hoofdstuk 11. Werken met platte tekst<a class="indexterm" name="d0e5856"></a></h1>
                </div>
             </div>
          </div>
          <div class="toc">
-            <dl>
+            <dl class="toc">
                <dt><span class="section"><a href="chapter.plain.text.html#default.encoding">1. Standaard codering</a></span></dt>
                <dt><span class="section"><a href="chapter.plain.text.html#OmegaT.solution">2. De <span class="application">OmegaT</span>-oplossing</a></span></dt>
             </dl>
          </div>
-         <div class="section" title="1. Standaard codering">
+         <div class="section">
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="default.encoding"></a>1. Standaard codering<a class="indexterm" name="d0e5626"></a><a class="indexterm" name="d0e5631"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="default.encoding"></a>1. Standaard codering<a class="indexterm" name="d0e5864"></a><a class="indexterm" name="d0e5869"></a></h2>
                   </div>
                </div>
             </div>
@@ -60,7 +60,7 @@
                alfabet weergegeven en niet in Kanji.
             </p>
          </div>
-         <div class="section" title="2. De OmegaT-oplossing">
+         <div class="section">
             <div class="titlepage">
                <div>
                   <div>
@@ -72,7 +72,7 @@
             <p>Er bestaan in principe drie manieren om dit op te lossen in <span class="application">OmegaT</span>. Zij behelzen allemaal het gebruik van de bestandsfilters in het menu <span class="bold"><strong>Opties</strong></span>.
             </p>
             <div class="variablelist">
-               <dl>
+               <dl class="variablelist">
                   <dt><span class="term">Wijzig de codering van uw bestanden naar Unicode</span></dt>
                   <dd>
                      <p>open uw bronbestand in een tekstverwerker die zijn codering juist interpreteert en sla het bestand op met de codering <span class="bold"><strong>"UTF-8"</strong></span>. Wijzig de bestandsextensie van <code class="literal">.txt</code> naar <code class="literal">.utf8</code>. <span class="application">OmegaT</span> zal het bestand automatisch interpreteren als een UTF8-bestand. Dit is de beste algemene alternatief, het bespaart u problemen
@@ -82,7 +82,7 @@
                </dl>
             </div>
             <div class="variablelist">
-               <dl>
+               <dl class="variablelist">
                   <dt><span class="term">Specificeer de codering voor uw 'platte tekst'-bestanden</span></dt>
                   <dd>
                      <p>- d.i. bestanden met de extensie <code class="filename">.txt</code> - :&nbsp;wijzig, in de sectie <span class="bold"><strong>Tekstbestanden</strong></span> van het dialoogvenster Bestandsfilters, de <span class="bold"><strong>Codering van bronbestand</strong></span> van &lt;auto&gt; naar de codering die overeenkomt met uw bron <code class="filename">.txt</code>-bestand, bijvoorbeeld .jp voor het bovenstaande voorbeeld.
@@ -91,7 +91,7 @@
                </dl>
             </div>
             <div class="variablelist">
-               <dl>
+               <dl class="variablelist">
                   <dt><span class="term">Wijzig de extensies van uw 'platte tekst'-bestanden</span></dt>
                   <dd>
                      <p>bijvoorbeeld van <code class="filename">.txt</code> naar <code class="filename">.jp</code> voor Japanse platte teksten:&nbsp;voeg, in de sectie <span class="bold"><strong>Tekstbestanden</strong></span> van het dialoogvenster Bestandsfilters, een nieuw <span class="bold"><strong>Patroon voor bronbestanden</strong></span> toe (<code class="filename">*.jp</code> voor dit voorbeeld)&nbsp;en selecteer de toepasselijke parameters voor de bron- en doelcodering.
@@ -103,7 +103,7 @@
                behandelen.
             </p>
             <div class="itemizedlist">
-               <ul class="itemizedlist" type="disc">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
                      <p><code class="literal">.txt</code>-bestanden worden automatisch (&lt;auto&gt;) door <span class="application">OmegaT</span> geïnterpreteerd als zijnde gecodeerd in de standaard codering van de computer.
                      </p>
@@ -111,23 +111,23 @@
                </ul>
             </div>
             <div class="itemizedlist">
-               <ul class="itemizedlist" type="disc">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
-                     <p><code class="literal">.txt1</code>-bestanden zijn bestanden in ISO-8859-1, geschikt voor de meeste <span class="bold"><strong>West-Europese</strong></span> talen.<a class="indexterm" name="d0e5748"></a></p>
+                     <p><code class="literal">.txt1</code>-bestanden zijn bestanden in ISO-8859-1, geschikt voor de meeste <span class="bold"><strong>West-Europese</strong></span> talen.<a class="indexterm" name="d0e5986"></a></p>
                   </li>
                </ul>
             </div>
             <div class="itemizedlist">
-               <ul class="itemizedlist" type="disc">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
-                     <p><code class="literal">.txt2</code>-bestanden zijn bestanden in ISO-8859-2, die de meeste <span class="bold"><strong>Centraal- en Oost-Europese</strong></span> talen ondervangt)<a class="indexterm" name="d0e5762"></a></p>
+                     <p><code class="literal">.txt2</code>-bestanden zijn bestanden in ISO-8859-2, die de meeste <span class="bold"><strong>Centraal- en Oost-Europese</strong></span> talen ondervangt)<a class="indexterm" name="d0e6000"></a></p>
                   </li>
                </ul>
             </div>
             <div class="itemizedlist">
-               <ul class="itemizedlist" type="disc">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
-                     <p><code class="literal">.utf8</code> bestanden worden door <span class="application">OmegaT</span> geïnterpreteerd als zijnde gecodeerd in UTF-8 (een codering die bijna alle talen in de wereld ondervangt).<a class="indexterm" name="d0e5776"></a></p>
+                     <p><code class="literal">.utf8</code> bestanden worden door <span class="application">OmegaT</span> geïnterpreteerd als zijnde gecodeerd in UTF-8 (een codering die bijna alle talen in de wereld ondervangt).<a class="indexterm" name="d0e6014"></a></p>
                   </li>
                </ul>
             </div>

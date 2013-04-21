@@ -39,10 +39,13 @@
 
       <mediaobject>
         <imageobject role="html">
-          <imagedata fileref="images/Omegatproject.png"/>
+		          <imagedata fileref="images/Omegatproject.png"/>
+       </imageobject>
+      <imageobject role="fo">
+          <imagedata fileref="images/Omegatproject.png" width="60%"/>
         </imageobject>
       </mediaobject>
-    </figure>
+	  </figure>
 
     <para>Alternatieve locaties voor sommige mappen kunnen worden gekozen bij het maken van het project of tijdens de vertaling. Het is daarom mogelijk om bestaande mappen te kiezen of mappen te maken op locaties die passen bij uw eigen werkwijze en projectbeheer. Open <guimenuitem>Project &gt; Eigenschappen...</guimenuitem> of met <guibutton>Ctrl+E</guibutton> en maak de nodige aanpassingen om de locaties van de mappen te wijzigen nadat een project is gemaakt.</para>
 
@@ -150,7 +153,7 @@
   </section>
 
   <section id="user.files">
-    <title id="user.files.location">Bestanden met gebruikersinstellingen<indexterm class="singular">
+    <title>Bestanden met gebruikersinstellingen<indexterm class="singular">
         <primary>Projectbestanden</primary> <secondary>Bestanden met gebruikersinstellingen</secondary>
       </indexterm></title>
 
@@ -316,7 +319,7 @@
           </row>
 
           <row>
-            <entry rowsep="0"><application>Omegat</application></entry>
+            <entry rowsep="0"><literal>Omegat</literal></entry>
 
             <entry rowsep="0">Een tekstbestand dat twee regels bevat:</entry>
           </row>
@@ -341,7 +344,7 @@
           </row>
 
           <row>
-            <entry rowsep="0"><application>OmegaT</application>.bat</entry>
+            <entry rowsep="0"><literal>OmegaT.bat</literal></entry>
 
             <entry rowsep="0">Een batch-bestand gebruikt om <application>OmegaT</application> te starten vanaf de opdrachtregel van Windows. Het bevat slechts de volgende regel:</entry>
           </row>
@@ -349,12 +352,12 @@
           <row>
             <entry/>
 
-            <entry><literal>java -jar <application>OmegaT</application>.jar
+            <entry><literal>java -jar OmegaT.jar
             %*</literal></entry>
           </row>
 
           <row>
-            <entry><application>OmegaT</application>.jar</entry>
+            <entry><literal>OmegaT.jar</literal></entry>
 
             <entry>De hoofdtoepassing OmegaT. U moet dit bestand aanroepen vanaf de opdrachtregel of starten vanuit uw bestandsbeheerder, gewoonlijk door er op te dubbelklikken, om OmegaT te starten.</entry>
           </row>

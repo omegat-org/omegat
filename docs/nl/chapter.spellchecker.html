@@ -3,8 +3,8 @@
       <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
    
       <title>Hoofdstuk 20. Spellingscontrole</title>
-      <link rel="stylesheet" href="OmegaT.css" type="text/css">
-      <meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+      <link rel="stylesheet" type="text/css" href="OmegaT.css">
+      <meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
       <link rel="home" href="index.html" title="OmegaT - Gebruikershandleiding">
       <link rel="up" href="index.html" title="OmegaT - Gebruikershandleiding">
       <link rel="prev" href="chapter.machine.translate.html" title="Hoofdstuk 19. Machinevertaling">
@@ -25,30 +25,30 @@
          </table>
          <hr>
       </div>
-      <div class="chapter" title="Hoofdstuk 20. Spellingscontrole">
+      <div class="chapter">
          <div class="titlepage">
             <div>
                <div>
-                  <h2 class="title"><a name="chapter.spellchecker"></a>Hoofdstuk 20. Spellingscontrole<a class="indexterm" name="d0e8040"></a></h2>
+                  <h1 class="title"><a name="chapter.spellchecker"></a>Hoofdstuk 20. Spellingscontrole<a class="indexterm" name="d0e8394"></a></h1>
                </div>
             </div>
          </div>
          <div class="toc">
-            <dl>
-               <dt><span class="section"><a href="chapter.spellchecker.html#d0e8045">1. Installeren van woordenboeken voor spelling</a></span></dt>
-               <dt><span class="section"><a href="chapter.spellchecker.html#d0e8106">2. Woordenboeken voor spelling gebruiken</a></span></dt>
+            <dl class="toc">
+               <dt><span class="section"><a href="chapter.spellchecker.html#d0e8399">1. Installeren van woordenboeken voor spelling</a></span></dt>
+               <dt><span class="section"><a href="chapter.spellchecker.html#d0e8459">2. Woordenboeken voor spelling gebruiken</a></span></dt>
                <dt><span class="section"><a href="chapter.spellchecker.html#hints">3. Hints</a></span></dt>
             </dl>
          </div>
-         <p>OmegaT heeft een ingebouwde spellingscontrole die is gebaseerd op de spellingscontrole die wordt gebruikt in OpenOffice.org,
-            Firefox en Thunderbird. Als consequentie daarvan is het in staat om het grote aantal gratis woordenboeken voor spelling te
-            gebruiken die beschikbaar is voor die toepassingen.
+         <p>OmegaT heeft een ingebouwde spellingscontrole die is gebaseerd op de spellingscontrole die wordt gebruikt in Apache OpenOffice,
+            LibreOffice, Firefox en Thunderbird. Als consequentie daarvan is het in staat om het grote aantal gratis woordenboeken voor
+            spelling te gebruiken die beschikbaar is voor die toepassingen.
          </p>
-         <div class="section" title="1. Installeren van woordenboeken voor spelling">
+         <div class="section">
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="d0e8045"></a>1. Installeren van woordenboeken voor spelling
+                     <h2 class="title" style="clear: both"><a name="d0e8399"></a>1. Installeren van woordenboeken voor spelling
                      </h2>
                   </div>
                </div>
@@ -57,7 +57,7 @@
                zijn geïnstalleerd. Volg deze procedure om woordenboeken te installeren:
             </p>
             <div class="itemizedlist">
-               <ul class="itemizedlist" type="disc">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
                      <p>Maak, in uw bestandsbeheerder, een nieuwe map op een geschikte locatie waarin uw woordenboeken voor de spelling kunnen worden
                         opgeslagen (D:\Vertalingen\spellingscontrole in het voorbeeld hieronder).
@@ -66,15 +66,15 @@
                </ul>
             </div>
             <div class="itemizedlist">
-               <ul class="itemizedlist" type="disc">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
-                     <p>Selecteer, in OmegaT, <span class="guisubmenu"><a class="indexterm" name="d0e8059"></a></span><span class="guimenuitem">Opties &gt; Spellingscontrole</span>, en klik dan op <span class="guibutton">Kiezen </span>naast het veld map Woordenboek-bestand. Navigeer naar en selecteer de map die u hebt gemaakt voor de woordenboeken.
+                     <p>Selecteer, in OmegaT, <span class="guisubmenu"><a class="indexterm" name="d0e8413"></a></span><span class="guimenuitem">Opties &gt; Spellingscontrole</span>, en klik dan op <span class="guibutton">Kiezen </span>naast het veld map Woordenboek-bestand. Navigeer naar en selecteer de map die u hebt gemaakt voor de woordenboeken.
                      </p>
                   </li>
                </ul>
             </div>
             <div class="itemizedlist">
-               <ul class="itemizedlist" type="disc">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
                      <p>Plaats de bestanden voor de woordenboeken die u wilt gebruiken in deze map. Er bestaan in essentie twee manieren waarop u
                         dit kunt doen. U kunt ofwel de bestanden handmatig kopiëren, d.i. van elders op uw systeem, met behulp van uw bestandsbeheerder;
@@ -86,24 +86,28 @@
                </ul>
             </div>
             <p>Handmatig kopiëren van de bestanden is zinvol als u al geschikte bestanden voor de woordenboeken op uw systeem heeft staan,
-               bijvoorbeeld als deel van uw installatie van OpenOffice.org of Thunderbird. Het is echter eenvoudiger om online naar woordenboeken
-               te zoeken met behulp van het veld <span class="bold"><strong>URL voor online woordenboeken</strong></span>:
+               bijvoorbeeld als deel van uw installatie van Apache OpenOffice, LibreOffice, Firefox of Thunderbird. Het is echter eenvoudiger
+               om online naar woordenboeken te zoeken met behulp van het veld <span class="bold"><strong>URL voor online woordenboeken</strong></span>:
             </p>
-            <div class="figure"><a name="spellchecker.setup"></a><p class="title"><b>Figuur 20.1. <a class="indexterm" name="d0e8084"></a>Spellingscontrole instellen</b></p>
+            <div class="figure"><a name="spellchecker.setup"></a><p class="title"><b>Afbeelding 20.1. <a class="indexterm" name="d0e8438"></a>Spellingscontrole instellen</b></p>
                <div class="figure-contents">
-                  <div class="mediaobject"><img src="images/SpellcheckerSetup_25.png" alt="SpellingscontroleSpellingscontrole instellen Spellingscontrole instellen"></div>
+                  <div class="mediaobject"><img src="images/SpellcheckerSetup_25.png" alt="Spellingscontrole instellen"></div>
                </div>
-            </div><br class="figure-break"><p>Klikken op de knop <span class="guibutton">Nieuw woordenboek installeren</span> zal het installatievenster Woordenboek openen, waar u de woordenboeken kunt selecteren die u wilt installeren. Zorg er voor
-               dat de taalcode van de doelbestanden correspondeert met de taalcode van het woordenboek: een FR-FR woordenboek zal niet werken
-               met de instelling FR voor het doel U zult de instelling naar FR-FR moeten wijzigen om de spellingscontrole het juiste woordenboek
-               voor uw doel te laten herkennen. Zoek naar bestanden met de naam, verwijzend naar de gebruikte taal en die de extensies <span class="emphasis"><em>aff</em></span> en <span class="emphasis"><em>dic.</em></span> hebben.
+            </div><br class="figure-break"><p>Klikken op de knop <span class="guibutton">Nieuw woordenboek installeren</span> zal het installatievenster Woordenboek openen, waar u de woordenboeken kunt selecteren die u wilt installeren.
+            </p>
+            <p>De namen van de bestanden moeten corresponderen met de taalcode van uw doeltaal zoals die is gedefinieerd in het dialoogvenster
+               Projecteigenschappen (<span class="guimenu">Project &gt; Eigenschappen</span>). Indien u bijvoorbeeld ES-MX (Mexicaans Spaans) hebt geselecteerd als de doeltaal, moeten de bestanden voor de woordneboeken
+               zijn genaamd es_MX.dic en es_MX.aff. Indien u slechts een standaard Spaans woordenboek beschikbaar hebt, met bijvoorbeeld
+               de bestandsnamen es_es.dic en es_es.aff, kunt u deze bestanden kopiëren naar es_MX.dic en es_MX.aff en het woordenboek voor
+               de spelling zal werken. Onthoud dat dit natuurlijk zal controleren op de standaard (Castilliaans) in plaats van op Mexicaans
+               Spaans.
             </p>
          </div>
-         <div class="section" title="2. Woordenboeken voor spelling gebruiken">
+         <div class="section">
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="d0e8106"></a>2. Woordenboeken voor spelling gebruiken
+                     <h2 class="title" style="clear: both"><a name="d0e8459"></a>2. Woordenboeken voor spelling gebruiken
                      </h2>
                   </div>
                </div>
@@ -115,20 +119,20 @@
             </p>
             <p>Selecteer <span class="guimenuitem">Opties &gt; Spellingscontrole</span> en selecteer het keuzevak <span class="guilabel">Automatische spellingscontrole</span> (zie boven) om de spellingscontrole in te schakelen.
             </p>
-            <div class="figure"><a name="spellchecker.in.action"></a><p class="title"><b>Figuur 20.2. </b></p>
+            <div class="figure"><a name="spellchecker.in.action"></a><p class="title"><b>Afbeelding 20.2. Spellingscontrole gebruiken</b></p>
                <div class="figure-contents">
-                  <div class="mediaobject"><img src="images/SpellcheckingText.png"></div>
+                  <div class="mediaobject"><img src="images/SpellcheckingText.png" alt="Spellingscontrole gebruiken"></div>
                </div>
             </div><br class="figure-break"><p>Klikken met rechts op een onderstreept woord (distriberen in de afbeelding hierboven) opent een menu met keuzelijst met suggesties
                voor de correctie (distribueren). U kunt de spellingscontrole instrueren om, alle keren dat het woord verkeerd gespeld voorkomt,
                alles te negeren of het aan het woordenboek toe te voegen.
             </p>
          </div>
-         <div class="section" title="3. Hints">
+         <div class="section">
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="hints"></a>3. Hints<a class="indexterm" name="d0e8130"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="hints"></a>3. Hints<a class="indexterm" name="d0e8485"></a></h2>
                   </div>
                </div>
             </div>
@@ -140,7 +144,7 @@
             </p>
             <p>In het geval dat u al een groot gedeelte van de tekst heeft vertaald, maar zich dan realiseert dat de taalcode van het project
                niet overeenkomt met de taalcode van de spellingscontrole (u specificeerde pt_BR als de taal, maar er zijn geen pt_BR-woordenboeken)
-               kunt u eenvoudigweg de twee corresponderende bestanden kopiëren en die hernoemen (bijvoorbeeld van <span class="emphasis"><em>pt_PT.arr</em></span> en <span class="emphasis"><em>pt_PT.dic</em></span> naar <span class="emphasis"><em>pt._BR.arr</em></span> en <span class="emphasis"><em>pt_BR.dic</em></span>). Natuurlijk is het veel verstandiger om een korte pauze te nemen en de juiste versies van de spellingscontrole te downloaden.
+               kunt u eenvoudigweg de twee corresponderende bestanden kopiëren en die hernoemen (bijvoorbeeld van <span class="emphasis"><em>pt_PT.arr</em></span> en <span class="emphasis"><em>pt_PT.dic</em></span> naar <span class="emphasis"><em>pt_BR.arr</em></span> en <span class="emphasis"><em>pt_BR.dic</em></span>). Natuurlijk is het veel verstandiger om een korte pauze te nemen en de juiste versies van de spellingscontrole te downloaden.
             </p>
             <p>Merk op dat <code class="filename">Verwijderen</code> de geselecteerde woordenboeken fysiek verwijdert. Als zij deel uitmaken van een andere toepassing op uw systeem zullen zij
                ook uit die toepassing verdwijnen. Indien u dat, om welke reden dan ook, zo nu en dan moet doen, kan het daarom verstandiger

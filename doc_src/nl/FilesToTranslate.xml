@@ -59,7 +59,7 @@
         </listitem>
 
         <listitem>
-          <para>DocuWiki-bestanden (*.txt)</para>
+          <para>DokuWiki-bestanden (*.txt)</para>
         </listitem>
       </itemizedlist>
 
@@ -95,8 +95,8 @@
 
       <para><itemizedlist>
           <listitem>
-            <para>OpenOffice.org / OpenDocument (*.ods, *.ots, *.odt, *.ott,
-            *.odp, *.otp)</para>
+            <para>ODF - OASIS Open Document Format (*.ods, *.ots, *.odt,
+            *.ott, *.odp, *.otp)</para>
           </listitem>
         </itemizedlist><itemizedlist>
           <listitem>
@@ -188,7 +188,7 @@
 
     <itemizedlist>
       <listitem>
-        <para>importeer het bestand in OpenOffice.org Writer</para>
+        <para>importeer het bestand in Writer</para>
       </listitem>
     </itemizedlist>
 
@@ -206,7 +206,7 @@
 
     <itemizedlist>
       <listitem>
-        <para>laad het doelbestand in OpenOffice.org Writer</para>
+        <para>laad het doelbestand in Writer</para>
       </listitem>
     </itemizedlist>
 
@@ -284,8 +284,14 @@
         </indexterm></title>
 
       <para>Als het vertaalde document wordt gemaakt zal de weergaverichting hetzelfde zijn als die van het originele document. Als het originele document LTR was, moet de weergaverichting van het doeldocument handmatig worden gewijzigd naar RTL in de toepassing waarin het wordt weergegeven. Elke indeling voor de uitvoer heeft specifieke manieren om om te gaan met RTL-weergave, controleer de relevante handleidingen voor de toepassing voor details.</para>
+      
+      <para>Voor .docx-bestanden worden een aantal wijzigingen automatisch gedaan:<itemizedlist>
+      <listitem>Alinea's, secties en tabellen wordne ingesteld op bidi</listitem>
+      <listitem>Runs (tekstelementen) worden ingesteld op RTL</listitem>     
+      </itemizedlist>
+      </para>
 
-      <para>Het is soms mogelijk om de parameters voor weergave voor het bronbestand te wijzigen zodat dergelijke parameters worden geërfd door de doelbestanden, om te vermijden dat de parameters voor weergave voor de doelbestanden elke keer moeten worden gewijzigd als de bestanden worden geopend. Dergelijke aanpassingen zijn bijvoorbeeld mogelijk in bestanden van OpenOffice.org.</para>
+      <para>Het is soms mogelijk om de parameters voor weergave voor het bronbestand te wijzigen zodat dergelijke parameters worden geërfd door de doelbestanden, om te vermijden dat de parameters voor weergave voor de doelbestanden elke keer moeten worden gewijzigd als de bestanden worden geopend. Zulke wijzigingen zijn mogelijk in ODF-bestanden bijvoorbeeld.</para>
     </section>
   </section>
 </chapter>

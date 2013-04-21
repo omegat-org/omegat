@@ -74,13 +74,13 @@
 
     <itemizedlist>
       <listitem>
-        <para>'*' komt overeen met nul of meer tekens, vanaf de huidige positie in een opgegeven woord tot het einde ervan. De zoekterm '<literal>run*</literal>' zal bijvoorbeeld overeenkomen met '<literal>run</literal>', '<literal>runs</literal>' en '<literal>running</literal>'.</para>
+        <para>'*' komt overeen met nul of meer tekens, vanaf de huidige positie in een opgegeven woord tot het einde ervan. De zoekterm <literal>'run*'</literal> zal bijvoorbeeld overeenkomen met <literal>'run</literal>, <literal>'runs'</literal>' en <literal>'running'</literal>.</para>
       </listitem>
     </itemizedlist>
 
     <itemizedlist>
       <listitem>
-        <para>'?' komt overeen met exact één teken. '<literal>run?</literal>' zal bijvoorbeeld overeenkomen met '<literal>runs</literal>' en '<literal>runn</literal>' in het woord '<literal>running</literal>'.</para>
+        <para>'?' komt overeen met exact één teken. <literal>'run?'</literal> zal bijvoorbeeld overeenkomen met <literal>'runs'</literal>' en <literal>'runn'</literal>' in het woord <literal>'running'</literal>.</para>
       </listitem>
     </itemizedlist>
 
@@ -92,7 +92,7 @@
         <primary>Zoeken</primary> <secondary>Methoden en opties</secondary>
       </indexterm></title>
 
-    <para>Selecteer de methode met behulp van de optieknoppen. U kunt kiezen uit twee methodes om te zoeken:</para>
+    <para>Selecteer de methode met behulp van de optieknoppen. De volgende methoden om te zoeken zijn beschikbaar:</para>
 
     <variablelist>
       <varlistentry>

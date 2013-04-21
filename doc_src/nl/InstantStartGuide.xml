@@ -10,9 +10,9 @@
 
     <para><remark>Opmerking:</remark> Op een Apple Mac, gebruik de toets <keycap>Cmd</keycap> of <keycap>Apple</keycap> in plaats van de toets <keycap>Ctrl</keycap></para>
 
-    <para>Maak eerst een project dat al uw bestanden zal bevatten, zoals uw bronbestanden, vertaalgeheugens, woordenlijsten en uiteindelijk uw vertaalde bestand, om te beginnen met het gebruiken van OmegaT. Selecteer, in het menu <guimenu>Project</guimenu>, <menuchoice> <guimenu/> <guimenuitem>Nieuw...</guimenuitem> </menuchoice><indexterm class="singular">
+    <para>Maak eerst een project dat al uw bestanden zal bevatten, zoals uw bronbestanden, vertaalgeheugens, woordenlijsten en uiteindelijk uw vertaalde bestand, om te beginnen met het gebruiken van OmegaT. In het menu <guimenu>Project</guimenu>, selecteer <menuchoice> <guimenuitem>Nieuw...</guimenuitem> </menuchoice><indexterm class="singular">
         <primary>menu Project</primary> <secondary>Nieuw...</secondary>
-      </indexterm> typ een naam voor uw project. Onthoud waar u het project maakte, omdat u er later naar terug moet keren.</para>
+      </indexterm> en typ een naam in voor uw project. Onthoud waar u het project maakt, omdat u er later naar terug moet keren.</para>
 
     <para>Nadat u het project een naam hebt gegeven, zal het dialoogvenster Nieuw project maken openen. Selecteer, aan het begin van dat dialoogvenster, uw taal voor de bronbestanden en de taal waarin uw vertaalde bestand moet zijn, en klik op <guibutton>OK </guibutton>om door te gaan.</para>
 

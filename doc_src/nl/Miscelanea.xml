@@ -23,7 +23,7 @@
 
       <para>Een geldig project in OmegaT moet aanwezig zijn om OmegaT uit te kunnen voeren. De locatie maakt niet uit omdat het bij de start toch al moet worden ingevuld in de opdrachtregel.</para>
 
-      <para>Indien u geen standaard instellingen wilt gebruiken, moeten de configuratiebestanden (<literal>filters.conf</literal> en <literal>segmentation.conf)</literal> aanwezig zijn. Dat kan op twee manieren worden bereikt:</para>
+      <para>Indien u geen standaard instellingen wilt gebruiken, moeten de configuratiebestanden (<literal>filters.conf</literal> en <literal>segmentation.conf</literal>) aanwezig zijn. Dat kan op twee manieren worden bereikt:</para>
 
       <itemizedlist>
         <listitem>
@@ -39,7 +39,7 @@
     <section id="starting.in.misc.console.mode">
       <title>OmegaT opstarten in modus console</title>
 
-      <para>Enkele extra parameters moeten bij het starten worden opgegeven om OmegaT in modus console te starten. De meest belangrijke is <literal>&lt;project-dir&gt;</literal>, en optioneel<literal> --config-dir=&lt;config-dir&gt;. </literal>Voorbeeld:</para>
+      <para>Enkele extra parameters moeten bij het starten worden opgegeven om OmegaT in modus console te starten. De meest belangrijke van deze is <literal>&lt;project-dir&gt;</literal>, en optioneel <literal>--config-dir=&lt;config-dir&gt;</literal>. Voorbeeld:</para>
 
       <para><literal>$&gt;java -jar <application>OmegaT</application>.jar /pad/naar/project \</literal></para>
 
@@ -83,7 +83,7 @@
     <section id="misc.console.mode.option.quiet">
       <title>optie Quiet</title>
 
-      <para>Een extra parameter voor de opdrachtregel, specifiek voor de console-modus: <literal>--quiet.</literal> In de modus quiet, wordt er minder informatie gelogd op het scherm. De berichten die u normaal gesproken zou vinden in de statusbalk worden niet weergegeven.</para>
+      <para>Een extra parameter voor de opdrachtregel, specifiek voor de modus console: <literal>--quiet</literal>. In de modus quiet, wordt minder informatie gelogd op het scherm. De berichten die u normaal gesproken zou vinden in de statusbalk worden niet weergegeven.</para>
 
       <para>Gebruik: <literal>java -jar <application>OmegaT</application>.jar /pad/naar/project --mode=console-translate --quiet</literal></para>
     </section>
@@ -91,7 +91,7 @@
     <section id="misc.console.mode.option.validatetags">
       <title>Optie Tags valideren</title>
 
-      <para>Een andere parameter voor de opdrachtregel, specifiek voor de console-modus: <literal>--tag-validation=[abort|warn].</literal> Als deze parameter wordt toegevoegd, wordt het valideren van tags toegepast voorafgaande aan vertalen/uitlijnen. Als de waarde <literal>abort</literal> is dan worden bij tagfouten de fouten afgedrukt en het programma stopt. Als de waarde <literal>warn</literal> is dan worden fouten afgedrukt maar OmegaT gaat door.</para>
+      <para>Een andere parameter voor de opdrachtregel, specifiek voor de modus console: <literal>--tag-validation=[abort|warn]</literal>. Als deze parameter wordt toegevoegd, wordt het valideren van tags toegepast voorafgaande aan vertalen/uitlijnen. Als de waarde <literal>abort</literal> is dan worden bij tagfouten de fouten afgedrukt en het programma stopt. Als de waarde <literal>warn</literal> is dan worden fouten afgedrukt maar OmegaT gaat door.</para>
 
       <para>Gebruik: <literal>java -jar <application>OmegaT</application>.jar /pad/naar/project --mode=console-translate --tag-validation=abort</literal></para>
     </section>
@@ -165,7 +165,7 @@
         <primary>Diversen</primary> <secondary>Gegevensverlies voorkomen</secondary>
       </indexterm></title>
 
-    <para><application>OmegaT</application> is een robuuste toepassing. U zou echter toch voorzorgen moeten nemen tegen gegevensverlies als u <application>OmegaT</application> gebruikt, net als met elke andere toepassing. Bij het vertalen van uw bestanden slaat <application>OmegaT</application> al uw voortgang op in het vertaalgeheugen <literal>project_save.tmx</literal> in de submap <literal>/omegat</literal> van het project.</para>
+    <para><application>OmegaT</application> is een robuuste toepassing. U zou echter toch voorzorgen moeten nemen tegen gegevensverlies als u <application>OmegaT</application> gebruikt, net als met elke andere toepassing. Bij het vertalen van uw bestanden slaat <application>OmegaT</application> al uw voortgang op in het vertaalgeheugen <literal>project_save.tmx</literal> die zich bevindt in de submap <literal>/omegat</literal> van het project.</para>
 
     <para>OmegaT slaat ook, elke keer als een project wordt geopend of herladen, een kopie van het vertaalgeheugen op in project_save.tmx.JAARMMDDUUMM.bak in dezelfde submap. JAAR is 4-getallen jaar, MM is de maand, DD de dag van de maand, en UU en MM zijn de uren en minuten van wanneer het vorige vertaalgeheugen werd opgeslagen.</para>
 

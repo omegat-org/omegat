@@ -52,9 +52,9 @@
 
     <para>De namen van de tokenizers zijn vermeld in het bestand Readme.txt dat wordt gedistribueerd met de bestanden van de tokenizer. Als u bijvoorbeeld de Lucene CJK tokenizer wilt gebruiken voor de brontaal en de Lucene French tokenizer in de doeltaal, zal uw opdracht er als volgt uitzien:</para>
 
-    <para><literal>java -jar OmegaT.jar --ITokenizer=org.omegat.plugins.
-    tokenizer.LuceneCJKTokenizer --ITokenizerTarget=org.omegat.plugins.
-    tokenizer.LuceneFrenchTokenizer</literal></para>
+    <para><literal>java -jar OmegaT.jar
+    --ITokenizer=org.omegat.plugins.tokenizer.LuceneCJKTokenizer
+    --ITokenizerTarget=org.omegat.plugins.tokenizer.LuceneFrenchTokenizer</literal></para>
   </section>
 
   <section>
@@ -69,8 +69,7 @@
 &lt;key&gt;Arguments&lt;/key&gt;
 &lt;array&gt;
   &lt;string&gt;--ITokenizer=org.omegat.plugins.tokenizer.LuceneCJKTokenizer&lt;/string&gt;
-  &lt;string&gt;--ITokenizerTarget=org.omegat.plugins.tokenizer.
-  LuceneFrenchTokenizer&lt;/string&gt;
+  &lt;string&gt;--ITokenizerTarget=org.omegat.plugins.tokenizer.LuceneFrenchTokenizer&lt;/string&gt;
 &lt;/array&gt;</code></literallayout>
   </section>
 
@@ -91,6 +90,6 @@
 12719: Info: Target tokenizer: org.omegat.core.matching.Tokenizer 
 </code></literallayout>
 
-    <para>Met het Mac OS X OmegaT.app pakket moet u dubbelklikken op de <literal>JavaApplicationStub</literal> die is geplaatst in /OmegaT.app/Contents/MacOS/ (kijk hierboven om toegang te verkrijgen) om OmegaT te starten vanuit de console en direct toegang te hebben tot het log.</para>
+    <para>Met het Mac OS X OmegaT.app pakket, dubbelklik op de <literal>JavaApplicationStub</literal> die is geplaatst in /OmegaT.app/Contents/MacOS/ (kijk hierboven om toegang te verkrijgen) om OmegaT te starten vanuit de console en direct toegang te krijgen tot het log.</para>
   </section>
 </appendix>

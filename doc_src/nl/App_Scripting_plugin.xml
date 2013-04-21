@@ -14,7 +14,7 @@
   <section>
     <title>Installatie en gebruik</title>
 
-    <para>De plug-in Scripting voor OmegaT kan worden gedownload vanaf de downloadsite voor OmegaT plug-ins (<ulink url="???">http://sourceforge.net/projects/omegat-plugins/files/</ulink>). Pak de bestanden uit en plaats ze allemaal in de map &quot;plugins&quot; die zich bevindt in de installatiemap van OmegaT, dat is de map waarin OmegaT.jar staat. Maak eerst de map &quot;plugins&quot; als die niet bestaat.</para>
+    <para>De plug-in Scripting voor OmegaT kan worden gedownload vanaf de <ulink url="http://sourceforge.net/projects/omegat-plugins/files">downloadsite voor OmegaT plug-ins</ulink>. Pak de bestanden uit en plaats ze allemaal in de map &quot;plugins&quot; die zich bevindt in de installatiemap van OmegaT, dat is de map waarin OmegaT.jar staat. Maak eerst de map &quot;plugins&quot; als die niet bestaat.</para>
 
     <para>Dit voegt een nieuw submenu<guisubmenu> Extra &gt; </guisubmenu><guisubmenu>Scripten</guisubmenu> toe. Onder het submenu <guisubmenu>Scripten</guisubmenu> zijn vijf tijdelijke plaatsaanduidingen beschikbaar voor scripts. Klikken op <guisubmenu>Scripten</guisubmenu> opent het dialoogvenster Scripten:<screenshot> <screeninfo>dialoogvenster Scripten</screeninfo> <mediaobject> <imageobject> <imagedata fileref="images/ScriptingDialog.png"/> </imageobject> </mediaobject> </screenshot></para>
 
@@ -56,34 +56,21 @@
         <listitem>
           <para><emphasis role="bold">JavaScript</emphasis> (soms afgekort tot JS, niet te verwarren met Java): is een op prototype gebaseerde scripttaal die dynamisch is, zwak getypeerd en eersteklas functies heeft. Het is een taal met meerdere paradigma's, ondersteund object-georiënteerde, imperatieve en functionele programmeerstijlen. Omdat het de taal is achter de populaire software zoals Firefox is het met voorkeur een bekend gereedschap om te programmeren in het domein van open-source .</para>
         </listitem>
-      </itemizedlist>Alle talen hebben toegang tot het objectmodel van OmegaT, met het project als het hoogste object. De volgende code in groovy bijvoorbeeld scant door alle segmenten in alle bestanden in het huidige project:</para>
+      </itemizedlist>Alle talen hebben toegang tot het objectmodel van OmegaT, met het project als het hoogste object. De volgende code in groovy scant bijvoorbeeld door alle segmenten in alle bestanden in het huidige project en drukt, als de vertaling bestaat, de bron en het doel van het segment af:</para>
 
-    <para><parameter>files = project.projectFiles;</parameter></para>
-
-    <para><parameter>for (i in 0 ..&lt; files.size())</parameter></para>
-
-    <para><parameter>{</parameter></para>
-
-    <para><parameter> for (j in 0 ..&lt;
-    files[i].entries.size())</parameter></para>
-
-    <para><parameter> {</parameter></para>
-
-    <para><parameter> currsegment = files[i].entries[j];</parameter></para>
-
-    <para><parameter> source = currsegment.getSrcText();</parameter></para>
-
-    <para><parameter> if (project.getTranslationInfo(ste))</parameter></para>
-
-    <para><parameter> target =
-    project.getTranslationInfo(currsegment).translation;</parameter></para>
-
-    <para><parameter> else</parameter></para>
-
-    <para><parameter> target = null;</parameter></para>
-
-    <para><parameter> }</parameter></para>
-
-    <para><parameter>}</parameter></para>
+    <programlisting>    files = project.projectFiles;
+    for (i in 0 ..&lt; files.size())
+    {
+        for (j in 0 ..&lt; files[i].entries.size())
+        {
+            currSegment = files[i].entries[j];
+            if (project.getTranslationInfo(currSegment))
+            {
+                source = currSegment.getSrcText();
+                target = project.getTranslationInfo(currSegment).translation;
+                console.println(source + &quot; &gt;&gt;&gt;&gt; &quot; + target);
+            }     
+        }
+    }</programlisting>
   </section>
 </appendix>

@@ -10,7 +10,7 @@
   <section>
     <title>Introductie</title>
 
-    <para>LanguageTool is een Open Source-programma om stijl en grammatica proef te lezen voor Engels, Frans, Duits, Pools, Nederlands, Roemeens en nog heel veel andere talen - bekijk de lijst met ondersteunde talen op (<ulink url="???">http://www.languagetool.org/languages/</ulink>) .</para>
+    <para><ulink url="http://www.languagetool.org">LanguageTool</ulink> is een Open Source-programma om stijl en grammatica proef te lezen voor Engels, Frans, Duits, Pools, Nederlands, Roemeens en nog een aantal andere talen - bekijk de <ulink url="http://www.languagetool.org/languages/">lijst met ondersteunde talen</ulink>.</para>
 
     <para>U kunt LanguageTool bekijken als een programma om fouten op te sporen die een eenvoudige spellingscontrole niet kan ontdekken, bijv. verwisselen van hen/hun, no/now etc. Het kan ook enkele grammaticale fouten opsporen. Het bevat geen spellingscontrole. LanguageTool zal fouten vinden waarvoor een regel is gedefinieerd in zijn taalspecifieke configuratiebestanden.</para>
 
@@ -30,7 +30,7 @@
   <section>
     <title>Installatie en gebruik</title>
 
-    <para>De plug-in LanguageTool voor OmegaT kan worden gedownload vanaf de downloadsite voor OmegaT plug-ins (<ulink url="???">http://sourceforge.net/projects/omegat-plugins/files/</ulink>). Pak de bestanden uit en plaats ze allemaal in de map &quot;plugins&quot; die zich bevindt in de installatiemap van OmegaT, dat is de map waarin OmegaT.jar staat. Maak eerst de map &quot;plugins&quot; als die niet bestaat.</para>
+    <para>De plugin LanguageTool voor OmegaT kan worden gedownload van de <ulink url="http://sourceforge.net/projects/omegat-plugins/files">OmegaT plugins downloadsite</ulink>. Pak de bestanden uit en plaats ze allemaal in de map &quot;plugins&quot; die zich bevindt in de installatiemap van OmegaT, dat is de map waarin OmegaT.jar staat. Maak eerst de map &quot;plugins&quot; als die niet bestaat.</para>
 
     <para>Eenmaal geïnstalleerd zal de plug-in automatisch worden gebruikt door OmegaT, als <guimenuitem>Opties &gt; Taalcontrole</guimenuitem> is aangevinkt. De toegepaste regels (indien aanwezig) zullen afhankelijk zijn van de bron- en doeltaal van het project. Wanneer een regel wordt geactiveerd zal de overeenkomende frase met blauw worden onderstreept in het Bewerkingsvenster (bekijk <emphasis>ook </emphasis>en <emphasis>Ik deed niets</emphasis> in de afbeelding hierboven). Indien met de muis over een onderstreepte frase wordt gegaan, zal een omschrijving verschijnen.</para>
   </section>

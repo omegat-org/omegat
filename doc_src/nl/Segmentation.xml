@@ -24,7 +24,7 @@
       <listitem>
         <para><application>OmegaT</application> parst eerst de tekst voor segmentatie op niveau van de structuur. Gedurende dit proces wordt alleen de structuur van het brondocument gebruikt om segmenten te maken.</para>
 
-        <para>Tekstbestanden kunnen bijvoorbeeld gesegmenteerd worden op regeleinden, lege regels of helemaal niet gesegmenteerd worden. Bestanden die opmaak bevatten (OpenOffice.org-documenten, HTML-documenten, etc.) worden gesegmenteerd op het blokniveau (alinea)tags. Vertaalbare object-attributen in XHTML of HTML-bestanden kunnen als afzonderlijke segmenten worden geëxtraheerd.</para>
+        <para>Tekstbestanden kunnen bijvoorbeeld gesegmenteerd worden op regeleinden, lege regels of helemaal niet gesegmenteerd worden. Bestanden die opmaak bevatten (ODF-documenten, HTML-documenten, etc.) worden gesegmenteerd op het blokniveau (alinea)tags. Vertaalbare object-attributen in XHTML of HTML-bestanden kunnen als afzonderlijke segmenten worden geëxtraheerd.</para>
       </listitem>
     </varlistentry>
 

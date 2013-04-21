@@ -3,8 +3,8 @@
       <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
    
       <title>Hoofdstuk 16. Reguliere uitdrukkingen</title>
-      <link rel="stylesheet" href="OmegaT.css" type="text/css">
-      <meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+      <link rel="stylesheet" type="text/css" href="OmegaT.css">
+      <meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
       <link rel="home" href="index.html" title="OmegaT - Gebruikershandleiding">
       <link rel="up" href="index.html" title="OmegaT - Gebruikershandleiding">
       <link rel="prev" href="chapter.searches.html" title="Hoofdstuk 15. Zoeken">
@@ -25,29 +25,29 @@
          </table>
          <hr>
       </div>
-      <div class="chapter" title="Hoofdstuk 16. Reguliere uitdrukkingen">
+      <div class="chapter">
          <div class="titlepage">
             <div>
                <div>
-                  <h2 class="title"><a name="chapter.regexp"></a>Hoofdstuk 16. Reguliere uitdrukkingen<a class="indexterm" name="d0e6998"></a></h2>
+                  <h1 class="title"><a name="chapter.regexp"></a>Hoofdstuk 16. Reguliere uitdrukkingen<a class="indexterm" name="d0e7349"></a></h1>
                </div>
             </div>
          </div>
          <div class="toc">
-            <dl>
+            <dl class="toc">
                <dt><span class="section"><a href="chapter.regexp.html#regex.tools.and.examples.of.use">1. Regex-programma's en voorbeelden van gebruik</a></span></dt>
             </dl>
          </div>
          <p>De reguliere uitdrukkingen (of afgekort regex) die worden gebruikt in zoekacties en segmentatieregels zijn die welke worden
             ondersteund door Java. Als u meer specifieke informatie nodig heeft raadpleeg dan <a class="ulink" href="http://download.oracle.com/javase/1.5.0/docs/api/java/util/regex/Pattern.html" target="_top">documentatie voor Java Regex</a>. Bekijk de aanvullende verwijzingen en voorbeelden hieronder.
          </p>
-         <div class="note" title="Opmerking" style="margin-left: 0.5in; margin-right: 0.5in;">
+         <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;">
             <h3 class="title">Opmerking</h3>
             <p>Dit hoofdstuk is bedoeld voor gevorderde gebruikers, die hun eigen varianten van segmentatieregels moeten kunnen definiëren
                of meer complexe en krachtigere zoeksleutels moeten kunnen opdelen.
             </p>
          </div>
-         <div class="table"><a name="d0e7013"></a><p class="title"><b>Tabel 16.1. Regex - Vlaggen</b></p>
+         <div class="table"><a name="d0e7364"></a><p class="title"><b>Tabel 16.1. Regex - Vlaggen</b></p>
             <div class="table-contents">
                <table summary="Regex - Vlaggen" border="1">
                   <colgroup>
@@ -68,7 +68,7 @@
                   </tbody>
                </table>
             </div>
-         </div><br class="table-break"><div class="table"><a name="d0e7030"></a><p class="title"><b>Tabel 16.2. Regex - Teken</b></p>
+         </div><br class="table-break"><div class="table"><a name="d0e7381"></a><p class="title"><b>Tabel 16.2. Regex - Teken</b></p>
             <div class="table-contents">
                <table summary="Regex - Teken" border="1">
                   <colgroup>
@@ -137,7 +137,7 @@
                   </tbody>
                </table>
             </div>
-         </div><br class="table-break"><div class="table"><a name="d0e7107"></a><p class="title"><b>Tabel 16.3. Regex - Aanhalingen</b></p>
+         </div><br class="table-break"><div class="table"><a name="d0e7458"></a><p class="title"><b>Tabel 16.3. Regex - Aanhalingen</b></p>
             <div class="table-contents">
                <table summary="Regex - Aanhalingen" border="1">
                   <colgroup>
@@ -172,7 +172,7 @@
                   </tbody>
                </table>
             </div>
-         </div><br class="table-break"><div class="table"><a name="d0e7139"></a><p class="title"><b>Tabel 16.4. Regex - Klassen voor Unicode-blokken en categorieën</b></p>
+         </div><br class="table-break"><div class="table"><a name="d0e7490"></a><p class="title"><b>Tabel 16.4. Regex - Klassen voor Unicode-blokken en categorieën</b></p>
             <div class="table-contents">
                <table summary="Regex - Klassen voor Unicode-blokken en categorieën" border="1">
                   <colgroup>
@@ -211,7 +211,7 @@
                   </tbody>
                </table>
             </div>
-         </div><br class="table-break"><div class="table"><a name="d0e7182"></a><p class="title"><b>Tabel 16.5. Regex - Tekenklassen</b></p>
+         </div><br class="table-break"><div class="table"><a name="d0e7533"></a><p class="title"><b>Tabel 16.5. Regex - Tekenklassen</b></p>
             <div class="table-contents">
                <table summary="Regex - Tekenklassen" border="1">
                   <colgroup>
@@ -240,7 +240,7 @@
                   </tbody>
                </table>
             </div>
-         </div><br class="table-break"><div class="table"><a name="d0e7209"></a><p class="title"><b>Tabel 16.6. Regex - Voorgedefinieerde tekenklassen</b></p>
+         </div><br class="table-break"><div class="table"><a name="d0e7560"></a><p class="title"><b>Tabel 16.6. Regex - Voorgedefinieerde tekenklassen</b></p>
             <div class="table-contents">
                <table summary="Regex - Voorgedefinieerde tekenklassen" border="1">
                   <colgroup>
@@ -285,7 +285,7 @@
                   </tbody>
                </table>
             </div>
-         </div><br class="table-break"><div class="table"><a name="d0e7256"></a><p class="title"><b>Tabel 16.7. Regex - Overeenkomsten voor begrenzingen</b></p>
+         </div><br class="table-break"><div class="table"><a name="d0e7607"></a><p class="title"><b>Tabel 16.7. Regex - Overeenkomsten voor begrenzingen</b></p>
             <div class="table-contents">
                <table summary="Regex - Overeenkomsten voor begrenzingen" border="1">
                   <colgroup>
@@ -318,7 +318,7 @@
                   </tbody>
                </table>
             </div>
-         </div><br class="table-break"><div class="table"><a name="d0e7288"></a><p class="title"><b>Tabel 16.8. Regex - Gulzige parameters</b></p>
+         </div><br class="table-break"><div class="table"><a name="d0e7639"></a><p class="title"><b>Tabel 16.8. Regex - Gulzige parameters</b></p>
             <div class="table-contents">
                <table summary="Regex - Gulzige parameters" border="1">
                   <colgroup>
@@ -347,11 +347,11 @@
                   </tbody>
                </table>
             </div>
-         </div><br class="table-break"><div class="note" title="Opmerking" style="margin-left: 0.5in; margin-right: 0.5in;">
+         </div><br class="table-break"><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;">
             <h3 class="title">Opmerking</h3>
             <p>Gulzige parameters zullen overeenkomen met zoveel als voor hen mogelijk is. Bijvoorbeeld: <span class="emphasis"><em>a+?</em></span> zal overeenkomen met de aaa in <span class="emphasis"><em>aaabbb</em></span></p>
          </div>
-         <div class="table"><a name="d0e7329"></a><p class="title"><b>Tabel 16.9. Regex - Weigerachtige (niet-gulzige) parameters</b></p>
+         <div class="table"><a name="d0e7680"></a><p class="title"><b>Tabel 16.9. Regex - Weigerachtige (niet-gulzige) parameters</b></p>
             <div class="table-contents">
                <table summary="Regex - Weigerachtige (niet-gulzige) parameters" border="1">
                   <colgroup>
@@ -380,11 +380,11 @@
                   </tbody>
                </table>
             </div>
-         </div><br class="table-break"><div class="note" title="Opmerking" style="margin-left: 0.5in; margin-right: 0.5in;">
+         </div><br class="table-break"><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;">
             <h3 class="title">Opmerking</h3>
             <p>Weigerachtige (niet-gulzige) parameters zullen overeenkomen met zo weinig als voor hen mogelijk is. <span class="emphasis"><em>a+?</em></span> zal bijvoorbeeld overeen komen met de eerste <span class="emphasis"><em>a</em></span> in <span class="emphasis"><em>aaabbb</em></span></p>
          </div>
-         <div class="table"><a name="d0e7367"></a><p class="title"><b>Tabel 16.10. Regex - Logische operatoren</b></p>
+         <div class="table"><a name="d0e7718"></a><p class="title"><b>Tabel 16.10. Regex - Logische operatoren</b></p>
             <div class="table-contents">
                <table summary="Regex - Logische operatoren" border="1">
                   <colgroup>
@@ -413,11 +413,11 @@
                   </tbody>
                </table>
             </div>
-         </div><br class="table-break"><div class="section" title="1. Regex-programma's en voorbeelden van gebruik">
+         </div><br class="table-break"><div class="section">
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="regex.tools.and.examples.of.use"></a>1. <a class="indexterm" name="d0e7396"></a>Regex-programma's en voorbeelden van gebruik<a class="indexterm" name="d0e7402"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="regex.tools.and.examples.of.use"></a>1. <a class="indexterm" name="d0e7747"></a>Regex-programma's en voorbeelden van gebruik<a class="indexterm" name="d0e7753"></a></h2>
                   </div>
                </div>
             </div>
@@ -426,7 +426,7 @@
                uitdrukking (bovenste item) analyseert de zoektekst (tekstvak in het midden), wat de hits oplevert, weergegeven in het tekstvak
                met het resultaat.
             </p>
-            <div class="figure"><a name="regerx.tester"></a><p class="title"><b>Figuur 16.1. Regex Tester</b></p>
+            <div class="figure"><a name="regerx.tester"></a><p class="title"><b>Afbeelding 16.1. Regex Tester</b></p>
                <div class="figure-contents">
                   <div class="mediaobject"><img src="images/RegexTester.png" alt="Regex Tester"></div>
                </div>
@@ -435,7 +435,7 @@
             <p>Een fijne collectie van handige gevallen van reguliere uitdrukkingen kan worden gevonden in <span class="application">OmegaT</span> zelf (zie Opties &gt; Segmentatie). De volgende lijst bevat uitdrukkingen die u misschien handig vindt bij het doorzoeken van
                het vertaalgeheugen:
             </p>
-            <div class="table"><a name="d0e7427"></a><p class="title"><b>Tabel 16.11. Regex - Voorbeelden van reguliere uitdrukkingen in vertalingen</b></p>
+            <div class="table"><a name="d0e7778"></a><p class="title"><b>Tabel 16.11. Regex - Voorbeelden van reguliere uitdrukkingen in vertalingen</b></p>
                <div class="table-contents">
                   <table summary="Regex - Voorbeelden van reguliere uitdrukkingen in vertalingen" border="1">
                      <colgroup>
@@ -470,12 +470,16 @@
                            <td align="left">Engels: dezelfde controle als hierboven, maar met betrekking tot medeklinkers ("a", niet "an")</td>
                         </tr>
                         <tr>
-                           <td align="left">\s\s+</td>
+                           <td align="left">\s{2,}</td>
                            <td align="left">meer dan één spatie</td>
                         </tr>
                         <tr>
                            <td align="left">\.[A-Z]</td>
                            <td align="left">Punt, gevolgd door een hoofdletter - mogelijk ontbreekt er een spatie tussen de punt en het begin van een nieuwe regel?</td>
+                        </tr>
+                        <tr>
+                           <td align="left">\bis\b</td>
+                           <td align="left">zoeken naar “is”, niet “thuis” of “isn't” etc.</td>
                         </tr>
                      </tbody>
                   </table>

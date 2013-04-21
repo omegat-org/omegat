@@ -10,7 +10,7 @@
 
     <itemizedlist>
       <listitem>
-        <para><emphasis role="bold">Vertaalgeheugen:</emphasis><application> </application>OmegaT slaat uw vertalingen op in een vertaalgeheugen. Tegelijkertijd kan het vertaalgeheugens van eerdere vertalingen als verwijzingen gebruiken. Vertaalgeheugens kunnen zeer handig zijn bij het vertalen van veel voorkomende herhalingen of tekstsegmenten die redelijk met elkaar overeen komen. OmegaT gebruikt vertaalgeheugens om uw eerdere vertalingen op te slaan en toont u dan de meest waarschijnlijke vertalingen voor de tekst waaraan u momenteel werkt.</para>
+        <para><emphasis role="bold">Vertaalgeheugen:</emphasis><application> OmegaT</application> slaat uw vertalingen op in een vertaalgeheugen. Tegelijkertijd kan het vertaalgeheugens van eerdere vertalingen als verwijzingen gebruiken. Vertaalgeheugens kunnen zeer handig zijn bij het vertalen van veel voorkomende herhalingen of tekstsegmenten die redelijk met elkaar overeen komen. OmegaT gebruikt vertaalgeheugens om uw eerdere vertalingen op te slaan en toont u dan de meest waarschijnlijke vertalingen voor de tekst waaraan u momenteel werkt.</para>
 
         <para>Deze vertaalgeheugens kunnen zeer handig zijn als een, reeds vertaald, document moet worden bijgewerkt. Ongewijzigde zinnen worden automatisch vertaald, terwijl bijgewerkte zinnen worden getoond met de vertaling van de meest gelijkende oudere versie van dezelfde zin. Wijzigingen in het originele document worden dus gemakkelijker afgehandeld. Als u eerder gemaakte vertaalgeheugens gebruikt, bijvoorbeeld geleverd door uw vertaalbureau of uw cliënt, is OmegaT in staat om ze te gebruiken als referentie-geheugens.</para>
 
@@ -86,7 +86,7 @@
       </listitem>
 
       <listitem>
-        <para><emphasis role="bold">Woordenboeken, Woordenlijsten</emphasis>, <emphasis role="bold">Machinevertaling</emphasis> en <emphasis role="bold">Spellingscontrole:</emphasis> OmegaT maakt uitgebreid gebruik van woordenboeken en woordenlijsten mogelijk. Als een internetverbinding beschikbaar is, kunnen diverse services voor machinevertaling zoals Google Translate worden gebruikt vanuit OmegaT. Indien spellingscontrole is geactiveerd, worden spelfouten en typefouten herkend en kunnen die gecorrigeerd worden tijdens de vertaling.</para>
+        <para><emphasis role="bold">Woordenboeken, Woordenlijsten</emphasis>, <emphasis role="bold">Machinevertaling</emphasis> en <emphasis role="bold">Spellingscontrole:</emphasis> OmegaT ondersteunt uitgebreid gebruik van woordenboeken en woordenlijsten. Als een verbinding met internet beschikbaar is kunnen verschillende services voor machinevertaling, zoals Google Translate en Microsoft Translator, worden gebruikt vanuit OmegaT. Indien spellingscontrole is geactiveerd, worden spelfouten en typefouten herkend en kunnen die gecorrigeerd worden tijdens de vertaling. Het open bron-programma LanguageTool kan worden gebruikt om veel voorkomende grammatische en stilistische fouten te corrigeren.</para>
       </listitem>
 
       <listitem>
@@ -104,7 +104,7 @@
 
         <itemizedlist>
           <listitem>
-            <para><emphasis role="bold">Talen:</emphasis> bevat de ISO-lijst van talen en taalcodes</para>
+            <para><emphasis role="bold">Talen:</emphasis> de ISO-lijst van talen en taalcodes wordt verschaft</para>
           </listitem>
         </itemizedlist>
 
@@ -114,13 +114,23 @@
           </listitem>
 
           <listitem>
-            <para><emphasis role="bold">Aanpassen van sneltoetsen:</emphasis> sneltoetsen kunnen worden aangepast om te voldoen aan uw persoonlijke voorkeuren</para>
+            <para><emphasis role="bold">Aanpassen van sneltoetsen:</emphasis> sneltoetsen kunnen aan uw persoonlijke voorkeuren worden aangepast</para>
           </listitem>
         </itemizedlist>
 
         <itemizedlist>
           <listitem>
-            <para><emphasis role="bold">Auteursrechten</emphasis></para>
+            <para><emphasis role="bold">Introductie voor invoegtoepassingen Tokenizer en Scripting</emphasis></para>
+          </listitem>
+
+          <listitem>
+            <para><emphasis role="bold">Teamprojecten</emphasis></para>
+          </listitem>
+        </itemizedlist>
+
+        <itemizedlist>
+          <listitem>
+            <para><emphasis role="bold">Auteursrechten en bekendmakingen</emphasis></para>
           </listitem>
         </itemizedlist>
       </listitem>

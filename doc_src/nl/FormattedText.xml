@@ -7,7 +7,7 @@
       <primary>Bronbestanden</primary> <secondary>opgemaakte tekst</secondary>
     </indexterm></title>
 
-  <para>Informatie over opmaak die aanwezig is in het bronbestand moet meestal worden gereproduceerd in het doelbestand. De in-regelige informatie over opmaak van ondersteunde formaten (momenteel DocBook, HTML, XHTML, Open Document (OpenOffice.org) en Office Open XML (MS Office 2007 en later) wordt door OmegaT weergegeven als tags. Normaal gesproken worden tags genegeerd bij het bepalen van de gelijkheid tussen de verschillende teksten ten behoeve van overeenkomsten. Tags die zijn gereproduceerd in het vertaalde segment zullen aanwezig zijn in het vertaalde document.</para>
+  <para>Informatie over opmaak die aanwezig is in het bronbestand moet meestal worden gereproduceerd in het doelbestand. De in-regelige informatie over opmaak van ondersteunde formaten (momenteel DocBook, HTML, XHTML, Open Document Format en Office Open XML (MS Office 2007 en later) wordt door OmegaT weergegeven als tags. Normaal gesproken worden tags genegeerd bij het bepalen van de gelijkheid tussen de verschillende teksten ten behoeve van overeenkomsten. Tags die zijn gereproduceerd in het vertaalde segment zullen aanwezig zijn in het vertaalde document.</para>
 
   <section id="formatting.tags">
     <title>Tags voor opmaak<indexterm class="singular">
@@ -108,7 +108,7 @@
 
     <para>Na een slechte bewerking:</para>
 
-    <para><literal>&lt;b0&gt;Opmaak &lt;b1&gt;een&lt;/b0&gt; &lt;/b1&gt;is nu zeer verminkt.&lt;end segment 0001&gt;</literal></para>
+    <para><literal>&lt;b0&gt;Opmaak &lt;b1&gt;een&lt;/b0&gt; &lt;/b1&gt;is nu zeer verminkt.&lt;segment 0001&gt;</literal></para>
   </section>
 
   <section>
@@ -118,7 +118,7 @@
 
     <mediaobject>
       <imageobject>
-        <imagedata fileref="images/OptionsTabValidation_25.png"/>
+        <imagedata fileref="images/OptionsTagValidation_25.png"/>
       </imageobject>
     </mediaobject>
 
@@ -128,7 +128,7 @@
       <listitem>
         <para><emphasis role="bold">Printf-variabelen - niet controleren, eenvoudige controleren, alle controleren</emphasis></para>
 
-        <para>OmegaT kan controleren of variabelen voor programmeren (zoals bijvoorbeeld %s) in de bron bestaan in de vertaling. U kunt bepalen om ze helemaal niet te controleren, de eenvoudige printf-variabelen te controleren (zoals %s %d etc) of alle typen printf-variabelen. .</para>
+        <para>OmegaT kan controleren of variabelen voor programmeren (zoals bijvoorbeeld %s) in de bron bestaan in de vertaling. U kunt bepalen om ze helemaal niet te controleren, de eenvoudige printf-variabelen te controleren (zoals %s %d etc) of alle typen printf-variabelen.</para>
       </listitem>
     </itemizedlist>
 
@@ -142,17 +142,17 @@
 
     <itemizedlist>
       <listitem>
-        <para><emphasis role="bold">Tekstveld Aangepaste tags</emphasis></para>
+        <para><emphasis role="bold">Aangepaste tag(s) reguliere uitdrukking</emphasis></para>
 
-        <para>Het hier invoeren van een reguliere uitdrukking zal er voor zorgen dat OmegaT de gedetecteerde items behandelt als een aangepaste tag. Indien het is geselecteerd en het aantal tags en hun volgorde identiek is, net zoals dat het geval is als voor tags van OmegaT.</para>
+        <para>Een hier ingevoerde reguliere uitdrukking zal er voor zorgen dat OmegaT de gedetecteerde items behandelt als aangepaste tags. Het of het aantal tags en hun volgorde identiek is, net zoals dat het geval is als voor tags van OmegaT.</para>
       </listitem>
     </itemizedlist>
 
     <itemizedlist>
       <listitem>
-        <para><emphasis role="bold">Fragmenten die zouden moeten worden verwijderd uit de vertaling</emphasis></para>
+        <para><emphasis role="bold">Fragment(en) die zouden moeten worden verwijderd uit de vertaling van de reguliere uitdrukking</emphasis></para>
 
-        <para>Men kan een reguliere uitdrukking invoeren voor ongewenste inhoud in het doel. Aanwezige overeenkomsten in het doelsegment zullen dan rood gekleurd worden, d.i. eenvoudig te identificeren en te corrigeren.</para>
+        <para>Men kan een reguliere uitdrukking invoeren voor ongewenste inhoud in het doel. Aanwezige overeenkomsten in het doelsegment zullen dan rood gekleurd worden, d.i. eenvoudig te identificeren en te corrigeren. Bij het zoeken naar fuzzy overeenkomsten wordt het patroon om te verwijderen genegeerd. Een vaste straf van 5 wordt toegevoegd als het verwijderde gedeelte niet overeenkomt met enig ander segment, dus de overeenkomst wordt niet weergegeven als 100%</para>
       </listitem>
     </itemizedlist>
   </section>

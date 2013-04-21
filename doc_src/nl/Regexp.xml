@@ -548,7 +548,7 @@
           </row>
 
           <row>
-            <entry>\s\s+</entry>
+            <entry>\s{2,}</entry>
 
             <entry>meer dan één spatie</entry>
           </row>
@@ -557,6 +557,12 @@
             <entry>\.[A-Z]</entry>
 
             <entry>Punt, gevolgd door een hoofdletter - mogelijk ontbreekt er een spatie tussen de punt en het begin van een nieuwe regel?</entry>
+          </row>
+
+          <row>
+            <entry>\bis\b</entry>
+
+            <entry>zoeken naar “is”, niet “thuis” of “isn't” etc.</entry>
           </row>
         </tbody>
       </tgroup>

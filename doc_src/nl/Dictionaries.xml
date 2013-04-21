@@ -12,13 +12,13 @@
         <primary>Woordenboeken</primary> <secondary>Downloaden en installeren</secondary>
       </indexterm></title>
 
-    <para>Woordenboeken in <application>OmegaT</application> zijn gebaseerd op het StarDict Platform. Doe het volgende om de benodigde bestanden te installeren:</para>
+    <para>Woordenboeken in <application>OmegaT</application> zijn gebaseerd op StarDict of op de indeling Lingvo DSL. Doe het volgende om de benodigde bestanden voor de indeling van StarDict te installeren:</para>
 
     <itemizedlist>
       <listitem>
-        <para>Zoek naar de gewenste taalcombinatie -bijvoorbeeld op het <ulink url="http://stardict.sourceforge.net/index.php"><indexterm class="singular">
-            <primary>Woordenboeken</primary> <secondary>StarDict, FreeDict</secondary>
-          </indexterm>StartDict Platform</ulink> hierboven of op <ulink url="http://www.freedict.org/en/list.html">FreeDict</ulink></para>
+        <para>Zoek naar de gewenste taalcombinatie - bijvoorbeeld op het <ulink url="http://stardict.sourceforge.net/index.php"><indexterm class="singular">
+            <primary>Woordenboeken</primary> <secondary>StarDict</secondary>
+          </indexterm>StarDict Platform</ulink> hierboven.</para>
       </listitem>
     </itemizedlist>
 

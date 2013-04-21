@@ -19,11 +19,11 @@
 
       <mediaobject>
         <imageobject role="html">
-          <imagedata fileref="images/NewProject_25.png"/>
+          <imagedata fileref="images/NewProject_26.png"/>
         </imageobject>
 
         <imageobject role="fo">
-          <imagedata fileref="images/NewProject_25.png" width="80%"/>
+          <imagedata fileref="images/NewProject_26.png" width="80%"/>
         </imageobject>
       </mediaobject>
     </figure>
@@ -81,6 +81,14 @@
           </indexterm></emphasis></para>
 
         <para>In het geval dat er niet-unieke segmenten in brondocumenten staan biedt het keuzevak Automatisch vergroten van vertaling de gebruiker de volgende twee mogelijkheden met betrekking tot automatische vertaling: indien geselecteerd zal het eerste vertaalde segment worden beschouwd als de standaard vertaling en de tekst van het doel zal automatisch worden gebruikt voor latere hits gedurende het vertaalproces. Foutief vertaalde segmenten kunnen natuurlijk later handmatig worden gecorrigeerd met behulp van<guimenuitem>Alternatieve vertaling maken</guimenuitem>. Als het keuzevak Automatisch vergroten van vertaling niet is geselecteerd zullen de segmenten met alternatieve vertalingen niet vertaald worden totdat de gebruiker heeft bepaald welke vertaling moet worden gebruikt.</para>
+      </listitem>
+
+      <listitem>
+        <para>keuzevak <emphasis role="bold">Tags verwijderen</emphasis><indexterm class="singular">
+            <primary>Project</primary> <secondary>Optie Tags verwijderen</secondary>
+          </indexterm></para>
+
+        <para>Indien ingeschakeld worden alle tags voor opmaak verwijderd uit de bronsegmenten. Dit is in het bijzonder handig als teksten worden afgehandeld waarin in-regelige opmaak geen echt nut heeft (bijv. ge-OCRde pdf, slecht geconverteerde .odt of .docx, etc.)  In een normaal geval zou het altijd mogelijk moeten zijn om de doeldocumenten te kunnen openen, omdat alleen de in-regelige tags worden verwijderd. Niet-zichtbare opmaak (d.i. die niet als tags verschijnen in de bewerker van OmegaT) wordt in de doeldocumenten behouden.</para>
       </listitem>
     </itemizedlist>
 

@@ -3,7 +3,7 @@
 ----------------------------------------------------------------------
    3 Enhancements
    2 Bug fixes
-   4 Localisation updates
+   5 Localisation updates
 ----------------------------------------------------------------------
 2.6.3 update 1 vs. 2.6.3
 
@@ -27,6 +27,7 @@ external entities, the target files could be empty
 
   Localisation updates:
 
+  - Dutch localization updated to 2.6.3 (UI, Documentation, Readme)
   - Interlingua localisation updated to 2.6.3 (UI, Readme, Instant Start)
   - Italian localisation updated to 2.6.3 (UI, Readme, Documentation)
   - Japanese localisation updated to 2.6.3 (UI, Documentation)

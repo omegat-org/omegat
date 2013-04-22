@@ -3,7 +3,7 @@
 ----------------------------------------------------------------------
    3 Enhancements
    2 Bug fixes
-   5 Localisation updates
+   6 Localisation updates
 ----------------------------------------------------------------------
 2.6.3 update 1 vs. 2.6.3
 
@@ -32,6 +32,7 @@ external entities, the target files could be empty
   - Italian localisation updated to 2.6.3 (UI, Readme, Documentation)
   - Japanese localisation updated to 2.6.3 (UI, Documentation)
   - Russian localisation updated to 2.6.3 (UI, , Readme, Documentation)
+  - Basque localisation updated to 2.6.3 (backported from 3.0) (UI, Readme, Instant Start)
 
 ----------------------------------------------------------------------
  OmegaT 2.6.3

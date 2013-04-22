@@ -34,6 +34,7 @@ external entities, the target files could be empty
   - Russian localisation updated to 2.6.3 (UI, , Readme, Documentation)
   - Basque localisation updated to 2.6.3 (backported from 3.0) (UI, Readme, Instant Start)
   - Brasilian Portuguese localisation updated to 2.6.3 (backported from 3.0) (UI, Instant Start)
+
 ----------------------------------------------------------------------
  OmegaT 2.6.3
 ----------------------------------------------------------------------

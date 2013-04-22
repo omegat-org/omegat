@@ -56,8 +56,7 @@
                </div>
             </div>
             <p>Most of the items that appear in the main menu can have a new
-                   shortcut assigned. Only the most commonly used menu items are assigned a
-                   shortcut by default. You can change the already assigned shortcuts and add
+                   shortcut assigned. You can change the already assigned shortcuts and add
                    new shortcuts by putting a shortcut definition file in your OmegaT
                    preferences folder (see <a class="link" href="chapter.files.and.directories.html#user.files" title="2.&nbsp;User settings files">User files
                       location</a>).
@@ -78,7 +77,7 @@
                    <span class="emphasis"><em>&lt;shortcut&gt;</em></span> is a combination of pressed keys
                    specified by the user<sup>[<a name="d0e11133" href="#ftn.d0e11133" class="footnote">2</a>]</sup>.
             </p>
-            <p>&lt;shortcut&gt; must be of the following form:0 or more
+            <p>&lt;shortcut&gt; must be of the following form: 0 or more
                    <code class="code">&lt;modifier&gt;</code> followed by 0 or 1
                    <code class="code">&lt;event&gt;</code> followed by 1 <code class="code">&lt;key&gt;</code>,
                    where:
@@ -146,8 +145,8 @@
                <div class="table-contents">
                   <table summary="Project Menu" border="1">
                      <colgroup>
-                        <col width="120" align="left">
-                        <col width="80" align="left">
+                        <col align="left">
+                        <col align="left">
                         <col align="left">
                      </colgroup>
                      <thead>
@@ -167,6 +166,11 @@
                            <td align="left">Open</td>
                            <td align="left"><span class="keycap"><strong>Ctrl+O</strong></span></td>
                            <td align="left">projectOpenMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Download Team Project</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">projectTeamNewMenuItem</td>
                         </tr>
                         <tr>
                            <td align="left">Import Source Files...</td>
@@ -226,12 +230,12 @@
                   </div>
                </div>
             </div>
-            <div class="table"><a name="d0e11387"></a><p class="title"><b>Table&nbsp;H.2.&nbsp;Edit Menu</b></p>
+            <div class="table"><a name="d0e11393"></a><p class="title"><b>Table&nbsp;H.2.&nbsp;Edit Menu</b></p>
                <div class="table-contents">
                   <table summary="Edit Menu" border="1">
                      <colgroup>
-                        <col width="120" align="left">
-                        <col width="80" align="left">
+                        <col align="left">
+                        <col align="left">
                         <col align="left">
                      </colgroup>
                      <thead>
@@ -323,17 +327,17 @@
                            <td align="left">editSelectFuzzy5MenuItem</td>
                         </tr>
                         <tr>
-                           <td align="left">Lower Case</td>
+                           <td align="left">Switch Case to/Lower Case</td>
                            <td align="left">&nbsp;</td>
                            <td align="left">lowerCaseMenuItem</td>
                         </tr>
                         <tr>
-                           <td align="left">Upper Case</td>
+                           <td align="left">Switch Case to/Upper Case</td>
                            <td align="left">&nbsp;</td>
                            <td align="left">upperCaseMenuItem</td>
                         </tr>
                         <tr>
-                           <td align="left">Title Case</td>
+                           <td align="left">Switch Case to/Title Case</td>
                            <td align="left">&nbsp;</td>
                            <td align="left">titleCaseMenuItem</td>
                         </tr>
@@ -341,6 +345,16 @@
                            <td align="left">Cycle case to...</td>
                            <td align="left"><span class="keycap"><strong>Shift+F3</strong></span></td>
                            <td align="left">cycleSwitchCaseMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Use as Default Translation</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">editMultipleDefault</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Create Alternative Translation</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">editMultipleAlternate</td>
                         </tr>
                      </tbody>
                   </table>
@@ -355,12 +369,12 @@
                   </div>
                </div>
             </div>
-            <div class="table"><a name="d0e11560"></a><p class="title"><b>Table&nbsp;H.3.&nbsp;GoTo Menu</b></p>
+            <div class="table"><a name="d0e11578"></a><p class="title"><b>Table&nbsp;H.3.&nbsp;GoTo Menu</b></p>
                <div class="table-contents">
                   <table summary="GoTo Menu" border="1">
                      <colgroup>
-                        <col width="120" align="left">
-                        <col width="80" align="left">
+                        <col align="left">
+                        <col align="left">
                         <col align="left">
                      </colgroup>
                      <thead>
@@ -394,13 +408,23 @@
                            <td align="left">gotoSegmentMenuItem</td>
                         </tr>
                         <tr>
-                           <td align="left">Back in history...</td>
-                           <td align="left"><span class="keycap"><strong>Ctrl+Shift+P</strong></span></td>
-                           <td align="left">gotoHistoryForwardMenuItem</td>
+                           <td align="left">Next Note</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">gotoNextNoteMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Previous Note</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">gotoPreviousNoteMenuItem</td>
                         </tr>
                         <tr>
                            <td align="left">Forward in history...</td>
                            <td align="left"><span class="keycap"><strong>Ctrl+Shift+N</strong></span></td>
+                           <td align="left">gotoHistoryForwardMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Back in history...</td>
+                           <td align="left"><span class="keycap"><strong>Ctrl+Shift+P</strong></span></td>
                            <td align="left">gotoHistoryBackMenuItem</td>
                         </tr>
                      </tbody>
@@ -416,11 +440,11 @@
                   </div>
                </div>
             </div>
-            <div class="table"><a name="d0e11639"></a><p class="title"><b>Table&nbsp;H.4.&nbsp;View Menu</b></p>
-               <div class="table-contents"><a class="indexterm" name="d0e11642"></a><table summary="View Menu" border="1">
+            <div class="table"><a name="d0e11669"></a><p class="title"><b>Table&nbsp;H.4.&nbsp;View Menu</b></p>
+               <div class="table-contents"><a class="indexterm" name="d0e11672"></a><table summary="View Menu" border="1">
                      <colgroup>
-                        <col width="120" align="left">
-                        <col width="80" align="left">
+                        <col align="left">
+                        <col align="left">
                         <col align="left">
                      </colgroup>
                      <thead>
@@ -452,6 +476,26 @@
                            <td align="left">viewMarkNonUniqueSegmentsCheckBoxMenuItem</td>
                         </tr>
                         <tr>
+                           <td align="left">Mark Segments with Notes</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">viewMarkNotedSegmentsCheckBoxMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Mark Non-breakable Spaces</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">viewMarkNBSPCheckBoxMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Mark Whitespace</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">viewMarkWhitespaceCheckBoxMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Mark Bidirectional Algorithm Control Characters</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">viewMarkBidiCheckBoxMenuItem</td>
+                        </tr>
+                        <tr>
                            <td align="left">Modification Info/Display None</td>
                            <td align="left">&nbsp;</td>
                            <td align="left">viewDisplayModificationInfoNoneRadioButtonMenuItem</td>
@@ -479,12 +523,12 @@
                   </div>
                </div>
             </div>
-            <div class="table"><a name="d0e11705"></a><p class="title"><b>Table&nbsp;H.5.&nbsp;Tools Menu</b></p>
+            <div class="table"><a name="d0e11759"></a><p class="title"><b>Table&nbsp;H.5.&nbsp;Tools Menu</b></p>
                <div class="table-contents">
                   <table summary="Tools Menu" border="1">
                      <colgroup>
-                        <col width="120" align="left">
-                        <col width="80" align="left">
+                        <col align="left">
+                        <col align="left">
                         <col align="left">
                      </colgroup>
                      <thead>
@@ -523,12 +567,12 @@
                   </div>
                </div>
             </div>
-            <div class="table"><a name="d0e11744"></a><p class="title"><b>Table&nbsp;H.6.&nbsp;Options Menu</b></p>
+            <div class="table"><a name="d0e11798"></a><p class="title"><b>Table&nbsp;H.6.&nbsp;Options Menu</b></p>
                <div class="table-contents">
                   <table summary="Options Menu" border="1">
                      <colgroup>
-                        <col width="120" align="left">
-                        <col width="80" align="left">
+                        <col align="left">
+                        <col align="left">
                         <col align="left">
                      </colgroup>
                      <thead>
@@ -610,7 +654,7 @@
                            <td align="left">optionsViewOptionsMenuItem</td>
                         </tr>
                         <tr>
-                           <td align="left">Save...</td>
+                           <td align="left">Saving and Output...</td>
                            <td align="left">&nbsp;</td>
                            <td align="left">optionsSaveOptionsMenuItem</td>
                         </tr>
@@ -637,12 +681,12 @@
                   </div>
                </div>
             </div>
-            <div class="table"><a name="d0e11864"></a><p class="title"><b>Table&nbsp;H.7.&nbsp;Help Menu</b></p>
+            <div class="table"><a name="d0e11918"></a><p class="title"><b>Table&nbsp;H.7.&nbsp;Help Menu</b></p>
                <div class="table-contents">
                   <table summary="Help Menu" border="1">
                      <colgroup>
-                        <col width="120" align="left">
-                        <col width="80" align="left">
+                        <col align="left">
+                        <col align="left">
                         <col align="left">
                      </colgroup>
                      <thead>
@@ -685,10 +729,10 @@
             </div>
             <div class="footnote">
                <p><sup>[<a name="ftn.d0e11209" href="#d0e11209" class="para">5</a>] </sup>The default OmegaT shortcuts are available from Sourceforge:
-                          <a class="ulink" href="http://omegat.svn.sourceforge.net/viewvc/omegat/branches/release-2-5/src/org/omegat/gui/main/MainMenuShortcuts.properties" target="_top">Default
+                          <a class="ulink" href="http://omegat.svn.sourceforge.net/viewvc/omegat/branches/release-2-6/src/org/omegat/gui/main/MainMenuShortcuts.properties" target="_top">Default
                              OmegaT Shortcuts</a></p>
                <p>The default OmegaT shortcuts for the Mac are also available from
-                          Sourceforge, they all use "meta" instead of "ctrl": <a class="ulink" href="http://omegat.svn.sourceforge.net/viewvc/omegat//branches/release-2-5/src/org/omegat/gui/main/MainMenuShortcuts.mac.properties" target="_top">Default
+                          Sourceforge, they all use "meta" instead of "ctrl": <a class="ulink" href="http://omegat.svn.sourceforge.net/viewvc/omegat/branches/release-2-6/src/org/omegat/gui/main/MainMenuShortcuts.mac.properties" target="_top">Default
                              OmegaT Shortcuts for the Mac</a></p>
             </div>
          </div>

@@ -3,8 +3,8 @@
       <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
    
       <title>Глава 10. Параметры редактирования</title>
-      <link rel="stylesheet" href="OmegaT.css" type="text/css">
-      <meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+      <link rel="stylesheet" type="text/css" href="OmegaT.css">
+      <meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
       <link rel="home" href="index.html" title="Руководство пользователя ОмегаТ">
       <link rel="up" href="index.html" title="Руководство пользователя ОмегаТ">
       <link rel="prev" href="chapter.files.to.translate.html" title="Глава 9. Файлы для перевода">
@@ -25,11 +25,11 @@
          </table>
          <hr>
       </div>
-      <div class="chapter" title="Глава 10. Параметры редактирования">
+      <div class="chapter">
          <div class="titlepage">
             <div>
                <div>
-                  <h2 class="title"><a name="chapter.translation.editing"></a>Глава 10. Параметры редактирования<a class="indexterm" name="d0e5400"></a></h2>
+                  <h1 class="title"><a name="chapter.translation.editing"></a>Глава 10. Параметры редактирования<a class="indexterm" name="d0e5636"></a></h1>
                </div>
             </div>
          </div>
@@ -44,14 +44,14 @@
             заполнялось уже существующим переводом или исходным текстом. В меню <span class="guimenu">«Параметры</span> → <span class="guimenuitem">Параметры редактирования...»</span> <span class="application">ОмегаТ</span> предлагает вам выбор из следующих вариантов:
          </p>
          <div class="variablelist">
-            <dl>
+            <dl class="variablelist">
                <dt><span class="term">Текст оригинала</span></dt>
                <dd>
                   <p>Вы можете автоматически заполнять поле редактирования текстом оригинала. Это полезно при переводе текста, содержащего много
                      торговых марок или других имён собственных, которые нужно оставить как есть.
                   </p>
                </dd>
-               <dt><span class="term">Оставить сегмент пустым<a class="indexterm" name="d0e5443"></a></span></dt>
+               <dt><span class="term">Оставить сегмент пустым<a class="indexterm" name="d0e5681"></a></span></dt>
                <dd>
                   <p>ОмегаТ оставит поле редактирования пустым. Эта настройка позволяет вам вводить перевод сразу, без необходимости удалять текст
                      оригинала, то есть избавляет вас от двух нажатий клавиш (<span class="bold"><strong>CTRL+A </strong></span>и <span class="bold"><strong>DEL). </strong></span> Теперь, можно задавать «пустые» переводы (переводы, в которых вообще нет текста). В области редактирования они отображаются
@@ -59,7 +59,7 @@
                      «<span class="bold"><strong>Установить пустой перевод</strong></span>». Пункт <span class="bold"><strong>Удалить перевод</strong></span> в том же меню позволяет удалить перевод текущего сегмента. Того же эффекта можно достичь, просто удалив перевод и нажав <span class="guibutton">ВВОД</span>.
                   </p>
                </dd>
-               <dt><span class="term">Вставлять лучшее нечёткое совпадение<a class="indexterm" name="d0e5471"></a></span></dt>
+               <dt><span class="term">Вставлять лучшее нечёткое совпадение<a class="indexterm" name="d0e5709"></a></span></dt>
                <dd>
                   <p>ОмегаТ вставит перевод строки, наиболее похожей на текущий оригинал, если эта строка превышает настраиваемый тут же порог
                      схожести. Чтобы отмечать переводы, полученные из нечётких совпадений, можно использовать специальный префикс (по умолчанию
@@ -71,14 +71,14 @@
          </div>
          <p>В нижней части окна можно включить следующие функции:</p>
          <div class="variablelist">
-            <dl>
-               <dt><span class="term">Попытаться преобразовать числа при вставке нечёткого совпадения<a class="indexterm" name="d0e5487"></a></span></dt>
+            <dl class="variablelist">
+               <dt><span class="term">Попытаться преобразовать числа при вставке нечёткого совпадения<a class="indexterm" name="d0e5725"></a></span></dt>
                <dd>
                   <p>Если флажок установлен, при вставке нечёткого совпадения, ОмегаТ попытается преобразовать числа из нечёткого совпадения таким
                      образом, чтобы они совпали с числами из исходного сегмента. Существует несколько ограничений:
                   </p>
                   <div class="itemizedlist">
-                     <ul class="itemizedlist" type="disc">
+                     <ul class="itemizedlist" style="list-style-type: disc; ">
                         <li class="listitem">
                            <p>Количество чисел в оригинальном сегменте и в совпадении должно совпадать.</p>
                         </li>
@@ -96,8 +96,8 @@
             </dl>
          </div>
          <div class="variablelist">
-            <dl>
-               <dt><span class="term">Разрешить перевод, идентичный оригиналу<a class="indexterm" name="d0e5511"></a></span></dt>
+            <dl class="variablelist">
+               <dt><span class="term">Разрешить перевод, идентичный оригиналу<a class="indexterm" name="d0e5749"></a></span></dt>
                <dd>
                   <p>Ваши документы могут содержать торговые марки или имена собственные, которые в переведённых документах должны оставаться неизменными.
                      Для обработки сегментов, которые содержат такой неизменяемый текст есть две стратегии.
@@ -110,14 +110,14 @@
             </dl>
          </div>
          <div class="variablelist">
-            <dl>
-               <dt><span class="term">Экспортировать сегмент в текстовый файл<a class="indexterm" name="d0e5536"></a></span></dt>
+            <dl class="variablelist">
+               <dt><span class="term">Экспортировать сегмент в текстовый файл<a class="indexterm" name="d0e5774"></a></span></dt>
                <dd>
                   <p>Функция экспорта текста позволяет сохранять части текущего проекта <span class="application">ОмегаТ</span> в простые текстовые файлы. Экспорт происходит при переходе к очередному сегменту. В подкаталоге «/script» в папке файлов
                      пользователя ОмегаТ появляются файлы со следующим содержимым:
                   </p>
                   <div class="itemizedlist">
-                     <ul class="itemizedlist" type="disc">
+                     <ul class="itemizedlist" style="list-style-type: disc; ">
                         <li class="listitem">
                            <p>Исходный текст текущего сегмента (<code class="filename">source.txt</code>).
                            </p>
@@ -139,8 +139,8 @@
             </dl>
          </div>
          <div class="variablelist">
-            <dl>
-               <dt><span class="term">Переход к следующему непереведённому сегменту приостанавливается, если есть хотя бы один альтернативный вариант перевода<a class="indexterm" name="d0e5582"></a></span></dt>
+            <dl class="variablelist">
+               <dt><span class="term">Переход к следующему непереведённому сегменту приостанавливается, если есть хотя бы один альтернативный вариант перевода<a class="indexterm" name="d0e5820"></a></span></dt>
                <dd>
                   <p>Если вы хотите избежать возможных ошибок при переводе идентичных сегментов, для которых есть разные варианты перевода, установите
                      этот флажок, и переход на <span class="bold"><strong>Следующий непереведённый сегменты</strong></span> будет затрагивать и идентичные сегменты, вне зависимости от того, были они переведены или нет.

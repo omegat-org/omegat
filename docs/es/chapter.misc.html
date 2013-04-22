@@ -3,8 +3,8 @@
       <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
    
       <title>Capítulo 22. Temas diversos</title>
-      <link rel="stylesheet" href="OmegaT.css" type="text/css">
-      <meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+      <link rel="stylesheet" type="text/css" href="OmegaT.css">
+      <meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
       <link rel="home" href="index.html" title="OmegaT - Guía de usuario">
       <link rel="up" href="index.html" title="OmegaT - Guía de usuario">
       <link rel="prev" href="chapter.spellchecker.html" title="Capítulo 21. El Corrector Ortográfico">
@@ -25,16 +25,16 @@
          </table>
          <hr>
       </div>
-      <div class="chapter" title="Capítulo 22. Temas diversos">
+      <div class="chapter">
          <div class="titlepage">
             <div>
                <div>
-                  <h2 class="title"><a name="chapter.misc"></a>Capítulo 22. Temas diversos<a class="indexterm" name="d0e8108"></a></h2>
+                  <h1 class="title"><a name="chapter.misc"></a>Capítulo 22. Temas diversos<a class="indexterm" name="d0e8108"></a></h1>
                </div>
             </div>
          </div>
          <div class="toc">
-            <dl>
+            <dl class="toc">
                <dt><span class="section"><a href="chapter.misc.html#omegat.misc.console.mode">1. OmegaT Modo consola</a></span></dt>
                <dd>
                   <dl>
@@ -48,7 +48,7 @@
                <dt><span class="section"><a href="chapter.misc.html#preventing.data.loss">4. Previniendo la pérdida de datos</a></span></dt>
             </dl>
          </div>
-         <div class="section" title="1. OmegaT Modo consola">
+         <div class="section">
             <div class="titlepage">
                <div>
                   <div>
@@ -56,7 +56,7 @@
                   </div>
                </div>
             </div>
-            <div class="note" title="Nota" style="margin-left: 0.5in; margin-right: 0.5in;">
+            <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;">
                <h3 class="title">Nota</h3>
                <p>¡De interés sólo para usuarios avanzados!</p>
             </div>
@@ -65,7 +65,7 @@
                podría ser un proyecto de software, con interfaz gráfica de usuario localizada en varios idiomas. Usando el modo consola,
                puedes generar una interfaz localizada en una parte del proceso de construcción.
             </p>
-            <div class="section" title="1.1. Requisitos previos">
+            <div class="section">
                <div class="titlepage">
                   <div>
                      <div>
@@ -80,7 +80,7 @@
                <p>Si necesitas configuraciones no estándar, los archivos de configuración correspondientes (<code class="literal">filters.conf</code> y <code class="literal">segmentation.conf)</code> deben estar presentes. Esto se puede conseguir de dos maneras:
                </p>
                <div class="itemizedlist">
-                  <ul class="itemizedlist" type="disc">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
                      <li class="listitem">
                         <p>Ejecuta <span class="application">OmegaT</span> normalmente (con la interfaz gráfica de usuario) y establece la configuración. Si arrancas <span class="application">OmegaT</span> en modo consola, este utilizará los ajustes que hayas configurado.
                         </p>
@@ -94,7 +94,7 @@
                   </ul>
                </div>
             </div>
-            <div class="section" title="1.2. Lanzando OmegaT en modo consola">
+            <div class="section">
                <div class="titlepage">
                   <div>
                      <div>
@@ -112,7 +112,7 @@
                <p><code class="literal"> --source-pattern={regexp}</code></p>
                <p><span class="bold"><strong>Explicación:</strong></span></p>
                <div class="itemizedlist">
-                  <ul class="itemizedlist" type="disc">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
                      <li class="listitem">
                         <p><code class="literal">&lt;project-dir&gt;</code> le dice a <span class="application">OmegaT</span> dónde se encuentra el proyecto a traducir. Si se da, <span class="application">OmegaT</span> se inicia en modo consola y traduce el proyecto.
                         </p>
@@ -120,7 +120,7 @@
                   </ul>
                </div>
                <div class="itemizedlist">
-                  <ul class="itemizedlist" type="disc">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
                      <li class="listitem">
                         <p><code class="literal">--config-dir=&lt;directorio-de-configuración&gt;</code> instruye a OmegaT sobre en cual directorio están los archivos de configuración. Si no se especifica, OmegaT vuelve a los
                            valores predeterminados (el directorio de OmegaT en el hogar del usuario, si o no están disponibles: el directorio de trabajo
@@ -130,7 +130,7 @@
                   </ul>
                </div>
                <div class="itemizedlist">
-                  <ul class="itemizedlist" type="disc">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
                      <li class="listitem">
                         <p><code class="literal">--mode=console-translate </code> <span class="application">OmegaT</span> se inicia en modo consola y traduce el proyecto.
                         </p>
@@ -142,7 +142,7 @@
                   </ul>
                </div>
             </div>
-            <div class="section" title="1.3. Opciones adicionales">
+            <div class="section">
                <div class="titlepage">
                   <div>
                      <div>
@@ -157,7 +157,7 @@
                <p>Uso: <code class="literal">java -jar <span class="application">OmegaT</span>.jar /ruta/al/proyecto --quiet</code></p>
             </div>
          </div>
-         <div class="section" title="2. Alineador automático de propiedades Java">
+         <div class="section">
             <div class="titlepage">
                <div>
                   <div>
@@ -173,7 +173,7 @@
                un paquete que termina con _fr. El tmx resultante se almacena en el directorio <code class="literal">omegat</code> bajo el nombre <code class="filename">align.tmx</code>.
             </p>
          </div>
-         <div class="section" title="3. Configurando el tipo de letra">
+         <div class="section">
             <div class="titlepage">
                <div>
                   <div>
@@ -184,7 +184,7 @@
             <p>En este diálogo puedes definir el tipo de letra utilizado por <span class="application">OmegaT</span> en las siguientes ventanas:
             </p>
             <div class="itemizedlist">
-               <ul class="itemizedlist" type="disc">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
                      <p>Ventana principal de <span class="application">OmegaT</span> (Editor, Visor de coincidencias, Visor de glosario)
                      </p>
@@ -192,14 +192,14 @@
                </ul>
             </div>
             <div class="itemizedlist">
-               <ul class="itemizedlist" type="disc">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
                      <p>Ventana de búsqueda</p>
                   </li>
                </ul>
             </div>
             <div class="itemizedlist">
-               <ul class="itemizedlist" type="disc">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
                      <p>Ventana de validación de etiquetas</p>
                   </li>
@@ -208,7 +208,7 @@
             <p>Puedes acceder al cuadro de diálogo a través de <a class="indexterm" name="d0e8311"></a><span class="guimenu">Opciones</span> → <span class="guimenuitem">Tipo de letra...</span> en el menú principal. El cuadro de diálogo contiene:
             </p>
             <div class="itemizedlist">
-               <ul class="itemizedlist" type="disc">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
                      <p><span class="bold"><strong>Tipo de letra:</strong></span> hay un desplegable para seleccionar uno de los tipos de letra disponibles en tu máquina
                      </p>
@@ -216,7 +216,7 @@
                </ul>
             </div>
             <div class="itemizedlist">
-               <ul class="itemizedlist" type="disc">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
                      <p><span class="bold"><strong>Tamaño:</strong></span> modifícalo para cambiar el tamaño de la letra
                      </p>
@@ -224,7 +224,7 @@
                </ul>
             </div>
             <div class="itemizedlist">
-               <ul class="itemizedlist" type="disc">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
                      <p><span class="bold"><strong>Texto de ejemplo:</strong></span> campo para visualizar inmediatamente el tipo de letra seleccionado
                      </p>
@@ -238,7 +238,7 @@
                (como el Ruso y Japonés), selecciona un tipo de letra que se pueda utilizar en ambos.
             </p>
          </div>
-         <div class="section" title="4. Previniendo la pérdida de datos">
+         <div class="section">
             <div class="titlepage">
                <div>
                   <div>
@@ -277,7 +277,7 @@
             </div>
             <p>Para evitar perder datos importantes:</p>
             <div class="itemizedlist">
-               <ul class="itemizedlist" type="disc">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
                      <p>Haz copias regulares de los archivos /omegat/project_save.tmx a medios de copia de seguridad, tales como CD o DVD.</p>
                   </li>
@@ -292,7 +292,7 @@
                </ul>
             </div>
             <div class="itemizedlist">
-               <ul class="itemizedlist" type="disc">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
                      <p>Utiliza estos textos de ayuda para empezar. En caso de que algún problema, envía un mensaje al grupos de usuarios de <a class="ulink" href="http://tech.groups.yahoo.com/group/Omegat/" target="_top"><span class="application">OmegaT</span></a>. No dudes en publicar en el idioma con el que te sientas más familiarizado.
                      </p>

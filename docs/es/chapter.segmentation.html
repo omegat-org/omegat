@@ -3,8 +3,8 @@
       <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
    
       <title>Capítulo 15. Segmentación del texto fuente</title>
-      <link rel="stylesheet" href="OmegaT.css" type="text/css">
-      <meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+      <link rel="stylesheet" type="text/css" href="OmegaT.css">
+      <meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
       <link rel="home" href="index.html" title="OmegaT - Guía de usuario">
       <link rel="up" href="index.html" title="OmegaT - Guía de usuario">
       <link rel="prev" href="chapter.translation.memories.html" title="Capítulo 14. Memorias de Traducción">
@@ -25,17 +25,17 @@
          </table>
          <hr>
       </div>
-      <div class="chapter" title="Capítulo 15. Segmentación del texto fuente">
+      <div class="chapter">
          <div class="titlepage">
             <div>
                <div>
-                  <h2 class="title"><a name="chapter.segmentation"></a>Capítulo 15. Segmentación del texto fuente
-                  </h2>
+                  <h1 class="title"><a name="chapter.segmentation"></a>Capítulo 15. Segmentación del texto fuente
+                  </h1>
                </div>
             </div>
          </div>
          <div class="toc">
-            <dl>
+            <dl class="toc">
                <dt><span class="section"><a href="chapter.segmentation.html#segmentation.rules">1. Reglas de segmentación</a></span></dt>
                <dt><span class="section"><a href="chapter.segmentation.html#rules.priority">2. Prioridad de regla</a></span></dt>
                <dt><span class="section"><a href="chapter.segmentation.html#creating.new.rule">3. Creando una nueva regla</a></span></dt>
@@ -61,7 +61,7 @@
          <p><span class="application">OmegaT</span> utiliza la siguiente secuencia de pasos:
          </p>
          <div class="variablelist">
-            <dl>
+            <dl class="variablelist">
                <dt><span class="term"><a class="indexterm" name="d0e6494"></a>Estructura del nivel de segmentación</span></dt>
                <dd>
                   <p><span class="application">OmegaT</span> primero analiza el texto para estructurar la segmentación de nivel superior. Durante este proceso, sólo estructura el archivo
@@ -79,7 +79,7 @@
                </dd>
             </dl>
          </div>
-         <div class="section" title="1. Reglas de segmentación">
+         <div class="section">
             <div class="titlepage">
                <div>
                   <div>
@@ -93,7 +93,7 @@
             </p>
             <p>Los dos tipos de reglas se comportan de la siguiente manera:</p>
             <div class="variablelist">
-               <dl>
+               <dl class="variablelist">
                   <dt><span class="term"><a class="indexterm" name="d0e6548"></a>Regla de ruptura</span></dt>
                   <dd>
                      <p>Separa el texto fuente en segmentos. Por ejemplo, "<span class="emphasis"><em>Did it make sense? I was not sure</em></span>." debería dividirse en dos segmentos. Para que esto ocurra, debe haber una regla para romper "?", cuando está seguida por
@@ -104,7 +104,7 @@
                </dl>
             </div>
             <div class="variablelist">
-               <dl>
+               <dl class="variablelist">
                   <dt><span class="term"><a class="indexterm" name="d0e6565"></a>Regla de excepción</span></dt>
                   <dd>
                      <p>especificar qué partes del texto no se deben separar. A pesar del punto, <span class="emphasis"><em>"Mrs. Dalloway"</em></span> no se debe dividir en dos segmentos, por tanto debes establecer una regla de excepción para "Mrs" (y para "Mr", "Dr", "prof",
@@ -118,7 +118,7 @@
                más significativos y coherentes.
             </p>
          </div>
-         <div class="section" title="2. Prioridad de regla">
+         <div class="section">
             <div class="titlepage">
                <div>
                   <div>
@@ -133,7 +133,7 @@
                en primer lugar, seguidas por las reglas para el Francés y, por último, las reglas predeterminadas.
             </p>
          </div>
-         <div class="section" title="3. Creando una nueva regla">
+         <div class="section">
             <div class="titlepage">
                <div>
                   <div>
@@ -159,7 +159,7 @@
                Consulta el capítulo sobre lsa <a class="link" href="chapter.regexp.html" title="Capítulo 16. Expresiones regulares">Expresiones regulares</a>. Un buen punto de partida siempre serán las reglas existentes.
             </p>
          </div>
-         <div class="section" title="4. Algunos ejemplos sencillos">
+         <div class="section">
             <div class="titlepage">
                <div>
                   <div>

@@ -3,8 +3,8 @@
       <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
    
       <title>Глава 18. Глоссарии</title>
-      <link rel="stylesheet" href="OmegaT.css" type="text/css">
-      <meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+      <link rel="stylesheet" type="text/css" href="OmegaT.css">
+      <meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
       <link rel="home" href="index.html" title="Руководство пользователя ОмегаТ">
       <link rel="up" href="index.html" title="Руководство пользователя ОмегаТ">
       <link rel="prev" href="chapter.dictionaries.html" title="Глава 17. Словари">
@@ -25,21 +25,21 @@
          </table>
          <hr>
       </div>
-      <div class="chapter" title="Глава 18. Глоссарии">
+      <div class="chapter">
          <div class="titlepage">
             <div>
                <div>
-                  <h2 class="title"><a name="chapter.glossaries"></a>Глава 18. Глоссарии<a class="indexterm" name="d0e7603"></a><a class="indexterm" name="d0e7608"></a></h2>
+                  <h1 class="title"><a name="chapter.glossaries"></a>Глава 18. Глоссарии<a class="indexterm" name="d0e7956"></a><a class="indexterm" name="d0e7961"></a></h1>
                </div>
             </div>
          </div>
          <div class="toc">
-            <dl>
-               <dt><span class="section"><a href="chapter.glossaries.html#d0e7632">1. Использование</a></span></dt>
-               <dt><span class="section"><a href="chapter.glossaries.html#d0e7687">2. Форматы файлов</a></span></dt>
-               <dt><span class="section"><a href="chapter.glossaries.html#d0e7726">3. Как создавать глоссарии</a></span></dt>
-               <dt><span class="section"><a href="chapter.glossaries.html#d0e7771">4. Использование Trados MultiTerm</a></span></dt>
-               <dt><span class="section"><a href="chapter.glossaries.html#d0e7787">5. Возможные проблемы с глоссариями</a></span></dt>
+            <dl class="toc">
+               <dt><span class="section"><a href="chapter.glossaries.html#d0e7985">1. Использование</a></span></dt>
+               <dt><span class="section"><a href="chapter.glossaries.html#d0e8040">2. Форматы файлов</a></span></dt>
+               <dt><span class="section"><a href="chapter.glossaries.html#d0e8079">3. Как создавать глоссарии</a></span></dt>
+               <dt><span class="section"><a href="chapter.glossaries.html#d0e8124">4. Использование Trados MultiTerm</a></span></dt>
+               <dt><span class="section"><a href="chapter.glossaries.html#d0e8140">5. Возможные проблемы с глоссариями</a></span></dt>
             </dl>
          </div>
          <p>Файлы глоссариев для <span class="application">ОмегаТ</span> можно создавать и обновлять вручную.
@@ -47,45 +47,44 @@
          <p>Если в проекте <span class="application">ОмегаТ</span> есть один или более глоссариев, то любой термин глоссария, который найден в активном сегменте, будет автоматически показан
             в области просмотра глоссария.
          </p>
-         <p>В диалоговом окне «Свойства проекта» можно задать расположение и имя глоссария. Расширение файла должно быть <code class="filename">.txt </code> (если это не так, то расширение будет добавлено автоматически). Файл должен находиться внутри каталога <code class="filename">/glossary</code>, возможно, в одном из его подкаталогов (например, <code class="filename">glossary/sub/glossary.txt</code>). Если файл с этим именем не существует, при первой записи в глоссарий он будет создан автоматически. Если файл уже существует,
+         <p>В диалоговом окне «Свойства проекта» можно задать расположение и имя глоссария. Расширение файла должно быть <code class="filename">.txt</code> (если это не так, то расширение будет добавлено автоматически). Файл должен находиться внутри каталога <code class="filename">/glossary</code>, возможно, в одном из его подкаталогов (например, <code class="filename">glossary/sub/glossary.txt</code>). Если файл с этим именем не существует, при первой записи в глоссарий он будет создан автоматически. Если файл уже существует,
             проверка формата и кодировки уже записанных в него данных проводиться не будет, новые записи будут всегда вноситься разделёнными
             табуляцией и в кодировке UTF-8. Так как ранее записанные данные изменяться не будут, возможность серьёзного повреждения существующего
             файла весьма маловероятна.
          </p>
-         <div class="section" title="1. Использование">
+         <div class="section">
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="d0e7632"></a>1. Использование
+                     <h2 class="title" style="clear: both"><a name="d0e7985"></a>1. Использование
                      </h2>
                   </div>
                </div>
             </div>
-            <p>Чтобы использовать уже имеющийся глоссарий, после создания проекта, просто поместите его в папку <a class="indexterm" name="d0e7637"></a> <code class="filename">/glossary</code>. Когда проект будет открыт, <span class="application">ОмегаТ</span> автоматически найдёт все файлы глоссариев в этой папке. Термины из активного сегмента, которые <span class="application">ОмегаТ</span> найдёт в этих файлах, будут отображены в области просмотра глоссария:
-            </p><a class="indexterm" name="d0e7652"></a><div class="figure"><a name="d0e7655"></a><p class="title"><b>Рисунок 18.1. Область просмотра глоссария</b></p>
+            <p>Чтобы использовать уже имеющийся глоссарий, после создания проекта, просто поместите его в папку <a class="indexterm" name="d0e7990"></a> <code class="filename">/glossary</code>. Когда проект будет открыт, <span class="application">ОмегаТ</span> автоматически найдёт все файлы глоссариев в этой папке. Термины из активного сегмента, которые <span class="application">ОмегаТ</span> найдёт в этих файлах, будут отображены в области просмотра глоссария:
+            </p><a class="indexterm" name="d0e8005"></a><div class="figure"><a name="d0e8008"></a><p class="title"><b>Рисунок 18.1. Область просмотра глоссария</b></p>
                <div class="figure-contents">
                   <div class="mediaobject"><img src="images/GlossaryPane_25.png" alt="Область просмотра глоссария"></div>
                </div>
             </div><br class="figure-break"><p>Слово перед знаком «=»&nbsp;— это термин на языке оригинала, его перевод находится после «=». К словарной статье можно добавить
-               примечание (см. «transitive verb» для второго слова в примере). Функция глоссария ищет только точные совпадения со статьёй
-               глоссария (например, не учитывает склонение слова и т.&nbsp;п.). Новые термины можно вручную внести в файл(ы) глоссария во время
-               перевода (например, в текстовом редакторе). Вновь добавленные термины будут распознаваться сразу после сохранения обновлённого
-               файла глоссария.
+               примечание. Функция глоссария ищет только точные совпадения со статьёй глоссария (например, не учитывает склонение слова и
+               т.&nbsp;п.). Новые термины можно вручную внести в файл(ы) глоссария во время перевода (например, в текстовом редакторе). Вновь
+               добавленные термины будут распознаваться сразу после сохранения обновлённого файла глоссария.
             </p>
             <p>Как видно на следующем примере, термин не обязательно должен быть представлен одним словом:</p>
-            <div class="figure"><a name="d0e7667"></a><p class="title"><b>Рисунок 18.2. Термин глоссария, состоящий из нескольких слов - пример<a class="indexterm" name="d0e7670"></a></b></p>
+            <div class="figure"><a name="d0e8020"></a><p class="title"><b>Рисунок 18.2. Термин глоссария, состоящий из нескольких слов - пример<a class="indexterm" name="d0e8023"></a></b></p>
                <div class="figure-contents">
-                  <div class="mediaobject"><img src="images/MultiTerm_Glossary_25.png" alt="Термин глоссария, состоящий из нескольких слов - примерГлоссарииОбласть просмотра глоссариятермин состоящий из нескольких слов"></div>
+                  <div class="mediaobject"><img src="images/MultiTerm_Glossary_25.png" alt="Термин глоссария, состоящий из нескольких слов - пример"></div>
                </div>
             </div><br class="figure-break"><p>Подчёркнутый элемент текста «pop-up menu» переведён в области просмотра глоссария как «pojavni menu». Если перевод из области
                просмотра глоссария выделить, а затем щёлкнуть правой кнопкой мыши, он автоматически вставится за текущей позицией курсора
-               в строке редактирования текущего сегмента.<sup>[<a name="d0e7684" href="#ftn.d0e7684" class="footnote">1</a>]</sup></p>
+               в строке редактирования текущего сегмента.<a href="#ftn.d0e8037" class="footnote" name="d0e8037"><sup class="footnote">[1]</sup></a></p>
          </div>
-         <div class="section" title="2. Форматы файлов">
+         <div class="section">
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="d0e7687"></a>2. <a class="indexterm" name="d0e7689"></a>Форматы файлов<a class="indexterm" name="d0e7695"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="d0e8040"></a>2. <a class="indexterm" name="d0e8042"></a>Форматы файлов<a class="indexterm" name="d0e8048"></a></h2>
                   </div>
                </div>
             </div>
@@ -99,38 +98,38 @@
                включать в строки запятые:
             </p>
             <p><code class="literal">"Это исходный термин, в котором есть запятая", "c'est un terme, qui contient une virgule"</code></p>
-            <p>Помимо простых текстовых файлов, поддерживаются глоссарии в формате TBX<a class="indexterm" name="d0e7711"></a>. TBX - Term Base eXchange&nbsp;— открытый, основанный на XML стандарт обмена структурированными терминологическими базами, TBX
+            <p>Помимо простых текстовых файлов, поддерживаются глоссарии в формате TBX<a class="indexterm" name="d0e8064"></a>. TBX - Term Base eXchange&nbsp;— открытый, основанный на XML стандарт обмена структурированными терминологическими базами, TBX
                был утверждён LISA и ISO как международный стандарт. Если вы используете какую-нибудь систему управления терминологией, например,
-               MultiTerm, вполне возможно, что она может сохранять терминологическую базу в формате TBX. <a class="ulink" href="http://www.microsoft.com/Language/en-US/Terminology.aspx" target="_top">Microsoft Terminology Collection</a> <a class="indexterm" name="d0e7720"></a> можно загрузить почти для 100 языков и использовать как отличный глоссарий по ИТ тематике.
+               MultiTerm, вполне возможно, что она может сохранять терминологическую базу в формате TBX. <a class="ulink" href="http://www.microsoft.com/Language/en-US/Terminology.aspx" target="_top">Microsoft Terminology Collection</a> <a class="indexterm" name="d0e8073"></a> можно загрузить почти для 100 языков и использовать как отличный глоссарий по ИТ тематике.
             </p>
          </div>
-         <div class="section" title="3. Как создавать глоссарии">
+         <div class="section">
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="d0e7726"></a>3. Как создавать глоссарии<a class="indexterm" name="d0e7729"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="d0e8079"></a>3. Как создавать глоссарии<a class="indexterm" name="d0e8082"></a></h2>
                   </div>
                </div>
             </div>
-            <p>В диалоговом окне «Свойства проекта» можно задать имя файла глоссария для записи (см. начало раздела). Чтобы добавить в глоссарий
-               новый термин, нужно нажать сочетание клавиш <span class="keycap"><strong>CTRL+SHIFT+G</strong></span>. Откроется диалоговое окно, в котором можно ввести исходный термин, перевод и комментарий:
+            <p>В диалоговом окне «Свойства проекта» можно задать имя файла глоссария для записи (см. начало раздела). Чтобы добавить новую
+               запись, щёлкните правой кнопкой мыши по области глоссариев или нажмите <span class="keycap"><strong>CTRL+SHIFT+G</strong></span>. Откроется диалоговое окно, в котором можно ввести исходный термин, перевод и комментарий:
             </p>
             <div class="mediaobject"><img src="images/GlossaryEntry_25.png"></div>
             <p>Содержимое файлов глоссария хранится в памяти. Считывание файлов происходит при каждом открытии или перезагрузке проекта.
                Обновление файла глоссария происходит довольно просто: нажмите <span class="keycap"><strong>CTRL+SHIFT+G</strong></span> и введите новый термин, его перевод и любой комментарий (вводя каждый элемент нажимайте TAB), а затем сохраните файл. Содержимое
                области глоссария также будет обновлено.
             </p>
-            <p><a class="indexterm" name="d0e7750"></a>Расположение файла глоссария для записи настраивается в диалоговом окне <span class="guimenuitem">«Проект &gt; Свойства…»</span>. Расширение должно быть либо <code class="filename">TXT</code>, либо <code class="filename">UTF8</code></p>
+            <p><a class="indexterm" name="d0e8103"></a>Расположение файла глоссария для записи настраивается в диалоговом окне <span class="guimenuitem">«Проект &gt; Свойства…»</span>. Расширение должно быть либо <code class="filename">TXT</code>, либо <code class="filename">UTF8</code></p>
             <p><span class="bold"><strong>Примечание:</strong></span> конечно, есть и другие способы создать простой текстовый файл с разделением табуляцией. Никто не запрещает использовать Notepad++
                на Windows, GEdit на GNU/Linux или какой-нибудь редактор электронных таблиц: подойдёт любая программа, которая умеет рабоать
                с UTF8 и может отображать пробелы (чтобы вы не пропустили символы <span class="keycap"><strong>TAB</strong></span>).
             </p>
          </div>
-         <div class="section" title="4. Использование Trados MultiTerm">
+         <div class="section">
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="d0e7771"></a>4. <a class="indexterm" name="d0e7773"></a>Использование Trados MultiTerm
+                     <h2 class="title" style="clear: both"><a name="d0e8124"></a>4. <a class="indexterm" name="d0e8126"></a>Использование Trados MultiTerm
                      </h2>
                   </div>
                </div>
@@ -140,67 +139,67 @@
                далее) перед собственно терминами. Новые версии MultiTerm поддерживают экспорт в формат TBX.
             </p>
          </div>
-         <div class="section" title="5. Возможные проблемы с глоссариями">
+         <div class="section">
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="d0e7787"></a>5. <a class="indexterm" name="d0e7789"></a>Возможные проблемы с глоссариями
+                     <h2 class="title" style="clear: both"><a name="d0e8140"></a>5. <a class="indexterm" name="d0e8142"></a>Возможные проблемы с глоссариями
                      </h2>
                   </div>
                </div>
             </div>
             <p><span class="bold"><strong>Проблема: термины глоссария не показываются, возможные причины:</strong></span></p>
             <div class="itemizedlist">
-               <ul class="itemizedlist" type="disc">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
                      <p>В каталоге «glossary» не найдено файлов глоссария.</p>
                   </li>
                </ul>
             </div>
             <div class="itemizedlist">
-               <ul class="itemizedlist" type="disc">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
                      <p>Файл глоссария пуст</p>
                   </li>
                </ul>
             </div>
             <div class="itemizedlist">
-               <ul class="itemizedlist" type="disc">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
                      <p>Термины не разделены табуляцией.</p>
                   </li>
                </ul>
             </div>
             <div class="itemizedlist">
-               <ul class="itemizedlist" type="disc">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
                      <p>У файла глоссария неправильное расширение (не .tab и не .utf8)</p>
                   </li>
                </ul>
             </div>
             <div class="itemizedlist">
-               <ul class="itemizedlist" type="disc">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
                      <p>Нет ТОЧНОГО совпадения между словарной статьёй и текстом вашего документа&nbsp;— например, слово употреблено во множественном числе.</p>
                   </li>
                </ul>
             </div>
             <div class="itemizedlist">
-               <ul class="itemizedlist" type="disc">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
                      <p>У файла глоссария неправильная кодировка</p>
                   </li>
                </ul>
             </div>
             <div class="itemizedlist">
-               <ul class="itemizedlist" type="disc">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
                      <p>В активном сегменте нет терминов, которые совпадают с терминами в глоссарии</p>
                   </li>
                </ul>
             </div>
             <div class="itemizedlist">
-               <ul class="itemizedlist" type="disc">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
                      <p>Проект не перезагрузили после решения вышеупомянутых проблем.</p>
                   </li>
@@ -208,16 +207,16 @@
             </div>
             <p><span class="bold"><strong>Проблема: некоторые символы неправильно отображаются в области глоссария</strong></span></p>
             <div class="itemizedlist">
-               <ul class="itemizedlist" type="disc">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
                      <p>...но те же символы корректно отображаются в области редактирования: расширение и кодировка файла не совпадают.</p>
                   </li>
                </ul>
             </div>
          </div>
-         <div class="footnotes"><br><hr width="100" align="left">
-            <div class="footnote">
-               <p><sup>[<a name="ftn.d0e7684" href="#d0e7684" class="para">1</a>] </sup>Заметьте, что в вышеприведённом примере этого не достаточно, так как в языке перевода (словенском) «pojavni menu» склоняется.
+         <div class="footnotes"><br><hr style="width:100; text-align:left;margin-left: 0">
+            <div id="ftn.d0e8037" class="footnote">
+               <p><a href="#d0e8037" class="para"><sup class="para">[1] </sup></a>Заметьте, что в вышеприведённом примере этого не достаточно, так как в языке перевода (словенском) «pojavni menu» склоняется.
                   Таким образом, вставленный фрагмент в именительном падеже следует исправить на «pojavnem meniju» (в т. н. местном падеже).
                   В некоторых случаях бывает проще ввести перевод термина с клавиатуры, не утруждая себя выделением и щелчками мышью.
                </p>

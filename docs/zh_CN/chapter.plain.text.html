@@ -3,8 +3,8 @@
       <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
    
       <title>第&nbsp;13&nbsp;章&nbsp;处理纯文本</title>
-      <link rel="stylesheet" href="OmegaT.css" type="text/css">
-      <meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+      <link rel="stylesheet" type="text/css" href="OmegaT.css">
+      <meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
       <link rel="home" href="index.html" title="OmegaT - 用户向导">
       <link rel="up" href="index.html" title="OmegaT - 用户向导">
       <link rel="prev" href="chapter.formatted.text.html" title="第&nbsp;12&nbsp;章&nbsp;处理格式化文本">
@@ -25,21 +25,21 @@
          </table>
          <hr>
       </div>
-      <div class="chapter" title="第&nbsp;13&nbsp;章&nbsp;处理纯文本">
+      <div class="chapter">
          <div class="titlepage">
             <div>
                <div>
-                  <h2 class="title"><a name="chapter.plain.text"></a>第&nbsp;13&nbsp;章&nbsp;处理纯文本<a class="indexterm" name="d0e6730"></a></h2>
+                  <h1 class="title"><a name="chapter.plain.text"></a>第&nbsp;13&nbsp;章&nbsp;处理纯文本<a class="indexterm" name="d0e6730"></a></h1>
                </div>
             </div>
          </div>
          <div class="toc">
-            <dl>
+            <dl class="toc">
                <dt><span class="section"><a href="chapter.plain.text.html#default.encoding">1. 缺省编码</a></span></dt>
                <dt><span class="section"><a href="chapter.plain.text.html#OmegaT.solution">2. <span class="application">OmegaT</span> 解决方案</a></span></dt>
             </dl>
          </div>
-         <div class="section" title="1.&nbsp;缺省编码">
+         <div class="section">
             <div class="titlepage">
                <div>
                   <div>
@@ -55,7 +55,7 @@
             <div class="mediaobject"><img src="images/OmT_Cyrillic.png"></div>
             <p>运行 OmegaT 的电脑的默认语言为俄语，因此它使用西里尔字符集而不是汉字字符集显示字符。</p>
          </div>
-         <div class="section" title="2.&nbsp;OmegaT 解决方案">
+         <div class="section">
             <div class="titlepage">
                <div>
                   <div>
@@ -66,7 +66,7 @@
             <p>基本上 <span class="application">OmegaT</span> 中有三种方法解决这个问题。它们都与<span class="bold"><strong>选项</strong></span>菜单中的文件过滤器应用程序有关。
             </p>
             <div class="variablelist">
-               <dl>
+               <dl class="variablelist">
                   <dt><span class="term">将文件编码改为 Unicode</span></dt>
                   <dd>
                      <p>使用能够正确解析编码的文本编辑器打开源文件，并使用 <span class="bold"><strong>"UTF-8"</strong></span> 编码保存文件。将文件扩展名由 <code class="literal">.txt</code> 改为 <code class="literal">.utf8。</code><span class="application">OmegaT</span> 会自动将文件解析为 UTF-8 文件。这是最常用的有效方案, 可最大程度减少您的问题.
@@ -75,7 +75,7 @@
                </dl>
             </div>
             <div class="variablelist">
-               <dl>
+               <dl class="variablelist">
                   <dt><span class="term">指定纯文本文件的编码</span></dt>
                   <dd>
                      <p>即扩展名为 <code class="filename">.txt </code> 的文件：在文件过滤器对话框的<span class="bold"><strong>文本文件</strong></span>部分，将<span class="bold"><strong>源文件编码</strong></span>从&lt;自动&gt;修改为 <code class="filename">.txt</code> 文件的编码，例如对于上述例子则修改为 .jp。
@@ -84,7 +84,7 @@
                </dl>
             </div>
             <div class="variablelist">
-               <dl>
+               <dl class="variablelist">
                   <dt><span class="term">修改纯文本文件的扩展名</span></dt>
                   <dd>
                      <p>例如对于日文纯文本文件将 <code class="filename">.txt</code> 修改为 <code class="filename">.jp</code>：在文件过滤器对话框的<span class="bold"><strong>文本文件</strong></span>部分，新增一个新的<span class="bold"><strong>源文件名模式</strong></span>（在此例中为 <code class="filename">*.jp</code>）并为该源文件和目标文件的编码选择适当的参数。
@@ -95,7 +95,7 @@
             <p>缺省情况下，<span class="application">OmegaT</span> 使用下面的短名单帮助您处理一些纯文本文件：
             </p>
             <div class="itemizedlist">
-               <ul class="itemizedlist" type="disc">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
                      <p><code class="literal">.txt</code> 文件会自动 (&lt;自动&gt;) 被 <span class="application">OmegaT</span> 以计算机缺省的编码进行解释。
                      </p>
@@ -103,21 +103,21 @@
                </ul>
             </div>
             <div class="itemizedlist">
-               <ul class="itemizedlist" type="disc">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
                      <p><code class="literal">.txt1</code> 是以 ISO-8859-1 进行编码的，包括绝大多数<span class="bold"><strong>西欧</strong></span>语言。<a class="indexterm" name="d0e6864"></a></p>
                   </li>
                </ul>
             </div>
             <div class="itemizedlist">
-               <ul class="itemizedlist" type="disc">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
                      <p><code class="literal">.txt2</code> 文件是以 ISO-8859-2 进行编码的，包括绝大多数<span class="bold"><strong>中欧和东欧</strong></span>语言<a class="indexterm" name="d0e6878"></a></p>
                   </li>
                </ul>
             </div>
             <div class="itemizedlist">
-               <ul class="itemizedlist" type="disc">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
                      <p><code class="literal">.utf8</code> 文件会被 <span class="application">OmegaT</span> 以 UTF-8 编码进行解释（一种几乎涵盖了世界上所有语言的编码）。<a class="indexterm" name="d0e6892"></a></p>
                   </li>

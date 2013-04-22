@@ -2,22 +2,22 @@
    <head>
       <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
    
-      <title>Приложение A. Модуль «tokenizer»</title>
-      <link rel="stylesheet" href="OmegaT.css" type="text/css">
-      <meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+      <title>Приложение D. Модуль «tokenizer»</title>
+      <link rel="stylesheet" type="text/css" href="OmegaT.css">
+      <meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
       <link rel="home" href="index.html" title="Руководство пользователя ОмегаТ">
       <link rel="up" href="index.html" title="Руководство пользователя ОмегаТ">
-      <link rel="prev" href="chapter.misc.html" title="Глава 21. Темы, не вошедшие в другие разделы">
-      <link rel="next" href="appendix.LanguageToolPlugin.inOmegaT.html" title="Приложение B. Модуль «LanguageTool»">
+      <link rel="prev" href="appendix.TeamProjects.html" title="Приложение C. Командные проекты в ОмегаТ">
+      <link rel="next" href="appendix.LanguageToolPlugin.inOmegaT.html" title="Приложение E. Модуль «LanguageTool»">
    </head>
    <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
       <div class="navheader">
          <table width="100%" summary="Navigation header">
             <tr>
-               <th colspan="3" align="center">Приложение A. Модуль «tokenizer»</th>
+               <th colspan="3" align="center">Приложение D. Модуль «tokenizer»</th>
             </tr>
             <tr>
-               <td width="20%" align="left"><a accesskey="p" href="chapter.misc.html">Пред.</a>&nbsp;
+               <td width="20%" align="left"><a accesskey="p" href="appendix.TeamProjects.html">Пред.</a>&nbsp;
                </td>
                <th width="60%" align="center">&nbsp;</th>
                <td width="20%" align="right">&nbsp;<a accesskey="n" href="appendix.LanguageToolPlugin.inOmegaT.html">След.</a></td>
@@ -25,27 +25,27 @@
          </table>
          <hr>
       </div>
-      <div class="appendix" title="Приложение A. Модуль «tokenizer»">
+      <div class="appendix">
          <div class="titlepage">
             <div>
                <div>
-                  <h2 class="title"><a name="appendix.TokenizerPlugin.inOmegaT"></a>Приложение A. Модуль «tokenizer»<a class="indexterm" name="d0e8503"></a></h2>
+                  <h1 class="title"><a name="appendix.TokenizerPlugin.inOmegaT"></a>Приложение D. Модуль «tokenizer»<a class="indexterm" name="d0e10713"></a></h1>
                </div>
             </div>
          </div>
          <div class="toc">
-            <dl>
-               <dt><span class="section"><a href="appendix.TokenizerPlugin.inOmegaT.html#d0e8508">1. Введение</a></span></dt>
-               <dt><span class="section"><a href="appendix.TokenizerPlugin.inOmegaT.html#d0e8537">2. Установка и использование из командной строки</a></span></dt>
-               <dt><span class="section"><a href="appendix.TokenizerPlugin.inOmegaT.html#d0e8554">3. Особенности использования в Mac OS X</a></span></dt>
-               <dt><span class="section"><a href="appendix.TokenizerPlugin.inOmegaT.html#d0e8568">4. Если модуль не работает</a></span></dt>
+            <dl class="toc">
+               <dt><span class="section"><a href="appendix.TokenizerPlugin.inOmegaT.html#d0e10718">1. Введение</a></span></dt>
+               <dt><span class="section"><a href="appendix.TokenizerPlugin.inOmegaT.html#d0e10747">2. Установка и использование из командной строки</a></span></dt>
+               <dt><span class="section"><a href="appendix.TokenizerPlugin.inOmegaT.html#d0e10764">3. Особенности использования в Mac OS&nbsp;X</a></span></dt>
+               <dt><span class="section"><a href="appendix.TokenizerPlugin.inOmegaT.html#d0e10778">4. Если модуль не работает</a></span></dt>
             </dl>
          </div>
-         <div class="section" title="1. Введение">
+         <div class="section">
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="d0e8508"></a>1. Введение<a class="indexterm" name="d0e8511"></a><a class="indexterm" name="d0e8516"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="d0e10718"></a>1. Введение<a class="indexterm" name="d0e10721"></a><a class="indexterm" name="d0e10726"></a></h2>
                   </div>
                </div>
             </div>
@@ -58,14 +58,14 @@
                приставки, суффиксы и окончания. В качестве примера рассмотрим склонение слова «хороший» в словенском языке:
             </p>
             <div class="itemizedlist">
-               <ul class="itemizedlist" type="disc">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
                      <p>lep, lepa, lepo&nbsp;— единственное число, мужской, женский и средний род</p>
                   </li>
                </ul>
             </div>
             <div class="itemizedlist">
-               <ul class="itemizedlist" type="disc">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
                      <p>lepši, lepša, lepše . — сравнительная степень, именительный падеж, мужской, женский и средний род соответственно. Во множественном
                         числе:
@@ -74,18 +74,18 @@
                </ul>
             </div>
             <div class="itemizedlist">
-               <ul class="itemizedlist" type="disc">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
                      <p>najlepših&nbsp;— превосходная степень, множественное число, родительный падеж, мужской, женский и средний род.</p>
                   </li>
                </ul>
             </div>
          </div>
-         <div class="section" title="2. Установка и использование из командной строки">
+         <div class="section">
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="d0e8537"></a>2. Установка и использование из командной строки
+                     <h2 class="title" style="clear: both"><a name="d0e10747"></a>2. Установка и использование из командной строки
                      </h2>
                   </div>
                </div>
@@ -105,20 +105,20 @@
                Например, если вы хотите использовать алгоритм Lucene CJK для исходного текста и Lucene French для переведённого текста, команда
                запуска должна выглядеть примерно так:
             </p>
-            <p><code class="literal">java -jar OmegaT.jar --ITokenizer=org.omegat.plugins.
-                      tokenizer.LuceneCJKTokenizer --ITokenizerTarget=org.omegat.plugins.
-                      tokenizer.LuceneFrenchTokenizer</code></p>
+            <p><code class="literal">java -jar OmegaT.jar
+                      --ITokenizer=org.omegat.plugins.tokenizer.LuceneCJKTokenizer
+                      --ITokenizerTarget=org.omegat.plugins.tokenizer.LuceneFrenchTokenizer</code></p>
          </div>
-         <div class="section" title="3. Особенности использования в Mac OS X">
+         <div class="section">
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="d0e8554"></a>3. Особенности использования в Mac OS X
+                     <h2 class="title" style="clear: both"><a name="d0e10764"></a>3. Особенности использования в Mac OS&nbsp;X
                      </h2>
                   </div>
                </div>
             </div>
-            <p>Если вы хотите использовать модуль морфологического поиска в ОмегаТ, запущенной на Mac OS X, следуйте приведённым выше инструкциям
+            <p>Если вы хотите использовать модуль морфологического поиска в ОмегаТ, запущенной на Mac OS&nbsp;X, следуйте приведённым выше инструкциям
                (чтобы узнать расположение OmegaT.jar, щёлкните правой кнопкой мыши по OmegaT.app), с той лишь разницей, что названия алгоритмов
                следует указывать в файле <code class="filename">info.plist</code>, который содержит опции запуска Java. Откройте <code class="filename">info.plist</code> и отредактируйте его нужным образом. Вот как этот файл должен выглядеть для примера выше:
             </p>
@@ -130,16 +130,15 @@
                      &lt;key&gt;Arguments&lt;/key&gt;<br>
                      &lt;array&gt;<br>
                      &nbsp;&nbsp;&lt;string&gt;--ITokenizer=org.omegat.plugins.tokenizer.LuceneCJKTokenizer&lt;/string&gt;<br>
-                     &nbsp;&nbsp;&lt;string&gt;--ITokenizerTarget=org.omegat.plugins.tokenizer.<br>
-                     &nbsp;&nbsp;LuceneFrenchTokenizer&lt;/string&gt;<br>
+                     &nbsp;&nbsp;&lt;string&gt;--ITokenizerTarget=org.omegat.plugins.tokenizer.LuceneFrenchTokenizer&lt;/string&gt;<br>
                      &lt;/array&gt;</code></p>
             </div>
          </div>
-         <div class="section" title="4. Если модуль не работает">
+         <div class="section">
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="d0e8568"></a>4. Если модуль не работает
+                     <h2 class="title" style="clear: both"><a name="d0e10778"></a>4. Если модуль не работает
                      </h2>
                   </div>
                </div>
@@ -163,7 +162,7 @@
                      12719:&nbsp;Info:&nbsp;Target&nbsp;tokenizer:&nbsp;org.omegat.core.matching.Tokenizer&nbsp;<br>
                      </code></p>
             </div>
-            <p>Для запуска ОмегаТ из командной строки в Mac OS X, дважды щёлкните мышью по файлу <code class="literal">JavaApplicationStub</code>, расположенному в «/OmegaT.app/Contents/MacOS/».
+            <p>Для запуска ОмегаТ из командной строки в Mac OS&nbsp;X, дважды щёлкните мышью по файлу <code class="literal">JavaApplicationStub</code>, расположенному в «/OmegaT.app/Contents/MacOS/».
             </p>
          </div>
       </div>
@@ -171,15 +170,15 @@
          <hr>
          <table width="100%" summary="Navigation footer">
             <tr>
-               <td width="40%" align="left"><a accesskey="p" href="chapter.misc.html">Пред.</a>&nbsp;
+               <td width="40%" align="left"><a accesskey="p" href="appendix.TeamProjects.html">Пред.</a>&nbsp;
                </td>
                <td width="20%" align="center">&nbsp;</td>
                <td width="40%" align="right">&nbsp;<a accesskey="n" href="appendix.LanguageToolPlugin.inOmegaT.html">След.</a></td>
             </tr>
             <tr>
-               <td width="40%" align="left" valign="top">Глава 21. Темы, не вошедшие в другие разделы&nbsp;</td>
+               <td width="40%" align="left" valign="top">Приложение C. Командные проекты в ОмегаТ&nbsp;</td>
                <td width="20%" align="center"><a accesskey="h" href="index.html">Начало</a></td>
-               <td width="40%" align="right" valign="top">&nbsp;Приложение B. Модуль «LanguageTool»</td>
+               <td width="40%" align="right" valign="top">&nbsp;Приложение E. Модуль «LanguageTool»</td>
             </tr>
          </table>
       </div>

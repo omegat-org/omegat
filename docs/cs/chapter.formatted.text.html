@@ -4,7 +4,7 @@
    
       <title>Chapter&nbsp;12.&nbsp;Práce s formátovaným textem</title>
       <link rel="stylesheet" type="text/css" href="OmegaT.css">
-      <meta name="generator" content="DocBook XSL Stylesheets V1.76.1">
+      <meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
       <link rel="home" href="index.html" title="Uživatelská skupina OmegaT">
       <link rel="up" href="index.html" title="Uživatelská skupina OmegaT">
       <link rel="prev" href="chapter.plain.text.html" title="Chapter&nbsp;11.&nbsp;Práce s prostým textem">
@@ -25,16 +25,16 @@
          </table>
          <hr>
       </div>
-      <div class="chapter" title="Chapter&nbsp;12.&nbsp;Práce s formátovaným textem">
+      <div class="chapter">
          <div class="titlepage">
             <div>
                <div>
-                  <h2 class="title"><a name="chapter.formatted.text"></a>Chapter&nbsp;12.&nbsp;Práce s formátovaným textem<a class="indexterm" name="d0e5845"></a><a class="indexterm" name="d0e5850"></a></h2>
+                  <h1 class="title"><a name="chapter.formatted.text"></a>Chapter&nbsp;12.&nbsp;Práce s formátovaným textem<a class="indexterm" name="d0e5845"></a><a class="indexterm" name="d0e5850"></a></h1>
                </div>
             </div>
          </div>
          <div class="toc">
-            <dl>
+            <dl class="toc">
                <dt><span class="section"><a href="chapter.formatted.text.html#formatting.tags">1. Formátovací tagy</a></span></dt>
                <dt><span class="section"><a href="chapter.formatted.text.html#tag.operations">2. Operace s tagy</a></span></dt>
                <dt><span class="section"><a href="chapter.formatted.text.html#tag.group.nesting">3. Vnořování skupiny tagů</a></span></dt>
@@ -50,7 +50,7 @@
             jsou tagy ignorovány s ohledem na podobnost mezi různými texty používanými pro porovnání. Tagy, které vložíte do přeloženého
             segmentu, budou přítomné v přeloženém dokumentu.
          </p>
-         <div class="section" title="1.&nbsp;Formátovací tagy">
+         <div class="section">
             <div class="titlepage">
                <div>
                   <div>
@@ -85,7 +85,7 @@
                rozděleny do dvou po sobě jdoucích segmentů a při ověřování tagů bude hlášena chyba a tyto dva segmenty budou označeny.
             </p>
          </div>
-         <div class="section" title="2.&nbsp;Operace s tagy">
+         <div class="section">
             <div class="titlepage">
                <div>
                   <div>
@@ -115,7 +115,7 @@
             <p>Po smazání:</p>
             <p><code class="literal">Toto formátování bylo smazáno.&lt;segment 0001&gt;</code></p>
          </div>
-         <div class="section" title="3.&nbsp;Vnořování skupiny tagů">
+         <div class="section">
             <div class="titlepage">
                <div>
                   <div>
@@ -133,7 +133,7 @@
             <p>Po vnoření:</p>
             <p><code class="literal">&lt;b0&gt;Formátování&lt;b1&gt;jedna&lt;/b1&gt;  &lt;/b0&gt; bylo vnořeno do formátování nula.</code></p>
          </div>
-         <div class="section" title="4.&nbsp;Překrývání skupiny tagů">
+         <div class="section">
             <div class="titlepage">
                <div>
                   <div>
@@ -149,7 +149,7 @@
             <p>Po chybné manipulaci</p>
             <p><code class="literal">&lt;b0&gt;Formátování&lt;b1&gt; jedna &lt;/b0&gt; &lt;/b1&gt;je teď zcela špatně.&lt;segment 0001&gt;</code></p>
          </div>
-         <div class="section" title="5.&nbsp;Možnosti Ověření tagů">
+         <div class="section">
             <div class="titlepage">
                <div>
                   <div>
@@ -165,7 +165,7 @@
                textu.
             </p>
             <div class="itemizedlist">
-               <ul class="itemizedlist" type="disc">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
                      <p><span class="bold"><strong>Proměnné printf - nekontrolovat, kontrolovat jednoduché, kontrolovat všechny.</strong></span></p>
                      <p>OmegaT také může kontrolovat programové proměnné (proměnné jako %s) jak ve zdrojovém, tak i v přeloženém textu.. Můžete se
@@ -176,7 +176,7 @@
                </ul>
             </div>
             <div class="itemizedlist">
-               <ul class="itemizedlist" type="disc">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
                      <p><span class="bold"><strong>Zkontrolovat prosté vzory java MessageFormat</strong></span></p>
                      <p>Když bude toto zaškrtávací políčko aktivní, bude OmegaT kontrolovat, zda jsou prosté tagy java MessageFormat (like {0}) zpracovány
@@ -186,7 +186,7 @@
                </ul>
             </div>
             <div class="itemizedlist">
-               <ul class="itemizedlist" type="disc">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
                      <p><span class="bold"><strong>Políčko ‚Přizpůsobit regulární výraz tagu/tagů‛</strong></span></p>
                      <p>Když sem vložíte regulární výraz, tak OmegaT bude zacházet s nalezenými případy jako se specificky definovanými tagy. Zkontroluje,
@@ -196,7 +196,7 @@
                </ul>
             </div>
             <div class="itemizedlist">
-               <ul class="itemizedlist" type="disc">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
                      <p><span class="bold"><strong>Fragmenty, které mají být odstraněny z překladu</strong></span></p>
                      <p>Můžete vložit regulární výraz pro nežádoucí obsah v překladu. Jakákoliv shoda v cílovém segmentu pak bude zobrazena červeně,
@@ -206,7 +206,7 @@
                </ul>
             </div>
          </div>
-         <div class="section" title="6.&nbsp;Ověření skupiny tagů">
+         <div class="section">
             <div class="titlepage">
                <div>
                   <div>
@@ -230,7 +230,7 @@
                tomu některé zapříčiní problémy při vytváření přeložených dokumentů.
             </p>
          </div>
-         <div class="section" title="7.&nbsp;Tipy pro správu tagů">
+         <div class="section">
             <div class="titlepage">
                <div>
                   <div>

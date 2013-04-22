@@ -3,8 +3,8 @@
       <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
    
       <title>第&nbsp;14&nbsp;章&nbsp;翻译记忆</title>
-      <link rel="stylesheet" href="OmegaT.css" type="text/css">
-      <meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+      <link rel="stylesheet" type="text/css" href="OmegaT.css">
+      <meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
       <link rel="home" href="index.html" title="OmegaT - 用户向导">
       <link rel="up" href="index.html" title="OmegaT - 用户向导">
       <link rel="prev" href="chapter.plain.text.html" title="第&nbsp;13&nbsp;章&nbsp;处理纯文本">
@@ -25,16 +25,16 @@
          </table>
          <hr>
       </div>
-      <div class="chapter" title="第&nbsp;14&nbsp;章&nbsp;翻译记忆">
+      <div class="chapter">
          <div class="titlepage">
             <div>
                <div>
-                  <h2 class="title"><a name="chapter.translation.memories"></a>第&nbsp;14&nbsp;章&nbsp;翻译记忆<a class="indexterm" name="d0e6923"></a></h2>
+                  <h1 class="title"><a name="chapter.translation.memories"></a>第&nbsp;14&nbsp;章&nbsp;翻译记忆<a class="indexterm" name="d0e6923"></a></h1>
                </div>
             </div>
          </div>
          <div class="toc">
-            <dl>
+            <dl class="toc">
                <dt><span class="section"><a href="chapter.translation.memories.html#OmegaT.and.tmx.files">1. OmegaT 中的翻译记忆</a></span></dt>
                <dd>
                   <dl>
@@ -54,7 +54,7 @@
                <dt><span class="section"><a href="chapter.translation.memories.html#upgrading.translation.memories">4. 更新翻译记忆</a></span></dt>
             </dl>
          </div>
-         <div class="section" title="1.&nbsp;OmegaT 中的翻译记忆">
+         <div class="section">
             <div class="titlepage">
                <div>
                   <div>
@@ -63,7 +63,7 @@
                   </div>
                </div>
             </div>
-            <div class="section" title="1.1.&nbsp;tmx 文件夹 - 位置及用途">
+            <div class="section">
                <div class="titlepage">
                   <div>
                      <div>
@@ -75,7 +75,7 @@
                <p><span class="application">OmegaT</span> 项目含有在四个不同位置的翻译记忆文件，即扩展名为 tmx 的文件：
                </p>
                <div class="variablelist">
-                  <dl>
+                  <dl class="variablelist">
                      <dt><span class="term"><a class="indexterm" name="d0e6939"></a>omegat 文件夹</span></dt>
                      <dd>
                         <p>omegat 文件夹包含 <code class="filename">project_save.tmx</code> 文件，以及一些备份的 TMX 文件。<code class="filename">project_save.tmx</code> 文件包含了自项目开始以来所有被保存的片段。项目中总是存在此文件。其内容总是根据源片段的字母进行排序。
@@ -86,7 +86,7 @@
                         <p>项目主文件夹中包含 3 个 tmx 文件：<code class="filename">project_name-omegat.tmx</code>，<code class="filename">project_name-level1.tmx</code> 以及 <code class="filename">project_name-level2.tmx</code>（project_name 是项目的名称）。
                         </p>
                         <div class="itemizedlist">
-                           <ul class="itemizedlist" type="disc">
+                           <ul class="itemizedlist" style="list-style-type: disc; ">
                               <li class="listitem">
                                  <p>level1 文件仅包含文本信息。</p>
                               </li>
@@ -128,7 +128,7 @@
                <p><span class="bold"><strong>多个译员工作于相同项目：</strong></span>把源文件分成 source/Alice, source/Bob 等，同时把它们分配给项目成员 (Alice, Bob ...)。随后他们可创建自己的项目，当结束或到达阶段性目标时实现他们自己的 <code class="filename">project_save.tmx</code>。然后收集 <code class="filename">project_save.tmx</code>，并解决可能存在的用词冲突。 之后创建新的主 TM，或者放到项目成员的 <span class="emphasis"><em>tm/auto</em></span>子目录或替换他们的 <code class="filename">project_save.tmx</code> 文件。该团队还可以使用相同的子目录结构来保存目标文件。这样允许他们，例如在任何时刻进行检查整个项目的目标版本是否已经完成。
                </p>
             </div>
-            <div class="section" title="1.2.&nbsp;TMX 备份">
+            <div class="section">
                <div class="titlepage">
                   <div>
                      <div>
@@ -162,7 +162,7 @@
                   </ol>
                </div>
             </div>
-            <div class="section" title="1.3.&nbsp;tmx 文件和语种">
+            <div class="section">
                <div class="titlepage">
                   <div>
                      <div>
@@ -173,7 +173,7 @@
                <p>tmx 文件包含的翻译单元由一定数量不同语言的等同片段组成。一个翻译单元至少由两个翻译单元变体 (tuv) 组成。每个都可以当作源或者目标使用。</p>
                <p>项目的设置将指出哪个是源语言，哪个是目标语言。因此 OmegaT 与项目的源和目标语言代码对应的 tuv 片段，并把它们分别用作源和目标片段。OmegaT 使用下面两个标准约定来识别语言代码：</p>
                <div class="itemizedlist">
-                  <ul class="itemizedlist" type="disc">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
                      <li class="listitem">
                         <p>2 字母（例如对于 Japanese 为 JA），或者</p>
                      </li>
@@ -188,7 +188,7 @@
                </div>
                <p>如果项目语言代码和 TMX 语言代码完全匹配，片段将会导入内存中。如果语言匹配但国家不匹配，仍会导入片段。如果语言代码和国家代码都不符合，片段将被忽略。</p>
             </div>
-            <div class="section" title="1.4.&nbsp;孤立片段">
+            <div class="section">
                <div class="titlepage">
                   <div>
                      <div>
@@ -200,7 +200,7 @@
                </p>
             </div>
          </div>
-         <div class="section" title="2.&nbsp;重用翻译记忆">
+         <div class="section">
             <div class="titlepage">
                <div>
                   <div>
@@ -217,21 +217,21 @@
             <p>默认情况下，\tm 文件夹位于项目的根文件夹中（例如： ...<span class="emphasis"><em>\MyProject\tm)</em></span>，但如果您想的话也可以在项目属性对话框中选择不同的文件夹。如果您频繁使用过去创建的翻译记忆，这将非常有用，比方说因为您一直在同一领域或为同一客户服务。在此情况下，有益的过程可能包括如下步骤：
             </p>
             <div class="itemizedlist">
-               <ul class="itemizedlist" type="disc">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
                      <p>在硬盘上某个习惯的位置创建一个文件夹（“仓库文件夹”）以保存某个客户或者主题的翻译记忆。</p>
                   </li>
                </ul>
             </div>
             <div class="itemizedlist">
-               <ul class="itemizedlist" type="disc">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
                      <p>每当完成一个项目，将该三份“导出”翻译记忆从项目的根文件夹复制到仓库文件夹。</p>
                   </li>
                </ul>
             </div>
             <div class="itemizedlist">
-               <ul class="itemizedlist" type="disc">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
                      <p>当您为同一主题或者客户启动一个新项目时，在<span class="guimenuitem">项目 &gt; 属性 &gt; 编辑项目</span>对话框找到该仓库文件夹，将其选中为翻译记忆文件夹。
                      </p>
@@ -240,7 +240,7 @@
             </div>
             <p>注意在程序启动时，/tm 仓库中的所有 TMX 文件将会被解析，因此将手头所有的 TMX 文件导入将会不必要地减慢 OmegaT 的运行。每当翻译记忆文件的内容已经转到 <code class="filename">project-save.tmx </code>文件的时候，您可能要考虑移除那些不再需要的文件。
             </p>
-            <div class="section" title="2.1.&nbsp;导入和导出翻译记忆">
+            <div class="section">
                <div class="titlepage">
                   <div>
                      <div>
@@ -259,7 +259,7 @@
                </p>
             </div>
          </div>
-         <div class="section" title="3.&nbsp;伪翻译记忆">
+         <div class="section">
             <div class="titlepage">
                <div>
                   <div>
@@ -267,20 +267,20 @@
                   </div>
                </div>
             </div>
-            <div class="note" title="注意" style="margin-left: 0.5in; margin-right: 0.5in;">
+            <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;">
                <h3 class="title">注意</h3>
                <p>这些内容为感兴趣的高级用户准备的！</p>
             </div>
             <p>在翻译片段之前，您可能想以不同于 OmegaT 的其他方式预处理它们。例如，如果想创建伪翻译进行测试，OmegaT 能为您创建包含项目所有片段的附加 TMX 文件。该翻译记忆中的译文可以是：</p>
             <div class="itemizedlist">
-               <ul class="itemizedlist" type="disc">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
                      <p>和原文相同的译文（默认）</p>
                   </li>
                </ul>
             </div>
             <div class="itemizedlist">
-               <ul class="itemizedlist" type="disc">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
                      <p>译文片段为空</p>
                   </li>
@@ -292,7 +292,7 @@
             <p>把其中的 <code class="literal">&lt;filename&gt;</code> 替换为想创建的文件名，可以是绝对的也可以相对于工作目录（启动 <span class="application">OmegaT</span> 的目录）。第二个参数 <code class="literal">--pseudotranslatetype</code> 是可选的。它的值可以是 <code class="literal">equal</code>（默认值，此时 source=target）或 <code class="literal">empty</code>（目标片段为空）。可以使用任何工具处理生成的 tmx 文件。要在 <span class="application">OmegaT</span> 重用这个文件，请把它更名为 <span class="emphasis"><em>project_save.tmx </em></span> 并放置到项目的 <code class="literal">omegat</code> 文件夹。
             </p>
          </div>
-         <div class="section" title="4.&nbsp;更新翻译记忆">
+         <div class="section">
             <div class="titlepage">
                <div>
                   <div>

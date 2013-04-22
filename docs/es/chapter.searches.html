@@ -3,8 +3,8 @@
       <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
    
       <title>Capítulo 17. Búsquedas</title>
-      <link rel="stylesheet" href="OmegaT.css" type="text/css">
-      <meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+      <link rel="stylesheet" type="text/css" href="OmegaT.css">
+      <meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
       <link rel="home" href="index.html" title="OmegaT - Guía de usuario">
       <link rel="up" href="index.html" title="OmegaT - Guía de usuario">
       <link rel="prev" href="chapter.regexp.html" title="Capítulo 16. Expresiones regulares">
@@ -25,16 +25,16 @@
          </table>
          <hr>
       </div>
-      <div class="chapter" title="Capítulo 17. Búsquedas">
+      <div class="chapter">
          <div class="titlepage">
             <div>
                <div>
-                  <h2 class="title"><a name="chapter.searches"></a>Capítulo 17. Búsquedas<a class="indexterm" name="d0e7171"></a></h2>
+                  <h1 class="title"><a name="chapter.searches"></a>Capítulo 17. Búsquedas<a class="indexterm" name="d0e7171"></a></h1>
                </div>
             </div>
          </div>
          <div class="toc">
-            <dl>
+            <dl class="toc">
                <dt><span class="section"><a href="chapter.searches.html#search.window">1. Ventana de búsqueda</a></span></dt>
                <dd>
                   <dl>
@@ -47,7 +47,7 @@
                <dt><span class="section"><a href="chapter.searches.html#search.result.display">4. Mostrando resultados de búsqueda</a></span></dt>
             </dl>
          </div>
-         <div class="section" title="1. Ventana de búsqueda">
+         <div class="section">
             <div class="titlepage">
                <div>
                   <div>
@@ -58,13 +58,13 @@
             </div>
             <div class="figure"><a name="text.search.window"></a><p class="title"><b>Figura 17.1. Ventana de búsqueda de texto<a class="indexterm" name="d0e7180"></a></b></p>
                <div class="figure-contents">
-                  <div class="mediaobject"><img src="images/TextSearch.png" alt="Ventana de búsqueda de textoVentana de búsquedaEjemplo"></div>
+                  <div class="mediaobject"><img src="images/TextSearch.png" alt="Ventana de búsqueda de texto"></div>
                </div>
-            </div><br class="figure-break"><div class="note" title="Nota" style="margin-left: 0.5in; margin-right: 0.5in;">
+            </div><br class="figure-break"><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;">
                <h3 class="title">Nota</h3>
                <p>La búsqueda de arriba encuentra todos los segmentos destino en que ocurren dos o más espacios en blanco - \s\s+ -.</p>
             </div>
-            <div class="section" title="1.1. Búsqueda">
+            <div class="section">
                <div class="titlepage">
                   <div>
                      <div>
@@ -77,7 +77,7 @@
                   tiempo, pero ciérralas cuando ya no son necesarias para no saturar tu escritorio.
                </p>
             </div>
-            <div class="section" title="1.2. Ubicación de búsqueda">
+            <div class="section">
                <div class="titlepage">
                   <div>
                      <div>
@@ -90,21 +90,21 @@
                   búsqueda a sólo el texto fuente o destino. Puedes buscar en
                </p>
                <div class="itemizedlist">
-                  <ul class="itemizedlist" type="disc">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
                      <li class="listitem">
                         <p>El proyecto únicamente (configuración predeterminada)</p>
                      </li>
                   </ul>
                </div>
                <div class="itemizedlist">
-                  <ul class="itemizedlist" type="disc">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
                      <li class="listitem">
                         <p>Ambos el proyecto y las memorias de traducción de referencia en /tm/ (consulta <span class="emphasis"><em>Buscar en MT)</em></span></p>
                      </li>
                   </ul>
                </div>
                <div class="itemizedlist">
-                  <ul class="itemizedlist" type="disc">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
                      <li class="listitem">
                         <p>un único archivo o un directorio que contiene un conjunto de archivos (consulta <span class="emphasis"><em>Búsqueda en archivos)</em></span></p>
                      </li>
@@ -114,7 +114,7 @@
                </p>
             </div>
          </div>
-         <div class="section" title="2. Usando comodines">
+         <div class="section">
             <div class="titlepage">
                <div>
                   <div>
@@ -127,7 +127,7 @@
                regulares.
             </p>
             <div class="itemizedlist">
-               <ul class="itemizedlist" type="disc">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
                      <p>'*' Coincide con cero o más caracteres, desde la posición actual de una palabra dada hasta su fin. El término de búsqueda
                         <code class="literal">'corr*'</code> por ejemplo, correspondería con las palabras <code class="literal">"correr"</code>, <code class="literal">'corrector'</code> y <code class="literal">"corresponder"</code>.
@@ -136,7 +136,7 @@
                </ul>
             </div>
             <div class="itemizedlist">
-               <ul class="itemizedlist" type="disc">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
                      <p>'?' coincide con cualquier carácter. Por ejemplo, <code class="literal">'err?'</code> coincidiría con la palabra <code class="literal">'erre'</code> y <code class="literal">'erro'</code> en la palabra <code class="literal">"errónea".</code></p>
                   </li>
@@ -144,7 +144,7 @@
             </div>
             <p>Las coincidencias se muestran en negrita azul.</p>
          </div>
-         <div class="section" title="3. Métodos de búsqueda">
+         <div class="section">
             <div class="titlepage">
                <div>
                   <div>
@@ -154,7 +154,7 @@
             </div>
             <p>Selecciona el método a utilizar en los botones de radio. Puedes elegir entre dos métodos de búsqueda:</p>
             <div class="variablelist">
-               <dl>
+               <dl class="variablelist">
                   <dt><span class="term">Búsqueda exacta</span></dt>
                   <dd>
                      <p>busca segmentos que contienen la cadena exacta que hayas especificado. La búsqueda exacta busca una frase, es decir, si introduces
@@ -174,7 +174,7 @@
             </div>
             <p>Para cualquiera de estos dos métodos, puedes elegir las siguientes tres opciones:</p>
             <div class="itemizedlist">
-               <ul class="itemizedlist" type="disc">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
                      <p><span class="bold"><strong>sensible entre mayúsculas y minúsculas</strong></span>: La búsqueda se realizará para la cadena exacta especificada, es decir, observará las mayúsculas y minúsculas.
                      </p>
@@ -192,7 +192,7 @@
                </ul>
             </div>
          </div>
-         <div class="section" title="4. Mostrando resultados de búsqueda">
+         <div class="section">
             <div class="titlepage">
                <div>
                   <div>

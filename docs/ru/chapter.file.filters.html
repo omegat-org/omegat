@@ -3,8 +3,8 @@
       <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
    
       <title>Глава 7. Файловые фильтры</title>
-      <link rel="stylesheet" href="OmegaT.css" type="text/css">
-      <meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+      <link rel="stylesheet" type="text/css" href="OmegaT.css">
+      <meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
       <link rel="home" href="index.html" title="Руководство пользователя ОмегаТ">
       <link rel="up" href="index.html" title="Руководство пользователя ОмегаТ">
       <link rel="prev" href="chapter.project.properties.html" title="Глава 6. Свойства проекта">
@@ -25,17 +25,17 @@
          </table>
          <hr>
       </div>
-      <div class="chapter" title="Глава 7. Файловые фильтры">
+      <div class="chapter">
          <div class="titlepage">
             <div>
                <div>
-                  <h2 class="title"><a name="chapter.file.filters"></a>Глава 7. Файловые фильтры
-                  </h2>
+                  <h1 class="title"><a name="chapter.file.filters"></a>Глава 7. Файловые фильтры
+                  </h1>
                </div>
             </div>
          </div>
          <div class="toc">
-            <dl>
+            <dl class="toc">
                <dt><span class="section"><a href="chapter.file.filters.html#file.filters.dialog">1. Диалоговое окно «Файловые фильтры»</a></span></dt>
                <dt><span class="section"><a href="chapter.file.filters.html#filters.options">2. Параметры фильтров</a></span></dt>
                <dt><span class="section"><a href="chapter.file.filters.html#edit.filter.dialog">3. Диалоговое окно «Редактирование фильтра»</a></span></dt>
@@ -52,21 +52,21 @@
             фильтры&nbsp;— это маленькие подпрограммы, которые могут:
          </p>
          <div class="itemizedlist">
-            <ul class="itemizedlist" type="disc">
+            <ul class="itemizedlist" style="list-style-type: disc; ">
                <li class="listitem">
                   <p>Прочитать документ в каком-либо формате. Например, текстовые файлы.</p>
                </li>
             </ul>
          </div>
          <div class="itemizedlist">
-            <ul class="itemizedlist" type="disc">
+            <ul class="itemizedlist" style="list-style-type: disc; ">
                <li class="listitem">
                   <p>Выделить из файла текст, который нужно переводить.</p>
                </li>
             </ul>
          </div>
          <div class="itemizedlist">
-            <ul class="itemizedlist" type="disc">
+            <ul class="itemizedlist" style="list-style-type: disc; ">
                <li class="listitem">
                   <p>Автоматизировать изменение имён файлов переведённых документов посредством замены содержимого, подлежащего переводу, собственно
                      переводом.
@@ -79,17 +79,17 @@
             окно, выбрав в главном меню пункт <span class="bold"><strong>Опции → Файловые фильтры...</strong></span>. Вы также можете внести некоторые настройки файловых фильтров, которые будут использоваться только в текущем проекте, нажав
             кнопку <span class="bold"><strong>Файловые фильтры...</strong></span> в диалоговом окне «Свойства проекта».
          </p>
-         <p>В диалоговом окне <span class="bold"><strong>Проект → Свойства...</strong></span> можно включить использование в проекте специальных файловых фильтров. Нажмите кнопку <span class="guibutton">«Файловые фильтры»</span> и установите флажок <span class="guimenuitem">«Использовать настройки файловых фильтров только в этом проекте»</span><a class="indexterm" name="d0e4160"></a>. Теперь все настройки файловых фильтров будут храниться вместе с проектом. Если позднее вы внесёте изменения в настройки,
+         <p>В диалоговом окне <span class="bold"><strong>Проект → Свойства...</strong></span> можно включить использование в проекте специальных файловых фильтров. Нажмите кнопку <span class="guibutton">«Файловые фильтры»</span> и установите флажок <span class="guimenuitem">«Использовать настройки файловых фильтров только в этом проекте»</span><a class="indexterm" name="d0e4345"></a>. Теперь все настройки файловых фильтров будут храниться вместе с проектом. Если позднее вы внесёте изменения в настройки,
             то будут обновлены только фильтры данного проекта, настройки файловых фильтров пользователя останутся неизменными.
          </p>
          <p><span class="bold"><strong>Обратите внимание!</strong></span> Если вы изменяете настройки фильтров при открытом проекте, то, чтобы изменения вступили в силу, вам придётся перезагрузить
             его.
          </p>
-         <div class="section" title="1. Диалоговое окно «Файловые фильтры»">
+         <div class="section">
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="file.filters.dialog"></a>1. Диалоговое окно «Файловые фильтры»<a class="indexterm" name="d0e4173"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="file.filters.dialog"></a>1. Диалоговое окно «Файловые фильтры»<a class="indexterm" name="d0e4358"></a></h2>
                   </div>
                </div>
             </div>
@@ -98,20 +98,20 @@
                загрузке проектов и скопирует их нетронутыми в каталог с файлами перевода. Если позже вы снова захотите использовать этот
                фильтр, просто поставьте флажок обратно. Чтобы сбросить настройки фильтров к стандартным, нажмите кнопку <span class="bold"><strong>По умолчанию</strong></span> Чтобы настроить, какие файлы и в каких кодировках будет обрабатывать фильтр, выберите его из списка и нажмите кнопку <span class="bold"><strong>«Изменить».</strong></span></p>
          </div>
-         <div class="section" title="2. Параметры фильтров">
+         <div class="section">
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="filters.options"></a>2. Параметры фильтров<a class="indexterm" name="d0e4188"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="filters.options"></a>2. Параметры фильтров<a class="indexterm" name="d0e4373"></a></h2>
                   </div>
                </div>
             </div>
-            <p>У пяти фильтров (текстовые файлы, файлы XHTML, файлы HTML и XHTML, файлы OpenDocument/OpenOffice.org и файлы Microsoft Open
-               XML) есть свои настройки. Чтобы изменить их, выберите фильтр из списка и нажмите кнопку <span class="bold"><strong>Параметры</strong></span>. Доступны следующие настройки:
+            <p>У некоторых фильтров (текстовые файлы, файлы XHTML, файлы HTML и XHTML, файлы OpenDocument и файлы Microsoft Open XML) есть
+               свои настройки. Чтобы изменить их, выберите фильтр из списка и нажмите кнопку <span class="bold"><strong>Параметры</strong></span>. Доступны следующие настройки:
             </p>
             <p><span class="bold"><strong>Текстовые файлы</strong></span></p>
             <div class="itemizedlist">
-               <ul class="itemizedlist" type="disc">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
                      <p><span class="emphasis"><em>Сегментировать текст на абзацы по разрывам строк, пустым строкам или никогда:</em></span></p>
                      <p>если включена сегментация по предложениям, то далее текст будет сегментироваться согласно этим настройкам.</p>
@@ -120,7 +120,7 @@
             </div>
             <p><span class="bold"><strong>Файлы PO</strong></span></p>
             <div class="itemizedlist">
-               <ul class="itemizedlist" type="disc">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
                      <p><span class="emphasis"><em>Разрешить пустые переводы в переведённых файлах:</em></span></p>
                      <p>При установленном флажке, если сегмент (который может оказаться целым абзацем) в файле PO не переведён, в конечном файле перевод
@@ -130,17 +130,45 @@
                   </li>
                </ul>
             </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p><span class="emphasis"><em>Пропускать заголовок PO-файла</em></span></p>
+                     <p>Если флажок установлен, заголовок PO-файла будет пропущен без изменений.</p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p><span class="emphasis"><em>Автоматически заменять «nplurals=INTEGER; &amp;plural=EXPRESSION;» в заголовке</em></span></p>
+                     <p><span class="emphasis"><em><span class="emphasis"><em>Если флажок установлен, ОмегаТ будет заменять соответствующую строку в заголовке PO-файла на строку по умолчанию для языка
+                                    перевода.</em></span></em></span></p>
+                  </li>
+               </ul>
+            </div>
             <p><span class="bold"><strong>XHTML-файлы</strong></span></p>
             <div class="itemizedlist">
-               <ul class="itemizedlist" type="disc">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
-                     <p><span class="emphasis"><em>Переводить следующие атрибуты </em></span>— выбранные атрибуты будут показаны как сегменты в области редактирования.
+                     <p><span class="emphasis"><em>Добавлять или изменять объявление кодировки в HTML- и XHTML-файлах</em></span>: часто, кодировка переведённых файлов должна отличаться от кодировки исходных файлов (если это специально указано или подразумевается).
+                        С помощью этого параметра можно указать, следует ли включать в переведённые файлы объявление кодировки. Например, если в параметрах
+                        файлового фильтра для переведённых файлов указана кодировка UTF-8, а данный переключатель установлен в положение «Всегда»,
+                        в переведённых файлах эта кодировка будет специально объявлена.
                      </p>
                   </li>
                </ul>
             </div>
             <div class="itemizedlist">
-               <ul class="itemizedlist" type="disc">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p><span class="emphasis"><em>Переводить следующие атрибуты:</em></span> выбранные атрибуты будут показаны как сегменты в области редактирования.
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
                      <p><span class="emphasis"><em>Начинать новый абзац по: &lt;br&gt;</em></span> тег HTML будет использоваться для определения начала нового сегмента.
                      </p>
@@ -148,7 +176,7 @@
                </ul>
             </div>
             <div class="itemizedlist">
-               <ul class="itemizedlist" type="disc">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
                      <p><span class="emphasis"><em>Пропускать текст, соответствующий регулярному выражению:</em></span> текст, соответствующий регулярному выражению, будет пропущен фильтром. При проверке тегов этот текст будет выделяться красным
                         цветом. Часть исходного сегмента, соответствующая регулярному выражению, выделяется курсивом.
@@ -157,7 +185,7 @@
                </ul>
             </div>
             <div class="itemizedlist">
-               <ul class="itemizedlist" type="disc">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
                      <p><span class="emphasis"><em>Не переводить атрибут содержимого у мета-тегов...:</em></span> следующие мета-теги не будут переводиться.
                      </p>
@@ -165,7 +193,7 @@
                </ul>
             </div>
             <div class="itemizedlist">
-               <ul class="itemizedlist" type="disc">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
                      <p><span class="emphasis"><em>Не переводить содержимое тегов со следующими парами «ключ-значение» (разделённых запятыми)</em></span>: если пара «ключ-значение» находится в списке, содержимое тегов переводиться не будет.
                      </p>
@@ -177,7 +205,7 @@
             <p><span class="bold"><strong>Файлы Microsoft Office Open XML</strong></span></p>
             <p>Вы можете выбрать, переводить или нет следующие элементы. Они будут отображаться как отдельные сегменты.</p>
             <div class="itemizedlist">
-               <ul class="itemizedlist" type="disc">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
                      <p><span class="bold"><strong>Word:</strong></span> скрытый текст, комментарии, сноски, концевые сноски, колонтитулы
                      </p>
@@ -185,7 +213,7 @@
                </ul>
             </div>
             <div class="itemizedlist">
-               <ul class="itemizedlist" type="disc">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
                      <p><span class="bold"><strong>Excel: </strong></span>комментарии, названия листов
                      </p>
@@ -193,7 +221,7 @@
                </ul>
             </div>
             <div class="itemizedlist">
-               <ul class="itemizedlist" type="disc">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
                      <p><span class="bold"><strong>Power Point:</strong></span> комментарии, образцы слайдов, макеты слайдов
                      </p>
@@ -201,7 +229,7 @@
                </ul>
             </div>
             <div class="itemizedlist">
-               <ul class="itemizedlist" type="disc">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
                      <p><span class="bold"><strong>Global:</strong></span> графики, диаграммы, рисунки, объекты WordArt
                      </p>
@@ -209,11 +237,11 @@
                </ul>
             </div>
             <div class="itemizedlist">
-               <ul class="itemizedlist" type="disc">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
                      <p><span class="bold"><strong>Другие параметры:</strong></span></p>
                      <div class="itemizedlist">
-                        <ul class="itemizedlist" type="circle">
+                        <ul class="itemizedlist" style="list-style-type: circle; ">
                            <li class="listitem">
                               <p><span class="emphasis"><em>Объединять теги:</em></span> если флажок установлен, теги, между которыми нет переводимого текста, будут объединяться в один тег.
                               </p>
@@ -230,7 +258,7 @@
             </div>
             <p><span class="bold"><strong>HTML- и XHTML-файлы</strong></span></p>
             <div class="itemizedlist">
-               <ul class="itemizedlist" type="disc">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
                      <p><span class="emphasis"><em>Добавлять или изменять объявление кодировки в HTML- и XHTML-файлах:</em></span>: всегда (по умолчанию), только если (X)HTML-файле есть заголовок, только если в (X)HTML-файл есть объявление кодировки, никогда
                      </p>
@@ -238,7 +266,7 @@
                </ul>
             </div>
             <div class="itemizedlist">
-               <ul class="itemizedlist" type="disc">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
                      <p><span class="emphasis"><em>Переводить следующие атрибуты:</em></span> выбранные атрибуты будут показаны как сегменты в области редактирования.
                      </p>
@@ -246,7 +274,7 @@
                </ul>
             </div>
             <div class="itemizedlist">
-               <ul class="itemizedlist" type="disc">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
                      <p><span class="emphasis"><em>Начинать новый абзац по:</em></span> тег HTML &lt;br&gt; будет использоваться для определения начала нового сегмента.
                      </p>
@@ -254,7 +282,7 @@
                </ul>
             </div>
             <div class="itemizedlist">
-               <ul class="itemizedlist" type="disc">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
                      <p><span class="emphasis"><em>Пропускать текст, соответствующий регулярному выражению:</em></span> текст, соответствующий этому регулярному выражению, будет пропущен фильтром.
                      </p>
@@ -262,7 +290,7 @@
                </ul>
             </div>
             <div class="itemizedlist">
-               <ul class="itemizedlist" type="disc">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
                      <p><span class="emphasis"><em>Не переводить атрибут содержимого у мета-тегов...:</em></span> следующие мета-теги не будут переводиться.
                      </p>
@@ -270,7 +298,7 @@
                </ul>
             </div>
             <div class="itemizedlist">
-               <ul class="itemizedlist" type="disc">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
                      <p><span class="emphasis"><em>Не переводить содержимое тегов со следующими парами «ключ-значение» (разделённых запятыми)</em></span>: если пара «ключ-значение» находится в списке, содержимое тегов переводиться не будет.
                      </p>
@@ -279,16 +307,16 @@
             </div>
             <p><span class="bold"><strong>Текстовые файлы</strong></span></p>
             <div class="itemizedlist">
-               <ul class="itemizedlist" type="disc">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
                      <p><span class="emphasis"><em>Сегментировать текст на абзацы по разрывам строк, пустым строкам или никогда:</em></span></p>
                      <p>если включена сегментация по предложениям, то далее текст будет сегментироваться согласно этим настройкам.</p>
                   </li>
                </ul>
             </div>
-            <p><span class="bold"><strong>Файлы OpenDocument/OpenOffice.org</strong></span></p>
+            <p><span class="bold"><strong>Файлы Open Document Format (ODF)</strong></span></p>
             <div class="itemizedlist">
-               <ul class="itemizedlist" type="disc">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
                      <p>Вы можете выбрать, переводить или нет следующие элементы:</p>
                      <p>индексы, закладки, ссылки на закладки, примечания, комментарии, примечания к презентациям, ссылки (URL), названия листов</p>
@@ -296,11 +324,11 @@
                </ul>
             </div>
          </div>
-         <div class="section" title="3. Диалоговое окно «Редактирование фильтра»">
+         <div class="section">
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="edit.filter.dialog"></a>3. Диалоговое окно «Редактирование фильтра»<a class="indexterm" name="d0e4367"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="edit.filter.dialog"></a>3. Диалоговое окно «Редактирование фильтра»<a class="indexterm" name="d0e4574"></a></h2>
                   </div>
                </div>
             </div>
@@ -309,11 +337,11 @@
                отредактируйте непосредственно поля или нажмите кнопку <span class="bold"><strong>Изменить.</strong></span> Чтобы добавить новый шаблон, нажмите кнопку <span class="bold"><strong>Добавить</strong></span>. Для добавления и редактирования шаблона используется одно и то же окно. Оно полезно тем, что включает специальный редактор
                шаблонов имени переведённых файлов, который позволяет настроить имена выводимых файлов.
             </p>
-            <div class="section" title="3.1. Тип исходного файла, шаблон имени файла">
+            <div class="section">
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="source.filetype.and.filename.pattern"></a>3.1. <a class="indexterm" name="d0e4382"></a>Тип исходного файла, шаблон имени файла<a class="indexterm" name="d0e4388"></a></h3>
+                        <h3 class="title"><a name="source.filetype.and.filename.pattern"></a>3.1. <a class="indexterm" name="d0e4589"></a>Тип исходного файла, шаблон имени файла<a class="indexterm" name="d0e4595"></a></h3>
                      </div>
                   </div>
                </div>
@@ -324,7 +352,7 @@
                   символы соответствуют сами себе. Например, если вы хотите, чтобы текстовый фильтр обрабатывал файлы readme (<code class="literal">readme, read.me</code>, и <code class="literal">readme.txt</code>), вам нужно использовать шаблон <code class="literal">read*</code>.
                </p>
             </div>
-            <div class="section" title="3.2. Кодировки исходного и переведённого файлов">
+            <div class="section">
                <div class="titlepage">
                   <div>
                      <div>
@@ -332,21 +360,21 @@
                         </h3>
                      </div>
                   </div>
-               </div><a class="indexterm" name="d0e4416"></a><a class="indexterm" name="d0e4421"></a><a class="indexterm" name="d0e4426"></a><p>Лишь в немногих форматах файлов явно прописывается кодировка. Для форматов, в которых это не делается, будет использоваться
+               </div><a class="indexterm" name="d0e4623"></a><a class="indexterm" name="d0e4628"></a><a class="indexterm" name="d0e4633"></a><p>Лишь в немногих форматах файлов явно прописывается кодировка. Для форматов, в которых это не делается, будет использоваться
                   кодировка, установленная для файлов с этим расширением. Например, по умолчанию файлы с расширением <code class="literal">.txt</code> будут загружены в стандартной кодировке вашей операционной системы. Вы можете изменить кодировку для любого шаблона имени
                   исходного файла. Кроме того, такие файлы могут быть сохранены в любой кодировке. По умолчанию кодировка переведённого файла
                   остаётся той же, что и у исходного. Поля выбора кодировки оригинала и перевода содержат меню со списком всех поддерживаемых
                   кодировок. &lt;auto&gt; оставляет выбор кодировки за <span class="application">ОмегаТ</span>. Вот как это работает:
                </p>
                <div class="itemizedlist">
-                  <ul class="itemizedlist" type="disc">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
                      <li class="listitem">
                         <p>Если в файле присутствует прямое указание кодировки (HTML-файлы, XML-файлы), ОмегаТ использует её.</p>
                      </li>
                   </ul>
                </div>
                <div class="itemizedlist">
-                  <ul class="itemizedlist" type="disc">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
                      <li class="listitem">
                         <p>Для некоторых форматов ОмегаТ настроена на использование заранее заданных кодировок (например, для файлов Java properties
                            и т.&nbsp;д.).
@@ -355,28 +383,28 @@
                   </ul>
                </div>
                <div class="itemizedlist">
-                  <ul class="itemizedlist" type="disc">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
                      <li class="listitem">
                         <p>Для текстовых файлов ОмегаТ использует кодировку операционной системы по умолчанию.</p>
                      </li>
                   </ul>
                </div>
             </div>
-            <div class="section" title="3.3. Имя переведённого файла">
+            <div class="section">
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="target.name"></a>3.3. Имя переведённого файла<a class="indexterm" name="d0e4454"></a></h3>
+                        <h3 class="title"><a name="target.name"></a>3.3. Имя переведённого файла<a class="indexterm" name="d0e4661"></a></h3>
                      </div>
                   </div>
                </div>
                <p>Иногда нужно автоматически переименовывать переведённые файлы, например, добавлять после имени файла код языка. Шаблоны имён
                   переведённых файлов используют особый синтаксис, поэтому если вам нужно редактировать это поле, вам придётся нажать на кнопку
-                  <span class="bold"><strong>Изменить...</strong></span> и использовать <a class="indexterm" name="d0e4464"></a>диалоговое окно редактирования шаблона. Если нужно вернуться к изначальной конфигурации фильтра, нажмите кнопку <span class="bold"><strong>По умолчанию.</strong></span> Также изменять имя можно и напрямую, дважды щёлкнув в поле шаблона имени файла перевода в диалогом окне файловых фильтров.
+                  <span class="bold"><strong>Изменить...</strong></span> и использовать <a class="indexterm" name="d0e4671"></a>диалоговое окно редактирования шаблона. Если нужно вернуться к изначальной конфигурации фильтра, нажмите кнопку <span class="bold"><strong>По умолчанию.</strong></span> Также изменять имя можно и напрямую, дважды щёлкнув в поле шаблона имени файла перевода в диалогом окне файловых фильтров.
                   Диалог редактирования шаблонов предлагает следующие настройки:
                </p>
                <div class="itemizedlist">
-                  <ul class="itemizedlist" type="disc">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
                      <li class="listitem">
                         <p>По умолчанию установлен шаблон <code class="literal">${filename}</code>&nbsp;— полное имя исходного файла с расширением, то есть имя переведённого файла совпадает с именем исходного файла.
                         </p>
@@ -384,7 +412,7 @@
                   </ul>
                </div>
                <div class="itemizedlist">
-                  <ul class="itemizedlist" type="disc">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
                      <li class="listitem">
                         <p><code class="literal">${nameOnly}</code>&nbsp;— позволяет вставить только имя исходного файла без расширения.
                         </p>
@@ -396,7 +424,7 @@
                   </ul>
                </div>
                <div class="itemizedlist">
-                  <ul class="itemizedlist" type="disc">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
                      <li class="listitem">
                         <p><code class="literal">${targetLocale}</code>&nbsp;— код локали перевода (в формате «xx_YY»).
                         </p>
@@ -404,7 +432,7 @@
                   </ul>
                </div>
                <div class="itemizedlist">
-                  <ul class="itemizedlist" type="disc">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
                      <li class="listitem">
                         <p><code class="literal">${targetLanguage}</code>&nbsp;— коды языка перевода и страны вместе (в форме «XX-YY»).
                         </p>
@@ -412,7 +440,7 @@
                   </ul>
                </div>
                <div class="itemizedlist">
-                  <ul class="itemizedlist" type="disc">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
                      <li class="listitem">
                         <p><code class="literal">${targetLanguageCode}</code>&nbsp;— код языка перевода («XX»).
                         </p>
@@ -420,59 +448,71 @@
                   </ul>
                </div>
                <div class="itemizedlist">
-                  <ul class="itemizedlist" type="disc">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
                      <li class="listitem">
                         <p><code class="literal">${targetCountryCode}</code>&nbsp;— код страны («YY»).
                         </p>
                      </li>
                      <li class="listitem">
-                        <p><code class="literal">$(timestamp-????)</code>&nbsp;— различные шаблоны представления системного времени на момент создания переведённых файлов.
+                        <p><code class="literal">${timestamp-????}</code>&nbsp;— различные шаблоны представления системного времени на момент создания переведённых файлов.
                         </p>
                         <p>Примеры шаблонов «SimpleDateFormat» можно найти в <a class="ulink" href="http://docs.oracle.com/javase/1.4.2/docs/api/java/text/SimpleDateFormat.html" target="_top">документации Oracle</a>.
                         </p>
                      </li>
                      <li class="listitem">
-                        <p>${system-os-name}&nbsp;— установленная на компьютере переводчика операционная система</p>
+                        <p><code class="literal">${system-os-name}</code>&nbsp;— установленная на компьютере переводчика операционная система
+                        </p>
                      </li>
                      <li class="listitem">
-                        <p>${system-user-name)&nbsp;— имя пользователя в операционной системе</p>
+                        <p><code class="literal">${system-user-name}</code>&nbsp;— имя пользователя в операционной системе
+                        </p>
                      </li>
                      <li class="listitem">
-                        <p>${system-host-name}&nbsp;— название машины (hostname)</p>
+                        <p><code class="literal">${system-host-name}</code>&nbsp;— название машины (hostname)
+                        </p>
                      </li>
                      <li class="listitem">
-                        <p>${file-source-encoding}&nbsp;— кодировка исходного файла</p>
+                        <p><code class="literal">${file-source-encoding}</code>&nbsp;— кодировка исходного файла
+                        </p>
                      </li>
                      <li class="listitem">
-                        <p>${file-target-encoding}&nbsp;— кодировка переведённого файла</p>
+                        <p><code class="literal">${file-target-encoding}</code>&nbsp;— кодировка переведённого файла
+                        </p>
                      </li>
                      <li class="listitem">
-                        <p>${targetLocaleLCID)&nbsp;— локаль переведённого файла Microsoft</p>
+                        <p><code class="literal">${targetLocaleLCID}</code>&nbsp;— локаль переведённого файла Microsoft
+                        </p>
                      </li>
                   </ul>
                </div>
                <p>Для шаблонов ${nameOnly} и ${Extension} доступны различные варианты. Если имя файла состоит из нескольких разделённых точками
-                  элементов, можно использовать шаблоны вида <code class="literal">$(name only</code><span class="emphasis"><em>-число расширений</em></span>) and <code class="literal">${extension</code>-<span class="emphasis"><em>число расширений} </em></span>. Например, если исходный документ назывался «Document.xx.docx», с помощью шаблонов можно получить следующие результаты:
+                  элементов, можно использовать шаблоны вида <code class="literal">${name only</code><span class="emphasis"><em>-порядковый номер расширения</em></span>} and <code class="literal">${extension</code>-<span class="emphasis"><em>порядковый номер расширения} </em></span>. Например, если исходный документ назывался «Document.xx.docx», с помощью шаблонов можно получить следующие результаты:
                </p>
                <div class="itemizedlist">
-                  <ul class="itemizedlist" type="disc">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
                      <li class="listitem">
-                        <p>${nameOnly-0} Document</p>
+                        <p><code class="literal">${nameOnly-0}</code> Document
+                        </p>
                      </li>
                      <li class="listitem">
-                        <p>${nameOnly-1} Document.xx</p>
+                        <p><code class="literal">${nameOnly-1}</code> Document.xx
+                        </p>
                      </li>
                      <li class="listitem">
-                        <p>${nameOnly-2} Document.xx.docx</p>
+                        <p><code class="literal">${nameOnly-2}</code> Document.xx.docx
+                        </p>
                      </li>
                      <li class="listitem">
-                        <p>${extension-0} docx</p>
+                        <p><code class="literal">${extension-0}</code> docx
+                        </p>
                      </li>
                      <li class="listitem">
-                        <p>${extension-1} xx.docx</p>
+                        <p><code class="literal">${extension-1}</code> xx.docx
+                        </p>
                      </li>
                      <li class="listitem">
-                        <p>${extension-2} Document.xx.docx</p>
+                        <p><code class="literal">${extension-2}</code> Document.xx.docx
+                        </p>
                      </li>
                   </ul>
                </div>

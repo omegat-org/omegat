@@ -3,8 +3,8 @@
       <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
    
       <title>第&nbsp;19&nbsp;章&nbsp;词汇表</title>
-      <link rel="stylesheet" href="OmegaT.css" type="text/css">
-      <meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+      <link rel="stylesheet" type="text/css" href="OmegaT.css">
+      <meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
       <link rel="home" href="index.html" title="OmegaT - 用户向导">
       <link rel="up" href="index.html" title="OmegaT - 用户向导">
       <link rel="prev" href="chapter.dictionaries.html" title="第&nbsp;18&nbsp;章&nbsp;词典">
@@ -25,16 +25,16 @@
          </table>
          <hr>
       </div>
-      <div class="chapter" title="第&nbsp;19&nbsp;章&nbsp;词汇表">
+      <div class="chapter">
          <div class="titlepage">
             <div>
                <div>
-                  <h2 class="title"><a name="chapter.glossaries"></a>第&nbsp;19&nbsp;章&nbsp;词汇表<a class="indexterm" name="d0e8447"></a><a class="indexterm" name="d0e8452"></a></h2>
+                  <h1 class="title"><a name="chapter.glossaries"></a>第&nbsp;19&nbsp;章&nbsp;词汇表<a class="indexterm" name="d0e8447"></a><a class="indexterm" name="d0e8452"></a></h1>
                </div>
             </div>
          </div>
          <div class="toc">
-            <dl>
+            <dl class="toc">
                <dt><span class="section"><a href="chapter.glossaries.html#d0e8465">1. 用法</a></span></dt>
                <dt><span class="section"><a href="chapter.glossaries.html#d0e8513">2. 文件格式</a></span></dt>
                <dt><span class="section"><a href="chapter.glossaries.html#d0e8558">3. 如何创建词汇表</a></span></dt>
@@ -46,7 +46,7 @@
          </p>
          <p>如果某个 <span class="application">OmegaT</span> 项目包含一个或多个词汇表文件，当前片段中出现的任何术语将自动显示在词汇表查看器中。
          </p>
-         <div class="section" title="1.&nbsp;用法">
+         <div class="section">
             <div class="titlepage">
                <div>
                   <div>
@@ -64,13 +64,13 @@
             <p>源术语可以不是一个单词，例如：</p>
             <div class="figure"><a name="d0e8500"></a><p class="title"><b>图&nbsp;19.2.&nbsp;词汇表中的多单词条目——示例<a class="indexterm" name="d0e8503"></a></b></p>
                <div class="figure-contents">
-                  <div class="mediaobject"><img src="images/MultiTerm_Glossary.png" alt="词汇表中的多单词条目——示例Glossary pane——多单词条目"></div>
+                  <div class="mediaobject"><img src="images/MultiTerm_Glossary.png" alt="词汇表中的多单词条目——示例"></div>
                </div>
             </div><br class="figure-break"><p>加下划线的项 "new preview screenshot" 由三个单词组成，在词汇表窗格中可以看到翻译为 "nov predogled posnetka zaslona"。注意，还能识别多术语项中的部分（比如上面例子中的 "preview"，也显示了它的翻译
                "predogled"），但优先级较低。
             </p>
          </div>
-         <div class="section" title="2.&nbsp;文件格式">
+         <div class="section">
             <div class="titlepage">
                <div>
                   <div>
@@ -87,7 +87,7 @@
             <p>除了纯文本，还支持 TBX 格式<a class="indexterm" name="d0e8537"></a>。TBX（Term Base eXchange）是用于交换结构化术语数据的开放的基于 XML 标准，已经被 LISA<a class="indexterm" name="d0e8543"></a> 和 ISO 批准为国际标准。如果您已经有术语管理系统（例如 MultiTerm），那么它很可能提供了导出 TBX 格式术语数据的功能。<a class="ulink" href="http://www.microsoft.com/Language/en-US/Terminology.aspx" target="_top">微软术语集</a> <a class="indexterm" name="d0e8552"></a>可以下载将近 100 种语言的术语，它可以作为 IT 词汇表的基础。
             </p>
          </div>
-         <div class="section" title="3.&nbsp;如何创建词汇表">
+         <div class="section">
             <div class="titlepage">
                <div>
                   <div>
@@ -107,7 +107,7 @@
             <p>请勿使用 OpenOffice.org 的 "列" 功能创建术语表的列：仅需在原文－目标语言术语对之间使用一个 TAB 间隔。</p>
             <p>在完成词条的录入后，把文件保存为 Unicode 编码，例如：</p>
             <div class="itemizedlist">
-               <ul class="itemizedlist" type="disc">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
                      <p>选择<code class="literal">File &gt;另存为</code></p>
                   </li>
@@ -118,7 +118,7 @@
                </ul>
             </div>
             <div class="itemizedlist">
-               <ul class="itemizedlist" type="disc">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
                      <p>在“过滤器中”选择“<span class="emphasis"><em>Text Encoded (.txt.)</em></span>”
                      </p>
@@ -142,21 +142,21 @@
             </p>
             <p>词汇表文件的内容会存放到内存中，在打开或重新载入项目时加载它们。因此更新词汇表文件非常简单：</p>
             <div class="itemizedlist">
-               <ul class="itemizedlist" type="disc">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
                      <p>让文件在您喜欢的编辑器中保持打开状态</p>
                   </li>
                </ul>
             </div>
             <div class="itemizedlist">
-               <ul class="itemizedlist" type="disc">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
                      <p>当遇到想要添加到词汇表中的新术语时，输入新的术语及其翻译和注释（确保在字段间使用了 TAB）并保存文件。因此词汇表窗格的内容将会被更新。</p>
                   </li>
                </ul>
             </div>
          </div>
-         <div class="section" title="4.&nbsp;使用 Multiterm">
+         <div class="section">
             <div class="titlepage">
                <div>
                   <div>
@@ -169,7 +169,7 @@
             </p>
             <p>如果使用 "Tab-delimited export" 系统选项导出，您必须删除头 5 列（包括编号, 创建日期等等）。新版本的 MultiTerm 支持导出为 TBX 格式。</p>
          </div>
-         <div class="section" title="5.&nbsp;常见词汇表问题">
+         <div class="section">
             <div class="titlepage">
                <div>
                   <div>
@@ -180,56 +180,56 @@
             </div>
             <p><span class="bold"><strong>问题：未显示词汇表术语——可能的解决方法：</strong></span></p>
             <div class="itemizedlist">
-               <ul class="itemizedlist" type="disc">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
                      <p>"glossary" 目录中没有找到词汇表文件。</p>
                   </li>
                </ul>
             </div>
             <div class="itemizedlist">
-               <ul class="itemizedlist" type="disc">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
                      <p>词汇表文件为空。</p>
                   </li>
                </ul>
             </div>
             <div class="itemizedlist">
-               <ul class="itemizedlist" type="disc">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
                      <p>词条的各项间未使用 TAB 字符分隔。</p>
                   </li>
                </ul>
             </div>
             <div class="itemizedlist">
-               <ul class="itemizedlist" type="disc">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
                      <p>术语表文件未使用正确的扩展名（.tab 或 .utf8）。</p>
                   </li>
                </ul>
             </div>
             <div class="itemizedlist">
-               <ul class="itemizedlist" type="disc">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
                      <p>词汇表词条和文档中的原文未完全匹配－－例如该词条是复数形式。</p>
                   </li>
                </ul>
             </div>
             <div class="itemizedlist">
-               <ul class="itemizedlist" type="disc">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
                      <p>词汇表文件没有采用正确的编码。</p>
                   </li>
                </ul>
             </div>
             <div class="itemizedlist">
-               <ul class="itemizedlist" type="disc">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
                      <p>当前片段中没有任何术语与词汇表中的术语相匹配。</p>
                   </li>
                </ul>
             </div>
             <div class="itemizedlist">
-               <ul class="itemizedlist" type="disc">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
                      <p>上述一个或多个问题已经被修正，但项目还没有被重新载入。</p>
                   </li>
@@ -237,7 +237,7 @@
             </div>
             <p><span class="bold"><strong>问题：在词汇表窗格中某些字符显示不正确。</strong></span></p>
             <div class="itemizedlist">
-               <ul class="itemizedlist" type="disc">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
                      <p>……但在编辑窗格中能正确显示这些字符：扩展名与文件编码方式不匹配。</p>
                   </li>

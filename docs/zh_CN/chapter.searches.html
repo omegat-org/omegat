@@ -3,8 +3,8 @@
       <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
    
       <title>第&nbsp;17&nbsp;章&nbsp;搜索</title>
-      <link rel="stylesheet" href="OmegaT.css" type="text/css">
-      <meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+      <link rel="stylesheet" type="text/css" href="OmegaT.css">
+      <meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
       <link rel="home" href="index.html" title="OmegaT - 用户向导">
       <link rel="up" href="index.html" title="OmegaT - 用户向导">
       <link rel="prev" href="chapter.regexp.html" title="第&nbsp;16&nbsp;章&nbsp;正则表达式">
@@ -25,16 +25,16 @@
          </table>
          <hr>
       </div>
-      <div class="chapter" title="第&nbsp;17&nbsp;章&nbsp;搜索">
+      <div class="chapter">
          <div class="titlepage">
             <div>
                <div>
-                  <h2 class="title"><a name="chapter.searches"></a>第&nbsp;17&nbsp;章&nbsp;搜索<a class="indexterm" name="d0e8075"></a></h2>
+                  <h1 class="title"><a name="chapter.searches"></a>第&nbsp;17&nbsp;章&nbsp;搜索<a class="indexterm" name="d0e8075"></a></h1>
                </div>
             </div>
          </div>
          <div class="toc">
-            <dl>
+            <dl class="toc">
                <dt><span class="section"><a href="chapter.searches.html#search.window">1. 搜索窗口</a></span></dt>
                <dd>
                   <dl>
@@ -47,7 +47,7 @@
                <dt><span class="section"><a href="chapter.searches.html#search.result.display">4. 搜索结果展示</a></span></dt>
             </dl>
          </div>
-         <div class="section" title="1.&nbsp;搜索窗口">
+         <div class="section">
             <div class="titlepage">
                <div>
                   <div>
@@ -58,13 +58,13 @@
             </div>
             <div class="figure"><a name="text.search.window"></a><p class="title"><b>图&nbsp;17.1.&nbsp;文本搜索窗口<a class="indexterm" name="d0e8084"></a></b></p>
                <div class="figure-contents">
-                  <div class="mediaobject"><img src="images/TextSearch.png" alt="文本搜索窗口搜索窗口示例"></div>
+                  <div class="mediaobject"><img src="images/TextSearch.png" alt="文本搜索窗口"></div>
                </div>
-            </div><br class="figure-break"><div class="note" title="注意" style="margin-left: 0.5in; margin-right: 0.5in;">
+            </div><br class="figure-break"><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;">
                <h3 class="title">注意</h3>
                <p>上面的搜索查找所有含有两个或更多空格（即包含 \s\s+）的目标片段。</p>
             </div>
-            <div class="section" title="1.1.&nbsp;搜索">
+            <div class="section">
                <div class="titlepage">
                   <div>
                      <div>
@@ -75,7 +75,7 @@
                <p><span class="application">OmegaT</span> 提供了强大的搜索功能。使用 <span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>F</strong></span> 调出搜索窗口，在查找文本框输入要搜索的单词或短语。此外，还可以在编辑区域（当前片段的目标文本）选择一个单词或短语，然后按 <span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>F</strong></span>键。在该情况下，单词或者短语将会自动输入到查找文本框中。您可以同时打开多个搜索窗口，但别忘记在不需要时关闭它们，这样它们才不会弄乱您的桌面。
                </p>
             </div>
-            <div class="section" title="1.2.&nbsp;搜索位置">
+            <div class="section">
                <div class="titlepage">
                   <div>
                      <div>
@@ -86,14 +86,14 @@
                </div>
                <p>默认情况下同时对项目的源和目标部分进行搜索，不过可以限制只在源或目标文本中进行。您可以在下列位置进行搜索</p>
                <div class="itemizedlist">
-                  <ul class="itemizedlist" type="disc">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
                      <li class="listitem">
                         <p>仅项目（缺省设置）</p>
                      </li>
                   </ul>
                </div>
                <div class="itemizedlist">
-                  <ul class="itemizedlist" type="disc">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
                      <li class="listitem">
                         <p>在项目和 /tm/ 中的参考翻译记忆（选中<span class="emphasis"><em>搜索翻译记忆</em></span>）
                         </p>
@@ -101,7 +101,7 @@
                   </ul>
                </div>
                <div class="itemizedlist">
-                  <ul class="itemizedlist" type="disc">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
                      <li class="listitem">
                         <p>单独的文件或包含一系列文件的文件夹（选中<span class="emphasis"><em>搜索文件</em></span>）
                         </p>
@@ -112,7 +112,7 @@
                </p>
             </div>
          </div>
-         <div class="section" title="2.&nbsp;使用通配符">
+         <div class="section">
             <div class="titlepage">
                <div>
                   <div>
@@ -122,7 +122,7 @@
             </div>
             <p>无论是精确还是关键词搜索，都可以使用通配符 '*' 和 '?'。要使用通配符，不能选中正则表达式选项，因为 '*' 和 '?' 在正则表达式中具有特殊含义。</p>
             <div class="itemizedlist">
-               <ul class="itemizedlist" type="disc">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
                      <p>'*' 匹配零个或多个字符，从指定单词的当前位置开始到它结束的部分。例如搜索条件 <code class="literal">'run*'</code> 将会匹配单词 <code class="literal">'run'</code>、<code class="literal">'runs'</code> 和 <code class="literal">'running'</code>。
                      </p>
@@ -130,7 +130,7 @@
                </ul>
             </div>
             <div class="itemizedlist">
-               <ul class="itemizedlist" type="disc">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
                      <p>'?' 匹配任何单个字符。例如，<code class="literal">'run?' </code>会匹配单词  <code class="literal">'runs'</code> 和 <code class="literal">'running'</code> 单词中的 <code class="literal">'runn'</code>。
                      </p>
@@ -139,7 +139,7 @@
             </div>
             <p>匹配将显示为蓝色粗体。</p>
          </div>
-         <div class="section" title="3.&nbsp;搜索方法">
+         <div class="section">
             <div class="titlepage">
                <div>
                   <div>
@@ -149,7 +149,7 @@
             </div>
             <p>使用单选按钮选择搜索方法。您可以在两个方法之中选择其一：</p>
             <div class="variablelist">
-               <dl>
+               <dl class="variablelist">
                   <dt><span class="term">精确搜索</span></dt>
                   <dd>
                      <p>找出包括指定字符串的片段。精确搜索查找某条短语，也就是说，如果输入了多个词汇，只有它们以相同顺序出现时才会被找出来。搜索 <code class="literal">open file</code> 将找到所有 <span class="emphasis"><em><code class="literal">open file</code></em></span> 字符串出现的地方，但不会找到 <span class="emphasis"><em><code class="literal">file opened</code></em></span> 或 <span class="emphasis"><em><code class="literal">open input file</code></em></span>.
@@ -165,7 +165,7 @@
             </div>
             <p>对于以上两种方法，均可以在下列三个选项中选择：</p>
             <div class="itemizedlist">
-               <ul class="itemizedlist" type="disc">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
                      <p><span class="bold"><strong>区分大小写</strong></span>：搜索工作将会严格匹配指定字符串，即遵循大小写状态。
                      </p>
@@ -181,7 +181,7 @@
                </ul>
             </div>
          </div>
-         <div class="section" title="4.&nbsp;搜索结果展示">
+         <div class="section">
             <div class="titlepage">
                <div>
                   <div>

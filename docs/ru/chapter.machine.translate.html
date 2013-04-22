@@ -3,8 +3,8 @@
       <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
    
       <title>Глава 19. Машинный перевод</title>
-      <link rel="stylesheet" href="OmegaT.css" type="text/css">
-      <meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+      <link rel="stylesheet" type="text/css" href="OmegaT.css">
+      <meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
       <link rel="home" href="index.html" title="Руководство пользователя ОмегаТ">
       <link rel="up" href="index.html" title="Руководство пользователя ОмегаТ">
       <link rel="prev" href="chapter.glossaries.html" title="Глава 18. Глоссарии">
@@ -25,29 +25,29 @@
          </table>
          <hr>
       </div>
-      <div class="chapter" title="Глава 19. Машинный перевод">
+      <div class="chapter">
          <div class="titlepage">
             <div>
                <div>
-                  <h2 class="title"><a name="chapter.machine.translate"></a>Глава 19. Машинный перевод<a class="indexterm" name="d0e7840"></a></h2>
+                  <h1 class="title"><a name="chapter.machine.translate"></a>Глава 19. Машинный перевод<a class="indexterm" name="d0e8193"></a></h1>
                </div>
             </div>
          </div>
          <div class="toc">
-            <dl>
-               <dt><span class="section"><a href="chapter.machine.translate.html#d0e7843">1. Введение</a></span></dt>
+            <dl class="toc">
+               <dt><span class="section"><a href="chapter.machine.translate.html#d0e8196">1. Введение</a></span></dt>
                <dt><span class="section"><a href="chapter.machine.translate.html#introduction">2. Google Translate</a></span></dt>
-               <dt><span class="section"><a href="chapter.machine.translate.html#d0e7884">3. Пользователи <span class="application">ОмегаТ</span> и Google Translate</a></span></dt>
-               <dt><span class="section"><a href="chapter.machine.translate.html#d0e7937">4. Belazar</a></span></dt>
-               <dt><span class="section"><a href="chapter.machine.translate.html#d0e7949">5. Apertium</a></span></dt>
+               <dt><span class="section"><a href="chapter.machine.translate.html#d0e8237">3. Пользователи <span class="application">ОмегаТ</span> и Google Translate</a></span></dt>
+               <dt><span class="section"><a href="chapter.machine.translate.html#d0e8290">4. Belazar</a></span></dt>
+               <dt><span class="section"><a href="chapter.machine.translate.html#d0e8302">5. Apertium</a></span></dt>
                <dt><span class="section"><a href="chapter.machine.translate.html#Google.Translate.troubleshooting">6. Машинный перевод - решение проблем</a></span></dt>
             </dl>
          </div>
-         <div class="section" title="1. Введение">
+         <div class="section">
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="d0e7843"></a>1. Введение<a class="indexterm" name="d0e7846"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="d0e8196"></a>1. Введение<a class="indexterm" name="d0e8199"></a></h2>
                   </div>
                </div>
             </div>
@@ -59,11 +59,11 @@
                к Интернету.
             </p>
          </div>
-         <div class="section" title="2. Google Translate">
+         <div class="section">
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="introduction"></a>2. Google Translate<a class="indexterm" name="d0e7864"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="introduction"></a>2. Google Translate<a class="indexterm" name="d0e8217"></a></h2>
                   </div>
                </div>
             </div>
@@ -72,7 +72,7 @@
                конечно, все основные мировые языки. Стоимость услуги зависит от объёма переводимых текстов, на момент написания документации,
                20 долларов США за миллион символов.<span class="bold"><strong></strong></span></p>
             <p><span class="bold"><strong>Внимание: </strong></span>прежде чем начать использовать сервис Google Translate, в вашей учётной записи необходимо указать номер счёта (для получения
-               более подробной информации, посетите страницу <a class="ulink" href="http://code.google.com/intl/en-US/apis/language/translate/v2/pricing.html" target="_top">Pricing and Terms of Service</a>). Чтобы идентифицировать себя как пользователя сервисов Google, надо воспользоваться уникальным персональным ключом, выданным
+               более подробной информации, посетите страницу <a class="ulink" href="https://developers.google.com/translate/v2/pricing?hl=en-US" target="_top">Pricing and Terms of Service</a>). Чтобы идентифицировать себя как пользователя сервисов Google, надо воспользоваться уникальным персональным ключом, выданным
                вам Google при регистрации. Подробную информацию о том, как передать ключ ОмегаТ, можно найти в разделе <a class="link" href="chapter.installing.and.running.html" title="Глава 3. Установка и запуск ОмегаТ">Установка и запуск</a>, подраздел «Аргументы команды запуска».
             </p>
             <p>Конечно, качество перевода зависит, с одной стороны, от набора текстов на языке перевода и доступности их двуязычных версий,
@@ -80,11 +80,11 @@
                со временем оно будет только улучшаться.
             </p>
          </div>
-         <div class="section" title="3. Пользователи ОмегаТ и Google Translate">
+         <div class="section">
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="d0e7884"></a>3. Пользователи <span class="application">ОмегаТ</span> и Google Translate
+                     <h2 class="title" style="clear: both"><a name="d0e8237"></a>3. Пользователи <span class="application">ОмегаТ</span> и Google Translate
                      </h2>
                   </div>
                </div>
@@ -103,7 +103,7 @@
                другим человеком.
             </p>
             <p>После того, как вы подключили сервис, при каждом переходе к новому сегменту в области машинного перевода будут появляться
-               соответствующие подсказки/варианты перевода. Если предложенный перевод кажется вам удачным, нажмите <span class="keycap"><strong><a class="indexterm" name="d0e7915"></a>CTRL</strong></span>+<span class="keycap"><strong>M</strong></span>, и он будет вставлен в поле редактирования перевода текущего сегмента. Например, в сегменте, приведённом на иллюстрации выше,
+               соответствующие подсказки/варианты перевода. Если предложенный перевод кажется вам удачным, нажмите <span class="keycap"><strong><a class="indexterm" name="d0e8268"></a>CTRL</strong></span>+<span class="keycap"><strong>M</strong></span>, и он будет вставлен в поле редактирования перевода текущего сегмента. Например, в сегменте, приведённом на иллюстрации выше,
                при нажатии <span class="keycap"><strong>CTRL</strong></span>+<span class="keycap"><strong>M</strong></span> испанский перевод будет заменён на словенский.
             </p>
             <p>Если вы не хотите, чтобы <span class="application">ОмегаТ</span> отсылала в Google переводимые вами сегменты, в меню «Параметры» снимите флажок «Google Translate».
@@ -112,22 +112,22 @@
                править перевод и отсылать в Google скорректированный вариант. Однако в ОмегаТ подобная возможность не реализована.
             </p>
          </div>
-         <div class="section" title="4. Belazar">
+         <div class="section">
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="d0e7937"></a>4. Belazar<a class="indexterm" name="d0e7940"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="d0e8290"></a>4. Belazar<a class="indexterm" name="d0e8293"></a></h2>
                   </div>
                </div>
             </div>
-            <p><a class="ulink" href="http://belsoft.tut.by/belazar/" target="_top">Belazar</a>&nbsp;— система машинного перевода для языковой пары русский-белорусский.
+            <p><a class="ulink" href="http://belazar.info/" target="_top">Belazar</a>&nbsp;— система машинного перевода для языковой пары русский-белорусский.
             </p>
          </div>
-         <div class="section" title="5. Apertium">
+         <div class="section">
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="d0e7949"></a>5. Apertium<a class="indexterm" name="d0e7952"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="d0e8302"></a>5. Apertium<a class="indexterm" name="d0e8305"></a></h2>
                   </div>
                </div>
             </div>
@@ -138,7 +138,7 @@
             </p>
             <p>Платформа предоставляет следующее:</p>
             <div class="itemizedlist">
-               <ul class="itemizedlist" type="disc">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
                      <p>ядро системы машинного перевода, независящей от языковой пары;</p>
                   </li>
@@ -148,7 +148,7 @@
                </ul>
             </div>
             <div class="itemizedlist">
-               <ul class="itemizedlist" type="disc">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
                      <p>лингвистические данные для всё расширяющегося списка языковых пар.</p>
                   </li>
@@ -163,24 +163,24 @@
                обработки ядром.
             </p>
          </div>
-         <div class="section" title="6. Машинный перевод - решение проблем">
+         <div class="section">
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="Google.Translate.troubleshooting"></a>6. Машинный перевод - решение проблем<a class="indexterm" name="d0e7981"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="Google.Translate.troubleshooting"></a>6. Машинный перевод - решение проблем<a class="indexterm" name="d0e8334"></a></h2>
                   </div>
                </div>
             </div>
             <p>Если в области машинного перевода не показывается ничего, проверьте:</p>
             <div class="itemizedlist">
-               <ul class="itemizedlist" type="disc">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
                      <p>Подключены ли вы к Интернету? Чтобы использовать Google Translate, необходимо подключение к Интернету.</p>
                   </li>
                </ul>
             </div>
             <div class="itemizedlist">
-               <ul class="itemizedlist" type="disc">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
                      <p>С какого и на какой язык осуществляется перевод? Убедитесь, что сервис машинного перевода поддерживает эту языковую пару.</p>
                   </li>

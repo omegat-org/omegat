@@ -3,8 +3,8 @@
       <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
    
       <title>第&nbsp;3&nbsp;章&nbsp;安装和运行 OmegaT</title>
-      <link rel="stylesheet" href="OmegaT.css" type="text/css">
-      <meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+      <link rel="stylesheet" type="text/css" href="OmegaT.css">
+      <meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
       <link rel="home" href="index.html" title="OmegaT - 用户向导">
       <link rel="up" href="index.html" title="OmegaT - 用户向导">
       <link rel="prev" href="chapter.instant.start.guide.html" title="第&nbsp;2&nbsp;章&nbsp;快速入门指南">
@@ -25,16 +25,16 @@
          </table>
          <hr>
       </div>
-      <div class="chapter" title="第&nbsp;3&nbsp;章&nbsp;安装和运行 OmegaT">
+      <div class="chapter">
          <div class="titlepage">
             <div>
                <div>
-                  <h2 class="title"><a name="chapter.installing.and.running"></a>第&nbsp;3&nbsp;章&nbsp;安装和运行 <span class="application">OmegaT</span></h2>
+                  <h1 class="title"><a name="chapter.installing.and.running"></a>第&nbsp;3&nbsp;章&nbsp;安装和运行 <span class="application">OmegaT</span></h1>
                </div>
             </div>
          </div>
          <div class="toc">
-            <dl>
+            <dl class="toc">
                <dt><span class="section"><a href="chapter.installing.and.running.html#d0e793">1. Windows 用户</a></span></dt>
                <dd>
                   <dl>
@@ -85,7 +85,7 @@
                <dt><span class="section"><a href="chapter.installing.and.running.html#building.OmegaT.from.source">7. 从源代码编译 <span class="application">OmegaT</span></a></span></dt>
             </dl>
          </div>
-         <div class="section" title="1.&nbsp;Windows 用户">
+         <div class="section">
             <div class="titlepage">
                <div>
                   <div>
@@ -93,7 +93,7 @@
                   </div>
                </div>
             </div>
-            <div class="section" title="1.1.&nbsp;下载安装包">
+            <div class="section">
                <div class="titlepage">
                   <div>
                      <div>
@@ -104,7 +104,7 @@
                </div>
                <p>安装了与 Oracle 的 Java 1.5 JRE 兼容的 Java 实现了吗？</p>
                <div class="itemizedlist">
-                  <ul class="itemizedlist" type="disc">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
                      <li class="listitem">
                         <p><span class="bold"><strong>是：</strong></span>下载 <span class="emphasis"><em>OmegaT_2.5.x_Windows_without_JRE.exe</em></span>。
                         </p>
@@ -116,7 +116,7 @@
                   </ul>
                </div>
             </div>
-            <div class="section" title="1.2.&nbsp;安装 OmegaT">
+            <div class="section">
                <div class="titlepage">
                   <div>
                      <div>
@@ -127,7 +127,7 @@
                <p>要安装 <span class="application">OmegaT</span>，仅需双击下载的程序并按照指示操作。
                </p>
             </div>
-            <div class="section" title="1.3.&nbsp;向启动菜单或桌面添加 OmegaT">
+            <div class="section">
                <div class="titlepage">
                   <div>
                      <div>
@@ -140,7 +140,7 @@
                <p>在完成安装之后您仍然可以创建快捷方式，只需将 <span class="emphasis"><em><span class="application">OmegaT</span>.exe</em></span> 拖动到桌面或开始菜单，以将其连接到该处。
                </p>
             </div>
-            <div class="section" title="1.4.&nbsp;运行 OmegaT">
+            <div class="section">
                <div class="titlepage">
                   <div>
                      <div>
@@ -156,7 +156,7 @@
                   <p><code class="code">#&nbsp;OmegaT.exe&nbsp;运行时配置&nbsp;#&nbsp;要使用某参数，仅需删除&nbsp;'-'&nbsp;前面的&nbsp;'#'&nbsp;#&nbsp;Memory&nbsp;-Xmx1024M&nbsp;#&nbsp;Language&nbsp;-Duser.language=FR&nbsp;#&nbsp;Country&nbsp;-Duser.country=CA</code></p>
                </div>
             </div>
-            <div class="section" title="1.5.&nbsp;升级 OmegaT">
+            <div class="section">
                <div class="titlepage">
                   <div>
                      <div>
@@ -167,7 +167,7 @@
                <p><span class="emphasis"><em>这里的内容只适用于通过“传统”方式安装的 OmegaT 的 Windows 版本。它不适用于 Web Start 版本（它会自动更新），也不适用在 Windows 上安装的跨平台版本。</em></span></p>
                <p>如果您已经在电脑上安装了某个版本的 OmegaT 且希望升级到最新的版本，有两种方法：</p>
                <div class="itemizedlist">
-                  <ul class="itemizedlist" type="disc">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
                      <li class="listitem">
                         <p><span class="bold"><strong>使用覆盖方式进行安装。</strong></span>要实现这个操作，只需将新版本安装到现有安装所在的目录。旧版本的 OmegaT 会被覆盖，不过将保留所有的设置。其中包括 OmegaT 中的首选项设置，对 <code class="filename"> OmegaT.l4J.ini</code> 文件进行的所有更改以及您使用的启动脚本（.bat 文件）。
                         </p>
@@ -176,12 +176,12 @@
                </div>
                <p>使用这种方法您可以下载“不含 JRE 的 Windows” 版本，因为新的安装程序可以使用原来的 JRE。</p>
                <div class="itemizedlist">
-                  <ul class="itemizedlist" type="disc">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
                      <li class="listitem">
                         <p><span class="bold"><strong>安装到新文件夹。</strong></span>这样您可以同时使用两个版本，直到您适应新版本的时候。使用这种方法您也可以使用在 OmegaT 中更改的首选项和设置。不过此时：
                         </p>
                         <div class="itemizedlist">
-                           <ul class="itemizedlist" type="circle">
+                           <ul class="itemizedlist" style="list-style-type: circle; ">
                               <li class="listitem">
                                  <p>如果您对 <code class="filename"> OmegaT.l4J.ini </code> 进行了修改或使用 .bat 文件，那么必须把它们复制过去。
                                  </p>
@@ -189,7 +189,7 @@
                            </ul>
                         </div>
                         <div class="itemizedlist">
-                           <ul class="itemizedlist" type="circle">
+                           <ul class="itemizedlist" style="list-style-type: circle; ">
                               <li class="listitem">
                                  <p>如果您已安装的程序是“带 JRE 的 Windows”版本，那么新的安装程序也必须是“带 JRE 的 Windows”版本。</p>
                               </li>
@@ -200,7 +200,7 @@
                </div>
             </div>
          </div>
-         <div class="section" title="2.&nbsp;Linux (Intel) 用户">
+         <div class="section">
             <div class="titlepage">
                <div>
                   <div>
@@ -208,7 +208,7 @@
                   </div>
                </div>
             </div>
-            <div class="section" title="2.1.&nbsp;下载正确的安装包">
+            <div class="section">
                <div class="titlepage">
                   <div>
                      <div>
@@ -219,7 +219,7 @@
                </div>
                <p>安装了与 Oracle 的 Java 1.5 JRE 兼容的 Java 实现了吗？</p>
                <div class="itemizedlist">
-                  <ul class="itemizedlist" type="disc">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
                      <li class="listitem">
                         <p><span class="bold"><strong>是：</strong></span>下载 <span class="emphasis"><em>OmegaT_2.5.x_Without_JRE.zip</em></span>。
                         </p>
@@ -231,7 +231,7 @@
                   </ul>
                </div>
             </div>
-            <div class="section" title="2.2.&nbsp;安装 OmegaT">
+            <div class="section">
                <div class="titlepage">
                   <div>
                      <div>
@@ -243,7 +243,7 @@
                </p>
                <p><span class="emphasis"><em>$ tar xf downloaded_file.tar.gz</em></span></p>
             </div>
-            <div class="section" title="2.3.&nbsp;向菜单（KDE）或面板（Gnome）中增加 OmegaT">
+            <div class="section">
                <div class="titlepage">
                   <div>
                      <div>
@@ -251,7 +251,7 @@
                      </div>
                   </div>
                </div>
-               <div class="section" title="2.3.1.&nbsp;KDE 4 用户">
+               <div class="section">
                   <div class="titlepage">
                      <div>
                         <div>
@@ -262,7 +262,7 @@
                   <p>可按下列步骤添加 <span class="application">OmegaT</span> 到菜单中：
                   </p>
                   <div class="itemizedlist">
-                     <ul class="itemizedlist" type="disc">
+                     <ul class="itemizedlist" style="list-style-type: disc; ">
                         <li class="listitem">
                            <p>按下<span class="bold"><strong> <span class="keysym">Alt+F2</span> </strong></span> 以显示 KRunner。输入 <span class="emphasis"><em>kmenuedit+enter</em></span> 命令并运行。出现 KMenuEditor。在 KMenuEditor 选择<span class="emphasis"><em>文件-&gt;新项目。</em></span></p>
                         </li>
@@ -288,7 +288,7 @@
                      </ul>
                   </div>
                </div>
-               <div class="section" title="2.3.2.&nbsp;GNOME 用户">
+               <div class="section">
                   <div class="titlepage">
                      <div>
                         <div>
@@ -299,7 +299,7 @@
                   <p>可按下列步骤添加 <span class="application">OmegaT</span> 到菜单中：
                   </p>
                   <div class="itemizedlist">
-                     <ul class="itemizedlist" type="disc">
+                     <ul class="itemizedlist" style="list-style-type: disc; ">
                         <li class="listitem">
                            <p>在面板上单击鼠标右键——<span class="emphasis"><em>添加新启动器［Add New Launcher］。</em></span></p>
                         </li>
@@ -315,7 +315,7 @@
                   </div>
                </div>
             </div>
-            <div class="section" title="2.4.&nbsp;运行 OmegaT">
+            <div class="section">
                <div class="titlepage">
                   <div>
                      <div>
@@ -327,7 +327,7 @@
                </p>
             </div>
          </div>
-         <div class="section" title="3.&nbsp;Mac OS X 用户">
+         <div class="section">
             <div class="titlepage">
                <div>
                   <div>
@@ -335,7 +335,7 @@
                   </div>
                </div>
             </div>
-            <div class="section" title="3.1.&nbsp;下载安装包">
+            <div class="section">
                <div class="titlepage">
                   <div>
                      <div>
@@ -348,7 +348,7 @@
                </p>
                <p>下载 <span class="emphasis"><em>OmegaT_2.5.x_Mac.zip.</em></span></p>
             </div>
-            <div class="section" title="3.2.&nbsp;安装 OmegaT">
+            <div class="section">
                <div class="titlepage">
                   <div>
                      <div>
@@ -359,7 +359,7 @@
                <p>双击 <span class="emphasis"><em>OmegaT_2.5.x_Mac.zip</em></span> 解压缩。该操作会创建一个名为<span class="emphasis"><em> <span class="application">OmegaT</span> </em></span> 的文件夹。此文件夹中包含两个文件：index.html 和 <span class="emphasis"><em><span class="application">OmegaT</span>.app.</em></span> 将文件夹复制到合适的文件夹（如：Applications)。完成上述操作后，即可删除 <span class="emphasis"><em>OmegaT_2.5.x_Mac.zip</em></span> 文件。
                </p>
             </div>
-            <div class="section" title="3.3.&nbsp;添加 OmegaT 到 Dock">
+            <div class="section">
                <div class="titlepage">
                   <div>
                      <div>
@@ -370,7 +370,7 @@
                <p>拖放 <span class="emphasis"><em><span class="application">OmegaT</span>.app</em></span> 到 Dock 中。
                </p>
             </div>
-            <div class="section" title="3.4.&nbsp;运行 OmegaT">
+            <div class="section">
                <div class="titlepage">
                   <div>
                      <div>
@@ -390,7 +390,7 @@
                <p><span class="emphasis"><em><span class="application"> </span></em></span>请使用在 <span class="emphasis"><em><span class="application">OmegaT</span>.app/Contents/Resources/Java/</em></span> 中的 <span class="emphasis"><em><span class="application">OmegaT</span>.jar</em></span> 文件来从命令行启动 <span class="application">OmegaT</span>。查阅下文中的 "命令行启动 " 了解更多信息。
                </p>
             </div>
-            <div class="section" title="3.5.&nbsp;Mac OS X 优势">
+            <div class="section">
                <div class="titlepage">
                   <div>
                      <div>
@@ -403,7 +403,7 @@
                </p>
             </div>
          </div>
-         <div class="section" title="4.&nbsp;其它系统">
+         <div class="section">
             <div class="titlepage">
                <div>
                   <div>
@@ -412,7 +412,7 @@
                </div>
             </div>
             <p>这里的信息适用于诸如 Solaris SPARC/x86/x64、Linux x64/PowerPC、Windows x64 的系统</p>
-            <div class="section" title="4.1.&nbsp;下载正确的安装包">
+            <div class="section">
                <div class="titlepage">
                   <div>
                      <div>
@@ -426,7 +426,7 @@
                </p>
                <p>安装了与 Oracle 的 Java 1.5 JRE 兼容的 Java 实现了吗？</p>
                <div class="itemizedlist">
-                  <ul class="itemizedlist" type="disc">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
                      <li class="listitem">
                         <p><span class="bold"><strong>是：</strong></span>下载 <span class="emphasis"><em>OmegaT_2.5.x_Windows_without_JRE.</em></span>zip。该安装包可用在任何安装了 Java 1.5 JRE 兼容 JRE 的平台上。
                         </p>
@@ -447,7 +447,7 @@
                   </ul>
                </div>
             </div>
-            <div class="section" title="4.2.&nbsp;安装 OmegaT">
+            <div class="section">
                <div class="titlepage">
                   <div>
                      <div>
@@ -458,7 +458,7 @@
                <p>要安装 <span class="application">OmegaT</span>，仅需解压 <span class="bold"><strong>OmegaT_2.5.x_Without_JRE.zip</strong></span> 文件。该操作会在工作目录中创建 <span class="emphasis"><em>./OmegaT_2.5.x_Without_JRE/</em></span> 目录，该目录包含运行 <span class="application">OmegaT</span> 需要的所有文件。
                </p>
             </div>
-            <div class="section" title="4.3.&nbsp;安装便捷的快捷方式">
+            <div class="section">
                <div class="titlepage">
                   <div>
                      <div>
@@ -470,7 +470,7 @@
                <p>按照系统的提示在方便的地方安装 <span class="application">OmegaT</span> 快捷方式。
                </p>
             </div>
-            <div class="section" title="4.4.&nbsp;运行 OmegaT">
+            <div class="section">
                <div class="titlepage">
                   <div>
                      <div>
@@ -482,7 +482,7 @@
                </p>
             </div>
          </div>
-         <div class="section" title="5.&nbsp;使用 Java Web Start">
+         <div class="section">
             <div class="titlepage">
                <div>
                   <div>
@@ -500,7 +500,7 @@
             </p>
             <p>请注意，如果您需要某个启动命令参数（见上文），就不得不使用正常安装。</p>
          </div>
-         <div class="section" title="6.&nbsp;从命令行启动 OmegaT">
+         <div class="section">
             <div class="titlepage">
                <div>
                   <div>
@@ -510,7 +510,7 @@
             </div>
             <p>正常情况下，没有必要从命令行启动 <span class="application">OmegaT</span>。不过，从命令行启动的方法允许用户控制和修改程序的行为。在命令行有两种启动 <span class="application">OmegaT</span> 的方法：
             </p>
-            <div class="section" title="6.1.&nbsp;打开命令行窗口">
+            <div class="section">
                <div class="titlepage">
                   <div>
                      <div>
@@ -546,7 +546,7 @@
                <p>上面的方法对于经常性启动一个程序来说是不切实际的。为此，上述两条命令被包含在一份文件（一份脚本、在 Windows 上也叫做一份 “.bat 文件”）。</p>
                <p>执行该文件时，将自动执行其中的命令。因此，要修改启动命令，修改该文件即足以。</p>
             </div>
-            <div class="section" title="6.2.&nbsp;启动命令参数">
+            <div class="section">
                <div class="titlepage">
                   <div>
                      <div>
@@ -559,7 +559,7 @@
                <p>下面给出了可用参数的清单：Advanced users can obtain more information on the arguments by typing <span class="emphasis"><em>man java</em></span> in the terminal window.
                </p>
                <div class="itemizedlist">
-                  <ul class="itemizedlist" type="disc">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
                      <li class="listitem">
                         <p><span class="bold"><strong>用户界面语言</strong></span></p>
                         <p><span class="bold"><strong>-Duser.language=XX</strong></span><a class="indexterm" name="d0e1623"></a> 正常情况下，也就是 <span class="application">OmegaT</span> 不带任何参数启动的情况下，程序将首先检测用户操作系统所使用的语言。如果存在所用语言的界面， <span class="application">OmegaT</span> 将会使用它。因此，如果用户的操作系统为俄语版，而 <span class="application">OmageT</span> 有俄语版的本地化版本，<span class="application">OmegaT</span> 将显示为俄语用户界面、俄语菜单等等。如果用户系统的语言不存在，<span class="application">OmegaT</span> 将默认使用英语。这是标准行为。
@@ -572,7 +572,7 @@
                   </ul>
                </div>
                <div class="itemizedlist">
-                  <ul class="itemizedlist" type="disc">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
                      <li class="listitem">
                         <p><span class="bold"><strong>用户国家设置</strong></span></p>
                         <p><span class="bold"><strong>-Duser.country=XX</strong></span><a class="indexterm" name="d0e1670"></a> 语言之后，您也可以指定国家，例如对于中文情况下的 CN 或 TW 。要使用期望的语言显示即时入门指南，您必须同时指定语言和国家。甚至在只要一种可用组合的情况下，这也是必须的，比如 Portuguese / Brazil 情况下的  pt_BR
@@ -582,7 +582,7 @@
                   </ul>
                </div>
                <div class="itemizedlist">
-                  <ul class="itemizedlist" type="disc">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
                      <li class="listitem">
                         <p><span class="bold"><strong>字体抗锯齿</strong></span> - (仅 Java 1.5)
                         </p>
@@ -620,7 +620,7 @@
                               -Dhttp.proxyport<span class="bold"><strong>=</strong></span>3128 -jar
                               -OmegaT</span>.jar</code></p>
             </div>
-            <div class="section" title="6.3.&nbsp;以命令行模式运行 OmegaT">
+            <div class="section">
                <div class="titlepage">
                   <div>
                      <div>
@@ -629,7 +629,7 @@
                   </div>
                </div>
                <p>控制台模式的目的是将 OmegaT 用作脚本环境的翻译工具。在控制台模式下，将不会载入任何图形化界面（因此仅在某控制台中运行），同时会自动按要求翻译指定的项目。</p>
-               <div class="section" title="6.3.1.&nbsp;先决条件">
+               <div class="section">
                   <div class="titlepage">
                      <div>
                         <div>
@@ -642,7 +642,7 @@
                   </p>
                   <p>如果需要变更设置，必须提供配置文件。可通过两种方式达到这个目的：</p>
                   <div class="itemizedlist">
-                     <ul class="itemizedlist" type="disc">
+                     <ul class="itemizedlist" style="list-style-type: disc; ">
                         <li class="listitem">
                            <p>正常运行 <span class="application">OmegaT</span> （带图形用户界面）并进行设置。如果以控制台模式启动 <span class="application">OmegaT</span>，它将使用相同的设置。
                            </p>
@@ -654,7 +654,7 @@
                      </ul>
                   </div>
                </div>
-               <div class="section" title="6.3.2.&nbsp;以控制台模式启动">
+               <div class="section">
                   <div class="titlepage">
                      <div>
                         <div>
@@ -674,7 +674,7 @@
                   <p>请注意所有的参数都以两个 - 字符开始。</p>
                   <p><span class="bold"><strong>说明：</strong></span></p>
                   <div class="itemizedlist">
-                     <ul class="itemizedlist" type="disc">
+                     <ul class="itemizedlist" style="list-style-type: disc; ">
                         <li class="listitem">
                            <p><code class="literal">&lt;project-dir&gt;</code> 告知 <span class="application">OmegaT</span> 要翻译项目的位置。如果给出了该参数，则 <span class="application">OmegaT</span> 以控制台模式启动并翻译指定的项目。
                            </p>
@@ -682,7 +682,7 @@
                      </ul>
                   </div>
                   <div class="itemizedlist">
-                     <ul class="itemizedlist" type="disc">
+                     <ul class="itemizedlist" style="list-style-type: disc; ">
                         <li class="listitem">
                            <p><code class="literal">--config-dir=&lt;config-dir&gt;</code> 告知 <span class="application">OmegaT</span> 配置文件所在的目录。如果没有给出该参数，<span class="application">OmegaT</span> 将转而使用缺省值（即用户主目录中的 <span class="application">OmegaT</span> 目录，如果不可用的话则是当前的工作目录）。请注意两个 - 字符
                            </p>
@@ -690,12 +690,12 @@
                      </ul>
                   </div>
                   <div class="itemizedlist">
-                     <ul class="itemizedlist" type="disc">
+                     <ul class="itemizedlist" style="list-style-type: disc; ">
                         <li class="listitem">
                            <p><span class="emphasis"><em><code class="literal">--mode</code>=...-</em></span> <span class="application">OmegaT</span> 以控制台模式启动，接着执行下列的某个服务
                            </p>
                            <div class="itemizedlist">
-                              <ul class="itemizedlist" type="circle">
+                              <ul class="itemizedlist" style="list-style-type: circle; ">
                                  <li class="listitem">
                                     <p><span class="emphasis"><em><span class="emphasis"><em><code class="literal">--mode=console-translate</code></em></span></em></span></p>
                                     <p>在该模式中，OmegaT 将尝试使用可用的翻译记忆来翻译 /soruce/ 中的文件。这可用于在含有 TMX 文件的服务器上运行 OmegaT 来自动翻译项目。</p>
@@ -724,7 +724,7 @@
                            <p><code class="literal">--source-pattern={regexp} </code></p>
                            <p>如果使用了模式，则该选项将指定要自动翻译的文件。如果未使用该选项，则处理所有文件。这里是一些限制源文件匹配的实际例子：</p>
                            <div class="itemizedlist">
-                              <ul class="itemizedlist" type="circle">
+                              <ul class="itemizedlist" style="list-style-type: circle; ">
                                  <li class="listitem">
                                     <p><span class="emphasis"><em><code class="literal">.*\.html</code></em></span></p>
                                     <p>此时将翻译所有的 HTML 文件，需要注意到 *.html 在正则表达式中指定时需要进行转义 (\.)。</p>
@@ -743,7 +743,7 @@
                      </ul>
                   </div>
                </div>
-               <div class="section" title="6.3.3.&nbsp;静默选项">
+               <div class="section">
                   <div class="titlepage">
                      <div>
                         <div>
@@ -756,7 +756,7 @@
                   </p>
                   <p>用法：<code class="literal">java -jar <span class="application">OmegaT</span>.jar /path/to/project --mode=console-translate --quiet</code></p>
                </div>
-               <div class="section" title="6.3.4.&nbsp;标记验证选项">
+               <div class="section">
                   <div class="titlepage">
                      <div>
                         <div>
@@ -771,7 +771,7 @@
                </div>
             </div>
          </div>
-         <div class="section" title="7.&nbsp;从源代码编译 OmegaT">
+         <div class="section">
             <div class="titlepage">
                <div>
                   <div>

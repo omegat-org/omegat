@@ -5,16 +5,16 @@
     <title>Руководство пользователя ОмегаТ</title>
 
     <authorinitials>vs</authorinitials>
-        <author><firstname>Vito</firstname>
-<surname>Smolej</surname>
+
+    <author>
+      <firstname>Vito Smolej</firstname>
     </author>
 
-    <pubdate><?dbtimestamp?></pubdate>
+    <pubdate/>
 
     <abstract>
       <para>Этот документ — официальное руководство пользователя ОмегаТ, свободной системы автоматизированного перевода. Также в этом документе содержатся инструкции по установке.</para>
     </abstract>
-
   </bookinfo>
 
   <xi:include href="AboutOmegaT.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
@@ -39,7 +39,7 @@
 
   <xi:include href="PlainText.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
 
- <xi:include href="FormattedText.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+  <xi:include href="FormattedText.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
 
   <xi:include href="TranslationMemories.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
 
@@ -58,19 +58,21 @@
   <xi:include href="Spellchecker.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
 
   <xi:include href="Miscelanea.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
-  
-  <xi:include href="App_Tokenizer_plugin.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
-  
-  <xi:include href="App_LanguageTool_plugin.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
-  
-  <xi:include href="App_Scripting_plugin.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
-
-  <xi:include href="App_Website.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
 
   <xi:include href="App_Languages.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
 
   <xi:include href="App_Keyboard.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
-  
+
+  <xi:include href="App_TeamProjects.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+
+  <xi:include href="App_Tokenizer_plugin.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+
+  <xi:include href="App_LanguageTool_plugin.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+
+  <xi:include href="App_Scripting_plugin.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+
+  <xi:include href="App_Website.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+
   <xi:include href="App_ShortCutCustomization.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
 
   <xi:include href="App_LegalNotices.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>

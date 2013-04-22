@@ -52,15 +52,15 @@
 
     <para>Названия алгоритмов для различных языков приведены в файле «Readme.txt», распространяемом в архиве, вместе с самим модулем. Например, если вы хотите использовать алгоритм Lucene CJK для исходного текста и Lucene French для переведённого текста, команда запуска должна выглядеть примерно так:</para>
 
-    <para><literal>java -jar OmegaT.jar --ITokenizer=org.omegat.plugins.
-    tokenizer.LuceneCJKTokenizer --ITokenizerTarget=org.omegat.plugins.
-    tokenizer.LuceneFrenchTokenizer</literal></para>
+    <para><literal>java -jar OmegaT.jar
+    --ITokenizer=org.omegat.plugins.tokenizer.LuceneCJKTokenizer
+    --ITokenizerTarget=org.omegat.plugins.tokenizer.LuceneFrenchTokenizer</literal></para>
   </section>
 
   <section>
-    <title>Особенности использования в Mac OS X</title>
+    <title>Особенности использования в Mac OS X</title>
 
-    <para>Если вы хотите использовать модуль морфологического поиска в ОмегаТ, запущенной на Mac OS X, следуйте приведённым выше инструкциям (чтобы узнать расположение OmegaT.jar, щёлкните правой кнопкой мыши по OmegaT.app), с той лишь разницей, что названия алгоритмов следует указывать в файле <filename>info.plist</filename>, который содержит опции запуска Java. Откройте <filename>info.plist</filename> и отредактируйте его нужным образом. Вот как этот файл должен выглядеть для примера выше:</para>
+    <para>Если вы хотите использовать модуль морфологического поиска в ОмегаТ, запущенной на Mac OS X, следуйте приведённым выше инструкциям (чтобы узнать расположение OmegaT.jar, щёлкните правой кнопкой мыши по OmegaT.app), с той лишь разницей, что названия алгоритмов следует указывать в файле <filename>info.plist</filename>, который содержит опции запуска Java. Откройте <filename>info.plist</filename> и отредактируйте его нужным образом. Вот как этот файл должен выглядеть для примера выше:</para>
 
     <literallayout><code>
 &lt;key&gt;VMOptions&lt;/key&gt;
@@ -69,8 +69,7 @@
 &lt;key&gt;Arguments&lt;/key&gt;
 &lt;array&gt;
   &lt;string&gt;--ITokenizer=org.omegat.plugins.tokenizer.LuceneCJKTokenizer&lt;/string&gt;
-  &lt;string&gt;--ITokenizerTarget=org.omegat.plugins.tokenizer.
-  LuceneFrenchTokenizer&lt;/string&gt;
+  &lt;string&gt;--ITokenizerTarget=org.omegat.plugins.tokenizer.LuceneFrenchTokenizer&lt;/string&gt;
 &lt;/array&gt;</code></literallayout>
   </section>
 
@@ -91,6 +90,6 @@
 12719: Info: Target tokenizer: org.omegat.core.matching.Tokenizer 
 </code></literallayout>
 
-    <para>Для запуска ОмегаТ из командной строки в Mac OS X, дважды щёлкните мышью по файлу <literal>JavaApplicationStub</literal>, расположенному в «/OmegaT.app/Contents/MacOS/».</para>
+    <para>Для запуска ОмегаТ из командной строки в Mac OS X, дважды щёлкните мышью по файлу <literal>JavaApplicationStub</literal>, расположенному в «/OmegaT.app/Contents/MacOS/».</para>
   </section>
 </appendix>

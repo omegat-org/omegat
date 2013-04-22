@@ -39,12 +39,15 @@
 
       <mediaobject>
         <imageobject role="html">
-          <imagedata fileref="images/Omegatproject.png"/>
+		          <imagedata fileref="images/Omegatproject.png"/>
+       </imageobject>
+      <imageobject role="fo">
+          <imagedata fileref="images/Omegatproject.png" width="60%"/>
         </imageobject>
       </mediaobject>
-    </figure>
+	  </figure>
 
-    <para>При создании проекта, и в дальнейшем, в процессе перевода, для некоторых из этих подкаталогов можно задать другое расположение. Таким образом, возможно выбрать уже существующие каталоги или создать их там, где вы посчитаете нужным, в соответствии с вашим рабочим процессом. Чтобы изменить расположение каталогов после создания проекта, выберите пункт меню <guimenuitem>«Проект → Свойства...»</guimenuitem>, или нажмите сочетание клавиш <guibutton>CTRL+E</guibutton>, и внесите необходимые изменения.</para>
+    <para>При создании проекта, и в дальнейшем, в процессе перевода, для некоторых из этих подкаталогов можно задать другое расположение. Таким образом, возможно выбрать уже существующие каталоги или создать их там, где вы посчитаете нужным, в соответствии с вашим рабочим процессом. Чтобы изменить расположение каталогов после создания проекта, выберите пункт меню <guimenuitem>«Проект → Свойства...»</guimenuitem>, или нажмите клавиши <guibutton>CTRL+E</guibutton>, и внесите необходимые изменения.</para>
 
     <para>В файловом менеджере проект перевода выглядит так же, как и любая другая папка. На иллюстрации ниже в папке <filename>my projects</filename> находятся три проекта ОмегаТ:</para>
 
@@ -150,7 +153,7 @@
   </section>
 
   <section id="user.files">
-    <title id="user.files.location">Файлы пользовательских настроек<indexterm class="singular">
+    <title>Файлы пользовательских настроек<indexterm class="singular">
         <primary>Файлы проекта</primary> <secondary>Файлы пользовательских настроек</secondary>
       </indexterm></title>
 
@@ -232,7 +235,7 @@
           </row>
 
           <row>
-            <entry>Mac OS X</entry>
+            <entry>Mac OS X</entry>
 
             <entry><filename>&lt;Домашний каталог&gt;/Library/Preferences/<application>OmegaT</application></filename></entry>
           </row>
@@ -252,7 +255,7 @@
         <primary>Файлы проекта</primary> <secondary>Файлы приложения</secondary>
       </indexterm></title>
 
-    <para>ОмегаТ поставляется в виде установочного пакета, который можно загрузить с SourceForge. Здесь идёт речь об обычном, платформо-независимом java пакете. Среди других пакетов — пакет «.tar» для GNU/Linux, программа установки для Windows с или без Java Runtime Environment, программа установки для Mac OS X и пакет с исходными кодами программы для разработчиков.</para>
+    <para>ОмегаТ поставляется в виде установочного пакета, который можно загрузить с SourceForge. Здесь идёт речь об обычном, платформо-независимом java пакете. Среди других пакетов — пакет «.tar» для GNU/Linux, программа установки для Windows с или без Java Runtime Environment, программа установки для Mac OS X и пакет с исходными кодами программы для разработчиков.</para>
 
     <para>Платформо-независимый пакет можно использовать на любой системе, где установлена JRE 1.5, включая платформы, для которых существуют специальные пакеты. Этот пакет представляет собой архив (ZIP или TAR), который нужно распаковать в любую папку на ваш выбор. Распаковка обычно осуществляется двойным щелчком мыши по загруженному файлу. После распаковки будет создана папка, со следующим содержимым:</para>
 
@@ -316,7 +319,7 @@
           </row>
 
           <row>
-            <entry rowsep="0"><application>OmegaT</application></entry>
+            <entry rowsep="0"><literal>OmegaT</literal></entry>
 
             <entry rowsep="0">Текстовый файл, который содержит две строки:</entry>
           </row>
@@ -337,11 +340,11 @@
           <row>
             <entry/>
 
-            <entry>Этот файл может оказаться полезным для пользователей GNU/Linux и OS X. Откройте командную строку, перейдите в каталог «/OmegaT_2.5/» и сделайте файл исполняемым («chmod +x OmegaT»). После этого вы сможете запускать ОмегаТ, вызывая из командной строки этот файл.</entry>
+            <entry>Этот файл может оказаться полезным для пользователей GNU/Linux и OS X. Откройте командную строку, перейдите в каталог «/OmegaT_2.5/» и сделайте файл исполняемым («chmod +x OmegaT»). После этого вы сможете запускать ОмегаТ, вызывая из командной строки этот файл.</entry>
           </row>
 
           <row>
-            <entry rowsep="0"><application>OmegaT</application>.bat</entry>
+            <entry rowsep="0"><literal>OmegaT.bat</literal></entry>
 
             <entry rowsep="0">Пакетный файл, который используется для запуска <application>ОмегаТ</application> из командной строки Windows. Он содержит только одну строку:</entry>
           </row>
@@ -349,12 +352,12 @@
           <row>
             <entry/>
 
-            <entry><literal>java -jar <application>OmegaT</application>.jar
+            <entry><literal>java -jar OmegaT.jar
             %*</literal></entry>
           </row>
 
           <row>
-            <entry><application>OmegaT</application>.jar</entry>
+            <entry><literal>OmegaT.jar</literal></entry>
 
             <entry>Собственно, программа ОмегаТ. Для запуска ОмегаТ вам нужно либо вызвать этот файл из командной строки, либо запустить его из вашего файлового менеджера двойным щелчком мыши.</entry>
           </row>

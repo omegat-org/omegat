@@ -14,7 +14,7 @@
   <section>
     <title>Установка и использование</title>
 
-    <para>Модуль «Scripting» для ОмегаТ можно загрузить с официального сайта модулей ОмегаТ (<ulink url="???">http://sourceforge.net/projects/omegat-plugins/files/</ulink>). Разархивируйте файлы и скопируйте их в подкаталог «plugins» основного каталога ОмегаТ (это каталог, в котором хранится «OmegaT.jar»). Если каталога «plugins» нет, создайте его.</para>
+    <para>Модуль «Scripting» для ОмегаТ можно загрузить с <ulink url="http://sourceforge.net/projects/omegat-plugins/files">официального сайта модулей ОмегаТ</ulink>. Разархивируйте файлы и скопируйте их в подкаталог «plugins» основного каталога ОмегаТ (это каталог, в котором хранится «OmegaT.jar»). Если каталога «plugins» нет, создайте его.</para>
 
     <para>В меню <guisubmenu>«Инструменты»</guisubmenu> появится новый пункт <guisubmenu>«Скрипты».</guisubmenu> Чуть ниже находятся пять неактивных пунктов меню, на которые можно назначить различные скрипты. Выбор пункта меню <guisubmenu>Скрипты</guisubmenu> приводит к появлению одноимённого диалогового окна:<screenshot> <screeninfo>Диалоговое окно «Скрипты»</screeninfo> <mediaobject> <imageobject> <imagedata fileref="images/ScriptingDialog.png"/> </imageobject> </mediaobject> </screenshot></para>
 
@@ -56,34 +56,21 @@
         <listitem>
           <para><emphasis role="bold">JavaScript</emphasis> (иногда сокращается до JS, не путайте с Java): прототипно-ориентированный скриптовый язык программирования с динамической, слабой типизацией и функциями как объектами первого класса. Это кросс-платформенный язык, поддерживающий объектно-ориентированный, императивный и функциональный стили программирования. На JavaScript частично написан популярный веб-браузер Firefox, этот язык хорошо известен и широко применяется в свободных программах.</para>
         </listitem>
-      </itemizedlist>Все языки имеют доступ к объектной модели ОмегаТ, в которой главным объектом является проект. Например, нижеприведённый код на Groovy считывает содержимое всех сегментов всех файлов текущего проекта.</para>
+      </itemizedlist>Все языки имеют доступ к объектной модели ОмегаТ, в которой главным объектом является проект. Например, нижеприведённый код на Groovy считывает содержимое всех сегментов всех файлов текущего проекта и, если у сегмента есть перевод, выводит на экран оригинальный текст и перевод сегмента.</para>
 
-    <para><parameter>files = project.projectFiles;</parameter></para>
-
-    <para><parameter>for (i in 0 ..&lt; files.size())</parameter></para>
-
-    <para><parameter>{</parameter></para>
-
-    <para><parameter> for (j in 0 ..&lt;
-    files[i].entries.size())</parameter></para>
-
-    <para><parameter> {</parameter></para>
-
-    <para><parameter> currsegment = files[i].entries[j];</parameter></para>
-
-    <para><parameter> source = currsegment.getSrcText();</parameter></para>
-
-    <para><parameter> if (project.getTranslationInfo(ste))</parameter></para>
-
-    <para><parameter> target =
-    project.getTranslationInfo(currsegment).translation;</parameter></para>
-
-    <para><parameter> else</parameter></para>
-
-    <para><parameter> target = null;</parameter></para>
-
-    <para><parameter> }</parameter></para>
-
-    <para><parameter>}</parameter></para>
+    <programlisting>    files = project.projectFiles;
+    for (i in 0 ..&lt; files.size())
+    {
+        for (j in 0 ..&lt; files[i].entries.size())
+        {
+            currSegment = files[i].entries[j];
+            if (project.getTranslationInfo(currSegment))
+            {
+                source = currSegment.getSrcText();
+                target = project.getTranslationInfo(currSegment).translation;
+                console.println(source + &quot; &gt;&gt;&gt;&gt; &quot; + target);
+            }     
+        }
+    }</programlisting>
   </section>
 </appendix>

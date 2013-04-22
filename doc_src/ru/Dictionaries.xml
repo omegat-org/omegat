@@ -12,13 +12,13 @@
         <primary>Словари</primary> <secondary>Загрузка и установка</secondary>
       </indexterm></title>
 
-    <para>Словари в <application>ОмегаТ</application> основаны на платформе StarDict. Чтобы установить словари, нужно сделать следующее:</para>
+    <para><application>ОмегаТ</application> поддерживает словари в формате StarDict и Lingvo DSL. Чтобы установить словари StarDict, нужно сделать следующее:</para>
 
     <itemizedlist>
       <listitem>
-        <para>Найдите словарь для необходимой пары языков — к примеру на сайте <ulink url="http://stardict.sourceforge.net/index.php"><indexterm class="singular">
-            <primary>Словари</primary> <secondary>StarDict, FreeDict</secondary>
-          </indexterm>StartDict Platform</ulink>, указанном выше, или на сайте <ulink url="http://www.freedict.org/en/list.html">FreeDict</ulink></para>
+        <para>Найдите словарь для необходимой пары языков — к примеру на сайте <ulink url="http://stardict.sourceforge.net/index.php"><indexterm class="singular">
+            <primary>Словари</primary> <secondary>StarDict</secondary>
+          </indexterm>StartDict</ulink>, указанном выше.</para>
       </listitem>
     </itemizedlist>
 

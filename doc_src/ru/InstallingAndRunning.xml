@@ -15,11 +15,11 @@
 
       <itemizedlist>
         <listitem>
-          <para><emphasis role="bold">Да: </emphasis>загрузите <emphasis>OmegaT_2.5.x_Windows_without_JRE.exe</emphasis>.</para>
+          <para><emphasis role="bold">Да: </emphasis>загрузите <emphasis>OmegaT_2.6.x_Windows_without_JRE.exe</emphasis>.</para>
         </listitem>
 
         <listitem>
-          <para><emphasis role="bold">Нет / не знаю:</emphasis> загрузите<emphasis> OmegaT_2.5.x_Windows.exe.</emphasis></para>
+          <para><emphasis role="bold">Нет / не знаю:</emphasis> загрузите<emphasis> OmegaT_2.6.x_Windows.exe.</emphasis></para>
 
           <para>В этот пакет включена Oracle Java Runtime Environment. Эта JRE не будет конфликтовать с другими реализациями Java, которые могут быть уже установлены на вашей системе.</para>
         </listitem>
@@ -29,17 +29,9 @@
     <section id="OmegaT.installation.Windows">
       <title><application>Установка ОмегаТ</application></title>
 
-      <para>Для установки <application>ОмегаТ</application>, дважды щёлкните по загруженной программе и следуйте инструкциям.</para>
-    </section>
+      <para>Для установки <application>ОмегаТ</application>, дважды щёлкните по загруженной программе.</para>
 
-    <section id="adding.OmegaT.to.the.start.menu.or.desktop">
-      <title>Добавление <application>ОмегаТ</application> в меню «Пуск» или на рабочий стол<indexterm class="singular">
-          <primary>Настройка ОмегаТ</primary> <secondary>Windows</secondary>
-        </indexterm></title>
-
-      <para>Во время установки программа спросит вас, хотите ли вы создать папку в меню <emphasis>«Пуск»</emphasis>, а также ярлыки на рабочем столе и панели быстрого запуска.</para>
-
-      <para>Вы можете создать ярлык и позднее, перетащив <emphasis><application>OmegaT</application>.exe</emphasis> на рабочий стол или в меню «Пуск».</para>
+      <para>В начале процесса установки можно выбрать язык, который будет при этом использоваться. В том же окне можно указать использовать этот же язык в интерфейсе ОмегаТ. Если установить соответствующий флажок, в файл «OmegaT.l4J.ini» будут внесены необходимые изменения (подробности в следующем разделе). Затем, после того, как вы примете лицензионное соглашение, программа установки спросит вас, хотите ли вы создать папку в меню <emphasis>«Пуск»</emphasis>, а также ярлыки на рабочем столе и панели быстрого запуска; вы можете создать ярлыки позднее, перетащив <emphasis><application>OmegaT</application>.exe</emphasis> на рабочий стол или в меню «Пуск». Наконец, вам будет предложено просмотреть файл «readme» и ознакомиться с изменениями в устанавливаемой версии.</para>
     </section>
 
     <section id="running.OmegaT.Windows">
@@ -112,11 +104,11 @@
 
       <itemizedlist>
         <listitem>
-          <para><emphasis role="bold">Да: </emphasis>загрузите <emphasis>OmegaT_2.5.x_Without_JRE.zip</emphasis>.</para>
+          <para><emphasis role="bold">Да: </emphasis>загрузите <emphasis>OmegaT_2.6.x_Without_JRE.zip</emphasis>.</para>
         </listitem>
 
         <listitem>
-          <para><emphasis role="bold">Нет / не знаю:</emphasis> загрузите<emphasis> OmegaT_2.5.x_Linux.tar.bz2.</emphasis></para>
+          <para><emphasis role="bold">Нет / не знаю:</emphasis> загрузите<emphasis> OmegaT_2.6.x_Linux.tar.bz2.</emphasis></para>
 
           <para>В этот пакет включена Oracle Java Runtime Environment. Эта JRE не будет конфликтовать с другими реализациями Java, которые могут быть уже установлены на вашей системе.</para>
         </listitem>
@@ -199,22 +191,22 @@
   </section>
 
   <section id="MAC.OSX.users">
-    <title>Для пользователей Mac OS X<indexterm class="singular">
-        <primary>Установка ОмегаТ</primary> <secondary>OS X</secondary>
+    <title>Для пользователей Mac OS X<indexterm class="singular">
+        <primary>Установка ОмегаТ</primary> <secondary>OS X</secondary>
       </indexterm></title>
 
     <section id="which.package.to.download.OSX">
       <title>Загрузка пакета</title>
 
-      <para>Для запуска <application>ОмегаТ</application> 2.5 требуется Java 1.5. Для того, чтобы обновить Java, нужно воспользоваться пунктом «Обновление программ...» из меню Apple.</para>
+      <para>Для запуска <application>ОмегаТ</application> 2.6 требуется Java 1.5. Для того, чтобы обновить Java, нужно воспользоваться пунктом «Обновление программ...» из меню Apple.</para>
 
-      <para>Загрузите <emphasis>OmegaT_2.5.x_Mac.zip.</emphasis></para>
+      <para>Загрузите <emphasis>OmegaT_2.6.x_Mac.zip.</emphasis></para>
     </section>
 
     <section id="OmegaT.installation.OSX">
       <title><application>Установка ОмегаТ</application></title>
 
-      <para>Дважды щёлкните на файле <emphasis>OmegaT_2.5.x_Mac.zip</emphasis>, чтобы распаковать его. Будет создана папка <emphasis> <application>OmegaT</application> </emphasis>. В папке находятся 2 файла: «index.html» и <emphasis><application>OmegaT</application>.app.</emphasis> Скопируйте папку в подходящее место (например, в «Applications»). После этого можно удалить файл <emphasis>OmegaT_2.5.x_Mac.zip</emphasis>, он вам больше не понадобится.</para>
+      <para>Дважды щёлкните на файле <emphasis>OmegaT_2.6.x_Mac.zip</emphasis>, чтобы распаковать его. Будет создана папка <emphasis> <application>OmegaT</application> </emphasis>. В папке находятся 2 файла: «index.html» и <emphasis><application>OmegaT</application>.app.</emphasis> Скопируйте папку в подходящее место (например, в «Applications»). После этого можно удалить файл <emphasis>OmegaT_2.6.x_Mac.zip</emphasis>, он вам больше не понадобится.</para>
     </section>
 
     <section id="adding.OmegaT.to.the.dock">
@@ -225,13 +217,13 @@
 
     <section id="running.OmegaT.OSX">
       <title>Запуск <application>ОмегаТ<indexterm class="singular">
-          <primary>Запуск ОмегаТ</primary> <secondary>OS X</secondary>
+          <primary>Запуск ОмегаТ</primary> <secondary>OS X</secondary>
         </indexterm></application></title>
 
       <para>Дважды щёлкните на <emphasis> <application>OmegaT</application>.app</emphasis> или на его ярлыке в Доке.</para>
 
       <para>Чтобы получить доступ к <application><emphasis>Info.plist</emphasis></application>, щёлкните правой кнопкой мыши по <emphasis><application>OmegaT</application>.app</emphasis> и выберите «Показать содержимое пакета», а затем откройте файл, снова щёлкнув правой кнопкой мыши и выбрав предпочитаемый текстовый редактор. Также в командной строке вы можете выполнить команду «cd», чтобы перейти в нужную папку и открыть <application><emphasis>Info.plist</emphasis> в каком-нибудь консольном редакторе, например, Emacs или vi</application>.<emphasis> <indexterm class="singular">
-          <primary>Настройка ОмегаТ</primary> <secondary>OS X</secondary> <tertiary>Параметры запуска</tertiary>
+          <primary>Настройка ОмегаТ</primary> <secondary>OS X</secondary> <tertiary>Параметры запуска</tertiary>
         </indexterm></emphasis></para>
 
       <para>Можно редактировать разделы <emphasis>Properties</emphasis> и <emphasis>VMOptions</emphasis>.</para>
@@ -244,9 +236,9 @@
     </section>
 
     <section id="Mac.OSX.goodies">
-      <title>«Плюшки» для Mac OS X</title>
+      <title>«Плюшки» для Mac OS X</title>
 
-      <para><emphasis><application>OmegaT</application>.app</emphasis> может взаимодействовать с Mac OS X Services. Т. е., можно выделить любое слово в окне <application>ОмегаТ</application> и использовать Services, чтобы поискать его в Spotlight или Google. Также, для автоматизации часто повторяющихся действий можно использовать AppleScript или Automator.</para>
+      <para><emphasis><application>OmegaT</application>.app</emphasis> может взаимодействовать с Mac OS X Services. Т. е., можно выделить любое слово в окне <application>ОмегаТ</application> и использовать Services, чтобы поискать его в Spotlight или Google. Также, для автоматизации часто повторяющихся действий можно использовать AppleScript или Automator.</para>
     </section>
   </section>
 
@@ -266,7 +258,7 @@
 
       <itemizedlist>
         <listitem>
-          <para><emphasis role="bold">Да: </emphasis>загрузите <emphasis>OmegaT_2.5.x_Windows_without_JRE.</emphasis>zip. Этот пакет можно использовать на любой платформе, где установлена версия JRE, совместимая с Java 1.5 JRE.</para>
+          <para><emphasis role="bold">Да: </emphasis>загрузите <emphasis>OmegaT_2.6.x_Windows_without_JRE.</emphasis>zip. Этот пакет можно использовать на любой платформе, где установлена версия JRE, совместимая с Java 1.5 JRE.</para>
         </listitem>
 
         <listitem>
@@ -274,7 +266,7 @@
         </listitem>
 
         <listitem>
-          <para><emphasis role="bold">Нет:</emphasis> установите версию Java JRE для вашей платформы (смотри ниже) и загрузите пакет <emphasis>OmegaT_2.5.x_Without_JRE.zip</emphasis>.</para>
+          <para><emphasis role="bold">Нет:</emphasis> установите версию Java JRE для вашей платформы (смотри ниже) и загрузите пакет <emphasis>OmegaT_2.6.x_Without_JRE.zip</emphasis>.</para>
 
           <para>Oracle предоставляет пакеты с JRE для Solaris SPARC/x86 (Java 1.5) и GNU/Linux x64, Solaris x64, Windows x64 (Java 1.5): <ulink url="http://www.oracle.com/technetwork/java/archive-139210.html">http://www.oracle.com/technetwork/java/archive-139210.html</ulink>.</para>
 
@@ -290,7 +282,7 @@
           <primary>Установка ОмегаТ</primary> <secondary>Другие системы</secondary>
         </indexterm></title>
 
-      <para>Чтобы установить <application>ОмегаТ</application>, просто распакуйте файл <emphasis role="bold">OmegaT_2.5.x_Without_JRE.zip</emphasis>. В текущей папке будет создан каталог <emphasis>./OmegaT_2.5.x_Without_JRE/</emphasis>, в котором вы найдёте все файлы, необходимые для запуска <application>ОмегаТ</application>.</para>
+      <para>Чтобы установить <application>ОмегаТ</application>, просто распакуйте файл <emphasis role="bold">OmegaT_2.6.x_Without_JRE.zip</emphasis>. В текущей папке будет создан каталог <emphasis>./OmegaT_2.6.x_Without_JRE/</emphasis>, в котором вы найдёте все файлы, необходимые для запуска <application>ОмегаТ</application>.</para>
     </section>
 
     <section id="installing.convenient.shortcuts">
@@ -334,7 +326,7 @@
     <section id="method1.opening.commandline.window">
       <title>Открытие окна командной строки</title>
 
-      <para>Окно командной строки также часто называют «окно терминала». В Windows оно называется «Сеанс MS-DOS» и его можно запустить через меню «Пуск» — «Программы» — «Сеанс MS-DOS». Его эквивалентом под Mac OS X является приложение Terminal, расположенное в «Applications → Utilities».</para>
+      <para>Окно командной строки также часто называют «окно терминала». В Windows оно называется «Сеанс MS-DOS» и его можно запустить через меню «Пуск» — «Программы» — «Сеанс MS-DOS». Его эквивалентом под Mac OS X является приложение Terminal, расположенное в «Applications → Utilities».</para>
 
       <para>Чтобы запустить <application>ОмегаТ</application>, обычно нужно ввести две команды. Первая:</para>
 
@@ -347,7 +339,7 @@
       <para><emphasis> <literal>cd C:\Program
       Files\<application>OmegaT</application></literal> </emphasis></para>
 
-      <para>В Mac OS X</para>
+      <para>В Mac OS X</para>
 
       <para><literal> <literal>cd &lt;<application>OmegaT</application>.app
       location&gt;/<application>OmegaT</application>.app/Contents/Resources/Java/</literal>
@@ -362,7 +354,7 @@
       <para><literal>java -jar
       <application>OmegaT</application>.jar</literal></para>
 
-      <para>Обратите внимание на регистр букв — программа не запустится, если вы введёте <emphasis>omegat</emphasis> вместо <emphasis>OmegaT </emphasis>!</para>
+      <para>Обратите внимание на регистр: в ОС, отличных от Windows, если вы введёте <emphasis>omegat </emphasis> вместо <emphasis>OmegaT</emphasis>, программа не запустится.</para>
 
       <para>Этот способ удобен при отладке: если во время работы произошла ошибка, то сообщение о ней выводится в окно терминала, что может быть очень полезно.</para>
 
@@ -447,6 +439,27 @@
           <para><emphasis role="bold">-Dgoogle.api.key=A123456789B123456789C123456789D12345678 </emphasis><emphasis role="bold"><indexterm class="singular">
               <primary>Запуск ОмегаТ</primary> <secondary>Аргументы скрипта запуска</secondary> <tertiary>Google Translate V2</tertiary>
             </indexterm></emphasis> Если у вас есть подписка на сервис Google Translate, введите ваш личный ключ Google API. Обратите внимание, длина ключа составляет 38 символов.</para>
+        </listitem>
+
+        <listitem>
+          <para><emphasis role="bold">Microsoft
+          Translator</emphasis><indexterm class="singular">
+              <primary>Запуск ОмегаТ</primary> <secondary>Аргументы скрипта запуска</secondary> <tertiary>Microsoft Translator</tertiary>
+            </indexterm></para>
+
+          <para>Убедитесь, что у вас есть учётная запись Майкрософт. Она необходима для входа в <ulink url="http://datamarket.azure.com/dataset/bing/microsofttranslator#schema">Windows Azure Marketplace</ulink> и использования сервиса Translator. Заметьте, что вы можете переводить бесплатно до 2 миллионов знаков в месяц. На <ulink url="https://datamarket.azure.com/account">странице вашей учётной записи</ulink> можно найти основной ключ учётной записи (Primary account key) и идентификатор клиента (Customer-ID):</para>
+
+          <para><emphasis role="bold">-Dmicrosoft.api.client_id=</emphasis><emphasis role="bold">XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX</emphasis></para>
+
+          <para>-<emphasis role="bold">Dmicrosoft.api.client_secret=XXXX9xXxX9xXXxxXXX9xxX99xXXXX9xx9XXxXxXXXXX=</emphasis></para>
+        </listitem>
+
+        <listitem>
+          <para><emphasis role="bold">Командные проекты<parameter><indexterm class="singular">
+              <primary>Запуск ОмегаТ</primary> <secondary>Аргументы скрипта запуска</secondary> <tertiary>Параметр «no-team»</tertiary>
+            </indexterm></parameter></emphasis></para>
+
+          <para>Параметр <emphasis role="bold">-no-team</emphasis> относится к командным проектам. Используйте его, если не хотите, чтобы ОмегаТ синхронизировала проект.</para>
         </listitem>
       </itemizedlist>
 
@@ -606,9 +619,7 @@
             <para><literal>--tag-validation=[abort|warn]</literal><parameter>
             outputFileName</parameter></para>
 
-            <para><parameter>В стандартный поток вывода будут направлены все оставшиеся ошибки тегов, которые затем могут быть исправлены переводчиком.</parameter></para>
-
-            <para>Благодаря этому параметру теги можно проверять в пакетном режиме. Если установлен режим «abort», проверка тегов будет приостановлена на первом же сегменте с ошибками. Если установлен режим «warn», проверка тегов обработает все сегменты и выведет все сообщения об ошибках.</para>
+            <para>Этот параметр позволяет производить проверку тегов в пакетном режиме. Если установлен режим <literal>abort</literal>, проверка тегов будет приостановлена на первом же сегменте с ошибками. Если установлен режим <literal>warn</literal>, проверка тегов обработает все сегменты и выведет все сообщения об ошибках.</para>
           </listitem>
         </itemizedlist>
       </section>
@@ -636,7 +647,7 @@
         <primary>Запуск ОмегаТ</primary> <secondary>Сборка ОмегаТ из исходного кода</secondary>
       </indexterm></title>
 
-    <para>Для сборки ОмегаТ из исходного кода вам понадобится утилита ant (<emphasis>http://ant.apache.org/bindownload.cgi</emphasis>). Распакуйте файл <emphasis>OmegaT_2.5.x_Source.zip</emphasis> и перейдите в каталог OmegaT_2.5.x_Source или в каталог <emphasis>./omegat/</emphasis>, если вы загрузили исходные коды из SVN. Проверьте, есть ли в этом каталоге файл «build.xml». Затем в командной строке наберите:</para>
+    <para>Для сборки ОмегаТ из исходного кода вам понадобится утилита ant (<emphasis>http://ant.apache.org/bindownload.cgi</emphasis>). Распакуйте файл <emphasis>OmegaT_2.6.x_Source.zip</emphasis> и перейдите в каталог OmegaT_2.5.x_Source или в каталог <emphasis>./omegat/</emphasis>, если вы загрузили исходные коды из SVN. Проверьте, есть ли в этом каталоге файл «build.xml». Затем в командной строке наберите:</para>
 
     <para><literal>$ ant jar release</literal></para>
 

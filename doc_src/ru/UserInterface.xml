@@ -128,7 +128,7 @@
                 <primary>Сочетания клавиш</primary> <secondary>Свойства проекта - CTRL+E</secondary>
               </indexterm></entry>
 
-            <entry>Используется для изменения языков и каталогов проекта (чтобы открыть, нажмите сочетание клавиш<guimenuitem>CTRL+E </guimenuitem> или выберите пункт меню <menuchoice> <guimenu>«Проект</guimenu> <guimenuitem>Свойства...»</guimenuitem> </menuchoice>, чтобы закрыть — нажмите <keycap>ESC)</keycap></entry>
+            <entry>Используется для изменения языков и каталогов проекта (чтобы открыть, нажмите клавиши <guimenuitem>CTRL+E </guimenuitem> или выберите пункт меню <menuchoice> <guimenu>«Проект</guimenu> <guimenuitem>Свойства...»</guimenuitem> </menuchoice>, чтобы закрыть — нажмите <keycap>ESC)</keycap></entry>
           </row>
 
           <row>
@@ -136,7 +136,7 @@
                 <primary>Свойства проекта</primary> <secondary>Шрифт</secondary>
               </indexterm></guimenuitem></entry>
 
-            <entry><para>Используется для изменения шрифта, <application>применяемого ОмегаТ</application> для показа оригинала, перевода, совпадений и терминов в глоссарии (чтобы открыть, выберите пункт меню <menuchoice> <guimenu>«Параметры</guimenu> <guimenuitem>Шрифт...»</guimenuitem> </menuchoice>, чтобы закрыть — нажмите <keycap>ESC</keycap><keycap>)</keycap></para></entry>
+            <entry><para>Используется для изменения шрифта, применяемого <application>ОмегаТ</application> для показа оригинала, перевода, совпадений и терминов в глоссарии (чтобы открыть, выберите пункт меню <menuchoice> <guimenu>«Параметры</guimenu> <guimenuitem>Шрифт...»</guimenuitem> </menuchoice>, чтобы закрыть — нажмите <keycap>ESC</keycap>)</para></entry>
           </row>
 
           <row>
@@ -298,25 +298,25 @@
 
         <tbody>
           <row>
-            <entry>33/33</entry>
+            <entry>27/27</entry>
 
             <entry>число сегментов - переведённые/всего в текущем документе</entry>
           </row>
 
           <row>
-            <entry>2780/2780</entry>
+            <entry>9319/16338</entry>
 
             <entry>число уникальных сегментов - переведено/всего уникальных сегментов в проекте</entry>
           </row>
 
           <row>
-            <entry>3760</entry>
+            <entry>31175</entry>
 
             <entry>общее число сегментов (включая не уникальные) в проекте</entry>
           </row>
 
           <row>
-            <entry>126/127</entry>
+            <entry>103/114</entry>
 
             <entry>число знаков в оригинале и переводе текущего сегмента</entry>
           </row>
@@ -400,6 +400,128 @@
           <para>аналогично предыдущему, но с учётом чисел и тегов</para>
         </listitem>
       </itemizedlist>
+
+      <section>
+        <title>Настройка области просмотра нечётких совпадений<indexterm class="singular">
+            <primary>Окна и области в ОмегаТ</primary> <secondary>Область просмотра нечётких совпадений</secondary> <tertiary>Настройка</tertiary>
+          </indexterm><indexterm class="singular">
+            <primary>Исходные файлы</primary> <secondary>Перевод обновлённых исходных файлов</secondary>
+          </indexterm></title>
+
+        <para>В диалоговом окне <guimenu>Параметры &gt; Внешние TMX…</guimenu> с помощью нескольких переменных можно настроить отображение нечётких совпадений.</para>
+
+        <figure id="matches.pane.setup">
+          <title><indexterm class="singular">
+              <primary>Совпадения</primary> <secondary>Настройка области просмотра совпадений - иллюстрация</secondary>
+            </indexterm><indexterm class="singular">
+              <primary>Окна и области в ОмегаТ</primary> <secondary>Настройка области просмотра совпадений - иллюстрация</secondary>
+            </indexterm>Настройка области просмотра совпадений</title>
+
+          <mediaobject>
+            <imageobject>
+              <imagedata fileref="images/MatchesPaneSetup.png"/>
+            </imageobject>
+
+            <imageobject role="fo">
+              <imagedata fileref="images/MatchesPaneSetup.png" width="50%"/>
+            </imageobject>
+          </mediaobject>
+        </figure>
+
+        <para>На иллюстрации выше показана конфигурация по умолчанию. Для настройки отображения нечётких совпадений можно использовать следующие переменные:</para>
+
+        <table colsep="0" rowsep="0">
+          <title>Настройка области просмотра совпадений<indexterm class="singular">
+              <primary>Пользовательский интерфейс</primary> <secondary>Настройка области просмотра совпадений</secondary>
+            </indexterm></title>
+
+          <tgroup cols="2" colsep="1" rowsep="1" title="Match pane setup">
+            <colspec align="left" colnum="1" colwidth="90"/>
+
+            <colspec align="left" colnum="2" colwidth=""/>
+
+            <tbody>
+              <row>
+                <entry><literal>${id}</literal></entry>
+
+                <entry>Номер совпадения от 1 до 5</entry>
+              </row>
+
+              <row>
+                <entry><literal>${sourceText}</literal></entry>
+
+                <entry>Исходный текст совпадения</entry>
+              </row>
+
+              <row>
+                <entry><literal>${targetText}</literal></entry>
+
+                <entry>Перевод совпадения</entry>
+              </row>
+
+              <row>
+                <entry><literal>${diff}</literal></entry>
+
+                <entry>Строка, в которой выделены различия между исходным сегментом и совпадением. <emphasis>Совет:</emphasis> это особенно полезно при работе с новой версией ранее переведённого документа.</entry>
+              </row>
+
+              <row>
+                <entry><literal>${score}</literal></entry>
+
+                <entry>Процент совпадения при использовании модуля «tokenizer»</entry>
+              </row>
+
+              <row>
+                <entry><literal>${noStemScore}</literal></entry>
+
+                <entry>Процент совпадения без учёта чисел и тегов</entry>
+              </row>
+
+              <row>
+                <entry><literal>${adjustedScore}</literal></entry>
+
+                <entry>Скорректированный процент совпадения</entry>
+              </row>
+
+              <row>
+                <entry><literal>${fileNameOnly}</literal></entry>
+
+                <entry>Имя TMX-файла</entry>
+              </row>
+
+              <row>
+                <entry><literal>${filePath}</literal></entry>
+
+                <entry>Полный путь к TMX-файлу</entry>
+              </row>
+
+              <row>
+                <entry><literal>${fileShortPath}</literal></entry>
+
+                <entry>Путь у TMX-файлу от папки /tm</entry>
+              </row>
+
+              <row>
+                <entry><literal>${creationID}</literal></entry>
+
+                <entry>Автор перевода совпадения</entry>
+              </row>
+
+              <row>
+                <entry><literal>${creationDate}</literal></entry>
+
+                <entry>Дата перевода совпадения</entry>
+              </row>
+
+              <row>
+                <entry><literal>${fuzzyFlag}</literal></entry>
+
+                <entry>Указывает на то, что совпадение является нечётким (в настоящее время реализовано только для переводов из PO-файлов с отметкой #fuzzy)</entry>
+              </row>
+            </tbody>
+          </tgroup>
+        </table>
+      </section>
     </section>
 
     <section>
@@ -456,13 +578,13 @@
       <para>Некоторые форматы файлов, специально разработанные для переводческой работы, например, PO, позволяют добавлять комментарии. Таким образом переводчик получает контекст для текущего сегмента. В примере ниже автор PO-файла добавил предупреждение для переводчика, чтобы тот проверил длину перевода:</para>
 
       <figure id="comments.pane">
-        <title><indexterm class="singular">
+        <title>Область просмотра комментариев<indexterm class="singular">
             <primary>Комментарии</primary> <secondary>Область просмотра комментариев</secondary>
           </indexterm></title>
 
         <mediaobject>
           <imageobject role="html">
-            <imagedata fileref="images/Comments_25.png" width=""/>
+            <imagedata fileref="images/Comments_25.png"/>
           </imageobject>
 
           <imageobject role="fo">
@@ -519,7 +641,7 @@
 
       <itemizedlist>
         <listitem>
-          <para>напротив имён файлов показано количество сегментов в каждом из них</para>
+          <para>Для каждого файла указаны его имя, тип файлового фильтра, кодировка и количество сегментов</para>
         </listitem>
       </itemizedlist>
 
@@ -545,7 +667,7 @@
           <primary>Окна и области в ОмегаТ</primary> <secondary>Окно поиска</secondary>
         </indexterm></title>
 
-      <para>Окно поиска используется для поиска конкретных сегментов в проекте. Одновременно могут быть открыты несколько окон поиска. Чтобы открыть новое окно, нажмите сочетание клавиш <keycombo> <keycap>CTRL</keycap> <keycap>F</keycap> </keycombo>. Окно поиска состоит из текстового поля для ввода строк или ключевых слов, переключателей настроек поиска и области отображения результатов поиска. За более подробной информацией обратитесь к разделу <emphasis> <link linkend="chapter.user.interface">Поиск</link> </emphasis>.</para>
+      <para>Окно поиска используется для поиска конкретных сегментов в проекте. Одновременно могут быть открыты несколько окон поиска. Чтобы открыть новое окно, нажмите клавиши <keycombo> <keycap>CTRL</keycap> <keycap>F</keycap> </keycombo>. Окно поиска состоит из текстового поля для ввода строк или ключевых слов, переключателей настроек поиска и области отображения результатов поиска. За более подробной информацией обратитесь к разделу <emphasis> <link linkend="chapter.user.interface">Поиск</link> </emphasis>.</para>
     </section>
 
     <section id="section.tag.validation">
@@ -609,7 +731,7 @@
           <primary>Статистика по совпадениям</primary> <seealso>Меню «Инструменты»</seealso>
         </indexterm></title>
 
-      <para>Статистику по совпадениям можно просмотреть, выбрав пункт меню <guimenuitem>«Инструменты&gt;Статистика по совпадениям».</guimenuitem> Расчёт совпадений довольно интенсивно нагружает процессор и может занять некоторое время, поэтому во время расчётов показывается индикатор выполнения. Стандартом де-факто является разбиение совпадений на следующие группы: точные совпадения, 95 %—100 %, 85 %—94 %, 75 %—84 %, 50 %—74 % и без совпадений. При подсчёте количества слов (количество слов, показываемое в окне «Файлы проекта», рассчитывается аналогично), используется специфический для ОмегаТ метод, в целом схожий с подсчётом количества сегментов. Расчёт данных проводится для сегментов, слов и символов (с пробелами и без).<figure>
+      <para>Статистику по совпадениям можно просмотреть, выбрав пункт меню <guimenuitem>«Инструменты&gt;Статистика по совпадениям».</guimenuitem> Расчёт совпадений довольно интенсивно нагружает процессор и может занять некоторое время, поэтому во время расчётов показывается индикатор выполнения. Стандартом де-факто является разбиение совпадений на следующие группы: повторения, точные совпадения, 95 %—100 %, 85 %—94 %, 75 %—84 %, 50 %—74 % и без совпадений. Расчёт данных проводится для сегментов, слов и символов (с пробелами и без). Заметьте, что методики расчёта совпадений в ОмегаТ и в других системах автоматизированного перевода могут различаться.<figure>
           <title>Статистика по совпадениям</title>
 
           <mediaobject>

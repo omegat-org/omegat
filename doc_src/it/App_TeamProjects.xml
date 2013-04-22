@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE appendix PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<appendix id="appendix.TeamProjects">
+  <title>Progetti in collaborazione di OmegaT<indexterm class="singular">
+      <primary>OmegaT</primary> <secondary>Progetti di squadra</secondary> <seealso>Progetti di squadra</seealso>
+    </indexterm></title>
+
+  <section>
+    <title>Controllo di versione - introduzione</title>
+
+    <para>La traduzione in collaborazione offerta da OmegaT si basa sulla funzionalità di controllo della versione o revisione, largamente usata dalle comunità informatiche per tenere sotto controllo il codice di un programma e permettere la collaborazione senza intoppi all'interno della relativa squadra di sviluppo. OmegaT supporta due popolari sistemi di controllo della versione (abbreviati in VCS, Version Control System), <ulink url="http://subversion.apache.org">Apache Subversion</ulink> (spesso abbreviato in SVN, per il nome di comando svn) e <ulink url="http://git-scm.com/">Git</ulink>. I vantaggi di un sistema VC per una squadra di traduttori sono riepilogati di seguito:</para>
+
+    <itemizedlist>
+      <listitem>
+        <para>I vari membri della squadra possono lavorare simultaneamente sul progetto di traduzione, senza interferire con gli altri</para>
+      </listitem>
+
+      <listitem>
+        <para>Possono condividere materiale comune, come la memoria di traduzione e il glossario</para>
+      </listitem>
+
+      <listitem>
+        <para>Per impostazione predefinita, ogni tre minuti una versione aggiornata dei dati condivisi è disponibile al resto della squadra</para>
+      </listitem>
+
+      <listitem>
+        <para>Il controllo di versione dei dati condivisi viene mantenuto dal sistema</para>
+      </listitem>
+
+      <listitem>
+        <para>I conflitti - per esempio, le versioni alternative dello stesso segmento o di una voce di glossario - possono essere tenuti sotto controllo, risolti e uniti</para>
+      </listitem>
+    </itemizedlist>
+
+    <para>I termini seguenti, da usare nel testo sotto riportato, necessitano di una breve spiegazione:</para>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis role="bold">Server VCS - </emphasis>cioè il server SVN o Git è l'ambiente remoto di rete in cui è conservato e mantenuto il materiale condiviso. Esso può esistere nella rete locale, ma nella maggior parte dei casi sarà disponibile su Internet, ossia tramite un indirizzo URL. Un membro della squadra, l'amministratore del progetto, deve essere in grado di gestire il lato server: deve, cioè, impostare l'ambiente, importare il progetto OmegaT, assegnare i diritti di accesso ai membri della squadra, risolvere i conflitti, e via discorrendo.</para>
+      </listitem>
+
+      <listitem>
+        <para><emphasis role="bold">Client VCS: </emphasis>per interfacciarsi col server è necessario installare, nei computer dei &quot;gestori del progetto&quot; facenti parte del progetto OmegaT, un client SVN o Git. Per l'ambiente Windows, <ulink url="http://tortoisesvn.net/">TortoiseSVN</ulink> e <ulink url="http://code.google.com/p/tortoisegit/">TortoiseGit</ulink> sono client molto popolari. Gli altri sistemi operativi (Linux, OS X) offrono pacchetti simili.</para>
+      </listitem>
+
+      <listitem>
+        <para><emphasis role="bold">repository (deposito): </emphasis>il luogo in cui viene salvato e mantenuto il materiale condiviso, sia su una rete di accesso locale, sia su Internet. I membri del progetto si collegano ad esso tramite il loro client VCS.</para>
+      </listitem>
+
+      <listitem>
+        <para><emphasis role="bold">checkout:</emphasis> l'operazione che crea una copia funzionante dal deposito al proprio computer locale. Il server mantiene le informazioni sui checkout, affinché i commit (vedere sotto) successivi possano essere eseguiti in modo ordinato.</para>
+      </listitem>
+
+      <listitem>
+        <para><emphasis role="bold">commit: </emphasis>una volta che una nuova versione locale del materiale scaricato (checked-out) è pronta, può essere inviata (committed) al deposito e resa disponibile al resto della squadra. Il server si assicura che tutte le modifiche in conflitto, dovute al fatto che due membri stanno lavorando sullo stesso contenuto scaricato, vengano risolte.</para>
+      </listitem>
+
+      <listitem>
+        <para><emphasis role="bold">amministratore: </emphasis>la persona responsabile per la creazione e il mantenimento del deposito, ossia colui che si prende cura delle attività lato server. Per evitare problemi, una persona deve avere, almeno inizialmente, questi diritti.</para>
+      </listitem>
+
+      <listitem>
+        <para><emphasis role="bold">utente</emphasis>: membro della squadra che collabora al progetto comune.</para>
+      </listitem>
+    </itemizedlist>
+  </section>
+
+  <section>
+    <title>Condividere un progetto tramite SVN<indexterm class="singular">
+        <primary>Progetti in collaborazione</primary> <secondary>Subversion</secondary>
+      </indexterm></title>
+
+    <para>Esistono due possibilità per avviare un server SVN: è possibile installare SVN sul proprio server o usare servizio di hosting. Quando si usa un servizio esterno, bisogna essere consapevoli delle possibili implicazioni in termini di riservatezza, dato che si carica la documentazione originale in un server fuori dal proprio controllo diretto. In alternativa, al fine di evitare questo problema, è possibile configurare un server SVN privato, per esempio, se si possiede già un server Apache che include il software in questione (per es., VisualSVN).</para>
+
+    <para>Una volta che il server SVN è disponibile, per gestire i contenuti del progetto nei loro computer, i gestori del progetto devono installare localmente un client SVN. Per Windows raccomandiamo <ulink url="http://tortoisesvn.net/">TortoiseSVN</ulink>. Per Mac si può scaricare il client, per esempio, da <ulink url="https://sourceforge.net/projects/macsvn/">SourceForge</ulink>, per Linux vedere <ulink url="www.yolinux.com/TUTORIALS/Subversion.html">Comandi Subversion e script</ulink>.</para>
+
+    <section>
+      <title>Creazione di un deposito (repository)<indexterm class="singular">
+          <primary>Progetti in collaborazione</primary> <secondary>Creazione di un deposito SVN</secondary>
+        </indexterm></title>
+
+      <para>La procedura spiegata qui si basa sul server SVN gratuito (limitato a due utenti) offerto da <ulink url="http://projectlocker.com/">ProjectLocker</ulink>. Si noti che il creatore del deposito ne possiede implicitamente di diritti di amministrazione. Per prima cosa autenticarsi al sito o, se si accede per la prima volta, registrarsi e annotare nome utente e password per i futuri progetti.</para>
+
+      <orderedlist>
+        <listitem>
+          <para>Creare un nuovo progetto in ProjectLocker</para>
+        </listitem>
+
+        <listitem>
+          <para>Digitare il e la descrizione del deposito ( <literal>OmegaT</literal> e <literal>OmegaT SL Localization </literal>nell'esempio usato qui)</para>
+        </listitem>
+
+        <listitem>
+          <para>Scegliere <guibutton> SVN.</guibutton></para>
+        </listitem>
+
+        <listitem>
+          <para>Fare clic su <guibutton>Create Project</guibutton></para>
+        </listitem>
+      </orderedlist>
+
+      <para>Aprire la vista <emphasis role="bold"> Projects</emphasis> per il proprio account. L'URL mostrato sotto Project Services sarà usato da SVN per connettere i client al server SVN appena creato. Si possono anche aggiungere membri della squadra al progetto e assegnar loro i diritti. Si noti che i membri della squadra, per poter essere aggiunti al progetto, devono prima registrarsi (nota: la versione gratuita di ProjectLocker consente solo due utenti per progetto).</para>
+
+      <para>I progetti possono essere gestiti in base allo stile di sviluppo e necessità. In modo simile ai progetti OmegaT, si avrà bisogno di depositi separati per diverse coppie di lingua. All'interno di una coppia di lingua specifica, è meglio mantenere anche oggetti e client diversi come depositi separati. L'alternativa è avere un singolo deposito con sottocartelle <literal>Progetto1</literal>, <literal>Progetto2</literal>, ecc., e condividere il materiale comune tramite cartelle <literal>tm</literal>, <literal>glossary</literal> e <literal>dictionary</literal> comuni.</para>
+
+      <para>Per l'esempio mostrato qui abbiamo deciso, per ragioni di semplicità, a fronte di un progetto OmegaT, l'uso di un singolo deposito. .</para>
+    </section>
+
+    <section>
+      <title>Importazione del progetto nel deposito SVN - Windows</title>
+
+      <para>Il deposito al momento è vuoto. Nel proprio disco rigido, creare prima una cartella client vuota. Creare una cartella vuota in cui mantenere il progetto e farvi sopra clic col pulsante destro del mouse. Selezionare <guilabel> TortoiseSVN &gt; Checkout.</guilabel> Apparirà la seguente finestra di dialogo:</para>
+ 
+      <mediaobject>
+        <imageobject role="html">
+          <imagedata fileref="images/Team_projects_checkout.png"/>
+        </imageobject>
+		<imageobject role="fo">
+          <imagedata fileref="images/Team_projects_checkout.png" width="80%"/>
+        </imageobject>
+      </mediaobject>
+ 
+      <para>Digitare l'URL fornito da ProjectLocker all'interno del campo <emphasis role="bold">URL of repository</emphasis>. Assicurarsi che il campo <emphasis role="bold">Checkout directory</emphasis> sia corretto, ossia che specifichi la cartella vuota creata, poi premere <emphasis role="bold">OK</emphasis>. Una volta completata l'operazione, è possibile controllare la suddetta cartella: deve ora contenere una sottocartella .svn e un segno di spunta OK verde sulla sua icona, che indica che i contenuti della cartella sono aggiornati.</para>
+
+      <para>Nel passaggio successivo aggiungeremo i file OmegaT alla cartella locale. I file seguenti devono essere condivisi tra i membri della squadra e devono essere dunque, in ogni modo, inclusi:</para>
+
+      <itemizedlist>
+        <listitem>
+          <para>il file del progetto omegat - <filename>omegat.project</filename></para>
+        </listitem>
+
+        <listitem>
+          <para>la memoria di traduzione - <filename>omegat\project_save.tmx</filename></para>
+        </listitem>
+
+        <listitem>
+          <para>i contenuti della cartella di origine</para>
+        </listitem>
+
+        <listitem>
+          <para>la definizione dei filtri specifici del progetto - <filename>omegat\filters.xml</filename></para>
+        </listitem>
+      </itemizedlist>
+
+      <para>L'amministratore può decidere di includere anche le seguenti cartelle e i relativi contenuti: <filename>tm</filename>, <filename>glossary</filename> e <filename>dictionary</filename>. Anche i file <filename>ignored_words.txt</filename> e <filename>learned_words.txt</filename> contenuti nella cartella <filename>omegat</filename> possono essere condivisi e mantenuti a livello di squadra. Evitare, in tutti i casi, l'aggiunta di file <filename>bak</filename>, <filename>project_stats.txt</filename> e <filename>project_stats_match.txt</filename>, nella sottocartella <filename>omegat</filename>, dato che essi aumenterebbero, senza alcun beneficio o scopo, le dimensioni del deposito. Si potrebbe volere applicare la stessa cartella <filename>target</filename> e i relativi contenuti.</para>
+
+      <para>Dopo aver copiato i file richiesti all'interno della cartella di checkout, si noterà che la sua icona è cambiata: il segno di spunta OK verde si è trasformato in un segno di esclamazione rosso, il che indica una modifica nella copia locale del deposito. I due passaggi seguenti aggiorneranno la versione del server:</para>
+
+      <itemizedlist>
+        <listitem>
+          <para><emphasis role="bold">aggiungere i file copiati alla versione locale del deposito:</emphasis> fare clic col pulsante destro del mouse sulla cartella di checkout locale e selezionare <guilabel>TortoiseSVN &gt; Add.</guilabel> All'interno della finestra di dialogo che si apre, non modificare le opzioni predefinite e premere <guilabel> OK</guilabel>. Apparirà la finestra Add Finished!, simile a quella indicata sotto:</para>
+ 
+      <mediaobject>
+        <imageobject role="html">
+          <imagedata fileref="images/Team_projects_Add.png"/>
+        </imageobject>
+		<imageobject role="fo">
+          <imagedata fileref="images/Team_projects_Add.png" width="80%"/>
+        </imageobject>
+      </mediaobject>
+	  
+          <para>I contenuti della cartella di checkout verrà contrassegnata di conseguenza:</para>
+
+          <mediaobject>
+            <imageobject role="html">
+              <imagedata fileref="images/Team_projects_checkoutAddFolder.png"/>
+            </imageobject>
+			<imageobject role="fo">
+              <imagedata fileref="images/Team_projects_checkoutAddFolder.png" width="80%"/>
+            </imageobject>
+          </mediaobject>
+
+        </listitem>
+        <listitem>
+          <para><emphasis role="bold">eseguire il commit delle modifiche locali nel server: </emphasis>fare clic col pulsante destro del mouse sulla cartella di checkout locale e selezionare <guilabel>SVN Commit....</guilabel> Si aprirà la finestra Commit (vedere sotto). Selezionare le modifiche da fare - ossia le cartelle e i file aggiunti in questo caso.</para>
+ 
+          <mediaobject>
+            <imageobject role="html">
+              <imagedata fileref="images/Team_projects_initialCommit.png"/>
+            </imageobject>
+	          <imageobject role="fo">
+              <imagedata fileref="images/Team_projects_initialCommit.png" width="80%"/>
+            </imageobject>
+          </mediaobject>
+
+          <para>Inserire un appropriato messaggio nella relativa finestra e premere <guilabel>OK</guilabel>. Si aprirà la finestra Commit, che mostrerà l'avanzamento dell'invio. Verranno prima inviati i contenuti correnti al deposito del server, poi aggiornata la copia locale del deposito - ossia i contenuti della sottocartella .svn - in modo da essere aggiornati all'ultima versione del deposito.</para>
+        </listitem>
+
+        <listitem>
+          <para><emphasis role="bold">aggiornare i file locali dalla copia del deposito locale</emphasis> - le modifiche ricevute dal deposito del server risiedono all'interno della sottocartella .svn, ma non ancora all'interno dei file e delle cartelle in sé. Per aggiornare i file locali, fare clic col pulsante destro del mouse sulla cartella checkout e selezionare <guilabel>SVN Update</guilabel>. Verificare il contenuto della cartella per confermare che la copia locale del deposito, e i file e le cartelle in essa contenuti, corrispondano all'ultima versione del server:</para>
+
+          <mediaobject>
+            <imageobject role="html">
+              <imagedata fileref="images/Team_projects_checkoutSVNupdate.png"/>
+            </imageobject>
+	          <imageobject role="fo">
+              <imagedata fileref="images/Team_projects_checkoutSVNupdate.png" width="80%"/>
+            </imageobject>
+          </mediaobject>
+        </listitem>
+      </itemizedlist>
+    </section>
+  </section>
+  <section>
+  <title>Utilizzo del progetto in collaborazione in OmegaT</title>
+  <para>Una volta configurato il progetto in collaborazione, i membri della squadra necessitano solo <application>OmegaT</application> per accedere al progetto. Per prima cosa, devono usare il comando <guilabel>Progetto &gt; Scarica il progetto in collaborazione</guilabel>. Tale comando eseguirà un checkout del progetto in una cartella locale. Le credenziali di autenticazione vengono memorizzate, dunque non vi è necessità di digitarle ogni volta. In Linux, se <application>OmegaT</application> continua a chiedere l'inserimento delle credenziali, è possibile attivare la casella <guilabel>Forza il salvataggio della password come testo semplice</guilabel>.</para>
+  <para>Per il suo uso successivo basta solo aprire il progetto come qualsiasi progetto <application>OmegaT</application>. OmegaT riconoscerà che è un progetto in collaborazione e lo sincronizzerà in modo automatico, per impostazione predefinita ogni tre minuti.</para>
+  </section>
+</appendix>

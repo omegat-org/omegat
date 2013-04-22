@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<chapter id="chapter.about.OmegaT">
+  <title>Panoramica su <application>OmegaT</application> - introduzione</title>
+
+  <section id="OmegaT-Highlists">
+    <title>Caratteristiche di OmegaT</title>
+
+    <para><application>OmegaT</application> è uno strumento CAT (Traduzione Assistita da Computer) con le seguenti caratteristiche:</para>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis role="bold">Memoria di traduzione:</emphasis><application> OmegaT</application> memorizza le traduzioni in un file di memoria di traduzione. Allo stesso tempo, usa come riferimento file di memoria di traduzione da traduzioni precedenti. Le memorie di traduzione possono risultare particolarmente utili quando si deve eseguire una traduzione con molte ripetizioni o con segmenti di testo relativamente simili. OmegaT usa le memorie di traduzione per memorizzare le traduzioni precedenti e suggerire quelle più probabili per il testo su cui si sta lavorando.</para>
+
+        <para>Queste memorie di traduzione sono anche particolarmente utili quando è necessario aggiornare un documento già tradotto. Le frasi non modificate vengono tradotte automaticamente, mentre per quelle che hanno subito aggiornamenti viene proposta, come traduzione più probabile, la versione precedentemente tradotta. In questo modo, è molto facile gestire le modifiche apportate al documento originario. Se si hanno a disposizione memorie di traduzione create in precedenza, per esempio dall'agenzia di traduzione, o dal cliente, OmegaT le può utilizzare come memorie di riferimento.</para>
+
+        <para>OmegaT usa il formato di file standard tmx per memorizzare e accedere alle memorie di traduzione: questo garantisce che il materiale, tradotto con altri strumenti di traduzione che supportano tale formato, possa essere scambiato.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis role="bold">Gestione terminologica</emphasis>: la gestione terminologica è un elemento importante per la coerenza di una traduzione. OmegaT fa uso di glossari che contengono le traduzioni di singoli termini o di brevi frasi: un dizionario bilingue semplificato e dedicato a un argomento specifico. OmegaT visualizza la traduzione di tutte le parole che compaiono all'interno del segmento correntemente attivo.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis role="bold">Processo di traduzione:</emphasis> il concetto fondamentale è di dover tradurre qualcosa, da un singolo file a una cartella, suddivisa in cartelle secondarie, che contiene molti file in diversi formati. Quando si indicherà a OmegaT che si ha la necessità di tradurre questi file, il programma cerca i file che è in grado di riconoscere, in base alle regole di filtraggio dei file; riconosce le parti testuali al loro interno, le suddivide in gruppi di testo in base alle regole di segmentazione e, infine, visualizza i singoli segmenti in modo da consentirne la traduzione. OmegaT memorizza le traduzioni e propone scelte per segmenti simili a quelli contenuti in memoria. Quando si è pronti per vedere il risultato finale, è possibile esportare i file tradotti, aprirli con l'applicazione adatta e vedere la traduzione nel suo formato finale...</para>
+      </listitem>
+    </itemizedlist>
+  </section>
+
+  <section id="OmegaT.chapters.summary">
+    <title>Riepilogo dei capitoli</title>
+
+    <para>Questo documento deve considerarsi sia un'esercitazione, sia una guida di riferimento. Di seguito, un breve riepilogo dei capitoli e del loro contenuto.</para>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis role="bold"> Guida di avvio rapido:</emphasis> questo capitolo vuole essere una guida all'avvio rapido per principianti e &quot;pigri&quot;, e tratta il procedimento completo, dall'apertura di un nuovo progetto di traduzione al suo completamento.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis role="bold">Installare e avviare OmegaT: </emphasis>questo capitolo è utile per coloro i quali utilizzano OmegaT per la prima volta. Contiene istruzioni specifiche su come installare e avviare OmegaT in Windows, Mac OS X e Linux. Destinato agli utenti avanzati, il capitolo descrive la modalità a riga di comando e le sue potenzialità.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis role="bold">L'interfaccia utente</emphasis>,<emphasis role="bold">Menu principale e Sistemi rapidi da tastiera</emphasis>: questi due capitoli verranno probabilmente consultati intensamente, poiché spiegano l'interfaccia utente di OmegaT e le funzioni a disposizione tramite il menu principale e le combinazioni di tasti.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis role="bold">Proprietà del progetto</emphasis>, <emphasis role="bold"><application>OmegaT</application> File e cartelle:</emphasis> un progetto, nel contesto di OmegaT, è una parte di un lavoro che OmegaT, in quanto strumento di assistenza alla traduzione, è in grado di gestire. Questo capitolo descrive le proprietà del progetto, quali le lingue di partenza e di arrivo. Il secondo di questi capitoli descrive le varie cartelle secondarie, i file in un progetto di traduzione e il loro ruolo, così come gli altri file e le applicazioni dell'utente associate a OmegaT.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis role="bold">Area del campo di modifica:</emphasis> breve capitolo che descrive come impostare il campo di modifica del segmento da tradurre.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis role="bold">Lavorare con testo semplice</emphasis> e <emphasis role="bold">Lavorare con testo formattato</emphasis>: i due capitoli chiariscono alcuni punti importanti riguardo il testo da tradurre, come set di codifica (nel caso dei file di testo semplice) e la gestione dei tag (nel caso di testo con formattazione).</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis role="bold">Memorie di traduzione: </emphasis> spiega il ruolo svolto dalle diverse cartelle secondarie che contengono le memorie di traduzione, e fornisce informazioni su altri importanti aspetti legati a tali memorie.</para>
+      </listitem>
+
+      <listitem>
+        <para><emphasis role="bold">Segmentazione</emphasis>: gli strumenti della memoria di traduzione operano su unità di testo definite &quot;segmenti&quot;. In OmegaT, i segmenti possono basarsi su paragrafi o su regole di segmentazione. La segmentazione a livello di paragrafo è meno usata, ma può risultare utile nei casi dei cosiddetti &quot;testi creativi&quot; La segmentazione basata su regole corrisponde, in genere, alla segmentazione a livello di frase. Il programma viene distribuito con diversi gruppi di regole, mentre l'utente può definirne di nuove, così come descritto in questo capitolo.</para>
+      </listitem>
+
+      <listitem>
+        <para><emphasis role="bold">Ricerche</emphasis> ed <emphasis role="bold"> </emphasis><emphasis role="bold">Espressioni regolari</emphasis>: in OmegaT, le ricerche possono essere tanto semplici quanto &quot;<emphasis>elencare dei segmenti comprendenti </emphasis><emphasis>la parola 'canguro' &quot;. </emphasis> Possono essere anche complesse, e permettono, ad esempio, di ricercare segmenti con due o più spazi consecutivi. In tale caso, verrà utilizzata l'espressione regolare ^s^s+ per individuare ed elencare i segmenti ricercati. Le espressioni regolari sono usate ampiamente anche all'interno delle regole di segmentazione.</para>
+      </listitem>
+
+      <listitem>
+        <para><emphasis role="bold">Dizionari, Glossari</emphasis>, <emphasis role="bold">Traduzione automatica</emphasis> , <emphasis role="bold">Correttore ortografico, LanguageTool:</emphasis> OmegaT supporta l'uso esteso di strumenti quali i dizionari e i glossari. Se è disponibile una connessione Internet possono essere utilizzati, all'interno di OmegaT, vari servizi di traduzione automatica, tipo Google Translate e Microsoft Translator. Se è attivata la correzione ortografica, quando si traduce possono essere riconosciuti e corretti gli errori ortografici e i refusi. Lo strumento open source LanguageTool può essere utilizzato per correggere gli errori grammaticali comuni e quelli di stile.</para>
+      </listitem>
+
+      <listitem>
+        <para><emphasis role="bold">Miscellanea</emphasis>: tratta di altri argomenti di interesse, per esempio come evitare di perdere dati.</para>
+      </listitem>
+
+      <listitem>
+        <para><emphasis role="bold">Appendici</emphasis> contiene le seguenti informazioni</para>
+
+        <itemizedlist>
+          <listitem>
+            <para><emphasis role="bold">OmegaT sul web:</emphasis> informazioni sulle risorse di OmegaT recuperabili in linea</para>
+          </listitem>
+        </itemizedlist>
+
+        <itemizedlist>
+          <listitem>
+            <para><emphasis role="bold">Lingue:</emphasis> viene fornito un elenco ISO delle lingue e dei loro codici</para>
+          </listitem>
+        </itemizedlist>
+
+        <itemizedlist>
+          <listitem>
+            <para><emphasis role="bold">Sistemi rapidi da tastiera nell'editor</emphasis>: elenco delle combinazioni rapide utilizzate nell'editor</para>
+          </listitem>
+
+          <listitem>
+            <para><emphasis role="bold">Personalizzazione delle scorciatoie:</emphasis>le combinazioni rapide si possono personalizzare al fine di adattarle alle esigenze dell'utente</para>
+          </listitem>
+        </itemizedlist>
+
+        <itemizedlist>
+          <listitem>
+            <para><emphasis role="bold">Introduzione ai plugin Tokenizer e di script</emphasis></para>
+          </listitem>
+
+          <listitem>
+            <para><emphasis role="bold">Progetti di squadra</emphasis></para>
+          </listitem>
+        </itemizedlist>
+
+        <itemizedlist>
+          <listitem>
+            <para><emphasis role="bold">Avvertenze legali e riconoscimenti</emphasis></para>
+          </listitem>
+        </itemizedlist>
+      </listitem>
+
+      <listitem>
+        <para><emphasis role="bold">Indice delle parole chiave:</emphasis> è un indice esteso delle parole chiave fornito come supporto all'utente durante la ricerca delle informazioni.</para>
+      </listitem>
+    </itemizedlist>
+  </section>
+</chapter>

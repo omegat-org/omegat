@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<chapter id="chapter.project.properties">
+  <title>Proprietà del progetto<indexterm class="singular">
+      <primary>Progetto</primary> <secondary>Proprietà</secondary>
+    </indexterm></title>
+
+  <para/>
+
+  <section id="properties.dialog">
+    <title>Finestra delle proprietà</title>
+
+    <para>La finestra di dialogo <menuchoice> <shortcut> <keycombo> <keycap>Ctrl</keycap> <keycap>E</keycap> </keycombo> </shortcut> <guimenu>Progetto</guimenu> <guimenuitem>Proprietà...</guimenuitem> </menuchoice> viene utilizzata per modificare il percorso di memorizzazione dei file e delle lingue del progetto.</para>
+
+    <para>Nel corso di una sessione di traduzione è possibile modificare le proprietà del progetto. Si noti che le modifiche alle impostazioni del progetto possono comportare conseguenze, in particolare nel caso in cui il progetto è stato già avviato. Fino a quando non si acquisisce un po' di esperienza con OmegaT, è più sicuro definire tutte le impostazioni prima di iniziare a tradurre, a meno che non ci si accorga di aver commesso un grave errore. I vari sistemi a disposizione dell'utente per proteggere il proprio lavoro, sono descritti nella sezione &quot;Come evitare la perdita di dati&quot;.</para>
+
+    <figure>
+      <title>Finestra delle proprietà del progetto</title>
+
+      <mediaobject>
+        <imageobject role="html">
+          <imagedata fileref="images/NewProject_26.png"/>
+        </imageobject>
+
+        <imageobject role="fo">
+          <imagedata fileref="images/NewProject_26.png" width="80%"/>
+        </imageobject>
+      </mediaobject>
+    </figure>
+
+    <para>Essa contiene:</para>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis role="bold">Un'area per impostare la lingua di partenza e quella di arrivo del progetto</emphasis></para>
+
+        <para>L'indicazione della lingua può essere inserita manualmente, oppure tramite una selezione dagli elenchi a cascata disponibili. Tenere presente che la modifica delle lingue potrebbe rendere inutile la memoria di traduzione in uso, se la coppia di lingue precedentemente impostata non dovesse corrispondere più a quella immessa in corso d'opera.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis role="bold"><guilabel>Abilita la segmentazione a livello di frase</guilabel> </emphasis>check box</para>
+
+        <indexterm class="singular">
+          <primary>Progetto</primary> <secondary>Abilita la segmentazione a livello di frase</secondary>
+        </indexterm>
+
+        <para>Le impostazioni di segmentazione si occupano solo del modo in cui <application>OmegaT</application> gestisce i file di partenza. Il metodo prevalente di segmentazione dei file sorgenti è quello a livello di frase, dunque questa opzione dovrebbe essere lasciata normalmente attivata.</para>
+
+        <para>In alcuni rari casi può essere preferibile usare un'alternativa, per es. la segmentazione a livello di paragrafo. La modifica di questa impostazione non cambia la segmentazione delle memorie di traduzione già esistenti. Se, a metà del lavoro, si decide di passare da una traduzione a livello di frase a quella a livello di paragrafo, la memoria di traduzione interna del progetto non verrà alterata (OmegaT può aggiornare le vecchie memorie di traduzione che non utilizzano la segmentazione per frasi, ma non viceversa.).</para>
+
+        <para>La modifica delle impostazioni di segmentazione potrebbe causare il frazionamento o l'accorpamento dei segmenti già tradotti. Ciò li riporterebbe alla condizione di &quot;non tradotti&quot;, dato che, nonostante la vecchia traduzione sia ancora presente, non corrisponderebbero più ai segmenti registrati nella memoria del progetto.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Pulsante <emphasis role="bold"><guibutton>Segmentazione...</guibutton> </emphasis><indexterm class="singular">
+            <primary>Segmentazione</primary> <secondary>regole generali vs del progetto</secondary>
+          </indexterm></para>
+
+        <para>Le regole di segmentazione valgono, in genere, per tutti i progetti. L'utente, tuttavia, potrebbe aver necessità di creare regole specifiche per il proprio progetto. Utilizzare questo pulsante per aprire la finestra di dialogo, poi attivare l'opzione <guimenuitem>Regole di segmentazione specifiche del progetto</guimenuitem> e regolare la segmentazione a proprio piacimento. Il nuovo gruppo di regole sarà memorizzato assieme al progetto e non influenzerà il gruppo di regole generali di segmentazione. Per eliminare le regole di segmentazione specifiche del progetto, deselezionare la casella. Per ulteriori informazioni sulle regole di segmentazione, si veda il capitolo <link linkend="chapter.segmentation">Segmentazione del documento originale</link>.<emphasis/></para>
+
+        <para><emphasis>Suggerimento:</emphasis> il gruppo di regole di segmentazione di uno specifico progetto vengono memorizzate nel file <filename>project/omegat/segmentation.conf.</filename></para>
+      </listitem>
+
+      <listitem>
+        <para>Pulsante <emphasis role="bold"><guibutton>Filtri dei file...</guibutton> </emphasis><indexterm class="singular">
+            <primary>filtri dei file</primary> <secondary>filtri dei file generali vs filtri dei file del progetto</secondary>
+          </indexterm></para>
+
+        <para>In un modo simile a quello sopra descritto, è possibile creare filtri dei file specifici del progetto, che saranno memorizzati al suo interno e varranno esclusivamente per esso. Per creare un gruppo di filtri dei file specifici del progetto, fare clic sul pulsante <guibutton>Filtri dei file... </guibutton>, poi attivare l'opzione <guimenuitem>Abilita filtri specifici del progetto</guimenuitem>, all'interno della finestra che appare. La copia della configurazione dei filtri modificati verrà memorizzata all'interno del progetto. Per eliminare i filtri dei file specifici del progetto, deselezionare la casella. Si noti che nel menu <guimenuitem>Opzioni -&gt; Filtri dei file</guimenuitem>, vengono modificati i file generali dell'utente, non quelli specifici del progetto. Per ulteriori informazioni sull'argomento, si veda il capitolo <link linkend="chapter.file.filters"> Filtri dei file</link>.<emphasis/></para>
+
+        <para><emphasis>Suggerimento:</emphasis> il gruppo dei filtri dei file di uno specifico progetto viene memorizzato nel file <filename>project/omegat/filters.xml.</filename></para>
+      </listitem>
+
+      <listitem>
+        <para>Opzione di <emphasis role="bold">propagazione automatica</emphasis><emphasis role="bold"><indexterm class="singular">
+            <primary>Progetto</primary> <secondary>Opzione di propagazione automatica</secondary>
+          </indexterm></emphasis></para>
+
+        <para>Nel caso di presenza di segmenti non univoci nei documenti di partenza, l'opzione di Propagazione automatica offre due possibilità, relativamente alla traduzione automatica: se attivata, il primo segmento tradotto verrà trattato come traduzione predefinita e il suo testo di destinazione sarà usato automaticamente per le successive corrispondenze durante il lavoro di traduzione. I segmenti tradotti male possono essere, naturalmente, corretti manualmente in un momento tramite la funzione <guimenuitem>Crea traduzione alternativa</guimenuitem>. Se l'opzione di propagazione automatica non viene attivata, i segmenti con traduzioni alternative verranno lasciati non tradotti fino a quando l'utente non decida quale traduzione usare.</para>
+      </listitem>
+
+      <listitem>
+        <para>Opzione <emphasis role="bold">Rimuovi i tag</emphasis><indexterm class="singular">
+            <primary>Progetto</primary> <secondary>Opzione Rimuovi i tag</secondary>
+          </indexterm></para>
+
+        <para>Se l'opzione è attivata, tutti i tag di formattazione sono rimossi dai segmenti di partenza. Ciò è particolarmente utile quando si ha a che fare con testi la cui formattazione incorporata non ha una concreta utilità (per es., PDF OCRed, file .odt o .docx convertiti in modo errato, e via discorrendo). Nei casi normali deve essere sempre possibile aprire i documenti di destinazione, dato che solo i tag incorporati vengono rimossi. Nei documenti di arrivo, la formattazione non visibile (per esempio, quella che non appare sotto forma di tag nell'editor di OmegaT) viene mantenuta.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis role="bold">Area per la definizione delle cartelle di memorizzazione dei file.</emphasis><indexterm class="singular">
+            <primary>Progetto</primary> <secondary>Modificare la struttura della cartella</secondary>
+          </indexterm><indexterm class="singular">
+            <primary>Glossari</primary> <secondary>Posizione del file di glossario scrivibile</secondary>
+          </indexterm></para>
+
+        <para>È qui possibile selezionare sottocartelle diverse, per esempio la sottocartella con i file di partenza, quella per i file di destinazione, e via discorrendo. Se si inseriscono manualmente i nomi delle cartelle non ancora esistenti, <application>OmegaT</application> si occuperà automaticamente per la loro creazione. Nel caso si volessero modificare le cartelle del progetto, tenere presente che l'azione non sposterà i file contenuti dalle vecchie cartelle alla nuova posizione.</para>
+      </listitem>
+    </itemizedlist>
+  </section>
+</chapter>

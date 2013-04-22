@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<chapter id="chapter.glossaries">
+  <title>Glossari<indexterm class="singular">
+      <primary>Finestre e pannelli in OmegaT</primary> <secondary>Pannello del Glossario</secondary>
+    </indexterm><indexterm class="singular">
+      <primary>Glossari</primary>
+    </indexterm></title>
+
+  <para>I glossari sono file da usare in  <application>OmegaT</application> creati e aggiornati.</para>
+
+  <para>Se un progetto <application>OmegaT</application> contiene uno o più glossari, tutti i termini presenti nel glossario trovati anche nel segmenti corrente saranno visualizzati automaticamente all'interno del visualizzatore Glossario.</para>
+
+  <para>La sua posizione e il suo nome sono definiti all'interno della finestra delle proprietà del progetto. L'estensione deve essere <filename>.txt</filename>(se così non fosse, essa verrà aggiunta). Il file deve essere contenuto all'interno della cartella <filename>/glossary</filename>, ma può trovarsi anche in un'ulteriore sottocartella (per es., <filename>glossary/sub/glossario.txt</filename>). Non è obbligatorio che il file esista, esso verrà creato (se necessario) quando si aggiunge una voce di glossario. Se il file esiste già, non sarà fatta alcuna verifica sul formato o sul gruppo di caratteri del file: le nuove voci saranno sempre aggiunte in formato con spazi separati da tabulazione e in UTF-8. Il contenuto esistente non verrà alterato, dunque i danni a un file già presente saranno molto limitati.</para>
+
+  <section>
+    <title>Uso</title>
+
+    <para>Per utilizzare un glossario esistente, sarà sufficiente inserirlo nella cartella <indexterm class="singular">
+        <primary>File del progetto</primary> <secondary>Sottocartella del Glossario</secondary>
+      </indexterm> <filename>/glossary</filename> dopo aver creato il progetto. <application>OmegaT</application> quando apre un progetto, rileva automaticamente i file di glossario presenti in questa cartella. I termini del segmento corrente che <application>OmegaT</application> reperisce all'interno del/dei file di glossario vengono visualizzati all'interno del pannello “Glossario” della schermata principale:</para>
+
+    <indexterm class="singular">
+      <primary>Glossari, pannello del Glossario</primary>
+    </indexterm>
+
+    <figure>
+      <title>Pannello del Glossario</title>
+
+      <mediaobject>
+        <imageobject role="html">
+          <imagedata fileref="images/GlossaryPane_25.png"/>
+        </imageobject>
+
+        <imageobject role="fo">
+          <imagedata fileref="images/GlossaryPane_25.png" width="60%"/>
+        </imageobject>
+      </mediaobject>
+    </figure>
+
+    <para>La parola prima del segno = è il termine di partenza, mentre la parola (o le parole) dopo il segno = rappresenta la sua traduzione. Alla voce di glossario può essere aggiunto un commento. La funzione di glossario è in grado di rilevare solo le corrispondenze esatte della voce contenuta nel glossario (vale a dire, non rileva le forme flesse, ecc.). Nel corso del processo di traduzione, al, o ai, file di glossario si possono inserire manualmente nuovi termini, per esempio servendosi di un editor di testo. I termini aggiunti di recente non saranno riconosciuti una volta che le modifiche nel file di testo verrano salvate.</para>
+
+    <para>Il termine di partenza non deve necessariamente essere una parola singola, come dimostra il prossimo esempio:</para>
+
+    <figure>
+      <title>voci con più parole nei glossari - esempio<indexterm class="singular">
+          <primary>Glossari</primary> <secondary>Pannello del Glossario</secondary> <tertiary>voci con più parole</tertiary>
+        </indexterm></title>
+
+      <mediaobject>
+        <imageobject role="html">
+          <imagedata fileref="images/MultiTerm_Glossary_25.png"/>
+        </imageobject>
+
+        <imageobject role="fo">
+          <imagedata fileref="images/MultiTerm_Glossary_25.png" width="80%"/>
+        </imageobject>
+      </mediaobject>
+    </figure>
+
+    <para>È possibile trovare nel pannello del glossario l'elemento sottolineato &quot;pop-up menu&quot; come &quot;pojavni menu&quot;. Per inserire l'elemento nel segmento di arrivo e alla posizione del cursore, evidenziarlo nel pannello del Glossario e fare clic col pulsante destro del mouse.<footnote>
+        <para>Si noti che nel caso di cui sopra, questo rappresenta metà del lavoro (o forse meno) poiché la lingua di arrivo (Sloveno) usa le declinazioni. L'elemento inserito &quot;pojavni meni&quot;, nella forma nominativa, deve essere cambiato in &quot;pojavnem meniju&quot;, per esempio nel locativo. In tali casi è probabilmente più veloce digitare direttamente il termine corretto, piuttosto che perder tempo col glossario e le relative combinazioni di tasti.</para>
+      </footnote></para>
+  </section>
+
+  <section>
+    <title><indexterm class="singular">
+        <primary>Glossari</primary> <secondary>Formato del file</secondary>
+      </indexterm>Formato dei file<indexterm class="singular">
+        <primary>File del progetto</primary> <secondary>File utente</secondary> <seealso>Glossari</seealso>
+      </indexterm></title>
+
+    <para>I file di glossario sono dei semplici file di solo testo composti da elenchi su tre colonne, delimitate da tabulatori, con il termine di partenza e quello di destinazione inseriti, rispettivamente, nella prima e nella seconda colonna. La terza colonna è utilizzata per l'inserimento di ulteriori informazioni. È possibile avere voci senza il termine di destinazione, per esempio solo col termine di partenza e il commento relativo.</para>
+
+    <para>I file di glossario possono prevedere la codifica predefinita dal sistema (indicata dall'estensione .tab) o in UTF-8 (estensione .utf8). Si preferisce la codifica Unicode (UTF8) per ovvie ragioni. È supportato anche il formato CSV. Questo formato è uguale a quello separato da tabulazione: termine sorgente, termine di destinazione. I campi del commento sono separati da una virgola ','. Le stringhe possono essere racchiuse da virgolette &quot;, che permettono di contenere una virgola all'interno di una stringa:</para>
+
+    <para><literal>&quot;This is a source term, which contains a comma&quot;,&quot;questo è un termine di partenza, che contiene una virgola&quot;</literal></para>
+
+    <para>Oltre al formato di solo testo, è supportato anche il formato TBX <indexterm class="singular">
+        <primary>Glossari</primary> <secondary>Formato TBX</secondary>
+      </indexterm>. TBX - Term Base eXchange - è lo standard aperto basato su XML per l'interscambio di dati terminologici strutturati; TBX è stato riconosciuto come standard internazionale da LISA e ISO. Se si possiede già un sistema di gestione terminologica - per esempio, MultiTerm - è molto probabile che esso preveda l'esportazione dei dati terminologici nel formato TBX. <ulink url="http://www.microsoft.com/Language/en-US/Terminology.aspx">raccolta di terminologia Microsoft</ulink> <indexterm class="singular">
+        <primary>Glossari</primary> <secondary>Raccolta di terminologia Microsoft</secondary>
+      </indexterm> può essere scaricata in quasi cento lingue e può servire come punto di partenza per la creazione di un glossario informatico.</para>
+  </section>
+
+  <section>
+    <title>Come creare glossari<indexterm class="singular">
+        <primary>Glossari</primary> <secondary>Creazione di un glossario</secondary>
+      </indexterm></title>
+
+    <para>L'impostazione del progetto permette di aggiungere un nome al file di glossario scrivibile (si veda l'inizio di questo capitolo). Fare clic col destro nel pannello del glossario o premere <keycap>Ctrl+Maiusc+G</keycap> per aggiungere una nuova voce. Si aprirà una finestra che consentirà d'inserire sia il termine di partenza, sia quello di destinazione ed eventuali commenti alla voce:</para>
+
+    <mediaobject role="html">
+      <imageobject>
+        <imagedata fileref="images/GlossaryEntry_25.png"/>
+      </imageobject>
+
+      <imageobject role="fo">
+        <imagedata fileref="images/GlossaryEntry_25.png" width="80%"/>
+      </imageobject>
+    </mediaobject>
+
+    <para>Il contenuto dei file di glossario viene memorizzato e caricato all'apertura o all'aggiornamento del progetto. L'aggiornamento del file di glossario è dunque piuttosto semplice: premere <keycap>Ctrl+Maiusc+G</keycap> e scrivere il nuovo termine, la sua traduzione e gli eventuali commenti (prestando attenzione a premere il tasto di tabulazione tra un campo e l'altro), poi salvare il file. Il contenuto del pannello del glossario verrà opportunamente aggiornato.</para>
+
+    <para><indexterm class="singular">
+        <primary>Glossari</primary> <secondary>Posizione del file di glossario scrivibile</secondary>
+      </indexterm>La posizione del file del glossario scrivibile può essere decisa in <guimenuitem>Progetto &gt; finestra Proprietà...</guimenuitem>. Le estensioni accettate sono <filename>TXT</filename> e <filename>UTF8</filename></para>
+
+    <para><emphasis role="bold">Nota:</emphasis> esistono, ovviamente, altri metodi per creare un semplice file con voci delimitate da tabulazione. Nulla vieta, per esempio, di usare Notepad++ in Windows o GEdit in Linux, oppure un foglio di calcolo elettronico, per questo scopo: si possono usare tutte le applicazioni in grado di gestire gli UTF8 e di mostrare gli spazi bianchi (in modo da non perdere di vista i caratteri <keycap>TAB</keycap> richiesti).</para>
+  </section>
+
+  <section>
+    <title><indexterm class="singular">
+        <primary>Glossari</primary> <secondary>Trados MultiTerm</secondary>
+      </indexterm>Uso di Trados MultiTerm</title>
+
+    <para>I dati esportati da Trados MultiTerm possono essere usati come glossari <application>OmegaT</application> senza modifiche, sempre che essi abbiano l'estensione di file <filename>.tab</filename> e che i campi dei termini di arrivo e partenza siano rispettivamente il primo e il secondo campo. Se si esporta utilizzando l'opzione di sistema &quot;Esportazione delimitata da tab&quot;, si dovranno eliminare le prime 5 colonne (Seq. Nr, Date created, ecc). Le versioni recenti di MultiTerm supportano l'esportazione al formato TBX.</para>
+  </section>
+
+  <section>
+    <title><indexterm class="singular">
+        <primary>Glossari</primary> <secondary>Problemi con i glossari</secondary>
+      </indexterm>Problemi comuni dei glossari</title>
+
+    <para><emphasis role="bold">Problema: non è visualizzato alcun termine di glossario - cause possibili:</emphasis></para>
+
+    <itemizedlist>
+      <listitem>
+        <para>Non sono presenti file di glossario nella cartella &quot;glossary&quot;.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Il file di glossario è vuoto.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Gli elementi non sono separati da un carattere TAB.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Il file di glossario non possiede l'estensione corretta (.tab o .utf8).</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Non esiste una PRECISA corrispondenza tra la voce di glossario e il testo di partenza nel documento - ad esempio, i plurali.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Il file di glossario non possiede la corretta codifica.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Non esistono termini nel segmento attivo che corrispondono ai termini presenti nel glossario.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Uno o più problemi citati sopra sono stati risolti ma il progetto non è stato ricaricato.</para>
+      </listitem>
+    </itemizedlist>
+
+    <para><emphasis role="bold">Problema: nel pannello del glossario alcuni caratteri non vengono visualizzati correttamente</emphasis></para>
+
+    <itemizedlist>
+      <listitem>
+        <para>...ma gli stessi caratteri sono visualizzati correttamente nel pannello di modifica: l'estensione e il file di codifica non coincidono.</para>
+      </listitem>
+    </itemizedlist>
+  </section>
+</chapter>

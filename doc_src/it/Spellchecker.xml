@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<chapter id="chapter.spellchecker">
+  <title>Correttore ortografico<indexterm class="singular">
+      <primary>Correttore ortografico</primary>
+    </indexterm></title>
+
+  <para>OmegaT possiede un correttore ortografico incorporato che si basa su quello usato in Apache OpenOffice, LibreOffice, Firefox e Thunderbird. È dunque in grado di utilizzare l'ampia gamma di dizionari ortografici gratuiti disponibile per queste applicazioni.</para>
+
+  <section>
+    <title>Installazione dei dizionari ortografici</title>
+
+    <para>Per utilizzare la funzione di correzione ortografica devono essere installati uno o più dizionari (per es., per la lingua di destinazione). Per installare i dizionari ortografici, seguire questa procedura:</para>
+
+    <itemizedlist>
+      <listitem>
+        <para>Creare, nel proprio gestore di file, una nuova cartella in cui memorizzare i dizionari ortografici (D:\Translations\spellcheckers nell'esempio sotto riportato).</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>In OmegaT, selezionare <guisubmenu><indexterm class="singular">
+            <primary>Menu Opzioni</primary> <secondary>Correzione ortografica</secondary>
+          </indexterm></guisubmenu><guimenuitem>Opzioni &gt; Correzione ortografica</guimenuitem>, poi premere il pulsante <guibutton>Scegli </guibutton>situato affianco al campo della posizione del dizionario. Navigare fino alla cartella creata per i dizionari.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Copiare i file di dizionario da usare all'interno di questa cartella. Esistono fondamentalmente due modi per eseguire questa operazione. O si copiano manualmente i file da un punto qualsiasi del proprio sistema, oppure si può usare la funzione <emphasis role="bold">&quot;Installa nuovo dizionario&quot;</emphasis> di OmegaT, che fornisce un elenco dei dizionari disponibili da cui attingere. Si noti che la funzione &quot;Installa&quot; richiede una connessione Internet. Verranno installate le lingue selezionate, le quali potranno eventualmente apparire nella finestra di configurazione del correttore ortografico (ciò potrebbe richiedere del tempo).</para>
+      </listitem>
+    </itemizedlist>
+
+    <para>La copiatura manuale dei file ha senso se nel proprio sistema si possiedono già file di dizionario adatti allo scopo, per esempio, quelli che fanno parte dell'installazione di OpenOffice, Firefox o Thunderbird. È tuttavia più semplice cercare i dizionari su Internet, utilizzando il campo <emphasis role="bold">URL per i dizionari in linea</emphasis>:</para>
+
+    <figure id="spellchecker.setup">
+      <title><indexterm class="singular">
+          <primary>Correttore ortografico</primary> <secondary>Impostazioni del correttore ortografico</secondary>
+        </indexterm>Impostazioni del correttore ortografico</title>
+
+      <mediaobject>
+        <imageobject role="html">
+          <imagedata fileref="images/SpellcheckerSetup_25.png"/>
+        </imageobject>
+
+        <imageobject role="fo">
+          <imagedata fileref="images/SpellcheckerSetup_25.png" width="80%"/>
+        </imageobject>
+      </mediaobject>
+    </figure>
+
+    <para>Premendo il pulsante <guibutton>Installa nuovo dizionario</guibutton> si apre la finestra di installazione del dizionario, in cui poter scegliere i dizionari da installare.</para>
+
+    <para>I nomi dei file devono corrispondere ai codici di lingua della lingua di destinazione, come definito nella finestra di dialogo di proprietà del progetto (<guimenu>Progetto &gt; Proprietà</guimenu>). Ad esempio, se avete selezionato ES-MX (spagnolo messicano) come la lingua di destinazione, i file di dizionario devono essere denominati es_MX.dic ed es_MX.aff. Se si dispone solo di un dizionario di Spagnolo standard, con i nomi file, per esempio, es_es.dic e es_es.aff, è possibile copiare questi file in es_MX.dic e es_MX.aff, e il correttore ortografico funzionerà. Si noti che questo eseguirà i controlli per lo Spagnolo standard (castigliano) piuttosto che per quello messicano.</para>
+  </section>
+
+  <section>
+    <title>Uso dei dizionari ortografici</title>
+
+    <para>Non è necessario impartire particolari istruzioni a OmegaT per usare uno specifico dizionario ortografico; OmegaT userà il dizionario di lingua corretto basandosi sui codici di lingua del progetto. Verificare comunque che i codici di lingua siano uguali: un dizionario IT-IT, ad esempio, non funzionerà con un codice di arrivo impostato a IT. Modificare, se necessario, i nomi dei file del dizionario, oppure cambiare le impostazioni linguistiche del proprio progetto.</para>
+
+    <para>Per abilitare il correttore ortografico, selezionare <guimenuitem>Opzioni &gt; Correzione ortografica</guimenuitem> e spuntare la casella <guilabel>Controlla automaticamente l'ortografia</guilabel> (vedere sopra).</para>
+
+    <figure id="spellchecker.in.action">
+      <title>Uso del correttore ortografico</title>
+
+      <mediaobject>
+        <imageobject role="html">
+          <imagedata fileref="images/SpellcheckingText.png"/>
+        </imageobject>
+
+        <imageobject role="fo">
+          <imagedata fileref="images/SpellcheckingText.png" width="80%"/>
+        </imageobject>
+      </mediaobject>
+    </figure>
+
+    <para>Il clic col pulsante destro del mouse su una parola sottolineata (Artund nella figura sopra) apre un menu a discesa che elenca i suggerimenti per la correzione (Art und). È pure possibile istruire il correttore a ignorare tutte le occorrenze della parola evidenziata, oppure ad aggiungerla al dizionario.</para>
+  </section>
+
+  <section id="hints">
+    <title>Consigli<indexterm class="singular">
+        <primary>Correttore ortografico</primary> <secondary>Consigli</secondary>
+      </indexterm></title>
+
+    <para>Se il correttore non funziona, assicurarsi prima di tutto che la casella <guilabel>&quot;Controlla automaticamente l'ortografia&quot;</guilabel>, nella finestra di dialogo della correzione ortografica (<guisubmenu>Opzioni &gt; Correzione ortografica...)</guisubmenu>, sia attivata.</para>
+
+    <para>Confrontare anche il codice della lingua di destinazione del proprio progetto con i dizionari disponibili all'interno della finestra di configurazione. Il correttore ortografico usa il codice della lingua di destinazione per determinare la lingua da usare: se quest'ultima è il Portoghese brasiliano (PT_BR), la sottocartella contenente i vocabolari deve contenere due file di dizionario chiamati rispettivamente <emphasis>pt_br.aff</emphasis> e <emphasis>pt_br.dic</emphasis>.</para>
+
+    <para>Se si è già tradotta un'ampia porzione di testo e ci si accorge che il codice della lingua di destinazione non corrisponde a quello della lingua del correttore ortografico (poiché è stata specificata pt_BR come lingua, per esempio, ma non è presente alcun dizionario pt_BR), basta copiare e rinominare i due file corrispondenti (per esempio, da <emphasis>pt_PT.aff</emphasis> e <emphasis>pt_PT.dic</emphasis> a <emphasis>pt._BR.aff</emphasis> e <emphasis>pt_BR.dic</emphasis>). Sarebbe più opportuno, naturalmente, prendersi una pausa e scaricare la versione corretta del correttore ortografico.</para>
+
+    <para>Si noti che il comando <filename>Rimuovi</filename> elimina fisicamente i dizionari selezionati. Se essi sono utilizzati da qualche altra applicazione del sistema, scompariranno anche da quella applicazione. Se, per una qualsiasi ragione, si dovesse eseguire di tanto in tanto questa operazione, si dovrebbero copiare i file coinvolti in una cartella diversa, riservata solo all'uso di OmegaT.</para>
+  </section>
+</chapter>

@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<appendix id="appendix.TokenizerPlugin.inOmegaT">
+  <title>Plugin Tokenizer<indexterm class="singular">
+      <primary>Plugin</primary> <secondary>Tokenizer</secondary>
+    </indexterm></title>
+
+  <section>
+    <title>Introduzione<indexterm class="singular">
+        <primary>Lucene</primary>
+
+        <see>Tokenizer</see>
+      </indexterm><indexterm class="singular">
+        <primary>Stemmer</primary>
+
+        <see>Tokenizer</see>
+      </indexterm></title>
+
+    <para>I tokenizer (o stemmer) migliorano la qualità delle concordanze tramite il riconoscimento delle parole flesse, sia nei file di partenza, sia nelle memorie di traduzione.  Migliorano anche le concordanze nel glossario.</para>
+
+    <para>Uno stemmer applicato all'Inglese, ad esempio, deve riconoscere la stringa &quot;cats&quot; (e possibilmente &quot;catlike&quot;, &quot;catty&quot;, e via discorrendo) basandosi sulla radice (tema) &quot;cat&quot;, e &quot;stemmer&quot;, &quot;stemming&quot;, &quot;stemmed&quot; basandosi su &quot;stem&quot;. L'algoritmo di riconoscimento della radice riduce le parole &quot;fishing&quot;, &quot;fished&quot;, &quot;fish&quot; e &quot;fisher&quot; al tema radice, ossia &quot;fish&quot;. Ciò è particolarmente utile nei casi di lingue che utilizzano forme prefissali e suffissali sui temi. Mutuando un esempio dallo Sloveno, di seguito l'aggettivo &quot;buono&quot; in tutte le forme grammaticalmente corrette possibili:</para>
+
+    <itemizedlist>
+      <listitem>
+        <para>lep, lepa, lepo - singolare, maschile (M), femminile (F), neutro (N)</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>lepši, lepša, lepše . - comparativo, nominativo, maschile, femminile, neutro, a confronto con la forma plurale dell'aggettivo</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>najlepših - superlativo, plurale, genitivo per M,F,N</para>
+      </listitem>
+    </itemizedlist>
+  </section>
+
+  <section>
+    <title>Installazione e uso della riga di comando</title>
+
+    <para>In OmegaT viene distribuito il plugin di un tokenizer adattato dal progetto Lucene, scaricabile in http://sourceforge.net/projects/omegat-plugins/files/. Scaricare il file più recente (al momento della scrittura di questa guida, è OmegaT-tokenizers_0.4_2-2.1.zip).</para>
+
+    <para>Per installare il tokenizer, creare una cartella di nome &quot;plugins&quot; all'interno della cartella in cui risiede OmegaT.jar e decomprimere i file al suo interno.</para>
+
+    <para>Per far funzionare OmegaT col tokenizer, deve essere specificato quale tokenizer verrà utilizzato per la lingua di partenza e quale per quella di destinazione. La sintassi è la seguente:</para>
+
+    <para><literal>java -jar OmegaT.jar --ITokenizer=[nome tokenizer lingua di partenza] --ITokenizerTarget=[nome tokenizer lingua di destinazione]</literal></para>
+
+    <para>I nomi dei tokenizer sono indicati nel file Readme.txt distribuito con i file del tokenizer. Per esempio, se si desidera utilizzare il tokenizer Lucene CJK per la lingua di partenza e quello Lucene French per quella di destinazione, il comando dovrà essere:</para>
+
+    <para><literal>java -jar OmegaT.jar
+    --ITokenizer=org.omegat.plugins.tokenizer.LuceneCJKTokenizer
+    --ITokenizerTarget=org.omegat.plugins.tokenizer.LuceneFrenchTokenizer</literal></para>
+  </section>
+
+  <section>
+    <title>Specifiche per Mac OS X</title>
+
+    <para>Per utilizzare i tokenizer col pacchetto OmegaT.app di Mac OS X, è valida la procedura descritta sopra (clic col tasto destro del mouse su OmegaT.app per individuare la posizione di OmegaT.jar), ma sarà necessario anche specificare i nomi dei tokenizer nel file <filename>info.plist </filename>, che contiene le opzioni di avvio per Java. Seguire le istruzioni sopra riportate per avere accesso al file <filename>info.plist</filename> e modificarlo in modo che assomigli all'esempio che abbiamo appena fornito:</para>
+
+    <literallayout><code>
+&lt;key&gt;VMOptions&lt;/key&gt;
+&lt;string&gt;-Xmx1024M&lt;/string&gt;
+
+&lt;key&gt;Arguments&lt;/key&gt;
+&lt;array&gt;
+  &lt;string&gt;--ITokenizer=org.omegat.plugins.tokenizer.LuceneCJKTokenizer&lt;/string&gt;
+  &lt;string&gt;--ITokenizerTarget=org.omegat.plugins.tokenizer.LuceneFrenchTokenizer&lt;/string&gt;
+&lt;/array&gt;</code></literallayout>
+  </section>
+
+  <section>
+    <title>Risoluzione dei problemi</title>
+
+    <para>Per verificare che i tokenizer siano utilizzati, aprire un progetto e controllare le informazioni del registro fornite dalla console. In base all'esempio citato sopra, le informazioni dovrebbero apparire così:</para>
+
+    <literallayout><code>
+84528: Info: Source tokenizer: org.omegat.plugins.tokenizer.LuceneCJKTokenizer 
+84528: Info: Target tokenizer: org.omegat.plugins.tokenizer.LuceneFrenchTokenizer 
+</code></literallayout>
+
+    <para>I numeri sulla sinistra possono risultare diversi a seconda del sistema, perciò verificare che i nomi dei tokenizer di partenza e destinazione, specificati nelle opzioni di avvio, corrispondano a ciò che il registro mostra. Se i tokenizer non vengono avviati correttamente, il registro apparirà in questo modo:</para>
+
+    <literallayout><code>
+12719: Info: Source tokenizer: org.omegat.core.matching.Tokenizer 
+12719: Info: Target tokenizer: org.omegat.core.matching.Tokenizer 
+</code></literallayout>
+
+    <para>Col pacchetto OmegaT.app per Mac OS X è necessario fare doppio clic su <literal>JavaApplicationStub</literal> che si trova in /OmegaT.app/Contents/MacOS/ (per accedervi, si veda sopra), per avviare OmegaT dalla console e ottenere accesso immediato al registro.</para>
+  </section>
+</appendix>

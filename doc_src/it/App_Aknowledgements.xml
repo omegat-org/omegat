@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE appendix PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<appendix id="appendix.acknowledgements">
+  <title>Riconoscimenti</title>
+
+  <section>
+    <title>Grazie a tutti!</title>
+
+    <para>Quali che siano le incongruenze, le omissioni e gli errori palesi presenti in questa versione, dichiaro che sono tutti di mia proprietà. Non sarebbe stato possibile, tuttavia, predisporre questo manuale senza l'aiuto e il supporto di varie persone. Un grazie particolare a:</para>
+
+    <itemizedlist>
+      <listitem>
+        <para>Mark Prior: la correzione della mia prima bozza è stato un atto d'amore nei confronti di OmegaT e la lingua inglese.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Didier Briel: non ce l'avrei fatta senza la pazienza e il costante aiuto di Didier per le complessità dei DocBook. Per non parlare della sua accuratezza e diligenza nella manutenzione ordinata e corretta dei depositi.</para>
+      </listitem>
+
+      <listitem>
+        <para>Samuel Murray: per il capitolo introduttivo &quot;Imparare a usare OmegaT in cinque minuti&quot;.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Will Helton: la sua revisione finale della bozza mi ha evitato brutte figure. Non avete idea di quanti articoli &quot;a&quot; e &quot;the&quot; sarebbero mancati senza il suo incomparabile aiuto.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Jean-Christophe Helary: merita un ringraziamento speciale per la descrizione concisa dell'avvio di OmegaT, dei parametri di avvio e di tutti gli altri dettagli che devo ancora notare.</para>
+      </listitem>
+
+      <listitem>
+        <para>Ultimo ma non ultimo: i miei ringraziamenti a tutti quelli che hanno inviato contributi al <ulink url="http://sourceforge.net/tracker/?group_id=68187&amp;atid=912617"> tracker della documentazione di OmegaT</ulink> riguardo le incongruenze trovate nelle versioni precedenti della documentazione. Continuate così!</para>
+      </listitem>
+    </itemizedlist>
+  </section>
+</appendix>

@@ -184,7 +184,7 @@
   <para>The "Shift" key doesn't exhibit any special behavior per se: when the
   "Shift" key is pressed, all keys move the cursor in their usual manner,
   except in the case of the <literal>Shift+Enter</literal> combination, that
-  inserts a line brak into the text.</para>
+  inserts a line break into the text.</para>
 
   <para>System-wide commands Select All (<keycap>Ctrl+A</keycap>), Paste
   (<emphasis role="bold">Ctrl+V</emphasis>), Cut (<emphasis

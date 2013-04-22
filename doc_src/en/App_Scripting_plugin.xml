@@ -115,7 +115,7 @@
       </itemizedlist>All the languages have access to the OmegaT object model,
     with the project as the top object. The following code snippet in groovy
     for instance scans through all the segments in all files in the current
-    project and, if the translatione xists, prints out the source and the
+    project and, if the translation exists, prints out the source and the
     target of the segment:</para>
 
     <programlisting>    files = project.projectFiles;

@@ -503,7 +503,7 @@
       <itemizedlist>
         <listitem>
           <para>When you exit the project. the TMX files in the main project
-          folder (see above) now contain the transltions in the selected
+          folder (see above) now contain the translations in the selected
           language pair, for the files, you have copied into the source
           folder. Copy them to a safe place for future referrals.</para>
         </listitem>
@@ -558,7 +558,7 @@
       memory into the tm subfolder and rename it ZH_CN.tmx to indicate the
       target language of the tmx. The translator will be shown English
       translations for source segments in Dutch and use them to create the
-      Chinese translaiton.</para>
+      Chinese translation.</para>
 
       <para><emphasis role="bold">Important: </emphasis>the supporting TMX
       must be renamed XX_YY.tmx, where XX_YY is the target language of the

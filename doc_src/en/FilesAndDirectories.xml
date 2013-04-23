@@ -474,49 +474,32 @@
           </row>
 
           <row>
-            <entry rowsep="0"><literal>OmegaT</literal></entry>
+            <entry><application>OmegaT</application></entry>
 
-            <entry rowsep="0">A text file containing two lines:</entry>
+            <entry><para>A text file containing two lines:</para>
+
+            <programlisting>#!/bin/bash java
+            java -jar OmegaT.jar $*</programlisting>
+
+            <para>Linux and OS X users may find this file useful. Make it
+executable (<literal>chmod +x OmegaT</literal>) from the command line after making
+sure you are in the /OmegaT_2.5/ directory. You will then be able
+to launch OmegaT by executing this file from the command
+line</para>
+            </entry>
           </row>
-
+          
           <row>
-            <entry rowsep="0"/>
+            <entry><application>OmegaT.bat</application>.bat</entry>
 
-            <entry rowsep="0"><literal>#!/bin/bash java</literal></entry>
-          </row>
-
-          <row>
-            <entry rowsep="0"/>
-
-            <entry rowsep="0"><literal>java -jar
-            <application>OmegaT</application>.jar $*</literal></entry>
-          </row>
-
-          <row>
-            <entry/>
-
-            <entry>Linux and OS X users may find this file useful. Make it
-            executable (chmod +x OmegaT) from the command line after making
-            sure you are in the /OmegaT_2.5/ directory. You will then be able
-            to launch OmegaT by executing this file from the command
-            line.</entry>
-          </row>
-
-          <row>
-            <entry rowsep="0"><literal>OmegaT.bat</literal></entry>
-
-            <entry rowsep="0">A batch file, used to launch
+            <entry><para>A batch file, used to launch
             <application>OmegaT</application> from the Windows command line.
-            It contains just the following line:</entry>
+            It contains just the following line:</para>
+
+            <programlisting>java -jar OmegaT.jar %*</programlisting>
+            </entry>
           </row>
-
-          <row>
-            <entry/>
-
-            <entry><literal>java -jar OmegaT.jar
-            %*</literal></entry>
-          </row>
-
+          
           <row>
             <entry><literal>OmegaT.jar</literal></entry>
 

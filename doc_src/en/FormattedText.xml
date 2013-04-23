@@ -243,7 +243,7 @@
     <itemizedlist>
       <listitem>
         <para><emphasis role="bold">Fragment(s) that should be removed from
-        the translation regular expressiom</emphasis></para>
+        the translation regular expression</emphasis></para>
 
         <para>One can enter a regular expression for unwanted contents in the
         target. Any matches in the target segment will then be painted red,

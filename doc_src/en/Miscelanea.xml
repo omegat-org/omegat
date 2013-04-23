@@ -69,7 +69,7 @@
       <para>To launch OmegaT in console mode, additional parameters must be
       specified at launch. The most important of these is
       <literal>&lt;project-dir&gt;</literal>, and
-      optionally<literal>--config-dir=&lt;config-dir&gt;</literal>.
+      optionally <literal>--config-dir=&lt;config-dir&gt;</literal>.
       Example:</para>
 
       <para><literal>$&gt; java -jar <application>OmegaT</application>.jar

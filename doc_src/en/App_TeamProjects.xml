@@ -198,7 +198,7 @@
 
       <para>The repository is empty at this moment. You create first an empty
       client folder on your disk. Create an empty folder, where you will keep
-      your project and right/click on it. Select<guilabel> TortoiseSVN &gt;
+      your project and right-click on it. Select<guilabel> TortoiseSVN &gt;
       Checkout.</guilabel> The following dialog appears:</para>
  
       <mediaobject>
@@ -321,7 +321,7 @@
           <para><emphasis role="bold">update local files from the local
           repository copy</emphasis> - the changes received from the server
           repository reside within the .svn subfolder but not yet in the files
-          and folders themselves. To update the local files, right/click on
+          and folders themselves. To update the local files, right-click on
           the checkout directory and select <guilabel>SVN Update</guilabel>.
           Check the contents of the folder to confirm that the local copy of
           the repository and the corresponding files and folders correspond to

@@ -7,7 +7,7 @@
     </indexterm></title>
 
   <para>OmegaT has a built-in spell checker based on the spelling checker used
-  in the Apache OpenOffice, LibreOffice, Firefox and Thunderbird. It is
+  in Apache OpenOffice, LibreOffice, Firefox and Thunderbird. It is
   consequently able to use the huge range of free spelling dictionaries
   available for these applications.</para>
 
@@ -54,8 +54,8 @@
     </itemizedlist>
 
     <para>Copying the files manually makes sense if you already have suitable
-    dictionary files on your system, for instance as part of your OpenOffice,
-    Firefox or Thunderbird installation. It is simpler, however, to look for
+    dictionary files on your system, for instance as part of your Apache OpenOffice,
+    Libreoffice, Firefox or Thunderbird installation. It is simpler, however, to look for
     dictionaries online, using the <emphasis role="bold">URL of online
     dictionaries</emphasis> field:</para>
 
@@ -151,7 +151,7 @@
     are no pt_BR vocabularies, for instance) you can simply copy the two
     corresponding files and rename them (e.g. from
     <emphasis>pt_PT.aff</emphasis> and <emphasis>pt_PT.dic</emphasis> to
-    <emphasis>pt._BR.aff</emphasis> and <emphasis>pt_BR.dic</emphasis>). Of
+    <emphasis>pt_BR.aff</emphasis> and <emphasis>pt_BR.dic</emphasis>). Of
     course it is much wiser, to take a short break and download the correct
     versions of the spell checker.</para>
 

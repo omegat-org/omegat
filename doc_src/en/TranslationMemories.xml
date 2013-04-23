@@ -17,7 +17,7 @@
       <title>tmx folders - location and purpose</title>
 
       <para><application>OmegaT</application> projects can have translation
-      memory files - i.e. files with the extension tmx - in four different
+      memory files - i.e. files with the extension tmx - in five different
       places:</para>
 
       <variablelist>
@@ -564,7 +564,7 @@
       must be renamed XX_YY.tmx, where XX_YY is the target language of the
       tmx, for instance to ZH_CN.tmx in the example above. The project and TMX
       source languages should of course be identical - NL in our example. Note
-      that only one TMX for a given language pair is possible, so If several
+      that only one TMX for a given language pair is possible, so if several
       translation memories should be involved, you will need to merge them all
       into the XX_YY.tmx.</para>
     </section>

@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 3.0.0
 ----------------------------------------------------------------------
-  26 Enhancements
+  27 Enhancements
    5 Bug fixes
    6 Localisation updates
 ----------------------------------------------------------------------
@@ -65,6 +65,9 @@
 
   - Integrate tokenizers in OmegaT 
   https://sourceforge.net/p/omegat/feature-requests/844/
+
+  - Enable LanguageTool Plugin in Java Webstart version 
+  https://sourceforge.net/p/omegat/feature-requests/851/
 
   Other enhancements:
 

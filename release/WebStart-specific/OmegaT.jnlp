@@ -30,7 +30,7 @@
 		<j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se">
 			<resources>
 				<jar href="OmegaT.jar" />
-				<jar href="docs.jar" />
+				<jar href="docs.jar" download="lazy" />
 				<jar href="htmlparser.jar" />
 				<jar href="jmyspell-core-1.0.0-beta-2.jar" />
 				<jar href="jna.jar" />

@@ -32,6 +32,7 @@ import org.omegat.util.Language;
  * Context for filter calls.
  */
 public class FilterContext {
+    private final ProjectProperties props;
 
     private final Language sourceLang;
 
@@ -44,12 +45,14 @@ public class FilterContext {
     private final boolean sentenceSegmentingEnabled;
 
     public FilterContext(ProjectProperties props) {
+        this.props = props;
         this.sourceLang = props.getSourceLanguage();
         this.targetLang = props.getTargetLanguage();
         this.sentenceSegmentingEnabled = props.isSentenceSegmentingEnabled();
     }
 
     public FilterContext(Language sourceLang, Language targetLang, boolean sentenceSegmentingEnabled) {
+        this.props = null;
         this.sourceLang = sourceLang;
         this.targetLang = targetLang;
         this.sentenceSegmentingEnabled = sentenceSegmentingEnabled;
@@ -88,4 +91,7 @@ public class FilterContext {
         return sentenceSegmentingEnabled;
     }
 
+    public ProjectProperties getProjectProperties() {
+        return props;
+    }
 }

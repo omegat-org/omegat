@@ -31,6 +31,7 @@ import java.awt.HeadlessException;
 import java.io.File;
 
 import javax.swing.JFrame;
+import javax.swing.JMenu;
 
 import org.custommonkey.xmlunit.XMLTestCase;
 import org.omegat.core.data.NotLoadedProject;
@@ -51,6 +52,30 @@ public abstract class TestCore extends XMLTestCase {
         removeDir(configDir);
 
         RuntimePreferences.setConfigDir(configDir.getAbsolutePath());
+
+        final JMenu menu = new JMenu();
+
+        final IMainMenu mainMenu = new IMainMenu() {
+            public JMenu getToolsMenu() {
+                return menu;
+            }
+
+            public JMenu getProjectMenu() {
+                return menu;
+            }
+
+            public JMenu getOptionsMenu() {
+                return menu;
+            }
+
+            public JMenu getMachineTranslationMenu() {
+                return menu;
+            }
+
+            public JMenu getGlossaryMenu() {
+                return menu;
+            }
+        };
 
         Core.setMainWindow(new IMainWindow() {
             public void addDockable(Dockable pane) {
@@ -89,7 +114,7 @@ public abstract class TestCore extends XMLTestCase {
             }
 
             public IMainMenu getMainMenu() {
-                return null;
+                return mainMenu;
             }
             
             public Cursor getCursor() {

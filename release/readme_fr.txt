@@ -1,7 +1,7 @@
 Ce document a été traduit par Didier Briel et Jean-Christophe Helary, copyright© 2007-2013.
 
 ==============================================================================
-  OmegaT 2.7, fichier « Lisez-moi »
+  OmegaT 3.0, fichier « Lisez-moi »
 
   1.  Informations à propos d'OmegaT
   2.  Qu'est ce qu'OmegaT ?
@@ -266,6 +266,16 @@ OmegaT utilise les bibliothèques suivantes :
   Diff (GPL)
   JSAP (LGPL)
   orion-ssh2-214 (licence Orion SSH for Java)
+  lucene-*.jar (licence Apache 2.0)
+  Les lemmatiseurs anglais (org.omegat.tokenizer.SnowballEnglishTokenizer et
+  org.omegat.tokenizer.LuceneEnglishTokenizer) utilisent des mots non significatifs d'Okapi
+(http://okapi.sourceforge.net) (licence LGPL)
+  tinysegmenter.jar (licence BSD modifiée)
+  commons-*.jar (licence Apache 2.0)
+  jWordSplitter (licence Apache 2.0)
+  LanguageTool.jar (licence LGPL)
+  morfologik-*.jar (licence Morfologik)
+  segment-1.3.0.jar (licence Segment)
 
 ==============================================================================
  5.  Est-ce qu'OmegaT vous pose problème ? Avez-vous besoin d'aide ?

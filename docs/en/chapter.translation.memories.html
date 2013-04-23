@@ -3,8 +3,8 @@
       <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
    
       <title>Chapter&nbsp;13.&nbsp;Translation memories</title>
-      <link rel="stylesheet" href="OmegaT.css" type="text/css">
-      <meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+      <link rel="stylesheet" type="text/css" href="OmegaT.css">
+      <meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
       <link rel="home" href="index.html" title="OmegaT - User's Guide">
       <link rel="up" href="index.html" title="OmegaT - User's Guide">
       <link rel="prev" href="chapter.formatted.text.html" title="Chapter&nbsp;12.&nbsp;Working with formatted text">
@@ -25,23 +25,23 @@
          </table>
          <hr>
       </div>
-      <div class="chapter" title="Chapter&nbsp;13.&nbsp;Translation memories">
+      <div class="chapter">
          <div class="titlepage">
             <div>
                <div>
-                  <h2 class="title"><a name="chapter.translation.memories"></a>Chapter&nbsp;13.&nbsp;Translation memories<a class="indexterm" name="d0e6293"></a><a class="indexterm" name="d0e6296"></a></h2>
+                  <h1 class="title"><a name="chapter.translation.memories"></a>Chapter&nbsp;13.&nbsp;Translation memories<a class="indexterm" name="d0e6296"></a><a class="indexterm" name="d0e6299"></a></h1>
                </div>
             </div>
          </div>
          <div class="toc">
-            <dl>
+            <dl class="toc">
                <dt><span class="section"><a href="chapter.translation.memories.html#OmegaT.and.tmx.files">1. Translation memories in OmegaT</a></span></dt>
                <dd>
                   <dl>
                      <dt><span class="section"><a href="chapter.translation.memories.html#tmx.files.location.and.purpose">1.1. tmx folders - location and purpose</a></span></dt>
                      <dt><span class="section"><a href="chapter.translation.memories.html#tmx.backup">1.2. tmx backup</a></span></dt>
                      <dt><span class="section"><a href="chapter.translation.memories.html#tmx.files.and.language">1.3. tmx files and language</a></span></dt>
-                     <dt><span class="section"><a href="chapter.translation.memories.html#d0e6591">1.4. Orphan segments</a></span></dt>
+                     <dt><span class="section"><a href="chapter.translation.memories.html#d0e6594">1.4. Orphan segments</a></span></dt>
                   </dl>
                </dd>
                <dt><span class="section"><a href="chapter.translation.memories.html#using.translation.memories.from.previous.projects">2. Reusing translation memories</a></span></dt>
@@ -50,15 +50,15 @@
                      <dt><span class="section"><a href="chapter.translation.memories.html#importing.and.exporting.translation.memories">2.1. Importing and exporting translation memories</a></span></dt>
                      <dt><span class="section"><a href="chapter.translation.memories.html#Creating.a.translation.memory.for.selected.documents">2.2. Creating a translation memory for selected documents</a></span></dt>
                      <dt><span class="section"><a href="chapter.translation.memories.html#sharing.translation.memories">2.3. Sharing translation memories</a></span></dt>
-                     <dt><span class="section"><a href="chapter.translation.memories.html#d0e6744">2.4. Using TMX with alternative language pairs</a></span></dt>
+                     <dt><span class="section"><a href="chapter.translation.memories.html#d0e6747">2.4. Using TMX with alternative language pairs</a></span></dt>
                   </dl>
                </dd>
-               <dt><span class="section"><a href="chapter.translation.memories.html#d0e6760">3. Sources with existing translations</a></span></dt>
+               <dt><span class="section"><a href="chapter.translation.memories.html#d0e6763">3. Sources with existing translations</a></span></dt>
                <dt><span class="section"><a href="chapter.translation.memories.html#pseudo.translated.memory">4. Pseudo-translated memory</a></span></dt>
                <dt><span class="section"><a href="chapter.translation.memories.html#upgrading.translation.memories">5. Upgrading translation memories</a></span></dt>
             </dl>
          </div>
-         <div class="section" title="1.&nbsp;Translation memories in OmegaT">
+         <div class="section">
             <div class="titlepage">
                <div>
                   <div>
@@ -67,7 +67,7 @@
                   </div>
                </div>
             </div>
-            <div class="section" title="1.1.&nbsp;tmx folders - location and purpose">
+            <div class="section">
                <div class="titlepage">
                   <div>
                      <div>
@@ -81,8 +81,8 @@
                         places:
                </p>
                <div class="variablelist">
-                  <dl>
-                     <dt><span class="term"><a class="indexterm" name="d0e6314"></a>omegat folder</span></dt>
+                  <dl class="variablelist">
+                     <dt><span class="term"><a class="indexterm" name="d0e6317"></a>omegat folder</span></dt>
                      <dd>
                         <p>The omegat folder contains the
                                        <code class="filename">project_save.tmx</code> and possibly a number of
@@ -93,7 +93,7 @@
                                        segment.
                         </p>
                      </dd>
-                     <dt><span class="term"><a class="indexterm" name="d0e6333"></a>main project folder</span></dt>
+                     <dt><span class="term"><a class="indexterm" name="d0e6336"></a>main project folder</span></dt>
                      <dd>
                         <p>The main project folder contains 3 tmx files,
                                        <code class="filename">project_name-omegat.tmx</code>,
@@ -102,7 +102,7 @@
                                        the name of your project).
                         </p>
                         <div class="itemizedlist">
-                           <ul class="itemizedlist" type="disc">
+                           <ul class="itemizedlist" style="list-style-type: disc; ">
                               <li class="listitem">
                                  <p>The level1 file contains only textual
                                                     information.
@@ -134,7 +134,7 @@
                                        below).
                         </p>
                      </dd>
-                     <dt><span class="term"><code class="filename"><a class="indexterm" name="d0e6387"></a>tm</code> folder</span></dt>
+                     <dt><span class="term"><code class="filename"><a class="indexterm" name="d0e6390"></a>tm</code> folder</span></dt>
                      <dd>
                         <p>The /tm/ folder can contain any number of ancillary
                                        translation memories - i.e. tmx files. Such files can be created
@@ -168,9 +168,9 @@
                                        happen in the first place).
                         </p>
                         <p>Note that the TMX files in the tm folder can be compressed
-                                       with gzip.<a class="indexterm" name="d0e6425"></a></p>
+                                       with gzip.<a class="indexterm" name="d0e6428"></a></p>
                      </dd>
-                     <dt><span class="term"><a class="indexterm" name="d0e6432"></a>tm/auto folder<a class="indexterm" name="d0e6440"></a></span></dt>
+                     <dt><span class="term"><a class="indexterm" name="d0e6435"></a>tm/auto folder<a class="indexterm" name="d0e6443"></a></span></dt>
                      <dd>
                         <p>If it is clear from the very start, that translations in a
                                        given TM (or TMs) are all correct, one can put them into
@@ -182,7 +182,7 @@
                                        main TM of the project without any user intervention.
                         </p>
                      </dd>
-                     <dt><span class="term"><a class="indexterm" name="d0e6459"></a>tm/penalty-xxx folders</span></dt>
+                     <dt><span class="term"><a class="indexterm" name="d0e6462"></a>tm/penalty-xxx folders</span></dt>
                      <dd>
                         <p>Sometimes, it is useful to distinguish between high-quality
                                        translation memories and those that are, because of the subject
@@ -239,11 +239,11 @@
                         complete project is still OK
                </p>
             </div>
-            <div class="section" title="1.2.&nbsp;tmx backup">
+            <div class="section">
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="tmx.backup"></a>1.2.&nbsp;tmx backup<a class="indexterm" name="d0e6512"></a></h3>
+                        <h3 class="title"><a name="tmx.backup"></a>1.2.&nbsp;tmx backup<a class="indexterm" name="d0e6515"></a></h3>
                      </div>
                   </div>
                </div>
@@ -285,11 +285,11 @@
                   </ol>
                </div>
             </div>
-            <div class="section" title="1.3.&nbsp;tmx files and language">
+            <div class="section">
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="tmx.files.and.language"></a>1.3.&nbsp;tmx files and language<a class="indexterm" name="d0e6564"></a></h3>
+                        <h3 class="title"><a name="tmx.files.and.language"></a>1.3.&nbsp;tmx files and language<a class="indexterm" name="d0e6567"></a></h3>
                      </div>
                   </div>
                </div>
@@ -305,7 +305,7 @@
                         the language codes using the following two standard conventions :
                </p>
                <div class="itemizedlist">
-                  <ul class="itemizedlist" type="disc">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
                      <li class="listitem">
                         <p>2 letters (e.g. JA for Japanese), or</p>
                      </li>
@@ -326,7 +326,7 @@
                         country, the segments still get loaded. If neither the language code not
                         the country code match, the segments will be ignored.
                </p>
-               <p><a class="indexterm" name="d0e6585"></a>TMX files can generally contain translation units with
+               <p><a class="indexterm" name="d0e6588"></a>TMX files can generally contain translation units with
                         several candidate languages. If for a given source segment there is no
                         entry for the selected target language, all other target segments are
                         loaded, regardless of the language. For instance, if the language pair
@@ -334,11 +334,11 @@
                         the DE-EN translation, if there's none in the DE-FR pair.
                </p>
             </div>
-            <div class="section" title="1.4.&nbsp;Orphan segments">
+            <div class="section">
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="d0e6591"></a>1.4.&nbsp;Orphan segments<a class="indexterm" name="d0e6594"></a></h3>
+                        <h3 class="title"><a name="d0e6594"></a>1.4.&nbsp;Orphan segments<a class="indexterm" name="d0e6597"></a></h3>
                      </div>
                   </div>
                </div>
@@ -352,11 +352,11 @@
                </p>
             </div>
          </div>
-         <div class="section" title="2.&nbsp;Reusing translation memories">
+         <div class="section">
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="using.translation.memories.from.previous.projects"></a>2.&nbsp;Reusing translation memories<a class="indexterm" name="d0e6610"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="using.translation.memories.from.previous.projects"></a>2.&nbsp;Reusing translation memories<a class="indexterm" name="d0e6613"></a></h2>
                   </div>
                </div>
             </div>
@@ -397,7 +397,7 @@
                    case, a useful procedure would be:
             </p>
             <div class="itemizedlist">
-               <ul class="itemizedlist" type="disc">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
                      <p>Create a folder (a "repository folder") in a convenient location
                                 on your hard drive for the translation memories for a particular
@@ -407,7 +407,7 @@
                </ul>
             </div>
             <div class="itemizedlist">
-               <ul class="itemizedlist" type="disc">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
                      <p>Whenever you finish a project, copy one of the three "export"
                                 translation memory files from the root folder of the project to the
@@ -417,7 +417,7 @@
                </ul>
             </div>
             <div class="itemizedlist">
-               <ul class="itemizedlist" type="disc">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
                      <p>When you begin a new project on the same subject or for the same
                                 customer, navigate to the repository folder in the
@@ -434,11 +434,11 @@
                    removing those that are not required any more, once you have used their
                    contents to fill up the <code class="filename">project-save.tmx</code> file.
             </p>
-            <div class="section" title="2.1.&nbsp;Importing and exporting translation memories">
+            <div class="section">
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="importing.and.exporting.translation.memories"></a>2.1.&nbsp;Importing and exporting translation memories<a class="indexterm" name="d0e6673"></a></h3>
+                        <h3 class="title"><a name="importing.and.exporting.translation.memories"></a>2.1.&nbsp;Importing and exporting translation memories<a class="indexterm" name="d0e6676"></a></h3>
                      </div>
                   </div>
                </div>
@@ -470,7 +470,7 @@
                         file that OmegaT has created.
                </p>
             </div>
-            <div class="section" title="2.2.&nbsp;Creating a translation memory for selected documents">
+            <div class="section">
                <div class="titlepage">
                   <div>
                      <div>
@@ -487,7 +487,7 @@
                         the assets.
                </p>
                <div class="itemizedlist">
-                  <ul class="itemizedlist" type="disc">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
                      <li class="listitem">
                         <p>Create a project, separate for other projects, in the desired
                                      language pair, with an appropriate name - note that the TMXs created
@@ -497,7 +497,7 @@
                   </ul>
                </div>
                <div class="itemizedlist">
-                  <ul class="itemizedlist" type="disc">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
                      <li class="listitem">
                         <p>Copy the documents, you need the translation memory for, into
                                      the source folder of the project.
@@ -506,7 +506,7 @@
                   </ul>
                </div>
                <div class="itemizedlist">
-                  <ul class="itemizedlist" type="disc">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
                      <li class="listitem">
                         <p>Copy the translation memories, containing the translations of
                                      the documents above, into <code class="filename">tm/auto</code> subfolder of
@@ -516,7 +516,7 @@
                   </ul>
                </div>
                <div class="itemizedlist">
-                  <ul class="itemizedlist" type="disc">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
                      <li class="listitem">
                         <p>Start the project. Check for possible Tag errors with
                                      <span class="keycap"><strong>Ctrl+T </strong></span>and untranslated segments with
@@ -528,7 +528,7 @@
                   </ul>
                </div>
                <div class="itemizedlist">
-                  <ul class="itemizedlist" type="disc">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
                      <li class="listitem">
                         <p>When you exit the project. the TMX files in the main project
                                      folder (see above) now contain the transltions in the selected
@@ -539,7 +539,7 @@
                   </ul>
                </div>
                <div class="itemizedlist">
-                  <ul class="itemizedlist" type="disc">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
                      <li class="listitem">
                         <p>To avoid reusing the project and thus possibly polluting future
                                      cases, delete the project folder or archive it away from your
@@ -549,11 +549,11 @@
                   </ul>
                </div>
             </div>
-            <div class="section" title="2.3.&nbsp;Sharing translation memories">
+            <div class="section">
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="sharing.translation.memories"></a>2.3.&nbsp;Sharing translation memories<a class="indexterm" name="d0e6733"></a></h3>
+                        <h3 class="title"><a name="sharing.translation.memories"></a>2.3.&nbsp;Sharing translation memories<a class="indexterm" name="d0e6736"></a></h3>
                      </div>
                   </div>
                </div>
@@ -569,11 +569,11 @@
                         Chapter
                </p>
             </div>
-            <div class="section" title="2.4.&nbsp;Using TMX with alternative language pairs">
+            <div class="section">
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="d0e6744"></a>2.4.&nbsp;Using TMX with alternative language pairs<a class="indexterm" name="d0e6747"></a></h3>
+                        <h3 class="title"><a name="d0e6747"></a>2.4.&nbsp;Using TMX with alternative language pairs<a class="indexterm" name="d0e6750"></a></h3>
                      </div>
                   </div>
                </div>
@@ -600,11 +600,11 @@
                </p>
             </div>
          </div>
-         <div class="section" title="3.&nbsp;Sources with existing translations">
+         <div class="section">
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="d0e6760"></a>3.&nbsp;Sources with existing translations<a class="indexterm" name="d0e6763"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="d0e6763"></a>3.&nbsp;Sources with existing translations<a class="indexterm" name="d0e6766"></a></h2>
                   </div>
                </div>
             </div>
@@ -628,15 +628,15 @@
                    consider unchecking this option in this case.
             </p>
          </div>
-         <div class="section" title="4.&nbsp;Pseudo-translated memory">
+         <div class="section">
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="pseudo.translated.memory"></a>4.&nbsp;Pseudo-translated memory<a class="indexterm" name="d0e6782"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="pseudo.translated.memory"></a>4.&nbsp;Pseudo-translated memory<a class="indexterm" name="d0e6785"></a></h2>
                   </div>
                </div>
             </div>
-            <div class="note" title="Note" style="margin-left: 0.5in; margin-right: 0.5in;">
+            <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;">
                <h3 class="title">Note</h3>
                <p>Of interest for advanced users only!</p>
             </div>
@@ -647,14 +647,14 @@
                    the project. The translation in this tmx can be either
             </p>
             <div class="itemizedlist">
-               <ul class="itemizedlist" type="disc">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
                      <p>translation equals source (default)</p>
                   </li>
                </ul>
             </div>
             <div class="itemizedlist">
-               <ul class="itemizedlist" type="disc">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
                      <p>translation segment is empty</p>
                   </li>
@@ -677,11 +677,11 @@
                    project.
             </p>
          </div>
-         <div class="section" title="5.&nbsp;Upgrading translation memories">
+         <div class="section">
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="upgrading.translation.memories"></a>5.&nbsp;Upgrading translation memories<a class="indexterm" name="d0e6834"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="upgrading.translation.memories"></a>5.&nbsp;Upgrading translation memories<a class="indexterm" name="d0e6837"></a></h2>
                   </div>
                </div>
             </div>

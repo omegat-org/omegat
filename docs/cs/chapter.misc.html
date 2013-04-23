@@ -4,7 +4,7 @@
    
       <title>Chapter&nbsp;21.&nbsp;Různá témata</title>
       <link rel="stylesheet" type="text/css" href="OmegaT.css">
-      <meta name="generator" content="DocBook XSL Stylesheets V1.76.1">
+      <meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
       <link rel="home" href="index.html" title="Uživatelská skupina OmegaT">
       <link rel="up" href="index.html" title="Uživatelská skupina OmegaT">
       <link rel="prev" href="chapter.spellchecker.html" title="Chapter&nbsp;20.&nbsp;Kontrola pravopisu">
@@ -25,16 +25,16 @@
          </table>
          <hr>
       </div>
-      <div class="chapter" title="Chapter&nbsp;21.&nbsp;Různá témata">
+      <div class="chapter">
          <div class="titlepage">
             <div>
                <div>
-                  <h2 class="title"><a name="chapter.misc"></a>Chapter&nbsp;21.&nbsp;Různá témata<a class="indexterm" name="d0e8212"></a></h2>
+                  <h1 class="title"><a name="chapter.misc"></a>Chapter&nbsp;21.&nbsp;Různá témata<a class="indexterm" name="d0e8212"></a></h1>
                </div>
             </div>
          </div>
          <div class="toc">
-            <dl>
+            <dl class="toc">
                <dt><span class="section"><a href="chapter.misc.html#omegat.misc.console.mode">1. OmegaT Režim příkazového řádku</a></span></dt>
                <dd>
                   <dl>
@@ -49,7 +49,7 @@
                <dt><span class="section"><a href="chapter.misc.html#preventing.data.loss">4. Prevence ztráty dat</a></span></dt>
             </dl>
          </div>
-         <div class="section" title="1.&nbsp;OmegaT Režim příkazového řádku">
+         <div class="section">
             <div class="titlepage">
                <div>
                   <div>
@@ -57,7 +57,7 @@
                   </div>
                </div>
             </div>
-            <div class="note" title="Note" style="margin-left: 0.5in; margin-right: 0.5in;">
+            <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;">
                <h3 class="title">Note</h3>
                <p>Tato část bude zajímat asi jen pokročilé uživatele.</p>
             </div>
@@ -66,7 +66,7 @@
                softwarový projekt, kde je uživatelské prostředí lokalizováno do množství jazyků. Použitím režimu příkazového řádku je možno
                zařadit generování lokalizovaného prostředí do procesu sestavení softwaru.
             </p>
-            <div class="section" title="1.1.&nbsp;Co budeme potřebovat">
+            <div class="section">
                <div class="titlepage">
                   <div>
                      <div>
@@ -81,7 +81,7 @@
                <p>Pokud budete potřebovat nestandardní nastavení, musíte mít odpovídající  konfigurační soubory (<code class="literal">filters.conf</code> a <code class="literal">segmentation.conf)</code>. Toho lze dosáhnout dvěma způsoby:
                </p>
                <div class="itemizedlist">
-                  <ul class="itemizedlist" type="disc">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
                      <li class="listitem">
                         <p>Spusťte aplikaci <span class="application">OmegaT</span> běžným způsobem (přes grafické uživatelské prostředí / GUI) a zvolte vhodné nastavení. Když <span class="application">OmegaT</span> spustíte v režimu příkazového řádku, tak bude použito zadané nastavení.
                         </p>
@@ -95,7 +95,7 @@
                   </ul>
                </div>
             </div>
-            <div class="section" title="1.2.&nbsp;Spouštění OmegaT v režimu příkazového řádku.">
+            <div class="section">
                <div class="titlepage">
                   <div>
                      <div>
@@ -115,7 +115,7 @@
                <p><code class="literal"> --tag-validation=[block|warn] </code></p>
                <p><span class="bold"><strong>Vysvětlení:</strong></span></p>
                <div class="itemizedlist">
-                  <ul class="itemizedlist" type="disc">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
                      <li class="listitem">
                         <p><code class="literal">&lt;project-dir&gt;</code> prozradí aplikaci <span class="application">OmegaT</span> kde najít projekt, který má být překládán. Pokud je to tedy zadáno, <span class="application">OmegaT</span> startuje v režimu příkazového řádku a přeloží zadaný projekt.
                         </p>
@@ -123,7 +123,7 @@
                   </ul>
                </div>
                <div class="itemizedlist">
-                  <ul class="itemizedlist" type="disc">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
                      <li class="listitem">
                         <p><code class="literal">--config-dir=&lt;config-dir&gt;</code> umožňuje sdělit aplikaci, ve kterém adresáři jsou uloženy konfigurační soubory. Když není zadáno, OmegaT se vrátí k výchozím
                            hodnotám (adresář OmegaT v domovské složce uživatele, nebo když není dostupné: adresář, ve kterém se právě pracuje).
@@ -132,7 +132,7 @@
                   </ul>
                </div>
                <div class="itemizedlist">
-                  <ul class="itemizedlist" type="disc">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
                      <li class="listitem">
                         <p><code class="literal">--mode=console-translate </code> <span class="application">OmegaT</span> startuje v režimu příkazového řádku a přeloží zadaný projekt. 
                         </p>
@@ -148,7 +148,7 @@
                   </ul>
                </div>
             </div>
-            <div class="section" title="1.3.&nbsp;Možnost Quiet (‚Tichý chod‛)">
+            <div class="section">
                <div class="titlepage">
                   <div>
                      <div>
@@ -162,7 +162,7 @@
                </p>
                <p>Příklad použití: <code class="literal">java -jar <span class="application">OmegaT</span>.jar /path/to/project --mode=console-translate --quiet</code></p>
             </div>
-            <div class="section" title="1.4.&nbsp;Možnosti Ověření tagů">
+            <div class="section">
                <div class="titlepage">
                   <div>
                      <div>
@@ -176,7 +176,7 @@
                <p>Příklad použití: <code class="literal">java -jar <span class="application">OmegaT</span>.jar /path/to/project --mode=console-translate --tag-validation=abort</code></p>
             </div>
          </div>
-         <div class="section" title="2.&nbsp;Automatický aligner pro vlastnosti Java">
+         <div class="section">
             <div class="titlepage">
                <div>
                   <div>
@@ -193,7 +193,7 @@
                balíček končící na _fr. Výsledná tmx je uložena v adresáři <code class="literal">omegat </code> s názvem <code class="filename">align.tmx</code>.
             </p>
          </div>
-         <div class="section" title="3.&nbsp;Nastavení písma">
+         <div class="section">
             <div class="titlepage">
                <div>
                   <div>
@@ -204,7 +204,7 @@
             <p>V tomto dialogovém okně je možno definovat písmo, které <span class="application">OmegaT</span> používá v následujících oknech a podoknech. 
             </p>
             <div class="itemizedlist">
-               <ul class="itemizedlist" type="disc">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
                      <p>Hlavní okno <span class="application">OmegaT</span>  (Editor, Přibližné překlady, Glosář)
                      </p>
@@ -212,14 +212,14 @@
                </ul>
             </div>
             <div class="itemizedlist">
-               <ul class="itemizedlist" type="disc">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
                      <p>Okno Hledat v textu</p>
                   </li>
                </ul>
             </div>
             <div class="itemizedlist">
-               <ul class="itemizedlist" type="disc">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
                      <p>Okno Ověření tagů</p>
                   </li>
@@ -228,7 +228,7 @@
             <p>Dialogové okno můžete zobrazit přes položku Hlavní nabídky <a class="indexterm" name="d0e8446"></a><span class="guimenu">Možnosti</span> → <span class="guimenuitem">Písmo...</span> Dialogové okno obsahuje:
             </p>
             <div class="itemizedlist">
-               <ul class="itemizedlist" type="disc">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
                      <p><span class="bold"><strong>Písmo</strong></span> v rozbalovacím menu si vyberte z písem dostupných ve vašem počítači.
                      </p>
@@ -236,7 +236,7 @@
                </ul>
             </div>
             <div class="itemizedlist">
-               <ul class="itemizedlist" type="disc">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
                      <p><span class="bold"><strong>Velikost:</strong></span> změnou ovlivníte velikost písma
                      </p>
@@ -244,7 +244,7 @@
                </ul>
             </div>
             <div class="itemizedlist">
-               <ul class="itemizedlist" type="disc">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
                      <p><span class="bold"><strong>Ukázkový text:</strong></span> v tomto políčku bezprostředně uvidíte ukázku vybraného písma
                      </p>
@@ -258,7 +258,7 @@
                být použito pro oba jazyky.
             </p>
          </div>
-         <div class="section" title="4.&nbsp;Prevence ztráty dat">
+         <div class="section">
             <div class="titlepage">
                <div>
                   <div>
@@ -298,7 +298,7 @@
             </div>
             <p>Jak se vyhnout ztrátě importovaných dat:</p>
             <div class="itemizedlist">
-               <ul class="itemizedlist" type="disc">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
                      <p>Pravidelně si pořizujte kopii souboru /omegat/project_save.tmx na záložní médium, jako je CD nebo DVD.</p>
                   </li>
@@ -313,7 +313,7 @@
                </ul>
             </div>
             <div class="itemizedlist">
-               <ul class="itemizedlist" type="disc">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
                      <p>Do začátku využívejte tyto texty Nápovědy. Pokud narazíte na problémy, zeptejte se v <a class="ulink" href="http://tech.groups.yahoo.com/group/Omegat/" target="_top">Uživatelské skupině <span class="application">OmegaT</span></a>. Neváhejte se zeptat v jazyce, který nejlépe ovládáte.
                      </p>

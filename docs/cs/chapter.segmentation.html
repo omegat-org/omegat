@@ -4,7 +4,7 @@
    
       <title>Chapter&nbsp;14.&nbsp;Segmentace zdroje</title>
       <link rel="stylesheet" type="text/css" href="OmegaT.css">
-      <meta name="generator" content="DocBook XSL Stylesheets V1.76.1">
+      <meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
       <link rel="home" href="index.html" title="Uživatelská skupina OmegaT">
       <link rel="up" href="index.html" title="Uživatelská skupina OmegaT">
       <link rel="prev" href="chapter.translation.memories.html" title="Chapter&nbsp;13.&nbsp;Překladové paměti">
@@ -25,17 +25,17 @@
          </table>
          <hr>
       </div>
-      <div class="chapter" title="Chapter&nbsp;14.&nbsp;Segmentace zdroje">
+      <div class="chapter">
          <div class="titlepage">
             <div>
                <div>
-                  <h2 class="title"><a name="chapter.segmentation"></a>Chapter&nbsp;14.&nbsp;Segmentace zdroje
-                  </h2>
+                  <h1 class="title"><a name="chapter.segmentation"></a>Chapter&nbsp;14.&nbsp;Segmentace zdroje
+                  </h1>
                </div>
             </div>
          </div>
          <div class="toc">
-            <dl>
+            <dl class="toc">
                <dt><span class="section"><a href="chapter.segmentation.html#segmentation.rules">1. Pravidla segmentace</a></span></dt>
                <dt><span class="section"><a href="chapter.segmentation.html#rules.priority">2. Pravidla přednosti</a></span></dt>
                <dt><span class="section"><a href="chapter.segmentation.html#creating.new.rule">3. Vytváření nového pravidla</a></span></dt>
@@ -59,7 +59,7 @@
          <p><span class="application">OmegaT</span> používá následující sled kroků:
          </p>
          <div class="variablelist">
-            <dl>
+            <dl class="variablelist">
                <dt><span class="term"><a class="indexterm" name="d0e6579"></a>Segmentace na úrovni struktury</span></dt>
                <dd>
                   <p><span class="application">OmegaT</span> nejprve zpracuje text pomocí segmentace na úrovni struktur. Během tohoto procesu je to jen struktura zdrojového souboru,
@@ -77,7 +77,7 @@
                </dd>
             </dl>
          </div>
-         <div class="section" title="1.&nbsp;Pravidla segmentace">
+         <div class="section">
             <div class="titlepage">
                <div>
                   <div>
@@ -91,7 +91,7 @@
             </p>
             <p>Tyto dva typy pravidel se chovají následovně:</p>
             <div class="variablelist">
-               <dl>
+               <dl class="variablelist">
                   <dt><span class="term"><a class="indexterm" name="d0e6633"></a>Pravidla zalomení</span></dt>
                   <dd>
                      <p>Rozdělí zdrojový text na segmenty. Například: „<span class="emphasis"><em>Did it make sense? I was not sure.“</em></span> by mělo být rozděleno na dva segmenty. Aby se tak stalo, mělo by tu být pravidlo zalomení pro „?“, po kterém následuje mezera
@@ -102,7 +102,7 @@
                </dl>
             </div>
             <div class="variablelist">
-               <dl>
+               <dl class="variablelist">
                   <dt><span class="term"><a class="indexterm" name="d0e6650"></a>Pravidlo výjimky</span></dt>
                   <dd>
                      <p>specifikuje, které části textu by NEMĚLY být rozděleny. Nehledě na tečku v <span class="emphasis"><em>„Mrs. Dalloway“</em></span> by zde neměl být text rozdělen, tzn. mělo by být založeno pravidlo výjimky pro Mrs (stejně tak Mr a Dr a prof atd.), což
@@ -116,7 +116,7 @@
                segmenty.
             </p>
          </div>
-         <div class="section" title="2.&nbsp;Pravidla přednosti">
+         <div class="section">
             <div class="titlepage">
                <div>
                   <div>
@@ -131,7 +131,7 @@
                se vychází z pravidel pro francouzštinu, a nakonec v pořadí se uplatní pravidla výchozího nastavení
             </p>
          </div>
-         <div class="section" title="3.&nbsp;Vytváření nového pravidla">
+         <div class="section">
             <div class="titlepage">
                <div>
                   <div>
@@ -156,7 +156,7 @@
                <a class="link" href="chapter.regexp.html" title="Chapter&nbsp;16.&nbsp;Regulární výrazy">Regulární výrazy</a>. Dobrým výchozím bodem vždy bude již existující pravidlo.
             </p>
          </div>
-         <div class="section" title="4.&nbsp;Pár jednoduchých příkladů">
+         <div class="section">
             <div class="titlepage">
                <div>
                   <div>

@@ -3,8 +3,8 @@
       <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
    
       <title>第&nbsp;12&nbsp;章&nbsp;处理格式化文本</title>
-      <link rel="stylesheet" href="OmegaT.css" type="text/css">
-      <meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+      <link rel="stylesheet" type="text/css" href="OmegaT.css">
+      <meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
       <link rel="home" href="index.html" title="OmegaT - 用户向导">
       <link rel="up" href="index.html" title="OmegaT - 用户向导">
       <link rel="prev" href="chapter.font.html" title="第&nbsp;11&nbsp;章&nbsp;字体设置">
@@ -25,16 +25,16 @@
          </table>
          <hr>
       </div>
-      <div class="chapter" title="第&nbsp;12&nbsp;章&nbsp;处理格式化文本">
+      <div class="chapter">
          <div class="titlepage">
             <div>
                <div>
-                  <h2 class="title"><a name="chapter.formatted.text"></a>第&nbsp;12&nbsp;章&nbsp;处理格式化文本<a class="indexterm" name="d0e6522"></a><a class="indexterm" name="d0e6527"></a></h2>
+                  <h1 class="title"><a name="chapter.formatted.text"></a>第&nbsp;12&nbsp;章&nbsp;处理格式化文本<a class="indexterm" name="d0e6522"></a><a class="indexterm" name="d0e6527"></a></h1>
                </div>
             </div>
          </div>
          <div class="toc">
-            <dl>
+            <dl class="toc">
                <dt><span class="section"><a href="chapter.formatted.text.html#formatting.tags">1. 格式化标签</a></span></dt>
                <dt><span class="section"><a href="chapter.formatted.text.html#tag.operations">2. 标签操作</a></span></dt>
                <dt><span class="section"><a href="chapter.formatted.text.html#tag.group.nesting">3. 标签组嵌套</a></span></dt>
@@ -46,7 +46,7 @@
          <p>在源文件中表示的格式化信息通常需要在目标文中重新创建。在 OmegaT 中，由所支持格式（尤其是在写入 DocBook、HTML、XHTML、开放文档（OpenOffice.org）和 Office 开放 XML（MS Office 2007
             及更高版本）的时候）产生的内部格式化信息以标签的形式出现。一般情况下，为匹配目的而比较不同文本的相似性时将忽略标签。在已译片段中重新创建的标签将会出现在译后文档中。
          </p>
-         <div class="section" title="1.&nbsp;格式化标签">
+         <div class="section">
             <div class="titlepage">
                <div>
                   <div>
@@ -66,7 +66,7 @@
             <p><span class="application">OmegaT</span> 在分割句子之前就进行标签创建工作。根据分割规则，标签对可能会被分成两部分并出现在两个连续的片段，而标签检验会检查到这两处的部分标签并提示这两个片段出现错误。
             </p>
          </div>
-         <div class="section" title="2.&nbsp;标签操作">
+         <div class="section">
             <div class="titlepage">
                <div>
                   <div>
@@ -88,7 +88,7 @@
             <p>删除后：</p>
             <p><code class="literal">此格式已经被删除。&lt;片段 0001&gt;</code></p>
          </div>
-         <div class="section" title="3.&nbsp;标签组嵌套">
+         <div class="section">
             <div class="titlepage">
                <div>
                   <div>
@@ -102,7 +102,7 @@
             <p>嵌套后：</p>
             <p><code class="literal">&lt;b0&gt;格式&lt;b1&gt;一&lt;/b1&gt;&lt;/b0&gt;已经嵌套到格式零的内部。&lt;片段 0001&gt;</code></p>
          </div>
-         <div class="section" title="4.&nbsp;标签组重叠">
+         <div class="section">
             <div class="titlepage">
                <div>
                   <div>
@@ -116,7 +116,7 @@
             <p>错误维护后：</p>
             <p><code class="literal">&lt;b0&gt;格式&lt;b1&gt;一&lt;/b0&gt;&lt;/b1&gt;现在变乱了。&lt;片段结束 0001&gt;</code></p>
          </div>
-         <div class="section" title="5.&nbsp;标签组检验">
+         <div class="section">
             <div class="titlepage">
                <div>
                   <div>
@@ -133,7 +133,7 @@
             </div><br class="figure-break"><p>标签用加粗蓝色突出显示，以便于对源内容和译后内容进行比较。点击链接可在编辑器中激活该片段。如果必要的话（在上面的情况中是丢失了 &lt;i2&gt;&lt;/i2&gt; 标签对），修正错误然后按 <span class="guimenuitem">Ctrl+T</span> 键返回标签验证窗口以修正其它错误。标签错误指的是译文中的标签序列没有完全按照源片段中的标签顺序和数量复制。某些标签操作是必要的和良性的，但有些在创建已译文档时会导致问题。
             </p>
          </div>
-         <div class="section" title="6.&nbsp;标签管理的几点提示">
+         <div class="section">
             <div class="titlepage">
                <div>
                   <div>

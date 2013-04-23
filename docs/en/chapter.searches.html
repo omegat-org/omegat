@@ -3,8 +3,8 @@
       <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
    
       <title>Chapter&nbsp;15.&nbsp;Searches</title>
-      <link rel="stylesheet" href="OmegaT.css" type="text/css">
-      <meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+      <link rel="stylesheet" type="text/css" href="OmegaT.css">
+      <meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
       <link rel="home" href="index.html" title="OmegaT - User's Guide">
       <link rel="up" href="index.html" title="OmegaT - User's Guide">
       <link rel="prev" href="chapter.segmentation.html" title="Chapter&nbsp;14.&nbsp;Source segmentation">
@@ -25,21 +25,21 @@
          </table>
          <hr>
       </div>
-      <div class="chapter" title="Chapter&nbsp;15.&nbsp;Searches">
+      <div class="chapter">
          <div class="titlepage">
             <div>
                <div>
-                  <h2 class="title"><a name="chapter.searches"></a>Chapter&nbsp;15.&nbsp;Searches<a class="indexterm" name="d0e7096"></a></h2>
+                  <h1 class="title"><a name="chapter.searches"></a>Chapter&nbsp;15.&nbsp;Searches<a class="indexterm" name="d0e7099"></a></h1>
                </div>
             </div>
          </div>
          <div class="toc">
-            <dl>
+            <dl class="toc">
                <dt><span class="section"><a href="chapter.searches.html#search.window">1. Search window</a></span></dt>
                <dd>
                   <dl>
-                     <dt><span class="section"><a href="chapter.searches.html#d0e7118">1.1. Searching</a></span></dt>
-                     <dt><span class="section"><a href="chapter.searches.html#d0e7142">1.2. Search location</a></span></dt>
+                     <dt><span class="section"><a href="chapter.searches.html#d0e7121">1.1. Searching</a></span></dt>
+                     <dt><span class="section"><a href="chapter.searches.html#d0e7145">1.2. Search location</a></span></dt>
                   </dl>
                </dd>
                <dt><span class="section"><a href="chapter.searches.html#using.wild.cards">2. Using wild cards</a></span></dt>
@@ -47,7 +47,7 @@
                <dt><span class="section"><a href="chapter.searches.html#search.result.display">4. Search results display</a></span></dt>
             </dl>
          </div>
-         <div class="section" title="1.&nbsp;Search window">
+         <div class="section">
             <div class="titlepage">
                <div>
                   <div>
@@ -56,22 +56,22 @@
                   </div>
                </div>
             </div>
-            <div class="figure"><a name="text.search.window"></a><p class="title"><b>Figure&nbsp;15.1.&nbsp;Text search Window<a class="indexterm" name="d0e7105"></a></b></p>
+            <div class="figure"><a name="text.search.window"></a><p class="title"><b>Figure&nbsp;15.1.&nbsp;Text search Window<a class="indexterm" name="d0e7108"></a></b></p>
                <div class="figure-contents">
-                  <div class="mediaobject"><img src="images/TextSearch25.png" alt="Text search WindowSearch windowExample"></div>
+                  <div class="mediaobject"><img src="images/TextSearch25.png" alt="Text search Window"></div>
                </div>
-            </div><br class="figure-break"><div class="note" title="Note" style="margin-left: 0.5in; margin-right: 0.5in;">
+            </div><br class="figure-break"><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;">
                <h3 class="title">Note</h3>
                <p>The above search finds all target segments that contain
                         characters, rather improbable in the target - i.e. Slovenian -
                         language.
                </p>
             </div>
-            <div class="section" title="1.1.&nbsp;Searching">
+            <div class="section">
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="d0e7118"></a>1.1.&nbsp;Searching<a class="indexterm" name="d0e7121"></a></h3>
+                        <h3 class="title"><a name="d0e7121"></a>1.1.&nbsp;Searching<a class="indexterm" name="d0e7124"></a></h3>
                      </div>
                   </div>
                </div>
@@ -85,11 +85,11 @@
                         clutter your desktop.
                </p>
             </div>
-            <div class="section" title="1.2.&nbsp;Search location">
+            <div class="section">
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="d0e7142"></a>1.2.&nbsp;Search location
+                        <h3 class="title"><a name="d0e7145"></a>1.2.&nbsp;Search location
                         </h3>
                      </div>
                   </div>
@@ -99,14 +99,14 @@
                         source or the target text. You may search in
                </p>
                <div class="itemizedlist">
-                  <ul class="itemizedlist" type="disc">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
                      <li class="listitem">
                         <p>the project only (default setting)</p>
                      </li>
                   </ul>
                </div>
                <div class="itemizedlist">
-                  <ul class="itemizedlist" type="disc">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
                      <li class="listitem">
                         <p>both the project and the reference translation memories in
                                      /tm/ (check <span class="emphasis"><em>Search TMs)</em></span></p>
@@ -114,7 +114,7 @@
                   </ul>
                </div>
                <div class="itemizedlist">
-                  <ul class="itemizedlist" type="disc">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
                      <li class="listitem">
                         <p>a single file or a folder containing a set of files (check
                                      <span class="emphasis"><em>Search files)</em></span></p>
@@ -125,17 +125,17 @@
                         <span class="application">OmegaT</span> restricts the search to files in
                         source file formats. Consequently, although OmegaT is quite able to
                         handle<code class="filename"> tmx</code> files, it does not include them in the
-                        Search files search. If you turn on <span class="bold"><strong><a class="indexterm" name="d0e7172"></a>Advanced Options</strong></span>, you can combine the search
+                        Search files search. If you turn on <span class="bold"><strong><a class="indexterm" name="d0e7175"></a>Advanced Options</strong></span>, you can combine the search
                         with the name of the author of the translation and time of the last
                         change made.
                </p>
             </div>
          </div>
-         <div class="section" title="2.&nbsp;Using wild cards">
+         <div class="section">
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="using.wild.cards"></a>2.&nbsp;Using wild cards<a class="indexterm" name="d0e7182"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="using.wild.cards"></a>2.&nbsp;Using wild cards<a class="indexterm" name="d0e7185"></a></h2>
                   </div>
                </div>
             </div>
@@ -144,7 +144,7 @@
                    users:
             </p>
             <div class="itemizedlist">
-               <ul class="itemizedlist" type="disc">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
                      <p>'*' matches zero or more characters, from the current position
                                 in a given word to its end. The search term <code class="literal">'run*'</code>
@@ -155,7 +155,7 @@
                </ul>
             </div>
             <div class="itemizedlist">
-               <ul class="itemizedlist" type="disc">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
                      <p>'?' matches any single character. For instance, <code class="literal">'run?'</code> 
                                 would match the word <code class="literal">'runs'</code> and
@@ -171,11 +171,11 @@
                    below).
             </p>
          </div>
-         <div class="section" title="3.&nbsp;Search methods and options">
+         <div class="section">
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="search.methoids"></a>3.&nbsp;Search methods and options<a class="indexterm" name="d0e7226"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="search.methoids"></a>3.&nbsp;Search methods and options<a class="indexterm" name="d0e7229"></a></h2>
                   </div>
                </div>
             </div>
@@ -183,7 +183,7 @@
                    methods are available:
             </p>
             <div class="variablelist">
-               <dl>
+               <dl class="variablelist">
                   <dt><span class="term">exact search</span></dt>
                   <dd>
                      <p>Search for segments containing the exact string you specified.
@@ -227,7 +227,7 @@
                    following:
             </p>
             <div class="itemizedlist">
-               <ul class="itemizedlist" type="disc">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
                      <p><span class="bold"><strong>case sensitive</strong></span>: the search will
                                 be performed for the exact string specified; i.e. capitalization is
@@ -268,7 +268,7 @@
                    shown in the above image can be selected.
             </p>
          </div>
-         <div class="section" title="4.&nbsp;Search results display">
+         <div class="section">
             <div class="titlepage">
                <div>
                   <div>

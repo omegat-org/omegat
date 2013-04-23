@@ -3,8 +3,8 @@
       <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
    
       <title>Chapter&nbsp;18.&nbsp;Glossaries</title>
-      <link rel="stylesheet" href="OmegaT.css" type="text/css">
-      <meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+      <link rel="stylesheet" type="text/css" href="OmegaT.css">
+      <meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
       <link rel="home" href="index.html" title="OmegaT - User's Guide">
       <link rel="up" href="index.html" title="OmegaT - User's Guide">
       <link rel="prev" href="chapter.dictionaries.html" title="Chapter&nbsp;17.&nbsp;Dictionaries">
@@ -25,21 +25,21 @@
          </table>
          <hr>
       </div>
-      <div class="chapter" title="Chapter&nbsp;18.&nbsp;Glossaries">
+      <div class="chapter">
          <div class="titlepage">
             <div>
                <div>
-                  <h2 class="title"><a name="chapter.glossaries"></a>Chapter&nbsp;18.&nbsp;Glossaries<a class="indexterm" name="d0e7973"></a><a class="indexterm" name="d0e7978"></a></h2>
+                  <h1 class="title"><a name="chapter.glossaries"></a>Chapter&nbsp;18.&nbsp;Glossaries<a class="indexterm" name="d0e7976"></a><a class="indexterm" name="d0e7981"></a></h1>
                </div>
             </div>
          </div>
          <div class="toc">
-            <dl>
-               <dt><span class="section"><a href="chapter.glossaries.html#d0e8002">1. Usage</a></span></dt>
-               <dt><span class="section"><a href="chapter.glossaries.html#d0e8057">2. File format</a></span></dt>
-               <dt><span class="section"><a href="chapter.glossaries.html#d0e8096">3. How to create glossaries</a></span></dt>
-               <dt><span class="section"><a href="chapter.glossaries.html#d0e8141">4. Using Trados MultiTerm</a></span></dt>
-               <dt><span class="section"><a href="chapter.glossaries.html#d0e8157">5. Common glossary problems</a></span></dt>
+            <dl class="toc">
+               <dt><span class="section"><a href="chapter.glossaries.html#d0e8005">1. Usage</a></span></dt>
+               <dt><span class="section"><a href="chapter.glossaries.html#d0e8060">2. File format</a></span></dt>
+               <dt><span class="section"><a href="chapter.glossaries.html#d0e8099">3. How to create glossaries</a></span></dt>
+               <dt><span class="section"><a href="chapter.glossaries.html#d0e8144">4. Using Trados MultiTerm</a></span></dt>
+               <dt><span class="section"><a href="chapter.glossaries.html#d0e8160">5. Common glossary problems</a></span></dt>
             </dl>
          </div>
          <p>Glossaries are files created and updated manually for use in
@@ -60,21 +60,21 @@
               tab-separated format and UTF-8. As the existing content will not be touched,
               damage to an existing file would be limited.
          </p>
-         <div class="section" title="1.&nbsp;Usage">
+         <div class="section">
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="d0e8002"></a>1.&nbsp;Usage
+                     <h2 class="title" style="clear: both"><a name="d0e8005"></a>1.&nbsp;Usage
                      </h2>
                   </div>
                </div>
             </div>
-            <p>To use an existing glossary, simply place it in the<a class="indexterm" name="d0e8007"></a> <code class="filename">/glossary</code> folder after creating the
+            <p>To use an existing glossary, simply place it in the<a class="indexterm" name="d0e8010"></a> <code class="filename">/glossary</code> folder after creating the
                    project. <span class="application">OmegaT</span> automatically detects glossary
                    files in this folder when a project is opened. Terms in the current
                    segment which <span class="application">OmegaT</span> finds in the glossary
                    file(s) are displayed in the Glossary pane:
-            </p><a class="indexterm" name="d0e8022"></a><div class="figure"><a name="d0e8025"></a><p class="title"><b>Figure&nbsp;18.1.&nbsp;Glossary pane</b></p>
+            </p><a class="indexterm" name="d0e8025"></a><div class="figure"><a name="d0e8028"></a><p class="title"><b>Figure&nbsp;18.1.&nbsp;Glossary pane</b></p>
                <div class="figure-contents">
                   <div class="mediaobject"><img src="images/GlossaryPane_25.png" alt="Glossary pane"></div>
                </div>
@@ -89,20 +89,20 @@
             <p>The source term does not have to be a single-word item, as the next
                    example shows:
             </p>
-            <div class="figure"><a name="d0e8037"></a><p class="title"><b>Figure&nbsp;18.2.&nbsp;multiple words entries in glossaries - example<a class="indexterm" name="d0e8040"></a></b></p>
+            <div class="figure"><a name="d0e8040"></a><p class="title"><b>Figure&nbsp;18.2.&nbsp;multiple words entries in glossaries - example<a class="indexterm" name="d0e8043"></a></b></p>
                <div class="figure-contents">
-                  <div class="mediaobject"><img src="images/MultiTerm_Glossary_25.png" alt="multiple words entries in glossaries - exampleGlossariesGlossary panemultiple-words entries"></div>
+                  <div class="mediaobject"><img src="images/MultiTerm_Glossary_25.png" alt="multiple words entries in glossaries - example"></div>
                </div>
             </div><br class="figure-break"><p>The underlined item "pop-up menu" can be found in the glossary pane
                    as "pojavni menu". Highlighting it in the Glossary pane and then
                    rightclicking insets at the cursor position in the target
-                   segment.<sup>[<a name="d0e8054" href="#ftn.d0e8054" class="footnote">1</a>]</sup></p>
+                   segment.<a href="#ftn.d0e8057" class="footnote" name="d0e8057"><sup class="footnote">[1]</sup></a></p>
          </div>
-         <div class="section" title="2.&nbsp;File format">
+         <div class="section">
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="d0e8057"></a>2.&nbsp;<a class="indexterm" name="d0e8059"></a>File format<a class="indexterm" name="d0e8065"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="d0e8060"></a>2.&nbsp;<a class="indexterm" name="d0e8062"></a>File format<a class="indexterm" name="d0e8068"></a></h2>
                   </div>
                </div>
             </div>
@@ -122,20 +122,20 @@
             </p>
             <p><code class="literal">"This is a source term, which contains a comma","c'est un
                       terme, qui contient une virgule"</code></p>
-            <p>In addition to the plain text format, TBX format <a class="indexterm" name="d0e8081"></a> is also supported. TBX - Term Base eXchange - is the open,
+            <p>In addition to the plain text format, TBX format <a class="indexterm" name="d0e8084"></a> is also supported. TBX - Term Base eXchange - is the open,
                    XML-based standard for exchanging structured terminological data, TBX has
                    been approved as an international standard by LISA and ISO. If you have an
                    existing terminology handling system - MultiTerm for example - it is quite
                    possible it offers the export of terminology data via TBX format. <a class="ulink" href="http://www.microsoft.com/Language/en-US/Terminology.aspx" target="_top">Microsoft
-                      Terminology Collection</a> <a class="indexterm" name="d0e8090"></a> can be downloaded in nearly 100 languages and can serve as
+                      Terminology Collection</a> <a class="indexterm" name="d0e8093"></a> can be downloaded in nearly 100 languages and can serve as
                    a cornerstone IT glossary.
             </p>
          </div>
-         <div class="section" title="3.&nbsp;How to create glossaries">
+         <div class="section">
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="d0e8096"></a>3.&nbsp;How to create glossaries<a class="indexterm" name="d0e8099"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="d0e8099"></a>3.&nbsp;How to create glossaries<a class="indexterm" name="d0e8102"></a></h2>
                   </div>
                </div>
             </div>
@@ -153,7 +153,7 @@
                    tab between the fields) and save the file. The contents of the glossary
                    pane will be updated accordingly.
             </p>
-            <p><a class="indexterm" name="d0e8120"></a>The location of the writable glossary file can be set in the
+            <p><a class="indexterm" name="d0e8123"></a>The location of the writable glossary file can be set in the
                    <span class="guimenuitem">Project &gt; Properties ... </span>dialog. The
                    recognized extensions are <code class="filename">TXT</code> and
                    <code class="filename">UTF8</code></p>
@@ -165,11 +165,11 @@
                    required <span class="keycap"><strong>TAB</strong></span> characters) can be used.
             </p>
          </div>
-         <div class="section" title="4.&nbsp;Using Trados MultiTerm">
+         <div class="section">
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="d0e8141"></a>4.&nbsp;<a class="indexterm" name="d0e8143"></a>Using Trados MultiTerm
+                     <h2 class="title" style="clear: both"><a name="d0e8144"></a>4.&nbsp;<a class="indexterm" name="d0e8146"></a>Using Trados MultiTerm
                      </h2>
                   </div>
                </div>
@@ -183,11 +183,11 @@
                    versions of MultiTerm support exporting to TBX format.
             </p>
          </div>
-         <div class="section" title="5.&nbsp;Common glossary problems">
+         <div class="section">
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="d0e8157"></a>5.&nbsp;<a class="indexterm" name="d0e8159"></a>Common glossary problems
+                     <h2 class="title" style="clear: both"><a name="d0e8160"></a>5.&nbsp;<a class="indexterm" name="d0e8162"></a>Common glossary problems
                      </h2>
                   </div>
                </div>
@@ -195,28 +195,28 @@
             <p><span class="bold"><strong>Problem: No glossary terms are displayed -
                          possible causes:</strong></span></p>
             <div class="itemizedlist">
-               <ul class="itemizedlist" type="disc">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
                      <p>No glossary file found in the "glossary" folder.</p>
                   </li>
                </ul>
             </div>
             <div class="itemizedlist">
-               <ul class="itemizedlist" type="disc">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
                      <p>The glossary file is empty.</p>
                   </li>
                </ul>
             </div>
             <div class="itemizedlist">
-               <ul class="itemizedlist" type="disc">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
                      <p>The items are not separated with a TAB character.</p>
                   </li>
                </ul>
             </div>
             <div class="itemizedlist">
-               <ul class="itemizedlist" type="disc">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
                      <p>The glossary file does not have the correct extension (.tab or
                                 .utf8).
@@ -225,7 +225,7 @@
                </ul>
             </div>
             <div class="itemizedlist">
-               <ul class="itemizedlist" type="disc">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
                      <p>There is no EXACT match between the glossary entry and the
                                 source text in your document - for instance plurals.
@@ -234,14 +234,14 @@
                </ul>
             </div>
             <div class="itemizedlist">
-               <ul class="itemizedlist" type="disc">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
                      <p>The glossary file does not have the correct encoding.</p>
                   </li>
                </ul>
             </div>
             <div class="itemizedlist">
-               <ul class="itemizedlist" type="disc">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
                      <p>There are no terms in the current segment which match any terms
                                 in the glossary.
@@ -250,7 +250,7 @@
                </ul>
             </div>
             <div class="itemizedlist">
-               <ul class="itemizedlist" type="disc">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
                      <p>One or more of the above problems may have been fixed, but the
                                 project has not been reloaded.
@@ -261,7 +261,7 @@
             <p><span class="bold"><strong>Problem: In the glossary pane, some characters
                          are not displayed properly</strong></span></p>
             <div class="itemizedlist">
-               <ul class="itemizedlist" type="disc">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
                      <p>...but the same characters are displayed properly in the Editing
                                 pane: the extension and the file encoding do not match.
@@ -270,9 +270,9 @@
                </ul>
             </div>
          </div>
-         <div class="footnotes"><br><hr width="100" align="left">
-            <div class="footnote">
-               <p><sup>[<a name="ftn.d0e8054" href="#d0e8054" class="para">1</a>] </sup>Note that in the above case, this is just half (or even less) of
+         <div class="footnotes"><br><hr style="width:100; text-align:left;margin-left: 0">
+            <div id="ftn.d0e8057" class="footnote">
+               <p><a href="#d0e8057" class="para"><sup class="para">[1] </sup></a>Note that in the above case, this is just half (or even less) of
                           the story, as the target language (Slovenian) uses declension. So the
                           inserted "pojavni meni" in the nominative form - has to be changed to
                           "pojavnem meniju" , i.e. to the locative. So it is probably faster to

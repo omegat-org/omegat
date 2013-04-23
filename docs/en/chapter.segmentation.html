@@ -3,8 +3,8 @@
       <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
    
       <title>Chapter&nbsp;14.&nbsp;Source segmentation</title>
-      <link rel="stylesheet" href="OmegaT.css" type="text/css">
-      <meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+      <link rel="stylesheet" type="text/css" href="OmegaT.css">
+      <meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
       <link rel="home" href="index.html" title="OmegaT - User's Guide">
       <link rel="up" href="index.html" title="OmegaT - User's Guide">
       <link rel="prev" href="chapter.translation.memories.html" title="Chapter&nbsp;13.&nbsp;Translation memories">
@@ -25,17 +25,17 @@
          </table>
          <hr>
       </div>
-      <div class="chapter" title="Chapter&nbsp;14.&nbsp;Source segmentation">
+      <div class="chapter">
          <div class="titlepage">
             <div>
                <div>
-                  <h2 class="title"><a name="chapter.segmentation"></a>Chapter&nbsp;14.&nbsp;Source segmentation
-                  </h2>
+                  <h1 class="title"><a name="chapter.segmentation"></a>Chapter&nbsp;14.&nbsp;Source segmentation
+                  </h1>
                </div>
             </div>
          </div>
          <div class="toc">
-            <dl>
+            <dl class="toc">
                <dt><span class="section"><a href="chapter.segmentation.html#segmentation.rules">1. Segmentation rules</a></span></dt>
                <dt><span class="section"><a href="chapter.segmentation.html#rules.priority">2. Rule priority</a></span></dt>
                <dt><span class="section"><a href="chapter.segmentation.html#creating.new.rule">3. Creating a new rule</a></span></dt>
@@ -46,13 +46,13 @@
               <span class="application">OmegaT</span> has two ways to segment a text: by
               paragraph or by sentence segmentation (also referred to as “rule-based
               segmentation”). In order to select the type of segmentation, select
-              <span class="guimenu"><a class="indexterm" name="d0e6865"></a>Project</span> → <span class="guimenuitem">Properties...</span> from the main menu and tick or untick the check box
+              <span class="guimenu"><a class="indexterm" name="d0e6868"></a>Project</span> → <span class="guimenuitem">Properties...</span> from the main menu and tick or untick the check box
               provided. Paragraph segmentation is advantageous in certain cases, such as
               highly creative or stylistic translations in which the translator may wish
               to change the order of entire sentences; for the majority of projects,
               however, sentence segmentation is a choice to be preferred, since it
               delivers better matches from previous translations. If sentence segmentation
-              has been selected, you can setup the rules by selecting <span class="guimenu"><a class="indexterm" name="d0e6876"></a>Options</span> → <span class="guimenuitem">Segmentation...</span>from the main menu.
+              has been selected, you can setup the rules by selecting <span class="guimenu"><a class="indexterm" name="d0e6879"></a>Options</span> → <span class="guimenuitem">Segmentation...</span>from the main menu.
          </p>
          <p>Dependable segmentation rules are already available for many
               languages, so it is likely that you will not need to get involved with
@@ -72,8 +72,8 @@
               steps:
          </p>
          <div class="variablelist">
-            <dl>
-               <dt><span class="term"><a class="indexterm" name="d0e6898"></a>Structure level segmentation</span></dt>
+            <dl class="variablelist">
+               <dt><span class="term"><a class="indexterm" name="d0e6901"></a>Structure level segmentation</span></dt>
                <dd>
                   <p><span class="application">OmegaT</span> first parses the text for
                              structure-level segmentation. During this process it is only the
@@ -86,7 +86,7 @@
                              or HTML files can be extracted as separate segments.
                   </p>
                </dd>
-               <dt><span class="term"><a class="indexterm" name="d0e6913"></a>Sentence level segmentation</span></dt>
+               <dt><span class="term"><a class="indexterm" name="d0e6916"></a>Sentence level segmentation</span></dt>
                <dd>
                   <p>After segmenting the source file into structural units,
                              <span class="application">OmegaT</span> will segment these blocks further
@@ -95,11 +95,11 @@
                </dd>
             </dl>
          </div>
-         <div class="section" title="1.&nbsp;Segmentation rules">
+         <div class="section">
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="segmentation.rules"></a>1.&nbsp;Segmentation rules<a class="indexterm" name="d0e6928"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="segmentation.rules"></a>1.&nbsp;Segmentation rules<a class="indexterm" name="d0e6931"></a></h2>
                   </div>
                </div>
             </div>
@@ -116,8 +116,8 @@
             </p>
             <p>The two types of rules behave as follows:</p>
             <div class="variablelist">
-               <dl>
-                  <dt><span class="term"><a class="indexterm" name="d0e6952"></a>Break rule</span></dt>
+               <dl class="variablelist">
+                  <dt><span class="term"><a class="indexterm" name="d0e6955"></a>Break rule</span></dt>
                   <dd>
                      <p>Separates the source text into segments. For example,
                                   "<span class="emphasis"><em>Did it make sense? I was not sure</em></span>." should be
@@ -130,8 +130,8 @@
                </dl>
             </div>
             <div class="variablelist">
-               <dl>
-                  <dt><span class="term"><a class="indexterm" name="d0e6969"></a>Exception rule</span></dt>
+               <dl class="variablelist">
+                  <dt><span class="term"><a class="indexterm" name="d0e6972"></a>Exception rule</span></dt>
                   <dd>
                      <p>specify what parts of text should NOT be separated. In spite
                                   of the period, <span class="emphasis"><em>"Mrs. Dalloway "</em></span> should not be
@@ -149,11 +149,11 @@
                    more meaningful and coherent segments.
             </p>
          </div>
-         <div class="section" title="2.&nbsp;Rule priority">
+         <div class="section">
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="rules.priority"></a>2.&nbsp;Rule priority<a class="indexterm" name="d0e6988"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="rules.priority"></a>2.&nbsp;Rule priority<a class="indexterm" name="d0e6991"></a></h2>
                   </div>
                </div>
             </div>
@@ -167,11 +167,11 @@
                    rules.
             </p>
          </div>
-         <div class="section" title="3.&nbsp;Creating a new rule">
+         <div class="section">
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="creating.new.rule"></a>3.&nbsp;Creating a new rule<a class="indexterm" name="d0e6998"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="creating.new.rule"></a>3.&nbsp;Creating a new rule<a class="indexterm" name="d0e7001"></a></h2>
                   </div>
                </div>
             </div>
@@ -203,11 +203,11 @@
                    rules.
             </p>
          </div>
-         <div class="section" title="4.&nbsp;A few simple examples">
+         <div class="section">
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="few.simple.examples"></a>4.&nbsp;<a class="indexterm" name="d0e7032"></a>A few simple examples
+                     <h2 class="title" style="clear: both"><a name="few.simple.examples"></a>4.&nbsp;<a class="indexterm" name="d0e7035"></a>A few simple examples
                      </h2>
                   </div>
                </div>
@@ -215,10 +215,10 @@
             <div class="informaltable">
                <table border="1">
                   <colgroup>
-                     <col width="150" align="left">
-                     <col width="60" align="center">
-                     <col width="60" align="center">
-                     <col width="190" align="left">
+                     <col align="left">
+                     <col align="center">
+                     <col align="center">
+                     <col align="left">
                   </colgroup>
                   <thead>
                      <tr>

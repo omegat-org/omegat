@@ -3,8 +3,8 @@
       <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
    
       <title>Глава 8. Файлы и каталоги ОмегаТ</title>
-      <link rel="stylesheet" href="OmegaT.css" type="text/css">
-      <meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+      <link rel="stylesheet" type="text/css" href="OmegaT.css">
+      <meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
       <link rel="home" href="index.html" title="Руководство пользователя ОмегаТ">
       <link rel="up" href="index.html" title="Руководство пользователя ОмегаТ">
       <link rel="prev" href="chapter.file.filters.html" title="Глава 7. Файловые фильтры">
@@ -25,22 +25,22 @@
          </table>
          <hr>
       </div>
-      <div class="chapter" title="Глава 8. Файлы и каталоги ОмегаТ">
+      <div class="chapter">
          <div class="titlepage">
             <div>
                <div>
-                  <h2 class="title"><a name="chapter.files.and.directories"></a>Глава 8. Файлы и каталоги <span class="application">ОмегаТ</span></h2>
+                  <h1 class="title"><a name="chapter.files.and.directories"></a>Глава 8. Файлы и каталоги <span class="application">ОмегаТ</span></h1>
                </div>
             </div>
          </div>
          <div class="toc">
-            <dl>
+            <dl class="toc">
                <dt><span class="section"><a href="chapter.files.and.directories.html#translation.project.files">1. Файлы проекта перевода</a></span></dt>
                <dd>
                   <dl>
                      <dt><span class="section"><a href="chapter.files.and.directories.html#file.omegat.project">1.1. Главная (корневая) папка</a></span></dt>
-                     <dt><span class="section"><a href="chapter.files.and.directories.html#d0e4667">1.2. Подкаталог «dictionary»</a></span></dt>
-                     <dt><span class="section"><a href="chapter.files.and.directories.html#d0e4674">1.3. Подкаталог «glossary»</a></span></dt>
+                     <dt><span class="section"><a href="chapter.files.and.directories.html#d0e4903">1.2. Подкаталог «dictionary»</a></span></dt>
+                     <dt><span class="section"><a href="chapter.files.and.directories.html#d0e4910">1.3. Подкаталог «glossary»</a></span></dt>
                      <dt><span class="section"><a href="chapter.files.and.directories.html#folder.OmegaT">1.4. Подкаталог «omegat»</a></span></dt>
                      <dt><span class="section"><a href="chapter.files.and.directories.html#folder.source">1.5. Подкаталог «source»</a></span></dt>
                      <dt><span class="section"><a href="chapter.files.and.directories.html#folder.target">1.6. Подкаталог «target»</a></span></dt>
@@ -53,7 +53,7 @@
          <p><span class="application">ОмегаТ</span> работает с файлами трёх типов.
          </p>
          <div class="itemizedlist">
-            <ul class="itemizedlist" type="disc">
+            <ul class="itemizedlist" style="list-style-type: disc; ">
                <li class="listitem">
                   <p>Файлы проекта перевода: они представляют собой проект перевода. Их потеря может повлиять на целостность проекта и на успешное
                      завершение вашей работы. Это самые важные файлы в <span class="application">ОмегаТ</span>. С этими файлами вы будете сталкиваться каждый день в процессе перевода.
@@ -62,7 +62,7 @@
             </ul>
          </div>
          <div class="itemizedlist">
-            <ul class="itemizedlist" type="disc">
+            <ul class="itemizedlist" style="list-style-type: disc; ">
                <li class="listitem">
                   <p>Файлы пользовательских настроек: они создаются, когда пользователь изменяет настройки ОмегаТ. Их потеря приведёт к тому, что
                      ОмегаТ вернётся к настройкам по умолчанию. Может быть весьма неприятно, если это случится посреди процесса перевода.
@@ -71,7 +71,7 @@
             </ul>
          </div>
          <div class="itemizedlist">
-            <ul class="itemizedlist" type="disc">
+            <ul class="itemizedlist" style="list-style-type: disc; ">
                <li class="listitem">
                   <p>Файлы приложения ОмегаТ: они включены в пакет, который вы загружаете. Большинство из них необходимы для нормальной работы
                      программы. Если по какой-то причине эти файлы были удалены или испорчены, просто повторно загрузите и/или переустановите ОмегаТ.
@@ -79,7 +79,7 @@
                </li>
             </ul>
          </div>
-         <div class="section" title="1. Файлы проекта перевода">
+         <div class="section">
             <div class="titlepage">
                <div>
                   <div>
@@ -87,7 +87,7 @@
                      </h2>
                   </div>
                </div>
-            </div><a class="indexterm" name="d0e4602"></a><p>Проект перевода <span class="application">ОмегаТ</span> состоит из нескольких файлов и каталогов.
+            </div><a class="indexterm" name="d0e4836"></a><p>Проект перевода <span class="application">ОмегаТ</span> состоит из нескольких файлов и каталогов.
             </p>
             <p>При создании проекта, ОмегаТ автоматически создаёт одноимённый каталог и несколько подкаталогов внутри него:</p>
             <div class="figure"><a name="OmegaT.project"></a><p class="title"><b>Рисунок 8.1. Проект ОмегаТ</b></p>
@@ -96,7 +96,7 @@
                </div>
             </div><br class="figure-break"><p>При создании проекта, и в дальнейшем, в процессе перевода, для некоторых из этих подкаталогов можно задать другое расположение.
                Таким образом, возможно выбрать уже существующие каталоги или создать их там, где вы посчитаете нужным, в соответствии с вашим
-               рабочим процессом. Чтобы изменить расположение каталогов после создания проекта, выберите пункт меню <span class="guimenuitem">«Проект → Свойства...»</span>, или нажмите сочетание клавиш <span class="guibutton">CTRL+E</span>, и внесите необходимые изменения.
+               рабочим процессом. Чтобы изменить расположение каталогов после создания проекта, выберите пункт меню <span class="guimenuitem">«Проект → Свойства...»</span>, или нажмите клавиши <span class="guibutton">CTRL+E</span>, и внесите необходимые изменения.
             </p>
             <p>В файловом менеджере проект перевода выглядит так же, как и любая другая папка. На иллюстрации ниже в папке <code class="filename">my projects</code> находятся три проекта ОмегаТ:
             </p>
@@ -108,22 +108,22 @@
             <p><br class="figure-break"></p>
             <p>Чтобы открыть проект, достаточно дважды щёлкнуть мышкой по любой из записей со значком ОмегаТ. Переводческий проект <span class="bold"><strong>Тестовый проект</strong></span>, созданный с настройками по умолчанию, будет представлять из себя новую вложенную папку со следующей структурой:
             </p>
-            <div class="section" title="1.1. Главная (корневая) папка">
+            <div class="section">
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="file.omegat.project"></a>1.1. Главная (корневая) папка<a class="indexterm" name="d0e4648"></a></h3>
+                        <h3 class="title"><a name="file.omegat.project"></a>1.1. Главная (корневая) папка<a class="indexterm" name="d0e4884"></a></h3>
                      </div>
                   </div>
                </div>
                <p>В главной папке находится файл <code class="filename"> OmegaT.Project</code>, в котором хранятся все настройки проекта, заданные через соответствующее диалоговое окно (<span class="guimenuitem">«Проект &gt; Свойства»</span>). В процессе перевода в этой папке также создаются и периодически пополняются другие файлы (<span class="emphasis"><em><code class="filename">имя_проекта</code></em></span><code class="filename">-omegat.tmx, имя_проекта-level1.tmx и имя_проекта-level2.tmx</code>). В них, в немного разном виде, хранится память переводов, которую можно использовать в последующих проектах.
                </p>
             </div>
-            <div class="section" title="1.2. Подкаталог «dictionary»">
+            <div class="section">
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="d0e4667"></a>1.2. Подкаталог «dictionary»
+                        <h3 class="title"><a name="d0e4903"></a>1.2. Подкаталог «dictionary»
                         </h3>
                      </div>
                   </div>
@@ -131,22 +131,22 @@
                <p>Изначально этот подкаталог пуст, в него вы можете самостоятельно добавить словари, которые планируете использовать в проекте.
                   Более подробную информацию можно найти в разделе <a class="link" href="chapter.dictionaries.html" title="Глава 17. Словари">Словари</a></p>
             </div>
-            <div class="section" title="1.3. Подкаталог «glossary»">
+            <div class="section">
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="d0e4674"></a>1.3. Подкаталог «glossary»
+                        <h3 class="title"><a name="d0e4910"></a>1.3. Подкаталог «glossary»
                         </h3>
                      </div>
                   </div>
                </div>
                <p>Изначально этот каталог пуст. В нём будут храниться глоссарии проекта. Более подробную информацию можно найти в разделе <a class="link" href="chapter.glossaries.html" title="Глава 18. Глоссарии">Глоссарии</a></p>
             </div>
-            <div class="section" title="1.4. Подкаталог «omegat»">
+            <div class="section">
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="folder.OmegaT"></a>1.4. Подкаталог «omegat»<a class="indexterm" name="d0e4684"></a></h3>
+                        <h3 class="title"><a name="folder.OmegaT"></a>1.4. Подкаталог «omegat»<a class="indexterm" name="d0e4920"></a></h3>
                      </div>
                   </div>
                </div>
@@ -164,11 +164,11 @@
                      <tbody>
                         <tr>
                            <td align="left">stats.txt</td>
-                           <td align="left"><a class="indexterm" name="d0e4711"></a>в этом файле хранится статистика проекта. Вы можете просмотреть её, выбрав пункт меню <span class="guimenuitem">«Инструменты &gt; Статистика»</span></td>
+                           <td align="left"><a class="indexterm" name="d0e4947"></a>в этом файле хранится статистика проекта. Вы можете просмотреть её, выбрав пункт меню <span class="guimenuitem">«Инструменты &gt; Статистика»</span></td>
                         </tr>
                         <tr>
                            <td align="left">ignored_words.txt. learned_words.txt</td>
-                           <td align="left"><a class="indexterm" name="d0e4723"></a>эти файлы создаются и используются при проверке орфографии. Если у вас уже есть списки слов, которые надо игнорировать или
+                           <td align="left"><a class="indexterm" name="d0e4959"></a>эти файлы создаются и используются при проверке орфографии. Если у вас уже есть списки слов, которые надо игнорировать или
                               добавить в словарь, их можно просто скопировать в соответствующие файлы в каталоге <code class="filename">omegat</code>.
                            </td>
                         </tr>
@@ -190,11 +190,11 @@
                   </table>
                </div>
             </div>
-            <div class="section" title="1.5. Подкаталог «source»">
+            <div class="section">
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="folder.source"></a>1.5. Подкаталог «source»<a class="indexterm" name="d0e4762"></a></h3>
+                        <h3 class="title"><a name="folder.source"></a>1.5. Подкаталог «source»<a class="indexterm" name="d0e4998"></a></h3>
                      </div>
                   </div>
                </div>
@@ -203,11 +203,11 @@
                   уровня и ОмегаТ скопирует всё её содержимое, сохранив изначальную структуру каталогов и файлов.
                </p>
             </div>
-            <div class="section" title="1.6. Подкаталог «target»">
+            <div class="section">
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="folder.target"></a>1.6. Подкаталог «target»<a class="indexterm" name="d0e4772"></a></h3>
+                        <h3 class="title"><a name="folder.target"></a>1.6. Подкаталог «target»<a class="indexterm" name="d0e5008"></a></h3>
                      </div>
                   </div>
                </div>
@@ -216,11 +216,11 @@
                </p>
             </div>
          </div>
-         <div class="section" title="2. Файлы пользовательских настроек">
+         <div class="section">
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="user.files"></a>2. Файлы пользовательских настроек<a class="indexterm" name="d0e4800"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="user.files"></a>2. Файлы пользовательских настроек<a class="indexterm" name="d0e5036"></a></h2>
                   </div>
                </div>
             </div>
@@ -290,7 +290,7 @@
                         </td>
                      </tr>
                      <tr>
-                        <td align="left">Mac OS X</td>
+                        <td align="left">Mac OS&nbsp;X</td>
                         <td align="left"><code class="filename">&lt;Домашний каталог&gt;/Library/Preferences/<span class="application">OmegaT</span></code></td>
                      </tr>
                      <tr>
@@ -301,17 +301,17 @@
                </table>
             </div>
          </div>
-         <div class="section" title="3. Файлы приложения">
+         <div class="section">
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="application.files"></a>3. Файлы приложения<a class="indexterm" name="d0e4899"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="application.files"></a>3. Файлы приложения<a class="indexterm" name="d0e5135"></a></h2>
                   </div>
                </div>
             </div>
             <p>ОмегаТ поставляется в виде установочного пакета, который можно загрузить с SourceForge. Здесь идёт речь об обычном, платформо-независимом
                java пакете. Среди других пакетов&nbsp;— пакет «.tar» для GNU/Linux, программа установки для Windows с или без Java Runtime Environment,
-               программа установки для Mac OS X и пакет с исходными кодами программы для разработчиков.
+               программа установки для Mac OS&nbsp;X и пакет с исходными кодами программы для разработчиков.
             </p>
             <p>Платформо-независимый пакет можно использовать на любой системе, где установлена JRE 1.5, включая платформы, для которых существуют
                специальные пакеты. Этот пакет представляет собой архив (ZIP или TAR), который нужно распаковать в любую папку на ваш выбор.
@@ -375,7 +375,7 @@
                         </td>
                      </tr>
                      <tr>
-                        <td align="left"><span class="application">OmegaT</span></td>
+                        <td align="left"><code class="literal">OmegaT</code></td>
                         <td align="left">Текстовый файл, который содержит две строки:</td>
                      </tr>
                      <tr>
@@ -389,25 +389,23 @@
                      </tr>
                      <tr>
                         <td align="left">&nbsp;</td>
-                        <td align="left">Этот файл может оказаться полезным для пользователей GNU/Linux и OS X. Откройте командную строку, перейдите в каталог «/OmegaT_2.5/»
+                        <td align="left">Этот файл может оказаться полезным для пользователей GNU/Linux и OS&nbsp;X. Откройте командную строку, перейдите в каталог «/OmegaT_2.5/»
                            и сделайте файл исполняемым («chmod +x OmegaT»). После этого вы сможете запускать ОмегаТ, вызывая из командной строки этот
                            файл.
                         </td>
                      </tr>
                      <tr>
-                        <td align="left"><span class="application">OmegaT</span>.bat
-                        </td>
+                        <td align="left"><code class="literal">OmegaT.bat</code></td>
                         <td align="left">Пакетный файл, который используется для запуска <span class="application">ОмегаТ</span> из командной строки Windows. Он содержит только одну строку:
                         </td>
                      </tr>
                      <tr>
                         <td align="left">&nbsp;</td>
-                        <td align="left"><code class="literal">java -jar <span class="application">OmegaT</span>.jar
+                        <td align="left"><code class="literal">java -jar OmegaT.jar
                                           %*</code></td>
                      </tr>
                      <tr>
-                        <td align="left"><span class="application">OmegaT</span>.jar
-                        </td>
+                        <td align="left"><code class="literal">OmegaT.jar</code></td>
                         <td align="left">Собственно, программа ОмегаТ. Для запуска ОмегаТ вам нужно либо вызвать этот файл из командной строки, либо запустить его
                            из вашего файлового менеджера двойным щелчком мыши.
                         </td>

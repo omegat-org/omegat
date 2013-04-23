@@ -1,0 +1,285 @@
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <title>Приложение C. Командные проекты в ОмегаТ</title>
+      <link rel="stylesheet" type="text/css" href="OmegaT.css">
+      <meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
+      <link rel="home" href="index.html" title="Руководство пользователя ОмегаТ">
+      <link rel="up" href="index.html" title="Руководство пользователя ОмегаТ">
+      <link rel="prev" href="appendix.keyboard.html" title="Приложение B. Сочетания клавиш для редактирования текста">
+      <link rel="next" href="appendix.TokenizerPlugin.inOmegaT.html" title="Приложение D. Модуль «tokenizer»">
+   </head>
+   <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+      <div class="navheader">
+         <table width="100%" summary="Navigation header">
+            <tr>
+               <th colspan="3" align="center">Приложение C. Командные проекты в ОмегаТ</th>
+            </tr>
+            <tr>
+               <td width="20%" align="left"><a accesskey="p" href="appendix.keyboard.html">Пред.</a>&nbsp;
+               </td>
+               <th width="60%" align="center">&nbsp;</th>
+               <td width="20%" align="right">&nbsp;<a accesskey="n" href="appendix.TokenizerPlugin.inOmegaT.html">След.</a></td>
+            </tr>
+         </table>
+         <hr>
+      </div>
+      <div class="appendix">
+         <div class="titlepage">
+            <div>
+               <div>
+                  <h1 class="title"><a name="appendix.TeamProjects"></a>Приложение C. Командные проекты в ОмегаТ<a class="indexterm" name="d0e10395"></a></h1>
+               </div>
+            </div>
+         </div>
+         <div class="toc">
+            <dl class="toc">
+               <dt><span class="section"><a href="appendix.TeamProjects.html#d0e10402">1. Управление версиями&nbsp;— введение</a></span></dt>
+               <dt><span class="section"><a href="appendix.TeamProjects.html#d0e10473">2. Совместная работа над проектом, с использованием SVN</a></span></dt>
+               <dd>
+                  <dl>
+                     <dt><span class="section"><a href="appendix.TeamProjects.html#d0e10494">2.1. Создание репозитория</a></span></dt>
+                     <dt><span class="section"><a href="appendix.TeamProjects.html#d0e10554">2.2. Импорт проекта в SVN-репозиторий, Windows</a></span></dt>
+                  </dl>
+               </dd>
+               <dt><span class="section"><a href="appendix.TeamProjects.html#d0e10694">3. Работа над командным проектом в ОмегаТ</a></span></dt>
+            </dl>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e10402"></a>1. Управление версиями&nbsp;— введение
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>В ОмегаТ функция совместной работы над переводом реализована на основе систем управления версиями (version control system,
+               VCS), которые широко применяются при разработке программного обеспечения для управления изменениями в коде программ и беспрепятственной
+               совместной работы в рамках команды. ОмегаТ поддерживает две популярные системы управления версиями: <a class="ulink" href="http://subversion.apache.org" target="_top">Apache Subversion</a> (иногда называемую SVN) и <a class="ulink" href="http://git-scm.com/" target="_top">Git</a>. Для команды разработчиков использование систем управления версиями имеет следующие преимущества:
+            </p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>несколько членов команды могут одновременно работать над одним проектом и при этом не мешать друг другу;</p>
+                  </li>
+                  <li class="listitem">
+                     <p>они могут использовать общую память переводов и общий глоссарий;</p>
+                  </li>
+                  <li class="listitem">
+                     <p>По умолчанию каждые три минуты всем членам команды становится доступна обновлённая версия перевода;</p>
+                  </li>
+                  <li class="listitem">
+                     <p>система автоматически управляет версиями общих файлов;</p>
+                  </li>
+                  <li class="listitem">
+                     <p>конфликты, например, различные варианты перевода одного сегмента или термина глоссария, можно отслеживать и разрешать;</p>
+                  </li>
+               </ul>
+            </div>
+            <p>Для начала дадим определение некоторым терминам:</p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p><span class="bold"><strong>сервер системы управления версиями:</strong></span> сервер SVN или Git, на котором хранятся материалы проекта. Сервер может находиться и в локальной сети, но в большинстве случаев
+                        он будет доступен в Интернете, т.&nbsp;е. будет иметь URL-адрес. Один из членов команды, администратор проекта, должен уметь настраивать
+                        всё необходимое на стороне сервера: подготавливать систему управления версиями, импортировать проекты ОмегаТ, устанавливать
+                        необходимые права для членов команды, разрешать конфликты и&nbsp;т.&nbsp;д.;
+                     </p>
+                  </li>
+                  <li class="listitem">
+                     <p><span class="bold"><strong>клиент системы управления версиями:</strong></span> для доступа к серверу, на компьютере руководителя проекта должна быть установлена клиентская программа SVN или Git. Для ОС
+                        Windows имеются популярные клиенты <a class="ulink" href="http://tortoisesvn.net/" target="_top">TortoiseSVN</a> и <a class="ulink" href="http://code.google.com/p/tortoisegit/" target="_top">TortoiseGit</a>. Схожие программы доступны и для других операционных систем (GNU/Linux, OS&nbsp;X);
+                     </p>
+                  </li>
+                  <li class="listitem">
+                     <p><span class="bold"><strong>репозиторий:</strong></span> место, где хранятся общие файлы проекта, либо в локальной сети, либо в Интернете. Члены команды подключаются к нему через
+                        клиентские программы системы управления версиями;
+                     </p>
+                  </li>
+                  <li class="listitem">
+                     <p><span class="bold"><strong>создание рабочей копии (извлечение документов из репозитория):</strong></span> операция, в результате которой на вашем компьютере появляется рабочая копия файлов, хранящихся в репозитории. Информация
+                        о создании рабочих копий хранится на сервере, благодаря чему последующая фиксация изменений (см. ниже) может производиться
+                        обычным образом;
+                     </p>
+                  </li>
+                  <li class="listitem">
+                     <p><span class="bold"><strong> фиксация изменений (создание новой версии):</strong></span> после того, как в рабочую копию файлов были внесены изменения, их можно отправить обратно в репозиторий (зафиксировать изменения)
+                        так, чтобы они стали доступны остальным членам команды. На стороне сервера проводится проверка, чтобы возможные конфликты,
+                        которые возникают, когда два участника команды переводят один и тот же сегмент, были разрешены;
+                     </p>
+                  </li>
+                  <li class="listitem">
+                     <p><span class="bold"><strong>администратор:</strong></span> член команды, ответственный за создание и поддержание рабочего репозитория, т.&nbsp;е. за обеспечение работы сервера. Чтобы избежать
+                        проблем, по крайней мере на начальном этапе, подобными правами должен обладать только один человек;
+                     </p>
+                  </li>
+                  <li class="listitem">
+                     <p><span class="bold"><strong>пользователь</strong></span>: член команды, работающий над общим проектом.
+                     </p>
+                  </li>
+               </ul>
+            </div>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e10473"></a>2. Совместная работа над проектом, с использованием SVN<a class="indexterm" name="d0e10476"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <p>Для работы с системой SVN можно либо установить её на ваш собственный сервер, либо воспользоваться услугами стороннего хостинга.
+               При использовании стороннего сервиса следует учитывать возможность утечки конфиденциальной информации, так как вы будете загружать
+               переводимые документы на сервер, который вы не можете контролировать. С другой стороны, этого можно избежать, создав свой
+               собственный SVN-сервер, например, если у вас уже установлен сервер Apache и другие необходимые программы (например, VisualSVN).
+            </p>
+            <p>После того, как вопрос в выбором сервера будет решён, руководитель проекта должен установить SVN-клиент на свой компьютер.
+               Пользователям ОС Windows рекомендуется воспользоваться <a class="ulink" href="http://tortoisesvn.net/" target="_top">TortoiseSVN</a>. Пользователи Mac могут загрузить SVN-клиент с веб-сайта <a class="ulink" href="https://sourceforge.net/projects/macsvn/" target="_top">SourceForge</a>. Для пользователей GNU/Linux доступно руководство <a class="ulink" href="www.yolinux.com/TUTORIALS/Subversion.html" target="_top">«Команды и скрипты Subversion» (на английском языке)</a>.
+            </p>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="d0e10494"></a>2.1. Создание репозитория<a class="indexterm" name="d0e10497"></a></h3>
+                     </div>
+                  </div>
+               </div>
+               <p>В данном руководстве описывается использование бесплатного (для команды из двух человек) SVN-сервера <a class="ulink" href="http://projectlocker.com/" target="_top">ProjectLocker</a>. Заметьте, что создатель репозитория по умолчанию имеет права администратора. Для начала зарегистрируйтесь на сайте и запомните
+                  выбранное имя пользователя и пароль для будущих проектов.
+               </p>
+               <div class="orderedlist">
+                  <ol class="orderedlist" type="1">
+                     <li class="listitem">
+                        <p>Создайте новый проект на ProjectLocker.</p>
+                     </li>
+                     <li class="listitem">
+                        <p>Введите название и описание репозитория. (в нашем примере это <code class="literal">«OmegaT»</code> и <code class="literal">«OmegaT SL Localization»</code>).
+                        </p>
+                     </li>
+                     <li class="listitem">
+                        <p>Выберите <span class="guibutton">SVN.</span></p>
+                     </li>
+                     <li class="listitem">
+                        <p>Нажмите <span class="guibutton">«Create Project» (создать проект).</span></p>
+                     </li>
+                  </ol>
+               </div>
+               <p>Перейдите к разделу <span class="bold"><strong>«Projects» (проекты)</strong></span> вашей учётной записи. В описании проекта («Project Services») будет указан URL-адрес, по которому SVN-клиенты могут подключиться
+                  к вашему новому SVN-серверу. Также здесь можно добавлять новых членов команды и устанавливать им права. Заметьте, что для
+                  этого члены команды тоже должны быть зарегистрированы (в бесплатной версии ProjectLocker команда может состоять только из
+                  двух человек).
+               </p>
+               <p>Проектами можно управлять в соответствии с вашим стилем работы и потребностями. Как и в случае с обычными проектами ОмегаТ,
+                  для переводов с разными языковыми парами следует создавать разные проекты. Однако и в рамках одной языковой пары лучше размещать
+                  переводы по разным тематикам или от разных клиентов в отдельных проектах. С другой стороны, в одном репозитории можно иметь
+                  подкаталоги <code class="literal">Проект1</code>, <code class="literal">Проект2</code> и&nbsp;т.&nbsp;д., при этом проекты будут иметь общие каталоги <code class="literal">tm</code>, <code class="literal">glossary</code>и <code class="literal">dictionary</code>.
+               </p>
+               <p>Например, в этом примере для простоты создаётся один репозиторий для одного проекта ОмегаТ. .</p>
+            </div>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="d0e10554"></a>2.2. Импорт проекта в SVN-репозиторий, Windows
+                        </h3>
+                     </div>
+                  </div>
+               </div>
+               <p>Изначально репозиторий создаётся пустым. Сначала вы должны создать пустой каталог SVN-клиента. Создайте на своём компьютере
+                  пустой каталог, в котором будет находиться ваш проект и щёлкните по нему правой кнопкой мыши. Выберите <span class="guilabel">TortoiseSVN &gt; Checkout</span> (TortoiseSVN &gt; Создание рабочей копии). Появится диалоговое окно, как на иллюстрации ниже.
+               </p>
+               <div class="mediaobject"><img src="images/Team_projects_checkout.png"></div>
+               <p>В поле <span class="bold"><strong>URL of repository</strong></span> (URL-адрес репозитория) введите адрес, полученный от ProjectLocker. Убедитесь, что в поле <span class="bold"><strong>Checkout directory</strong></span> (каталог рабочей копии) указан только что созданный пустой каталог и нажмите <span class="bold"><strong>OK</strong></span>. После завершения работы клиента вы можете убедиться, что в новом каталоге теперь содержится подкаталог «.svn», а на иконке
+                  появился небольшой зелёный символ «OK», обозначающий, что содержимое каталога синхронизировано с репозиторием.
+               </p>
+               <p>Далее следует добавить в этот каталог файлы проекта ОмегаТ. Следующие файлы должным быть доступны всем членам проекта:</p>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
+                     <li class="listitem">
+                        <p>основной файл проекта <code class="filename">omegat.project</code>;
+                        </p>
+                     </li>
+                     <li class="listitem">
+                        <p>файл памяти переводов проекта <code class="filename">omegat\project_save.tmx</code>;
+                        </p>
+                     </li>
+                     <li class="listitem">
+                        <p>содержимое каталога исходных файлов;</p>
+                     </li>
+                     <li class="listitem">
+                        <p>файл со специальными настройками файловых фильтров <code class="filename">omegat\filters.xml</code>.
+                        </p>
+                     </li>
+                  </ul>
+               </div>
+               <p>Также администратор проекта может добавить каталоги <code class="filename">tm</code>, <code class="filename">glossary</code> и <code class="filename">dictionary</code>. Возможно, стоит добавить и файлы <code class="filename">ignored_words.txt</code> и <code class="filename">learned_words.txt</code> из каталога <code class="filename">omegat</code>. Не стоит добавлять файлы с расширением <code class="filename">bak</code>, файл <code class="filename">project_stats.txt</code> и <code class="filename">project_stats_match.txt</code> из каталога <code class="filename">omegat</code>, так как они будут лишь занимать место на сервере. Скорее всего, то же самое относится и к содержимому каталога <code class="filename">target</code>.
+               </p>
+               <p>После того, как вы скопируете все необходимые файлы в каталог с рабочей копией репозитория, зелёный символ «ОК» сменится на
+                  красный восклицательный знак, что означает, что в рабочей копии произошли изменения, которые не были зафиксированы в репозитории.
+                  Чтобы теперь обновить содержимое репозитория, следует сделать следующее:
+               </p>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
+                     <li class="listitem">
+                        <p><span class="bold"><strong>добавить скопированные файлы в рабочую копию репозитория:</strong></span> щёлкните правой кнопкой мыши по каталогу рабочей копии и выберите <span class="guilabel">TortoiseSVN &gt; Add</span> (TortoiseSVN &gt; Добавить). В появившемся диалоговом окне оставьте настройки по умолчанию и нажмите <span class="guilabel">OK</span>. Появится окно «Add finished!» (добавление завершено!), как на иллюстрации ниже:
+                        </p>
+                        <div class="mediaobject"><img src="images/Team_projects_Add.png"></div>
+                        <p>Теперь содержимое каталога рабочей копии должно иметь соответствующие пометки:</p>
+                        <div class="mediaobject"><img src="images/Team_projects_checkoutAddFolder.png"></div>
+                     </li>
+                     <li class="listitem">
+                        <p><span class="bold"><strong>зафиксировать изменения в репозитории:</strong></span> щёлкните правой кнопкой мыши по каталогу рабочей копии и выберите <span class="guilabel">SVN Commit…</span>(зафиксировать изменения…). Откроется новое диалоговое окно. Отметьте нужные изменения, т.&nbsp;е., скопированные каталоги и файлы.
+                        </p>
+                        <div class="mediaobject"><img src="images/Team_projects_initialCommit.png"></div>
+                        <p>Добавьте описание изменений в поле «Message» (сообщение) и нажмите <span class="guilabel">OK</span>. Появится новое окно, в котором будет отображаться прогресс фиксации изменений. Сначала содержимое рабочей копии будет отправлено
+                           на сервер, а затем будет произведена синхронизация каталога «.svn» с текущим состоянием репозитория;
+                        </p>
+                     </li>
+                     <li class="listitem">
+                        <p><span class="bold"><strong>обновить файлы рабочей копии из локальной копии репозитория:</strong></span> сейчас, в подкаталоге «.svn» находится локальная копия репозитория, но файлы рабочей копии проекта пока не синхронизированы.
+                           Чтобы обновить рабочую копию, щёлкните правой кнопкой мыши по главному каталогу проекта и выберите <span class="guilabel">SVN Update</span> (обновить из SVN). Проверьте содержимое каталога, чтобы убедиться, что локальная копия репозитория и соответствующие файлы
+                           и подкаталоги соответствуют последним версиям на сервере:
+                        </p>
+                        <div class="mediaobject"><img src="images/Team_projects_checkoutSVNupdate.png"></div>
+                     </li>
+                  </ul>
+               </div>
+            </div>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e10694"></a>3. Работа над командным проектом в ОмегаТ
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>После размещения проекта на сервере члены команда должны лишь настроить <span class="application">ОмегаТ</span> для доступа к общему проекту. Сначала нужно выбрать пункт меню <span class="guilabel">Проект &gt; Загрузить командный проект…</span>: ОмегаТ извлечёт из репозитория последнюю версию проекта и сохранит её в локальном каталоге. Учётные данные сохраняются автоматически,
+               так что вводить их второй раз не придётся. Если вы используете GNU/Linux и <span class="application">ОмегаТ</span> по прежнему каждый раз запрашивает учётные данные, попробуйте установить флажок <span class="guilabel">«Принудительно сохранять пароль в виде обычного текста»</span>.
+            </p>
+            <p>При последующем использовании будет достаточно просто открыть этот проект. ОмегаТ распознает его как командный и будет синхронизировать
+               нужные файлы автоматически. По умолчанию синхронизация будет происходить каждые три минуты.
+            </p>
+         </div>
+      </div>
+      <div class="navfooter">
+         <hr>
+         <table width="100%" summary="Navigation footer">
+            <tr>
+               <td width="40%" align="left"><a accesskey="p" href="appendix.keyboard.html">Пред.</a>&nbsp;
+               </td>
+               <td width="20%" align="center">&nbsp;</td>
+               <td width="40%" align="right">&nbsp;<a accesskey="n" href="appendix.TokenizerPlugin.inOmegaT.html">След.</a></td>
+            </tr>
+            <tr>
+               <td width="40%" align="left" valign="top">Приложение B. Сочетания клавиш для редактирования текста&nbsp;</td>
+               <td width="20%" align="center"><a accesskey="h" href="index.html">Начало</a></td>
+               <td width="40%" align="right" valign="top">&nbsp;Приложение D. Модуль «tokenizer»</td>
+            </tr>
+         </table>
+      </div>
+   </body>
+</html>

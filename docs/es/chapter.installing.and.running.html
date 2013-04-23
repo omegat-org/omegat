@@ -3,8 +3,8 @@
       <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
    
       <title>Capítulo 3. Instalando y ejecutando OmegaT</title>
-      <link rel="stylesheet" href="OmegaT.css" type="text/css">
-      <meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+      <link rel="stylesheet" type="text/css" href="OmegaT.css">
+      <meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
       <link rel="home" href="index.html" title="OmegaT - Guía de usuario">
       <link rel="up" href="index.html" title="OmegaT - Guía de usuario">
       <link rel="prev" href="chapter.instant.start.guide.html" title="Capítulo 2. Guía de inicio rápido">
@@ -25,16 +25,16 @@
          </table>
          <hr>
       </div>
-      <div class="chapter" title="Capítulo 3. Instalando y ejecutando OmegaT">
+      <div class="chapter">
          <div class="titlepage">
             <div>
                <div>
-                  <h2 class="title"><a name="chapter.installing.and.running"></a>Capítulo 3. Instalando y ejecutando <span class="application">OmegaT</span></h2>
+                  <h1 class="title"><a name="chapter.installing.and.running"></a>Capítulo 3. Instalando y ejecutando <span class="application">OmegaT</span></h1>
                </div>
             </div>
          </div>
          <div class="toc">
-            <dl>
+            <dl class="toc">
                <dt><span class="section"><a href="chapter.installing.and.running.html#d0e782">1. Usuarios de Windows</a></span></dt>
                <dd>
                   <dl>
@@ -85,7 +85,7 @@
                <dt><span class="section"><a href="chapter.installing.and.running.html#building.OmegaT.from.source">7. Construyendo <span class="application">OmegaT</span> desde código fuente</a></span></dt>
             </dl>
          </div>
-         <div class="section" title="1. Usuarios de Windows">
+         <div class="section">
             <div class="titlepage">
                <div>
                   <div>
@@ -93,7 +93,7 @@
                   </div>
                </div>
             </div>
-            <div class="section" title="1.1. Descarga el paquete">
+            <div class="section">
                <div class="titlepage">
                   <div>
                      <div>
@@ -104,7 +104,7 @@
                </div>
                <p>¿Tienes una implementación de Java compatible con Java 1.5 JRE de Oracle?</p>
                <div class="itemizedlist">
-                  <ul class="itemizedlist" type="disc">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
                      <li class="listitem">
                         <p><span class="bold"><strong>Sí:</strong></span> descarga <span class="emphasis"><em>OmegaT_2.3.x_Windows_without_JRE.exe</em></span>.
                         </p>
@@ -118,7 +118,7 @@
                   </ul>
                </div>
             </div>
-            <div class="section" title="1.2. Instalando OmegaT">
+            <div class="section">
                <div class="titlepage">
                   <div>
                      <div>
@@ -129,7 +129,7 @@
                <p>Para instalar <span class="application">OmegaT</span>, haz doble clic en el programa descargado y sigue las instrucciones
                </p>
             </div>
-            <div class="section" title="1.3. Añadiendo OmegaT al menú Inicio o al escritorio">
+            <div class="section">
                <div class="titlepage">
                   <div>
                      <div>
@@ -142,7 +142,7 @@
                <p>También puedes crear un acceso directo más tarde arrastrando <span class="emphasis"><em><span class="application">OmegaT</span>.exe</em></span> al menú Inicio, al escritorio o al Inicio rápido para enlazarlos desde allí.
                </p>
             </div>
-            <div class="section" title="1.4. Ejecutando OmegaT">
+            <div class="section">
                <div class="titlepage">
                   <div>
                      <div>
@@ -163,7 +163,7 @@
                         #&nbsp;Country&nbsp;-Duser.country=CA</code></p>
                </div>
             </div>
-            <div class="section" title="1.5. Actualizando OmegaT">
+            <div class="section">
                <div class="titlepage">
                   <div>
                      <div>
@@ -175,7 +175,7 @@
                         que se actualizan automáticamente, ni a las versiones de plataformas cruzadas instaladas en Windows.</em></span></p>
                <p>Si ya tienes instalada una versión de OmegaT en tu PC y deseas actualizarla a una versión más reciente, tienes dos opciones:</p>
                <div class="itemizedlist">
-                  <ul class="itemizedlist" type="disc">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
                      <li class="listitem">
                         <p><span class="bold"><strong>Instalar sobre la instalación existente. </strong></span>Para ello, sólo tienes que seleccionar el directorio de instalación igual que el de la instalación existente al instalar la
                            nueva versión. La versión "antigua" de OmegaT se sobrescribirá, pero se mantendrán la misma configuración. Esto incluye las
@@ -186,14 +186,14 @@
                </div>
                <p>Con este método, también puedes descargar la versión "Windows sin JRE", ya que la nueva instalación utilizará el JRE existente.</p>
                <div class="itemizedlist">
-                  <ul class="itemizedlist" type="disc">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
                      <li class="listitem">
                         <p><span class="bold"><strong>Instalación en un nuevo directorio. </strong></span>Esto te permitirá mantener las dos versiones lado a lado, lo cual posiblemente es lo que deseas hacer, hasta que te sientas
                            cómodo con la nueva versión. Este método también utiliza las preferencias y ajustes que hayas realizado desde OmegaT. En este
                            caso, sin embargo:
                         </p>
                         <div class="itemizedlist">
-                           <ul class="itemizedlist" type="circle">
+                           <ul class="itemizedlist" style="list-style-type: circle; ">
                               <li class="listitem">
                                  <p>Si haz realizado cambios en tu archivo <code class="filename">OmegaT.l4J.ini</code> y / o utilizas un archivo .bat, los debes copiar de nuevo.
                                  </p>
@@ -201,7 +201,7 @@
                            </ul>
                         </div>
                         <div class="itemizedlist">
-                           <ul class="itemizedlist" type="circle">
+                           <ul class="itemizedlist" style="list-style-type: circle; ">
                               <li class="listitem">
                                  <p>Si la instalación de OmegaT existente es una versión "Windows con JRE", la nueva versión también debe ser una versión "Windows
                                     con JRE".
@@ -214,7 +214,7 @@
                </div>
             </div>
          </div>
-         <div class="section" title="2. Usuarios de Linux (Intel)">
+         <div class="section">
             <div class="titlepage">
                <div>
                   <div>
@@ -222,7 +222,7 @@
                   </div>
                </div>
             </div>
-            <div class="section" title="2.1. Descarga el paquete adecuado">
+            <div class="section">
                <div class="titlepage">
                   <div>
                      <div>
@@ -233,7 +233,7 @@
                </div>
                <p>¿Tienes una implementación de Java compatible con Java 1.5 JRE de Oracle?</p>
                <div class="itemizedlist">
-                  <ul class="itemizedlist" type="disc">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
                      <li class="listitem">
                         <p><span class="bold"><strong>Sí:</strong></span> descarga <span class="emphasis"><em>OmegaT_2.3.x_Without_JRE.zip</em></span>.
                         </p>
@@ -247,7 +247,7 @@
                   </ul>
                </div>
             </div>
-            <div class="section" title="2.2. Instalando OmegaT">
+            <div class="section">
                <div class="titlepage">
                   <div>
                      <div>
@@ -260,7 +260,7 @@
                </p>
                <p><span class="emphasis"><em>$ tar xf archivo_descargado.tar.gz</em></span></p>
             </div>
-            <div class="section" title="2.3. Añadiendo OmegaT a tus menús (KDE) o paneles (Gnome)">
+            <div class="section">
                <div class="titlepage">
                   <div>
                      <div>
@@ -269,7 +269,7 @@
                      </div>
                   </div>
                </div>
-               <div class="section" title="2.3.1. Usuarios de KDE 4">
+               <div class="section">
                   <div class="titlepage">
                      <div>
                         <div>
@@ -280,7 +280,7 @@
                   <p>Puedes agregar <span class="application">OmegaT</span> a tus menús de la siguiente manera:
                   </p>
                   <div class="itemizedlist">
-                     <ul class="itemizedlist" type="disc">
+                     <ul class="itemizedlist" style="list-style-type: disc; ">
                         <li class="listitem">
                            <p>Presiona las teclas <span class="bold"><strong> <span class="keysym">Alt+F2</span> </strong></span> para mostrar el KRunner. Escribe <span class="emphasis"><em>kmenuedit+enter</em></span> para ejecutar la orden. Aparece el KMenuEditor. En KMenuEditor selecciona <span class="emphasis"><em>Archivo → Nuevo elemento.</em></span></p>
                         </li>
@@ -305,7 +305,7 @@
                      </ul>
                   </div>
                </div>
-               <div class="section" title="2.3.2. Usuarios de GNOME">
+               <div class="section">
                   <div class="titlepage">
                      <div>
                         <div>
@@ -316,7 +316,7 @@
                   <p>Puedes agregar <span class="application">OmegaT</span> a tus menús de la siguiente manera:
                   </p>
                   <div class="itemizedlist">
-                     <ul class="itemizedlist" type="disc">
+                     <ul class="itemizedlist" style="list-style-type: disc; ">
                         <li class="listitem">
                            <p>Haz clic con el botón derecho en el panel - <span class="emphasis"><em>Añadir nuevo lanzador.</em></span></p>
                         </li>
@@ -334,7 +334,7 @@
                   </div>
                </div>
             </div>
-            <div class="section" title="2.4. Ejecutando OmegaT">
+            <div class="section">
                <div class="titlepage">
                   <div>
                      <div>
@@ -346,7 +346,7 @@
                </p>
             </div>
          </div>
-         <div class="section" title="3. Usuarios de Mac OS X">
+         <div class="section">
             <div class="titlepage">
                <div>
                   <div>
@@ -354,7 +354,7 @@
                   </div>
                </div>
             </div>
-            <div class="section" title="3.1. Descargando el paquete">
+            <div class="section">
                <div class="titlepage">
                   <div>
                      <div>
@@ -367,7 +367,7 @@
                </p>
                <p>Descarga <span class="emphasis"><em>OmegaT_2.3.x_Mac.zip.</em></span></p>
             </div>
-            <div class="section" title="3.2. Instalando OmegaT">
+            <div class="section">
                <div class="titlepage">
                   <div>
                      <div>
@@ -379,7 +379,7 @@
                   <span class="emphasis"><em>OmegaT_2.3.x_Mac.zip</em></span>, ya no es necesario.
                </p>
             </div>
-            <div class="section" title="3.3. Añadiendo OmegaT al Dock">
+            <div class="section">
                <div class="titlepage">
                   <div>
                      <div>
@@ -390,7 +390,7 @@
                <p>Arrastra y suelta <span class="emphasis"><em><span class="application">OmegaT</span>.app</em></span> en el Dock.
                </p>
             </div>
-            <div class="section" title="3.4. Ejecutando OmegaT">
+            <div class="section">
                <div class="titlepage">
                   <div>
                      <div>
@@ -411,7 +411,7 @@
                <p><span class="emphasis"><em><span class="application"> </span></em></span>Usa el archivo <span class="emphasis"><em><span class="application">OmegaT</span>.jar</em></span> que se encuentra en <span class="emphasis"><em><span class="application">OmegaT</span>.app/Contents/Resources/Java/</em></span> para lanzar <span class="application">OmegaT</span> desde la línea de ordenes. Consulta "lanzando desde la línea de ordenes" para más información.
                </p>
             </div>
-            <div class="section" title="3.5. Golosinas de Mac OS X">
+            <div class="section">
                <div class="titlepage">
                   <div>
                      <div>
@@ -426,7 +426,7 @@
                </p>
             </div>
          </div>
-         <div class="section" title="4. Otros sistemas">
+         <div class="section">
             <div class="titlepage">
                <div>
                   <div>
@@ -435,7 +435,7 @@
                </div>
             </div>
             <p>Esta información se aplica a sistemas como Solaris SPARC/x86/x64, Linux x64/PowerPC, Windows x64</p>
-            <div class="section" title="4.1. Descarga el paquete adecuado">
+            <div class="section">
                <div class="titlepage">
                   <div>
                      <div>
@@ -450,7 +450,7 @@
                </p>
                <p>¿Tienes una implementación de Java compatible con Java 1.5 JRE de Oracle?</p>
                <div class="itemizedlist">
-                  <ul class="itemizedlist" type="disc">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
                      <li class="listitem">
                         <p><span class="bold"><strong>Sí:</strong></span> descarga <span class="emphasis"><em>OmegaT_2.3.x_Windows_without_JRE.</em></span>zip Este paquete se puede utilizar en cualquier plataforma donde esté instalado un JRE compatible con el JRE de Java 1.5.
                         </p>
@@ -470,7 +470,7 @@
                   </ul>
                </div>
             </div>
-            <div class="section" title="4.2. Instalando OmegaT">
+            <div class="section">
                <div class="titlepage">
                   <div>
                      <div>
@@ -481,7 +481,7 @@
                <p>Para instalar <span class="application">OmegaT</span>, simplemente descomprime el archivo <span class="bold"><strong>OmegaT_2.3.x_Without_JRE.zip</strong></span>. Esto crea un directorio <span class="emphasis"><em>./OmegaT_2.3.x_Without_JRE /</em></span> en el directorio actual con todos los archivos necesarios para ejecutar <span class="application">OmegaT</span>.
                </p>
             </div>
-            <div class="section" title="4.3. Instalando convenientes accesos directos">
+            <div class="section">
                <div class="titlepage">
                   <div>
                      <div>
@@ -493,7 +493,7 @@
                <p>Sigue las instrucciones de tu sistema para instalar atajos a <span class="application">OmegaT</span> en lugares convenientes a tu elección.
                </p>
             </div>
-            <div class="section" title="4.4. Ejecutando OmegaT">
+            <div class="section">
                <div class="titlepage">
                   <div>
                      <div>
@@ -506,7 +506,7 @@
                </p>
             </div>
          </div>
-         <div class="section" title="5. Usando Java Web Start">
+         <div class="section">
             <div class="titlepage">
                <div>
                   <div>
@@ -531,7 +531,7 @@
                utilizar la instalación normal.
             </p>
          </div>
-         <div class="section" title="6. Iniciando OmegaT desde la línea de ordenes">
+         <div class="section">
             <div class="titlepage">
                <div>
                   <div>
@@ -542,7 +542,7 @@
             <p>Normalmente, no es necesario iniciar <span class="application">OmegaT</span> desde la línea de ordenes. Sin embargo, la alternativa de línea de ordenes te permite controlar y modificar el comportamiento
                del programa. Hay dos maneras de ejecutar <span class="application">OmegaT</span> usando la línea de ordenes.
             </p>
-            <div class="section" title="6.1. Abriendo una ventana de la línea de ordenes">
+            <div class="section">
                <div class="titlepage">
                   <div>
                      <div>
@@ -584,7 +584,7 @@
                   en el orden de inicio, es suficiente hacer las modificaciones en el archivo.
                </p>
             </div>
-            <div class="section" title="6.2. Argumentos de la orden de lanzamiento">
+            <div class="section">
                <div class="titlepage">
                   <div>
                      <div>
@@ -599,7 +599,7 @@
                   los argumentos escribiendo <span class="emphasis"><em>man Java</em></span> en la ventana de la terminal.
                </p>
                <div class="itemizedlist">
-                  <ul class="itemizedlist" type="disc">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
                      <li class="listitem">
                         <p><span class="bold"><strong>Idioma de la interfaz de usuario</strong></span></p>
                         <p><span class="bold"><strong>-Duser.language=XX</strong></span><a class="indexterm" name="d0e1606"></a> Normalmente, es decir, cuando lanzas <span class="application">OmegaT</span> sin ningún tipo de argumento, el programa primero detecta el idioma del sistema operativo del usuario. Si está disponible
@@ -614,7 +614,7 @@
                   </ul>
                </div>
                <div class="itemizedlist">
-                  <ul class="itemizedlist" type="disc">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
                      <li class="listitem">
                         <p><span class="bold"><strong>Configurando el país del usuario</strong></span></p>
                         <p><span class="bold"><strong>-Duser.country=XX</strong></span><a class="indexterm" name="d0e1654"></a> Además del idioma, también puedes especificar el país, por ejemplo, CN o TW en el caso del idioma Chino. Para mostrar la
@@ -625,7 +625,7 @@
                   </ul>
                </div>
                <div class="itemizedlist">
-                  <ul class="itemizedlist" type="disc">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
                      <li class="listitem">
                         <p><span class="bold"><strong>Suavizando el contorno del tipo de letra</strong></span> - (sólo Java 1.5)
                         </p>
@@ -659,7 +659,7 @@
                               -Dhttp.proxyport<span class="bold"><strong>=</strong></span>3128 -jar
                               -OmegaT</span>.jar</code></p>
             </div>
-            <div class="section" title="6.3. OmegaT en el modo de línea de ordenes">
+            <div class="section">
                <div class="titlepage">
                   <div>
                      <div>
@@ -671,7 +671,7 @@
                   lo inicias en modo consola, no se carga la interfaz gráfica de usuario (por lo tanto funciona en cualquier consola) y automáticamente
                   se procesa el proyecto dado conforme a lo solicitado.
                </p>
-               <div class="section" title="6.3.1. Requisitos previos">
+               <div class="section">
                   <div class="titlepage">
                      <div>
                         <div>
@@ -684,7 +684,7 @@
                   </p>
                   <p>Si necesitas alterar la configuración, los archivos de configuración deben estar disponibles. Lo puedes lograr de dos maneras:</p>
                   <div class="itemizedlist">
-                     <ul class="itemizedlist" type="disc">
+                     <ul class="itemizedlist" style="list-style-type: disc; ">
                         <li class="listitem">
                            <p>Ejecuta <span class="application">OmegaT</span> normalmente (con la interfaz gráfica de usuario) y especifica la configuración. Si inicias <span class="application">OmegaT</span> en modo consola, se utilizará la misma configuración.
                            </p>
@@ -697,7 +697,7 @@
                      </ul>
                   </div>
                </div>
-               <div class="section" title="6.3.2. Arrancando en modo consola">
+               <div class="section">
                   <div class="titlepage">
                      <div>
                         <div>
@@ -716,7 +716,7 @@
                   <p>Ten en cuenta que todos los parámetros comienzan con un carácter de guión '-' doble.</p>
                   <p><span class="bold"><strong>Explicación:</strong></span></p>
                   <div class="itemizedlist">
-                     <ul class="itemizedlist" type="disc">
+                     <ul class="itemizedlist" style="list-style-type: disc; ">
                         <li class="listitem">
                            <p><code class="literal">&lt;directorio-del-proyecto&gt;</code> dice a <span class="application">OmegaT</span> dónde se encuentra el proyecto a traducir. Si se proporciona, <span class="application">OmegaT</span> se inicia en modo consola y traducirá el proyecto.
                            </p>
@@ -724,7 +724,7 @@
                      </ul>
                   </div>
                   <div class="itemizedlist">
-                     <ul class="itemizedlist" type="disc">
+                     <ul class="itemizedlist" style="list-style-type: disc; ">
                         <li class="listitem">
                            <p><code class="literal">--config-dir=&lt;directorio-de-configuración&gt;</code> dice a <span class="application">OmegaT</span> en cual directorio están los archivos de configuración. Si no se da, <span class="application">OmegaT</span> vuelve a los valores predeterminados del directorio (<span class="application">OmegaT</span> en el hogar del usuario, o en su defecto, el directorio de trabajo actual). Ten en cuenta los dobles caracteres de guión
                               '-'
@@ -733,12 +733,12 @@
                      </ul>
                   </div>
                   <div class="itemizedlist">
-                     <ul class="itemizedlist" type="disc">
+                     <ul class="itemizedlist" style="list-style-type: disc; ">
                         <li class="listitem">
                            <p><span class="emphasis"><em><code class="literal">--mode</code>=...-</em></span> <span class="application">OmegaT</span> se inicia en modo de consola para realizar automáticamente uno de los siguientes servicios
                            </p>
                            <div class="itemizedlist">
-                              <ul class="itemizedlist" type="circle">
+                              <ul class="itemizedlist" style="list-style-type: circle; ">
                                  <li class="listitem">
                                     <p><span class="emphasis"><em><span class="emphasis"><em><code class="literal">--mode=console-translate</code></em></span></em></span></p>
                                     <p>En este modo, OmegaT intentará traducir los archivos en /fuente/ con las memorias de traducción disponibles. Esto es útil
@@ -772,7 +772,7 @@
                               el parámetro, todos los archivos serán procesados. He aquí algunos ejemplos típicos para limitar tu elección:
                            </p>
                            <div class="itemizedlist">
-                              <ul class="itemizedlist" type="circle">
+                              <ul class="itemizedlist" style="list-style-type: circle; ">
                                  <li class="listitem">
                                     <p><span class="emphasis"><em><code class="literal">.*\.html</code></em></span></p>
                                     <p>Todos los archivos HTML se traducirán - no es que el punto habitualmente *.html tenga que escaparse (\.) según lo especificado
@@ -797,7 +797,7 @@
                      </ul>
                   </div>
                </div>
-               <div class="section" title="6.3.3. Opción &#34;quiet&#34;">
+               <div class="section">
                   <div class="titlepage">
                      <div>
                         <div>
@@ -813,7 +813,7 @@
                </div>
             </div>
          </div>
-         <div class="section" title="7. Construyendo OmegaT desde código fuente">
+         <div class="section">
             <div class="titlepage">
                <div>
                   <div>

@@ -3,8 +3,8 @@
       <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
    
       <title>Capítulo 13. Trabajando con Texto sin Formato</title>
-      <link rel="stylesheet" href="OmegaT.css" type="text/css">
-      <meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+      <link rel="stylesheet" type="text/css" href="OmegaT.css">
+      <meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
       <link rel="home" href="index.html" title="OmegaT - Guía de usuario">
       <link rel="up" href="index.html" title="OmegaT - Guía de usuario">
       <link rel="prev" href="chapter.formatted.text.html" title="Capítulo 12. Trabajando con texto con formato">
@@ -25,21 +25,21 @@
          </table>
          <hr>
       </div>
-      <div class="chapter" title="Capítulo 13. Trabajando con Texto sin Formato">
+      <div class="chapter">
          <div class="titlepage">
             <div>
                <div>
-                  <h2 class="title"><a name="chapter.plain.text"></a>Capítulo 13. Trabajando con Texto sin Formato<a class="indexterm" name="d0e5831"></a></h2>
+                  <h1 class="title"><a name="chapter.plain.text"></a>Capítulo 13. Trabajando con Texto sin Formato<a class="indexterm" name="d0e5831"></a></h1>
                </div>
             </div>
          </div>
          <div class="toc">
-            <dl>
+            <dl class="toc">
                <dt><span class="section"><a href="chapter.plain.text.html#default.encoding">1. Codificación predeterminada</a></span></dt>
                <dt><span class="section"><a href="chapter.plain.text.html#OmegaT.solution">2. La solución <span class="application">OmegaT</span></a></span></dt>
             </dl>
          </div>
-         <div class="section" title="1. Codificación predeterminada">
+         <div class="section">
             <div class="titlepage">
                <div>
                   <div>
@@ -61,7 +61,7 @@
                Cirílico, y no en Kanji.
             </p>
          </div>
-         <div class="section" title="2. La solución OmegaT">
+         <div class="section">
             <div class="titlepage">
                <div>
                   <div>
@@ -72,7 +72,7 @@
             <p>Básicamente, hay tres formas de abordar este problema en <span class="application">OmegaT</span>. Todas ellas implican la aplicación de filtros de archivo en el menú <span class="bold"><strong>Opciones</strong></span>.
             </p>
             <div class="variablelist">
-               <dl>
+               <dl class="variablelist">
                   <dt><span class="term">Cambiar la codificación de tus archivos a Unicode</span></dt>
                   <dd>
                      <p>abre tu archivo fuente en un editor de texto que interprete correctamente su codificación y guarda el archivo en codificación
@@ -83,7 +83,7 @@
                </dl>
             </div>
             <div class="variablelist">
-               <dl>
+               <dl class="variablelist">
                   <dt><span class="term">Especifica la codificación de tus archivos de texto plano</span></dt>
                   <dd>
                      <p>- es decir, archivos con extensión <code class="filename">.txt</code> - : en la sección <span class="bold"><strong>Archivos de texto</strong></span> del cuadro de diálogo Filtros de archivo, cambia la <span class="bold"><strong>Codificación de archivos fuente</strong></span> de &lt;auto&gt; a la codificación que corresponde a tu archivo fuente <code class="filename">.txt</code>, por ejemplo, a .jp para el caso anterior.
@@ -92,7 +92,7 @@
                </dl>
             </div>
             <div class="variablelist">
-               <dl>
+               <dl class="variablelist">
                   <dt><span class="term">Cambia las extensiones de los archivos fuente de texto sin formato</span></dt>
                   <dd>
                      <p>por ejemplo, de <code class="filename">.txt</code> a <code class="filename">.jp</code> para los archivos de texto plano Japoneses: en la sección <span class="bold"><strong>Archivos de texto</strong></span> del cuadro de diálogo Filtros de archivo, añade un nuevo <span class="bold"><strong>Patrón de nombre de archivo</strong></span> (<code class="filename">*.jp</code> para este ejemplo) y selecciona los parámetros adecuados para la codificación de los archivos fuente y destino
@@ -104,7 +104,7 @@
                plano:
             </p>
             <div class="itemizedlist">
-               <ul class="itemizedlist" type="disc">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
                      <p>archivos <code class="literal">.txt</code> automáticamente a ( &lt;auto&gt; ) interpretados por <span class="application">OmegaT</span> como codificados en la codificación predeterminada del equipo.
                      </p>
@@ -112,21 +112,21 @@
                </ul>
             </div>
             <div class="itemizedlist">
-               <ul class="itemizedlist" type="disc">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
                      <p><code class="literal">.txt1</code> son archivos en ISO-8859-1, que cubren la mayoría de los idiomas de <span class="bold"><strong>Europa Occidental</strong></span>.<a class="indexterm" name="d0e5966"></a></p>
                   </li>
                </ul>
             </div>
             <div class="itemizedlist">
-               <ul class="itemizedlist" type="disc">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
                      <p><code class="literal">.txt2</code> son archivos en ISO-8859-2, que cubren la mayoría de los idiomas de <span class="bold"><strong>Europa Central y Oriental</strong></span><a class="indexterm" name="d0e5979"></a></p>
                   </li>
                </ul>
             </div>
             <div class="itemizedlist">
-               <ul class="itemizedlist" type="disc">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
                      <p><code class="literal">.utf8</code> estos archivos son interpretados por <span class="application">OmegaT</span> como codificado en UTF-8 (una codificación que abarca casi todos los idiomas del mundo).<a class="indexterm" name="d0e5993"></a></p>
                   </li>

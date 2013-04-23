@@ -3,8 +3,8 @@
       <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
    
       <title>第&nbsp;15&nbsp;章&nbsp;源片段</title>
-      <link rel="stylesheet" href="OmegaT.css" type="text/css">
-      <meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+      <link rel="stylesheet" type="text/css" href="OmegaT.css">
+      <meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
       <link rel="home" href="index.html" title="OmegaT - 用户向导">
       <link rel="up" href="index.html" title="OmegaT - 用户向导">
       <link rel="prev" href="chapter.translation.memories.html" title="第&nbsp;14&nbsp;章&nbsp;翻译记忆">
@@ -25,17 +25,17 @@
          </table>
          <hr>
       </div>
-      <div class="chapter" title="第&nbsp;15&nbsp;章&nbsp;源片段">
+      <div class="chapter">
          <div class="titlepage">
             <div>
                <div>
-                  <h2 class="title"><a name="chapter.segmentation"></a>第&nbsp;15&nbsp;章&nbsp;源片段
-                  </h2>
+                  <h1 class="title"><a name="chapter.segmentation"></a>第&nbsp;15&nbsp;章&nbsp;源片段
+                  </h1>
                </div>
             </div>
          </div>
          <div class="toc">
-            <dl>
+            <dl class="toc">
                <dt><span class="section"><a href="chapter.segmentation.html#segmentation.rules">1. 片段分割规则</a></span></dt>
                <dt><span class="section"><a href="chapter.segmentation.html#rules.priority">2. 规则的优先级</a></span></dt>
                <dt><span class="section"><a href="chapter.segmentation.html#creating.new.rule">3. 创建新规则</a></span></dt>
@@ -50,7 +50,7 @@
          <p><span class="application">OmegaT</span> 使用下列步骤：
          </p>
          <div class="variablelist">
-            <dl>
+            <dl class="variablelist">
                <dt><span class="term"><a class="indexterm" name="d0e7397"></a>结构层片段分割</span></dt>
                <dd>
                   <p><span class="application">OmegaT</span> 首先将文本分割成结构级别的片段。在这个过程中，只有源文本的结构被用于创建片段。
@@ -64,7 +64,7 @@
                </dd>
             </dl>
          </div>
-         <div class="section" title="1.&nbsp;片段分割规则">
+         <div class="section">
             <div class="titlepage">
                <div>
                   <div>
@@ -76,7 +76,7 @@
             </p>
             <p>两种类型的规则表现如下：</p>
             <div class="variablelist">
-               <dl>
+               <dl class="variablelist">
                   <dt><span class="term"><a class="indexterm" name="d0e7451"></a>中断规则</span></dt>
                   <dd>
                      <p>将源文本分割为片段。例如，"<span class="emphasis"><em>Did it make sense?I was not sure</em></span>." 应该分割成两个句子。要实现这样的目的，应该在 "?" 后跟着空格和大写字符时进行中断的规则。要定义一个中断规则，请选中中断/例外复选框。
@@ -85,7 +85,7 @@
                </dl>
             </div>
             <div class="variablelist">
-               <dl>
+               <dl class="variablelist">
                   <dt><span class="term"><a class="indexterm" name="d0e7468"></a>例外规则</span></dt>
                   <dd>
                      <p>指定哪部分文本不应该被分开。不考虑句点的话， <span class="emphasis"><em>"Mrs. Dalloway "</em></span> 不应被分割成两个片段，因此应该为后面跟着句点的 Mrs (以及 Mr 和 Dr 、prof 等等) 创建例外规则。要定义例外规则，请取消选中中断/例外复选框。
@@ -95,7 +95,7 @@
             </div>
             <p>对于绝大多数欧洲语言和日语来说，预定义的中断规则已经够用了。从灵活性的角度看，您可能考虑为要翻译的语种定义更多的例外规则，以获取语意更完整也更连贯的片段。</p>
          </div>
-         <div class="section" title="2.&nbsp;规则的优先级">
+         <div class="section">
             <div class="titlepage">
                <div>
                   <div>
@@ -105,7 +105,7 @@
             </div>
             <p>为匹配的语言模式定义的所有片段分割规则会按照规定的优先级别得到应用，因此为特定语言定义的规则优先级会比缺省规则要高。例如，为加拿大法语 (FR-CA) 创建的规则优先级应该比为法语 (FR.*) 创建规则的优先级要高，也比缺省规则(.*) 要高。因此，在翻译加拿大法语时，会首先应用加拿大法语规则（如果存在的话），接着是法语规则，最后为默认规则。</p>
          </div>
-         <div class="section" title="3.&nbsp;创建新规则">
+         <div class="section">
             <div class="titlepage">
                <div>
                   <div>
@@ -123,7 +123,7 @@
             <p>添加<span class="bold"><strong>之前</strong></span>和<span class="bold"><strong>之后</strong></span>模式。要检查它们的语法和适用性，建议使用工具来直接查看效果。请参阅<a class="link" href="chapter.regexp.html" title="第&nbsp;16&nbsp;章&nbsp;正则表达式">正则表达式</a>章节。了解现有的规则总是个很好的起点。
             </p>
          </div>
-         <div class="section" title="4.&nbsp;一些简单的例子">
+         <div class="section">
             <div class="titlepage">
                <div>
                   <div>

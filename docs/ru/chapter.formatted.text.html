@@ -3,8 +3,8 @@
       <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
    
       <title>Глава 12. Работа с форматированным текстом</title>
-      <link rel="stylesheet" href="OmegaT.css" type="text/css">
-      <meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+      <link rel="stylesheet" type="text/css" href="OmegaT.css">
+      <meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
       <link rel="home" href="index.html" title="Руководство пользователя ОмегаТ">
       <link rel="up" href="index.html" title="Руководство пользователя ОмегаТ">
       <link rel="prev" href="chapter.plain.text.html" title="Глава 11. Работа с простыми текстовыми файлами">
@@ -25,51 +25,51 @@
          </table>
          <hr>
       </div>
-      <div class="chapter" title="Глава 12. Работа с форматированным текстом">
+      <div class="chapter">
          <div class="titlepage">
             <div>
                <div>
-                  <h2 class="title"><a name="chapter.formatted.text"></a>Глава 12. Работа с форматированным текстом<a class="indexterm" name="d0e5785"></a><a class="indexterm" name="d0e5790"></a></h2>
+                  <h1 class="title"><a name="chapter.formatted.text"></a>Глава 12. Работа с форматированным текстом<a class="indexterm" name="d0e6026"></a><a class="indexterm" name="d0e6031"></a></h1>
                </div>
             </div>
          </div>
          <div class="toc">
-            <dl>
+            <dl class="toc">
                <dt><span class="section"><a href="chapter.formatted.text.html#formatting.tags">1. Теги форматирования</a></span></dt>
                <dt><span class="section"><a href="chapter.formatted.text.html#tag.operations">2. Операции с тегами</a></span></dt>
                <dt><span class="section"><a href="chapter.formatted.text.html#tag.group.nesting">3. Вложенные группы тегов</a></span></dt>
                <dt><span class="section"><a href="chapter.formatted.text.html#tag.group.overlapping">4. Перекрывающиеся группы тегов</a></span></dt>
-               <dt><span class="section"><a href="chapter.formatted.text.html#d0e5937">5. Параметры проверки тегов</a></span></dt>
+               <dt><span class="section"><a href="chapter.formatted.text.html#d0e6178">5. Параметры проверки тегов</a></span></dt>
                <dt><span class="section"><a href="chapter.formatted.text.html#tag.group.validation">6. Проверка групп тегов</a></span></dt>
                <dt><span class="section"><a href="chapter.formatted.text.html#hints.for.tag.management">7. Советы по управлению тегами</a></span></dt>
             </dl>
          </div>
          <p>Обычно в переведённом файле требуется сохранить форматирование оригинала. Информация о форматировании в поддерживаемых файлах
-            (на момент написания это DocBook, HTML, XHTML, Open Document (OpenOffice.org) и Office Open XML (MS Office 2007 и более новые
+            (на момент написания это DocBook, HTML, XHTML, Open Document Format (ODF) и Office Open XML (MS Office 2007 и более новые
             версии)) представлена в ОмегаТ тегами. Как правило, при оценке степени схожести текстов, теги игнорируются. Теги, которые
             воспроизведены в переведённом сегменте, будут перенесены в переведённый документ.
          </p>
-         <div class="section" title="1. Теги форматирования">
+         <div class="section">
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="formatting.tags"></a>1. Теги форматирования<a class="indexterm" name="d0e5800"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="formatting.tags"></a>1. Теги форматирования<a class="indexterm" name="d0e6041"></a></h2>
                   </div>
                </div>
             </div>
-            <p><a class="indexterm" name="d0e5804"></a><span class="bold"><strong>Названия тегов:</strong></span></p>
+            <p><a class="indexterm" name="d0e6045"></a><span class="bold"><strong>Названия тегов:</strong></span></p>
             <p>Названия тегов состоят из одной, двух или трёх букв и цифры. Уникальный номер позволяет, с одной стороны, группировать схожие
                теги, а с другой, различать те из них, которые названы одинаковыми буквами, но на самом деле представляют собой разные сущности.
                Буквы, используемые при наименовании тега, по возможности отражают форматирование, которое представляет данный тег (например,
                «b» обозначает «bold», полужирный шрифт, а «i» обозначает «italic», курсив).
             </p>
-            <p><a class="indexterm" name="d0e5814"></a><span class="bold"><strong>Нумерация тегов</strong></span></p>
+            <p><a class="indexterm" name="d0e6055"></a><span class="bold"><strong>Нумерация тегов</strong></span></p>
             <p>Теги нумеруются в порядке возрастания, по группам. Под «группой тегов» в данном контексте понимаются один или два связанных
                по смыслу тега (например, &lt;i0&gt; и &lt;/i0&gt;). Внутри сегмента первая группа (пара или одиночный тег) получает номер 0, вторая&nbsp;—
                номер 1 и так далее. В первом примере ниже есть три группы тегов (пара, одиночный тег, затем снова пара тегов), во втором
                примере только одна группа (пара).
             </p>
-            <p><a class="indexterm" name="d0e5824"></a><span class="bold"><strong>Парные и одиночные теги:</strong></span></p>
+            <p><a class="indexterm" name="d0e6065"></a><span class="bold"><strong>Парные и одиночные теги:</strong></span></p>
             <p>Теги могут быть либо одиночными, либо парными. Одиночные теги используются для представления форматирования, которое не затрагивает
                окружающий текст (например, дополнительный пробел или разрыв строки).
             </p>
@@ -84,11 +84,11 @@
                содержащие ошибки.
             </p>
          </div>
-         <div class="section" title="2. Операции с тегами">
+         <div class="section">
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="tag.operations"></a>2. Операции с тегами<a class="indexterm" name="d0e5850"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="tag.operations"></a>2. Операции с тегами<a class="indexterm" name="d0e6091"></a></h2>
                   </div>
                </div>
             </div>
@@ -96,7 +96,7 @@
                надёжным решением будет всегда сохранять в переводе исходные теги в исходном порядке. Однако, при соблюдении некоторых условий,
                от этого правила можно иногда отступать.
             </p>
-            <p><span class="bold"><strong><a class="indexterm" name="d0e5859"></a>Повторение тегов</strong></span></p>
+            <p><span class="bold"><strong><a class="indexterm" name="d0e6100"></a>Повторение тегов</strong></span></p>
             <p>Чтобы повторить группу тегов, просто скопируйте их в желаемое место в тексте. Помните, что открывающий тег всегда должен находиться
                перед закрывающим. Форматирование, представленное группой, которую вы продублировали, будет применено к тому месту, куда было
                произведено копирование.
@@ -105,7 +105,7 @@
             <p><code class="literal">&lt;b0&gt;Это форматирование&lt;/b0&gt; будет применено здесь&lt;сегмент 0001&gt;</code></p>
             <p>После копирования:</p>
             <p><code class="literal">&lt;b0&gt;Это форматирование&lt;/b0&gt; было применено &lt;b0&gt;здесь&lt;/b0&gt;.&lt;сегмент 0001&gt;</code></p>
-            <p><span class="bold"><strong><a class="indexterm" name="d0e5879"></a>Удаление групп тегов</strong></span></p>
+            <p><span class="bold"><strong><a class="indexterm" name="d0e6120"></a>Удаление групп тегов</strong></span></p>
             <p>Чтобы убрать группу тегов, просто удалите её из сегмента. Помните, что нужно удалить как открывающие, так и закрывающие теги
                и убедиться, что все следы форматирования действительно стёрты. В противном случае созданный файл будет повреждён. Удаляя
                группу тегов, вы удаляете соответствующее форматирование из переведённого файла.
@@ -115,11 +115,11 @@
             <p>После удаления:</p>
             <p><code class="literal">Это форматирование было удалено.&lt;сегмент 0001&gt;</code></p>
          </div>
-         <div class="section" title="3. Вложенные группы тегов">
+         <div class="section">
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="tag.group.nesting"></a>3. Вложенные группы тегов<a class="indexterm" name="d0e5900"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="tag.group.nesting"></a>3. Вложенные группы тегов<a class="indexterm" name="d0e6141"></a></h2>
                   </div>
                </div>
             </div>
@@ -133,11 +133,11 @@
             <p>После перемещения тегов:</p>
             <p><code class="literal">&lt;b0&gt;Форматирование &lt;b1&gt;один&lt;/b1&gt;&lt;/b0&gt; было скопировано внутрь форматирования ноль.&lt;сегмент 0001&gt;</code></p>
          </div>
-         <div class="section" title="4. Перекрывающиеся группы тегов">
+         <div class="section">
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="tag.group.overlapping"></a>4. Перекрывающиеся группы тегов<a class="indexterm" name="d0e5920"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="tag.group.overlapping"></a>4. Перекрывающиеся группы тегов<a class="indexterm" name="d0e6161"></a></h2>
                   </div>
                </div>
             </div>
@@ -147,34 +147,34 @@
             <p>Пример:</p>
             <p><code class="literal">&lt;b0&gt;Форматирование&lt;/b0&gt; &lt;b1&gt;один&lt;/b1&gt; будет испорчено.&lt;сегмент 0001&gt;</code></p>
             <p>В результате некорректного обращения с тегами:</p>
-            <p><code class="literal">Ну вот, &lt;b0&gt;форматирование &lt;b1&gt;один&lt;/b0&gt; &lt;/b1&gt; теперь испорчено.&lt;сегмент 0001&gt;</code></p>
+            <p><code class="literal">&lt;b0&gt;Форматирование &lt;b1&gt;один&lt;/b0&gt; &lt;/b1&gt;теперь сильно испорчено.&lt;segment 0001&gt;</code></p>
          </div>
-         <div class="section" title="5. Параметры проверки тегов">
+         <div class="section">
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="d0e5937"></a>5. Параметры проверки тегов
+                     <h2 class="title" style="clear: both"><a name="d0e6178"></a>5. Параметры проверки тегов
                      </h2>
                   </div>
                </div>
             </div>
             <p>Проверку тегов можно настроить в специальном диалоговом окне <span class="guimenuitem">«Параметры &gt; Проверка тегов...»</span>:
             </p>
-            <div class="mediaobject"><img src="images/OptionsTabValidation_25.png"></div>
+            <div class="mediaobject"><img src="images/OptionsTagValidation_25.png"></div>
             <p>Описанные ниже настройки применяются не только к файлам с форматированным текстом, но ко всем исходным файлам вообще.</p>
             <div class="itemizedlist">
-               <ul class="itemizedlist" type="disc">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
                      <p><span class="bold"><strong>Переменные printf - не проверять, проверять простые, проверять все</strong></span></p>
                      <p>ОмегаТ может проверять, чтобы программные переменные из исходного сегмента (такие как %s, например) присутствовали и в переводе.
                         Вы можете решить отказаться от подобной проверки, выбрать проверку только простых переменных printf (таких как %s %d и т.&nbsp;д.)
-                        или проверку всех переменных printf. .
+                        или проверку всех переменных printf.
                      </p>
                   </li>
                </ul>
             </div>
             <div class="itemizedlist">
-               <ul class="itemizedlist" type="disc">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
                      <p><span class="bold"><strong>Проверять простые шаблоны Java MessageFormat</strong></span></p>
                      <p>Если флажок установлен, ОмегаТ будет проверять корректность работы с простыми тегами Java MessageFormat (такими как {0}).</p>
@@ -182,9 +182,9 @@
                </ul>
             </div>
             <div class="itemizedlist">
-               <ul class="itemizedlist" type="disc">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
-                     <p><span class="bold"><strong>Нестандартные теги</strong></span></p>
+                     <p><span class="bold"><strong>Регулярные выражения для нестандартных тегов</strong></span></p>
                      <p>Если ввести в это поле некое регулярное выражение, ОмегаТ будет рассматривать соответствующие этому шаблону подстроки как
                         пользовательские теги. Как и в случае с обычными тегами ОмегаТ, для пользовательских тегов будет производиться проверка, присутствуют
                         ли они в переводе в должном порядке и количестве.
@@ -193,26 +193,28 @@
                </ul>
             </div>
             <div class="itemizedlist">
-               <ul class="itemizedlist" type="disc">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
-                     <p><span class="bold"><strong>Фрагменты, удаляемые из перевода</strong></span></p>
+                     <p><span class="bold"><strong>Регулярное выражение для удаления фрагментов из перевода</strong></span></p>
                      <p>В это поле можно ввести регулярное выражение для поиска фрагментов текста, которые следует удалить из перевода. Любые совпадения
-                        в переведённых сегментах будут отмечены красным и их можно будет легко найти и исправить.
+                        в переведённых сегментах будут отмечены красным и их можно будет легко найти и исправить. При поиске нечётких совпадений это
+                        регулярное выражение игнорируется. Если удаляемая часть не совпадает с каким-либо другим сегментом, процент совпадения уменьшается
+                        на 5, так, чтобы совпадение не показывалось как точное.
                      </p>
                   </li>
                </ul>
             </div>
          </div>
-         <div class="section" title="6. Проверка групп тегов">
+         <div class="section">
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="tag.group.validation"></a>6. Проверка групп тегов<a class="indexterm" name="d0e5981"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="tag.group.validation"></a>6. Проверка групп тегов<a class="indexterm" name="d0e6222"></a></h2>
                   </div>
                </div>
             </div>
             <p>Функция проверки тегов определяет сегменты, в которых теги оригинала и перевода не совпадают и показывает их. При нажатии
-               сочетания клавиш <span class="guimenuitem">CTRL+T<a class="indexterm" name="d0e5990"></a></span> откроется окно с сегментами, при переводе которых теги возможно были расставлены неправильно. С помощью этого окна можно
+               сочетания клавиш <span class="guimenuitem">CTRL+T<a class="indexterm" name="d0e6231"></a></span> откроется окно с сегментами, при переводе которых теги возможно были расставлены неправильно. С помощью этого окна можно
                легко исправить теги и создать переведённые документы с правильным форматированием. Открывающееся при нажатии <span class="guimenuitem">CTRL+T</span> окно содержит таблицу из трёх столбцов, в которой для каждого сегмента с ошибками в тегах содержатся ссылка на него, а также
                текст оригинала и перевода.
             </p>
@@ -227,11 +229,11 @@
                мириться, другие вызовут проблемы после создания переведённого документа.
             </p>
          </div>
-         <div class="section" title="7. Советы по управлению тегами">
+         <div class="section">
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="hints.for.tag.management"></a>7. Советы по управлению тегами<a class="indexterm" name="d0e6015"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="hints.for.tag.management"></a>7. Советы по управлению тегами<a class="indexterm" name="d0e6256"></a></h2>
                   </div>
                </div>
             </div>

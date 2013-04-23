@@ -4,7 +4,7 @@
    
       <title>Appendix&nbsp;G.&nbsp;Přizpůsobení klávesových zkratek</title>
       <link rel="stylesheet" type="text/css" href="OmegaT.css">
-      <meta name="generator" content="DocBook XSL Stylesheets V1.76.1">
+      <meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
       <link rel="home" href="index.html" title="Uživatelská skupina OmegaT">
       <link rel="up" href="index.html" title="Uživatelská skupina OmegaT">
       <link rel="prev" href="appendix.keyboard.html" title="Appendix&nbsp;F.&nbsp;Klávesové zkratky v editoru">
@@ -25,17 +25,17 @@
          </table>
          <hr>
       </div>
-      <div class="appendix" title="Appendix&nbsp;G.&nbsp;Přizpůsobení klávesových zkratek">
+      <div class="appendix">
          <div class="titlepage">
             <div>
                <div>
-                  <h2 class="title"><a name="appendix.shortcut.custom"></a>Appendix&nbsp;G.&nbsp;Přizpůsobení klávesových zkratek
-                  </h2>
+                  <h1 class="title"><a name="appendix.shortcut.custom"></a>Appendix&nbsp;G.&nbsp;Přizpůsobení klávesových zkratek
+                  </h1>
                </div>
             </div>
          </div>
          <div class="toc">
-            <dl>
+            <dl class="toc">
                <dt><span class="section"><a href="appendix.shortcut.custom.html#ch04.shortcuts.customization">1. Přizpůsobení klávesových zkratek</a></span></dt>
                <dt><span class="section"><a href="appendix.shortcut.custom.html#ch04.shortcuts.ProjectMenu">2. Nabídka ‚Projekt‛</a></span></dt>
                <dt><span class="section"><a href="appendix.shortcut.custom.html#ch04.shortcuts.EditMenu">3. Nabídka ‚Upravit‛</a></span></dt>
@@ -46,7 +46,7 @@
                <dt><span class="section"><a href="appendix.shortcut.custom.html#ch04.shortcuts.HelpMenu">8. Nabídka ‚Nápověda‛</a></span></dt>
             </dl>
          </div>
-         <div class="section" title="1.&nbsp;Přizpůsobení klávesových zkratek">
+         <div class="section">
             <div class="titlepage">
                <div>
                   <div>
@@ -64,29 +64,29 @@
             </p>
             <p>Jakmile upravíte soubor <code class="filename">MainMenuShortcuts.properties</code>, je pak nutno <span class="application">OmegaT</span> restartovat, aby se načetlo nastavení nových klávesových zkratek.
             </p>
-            <p>Syntaxe definice klávesové zkratky je tato: <code class="code">&lt;kód položky nabídky&gt;=&lt;klávesová zkratka&gt;</code>, kde <span class="emphasis"><em>&lt;kód položky nabídky&gt;</em></span> je kód, který si vezmete z tabulek níže a <span class="emphasis"><em>&lt;klávesová zkratka&gt;</em></span> je kombinace kláves definovaná uživatele.<sup>[<a name="d0e10532" href="#ftn.d0e10532" class="footnote">2</a>]</sup>.
+            <p>Syntaxe definice klávesové zkratky je tato: <code class="code">&lt;kód položky nabídky&gt;=&lt;klávesová zkratka&gt;</code>, kde <span class="emphasis"><em>&lt;kód položky nabídky&gt;</em></span> je kód, který si vezmete z tabulek níže a <span class="emphasis"><em>&lt;klávesová zkratka&gt;</em></span> je kombinace kláves definovaná uživatele.<a href="#ftn.d0e10532" class="footnote" name="d0e10532"><sup class="footnote">[2]</sup></a>.
             </p>
             <p>&lt;klávesová zkratka&gt; musí mít jednu z následujících podob:0 nebo více <code class="code">&lt;modifikátor&gt;</code> následován 0 nebo 1 <code class="code">&lt;událost&gt;</code> následován 1 <code class="code">&lt;klávesa&gt;</code>, kde:
             </p>
             <div class="itemizedlist">
-               <ul class="itemizedlist" type="disc">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
-                     <p><code class="code">&lt;modifikátor&gt;</code> může být: <span class="emphasis"><em>shift</em></span>, <span class="emphasis"><em>control</em></span>, <span class="emphasis"><em>ctrl</em></span>, <span class="emphasis"><em>meta</em></span><sup>[<a name="d0e10566" href="#ftn.d0e10566" class="footnote">3</a>]</sup>, <span class="emphasis"><em>alt</em></span>,
+                     <p><code class="code">&lt;modifikátor&gt;</code> může být: <span class="emphasis"><em>shift</em></span>, <span class="emphasis"><em>control</em></span>, <span class="emphasis"><em>ctrl</em></span>, <span class="emphasis"><em>meta</em></span><a href="#ftn.d0e10566" class="footnote" name="d0e10566"><sup class="footnote">[3]</sup></a>, <span class="emphasis"><em>alt</em></span>,
                                   <span class="emphasis"><em>altGraph</em></span></p>
                   </li>
                   <li class="listitem">
                      <p><code class="code">&lt;událost&gt;</code> může být: <span class="emphasis"><em>jednorázový stisk klávesy</em></span>, <span class="emphasis"><em>podržení stisknuté klávesy</em></span>, <span class="emphasis"><em>uvolnění klávesy</em></span></p>
                   </li>
                   <li class="listitem">
-                     <p>a <code class="code">&lt;klávesa&gt;</code> může být jakákoliv klávesa dostupná na vaší klávesnici<sup>[<a name="d0e10600" href="#ftn.d0e10600" class="footnote">4</a>]</sup>.
+                     <p>a <code class="code">&lt;klávesa&gt;</code> může být jakákoliv klávesa dostupná na vaší klávesnici<a href="#ftn.d0e10600" class="footnote" name="d0e10600"><sup class="footnote">[4]</sup></a>.
                      </p>
                   </li>
                </ul>
             </div>
-            <p>Například se podívejme na výchozí klávesové zkratky OmegaT<sup>[<a name="d0e10608" href="#ftn.d0e10608" class="footnote">5</a>]</sup>nalezneme zde:
+            <p>Například se podívejme na výchozí klávesové zkratky OmegaT<a href="#ftn.d0e10608" class="footnote" name="d0e10608"><sup class="footnote">[5]</sup></a>nalezneme zde:
             </p>
             <div class="itemizedlist">
-               <ul class="itemizedlist" type="disc">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
                      <p><code class="code">projectOpenMenuItem=ctrl O</code></p>
                   </li>
@@ -108,7 +108,7 @@
                se systémovými zkratkami, budou v rámci OmegaT k dispozici.
             </p>
          </div>
-         <div class="section" title="2.&nbsp;Nabídka ‚Projekt‛">
+         <div class="section">
             <div class="titlepage">
                <div>
                   <div>
@@ -191,7 +191,7 @@
                   </table>
                </div>
             </div><br class="table-break"></div>
-         <div class="section" title="3.&nbsp;Nabídka ‚Upravit‛">
+         <div class="section">
             <div class="titlepage">
                <div>
                   <div>
@@ -319,7 +319,7 @@
                   </table>
                </div>
             </div><br class="table-break"></div>
-         <div class="section" title="4.&nbsp;Nabídka ‚Přejít‛">
+         <div class="section">
             <div class="titlepage">
                <div>
                   <div>
@@ -377,7 +377,7 @@
                   </table>
                </div>
             </div><br class="table-break"></div>
-         <div class="section" title="5.&nbsp;Nabídka ‚Zobrazit‛">
+         <div class="section">
             <div class="titlepage">
                <div>
                   <div>
@@ -440,7 +440,7 @@
                   </table>
                </div>
             </div><br class="table-break"></div>
-         <div class="section" title="6.&nbsp;Nabídka ‚Nástroje‛">
+         <div class="section">
             <div class="titlepage">
                <div>
                   <div>
@@ -483,7 +483,7 @@
                   </table>
                </div>
             </div><br class="table-break"></div>
-         <div class="section" title="7.&nbsp;Nabídka ‚Možnosti‛">
+         <div class="section">
             <div class="titlepage">
                <div>
                   <div>
@@ -596,7 +596,7 @@
                   </table>
                </div>
             </div><br class="table-break"></div>
-         <div class="section" title="8.&nbsp;Nabídka ‚Nápověda‛">
+         <div class="section">
             <div class="titlepage">
                <div>
                   <div>
@@ -634,20 +634,20 @@
                   </table>
                </div>
             </div><br class="table-break"></div>
-         <div class="footnotes"><br><hr width="100" align="left">
-            <div class="footnote">
-               <p><sup>[<a id="ftn.d0e10532" href="#d0e10532" class="para">2</a>] </sup>Kompletní syntax stisku kláves (klávesových zkratek) je definovaná v následující dokumentaci Java 1.6 od Oracle (na konci
+         <div class="footnotes"><br><hr style="width:100; text-align:left;margin-left: 0">
+            <div id="ftn.d0e10532" class="footnote">
+               <p><a href="#d0e10532" class="para"><sup class="para">[2] </sup></a>Kompletní syntax stisku kláves (klávesových zkratek) je definovaná v následující dokumentaci Java 1.6 od Oracle (na konci
                   stránky): <a class="ulink" href="http://docs.oracle.com/javase/6/docs/api/javax/swing/KeyStroke.html" target="_top">Java 1.6 klávesové zkratky</a></p>
             </div>
-            <div class="footnote">
-               <p><sup>[<a id="ftn.d0e10566" href="#d0e10566" class="para">3</a>] </sup>Na počítačích Mac je nutno použít modifikátor <span class="emphasis"><em>meta</em></span>, aby se specifikovala klávesa <span class="emphasis"><em>command</em></span>.
+            <div id="ftn.d0e10566" class="footnote">
+               <p><a href="#d0e10566" class="para"><sup class="para">[3] </sup></a>Na počítačích Mac je nutno použít modifikátor <span class="emphasis"><em>meta</em></span>, aby se specifikovala klávesa <span class="emphasis"><em>command</em></span>.
                </p>
             </div>
-            <div class="footnote">
-               <p><sup>[<a id="ftn.d0e10600" href="#d0e10600" class="para">4</a>] </sup>Možné události (reakce kláves) jsou uvedeny v následující dokumentaci Java 1.6 od Oracle: <a class="ulink" href="http://docs.oracle.com/javase/6/docs/api/java/awt/event/KeyEvent.html" target="_top">Popis klávesových událostí Java 1.6</a></p>
+            <div id="ftn.d0e10600" class="footnote">
+               <p><a href="#d0e10600" class="para"><sup class="para">[4] </sup></a>Možné události (reakce kláves) jsou uvedeny v následující dokumentaci Java 1.6 od Oracle: <a class="ulink" href="http://docs.oracle.com/javase/6/docs/api/java/awt/event/KeyEvent.html" target="_top">Popis klávesových událostí Java 1.6</a></p>
             </div>
-            <div class="footnote">
-               <p><sup>[<a id="ftn.d0e10608" href="#d0e10608" class="para">5</a>] </sup>Výchozí klávesové zkratky OmegaT jsou dostupné přes Sourceforge: <a class="ulink" href="http://omegat.svn.sourceforge.net/viewvc/omegat/branches/release-2-5/src/org/omegat/gui/main/MainMenuShortcuts.properties" target="_top">Výchozí klávesové zkratky OmegaT</a></p>
+            <div id="ftn.d0e10608" class="footnote">
+               <p><a href="#d0e10608" class="para"><sup class="para">[5] </sup></a>Výchozí klávesové zkratky OmegaT jsou dostupné přes Sourceforge: <a class="ulink" href="http://omegat.svn.sourceforge.net/viewvc/omegat/branches/release-2-5/src/org/omegat/gui/main/MainMenuShortcuts.properties" target="_top">Výchozí klávesové zkratky OmegaT</a></p>
                <p>Výchozí klávesové zkratky OmegaT pro Mac jsou také dostupné přes Sourceforge, všechny používají „meta“ místo „ctrl“: <a class="ulink" href="http://omegat.svn.sourceforge.net/viewvc/omegat//branches/release-2-5/src/org/omegat/gui/main/MainMenuShortcuts.mac.properties" target="_top">Výchozí klávesové zkratky OmegaT pro Mac</a></p>
             </div>
          </div>

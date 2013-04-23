@@ -1,1 +1,509 @@
-<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>第7章 ファイルフィルター</title><link rel="stylesheet" href="OmegaT.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.75.2"><link rel="home" href="index.html" title="OmegaT - 取扱説明書"><link rel="up" href="index.html" title="OmegaT - 取扱説明書"><link rel="prev" href="chapter.project.properties.html" title="第6章 プロジェクト設定"><link rel="next" href="chapter.files.and.directories.html" title="第8章 OmegaT ファイルとフォルダー"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">第7章 ファイルフィルター</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="chapter.project.properties.html">戻る</a>&nbsp;</td><th width="60%" align="center">&nbsp;</th><td width="20%" align="right">&nbsp;<a accesskey="n" href="chapter.files.and.directories.html">次へ</a></td></tr></table><hr></div><div class="chapter" title="第7章 ファイルフィルター"><div class="titlepage"><div><div><h2 class="title"><a name="chapter.file.filters"></a>第7章 ファイルフィルター</h2></div></div></div><div class="toc"><dl><dt><span class="section"><a href="chapter.file.filters.html#file.filters.dialog">1. ファイルフィルター ダイアログ</a></span></dt><dt><span class="section"><a href="chapter.file.filters.html#filters.options">2. フィルター設定</a></span></dt><dt><span class="section"><a href="chapter.file.filters.html#edit.filter.dialog">3. フィルターの編集ダイアログ</a></span></dt><dd><dl><dt><span class="section"><a href="chapter.file.filters.html#source.filetype.and.filename.pattern">3.1. 原文ファイル形式、ファイル名構成例</a></span></dt><dt><span class="section"><a href="chapter.file.filters.html#source.and.target.files.encoding">3.2. 原文ファイルと訳文ファイルのエンコーディング</a></span></dt><dt><span class="section"><a href="chapter.file.filters.html#target.name">3.3. 訳文ファイル名</a></span></dt></dl></dd></dl></div><p>OmegaT には高度にカスタマイズ可能なフィルター機能があり、さらにその多くの挙動設定を変更できます。ファイルフィルターは以下のような機能を持ったコードの集まりです：</p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>ある特定のファイル形式の文書を読み込みます。たとえばプレーンテキストファイルです。</p></li></ul></div><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>そのファイルから翻訳可能な部分を抽出します。</p></li></ul></div><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>訳文ファイルの生成時に、原文分節を訳文に置き換えたり、規則に基づきファイル名を修正するなどの自動処理を行います。</p></li></ul></div><p>OmegaT が対応しているファイル形式は、メニューの<span class="guimenuitem">［設定］→［ファイルフィルター］</span>から一覧できます。</p><p>ほとんどの場合は、デフォルトのファイルフィルター設定のままで問題ないでしょう。もしそうでなければ、メインメニューから<span class="bold"><strong>［設定］→［ファイルフィルター］</strong></span>を選択してダイアログを開いてください。プロジェクト設定から<span class="bold"><strong>［ファイルフィルター...］</strong></span>を選ぶことで、現在のプロジェクト専用のファイルフィルターを設定することもできます。この設定は、他のプロジェクトに影響を与えません。</p><p>プロジェクト専用ファイルフィルターを設定するには、まずメニューから<span class="bold"><strong>［プロジェクト］→［プロジェクト設定...］を選びます。</strong></span>次に<span class="guibutton">［ファイルフィルター...］</span>ボタンをクリックして、<span class="guimenuitem">［ファイルフィルター設定をプロジェクト専用にする］</span>チェックボックスにチェックを入れます<a class="indexterm" name="d0e4324"></a>。こうすると、フィルター設定のコピーがプロジェクト自体とセットで保持されるようになります。この状態でフィルターの設定を変更すると、プロジェクト専用フィルターだけが更新されます。ユーザーレベルのフィルターには影響しません。</p><p><span class="bold"><strong>警告：</strong></span>プロジェクトを開いているときにフィルター設定を変更すると、変更を適用するためにプロジェクトの再読み込みが必要になります。</p><div class="section" title="1. ファイルフィルター ダイアログ"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="file.filters.dialog"></a>1. ファイルフィルター ダイアログ<a class="indexterm" name="d0e4337"></a></h2></div></div></div><p>使用可能なファイルフィルターを一覧表示します。OmegaT の中で翻訳したくないファイル形式がある場合は、ファイル形式名の横にあるチェックボックスのチェックを外すと、その形式に対してフィルター機能を使わないようにすることができます。フィルターを無効にしているファイル形式のファイルは、プロジェクトの読み込み時に無視され、訳文生成時には未変更の状態で訳文フォルダーにコピーされます。再びフィルターを使用したくなったら、対象のチェックボックスにチェックを入れてください。<span class="bold"><strong>［初期値を復元］</strong></span>をクリックすると、それまでのフィルター設定をリセットし初期設定に戻します。フィルター対象とするファイルやエンコーディングを変更する場合は<span class="bold"><strong>［編集...］</strong></span>をクリックします。</p></div><div class="section" title="2. フィルター設定"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="filters.options"></a>2. フィルター設定<a class="indexterm" name="d0e4353"></a></h2></div></div></div><p>以下のフィルター（テキストファイル、PO ファイル、XHTML ファイル、HTML ファイル・XHTML ファイル、OpenDocument ファイル、Microsoft Open XML ファイル）では、いくつかの専用オプションを設定できます。設定を変更する場合は、フィルターを選択して<span class="bold"><strong>［設定...］</strong></span>を押してください。可能な設定は以下の通りです：</p><p><span class="bold"><strong>テキストファイル</strong></span></p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p><span class="emphasis"><em>原文を改行で分節化するか、空行で分節化するか、分節化しないか：</em></span></p><p>文単位の分節化が有効になっている場合は、ここで選択した設定によってさらに分節化されます。</p></li></ul></div><p><span class="bold"><strong>PO ファイル</strong></span></p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p><span class="emphasis"><em>訳文ファイルの空分節を許可</em></span>：</p><p>この設定を有効にすると、未翻訳の PO 分節（たいていは段落全体）を空のままにして訳文ファイルを生成します。もう少し技術的に立ち入った話をすると、PO 訳文ファイルの<code class="code">msgstr</code>分節が空のままになる、ということです。PO ファイルの場合はこれが一般的な状態ですので、この設定はデフォルトで有効になっています。この設定を無効にすると、原文が訳文分節にコピーされます。</p></li></ul></div><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p><span class="emphasis"><em>PO ヘッダーを無視</em></span></p><p>この設定にチェックを入れると、PO ヘッダーを翻訳対象外とみなして、原文のままにします。</p></li></ul></div><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p><span class="emphasis"><em>ヘッダーの「nplurals=整数; plural=式;」を自動で置換</em></span></p><p><span class="emphasis"><em><span class="emphasis"><em>この設定にチェックを入れると、PO ファイルのヘッダーにある複数形指定を、訳文言語に合わせて自動変更します。</em></span></em></span></p></li></ul></div><p><span class="bold"><strong>XHTML ファイル</strong></span></p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p><span class="emphasis"><em>以下の場合に HTML・XHTML ファイルにエンコーディング宣言を追加または変更</em></span>：訳文ファイルのエンコーディング文字セットを、原文ファイルのそれ（明示的に指定されたものであれ、暗黙に適用されたものであれ）とは違うものにしたいということは、よくあります。この設定を使うと、訳文ファイルにエンコーディング宣言を含めるかどうかを指定できます。たとえば、ファイルフィルターで訳文ファイルのエンコーディングが UTF-8 に指定されている場合、この設定によって、訳文ファイルに必ずその情報を含めるようにすることができます。</p></li></ul></div><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p><span class="emphasis"><em>以下の属性を翻訳：</em></span>選択した属性を編集ウィンドウで分節として表示できます。</p></li></ul></div><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p><span class="emphasis"><em>以下のタグで分節化：</em></span>HTML の<span class="emphasis"><em>&lt;br&gt;</em></span>タグがある場所を段落とみなして分節化することができます。</p></li></ul></div><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p><span class="emphasis"><em>以下の正規表現に一致する文字列を翻訳しない：</em></span>指定した正規表現に一致するテキストは、翻訳対象とせずスキップすることができます。スキップした箇所は、タグ検証では赤く表示されます。参考訳文ウィンドウでは、スキップした箇所が原文分節にあると、そのテキストは斜体で表示されます。</p></li></ul></div><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p><span class="emphasis"><em>&lt;meta&gt; タグ内の以下の属性と値は翻訳しない（カンマ区切りで複数指定）：</em></span>ここで指定した &lt;meta&gt; タグは、翻訳されません。</p></li></ul></div><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p><span class="emphasis"><em>以下の属性と値を持つタグの内容は翻訳しない（カンマ区切りで複数指定）</em></span>：ここでキー＝値の形式で指定したタグは、翻訳されません。</p><p>この設定は、ある属性の値に応じてタグを翻訳しないようにするのに、役に立つことがあります。たとえば、<code class="literal">&lt;div class="hide"&gt; &lt;span translate="no"&gt;</code>のようなタグは、キー＝値の形式で指定して翻訳対象外に設定できます。この例の場合、設定欄は次のようになります：<code class="literal">class=hide, translate=no</code></p></li></ul></div><p><span class="bold"><strong>Microsoft Office Open XML ファイル</strong></span></p><p>どの要素を翻訳するか、選ぶことができます。選んだ要素は、翻訳時に個別の分節として表示されます。</p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p><span class="bold"><strong>Word：</strong></span>非表示の命令とテキスト、コメント、脚注、文末脚注、ヘッダー、フッター</p></li></ul></div><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p><span class="bold"><strong>Excel：</strong></span>コメント、シート名</p></li></ul></div><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p><span class="bold"><strong>Power Point：</strong></span>スライドのコメント、スライド マスター、スライド レイアウト</p></li></ul></div><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p><span class="bold"><strong>共通：</strong></span>表、ダイアグラム、図、ワードアート</p></li></ul></div><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p><span class="bold"><strong>その他の設定：</strong></span></p><div class="itemizedlist"><ul class="itemizedlist" type="circle"><li class="listitem"><p><span class="emphasis"><em>タグを結合</em></span>：チェックが入っていれば、翻訳対象テキストを含まない連続するタグを１つのタグに結合します。</p></li><li class="listitem"><p><span class="emphasis"><em>すべてのタグの空白を維持</em></span>：チェックが入っていれば、空白文字（半角スペースや改行など）を保持します。たとえそれが技術的には意味が無い場合でも、残します。</p></li></ul></div></li></ul></div><p><span class="bold"><strong>HTML ファイル・XHTML ファイル</strong></span></p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p><span class="emphasis"><em>以下の場合に HTML・XHTML ファイルにエンコーディング宣言を追加または変更：</em></span>常に（デフォルト）、(X)HTML ファイルにヘッダーがある場合のみ、(X)HTML ファイルにエンコーディング宣言がある場合のみ、しない</p></li></ul></div><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p><span class="emphasis"><em>以下の属性を翻訳：</em></span>選択した属性を編集ウィンドウで分節として表示できます。</p></li></ul></div><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p><span class="emphasis"><em>以下のタグで分節化：</em></span>HTML の &lt;br&gt; タグがある場所を段落とみなして分節化することができます。</p></li></ul></div><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p><span class="emphasis"><em>以下の正規表現に一致する文字列を翻訳しない：</em></span>指定した正規表現に一致するテキストは、翻訳対象とせずスキップすることができます。</p></li></ul></div><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p><span class="emphasis"><em>&lt;meta&gt; タグ内の以下の属性と値は翻訳しない（カンマ区切りで複数指定）：</em></span>ここで指定した &lt;meta&gt; タグは、翻訳されません。</p></li></ul></div><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p><span class="emphasis"><em>以下の属性と値を持つタグの内容は翻訳しない（カンマ区切りで複数指定）</em></span>：ここでキー＝値の形式で指定したタグは、翻訳されません。</p></li></ul></div><p><span class="bold"><strong>テキストファイル</strong></span></p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p><span class="emphasis"><em>原文を改行で分節化するか、空行で分節化するか、分節化しないか</em></span>：</p><p>文単位の分節化が有効になっている場合は、ここで選択した設定によってさらに分節化されます。</p></li></ul></div><p><span class="bold"><strong>OpenDocument Format (ODF) ファイル</strong></span></p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>どの要素を翻訳するか、選ぶことができます：</p><p>Index 項目、ブックマーク、ブックマーク参照、脚注、コメント、プレゼンテーションのノート、リンク（URL）、シート名</p></li></ul></div></div><div class="section" title="3. フィルターの編集ダイアログ"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="edit.filter.dialog"></a>3. フィルターの編集ダイアログ<a class="indexterm" name="d0e4559"></a></h2></div></div></div><p>このダイアログでは、フィルターで処理する原文ファイル名の構成例の指定、訳文ファイル名のカスタマイズ、読み込む原文ファイルと生成する訳文ファイルのエンコーディングを設定できます。ファイルフィルター構成例を編集するには、それぞれの欄をダブルクリックして直接修正するか、<span class="bold"><strong>編集</strong></span>ボタンをクリックします。新しいファイルフィルター構成例を追加するには<span class="bold"><strong>追加</strong></span>ボタンをクリックします。構成例の追加と編集には、同じダイアログを使用します。このダイアログは、訳文ファイル名の構成例編集に特化したエディターを持っているため、出力するファイル名のカスタマイズに便利です。</p><div class="section" title="3.1. 原文ファイル形式、ファイル名構成例"><div class="titlepage"><div><div><h3 class="title"><a name="source.filetype.and.filename.pattern"></a>3.1.<a class="indexterm" name="d0e4574"></a>原文ファイル形式、ファイル名構成例<a class="indexterm" name="d0e4580"></a></h3></div></div></div><p>OmegaT は原文フォルダーにファイルを見つけると、まず拡張子から判別してファイルフィルターを選択しようとします。もっと具体的に言うと、各フィルターの原文ファイル名構成例から、ファイル名と一致するものを探索します。たとえば、構成例<code class="literal">*.xhtml</code>は、拡張子が<code class="literal">.xhtml</code>のあらゆるファイルに一致します。適切なフィルターが見つかった時点で探索は終了し、そのフィルターが該当するファイルの処理に割り当てられます。たとえばデフォルトでは、XHTML フィルターは拡張子 .xhtml のファイルを処理するのに使用されます。そのフィルターに扱わせたいファイルに応じて、ファイル名構成例を変更したり追加したりできます。原文ファイル名構成例には、<span class="bold"><strong>検索</strong></span>機能と同様にワイルドカード文字を使用できます。ワイルドカード「*」は０個以上の任意の文字と一致します。ワイルドカード「?」は任意の１文字と一致します。他のすべての文字は、それらの文字自身をあらわします。たとえばテキストフィルターを readme ファイル（<code class="literal">readme</code>、<code class="literal">read.me</code>や<code class="literal">readme.txt</code>）にも対応させたい場合は、ファイル名構成例に<code class="literal">read*</code>を指定してください。（日本語訳注：実際にはワイルドカード文字と衝突しない範囲で、正規表現も使用できます。たとえばファイル名の末尾に数字のついた、拡張子 .foo のファイルを扱いたい場合は、<code class="literal">*\d.foo</code>のような指定が可能です。正規表現の詳細は、http://docs.oracle.com/javase/jp/6/api/java/util/regex/Pattern.html を参照してください）</p></div><div class="section" title="3.2. 原文ファイルと訳文ファイルのエンコーディング"><div class="titlepage"><div><div><h3 class="title"><a name="source.and.target.files.encoding"></a>3.2. 原文ファイルと訳文ファイルのエンコーディング</h3></div></div></div><a class="indexterm" name="d0e4614"></a><a class="indexterm" name="d0e4619"></a><a class="indexterm" name="d0e4624"></a><p>エンコーディングの指定が必須のファイル形式は限られています。エンコーディングを特に指定しなかった場合（&lt;自動&gt; の場合）は、拡張子に応じたエンコーディングが使用されます。たとえばデフォルトでは、<code class="literal">.txt</code>ファイルには OS のデフォルト エンコーディングが使用されます。原文ファイルのエンコーディングを、ファイル名構成例ごとに変更することもできます。まったく同様に、訳文ファイルを出力する際のエンコーディングも、任意に変更できます。デフォルトでは、訳文ファイルのエンコーディングは、原文ファイルと同じになります。原文ファイルと訳文ファイルのエンコーディングを指定する項目では、対応したすべてのエンコーディングをコンボボックスから選択できます。&lt;自動&gt; は、<span class="application">OmegaT</span>に自動的に判断させます。自動の場合のエンコーディングは、次の仕組みで判定します：</p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>原文ファイルにエンコーディング宣言があれば、それに従います（HTML ファイル、XML ベースのファイルの場合）</p></li></ul></div><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>いくつかのファイル形式（Java properties など）に対しては、その形式に必須のエンコーディングを設定します</p></li></ul></div><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>テキストファイルには、OS デフォルトのエンコーディング（たとえば日本語版の Windows OS では、シフト JIS 固定）を使用します</p></li></ul></div></div><div class="section" title="3.3. 訳文ファイル名"><div class="titlepage"><div><div><h3 class="title"><a name="target.name"></a>3.3. 訳文ファイル名<a class="indexterm" name="d0e4652"></a></h3></div></div></div><p>翻訳するファイル名を自動的に変更したい時があると思います。たとえば、ファイル名のあとに言語コードを追加したい場合などです。訳文ファイル名構成例は特別な文法で記述されています。これを編集したい場合は、［<span class="bold"><strong>編集...</strong></span>］をクリックして<a class="indexterm" name="d0e4662"></a>構成例編集ダイアログを使用してください。編集内容をそのフィルターの初期値に戻したい時は、［<span class="bold"><strong>初期値を復元</strong></span>］をクリックしてください。またファイルフィルターダイアログの中で、訳文ファイル名構成例を直接編集することもできます。構成例編集ダイアログでは、以下のような変数を使用できます：</p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>デフォルトは<code class="literal">${filename}</code>です。-- 拡張子を伴った完全な原文ファイル名で、これを指定すると、訳文ファイル名は原文ファイル名と同じになります。</p></li></ul></div><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p><code class="literal">${nameOnly}</code>-- 拡張子なしの原文ファイル名です。</p></li><li class="listitem"><p><code class="literal">${extension}</code>-- 原文ファイルの拡張子のみです。</p></li></ul></div><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p><code class="literal">${targetLocale}</code>-- 訳文のロケールコード（「xx_YY」形式）です。</p></li></ul></div><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p><code class="literal">${targetLanguage}</code>-- 訳文の言語コードと国コードを合わせたもの（「XX-YY」形式）です。</p></li></ul></div><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p><code class="literal">${targetLanguageCode}</code>-- 訳文の言語コードのみ（「XX」）です。</p></li></ul></div><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p><code class="literal">${targetCountryCode}</code>-- 訳文の国コードのみ（「YY」）です。</p></li><li class="listitem"><p><code class="literal">${timestamp-????}</code>-- 各種の書式による訳文ファイル生成時のシステム日時です。</p><p>『SimpleDateFormat』の書式については、<a class="ulink" href="http://docs.oracle.com/javase/jp/6/api/java/text/SimpleDateFormat.html" target="_top">Oracle 技術文書</a>を参照してください。</p></li><li class="listitem"><p><code class="literal">${system-os-name}</code>-- コンピューターの OS 名です。</p></li><li class="listitem"><p><code class="literal">${system-user-name}</code>-- システムのユーザー名です。</p></li><li class="listitem"><p><code class="literal">${system-host-name}</code>-- システムのホスト名です。</p></li><li class="listitem"><p><code class="literal">${file-source-encoding}</code>-- 原文ファイルのエンコーディング名です。</p></li><li class="listitem"><p><code class="literal">${file-target-encoding}</code>-- 訳文ファイルのエンコーディング名です。</p></li><li class="listitem"><p><code class="literal">${targetLocaleLCID}</code>-- 訳文ファイルの Microsoft ロケール（「xx-yy」形式）です。</p></li></ul></div><p>${nameOnly} と ${extension} に関しては、追加の変数を使用できます。ファイル名があいまいな場合、使用する構成要素を<code class="literal">${nameOnly</code><span class="emphasis"><em>-拡張子の個数</em></span>} と<code class="literal">${extension</code>-<span class="emphasis"><em>名前の個数}</em></span>の形式で指定することができます。たとえば原文ファイル名が「Document.xx.docx」だったとしましょう。その場合、各種の変数とその結果は次のようになります：</p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p><code class="literal">${nameOnly-0}</code>Document</p></li><li class="listitem"><p><code class="literal">${nameOnly-1}</code>Document.xx</p></li><li class="listitem"><p><code class="literal">${nameOnly-2}</code>Document.xx.docx</p></li><li class="listitem"><p><code class="literal">${extension-0}</code>docx</p></li><li class="listitem"><p><code class="literal">${extension-1}</code>xx.docx</p></li><li class="listitem"><p><code class="literal">${nameOnly-2}</code>Document.xx.docx</p></li></ul></div></div></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="chapter.project.properties.html">戻る</a>&nbsp;</td><td width="20%" align="center">&nbsp;</td><td width="40%" align="right">&nbsp;<a accesskey="n" href="chapter.files.and.directories.html">次へ</a></td></tr><tr><td width="40%" align="left" valign="top">第6章 プロジェクト設定&nbsp;</td><td width="20%" align="center"><a accesskey="h" href="index.html">ホーム</a></td><td width="40%" align="right" valign="top">&nbsp;第8章<span class="application">OmegaT</span>ファイルとフォルダー</td></tr></table></div></body></html>
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <title>第7章 ファイルフィルター</title>
+      <link rel="stylesheet" type="text/css" href="OmegaT.css">
+      <meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
+      <link rel="home" href="index.html" title="OmegaT - 取扱説明書">
+      <link rel="up" href="index.html" title="OmegaT - 取扱説明書">
+      <link rel="prev" href="chapter.project.properties.html" title="第6章 プロジェクト設定">
+      <link rel="next" href="chapter.files.and.directories.html" title="第8章 OmegaT ファイルとフォルダー">
+   </head>
+   <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+      <div class="navheader">
+         <table width="100%" summary="Navigation header">
+            <tr>
+               <th colspan="3" align="center">第7章 ファイルフィルター</th>
+            </tr>
+            <tr>
+               <td width="20%" align="left"><a accesskey="p" href="chapter.project.properties.html">戻る</a>&nbsp;
+               </td>
+               <th width="60%" align="center">&nbsp;</th>
+               <td width="20%" align="right">&nbsp;<a accesskey="n" href="chapter.files.and.directories.html">次へ</a></td>
+            </tr>
+         </table>
+         <hr>
+      </div>
+      <div class="chapter">
+         <div class="titlepage">
+            <div>
+               <div>
+                  <h1 class="title"><a name="chapter.file.filters"></a>第7章 ファイルフィルター
+                  </h1>
+               </div>
+            </div>
+         </div>
+         <div class="toc">
+            <dl class="toc">
+               <dt><span class="section"><a href="chapter.file.filters.html#file.filters.dialog">1. ファイルフィルター ダイアログ</a></span></dt>
+               <dt><span class="section"><a href="chapter.file.filters.html#filters.options">2. フィルター設定</a></span></dt>
+               <dt><span class="section"><a href="chapter.file.filters.html#edit.filter.dialog">3. フィルターの編集ダイアログ</a></span></dt>
+               <dd>
+                  <dl>
+                     <dt><span class="section"><a href="chapter.file.filters.html#source.filetype.and.filename.pattern">3.1. 原文ファイル形式、ファイル名構成例</a></span></dt>
+                     <dt><span class="section"><a href="chapter.file.filters.html#source.and.target.files.encoding">3.2. 原文ファイルと訳文ファイルのエンコーディング</a></span></dt>
+                     <dt><span class="section"><a href="chapter.file.filters.html#target.name">3.3. 訳文ファイル名</a></span></dt>
+                  </dl>
+               </dd>
+            </dl>
+         </div>
+         <p>OmegaT には高度にカスタマイズ可能なフィルター機能があり、さらにその多くの挙動設定を変更できます。ファイルフィルターは以下のような機能を持ったコードの集まりです：</p>
+         <div class="itemizedlist">
+            <ul class="itemizedlist" style="list-style-type: disc; ">
+               <li class="listitem">
+                  <p>ある特定のファイル形式の文書を読み込みます。たとえばプレーンテキストファイルです。</p>
+               </li>
+            </ul>
+         </div>
+         <div class="itemizedlist">
+            <ul class="itemizedlist" style="list-style-type: disc; ">
+               <li class="listitem">
+                  <p>そのファイルから翻訳可能な部分を抽出します。</p>
+               </li>
+            </ul>
+         </div>
+         <div class="itemizedlist">
+            <ul class="itemizedlist" style="list-style-type: disc; ">
+               <li class="listitem">
+                  <p>訳文ファイルの生成時に、原文分節を訳文に置き換えたり、規則に基づきファイル名を修正するなどの自動処理を行います。</p>
+               </li>
+            </ul>
+         </div>
+         <p>OmegaT が対応しているファイル形式は、メニューの<span class="guimenuitem">［設定］→［ファイルフィルター］</span>から一覧できます。
+         </p>
+         <p>ほとんどの場合は、デフォルトのファイルフィルター設定のままで問題ないでしょう。もしそうでなければ、メインメニューから<span class="bold"><strong>［設定］→［ファイルフィルター］</strong></span>を選択してダイアログを開いてください。プロジェクト設定から<span class="bold"><strong>［ファイルフィルター...］</strong></span>を選ぶことで、現在のプロジェクト専用のファイルフィルターを設定することもできます。この設定は、他のプロジェクトに影響を与えません。
+         </p>
+         <p>プロジェクト専用ファイルフィルターを設定するには、まずメニューから<span class="bold"><strong>［プロジェクト］→［プロジェクト設定...］を選びます。</strong></span>次に<span class="guibutton">［ファイルフィルター...］</span>ボタンをクリックして、<span class="guimenuitem">［ファイルフィルター設定をプロジェクト専用にする］</span>チェックボックスにチェックを入れます<a class="indexterm" name="d0e4324"></a>。こうすると、フィルター設定のコピーがプロジェクト自体とセットで保持されるようになります。この状態でフィルターの設定を変更すると、プロジェクト専用フィルターだけが更新されます。ユーザーレベルのフィルターには影響しません。
+         </p>
+         <p><span class="bold"><strong>警告：</strong></span>プロジェクトを開いているときにフィルター設定を変更すると、変更を適用するためにプロジェクトの再読み込みが必要になります。
+         </p>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="file.filters.dialog"></a>1. ファイルフィルター ダイアログ<a class="indexterm" name="d0e4337"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <p>使用可能なファイルフィルターを一覧表示します。OmegaT の中で翻訳したくないファイル形式がある場合は、ファイル形式名の横にあるチェックボックスのチェックを外すと、その形式に対してフィルター機能を使わないようにすることができます。フィルターを無効にしているファイル形式のファイルは、プロジェクトの読み込み時に無視され、訳文生成時には未変更の状態で訳文フォルダーにコピーされます。再びフィルターを使用したくなったら、対象のチェックボックスにチェックを入れてください。<span class="bold"><strong>［初期値を復元］</strong></span> をクリックすると、それまでのフィルター設定をリセットし初期設定に戻します。フィルター対象とするファイルやエンコーディングを変更する場合は<span class="bold"><strong>［編集...］</strong></span>をクリックします。
+            </p>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="filters.options"></a>2. フィルター設定<a class="indexterm" name="d0e4353"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <p>以下のフィルター（テキストファイル、PO ファイル、XHTML ファイル、HTML ファイル・XHTML ファイル、OpenDocument ファイル、Microsoft Open XML ファイル）では、いくつかの専用オプションを設定できます。設定を変更する場合は、フィルターを選択して<span class="bold"><strong>［設定...］</strong></span> を押してください。可能な設定は以下の通りです：
+            </p>
+            <p><span class="bold"><strong>テキストファイル</strong></span></p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p><span class="emphasis"><em>原文を改行で分節化するか、空行で分節化するか、分節化しないか：</em></span></p>
+                     <p>文単位の分節化が有効になっている場合は、ここで選択した設定によってさらに分節化されます。</p>
+                  </li>
+               </ul>
+            </div>
+            <p><span class="bold"><strong>PO ファイル</strong></span></p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p><span class="emphasis"><em>訳文ファイルの空分節を許可</em></span>：
+                     </p>
+                     <p>この設定を有効にすると、未翻訳の PO 分節（たいていは段落全体）を空のままにして訳文ファイルを生成します。もう少し技術的に立ち入った話をすると、PO 訳文ファイルの <code class="code">msgstr</code> 分節が空のままになる、ということです。PO ファイルの場合はこれが一般的な状態ですので、この設定はデフォルトで有効になっています。この設定を無効にすると、原文が訳文分節にコピーされます。
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p><span class="emphasis"><em>PO ヘッダーを無視</em></span></p>
+                     <p>この設定にチェックを入れると、PO ヘッダーを翻訳対象外とみなして、原文のままにします。</p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p><span class="emphasis"><em>ヘッダーの「nplurals=整数; plural=式;」を自動で置換</em></span></p>
+                     <p><span class="emphasis"><em><span class="emphasis"><em>この設定にチェックを入れると、PO ファイルのヘッダーにある複数形指定を、訳文言語に合わせて自動変更します。</em></span></em></span></p>
+                  </li>
+               </ul>
+            </div>
+            <p><span class="bold"><strong>XHTML ファイル</strong></span></p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p><span class="emphasis"><em>以下の場合に HTML・XHTML ファイルにエンコーディング宣言を追加または変更</em></span>：訳文ファイルのエンコーディング文字セットを、原文ファイルのそれ（明示的に指定されたものであれ、暗黙に適用されたものであれ）とは違うものにしたいということは、よくあります。この設定を使うと、訳文ファイルにエンコーディング宣言を含めるかどうかを指定できます。たとえば、ファイルフィルターで訳文ファイルのエンコーディングが
+                        UTF-8 に指定されている場合、この設定によって、訳文ファイルに必ずその情報を含めるようにすることができます。
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p><span class="emphasis"><em>以下の属性を翻訳：</em></span>選択した属性を編集ウィンドウで分節として表示できます。
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p><span class="emphasis"><em>以下のタグで分節化：</em></span> HTML の <span class="emphasis"><em>&lt;br&gt;</em></span> タグがある場所を段落とみなして分節化することができます。
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p><span class="emphasis"><em>以下の正規表現に一致する文字列を翻訳しない：</em></span>指定した正規表現に一致するテキストは、翻訳対象とせずスキップすることができます。スキップした箇所は、タグ検証では赤く表示されます。参考訳文ウィンドウでは、スキップした箇所が原文分節にあると、そのテキストは斜体で表示されます。
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p><span class="emphasis"><em>&lt;meta&gt; タグ内の以下の属性と値は翻訳しない（カンマ区切りで複数指定）：</em></span>ここで指定した &lt;meta&gt; タグは、翻訳されません。
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p><span class="emphasis"><em>以下の属性と値を持つタグの内容は翻訳しない（カンマ区切りで複数指定）</em></span>：ここでキー＝値の形式で指定したタグは、翻訳されません。
+                     </p>
+                     <p>この設定は、ある属性の値に応じてタグを翻訳しないようにするのに、役に立つことがあります。たとえば、<code class="literal">&lt;div class="hide"&gt; &lt;span translate="no"&gt;</code> のようなタグは、キー＝値の形式で指定して翻訳対象外に設定できます。この例の場合、設定欄は次のようになります：<code class="literal">class=hide, translate=no</code></p>
+                  </li>
+               </ul>
+            </div>
+            <p><span class="bold"><strong>Microsoft Office Open XML ファイル</strong></span></p>
+            <p>どの要素を翻訳するか、選ぶことができます。選んだ要素は、翻訳時に個別の分節として表示されます。</p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p><span class="bold"><strong>Word：</strong></span>非表示の命令とテキスト、コメント、脚注、文末脚注、ヘッダー、フッター
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p><span class="bold"><strong>Excel：</strong></span>コメント、シート名
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p><span class="bold"><strong>Power Point：</strong></span>スライドのコメント、スライド マスター、スライド レイアウト
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p><span class="bold"><strong>共通：</strong></span>表、ダイアグラム、図、ワードアート
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p><span class="bold"><strong>その他の設定：</strong></span></p>
+                     <div class="itemizedlist">
+                        <ul class="itemizedlist" style="list-style-type: circle; ">
+                           <li class="listitem">
+                              <p><span class="emphasis"><em>タグを結合</em></span>：チェックが入っていれば、翻訳対象テキストを含まない連続するタグを１つのタグに結合します。
+                              </p>
+                           </li>
+                           <li class="listitem">
+                              <p><span class="emphasis"><em>すべてのタグの空白を維持</em></span>：チェックが入っていれば、空白文字（半角スペースや改行など）を保持します。たとえそれが技術的には意味が無い場合でも、残します。
+                              </p>
+                           </li>
+                        </ul>
+                     </div>
+                  </li>
+               </ul>
+            </div>
+            <p><span class="bold"><strong>HTML ファイル・XHTML ファイル</strong></span></p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p><span class="emphasis"><em>以下の場合に HTML・XHTML ファイルにエンコーディング宣言を追加または変更：</em></span>常に（デフォルト）、(X)HTML ファイルにヘッダーがある場合のみ、(X)HTML ファイルにエンコーディング宣言がある場合のみ、しない
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p><span class="emphasis"><em>以下の属性を翻訳：</em></span>選択した属性を編集ウィンドウで分節として表示できます。
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p><span class="emphasis"><em>以下のタグで分節化：</em></span> HTML の &lt;br&gt; タグがある場所を段落とみなして分節化することができます。
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p><span class="emphasis"><em>以下の正規表現に一致する文字列を翻訳しない：</em></span>指定した正規表現に一致するテキストは、翻訳対象とせずスキップすることができます。
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p><span class="emphasis"><em>&lt;meta&gt; タグ内の以下の属性と値は翻訳しない（カンマ区切りで複数指定）：</em></span>ここで指定した &lt;meta&gt; タグは、翻訳されません。
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p><span class="emphasis"><em>以下の属性と値を持つタグの内容は翻訳しない（カンマ区切りで複数指定）</em></span>：ここでキー＝値の形式で指定したタグは、翻訳されません。
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <p><span class="bold"><strong>テキストファイル</strong></span></p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p><span class="emphasis"><em>原文を改行で分節化するか、空行で分節化するか、分節化しないか</em></span>：
+                     </p>
+                     <p>文単位の分節化が有効になっている場合は、ここで選択した設定によってさらに分節化されます。</p>
+                  </li>
+               </ul>
+            </div>
+            <p><span class="bold"><strong>OpenDocument Format (ODF) ファイル</strong></span></p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>どの要素を翻訳するか、選ぶことができます：</p>
+                     <p>Index 項目、ブックマーク、ブックマーク参照、脚注、コメント、プレゼンテーションのノート、リンク（URL）、シート名</p>
+                  </li>
+               </ul>
+            </div>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="edit.filter.dialog"></a>3. フィルターの編集ダイアログ<a class="indexterm" name="d0e4559"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <p>このダイアログでは、フィルターで処理する原文ファイル名の構成例の指定、訳文ファイル名のカスタマイズ、読み込む原文ファイルと生成する訳文ファイルのエンコーディングを設定できます。ファイルフィルター構成例を編集するには、それぞれの欄をダブルクリックして直接修正するか、<span class="bold"><strong>編集</strong></span>ボタンをクリックします。新しいファイルフィルター構成例を追加するには<span class="bold"><strong>追加</strong></span>ボタンをクリックします。構成例の追加と編集には、同じダイアログを使用します。このダイアログは、訳文ファイル名の構成例編集に特化したエディターを持っているため、出力するファイル名のカスタマイズに便利です。
+            </p>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="source.filetype.and.filename.pattern"></a>3.1. <a class="indexterm" name="d0e4574"></a>原文ファイル形式、ファイル名構成例<a class="indexterm" name="d0e4580"></a></h3>
+                     </div>
+                  </div>
+               </div>
+               <p>OmegaT は原文フォルダーにファイルを見つけると、まず拡張子から判別してファイルフィルターを選択しようとします。もっと具体的に言うと、各フィルターの原文ファイル名構成例から、ファイル名と一致するものを探索します。たとえば、構成例 <code class="literal">*.xhtml</code> は、拡張子が <code class="literal">.xhtml</code> のあらゆるファイルに一致します。適切なフィルターが見つかった時点で探索は終了し、そのフィルターが該当するファイルの処理に割り当てられます。たとえばデフォルトでは、XHTML フィルターは拡張子 .xhtml のファイルを処理するのに使用されます。そのフィルターに扱わせたいファイルに応じて、ファイル名構成例を変更したり追加したりできます。原文ファイル名構成例には、<span class="bold"><strong>検索</strong></span>機能と同様にワイルドカード文字を使用できます。ワイルドカード「*」は０個以上の任意の文字と一致します。ワイルドカード「?」は任意の１文字と一致します。他のすべての文字は、それらの文字自身をあらわします。たとえばテキストフィルターを readme
+                  ファイル（<code class="literal">readme</code>、<code class="literal">read.me</code> や <code class="literal">readme.txt</code>）にも対応させたい場合は、ファイル名構成例に <code class="literal">read*</code> を指定してください。（日本語訳注：実際にはワイルドカード文字と衝突しない範囲で、正規表現も使用できます。たとえばファイル名の末尾に数字のついた、拡張子 .foo のファイルを扱いたい場合は、<code class="literal">*\d.foo</code> のような指定が可能です。正規表現の詳細は、http://docs.oracle.com/javase/jp/6/api/java/util/regex/Pattern.html を参照してください）
+               </p>
+            </div>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="source.and.target.files.encoding"></a>3.2. 原文ファイルと訳文ファイルのエンコーディング
+                        </h3>
+                     </div>
+                  </div>
+               </div><a class="indexterm" name="d0e4614"></a><a class="indexterm" name="d0e4619"></a><a class="indexterm" name="d0e4624"></a><p>エンコーディングの指定が必須のファイル形式は限られています。エンコーディングを特に指定しなかった場合（&lt;自動&gt; の場合）は、拡張子に応じたエンコーディングが使用されます。たとえばデフォルトでは、<code class="literal">.txt</code> ファイルには OS のデフォルト エンコーディングが使用されます。原文ファイルのエンコーディングを、ファイル名構成例ごとに変更することもできます。まったく同様に、訳文ファイルを出力する際のエンコーディングも、任意に変更できます。デフォルトでは、訳文ファイルのエンコーディングは、原文ファイルと同じになります。原文ファイルと訳文ファイルのエンコーディングを指定する項目では、対応したすべてのエンコーディングをコンボボックスから選択できます。&lt;自動&gt;
+                  は、<span class="application">OmegaT</span> に自動的に判断させます。自動の場合のエンコーディングは、次の仕組みで判定します：
+               </p>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
+                     <li class="listitem">
+                        <p>原文ファイルにエンコーディング宣言があれば、それに従います（HTML ファイル、XML ベースのファイルの場合）</p>
+                     </li>
+                  </ul>
+               </div>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
+                     <li class="listitem">
+                        <p>いくつかのファイル形式（Java properties など）に対しては、その形式に必須のエンコーディングを設定します</p>
+                     </li>
+                  </ul>
+               </div>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
+                     <li class="listitem">
+                        <p>テキストファイルには、OS デフォルトのエンコーディング（たとえば日本語版の Windows OS では、シフト JIS 固定）を使用します</p>
+                     </li>
+                  </ul>
+               </div>
+            </div>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="target.name"></a>3.3. 訳文ファイル名<a class="indexterm" name="d0e4652"></a></h3>
+                     </div>
+                  </div>
+               </div>
+               <p>翻訳するファイル名を自動的に変更したい時があると思います。たとえば、ファイル名のあとに言語コードを追加したい場合などです。訳文ファイル名構成例は特別な文法で記述されています。これを編集したい場合は、［<span class="bold"><strong>編集...</strong></span>］をクリックして<a class="indexterm" name="d0e4662"></a>構成例編集ダイアログを使用してください。編集内容をそのフィルターの初期値に戻したい時は、［<span class="bold"><strong>初期値を復元</strong></span>］をクリックしてください。またファイルフィルターダイアログの中で、訳文ファイル名構成例を直接編集することもできます。構成例編集ダイアログでは、以下のような変数を使用できます：
+               </p>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
+                     <li class="listitem">
+                        <p>デフォルトは <code class="literal">${filename}</code> です。-- 拡張子を伴った完全な原文ファイル名で、これを指定すると、訳文ファイル名は原文ファイル名と同じになります。
+                        </p>
+                     </li>
+                  </ul>
+               </div>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
+                     <li class="listitem">
+                        <p><code class="literal">${nameOnly}</code> -- 拡張子なしの原文ファイル名です。
+                        </p>
+                     </li>
+                     <li class="listitem">
+                        <p><code class="literal">${extension}</code> -- 原文ファイルの拡張子のみです。
+                        </p>
+                     </li>
+                  </ul>
+               </div>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
+                     <li class="listitem">
+                        <p><code class="literal">${targetLocale}</code> -- 訳文のロケールコード（「xx_YY」形式）です。
+                        </p>
+                     </li>
+                  </ul>
+               </div>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
+                     <li class="listitem">
+                        <p><code class="literal">${targetLanguage}</code> -- 訳文の言語コードと国コードを合わせたもの（「XX-YY」形式）です。
+                        </p>
+                     </li>
+                  </ul>
+               </div>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
+                     <li class="listitem">
+                        <p><code class="literal">${targetLanguageCode}</code> -- 訳文の言語コードのみ（「XX」）です。
+                        </p>
+                     </li>
+                  </ul>
+               </div>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
+                     <li class="listitem">
+                        <p><code class="literal">${targetCountryCode}</code> -- 訳文の国コードのみ（「YY」）です。
+                        </p>
+                     </li>
+                     <li class="listitem">
+                        <p><code class="literal">${timestamp-????}</code> -- 各種の書式による訳文ファイル生成時のシステム日時です。
+                        </p>
+                        <p>『SimpleDateFormat』の書式については、<a class="ulink" href="http://docs.oracle.com/javase/jp/6/api/java/text/SimpleDateFormat.html" target="_top">Oracle 技術文書</a>を参照してください。
+                        </p>
+                     </li>
+                     <li class="listitem">
+                        <p><code class="literal">${system-os-name}</code> -- コンピューターの OS 名です。
+                        </p>
+                     </li>
+                     <li class="listitem">
+                        <p><code class="literal">${system-user-name}</code> -- システムのユーザー名です。
+                        </p>
+                     </li>
+                     <li class="listitem">
+                        <p><code class="literal">${system-host-name}</code> -- システムのホスト名です。
+                        </p>
+                     </li>
+                     <li class="listitem">
+                        <p><code class="literal">${file-source-encoding}</code> -- 原文ファイルのエンコーディング名です。
+                        </p>
+                     </li>
+                     <li class="listitem">
+                        <p><code class="literal">${file-target-encoding}</code> -- 訳文ファイルのエンコーディング名です。
+                        </p>
+                     </li>
+                     <li class="listitem">
+                        <p><code class="literal">${targetLocaleLCID}</code> -- 訳文ファイルの Microsoft ロケール（「xx-yy」形式）です。
+                        </p>
+                     </li>
+                  </ul>
+               </div>
+               <p>${nameOnly} と ${extension} に関しては、追加の変数を使用できます。ファイル名があいまいな場合、使用する構成要素を <code class="literal">${nameOnly</code><span class="emphasis"><em>-拡張子の個数</em></span>} と <code class="literal">${extension</code>-<span class="emphasis"><em>名前の個数}</em></span> の形式で指定することができます。たとえば原文ファイル名が「Document.xx.docx」だったとしましょう。その場合、各種の変数とその結果は次のようになります：
+               </p>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
+                     <li class="listitem">
+                        <p><code class="literal">${nameOnly-0}</code> Document
+                        </p>
+                     </li>
+                     <li class="listitem">
+                        <p><code class="literal">${nameOnly-1}</code> Document.xx
+                        </p>
+                     </li>
+                     <li class="listitem">
+                        <p><code class="literal">${nameOnly-2}</code> Document.xx.docx
+                        </p>
+                     </li>
+                     <li class="listitem">
+                        <p><code class="literal">${extension-0}</code> docx
+                        </p>
+                     </li>
+                     <li class="listitem">
+                        <p><code class="literal">${extension-1}</code> xx.docx
+                        </p>
+                     </li>
+                     <li class="listitem">
+                        <p><code class="literal">${nameOnly-2}</code> Document.xx.docx
+                        </p>
+                     </li>
+                  </ul>
+               </div>
+            </div>
+         </div>
+      </div>
+      <div class="navfooter">
+         <hr>
+         <table width="100%" summary="Navigation footer">
+            <tr>
+               <td width="40%" align="left"><a accesskey="p" href="chapter.project.properties.html">戻る</a>&nbsp;
+               </td>
+               <td width="20%" align="center">&nbsp;</td>
+               <td width="40%" align="right">&nbsp;<a accesskey="n" href="chapter.files.and.directories.html">次へ</a></td>
+            </tr>
+            <tr>
+               <td width="40%" align="left" valign="top">第6章 プロジェクト設定&nbsp;</td>
+               <td width="20%" align="center"><a accesskey="h" href="index.html">ホーム</a></td>
+               <td width="40%" align="right" valign="top">&nbsp;第8章 <span class="application">OmegaT</span> ファイルとフォルダー
+               </td>
+            </tr>
+         </table>
+      </div>
+   </body>
+</html>

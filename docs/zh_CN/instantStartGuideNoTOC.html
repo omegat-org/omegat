@@ -3,11 +3,11 @@
       <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
    
       <title>快速入门指南</title>
-      <link rel="stylesheet" href="OmegaT.css" type="text/css">
-      <meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+      <link rel="stylesheet" type="text/css" href="OmegaT.css">
+      <meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
    </head>
    <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
-      <div class="chapter" title="快速入门指南">
+      <div class="chapter">
          <div class="titlepage">
             <div>
                <div>
@@ -16,7 +16,7 @@
                </div>
             </div>
          </div>
-         <div class="section" title="1.&nbsp;五分钟内学会使用 OmegaT！">
+         <div class="section">
             <div class="titlepage">
                <div>
                   <div>
@@ -34,7 +34,7 @@
             </p>
             <p>OmegaT 将您的翻译工作组织成翻译项目［Project］。OmegaT 为每个项目创建一系列文件夹，这些文件夹依次保存要翻译的源文档、希望用到的词汇表，以及任何可能用到的翻译记忆。同时 OmegaT 也创建“Target” 文件夹，用来保存最后的已译文档。</p>
          </div>
-         <div class="section" title="2.&nbsp;使用 OmegaT 翻译">
+         <div class="section">
             <div class="titlepage">
                <div>
                   <div>
@@ -43,7 +43,7 @@
                   </div>
                </div>
             </div>
-            <div class="section" title="2.1.&nbsp;创建并打开一个新的项目">
+            <div class="section">
                <div class="titlepage">
                   <div>
                      <div>
@@ -58,7 +58,7 @@
                </p>
                <div class="figure"><a name="New.project.dialog.window"></a><p class="title"><b>Figure&nbsp;1.&nbsp;<a class="indexterm" name="d0e80"></a>新建项目 - 对话窗口</b></p>
                   <div class="figure-contents">
-                     <div class="mediaobject"><img src="images/NewProject.png" alt="项目项目对话窗口 - 图示新建项目 - 对话窗口"></div>
+                     <div class="mediaobject"><img src="images/NewProject.png" alt="新建项目 - 对话窗口"></div>
                   </div>
                </div><br class="figure-break"><p>您仅需简单地接受子文件夹的位置，但是必须首先确认源和目标语言编码是正确的。从下拉列表中选择语言代码（2字母）或语言和地区代码（2 + 2 字母），或直接手工输入代码（语言代码可以为 2 到 3 个字母）。记下目标文件夹（用于保存译好文档）的位置。如果希望
                   OmegaT 根据句子而不是段落进行片段分割，请阅读片段分割规则章节<a class="indexterm" name="d0e93"></a>。
@@ -67,11 +67,11 @@
                </p>
                <p>要查看待译文件清单，请打开<span class="bold"><strong>项目文件</strong></span> <a class="indexterm" name="d0e109"></a>窗口（如果没有自动开启的话，可使用菜单：<span class="guimenu">项目</span> → <span class="guimenuitem">项目文件……</span>,<a class="indexterm" name="d0e121"></a>）。如果改变了源文件夹的内容，记住首先要重新载入项目（菜单：<span class="guimenu">项目</span> → <span class="guimenuitem">重新载入</span> (<span class="shortcut"><strong><span class="keycap"><strong>F5</strong></span></strong></span>)）。缺省情况下，<span class="application">OmegaT</span> 打开项目清单中的第一个文件。请记住，<span class="application">OmegaT</span> 仅能翻译下面列出的能够被文件过滤器所匹配的格式的文件。其它任何文件将会被忽略。<a class="indexterm" name="d0e142"></a></p>
                <div class="itemizedlist">
-                  <ul class="itemizedlist" type="disc">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
                      <li class="listitem">
                         <p><span class="bold"><strong>纯文本文件格式<a class="indexterm" name="d0e152"></a></strong></span></p>
                         <div class="itemizedlist">
-                           <ul class="itemizedlist" type="circle">
+                           <ul class="itemizedlist" style="list-style-type: circle; ">
                               <li class="listitem">
                                  <p>ASCII 文本（.txt 等）</p>
                               </li>
@@ -81,21 +81,21 @@
                            </ul>
                         </div>
                         <div class="itemizedlist">
-                           <ul class="itemizedlist" type="circle">
+                           <ul class="itemizedlist" style="list-style-type: circle; ">
                               <li class="listitem">
                                  <p>Java 资源文件（*.properties）</p>
                               </li>
                            </ul>
                         </div>
                         <div class="itemizedlist">
-                           <ul class="itemizedlist" type="circle">
+                           <ul class="itemizedlist" style="list-style-type: circle; ">
                               <li class="listitem">
                                  <p>PO 文件（*.po）</p>
                               </li>
                            </ul>
                         </div>
                         <div class="itemizedlist">
-                           <ul class="itemizedlist" type="circle">
+                           <ul class="itemizedlist" style="list-style-type: circle; ">
                               <li class="listitem">
                                  <p>INI (key=value) 文件（*.ini）</p>
                               </li>
@@ -105,7 +105,7 @@
                            
                         </p>
                         <div class="itemizedlist">
-                           <ul class="itemizedlist" type="circle">
+                           <ul class="itemizedlist" style="list-style-type: circle; ">
                               <li class="listitem">
                                  <p>DTD 文件（*.DTD）</p>
                               </li>
@@ -115,14 +115,14 @@
                            </ul>
                         </div>
                         <div class="itemizedlist">
-                           <ul class="itemizedlist" type="circle">
+                           <ul class="itemizedlist" style="list-style-type: circle; ">
                               <li class="listitem">
                                  <p>SubRip 标题文件 (*.srt)</p>
                               </li>
                            </ul>
                         </div>
                         <div class="itemizedlist">
-                           <ul class="itemizedlist" type="circle">
+                           <ul class="itemizedlist" style="list-style-type: circle; ">
                               <li class="listitem">
                                  <p>Magento CE Locale CSV (*.csv)</p>
                               </li>
@@ -132,11 +132,11 @@
                   </ul>
                </div>
                <div class="itemizedlist">
-                  <ul class="itemizedlist" type="disc">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
                      <li class="listitem">
                         <p><span class="bold"><strong>标记文本文件格式<a class="indexterm" name="d0e197"></a></strong></span></p>
                         <div class="itemizedlist">
-                           <ul class="itemizedlist" type="circle">
+                           <ul class="itemizedlist" style="list-style-type: circle; ">
                               <li class="listitem">
                                  <p>OpenOffice.org / OpenDocument (*.odt, *.ott, *.ods, *.ots,
                                     *.odp, *.otp)
@@ -145,63 +145,63 @@
                            </ul>
                         </div>
                         <div class="itemizedlist">
-                           <ul class="itemizedlist" type="circle">
+                           <ul class="itemizedlist" style="list-style-type: circle; ">
                               <li class="listitem">
                                  <p>Microsoft Open XML (*.docx, *.xlsx, *.pptx)</p>
                               </li>
                            </ul>
                         </div>
                         <div class="itemizedlist">
-                           <ul class="itemizedlist" type="circle">
+                           <ul class="itemizedlist" style="list-style-type: circle; ">
                               <li class="listitem">
                                  <p>(X)HTML (*.html, *.xhtml,*.xht)</p>
                               </li>
                            </ul>
                         </div>
                         <div class="itemizedlist">
-                           <ul class="itemizedlist" type="circle">
+                           <ul class="itemizedlist" style="list-style-type: circle; ">
                               <li class="listitem">
                                  <p>HTML Help Compiler (*.hhc, *.hhk)</p>
                               </li>
                            </ul>
                         </div>
                         <div class="itemizedlist">
-                           <ul class="itemizedlist" type="circle">
+                           <ul class="itemizedlist" style="list-style-type: circle; ">
                               <li class="listitem">
                                  <p>DocBook (*.xml)</p>
                               </li>
                            </ul>
                         </div>
                         <div class="itemizedlist">
-                           <ul class="itemizedlist" type="circle">
+                           <ul class="itemizedlist" style="list-style-type: circle; ">
                               <li class="listitem">
                                  <p>单语 XLIFF (*.xlf, *.xliff, *.sdlxliff)</p>
                               </li>
                            </ul>
                         </div>
                         <div class="itemizedlist">
-                           <ul class="itemizedlist" type="circle">
+                           <ul class="itemizedlist" style="list-style-type: circle; ">
                               <li class="listitem">
                                  <p>QuarkXPress CopyFlowGold (*.tag, *.xtg)</p>
                               </li>
                            </ul>
                         </div>
                         <div class="itemizedlist">
-                           <ul class="itemizedlist" type="circle">
+                           <ul class="itemizedlist" style="list-style-type: circle; ">
                               <li class="listitem">
                                  <p>ResX 文件 (*.resx)</p>
                               </li>
                            </ul>
                         </div>
                         <div class="itemizedlist">
-                           <ul class="itemizedlist" type="circle">
+                           <ul class="itemizedlist" style="list-style-type: circle; ">
                               <li class="listitem">
                                  <p>Android 资源 (*.xml)</p>
                               </li>
                            </ul>
                         </div>
                         <div class="itemizedlist">
-                           <ul class="itemizedlist" type="circle">
+                           <ul class="itemizedlist" style="list-style-type: circle; ">
                               <li class="listitem">
                                  <p>LaTex (*.tex, *.latex)</p>
                               </li>
@@ -214,7 +214,7 @@
                            </ul>
                         </div>
                         <div class="itemizedlist">
-                           <ul class="itemizedlist" type="circle">
+                           <ul class="itemizedlist" style="list-style-type: circle; ">
                               <li class="listitem">
                                  <p>WiX Localization (*.wxl)</p>
                               </li>
@@ -237,7 +237,7 @@
                </div>
                <p>除了您想翻译的文本，标记文本文件还包含在 OmegaT 以“标记”的形式显示的格式信息。这些标记必须出现在译文中，包括那些不需要“翻译”的格式信息。如果不小心遗漏或错位了标记，那么生成的文本可能不会按预期的显示且译文可能损坏——请参阅下面的“标记验证”章节。</p>
             </div>
-            <div class="section" title="2.2.&nbsp;逐片段翻译">
+            <div class="section">
                <div class="titlepage">
                   <div>
                      <div>
@@ -251,7 +251,7 @@
                <p>处于激活状态的片段将以绿色高亮度显示，在下方的“目标区域”将会显示一段源文本的副本。（此时，目标区域之外的所有文本都受到保护无法修改。）您必须在标记&lt;<code class="literal">segment 0001&gt;</code> 之前输入译文。可以进行设置让 OmegaT 自动复制原文到目标文本（请参阅<span class="emphasis"><em>选项&gt;编辑行为……</em></span>），可用于当部分源文本需要保持不变的时候。此时您将覆盖源文本。按下 <span class="bold"><strong>"ENTER"</strong></span> 以进入下一个片段。注意：
                </p>
                <div class="itemizedlist">
-                  <ul class="itemizedlist" type="disc">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
                      <li class="listitem">
                         <p>如果想移动到文本的任何其它部分，无论是前面还是后面，可用鼠标双击想打开的段落或者句子。</p>
                      </li>
@@ -267,7 +267,7 @@
                   </ul>
                </div>
             </div>
-            <div class="section" title="2.3.&nbsp;使用翻译记忆、词汇表和字典中的匹配项">
+            <div class="section">
                <div class="titlepage">
                   <div>
                      <div>
@@ -276,7 +276,7 @@
                      </div>
                   </div>
                </div>
-               <div class="section" title="2.3.1.&nbsp;翻译记忆匹配">
+               <div class="section">
                   <div class="titlepage">
                      <div>
                         <div>
@@ -291,7 +291,7 @@
                   </div><br class="figure-break"><p>如果 <span class="application">OmegaT</span> 在项目的翻译记忆中找到了下一片段的模糊匹配（相似度在 30% 或者更高），它将在匹配查看器中显示结果。缺省情况下，将预先选中匹配查看器中的第一条匹配结果。
                   </p>
                   <div class="itemizedlist">
-                     <ul class="itemizedlist" type="disc">
+                     <ul class="itemizedlist" style="list-style-type: disc; ">
                         <li class="listitem">
                            <p>按 <span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>I</strong></span><a class="indexterm" name="d0e352"></a> 将预选的匹配插入当前光标位置或……
                            </p>
@@ -304,7 +304,7 @@
                   </div>
                   <p>如果发现了多个匹配，而您又不想使用预选中的匹配：</p>
                   <div class="itemizedlist">
-                     <ul class="itemizedlist" type="disc">
+                     <ul class="itemizedlist" style="list-style-type: disc; ">
                         <li class="listitem">
                            <p>在匹配查看器中选择喜欢的匹配：<span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>2</strong></span> 选择第二个显示的匹配，<span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>3</strong></span> 选择第三个，依此类推。
                            </p>
@@ -318,7 +318,7 @@
                   <p>您可以让 OmegaT 打开片段时自动插入任何高于指定匹配百分比的第一个匹配。可通过<span class="guimenu">选项</span> 来设置该选项
                   </p>
                </div>
-               <div class="section" title="2.3.2.&nbsp;词汇表和词典匹配">
+               <div class="section">
                   <div class="titlepage">
                      <div>
                         <div>
@@ -328,7 +328,7 @@
                   </div>
                   <p>项目中可能包含的词汇表和词典中的匹配术语将在词汇和字典显示窗格以供参考。</p>
                </div>
-               <div class="section" title="2.3.3.&nbsp;使用搜索功能">
+               <div class="section">
                   <div class="titlepage">
                      <div>
                         <div>
@@ -340,7 +340,7 @@
                   <p><span class="application">OmegaT</span> 提供了强大的搜索功能。使用 <span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>F</strong></span> 调出搜索窗口，在“查找”文本框输入要搜索的单词或短语。另一种方法，在编辑器窗格的任意位置选择一个单词或短语，然后按 <span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>F</strong></span>：刚才选中的单词或短语将自动插入之后打开的搜索窗口的“查找”文本框中。
                   </p>
                </div>
-               <div class="section" title="2.3.4.&nbsp;使用机器翻译服务">
+               <div class="section">
                   <div class="titlepage">
                      <div>
                         <div>
@@ -352,7 +352,7 @@
                   </p>
                </div>
             </div>
-            <div class="section" title="2.4.&nbsp;创建已译文档">
+            <div class="section">
                <div class="titlepage">
                   <div>
                      <div>
@@ -365,7 +365,7 @@
                </p>
             </div>
          </div>
-         <div class="section" title="3.&nbsp;处理标记文本">
+         <div class="section">
             <div class="titlepage">
                <div>
                   <div>
@@ -375,7 +375,7 @@
             </div>
             <p><span class="application">OmegaT</span> 使用特殊标签做标记以确保源文档的格式（如加粗、斜体等）不会丢失。<span class="application">OmegaT</span> 标记由一个或多个字母跟着一个或多个数字组成，使用 "/" 字符来封闭（例如：&lt;f0&gt;，&lt;/f0&gt; &lt;br&gt;, &lt;/s2&gt; 等等）。您必须小心处理这些标记，以确保它们以正确的风格出现在目标片段中（参阅标记操作）。
             </p>
-            <div class="section" title="3.1.&nbsp;一个例子……">
+            <div class="section">
                <div class="titlepage">
                   <div>
                      <div>
@@ -394,7 +394,7 @@
                </p>
                <div class="figure"><a name="fig.tagged.segment.source"></a><p class="title"><b>Figure&nbsp;3.&nbsp;源 <a class="indexterm" name="d0e545"></a>HTML 片段</b></p>
                   <div class="figure-contents">
-                     <div class="mediaobject"><img src="images/tagged_segment.png" alt="源 片段、源和目标 - 图示HTML 片段"></div>
+                     <div class="mediaobject"><img src="images/tagged_segment.png" alt="源 HTML 片段"></div>
                   </div>
                </div><br class="figure-break"><p>当 <span class="application">OmegaT</span> 创建已译文档时，HTML 看起来将像下面的样子：
                </p>
@@ -403,7 +403,7 @@
                      <div class="mediaobject"><img src="images/tagged_segment_target.png" alt="目标 HTML 片段"></div>
                   </div>
                </div><br class="figure-break"></div>
-            <div class="section" title="3.2.&nbsp;标记验证">
+            <div class="section">
                <div class="titlepage">
                   <div>
                      <div>

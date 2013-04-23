@@ -3,8 +3,8 @@
       <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
    
       <title>Capítulo 14. Memorias de Traducción</title>
-      <link rel="stylesheet" href="OmegaT.css" type="text/css">
-      <meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+      <link rel="stylesheet" type="text/css" href="OmegaT.css">
+      <meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
       <link rel="home" href="index.html" title="OmegaT - Guía de usuario">
       <link rel="up" href="index.html" title="OmegaT - Guía de usuario">
       <link rel="prev" href="chapter.plain.text.html" title="Capítulo 13. Trabajando con Texto sin Formato">
@@ -25,16 +25,16 @@
          </table>
          <hr>
       </div>
-      <div class="chapter" title="Capítulo 14. Memorias de Traducción">
+      <div class="chapter">
          <div class="titlepage">
             <div>
                <div>
-                  <h2 class="title"><a name="chapter.translation.memories"></a>Capítulo 14. Memorias de Traducción<a class="indexterm" name="d0e6024"></a></h2>
+                  <h1 class="title"><a name="chapter.translation.memories"></a>Capítulo 14. Memorias de Traducción<a class="indexterm" name="d0e6024"></a></h1>
                </div>
             </div>
          </div>
          <div class="toc">
-            <dl>
+            <dl class="toc">
                <dt><span class="section"><a href="chapter.translation.memories.html#OmegaT.and.tmx.files">1. Memorias de traducción en OmegaT</a></span></dt>
                <dd>
                   <dl>
@@ -54,7 +54,7 @@
                <dt><span class="section"><a href="chapter.translation.memories.html#upgrading.translation.memories">4. Actualizando memorias de traducción</a></span></dt>
             </dl>
          </div>
-         <div class="section" title="1. Memorias de traducción en OmegaT">
+         <div class="section">
             <div class="titlepage">
                <div>
                   <div>
@@ -63,7 +63,7 @@
                   </div>
                </div>
             </div>
-            <div class="section" title="1.1. directorios tmx - ubicación y propósito">
+            <div class="section">
                <div class="titlepage">
                   <div>
                      <div>
@@ -75,7 +75,7 @@
                <p>Los proyectos <span class="application">OmegaT</span> pueden tener los archivos de memoria de traducción - es decir, archivos con la extensión tmx - en cuatro diferentes lugares:
                </p>
                <div class="variablelist">
-                  <dl>
+                  <dl class="variablelist">
                      <dt><span class="term"><a class="indexterm" name="d0e6041"></a>Directorio omegat</span></dt>
                      <dd>
                         <p>El directorio omegat contiene el project_save.tmx y, posiblemente, una serie de archivos de copias de seguridad TMX. El archivo
@@ -88,7 +88,7 @@
                         <p>El directorio principal del proyecto contiene tres archivos TMX, <code class="filename">nombre_proyecto-omegat.tmx</code>, <code class="filename">nombre_proyecto-level1.tmx</code> y <code class="filename">nombre_proyecto-level2.tmx</code> (donde nombre_proyecto es el nombre del proyecto).
                         </p>
                         <div class="itemizedlist">
-                           <ul class="itemizedlist" type="disc">
+                           <ul class="itemizedlist" style="list-style-type: disc; ">
                               <li class="listitem">
                                  <p>El archivo level1 sólo contiene información textual.</p>
                               </li>
@@ -154,7 +154,7 @@
                   la versión destino para todo el proyecto
                </p>
             </div>
-            <div class="section" title="1.2. Copia de seguridad tmx">
+            <div class="section">
                <div class="titlepage">
                   <div>
                      <div>
@@ -191,7 +191,7 @@
                   </ol>
                </div>
             </div>
-            <div class="section" title="1.3. Archivos tmx y el idioma">
+            <div class="section">
                <div class="titlepage">
                   <div>
                      <div>
@@ -208,7 +208,7 @@
                   respectivamente. OmegaT reconoce los códigos de idioma usando las siguientes dos normas:
                </p>
                <div class="itemizedlist">
-                  <ul class="itemizedlist" type="disc">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
                      <li class="listitem">
                         <p>2 letras (por ejemplo, JA para japonés), o</p>
                      </li>
@@ -226,7 +226,7 @@
                   código de país, los segmentos serán ignorados.
                </p>
             </div>
-            <div class="section" title="1.4. Segmentos huérfanos">
+            <div class="section">
                <div class="titlepage">
                   <div>
                      <div>
@@ -240,7 +240,7 @@
                </p>
             </div>
          </div>
-         <div class="section" title="2. Reutilizando memorias de traducción">
+         <div class="section">
             <div class="titlepage">
                <div>
                   <div>
@@ -267,7 +267,7 @@
                para el mismo cliente. En este caso, un procedimiento útil sería:
             </p>
             <div class="itemizedlist">
-               <ul class="itemizedlist" type="disc">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
                      <p>Crea un directorio (un "directorio repositorio") en una ubicación conveniente en tu disco duro para las memorias de traducción
                         para un cliente o tema particular.
@@ -276,7 +276,7 @@
                </ul>
             </div>
             <div class="itemizedlist">
-               <ul class="itemizedlist" type="disc">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
                      <p>Cada vez que termines un proyecto, copia uno de los tres archivos "exportables" de la memoria de traducción del proyecto al
                         directorio del repositorio.
@@ -285,7 +285,7 @@
                </ul>
             </div>
             <div class="itemizedlist">
-               <ul class="itemizedlist" type="disc">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
                      <p>Cuando comiences un nuevo proyecto sobre el mismo tema o para el mismo cliente, navega al directorio del repositorio desde
                         el cuadro de diálogo <span class="guimenuitem">Propiedades del Proyecto → Editar Proyecto</span> y selecciónalo como el directorio de memorias de traducción.
@@ -299,7 +299,7 @@
                Incluso, puedes considerar eliminar aquellos que no sean necesarios más, una vez que haz utilizado su contenido para llenar
                el archivo <code class="filename">project_save.tmx</code>.
             </p>
-            <div class="section" title="2.1. Importando y exportando memorias de traducción">
+            <div class="section">
                <div class="titlepage">
                   <div>
                      <div>
@@ -328,7 +328,7 @@
                </p>
             </div>
          </div>
-         <div class="section" title="3. Memoria pseudotraducida">
+         <div class="section">
             <div class="titlepage">
                <div>
                   <div>
@@ -336,7 +336,7 @@
                   </div>
                </div>
             </div>
-            <div class="note" title="Nota" style="margin-left: 0.5in; margin-right: 0.5in;">
+            <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;">
                <h3 class="title">Nota</h3>
                <p>¡De interés sólo para usuarios avanzados!</p>
             </div>
@@ -345,14 +345,14 @@
                que contiene todos los segmentos del proyecto. La traducción en este tmx puede ser
             </p>
             <div class="itemizedlist">
-               <ul class="itemizedlist" type="disc">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
                      <p>una traducción igual al original (predeterminada)</p>
                   </li>
                </ul>
             </div>
             <div class="itemizedlist">
-               <ul class="itemizedlist" type="disc">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
                      <p>con los segmentos de traducción vacíos</p>
                   </li>
@@ -367,7 +367,7 @@
                <span class="application">OmegaT</span> cámbiale el nombre a <span class="emphasis"><em>project_save.tmx</em></span> y colócala en el directorio <code class="literal">omegat</code> de tu proyecto.
             </p>
          </div>
-         <div class="section" title="4. Actualizando memorias de traducción">
+         <div class="section">
             <div class="titlepage">
                <div>
                   <div>

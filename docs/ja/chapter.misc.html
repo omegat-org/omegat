@@ -1,1 +1,324 @@
-<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>第21章 その他の話題</title><link rel="stylesheet" href="OmegaT.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.75.2"><link rel="home" href="index.html" title="OmegaT - 取扱説明書"><link rel="up" href="index.html" title="OmegaT - 取扱説明書"><link rel="prev" href="chapter.spellchecker.html" title="第20章 綴り確認"><link rel="next" href="appendix.languages.html" title="付録A 言語設定 - ISO 639 コード一覧"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">第21章 その他の話題</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="chapter.spellchecker.html">戻る</a>&nbsp;</td><th width="60%" align="center">&nbsp;</th><td width="20%" align="right">&nbsp;<a accesskey="n" href="appendix.languages.html">次へ</a></td></tr></table><hr></div><div class="chapter" title="第21章 その他の話題"><div class="titlepage"><div><div><h2 class="title"><a name="chapter.misc"></a>第21章 その他の話題<a class="indexterm" name="d0e8468"></a></h2></div></div></div><div class="toc"><dl><dt><span class="section"><a href="chapter.misc.html#omegat.misc.console.mode">1. OmegaT コンソールモード</a></span></dt><dd><dl><dt><span class="section"><a href="chapter.misc.html#misc.console.mode.prerequisites">1.1. 必要な条件</a></span></dt><dt><span class="section"><a href="chapter.misc.html#starting.in.misc.console.mode">1.2. コンソールモードで起動する</a></span></dt><dt><span class="section"><a href="chapter.misc.html#misc.console.mode.option.quiet">1.3. サイレントオプション</a></span></dt><dt><span class="section"><a href="chapter.misc.html#misc.console.mode.option.validatetags">1.4. タグ検証の設定</a></span></dt></dl></dd><dt><span class="section"><a href="chapter.misc.html#d0e8633">2. Java properties ファイルの自動整列機能</a></span></dt><dt><span class="section"><a href="chapter.misc.html#font.settings">3. 字体の設定</a></span></dt><dt><span class="section"><a href="chapter.misc.html#preventing.data.loss">4. データを失わないために</a></span></dt></dl></div><div class="section" title="1. OmegaT コンソールモード"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="omegat.misc.console.mode"></a>1.<span class="application"><a class="indexterm" name="d0e8474"></a>OmegaT</span>コンソールモード<a class="indexterm" name="d0e8481"></a></h2></div></div></div><div class="note" title="注記" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">注記</h3><p>興味のある上級者のユーザーのみを対象としています。</p></div><p>コンソール（コマンドラインとも）モードは、スクリプト環境で<span class="application">OmegaT</span>を翻訳ツールとして用いる場合に使用できます。コンソールモードで開始すると、どのコンソール上でも動作するように、GUI を表示しません。そして、指定されたプロジェクトを自動的に処理します。たとえば、あるプログラム用のプロジェクトで、GUI をたくさんの言語に地域化する必要があるとします。コンソールモードを使うと、そのプログラムをビルドする工程に、インターフェースを地域化する作業を組み込むことができます。</p><div class="section" title="1.1. 必要な条件"><div class="titlepage"><div><div><h3 class="title"><a name="misc.console.mode.prerequisites"></a>1.1. 必要な条件</h3></div></div></div><p>このモードで OmegaT を起動するためには、有効な OmegaT プロジェクトが存在している必要があります。場所はどこであってもかまいません。起動時にコマンドライン上で指定します。</p><p>標準とは別の設定を指定したい場合は、有効な設定ファイル（<code class="literal">filters.conf</code>と<code class="literal">segmentation.conf</code>）も用意する必要があります。その場合は、次の２つのうちいずれかの方法をとってください：</p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p><span class="application">OmegaT</span>を通常通り（GUI 経由で）起動して設定しておきます。そのままコンソールモードで起動すると、同じ設定を使用します。</p></li><li class="listitem"><p><span class="application">OmegaT</span>を通常通り起動できない（GUI 環境がない）場合は、次の方法をとってください：同じ端末の他の場所、または別の端末にある OmegaT の設定ファイルを、あらかじめ決めたフォルダーにコピーしておきます。フォルダーの場所は、起動時にコマンドライン上で指定するので、どこであってもかまいません（次の項を参照してください）。設定ファイルは、<code class="literal">filters.conf</code>と<code class="literal">segmentation.conf</code>です。ユーザーのホームフォルダー（Windows の場合<code class="literal">C:\Documents and Settings\%User%\<span class="application">OmegaT</span></code>、Linux の場合<code class="literal">%user%/.omegat/</code>）にあります。</p></li></ul></div></div><div class="section" title="1.2. コンソールモードで起動する"><div class="titlepage"><div><div><h3 class="title"><a name="starting.in.misc.console.mode"></a>1.2. コンソールモードで起動する</h3></div></div></div><p>コンソールモードで OmegaT を起動する場合、いくつかの引数が必要になります。最も重要な引数は、<code class="literal">&lt;project-dir&gt;</code>です。他に任意の引数として、<code class="literal">--config-dir=&lt;config-dir&gt;</code>もあります。例：</p><p><code class="literal">$&gt; java -jar<span class="application">OmegaT</span>.jar /path/to/project \</code></p><p><code class="literal">--config-dir=/path/to/config-files/ \</code></p><p><code class="literal">--mode=console-translate \</code></p><p><code class="literal">--source-pattern={正規表現} \</code></p><p><code class="literal">--tag-validation=[block|warn]</code></p><p><span class="bold"><strong>説明：</strong></span></p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p><code class="literal">&lt;project-dir&gt;</code>プロジェクトの場所を指定します。この引数を指定すると、<span class="application">OmegaT</span>がコンソールモードで起動し、指定されたプロジェクトを翻訳します。</p></li></ul></div><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p><code class="literal">--config-dir=&lt;config-dir&gt;</code>設定ファイルの場所を指定します。このオプションが指定されない場合は、OmegaT は初期設定を使用します（ユーザーホームフォルダーの下の OmegaT フォルダーか、それが存在しない場合は現在の作業ディレクトリ）。</p></li></ul></div><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p><code class="literal">--mode=console-translate</code>この引数を指定すると、<span class="application">OmegaT</span>がコンソールモードで起動し、指定されたプロジェクトを翻訳します。</p></li><li class="listitem"><p><code class="literal">--source-pattern={正規表現}</code>翻訳したいファイルを指定します。正規表現を指定した例：<code class="filename">test\.html</code></p></li><li class="listitem"><p><code class="literal">--tag-validation=[abort|warn]</code>「abort」を指定した場合は、不正なタグを見つけた時点で、タグ検証を中止します。「warn」を指定した場合は、エラーを出力しますが、プログラムは処理を継続します。上記以外の値を指定した場合はすべて、タグ検証を行いません。</p></li></ul></div></div><div class="section" title="1.3. サイレントオプション"><div class="titlepage"><div><div><h3 class="title"><a name="misc.console.mode.option.quiet"></a>1.3. サイレントオプション</h3></div></div></div><p>コンソールモード用の追加設定として &lt;c0&gt;--quiet&lt;/c0&gt; があります。このオプションを指定すると、画面出力が極力抑えられます。通常ステータスバーに表示されるようなメッセージは、表示されなくなります。</p><p>使い方:<code class="literal">java -jar<span class="application">OmegaT</span>.jar /path/to/project --mode=console-translate --quiet</code></p></div><div class="section" title="1.4. タグ検証の設定"><div class="titlepage"><div><div><h3 class="title"><a name="misc.console.mode.option.validatetags"></a>1.4. タグ検証の設定</h3></div></div></div><p>もう１つ別の追加のコンソールモードのオプションとして、<code class="literal">--tag-validation=[abort|warn]</code>があります。このオプションを指定すると、翻訳や整列の処理時にタグ検証を行います。オプション値「<code class="literal">abort</code>」を指定した場合は、タグのエラーがあった場合はエラーを出力して処理を中止します。オプション値「<code class="literal">warn</code>」を指定した場合は、タグのエラーがあった場合はエラーを出力して処理を継続します。</p><p>使い方:<code class="literal">java -jar<span class="application">OmegaT</span>.jar /path/to/project --mode=console-translate --tag-validation=abort</code></p></div></div><div class="section" title="2. Java properties ファイルの自動整列機能"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="d0e8633"></a>2. Java properties ファイルの自動整列機能<a class="indexterm" name="d0e8636"></a></h2></div></div></div><p>OmegaT は Java の .properties ファイルをコンソールモードで整列することができます。すなわち、原文とその対訳の Properties ファイルから、対応する TMX ファイルを生成します。使い方：</p><p><code class="literal">java -jar OmegaT.jar --mode=console-align /my-project-dir --alignDir=/translatedFiles/</code></p><p><code class="filename">alignDir</code>には、プロジェクトの訳文言語に翻訳された訳文ファイルを配置しておく必要があります。たとえばプロジェクトが英→日翻訳の言語設定になっている場合、alignDir フォルダーには、ファイル名が「_ja」で終わるバンドルが存在しなければなりません。整列した TMX ファイルは、<code class="filename">align.tmx</code>という名前で<code class="literal">omegat</code>フォルダーに出力されます。</p></div><div class="section" title="3. 字体の設定"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="font.settings"></a>3. 字体の設定<a class="indexterm" name="d0e8659"></a></h2></div></div></div><p>このダイアログでは、<span class="application">OmegaT</span>の以下のウィンドウで使用される字体を変更できます：</p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>メインウィンドウ（編集ウィンドウ、参考訳文ウィンドウ、用語集ウィンドウ）</p></li></ul></div><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>検索ウィンドウ</p></li></ul></div><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>タグ検証ウィンドウ</p></li></ul></div><p>このダイアログはメインメニューの<a class="indexterm" name="d0e8683"></a><span class="guimenu">設定</span>→<span class="guimenuitem">字体...</span>を選択すると表示できます。このダイアログは以下の項目からなります：</p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p><span class="bold"><strong>字体名：</strong></span>実行環境で利用可能な字体一覧をドロップダウン表示するコンボボックスです。</p></li></ul></div><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p><span class="bold"><strong>大きさ：</strong></span>字体の大きさを変更します。</p></li></ul></div><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p><span class="bold"><strong>サンプルテキスト：</strong></span>選択した字体をその場でプレビューできる領域です。</p></li></ul></div><p><span class="bold"><strong>注意：</strong></span>状況によっては、字体設定の変更後、その反映に時間がかかることがあります。これは特に、多くの分節を含む巨大なファイルを編集ウィンドウで開いているときや、負荷の高い処理を並列実行してハードウェアが遅くなっているときに、見られます。また、特定の言語向けにデザインされた字体もあるため、字体によってはある言語との組み合わせで特に効果的に使用できる場合もあります。アルファべットや文字体系が大きく異なる言語間（たとえばロシア語と日本語のような）で翻訳をしている場合は、両方に適した字体を選ぶことが大切です。</p></div><div class="section" title="4. データを失わないために"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="preventing.data.loss"></a>4. データを失わないために<a class="indexterm" name="d0e8719"></a></h2></div></div></div><p><span class="application">OmegaT</span>は堅牢なプログラムです。しかし、他のプログラムを使用するときと同様、万が一データが消えてしまった場合の対策を考えておくべきでしょう。<span class="application">OmegaT</span>は、翻訳作業のすべての内容を翻訳メモリ（<code class="literal">omegat</code>フォルダーの<code class="literal">project_save.tmx</code>ファイル）に保存します。</p><p>また、プロジェクトを開くか再読み込みするたびに、翻訳メモリのバックアップファイル（同じく omegat フォルダーの project_save.tmx.YYYYMMDDHHNN.bak ファイル）を作成します。「YYYYMMDDHHNN」の部分は、前回保存した日付を 4 桁の年（YYYY）、月（MM）、日（DD）、時（HH）、分（NN）で表します。</p><p>翻訳データが消えた場合、以下の手順にしたがって、直近に保存されたバックアップ（デフォルトの設定であれば過去 10 分以内）からプロジェクトを復元してください:</p><div class="orderedlist"><ol class="orderedlist" type="1"><li class="listitem"><p>プロジェクトを閉じる</p></li><li class="listitem"><p>現在の<code class="filename">project_save.tmx</code>ファイルの名前を一時的に変更する（たとえば<code class="filename">project_save.tmx.temporary</code>）</p></li><li class="listitem"><p>探している内容ともっとも近い翻訳メモリのバックアップファイルを選択する</p></li><li class="listitem"><p>そのファイル名を<code class="literal">project_save.tmx</code>に変更する</p></li><li class="listitem"><p>プロジェクトを再度開く</p></li></ol></div><p>大切なデータを失わないためには：</p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>omegat フォルダーにある project_save.tmx ファイルを、CD や DVD のような外部メディアや、クラウド ストレージに、定期的にコピーをとっておきましょう。</p></li><li class="listitem"><p><span class="application">OmegaT</span>の使用に慣れるまでは、翻訳ファイルを定期的に作成し、翻訳後のファイルに最新の翻訳内容が反映されているかを、こまめに確認してください。</p></li><li class="listitem"><p>翻訳作業全体の途中で<code class="literal">source</code>にあるファイルを変更した場合は、特に注意してください。翻訳を開始した後に原文ファイルを変更すると、<span class="application">OmegaT</span>は既に翻訳した分節を見つけられなくなるかもしれません。</p></li></ul></div><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>まず、このヘルプに書かれた内容を参照して、解決を試みてください。それでも問題が解決しない場合は、<a class="ulink" href="http://tech.groups.yahoo.com/group/OmegaT/" target="_top"><span class="application">OmegaT</span>ユーザーグループ</a>に投稿してください。多言語に対応しているので、自分が一番書きやすい言語（日本語でも）で投稿してかまいません。</p></li></ul></div></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="chapter.spellchecker.html">戻る</a>&nbsp;</td><td width="20%" align="center">&nbsp;</td><td width="40%" align="right">&nbsp;<a accesskey="n" href="appendix.languages.html">次へ</a></td></tr><tr><td width="40%" align="left" valign="top">第20章 綴り確認&nbsp;</td><td width="20%" align="center"><a accesskey="h" href="index.html">ホーム</a></td><td width="40%" align="right" valign="top">&nbsp;付録A 言語設定 - ISO 639 コード一覧</td></tr></table></div></body></html>
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <title>第21章 その他の話題</title>
+      <link rel="stylesheet" type="text/css" href="OmegaT.css">
+      <meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
+      <link rel="home" href="index.html" title="OmegaT - 取扱説明書">
+      <link rel="up" href="index.html" title="OmegaT - 取扱説明書">
+      <link rel="prev" href="chapter.spellchecker.html" title="第20章 綴り確認">
+      <link rel="next" href="appendix.languages.html" title="付録A 言語設定 - ISO 639 コード一覧">
+   </head>
+   <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+      <div class="navheader">
+         <table width="100%" summary="Navigation header">
+            <tr>
+               <th colspan="3" align="center">第21章 その他の話題</th>
+            </tr>
+            <tr>
+               <td width="20%" align="left"><a accesskey="p" href="chapter.spellchecker.html">戻る</a>&nbsp;
+               </td>
+               <th width="60%" align="center">&nbsp;</th>
+               <td width="20%" align="right">&nbsp;<a accesskey="n" href="appendix.languages.html">次へ</a></td>
+            </tr>
+         </table>
+         <hr>
+      </div>
+      <div class="chapter">
+         <div class="titlepage">
+            <div>
+               <div>
+                  <h1 class="title"><a name="chapter.misc"></a>第21章 その他の話題<a class="indexterm" name="d0e8468"></a></h1>
+               </div>
+            </div>
+         </div>
+         <div class="toc">
+            <dl class="toc">
+               <dt><span class="section"><a href="chapter.misc.html#omegat.misc.console.mode">1. OmegaT コンソールモード</a></span></dt>
+               <dd>
+                  <dl>
+                     <dt><span class="section"><a href="chapter.misc.html#misc.console.mode.prerequisites">1.1. 必要な条件</a></span></dt>
+                     <dt><span class="section"><a href="chapter.misc.html#starting.in.misc.console.mode">1.2. コンソールモードで起動する</a></span></dt>
+                     <dt><span class="section"><a href="chapter.misc.html#misc.console.mode.option.quiet">1.3. サイレントオプション</a></span></dt>
+                     <dt><span class="section"><a href="chapter.misc.html#misc.console.mode.option.validatetags">1.4. タグ検証の設定</a></span></dt>
+                  </dl>
+               </dd>
+               <dt><span class="section"><a href="chapter.misc.html#d0e8633">2. Java properties ファイルの自動整列機能</a></span></dt>
+               <dt><span class="section"><a href="chapter.misc.html#font.settings">3. 字体の設定</a></span></dt>
+               <dt><span class="section"><a href="chapter.misc.html#preventing.data.loss">4. データを失わないために</a></span></dt>
+            </dl>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="omegat.misc.console.mode"></a>1. <span class="application"><a class="indexterm" name="d0e8474"></a>OmegaT</span> コンソールモード<a class="indexterm" name="d0e8481"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;">
+               <h3 class="title">注記</h3>
+               <p>興味のある上級者のユーザーのみを対象としています。</p>
+            </div>
+            <p>コンソール（コマンドラインとも）モードは、スクリプト環境で <span class="application">OmegaT</span> を翻訳ツールとして用いる場合に使用できます。コンソールモードで開始すると、どのコンソール上でも動作するように、GUI を表示しません。そして、指定されたプロジェクトを自動的に処理します。たとえば、あるプログラム用のプロジェクトで、GUI をたくさんの言語に地域化する必要があるとします。コンソールモードを使うと、そのプログラムをビルドする工程に、インターフェースを地域化する作業を組み込むことができます。
+            </p>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="misc.console.mode.prerequisites"></a>1.1. 必要な条件
+                        </h3>
+                     </div>
+                  </div>
+               </div>
+               <p>このモードで OmegaT を起動するためには、有効な OmegaT プロジェクトが存在している必要があります。場所はどこであってもかまいません。起動時にコマンドライン上で指定します。</p>
+               <p>標準とは別の設定を指定したい場合は、有効な設定ファイル（<code class="literal">filters.conf</code> と <code class="literal">segmentation.conf</code>）も用意する必要があります。その場合は、次の２つのうちいずれかの方法をとってください：
+               </p>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
+                     <li class="listitem">
+                        <p><span class="application">OmegaT</span> を通常通り（GUI 経由で）起動して設定しておきます。そのままコンソールモードで起動すると、同じ設定を使用します。
+                        </p>
+                     </li>
+                     <li class="listitem">
+                        <p><span class="application">OmegaT</span> を通常通り起動できない（GUI 環境がない）場合は、次の方法をとってください：同じ端末の他の場所、または別の端末にある OmegaT の設定ファイルを、あらかじめ決めたフォルダーにコピーしておきます。フォルダーの場所は、起動時にコマンドライン上で指定するので、どこであってもかまいません（次の項を参照してください）。設定ファイルは、<code class="literal">filters.conf</code> と <code class="literal">segmentation.conf</code> です。ユーザーのホームフォルダー（Windows の場合 <code class="literal">C:\Documents and Settings\%User%\<span class="application">OmegaT</span></code>、Linux の場合 <code class="literal">%user%/.omegat/</code>）にあります。
+                        </p>
+                     </li>
+                  </ul>
+               </div>
+            </div>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="starting.in.misc.console.mode"></a>1.2. コンソールモードで起動する
+                        </h3>
+                     </div>
+                  </div>
+               </div>
+               <p>コンソールモードで OmegaT を起動する場合、いくつかの引数が必要になります。最も重要な引数は、<code class="literal">&lt;project-dir&gt;</code> です。他に任意の引数として、<code class="literal">--config-dir=&lt;config-dir&gt;</code> もあります。例：
+               </p>
+               <p><code class="literal">$&gt; java -jar <span class="application">OmegaT</span>.jar
+                           /path/to/project \</code></p>
+               <p><code class="literal"> --config-dir=/path/to/config-files/ \</code></p>
+               <p><code class="literal"> --mode=console-translate \</code></p>
+               <p><code class="literal">--source-pattern={正規表現} \</code></p>
+               <p><code class="literal"> --tag-validation=[block|warn] </code></p>
+               <p><span class="bold"><strong>説明：</strong></span></p>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
+                     <li class="listitem">
+                        <p><code class="literal">&lt;project-dir&gt;</code> プロジェクトの場所を指定します。この引数を指定すると、<span class="application">OmegaT</span> がコンソールモードで起動し、指定されたプロジェクトを翻訳します。
+                        </p>
+                     </li>
+                  </ul>
+               </div>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
+                     <li class="listitem">
+                        <p><code class="literal">--config-dir=&lt;config-dir&gt;</code> 設定ファイルの場所を指定します。このオプションが指定されない場合は、OmegaT は初期設定を使用します（ユーザーホームフォルダーの下の OmegaT フォルダーか、それが存在しない場合は現在の作業ディレクトリ）。
+                        </p>
+                     </li>
+                  </ul>
+               </div>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
+                     <li class="listitem">
+                        <p><code class="literal">--mode=console-translate </code> この引数を指定すると、<span class="application">OmegaT</span> がコンソールモードで起動し、指定されたプロジェクトを翻訳します。
+                        </p>
+                     </li>
+                     <li class="listitem">
+                        <p><code class="literal">--source-pattern={正規表現}</code> 翻訳したいファイルを指定します。正規表現を指定した例：<code class="filename">test\.html</code></p>
+                     </li>
+                     <li class="listitem">
+                        <p><code class="literal">--tag-validation=[abort|warn]</code> 「abort」を指定した場合は、不正なタグを見つけた時点で、タグ検証を中止します。「warn」を指定した場合は、エラーを出力しますが、プログラムは処理を継続します。上記以外の値を指定した場合はすべて、タグ検証を行いません。
+                        </p>
+                     </li>
+                  </ul>
+               </div>
+            </div>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="misc.console.mode.option.quiet"></a>1.3. サイレントオプション
+                        </h3>
+                     </div>
+                  </div>
+               </div>
+               <p>コンソールモード用の追加設定として &lt;c0&gt;--quiet&lt;/c0&gt; があります。このオプションを指定すると、画面出力が極力抑えられます。通常ステータスバーに表示されるようなメッセージは、表示されなくなります。</p>
+               <p>使い方: <code class="literal">java -jar <span class="application">OmegaT</span>.jar /path/to/project --mode=console-translate --quiet</code></p>
+            </div>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="misc.console.mode.option.validatetags"></a>1.4. タグ検証の設定
+                        </h3>
+                     </div>
+                  </div>
+               </div>
+               <p>もう１つ別の追加のコンソールモードのオプションとして、<code class="literal">--tag-validation=[abort|warn]</code> があります。このオプションを指定すると、翻訳や整列の処理時にタグ検証を行います。オプション値「<code class="literal">abort</code>」を指定した場合は、タグのエラーがあった場合はエラーを出力して処理を中止します。オプション値「<code class="literal">warn</code>」を指定した場合は、タグのエラーがあった場合はエラーを出力して処理を継続します。
+               </p>
+               <p>使い方: <code class="literal">java -jar <span class="application">OmegaT</span>.jar /path/to/project --mode=console-translate --tag-validation=abort</code></p>
+            </div>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e8633"></a>2. Java properties ファイルの自動整列機能<a class="indexterm" name="d0e8636"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <p>OmegaT は Java の .properties ファイルをコンソールモードで整列することができます。すなわち、原文とその対訳の Properties ファイルから、対応する TMX ファイルを生成します。使い方：</p>
+            <p><code class="literal">java -jar OmegaT.jar --mode=console-align /my-project-dir
+                      --alignDir=/translatedFiles/ </code></p>
+            <p><code class="filename">alignDir</code> には、プロジェクトの訳文言語に翻訳された訳文ファイルを配置しておく必要があります。たとえばプロジェクトが英→日翻訳の言語設定になっている場合、alignDir フォルダーには、ファイル名が「_ja」で終わるバンドルが存在しなければなりません。整列した
+               TMX ファイルは、<code class="filename">align.tmx</code> という名前で <code class="literal">omegat</code> フォルダーに出力されます。
+            </p>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="font.settings"></a>3. 字体の設定<a class="indexterm" name="d0e8659"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <p>このダイアログでは、<span class="application">OmegaT</span> の以下のウィンドウで使用される字体を変更できます：
+            </p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>メインウィンドウ（編集ウィンドウ、参考訳文ウィンドウ、用語集ウィンドウ）</p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>検索ウィンドウ</p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>タグ検証ウィンドウ</p>
+                  </li>
+               </ul>
+            </div>
+            <p>このダイアログはメインメニューの <a class="indexterm" name="d0e8683"></a><span class="guimenu">設定</span> → <span class="guimenuitem">字体...</span> を選択すると表示できます。このダイアログは以下の項目からなります：
+            </p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p><span class="bold"><strong>字体名：</strong></span>実行環境で利用可能な字体一覧をドロップダウン表示するコンボボックスです。
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p><span class="bold"><strong>大きさ：</strong></span>字体の大きさを変更します。
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p><span class="bold"><strong>サンプルテキスト：</strong></span>選択した字体をその場でプレビューできる領域です。
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <p><span class="bold"><strong>注意：</strong></span>状況によっては、字体設定の変更後、その反映に時間がかかることがあります。これは特に、多くの分節を含む巨大なファイルを編集ウィンドウで開いているときや、負荷の高い処理を並列実行してハードウェアが遅くなっているときに、見られます。また、特定の言語向けにデザインされた字体もあるため、字体によってはある言語との組み合わせで特に効果的に使用できる場合もあります。アルファべットや文字体系が大きく異なる言語間（たとえばロシア語と日本語のような）で翻訳をしている場合は、両方に適した字体を選ぶことが大切です。
+            </p>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="preventing.data.loss"></a>4. データを失わないために<a class="indexterm" name="d0e8719"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <p><span class="application">OmegaT</span> は堅牢なプログラムです。しかし、他のプログラムを使用するときと同様、万が一データが消えてしまった場合の対策を考えておくべきでしょう。<span class="application">OmegaT</span> は、翻訳作業のすべての内容を翻訳メモリ（<code class="literal">omegat</code> フォルダーの <code class="literal">project_save.tmx</code> ファイル）に保存します。
+            </p>
+            <p>また、プロジェクトを開くか再読み込みするたびに、翻訳メモリのバックアップファイル（同じく omegat フォルダーの project_save.tmx.YYYYMMDDHHNN.bak ファイル）を作成します。「YYYYMMDDHHNN」の部分は、前回保存した日付を
+               4 桁の年（YYYY）、月（MM）、日（DD）、時（HH）、分（NN）で表します。
+            </p>
+            <p>翻訳データが消えた場合、以下の手順にしたがって、直近に保存されたバックアップ（デフォルトの設定であれば過去 10 分以内）からプロジェクトを復元してください:</p>
+            <div class="orderedlist">
+               <ol class="orderedlist" type="1">
+                  <li class="listitem">
+                     <p>プロジェクトを閉じる</p>
+                  </li>
+                  <li class="listitem">
+                     <p>現在の <code class="filename">project_save.tmx</code> ファイルの名前を一時的に変更する（たとえば <code class="filename">project_save.tmx.temporary</code>）
+                     </p>
+                  </li>
+                  <li class="listitem">
+                     <p>探している内容ともっとも近い翻訳メモリのバックアップファイルを選択する</p>
+                  </li>
+                  <li class="listitem">
+                     <p>そのファイル名を <code class="literal">project_save.tmx</code> に変更する
+                     </p>
+                  </li>
+                  <li class="listitem">
+                     <p>プロジェクトを再度開く</p>
+                  </li>
+               </ol>
+            </div>
+            <p>大切なデータを失わないためには：</p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>omegat フォルダーにある project_save.tmx ファイルを、CD や DVD のような外部メディアや、クラウド ストレージに、定期的にコピーをとっておきましょう。</p>
+                  </li>
+                  <li class="listitem">
+                     <p><span class="application">OmegaT</span> の使用に慣れるまでは、翻訳ファイルを定期的に作成し、翻訳後のファイルに最新の翻訳内容が反映されているかを、こまめに確認してください。
+                     </p>
+                  </li>
+                  <li class="listitem">
+                     <p>翻訳作業全体の途中で <code class="literal">source</code> にあるファイルを変更した場合は、特に注意してください。翻訳を開始した後に原文ファイルを変更すると、<span class="application">OmegaT</span> は既に翻訳した分節を見つけられなくなるかもしれません。
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>まず、このヘルプに書かれた内容を参照して、解決を試みてください。それでも問題が解決しない場合は、<a class="ulink" href="http://tech.groups.yahoo.com/group/OmegaT/" target="_top"><span class="application">OmegaT</span> ユーザーグループ</a>に投稿してください。多言語に対応しているので、自分が一番書きやすい言語（日本語でも）で投稿してかまいません。
+                     </p>
+                  </li>
+               </ul>
+            </div>
+         </div>
+      </div>
+      <div class="navfooter">
+         <hr>
+         <table width="100%" summary="Navigation footer">
+            <tr>
+               <td width="40%" align="left"><a accesskey="p" href="chapter.spellchecker.html">戻る</a>&nbsp;
+               </td>
+               <td width="20%" align="center">&nbsp;</td>
+               <td width="40%" align="right">&nbsp;<a accesskey="n" href="appendix.languages.html">次へ</a></td>
+            </tr>
+            <tr>
+               <td width="40%" align="left" valign="top">第20章 綴り確認&nbsp;</td>
+               <td width="20%" align="center"><a accesskey="h" href="index.html">ホーム</a></td>
+               <td width="40%" align="right" valign="top">&nbsp;付録A 言語設定 - ISO 639 コード一覧
+                    
+                    
+                    
+               </td>
+            </tr>
+         </table>
+      </div>
+   </body>
+</html>

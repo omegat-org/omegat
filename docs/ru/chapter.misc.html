@@ -3,12 +3,12 @@
       <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
    
       <title>Глава 21. Темы, не вошедшие в другие разделы</title>
-      <link rel="stylesheet" href="OmegaT.css" type="text/css">
-      <meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+      <link rel="stylesheet" type="text/css" href="OmegaT.css">
+      <meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
       <link rel="home" href="index.html" title="Руководство пользователя ОмегаТ">
       <link rel="up" href="index.html" title="Руководство пользователя ОмегаТ">
       <link rel="prev" href="chapter.spellchecker.html" title="Глава 20. Проверка орфографии">
-      <link rel="next" href="appendix.TokenizerPlugin.inOmegaT.html" title="Приложение A. Модуль «tokenizer»">
+      <link rel="next" href="appendix.languages.html" title="Приложение A. Языки - список кодов ISO 639">
    </head>
    <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
       <div class="navheader">
@@ -20,21 +20,21 @@
                <td width="20%" align="left"><a accesskey="p" href="chapter.spellchecker.html">Пред.</a>&nbsp;
                </td>
                <th width="60%" align="center">&nbsp;</th>
-               <td width="20%" align="right">&nbsp;<a accesskey="n" href="appendix.TokenizerPlugin.inOmegaT.html">След.</a></td>
+               <td width="20%" align="right">&nbsp;<a accesskey="n" href="appendix.languages.html">След.</a></td>
             </tr>
          </table>
          <hr>
       </div>
-      <div class="chapter" title="Глава 21. Темы, не вошедшие в другие разделы">
+      <div class="chapter">
          <div class="titlepage">
             <div>
                <div>
-                  <h2 class="title"><a name="chapter.misc"></a>Глава 21. Темы, не вошедшие в другие разделы<a class="indexterm" name="d0e8152"></a></h2>
+                  <h1 class="title"><a name="chapter.misc"></a>Глава 21. Темы, не вошедшие в другие разделы<a class="indexterm" name="d0e8510"></a></h1>
                </div>
             </div>
          </div>
          <div class="toc">
-            <dl>
+            <dl class="toc">
                <dt><span class="section"><a href="chapter.misc.html#omegat.misc.console.mode">1. ОмегаТ в режиме командной строки</a></span></dt>
                <dd>
                   <dl>
@@ -44,21 +44,21 @@
                      <dt><span class="section"><a href="chapter.misc.html#misc.console.mode.option.validatetags">1.4. Параметр проверки тегов</a></span></dt>
                   </dl>
                </dd>
-               <dt><span class="section"><a href="chapter.misc.html#d0e8331">2. Автоматическое выравнивание файлов Java properties</a></span></dt>
+               <dt><span class="section"><a href="chapter.misc.html#d0e8689">2. Автоматическое выравнивание файлов Java properties</a></span></dt>
                <dt><span class="section"><a href="chapter.misc.html#font.settings">3. Настройки шрифтов</a></span></dt>
                <dt><span class="section"><a href="chapter.misc.html#preventing.data.loss">4. Предотвращение потери данных</a></span></dt>
             </dl>
          </div>
-         <div class="section" title="1. ОмегаТ в режиме командной строки">
+         <div class="section">
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="omegat.misc.console.mode"></a>1. <span class="application"><a class="indexterm" name="d0e8158"></a>ОмегаТ</span> в режиме командной строки<a class="indexterm" name="d0e8165"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="omegat.misc.console.mode"></a>1. <span class="application"><a class="indexterm" name="d0e8516"></a>ОмегаТ</span> в режиме командной строки<a class="indexterm" name="d0e8523"></a></h2>
                   </div>
                </div>
             </div>
-            <div class="note" title="Замечание" style="margin-left: 0.5in; margin-right: 0.5in;">
-               <h3 class="title">Замечание</h3>
+            <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;">
+               <h3 class="title">Примечание</h3>
                <p>Этот раздел предназначен для опытных пользователей!</p>
             </div>
             <p>Режим работы <span class="application">ОмегаТ</span> в командной строке задуман для того, чтобы программу можно было использовать как средство выполнение перевода в скриптовом
@@ -67,7 +67,7 @@
                продукт, чей графический интерфейс переведён на несколько языков. В этом случае, режим командной строки можно использовать
                для автоматизированного создания переведённого интерфейса в рамках общего процесса сборки программы.
             </p>
-            <div class="section" title="1.1. Что для этого нужно">
+            <div class="section">
                <div class="titlepage">
                   <div>
                      <div>
@@ -79,10 +79,10 @@
                <p>Прежде всего нужен проект в формате ОмегаТ. Его расположение не важно, так как оно явно указывается в командной строке при
                   запуске.
                </p>
-               <p>Если нужны не стандартные настройки для работы, нужно, чтобы имелись соответствующие файлы конфигурации (<code class="literal">filters.conf</code> и <code class="literal">segmentation.conf)</code>. Этого можно достичь двумя способами:
+               <p>Если нужны не стандартные настройки для работы, нужно, чтобы имелись соответствующие файлы конфигурации (<code class="literal">filters.conf</code> и <code class="literal">segmentation.conf</code>). Этого можно достичь двумя способами:
                </p>
                <div class="itemizedlist">
-                  <ul class="itemizedlist" type="disc">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
                      <li class="listitem">
                         <p>Запустить <span class="application">ОмегаТ</span> в нормальном режиме (с графическим интерфейсом) и настроить её так, как нужно. После этого <span class="application">ОмегаТ</span> будет использовать указанные настройки и в режиме командной строки.
                         </p>
@@ -96,7 +96,7 @@
                   </ul>
                </div>
             </div>
-            <div class="section" title="1.2. Запуск ОмегаТ в режиме командной строки">
+            <div class="section">
                <div class="titlepage">
                   <div>
                      <div>
@@ -115,7 +115,7 @@
                <p><code class="literal"> --tag-validation=[block|warn] </code></p>
                <p><span class="bold"><strong>Пояснение:</strong></span></p>
                <div class="itemizedlist">
-                  <ul class="itemizedlist" type="disc">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
                      <li class="listitem">
                         <p><code class="literal">&lt;project-dir&gt;</code> указывает <span class="application">ОмегаТ</span>, где находится проект перевода. Если этот параметр задан, при запуске в режиме командной строки <span class="application">ОмегаТ</span> переводит данный проект.
                         </p>
@@ -123,7 +123,7 @@
                   </ul>
                </div>
                <div class="itemizedlist">
-                  <ul class="itemizedlist" type="disc">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
                      <li class="listitem">
                         <p><code class="literal">--config-dir=&lt;папка с файлами конфигурации&gt;</code> указывает ОмегаТ, в каком каталоге находятся файлы конфигурации. Если этот параметр не задан, ОмегаТ использует настройки
                            по умолчанию (находящиеся в каталоге OmegaT в домашнем каталоге пользователя, или, если они там не найдены&nbsp;—&nbsp;в текущем рабочем
@@ -133,7 +133,7 @@
                   </ul>
                </div>
                <div class="itemizedlist">
-                  <ul class="itemizedlist" type="disc">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
                      <li class="listitem">
                         <p><code class="literal">--mode=console-translate </code> указывает <span class="application">ОмегаТ</span> запуститься в режиме командной строки и перевести указанный проект
                         </p>
@@ -149,7 +149,7 @@
                   </ul>
                </div>
             </div>
-            <div class="section" title="1.3. Параметр «quiet»">
+            <div class="section">
                <div class="titlepage">
                   <div>
                      <div>
@@ -163,7 +163,7 @@
                </p>
                <p>Использовать параметр можно так: <code class="literal">java -jar <span class="application">OmegaT</span>.jar /путь/к/проекту --mode=console-translate --quiet</code></p>
             </div>
-            <div class="section" title="1.4. Параметр проверки тегов">
+            <div class="section">
                <div class="titlepage">
                   <div>
                      <div>
@@ -172,16 +172,16 @@
                      </div>
                   </div>
                </div>
-               <p>Для режима командной строки также предусмотрен ещё один параметр: <code class="literal">--tag-validation=[abort|warn].</code> Если он задан, перед переводом проводится проверка тегов. Если задано <code class="literal">abort</code>, ошибки будут напечатаны и программа завершит работу. Если задано <code class="literal">warn</code>, ошибки будут напечатаны, но работа будет продолжена.
+               <p>Для режима командной строки также предусмотрен ещё один параметр: <code class="literal">--tag-validation=[abort|warn]</code>. Если он задан, перед переводом проводится проверка тегов. Если задано <code class="literal">abort</code>, ошибки будут напечатаны и программа завершит работу. Если задано <code class="literal">warn</code>, ошибки будут напечатаны, но работа будет продолжена.
                </p>
                <p>Использование: <code class="literal">java -jar <span class="application">OmegaT</span>.jar /путь/к/проекту --mode=console-translate --tag-validation=abort</code></p>
             </div>
          </div>
-         <div class="section" title="2. Автоматическое выравнивание файлов Java properties">
+         <div class="section">
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="d0e8331"></a>2. Автоматическое выравнивание файлов Java properties<a class="indexterm" name="d0e8334"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="d0e8689"></a>2. Автоматическое выравнивание файлов Java properties<a class="indexterm" name="d0e8692"></a></h2>
                   </div>
                </div>
             </div>
@@ -193,18 +193,18 @@
                на французский, имя bundle-файла должно иметь окончание «_fr». Полученный TMX-файл будет размещён в каталоге <code class="literal">omegat</code> под именем <code class="filename">align.tmx</code>.
             </p>
          </div>
-         <div class="section" title="3. Настройки шрифтов">
+         <div class="section">
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="font.settings"></a>3. Настройки шрифтов<a class="indexterm" name="d0e8358"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="font.settings"></a>3. Настройки шрифтов<a class="indexterm" name="d0e8716"></a></h2>
                   </div>
                </div>
             </div>
             <p>Это диалоговое окно позволяет вам изменить шрифт, который <span class="application">ОмегаТ</span> использует в следующих окнах:
             </p>
             <div class="itemizedlist">
-               <ul class="itemizedlist" type="disc">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
                      <p>Главное окно <span class="application">ОмегаТ</span> (область редактирования, область просмотра совпадений, область глоссария)
                      </p>
@@ -212,23 +212,23 @@
                </ul>
             </div>
             <div class="itemizedlist">
-               <ul class="itemizedlist" type="disc">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
                      <p>Окно поиска</p>
                   </li>
                </ul>
             </div>
             <div class="itemizedlist">
-               <ul class="itemizedlist" type="disc">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
                      <p>Окно проверки тегов</p>
                   </li>
                </ul>
             </div>
-            <p>Это диалоговое окно можно вызвать, выбрав пункт меню <a class="indexterm" name="d0e8385"></a><span class="guimenu">«Параметры</span> → <span class="guimenuitem">Шрифт...»</span> Это диалоговое окно содержит:
+            <p>Это диалоговое окно можно вызвать, выбрав пункт меню <a class="indexterm" name="d0e8743"></a><span class="guimenu">«Параметры</span> → <span class="guimenuitem">Шрифт...»</span> Это диалоговое окно содержит:
             </p>
             <div class="itemizedlist">
-               <ul class="itemizedlist" type="disc">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
                      <p><span class="bold"><strong>Шрифт:</strong></span> меню выбора шрифтов, доступных на вашем компьютере;
                      </p>
@@ -236,7 +236,7 @@
                </ul>
             </div>
             <div class="itemizedlist">
-               <ul class="itemizedlist" type="disc">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
                      <p><span class="bold"><strong>Размер:</strong></span> поле для изменения размера шрифта;
                      </p>
@@ -244,7 +244,7 @@
                </ul>
             </div>
             <div class="itemizedlist">
-               <ul class="itemizedlist" type="disc">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
                      <p><span class="bold"><strong>Образец текста:</strong></span> область предварительного просмотра выбранного шрифта.
                      </p>
@@ -257,15 +257,15 @@
                алфавитом/системой письма (например, с русского на японский), нужно выбрать шрифт, поддерживающий оба языка.
             </p>
          </div>
-         <div class="section" title="4. Предотвращение потери данных">
+         <div class="section">
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="preventing.data.loss"></a>4. Предотвращение потери данных<a class="indexterm" name="d0e8421"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="preventing.data.loss"></a>4. Предотвращение потери данных<a class="indexterm" name="d0e8779"></a></h2>
                   </div>
                </div>
             </div>
-            <p><span class="application">ОмегаТ</span>&nbsp;— довольно стабильное приложение. Тем не менее, как и при использовании любой другой программы, во время работы с <span class="application">ОмегаТ</span> необходимо заботиться о сохранности ваших данных. Когда вы переводите свои файлы, <span class="application">ОмегаТ</span> сохраняет наработки в памяти переводов <code class="literal">project_save.tmx</code>, которая находится в папке <code class="literal">/omegat </code> вашего проекта.
+            <p><span class="application">ОмегаТ</span>&nbsp;— довольно стабильное приложение. Тем не менее, как и при использовании любой другой программы, во время работы с <span class="application">ОмегаТ</span> необходимо заботиться о сохранности ваших данных. Когда вы переводите свои файлы, <span class="application">ОмегаТ</span> сохраняет наработки в памяти переводов <code class="literal">project_save.tmx</code>, которая находится в папке <code class="literal">/omegat</code> вашего проекта.
             </p>
             <p>Кроме того, ОмегаТ сохраняет резервные копии памяти переводов в файлах «project_save.tmx.ГГГММДДЧЧНН.bak» в той же папке при
                каждом открытии или перезагрузке проекта. «ГГГГ» это год (4 цифры), «ММ»&nbsp;— это месяц, «ДД»&nbsp;— число, «ЧЧ» и «НН»&nbsp;— это часы
@@ -296,7 +296,7 @@
             </div>
             <p>Чтобы предотвратить потерю важных данных:</p>
             <div class="itemizedlist">
-               <ul class="itemizedlist" type="disc">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
                      <p>Регулярно делайте копии файла «/omegat/project_save.tmx» на резервные носители, например, CD или DVD.</p>
                   </li>
@@ -311,7 +311,7 @@
                </ul>
             </div>
             <div class="itemizedlist">
-               <ul class="itemizedlist" type="disc">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
                      <p>Чтобы побыстрее освоиться, почаще обращайтесь к этому руководству. Если возникнут проблемы, напишите в <a class="ulink" href="http://tech.groups.yahoo.com/group/Omegat/" target="_top">список рассылки пользователей <span class="application">ОмегаТ</span></a>. Пишите на том языке, на котором изъясняетесь лучше всего.
                      </p>
@@ -327,12 +327,16 @@
                <td width="40%" align="left"><a accesskey="p" href="chapter.spellchecker.html">Пред.</a>&nbsp;
                </td>
                <td width="20%" align="center">&nbsp;</td>
-               <td width="40%" align="right">&nbsp;<a accesskey="n" href="appendix.TokenizerPlugin.inOmegaT.html">След.</a></td>
+               <td width="40%" align="right">&nbsp;<a accesskey="n" href="appendix.languages.html">След.</a></td>
             </tr>
             <tr>
                <td width="40%" align="left" valign="top">Глава 20. Проверка орфографии&nbsp;</td>
                <td width="20%" align="center"><a accesskey="h" href="index.html">Начало</a></td>
-               <td width="40%" align="right" valign="top">&nbsp;Приложение A. Модуль «tokenizer»</td>
+               <td width="40%" align="right" valign="top">&nbsp;Приложение A. Языки - список кодов ISO 639
+                    
+                    
+                    
+               </td>
             </tr>
          </table>
       </div>

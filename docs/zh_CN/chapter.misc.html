@@ -3,8 +3,8 @@
       <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
    
       <title>第&nbsp;22&nbsp;章&nbsp;杂项主题</title>
-      <link rel="stylesheet" href="OmegaT.css" type="text/css">
-      <meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+      <link rel="stylesheet" type="text/css" href="OmegaT.css">
+      <meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
       <link rel="home" href="index.html" title="OmegaT - 用户向导">
       <link rel="up" href="index.html" title="OmegaT - 用户向导">
       <link rel="prev" href="chapter.spellchecker.html" title="第&nbsp;21&nbsp;章&nbsp;拼写检查">
@@ -25,16 +25,16 @@
          </table>
          <hr>
       </div>
-      <div class="chapter" title="第&nbsp;22&nbsp;章&nbsp;杂项主题">
+      <div class="chapter">
          <div class="titlepage">
             <div>
                <div>
-                  <h2 class="title"><a name="chapter.misc"></a>第&nbsp;22&nbsp;章&nbsp;杂项主题<a class="indexterm" name="d0e9044"></a></h2>
+                  <h1 class="title"><a name="chapter.misc"></a>第&nbsp;22&nbsp;章&nbsp;杂项主题<a class="indexterm" name="d0e9044"></a></h1>
                </div>
             </div>
          </div>
          <div class="toc">
-            <dl>
+            <dl class="toc">
                <dt><span class="section"><a href="chapter.misc.html#omegat.misc.console.mode">1. OmegaT 控制台模式</a></span></dt>
                <dd>
                   <dl>
@@ -49,7 +49,7 @@
                <dt><span class="section"><a href="chapter.misc.html#preventing.data.loss">4. 防止数据丢失</a></span></dt>
             </dl>
          </div>
-         <div class="section" title="1.&nbsp;OmegaT 控制台模式">
+         <div class="section">
             <div class="titlepage">
                <div>
                   <div>
@@ -57,13 +57,13 @@
                   </div>
                </div>
             </div>
-            <div class="note" title="注意" style="margin-left: 0.5in; margin-right: 0.5in;">
+            <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;">
                <h3 class="title">注意</h3>
                <p>这些内容为感兴趣的高级用户准备的！</p>
             </div>
             <p>控制台（即命令行）模式的目的是将 <span class="application">of OmegaT</span> 用作脚本环境的翻译工具。在控制台模式下，将不会载入任何图形化界面（因此仅在某控制台中运行），同时会自动按要求翻译指定的项目。这样的一个例子是需要把图形用户界面本地化为多种语言的软件项目。使用控制台模式就可以在它的构建过程中生成本地化界面。
             </p>
-            <div class="section" title="1.1.&nbsp;先决条件">
+            <div class="section">
                <div class="titlepage">
                   <div>
                      <div>
@@ -76,7 +76,7 @@
                <p>如果不使用标准设置，必须提供相应的配置文件（<code class="literal">filters.conf</code> 和 <code class="literal">segmentation.conf)</code>）。可通过两种方式达到这个目的：
                </p>
                <div class="itemizedlist">
-                  <ul class="itemizedlist" type="disc">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
                      <li class="listitem">
                         <p>正常运行 <span class="application">OmegaT</span> （带图像用户界面）并进行设置。如果以控制台模式启动 <span class="application">OmegaT</span>，它将使用您配置的设置。
                         </p>
@@ -88,7 +88,7 @@
                   </ul>
                </div>
             </div>
-            <div class="section" title="1.2.&nbsp;以控制台模式运行 OmegaT">
+            <div class="section">
                <div class="titlepage">
                   <div>
                      <div>
@@ -106,7 +106,7 @@
                <p><code class="literal"> --source-pattern={regexp}</code></p>
                <p><span class="bold"><strong>说明：</strong></span></p>
                <div class="itemizedlist">
-                  <ul class="itemizedlist" type="disc">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
                      <li class="listitem">
                         <p><code class="literal">&lt;project-dir&gt;</code> 告知 <span class="application">OmegaT</span> 要翻译项目的位置。如果给出了该参数，则 <span class="application">OmegaT</span> 以控制台模式启动并翻译指定的项目。
                         </p>
@@ -114,7 +114,7 @@
                   </ul>
                </div>
                <div class="itemizedlist">
-                  <ul class="itemizedlist" type="disc">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
                      <li class="listitem">
                         <p><code class="literal">--config-dir=&lt;config-dir&gt;</code> 向 OmegaT 指示配置文件所在的目录。如果不给定该参数，OmegaT 将转而使用缺省值（即用户主目录中的 OmegaT 目录，如果不可用的话则是当前的工作目录）。
                         </p>
@@ -122,7 +122,7 @@
                   </ul>
                </div>
                <div class="itemizedlist">
-                  <ul class="itemizedlist" type="disc">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
                      <li class="listitem">
                         <p><code class="literal">--mode=console-translate </code> <span class="application">OmegaT</span> 以控制台模式运行并翻译指定的项目。
                         </p>
@@ -133,7 +133,7 @@
                   </ul>
                </div>
             </div>
-            <div class="section" title="1.3.&nbsp;静默选项">
+            <div class="section">
                <div class="titlepage">
                   <div>
                      <div>
@@ -146,7 +146,7 @@
                </p>
                <p>用法：<code class="literal">java -jar <span class="application">OmegaT</span>.jar /path/to/project --mode=console-translate --quiet</code></p>
             </div>
-            <div class="section" title="1.4.&nbsp;标记验证选项">
+            <div class="section">
                <div class="titlepage">
                   <div>
                      <div>
@@ -160,7 +160,7 @@
                <p>用法：<code class="literal">java -jar <span class="application">OmegaT</span>.jar /path/to/project --mode=console-translate --tag-validation=abort</code></p>
             </div>
          </div>
-         <div class="section" title="2.&nbsp;自动 Java 属性对齐器">
+         <div class="section">
             <div class="titlepage">
                <div>
                   <div>
@@ -174,7 +174,7 @@
             <p><code class="filename">alignDir </code> 必须包含项目目标语言的翻译。例如，如果项目为 EN-&gt;FR，则 alignDir 必须包含以 _fr 结尾的包。生成的 TMX 保存在 <code class="literal">omegat</code> 目录，名称为 <code class="filename">align.tmx</code>。
             </p>
          </div>
-         <div class="section" title="3.&nbsp;字体设置">
+         <div class="section">
             <div class="titlepage">
                <div>
                   <div>
@@ -185,7 +185,7 @@
             <p>在该对话框中可以修改下列 <span class="application">OmegaT</span> 窗口所使用的字体：
             </p>
             <div class="itemizedlist">
-               <ul class="itemizedlist" type="disc">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
                      <p><span class="application">OmegaT</span> 主窗口 (编辑器、匹配查看器、词汇表查看器）
                      </p>
@@ -193,14 +193,14 @@
                </ul>
             </div>
             <div class="itemizedlist">
-               <ul class="itemizedlist" type="disc">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
                      <p>搜索窗口</p>
                   </li>
                </ul>
             </div>
             <div class="itemizedlist">
-               <ul class="itemizedlist" type="disc">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
                      <p>标签验证窗口</p>
                   </li>
@@ -209,7 +209,7 @@
             <p>通过主菜单中的<a class="indexterm" name="d0e9267"></a><span class="guimenu">选项</span> → <span class="guimenuitem">字体……</span>菜单项可以调出该对话框。该对话框包括：
             </p>
             <div class="itemizedlist">
-               <ul class="itemizedlist" type="disc">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
                      <p><span class="bold"><strong>字体：</strong></span>用于在计算机上选择可用字体的下拉菜单。
                      </p>
@@ -217,7 +217,7 @@
                </ul>
             </div>
             <div class="itemizedlist">
-               <ul class="itemizedlist" type="disc">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
                      <p><span class="bold"><strong>大小：</strong></span>改变字体大小。
                      </p>
@@ -225,7 +225,7 @@
                </ul>
             </div>
             <div class="itemizedlist">
-               <ul class="itemizedlist" type="disc">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
                      <p><span class="bold"><strong>示例文本：</strong></span>即时预览所选择的字体的区域。
                      </p>
@@ -235,7 +235,7 @@
             <p><span class="bold"><strong>注意：</strong></span>在某些情况下，修改字体设置后 OmegaT 可能需要一些时间来更新显示。特别是在编辑器中打开了一份拥有大量片段的大文件或使用慢速硬件的时候。同时，就某些语言而言，某些字体比另一些的表现更佳。特别是当您在不同的语系/书写系统间进行翻译（例如俄语和日语），请选择一种适用于两者的字体。
             </p>
          </div>
-         <div class="section" title="4.&nbsp;防止数据丢失">
+         <div class="section">
             <div class="titlepage">
                <div>
                   <div>
@@ -269,7 +269,7 @@
             </div>
             <p>为避免丢失重要数据：</p>
             <div class="itemizedlist">
-               <ul class="itemizedlist" type="disc">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
                      <p>必须定期备份 /omegat/project_save.tmx，例如复制到 CD 或 DVD。</p>
                   </li>
@@ -284,7 +284,7 @@
                </ul>
             </div>
             <div class="itemizedlist">
-               <ul class="itemizedlist" type="disc">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
                      <p>通过这些帮助来开始使用。如果运行遇到问题，请在<a class="ulink" href="http://tech.groups.yahoo.com/group/Omegat/" target="_top"><span class="application">OmegaT</span> 用户组</a>发帖。请使用自我感觉最熟悉的语言发帖。
                      </p>

@@ -1,1 +1,160 @@
-<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>第17章 辞書</title><link rel="stylesheet" href="OmegaT.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.75.2"><link rel="home" href="index.html" title="OmegaT - 取扱説明書"><link rel="up" href="index.html" title="OmegaT - 取扱説明書"><link rel="prev" href="chapter.regexp.html" title="第16章 正規表現"><link rel="next" href="chapter.glossaries.html" title="第18章 用語集 (Glossaries)"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">第17章 辞書</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="chapter.regexp.html">戻る</a>&nbsp;</td><th width="60%" align="center">&nbsp;</th><td width="20%" align="right">&nbsp;<a accesskey="n" href="chapter.glossaries.html">次へ</a></td></tr></table><hr></div><div class="chapter" title="第17章 辞書"><div class="titlepage"><div><div><h2 class="title"><a name="chapter.dictionaries"></a>第17章<a class="indexterm" name="d0e7779"></a>辞書</h2></div></div></div><div class="toc"><dl><dt><span class="section"><a href="chapter.dictionaries.html#d0e7784">1. 辞書のダウンロードとインストール方法</a></span></dt><dt><span class="section"><a href="chapter.dictionaries.html#d0e7887">2. 辞書に関するトラブルシューティング</a></span></dt></dl></div><p></p><div class="section" title="1. 辞書のダウンロードとインストール方法"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="d0e7784"></a>1. 辞書のダウンロードとインストール方法<a class="indexterm" name="d0e7787"></a></h2></div></div></div><p><span class="application">OmegaT</span>は、StarDict 形式および Lingvo DSL 形式の辞書に対応しています。StarDict 形式の辞書は、次の手順でインストールしてください：</p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>必要な言語の組み合わせの辞書を探します。辞書を提供している場所には、たとえば<a class="ulink" href="http://stardict.sourceforge.net/index.php" target="_top"><a class="indexterm" name="d0e7801"></a>StarDict プラットフォーム</a>があります。</p></li></ul></div><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>辞書ファイルをダウンロードします。これは<code class="filename">TAR アーカイブ</code>（拡張子<span class="emphasis"><em>tar.bz</em></span>または<span class="emphasis"><em>tar.bz2</em></span>）である必要があります。</p></li></ul></div><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>untar コマンド（Windows であれば、たとえば<code class="filename">WinRAR</code>などのユーティリティ）で、そのファイルを展開します。展開先は、プロジェクトフォルダー配下の「dictionary」フォルダーの中です。展開すると、拡張子が<span class="emphasis"><em>dz</em></span>、<span class="emphasis"><em>idx</em></span>、<span class="emphasis"><em>ifo</em></span>の３つのファイルができるはずです。</p></li></ul></div><p>利用できるのは、対訳形式の辞書に限りません。この辞書機能を使って、多種多様な情報を参照できます。たとえば：</p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p><a class="indexterm" name="d0e7842"></a>Webster's Revised Unabridged Dictionary (1913)</p></li></ul></div><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p><a class="indexterm" name="d0e7851"></a>Longman Dictionary of Contemporary English</p></li></ul></div><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p><a class="indexterm" name="d0e7860"></a>The Britannica Concise Encyclopedia</p></li></ul></div><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>…などです。</p></li></ul></div><p>辞書の中には文書が何も付属していないものがありますが、これは自由に使用できます。一方、上記に挙げたような辞書は GPL ライセンスに従います。以下は、Merriam Webster 10th dictionary を実際に参照している様子です：</p><div class="figure"><a name="Dict.Merriam.Webster"></a><p class="title"><b>図17.1<a class="indexterm" name="d0e7874"></a>Merriam Webster 10th dictionary - 使用中の様子</b></p><div class="figure-contents"><div class="mediaobject"><img src="images/DictMerriamWebster.png" alt="辞書Merriam Webster辞書Merriam Webster 10th dictionary - 使用中の様子"></div></div></div><br class="figure-break"></div><div class="section" title="2. 辞書に関するトラブルシューティング"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="d0e7887"></a>2.<a class="indexterm" name="d0e7889"></a>辞書に関するトラブルシューティング</h2></div></div></div><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>プロジェクト設定で指定したフォルダー（もしくはそのサブフォルダー）中に、辞書ファイルが存在しますか？メニュー<span class="guimenu">［プロジェクト］</span>→<span class="guimenuitem">［プロジェクト設定...］</span>(<span class="shortcut"><strong><span class="keycap"><strong><a class="indexterm" name="d0e7903"></a>Ctrl</strong></span>+<span class="keycap"><strong>E</strong></span></strong></span>)で、辞書フォルダーの場所を確認できます。</p></li></ul></div><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>そのフォルダーには同じ名前のファイルが３つ（拡張子違いで）存在していますか？　もし１つしか見当たらなければ、拡張子を確認してみましょう。<span class="emphasis"><em>tar.bz</em></span>か<span class="emphasis"><em>tar.bz2</em></span>だったら、圧縮ファイルを展開し忘れています。</p></li></ul></div></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="chapter.regexp.html">戻る</a>&nbsp;</td><td width="20%" align="center">&nbsp;</td><td width="40%" align="right">&nbsp;<a accesskey="n" href="chapter.glossaries.html">次へ</a></td></tr><tr><td width="40%" align="left" valign="top">第16章 正規表現&nbsp;</td><td width="20%" align="center"><a accesskey="h" href="index.html">ホーム</a></td><td width="40%" align="right" valign="top">&nbsp;第18章 用語集 (Glossaries)</td></tr></table></div></body></html>
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <title>第17章 辞書</title>
+      <link rel="stylesheet" type="text/css" href="OmegaT.css">
+      <meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
+      <link rel="home" href="index.html" title="OmegaT - 取扱説明書">
+      <link rel="up" href="index.html" title="OmegaT - 取扱説明書">
+      <link rel="prev" href="chapter.regexp.html" title="第16章 正規表現">
+      <link rel="next" href="chapter.glossaries.html" title="第18章 用語集 (Glossaries)">
+   </head>
+   <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+      <div class="navheader">
+         <table width="100%" summary="Navigation header">
+            <tr>
+               <th colspan="3" align="center">第17章 辞書</th>
+            </tr>
+            <tr>
+               <td width="20%" align="left"><a accesskey="p" href="chapter.regexp.html">戻る</a>&nbsp;
+               </td>
+               <th width="60%" align="center">&nbsp;</th>
+               <td width="20%" align="right">&nbsp;<a accesskey="n" href="chapter.glossaries.html">次へ</a></td>
+            </tr>
+         </table>
+         <hr>
+      </div>
+      <div class="chapter">
+         <div class="titlepage">
+            <div>
+               <div>
+                  <h1 class="title"><a name="chapter.dictionaries"></a>第17章 <a class="indexterm" name="d0e7779"></a>辞書
+                  </h1>
+               </div>
+            </div>
+         </div>
+         <div class="toc">
+            <dl class="toc">
+               <dt><span class="section"><a href="chapter.dictionaries.html#d0e7784">1. 辞書のダウンロードとインストール方法</a></span></dt>
+               <dt><span class="section"><a href="chapter.dictionaries.html#d0e7887">2. 辞書に関するトラブルシューティング</a></span></dt>
+            </dl>
+         </div>
+         <p></p>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e7784"></a>1. 辞書のダウンロードとインストール方法<a class="indexterm" name="d0e7787"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <p><span class="application">OmegaT</span> は、StarDict 形式および Lingvo DSL 形式の辞書に対応しています。StarDict 形式の辞書は、次の手順でインストールしてください：
+            </p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>必要な言語の組み合わせの辞書を探します。辞書を提供している場所には、たとえば <a class="ulink" href="http://stardict.sourceforge.net/index.php" target="_top">StarDict プラットフォーム</a>があります。
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>辞書ファイルをダウンロードします。これは <code class="filename">TAR アーカイブ</code>（拡張子 <span class="emphasis"><em>tar.bz</em></span> または <span class="emphasis"><em>tar.bz2</em></span>）である必要があります。
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>untar コマンド（Windows であれば、たとえば <code class="filename">WinRAR</code> などのユーティリティ）で、そのファイルを展開します。展開先は、プロジェクトフォルダー配下の「dictionary」フォルダーの中です。展開すると、拡張子が <span class="emphasis"><em>dz</em></span>、<span class="emphasis"><em>idx </em></span>、<span class="emphasis"><em>ifo</em></span> の３つのファイルができるはずです。
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <p>利用できるのは、対訳形式の辞書に限りません。この辞書機能を使って、多種多様な情報を参照できます。たとえば：</p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p><a class="indexterm" name="d0e7842"></a>Webster's Revised Unabridged Dictionary (1913)
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p><a class="indexterm" name="d0e7851"></a>Longman Dictionary of Contemporary English
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p><a class="indexterm" name="d0e7860"></a>The Britannica Concise Encyclopedia
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>…などです。</p>
+                  </li>
+               </ul>
+            </div>
+            <p>辞書の中には文書が何も付属していないものがありますが、これは自由に使用できます。一方、上記に挙げたような辞書は GPL ライセンスに従います。以下は、Merriam Webster 10th dictionary を実際に参照している様子です：</p>
+            <div class="figure"><a name="Dict.Merriam.Webster"></a><p class="title"><b>図17.1 <a class="indexterm" name="d0e7874"></a>Merriam Webster 10th dictionary - 使用中の様子</b></p>
+               <div class="figure-contents">
+                  <div class="mediaobject"><img src="images/DictMerriamWebster.png" alt="Merriam Webster 10th dictionary - 使用中の様子"></div>
+               </div>
+            </div><br class="figure-break"></div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e7887"></a>2. <a class="indexterm" name="d0e7889"></a>辞書に関するトラブルシューティング
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>プロジェクト設定で指定したフォルダー（もしくはそのサブフォルダー）中に、辞書ファイルが存在しますか？メニュー<span class="guimenu">［プロジェクト］</span> → <span class="guimenuitem">［プロジェクト設定...］</span> (<span class="shortcut"><strong><span class="keycap"><strong><a class="indexterm" name="d0e7903"></a>Ctrl</strong></span>+<span class="keycap"><strong>E</strong></span></strong></span>)で、辞書フォルダーの場所を確認できます。
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>そのフォルダーには同じ名前のファイルが３つ（拡張子違いで）存在していますか？　もし１つしか見当たらなければ、拡張子を確認してみましょう。<span class="emphasis"><em>tar.bz</em></span> か <span class="emphasis"><em>tar.bz2</em></span>だったら、圧縮ファイルを展開し忘れています。
+                     </p>
+                  </li>
+               </ul>
+            </div>
+         </div>
+      </div>
+      <div class="navfooter">
+         <hr>
+         <table width="100%" summary="Navigation footer">
+            <tr>
+               <td width="40%" align="left"><a accesskey="p" href="chapter.regexp.html">戻る</a>&nbsp;
+               </td>
+               <td width="20%" align="center">&nbsp;</td>
+               <td width="40%" align="right">&nbsp;<a accesskey="n" href="chapter.glossaries.html">次へ</a></td>
+            </tr>
+            <tr>
+               <td width="40%" align="left" valign="top">第16章 正規表現&nbsp;</td>
+               <td width="20%" align="center"><a accesskey="h" href="index.html">ホーム</a></td>
+               <td width="40%" align="right" valign="top">&nbsp;第18章 用語集 (Glossaries)</td>
+            </tr>
+         </table>
+      </div>
+   </body>
+</html>

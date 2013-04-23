@@ -3,8 +3,8 @@
       <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
    
       <title>第&nbsp;20&nbsp;章&nbsp;机器翻译</title>
-      <link rel="stylesheet" href="OmegaT.css" type="text/css">
-      <meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+      <link rel="stylesheet" type="text/css" href="OmegaT.css">
+      <meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
       <link rel="home" href="index.html" title="OmegaT - 用户向导">
       <link rel="up" href="index.html" title="OmegaT - 用户向导">
       <link rel="prev" href="chapter.glossaries.html" title="第&nbsp;19&nbsp;章&nbsp;词汇表">
@@ -25,16 +25,16 @@
          </table>
          <hr>
       </div>
-      <div class="chapter" title="第&nbsp;20&nbsp;章&nbsp;机器翻译">
+      <div class="chapter">
          <div class="titlepage">
             <div>
                <div>
-                  <h2 class="title"><a name="chapter.machine.translate"></a>第&nbsp;20&nbsp;章&nbsp;机器翻译<a class="indexterm" name="d0e8727"></a></h2>
+                  <h1 class="title"><a name="chapter.machine.translate"></a>第&nbsp;20&nbsp;章&nbsp;机器翻译<a class="indexterm" name="d0e8727"></a></h1>
                </div>
             </div>
          </div>
          <div class="toc">
-            <dl>
+            <dl class="toc">
                <dt><span class="section"><a href="chapter.machine.translate.html#d0e8730">1. 介绍</a></span></dt>
                <dt><span class="section"><a href="chapter.machine.translate.html#introduction">2. 谷歌翻译</a></span></dt>
                <dt><span class="section"><a href="chapter.machine.translate.html#d0e8771">3. <span class="application">OmegaT</span> 用户和谷歌翻译</a></span></dt>
@@ -43,7 +43,7 @@
                <dt><span class="section"><a href="chapter.machine.translate.html#Google.Translate.troubleshooting">6. 机器翻译 - 故障排除</a></span></dt>
             </dl>
          </div>
-         <div class="section" title="1.&nbsp;介绍">
+         <div class="section">
             <div class="titlepage">
                <div>
                   <div>
@@ -56,7 +56,7 @@
             <p>要激活某种机器翻译服务，请前往<span class="guimenuitem">选项&gt;机器翻译……</span>，然后激活需要的服务。需要注意的是它们都是基于网络：您必须在线才能使用它们。
             </p>
          </div>
-         <div class="section" title="2.&nbsp;谷歌翻译">
+         <div class="section">
             <div class="titlepage">
                <div>
                   <div>
@@ -70,7 +70,7 @@
             </p>
             <p>谷歌翻译的质量当然一方面取决于目标语言文本和双语版本的可用性，另一方面取决于所创建模型的质量。有一点可以肯定，在某些情况下，其质量肯定不够好，但它肯定会不断提高，而不是变差。</p>
          </div>
-         <div class="section" title="3.&nbsp;OmegaT 用户和谷歌翻译">
+         <div class="section">
             <div class="titlepage">
                <div>
                   <div>
@@ -93,7 +93,7 @@
             </p>
             <p>注意，除了源片段外不会将其他任何内容发送至机器翻译服务。谷歌翻译的在线版本允许用户纠正翻译建议和发送正确的片段。然而此功能在 OmegaT 中尚未实现。</p>
          </div>
-         <div class="section" title="4.&nbsp;Belazar">
+         <div class="section">
             <div class="titlepage">
                <div>
                   <div>
@@ -104,7 +104,7 @@
             <p><a class="ulink" href="http://belsoft.tut.by/belazar/" target="_top">Belazar</a> 是用于俄罗斯－白俄罗斯语言对的机器语言翻译工具。
             </p>
          </div>
-         <div class="section" title="5.&nbsp;Apertium">
+         <div class="section">
             <div class="titlepage">
                <div>
                   <div>
@@ -116,7 +116,7 @@
             </p>
             <p>该平台提供</p>
             <div class="itemizedlist">
-               <ul class="itemizedlist" type="disc">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
                      <p>语言独立的机器翻译引擎</p>
                   </li>
@@ -126,7 +126,7 @@
                </ul>
             </div>
             <div class="itemizedlist">
-               <ul class="itemizedlist" type="disc">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
                      <p>用于不断增长的语言对数目的语言学数据</p>
                   </li>
@@ -135,7 +135,7 @@
             <p>Apertium 使用浅层传播机器翻译引擎（shallow-transfer machine translation engine ）来处理输入的文本，就像汇编行：去除格式，形态分析，语音消歧，浅层结构传播，词汇传播，形态生成以及重新格式化。</p>
             <p>使用 Apertium 为各种语言对构建机器翻译系统是可行的，在底端，Apertium 使用基于 XML 的简单标准格式对需要的语言学数据（通过手工或转换现有数据）进行编码，并使用提供的工具被编译为引擎可用的高级格式。</p>
          </div>
-         <div class="section" title="6.&nbsp;机器翻译 - 故障排除">
+         <div class="section">
             <div class="titlepage">
                <div>
                   <div>
@@ -145,14 +145,14 @@
             </div>
             <p>如果在机器翻译窗格中没有出现任何东西，检查下列内容：</p>
             <div class="itemizedlist">
-               <ul class="itemizedlist" type="disc">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
                      <p>是否在线？必须处于在线状态才能使用机器翻译。</p>
                   </li>
                </ul>
             </div>
             <div class="itemizedlist">
-               <ul class="itemizedlist" type="disc">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
                      <p>进行翻译的语言对是什么？检查选择的服务是否支持。</p>
                   </li>

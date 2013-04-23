@@ -2,22 +2,22 @@
    <head>
       <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
    
-      <title>Приложение G. Настройка сочетаний клавиш</title>
-      <link rel="stylesheet" href="OmegaT.css" type="text/css">
-      <meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+      <title>Приложение H. Настройка сочетаний клавиш</title>
+      <link rel="stylesheet" type="text/css" href="OmegaT.css">
+      <meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
       <link rel="home" href="index.html" title="Руководство пользователя ОмегаТ">
       <link rel="up" href="index.html" title="Руководство пользователя ОмегаТ">
-      <link rel="prev" href="appendix.keyboard.html" title="Приложение F. Сочетания клавиш для редактирования текста">
-      <link rel="next" href="appendix.legal.notices.html" title="Приложение H. Авторские права">
+      <link rel="prev" href="appendix.website.html" title="Приложение G. ОмегаТ в Интернете">
+      <link rel="next" href="appendix.legal.notices.html" title="Приложение I. Авторские права">
    </head>
    <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
       <div class="navheader">
          <table width="100%" summary="Navigation header">
             <tr>
-               <th colspan="3" align="center">Приложение G. Настройка сочетаний клавиш</th>
+               <th colspan="3" align="center">Приложение H. Настройка сочетаний клавиш</th>
             </tr>
             <tr>
-               <td width="20%" align="left"><a accesskey="p" href="appendix.keyboard.html">Пред.</a>&nbsp;
+               <td width="20%" align="left"><a accesskey="p" href="appendix.website.html">Пред.</a>&nbsp;
                </td>
                <th width="60%" align="center">&nbsp;</th>
                <td width="20%" align="right">&nbsp;<a accesskey="n" href="appendix.legal.notices.html">След.</a></td>
@@ -25,17 +25,17 @@
          </table>
          <hr>
       </div>
-      <div class="appendix" title="Приложение G. Настройка сочетаний клавиш">
+      <div class="appendix">
          <div class="titlepage">
             <div>
                <div>
-                  <h2 class="title"><a name="appendix.shortcut.custom"></a>Приложение G. Настройка сочетаний клавиш
-                  </h2>
+                  <h1 class="title"><a name="appendix.shortcut.custom"></a>Приложение H. Настройка сочетаний клавиш
+                  </h1>
                </div>
             </div>
          </div>
          <div class="toc">
-            <dl>
+            <dl class="toc">
                <dt><span class="section"><a href="appendix.shortcut.custom.html#ch04.shortcuts.customization">1. Настройка сочетаний клавиш</a></span></dt>
                <dt><span class="section"><a href="appendix.shortcut.custom.html#ch04.shortcuts.ProjectMenu">2. Меню «Проект»</a></span></dt>
                <dt><span class="section"><a href="appendix.shortcut.custom.html#ch04.shortcuts.EditMenu">3. Меню «Правка»</a></span></dt>
@@ -46,47 +46,47 @@
                <dt><span class="section"><a href="appendix.shortcut.custom.html#ch04.shortcuts.HelpMenu">8. Меню «Справка»</a></span></dt>
             </dl>
          </div>
-         <div class="section" title="1. Настройка сочетаний клавиш">
+         <div class="section">
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="ch04.shortcuts.customization"></a>1. <a class="indexterm" name="d0e10432"></a>Настройка сочетаний клавиш
+                     <h2 class="title" style="clear: both"><a name="ch04.shortcuts.customization"></a>1. <a class="indexterm" name="d0e11083"></a>Настройка сочетаний клавиш
                      </h2>
                   </div>
                </div>
             </div>
             <p>Для большинства элементов главного меню можно настроить сочетание клавиш. По умолчанию, сочетания клавиш присвоены только
                наиболее используемым пунктам меню. Вы можете изменить сочетания клавиш по умолчанию и добавить новые, поместив в каталог
-               настроек ОмегаТ файл с соответствующими определениями (см. раздел <a class="link" href="chapter.files.and.directories.html#user.files.location">Расположение пользовательских файлов</a>).
+               настроек ОмегаТ файл с соответствующими определениями (см. раздел <a class="link" href="chapter.files.and.directories.html#user.files" title="2. Файлы пользовательских настроек">Расположение пользовательских файлов</a>).
             </p>
             <p>Файл с определениями сочетаний клавиш должен называться <code class="filename">MainMenuShortcuts.properties</code> и содержать не более одного сочетания в каждой строке. Допускается наличие пустых строк и строк комментария, которые начинаются
                с «//». Все символы после знака «//» будут проигнорированы.
             </p>
             <p>Чтобы новые сочетания клавиш вступили в силу, после изменения <code class="filename">MainMenuShortcuts.properties</code> <span class="application">ОмегаТ</span> должна быть перезапущена.
             </p>
-            <p>Новые сочетания клавиш должны определяться следующим образом: <code class="code">&lt;кодовое обозначение пункта меню&gt;=&lt;сочетание клавиш&gt;</code>, где <span class="emphasis"><em>&lt;кодовое обозначение пункта меню&gt;</em></span>&nbsp;— код из приведённых ниже таблиц, а <span class="emphasis"><em>&lt;сочетание клавиш&gt;</em></span>&nbsp;— заданная пользователем комбинация клавиш, которую надо нажать.<sup>[<a name="d0e10467" href="#ftn.d0e10467" class="footnote">2</a>]</sup>.
+            <p>Новые сочетания клавиш должны определяться следующим образом: <code class="code">&lt;кодовое обозначение пункта меню&gt;=&lt;сочетание клавиш&gt;</code>, где <span class="emphasis"><em>&lt;кодовое обозначение пункта меню&gt;</em></span>&nbsp;— код из приведённых ниже таблиц, а <span class="emphasis"><em>&lt;сочетание клавиш&gt;</em></span>&nbsp;— заданная пользователем комбинация клавиш, которую надо нажать.<a href="#ftn.d0e11118" class="footnote" name="d0e11118"><sup class="footnote">[2]</sup></a>.
             </p>
             <p>&lt;сочетание клавиш&gt; имеет следующий формат: 0 или 1 <code class="code">&lt;модификатор&gt;</code>, затем 0 или 1 <code class="code">&lt;состояние&gt;</code> и 1 <code class="code">&lt;клавиша&gt;</code>, где:
             </p>
             <div class="itemizedlist">
-               <ul class="itemizedlist" type="disc">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
-                     <p><code class="code">&lt;модификатор&gt;</code> может принимать значения: <span class="emphasis"><em>shift</em></span>, <span class="emphasis"><em>control</em></span>, <span class="emphasis"><em>ctrl</em></span>, <span class="emphasis"><em>meta</em></span><sup>[<a name="d0e10501" href="#ftn.d0e10501" class="footnote">3</a>]</sup>, <span class="emphasis"><em>alt</em></span>,
+                     <p><code class="code">&lt;модификатор&gt;</code> может принимать значения: <span class="emphasis"><em>shift</em></span>, <span class="emphasis"><em>control</em></span>, <span class="emphasis"><em>ctrl</em></span>, <span class="emphasis"><em>meta</em></span><a href="#ftn.d0e11152" class="footnote" name="d0e11152"><sup class="footnote">[3]</sup></a>, <span class="emphasis"><em>alt</em></span>,
                                   <span class="emphasis"><em>altGraph</em></span></p>
                   </li>
                   <li class="listitem">
                      <p><code class="code">&lt;состояние&gt;</code> может принимать значение: <span class="emphasis"><em>typed</em></span>, <span class="emphasis"><em>pressed</em></span>, <span class="emphasis"><em>released</em></span></p>
                   </li>
                   <li class="listitem">
-                     <p>и <code class="code">&lt;клавиша&gt;</code> может соответствовать любой доступной на клавиатуре клавише<sup>[<a name="d0e10535" href="#ftn.d0e10535" class="footnote">4</a>]</sup>.
+                     <p>и <code class="code">&lt;клавиша&gt;</code> может соответствовать любой доступной на клавиатуре клавише<a href="#ftn.d0e11186" class="footnote" name="d0e11186"><sup class="footnote">[4]</sup></a>.
                      </p>
                   </li>
                </ul>
             </div>
-            <p>Например, в сочетаниях клавиш, используемых ОмегаТ по умолчанию<sup>[<a name="d0e10543" href="#ftn.d0e10543" class="footnote">5</a>]</sup> можно найти:
+            <p>Например, в сочетаниях клавиш, используемых ОмегаТ по умолчанию<a href="#ftn.d0e11194" class="footnote" name="d0e11194"><sup class="footnote">[5]</sup></a> можно найти:
             </p>
             <div class="itemizedlist">
-               <ul class="itemizedlist" type="disc">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
                      <p><code class="code">projectOpenMenuItem=ctrl O</code></p>
                   </li>
@@ -108,7 +108,7 @@
                клавиш, в ОмегаТ они должны заработать.
             </p>
          </div>
-         <div class="section" title="2. Меню «Проект»">
+         <div class="section">
             <div class="titlepage">
                <div>
                   <div>
@@ -117,13 +117,13 @@
                   </div>
                </div>
             </div>
-            <div class="table"><a name="d0e10614"></a><p class="title"><b>Таблица G.1. Меню «Проект»</b></p>
+            <div class="table"><a name="d0e11265"></a><p class="title"><b>Таблица H.1. Меню «Проект»</b></p>
                <div class="table-contents">
                   <table summary="Меню «Проект»" border="1">
                      <colgroup>
-                        <col width="120" align="left">
-                        <col width="80" align="left">
-                        <col align="left">
+                        <col width="120" align="left" class="1">
+                        <col width="80" align="left" class="2">
+                        <col align="left" class="3">
                      </colgroup>
                      <thead>
                         <tr>
@@ -192,7 +192,7 @@
                   </table>
                </div>
             </div><br class="table-break"></div>
-         <div class="section" title="3. Меню «Правка»">
+         <div class="section">
             <div class="titlepage">
                <div>
                   <div>
@@ -201,13 +201,13 @@
                   </div>
                </div>
             </div>
-            <div class="table"><a name="d0e10715"></a><p class="title"><b>Таблица G.2. Меню «Правка»</b></p>
+            <div class="table"><a name="d0e11366"></a><p class="title"><b>Таблица H.2. Меню «Правка»</b></p>
                <div class="table-contents">
                   <table summary="Меню «Правка»" border="1">
                      <colgroup>
-                        <col width="120" align="left">
-                        <col width="80" align="left">
-                        <col align="left">
+                        <col width="120" align="left" class="1">
+                        <col width="80" align="left" class="2">
+                        <col align="left" class="3">
                      </colgroup>
                      <thead>
                         <tr>
@@ -313,7 +313,7 @@
                            <td align="left">titleCaseMenuItem</td>
                         </tr>
                         <tr>
-                           <td align="left">Сменить регистр на...</td>
+                           <td align="left">Изменять регистр в цикле…</td>
                            <td align="left"><span class="keycap"><strong>SHIFT+F3</strong></span></td>
                            <td align="left">cycleSwitchCaseMenuItem</td>
                         </tr>
@@ -321,7 +321,7 @@
                   </table>
                </div>
             </div><br class="table-break"></div>
-         <div class="section" title="4. Меню «Переход»">
+         <div class="section">
             <div class="titlepage">
                <div>
                   <div>
@@ -330,13 +330,13 @@
                   </div>
                </div>
             </div>
-            <div class="table"><a name="d0e10888"></a><p class="title"><b>Таблица G.3. Меню «Переход»</b></p>
+            <div class="table"><a name="d0e11539"></a><p class="title"><b>Таблица H.3. Меню «Переход»</b></p>
                <div class="table-contents">
                   <table summary="Меню «Переход»" border="1">
                      <colgroup>
-                        <col width="120" align="left">
-                        <col width="80" align="left">
-                        <col align="left">
+                        <col width="120" align="left" class="1">
+                        <col width="80" align="left" class="2">
+                        <col align="left" class="3">
                      </colgroup>
                      <thead>
                         <tr>
@@ -380,7 +380,7 @@
                   </table>
                </div>
             </div><br class="table-break"></div>
-         <div class="section" title="5. Меню «Вид»">
+         <div class="section">
             <div class="titlepage">
                <div>
                   <div>
@@ -389,12 +389,12 @@
                   </div>
                </div>
             </div>
-            <div class="table"><a name="d0e10967"></a><p class="title"><b>Таблица G.4. Меню «Вид»</b></p>
-               <div class="table-contents"><a class="indexterm" name="d0e10970"></a><table summary="Меню «Вид»" border="1">
+            <div class="table"><a name="d0e11618"></a><p class="title"><b>Таблица H.4. Меню «Вид»</b></p>
+               <div class="table-contents"><a class="indexterm" name="d0e11621"></a><table summary="Меню «Вид»" border="1">
                      <colgroup>
-                        <col width="120" align="left">
-                        <col width="80" align="left">
-                        <col align="left">
+                        <col width="120" align="left" class="1">
+                        <col width="80" align="left" class="2">
+                        <col align="left" class="3">
                      </colgroup>
                      <thead>
                         <tr>
@@ -443,7 +443,7 @@
                   </table>
                </div>
             </div><br class="table-break"></div>
-         <div class="section" title="6. Меню «Инструменты»">
+         <div class="section">
             <div class="titlepage">
                <div>
                   <div>
@@ -452,13 +452,13 @@
                   </div>
                </div>
             </div>
-            <div class="table"><a name="d0e11033"></a><p class="title"><b>Таблица G.5. Меню «Инструменты»</b></p>
+            <div class="table"><a name="d0e11684"></a><p class="title"><b>Таблица H.5. Меню «Инструменты»</b></p>
                <div class="table-contents">
                   <table summary="Меню «Инструменты»" border="1">
                      <colgroup>
-                        <col width="120" align="left">
-                        <col width="80" align="left">
-                        <col align="left">
+                        <col width="120" align="left" class="1">
+                        <col width="80" align="left" class="2">
+                        <col align="left" class="3">
                      </colgroup>
                      <thead>
                         <tr>
@@ -487,7 +487,7 @@
                   </table>
                </div>
             </div><br class="table-break"></div>
-         <div class="section" title="7. Меню «Параметры»">
+         <div class="section">
             <div class="titlepage">
                <div>
                   <div>
@@ -496,13 +496,13 @@
                   </div>
                </div>
             </div>
-            <div class="table"><a name="d0e11072"></a><p class="title"><b>Таблица G.6. Меню «Параметры»</b></p>
+            <div class="table"><a name="d0e11723"></a><p class="title"><b>Таблица H.6. Меню «Параметры»</b></p>
                <div class="table-contents">
                   <table summary="Меню «Параметры»" border="1">
                      <colgroup>
-                        <col width="120" align="left">
-                        <col width="80" align="left">
-                        <col align="left">
+                        <col width="120" align="left" class="1">
+                        <col width="80" align="left" class="2">
+                        <col align="left" class="3">
                      </colgroup>
                      <thead>
                         <tr>
@@ -601,7 +601,7 @@
                   </table>
                </div>
             </div><br class="table-break"></div>
-         <div class="section" title="8. Меню «Справка»">
+         <div class="section">
             <div class="titlepage">
                <div>
                   <div>
@@ -610,13 +610,13 @@
                   </div>
                </div>
             </div>
-            <div class="table"><a name="d0e11192"></a><p class="title"><b>Таблица G.7. Меню «Справка»</b></p>
+            <div class="table"><a name="d0e11843"></a><p class="title"><b>Таблица H.7. Меню «Справка»</b></p>
                <div class="table-contents">
                   <table summary="Меню «Справка»" border="1">
                      <colgroup>
-                        <col width="120" align="left">
-                        <col width="80" align="left">
-                        <col align="left">
+                        <col width="120" align="left" class="1">
+                        <col width="80" align="left" class="2">
+                        <col align="left" class="3">
                      </colgroup>
                      <thead>
                         <tr>
@@ -640,19 +640,19 @@
                   </table>
                </div>
             </div><br class="table-break"></div>
-         <div class="footnotes"><br><hr width="100" align="left">
-            <div class="footnote">
-               <p><sup>[<a name="ftn.d0e10467" href="#d0e10467" class="para">2</a>] </sup>Полный синтаксис определения сочетаний клавиш описан в документации Java 1.6 от компании Oracle (внизу страницы): <a class="ulink" href="http://docs.oracle.com/javase/6/docs/api/javax/swing/KeyStroke.html" target="_top">Сочетания клавиш Java 1.6</a></p>
+         <div class="footnotes"><br><hr style="width:100; text-align:left;margin-left: 0">
+            <div id="ftn.d0e11118" class="footnote">
+               <p><a href="#d0e11118" class="para"><sup class="para">[2] </sup></a>Полный синтаксис определения сочетаний клавиш описан в документации Java 1.6 от компании Oracle (внизу страницы): <a class="ulink" href="http://docs.oracle.com/javase/6/docs/api/javax/swing/KeyStroke.html" target="_top">Сочетания клавиш Java 1.6</a></p>
             </div>
-            <div class="footnote">
-               <p><sup>[<a name="ftn.d0e10501" href="#d0e10501" class="para">3</a>] </sup>На Mac OS X модификатор <span class="emphasis"><em>meta</em></span> используется для обозначения клавиши <span class="emphasis"><em>COMMAND</em></span>.
+            <div id="ftn.d0e11152" class="footnote">
+               <p><a href="#d0e11152" class="para"><sup class="para">[3] </sup></a>На Mac OS&nbsp;X модификатор <span class="emphasis"><em>meta</em></span> используется для обозначения клавиши <span class="emphasis"><em>COMMAND</em></span>.
                </p>
             </div>
-            <div class="footnote">
-               <p><sup>[<a name="ftn.d0e10535" href="#d0e10535" class="para">4</a>] </sup>Все возможные клавиши перечислены в документации Java 1.6 от компании Oracle: <a class="ulink" href="http://docs.oracle.com/javase/6/docs/api/java/awt/event/KeyEvent.html" target="_top">Описание Java 1.6 keyEvents</a></p>
+            <div id="ftn.d0e11186" class="footnote">
+               <p><a href="#d0e11186" class="para"><sup class="para">[4] </sup></a>Все возможные клавиши перечислены в документации Java 1.6 от компании Oracle: <a class="ulink" href="http://docs.oracle.com/javase/6/docs/api/java/awt/event/KeyEvent.html" target="_top">Описание Java 1.6 keyEvents</a></p>
             </div>
-            <div class="footnote">
-               <p><sup>[<a name="ftn.d0e10543" href="#d0e10543" class="para">5</a>] </sup>Сочетания клавиш по умолчанию в ОмегаТ доступны на SourceForge: <a class="ulink" href="http://omegat.svn.sourceforge.net/viewvc/omegat/branches/release-2-5/src/org/omegat/gui/main/MainMenuShortcuts.properties" target="_top">Сочетания клавиш по умолчанию</a></p>
+            <div id="ftn.d0e11194" class="footnote">
+               <p><a href="#d0e11194" class="para"><sup class="para">[5] </sup></a>Сочетания клавиш по умолчанию в ОмегаТ доступны на SourceForge: <a class="ulink" href="http://omegat.svn.sourceforge.net/viewvc/omegat/branches/release-2-5/src/org/omegat/gui/main/MainMenuShortcuts.properties" target="_top">Сочетания клавиш по умолчанию</a></p>
                <p>Сочетания клавиш по умолчанию для Mac также доступны на SourceForge, в них вместо «ctrl» используется «meta»: <a class="ulink" href="http://omegat.svn.sourceforge.net/viewvc/omegat//branches/release-2-5/src/org/omegat/gui/main/MainMenuShortcuts.mac.properties" target="_top">Сочетания клавиш по умолчанию для Mac</a></p>
             </div>
          </div>
@@ -661,15 +661,15 @@
          <hr>
          <table width="100%" summary="Navigation footer">
             <tr>
-               <td width="40%" align="left"><a accesskey="p" href="appendix.keyboard.html">Пред.</a>&nbsp;
+               <td width="40%" align="left"><a accesskey="p" href="appendix.website.html">Пред.</a>&nbsp;
                </td>
                <td width="20%" align="center">&nbsp;</td>
                <td width="40%" align="right">&nbsp;<a accesskey="n" href="appendix.legal.notices.html">След.</a></td>
             </tr>
             <tr>
-               <td width="40%" align="left" valign="top">Приложение F. Сочетания клавиш для редактирования текста&nbsp;</td>
+               <td width="40%" align="left" valign="top">Приложение G. ОмегаТ в Интернете&nbsp;</td>
                <td width="20%" align="center"><a accesskey="h" href="index.html">Начало</a></td>
-               <td width="40%" align="right" valign="top">&nbsp;Приложение H. Авторские права</td>
+               <td width="40%" align="right" valign="top">&nbsp;Приложение I. Авторские права</td>
             </tr>
          </table>
       </div>

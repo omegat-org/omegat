@@ -327,6 +327,16 @@ OmegaT uses the following libraries:
   Diff (GPL)
   JSAP (LGPL)
   orion-ssh2-214 (Orion SSH for Java license)
+  lucene-*.jar (Apache License 2.0)
+  The English tokenizers (org.omegat.tokenizer.SnowballEnglishTokenizer and
+  org.omegat.tokenizer.LuceneEnglishTokenizer) use stop words from Okapi
+(http://okapi.sourceforge.net) (LGPL license)
+  tinysegmenter.jar (Modified BSD license)
+  commons-*.jar (Apache License 2.0)
+  jWordSplitter (Apache License 2.0)
+  LanguageTool.jar (LGPL license)
+  morfologik-*.jar (Morfologik license)
+  segment-1.3.0.jar (Segment license)
 
 ==============================================================================
  5.  Is OmegaT bugging you? Do you need help?

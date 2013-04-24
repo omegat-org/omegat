@@ -479,7 +479,7 @@
             <entry><para>A text file containing two lines:</para>
 
             <programlisting>#!/bin/bash java
-            java -jar OmegaT.jar $*</programlisting>
+java -jar OmegaT.jar $*</programlisting>
 
             <para>Linux and OS X users may find this file useful. Make it
 executable (<literal>chmod +x OmegaT</literal>) from the command line after making
@@ -490,7 +490,7 @@ line</para>
           </row>
           
           <row>
-            <entry><application>OmegaT.bat</application>.bat</entry>
+            <entry>OmegaT.bat</entry>
 
             <entry><para>A batch file, used to launch
             <application>OmegaT</application> from the Windows command line.

@@ -3,7 +3,7 @@
 ----------------------------------------------------------------------
   27 Enhancements
    5 Bug fixes
-   6 Localisation updates
+   7 Localisation updates
 ----------------------------------------------------------------------
 3.0.0 vs. 2.6.3
 
@@ -119,6 +119,8 @@ OmegaT failed to load the valid ones
   - Italian localisation updated to 3.0.0 (UI, readme, Instant Start)
   - Japanese localisation updated to 3.0.0 (UI)
   - Russian localisation updated to 3.0.0 (UI, readme, Instant Start)
+  - Turkish localisation updated to 3.0.0 (UI)
+
 
 ----------------------------------------------------------------------
  OmegaT 2.6.3 update 1

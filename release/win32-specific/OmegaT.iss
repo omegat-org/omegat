@@ -11,7 +11,7 @@ UninstallDisplayIcon={app}\OmegaT.exe
 AllowNoIcons=yes
 Compression=lzma
 SolidCompression=yes
-LicenseFile=license.txt
+LicenseFile=OmegaT-license.txt
 OutputDir=..\dist2
 OutputBaseFilename=OmegaT_@VERSION_NUMBER_SUBST@_Windows_without_JRE
 
@@ -24,7 +24,7 @@ Source: "plugins\*"; DestDir: "{app}\plugins"; Flags: recursesubdirs
 Source: "OmegaT.exe"; DestDir: "{app}"
 Source: "OmegaT.l4J.ini"; DestDir: "{app}"; AfterInstall: SetUserLanguage; Flags: onlyifdoesntexist
 Source: "OmegaT.jar"; DestDir: "{app}"
-Source: "license.txt"; DestDir: "{app}"
+Source: "OmegaT-license.txt"; DestDir: "{app}"
 Source: "doc-license.txt"; DestDir: "{app}"
 Source: "readme.txt"; DestDir: "{app}"; Flags: isreadme;
 Source: "readme_ar.txt"; DestDir: "{app}"; Flags: isreadme; Languages: ar

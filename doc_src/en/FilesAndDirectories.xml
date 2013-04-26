@@ -483,7 +483,7 @@ java -jar OmegaT.jar $*</programlisting>
 
             <para>Linux and OS X users may find this file useful. Make it
 executable (<literal>chmod +x OmegaT</literal>) from the command line after making
-sure you are in the /OmegaT_2.5/ directory. You will then be able
+sure you are in the /OmegaT_2.6/ directory. You will then be able
 to launch OmegaT by executing this file from the command
 line</para>
             </entry>

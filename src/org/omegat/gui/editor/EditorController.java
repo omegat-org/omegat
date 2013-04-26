@@ -591,6 +591,7 @@ public class EditorController implements IEditor {
             CoreEvents.fireEntryNewFile(Core.getProject().getProjectFiles().get(displayedFileIndex).filePath);
         }
 
+        editor.autoCompleter.hidePopup();
         editor.repaint();
 
         // fire event about new segment activated
@@ -632,6 +633,7 @@ public class EditorController implements IEditor {
             SwingUtilities.invokeLater(new Runnable() {
                 public void run() {
                     markerController.reprocessImmediately(m_docSegList[displayedEntryIndex]);
+                    editor.autoCompleter.updatePopup();
                 }
             });
         }
@@ -1702,6 +1704,11 @@ public class EditorController implements IEditor {
         // Reset the empty translation status
         setEmptyTranslation(false);
     }
+
+    public void windowDeactivated() {
+        editor.autoCompleter.hidePopup();
+    }
+
     /**
      * Class for checking if alternative translation exist.
      */

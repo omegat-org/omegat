@@ -6,6 +6,7 @@
  Copyright (C) 2009 Alex Buloichik
                2009 Didier Briel
                2010 Wildrich Fourie
+               2013 Zoltan Bartko
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -28,6 +29,7 @@
 package org.omegat.gui.editor;
 
 import java.awt.Cursor;
+import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -58,6 +60,7 @@ import javax.swing.text.ViewFactory;
 
 import org.omegat.core.CoreEvents;
 import org.omegat.core.data.SourceTextEntry;
+import org.omegat.gui.editor.autocompleter.AutoCompleter;
 import org.omegat.util.PatternConsts;
 import org.omegat.util.StaticUtils;
 import org.omegat.util.StringUtil;
@@ -69,6 +72,7 @@ import org.omegat.util.gui.DockingUI;
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Didier Briel
  * @author Wildrich Fourie
+ * @author Zoltan Bartko
  */
 @SuppressWarnings("serial")
 public class EditorTextArea3 extends JEditorPane {
@@ -81,6 +85,8 @@ public class EditorTextArea3 extends JEditorPane {
     protected final List<PopupMenuConstructorInfo> popupConstructors = new ArrayList<PopupMenuConstructorInfo>();
 
     protected String currentWord;
+
+    protected AutoCompleter autoCompleter = new AutoCompleter(this);
 
     public EditorTextArea3(EditorController controller) {
         this.controller = controller;
@@ -136,9 +142,22 @@ public class EditorTextArea3 extends JEditorPane {
         }
     }
 
+    /**
+     * Return true if the specified position is within the active translation
+     * @param position
+     * @return 
+     */
+    public boolean isInActiveTranslation(int position) {
+        return (position >= getOmDocument().getTranslationStart()
+                && position <= getOmDocument().getTranslationEnd());
+    }
+
     protected MouseListener mouseListener = new MouseAdapter() {
         @Override
         public void mouseClicked(MouseEvent e) {
+            if (autoCompleter.isVisible()) {
+                autoCompleter.hidePopup();
+            }
             // where is the mouse
             int mousepos = viewToModel(e.getPoint());
             if (e.getButton() == MouseEvent.BUTTON1 && e.getClickCount() == 2) {
@@ -159,8 +178,6 @@ public class EditorTextArea3 extends JEditorPane {
                     cons = popupConstructors.toArray(new PopupMenuConstructorInfo[popupConstructors.size()]);
                 }
 
-                boolean isInActiveTranslation = mousepos >= getOmDocument().getTranslationStart()
-                        && mousepos <= getOmDocument().getTranslationEnd();
                 boolean isInActiveEntry;
                 int ae = controller.displayedEntryIndex;
                 SegmentBuilder sb = controller.m_docSegList[ae];
@@ -174,7 +191,7 @@ public class EditorTextArea3 extends JEditorPane {
                 for (PopupMenuConstructorInfo c : cons) {
                     // call each constructor
                     c.constructor.addItems(popup, EditorTextArea3.this, mousepos, isInActiveEntry,
-                            isInActiveTranslation, sb);
+                            isInActiveTranslation(mousepos), sb);
                 }
 
                 DockingUI.removeUnusedMenuSeparators(popup);
@@ -224,19 +241,22 @@ public class EditorTextArea3 extends JEditorPane {
         Document3 doc = getOmDocument();
 
         // non-standard processing
-        if (isKey(e, KeyEvent.VK_TAB, 0)) {
+        if (autoCompleter.processKeys(e)) {
+            // The AutoCompleter needs special treatment.
+            processed = true;
+        } else if (StaticUtils.isKey(e, KeyEvent.VK_TAB, 0)) {
             // press TAB when 'Use TAB to advance'
             if (controller.settings.isUseTabForAdvance()) {
                 controller.nextEntry();
                 processed = true;
             }
-        } else if (isKey(e, KeyEvent.VK_TAB, KeyEvent.SHIFT_MASK)) {
+        } else if (StaticUtils.isKey(e, KeyEvent.VK_TAB, InputEvent.SHIFT_MASK)) {
             // press Shift+TAB when 'Use TAB to advance'
             if (controller.settings.isUseTabForAdvance()) {
                 controller.prevEntry();
                 processed = true;
             }
-        } else if (isKey(e, KeyEvent.VK_ENTER, 0)) {
+        } else if (StaticUtils.isKey(e, KeyEvent.VK_ENTER, 0)) {
             // press ENTER
             if (!controller.settings.isUseTabForAdvance()) {
                 controller.nextEntry();
@@ -244,33 +264,33 @@ public class EditorTextArea3 extends JEditorPane {
             } else {
                 processed = true;
             }
-        } else if ((!mac && isKey(e, KeyEvent.VK_ENTER, KeyEvent.CTRL_MASK))
-                || (mac && isKey(e, KeyEvent.VK_ENTER, KeyEvent.META_MASK))) {
+        } else if ((!mac && StaticUtils.isKey(e, KeyEvent.VK_ENTER, InputEvent.CTRL_MASK))
+                || (mac && StaticUtils.isKey(e, KeyEvent.VK_ENTER, InputEvent.META_MASK))) {
             // press Ctrl+ENTER (Cmd+Enter for MacOS)
             if (!controller.settings.isUseTabForAdvance()) {
                 controller.prevEntry();
                 processed = true;
             }
-        } else if (isKey(e, KeyEvent.VK_ENTER, KeyEvent.SHIFT_MASK)) {
+        } else if (StaticUtils.isKey(e, KeyEvent.VK_ENTER, InputEvent.SHIFT_MASK)) {
             // convert Shift+Enter event to straight enter key
             KeyEvent ke = new KeyEvent(e.getComponent(), e.getID(), e.getWhen(), 0, KeyEvent.VK_ENTER, '\n');
             super.processKeyEvent(ke);
             processed = true;
-        } else if ((!mac && isKey(e, KeyEvent.VK_A, KeyEvent.CTRL_MASK))
-                || (mac && isKey(e, KeyEvent.VK_A, KeyEvent.META_MASK))) {
+        } else if ((!mac && StaticUtils.isKey(e, KeyEvent.VK_A, InputEvent.CTRL_MASK))
+                || (mac && StaticUtils.isKey(e, KeyEvent.VK_A, InputEvent.META_MASK))) {
             // handling Ctrl+A manually (Cmd+A for MacOS)
             setSelectionStart(doc.getTranslationStart());
             setSelectionEnd(doc.getTranslationEnd());
             processed = true;
-        } else if (isKey(e, KeyEvent.VK_O, KeyEvent.CTRL_MASK | KeyEvent.SHIFT_MASK)) {
+        } else if (StaticUtils.isKey(e, KeyEvent.VK_O, InputEvent.CTRL_MASK | InputEvent.SHIFT_MASK)) {
             // handle Ctrl+Shift+O - toggle orientation LTR-RTL
             Cursor oldCursor = this.getCursor();
             this.setCursor(new Cursor(Cursor.WAIT_CURSOR));
             controller.toggleOrientation();
             this.setCursor(oldCursor);
             processed = true;
-        } else if ((!mac && isKey(e, KeyEvent.VK_BACK_SPACE, KeyEvent.CTRL_MASK))
-                || (mac && isKey(e, KeyEvent.VK_BACK_SPACE, KeyEvent.ALT_MASK))) {
+        } else if ((!mac && StaticUtils.isKey(e, KeyEvent.VK_BACK_SPACE, InputEvent.CTRL_MASK))
+                || (mac && StaticUtils.isKey(e, KeyEvent.VK_BACK_SPACE, InputEvent.ALT_MASK))) {
             // handle Ctrl+Backspace (Alt+Backspace for MacOS)
             try {
                 processed = wholeTagDelete(false);
@@ -287,8 +307,8 @@ public class EditorTextArea3 extends JEditorPane {
             } catch (BadLocationException ex) {
                 // do nothing
             }
-        } else if ((!mac && isKey(e, KeyEvent.VK_DELETE, KeyEvent.CTRL_MASK))
-                || (mac && isKey(e, KeyEvent.VK_DELETE, KeyEvent.ALT_MASK))) {
+        } else if ((!mac && StaticUtils.isKey(e, KeyEvent.VK_DELETE, InputEvent.CTRL_MASK))
+                || (mac && StaticUtils.isKey(e, KeyEvent.VK_DELETE, InputEvent.ALT_MASK))) {
             // handle Ctrl+Backspace (Alt+Delete for MacOS)
             try {
                 processed = wholeTagDelete(true);
@@ -305,26 +325,26 @@ public class EditorTextArea3 extends JEditorPane {
             } catch (BadLocationException ex) {
                 // do nothing
             }
-        } else if ((!mac && isKey(e, KeyEvent.VK_PAGE_UP, KeyEvent.CTRL_MASK))
-                || (mac && isKey(e, KeyEvent.VK_PAGE_UP, KeyEvent.META_MASK))) {
+        } else if ((!mac && StaticUtils.isKey(e, KeyEvent.VK_PAGE_UP, InputEvent.CTRL_MASK))
+                || (mac && StaticUtils.isKey(e, KeyEvent.VK_PAGE_UP, InputEvent.META_MASK))) {
             // Ctrl+PgUp - to the begin of document(Cmd+PgUp for MacOS)
             setCaretPosition(0);
             processed = true;
-        } else if ((!mac && isKey(e, KeyEvent.VK_PAGE_DOWN, KeyEvent.CTRL_MASK))
-                || (mac && isKey(e, KeyEvent.VK_PAGE_DOWN, KeyEvent.META_MASK))) {
+        } else if ((!mac && StaticUtils.isKey(e, KeyEvent.VK_PAGE_DOWN, InputEvent.CTRL_MASK))
+                || (mac && StaticUtils.isKey(e, KeyEvent.VK_PAGE_DOWN, InputEvent.META_MASK))) {
             // Ctrl+PgDn - to the end of document(Cmd+PgDn for MacOS)
             setCaretPosition(getOmDocument().getLength());
             processed = true;
-        } else if ((!mac && isKey(e, KeyEvent.VK_LEFT, KeyEvent.CTRL_MASK))
-                || (mac && isKey(e, KeyEvent.VK_LEFT, KeyEvent.ALT_MASK))
-                || (!mac && isKey(e, KeyEvent.VK_LEFT, KeyEvent.CTRL_MASK | KeyEvent.SHIFT_MASK))
-                || (mac && isKey(e, KeyEvent.VK_LEFT, KeyEvent.ALT_MASK | KeyEvent.SHIFT_MASK))) {
+        } else if ((!mac && StaticUtils.isKey(e, KeyEvent.VK_LEFT, InputEvent.CTRL_MASK))
+                || (mac && StaticUtils.isKey(e, KeyEvent.VK_LEFT, InputEvent.ALT_MASK))
+                || (!mac && StaticUtils.isKey(e, KeyEvent.VK_LEFT, InputEvent.CTRL_MASK | InputEvent.SHIFT_MASK))
+                || (mac && StaticUtils.isKey(e, KeyEvent.VK_LEFT, InputEvent.ALT_MASK | InputEvent.SHIFT_MASK))) {
             // Ctrl+Left - skip to the end of tag (Alt+Left for MacOS)
             processed = moveCursorOverTag((e.getModifiers() & KeyEvent.SHIFT_MASK) != 0, false);
-        } else if ((!mac && isKey(e, KeyEvent.VK_RIGHT, KeyEvent.CTRL_MASK))
-                || (mac && isKey(e, KeyEvent.VK_RIGHT, KeyEvent.ALT_MASK))
-                || (!mac && isKey(e, KeyEvent.VK_RIGHT, KeyEvent.CTRL_MASK | KeyEvent.SHIFT_MASK))
-                || (mac && isKey(e, KeyEvent.VK_RIGHT, KeyEvent.ALT_MASK | KeyEvent.SHIFT_MASK))) {
+        } else if ((!mac && StaticUtils.isKey(e, KeyEvent.VK_RIGHT, InputEvent.CTRL_MASK))
+                || (mac && StaticUtils.isKey(e, KeyEvent.VK_RIGHT, InputEvent.ALT_MASK))
+                || (!mac && StaticUtils.isKey(e, KeyEvent.VK_RIGHT, InputEvent.CTRL_MASK | InputEvent.SHIFT_MASK))
+                || (mac && StaticUtils.isKey(e, KeyEvent.VK_RIGHT, InputEvent.ALT_MASK | InputEvent.SHIFT_MASK))) {
             // Ctrl+Right - skip to the end of tag (Alt+Right for MacOS)
             processed = moveCursorOverTag((e.getModifiers() & KeyEvent.SHIFT_MASK) != 0, true);
         }
@@ -578,6 +598,7 @@ public class EditorTextArea3 extends JEditorPane {
                 setCaretPosition(end);
             }
         }
+        autoCompleter.updatePopup();
     }
 
     /**
@@ -600,21 +621,6 @@ public class EditorTextArea3 extends JEditorPane {
      */
     private void fixSelectionEnd(int end) {
         setSelectionEnd(end);
-    }
-
-    /**
-     * Check if specified key pressed.
-     * 
-     * @param e
-     *            pressed key event
-     * @param code
-     *            required key code
-     * @param modifiers
-     *            required modifiers
-     * @return true if checked key pressed
-     */
-    private static boolean isKey(KeyEvent e, int code, int modifiers) {
-        return e.getKeyCode() == code && e.getModifiers() == modifiers;
     }
 
     /**

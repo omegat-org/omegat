@@ -7,7 +7,7 @@
                2007 Didier Briel, Zoltan Bartko, Alex Buloichik
                2008 - 2011 Didier Briel
                2012 Martin Fleurke, Didier Briel
-               2013 Aaron Madlon-Kay
+               2013 Aaron Madlon-Kay, Zoltan Bartko
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -30,6 +30,7 @@
 package org.omegat.util;
 
 import java.awt.GraphicsEnvironment;
+import java.awt.event.KeyEvent;
 import java.io.BufferedOutputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -156,6 +157,21 @@ public class StaticUtils {
             res += placeholderMatcher.group(0);
         }
         return res;
+    }
+
+    /**
+     * Check if specified key pressed.
+     *
+     * @param e
+     *            pressed key event
+     * @param code
+     *            required key code
+     * @param modifiers
+     *            required modifiers
+     * @return true if checked key pressed
+     */
+    public static boolean isKey(KeyEvent e, int code, int modifiers) {
+        return e.getKeyCode() == code && e.getModifiers() == modifiers;
     }
 
     static class TagOrder {

@@ -4,7 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2009 Alex Buloichik
-               2013 Aaron Madlon-Kay
+               2013 Aaron Madlon-Kay, Zoltan Bartko
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -42,6 +42,7 @@ import javax.swing.text.StyleConstants;
  * 
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Aaron Madlon-Kay
+ * @author Zoltan Bartko
  */
 @SuppressWarnings("serial")
 public class Document3 extends DefaultStyledDocument {
@@ -78,7 +79,7 @@ public class Document3 extends DefaultStyledDocument {
     /**
      * Calculate the position of the start of the current translation
      */
-    protected int getTranslationStart() {
+    public int getTranslationStart() {
         return activeTranslationBeginM1.getOffset() + 1;
     }
 

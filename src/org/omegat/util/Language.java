@@ -176,6 +176,14 @@ public class Language implements Comparable<Object> {
             return this.countryCode;
     }
 
+    /**
+     * Determine whether or not the language is space-delimited.
+     * Only Chinese and Japanese are not space-delimited.
+     */
+    public boolean isSpaceDelimited() {
+        return !"ZH".equalsIgnoreCase(this.languageCode) && !"JA".equalsIgnoreCase(this.languageCode);
+    }
+
     // /////////////////////////////////////////////////////////////////////////
     // /////////////////////////////////////////////////////////////////////////
     // /////////////////////////////////////////////////////////////////////////

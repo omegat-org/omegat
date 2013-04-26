@@ -123,6 +123,11 @@ public class MainWindow extends JFrame implements IMainWindow {
             public void windowClosing(WindowEvent e) {
                 menu.mainWindowMenuHandler.projectExitMenuItemActionPerformed();
             }
+            @Override
+            public void windowDeactivated(WindowEvent we) {
+                Core.getEditor().windowDeactivated();
+                super.windowDeactivated(we);
+            }
         });
 
         // load default font from preferences

@@ -205,6 +205,9 @@ public class GlossaryTextAreaTest extends TestCore {
 
             public void refreshViewAfterFix(List<Integer> fixedEntries) {
             }
+
+            public void windowDeactivated() {
+            }
         });
     }
 }

@@ -332,4 +332,9 @@ public interface IEditor {
      * Returns current translation or null.
      */
     String getCurrentTranslation();
+
+    /**
+     * Perform any necessary actions for window deactivation.
+     */
+    void windowDeactivated();
 }

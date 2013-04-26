@@ -17,7 +17,8 @@ Class-Path: lib/lib-mnemonics.jar lib/htmlparser.jar lib/MRJAdapter.jar
   lib/commons-validator-1.3.1.jar lib/jWordSplitter.jar
   lib/LanguageTool-data.jar lib/LanguageTool.jar
   lib/morfologik-fsa-1.5.2.jar lib/morfologik-stemming-1.5.2.jar
-  lib/segment-1.3.0.jar
+  lib/segment-1.3.0.jar lib/icu4j-51_1.jar lib/FontBox-0.1.0.jar
+  lib/JempBox-0.2.0.jar lib/pdfbox-app-1.8.1.jar
 OmegaT-Plugin: true
 
 Name: org.omegat.filters3.xml.android.AndroidFilter
@@ -63,6 +64,9 @@ Name: org.omegat.filters2.text.dokuwiki.DokuWikiFilter
 OmegaT-Plugin: filter
 
 Name: org.omegat.filters2.text.magento.MagentoFilter
+OmegaT-Plugin: filter
+
+Name: org.omegat.filters2.pdf.PdfFilter
 OmegaT-Plugin: filter
 
 Name: org.omegat.filters3.xml.docbook.DocBookFilter

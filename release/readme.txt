@@ -336,6 +336,10 @@ OmegaT uses the following libraries:
   LanguageTool.jar (LGPL license)
   morfologik-*.jar (Morfologik license)
   segment-1.3.0.jar (Segment license)
+  pdfbox-app-1.8.1.jar (Apache License 2.0)
+  Fontbox-0.1.0.jar and JempBox-0.2.0.jar (Fonbox license)
+  icu4j-51_1.jar (ICU4J license)
+
 
 ==============================================================================
  5.  Is OmegaT bugging you? Do you need help?

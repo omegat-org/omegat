@@ -31,7 +31,7 @@
         </listitem>
 
         <listitem>
-          <para><application>OmegaT</application> を通常通り起動できない（GUI 環境がない）場合は、次の方法をとってください：同じ端末の他の場所、または別の端末にある OmegaT の設定ファイルを、あらかじめ決めたフォルダーにコピーしておきます。フォルダーの場所は、起動時にコマンドライン上で指定するので、どこであってもかまいません（次の項を参照してください）。設定ファイルは、<literal>filters.conf</literal> と <literal>segmentation.conf</literal> です。ユーザーのホームフォルダー（Windows の場合 <literal>C:\Documents and Settings\%User%\<application>OmegaT</application></literal>、Linux の場合 <literal>%user%/.omegat/</literal>）にあります。</para>
+          <para><application>OmegaT</application> を通常通り起動できない（GUI 環境がない）場合は、次の方法をとってください：同じ端末の他の場所、または別の端末にある <application>OmegaT</application> の設定ファイルを、あらかじめ決めたフォルダーにコピーしておきます。フォルダーの場所は、起動時にコマンドライン上で指定するので、どこであってもかまいません（次の項を参照してください）。設定ファイルは、<literal>filters.conf</literal> と <literal>segmentation.conf</literal> です。ユーザーのホームフォルダー（Windows の場合 <literal>C:\Documents and Settings\%User%\<application>OmegaT</application></literal>、Linux の場合 <literal>%user%/.omegat/</literal>）にあります。</para>
         </listitem>
       </itemizedlist>
     </section>
@@ -84,7 +84,7 @@
     <section id="misc.console.mode.option.quiet">
       <title>サイレントオプション</title>
 
-      <para>コンソールモード用の追加設定として &lt;c0&gt;--quiet&lt;/c0&gt; があります。このオプションを指定すると、画面出力が極力抑えられます。通常ステータスバーに表示されるようなメッセージは、表示されなくなります。</para>
+      <para>コンソールモード用の追加設定として <literal>--quiet</literal> があります。このオプションを指定すると、画面出力が極力抑えられます。通常ステータスバーに表示されるようなメッセージは、表示されなくなります。</para>
 
       <para>使い方: <literal>java -jar <application>OmegaT</application>.jar /path/to/project --mode=console-translate --quiet</literal></para>
     </section>

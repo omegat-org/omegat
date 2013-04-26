@@ -13,7 +13,7 @@
     <section id="tmx.files.location.and.purpose">
       <title>tmx フォルダー − 場所と目的</title>
 
-      <para><application>OmegaT</application> のプロジェクトは、翻訳メモリファイル（拡張子 tmx）を４箇所に配置します。</para>
+      <para><application>OmegaT</application> のプロジェクトは、翻訳メモリファイル（拡張子 tmx）を５箇所に配置します。</para>
 
       <variablelist>
         <varlistentry>

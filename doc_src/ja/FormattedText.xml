@@ -140,7 +140,7 @@
 
     <itemizedlist>
       <listitem>
-        <para><emphasis role="bold">独自タグの正規表現：</emphasis></para>
+        <para><emphasis role="bold">独自タグの正規表現</emphasis></para>
 
         <para>独自にタグとして認識させたい文字列の正規表現を、ここに入力します。タグ検証機能は、独自タグについても、OmegaT のタグと同じように、個数と順番が変わっていないか確認します。</para>
       </listitem>
@@ -148,7 +148,7 @@
 
     <itemizedlist>
       <listitem>
-        <para><emphasis role="bold">翻訳から削除すべき文字列の正規表現：</emphasis></para>
+        <para><emphasis role="bold">翻訳から削除すべき文字列の正規表現</emphasis></para>
 
         <para>訳文ファイルに含めたくない文字列を、正規表現で入力します。その文字列が訳文分節に存在した場合は、気づきやすいように該当箇所が赤字で表示されます。参考訳文の検索時には、削除すべき文字列は無視されます。もし削除文字列を含む参考訳文と含まない参考訳文とがあった場合は、削除文字列を含む参考訳文に対して５％の固定ペナルティが与えられます。このような場合に、削除した文字列を含む参考訳文の類似度が１００％になることは、ありません。</para>
       </listitem>

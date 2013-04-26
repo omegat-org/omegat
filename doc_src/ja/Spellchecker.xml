@@ -32,7 +32,7 @@
       </listitem>
     </itemizedlist>
 
-    <para>手動でファイルをコピーする方法は、コンピューター内のどこかに使いたい辞書ファイルがある場合に適しています。たとえば OpenOffice や Firefox、Thunderbird をインストール済みの場合が該当します。もっとも、<emphasis role="bold">オンライン辞書の URL</emphasis> 欄を使って、インターネット上から辞書を探すほうが、簡単かもしれません。</para>
+    <para>手動でファイルをコピーする方法は、コンピューター内のどこかに使いたい辞書ファイルがある場合に適しています。たとえば Apache OpenOffice や LibreOffice、Firefox、Thunderbird をインストール済みの場合が該当します。もっとも、<emphasis role="bold">オンライン辞書の URL</emphasis> 欄を使って、インターネット上から辞書を探すほうが、簡単かもしれません。</para>
 
     <figure id="spellchecker.setup">
       <title><indexterm class="singular">

@@ -322,43 +322,26 @@
           </row>
 
           <row>
-            <entry rowsep="0"><literal>OmegaT</literal></entry>
+            <entry><application>OmegaT</application></entry>
 
-            <entry rowsep="0">以下の 2 行からなるテキストファイルです：</entry>
+            <entry><para>以下の 2 行からなるテキストファイルです：</para>
+
+            <programlisting>#!/bin/bash java
+java -jar OmegaT.jar $*</programlisting>
+
+            <para>Linux および Mac OS X のユーザーでしたら、役に立つことでしょう。コマンドラインで OmegaT_2.6 フォルダーに移動してから、このファイルに実行権限をつけてください（<literal>chmod +x OmegaT</literal>）。このファイルをコマンドラインから実行することで、OmegaT を起動できます。</para>
+            </entry>
           </row>
-
+          
           <row>
-            <entry rowsep="0"/>
+            <entry>OmegaT.bat</entry>
 
-            <entry rowsep="0"><literal>#!/bin/bash java</literal></entry>
+            <entry><para>Windows の コマンドライン（コマンドプロンプト）から <application>OmegaT</application> を実行する際に使用するバッチファイルです。内容は以下の行のみです：</para>
+
+            <programlisting>java -jar OmegaT.jar %*</programlisting>
+            </entry>
           </row>
-
-          <row>
-            <entry rowsep="0"/>
-
-            <entry rowsep="0"><literal>java -jar
-            <application>OmegaT</application>.jar $*</literal></entry>
-          </row>
-
-          <row>
-            <entry/>
-
-            <entry>Linux および Mac OS X のユーザーでしたら、役に立つことでしょう。コマンドラインで OmegaT_2.6 フォルダーに移動してから、このファイルに実行権限をつけてください（chmod +x OmegaT）。このファイルをコマンドラインから実行することで、OmegaT を起動できます。</entry>
-          </row>
-
-          <row>
-            <entry rowsep="0"><literal>OmegaT.bat</literal></entry>
-
-            <entry rowsep="0">Windows の コマンドライン（コマンドプロンプト）から <application>OmegaT</application> を実行する際に使用するバッチファイルです。内容は以下の行のみです：</entry>
-          </row>
-
-          <row>
-            <entry/>
-
-            <entry><literal>java -jar OmegaT.jar
-            %*</literal></entry>
-          </row>
-
+          
           <row>
             <entry><literal>OmegaT.jar</literal></entry>
 

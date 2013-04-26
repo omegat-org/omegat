@@ -40,7 +40,7 @@
       </listitem>
 
       <listitem>
-        <para><emphasis role="bold">VCS クライアント：</emphasis>サーバーへのインターフェースです。プロジェクトの管理者は、SVN または Git 用のクライアントをコンピューターにインストールして、OmegaT プロジェクトを管理します。Windows 向けの汎用クライアントとしては、 <ulink url="http://tortoisesvn.net/">TortoiseSVN</ulink> や <ulink url="http://code.google.com/p/tortoisegit/">TortoiseGit</ulink> が有名です。Linux や Mac OS X など、他の OS 向けにも同様のパッケージが存在します。</para>
+        <para><emphasis role="bold">VCS クライアント：</emphasis>サーバーへのインターフェースです。プロジェクトの管理者は、SVN または Git 用のクライアントをコンピューターにインストールして、OmegaT プロジェクトを管理します。Windows 向けの汎用クライアントとしては、<ulink url="http://tortoisesvn.net/">TortoiseSVN</ulink> や <ulink url="http://code.google.com/p/tortoisegit/">TortoiseGit</ulink> が有名です。Linux や Mac OS X など、他の OS 向けにも同様のパッケージが存在します。</para>
       </listitem>
 
       <listitem>

@@ -85,7 +85,7 @@
 
   <section id="creating.new.rule">
     <title>規則の新規作成<indexterm class="singular">
-        <primary>分節化</primary> <secondary>規則の新規作成</secondary> &lt;t2&gt;正規表現&lt;/t2&gt;
+        <primary>分節化</primary> <secondary>規則の新規作成</secondary> <seealso>正規表現</seealso>
       </indexterm></title>
 
     <para>分節化規則を大きく変更することは、特に最初の下訳が終わった後では、避けるべきです。しかし略称を認識させるために規則を追加するような、限定的な変更であれば、それは改善に値します。</para>

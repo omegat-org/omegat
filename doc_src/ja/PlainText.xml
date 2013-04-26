@@ -49,7 +49,7 @@
         <term>ファイルのエンコーディングをユニコードに変更する</term>
 
         <listitem>
-          <para>原文ファイルをテキストエディターで開き、エンコーディング <emphasis role="bold">UTF-8</emphasis> で保存しなおします。このとき、拡張子を <literal>.txt</literal> から <literal>.utf8</literal> に変更してください。OmegaT はこのファイルを UTF-8 ファイルとして自動的に認識します。 これは最も理にかなった解決策で、あなたを厄介ごとから救ってくれます。</para>
+          <para>原文ファイルをテキストエディターで開き、エンコーディング <emphasis role="bold">UTF-8</emphasis> で保存しなおします。このとき、拡張子を <literal>.txt</literal> から <literal>.utf8</literal> に変更してください。OmegaT はこのファイルを UTF-8 ファイルとして自動的に認識します。これは最も理にかなった解決策で、あなたを厄介ごとから救ってくれます。</para>
         </listitem>
       </varlistentry>
     </variablelist>
@@ -78,7 +78,7 @@
 
     <itemizedlist>
       <listitem>
-        <para><literal>.txt</literal> ファイルは、エンコーディングを「&lt;自動&gt;」で認識します。これは、コンピューターのデフォルトのエンコーディングに合わせることを意味します。 </para>
+        <para><literal>.txt</literal> ファイルは、エンコーディングを「&lt;自動&gt;」で認識します。これは、コンピューターのデフォルトのエンコーディングに合わせることを意味します。</para>
       </listitem>
     </itemizedlist>
 

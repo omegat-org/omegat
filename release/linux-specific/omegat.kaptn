@@ -1,6 +1,6 @@
 #!/usr/bin/kaptain
 
-# This version of the Kaptain OmegaT Launcher: 2012-05-05.
+# This version of the Kaptain OmegaT Launcher: 2013-04-26
 
 start "OmegaT Launcher" -> omticon top bottom ;
   top :tabbed  -> locs mem langs connect appearance about ;
@@ -23,10 +23,10 @@ javaloc_hc :horizontal -> @close="Close";
 
 
 # Location of the OmegaT.jar file (OmegaT version)
-# To make a particular OmegaT.jar file the default, replace ="OmegaT.jar"
+# To make a particular OmegaT.jar file the default, replace =""
 # with ="<full path of OmegaT.jar file>"
 
-jarfileloc :horizontal "Location of OmegaT.jar" -> @infile("OmegaT.jar")="OmegaT.jar" jarfileloc_help ;
+jarfileloc :horizontal "Location of OmegaT.jar" -> @infile("OmegaT.jar")="" jarfileloc_help ;
 jarfileloc_help :dialog "Help" -> jarfileloc_m jarfileloc_hc ;
 jarfileloc_m :horizontal ->  jarfileloc_t ;
 jarfileloc_t "Location of the OmegaT program. Use this menu item to \nselect a different (installed) version of OmegaT, for example for testing." -> @ ;

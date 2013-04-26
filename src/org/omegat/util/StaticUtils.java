@@ -1046,4 +1046,52 @@ public class StaticUtils {
         }
     }
 
+    /**
+     * Parse a command line string into arguments, interpreting
+     * double and single quotes as Bash does.
+     * @param cmd Command string
+     * @return Array of arguments
+     */
+    public static String[] parseCLICommand(String cmd) {
+        cmd = cmd.trim();
+        if (cmd.length() == 0) return new String[] { "" };
+        
+        StringBuilder arg = new StringBuilder();
+        List<String> result = new ArrayList<String>();
+        
+        final char noQuote = '\0';
+        char currentQuote = noQuote;
+        for (int i = 0; i < cmd.length(); i++) {
+            char c = cmd.charAt(i);
+            if (c == currentQuote) {
+                currentQuote = noQuote;
+            } else if (c == '"' && currentQuote == noQuote) {
+                currentQuote = '"';
+            } else if (c == '\'' && currentQuote == noQuote) {
+                currentQuote = '\'';
+            } else if (c == '\\' && i + 1 < cmd.length()) {
+                char next = cmd.charAt(i + 1);
+                if ((currentQuote == noQuote && Character.isWhitespace(next))
+                        || (currentQuote == '"' && next == '"')) {
+                    arg.append(next);
+                    i++;
+                } else {
+                    arg.append(c);
+                }
+            } else {
+                if (Character.isWhitespace(c) && currentQuote == noQuote && arg.length() > 0) {
+                    result.add(arg.toString());
+                    arg = new StringBuilder();
+                } else {
+                    arg.append(c);
+                }
+            }
+        }
+        // Catch last arg
+        if (arg.length() > 0) {
+            result.add(arg.toString());
+        }
+        return result.toArray(new String[0]);
+    }
+    
 } // StaticUtils

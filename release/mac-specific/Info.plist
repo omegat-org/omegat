@@ -30,7 +30,6 @@
 			<string>$JAVAROOT/lib/htmlparser.jar</string>
 			<string>$JAVAROOT/lib/jmyspell-core-1.0.0-beta-2.jar</string>
 			<string>$JAVAROOT/lib/jna.jar</string>
-			<string>$JAVAROOT/lib/JSAP-2.1.jar</string>
 			<string>$JAVAROOT/lib/jsch-0.1.49.jar</string>
 			<string>$JAVAROOT/lib/lucene-analyzers-3.6.2.jar</string>
 			<string>$JAVAROOT/lib/lucene-core-3.6.2.jar</string>

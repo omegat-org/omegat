@@ -62,9 +62,6 @@ Base64 is public domain and is included in OmegaT sources
 diff.jar is distributed under the GNU General Public License version 1 and greater
 Sources are available in OmegaT sources, in the directory lib/sources
 
-JSAP-2.1.jar is distributed under the GNU Lesser General Public License version 
-Sources are available in OmegaT sources, in the directory lib/sources
-
 orion-ssh2-214.jar is distributed under the Orion SSH for Java license
 
 lucene-*.jar are distributed under the Apache License 2.0

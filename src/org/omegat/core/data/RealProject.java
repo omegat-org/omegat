@@ -88,8 +88,6 @@ import org.omegat.util.StringUtil;
 import org.omegat.util.gui.UIThreadsUtil;
 import org.xml.sax.SAXParseException;
 
-import com.martiansoftware.jsap.CommandLineTokenizer;
-
 /**
  * Loaded project implementation. Only translation could be changed after project will be loaded and set by
  * Core.setProject.
@@ -545,7 +543,7 @@ public class RealProject implements IProject {
         command = expander.expandVariables(m_config);
         Log.log("Executing command: " + command);
         try {
-            Process p = Runtime.getRuntime().exec(CommandLineTokenizer.tokenize(command));
+            Process p = Runtime.getRuntime().exec(StaticUtils.parseCLICommand(command));
             processCache.push(p);
             CommandMonitor stdout = CommandMonitor.StdoutMonitor(p);
             CommandMonitor stderr = CommandMonitor.StderrMonitor(p);

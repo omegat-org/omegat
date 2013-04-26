@@ -325,7 +325,6 @@ OmegaT uses the following libraries:
   JSch (JSch License)
   Base64 (public domain)
   Diff (GPL)
-  JSAP (LGPL)
   orion-ssh2-214 (Orion SSH for Java license)
   lucene-*.jar (Apache License 2.0)
   The English tokenizers (org.omegat.tokenizer.SnowballEnglishTokenizer and

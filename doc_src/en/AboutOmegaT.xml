@@ -45,8 +45,7 @@
         OmegaT uses glossaries containing translations of single words or
         small phrases: a simplified bilingual dictionary for a specific
         domain. For your reference, OmegaT displays the translation of any
-        words that happen to be present in the segment that currently has
-        focus.</para>
+        word that is both present in the segment and registered in the glossary.</para>
       </listitem>
     </itemizedlist>
 
@@ -61,10 +60,10 @@
         the text groups according to the segmentation rules, and displays the
         segments one by one so that you can proceed with the translation.
         OmegaT stores your translations and proposes possible translations
-        from similar segments in previous memory files. When you are ready to
-        view the final product, you can export the translated files, open them
-        in the appropriate application and view the translation in the final
-        format...</para>
+        from similar segments in registered in the translation memory files. 
+        When you are ready to view the final product, you can export the
+        translated files, open them in the appropriate application and view
+        the translation in the final format...</para>
       </listitem>
     </itemizedlist>
   </section>
@@ -77,9 +76,8 @@
 
     <itemizedlist>
       <listitem>
-        <para><emphasis role="bold"> Instant start guide:</emphasis> this
-        chapter is intended as an Instant Start Guide for beginners and “tyre
-        kickers”, showing the complete procedure from opening a new
+        <para><emphasis role="bold">Learn to use OmegaT in 5 minutes!:</emphasis> this
+        chapter is intended as a quick tutorial for beginners as well as people who already know CAT tools, showing the complete procedure from opening a new
         translation project through to completing the translation.</para>
       </listitem>
     </itemizedlist>
@@ -174,7 +172,7 @@
         connection is available, various MT services such as Google Translate
         and Microsoft Translator can be used from within OmegaT. If spell
         checking is activated, spelling mistakes and typos are recognized and
-        can be corrected during translation. The openSource LanguageTool can
+        can be corrected during translation. The open source LanguageTool can
         be used to correct common grammatical and stylistic mistakes.</para>
       </listitem>
 

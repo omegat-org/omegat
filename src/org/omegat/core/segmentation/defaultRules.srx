@@ -2087,6 +2087,10 @@
           <afterbreak>\s</afterbreak>
         </rule>
         <rule break="no">
+          <beforebreak>\bn\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule>
+        <rule break="no">
           <beforebreak>prof\.</beforebreak>
           <afterbreak>\s</afterbreak>
         </rule>

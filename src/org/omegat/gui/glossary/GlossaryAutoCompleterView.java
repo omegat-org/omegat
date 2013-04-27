@@ -50,9 +50,11 @@ public class GlossaryAutoCompleterView extends AutoCompleterView {
         List<String> entryList = new ArrayList<String>();
         
         for (GlossaryEntry entry : Core.getGlossary().getDisplayedEntries()) {
-            String candidate = entry.getLocText();
-            if (candidate.toLowerCase().startsWith(wordChunk.toLowerCase())) {
-                entryList.add(candidate);
+            String items[] = entry.getLocText().split(", ");
+            for (int i = 0; i < items.length; i++) {
+                if (items[i].toLowerCase().startsWith(wordChunk.toLowerCase())) {
+                    entryList.add(items[i]);
+                }
             }
         }
         

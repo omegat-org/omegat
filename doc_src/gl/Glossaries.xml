@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<chapter id="chapter.glossaries">
+  <title>Glosarios<indexterm class="singular">
+      <primary>Xanelas e paneis de OmegaT</primary> <secondary>Panel do glosario</secondary>
+    </indexterm><indexterm class="singular">
+      <primary>Glosarios</primary>
+    </indexterm></title>
+
+  <para>Os glosarios son ficheiros creados e actualizados manualmente para o seu uso en <application>OmegaT</application>.</para>
+
+  <para>Se un proxecto de <application>OmegaT</application> contén un ou máis glosarios, calquera termo do glosario que se atope no segmento activo se amosará automaticamente no visor do glosario.</para>
+
+  <para>Pode definir a súa localización e nome no diálogo de propiedades do proxecto. A extensión debe ser <filename>.txt</filename> (se non, se engadirá). A localización do glosario debe ser dentro do cartafol <filename>/glossary</filename>, mais pode estar nun cartafol inferior (por exemplo, <filename>glossary/sub/glosario.txt</filename>). O ficheiro non necesita existir cando se configure, se creará (se é necesario) cando engada unha entrada ao glosario. Se xa existe o ficheiro, non se intentará verificar o formato ou a codificación de caracteres do ficheiro: as novas entradas sempre estarán nun formato separado por tabuladores e en UTF-8. Xa que o contido existente non se tocará, se limitará o dano que se poida facer a un documento existente.</para>
+
+  <section>
+    <title>Emprego</title>
+
+    <para>Para empregar un glosario xa existente, simplemente ten que situalo no cartafol<indexterm class="singular">
+        <primary>Ficheiros do proxecto</primary> <secondary>Subcartafol glossary</secondary>
+      </indexterm> <filename>/glossary</filename> despois de crear o proxecto. <application>OmegaT</application> detecta automaticamente os ficheiros de glosario neste cartafol cando se abre un proxecto. Os termos no segmento activo que atope <application>OmegaT</application> no(s) ficheiro(s) do glosario se amosarán no panel do glosario:</para>
+
+    <indexterm class="singular">
+      <primary>Glosarios, panel do glosario</primary>
+    </indexterm>
+
+    <figure>
+      <title>Panel do glosario</title>
+
+      <mediaobject>
+        <imageobject role="html">
+          <imagedata fileref="images/GlossaryPane_25.png"/>
+        </imageobject>
+
+        <imageobject role="fo">
+          <imagedata fileref="images/GlossaryPane_25.png" width="60%"/>
+        </imageobject>
+      </mediaobject>
+    </figure>
+
+    <para>A palabra anterior ao símbolo = é o termo de orixe, e a súa tradución é (ou son) as palabras despois de =. A entrada de vocabulario pode ter un comentario engadido. A función de glosario só atopa coincidencias exactas coa entrada do glosario (por exemplo, non atopa formas flexionadas, etc.). Poden engadirse novos termos manualmente ao(s) ficheiro(s) do glosario durante a tradución, por exemplo, nun editor de textos. Os novos termos non se recoñecerán ata que se garden os cambios no ficheiro de texto.</para>
+
+    <para>O termo de orixe non ten por que ser un elemento dunha soa palabra, como se pode ver no seguinte exemplo:</para>
+
+    <figure>
+      <title>Entradas con múltiples palabras en glosarios - exemplo<indexterm class="singular">
+          <primary>Glosarios</primary> <secondary>Panel do glosario</secondary> <tertiary>entradas con múltiples palabras</tertiary>
+        </indexterm></title>
+
+      <mediaobject>
+        <imageobject role="html">
+          <imagedata fileref="images/MultiTerm_Glossary_25.png"/>
+        </imageobject>
+
+        <imageobject role="fo">
+          <imagedata fileref="images/MultiTerm_Glossary_25.png" width="80%"/>
+        </imageobject>
+      </mediaobject>
+    </figure>
+
+    <para>O elemento subliñado «pop-up menu» pode atoparse no panel do glosario como «pojavni menu». Destacándoo no panel do glosario e facendo despois clic dereito insíreo na posición do cursor no segmento traducido.<footnote>
+        <para>Teña en conta que no caso anterior, isto é so a metade (ou incluso menos) da historia, xa que o idioma de destino (esloveno) emprega declinacións. Así que a forma inserida «pojavni menu» en forma nominativa ten que cambiarse a «pojavnem meniju», é dicir, a locativo. Así que probabelmente sexa máis rápido escribir o termo correctamente sen molestarse co glosario e os atallos de teclado.</para>
+      </footnote></para>
+  </section>
+
+  <section>
+    <title><indexterm class="singular">
+        <primary>Glosarios</primary> <secondary>Formato do ficheiro</secondary>
+      </indexterm>Formato do ficheiro<indexterm class="singular">
+        <primary>Ficheiros do proxecto</primary> <secondary>Ficheiros de usuario</secondary> <seealso>Glosarios</seealso>
+      </indexterm></title>
+
+    <para>Os ficheiros do glosario son ficheiros de texto plano simples que conteñen tres columnas, listas delimitadas mediante tabuladores cos termos de orixe e destino na primeira e segunda columna respectivamente. A terceira columna pode empregarse para información adicional. Pode ter entradas sen columna de destino, é dicir, soamente co termo de orixe e o comentario.</para>
+
+    <para>Os ficheiros de glosario poden estar na codificación predeterminada do sistema (e indicado mediante a extensión .tab) ou en UTF-8 (extensión .utf8). Prefírese a codificación Unicode (UTF8) por razóns obvias. Tamén é compatíbel o formato CSV. Este formato é o mesmo que o dividido por tabulacións: termo de orixe e termo de destino. Os campos de comentarios se separan cunha coma ','. As cadeas poden pecharse con comiñas &quot;, que permite que as cadeas conteñan comas:</para>
+
+    <para><literal>&quot;Este é un termo de orixe, que contén unha coma&quot;, &quot;this is a source term, which contains a comma&quot;</literal></para>
+
+    <para>Ademais do formato de texto plano, tamén e compatíbel o formato <indexterm class="singular">
+        <primary>Glosarios</primary> <secondary>Formato TBX</secondary>
+      </indexterm> TBX. TBX (Term Base eXchange) é o estándar aberto baseado en XML para o intercambio de información terminolóxica estruturada. TBX aprobouse como o estándar internacional por LISA e ISO. Se xa ten un sistema de xestión terminolóxica (MultiTerm, por exemplo) é moi posíbel que lle ofreza a exportación de datos terminolóxicos ao formato TBX. A <ulink url="http://www.microsoft.com/Language/es-ES/Terminology.aspx">Colección terminolóxica de Microsoft</ulink> <indexterm class="singular">
+        <primary>Glosarios</primary> <secondary>Colección de terminoloxía de Microsoft</secondary>
+      </indexterm> pode descargarse en case cen linguas e pode servir coma unha pedra angular do glosario de TIC.</para>
+  </section>
+
+  <section>
+    <title>Como crear glosarios<indexterm class="singular">
+        <primary>Glosarios</primary> <secondary>Crear un glosario</secondary>
+      </indexterm></title>
+
+    <para>A configuración do proxecto permítelle inserir un nume para un ficheiro de glosario modificábel (vexa o principio deste capítulo). Faga clic dereito no panel do glosario ou prema <keycap>Ctrl+Shift+G</keycap> para engadir unha nova entrada. Abrirase un diálogo, que lle permitirá engadir o termo de orixe, o termo de destino e calquera comentario que poida ter:</para>
+
+    <mediaobject role="html">
+      <imageobject>
+        <imagedata fileref="images/GlossaryEntry_25.png"/>
+      </imageobject>
+
+      <imageobject role="fo">
+        <imagedata fileref="images/GlossaryEntry_25.png" width="80%"/>
+      </imageobject>
+    </mediaobject>
+
+    <para>Os contidos dos ficheiros de glosario se manteñen na memoria e se cargan cando se abre ou recarga o proxecto. Actualizar un ficheiro de glosario e tan simple como: premer <keycap>Ctrl+Shift+G</keycap> e inserir o novo termo, a súa tradución e calquera comentario que queira facer (asegurándose de que preme o tabulador entre os campos) e garde o ficheiro. Os contidos do panel do glosario se actualizarán conforme aos cambios realizados.</para>
+
+    <para><indexterm class="singular">
+        <primary>Glosarios</primary> <secondary>Localización do ficheiro de glosario modificábel</secondary>
+      </indexterm>A localización do ficheiro de glosario modificábel pode estabelecerse no diálogo <guimenuitem>Proxecto &gt; Propiedades... </guimenuitem> As extensións recoñecidas con <filename>TXT</filename> e <filename>UTF8</filename>.</para>
+
+    <para><emphasis role="bold">Nota:</emphasis> Hai outros medios para crear un simple ficheiro con entradas delimitadas por tabulacións. Non hai nada en contra de empregar Notepad++ en Windows, GEdit en Linux por exemplo ou algún programa de folla de cálculo para este propósito: pódese empregar calquera aplicación que poida xestionar UTF8 e que poida amosar espazo en branco (de modo que non se esqueza dos caracteres de <keycap>tabulación</keycap> necesarios).</para>
+  </section>
+
+  <section>
+    <title><indexterm class="singular">
+        <primary>Glosarios</primary> <secondary>MultiTerm de Trados</secondary>
+      </indexterm>Empregar o MultiTerm de Trados</title>
+
+    <para>Os datos exportados do MultiTerm de Trados poden empregarse como glosarios de <application>OmegaT</application> sen ningunha modificación adicional, posto que teñen a extensión de ficheiro <filename>.tab</filename> e os campos de orixe e destino están nas dúas primeiras columnas. Se exporta empregando a opción do sistema «Exportar delimitando con tabulacións», necesitará eliminar as primeiras 5 columnas (Seq. Nr, Data de creación, etc.) As versións máis novas de MultiTerm son compatíbeis coa exportación en formato TBX.</para>
+  </section>
+
+  <section>
+    <title><indexterm class="singular">
+        <primary>Glosarios</primary> <secondary>Problemas cos glosarios</secondary>
+      </indexterm>Problemas comúns cos glosarios</title>
+
+    <para><emphasis role="bold">Problema: non se amosan termos do glosario - posíbeis causas:</emphasis></para>
+
+    <itemizedlist>
+      <listitem>
+        <para>Non hai ningún glosario no cartafol «glossary».</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>O ficheiro do glosario está baleiro.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Os elementos non están separados cun carácter de tabulación.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>O ficheiro do glosario non ten unha extensión correcta (.tab ou .utf8).</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Non hai unha coincidencia EXACTA entre a entrada do glosario e o texto de orixe no seu documento, por exemplo, plurais.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>O ficheiro de glosario non ten a codificación correcta.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Non hai termos no segmento activo que coincidan con ningún termo do glosario.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Un ou máis dos problemas anteriores se arranxaron, mais non se recargou o proxecto.</para>
+      </listitem>
+    </itemizedlist>
+
+    <para><emphasis role="bold">Problema: no panel de glosario, non se amosan ben algúns caracteres</emphasis></para>
+
+    <itemizedlist>
+      <listitem>
+        <para>...mais os mesmos caracteres se amosan ben no panel de edición: a extensión e a codificación do ficheiro non coinciden.</para>
+      </listitem>
+    </itemizedlist>
+  </section>
+</chapter>

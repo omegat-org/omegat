@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<appendix id="appendix.keyboard">
+  <title>Atallos de teclado no editor</title>
+
+  <para>Este pequeno texto describe o comportamento do teclado no panel de edición. O termo «Desprazar ao interior do segmento» significa que o cursor desprazarase ao comezo do segmento se xa estaba antes do segmento, e á fin se estaba despois del.</para>
+
+  <table>
+    <title>Comportamento do teclado no editor</title>
+
+    <tgroup cols="2">
+      <colspec align="left" colnum="1"/>
+
+      <colspec align="left" colnum="2"/>
+
+      <thead>
+        <row>
+          <entry align="left">Combinación de teclas</entry>
+
+          <entry align="left">Acción</entry>
+        </row>
+      </thead>
+
+      <tbody>
+        <row>
+          <entry><emphasis role="bold">Esquerda:</emphasis></entry>
+
+          <entry>un carácter á esquerda, mais non máis alá co comezo do segmento</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">Dereita:</emphasis></entry>
+
+          <entry>un carácter á dereita, mais non máis aló da fin do segmento</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">Ctrl+Esquerda:</emphasis></entry>
+
+          <entry>unha palabra á esquerda, mais non máis alá co comezo do segmento</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">Ctrl+Dereita:</emphasis></entry>
+
+          <entry>unha palabra á dereita, mais non máis aló da fin do segmento</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">RePág:</emphasis></entry>
+
+          <entry>retroceder unha páxina no documento</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">AvPág:</emphasis></entry>
+
+          <entry>avanzar unha páxina no documento</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">Inicio*</emphasis></entry>
+
+          <entry>moverse ata o comezo da liña do segmento</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">Fin*</emphasis></entry>
+
+          <entry>moverse ata o fin da liña do segmento</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">Ctrl+Inicio</emphasis></entry>
+
+          <entry>moverse ata o comezo do segmento</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">Ctrl+Fin</emphasis></entry>
+
+          <entry>moverse ata a fin do segmento</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">Ctrl+RePág</emphasis></entry>
+
+          <entry>moverse ata o comezo do documento (Mac: <emphasis role="bold">Cmd+RePág</emphasis>)</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">Ctrl+AvPág</emphasis></entry>
+
+          <entry>moverse ata a fin do documento (Mac: <emphasis role="bold">Cmd+AvPág</emphasis>)</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">Retroceder*</emphasis></entry>
+
+          <entry>eliminar un carácter detrás do cursor</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">Suprimir*</emphasis></entry>
+
+          <entry>eliminar un carácter despois do cursor</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">Ctrl+Borrar</emphasis></entry>
+
+          <entry>eliminar caracteres ata o inicio da palabra anterior (Mac: <emphasis role="bold">Alt+Borrar</emphasis>)</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">Ctrl+Suprimir</emphasis></entry>
+
+          <entry>eliminar caracteres ata o inicio da seguinte palabra (Mac: <emphasis role="bold">Alt+Suprimir</emphasis>)</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">Ctrl+Enter</emphasis></entry>
+
+          <entry>abrir un segmento previo (Mac: <emphasis role="bold">Cmd+Enter</emphasis>)</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">Ctrl+A</emphasis></entry>
+
+          <entry>seleccionar o segmento completo (Mac: <emphasis role="bold">Cmd+A</emphasis>)</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">Ctrl+Shift+O</emphasis></entry>
+
+          <entry>Cambio do sentido de lectura</entry>
+        </row>
+      </tbody>
+    </tgroup>
+  </table>
+
+  <para>* Estas teclas teñen un comportamento distinto cando o cursor está fora do segmento a editar:</para>
+
+  <itemizedlist>
+    <listitem>
+      <para><emphasis role="bold">Inicio: </emphasis> despraza o cursor ao comezo do segmento activo</para>
+    </listitem>
+
+    <listitem>
+      <para><emphasis role="bold">Fin: </emphasis> despraza o cursor á fin do segmento activo</para>
+    </listitem>
+
+    <listitem>
+      <para><emphasis role="bold">Retroceder: </emphasis>nada</para>
+    </listitem>
+
+    <listitem>
+      <para><emphasis role="bold">Suprimir: </emphasis>nada</para>
+    </listitem>
+
+    <listitem>
+      <para>Se se preme <emphasis role="bold">calquera tecla de carácter</emphasis> fora do segmento a editar, será ignorado.</para>
+    </listitem>
+  </itemizedlist>
+
+  <para>A tecla «Shift» non ten ningún comportamento especial per se: cando se preme a tecla «Shift», todas as teclas moven o cursor de xeito normal, excepto no caso da combinación <literal>Shift+Enter</literal>, que insire un salto de liña no texto.</para>
+
+  <para>As combinacións de teclas xerais como seleccionar todo (<keycap>Ctrl+A</keycap>), pegar (<emphasis role="bold">Ctrl+V</emphasis>), cortar (<emphasis role="bold">Ctrl+X</emphasis>), copiar (<emphasis role="bold">Ctrl+C)</emphasis>), inserir coincidencia <emphasis role="bold">(Ctrl+I</emphasis>) e inserir cadea orixinal (<emphasis role="bold">Ctrl+Shift+I</emphasis>) actúan só en concordancia co segmento aberto.</para>
+
+  <para>Teña en conta que pode personalizar os atallos de teclado para que estean acordes ás súas preferencias. Vexa <link linkend="ch04.shortcuts.customization">Apéndice de personalización de atallos de teclado</link></para>
+</appendix>

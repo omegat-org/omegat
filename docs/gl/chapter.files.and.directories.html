@@ -1,0 +1,429 @@
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <title>Chapter&nbsp;8.&nbsp;Ficheiros e cartafoles de OmegaT</title>
+      <link rel="stylesheet" type="text/css" href="OmegaT.css">
+      <meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
+      <link rel="home" href="index.html" title="OmegaT - Guía de usuario">
+      <link rel="up" href="index.html" title="OmegaT - Guía de usuario">
+      <link rel="prev" href="chapter.file.filters.html" title="Chapter&nbsp;7.&nbsp;Filtros de ficheiro">
+      <link rel="next" href="chapter.files.to.translate.html" title="Chapter&nbsp;9.&nbsp;Ficheiros a traducir">
+   </head>
+   <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+      <div class="navheader">
+         <table width="100%" summary="Navigation header">
+            <tr>
+               <th colspan="3" align="center">Chapter&nbsp;8.&nbsp;Ficheiros e cartafoles de <span class="application">OmegaT</span></th>
+            </tr>
+            <tr>
+               <td width="20%" align="left"><a accesskey="p" href="chapter.file.filters.html">Prev</a>&nbsp;
+               </td>
+               <th width="60%" align="center">&nbsp;</th>
+               <td width="20%" align="right">&nbsp;<a accesskey="n" href="chapter.files.to.translate.html">Next</a></td>
+            </tr>
+         </table>
+         <hr>
+      </div>
+      <div class="chapter">
+         <div class="titlepage">
+            <div>
+               <div>
+                  <h1 class="title"><a name="chapter.files.and.directories"></a>Chapter&nbsp;8.&nbsp;Ficheiros e cartafoles de <span class="application">OmegaT</span></h1>
+               </div>
+            </div>
+         </div>
+         <div class="toc">
+            <dl class="toc">
+               <dt><span class="section"><a href="chapter.files.and.directories.html#translation.project.files">1. Ficheiros do proxecto de tradución</a></span></dt>
+               <dd>
+                  <dl>
+                     <dt><span class="section"><a href="chapter.files.and.directories.html#file.omegat.project">1.1. Cartafol superior</a></span></dt>
+                     <dt><span class="section"><a href="chapter.files.and.directories.html#d0e4916">1.2. Subcartafol dictionary</a></span></dt>
+                     <dt><span class="section"><a href="chapter.files.and.directories.html#d0e4924">1.3. Subcartafol glossary</a></span></dt>
+                     <dt><span class="section"><a href="chapter.files.and.directories.html#folder.OmegaT">1.4. Subcartafol omegat</a></span></dt>
+                     <dt><span class="section"><a href="chapter.files.and.directories.html#folder.source">1.5. Subcartafol source</a></span></dt>
+                     <dt><span class="section"><a href="chapter.files.and.directories.html#folder.target">1.6. Subcartafol target</a></span></dt>
+                  </dl>
+               </dd>
+               <dt><span class="section"><a href="chapter.files.and.directories.html#user.files">2. Ficheiros de configuración do usuario</a></span></dt>
+               <dt><span class="section"><a href="chapter.files.and.directories.html#application.files">3. Ficheiros de aplicacións</a></span></dt>
+            </dl>
+         </div>
+         <p><span class="application">OmegaT</span> funciona con tres tipos de ficheiros.
+         </p>
+         <div class="itemizedlist">
+            <ul class="itemizedlist" style="list-style-type: disc; ">
+               <li class="listitem">
+                  <p>Ficheiros do proxecto de tradución: constitúen o proxecto de tradución. Perdelos podería afectar á integridade do proxecto
+                     e a súa capacidade de completar o traballo. Os ficheiros do proxecto son os ficheiros máis importantes en <span class="application">OmegaT</span>. Son os ficheiros cos que traballas día a día ao traducir.
+                  </p>
+               </li>
+            </ul>
+         </div>
+         <div class="itemizedlist">
+            <ul class="itemizedlist" style="list-style-type: disc; ">
+               <li class="listitem">
+                  <p>Ficheiros de configuración do usuario: son creados cando se modifica o comportamento de OmegaT pola configuración das preferencias
+                     do usuario. Perdelas normalmente resulta en que OmegaT volve ao «estado de fábrica». Isto pode ser algo problemático ás veces
+                     cando estás en medio dunha tradución.
+                  </p>
+               </li>
+            </ul>
+         </div>
+         <div class="itemizedlist">
+            <ul class="itemizedlist" style="list-style-type: disc; ">
+               <li class="listitem">
+                  <p>Ficheiros de aplicacións: están incluídos no paquete que descarga. A maioría deles son necesarios para que OmegaT funcione
+                     propiamente. Se por algunha razón perde ou corrompe algún destes ficheiros, simplemente descargue e/ou reinstale OmegaT para
+                     recuperalos.
+                  </p>
+               </li>
+            </ul>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="translation.project.files"></a>1.&nbsp;Ficheiros do proxecto de tradución
+                     </h2>
+                  </div>
+               </div>
+            </div><a class="indexterm" name="d0e4849"></a><p>Un proxecto de tradución de <span class="application">OmegaT</span> consiste nun número de ficheiros e cartafoles.
+            </p>
+            <p>Cando crea un proxecto de tradución, OmegaT crea automaticamente un cartafol co nome especificado e unha lista de cartafoles:</p>
+            <div class="figure"><a name="OmegaT.project"></a><p class="title"><b>Figure&nbsp;8.1.&nbsp;Proxecto OmegaT</b></p>
+               <div class="figure-contents">
+                  <div class="mediaobject"><img src="images/Omegatproject.png" alt="Proxecto OmegaT"></div>
+               </div>
+            </div><br class="figure-break"><p>Poden escollerse localizacións alternativas para algúns cartafoles na creación do proxecto ou durante a tradución. É polo
+               tanto posíbel seleccionar cartafoles existentes ou crear cartafoles en localizacións que reflictan os seus hábitos de xestión
+               de proxectos e fluxo de traballo. Para cambiar a localización dos cartafoles unha vez creado o proxecto, abra <span class="guimenuitem">Proxecto &gt; Propiedades...</span> no menú ou con <span class="guibutton">Ctrl+E</span> e faga os cambios necesarios.
+            </p>
+            <p>Nun xestor de ficheiros un proxecto de tradución semella e funciona como calquera outro cartafol. No seguinte exemplo o cartafol
+               <code class="filename">my projects</code> contén tres proxectos de OmegaT:
+            </p>
+            <div class="figure"><a name="OmegaT.projects.and.subdirectories"></a><p class="title"><b>Figure&nbsp;8.2.&nbsp;Proxectos de OmegaT e subcartafoles</b></p>
+               <div class="figure-contents">
+                  <div class="mediaobject"><img src="images/OmegaT_projects_and_subdirectories.png" alt="Proxectos de OmegaT e subcartafoles"></div>
+               </div>
+            </div>
+            <p><br class="figure-break"></p>
+            <p>Facendo dobre clic no elemento coa icona de OmegaT é suficiente para abrir o proxecto. Un proxecto de tradución <span class="bold"><strong>Proxecto_Exemplo</strong></span> creado coa configuración predeterminada crearase como un novo subcartafol coa seguinte estrutura:
+            </p>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="file.omegat.project"></a>1.1.&nbsp;Cartafol superior<a class="indexterm" name="d0e4897"></a></h3>
+                     </div>
+                  </div>
+               </div>
+               <p>O cartafol superior dun cartafol sempre contén o ficheiro <code class="filename">OmegaT.Project</code>, que contén os parámetros do proxecto tal e como se definiron na xanela de propiedades do proxecto (<span class="guimenuitem">Proxecto &gt; Propiedades</span>). Mentres se vai traducindo, crearanse ficheiros adicionais (<span class="emphasis"><em><code class="filename">project_name</code></em></span><code class="filename">-omegat.tmx, project_name-level1.tmx e project_name-level2.tmx</code>) que se actualizarán durante o proceso de tradución. Estes ficheiros conteñen a mesma información das memorias de tradución
+                  mais en diferentes formas, para poder ser empregadas despois en futuros proxectos.
+               </p>
+            </div>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="d0e4916"></a>1.2.&nbsp;Subcartafol dictionary
+                        </h3>
+                     </div>
+                  </div>
+               </div>
+               <p>Inicialmente baleiro, este cartafol pode conter dicionarios que engada ao proxecto. Vexa o <a class="link" href="chapter.dictionaries.html" title="Chapter&nbsp;17.&nbsp;Dicionarios">capítulo Dicionarios</a> para máis información.
+               </p>
+            </div>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="d0e4924"></a>1.3.&nbsp;Subcartafol glossary
+                        </h3>
+                     </div>
+                  </div>
+               </div>
+               <p>Este cartafol está inicialmente baleiro. Conterá glosarios que empregue no proxecto. Vexa o <a class="link" href="chapter.glossaries.html" title="Chapter&nbsp;18.&nbsp;Glosarios">capítulo Glosarios</a> para máis información.
+               </p>
+            </div>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="folder.OmegaT"></a>1.4.&nbsp;Subcartafol omegat<a class="indexterm" name="d0e4935"></a></h3>
+                     </div>
+                  </div>
+               </div>
+               <p>O subcartafol <span class="bold"><strong>omegat</strong></span> contén polo menos un e posibelmente moitos outros ficheiros. O ficheiro máis importante é <code class="filename">project_save.tmx,</code> pois é a memoria de tradución coa que traballa o proxecto. Vanse engadindo copias deste ficheiro (coa extensión bak) progresivamente
+                  neste subcartafol, primeiro ao comezo da sesión de tradución, ao final, e mentres progresa a tradución. Deste modo se pode
+                  advertir dunha perda de datos (vexa Prever a perda de datos no capítulo <a class="link" href="chapter.misc.html" title="Chapter&nbsp;21.&nbsp;Outros asuntos">Outros.</a></p>
+               <p>Durante a tradución poden crearse ficheiros adicionais neste subcartafol, ficheiros como os seguintes:</p>
+               <div class="informaltable">
+                  <table border="1">
+                     <colgroup>
+                        <col align="left">
+                        <col>
+                     </colgroup>
+                     <tbody>
+                        <tr>
+                           <td align="left">stats.txt</td>
+                           <td align="left"><a class="indexterm" name="d0e4961"></a>contén as estatísticas actuais do proxecto. Pode velas seleccionando <span class="guimenuitem">Ferramentas &gt; Estatísticas</span></td>
+                        </tr>
+                        <tr>
+                           <td align="left">ignored_words.txt. learned_words.txt</td>
+                           <td align="left"><a class="indexterm" name="d0e4973"></a>son creados e empregados polo verificador ortográfico. Se xa reuniu palabras que lle gustaría que o verificador ortográfico
+                              ignore ou acepte, só necesita copiar as ficheiros correspondentes no subcartafol <code class="filename">omegat</code> do seu proxecto actual.
+                           </td>
+                        </tr>
+                        <tr>
+                           <td align="left">project_stats_match.txt</td>
+                           <td align="left">contén as últimas estatísticas de coincidencia, xeradas por <span class="guimenuitem">Ferramentas &gt; Estatísticas de coincidencias</span></td>
+                        </tr>
+                        <tr>
+                           <td align="left">segmentation.conf</td>
+                           <td align="left">se existe, contén regras de segmentación específicas do proxecto, se se requiren en <span class="guimenuitem">Proxecto &gt; Propiedades...</span> Vexa o <a class="link" href="chapter.project.properties.html" title="Chapter&nbsp;6.&nbsp;Propiedades do proxecto">Capítulo de propiedades do proxecto</a></td>
+                        </tr>
+                        <tr>
+                           <td align="left">filters.xml</td>
+                           <td align="left">se existe, contén regras de filtros específicas do proxecto, se se requiren en <span class="guimenuitem">Proxecto &gt; Propiedades...</span> Vexa o <a class="link" href="chapter.project.properties.html" title="Chapter&nbsp;6.&nbsp;Propiedades do proxecto">Capítulo de propiedades do proxecto</a></td>
+                        </tr>
+                     </tbody>
+                  </table>
+               </div>
+            </div>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="folder.source"></a>1.5.&nbsp;Subcartafol source<a class="indexterm" name="d0e5012"></a></h3>
+                     </div>
+                  </div>
+               </div>
+               <p>O subcartafol source contén os ficheiros que serán traducidos. Pode engadir ficheiros nel máis tarde. Teña en conta que a
+                  estrutura do subcartafol source pode tomar a forma que vostede queira. Se os ficheiros a traducir son partes dunha estrutura
+                  en árbore (como nunha páxina web), só necesita especificar o subcartafol superior e OmegaT manterá os contidos enteiros, mentres
+                  mantén a estrutura en árbore intacta.
+               </p>
+            </div>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="folder.target"></a>1.6.&nbsp;Subcartafol target<a class="indexterm" name="d0e5022"></a></h3>
+                     </div>
+                  </div>
+               </div>
+               <p>Este subcartafol está inicialmente baleiro. Para engadir contidos a el, seleccione <span class="guimenu">Proxecto</span> → <span class="guimenuitem">Crear documentos traducidos</span> (<span class="shortcut"><strong><span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>D</strong></span></strong></span>). Os ficheiros do cartafol <code class="filename">source</code>, tanto traducidos coma non, xéranse entón aquí, coa mesma xerarquía que a presente no subcartafol source. Os contidos do
+                  subcartafol source reflectirán o estado da tradución, tal e como está ma memoria de tradución do proxecto, gardada no actual
+                   <span class="bold"><strong>/omegat/project_save.tmx</strong></span>. Os segmentos sen traducir quedarán no idioma orixinal.
+               </p>
+            </div>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="user.files"></a>2.&nbsp;Ficheiros de configuración do usuario<a class="indexterm" name="d0e5050"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <p>Os ficheiros de usuario conteñen a información aplicábel a todos os proxectos dun usuario dado;</p>
+            <div class="informaltable">
+               <table border="1">
+                  <colgroup>
+                     <col align="left">
+                     <col>
+                  </colgroup>
+                  <tbody>
+                     <tr>
+                        <td align="left">logs/OmegaT.log</td>
+                        <td align="left">Este ficheiro rexistra as mensaxes de erro de Java mentres <span class="application">OmegaT</span> está sendo executado. Se OmegaT se comporta dun xeito errático, é importante incluír este ficheiro ou a parte relevante a
+                           un informe de erro
+                        </td>
+                     </tr>
+                     <tr>
+                        <td align="left">script/</td>
+                        <td align="left">cartafol que contén ficheiros de script para o plugin de script, se está instalado</td>
+                     </tr>
+                     <tr>
+                        <td align="left">filters.xml</td>
+                        <td align="left">Filtros de ficheiro predeterminados do usuario</td>
+                     </tr>
+                     <tr>
+                        <td align="left">omegat.prefs</td>
+                        <td align="left">Preferencias de OmegaT</td>
+                     </tr>
+                     <tr>
+                        <td align="left">segmentation.conf</td>
+                        <td align="left">Regras de segmentación predeterminadas do usuario</td>
+                     </tr>
+                     <tr>
+                        <td align="left">uiLayout.xml</td>
+                        <td align="left">Ficheiro xml con todas as configuracións e opcións accesíbeis a través da interface de usuario</td>
+                     </tr>
+                  </tbody>
+               </table>
+            </div>
+            <p>Teña en conta que as regras de segmentación e de filtros predeterminadas poden sobrescribirse pola configuración específica
+               do proxecto (vexa anteriormente). A localización dos ficheiros de usuario depende da plataforma que use:
+            </p>
+            <div class="informaltable">
+               <table border="1">
+                  <colgroup>
+                     <col align="left">
+                     <col>
+                  </colgroup>
+                  <tbody>
+                     <tr>
+                        <td align="left">Windows 2000 e XP</td>
+                        <td align="left"><code class="literal">Documents and Settings\&lt;Nome de usuario&gt;\Application Data\<span class="application">OmegaT</span></code></td>
+                     </tr>
+                     <tr>
+                        <td align="left">Windows Vista e 7</td>
+                        <td align="left"><code class="literal">Users\&lt;Nome de usuario&gt;\AppData\Roaming\<span class="application">OmegaT</span></code></td>
+                     </tr>
+                     <tr>
+                        <td align="left">Outros Windows</td>
+                        <td align="left"><code class="literal">&lt;Algo&gt;\<span class="application">OmegaT</span></code> (&lt;Algo&gt; correspóndese coa localización do cartafol «home» determinado por Java)
+                        </td>
+                     </tr>
+                     <tr>
+                        <td align="left">Linux/Solaris/FreeBSD</td>
+                        <td align="left"><code class="literal">&lt;Cartafol de inicio do usuario&gt;/.omegat </code>(.omegat é un cartafol, o punto que precede ao nome faino invisíbel a menos que escriba ls -a ou unha orde equivalente)
+                        </td>
+                     </tr>
+                     <tr>
+                        <td align="left">MAC OS X</td>
+                        <td align="left"><code class="filename">&lt;Cartafol de inicio do usuario&gt;/Library/Preferences/<span class="application">OmegaT</span></code></td>
+                     </tr>
+                     <tr>
+                        <td align="left">Outros</td>
+                        <td align="left"><code class="filename">&lt;Cartafol de inicio do usuario&gt;</code></td>
+                     </tr>
+                  </tbody>
+               </table>
+            </div>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="application.files"></a>3.&nbsp;Ficheiros de aplicacións<a class="indexterm" name="d0e5149"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <p>OmegaT distribúese coma un paquete que se pode descargar desde SourceForge. Aquí considérase un paquete independente da plataforma
+               nunha forma Java estándar. As alternativas inclúen un paquete Linux .tar, un instalador de Windows (con ou sen Java Runtime
+               Environment), un instalador de Mac OS X, e un paquete co código fonte para os desenvolvedores.
+            </p>
+            <p>O paquete independente de plataforma pode empregarse en calquera plataforma con Java 1.5 runtime environment, incluídas as
+               plataformas para as que exista un paquete específico. Tamén se ofrece un ficheiro comprimido (ficheiro zip ou tar) que debe
+               extraer nun cartafol da súa escolla para a instalación. O ficheiro pode extraerse normalmente facendo dobre clic no paquete
+               descargado. Unha vez extraído o ficheiro, crearase un cartafol que contén os seguintes contidos:
+            </p>
+            <div class="informaltable">
+               <table border="1">
+                  <colgroup>
+                     <col align="left">
+                     <col>
+                  </colgroup>
+                  <tbody>
+                     <tr>
+                        <td align="left"><span class="bold"><strong>Ficheiro/ subcartafol</strong></span></td>
+                        <td align="left"><span class="bold"><strong>Contidos</strong></span></td>
+                     </tr>
+                     <tr>
+                        <td align="left"><code class="filename">/docs/</code></td>
+                        <td align="left">Todos os manuais de usuario están neste cartafol. Pode abrimos nun navegador de Internet para obter acceso ás ligazóns externas.</td>
+                     </tr>
+                     <tr>
+                        <td align="left"><code class="filename">/images/</code></td>
+                        <td align="left">Iconas e logos gráficos</td>
+                     </tr>
+                     <tr>
+                        <td align="left"><code class="filename">/lib/</code></td>
+                        <td align="left">Contén os ficheiros Java necesarios para a operación de <span class="application">OmegaT</span>.
+                        </td>
+                     </tr>
+                     <tr>
+                        <td align="left"><code class="filename">join.html</code></td>
+                        <td align="left">É un ficheiro html ordinario que, cando se abre no navegador, o dirixe ao grupo de usuarios de OmgaT aloxado en Yahoo! Groups.
+                           Non é necesario unirse, mais lle concederá acceso a servizos adicionais, como ficheiros, cuestionarios e a oportunidade de
+                           tomar parte nas discusións relacionadas con OmegaT. Os arquivos do grupo son públicos e poden verse sen unha subscrición ao
+                           grupo.
+                        </td>
+                     </tr>
+                     <tr>
+                        <td align="left"><code class="filename">changes.txt</code></td>
+                        <td align="left">Unha lista relativamente detallada das modificacións entre esta versión e as anteriores.</td>
+                     </tr>
+                     <tr>
+                        <td align="left"><code class="filename">license.txt</code></td>
+                        <td align="left">A LICENZA PÚBLICA XERAL DE GNU. Esta licenza permítelle facer certas cousas con <span class="application">OmegaT</span>, incluso a modificación e distribución do mesmo. Se está interesado en modificar ou distribuír <span class="application">OmegaT</span>, lea este documento coidadosamente e asegúrese de que entende as súas implicacións antes de facer nada. Se ten algunha pregunta,
+                           non dubide en dirixirse aos membros do proxecto directamente, tanto enviándolles un correo electrónico desde a páxina de SourceForge
+                           ou enviándolles un correo público ao grupo de usuarios.
+                        </td>
+                     </tr>
+                     <tr>
+                        <td align="left"><code class="filename">doc-license.txt</code></td>
+                        <td align="left">A LICENZA PÚBLICA XERAL DE GNU. Esta licenza cobre a documentación. Vexa máis arriba.</td>
+                     </tr>
+                     <tr>
+                        <td align="left"><code class="filename">readme.txt</code></td>
+                        <td align="left">Este ficheiro é moi importante e debería asegurarse de que o leu antes de iniciar OmegaT. Inclúe información xeral de OmegaT,
+                           onde atopar máis información, como contribuír, etc. Traduciuse a varias linguas.
+                        </td>
+                     </tr>
+                     <tr>
+                        <td align="left"><span class="application">OmegaT</span></td>
+                        <td align="left">
+                           <p>Un ficheiro de texto que inclúe dúas liñas:</p>
+                           
+                                       <pre class="programlisting">#!/bin/bash java
+java -jar OmegaT.jar $*</pre>
+                           
+                                       <p>Os usuarios de Linux e OS X poden atopar este ficheiro útil. Fágao executábel (<code class="literal">chmod +x OmegaT</code>) desde a liña de ordes despois de asegurarse de que está no cartafol /OmegaT_2.6/. Entón poderá iniciar OmegaT se executa
+                              este ficheiro desde a liña de ordes.
+                           </p>
+                                       
+                        </td>
+                     </tr>
+                     <tr>
+                        <td align="left">OmegaT.bat</td>
+                        <td align="left">
+                           <p>Un ficheiro batch empregado para iniciar <span class="application">OmegaT</span> desde a liña de ordes de Windows. Contén só a seguinte liña:
+                           </p>
+                           
+                                       <pre class="programlisting">java -jar OmegaT.jar %*</pre>
+                                       </td>
+                     </tr>
+                     <tr>
+                        <td align="left"><code class="literal">OmegaT.jar</code></td>
+                        <td align="left">A aplicación OmegaT principal. Para iniciar OmegaT, debe iniciar este ficheiro tanto desde a liña de ordes ou desde o xestor
+                           de ficheiros, usualmente facendo dobre clic nel.
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </div>
+         </div>
+      </div>
+      <div class="navfooter">
+         <hr>
+         <table width="100%" summary="Navigation footer">
+            <tr>
+               <td width="40%" align="left"><a accesskey="p" href="chapter.file.filters.html">Prev</a>&nbsp;
+               </td>
+               <td width="20%" align="center">&nbsp;</td>
+               <td width="40%" align="right">&nbsp;<a accesskey="n" href="chapter.files.to.translate.html">Next</a></td>
+            </tr>
+            <tr>
+               <td width="40%" align="left" valign="top">Chapter&nbsp;7.&nbsp;Filtros de ficheiro&nbsp;</td>
+               <td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
+               <td width="40%" align="right" valign="top">&nbsp;Chapter&nbsp;9.&nbsp;Ficheiros a traducir</td>
+            </tr>
+         </table>
+      </div>
+   </body>
+</html>

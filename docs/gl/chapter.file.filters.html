@@ -1,0 +1,550 @@
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <title>Chapter&nbsp;7.&nbsp;Filtros de ficheiro</title>
+      <link rel="stylesheet" type="text/css" href="OmegaT.css">
+      <meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
+      <link rel="home" href="index.html" title="OmegaT - Guía de usuario">
+      <link rel="up" href="index.html" title="OmegaT - Guía de usuario">
+      <link rel="prev" href="chapter.project.properties.html" title="Chapter&nbsp;6.&nbsp;Propiedades do proxecto">
+      <link rel="next" href="chapter.files.and.directories.html" title="Chapter&nbsp;8.&nbsp;Ficheiros e cartafoles de OmegaT">
+   </head>
+   <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+      <div class="navheader">
+         <table width="100%" summary="Navigation header">
+            <tr>
+               <th colspan="3" align="center">Chapter&nbsp;7.&nbsp;Filtros de ficheiro</th>
+            </tr>
+            <tr>
+               <td width="20%" align="left"><a accesskey="p" href="chapter.project.properties.html">Prev</a>&nbsp;
+               </td>
+               <th width="60%" align="center">&nbsp;</th>
+               <td width="20%" align="right">&nbsp;<a accesskey="n" href="chapter.files.and.directories.html">Next</a></td>
+            </tr>
+         </table>
+         <hr>
+      </div>
+      <div class="chapter">
+         <div class="titlepage">
+            <div>
+               <div>
+                  <h1 class="title"><a name="chapter.file.filters"></a>Chapter&nbsp;7.&nbsp;Filtros de ficheiro
+                  </h1>
+               </div>
+            </div>
+         </div>
+         <div class="toc">
+            <dl class="toc">
+               <dt><span class="section"><a href="chapter.file.filters.html#file.filters.dialog">1. Diálogo de filtros de ficheiro</a></span></dt>
+               <dt><span class="section"><a href="chapter.file.filters.html#filters.options">2. Opcións de filtrado</a></span></dt>
+               <dt><span class="section"><a href="chapter.file.filters.html#edit.filter.dialog">3. Diálogo de edición de filtros</a></span></dt>
+               <dd>
+                  <dl>
+                     <dt><span class="section"><a href="chapter.file.filters.html#source.filetype.and.filename.pattern">3.1. Tipo de ficheiro de orixe, padrón do nome do ficheiro</a></span></dt>
+                     <dt><span class="section"><a href="chapter.file.filters.html#source.and.target.files.encoding">3.2. Codificación dos ficheiros de orixe e destino</a></span></dt>
+                     <dt><span class="section"><a href="chapter.file.filters.html#target.name">3.3. Nome de ficheiro de destino</a></span></dt>
+                  </dl>
+               </dd>
+            </dl>
+         </div>
+         <p>OmegaT inclúe filtros altamente personalizábeis, o que lle permitirá configurar numerosos aspectos. Os filtros de ficheiro
+            son partes de código capaces de:
+         </p>
+         <div class="itemizedlist">
+            <ul class="itemizedlist" style="list-style-type: disc; ">
+               <li class="listitem">
+                  <p>Ler o documento nalgúns formatos de ficheiro específicos. Por exemplo, ficheiros de texto plano.</p>
+               </li>
+            </ul>
+         </div>
+         <div class="itemizedlist">
+            <ul class="itemizedlist" style="list-style-type: disc; ">
+               <li class="listitem">
+                  <p>Extraer o contido traducíbel do ficheiro.</p>
+               </li>
+            </ul>
+         </div>
+         <div class="itemizedlist">
+            <ul class="itemizedlist" style="list-style-type: disc; ">
+               <li class="listitem">
+                  <p>Automatizar modificacións dos nomes de ficheiro do documento traducido cambiando os contidos traducíbeis coa súa tradución.</p>
+               </li>
+            </ul>
+         </div>
+         <p>Para ver que formatos permite OmegaT, vexa o menú <span class="guimenuitem">Opcións &gt; Filtros de ficheiro... </span></p>
+         <p>A maioría dos usuarios atoparán suficientes opcións de filtrado de ficheiros predeterminadas. Se este non é o seu caso, abra
+            o diálogo principal seleccionando <span class="bold"><strong>Opcións &gt; Filtros de ficheiro...</strong></span> desde o menú principal. Tamén pode activar filtros de ficheiro específicos para cada proxecto, que só se empregarán no proxecto
+            actual, seleccionando a opción <span class="bold"><strong>Filtros de ficheiro...</strong></span> nas propiedades do proxecto.
+         </p>
+         <p>Pode activar filtros específicos para o proxecto mediante o menú <span class="bold"><strong>Proxecto &gt; Propiedades...</strong></span>. Faga clic en <span class="guibutton">Filtros de ficheiro</span> e marque a caixa de verificación <span class="guimenuitem">Permitir filtros específicos para o proxecto</span><a class="indexterm" name="d0e4358"></a>. Gardarase unha copia da configuración dos filtros xunto co proxecto. Se despois cambia os filtros, só se actualizarán os
+            filtros do proxecto, mentres que os filtros do usuario se manterán sen ningún cambio.
+         </p>
+         <p><span class="bold"><strong>Atención!</strong></span> Se cambia as opcións dos filtros mentres está aberto un proxecto, debe reabrir o proxecto para que se efectúen os cambios.
+         </p>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="file.filters.dialog"></a>1.&nbsp;Diálogo de filtros de ficheiro<a class="indexterm" name="d0e4371"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <p>Este diálogo amosa a lista dos distintos filtros de ficheiro dispoñíbeis. Se non quere empregar OmegaT para traducir ficheiros
+               dalgún tipo en concreto, pode desactivar o filtro correspondente desmarque a caixa de verificación ao seu carón. OmegaT omitirá
+               entón os ficheiros apropiados á hora de cargar proxectos, e copiará os devanditos ficheiros sen modificar cando se creen os
+               documentos de destino. Cando desexe empregar o filtro de novo, active a caixa de verificación. Faga clic en <span class="bold"><strong>Predeterminados</strong></span> para volver os filtros de ficheiro ao estado predeterminado. Para editar que ficheiros e codificacións procesará cada filtro,
+               seleccione o ficheiro da lista e prema en <span class="bold"><strong>Editar</strong></span>.
+            </p>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="filters.options"></a>2.&nbsp;Opcións de filtrado<a class="indexterm" name="d0e4387"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <p>Moitos filtros (ficheiros de texto, ficheiros XHTML, ficheiros HTML e XHTML, ficheiros OpenDocument e ficheiros Microsoft
+               Open XML) teñen unha ou máis opcións específicas. Para modificar as opcións, seleccione o filtro da lista e faga clic en <span class="bold"><strong>Opcións</strong></span>. As opcións dispoñíbeis son:
+            </p>
+            <p><span class="bold"><strong>Ficheiros de texto</strong></span></p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p><span class="emphasis"><em>Segmentación por parágrafos en saltos de liña, liñas baleiras ou nunca:</em></span></p>
+                     <p>se están activadas as regras de segmentación por frase, o texto será segmentado segundo a opción seleccionada.</p>
+                  </li>
+               </ul>
+            </div>
+            <p><span class="bold"><strong>Ficheiros PO</strong></span></p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p><span class="emphasis"><em>Permitir traducións en branco no ficheiro de destino</em></span>:
+                     </p>
+                     <p>se esta opción está activada, cando non se traduce un ficheiro PO (que pode ser un parágrafo enteiro), a tradución podería
+                        estar baleira no ficheiro de destino. Tecnicamente, o segmento <code class="code">msgstr</code> do ficheiro PO, se se crea, deixarase baleiro. Xa que este é o comportamento normal para os ficheiros PO, está activado por
+                        defecto. Se se desactiva esta opción, o texto orixinal será copiado no segmento de destino.
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p><span class="emphasis"><em>Omitir cabeceira de PO</em></span></p>
+                     <p>Se se activa esta opción, as cabeceiras de PO serán omitidas e deixaranse sen cambiar.</p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p><span class="emphasis"><em>Substituír automaticamente 'nplurals=INTEGER; &amp;plural=EXPRESSION;' na cabeceira</em></span></p>
+                     <p><span class="emphasis"><em><span class="emphasis"><em>Esta opción permite que OmegaT sobrescriba a especificación na cabeceira do ficheiro PO e empregue as opcións predeterminadas
+                                    para o idioma de destino seleccionado.</em></span></em></span></p>
+                  </li>
+               </ul>
+            </div>
+            <p><span class="bold"><strong>Ficheiros XHTML</strong></span></p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p><span class="emphasis"><em>Engadir ou reescribir o código de ficheiros HTML e XHTML</em></span>: moitas veces os ficheiros de destino teñen que ter un conxunto de codificación de caracteres diferente ao do ficheiro de
+                        orixe (tanto se está definido explícita coma implicitamente). Empregando esta opción, o tradutor pode especificar se os ficheiros
+                        de destino terán unha declaración de codificación incluída. Por exemplo, se os filtros de ficheiro especifican UTF8 coma esquema
+                        de codificación para os ficheiros de destino, seleccionar Sempre asegurará que esta información se inclúe nos ficheiros traducidos.
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p><span class="emphasis"><em>Traducir os seguintes atributos</em></span>: os atributos seleccionados aparecerán coma segmentos na xanela de edición.
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p><span class="emphasis"><em>Iniciar un novo parágrafo en: a etiqueta HTML &lt;br&gt;</em></span> creará un novo parágrafo para os efectos de segmentación.
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p><span class="emphasis"><em>Omitir as expresións regulares de coincidencia de texto</em></span>: omitirase o texto que coincida coas expresións regulares. Amosarase en vermello na validación de etiquetas. O texto no segmento
+                        de orixe que coincide amósase en cursiva.
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p><span class="emphasis"><em>Non traducir o atributo de contido das metaetiquetas...:</em></span> As seguintes metaetiquetas non serán traducidas.
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p><span class="emphasis"><em>Non traducir o contido das etiquetas cos seguintes pares chave-valor dos atributos (separados por comas):</em></span>: unha coincidencia na lista de pares chave-valor causará que se ignore o contido das etiquetas.
+                     </p>
+                     <p>Ás veces é útil ser capaz de facer algunhas etiquetas intraducíbeis baseándose no valor dos atributos. Por exemplo, <code class="literal">&lt;div class="hide"&gt; &lt;span translate="no"&gt;</code> Pode definir pares chave-valor para que algunhas etiquetas se deixen sen traducir. No exemplo anterior, o campo debería conter:
+                        <code class="literal">class=hide, translate=no </code></p>
+                  </li>
+               </ul>
+            </div>
+            <p><span class="bold"><strong>Ficheiros Microsoft Office XML</strong></span></p>
+            <p>Pode seleccionar que elementos se van traducir. Aparecerán coma segmentos separados na tradución.</p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p><span class="bold"><strong>Word:</strong></span> texto de instrución non visíbel, comentarios, notas a pé, notas ao final, rodapés
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p><span class="bold"><strong>Excel: </strong></span>comentarios, nome das follas
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p><span class="bold"><strong>Power Point</strong></span>: comentarios das diapositivas, padróns de diapositivas, deseño das diapositivas
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p><span class="bold"><strong>Global:</strong></span> gráficas, diagramas, debuxos, WordArt
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p><span class="bold"><strong>Outras opcións:</strong></span></p>
+                     <div class="itemizedlist">
+                        <ul class="itemizedlist" style="list-style-type: circle; ">
+                           <li class="listitem">
+                              <p><span class="emphasis"><em>Agregar etiquetas</em></span>: se se marca, as etiquetas sen texto traducíbel entre elas agregaranse coma etiquetas simples.
+                              </p>
+                           </li>
+                           <li class="listitem">
+                              <p><span class="emphasis"><em>Manter os espazos para todas as etiquetas</em></span>: se se marca, manterase o «espazo en branco» (é dicir, espazos e quebras de liña), incluso se non se estabelecen tecnicamente
+                                 no documento
+                              </p>
+                           </li>
+                        </ul>
+                     </div>
+                  </li>
+               </ul>
+            </div>
+            <p><span class="bold"><strong>Ficheiros HTML e XHTML</strong></span></p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p><span class="emphasis"><em>Engadir ou reescribir a declaración de codificación de ficheiros HTML e XHTML</em></span>: Sempre (predeterminado), Só se o ficheiro (X)HTML ten un cabezallo, Só se o ficheiro (X)HTML ten unha declaración de codificación,
+                        Nunca.
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p><span class="emphasis"><em>Traducir os seguintes atributos</em></span>: os atributos seleccionados aparecerán coma segmentos na xanela de edición.
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p><span class="emphasis"><em>Iniciar un novo parágrafo en</em></span>: a etiqueta HTML &lt;br&gt; creará un novo parágrafo para os efectos de segmentación.
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p><span class="emphasis"><em>Omitir as expresións regulares de coincidencia de texto</em></span>: o texto que coincida coas expresións regulares se omitirá.
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p><span class="emphasis"><em>Non traducir o atributo de contido das metaetiquetas...:</em></span> As seguintes metaetiquetas non serán traducidas.
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p><span class="emphasis"><em>Non traducir o contido das etiquetas cos seguintes pares chave-valor dos atributos (separados por comas):</em></span>: unha coincidencia na lista de pares chave-valor causará que se ignore o contido das etiquetas.
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <p><span class="bold"><strong>Ficheiros de texto</strong></span></p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p><span class="emphasis"><em>Segmentación por parágrafos en saltos de liña, liñas baleiras ou nunca</em></span>:
+                     </p>
+                     <p>se están activadas as regras de segmentación por frase, o texto será segmentado segundo a opción seleccionada.</p>
+                  </li>
+               </ul>
+            </div>
+            <p><span class="bold"><strong>Ficheiros en formato Open Document (ODF)</strong></span></p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>Pode seleccionar cal dos seguintes elementos serán traducidos:</p>
+                     <p>entradas do índice, marcadores, referencias dos marcadores, notas, comentarios, notas das presentacións, ligazóns (URL), nomes
+                        das follas
+                     </p>
+                  </li>
+               </ul>
+            </div>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="edit.filter.dialog"></a>3.&nbsp;Diálogo de edición de filtros<a class="indexterm" name="d0e4590"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <p>Este diálogo permítelle configurar os padróns de nome de ficheiro orixe dos ficheiros que se procesarán, personalizar os nomes
+               de ficheiro dos ficheiros traducidos, e seleccionar a codificación a empregar na carga e gardado do ficheiro. Para modificar
+               un padrón de filtro de ficheiro, pode modificar os campos directamente ou ben facer clic en <span class="bold"><strong>Editar.</strong></span> Para engadir un novo padrón de filtros de ficheiro, faga clic en <span class="bold"><strong>Engadir</strong></span>. Emprégase o mesmo diálogo para engadir un padrón ou para editar un padrón en particular. O diálogo é útil porque inclúe
+               un editor especial de padróns de nomes de ficheiro de destino que pode configurar os nomes dos ficheiros creados.
+            </p>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="source.filetype.and.filename.pattern"></a>3.1.&nbsp;<a class="indexterm" name="d0e4605"></a>Tipo de ficheiro de orixe, padrón do nome do ficheiro<a class="indexterm" name="d0e4611"></a></h3>
+                     </div>
+                  </div>
+               </div>
+               <p>Cando OmegaT atopa un ficheiro no cartafol de orixe, intenta seleccionar o filtro baseándose na extensión dos ficheiros. Para
+                  ser precisos, OmegaT intenta coincidir cada padrón dos nomes do ficheiro de orixe dos filtros co nome do ficheiro.  Por exemplo,
+                  o padrón <code class="literal">*.xhtml</code> fai coincidir calquera ficheiro coa extensión <code class="literal">.xhtml</code>. Se se atopa o filtro apropiado, asígnase o ficheiro para ser procesado. Por exemplo, de xeito predeterminado, empréganse
+                  os filtros XHTML para o procesado de ficheiros coa extensión .xhtml. Pode cambiar o engadir padróns de nomes de ficheiro para
+                  que os ficheiros sexan xestionados por cada filtro. Os padróns de nome de ficheiro de orixe utilizan caracteres comodín similares
+                  aos empregados nas <span class="bold"><strong>Buscas. </strong></span>O carácter '*' coincide con ningún ou máis caracteres. O carácter '?' coincide con exactamente un carácter. O resto de caracteres
+                  represéntanse a eles mesmos. Por exemplo, se desexa que o filtro de textos xestione os ficheiros léame (<code class="literal">leame, lea.me</code>, e <code class="literal">leame.txt</code>) debería empregar o padrón <code class="literal">lea*</code>.
+               </p>
+            </div>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="source.and.target.files.encoding"></a>3.2.&nbsp;Codificación dos ficheiros de orixe e destino
+                        </h3>
+                     </div>
+                  </div>
+               </div><a class="indexterm" name="d0e4639"></a><a class="indexterm" name="d0e4644"></a><a class="indexterm" name="d0e4649"></a><p>Só un número limitado de formatos de ficheiro especifican unha codificación obrigatoria. Os formatos de ficheiros que non
+                  especifican a codificación, empregarán a codificación estabelecida por vostede para a extensión que coincida co seu nome.
+                  Por exemplo, de modo predeterminado, os ficheiros <code class="literal">.txt</code> cargaranse empregando a codificación predeterminada do seu sistema operativo. Pode cambiar a codificación de orixe para cada
+                  padrón de nome de ficheiro de orixe diferente. Estes ficheiros tamén poden producirse en calquera codificación. De modo predeterminado,
+                  a codificación do ficheiro traducido é a mesma que a codificación do ficheiro de orixe. Os campos de codificación de orixe
+                  e destino empregan caixas de combinación que inclúen todas as codificacións admitidas. &lt;auto&gt; deixa a escolla de codificación
+                  a <span class="application">OmegaT</span>. Así é como funciona:
+               </p>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
+                     <li class="listitem">
+                        <p>OmegaT identifica a codificación do ficheiro de orixe mediante o emprego da declaración de codificación, de habela (ficheiros
+                           HTML, ficheiros baseados en XML)
+                        </p>
+                     </li>
+                  </ul>
+               </div>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
+                     <li class="listitem">
+                        <p>OmegaT está construído para empregar unha codificación obrigatoria para certos formatos de ficheiros (propiedades de Java,
+                           etc.)
+                        </p>
+                     </li>
+                  </ul>
+               </div>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
+                     <li class="listitem">
+                        <p>OmegaT emprega a codificación predeterminada do sistema operativo para os ficheiros de texto.</p>
+                     </li>
+                  </ul>
+               </div>
+            </div>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="target.name"></a>3.3.&nbsp;Nome de ficheiro de destino<a class="indexterm" name="d0e4677"></a></h3>
+                     </div>
+                  </div>
+               </div>
+               <p>Ás veces pode que desexe renomear os ficheiros que traduciu automaticamente, por exemplo, engadindo un código de idioma despois
+                  do nome do ficheiro. O padrón de nome de ficheiro de destino emprega unha sintaxe especial, así que se desexa editar este
+                  campo, debe facer clic en <span class="bold"><strong>Editar...</strong></span> e empregar o <a class="indexterm" name="d0e4687"></a>Diálogo de edición de padróns. Se quere recuperar a configuración predeterminada do filtro, faga clic en <span class="bold"><strong>Predeterminados.</strong></span> Tamén pode modificar o nome directamente no campo de padrón do nome de ficheiro de destino ou no diálogo de filtros de ficheiro.
+                  O diálogo de edición de padróns ofrece, entre outras, as seguintes opcións:
+               </p>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
+                     <li class="listitem">
+                        <p>O predeterminado é <code class="literal">${filename}</code>– nome do ficheiro completo do ficheiro de orixe con extensión: neste caso o nome do ficheiro traducido é o mesmo que o do
+                           ficheiro orixinal.
+                        </p>
+                     </li>
+                  </ul>
+               </div>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
+                     <li class="listitem">
+                        <p><code class="literal">${nameOnly}</code>– permítelle inserir só o nome do ficheiro orixinal sen extensión.
+                        </p>
+                     </li>
+                     <li class="listitem">
+                        <p><code class="literal">${extension} </code>– a extensión do ficheiro orixinal.
+                        </p>
+                     </li>
+                  </ul>
+               </div>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
+                     <li class="listitem">
+                        <p><code class="literal">${targetLocale}</code>– código de idioma de destino (coa forma «xx_YY»).
+                        </p>
+                     </li>
+                  </ul>
+               </div>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
+                     <li class="listitem">
+                        <p><code class="literal">${targetLanguage}</code>– código do país e do idioma xuntos (coa forma «XX_YY»).
+                        </p>
+                     </li>
+                  </ul>
+               </div>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
+                     <li class="listitem">
+                        <p><code class="literal">${targetLanguageCode}</code> – o idioma de destino - só «XX».
+                        </p>
+                     </li>
+                  </ul>
+               </div>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
+                     <li class="listitem">
+                        <p><code class="literal">${targetCountryCode}</code>–o país de destino - só «YY».
+                        </p>
+                     </li>
+                     <li class="listitem">
+                        <p><code class="literal">${timestamp-????}</code> – hora do sistema no momento da creación do ficheiro en diferentes padróns.
+                        </p>
+                        <p>Vexa a <a class="ulink" href="http://docs.oracle.com/javase/1.4.2/docs/api/java/text/SimpleDateFormat.html" target="_top">Documentación de Oracle</a> para máis exemplos dos padróns «SimpleDateFormat».
+                        </p>
+                     </li>
+                     <li class="listitem">
+                        <p><code class="literal">${system-os-name}</code> - sistema operativo do computador empregado
+                        </p>
+                     </li>
+                     <li class="listitem">
+                        <p><code class="literal">${system-user-name}</code> - nome de usuario do sistema
+                        </p>
+                     </li>
+                     <li class="listitem">
+                        <p><code class="literal">${system-host-name}</code> - nome do servidor do sistema
+                        </p>
+                     </li>
+                     <li class="listitem">
+                        <p><code class="literal">${file-source-encoding}</code> - codificación do ficheiro orixinal
+                        </p>
+                     </li>
+                     <li class="listitem">
+                        <p><code class="literal">${file-target-encoding}</code> - codificación do ficheiro de destino
+                        </p>
+                     </li>
+                     <li class="listitem">
+                        <p><code class="literal">${targetLocaleLCID}</code> - idioma de destino de Microsoft
+                        </p>
+                     </li>
+                  </ul>
+               </div>
+               <p>Hai outras variantes adicionais para as variábeis ${nameOnly} e ${Extension}. Se o nome do ficheiro é ambivalente, pode aplicar
+                  variábeis da forma <code class="literal">${name only</code><span class="emphasis"><em>-extension number</em></span>} e <code class="literal">${extension</code>-<span class="emphasis"><em>extension number} </em></span>. Se por exemplo, o ficheiro orixinal se chama Documento.xx.docx, as seguintes variábeis darán os seguintes resultados:
+               </p>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
+                     <li class="listitem">
+                        <p><code class="literal">${nameOnly-0}</code> Documento
+                        </p>
+                     </li>
+                     <li class="listitem">
+                        <p><code class="literal">${nameOnly-1}</code> Documento.xx
+                        </p>
+                     </li>
+                     <li class="listitem">
+                        <p><code class="literal">${nameOnly-2}</code> Documento.xx.docx
+                        </p>
+                     </li>
+                     <li class="listitem">
+                        <p><code class="literal">${extension-0}</code> docx
+                        </p>
+                     </li>
+                     <li class="listitem">
+                        <p><code class="literal">${extension-1}</code> xx.docx
+                        </p>
+                     </li>
+                     <li class="listitem">
+                        <p><code class="literal">${extension-2}</code> Documento.xx.docx
+                        </p>
+                     </li>
+                  </ul>
+               </div>
+            </div>
+         </div>
+      </div>
+      <div class="navfooter">
+         <hr>
+         <table width="100%" summary="Navigation footer">
+            <tr>
+               <td width="40%" align="left"><a accesskey="p" href="chapter.project.properties.html">Prev</a>&nbsp;
+               </td>
+               <td width="20%" align="center">&nbsp;</td>
+               <td width="40%" align="right">&nbsp;<a accesskey="n" href="chapter.files.and.directories.html">Next</a></td>
+            </tr>
+            <tr>
+               <td width="40%" align="left" valign="top">Chapter&nbsp;6.&nbsp;Propiedades do proxecto&nbsp;</td>
+               <td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
+               <td width="40%" align="right" valign="top">&nbsp;Chapter&nbsp;8.&nbsp;Ficheiros e cartafoles de <span class="application">OmegaT</span></td>
+            </tr>
+         </table>
+      </div>
+   </body>
+</html>

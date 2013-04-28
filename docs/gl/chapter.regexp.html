@@ -1,0 +1,506 @@
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <title>Chapter&nbsp;16.&nbsp;Expresións regulares</title>
+      <link rel="stylesheet" type="text/css" href="OmegaT.css">
+      <meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
+      <link rel="home" href="index.html" title="OmegaT - Guía de usuario">
+      <link rel="up" href="index.html" title="OmegaT - Guía de usuario">
+      <link rel="prev" href="chapter.searches.html" title="Chapter&nbsp;15.&nbsp;Buscas">
+      <link rel="next" href="chapter.dictionaries.html" title="Chapter&nbsp;17.&nbsp;Dicionarios">
+   </head>
+   <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+      <div class="navheader">
+         <table width="100%" summary="Navigation header">
+            <tr>
+               <th colspan="3" align="center">Chapter&nbsp;16.&nbsp;Expresións regulares</th>
+            </tr>
+            <tr>
+               <td width="20%" align="left"><a accesskey="p" href="chapter.searches.html">Prev</a>&nbsp;
+               </td>
+               <th width="60%" align="center">&nbsp;</th>
+               <td width="20%" align="right">&nbsp;<a accesskey="n" href="chapter.dictionaries.html">Next</a></td>
+            </tr>
+         </table>
+         <hr>
+      </div>
+      <div class="chapter">
+         <div class="titlepage">
+            <div>
+               <div>
+                  <h1 class="title"><a name="chapter.regexp"></a>Chapter&nbsp;16.&nbsp;Expresións regulares<a class="indexterm" name="d0e7347"></a></h1>
+               </div>
+            </div>
+         </div>
+         <div class="toc">
+            <dl class="toc">
+               <dt><span class="section"><a href="chapter.regexp.html#regex.tools.and.examples.of.use">1. Ferramentas e exemplos de uso de expresións regulares</a></span></dt>
+            </dl>
+         </div>
+         <p>As expresións regulares (ou regex para acortar) empregadas nas buscas e regras de segmentación son as compatíbeis con Java.
+            En caso de necesitar información máis específica, consulte a <a class="ulink" href="http://download.oracle.com/javase/1.5.0/docs/api/java/util/regex/Pattern.html" target="_top">Documentación sobre Regex de Java</a>. Vexa referencias adicionais e exemplos máis adiante.
+         </p>
+         <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;">
+            <h3 class="title">Note</h3>
+            <p>Este capítulo está pensado para usuarios avanzados, que necesitar definir as súas propias variantes de regras de segmentación
+               ou que necesitan facer buscas máis complexas e exhaustivas.
+            </p>
+         </div>
+         <div class="table"><a name="d0e7362"></a><p class="title"><b>Table&nbsp;16.1.&nbsp;Regex - Bandeiras</b></p>
+            <div class="table-contents">
+               <table summary="Regex - Bandeiras" border="1">
+                  <colgroup>
+                     <col align="left">
+                     <col>
+                  </colgroup>
+                  <thead>
+                     <tr>
+                        <th align="left">A construción</th>
+                        <th align="left">... coincide coa seguinte</th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                     <tr>
+                        <td align="left">(?i)</td>
+                        <td align="left">Permite coincidencias que non teñan en conta as maiúsculas e minúsculas (de xeito predeterminado, o padrón ten en conta as
+                           maiúsculas e minúsculas).
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </div>
+         </div><br class="table-break"><div class="table"><a name="d0e7379"></a><p class="title"><b>Table&nbsp;16.2.&nbsp;Regex - Carácter</b></p>
+            <div class="table-contents">
+               <table summary="Regex - Carácter" border="1">
+                  <colgroup>
+                     <col align="left">
+                     <col>
+                  </colgroup>
+                  <thead>
+                     <tr>
+                        <th align="left">A construción</th>
+                        <th align="left">... coincide coa seguinte</th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                     <tr>
+                        <td align="left">x</td>
+                        <td align="left">O carácter x, excepto o seguinte...</td>
+                     </tr>
+                     <tr>
+                        <td align="left">\uhhhh</td>
+                        <td align="left">O carácter con valor hexadecimal 0xhhhh</td>
+                     </tr>
+                     <tr>
+                        <td align="left">\t</td>
+                        <td align="left">O carácter de tabulación ('\u0009')</td>
+                     </tr>
+                     <tr>
+                        <td align="left">\n</td>
+                        <td align="left">O carácter de nova liña ('\u000A')</td>
+                     </tr>
+                     <tr>
+                        <td align="left">\r</td>
+                        <td align="left">O carácter de retorno de carro ('\u000D')</td>
+                     </tr>
+                     <tr>
+                        <td align="left">\f</td>
+                        <td align="left">O carácter de alimentación de folla ('\u000C')</td>
+                     </tr>
+                     <tr>
+                        <td align="left">\a</td>
+                        <td align="left">O carácter alerta (campá) ('\u0007')</td>
+                     </tr>
+                     <tr>
+                        <td align="left">\e</td>
+                        <td align="left">O carácter de escape ('\u001B')</td>
+                     </tr>
+                     <tr>
+                        <td align="left">\cx</td>
+                        <td align="left">O carácter de control correspondente a x</td>
+                     </tr>
+                     <tr>
+                        <td align="left">\0n</td>
+                        <td align="left">O carácter con valor octal 0n (0 &lt;=n &lt;=7)</td>
+                     </tr>
+                     <tr>
+                        <td align="left">\0nn</td>
+                        <td align="left">O carácter con valor octal 0nn (0 &lt;=n &lt;=7)</td>
+                     </tr>
+                     <tr>
+                        <td align="left">\0mnn</td>
+                        <td align="left">O carácter con valor octal 0mnn (0 &lt;=m &lt;=3, 0 &lt;= n &lt;=7)</td>
+                     </tr>
+                     <tr>
+                        <td align="left">\xhh</td>
+                        <td align="left">O carácter con valor hexadecimal 0xhh</td>
+                     </tr>
+                  </tbody>
+               </table>
+            </div>
+         </div><br class="table-break"><div class="table"><a name="d0e7456"></a><p class="title"><b>Table&nbsp;16.3.&nbsp;Regex - Citación</b></p>
+            <div class="table-contents">
+               <table summary="Regex - Citación" border="1">
+                  <colgroup>
+                     <col align="left">
+                     <col>
+                  </colgroup>
+                  <thead>
+                     <tr>
+                        <th align="left">A construción</th>
+                        <th align="left">... coincide coa seguinte</th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                     <tr>
+                        <td align="left">\</td>
+                        <td align="left">Nada, mais cita o seguinte carácter. Isto é necesario se quere inserir calquera dos meta caracteres !$()*+.&lt;&gt;?[\]^{|} e que
+                           coincidan con eles mesmos.
+                        </td>
+                     </tr>
+                     <tr>
+                        <td align="left">\\</td>
+                        <td align="left">Por exemplo, este é o carácter de barra invertida</td>
+                     </tr>
+                     <tr>
+                        <td align="left">\Q</td>
+                        <td align="left">Nada, mais cita a todos os caracteres ata \E</td>
+                     </tr>
+                     <tr>
+                        <td align="left">\E</td>
+                        <td align="left">Nada, mais termina citas iniciadas por \Q</td>
+                     </tr>
+                  </tbody>
+               </table>
+            </div>
+         </div><br class="table-break"><div class="table"><a name="d0e7488"></a><p class="title"><b>Table&nbsp;16.4.&nbsp;Regex - Clases para bloques e categorías Unicode</b></p>
+            <div class="table-contents">
+               <table summary="Regex - Clases para bloques e categorías Unicode" border="1">
+                  <colgroup>
+                     <col align="left">
+                     <col>
+                  </colgroup>
+                  <thead>
+                     <tr>
+                        <th align="left">A construción</th>
+                        <th align="left">... coincide coa seguinte</th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                     <tr>
+                        <td align="left">\p{InGreek}</td>
+                        <td align="left">Un carácter no bloque Grego (<a class="ulink" href="http://download.oracle.com/javase/1.5.0/docs/api/java/util/regex/Pattern.html#ubc" target="_top">bloque</a> simple)
+                        </td>
+                     </tr>
+                     <tr>
+                        <td align="left">\p{Lu}</td>
+                        <td align="left">Unha letra maiúscula (<a class="ulink" href="http://download.oracle.com/javase/1.5.0/docs/api/java/util/regex/Pattern.html#ubc" target="_top">categoría</a> simple)
+                        </td>
+                     </tr>
+                     <tr>
+                        <td align="left">\p{Sc}</td>
+                        <td align="left">Un símbolo de divisa</td>
+                     </tr>
+                     <tr>
+                        <td align="left">\P{InGreek}</td>
+                        <td align="left">Calquera carácter excepto un do bloque grego (negación)</td>
+                     </tr>
+                     <tr>
+                        <td align="left">[\p{L}&amp;&amp;[^\p{Lu}]]</td>
+                        <td align="left">Calquera letra excepto unha letra en maiúscula (subtracción)</td>
+                     </tr>
+                  </tbody>
+               </table>
+            </div>
+         </div><br class="table-break"><div class="table"><a name="d0e7531"></a><p class="title"><b>Table&nbsp;16.5.&nbsp;Regex - Clases de caracteres</b></p>
+            <div class="table-contents">
+               <table summary="Regex - Clases de caracteres" border="1">
+                  <colgroup>
+                     <col align="left">
+                     <col>
+                  </colgroup>
+                  <thead>
+                     <tr>
+                        <th align="left">A construción</th>
+                        <th align="left">... coincide coa seguinte</th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                     <tr>
+                        <td align="left">[abc]</td>
+                        <td align="left">a, b ou c (clase simple)</td>
+                     </tr>
+                     <tr>
+                        <td align="left">[^abc]</td>
+                        <td align="left">Calquera carácter excepto a, b ou c (negación)</td>
+                     </tr>
+                     <tr>
+                        <td align="left">[a-zA-Z]</td>
+                        <td align="left">Desde o a ata o z ou A ata Z, inclusive (rango)</td>
+                     </tr>
+                  </tbody>
+               </table>
+            </div>
+         </div><br class="table-break"><div class="table"><a name="d0e7558"></a><p class="title"><b>Table&nbsp;16.6.&nbsp;Regez - Clases predeterminadas de caracteres</b></p>
+            <div class="table-contents">
+               <table summary="Regez - Clases predeterminadas de caracteres" border="1">
+                  <colgroup>
+                     <col align="left">
+                     <col>
+                  </colgroup>
+                  <thead>
+                     <tr>
+                        <th align="left">A construción</th>
+                        <th align="left">... coincide coa seguinte</th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                     <tr>
+                        <td align="left">.</td>
+                        <td align="left">Calquera carácter (excepto os finalizadores de liña)</td>
+                     </tr>
+                     <tr>
+                        <td align="left">\d</td>
+                        <td align="left">Un díxito: [0-9]</td>
+                     </tr>
+                     <tr>
+                        <td align="left">\D</td>
+                        <td align="left">Un non díxito: [^0-9]</td>
+                     </tr>
+                     <tr>
+                        <td align="left">\s</td>
+                        <td align="left">Un carácter de espazo en branco: [ \t\n\x0B\f\r]</td>
+                     </tr>
+                     <tr>
+                        <td align="left">\S</td>
+                        <td align="left">Un espazo de non espazo en branco: [^\s]</td>
+                     </tr>
+                     <tr>
+                        <td align="left">\w</td>
+                        <td align="left">Un carácter de palabra: [a-zA-Z_0-9]</td>
+                     </tr>
+                     <tr>
+                        <td align="left">\W</td>
+                        <td align="left">Un carácter de non palabra: [^\w]</td>
+                     </tr>
+                  </tbody>
+               </table>
+            </div>
+         </div><br class="table-break"><div class="table"><a name="d0e7605"></a><p class="title"><b>Table&nbsp;16.7.&nbsp;Regex - Límite de coincidencias</b></p>
+            <div class="table-contents">
+               <table summary="Regex - Límite de coincidencias" border="1">
+                  <colgroup>
+                     <col align="left">
+                     <col>
+                  </colgroup>
+                  <thead>
+                     <tr>
+                        <th align="left">A construción</th>
+                        <th align="left">... coincide coa seguinte</th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                     <tr>
+                        <td align="left">^</td>
+                        <td align="left">O comezo dunha liña</td>
+                     </tr>
+                     <tr>
+                        <td align="left">$</td>
+                        <td align="left">O fin dunha liña</td>
+                     </tr>
+                     <tr>
+                        <td align="left">\b</td>
+                        <td align="left">En los límites de una palabra</td>
+                     </tr>
+                     <tr>
+                        <td align="left">\B</td>
+                        <td align="left">Nos límites dun carácter non constituínte de palabra</td>
+                     </tr>
+                  </tbody>
+               </table>
+            </div>
+         </div><br class="table-break"><div class="table"><a name="d0e7637"></a><p class="title"><b>Table&nbsp;16.8.&nbsp;Regex - Cuantificadores cobizosos</b></p>
+            <div class="table-contents">
+               <table summary="Regex - Cuantificadores cobizosos" border="1">
+                  <colgroup>
+                     <col align="left">
+                     <col>
+                  </colgroup>
+                  <thead>
+                     <tr>
+                        <th align="left">A construción</th>
+                        <th align="left">... coincide coa seguinte</th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                     <tr>
+                        <td align="left">X<span class="emphasis"><em>?</em></span></td>
+                        <td align="left">X, unha vez ou nunca</td>
+                     </tr>
+                     <tr>
+                        <td align="left">X<span class="emphasis"><em>*</em></span></td>
+                        <td align="left">X, cero ou máis veces</td>
+                     </tr>
+                     <tr>
+                        <td align="left">X<span class="emphasis"><em>+</em></span></td>
+                        <td align="left">X, unha ou máis veces</td>
+                     </tr>
+                  </tbody>
+               </table>
+            </div>
+         </div><br class="table-break"><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;">
+            <h3 class="title">Note</h3>
+            <p>os cuantificadores cobizosos coincidirán tanto coma sexa posíbel. Por exemplo, <span class="emphasis"><em>a+?</em></span> debe coincidir con aaa en <span class="emphasis"><em>aaabbb</em></span></p>
+         </div>
+         <div class="table"><a name="d0e7678"></a><p class="title"><b>Table&nbsp;16.9.&nbsp;Regex - Cuantificadores tímidos (non cobizosos)</b></p>
+            <div class="table-contents">
+               <table summary="Regex - Cuantificadores tímidos (non cobizosos)" border="1">
+                  <colgroup>
+                     <col align="left">
+                     <col>
+                  </colgroup>
+                  <thead>
+                     <tr>
+                        <th align="left">A construción</th>
+                        <th align="left">... coincide coa seguinte</th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                     <tr>
+                        <td align="left">X??</td>
+                        <td align="left">X, unha vez ou nunca</td>
+                     </tr>
+                     <tr>
+                        <td align="left">X*?</td>
+                        <td align="left">X, cero ou máis veces</td>
+                     </tr>
+                     <tr>
+                        <td align="left">X+?</td>
+                        <td align="left">X, unha ou máis veces</td>
+                     </tr>
+                  </tbody>
+               </table>
+            </div>
+         </div><br class="table-break"><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;">
+            <h3 class="title">Note</h3>
+            <p>os cuantificadores non cobizosos coincidirán o mínimo posíbel. Por exemplo, <span class="emphasis"><em>a+?</em></span> debe coincidir coa primeira <span class="emphasis"><em>a</em></span> en <span class="emphasis"><em>aaabbb</em></span></p>
+         </div>
+         <div class="table"><a name="d0e7716"></a><p class="title"><b>Table&nbsp;16.10.&nbsp;Regex - operadores lóxicos</b></p>
+            <div class="table-contents">
+               <table summary="Regex - operadores lóxicos" border="1">
+                  <colgroup>
+                     <col align="left">
+                     <col>
+                  </colgroup>
+                  <thead>
+                     <tr>
+                        <th align="left">A construción</th>
+                        <th align="left">... coincide coa seguinte</th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                     <tr>
+                        <td align="left">XY</td>
+                        <td align="left">X seguido de Y</td>
+                     </tr>
+                     <tr>
+                        <td align="left">X|Y</td>
+                        <td align="left">Tanto X como Y</td>
+                     </tr>
+                     <tr>
+                        <td align="left">(XY)</td>
+                        <td align="left">XY coma un grupo indivisíbel</td>
+                     </tr>
+                  </tbody>
+               </table>
+            </div>
+         </div><br class="table-break"><div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="regex.tools.and.examples.of.use"></a>1.&nbsp;<a class="indexterm" name="d0e7745"></a>Ferramentas e exemplos de uso de expresións regulares<a class="indexterm" name="d0e7751"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <p>Hai dispoñíbeis un número de ferramentas interactivas para desenvolver e probar expresións regulares. Xeralmente seguen máis
+               ou menos o mesmo padrón (vexa máis adiante un exemplo do Comprobador de expresión regular): a expresión regular (primeira
+               entrada) analiza o texto de busca (caixa de texto do medio), dando consellos, se amosa no cadro de texto de resultados.
+            </p>
+            <div class="figure"><a name="regerx.tester"></a><p class="title"><b>Figure&nbsp;16.1.&nbsp;Comprobador de Regex</b></p>
+               <div class="figure-contents">
+                  <div class="mediaobject"><img src="images/RegexTester.png" alt="Comprobador de Regex"></div>
+               </div>
+            </div><br class="figure-break"><p>Vexa <a class="ulink" href="http://weitz.de/regex-coach/" target="_top">The Regex Coach</a> para as versións Windows, Linux e FreeBSD dunha ferramenta independente. Esta é case idéntica ao exemplo anterior.
+            </p>
+            <p>Pode atopar unha gran colección de casos de expresións regulares útiles no propio <span class="application">OmegaT</span> (vexa Opcións &gt; Segmentación). A seguinte lista inclúe expresións que pode atopar útiles cando busque na memoria de tradución:
+            </p>
+            <div class="table"><a name="d0e7776"></a><p class="title"><b>Table&nbsp;16.11.&nbsp;Regex - Exemplos de expresións regulares en traducións</b></p>
+               <div class="table-contents">
+                  <table summary="Regex - Exemplos de expresións regulares en traducións" border="1">
+                     <colgroup>
+                        <col align="left">
+                        <col>
+                     </colgroup>
+                     <thead>
+                        <tr>
+                           <th align="left">Expresión regular</th>
+                           <th align="left">Atopa o seguinte:</th>
+                        </tr>
+                     </thead>
+                     <tbody>
+                        <tr>
+                           <td align="left">(\b\w+\b)\s\1\b</td>
+                           <td align="left">palabras duplicadas</td>
+                        </tr>
+                        <tr>
+                           <td align="left">[\.,]\s*[\.,]+</td>
+                           <td align="left">coma ou punto seguido de espazo ou outra coma ou punto</td>
+                        </tr>
+                        <tr>
+                           <td align="left">\. \s+$</td>
+                           <td align="left">espazos extra despois dun punto ao final de liña</td>
+                        </tr>
+                        <tr>
+                           <td align="left">\s+a\s+[aeiou]</td>
+                           <td align="left">Inglés: palabras que comecen por vogal, que xeralmente deberían ir precedidas de «an» e non «a»</td>
+                        </tr>
+                        <tr>
+                           <td align="left">\s+an\s+[^aeiou]</td>
+                           <td align="left">Inglés: o mesmo caso ca antes, mais coas consoantes («a» e non «an»)</td>
+                        </tr>
+                        <tr>
+                           <td align="left">\s{2,}</td>
+                           <td align="left">máis dun espazo</td>
+                        </tr>
+                        <tr>
+                           <td align="left">\.[A-Z]</td>
+                           <td align="left">Punto, seguido dunha letra en maiúscula (posibelmente falte un espazo entre o punto e o comezo da nova frase)</td>
+                        </tr>
+                        <tr>
+                           <td align="left">\bis\b</td>
+                           <td align="left">busca «is», e non «this» ou «isn't», etc.</td>
+                        </tr>
+                     </tbody>
+                  </table>
+               </div>
+            </div><br class="table-break"></div>
+      </div>
+      <div class="navfooter">
+         <hr>
+         <table width="100%" summary="Navigation footer">
+            <tr>
+               <td width="40%" align="left"><a accesskey="p" href="chapter.searches.html">Prev</a>&nbsp;
+               </td>
+               <td width="20%" align="center">&nbsp;</td>
+               <td width="40%" align="right">&nbsp;<a accesskey="n" href="chapter.dictionaries.html">Next</a></td>
+            </tr>
+            <tr>
+               <td width="40%" align="left" valign="top">Chapter&nbsp;15.&nbsp;Buscas&nbsp;</td>
+               <td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
+               <td width="40%" align="right" valign="top">&nbsp;Chapter&nbsp;17.&nbsp;Dicionarios</td>
+            </tr>
+         </table>
+      </div>
+   </body>
+</html>

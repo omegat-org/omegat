@@ -1,0 +1,172 @@
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <title>Chapter&nbsp;20.&nbsp;Verificación ortográfica</title>
+      <link rel="stylesheet" type="text/css" href="OmegaT.css">
+      <meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
+      <link rel="home" href="index.html" title="OmegaT - Guía de usuario">
+      <link rel="up" href="index.html" title="OmegaT - Guía de usuario">
+      <link rel="prev" href="chapter.machine.translate.html" title="Chapter&nbsp;19.&nbsp;Tradución automática">
+      <link rel="next" href="chapter.misc.html" title="Chapter&nbsp;21.&nbsp;Outros asuntos">
+   </head>
+   <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+      <div class="navheader">
+         <table width="100%" summary="Navigation header">
+            <tr>
+               <th colspan="3" align="center">Chapter&nbsp;20.&nbsp;Verificación ortográfica</th>
+            </tr>
+            <tr>
+               <td width="20%" align="left"><a accesskey="p" href="chapter.machine.translate.html">Prev</a>&nbsp;
+               </td>
+               <th width="60%" align="center">&nbsp;</th>
+               <td width="20%" align="right">&nbsp;<a accesskey="n" href="chapter.misc.html">Next</a></td>
+            </tr>
+         </table>
+         <hr>
+      </div>
+      <div class="chapter">
+         <div class="titlepage">
+            <div>
+               <div>
+                  <h1 class="title"><a name="chapter.spellchecker"></a>Chapter&nbsp;20.&nbsp;Verificación ortográfica<a class="indexterm" name="d0e8393"></a></h1>
+               </div>
+            </div>
+         </div>
+         <div class="toc">
+            <dl class="toc">
+               <dt><span class="section"><a href="chapter.spellchecker.html#d0e8398">1. Instalación de dicionarios ortográficos</a></span></dt>
+               <dt><span class="section"><a href="chapter.spellchecker.html#d0e8458">2. Empregar dicionarios ortográficos</a></span></dt>
+               <dt><span class="section"><a href="chapter.spellchecker.html#hints">3. Consellos</a></span></dt>
+            </dl>
+         </div>
+         <p>OmegaT ten un sistema de verificación ortográfica incorporado baseado no sistema empregado en Apache OpenOffice, LibreOffice,
+            Firefox e Thunderbird. Polo tanto, pode empregar o grande abano de dicionarios ortográficos libres que están dispoñíbeis para
+            estas aplicacións.
+         </p>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e8398"></a>1.&nbsp;Instalación de dicionarios ortográficos
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>Antes de poder empregar a función de verificación ortográfica, debe instalar un dicionario ou dicionarios adecuados (é dicir,
+               para o idioma de destino). Para instalar dicionarios ortográficos, siga este procedemento:
+            </p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>No xestor de ficheiros, cree un novo cartafol no que almacenar os dicionarios ortográficos (D:\Traducións\ortografía, no seguinte
+                        exemplo).
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>En OmegaT, seleccione <span class="guisubmenu"><a class="indexterm" name="d0e8412"></a></span><span class="guimenuitem">Opcións &gt; Verificación ortográfica</span>, e faga clic en <span class="guibutton">Seleccionar</span> ao lado do campo de cartafoles cos ficheiros de dicionarios. Navegue ata o cartafol creado para os dicionarios e seleccióneo.
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>Sitúe os ficheiros de dicionario que desexe empregar neste cartafol. Hai esencialmente dous modos de facer isto. Pode ou ben
+                        copiar os ficheiros manualmente, é dicir, de outro lugar no seu sistema, mediante o xestor de ficheiros; ou pode empregar
+                        a función <span class="bold"><strong>«Instalar un novo dicionario»</strong></span> de OmegaT, que lle ofrecerá unha lista de dicionarios dispoñíbeis para seleccionar. Teña en conta que a función de instalación
+                        require conexión a Internet. Os idiomas seleccionados instalaranse e aparecerán na xanela de configuración de ortografía (pode
+                        que tarde un tempo).
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <p>Copiar os ficheiros manualmente ten sentido se xa ten uns dicionarios adecuados no seu sistema, por exemplo, como parte da
+               instalación de Apache OpenOffice, LibreOffice, Firefox ou Thunderbird. Aínda así, é máis sinxelo buscar dicionarios na rede
+               empregando o campo de <span class="bold"><strong>URL de dicionarios en rede</strong></span>:
+            </p>
+            <div class="figure"><a name="spellchecker.setup"></a><p class="title"><b>Figure&nbsp;20.1.&nbsp;<a class="indexterm" name="d0e8437"></a>Configuración de ortografía</b></p>
+               <div class="figure-contents">
+                  <div class="mediaobject"><img src="images/SpellcheckerSetup_25.png" alt="Configuración de ortografía"></div>
+               </div>
+            </div><br class="figure-break"><p>Facendo clic en <span class="guibutton">Instalar un novo dicionario</span>, abrirá a xanela de instalación de dicionarios, onde pode seleccionar os dicionarios que queira instalar.
+            </p>
+            <p>Os nomes dos ficheiros debe corresponderse co código de idioma do idioma de destino definida no diálogo de propiedades do
+               proxecto (<span class="guimenu">Proxecto &gt; Propiedades</span>). Por exemplo, se seleccionou ES-MX (español de México) como o idioma de destino, os ficheiros de dicionario deben chamarse
+               es_MX.dic e es_MX.aff. Se só ten un dicionario de español estándar dispoñíbel, cos nomes de ficheiro es_es.dic e es_es.aff,
+               por exemplo, pode copiar estes ficheiros co nome es_MX.dic e es_MX.aff e a verificación ortográfica funcionará. Teña en conta
+               que isto comprobará o texto tomando como referencia o estándar (castelán) e non o español de México.
+            </p>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e8458"></a>2.&nbsp;Empregar dicionarios ortográficos
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>Non necesita configurar OmegaT para utilizar un dicionario ortográfico en particular; OmegaT empregará o dicionario do idioma
+               correcto segundo os códigos de linguas do seu proxecto. Aínda así, comprobe que os códigos de idioma son exactamente os mesmos:
+               un dicionario FR-FR non funcionará cunha configuración de idioma de destino FR, por exemplo. Se é necesario, edite o nome
+               dos ficheiros do dicionario ou cambie a configuración de linguas do seu proxecto.
+            </p>
+            <p>Para activar o verificador ortográfico, seleccione <span class="guimenuitem">Opcións &gt; Verificación ortográfica</span> e marque a caixa de <span class="guilabel">Comprobar automaticamente a ortografía do texto</span> (vexa máis arriba).
+            </p>
+            <div class="figure"><a name="spellchecker.in.action"></a><p class="title"><b>Figure&nbsp;20.2.&nbsp;Empregar o corrector ortográfico.</b></p>
+               <div class="figure-contents">
+                  <div class="mediaobject"><img src="images/SpellcheckingText.png" alt="Empregar o corrector ortográfico."></div>
+               </div>
+            </div><br class="figure-break"><p>Facendo clic dereito nunha palabra subliñada (Artund na imaxe anterior) abrirá un menú desdobrábel con suxestións para a corrección
+               (Art und). Tamén pode facer que o corrector ortográfico ignore todas as veces que aparece unha palabra mal escrita, ou engadila
+               ao dicionario.
+            </p>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="hints"></a>3.&nbsp;Consellos<a class="indexterm" name="d0e8484"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <p>Se non funciona a verificación ortográfica, asegúrese primeiro de que a caixa de verificación <span class="guilabel">« Comprobar automaticamente a ortografía do texto»</span> no diálogo de verificación ortográfica (<span class="guisubmenu">Opcións &gt; Verificación ortográfica...</span>) está marcada.
+            </p>
+            <p>Tamén comprobe que o código de idioma de destino do seu proxecto coincide cos dicionarios dispoñíbeis na xanela de configuración.
+               O corrector ortográfico emprega o código do idioma de destino para determinar que idioma se empregará: se o idioma de destino
+               é portugués brasileiro (PT_BR), o subcartafol co dicionario ortográfico debe conter os dous ficheiros de vocabulario, chamados
+               <span class="emphasis"><em>pt_br.aff</em></span> e <span class="emphasis"><em>pt_br.dic</em></span>.
+            </p>
+            <p>Se xa traduciu unha grande parte do texto e despois se decatou de que o código do idioma de destino do proxecto non coincide
+               co código de idioma do corrector ortográfico (especificou pt_BR como o idioma, mais non había dicionarios pt_BR, por exemplo)
+               pode copiar os ficheiros correspondentes e renomealos (por exemplo, de <span class="emphasis"><em>pt_PT.aff</em></span> e <span class="emphasis"><em>pt_PT.dic</em></span> a <span class="emphasis"><em>pt._BR.aff</em></span> e <span class="emphasis"><em>pt_BR.dic</em></span>). Por suposto, é moito mellor tomar un descanso e descargar as versións correctas dos dicionarios ortográficos.
+            </p>
+            <p>Teña en conta que a función <code class="filename">Eliminar</code> elimina fisicamente os vocabularios seleccionados. Se se empregan por algunha outra aplicación do seu sistema, desaparecerán
+               para esa aplicación tamén. Se, por calquera razón, necesita facer isto algunha vez, pode que teña máis sentido copiar os ficheiros
+               relacionados a un cartafol diferente, reservándoos só para o uso de OmegaT.
+            </p>
+         </div>
+      </div>
+      <div class="navfooter">
+         <hr>
+         <table width="100%" summary="Navigation footer">
+            <tr>
+               <td width="40%" align="left"><a accesskey="p" href="chapter.machine.translate.html">Prev</a>&nbsp;
+               </td>
+               <td width="20%" align="center">&nbsp;</td>
+               <td width="40%" align="right">&nbsp;<a accesskey="n" href="chapter.misc.html">Next</a></td>
+            </tr>
+            <tr>
+               <td width="40%" align="left" valign="top">Chapter&nbsp;19.&nbsp;Tradución automática&nbsp;</td>
+               <td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
+               <td width="40%" align="right" valign="top">&nbsp;Chapter&nbsp;21.&nbsp;Outros asuntos</td>
+            </tr>
+         </table>
+      </div>
+   </body>
+</html>

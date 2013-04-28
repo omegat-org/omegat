@@ -1,0 +1,297 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<chapter id="chapter.files.to.translate">
+  <title>Ficheiros a traducir</title>
+
+  <section id="file.formats">
+    <title>Formatos de ficheiro<indexterm class="singular">
+        <primary>Ficheiros orixe</primary> <secondary>Formatos de ficheiro</secondary>
+      </indexterm><indexterm class="singular">
+        <primary>Ficheiros de destino</primary> <secondary>Formatos de ficheiro</secondary>
+      </indexterm></title>
+
+    <para><application>Pode empregar OmegaT</application> para traducir ficheiros en varios formatos. Hai basicamente dous tipos de formatos: texto plano e texto formatado.</para>
+
+    <section>
+      <title>Ficheiros de texto plano<indexterm class="singular">
+          <primary>Ficheiros de destino</primary> <secondary>Ficheiros de texto plano</secondary>
+        </indexterm><indexterm class="singular">
+          <primary>Ficheiros orixe</primary> <secondary>Ficheiros de texto plano</secondary>
+        </indexterm></title>
+
+      <para>Os ficheiros de texto plano só conteñen texto, polo que a súa tradución é tan sinxela como escribila. Hai moitos métodos para especificar a codificación dun ficheiro de modo que os contidos non se líen cando se abran en <application>OmegaT</application>. Estes ficheiros non conteñen ningunha información de formatado mais aló de espazos en branco empregados para aliñar o texto, indicar parágrafos e inserir saltos de liña. Non poden conter ou manter información relacionada á cor, fonte, etc. do texto. Actualmente, <application>OmegaT</application> é compatíbel cos seguintes formatos de texto plano:<indexterm class="singular">
+          <primary>Formatos de ficheiro</primary> <secondary>sen formatar</secondary> <seealso>Ficheiros orixe</seealso>
+        </indexterm></para>
+
+      <itemizedlist>
+        <listitem>
+          <para>Texto ASCII (.txt, etc.)</para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para>Texto codificado (*.UTF8)</para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para>Paquetes de recursos Java (*.properties)</para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para>Ficheiros PO (*.po)</para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para>Ficheiros (clave=valor) INI (*.ini)</para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para>Ficheiros DTD (*.DTD)</para>
+        </listitem>
+
+        <listitem>
+          <para>Ficheiros DokuWiki (*.txt)</para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para>Ficheiros de título SubRip (*.srt)</para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para>Ficheiros de Magento CE Locale CSV (*.csv)</para>
+        </listitem>
+      </itemizedlist>
+
+      <para><application>OmegaT</application> pode xestionar outros tipos de ficheiro de texto plano asociando a extensión de ficheiro a un tipo de ficheiro compatíbel (por exemplo, os ficheiros .pod poden asociarse a un filtro de texto ASCII) e preprocesándoos con regras de segmentación específicas.</para>
+
+      <para>Os ficheiros PO<indexterm class="singular">
+          <primary>Ficheiros orixe</primary> <secondary>PO como ficheiros bilingües</secondary>
+        </indexterm> poden conten tanto o texto de orixe coma o de destino. Desde este punto de vista, hai ficheiros de texto plano <emphasis>máis</emphasis> memorias de tradución. Se para un segmento de orixe dado aínda non hai unha tradución existente na memoria de tradución do proxecto (project_save.tmx), a tradución actual gardarase en project_save.tmx como a tradución predeterminada. Aínda si, se xa existe o segmento de orixe cunha tradución diferente, gardarase a nova tradución como unha tradución alternativa.</para>
+    </section>
+
+    <section>
+      <title>Ficheiros de texto formatados<indexterm class="singular">
+          <primary>Ficheiros de destino</primary> <secondary>Ficheiros de texto formatado</secondary> <seealso>Texto etiquetado</seealso>
+        </indexterm><indexterm class="singular">
+          <primary>Ficheiros orixe</primary> <secondary>Ficheiros de texto plano</secondary>
+        </indexterm></title>
+
+      <para>Os ficheiros de texto formatado conteñen información como o tipo de fonte, tamaño, cor, etc. así como o texto. Créanse normalmente en procesadores de texto ou editores de HTML. Estes formatos de texto están deseñados para manter a información do formato. A información do formato pode ser tan simple como «isto está en negra», ou tan complexo como datos en táboas con diferentes tamaños de fonte, cores, posicións, etc. Na maioría dos traballos de tradución, se considera importante que se manteña o formato do texto orixinal na tradución. OmegaT permite facer isto marcando os caracteres/palabras que teñan un formato especial con etiquetas sinxelas de xestionar. A simplificación do formato do texto orixinal contribúe enormemente para reducir o número de etiquetas. Cando sexa posíbel, a unificación de fontes, tamaño de fontes, cores, etc. empregados nun documento, simplifica a tarefa de tradución e reduce o número posíbel de erros de etiquetas. Cada tipo de ficheiro xestiónase de modo diferente en OmegaT. Pode configurarse un comportamento específico nos filtros de ficheiro. Cando se redactou este texto, OmegaT era compatíbel cos seguintes formatos de texto formatado:<indexterm class="singular">
+          <primary>Formatos de ficheiro</primary> <secondary>formatados</secondary> <seealso>Ficheiros orixe</seealso>
+        </indexterm></para>
+
+      <para><itemizedlist>
+          <listitem>
+            <para>ODF - OASIS Open Document Format (*.ods, *.ots, *.odt,
+            *.ott, *.odp, *.otp)</para>
+          </listitem>
+        </itemizedlist><itemizedlist>
+          <listitem>
+            <para>Microsoft Office Open XML (*.docx, *.dotx, *.xlsx, *.xltx,
+            *.pptx)</para>
+          </listitem>
+        </itemizedlist><itemizedlist>
+          <listitem>
+            <para>(X)HTML (*.html, *.xhtml,*.xht)</para>
+          </listitem>
+        </itemizedlist><itemizedlist>
+          <listitem>
+            <para>Compilador de axuda HTML (*.hhc, *.hhk)</para>
+          </listitem>
+        </itemizedlist><itemizedlist>
+          <listitem>
+            <para>DocBook (*.xml)</para>
+          </listitem>
+        </itemizedlist><itemizedlist>
+          <listitem>
+            <para>XLIFF (*.xlf, *.xliff, *.sdlxliff) - da variedade orixe=destino</para>
+          </listitem>
+        </itemizedlist><itemizedlist>
+          <listitem>
+            <para>QuarkXPress CopyFlowGold (*.tag, *.xtg)</para>
+          </listitem>
+        </itemizedlist><itemizedlist>
+          <listitem>
+            <para>Ficheiros ResX (*.resx)</para>
+          </listitem>
+        </itemizedlist><itemizedlist>
+          <listitem>
+            <para>Recursos para Android (*.xml)</para>
+          </listitem>
+        </itemizedlist><itemizedlist>
+          <listitem>
+            <para>LaTex (*.tex, *.latex)</para>
+          </listitem>
+
+          <listitem>
+            <para>Ficheiros de Axuda (*.xml) e Manuais (*.hmxp)</para>
+          </listitem>
+
+          <listitem>
+            <para>Typo3 LocManager (*.xml)</para>
+          </listitem>
+        </itemizedlist><itemizedlist>
+          <listitem>
+            <para>Localización WiX (*.wxl)</para>
+          </listitem>
+
+          <listitem>
+            <para>Iceni Infix (*.xml)</para>
+          </listitem>
+
+          <listitem>
+            <para>Exportación a Flash XML (*.xml)</para>
+          </listitem>
+
+          <listitem>
+            <para>TXML de Wordfast (*.txml)</para>
+          </listitem>
+
+          <listitem>
+            <para>Camtasia para Windows (*.camproj)</para>
+          </listitem>
+
+          <listitem>
+            <para>Visio (*.vxd)</para>
+          </listitem>
+        </itemizedlist></para>
+
+      <para>OmegaT tamén pode aceptar outros tipos de ficheiro de texto formatado asociando a súa extensión a un tipo de ficheiro compatíbel, asumindo que as regras de segmentación correspondentes os segmentará correctamente.</para>
+    </section>
+  </section>
+
+  <section id="other.file.formats">
+    <title>Outros formatos de ficheiro<indexterm class="singular">
+        <primary>Ficheiros de destino</primary> <secondary>Outros formatos de ficheiro</secondary>
+      </indexterm><indexterm class="singular">
+        <primary>Ficheiros orixe</primary> <secondary>Outros formatos de ficheiro</secondary>
+      </indexterm></title>
+
+    <para>Poden existir outros formatos de texto plano ou formatado apropiados para o seu procesamento en OmegaT.</para>
+
+    <para><indexterm class="singular">
+        <primary>Ficheiros de destino</primary> <secondary>Ferramentas de conversión de ficheiros</secondary>
+      </indexterm>Poden empregarse ferramentas externas para converter ficheiros a un formato compatíbel. Os ficheiros traducidos necesitarán ser convertidos de novo ao formato orixinal. Por exemplo, se ten unha versión desactualizada de Microsoft Word, que non é compatíbel co formato ODT, aquí vai un pequeno truco para ficheiros coa extensión DOC:</para>
+
+    <itemizedlist>
+      <listitem>
+        <para>importe o ficheiro nun procesador de textos ODF</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>garde o ficheiro en formato ODT</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>tradúzao no ficheiro ODT de destino</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>cargue o ficheiro de destino nun procesador de textos ODF</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>garde o documento coma un ficheiro DOC</para>
+      </listitem>
+    </itemizedlist>
+
+    <para>A calidade do formato do ficheiro traducido dependerá na calidade das varias conversións. Antes de facer estas conversións, asegúrese ter probado todas as opcións. Comprobe a <ulink url="http://www.omegat.org/">páxina web de OmegaT</ulink> para unha lista actualizada de ferramentas de asistencia á tradución.</para>
+  </section>
+
+  <section id="right.to.left.languages">
+    <title>Linguas de escritura de dereita a esquerda (RTL)<indexterm class="singular">
+        <primary>Linguas de escritura de dereita a esquerda (RTL)</primary>
+      </indexterm><indexterm class="singular">
+        <primary>Ficheiros de destino</primary> <secondary>Linguas de escritura de dereita a esquerda</secondary>
+      </indexterm><indexterm class="singular">
+        <primary>Ficheiros orixe</primary> <secondary>Linguas de escritura de dereita a esquerda</secondary>
+      </indexterm></title>
+
+    <para>A xustificación dos segmentos de orixe e destino depende das linguas do proxecto. De xeito predeterminado, se emprega unha xustificación á esquerda para as linguas de escritura de esquerda a dereita (LTR) e unha xustificación á dereita para as linguas de escritura de dereita á esquerda (RTL) Pode cambiar entre os distintos modos premendo <keycombo> <keycap>Shift</keycap> <keycap>Ctrl</keycap> <keycap>O</keycap> </keycombo> (é a letra O, non o numeral 0). A combinación <keycombo> <keycap>Shift</keycap> <keycap>Ctrl</keycap> <keycap>O</keycap> </keycombo> ten tres estados:</para>
+
+    <itemizedlist>
+      <listitem>
+        <para>xustificación predeterminada, que é a definida polo idioma</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>xustificación á esquerda</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>xustificación á dereita</para>
+      </listitem>
+    </itemizedlist>
+
+    <para>O emprego do modo RTL en <application>OmegaT</application> non ten ningunha influencia nin sequera na disposición dos documentos traducidos creados en <application>OmegaT</application>. O modo dos documentos traducidos debe cambiarse na aplicación (como Microsoft Word) empregada comunmente para amosar ou modificalos (comprobe os manuais relevantes para máis detalles). O emprego de <keycombo> <keycap>Shift</keycap> <keycap>Ctrl</keycap> <keycap>O</keycap> </keycombo> fai que tanto o texto inserido coma a aparencia de <application>OmegaT</application> cambien. Pode empregarse por separado para os tres paneis (editor, coincidencias parciais e glosario) facendo clic no panel e activando o modo. Tamén pode empregarse nos campos de inserción de <application>OmegaT</application> (na xanela de buscas, para as regras de segmentación, etc.)</para>
+
+    <para>Nota para os usuarios de Mac OS X: empregade o atallo <keycombo> <keycap>Shift</keycap> <keycap>Ctrl</keycap> <keycap>O</keycap> </keycombo> e <emphasis role="bold">non</emphasis> cmd+Ctrl+O.</para>
+
+    <section>
+      <title>Mestura de cadeas RTL e LTR nos segmentos<indexterm class="singular">
+          <primary>Idiomas RTL</primary> <secondary>Mestura de cadeas RTL e LTR</secondary>
+        </indexterm><indexterm class="singular">
+          <primary>Ficheiros de destino</primary> <secondary>Mestura de cadeas RTL e LTR</secondary>
+        </indexterm><indexterm class="singular">
+          <primary>Ficheiros orixe</primary> <secondary>Mestura de cadeas RTL e LTR</secondary>
+        </indexterm></title>
+
+      <para>Cando está escribindo un texto puramente RTL, pode empregar a vista predeterminada (LTR). Porén, en moitos casos é necesario inserir texto LTR en texto RTL. Por exemplo, nas etiquetas de OmegaT, nomes de produtos que teñen que permanecer no idioma LTR orixinal, marcadores de posición en ficheiros de localización e números en texto. En casos coma este, é necesario cambiar ao modo RTL, de modo que o texto RTL (en realidade bidireccional) se amose correctamente. Deberiamos destacar que cando <application>OmegaT</application> está en modo RTL, tanto a orixe coma o destino amósanse en modo RTL. Isto significa que se o idioma de orixe é LTR e o idioma de destino é RTL, ou viceversa, pode ser necesario cambiar alternativamente entre os modos RTL e LTR para ver o segmento de orixe e inserir o de destino dun xeito fácil nos seus respectivos modos.</para>
+    </section>
+
+    <section>
+      <title>Etiquetas de <application>OmegaT</application> en segmentos RTL<indexterm class="singular">
+          <primary>Idiomas RTL</primary> <secondary>Etiquetas de OmegaT en idiomas RTL</secondary>
+        </indexterm></title>
+
+      <para>Como se dixo anteriormente, as etiquetas de OmegaT son cadeas LTR. Cando traducimos entre un idioma RTL e LTR, ler correctamente as etiquetas do orixinal e inserilas propiamente na tradución pode requirir que o tradutor cambie entre os modos LTR e RTL varias veces.</para>
+
+      <para>Se o documento o permite, animamos ao tradutor a que retire información en canto ao estilo do documento orixinal de modo que aparezan o menor número de etiquetas posíbel na interface ce OmegaT. Siga as indicacións que lle damos nos Consellos para a xestión de etiquetas. Valide as etiquetas frecuentemente (vexa Validación de etiquetas) e produza os documentos traducidos (vexa máis abaixo e Menú) a intervalos regulares para facer máis fácil atopar calquera problema que poida xurdir. Un consello: traducir unha versión en texto plano do texto e engadir despois as marcas de estilo necesarias na aplicación adecuada despois de realizar a tradución pode ser menos complicado.</para>
+    </section>
+
+    <section>
+      <title>Crear documentos RTL traducidos<indexterm class="singular">
+          <primary>Idiomas RTL</primary> <secondary>Crear ficheiros de destino RTL</secondary>
+        </indexterm><indexterm class="singular">
+          <primary>Idiomas RTL</primary> <secondary>Ficheiros de destino</secondary>
+        </indexterm><indexterm class="singular">
+          <primary>Idiomas RTL</primary> <secondary>Crear texto de destino RTL</secondary>
+        </indexterm></title>
+
+      <para>Cando se crea o documento traducido, a súa dirección será a mesma que a do documento orixinal. Se o documento orixinal era LTR, a dirección do documento de destino debe cambiarse manualmente a RTL na aplicación adecuada. Cada formato ten os seus modos específicos de xestionar a disposición RTL: comprobe os manuais das aplicacións relevantes para máis detalles.</para>
+      
+      <para>Para os ficheiros .docx, fanse algúns cambios automaticamente:<itemizedlist>
+      <listitem>Os parágrafos, seccións e táboas configúranse en bidi</listitem>
+      <listitem>Os elementos do texto configúranse en RTL</listitem>     
+      </itemizedlist>
+      </para>
+
+      <para>Para evitar o cambio de parámetros de disposición dos ficheiros de destino cada vez que se abren os ficheiros, pode que sexa posíbel cambiar os parámetros de disposición do ficheiro orixe para que eses parámetros sexan herdados polos ficheiros de destino. Estas modificacións son posíbeis nos ficheiros ODF, por exemplo.</para>
+    </section>
+  </section>
+</chapter>

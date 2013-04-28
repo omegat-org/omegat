@@ -3,7 +3,7 @@
 ----------------------------------------------------------------------
    2 Enhancements
    0 Bug fix
-   0 Localisation update
+   1 Localisation update
 ----------------------------------------------------------------------
 3.0.1 vs. 3.0.0
 
@@ -14,6 +14,10 @@
 
   - PDF input filter 
   https://sourceforge.net/p/omegat/feature-requests/539/
+
+  Localisation updates:
+
+  - Catalan localisation updated to 3.0.0 (UI, readme, Documentation)
 
 ----------------------------------------------------------------------
  OmegaT 3.0.0

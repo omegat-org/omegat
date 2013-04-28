@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<appendix id="appendix.ScriptingPlugin.inOmegaT">
+  <title>Engadido de Scripting<indexterm class="singular">
+      <primary>Engadidos</primary> <secondary>Scripting</secondary>
+    </indexterm></title>
+
+  <section>
+    <title>Introdución</title>
+
+    <para>OmegaT-Scripting permite executar scripts escritos en diferentes linguaxes de programación en OmegaT.</para>
+  </section>
+
+  <section>
+    <title>Instalación e uso</title>
+
+    <para>O engadido de Scrpting para OmegaT pode descargarse dende o <ulink url="http://sourceforge.net/projects/omegat-plugins/files">sitio de descarga de engadidos de OmegaT</ulink>. Descomprima os ficheiros e gárdeos no cartafol «plugins» dentro da carpeta de instalación de OmegaT, é dicir, o cartafol que contén o ficheiro OmegaT.jar. Primeiro cree o cartafol «plugins», de non existir un xa.</para>
+
+    <para>Isto engade un submenú novo <guisubmenu>Ferramentas &gt; </guisubmenu><guisubmenu>Scripting.</guisubmenu> Baixo o submenú de <guisubmenu>Scripting</guisubmenu>, hai dispoñíbeis cinco lugares para scripts. Facendo clic en <guisubmenu>Scripting</guisubmenu>, abre o diálogo do engadido:<screenshot> <screeninfo>Diálogo de Scripting</screeninfo> <mediaobject> <imageobject> <imagedata fileref="images/ScriptingDialog.png"/> </imageobject> </mediaobject> </screenshot></para>
+
+    <para>O diálogo do engadido permítelle cargar un script existente na área de texto e executalo no proxecto aberto nese momento. Para personalizar a funcionalidade dos scripts, faga o seguinte:</para>
+
+    <itemizedlist>
+      <listitem>
+        <para>Cargue un script no editor facendo clic no seu nome na lista do panel esquerdo.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Faga clic dereito nun botón dende o «&lt;1&gt;» ao «&lt;5&gt;» no panel inferior e seleccione «Engadir». No exemplo anterior, xa se engadiron dous scripts (posición 1 e 2).</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Cando faga clic esquerdo no número, executarase o script. Pode iniciar as macros seleccionadas dende o menú principal ou ben empregando as entradas no menú de <guisubmenu>Ferramentas</guisubmenu> ou premendo <keycap>Ctrl+Alt+F#</keycap> (sendo # un número do 1 ao 5).</para>
+      </listitem>
+    </itemizedlist>
+
+    <para>Xa están implementadas as seguintes linguaxes de programación:</para>
+
+    <para><itemizedlist>
+        <listitem>
+          <para><emphasis role="bold">NetRexx</emphasis> (http://www.netrexx.org/): é compatíbel coa sintaxe REXX clásica, sen palabras chave reservadas, xunto con importantes engadidos para a compatibilidade con programación orientada a obxectos dun xeito compatíbel co modelo de obxectos de Java. Tódalas librarías de clase Java existentes poden empregarse sen ningún cambio e sen unha configuración especial; ao mesmo tempo, un programador de Java pode escoller empregar a clase Rexx dende o paquete de execución para un mellor manexo das cadeas en programas de código fonte con sintaxe en Java.</para>
+        </listitem>
+      </itemizedlist><itemizedlist>
+        <listitem>
+          <para><emphasis role="bold">XSLT</emphasis> (Extensible Stylesheet Language Transformations, transformacións de idioma de folla de cálculo extensíbel): é unha linguaxe baseada en XML declarativa que se emprega para a transformación de documentos XML. O documento orixinal non se cambia, senón que se crea un novo documento baseado no contido dun documento existente. O novo documento pode producirse en serie polo procesador en linguaxe XML estándar ou noutro formato, como HTML ou texto plano. XSLT emprégase a miúdo para converter datos entre diferentes esquemas de XML ou para converter datos XML en páxinas web ou documentos PDF.</para>
+        </listitem>
+      </itemizedlist><itemizedlist>
+        <listitem>
+          <para><emphasis role="bold">Groovy</emphasis> (http://groovy.codehaus.org): é unha linguaxe dinámica para a máquina virtual Java. Constrúe sobre as forzas de Java mais ten funcións adicionais inspirados en linguaxes como Python, Ruby e Smalltalk.</para>
+        </listitem>
+      </itemizedlist><itemizedlist>
+        <listitem>
+          <para><emphasis role="bold">JavaScript</emphasis> (abreviado ás veces como JS, non confundir con Java): é unha linguaxe baseada nun prototipo. Esta linguaxe é dinámica, flexíbel e ten funcións de primeira clase. É unha linguaxe multiparadigmática, compatíbel con estilos de programación orientada a obxectos, imperativa e funcional. É unha ferramenta de programación popular e unha das preferidas no eido do software libre, pois se emprega en software tan coñecido como Firefox.</para>
+        </listitem>
+      </itemizedlist>Todas as linguaxes teñen acceso ao modelo de obxectos de OmegaT, co proxecto como o punto máis elevado do obxecto. O seguinte fragmento de código en groovy analiza todos os segmentos de todos os ficheiros do proxecto activo e, se a tradución existe, imprime a orixe e o destino do segmento.</para>
+
+    <programlisting>    files = project.projectFiles;
+    for (i in 0 ..&lt; files.size())
+    {{{
+        for (j in 0 ..&lt; files[i].entries.size())
+        {{{
+            currSegment = files[i].entries[j];
+            if (project.getTranslationInfo(currSegment))
+            {{{
+                source = currSegment.getSrcText();
+                target = project.getTranslationInfo(currSegment).translation;
+                console.println(source + &quot; &gt;&gt;&gt;&gt; &quot; + target);
+            }     
+        }
+    }</programlisting>
+  </section>
+</appendix>

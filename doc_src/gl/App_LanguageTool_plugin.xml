@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<appendix id="appendix.LanguageToolPlugin.inOmegaT">
+  <title>Engadido de LanguageTool<indexterm class="singular">
+      <primary>Engadidos</primary> <secondary>LanguageTool</secondary>
+    </indexterm></title>
+
+  <section>
+    <title>Introdución</title>
+
+    <para><ulink url="http://www.languagetool.org">LanguageTool</ulink> é un software de corrección gramatical e de estilo de código aberto dispoñíbel para as linguas inglesa, francesa, alemá, polaca, neerlandesa e romanesa, entre moitas outras. Vexa a <ulink url="http://www.languagetool.org/languages/">lista completa de idiomas compatíbeis.</ulink> </para>
+
+    <para>Pode pensar en LanguageTool como un software para detectar erros que un simple software de verificación ortográfica non pode detectar, por exemplo, mesturar palabras semellantes, etc. Tamén pode detectar algúns erros gramaticais, mais non inclúe verificación ortográfica. LanguageTool atopará erros para os que se definiu unha regra nos ficheiros de configuración específicos dun idioma.</para>
+
+    <figure>
+      <title>LanguageTool en OmegaT</title>
+
+      <screenshot>
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="images/LanguageToolExample.png"/>
+          </imageobject>
+        </mediaobject>
+      </screenshot>
+    </figure>
+  </section>
+
+  <section>
+    <title>Instalación e uso</title>
+
+    <para>O engadido de LanguageTool para OmegaT pode descargarse dende o <ulink url="http://sourceforge.net/projects/omegat-plugins/files">sitio de descarga de engadidos de OmegaT</ulink>. Descomprima os ficheiros e gárdeos no cartafol «plugins» dentro da carpeta de instalación de OmegaT, é dicir, o cartafol que contén o ficheiro OmegaT.jar. Primeiro cree o cartafol «plugins», de non existir un xa.</para>
+
+    <para>Unha vez instalado, OmegaT usará automaticamente o engadido, sempre e cando estea activado <guimenuitem>Opcións &gt; Verificación ortográfica</guimenuitem> As regras aplicadas (de houber) dependerán no idioma de orixe e de destino do proxecto. Cando se dispara unha regra, a frase correspondente subliñarase en azul no editor (ver <emphasis>tamén </emphasis>e <emphasis>eu non fixen nada</emphasis>na imaxe anterior. Cando poña o rato sobre a frase subliñada, aparecerá unha explicación.</para>
+  </section>
+</appendix>

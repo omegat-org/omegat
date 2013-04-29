@@ -4,6 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
+               2013 Aaron Madlon-Kay
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -25,28 +26,126 @@
 
 package org.omegat.gui.glossary;
 
+import java.util.ArrayList;
+
 /**
  * An entry in the glossary.
  * 
  * @author Keith Godfrey
+ * @author Aaron Madlon-Kay
  */
 public class GlossaryEntry {
-    public GlossaryEntry(String src, String loc, String com) {
+    public GlossaryEntry(String src, String[] loc, String[] com) {
         m_src = src;
         m_loc = loc;
         m_com = com;
+    }
+    
+    public GlossaryEntry(String src, String loc, String com) {
+        this(src, new String[] {loc}, new String[] {com});
     }
 
     public String getSrcText() {
         return m_src;
     }
 
+    /**
+     * Return the first target-language term string.
+     * 
+     * Glossary entries can have multiple target strings
+     * if they have been combined for display purposes.
+     * Access all target strings with {@link GlossaryEntry#getLocTerms(boolean)}.
+     * 
+     * @return The first target-language term string
+     */
     public String getLocText() {
-        return m_loc;
+        return m_loc.length > 0 ? m_loc[0] : "";
     }
 
-    public String getCommentText() {
+    /**
+     * Return each individual target-language term that
+     * corresponds to the source term.
+     * 
+     * @param uniqueOnly Whether or not to filter duplicates from the list
+     * @return All target-language terms
+     */
+    public String[] getLocTerms(boolean uniqueOnly) {
+        if (!uniqueOnly || m_loc.length == 1) return m_loc;
+        
+        ArrayList<String> list = new ArrayList<String>();
+        for (int i = 0; i < m_loc.length; i++) {
+            if (i > 0 && m_loc[i].equals(m_loc[i - 1])) continue;
+            list.add(m_loc[i]);
+        }
+        return list.toArray(new String[0]);
+    }
+
+    /**
+     * Return the first comment string.
+     * 
+     * Glossary entries can have multiple comment strings
+     * if they have been combined for display purposes.
+     * Access all comment strings with {@link GlossaryEntry#getComments()}.
+     * 
+     * @return The first comment string
+     */
+    public String getCommentText() {        
+        return m_com.length > 0 ? m_com[0] : "";
+    }
+
+    public String[] getComments() {
         return m_com;
+    }
+
+    public String toString() {
+        
+        StringBuffer buf = new StringBuffer();
+        buf.append(m_src);
+        buf.append(" = ");
+        
+        StringBuffer comments = new StringBuffer();
+        
+        int commentIndex = 0;
+        for (int i = 0; i < m_loc.length; i++) {
+            if (i > 0 && m_loc[i].equals(m_loc[i - 1])) {
+                if (!m_com[i].equals("")) {
+                    comments.append("\n");
+                    comments.append(commentIndex);
+                    comments.append(". ");
+                    comments.append(m_com[i]);
+                }
+                continue;
+            }
+            if (i > 0) buf.append(", ");
+            buf.append(bracketEntry(m_loc[i]));
+            commentIndex++;
+            if (!m_com[i].equals("")) {
+                comments.append("\n");
+                comments.append(commentIndex);
+                comments.append(". ");
+                comments.append(m_com[i]);
+            }
+        }
+        
+        buf.append(comments);
+        
+        return buf.toString();
+    }
+    
+    /**
+     * If a combined glossary entry contains ',', it needs to be bracketed by
+     * quotes, to prevent confusion when entries are combined. However, if the
+     * entry contains ';' or '"', it will automatically be bracketed by quotes.
+     * 
+     * @param entry
+     *            A glossary text entry
+     * @return A glossary text entry possibly bracketed by quotes
+     */
+    private String bracketEntry(String entry) {
+
+        if (entry.contains(",") && !(entry.contains(";") || entry.contains("\"")))
+            entry = '"' + entry + '"';
+        return entry;
     }
 
     @Override
@@ -73,6 +172,6 @@ public class GlossaryEntry {
     }
 
     private String m_src;
-    private String m_loc;
-    private String m_com;
+    private String[] m_loc;
+    private String[] m_com;
 }

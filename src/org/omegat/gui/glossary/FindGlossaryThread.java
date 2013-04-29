@@ -6,6 +6,7 @@
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
                2008 Alex Buloichik
                2009 Wildrich Fourie, Didier Briel, Alex Buloichik
+               2013 Aaron Madlon-Kay
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -59,6 +60,7 @@ import org.omegat.util.Token;
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Wildrich Fourie
  * @author Didier Briel
+ * @author Aaron Madlon-Kay
  */
 public class FindGlossaryThread extends EntryInfoSearchThread<List<GlossaryEntry>> {
 
@@ -119,22 +121,6 @@ public class FindGlossaryThread extends EntryInfoSearchThread<List<GlossaryEntry
                 }
             }
         return result;
-    }
-
-    /**
-     * If a combined glossary entry contains ',', it needs to be bracketed by
-     * quotes, to prevent confusion when entries are combined. However, if the
-     * entry contains ';' or '"', it will automatically be bracketed by quotes.
-     * 
-     * @param entry
-     *            A glossary text entry
-     * @return A glossary text entry possibly bracketed by quotes
-     */
-    private String bracketEntry(String entry) {
-
-        if (entry.contains(",") && !(entry.contains(";") || entry.contains("\"")))
-            entry = '"' + entry + '"';
-        return entry;
     }
 
     private List<GlossaryEntry> filterGlossary(List<GlossaryEntry> result) {
@@ -247,42 +233,19 @@ public class FindGlossaryThread extends EntryInfoSearchThread<List<GlossaryEntry
             // == Now put the sortedList together
             // ===============================
             String srcTxt = sortList.get(0).getSrcText();
-            String locTxt = sortList.get(0).getLocText();
-            String comTxt = "";
+            ArrayList<String> locTxts = new ArrayList<String>();
+            ArrayList<String> comTxts = new ArrayList<String>();
 
-            int comCounter = 1;
-
-            locTxt = bracketEntry(locTxt);
-
-            String prevLocTxt = sortList.get(0).getLocText();
-            String prevComTxt = sortList.get(0).getCommentText();
-
-            if (!prevComTxt.equals(""))
-                comTxt = comCounter + ". " + prevComTxt;
-
-            for (int m = 1; m < sortList.size(); m++) {
-                if (!sortList.get(m).getLocText().equals(prevLocTxt)) {
-                    comCounter++;
-                    prevLocTxt = sortList.get(m).getLocText();
-                    locTxt += ", " + bracketEntry(prevLocTxt);
-                    // The Comments cannot be equal because all the duplicates
-                    // have been removed earlier.
-                    if (!sortList.get(m).getCommentText().equals("")) {
-                        if (comTxt.equals(""))
-                            comTxt = comCounter + ". " + sortList.get(m).getCommentText();
-                        else
-                            comTxt += "\n" + comCounter + ". " + sortList.get(m).getCommentText();
-                    }
-                } else {
-                    if (!sortList.get(m).getCommentText().equals("")) {
-                        if (comTxt.equals(""))
-                            comTxt = comCounter + ". " + sortList.get(m).getCommentText();
-                        else
-                            comTxt += "\n" + comCounter + ". " + sortList.get(m).getCommentText();
-                    }
+            for (GlossaryEntry e : sortList) {
+                for (String s : e.getLocTerms(false)) {
+                    locTxts.add(s);
+                }
+                for (String s : e.getComments()) {
+                    comTxts.add(s);
                 }
             }
-            GlossaryEntry combineEntry = new GlossaryEntry(srcTxt, locTxt, comTxt);
+            GlossaryEntry combineEntry = new GlossaryEntry(srcTxt,
+                    locTxts.toArray(new String[0]), comTxts.toArray(new String[0]));
             returnList.add(combineEntry);
             // ==================================================================
         }

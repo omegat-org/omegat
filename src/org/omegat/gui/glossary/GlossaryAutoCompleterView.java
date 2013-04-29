@@ -50,10 +50,9 @@ public class GlossaryAutoCompleterView extends AutoCompleterView {
         List<String> entryList = new ArrayList<String>();
         
         for (GlossaryEntry entry : Core.getGlossary().getDisplayedEntries()) {
-            String items[] = entry.getLocText().split(", ");
-            for (int i = 0; i < items.length; i++) {
-                if (items[i].toLowerCase().startsWith(wordChunk.toLowerCase())) {
-                    entryList.add(items[i]);
+            for (String s : entry.getLocTerms(true)) {
+                if (s.toLowerCase().startsWith(wordChunk.toLowerCase())) {
+                    entryList.add(s);
                 }
             }
         }
@@ -61,7 +60,9 @@ public class GlossaryAutoCompleterView extends AutoCompleterView {
         if (!Core.getProject().getProjectProperties().getTargetLanguage().isSpaceDelimited()
                 && entryList.size() == 0) {
             for (GlossaryEntry entry : Core.getGlossary().getDisplayedEntries()) {
-                entryList.add(entry.getLocText());
+                for (String s : entry.getLocTerms(true)) {
+                    entryList.add(s);
+                }
             }
         }
         

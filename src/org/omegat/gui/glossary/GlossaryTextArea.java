@@ -8,6 +8,7 @@
                2009-2010 Wildrich Fourie
                2010 Alex Buloichik
                2012 Jean-Christophe Helary
+               2013 Aaron Madlon-Kay
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -69,6 +70,7 @@ import org.omegat.util.gui.UIThreadsUtil;
  * @author Wildrich Fourie
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Jean-Christophe Helary
+ * @author Aaron Madlon-Kay
  */
 @SuppressWarnings("serial")
 public class GlossaryTextArea extends EntryInfoThreadPane<List<GlossaryEntry>> {
@@ -171,9 +173,7 @@ public class GlossaryTextArea extends EntryInfoThreadPane<List<GlossaryEntry>> {
 
         StringBuffer buf = new StringBuffer();
         for (GlossaryEntry entry : entries) {
-            buf.append(entry.getSrcText() + " = " + entry.getLocText());
-            if (entry.getCommentText().length() > 0)
-                buf.append("\n" + entry.getCommentText());
+            buf.append(entry.toString());
             buf.append("\n\n");
         }
         setText(buf.toString());

@@ -111,7 +111,7 @@ public class AutoCompleter {
     public boolean processKeys(KeyEvent e) {
         
         if (!isVisible() && ((!onMac && StaticUtils.isKey(e, KeyEvent.VK_SPACE, KeyEvent.CTRL_MASK))
-                || (onMac && StaticUtils.isKey(e, KeyEvent.VK_ESCAPE, 0)))) {
+                || (onMac && StaticUtils.isKey(e, KeyEvent.VK_SPACE, KeyEvent.META_MASK)))) {
 
             if (!editor.isInActiveTranslation(editor.getCaretPosition())) {
                 return false;

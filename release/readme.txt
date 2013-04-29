@@ -1,4 +1,4 @@
-﻿@@TRANSLATION_NOTICE@@
+@@TRANSLATION_NOTICE@@
 
 ==============================================================================
   OmegaT 3.0, Read Me file
@@ -19,13 +19,13 @@ The most current info about OmegaT can be found at
 
 User support, at the Yahoo user group (multilingual), where the archives are
 searchable without subscription:
-     http://groups.yahoo.com/group/OmegaT/
+     http://tech.groups.yahoo.com/group/OmegaT/
 
 Requests for Enhancements (in English), at the SourceForge site:
-     http://sourceforge.net/tracker/?group_id=68187&atid=520350
+     https://sourceforge.net/p/omegat/feature-requests/
 
 Bug reports (in English), at the SourceForge site:
-     http://sourceforge.net/tracker/?group_id=68187&atid=520347
+     https://sourceforge.net/p/omegat/bugs/
 
 ==============================================================================
   2.  What is OmegaT?
@@ -248,10 +248,10 @@ To participate in the development of OmegaT, get in touch with the developers at
 To translate OmegaT's user interface, user manual or other related documents,
 read:
       
-      http://www.omegat.org/en/translation-info.html
+      http://www.omegat.org/en/howtos/localizing_omegat.php
 
 And subscribe to the translators' list:
-      http://lists.sourceforge.net/mailman/listinfo/omegat-l10n
+      https://lists.sourceforge.net/lists/listinfo/omegat-l10n
 
 To contribute in other ways, subscribe first to the user group at:
       http://tech.groups.yahoo.com/group/omegat/
@@ -366,10 +366,10 @@ You can add copies of files, portions of the log, screen shots, anything that
 you think will help the developers with finding and fixing your bug.
 
 To browse the archives of the user group, go to:
-     http://groups.yahoo.com/group/OmegaT/
+     http://tech.groups.yahoo.com/group/OmegaT/
 
 To browse the bug report page and file a new bug report if necessary, go to:
-     http://sourceforge.net/tracker/?group_id=68187&atid=520347
+     https://sourceforge.net/p/omegat/bugs/
 
 To keep track of what is happening to your bug report you may want to register
 as a Source Forge user.

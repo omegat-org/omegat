@@ -64,6 +64,7 @@ public class GlossaryAutoCompleterView extends AutoCompleterView {
                     entryList.add(s);
                 }
             }
+            completer.adjustInsertionPoint(wordChunk.length());
         }
         
         return entryList;

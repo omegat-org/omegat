@@ -147,7 +147,7 @@ OmegaT failed to load the valid ones
 ----------------------------------------------------------------------
    0 Enhancement
    0 Bug fix
-   2 Localisation updates
+   3 Localisation updates
 ----------------------------------------------------------------------
 2.6.3 update 1 vs. 2.6.3
 
@@ -155,6 +155,7 @@ OmegaT failed to load the valid ones
 
   - Turkish localisation updated to 2.6.3 (backported from 3.0) (UI)
   - Catalan localisation updated to 2.6.3 (UI, Readme, Instant Start)
+  - Galician localisation backported from 3.0.0 (Documentation)
 
 ----------------------------------------------------------------------
  OmegaT 2.6.3 update 1

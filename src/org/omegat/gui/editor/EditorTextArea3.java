@@ -169,39 +169,45 @@ public class EditorTextArea3 extends JEditorPane {
                 }
             }
             if (e.isPopupTrigger() || e.getButton() == MouseEvent.BUTTON3) {
-                PopupMenuConstructorInfo[] cons;
-                synchronized (popupConstructors) {
-                    /**
-                     * Copy constructors - for disable blocking in the procesing
-                     * time.
-                     */
-                    cons = popupConstructors.toArray(new PopupMenuConstructorInfo[popupConstructors.size()]);
-                }
-
-                boolean isInActiveEntry;
-                int ae = controller.displayedEntryIndex;
-                SegmentBuilder sb = controller.m_docSegList[ae];
-                if (sb.isActive()) {
-                    isInActiveEntry = mousepos >= sb.getStartPosition() && mousepos <= sb.getEndPosition();
-                } else {
-                    isInActiveEntry = false;
-                }
-
-                JPopupMenu popup = new JPopupMenu();
-                for (PopupMenuConstructorInfo c : cons) {
-                    // call each constructor
-                    c.constructor.addItems(popup, EditorTextArea3.this, mousepos, isInActiveEntry,
-                            isInActiveTranslation(mousepos), sb);
-                }
-
-                DockingUI.removeUnusedMenuSeparators(popup);
-
+                JPopupMenu popup = makePopupMenu(mousepos);
                 if (popup.getComponentCount() > 0) {
                     popup.show(EditorTextArea3.this, (int) e.getPoint().getX(), (int) e.getPoint().getY());
                 }
             }
         }
     };
+
+    private JPopupMenu makePopupMenu(int pos) {
+        
+        PopupMenuConstructorInfo[] cons;
+        synchronized (popupConstructors) {
+            /**
+             * Copy constructors - for disable blocking in the procesing
+             * time.
+             */
+            cons = popupConstructors.toArray(new PopupMenuConstructorInfo[popupConstructors.size()]);
+        }
+
+        boolean isInActiveEntry;
+        int ae = controller.displayedEntryIndex;
+        SegmentBuilder sb = controller.m_docSegList[ae];
+        if (sb.isActive()) {
+            isInActiveEntry = pos >= sb.getStartPosition() && pos <= sb.getEndPosition();
+        } else {
+            isInActiveEntry = false;
+        }
+
+        JPopupMenu popup = new JPopupMenu();
+        for (PopupMenuConstructorInfo c : cons) {
+            // call each constructor
+            c.constructor.addItems(popup, EditorTextArea3.this, pos, isInActiveEntry,
+                    isInActiveTranslation(pos), sb);
+        }
+
+        DockingUI.removeUnusedMenuSeparators(popup);
+
+        return popup;
+    }
 
     /**
      * Add new constructor into list and sort full list by priority.
@@ -244,6 +250,14 @@ public class EditorTextArea3 extends JEditorPane {
         if (autoCompleter.processKeys(e)) {
             // The AutoCompleter needs special treatment.
             processed = true;
+        } else if (mac && StaticUtils.isKey(e, KeyEvent.VK_ESCAPE, InputEvent.SHIFT_MASK)) {
+            // Shift+Esc for contextual menu on Mac
+            JPopupMenu popup = makePopupMenu(getCaretPosition());
+            if (popup.getComponentCount() > 0) {
+                popup.show(EditorTextArea3.this,
+                        (int) getCaret().getMagicCaretPosition().getX(),
+                        (int) getCaret().getMagicCaretPosition().getY());
+            }
         } else if (StaticUtils.isKey(e, KeyEvent.VK_TAB, 0)) {
             // press TAB when 'Use TAB to advance'
             if (controller.settings.isUseTabForAdvance()) {

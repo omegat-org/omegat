@@ -1,0 +1,161 @@
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <title>Chapter&nbsp;6.&nbsp;Propiedades do proxecto</title>
+      <link rel="stylesheet" type="text/css" href="OmegaT.css">
+      <meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
+      <link rel="home" href="index.html" title="OmegaT - Guía de usuario">
+      <link rel="up" href="index.html" title="OmegaT - Guía de usuario">
+      <link rel="prev" href="chapter.menu.html" title="Chapter&nbsp;5.&nbsp;Atallos de teclado e Menú">
+      <link rel="next" href="chapter.file.filters.html" title="Chapter&nbsp;7.&nbsp;Filtros de ficheiro">
+   </head>
+   <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+      <div class="navheader">
+         <table width="100%" summary="Navigation header">
+            <tr>
+               <th colspan="3" align="center">Chapter&nbsp;6.&nbsp;Propiedades do proxecto</th>
+            </tr>
+            <tr>
+               <td width="20%" align="left"><a accesskey="p" href="chapter.menu.html">Prev</a>&nbsp;
+               </td>
+               <th width="60%" align="center">&nbsp;</th>
+               <td width="20%" align="right">&nbsp;<a accesskey="n" href="chapter.file.filters.html">Next</a></td>
+            </tr>
+         </table>
+         <hr>
+      </div>
+      <div class="chapter">
+         <div class="titlepage">
+            <div>
+               <div>
+                  <h1 class="title"><a name="chapter.project.properties"></a>Chapter&nbsp;6.&nbsp;Propiedades do proxecto<a class="indexterm" name="d0e4147"></a></h1>
+               </div>
+            </div>
+         </div>
+         <div class="toc">
+            <dl class="toc">
+               <dt><span class="section"><a href="chapter.project.properties.html#properties.dialog">1. Diálogo das propiedades</a></span></dt>
+            </dl>
+         </div>
+         <p></p>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="properties.dialog"></a>1.&nbsp;Diálogo das propiedades
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>O diálogo <span class="guimenu">Proxecto</span> → <span class="guimenuitem">Propiedades...</span> (<span class="shortcut"><strong><span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>E</strong></span></strong></span>) de emprégase para definir e modificar os cartafoles e idiomas do proxecto.
+            </p>
+            <p>É posíbel modificar as propiedades do proxecto durante una sesión de tradución. Teña conta de que os cambios de configuración
+               do proxecto poden ter consecuencias, especialmente cando xa se comezou co proxecto. Ata que teña algo de experiencia en OmegaT,
+               o máis seguro é considerar as configuracións finais unha vez que se comezou a tradución, a menos que se decate dalgún erro
+               grave. Vexa a sección Como evitar a perda de datos para ver modos e medios de protexer o seu traballo.
+            </p>
+            <div class="figure"><a name="d0e4172"></a><p class="title"><b>Figure&nbsp;6.1.&nbsp;Xanela de propiedades do proxecto</b></p>
+               <div class="figure-contents">
+                  <div class="mediaobject"><img src="images/NewProject_26.png" alt="Xanela de propiedades do proxecto"></div>
+               </div>
+            </div><br class="figure-break"><p>Contén:</p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p><span class="bold"><strong>Unha área para configurar os idiomas de orixe e destino do proxecto</strong></span></p>
+                     <p>Pode tanto inserir os idiomas de orixe e destino a man como empregar os menús desdobrábel. Teña en conta que cambiar os idiomas
+                        pode facer que as memorias de tradución empregadas nese momento sexan inútiles xa que non coincidirá o par de linguas dos
+                        novos idiomas.
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>Caixa de verificación para <span class="bold"><strong><span class="guilabel">Activar segmentación a nivel de frase</span></strong></span></p><a class="indexterm" name="d0e4196"></a><p>A configuración de segmentación só controla o modo no que <span class="application">OmegaT</span> xestiona os ficheiros. O modo máis común de segmentación do texto orixe é a nivel de frase, así que esta caixa de verificación
+                        debería estar marcada.
+                     </p>
+                     <p>Nalgúns casos marxinais a alternativa, é dicir, a segmentación por parágrafos, pode ser a opción preferida. Cambiar esta marca
+                        non modifica a segmentación das memorias de tradución xa existentes. Se decide cambiar á segmentación por parágrafos no medio
+                        dunha tradución, a memoria de tradución interna do proxecto non se cambiará (OmegaT pode actualizar memorias de tradución
+                        antigas que non empregaran a segmentación por frase, mais non ao revés).
+                     </p>
+                     <p>Cambiar a configuración de segmentación pode producir que algúns segmentos xa traducidos se dividan ou se xunten. Isto devolveraos
+                        ao estado de «non traducido», xa que non terán unha coincidencia na memoria do proxecto, incluso aínda que a tradución orixinal
+                        estea aí aínda.
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>Botón de <span class="bold"><strong><span class="guibutton">Segmentación...</span> </strong></span><a class="indexterm" name="d0e4218"></a></p>
+                     <p>As regras de segmentación xeralmente son válidas en todos os proxectos. Porén, o usuario pode necesitar xerar un conxunto
+                        de regras específicas para o proxecto en cuestión. Empregue este botón para abrir un diálogo, activar a caixa de verificación
+                        de <span class="guimenuitem">Regras de segmentación específicas do proxecto</span>, despois proceda a axustar as regras de segmentación coma desexe. O novo conxunto de regras se gardará xunto co proxecto
+                        e non interferirá co conxunto xeral de regras de segmentación. Para eliminar as regras de segmentación específicas do proxecto,
+                        desmarque a caixa de verificación. Vexa o capítulo <a class="link" href="chapter.segmentation.html" title="Chapter&nbsp;14.&nbsp;Segmentación do segmento orixe">Segmentación da orixe</a> para máis información ou regras de segmentación.<span class="emphasis"><em></em></span></p>
+                     <p><span class="emphasis"><em>Consello:</em></span> o conxunto de regras de segmentación para un proxecto dado se garda como <code class="filename">project/omegat/segmentation.conf.</code></p>
+                  </li>
+                  <li class="listitem">
+                     <p>Botón de <span class="bold"><strong><span class="guibutton">Filtros de ficheiro...</span> </strong></span><a class="indexterm" name="d0e4245"></a></p>
+                     <p>Dun xeito similar ao descrito anteriormente, o usuario pode crear filtros de ficheiro específicos do proxecto, que se gardarán
+                        xunto con este e que serán válidos só para o proxecto actual. Para crear un conxunto de filtros de ficheiro específico para
+                        o proxecto, faga clic no botón <span class="guibutton">Filtros de ficheiros...</span>, despois marque a caixa de verificación de <span class="guimenuitem">Permitir filtros específicos do proxecto</span> na xanela. Gardarase unha copia da configuración de filtros cambiada xunto co proxecto. Para eliminar os filtros de ficheiro
+                        específicos do proxecto, desmarque a caixa de verificación. Teña en conta que no menú <span class="guimenuitem">Opcións &gt; Filtros de ficheiro</span>, cambiarán os filtros de usuario globais, non os filtros do proxecto. Vexa o capítulo <a class="link" href="chapter.file.filters.html" title="Chapter&nbsp;7.&nbsp;Filtros de ficheiro">Filtros de ficheiro</a> para máis información.<span class="emphasis"><em></em></span></p>
+                     <p><span class="emphasis"><em>Consello:</em></span> o conxunto de filtros de ficheiro para un proxecto dado se garda como <code class="filename">project/omegat/filters.xml.</code></p>
+                  </li>
+                  <li class="listitem">
+                     <p>Caixa de verificación de <span class="bold"><strong>Autopropagación</strong></span><span class="bold"><strong><a class="indexterm" name="d0e4277"></a></strong></span></p>
+                     <p>En caso de que haxa segmentos non únicos en documentos de orixe, a caixa de verificación de autopropagación ofrece ao usuario
+                        as seguintes dúas posibilidades en relación coa tradución automática: se se marca, o primeiro segmento traducido se asumirá
+                        como a tradución predeterminada e o seu texto de destino se empregará automaticamente en seguintes coincidencias durante o
+                        proceso de tradución. Os segmentos mal traducidos poden corrixirse máis tarde manualmente mediante a función <span class="guimenuitem">Crear unha tradución alternativa</span>. Se non está marcada a caixa de verificación de autopropagación, os segmentos con traducións alternativas quedarán sen traducir
+                        ata que o usuario decida que tradución empregar.
+                     </p>
+                  </li>
+                  <li class="listitem">
+                     <p>Caixa de verificación de <span class="bold"><strong>Eliminar etiquetas</strong></span><a class="indexterm" name="d0e4292"></a></p>
+                     <p>Cando se marca, todas as etiquetas de formatado son eliminadas dos segmentos de orixe. Isto é especialmente útil cando traballa
+                        con textos onde o formatado interno non é realmente útil (por exemplo, documentos en formato PDF lidos a través dun OCR, mal
+                        convertidos a .odt ou .docx, etc.) Nun caso normal, debería ser posíbel abrir os documentos de destino, xa que só se eliminan
+                        as etiquetas internas. O formatado non visíbel (é dicir, o que non aparece como etiquetas no editor de OmegaT) se mantén nos
+                        documentos de destino.
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p><span class="bold"><strong>Unha área para configurar os cartafoles do proxecto</strong></span><a class="indexterm" name="d0e4304"></a><a class="indexterm" name="d0e4309"></a></p>
+                     <p>Aquí pode seleccionar diferentes subcartafoles, por exemplo o subcartafol cos ficheiros de orixe, o subcartafol para os ficheiros
+                        de destino, etc. Se insire nomes ou cartafoles que aínda non existen, <span class="application">OmegaT</span> créaos por vostede. En caso de que decida modificar os cartafoles do proxecto, teña en conta que isto non moverá os ficheiros
+                        existentes de cartafoles antigos á nova localización.
+                     </p>
+                  </li>
+               </ul>
+            </div>
+         </div>
+      </div>
+      <div class="navfooter">
+         <hr>
+         <table width="100%" summary="Navigation footer">
+            <tr>
+               <td width="40%" align="left"><a accesskey="p" href="chapter.menu.html">Prev</a>&nbsp;
+               </td>
+               <td width="20%" align="center">&nbsp;</td>
+               <td width="40%" align="right">&nbsp;<a accesskey="n" href="chapter.file.filters.html">Next</a></td>
+            </tr>
+            <tr>
+               <td width="40%" align="left" valign="top">Chapter&nbsp;5.&nbsp;Atallos de teclado e Menú&nbsp;</td>
+               <td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
+               <td width="40%" align="right" valign="top">&nbsp;Chapter&nbsp;7.&nbsp;Filtros de ficheiro</td>
+            </tr>
+         </table>
+      </div>
+   </body>
+</html>

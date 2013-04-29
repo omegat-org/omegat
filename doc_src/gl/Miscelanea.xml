@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<chapter id="chapter.misc">
+  <title>Outros asuntos<indexterm class="singular">
+      <primary>Outros</primary>
+    </indexterm></title>
+
+  <section id="omegat.misc.console.mode">
+    <title>Modo consola de <application><indexterm class="singular">
+        <primary>Modo consola de OmegaT</primary> <seealso>Outros</seealso>
+      </indexterm>OmegaT</application><indexterm class="singular">
+        <primary>Varios</primary> <secondary>Modo consola de OmegaT</secondary>
+      </indexterm></title>
+
+    <note>
+      <para>Só de interese para usuarios avanzados.</para>
+    </note>
+
+    <para>O propósito do modo consola (é dicir, liña de ordes) é permitir ao usuario empregar <application>OmegaT</application> como unha ferramenta de tradución nun ambiente de desenvolvemento. Cando se inicia OmegaT en modo consola, non se carga ningunha interface gráfica de usuario (polo que funcionará en calquera consola) e o proxecto dado se traduce automaticamente. Un exemplo sería un proxecto de software no que se localiza a interface gráfica de usuario a un número de idiomas. Empregando o modo consola, un pode facer que a xeración dunha interface localizada sexa parte do proceso de construción.</para>
+
+    <section id="misc.console.mode.prerequisites">
+      <title>Prerrequisitos</title>
+
+      <para>Para executar OmegaT, necesita un proxecto válido de OmegaT. A localización é irrelevante, xa que necesita especificala explicitamente na liña de ordes ao inicio.</para>
+
+      <para>Se necesita configuracións que non son as estándar, tamén deberá ter presente os ficheiros de configuración (<literal>filters.conf</literal> e <literal>segmentation.conf</literal>) Isto pode conseguirse de dous xeitos:</para>
+
+      <itemizedlist>
+        <listitem>
+          <para>Executar <application>OmegaT</application> normalmente (coa interface gráfica de usuario) e especificar a configuración. Se inicia <application>OmegaT</application> en modo consola, empregará a mesma configuración.</para>
+        </listitem>
+
+        <listitem>
+          <para>Se non pode executar <application>OmegaT</application> normalmente (non ten un ambiente gráfico dispoñíbel): copie os ficheiros de configuración de outra instalación de <application>OmegaT</application> de outra máquina a un cartafol específico. A localización non importa, xa que pode engadila na liña de ordes ao inicio (vexa máis adiante). Os ficheiros relevantes son <literal>filters.conf</literal> e <literal>segmentation.conf</literal>, que pode atopar no directorio de inicio do usuario (por exemplo, <literal>C:\Documents and Settings\%Usuario%\<application>OmegaT</application></literal> en Windows, <literal>%usuario%/.omegat/</literal> en Linux)</para>
+        </listitem>
+      </itemizedlist>
+    </section>
+
+    <section id="starting.in.misc.console.mode">
+      <title>Iniciar OmegaT en modo consola</title>
+
+      <para>Para iniciar OmegaT en modo consola, debe especificar os parámetros adicionais ao inicio. Os máis importantes son <literal>&lt;project-dir&gt;</literal>, e opcionalmente <literal>--config-dir=&lt;config-dir&gt;</literal>. Exemplo:</para>
+
+      <para><literal>$&gt; java -jar <application>OmegaT</application>.jar /ruta/do/proxecto \</literal></para>
+
+      <para><literal>--config-dir=/ruta/dos/ficheiros-de-configuración/ \</literal></para>
+
+      <para><literal> --mode=console-translate \</literal></para>
+
+      <para><literal> --source-pattern={regexp} \</literal></para>
+
+      <para><literal> --tag-validation=[block|warn] </literal></para>
+
+      <para><emphasis role="bold">Explicación:</emphasis></para>
+
+      <itemizedlist>
+        <listitem>
+          <para><literal>&lt;project-dir&gt;</literal> informa a <application>OmegaT</application> de onde atopar o proxecto para traducir. Se é o caso, <application>OmegaT</application> se iniciará en modo consola e traducirá o proxecto dado.</para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para><literal>--config-dir=&lt;config-dir&gt;</literal> permite que OmegaT reciba instrucións de en que cartafol están gardados os ficheiros de configuracións Se non se especifican, OmegaT volverá aos valores predeterminados (o cartafol de OmegaT no cartafol de usuario ou, se non está dispoñíbel, no directorio actual de traballo.)</para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para><literal>--mode=console-translate </literal> <application>OmegaT</application> se inicia en modo consola e traduce o proxecto dado</para>
+        </listitem>
+
+        <listitem>
+          <para><literal>--source-pattern={regexp} </literal>Os ficheiros a traducir poden especificarse deste modo. Aquí ten un exemplo de expresión regular: <filename>test\.html</filename></para>
+        </listitem>
+
+        <listitem>
+          <para><literal>--tag-validation=[abort|warn] </literal> En abort, o programa se abortará se atopa algún error durante a validación de etiquetas. En warn, se amosarán os erros mais o programa continuará. No resto de casos, non se levará a cabo unha validación de etiquetas.</para>
+        </listitem>
+      </itemizedlist>
+    </section>
+
+    <section id="misc.console.mode.option.quiet">
+      <title>Opción silenciosa.</title>
+
+      <para>Un parámetro da liña de ordes extra específico para o modo consola: <literal>--quiet.</literal> En modo silencioso, se amosa menos información no monitor. As mensaxes que atoparía normalmente nas barras de estado non se amosarán.</para>
+
+      <para>Emprego: <literal>java -jar <application>OmegaT</application>.jar /ruta/do/proxecto --mode=console-translate --quiet</literal></para>
+    </section>
+
+    <section id="misc.console.mode.option.validatetags">
+      <title>Opción de validación de etiquetas</title>
+
+      <para>Outro parámetro da liña de ordes extra específico para o modo consola: <literal>--tag-validation=[abort|warn]</literal>. Cando se engade este parámetro, a validación de etiquetas se fai antes que a tradución/aliñación. Se o valor é <literal>abort</literal>, entón se amosarán os errores de etiquetas e o programa se deterá. Se o valor é <literal>warn</literal> entón se amosarán os erros mais OmegaT continuará.</para>
+
+      <para>Emprego:  <literal>java -jar <application>OmegaT</application>.jar /ruta/do/proxecto --mode=console-translate --tag-validation=abort</literal></para>
+    </section>
+  </section>
+
+  <section>
+    <title>Aliñador automático de propiedades de Java<indexterm class="singular">
+        <primary>Outros</primary> <secondary>Aliñador automático para propiedades de Java</secondary>
+      </indexterm></title>
+
+    <para>OmegaT pode aliñar as .properties de Java en modo consola. Se ten os ficheiros de orixe e destino de propiedades, para un e o mesmo contido no par de linguas, este procedemento creará un ficheiro tmx correspondente con estes contidos. Emprego:</para>
+
+    <para><literal>java -jar OmegaT.jar --mode=console-align /directorio-do-meu-proxecto --alignDir=/translatedFiles/</literal></para>
+
+    <para><filename>alignDir</filename> debe conter a tradución do idioma de destino do proxecto. Por exemplo, se o proxecto é EN&gt;FR, alignDir debe conter un final que acabe en _fr. A TMX resultante se gardará no cartafol <literal>/omegat/</literal> co nome <filename>align.tmx</filename>.</para>
+  </section>
+
+  <section id="font.settings">
+    <title>Configuración do tipo de letra<indexterm class="singular">
+        <primary>Outros</primary> <secondary>Configuración de tipo de letra</secondary>
+      </indexterm></title>
+
+    <para>Neste diálogo pode definir o tipo de letra que emprega <application>OmegaT</application> nas seguintes xanelas:</para>
+
+    <itemizedlist>
+      <listitem>
+        <para>Xanela principal de <application>OmegaT</application> (editor, visor de coincidencias, visor do glosario)</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Xanela de buscas</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Xanela de validación de etiquetas</para>
+      </listitem>
+    </itemizedlist>
+
+    <para>Pódese acceder a este diálogo mediante o elemento <indexterm class="singular">
+        <primary>Menú Opcións</primary> <secondary>Tipo de letra...</secondary>
+      </indexterm><menuchoice> <guimenu>Opcións</guimenu> <guimenuitem>Tipo de letra...</guimenuitem> </menuchoice> no menú principal. O diálogo contén:</para>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis role="bold">Fonte:</emphasis> menú desdobrábel para seleccionar un dos tipos de letra dispoñíbeis no seu computador</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis role="bold">Tamaño:</emphasis> edíteo para cambiar o tamaño do tipo de letra</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis role="bold">Texto de mostra:</emphasis> campo para unha previsión inmediata da fonte seleccionada</para>
+      </listitem>
+    </itemizedlist>
+
+    <para><emphasis role="bold">Nota:</emphasis> Nalgúns casos pode tardar algún tempo que OmegaT actualice a aparencia despois de configurar o tipo de letra. Isto sucede especialmente no caso de que se abra un ficheiro que teña moitos segmentos no editor, e/ou se empregue hardware lento. Teña en conta tamén que algúns tipos de letras se comportan mellor entre algúns pares de linguas ca outros. En particular, se está traducindo entre dúas linguas con distintos alfabetos ou sistemas de escrita (como o ruso e xaponés), seleccione un tipo de letra que se poida empregar en ambos os casos.</para>
+  </section>
+
+  <section id="preventing.data.loss">
+    <title>Previr a perda de datos<indexterm class="singular">
+        <primary>Outros</primary> <secondary>Previr a perda de datos</secondary>
+      </indexterm></title>
+
+    <para><application>OmegaT</application> é unha aplicación robusta. Porén, debería tomar precaucións contra a perda de datos cando empregue <application>OmegaT</application> tal e como faría con calquera outra aplicación. Cando traduce os seus ficheiros, <application>OmegaT</application> garda todos os progresos na memoria de tradución <literal>project_save.tmx</literal> que está no subcartafol <literal>/omegat</literal> do proxecto.</para>
+
+    <para>OmegaT tamén fai unha copia de seguridade da memoria de tradución en project_save.tmx.AAAAMMDDHHNN.bak no mesmo subcartafol cada vez que se abre ou recarga o proxecto. AAAA é o ano cos catro díxitos, MM é o mes, DD o día do mes, e HH e NN as horas e minutos cando se gardou a última memoria de tradución.</para>
+
+    <para>Se cree que perdeu información da tradución, pode empregar o seguinte procedemento para restaurar o proxecto ao seu estado gardado máis recente, normalmente non máis antigo que aproximadamente 10 minutos ou así:</para>
+
+    <orderedlist>
+      <listitem>
+        <para>peche o proxecto</para>
+      </listitem>
+
+      <listitem>
+        <para>renomee o ficheiro <filename>project_save.tmx </filename> actual (por exemplo, a <filename>project_save.tmx.temporary</filename>)</para>
+      </listitem>
+
+      <listitem>
+        <para>seleccione a copia de seguridade da memoria de tradución que é máis probábel que conteña a información que está buscando</para>
+      </listitem>
+
+      <listitem>
+        <para>renoméea a <literal>project_save.tmx</literal></para>
+      </listitem>
+
+      <listitem>
+        <para>abra o proxecto</para>
+      </listitem>
+    </orderedlist>
+
+    <para>Para evitar a perda de datos importantes:</para>
+
+    <itemizedlist>
+      <listitem>
+        <para>Faga copias regulares do ficheiro /omegat/project_save.tmx nun dispositivo de copia de seguridade, como un CD ou un DVD.</para>
+      </listitem>
+
+      <listitem>
+        <para>Ata que se sinta cómodo con <application>OmegaT</application>, cree os ficheiros traducidos a intervalos regulares e comprobe que os ficheiros traducidos conteñen a última versión da súa tradución.</para>
+      </listitem>
+
+      <listitem>
+        <para>Teña coidado en particular cando faga cambios aos ficheiros no cartafol <literal>/source</literal> no medio dun proxecto. Se se modifica o ficheiro de orixe despois de comezar unha tradución, <application>OmegaT</application> non será capaz de atopar os segmentos que xa traduciu.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Empregue estes textos de Axuda para comezar. En caso de ter algún problema, envíe unha mensaxe ao <ulink url="http://tech.groups.yahoo.com/group/Omegat/">grupo de usuarios de <application>OmegaT</application></ulink>. Non dubide en escribir no idioma co que se sinta máis cómodo.</para>
+      </listitem>
+    </itemizedlist>
+  </section>
+</chapter>

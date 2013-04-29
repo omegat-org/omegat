@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<chapter id="chapter.translation.editing">
+  <title>Editar comportamento...<indexterm class="singular">
+      <primary>Menú</primary> <secondary>Opcións</secondary> <tertiary>Editar comportamento...</tertiary>
+    </indexterm></title>
+
+  <para>O diálogo en <menuchoice> <guimenu>Opcións</guimenu> <guimenuitem>Editar comportamento...</guimenuitem> </menuchoice> permite que o usuario seleccione como se inicia e comporta o campo de edición do segmento activo:</para>
+
+  <figure id="editing.behavior.options">
+    <title>Opcións de edición de comportamento</title>
+
+    <mediaobject>
+      <imageobject role="html">
+        <imagedata fileref="images/EditingBehaviourOptions25.png"/>
+      </imageobject>
+	  <imageobject role="fo">
+        <imagedata fileref="images/EditingBehaviourOptions25.png"/>
+      </imageobject>
+    </mediaobject>
+  </figure>
+
+  <para/>
+
+  <para>A tradución dos ficheiros lévase a cabo cun desprazamento de segmento a segmento, editando de cada vez un deles. Cando se move entre os segmentos, pode desexar que o programa insira no campo de edición unha tradución xa feita como una tradución parcial ou co texto de orixe. En <menuchoice> <guimenu>Opcións</guimenu> <guimenuitem>Editar comportamento...</guimenuitem> </menuchoice> <application>OmegaT</application> ofrécelle as seguintes alternativas:</para>
+
+  <variablelist>
+    <varlistentry>
+      <term>O texto orixe</term>
+
+      <listitem>
+        <para>Pode facer que se insira automaticamente no campo de edición. Isto é útil para textos que conteñan moitas marcas rexistradas ou outros nomes propios que non deben modificarse.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Deixar o segmento baleiro<indexterm class="singular">
+          <primary>Menú Opcións</primary> <secondary>Editar comportamento</secondary> <tertiary>Tradución baleira</tertiary>
+        </indexterm></term>
+
+      <listitem>
+        <para>OmegaT deixará o campo de edición en branco. Esta opción permite ao usuario inserir a tradución sen necesidade de eliminar o texto de orixe, aforrando así dous combinacións de teclas (<emphasis role="bold">Ctrl+A</emphasis> e <emphasis role="bold">Suprimir) </emphasis> Non se permiten traducións baleiras. Amósanse como &lt;EMPTY&gt; no editor. Para crear unha, faga clic dereito nun segmento e seleccione «<emphasis role="bold">Estabelecer tradución baleira</emphasis>». A entrada <emphasis role="bold">Eliminar tradución</emphasis> no mesmo menú emerxente tamén permite eliminar a tradución existente do segmento activo. Pode conseguir o mesmo limpando o segmento de destino e premendo <guibutton>Enter.</guibutton></para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Inserir a mellor coincidencia parcial<indexterm class="singular">
+          <primary>Menú Opcións</primary> <secondary>Editar comportamento</secondary> <tertiary>Inserir coincidencia parcial</tertiary>
+        </indexterm></term>
+
+      <listitem>
+        <para>OmegaT inserirá a tradución da cadea máis similar ao segmento de orixe actual se o limiar de similitude supera o que vostede estabeleceu neste diálogo. O prefixo (predeterminado coma baleiro) pode empregarse para etiquetar as traducións inseridas como coincidencias parciais. Se engade un prefixo (por exemplo [parcial]), pode localizar as traducións máis tarde para ver se son correctas.</para>
+      </listitem>
+    </varlistentry>
+  </variablelist>
+
+  <para>As caixas de verificación na parte inferior da ventá serven para o seguinte:</para>
+
+  <variablelist>
+    <varlistentry>
+      <term>Intentar converter os números cando se insira unha coincidencia parcial<indexterm class="singular">
+          <primary>Menú Opcións</primary> <secondary>Editar comportamento</secondary> <tertiary>Converter números</tertiary>
+        </indexterm></term>
+
+      <listitem>
+        <para>Se se verifica esta opción, cando se insira unha coincidencia parcial, tanto manualmente coma automaticamente, OmegaT intentará converter os números nas coincidencias parciais segundo o contido do segmento de orixe. Hai un número de restricións:</para>
+
+        <itemizedlist>
+          <listitem>
+            <para>O segmento de orixe e as coincidencias parciais teñen que conter a mesma lista de números</para>
+          </listitem>
+        
+          <listitem>
+            <para>Os números deben ser exactamente os mesmos entre as coincidencias de orixe e de destino.</para>
+          </listitem>
+        
+          <listitem>
+            <para>Só se terán en conta os números enteiros e decimais simples (empregando o punto coma carácter decimal, é dicir, 5.4, mais non 5,4 ou 54E-01).</para>
+          </listitem>
+        </itemizedlist>
+      </listitem>
+    </varlistentry>
+  </variablelist>
+
+  <variablelist>
+    <varlistentry>
+      <term>Permite que a tradución sexa igual á cadea orixinal<indexterm class="singular">
+          <primary>Menú Opcións</primary> <secondary>Editar comportamento</secondary> <tertiary>Tradución igual a cadea orixinal</tertiary>
+        </indexterm></term>
+
+      <listitem>
+        <para>Os documentos a traducir poden conter marcas rexistradas, nomes ou outros nomes propios que non cambiarán nos documentos traducidos. Hai dúas estratexias a seguir para os segmentos que conteñan só texto invariábel.</para>
+
+        <para>Pode decidir non traducir este tipo de segmentos. OmegaT identificará estes segmentos como non traducidos. Esta é a opción predeterminada. A alternativa é inserir unha tradución que sexa idéntica ao texto de orixe. OmegaT pode recoñecer que vostede fixo isto. Para que isto sexa posíbel, vaia a <menuchoice> <guimenu>Opcións</guimenu> <guimenuitem>Editar comportamento...</guimenuitem> </menuchoice> e marque a caixa de verificación correspondente a <emphasis role="bold">Permitir que a tradución sexa igual á cadea orixinal</emphasis>.</para>
+      </listitem>
+    </varlistentry>
+  </variablelist>
+
+  <variablelist>
+    <varlistentry>
+      <term>Exportar o segmento a ficheiros de texto<indexterm class="singular">
+          <primary>Menú Opcións</primary> <secondary>Editar comportamento</secondary> <tertiary>Exportar o segmento actual</tertiary>
+        </indexterm></term>
+
+      <listitem>
+        <para>A función de exportación de texto exporta os datos do proxecto de <application>OmegaT</application> actual a ficheiros de texto plano. Os datos expórtanse cando se abre o segmento. Os ficheiros aparecen no subcartafol /script no cartafol de ficheiros de usuario de OmegaT, e inclúen:</para>
+
+        <itemizedlist>
+          <listitem>
+            <para>O contido dos segmentos do texto orixinal (<filename>source.txt</filename>).</para>
+          </listitem>
+
+          <listitem>
+            <para>O contido dos segmentos do texto traducido (<filename>target.txt</filename>).</para>
+          </listitem>
+
+          <listitem>
+            <para>O texto destacado polo usuario, cando preme <keycap>Ctrl+Shift+C</keycap> ou cando selecciona <guimenuitem>Editar &gt; Exportar selección</guimenuitem> (<filename>selection.txt</filename>).</para>
+          </listitem>
+        </itemizedlist>
+
+        <para>O contido dos ficheiros sobrescribirase tanto cando se abra un novo segmento (source.txt e target.txt) como cando se exporte unha nova selección (selection.txt). Os ficheiros son ficheiros de texto plano sen formato. Todo o proceso pode dirixirse e controlarse mediante un script baseado en Tck/Tcl. Vexa <ulink url="http://www.omegat.org/en/howtos/text_export.html">Como empregar a función de exportación de texto de OmegaT</ulink> para información máis específica, exemplos e suxestións.</para>
+      </listitem>
+    </varlistentry>
+  </variablelist>
+
+  <variablelist>
+    <varlistentry>
+      <term>Ir ao seguinte segmento sen traducir detense cando hai polo menos unha tradución alternativa.<indexterm class="singular">
+          <primary>Menú Opcións</primary> <secondary>Editar comportamento</secondary> <tertiary>Segmentos cunha tradución alternativa</tertiary>
+        </indexterm></term>
+
+      <listitem>
+        <para>Se quere evitar calquera erro de tradución en segmentos con varios posíbeis contidos de destino, marcar esta caixa de verificación fará que a función <emphasis role="bold">Ir ao seguinte segmento sen traducir</emphasis> se deteña no seguinte segmento con esas características, sen ter en conta se xa se traduciu ou non.</para>
+      </listitem>
+    </varlistentry>
+  </variablelist>
+</chapter>

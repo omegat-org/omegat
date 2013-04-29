@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<chapter id="chapter.segmentation">
+  <title>Segmentación do segmento orixe</title>
+
+  <para>As ferramentas de memoria de tradución funcionan con unidades textuais chamadas segmentos. <application>OmegaT</application> ten dúas formas de segmentar un texto: por parágrafo ou por frase (tamén chamada «segmentación baseada en regras»). Para seleccionar o tipo de segmentación, seleccione <menuchoice> <guimenu><indexterm class="singular">
+          <primary>Proxecto</primary> <secondary>Propiedades</secondary>
+        </indexterm>Proxecto</guimenu> <guimenuitem>Propiedades...</guimenuitem> </menuchoice> desde o menú principal e marque ou desmarque a caixa dispoñíbel para tal efecto. A segmentación por parágrafos é mellor en certos casos, como en traducións moi creativas ou estilísticas nas que o tradutor pode querer cambiar a orde de frases enteiras; na maioría dos proxectos, porén, é preferíbel a segmentación por frase, xa que consegue mellores coincidencias de traducións anteriores. Se se seleccionou a segmentación por frase, pode editar as regras seleccionando <menuchoice> <guimenu><indexterm class="singular">
+          <primary>Proxecto</primary> <secondary>Opcións</secondary>
+        </indexterm>Opcións</guimenu> <guimenuitem>Segmentación...</guimenuitem> </menuchoice>desde o menú principal.</para>
+
+  <para>Xa hai regras de segmentación dispoñíbeis para moitas linguas, así que é pouco probábel que necesite escribir as súas propias regras de segmentación Pola outra banda, esta funcionalidade pode ser moi útil en casos especiais nos que queira incrementar a súa produtividade adaptando as regras de segmentación ao texto que ten que traducir.</para>
+
+  <para><emphasis role="bold">Atención:</emphasis> debido a que o texto se segmentará de modo diferente despois de que se cambien as opcións de filtros, deberá comezar a traducir desde o principio. Ao mesmo tempo, os segmentos válidos previos na memoria de tradución pasarán a ser segmentos orfos. Se cambia as opcións de segmentación cando está aberto un proxecto, terá que recargalo para que os cambios sexan efectivos.</para>
+
+  <para><application>OmegaT</application> usa a seguinte secuencia de pasos:</para>
+
+  <variablelist>
+    <varlistentry>
+      <term><indexterm class="singular">
+          <primary>Segmentación</primary> <secondary>Segmentación a nivel do orixinal</secondary>
+        </indexterm>Estrutura do nivel de segmentación</term>
+
+      <listitem>
+        <para><application>OmegaT</application> primeiro analiza o texto para estruturar o nivel de segmentación. Durante este proceso, só estrutura o ficheiro de orixe que se utiliza para producir segmentos.</para>
+
+        <para>Por exemplo, os ficheiros de texto se segmentarán polas quebras de liña, liñas baleiras ou non se segmentarán. Os ficheiros que conteñan formatado (documentos ODF, HTML, etc.) se segmentan polas etiquetas a nivel de bloque (parágrafo). Os atributos de obxecto traducíbeis en ficheiros XHTML ou HTML se poden extraer coma segmentos separados.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term><indexterm class="singular">
+          <primary>Segmentación</primary> <secondary>Segmentación a nivel de frase</secondary>
+        </indexterm>Segmentación a nivel de frase</term>
+
+      <listitem>
+        <para>Despois de segmentar o ficheiro de orixe en unidades estruturais, <application>OmegaT</application> segmentara estes bloques aínda máis en frases.</para>
+      </listitem>
+    </varlistentry>
+  </variablelist>
+
+  <section id="segmentation.rules">
+    <title>Regras de segmentación<indexterm class="singular">
+        <primary>Segmentación</primary> <secondary>Regras</secondary>
+      </indexterm></title>
+
+    <para>O proceso de segmentación pode describirse do seguinte modo: o cursor se move polo texto, carácter por carácter. En cada regra de posición do cursor, consistente dun padrón de <emphasis role="bold">Antes</emphasis> e <emphasis role="bold">Despois</emphasis>, se aplican na orde dada para ver se algún dos padróns <emphasis role="bold">Antes</emphasis> son válidos para o texto da esquerda e o padrón <emphasis role="bold">Despois</emphasis> correspondente para o texto á dereita do cursor. Se a regra coincide, ou ben o cursor se move sen inserir unha quebra de segmento (por unha regra de excepción) ou ben se crea unha nova quebra de segmento na posición do cursor (pola regra de quebra).</para>
+
+    <para>Os dous tipos de regras se comportan do seguinte xeito:</para>
+
+    <variablelist>
+      <varlistentry>
+        <term><indexterm class="singular">
+            <primary>Segmentación</primary> <secondary>Regras</secondary> <tertiary>Regra de quebra</tertiary>
+          </indexterm>Regra de quebra</term>
+
+        <listitem>
+          <para>Divide o texto de orixe en segmentos. Por exemplo, «<emphasis>Tiña sentido? Non estaba seguro</emphasis>.» debería dividirse en dous segmentos. Para que isto suceda, debería haber unha regra de quebra para o carácter «?» cando lle sigan algún espazo e unha palabra en maiúscula. Para definir unha regra como una regra de quebra, marque a caixa de verificación de Quebra/Excepción.</para>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+
+    <variablelist>
+      <varlistentry>
+        <term><indexterm class="singular">
+            <primary>Segmentación</primary> <secondary>Regras</secondary> <tertiary>Regra de excepción</tertiary>
+          </indexterm>Regra de excepción</term>
+
+        <listitem>
+          <para>especifica que partes do texto NON deben ser divididas. A pesar do punto, <emphasis>«Sr. Dalloway»</emphasis> non debería dividirse en dous segmentos, polo que debería estabelecerse unha regra de excepción para Sr (e para Srª, Dr, Prof, etc.), seguidos dun punto Para definir unha regra como unha regra de excepción, deixe a caixa de verificación Quebra/Excepción sen marcar.</para>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+
+    <para>As regras de quebra predeterminadas deberían ser suficientes para a maioría dos idiomas europeos e xaponés. Debido á flexibilidade, pode que queira definir máis regras de excepción para o seu idioma de orixe para conseguir segmentos máis coherentes e con máis sentido.</para>
+  </section>
+
+  <section id="rules.priority">
+    <title>Prioridade das regras<indexterm class="singular">
+        <primary>Segmentación</primary> <secondary>Prioridade das regras</secondary>
+      </indexterm></title>
+
+    <para>Todo conxunto de regras de segmentación para un padrón de coincidencia de linguas están activos e se aplicarán na orde de prioridade dada, polo que as regras para linguas específicas deberían estar por riba das regras predeterminadas. Por exemplo, as regras para o francés canadense (FR-CA) deberían estar por riba das regras para o francés (FR.*), e por riba das predeterminadas (.*). Polo tanto, cando traduza do francés canadense as regras para ese idioma (se as hai) se aplicarán primeiro, seguidas polas regras para o francés e, por último, as regras predeterminadas.</para>
+  </section>
+
+  <section id="creating.new.rule">
+    <title>Crear unha nova regra<indexterm class="singular">
+        <primary>Glosarios</primary> <secondary>Crear unha nova regra</secondary> <seealso>Expresións regulares</seealso>
+      </indexterm></title>
+
+    <para>Debería evitarse producir grandes cambios nas regras de segmentacións, especialmente despois de acabar o primeiro borrador, mais os pequenos cambios, tales como a adición de abreviacións recoñecidas, pode ser bo.</para>
+
+    <para>A fin de modificar ou ampliar un conxunto de regras existente, simplemente faga clic sobre la regra en la táboa superior. As regras para ese conxunto aparecerán na metade inferior da xanela.</para>
+
+    <para>Para crear un conxunto de regras baleiro para un novo padrón de lingua, faga clic en <emphasis role="bold">Engadir</emphasis> na metade superior do diálogo. Aparecerá unha liña baleira no final da táboa superior (pode que teña que desprazarse cara abaixo para poder vela). Cambie o nome do conxunto de regras e o padrón de idioma ao idioma relacionado e o seu código (vexa <xref linkend="appendix.languages"/> para unha lista dos códigos de linguas). A sintaxe do padrón de linguas se adapta á sintaxe das expresións regulares. Se o seu conxunto de regras é para un par de lingua-país, advertímoslle de que deberá movelo á parte superior co botón <emphasis role="bold">Desprazar cara arriba</emphasis>.</para>
+
+    <para>Engada os padróns <emphasis role="bold">Antes</emphasis> e <emphasis role="bold">Despois</emphasis>. Para comprobar a súa sintaxe e aplicabilidade, é aconsellábel empregar ferramentas que permitan ver os seus efectos directamente. Vexa o capítulo <link linkend="chapter.regexp">Expresións regulares</link>. Un bo punto de partida sempre serán as regras existentes.</para>
+  </section>
+
+  <section id="few.simple.examples">
+    <title><indexterm class="singular">
+        <primary>Segmentación</primary> <secondary>Exemplos</secondary>
+      </indexterm>Algúns exemplos sinxelos</title>
+
+    <informaltable>
+      <tgroup cols="4">
+        <colspec align="left" colnum="1"/>
+
+        <colspec align="center" colnum="2"/>
+
+        <colspec align="center" colnum="3"/>
+
+        <colspec align="left" colnum="4"/>
+
+        <thead>
+          <row>
+            <entry>Intención</entry>
+
+            <entry align="center">Antes</entry>
+
+            <entry align="center">Despois</entry>
+
+            <entry>Nota</entry>
+          </row>
+        </thead>
+
+        <tbody>
+          <row>
+            <entry>Configurar o inicio do segmento despois dun punto ('.') seguido por un espazo, tabulación, etc.</entry>
+
+            <entry align="center">\.</entry>
+
+            <entry align="center">\s</entry>
+
+            <entry>«\.» é o carácter de punto. «\s» fai referencia a calquera espazo en branco (espazo, tabulación, nova páxina, etc.)</entry>
+          </row>
+
+          <row>
+            <entry>Non segmentar despois de Sr.</entry>
+
+            <entry align="center">Sr\.</entry>
+
+            <entry align="center">\s</entry>
+
+            <entry>Esta é unha regra de excepción, así que non deberá marcar a caixa de verificación da regra</entry>
+          </row>
+
+          <row>
+            <entry>Estabelecer un segmento despois de «。» (punto xaponés)</entry>
+
+            <entry align="center">。</entry>
+
+            <entry align="center"/>
+
+            <entry>Teña en conta que a sección <literal>despois</literal> está baleira</entry>
+          </row>
+
+          <row>
+            <entry>Non segmentar despois de Sr., Sra. Srs. e Sras.</entry>
+
+            <entry align="center">Sr??s??\.</entry>
+
+            <entry align="center">\s</entry>
+
+            <entry>Regra de excepción - vexa o uso de ? en expresións regulares</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </informaltable>
+  </section>
+</chapter>

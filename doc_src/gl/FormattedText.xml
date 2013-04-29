@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<chapter id="chapter.formatted.text">
+  <title>Traballar con texto formatado<indexterm class="singular">
+      <primary>Ficheiros de destino</primary> <secondary>Texto formatado</secondary>
+    </indexterm><indexterm class="singular">
+      <primary>Ficheiros orixe</primary> <secondary>Texto formatado</secondary>
+    </indexterm></title>
+
+  <para>A información de formatado presente no ficheiro orixinal normalmente necesita ser reproducida no ficheiro de destino. A información de formatado interno creada polos formatos compatíbeis (en particular DocBook, HTML, XHTML, Open Document Format (ODF) e OFfice Open XML (MS OFfice 2007 e posteriores) no momento no que se redacta este documento) preséntase como etiquetas en OmegaT. Normalmente as etiquetas ignóranse cando se considera a similitude entre diferentes textos por cuestións de coincidencia. As etiquetas reproducidas no segmento traducido presentaranse no documento traducido.</para>
+
+  <section id="formatting.tags">
+    <title>Etiquetas de formatado<indexterm class="singular">
+        <primary>Etiquetas</primary>
+      </indexterm></title>
+
+    <para><indexterm class="singular">
+        <primary>Etiquetas</primary> <secondary>Nomes</secondary>
+      </indexterm><emphasis role="bold">Nomes das etiquetas:</emphasis></para>
+
+    <para>As etiquetas consisten en de entre un a tres caracteres máis un número A numeración única permite agrupar as etiquetas que se correspondan xuntas e diferencialas entre as outras etiquetas que teñan o mesmo carácter de atallo, mais que son diferentes realmente. Os caracteres de atallo intentan reflectir o significado oculto da etiqueta (por exemplo, b para as negras (bold en inglés), i para a cursiva (italics en inglés), etc.)</para>
+
+    <para><indexterm class="singular">
+        <primary>Etiquetas</primary> <secondary>Numeración</secondary>
+      </indexterm><emphasis role="bold">Numeración de etiquetas:</emphasis></para>
+
+    <para>As etiquetas enuméranse incrementalmente por grupo de etiqueta. Os «grupos de etiquetas» neste contexto son unha soa etiqueta (como &lt;i0&gt; e &lt;/i0&gt;). Dentro dun segmento, o primeiro grupo (par ou simple) recibe o número 0, o segundo o número 1, etc. O primeiro exemplo máis abaixo ten tres grupos de etiquetas (un par, un simple e outro par), o segundo exemplo ten só un grupo (un par).</para>
+
+    <para><indexterm class="singular">
+        <primary>Etiquetas</primary> <secondary>Pares e simples</secondary>
+      </indexterm><emphasis role="bold">Pares e simples:</emphasis></para>
+
+    <para>As etiquetas sempre van en pares ou soltas (simples). As etiquetas simples indican información de formatado que non afecta ao texto ao redor (un espazo extra ou un salto de liña, por exemplo).</para>
+
+    <para><literal>&lt;b0&gt;&lt;Ctr+N&gt;&lt;/b0&gt;,
+    &lt;br1&gt;&lt;b2&gt;&lt;Enter&gt;&lt;/b2&gt;&lt;segment 2132&gt;
+    </literal></para>
+
+    <para>&lt;br1&gt; é unha etiqueta simple e non afecta ao texto ao redor dela. As etiquetas por pares normalmente indican información de estilo que se aplica ao texto situado entre a etiqueta de apertura e a de peche. &lt;b0&gt; e &lt;/b0&gt; máis abaixo están emparelladas e afectan ao texto log.txt Teña en conta que a etiqueta de apertura debe estar sempre antes que a etiqueta de peche correspondente:</para>
+
+    <para>&lt;<literal>Ficheiro log (&lt;b0&gt;log.txt&lt;/b0&gt;) para seguir operacións e erros.&lt;segment 3167&gt;</literal></para>
+
+    <para><application>OmegaT</application> crea as etiquetas antes do proceso de segmentación. Dependendo das regras de segmentación, o par de etiquetas pode separarse en dous segmentos consecutivos e a validación de etiquetas dará erro e marcará os dous segmentos.</para>
+  </section>
+
+  <section id="tag.operations">
+    <title>Operacións de etiquetas<indexterm class="singular">
+        <primary>Etiquetas</primary> <secondary>Operacións</secondary>
+      </indexterm></title>
+
+    <para>Debe ter coidado coas etiquetas. Se se cambian accidentalmente, o formato do ficheiro final pode corromperse. Unha regra básica é que a secuencia de etiquetas debe manterse na mesma orde. Porén, é posíbel, se se seguen unhas regras estritas, desviarse desta regra básica.</para>
+
+    <para><emphasis role="bold"><indexterm class="singular">
+        <primary>Etiquetas</primary> <secondary>Duplicación</secondary>
+      </indexterm>Duplicación de etiquetas:</emphasis></para>
+
+    <para>Para duplicar grupos de etiquetas, simplemente cópieas na posición da súa elección. Teña en conta que nun par, a etiqueta de apertura debe estar antes que a etiqueta de peche. O formatado representado polo grupo que duplicou aplicarase as dúas seccións.</para>
+
+    <para>Exemplo:</para>
+
+    <para><literal>&lt;b0&gt;Este formatado&lt;/b0&gt; vai duplicarse aquí.&lt;segment 0001&gt;</literal></para>
+
+    <para>Despois da duplicación:</para>
+
+    <para><literal>&lt;b0&gt;Este formatado&lt;/b0&gt; &lt;b0&gt;foi duplicado aquí&lt;/b0&gt;.&lt;segment 0001&gt;</literal></para>
+
+    <para><emphasis role="bold"><indexterm class="singular">
+        <primary>Etiquetas</primary> <secondary>Eliminación de grupos</secondary>
+      </indexterm>Eliminación de grupos de etiquetas:</emphasis></para>
+
+    <para>Para eliminar grupos de etiquetas, simplemente retíreas do segmento. Teña en conta que nun par debe eliminar tanto a etiqueta de apertura como a de peche para asegurarse de que todas as pegadas do formatado se eliminan correctamente, senón o ficheiro traducido pode corromperse. Eliminando un grupo de etiquetas, eliminará o formatado relacionado con elas do ficheiro traducido.</para>
+
+    <para>Exemplo:</para>
+
+    <para><literal>&lt;b0&gt;Este formatado&lt;/b0&gt; vai eliminarse.&lt;segment 0001&gt;</literal></para>
+
+    <para>Despois da eliminación:</para>
+
+    <para><literal>Este formatado foi eliminado.&lt;segment 0001&gt;</literal></para>
+  </section>
+
+  <section id="tag.group.nesting">
+    <title>Aniñamento de grupos de etiquetas<indexterm class="singular">
+        <primary>Etiquetas</primary> <secondary>Aniñamento de grupos</secondary>
+      </indexterm></title>
+
+    <para>A modificación da orde dun grupo de etiquetas pode resultar nun aniñamento dun grupo de etiquetas con outro grupo de etiquetas. Isto é aceptábel, pois o grupo de peche pecha totalmente o grupo pechado. É dicir, cando se moven pares de etiquetas, asegúrese de que tanto as etiquetas de apertura como as de peche están dentro ou fora de outros pares de etiquetas, ou o ficheiro traducido pode corromperse e dar erro ao abrilo.</para>
+
+    <para>Exemplo:</para>
+
+    <para><literal>&lt;b0&gt;O formatado&lt;/b0&gt; &lt;b1&gt;un&lt;/b1&gt; vai aniñarse dentro do formatado cero.&lt;segment 0001&gt;</literal></para>
+
+    <para>Despois do aniñamento:</para>
+
+    <para><literal>&lt;b0&gt;O formatado &lt;b1&gt;un&lt;/b1&gt;&lt;/b0&gt; aniñouse dentro do formatado cero.&lt;segment 0001&gt;</literal></para>
+  </section>
+
+  <section id="tag.group.overlapping">
+    <title>Superposición de grupos de etiquetas<indexterm class="singular">
+        <primary>Etiquetas</primary> <secondary>Superposición de grupos</secondary>
+      </indexterm></title>
+
+    <para>A superposición é o resultado da mala manipulación de pares de etiquetas e é seguro que o seu resultado será a corrupción do formato e ás veces o documento traducido nin sequera abrirá.</para>
+
+    <para>Exemplo:</para>
+
+    <para><literal>&lt;b0&gt;O formatado&lt;/b0&gt; &lt;b1&gt;un&lt;/b1&gt; vai liarse.&lt;segment 0001&gt;</literal></para>
+
+    <para>Despois dunha mala manipulación:</para>
+
+    <para><literal>&lt;b0&gt;O formatado &lt;b1&gt;un&lt;/b0&gt; &lt;/b1&gt;está liado agora.&lt;segment 0001&gt;</literal></para>
+  </section>
+
+  <section>
+    <title>Opcións da validación de etiquetas</title>
+
+    <para>Para personalizar o traballo con etiquetas, pode configurar algunhas das regras na xanela <guimenuitem>Opcións &gt; Validación de etiquetas...</guimenuitem>:</para>
+
+    <mediaobject>
+      <imageobject>
+        <imagedata fileref="images/OptionsTagValidation_25.png"/>
+      </imageobject>
+    </mediaobject>
+
+    <para>O comportamento amosado aquí aplícase a todos os ficheiros de orixe e non só para algúns tipos de ficheiro, coma o texto formatado.</para>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis role="bold">Variábeis printf - non comprobar, comprobación simple, comprobar todas</emphasis></para>
+
+        <para>OmegaT pode comprobar se variábeis de programación (como %s por exemplo) no orixinal existen na tradución. Pode decidir non comprobalas, comprobar só as variábeis printf simples (como %s, %d, etc.) ou por variábeis print de todos os tipos.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis role="bold">Comprobar os padróns MessageFormate simples de java</emphasis></para>
+
+        <para>Marcando esta caixa fará que OmegaT comprobe se as etiquetas MessageFormat simples de java (como {0}) se procesaron correctamente.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis role="bold">Expresión regular de etiqueta(s) personalizada(s)</emphasis></para>
+
+        <para>Inserir unha expresión regular aquí fará que OmegaT trate as aparicións detectadas como etiquetas do usuario. Comproba que o número de etiquetas e a súa orde sexa idéntica, xusto coma no caso das etiquetas de OmegaT.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis role="bold">Expresión regular para o(s) fragmento(s) que deben eliminarse da tradución</emphasis></para>
+
+        <para>Pódese inserir unha expresión regular por contidos non desexados na tradución. Calquera coincidencia co segmento de destino será pintada de vermello, é dicir, fácil de identificar e corrixir. Cando busca por coincidencias parciais ignórase o padrón de eliminación. Se engade unha penalización fixa de 5 se a parte eliminada non coincida con algún outro segmento, así que a coincidencia non se mostrará ao 100 %.</para>
+      </listitem>
+    </itemizedlist>
+  </section>
+
+  <section id="tag.group.validation">
+    <title>Validación de grupos de etiquetas<indexterm class="singular">
+        <primary>Etiquetas</primary> <secondary>Validación de grupos</secondary>
+      </indexterm></title>
+
+    <para>A función de validación de etiquetas detecta os cambios nas secuencias de etiquetas (tanto deliberados coma accidentais), e amosa os segmentos afectados. Iniciar esta función – <guimenuitem>Ctrl+T<indexterm class="singular">
+        <primary>Atallos de teclado</primary> <secondary>Validación de etiquetas - Ctrl+T</secondary>
+      </indexterm></guimenuitem> - abre unha xanela que contén todos os segmentos no ficheiro que conteñan etiquetas supostamente rotas ou mal colocadas na tradución. Reparar as etiquetas e crear de novo os documentos finais é fácil coa función de validación de etiquetas. A xanela que se abre cando preme <guimenuitem>Ctrl+T</guimenuitem> contén unha táboa de tres columnas cunha ligazón ao segmento, o segmento orixinal e o segmento traducido.</para>
+
+    <figure id="tag.validation">
+      <title>Entrada de validación de etiquetas</title>
+
+      <mediaobject>
+        <imageobject role="html">
+          <imagedata fileref="images/TagValidation.png"/>
+        </imageobject>
+
+        <imageobject role="fo">
+          <imagedata fileref="images/TagValidation.png" width="90%"/>
+        </imageobject>
+      </mediaobject>
+    </figure>
+
+    <para>As etiquetas destácanse en negra e azul para unha comparación fácil entre os contidos do orixinal e os traducidos. Faga clic na ligazón para activar o segmento no editor. Corrixa o erro, de ser necesario (co caso anterior falta o par &lt;i2&gt;&lt;/i2&gt;) e prema <guimenuitem>Ctrl+T</guimenuitem> para volver á xanela de validación de etiquetas para corrixir outros erros. Os erros de etiquetas son secuencias de etiquetas na tradución nas que non se reproduce a mesma orde ou número de etiquetas que no orixinal. Algunha manipulación de etiquetas é necesaria e son benignas, outras causarán problemas cando se cree o documento traducido.</para>
+  </section>
+
+  <section id="hints.for.tag.management">
+    <title>Consellos para a xestión de etiquetas<indexterm class="singular">
+        <primary>Etiquetas</primary> <secondary>Consellos</secondary>
+      </indexterm></title>
+
+    <para><emphasis role="bold">Simplifique o texto orixinal</emphasis></para>
+
+    <para>Xeralmente as etiquetas representan o formatado dalgún xeito do texto orixinal. A simplificación do formatado orixinal contribúe enormemente á redución do número de etiquetas. Cando as circunstancias o permitan, debería ter en conta a unificación das fontes, o tamaño delas, as cores, etc pois podería simplificar a tradución e reducir o número potencial de erros de etiquetas. Lea a sección de operacións con etiquetas para ver que pode facer con elas. Recorde que se atopa as etiquetas coma un problema en OmegaT e o formatado non é extremadamente relevante para a tradución actual, a supresión das etiquetas pode ser o modo máis fácil de solucionar os problemas.</para>
+
+    <para><emphasis role="bold">Poña atención adicional nos pares de etiquetas.</emphasis></para>
+
+    <para>Se necesita ver as etiquetas en OmegaT mais non necesita manter a maioría no documento traducido, é libre de non introducir as etiquetas na tradución. Neste caso poña atención adicional nos pares de etiquetas xa que a supresión dunha parte do par mais non da outra corromperá o formatado do documento. É posíbel empregar as regras de segmentación para crear segmentos con menos etiquetas, xa que estas se inclúen no propio texto. Esta é unha función avanzada e se necesita certa experiencia pada aplicala correctamente.</para>
+
+    <para>OmegaT aínda non é capaz de detectar erros de formatado de xeito totalmente automático, así que non xe avisará se comete algún erro ou cambia o formatado para axeitalo mellor ao idioma de destino. Porén, as veces o documento traducido pode parecer estraño e, no peor dos caso, pode que nin sequera abra.</para>
+  </section>
+</chapter>

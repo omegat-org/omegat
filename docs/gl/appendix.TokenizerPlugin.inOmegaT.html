@@ -1,0 +1,181 @@
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <title>Appendix&nbsp;D.&nbsp;Engadido de Tokenizer</title>
+      <link rel="stylesheet" type="text/css" href="OmegaT.css">
+      <meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
+      <link rel="home" href="index.html" title="OmegaT - Guía de usuario">
+      <link rel="up" href="index.html" title="OmegaT - Guía de usuario">
+      <link rel="prev" href="appendix.TeamProjects.html" title="Appendix&nbsp;C.&nbsp;Proxectos en equipo de OmegaT">
+      <link rel="next" href="appendix.LanguageToolPlugin.inOmegaT.html" title="Appendix&nbsp;E.&nbsp;Engadido de LanguageTool">
+   </head>
+   <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+      <div class="navheader">
+         <table width="100%" summary="Navigation header">
+            <tr>
+               <th colspan="3" align="center">Appendix&nbsp;D.&nbsp;Engadido de Tokenizer</th>
+            </tr>
+            <tr>
+               <td width="20%" align="left"><a accesskey="p" href="appendix.TeamProjects.html">Prev</a>&nbsp;
+               </td>
+               <th width="60%" align="center">&nbsp;</th>
+               <td width="20%" align="right">&nbsp;<a accesskey="n" href="appendix.LanguageToolPlugin.inOmegaT.html">Next</a></td>
+            </tr>
+         </table>
+         <hr>
+      </div>
+      <div class="appendix">
+         <div class="titlepage">
+            <div>
+               <div>
+                  <h1 class="title"><a name="appendix.TokenizerPlugin.inOmegaT"></a>Appendix&nbsp;D.&nbsp;Engadido de Tokenizer<a class="indexterm" name="d0e10736"></a></h1>
+               </div>
+            </div>
+         </div>
+         <div class="toc">
+            <dl class="toc">
+               <dt><span class="section"><a href="appendix.TokenizerPlugin.inOmegaT.html#d0e10741">1. Introdución</a></span></dt>
+               <dt><span class="section"><a href="appendix.TokenizerPlugin.inOmegaT.html#d0e10771">2. Instalación e emprego da liña de ordes</a></span></dt>
+               <dt><span class="section"><a href="appendix.TokenizerPlugin.inOmegaT.html#d0e10788">3. Especificacións para Mac OS X</a></span></dt>
+               <dt><span class="section"><a href="appendix.TokenizerPlugin.inOmegaT.html#d0e10802">4. Resolución de problemas</a></span></dt>
+            </dl>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e10741"></a>1.&nbsp;Introdución<a class="indexterm" name="d0e10744"></a><a class="indexterm" name="d0e10750"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <p>Os tokenizers (ou stemmers) melloran a calidade das coincidencias recoñecendo palabras inseridas nos textos de orixe e na
+               memoria de tradución. Tamén melloran a coincidencia do glosario.
+            </p>
+            <p>Un stemmer para o inglés, por exemplo, debería identificar a cadea «cat» coma base da cadea «cats»(e posibelmente «catlike»,
+               «catty», etc.) e «stem» coma base de «stemmer», «stemming» e «stemmed». Un algoritmo de stemming reduce as palabras «fishing»,
+               «fished», «fish» e «fisher» á palabra raíz, «fish». Isto é especialmente útil no caso de linguas que empreguen prefixos e
+               sufixos para a creación de palabras. Tomando un exemplo do esloveno, aí vai a palabra «bo» en todas as formas gramaticalmente
+               correctas:
+            </p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>lep, lepa, lepo (singular: masculino, feminino e neutro)</p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>lepši, lepša, lepše . (formas plurais correspondentes ao comparativo, nominativo, masculino, feminino e neutro do adxectivo)</p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>najlepših (superlativo, plural, xenitivo para o masculino, feminino e neutro)</p>
+                  </li>
+               </ul>
+            </div>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e10771"></a>2.&nbsp;Instalación e emprego da liña de ordes
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>Distribúese un paquete de tokenizer adaptado do proxecto Lucene coma un engadido de OmegaT en http://sourceforge.net/projects/omegat-plugins/files/.
+               Descargue os ficheiros máis recentes (OmegaT-tikenizers_0.5-2.1.zip no momento en que se escribe este documento).
+            </p>
+            <p>Para instalar o tokenizer, cree un cartafol co nome «plugins» no cartafol no que se atopa o ficheiro OmegaT.jar e extraia
+               os ficheiros indicados anteriormente nese cartafol.
+            </p>
+            <p>Para executar OmegaT co tokenizer, necesita especificar que tokenizer empregará para o idioma de orixe e cal para o idioma
+               de destino. A sintaxe é a seguinte:
+            </p>
+            <p><code class="literal">java -jar OmegaT.jar --ITokenizer=[nome do tokenizer do idioma de orixe] --ITokenizerTarget=[nome do tokenizer do idioma de
+                  destino]</code></p>
+            <p>O nome dos tokenizer veñen no ficheiro Readme.txt incluído no cartafol do tokenizer. Por exemplo, se desexa empregar o tokenizer
+               Lucene CJK no idioma de orixe e o Lucene French na de destino, a súa orde tería que ser a seguinte:
+            </p>
+            <p><code class="literal">java -jar OmegaT.jar
+                      --ITokenizer=org.omegat.plugins.tokenizer.LuceneCJKTokenizer
+                      --ITokenizerTarget=org.omegat.plugins.tokenizer.LuceneFrenchTokenizer</code></p>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e10788"></a>3.&nbsp;Especificacións para Mac OS X
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>Se desexa empregar os tokenizers co paquete OmegaT.app para Mac OS X, ten que realizar a instalación anterior (clic dereito
+               en OmegaT.app para atopar a localización de OmegaT.jar), mais necesitará especificar o nome dos tokenizer no ficheiro <code class="filename">info.plist</code> que contén as opcións de inicio de Java. Siga as instrucións anteriores para acceder ao ficheiro <code class="filename">info.plist</code> e editalo de modo que quede así para o exemplo dado anteriormente:
+            </p>
+            <div class="literallayout">
+               <p><code class="code"><br>
+                     &lt;key&gt;VMOptions&lt;/key&gt;<br>
+                     &lt;string&gt;-Xmx1024M&lt;/string&gt;<br>
+                     <br>
+                     &lt;key&gt;Arguments&lt;/key&gt;<br>
+                     &lt;array&gt;<br>
+                     &nbsp;&nbsp;&lt;string&gt;--ITokenizer=org.omegat.plugins.tokenizer.LuceneCJKTokenizer&lt;/string&gt;<br>
+                     &nbsp;&nbsp;&lt;string&gt;--ITokenizerTarget=org.omegat.plugins.tokenizer.LuceneFrenchTokenizer&lt;/string&gt;<br>
+                     &lt;/array&gt;</code></p>
+            </div>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e10802"></a>4.&nbsp;Resolución de problemas
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>Para asegurarse de que os tokenizers están activos, abra un proxecto e comprobe a información do log desde a consola. Co exemplo
+               anterior, debería aparecer así:
+            </p>
+            <div class="literallayout">
+               <p><code class="code"><br>
+                     84528:&nbsp;Info:&nbsp;Source&nbsp;tokenizer:&nbsp;org.omegat.plugins.tokenizer.LuceneCJKTokenizer&nbsp;<br>
+                     84528:&nbsp;Info:&nbsp;Target&nbsp;tokenizer:&nbsp;org.omegat.plugins.tokenizer.LuceneFrenchTokenizer&nbsp;<br>
+                     </code></p>
+            </div>
+            <p>Os números da esquerda poden ser diferentes no seu sistema así que asegúrese de que o nome do tokenizer de orixe e destino,
+               especificados nas opcións de inicio, corresponden co que amosa o log. Se os tokenizers non se iniciar adecuadamente, o log
+               amosará isto:
+            </p>
+            <div class="literallayout">
+               <p><code class="code">84528:&nbsp;Info:&nbsp;Source&nbsp;tokenizer:&nbsp;org.omegat.plugins.tokenizer.LuceneCJKTokenizer&nbsp;84528:&nbsp;Info:&nbsp;Target&nbsp;tokenizer:&nbsp;org.omegat.plugins.tokenizer.LuceneFrenchTokenizer</code></p>
+            </div>
+            <p>Co paquete OmegaT.app para Mac OS X, faga dobre clic no <code class="literal">JavaApplicationStub</code> situado en /OmegaT.app/Contents/MacOS/ (vexa máis arriba como acceder a el) para iniciar OmegaT desde unha consola e ter
+               acceso inmediato ao log.
+            </p>
+         </div>
+      </div>
+      <div class="navfooter">
+         <hr>
+         <table width="100%" summary="Navigation footer">
+            <tr>
+               <td width="40%" align="left"><a accesskey="p" href="appendix.TeamProjects.html">Prev</a>&nbsp;
+               </td>
+               <td width="20%" align="center">&nbsp;</td>
+               <td width="40%" align="right">&nbsp;<a accesskey="n" href="appendix.LanguageToolPlugin.inOmegaT.html">Next</a></td>
+            </tr>
+            <tr>
+               <td width="40%" align="left" valign="top">Appendix&nbsp;C.&nbsp;Proxectos en equipo de OmegaT&nbsp;</td>
+               <td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
+               <td width="40%" align="right" valign="top">&nbsp;Appendix&nbsp;E.&nbsp;Engadido de LanguageTool</td>
+            </tr>
+         </table>
+      </div>
+   </body>
+</html>

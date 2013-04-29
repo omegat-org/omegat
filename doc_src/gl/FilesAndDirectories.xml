@@ -1,0 +1,351 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<chapter id="chapter.files.and.directories">
+  <title>Ficheiros e cartafoles de <application>OmegaT</application></title>
+
+  <para><application>OmegaT</application> funciona con tres tipos de ficheiros.</para>
+
+  <itemizedlist>
+    <listitem>
+      <para>Ficheiros do proxecto de tradución: constitúen o proxecto de tradución. Perdelos podería afectar á integridade do proxecto e a súa capacidade de completar o traballo. Os ficheiros do proxecto son os ficheiros máis importantes en <application>OmegaT</application>. Son os ficheiros cos que traballas día a día ao traducir.</para>
+    </listitem>
+  </itemizedlist>
+
+  <itemizedlist>
+    <listitem>
+      <para>Ficheiros de configuración do usuario: son creados cando se modifica o comportamento de OmegaT pola configuración das preferencias do usuario. Perdelas normalmente resulta en que OmegaT volve ao «estado de fábrica». Isto pode ser algo problemático ás veces cando estás en medio dunha tradución.</para>
+    </listitem>
+  </itemizedlist>
+
+  <itemizedlist>
+    <listitem>
+      <para>Ficheiros de aplicacións: están incluídos no paquete que descarga. A maioría deles son necesarios para que OmegaT funcione propiamente. Se por algunha razón perde ou corrompe algún destes ficheiros, simplemente descargue e/ou reinstale OmegaT para recuperalos.</para>
+    </listitem>
+  </itemizedlist>
+
+  <section id="translation.project.files">
+    <title>Ficheiros do proxecto de tradución</title>
+
+    <indexterm class="singular">
+      <primary>Ficheiros do proxecto</primary> <secondary>Ficheiros do proxecto de tradución</secondary>
+    </indexterm>
+
+    <para>Un proxecto de tradución de <application>OmegaT</application> consiste nun número de ficheiros e cartafoles.</para>
+
+    <para>Cando crea un proxecto de tradución, OmegaT crea automaticamente un cartafol co nome especificado e unha lista de cartafoles:</para>
+
+    <figure id="OmegaT.project">
+      <title>Proxecto OmegaT</title>
+
+      <mediaobject>
+        <imageobject role="html">
+		          <imagedata fileref="images/Omegatproject.png"/>
+       </imageobject>
+      <imageobject role="fo">
+          <imagedata fileref="images/Omegatproject.png" width="60%"/>
+        </imageobject>
+      </mediaobject>
+	  </figure>
+
+    <para>Poden escollerse localizacións alternativas para algúns cartafoles na creación do proxecto ou durante a tradución. É polo tanto posíbel seleccionar cartafoles existentes ou crear cartafoles en localizacións que reflictan os seus hábitos de xestión de proxectos e fluxo de traballo. Para cambiar a localización dos cartafoles unha vez creado o proxecto, abra <guimenuitem>Proxecto &gt; Propiedades...</guimenuitem> no menú ou con <guibutton>Ctrl+E</guibutton> e faga os cambios necesarios.</para>
+
+    <para>Nun xestor de ficheiros un proxecto de tradución semella e funciona como calquera outro cartafol. No seguinte exemplo o cartafol <filename>my projects</filename> contén tres proxectos de OmegaT:</para>
+
+    <para><figure id="OmegaT.projects.and.subdirectories">
+        <title>Proxectos de OmegaT e subcartafoles</title>
+
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="images/OmegaT_projects_and_subdirectories.png"/>
+          </imageobject>
+        </mediaobject>
+      </figure></para>
+
+    <para>Facendo dobre clic no elemento coa icona de OmegaT é suficiente para abrir o proxecto. Un proxecto de tradución <emphasis role="bold">Proxecto_Exemplo</emphasis> creado coa configuración predeterminada crearase como un novo subcartafol coa seguinte estrutura:</para>
+
+    <section id="file.omegat.project">
+      <title>Cartafol superior<indexterm class="singular">
+          <primary>Ficheiros do proxecto</primary> <secondary>Ficheiro omegat.project</secondary>
+        </indexterm></title>
+
+      <para>O cartafol superior dun cartafol sempre contén o ficheiro <filename>OmegaT.Project</filename>, que contén os parámetros do proxecto tal e como se definiron na xanela de propiedades do proxecto (<guimenuitem>Proxecto &gt; Propiedades</guimenuitem>). Mentres se vai traducindo, crearanse ficheiros adicionais (<emphasis><filename>project_name</filename></emphasis><filename>-omegat.tmx, project_name-level1.tmx e project_name-level2.tmx</filename>) que se actualizarán durante o proceso de tradución. Estes ficheiros conteñen a mesma información das memorias de tradución mais en diferentes formas, para poder ser empregadas despois en futuros proxectos.</para>
+    </section>
+
+    <section>
+      <title>Subcartafol dictionary</title>
+
+      <para>Inicialmente baleiro, este cartafol pode conter dicionarios que engada ao proxecto. Vexa o <link linkend="chapter.dictionaries">capítulo Dicionarios</link> para máis información.</para>
+    </section>
+
+    <section>
+      <title>Subcartafol glossary</title>
+
+      <para>Este cartafol está inicialmente baleiro. Conterá glosarios que empregue no proxecto. Vexa o <link linkend="chapter.glossaries">capítulo Glosarios</link> para máis información.</para>
+    </section>
+
+    <section id="folder.OmegaT">
+      <title>Subcartafol omegat<indexterm class="singular">
+          <primary>Ficheiros do proxecto</primary> <secondary>Subcartafol omegat</secondary>
+        </indexterm></title>
+
+      <para>O subcartafol <emphasis role="bold">omegat</emphasis> contén polo menos un e posibelmente moitos outros ficheiros. O ficheiro máis importante é <filename>project_save.tmx,</filename> pois é a memoria de tradución coa que traballa o proxecto. Vanse engadindo copias deste ficheiro (coa extensión bak) progresivamente neste subcartafol, primeiro ao comezo da sesión de tradución, ao final, e mentres progresa a tradución. Deste modo se pode advertir dunha perda de datos (vexa Prever a perda de datos no capítulo <link linkend="chapter.misc">Outros.</link></para>
+
+      <para>Durante a tradución poden crearse ficheiros adicionais neste subcartafol, ficheiros como os seguintes:</para>
+
+      <para><informaltable>
+          <tgroup align="left" cols="2" rowsep="1">
+            <colspec align="left" colnum="1"/>
+
+            <tbody>
+              <row>
+                <entry>stats.txt</entry>
+
+                <entry><indexterm class="singular">
+                    <primary>Ficheiros do proxecto</primary> <secondary>Ficheiro de estatísticas</secondary>
+                  </indexterm>contén as estatísticas actuais do proxecto. Pode velas seleccionando <guimenuitem>Ferramentas &gt; Estatísticas</guimenuitem></entry>
+              </row>
+
+              <row>
+                <entry>ignored_words.txt. learned_words.txt</entry>
+
+                <entry><indexterm class="singular">
+                    <primary>Ficheiros do proxecto</primary> <secondary>ignored_words e learned_words</secondary>
+                  </indexterm>son creados e empregados polo verificador ortográfico. Se xa reuniu palabras que lle gustaría que o verificador ortográfico ignore ou acepte, só necesita copiar as ficheiros correspondentes no subcartafol <filename>omegat</filename> do seu proxecto actual.</entry>
+              </row>
+
+              <row>
+                <entry>project_stats_match.txt</entry>
+
+                <entry>contén as últimas estatísticas de coincidencia, xeradas por <guimenuitem>Ferramentas &gt; Estatísticas de coincidencias</guimenuitem></entry>
+              </row>
+
+              <row>
+                <entry>segmentation.conf</entry>
+
+                <entry>se existe, contén regras de segmentación específicas do proxecto, se se requiren en <guimenuitem>Proxecto &gt; Propiedades...</guimenuitem> Vexa o <link linkend="chapter.project.properties">Capítulo de propiedades do proxecto</link></entry>
+              </row>
+
+              <row>
+                <entry>filters.xml</entry>
+
+                <entry>se existe, contén regras de filtros específicas do proxecto, se se requiren en <guimenuitem>Proxecto &gt; Propiedades...</guimenuitem> Vexa o <link linkend="chapter.project.properties">Capítulo de propiedades do proxecto</link></entry>
+              </row>
+            </tbody>
+          </tgroup>
+        </informaltable></para>
+    </section>
+
+    <section id="folder.source">
+      <title>Subcartafol source<indexterm class="singular">
+          <primary>Ficheiros do proxecto</primary> <secondary>Subcartafol source</secondary>
+        </indexterm></title>
+
+      <para>O subcartafol source contén os ficheiros que serán traducidos. Pode engadir ficheiros nel máis tarde. Teña en conta que a estrutura do subcartafol source pode tomar a forma que vostede queira. Se os ficheiros a traducir son partes dunha estrutura en árbore (como nunha páxina web), só necesita especificar o subcartafol superior e OmegaT manterá os contidos enteiros, mentres mantén a estrutura en árbore intacta.</para>
+    </section>
+
+    <section id="folder.target">
+      <title>Subcartafol target<indexterm class="singular">
+          <primary>Ficheiros do proxecto</primary> <secondary>Subcartafol target</secondary>
+        </indexterm></title>
+
+      <para>Este subcartafol está inicialmente baleiro. Para engadir contidos a el, seleccione <menuchoice> <shortcut> <keycombo> <keycap>Ctrl</keycap> <keycap>D</keycap> </keycombo> </shortcut> <guimenu>Proxecto</guimenu> <guimenuitem>Crear documentos traducidos</guimenuitem> </menuchoice>. Os ficheiros do cartafol <filename>source</filename>, tanto traducidos coma non, xéranse entón aquí, coa mesma xerarquía que a presente no subcartafol source. Os contidos do subcartafol source reflectirán o estado da tradución, tal e como está ma memoria de tradución do proxecto, gardada no actual  <emphasis role="bold">/omegat/project_save.tmx</emphasis>. Os segmentos sen traducir quedarán no idioma orixinal.</para>
+    </section>
+  </section>
+
+  <section id="user.files">
+    <title>Ficheiros de configuración do usuario<indexterm class="singular">
+        <primary>Ficheiros do proxecto</primary> <secondary>Ficheiros de configuración do usuario</secondary>
+      </indexterm></title>
+
+    <para>Os ficheiros de usuario conteñen a información aplicábel a todos os proxectos dun usuario dado;</para>
+
+    <informaltable>
+      <tgroup align="left" cols="2" rowsep="1">
+        <colspec align="left" colnum="1"/>
+
+        <tbody>
+          <row>
+            <entry>logs/OmegaT.log</entry>
+
+            <entry>Este ficheiro rexistra as mensaxes de erro de Java mentres <application>OmegaT</application> está sendo executado. Se OmegaT se comporta dun xeito errático, é importante incluír este ficheiro ou a parte relevante a un informe de erro</entry>
+          </row>
+
+          <row>
+            <entry>script/</entry>
+
+            <entry>cartafol que contén ficheiros de script para o plugin de script, se está instalado</entry>
+          </row>
+
+          <row>
+            <entry>filters.xml</entry>
+
+            <entry>Filtros de ficheiro predeterminados do usuario</entry>
+          </row>
+
+          <row>
+            <entry>omegat.prefs</entry>
+
+            <entry>Preferencias de OmegaT</entry>
+          </row>
+
+          <row>
+            <entry>segmentation.conf</entry>
+
+            <entry>Regras de segmentación predeterminadas do usuario</entry>
+          </row>
+
+          <row>
+            <entry>uiLayout.xml</entry>
+
+            <entry>Ficheiro xml con todas as configuracións e opcións accesíbeis a través da interface de usuario</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </informaltable>
+
+    <para>Teña en conta que as regras de segmentación e de filtros predeterminadas poden sobrescribirse pola configuración específica do proxecto (vexa anteriormente). A localización dos ficheiros de usuario depende da plataforma que use:</para>
+
+    <informaltable>
+      <tgroup align="left" cols="2" rowsep="1">
+        <colspec align="left" colnum="1"/>
+
+        <tbody>
+          <row>
+            <entry>Windows 2000 e XP</entry>
+
+            <entry><literal>Documents and Settings\&lt;Nome de usuario&gt;\Application Data\<application>OmegaT</application></literal></entry>
+          </row>
+
+          <row>
+            <entry>Windows Vista e 7</entry>
+
+            <entry><literal>Users\&lt;Nome de usuario&gt;\AppData\Roaming\<application>OmegaT</application></literal></entry>
+          </row>
+
+          <row>
+            <entry>Outros Windows</entry>
+
+            <entry><literal>&lt;Algo&gt;\<application>OmegaT</application></literal> (&lt;Algo&gt; correspóndese coa localización do cartafol «home» determinado por Java)</entry>
+          </row>
+
+          <row>
+            <entry>Linux/Solaris/FreeBSD</entry>
+
+            <entry><literal>&lt;Cartafol de inicio do usuario&gt;/.omegat </literal>(.omegat é un cartafol, o punto que precede ao nome faino invisíbel a menos que escriba ls -a ou unha orde equivalente)</entry>
+          </row>
+
+          <row>
+            <entry>MAC OS X</entry>
+
+            <entry><filename>&lt;Cartafol de inicio do usuario&gt;/Library/Preferences/<application>OmegaT</application></filename></entry>
+          </row>
+
+          <row>
+            <entry>Outros</entry>
+
+            <entry><filename>&lt;Cartafol de inicio do usuario&gt;</filename></entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </informaltable>
+  </section>
+
+  <section id="application.files">
+    <title>Ficheiros de aplicacións<indexterm class="singular">
+        <primary>Ficheiros do proxecto</primary> <secondary>Ficheiros de aplicacións</secondary>
+      </indexterm></title>
+
+    <para>OmegaT distribúese coma un paquete que se pode descargar desde SourceForge. Aquí considérase un paquete independente da plataforma nunha forma Java estándar. As alternativas inclúen un paquete Linux .tar, un instalador de Windows (con ou sen Java Runtime Environment), un instalador de Mac OS X, e un paquete co código fonte para os desenvolvedores.</para>
+
+    <para>O paquete independente de plataforma pode empregarse en calquera plataforma con Java 1.5 runtime environment, incluídas as plataformas para as que exista un paquete específico. Tamén se ofrece un ficheiro comprimido (ficheiro zip ou tar) que debe extraer nun cartafol da súa escolla para a instalación. O ficheiro pode extraerse normalmente facendo dobre clic no paquete descargado. Unha vez extraído o ficheiro, crearase un cartafol que contén os seguintes contidos:</para>
+
+    <informaltable>
+      <tgroup align="left" cols="2" rowsep="1">
+        <colspec align="left" colnum="1"/>
+
+        <tbody>
+          <row>
+            <entry><emphasis role="bold">Ficheiro/ subcartafol</emphasis></entry>
+
+            <entry><emphasis role="bold">Contidos</emphasis></entry>
+          </row>
+
+          <row>
+            <entry><filename>/docs/</filename></entry>
+
+            <entry>Todos os manuais de usuario están neste cartafol. Pode abrimos nun navegador de Internet para obter acceso ás ligazóns externas.</entry>
+          </row>
+
+          <row>
+            <entry><filename>/images/</filename></entry>
+
+            <entry>Iconas e logos gráficos</entry>
+          </row>
+
+          <row>
+            <entry><filename>/lib/</filename></entry>
+
+            <entry>Contén os ficheiros Java necesarios para a operación de <application>OmegaT</application>.</entry>
+          </row>
+
+          <row>
+            <entry><filename>join.html</filename></entry>
+
+            <entry>É un ficheiro html ordinario que, cando se abre no navegador, o dirixe ao grupo de usuarios de OmgaT aloxado en Yahoo! Groups. Non é necesario unirse, mais lle concederá acceso a servizos adicionais, como ficheiros, cuestionarios e a oportunidade de tomar parte nas discusións relacionadas con OmegaT. Os arquivos do grupo son públicos e poden verse sen unha subscrición ao grupo.</entry>
+          </row>
+
+          <row>
+            <entry><filename>changes.txt</filename></entry>
+
+            <entry>Unha lista relativamente detallada das modificacións entre esta versión e as anteriores.</entry>
+          </row>
+
+          <row>
+            <entry><filename>license.txt</filename></entry>
+
+            <entry>A LICENZA PÚBLICA XERAL DE GNU. Esta licenza permítelle facer certas cousas con <application>OmegaT</application>, incluso a modificación e distribución do mesmo. Se está interesado en modificar ou distribuír <application>OmegaT</application>, lea este documento coidadosamente e asegúrese de que entende as súas implicacións antes de facer nada. Se ten algunha pregunta, non dubide en dirixirse aos membros do proxecto directamente, tanto enviándolles un correo electrónico desde a páxina de SourceForge ou enviándolles un correo público ao grupo de usuarios.</entry>
+          </row>
+
+          <row>
+            <entry><filename>doc-license.txt</filename></entry>
+
+            <entry>A LICENZA PÚBLICA XERAL DE GNU. Esta licenza cobre a documentación. Vexa máis arriba.</entry>
+          </row>
+
+          <row>
+            <entry><filename>readme.txt</filename></entry>
+
+            <entry>Este ficheiro é moi importante e debería asegurarse de que o leu antes de iniciar OmegaT. Inclúe información xeral de OmegaT, onde atopar máis información, como contribuír, etc. Traduciuse a varias linguas.</entry>
+          </row>
+
+          <row>
+            <entry><application>OmegaT</application></entry>
+
+            <entry><para>Un ficheiro de texto que inclúe dúas liñas:</para>
+
+            <programlisting>#!/bin/bash java
+java -jar OmegaT.jar $*</programlisting>
+
+            <para>Os usuarios de Linux e OS X poden atopar este ficheiro útil. Fágao executábel (<literal>chmod +x OmegaT</literal>) desde a liña de ordes despois de asegurarse de que está no cartafol /OmegaT_2.6/. Entón poderá iniciar OmegaT se executa este ficheiro desde a liña de ordes.</para>
+            </entry>
+          </row>
+          
+          <row>
+            <entry>OmegaT.bat</entry>
+
+            <entry><para>Un ficheiro batch empregado para iniciar <application>OmegaT</application> desde a liña de ordes de Windows. Contén só a seguinte liña:</para>
+
+            <programlisting>java -jar OmegaT.jar %*</programlisting>
+            </entry>
+          </row>
+          
+          <row>
+            <entry><literal>OmegaT.jar</literal></entry>
+
+            <entry>A aplicación OmegaT principal. Para iniciar OmegaT, debe iniciar este ficheiro tanto desde a liña de ordes ou desde o xestor de ficheiros, usualmente facendo dobre clic nel.</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </informaltable>
+  </section>
+</chapter>

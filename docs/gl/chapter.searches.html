@@ -1,0 +1,257 @@
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <title>Chapter&nbsp;15.&nbsp;Buscas</title>
+      <link rel="stylesheet" type="text/css" href="OmegaT.css">
+      <meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
+      <link rel="home" href="index.html" title="OmegaT - Guía de usuario">
+      <link rel="up" href="index.html" title="OmegaT - Guía de usuario">
+      <link rel="prev" href="chapter.segmentation.html" title="Chapter&nbsp;14.&nbsp;Segmentación do segmento orixe">
+      <link rel="next" href="chapter.regexp.html" title="Chapter&nbsp;16.&nbsp;Expresións regulares">
+   </head>
+   <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+      <div class="navheader">
+         <table width="100%" summary="Navigation header">
+            <tr>
+               <th colspan="3" align="center">Chapter&nbsp;15.&nbsp;Buscas</th>
+            </tr>
+            <tr>
+               <td width="20%" align="left"><a accesskey="p" href="chapter.segmentation.html">Prev</a>&nbsp;
+               </td>
+               <th width="60%" align="center">&nbsp;</th>
+               <td width="20%" align="right">&nbsp;<a accesskey="n" href="chapter.regexp.html">Next</a></td>
+            </tr>
+         </table>
+         <hr>
+      </div>
+      <div class="chapter">
+         <div class="titlepage">
+            <div>
+               <div>
+                  <h1 class="title"><a name="chapter.searches"></a>Chapter&nbsp;15.&nbsp;Buscas<a class="indexterm" name="d0e7098"></a></h1>
+               </div>
+            </div>
+         </div>
+         <div class="toc">
+            <dl class="toc">
+               <dt><span class="section"><a href="chapter.searches.html#search.window">1. Xanela de buscas</a></span></dt>
+               <dd>
+                  <dl>
+                     <dt><span class="section"><a href="chapter.searches.html#d0e7120">1.1. Buscando</a></span></dt>
+                     <dt><span class="section"><a href="chapter.searches.html#d0e7144">1.2. Localización da busca</a></span></dt>
+                  </dl>
+               </dd>
+               <dt><span class="section"><a href="chapter.searches.html#using.wild.cards">2. Empregando comodíns</a></span></dt>
+               <dt><span class="section"><a href="chapter.searches.html#search.methoids">3. Métodos e opcións de busca</a></span></dt>
+               <dt><span class="section"><a href="chapter.searches.html#search.result.display">4. Mostra dos resultados de busca</a></span></dt>
+            </dl>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="search.window"></a>1.&nbsp;Xanela de buscas
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <div class="figure"><a name="text.search.window"></a><p class="title"><b>Figure&nbsp;15.1.&nbsp;Xanela de busca de texto<a class="indexterm" name="d0e7107"></a></b></p>
+               <div class="figure-contents">
+                  <div class="mediaobject"><img src="images/TextSearch25.png" alt="Xanela de busca de texto"></div>
+               </div>
+            </div><br class="figure-break"><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;">
+               <h3 class="title">Note</h3>
+               <p>A busca anterior atopa todos os segmentos de destino que conteñan caracteres, moi improbábeis no idioma de destino (é dicir,
+                  esloveno).
+               </p>
+            </div>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="d0e7120"></a>1.1.&nbsp;Buscando<a class="indexterm" name="d0e7123"></a></h3>
+                     </div>
+                  </div>
+               </div>
+               <p><span class="application">OmegaT</span> fornece un conxunto moi potente de funcións de busca. Para facer buscas prema <span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>F</strong></span> e mostrarase a xanela de busca, nela insira no campo «Buscar por» unha palabra ou frase que queira buscar. Tamén pode, na
+                  ventá de edición, seleccionar una palabra ou frase no campo de edición (texto de destino do segmento activo) e premer <span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>F</strong></span>. A palabra ou frase será inserida na caixa de busca automaticamente. Pode ter varias xanelas de busca abertas simultaneamente,
+                  mais pécheas cando xa non as necesite para non ensuciar o seu escritorio.
+               </p>
+            </div>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="d0e7144"></a>1.2.&nbsp;Localización da busca
+                        </h3>
+                     </div>
+                  </div>
+               </div>
+               <p>As buscas se realizar de xeito predeterminado tanto nas seccións de orixe coma de destino do proxecto, mais pode limitar a
+                  buscar a só o texto de orixe ou de destino. Pode buscar
+               </p>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
+                     <li class="listitem">
+                        <p>No proxecto soamente (configuración predeterminada)</p>
+                     </li>
+                  </ul>
+               </div>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
+                     <li class="listitem">
+                        <p>tanto no proxecto coma nas memorias de tradución de /tm/ que se toman como referencia (marque <span class="emphasis"><em>Buscar en MT)</em></span></p>
+                     </li>
+                  </ul>
+               </div>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
+                     <li class="listitem">
+                        <p>un só ficheiro ou cartafol que conteña un conxunto de ficheiros (marque <span class="emphasis"><em>Buscar ficheiros)</em></span></p>
+                     </li>
+                  </ul>
+               </div>
+               <p>Se busca nos ficheiros (non nas memorias de tradución), <span class="application">OmegaT</span> restrinxirá a busca aos ficheiros nos formatos de ficheiros de orixe. Consecuentemente, malia que OmegaT poida xestionar
+                  ficheiros <code class="filename">tmx</code>, non os inclúe nas buscas de ficheiros. Se activa as <span class="bold"><strong><a class="indexterm" name="d0e7174"></a>Opcións avanzadas</strong></span>, pode combinar a busca co nome do autor da tradución e hora do último cambio feito.
+               </p>
+            </div>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="using.wild.cards"></a>2.&nbsp;Empregando comodíns<a class="indexterm" name="d0e7184"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <p>Tanto nas buscas exactas coma por palabra clave, poden empregarse os comodíns '*' e '?'. Teñen a mesma utilidade que nas buscas
+               de Word:
+            </p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>'*' coincide con cero ou máis caracteres, desde a posición actual da palabra dada ata o final. A busca do termo <code class="literal">'run*'</code>, por exemplo, coincidirá coas palabras <code class="literal">'run'</code>, <code class="literal">'runs'</code> e <code class="literal">'running'</code>.
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>'?' coincide cun carácter calquera. Por exemplo, <code class="literal">'run?'</code> coincidirá coas palabras <code class="literal">'runs'</code> e <code class="literal">'runn'</code> dentro da palabra <code class="literal">'running'</code>.
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <p>As coincidencias se amosarán destacadas en azul e negra. Teña en conta que '*' e '?' teñen un significado especial nas expresións
+               regulares, así que a busca con comodíns, como se describe aquí, se aplica só a busca exacta e por palabra clave (vexa máis
+               adiante).
+            </p>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="search.methoids"></a>3.&nbsp;Métodos e opcións de busca<a class="indexterm" name="d0e7228"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <p>Seleccione o método empregando os botóns de opcións Ten dispoñíbel os seguintes métodos de busca:</p>
+            <div class="variablelist">
+               <dl class="variablelist">
+                  <dt><span class="term">busca exacta</span></dt>
+                  <dd>
+                     <p>Busca segmentos que conteñan a cadea exacta que especificou. Unha busca exacta busca unha frase, é dicir, se se inseriron
+                        varias palabras, só se atoparán se están nesa mesma orde. Se busca <code class="literal">open file</code> atopará todas as veces que aparece a cadea <span class="emphasis"><em><code class="literal">open file</code></em></span>, mais non <span class="emphasis"><em><code class="literal">file opened</code></em></span> ou <span class="emphasis"><em><code class="literal">open input file</code></em></span>.
+                     </p>
+                  </dd>
+                  <dt><span class="term">busca por palabra clave</span></dt>
+                  <dd>
+                     <p>Busca segmentos que conteñan todas as palabras chave que especificou, en calquera orde. Seleccione a busca por palabra clave
+                        para buscar por calquera número de palabras completas individuais, en calquera orde. OmegaT amosa unha lista de todos os segmentos
+                        que conteñan todas as palabras especificadas. A busca por palabra clave é similar á busca «con todas as palabras» nun motor
+                        de busca de internet coma Google (e logic). Se empregamos a busca por palabra clave con <span class="emphasis"><em><code class="literal">open file</code></em></span> entón atoparemos todas as veces que aparece a cadea <span class="emphasis"><em><code class="literal">open file</code>,</em></span> así como <span class="emphasis"><em><code class="literal">file opened</code>, <code class="literal">open input file</code>, <code class="literal">file may not be safe to open</code></em></span>, etc.
+                     </p>
+                  </dd>
+                  <dt><span class="term"><span class="bold"><strong>expresións regulares</strong></span></span></dt>
+                  <dd>
+                     <p>A cadea de busca se tratará como unha expresión regular. A cadea de busca - [a-zA-Z]+[öäüqwß] - no exemplo anterior, por exemplo,
+                        busca por palabras no segmento de destino que conteña caracteres cuestionábeis para un teclado alemán. As expresións regulares
+                        son un método potente de buscar instancias dunha cadea. Para máis información vexa o capítulo <a class="link" href="chapter.regexp.html" title="Chapter&nbsp;16.&nbsp;Expresións regulares">Expresións regulares.</a></p>
+                  </dd>
+               </dl>
+            </div>
+            <p>Ademais de un dos métodos anteriores, pode seleccionar os seguintes:</p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p><span class="bold"><strong>diferencias maiúsculas de minúsculas</strong></span>: a busca se realizará coa cadea especificada exacta; é dicir, se terá en conta a diferencia entre maiúsculas e minúsculas.
+                     </p>
+                  </li>
+                  <li class="listitem">
+                     <p><span class="bold"><strong>nos orixinais:</strong></span> busca nos segmentos orixinais
+                     </p>
+                  </li>
+                  <li class="listitem">
+                     <p><span class="bold"><strong>nas traducións:</strong></span> busca nos segmentos traducidos
+                     </p>
+                  </li>
+                  <li class="listitem">
+                     <p><span class="bold"><strong>nas notas:</strong></span> busca en notas dos segmentos
+                     </p>
+                  </li>
+                  <li class="listitem">
+                     <p><span class="bold"><strong>Buscar nas MT</strong></span>: se incluirán as memorias de tradución do cartafol <code class="filename">tm</code> na busca.
+                     </p>
+                  </li>
+                  <li class="listitem">
+                     <p><span class="bold"><strong>amosar todos os resultados:</strong></span> desmarcar esta caixa fará que OmegaT só amose o primeiro resultado que atope, en caso de atopar varios resultados.
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <p>Se fai clic no botón <span class="guibutton">Opcións avanzadas</span> poderá seleccionar outros criterios adicionais (autor da tradución, data da tradución, etc.) tan e como se amosa na imaxe
+               anterior.
+            </p>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="search.result.display"></a>4.&nbsp;Mostra dos resultados de busca
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>Premendo o botón de busca despois de inserir unha cadea no campo de busca, amosa todos os segmentos no proxecto que inclúan
+               a cadea inserida. Como <span class="application">OmegaT</span> manexa segmentos idénticos como unha soa entidade, só se amosará o primeiro segmento único. Os segmentos se amosarán en orden
+               de aparencia no proxecto. Os segmentos traducidos se amosarán co texto orixinal encima e o traducido debaixo, os segmentos
+               sen traducir se amosarán só co segmento orixinal.
+            </p>
+            <p>Facendo clic nun segmento, abrirá dito segmento no editor para que o modifique. Pode entón cambiar á xanela de busca para
+               ver o seguinte segmento atopado, por exemplo, para comprobar e, se é necesario, corrixir terminoloxía.
+            </p>
+            <p>Pode ter moitas xanelas de busca abertas simultaneamente. Pode ver rapidamente os seus contidos fixándose no seu título: conterá
+               o termo de busca empregado.
+            </p>
+         </div>
+      </div>
+      <div class="navfooter">
+         <hr>
+         <table width="100%" summary="Navigation footer">
+            <tr>
+               <td width="40%" align="left"><a accesskey="p" href="chapter.segmentation.html">Prev</a>&nbsp;
+               </td>
+               <td width="20%" align="center">&nbsp;</td>
+               <td width="40%" align="right">&nbsp;<a accesskey="n" href="chapter.regexp.html">Next</a></td>
+            </tr>
+            <tr>
+               <td width="40%" align="left" valign="top">Chapter&nbsp;14.&nbsp;Segmentación do segmento orixe&nbsp;</td>
+               <td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
+               <td width="40%" align="right" valign="top">&nbsp;Chapter&nbsp;16.&nbsp;Expresións regulares</td>
+            </tr>
+         </table>
+      </div>
+   </body>
+</html>

@@ -1,0 +1,777 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<chapter id="chapter.user.interface">
+  <title>A interface de usuario</title>
+
+  <section id="user.interface.items">
+    <title>A xanela principal de OmegaT, outras xanelas e diálogos</title>
+
+    <para>A xanela principal de OmegaT contén a xanela principal, a barra de estado e varios paneis. Hai outras xanelas adicionais, así como diálogos empregados para cambiar a configuración do proxecto de OmegaT. A seguinte información resume o seu uso e como se abren:</para>
+
+    <table colsep="0" rowsep="0">
+      <title>Xanela principal de OmegaT<indexterm class="singular">
+          <primary>Interface de usuario</primary> <secondary>Xanela principal de OmegaT</secondary>
+        </indexterm></title>
+
+      <tgroup cols="2" colsep="0" rowsep="1" title="Main OMegaT window">
+        <colspec align="left" colnum="1"/>
+
+        <colspec align="left" colnum="2"/>
+
+        <tbody>
+          <row>
+            <entry><guimenuitem>Panel de edición</guimenuitem></entry>
+
+            <entry>onde escribe e edita a tradución</entry>
+          </row>
+
+          <row>
+            <entry><guimenuitem>Panel de coincidencias</guimenuitem></entry>
+
+            <entry>amosa os segmentos máis similares das memorias de tradución</entry>
+          </row>
+
+          <row>
+            <entry><guimenuitem>Panel do glosario</guimenuitem></entry>
+
+            <entry>amosa a terminoloxía atopada para os elementos no segmento activo</entry>
+          </row>
+
+          <row>
+            <entry><guimenuitem>Panel de dicionario</guimenuitem></entry>
+
+            <entry>amosa as coincidencias do dicionario atopadas para os elementos no segmento activo</entry>
+          </row>
+
+          <row>
+            <entry><guimenuitem>Panel de tradución automática</guimenuitem></entry>
+
+            <entry>amosa a tradución provista polos servizos de tradución automática</entry>
+          </row>
+
+          <row>
+            <entry><guimenuitem>Panel de notas</guimenuitem></entry>
+
+            <entry>notas relacionadas co segmento activo, por exemplo, traducións alternativas ou a chave en caso de formatos de ficheiro do tipo chave=valor</entry>
+          </row>
+
+          <row>
+            <entry><guimenuitem>Panel de comentarios</guimenuitem></entry>
+
+            <entry>Comentarios do autor en ficheiros PO, ou o nome do atributo traducido (en XHTML)</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+
+    <table colsep="0" rowsep="0">
+      <title>Outras xanelas<indexterm class="singular">
+          <primary>Interface de usuario</primary> <secondary>Outras xanelas</secondary>
+        </indexterm></title>
+
+      <tgroup cols="2" colsep="0" rowsep="1" title="Other windows">
+        <colspec align="left" colnum="1"/>
+
+        <colspec align="left" colnum="2"/>
+
+        <tbody>
+          <row>
+            <entry><guimenuitem><indexterm class="singular">
+                <primary>Atallos de teclado</primary> <secondary>Validación de etiquetas - Ctrl+T</secondary>
+              </indexterm>Xanela de validación de etiquetas</guimenuitem></entry>
+
+            <entry><para>Emprégase para validar etiquetas (abrir con <keycombo> <keycap>Ctrl</keycap> <keycap>T</keycap> </keycombo>, pechar con <keycap>Esc</keycap>)</para></entry>
+          </row>
+
+          <row>
+            <entry><guimenuitem><indexterm class="singular">
+                <primary>Atallos de teclado</primary> <secondary>Axuda - F1</secondary>
+              </indexterm>Navegador de axuda</guimenuitem></entry>
+
+            <entry><para>Emprégase para amosar o manual de usuario (abrir con <keycap>F1</keycap>, pechar con <keycap>Esc</keycap>)</para></entry>
+          </row>
+
+          <row>
+            <entry><guimenuitem>Xanela de estatísticas</guimenuitem></entry>
+
+            <entry><para>Emprégase para abrir a xanela coas estatísticas do proxecto, ábrese empregando <menuchoice> <guimenu><indexterm class="singular">
+                    <primary>Menú Ferramentas</primary> <secondary>estatísticas</secondary>
+                  </indexterm>Ferramentas</guimenu> <guimenuitem>Estatísticas.</guimenuitem> </menuchoice></para></entry>
+          </row>
+
+          <row>
+            <entry><guimenuitem>Xanela de estatísticas de coincidencias</guimenuitem></entry>
+
+            <entry><para>Emprégase para amosar as estatísticas de coincidencias do proxecto, seleccione <menuchoice> <guimenu><indexterm class="singular">
+                    <primary>Menú Ferramentas</primary> <secondary>Estatísticas de coincidencias</secondary>
+                  </indexterm>Ferramentas</guimenu> <guimenuitem>Estatísticas de coincidencias</guimenuitem> </menuchoice>para abrila.</para></entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+
+    <table border="0" colsep="0" rowsep="0">
+      <title>Diálogo de preferencias<indexterm class="singular">
+          <primary>Interface de usuario</primary> <secondary>Diálogo de preferencias</secondary> <seealso>Preferencias do proxecto</seealso>
+        </indexterm></title>
+
+      <tgroup cols="2" colsep="0" rowsep="1" title="Settings dialogs">
+        <colspec align="left" colnum="1"/>
+
+        <colspec align="left" colnum="2"/>
+
+        <tbody>
+          <row>
+            <entry><guimenuitem>Propiedades do proxecto<indexterm class="singular">
+                <primary>Menú Proxecto</primary> <secondary>Propiedades</secondary>
+              </indexterm></guimenuitem> <indexterm class="singular">
+                <primary>Atallos de teclado</primary> <secondary>Propiedades do proxecto - Ctrl+E</secondary>
+              </indexterm></entry>
+
+            <entry>Empréganse para modificar os cartafoles e idiomas do proxecto (abrir mediante o atallo <guimenuitem>Ctrl+E</guimenuitem> ou <menuchoice> <guimenu>Proxecto</guimenu> <guimenuitem>Propiedades...</guimenuitem> </menuchoice>, pechar con <keycap>Esc)</keycap></entry>
+          </row>
+
+          <row>
+            <entry><guimenuitem>Tipo de letra<indexterm class="singular">
+                <primary>Preferencias do proxecto</primary> <secondary>Tipo de letra</secondary>
+              </indexterm></guimenuitem></entry>
+
+            <entry><para>Emprégase para modificar o tipo de letra empregado por <application>OmegaT</application> para amosar a orixe, a tradución, coincidencias e termos do glosario (abrir mediante <menuchoice> <guimenu>Opcións</guimenu> <guimenuitem>Tipo de letra...</guimenuitem> </menuchoice>, pechar con <keycap>Esc</keycap>).</para></entry>
+          </row>
+
+          <row>
+            <entry><guimenuitem>Filtros de ficheiro<indexterm class="singular">
+                <primary>Preferencias do proxecto</primary> <secondary>Filtros de ficheiro</secondary>
+              </indexterm><indexterm class="singular">
+                <primary>Menú Opcións</primary> <secondary>Filtros de ficheiro</secondary>
+              </indexterm></guimenuitem></entry>
+
+            <entry>Empréganse para axustar a xestión dos formatos de ficheiro compatíbeis (abrir mediante <menuchoice> <guimenu>Opcións</guimenu> <guimenuitem>Filtros de ficheiro...</guimenuitem> </menuchoice>, pechar con <keycap>Esc</keycap>)</entry>
+          </row>
+
+          <row>
+            <entry><guimenuitem>Segmentación<indexterm class="singular">
+                <primary>Preferencias do proxecto</primary> <secondary>Segmentación</secondary>
+              </indexterm><indexterm class="singular">
+                <primary>Menú Opcións</primary> <secondary>Segmentación</secondary>
+              </indexterm></guimenuitem></entry>
+
+            <entry>Emprégase para cambiar o modo no que se segmenta o texto en frases (abrir mediante <menuchoice> <guimenu>Opcións</guimenu> <guimenuitem>Segmentación</guimenuitem> </menuchoice>, pechar con <keycap>Esc</keycap>).</entry>
+          </row>
+
+          <row>
+            <entry><guimenuitem>Editar comportamento...<indexterm class="singular">
+                <primary>Menú Opcións</primary> <secondary>Editar comportamento...</secondary>
+              </indexterm><indexterm class="singular">
+                <primary>Preferencias do proxecto</primary> <secondary>Editar comportamento...</secondary>
+              </indexterm></guimenuitem></entry>
+
+            <entry>Emprégase para cambiar o modo en que se comporta <application>OmegaT</application> cando se despraza entre os segmentos (abrir mediante <menuchoice> <guimenu>Opcións</guimenu> <guimenuitem>Comportamento...</guimenuitem> </menuchoice>, pechar con <keycap>Esc</keycap>)</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+  </section>
+
+  <section id="OmegaT.main.window">
+    <title>Xanela principal de <application>OmegaT</application><indexterm class="singular">
+        <primary>Xanelas e paneis de OmegaT</primary> <secondary>Xanela principal</secondary>
+      </indexterm></title>
+
+    <figure id="OmegaT.main.window.figure">
+      <title>Xanela principal de OmegaT</title>
+
+      <mediaobject>
+        <imageobject role="html">
+          <imagedata fileref="images/OmegaT_panes_25.png" scale="100"/>
+        </imageobject>
+
+        <imageobject role="fo">
+          <imagedata fileref="images/OmegaT_panes_25.png" width="80%"/>
+        </imageobject>
+      </mediaobject>
+    </figure>
+
+    <para>A xanela principal componse de varios paneis, o menú principal e unha barra de estado. Pode cambiar a posición de calquera panel ou incluso desancoralo nunha xanela separada facendo clic e arrastrando o panel polo seu nome. Dependendo do estado do panel, poden aparecer distintos signos na esquina superior dereita:</para>
+
+    <note>
+      <para>Se non pode ver todos os paneis (abrilos ou minimizalos), pode premer <guisubmenu>Opcións &gt; Restaurar a xanela principal</guisubmenu> para restaurala ao estado definido na instalación.</para>
+    </note>
+
+    <table>
+      <title>Widgets dos paneis<indexterm class="singular">
+          <primary>Xanelas e paneis de OmegaT</primary> <secondary>Widgets dos paneis</secondary>
+        </indexterm></title>
+
+      <tgroup cols="2">
+        <colspec align="left" colnum="1"/>
+
+        <tbody>
+          <row>
+            <entry><inlinemediaobject>
+                <imageobject role="html">
+                  <imagedata fileref="images/Minimize.gif" width="60%"/>
+                </imageobject>
+
+                <imageobject role="fo">
+                  <imagedata fileref="images/Minimize.gif" width="40%"/>
+                </imageobject>
+              </inlinemediaobject></entry>
+
+            <entry>minimiza o panel, de modo que só se amose o nome na parte inferior da xanela</entry>
+          </row>
+
+          <row>
+            <entry><inlinemediaobject>
+                <imageobject role="html">
+                  <imagedata fileref="images/Maximize.gif" width="60%"/>
+                </imageobject>
+
+                <imageobject role="fo">
+                  <imagedata fileref="images/Maximize.gif" width="40%"/>
+                </imageobject>
+              </inlinemediaobject></entry>
+
+            <entry>maximiza o panel</entry>
+          </row>
+
+          <row>
+            <entry><inlinemediaobject>
+                <imageobject role="html">
+                  <imagedata fileref="images/restore.gif" width="60%"/>
+                </imageobject>
+
+                <imageobject role="fo">
+                  <imagedata fileref="images/restore.gif" width="40%"/>
+                </imageobject>
+              </inlinemediaobject></entry>
+
+            <entry>restaura o deseño antes de maximizar</entry>
+          </row>
+
+          <row>
+            <entry><inlinemediaobject>
+                <imageobject role="html">
+                  <imagedata fileref="images/undock.gif" width="60%"/>
+                </imageobject>
+
+                <imageobject role="fo">
+                  <imagedata fileref="images/undock.gif" width="40%"/>
+                </imageobject>
+              </inlinemediaobject></entry>
+
+            <entry>desancora o panel da xanela principal</entry>
+          </row>
+
+          <row>
+            <entry><inlinemediaobject>
+                <imageobject role="html">
+                  <imagedata fileref="images/dock.gif" width="60%"/>
+                </imageobject>
+
+                <imageobject role="fo">
+                  <imagedata fileref="images/dock.gif" width="40%"/>
+                </imageobject>
+              </inlinemediaobject></entry>
+
+            <entry>coloca de novo o panel dentro da xanela principal.</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+
+    <para>Pode sobrepor paneis se o desexa. Cando fai isto, os paneis amosarán unha lapela na parte superior. Os separadores entre paneis pódense arrastrar para redimensionalos. Se se esqueceu dos cambios que fixo á interface de usuario, pode empregar <guimenuitem><indexterm class="singular">
+        <primary>Xanelas de OmegaT</primary> <seealso>Xanelas e paneis en OmegaT</seealso>
+      </indexterm> <indexterm class="singular">
+        <primary>Xanelas de OmegaT</primary> <secondary>Restaurar á configuración predeterminada</secondary>
+      </indexterm>Opcións &gt; Restaurar a xanela principal</guimenuitem> en calquera momento para volver ao deseño orixinal.</para>
+
+    <para>Os contadores na parte inferior dereita teñen conta do progreso da tradución (os números da columna da esquerda se refiren á cifra superior):</para>
+
+    <table>
+      <title>Xanela principal - contadores<indexterm class="singular">
+          <primary>Xanelas e paneis en OmegaT</primary> <secondary>Contadores</secondary>
+        </indexterm></title>
+
+      <tgroup cols="2">
+        <colspec align="left" colnum="1"/>
+
+        <tbody>
+          <row>
+            <entry>27/27</entry>
+
+            <entry>número de segmentos - traducidos e total do ficheiro actual</entry>
+          </row>
+
+          <row>
+            <entry>9319/16338</entry>
+
+            <entry>número de segmentos únicos - traducidos e total do proxecto</entry>
+          </row>
+
+          <row>
+            <entry>31175</entry>
+
+            <entry>número total de segmentos (incluíndo repetidos) no proxecto</entry>
+          </row>
+
+          <row>
+            <entry>103/114</entry>
+
+            <entry>número de caracteres no segmento de orixe e destino</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+
+    <para>Desde un punto de vista práctico, o par de números máis importante é o segundo: indícalle canto fixo ata o momento en relación co total ou segundo número. O proxecto do exemplo está acabado, xa que todos os segmentos únicos están traducidos.</para>
+
+    <section id="editor.pane">
+      <title>Panel de edición<indexterm class="singular">
+          <primary>Xanelas e paneis de OmegaT</primary> <secondary>Panel de edición</secondary>
+        </indexterm></title>
+
+      <para>Aquí é onde escribe e edita a súa tradución. O panel de edición amosa o texto do documento parcialmente traducido: amósase a tradución do texto xa traducido mentres que o texto sen traducir se amosa no idioma orixinal O texto amosado se divide en segmentos e pode desprazarse polo documento e facer dobre clic en calquera segmento para abrilo e editalo. No caso anterior, os segmentos xa traducidos se amosan en amarelo.</para>
+
+      <para>Un dos segmentos anteriores e o segmento activo. É o segmento que se amosa en dúas partes. A parte superior está na lingua de orixe, en negra e cun fondo de cor verde, a parte inferior é o campo de edición, acabada cun marcador: <indexterm class="singular">
+          <primary>Marcador de segmentos</primary>
+        </indexterm>o marcador é <literal>&lt;segment nnnn&gt;</literal> onde nnnn é o número de segmento do proxecto. Empregue a parte superior como referencia e sobrescriba ou modifique o contido do campo de edición coa tradución.</para>
+
+      <para>Dependendo do comportamento de edición preferido, o campo de edición do segmento sen traducir pode estar baleiro, conter o texto de orixe ou conter a tradución da cadea máis similar á que está sendo traducida. Cando se move a outro segmento, a tradución se validará e almacenará. Se quere que a tradución sexa igual ao segmento de orixe, simplemente deixe o campo de edición baleiro retirando todo o texto (seleccione todo con <keycap>Ctrl+A</keycap> e elimine con <keycap>Supr</keycap>. OmegaT pode gardar traducións idénticas á cadea orixinal. Isto é útil para documentos que conteñen marcas comerciais, nomes ou outros nomes propios, ou partes nun terceiro idioma que non se teñen que traducir. Vexa <emphasis>Edición da tradución</emphasis> para máis detalles.</para>
+
+      <para>Se fai clic dereito no panel de edición, aparecerá un menú emerxente coas funcións <emphasis role="bold">Cortar, Copiar, Pegar</emphasis> (é dicir, as mesmas funcións que <keycombo> <keycap>Ctrl</keycap> <keycap>X</keycap> </keycombo>, <keycombo> <keycap>Ctrl</keycap> <keycap>C</keycap> </keycombo> e <keycombo> <keycap>Ctrl</keycap> <keycap>V</keycap> </keycombo>) e <emphasis role="bold">Ir a segmento</emphasis>.</para>
+    </section>
+
+    <section id="match.viewer">
+      <title>Panel de coincidencias parciais<indexterm class="singular">
+          <primary>Xanelas e paneis de OmegaT</primary> <secondary>Panel de coincidencias parciais</secondary>
+        </indexterm></title>
+
+      <para><figure id="matches.pane">
+          <title><indexterm class="singular">
+              <primary>Coincidencias</primary> <secondary>Panel de coincidencias - imaxe</secondary>
+            </indexterm><indexterm class="singular">
+              <primary>Xanelas e paneis de OmegaT</primary> <secondary>Panel de coincidencias - cifra</secondary>
+            </indexterm>Panel de coincidencias</title>
+
+          <mediaobject>
+            <imageobject role="html">
+              <imagedata fileref="images/MatchesPane_25.png"/>
+            </imageobject>
+
+            <imageobject role="fo">
+              <imagedata fileref="images/MatchesPane_25.png" width="80%"/>
+            </imageobject>
+          </mediaobject>
+        </figure></para>
+
+      <para>O visor de coincidencias amosa os segmentos máis similares das memorias de tradución, tanto da memoria de tradución interna do proxecto creada a tempo real mentres traduce o seu proxecto e de memorias de tradución secundarias que importase de outros traballos, ou que recibiu do seu cliente ou axencia de tradución.</para>
+
+      <para>Cando se move ao seguinte segmento, a primeira coincidencia parcial (a que ten o mellor porcentaxe de coincidencia) selecciónase automaticamente. É posíbel seleccionar unha coincidencia diferente, premendo <guimenuitem>Ctrl+2, 3, 4 ou 5</guimenuitem>.<indexterm>
+          <primary>Atallos de teclado</primary> <secondary>Seleccionar a coincidencia - Ctrl+N</secondary>
+        </indexterm> Por suposto, ao premer <keycombo><keycap>Ctrl</keycap> <keycap>5</keycap> </keycombo> no fará nada, se no hai ningunha coincidencia #5. Para utilizar a coincidencia seleccionada na súa tradución, use <guimenuitem>Ctrl+R</guimenuitem><indexterm class="singular">
+          <primary>Atallos de teclado</primary> <secondary>Substituír texto - Ctrl+R</secondary>
+        </indexterm> para substituír o campo de destino coa coincidencia ou use <guimenuitem>Ctrl+I <indexterm class="singular">
+          <primary>Atallos de teclado</primary> <secondary>Inserir texto - Ctrl+I</secondary>
+        </indexterm></guimenuitem> para inserila na posición do cursor.</para>
+
+      <para>A porcentaxe de coincidencia é equivalente a tomar o número de palabras comúns dos segmentos e dividilos polo número de palabras no máis longo dos dous. A coincidencia parcial seleccionada se destacará en negra, as palabras que falten no segmento que está traducindo se colorearán en azul e as palabras adxacentes ás partes que faltan en verde. No exemplo anterior o segmento de orixe é <emphasis role="bold">Context menu command</emphasis>. A mellor coincidencia é do 100%, porque coinciden todas as palabras. É o mesmo caso que nas dúas seguintes coincidencias, e a coincidencia número 4 é similar, mais diferente. A liña coa porcentaxe de coincidencia tamén contén o nome da memoria de tradución <indexterm class="singular">
+          <primary>Memorias de tradución</primary> <secondary>Coincidencias</secondary>
+        </indexterm> que contén a coincidencia. Se non se amosa ningún nome de ficheiro, a fonte é a memoria de tradución interna do proxecto. Os segmentos orfos<indexterm class="singular">
+          <primary>Memorias de tradución</primary> <secondary>Segmentos orfos</secondary>
+        </indexterm> (a coincidencia número 2) describe segmentos na memoria de tradución predeterminada do proxecto que non teñen un segmento de orixe correspondente.</para>
+
+      <para>Realmente hai tres estimacións dispoñíbeis (66/66/30 no caso da coincidencia número 4 no exemplo anterior). Se definen do seguinte xeito:</para>
+
+      <itemizedlist>
+        <listitem>
+          <para>porcentaxe de coincidencia cando se emprega o engadido tokenizer</para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para>coincidencia de OmegaT predeterminada - número de palabras coincidentes (sen numerais e etiquetas) divididos polo número total de palabras</para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para>Coincidencia de OmegaT, incluíndo números e etiquetas</para>
+        </listitem>
+      </itemizedlist>
+
+      <section>
+        <title>Personalizar o panel de coincidencias parciais<indexterm class="singular">
+            <primary>Xanelas e paneis de OmegaT</primary> <secondary>Panel de coincidencias parciais</secondary> <tertiary>Personalización</tertiary>
+          </indexterm><indexterm class="singular">
+            <primary>Ficheiros de orixe</primary> <secondary>Traducir un segmento actualizado</secondary>
+          </indexterm></title>
+
+        <para>En <guimenu>Opcións &gt; TMXs externas</guimenu>, hai diferentes variábeis que lle permiten configurar o comportamento do panel de coincidencias:</para>
+
+        <figure id="matches.pane.setup">
+          <title><indexterm class="singular">
+              <primary>Coincidencias</primary> <secondary>Configuración do panel de coincidencias - imaxe</secondary>
+            </indexterm><indexterm class="singular">
+              <primary>Xanelas e paneis de OmegaT</primary> <secondary>Panel de coincidencias - imaxe</secondary>
+            </indexterm>Configuración do panel de coincidencias</title>
+
+          <mediaobject>
+            <imageobject>
+              <imagedata fileref="images/MatchesPaneSetup.png"/>
+            </imageobject>
+
+            <imageobject role="fo">
+              <imagedata fileref="images/MatchesPaneSetup.png" width="50%"/>
+            </imageobject>
+          </mediaobject>
+        </figure>
+
+        <para>A imaxe anterior amosa o modelo predeterminado de visualización das coincidencias. Os contidos poden personalizarse usando as seguintes variábeis:</para>
+
+        <table colsep="0" rowsep="0">
+          <title>Configuración do panel de coincidencias<indexterm class="singular">
+              <primary>Interface de usuario</primary> <secondary>Configuración do panel de coincidencias</secondary>
+            </indexterm></title>
+
+          <tgroup cols="2" colsep="1" rowsep="1" title="Match pane setup">
+            <colspec align="left" colnum="1"/>
+
+            <colspec align="left" colnum="2"/>
+
+            <tbody>
+              <row>
+                <entry><literal>${id}</literal></entry>
+
+                <entry>Número da coincidencia do 1 ao 5</entry>
+              </row>
+
+              <row>
+                <entry><literal>${sourceText}</literal></entry>
+
+                <entry>Texto de orixe da coincidencia</entry>
+              </row>
+
+              <row>
+                <entry><literal>${targetText}</literal></entry>
+
+                <entry>Texto de destino da coincidencia</entry>
+              </row>
+
+              <row>
+                <entry><literal>${diff}</literal></entry>
+
+                <entry>Cadea que amosa as diferencias entre a orixe e a coincidencia. <emphasis>Consello:</emphasis> empregue esta función se o texto que está traducindo se actualizou.</entry>
+              </row>
+
+              <row>
+                <entry><literal>${score}</literal></entry>
+
+                <entry>Porcentaxe co tokenizer</entry>
+              </row>
+
+              <row>
+                <entry><literal>${noStemScore}</literal></entry>
+
+                <entry>Porcentaxe sen números e etiquetas</entry>
+              </row>
+
+              <row>
+                <entry><literal>${adjustedScore}</literal></entry>
+
+                <entry>Porcentaxe axustado</entry>
+              </row>
+
+              <row>
+                <entry><literal>${fileNameOnly}</literal></entry>
+
+                <entry>Nome da TMX</entry>
+              </row>
+
+              <row>
+                <entry><literal>${filePath}</literal></entry>
+
+                <entry>Ruta completa da TMX</entry>
+              </row>
+
+              <row>
+                <entry><literal>${fileShortPath}</literal></entry>
+
+                <entry>Ruta da TMX comezando dende a raíz de /tm</entry>
+              </row>
+
+              <row>
+                <entry><literal>${creationID}</literal></entry>
+
+                <entry>Autor da coincidencia</entry>
+              </row>
+
+              <row>
+                <entry><literal>${creationDate}</literal></entry>
+
+                <entry>Data da coincidencia</entry>
+              </row>
+
+              <row>
+                <entry><literal>${fuzzyFlag}</literal></entry>
+
+                <entry>Indica que a coincidencia é parcial (actualmente só para traducións de ficheiros PO coa marca #fuzzy)</entry>
+              </row>
+            </tbody>
+          </tgroup>
+        </table>
+      </section>
+    </section>
+
+    <section>
+      <title>Panel do glosario<indexterm class="singular">
+          <primary>Xanelas e paneis de OmegaT</primary> <secondary>Panel do glosario</secondary>
+        </indexterm></title>
+
+      <para>O panel do glosario permítelle acceder á súa propia colección de expresións e terminoloxía especializada que puido elaborar nos seus ficheiros de glosario. Amosa a tradución de termos atopados no segmento activo. O segmento de orixe no exemplo anterior era «<emphasis>Orde de menú de contexto</emphasis>», coma no exemplo anterior de coincidencias parciais, e os termos amosados se atoparon nos glosarios dispoñíbeis na colección terminolóxica de Microsoft e o glosario do grupo de usuarios de Linux de Eslovenia.</para>
+
+      <figure id="multiword.pane">
+        <title><indexterm class="singular">
+            <primary>Glosarios</primary>
+          </indexterm>entrada con múltiples palabras no glosario</title>
+
+        <mediaobject>
+          <imageobject role="html">
+            <imagedata fileref="images/GlossaryPane_25.png"/>
+          </imageobject>
+
+          <imageobject role="fo">
+            <imagedata fileref="images/GlossaryPane_25.png" width="80%"/>
+          </imageobject>
+        </mediaobject>
+      </figure>
+
+      <para>Se ten a opción TransTips activada (<guimenuitem>Opcións &gt; TransTips</guimenuitem>), pode facer clic dereito na palabra destacada no segmento de orixe para abrir un menú emerxente coa tradución suxerida, tal e como se ofrece no seu glosario. Seleccionando unha delas inserirá a opción na posición actual do cursor no segmento de destino. Tamén pode seleccionar a súa alternativa preferida no panel do glosario e inserila no destino facendo clic dereito nela.</para>
+    </section>
+
+    <section id="dictionaries">
+      <title>Panel do dicionario<indexterm class="singular">
+          <primary>Xanelas e paneis de OmegaT</primary> <secondary>Panel do dicionario</secondary>
+        </indexterm></title>
+
+      <para>Os dicionarios son os equivalentes electrónicos dos dicionarios impresos como o Merriam Webster, Duden, Larousse, etc. que pode ter no seu escritorio. Vexa máis información no capítulo <link linkend="chapter.dictionaries">Dicionarios</link></para>
+    </section>
+
+    <section id="Multiple.Translations">
+      <title>Panel de múltiples traducións<indexterm class="singular">
+          <primary>Xanelas e paneis de OmegaT</primary> <secondary>Panel de múltiples traducións</secondary>
+        </indexterm></title>
+
+      <para>Un segmento de orixe dado poida que necesite varias traducións diferentes, dependendo do contexto. Se a tradución actual do segmento non coincide, o usuario pode seleccionar <guisubmenu>Editar &gt; Crear tradución alternativa</guisubmenu>. O texto de destino inserido posteriormente se tratará coma unha tradución alternativa do segmento de orixe. Pode definir unha das alternativas (por exemplo, a máis probábel entre elas) coma predeterminada seleccionando <guisubmenu>Editar &gt; Usar coma tradución predeterminada</guisubmenu></para>
+    </section>
+
+    <section>
+      <title>Panel de notas</title>
+
+      <para>O tradutor pode engadir notas ao segmento aberto, por exemplo para volver máis adiante ao segmento e refacer a tradución, comprobar que as traducións alternativas son correctas ou para preguntar a compañeiros pola súa opinión. Pode navegar a través das notas empregando <guisubmenu>Ir a &gt; Seguinte nota</guisubmenu> e <guisubmenu>Ir a &gt; Nota anterior</guisubmenu>-</para>
+    </section>
+
+    <section>
+      <title>Panel de comentarios</title>
+
+      <para>Algúns dos formatos de ficheiros especializados en tradución, como por exemplo, PO, permiten a inclusión de comentarios. Deste xeito o tradutor pode obter o contexto do segmento que ten que traducir. No exemplo anterior, o autor do ficheiro PO incluíu un aviso para o tradutor para que comprobase a lonxitude da tradución:</para>
+
+      <figure id="comments.pane">
+        <title>Panel de comentarios<indexterm class="singular">
+            <primary>Comentarios</primary> <secondary>Panel de comentarios</secondary>
+          </indexterm></title>
+
+        <mediaobject>
+          <imageobject role="html">
+            <imagedata fileref="images/Comments_25.png"/>
+          </imageobject>
+
+          <imageobject role="fo">
+            <imagedata fileref="images/Comments_25.png" width="80%"/>
+          </imageobject>
+        </mediaobject>
+      </figure>
+    </section>
+
+    <section id="Google.Translate">
+      <title>Panel de tradución automática<indexterm class="singular">
+          <primary>Xanelas e paneis de OmegaT</primary> <secondary>Panel de tradución automática</secondary>
+        </indexterm></title>
+
+      <para>O panel de tradución automática, cando se abre, contén as suxestións realizadas polas ferramentas de tradución automática para o segmento activo. Prema <keysym>Ctrl+M</keysym> para substituír a tradución do segmento activo coa tradución suxerida. Atopará máis información no capítulo <link linkend="chapter.machine.translate">Tradución automática</link></para>
+    </section>
+
+    <section>
+      <title id="main.menu">Menú principal</title>
+
+      <para>O menú principal garántelle o acceso a todas as funcións de <application>OmegaT</application>. Vexa o apéndice <emphasis>Menú principal</emphasis> para una descrición completa de todos os menús e os seus elementos. As funcións utilizadas máis frecuentemente son accesíbeis con atallos de teclado, así que unha vez se acostume a eles, xa no vai haber ningunha necesidade de navegar polos menús mentres traduce. Vexa o capítulo <link linkend="chapter.menu">Menú e atallos de teclado</link> para máis detalles.</para>
+    </section>
+
+    <section id="status.bar">
+      <title>Barra de estado</title>
+
+      <para>A barra de estado amosa mensaxes relacionadas co fluxo de traballo na parte inferior da xanela principal. Esta barra dálle ao usuario información sobre operacións específicas que están en progreso. Tamén amosa o número de coincidencias parciais e do glosario para o segmento activo.</para>
+    </section>
+  </section>
+
+  <section id="other.windows">
+    <title>Outras xanelas</title>
+
+    <section id="section.project.files">
+      <title>Ficheiros do proxecto<indexterm class="singular">
+          <primary>Xanelas e paneis de OmegaT</primary> <secondary>Ficheiros do proxecto</secondary>
+        </indexterm></title>
+
+      <para>A xanela Ficheiros do proxecto, lista os ficheiros do proxecto e amosa información del mesmo. Se amosa automaticamente cando OmegaT carga un proxecto. Use <guimenuitem>Ctrl+L<indexterm class="singular">
+          <primary>Atallos de teclado</primary> <secondary>Lista de ficheiros do proxecto - Ctrl+L</secondary>
+        </indexterm></guimenuitem> para abrir e <keycap>Esc</keycap> para pechala. A xanela Ficheiros do proxecto amosa a seguinte información:</para>
+
+      <itemizedlist>
+        <listitem>
+          <para>a lista de todos os ficheiros traducíbeis no proxecto. Estes son os ficheiros presentes no cartafol de ficheiros de orixe nun formato que OmegaT poida recoñecer. Ao facer clic nalgún ficheiro, este abrirase para traducilo.</para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para>o ficheiro dispoñíbel actualmente no panel de edición está resaltado cun fondo azul. Se preme <keycap>Enter</keycap> moverá o panel de edición á parte superior do ficheiro seleccionado</para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para>As entradas dos ficheiros inclúen o seu nome, tipos de filtro de ficheiro, a codificación e o número de segmentos que contén cada ficheiro</para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para>o número total de segmentos, o número de segmentos únicos en todo o proxecto e o número de segmentos únicos xa traducidos se amosan na parte inferior</para>
+        </listitem>
+      </itemizedlist>
+
+      <para>O conxunto de segmentos <emphasis role="bold">únicos</emphasis> se calcula tomando todos os segmentos e retirando os duplicados. (a definición de «único» diferencia maiúsculas e minúsculas: «Run» e «run» son considerados distintos)</para>
+
+      <para>A diferenza entre «número de segmentos» e «número de segmentos únicos» ofrece unha idea aproximada do número de repeticións do texto. Porén, teña en conta que os números non indican se as repeticións son moi relevantes: podería significar que frases relativamente longas se repiten un número de veces (neste caso é vostede un afortunado) ou podería describir unha táboa de palabras chave (polo que non será afortunado). O ficheiro <filename>project_stats.txt</filename> situado no cartafol omegat do proxecto contén información dos segmentos máis detallada, dividida por ficheiro.</para>
+
+      <para>A modificación das regras de segmentación pode afectar ao número de segmentos e segmentos únicos. Isto, de todas formas, debería evitarse unha vez que xa comezou a traducir o proxecto. Vexa o capítulo <emphasis>Regras de segmentación</emphasis> para máis información.</para>
+
+      <para><emphasis role="bold"><indexterm class="singular">
+          <primary>Ficheiros de orixe</primary> <secondary>Engadir ficheiros ao proxecto</secondary>
+        </indexterm>Engadir ficheiros ao proxecto: </emphasis> pode engadir ficheiros de orixe ao proxecto facendo clic no botón de «<guimenuitem>Importar ficheiros de orixe...</guimenuitem>» Isto copia os ficheiros seleccionados ao cartafol <filename>/source</filename> e recarga o proxecto para tomar en conta os novos ficheiros. Tamén pode agregar ficheiros de orixe de páxinas de Internet escritas en MediaWiki, facendo clic no botón «<guimenuitem>Importar desde MediaWiki</guimenuitem>» e proporcionando a URL correspondente.</para>
+    </section>
+
+    <section id="section.search.window">
+      <title>Xanela de buscas<indexterm class="singular">
+          <primary>Xanelas e paneis de OmegaT</primary> <secondary>Panel de busca</secondary>
+        </indexterm></title>
+
+      <para>Pode empregar a xanela de buscas para atopar segmentos específicos dun proxecto. Tamén pode abrir varias xanelas de busca ao mesmo tempo. Para abrir unha xanela de busca nova, use <keycombo> <keycap>Ctrl</keycap> <keycap>F</keycap> </keycombo> na xanela principal. A xanela de busca componse dun campo de texto para a cadea a buscar ou palabras chave, indicadores e botóns de opción para a creación da busca e unha área de visualización que contén os resultados da busca. Vexa o capítulo<emphasis> <link linkend="chapter.user.interface">Buscas</link> </emphasis>para máis información sobre a xanela de busca.</para>
+    </section>
+
+    <section id="section.tag.validation">
+      <title>Validación de etiquetas<indexterm class="singular">
+          <primary>Validación de etiquetas</primary> <seealso>Atallos de teclado, etiquetas</seealso>
+        </indexterm><indexterm class="singular">
+          <primary>Xanelas e paneis de OmegaT</primary> <secondary>Validación de etiquetas</secondary> <seealso>Etiquetas</seealso>
+        </indexterm></title>
+
+      <para>A xanela de validación de etiquetas detecta e lista calquera error e inconsistencias nas etiquetas da tradución. Abra a xanela con <guimenuitem>Ctrl+T. </guimenuitem>A xanela dispón dunha táboa de 3 columnas cunha ligazón ao segmento de orixe e ao contido traducido:</para>
+
+      <para><figure id="tag.validator.window">
+          <title><indexterm class="singular">
+              <primary>Validación de etiquetas</primary> <secondary>Xanela - imaxe</secondary> <seealso>Etiquetas</seealso>
+            </indexterm>Xanela de validación de etiquetas</title>
+
+          <mediaobject>
+            <imageobject role="html">
+              <imagedata fileref="images/TagValidator.png"/>
+            </imageobject>
+
+            <imageobject role="fo">
+              <imagedata fileref="images/TagValidator.png" width="60%"/>
+            </imageobject>
+          </mediaobject>
+        </figure></para>
+
+      <para>As etiquetas se destacan en negra e azul para unha comparación fácil entre os contidos do orixinal e os traducidos. Faga clic na ligazón para saltar ao segmento no panel de edición. Corrixa o erro se é necesario e prema <guimenuitem>Ctrl+T</guimenuitem> para volver á xanela de validación de etiquetas para corrixir outros erros. No primeiro e terceiro casos anteriores, as etiquetas estaban mal emparelladas, e no segundo caso falta o símbolo &lt; na primeira etiqueta.</para>
+
+      <para>Os erros de etiquetas son casos nos que as etiquetas na tradución non se corresponden na orde e número ao segmento orixinal. Algúns erros de etiquetas que aparecen na xanela de validación de etiquetas son necesarios e benignos, outros causarán problemas cando se cree o documento traducido. As etiquetas, xeralmente representan algún tipo de formato no texto orixinal. Simplificar o formatado do texto orixinal no ficheiro de orixe antes de comezar a tradución contribúe enormemente a reducir o número de etiquetas.</para>
+    </section>
+
+    <section>
+      <title>Estatísticas<indexterm class="singular">
+          <primary>Estatísticas</primary> <seealso>Menú Ferramentas</seealso>
+        </indexterm></title>
+
+      <para>A xanela de estatísticas, á que se accede a través de <emphasis role="bold">Ferramentas &gt; Estatísticas</emphasis>, amosa as estatísticas do proxecto actual de OmegaT, tanto de forma resumida como detallada para cada ficheiro a traducir. As estatísticas amosadas están dispoñíbeis nun ficheiro separado por tabuladores en <filename>project_stats.txt</filename> (subcartafol <filename>omegat</filename>), preparado para cargarse nun programa de folla de cálculo para a conveniencia de usuario. Pode usar <guimenuitem>Ctrl+A <indexterm class="singular">
+          <primary>Atallos de teclado</primary> <secondary>Seleccionar todo - Ctrl+A</secondary>
+        </indexterm></guimenuitem><guimenuitem>, Ctrl+C <indexterm class="singular">
+          <primary>Atallos de teclado</primary> <secondary>Copiar texto - Ctrl+C</secondary>
+        </indexterm></guimenuitem> e <guimenuitem>Ctrl+V <indexterm class="singular">
+          <primary>Atallos de teclado</primary> <secondary>Pegar texto - Ctrl+V</secondary>
+        </indexterm></guimenuitem> para copiar e pegar os contidos.<figure id="ProjectStatistic.Window">
+          <title>estatísticas do proxecto</title>
+
+          <mediaobject>
+            <imageobject role="html">
+              <imagedata fileref="images/StatisticsWindow_25.png"/>
+            </imageobject>
+
+            <imageobject role="fo">
+              <imagedata fileref="images/StatisticsWindow_25.png" width="60%"/>
+            </imageobject>
+          </mediaobject>
+        </figure></para>
+    </section>
+
+    <section>
+      <title>Estatísticas das coincidencias<indexterm class="singular">
+          <primary>Estatísticas de coincidencias</primary> <seealso>Menú Ferramentas</seealso>
+        </indexterm></title>
+
+      <para>Pódese acceder ás estatísticas das coincidencias a través de <guimenuitem>Ferramentas &gt; Estatísticas das coincidencias.</guimenuitem> A avaliación é intensiva e pode levar tempo, así que se amosará unha barra de progreso durante o cálculo. No relacionado coas categorías, emprégase o estándar industrial de facto para clasificar coincidencias nos seguintes grupos: repeticións, coincidencia exacta,  95%-100%, 85%-94%, 75%-84%, 50%-74% e Sen coincidencias. Esta información se calcula tanto polos segmentos como polas palabras e caracteres (con e sen espazos incluídos). Teña en conta que podería haber pequenas diferenzas entre as contas de OmegaT e os números provistos por outras ferramentas de tradución asistida.<figure>
+          <title>Estatísticas das coincidencias</title>
+
+          <mediaobject>
+            <imageobject role="html">
+              <imagedata fileref="images/MatchStatistics.png"/>
+            </imageobject>
+
+            <imageobject role="fo">
+              <imagedata fileref="images/MatchStatistics.png" width="80%"/>
+            </imageobject>
+          </mediaobject>
+        </figure></para>
+
+      <para>Teña en conta que estes totais son boas (ou tan boas coma poden selo) aproximacións do traballo do proxecto e polo tanto lle serve como unha base para o seu cálculo de custos e prezos.</para>
+
+      <para>Na última columna non se teñen en conta os espazos entre os segmentos. As repeticións son segmentos idénticos presentes varias veces no texto. O primeiro segmentos e os seus contidos se clasificarán como «sen coincidencias», e o resto deles como unha repetición do primeiro. Se a tradución de varios segmentos de orixe idénticos xa existe na memoria de tradución do proxecto, estes segmentos, xunto con outros segmentos únicos xa traducidos, se clasificarán como «Coincidencia exacta». O número de segmentos únicos, se é necesario, se amosa na xanela de estatísticas estándar, sen importar se se traduciron ou non.</para>
+
+      <para>O resto das categorías (50-100%) son segmentos sen traducir cunha coincidencia parcial. As coincidencias parciais veñen do cartafol <filename>/tm</filename> tamén, e non só da memoria de tradución interna en <filename>/omegat</filename>, coma no caso das repeticións e coincidencias exactas. A única diferencia coas coincidencias da memoria de tradución <filename>project_save</filename> é que as memorias externas non poden producir coincidencias exactas, só 100%. Se alguén non quere empregar as memorias externas para a conta, debe baleirar o cartafol /tm ou cambiar a configuración do proxecto (temporalmente) para que o valor dos puntos de /tm estean nun lugar diferente.</para>
+
+      <para>As estatísticas de coincidencias se dividen por tabuladores e pode empregar <guimenuitem>Ctrl+A <indexterm class="singular">
+          <primary>Atallos de teclado</primary> <secondary>Seleccionar todo - Ctrl+A</secondary>
+        </indexterm></guimenuitem><guimenuitem>, Ctrl+C <indexterm class="singular">
+          <primary>Atallos de teclado</primary> <secondary>copiar texto - Ctrl+C</secondary>
+        </indexterm></guimenuitem> e <guimenuitem>Ctrl+V <indexterm class="singular">
+          <primary>Atallos de teclado</primary> <secondary>Pegar texto - Ctrl+V</secondary>
+        </indexterm></guimenuitem> para copialas e pegalas, por exemplo, nunha folla de cálculo ou na súa aplicación de contabilidade. Unha vez feita a conta, os datos tamén estarán dispoñíbeis en <filename>omegat/project_stats_match.txt</filename>. Teña en conta que o ficheiro ten marcas de tempo, xa que o cálculo (contrario ás estatísticas estándar) non é instantáneo e polo tanto pode quedar obsoleto rapidamente.</para>
+    </section>
+
+    <section>
+      <title>Navegador de axuda<indexterm class="singular">
+          <primary>Menú Axuda</primary> <secondary>Navegador de axuda</secondary>
+        </indexterm></title>
+
+      <para>O navegador de axuda (que amosa este manual) pode abrirse premendo <keycap><indexterm class="singular">
+          <primary>Atallos de teclado</primary> <secondary>Axuda - F1</secondary>
+        </indexterm>F1</keycap> ou navegando a <guimenuitem><indexterm class="singular">
+          <primary>Menú Axuda</primary> <secondary>Manual de usuario...</secondary>
+        </indexterm>Axuda &gt; Manual de usuario...</guimenuitem> no menú principal. Na xanela, se amosarán o manual e dous botóns: Atrás e Contidos. O manual de usuario é un documento HTML con ligazóns aos diferentes capítulos. Ao facer clic nunha ligazón como o faría nun navegador web trae a páxina desexada ao primeiro plano.</para>
+
+      <para>O manual de usuario se atopa no subcartafol docs baixo o cartafol de instalación de OmegaT, así que pode ver, por exemplo, a documentación en galego abrindo no navegador o ficheiro <filename>docs/gl/index.html</filename>. Abrir o manual de usuario deste xeito tamén lle permite seguir ligazóns externas, xa que o navegador de axuda incluído non acepta ligazóns de Internet externas.</para>
+    </section>
+  </section>
+</chapter>

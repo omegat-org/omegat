@@ -1,0 +1,291 @@
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <title>Appendix&nbsp;C.&nbsp;Proxectos en equipo de OmegaT</title>
+      <link rel="stylesheet" type="text/css" href="OmegaT.css">
+      <meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
+      <link rel="home" href="index.html" title="OmegaT - Guía de usuario">
+      <link rel="up" href="index.html" title="OmegaT - Guía de usuario">
+      <link rel="prev" href="appendix.keyboard.html" title="Appendix&nbsp;B.&nbsp;Atallos de teclado no editor">
+      <link rel="next" href="appendix.TokenizerPlugin.inOmegaT.html" title="Appendix&nbsp;D.&nbsp;Engadido de Tokenizer">
+   </head>
+   <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+      <div class="navheader">
+         <table width="100%" summary="Navigation header">
+            <tr>
+               <th colspan="3" align="center">Appendix&nbsp;C.&nbsp;Proxectos en equipo de OmegaT</th>
+            </tr>
+            <tr>
+               <td width="20%" align="left"><a accesskey="p" href="appendix.keyboard.html">Prev</a>&nbsp;
+               </td>
+               <th width="60%" align="center">&nbsp;</th>
+               <td width="20%" align="right">&nbsp;<a accesskey="n" href="appendix.TokenizerPlugin.inOmegaT.html">Next</a></td>
+            </tr>
+         </table>
+         <hr>
+      </div>
+      <div class="appendix">
+         <div class="titlepage">
+            <div>
+               <div>
+                  <h1 class="title"><a name="appendix.TeamProjects"></a>Appendix&nbsp;C.&nbsp;Proxectos en equipo de OmegaT<a class="indexterm" name="d0e10413"></a></h1>
+               </div>
+            </div>
+         </div>
+         <div class="toc">
+            <dl class="toc">
+               <dt><span class="section"><a href="appendix.TeamProjects.html#d0e10420">1. Control da versión - introdución</a></span></dt>
+               <dt><span class="section"><a href="appendix.TeamProjects.html#d0e10491">2. Compartir un proxecto mediante SVN</a></span></dt>
+               <dd>
+                  <dl>
+                     <dt><span class="section"><a href="appendix.TeamProjects.html#d0e10512">2.1. Crear un repositorio</a></span></dt>
+                     <dt><span class="section"><a href="appendix.TeamProjects.html#d0e10572">2.2. Importar o proxecto a un repositorio SVN (Windows)</a></span></dt>
+                  </dl>
+               </dd>
+               <dt><span class="section"><a href="appendix.TeamProjects.html#d0e10711">3. Empregar o proxecto en equipo en OmegaT</a></span></dt>
+            </dl>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e10420"></a>1.&nbsp;Control da versión - introdución
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>A tradución colaborativa ofrecida por OmegaT baséase na funcionalidade de control da versión e revisión, amplamente usada
+               pola comunidade do software para manter un control dos cambios que se fan ao código dun programa e permitir unha colaboración
+               sen trabas dentro do equipo de desenvolvemento.  OmegaT é compatíbel con dous dos sistemas de control da versión (VCS para
+               abreviar) máis populares:  <a class="ulink" href="http://subversion.apache.org" target="_top">Apache Subversion</a> (a miúdo abreviado como SVN, polo nome da orde svn) e <a class="ulink" href="http://git-scm.com/" target="_top">Git</a>.  As vantaxes dun sistema de control de versións para un equipo de tradutores pode resumirse do seguinte xeito:
+            </p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>Varios membros do equipo poden traballar no proxecto de tradución simultaneamente sen interferir cos demais</p>
+                  </li>
+                  <li class="listitem">
+                     <p>Poden compartir material común, como unha memoria de tradución do proxecto e o glosario</p>
+                  </li>
+                  <li class="listitem">
+                     <p>Por defecto, cada tres minutos ponse á disposición do resto do equipo unha versión actualizada dos datos compartidos </p>
+                  </li>
+                  <li class="listitem">
+                     <p>O sistema mantén a versión nos datos compartidos</p>
+                  </li>
+                  <li class="listitem">
+                     <p>Os conflitos (por exemplo, traducións alternativas para o mesmo segmento ou entrada do glosario) poden controlarse, resolverse
+                        e fusionarse
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <p>Os seguintes termos, que se empregarán no seguinte texto, merecen unha pequena explicación:</p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p><span class="bold"><strong>Servidor VCS - </strong></span> o servidor SVN ou Git é o ambiente no que se mantén o material común na rede. O servidor pode existir na rede local, mais
+                        na maioría dos casos estará dispoñíbel en internet, é dicir, mediante un enderezo URL. Un membro do equipo, o administrador
+                        do proxecto, necesita estar familiarizado coa xestión de servidores, é dicir, o traballo de preparar o ambiente, importar
+                        o proxecto de OmegaT, asignar os dereitos de acceso aos membros do equipo, resolver conflitos, etc.
+                     </p>
+                  </li>
+                  <li class="listitem">
+                     <p><span class="bold"><strong>Cliente VCS: </strong></span>Para a conexión co servidor é necesario que os «xestores de proxectos» que participen no proxecto de OmegaT teñan instalado
+                        un cliente SVN ou Git no seu computador. Uns clientes moi populares para o sistema operativo Windows son <a class="ulink" href="http://tortoisesvn.net/" target="_top">TortoiseSVN</a> e <a class="ulink" href="http://code.google.com/p/tortoisegit/" target="_top">TortoiseGit</a>. Outros sistemas operativos (Linux, OS X) ofrecen paquetes similares.
+                     </p>
+                  </li>
+                  <li class="listitem">
+                     <p><span class="bold"><strong>Repositorio: </strong></span> lugar no que se garda e mantén o material compartido, tanto nunha rede de acceso local coma na Internet. Os membros do proxecto
+                        conéctanse a el mediante o cliente VCS.
+                     </p>
+                  </li>
+                  <li class="listitem">
+                     <p><span class="bold"><strong>checkout:</strong></span> operación que crea unha copia operativa do repositorio no seu computador. O servidor mantén a información dos checkouts,
+                        de modo que as remisións posteriores (vexa máis adiante) se poidan realizar de forma ordenada.
+                     </p>
+                  </li>
+                  <li class="listitem">
+                     <p><span class="bold"><strong>remisión:</strong></span> unha vez que a versión local do material do servidor está preparada, pode remitirse ao repositorio e facer que estea dispoñíbel
+                        para o resto do equipo. O servidor asegúrase que calquera cambio conflitivo, debido a que dous membros traballan cos mesmos
+                        contidos, se resolvan.
+                     </p>
+                  </li>
+                  <li class="listitem">
+                     <p><span class="bold"><strong>administrador: </strong></span> persoa responsábel da creación e mantemento do repositorio, é dicir, de ter en conta as responsabilidades do servidor da
+                        tarefa. Para evitar calquera problema, só debería ter estes dereitos unha persoa, polo menos en principio.
+                     </p>
+                  </li>
+                  <li class="listitem">
+                     <p><span class="bold"><strong>usuario</strong></span>: membro do equipo que colabora nun proxecto común.
+                     </p>
+                  </li>
+               </ul>
+            </div>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e10491"></a>2.&nbsp;Compartir un proxecto mediante SVN<a class="indexterm" name="d0e10494"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <p>Hai dúas posibilidades para executar un servidor SVN: pode instalar SVN no seu propio servidor ou ben pode empregar un servizo
+               de aloxamento web. Se emprega un servizo externo debe ter coidado coas posíbeis implicacións en termos de confidencialidade,
+               pois está cargando un documento orixinal nun servidor fóra do seu control directo. Se quere evitar isto, pode preparar un
+               servidor SVN privado, por exemplo se xa ten un servidor Apache que inclúa o software en cuestión (por exemplo VisualSVN).
+            </p>
+            <p>Unha ver que estea dispoñíbel o servidor SVN, os xestores de proxectos deben instalar no seu computador un cliente SVN, para
+               así poder xestionar os contidos dos proxectos dende el. Para Windows, recomendámoslle <a class="ulink" href="http://tortoisesvn.net/" target="_top">TortoiseSVN</a>. Para Mac pode descargar o cliente, por exemplo, desde <a class="ulink" href="https://sourceforge.net/projects/macsvn/" target="_top">SourceForge </a>, para Linux, vexa <a class="ulink" href="www.yolinux.com/TUTORIALS/Subversion.html" target="_top">Scripts e ordes de Subversion</a>.
+            </p>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="d0e10512"></a>2.1.&nbsp;Crear un repositorio<a class="indexterm" name="d0e10515"></a></h3>
+                     </div>
+                  </div>
+               </div>
+               <p>O proceso aquí presentado está aloxado nun servidor SVN gratuíto (limitado a dous usuarios) ofrecido po <a class="ulink" href="http://projectlocker.com/" target="_top">ProjectLocker</a>. Teña en conta que o creador do repositorio implicitamente ten os dereitos de administrador para o repositorio creado. Inicie
+                  sesión no sitio primeiro ou, se é a súa primeira vez no sitio, rexístrese nel e anote o seu nome de usuario e contrasinal
+                  para futuros proxectos.
+               </p>
+               <div class="orderedlist">
+                  <ol class="orderedlist" type="1">
+                     <li class="listitem">
+                        <p>Cree un novo proxecto en ProjectLocker</p>
+                     </li>
+                     <li class="listitem">
+                        <p>Escriba o nome e descrición do repositorio. ( <code class="literal">OmegaT</code> e <code class="literal">OmegaT SL Localization</code> no exemplo aquí empregado)
+                        </p>
+                     </li>
+                     <li class="listitem">
+                        <p>Escolla <span class="guibutton">SVN.</span></p>
+                     </li>
+                     <li class="listitem">
+                        <p>Faga clic en <span class="guibutton">Create Project (Crear proxecto)</span></p>
+                     </li>
+                  </ol>
+               </div>
+               <p>Abra a vista de <span class="bold"><strong>Projects (Proxectos)</strong></span> da súa conta. O enderezo URL amosado baixo Project Services (Servizos do proxecto) será o empregado por SVN para conectar
+                  os clientes ao servidor SVN que acaba de estabelecer. Este tamén e o lugar para engadir membros do equipo ao proxecto e asignarlles
+                  os dereitos adecuados. Teña en conta que os membros do equipo teñen que estar rexistrados previamente, antes de que poida
+                  engadilos ao proxecto (Nota: na versión gratuíta de ProjectLocker so pode engadir dous usuarios por proxecto).
+               </p>
+               <p>Os proxectos poden xestionarse segundo as súas necesidades e estilo de desenvolvemento. Dun xeito similar ao dos proxectos
+                  de OmegaT, necesitará ter repositorios diferentes para cada par de linguas. Tamén é recomendábel manter en repositorios separados
+                  os proxectos dependendo da materia e/ou o cliente, aínda que compartan o mesmo par de linguas A alternativa é ter un só repositorio
+                  con subcartafoles: <code class="literal">Proxecto1</code>, <code class="literal">Proxecto2</code>, etc., e compartir o material mediante cartafoles comúns para a <code class="literal">tm (memoria de tradución)</code>, <code class="literal">glosario</code> e <code class="literal">dicionario</code>.
+               </p>
+               <p>Para o exemplo que amosamos aquí, decidimos empregar un proxecto de OmegaT nun só repositorio por razóns de sinxeleza.</p>
+            </div>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="d0e10572"></a>2.2.&nbsp;Importar o proxecto a un repositorio SVN (Windows)
+                        </h3>
+                     </div>
+                  </div>
+               </div>
+               <p>O repositorio está baleiro agora mesmo. Cree primeiro un cartafol de cliente baleiro no seu disco. Cree un cartafol baleiro
+                  onde gardará o seu proxecto e faga clic dereito nel. Seleccione <span class="guilabel">TortoiseSVN &gt; Checkout.</span> Aparecerá o seguinte diálogo:
+               </p>
+               <div class="mediaobject"><img src="images/Team_projects_checkout.png"></div>
+               <p>Insira o enderezo URL que lle ofreceu ProjectLocker no campo <span class="bold"><strong>URL of repository (URL do repositorio)</strong></span>. Asegúrese de que o campo <span class="bold"><strong>Checkout directory (directorio para realizar o checkout)</strong></span> é correcto, é dicir, que especifica o cartafol baleiro que creou, e prema <span class="bold"><strong>Aceptar</strong></span>. Unha vez que acabe a operación, pode comprobar o devandito cartafol: debería conter un subdirectorio .svn e aparecerá na
+                  icona unha etiqueta verde de OK, o que indica que os contidos do cartafol están actualizados:
+               </p>
+               <p>No seguinte paso, engadiremos os ficheiros de OmegaT ao directorio local. Os seguintes ficheiros son para compartir entre
+                  os membros do equipo e teñen que incluírse sexa cal sexa o caso:
+               </p>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
+                     <li class="listitem">
+                        <p>O ficheiro do proxecto omegat <code class="filename">omegat.project</code></p>
+                     </li>
+                     <li class="listitem">
+                        <p>A memoria de tradución (<code class="filename">omegat\project_save.tmx</code>)
+                        </p>
+                     </li>
+                     <li class="listitem">
+                        <p>Os contidos do cartafol de orixe</p>
+                     </li>
+                     <li class="listitem">
+                        <p>A definición de filtros específicos para o proxecto (<code class="filename">omegat\filters.xml</code>)
+                        </p>
+                     </li>
+                  </ul>
+               </div>
+               <p>O administrador pode decidir incluír os seguintes cartafoles tamén: <code class="filename">tm (memorias de tradución)</code>, <code class="filename">glossary (glosarios)</code> e <code class="filename">dictionary (dicionarios)</code>. Tamén pode pagar a pena compartir e manter co equipo os ficheiros  <code class="filename">ignored_words.txt</code> e <code class="filename">learned_words.txt</code> no cartafol<code class="filename">omegat</code>. Non engada en ningún caso os ficheiros <code class="filename">bak</code>, <code class="filename">project_stats.txt</code> e <code class="filename">project_stats_match.txt</code> no subcartafol <code class="filename">omegat</code>, xa que se enche o repositorio de material innecesario. Pode que queira aplicar o mesmo ao cartafol <code class="filename">target</code> e aos seus contidos.
+               </p>
+               <p>Despois de copiar os ficheiros necesarios no directorio creado para o checkout, decatarase de que a icona cambiou: a etiqueta
+                  verde de OK cambiou a un signo vermello de exclamación, o que indica o cambio na copia local do repositorio. Os seguintes
+                  dous pasos farán que se actualice a versión do servidor:
+               </p>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
+                     <li class="listitem">
+                        <p><span class="bold"><strong>engadir os ficheiros copiados da versión local do repositorio:</strong></span> faga clic dereito no directorio local para o checkout e seleccione <span class="guilabel">TortoiseSvn &gt; Add (engadir)</span>. No diálogo que se abre, deixe todas as opcións predeterminadas e prema <span class="guilabel">OK (Aceptar)</span> Aparecerá a ventá Add Finished! (Adición finalizada) aparecerá unha xanela similar á seguinte:
+                        </p>
+                        <div class="mediaobject"><img src="images/Team_projects_Add.png"></div>
+                        <p>Os contidos do directorio para o checkout marcaranse conforme a iso:</p>
+                        <div class="mediaobject"><img src="images/Team_projects_checkoutAddFolder.png"></div>
+                     </li>
+                     <li class="listitem">
+                        <p><span class="bold"><strong>remitir cambios locais ao servidor:</strong></span> faga clic dereito no directorio local para o checkout e seleccione <span class="guilabel">SVN Commit... (Remisión SVN)</span> Abrirase a xanela de remisión (vexa máis adiante). Comprobe que se levaron a cabo os cambios, é dicir, os cartafoles e ficheiros
+                           engadidos neste caso.
+                        </p>
+                        <div class="mediaobject"><img src="images/Team_projects_initialCommit.png"></div>
+                        <p>Insira unha mensaxe apropiada na xanela da mensaxe e prema <span class="guilabel">OK (Aceptar) </span>. Abrirase a xanela de remisión e amosará o progreso da orde de remisión. Primeiro remitirá os contidos actuais ao repositorio
+                           do servidor e despois actualizará a copia local do repositorio, é dicir, os contidos do subcartafol .svn, de modo que estea
+                           actualizado coa última versión do repositorio.
+                        </p>
+                     </li>
+                     <li class="listitem">
+                        <p><span class="bold"><strong>actualizar is ficheiros locais desde unha copia local do repositorio</strong></span>: os cambios recibidos do repositorio do servidor residen no subcartafol .svn mais non nos propios ficheiros e cartafoles.
+                           Para actualizar os ficheiros locais, faga clic dereito no cartafol do checkout e seleccione <span class="guilabel">SVN Update (Actualizar SVN)</span>. Comprobe o contido do cartafol para confirmar que a copia local do repositorio e os ficheiros e cartafoles corresponden
+                           coa última versión do servidor:
+                        </p>
+                        <div class="mediaobject"><img src="images/Team_projects_checkoutSVNupdate.png"></div>
+                     </li>
+                  </ul>
+               </div>
+            </div>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e10711"></a>3.&nbsp;Empregar o proxecto en equipo en OmegaT
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>Unha vez que estea preparado o proxecto en equipo, os membros do equipo só necesitan que <span class="application">OmegaT</span> acceda ao proxecto en equipo. Primeiro, necesita empregar a función <span class="guilabel">Proxecto &gt; Descargar proxecto en equipo</span>. Isto realizará un checkout do proxecto nun cartafol local. Gardaranse as credenciais, así que non necesita inserilas cada
+               vez. En Linux, se <span class="application">OmegaT</span> segue pedindo as credenciais, pode marcar a caixa de verificación de <span class="guilabel">Forzar gardado da contrasinal coma texto plano</span>.
+            </p>
+            <p>Para os seguintes usos, só necesita abrir o proxecto coma calquera outro proxecto de <span class="application">OmegaT</span>. OmegaT recoñecerao coma un proxecto en equipo e sincronizará todo automaticamente, coma opción predeterminada, cada tres
+               minutos.
+            </p>
+         </div>
+      </div>
+      <div class="navfooter">
+         <hr>
+         <table width="100%" summary="Navigation footer">
+            <tr>
+               <td width="40%" align="left"><a accesskey="p" href="appendix.keyboard.html">Prev</a>&nbsp;
+               </td>
+               <td width="20%" align="center">&nbsp;</td>
+               <td width="40%" align="right">&nbsp;<a accesskey="n" href="appendix.TokenizerPlugin.inOmegaT.html">Next</a></td>
+            </tr>
+            <tr>
+               <td width="40%" align="left" valign="top">Appendix&nbsp;B.&nbsp;Atallos de teclado no editor&nbsp;</td>
+               <td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
+               <td width="40%" align="right" valign="top">&nbsp;Appendix&nbsp;D.&nbsp;Engadido de Tokenizer</td>
+            </tr>
+         </table>
+      </div>
+   </body>
+</html>

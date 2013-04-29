@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<chapter id="chapter.project.properties">
+  <title>Propiedades do proxecto<indexterm class="singular">
+      <primary>Proxecto</primary> <secondary>Propiedades</secondary>
+    </indexterm></title>
+
+  <para/>
+
+  <section id="properties.dialog">
+    <title>Diálogo das propiedades</title>
+
+    <para>O diálogo <menuchoice> <shortcut> <keycombo> <keycap>Ctrl</keycap> <keycap>E</keycap> </keycombo> </shortcut> <guimenu>Proxecto</guimenu> <guimenuitem>Propiedades...</guimenuitem> </menuchoice> de emprégase para definir e modificar os cartafoles e idiomas do proxecto.</para>
+
+    <para>É posíbel modificar as propiedades do proxecto durante una sesión de tradución. Teña conta de que os cambios de configuración do proxecto poden ter consecuencias, especialmente cando xa se comezou co proxecto. Ata que teña algo de experiencia en OmegaT, o máis seguro é considerar as configuracións finais unha vez que se comezou a tradución, a menos que se decate dalgún erro grave. Vexa a sección Como evitar a perda de datos para ver modos e medios de protexer o seu traballo.</para>
+
+    <figure>
+      <title>Xanela de propiedades do proxecto</title>
+
+      <mediaobject>
+        <imageobject role="html">
+          <imagedata fileref="images/NewProject_26.png"/>
+        </imageobject>
+
+        <imageobject role="fo">
+          <imagedata fileref="images/NewProject_26.png" width="80%"/>
+        </imageobject>
+      </mediaobject>
+    </figure>
+
+    <para>Contén:</para>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis role="bold">Unha área para configurar os idiomas de orixe e destino do proxecto</emphasis></para>
+
+        <para>Pode tanto inserir os idiomas de orixe e destino a man como empregar os menús desdobrábel. Teña en conta que cambiar os idiomas pode facer que as memorias de tradución empregadas nese momento sexan inútiles xa que non coincidirá o par de linguas dos novos idiomas.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Caixa de verificación para <emphasis role="bold"><guilabel>Activar segmentación a nivel de frase</guilabel></emphasis></para>
+
+        <indexterm class="singular">
+          <primary>Proxecto</primary> <secondary>Activar segmentación a nivel de frase</secondary>
+        </indexterm>
+
+        <para>A configuración de segmentación só controla o modo no que <application>OmegaT</application> xestiona os ficheiros. O modo máis común de segmentación do texto orixe é a nivel de frase, así que esta caixa de verificación debería estar marcada.</para>
+
+        <para>Nalgúns casos marxinais a alternativa, é dicir, a segmentación por parágrafos, pode ser a opción preferida. Cambiar esta marca non modifica a segmentación das memorias de tradución xa existentes. Se decide cambiar á segmentación por parágrafos no medio dunha tradución, a memoria de tradución interna do proxecto non se cambiará (OmegaT pode actualizar memorias de tradución antigas que non empregaran a segmentación por frase, mais non ao revés).</para>
+
+        <para>Cambiar a configuración de segmentación pode producir que algúns segmentos xa traducidos se dividan ou se xunten. Isto devolveraos ao estado de «non traducido», xa que non terán unha coincidencia na memoria do proxecto, incluso aínda que a tradución orixinal estea aí aínda.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Botón de <emphasis role="bold"><guibutton>Segmentación...</guibutton> </emphasis><indexterm class="singular">
+            <primary>Segmentación</primary> <secondary>Regras globais e do proxecto</secondary>
+          </indexterm></para>
+
+        <para>As regras de segmentación xeralmente son válidas en todos os proxectos. Porén, o usuario pode necesitar xerar un conxunto de regras específicas para o proxecto en cuestión. Empregue este botón para abrir un diálogo, activar a caixa de verificación de <guimenuitem>Regras de segmentación específicas do proxecto</guimenuitem>, despois proceda a axustar as regras de segmentación coma desexe. O novo conxunto de regras se gardará xunto co proxecto e non interferirá co conxunto xeral de regras de segmentación. Para eliminar as regras de segmentación específicas do proxecto, desmarque a caixa de verificación. Vexa o capítulo <link linkend="chapter.segmentation">Segmentación da orixe</link> para máis información ou regras de segmentación.<emphasis/></para>
+
+        <para><emphasis>Consello:</emphasis> o conxunto de regras de segmentación para un proxecto dado se garda como <filename>project/omegat/segmentation.conf.</filename></para>
+      </listitem>
+
+      <listitem>
+        <para>Botón de <emphasis role="bold"><guibutton>Filtros de ficheiro...</guibutton> </emphasis><indexterm class="singular">
+            <primary>Filtros de ficheiro</primary> <secondary>filtros de ficheiro globais e do proxecto</secondary>
+          </indexterm></para>
+
+        <para>Dun xeito similar ao descrito anteriormente, o usuario pode crear filtros de ficheiro específicos do proxecto, que se gardarán xunto con este e que serán válidos só para o proxecto actual. Para crear un conxunto de filtros de ficheiro específico para o proxecto, faga clic no botón <guibutton>Filtros de ficheiros...</guibutton>, despois marque a caixa de verificación de <guimenuitem>Permitir filtros específicos do proxecto</guimenuitem> na xanela. Gardarase unha copia da configuración de filtros cambiada xunto co proxecto. Para eliminar os filtros de ficheiro específicos do proxecto, desmarque a caixa de verificación. Teña en conta que no menú <guimenuitem>Opcións &gt; Filtros de ficheiro</guimenuitem>, cambiarán os filtros de usuario globais, non os filtros do proxecto. Vexa o capítulo <link linkend="chapter.file.filters">Filtros de ficheiro</link> para máis información.<emphasis/></para>
+
+        <para><emphasis>Consello:</emphasis> o conxunto de filtros de ficheiro para un proxecto dado se garda como <filename>project/omegat/filters.xml.</filename></para>
+      </listitem>
+
+      <listitem>
+        <para>Caixa de verificación de <emphasis role="bold">Autopropagación</emphasis><emphasis role="bold"><indexterm class="singular">
+            <primary>Proxecto</primary> <secondary>Opción de autopropagación</secondary>
+          </indexterm></emphasis></para>
+
+        <para>En caso de que haxa segmentos non únicos en documentos de orixe, a caixa de verificación de autopropagación ofrece ao usuario as seguintes dúas posibilidades en relación coa tradución automática: se se marca, o primeiro segmento traducido se asumirá como a tradución predeterminada e o seu texto de destino se empregará automaticamente en seguintes coincidencias durante o proceso de tradución. Os segmentos mal traducidos poden corrixirse máis tarde manualmente mediante a función <guimenuitem>Crear unha tradución alternativa</guimenuitem>. Se non está marcada a caixa de verificación de autopropagación, os segmentos con traducións alternativas quedarán sen traducir ata que o usuario decida que tradución empregar.</para>
+      </listitem>
+
+      <listitem>
+        <para>Caixa de verificación de <emphasis role="bold">Eliminar etiquetas</emphasis><indexterm class="singular">
+            <primary>Proxecto</primary> <secondary>Opción para eliminar etiquetas</secondary>
+          </indexterm></para>
+
+        <para>Cando se marca, todas as etiquetas de formatado son eliminadas dos segmentos de orixe. Isto é especialmente útil cando traballa con textos onde o formatado interno non é realmente útil (por exemplo, documentos en formato PDF lidos a través dun OCR, mal convertidos a .odt ou .docx, etc.) Nun caso normal, debería ser posíbel abrir os documentos de destino, xa que só se eliminan as etiquetas internas. O formatado non visíbel (é dicir, o que non aparece como etiquetas no editor de OmegaT) se mantén nos documentos de destino.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis role="bold">Unha área para configurar os cartafoles do proxecto</emphasis><indexterm class="singular">
+            <primary>Proxecto</primary> <secondary>Cambiar a estrutura dos cartafoles</secondary>
+          </indexterm><indexterm class="singular">
+            <primary>Glosarios</primary> <secondary>Localización do ficheiro de glosario modificábel</secondary>
+          </indexterm></para>
+
+        <para>Aquí pode seleccionar diferentes subcartafoles, por exemplo o subcartafol cos ficheiros de orixe, o subcartafol para os ficheiros de destino, etc. Se insire nomes ou cartafoles que aínda non existen, <application>OmegaT</application> créaos por vostede. En caso de que decida modificar os cartafoles do proxecto, teña en conta que isto non moverá os ficheiros existentes de cartafoles antigos á nova localización.</para>
+      </listitem>
+    </itemizedlist>
+  </section>
+</chapter>

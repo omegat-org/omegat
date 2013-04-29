@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE appendix PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<appendix id="appendix.acknowledgements">
+  <title>Agradecementos</title>
+
+  <section>
+    <title>Grazas a todos!</title>
+
+    <para>Sexan cales sexan as inconsistencias, omisións ou erros sinxelos que poidas atopar nesta versión, declaro que son todos meus. Porén, este manual non sería posíbel sen a axuda e apoio de moita xente. Grazas explícitas a:</para>
+
+    <itemizedlist>
+      <listitem>
+        <para>Mark Prior: a corrección do meu primeiro borrador foi un acto de amor por OmegaT e a lingua inglesa.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Didier Briel: non podería facelo sen a paciente e persistente axuda de Didier coas complexidades de DocBook. Sen mencionar o seu coidado e dilixencia á hora de manter os repositorios intactos e en bo estado.</para>
+      </listitem>
+
+      <listitem>
+        <para>Samuel Murray: polo capítulo introdutorio de «Aprende a usar OmegaT en 5 minutos».</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Will Helton: a súa lectura final do borrador aforroume un montón de vergoña. Un só pode preguntarse cantos artigos e preposicións poderían faltar sen a súa inestimábel axuda.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Jean-Christophe Helary: un agradecemento especial a JC pola súa concisa descrición sobre a execución, parámetros a liña de ordes e outros detalles de OmegaT dos que aínda non teño coñecemento.</para>
+      </listitem>
+
+      <listitem>
+        <para>Por último mais non menos importante: grazas a todos os colaboradores do <ulink url="http://sourceforge.net/tracker/?group_id=68187&amp;atid=912617"> rastreador de documentación de OmegaT</ulink> por todas as inconsistencias que atopastes nas versións anteriores da documentación. Sigan co bo traballo!</para>
+      </listitem>
+    </itemizedlist>
+  </section>
+</appendix>

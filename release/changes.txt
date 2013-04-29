@@ -17,7 +17,7 @@
 
   Localisation updates:
 
-  - Catalan localisation updated to 3.0.0 (UI, readme, Documentation)
+  - Galician localisation updated to 3.0.0 (UI, readme, Documentation)
 
 ----------------------------------------------------------------------
  OmegaT 3.0.0

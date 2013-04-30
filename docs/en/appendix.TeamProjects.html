@@ -250,12 +250,12 @@
                         <span class="bold"><strong>URL of repository</strong></span>. Make sure the field
                         <span class="bold"><strong>Checkout directory</strong></span> is correct, i.e.
                         specifies the empty folder you have created, and press <span class="bold"><strong>OK</strong></span>. Once the operation has finished, you can
-                        check the said folder: it should now contain a subdirectory .svn and a
+                        check the said folder: it should now contain a subfolder .svn and a
                         green OK badge on its icon will show, that the contents of the folder
                         are up-to-date:
                </p>
                <p>In the next step, we will add the OmegaT files to the local
-                        directory. The following files are to be shared among the members of the
+                        folder. The following files are to be shared among the members of the
                         team and thus have to be included in any case:
                </p>
                <div class="itemizedlist">
@@ -289,7 +289,7 @@
                         the <code class="filename">target</code> folder and its
                         contents.
                </p>
-               <p>After copying the required files into the checkout directory you
+               <p>After copying the required files into the checkout folder you
                         will notice that its icon has changed: the green OK badge has changed to
                         a red exclamation sign, signifying the change in the local copy of the
                         repository. The following two steps will bring the server version up to
@@ -300,20 +300,20 @@
                      <li class="listitem">
                         <p><span class="bold"><strong>add the copied files to the local
                                            version of the repository:</strong></span> right-click on the local
-                                     checkout directory and select <span class="guilabel">TortoiseSVN &gt;
+                                     checkout folder and select <span class="guilabel">TortoiseSVN &gt;
                                         Add.</span> In the dialog that opens, leave all options as per
                                      default and click<span class="guilabel"> OK</span>. The Add Finished! window,
                                      similar to the one below will appear:
                         </p>
                         <div class="mediaobject"><img src="images/Team_projects_Add.png"></div>
-                        <p>The contents of the checkout directory will be marked
+                        <p>The contents of the checkout folder will be marked
                                      accordingly:
                         </p>
                         <div class="mediaobject"><img src="images/Team_projects_checkoutAddFolder.png"></div>
                      </li>
                      <li class="listitem">
                         <p><span class="bold"><strong>commit local changes to the server:
-                                           </strong></span>right-click on the local checkout directory and select
+                                           </strong></span>right-click on the local checkout folder and select
                                      <span class="guilabel">SVN Commit....</span> The Commit window - see below
                                      opens. Check the changes to be made - i.e. the folders and files
                                      added in this case.
@@ -332,7 +332,7 @@
                                            repository copy</strong></span> - the changes received from the server
                                      repository reside within the .svn subfolder but not yet in the files
                                      and folders themselves. To update the local files, right-click on
-                                     the checkout directory and select <span class="guilabel">SVN Update</span>.
+                                     the checkout folder and select <span class="guilabel">SVN Update</span>.
                                      Check the contents of the folder to confirm that the local copy of
                                      the repository and the corresponding files and folders correspond to
                                      the latest server version:

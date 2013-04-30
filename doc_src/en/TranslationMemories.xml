@@ -215,7 +215,7 @@
 
       <para><emphasis role="bold">several projects on the same subject:
       </emphasis>keep the project structure, and change source and target
-      directories (Source = source/order1, target = target/order1 etc). Note
+      folders (Source = source/order1, target = target/order1 etc). Note
       that you segments from order1, that are not present in order2 and other
       subsequent jobs, will be tagged as orphan segments; however, they will
       still be useful for getting fuzzy matches.</para>
@@ -229,7 +229,7 @@
       files are then collected and possible conflicts as regards terminology
       for instance get resolved. A new version of the master TM is then
       created, either to be put in team members'
-      <emphasis>tm/auto</emphasis>subdirectories or to replace their
+      <emphasis>tm/auto</emphasis>subfolders or to replace their
       <filename>project_save.tmx</filename> files. The team can also use the
       same subfolder structure for the target files. This allows them for
       instance to check at any moment, whether the target version for the
@@ -245,7 +245,7 @@
 
       <para>As you translate your files, <application>OmegaT</application>
       stores your work continually in <filename>project_save.tmx</filename> in
-      the project's /<filename>omegat</filename> subdirectory.</para>
+      the project's /<filename>omegat</filename> subfolder.</para>
 
       <para><application>OmegaT</application> also backups translation memory
       to <filename>project_save.tmx.YEARMMDDHHNN.bak</filename> in the same
@@ -636,7 +636,7 @@
 
     <para>Replace <literal>&lt;filename&gt;</literal> with the name of the
     file you wish to create, either absolute or relative to the working
-    directory (the directory you start <application>OmegaT</application>
+    folder (the folder you start <application>OmegaT</application>
     from). The second argument <literal>--pseudotranslatetype</literal> is
     optional. Its value is either <literal>equal</literal> (default value, for
     source=target) or <literal>empty</literal> (target segment is empty). You

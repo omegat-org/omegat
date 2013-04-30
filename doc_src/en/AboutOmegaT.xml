@@ -106,7 +106,7 @@
       <listitem>
         <para><emphasis role="bold">Project properties</emphasis>, <emphasis
         role="bold"><application>OmegaT</application> Files and
-        Directories:</emphasis> a project in the context of OmegaT is the
+        Folders:</emphasis> a project in the context of OmegaT is the
         piece of work that OmegaT as a CAT tool is able to handle. This
         chapter describes the project properties, such as the source and
         target languages. The second of these chapters describes the various
@@ -136,7 +136,7 @@
     <itemizedlist>
       <listitem>
         <para><emphasis role="bold">Translation memories: </emphasis> explains
-        the role of the various subdirectories containing translation
+        the role of the various subfolders containing translation
         memories, and provides information on other important aspects relating
         to translation memories.</para>
       </listitem>

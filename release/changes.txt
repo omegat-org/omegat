@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 3.0.1
 ----------------------------------------------------------------------
-   2 Enhancements
+   3 Enhancements
    0 Bug fix
    1 Localisation update
 ----------------------------------------------------------------------
@@ -14,6 +14,9 @@
 
   - PDF input filter 
   https://sourceforge.net/p/omegat/feature-requests/539/
+
+  - Keyboard access to contextual menu items 
+  https://sourceforge.net/p/omegat/feature-requests/537/
 
   Localisation updates:
 

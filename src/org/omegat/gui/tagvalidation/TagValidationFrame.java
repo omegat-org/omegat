@@ -374,7 +374,7 @@ public class TagValidationFrame extends JFrame {
             output.append(colorTags(report.translation, "blue", placeholderPattern, removePattern,
                     report.ste.getProtectedParts(), report.transErrors));
             output.append("</td>");
-            output.append("<td>");
+            output.append("<td width=\"10%\">");
             Set<TagError> allErrors = new HashSet<TagError>(report.srcErrors.values());
             allErrors.addAll(report.transErrors.values());
             for (TagError err : allErrors) {

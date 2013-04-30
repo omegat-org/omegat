@@ -63,7 +63,7 @@
     LibreOffice Writer or HTML, OmegaT will convert the formatting into tags
     that surround the text that you translate. Often documents will also have
     tags that have nothing to do with formatting, but which are also
-    important.In the source file (and in the translated file), A source
+    important in the source file (and in the translated file). A source
     sentence might look like</para>
 
     <para/>

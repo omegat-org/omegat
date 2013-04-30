@@ -52,11 +52,11 @@
           <para>If you are unable to run <application>OmegaT</application>
           normally (no graphical environment available): copy the settings
           files from some other <application>OmegaT</application> installation
-          on another machine to a specific directory. The location does not
+          on another machine to a specific folder. The location does not
           matter, since you can add it to the command line at launch (see
           below). The relevant files <literal>filters.conf</literal> and
           <literal>segmentation.conf</literal> can be found in the user home
-          directory (E.g. <literal>C:\Documents and
+          folder (E.g. <literal>C:\Documents and
           Settings\%User%\<application>OmegaT</application></literal> under
           Windows, <literal>%user%/.omegat/</literal> under Linux)</para>
         </listitem>
@@ -100,7 +100,7 @@
           OmegaT to be instructed in which folder the configuration files are
           stored. If not specified, OmegaT reverts to default values (the
           OmegaT folder in the user home folder, or if not available: the
-          current working directory).</para>
+          current working folder).</para>
         </listitem>
       </itemizedlist>
 

@@ -465,7 +465,7 @@
 
       <para>To install <application>OmegaT</application>, simply unpack the
       <emphasis role="bold">OmegaT_2.6.x_Without_JRE.zip</emphasis> file. This
-      creates an <emphasis>./OmegaT_2.6.x_Without_JRE/</emphasis> directory in
+      creates an <emphasis>./OmegaT_2.6.x_Without_JRE/</emphasis> folder in
       the working folder with all the files necessary to run
       <application>OmegaT</application>.</para>
     </section>
@@ -862,11 +862,11 @@
             <para>If you can't run <application>OmegaT</application> normally
             (no graphical environment available): copy the settings files from
             some other <application>OmegaT</application> installation on
-            another machine to a specific directory. The location does not
+            another machine to a specific folder. The location does not
             matter, since you can add it to the command line at startup. The
             relevant files are <literal>filters.conf</literal> and
             <literal>segmentation.conf</literal> and can be found in the user
-            home directory (e.g. <literal>C:\Documents and
+            home folder (e.g. <literal>C:\Documents and
             Settings\%User%\<application>OmegaT</application></literal> under
             Windows, <literal>%user%/.omegat/</literal> under Linux)</para>
           </listitem>
@@ -908,11 +908,11 @@
         <itemizedlist>
           <listitem>
             <para><literal>--config-dir=&lt;config-dir&gt;</literal> tells
-            <application>OmegaT</application> in which directory the
+            <application>OmegaT</application> in which folder the
             configuration files are stored. If not given,
             <application>OmegaT</application> reverts to default values
             (<application>OmegaT</application> folder under user home or, if
-            unavailable, the current working directory). Note double -
+            unavailable, the current working folder). Note double -
             character</para>
           </listitem>
         </itemizedlist>
@@ -994,14 +994,14 @@
                 <para><literal>test\.html</literal></para>
 
                 <para>Only the file test.html at the root of the source
-                directory will be translated. If there are other files named
-                test.html in other directories, they will be ignored.</para>
+                folder will be translated. If there are other files named
+                test.html in other folders, they will be ignored.</para>
               </listitem>
 
               <listitem>
                 <para><literal>dir-10\\test\.html</literal></para>
 
-                <para>Only the file test.html in the directory dir-10 will be
+                <para>Only the file test.html in the folder dir-10 will be
                 processed. Again note that the backslash is escaped as
                 well.</para>
               </listitem>
@@ -1029,14 +1029,14 @@
                 <para><literal>test\.html</literal></para>
 
                 <para>Only the file test.html at the root of the source
-                directory will be translated. If there are other files named
-                test.html in other directories, they will be ignored.</para>
+                folder will be translated. If there are other files named
+                test.html in other folders, they will be ignored.</para>
               </listitem>
 
               <listitem>
                 <para><literal>dir-10\\test\.html</literal></para>
 
-                <para>Only the file test.html in the directory dir-10 will be
+                <para>Only the file test.html in the folder dir-10 will be
                 processed. Again note that the backslash is escaped as
                 well.</para>
               </listitem>
@@ -1098,8 +1098,8 @@
     (<emphasis>http://ant.apache.org/bindownload.cgi</emphasis>) to build your
     own version of OmegaT. Unpack the
     <emphasis>OmegaT_2.6.x_Source.zip</emphasis> file and enter the
-    OmegaT_2.6.x_Source directory or enter the <emphasis>./omegat/</emphasis>
-    directory of the SVN checked out code. Please make sure that a build.xml
+    OmegaT_2.6.x_Source folder or enter the <emphasis>./omegat/</emphasis>
+    folder of the SVN checked out code. Please make sure that a build.xml
     file is present in that folder. Then, on the command line, type:</para>
 
     <para><literal>$ ant jar release</literal></para>

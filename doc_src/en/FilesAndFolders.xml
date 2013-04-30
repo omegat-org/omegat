@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
 "../../../docbook-xml-4.5/docbookx.dtd">
-<chapter id="chapter.files.and.directories">
-  <title><application>OmegaT</application> Files and Directories</title>
+<chapter id="chapter.files.and.folders">
+  <title><application>OmegaT</application> Files and Folders</title>
 
   <para><application>OmegaT</application> works with three types of
   files.</para>
@@ -45,7 +45,7 @@
     </indexterm>
 
     <para>An <application>OmegaT</application> translation project consists of
-    a number of files and directories.</para>
+    a number of files and folders.</para>
 
     <para>When you create a translation project, OmegaT automatically creates
     a folder with the specified name, and a list of folders:</para>
@@ -75,12 +75,12 @@
     other folder. In the following example the folder <filename>my
     projects</filename> contains three OmegaT projects:</para>
 
-    <para><figure id="OmegaT.projects.and.subdirectories">
-        <title>OmegaT projects and subdirectories</title>
+    <para><figure id="OmegaT.projects.and.subfolders">
+        <title>OmegaT projects and subfolders</title>
 
         <mediaobject>
           <imageobject>
-            <imagedata fileref="images/OmegaT_projects_and_subdirectories.png"/>
+            <imagedata fileref="images/OmegaT_projects_and_subfolders.png"/>
           </imageobject>
         </mediaobject>
       </figure></para>
@@ -144,7 +144,7 @@
       linkend="chapter.misc">Miscellanea.</link></para>
 
       <para>During translation additional files may get created in this
-      subdirectory as follows</para>
+      subfolder as follows</para>
 
       <para><informaltable>
           <tgroup align="left" cols="2" rowsep="1">
@@ -244,7 +244,7 @@
           <guimenu>Project</guimenu>
 
           <guimenuitem>Create Translated Documents</guimenuitem>
-        </menuchoice>. Files within the <filename>source</filename> directory,
+        </menuchoice>. Files within the <filename>source</filename> folder,
       whether translated or not, are then generated here, with the same
       hierarchy as present in the source subfolder. The contents of the target
       subfolder will reflect the current state of the translation, as present
@@ -350,7 +350,7 @@
             <entry>Linux/Solaris/FreeBSD</entry>
 
             <entry><literal>&lt;User Home&gt;/.omegat </literal>(.omegat is a
-            directory, the dot preceding its name makes it invisible unless
+            folder, the dot preceding its name makes it invisible unless
             you type ls -a or an equivalent command)</entry>
           </row>
 
@@ -483,7 +483,7 @@ java -jar OmegaT.jar $*</programlisting>
 
             <para>Linux and OS X users may find this file useful. Make it
 executable (<literal>chmod +x OmegaT</literal>) from the command line after making
-sure you are in the /OmegaT_2.6/ directory. You will then be able
+sure you are in the /OmegaT_2.6/ folder. You will then be able
 to launch OmegaT by executing this file from the command
 line</para>
             </entry>

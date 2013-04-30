@@ -250,13 +250,15 @@ public class EditorTextArea3 extends JEditorPane {
         if (autoCompleter.processKeys(e)) {
             // The AutoCompleter needs special treatment.
             processed = true;
-        } else if (mac && StaticUtils.isKey(e, KeyEvent.VK_ESCAPE, InputEvent.SHIFT_MASK)) {
-            // Shift+Esc for contextual menu on Mac
+        } else if (StaticUtils.isKey(e, KeyEvent.VK_CONTEXT_MENU, 0)
+                || (mac && StaticUtils.isKey(e, KeyEvent.VK_ESCAPE, InputEvent.SHIFT_MASK))) {
+            // Context Menu key for contextual (right-click) menu (Shift+Esc on Mac)
             JPopupMenu popup = makePopupMenu(getCaretPosition());
             if (popup.getComponentCount() > 0) {
                 popup.show(EditorTextArea3.this,
                         (int) getCaret().getMagicCaretPosition().getX(),
                         (int) getCaret().getMagicCaretPosition().getY());
+                processed = true;
             }
         } else if (StaticUtils.isKey(e, KeyEvent.VK_TAB, 0)) {
             // press TAB when 'Use TAB to advance'

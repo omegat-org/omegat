@@ -2,7 +2,7 @@
  OmegaT 3.0.1
 ----------------------------------------------------------------------
    3 Enhancements
-   0 Bug fix
+   1 Bug fix
    1 Localisation update
 ----------------------------------------------------------------------
 3.0.1 vs. 3.0.0
@@ -17,6 +17,11 @@
 
   - Keyboard access to contextual menu items 
   https://sourceforge.net/p/omegat/feature-requests/537/
+
+  Bug fixes:
+
+  - Tag validation window does not keep enough space for Japanese errors
+  https://sourceforge.net/p/omegat/bugs/583/
 
   Localisation updates:
 

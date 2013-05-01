@@ -739,7 +739,9 @@ public class RealProject implements IProject {
         try {
             repository.reset();
         } catch (Exception e) {
-            //too bad, but not a real problem.
+            // too bad, but not a real problem.
+            // or is it? We log the exception just in case
+            Log.log(e);
         }
 
         /* project is now in a bad state!

@@ -1,11 +1,15 @@
 ----------------------------------------------------------------------
  OmegaT 2.6.3 update 2
 ----------------------------------------------------------------------
-   0 Enhancement
+   1 Enhancement
    0 Bug fix
    3 Localisation updates
 ----------------------------------------------------------------------
 2.6.3 update 1 vs. 2.6.3
+
+  Other enhancements:
+
+  - Add \bn\.\s as an exception to Finnish rules
 
   Localisation updates:
 

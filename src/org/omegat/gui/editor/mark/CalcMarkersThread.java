@@ -119,7 +119,7 @@ public class CalcMarkersThread extends Thread {
                         continue;
                     }
                     mController.queueMarksOutput(ev);
-                } catch (Exception ex) {
+                } catch (Throwable ex) {
                     Log.log(ex);
                 }
             }

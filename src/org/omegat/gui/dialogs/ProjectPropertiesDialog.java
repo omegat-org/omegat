@@ -358,6 +358,7 @@ public class ProjectPropertiesDialog extends JDialog {
         	Mnemonics.setLocalizedText(m_externalCommandLabel, OStrings.getString("PP_EXTERN_CMD_DISABLED"));
             m_externalCommandTextArea.setEditable(false);
             m_externalCommandTextArea.setToolTipText(OStrings.getString("PP_EXTERN_CMD_DISABLED_TOOLTIP"));
+            m_externalCommandLabel.setToolTipText(OStrings.getString("PP_EXTERN_CMD_DISABLED_TOOLTIP"));
             m_externalCommandTextArea.setBackground(UIManager.getDefaults().getColor("Label.background"));
         }
         final JScrollPane m_externalCommandScrollPane = new JScrollPane();

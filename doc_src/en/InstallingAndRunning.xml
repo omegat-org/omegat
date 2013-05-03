@@ -16,17 +16,17 @@
       package</title>
 
       <para>Do you have a Java implementation compatible with Oracle's Java
-      1.5 JRE?</para>
+      1.6 JRE?</para>
 
       <itemizedlist>
         <listitem>
           <para><emphasis role="bold">Yes: </emphasis>download
-          <emphasis>OmegaT_2.6.x_Windows_without_JRE.exe</emphasis>.</para>
+          <emphasis>OmegaT_&omegat-version;.x_Windows_without_JRE.exe</emphasis>.</para>
         </listitem>
 
         <listitem>
           <para><emphasis role="bold">No / I don't know:</emphasis>
-          download<emphasis> OmegaT_2.6.x_Windows.exe.</emphasis></para>
+          download<emphasis> OmegaT_&omegat-version;.x_Windows.exe.</emphasis></para>
 
           <para>This package is bundled with Oracle's Java Runtime
           Environment. This JRE will not interfere with other Java
@@ -162,17 +162,17 @@
       <title>Downloading the right package</title>
 
       <para>Do you have a Java implementation compatible with Oracle's Java
-      1.5 JRE?</para>
+      1.6 JRE?</para>
 
       <itemizedlist>
         <listitem>
           <para><emphasis role="bold">Yes: </emphasis>download
-          <emphasis>OmegaT_2.6.x_Without_JRE.zip</emphasis>.</para>
+          <emphasis>OmegaT_&omegat-version;.x_Without_JRE.zip</emphasis>.</para>
         </listitem>
 
         <listitem>
           <para><emphasis role="bold">No / I don't know:</emphasis> download
-          <emphasis>OmegaT_2.6.x_Linux.tar.bz2.</emphasis></para>
+          <emphasis>OmegaT_&omegat-version;.x_Linux.tar.bz2.</emphasis></para>
 
           <para>This package is bundled with Oracle's Java Runtime
           Environment. This JRE will not interfere with other Java
@@ -310,23 +310,23 @@
     <section id="which.package.to.download.OSX">
       <title>Downloading the package</title>
 
-      <para><application>OmegaT</application> 2.6 requires Java 1.5 to run.
+      <para><application>OmegaT</application> &omegat-version; requires Java 1.6 to run.
       Use "Software Update..." from the Apple menu to update your Java
       version.</para>
 
-      <para>Download <emphasis>OmegaT_2.6.x_Mac.zip.</emphasis></para>
+      <para>Download <emphasis>OmegaT_&omegat-version;.x_Mac.zip.</emphasis></para>
     </section>
 
     <section id="OmegaT.installation.OSX">
       <title><application>Installing OmegaT </application></title>
 
-      <para>Double click on <emphasis>OmegaT_2.6.x_Mac.zip</emphasis> to
+      <para>Double click on <emphasis>OmegaT_&omegat-version;.x_Mac.zip</emphasis> to
       unpack it. This creates a folder called <emphasis>
       <application>OmegaT</application> </emphasis>. The folder contains 2
       files: index.html and
       <emphasis><application>OmegaT</application>.app.</emphasis> Copy the
       folder to a suitable folder (e.g. Applications). Once you have done
-      this, you can delete the <emphasis>OmegaT_2.6.x_Mac.zip</emphasis> file,
+      this, you can delete the <emphasis>OmegaT_&omegat-version;.x_Mac.zip</emphasis> file,
       it is no longer needed.</para>
     </section>
 
@@ -420,13 +420,13 @@
       to be able to use <application>OmegaT</application>.</para>
 
       <para>Do you have a Java implementation compatible with Oracle's Java
-      1.5 JRE?</para>
+      1.6 JRE?</para>
 
       <itemizedlist>
         <listitem>
           <para><emphasis role="bold">Yes: </emphasis>download
-          <emphasis>OmegaT_2.6.x_Windows_without_JRE.</emphasis>zip. This
-          package can be used on any platform where a Java 1.5 JRE compatible
+          <emphasis>OmegaT_&omegat-version;.x_Windows_without_JRE.</emphasis>zip. This
+          package can be used on any platform where a Java 1.6 JRE compatible
           JRE is installed.</para>
         </listitem>
 
@@ -440,10 +440,10 @@
         <listitem>
           <para><emphasis role="bold">No:</emphasis> obtain a Java JRE for
           your system (see below) and download
-          <emphasis>OmegaT_2.6.x_Without_JRE.zip</emphasis>.</para>
+          <emphasis>OmegaT_&omegat-version;.x_Without_JRE.zip</emphasis>.</para>
 
-          <para>Oracle provides JREs for Solaris SPARC/x86 (Java 1.5) and for
-          Linux x64, Solaris x64, Windows x64 (Java 1.5) at <ulink
+          <para>Oracle provides JREs for Solaris SPARC/x86 (Java 1.6) and for
+          Linux x64, Solaris x64, Windows x64 (Java 1.6) at <ulink
           url="http://www.oracle.com/technetwork/java/archive-139210.html">http://www.oracle.com/technetwork/java/archive-139210.html</ulink></para>
 
           <para>IBM provides JREs for Linux PowerPC at <ulink
@@ -464,8 +464,8 @@
         </indexterm></title>
 
       <para>To install <application>OmegaT</application>, simply unpack the
-      <emphasis role="bold">OmegaT_2.6.x_Without_JRE.zip</emphasis> file. This
-      creates an <emphasis>./OmegaT_2.6.x_Without_JRE/</emphasis> folder in
+      <emphasis role="bold">OmegaT_&omegat-version;.x_Without_JRE.zip</emphasis> file. This
+      creates an <emphasis>./OmegaT_&omegat-version;.x_Without_JRE/</emphasis> folder in
       the working folder with all the files necessary to run
       <application>OmegaT</application>.</para>
     </section>
@@ -504,7 +504,7 @@
         <secondary>Using Java Web Start</secondary>
       </indexterm></title>
 
-    <para>Java Web Start technology (part of Java 1.5 and above) can be used
+    <para>Java Web Start technology (part of Java 1.6 and above) can be used
     to deploy standalone Java software applications with a single click over
     the network. Java Web Start ensures that the latest version of the
     application will be deployed, as well as the correct version of the Java
@@ -694,7 +694,7 @@
 
       <itemizedlist>
         <listitem>
-          <para><emphasis role="bold">Font antialiasing</emphasis> - (Java 1.5
+          <para><emphasis role="bold">Font antialiasing</emphasis> - (Java 1.6
           only)</para>
 
           <para><emphasis role="bold">-Dswing.aatext=true<indexterm
@@ -788,7 +788,7 @@
           this to sign-in to <ulink
           url="http://datamarket.azure.com/dataset/bing/microsofttranslator#schema">Windows
           Azure Marketplace</ulink> and use the Translator service. Note that
-          up to 2M characters per month are free of charge. the two entries
+          up to 2M characters per month are free of charge. The two entries
           required are available in your <ulink
           url="https://datamarket.azure.com/account">account page</ulink>
           under Primary account key and Customer-ID:</para>
@@ -1097,8 +1097,8 @@
     <para>Note that you will need the ant program
     (<emphasis>http://ant.apache.org/bindownload.cgi</emphasis>) to build your
     own version of OmegaT. Unpack the
-    <emphasis>OmegaT_2.6.x_Source.zip</emphasis> file and enter the
-    OmegaT_2.6.x_Source folder or enter the <emphasis>./omegat/</emphasis>
+    <emphasis>OmegaT_&omegat-version;.x_Source.zip</emphasis> file and enter the
+    OmegaT_&omegat-version;.x_Source folder or enter the <emphasis>./omegat/</emphasis>
     folder of the SVN checked out code. Please make sure that a build.xml
     file is present in that folder. Then, on the command line, type:</para>
 

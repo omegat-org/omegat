@@ -385,7 +385,7 @@
     installer, and a source code package for developers.</para>
 
     <para>The platform-independent package can be used on any platform with a
-    working Java 1.5 runtime environment, including the platforms for which a
+    working Java &java-version; runtime environment, including the platforms for which a
     specific package also exists. It is provided as a compressed file (zip or
     tar archive) that you must extract to the folder of your choice for
     installation. The file can usually be extracted by double-clicking on the
@@ -483,7 +483,7 @@ java -jar OmegaT.jar $*</programlisting>
 
             <para>Linux and OS X users may find this file useful. Make it
 executable (<literal>chmod +x OmegaT</literal>) from the command line after making
-sure you are in the /OmegaT_2.6/ folder. You will then be able
+sure you are in the /OmegaT_&omegat-version;/ folder. You will then be able
 to launch OmegaT by executing this file from the command
 line</para>
             </entry>

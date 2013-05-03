@@ -13,7 +13,7 @@
   <para>The regular expressions (or regex for short) used in searches and
   segmentation rules are those supported by Java. Should you need more
   specific information, consult the <ulink
-  url="http://download.oracle.com/javase/1.5.0/docs/api/java/util/regex/Pattern.html">Java
+  url="http://download.oracle.com/javase/&java-version;.0/docs/api/java/util/regex/Pattern.html">Java
   Regex documentation</ulink>. See additional references and examples
   below.</para>
 
@@ -209,7 +209,7 @@
           <entry>\p{InGreek}</entry>
 
           <entry>A character in the Greek block (simple <ulink
-          url="http://download.oracle.com/javase/1.5.0/docs/api/java/util/regex/Pattern.html#ubc">
+          url="http://download.oracle.com/javase/&java-version;.0/docs/api/java/util/regex/Pattern.html#ubc">
           block</ulink>)</entry>
         </row>
 
@@ -217,7 +217,7 @@
           <entry>\p{Lu}</entry>
 
           <entry>An uppercase letter (simple <ulink
-          url="http://download.oracle.com/javase/1.5.0/docs/api/java/util/regex/Pattern.html#ubc">
+          url="http://download.oracle.com/javase/&java-version;.0/docs/api/java/util/regex/Pattern.html#ubc">
           category</ulink>)</entry>
         </row>
 

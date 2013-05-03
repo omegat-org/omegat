@@ -737,7 +737,9 @@ public class RealProject implements IProject {
         //Here I keep a separate call, just to make it clear what and why we are doing
         //and to allow to make this feature optional in future releases
         try {
+            unlockProject(); // So that we are able to replace omegat.project
             repository.reset();
+            lockProject(); // we restore the lock
         } catch (Exception e) {
             // too bad, but not a real problem.
             // or is it? We log the exception just in case

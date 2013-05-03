@@ -19,15 +19,15 @@
     <application>OmegaT</application> web site </ulink>contains links to
     numerous <application>OmegaT</application> resources. User support is
     provided on a volunteer basis at the <ulink
-    url="http://groups.yahoo.com/group/omegat/"><application>OmegaT</application>
+    url="http://tech.groups.yahoo.com/group/omegat/"><application>OmegaT</application>
     Yahoo! User Group</ulink>. The <ulink
-    url="http://tech.groups.yahoo.com/group/omegat/database?method=reportRows&amp;amp;tbl=1">FAQ
+    url="http://tech.groups.yahoo.com/group/OmegaT/database?method=reportRows&amp;tbl=1">FAQ
     </ulink> is a good starting point for finding answers to questions you may
     have. For the latest version of OmegaT, refer to the downloads page at
     www.omegat.org. You can also file <ulink
-    url="http://sourceforge.net/tracker/?group_id=68187&amp;amp;atid=520347">bug
+    url="https://sourceforge.net/p/omegat/bugs/">bug
     reports</ulink> and <ulink
-    url="http://sourceforge.net/tracker/?group_id=68187&amp;amp;atid=52035">requests
+    url="https://sourceforge.net/p/omegat/feature-requests/">requests
     for enhancements.</ulink></para>
   </section>
 
@@ -79,7 +79,7 @@
     <application>OmegaT</application>:</emphasis></para>
 
     <para>first join the <ulink
-    url="http://groups.yahoo.com/group/OmegaT/">user group</ulink> (via web or
+    url="http://tech.groups.yahoo.com/group/OmegaT/">user group</ulink> (via web or
     by sending an email to <ulink
     url="mailto:OmegaT-subscribe@yahoogroups.com"><application>OmegaT</application>-subscribe@yahoogroups.com</ulink>).
     To get involved in the <application>OmegaT</application> development
@@ -93,7 +93,7 @@
     related documents:</emphasis></para>
 
     <para>first read the <ulink
-    url="http://www.omegat.org/en/howtos/localizing_omegat.html">Localizing
+    url="http://www.omegat.org/en/howtos/localizing_omegat.php">Localizing
     and Customizing <application>OmegaT</application></ulink> guide, and join
     the <application>OmegaT</application> translators' group via web or by
     sending an email to <ulink

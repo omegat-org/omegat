@@ -16,7 +16,7 @@
       package</title>
 
       <para>Do you have a Java implementation compatible with Oracle's Java
-      &java-version; JRE?</para>
+      1.5 JRE?</para>
 
       <itemizedlist>
         <listitem>
@@ -162,7 +162,7 @@
       <title>Downloading the right package</title>
 
       <para>Do you have a Java implementation compatible with Oracle's Java
-      &java-version; JRE?</para>
+      1.5 JRE?</para>
 
       <itemizedlist>
         <listitem>
@@ -310,7 +310,7 @@
     <section id="which.package.to.download.OSX">
       <title>Downloading the package</title>
 
-      <para><application>OmegaT</application> &omegat-version; requires Java &java-version; to run.
+      <para><application>OmegaT</application> &omegat-version; requires Java 1.5 to run.
       Use "Software Update..." from the Apple menu to update your Java
       version.</para>
 
@@ -420,13 +420,13 @@
       to be able to use <application>OmegaT</application>.</para>
 
       <para>Do you have a Java implementation compatible with Oracle's Java
-      &java-version; JRE?</para>
+      1.5 JRE?</para>
 
       <itemizedlist>
         <listitem>
           <para><emphasis role="bold">Yes: </emphasis>download
           <emphasis>OmegaT_&omegat-version;.x_Windows_without_JRE.</emphasis>zip. This
-          package can be used on any platform where a Java &java-version; JRE compatible
+          package can be used on any platform where a Java 1.5 JRE compatible
           JRE is installed.</para>
         </listitem>
 
@@ -442,8 +442,8 @@
           your system (see below) and download
           <emphasis>OmegaT_&omegat-version;.x_Without_JRE.zip</emphasis>.</para>
 
-          <para>Oracle provides JREs for Solaris SPARC/x86 (Java &java-version;) and for
-          Linux x64, Solaris x64, Windows x64 (Java &java-version;) at <ulink
+          <para>Oracle provides JREs for Solaris SPARC/x86 (Java 1.5) and for
+          Linux x64, Solaris x64, Windows x64 (Java 1.5) at <ulink
           url="http://www.oracle.com/technetwork/java/archive-139210.html">http://www.oracle.com/technetwork/java/archive-139210.html</ulink></para>
 
           <para>IBM provides JREs for Linux PowerPC at <ulink
@@ -504,7 +504,7 @@
         <secondary>Using Java Web Start</secondary>
       </indexterm></title>
 
-    <para>Java Web Start technology (part of Java &java-version; and above) can be used
+    <para>Java Web Start technology (part of Java 1.5 and above) can be used
     to deploy standalone Java software applications with a single click over
     the network. Java Web Start ensures that the latest version of the
     application will be deployed, as well as the correct version of the Java
@@ -694,7 +694,7 @@
 
       <itemizedlist>
         <listitem>
-          <para><emphasis role="bold">Font antialiasing</emphasis> - (Java &java-version;
+          <para><emphasis role="bold">Font antialiasing</emphasis> - (Java 1.5
           only)</para>
 
           <para><emphasis role="bold">-Dswing.aatext=true<indexterm

@@ -385,7 +385,7 @@
     installer, and a source code package for developers.</para>
 
     <para>The platform-independent package can be used on any platform with a
-    working Java &java-version; runtime environment, including the platforms for which a
+    working Java 1.5 runtime environment, including the platforms for which a
     specific package also exists. It is provided as a compressed file (zip or
     tar archive) that you must extract to the folder of your choice for
     installation. The file can usually be extracted by double-clicking on the

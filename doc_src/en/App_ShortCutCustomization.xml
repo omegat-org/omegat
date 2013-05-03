@@ -33,9 +33,9 @@
     <emphasis>&lt;shortcut&gt;</emphasis> is a combination of pressed keys
     specified by the user<footnote>
         <para>The full syntax for keystrokes (shortcuts) is defined in the
-        following Java &java-version; documentation from Oracle (bottom of page): <ulink
-        url="http://docs.oracle.com/javase/&java-version;.0/docs/api/javax/swing/KeyStroke.html">Java
-        &java-version; keystrokes shortcuts</ulink></para>
+        following Java 1.5 documentation from Oracle (bottom of page): <ulink
+        url="http://docs.oracle.com/javase/1.5.0/docs/api/javax/swing/KeyStroke.html">Java
+        1.5 keystrokes shortcuts</ulink></para>
       </footnote>.</para>
 
     <para>&lt;shortcut&gt; must be of the following form: 0 or more
@@ -61,9 +61,9 @@
           <para>and <code>&lt;key&gt;</code> can be any key available on your
           keyboard<footnote>
               <para>The possible keyevents (keys) are listed in the following
-              Java &java-version; documentation from Oracle: <ulink
-              url="http://docs.oracle.com/javase/&java-version;.0/docs/api/java/awt/event/KeyEvent.html">Java
-              &java-version; keyEvents description</ulink></para>
+              Java 1.5 documentation from Oracle: <ulink
+              url="http://docs.oracle.com/javase/1.5.0/docs/api/java/awt/event/KeyEvent.html">Java
+              1.5 keyEvents description</ulink></para>
             </footnote>.</para>
         </listitem>
       </itemizedlist></para>

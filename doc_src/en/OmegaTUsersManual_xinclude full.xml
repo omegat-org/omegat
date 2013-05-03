@@ -2,7 +2,6 @@
 <!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
 "../../../docbook-xml-4.5/docbookx.dtd" [
 <!ENTITY omegat-version "2.6">
-<!ENTITY java-version "1.5">
 ]>
 
 <book lang="en">

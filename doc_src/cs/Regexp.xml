@@ -5,14 +5,14 @@
       <primary>Regulární výrazy</primary> <seealso>Segmentace</seealso> <seealso>Vyhledávání</seealso>
     </indexterm></title>
 
-  <para>Regulární výrazy (uváděné i zkráceně jako ‚regex‘ - z anglického ‚REGular EXpressions‘) používané při vyhledávání a v segmentačních pravidlech jsou právě ty, které podporuje Java. Pokud potřebujete bližší informace, navštivte stránku <ulink url="http://download.oracle.com/javase/1.5.0/docs/api/java/util/regex/Pattern.html">Java Regex documentation</ulink>. Projděte si dodatečné odkazy a příklady níže.</para>
+  <para>Regulární výrazy (uváděné i zkráceně jako ‚regex‘ – z anglického ‚REGular EXpressions‘) používané při vyhledávání a v segmentačních pravidlech jsou identické s těmi, které podporuje Java. Pokud potřebujete bližší informace, navštivte stránku <ulink url="http://download.oracle.com/javase/1.5.0/docs/api/java/util/regex/Pattern.html">Java Regex documentation</ulink>. Projděte si dodatečné odkazy a příklady níže.</para>
 
   <note>
-    <para>Tato kapitola se obrací především na pokročilé uživatele, který potřebují definovat vlastní varianty pravidel segmentace nebo chtějí získat komplexnější a účinnější nástroj při vyhledávání.</para>
+    <para>Tato kapitola se obrací především na pokročilé uživatele, kteří potřebují definovat vlastní varianty pravidel segmentace nebo chtějí získat komplexnější a účinnější nástroj při vyhledávání.</para>
   </note>
 
   <table>
-    <title>Regulární výrazy - Označení</title>
+    <title>Regulární výrazy – Označení</title>
 
     <tgroup align="left" cols="2" rowsep="1">
       <colspec align="left" colnum="1" colwidth="100"/>
@@ -36,7 +36,7 @@
   </table>
 
   <table>
-    <title>Regulární výrazy - Znak</title>
+    <title>Regulární výrazy – Znak</title>
 
     <tgroup align="left" cols="2" rowsep="1">
       <colspec align="left" colnum="1" colwidth="100"/>
@@ -107,13 +107,13 @@
         <row>
           <entry>\0n</entry>
 
-          <entry>Znak s oktalovou/osmičkovou hodnotou 0n  (0 &lt;= n &lt;= 7)</entry>
+          <entry>Znak s oktalovou/osmičkovou hodnotou 0n (0 &lt;= n &lt;= 7)</entry>
         </row>
 
         <row>
           <entry>\0nn</entry>
 
-          <entry>Znak s oktalovou/osmičkovou hodnotou 0n  (0 &lt;= n &lt;= 7)</entry>
+          <entry>Znak s oktalovou/osmičkovou hodnotou 0nn (0 &lt;= n &lt;= 7)</entry>
         </row>
 
         <row>
@@ -132,7 +132,7 @@
   </table>
 
   <table>
-    <title>Regulární výrazy - Uvozování</title>
+    <title>Regulární výrazy – Uvozování</title>
 
     <tgroup align="left" cols="2" rowsep="1">
       <colspec align="left" colnum="1" colwidth="100"/>
@@ -174,7 +174,7 @@
   </table>
 
   <table>
-    <title>Regulární výrazy - Třídy pro bloky a kategorie Unicode</title>
+    <title>Regulární výrazy – Třídy pro bloky a kategorie Unicode</title>
 
     <tgroup align="left" cols="2" rowsep="1">
       <colspec align="left" colnum="1" colwidth="100"/>
@@ -209,7 +209,7 @@
         <row>
           <entry>\p{řecky}</entry>
 
-          <entry>Jakýkoliv znak mimo nějakého z Řecké sady (negace)</entry>
+          <entry>Jakýkoliv znak mimo nějakého z řecké sady (negace)</entry>
         </row>
 
         <row>
@@ -222,7 +222,7 @@
   </table>
 
   <table>
-    <title>Regulární výrazy - Třídy znaků</title>
+    <title>Regulární výrazy – Třídy znaků</title>
 
     <tgroup align="left" cols="2" rowsep="1">
       <colspec align="left" colnum="1" colwidth="100"/>
@@ -239,7 +239,7 @@
         <row>
           <entry>[abc]</entry>
 
-          <entry>a, b, nebo c  (jednoduchá třída)</entry>
+          <entry>a, b, nebo c (jednoduchá třída)</entry>
         </row>
 
         <row>
@@ -258,7 +258,7 @@
   </table>
 
   <table>
-    <title>Regulární výrazy - Předdefinované třídy znaků</title>
+    <title>Regulární výrazy – Předdefinované třídy znaků</title>
 
     <tgroup align="left" cols="2" rowsep="1">
       <colspec align="left" colnum="1" colwidth="100"/>
@@ -360,7 +360,7 @@
   </table>
 
   <table>
-    <title>Regulární výrazy - Hladové kvantifikátory</title>
+    <title>Regulární výrazy – Hladové kvantifikátory</title>
 
     <tgroup align="left" cols="2" rowsep="1">
       <colspec align="left" colnum="1" colwidth="100"/>
@@ -396,11 +396,11 @@
   </table>
 
   <note>
-    <para>hladové kvantifikátory se budou snažit najít tolik shody, jak je to jen možné Například: <emphasis>a+?</emphasis> bude odpovídat aaa v <emphasis>aaabbb</emphasis></para>
+    <para>Hladové kvantifikátory se budou snažit najít tolik shody, jak je to jen možné. Například: <emphasis>a+?</emphasis> bude odpovídat aaa v <emphasis>aaabbb</emphasis></para>
   </note>
 
   <table>
-    <title>Regulární výrazy - Líné kvantifikátory</title>
+    <title>Regulární výrazy – Líné kvantifikátory</title>
 
     <tgroup align="left" cols="2" rowsep="1">
       <colspec align="left" colnum="1" colwidth="100"/>
@@ -436,11 +436,11 @@
   </table>
 
   <note>
-    <para>líné kvantifikátory se budou snažit najít co nejmíň shody, jak je to jen možné Například: <emphasis>a+?</emphasis> bude odpovídat prvnímu <emphasis>a</emphasis> v <emphasis>aaabbb</emphasis></para>
+    <para>Líné kvantifikátory se budou snažit najít co nejmíň shody, jak je to jen možné. Například: <emphasis>a+?</emphasis> bude odpovídat prvnímu <emphasis>a</emphasis> v <emphasis>aaabbb</emphasis></para>
   </note>
 
   <table>
-    <title>Regulární výrazy - Logické operátory</title>
+    <title>Regulární výrazy – Logické operátory</title>
 
     <tgroup align="left" cols="2" rowsep="1">
       <colspec align="left" colnum="1" colwidth="100"/>
@@ -485,7 +485,7 @@
     <para>Existuje množství interaktivních nástrojů dostupných pro vývoj a testování regulárních výrazů. Všechny obecně postupují dle stejného vzoru (vizte níže příklad ve formě pluginu pro Firefox: Regular Expression Tester): regulární výraz (záznam nahoře) zkoumá hledaný text (textové pole uprostřed), ukazuje výsledky v poli pro výsledky.</para>
 
     <figure id="regerx.tester">
-      <title>Regex Tester</title>
+      <title>Nástroj pro testování regulárních výrazů ‚Regex Tester‘</title>
 
       <mediaobject>
         <imageobject role="html">
@@ -498,12 +498,12 @@
       </mediaobject>
     </figure>
 
-    <para>Můžete také vyzkoušet trenažer <ulink url="http://weitz.de/regex-coach/">The Regex Coach</ulink> jako samostatný nástroj pro Windows, Linux, Mac, FreeBSD, jedná se o samostatný nástroj. Je podobný předchozímu příkladu.</para>
+    <para>Můžete také vyzkoušet trenažer <ulink url="http://weitz.de/regex-coach/">The Regex Coach</ulink> jako samostatný nástroj pro Windows, Linux, Mac, FreeBSD. Je podobný předchozímu příkladu.</para>
 
     <para>Malá sbírka užitečných regulárních výrazů se nachází přímo v aplikaci <application>OmegaT</application> (vizte Možnosti &gt; Segmentace). Následující seznam zahrnuje výrazy, které se mohou hodit při prohledávání překladové paměti:</para>
 
     <table>
-      <title>Regulární výrazy - Příklady regulárních výrazů v překladech</title>
+      <title>Regulární výrazy  Příklady regulárních výrazů v překladech</title>
 
       <tgroup align="left" cols="2" rowsep="1">
         <colspec align="left" colnum="1" colwidth="100"/>
@@ -548,7 +548,7 @@
           </row>
 
           <row>
-            <entry>\s\s+</entry>
+            <entry>\s{2,}</entry>
 
             <entry>víc než jedna mezera</entry>
           </row>
@@ -556,7 +556,13 @@
           <row>
             <entry>\.[A-Z]</entry>
 
-            <entry>Tečka následovaná slovem s prvním velkým písmenem - pravděpodobně chybí mezera mezi tečkou a začátkem nové věty?</entry>
+            <entry>Tečka následovaná slovem s prvním velkým písmenem – pravděpodobně chybí mezera mezi tečkou a začátkem nové věty?</entry>
+          </row>
+
+          <row>
+            <entry>\bis\b</entry>
+
+            <entry>hledej „is“, ale ne „this“ nebo „isn't“ atd.</entry>
           </row>
         </tbody>
       </tgroup>

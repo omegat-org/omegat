@@ -1,32 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
 <chapter id="chapter.about.OmegaT">
-  <title>O aplikaci <application>OmegaT</application> - úvod</title>
+  <title>O aplikaci <application>OmegaT</application> – úvodi</title>
 
   <section id="OmegaT-Highlists">
-    <title>OmegaT nejdůležitější charakteristiky</title>
+    <title>Nejdůležitější charakteristiky OmegaT</title>
 
-    <para><application>OmegaT</application> je svobodný nástroj využívající technologie překladové paměti, nejdůležitější rysy jsou:</para>
+    <para><application>OmegaT</application> je svobodný nástroj využívající technologie překladové paměti, nejdůležitějšími charakteristikami jsou:</para>
 
     <itemizedlist>
       <listitem>
-        <para><emphasis role="bold">Překladová paměť:</emphasis><application> </application>OmegaT ukládá vaše překlady do souboru s překladovou pamětí. Současně může pro srovnání využívat paměti z předchozích překladů. Překladové paměti mohou být velmi užitečné u takového překladu, ve kterém se části textu často opakují nebo je zde množství přiměřeně podobných segmentů textu. OmegaT využívá překladové paměti k uložení si vašich předchozích překladů a pak navrhuje vhodné překlady pro text, se kterým právě pracujete.</para>
+        <para><emphasis role="bold">Překladová paměť:</emphasis><application> OmegaT</application> ukládá vaše překlady do souboru s překladovou pamětí. Současně může pro srovnání využívat paměti z předchozích překladů. Překladové paměti mohou být velmi užitečné u takového překladu, ve kterém se části textu často opakují nebo je zde množství přiměřeně podobných segmentů textu. OmegaT ukládá vaše předchozí překlady do překladové paměti a pak navrhuje vhodné překlady pro text, se kterým právě pracujete.</para>
 
-        <para>Překladové paměti mohou být velmi užitečné, pokud potřebujete aktualizovat dokument, který jste již jednou přeložili. Nezměněné věty budou automaticky přeloženy, a aktualizované věty budou zobrazeny s překladem nejpodobnější starší věty. Tím pádem se zjednoduší manipulace s úpravami původního dokumentu. Pokud vám byly dodány již dříve vytvořené překladové paměti, například poskytnuté překladatelskou agenturou nebo vaším klientem, OmegaT je bude moci používat jako referenční paměti.</para>
+        <para>Jakmile potřebujete aktualizovat dokument, který jste již jednou přeložiti, pak jsou takové překladové paměti velmi užitečné. Nezměněné věty budou automaticky přeloženy, a aktualizované věty budou zobrazeny s překladem nejpodobnější starší věty. Tím pádem se zjednoduší práce na úpravách původního dokumentu. Pokud vám byly dodány již dříve vytvořené překladové paměti, například poskytnuté překladatelskou agenturou nebo vaším klientem, OmegaT je bude moci používat jako referenční paměti.</para>
 
-        <para>OmegaT používá standardní formát souborů TMX k ukládání a přístupu k překladovým pamětem, což nabízí možnost sdílení vašich překladových materiálů s jinými aplikacemi CAT, které tento formát podporují.</para>
+        <para>Pro ukládání a přístup k překladovým pamětem používá OmegaT standardní formát souborů TMX, což nabízí možnost sdílení vašich překladových materiálů s jinými aplikacemi CAT, které tento formát podporují.</para>
       </listitem>
     </itemizedlist>
 
     <itemizedlist>
       <listitem>
-        <para><emphasis role="bold">Správa terminologie</emphasis>: Správa terminologie je důležitá pro konzistentnost překladu. OmegaT používá glosáře, které obsahují překlady jednotlivých slov nebo malých frází: čili druh zjednodušeného dvoujazyčného slovníku pro specifické pole působnosti. To znamená tedy, že OmegaT zobrazí překlad jakéhokoliv slova, které je přítomno v právě aktivním segmentu.</para>
+        <para><emphasis role="bold">Správa terminologie:</emphasis> Správa terminologie je důležitá pro konzistentnost překladu. OmegaT používá glosáře, které obsahují překlady jednotlivých slov nebo malých frází: čili druh zjednodušeného dvoujazyčného slovníku pro specifické pole působnosti. To tedy znamená, že OmegaT zobrazí překlad jakéhokoliv slova, které je přítomno v právě aktivním segmentu.</para>
       </listitem>
     </itemizedlist>
 
     <itemizedlist>
       <listitem>
-        <para><emphasis role="bold">Proces překladu:</emphasis> Představte si, že máte něco přeložit; od jediného souboru až po adresář s podadresáři, ve kterých jsou spousty souborů v různých formátech. Když programu OmegaT zadáte, že potřebujete přeložit tyto soubory, tak OmegaT vyhledá podle pravidel pro filtrování souborů podporované formáty souborů, rozpozná v nich textové části, rozdělí skupiny textu v souladu s pravidly segmentace a zobrazí segmenty jeden za druhým, a vy je můžete jednotlivě překládat. OmegaT uloží vaše překlady a navrhne možné překlady podobných segmentů z již existujících dřívějších překladových pamětí. Jakmile budete chtít zobrazit výsledný produkt, můžete exportovat přeložené soubory, otevřít je v odpovídající aplikaci a zobrazit překlad ve výsledném formátu...</para>
+        <para><emphasis role="bold">Proces překladu:</emphasis> Představte si, že máte něco přeložit: v rozsahu od jediného souboru až po adresář s podadresáři, ve kterých jsou spousty souborů v různých formátech. Když programu OmegaT zadáte, že potřebujete přeložit tyto soubory, tak OmegaT vyhledá podle pravidel pro filtrování souborů podporované formáty souborů, rozpozná v nich textové části, rozdělí skupiny textu v souladu s pravidly segmentace a zobrazí segmenty jeden za druhým, a vy je můžete jednotlivě překládat. OmegaT uloží vaše překlady a navrhne možné překlady podobných segmentů z již existujících dřívějších překladových pamětí. Jakmile budete chtít zobrazit hotový přeložený text, můžete exportovat přeložené soubory, otevřít je v odpovídající aplikaci a zobrazit překlad ve výsledném formátu...</para>
       </listitem>
     </itemizedlist>
   </section>
@@ -38,19 +38,19 @@
 
     <itemizedlist>
       <listitem>
-        <para><emphasis role="bold">Stručný úvodní průvodce:</emphasis> tato kapitola má sloužit jako Stručný úvodní průvodce pro začátečníky a potenciální vážné zájemce o používání OmegaT, ukazuje ucelený postup od otevření nového překladového projektu až po dokončení překladu.</para>
+        <para><emphasis role="bold">Stručný úvodní průvodce:</emphasis> tato kapitola má sloužit jako Stručný úvodní průvodce pro začátečníky a potenciální vážné zájemce o používání OmegaT; ukazuje ucelený postup od otevření nového překladového projektu až po dokončení překladu.</para>
       </listitem>
     </itemizedlist>
 
     <itemizedlist>
       <listitem>
-        <para><emphasis role="bold">Instalace a provoz programu OmegaT:</emphasis> tato kapitola se hodí když se poprvé pouštíte do užívání OmegaT. Obsahuje specifické pokyny k instalaci aplikace OmegaT a jejím provozu pod Windows, Mac OS X a Linuxem. Pokročilí uživatelé naleznou v této kapitole popis a možnosti režimu příkazového řádku. </para>
+        <para><emphasis role="bold">Instalace a provoz programu OmegaT:</emphasis> tato kapitola se hodí když se poprvé pouštíte do užívání OmegaT. Obsahuje specifické pokyny k instalaci aplikace OmegaT a jejím provozu pod Windows, Mac OS X a Linuxem. Pokročilí uživatelé zde naleznou popis a možnosti režimu příkazového řádku. </para>
       </listitem>
     </itemizedlist>
 
     <itemizedlist>
       <listitem>
-        <para><emphasis role="bold">Uživatelské prostředí</emphasis>, <emphasis role="bold">Hlavní nabídka a Klávesové zkratky</emphasis>: tyto dvě kapitoly je dobré si řádně nastudovat, protože vysvětlují uživatelské prostředí aplikace OmegaT a funkce, které jsou dostupné přes hlavní menu a klávesové zkratky.</para>
+        <para><emphasis role="bold">Uživatelské prostředí</emphasis>, <emphasis role="bold">Hlavní nabídka a Klávesové zkratky</emphasis>: tyto dvě kapitoly je dobré si řádně nastudovat, protože vysvětlují uživatelské prostředí aplikace OmegaT a funkce, které jsou dostupné přes hlavní nabídku a prostřednictvím klávesových zkratek.</para>
       </listitem>
     </itemizedlist>
 
@@ -62,13 +62,13 @@
 
     <itemizedlist>
       <listitem>
-        <para><emphasis role="bold">Fungování pole editace:</emphasis> krátká kapitola popisující jak nastavit fungování editace právě překládaného segmentu.</para>
+        <para><emphasis role="bold">Nastavení pro pole editace:</emphasis> krátká kapitola popisující jak nastavit automatické úpravy právě překládaného segmentu.</para>
       </listitem>
     </itemizedlist>
 
     <itemizedlist>
       <listitem>
-        <para><emphasis role="bold">práce s prostým textem</emphasis> a <emphasis role="bold">Práce s formátovaným textem</emphasis>: v těchto dvou kapitolách jsou objasněny určité důležité body zaměřené na překládaný text, jako např. nastavení kódování (v případě souborů s prostým textem) a manipulace s tagy (v případě, že jde o formátovaný text).</para>
+        <para><emphasis role="bold">Práce s prostým textem</emphasis> a <emphasis role="bold">Práce s formátovaným textem:</emphasis> v těchto dvou kapitolách jsou objasněny určité důležité body zaměřené na překládaný text, jako např. nastavení kódování (v případě souborů s prostým textem) a manipulace s tagy (v případě, že jde o formátovaný text).</para>
       </listitem>
     </itemizedlist>
 
@@ -78,23 +78,23 @@
       </listitem>
 
       <listitem>
-        <para><emphasis role="bold">Segmentace</emphasis>: nástroje využívající překladových pamětí pracují s textovými jednotkami nazývanými segmenty. V OmegaT se segmenty určují buď podle odstavců nebo pravidel segmentace. Segmentace podle odstavců se používá méně, ale může být užitečná v případě tzv. „kreativních“ textů. Segmentace s využitím pravidel je obvykle používána jako synonymum pro segmentaci na úrovni vět. Celá řada pravidel je dodávána přímo s programem a uživatelé si mohou definovat dodatečně svá pravidla, jak je to popsáno v této kapitole.</para>
+        <para><emphasis role="bold">Segmentace:</emphasis> nástroje využívající překladových pamětí pracují s textovými jednotkami nazývanými segmenty. V OmegaT se segmenty určují buď podle odstavců nebo pravidel segmentace. Segmentace na úrovni odstavců se používá méně často, ale může být užitečná v případě překladu tzv. „kreativních“ textů. Segmentace s využitím pravidel je obvykle používána jako synonymum pro segmentaci na úrovni vět. Celá řada pravidel je dodávána přímo s programem a uživatelé si mohou definovat dodatečně svá pravidla, jak je to popsáno v této kapitole.</para>
       </listitem>
 
       <listitem>
-        <para><emphasis role="bold">Vyhledávání</emphasis> a<emphasis role="bold"> </emphasis><emphasis role="bold">Regulární výrazy</emphasis>: Vyhledávání v OmegaT je vskutku jednoduché, stačí zadat příkaz jako „<emphasis>vypiš segmenty obsahující slovo</emphasis><emphasis>‚kangaroo‛“. </emphasis> Dotazy mohou být také komplexní, je možno například hledat segmenty obsahující dvě nebo více po sobě jdoucích mezer. V takovém případě by se použil regulární výraz ^s^s+pro nalezení odpovídajících segmentů. Regulární výrazy se také hojně používají u pravidel segmentace.</para>
+        <para><emphasis role="bold">Vyhledávání</emphasis> a <emphasis role="bold"></emphasis><emphasis role="bold">Regulární výrazy</emphasis>: Vyhledávání v OmegaT je vskutku jednoduché, stačí zadat příkaz jako „<emphasis>vypiš segmenty obsahující slovo </emphasis><emphasis>‚kangaroo‛“. </emphasis> Dotazy mohou být také komplexní, je možno například hledat segmenty obsahující dvě nebo více po sobě jdoucích mezer. V takovém případě by se použil regulární výraz ^s^s+ pro nalezení odpovídajících segmentů. Regulární výrazy se také hojně používají u pravidel segmentace.</para>
       </listitem>
 
       <listitem>
-        <para><emphasis role="bold">Slovníky, Glosáře</emphasis>, <emphasis role="bold">Strojový překlad</emphasis> a <emphasis role="bold">Kontrola pravopisu:</emphasis> OmegaT podporuje široké užití slovníků a glosářů. Pokud je k dispozici internetové připojení, pak je možno využít různé služby strojového překladu jako Google Překladač přímo v prostředí OmegaT. Jestliže si aktivujete kontrolu pravopisu, program rozezná pravopisné chyby a překlepy a uživatel text opravuje již během překladu.</para>
+        <para><emphasis role="bold">Slovníky, Glosáře</emphasis>, <emphasis role="bold">Strojový překlad</emphasis> a <emphasis role="bold">Kontrola pravopisu, kontrola stylu a gramatiky „LanguageTool“:</emphasis> OmegaT podporuje široké užití slovníků a glosářů. Pokud je k dispozici internetové připojení, pak je možno využít různé služby strojového překladu jako Překladače od Google a Microsoftu přímo v prostředí OmegaT. Jestliže si aktivujete kontrolu pravopisu, program rozezná pravopisné chyby a překlepy a uživatel text opravuje již během překladu. OpenSource program „LanguageTool“ slouží ke korektuře běžných gramatických a stylistických chyb vybraných jazyků.</para>
       </listitem>
 
       <listitem>
-        <para><emphasis role="bold">Různé</emphasis>: program se zabývá i jinými oblastmi, jako například jak předejít ztrátě dat</para>
+        <para><emphasis role="bold">Různé:</emphasis> program se zabývá i jinými oblastmi, jako například jak předejít ztrátě dat</para>
       </listitem>
 
       <listitem>
-        <para><emphasis role="bold">Dodatky</emphasis> obsahuje následující informace</para>
+        <para><emphasis role="bold">Dodatky</emphasis> obsahují následující informace</para>
 
         <itemizedlist>
           <listitem>
@@ -110,7 +110,7 @@
 
         <itemizedlist>
           <listitem>
-            <para><emphasis role="bold">Klávesové zkratky v editoru</emphasis>: seznam zkratek používaných v editoru</para>
+            <para><emphasis role="bold">Klávesové zkratky v editoru:</emphasis> seznam zkratek používaných v editoru</para>
           </listitem>
 
           <listitem>
@@ -120,7 +120,17 @@
 
         <itemizedlist>
           <listitem>
-            <para><emphasis role="bold">Právní poznámky</emphasis></para>
+            <para><emphasis role="bold">Úvod k pluginům tokenizeru a skriptování</emphasis></para>
+          </listitem>
+
+          <listitem>
+            <para><emphasis role="bold">Týmové projekty</emphasis></para>
+          </listitem>
+        </itemizedlist>
+
+        <itemizedlist>
+          <listitem>
+            <para><emphasis role="bold">Právní poznámky a zásluhy </emphasis></para>
           </listitem>
         </itemizedlist>
       </listitem>

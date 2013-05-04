@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
 <appendix id="appendix.languages">
-  <title>Jazyky - seznam kódů ISO 639<indexterm class="singular">
+  <title>Jazyky – seznam kódů ISO 639<indexterm class="singular">
     <primary>Jazyky</primary>
   </indexterm>
   <indexterm class="singular">
@@ -384,7 +384,7 @@
 	  <entry>ita</entry>
 	</row>
         <row>
-	  <entry>Inuktitut</entry>
+	  <entry>Inuitština</entry>
 	  <entry>iu</entry>
 	  <entry>iku</entry>
 	</row>
@@ -604,7 +604,7 @@
 	  <entry>nor</entry>
 	</row>
         <row>
-	  <entry>Nuosu</entry>
+	  <entry>Yi</entry>
 	  <entry>ii</entry>
 	  <entry>iii</entry>
 	</row>
@@ -679,7 +679,7 @@
 	  <entry>que</entry>
 	</row>
         <row>
-	  <entry>Romansh</entry>
+	  <entry>Rétorománština</entry>
 	  <entry>rm</entry>
 	  <entry>roh</entry>
 	</row>

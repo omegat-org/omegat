@@ -6,8 +6,7 @@
   <para>Tento krátký text popisuje akce vyvolané klávesami v podokně Editoru. Pojem „Přesunout se do segmentu“ znamená, že kurzor se přesune na začátek segmentu, pokud se nachází před segmentem, a na konec segmentu, pokud se nachází za segmentem.</para>
 
   <table>
-    <title>Akce v okně editoru vyvolané klávesami
-</title>
+    <title>Akce v okně editoru vyvolané klávesami</title>
 
     <tgroup cols="2">
       <colspec align="left" colnum="1" colwidth="90"/>
@@ -44,7 +43,7 @@
         <row>
           <entry><emphasis role="bold">Ctrl+Vpravo:</emphasis></entry>
 
-          <entry>posunout o slovo vpravo, ale ne dále než za začátek segmentu</entry>
+          <entry>posunout o slovo vpravo, ale ne dále než za konec segmentu</entry>
         </row>
 
         <row>
@@ -134,7 +133,7 @@
         <row>
           <entry><emphasis role="bold">Ctrl+Shift+O</emphasis></entry>
 
-          <entry>změna směru záznamu mezi RTL-LTR (zprava doleva-zleva doprava)</entry>
+          <entry>změna směru záznamu mezi RTL-LTR (zprava doleva – zleva doprava)</entry>
         </row>
       </tbody>
     </tgroup>
@@ -160,11 +159,13 @@
     </listitem>
 
     <listitem>
-      <para><emphasis role="bold">Jakákoliv klávesa, </emphasis>když je kurzor mimo editovatelný segment, akce je ignorována.</para>
+      <para><emphasis role="bold">Jakákoliv klávesa, </emphasis>když je kurzor mimo editovatelný segment, pak je taková akce ignorována.</para>
     </listitem>
   </itemizedlist>
 
-  <para>Klávesa „Shift“ sama o sobě nevyvolá žádné speciální reakce pohybu kurzoru: když je stisknuta klávesa „Shift“, všechny klávesy pohybují kurzorem obvyklým způsobem.</para>
+  <para>Klávesa „Shift“ sama o sobě nevyvolá žádné speciální reakce pohybu kurzoru: když je stisknuta klávesa „Shift“, všechny klávesy pohybují kurzorem obvyklým způsobem, kromě případu kombinace kláves <literal>Shift+Enter</literal>, pomocí které se do textu vloží zalomení řádku.</para>
 
-  <para>Obecné příkazy systému: Vložit (<emphasis role="bold">Ctrl+V</emphasis> nebo <emphasis role="bold">Ctrl+Insert</emphasis>), Kopírovat (<emphasis role="bold">Ctrl+X</emphasis> nebo <emphasis role="bold">Ctrl+C)</emphasis>, Vložit přibližný překlad <emphasis role="bold">(Ctrl+I</emphasis>) a Vložit zdroj (<emphasis role="bold">Ctrl+Shift+I</emphasis>) v zásadě reaguje na jakýkoliv výběr, včetně výběru textu nacházejícího se mimo aktuální segment. Pokud je kurzor mimo právě otevřený segment, pak se vkládaný text stejně vloží dovnitř otevřeného segmentu.</para>
+  <para>Obecné příkazy systému: Vybrat vše (<keycap>Ctrl+A</keycap>), Vložit (<emphasis role="bold">Ctrl+V</emphasis> ), Vyjmout (<emphasis role="bold">Ctrl+X</emphasis>), Kopírovat <emphasis role="bold">Ctrl+C)</emphasis>, Vložit přibližný překlad <emphasis role="bold">(Ctrl+I</emphasis>) a Vložit zdroj (<emphasis role="bold">Ctrl+Shift+I</emphasis>) v zásadě reaguje pouze na text uvnitř aktuálně otevřeného segmentu.</para>
+
+  <para>Klávesové zkratky si můžete dle vlastní potřeby upravit. Více naleznete v části <link linkend="ch04.shortcuts.customization">Přizpůsobení zkratek</link></para>
 </appendix>

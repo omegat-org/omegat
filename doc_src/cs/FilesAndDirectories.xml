@@ -13,7 +13,7 @@
 
   <itemizedlist>
     <listitem>
-      <para>Soubory s nastavením uživatele: Jsou vytvořeny, když uživatel pozmění chování programu OmegaT prostřednictvím nastavení voleb. Jejich ztráta znamená, že OmegaT se vrátí na „továrním nastavení“. Pokud změníte nastavení když zrovna překládáte, může to někdy zapříčinit menší problémy.</para>
+      <para>Soubory s nastavením uživatele: Jsou vytvořeny, když uživatel pozmění chování programu OmegaT prostřednictvím nastavení voleb. Jejich ztráta znamená, že OmegaT se vrátí na „tovární nastavení“. Pokud změníte nastavení když zrovna překládáte, může to někdy zapříčinit určité problémy.</para>
     </listitem>
   </itemizedlist>
 
@@ -39,14 +39,17 @@
 
       <mediaobject>
         <imageobject role="html">
-          <imagedata fileref="images/Omegatproject.png"/>
+		          <imagedata fileref="images/Omegatproject.png"/>
+       </imageobject>
+      <imageobject role="fo">
+          <imagedata fileref="images/Omegatproject.png" width="60%"/>
         </imageobject>
       </mediaobject>
-    </figure>
+	  </figure>
 
-    <para>Při vytváření projektu nebo během překladu si můžete vybrat alternativní umístění pro některé adresáře Je proto možné, vybrat již existující adresář nebo vytvořit adresáře na takovém umístění, které bude odpovídat vašemu pracovnímu postupu a zvykům projektového managementu. I po vytvoření projektu je možno změnit umístění adresářů, a to otevřením <guimenuitem>Projekt &gt; Vlastnosti...</guimenuitem> v nabídce nebo klávesovou zkratkou <guibutton>Ctrl+E</guibutton>, a pak je možno provést potřebné změny.</para>
+    <para>Během vytváření projektu nebo během překladu si můžete vybrat alternativní umístění pro některé adresáře. Je proto možné, vybrat již existující adresář nebo vytvořit adresáře na takovém umístění, které bude odpovídat vašemu pracovnímu postupu a zvykům projektového managementu. I po vytvoření projektu je možno změnit umístění adresářů, a to otevřením <guimenuitem>Projekt &gt; Vlastnosti...</guimenuitem> v nabídce nebo klávesovou zkratkou <guibutton>Ctrl+E</guibutton>, a pak je možno provést potřebné změny.</para>
 
-    <para>Při pohledu přes správce souborů vypadá ten stejný  překladový projekt jako jakýkoliv jiný adresář. V následujícím příkladě obsahuje adresář <filename>my projects</filename> tři projekty OmegaT:</para>
+    <para>Při pohledu přes správce souborů vypadá ten stejný překladový projekt jako jakýkoliv jiný adresář. V následujícím příkladě obsahuje adresář <filename>my projects</filename> tři projekty OmegaT:</para>
 
     <para><figure id="OmegaT.projects.and.subdirectories">
         <title>Projekty a podadresáře aplikace OmegaT</title>
@@ -65,7 +68,7 @@
           <primary>Soubory projektu</primary> <secondary>Soubor omegat.project</secondary>
         </indexterm></title>
 
-      <para>Adresář nejvyšší úrovně v projektu vždy obsahuje soubore<filename> OmegaT.Project</filename>, který obsahuje parametry projektu tak, jak byly definovány v okně Vlastnosti projektu (<guimenuitem>Projekt &gt; Vlastnosti</guimenuitem>). Během provádění překladu jsou vytvořeny další soubor (<emphasis><filename>nazev_projektu</filename></emphasis><filename>-omegat.tmx, nazev_projektu-level1.tmx a nazev_projektu-level2.tmx</filename>)  Obsahují vždy obsahově stejnou překladovou paměť v různých formách, a budou použity v budoucích projektech.</para>
+      <para>Adresář nejvyšší úrovně v projektu vždy obsahuje soubor <filename>OmegaT.Project</filename>, který obsahuje parametry projektu tak, jak byly definovány v okně Vlastnosti projektu (<guimenuitem>Projekt &gt; Vlastnosti...</guimenuitem>). Během provádění překladu jsou vytvořeny další soubory (<emphasis><filename>nazev_projektu</filename></emphasis><filename>-omegat.tmx, nazev_projektu-level1.tmx a nazev_projektu-level2.tmx</filename>). Obsahují vždy obsahově stejnou překladovou paměť v různých formách, a budou použity v budoucích projektech.</para>
     </section>
 
     <section>
@@ -85,7 +88,7 @@
           <primary>Soubory projektu</primary> <secondary>Podadresář ‚omegat‛</secondary>
         </indexterm></title>
 
-      <para>Podadresář <emphasis role="bold">omegat</emphasis> obsahuje minimálně jeden nebo více dalších souborů. Soubor <filename>project_save.tmx</filename> představuje pracovní překladovou paměť projektu. Zálohy tohoto souboru (s koncovkou .bak) se průběžně ukládají do tohoto podadresáře, nejprve na začátku překladového sezení, na jeho konci, ale také v průběhu překládání. Tímto způsobem je zabráněno neúmyslné ztrátě - viz Prevence ztráty dat v kapitole <link linkend="chapter.misc">Různé</link>.</para>
+      <para>Podadresář <emphasis role="bold">omegat</emphasis> obsahuje minimálně jeden nebo více dalších souborů. Soubor <filename>project_save.tmx</filename> představuje pracovní překladovou paměť projektu. Zálohy tohoto souboru (s koncovkou .bak) se průběžně ukládají do tohoto podadresáře, nejprve na začátku překladového sezení, na jeho konci, ale také v průběhu překládání. Tímto způsobem je zabráněno neúmyslné ztrátě – viz Prevence ztráty dat v kapitole <link linkend="chapter.misc">Různé</link>.</para>
 
       <para>Během překladu dalších souborů mohou být v tomto adresáři vytvořeny i tyto soubory </para>
 
@@ -113,19 +116,19 @@
               <row>
                 <entry>project_stats_match.txt</entry>
 
-                <entry>obsahuje statistiku shody posledního zpracovávaného projektu, je generován přes <guimenuitem>Nástroje &gt; Statistika shody</guimenuitem></entry>
+                <entry>Pbsahuje statistiku shody posledního zpracovávaného projektu, je generován přes <guimenuitem>Nástroje &gt; Statistika shody</guimenuitem></entry>
               </row>
 
               <row>
                 <entry>segmentation.conf</entry>
 
-                <entry>pokud existuje, obsahuje segmentační pravidla šitá na míru danému projektu, tedy jen pokud se na ně odkazuje přes <guimenuitem>Projekt &gt; Vlastnosti...</guimenuitem> Viz <link linkend="chapter.project.properties">kapitolu Vlastnosti projektu</link></entry>
+                <entry>Pokud existuje, obsahuje segmentační pravidla šitá na míru danému projektu, tedy jen pokud se na ně odkazuje přes <guimenuitem>Projekt &gt; Vlastnosti...</guimenuitem> Viz <link linkend="chapter.project.properties">kapitolu Vlastnosti projektu</link></entry>
               </row>
 
               <row>
                 <entry>filters.xml</entry>
 
-                <entry>pokud existuje, obsahuje specifické filtry souboru daného projektu, když jsou dotazovány přes <guimenuitem>Projekt &gt; Vlastnosti ...</guimenuitem> Viz <link linkend="chapter.project.properties"> kapitolu Vlastnosti projektu</link></entry>
+                <entry>Pokud existuje, obsahuje specifické filtry souboru daného projektu, když jsou dotazovány přes <guimenuitem>Projekt &gt; Vlastnosti ...</guimenuitem> Viz <link linkend="chapter.project.properties"> kapitolu Vlastnosti projektu</link></entry>
               </row>
             </tbody>
           </tgroup>
@@ -137,7 +140,7 @@
           <primary>Soubory projektu</primary> <secondary>Podadresář zdrojového textu (source)</secondary>
         </indexterm></title>
 
-      <para>Podadresář zdrojového textu (source) obsahuje soubory, které se mají překládat. Můžete přidávat soubory i později Nezapomeňte, že struktura zdrojového podadresáře může mít libovolnou formu. Pokud jsou soubory, které budete překládat, součástí stromové struktury (jako např. webová stránka), vše co musíte udělat je určit nejvyšší podadresář a OmegaT zkopíruje veškerý obsah, a stromová struktura zůstane zachována.</para>
+      <para>Podadresář zdrojového textu (source) obsahuje soubory, které se mají překládat. Můžete přidávat soubory i později. Nezapomeňte ale, že struktura zdrojového podadresáře může mít libovolnou formu. Pokud jsou soubory, které budete překládat, součástí stromové struktury (jako např. webová stránka), vše co musíte udělat je určit nejvyšší podadresář a OmegaT zkopíruje veškerý obsah, a stromová struktura zůstane zachována.</para>
     </section>
 
     <section id="folder.target">
@@ -150,7 +153,7 @@
   </section>
 
   <section id="user.files">
-    <title id="user.files.location">Soubory s uživatelským nastavením<indexterm class="singular">
+    <title>Soubory s uživatelským nastavením<indexterm class="singular">
         <primary>Soubory projektu</primary> <secondary>Soubory s uživatelským nastavením</secondary>
       </indexterm></title>
 
@@ -170,13 +173,13 @@
           <row>
             <entry>Není zvolen žádný skript.</entry>
 
-            <entry>adresář, který obsahuje soubory skriptů pro skriptovací plugin, tedy pokud je tento plugin nainstalován</entry>
+            <entry>Adresář, který obsahuje soubory skriptů pro skriptovací plugin, tedy pokud je tento plugin nainstalován</entry>
           </row>
 
           <row>
             <entry>filters.xml</entry>
 
-            <entry>výchozí filtry souborů uživatele</entry>
+            <entry>Výchozí filtry souborů uživatele</entry>
           </row>
 
           <row>
@@ -188,7 +191,7 @@
           <row>
             <entry>segmentation.conf</entry>
 
-            <entry>výchozí segmentační pravidla uživatele</entry>
+            <entry>Výchozí segmentační pravidla uživatele</entry>
           </row>
 
           <row>
@@ -200,7 +203,7 @@
       </tgroup>
     </informaltable>
 
-    <para>Mějte na paměti, že výchozí pravidla segmentace a filtry souborů mohou být přepsány nastavením pro daný projekt (viz výše). Umistěni uživatelských souborů záleží na tom, kterou platformu používáte:</para>
+    <para>Výchozí pravidla segmentace a filtry souborů mohou být přepsány nastavením pro daný projekt (viz výše). Umístěni uživatelských souborů záleží na tom, kterou platformu používáte:</para>
 
     <informaltable>
       <tgroup align="left" cols="2" rowsep="1">
@@ -222,7 +225,7 @@
           <row>
             <entry>Ostatní Windows:</entry>
 
-            <entry><literal>&lt;Něco...&gt;\<application>OmegaT</application></literal>  (&lt;Něco...&gt; odpovídá umístění výchozí domovské složky („home“), která je určena Javou.)</entry>
+            <entry><literal>&lt;Něco...&gt;\<application>OmegaT</application></literal> (&lt;Něco...&gt; odpovídá umístění výchozí domovské složky (‚home‘), která je určena Javou.)</entry>
           </row>
 
           <row>
@@ -232,7 +235,7 @@
           </row>
 
           <row>
-            <entry>MAC OSX</entry>
+            <entry>MAC OS X</entry>
 
             <entry><filename>&lt;Home uživatele&gt;/Library/Preferences/<application>OmegaT</application></filename></entry>
           </row>
@@ -249,12 +252,10 @@
 
   <section id="application.files">
     <title>Soubory aplikace<indexterm class="singular">
-        <primary>Project files</primary>
-
-        <secondary>Application files</secondary>
+        <primary>Soubory projektu</primary> <secondary>1Soubory aplikace</secondary>
       </indexterm></title>
 
-    <para>OmegaT je dodávána jako balíček, který si lze stáhnout ze serveru SourceForge. Je tu například balíček, který není závislý na dané platformě, v jeho standardní Java formě. Alternativy obsahují linuxový balíček .tar, instalátor pro Windows - s nebo bez běhového prostředí Java, instalátor pro Mac OS X, a balíček se zdrojovým kódem pro vývojáře.</para>
+    <para>OmegaT je dodávána jako balíček, který si lze stáhnout ze serveru SourceForge. Je tu například balíček, který není závislý na dané platformě, v jeho standardní Java formě. Alternativy obsahují linuxový balíček .tar, instalátor pro Windows – s nebo bez běhového prostředí Java, instalátor pro Mac OS X, a balíček se zdrojovým kódem pro vývojáře.</para>
 
     <para>Balíček, který není závislý na dané platformě, se dá použít na různých platformách s funkčním běhovým prostředím Java 1.5, včetně platforem, pro které je dostupný specifický balíček. Balíček je poskytován jako komprimovaný soubor (archív typu zip nebo tar), který musíte rozbalit do adresáře, který jste si zvolili pro instalaci. Soubor se zpravidla dá rozbalit dvojklikem na stažený balíček. Rozbalený archiv vytvoří adresář, který obsahuje následující obsah:</para>
 
@@ -272,7 +273,7 @@
           <row>
             <entry><filename>/docs/</filename></entry>
 
-            <entry>Zde najdete veškeré soubory uživatelské příručky. Pokud chcete nechat načítat obsah externích linků, je dobré si příručku otevřít v internetovém prohlížeči.</entry>
+            <entry>Zde najdete veškeré soubory uživatelské příručky. Pokud chcete nechat načítat obsah externích odkazů, je dobré si příručku otevřít v internetovém prohlížeči.</entry>
           </row>
 
           <row>
@@ -318,7 +319,7 @@
           </row>
 
           <row>
-            <entry rowsep="0"><application>OmegaT</application></entry>
+            <entry rowsep="0"><literal>OmegaT</literal></entry>
 
             <entry rowsep="0">Textový soubor, který obsahuje dva řádky:</entry>
           </row>
@@ -339,11 +340,11 @@
           <row>
             <entry/>
 
-            <entry>Toto se může hodit uživatelům Linuxu a Mac OS X. Po té, co se ujistíte, že jste v příkazovém řádku v adresáři /OmegaT_2.5/ (číslo dle aktuální verze), povolte souboru oprávnění na čtení a zápis (chmod +x OmegaT). Posléze bude možné startovat OmegaT spouštěním tohoto souboru  z příkazového řádku.</entry>
+            <entry>Uživatelům systémů Linux a Mac OS X se tyto soubory mohou hodit. Po té, co se ujistíte, že jste v příkazovém řádku v adresáři /OmegaT_2.5/ (číslo dle aktuální verze), povolte souboru oprávnění na čtení a zápis (chmod +x OmegaT). Posléze bude možné startovat OmegaT spouštěním tohoto souboru z příkazového řádku.</entry>
           </row>
 
           <row>
-            <entry rowsep="0"><application>OmegaT</application>.bat</entry>
+            <entry rowsep="0"><literal>OmegaT.bat</literal></entry>
 
             <entry rowsep="0">Dávkový soubor, který se používá pro spouštění programu <application>OmegaT</application> z příkazového řádku pod Windows. Obsahuje pouze následující řádek:</entry>
           </row>
@@ -351,14 +352,14 @@
           <row>
             <entry/>
 
-            <entry><literal>java -jar <application>OmegaT</application>.jar
+            <entry><literal>java -jar OmegaT.jar
             %*</literal></entry>
           </row>
 
           <row>
-            <entry><application>OmegaT</application>.jar</entry>
+            <entry><literal>OmegaT.jar</literal></entry>
 
-            <entry>Hlavní aplikace OmegaT. Pro spuštění OmegaT musíte buď spustit tento soubor z příkazového řádku, nebo z vašeho správce souborů, obvykle dvojitým kliknutím.</entry>
+            <entry>Hlavní aplikace OmegaT. Pro spuštění OmegaT musíte buď spustit tento soubor z příkazového řádku, nebo z vašeho správce souborů, obvykle dvojklikem.</entry>
           </row>
         </tbody>
       </tgroup>

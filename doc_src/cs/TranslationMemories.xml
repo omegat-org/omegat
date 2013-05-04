@@ -3,21 +3,23 @@
 <chapter id="chapter.translation.memories">
   <title>Překladové paměti<indexterm class="singular">
       <primary>Překladové paměti</primary>
+    </indexterm><indexterm class="singular">
+      <primary>TMX</primary> <see>Překladové paměti</see>
     </indexterm></title>
 
   <section id="OmegaT.and.tmx.files">
     <title>Překladové paměti v OmegaT</title>
 
     <section id="tmx.files.location.and.purpose">
-      <title>odresáře překladových pamětí - umístění a účel</title>
+      <title>adresáře překladových pamětí – umístění a účel</title>
 
-      <para>Projekty <application>OmegaT</application> mohou obsahovat soubory překladových pamětí - tj. soubory s koncovkou tmx, a tyto soubory mohou být na čtyřech různých místech:</para>
+      <para>Projekty <application>OmegaT</application> mohou obsahovat soubory překladových pamětí – tj. soubory s koncovkou tmx, a tyto soubory mohou být na čtyřech různých místech:</para>
 
       <variablelist>
         <varlistentry>
           <term><indexterm class="singular">
               <primary>Překladové paměti</primary> <secondary>Podadresář omegat</secondary> <seealso>Soubory projektu</seealso>
-            </indexterm>adresář omegat</term>
+            </indexterm>Adresář omegat</term>
 
           <listitem>
             <para>Adresář omegat obsahuje <filename>project_save.tmx</filename> a případně několik záložních souborů TMX.  Soubor <filename>project_save.tmx</filename> obsahuje všechny segmenty, které byly uložené do paměti od okamžiku, kdy jste začali práci na projektu. Tento soubor je v projektu vždy obsažen. Jeho obsah bude vždy řazen abecedně podle zdrojových segmentů.</para>
@@ -46,7 +48,7 @@
               </listitem>
             </itemizedlist>
 
-            <para>Tyto soubory jsou kopiemi souboru <filename>project_save.tmx</filename>, tj. hlavní překladové paměti projektu, kromě tak zvaných nespárovaných (osiřelých) segmentů. Mají odpovídajícím způsobem změněné jména, takže jejich obsah je možno identifikovat, i když je používáte jinde, například v podadresáři <filename>tm</filename> nebo v jiném projektu (viz níže).</para>
+            <para>Tyto soubory jsou kopiemi souboru <filename>project_save.tmx</filename>, tj. hlavní překladové paměti projektu, kromě tak zvaných nespárovaných (osiřelých) segmentů. Mají odpovídajícím způsobem změněná jména, takže jejich obsah je možno identifikovat, i když je používáte jinde, například v podadresáři <filename>tm</filename> nebo v jiném projektu (viz níže).</para>
           </listitem>
         </varlistentry>
 
@@ -58,9 +60,15 @@
           <listitem>
             <para>Adresář /tm/ může obsahovat libovolné množství vedlejších překladových pamětí, čili souborů tmx. Takové soubory mohly být vytvořeny jakýmkoliv z výše jmenovaných způsobů. Všimněte si, že jiné nástroje CAT umí exportovat (a také importovat) soubory tmx, obvykle všechny tři formy. Samozřejmě nejlepší věc je použít soubory překladové paměti specifické pro OmegaT (viz výše), takže zůstane zachované formátování textu.</para>
 
-            <para>Obsahy překladových pamětí v podadresáři tm slouží ke generování návrhů pro překládaný text / texty. Jakýkoliv text, který byl již přeložený a uložený do těchto souborů, se objeví mezi návrhy přibližného překladu, pokud je tedy v dostatečné míře podobný textu, který je právě překládán.</para>
+            <para>Obsahy překladových pamětí v podadresáři tm slouží ke generování návrhů pro překládaný text či texty. Jakýkoliv text, který byl již přeložený a uložený do těchto souborů, se objeví mezi návrhy přibližného překladu, pokud je tedy v dostatečné míře podobný textu, který je právě překládán.</para>
 
-            <para>Pokud je zdrojový segment v jedné z vedlejších překladových pamětí identický s právě překládaným textem, OmegaT se zachová tak, jak je to nastaveno v dialogovém okně <menuchoice> <guimenu>Možnosti</guimenu> <guimenuitem>Nastavení editace...</guimenuitem> </menuchoice>  Například (pokud je akceptováno výchozí nastavení), překlad z vedlejší překladové paměti je akceptován a je přidána předpona <emphasis>[přibližně]</emphasis>, takže překladatel si může takovéto překlady v pozdější fázi překladu projít a zkontrolovat, jestli takto označené segmenty byly přeloženy správně (viz kapitolu <link linkend="chapter.translation.editing">Nastavení editace</link>) <menuchoice> <guimenu>.</guimenu> </menuchoice>.</para>
+            <para>Pokud je zdrojový segment v jedné z vedlejších překladových pamětí identický s právě překládaným textem, OmegaT se zachová tak, jak je to nastaveno v dialogovém okně <menuchoice> <guimenu>Možnosti</guimenu> <guimenuitem>Nastavení editace...</guimenuitem> </menuchoice>  Například (pokud je akceptováno výchozí nastavení), překlad z vedlejší překladové paměti je akceptován a je přidána předpona <emphasis>[přibližně]</emphasis>, takže překladatel si může takovéto překlady v pozdější fázi překladu projít a zkontrolovat, jestli takto označené segmenty byly přeloženy správně (viz kapitolu <link linkend="chapter.translation.editing">Nastavení editace</link>) <menuchoice> <guimenu></guimenu> </menuchoice>.</para>
+
+            <para>Může se stát, že překladové paměti dostupné v podadresáři <filename>tm</filename> obsahují segmenty s identickým zdrojovým textem, ale odlišnými překlady. Soubory překladových pamětí jsou načítány podle svých názvů a segmenty obsažené v dané překladové paměti jsou načítány po řádcích. Poslední segment s identickým zdrojovým textem má tedy větší váhu (samozřejmě je smysluplnější v první řadě takovýmto situacím předcházet).</para>
+
+            <para>Soubory překladových pamětí v adresáři tm mohou být komprimovány jako gzip.<indexterm class="singular">
+                <primary>Překladové paměti</primary> <secondary>komprimování</secondary>
+              </indexterm></para>
           </listitem>
         </varlistentry>
 
@@ -72,22 +80,32 @@
             </indexterm></term>
 
           <listitem>
-            <para>Pokud je na samotném začátku jasné, že překlady v dané překladové paměti (nebo více pamětech) jsou psrávné, je možné je vložit do adresáře  <emphasis role="bold">tm/auto</emphasis> a vyhnout se tak potvrzování spousty případů <emphasis>[přibližně]</emphasis>. Tímto způsobem dojde k efektivnímu <emphasis role="bold">předběžnému překladu</emphasis> zdrojového textu: všechny segmenty ve zdrojovém textu, pro které lze najít překlady v této „automatické“ překladové paměti, se tak bez dalšího zásahu uživatele dostanou do hlavní překladové paměti projektu.</para>
+            <para>Pokud je na samotném začátku jasné, že překlady v dané překladové paměti (nebo více pamětech) jsou správné, je možné je vložit do adresáře <emphasis role="bold">tm/auto</emphasis> a vyhnout se tak potvrzování spousty případů <emphasis>[přibližně]</emphasis>. Tímto způsobem dojde k efektivnímu <emphasis role="bold">předběžnému překladu</emphasis> zdrojového textu: všechny segmenty ve zdrojovém textu, pro které lze najít překlady v této „automatické“ překladové paměti, se tak bez dalšího zásahu uživatele dostanou do hlavní překladové paměti projektu.</para>
+          </listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term><indexterm class="singular">
+              <primary>Překladové paměti</primary> <secondary>Podadresář tm/penalty-xxx</secondary> <seealso>Soubory projektu</seealso>
+            </indexterm>adresáře penalty-xxx</term>
+
+          <listitem>
+            <para>Někdy je užitečné rozlišovat mezi překladovými pamětmi, kde je kladen důraz na kvalitu, a takovými, které nejsou tolik spolehlivé, čili, kde se tolik neklade důraz na obsah, klienta, revizi, status, atd. Pro překladové paměti v adresářích s názvem „penalty-xxx“ (s hodnotou xxx mezi 0 a 100), jsou přibližné překlady negativně hodnoceny dle názvu adresáře: např. 100% shody v jakékoli překladové paměti, která je v adresáři nazvaném Penalty-30, bude snížena na 70% shody. Snížení míry shody je pak aplikováno na všechny tři typy procentní shody: shody 75, 80, 90 budou v takovém případě sníženy na 45, 50, 60.</para>
           </listitem>
         </varlistentry>
       </variablelist>
 
       <para>Můžete si také nastavit, aby <application>OmegaT</application> měla dodatečný soubor TMX (ve stylu <application>OmegaT</application>) kdekoliv jinde dle vaší volby, takový soubor bude obsahovat veškeré přeložitelné segmenty projektu. Viz níže Paměť pseudopřekladu.</para>
 
-      <para>Povšimněte si , že všechny překladové paměti jsou při otevření překladu nahrány do paměti. Pravidelně se ukládají zálohy projektové překladové paměti (viz další kapitolu), a automaticky je ukládán/aktualizován soubor <filename>project_save.tmx</filename> pokaždé, když projekt zavřete anebo jej znova načtete. To například znamená, že nemusíte ukončit projekt,  na které právě pracujete, pokud se rozhodnete přidat další vedlejší překladovou paměť: stačí jednoduše opětovně načíst znovu a provedené změny už budou zahrnuty.</para>
+      <para>Všechny překladové paměti jsou při otevření překladu nahrány do paměti. Pravidelně se ukládají zálohy projektové překladové paměti (viz další kapitolu), a automaticky je ukládán a aktualizován soubor <filename>project_save.tmx</filename> pokaždé, když projekt zavřete anebo jej znova načtete. To například znamená, že pokud se rozhodnete přidat další vedlejší překladovou paměť, tak nemusíte ukončit projekt, na kterém právě pracujete: stačí jednoduše opětovně načíst znovu a provedené změny už budou zahrnuty.</para>
 
-      <para>Umístění různých odlišných překladových pamětí pro daný projekt si uživatel určuje sám (viz dialogové okno Projekt ve <link linkend="chapter.instant.start.guide">Stručném úvodním průvodci).</link></para>
+      <para>Umístění různých odlišných překladových pamětí pro daný projekt si uživatel určuje sám (viz dialogové okno Projekt v okně <link linkend="chapter.project.properties">Vlastnosti projektu).</link></para>
 
       <para>V závislosti na situaci, je možné využít různé strategie, např.:</para>
 
       <para><emphasis role="bold">Několik projektů ke stejnému tématu:</emphasis> zachovejte si strukturu projektu a změňte adresáře pro zdrojové soubory a překlad (Zdroj = source/zakazka1, Překlad = target/zakazka1 atd). Všimněte si, že vaše segmenty z adresáře zakazka1 nejsou zahrnuty v adresáři zakazka2 a dalších následných zakázkách, následně budou tyto segmenty označeny jako nespárované segmenty: nicméně pořád budou užitečné při získávání shod pro přibližné překlady.</para>
 
-      <para><emphasis role="bold">několik překladatelů pracuje na stejném projektu:</emphasis> rozdělte zdrojové soubory např. takto source/Alice, source/Bob ... a přidělte je členům týmu (Alice, Bob, ...). Tito si mohou vytvořit vlastní projekty a posléze po dokončení překladu nebo splnění svého penza, dodat vlastní  soubor <filename>project_save.tmx</filename>.  Soubory <filename>project_save.tmx</filename> se sesbírají a vyřeší se případné konflikty, např. co se týče terminologie. Takto bude vytvořena nová hlavní verze překladové paměti, buď aby se vložila do podadresářů všech členů týmu <emphasis>tm/auto</emphasis> nebo aby si členové týmu nahradili své soubory <filename>project_save.tmx</filename>. Tým může také používat stejnou strukturu podadresářů pr cílové soubory. Toto jim umožňuje například zkontrolovat ve kterýkoliv okamžik, zda je cílová verze pro kompletní projekt stále v pořádku.</para>
+      <para><emphasis role="bold">Několik překladatelů pracuje na stejném projektu:</emphasis> rozdělte zdrojové soubory např. takto source/Alice, source/Bob ... a přidělte je členům týmu (Alice, Bob, ...). Tito si mohou vytvořit vlastní projekty a posléze po dokončení překladu nebo splnění svého penza, dodat vlastní soubor <filename>project_save.tmx</filename>.  Soubory <filename>project_save.tmx</filename> se sesbírají a vyřeší se případné konflikty, např. co se týče terminologie. Takto bude vytvořena nová hlavní verze překladové paměti, buď aby se vložila do podadresářů všech členů týmu <emphasis>tm/auto</emphasis> nebo aby si členové týmu nahradili své soubory <filename>project_save.tmx</filename>. Tým může také používat stejnou strukturu podadresářů pro cílové soubory. Toto jim umožňuje například kdykoliv zkontrolovat, zda je cílová verze pro kompletní projekt stále v pořádku.</para>
     </section>
 
     <section id="tmx.backup">
@@ -107,19 +125,19 @@
         </listitem>
 
         <listitem>
-          <para>přejmenujte aktuální soubor <filename>project_save.tmx </filename> na něco, co si budete pamatovat (např. <filename>project_save.tmx.nahradni</filename>)</para>
+          <para>přejmenujte aktuální soubor <filename>project_save.tmx </filename> na něco, co si budete pamatovat (např.  <filename>project_save.tmx.nahradni</filename>)</para>
         </listitem>
 
         <listitem>
-          <para>Označte tu zálohu překladové paměti, třeba tu nejnovější, nebo poslední z předchozího dne, která nejvíce pravděpodobně obsahuje data, která hledáte.</para>
+          <para>označte zálohovou překladovou paměť, a to takovou (např. tu nejaktuálnější, nebo poslední verzi z předchozího dne), u které je nejpravděpodobnější, že obsahuje vámi hledaná data</para>
         </listitem>
 
         <listitem>
-          <para>Zkopírujte pak její obsah do souboru <filename>project_save.tmx</filename>.</para>
+          <para>zkopírujte pak její obsah do souboru <filename>project_save.tmx</filename></para>
         </listitem>
 
         <listitem>
-          <para>Otevřete projekt</para>
+          <para>otevřete projekt</para>
         </listitem>
       </orderedlist>
     </section>
@@ -139,7 +157,7 @@
         </listitem>
 
         <listitem>
-          <para>dvou nebo tří znakové jazykové kódy následované dvouznakovým kódem země (např. EN-US - Viz <xref linkend="appendix.languages"/> částečný seznam kódů jazyků a zemí).</para>
+          <para>2 nebo 3 písmenný kód jazyka, za kterým následuje 2 písmenný kód země (např. EN-US - Viz <xref linkend="appendix.languages"/> částečný seznam kódů jazyků a zemí).</para>
         </listitem>
       </itemizedlist>
 
@@ -155,47 +173,47 @@
           <primary>Překladové paměti</primary> <secondary>Nespárované segmenty</secondary>
         </indexterm></title>
 
-      <para>Soubor <filename>project_save.tmx</filename> obsahuje všechny segmenty, které byly přeložené od okamžiku, kdy jste začali práci na projektu. Jestli ale upravíte segmentaci projektu, nebo smažete soubory zdroje, některé shody budou v podokně &quot;Přibližné překlady&quot; zobrazené jako <emphasis role="bold">nespárované segmenty</emphasis>: takové shody odkazují na segmenty, které ve zdrojovém dokumentu již neexistují, ale odpovídají segmentům přeloženým a zaznamenaným před provedenou změnou.</para>
+      <para>Soubor <filename>project_save.tmx</filename> obsahuje všechny segmenty, které byly přeložené od okamžiku, kdy jste začali práci na projektu. Jestli ale upravíte segmentaci projektu, nebo smažete soubory zdroje, některé shody budou v podokně „Přibližné překlady“ zobrazené jako <emphasis role="bold">nespárované segmenty</emphasis>: takové shody odkazují na segmenty, které ve zdrojovém dokumentu již neexistují, ale odpovídají segmentům přeloženým a zaznamenaným před provedenou změnou.</para>
     </section>
   </section>
 
   <section id="using.translation.memories.from.previous.projects">
     <title>Opětovné používání překladových pamětí<indexterm class="singular">
-        <primary>Překladové paměti</primary> <secondary>Import a export</secondary>
-      </indexterm><indexterm class="singular">
         <primary>Překladové paměti</primary> <secondary>Opětovné používání překladových pamětí</secondary>
       </indexterm></title>
 
-    <para>Ze začátku, tzn. když je projekt vytvořen, hlavní překladová paměť projektu, čili soubor <filename>project_save.tmx</filename>, je prázdná. Tato překladová paměť se postupně během překladu plní. Aby se tento proces urychlil, je možno použít již existující překlady. Pokud daná věta již byla jednou přeložena, a přeložena správně, není tedy nutno ji překládat znovu. Překladové paměti tedy mohou obsahovat referenční překlady: typickým příkladem je mezinárodní legislativa Evropského společenství. </para>
+    <para>Na začátku, tzn. když je projekt vytvořen, hlavní překladová paměť projektu, čili soubor <filename>project_save.tmx</filename>, je prázdná. Tato překladová paměť se postupně během překladu plní. Aby se tento proces urychlil, je možno použít již existující překlady. Pokud daná věta již byla jednou přeložena, a přeložena správně, není tedy nutno ji překládat znovu. Překladové paměti tedy mohou obsahovat referenční překlady: typickým příkladem je mezinárodní legislativa Evropského společenství. </para>
 
-    <para>Když vytvoříte cílové dokumenty v projektu <application>OmegaT</application>, překladová paměť projektu bude uložena ve formě tří souborů v kořenovém adresáři vašeho <application>OmegaT</application> projektu (popis vysvětlen výše). Tyto tři TMX soubory (-„<filename>omegat.tmx</filename>“, „<filename>-level1.tmx</filename>“ a „<filename>-level2.tmx</filename>“) můžeme taktéž označit jako „exportní překladová paměť“, tj. jako exportovatelný dvoujazyčný přehled vašeho současného projektu.</para>
+    <para>Když vytvoříte cílové dokumenty v projektu<application>OmegaT</application>, překladová paměť projektu bude uložena ve formě tří souborů v kořenovém adresáři vašeho <application>OmegaT</application> projektu (popis vysvětlen výše). Tyto tři TMX soubory (-„<filename>omegat.tmx</filename>“, „<filename>-level1.tmx</filename>“ a „<filename>-level2.tmx</filename>“) můžeme taktéž označit jako „exportní překladová paměť“, tj.  jako exportovatelný dvoujazyčný přehled vašeho současného projektu.</para>
 
-    <para>Pokud chcete použít překladovou paměť z předchozího projektu (například protože nový projekt je podobný tomu předchozímu, nebo používá terminologii, která byla dříve použita), můžete tyto překladové paměti použít jako „vstupní překladové paměti“, tj. pro import pro váš nový projekt. V tomto případě umístěte zvolené překladové paměti, které chcete použít, do adresáře projektu <emphasis>/tm</emphasis> nebo do adresáře <emphasis>/tm</emphasis>/auto vašeho nového projektu: při nakopírování paměti do /tm to bude fungovat tak, že nálezy z této překladové paměti budou zobrazeny v podokně Přibližné překlady, a v případě /tm/auto bude překladová paměť použita k předběžnému překladu zdrojového textu.</para>
+    <para>Pokud chcete použít překladovou paměť z předchozího projektu (například protože nový projekt je podobný tomu předchozímu, nebo používá terminologii, která byla dříve použita), můžete tyto překladové paměti použít jako „vstupní překladové paměti“, tj. pro import pro váš nový projekt. V tomto případě umístěte zvolené překladové paměti, které chcete použít, do adresáře <emphasis>/tm</emphasis> nebo do adresáře <emphasis>/tm</emphasis>/auto vašeho nového projektu: při nakopírování paměti do /tm to bude fungovat tak, že nálezy z této překladové paměti budou zobrazeny v podokně Přibližné překlady, a v případě /tm/auto bude překladová paměť použita k předběžnému překladu zdrojového textu.</para>
 
-    <para>Ve výchozím nastavení je adresář /tm umístěn přímo v kořenovém adresáři projektu (např. ..<emphasis>/MujProjekt/tm)</emphasis>, ale můžete si dle vlastních potřeb zvolit jiný adresář v dialogovém okně Vlastnosti. Toto je užitečná vlastnost, pokud často používáte překladové paměti vytvořené již dříve, například protože se týkají stejného tématu nebo jsou pro stejného klienta. V tomto případě je užitečný tento postup:</para>
+    <para>Ve výchozím nastavení je adresář /tm umístěn přímo v kořenovém adresáři projektu (např. ...<emphasis>/MujProjekt/tm</emphasis>), ale můžete si dle vlastních potřeb zvolit v dialogovém okně Vlastnosti jiný adresář. Toto je užitečná vlastnost, pokud často používáte překladové paměti vytvořené již dříve, například protože se týkají stejného tématu nebo jsou pro stejného klienta. V tomto případě je užitečný tento postup:</para>
 
     <itemizedlist>
       <listitem>
-        <para>Vytvořte adresář („zdrojový adresář“) na vhodném umístění na vašem disku, do kterého budete ukládat překladové paměti podle konkrétního klienta či tématu.</para>
+        <para>Vytvořte adresář („adresář jako úložiště“) na vhodném umístění na vašem disku, do kterého budete ukládat překladové paměti podle konkrétního klienta či tématu.</para>
       </listitem>
     </itemizedlist>
 
     <itemizedlist>
       <listitem>
-        <para>Pokaždé, když dokončíte projekt, zkopírujte jeden ze tří souborů „exportních“ překladových pamětí z kořenového adresáře projektu do zdrojového adresáře.</para>
+        <para>Pokaždé, když dokončíte projekt, zkopírujte jeden ze tří souborů „exportních“ překladových pamětí z kořenového adresáře projektu do adresáře v roli úložiště.</para>
       </listitem>
     </itemizedlist>
 
     <itemizedlist>
       <listitem>
-        <para>Když začnete pracovat na novém projektu na stejné téma či pro stejného klienta, zadejte v dialogovém okně Vlastnosti zdrojový adresář <guimenuitem>Projekt &gt; Vlastnosti &gt; Upravit vlastnosti projektu</guimenuitem> a označte jej jako Adresář překladové paměti.</para>
+        <para>Když začnete pracovat na novém projektu na stejné téma či pro stejného klienta, zadejte v dialogovém okně Vlastnosti adresář úložiště<guimenuitem>Projekt &gt; Vlastnosti &gt; Upravit vlastnosti projektu</guimenuitem> a označte jej jako Adresář překladové paměti.</para>
       </listitem>
     </itemizedlist>
 
     <para>Mějte na paměti, že všechny soubory TMX v adresáři /tm se budou během startu programu parsovat, takže když v tomto adresář máte veškeré své soubory TMX počítejte s odpovídajícím zbytečným zpomalením aplikace OmegaT. Taktéž nezapomeňte na možnost odstranění takových pamětí, které již nejsou zapotřebí, např. po té, co jste použili jejich obsah k naplnění souboru <filename>project-save.tmx </filename>.</para>
 
-    <section>
-      <title>Import a export překladových pamětí</title>
+    <section id="importing.and.exporting.translation.memories">
+      <title>Import a export překladových pamětí<indexterm class="singular">
+          <primary>Překladové paměti</primary> <secondary>Import a export</secondary>
+        </indexterm></title>
 
       <para>OmegaT podporuje importování TMX verzí 1.1-1.4b (oba typy: level 1 a level 2). Toto umožňuje v aplikaci OmegaT používat překladové paměti vytvořené jinými nástroji. Nicméně, OmegaT nepodporuje importované soubory TMX level 2 (které ukládají nejen překlad, ale i formátování) úplně. Soubory TMX level2 se i tak budou importovat a jejich textový obsah OmegaT vidí, ale kvalita shody u přibližných překladů bude nižší.</para>
 
@@ -203,8 +221,84 @@
 
       <para>O některých nástrojích je známé, že za určitých podmínek vytvářejí neplatné soubory TMX. Pokud chcete používat takovéto soubory jako referenční překlady v OmegaT, je nutné je v případě, že by je aplikace OmegaT odmítla, opravit. Opravy představují jednoduché operace a OmegaT vám pomůže pomocí příslušné chybové zprávy. Pokud máte problémy s užíváním programu, můžete požádat o radu v uživatelské skupině.</para>
 
-      <para><application/>OmegaT exportuje soubory TMX ve verzi 1.4 (jak level 1, tak i level 2) Export levelu 2 není standardní level 2, ale je dostačující na vytvoření správných shod v překladatelských nástrojích podporujících TMX Level 2. Pokud potřebujete jen textové informace (a ne informace o formátování, použijte soubor level 1, který byl vytvořen pomocí OmegaT.</para>
+      <para>OmegaT exportuje soubory TMX ve verzi 1.4 (jak level 1, tak i level 2) Export levelu 2 není standardní level 2, ale je dostačující na vytvoření správných shod v překladatelských nástrojích podporujících TMX Level 2. Pokud potřebujete jen textové informace (a ne informace o formátování, použijte soubor level 1, který byl vytvořen pomocí OmegaT.</para>
     </section>
+
+    <section id="Creating.a.translation.memory.for.selected.documents">
+      <title>Vytvoření překladové paměti pro vybrané dokumenty</title>
+
+      <para>V případě, kdy překladatel chce sdílet svou překladovou paměť tím způsobem, že vynechá některé části nebo zahrne pouze překlady určitých souborů, nebude pak sdílet celý soubor<filename>NazevProjektu-omegat.tmx</filename>. Následující postup znázorňuje jen jednu z možností, ale dostatečně jednoduchou k porozumění a bez jakéhokoli ohrožení obsahu.</para>
+
+      <itemizedlist>
+        <listitem>
+          <para>Vytvořte projekt v žádaném jazykovém páru, oddělte jej od jiných projektů,a přidělte mu odpovídající název - vytvořená překladová paměť bude tento název obsahovat.</para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para>Do zdrojového adresáře projektu (‚source‘) zkopírujte dokumenty, které potřebujete pro vytvoření překladové paměti.</para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para>Zkopírujte překladové paměti, obsahující překlad nahoře jmenovaných dokumentů do podadresáře <filename>tm/auto</filename> nového projektu. </para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para>Začněte práci na projektu. Zkontrolujte tagy, jestli neobsahují chyby pomocí klávesové zkratky <keycap>Ctrl+T </keycap> a pomocí <keycap>Ctrl+U</keycap> zkontrolujte, zda nejsou obsaženy nepřeložené segmenty.  Po té, co dosáhnete žádaného stavu překladu, můžete stisknout <keycap>Ctrl+D</keycap> a tím vytvoříte cílové dokumenty, také zkontrolujte jejich obsah.</para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para>Pak zavřete projekt. Soubory překladové paměti, které jsou obsaženy v hlavním adresáři projektu (viz výše) nyní obsahují překlady vybraného jazykového páru pro ty soubory, které jste nakopírovali do zdrojového adresáře. Zkopírujte je na takové místo, kde je v případě budoucí potřeby najdete.</para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para>Abyste zabránili opětovnému použití projektu a tím možné znehodnocení budoucích případů, smažte adresář projektu nebo jej archivujte mimo obvyklé umístění, kde pracujete s projekty.</para>
+        </listitem>
+      </itemizedlist>
+    </section>
+
+    <section id="sharing.translation.memories">
+      <title>Sdílení projektových pamětí<indexterm class="singular">
+          <primary>Překladové paměti</primary> <secondary>Sdílení</secondary> <seealso>Projekt, Download, Týmový projekt...</seealso>
+        </indexterm></title>
+
+      <para>V případě, kde je zahrnuta spolupráce týmu překladatelů, budou účastníci upřednostňovat možnost sdílení běžné překladové paměti, místo aby šířili vlastní místní verze.</para>
+
+      <para>OmegaT komunikuje s SVN a Git, dvěma běžnými programy týmové spolupráce pro správu revizí a verzí (‚revision control systems‘ / RSC), které jsou dostupné pod otevřenou open source licencí. V případě programu OmegaT jsou kompletní projektové adresáře (jinými slovy dotčené překladové paměti stejně jako adresář se zdrojem, nastavení projektu, atd.)spravovány vybraným RSC. Více informací v kapitole</para>
+    </section>
+
+    <section>
+      <title>Použití překladových pamětí s alternativními jazykovými páry<indexterm class="singular">
+          <primary>Překladové paměti</primary> <secondary>Alternativní jazykové páry</secondary>
+        </indexterm></title>
+
+      <para>Mohou nastat situace, kdy jste dokončili projekt s např. zdrojem v holandštině a překlad je třeba anglicky. Pak potřebujete překlad do např. čínštiny, ale váš překladatel nerozumí holandštině; tento překladatel nicméně umí perfektně anglicky. V takovém případě může posloužit NL-EN překladová paměť jako prostředník pro vygenerování překlad NL-ZH.</para>
+
+      <para>Řešení v našem případě je zkopírovat existující překladovou paměť do podadresáře ‚tm‘ a přejmenovat jej na ZH_CN.tmx, aby se tak naznačil cílový jazyk překladové paměti. Překladateli se ukáží anglické překlady zdrojových segmentů v holandštině a použije je k vytvoření čínského překladu.</para>
+
+      <para><emphasis role="bold">Důležitá informace:</emphasis> podpůrná překladová paměť musí být přejmenována na XX_YY.tmx, kde XX_YY je cílový jazyk překladové paměti, např. ZH_CN.tmx ve výše uvedeném případě. Zdrojové jazyky projektu a překladové paměti by ovšem měly být identické - v našem příkladě NL. Je přípustná pouze jedna překladová paměť pro daný jazykový pár, takže pokud by bylo nutno zahrnout několik překladových pamětí, budete je muset spojit všechny v XX_YY.tmx.</para>
+    </section>
+  </section>
+
+  <section>
+    <title>Zdroje s existujícími překlady<indexterm class="singular">
+        <primary>Překladové paměti</primary> <secondary>Soubory PO a OKAPI TTX</secondary> <seealso>Překladové paměti Podadresář tm/auto</seealso>
+      </indexterm></title>
+
+    <para>Některé typy zdrojových souborů (např. PO, TTX, atd.) jsou dvoujazyčné, tj. slouží jednak jako zdrojový text, ale také jako překladová paměť. V takových případech existující překlad, který se nachází v takovém souboru, bude zahrnut do souboru <filename>project_save.tmx</filename>. Zachází se s ním jako s výchozím překladem pokud není nalezena žádná shoda, nebo se bere jako alternativní překlad, pokud existuje stejný zdrojový segment, ale s cílovým textem. Výsledek pak bude záviset na pořadí, ve kterém byly nahrány zdrojové segmenty.</para>
+
+    <para>Všechny překlady ze zdrojových dokumentů jsou také zobrazeny v podokně Komentáře, a navíc v podokně Přibližné překlady. V případě PO souborů, se použije 20% snížení váhy pro alternativní překlad (tj. 100% shoda se stane 80% shodou). Slovo [Přibližně] bude zobrazeno ve zdrojovém segmentu.</para>
+
+    <para>Když nahrajete segmentovaný soubor TTX, budou zahrnuty segmenty, kde se zdroj rovná cíli jen tehdy, když označíte volbu „Povolit překlad rovnající se zdroji“ v Možnosti → Nastavení editace... Může to být matoucí, takže zvažte možnost tuto volbu v takovém případě neaktivovat.</para>
   </section>
 
   <section id="pseudo.translated.memory">
@@ -216,11 +310,11 @@
       <para>Tato část bude zajímat asi jen pokročilé uživatele.</para>
     </note>
 
-    <para>Před samotným překladem segmentů, možná je budete chtít předzpracovat nebo je zpracovat jiným způsobem s OmegaT. Například budete chtít vytvořit pseudopřeklad pro testovací účely, OmegaT umožňuje vytvořit dodatečný soubor tmx, který obsahuje všechny segmenty projektu. Překlad v tomto tmx může být</para>
+    <para>Před samotným překladem segmentů, je možná budete chtít s OmegaT předzpracovat nebo je zpracovat jiným způsobem. Například budete chtít vytvořit pseudopřeklad pro testovací účely, OmegaT umožňuje vytvořit dodatečný soubor tmx, který obsahuje všechny segmenty projektu. Překlad v tomto tmx může být buď</para>
 
     <itemizedlist>
       <listitem>
-        <para>překlad rovnající se zdroji (výchozí nastavení)</para>
+        <para>překlad rovnající se zdroji (výchozí nastavení) nebo</para>
       </listitem>
     </itemizedlist>
 
@@ -234,7 +328,7 @@
 
     <para><literal>java -jar omegat.jar --pseudotranslatetmx=&lt;nazevsouboru&gt; [pseudotranslatetype=[equal|empty]]</literal></para>
 
-    <para>Nahraďte <literal>&lt;nazevsouboru&gt;</literal> nazvem souboru, který chcete vytvořit, buď  absolutně nebo relativně vůči pracovnímu adresáři (adresář, odkud startujete <application>OmegaT</application>). Druhý parametr <literal>--pseudotranslatetype</literal> je volitelný. Jeho hodnota je buď  <literal>equal</literal> (‚rovnající se‛) (výchozí hodnota pro zdroj=překlad) nebo <literal>empty</literal> (‚prázdný‛) (cílový segment zůstane prázdný). Vytvořený soubor tmx můžete zpracovávat libovolným nástrojem. Abyste mohli použít tento soubor v <application>OmegaT</application>, tak jej přejmenujte na <emphasis>project_save.tmx </emphasis> a uložte jej do adresáře <literal>omegat</literal> ve vašem projektu.</para>
+    <para>Nahraďte <literal>&lt;nazevsouboru&gt;</literal> názvem souboru, který chcete vytvořit, buď  absolutně nebo relativně vůči pracovnímu adresáři (adresář, odkud startujete <application>OmegaT</application>). Druhý parametr <literal>--pseudotranslatetype</literal> je volitelný. Jeho hodnota je buď  <literal>equal</literal> (‚rovnající se‛) (výchozí hodnota pro zdroj=překlad) nebo <literal>empty</literal> (‚prázdný‛) (cílový segment zůstane prázdný). Vytvořený soubor tmx můžete zpracovávat libovolným nástrojem. Abyste mohli použít tento soubor v <application>OmegaT</application>, tak jej přejmenujte na <emphasis>project_save.tmx </emphasis> a uložte jej do adresáře <literal>omegat</literal> ve vašem projektu.</para>
   </section>
 
   <section id="upgrading.translation.memories">
@@ -244,6 +338,6 @@
 
     <para>Velmi rané verze <application>OmegaT</application> umožňovaly segmentaci zdrojových souborů jen po odstavcích a byly nekonzistentní, když se provádělo číslování formátovacích tagů v HTML a souborech Open Document. <application>OmegaT</application> 2.5 umí detekovat a aktualizovat takové soubory tmx za provozu a zvýšit tak kvalitu shody v přibližných překladech a zefektnivní tak váš existující překlad, ušetří vám práci, kterou byste jinak museli dělat ručně.</para>
 
-    <para>Překladová paměť projektu bude aktualizovaná jen jednou a bude zapsána v aktualizované formě do souboru <filename>project-save.tmx</filename>; zastaralé soubory tmx budou aktualizované za provozu pokaždé, když bude projekt načítán. Všimněte si, že v některých případech mohou změny ve filtrech souborů v <application>OmegaT</application> 2.5 vést ke zcela odlišné segmentaci; jako následek takové situace bude nutno aktualizovat překlad ručně, ale to se stává jen velmi zřídka.</para>
+    <para>Překladová paměť projektu bude aktualizována jen jednou a bude zapsána v aktualizované formě do souboru <filename>project-save.tmx</filename>; zastaralé soubory tmx budou aktualizované za provozu pokaždé, když bude projekt načítán. Všimněte si, že v některých případech mohou změny ve filtrech souborů v <application>OmegaT</application> 2.5 vést ke zcela odlišné segmentaci; jako následek takové situace bude nutno aktualizovat překlad ručně, ale to se stává jen velmi zřídka.</para>
   </section>
 </chapter>

@@ -10,7 +10,7 @@
         <primary>OmegaT na webu</primary> <secondary>Projekt SourceForge</secondary>
       </indexterm></title>
 
-    <para>Webová stránka aplikace<ulink url="http://www.omegat.org/"> <application>OmegaT</application> </ulink>obsahuje četné odkazy na různé zdroje pro <application>OmegaT</application>. Uživatelskou podporu poskytují dobrovolníci v <ulink url="http://groups.yahoo.com/group/omegat/">Uživatelské skupině <application>OmegaT</application> na Yahoo!</ulink>. Při dotazech je dobré začít v části často kladených otázek <ulink url="http://tech.groups.yahoo.com/group/omegat/database?method=reportRows&amp;amp;tbl=1">FAQ</ulink> Nejnovější verzi OmegaT si můžete stáhnout ze stránky www.omegat.org. Také můžete podávat hlášení o <ulink url="http://sourceforge.net/tracker/?group_id=68187&amp;amp;atid=520347">chybách v programu</ulink> a sdělit své <ulink url="http://sourceforge.net/tracker/?group_id=68187&amp;amp;atid=52035">požadavky na vylepšení</ulink>.</para>
+    <para>Webová stránka aplikace<ulink url="http://www.omegat.org/"> <application>OmegaT</application> </ulink>obsahuje četné odkazy na různé zdroje pro <application>OmegaT</application>. Uživatelskou podporu poskytují dobrovolníci v <ulink url="http://groups.yahoo.com/group/omegat/">Uživatelské skupině <application>OmegaT</application>  na Yahoo!</ulink>. Při dotazech je dobré začít v části často kladených otázek <ulink url="http://tech.groups.yahoo.com/group/omegat/database?method=reportRows&amp;amp;tbl=1">FAQ</ulink> Nejnovější verzi OmegaT si můžete stáhnout ze stránky www.omegat.org. Také můžete podávat hlášení o <ulink url="http://sourceforge.net/tracker/?group_id=68187&amp;amp;atid=520347">chybách v programu</ulink> a sdělit své <ulink url="http://sourceforge.net/tracker/?group_id=68187&amp;amp;atid=52035">požadavky na vylepšení</ulink>.</para>
   </section>
 
   <section id="bug.reports">
@@ -18,25 +18,25 @@
         <primary>OmegaT na webu</primary> <secondary>Hlášení chyb</secondary>
       </indexterm></title>
 
-    <para>Mějte na paměti, že každé dobré hlášení o chybách potřebuje jen tři věci:</para>
+    <para>Mějte na paměti, že každé dobré hlášení o chybách vyžaduje jen tři věci:</para>
 
     <itemizedlist>
       <listitem>
-        <para>Kroky, které je zapotřebí zopakovat</para>
+        <para>kroky, které je zapotřebí zopakovat</para>
       </listitem>
 
       <listitem>
-        <para>Co jste čekali, že uvidíte, a</para>
+        <para>co jste čekali, že uvidíte, a</para>
       </listitem>
 
       <listitem>
-        <para>Co jste uviděli místo toho</para>
+        <para>co jste uviděli místo toho</para>
       </listitem>
     </itemizedlist>
 
     <para>Více v článku <ulink url="http://www.joelonsoftware.com/articles/fog0000000029.html">Bezbolestná hlášení o chybách</ulink>, autor: Joel Spolsky</para>
 
-    <para>Měli byste přidat kopie souborů, části logu, snímky obrazovky, prostě cokoliv, o čem si myslíte, že pomůže vývojářům nalézt a opravit vámi hlášenou chybu. Za povšimnutí stojí, že hlášení o chybách jsou veřejně viditelná, takže byste tam neměli umisťovat žádné citlivé soubory. Pokud chcete být informováni o tom, co se děje s vaším hlášením, měli zaregistrujte se jako uživatel SourceForge, přihlaste se a podejte hlášení o chybě, nebo jednoduše klikněte na ‚Monitor‛ ve vrchní části hlášení.</para>
+    <para>Měli byste přidat kopie souborů, části logu / protokolu, snímky obrazovky, prostě cokoliv, o čem si myslíte, že pomůže vývojářům nalézt a opravit vámi hlášenou chybu. Za povšimnutí stojí, že hlášení o chybách jsou veřejně viditelná, takže byste tam neměli umisťovat žádné citlivé soubory. Pokud chcete být informováni o tom, co se děje s vaším hlášením, zaregistrujte se jako uživatel SourceForge, přihlaste se a podejte hlášení o chybě, nebo jednoduše klikněte na ‚Monitor‛ ve vrchní části hlášení.</para>
   </section>
 
   <section id="contributing.to.omegat.project">
@@ -53,14 +53,14 @@
     <para>nejprve si přečtěte průvodce pro <ulink url="http://www.omegat.org/en/howtos/localizing_omegat.html">Lokalizaci a přizpůsobení programu <application>OmegaT</application></ulink>, a přihlaste se do Překladatelské skupiny <application>OmegaT</application>, buď přes web nebo zasláním emailu na adresu <ulink url="mailto:omegat-development-request@lists.sourceforge.net?subject=subscribe">omegat-l10n-request@lists.sourceforge.net</ulink> a do předmětu uveďte „subscribe“.</para>
 
     <indexterm class="singular">
-      <primary>OmegaT on the web</primary> <secondary>Vývoj, Lokalizace</secondary>
+      <primary>OmegaT na webu</primary> <secondary>Vývoj, Lokalizace</secondary>
     </indexterm>
 
     <para>Pokud máte zájem podpořit projekt OmegaT finančně <indexterm class="singular">
         <primary>OmegaT na webu</primary> <secondary>Finanční podpora</secondary>
       </indexterm></para>
 
-    <para>Pokud byste chtěli pomoci podpořit průběžný vývoj OmegaT, velmi bychom to ocenili - klikněte na tento link pro přejití na <ulink url="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&amp;hosted_button_id=9UB6Y2BBF99\ LL">PayPal účet OmegaT</ulink>.</para>
+    <para>Pokud byste chtěli finančně podpořit průběžný vývoj OmegaT, velmi bychom to ocenili – klikněte na tento link pro přejití na <ulink url="https://www.paypal.com/us/cgi-bin/webscr?cmd=_flow&amp;SESSION=Wumx5AKXybfb0RFlBA4Zve2v75W1qGfK9-ujQ1vYZQGSOnjY-hjIb4st1aG&amp;dispatch=5885d80a13c0db1f8e263663d3faee8d569c51c61ce57e9125f793ea33988004">PayPal účet OmegaT</ulink>.</para>
 
     <indexterm class="singular">
       <primary>OmegaT na webu</primary> <secondary>Sponzorování OmegaT</secondary>

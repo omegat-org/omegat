@@ -298,7 +298,23 @@ public class Entry {
         // remove tags at begin and end, if required
         boolean removeTags = Core.getFilterMaster().getConfig().isRemoveTags();
         boolean removeSpacesAround = Core.getFilterMaster().getConfig().isRemoveSpacesNonseg();
-        if (removeTags) {
+        if (removeTags && removeSpacesAround) {
+            // find first and last real text
+            for (int i = firstGood; i <= lastGood; i++) {
+                Element elem = get(i);
+                if ((elem instanceof Text) && ((Text) elem).isMeaningful()) {
+                    firstGood = i;
+                    break;
+                }
+            }
+            for (int i = lastGood; i >= firstGood; i--) {
+                Element elem = get(i);
+                if ((elem instanceof Text) && ((Text) elem).isMeaningful()) {
+                    lastGood = i;
+                    break;
+                }
+            }
+        } else if (removeTags) {
             enumerateTags(firstGood, lastGood);
             xmlDialect.constructShortcuts(elements.subList(firstGood, lastGood + 1), new Shortcuts());
             boolean modified = true;

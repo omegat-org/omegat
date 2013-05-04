@@ -66,9 +66,11 @@ public class ProjectFactory {
         Core.getAutoSave().disable();
         RealProject p = new RealProject(props, repository);
         p.loadProject(onlineMode);
-        Core.setProject(p);
-        Core.getAutoSave().enable();
-        CoreEvents.fireProjectChange(IProjectEventListener.PROJECT_CHANGE_TYPE.LOAD);
+        if (p.isProjectLoaded()) {
+            Core.setProject(p);
+            Core.getAutoSave().enable();
+            CoreEvents.fireProjectChange(IProjectEventListener.PROJECT_CHANGE_TYPE.LOAD);
+        }
     }
 
     /**

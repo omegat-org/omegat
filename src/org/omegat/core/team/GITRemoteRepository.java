@@ -89,7 +89,7 @@ public class GITRemoteRepository implements IRemoteRepository {
     }
 
     public boolean isFilesLockingAllowed() {
-        return false;
+        return true;
     }
 
     public GITRemoteRepository(File localDirectory) throws Exception {
@@ -218,7 +218,14 @@ public class GITRemoteRepository implements IRemoteRepository {
     }
 
     public void reset() throws Exception {
-        new Git(repository).reset().setMode(ResetCommand.ResetType.HARD).call();
+        Log.logInfoRB("GIT_START", "reset");
+        try {
+            new Git(repository).reset().setMode(ResetCommand.ResetType.HARD).call();
+            Log.logInfoRB("GIT_FINISH", "reset");
+        } catch (Exception ex) {
+            Log.logErrorRB("GIT_ERROR", "reset", ex.getMessage());
+            checkAndThrowException(ex);
+        }
     }
 
     public void updateFullProject() throws NetworkException, Exception {

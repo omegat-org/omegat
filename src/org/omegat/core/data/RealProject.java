@@ -191,8 +191,11 @@ public class RealProject implements IProject {
 
     public void saveProjectProperties() throws Exception {
         unlockProject();
-        ProjectFileStorage.writeProjectFile(m_config);
-        lockProject();
+        try {
+            ProjectFileStorage.writeProjectFile(m_config);
+        } finally {
+            lockProject();
+        }
         Preferences.setPreference(Preferences.SOURCE_LOCALE, m_config.getSourceLanguage().toString());
         Preferences.setPreference(Preferences.TARGET_LOCALE, m_config.getTargetLanguage().toString());
     }
@@ -204,9 +207,11 @@ public class RealProject implements IProject {
         Log.logInfoRB("LOG_DATAENGINE_CREATE_START");
         UIThreadsUtil.mustNotBeSwingThread();
 
-        lockProject();
-
         try {
+            if (!lockProject()) {
+                throw new KnownException("PROJECT_LOCKED");
+            }
+
             createDirectory(m_config.getProjectRoot(), null);
             createDirectory(m_config.getProjectInternal(), OConsts.DEFAULT_INTERNAL);
             createDirectory(m_config.getSourceRoot(), OConsts.DEFAULT_SOURCE);
@@ -247,11 +252,13 @@ public class RealProject implements IProject {
         Log.logInfoRB("LOG_DATAENGINE_LOAD_START");
         UIThreadsUtil.mustNotBeSwingThread();
 
-        lockProject();
-        isOnlineMode = onlineMode;
-
         // load new project
         try {
+            if (!lockProject()) {
+                throw new KnownException("PROJECT_LOCKED");
+            }
+            isOnlineMode = onlineMode;
+
             Preferences.setPreference(Preferences.CURRENT_FOLDER, new File(m_config.getProjectRoot())
                     .getParentFile().getAbsolutePath());
             Preferences.save();
@@ -354,7 +361,7 @@ public class RealProject implements IProject {
      * {@inheritDoc}
      */
     public boolean isProjectLoaded() {
-        return true;
+        return projectTMX != null;
     }
 
     /**
@@ -379,21 +386,31 @@ public class RealProject implements IProject {
     /**
      * Lock omegat.project file against rename or move project.
      */
-    protected void lockProject() {
+    protected boolean lockProject() {
         if (!RuntimePreferences.isProjectLockingEnabled()) {
-            return;
+            return true;
         }
         if (repository != null) {
             if (!repository.isFilesLockingAllowed()) {
-                return;
+                return true;
             }
         }
         try {
             File lockFile = new File(m_config.getProjectRoot(), OConsts.FILE_PROJECT);
             lockChannel = new RandomAccessFile(lockFile, "rw").getChannel();
-            lock = lockChannel.lock();
-        } catch (Exception ex) {
+            lock = lockChannel.tryLock();
+        } catch (Throwable ex) {
             Log.log(ex);
+        }
+        if (lock == null) {
+            try {
+                lockChannel.close();
+            } catch (Throwable ex) {
+            }
+            lockChannel = null;
+            return false;
+        } else {
+            return true;
         }
     }
 
@@ -410,9 +427,13 @@ public class RealProject implements IProject {
             }
         }
         try {
-            lock.release();
-            lockChannel.close();
-        } catch (Exception ex) {
+            if (lock != null) {
+                lock.release();
+            }
+            if (lockChannel != null) {
+                lockChannel.close();
+            }
+        } catch (Throwable ex) {
             Log.log(ex);
         }
     }
@@ -736,14 +757,11 @@ public class RealProject implements IProject {
         //Note that we can replace restoreBase with reset for the same functionality.
         //Here I keep a separate call, just to make it clear what and why we are doing
         //and to allow to make this feature optional in future releases
+        unlockProject(); // So that we are able to replace omegat.project
         try {
-            unlockProject(); // So that we are able to replace omegat.project
             repository.reset();
+        } finally {
             lockProject(); // we restore the lock
-        } catch (Exception e) {
-            // too bad, but not a real problem.
-            // or is it? We log the exception just in case
-            Log.log(e);
         }
 
         /* project is now in a bad state!

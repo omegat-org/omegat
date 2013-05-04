@@ -448,9 +448,14 @@ public class Main {
         }
 
         RealProject p = new RealProject(projectProperties);
-        if (loadProject)
+        if (loadProject) {
             p.loadProject(true);
-        Core.setProject(p);
+            if (p.isProjectLoaded()) {
+                Core.setProject(p);
+            }
+        } else {
+            Core.setProject(p);
+        }
         return p;
     }
 

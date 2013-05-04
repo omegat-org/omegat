@@ -192,8 +192,16 @@ public class SVNRemoteRepository implements IRemoteRepository {
     }
 
     public void reset() throws Exception {
-        //not tested. Can anyone confirm this code?
-        ourClientManager.getWCClient().doRevert(new File[] {baseDirectory}, SVNDepth.INFINITY, (Collection<String>) null);
+        Log.logInfoRB("SVN_START", "reset");
+        try {
+            // not tested. Can anyone confirm this code?
+            ourClientManager.getWCClient().doRevert(new File[] { baseDirectory }, SVNDepth.INFINITY,
+                    (Collection<String>) null);
+            Log.logInfoRB("SVN_FINISH", "reset");
+        } catch (Exception ex) {
+            Log.logErrorRB("SVN_ERROR", "reset", ex.getMessage());
+            throw ex;
+        }
     }
 
     public void upload(File file, String commitMessage) throws SocketException, Exception {

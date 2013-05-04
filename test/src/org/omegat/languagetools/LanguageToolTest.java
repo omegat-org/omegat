@@ -31,7 +31,9 @@ import junit.framework.TestCase;
 
 import org.junit.Test;
 import org.languagetool.JLanguageTool;
-import org.languagetool.Language;
+import org.languagetool.language.Belarusian;
+import org.languagetool.language.English;
+import org.languagetool.language.French;
 import org.languagetool.rules.RuleMatch;
 import org.languagetool.rules.UppercaseSentenceStartRule;
 import org.languagetool.rules.patterns.PatternRule;
@@ -42,10 +44,10 @@ import org.languagetool.rules.patterns.PatternRule;
 public class LanguageToolTest extends TestCase {
     @Test
     public void testExecute() throws Exception {
-        JLanguageTool lt = new JLanguageTool(Language.BELARUSIAN);
+        JLanguageTool lt = new JLanguageTool(new Belarusian());
         lt.activateDefaultPatternRules();
 
-        List<RuleMatch> matches = lt.check("спраудзім");
+        List<RuleMatch> matches = lt.check("спраудзім.");
         assertEquals(2, matches.size());
         assertTrue(matches.get(0).getRule() instanceof UppercaseSentenceStartRule);
         assertTrue(matches.get(1).getRule() instanceof PatternRule);
@@ -53,7 +55,7 @@ public class LanguageToolTest extends TestCase {
 
     @Test
     public void testFrench() throws Exception {
-        JLanguageTool lt = new JLanguageTool(Language.FRENCH);
+        JLanguageTool lt = new JLanguageTool(new French());
         lt.activateDefaultPatternRules();
 
         List<RuleMatch> matches = lt.check("Directeur production du groupe");
@@ -63,7 +65,7 @@ public class LanguageToolTest extends TestCase {
 
     @Test
     public void testEnglish() throws Exception {
-        JLanguageTool lt = new JLanguageTool(Language.ENGLISH);
+        JLanguageTool lt = new JLanguageTool(new English());
         lt.activateDefaultPatternRules();
 
         List<RuleMatch> matches = lt.check("Check test");

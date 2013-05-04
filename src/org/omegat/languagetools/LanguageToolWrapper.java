@@ -67,7 +67,7 @@ public class LanguageToolWrapper implements IMarker, IProjectEventListener {
 
     private JCheckBoxMenuItem menuItem;
 
-    private boolean disabled = true;
+    protected boolean disabled = true;
 
     public LanguageToolWrapper() throws Exception {
         disabled = Preferences.isPreferenceDefault(Preferences.LT_DISABLED, true);

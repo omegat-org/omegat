@@ -147,6 +147,7 @@ public class FalseFriendsTest extends TestCore {
         LanguageToolWrapper wrapper = new LanguageToolWrapper();
 
         wrapper.onProjectChanged(PROJECT_CHANGE_TYPE.LOAD);
+        wrapper.disabled = false;
 
         List<Mark> marks = wrapper.getMarksForEntry(null, "This is abnegation.", "To jest abnegacja.", true);
         assertEquals(1, marks.size());
@@ -158,6 +159,7 @@ public class FalseFriendsTest extends TestCore {
         LanguageToolWrapper wrapper = new LanguageToolWrapper();
 
         wrapper.onProjectChanged(PROJECT_CHANGE_TYPE.LOAD);
+        wrapper.disabled = false;
 
         List<Mark> marks = wrapper.getMarksForEntry(null, "This is some long text without translation.", "", true);
         assertEquals(0, marks.size());

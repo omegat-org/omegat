@@ -75,16 +75,16 @@ tinysegmenter.jar is distributed under the Modified BSD license
 commons-*.jar are distributed under the Apache License 2.0
 (required for LanguageTool)
 
-jWordSplitter is distributed under the Apache License 2.0
+jwordSplitter-3.4.jar is distributed under the Apache License 2.0
 (required for LanguageTool)
 
-LanguageTool.jar is distributed under the LGPL license
+LanguageTool-data.jar and languagetool-core-2.1.jar are distributed under the LGPL license
 LanguageTool sources are available via SVN from http://sourceforge.net/projects/languagetool/
 
 morfologik-*.jar is distributed under the Morfologik license
 (required for LanguageTool)
 
-segment-1.3.0.jar is distributed under the Segment license
+segment-1.4.1.jar is distributed under the Segment license
 (required for LanguageTool)
 
 pdfbox-app-1.8.1.jar is distributed under the Apache License 2.0

@@ -1346,7 +1346,7 @@ public class RealProject implements IProject {
         try {
             return (ITokenizer) projectPref.newInstance();
         } catch (Throwable e) {
-            Log.log(e.getMessage());
+            Log.log(e);
         }
         
         return new DefaultTokenizer();

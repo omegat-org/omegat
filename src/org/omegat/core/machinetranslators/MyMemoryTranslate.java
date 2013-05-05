@@ -64,11 +64,10 @@ import javax.xml.xpath.XPathFactory;
  */
 public class MyMemoryTranslate extends BaseTranslate {
     protected static String GT_URL = "http://mymemory.translated.net/api/get?q=";
-    protected static String GT_URL2 = "&langpair=#sourceLang#|#targetLang#&of=#format#&mt=0";
+    protected static String GT_URL2 = "&langpair=#sourceLang#|#targetLang#&of=#format#&mt=0"; // Note: Add parameter &mt=0 to suppress MT results from being included in the TMX response; omit this parameter to include MT results
     protected static String MYMEMORYLABEL_TRANSLATION = "translation";
     protected static String MYMEMORYLABEL_MATCHQUALITYPERCENTAGE = "match";
-    protected static String XPATH_QUERY_1 = "child::tuv[@lang='#langCode#-#countryCode#']/seg/text()"; // used for standard 4-letter locale codes in the search query
-    protected static String XPATH_QUERY_2 = "child::tuv[starts-with(@lang, '#langCode#')]/seg/text()"; // used for when no country code is provided; this is needed, because MyMemory always returns a 4-letter locale code, even when the query contains a language code only
+    protected static String XPATH_QUERY = "child::tuv[starts-with(@lang, '#langCode#')]/seg/text()"; // MyMemory always returns a 4-letter locale code, even when the query contains a language code only; to make sure we get the right matches, only the language code is taken into account
     @Override
     protected String getPreferenceName() {
     	return Preferences.ALLOW_MYMEMORY_TRANSLATE;
@@ -147,10 +146,8 @@ public class MyMemoryTranslate extends BaseTranslate {
             Node tu = null;
             String sourceSeg = "";
             String targetSeg = "";
-            String sourceCountryCode = sLang.getCountryCode(); 
-            String targetCountryCode = tLang.getCountryCode(); 
-            String targetSegQueryString = buildSegmentQueryString(tLang, targetCountryCode);
-            String sourceSegQueryString = buildSegmentQueryString(sLang, sourceCountryCode);
+            String targetSegQueryString = XPATH_QUERY.replace("#langCode#", tLang.getLanguageCode());
+            String sourceSegQueryString = XPATH_QUERY.replace("#langCode#", tLang.getLanguageCode());
             
             String bestTranslation = "";
         
@@ -185,27 +182,6 @@ public class MyMemoryTranslate extends BaseTranslate {
 	       str = str.replace("&apos;", "'");
 	       
 		return str;
-	}
-
-	/**
-	 * @param tLang
-	 * @param targetCountryCode
-	 * @return
-	 */
-	private String buildSegmentQueryString(Language tLang,
-			String targetCountryCode) {
-		String segQueryString = "";
-		
-		if(targetCountryCode != "" )
-		{
-			segQueryString = XPATH_QUERY_1.replace("#langCode#", tLang.getLanguageCode());
-			segQueryString = segQueryString.replace("#countryCode#", targetCountryCode); 
-		}
-		else 
-		{
-			segQueryString = XPATH_QUERY_2.replace("#langCode#", tLang.getLanguageCode());
-		}
-		return segQueryString;
 	}
 
 	/**

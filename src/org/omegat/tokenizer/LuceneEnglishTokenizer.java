@@ -28,17 +28,14 @@ import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.StringReader;
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import org.apache.lucene.analysis.TokenStream;
-import org.apache.lucene.analysis.da.DanishAnalyzer;
 import org.apache.lucene.analysis.en.EnglishAnalyzer;
 import org.apache.lucene.analysis.standard.StandardTokenizer;
 import org.apache.lucene.util.Version;
+import org.omegat.core.Core;
 
 /**
  * @author Aaron Madlon-Kay
@@ -72,7 +69,17 @@ public class LuceneEnglishTokenizer extends BaseTokenizer {
                             + ex.getMessage());
         }
     }
-    
+
+    /**
+     * Register plugin into OmegaT.
+     */
+    public static void loadPlugins() {
+        Core.registerTokenizerClass(LuceneEnglishTokenizer.class);
+    }
+
+    public static void unloadPlugins() {
+    }
+
     @Override
     protected TokenStream getTokenStream(final String strOrig,
             final boolean stemsAllowed, final boolean stopWordsAllowed) {

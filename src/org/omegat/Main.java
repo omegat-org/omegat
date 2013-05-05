@@ -174,15 +174,19 @@ public class Main {
         switch (runMode) {
         case GUI:
             runGUI();
+            // GUI has own shutdown code
             break;
         case CONSOLE_TRANSLATE:
             runConsoleTranslate();
+            PluginUtils.unloadPlugins();
             break;
         case CONSOLE_CREATEPSEUDOTRANSLATETMX:
             runCreatePseudoTranslateTMX();
+            PluginUtils.unloadPlugins();
             break;
         case CONSOLE_ALIGN:
             runConsoleAlign();
+            PluginUtils.unloadPlugins();
             break;
         }
     }
@@ -233,6 +237,16 @@ public class Main {
         } catch (Throwable ex) {
             Log.log(ex);
             showError(ex);
+        }
+
+        if (!Core.getPluginsLoadingErrors().isEmpty()) {
+            String err = "";
+            for (int i = 0; i < Core.getPluginsLoadingErrors().size(); i++) {
+                err += "\n" + Core.getPluginsLoadingErrors().get(i);
+            }
+            err = err.substring(1);
+            JOptionPane.showMessageDialog(JOptionPane.getRootFrame(), err,
+                    OStrings.getString("STARTUP_ERRORBOX_TITLE"), JOptionPane.ERROR_MESSAGE);
         }
 
         CoreEvents.fireApplicationStartup();

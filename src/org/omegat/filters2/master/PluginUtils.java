@@ -30,6 +30,7 @@ import java.io.File;
 import java.io.FileFilter;
 import java.io.FileInputStream;
 import java.io.InputStream;
+import java.lang.reflect.Method;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.ArrayList;
@@ -42,11 +43,13 @@ import java.util.Map;
 import java.util.jar.Attributes;
 import java.util.jar.Manifest;
 
+import org.omegat.core.Core;
 import org.omegat.tokenizer.DefaultTokenizer;
 import org.omegat.tokenizer.Tokenizer;
 import org.omegat.util.FileUtil;
 import org.omegat.util.Language;
 import org.omegat.util.Log;
+import org.omegat.util.OStrings;
 import org.omegat.util.StaticUtils;
 
 /**
@@ -61,6 +64,9 @@ public final class PluginUtils {
         FILTER, TOKENIZER, MARKER, MACHINETRANSLATOR, BASE, GLOSSARY, UNKNOWN
     };
 
+    protected static URLClassLoader pluginsClassLoader;
+    protected static List<Class<?>> loadedPlugins = new ArrayList<Class<?>>();
+
     /** Private constructor to disallow creation */
     private PluginUtils() {
     }
@@ -74,7 +80,6 @@ public final class PluginUtils {
         File pluginsDir = new File(StaticUtils.installDir(), "plugins");
         File homePluginsDir = new File(StaticUtils.getConfigDir(), "plugins");
         try {
-            URLClassLoader cls;
             // list all jars in /plugins/
             List<File> fs = FileUtil.findFiles(pluginsDir, new FileFilter() {
                 public boolean accept(File pathname) {
@@ -93,8 +98,9 @@ public final class PluginUtils {
             }
             boolean foundMain = false;
             // look on all manifests
-            cls = new URLClassLoader(urls, PluginUtils.class.getClassLoader());
-            for (Enumeration<URL> mlist = cls.getResources("META-INF/MANIFEST.MF"); mlist.hasMoreElements();) {
+            pluginsClassLoader = new URLClassLoader(urls, PluginUtils.class.getClassLoader());
+            for (Enumeration<URL> mlist = pluginsClassLoader.getResources("META-INF/MANIFEST.MF"); mlist
+                    .hasMoreElements();) {
                 URL mu = mlist.nextElement();
                 InputStream in = mu.openStream();
                 Manifest m;
@@ -107,7 +113,7 @@ public final class PluginUtils {
                     // found main manifest - not in development mode
                     foundMain = true;
                 }
-                loadFromManifest(m, cls);
+                loadFromManifest(m, pluginsClassLoader);
             }
             if (!foundMain) {
                 // development mode - load main manifest template
@@ -123,7 +129,7 @@ public final class PluginUtils {
                     } finally {
                         in.close();
                     }
-                    loadFromManifest(m, cls);
+                    loadFromManifest(m, pluginsClassLoader);
                 }
             }
         } catch (Exception ex) {
@@ -227,6 +233,44 @@ public final class PluginUtils {
      * @throws ClassNotFoundException
      */
     protected static void loadFromManifest(final Manifest m, final ClassLoader classLoader)
+            throws ClassNotFoundException {
+        String pluginClasses = m.getMainAttributes().getValue("OmegaT-Plugins");
+        if (pluginClasses != null) {
+            for (String clazz : pluginClasses.split("\\s+")) {
+                if (clazz.trim().isEmpty()) {
+                    continue;
+                }
+                try {
+                    Class<?> c = classLoader.loadClass(clazz);
+                    Method load = c.getMethod("loadPlugins");
+                    load.invoke(c);
+                    loadedPlugins.add(c);
+                } catch (Throwable ex) {
+                    Log.logErrorRB(ex, "PLUGIN_LOAD_ERROR", clazz, ex.getClass().getSimpleName(), ex.getMessage());
+                    Core.pluginLoadingError(StaticUtils.format(OStrings.getString("PLUGIN_LOAD_ERROR"), clazz, ex
+                            .getClass().getSimpleName(), ex.getMessage()));
+                }
+            }
+        }
+
+        loadFromManifestOld(m, classLoader);
+    }
+
+    public static void unloadPlugins() {
+        for(Class<?> p:loadedPlugins) {
+            try {
+                Method load = p.getMethod("unloadPlugins");
+                load.invoke(p);
+            } catch (Throwable ex) {
+                Log.logErrorRB(ex, "PLUGIN_UNLOAD_ERROR", p.getClass().getSimpleName(), ex.getMessage());
+            }
+        }
+    }
+
+    /**
+     * Old-style plugin loading.
+     */
+    protected static void loadFromManifestOld(final Manifest m, final ClassLoader classLoader)
             throws ClassNotFoundException {
         if (m.getMainAttributes().getValue("OmegaT-Plugin") == null) {
             return;

@@ -33,6 +33,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 
+import org.omegat.core.Core;
 import org.omegat.util.LFileCopy;
 import org.omegat.util.Language;
 import org.omegat.util.OStrings;
@@ -45,6 +46,16 @@ import org.omegat.util.Preferences;
  */
 public class BelazarTranslate extends BaseTranslate {
     protected static final String CHARSET = "Cp1251";
+
+    /**
+     * Register plugin into OmegaT.
+     */
+    public static void loadPlugins() {
+        Core.registerMachineTranslationClass(BelazarTranslate.class);
+    }
+
+    public static void unloadPlugins() {
+    }
 
     @Override
     protected String getPreferenceName() {

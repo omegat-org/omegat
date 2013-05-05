@@ -69,6 +69,16 @@ public class LanguageToolWrapper implements IMarker, IProjectEventListener {
 
     protected boolean disabled = true;
 
+    /**
+     * Register plugin into OmegaT.
+     */
+    public static void loadPlugins() {
+        Core.registerMarkerClass(LanguageToolWrapper.class);
+    }
+
+    public static void unloadPlugins() {
+    }
+
     public LanguageToolWrapper() throws Exception {
         disabled = Preferences.isPreferenceDefault(Preferences.LT_DISABLED, true);
 

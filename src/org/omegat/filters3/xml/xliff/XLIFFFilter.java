@@ -30,6 +30,8 @@ package org.omegat.filters3.xml.xliff;
 import java.awt.Dialog;
 import java.io.File;
 import java.util.Map;
+
+import org.omegat.core.Core;
 import org.omegat.filters2.FilterContext;
 import org.omegat.filters2.Instance;
 import org.omegat.filters3.xml.XMLFilter;
@@ -42,6 +44,16 @@ import org.omegat.util.OStrings;
  * @author Didier Briel
  */
 public class XLIFFFilter extends XMLFilter {
+
+    /**
+     * Register plugin into OmegaT.
+     */
+    public static void loadPlugins() {
+        Core.registerFilterClass(XLIFFFilter.class);
+    }
+
+    public static void unloadPlugins() {
+    }
 
     /**
      * Creates a new instance of XLIFFFilter

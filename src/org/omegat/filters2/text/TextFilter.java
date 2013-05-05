@@ -32,6 +32,7 @@ import java.io.IOException;
 import java.io.Writer;
 import java.util.Map;
 
+import org.omegat.core.Core;
 import org.omegat.filters2.AbstractFilter;
 import org.omegat.filters2.FilterContext;
 import org.omegat.filters2.Instance;
@@ -62,6 +63,16 @@ public class TextFilter extends AbstractFilter {
     public static final String SEGMENT_NEVER = "NEVER";
 
     public static final String OPTION_SEGMENT_ON = "segmentOn";
+
+    /**
+     * Register plugin into OmegaT.
+     */
+    public static void loadPlugins() {
+        Core.registerFilterClass(TextFilter.class);
+    }
+
+    public static void unloadPlugins() {
+    }
 
     public String getFileFormatName() {
         return OStrings.getString("TEXTFILTER_FILTER_NAME");

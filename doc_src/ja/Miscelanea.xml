@@ -62,7 +62,7 @@
 
       <itemizedlist>
         <listitem>
-          <para><literal>--config-dir=&lt;config-dir&gt;</literal> 設定ファイルの場所を指定します。このオプションが指定されない場合は、OmegaT は初期設定を使用します（ユーザーホームフォルダーの下の OmegaT フォルダーか、それが存在しない場合は現在の作業ディレクトリ）。</para>
+          <para><literal>--config-dir=&lt;config-dir&gt;</literal> 設定ファイルの場所を指定します。このオプションが指定されない場合は、OmegaT は初期設定を使用します（ユーザーホームフォルダーの下の OmegaT フォルダーか、それが存在しない場合は現在の作業フォルダー）。</para>
         </listitem>
       </itemizedlist>
 

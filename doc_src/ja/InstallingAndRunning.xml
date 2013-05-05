@@ -280,7 +280,7 @@
           <primary>OmegaT のインストール</primary> <secondary>その他のシステム</secondary>
         </indexterm></title>
 
-      <para><application>OmegaT</application> をインストールするには、<emphasis role="bold">OmegaT_2.6.x_Without_JRE.zip</emphasis> ファイルを展開してください。作業フォルダーに <emphasis>./OmegaT_2.6.x_Without_JRE/</emphasis> フォルダーと、<application>OmegaT</application> の実行に必要なすべてのファイルが作成されます。</para>
+      <para><application>OmegaT</application> をインストールするには、<emphasis role="bold">OmegaT_2.6.x_Without_JRE.zip</emphasis> ファイルを展開してください。作業フォルダーに <emphasis>OmegaT_2.6.x_Without_JRE</emphasis> フォルダーと、<application>OmegaT</application> の実行に必要なすべてのファイルが作成されます。</para>
     </section>
 
     <section id="installing.convenient.shortcuts">
@@ -485,7 +485,7 @@
           </listitem>
 
           <listitem>
-            <para>仮に、<application>OmegaT</application> を通常通り起動できない（GUI 環境がない）場合は次の方法をとってください：同じ端末の他の場所、または別の端末にある OmegaT の設定ファイルを、あらかじめ決めたフォルダーにコピーしておきます。そのフォルダーの場所は、起動時にコマンドライン上で指定するので、どこであってもかまいません。設定ファイルは、<literal>filters.conf</literal> と <literal>segmentation.conf</literal> です。ユーザーのホームフォルダー（Windows の場合 <literal>C:\Documents and Settings\%User%\<application>OmegaT</application></literal>、Linux の場合 <literal>%user%/.omegat/</literal>）にあります。</para>
+            <para><application>OmegaT</application> を通常通り起動できない（GUI 環境がない）場合は、次の方法をとってください：同じ端末の他の場所、または別の端末にある <application>OmegaT</application> の設定ファイルを、あらかじめ決めたフォルダーにコピーしておきます。そのフォルダーの場所は、起動時にコマンドライン上で指定するので、どこであってもかまいません。設定ファイルは、<literal>filters.conf</literal> と <literal>segmentation.conf</literal> です。ユーザーのホームフォルダー（Windows の場合 <literal>C:\Documents and Settings\%User%\<application>OmegaT</application></literal>、Linux の場合 <literal>%user%/.omegat/</literal>）にあります。</para>
           </listitem>
         </itemizedlist>
       </section>
@@ -517,7 +517,7 @@
 
         <itemizedlist>
           <listitem>
-            <para><literal>--config-dir=&lt;config-dir&gt;</literal> 設定ファイルがどの場所にあるかを指定します。このオプションが指定されない場合は、<application>OmegaT</application> は初期設定を使用します（ユーザーホームフォルダーの下の <application>OmegaT</application> フォルダーか、それが存在しない場合は現在の作業ディレクトリ）。引数は二重のハイフン記号（-）で始まることに注意してください。</para>
+            <para><literal>--config-dir=&lt;config-dir&gt;</literal> 設定ファイルがどのフォルダーにあるかを指定します。このオプションが指定されない場合は、<application>OmegaT</application> は初期設定を使用します（ユーザーホームフォルダーの下の <application>OmegaT</application> フォルダーか、それが存在しない場合は現在の作業フォルダー）。引数は二重のハイフン記号（-）で始まることに注意してください。</para>
           </listitem>
         </itemizedlist>
 

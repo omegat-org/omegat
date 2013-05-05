@@ -160,7 +160,7 @@
         <primary>タグ</primary> <secondary>グループの検証</secondary>
       </indexterm></title>
 
-    <para>タグ検証機能は、（故意か過失かによらず）変更されたタグを検知し、影響のあるセグメントを表示します。<guimenuitem>Ctrl+T<indexterm class="singular">
+    <para>タグ検証機能は、（故意か過失かによらず）変更されたタグを検知し、影響のある分節を表示します。<guimenuitem>Ctrl+T<indexterm class="singular">
         <primary>ショートカット</primary> <secondary>タグ検証 - Ctrl+T</secondary>
       </indexterm></guimenuitem> でこの機能を使用できます。専用のウィンドウには、壊れたもしくは誤ったと思しきタグを含む分節がすべて表示されます。タグ検証機能により、タグの修正と翻訳文書の再生成が簡単になります。<guimenuitem>Ctrl+T</guimenuitem> により表示されるウインドウには３列の表があります。それぞれ分節へのリンク、原文の分節、訳文の分節です。</para>
 

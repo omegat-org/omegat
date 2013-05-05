@@ -8,61 +8,51 @@
         <primary>プロジェクト</primary> <secondary>新規作成 / 読み込み</secondary>
       </indexterm></title>
 
-    <para><remark>注意：</remark>Mac ユーザーは、<keycap>Ctrl</keycap> キーを <keycap>Cmd</keycap> (⌘ マークが付いているキー) または <keycap>Apple</keycap> キー (りんごマークが付いているキー) に読み替えてください</para>
+    <para><remark>注意：</remark>Mac ユーザーは、<keycap>Ctrl</keycap> キーを <keycap>Command</keycap> キー（⌘ マークが付いているキー）に読み替えてください</para>
 
-    <para>まずプロジェクトを作成しましょう。プロジェクトには、原文ファイルをはじめ、翻訳メモリや用語集、そしていずれ生成するはずの訳文ファイルなど、すべてのファイルが保持されることになります。<guimenu>プロジェクト</guimenu>メニューから<menuchoice><guimenuitem>新規作成...</guimenuitem></menuchoice><indexterm class="singular">
+      <indexterm class="singular">
         <primary>プロジェクトメニュー</primary> <secondary>新規作成...</secondary>
-      </indexterm>を選び、作成するプロジェクトの名前を入力してください。後で必要になるので、プロジェクトをどの場所に作成したか覚えておきましょう。</para>
+      </indexterm>
 
-    <para>プロジェクト名を入力して保存したら、プロジェクトの新規作成ダイアログが開きます。ダイアログの先頭で、原文ファイルの言語と訳文ファイルの言語を選び、［<guibutton>確定</guibutton>］ボタンをクリックします。</para>
+    <para>まずプロジェクトを作成しましょう。プロジェクトには、原文ファイルをはじめ、翻訳メモリや用語集、そしていずれ生成するはずの訳文ファイルなど、すべてのファイルが保持されることになります。<guimenu>プロジェクト</guimenu>メニューから<menuchoice><guimenuitem>新規作成...</guimenuitem></menuchoice>を選び、作成するプロジェクトの名前を入力してください。後で必要になるので、プロジェクトをどの場所に作成したか覚えておきましょう。</para>
 
-    <para><application>他の設定に用があれば、<keycap>Ctrl+E</keycap> キーを押して、いつでもこのダイアログに戻ることができます。</application></para>
+    <para>プロジェクト名を入力して保存したら、<guilabel>プロジェクトの新規作成</guilabel>ダイアログが開きます。ダイアログの先頭で、原文ファイルの言語と訳文ファイルの言語を選び、［<guibutton>確定</guibutton>］ボタンをクリックします。</para>
 
-    <para>続いて、翻訳対象ファイル一覧ダイアログが開きます。［原文ファイルを追加...］ボタンをクリックし、原文ファイルを選択します。OmegaT は選択されたファイルを、新しく作成されたプロジェクトの <filename>source</filename> フォルダーへコピーします。原文ファイルが編集ウィンドウに読み込まれたら、翻訳対象ファイル一覧ダイアログを閉じましょう。</para>
+    <para>他の設定に用があれば、<keycap>Ctrl+E</keycap> キーを押して、いつでもこのダイアログに戻ることができます。</para>
+
+    <para>続いて、<guilabel>翻訳対象ファイル一覧</guilabel>ダイアログが開きます。［<guibutton>原文ファイルを追加...</guibutton>］ボタンをクリックし、原文ファイルを選択します。OmegaT は選択されたファイルを、新しく作成されたプロジェクトの <filename>source</filename> フォルダーへコピーします。原文ファイルが<guilabel>編集</guilabel>ウィンドウに読み込まれたら、<guilabel>翻訳対象ファイル一覧</guilabel>ダイアログを閉じましょう。</para>
   </section>
 
   <section id="translate.the.segments.one.by.one">
     <title>ファイルを翻訳する</title>
 
-    <para>OmegaT は翻訳のために、原文を「分節」という単位に分割して表示します。ひとつの分節を翻訳し終えたら、<keycap>Ctrl+U</keycap> キーを押して、次の未翻訳分節へと移動します（<keycap>Ctrl+Shift+U </keycap> キーを押すと、次の翻訳済み分節へ移動します）。翻訳の成果を確認したくなったら、<keycap>Ctrl+D</keycap> キーを押して、いつでも訳文ファイルを生成できます。訳文ファイルは、プロジェクトの target フォルダー内に作成されます。翻訳作業のあいだ、［<guimenu>編集</guimenu>］メニューおよび［<guimenu>移動</guimenu>］メニューから、さまざまな役に立つ機能を利用することができます。</para>
+    <para>OmegaT は翻訳のために、原文を「分節」という単位に分割して表示します。ひとつの分節を翻訳し終えたら、<keycap>Ctrl+U</keycap> キーを押して、次の未翻訳分節へと移動します（<keycap>Ctrl+Shift+U</keycap> キーを押すと、次の翻訳済み分節へ移動します）。翻訳の成果を確認したくなったら、<keycap>Ctrl+D</keycap> キーを押して、いつでも訳文ファイルを生成できます。訳文ファイルは、プロジェクトの <filename>target</filename> フォルダー内に作成されます。翻訳作業のあいだ、［<guimenu>編集</guimenu>］メニューおよび［<guimenu>移動</guimenu>］メニューから、さまざまな役に立つ機能を利用することができます。</para>
   </section>
 
   <section>
     <title>タグを検証する</title>
 
-    <para>もし原文ファイルが、Microsoft Word や LibreOffice Writer、HTML などの書式情報を持つファイル形式だった場合、OmegaT はその情報をタグに変換し、対象テキストをタグで括った形式で表示します。また文書には、書式とはまったく関係ないけれど、やはり重要なタグが含まれることがあります。原文ファイル（と訳文ファイル）では、原文は次のように見えるはずです。</para>
-
-    <para/>
-
-    <mediaobject>
+    <para>もし原文ファイルが、Microsoft Word や LibreOffice Writer、HTML などの書式情報を持つファイル形式だった場合、OmegaT はその情報をタグに変換し、対象テキストをタグで括った形式で表示します。また文書には、書式とはまったく関係ないけれど、原文ファイル（と訳文ファイル）にとってやはり重要なタグが含まれることがあります。原文は次のように見えるはずです。<mediaobject>
       <imageobject role="html">
-        <imagedata align="left" fileref="images/InstantGuide_1.png"/>
+        <imagedata align="justify" fileref="images/InstantGuide_1.png"/>
       </imageobject>
-
       <imageobject role="fo">
-        <imagedata align="left" fileref="images/InstantGuide_1.png" width="40%"/>
+        <imagedata align="justify" fileref="images/InstantGuide_1.png" width="40%"/>
       </imageobject>
     </mediaobject>
+    </para>
 
-    <para/>
-
-    <para>一方 OmegaT は、この文を次のような形で表示します：</para>
-
-    <para><literal/></para>
-
-    <mediaobject>
+    <para>一方 OmegaT は、この文を次のような形で表示します：<mediaobject>
       <imageobject role="html">
-        <imagedata align="left" fileref="images/InstantGuide_2.png"/>
+        <imagedata align="justify" fileref="images/InstantGuide_2.png"/>
       </imageobject>
-
       <imageobject role="fo">
-        <imagedata align="left" fileref="images/InstantGuide_2.png" width="45%"/>
+        <imagedata align="justify" fileref="images/InstantGuide_2.png" width="45%"/>
       </imageobject>
     </mediaobject>
-
-    <para/>
-
-    <para>OmegaT はタグを灰色で描画するので、見分けるのは簡単です。タグは特に保護されてはいません。したがってふつうの文と同じように、削除したり、手入力したり、移動したりすることができます。ただし、もしタグを誤って編集すると、訳文ファイルを開くときに問題が起きるかもしれません。そうならないよう、訳文ファイルを生成する前に <keycap>Ctrl+T</keycap> キーを押して、タグが正しいか検証しておくとよいでしょう。</para>
+    </para>
+    
+    <para>OmegaT はタグを灰色で描画するので、見分けるのは簡単です。タグは保護されます。したがってタグの中身を書き換えることはできません。しかしタグごと削除したり、手入力したり、移動したりすることはできます。ただし、もしタグを誤って編集すると、訳文ファイルを開くときに問題が起きるかもしれません。そうならないよう、訳文ファイルを生成する前に <keycap>Ctrl+T</keycap> キーを押して、タグが正しいか検証しておくとよいでしょう。</para>
   </section>
 
   <section>
@@ -76,37 +66,37 @@
 
     <itemizedlist>
       <listitem>
-        <para>ファイルが編集ウィンドウに読み込まれない場合は、OmegaT が原文ファイルのファイル形式に対応していないのかもしれません。取扱説明書「第７章：ファイルフィルター」の、OmegaT が対応しているファイル形式の一覧を確認してみてください。</para>
+        <para>ファイルが<guilabel>編集</guilabel>ウィンドウに読み込まれない場合は、OmegaT が原文ファイルのファイル形式に対応していないのかもしれません。「<link linkend="chapter.file.filters">ファイルフィルター</link>」の、OmegaT が対応しているファイル形式の一覧を確認してみてください。</para>
       </listitem>
     </itemizedlist>
 
     <itemizedlist>
       <listitem>
-        <para>タスクに応じて、それぞれ個別に新規プロジェクトを作成しても構いませんし、一度に複数の原文ファイルを追加することもできます。</para>
+        <para>タスクに応じて、それぞれ個別に新規プロジェクトを作成しても構いませんし、原文ファイルはいつでも追加できます。</para>
       </listitem>
     </itemizedlist>
 
     <itemizedlist>
       <listitem>
-        <para>プロジェクトの初期設定を確認したければ、<keycap>Ctrl+E</keycap> キーを押してプロジェクト設定ダイアログを開いてください。プロジェクトに含まれる原文ファイルの一覧を確認したければ、<keycap>Ctrl+L</keycap> キーを押して翻訳対象ファイル一覧ダイアログを開いてください。</para>
+        <para>プロジェクトの初期設定を確認したければ、<keycap>Ctrl+E</keycap> キーを押してプロジェクト設定ダイアログを開いてください。プロジェクトに含まれる原文ファイルの一覧を確認したければ、<keycap>Ctrl+L</keycap> キーを押して<guilabel>翻訳対象ファイル一覧</guilabel>ダイアログを開いてください。</para>
       </listitem>
     </itemizedlist>
 
     <itemizedlist>
       <listitem>
-        <para>翻訳作業の最後に、OmegaT は「level1」、「level2」、「omegat」と呼ばれる３つの翻訳メモリをプロジェクトフォルダー内に出力します。「level1」と「level2」は、他の翻訳支援ツールと翻訳メモリを共有するために使います。「omegat」は OmegaT 専用の翻訳メモリで、将来作成する別のプロジェクトで利用することができます。翻訳メモリファイルをプロジェクトの tm フォルダー内に配置しておくと、OmegaT はそこから「参考訳文」と呼ばれる類似分節を自動的に検索するようになります。</para>
+        <para>翻訳作業の最後に、OmegaT は <filename>level1</filename>、<filename>level2</filename>、<filename>omegat</filename> と呼ばれる３つの翻訳メモリをプロジェクトフォルダー内に出力します。<filename>level1</filename> と <filename>level2</filename> は、他の翻訳支援ツールと翻訳メモリを共有するために使います。<filename>omegat</filename> は OmegaT 専用の翻訳メモリで、将来作成する別のプロジェクトで流用することができます。翻訳メモリファイルをプロジェクトの <filename>tm</filename> フォルダー内に配置しておくと、OmegaT はそこから「参考訳文」と呼ばれる類似分節を自動的に検索するようになります。</para>
       </listitem>
     </itemizedlist>
 
     <itemizedlist>
       <listitem>
-        <para><guibutton>Ctrl+Shift+G</guibutton> キーを押すと、用語を追加することができます。また既存の用語集ファイルをプロジェクトの <filename>glossary</filename> フォルダーにコピーしておくと、OmegaT はそこから用語を自動的に検索するようになります。</para>
+        <para><keycap>Ctrl+Shift+G</keycap> キーを押すと、新しい用語を追加することができます。また既存の用語集ファイルをプロジェクトの <filename>glossary</filename> フォルダーにコピーしておくと、OmegaT はそこから用語を自動的に検索するようになります。</para>
       </listitem>
     </itemizedlist>
 
     <itemizedlist>
       <listitem>
-        <para>原文や訳文から語句を検索したいときは、<keycap>Ctrl+F</keycap> キーを押せば、いつでもプロジェクトの検索ウィンドウを表示できます。</para>
+        <para>原文や訳文から語句を検索したいときは、<keycap>Ctrl+F</keycap> キーを押せば、いつでも<guilabel>プロジェクトの検索</guilabel>ウィンドウを表示できます。</para>
       </listitem>
     </itemizedlist>
 

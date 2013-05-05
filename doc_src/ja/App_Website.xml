@@ -10,7 +10,7 @@
         <primary>ウェブ上の OmegaT 情報</primary> <secondary>SourceForge プロジェクト</secondary>
       </indexterm></title>
 
-    <para><ulink url="http://www.omegat.org/"><application>OmegaT</application> のウェブサイト</ulink>には <application>OmegaT</application> に関するさまざまな情報へのリンクがあります。またボランティアによるユーザーサポートが、<ulink url="http://groups.yahoo.com/group/omegat/"><application>OmegaT</application> Yahoo! ユーザーグループ</ulink>で提供されています。<ulink url="http://tech.groups.yahoo.com/group/omegat/database?method=reportRows&amp;amp;tbl=1">よくある質問（FAQ）ページ</ulink>はあなたの疑問に答えてくれる出発点になるでしょう。OmegaT の最新版については、www.omegat.org のダウンロード ページを参照してください。<ulink url="http://sourceforge.net/tracker/?group_id=68187&amp;amp;atid=520347">バグ報告</ulink>や<ulink url="http://sourceforge.net/tracker/?group_id=68187&amp;amp;atid=52035">機能改善リクエスト</ulink>も行えます。</para>
+    <para><ulink url="http://www.omegat.org/"><application>OmegaT</application> のウェブサイト</ulink>には <application>OmegaT</application> に関するさまざまな情報へのリンクがあります。またボランティアによるユーザーサポートが、<ulink url="http://tech.groups.yahoo.com/group/omegat/"><application>OmegaT</application> Yahoo! ユーザーグループ</ulink>で提供されています。<ulink url="http://tech.groups.yahoo.com/group/OmegaT/database?method=reportRows&amp;tbl=1">よくある質問（FAQ）ページ</ulink>はあなたの疑問に答えてくれる出発点になるでしょう。OmegaT の最新版については、www.omegat.org のダウンロード ページを参照してください。<ulink url="https://sourceforge.net/p/omegat/bugs/">バグ報告</ulink>や<ulink url="https://sourceforge.net/p/omegat/feature-requests/">機能改善リクエスト</ulink>も行えます。</para>
   </section>
 
   <section id="bug.reports">
@@ -46,7 +46,7 @@
 
     <para><emphasis role="bold"><application>OmegaT</application> に貢献するには：</emphasis></para>
 
-    <para>まず<ulink url="http://groups.yahoo.com/group/omegat/">ユーザーグループ</ulink>に参加してください（ウェブから登録するか、または <ulink url="mailto:OmegaT-subscribe@yahoogroups.com"><application>OmegaT</application>-subscribe@yahoogroups.com</ulink> 宛にメールを送信してください）。<application>OmegaT</application> の開発に協力したい場合は、開発者グループへ参加してください。ウェブから登録するか、または「subscribe」という件名のメールを <ulink url="mailto:omegat-development-request@list.sourceforge.net?subject=subscribe">omegat-development-request@lists.sourceforge.net</ulink> に送信してください。</para>
+    <para>まず<ulink url="http://tech.groups.yahoo.com/group/OmegaT/">ユーザーグループ</ulink>に参加してください（ウェブから登録するか、または <ulink url="mailto:OmegaT-subscribe@yahoogroups.com"><application>OmegaT</application>-subscribe@yahoogroups.com</ulink> 宛にメールを送信してください）。<application>OmegaT</application> の開発に協力したい場合は、開発者グループへ参加してください。ウェブから登録するか、または「subscribe」という件名のメールを <ulink url="mailto:omegat-development-request@list.sourceforge.net?subject=subscribe">omegat-development-request@lists.sourceforge.net</ulink> に送信してください。</para>
 
     <para><emphasis role="bold"><application>OmegaT</application> のユーザーインターフェースや取扱説明書、その他関連文書を翻訳するには：</emphasis></para>
 

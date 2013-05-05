@@ -33,6 +33,7 @@ import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.omegat.tokenizer.ITokenizer;
 import org.omegat.util.Language;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
@@ -43,6 +44,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource; // needed for TMX response only 
 
+import org.omegat.core.Core;
 import org.omegat.core.matching.LevenshteinDistance;
 
 import javax.xml.parsers.DocumentBuilderFactory; // needed for TMX response only 
@@ -214,29 +216,33 @@ public class MyMemoryTranslate extends BaseTranslate {
 	private int getLevensteinDistance(String text, String sourceSeg) {
             int dist;
             LevenshteinDistance leven = new LevenshteinDistance(); 
-            char[] txtChars = text.toCharArray();
-            char[] srcChars = sourceSeg.toCharArray(); 
-            Token[] textTokenArray = convertCharArrayToTokenArray(txtChars);
-            Token[] sourceSegTokenArray = convertCharArrayToTokenArray(srcChars);
-		
+            ITokenizer srcTokenizer = Core.getProject().getSourceTokenizer();
+            
+//            String[] txtWords = text.split(" "); // TODO: Decide which tokenization method to use; the commented-out lines return different results. 
+//            String[] srcWords = sourceSeg.split(" "); 
+//            Token[] textTokenArray = convertStringArrayToTokenArray(txtWords);
+//            Token[] sourceSegTokenArray = convertStringArrayToTokenArray(srcWords);
+            Token[] textTokenArray = srcTokenizer.tokenizeAllExactly(text);
+            Token[] sourceSegTokenArray = srcTokenizer.tokenizeAllExactly(sourceSeg);
+            
             dist = leven.compute(textTokenArray, sourceSegTokenArray);
             return dist;
 	}
     
-	private Token[] convertCharArrayToTokenArray(char[] chars) {
-		Token[] emptyArrayForConversion = {};
-		List <Token> tok = new ArrayList<Token>();
-		int i = 0; 
-		
-		for( char c : chars) 
-		{
-			Token myToken = new Token(String.valueOf(c), i);
-			tok.add(myToken);
-			i++;
-		}
-		
-		return (Token[]) tok.toArray(emptyArrayForConversion);
-	}
+//	private Token[] convertStringArrayToTokenArray(String[] words) {
+//		Token[] emptyArrayForConversion = {}; 				// a slightly weird work-around due to Java limitations when converting a typed array
+//		List <Token> tokenList = new ArrayList<Token>();
+//		int i = 0; 
+//		
+//		for( String w : words ) 
+//		{
+//			Token myToken = new Token(w, i);
+//			tokenList.add(myToken);
+//			i++;
+//		}
+//		
+//		return (Token[]) tokenList.toArray(emptyArrayForConversion);
+//	}
 
 	private String getMyMemoryResponse(Language sLang, Language tLang, String text, String format)
 	throws UnsupportedEncodingException, IOException {
@@ -247,14 +253,16 @@ public class MyMemoryTranslate extends BaseTranslate {
             String url = GT_URL + URLEncoder.encode(text, "UTF-8") + url2;
 
             // Get the results from MyMemory
-            String myMemoryRepsonse = "";
+            String myMemoryResponse = "";
             try {
-                myMemoryRepsonse = WikiGet.getURL(url);
+                myMemoryResponse = WikiGet.getURL(url);
             } catch (IOException e) {
                 throw e;
             }
             
-            return myMemoryRepsonse;
+            // System.out.println(myMemoryResponse);
+            
+            return myMemoryResponse;
 	}
     
     // Note: This method is not used, because it requires the JSON Simple library, which is under Apache license (http://code.google.com/p/json-simple/). 

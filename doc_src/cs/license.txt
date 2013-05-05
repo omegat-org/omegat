@@ -1,5 +1,4 @@
-		    Licence GNU General Public License. Verze z 2. Äervna 1991
-[PrÃ¡vnÄ› zÃ¡vaznÃ© je pÅ¯vodnÃ­ - anglickÃ© - znÄ›nÃ­, pÅ™Ã­padnÃ½ pÅ™eklad je tedy pouze orientaÄnÃ­ a bez zÃ¡ruky na prÃ¡vnÃ­ zÃ¡vaznost. Z tohoto dÅ¯vodu tu licence nenÃ­ pÅ™eloÅ¾ena, Äeskou verzi si prosÃ­m v pÅ™Ã­padÄ› zÃ¡jmu najdÄ›te na webu.]
+		    Licence GNU General Public License. Verze z 2. èervna 1991 [Právnì závazné je pùvodní – anglické – znìní, pøípadnı pøeklad je tedy pouze orientaèní a bez záruky na právní závaznost. Z tohoto dùvodu tu licence není pøeloena, èeskou verzi si prosím v pøípadì zájmu najdìte na webu.]
 
  Copyright (C) 1989, 1991 Free Software Foundation, Inc.
                        51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA

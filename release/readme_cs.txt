@@ -1,4 +1,4 @@
-Tento překlad vypracoval [Josef Molnár], copyright© [2012].
+Tento překlad vypracoval [Josef Molnár], copyright© [2013].
 
 ==============================================================================
   OmegaT 2.0, soubor Read Me / Čti mě
@@ -29,7 +29,7 @@ Požadavky a návrhy na zlepšení (anglicky), na stránce SourceForge:
 ==============================================================================
   2.  Co je OmegaT?
 
-OmegaT je nástroj pro překlad podporovaný počítačem (CAT - computer assisted translation). Jedná se o svobodný program, to znamená,
+OmegaT je nástroj pro překlad podporovaný počítačem (CAT – computer assisted translation). Jedná se o svobodný program, to znamená,
 že za jeho používání nemusíte nic platit, dokonce ani při používání ve firmě, a můžete jej, při respektování uživatelské licence, upravovat anebo dále šířit.
 
 Hlavní znaky programu:
@@ -80,6 +80,7 @@ OmegaT bez problémů zvládá zpracovat následující formáty:
   - Flash XML export (*.xml)
   - Wordfast TXML (*.txml)
   - Camtasia pro soubory Windows (*.camproj)
+  - Visio (*.vxd)
 
 Aplikaci OmegaT lze stejně dobře přizpůsobit i jiným formátům.
 
@@ -108,7 +109,7 @@ Práva, která udělíte této verzi (která lze nazývat jako „neomezený př
 Jiné způsoby stahování a instalace programu OmegaT si ukážeme později. 
 
 Pro uživatele Windows a Linuxu: jestli jste si jisti, že váš systém má již vhodnou verzi JRE nainstalovánu, můžete instalovat verzi programu OmegaT bez JRE (to je naznačeno v samotném názvu verze, „Without_JRE“, tedy bez Javy). 
-Pokud máte jakékoliv pochybnosti, doporučujeme použít  verzi s JRE. Tato volba je bezpečná, dokonce i když už máte JRE ve vašem systému instalováno, tato verze s tímto již nainstalovaným prostředím nebude kolidovat.
+Pokud máte jakékoliv pochybnosti, doporučujeme použít verzi s JRE. Tato volba je bezpečná, dokonce i když už máte JRE ve vašem systému instalováno, tato verze s tímto již nainstalovaným prostředím nebude kolidovat.
 
 Uživatelé Linuxu: OmegaT bude běžet i na otevřené implementaci balíčku Java, který je dodáván se spoustou Linuxových distribucí (například Ubuntu), ale mohou se vyskytnout chyby, zobrazovat problémy nebo některé vlastnosti nebudou dostupné. Proto doporučujeme, abyste si stáhli a instalovali buď JRE od Oracle nebo balíček OmegaT, který obsahuje JRE (archiv .tar.bz2), je to balíček s označením „Linux“. Když instalujete verzi Javy na úrovni systému, musíte se buď ujistit, že je správně přiřazena při startu, nebo ji explicitně vyvolat při spouštění OmegaT. Pokud si ale v Linuxu nejste natolik jistí, pak vám doporučujeme instalovat verzi OmegaT, kde je JRE obsaženo. Je to bezpečná volba, neboť „místní“ JRE se nebude rušit s jakýmkoliv jiným JRE, které je instalováno na vašem systému. 
 
@@ -203,11 +204,13 @@ Do kódu přispěli
   Thomas Cordonnier
   Martin Fleurke  
   Wildrich Fourie
+  Phillip Hall
   Jean-Christophe Helary
   Thomas Huriaux
   Hans-Peter Jacobs
-  Guido Leenders
   Ibai Lakunza Velasco
+  Guido Leenders
+  Aaron Madlon-Kay
   Fabián Mandelbaum
   John Moran
   Maxym Mykhalchuk 
@@ -217,6 +220,7 @@ Do kódu přispěli
   Tiago Saboga
   Andrzej Sawuła
   Benjamin Siband
+  Yu Tang
   Rashid Umarov  
   Antonio Vilei
   Martin Wunderlich
@@ -235,25 +239,23 @@ Ostatní přispěvatelé
 ale své jméno nevidíte v těchto záznamech, klidně nás kontaktujte.)
 
 OmegaT používá následující knihovny:
-
-  HTMLParser od přispěvatelů Somik Raha, Derrick Oswald a dalších (Licence LGPL)
-  http://sourceforge.net/projects/htmlparser
-
+  HTMLParser 1.6 od autorů Somik Raha, Derrick Oswald a další (LGPL Licence)
   MRJ Adapter 1.0.8 od Steve Roy (LGPL Licence)
-  http://homepage.mac.com/sroy/mrjadapter/
-
   VLDocking Framework 2.1.4 od VLSolutions (CeCILL Licence)
-  http://www.vlsolutions.com/en/products/docking/
-
   Hunspell autora László Németh a dalších (LGPL Licence).
-
   JNA dodali Todd Fast, Timothy Wall a dalších (LGPL Licence)
-
   Swing-Layout 1.0.2 (Licence LGPL)
-
   Jmyspell 2.1.4 (Licence LGPL)
-
   JAXB 2.1.7 (GPLv2 + výjimka classpath)
+  SJXP 1.0.2 (GPL v2)
+  SVNKit 1.7.5 (Licence TMate)
+  Sequence Library (Sequence Library License)
+  ANTLR 3.4 (Licence ANTLR 3)
+  SQLJet 1.1.3 (GPL v2)
+  JGit (Eclipse Distribution License)
+  JSch (Licence JSch)
+  Base64 (public domain)
+  Diff (GPL)
 
 ==============================================================================
  5.  Máte s aplikací OmegaT problémy? Potřebujete pomoc?

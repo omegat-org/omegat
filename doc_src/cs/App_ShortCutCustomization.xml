@@ -5,10 +5,10 @@
 
   <section id="ch04.shortcuts.customization">
     <title><indexterm class="singular">
-        <primary>Klávesové zkratky - přizpůsobení</primary> <secondary>Přizpůsobení</secondary>
+        <primary>Klávesové zkratky</primary> <secondary>Přizpůsobení</secondary>
       </indexterm>Přizpůsobení klávesových zkratek</title>
 
-    <para>Většině položek, které jsou dostupné v hlavní nabídce může být přiřazena nová klávesová zkratka. Jen ty nejčastěji používané položky nabídky mají přiřazené klávesové zkratky již ve výchozím nastavení programu. Můžete změnit již přiřazené klávesové zkratky a přidat nové zkratky tak, že přidáte soubor definic klávesových zkratek do svého adresáře OmegaT (<link linkend="user.files.location">Umístění souborů uživatele</link>).</para>
+    <para>Většině položek, které jsou dostupné v Hlavní nabídce může být přiřazena nová klávesová zkratka. Jen ty nejčastěji používané položky nabídky mají přiřazené klávesové zkratky již ve výchozím nastavení programu. Můžete změnit již přiřazené klávesové zkratky a přidat nové zkratky tak, že přidáte soubor definic klávesových zkratek do svého adresáře OmegaT (<link linkend="user.files">Umístění souborů uživatele</link>).</para>
 
     <para>Soubor definic klávesových zkratek musí být pojmenován <filename>MainMenuShortcuts.properties</filename> a musí obsahovat nanejvýš jednu definici klávesové zkratky na jednom řádku. Prázdné řádky jsou akceptovány a řádky s komentářem musí začínat dvěma lomítky „//“.  Cokoliv za „//“ bude ignorováno.</para>
 
@@ -18,10 +18,10 @@
         <para>Kompletní syntax stisku kláves (klávesových zkratek) je definovaná v následující dokumentaci Java 1.6 od Oracle (na konci stránky): <ulink url="http://docs.oracle.com/javase/6/docs/api/javax/swing/KeyStroke.html">Java 1.6 klávesové zkratky</ulink></para>
       </footnote>.</para>
 
-    <para>&lt;klávesová zkratka&gt; musí mít jednu z následujících podob:0 nebo více <code>&lt;modifikátor&gt;</code> následován 0 nebo 1 <code>&lt;událost&gt;</code> následován 1 <code>&lt;klávesa&gt;</code>, kde:<itemizedlist>
+    <para>&lt;klávesová zkratka&gt; musí mít jednu z následujících podob: 0 nebo více <code>&lt;modifikátor&gt;</code> následován 0 nebo 1 <code>&lt;událost&gt;</code> následován 1 <code>&lt;klávesa&gt;</code>, kde:<itemizedlist>
         <listitem>
           <para><code>&lt;modifikátor&gt;</code> může být: <emphasis>shift</emphasis>, <emphasis>control</emphasis>, <emphasis>ctrl</emphasis>, <emphasis>meta</emphasis><footnote>
-              <para>Na počítačích Mac je nutno použít modifikátor <emphasis>meta</emphasis>, aby se specifikovala klávesa <emphasis>command</emphasis>.</para>
+              <para>Na počítačích Mac je nutno použít modifikátor <emphasis>meta</emphasis>, aby se tak specifikovala klávesa <emphasis>command</emphasis>.</para>
             </footnote>, <emphasis>alt</emphasis>,
           <emphasis>altGraph</emphasis></para>
         </listitem>
@@ -37,11 +37,11 @@
         </listitem>
       </itemizedlist></para>
 
-    <para>Například se podívejme na výchozí klávesové zkratky OmegaT<footnote>
+    <para>Podívejme se například na výchozí klávesové zkratky OmegaT<footnote>
         <para>Výchozí klávesové zkratky OmegaT jsou dostupné přes Sourceforge: <ulink url="http://omegat.svn.sourceforge.net/viewvc/omegat/branches/release-2-5/src/org/omegat/gui/main/MainMenuShortcuts.properties">Výchozí klávesové zkratky OmegaT</ulink></para>
 
         <para>Výchozí klávesové zkratky OmegaT pro Mac jsou také dostupné přes Sourceforge, všechny používají „meta“ místo „ctrl“: <ulink url="http://omegat.svn.sourceforge.net/viewvc/omegat//branches/release-2-5/src/org/omegat/gui/main/MainMenuShortcuts.mac.properties">Výchozí klávesové zkratky OmegaT pro Mac</ulink></para>
-      </footnote>nalezneme zde:</para>
+      </footnote>nalezneme např.:</para>
 
     <itemizedlist>
       <listitem>
@@ -65,7 +65,7 @@
     <para><code> toolsShowStatisticsStandardMenuItem=shift meta
     S</code></para>
 
-    <para>Uložte soubor a restartujte <application>OmegaT</application>. Vaše nová zkratka by se teď měla již objevit vedle položky nabídky, kterou jste upravili. Když nové zkratky nebudou kolidovat se systémovými zkratkami, budou v rámci OmegaT k dispozici.</para>
+    <para>Uložte soubor a restartujte <application>OmegaT</application>. Vaše nová zkratka by se teď měla již objevit vedle položky nabídky, kterou jste upravili. Vaše nové klávesová zkratky pak budou v OmegaT k dispozici, pokud ovšem nebudou kolidovat se systémovými zkratkami.</para>
   </section>
 
   <section id="ch04.shortcuts.ProjectMenu">
@@ -73,10 +73,6 @@
 
     <table>
       <title>Nabídka ‚Projekt‛</title>
-
-      <indexterm class="singular">
-        <primary>Přizpůsobení zkratek</primary> <secondary>Nabídka ‚Projekt‛</secondary>
-      </indexterm>
 
       <tgroup cols="3" colsep="1">
         <colspec align="left" colname="1" colnum="1" colwidth="120"/>
@@ -194,10 +190,6 @@
     <table>
       <title>Nabídka ‚Upravit‛</title>
 
-      <indexterm class="singular">
-        <primary>Přizpůsobení zkratek</primary> <secondary>Nabídka ‚Upravit‛</secondary>
-      </indexterm>
-
       <tgroup cols="3" colsep="1">
         <colspec align="left" colname="1" colnum="1" colwidth="120"/>
 
@@ -249,7 +241,7 @@
           </row>
 
           <row>
-            <entry>Přepsat strojovým překladem</entry>
+            <entry>Přepsat Strojovým překladem</entry>
 
             <entry><keycap>Ctrl+M</keycap></entry>
 
@@ -369,7 +361,7 @@
           </row>
 
           <row>
-            <entry>Přepnout velikost písma</entry>
+            <entry>Změnit velikost písma...</entry>
 
             <entry><keycap>Shift+F3</keycap></entry>
 
@@ -385,12 +377,6 @@
 
     <table>
       <title>Nabídka ‚Přejít‛</title>
-
-      <indexterm class="singular">
-        <primary>Shortcuts Customization</primary>
-
-        <secondary>Goto Menu</secondary>
-      </indexterm>
 
       <tgroup cols="3" colsep="1">
         <colspec align="left" colname="1" colnum="1" colwidth="120"/>
@@ -523,7 +509,7 @@
           </row>
 
           <row>
-            <entry>Informace k úpravám/Nezobrazovat žádné</entry>
+            <entry>Informace k úpravám / Nezobrazovat žádné</entry>
 
             <entry/>
 
@@ -531,7 +517,7 @@
           </row>
 
           <row>
-            <entry>Informace k úpravám/Zobrazovat u otevřeného segmentu</entry>
+            <entry>Informace k úpravám / Zobrazovat u otevřeného segmentu</entry>
 
             <entry/>
 
@@ -539,7 +525,7 @@
           </row>
 
           <row>
-            <entry>Informace k úpravám/Zobrazovat pro všechny segmenty</entry>
+            <entry>Informace k úpravám / Zobrazovat pro všechny segmenty</entry>
 
             <entry/>
 
@@ -555,10 +541,6 @@
 
     <table>
       <title>Nabídka ‚Nástroje‛</title>
-
-      <indexterm class="singular">
-        <primary>Přizpůsobení zkratek</primary> <secondary>Nabídka ‚Nástroje‛</secondary>
-      </indexterm>
 
       <tgroup cols="3" colsep="1">
         <colspec align="left" colname="1" colnum="1" colwidth="120"/>
@@ -612,10 +594,6 @@
     <table>
       <title>Nabídka ‚Možnosti‛</title>
 
-      <indexterm class="singular">
-        <primary>Přizpůsobení zkratek</primary> <secondary>Nabídka ‚Možnosti‛</secondary>
-      </indexterm>
-
       <tgroup cols="3" colsep="1">
         <colspec align="left" colname="1" colnum="1" colwidth="120"/>
 
@@ -659,7 +637,7 @@
           </row>
 
           <row>
-            <entry>TransTips/Povolit TransTips</entry>
+            <entry>TransTips / Povolit TransTips</entry>
 
             <entry/>
 
@@ -667,7 +645,7 @@
           </row>
 
           <row>
-            <entry>TransTips/Přesná shoda</entry>
+            <entry>TransTips / Přesná shoda</entry>
 
             <entry/>
 
@@ -779,10 +757,6 @@
 
     <table>
       <title>Nabídka ‚Nápověda‛</title>
-
-      <indexterm class="singular">
-        <primary>Přizpůsobení zkratek</primary> <secondary>Nabídka ‚Nápověda‛</secondary>
-      </indexterm>
 
       <tgroup cols="3" colsep="1">
         <colspec align="left" colname="1" colnum="1" colwidth="120"/>

@@ -5,7 +5,7 @@
       <primary>Kontrola pravopisu</primary>
     </indexterm></title>
 
-  <para>OmegaT má vestavěnou kontrolu pravopisu založenou na kontrole pravopisu, která se používá v programech OpenOffice.org, Firefox a Thunderbird. Z tohoto důvodu je možné použít na širokou škálu volných slovníků kontroly pravopisu, které jsou k dispozici pro tyto aplikace.</para>
+  <para>OmegaT má vestavěnou kontrolu pravopisu založenou na kontrole pravopisu, která se používá v programech Apache OpenOffice, LibreOffice, Firefox a Thunderbird. Takže je možné použít na širokou škálu volných slovníků kontroly pravopisu, které jsou k dispozici pro tyto aplikace.</para>
 
   <section>
     <title>Instalace slovníků kontroly pravopisu</title>
@@ -14,21 +14,21 @@
 
     <itemizedlist>
       <listitem>
-        <para>Ve svém správci souborů vytvořte nový adresář na vhodné pozici, ve kterém budete ukládat slovníky pro kontrolu pravopisu (v příkladě níže je to: D:\Translations\spellcheckers)</para>
+        <para>Přes svého správce souborů vytvořte na vhodné pozici nový adresář, ve kterém budete ukládat slovníky pro kontrolu pravopisu (v příkladě níže je to: D:\Translations\spellcheckers)</para>
       </listitem>
     </itemizedlist>
 
     <itemizedlist>
       <listitem>
         <para>V aplikaci OmegaT vyberte <guisubmenu><indexterm class="singular">
-            Nabídka <primary>Možnosti</primary> <secondary>Kontrola pravopisu</secondary>
+            <primary>Nabídka Možnosti</primary> <secondary>Kontrola pravopisu</secondary>
           </indexterm></guisubmenu><guimenuitem>Možnosti &gt; Kontrola pravopisu</guimenuitem>, pak klikněte na <guibutton>Vybrat</guibutton> vedle pole zobrazujícího Adresář se soubory slovníku. Přejděte na a vyberte adresář, který jste vytvořili pro ukládání slovníků.</para>
       </listitem>
     </itemizedlist>
 
     <itemizedlist>
       <listitem>
-        <para>Do tohoto adresáře vložte vybrané soubory slovníku. V podstatě máte k dispozici dva způsoby jak toto provést. Můžete buď vkopírovat tyto soubory ručně, tj. z jiné pozice kdekoliv ve vašem systému za použití souborového manažeru; nebo použijte funkci OmegaT <emphasis role="bold">Instalovat nový slovník&quot;</emphasis>, která zobrazí seznam dostupných slovníku a vy si můžete vybrat. Pozor: Funkce „Instalovat“ vyžaduje připojení k internetu. Označené jazyky budou nainstalovány a zobrazí se v okně Nastavení kontroly pravopisu (instalace může chvíli trvat).</para>
+        <para>Do tohoto adresáře vložte vybrané soubory slovníku. V podstatě máte k dispozici dva způsoby jak toto provést. Můžete buď vkopírovat tyto soubory ručně, tj. z jiné pozice kdekoliv ve vašem systému za použití souborového manažeru; nebo použijte funkci OmegaT <emphasis role="bold">„Instalovat nový slovník“</emphasis>, která zobrazí seznam dostupných slovníků a vy si můžete vybrat. Pozor: Funkce „Instalovat“ vyžaduje připojení k internetu. Označené jazyky budou nainstalovány a zobrazí se v okně Nastavení kontroly pravopisu (instalace může chvíli trvat).</para>
       </listitem>
     </itemizedlist>
 
@@ -36,36 +36,34 @@
 
     <figure id="spellchecker.setup">
       <title><indexterm class="singular">
-          <primary>Nastavení kontroly pravopisu</primary> <secondary>Nastavení kontroly pravopisu - obrázek</secondary>
+          <primary>Kontrola pravopisu</primary> <secondary>Nastavení kontroly pravopisu</secondary>
         </indexterm>Nastavení kontroly pravopisu</title>
 
       <mediaobject>
         <imageobject role="html">
           <imagedata fileref="images/SpellcheckerSetup_25.png"/>
         </imageobject>
-      </mediaobject>
 
-      <mediaobject>
         <imageobject role="fo">
           <imagedata fileref="images/SpellcheckerSetup_25.png" width="80%"/>
         </imageobject>
       </mediaobject>
     </figure>
 
-    <para>Kliknutím na <guibutton>Instalovat nový slovník</guibutton> otevře okno Instalátor slovníků, kde si můžete vybrat slovníky, které chcete instalovat. Překontrolujte si jazykový kód souborů s překladem, aby odpovídal s kódem jazyka ve slovníku kontroly pravopisu: slovník FR-FR nebude fungovat při nastavení překladu jako FR. Musíte změnit nastavení na FR-FR, aby Kontrola pravopisu správně rozeznala potřebný slovník pro váš cílový soubor (pro češtinu: CZ vs. cs-CZ). Hledejte soubory, jejichž jméno odpovídá použitému jazyku, a které mají koncovku <emphasis>aff</emphasis> a <emphasis>dic.</emphasis>.</para>
+    <para>Kliknutím na <guibutton>Instalovat nový slovník</guibutton> se otevře okno Instalátor slovníků, kde si můžete vybrat slovníky, které chcete instalovat.</para>
+
+    <para>Názvy souborů musí odpovídat jazykovému kódu cílového jazyka tak jak je definován v okně Vlastnosti projektu (<guimenu>Projekt &gt; Vlastnosti</guimenu>). Například, pokud jste si vybrali ES-MX (mexická španělština) jako cílový jazyk, musí být soubory slovníku pojmenovány ‚es_MX.dic‘ a ‚es_MX.aff‘. Pokud pak třeba máte k dispozici slovník se standardní španělštinou, označené např. ‚es_es.dic‘ and ‚es_es.aff‘, můžete je přejmenovat na ‚es_MX.dic‘ a ‚es_MX.aff‘ a kontrola pravopisu budu fungovat.  Nezapomeňte ale na to, že pak se bude postupovat dle pravidel pro standardní španělštinu (kastilštinu) a ne pro mexickou španělštinu.</para>
   </section>
 
   <section>
     <title>Použití slovníků kontroly pravopisu</title>
 
-    <para>Není nutno nijak instruovat OmegaT pro použití konkrétního slovníku kontroly pravopisu: OmegaT použije správnou jazykovou verzi slovníku založenou na jazykovém kódu vašeho projektu. Nicméně zkontrolujte, zda jazykový kód je naprosto stejný: například slovník FR-FR nebude fungovat při nastavení překladu jako FR. Pokud je to nutné, upravte název souboru slovníku kontroly pravopisu nebo změňte jazyková nastavení vašeho projektu.</para>
+    <para>OmegaT nemusíte nijak instruovat pro použití konkrétního slovníku kontroly pravopisu: Program použije správnou jazykovou verzi slovníku založenou na jazykovém kódu vašeho projektu. Nicméně zkontrolujte, zda jazykový kód je naprosto stejný: například slovník FR-FR nebude fungovat při nastavení překladu jako FR. Pokud je to nutné, upravte název souboru slovníku kontroly pravopisu nebo změňte jazyková nastavení vašeho projektu.</para>
 
-    <para>Aby byla kontrola pravopisu aktivní, otevřete <guimenuitem>Možnosti &gt; Kontrola pravopisu</guimenuitem> a označte zaškrtávací políčko <guilabel>Automaticky zkontrolovat pravopis textu</guilabel> (viz příklad výše).</para>
+    <para>Aby byla kontrola pravopisu aktivní, otevřete <guimenuitem>Možnosti &gt; Kontrola pravopisu</guimenuitem> a označte zaškrtávací políčko <guilabel>Automaticky kontrolovat pravopis textu</guilabel> (viz příklad výše).</para>
 
     <figure id="spellchecker.in.action">
-      <title><indexterm class="singular">
-          <primary>Kontrola pravopisu</primary> <secondary>Kontrola pravopisu - obrázek</secondary>
-        </indexterm>Kontrola pravopisu v akci</title>
+      <title>Použití kontroly pravopisu</title>
 
       <mediaobject>
         <imageobject role="html">
@@ -78,7 +76,7 @@
       </mediaobject>
     </figure>
 
-    <para>Když kliknete pravým tlačítkem myši na zvýrazněné slovo (například zde Artund) objeví se rozbalovací menu, kde je vyobrazen seznam návrhů oprav (Art und). Samozřejmě můžete zadat do kontroly pravopisu, že všechny výskyty tímto způsobem zapsaného slova se mají ignorovat, nebo jej přidat do slovníku.</para>
+    <para>Když kliknete pravým tlačítkem myši na zvýrazněné slovo (například zde v německém textu Artund) objeví se vyskakovací menu, kde je vyobrazen seznam návrhů oprav (Art und). Samozřejmě můžete zadat do kontroly pravopisu, že všechny výskyty tímto způsobem zapsaného slova se mají ignorovat, nebo jej přidat do slovníku.</para>
   </section>
 
   <section id="hints">
@@ -86,12 +84,12 @@
         <primary>Kontrola pravopisu</primary> <secondary>Tipy</secondary>
       </indexterm></title>
 
-    <para>Pokud kontrola pravopisu nefunguje, nejprve se ujistěte, že zaškrtávací políčko <guilabel>„Automaticky zkontrolovat pravopis textu“</guilabel> v okně Nastavení kontroly pravopisu (<guisubmenu>Možnosti &gt; Kontrola pravopisu</guisubmenu>) je opravdu zaškrtnuto.</para>
+    <para>Pokud kontrola pravopisu nefunguje, nejprve se ujistěte, že  je opravdu označeno zaškrtávací políčko <guilabel>„Automaticky kontrolovat pravopis textu“</guilabel> v okně Nastavení kontroly pravopisu (<guisubmenu>Možnosti &gt; Kontrola pravopisu</guisubmenu>).</para>
 
     <para>Zkontrolujte také, zda jazykový kód cíle vašeho projektu odpovídá dostupným slovníkům v okně nastavení Kontroly pravopisu. Kontrola pravopisu užívá kód jazyku překladu k určení jazyka, který se použije při kontrole pravopisu: pokud je cílový jazyk Brazilská portugalština (PT_BR), musí podadresář se slovníky obsahovat dva slovníkové soubory pojmenované <emphasis>pt_br.aff</emphasis> a <emphasis>pt_br.dic</emphasis>.</para>
 
-    <para>Pokud jste již přeložili velkou část textu, ale až posléze jste si uvědomili, že kód cílového jazyka projektu nesouhlasí s kódem jazyka v Kontrole pravopisu (zadali jste jazyk pt_BR, ale nemáte pt_BR slovník) můžete jednoduše zkopírovat oba potřebné soubory a kopie přejmenovat (z  <emphasis>pt_PT.arr</emphasis> nebo <emphasis>pt_PT.dic</emphasis> na <emphasis>pt._BR.arr</emphasis> a <emphasis>pt_BR.dic</emphasis>). Samozřejmě je lepší, práci na chvíli přerušit a stáhnout si správnou verzi kontroly pravopisu.</para>
+    <para>Pokud jste již přeložili velkou část textu, ale až posléze jste si uvědomili, že kód cílového jazyka projektu nesouhlasí s kódem jazyka v Kontrole pravopisu (zadali jste jazyk pt_BR, ale nemáte pt_BR slovník) můžete jednoduše zkopírovat oba potřebné soubory a kopie přejmenovat (např. z <emphasis>pt_PT.aff</emphasis> a <emphasis>pt_PT.dic</emphasis> na <emphasis>pt._BR.aff</emphasis> a <emphasis>pt_BR.dic</emphasis>). Samozřejmě je lepší, práci na chvíli přerušit a stáhnout si správnou verzi kontroly pravopisu.</para>
 
-    <para>Pozor: volba <filename>Odstranit</filename> fyzicky odstraní vybrané slovníky. Pokud jsou tyto slovníky používány jinou aplikací ve vašem systému, budou odstraněny i z této aplikace. Pokud z jakéhokoliv důvodu budete potřebovat slovníky opakovaně instalovat a odstraňovat, bude lepší zkopírovat potřebné soubory do jiného adresáře, který bude sloužit jen pro účely aplikace OmegaT.</para>
+    <para>Pozor: volba <filename>Odstranit</filename> fyzicky odstraní vybrané slovníky. Pokud jsou tyto slovníky používány jinou aplikací ve vašem systému, budou odstraněny i z této aplikace. Pokud z jakéhokoliv důvodu budete potřebovat slovníky opakovaně instalovat a odstraňovat, bude lepší zkopírovat potřebné soubory do jiného adresáře, který bude sloužit jen pro účely OmegaT.</para>
   </section>
 </chapter>

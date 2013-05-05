@@ -10,20 +10,20 @@
   <section id="properties.dialog">
     <title>Dialogové okno Vlastnosti projektu</title>
 
-    <para>Toto dialogové okno <menuchoice> <shortcut> <keycombo> <keycap>Ctrl</keycap> <keycap>E</keycap> </keycombo> </shortcut> <guimenu>Vlastnosti</guimenu> <guimenuitem>projektu</guimenuitem> </menuchoice> se používá pro úpravu adresářů a jazyků projektu.</para>
+    <para>Toto dialogové okno <menuchoice> <shortcut> <keycombo> <keycap>Ctrl</keycap> <keycap>E</keycap> </keycombo> </shortcut> <guimenu>Projekt</guimenu> <guimenuitem>Vlastnosti...</guimenuitem> </menuchoice> se používá pro úpravu adresářů a jazyků projektu.</para>
 
-    <para>Během práce na překladu je možné upravovat vlastnosti projektu. Nezapomeňte, že změny v nastavení projektu mohou mít následky, obzvláště, když je projekt již otevřen. Dokud nemá uživatel aspoň nějaké zkušenosti s OmegaT, je nejlepší po startu projektu považovat veškerá nastavení za definitivní - až na případ, že byste si uvědomili, že se při nastavení naskytla zásadní chyba. V části Prevence ztráty dat najdete způsoby a prostředky jak svou práci chránit.</para>
+    <para>Během práce na překladu je možné upravovat vlastnosti projektu. Nezapomeňte, že změny v nastavení projektu mohou mít následky, obzvláště, když je projekt již otevřen. Dokud nemá uživatel aspoň nějaké zkušenosti s OmegaT, je nejlepší po startu projektu považovat veškerá nastavení za definitivní – až na případ, že byste si uvědomili, že se při nastavení naskytla zásadní chyba. V části Prevence ztráty dat najdete způsoby a prostředky jak svou práci chránit.</para>
 
     <figure>
       <title>Okno Vlastnosti projektu</title>
 
       <mediaobject>
         <imageobject role="html">
-          <imagedata fileref="images/NewProject_25.png"/>
+          <imagedata fileref="images/NewProject_26.png"/>
         </imageobject>
 
         <imageobject role="fo">
-          <imagedata fileref="images/NewProject_25.png" width="80%"/>
+          <imagedata fileref="images/NewProject_26.png" width="80%"/>
         </imageobject>
       </mediaobject>
     </figure>
@@ -60,14 +60,14 @@
             <primary>Segmentace</primary> <secondary>obecná pravidla vs. pravidla projektu</secondary>
           </indexterm></para>
 
-        <para>Pravidla segmentace obecně platí ve všech projektech. Nicméně uživatel může potřebovat si vytvořit několik pravidel, která jsou specifická pro konkrétní projekt. Použijte toto tlačítko pro otevření dialogového okna, aktivujte zaškrtávací políčko <guimenuitem>Upravit pravidla segmentace podle konkrétního projektu</guimenuitem>, pak si dle vlastní potřeby upravte segmentační pravidla. Nová sada pravidel bude uložena spolu s projektem a nebude odporovat obecným pravidlům segmentace. Až budete chtít smazat pravidla segmentace specifická pro daný projekt, zrušte označení tohoto zaškrtávacího políčka. V kapitole <link linkend="chapter.segmentation">Segmentace zdroje</link> naleznete více informací k pravidlům segmentace.<emphasis/></para>
+        <para>Pravidla segmentace obecně platí ve všech projektech. Nicméně se může stát, že uživatel bude potřebovat si vytvořit několik pravidel, která jsou specifická pro konkrétní projekt. Použijte toto tlačítko pro otevření dialogového okna, aktivujte zaškrtávací políčko <guimenuitem>Upravit pravidla segmentace podle konkrétního projektu</guimenuitem>, pak si dle vlastní potřeby upravte segmentační pravidla. Nová sada pravidel bude uložena spolu s projektem a nebude odporovat obecným pravidlům segmentace. Až budete chtít smazat pravidla segmentace specifická pro daný projekt, zrušte označení tohoto zaškrtávacího políčka. V kapitole <link linkend="chapter.segmentation">Segmentace zdroje</link> naleznete více informací k pravidlům segmentace.<emphasis/></para>
 
         <para><emphasis>Tip:</emphasis> sada pravidel segmentace pro daný projekt je uložena v <filename>project/omegat/segmentation.conf.</filename></para>
       </listitem>
 
       <listitem>
         <para>Tlačítko<emphasis role="bold"><guibutton>Filtry souborů...</guibutton> </emphasis><indexterm class="singular">
-            <primary>Filtry souborů</primary> <secondary>obecné vs. filtry souborů projektu</secondary>
+            <primary>Filtry souborů</primary> <secondary>obecné filtry vs. filtry souborů projektu</secondary>
           </indexterm></para>
 
         <para>Podobně jak je výše popsáno si může uživatel vytvořit projektově specifické Filtry souborů, které budou uloženy spolu s projektem, a které budou platné jen pro daný projekt. Projektově specifickou sadu filtrů souborů vytvoříte kliknutím na tlačítko <guibutton>Filtry souborů...</guibutton>, pak v zobrazeném okně aktivujte zaškrtávací políčko <guimenuitem>Upravit nastavení filtru souborů podle konkrétního projektu</guimenuitem>. Kopie nastavení filtrů se případě uloží s projektem. Až budete chtít smazat specifické filtry souborů, zrušte označení tohoto zaškrtávacího políčka. Za poznámku stojí, že v nabídce <guimenuitem>Možnosti -&gt; Filtry souborů</guimenuitem> se mění obecné uživatelské filtry, ne filtry specifické pro daný projekt. Více informací k tomuto tématu najdete v kapitole <link linkend="chapter.file.filters">Filtry souborů </link><emphasis/></para>
@@ -82,6 +82,14 @@
 
         <para>V případě, že ve zdrojovém dokumentu jsou nejedinečné segmenty, nabízí zaškrtávací políčko Automatické upřednostnění následující dvě možnosti týkající se automatického překladu: pokud je zaškrtnuto, první přeložený segment bude považován za výchozí překlad a jeho cílový text bude automaticky použit pro pozdější shody během překladového procesu. Segmenty, které byly takto chybně přeloženy, je možno samozřejmě opravit později ručně použitím <guimenuitem>Vytvořit alternativní překlad</guimenuitem>. Pokud ale zaškrtávací políčko Automatické upřednostnění není zaškrtnuto, pak segmenty nabízející alternativní překlad zůstanou nepřeloženy, dokud uživatel sám nerozhodne, který překlad použít.</para>
       </listitem>
+
+      <listitem>
+        <para>Zaškrtávací políčko <emphasis role="bold">Odstranit tagy</emphasis><indexterm class="singular">
+            <primary>Projekt</primary> <secondary>Volba Odstranit tagy</secondary>
+          </indexterm></para>
+
+        <para>Pokud je aktivováno, všechny formátovací tagy budou ze zdrojových segmentů odstraněny. Tato funkce je užitečná obzvláště při práci s texty, kde vnitřní formátování nemá žádné skutečné využití (např. PDF rozpoznané pomocí OCR, špatně zkonvertované .odt nebo .docx, atd). Odstraněny budou jen vnitřní tagy, takže běžně by neměl být žádný problém s otevíráním přeložených dokumentů. Neviditelné formátování (tj. takové, které se nezobrazí jako tagy v editoru OmegaT) v přeloženém dokumentu zůstane.</para>
+      </listitem>
     </itemizedlist>
 
     <itemizedlist>
@@ -92,7 +100,7 @@
             <primary>Glosáře</primary> <secondary>Umístění zapisovatelného souboru glosáře</secondary>
           </indexterm></para>
 
-        <para>Zde můžete vybrat různé podadresáře, například podadresář se zdrojovými soubory, podadresář se soubory překladu atd. pokud vložíte názvy adresářů, které dosud neexistují, <application>OmegaT</application> je pro vás vytvoří. Pokud se rozhodnete změnit projektové adresáře, nezapomeňte na to, že takto nepřesunete existující soubory ze starých adresářů na novou pozici.</para>
+        <para>Zde můžete vybrat různé podadresáře, například podadresář se zdrojovými soubory, podadresář se soubory překladu atd. a pokud vložíte názvy adresářů, které dosud neexistují, <application>OmegaT</application> je pro vás vytvoří. Pokud se rozhodnete změnit projektové adresáře, nezapomeňte na to, že takto nepřesunete existující soubory ze starých adresářů na novou pozici.</para>
       </listitem>
     </itemizedlist>
   </section>

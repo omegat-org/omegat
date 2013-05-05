@@ -14,9 +14,9 @@
   <section>
     <title>Instalace a použití</title>
 
-    <para>Plugin Scriptiong si pro OmegaT stáhnete ze stránek určených pro stahování pluginů (<ulink url="???">http://sourceforge.net/projects/omegat-plugins/files/</ulink>). Rozbalte soubory a  vložte je všechny do adresáře „plugins“, který se nachází v instalačním adresáři OmegaT, čili v adresáří, kde je uložen soubor OmegaT.jar. Pokud adresář „plugins“ neexistuje, tak jej vytvořte.</para>
+    <para>Plugin Skriptování pro OmegaT si můžete stáhnout ze <ulink url="http://sourceforge.net/projects/omegat-plugins/files">stránky určené pro stahování pluginů</ulink>. Rozbalte soubory a vložte je všechny do adresáře „plugins“, který se nachází v instalačním adresáři OmegaT, čili v adresáři, kde je uložen soubor OmegaT.jar. Pokud adresář „plugins“ neexistuje, tak jej vytvořte.</para>
 
-    <para>Tímto krokem přidáte další podnabídku <guisubmenu>Nástroje</guisubmenu><guisubmenu>Skriptování.</guisubmenu> Pod podnabídkou <guisubmenu>Skriptování</guisubmenu> naleznete pět řádků, kterým můžete přiřadit skripty. Kliknutím na <guisubmenu>Skriptování</guisubmenu> otevřete podokno Skriptování:<screenshot> <screeninfo>Skriptování</screeninfo> <mediaobject> <imageobject> <imagedata fileref="images/ScriptingDialog.png"/> </imageobject> </mediaobject> </screenshot></para>
+    <para>Tímto krokem bude přidána další podnabídka<guisubmenu> Nástroje &gt; </guisubmenu><guisubmenu>Skriptování.</guisubmenu> V podnabídce <guisubmenu>Skriptování</guisubmenu> naleznete pět zástupných řádků, kterým můžete přiřadit skripty. Kliknutím na <guisubmenu>Skriptování</guisubmenu> otevřete podokno Skriptování: <screenshot> <screeninfo>Skriptování</screeninfo> <mediaobject> <imageobject> <imagedata fileref="images/ScriptingDialog.png"/> </imageobject> </mediaobject> </screenshot></para>
 
     <para>V podokně Skriptování můžete nahrát již existující skript do textového pole a spustit jej v právě otevřeném projektu. Pro přizpůsobení vlastností skriptu proveďte následující kroky:</para>
 
@@ -54,36 +54,23 @@
         </listitem>
       </itemizedlist><itemizedlist>
         <listitem>
-          <para><emphasis role="bold">JavaScript</emphasis>  (někdy se zkracuje jako JS, nezaměňovat s Javou): je skrptovací jazyk založený na prototypech, je dynamický, používá krátký zápis a nabízí prvotřídní funkce. Je to multiplatformní jazyk, podporuje objektově orientované, imperativní a funkční programovací styly. Je jazykem, který stojí za populárním software jako Firefox a představuje tak známý a často využívaný programovací nástroj v oblasti open source.</para>
+          <para><emphasis role="bold">JavaScript</emphasis> (někdy se zkracuje jako JS, nezaměňovat s Javou): je skrptovací jazyk založený na prototypech, je dynamický, používá krátký zápis a nabízí prvotřídní funkce. Je to multiplatformní jazyk, podporuje objektově orientované, imperativní a funkční programovací styly. Je jazykem, který stojí za populárním software jako Firefox a představuje tak známý a často využívaný programovací nástroj v oblasti open source.</para>
         </listitem>
-      </itemizedlist>Všechny jazyky mají přístup do objektového modelu OmegaT, kde projekt představuje hlavní objekt. Následující ukázka kódu v groovy prochází všechny segmenty ve všech souborech aktuálního projektu:</para>
+      </itemizedlist>Všechny jazyky mají přístup do objektového modelu OmegaT, kde projekt představuje hlavní objekt. Následující ukázka kódu v groovy prochází všechny segmenty ve všech souborech aktuálního projektu a, pokud jsou dostupné překlady, zobrazí zdrojový a cílový segment:</para>
 
-    <para><parameter>files = project.projectFiles;</parameter></para>
-
-    <para><parameter>for (i in 0 ..&lt; files.size())</parameter></para>
-
-    <para><parameter>{</parameter></para>
-
-    <para><parameter> for (j in 0 ..&lt;
-    files[i].entries.size())</parameter></para>
-
-    <para><parameter> {</parameter></para>
-
-    <para><parameter> currsegment = files[i].entries[j];</parameter></para>
-
-    <para><parameter> source = currsegment.getSrcText();</parameter></para>
-
-    <para><parameter> if (project.getTranslationInfo(ste))</parameter></para>
-
-    <para><parameter> target =
-    project.getTranslationInfo(currsegment).translation;</parameter></para>
-
-    <para><parameter> else</parameter></para>
-
-    <para><parameter> target = null;</parameter></para>
-
-    <para><parameter> }</parameter></para>
-
-    <para><parameter>}</parameter></para>
+    <programlisting>    files = project.projectFiles;
+    for (i in 0 ..&lt; files.size())
+    {
+        for (j in 0 ..&lt; files[i].entries.size())
+        {
+            currSegment = files[i].entries[j];
+            if (project.getTranslationInfo(currSegment))
+            {
+                source = currSegment.getSrcText();
+                target = project.getTranslationInfo(currSegment).translation;
+                console.println(source + &quot; &gt;&gt;&gt;&gt; &quot; + target);
+            }     
+        }
+    }</programlisting>
   </section>
 </appendix>

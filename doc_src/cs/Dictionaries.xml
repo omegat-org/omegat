@@ -12,21 +12,19 @@
         <primary>Slovníky</primary> <secondary>Stažení a instalace</secondary>
       </indexterm></title>
 
-    <para>Slovníky v aplikaci <application>OmegaT</application> jsou založeny na platformě StartDict. Chcete-li nainstalovat potřebné soubory, postupujte takto:</para>
+    <para>Slovníky v aplikaci <application>OmegaT</application> jsou založeny na formátu StarDict nebo Lingvo DSL. Chcete-li nainstalovat potřebné soubory formátu StarDict, postupujte takto:</para>
 
     <itemizedlist>
       <listitem>
-        <para>Vyhledejte si požadovanou jazykovou kombinaci - například na zmíněné stránce <ulink url="http://stardict.sourceforge.net/index.php"><indexterm class="singular">
-            <primary>Slovníky</primary> <seealso>FreeDict</seealso>
-          </indexterm>StartDict Platform</ulink> nebo <ulink url="http://www.freedict.org/en/list.html">FreeDict<indexterm class="singular">
-            <primary>Slovníky</primary> <seealso>Stardict</seealso>
-          </indexterm></ulink>.</para>
+        <para>Vyhledejte si požadovanou jazykovou kombinaci - například na výše zmíněné stránce <ulink url="http://stardict.sourceforge.net/index.php"><indexterm class="singular">
+            <primary>Slovníky</primary> <secondary>StarDict</secondary>
+          </indexterm>StarDict Platform</ulink>.&gt;</para>
       </listitem>
     </itemizedlist>
 
     <itemizedlist>
       <listitem>
-        <para>Stáhněte si soubor - měl by být v archívu <filename>tarball</filename> (koncovka <emphasis>tar.bz </emphasis> nebo <emphasis>tar.bz2</emphasis>).</para>
+        <para>Stáhněte si soubor – mělo by se jednat o archív typu <filename>tarball</filename> (koncovka <emphasis>tar.bz </emphasis> nebo <emphasis>tar.bz2</emphasis>).</para>
       </listitem>
     </itemizedlist>
 
@@ -41,24 +39,24 @@
     <itemizedlist>
       <listitem>
         <para><indexterm class="singular">
-            <primary>Slovníky</primary> <seealso>Webster</seealso>
-          </indexterm>Webster's Revised Unabridged Dictionary (1913)</para>
+            <primary>Slovníky</primary> <secondary>Webster</secondary>
+          </indexterm>Slovník Webster's Revised Unabridged Dictionary (1913)</para>
       </listitem>
     </itemizedlist>
 
     <itemizedlist>
       <listitem>
         <para><indexterm class="singular">
-            <primary>Slovníky</primary> <seealso>Longman</seealso>
-          </indexterm>Longman Dictionary of Contemporary English</para>
+            <primary>Slovníky</primary> <secondary>Longman</secondary>
+          </indexterm>Slovník Longman Dictionary of Contemporary English</para>
       </listitem>
     </itemizedlist>
 
     <itemizedlist>
       <listitem>
         <para><indexterm class="singular">
-            <primary>Slovníky </primary><seealso>Britannica</seealso> 
-          </indexterm>The Britannica Concise Encyclopedia</para>
+            <primary>Slovníky</primary> <secondary>Britannica</secondary>
+          </indexterm>Encyklopedie The Britannica Concise Encyclopedia</para>
       </listitem>
     </itemizedlist>
 
@@ -68,12 +66,12 @@
       </listitem>
     </itemizedlist>
 
-    <para>Některé slovníky jsou bez dalších podmínek - tj. jsou „Zdarma k použití“, a některé z nich, stejně jako výběr výše, jsou pod licencí GPL. Následující příklad ukazuje Merrian Webster 10th dictionary „v akci“:</para>
+    <para>Některé slovníky jsou bez dalších podmínek – tj.  jsou „Volně k použití“, a některé z nich, stejně jako výběr výše, jsou pod licencí GPL. Následující příklad ukazuje Merrian Webster 10th dictionary „v akci“:</para>
 
     <figure id="Dict.Merriam.Webster">
       <title><indexterm class="singular">
-          <primary>Slovník</primary> <secondary>Merriam Webster - obrázek</secondary> <seealso>Slovníky</seealso>
-        </indexterm>Slovník Merriam Webster - použití</title>
+          <primary>Slovníky</primary> <secondary>Merriam Webster</secondary> <seealso>Slovníky</seealso>
+        </indexterm>Slovník Merriam Webster – použití</title>
 
       <mediaobject>
         <imageobject role="html">
@@ -95,8 +93,8 @@
     <itemizedlist>
       <listitem>
         <para>Zkontrolujte, zda jsou vaše slovníky ve správném adresáři (nebo jeho podadresáři). Zkontrolujte <menuchoice> <shortcut> <keycombo> <keycap><indexterm class="singular">
-                    <primary>Klávesové zkratky</primary> <secondary>Ctrl+E - Vlastnosti projektu</secondary>
-                  </indexterm>Ctrl</keycap> <keycap>E</keycap> </keycombo> </shortcut> <guimenu>Vlastnosti</guimenu> <guimenuitem> Projektu</guimenuitem> </menuchoice></para>
+                    <primary>Klávesové zkratky</primary> <secondary>Vlastnosti projektu - Ctrl+E</secondary>
+                  </indexterm>Ctrl</keycap> <keycap>E</keycap> </keycombo> </shortcut> <guimenu>Projekt </guimenu> <guimenuitem> Vlastnosti...</guimenuitem> </menuchoice></para>
       </listitem>
     </itemizedlist>
 

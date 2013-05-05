@@ -25,15 +25,15 @@
     </figure>
 
     <note>
-      <para>Výše uvedené hledání najde všechny cílové segmenty, které obsahují znaky, dost nepravděpodobné v cílovém jazyce - tj. slovinštině.</para>
+      <para>Výše uvedené hledání najde všechny cílové segmenty, které obsahují hledané znaky, což je v cílovém jazyce – zde slovinština – dost vzácné.</para>
     </note>
 
     <section>
       <title>Hledání<indexterm class="singular">
-          <primary>Klávesová zkratka</primary> <secondary>Ctrl+F - Hledat</secondary>
+          <primary>Klávesové zkratky</primary> <secondary>Hledat</secondary>
         </indexterm></title>
 
-      <para><application>OmegaT</application> poskytuje množství výkonných vyhledávacích funkcí. Okno Hledat otevřete pomocí zkratky <keycombo> <keycap>Ctrl</keycap> <keycap>F</keycap> </keycombo>, pak zadejte slovo nebo frázi, kterou chcete vyhledat do pole „Hledat“. Podobně lze vycházet přímo z Editoru: označte slovo či frázi kdekoliv v podokně Editoru (cílový text aktuálního segmentu) a stiskněte <keycombo> <keycap>Ctrl</keycap> <keycap>F</keycap></keycombo>. Slovo nebo fráze bude v tomto případě zadané do pole „Hledat“ automaticky. Současně je možné mít otevřeno několik oken hledání, ale zavřete je hned, když je už nepotřebujete, aby nezahltila paměť počítače.</para>
+      <para><application>OmegaT</application> poskytuje množství výkonných vyhledávacích funkcí. Okno Hledat otevřete pomocí zkratky <keycombo> <keycap>Ctrl</keycap> <keycap>F</keycap> </keycombo>, pak zadejte slovo nebo frázi, kterou chcete vyhledat do pole „Hledat“. Podobně lze vycházet přímo z Editoru: označte slovo či frázi kdekoliv v podokně Editoru (cílový text aktuálního segmentu) a stiskněte <keycombo> <keycap>Ctrl</keycap> <keycap>F</keycap></keycombo>. Slovo nebo fráze bude v tomto případě zadané do pole „Hledat“ automaticky. Současně je možné mít otevřeno několik oken hledání, ale zavřete je hned, když je už nepotřebujete, aby se tak nezahltila paměť počítače.</para>
     </section>
 
     <section>
@@ -74,7 +74,7 @@
 
     <itemizedlist>
       <listitem>
-        <para>‚*‘ reprezentuje nula nebo více znaků, počítá se od aktuální pozici v daném slově po jeho konec. Vyhledávané položce ‚<literal>run*</literal>‘ by například odpovídalo ‚<literal>run</literal>‘, ‚<literal>runs</literal>‘ a ‚<literal>running</literal>‘.</para>
+        <para>‚*‘ reprezentuje nula nebo více znaků, počítá se od aktuální pozice v daném slově po jeho konec. Vyhledávané položce ‚<literal>run*</literal>‘ by například odpovídalo ‚<literal>run</literal>‘, ‚<literal>runs</literal>‘ a ‚<literal>running</literal>‘.</para>
       </listitem>
     </itemizedlist>
 
@@ -92,7 +92,7 @@
         <primary>Vyhledávání</primary> <secondary>Metody a možnosti</secondary>
       </indexterm></title>
 
-    <para>Vyberte metodu hledání pomocí přepínacích tlačítek. Můžete si vybrat mezi dvěma metodami hledání:</para>
+    <para>Metodu hledání vyberte pomocí přepínacích tlačítek. Dostupné jsou následující metody hledání:</para>
 
     <variablelist>
       <varlistentry>
@@ -115,16 +115,16 @@
         <term><emphasis role="bold">Regulární výrazy</emphasis></term>
 
         <listitem>
-          <para>Řetězec znaků pro vyhledávání bude zpracován jako regulární výraz. Řetězec znaků pro vyhledávání - [a-zA-Z]+[öäüqwß] - například jako v příkladě nahoře hledá slova v cílovém segmentu, a to taková, která obsahují zadané zvláštní znaky na německé klávesnici. Regulární výrazy představují účinný způsob hledání různých podob daného řetězce. Více najdete v kapitole <link linkend="chapter.regexp">Regulární výrazy.</link></para>
+          <para>Řetězec znaků pro vyhledávání bude zpracován jako regulární výraz. Řetězec znaků pro vyhledávání – [a-zA-Z]+[öäüqwß] – například jako v příkladě nahoře hledá slova v cílovém segmentu, a to taková, která obsahují zadané zvláštní znaky na německé klávesnici. Regulární výrazy představují účinný způsob hledání různých podob daného řetězce. Více najdete v kapitole <link linkend="chapter.regexp">Regulární výrazy.</link></para>
         </listitem>
       </varlistentry>
     </variablelist>
 
-    <para>K nahoře zmíněným metodám můžete přidat následující  možnosti:</para>
+    <para>K nahoře zmíněným metodám můžete přidat následující možnosti:</para>
 
     <itemizedlist>
       <listitem>
-        <para><emphasis role="bold">Rozlišovat velikost písmen</emphasis>: vyhledávání se týká přesně zadaného řetězce; tj. přihlíží se na velikost písmen</para>
+        <para><emphasis role="bold">Rozlišovat velikost písmen</emphasis>: vyhledávání se týká přesně zadaného řetězce; tj. přihlíží se na velikost písmen.</para>
       </listitem>
 
       <listitem>
@@ -154,7 +154,7 @@
   <section id="search.result.display">
     <title>Zobrazení výsledků hledání</title>
 
-    <para>Stisknutí tlačítka pro vyhledávání po zadání řetězce do vyhledávacího pole zobrazí všechny segmenty v projektu, které obsahují zadaný řetězec. Protože  <application>OmegaT</application> zpracovává identické segmenty jako jednu entitu, zobrazuje se jen první jedinečný segment. Segmenty jsou zobrazované v takovém pořadí, v jakém se nacházejí v projektu.  Přeložené segmenty se zobrazí s původním textem nahoře a přeloženým textem dole, nepřeložené segmenty se zobrazí jen s původním textem.</para>
+    <para>Stisknutí tlačítka pro vyhledávání po zadání řetězce do vyhledávacího pole zobrazí všechny segmenty v projektu, které obsahují zadaný řetězec. Protože <application>OmegaT</application> zpracovává identické segmenty jako jednu entitu, zobrazuje se jen první jedinečný segment. Segmenty jsou zobrazované v takovém pořadí, v jakém se nacházejí v projektu.  Přeložené segmenty se zobrazí s původním textem nahoře a přeloženým textem dole, nepřeložené segmenty se zobrazí jen s původním textem.</para>
 
     <para>Pokud chcete segment zpracovávat v Editoru, stačí na něj kliknout. Potom se můžete vrátit zpět do okna Hledat a přejít na další nalezený segment, například abyste jej mohli zkontrolovat, a pokud nutno přizpůsobit terminologii.</para>
 

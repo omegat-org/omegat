@@ -16,25 +16,25 @@
         <see>Tokenizer</see>
       </indexterm></title>
 
-    <para>Tokenzier (též zvaný ‚stemmer‛, čili nástroj, který umí poznat slovo pojde jeho kořene/kmene) zvyšuje kvalitu nálezů při rozpoznání konkrétních slov ve zdrojovém textu a v datech překladové paměti. Stejně tak umí zlepšit hledání v glosáři.</para>
+    <para>Tokenizer (též zvaný ‚stemmer‛, čili nástroj, který umí poznat slovo podle jeho kořene / kmene) zvyšuje kvalitu nálezů při rozpoznání konkrétních slov ve zdrojovém textu a v datech překladové paměti. Stejně tak umí zlepšit hledání v glosáři.</para>
 
     <para>Napříkld stemmer pro angličtinu by měl identifikovat řetězec „cats“ (a stejně „catlike“, „catty“, atd.) protože vychází z kmene „cat“, a slova „stemmer“, „stemming“ a „stemmed“ mají kořen „stem“. Algoritmus pro nalezení kořene redukuje slova jako „fishing“, „fished“, „fish“ a „fisher“ na kořen slova „fish“. Toto je obzvláště užitečné u jazyků, které používají předpony a přípony pro odvozování nových slov z kořene. Uveďme si ještě jeden příklad ze slovinštiny, zde jsou různé formy pro anglické „good“:</para>
 
     <itemizedlist>
       <listitem>
-        <para>lep, lepa, lepo - jednotné číslo, mužský, ženský a střední rod</para>
+        <para>lep, lepa, lepo – jednotné číslo, mužský, ženský a střední rod</para>
       </listitem>
     </itemizedlist>
 
     <itemizedlist>
       <listitem>
-        <para>lepši, lepša, lepše . - komparativ, první pád, mužský, ženský a střední rod, resp. forma množného čísla přídavného jména</para>
+        <para>lepši, lepša, lepše  - komparativ, první pád, mužský, ženský a střední rod, resp. forma množného čísla přídavného jména</para>
       </listitem>
     </itemizedlist>
 
     <itemizedlist>
       <listitem>
-        <para>najlepših - superlativ, množné číslo, druhý pád pro mužský, ženský a střední rod.</para>
+        <para>najlepših – superlativ, množné číslo, druhý pád pro mužský, ženský a střední rod.</para>
       </listitem>
     </itemizedlist>
   </section>
@@ -42,25 +42,25 @@
   <section>
     <title>Instalace a použití v prostředí příkazového řádku</title>
 
-    <para>Balíček tokenizeru, který vychází z projektu Lucene je distribuován jako plugin pro OmegaT na adrese http://sourceforge.net/projects/omegat-plugins/files/.  Stáhněte si nejaktuálnější soubory (v době psaní tohoto textu je nejenovější OmegaT-tokenizers_0.4_2-2.1.zip)</para>
+    <para>Balíček tokenizeru, který vychází z projektu Lucene je distribuován jako plugin pro OmegaT na adrese http://sourceforge.net/projects/omegat-plugins/files/.  Stáhněte si nejaktuálnější soubory (v době psaní tohoto textu je nejnovější verze OmegaT-tokenizers_0.4_2-2.1.zip)</para>
 
-    <para>Pro instalaci tokenizeru vytvořte v adresáři, kde je instalován soubor OmegaT.jar, adresář s názvem „plugins“ a do tohoto nového adresáře rozbalte nahoře zmíněný zip soubor.</para>
+    <para>Pro instalaci tokenizeru vytvořte v adresáři, kde je instalován soubor OmegaT.jar, adresář s názvem „plugins“ a do tohoto nového adresáře rozbalte nahoře zmíněný zip archiv.</para>
 
-    <para>Aby bylo možno spouštět OmegaT s tokenizerem, potřebujete specifikovat, který tokenizer budete používat pro zdrojový jazyk a který tokenizer budete používat pro jazyk překladu. Syntax takového příkazu je následující:</para>
+    <para>Aby bylo možno spouštět OmegaT s tokenizerem, potřebujete specifikovat, který tokenizer budete používat pro zdrojový jazyk, a který tokenizer budete používat pro jazyk překladu. Syntax takového příkazu je následující:</para>
 
-    <para><literal>java -jar OmegaT.jar --ITokenizer=[jméno tokenzieru pro zdrojový jazyk] --ITokenizerTarget=[jméno tokenizeru pro jazyk překladu]</literal></para>
+    <para><literal>java -jar OmegaT.jar --ITokenizer=[jméno tokenizeru pro zdrojový jazyk] --ITokenizerTarget=[jméno tokenizeru pro jazyk překladu]</literal></para>
 
-    <para>Jména tokenizerů jsou zadány v souboru Readme.txt, který se stáhne současně se soubory tokenizeru. Například, pokud budete chtít použít tokenizer Lucene CJK pro zdrojový jazyk a tokenzer Lucene French pro jazyk překladu, váš příkaz pro spuštění bude vypadat takto:</para>
+    <para>Jména tokenizerů jsou zadána v souboru Readme.txt, který se stáhne současně se soubory tokenizeru. Například, pokud budete chtít použít tokenizer Lucene CJK pro zdrojový jazyk a tokenzer Lucene French pro jazyk překladu, váš příkaz pro spuštění bude vypadat takto:</para>
 
-    <para><literal>java -jar OmegaT.jar --ITokenizer=org.omegat.plugins.
-    tokenizer.LuceneCJKTokenizer --ITokenizerTarget=org.omegat.plugins.
-    tokenizer.LuceneFrenchTokenizer</literal></para>
+    <para><literal>java -jar OmegaT.jar
+    --ITokenizer=org.omegat.plugins.tokenizer.LuceneCJKTokenizer
+    --ITokenizerTarget=org.omegat.plugins.tokenizer.LuceneFrenchTokenizer</literal></para>
   </section>
 
   <section>
-    <title>Specifika Mac OS X</title>
+    <title>Specifika systému Mac OS X</title>
 
-    <para>Pokud chcete používat tokenizery s balíčkem Mac OS X OmegaT.app, tak platí instalace popsaná nahoře (abyste nalezli umístění OmegaT.jar, klikněte pravým tlačítkem myši na OmegaT.app), ale budete muset specifikovat názvy tokenizerů v souboru <filename>info.plist </filename>který obsahuje možností spouštění Javy. Následujte výše uvedené pokyny ke zpracování souboru <filename>info.plist</filename>  a upravte jek, aby vypadal následovně pro výše uvedený příklad:</para>
+    <para>Pokud chcete používat tokenizery s balíčkem Mac OS X OmegaT.app, tak platí instalace popsaná nahoře (umístění OmegaT.jar naleznete tak, že kliknete pravým tlačítkem myši na OmegaT.app), ale budete muset specifikovat názvy tokenizerů v souboru <filename>info.plist </filename>který obsahuje možnosti spouštění Javy. Následujte výše uvedené pokyny ke zpracování souboru <filename>info.plist</filename> a upravte jej tak, aby pro výše uvedený příklad vypadal následovně:</para>
 
     <literallayout><code>
 &lt;key&gt;VMOptions&lt;/key&gt;
@@ -69,8 +69,7 @@
 &lt;key&gt;Arguments&lt;/key&gt;
 &lt;array&gt;
   &lt;string&gt;--ITokenizer=org.omegat.plugins.tokenizer.LuceneCJKTokenizer&lt;/string&gt;
-  &lt;string&gt;--ITokenizerTarget=org.omegat.plugins.tokenizer.
-  LuceneFrenchTokenizer&lt;/string&gt;
+  &lt;string&gt;--ITokenizerTarget=org.omegat.plugins.tokenizer.LuceneFrenchTokenizer&lt;/string&gt;
 &lt;/array&gt;</code></literallayout>
   </section>
 
@@ -84,13 +83,13 @@
 84528: Info: Target tokenizer: org.omegat.plugins.tokenizer.LuceneFrenchTokenizer 
 </code></literallayout>
 
-    <para>Číslice vlevo asi budou na vašem systému odlišné, ale hlavně se ujistěte, že názvy tokenizerů pro zdroj a překlad, které specifikujete v možnostech spouštění, odpovídají tomu, co najdete v logu. Pokud tokenizery nejsou správně spuštěny, log bude vypadat podobně:</para>
+    <para>Číslice vlevo asi budou na vašem systému odlišné, ale hlavně se ujistěte, že názvy tokenizerů pro zdroj a překlad, které specifikujete v možnostech spouštění, odpovídají tomu, co najdete v logu. Pokud tokenizery nejsou správně spuštěny, protokol (tzv. ‚log‘) bude vypadat podobně:</para>
 
     <literallayout><code>
 12719: Info: Source tokenizer: org.omegat.core.matching.Tokenizer 
 12719: Info: Target tokenizer: org.omegat.core.matching.Tokenizer 
 </code></literallayout>
 
-    <para>S balíčkem Mac OS X OmegaT.app, budete muset dvakrát kliknout na soubor <literal>JavaApplicationStub</literal>,který najdete v /OmegaT.app/Contents/MacOS/ (přístup je popsán výše), a spustíte tak OmegaT z příkazového řádku a máte tak přímý přístup k logu.</para>
+    <para>S balíčkem Mac OS X OmegaT.app, budete muset dvakrát kliknout na soubor <literal>JavaApplicationStub</literal>, který najdete v /OmegaT.app/Contents/MacOS/ (přístup je popsán výše), a spustíte tak OmegaT z příkazového řádku a máte tak přímý přístup k logu.</para>
   </section>
 </appendix>

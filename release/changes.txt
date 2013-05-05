@@ -3,7 +3,7 @@
 ----------------------------------------------------------------------
    3 Enhancements
    2 Bug fixes
-   1 Localisation update
+   2 Localisation updates
 ----------------------------------------------------------------------
 3.0.1 vs. 3.0.0
 
@@ -29,6 +29,7 @@ and some time was lost (e.g., 13 seconds) while it tries to delete it
   Localisation updates:
 
   - Galician localisation updated to 3.0.0 (UI, readme, Documentation)
+  - Hungarian localisation updated to 3.0.0 (UI)
 
 ----------------------------------------------------------------------
  OmegaT 3.0.0

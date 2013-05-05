@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
-<chapter id="chapter.files.and.directories">
+<chapter id="chapter.files.and.folders">
   <title><application>OmegaT</application> ファイルとフォルダー</title>
 
   <para><application>OmegaT</application> は大きく分けて３種類のファイルを扱います。</para>
@@ -51,12 +51,12 @@
 
     <para>OmegaT 以外のファイルマネージャーで見ると、翻訳プロジェクトは他のフォルダーと特に区別無く表示されます。下の図は OmegaT での表示例ですが、<filename>マイ プロジェクト</filename>フォルダーに３つの OmegaT プロジェクトが含まれていることが分かります。</para>
 
-    <para><figure id="OmegaT.projects.and.subdirectories">
+    <para><figure id="OmegaT.projects.and.subfolders">
         <title>OmegaT プロジェクトと通常のフォルダー</title>
 
         <mediaobject>
           <imageobject>
-            <imagedata fileref="images/OmegaT_projects_and_subdirectories.png"/>
+            <imagedata fileref="images/OmegaT_projects_and_subfolders.png"/>
           </imageobject>
         </mediaobject>
       </figure></para>
@@ -329,7 +329,7 @@
             <programlisting>#!/bin/bash java
 java -jar OmegaT.jar $*</programlisting>
 
-            <para>Linux および Mac OS X のユーザーでしたら、役に立つことでしょう。コマンドラインで OmegaT_2.6 フォルダーに移動してから、このファイルに実行権限をつけてください（<literal>chmod +x OmegaT</literal>）。このファイルをコマンドラインから実行することで、OmegaT を起動できます。</para>
+            <para>Linux および Mac OS X のユーザーでしたら、役に立つことでしょう。OmegaT_2.6 フォルダーに移動してから、このファイルにコマンドラインで実行権限をつけてください（<literal>chmod +x OmegaT</literal>）。このファイルをコマンドラインから実行することで、OmegaT を起動できます。</para>
             </entry>
           </row>
           

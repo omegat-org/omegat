@@ -353,7 +353,7 @@
                   <keycap>C</keycap>
                 </keycombo></entry>
 
-              <entry>選択した領域を別のテキストファイルに出力します。選択領域がない場合、現在開いている原文がこのファイルに書き込まれます。<application>OmegaT</application> を閉じるとき、このファイルは空の状態ではなく、通常のクリップボードと同じように機能します。出力された内容は、個人設定フォルダー（「<xref linkend="chapter.files.and.directories"/>」を参照してください）の <filename>selection.txt</filename> というファイルにコピーされます。</entry>
+              <entry>選択した領域を別のテキストファイルに出力します。選択領域がない場合、現在開いている原文がこのファイルに書き込まれます。<application>OmegaT</application> を閉じるとき、このファイルは空の状態ではなく、通常のクリップボードと同じように機能します。出力された内容は、個人設定フォルダー（「<xref linkend="chapter.files.and.folders"/>」を参照してください）の <filename>selection.txt</filename> というファイルにコピーされます。</entry>
             </row>
 
             <row>

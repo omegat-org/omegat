@@ -28,13 +28,13 @@ OmegaT に関する最新の情報は以下のウェブサイトで公開され�
       http://www.omegat.org/
 
 ユーザーサポートは Yahoo ユーザーグループで提供されています（多言語対応）。過去ログは、ユーザー登録しなくても検索できます。
-     http://groups.yahoo.com/group/omegat/
+     http://tech.groups.yahoo.com/group/OmegaT/
 
 機能に関する要望は SourceForge 内の開発サイトへ（英語のみ）：
-     http://sourceforge.net/tracker/?group_id=68187&atid=520350
+     https://sourceforge.net/p/omegat/feature-requests/
 
 バグ報告も同じく SourceForge 内の開発サイトへ（英語のみ）：
-     http://sourceforge.net/tracker/?group_id=68187&atid=520347
+     https://sourceforge.net/p/omegat/bugs/
 
 ==============================================================================
   2.  OmegaT とは？
@@ -192,10 +192,10 @@ OmegaT の開発に協力したい場合、以下のサイトから開発者た�
       http://lists.sourceforge.net/lists/listinfo/omegat-development
 
 OmegaT のユーザーインターフェースや取扱説明書、他の関連文書の翻訳に協力したい場合、まず下記のファイルを読んでください：
-      http://www.omegat.org/en/translation-info.html
+      http://www.omegat.org/en/howtos/localizing_omegat.php
 
 そして翻訳者のメーリングリストに参加してください：
-      http://lists.sourceforge.net/mailman/listinfo/omegat-l10n
+      https://lists.sourceforge.net/lists/listinfo/omegat-l10n
 
 他の何らかの方法で協力したい場合、まずユーザーグループに参加してください：
       http://tech.groups.yahoo.com/group/omegat/
@@ -285,10 +285,10 @@ OmegaT は以下に示すライブラリを使用しています。
 開発者がバグを発見し、修正するのに助けとなる情報を添付してください。たとえば、該当ファイルやログの一部、スクリーンショットなどです。
 
 ユーザーグループの過去ログは、以下のサイトで閲覧できます：
-     http://groups.yahoo.com/group/omegat/
+     http://tech.groups.yahoo.com/group/OmegaT/
 
 バグ報告を閲覧したり、新規にバグ報告を行う場合は、以下を参照してください：
-     http://sourceforge.net/tracker/?group_id=68187&atid=520347
+     https://sourceforge.net/p/omegat/bugs/
 
 バグ報告に関する進捗を確認したい場合は、SourceForge にユーザー登録してください。
 

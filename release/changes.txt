@@ -2,7 +2,7 @@
  OmegaT 3.0.1
 ----------------------------------------------------------------------
    3 Enhancements
-   3 Bug fixes
+   4 Bug fixes
    2 Localisation updates
 ----------------------------------------------------------------------
 3.0.1 vs. 3.0.0
@@ -25,6 +25,9 @@
 
   - Team projects: during save, OmegaT could not update omegat.project
 and some time was lost (e.g., 13 seconds) while it tries to delete it
+
+  - Under Linux, when trying to open a project with a second instance
+of OmegaT, the second instance would freeze
 
   - In some cases, MyMemory wasn't returning any results
 

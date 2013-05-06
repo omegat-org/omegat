@@ -3,9 +3,9 @@
 ----------------------------------------------------------------------
    1 Enhancement
    0 Bug fix
-   4 Localisation updates
+   5 Localisation updates
 ----------------------------------------------------------------------
-2.6.3 update 1 vs. 2.6.3
+2.6.3 update 2 vs. 2.6.3 update 1
 
   Other enhancements:
 
@@ -13,6 +13,7 @@
 
   Localisation updates:
 
+  - Belarusian localisation updated to 2.6.3 (backported from 3.0) (UI, Readme)
   - Catalan localisation updated to 2.6.3 (UI, Readme, Instant Start)
   - Czech localisation updated to 2.6.3 (UI, Readme, Documentation)
   - Galician localisation backported from 3.0.0 (Documentation)

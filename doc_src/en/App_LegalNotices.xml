@@ -16,7 +16,7 @@
     <para><emphasis role="bold">Copyright</emphasis></para>
 
     <para>The documentation distributed with <application>OmegaT</application>
-    &omegat-version; includes the User Manual and the readme.txt document. The
+    includes the User Manual and the readme.txt document. The
     documentation is Copyright ©2013 Vito Smolej. The author of the Chapter
     <emphasis>Learn to use OmegaT in 5 minutes!</emphasis> is Samuel Murray,
     Copyright ©2005-2012.</para>
@@ -47,7 +47,7 @@
     <para><emphasis role="bold">Copyright</emphasis></para>
 
     <para><emphasis role="bold"><application>OmegaT</application>
-    &omegat-version;</emphasis> is Copyright © 2000-2013 Keith Godfrey, Zoltan Bartko, Volker Berlin, Didier Briel,
+    </emphasis> is Copyright © 2000-2013 Keith Godfrey, Zoltan Bartko, Volker Berlin, Didier Briel,
     Kim Bruning, Alex Buloichik, Thomas Cordonnier, Sandra Jean Chua, 
     Martin Fleurke, Wildrich Fourie, Phillip Hall, Jean-Christophe Helary, Thomas Huriaux, 
     Hans-Peter Jacobs, Ibai Lakunza Velasco, Guido Leenders, Aaron Madlon-Kay, 
@@ -59,14 +59,14 @@
     modifications</emphasis></para>
 
     <para><emphasis role="bold">OmegaT
-    &omegat-version;</emphasis> is free software; you can redistribute it and/or modify it
+    </emphasis> is free software; you can redistribute it and/or modify it
     under the terms of the GNU General Public License as published by the Free
     Software Foundation; either version 2 of the License, or (if you prefer)
     any later version.</para>
 
     <para><emphasis role="bold">Warranty</emphasis></para>
 
-    <para><emphasis role="bold"> <application>OmegaT</application> &omegat-version;
+    <para><emphasis role="bold"> <application>OmegaT</application>
     </emphasis>is distributed in the hope that it will be useful, but WITHOUT
     ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
     FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for

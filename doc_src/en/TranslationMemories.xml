@@ -656,7 +656,7 @@
     <para>Very early versions of <application>OmegaT</application> were
     capable of segmenting source files into paragraphs only and were
     inconsistent when numbering formatting tags in HTML and Open Document
-    files. <application>OmegaT</application> &omegat-version; can detect and upgrade such
+    files. <application>OmegaT</application> can detect and upgrade such
     tmx files on the fly to increase fuzzy matching quality and leverage your
     existing translation better, saving you the work of doing this
     manually.</para>
@@ -665,7 +665,7 @@
     upgraded form into the <filename>project-save.tmx</filename>; legacy tmx
     files will be upgraded on the fly each time the project is loaded. Note
     that in some cases changes in file filters in
-    <application>OmegaT</application> &omegat-version; may lead to totally different
+    <application>OmegaT</application> may lead to totally different
     segmentation; as a result, you will have to upgrade your translation
     manually in such rare cases.</para>
   </section>

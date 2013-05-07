@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
-"../../../docbook-xml-4.5/docbookx.dtd" [
-<!ENTITY omegat-version "2.6">
-]>
+"../../../docbook-xml-4.5/docbookx.dtd">
 
 <book lang="en">
   <bookinfo>
-    <title>OmegaT &omegat-version; - User's Guide</title>
+    <title>OmegaT 2.6 - User's Guide</title>
 
     <authorinitials>vs</authorinitials>
 

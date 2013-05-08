@@ -36,8 +36,9 @@ public class XMLContentBasedTag extends XMLIntactTag {
     private int shortcutIndex;
 
     /** Creates a new instance of XML Tag */
-    public XMLContentBasedTag(XMLDialect xmlDialect, String tag, String shortcut, Type type, org.xml.sax.Attributes attributes) {
-        super(xmlDialect, tag, shortcut, type, attributes);
+    public XMLContentBasedTag(XMLDialect xmlDialect, Handler handler, String tag, String shortcut, Type type,
+            org.xml.sax.Attributes attributes) {
+        super(xmlDialect, handler, tag, shortcut, type, attributes);
     }
 
     public void setShortcut(String shortcut) {

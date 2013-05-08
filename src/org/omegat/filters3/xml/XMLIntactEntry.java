@@ -33,8 +33,8 @@ import org.omegat.filters3.Entry;
  * @author Maxym Mykhalchuk
  */
 public class XMLIntactEntry extends Entry {
-    public XMLIntactEntry(XMLDialect xmlDialect) {
-        super(xmlDialect);
+    public XMLIntactEntry(XMLDialect xmlDialect, Handler handler) {
+        super(xmlDialect, handler);
     }
 
     /**

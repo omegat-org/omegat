@@ -25,6 +25,7 @@
 
 package org.omegat.filters3;
 
+import org.omegat.filters3.xml.Handler;
 import org.omegat.filters3.xml.XMLDialect;
 import org.omegat.util.StaticUtils;
 
@@ -47,9 +48,10 @@ public abstract class OutOfTurnTag extends Tag {
      * of text that should be translated separately, not breaking currently
      * collected text.
      */
-    public OutOfTurnTag(XMLDialect xmlDialect, String tag, String shortcut, Attributes attributes) {
+    public OutOfTurnTag(XMLDialect xmlDialect, Handler handler, String tag, String shortcut,
+            Attributes attributes) {
         super(tag, shortcut, Tag.Type.ALONE, attributes);
-        entry = new Entry(xmlDialect);
+        entry = new Entry(xmlDialect, handler);
     }
 
     /**

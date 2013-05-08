@@ -74,7 +74,7 @@ import org.xml.sax.helpers.DefaultHandler;
  * @author Didier Briel
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
-class Handler extends DefaultHandler implements LexicalHandler, DeclHandler {
+public class Handler extends DefaultHandler implements LexicalHandler, DeclHandler {
     private Translator translator;
     private XMLDialect dialect;
     private File inFile;
@@ -426,13 +426,13 @@ class Handler extends DefaultHandler implements LexicalHandler, DeclHandler {
         setSpacePreservingTag(XMLUtils.convertAttributes(attributes));
         if (!collectingIntactText()) {
             if (isContentBasedTag(tag, XMLUtils.convertAttributes(attributes))) {
-                intacttag = new XMLContentBasedTag(dialect, tag, getShortcut(tag), dialect.getContentBasedTags().get(tag),
-                        attributes);
+                intacttag = new XMLContentBasedTag(dialect, this, tag, getShortcut(tag), dialect
+                        .getContentBasedTags().get(tag), attributes);
                 xmltag = intacttag;
                 intacttagName = tag;
                 intacttagAttributes = XMLUtils.convertAttributes(attributes);
             } else if (isIntactTag(tag, XMLUtils.convertAttributes(attributes))) {
-                intacttag = new XMLIntactTag(dialect, tag, getShortcut(tag), attributes);
+                intacttag = new XMLIntactTag(dialect, this, tag, getShortcut(tag), attributes);
                 xmltag = intacttag;
                 intacttagName = tag;
                 intacttagAttributes = XMLUtils.convertAttributes(attributes);
@@ -491,7 +491,7 @@ class Handler extends DefaultHandler implements LexicalHandler, DeclHandler {
         translatorTagStart(tag, attributes);
         
         if (isOutOfTurnTag(tag)) {
-            XMLOutOfTurnTag ootTag = new XMLOutOfTurnTag(dialect, tag, getShortcut(tag), attributes);
+            XMLOutOfTurnTag ootTag = new XMLOutOfTurnTag(dialect, this, tag, getShortcut(tag), attributes);
             currEntry().add(ootTag);
             outofturnEntries.push(ootTag.getEntry());
         } else {
@@ -624,6 +624,17 @@ class Handler extends DefaultHandler implements LexicalHandler, DeclHandler {
             }
             return dialect.validateParagraphTag(tag, atts);
         }
+    }
+
+    /**
+     * Returns whether the tag starts a new paragraph.
+     */
+    public boolean isParagraphTag(Tag tag) {
+        if ((dialect.getParagraphTags() != null && dialect.getParagraphTags().contains(tag.getTag()))
+                || isPreformattingTag(tag.getTag(), tag.getAttributes()))
+            return true;
+        else
+            return dialect.validateParagraphTag(tag.getTag(), tag.getAttributes());
     }
 
     /**
@@ -891,7 +902,7 @@ class Handler extends DefaultHandler implements LexicalHandler, DeclHandler {
             throw new SAXException(e);
         }
 
-        entry = new Entry(dialect);
+        entry = new Entry(dialect, this);
     }
 
     /** Receive notification of the end of the document. */

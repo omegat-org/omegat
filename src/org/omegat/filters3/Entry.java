@@ -35,10 +35,12 @@ import java.util.List;
 import org.omegat.core.Core;
 import org.omegat.filters2.Shortcuts;
 import org.omegat.filters2.TranslationException;
+import org.omegat.filters3.xml.Handler;
 import org.omegat.filters3.xml.XMLContentBasedTag;
 import org.omegat.filters3.xml.XMLDialect;
-import org.omegat.filters3.xml.XMLText;
+import org.omegat.util.InlineTagHandler;
 import org.omegat.util.PatternConsts;
+import org.omegat.util.StringUtil;
 
 /**
  * Translatable entry. Holds a list of source tags and text, translated text and
@@ -50,9 +52,11 @@ import org.omegat.util.PatternConsts;
  */
 public class Entry {
     final XMLDialect xmlDialect;
+    final Handler handler;
 
-    public Entry(XMLDialect xmlDialect) {
+    public Entry(XMLDialect xmlDialect, Handler handler) {
         this.xmlDialect = xmlDialect;
+        this.handler = handler;
     }
 
     /**
@@ -179,10 +183,6 @@ public class Entry {
                 textStart = i;
                 break;
             }
-            if (elem instanceof XMLContentBasedTag) {
-                textStart = i;
-                break;
-            }
         }
         for (int i = 0; i < size(); i++) {
             Element elem = get(i);
@@ -206,9 +206,49 @@ public class Entry {
                 textEnd = i;
                 break;
             }
+        }
+
+        // if content-based tag is inside text, then expand text into paired cntent-based tag
+        for (int i = textStart; i <= textEnd; i++) {
+            Element elem = get(i);
             if (elem instanceof XMLContentBasedTag) {
-                textEnd = i;
-                break;
+                XMLContentBasedTag tag = (XMLContentBasedTag) elem;
+                if (tag.getTag().equals("bpt") || tag.getTag().equals("ept")) {
+                    // find id of paired tag
+                    String id = StringUtil.nvl(tag.getAttribute("rid"), tag.getAttribute("id"),
+                            tag.getAttribute("i"));
+                    if (id == null) {
+                        continue;
+                    }
+                    // find paired tag before
+                    for (int j = textStart - 1; j >= 0; j--) {
+                        if (get(j) instanceof XMLContentBasedTag) {
+                            XMLContentBasedTag tag2 = (XMLContentBasedTag) get(j);
+                            if (tag2.getTag().equals("bpt") || tag2.getTag().equals("ept")) {
+                                // find id of paired tag
+                                String id2 = StringUtil.nvl(tag2.getAttribute("rid"),
+                                        tag2.getAttribute("id"), tag2.getAttribute("i"));
+                                if (id.equals(id2)) {
+                                    textStart = j;
+                                }
+                            }
+                        }
+                    }
+                    // find paired tag after
+                    for (int j = textEnd + 1; j < size(); j++) {
+                        if (get(j) instanceof XMLContentBasedTag) {
+                            XMLContentBasedTag tag2 = (XMLContentBasedTag) get(j);
+                            if (tag2.getTag().equals("bpt") || tag2.getTag().equals("ept")) {
+                                // find id of paired tag
+                                String id2 = StringUtil.nvl(tag2.getAttribute("rid"),
+                                        tag2.getAttribute("id"), tag2.getAttribute("i"));
+                                if (id.equals(id2)) {
+                                    textEnd = j;
+                                }
+                            }
+                        }
+                    }
+                }
             }
         }
 
@@ -292,103 +332,52 @@ public class Entry {
         if (!found)
             lastGood = textEnd;
 
-        firstGood = Math.min(1, firstGood);
-        lastGood = Math.max(size() - 2, lastGood);
-
-        // remove tags at begin and end, if required
         boolean removeTags = Core.getFilterMaster().getConfig().isRemoveTags();
-        boolean removeSpacesAround = Core.getFilterMaster().getConfig().isRemoveSpacesNonseg();
-        if (removeTags && removeSpacesAround) {
-            // find first and last real text
-            for (int i = firstGood; i <= lastGood; i++) {
+        // tags was already removed - restore they if need
+        if (!removeTags) {
+            for (int i = firstGood - 1; i >= 0; i--) {
                 Element elem = get(i);
-                if ((elem instanceof Text) && ((Text) elem).isMeaningful()) {
+                if (elem instanceof Tag) {
+                    if (handler.isParagraphTag((Tag) elem)) {
+                        break;
+                    }
                     firstGood = i;
-                    break;
                 }
             }
-            for (int i = lastGood; i >= firstGood; i--) {
+            for (int i = lastGood + 1; i < size(); i++) {
                 Element elem = get(i);
-                if ((elem instanceof Text) && ((Text) elem).isMeaningful()) {
+                if (elem instanceof Tag) {
+                    if (handler.isParagraphTag((Tag) elem)) {
+                        break;
+                    }
                     lastGood = i;
-                    break;
                 }
             }
-        } else if (removeTags) {
-            enumerateTags(firstGood, lastGood);
-            xmlDialect.constructShortcuts(elements.subList(firstGood, lastGood + 1), new Shortcuts());
-            boolean modified = true;
-            while (modified) {
-                // iterate by tags at begin and end
-                modified = false;
-                if (firstGood <= lastGood) {
-                    Element eBeg = get(firstGood);
-                    Element eEnd = get(lastGood);
-                    if (removeSpacesAround) {
-                        // remove spaces around text
-                        if (eBeg instanceof Text) {
-                            Text tElem = (Text) eBeg;
-                            if (!tElem.isMeaningful()) {
-                                firstGood++;
-                                modified = true;
-                                continue;
-                            }
-                        }
-                        if (eEnd instanceof Text) {
-                            Text tElem = (Text) eEnd;
-                            if (!tElem.isMeaningful()) {
-                                lastGood--;
-                                modified = true;
-                                continue;
-                            }
-                        }
+        }
+
+        boolean removeSpacesAround = Core.getFilterMaster().getConfig().isRemoveSpacesNonseg();
+        // spaces was already removed - restore they if need
+        if (!removeSpacesAround) {
+            for (int i = firstGood - 1; i >= 0; i--) {
+                Element elem = get(i);
+                if (elem instanceof Tag) {
+                    if (handler.isParagraphTag((Tag) elem)) {
+                        break;
                     }
-                    // check for remove paired tag
-                    if (firstGood != lastGood && eBeg instanceof XMLContentBasedTag
-                            && eEnd instanceof XMLContentBasedTag) {
-                        XMLContentBasedTag tBeg = (XMLContentBasedTag) eBeg;
-                        XMLContentBasedTag tEnd = (XMLContentBasedTag) eEnd;
-                        if (tBeg.getType() == Tag.Type.BEGIN && tEnd.getType() == Tag.Type.END
-                                && tBeg.getShortcutLetter() == tEnd.getShortcutLetter()
-                                && tBeg.getShortcutIndex() == tEnd.getShortcutIndex()) {
-                            // paired
-                            firstGood++;
-                            lastGood--;
-                            modified = true;
-                            continue;
-                        }
-                    } else if (firstGood != lastGood && eBeg instanceof Tag && eEnd instanceof Tag) {
-                        Tag tBeg = (Tag) eBeg;
-                        Tag tEnd = (Tag) eEnd;
-                        if (tBeg.getType() == Tag.Type.BEGIN && tEnd.getType() == Tag.Type.END
-                                && tBeg.getShortcut().equals(tEnd.getShortcut()) && tBeg.getIndex() == tEnd.getIndex()) {
-                            // paired
-                            firstGood++;
-                            lastGood--;
-                            modified = true;
-                            continue;
-                        }
+                }
+                if ((elem instanceof Text) && !((Text) elem).isMeaningful()) {
+                    firstGood = i;
+                }
+            }
+            for (int i = lastGood + 1; i < size(); i++) {
+                Element elem = get(i);
+                if (elem instanceof Tag) {
+                    if (handler.isParagraphTag((Tag) elem)) {
+                        break;
                     }
-                    // check for remove alone tag at begin
-                    if (eBeg instanceof Tag) {
-                        Tag tBeg = (Tag) eBeg;
-                        if (tBeg.getType() == Tag.Type.ALONE) {
-                            // alone
-                            firstGood++;
-                            modified = true;
-                            continue;
-                        }
-                    }
-                    // check for remove alone tag at end
-                    if (eEnd instanceof Tag) {
-                        Tag tEnd = (Tag) eEnd;
-                        if (tEnd.getType() == Tag.Type.ALONE) {
-                            // alone
-                            lastGood--;
-                            modified = true;
-                            continue;
-                        }
-                    }
+                }
+                if ((elem instanceof Text) && !((Text) elem).isMeaningful()) {
+                    lastGood = i;
                 }
             }
         }
@@ -543,7 +532,7 @@ public class Entry {
      * {@link #setTranslation(String)} for details.
      */
     private void checkAndRecoverTags(String translation) throws TranslationException {
-        translatedEntry = new Entry(xmlDialect);
+        translatedEntry = new Entry(xmlDialect, handler);
 
         // /////////////////////////////////////////////////////////////////////
         // recovering tags

@@ -2,7 +2,7 @@
  OmegaT 3.0.1
 ----------------------------------------------------------------------
    4 Enhancements
-   4 Bug fixes
+   6 Bug fixes
    3 Localisation updates
 ----------------------------------------------------------------------
 3.0.1 vs. 3.0.0
@@ -27,6 +27,12 @@
 
   - Tag validation window does not keep enough space for Japanese errors
   https://sourceforge.net/p/omegat/bugs/583/
+
+  - Remove leading and trailing tags option not working 
+  https://sourceforge.net/p/omegat/bugs/582/
+
+  - New tag handling changes XML formatting for empty tags 
+  - https://sourceforge.net/p/omegat/bugs/581/
 
   - Team projects: during save, OmegaT could not update omegat.project
 and some time was lost (e.g., 13 seconds) while it tries to delete it

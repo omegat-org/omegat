@@ -45,6 +45,7 @@ import org.htmlparser.Node;
 import org.htmlparser.Remark;
 import org.htmlparser.Tag;
 import org.htmlparser.Text;
+import org.htmlparser.nodes.TextNode;
 import org.htmlparser.visitors.NodeVisitor;
 import org.omegat.core.Core;
 import org.omegat.util.OStrings;
@@ -256,7 +257,8 @@ public class FilterVisitor extends NodeVisitor {
     @Override
     public void visitStringNode(Text string) {
         recurse = true;
-        String trimmedtext = string.getText().trim();
+        // nbsp is special case - process it like usual spaces
+        String trimmedtext = string.getText().replace("&nbsp;", " ").trim();
         if (trimmedtext.length() > 0) {
             // Hack around HTMLParser not being able to handle XHTML
             // RFE pending:
@@ -480,10 +482,48 @@ public class FilterVisitor extends NodeVisitor {
             lastgood--;
         }
 
-        boolean removeTags = Core.getFilterMaster().getConfig().isRemoveTags();
-        if (!removeTags) {
-            firstgood = 0;
-            lastgood = all.size() - 1;
+        boolean changed = true;
+        while (changed) {
+            changed = false;
+            boolean removeTags = Core.getFilterMaster().getConfig().isRemoveTags();
+            if (!removeTags) {
+                for (int i = 0; i < firstgood; i++) {
+                    Node node = all.get(i);
+                    if (node instanceof Tag) {
+                        firstgood = i;
+                        changed = true;
+                        break;
+                    }
+                }
+                for (int i = all.size() - 1; i > lastgood; i--) {
+                    Node node = all.get(i);
+                    if (node instanceof Tag) {
+                        lastgood = i;
+                        changed = true;
+                        break;
+                    }
+                }
+            }
+
+            boolean removeSpacesAround = Core.getFilterMaster().getConfig().isRemoveSpacesNonseg();
+            if (!removeSpacesAround) {
+                for (int i = 0; i < firstgood; i++) {
+                    Node node = all.get(i);
+                    if (node instanceof TextNode) {
+                        firstgood = i;
+                        changed = true;
+                        break;
+                    }
+                }
+                for (int i = all.size() - 1; i > lastgood; i--) {
+                    Node node = all.get(i);
+                    if (node instanceof TextNode) {
+                        lastgood = i;
+                        changed = true;
+                        break;
+                    }
+                }
+            }
         }
 
         // writing out all tags before the "first good" one

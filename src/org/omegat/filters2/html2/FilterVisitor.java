@@ -258,7 +258,7 @@ public class FilterVisitor extends NodeVisitor {
     public void visitStringNode(Text string) {
         recurse = true;
         // nbsp is special case - process it like usual spaces
-        String trimmedtext = string.getText().replace("&nbsp;", " ").trim();
+        String trimmedtext = entitiesToChars(string.getText()).replace((char) 160, ' ').trim();
         if (trimmedtext.length() > 0) {
             // Hack around HTMLParser not being able to handle XHTML
             // RFE pending:

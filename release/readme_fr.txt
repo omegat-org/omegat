@@ -1,4 +1,4 @@
-Ce document a été traduit par Didier Briel et Jean-Christophe Helary, copyright© 2007-2013.
+Ce document a été traduit par Didier Briel et Jean-Christophe Helary, copyright© 2007-2012.
 
 ==============================================================================
   OmegaT 3.0, fichier « Lisez-moi »
@@ -18,13 +18,13 @@ Les informations les plus récentes au sujet d'OmegaT sont à :
       http://www.omegat.org/
 
 Aide utilisateur sur le groupe Yahoo. Vous pouvez y consulter les archives sans vous inscrire au groupe :
-     http://groups.yahoo.com/group/OmegaT/
+     http://tech.groups.yahoo.com/group/omegat/
 
 Demandes d'améliorations (en anglais), sur le site de SourceForge :
-     http://sourceforge.net/tracker/?group_id=68187&atid=520350
+     https://sourceforge.net/p/omegat/feature-requests/
 
 Rapports de bogues (en anglais), sur le site de SourceForge :
-     http://sourceforge.net/tracker/?group_id=68187&atid=520347
+     https://sourceforge.net/p/omegat/bugs/
 
 ==============================================================================
   2.  Qu'est ce qu'OmegaT ?
@@ -188,10 +188,10 @@ Pour participer au développement d'OmegaT, prenez contact avec les développeur
 
 Pour traduire l'interface utilisateur, le manuel ou d'autres documents, lisez :
       
-      http://www.omegat.org/en/translation-info.html
+      http://www.omegat.org/en/howtos/localizing_omegat.php
 
 Et inscrivez vous à la liste des traducteurs (multilingue) :
-      http://lists.sourceforge.net/mailman/listinfo/omegat-l10n
+      https://lists.sourceforge.net/lists/listinfo/omegat-l10n
 
 Pour d'autres types de contributions, inscrivez-vous d'abord au groupe des utilisateurs :
       http://tech.groups.yahoo.com/group/omegat/
@@ -264,7 +264,6 @@ OmegaT utilise les bibliothèques suivantes :
   JSch (licence JSch)
   Base64 (domaine public)
   Diff (GPL)
-  JSAP (LGPL)
   orion-ssh2-214 (licence Orion SSH for Java)
   lucene-*.jar (licence Apache 2.0)
   Les lemmatiseurs anglais (org.omegat.tokenizer.SnowballEnglishTokenizer et
@@ -275,7 +274,11 @@ OmegaT utilise les bibliothèques suivantes :
   jWordSplitter (licence Apache 2.0)
   LanguageTool.jar (licence LGPL)
   morfologik-*.jar (licence Morfologik)
-  segment-1.3.0.jar (licence Segment)
+  segment-1.4.1.jar (licence Segment)
+  pdfbox-app-1.8.1.jar (licence Apache 2.0)
+  Fontbox-0.1.0.jar et JempBox-0.2.0.jar (licence Fontbox)
+  icu4j-51_1.jar (licence ICU4J)
+
 
 ==============================================================================
  5.  Est-ce qu'OmegaT vous pose problème ? Avez-vous besoin d'aide ?
@@ -292,10 +295,10 @@ Un bon rapport de bogue comporte exactement 3 parties.
 Il est possible d'ajouter des copies de fichiers, des portions du journal, des copies d'écran à votre rapport, tout ce qui vous semble qui aidera les développeurs à résoudre votre problème.
 
 Les archives du groupe utilisateur sont à :
-     http://groups.yahoo.com/group/OmegaT/
+     http://tech.groups.yahoo.com/group/omegat/
 
 Pour consulter la page des rapports de bogue et pour remplir un nouveau rapport rendez-vous à :
-     http://sourceforge.net/tracker/?group_id=68187&atid=520347
+     https://sourceforge.net/p/omegat/bugs/
 
 Il sera nécessaire de procéder à un enregistrement en tant qu'utilisateur de SourceForge si vous souhaitez recevoir des informations sur les suites données à votre rapport.
 

@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 3.0.1
 ----------------------------------------------------------------------
-   4 Enhancements
+   5 Enhancements
    6 Bug fixes
    6 Localisation updates
 ----------------------------------------------------------------------
@@ -22,6 +22,9 @@
 
   - LanguageTool was updated to 2.1, and now has specific rules for
 29 languages: http://www.languagetool.org/languages/
+
+  - Versionning support was added for plugins. How to use it is
+documented in docs_devel/OmegaT developer's guide.odt
 
   Bug fixes:
 

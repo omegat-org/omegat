@@ -3,7 +3,7 @@
 ----------------------------------------------------------------------
    4 Enhancements
    6 Bug fixes
-   3 Localisation updates
+   6 Localisation updates
 ----------------------------------------------------------------------
 3.0.1 vs. 3.0.0
 
@@ -45,8 +45,11 @@ of OmegaT, the second instance would freeze
   Localisation updates:
 
   - Belarusian localization updated to 3.0.0 (UI, Readme)
-  - Galician localisation updated to 3.0.0 (UI, readme, Documentation)
+  - Galician localisation updated to 3.0.0 (UI, Readme, Documentation)
   - Hungarian localisation updated to 3.0.0 (UI)
+  - Japanese localisation updated to 3.0.1 (UI, Redme, Documentation)
+  - Simplified Chinese localisation updated to 3.0.0 (UI)
+  - Welsh localisation updated to 3.0.0 (UI, Readme, Instant Start)
 
 ----------------------------------------------------------------------
  OmegaT 3.0.0

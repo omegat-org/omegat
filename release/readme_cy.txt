@@ -1,7 +1,7 @@
-Cyfieithiad gan Rhoslyn Prys, hawlfraint¬© 2008
+Ôªø@@TRANSLATION_NOTICE@@
 
-Cyfieithiad Rhoslyn Prys, hawlfraint 2009 
-  Ffeil Darllen fi OmegaT 2.0
+==============================================================================
+  Ffeil Darllennwch Fi OmegaT 3.0
 
   1.  Gwybodaeth am OmegaT
   2.  Beth yw OmegaT?
@@ -10,14 +10,15 @@ Cyfieithiad Rhoslyn Prys, hawlfraint 2009
   5.  A yw OmegaT yn eich poeni chi? Ydych chi angen cymorth?
   6.  Manylion ryddhau
 
-Cyfieithiad Rhoslyn Prys, hawlfraint 2009 
+==============================================================================
   1.  Gwybodaeth am OmegaT
 
 
-Mae'r wybodaeth ddiweddaraf am OmegaT i'w gael yn:
+Mae'r wybodaeth ddiweddaraf am OmegaT i'w gael yn
       http://www.omegat.org/
 
-Mae cefnogaeth i'r defnyddiwr ar gael yn y gr≈µp defnyddiwr Yahoo (amlieithog), lle mae archif chwiliadwy ar gael heb danysgrifiad.
+Mae cefnogaeth i'r defnyddiwr ar gael yn y gr?p defnyddiwr Yahoo (amlieithog),
+lle mae archif chwiliadwy ar gael heb danysgrifiad:
      http://groups.yahoo.com/group/OmegaT/
 
 Cais am Welliannau (yn Saesneg), ar wefan SourceForge:
@@ -26,121 +27,216 @@ Cais am Welliannau (yn Saesneg), ar wefan SourceForge:
 Negeseuon gwall (yn Saesneg), gwefan SourceForge:
      http://sourceforge.net/tracker/?group_id=68187&atid=520347
 
-Cyfieithiad Rhoslyn Prys, hawlfraint 2009 
+==============================================================================
   2.  Beth yw OmegaT?
 
-Offeryn Cyfieithu gyda Chymorth Cyfrifiadur yw OmegaT (CAT). Mae am ddim, hynny yw does dim rhaid talu i'w ddefnyddio, hyd yn oed ar gyfer defnydd proffesiynol, ac rydych yn rhydd i'w newid a neu ei ailddosbarthu cyn belled √¢'ch bod yn parchu trwydded y defnyddiwr.
+Offeryn Cyfieithu gyda Chymorth Cyfrifiadur yw OmegaT (CAT). Mae am ddim, hynny yw
+does dim rhaid talu i'w ddefnyddio, hyd yn oed ar gyfer defnydd proffesiynol,
+ac rydych yn rhydd i'w newid a neu ei ailddosbarthu cyn belled ‚'ch bod yn
+parchu trwydded y defnyddiwr.
 
-Prif nodweddion OmegaT yw
+Prif nodweddion OmegaT yw:
    - gallu rhedeg ar unrhyw system weithredu sy'n cynnal Java
-  - gallu defnyddio unrhyw ffeil TMX dilys fel cyfeirnod cyfieithu
-  - segmentu brawddegau hyblyg (gan ddefnyddio dull SRX)
-  - chwilio o fewn y project a'r cof cyfieithu penodol
-  - chwilio am ffeiliau fformatau sy'n cael eu cynnal, o fewn unrhyw ffolder 
-  - cyfatebiad bras cyfieithiadau
-  - trin projectau sylweddol gan gynnwys hierarchaethau cyfeiriaduron cymhleth
-  - cynnal geirfaoedd (ar gyfer gwirio termau) 
-  - cynnal gwiryddion sillafu Cod Agored gweithredol
-  - cynnal geiriaduron StarDict
-  - cynnal gwasanaethau cyfieithu peirianyddol Google Translate
-  - dogfennaeth a thiwtorial clir a chynhwysfawr
-  - wedi ei leoleiddio i nifer o ieithoedd.
+   - gallu defnyddio unrhyw ffeil TMX dilys fel cyfeirnod cyfieithu
+   - segmentu brawddegau hyblyg (gan ddefnyddio dull SRX)
+   - chwilio o fewn y project a'r cof cyfieithu penodol
+   - chwilio am ffeiliau fformatau sy'n cael eu cynnal, o fewn unrhyw ffolder 
+   - cyfatebiad bras cyfieithiadau
+   - trin projectau sylweddol gan gynnwys hierarchaethau cyfeiriaduron cymhleth
+   - cynnal geirfaoedd (ar gyfer gwirio termau) 
+   - cynnal gwirwyr sillafu Cod Agored
+   - cynnal geiriaduron StatDict
+   - cynnal gwasanaethau cyfieithu peirianyddol Google Translate
+   - dogfennaeth a thiwtorial clir a chynhwysfawr
+   - wedi ei leoleiddio i nifer o ieithoedd.
 
 Mae OmegaT yn cynnal y fformatau ffeil canlynol:
-  - testun plaen
-  - HTML ac XHTML
-  - didolwr Cymorth HTML
-  - OpenDocument/OpenOffice.org
-  - Java resource bundles (.properties)
-  - ffeiliau INI (ffeiliau gyda pharau allwedd=gwerth o unrhyw amgodiad)
-  - ffeiliau PO
-  - fformat ffeil dogfennau DocBook
-  - ffeiliau Microsoft OpenXML
-  - ffeiliau Okapi uniaith  XLIFF
-  - QuarkXPress CopyFlowGold
-  Ffeiliau Isdeitlo (STR)
-  - ResX
-  - adnoddau Android
-  - LaTeX
+
+- fformatau ffeiliau testun plaen
+
+  - testun AsCII (.txt, etc.)
+  - testun wedi ei amgodio (*.UTF8)
+  - bwndeli adnoddau Java (*.properties)
+  - ffeiliau PO (*.po)
+  - ffeiliau INI (key=value) (*.ini)
+  - ffeiliau DTD (*.DTD)
+  - ffeiliau DocuWiki (*.txt)
+  - ffeiliau teitl SubRip (*.srt)
+  - ffeiliau Magento CE Locale CSV  (*.csv)
+
+- fformatau ffeiliau testu wedi eu tagio
+
+  - OpenOffice.org / OpenDocument (*.odt, *.ott, *.ods, *.ots, *.odp, *.otp)
+  - Microsoft Open XML (*.docx, *.xlsx, *.pptx)
+  - (X)HTML (*.html, *.xhtml,*.xht)
+  - HTML Help Compiler (*.hhc, *.hhk)
+  - DocBook (*.xml)
+  - monolingual XLIFF (*.xlf, *.xliff, *.sdlxliff)
+  - QuarkXPress CopyFlowGold (*.tag, *.xtg)
+  - ffeiliau ResX (*.resx)
+  - Android resource (*.xml)
+  - LaTex (*.tex, *.latex)
+  - ffeiliau Cymorth (*.xml) a Llawlyfr (*.hmxp)
+  - Typo3 LocManager (*.xml)
+  - WiX Localization (*.wxl)
+  - Iceni Infix (*.xml)
+  - Flash XML export (*.xml)
+  - Wordfast TXML (*.txml)
+  - Camtasia for Windows (*.camproj)
+  - Visio (*.vxd)
 
 Mae modd addasu OmegaT i gynnal ffeiliau eraill hefyd.
 
-Gall OmegaT ddidoli'r hierarchaeth fwyaf cymhleth,  yn awtomatig, i gael mynediad at y ffeiliau sy'n cael eu cynnal a chynhyrchu cyfeiriadur targed gyda'r union un strwythur, gan gynnwys cop√Øau o ffeiliau sydd ddim yn cael eu cynnal.
+Gall OmegaT ddidoli'r hierarchaeth fwyaf cymhleth,  yn awtomatig, i gael
+mynediad at y ffeiliau sy'n cael eu cynnal a chynhyrchu cyfeiriadur targed gyda'r
+union un strwythur, gan gynnwys copÔau o ffeiliau sydd ddim yn cael eu cynnal.
 
-Mae tiwtorial ar gael wrth gychwyn OmegaT pan fydd yn dangos y Tiwtorial Cychwyn Cyflym.
+Mae tiwtorial ar gael wrth gychwyn OmegaT pan fydd yn dangos y Tiwtorial
+Cychwyn Cyflym.
 
-Mae'r llawlyfr defnyddiwr o fewn y pecynnau rydych newydd eu llwytho i lawr ac mae modd cael mynediad atynt drwy'r ddewislen [Cymorth] ar √¥l cychwyn OmegaT.
+Mae'r llawlyfr defnyddiwr o fewn y pecynnau rydych newydd eu llwytho i lawr ac mae
+modd cael mynediad atynt drwy'r ddewislen [Cymorth] ar Ùl cychwyn OmegaT.
 
-Cyfieithiad Rhoslyn Prys, hawlfraint 2009 
+==============================================================================
  3. Gosod OmegaT
 
-Mae OmegaT angen fersiwn 1.4 o'r Java Runtime Environment neu uwch er mwyn rhedeg. Mae OmegaT nawr ar gael gyda 'r Java Runtime Environment yn rhan o'r pecyn er mwyn arbed trafferthion i ddefnyddwyr ei ddewis, a'i osod. 
+3.1 Cyffredinol
+Mae OmegaT angen fersiwn 1.5 neu uwch o'r Java Runtime Environmenter
+ar eich system. Mae OmegaT nawr ar gael gyda 'r
+Java Runtime Environment yn rhan o'r pecyn er mwyn arbed trafferthion i ddefnyddwyr
+ei ddewis, a'i osod. 
 
-Os yw Java eisoes gennych, y ffordd hawsaf i osod y fersiwn cyfredol o OmegaT yw defnyddio Java Web Start.  
-Ar gyfer y pwrpas yma llwythwch i lawr y ffeil ganlynol a'i gweithredu:
+Os yw Java gennych eisoes, un ffordd i osod y fersiwn yma o OmegaT
+yw drwy ddefnyddio Java Web Start. 
+Er mwyn gwneud hynn llwythwch i lawr y ffeil ganlynol a'i gweithredu:
 
    http://omegat.sourceforge.net/webstart/OmegaT.jnlp
 
-Bydd yn gosod yr amgylchedd cywir ar gyfer eich cyfrifiadur a'r rhaglen wrth ei redeg gyntaf. Nid oes angen i alwadau wedyn fod ar-lein.
+Bydd yn gosod yr amgylchedd cywir ar gyfer eich cyfrifiadur a'r rhaglen. Nid oes rhaid bod ar-lein wedyn.
 
-Yn ystod y gosod, yn ddibynnol ar eich system weithredu, efallai byddwch yn derbyn nifer o rybuddion diogelwch. Mae'r dystysgrif wedi ei llofnodi gan "Didier Briel". 
-Mae'r caniatad rydych yn ei roi i'r fersiwn yma ( y mae modd son amdano fel ",myneediad dilyffethair i'r cyfrifiadur") yn union yr un peth √°'r caniatad sy'n cael ei roi i'r fersiwn lleol, fel sydd wedi ei osod drwy drefn, sy'n cael ei ddisgrifio'n ddiweddarach: mae nhw'n caniatau mynediad i ddisg caled y cyfrifiadur. Bydd clicio pellach ar OmegaT.jnlp  yn gwirio am ddiweddariadau i OmegaT, os ydych ar-lein, gosodwch nhw os oes yna ac yna cychwyn OmegaT 
+Yn ystod y gosod, yn ddibynnol ar eich system weithredu, efallai y byddwch yn
+derbyn nifer o rybuddion diogelwch. Mae'r dystysgrif wedi ei lofnodi gan "Didier Briel" ei hun. 
+Mae'r caniat‚d rydych yn rhoi i'r fersiwn hon (fydd efallai yn cael ei nodi fel
+"mynediad dilyffethair i'r cyfrifiadur") yn union yr un peth ‚'r caniat‚d rydych yn eu
+rhai yn y fersiwn lleol, sy'n cael ei osod gan drefn, fydd yn cael ei ddisgrifioín
+hwyrach; maent yn caniat·u mynediad i ddisg caled cyfrifiadur. Bydd clicio canlynol ar OmegaT.jnlp 
+yn gwirio am ddiweddariadau, os ydych ar-lein eu gosod ac yna cychwyn
+OmegaTwill check for any upgrades, if you are online, install them if there are any, 
+and then start OmegaT. 
 
-Mae'r ffyrdd amrywiol o lwytho i lawr a gosod OmegaT yn cael eu dangos isod. 
+Mae'r ffyrdd eraill o lwytho i lawr a gosod OmegaT yn cael eu dangos isod. 
 
-Defnyddwyr Windows a Linux: os ydych yn si≈µr fod fersiwn addas o'r JRE wedi ei osod ar eich system, gallwch osod y fersiwn o OmegaT heb JRE. Mae hyn yn cael ei ddynodi drwy enw'r fersiwn, "Without _JRE") 
-Os oes amheuaeth, defnyddiwch y fersiwn "safonol", h.y. gyda'r JRE. Mae hyn yn ddigon diogel oherwydd hyd yn oed os yw'r JRE ar y system ni fydd y fersiwn yma'n ymyrryd ag ef.
+Defnyddwyr Windows a Linux: os ydych yn si?r fod fersiwn addas o'r JRE wedi
+ei osod ar eich system, gallwch osod y fersiwn o OmegaT heb JRE. Mae hyn yn
+cael ei ddynodi drwy enw'r fersiwn, "Without _JRE") 
+Os oes amheuaeth, defnyddiwch y fersiwn "safonol", h.y. gyda'r JRE. Mae hyn yn ddigon diogel oherwydd hyd yn oed os yw'r JRE ar y system
+ni fydd y fersiwn yma'n ymyrryd ag ef.
 
-Defnyddwyr Linux:  nid yw OmegaT yn gweithio gyda'r fersiwn rhydd/cod agored o Java sydd wedi ei gynnwys gydag amryw o ddosbarthiadau o Linux (e.e., Ubuntu) am eu bod un ai yn hen neu anghyflawn. Llwytho i lawr a gosod Java Runtime Environment (JRE) Sun drwy'r cyswllt uchod neu lwytho i lawr a gosod y pecyn OmegaT sy'n cynnwys y JRE (bwndel .tar.gz ar gyfer Linux) 
+Defnyddwyr Linux:
+Mae OmegaT yn gweithio gyda'r fersiwn rhydd/cod agored o Java sydd wedi ei
+gynnwys gydag amryw o ddosbarthiadau o Linux (e.e., Ubuntu) ond efallai y
+profwch wallau, anhawsterau arddangos neu nodweddion coll. Rydym felly yn argymell
+eich bod yn llwytho i lawr a gosod Java Runtime Environment (JRE) Oracle
+neu'r pecyn OmegaT sy'n cynnwys y bwndel JRE (.tar.gz ar gyfer Linux)  Os fyddwch yn gosod fersien o Java ar lefel system rhaid un ai
+sicrhau ei fod o fewn eich llwybr cychwyn neu ei alw yn benodol
+wrth gychwyn OmegaT. Os nad ydych yn gyfarwydd ‚ Linux rydym yn argymell eich bod yn gosod
+y fersiwn o OmegaT sy;n cynnwys y JRE. Mae hyn yn ddiogel,
+gan na fydd y fersiwn "lleol" o JRE yn ymyrryd gydag unrhyw JRE arall
+gall fod ar eich system.
 
-Defnyddwyr Mac: mae'r JRE eisoes wedi ei osod ar y MAC OS
+Defnyddwyr Mac
+Mae'r JRE eisoes wedi ei osod ar y MAC OS X cyn Mac OS X 10.7 Bydd defnyddwyr Lion yn cael eu hannog gan y system pa fyddant
+yn cychwyn rhaglen sydd angen Java a bydd y system yn ei
+lwytho i lawr a'i osod.
 
-Defnyddwyr Linux ar systemau PPC: bydd rhaid i ddefnyddwyr lwytho i lawr JRE IBM gan nad yw Sun yn darparu JRE ar gyfer systemau PPC. Yn yr achos yma, llwytho i lawr o:
+Defnyddwyr Linux ar systemau PPC:
+Bydd rhaid i ddefnyddwyr lwytho i lawr JRE IBM gan nad
+yw Sun yn darparu JRE ar gyfer systemau PPC. Yn yr achos yma, llwytho i lawr o:
 
-    http://www-128.ibm.com/developerworks/java/jdk/linux/download.html 
+    http://www.ibm.com/developerworks/java/jdk/linux/download.html 
 
 
-3.2 Gosod * Defnyddwyr Windows: Cychwynnwch y rhaglen osod Os hoffech chi gall y rhaglen osod greu llwybrau byr i gychwyn OmegaT
-Eraill: I osod OmegaT, cr√´wch ffolder addas ar gyfer OmegaT ( e.e., /usr/local/lib ar Linux). Cop√Øo archif  zip neu tar.gz OmegaT i'r ffolder yma a'i ddadbacio.
+3.2 Gosod
+* Defnyddwyr Windows:
+Cychwynnwch y rhaglen osod. Os hoffech chi
+gall y rhaglen osod greu llwybrau byr i gychwyn OmegaT
 
-Cychwyn OmegaT Mae nifer o ffyrdd i gychwyn OmegaT.
+*Defnyddwyr Linux:
+Rhowch yr archif mewn unrhyw ffolder addas a'i ddadbacio: Mae OmegaT
+wedyn yn barod i'w gychwyn. Mae modd creu gosodiad mwy twt a chyfeillgar drwy
+ddefnyddio sgript gosod (linux-install.sh). I ddefnyddio'r 
+sgript, agorwch ffenestr terfynell (consol), newid ffolder i'r un sy'n cynnwys
+OmegaT.jar a'r sgript linux-install.sh a gweithredu'r sgript gyda  ./linux-install.sh.
 
-*Defnyddwyr Windows: clic dwbl i'r ffeil OmegaT.exe Os ydych yn gallu gweld OmegaT ond nid OmegaT.exe yn eich Rheolwr Ffeiliau (Windows Explorer), newidiwch y gosodiadau fel bo estyniadau'r ffeiliau'n cael eu dangos.
+*Defnyddwyr Mac:
+CopÔwch yr archif OmegaT.zip i leoliad addas a'i ddadbacio er mwyn cael
+ffolder sy'n cynnwys ffeil mynegai dogfen HTML ac OmegaT.app,
+y ffeil rhaglen. 
 
-*Drwy rhoi clic dwbl i'r ffeil OmegaT.jar Dim os yw'r ffeil .jar wedi ei gysylltu √¢ Java yn eich system y bydd hwn yn gweithio.
+*Eraill (e.e. Solaris, FreeBSD):
+I osod OmegaT crÎwch ffolder addas ar gyfer OmegaT. CopÔwch archif  zip neu tar.gz OmegaT i'r ffolder yma a'i ddadbacio.
 
-*O'r llinell orchymyn. Y gorchymyn i gychwyn OmegaT yw:
+3.3 Cychwyn OmegaT
+Cychwynnwch OmegaT fel a ganlyn.
 
-cd <ffolder lle mae ffeil OmegaT.jar wedi ei leoli>
+*Defnyddwyr Windows:
+Os ydych wedi creu llwybr byr ar y bwrdd gwaith wrth osod,
+cliciwch ar hwnnw. Fel arall rhowch glic dwbl i'r ffeil
+OmegaT.exe Os ydych yn gallu gweld OmegaT ond nid OmegaT.exe yn eich
+Rheolwr Ffeiliau (Windows Explorer), newidiwch y gosodiadau
+fel bo estyniadau'r ffeiliau'n cael eu dangos.
 
-<enw a llwybr ffeil gweithredol Java> -jar Omega.jar
+*Defnyddwyr Linux:
+Os ydych wedi defnyddio'r sgript gosod, dylech fod yn gallu cychwyn OmegaT gyda:
+Alt+F2
+ac yna:
+omegat
+
+*Defnyddwyr Mac:
+Clic dwbl ar y ffeil OmegaT.app.
+
+*O'ch rheolwr ffeiliau(pob system):
+Clic dwbl ar ffeil OmegaT.jar. Dim os yw'r ffeil .jar wedi ei chysylltu
+‚ Java yn eich system y bydd hwn yn gweithio.
+
+*O'r linell orchymyn (pob system):
+Y gorchymyn i gychwyn OmegaT yw:
+
+cd <ffolder lle mae ffeil OmegaT.jar wedi ei lleoli>
+
+<enw a llwybr ffeil weithredol Java> -jar Omega.jar
 
 (Ffeil weithredol Java yw'r ffeil java ar Linux a java.exe yn Windows.
-Os yw Java wedi ei osod ar lefel y system, nid oes angen gosod y llwybr llawn)
+Os yw Java wedi ei osod ar lefel y system, nid oes angen gosod
+y llwybr llawn)
 
-*Defnyddwyr Windows: Mae'r rhaglen osod yn gallu creu llwybrau byr ar eich cyfer yn y ddewislen cychwyn, ar y bwrdd gwaith Mae modd llusgo ffeil OmegaT i'r ddewislen cychwyn, y bwrdd gwaith neu'r ardal cychwyn cyflym i gysylltu iddi o'r mannau hynny.
+Cyfaddasu eich profiad o gychwyn OmegaT:
 
-*Defnyddwyr Linux KDE: gallwch ychwanegu OmegaT i'ch dewislenni fel a ganlyn:
+*Defnyddwyr Windows:
+Mae'r rhaglen osod yn gallu creu llwybraubyr ar eich cyfer yn y
+ddewislen cychwyn, ar y bwrdd gwaith ac yn y maes cychwyn cyflym Mae modd llusgo ffeil
+OmegaT.exe i'r ddewislen cychwyn, y bwrdd gwaith neu'r ardal cychwyn cyflym
+i gysylltu iddi o'r mannau hynny.
 
-Control Center - Desktop - Panels - Menus - Edit K Menu - File - New Item/New 
-Submenu.
+*Defnyddwyr Linux:
+Am ffordd mwy cyfeillgar o gychwyn OmegaT, mae modd defnyddio sgript
+Kaptain, sy'n cael ei ddarparu (omegat.kaptn). I ddefnyddio'r sgript rhaid gosod
+Kaptain yn gyntaf. Yna mae modd cychwyn sgript cychwyn Kaptain gyda
+Alt+F2
+omegat.kaptn
 
-Yna wedi dewis dewislen addas, ychwanegu isddewislen/eitem gyda File - New Submenu a File - New Item. Rhowch OmegaT fel enw'r eitem newydd.
+Am ragor o wybodaeth ar sgript Kaptain ac ychwanegu eitemau dewislen
+a chychwyn eiconau yn Linux, ewch i OmegaT ar Linux HowTo.
 
-Yn y maes "Gorchymyn", defnyddiwch y botymau symud i ganfod y sgript cychwyn OmegaT a'i ddewis. 
+*Defnyddwyr Mac:
+Llusgwch OmegaT.app i'ch doc neu i far offer ffenestr Finder er mwyn gallu
+ei gychwyn o unrhyw leoliad. Mae hefyd modd ei alw ym
+maes chwilio Spotlight.
 
-Clicio ar y botwm eicon (i'r dde o'r meysydd Enw/Disgrifiad/Sylw) - Eiconau Eraill - Pori, a symud i'r isffolder /images yn ffolder rhaglen OmegaT. Dewis eicon OmegaT.png.
+==============================================================================
+ 4. Ymuno ‚ phroject OmegaT
 
-I orffen, cadw'r newidiadau gyda Ffeil - Cadw.
-
-*Defnyddwyr GNOME Linux: gallwch ychwanegu OmegaT i'ch panel (y bar ar frig y sgrin) fel a ganlyn:
-
-Clic de ar y panel - Ychwanegu Cychwynnwr Newydd. Rhowch "OmegaT" yn y maes "Enw"; yn y maes "Gorchymyn", defnyddiwch y botwm symud i ganfod eich sgript cychwyn OmegaT. Dewiswch y sgript a chadarnhau gyda Iawn
-
-Cyfieithiad Rhoslyn Prys, hawlfraint 2009 
- 4. Ymuno √¢ phroject OmegaT
-
-I gyfrannu at ddatblygiad, cysylltwch √¢'r datblygwyr yn:
+I gyfrannu at ddatblygiad OmegaT, cysylltwch ‚'r datblygwyr yn:
     http://lists.sourceforge.net/lists/listinfo/omegat-development
 
 I gyfieithu rhyngwyneb, llawlyfr defnyddiwr neu ddogfennau perthnasol eraill OmegaT, darllenwch:
@@ -150,7 +246,7 @@ I gyfieithu rhyngwyneb, llawlyfr defnyddiwr neu ddogfennau perthnasol eraill Ome
 Tanysgrifiwch i'r rhestr cyfieithwyr:
       http://lists.sourceforge.net/mailman/listinfo/omegat-l10n
 
-Am gyfraniadau eraill, tanysgrifiwch √¢'r gr≈µp defnyddwyr:
+I gyfrannu mewn ffyrdd eraill, tanysgrifiwch yn gyntaf i'r gr?p defnyddwyr yn:
       http://tech.groups.yahoo.com/group/omegat/
 
 I glywed am beth sy'n digwydd ym myd OmegaT...
@@ -162,70 +258,83 @@ Mae'r cyfranwyr blaenorol yn cynnwys:
 
 Cyfrannwyd cod gan
   Zoltan Bartko
-  Didier Briel (rheolwr rhyddhau)
+  Volker Berlin
+  Didier Briel (rheolwr datblygu)
   Kim Bruning
-  Alex Buloichik
+  Alex Buloichik (datblygwr arweiniol)
   Sandra Jean Chua
+  Thomas Cordonnier
   Martin Fleurke  
   Wildrich Fourie
+  Phillip Hall
+  Jean-Christophe Helary
   Thomas Huriaux
+  Hans-Peter Jacobs
+  Kyle Katarn
+  Ibai Lakunza Velasco
+  Guido Leenders
+  Aaron Madlon-Kay
   Fabi√°n Mandelbaum
+  John Moran
   Maxym Mykhalchuk 
   Arno Peters
   Henry Pijffers 
+  Briac Pilpr√©
   Tiago Saboga
   Andrzej Sawu≈Ça
   Benjamin Siband
+  Yu Tang
+  Rashid Umarov  
+  Antonio Vilei
   Martin Wunderlich
+  Michael Zakharov
 
 Cyfraniadau eraill gan
   Sabine Cretella
   Dmitri Gabinski
-  Jean-Christophe Helary rheolwr lleoleiddio)
+  Jean-Christophe Helary (rheolwr lleoleiddio)
   Vito Smolej (rheolwr dogfennau)
   Samuel Murray
   Marc Prior 
   a llawer iawn o bobl gymwynasgar
 
-(Os ydych yn credu eich bod wedi cyfrannu mewn ffordd arwyddocaol i Broject OmegaT a heb gael eich enwi ar y rhestr, cysylltwch √¢ ni.)
+(Os ydych yn credu eich bod wedi cyfrannu mewn ffordd arwyddocaol i Broject OmegaT a heb gael eich enwi ar y rhestr, cysylltwch ‚ ni.)
 
 Mae OmegaT yn defnyddio'r llyfrgelloedd canlynol:
-
   HTMLParser 1.6 gan Somik Raha, Derrick Oswald ac eraill (Trwydded LGPL)
-  http://sourceforge.net/projects/htmlparser
-
   MRJ Adapter 1.0.8 gan Steve Roy (Trwydded LGPL)
-  http://homepage.mac.com/sroy/mrjadapter/
-
   VLDocking Framework 2.0.6d gan VLSolutions (Trwydded CeCILL)
-  http://www.vlsolutions.com/en/products/docking/
-
-  Hunspell 1.1.12 gan L√°szl√≥ N√©meth ac eraill (Trwydded LGPL)
-
+  Hunspell by L√°szl√≥ N√©meth ac eraill (Trwydded LGPL)
   JNA gan Todd Fast, Timothy Wall ac eraill (Trwydded LGPL)
-
   Swing-Layout 1.0.2 (Trwydded LGPL)
-
   Jmyspell 2.1.4 (Trwydded LGPL)
+  SVNKit 1.7.5 (Trwydded TMate)
+  Sequence Library (Trwydded Sequence Library)
+  ANTLR 3.4 (Trwydded ANTLR 3)
+  SQLJet 1.1.3 (GPL v2)
+  JGit (Trwydded Eclipse Distribution)
+  JSch (Trwydded JSch)
+  Base64 (parth cyhoeddus)
+  Diff (GPL)
+  JSAP (LGPL)
+  orion-ssh2-214 (Trwydded Java Orion SSH)
 
-  JAXB 2.1.7 (GPLv2 + classpath exception)
-
-Cyfieithiad Rhoslyn Prys, hawlfraint 2009 
+==============================================================================
  5.  A yw OmegaT yn eich poeni chi? Ydych chi angen cymorth?
 
-Cyn adrodd ar wall, gwnewch yn si≈µr eich bod wedi darllen y ddogfennaeth yn fanwl. Efallai bod yr hyn rydych yn ei weld yn nodwedd o OmegaT rydych newydd ei ddarganfod. [Os ewch i edrych ar gofnod OmegaT a gweld geiriau fel
+Cyn adrodd ar wall, gwnewch yn si?r eich bod wedi darllen y ddogfennaeth yn fanwl. Efallai bod yr hyn rydych yn ei weld yn nodwedd o OmegaT rydych newydd ei ddarganfod. Os ewch i edrych ar gofnod OmegaT a gweld geiriau fel
 "Error", "Warning", "Exception", neu "died unexpectedly" yna rydych wedi darganfod problem go iawn (mae log.txt i'w weld yn ffolder dewisiadau defnyddiwr, gw. y llawlyfr am ei leoliad).
 
-Y peth nesaf i'w wneud yw cadarnhau'r hyn rydych wedi ei ganfod gyda defnyddwyr i wneud yn si≈µr nad yw hyn wedi ei adrodd o'r blaen. Mae modd gwirio'r dudalen cofnod gwall yn SourceForge hefyd. Dim ond pan rydych yn si≈µr mai chi yw'r cyntaf i ganfod cyfres o ddigwyddiadau mae modd eu hail greu sydd wedi cychwyn rhywbeth nad yw i fod i ddigwydd y dylech anfon adroddiad gwall.
+Y peth nesaf i'w wneud yw cadarnhau'r hyn rydych wedi ei ganfod gyda defnyddwyr i wneud yn si?r nad yw hyn wedi ei adrodd o'r blaen. Mae modd gwirio'r dudalen cofnod gwall yn SourceForge hefyd. Dim ond pan rydych yn si?r mai chi yw'r cyntaf i ganfod cyfres o ddigwyddiadau mae modd eu hail greu sydd wedi cychwyn rhywbeth nad yw i fod i ddigwydd y dylech anfon adroddiad gwall.
 
 Mae pob adroddiad gwall da angen tri peth.
   - Camau i'w hatgynhyrchu
-  - Beth i ddisgwyl ei weld, a
-  - Beth welwyd yn lle hynny.
+   - Beth i ddisgwyl ei weld, a
+   -Beth welwyd yn lle hynny.
 
-Gallwch ychwanegu cop√Øau o ffeiliau, darnau o'r log, lluniau sgrin, unrhyw beth rydych yn ei feddwl bydd o gymorth i'r datblygwyr i ganfod a chywiro eich gwall.
+Gallwch ychwanegu copÔau o ffeiliau, darnau o'r log, lluniau sgrin, unrhyw beth rydych yn ei feddwl bydd o gymorth i'r datblygwyr i ganfod a chywiro eich gwall.
 
-I bori archifau y gr≈µp defnyddwyr ewch i:
+I bori archifau y gr?p defnyddwyr ewch i:
      http://groups.yahoo.com/group/OmegaT/
 
 I bori'r dudalen cofnodi gwall ac i gofnodi adroddiad gwall os oes angen, ewch i:
@@ -239,4 +348,4 @@ I gadw cofnod o'r hyn sy'n digwydd i'ch adroddiad gwall, cofrestrwch fel defnydd
 Gwelwch y ffeil 'changes.txt'  am wybodaeth fanwl am newidiadau yn y ryddhad yma a'r rhai blaenorol.
 
 
-Cyfieithiad Rhoslyn Prys, hawlfraint 2009 
+==============================================================================

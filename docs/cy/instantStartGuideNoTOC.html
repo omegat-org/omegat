@@ -1,164 +1,165 @@
 <html>
-<head>
-  <link rel="stylesheet" href="./OmegaT.css" type="text/css">
-  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-
-  <title>Canllaw Cychwyn Cyflym - Llawlyfr Defnyddiwr 1.8</title>
-</head>
-
-<body>
-  <h2>Dechreuwch ddefnyddio OmegaT mewn 5 munud! - Canllaw Cychwyn Cyflym</h2>
-
-  <p>Mae'r canllaw cychwyn cyflym hwn yn canolbwyntio ar y nodweddion sylfaenol yn unig. Yn ddelfrydol, dylai defnyddwyr ddarllen y Llawlyfr Defnyddwyr er mwyn ymgyfarwyddo â phopeth sydd gan OmegaT i'w gynnig.  Mae'r llwybrau byr a ddisgrifir yma'n defnyddio'r patrwm "ctrl+bysell" ond dylai defnyddwyr Mac ddarllen "cmd+bysell" yn lle hynny. Mae gan y fysell "cmd" unai label "command" arni neu farc afal ar fysellfyrddau Apple.</p>
-  <hr>
-  <a name="summary" id="summary"></a>
-
-  <h2>Yn fyr, dyma sut mae OmegaT yn gweithio</h2>
-
-  <p>Mae sgrin OmegaT yn cynnwys un gofod wedi'i rannu'n dair ffenestr wahanol. Gellir newid maint pob un o'r rhain gyda'r llygoden.  Ar y chwith mae'r Golygydd lle'r ydych yn teipio eich cyfieithiad. Ar y dde, uchod, mae'r ffenestr Cyfateb yn Fras, lle caiff cyfatebion yn y cof cyfieithu eu dangos.  Oddi tan y ffenestr honno mae'r ffenestr Geirfa, lle caiff cyfatebion yn yr eirfa eu dangos.</p>
-
-  <p>Yn y ffenestr Golygu, mae OmegaT yn cyflwyno'r testun ffynhonnell wedi ei 'segmentu' yn frawddegau (neu baragraffau). Rydych chi'n cyfieithu'r segmentau hyn un ar y tro. Wrth i chi symud o un segment i'r nesaf caiff eich cyfieithiadau eu cofnodi yn y cof cyfieithu. Unwaith y bydd pob segment wedi'i gyfieithu (neu cyn hynny, os mynnwch), bydd OmegaT yn defnyddio'r cof cyfieithu i gynhyrchu'r dogfen(nau) a gyfieithwyd mewn ffolder darged o'r enw 'target'.</p>
-
-  <p>Mae OmegaT yn trefnu eich gwaith ar ffurf 'projectau cyfieithu'. [Ar gyfer pob project mae OmegaT yn creu set o ffolderi. Caiff rhain eu defnyddio i storio'r dogfennau ffynhonnell sydd i'w cyfieithu, y geirfaon y gallech fod eisiau eu defnyddio, ac unrhyw gofion cyfieithu yr hoffech ddefnyddio. Mae OmegaT hefyd yn creu ffolder o'r enw 'target' a fydd yn cynnwys y dogfennau terfynol wedi iddynt gael eu cyfieithu.</p>
-  <hr>
-  <a name="translate" id="translate"></a>
-
-  <h2>Sut i gyfieithu gan ddefnyddio OmegaT</h2><a name="create" id="create"></a>
-
-  <h3>Creu ac agor project newydd</h3>
-
-  <p>Dewiswch <strong>Project → Newydd...</strong> o'r ddewislen.</p>
-
-  <p>Porwch i'r ffolder lle'r hoffech chi gadw'r ffeiliau project, a theipio enw ar gyfer y project cyfieithu. Bydd yr enw hwn yn cael ei ddefnyddio ar gyfer y prif ffolder project; bydd holl ffeiliau'r project yn cael eu storio yn y ffolder hwn neu ei is-ffolderi.</p>
-
-  <p>Bydd OmegaT yn gofyn i chi gadarnhau neu newid y ffolderi project sydd i'w creu, gan ddefnyddio'r deialog isod:</p>
-
-  <p align="center"><img src="images/NewProject.png" name="graphics1" alt=
-  "Ffenestr gosodiadau project" id="graphics1" align="bottom" border="0"></p>
-
-  <p>Gallwch dderbyn lleoliad yr is-ffolderi, ond gwnewch yn siŵr yn gyntaf fod y codau iaith ar gyfer y cyfieithiad yn gywir. Dewiswch y cod iaith (2 lythyren) neu iaith-ac-ardal (2 + 2 lythyren) o'r ddewislen, neu teipiwch nhw i mewn â llaw. (gall y cod iaith fod yn 2 neu 3 llythyren) Gwnewch nodyn o leoliad yr is-ffolder 'target' (ar gyfer eich dogfennau wedi eu cyfieithu). Os hoffech chi i OmegaT segmentu fesul brawddeg yn hytrach na fesul "paragraff", mae'n syniad da i chi wirio'r rheolau segmentu.</p>
-
-  <p>Pan fyddwch chi'n clicio Iawn er mwyn derbyn gosodiadau'r project, bydd OmegaT yn gofyn i chi ddewis y dogfennau ffynhonnell yr hoffech chi eu cyfieithu ar gyfer eu  mewnforio. Gallwch fewnforio ffeiliau unigol, neu fewnforio cyfeiriaduron cyfan gan gynnwys yr holl ffeiliau yn eu is-ffolderi. Os ydych chi wedi mewnforio'r dogfennau anghywir mewn camgymeriad, neu gormod ohonynt, gallwch gael gwared â nhw drwy eu symud neu eu dileu o ffolder Ffynhonnell eich project OmegaT (gan ddefnyddio rheolwr ffeiliau eich system [Windows Explorer etc.], er enghraifft).</p>
-
-  <p>I wirio eich rhestr o ffeiliau sydd i'w cyfieithu, edrychwch ar y ffenestr <strong>Ffeiliau'r Project</strong>  (Dewislen: <strong>Project → Ffeiliau Project...</strong>, os nad yw'n agor yn awtomatig). Os oedd yn rhaid i chi newid Cynnwys y ffolder ffynhonnell ('source'), cofiwch ail-lwytho'r project yn gyntaf (Dewislen: <strong>Project → Ail-lwytho</strong>). Bydd OmegaT yn agor y ffeil cyntaf yn y rhestr project. Cofiwch, gall OmegaT ddim ond cyfieithu ffeiliau yn y fformatau isod os ydynt yn cyfateb i'r patrymau a ddiffiniwyd yn yr hidlau ffeiliau. Bydd unrhyw ffeiliau eraill yn cael eu hanwybyddu.</p>
-
-  <ul>
-    <li>OpenDocument/OpenOffice.org</li>
-
-    <li>Testun plaen (plain text)</li>
-
-    <li>.po</li>
-
-    <li>Bundle.properties Java</li>
-
-    <li>XHTML, HTML</li>
-
-    <li>- didolwr Cymorth HTML</li>
-
-    <li>INI (fformat 'allwedd=gwerth')</li>
-
-    <li>DocBook</li>
-
-    <li>Microsoft Open XML</li>
-
-    <li>Okapi monolingual XLIFF</li>
-
-    <li>QuarkXPress CopyFlowGold</li>
-
-    <li>Ffeiliau Isdeitlo (STR)</li>
-
-    <li>ResX</li>
-
-    <li>Adnoddau Android</li>
-
-    <li>LaTeX</li>
-  </ul><a name="segments" id="segments"></a>
-
-  <h3>Cyfieithu segmentau un ar y tro</h3>
-
-  <p>Unwaith i chi ddiffinio'r project a'r ffeiliau rydych am eu cyfieithu, bydd OmegaT yn agor y ffeil gyntaf yn y Golygydd. Caiff y segment cyntaf ei amlygu mewn gwyrdd; caiff copi o'r testun ffynhonnell ei ddangos oddi tanodd, yn y maes targed. (Ar hyn o bryd, bydd pob testun oddi allan i'r maes targed yn cael ei warchod ac ni fydd modd ei olygu.) Rhaid teipio eich cyfieithiad rhwng y tagiau <code>&lt;segment 0001&gt;</code> a <code>&lt;end segment&gt;</code>,gan ysgrifennu dros y testun ffynhonnell  Pwyswch "ENTER" i symud ymlaen i'r segment nesaf. Nodyn:</p>
-
-  <ul>
-    <li>Er mwyn symud i unrhyw ran arall o'r testun, p'un ai uchod neu isod, dwbl-gliciwch ar y frawddeg neu baragraff rydych yn dymuno ei hagor.</li>
-
-    <li>Os oes yn well gennych chi gyfieithu i mewn i faes targed gwag, dewiswch y gosodiad hwn yn <strong>Dewisiadau → Ymddygiad Golygu...</strong> </li>
-  </ul>
-
-  <p>Pan fyddwch chi'n gwasgu "<strong>ENTER</strong>", mae sawl peth yn digwydd yn y cefndir: mae OmegaT ychwanegu'r pâr o segmentau (y segment ffynhonnell a'i gyfieithiad) i'r cof cyfieithu, a bydd hefyd yn cyfieithu unrhyw segmentau sydd yn union yr un fath yn y ffeiliau project eraill. Mae hefyd yn sganio'r cof cyfieithu a'r eirfa gan chwilio am gyfatebion ar gyfer y segment nesaf sydd heb ei gyfieithu.</p><a name="tm" id="tm"></a>
-
-  <h3>Defnyddio'r cof cyfieithu a'r cyfatebion yn eich geirfa a geiriaduron</h3><a name="tm_matches" id="tm_matches"></a>
-
-  <h3>Cyfatebion cof cyfieithu</h3>
-
-  <p>Os yw OmegaT yn dod o hyd i unrhyw gyfatebion bras (30% neu uwch - gweler y llawlyfr) ar gyfer y segment nesaf, mae'n dangos y cyfatebion hyn yn y Ffenestr Cyfatebion. Mae'r segment sy'n cyfateb orau  wedi'i rag-ddewis yn y Ffenestr Cyfatebion. I fewnosod cyfatebion cof cyfieithu o'r Ffenestr Cyfatebion i mewn yn eich maes targed, gellwch ddefnyddio bysellau brys:</p>
-
-  <ul>
-    <li>Pwyswch <code>Ctrl+I</code> i osod y segment a ragddewiswyd yn safle'r cyrchwr, neu...</li>
-
-    <li>Pwyswch <code>Ctrl+R</code> ti ysgrifennu dros y segment cyfan gyda segment cyfatebol a ragddewiswyd.</li>
-  </ul>
-
-  <p>Os oes sawl segment cyfatebol wedi eu darganfod a bod yn well gennych beidio a defnyddio'r un a ragddewiswyd:</p>
-
-  <ul>
-    <li>Dewiswch y segment cyfatebol rydych chi'n ei ffafrio yn y Ffenestr Cyfatebion: Pwyswch <code>Ctrl+2</code> i ddewis yr ail ddewis, <code>Ctrl+3</code> i ddewis y trydydd, etc.</li>
-
-    <li>Yna defnyddiwch y bysellau brys <code>Ctrl+I</code> or <code>Ctrl+R</code>, fel a ddisgrifiwyd uchod.</li>
-  </ul>
-
-  <p>(Gallwch ddweud wrth OmegaT am fewnosod unrhyw segment sy'n cyfateb yn uwch chanran benodol i mewn yn y maes targed yn awtomatig pan fydd y segment yn agor. Gosodwch y dewis hwn gan ddefnyddio <strong>Dewisiadau→ Ymddygiad Golygu...</strong></p><a name="gloss_matches" id="gloss_matches"></a>
-
-  <h3>Cyfatebion Geirfa a Geiriadur</h3>
-
-  <p>Bydd cyfatebion termau yn y geirfaoedd a geiriaduron, a all eich bod wedi eu cynnwys yn y project, gael eu harddangos yn y ffenestri geirfa a geiriadur.&nbsp;</p><a name="searches" id="searches"></a>
-
-  <h3>Defnyddio chwilio</h3>
-
-  <p>Mae OmegaT yn darparu amrediad grymus o nodweddion chwilio. Agorwch y ffenestr Chwilio drwy bwyso <code>Ctrl+F</code> a theipio'r gair neu ymadrodd yr hoffech chi chwilio amdano yn y blwch "Chwilio am". Gallwch hefyd ddewis gair neu ymadrodd yn y maes golygu (testun targed y segment gweithredol) a phwyso Ctrl+F. Caiff y gair neu'r ymadrodd ei osod yn y blwch "Chwilio am" yn awtomatig yn yr achos hwn.</p>
-
-  <h3>Defnyddio Google Translate</h3>
-
-  <p>Yn ffenestr Google Translate, byddwch yn derbyn cynnig cyfieithiad o'r segment cyfredol yn awtomatig. Gallwch ei gynnwys gyda <code>Ctrl+M</code> i'r segment targed<br></p>
-
-  <p><a name="create_trans" id="create_trans"></a></p>
-
-  <h3>Creu dogfennau wedi eu cyfieithu</h3>
-
-  <p>Pan fyddwch wedi cyfieithu pob un o'r segmentau (neu cyn hynny, hyd yn oed), bydd OmegaT yn diweddaru'r dogfen(nau) targed gan ddefnyddio'r cyfieithiadau sydd wedi'u storio yn y cof cyfieithu. I wneud hynny, dewiswch <strong>Project → Creu Dogfennau wedi eu Cyfieithu...</strong> o'r ddewislen. Bydd OmegaT yn adeiladu fersiynau wedi'u cyfieithu o bob dogfen sydd yn y ffolder 'source' y mae modd eu cyfieithu, p'un ai ydyn nhw wedi eu cyfieithu yn llawn neu beidio. Caiff y ffeiliau sydd wedi eu cyfieithu yn llawn neu'n rhannol eu cadw yn ffolder 'target' y project. Er mwyn cwblhau eich project, agorwch y ffeiliau targed yn eu rhaglennu priodol (porwr, prosesydd geiriau...) er mwyn gwirio cynnwys a fformatio eich cyfieithiad. Gallwch ddychwelyd i OmegaT i wneud unrhyw gywiriadau angenrheidiol; peidiwch ag anghofio ail-greu'r dogfennau cyfieithiedig wedi hynny.</p>
-  <hr>
-  <a name="tags" id="tags"></a>
-
-  <h2>Sut i drin testun wedi'i dagio</h2>
-
-  <p>Mae OmegaT yn sicrhau nad yw fformatio'r ddogfen ffynhonnell (trwm, italig etc.) yn cael ei golli drwy ei marcio â thagiau arbennig&lt;/ao&gt;.  Mae tagiau OmegaT wedi eu ffurfio gan ddefnyddio un neu fwy o lythrennau sy'n cael eu dilyn gan un neu fwy o ddigidau ac maent weithiau'n defnyddio'r nod "/" er enghraifft:  &lt;f0&gt;, &lt;/f0&gt; &lt;br&gt;, &lt;/s2&gt; etc.). Rhaid trin y tagiau hyn yn ofalus gan sicrhau eu bod wedi'u cynnwys yn gywir yn y segmentau targed. (gw. <em>gweithredoedd tagiau</em>).</p><a name="example" id="example"></a>
-
-  <h3>Enghraifft...</h3>
-
-  <p>Yn yr enghreifftiau hyn rydym wedi amlygu'r tagiau i'w gwneud yn haws i'w gweld, ond yn OmegaT ni fyddant wedi'u hamlygu. Bydd tagiau HTML, wedi eu hamlygu mewn <font color="blue">blue</font>, yn cael eu hawybyddu gan OmegaT gan eu bod yn amgylchynnu'r segment yn llwyr.  Rhaid i'r tagiau amlygir mewn <font color="blue">gwyrdd</font>,gael eu trin gan OmegaT gan eu bod o fewn y segment Dyma enghraifft o segment mewn HTML:</p>
-
-  <p><code><font color="blue">&lt;p&gt;</font>Gellir dewis ffont arddangos gwahanol yn y deialog  <font color="green">&lt;b&gt;</font>Ffont Arddangos<font color=
-  "green">&lt;/b&gt;</font>. Mae wedi leoli yn  <font color=
-  "green">&lt;i&gt;</font>Dewisiadau<font color="green">&lt;/i&gt;</font> → <font color="green">&lt;i&gt;</font>Eitem dewislen <font color=
-  "green">&lt;/i&gt;</font>Ffont Arddangos.... Gellir newid math a maint y ffont yn y deialog hwnnw.<font color="blue">&lt;/p&gt;</font></code></p>
-
-  <p>Dyma sut y bydd OmegaT yn ei ddangos, yn Afrikaans:</p><br>
-
-  <p><img src="images/tagged_segment.png" alt="" border="0" height="150" width=
-  "592"></p><br>
-
-  <p>Pan fydd OmegaT yn creu'r ddogfen wedi'i chyfieithu, bydd yr HTML yn edrych fel hyn:</p>
-
-  <p><img src="images/tagged_segment_target.png" alt="" border="0" height="122"
-  width="592"></p><a name="tag_verif" id="tag_verif"></a>
-
-  <h3>Dilysu Tagiau</h3>
-
-  <p>Nid yw OmegaT yn adnabod tagio gwallus yn awtomatig yn y ddogfen a gyfieithwyd. Cyn i chi anfon y ddogfen i'ch cleient, dylech felly wirio eich tagiau am wallau.</p>
-
-  <p>Dewiswch <strong>Offer → Dilysu Tagiau</strong> o'r ddewislen. [Bydd tabl yn ymddangos yn dangos y segmentau lle nad yw'r tagiau ffynhonnell a'r tagiau targed yn cyfateb. Cliciwch ar y rhif segment. Cewch eich cludo'n awtomatig i'r segment gwallus yn y Golygydd, lle gallwch gywiro'r tagio. Pwyswch <span style="font-weight: bold;">Enter</span> i ddilysu'r segment a gwirio'r cywiriad drwy bwyso <span style=
-  "font-weight: bold;">Control-T</span> eto. </p>
-
-  <p>Mewn rhai achosion gall gwallau tagio rwystro'r ddogfen rhag agor. Dylech felly sicrhau eich bod wedi gwirio unrhyw wallau tagio cyn creu'r ffeiliau wedi'u cyfieithu. Yn olaf, dylech bob tro wirio'r fformatio terfynol drwy agor y ddogfen a gyfieithwyd yn rhaglen gysylltiedig briodol.</p>
-  <hr>
-</body>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <title>Dysgu defnyddio OmegaT mewn 5 munud!</title>
+      <link rel="stylesheet" type="text/css" href="OmegaT.css">
+      <meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
+   </head>
+   <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+      <div class="chapter">
+         <div class="titlepage">
+            <div>
+               <div>
+                  <h2 class="title"><a name="chapter.instant.start.guide"></a>Dysgu defnyddio OmegaT mewn 5 munud!
+                  </h2>
+               </div>
+            </div>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="create.and.open.new.project"></a>1.&nbsp;Creu project newydd<a class="indexterm" name="d0e7"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <p><em><span class="remark">Nodyn:</span></em>Ar Apple Mac, defnyddiwch <span class="keycap"><strong>Cmd</strong></span> neu fysell  <span class="keycap"><strong>Apple</strong></span> yn lle bysell <span class="keycap"><strong>Ctrl</strong></span> 
+            </p>
+            <p>I gychwyn defnyddio OmegaT, cerwch broject fydd yn dal eich holl ffeiliau, megis y ffeil ffynhonnell, cofion cyfieithu, geirfaon
+               ac yn y diwedd eich ffeil wedi ei chyfieithu. Yn newislen y <span class="guimenu">Project</span>, dewiswch <span class="guimenuitem">Newydd...</span><a class="indexterm" name="d0e33"></a> a theipio enw i'r project. Cofiwch lle rydych wedi creu'r project gan y bydd angen i chi fynd yn ôl ato.
+            </p>
+            <p>Wedi i chi roi enw i'r project bydd y deialog Creu Project Newydd yn agor. Ar frig y deialog hwnnw dewiswch eiaith y ffeil
+               ffynhonnell a'r iaith y bydd y ffeil wedi ei chyfieithu ynddi ac yna clicio <span class="guibutton">Iawn </span> i barhau.
+            </p>
+            <p><span class="application">Os oes gennych ddiddordeb yn y gosodiadau eraill dewch nôl atynt ar unrhyw adeg  drwy bwyso <span class="keycap"><strong>Ctrl+E.</strong></span></span></p>
+            <p>Nesaf bydd deialog Ffeiliau Project yn agor. Cliciwch y Mewnforio ffeiliau ffynhonnell... i ddewis eich ffeiliau ffynhonnell.
+               Bydd OmegaT yn copïo'r ffeiliau hyn i'r is ffolder <code class="filename">/source/</code>yn eich project newydd. Wedi i'r ffeil ffynhonnell gael ei llwytho i'r paen Golygu, mae modd cau'r deialog ffeiliau project.
+            </p>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="translate.the.segments.one.by.one"></a>2.&nbsp;Cyfieithu'r ffeil
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>Bydd OmegaT yn cyflwyno un segment ar y tro i chi ei gyfieithu. Wedi i chi gyfieithu pob segment, pwyswch <span class="keycap"><strong>Ctrl+U </strong></span>i symud i'r segment heb ei gyfieithu nesaf (neu <span class="keycap"><strong>Ctrl+Shift+U </strong></span>i symud i'r segment nesaf wedi ei gyfieithu). Pryd bynnag fyddwch eisiau gweld y cyfieithiad ar ei ffurf derfynol, pwyswch
+               <span class="keycap"><strong>Ctrl+D</strong></span>  i gynhyrchu'r ddogfen wedi ei chyfieithu, fydd yn cael ei chynhyrchu yn isfolder /target/ eich ffolder project. Wrth gyfieithu,
+               defnyddiwch y dewislenni <span class="guimenu">Golygu</span> a <span class="guimenu">Mynd</span> i gyflawni swyddogaethau defnyddiol amrywiol.
+            </p>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e74"></a>3.&nbsp;Dilysu eich tagiau
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>Os yw eich ffeil ffynhonnell yn ffeil wedi ei fformatio, e.e. Microsoft Word, LibreOffice Writer neu HTML, bydd OmegaT yn
+               trosi'r fformat i dagiau sy'n amgylchynu’r testun rydych yn ei gyfieithu. Yn aml bydd gan ddogfennau dagiau sydd â dim i wneud
+               â fformatio, ond sydd hefyd yn bwysig. Yn y ffeil ffynhonnell (ac yn y ffeil wedi ei chyfieithu), gall brawddeg ffynhonnell
+               edrych fel hyn
+            </p>
+            <p></p>
+            <div class="mediaobject" align="left"><img src="images/InstantGuide_1.png" align="left"></div>
+            <p></p>
+            <p>Bydd OmegaT, fodd bynnag, yn cyflwyno'r frawddeg yn y dull canlynol:</p>
+            <p><code class="literal"></code></p>
+            <div class="mediaobject" align="left"><img src="images/InstantGuide_2.png" align="left"></div>
+            <p></p>
+            <p>Mae'r tagiau o fewn OmegaT yn llwyd fel eu bod yn hawdd eu hadnabod. Nid ydynt wedi eu hamddiffyn, felly mae modd eu dileu,
+               eu rhoi gyda llawn neu eu symud o amgylch y frawddeg darged. Er hynny, os byddwch yn gwneud camgymeriad wrth deipio'r tagiau
+               fformat, efallai na fydd eich ffeil wedi ei chyfieithu yn peidio ag agor. Felly, pwyswch  <span class="keycap"><strong>Ctrl+T</strong></span> cyn cynhyrchu eich ffeil wedi ei chyfieithu, er mwyn sicrhau fod eich tagiau yn gywir.
+            </p>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e101"></a>4.&nbsp;Cynhyrchu'r ffeil wedi ei chyfieithu
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>Unwaith i chi wneud yn siŵr nad oes gwallau tag yn eich cyfieithiad, pwyswch <span class="keycap"><strong>Ctrl+D</strong></span> i gynhyrchu'r ffeil targed, fydd yn cael ei chreu yn yr isffolder <code class="filename"> /target/</code>eich ffolder project.
+            </p>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e112"></a>5.&nbsp;Rhai pethau eraill i'w cofio
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>Os nad yw ffeil yn llwytho i'r paen Golygu, gall fod y ffeil fod mewn fformat nad yw'n gweithio'n dda gydag OmegaT Gw. Pennod
+                        7: Hidlau Ffeil yn y Llawlyfr Defnyddiwr am restr o fformatau y mae OmegaT yn gallu eu trin.
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>Mae modd creu project newydd ar gyfer pob darn o waith newydd ac mae modd ychwanegu nifer o ffeiliau ffynhonnell ar un waith
+                        i'r project.
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>I atgoffa eich hun o osodiadau cychwynnol y project, agorwch Osodiadau'r Project drwy bwyso <span class="keycap"><strong>Ctrl+E</strong></span>. I weld rhestr y ffeiliau y project, agorwch deialog y Ffeiliau Project drwy bwyso <span class="keycap"><strong>Ctrl+L</strong></span>.
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>Wedi i chi orffen cyfieithu, bydd OmegaT yn allforio tri cof cyfieithu o'r enw "level1", "level2" ac "omegat" i'ch ffolder
+                        project Mae modd rhannu cofion  "level1" and "level2" gyda defnyddwyr rhaglenni cyfieithu eraill. Mae modd defnyddio'r cof
+                        "omegat" o fewn OmegaT mewn projectau fyddwch yn eu creu yn y dyfodol. Os fyddwch yn gosod ffeiliau cof cyfieithu yn isfolder
+                        /tm/ eich ffolder project, bydd OmegaT yn chwilio'n awtomatig am segmentau tebyg, sef "bras gyfieithiadau" .
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>Mae modd creu geirfa drwy bwyso  <span class="guibutton">Ctrl+Shift+G</span>, neu gopïo geirfâu cyfredol i'r isffolder<code class="filename">/glossary/</code>eich ffolder project, a bydd OmegaT yn eu chwilio am eiriau .
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>Mae'n aml yn ddefnyddiol i chwilio am eiriau ac ymadroddion yn y ffeiliau ffynhonnell ac yn eich cyfieithiad felly pwyswch
+                        <span class="keycap"><strong>Ctrl+F</strong></span> i ddefnyddio'r deialog "Chwilio Testun". 
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>Am gyflwyniad mwy cynhwysfawr gw. <a class="ulink" href="http://www.omegat.org/en/tutorial/OmegaT%20for%20Beginners.pdf" target="_top">OmegaT for beginners</a> ar wefan OmegaT Os fyddwch angen cymorth gydag unrhyw agwedd o OmegaT, teimlwch yn rhydd i ymuno â  <a class="ulink" href="http://tech.groups.yahoo.com/group/OmegaT/" target="_top">grŵp defnyddwyr OmegaT.</a></p>
+                  </li>
+               </ul>
+            </div>
+         </div>
+      </div>
+   </body>
 </html>

@@ -179,9 +179,9 @@ OmegaT failed to load the valid ones
 ----------------------------------------------------------------------
    1 Enhancement
    0 Bug fix
-   4 Localisation updates
+   8 Localisation updates
 ----------------------------------------------------------------------
-2.6.3 update 1 vs. 2.6.3
+2.6.3 update 2 vs. 2.6.3 update 1
 
   Other enhancements:
 
@@ -189,10 +189,14 @@ OmegaT failed to load the valid ones
 
   Localisation updates:
 
+  - Belarusian localisation updated to 2.6.3 (backported from 3.0) (UI, Readme)
   - Catalan localisation updated to 2.6.3 (UI, Readme, Instant Start)
   - Czech localisation updated to 2.6.3 (UI, Readme, Documentation)
   - Galician localisation backported from 3.0.0 (Documentation)
+  - Japanese localisation updated to 2.6.3-2 (Documentation)
   - Turkish localisation updated to 2.6.3 (backported from 3.0) (UI)
+  - Simplified Chinese localisation updated to 2.6.3 (backported from 3.0) (UI)
+  - Welsh localisation updated to 2.6.3 (backported from 3.0) (UI, Readme, Instant Start)
 
 ----------------------------------------------------------------------
  OmegaT 2.6.3 update 1
@@ -245,6 +249,8 @@ external entities, the target files could be empty
   - Import from exported script files
   http://sourceforge.net/support/tracker.php?aid=2957819
 
+  Other enhancements:
+  
   - More flexible parsing for external commands arguments
 
   - Updated documentation

@@ -2,22 +2,22 @@
    <head>
       <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
    
-      <title>Bijlage G. Aanpassen van sneltoetsen toetsenbord</title>
+      <title>Bijlage H. Aanpassen van sneltoetsen toetsenbord</title>
       <link rel="stylesheet" type="text/css" href="OmegaT.css">
       <meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
       <link rel="home" href="index.html" title="OmegaT - Gebruikershandleiding">
       <link rel="up" href="index.html" title="OmegaT - Gebruikershandleiding">
-      <link rel="prev" href="appendix.keyboard.html" title="Bijlage F. Sneltoetsen voor het toetsenbord voor het bewerken">
-      <link rel="next" href="appendix.legal.notices.html" title="Bijlage H. Auteursrechten">
+      <link rel="prev" href="appendix.website.html" title="Bijlage G. OmegaT op het web">
+      <link rel="next" href="appendix.legal.notices.html" title="Bijlage I. Auteursrechten">
    </head>
    <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
       <div class="navheader">
          <table width="100%" summary="Navigation header">
             <tr>
-               <th colspan="3" align="center">Bijlage G. Aanpassen van sneltoetsen toetsenbord</th>
+               <th colspan="3" align="center">Bijlage H. Aanpassen van sneltoetsen toetsenbord</th>
             </tr>
             <tr>
-               <td width="20%" align="left"><a accesskey="p" href="appendix.keyboard.html">Terug</a>&nbsp;
+               <td width="20%" align="left"><a accesskey="p" href="appendix.website.html">Terug</a>&nbsp;
                </td>
                <th width="60%" align="center">&nbsp;</th>
                <td width="20%" align="right">&nbsp;<a accesskey="n" href="appendix.legal.notices.html">Volgende</a></td>
@@ -29,7 +29,7 @@
          <div class="titlepage">
             <div>
                <div>
-                  <h1 class="title"><a name="appendix.shortcut.custom"></a>Bijlage G. Aanpassen van sneltoetsen toetsenbord
+                  <h1 class="title"><a name="appendix.shortcut.custom"></a>Bijlage H. Aanpassen van sneltoetsen toetsenbord
                   </h1>
                </div>
             </div>
@@ -50,40 +50,40 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="ch04.shortcuts.customization"></a>1. <a class="indexterm" name="d0e10458"></a>Aanpassen van sneltoetsen toetsenbord
+                     <h2 class="title" style="clear: both"><a name="ch04.shortcuts.customization"></a>1. <a class="indexterm" name="d0e11100"></a>Aanpassen van sneltoetsen toetsenbord
                      </h2>
                   </div>
                </div>
             </div>
-            <p>Aan de meeste items die verschijnen in het hoofdmenu kan een sneltoets worden toegewezen. Alleen aan de meest algemeen gebruikte
-               menuitems zijn standaard sneltoetsen toegewezen. U kunt de reeds toegewezen sneltoetsen wijzigen en nieuwe sneltoetsen toevoegen
-               door een bestand met definities voor de sneltoetsen in uw map voor voorkeuren voor OmegaT te plaatsen (zie <a class="link" href="chapter.files.and.directories.html#user.files.location">Locatie gebruikersbestanden</a>).
+            <p>Aan de meeste items die verschijnen in het hoofdmenu kan een sneltoets worden toegewezen. U kunt de reeds toegewezen sneltoetsen
+               wijzigen en nieuwe sneltoetsen toevoegen door een bestand met definities voor de sneltoetsen in uw map voor voorkeuren voor
+               OmegaT te plaatsen (zie <a class="link" href="chapter.files.and.folders.html#user.files" title="2. Bestanden met gebruikersinstellingen">Locatie gebruikersbestanden</a>).
             </p>
             <p>Het bestand met definities voor de sneltoetsen moet zijn genaamd <code class="filename">MainMenuShortcuts.properties</code> en mag ten hoogste één definitie voor een sneltoets per regel bevatten. Lege regels worden geaccepteerd en regels met opmerkingen
                zouden moeten beginnen met "//". Alles na de "//" zal worden genegeerd.
             </p>
             <p>Als het bestand <code class="filename">MainMenuShortcuts.properties</code> is gewijzigd, moet <span class="application">OmegaT</span> opnieuw gestart worden om de nieuwe sneltoetsen te kunnen laten werken.
             </p>
-            <p>De syntaxis voor de definitie van de sneltoets is de volgende: <code class="code">&lt;code menuitem&gt;=&lt;sneltoets&gt;</code>, waar <span class="emphasis"><em>&lt;code menuitem&gt;</em></span> een code is die wordt genomen uit de tabellen hieronder en <span class="emphasis"><em>&lt;sneltoets&gt;</em></span> een combinatie is van ingedrukte toetsen die wordt gedefinieerd door de gebruiker.<a href="#ftn.d0e10493" class="footnote" name="d0e10493"><sup class="footnote">[2]</sup></a>.
+            <p>De syntaxis voor de definitie van de sneltoets is de volgende: <code class="code">&lt;code menuitem&gt;=&lt;sneltoets&gt;</code>, waar <span class="emphasis"><em>&lt;code menuitem&gt;</em></span> een code is die wordt genomen uit de tabellen hieronder en <span class="emphasis"><em>&lt;sneltoets&gt;</em></span> een combinatie is van ingedrukte toetsen die wordt gedefinieerd door de gebruiker<a href="#ftn.d0e11135" class="footnote" name="d0e11135"><sup class="footnote">[2]</sup></a>.
             </p>
             <p>&lt;sneltoets&gt; moet in de volgende vorm zijn: 0 of meer <code class="code">&lt;modifier&gt;</code> gevolgd door 0 of 1 <code class="code">&lt;event&gt;</code> gevolgd door 1 <code class="code">&lt;key&gt;</code>, waar:
             </p>
             <div class="itemizedlist">
                <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
-                     <p><code class="code">&lt;modifier&gt;</code> kan zijn: <span class="emphasis"><em>shift</em></span>, <span class="emphasis"><em>control</em></span>, <span class="emphasis"><em>ctrl</em></span>, <span class="emphasis"><em>meta</em></span><a href="#ftn.d0e10527" class="footnote" name="d0e10527"><sup class="footnote">[3]</sup></a>, <span class="emphasis"><em>alt</em></span>,
+                     <p><code class="code">&lt;modifier&gt;</code> kan zijn: <span class="emphasis"><em>shift</em></span>, <span class="emphasis"><em>control</em></span>, <span class="emphasis"><em>ctrl</em></span>, <span class="emphasis"><em>meta</em></span><a href="#ftn.d0e11169" class="footnote" name="d0e11169"><sup class="footnote">[3]</sup></a>, <span class="emphasis"><em>alt</em></span>,
                                   <span class="emphasis"><em>altGraph</em></span></p>
                   </li>
                   <li class="listitem">
                      <p><code class="code">&lt;event&gt;</code> kan zijn: <span class="emphasis"><em>typed</em></span>, <span class="emphasis"><em>pressed</em></span>, <span class="emphasis"><em>released</em></span></p>
                   </li>
                   <li class="listitem">
-                     <p>en <code class="code">&lt;key&gt;</code> kan elke toets zijn die beschikbaar is op uw toetsenbord<a href="#ftn.d0e10561" class="footnote" name="d0e10561"><sup class="footnote">[4]</sup></a>.
+                     <p>en <code class="code">&lt;key&gt;</code> kan elke toets zijn die beschikbaar is op uw toetsenbord<a href="#ftn.d0e11203" class="footnote" name="d0e11203"><sup class="footnote">[4]</sup></a>.
                      </p>
                   </li>
                </ul>
             </div>
-            <p>Bijvoorbeeld, de standaard sneltoetsen voor OmegaT<a href="#ftn.d0e10569" class="footnote" name="d0e10569"><sup class="footnote">[5]</sup></a>, kan men vinden:
+            <p>Bijvoorbeeld, de standaard sneltoetsen voor OmegaT<a href="#ftn.d0e11211" class="footnote" name="d0e11211"><sup class="footnote">[5]</sup></a>, kan men vinden:
             </p>
             <div class="itemizedlist">
                <ul class="itemizedlist" style="list-style-type: disc; ">
@@ -97,8 +97,7 @@
             </div>
             <p>De eerste is de sneltoets voor <span class="guimenuitem">Project openen</span>, de tweede voor <span class="guimenuitem">Item voor woordenlijst maken</span>.
             </p>
-            <p>Indien u <span class="keycap"><strong>Shift</strong></span>+<span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>O</strong></span> wilt gebruiken om een project te openen, past u <code class="filename">MainMenuShortcuts.properties</code> als volgt aan:<code class="code">
-                      </code></p>
+            <p>Indien u <span class="keycap"><strong>Shift</strong></span>+<span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>O</strong></span> wilt gebruiken om een project te openen, past u <code class="filename">MainMenuShortcuts.properties</code> als volgt aan:<code class="code"> </code></p>
             <p><code class="code">projectOpenMenuItem=shift ctrl O</code>.
             </p>
             <p>Indien u een Mac gebruikt en u wilt de sneltoets <span class="keycap"><strong>Shift</strong></span>+<span class="keycap"><strong>Command</strong></span>+<span class="keycap"><strong>S</strong></span> toevoegen aan <span class="guimenu">Extra</span> → <span class="guimenuitem">Statistieken</span>, voeg dan de volgende regel toe aan uw <code class="filename">MainMenuShortcuts.properties</code>:<code class="code"></code></p>
@@ -117,12 +116,12 @@
                   </div>
                </div>
             </div>
-            <div class="table"><a name="d0e10646"></a><p class="title"><b>Tabel G.1. menu Project</b></p>
+            <div class="table"><a name="d0e11288"></a><p class="title"><b>Tabel H.1. menu Project</b></p>
                <div class="table-contents">
                   <table summary="menu Project" border="1">
                      <colgroup>
-                        <col width="120" align="left" class="1">
-                        <col width="80" align="left" class="2">
+                        <col align="left" class="1">
+                        <col align="left" class="2">
                         <col align="left" class="3">
                      </colgroup>
                      <thead>
@@ -142,6 +141,11 @@
                            <td align="left">Openen</td>
                            <td align="left"><span class="keycap"><strong>Ctrl+O</strong></span></td>
                            <td align="left">projectOpenMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Teamproject downloaden</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">projectTeamNewMenuItem</td>
                         </tr>
                         <tr>
                            <td align="left">Bronbestanden importeren...</td>
@@ -201,12 +205,12 @@
                   </div>
                </div>
             </div>
-            <div class="table"><a name="d0e10747"></a><p class="title"><b>Tabel G.2. menu Bewerken</b></p>
+            <div class="table"><a name="d0e11395"></a><p class="title"><b>Tabel H.2. menu Bewerken</b></p>
                <div class="table-contents">
                   <table summary="menu Bewerken" border="1">
                      <colgroup>
-                        <col width="120" align="left" class="1">
-                        <col width="80" align="left" class="2">
+                        <col align="left" class="1">
+                        <col align="left" class="2">
                         <col align="left" class="3">
                      </colgroup>
                      <thead>
@@ -298,17 +302,17 @@
                            <td align="left">editSelectFuzzy5MenuItem</td>
                         </tr>
                         <tr>
-                           <td align="left">Kleine letters</td>
+                           <td align="left">Schakel letters naar kleine letters</td>
                            <td align="left">&nbsp;</td>
                            <td align="left">lowerCaseMenuItem</td>
                         </tr>
                         <tr>
-                           <td align="left">Hoofdletters</td>
+                           <td align="left">Schakel letters naar Hoofdletters</td>
                            <td align="left">&nbsp;</td>
                            <td align="left">upperCaseMenuItem</td>
                         </tr>
                         <tr>
-                           <td align="left">Alle woorden hoofdletters</td>
+                           <td align="left">Schakel letters naar Alle woorden hoofdletter</td>
                            <td align="left">&nbsp;</td>
                            <td align="left">titleCaseMenuItem</td>
                         </tr>
@@ -316,6 +320,16 @@
                            <td align="left">Schakel Hoofd-/kleine letters naar...</td>
                            <td align="left"><span class="keycap"><strong>Shift+F3</strong></span></td>
                            <td align="left">cycleSwitchCaseMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Als standaard vertaling gebruiken</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">editMultipleDefault</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Alternatieve vertaling maken</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">editMultipleAlternate</td>
                         </tr>
                      </tbody>
                   </table>
@@ -330,12 +344,12 @@
                   </div>
                </div>
             </div>
-            <div class="table"><a name="d0e10920"></a><p class="title"><b>Tabel G.3. menu Ga naar</b></p>
+            <div class="table"><a name="d0e11580"></a><p class="title"><b>Tabel H.3. menu Ga naar</b></p>
                <div class="table-contents">
                   <table summary="menu Ga naar" border="1">
                      <colgroup>
-                        <col width="120" align="left" class="1">
-                        <col width="80" align="left" class="2">
+                        <col align="left" class="1">
+                        <col align="left" class="2">
                         <col align="left" class="3">
                      </colgroup>
                      <thead>
@@ -367,13 +381,23 @@
                            <td align="left">gotoSegmentMenuItem</td>
                         </tr>
                         <tr>
-                           <td align="left">Terug in geschiedenis...</td>
-                           <td align="left"><span class="keycap"><strong>Ctrl+Shift+P</strong></span></td>
-                           <td align="left">gotoHistoryForwardMenuItem</td>
+                           <td align="left">Volgende notitie</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">gotoNextNoteMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Vorige notitie</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">gotoPreviousNoteMenuItem</td>
                         </tr>
                         <tr>
                            <td align="left">Verder in geschiedenis...</td>
                            <td align="left"><span class="keycap"><strong>Ctrl+Shift+N</strong></span></td>
+                           <td align="left">gotoHistoryForwardMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Terug in geschiedenis...</td>
+                           <td align="left"><span class="keycap"><strong>Ctrl+Shift+P</strong></span></td>
                            <td align="left">gotoHistoryBackMenuItem</td>
                         </tr>
                      </tbody>
@@ -389,11 +413,11 @@
                   </div>
                </div>
             </div>
-            <div class="table"><a name="d0e10999"></a><p class="title"><b>Tabel G.4. menu Weergave</b></p>
-               <div class="table-contents"><a class="indexterm" name="d0e11002"></a><table summary="menu Weergave" border="1">
+            <div class="table"><a name="d0e11671"></a><p class="title"><b>Tabel H.4. menu Weergave</b></p>
+               <div class="table-contents"><a class="indexterm" name="d0e11674"></a><table summary="menu Weergave" border="1">
                      <colgroup>
-                        <col width="120" align="left" class="1">
-                        <col width="80" align="left" class="2">
+                        <col align="left" class="1">
+                        <col align="left" class="2">
                         <col align="left" class="3">
                      </colgroup>
                      <thead>
@@ -425,6 +449,26 @@
                            <td align="left">viewMarkNonUniqueSegmentsCheckBoxMenuItem</td>
                         </tr>
                         <tr>
+                           <td align="left">Segmenten met opmerkingen markeren</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">viewMarkNotedSegmentsCheckBoxMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Niet-afbreekbare spaties markeren</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">viewMarkNBSPCheckBoxMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Witruimte markeren</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">viewMarkWhitespaceCheckBoxMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Bidirectional Algorithm Control Characters markeren</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">viewMarkBidiCheckBoxMenuItem</td>
+                        </tr>
+                        <tr>
                            <td align="left">Info over wijzigingen/Niet weergeven</td>
                            <td align="left">&nbsp;</td>
                            <td align="left">viewDisplayModificationInfoNoneRadioButtonMenuItem</td>
@@ -452,12 +496,12 @@
                   </div>
                </div>
             </div>
-            <div class="table"><a name="d0e11065"></a><p class="title"><b>Tabel G.5. menu Extra</b></p>
+            <div class="table"><a name="d0e11761"></a><p class="title"><b>Tabel H.5. menu Extra</b></p>
                <div class="table-contents">
                   <table summary="menu Extra" border="1">
                      <colgroup>
-                        <col width="120" align="left" class="1">
-                        <col width="80" align="left" class="2">
+                        <col align="left" class="1">
+                        <col align="left" class="2">
                         <col align="left" class="3">
                      </colgroup>
                      <thead>
@@ -496,12 +540,12 @@
                   </div>
                </div>
             </div>
-            <div class="table"><a name="d0e11104"></a><p class="title"><b>Tabel G.6. menu Opties</b></p>
+            <div class="table"><a name="d0e11800"></a><p class="title"><b>Tabel H.6. menu Opties</b></p>
                <div class="table-contents">
                   <table summary="menu Opties" border="1">
                      <colgroup>
-                        <col width="120" align="left" class="1">
-                        <col width="80" align="left" class="2">
+                        <col align="left" class="1">
+                        <col align="left" class="2">
                         <col align="left" class="3">
                      </colgroup>
                      <thead>
@@ -583,7 +627,7 @@
                            <td align="left">optionsViewOptionsMenuItem</td>
                         </tr>
                         <tr>
-                           <td align="left">Opslaan...</td>
+                           <td align="left">Opslaan en uitvoer...</td>
                            <td align="left">&nbsp;</td>
                            <td align="left">optionsSaveOptionsMenuItem</td>
                         </tr>
@@ -610,12 +654,12 @@
                   </div>
                </div>
             </div>
-            <div class="table"><a name="d0e11224"></a><p class="title"><b>Tabel G.7. menu Help</b></p>
+            <div class="table"><a name="d0e11920"></a><p class="title"><b>Tabel H.7. menu Help</b></p>
                <div class="table-contents">
                   <table summary="menu Help" border="1">
                      <colgroup>
-                        <col width="120" align="left" class="1">
-                        <col width="80" align="left" class="2">
+                        <col align="left" class="1">
+                        <col align="left" class="2">
                         <col align="left" class="3">
                      </colgroup>
                      <thead>
@@ -641,22 +685,22 @@
                </div>
             </div><br class="table-break"></div>
          <div class="footnotes"><br><hr style="width:100; text-align:left;margin-left: 0">
-            <div id="ftn.d0e10493" class="footnote">
-               <p><a href="#d0e10493" class="para"><sup class="para">[2] </sup></a>De volledige syntaxis voor toetsaanslagen (sneltoetsen) wordt gedefinieerd in de volgende documentatie voor Java 1.6 van Oracle
+            <div id="ftn.d0e11135" class="footnote">
+               <p><a href="#d0e11135" class="para"><sup class="para">[2] </sup></a>De volledige syntaxis voor toetsaanslagen (sneltoetsen) wordt gedefinieerd in de volgende documentatie voor Java 1.6 van Oracle
                   (onderaan de bladzijde): <a class="ulink" href="http://docs.oracle.com/javase/6/docs/api/javax/swing/KeyStroke.html" target="_top">Java 1.6 keystrokes shortcuts</a></p>
             </div>
-            <div id="ftn.d0e10527" class="footnote">
-               <p><a href="#d0e10527" class="para"><sup class="para">[3] </sup></a>Op de Mac moet de modifier <span class="emphasis"><em>meta</em></span> worden gebruikt om de toets <span class="emphasis"><em>command</em></span> te specificeren.
+            <div id="ftn.d0e11169" class="footnote">
+               <p><a href="#d0e11169" class="para"><sup class="para">[3] </sup></a>Op de Mac moet de modifier <span class="emphasis"><em>meta</em></span> worden gebruikt om de toets <span class="emphasis"><em>command</em></span> te specificeren.
                </p>
             </div>
-            <div id="ftn.d0e10561" class="footnote">
-               <p><a href="#d0e10561" class="para"><sup class="para">[4] </sup></a>De mogelijke gebeurtenissen voor de toetsen (events) worden opgesomd op de volgende documentatie voor Java 1.6 van Oracle:
+            <div id="ftn.d0e11203" class="footnote">
+               <p><a href="#d0e11203" class="para"><sup class="para">[4] </sup></a>De mogelijke gebeurtenissen voor de toetsen (events) worden opgesomd op de volgende documentatie voor Java 1.6 van Oracle:
                   <a class="ulink" href="http://docs.oracle.com/javase/6/docs/api/java/awt/event/KeyEvent.html" target="_top">Java 1.6 keyEvents description</a></p>
             </div>
-            <div id="ftn.d0e10569" class="footnote">
-               <p><a href="#d0e10569" class="para"><sup class="para">[5] </sup></a>De standaard sneltoetsen voor OmegaT zijn beschikbaar via Sourceforge: <a class="ulink" href="http://omegat.svn.sourceforge.net/viewvc/omegat/branches/release-2-5/src/org/omegat/gui/main/MainMenuShortcuts.properties" target="_top">Default OmegaT Shortcuts</a></p>
+            <div id="ftn.d0e11211" class="footnote">
+               <p><a href="#d0e11211" class="para"><sup class="para">[5] </sup></a>De standaard sneltoetsen voor OmegaT zijn beschikbaar via Sourceforge: <a class="ulink" href="http://omegat.svn.sourceforge.net/viewvc/omegat/branches/release-2-6/src/org/omegat/gui/main/MainMenuShortcuts.properties" target="_top">Default OmegaT Shortcuts</a></p>
                <p>De standaard sneltoetsen voor OmegaT voor de Mac zijn ook beschikbaar via Sourceforge, zij gebruiken allemaal "meta" in plaats
-                  van "ctrl": <a class="ulink" href="http://omegat.svn.sourceforge.net/viewvc/omegat//branches/release-2-5/src/org/omegat/gui/main/MainMenuShortcuts.mac.properties" target="_top">Default OmegaT Shortcuts for the Mac</a></p>
+                  van "ctrl": <a class="ulink" href="http://omegat.svn.sourceforge.net/viewvc/omegat/branches/release-2-6/src/org/omegat/gui/main/MainMenuShortcuts.mac.properties" target="_top">Default OmegaT Shortcuts for the Mac</a></p>
             </div>
          </div>
       </div>
@@ -664,15 +708,15 @@
          <hr>
          <table width="100%" summary="Navigation footer">
             <tr>
-               <td width="40%" align="left"><a accesskey="p" href="appendix.keyboard.html">Terug</a>&nbsp;
+               <td width="40%" align="left"><a accesskey="p" href="appendix.website.html">Terug</a>&nbsp;
                </td>
                <td width="20%" align="center">&nbsp;</td>
                <td width="40%" align="right">&nbsp;<a accesskey="n" href="appendix.legal.notices.html">Volgende</a></td>
             </tr>
             <tr>
-               <td width="40%" align="left" valign="top">Bijlage F. Sneltoetsen voor het toetsenbord voor het bewerken&nbsp;</td>
+               <td width="40%" align="left" valign="top">Bijlage G. OmegaT op het web&nbsp;</td>
                <td width="20%" align="center"><a accesskey="h" href="index.html">Begin</a></td>
-               <td width="40%" align="right" valign="top">&nbsp;Bijlage H. Auteursrechten</td>
+               <td width="40%" align="right" valign="top">&nbsp;Bijlage I. Auteursrechten</td>
             </tr>
          </table>
       </div>

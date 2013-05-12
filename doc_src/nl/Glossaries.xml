@@ -11,7 +11,7 @@
 
   <para>Als een project in <application>OmegaT</application> één of meer woordenlijsten bevat, worden termen uit de woordenlijst die ook worden gevonden in het huidige segment automatisch weergegeven in het venster Woordenlijst.</para>
 
-  <para>U definieert de locatie ervan in het dialoogvenster Projecteigenschappen. De extensie moet <filename>.txt </filename>zijn (indien niet zal die worden toegevoegd). De locatie van het bestand moet liggen binnen de map <filename>/glossary</filename>, maar het mag in een diepere map staan (bijv. <filename>glossary/sub/glossary.txt</filename>). Het bestand hoeft niet te bestaan als het wordt ingesteld, het zal worden gemaakt (indien nodig) bij het toevoegen van een item voor de woordenlijst. Als het bestand al bestaat, wordt er geen poging gedaan om de indeling of de tekenset van het bestand te verifiëren: de nieuwe items zullen altijd in de indeling tab-gescheiden en UTF-8 zijn. Omdat de bestaande inhoud niet wordt geraakt, zal schade aan een bestaand bestand beperkt zijn.</para>
+  <para>U definieert de locatie ervan in het dialoogvenster Projecteigenschappen. De extensie moet <filename>.txt</filename> zijn (indien niet zal die worden toegevoegd). De locatie van het bestand moet liggen binnen de map <filename>/glossary</filename>, maar het mag in een diepere map staan (bijv. <filename>glossary/sub/glossary.txt</filename>). Het bestand hoeft niet te bestaan als het wordt ingesteld, het zal worden gemaakt (indien nodig) bij het toevoegen van een item voor de woordenlijst. Als het bestand al bestaat, wordt er geen poging gedaan om de indeling of de tekenset van het bestand te verifiëren: de nieuwe items zullen altijd in de indeling tab-gescheiden en UTF-8 zijn. Omdat de bestaande inhoud niet wordt geraakt, zal schade aan een bestaand bestand beperkt zijn.</para>
 
   <section>
     <title>Gebruik</title>
@@ -38,7 +38,7 @@
       </mediaobject>
     </figure>
 
-    <para>Het woord voor het =-teken is de bronterm en de vertaling is (of zijn) de woorden na =. Het woordenlijst-item kan een opmerking toegevoegd hebben (zie &quot;bedrijvend werkwoord&quot; voor het tweede item). De functie woordenlijst vindt alleen exacte overeenkomsten met het woordenlijst-item (bijv. vindt geen afgeleide vormen etc.). Nieuwe termen kunnen handmatig aan de bestanden voor de woordenlijst worden toegevoegd tijdens het vertalen,bijvoorbeeld in een tekstverwerkingsprogramma. Nieuw toegevoegde termen worden niet herkend vóórdat de wijzigingen in het tekstbestand zijn opgeslagen.</para>
+    <para>Het woord voor het =-teken is de bronterm en de vertaling is (of zijn) de woorden na =. Het item voor de woordenlijst kan een opmerking toegevoegd hebben. De functie woordenlijst vindt alleen exacte overeenkomsten met het woordenlijst-item (bijv. vindt geen afgeleide vormen etc.). Nieuwe termen kunnen handmatig aan de bestanden voor de woordenlijst worden toegevoegd tijdens het vertalen,bijvoorbeeld in een tekstverwerkingsprogramma. Nieuw toegevoegde termen worden niet herkend vóórdat de wijzigingen in het tekstbestand zijn opgeslagen.</para>
 
     <para>De bronterm behoeft geen item met één woord te zijn, zoals het volgende voorbeeld laat zien:</para>
 
@@ -88,7 +88,7 @@
         <primary>Woordenlijsten</primary> <secondary>een woordenlijst maken</secondary>
       </indexterm></title>
 
-    <para>De projectinstellingen maken het mogelijk een naam in te voeren voor een te beschrijven woordenlijstbestand (zie het begin van dit hoofdstuk). Nieuwe items toevoegen wordt gedaan met behulp van de sneltoets voor het toetsenbord <keycap>Ctrl+Shift+G</keycap>. Een dialoogvenster opent en maakt het u mogelijk de bronterm, doelterm en opmerkingen die u zou kunnen hebben in te voeren:</para>
+    <para>De projectinstellingen maken het mogelijk een naam in te voeren voor een te beschrijven woordenlijstbestand (zie het begin van dit hoofdstuk). Klik met rechts in het venster Woordenlijst of druk op <keycap>Ctrl+Shift+G</keycap> om een nieuw item toe te voegen. Een dialoogvenster opent en maakt het u mogelijk de bronterm, doelterm en opmerkingen die u zou kunnen hebben in te voeren:</para>
 
     <mediaobject role="html">
       <imageobject>

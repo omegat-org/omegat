@@ -15,21 +15,16 @@
 
   <para><application>OmegaT</application> gebruikt de volgende reeks stappen:</para>
 
-  <variablelist>
-    <varlistentry>
-      <term><indexterm class="singular">
+  <variablelist> <varlistentry> <term><indexterm class="singular">
           <primary>Segmentatie</primary> <secondary>segmentatie op niveau van de bron</secondary>
         </indexterm>Segmentatie op niveau van de structuur</term>
 
       <listitem>
         <para><application>OmegaT</application> parst eerst de tekst voor segmentatie op niveau van de structuur. Gedurende dit proces wordt alleen de structuur van het brondocument gebruikt om segmenten te maken.</para>
 
-        <para>Tekstbestanden kunnen bijvoorbeeld gesegmenteerd worden op regeleinden, lege regels of helemaal niet gesegmenteerd worden. Bestanden die opmaak bevatten (OpenOffice.org-documenten, HTML-documenten, etc.) worden gesegmenteerd op het blokniveau (alinea)tags. Vertaalbare object-attributen in XHTML of HTML-bestanden kunnen als afzonderlijke segmenten worden geëxtraheerd.</para>
+        <para>Tekstbestanden kunnen bijvoorbeeld gesegmenteerd worden op regeleinden, lege regels of helemaal niet gesegmenteerd worden. Bestanden die opmaak bevatten (ODF-documenten, HTML-documenten, etc.) worden gesegmenteerd op het blokniveau (alinea)tags. Vertaalbare object-attributen in XHTML of HTML-bestanden kunnen als afzonderlijke segmenten worden geëxtraheerd.</para>
       </listitem>
-    </varlistentry>
-
-    <varlistentry>
-      <term><indexterm class="singular">
+    </varlistentry> <varlistentry> <term><indexterm class="singular">
           <primary>Segmentatie</primary> <secondary>segmentatie op niveau van zin</secondary>
         </indexterm>Segmentatie op niveau van de zin</term>
 
@@ -48,21 +43,14 @@
 
     <para>De twee typen regels gedragen zich als volgt:</para>
 
-    <variablelist>
-      <varlistentry>
-        <term><indexterm class="singular">
+    <variablelist> <varlistentry> <term><indexterm class="singular">
             <primary>Segmentatie</primary> <secondary>regels</secondary> <tertiary>afbreekregel</tertiary>
           </indexterm>Afbreekregel</term>
 
         <listitem>
           <para>Verdeelt de brontekst in segmenten. Voorbeeld: &quot;<emphasis>Begrijpt u dat? Ik was er niet zeker van.</emphasis>&quot; zou moeten worden gescheiden in twee segmenten. Wat betekent dat er een afbreekregel zou moeten zijn voor &quot;?&quot;, indien die wordt gevolgd door spaties en een woord met een hoofdletter. Selecteer het keuzevak Afbreken/Uitzondering om een regel te definiëren als een Afbreekregel.</para>
         </listitem>
-      </varlistentry>
-    </variablelist>
-
-    <variablelist>
-      <varlistentry>
-        <term><indexterm class="singular">
+      </varlistentry> </variablelist> <variablelist> <varlistentry> <term><indexterm class="singular">
             <primary>Segmentatie</primary> <secondary>regels</secondary> <tertiary>uitzonderingsregel</tertiary>
           </indexterm>Uitzonderingsregel</term>
 
@@ -104,13 +92,13 @@
 
     <informaltable>
       <tgroup cols="4">
-        <colspec align="left" colnum="1" colwidth="150"/>
+        <colspec align="left" colnum="1"/>
 
-        <colspec align="center" colnum="2" colwidth="60"/>
+        <colspec align="center" colnum="2"/>
 
-        <colspec align="center" colnum="3" colwidth="60"/>
+        <colspec align="center" colnum="3"/>
 
-        <colspec align="left" colnum="4" colwidth="190"/>
+        <colspec align="left" colnum="4"/>
 
         <thead>
           <row>

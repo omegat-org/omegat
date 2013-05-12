@@ -9,9 +9,9 @@
     <title>Gedrag van de toets bij bewerken</title>
 
     <tgroup cols="2">
-      <colspec align="left" colnum="1" colwidth="90"/>
+      <colspec align="left" colnum="1"/>
 
-      <colspec align="left" colnum="2" colwidth="300"/>
+      <colspec align="left" colnum="2"/>
 
       <thead>
         <row>
@@ -163,7 +163,9 @@
     </listitem>
   </itemizedlist>
 
-  <para>De toets &quot;Shift&quot; omvat niet per definitie enig speciaal gedrag: indien de &quot;Shift&quot;-toets is ingedrukt verplaatsen alle toetsen de cursor op de hun gewone manier.</para>
+  <para>De toets &quot;Shift&quot; omvat niet per definitie enig speciaal gedrag: indien de &quot;Shift&quot;-toets is ingedrukt verplaatsen alle toetsen de cursor op de hun gewone manier, behalve in het geval van de combinatie <literal>Shift+Enter</literal>, die een regeleinde in de tekst invoert.</para>
 
-  <para>Systeembrede opdrachten: Plakken (<emphasis role="bold">Ctrl+V</emphasis> of <emphasis role="bold">Ctrl+Insert</emphasis>), Knippen (<emphasis role="bold">Ctrl+X</emphasis> of <emphasis role="bold">Ctrl+C)</emphasis>, Overeenkomst invoegen <emphasis role="bold">(Ctrl+I</emphasis>) en Bron invoegen (<emphasis role="bold">Ctrl+Shift+I</emphasis>) acteren in principe op elke selectie, inclusief die welke zich uitstrekken tot buiten het huidige segment. In een dergelijk geval zal de selectie natuurlijk worden beperkt tot de grenzen van het segment.</para>
+  <para>De systeembrede opdrachten Alles selecteren (<keycap>Ctrl+A</keycap>), Plakken (<emphasis role="bold">Ctrl+V</emphasis>), Knippen (<emphasis role="bold">Ctrl+X</emphasis>), kopiëren (<emphasis role="bold">Ctrl+C)</emphasis>, Overeenkomst invoegen <emphasis role="bold">(Ctrl+I</emphasis>) en Bron invoegen (<emphasis role="bold">Ctrl+Shift+I</emphasis>) acteren in principe alleen op de tekst binnen het momenteel geopende segment.</para>
+
+  <para>Onthoud dat u de sneltoetsen naar uw eigen voorkeuren kunt aanpassen. Zie <link linkend="ch04.shortcuts.customization">appendix Sneltoetsen aanpassen</link></para>
 </appendix>

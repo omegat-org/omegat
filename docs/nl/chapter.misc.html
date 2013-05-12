@@ -8,7 +8,7 @@
       <link rel="home" href="index.html" title="OmegaT - Gebruikershandleiding">
       <link rel="up" href="index.html" title="OmegaT - Gebruikershandleiding">
       <link rel="prev" href="chapter.spellchecker.html" title="Hoofdstuk 20. Spellingscontrole">
-      <link rel="next" href="appendix.TokenizerPlugin.inOmegaT.html" title="Bijlage A. plug-in Tokenizer">
+      <link rel="next" href="appendix.languages.html" title="Bijlage A. Talen - ISO 639 codelijst">
    </head>
    <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
       <div class="navheader">
@@ -20,7 +20,7 @@
                <td width="20%" align="left"><a accesskey="p" href="chapter.spellchecker.html">Terug</a>&nbsp;
                </td>
                <th width="60%" align="center">&nbsp;</th>
-               <td width="20%" align="right">&nbsp;<a accesskey="n" href="appendix.TokenizerPlugin.inOmegaT.html">Volgende</a></td>
+               <td width="20%" align="right">&nbsp;<a accesskey="n" href="appendix.languages.html">Volgende</a></td>
             </tr>
          </table>
          <hr>
@@ -29,7 +29,7 @@
          <div class="titlepage">
             <div>
                <div>
-                  <h1 class="title"><a name="chapter.misc"></a>Hoofdstuk 21. Diverse onderwerpen<a class="indexterm" name="d0e8175"></a></h1>
+                  <h1 class="title"><a name="chapter.misc"></a>Hoofdstuk 21. Diverse onderwerpen<a class="indexterm" name="d0e8524"></a></h1>
                </div>
             </div>
          </div>
@@ -44,7 +44,7 @@
                      <dt><span class="section"><a href="chapter.misc.html#misc.console.mode.option.validatetags">1.4. Optie Tags valideren</a></span></dt>
                   </dl>
                </dd>
-               <dt><span class="section"><a href="chapter.misc.html#d0e8354">2. Automatisch vergelijken van Java-eigenschappen</a></span></dt>
+               <dt><span class="section"><a href="chapter.misc.html#d0e8703">2. Automatisch vergelijken van Java-eigenschappen</a></span></dt>
                <dt><span class="section"><a href="chapter.misc.html#font.settings">3. Lettertype-instellingen</a></span></dt>
                <dt><span class="section"><a href="chapter.misc.html#preventing.data.loss">4. Gegevensverlies voorkomen</a></span></dt>
             </dl>
@@ -53,7 +53,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="omegat.misc.console.mode"></a>1. <span class="application"><a class="indexterm" name="d0e8181"></a>OmegaT</span> modus Console<a class="indexterm" name="d0e8188"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="omegat.misc.console.mode"></a>1. <span class="application"><a class="indexterm" name="d0e8530"></a>OmegaT</span> modus Console<a class="indexterm" name="d0e8537"></a></h2>
                   </div>
                </div>
             </div>
@@ -78,7 +78,7 @@
                <p>Een geldig project in OmegaT moet aanwezig zijn om OmegaT uit te kunnen voeren. De locatie maakt niet uit omdat het bij de
                   start toch al moet worden ingevuld in de opdrachtregel.
                </p>
-               <p>Indien u geen standaard instellingen wilt gebruiken, moeten de configuratiebestanden (<code class="literal">filters.conf</code> en <code class="literal">segmentation.conf)</code> aanwezig zijn. Dat kan op twee manieren worden bereikt:
+               <p>Indien u geen standaard instellingen wilt gebruiken, moeten de configuratiebestanden (<code class="literal">filters.conf</code> en <code class="literal">segmentation.conf</code>) aanwezig zijn. Dat kan op twee manieren worden bereikt:
                </p>
                <div class="itemizedlist">
                   <ul class="itemizedlist" style="list-style-type: disc; ">
@@ -105,7 +105,7 @@
                   </div>
                </div>
                <p>Enkele extra parameters moeten bij het starten worden opgegeven om OmegaT in modus console te starten. De meest belangrijke
-                  is <code class="literal">&lt;project-dir&gt;</code>, en optioneel<code class="literal"> --config-dir=&lt;config-dir&gt;. </code>Voorbeeld:
+                  van deze is <code class="literal">&lt;project-dir&gt;</code>, en optioneel <code class="literal">--config-dir=&lt;config-dir&gt;</code>. Voorbeeld:
                </p>
                <p><code class="literal">$&gt;java -jar <span class="application">OmegaT</span>.jar /pad/naar/project \</code></p>
                <p><code class="literal">--config-dir=/pad/naar/config-bestanden/ \</code></p>
@@ -158,8 +158,8 @@
                      </div>
                   </div>
                </div>
-               <p>Een extra parameter voor de opdrachtregel, specifiek voor de console-modus: <code class="literal">--quiet.</code> In de modus quiet, wordt er minder informatie gelogd op het scherm. De berichten die u normaal gesproken zou vinden in de
-                  statusbalk worden niet weergegeven.
+               <p>Een extra parameter voor de opdrachtregel, specifiek voor de modus console: <code class="literal">--quiet</code>. In de modus quiet, wordt minder informatie gelogd op het scherm. De berichten die u normaal gesproken zou vinden in de statusbalk
+                  worden niet weergegeven.
                </p>
                <p>Gebruik: <code class="literal">java -jar <span class="application">OmegaT</span>.jar /pad/naar/project --mode=console-translate --quiet</code></p>
             </div>
@@ -172,8 +172,8 @@
                      </div>
                   </div>
                </div>
-               <p>Een andere parameter voor de opdrachtregel, specifiek voor de console-modus: <code class="literal">--tag-validation=[abort|warn].</code> Als deze parameter wordt toegevoegd, wordt het valideren van tags toegepast voorafgaande aan vertalen/uitlijnen. Als de waarde
-                  <code class="literal">abort</code> is dan worden bij tagfouten de fouten afgedrukt en het programma stopt. Als de waarde <code class="literal">warn</code> is dan worden fouten afgedrukt maar OmegaT gaat door.
+               <p>Een andere parameter voor de opdrachtregel, specifiek voor de modus console: <code class="literal">--tag-validation=[abort|warn]</code>. Als deze parameter wordt toegevoegd, wordt het valideren van tags toegepast voorafgaande aan vertalen/uitlijnen. Als de
+                  waarde <code class="literal">abort</code> is dan worden bij tagfouten de fouten afgedrukt en het programma stopt. Als de waarde <code class="literal">warn</code> is dan worden fouten afgedrukt maar OmegaT gaat door.
                </p>
                <p>Gebruik: <code class="literal">java -jar <span class="application">OmegaT</span>.jar /pad/naar/project --mode=console-translate --tag-validation=abort</code></p>
             </div>
@@ -182,7 +182,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="d0e8354"></a>2. Automatisch vergelijken van Java-eigenschappen<a class="indexterm" name="d0e8357"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="d0e8703"></a>2. Automatisch vergelijken van Java-eigenschappen<a class="indexterm" name="d0e8706"></a></h2>
                   </div>
                </div>
             </div>
@@ -199,7 +199,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="font.settings"></a>3. Lettertype-instellingen<a class="indexterm" name="d0e8380"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="font.settings"></a>3. Lettertype-instellingen<a class="indexterm" name="d0e8729"></a></h2>
                   </div>
                </div>
             </div>
@@ -227,7 +227,7 @@
                   </li>
                </ul>
             </div>
-            <p>Het dialoogvenster kan worden aangeroepen door het item in het hoofdmenu <a class="indexterm" name="d0e8406"></a><span class="guimenu">Opties</span> → <span class="guimenuitem">Lettertype...</span>. Het dialoogvenster bevat:
+            <p>Het dialoogvenster kan worden aangeroepen door het item in het hoofdmenu <a class="indexterm" name="d0e8755"></a><span class="guimenu">Opties</span> → <span class="guimenuitem">Lettertype...</span>. Het dialoogvenster bevat:
             </p>
             <div class="itemizedlist">
                <ul class="itemizedlist" style="list-style-type: disc; ">
@@ -264,11 +264,11 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="preventing.data.loss"></a>4. Gegevensverlies voorkomen<a class="indexterm" name="d0e8442"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="preventing.data.loss"></a>4. Gegevensverlies voorkomen<a class="indexterm" name="d0e8791"></a></h2>
                   </div>
                </div>
             </div>
-            <p><span class="application">OmegaT</span> is een robuuste toepassing. U zou echter toch voorzorgen moeten nemen tegen gegevensverlies als u <span class="application">OmegaT</span> gebruikt, net als met elke andere toepassing. Bij het vertalen van uw bestanden slaat <span class="application">OmegaT</span> al uw voortgang op in het vertaalgeheugen <code class="literal">project_save.tmx</code> in de submap <code class="literal">/omegat</code> van het project.
+            <p><span class="application">OmegaT</span> is een robuuste toepassing. U zou echter toch voorzorgen moeten nemen tegen gegevensverlies als u <span class="application">OmegaT</span> gebruikt, net als met elke andere toepassing. Bij het vertalen van uw bestanden slaat <span class="application">OmegaT</span> al uw voortgang op in het vertaalgeheugen <code class="literal">project_save.tmx</code> die zich bevindt in de submap <code class="literal">/omegat</code> van het project.
             </p>
             <p>OmegaT slaat ook, elke keer als een project wordt geopend of herladen, een kopie van het vertaalgeheugen op in project_save.tmx.JAARMMDDUUMM.bak
                in dezelfde submap. JAAR is 4-getallen jaar, MM is de maand, DD de dag van de maand, en UU en MM zijn de uren en minuten van
@@ -332,12 +332,16 @@
                <td width="40%" align="left"><a accesskey="p" href="chapter.spellchecker.html">Terug</a>&nbsp;
                </td>
                <td width="20%" align="center">&nbsp;</td>
-               <td width="40%" align="right">&nbsp;<a accesskey="n" href="appendix.TokenizerPlugin.inOmegaT.html">Volgende</a></td>
+               <td width="40%" align="right">&nbsp;<a accesskey="n" href="appendix.languages.html">Volgende</a></td>
             </tr>
             <tr>
                <td width="40%" align="left" valign="top">Hoofdstuk 20. Spellingscontrole&nbsp;</td>
                <td width="20%" align="center"><a accesskey="h" href="index.html">Begin</a></td>
-               <td width="40%" align="right" valign="top">&nbsp;Bijlage A. plug-in Tokenizer</td>
+               <td width="40%" align="right" valign="top">&nbsp;Bijlage A. Talen - ISO 639 codelijst
+                    
+                    
+                    
+               </td>
             </tr>
          </table>
       </div>

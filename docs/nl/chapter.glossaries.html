@@ -29,17 +29,17 @@
          <div class="titlepage">
             <div>
                <div>
-                  <h1 class="title"><a name="chapter.glossaries"></a>Hoofdstuk 18. Woordenlijsten<a class="indexterm" name="d0e7625"></a><a class="indexterm" name="d0e7630"></a></h1>
+                  <h1 class="title"><a name="chapter.glossaries"></a>Hoofdstuk 18. Woordenlijsten<a class="indexterm" name="d0e7973"></a><a class="indexterm" name="d0e7978"></a></h1>
                </div>
             </div>
          </div>
          <div class="toc">
             <dl class="toc">
-               <dt><span class="section"><a href="chapter.glossaries.html#d0e7654">1. Gebruik</a></span></dt>
-               <dt><span class="section"><a href="chapter.glossaries.html#d0e7709">2. Bestandsformaat</a></span></dt>
-               <dt><span class="section"><a href="chapter.glossaries.html#d0e7748">3. Hoe zijn woordenlijsten te maken</a></span></dt>
-               <dt><span class="section"><a href="chapter.glossaries.html#d0e7794">4. Trados Multiterm gebruiken</a></span></dt>
-               <dt><span class="section"><a href="chapter.glossaries.html#d0e7810">5. Algemene problemen met woordenlijsten</a></span></dt>
+               <dt><span class="section"><a href="chapter.glossaries.html#d0e8002">1. Gebruik</a></span></dt>
+               <dt><span class="section"><a href="chapter.glossaries.html#d0e8057">2. Bestandsformaat</a></span></dt>
+               <dt><span class="section"><a href="chapter.glossaries.html#d0e8096">3. Hoe zijn woordenlijsten te maken</a></span></dt>
+               <dt><span class="section"><a href="chapter.glossaries.html#d0e8142">4. Trados Multiterm gebruiken</a></span></dt>
+               <dt><span class="section"><a href="chapter.glossaries.html#d0e8158">5. Algemene problemen met woordenlijsten</a></span></dt>
             </dl>
          </div>
          <p>Woordenlijsten zijn bestanden die handmatig gemaakt en bijgewerkt worden voor gebruik in <span class="application">OmegaT</span>.
@@ -47,7 +47,7 @@
          <p>Als een project in <span class="application">OmegaT</span> één of meer woordenlijsten bevat, worden termen uit de woordenlijst die ook worden gevonden in het huidige segment automatisch
             weergegeven in het venster Woordenlijst.
          </p>
-         <p>U definieert de locatie ervan in het dialoogvenster Projecteigenschappen. De extensie moet <code class="filename">.txt </code>zijn (indien niet zal die worden toegevoegd). De locatie van het bestand moet liggen binnen de map <code class="filename">/glossary</code>, maar het mag in een diepere map staan (bijv. <code class="filename">glossary/sub/glossary.txt</code>). Het bestand hoeft niet te bestaan als het wordt ingesteld, het zal worden gemaakt (indien nodig) bij het toevoegen van
+         <p>U definieert de locatie ervan in het dialoogvenster Projecteigenschappen. De extensie moet <code class="filename">.txt</code> zijn (indien niet zal die worden toegevoegd). De locatie van het bestand moet liggen binnen de map <code class="filename">/glossary</code>, maar het mag in een diepere map staan (bijv. <code class="filename">glossary/sub/glossary.txt</code>). Het bestand hoeft niet te bestaan als het wordt ingesteld, het zal worden gemaakt (indien nodig) bij het toevoegen van
             een item voor de woordenlijst. Als het bestand al bestaat, wordt er geen poging gedaan om de indeling of de tekenset van het
             bestand te verifiëren: de nieuwe items zullen altijd in de indeling tab-gescheiden en UTF-8 zijn. Omdat de bestaande inhoud
             niet wordt geraakt, zal schade aan een bestaand bestand beperkt zijn.
@@ -56,36 +56,36 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="d0e7654"></a>1. Gebruik
+                     <h2 class="title" style="clear: both"><a name="d0e8002"></a>1. Gebruik
                      </h2>
                   </div>
                </div>
             </div>
-            <p>Plaats een bestaande woordenlijst eenvoudigweg in de map<a class="indexterm" name="d0e7659"></a> <code class="filename">/glossary</code>, na het maken van het project, om die te gebruiken. <span class="application">OmegaT</span> detecteert automatisch woordenlijstbestanden in deze map als een project wordt geopend. Termen in het huidige segment die
+            <p>Plaats een bestaande woordenlijst eenvoudigweg in de map<a class="indexterm" name="d0e8007"></a> <code class="filename">/glossary</code>, na het maken van het project, om die te gebruiken. <span class="application">OmegaT</span> detecteert automatisch woordenlijstbestanden in deze map als een project wordt geopend. Termen in het huidige segment die
                <span class="application">OmegaT</span> vindt in het/de woordenlijstbestand(en) worden weergegeven in het venster Woordenlijst:
-            </p><a class="indexterm" name="d0e7674"></a><div class="figure"><a name="d0e7677"></a><p class="title"><b>Afbeelding 18.1. venster Woordenlijst</b></p>
+            </p><a class="indexterm" name="d0e8022"></a><div class="figure"><a name="d0e8025"></a><p class="title"><b>Afbeelding 18.1. venster Woordenlijst</b></p>
                <div class="figure-contents">
                   <div class="mediaobject"><img src="images/GlossaryPane_25.png" alt="venster Woordenlijst"></div>
                </div>
-            </div><br class="figure-break"><p>Het woord voor het =-teken is de bronterm en de vertaling is (of zijn) de woorden na =. Het woordenlijst-item kan een opmerking
-               toegevoegd hebben (zie "bedrijvend werkwoord" voor het tweede item). De functie woordenlijst vindt alleen exacte overeenkomsten
-               met het woordenlijst-item (bijv. vindt geen afgeleide vormen etc.). Nieuwe termen kunnen handmatig aan de bestanden voor de
-               woordenlijst worden toegevoegd tijdens het vertalen,bijvoorbeeld in een tekstverwerkingsprogramma. Nieuw toegevoegde termen
-               worden niet herkend vóórdat de wijzigingen in het tekstbestand zijn opgeslagen.
+            </div><br class="figure-break"><p>Het woord voor het =-teken is de bronterm en de vertaling is (of zijn) de woorden na =. Het item voor de woordenlijst kan
+               een opmerking toegevoegd hebben. De functie woordenlijst vindt alleen exacte overeenkomsten met het woordenlijst-item (bijv.
+               vindt geen afgeleide vormen etc.). Nieuwe termen kunnen handmatig aan de bestanden voor de woordenlijst worden toegevoegd
+               tijdens het vertalen,bijvoorbeeld in een tekstverwerkingsprogramma. Nieuw toegevoegde termen worden niet herkend vóórdat de
+               wijzigingen in het tekstbestand zijn opgeslagen.
             </p>
             <p>De bronterm behoeft geen item met één woord te zijn, zoals het volgende voorbeeld laat zien:</p>
-            <div class="figure"><a name="d0e7689"></a><p class="title"><b>Afbeelding 18.2. items met meerdere woorden in woordenlijsten - voorbeeld<a class="indexterm" name="d0e7692"></a></b></p>
+            <div class="figure"><a name="d0e8037"></a><p class="title"><b>Afbeelding 18.2. items met meerdere woorden in woordenlijsten - voorbeeld<a class="indexterm" name="d0e8040"></a></b></p>
                <div class="figure-contents">
                   <div class="mediaobject"><img src="images/MultiTerm_Glossary_25.png" alt="items met meerdere woorden in woordenlijsten - voorbeeld"></div>
                </div>
             </div><br class="figure-break"><p>Het onderstreepte item "pop-upmenu" kan worden gevonden in het venster Woordenlijst als "pojavni menu". Door het te accentueren
-               in het venster Woordenlijst en er dan met rechts op te klikken voegt het in op de cursorpositie in het doelsegment.<a href="#ftn.d0e7706" class="footnote" name="d0e7706"><sup class="footnote">[1]</sup></a></p>
+               in het venster Woordenlijst en er dan met rechts op te klikken voegt het in op de cursorpositie in het doelsegment.<a href="#ftn.d0e8054" class="footnote" name="d0e8054"><sup class="footnote">[1]</sup></a></p>
          </div>
          <div class="section">
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="d0e7709"></a>2. <a class="indexterm" name="d0e7711"></a>Bestandsformaat<a class="indexterm" name="d0e7717"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="d0e8057"></a>2. <a class="indexterm" name="d0e8059"></a>Bestandsformaat<a class="indexterm" name="d0e8065"></a></h2>
                   </div>
                </div>
             </div>
@@ -100,29 +100,30 @@
                te hebben:
             </p>
             <p><code class="literal">"This is a source term, which contains a comma","Dit is een bronterm, die een komma bevat"</code></p>
-            <p>In aanvulling op het platte tekst-formaat, wordt TBX-formaat <a class="indexterm" name="d0e7733"></a> ook ondersteund. TBX - Term Base eXchange - is de open, op XML gebaseerde standaard voor de uitwisseling van gestructureerde
+            <p>In aanvulling op het platte tekst-formaat, wordt TBX-formaat <a class="indexterm" name="d0e8081"></a> ook ondersteund. TBX - Term Base eXchange - is de open, op XML gebaseerde standaard voor de uitwisseling van gestructureerde
                terminologische gegevens. TBX is goedgekeurd als een internationale standaard door LISA en ISO. Als u een bestaand systeem
                hebt voor de afhandeling van terminologie - MultiTerm bijvoorbeeld - is het zeer wel mogelijk dat het de mogelijkheid biedt
-               om gegevens van terminologie in TBX-formaat te exporteren. <a class="ulink" href="http://www.microsoft.com/Language/en-US/Terminology.aspx" target="_top">Microsoft Terminology Collection</a> <a class="indexterm" name="d0e7742"></a>kan worden gedownload in bijna 100 talen en kan dienen als hoeksteen IT-woordenlijst.
+               om gegevens van terminologie in TBX-formaat te exporteren. <a class="ulink" href="http://www.microsoft.com/Language/en-US/Terminology.aspx" target="_top">Microsoft Terminology Collection</a> <a class="indexterm" name="d0e8090"></a>kan worden gedownload in bijna 100 talen en kan dienen als hoeksteen IT-woordenlijst.
             </p>
          </div>
          <div class="section">
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="d0e7748"></a>3. Hoe zijn woordenlijsten te maken<a class="indexterm" name="d0e7751"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="d0e8096"></a>3. Hoe zijn woordenlijsten te maken<a class="indexterm" name="d0e8099"></a></h2>
                   </div>
                </div>
             </div>
             <p>De projectinstellingen maken het mogelijk een naam in te voeren voor een te beschrijven woordenlijstbestand (zie het begin
-               van dit hoofdstuk). Nieuwe items toevoegen wordt gedaan met behulp van de sneltoets voor het toetsenbord <span class="keycap"><strong>Ctrl+Shift+G</strong></span>. Een dialoogvenster opent en maakt het u mogelijk de bronterm, doelterm en opmerkingen die u zou kunnen hebben in te voeren:
+               van dit hoofdstuk). Klik met rechts in het venster Woordenlijst of druk op <span class="keycap"><strong>Ctrl+Shift+G</strong></span> om een nieuw item toe te voegen. Een dialoogvenster opent en maakt het u mogelijk de bronterm, doelterm en opmerkingen die
+               u zou kunnen hebben in te voeren:
             </p>
             <div class="mediaobject"><img src="images/GlossaryEntry_25.png"></div>
             <p>De inhoud van bestanden met woordenlijsten worden in het geheugen bewaard en geladen als het project wordt geopend of opnieuw
                geladen. Bijwerken van een woordenlijstbestand is dus vrij eenvoudig: druk op <span class="keycap"><strong>Ctrl+Shift+G</strong></span> en voer de nieuwe term in, de vertaling ervan en opmerkingen die u zou kunnen hebben (zorg er voor dat u op 'tab' drukt tussen
                de velden) en sla het bestand op. De inhoud van het venster Woordenlijst zal overeenkomstig worden bijgewerkt.
             </p>
-            <p><a class="indexterm" name="d0e7772"></a>De locatie van het te beschrijven bestand voor de woordenlijst kan worden ingesteld in het dialoogvenster <span class="guimenuitem">Project &gt; Eigenschappen ...</span>. De te herkennen extensies zijn <code class="filename">TXT</code> en <code class="filename">UTF8</code>.
+            <p><a class="indexterm" name="d0e8120"></a>De locatie van het te beschrijven bestand voor de woordenlijst kan worden ingesteld in het dialoogvenster <span class="guimenuitem">Project &gt; Eigenschappen ...</span>. De te herkennen extensies zijn <code class="filename">TXT</code> en <code class="filename">UTF8</code>.
             </p>
             <p><span class="bold"><strong>Opmerking: </strong></span>Natuurlijk zijn er andere manieren en mogelijkheden om een eenvoudig bestand met tabgescheiden items te maken. Er is niets
                tegen het gebruiken van Notepad++ op Windows of GEdit op Linux of een werkbladprogramma voor dit doel: elk programma dat UTF8
@@ -133,7 +134,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="d0e7794"></a>4. <a class="indexterm" name="d0e7796"></a>Trados Multiterm gebruiken
+                     <h2 class="title" style="clear: both"><a name="d0e8142"></a>4. <a class="indexterm" name="d0e8144"></a>Trados Multiterm gebruiken
                      </h2>
                   </div>
                </div>
@@ -148,7 +149,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="d0e7810"></a>5. <a class="indexterm" name="d0e7812"></a>Algemene problemen met woordenlijsten
+                     <h2 class="title" style="clear: both"><a name="d0e8158"></a>5. <a class="indexterm" name="d0e8160"></a>Algemene problemen met woordenlijsten
                      </h2>
                   </div>
                </div>
@@ -224,8 +225,8 @@
             </div>
          </div>
          <div class="footnotes"><br><hr style="width:100; text-align:left;margin-left: 0">
-            <div id="ftn.d0e7706" class="footnote">
-               <p><a href="#d0e7706" class="para"><sup class="para">[1] </sup></a>Onthoud dat in het bovenstaande geval, dit slechts het halve verhaal (of zelfs nog minder is) is, omdat de doeltaal (Sloveens)
+            <div id="ftn.d0e8054" class="footnote">
+               <p><a href="#d0e8054" class="para"><sup class="para">[1] </sup></a>Onthoud dat in het bovenstaande geval, dit slechts het halve verhaal (of zelfs nog minder is) is, omdat de doeltaal (Sloveens)
                   verbuigingen gebruikt. Dus het ingevoegde "pojavni meni" in de nominatieve vorm - moet worden gewijzigd naar "pojavnem meniju",
                   d.i. naar de locatief. Dus is het waarschijnlijk sneller om de term direct correct in te typen zonder u bezig te houden met
                   de woordenlijst en de sneltoetsen daarvan.

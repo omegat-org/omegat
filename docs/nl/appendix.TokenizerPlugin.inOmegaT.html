@@ -2,22 +2,22 @@
    <head>
       <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
    
-      <title>Bijlage A. plug-in Tokenizer</title>
+      <title>Bijlage D. plug-in Tokenizer</title>
       <link rel="stylesheet" type="text/css" href="OmegaT.css">
       <meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
       <link rel="home" href="index.html" title="OmegaT - Gebruikershandleiding">
       <link rel="up" href="index.html" title="OmegaT - Gebruikershandleiding">
-      <link rel="prev" href="chapter.misc.html" title="Hoofdstuk 21. Diverse onderwerpen">
-      <link rel="next" href="appendix.LanguageToolPlugin.inOmegaT.html" title="Bijlage B. plug-in LanguageTool">
+      <link rel="prev" href="appendix.TeamProjects.html" title="Bijlage C. OmegaT Teamprojecten">
+      <link rel="next" href="appendix.LanguageToolPlugin.inOmegaT.html" title="Bijlage E. plug-in LanguageTool">
    </head>
    <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
       <div class="navheader">
          <table width="100%" summary="Navigation header">
             <tr>
-               <th colspan="3" align="center">Bijlage A. plug-in Tokenizer</th>
+               <th colspan="3" align="center">Bijlage D. plug-in Tokenizer</th>
             </tr>
             <tr>
-               <td width="20%" align="left"><a accesskey="p" href="chapter.misc.html">Terug</a>&nbsp;
+               <td width="20%" align="left"><a accesskey="p" href="appendix.TeamProjects.html">Terug</a>&nbsp;
                </td>
                <th width="60%" align="center">&nbsp;</th>
                <td width="20%" align="right">&nbsp;<a accesskey="n" href="appendix.LanguageToolPlugin.inOmegaT.html">Volgende</a></td>
@@ -29,23 +29,23 @@
          <div class="titlepage">
             <div>
                <div>
-                  <h1 class="title"><a name="appendix.TokenizerPlugin.inOmegaT"></a>Bijlage A. plug-in Tokenizer<a class="indexterm" name="d0e8524"></a></h1>
+                  <h1 class="title"><a name="appendix.TokenizerPlugin.inOmegaT"></a>Bijlage D. plug-in Tokenizer<a class="indexterm" name="d0e10729"></a></h1>
                </div>
             </div>
          </div>
          <div class="toc">
             <dl class="toc">
-               <dt><span class="section"><a href="appendix.TokenizerPlugin.inOmegaT.html#d0e8529">1. Introductie</a></span></dt>
-               <dt><span class="section"><a href="appendix.TokenizerPlugin.inOmegaT.html#d0e8558">2. Installatie en gebruik van de opdrachtregel</a></span></dt>
-               <dt><span class="section"><a href="appendix.TokenizerPlugin.inOmegaT.html#d0e8575">3. Mac OS X specifieken</a></span></dt>
-               <dt><span class="section"><a href="appendix.TokenizerPlugin.inOmegaT.html#d0e8589">4. Probleemoplossing</a></span></dt>
+               <dt><span class="section"><a href="appendix.TokenizerPlugin.inOmegaT.html#d0e10734">1. Introductie</a></span></dt>
+               <dt><span class="section"><a href="appendix.TokenizerPlugin.inOmegaT.html#d0e10763">2. Installatie en gebruik van de opdrachtregel</a></span></dt>
+               <dt><span class="section"><a href="appendix.TokenizerPlugin.inOmegaT.html#d0e10780">3. Mac OS X specifieken</a></span></dt>
+               <dt><span class="section"><a href="appendix.TokenizerPlugin.inOmegaT.html#d0e10794">4. Probleemoplossing</a></span></dt>
             </dl>
          </div>
          <div class="section">
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="d0e8529"></a>1. Introductie<a class="indexterm" name="d0e8532"></a><a class="indexterm" name="d0e8537"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="d0e10734"></a>1. Introductie<a class="indexterm" name="d0e10737"></a><a class="indexterm" name="d0e10742"></a></h2>
                   </div>
                </div>
             </div>
@@ -86,7 +86,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="d0e8558"></a>2. Installatie en gebruik van de opdrachtregel
+                     <h2 class="title" style="clear: both"><a name="d0e10763"></a>2. Installatie en gebruik van de opdrachtregel
                      </h2>
                   </div>
                </div>
@@ -105,15 +105,15 @@
                Als u bijvoorbeeld de Lucene CJK tokenizer wilt gebruiken voor de brontaal en de Lucene French tokenizer in de doeltaal, zal
                uw opdracht er als volgt uitzien:
             </p>
-            <p><code class="literal">java -jar OmegaT.jar --ITokenizer=org.omegat.plugins.
-                      tokenizer.LuceneCJKTokenizer --ITokenizerTarget=org.omegat.plugins.
-                      tokenizer.LuceneFrenchTokenizer</code></p>
+            <p><code class="literal">java -jar OmegaT.jar
+                      --ITokenizer=org.omegat.plugins.tokenizer.LuceneCJKTokenizer
+                      --ITokenizerTarget=org.omegat.plugins.tokenizer.LuceneFrenchTokenizer</code></p>
          </div>
          <div class="section">
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="d0e8575"></a>3. Mac OS X specifieken
+                     <h2 class="title" style="clear: both"><a name="d0e10780"></a>3. Mac OS X specifieken
                      </h2>
                   </div>
                </div>
@@ -130,8 +130,7 @@
                      &lt;key&gt;Arguments&lt;/key&gt;<br>
                      &lt;array&gt;<br>
                      &nbsp;&nbsp;&lt;string&gt;--ITokenizer=org.omegat.plugins.tokenizer.LuceneCJKTokenizer&lt;/string&gt;<br>
-                     &nbsp;&nbsp;&lt;string&gt;--ITokenizerTarget=org.omegat.plugins.tokenizer.<br>
-                     &nbsp;&nbsp;LuceneFrenchTokenizer&lt;/string&gt;<br>
+                     &nbsp;&nbsp;&lt;string&gt;--ITokenizerTarget=org.omegat.plugins.tokenizer.LuceneFrenchTokenizer&lt;/string&gt;<br>
                      &lt;/array&gt;</code></p>
             </div>
          </div>
@@ -139,7 +138,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="d0e8589"></a>4. Probleemoplossing
+                     <h2 class="title" style="clear: both"><a name="d0e10794"></a>4. Probleemoplossing
                      </h2>
                   </div>
                </div>
@@ -163,8 +162,8 @@
                      12719:&nbsp;Info:&nbsp;Target&nbsp;tokenizer:&nbsp;org.omegat.core.matching.Tokenizer&nbsp;<br>
                      </code></p>
             </div>
-            <p>Met het Mac OS X OmegaT.app pakket moet u dubbelklikken op de <code class="literal">JavaApplicationStub</code> die is geplaatst in /OmegaT.app/Contents/MacOS/ (kijk hierboven om toegang te verkrijgen) om OmegaT te starten vanuit de
-               console en direct toegang te hebben tot het log.
+            <p>Met het Mac OS X OmegaT.app pakket, dubbelklik op de <code class="literal">JavaApplicationStub</code> die is geplaatst in /OmegaT.app/Contents/MacOS/ (kijk hierboven om toegang te verkrijgen) om OmegaT te starten vanuit de
+               console en direct toegang te krijgen tot het log.
             </p>
          </div>
       </div>
@@ -172,15 +171,15 @@
          <hr>
          <table width="100%" summary="Navigation footer">
             <tr>
-               <td width="40%" align="left"><a accesskey="p" href="chapter.misc.html">Terug</a>&nbsp;
+               <td width="40%" align="left"><a accesskey="p" href="appendix.TeamProjects.html">Terug</a>&nbsp;
                </td>
                <td width="20%" align="center">&nbsp;</td>
                <td width="40%" align="right">&nbsp;<a accesskey="n" href="appendix.LanguageToolPlugin.inOmegaT.html">Volgende</a></td>
             </tr>
             <tr>
-               <td width="40%" align="left" valign="top">Hoofdstuk 21. Diverse onderwerpen&nbsp;</td>
+               <td width="40%" align="left" valign="top">Bijlage C. OmegaT Teamprojecten&nbsp;</td>
                <td width="20%" align="center"><a accesskey="h" href="index.html">Begin</a></td>
-               <td width="40%" align="right" valign="top">&nbsp;Bijlage B. plug-in LanguageTool</td>
+               <td width="40%" align="right" valign="top">&nbsp;Bijlage E. plug-in LanguageTool</td>
             </tr>
          </table>
       </div>

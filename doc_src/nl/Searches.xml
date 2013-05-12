@@ -74,13 +74,13 @@
 
     <itemizedlist>
       <listitem>
-        <para>'*' komt overeen met nul of meer tekens, vanaf de huidige positie in een opgegeven woord tot het einde ervan. De zoekterm '<literal>run*</literal>' zal bijvoorbeeld overeenkomen met '<literal>run</literal>', '<literal>runs</literal>' en '<literal>running</literal>'.</para>
+        <para>'*' komt overeen met nul of meer tekens, vanaf de huidige positie in een opgegeven woord tot het einde ervan. De zoekterm <literal>'run*'</literal> zal bijvoorbeeld overeenkomen met <literal>'run</literal>, <literal>'runs'</literal>' en <literal>'running'</literal>.</para>
       </listitem>
     </itemizedlist>
 
     <itemizedlist>
       <listitem>
-        <para>'?' komt overeen met exact één teken. '<literal>run?</literal>' zal bijvoorbeeld overeenkomen met '<literal>runs</literal>' en '<literal>runn</literal>' in het woord '<literal>running</literal>'.</para>
+        <para>'?' komt overeen met exact één teken. <literal>'run?'</literal> zal bijvoorbeeld overeenkomen met <literal>'runs'</literal>' en <literal>'runn'</literal>' in het woord <literal>'running'</literal>.</para>
       </listitem>
     </itemizedlist>
 
@@ -92,27 +92,19 @@
         <primary>Zoeken</primary> <secondary>Methoden en opties</secondary>
       </indexterm></title>
 
-    <para>Selecteer de methode met behulp van de optieknoppen. U kunt kiezen uit twee methodes om te zoeken:</para>
+    <para>Selecteer de methode met behulp van de optieknoppen. De volgende methoden om te zoeken zijn beschikbaar:</para>
 
-    <variablelist>
-      <varlistentry>
-        <term>Exact zoeken</term>
+    <variablelist> <varlistentry> <term>Exact zoeken</term>
 
         <listitem>
           <para>Zoekt naar segmenten die de exacte tekenreeks bevatten die u heeft opgegeven. Exact zoeken zoekt naar een frase, d.i. als er meerdere woorden zijn ingevoerd, zullen zij slechts worden gevonden als zij in exact dezelfde volgorde voorkomen. Zoeken naar <literal>geopend bestand</literal> zal dus alle entiteiten van de tekenreeks <emphasis><literal>geopend bestand</literal></emphasis> vinden, maar niet <emphasis><literal>bestand geopend</literal></emphasis> of <emphasis><literal>geopend invoerbestand</literal></emphasis>.</para>
         </listitem>
-      </varlistentry>
-
-      <varlistentry>
-        <term>Sleutelwoorden zoeken</term>
+      </varlistentry> <varlistentry> <term>Sleutelwoorden zoeken</term>
 
         <listitem>
           <para>Zoekt naar segmenten die alle sleutelwoorden bevatten die u heeft opgegeven, in willekeurige volgorde. Selecteer Sleutelwoorden zoeken om te zoeken naar een willekeurig aantal individuele woorden, in willekeurige volgorde. OmegaT zal een lijst weergeven waarin alle segmenten staan waarin alle gespecificeerde woorden voorkomen. Zoeken met sleutelwoord is hetzelfde als zoekacties &quot;met alle woorden&quot; in een internetzoekmachine zoals Google (logische EN). Zoeken met sleutelwoorden naar <emphasis><literal>geopend bestand</literal></emphasis> zal dus alle entiteiten van de tekenreeks <emphasis><literal>open file</literal></emphasis> vinden, en ook <emphasis><literal>bestand geopend</literal>, <literal>geopend invoer bestand</literal>, <literal>bestand kan gevaarlijk zijn als geopend</literal></emphasis>, etc..</para>
         </listitem>
-      </varlistentry>
-
-      <varlistentry>
-        <term><emphasis role="bold">reguliere uitdrukkingen</emphasis></term>
+      </varlistentry> <varlistentry> <term><emphasis role="bold">Reguliere uitdrukkingen</emphasis></term>
 
         <listitem>
           <para>De zoekterm zal worden behandeld als een reguliere uitdrukking. De zoekterm - [a-zA-Z]+[öäüqwß] - in het voorbeeld hierboven bijvoorbeeld zoekt naar woorden in het doelsegment die twijfelachtige tekens bevatten vanaf het Duitse toetsenbord. Reguliere uitdrukkingen zijn een krachtige manier om naar items van een tekenreeks te zoeken. Bekijk meer in het hoofdstuk<link linkend="chapter.regexp"> Reguliere uitdrukkingen.</link></para>

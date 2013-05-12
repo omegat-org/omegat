@@ -8,13 +8,13 @@
         <primary>Sneltoetsen van toetsenbord</primary> <secondary>aanpassen</secondary>
       </indexterm>Aanpassen van sneltoetsen toetsenbord</title>
 
-    <para>Aan de meeste items die verschijnen in het hoofdmenu kan een sneltoets worden toegewezen. Alleen aan de meest algemeen gebruikte menuitems zijn standaard sneltoetsen toegewezen. U kunt de reeds toegewezen sneltoetsen wijzigen en nieuwe sneltoetsen toevoegen door een bestand met definities voor de sneltoetsen in uw map voor voorkeuren voor OmegaT te plaatsen (zie <link linkend="user.files.location">Locatie gebruikersbestanden</link>).</para>
+    <para>Aan de meeste items die verschijnen in het hoofdmenu kan een sneltoets worden toegewezen. U kunt de reeds toegewezen sneltoetsen wijzigen en nieuwe sneltoetsen toevoegen door een bestand met definities voor de sneltoetsen in uw map voor voorkeuren voor OmegaT te plaatsen (zie <link linkend="user.files">Locatie gebruikersbestanden</link>).</para>
 
     <para>Het bestand met definities voor de sneltoetsen moet zijn genaamd <filename>MainMenuShortcuts.properties</filename> en mag ten hoogste één definitie voor een sneltoets per regel bevatten. Lege regels worden geaccepteerd en regels met opmerkingen zouden moeten beginnen met &quot;//&quot;. Alles na de &quot;//&quot; zal worden genegeerd.</para>
 
     <para>Als het bestand <filename>MainMenuShortcuts.properties</filename> is gewijzigd, moet <application>OmegaT</application> opnieuw gestart worden om de nieuwe sneltoetsen te kunnen laten werken.</para>
 
-    <para>De syntaxis voor de definitie van de sneltoets is de volgende: <code>&lt;code menuitem&gt;=&lt;sneltoets&gt;</code>, waar <emphasis>&lt;code menuitem&gt;</emphasis> een code is die wordt genomen uit de tabellen hieronder en <emphasis>&lt;sneltoets&gt;</emphasis> een combinatie is van ingedrukte toetsen die wordt gedefinieerd door de gebruiker.<footnote>
+    <para>De syntaxis voor de definitie van de sneltoets is de volgende: <code>&lt;code menuitem&gt;=&lt;sneltoets&gt;</code>, waar <emphasis>&lt;code menuitem&gt;</emphasis> een code is die wordt genomen uit de tabellen hieronder en <emphasis>&lt;sneltoets&gt;</emphasis> een combinatie is van ingedrukte toetsen die wordt gedefinieerd door de gebruiker<footnote>
         <para>De volledige syntaxis voor toetsaanslagen (sneltoetsen) wordt gedefinieerd in de volgende documentatie voor Java 1.6 van Oracle (onderaan de bladzijde): <ulink url="http://docs.oracle.com/javase/6/docs/api/javax/swing/KeyStroke.html">Java 1.6 keystrokes shortcuts</ulink></para>
       </footnote>.</para>
 
@@ -38,9 +38,9 @@
       </itemizedlist></para>
 
     <para>Bijvoorbeeld, de standaard sneltoetsen voor OmegaT<footnote>
-        <para>De standaard sneltoetsen voor OmegaT zijn beschikbaar via Sourceforge: <ulink url="http://omegat.svn.sourceforge.net/viewvc/omegat/branches/release-2-5/src/org/omegat/gui/main/MainMenuShortcuts.properties">Default OmegaT Shortcuts</ulink></para>
+        <para>De standaard sneltoetsen voor OmegaT zijn beschikbaar via Sourceforge: <ulink url="http://omegat.svn.sourceforge.net/viewvc/omegat/branches/release-2-6/src/org/omegat/gui/main/MainMenuShortcuts.properties">Default OmegaT Shortcuts</ulink></para>
 
-        <para>De standaard sneltoetsen voor OmegaT voor de Mac zijn ook beschikbaar via Sourceforge, zij gebruiken allemaal &quot;meta&quot; in plaats van &quot;ctrl&quot;: <ulink url="http://omegat.svn.sourceforge.net/viewvc/omegat//branches/release-2-5/src/org/omegat/gui/main/MainMenuShortcuts.mac.properties">Default OmegaT Shortcuts for the Mac</ulink></para>
+        <para>De standaard sneltoetsen voor OmegaT voor de Mac zijn ook beschikbaar via Sourceforge, zij gebruiken allemaal &quot;meta&quot; in plaats van &quot;ctrl&quot;: <ulink url="http://omegat.svn.sourceforge.net/viewvc/omegat/branches/release-2-6/src/org/omegat/gui/main/MainMenuShortcuts.mac.properties">Default OmegaT Shortcuts for the Mac</ulink></para>
       </footnote>, kan men vinden:</para>
 
     <itemizedlist>
@@ -55,8 +55,7 @@
 
     <para>De eerste is de sneltoets voor <guimenuitem>Project openen</guimenuitem>, de tweede voor <guimenuitem>Item voor woordenlijst maken</guimenuitem>.</para>
 
-    <para>Indien u <keycombo> <keycap>Shift</keycap> <keycap>Ctrl</keycap> <keycap>O</keycap> </keycombo> wilt gebruiken om een project te openen, past u <filename>MainMenuShortcuts.properties</filename> als volgt aan:<code>
-    </code></para>
+    <para>Indien u <keycombo> <keycap>Shift</keycap> <keycap>Ctrl</keycap> <keycap>O</keycap> </keycombo> wilt gebruiken om een project te openen, past u <filename>MainMenuShortcuts.properties</filename> als volgt aan:<code> </code></para>
 
     <para><code>projectOpenMenuItem=shift ctrl O</code>.</para>
 
@@ -75,9 +74,9 @@
       <title>menu Project</title>
 
       <tgroup cols="3" colsep="1">
-        <colspec align="left" colname="1" colnum="1" colwidth="120"/>
+        <colspec align="left" colname="1" colnum="1"/>
 
-        <colspec align="left" colname="2" colnum="2" colwidth="80"/>
+        <colspec align="left" colname="2" colnum="2"/>
 
         <colspec align="left" colname="3" colnum="3"/>
 
@@ -106,6 +105,14 @@
             <entry><keycap>Ctrl+O</keycap></entry>
 
             <entry>projectOpenMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Teamproject downloaden</entry>
+
+            <entry/>
+
+            <entry>projectTeamNewMenuItem</entry>
           </row>
 
           <row>
@@ -191,9 +198,9 @@
       <title>menu Bewerken</title>
 
       <tgroup cols="3" colsep="1">
-        <colspec align="left" colname="1" colnum="1" colwidth="120"/>
+        <colspec align="left" colname="1" colnum="1"/>
 
-        <colspec align="left" colname="2" colnum="2" colwidth="80"/>
+        <colspec align="left" colname="2" colnum="2"/>
 
         <colspec align="left" colname="3" colnum="3"/>
 
@@ -337,7 +344,7 @@
           </row>
 
           <row>
-            <entry>Kleine letters</entry>
+            <entry>Schakel letters naar kleine letters</entry>
 
             <entry/>
 
@@ -345,7 +352,7 @@
           </row>
 
           <row>
-            <entry>Hoofdletters</entry>
+            <entry>Schakel letters naar Hoofdletters</entry>
 
             <entry/>
 
@@ -353,7 +360,7 @@
           </row>
 
           <row>
-            <entry>Alle woorden hoofdletters</entry>
+            <entry>Schakel letters naar Alle woorden hoofdletter</entry>
 
             <entry/>
 
@@ -367,6 +374,23 @@
 
             <entry>cycleSwitchCaseMenuItem</entry>
           </row>
+
+          <row>
+            <entry>Als standaard vertaling gebruiken</entry>
+
+            <entry/>
+
+            <entry>editMultipleDefault</entry>
+          </row>
+
+          <row>
+            <entry>Alternatieve vertaling maken</entry>
+
+            <entry/>
+
+            <entry>editMultipleAlternate</entry>
+          </row>
+
         </tbody>
       </tgroup>
     </table>
@@ -378,11 +402,10 @@
     <table>
       <title>menu Ga naar</title>
 
-
       <tgroup cols="3" colsep="1">
-        <colspec align="left" colname="1" colnum="1" colwidth="120"/>
+        <colspec align="left" colname="1" colnum="1"/>
 
-        <colspec align="left" colname="2" colnum="2" colwidth="80"/>
+        <colspec align="left" colname="2" colnum="2"/>
 
         <colspec align="left" colname="3" colnum="3"/>
 
@@ -430,17 +453,33 @@
           </row>
 
           <row>
-            <entry>Terug in geschiedenis...</entry>
+            <entry>Volgende notitie</entry>
 
-            <entry><keycap>Ctrl+Shift+P</keycap></entry>
+            <entry/>
 
-            <entry>gotoHistoryForwardMenuItem</entry>
+            <entry>gotoNextNoteMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Vorige notitie</entry>
+
+            <entry/>
+
+            <entry>gotoPreviousNoteMenuItem</entry>
           </row>
 
           <row>
             <entry>Verder in geschiedenis...</entry>
 
             <entry><keycap>Ctrl+Shift+N</keycap></entry>
+
+            <entry>gotoHistoryForwardMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Terug in geschiedenis...</entry>
+
+            <entry><keycap>Ctrl+Shift+P</keycap></entry>
 
             <entry>gotoHistoryBackMenuItem</entry>
           </row>
@@ -460,9 +499,9 @@
       </indexterm>
 
       <tgroup cols="3" colsep="1">
-        <colspec align="left" colname="1" colnum="1" colwidth="120"/>
+        <colspec align="left" colname="1" colnum="1"/>
 
-        <colspec align="left" colname="2" colnum="2" colwidth="80"/>
+        <colspec align="left" colname="2" colnum="2"/>
 
         <colspec align="left" colname="3" colnum="3"/>
 
@@ -510,6 +549,38 @@
           </row>
 
           <row>
+            <entry>Segmenten met opmerkingen markeren</entry>
+
+            <entry/>
+
+            <entry>viewMarkNotedSegmentsCheckBoxMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Niet-afbreekbare spaties markeren</entry>
+
+            <entry/>
+
+            <entry>viewMarkNBSPCheckBoxMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Witruimte markeren</entry>
+
+            <entry/>
+
+            <entry>viewMarkWhitespaceCheckBoxMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Bidirectional Algorithm Control Characters markeren</entry>
+
+            <entry/>
+
+            <entry>viewMarkBidiCheckBoxMenuItem</entry>
+          </row>
+
+           <row>
             <entry>Info over wijzigingen/Niet weergeven</entry>
 
             <entry/>
@@ -517,7 +588,7 @@
             <entry>viewDisplayModificationInfoNoneRadioButtonMenuItem</entry>
           </row>
 
-          <row>
+         <row>
             <entry>Info over wijzigingen/Weergave voor huidige segment</entry>
 
             <entry/>
@@ -543,11 +614,10 @@
     <table>
       <title>menu Extra</title>
 
-
       <tgroup cols="3" colsep="1">
-        <colspec align="left" colname="1" colnum="1" colwidth="120"/>
+        <colspec align="left" colname="1" colnum="1"/>
 
-        <colspec align="left" colname="2" colnum="2" colwidth="80"/>
+        <colspec align="left" colname="2" colnum="2"/>
 
         <colspec align="left" colname="3" colnum="3"/>
 
@@ -596,11 +666,10 @@
     <table>
       <title>menu Opties</title>
 
-
       <tgroup cols="3" colsep="1">
-        <colspec align="left" colname="1" colnum="1" colwidth="120"/>
+        <colspec align="left" colname="1" colnum="1"/>
 
-        <colspec align="left" colname="2" colnum="2" colwidth="80"/>
+        <colspec align="left" colname="2" colnum="2"/>
 
         <colspec align="left" colname="3" colnum="3"/>
 
@@ -728,7 +797,7 @@
           </row>
 
           <row>
-            <entry>Opslaan...</entry>
+            <entry>Opslaan en uitvoer...</entry>
 
             <entry/>
 
@@ -762,9 +831,9 @@
       <title>menu Help</title>
 
       <tgroup cols="3" colsep="1">
-        <colspec align="left" colname="1" colnum="1" colwidth="120"/>
+        <colspec align="left" colname="1" colnum="1"/>
 
-        <colspec align="left" colname="2" colnum="2" colwidth="80"/>
+        <colspec align="left" colname="2" colnum="2"/>
 
         <colspec align="left" colname="3" colnum="3"/>
 

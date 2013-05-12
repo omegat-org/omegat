@@ -8,7 +8,7 @@
       <link rel="home" href="index.html" title="OmegaT - Gebruikershandleiding">
       <link rel="up" href="index.html" title="OmegaT - Gebruikershandleiding">
       <link rel="prev" href="chapter.project.properties.html" title="Hoofdstuk 6. Projecteigenschappen">
-      <link rel="next" href="chapter.files.and.directories.html" title="Hoofdstuk 8. OmegaT bestanden en mappen">
+      <link rel="next" href="chapter.files.and.folders.html" title="Hoofdstuk 8. OmegaT bestanden en mappen">
    </head>
    <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
       <div class="navheader">
@@ -20,7 +20,7 @@
                <td width="20%" align="left"><a accesskey="p" href="chapter.project.properties.html">Terug</a>&nbsp;
                </td>
                <th width="60%" align="center">&nbsp;</th>
-               <td width="20%" align="right">&nbsp;<a accesskey="n" href="chapter.files.and.directories.html">Volgende</a></td>
+               <td width="20%" align="right">&nbsp;<a accesskey="n" href="chapter.files.and.folders.html">Volgende</a></td>
             </tr>
          </table>
          <hr>
@@ -80,7 +80,7 @@
             door in het hoofdmenu<span class="bold"><strong> Opties → Bestandsfilters...</strong></span> te selecteren. U kunt ook project-specifieke bestandsfilters inschakelen, die alleen zullen worden gebruikt voor het huidige
             project, door de optie <span class="bold"><strong>Bestandsfilters...</strong></span> in Project → Eigenschappen te selecteren.
          </p>
-         <p>U kunt projectspecifieke filters inschakelen via <span class="bold"><strong>Opties → Eigenschappen...</strong></span>. Klik op de knop <span class="guibutton">Bestandsfilters</span> en activeer het keuzevak <span class="guimenuitem">Projectspecifieke filters inschakelen</span><a class="indexterm" name="d0e4173"></a>. Een kopie van de configuratie van de filters zal in dit geval met het project worden opgeslagen. Indien u later filters
+         <p>U kunt projectspecifieke filters inschakelen via <span class="bold"><strong>Project → Eigenschappen...</strong></span>. Klik op de knop <span class="guibutton">Bestandsfilters</span> en activeer het keuzevak <span class="guimenuitem">Projectspecifieke filters inschakelen</span><a class="indexterm" name="d0e4359"></a>. Een kopie van de configuratie van de filters zal in dit geval met het project worden opgeslagen. Indien u later filters
             wijzigt zullen alleen de projectfilters worden bijgewerkt, waarbij de filters voor de gebruikers ongewijzigd zullen blijven.
          </p>
          <p><span class="bold"><strong>Waarschuwing!</strong></span> Als u de segmentatie-opties wijzigt als een project geopend is moet u het project herladen vóórdat de wijzigingen effect
@@ -90,7 +90,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="file.filters.dialog"></a>1. dialoogvenster Bestandsfilters<a class="indexterm" name="d0e4186"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="file.filters.dialog"></a>1. dialoogvenster Bestandsfilters<a class="indexterm" name="d0e4372"></a></h2>
                   </div>
                </div>
             </div>
@@ -104,13 +104,13 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="filters.options"></a>2. Filteropties<a class="indexterm" name="d0e4202"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="filters.options"></a>2. Filteropties<a class="indexterm" name="d0e4388"></a></h2>
                   </div>
                </div>
             </div>
-            <p>Vijf filters (Tekstbestanden, XHTML-bestanden, HTML- en XHTML-bestanden, OpenDocument/OpenOffice.org-bestanden en Microsoft
-               Open XML-bestanden) hebben één of meer specifieke opties. Selecteer, om de opties aan te passen, het filter uit de lijst en
-               klik op <span class="bold"><strong>Opties</strong></span>. De beschikbare opties zijn:
+            <p>Verschillende filters (Tekstbestanden, XHTML-bestanden, HTML- en XHTML-bestanden, OpenDocument-bestanden en Microsoft Open
+               XML-bestanden) hebben één of meer specifieke opties. Selecteer, om de opties aan te passen, het filter uit de lijst en klik
+               op <span class="bold"><strong>Opties</strong></span>. De beschikbare opties zijn:
             </p>
             <p><span class="bold"><strong>Tekstbestanden</strong></span></p>
             <div class="itemizedlist">
@@ -136,11 +136,39 @@
                   </li>
                </ul>
             </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p><span class="emphasis"><em>PO-koptekst overslaan</em></span></p>
+                     <p>De koptekst van de PO zal worden overgeslagen en niet worden gewijzigd, als deze optie is geselecteerd.</p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p><span class="emphasis"><em>Automatisch vervangen van 'nplurals=INTEGER; &amp;plural=EXPRESSION;' in koptekst</em></span></p>
+                     <p><span class="emphasis"><em><span class="emphasis"><em>De optie maakt het voor OmegaT mogelijk om de specificatie in de koptekst van het PO-bestand te overschrijven en de standaard
+                                    voor de geselecteerde doeltaal te gebruiken.</em></span></em></span></p>
+                  </li>
+               </ul>
+            </div>
             <p><span class="bold"><strong>XHTML-bestanden</strong></span></p>
             <div class="itemizedlist">
                <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
-                     <p><span class="emphasis"><em>Vertaal de volgende attributen</em></span>- de geselecteerde attributen zullen als segmenten in het venster Bewerken verschijnen.
+                     <p><span class="emphasis"><em>Codering-declaratie aan HTML- en XHTML-bestanden toevoegen of herschrijven</em></span>: vaak moeten de doelbestanden een andere tekenset voor de codering hebben dan die in het bronbestand (of dat nu expliciet
+                        gedefinieerd is of als gevolg van). Met behulp van deze optie kan de vertaler specificeren of in de doelbestanden de declaratie
+                        voor de codering moet worden opgenomen. Als bijvoorbeeld het filter UTF8 specificeert als het schema voor codering voor de
+                        doelbestanden, zal het selecteren van Altijd er voor zorgen dat deze informatie zal wordne opgenomen in de vertaalde bestanden.
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p><span class="emphasis"><em>Vertaal de volgende attributen</em></span>: De geselecteerde attributen zullen als segmenten in het venster Bewerken verschijnen.
                      </p>
                   </li>
                </ul>
@@ -296,7 +324,7 @@
                   </li>
                </ul>
             </div>
-            <p><span class="bold"><strong>OpenDocument/OpenOffice.org bestanden</strong></span></p>
+            <p><span class="bold"><strong>Open Document Format (ODF)-bestanden</strong></span></p>
             <div class="itemizedlist">
                <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
@@ -312,7 +340,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="edit.filter.dialog"></a>3. dialoogvenster Filter bewerken<a class="indexterm" name="d0e4383"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="edit.filter.dialog"></a>3. dialoogvenster Filter bewerken<a class="indexterm" name="d0e4591"></a></h2>
                   </div>
                </div>
             </div>
@@ -326,7 +354,7 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="source.filetype.and.filename.pattern"></a>3.1. <a class="indexterm" name="d0e4398"></a>Type bronbestand, patroon voor bestandsnaam<a class="indexterm" name="d0e4404"></a></h3>
+                        <h3 class="title"><a name="source.filetype.and.filename.pattern"></a>3.1. <a class="indexterm" name="d0e4606"></a>Type bronbestand, patroon voor bestandsnaam<a class="indexterm" name="d0e4612"></a></h3>
                      </div>
                   </div>
                </div>
@@ -346,7 +374,7 @@
                         </h3>
                      </div>
                   </div>
-               </div><a class="indexterm" name="d0e4432"></a><a class="indexterm" name="d0e4437"></a><a class="indexterm" name="d0e4442"></a><p>Slechts een beperkt aantal bestandsformaten specificeren een voorgeschreven codering. Bestandsformaten die hun codering niet
+               </div><a class="indexterm" name="d0e4640"></a><a class="indexterm" name="d0e4645"></a><a class="indexterm" name="d0e4650"></a><p>Slechts een beperkt aantal bestandsformaten specificeren een voorgeschreven codering. Bestandsformaten die hun codering niet
                   specificeren zullen de codering gebruiken die u instelt voor de extensie die overeenkomt met hun naam. Standaard zullen bijvoorbeeld
                   <code class="literal">.txt</code>-bestanden worden geladen met behulp van de standaard codering van uw besturingssysteem. U kunt de broncodering voor elk verschillend
                   bronbestandsnaam-patroon wijzigen. Zulke bestanden kunnen ook in elke codering worden weggeschreven. Als standaard heeft het
@@ -381,12 +409,12 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="target.name"></a>3.3. Doelbestandsnaam<a class="indexterm" name="d0e4470"></a></h3>
+                        <h3 class="title"><a name="target.name"></a>3.3. Doelbestandsnaam<a class="indexterm" name="d0e4678"></a></h3>
                      </div>
                   </div>
                </div>
                <p>Soms wilt u misschien de bestanden die u vertaalde automatisch hernoemen, bijvoorbeeld door een taalcode achter de bestandsnaam
-                  te zetten. Doelbestandsnaam-patronen gebruiken een speciale syntaxis, dus als u dit veld zou willen bewerken, moet u op <span class="bold"><strong>Bewerken...</strong></span> klikken en het dialoogvenster <a class="indexterm" name="d0e4480"></a>Patroon bewerken gebruiken. Klik op <span class="bold"><strong>Standaardinstellingen</strong></span> als u terug wilt keren naar de standaard configuratie van het filter. U kunt de naam ook direct aanpassen in het veld voor
+                  te zetten. Doelbestandsnaam-patronen gebruiken een speciale syntaxis, dus als u dit veld zou willen bewerken, moet u op <span class="bold"><strong>Bewerken...</strong></span> klikken en het dialoogvenster <a class="indexterm" name="d0e4688"></a>Patroon bewerken gebruiken. Klik op <span class="bold"><strong>Standaardinstellingen</strong></span> als u terug wilt keren naar de standaard configuratie van het filter. U kunt de naam ook direct aanpassen in het veld voor
                   het patroon van het doelbestand of het dialoogvenster Bestandsfilters. Het dialoogvenster Patroon bewerken biedt, naast andere,
                   de volgende opties:
                </p>
@@ -442,54 +470,66 @@
                         </p>
                      </li>
                      <li class="listitem">
-                        <p><code class="literal">$(timestamp-????)</code> - datum en tijd van het systeem op het moment van genereren in verschillende patronen
+                        <p><code class="literal">${timestamp-????}</code> - datum en tijd van het systeem op het moment van genereren in verschillende patronen
                         </p>
-                        <p>Bekijk <a class="ulink" href="http://docs.oracle.com/javase/1.4.2/docs/api/java/text/SimpleDateFormat.html" target="_top">documentatie van Oracle</a> vpor voorbeelden van de patronen voor "SimpleDateFormat"
+                        <p>Bekijk <a class="ulink" href="http://docs.oracle.com/javase/1.4.2/docs/api/java/text/SimpleDateFormat.html" target="_top">documentatie van Oracle</a> voor voorbeelden van de patronen voor "SimpleDateFormat"
                         </p>
                      </li>
                      <li class="listitem">
-                        <p>${system-os-name} - besturingssysteem van de gebruikte computer</p>
+                        <p><code class="literal">${system-os-name}</code> - besturingssysteem van de gebruikte computer
+                        </p>
                      </li>
                      <li class="listitem">
-                        <p>${system-user-name) - systeem gebruikersnaam</p>
+                        <p><code class="literal">${system-user-name}</code> - systeem gebruikersnaam
+                        </p>
                      </li>
                      <li class="listitem">
-                        <p>${system-host-name} - systeem hostnaam</p>
+                        <p><code class="literal">${system-host-name}</code> - systeem hostnaam
+                        </p>
                      </li>
                      <li class="listitem">
-                        <p>${file-source-encoding} - codering bronbestand</p>
+                        <p><code class="literal">${file-source-encoding}</code> - codering bronbestand
+                        </p>
                      </li>
                      <li class="listitem">
-                        <p>${file-target-encoding} - codering doelbestand</p>
+                        <p><code class="literal">${file-target-encoding}</code> - codering doelbestand
+                        </p>
                      </li>
                      <li class="listitem">
-                        <p>${targetLocaleLCID) - Microsoft locale voor doel</p>
+                        <p><code class="literal">${targetLocaleLCID}</code> - Microsoft locale voor doel
+                        </p>
                      </li>
                   </ul>
                </div>
                <p>Aanvullende varianten zijn beschikbaar voor variabelen ${nameOnly} en ${Extension}. In het geval dat de bestandsnaam een niet
-                  unieke naam heeft, kan men variabelen in de vorm <code class="literal">$(name only</code><span class="emphasis"><em>-aantal extensies</em></span>) en <code class="literal">${extension</code>-<span class="emphasis"><em>aantal extensies} </em></span> toepassen. Als bijvoorbeeld het originele bestand is genaamd Document.xx.docx, zullen de volgende variabelen de volgende
+                  unieke naam heeft, kan men variabelen in de vorm <code class="literal">${name only</code><span class="emphasis"><em>-aantal extensies</em></span>} en <code class="literal">${extension</code>-<span class="emphasis"><em>aantal extensies} </em></span> toepassen. Als bijvoorbeeld het originele bestand is genaamd Document.xx.docx, zullen de volgende variabelen de volgende
                   resultaten geven:
                </p>
                <div class="itemizedlist">
                   <ul class="itemizedlist" style="list-style-type: disc; ">
                      <li class="listitem">
-                        <p>${nameOnly-0} Document</p>
+                        <p><code class="literal">${nameOnly-0}</code> Document
+                        </p>
                      </li>
                      <li class="listitem">
-                        <p>${nameOnly-1} Document.xx</p>
+                        <p><code class="literal">${nameOnly-1}</code> Document.xx
+                        </p>
                      </li>
                      <li class="listitem">
-                        <p>${nameOnly-2} Document.xx.docx</p>
+                        <p><code class="literal">${nameOnly-2}</code> Document.xx.docx
+                        </p>
                      </li>
                      <li class="listitem">
-                        <p>${extension-0} docx</p>
+                        <p><code class="literal">${extension-0}</code> docx
+                        </p>
                      </li>
                      <li class="listitem">
-                        <p>${extension-1} xx.docx</p>
+                        <p><code class="literal">${extension-1}</code> xx.docx
+                        </p>
                      </li>
                      <li class="listitem">
-                        <p>${extension-2} Document.xx.docx</p>
+                        <p><code class="literal">${extension-2}</code> Document.xx.docx
+                        </p>
                      </li>
                   </ul>
                </div>
@@ -503,7 +543,7 @@
                <td width="40%" align="left"><a accesskey="p" href="chapter.project.properties.html">Terug</a>&nbsp;
                </td>
                <td width="20%" align="center">&nbsp;</td>
-               <td width="40%" align="right">&nbsp;<a accesskey="n" href="chapter.files.and.directories.html">Volgende</a></td>
+               <td width="40%" align="right">&nbsp;<a accesskey="n" href="chapter.files.and.folders.html">Volgende</a></td>
             </tr>
             <tr>
                <td width="40%" align="left" valign="top">Hoofdstuk 6. Projecteigenschappen&nbsp;</td>

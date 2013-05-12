@@ -15,7 +15,7 @@
     <title>Regex - Vlaggen</title>
 
     <tgroup align="left" cols="2" rowsep="1">
-      <colspec align="left" colnum="1" colwidth="100"/>
+      <colspec align="left" colnum="1"/>
 
       <thead>
         <row>
@@ -39,7 +39,7 @@
     <title>Regex - Teken</title>
 
     <tgroup align="left" cols="2" rowsep="1">
-      <colspec align="left" colnum="1" colwidth="100"/>
+      <colspec align="left" colnum="1"/>
 
       <thead>
         <row>
@@ -135,7 +135,7 @@
     <title>Regex - Aanhalingen</title>
 
     <tgroup align="left" cols="2" rowsep="1">
-      <colspec align="left" colnum="1" colwidth="100"/>
+      <colspec align="left" colnum="1"/>
 
       <thead>
         <row>
@@ -177,7 +177,7 @@
     <title>Regex - Klassen voor Unicode-blokken en categorieën</title>
 
     <tgroup align="left" cols="2" rowsep="1">
-      <colspec align="left" colnum="1" colwidth="100"/>
+      <colspec align="left" colnum="1"/>
 
       <thead>
         <row>
@@ -225,7 +225,7 @@
     <title>Regex - Tekenklassen</title>
 
     <tgroup align="left" cols="2" rowsep="1">
-      <colspec align="left" colnum="1" colwidth="100"/>
+      <colspec align="left" colnum="1"/>
 
       <thead>
         <row>
@@ -261,7 +261,7 @@
     <title>Regex - Voorgedefinieerde tekenklassen</title>
 
     <tgroup align="left" cols="2" rowsep="1">
-      <colspec align="left" colnum="1" colwidth="100"/>
+      <colspec align="left" colnum="1"/>
 
       <thead>
         <row>
@@ -321,7 +321,7 @@
     <title>Regex - Overeenkomsten voor begrenzingen</title>
 
     <tgroup align="left" cols="2" rowsep="1">
-      <colspec align="left" colnum="1" colwidth="100"/>
+      <colspec align="left" colnum="1"/>
 
       <thead>
         <row>
@@ -363,7 +363,7 @@
     <title>Regex - Gulzige parameters</title>
 
     <tgroup align="left" cols="2" rowsep="1">
-      <colspec align="left" colnum="1" colwidth="100"/>
+      <colspec align="left" colnum="1"/>
 
       <thead>
         <row>
@@ -403,7 +403,7 @@
     <title>Regex - Weigerachtige (niet-gulzige) parameters</title>
 
     <tgroup align="left" cols="2" rowsep="1">
-      <colspec align="left" colnum="1" colwidth="100"/>
+      <colspec align="left" colnum="1"/>
 
       <thead>
         <row>
@@ -443,7 +443,7 @@
     <title>Regex - Logische operatoren</title>
 
     <tgroup align="left" cols="2" rowsep="1">
-      <colspec align="left" colnum="1" colwidth="100"/>
+      <colspec align="left" colnum="1"/>
 
       <thead>
         <row>
@@ -506,7 +506,7 @@
       <title>Regex - Voorbeelden van reguliere uitdrukkingen in vertalingen</title>
 
       <tgroup align="left" cols="2" rowsep="1">
-        <colspec align="left" colnum="1" colwidth="100"/>
+        <colspec align="left" colnum="1"/>
 
         <thead>
           <row>
@@ -548,7 +548,7 @@
           </row>
 
           <row>
-            <entry>\s\s+</entry>
+            <entry>\s{2,}</entry>
 
             <entry>meer dan één spatie</entry>
           </row>
@@ -557,6 +557,12 @@
             <entry>\.[A-Z]</entry>
 
             <entry>Punt, gevolgd door een hoofdletter - mogelijk ontbreekt er een spatie tussen de punt en het begin van een nieuwe regel?</entry>
+          </row>
+
+          <row>
+            <entry>\bis\b</entry>
+
+            <entry>zoeken naar “is”, niet “thuis” of “isn't” etc.</entry>
           </row>
         </tbody>
       </tgroup>

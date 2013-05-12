@@ -22,7 +22,7 @@
 
     <para>Google Translate is een service waarvoor betaald moet worden en die wordt aangeboden door Google, voor het vertalen van zinnen, websites en complete teksten tussen een nog steeds groeiend aantal talen. Op het moment van schrijven bevat de lijst meer dan 50 talen, van Albanees tot Jiddisch, inclusief natuurlijk alle grote talen. De huidige versie van de service is, op het moment van schrijven, gebaseerd op het gebruiken ervan, met een prijs van 20 USD per miljoen tekens.<emphasis role="bold"/></para>
 
-    <para><emphasis role="bold">Belangrijk: </emphasis>Google Translate API v2 vereist rekeninggegevens voor alle accounts vóórdat u de service kunt gebruiken (zie <ulink url="http://code.google.com/intl/en-US/apis/language/translate/v2/pricing.html">Pricing and Terms of Service</ulink> voor meer informatie). U gebruikt uw eigen private unieke sleutel, die door Google aan u is verzonden toen u zich registreerde bij de service, om uzelf te identificeren als een geldige gebruiker voor de services van Google. Bekijk hoofdstuk <link linkend="chapter.installing.and.running">Installeren en uitvoeren van OmegaT</link>, gedeelte OmegaT starten vanaf de opdrachtregel, voor details om deze sleutel aan de omgeving van OmegaT toe te voegen.</para>
+    <para><emphasis role="bold">Belangrijk: </emphasis>Google Translate API v2 vereist rekeninggegevens voor alle accounts vóórdat u de service kunt gebruiken (zie <ulink url="https://developers.google.com/translate/v2/pricing?hl=en-US">Pricing and Terms of Service</ulink> voor meer informatie). U gebruikt uw eigen private unieke sleutel, die door Google aan u is verzonden toen u zich registreerde bij de service, om uzelf te identificeren als een geldige gebruiker voor de services van Google. Bekijk hoofdstuk <link linkend="chapter.installing.and.running">Installeren en uitvoeren van OmegaT</link>, gedeelte OmegaT starten vanaf de opdrachtregel, voor details om deze sleutel aan de omgeving van OmegaT toe te voegen.</para>
 
     <para>De kwaliteit van de vertaling is aan de ene kant afhankelijk van het reservoir aan teksten in de doeltaal en de beschikbaarheid van hun meertalige versies, aan de andere kant ook van de kwaliteit van de gebouwde modellen. Het is haast wel zeker dat, hoewel de kwaliteit in sommige gevallen onvoldoende kan zijn, het uiteindelijk mettertijd beter zal worden en niet slechter.</para>
   </section>
@@ -62,7 +62,7 @@
         <primary>Machinevertaling</primary> <secondary>Belazar</secondary>
       </indexterm></title>
 
-    <para><ulink url="http://belsoft.tut.by/belazar/">Belazar</ulink> is een programma voor machinevertaling voor een Russisch - Wit-Russisch taalpaar.</para>
+    <para><ulink url="http://belazar.info/">Belazar</ulink> is een programma voor machinevertaling voor een Russisch - Wit-Russisch taalpaar.</para>
   </section>
 
   <section>

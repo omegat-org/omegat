@@ -14,9 +14,9 @@
         </indexterm></title>
 
       <tgroup cols="2" colsep="0" rowsep="1" title="Main OMegaT window">
-        <colspec align="left" colnum="1" colwidth="90"/>
+        <colspec align="left" colnum="1"/>
 
-        <colspec align="left" colnum="2" colwidth=""/>
+        <colspec align="left" colnum="2"/>
 
         <tbody>
           <row>
@@ -70,9 +70,9 @@
         </indexterm></title>
 
       <tgroup cols="2" colsep="0" rowsep="1" title="Other windows">
-        <colspec align="left" colnum="1" colwidth="90"/>
+        <colspec align="left" colnum="1"/>
 
-        <colspec align="left" colnum="2" colwidth=""/>
+        <colspec align="left" colnum="2"/>
 
         <tbody>
           <row>
@@ -80,7 +80,7 @@
                 <primary>Sneltoetsen</primary> <secondary>Tagvalidatie - Ctrl+T</secondary>
               </indexterm>venster Tags valideren</guimenuitem></entry>
 
-            <entry><para>Gebruikt om de gebruikershandleiding te lezen (openen met <keycombo> <keycap>Ctrl</keycap> <keycap>T</keycap> </keycombo>, sluiten met <keycap>Esc</keycap>)</para></entry>
+            <entry><para>Gebruikt om tags te valideren (openen met <keycombo> <keycap>Ctrl</keycap> <keycap>T</keycap> </keycombo>, sluiten met <keycap>Esc</keycap>)</para></entry>
           </row>
 
           <row>
@@ -116,9 +116,9 @@
         </indexterm></title>
 
       <tgroup cols="2" colsep="0" rowsep="1" title="Settings dialogs">
-        <colspec align="left" colnum="1" colwidth="90"/>
+        <colspec align="left" colnum="1"/>
 
-        <colspec align="left" colnum="2" colwidth=""/>
+        <colspec align="left" colnum="2"/>
 
         <tbody>
           <row>
@@ -136,7 +136,7 @@
                 <primary>Projectinstellingen</primary> <secondary>lettertype</secondary>
               </indexterm></guimenuitem></entry>
 
-            <entry><para>Gebruikt om het lettertype aan te passen <application>dat door OmegaT wordt gebruikt</application> voor het weergeven van bron, vertaling, overeenkomsten en de termen uit de woordenlijst, (openen met <menuchoice> <guimenu>Opties</guimenu> <guimenuitem>Lettertype...</guimenuitem> </menuchoice>, sluiten met <keycap>Esc</keycap><keycap>)</keycap></para></entry>
+            <entry><para>Gebruikt om het lettertype aan te passen <application>dat door OmegaT wordt gebruikt</application> voor het weergeven van bron, vertaling, overeenkomsten en de termen uit de woordenlijst, (openen met <menuchoice> <guimenu>Opties</guimenu> <guimenuitem>Lettertype...</guimenuitem> </menuchoice>, sluiten met <keycap>Esc</keycap>)</para></entry>
           </row>
 
           <row>
@@ -195,7 +195,7 @@
     <para>Het hoofdvenster bestaat uit verschillende vensters, het hoofdmenu en een statusbalk. U kunt de positie van elk venster wijzigen of het zelfs losmaken en er een zelfstandig venster van maken door het venster te slepen aan zijn naam. Afhankelijk van de status van het venster kunnen verschillende tekens verschijnen in de rechterbovenhoek ervan.</para>
 
     <note>
-      <para>Als u niet alle vensters kunt zien (als ze zijn geopend of geminimaliseerd), zal drukken op <guisubmenu> Opties &gt; Hoofdvenster herstellen </guisubmenu> ze herstellen naar de status zoals die is gedefinieerd bij de installatie.</para>
+      <para>Als u niet alle vensters kunt zien (als ze zijn geopend of geminimaliseerd), zal drukken op <guisubmenu> Opties &gt; Hoofdvenster herstellen </guisubmenu>ze herstellen naar de status zoals die is gedefinieerd bij de installatie.</para>
     </note>
 
     <table>
@@ -204,7 +204,7 @@
         </indexterm></title>
 
       <tgroup cols="2">
-        <colspec align="left" colnum="1" colwidth="60"/>
+        <colspec align="left" colnum="1"/>
 
         <tbody>
           <row>
@@ -294,29 +294,29 @@
         </indexterm></title>
 
       <tgroup cols="2">
-        <colspec align="left" colnum="1" colwidth="60"/>
+        <colspec align="left" colnum="1"/>
 
         <tbody>
           <row>
-            <entry>33/33</entry>
+            <entry>27/27</entry>
 
             <entry>aantal segmenten - vertaald / totaal van huidig bestand</entry>
           </row>
 
           <row>
-            <entry>2780/2780</entry>
+            <entry>9319/16338</entry>
 
             <entry>aantal unieke segmenten - vertaald / totaal in het project</entry>
           </row>
 
           <row>
-            <entry>3760</entry>
+            <entry>31175</entry>
 
             <entry>totaal aantal segmenten (inclusief herhalingen) in het project</entry>
           </row>
 
           <row>
-            <entry>126/127</entry>
+            <entry>103/114</entry>
 
             <entry>aantal tekens in het bron- en in het doelsegment</entry>
           </row>
@@ -400,6 +400,128 @@
           <para>overeenkomst OmegaT, inclusief getallen en tags</para>
         </listitem>
       </itemizedlist>
+
+      <section>
+        <title>Aanpassen van het venster Overeenkomsten<indexterm class="singular">
+            <primary>Vensters in OmegaT</primary> <secondary>venster Overeenkomsten</secondary> <tertiary>Aanpassen</tertiary>
+          </indexterm><indexterm class="singular">
+            <primary>Bronbestanden</primary> <secondary>Vertalen bijgewerkte bron</secondary>
+          </indexterm></title>
+
+        <para>In <guimenu>Opties &gt; Externe TMXen</guimenu> maken een aantal variabelen het mogelijk om de weergave van het venster Overeenkomsten te configureren:</para>
+
+        <figure id="matches.pane.setup">
+          <title><indexterm class="singular">
+              <primary>Overeenkomsten</primary> <secondary>Instellen venster Overeenkomsten - afbeelding</secondary>
+            </indexterm><indexterm class="singular">
+              <primary>Vensters in OmegaT</primary> <secondary>Instellen venster Overeenkomsten - afbeelding</secondary>
+            </indexterm>Instellen venster Overeenkomsten</title>
+
+          <mediaobject>
+            <imageobject>
+              <imagedata fileref="images/MatchesPaneSetup.png"/>
+            </imageobject>
+
+            <imageobject role="fo">
+              <imagedata fileref="images/MatchesPaneSetup.png" width="50%"/>
+            </imageobject>
+          </mediaobject>
+        </figure>
+
+        <para>De afbeelding hierboven heeft de sjabloon weer voor de standaard weergave van overeenkomsten. De inhoud ka worden aangepast met behulp van de volgende variabelen:</para>
+
+        <table colsep="0" rowsep="0">
+          <title>Instellen venster Overeenkomsten<indexterm class="singular">
+              <primary>Gebruikersinterface</primary> <secondary>Instellen venster Overeenkomsten</secondary>
+            </indexterm></title>
+
+          <tgroup cols="2" colsep="1" rowsep="1" title="Match pane setup">
+            <colspec align="left" colnum="1"/>
+
+            <colspec align="left" colnum="2"/>
+
+            <tbody>
+              <row>
+                <entry><literal>${id}</literal></entry>
+
+                <entry>Nummer van de overeenkomst van 1 tot en met 5</entry>
+              </row>
+
+              <row>
+                <entry><literal>${sourceText}</literal></entry>
+
+                <entry>Brontekst van de overeenkomst</entry>
+              </row>
+
+              <row>
+                <entry><literal>${targetText}</literal></entry>
+
+                <entry>Doeltekst van de overeenkomst</entry>
+              </row>
+
+              <row>
+                <entry><literal>${diff}</literal></entry>
+
+                <entry>Tekenreeks die de verschillen weergeeft tussen de bron en de overeenkomst.<emphasis> Hint:</emphasis> gebruik dit als de tekst, die u hebt vertaald, is bijgewerkt.</entry>
+              </row>
+
+              <row>
+                <entry><literal>${score}</literal></entry>
+
+                <entry>Percentage met tokenizer</entry>
+              </row>
+
+              <row>
+                <entry><literal>${noStemScore}</literal></entry>
+
+                <entry>Percentage zonder nummers en tags</entry>
+              </row>
+
+              <row>
+                <entry><literal>${adjustedScore}</literal></entry>
+
+                <entry>Percentage aangepast</entry>
+              </row>
+
+              <row>
+                <entry><literal>${fileNameOnly}</literal></entry>
+
+                <entry>Naam van de TMX</entry>
+              </row>
+
+              <row>
+                <entry><literal>${filePath}</literal></entry>
+
+                <entry>Volledig pad van de TMX</entry>
+              </row>
+
+              <row>
+                <entry><literal>${fileShortPath}</literal></entry>
+
+                <entry>Pad van de TMX, beginnend vanaf de root van /tm</entry>
+              </row>
+
+              <row>
+                <entry><literal>${creationID}</literal></entry>
+
+                <entry>Auteur van de overeenkomst</entry>
+              </row>
+
+              <row>
+                <entry><literal>${creationDate}</literal></entry>
+
+                <entry>Datum van de overeenkomst</entry>
+              </row>
+
+              <row>
+                <entry><literal>${fuzzyFlag}</literal></entry>
+
+                <entry>Geeft aan dat deze overeenkomst fuzzy is (momenteel alleen voor vertalingen vanuit PO-bestanden met de markering #fuzzy)</entry>
+              </row>
+            </tbody>
+          </tgroup>
+        </table>
+      </section>
     </section>
 
     <section>
@@ -456,13 +578,13 @@
       <para>Sommige bestandsindelingen, gespecialiseerd voor vertaalwerk, bijvoorbeeld PO, maken het opnemen van opmerkingen mogelijk. Op deze manier kan de vertaler de context voor het segment dat moet worden vertaald worden verschaft. In het voorbeeld hieronder heeft de auteur van het PO-bestand een waarschuwing voor de vertaler opgenomen om de lengte van de vertaling te controleren:</para>
 
       <figure id="comments.pane">
-        <title><indexterm class="singular">
+        <title>venster Opmerkingen<indexterm class="singular">
             <primary>Opmerkingen</primary> <secondary>venster Opmerkingen</secondary>
           </indexterm></title>
 
         <mediaobject>
           <imageobject role="html">
-            <imagedata fileref="images/Comments_25.png" width=""/>
+            <imagedata fileref="images/Comments_25.png"/>
           </imageobject>
 
           <imageobject role="fo">
@@ -519,7 +641,7 @@
 
       <itemizedlist>
         <listitem>
-          <para>het aantal segmenten in elk bestand wordt naast de naam van het bestand weergegeven</para>
+          <para>Items van bestanden bevatten hun namen, typen bestandsfilters, hun codering en het aantal segmenten dat elk bestand bevat</para>
         </listitem>
       </itemizedlist>
 
@@ -589,7 +711,7 @@
           <primary>Sneltoetsen</primary> <secondary>Tekst kopiëren - Ctrl+C</secondary>
         </indexterm></guimenuitem>, <guimenuitem>Ctrl+V <indexterm class="singular">
           <primary>Sneltoetsen</primary> <secondary>Tekst plakken - Ctrl+V</secondary>
-        </indexterm></guimenuitem> gebruiken om de inhoud te kopiëren en te plakken.<figure id="ProjectStatistic.Window">
+        </indexterm></guimenuitem> gebruiken om de inhoud te kopiëren en te plakken. <figure id="ProjectStatistic.Window">
           <title>projectstatistieken</title>
 
           <mediaobject>
@@ -609,7 +731,7 @@
           <primary>Statistieken voor overeenkomsten</primary> <seealso>menu Extra</seealso>
         </indexterm></title>
 
-      <para>Toegang tot de statistieken voor overeenkomsten gaat via<guimenuitem>Extra &gt; Statistieken voor overeenkomsten.</guimenuitem> De evaluatie vergt nogal wat gebruik van de CPU en kan nogal wat tijd vergen, dus wordt er een voortgangsbalk weergegeven gedurende de berekening. Voorzover het categorieën betreft, de de facto industriestandaard voor het classificeren van overeenkomsten in de volgende groepen wordt gebruikt: Exacte overeenkomst, 95%-100%, 85%-94%, 75%-84%, 50%-74% en Geen overeenkomst. De tellingen van woorden, identiek aan tellingen in het venster Projectbestanden, are strikt gebaseerd op de methode van tellen van OmegaT, met een aantal verschillen in terminologie om rekening te houden met conceptuele verschillen. Deze informatie wordt berekend voor zowel segmenten als voor woorden en voor tekens (zonder en met spaties).<figure>
+      <para>Toegang tot de statistieken voor overeenkomsten gaat via<guimenuitem>Extra &gt; Statistieken voor overeenkomsten.</guimenuitem> De evaluatie vergt nogal wat gebruik van de CPU en kan nogal wat tijd vergen, dus wordt er een voortgangsbalk weergegeven gedurende de berekening. Voorzover het categorieën betreft wordt de de facto industriestandaard voor het classificeren van overeenkomsten in de volgende groepen gebruikt: Herhalingen, Exacte overeenkomst, 95%-100%, 85%-94%, 75%-84%, 50%-74% en Geen overeenkomst. Deze informatie wordt berekend voor zowel segmenten als voor woorden en voor tekens (zonder en met spaties). Onthoud dat er kleine verschillen zouden kunnen zijn tussen de tellingen van OmegaT en de getallen die worden verschaft door andere CAT-programma's.<figure>
           <title>Statistieken voor overeenkomsten</title>
 
           <mediaobject>

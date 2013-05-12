@@ -5,7 +5,7 @@
       <primary>Spellingscontrole</primary>
     </indexterm></title>
 
-  <para>OmegaT heeft een ingebouwde spellingscontrole die is gebaseerd op de spellingscontrole die wordt gebruikt in OpenOffice.org, Firefox en Thunderbird. Als consequentie daarvan is het in staat om het grote aantal gratis woordenboeken voor spelling te gebruiken die beschikbaar is voor die toepassingen.</para>
+  <para>OmegaT heeft een ingebouwde spellingscontrole die is gebaseerd op de spellingscontrole die wordt gebruikt in Apache OpenOffice, LibreOffice, Firefox en Thunderbird. Als consequentie daarvan is het in staat om het grote aantal gratis woordenboeken voor spelling te gebruiken die beschikbaar is voor die toepassingen.</para>
 
   <section>
     <title>Installeren van woordenboeken voor spelling</title>
@@ -32,7 +32,7 @@
       </listitem>
     </itemizedlist>
 
-    <para>Handmatig kopiëren van de bestanden is zinvol als u al geschikte bestanden voor de woordenboeken op uw systeem heeft staan, bijvoorbeeld als deel van uw installatie van OpenOffice.org of Thunderbird. Het is echter eenvoudiger om online naar woordenboeken te zoeken met behulp van het veld <emphasis role="bold">URL voor online woordenboeken</emphasis>:</para>
+    <para>Handmatig kopiëren van de bestanden is zinvol als u al geschikte bestanden voor de woordenboeken op uw systeem heeft staan, bijvoorbeeld als deel van uw installatie van Apache OpenOffice, LibreOffice, Firefox of Thunderbird. Het is echter eenvoudiger om online naar woordenboeken te zoeken met behulp van het veld <emphasis role="bold">URL voor online woordenboeken</emphasis>:</para>
 
     <figure id="spellchecker.setup">
       <title><indexterm class="singular">
@@ -50,7 +50,9 @@
       </mediaobject>
     </figure>
 
-    <para>Klikken op de knop <guibutton>Nieuw woordenboek installeren</guibutton> zal het installatievenster Woordenboek openen, waar u de woordenboeken kunt selecteren die u wilt installeren. Zorg er voor dat de taalcode van de doelbestanden correspondeert met de taalcode van het woordenboek: een FR-FR woordenboek zal niet werken met de instelling FR voor het doel U zult de instelling naar FR-FR moeten wijzigen om de spellingscontrole het juiste woordenboek voor uw doel te laten herkennen. Zoek naar bestanden met de naam, verwijzend naar de gebruikte taal en die de extensies <emphasis>aff</emphasis> en <emphasis>dic.</emphasis> hebben.</para>
+    <para>Klikken op de knop <guibutton>Nieuw woordenboek installeren</guibutton> zal het installatievenster Woordenboek openen, waar u de woordenboeken kunt selecteren die u wilt installeren.</para>
+
+    <para>De namen van de bestanden moeten corresponderen met de taalcode van uw doeltaal zoals die is gedefinieerd in het dialoogvenster Projecteigenschappen (<guimenu>Project &gt; Eigenschappen</guimenu>). Indien u bijvoorbeeld ES-MX (Mexicaans Spaans) hebt geselecteerd als de doeltaal, moeten de bestanden voor de woordneboeken zijn genaamd es_MX.dic en es_MX.aff. Indien u slechts een standaard Spaans woordenboek beschikbaar hebt, met bijvoorbeeld de bestandsnamen es_es.dic en es_es.aff, kunt u deze bestanden kopiëren naar es_MX.dic en es_MX.aff en het woordenboek voor de spelling zal werken. Onthoud dat dit natuurlijk zal controleren op de standaard (Castilliaans) in plaats van op Mexicaans Spaans.</para>
   </section>
 
   <section>
@@ -61,7 +63,9 @@
     <para>Selecteer <guimenuitem>Opties &gt; Spellingscontrole</guimenuitem> en selecteer het keuzevak <guilabel>Automatische spellingscontrole</guilabel> (zie boven) om de spellingscontrole in te schakelen.</para>
 
     <figure id="spellchecker.in.action">
-        <mediaobject>
+      <title>Spellingscontrole gebruiken</title>
+
+      <mediaobject>
         <imageobject role="html">
           <imagedata fileref="images/SpellcheckingText.png"/>
         </imageobject>
@@ -84,7 +88,7 @@
 
     <para>Controleer de taalcode van uw doel met de beschikbare woordenboeken in het venster Instellen spellingscontrole. De spellingscontrole bepaalt de taal die het moet gebruiken uit de taalcode van het doel: als de taalcode voor het doel Braziliaans Portugees (PT_BR) is, moet de submap met woordenboeken de twee bestanden voor het woordenboek, genaamd <emphasis>pt_br.aff</emphasis> en <emphasis>pt_br.dic</emphasis>, bevatten.</para>
 
-    <para>In het geval dat u al een groot gedeelte van de tekst heeft vertaald, maar zich dan realiseert dat de taalcode van het project niet overeenkomt met de taalcode van de spellingscontrole (u specificeerde pt_BR als de taal, maar er zijn geen pt_BR-woordenboeken) kunt u eenvoudigweg de twee corresponderende bestanden kopiëren en die hernoemen (bijvoorbeeld van <emphasis>pt_PT.arr</emphasis> en <emphasis>pt_PT.dic</emphasis> naar <emphasis>pt._BR.arr</emphasis> en <emphasis>pt_BR.dic</emphasis>). Natuurlijk is het veel verstandiger om een korte pauze te nemen en de juiste versies van de spellingscontrole te downloaden.</para>
+    <para>In het geval dat u al een groot gedeelte van de tekst heeft vertaald, maar zich dan realiseert dat de taalcode van het project niet overeenkomt met de taalcode van de spellingscontrole (u specificeerde pt_BR als de taal, maar er zijn geen pt_BR-woordenboeken) kunt u eenvoudigweg de twee corresponderende bestanden kopiëren en die hernoemen (bijvoorbeeld van <emphasis>pt_PT.aff</emphasis> en <emphasis>pt_PT.dic</emphasis> naar <emphasis>pt_BR.aff</emphasis> en <emphasis>pt_BR.dic</emphasis>). Natuurlijk is het veel verstandiger om een korte pauze te nemen en de juiste versies van de spellingscontrole te downloaden.</para>
 
     <para>Merk op dat <filename>Verwijderen</filename> de geselecteerde woordenboeken fysiek verwijdert. Als zij deel uitmaken van een andere toepassing op uw systeem zullen zij ook uit die toepassing verdwijnen. Indien u dat, om welke reden dan ook, zo nu en dan moet doen, kan het daarom verstandiger zijn om de betrokken bestanden te kopiëren naar een andere map, alleen gereserveerd voor gebruik door OmegaT.</para>
   </section>

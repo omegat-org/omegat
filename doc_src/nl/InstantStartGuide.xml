@@ -30,7 +30,7 @@
   <section>
     <title>Valideren van uw tags</title>
 
-    <para>Als uw bronbestand een opgemaakt bestand is, bijv. Microsoft Word, LibreOffice Writer of HTML, zal OmegaT de opmaak converteren naar tags die de tekst die u vertaalt omsluiten. Documenten hebben ook vaak tags die niets te maken hebben met opmaak, maar die ook belangrijk zijn. In het bronbestand (en in het vertaalde bestand), zou een bronzin eruit kunnen zien als</para>
+    <para>Als uw bronbestand een opgemaakt bestand is, bijv. Microsoft Word, LibreOffice Writer of HTML, zal OmegaT de opmaak converteren naar tags die de tekst die u vertaalt omsluiten. Documenten hebben ook vaak tags die niets te maken hebben met opmaak, maar die ook belangrijk zijn in het bronbestand (en in het vertaalde bestand).  Een zin in de bron zou er uit kunnen zien als</para>
 
     <para/>
 
@@ -94,7 +94,7 @@
 
     <itemizedlist>
       <listitem>
-        <para>Aan het einde van uw vertaling exporteert OmegaT drie vertaalgeheugens, genaamd &quot;level1&quot;, &quot;level2&quot; en &quot;omegat&quot; naar uw projectmap. De geheugens &quot;level1&quot; en &quot;level2&quot; kunnen worden gedeeld met gebruikers van andere vertaalprogramma's. Het geheugen genaamd &quot;omegat&quot; kan worden gebruikt in OmegaT zelf, in toekomstige projecten die u maakt. Als u bestanden van vertaalgeheugens plaats in de submap /tm/ van uw projectmap, zal OmegaT automatisch daarin zoeken naar overeenkomstige segmenten, genaamd &quot;fuzzy overeenkomsten&quot;. .</para>
+        <para>Aan het einde van uw vertaling exporteert OmegaT drie vertaalgeheugens, genaamd &quot;level1&quot;, &quot;level2&quot; en &quot;omegat&quot; naar uw projectmap. De geheugens &quot;level1&quot; en &quot;level2&quot; kunnen worden gedeeld met gebruikers van andere vertaalprogramma's. Het geheugen genaamd &quot;omegat&quot; kan worden gebruikt in OmegaT zelf, in toekomstige projecten die u maakt. Als u bestanden van vertaalgeheugens plaats in de submap /tm/ van uw projectmap, zal OmegaT automatisch daarin zoeken naar overeenkomstige segmenten, genaamd &quot;fuzzy overeenkomsten&quot;.</para>
       </listitem>
     </itemizedlist>
 

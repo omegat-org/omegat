@@ -47,9 +47,9 @@
         <title>menu Project</title>
 
         <tgroup cols="3" colsep="1">
-          <colspec align="left" colnum="1" colwidth="100"/>
+          <colspec align="left" colnum="1"/>
 
-          <colspec align="left" colnum="2" colwidth="100"/>
+          <colspec align="left" colnum="2"/>
 
           <tbody>
             <row>
@@ -185,9 +185,9 @@
         <title>Sneltoetsen kopiëren/knippen/plakken</title>
 
         <tgroup cols="3" colsep="1">
-          <colspec align="left" colnum="1" colwidth="100"/>
+          <colspec align="left" colnum="1"/>
 
-          <colspec align="left" colnum="2" colwidth="100"/>
+          <colspec align="left" colnum="2"/>
 
           <tbody>
             <row>
@@ -235,9 +235,9 @@
         <title>menu Bewerken</title>
 
         <tgroup cols="3" colsep="1">
-          <colspec align="left" colnum="1" colwidth="100"/>
+          <colspec align="left" colnum="1"/>
 
-          <colspec align="left" colnum="2" colwidth="100"/>
+          <colspec align="left" colnum="2"/>
 
           <tbody>
             <row>
@@ -355,7 +355,7 @@
                   <keycap>C</keycap>
                 </keycombo></entry>
 
-              <entry>Exporteert de huidige selectie naar een tekstbestand voor verwerking. Indien geen tekst is geselecteerd, wordt het huidige bronsegment naar dit bestand geschreven. Wanneer de gebruiker <application>OmegaT</application> afsluit, wordt dit bestand niet geleegd, om consistent te zijn aan het gebruikelijke gedrag van het klembord. De geëxporteerde inhoud wordt gekopieerd naar het bestand <filename>selection.txt</filename> dat is geplaatst in de voorkeursmap van de gebruiker (zie <xref linkend="chapter.files.and.directories"/>).</entry>
+              <entry>Exporteert de huidige selectie naar een tekstbestand voor verwerking. Indien geen tekst is geselecteerd, wordt het huidige bronsegment naar dit bestand geschreven. Wanneer de gebruiker <application>OmegaT</application> afsluit, wordt dit bestand niet geleegd, om consistent te zijn aan het gebruikelijke gedrag van het klembord. De geëxporteerde inhoud wordt gekopieerd naar het bestand <filename>selection.txt</filename> dat is geplaatst in de voorkeursmap van de gebruiker (zie <xref linkend="chapter.files.and.folders"/>).</entry>
             </row>
 
             <row>
@@ -435,9 +435,9 @@
         <title>menu Ga naar</title>
 
         <tgroup cols="3" colsep="1">
-          <colspec align="left" colnum="1" colwidth="100"/>
+          <colspec align="left" colnum="1"/>
 
-          <colspec align="left" colnum="2" colwidth="100"/>
+          <colspec align="left" colnum="2"/>
 
           <tbody>
             <row>
@@ -537,7 +537,7 @@
         <title>menu Weergave</title>
 
         <tgroup cols="2" colsep="1">
-          <colspec align="left" colnum="1" colwidth="100"/>
+          <colspec align="left" colnum="1"/>
 
           <tbody>
             <row>
@@ -607,7 +607,7 @@
         </indexterm>
 
         <tgroup cols="2" colsep="1">
-          <colspec align="left" colnum="1" colwidth="100"/>
+          <colspec align="left" colnum="1"/>
 
           <tbody>
             <row>
@@ -647,7 +647,7 @@
         <title>menu Opties</title>
 
         <tgroup cols="2" colsep="1">
-          <colspec align="left" colnum="1" colwidth="100"/>
+          <colspec align="left" colnum="1"/>
 
           <tbody>
             <row>
@@ -713,7 +713,7 @@
             <row>
               <entry><guimenuitem>Tags valideren...</guimenuitem></entry>
 
-              <entry>Voor programmeurs: Stelt u in staat om de opties voor Tags valideren te configureren en ook variabelen in het programma (%...) te controleren.</entry>
+              <entry>Voor programmeurs: Stelt u in staat om de opties voor Tags valideren te configureren en variabelen in het programma (%...) ook te controleren.</entry>
             </row>
 
             <row>
@@ -767,7 +767,7 @@
         <title>menu Help</title>
 
         <tgroup cols="2" colsep="1">
-          <colspec align="left" colnum="1" colwidth="100"/>
+          <colspec align="left" colnum="1"/>
 
           <tbody>
             <row>
@@ -839,9 +839,9 @@
         <title>Sneltoetsen voor projectbeheer</title>
 
         <tgroup cols="3" colsep="1">
-          <colspec align="left" colnum="1" colwidth="100"/>
+          <colspec align="left" colnum="1"/>
 
-          <colspec align="left" colnum="2" colwidth="100"/>
+          <colspec align="left" colnum="2"/>
 
           <tbody>
             <row>
@@ -921,9 +921,9 @@
         <title>Sneltoetsen Bewerken</title>
 
         <tgroup cols="3" colsep="1">
-          <colspec align="left" colnum="1" colwidth="100"/>
+          <colspec align="left" colnum="1"/>
 
-          <colspec align="left" colnum="2" colwidth="100"/>
+          <colspec align="left" colnum="2"/>
 
           <tbody>
             <row>
@@ -1087,9 +1087,9 @@
         <title>Sneltoetsen Verplaatsen</title>
 
         <tgroup cols="3" colsep="1">
-          <colspec align="left" colnum="1" colwidth="100"/>
+          <colspec align="left" colnum="1"/>
 
-          <colspec align="left" colnum="2" colwidth="100"/>
+          <colspec align="left" colnum="2"/>
 
           <tbody>
             <row>
@@ -1173,9 +1173,9 @@
         <title>Diverse sneltoetsen</title>
 
         <tgroup cols="3" colsep="1">
-          <colspec align="left" colnum="1" colwidth="100"/>
+          <colspec align="left" colnum="1"/>
 
-          <colspec align="left" colnum="2" colwidth="100"/>
+          <colspec align="left" colnum="2"/>
 
           <tbody>
             <row>

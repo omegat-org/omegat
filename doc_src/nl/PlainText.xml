@@ -44,29 +44,17 @@
 
     <para>Er bestaan in principe drie manieren om dit op te lossen in <application>OmegaT</application>. Zij behelzen allemaal het gebruik van de bestandsfilters in het menu <emphasis role="bold">Opties</emphasis>.</para>
 
-    <variablelist>
-      <varlistentry>
-        <term>Wijzig de codering van uw bestanden naar Unicode</term>
+    <variablelist> <varlistentry> <term>Wijzig de codering van uw bestanden naar Unicode</term>
 
         <listitem>
           <para>open uw bronbestand in een tekstverwerker die zijn codering juist interpreteert en sla het bestand op met de codering <emphasis role="bold">&quot;UTF-8&quot;</emphasis>. Wijzig de bestandsextensie van <literal>.txt</literal> naar <literal>.utf8</literal>. <application>OmegaT</application> zal het bestand automatisch interpreteren als een UTF8-bestand. Dit is de beste algemene alternatief, het bespaart u problemen op de langere termijn.</para>
         </listitem>
-      </varlistentry>
-    </variablelist>
-
-    <variablelist>
-      <varlistentry>
-        <term>Specificeer de codering voor uw 'platte tekst'-bestanden</term>
+      </varlistentry> </variablelist> <variablelist> <varlistentry> <term>Specificeer de codering voor uw 'platte tekst'-bestanden</term>
 
         <listitem>
           <para>- d.i. bestanden met de extensie <filename>.txt</filename> - : wijzig, in de sectie <emphasis role="bold">Tekstbestanden</emphasis> van het dialoogvenster Bestandsfilters, de <emphasis role="bold">Codering van bronbestand</emphasis> van &lt;auto&gt; naar de codering die overeenkomt met uw bron <filename>.txt</filename>-bestand, bijvoorbeeld .jp voor het bovenstaande voorbeeld.</para>
         </listitem>
-      </varlistentry>
-    </variablelist>
-
-    <variablelist>
-      <varlistentry>
-        <term>Wijzig de extensies van uw 'platte tekst'-bestanden</term>
+      </varlistentry> </variablelist> <variablelist> <varlistentry> <term>Wijzig de extensies van uw 'platte tekst'-bestanden</term>
 
         <listitem>
           <para>bijvoorbeeld van <filename>.txt</filename> naar <filename>.jp</filename> voor Japanse platte teksten: voeg, in de sectie <emphasis role="bold">Tekstbestanden</emphasis> van het dialoogvenster Bestandsfilters, een nieuw <emphasis role="bold">Patroon voor bronbestanden</emphasis> toe (<filename>*.jp</filename> voor dit voorbeeld) en selecteer de toepasselijke parameters voor de bron- en doelcodering.</para>

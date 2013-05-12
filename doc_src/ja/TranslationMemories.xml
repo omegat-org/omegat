@@ -336,8 +336,8 @@
         <primary>翻訳メモリ</primary> <secondary>翻訳メモリの更新</secondary>
       </indexterm></title>
 
-    <para>ごく初期のバージョンの <application>OmegaT</application> は、段落単位でしか原文を分節化できず、また HTML と Open Document ファイルに対しては、整形用のタグに対する番号付けを適切に行えない場合がありました。<application>OmegaT</application> 2.6 では、参考訳文の品質を向上し、すでに存在する翻訳内容をより活用するため、このような古い形式の TMX ファイルを見つけると、その場で新しい形式に更新します。そのために手作業で何かを行う必要はありません。</para>
+    <para>ごく初期のバージョンの <application>OmegaT</application> は、段落単位でしか原文を分節化できず、また HTML と Open Document ファイルに対しては、整形用のタグに対する番号付けを適切に行えない場合がありました。<application>OmegaT</application> では、参考訳文の品質を向上し、すでに存在する翻訳内容をより活用するために、このような古い形式の TMX ファイルを見つけると、その場で新しい形式に更新します。そのために手作業で何かを行う必要はありません。</para>
 
-    <para>プロジェクトのメインの TMX ファイルがバージョンアップされるのは１度だけです。最新の形式で <filename>project-save.tmx</filename> に書き込まれます。それ以外の以前の TMX ファイルは、プロジェクトが読み込まれるたびにその場で更新されます。<application>OmegaT</application> 2.6 ではファイルフィルターに変更が加えられたため、分節化の内容がまったく異なる可能性があります。ごくまれに、翻訳メモリを手動で更新する必要があるかもしれませんので、注意してください。</para>
+    <para>プロジェクトのメインの TMX ファイルがバージョンアップされるのは１度だけです。最新の形式で <filename>project-save.tmx</filename> に書き込まれます。それ以外の以前の TMX ファイルは、プロジェクトが読み込まれるたびにその場で更新されます。<application>OmegaT</application> ではファイルフィルターに変更が加えられたため、分節化の内容がまったく異なる可能性があります。ごくまれに、翻訳メモリを手動で更新する必要があるかもしれませんので、注意してください。</para>
   </section>
 </chapter>

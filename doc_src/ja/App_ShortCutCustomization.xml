@@ -15,7 +15,7 @@
     <para><filename>MainMenuShortcuts.properties</filename> ファイルを修正した場合は、新しいショートカット設定を反映させるために、忘れず <application>OmegaT</application> を再起動してください。</para>
 
     <para>ショートカット定義構文は、次の通りです：<code>&lt;メニュー項目コード&gt;=&lt;ショートカット&gt;</code>。<emphasis>&lt;メニュー項目コード&gt;</emphasis> の値は、後述する表を参照してください。<emphasis>&lt;ショートカット&gt;</emphasis> には割り当てたいキーの組み合わせを指定します<footnote>
-        <para>キーストローク（ショートカット）の完全な構文定義は、Oracle による次の Java 1.6 技術文書（ページの最後）を参照してください：<ulink url="http://docs.oracle.com/javase/jp/6/api/javax/swing/KeyStroke.html">Java 1.6 keystrokes shortcuts</ulink></para>
+        <para>キーストローク（ショートカット）の完全な構文定義は、Oracle による次の Java 1.5 技術文書（ページの最後）を参照してください：<ulink url="http://docs.oracle.com/javase/jp/1.5.0/api/javax/swing/KeyStroke.html">Java 1.5 keystrokes shortcuts</ulink></para>
       </footnote></para>
 
     <para>&lt;ショートカット&gt; は次の形式に従います：０個以上の <code>&lt;修飾子&gt;</code>、続いて０個または１個の <code>&lt;イベント&gt;</code>、続いて１個の <code>&lt;キー&gt;</code>。ただし：<itemizedlist>
@@ -31,8 +31,8 @@
 
         <listitem>
           <para>そして <code>&lt;キー&gt;</code> には、キーボード上で利用可能な任意のキーを指定できます<footnote>
-              <para>利用できるキーイベント（キー）の一覧は、Oracle による次の Java 1.6 技術文書を参照してください：<ulink url="http://docs.oracle.com/javase/jp/6/api/java/awt/event/KeyEvent.html">Java 1.6 keyEvents description</ulink></para>
-            </footnote>。</para>
+              <para>利用できるキーイベント（キー）の一覧は、Oracle による次の Java 1.5 技術文書を参照してください：<ulink url="http://docs.oracle.com/javase/jp/1.5.0/api/java/awt/event/KeyEvent.html">Java 1.5 keyEvents description</ulink></para>
+            </footnote></para>
         </listitem>
       </itemizedlist></para>
 

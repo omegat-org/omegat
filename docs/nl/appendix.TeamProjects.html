@@ -1,0 +1,295 @@
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <title>Bijlage C. OmegaT Teamprojecten</title>
+      <link rel="stylesheet" type="text/css" href="OmegaT.css">
+      <meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
+      <link rel="home" href="index.html" title="OmegaT - Gebruikershandleiding">
+      <link rel="up" href="index.html" title="OmegaT - Gebruikershandleiding">
+      <link rel="prev" href="appendix.keyboard.html" title="Bijlage B. Sneltoetsen voor het toetsenbord voor het bewerken">
+      <link rel="next" href="appendix.TokenizerPlugin.inOmegaT.html" title="Bijlage D. plug-in Tokenizer">
+   </head>
+   <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+      <div class="navheader">
+         <table width="100%" summary="Navigation header">
+            <tr>
+               <th colspan="3" align="center">Bijlage C. OmegaT Teamprojecten</th>
+            </tr>
+            <tr>
+               <td width="20%" align="left"><a accesskey="p" href="appendix.keyboard.html">Terug</a>&nbsp;
+               </td>
+               <th width="60%" align="center">&nbsp;</th>
+               <td width="20%" align="right">&nbsp;<a accesskey="n" href="appendix.TokenizerPlugin.inOmegaT.html">Volgende</a></td>
+            </tr>
+         </table>
+         <hr>
+      </div>
+      <div class="appendix">
+         <div class="titlepage">
+            <div>
+               <div>
+                  <h1 class="title"><a name="appendix.TeamProjects"></a>Bijlage C. OmegaT Teamprojecten<a class="indexterm" name="d0e10408"></a></h1>
+               </div>
+            </div>
+         </div>
+         <div class="toc">
+            <dl class="toc">
+               <dt><span class="section"><a href="appendix.TeamProjects.html#d0e10415">1. Versiebeheer - introductie</a></span></dt>
+               <dt><span class="section"><a href="appendix.TeamProjects.html#d0e10486">2. Delen van een project met behulp van SVN</a></span></dt>
+               <dd>
+                  <dl>
+                     <dt><span class="section"><a href="appendix.TeamProjects.html#d0e10507">2.1. Een opslagplaats maken</a></span></dt>
+                     <dt><span class="section"><a href="appendix.TeamProjects.html#d0e10567">2.2. Importeren van het project naar de opslagplaats van SVN - Windows</a></span></dt>
+                  </dl>
+               </dd>
+               <dt><span class="section"><a href="appendix.TeamProjects.html#d0e10704">3. Het teamproject gebruiken in OmegaT</a></span></dt>
+            </dl>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e10415"></a>1. Versiebeheer - introductie
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>Het gemeenschappelijk vertalen zoals dat wordt aangeboden door OmegaT is gebaseerd op de functionaliteit van versie- of revisiebeheer,
+               breed gebruikt binnen de gemeenschap van softwareontwikkelaars om hun wijzigingen aan de code van een programma te beheren
+               en ongehinderde samenwerking binnen het team van ontwikkelaars mogelijk te maken. OmegaT ondersteunt twee van de populaire
+               systemen voor versiebeheer (afgekort VCS), <a class="ulink" href="http://subversion.apache.org" target="_top">Apache Subversion</a> (vaak afgekort tot SVN naar de naam van de opdracht svn) en <a class="ulink" href="http://git-scm.com/" target="_top">Git</a>. De voordelen van een systeem voor versiebeheer voor een team van vertalers kan als volgt worden samengevat:
+            </p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>verschillende teamleden kunnen tegelijkertijd aan het vertaalproject werken zonder elkaar te hinderen</p>
+                  </li>
+                  <li class="listitem">
+                     <p>Zij kunnen algemeen materiaal delen, zoals vertaalgeheugens voor het project en de woordenlijst</p>
+                  </li>
+                  <li class="listitem">
+                     <p>Standaard is elke drie minuten een bijgewerkte versie van de gedeelde gegevens beschikbaar voor de rest van het team</p>
+                  </li>
+                  <li class="listitem">
+                     <p>Het systeem onderhoudt de versies voor de gedeelde gegevens</p>
+                  </li>
+                  <li class="listitem">
+                     <p>Conflicten - bijvoorbeeld alternatieve vertalingen van hetzelfde segment of item voor de woordenlijst - kunnen worden gemonitord,
+                        opgelost en samengevoegd
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <p>De volgende termen, zie in de tekst hieronder zullen worden gebruikt, verdienen een korte uitleg:</p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p><span class="bold"><strong>server voor VCS - </strong></span>d.i. server voor SVN of Git, is de omgeving waar het algemene materiaal op het net is opgeslagen en wordt onderhouden. De
+                        server kan bestaan in het lokale netwerk maar in de meeste gevallen zal hij beschikbaar zijn op het internet, d.i. via een
+                        URL-adres. Eén lid van het team, de beheerder van het project, dient bekend te zijn met het afhandelen van de dingen aan de
+                        kant van de server, d.i. de taak van het instellen van de omgeving, importeren van het project van OmegaT, toewijzen van de
+                        toegangsrechten voor de leden van het team, oplossen van de conflicten, etc.
+                     </p>
+                  </li>
+                  <li class="listitem">
+                     <p><span class="bold"><strong>cliënt voor VCS: </strong></span> Een cliënt voor SVN of Git moet op de computers van de "beheerders van het project", die zijn betrokken bij het project van
+                        OmegaT, zijn geïnstalleerd om met de server te kunnen werken. Zeer populaire cliënten voor de Windows-omgeving zijn <a class="ulink" href="http://tortoisesvn.net/" target="_top">TortoiseSVN</a> en <a class="ulink" href="http://code.google.com/p/tortoisegit/" target="_top">TortoiseGit</a>. Andere besturingssystemen (Linux, OS X) bieden soortgelijke pakketten.
+                     </p>
+                  </li>
+                  <li class="listitem">
+                     <p><span class="bold"><strong>opslagplaats: </strong></span>de plaats waar het gedeelde materiaal is opgeslagen en wordt onderhouden, ofwel op een lokaal toegankelijk netwerk of op het
+                        internet. Leden van het project verbinden zich daarmee via hun cliënt voor VCS.
+                     </p>
+                  </li>
+                  <li class="listitem">
+                     <p><span class="bold"><strong>checkout:</strong></span> de bewerking die een werkkopie maakt vanuit de opslagplaats naar uw lokale computer. De server legt de informatie over checkouts
+                        vast, zodat latere indieningen (commits (zie hieronder)) op een ordentelijke manier kunnen worden uitgevoerd.
+                     </p>
+                  </li>
+                  <li class="listitem">
+                     <p><span class="bold"><strong>indiening (commit): </strong></span>als eenmaal een nieuwe lokale versie van het materiaal van de checkout klaar is, kan het worden ingediend bij de opslagplaats
+                        en dus beschikbaar worden gemaakt voor de rest van het team. De server zorgt er voor dat conflicterende wijzigingen, veroorzaakt
+                        doordat twee leden werken aan dezelfde inhoud van een checkout, zullen worden opgelost.
+                     </p>
+                  </li>
+                  <li class="listitem">
+                     <p><span class="bold"><strong>beheerder: </strong></span>de persoon die verantwoordelijk is voor het maken en onderhouden van de opslagplaats, d.i. zorgen voor de taken aan de zijde
+                        van de server. Slechts één persoon zou deze rechten ten minste initieel moeten hebben om problemen te voorkomen.
+                     </p>
+                  </li>
+                  <li class="listitem">
+                     <p><span class="bold"><strong>gebruiker</strong></span>: een lid van het team, samenwerkend aan het gedeelde project.
+                     </p>
+                  </li>
+               </ul>
+            </div>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e10486"></a>2. Delen van een project met behulp van SVN<a class="indexterm" name="d0e10489"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <p>Er zijn twee mogelijkheden om een server voor SVN uit te voeren: u kunt SVN op uw eigen server installeren of u kunt een gehoste
+               service gebruiken. Bij het gebruiken van een externe service dient u zich bewust te zijn van de mogelijke implicaties met
+               betrekking tot vertrouwelijkheid, omdat u het originele document laadt op een server die zich buiten uw directe beheer bevindt.
+               U kunt, als alternatief, een private server voor SVN server instellen, bijvoorbeeld als u al een server voor Apache hebt die
+               de gevraagde software al bevat (bijv. VisualSVN), om dit probleem te vermijden.
+            </p>
+            <p>Als de server voor SVN eenmaal beschikbaar is, moeten beheerders voor het project lokaal een cliënt voor SVN installeren,
+               om de inhoud van het project op hun computers te kunnen beheren. Voor Windows bevelen wij <a class="ulink" href="http://tortoisesvn.net/" target="_top">TortoiseSVN</a> aan. Voor Mac kunt u de cliënt bijvoorbeeld downloaden van <a class="ulink" href="https://sourceforge.net/projects/macsvn/" target="_top">SourceForge</a>, Voor Linux: zie <a class="ulink" href="www.yolinux.com/TUTORIALS/Subversion.html" target="_top">Subversion opdrachten en scripts</a>.
+            </p>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="d0e10507"></a>2.1. Een opslagplaats maken<a class="indexterm" name="d0e10510"></a></h3>
+                     </div>
+                  </div>
+               </div>
+               <p>De hier gepresenteerde procedure is gebaseerd op de gratis server voor SVN (beperkt tot 2 gebruikers) die wordt aangeboden
+                  door <a class="ulink" href="http://projectlocker.com/" target="_top">ProjectLocker</a>. Onthoud dat degene die de opslagplaats maakt impliciet de rechten als beheerder voor de gemaakte opslagplaats verkrijgt.
+                  Log eerst in op de site of - als het uw eerste keer is dat u de site bezoekt: registreer uzelf er voor en noteer uw gebruikersnaam
+                  en wachtwoord voor de toekomstige projecten.
+               </p>
+               <div class="orderedlist">
+                  <ol class="orderedlist" type="1">
+                     <li class="listitem">
+                        <p>Maak een nieuw project op ProjectLocker</p>
+                     </li>
+                     <li class="listitem">
+                        <p>Typ de naam en omschrijving van de opslagplaats in. (in het voorbeeld hier worden <code class="literal">OmegaT</code> en <code class="literal">OmegaT SL Localization </code>gebruikt)
+                        </p>
+                     </li>
+                     <li class="listitem">
+                        <p>Kies<span class="guibutton"> SVN.</span></p>
+                     </li>
+                     <li class="listitem">
+                        <p>Klik op <span class="guibutton">Create Project</span></p>
+                     </li>
+                  </ol>
+               </div>
+               <p>Open de weergave<span class="bold"><strong> Projects</strong></span> voor uw account. De URL die wordt weergegeven onder Project Services zal door SVN worden gebruikt om cliënten te verbinden
+                  met de server van SVN die u zojuist hebt ingesteld. Dit is ook de plaats om leden van het team toe te voegen aan het project
+                  en om ze hun rechten toe te kennen. Onthoud dat de teamleden zich eerst geregistreerd moeten hebben, vóórdat u ze aan het
+                  project kunt toevoegen (Opmerking: in de gratis versie van ProjectLocker zijn slechts twee gebruikers per project toegestaan).
+               </p>
+               <p>Projecten kunnen worden beheerd overeenkomstig uw stijl en wensen voor de ontwikkeling. Soortgelijk als in het geval van projecten
+                  van OmegaT zult u verschillende opslagplaatsen nodig hebben voor verschillende paren van talen. Binnen een bepaald paar van
+                  talen is het het beste om verschillende onderwerpen en/of cliënten ook als afzonderlijke opslagplaatsen te houden. Het alternatief
+                  is om één enkele opslagplaats te hebben met submappen <code class="literal">Project1</code>, <code class="literal">Project2</code>, etc. en het algemene materiaal te delen via de mappen <code class="literal">tm</code>, <code class="literal">glossary</code> en <code class="literal">dictionary</code>.
+               </p>
+               <p>Voor het hier weergegeven voorbeeld besloten we tot het enkele project in OmegaT - één enkele opslagplaats om redenen van
+                  eenvoud.
+               </p>
+            </div>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="d0e10567"></a>2.2. Importeren van het project naar de opslagplaats van SVN - Windows
+                        </h3>
+                     </div>
+                  </div>
+               </div>
+               <p>Op dit moment is de opslagplaats leeg. U maakt eerst een lege map voor de cliënt aan op uw schijf. Maak een lege map waar
+                  u uw project zult bewaren en klik er met rechts op. Selecteer<span class="guilabel"> TortoiseSVN &gt; Checkout.</span> Het volgende dialoogvenster verschijnt:
+               </p>
+               <div class="mediaobject"><img src="images/Team_projects_checkout.png"></div>
+               <p>Voer, in het veld <span class="bold"><strong>URL of repository</strong></span>, de URL in die werd verschaft door ProjectLocker. Zorg er voor dat het veld <span class="bold"><strong>Checkout directory</strong></span> juist is correct, d.i. de lege map specificeert die u hebt gemaakt, en druk op <span class="bold"><strong>OK</strong></span>. Als de bewerking eenmaal is voltooid kunt u de betreffende map controleren: die zou nu een submap .svn moeten bevatten en
+                  een groen schild OK op het pictogram ervan zal aangeven dat de inhoud van de map up-to-date is:
+               </p>
+               <p>In de volgende stap zullen we de bestanden voor OmegaT  aan de lokale map toevoegen. De volgende bestanden dienen te worden
+                  gedeeld door de leden van het team en dienen dus in elk geval daarin te worden opgenomen:
+               </p>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
+                     <li class="listitem">
+                        <p>het bestand voor het project omegat - <code class="filename">omegat.project</code></p>
+                     </li>
+                     <li class="listitem">
+                        <p>het vertaalgeheugen - <code class="filename">omegat\project_save.tmx</code></p>
+                     </li>
+                     <li class="listitem">
+                        <p>de inhoud van de map source</p>
+                     </li>
+                     <li class="listitem">
+                        <p>de definitie voor project-specifieke filters - <code class="filename">omegat\filters.xml</code></p>
+                     </li>
+                  </ul>
+               </div>
+               <p>De beheerder kan beslissen om ook de volgende mappen en hun inhoud op te nemen: <code class="filename">tm</code>, <code class="filename">glossary</code> en <code class="filename">dictionary</code>. Ook <code class="filename">ignored_words.txt</code> en <code class="filename">learned_words.txt</code> in de map <code class="filename">omegat</code> zouden het waard kunnen zijn om te delen en te worden onderhouden op het niveau van het team. Vermijd in ieder geval het
+                  toevoegen van bestanden <code class="filename">bak</code>, <code class="filename">project_stats.txt</code> en <code class="filename">project_stats_match.txt</code>, uit de submap <code class="filename">omegat</code>, omdat zij geen nut of voordeel hebben en slechts ruimte innemen in de opslagplaats. U zou misschien hetzelfde willen doen
+                  voor de map <code class="filename">target</code> en de inhoud daarvan.
+               </p>
+               <p>Na het kopiëren van de gewenste bestanden in de map voor de checkout zult u bemerken dat het pictogram er van gewijzigd is:
+                  het groene schild OK is gewijzigd naar een rood uitroepteken, wat de wijziging in de lokale kopie van de opslagplaats aangeeft.
+                  De volgende twee stappen zullen de versie van de server up to date brengen:
+               </p>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
+                     <li class="listitem">
+                        <p><span class="bold"><strong>voeg de gekopieerde bestanden toe aan de lokale versie van de opslagplaats:</strong></span> klik met rechts op de map voor de lokale checkout en selecteer <span class="guilabel">TortoiseSVN &gt; Add.</span> Laat, in het dialoogvenster dat opent, alle opties als standaard staan en klik op<span class="guilabel"> OK</span>. Het venster Add Finished! dat soortgelijk is aan dat hieronder zal verschijnen:
+                        </p>
+                        <div class="mediaobject"><img src="images/Team_projects_Add.png"></div>
+                        <p>De inhoud van de map voor de checkout zal overeenkomstig worden gemarkeerd:</p>
+                        <div class="mediaobject"><img src="images/Team_projects_checkoutAddFolder.png"></div>
+                     </li>
+                     <li class="listitem">
+                        <p><span class="bold"><strong>indienen (commit) van lokale wijzigingen naar de server: </strong></span>klik met rechts op de map voor de lokale checkout en selecteer <span class="guilabel">SVN Commit....</span> Het venster Commit - zie hierionder - opent. Vink de wijzigingen aan die moeten worden gemaakt - d.i. de mappen en bestanden
+                           die in dit geval moeten worden toegevoegd.
+                        </p>
+                        <div class="mediaobject"><img src="images/Team_projects_initialCommit.png"></div>
+                        <p>Voer een toepasselijke boodschap in het berichtenvenster in en druk op <span class="guilabel">OK</span>. Het venster Commit zal openen en de voortgang van de opdracht tot indienen weergeven. Het zal eerst de huidige inhoud bij
+                           de opslagplaats van de server indienen en dan de lokale kopie van de opslagplaats bijwerken - d.i. de inhoud van de submap
+                           .svn - zodat die up to date is met de laatste versie in de opslagplaats.
+                        </p>
+                     </li>
+                     <li class="listitem">
+                        <p><span class="bold"><strong>lokale bestanden in de kopie op de lokale opslagplaats bijwerken</strong></span> - de ontvangen wijzigingen van de opslagplaats op de server bevinden zich in de map .svn  maar nog niet in de bestanden en
+                           mappen zelf. Klik met rechts op de map voor de checkout en selecteer <span class="guilabel">SVN Update</span> om de lokale bestanden bij te werken. Vink de inhoud van de map aan om te bevestigen dat de lokale kopie van de opslagplaats
+                           en de overeenkomstige bestanden en mappen overeenkomen met de laatste versie op de server:
+                        </p>
+                        <div class="mediaobject"><img src="images/Team_projects_checkoutSVNupdate.png"></div>
+                     </li>
+                  </ul>
+               </div>
+            </div>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e10704"></a>3. Het teamproject gebruiken in OmegaT
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>Als het teamproject een maal is ingesteld, hoeven leden van het team slechts via <span class="application">OmegaT</span> toegang tot het teamproject te krijgen. Eerst moeten zij <span class="guilabel">Project &gt; Teamproject downloaden</span> gebruiken. Dit zal actueel een checkout doen van het project naar een lokale map. Inloggegevens worden opgeslagen zodat het
+               niet nodig is om ze elke keer in te voeren. Onder Linux, als <span class="application">OmegaT</span> nog steeds vraagt naar uw inloggegevens, kunt u het keuzevak <span class="guilabel">Wachtwoord opslaan als platte tekst</span> aanvinken.
+            </p>
+            <p>Voor volgend gebruik is alles dat nodig is het openen van het project net als elk ander project van <span class="application">OmegaT</span>. OmegaT zal het als een teamproject herkennen en zal alles, standaard elke drie minuten, automatisch synchroniseren.
+            </p>
+         </div>
+      </div>
+      <div class="navfooter">
+         <hr>
+         <table width="100%" summary="Navigation footer">
+            <tr>
+               <td width="40%" align="left"><a accesskey="p" href="appendix.keyboard.html">Terug</a>&nbsp;
+               </td>
+               <td width="20%" align="center">&nbsp;</td>
+               <td width="40%" align="right">&nbsp;<a accesskey="n" href="appendix.TokenizerPlugin.inOmegaT.html">Volgende</a></td>
+            </tr>
+            <tr>
+               <td width="40%" align="left" valign="top">Bijlage B. Sneltoetsen voor het toetsenbord voor het bewerken&nbsp;</td>
+               <td width="20%" align="center"><a accesskey="h" href="index.html">Begin</a></td>
+               <td width="40%" align="right" valign="top">&nbsp;Bijlage D. plug-in Tokenizer</td>
+            </tr>
+         </table>
+      </div>
+   </body>
+</html>

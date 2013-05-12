@@ -1,0 +1,435 @@
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <title>Hoofdstuk 8. OmegaT bestanden en mappen</title>
+      <link rel="stylesheet" type="text/css" href="OmegaT.css">
+      <meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
+      <link rel="home" href="index.html" title="OmegaT - Gebruikershandleiding">
+      <link rel="up" href="index.html" title="OmegaT - Gebruikershandleiding">
+      <link rel="prev" href="chapter.file.filters.html" title="Hoofdstuk 7. Bestandsfilters">
+      <link rel="next" href="chapter.files.to.translate.html" title="Hoofdstuk 9. Te vertalen bestanden">
+   </head>
+   <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+      <div class="navheader">
+         <table width="100%" summary="Navigation header">
+            <tr>
+               <th colspan="3" align="center">Hoofdstuk 8. <span class="application">OmegaT</span> bestanden en mappen
+               </th>
+            </tr>
+            <tr>
+               <td width="20%" align="left"><a accesskey="p" href="chapter.file.filters.html">Terug</a>&nbsp;
+               </td>
+               <th width="60%" align="center">&nbsp;</th>
+               <td width="20%" align="right">&nbsp;<a accesskey="n" href="chapter.files.to.translate.html">Volgende</a></td>
+            </tr>
+         </table>
+         <hr>
+      </div>
+      <div class="chapter">
+         <div class="titlepage">
+            <div>
+               <div>
+                  <h1 class="title"><a name="chapter.files.and.folders"></a>Hoofdstuk 8. <span class="application">OmegaT</span> bestanden en mappen
+                  </h1>
+               </div>
+            </div>
+         </div>
+         <div class="toc">
+            <dl class="toc">
+               <dt><span class="section"><a href="chapter.files.and.folders.html#translation.project.files">1. Projectbestanden vertaling</a></span></dt>
+               <dd>
+                  <dl>
+                     <dt><span class="section"><a href="chapter.files.and.folders.html#file.omegat.project">1.1. Bovenste map</a></span></dt>
+                     <dt><span class="section"><a href="chapter.files.and.folders.html#d0e4917">1.2. Submap dictionary</a></span></dt>
+                     <dt><span class="section"><a href="chapter.files.and.folders.html#d0e4925">1.3. Submap glossary</a></span></dt>
+                     <dt><span class="section"><a href="chapter.files.and.folders.html#folder.OmegaT">1.4. Submap omegat</a></span></dt>
+                     <dt><span class="section"><a href="chapter.files.and.folders.html#folder.source">1.5. Submap source</a></span></dt>
+                     <dt><span class="section"><a href="chapter.files.and.folders.html#folder.target">1.6. Submap target</a></span></dt>
+                  </dl>
+               </dd>
+               <dt><span class="section"><a href="chapter.files.and.folders.html#user.files">2. Bestanden met gebruikersinstellingen</a></span></dt>
+               <dt><span class="section"><a href="chapter.files.and.folders.html#application.files">3. Toepassingsbestanden</a></span></dt>
+            </dl>
+         </div>
+         <p><span class="application">OmegaT</span> werkt met drie bestandstypen.
+         </p>
+         <div class="itemizedlist">
+            <ul class="itemizedlist" style="list-style-type: disc; ">
+               <li class="listitem">
+                  <p>Projectbestanden vertaling: Deze vormen een vertaalproject. Verlies van deze bestanden kan de integriteit van het project
+                     beïnvloeden alsmede de mogelijkheid van het voltooien van uw werk. Projectbestanden zijn de meest belangrijke bestanden in
+                     <span class="application">OmegaT</span>. Het zijn de bestanden waarmee u dagelijks hebt te maken bij het vertalen.
+                  </p>
+               </li>
+            </ul>
+         </div>
+         <div class="itemizedlist">
+            <ul class="itemizedlist" style="list-style-type: disc; ">
+               <li class="listitem">
+                  <p>Bestanden voor gebruikersinstellingen: Deze worden gemaakt als het gedrag van OmegaT wordt gewijzigd met voorkeursinstellingen
+                     voor de gebruiker. Verlies van deze bestanden zorgt er meestal voor dat OmegaT terugkeert naar de "fabrieksinstellingen".
+                     Dit kan soms enige problemen geven als u midden in een vertaling bent.
+                  </p>
+               </li>
+            </ul>
+         </div>
+         <div class="itemizedlist">
+            <ul class="itemizedlist" style="list-style-type: disc; ">
+               <li class="listitem">
+                  <p>Toepassingsbestanden: Zij zijn opgenomen in het pakket dat u hebt gedownload. De meeste er van zijn nodig om OmegaT juist
+                     te laten functioneren. Als door enige oorzaak deze bestanden verloren gaan of beschadigd worden, download en herinstalleer
+                     OmegaT dan om ze allemaal terug te zetten.
+                  </p>
+               </li>
+            </ul>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="translation.project.files"></a>1. Projectbestanden vertaling
+                     </h2>
+                  </div>
+               </div>
+            </div><a class="indexterm" name="d0e4850"></a><p>Een <span class="application">OmegaT</span> vertaalproject bestaat uit een aantal bestanden en mappen.
+            </p>
+            <p>Als u een vertaalproject maakt, maakt OmegaT automatisch een map met de gespecificeerde naam aan en een lijst met mappen:</p>
+            <div class="figure"><a name="OmegaT.project"></a><p class="title"><b>Afbeelding 8.1. OmegaT project</b></p>
+               <div class="figure-contents">
+                  <div class="mediaobject"><img src="images/Omegatproject.png" alt="OmegaT project"></div>
+               </div>
+            </div><br class="figure-break"><p>Alternatieve locaties voor sommige mappen kunnen worden gekozen bij het maken van het project of tijdens de vertaling. Het
+               is daarom mogelijk om bestaande mappen te kiezen of mappen te maken op locaties die passen bij uw eigen werkwijze en projectbeheer.
+               Open <span class="guimenuitem">Project &gt; Eigenschappen...</span> of met <span class="guibutton">Ctrl+E</span> en maak de nodige aanpassingen om de locaties van de mappen te wijzigen nadat een project is gemaakt.
+            </p>
+            <p>In een bestandsbeheerder ziet een vertaalproject er precies zo uit als elke andere map en gedraagt zich ook zo. In het volgende
+               voorbeeld bevat de map <code class="filename">mijn projecten</code> drie projecten van OmegaT:
+            </p>
+            <div class="figure"><a name="OmegaT.projects.and.subfolders"></a><p class="title"><b>Afbeelding 8.2. OmegaT projecten en mappen</b></p>
+               <div class="figure-contents">
+                  <div class="mediaobject"><img src="images/OmegaT_projects_and_subfolders.png" alt="OmegaT projecten en mappen"></div>
+               </div>
+            </div>
+            <p><br class="figure-break"></p>
+            <p>Dubbelklikken op het item met het pictogram van OmegaT is voldoende om het project te openen. Een vertaalproject <span class="bold"><strong>Voorbeeld_Project</strong></span>, gemaakt met de standaard instellingen, zal worden gemaakt als een nieuwe submap met de volgende structuur:
+            </p>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="file.omegat.project"></a>1.1. Bovenste map<a class="indexterm" name="d0e4898"></a></h3>
+                     </div>
+                  </div>
+               </div>
+               <p>De bovenste map van een project bevat altijd het bestand<code class="filename"> OmegaT.Project</code>, dat de parameters voor het project bevat zoals die zijn gedefinieerd in het venster Projecteigenschappen (<span class="guimenuitem">Bestand &gt; Eigenschappen</span>). Als de vertaling vordert worden in deze map aanvullende bestanden (<span class="emphasis"><em><code class="filename">project_naam</code></em></span><code class="filename">-omegat.tmx, project_naam-level1.tmx en project_naam-level2.tmx</code>) gemaakt (en bijgewerkt gedurende het vertaalproces). Zij bevatten één en dezelfde inhoud voor het vertaalgeheugen in verschillende
+                  vormen, om in toekomstige projecten te worden gebruikt.
+               </p>
+            </div>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="d0e4917"></a>1.2. Submap dictionary
+                        </h3>
+                     </div>
+                  </div>
+               </div>
+               <p>Bij aanvang leeg, zal deze map woordenboeken bevatten die u zult toevoegen aan het project. Bekijk <a class="link" href="chapter.dictionaries.html" title="Hoofdstuk 17. Woordenboeken">hoofdstuk Woordenboeken</a> voor meer over dit onderwerp.
+               </p>
+            </div>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="d0e4925"></a>1.3. Submap glossary
+                        </h3>
+                     </div>
+                  </div>
+               </div>
+               <p>Deze map is bij aanvang leeg. Hij zal de woordenlijsten bevatten die u in het project zult gebruiken. Bekijk <a class="link" href="chapter.glossaries.html" title="Hoofdstuk 18. Woordenlijsten">hoofdstuk Woordenlijsten</a> voor meer over dit onderwerp.
+               </p>
+            </div>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="folder.OmegaT"></a>1.4. Submap omegat<a class="indexterm" name="d0e4936"></a></h3>
+                     </div>
+                  </div>
+               </div>
+               <p>De submap <span class="bold"><strong>omegat</strong></span> bevat ten minste één en mogelijk meerdere andere bestanden. Het meest belangrijke bestand is hier <code class="filename">project_save.tmx, </code>dat het werkende vertaalgeheugen voor het project is. Back-ups van dit bestand (met de extensie bak) worden progressief toegevoegd
+                  aan deze map, eerst aan het begin van de vertaalsessie, aan het einde daarvan en als de vertaling vordert. Op deze manier
+                  wordt een onbedoeld verlies van gegevens vermeden - bekijk Gegevensverlies voorkomen in hoofdstuk <a class="link" href="chapter.misc.html" title="Hoofdstuk 21. Diverse onderwerpen">Diverse onderwerpen.</a></p>
+               <p>Gedurende de vertaling kunnen als volgt aanvullende bestanden in deze map worden gecreëerd</p>
+               <div class="informaltable">
+                  <table border="1">
+                     <colgroup>
+                        <col align="left">
+                        <col>
+                     </colgroup>
+                     <tbody>
+                        <tr>
+                           <td align="left">stats.txt</td>
+                           <td align="left"><a class="indexterm" name="d0e4962"></a>bevat de huidige statistieken van het huidige project. U kunt het bekijken door te selecteren <span class="guimenuitem">Extra &gt; Statistieken</span></td>
+                        </tr>
+                        <tr>
+                           <td align="left">ignored_words.txt. learned_words.txt</td>
+                           <td align="left"><a class="indexterm" name="d0e4974"></a>worden gemaakt en gebruikt door de spellingscontrole. Als u al woorden hebt verzameld waarvan u wilt dat de spellingscontrole
+                              die negeert / accepteert, hoeft u slechts de corresponderende twee bestanden naar de submap <code class="filename">omegat</code> van uw huidige project te kopiëren.
+                           </td>
+                        </tr>
+                        <tr>
+                           <td align="left">project_stats_match.txt</td>
+                           <td align="left">bevat de laatste statistieken voor overeenkomsten in het project, gegenereerd door <span class="guimenuitem">Extra &gt; Statistieken voor overeenkomsten</span></td>
+                        </tr>
+                        <tr>
+                           <td align="left">segmentation.conf</td>
+                           <td align="left">indien aanwezig bevat het projectspecifieke segmentatieregels, indien vereist in <span class="guimenuitem">Project &gt; Eigenschappen ... </span>Bekijk <a class="link" href="chapter.project.properties.html" title="Hoofdstuk 6. Projecteigenschappen">hoofdstuk Projecteigenschappen</a></td>
+                        </tr>
+                        <tr>
+                           <td align="left">filters.xml</td>
+                           <td align="left">indien aanwezig bevat het projectspecifieke bestandsfilters, indien vereist in <span class="guimenuitem">Project &gt; Eigenschappen ... </span>Bekijk <a class="link" href="chapter.project.properties.html" title="Hoofdstuk 6. Projecteigenschappen">hoofdstuk Projecteigenschappen</a></td>
+                        </tr>
+                     </tbody>
+                  </table>
+               </div>
+            </div>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="folder.source"></a>1.5. Submap source<a class="indexterm" name="d0e5013"></a></h3>
+                     </div>
+                  </div>
+               </div>
+               <p>De submap source bevat de bestanden die moeten worden vertaald. U kunt de bestanden er later aan toevoegen. Houdt er wel rekening
+                  mee dat de structuur van de submap source elke vorm mag hebben die u wilt. Indien de bestanden die vertaald moeten worden
+                  deel uitmaken van een boomstructuur (zoals op een website), hoeft u slechts de bovenste submap op te geven en zal OmegaT de
+                  gehele inhoud behouden, waarbij de boomstructuur intact blijft.
+               </p>
+            </div>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="folder.target"></a>1.6. Submap target<a class="indexterm" name="d0e5023"></a></h3>
+                     </div>
+                  </div>
+               </div>
+               <p>Deze submap is bij aanvang leeg. Selecteer <span class="guimenu">Project</span> → <span class="guimenuitem">Vertaalde documenten maken</span> (<span class="shortcut"><strong><span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>D</strong></span></strong></span>) om er inhoud aan toe te voegen. Bestanden in de map <code class="filename">source</code>, of zij vertaald zijn of niet, worden dan hier gegenereerd, in dezelfde hiërarchie als die welke aanwezig is in de submap
+                  source. De inhoud van de submap target zal de huidige status van de vertaling weergeven, zoals die aanwezig is in het vertaalgeheugen
+                  van het project, opgeslagen in het huidige <span class="bold"><strong>/omegat/project_save.tmx</strong></span>. Niet-vertaalde segmenten zullen hierbij hun brontaal behouden.
+               </p>
+            </div>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="user.files"></a>2. Bestanden met gebruikersinstellingen<a class="indexterm" name="d0e5051"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <p>Gebruikersbestanden bevatten de informatie die van toepassing is voor alle projecten voor een bepaalde gebruiker;</p>
+            <div class="informaltable">
+               <table border="1">
+                  <colgroup>
+                     <col align="left">
+                     <col>
+                  </colgroup>
+                  <tbody>
+                     <tr>
+                        <td align="left">logs/OmegaT.log</td>
+                        <td align="left">Dit bestand slaat foutberichten van Java op terwijl <span class="application">OmegaT</span> wordt uitgevoerd. Als OmegaT zich niet goed lijkt te gedragen is het belangrijk om dit bestand of het relevante gedeelte
+                           daarvan op te nemen in een foutenrapport.
+                        </td>
+                     </tr>
+                     <tr>
+                        <td align="left">script/</td>
+                        <td align="left">map die scriptbestanden bevat voor de plug-in Scripting, indien geïnstalleerd</td>
+                     </tr>
+                     <tr>
+                        <td align="left">filters.xml</td>
+                        <td align="left">standaard bestandsfilters voor de gebruiker</td>
+                     </tr>
+                     <tr>
+                        <td align="left">omegat.prefs</td>
+                        <td align="left">voorkeuren van OmegaT</td>
+                     </tr>
+                     <tr>
+                        <td align="left">segmentation.conf</td>
+                        <td align="left">standaard segmentatieregels voor de gebruiker</td>
+                     </tr>
+                     <tr>
+                        <td align="left">uiLayout.xml</td>
+                        <td align="left">Een xml-bestand met alle toegankelijke optie-instellingen voor de GUI.</td>
+                     </tr>
+                  </tbody>
+               </table>
+            </div>
+            <p>Onthoud dat de standaard segmentatieregels en bestandsfilters kunnen worden overschreven door een projectspecifieke instelling
+               (zie boven). De locatie van gebruikersbestanden is afhankelijk van het platform dat u gebruikt:
+            </p>
+            <div class="informaltable">
+               <table border="1">
+                  <colgroup>
+                     <col align="left">
+                     <col>
+                  </colgroup>
+                  <tbody>
+                     <tr>
+                        <td align="left">Windows 2000 en XP</td>
+                        <td align="left"><code class="literal">Documents and Settings\&lt;gebruikersnaam&gt;\Application Data\<span class="application">OmegaT</span></code></td>
+                     </tr>
+                     <tr>
+                        <td align="left">Windows Vista en 7</td>
+                        <td align="left"><code class="literal">Users\&lt;gebruikersnaam&gt;\AppData\Roaming\<span class="application">OmegaT</span></code></td>
+                     </tr>
+                     <tr>
+                        <td align="left">andere Windows</td>
+                        <td align="left"><code class="literal">&lt;Iets&gt;\<span class="application">OmegaT</span></code> (&lt;Iets&gt; komt overeen met de locatie van de map "home" zoals die wordt vastgesteld door Java.)
+                        </td>
+                     </tr>
+                     <tr>
+                        <td align="left">Linux/Solaris/FreeBSD</td>
+                        <td align="left"><code class="literal">&lt;User Home&gt;/.omegat</code> (.omegat is een map, de punt die voor de naam staat maakt die onzichtbaar tenzij u typt ls -a of een overeenkomende opdracht.)
+                        </td>
+                     </tr>
+                     <tr>
+                        <td align="left">MAC OS X</td>
+                        <td align="left"><code class="filename">&lt;gebruiker Home&gt;/Library/Preferences/<span class="application">OmegaT</span></code></td>
+                     </tr>
+                     <tr>
+                        <td align="left">Andere</td>
+                        <td align="left"><code class="filename">&lt;gebruiker Home&gt;</code></td>
+                     </tr>
+                  </tbody>
+               </table>
+            </div>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="application.files"></a>3. Toepassingsbestanden<a class="indexterm" name="d0e5150"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <p>OmegaT wordt uitgegeven als een pakket dat u kunt downloaden vanaf SourceForge. Hier wordt een platform-onafhankelijk pakket
+               in een standaard Java-vorm overwogen. Alternatieven bevatten een Linux .tar-pakket, een Windows-installatieprogramma - met
+               of zonder een Java Runtime Environment -, een Mac OS X-installatieprogramma en een broncodepakket voor ontwikkelaars.
+            </p>
+            <p>Het platform onafhankelijke pakket kan worden gebruikt op elk platform met een werkende Java 1.5 runtime omgeving, inclusief
+               de platforms waarvoor een specifiek pakket bestaat. Het wordt geleverd als een gecomprimeerd bestand (zip- of tar-archief)
+               dat u in de map van uw keuze moet uitpakken om te installeren. Het bestand kan gewoonlijk worden uitgepakt door op het gedownloade
+               pakket te dubbelklikken. Als het archief is uitgepakt zal een map zijn gemaakt met de volgende inhoud:
+            </p>
+            <div class="informaltable">
+               <table border="1">
+                  <colgroup>
+                     <col align="left">
+                     <col>
+                  </colgroup>
+                  <tbody>
+                     <tr>
+                        <td align="left"><span class="bold"><strong>Bestand/ submap</strong></span></td>
+                        <td align="left"><span class="bold"><strong>Inhoud</strong></span></td>
+                     </tr>
+                     <tr>
+                        <td align="left"><code class="filename">/docs/</code></td>
+                        <td align="left">Alle bestanden van de gebruikershandleiding staan in deze map. U kunt ze in een internetbrowser openen om toegang te krijgen
+                           tot externe koppelingen.
+                        </td>
+                     </tr>
+                     <tr>
+                        <td align="left"><code class="filename">/images/</code></td>
+                        <td align="left">Pictogrammen en logo-afbeeldingen</td>
+                     </tr>
+                     <tr>
+                        <td align="left"><code class="filename">/lib/</code></td>
+                        <td align="left">Bevat Java-bestanden die nodig zijn om <span class="application">OmegaT</span> uit te voeren.
+                        </td>
+                     </tr>
+                     <tr>
+                        <td align="left"><code class="filename">join.html</code></td>
+                        <td align="left">Dit is een normaal html-bestand dat, eenmaal geopend in uw internetbrowser, u naar de OmegaT gebruikersgroep brengt die wordt
+                           gehost op Yahoo! Groups. Abonneren is niet noodzakelijk maar geeft u toegang tot aanvullende services, zoals bestanden en
+                           onregelmatige polls, daarnaast kunt u deelnemen aan discussies die zijn gerelateerd aan OmegaT. De archieven van de groep
+                           zijn openbaar en het raadplegen daarvan vereist geen abonnement op de groep.
+                        </td>
+                     </tr>
+                     <tr>
+                        <td align="left"><code class="filename">changes.txt</code></td>
+                        <td align="left">Een relatief gedetailleerde lijst van aanpassingen tussen deze versie en de voorafgaande versies.</td>
+                     </tr>
+                     <tr>
+                        <td align="left"><code class="filename">license.txt</code></td>
+                        <td align="left">De GNU GENERAL PUBLIC LICENSE. Deze licentie staat u toe om bepaalde dingen met <span class="application">OmegaT</span> te doen, inclusief het aanpassen en distribueren ervan. Indien u bent geïnteresseerd in het aanpassen of distribueren van
+                           <span class="application">OmegaT</span>, lees dit document dan zorgvuldig door en zorg er voor dat u bekend bent met alle implicaties vóórdat u iets anders doet.
+                           Als u twijfelt, aarzel dan niet om de projectleden direct te benaderen ofwel door hen een mail te sturen vanaf de pagina van
+                           SourceForge of door een publieke mail te sturen aan de gebruikersgroep.
+                        </td>
+                     </tr>
+                     <tr>
+                        <td align="left"><code class="filename">doc-license.txt</code></td>
+                        <td align="left">De GNU GENERAL PUBLIC LICENSE. Deze licentie behandelt de documentatie. Zie boven.</td>
+                     </tr>
+                     <tr>
+                        <td align="left"><code class="filename">readme.txt</code></td>
+                        <td align="left">Dit bestand is heel belangrijk en u zou het gelezen moeten hebben voordat u met OmegaT begon. Het bevat algemene informatie
+                           over OmegaT, waar meer informatie te vinden is, hoe mee te doen etc. Het is vertaald in een aantal talen.
+                        </td>
+                     </tr>
+                     <tr>
+                        <td align="left"><span class="application">Omegat</span></td>
+                        <td align="left">
+                           <p>Een tekstbestand dat twee regels bevat:</p>
+                           
+                                       <pre class="programlisting">#!/bin/bash java
+java -jar OmegaT.jar $*</pre>
+                           
+                                       <p>Linux- en OS X-gebruikers zouden dit handig kunnen vinden. Maak het uitvoerbaar (<code class="literal">chmod +x OmegaT</code>) vanaf de opdrachtregel nadat u zich er van overtuigd hebt dat u in de map /OmegaT_3.0/ bent. U kunt dan OmegaT starten door
+                              dit bestand vanaf de opdrachtregel uit te voeren
+                           </p>
+                                       
+                        </td>
+                     </tr>
+                     <tr>
+                        <td align="left">OmegaT.bat</td>
+                        <td align="left">
+                           <p>Een batch-bestand gebruikt om <span class="application">OmegaT</span> te starten vanaf de opdrachtregel van Windows. Het bevat slechts de volgende regel:
+                           </p>
+                           
+                                       <pre class="programlisting">java -jar OmegaT.jar %*</pre>
+                                       </td>
+                     </tr>
+                     <tr>
+                        <td align="left"><code class="literal">OmegaT.jar</code></td>
+                        <td align="left">De hoofdtoepassing OmegaT. U moet dit bestand aanroepen vanaf de opdrachtregel of starten vanuit uw bestandsbeheerder, gewoonlijk
+                           door er op te dubbelklikken, om OmegaT te starten.
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </div>
+         </div>
+      </div>
+      <div class="navfooter">
+         <hr>
+         <table width="100%" summary="Navigation footer">
+            <tr>
+               <td width="40%" align="left"><a accesskey="p" href="chapter.file.filters.html">Terug</a>&nbsp;
+               </td>
+               <td width="20%" align="center">&nbsp;</td>
+               <td width="40%" align="right">&nbsp;<a accesskey="n" href="chapter.files.to.translate.html">Volgende</a></td>
+            </tr>
+            <tr>
+               <td width="40%" align="left" valign="top">Hoofdstuk 7. Bestandsfilters&nbsp;</td>
+               <td width="20%" align="center"><a accesskey="h" href="index.html">Begin</a></td>
+               <td width="40%" align="right" valign="top">&nbsp;Hoofdstuk 9. Te vertalen bestanden</td>
+            </tr>
+         </table>
+      </div>
+   </body>
+</html>

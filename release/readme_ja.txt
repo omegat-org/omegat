@@ -279,7 +279,7 @@ OmegaT は以下に示すライブラリを使用しています。
   jWordSplitter（Apache ライセンス 2.0）
   LanguageTool.jar（LGPL ライセンス）
   morfologik-*.jar（Morfologik ライセンス）
-  segment-1.3.0.jar（Segment ライセンス）
+  segment-1.4.1.jar（Segment ライセンス）
   pdfbox-app-1.8.1.jar（Apache ライセンス 2.0）
   Fontbox-0.1.0.jar and JempBox-0.2.0.jar（Fontbox ライセンス）
   icu4j-51_1.jar（ICU4J ライセンス）

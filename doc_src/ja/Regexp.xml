@@ -5,7 +5,7 @@
       <primary>正規表現</primary> <seealso>分節化</seealso> <seealso>検索</seealso>
     </indexterm></title>
 
-  <para>文字列検索と分節化規則で使用する正規表現は、Java がサポートしているものです。より詳細な情報については <ulink url="http://docs.oracle.com/javase/jp/1.5.0/api/java/util/regex/Pattern.html">Java の正規表現に関する技術文書</ulink>を参照してください。以下の構文一覧と使用例も参照してください。</para>
+  <para>文字列検索と分節化規則で使用する正規表現は、Java がサポートしているものです。より詳細な情報については <ulink url="http://docs.oracle.com/javase/jp/6/api/java/util/regex/Pattern.html">Java の正規表現に関する技術文書</ulink>を参照してください。以下の構文一覧と使用例も参照してください。</para>
 
   <note>
     <para>この章は上級者のユーザーを対象にしています。独自の分節化規則を定義したり、こみいった条件での検索を必要とする場合に、参照してください。</para>
@@ -191,13 +191,13 @@
         <row>
           <entry>\p{InGreek}</entry>
 
-          <entry>ギリシャ語ブロックの文字（単純 <ulink url="http://docs.oracle.com/javase/jp/1.5.0/api/java/util/regex/Pattern.html#ubc">ブロック</ulink>）</entry>
+          <entry>ギリシャ語ブロックの文字（単純 <ulink url="http://docs.oracle.com/javase/jp/6/api/java/util/regex/Pattern.html#ubc">ブロック</ulink>）</entry>
         </row>
 
         <row>
           <entry>\p{Lu}</entry>
 
-          <entry>大文字（単純 <ulink url="http://docs.oracle.com/javase/jp/1.5.0/api/java/util/regex/Pattern.html#ubc">カテゴリ</ulink>）</entry>
+          <entry>大文字（単純 <ulink url="http://docs.oracle.com/javase/jp/6/api/java/util/regex/Pattern.html#ubc">カテゴリ</ulink>）</entry>
         </row>
 
         <row>

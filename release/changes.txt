@@ -35,7 +35,7 @@ documented in docs_devel/OmegaT developer's guide.odt
   https://sourceforge.net/p/omegat/bugs/582/
 
   - New tag handling changes XML formatting for empty tags 
-  - https://sourceforge.net/p/omegat/bugs/581/
+  https://sourceforge.net/p/omegat/bugs/581/
 
   - Team projects: during save, OmegaT could not update omegat.project
 and some time was lost (e.g., 13 seconds) while it tries to delete it

@@ -1,0 +1,286 @@
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <title>Appendix&nbsp;C.&nbsp;OmegaT Týmové projekty</title>
+      <link rel="stylesheet" type="text/css" href="OmegaT.css">
+      <meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
+      <link rel="home" href="index.html" title="Uživatelská skupina OmegaT">
+      <link rel="up" href="index.html" title="Uživatelská skupina OmegaT">
+      <link rel="prev" href="appendix.keyboard.html" title="Appendix&nbsp;B.&nbsp;Klávesové zkratky v editoru">
+      <link rel="next" href="appendix.TokenizerPlugin.inOmegaT.html" title="Appendix&nbsp;D.&nbsp;Plugin Tokenizer">
+   </head>
+   <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+      <div class="navheader">
+         <table width="100%" summary="Navigation header">
+            <tr>
+               <th colspan="3" align="center">Appendix&nbsp;C.&nbsp;OmegaT Týmové projekty</th>
+            </tr>
+            <tr>
+               <td width="20%" align="left"><a accesskey="p" href="appendix.keyboard.html">Prev</a>&nbsp;
+               </td>
+               <th width="60%" align="center">&nbsp;</th>
+               <td width="20%" align="right">&nbsp;<a accesskey="n" href="appendix.TokenizerPlugin.inOmegaT.html">Next</a></td>
+            </tr>
+         </table>
+         <hr>
+      </div>
+      <div class="appendix">
+         <div class="titlepage">
+            <div>
+               <div>
+                  <h1 class="title"><a name="appendix.TeamProjects"></a>Appendix&nbsp;C.&nbsp;OmegaT Týmové projekty<a class="indexterm" name="d0e10420"></a></h1>
+               </div>
+            </div>
+         </div>
+         <div class="toc">
+            <dl class="toc">
+               <dt><span class="section"><a href="appendix.TeamProjects.html#d0e10427">1. Správa verzí - úvod</a></span></dt>
+               <dt><span class="section"><a href="appendix.TeamProjects.html#d0e10498">2. Sdílení projektu za použití SVN</a></span></dt>
+               <dd>
+                  <dl>
+                     <dt><span class="section"><a href="appendix.TeamProjects.html#d0e10519">2.1. Vytvoření úložiště</a></span></dt>
+                     <dt><span class="section"><a href="appendix.TeamProjects.html#d0e10579">2.2. Import projektu do úložiště SVN - Windows</a></span></dt>
+                  </dl>
+               </dd>
+               <dt><span class="section"><a href="appendix.TeamProjects.html#d0e10716">3. Použití týmového projektu v OmegaT</a></span></dt>
+            </dl>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e10427"></a>1.&nbsp;Správa verzí - úvod
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>Překlad založený na spolupráci více překladatelů, který nabízí OmegaT, se zakládá na funkčnosti verzí nebo správě revizí,
+               hojně používané softwarovou komunitou pro správu změn v kódu programu a umožňuje tak nerušenou spolupráci v rámci vývojářského
+               týmu. OmegaT podporuje dva z populárních systémů na správu verzí (version control systems / VCS), <a class="ulink" href="http://subversion.apache.org" target="_top">Apache Subversion</a> (často zkracováno jako SVN, po příkazu jako svn) a <a class="ulink" href="http://git-scm.com/" target="_top">Git</a>. Výhody systémů na správu verzí pro tým překladatelů se dají shrnout následovně:
+            </p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>Hned několik členů týmu může pracovat na projektu ve stejný čas bez toho, aby se vzájemně rušili</p>
+                  </li>
+                  <li class="listitem">
+                     <p>Členové mohou sdílet společné materiály, jako např. překladovou paměť projektu a příslušné glosáře</p>
+                  </li>
+                  <li class="listitem">
+                     <p>Ve výchozím nastavení je pro zbytek týmu aktualizována verze sdílených dat každé tři minuty.</p>
+                  </li>
+                  <li class="listitem">
+                     <p>Systém spravuje verze sdílených dat</p>
+                  </li>
+                  <li class="listitem">
+                     <p>Konflikty - například alternativní překlady stejného segmentu nebo záznamu v glosáři - lze monitorovat, řešit a zpracovat
+                        odpovídajícím způsobem.
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <p>V následující části budou alespoň krátce vysvětleny pojmy, které se vyskytují v dalším níže uvedeném textu:</p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p><span class="bold"><strong>VCS server - </strong></span>tj. SVN nebo Git server, který poskytuje prostředí kde je společný materiál udržován a spravován na síti. Server může existovat
+                        v místní síti, ale ve většině případů bude dostupný na internetu, tj. přes adresu URL. Jeden člen týmu, administrátor projektu,
+                        musí být obeznámen s obsluhou serveru, tj.  jeho úkolem je nastavení prostředí, import projektu OmegaT, přiřazení přístupových
+                        práv členům týmu, řešení konfliktů, atd.
+                     </p>
+                  </li>
+                  <li class="listitem">
+                     <p><span class="bold"><strong>VSC klient:</strong></span> SVN nebo Git klient na propojení se serverem musí být instalován na počítačích „správců projektu“, kteří se podílejí na projektu
+                        OmegaT Velmi oblíbené klienty v prostředí Windows jsou <a class="ulink" href="http://tortoisesvn.net/" target="_top">TortoiseSVN</a> a <a class="ulink" href="http://code.google.com/p/tortoisegit/" target="_top">TortoiseGit</a>. Jiné operační systémy (Linux, OS X) nabízejí podobné balíčky.
+                     </p>
+                  </li>
+                  <li class="listitem">
+                     <p><span class="bold"><strong>úložiště (jinak řečeno ‚repozitář‘):</strong></span> místo, kde je sdílený materiál uložen a také spravován, buď v místní síti nebo na internetu. Členové týmu se k úložišti připojí
+                        přes svého VCS klienta.
+                     </p>
+                  </li>
+                  <li class="listitem">
+                     <p><span class="bold"><strong>získat / ‚checkout‘:</strong></span> operace, která vytvoří pracovní kopii úložiště na váš místní počítač. Server si ukládá informace o získávání dat, takže je
+                        možné řádným způsobem později provádět odevzdání (viz níže).
+                     </p>
+                  </li>
+                  <li class="listitem">
+                     <p><span class="bold"><strong>odevzdat / ‚commit‘</strong></span>: jakmile je k dispozici nová místní verze materiálu, který je připraven k odeslání, může být odevzdán do úložiště a tím pádem
+                        zpřístupněn zbytku týmu. Server se ujistí, že budou vyřešeny konfliktní změny, které by se mohly vyskytovat pokud dva členové
+                        týmu pracují na stejném obsahu.
+                     </p>
+                  </li>
+                  <li class="listitem">
+                     <p><span class="bold"><strong>správce:</strong></span> osoba odpovědná za vytvoření a správu úložiště, tj. plnění úkolů spojených s projektem ze strany serveru. Aby se zabránilo
+                        problémům, měla by ze začátku projektu mít tato práva pouze jedna osoba.
+                     </p>
+                  </li>
+                  <li class="listitem">
+                     <p><span class="bold"><strong>uživatel</strong></span>: člen týmu, který spolupracuje na společném projektu.
+                     </p>
+                  </li>
+               </ul>
+            </div>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e10498"></a>2.&nbsp;Sdílení projektu za použití SVN<a class="indexterm" name="d0e10501"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <p>Existují dvě možnosti jak rozběhnout SVN server: můžete instalovat SVN na svůj server nebo můžete použít hostující službu.
+               Když používáte externí službu musíte si být vědomi možných následků v rámci utajení dat, protože nahráváte originální dokument
+               na server, nad kterým nemáte přímou kontrolu.  Alternativně, abyste zabránili tomuto problému, můžete nastavit soukromý SVN
+               server, například pokud již máte Apache server, který obsahuje dotyčný software (např. VisualSVN).
+            </p>
+            <p>Jakmile je SVN server dostupný, správci projektu musí lokálně instalovat SVN klienta, aby mohli spravovat obsah projektu na
+               svých počítačích. Pro Windows doporučujeme <a class="ulink" href="http://tortoisesvn.net/" target="_top">TortoiseSVN</a>. Pro Mac můžete stáhnout klienta např. z <a class="ulink" href="https://sourceforge.net/projects/macsvn/" target="_top">SourceForge</a>, pro Linux viz <a class="ulink" href="www.yolinux.com/TUTORIALS/Subversion.html" target="_top">Subversion Commands and Scripts</a>. 
+            </p>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="d0e10519"></a>2.1.&nbsp;Vytvoření úložiště<a class="indexterm" name="d0e10522"></a></h3>
+                     </div>
+                  </div>
+               </div>
+               <p>Zde uvedený postup se opírá o svobodný SVN server (s omezením na 2 uživatele), který nabízí  <a class="ulink" href="http://projectlocker.com/" target="_top">ProjectLocker</a>. Ten, kdo úložiště vytváří musí mít pro vytvářený úložiště již od počátku práva správce. Nejprve se přihlaste na stránku
+                  nebo - pokud jste na stránce poprvé, registrujte se k přístupu a poznačte si své uživatelské jméno a heslo pro budoucí projekty.
+               </p>
+               <div class="orderedlist">
+                  <ol class="orderedlist" type="1">
+                     <li class="listitem">
+                        <p>Vytvořte nový projekt v části ProjectLocker.</p>
+                     </li>
+                     <li class="listitem">
+                        <p>Zapište název a popis úložiště. (<code class="literal">OmegaT</code> a <code class="literal">OmegaT SL Localization</code> v našem příkladě)
+                        </p>
+                     </li>
+                     <li class="listitem">
+                        <p>Vyberte <span class="guibutton">SVN.</span></p>
+                     </li>
+                     <li class="listitem">
+                        <p>Klikněte na <span class="guibutton">Vytvořit projekt / Create Project</span></p>
+                     </li>
+                  </ol>
+               </div>
+               <p>Pro zobrazení svého účtu otevřete položku <span class="bold"><strong>Projekty</strong></span>. URL zobrazená pod Službami projektu (Project Services) bude použita v SVN k propojení klienta a SVN serveru, který jste
+                  právě založili. Zde se také přidávají členové týmu k projektu a přiřazují se jim odpovídající práva. Členové týmu musí být
+                  nejprve registrováni, a to před tím, než je budete moci přidat do projektu (Poznámka: ve verzi programu ProjectLocker, která
+                  je zdarma, máte možnost zadat pouze dva uživatele na projekt).
+               </p>
+               <p>Projekty můžete spravovat dle vlastního vývojářského stylu a potřeb. Podobně jako v případě projektů OmegaT, budete potřebovat
+                  mít oddělené úložiště pro různé jazykové páry. V rámci daného jazykového páru je také velmi dobrou volbou rozlišovat odlišné
+                  obory anebo klienty jako samostatné úložiště. Alternativa by pak byla mít jediné úložiště s podadresáři <code class="literal">Projekt1</code>, <code class="literal">Projekt2</code>, atd., a sdílet společný materiál přes společné adresáře <code class="literal">tm</code>, <code class="literal">glossary</code> a <code class="literal">dictionary</code>. 
+               </p>
+               <p>Například, jak je ukázáno zde, jsme se rozhodli pro jeden projekt OmegaT - jedno úložiště z důvodů jednoduchosti. .</p>
+            </div>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="d0e10579"></a>2.2.&nbsp;Import projektu do úložiště SVN - Windows
+                        </h3>
+                     </div>
+                  </div>
+               </div>
+               <p>Úložiště je v tento moment prázdné. Nejprve vytvoříte prázdný adresář klienta na svém disku. Vytvořte prázdný adresář, kde
+                  budete uchovávat svůj projekt a klikněte na něj pravým tlačítkem myši. Vyberte volbu <span class="guilabel"> TortoiseSVN &gt; SVN Získat... (SVN Checkout).</span> Zobrazí se následující dialogové okno:
+               </p>
+               <div class="mediaobject"><img src="images/Team_projects_checkout.png"></div>
+               <p>Vložte URL, kterou poskytl ProjectLocker do políčka <span class="bold"><strong>URL úložiště</strong></span>. Ujistěte se, že políčko <span class="bold"><strong>Adresář získání (‚Checkout directory‘)</strong></span> je správně, tj. specifikuje prázdný adresář, který jste vytvořili, a stiskněte <span class="bold"><strong>OK</strong></span>. Jakmile je operace dokončena, můžete zkontrolovat popsaný adresář: měl by nyní obsahovat podadresář .svn a mělo by být zobrazena
+                  zelená ikona s nápisem OK, to znamená, že obsah adresáře je aktuální:
+               </p>
+               <p>V dalším kroku přidáme soubory OmegaT do místního adresáře. Následující soubory jsou určeny ke sdílení mezi členy týmu a musí
+                  zde být tedy obsaženy:
+               </p>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
+                     <li class="listitem">
+                        <p>soubor s projektem OmegaT - <code class="filename">omegat.project</code></p>
+                     </li>
+                     <li class="listitem">
+                        <p>překladová paměť - <code class="filename">omegat\project_save.tmx</code></p>
+                     </li>
+                     <li class="listitem">
+                        <p>obsah zdrojového adresáře</p>
+                     </li>
+                     <li class="listitem">
+                        <p>definice filtrů specifické pro daný projekt - <code class="filename">omegat\filters.xml</code></p>
+                     </li>
+                  </ul>
+               </div>
+               <p>Správce se může rozhodnout, zda také zahrne následující adresáře a jejich obsah: <code class="filename">tm</code>, <code class="filename">glossary</code> a <code class="filename">dictionary</code>. Taktéž je dobré sdílet a spravovat na úrovni týmu soubory <code class="filename">ignored_words.txt</code> a <code class="filename">learned_words.txt</code>, které se nachází v adresáři <code class="filename">omegat</code>. Určitě se ale vyhněte přidáním souborů záloh (<code class="filename">bak</code>), statistiky  <code class="filename">project_stats.txt</code> a <code class="filename">project_stats_match.txt</code> do podadresáře <code class="filename">omegat</code>, protože by pak tyto soubory zbytečně zabíraly místo v úložišti aniž by měly pro projekt nějaký užitek. Podobné předvolby
+                  můžete zvolit pro cílový adresář <code class="filename">target</code> a jeho obsah.
+               </p>
+               <p>Po zkopírování požadovaných adresářů do adresáře získání uvidíte, že jeho ikona se změnila: zelený štítek OK se změnil na
+                  červený vykřičník, což znamená, že v místní kopii úložiště došlo ke změně. Následující dva kroky aktualizují serverovou verzi.
+               </p>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
+                     <li class="listitem">
+                        <p><span class="bold"><strong>přidat zkopírované soubory do místní verze úložiště:</strong></span> klikněte pravým tlačítkem myši na adresář získání a vyberte <span class="guilabel">TortoiseSVN &gt; Přidat.</span> V otevřeném dialogovém okně nechejte všem volbám jejich výchozí hodnoty a klikněte na <span class="guilabel"> OK</span>. Přidávání souborů je dokončeno! zobrazí se okno podobné tomu, které je zde zobrazeno níže:
+                        </p>
+                        <div class="mediaobject"><img src="images/Team_projects_Add.png"></div>
+                        <p>Obsah adresáře získání bude odpovídajícím způsobem označen:</p>
+                        <div class="mediaobject"><img src="images/Team_projects_checkoutAddFolder.png"></div>
+                     </li>
+                     <li class="listitem">
+                        <p><span class="bold"><strong>odevzdat místní změny na server:</strong></span> klikněte pravým tlačítkem na místní adresář získání a vyberte <span class="guilabel">SVN Odevzdat...</span> Otevře se okno pro odevzdání - viz níže. Zkontrolujte změny, které mají být provedeny - tj. v tomto případě přidané adresáře
+                           a soubory.
+                        </p>
+                        <div class="mediaobject"><img src="images/Team_projects_initialCommit.png"></div>
+                        <p>Vložte vhodnou zprávu do okna Zpráva a stiskněte <span class="guilabel">OK</span>. Otevře se okno odevzdání a ukáže stav provádění příkazu odevzdání. V první řadě bude odevzdán obsah serverového úložiště
+                           a pak se aktualizuje místní kopie úložiště - tj. obsahy podadresáře .svn - takže bude aktuální a odpovídat poslední verzi
+                           úložiště.
+                        </p>
+                     </li>
+                     <li class="listitem">
+                        <p><span class="bold"><strong>aktualizujte místní soubory z místní kopie úložiště</strong></span> - změny doručené ze serverového úložiště jsou umístěny v podadresáři .svn ale ne přímo v samotných souborech a adresářích.
+                           Pro aktualizaci místních souborů klikněte pravým tlačítkem myši na adresář získání a vyberte volbu pro aktualizaci <span class="guilabel">SVN Aktualizovat</span>. Zkontrolujte obsah adresáře a potvrďte, že místní kopie úložiště a odpovídající soubory a adresáře odpovídají nejnovější
+                           serverové verzi:
+                        </p>
+                        <div class="mediaobject"><img src="images/Team_projects_checkoutSVNupdate.png"></div>
+                     </li>
+                  </ul>
+               </div>
+            </div>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e10716"></a>3.&nbsp;Použití týmového projektu v OmegaT
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>Pokud je týmový projekt nastaven, jediné co členové týmu potřebují k přístupu do týmového projektu je <span class="application">OmegaT</span>. Nejprve musí otevřít <span class="guilabel">Projekt &gt; Stáhnout týmový projekt</span>. Tento krok ve skutečnosti nahraje projekt ze sítě do místního adresáře. Přihlašovací údaje budou uloženy, takže není nutno
+               je vkládat pokaždé znovu. Pokud se <span class="application">OmegaT</span> pod Linuxem stále ptá na přihlašovací údaje, můžete označit výběr zaškrtávacího políčka <span class="guilabel">Nucené uložení hesla ve formátu prostého textu</span>.
+            </p>
+            <p>Vše co potřebujete pro další používání projektu je to, že jej otevřete jako jakýkoliv jiný projekt <span class="application">OmegaT</span>. OmegaT pozná, že se jedná o týmový projekt a vše automaticky synchronizuje, ve výchozím nastavení se tak děje každé tři
+               minuty.
+            </p>
+         </div>
+      </div>
+      <div class="navfooter">
+         <hr>
+         <table width="100%" summary="Navigation footer">
+            <tr>
+               <td width="40%" align="left"><a accesskey="p" href="appendix.keyboard.html">Prev</a>&nbsp;
+               </td>
+               <td width="20%" align="center">&nbsp;</td>
+               <td width="40%" align="right">&nbsp;<a accesskey="n" href="appendix.TokenizerPlugin.inOmegaT.html">Next</a></td>
+            </tr>
+            <tr>
+               <td width="40%" align="left" valign="top">Appendix&nbsp;B.&nbsp;Klávesové zkratky v editoru&nbsp;</td>
+               <td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
+               <td width="40%" align="right" valign="top">&nbsp;Appendix&nbsp;D.&nbsp;Plugin Tokenizer</td>
+            </tr>
+         </table>
+      </div>
+   </body>
+</html>

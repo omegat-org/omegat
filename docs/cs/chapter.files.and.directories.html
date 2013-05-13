@@ -41,8 +41,8 @@
                <dd>
                   <dl>
                      <dt><span class="section"><a href="chapter.files.and.directories.html#file.omegat.project">1.1. Adresář nejvyšší úrovně</a></span></dt>
-                     <dt><span class="section"><a href="chapter.files.and.directories.html#d0e4728">1.2. Podadresář ‚dictionary‛ (slovník)</a></span></dt>
-                     <dt><span class="section"><a href="chapter.files.and.directories.html#d0e4735">1.3. Podadresář ‚glossary‛ (glosář)</a></span></dt>
+                     <dt><span class="section"><a href="chapter.files.and.directories.html#d0e4919">1.2. Podadresář ‚dictionary‛ (slovník)</a></span></dt>
+                     <dt><span class="section"><a href="chapter.files.and.directories.html#d0e4926">1.3. Podadresář ‚glossary‛ (glosář)</a></span></dt>
                      <dt><span class="section"><a href="chapter.files.and.directories.html#folder.OmegaT">1.4. Podadresář ‚omegat‛</a></span></dt>
                      <dt><span class="section"><a href="chapter.files.and.directories.html#folder.source">1.5. Podadresář zdrojového textu (source)</a></span></dt>
                      <dt><span class="section"><a href="chapter.files.and.directories.html#folder.target">1.6. Podadresář překladu (target)</a></span></dt>
@@ -67,8 +67,8 @@
             <ul class="itemizedlist" style="list-style-type: disc; ">
                <li class="listitem">
                   <p>Soubory s nastavením uživatele: Jsou vytvořeny, když uživatel pozmění chování programu OmegaT prostřednictvím nastavení voleb.
-                     Jejich ztráta znamená, že OmegaT se vrátí na „továrním nastavení“. Pokud změníte nastavení když zrovna překládáte, může to
-                     někdy zapříčinit menší problémy.
+                     Jejich ztráta znamená, že OmegaT se vrátí na „tovární nastavení“. Pokud změníte nastavení když zrovna překládáte, může to
+                     někdy zapříčinit určité problémy.
                   </p>
                </li>
             </ul>
@@ -91,18 +91,18 @@
                      </h2>
                   </div>
                </div>
-            </div><a class="indexterm" name="d0e4663"></a><p>Překladový projekt programu <span class="application">OmegaT</span> zahrnuje množství souborů a adresářů.
+            </div><a class="indexterm" name="d0e4852"></a><p>Překladový projekt programu <span class="application">OmegaT</span> zahrnuje množství souborů a adresářů.
             </p>
             <p>Když vytvoříte překladový projekt, OmegaT automaticky vytvoří adresář se specifickým názvem a seznam adresářů:</p>
             <div class="figure"><a name="OmegaT.project"></a><p class="title"><b>Figure&nbsp;8.1.&nbsp;Projekt OmegaT</b></p>
                <div class="figure-contents">
                   <div class="mediaobject"><img src="images/Omegatproject.png" alt="Projekt OmegaT"></div>
                </div>
-            </div><br class="figure-break"><p>Při vytváření projektu nebo během překladu si můžete vybrat alternativní umístění pro některé adresáře Je proto možné, vybrat
-               již existující adresář nebo vytvořit adresáře na takovém umístění, které bude odpovídat vašemu pracovnímu postupu a zvykům
-               projektového managementu. I po vytvoření projektu je možno změnit umístění adresářů, a to otevřením <span class="guimenuitem">Projekt &gt; Vlastnosti...</span> v nabídce nebo klávesovou zkratkou <span class="guibutton">Ctrl+E</span>, a pak je možno provést potřebné změny.
+            </div><br class="figure-break"><p>Během vytváření projektu nebo během překladu si můžete vybrat alternativní umístění pro některé adresáře. Je proto možné,
+               vybrat již existující adresář nebo vytvořit adresáře na takovém umístění, které bude odpovídat vašemu pracovnímu postupu a
+               zvykům projektového managementu. I po vytvoření projektu je možno změnit umístění adresářů, a to otevřením <span class="guimenuitem">Projekt &gt; Vlastnosti...</span> v nabídce nebo klávesovou zkratkou <span class="guibutton">Ctrl+E</span>, a pak je možno provést potřebné změny.
             </p>
-            <p>Při pohledu přes správce souborů vypadá ten stejný  překladový projekt jako jakýkoliv jiný adresář. V následujícím příkladě
+            <p>Při pohledu přes správce souborů vypadá ten stejný překladový projekt jako jakýkoliv jiný adresář. V následujícím příkladě
                obsahuje adresář <code class="filename">my projects</code> tři projekty OmegaT:
             </p>
             <div class="figure"><a name="OmegaT.projects.and.subdirectories"></a><p class="title"><b>Figure&nbsp;8.2.&nbsp;Projekty a podadresáře aplikace OmegaT</b></p>
@@ -117,18 +117,18 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="file.omegat.project"></a>1.1.&nbsp;Adresář nejvyšší úrovně<a class="indexterm" name="d0e4709"></a></h3>
+                        <h3 class="title"><a name="file.omegat.project"></a>1.1.&nbsp;Adresář nejvyšší úrovně<a class="indexterm" name="d0e4900"></a></h3>
                      </div>
                   </div>
                </div>
-               <p>Adresář nejvyšší úrovně v projektu vždy obsahuje soubore<code class="filename"> OmegaT.Project</code>, který obsahuje parametry projektu tak, jak byly definovány v okně Vlastnosti projektu (<span class="guimenuitem">Projekt &gt; Vlastnosti</span>). Během provádění překladu jsou vytvořeny další soubor (<span class="emphasis"><em><code class="filename">nazev_projektu</code></em></span><code class="filename">-omegat.tmx, nazev_projektu-level1.tmx a nazev_projektu-level2.tmx</code>)  Obsahují vždy obsahově stejnou překladovou paměť v různých formách, a budou použity v budoucích projektech.
+               <p>Adresář nejvyšší úrovně v projektu vždy obsahuje soubor <code class="filename">OmegaT.Project</code>, který obsahuje parametry projektu tak, jak byly definovány v okně Vlastnosti projektu (<span class="guimenuitem">Projekt &gt; Vlastnosti...</span>). Během provádění překladu jsou vytvořeny další soubory (<span class="emphasis"><em><code class="filename">nazev_projektu</code></em></span><code class="filename">-omegat.tmx, nazev_projektu-level1.tmx a nazev_projektu-level2.tmx</code>). Obsahují vždy obsahově stejnou překladovou paměť v různých formách, a budou použity v budoucích projektech.
                </p>
             </div>
             <div class="section">
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="d0e4728"></a>1.2.&nbsp;Podadresář ‚dictionary‛ (slovník)
+                        <h3 class="title"><a name="d0e4919"></a>1.2.&nbsp;Podadresář ‚dictionary‛ (slovník)
                         </h3>
                      </div>
                   </div>
@@ -140,7 +140,7 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="d0e4735"></a>1.3.&nbsp;Podadresář ‚glossary‛ (glosář)
+                        <h3 class="title"><a name="d0e4926"></a>1.3.&nbsp;Podadresář ‚glossary‛ (glosář)
                         </h3>
                      </div>
                   </div>
@@ -153,13 +153,13 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="folder.OmegaT"></a>1.4.&nbsp;Podadresář ‚omegat‛<a class="indexterm" name="d0e4746"></a></h3>
+                        <h3 class="title"><a name="folder.OmegaT"></a>1.4.&nbsp;Podadresář ‚omegat‛<a class="indexterm" name="d0e4937"></a></h3>
                      </div>
                   </div>
                </div>
                <p>Podadresář <span class="bold"><strong>omegat</strong></span> obsahuje minimálně jeden nebo více dalších souborů. Soubor <code class="filename">project_save.tmx</code> představuje pracovní překladovou paměť projektu. Zálohy tohoto souboru (s koncovkou .bak) se průběžně ukládají do tohoto
                   podadresáře, nejprve na začátku překladového sezení, na jeho konci, ale také v průběhu překládání. Tímto způsobem je zabráněno
-                  neúmyslné ztrátě - viz Prevence ztráty dat v kapitole <a class="link" href="chapter.misc.html" title="Chapter&nbsp;21.&nbsp;Různá témata">Různé</a>.
+                  neúmyslné ztrátě – viz Prevence ztráty dat v kapitole <a class="link" href="chapter.misc.html" title="Chapter&nbsp;21.&nbsp;Různá témata">Různé</a>.
                </p>
                <p>Během překladu dalších souborů mohou být v tomto adresáři vytvořeny i tyto soubory </p>
                <div class="informaltable">
@@ -171,25 +171,25 @@
                      <tbody>
                         <tr>
                            <td align="left">stats.txt</td>
-                           <td align="left"><a class="indexterm" name="d0e4773"></a>obsahují aktuální statistiky právě zpracovávaného projektu. Obsah můžete zobrazit vybráním <span class="guimenuitem">Nástroje &gt; Statistika</span></td>
+                           <td align="left"><a class="indexterm" name="d0e4964"></a>obsahují aktuální statistiky právě zpracovávaného projektu. Obsah můžete zobrazit vybráním <span class="guimenuitem">Nástroje &gt; Statistika</span></td>
                         </tr>
                         <tr>
                            <td align="left">ignored_words.txt. learned_words.txt</td>
-                           <td align="left"><a class="indexterm" name="d0e4785"></a>Oba vytvoří a využívá kontrola pravopisu. Pokud jste již nasbírali slova, která má kontrola pravopisu ignorovat nebo akceptovat,
+                           <td align="left"><a class="indexterm" name="d0e4976"></a>Oba vytvoří a využívá kontrola pravopisu. Pokud jste již nasbírali slova, která má kontrola pravopisu ignorovat nebo akceptovat,
                               stačí, abyste tyto oba soubory nakopírovali do podadresáře <code class="filename">omegat</code> ve vašem aktuálním projektu. 
                            </td>
                         </tr>
                         <tr>
                            <td align="left">project_stats_match.txt</td>
-                           <td align="left">obsahuje statistiku shody posledního zpracovávaného projektu, je generován přes <span class="guimenuitem">Nástroje &gt; Statistika shody</span></td>
+                           <td align="left">Pbsahuje statistiku shody posledního zpracovávaného projektu, je generován přes <span class="guimenuitem">Nástroje &gt; Statistika shody</span></td>
                         </tr>
                         <tr>
                            <td align="left">segmentation.conf</td>
-                           <td align="left">pokud existuje, obsahuje segmentační pravidla šitá na míru danému projektu, tedy jen pokud se na ně odkazuje přes <span class="guimenuitem">Projekt &gt; Vlastnosti...</span> Viz <a class="link" href="chapter.project.properties.html" title="Chapter&nbsp;6.&nbsp;Vlastnosti projektu">kapitolu Vlastnosti projektu</a></td>
+                           <td align="left">Pokud existuje, obsahuje segmentační pravidla šitá na míru danému projektu, tedy jen pokud se na ně odkazuje přes <span class="guimenuitem">Projekt &gt; Vlastnosti...</span> Viz <a class="link" href="chapter.project.properties.html" title="Chapter&nbsp;6.&nbsp;Vlastnosti projektu">kapitolu Vlastnosti projektu</a></td>
                         </tr>
                         <tr>
                            <td align="left">filters.xml</td>
-                           <td align="left">pokud existuje, obsahuje specifické filtry souboru daného projektu, když jsou dotazovány přes <span class="guimenuitem">Projekt &gt; Vlastnosti ...</span> Viz <a class="link" href="chapter.project.properties.html" title="Chapter&nbsp;6.&nbsp;Vlastnosti projektu"> kapitolu Vlastnosti projektu</a></td>
+                           <td align="left">Pokud existuje, obsahuje specifické filtry souboru daného projektu, když jsou dotazovány přes <span class="guimenuitem">Projekt &gt; Vlastnosti ...</span> Viz <a class="link" href="chapter.project.properties.html" title="Chapter&nbsp;6.&nbsp;Vlastnosti projektu"> kapitolu Vlastnosti projektu</a></td>
                         </tr>
                      </tbody>
                   </table>
@@ -199,12 +199,12 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="folder.source"></a>1.5.&nbsp;Podadresář zdrojového textu (source)<a class="indexterm" name="d0e4824"></a></h3>
+                        <h3 class="title"><a name="folder.source"></a>1.5.&nbsp;Podadresář zdrojového textu (source)<a class="indexterm" name="d0e5015"></a></h3>
                      </div>
                   </div>
                </div>
-               <p>Podadresář zdrojového textu (source) obsahuje soubory, které se mají překládat. Můžete přidávat soubory i později Nezapomeňte,
-                  že struktura zdrojového podadresáře může mít libovolnou formu. Pokud jsou soubory, které budete překládat, součástí stromové
+               <p>Podadresář zdrojového textu (source) obsahuje soubory, které se mají překládat. Můžete přidávat soubory i později. Nezapomeňte
+                  ale, že struktura zdrojového podadresáře může mít libovolnou formu. Pokud jsou soubory, které budete překládat, součástí stromové
                   struktury (jako např. webová stránka), vše co musíte udělat je určit nejvyšší podadresář a OmegaT zkopíruje veškerý obsah,
                   a stromová struktura zůstane zachována.
                </p>
@@ -213,7 +213,7 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="folder.target"></a>1.6.&nbsp;Podadresář překladu (target)<a class="indexterm" name="d0e4834"></a></h3>
+                        <h3 class="title"><a name="folder.target"></a>1.6.&nbsp;Podadresář překladu (target)<a class="indexterm" name="d0e5025"></a></h3>
                      </div>
                   </div>
                </div>
@@ -227,7 +227,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="user.files"></a>2.&nbsp;Soubory s uživatelským nastavením<a class="indexterm" name="d0e4862"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="user.files"></a>2.&nbsp;Soubory s uživatelským nastavením<a class="indexterm" name="d0e5053"></a></h2>
                   </div>
                </div>
             </div>
@@ -247,11 +247,11 @@
                      </tr>
                      <tr>
                         <td align="left">Není zvolen žádný skript.</td>
-                        <td align="left">adresář, který obsahuje soubory skriptů pro skriptovací plugin, tedy pokud je tento plugin nainstalován</td>
+                        <td align="left">Adresář, který obsahuje soubory skriptů pro skriptovací plugin, tedy pokud je tento plugin nainstalován</td>
                      </tr>
                      <tr>
                         <td align="left">filters.xml</td>
-                        <td align="left">výchozí filtry souborů uživatele</td>
+                        <td align="left">Výchozí filtry souborů uživatele</td>
                      </tr>
                      <tr>
                         <td align="left">omegat.prefs</td>
@@ -259,7 +259,7 @@
                      </tr>
                      <tr>
                         <td align="left">segmentation.conf</td>
-                        <td align="left">výchozí segmentační pravidla uživatele</td>
+                        <td align="left">Výchozí segmentační pravidla uživatele</td>
                      </tr>
                      <tr>
                         <td align="left">uiLayout.xml</td>
@@ -268,8 +268,8 @@
                   </tbody>
                </table>
             </div>
-            <p>Mějte na paměti, že výchozí pravidla segmentace a filtry souborů mohou být přepsány nastavením pro daný projekt (viz výše).
-               Umistěni uživatelských souborů záleží na tom, kterou platformu používáte:
+            <p>Výchozí pravidla segmentace a filtry souborů mohou být přepsány nastavením pro daný projekt (viz výše). Umístěni uživatelských
+               souborů záleží na tom, kterou platformu používáte:
             </p>
             <div class="informaltable">
                <table border="1">
@@ -288,7 +288,7 @@
                      </tr>
                      <tr>
                         <td align="left">Ostatní Windows:</td>
-                        <td align="left"><code class="literal">&lt;Něco...&gt;\<span class="application">OmegaT</span></code>  (&lt;Něco...&gt; odpovídá umístění výchozí domovské složky („home“), která je určena Javou.)
+                        <td align="left"><code class="literal">&lt;Něco...&gt;\<span class="application">OmegaT</span></code> (&lt;Něco...&gt; odpovídá umístění výchozí domovské složky (‚home‘), která je určena Javou.)
                         </td>
                      </tr>
                      <tr>
@@ -298,7 +298,7 @@
                         </td>
                      </tr>
                      <tr>
-                        <td align="left">MAC OSX</td>
+                        <td align="left">MAC OS X</td>
                         <td align="left"><code class="filename">&lt;Home uživatele&gt;/Library/Preferences/<span class="application">OmegaT</span></code></td>
                      </tr>
                      <tr>
@@ -313,12 +313,12 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="application.files"></a>3.&nbsp;Soubory aplikace<a class="indexterm" name="d0e4961"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="application.files"></a>3.&nbsp;Soubory aplikace<a class="indexterm" name="d0e5152"></a></h2>
                   </div>
                </div>
             </div>
             <p>OmegaT je dodávána jako balíček, který si lze stáhnout ze serveru SourceForge. Je tu například balíček, který není závislý
-               na dané platformě, v jeho standardní Java formě. Alternativy obsahují linuxový balíček .tar, instalátor pro Windows - s nebo
+               na dané platformě, v jeho standardní Java formě. Alternativy obsahují linuxový balíček .tar, instalátor pro Windows – s nebo
                bez běhového prostředí Java, instalátor pro Mac OS X, a balíček se zdrojovým kódem pro vývojáře.
             </p>
             <p>Balíček, který není závislý na dané platformě, se dá použít na různých platformách s funkčním běhovým prostředím Java 1.5,
@@ -339,7 +339,7 @@
                      </tr>
                      <tr>
                         <td align="left"><code class="filename">/docs/</code></td>
-                        <td align="left">Zde najdete veškeré soubory uživatelské příručky. Pokud chcete nechat načítat obsah externích linků, je dobré si příručku
+                        <td align="left">Zde najdete veškeré soubory uživatelské příručky. Pokud chcete nechat načítat obsah externích odkazů, je dobré si příručku
                            otevřít v internetovém prohlížeči.
                         </td>
                      </tr>
@@ -382,7 +382,7 @@
                         </td>
                      </tr>
                      <tr>
-                        <td align="left"><span class="application">OmegaT</span></td>
+                        <td align="left"><code class="literal">OmegaT</code></td>
                         <td align="left">Textový soubor, který obsahuje dva řádky:</td>
                      </tr>
                      <tr>
@@ -396,27 +396,25 @@
                      </tr>
                      <tr>
                         <td align="left">&nbsp;</td>
-                        <td align="left">Toto se může hodit uživatelům Linuxu a Mac OS X. Po té, co se ujistíte, že jste v příkazovém řádku v adresáři /OmegaT_2.5/
-                           (číslo dle aktuální verze), povolte souboru oprávnění na čtení a zápis (chmod +x OmegaT). Posléze bude možné startovat OmegaT
-                           spouštěním tohoto souboru  z příkazového řádku.
+                        <td align="left">Uživatelům systémů Linux a Mac OS X se tyto soubory mohou hodit. Po té, co se ujistíte, že jste v příkazovém řádku v adresáři
+                           /OmegaT_2.5/ (číslo dle aktuální verze), povolte souboru oprávnění na čtení a zápis (chmod +x OmegaT). Posléze bude možné
+                           startovat OmegaT spouštěním tohoto souboru z příkazového řádku.
                         </td>
                      </tr>
                      <tr>
-                        <td align="left"><span class="application">OmegaT</span>.bat
-                        </td>
+                        <td align="left"><code class="literal">OmegaT.bat</code></td>
                         <td align="left">Dávkový soubor, který se používá pro spouštění programu <span class="application">OmegaT</span> z příkazového řádku pod Windows. Obsahuje pouze následující řádek:
                         </td>
                      </tr>
                      <tr>
                         <td align="left">&nbsp;</td>
-                        <td align="left"><code class="literal">java -jar <span class="application">OmegaT</span>.jar
+                        <td align="left"><code class="literal">java -jar OmegaT.jar
                                           %*</code></td>
                      </tr>
                      <tr>
-                        <td align="left"><span class="application">OmegaT</span>.jar
-                        </td>
+                        <td align="left"><code class="literal">OmegaT.jar</code></td>
                         <td align="left">Hlavní aplikace OmegaT. Pro spuštění OmegaT musíte buď spustit tento soubor z příkazového řádku, nebo z vašeho správce souborů,
-                           obvykle dvojitým kliknutím.
+                           obvykle dvojklikem.
                         </td>
                      </tr>
                   </tbody>

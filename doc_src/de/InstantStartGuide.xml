@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<chapter id="chapter.instant.start.guide">
+  <title>Erlernen Sie den Umgang mit OmegaT in 5 Minuten!</title>
+
+  <section id="create.and.open.new.project">
+    <title>Ein neues Projekt erstellen<indexterm class="singular">
+        <primary>Projekt</primary> <secondary>Erstellen / öffne neu</secondary>
+      </indexterm></title>
+
+    <para><remark>Hinweis:</remark>Auf einem Apple Mac, benutzen Sie die<keycap>Cmd</keycap> oder <keycap>Apple</keycap> Taste anstelle der <keycap>Ctrl (Strg)</keycap> Taste</para>
+
+    <para>Um mit der Nutzung von OmegaT zu beginnen, erstellen Sie erst ein Projekt, in dem alle Ihre Dateien sind, wie die TMs, Glossare und später auch die übersetzte Datei. Im <guimenu>Projekt</guimenu> Menü wählen Sie <menuchoice> <guimenuitem>Neu...</guimenuitem> </menuchoice><indexterm class="singular">
+        <primary>Menü Projekt</primary> <secondary>Neu...</secondary>
+      </indexterm> und gegen den Namen Ihres Projektes ein. Merken Sie sich, wo Sie das Projekt erstellt haben, denn Sie müssen später dorthin zurückkehren.</para>
+
+    <para>Wenn Sie dem Projekt einen Namen gegeben habe, wird sich der Dialog Erstelle neues Projekt öffnen. Wählen Sie oben im Dialog die Sprache Ihrer Quelldatei und die Sprache, in der die Zieldatei sein wird und klicken auf <guibutton>OK </guibutton>um fortzufahren.</para>
+
+    <para><application>Wenn Sie an anderen Einstellungen dieses Dialogs interessiert sind, dann können Sie jederzeit zurückkehren, in dem Sie <keycap>Ctrl+E</keycap> klicken.</application></para>
+
+    <para>Als Nächstes öffnet sich der Dialog Projektdateien. Klicken Sie auf Quelldateien importieren... um die Quelldateien auszuwählen. OmegaT wird dann die ausgewählten Dateien in den Unterordner <filename>/source/</filename> Ihres neu erstellten Projekts kopieren. Wenn die Quelldatei ins Bearbeitungsfeld geladen wurde, können Sie den Dialog Projektdateien schließen.</para>
+  </section>
+
+  <section id="translate.the.segments.one.by.one">
+    <title>Übersetzen Sie die Datei</title>
+
+    <para>OmegaT wird Ihnen jeweils ein Segment zum Übersetzen präsentieren. Wenn Sie jedes Segment übersetzt haben, drücken Sie <keycap>Ctrl+U </keycap>um zum nächsten nicht übersetzten Segment zu gehen (oder <keycap>Ctrl+Shift+U </keycap>um zum nächsten übersetzten Segment zu gehen). Wann immer Sie sehen wollen, wie Ihre Übersetzung im endgültigen Format aussieht, drücken Sie <keycap>Ctrl+D</keycap>, um das übersetzte Dokument zu erzeugen, was im Unterverzeichnis /target/ Ihres Projekt erstellt wird. Nutzen Sie während der Übersetzung die Menüs <guimenu>Bearbeiten</guimenu> und <guimenu>Gehe zu</guimenu> um nützliche Funktionen zu vollziehen.</para>
+  </section>
+
+  <section>
+    <title>Überprüfen Sie Ihre Tags</title>
+
+    <para>Wenn Ihre Datei eine formatierte Datei ist, z.B. von Microsoft Word, LibreOffice Writer oder HTML, wird OmegaT die Formatierung in Tags umwandeln, die den Text, den Sie übersetzen, umgeben werden. Oft haben die Dokumente auch Tags, die nichts mit dem Formatieren zu tun haben, die aber in der Quelldatei (und Zieldatei) wichtig sind. Eine Quelldatei kann so aussehen</para>
+
+    <para/>
+
+    <mediaobject>
+      <imageobject role="html">
+        <imagedata align="left" fileref="images/InstantGuide_1.png"/>
+      </imageobject>
+
+      <imageobject role="fo">
+        <imagedata align="left" fileref="images/InstantGuide_1.png" width="40%"/>
+      </imageobject>
+    </mediaobject>
+
+    <para/>
+
+    <para>OmegaT wird diesen Satz aber in folgender Form präsentieren:</para>
+
+    <para><literal/></para>
+
+    <mediaobject>
+      <imageobject role="html">
+        <imagedata align="left" fileref="images/InstantGuide_2.png"/>
+      </imageobject>
+
+      <imageobject role="fo">
+        <imagedata align="left" fileref="images/InstantGuide_2.png" width="45%"/>
+      </imageobject>
+    </mediaobject>
+
+    <para/>
+
+    <para>Die Tags in OmegaT sind grau, so können sie leicht erkannt werden. Sie sind nicht geschützt, so dass Sie sie löschen können, sie manuell eingeben oder sie im Zielsatz bewegen können. Wenn Sie allerdings einen Fehler beim Eintippen des Tags gemacht haben, kann es sein, dass die übersetzte Datei nicht geöffnet wird. Drücken Sie daher <keycap>Ctrl+T</keycap> bevor Sie das übersetzte Dokument erzeugen, um zu prüfen, dass Ihre Tags korrekt sind.</para>
+  </section>
+
+  <section>
+    <title>Die übersetzte Datei erzeugen</title>
+
+    <para>Sobald Sie sichergestellt haben, dass keine Tags Fehler in Ihrer Übersetzung sind, drücken Sie <keycap>Ctrl+D</keycap> um die Zieldatei zu erzeugen. Es wird im Unterordner<filename> /target/</filename>Ihres Projektesordners angelegt werden.</para>
+  </section>
+
+  <section>
+    <title>Ein paar mehr Dinge zum Merken</title>
+
+    <itemizedlist>
+      <listitem>
+        <para>Wenn eine Datei nicht in Ihr Bearbeitunsfenster geladen wird, dann könnte es sein, dass sie in einem Format ist, das in OmegaT nicht funktioniert. Siehe Kapitel 7: Dateifilter im Benutzerhandbuch für eine Liste von Dateiformaten, die OmegaT verarbeiten kann.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Sie können für jeden neuen Job ein neues Projekt erstellt und Sie können mehrere Quelldateien auf einmal einem Projekt hinzufügen.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Um an die ursprünglichen Einstellungen des Projekts erinnert zu werden, öffnen Sie den Dialog zu Einstellungen des Projekts mit <keycap>Ctrl+E</keycap>. Um eine Liste der Dateien im Projekt zu sehen, öffnen Sie den Dialog Projektdateien, indem Sie <keycap>Ctrl+L</keycap> drücken.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Am Ende Ihrer Übersetzung wird OmegaT diese translation memories, die &quot;level1&quot;, &quot;level2&quot; und &quot;omegat&quot; genannt werden, in Ihren Projektordner exportieren. Die &quot;level1&quot; und &quot;level2&quot; memories können mit anderen Benutzern anderer Übersetzungsprogramme geteilt werden. Die memory mit dem Namen &quot;omegat&quot; kann in OmegaT selber in zukünftigen Projekte, die Sie anlegen, benutzt werden. Wenn Sie translation memory Dateien in den Unterordner /tm/ Ihres Projektordner packen, wird OmegaT in ihnen automatisch nach ähnlichen Segmenten suchen. Sie werden &quot;unscharfe Treffer&quot; genannt. .</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Sie können ein Glossar durch das Drücken von <guibutton>Ctrl+Shift+G</guibutton> erstellen oder kopieren Sie vorhandene Glossare in den Unterordner <filename>/glossary/</filename>Ihres Projektordners. OmegaT wird automatisch Wörter in ihnen nachschlagen.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Es ist oft sinnvoll nach Wörtern oder Ausdrücken im Quelltext und in Ihrer Übersetzung zu suchen. Drücken Sie daher jederzeit <keycap>Ctrl+F</keycap> für den Dialog der Textsuche.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Für eine umfassendere Einführung sehen Sie <ulink url="http://www.omegat.org/en/tutorial/OmegaT%20for%20Beginners.pdf">OmegaT for beginners</ulink> auf der Website von OmegaT. Wenn Sie Unterstützung zu irgendeinem Aspekt von OmegaT brauchen, treten Sie gerne der <ulink url="[fuzzy] http://tech.groups.yahoo.com/group/omegat/">OmegaT users group</ulink> bei.</para>
+      </listitem>
+    </itemizedlist>
+  </section>
+</chapter>

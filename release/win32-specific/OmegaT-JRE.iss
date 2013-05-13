@@ -32,9 +32,12 @@ Source: "readme_ar.txt"; DestDir: "{app}"; Flags: isreadme; Languages: ar
 Source: "readme_ca.txt"; DestDir: "{app}"; Flags: isreadme; Languages: ca
 Source: "readme_cs.txt"; DestDir: "{app}"; Flags: isreadme; Languages: cs
 ;Source: "readme_cy.txt"; DestDir: "{app}"; Flags: isreadme; Languages: cy
+Source: "readme_da.txt"; DestDir: "{app}"; Flags: isreadme; Languages: da
 Source: "readme_de.txt"; DestDir: "{app}"; Flags: isreadme; Languages: de
+Source: "readme_es.txt"; DestDir: "{app}"; Flags: isreadme; Languages: es
 Source: "readme_eu.txt"; DestDir: "{app}"; Flags: isreadme; Languages: eu
 Source: "readme_fr.txt"; DestDir: "{app}"; Flags: isreadme; Languages: fr
+Source: "readme_gl.txt"; DestDir: "{app}"; Flags: isreadme; Languages: gl
 Source: "readme_hu.txt"; DestDir: "{app}"; Flags: isreadme; Languages: hu
 Source: "readme_it.txt"; DestDir: "{app}"; Flags: isreadme; Languages: it
 Source: "readme_ja.txt"; DestDir: "{app}"; Flags: isreadme; Languages: ja

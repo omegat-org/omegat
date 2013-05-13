@@ -3,7 +3,7 @@
 ----------------------------------------------------------------------
    1 Enhancement
    0 Bug fix
-   9 Localisation updates
+   10 Localisation updates
 ----------------------------------------------------------------------
 2.6.3 update 2 vs. 2.6.3 update 1
 
@@ -15,12 +15,13 @@
 
   - Belarusian localisation updated to 2.6.3 (backported from 3.0) (UI, Readme)
   - Catalan localisation updated to 2.6.3 (UI, Readme, Instant Start)
-  - Greek localisation updated to 2.6.3 (backported from 3.0) (UI, Instant Start)
   - Czech localisation updated to 2.6.3 (UI, Readme, Documentation)
   - Galician localisation backported from 3.0.0 (Documentation)
+  - Greek localisation updated to 2.6.3 (backported from 3.0) (UI, Instant Start)
+  - Hungarian localisation updated to 2.6.3 (backported from 3.0) (UI)
   - Japanese localisation updated to 2.6.3-2 (Documentation)
-  - Turkish localisation updated to 2.6.3 (backported from 3.0) (UI)
   - Simplified Chinese localisation updated to 2.6.3 (backported from 3.0) (UI)
+  - Turkish localisation updated to 2.6.3 (backported from 3.0) (UI)
   - Welsh localisation updated to 2.6.3 (backported from 3.0) (UI, Readme, Instant Start)
 
 ----------------------------------------------------------------------

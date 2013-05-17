@@ -11,7 +11,7 @@
                2010 Wildrich Fourie, Didier Briel
                2011 Didier Briel
                2012 Wildrich Fourie, Guido Leenders, Martin Fleurke, Didier Briel
-               2013 Zoltan Bartko
+               2013 Zoltan Bartko, Didier Briel
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -379,6 +379,7 @@ public class MainWindowMenu implements ActionListener, MenuListener, IMainMenu {
         helpMenu.add(helpContentsMenuItem = createMenuItem("TF_MENU_HELP_CONTENTS"));
         helpMenu.add(helpAboutMenuItem = createMenuItem("TF_MENU_HELP_ABOUT"));
         helpMenu.add(helpLastChangesMenuItem = createMenuItem("TF_MENU_HELP_LAST_CHANGES"));
+        helpMenu.add(helpLogMenuItem = createMenuItem("TF_MENU_HELP_LOG"));
         
 
         // Grayed out if there is no glossary plugins. Plugin can enable it.
@@ -636,6 +637,7 @@ public class MainWindowMenu implements ActionListener, MenuListener, IMainMenu {
     JMenuItem helpAboutMenuItem;
     JMenuItem helpContentsMenuItem;
     JMenuItem helpLastChangesMenuItem;
+    JMenuItem helpLogMenuItem;
     JMenu helpMenu;
     JMenuItem lowerCaseMenuItem;
     JMenuBar mainMenu;

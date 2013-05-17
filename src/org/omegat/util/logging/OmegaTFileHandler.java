@@ -4,6 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2008 Alex Buloichik
+               2013 Didier Briel
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -58,6 +59,7 @@ import org.omegat.util.StaticUtils;
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
 public class OmegaTFileHandler extends StreamHandler {
+    private String logFileName;
     private File lockFile;
     private FileOutputStream lockStream;
     private final long maxSize;
@@ -89,6 +91,12 @@ public class OmegaTFileHandler extends StreamHandler {
         openFiles(new File(StaticUtils.getConfigDir(), "logs"));
     }
 
+   /**
+    * @return the name of the current log file
+    */
+    public String getOmegaTLogFileName(){
+       return logFileName;
+   }
     /**
      * Open log file and lock.
      */
@@ -96,9 +104,10 @@ public class OmegaTFileHandler extends StreamHandler {
         dir.mkdirs();
         for (int instanceIndex = 0; instanceIndex < 100; instanceIndex++) {
             String fileName = "OmegaT" + (instanceIndex > 0 ? ("-" + instanceIndex) : "");
-
+            
             lockFile = new File(dir, fileName + ".log.lck");
-
+            logFileName = fileName;
+            
             // try to create lock file
             lockStream = new FileOutputStream(lockFile);
             if (lockStream.getChannel().tryLock() != null) {

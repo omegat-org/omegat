@@ -5,6 +5,7 @@
 
  Copyright (C) 2000-2006 Keith Godfrey, Maxym Mykhalchuk, and Henry Pijffers
                2008 Alex Buloichik
+               2013 Didier Briel
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -39,6 +40,7 @@ import java.util.logging.Level;
 import java.util.logging.LogManager;
 import java.util.logging.LogRecord;
 import java.util.logging.Logger;
+import org.omegat.util.logging.OmegaTFileHandler;
 
 /**
  * A collection of methods to make logging things easier.
@@ -137,6 +139,29 @@ public class Log {
     public static String getLogLocation() {
         return StaticUtils.getConfigDir() + "/logs";
     }
+    
+    /**
+     * Compute the filename of the log file
+     * @return the filename of the log, or an empty string
+     */
+    public static String getLogFileName() {
+        Handler[] hand = LOGGER.getParent().getHandlers();
+        if (hand[1] instanceof OmegaTFileHandler) {
+            OmegaTFileHandler omegatLog = (OmegaTFileHandler) hand[1];
+            return omegatLog.getOmegaTLogFileName()+ ".log";
+        } else {
+            return "";
+        }
+            
+    }
+    
+    /**
+     * Compute the full path of the log file
+     * @return the full path of the log file
+     */
+    public static String getLogFilePath() {
+        return getLogLocation() + "/" + getLogFileName();
+    }
 
     /**
      * Logs what otherwise would go to System.out
@@ -229,8 +254,8 @@ public class Log {
             rec.setParameters(parameters);
             rec.setLoggerName(LOGGER.getName());
             LOGGER.log(rec);
+            }
         }
-    }
 
     /**
      * Writes an error message to the log (to be retrieved from the resource

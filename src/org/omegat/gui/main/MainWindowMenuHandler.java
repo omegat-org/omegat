@@ -10,7 +10,7 @@
                2009 Didier Briel, Alex Buloichik
                2010 Wildrich Fourie, Didier Briel
                2012 Wildrich Fourie, Guido Leenders, Didier Briel
-               2013 Zoltan Bartko
+               2013 Zoltan Bartko, Didier Briel
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -56,6 +56,7 @@ import org.omegat.gui.dialogs.AboutDialog;
 import org.omegat.gui.dialogs.ExternalTMXMatchesDialog;
 import org.omegat.gui.dialogs.FontSelectionDialog;
 import org.omegat.gui.dialogs.LastChangesDialog;
+import org.omegat.gui.dialogs.LogDialog;
 import org.omegat.gui.dialogs.SaveOptionsDialog;
 import org.omegat.gui.dialogs.SpellcheckerConfigurationDialog;
 import org.omegat.gui.dialogs.TagValidationOptionsDialog;
@@ -870,6 +871,13 @@ public class MainWindowMenuHandler {
         new LastChangesDialog(mainWindow).setVisible(true);
     }
 
+    /**
+     * Show log
+     */
+    public void helpLogMenuItemActionPerformed() {
+        new LogDialog(mainWindow).setVisible(true);
+    }
+    
     /**
      * Displays the dialog to set login and password for proxy.
      */

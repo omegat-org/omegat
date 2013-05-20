@@ -26,10 +26,13 @@
 package org.omegat.tokenizer;
 
 import java.io.StringReader;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 import org.apache.lucene.analysis.TokenStream;
 import org.apache.lucene.analysis.fr.FrenchAnalyzer;
 import org.apache.lucene.analysis.standard.StandardTokenizer;
+import org.apache.lucene.util.Version;
 
 /**
  * @author Alex Buloichik (alex73mail@gmail.com)
@@ -37,6 +40,17 @@ import org.apache.lucene.analysis.standard.StandardTokenizer;
  */
 @Tokenizer(languages = { "fr" }, isDefault = true)
 public class LuceneFrenchTokenizer extends BaseTokenizer {
+
+    @Override
+    public Map<Version, String> getSupportedBehaviors() {
+        Map<Version, String> result = new LinkedHashMap<Version, String>();
+        result.putAll(super.getSupportedBehaviors());
+        result.put(Version.LUCENE_36, result.get(Version.LUCENE_36) + " (UniNE)");
+        result.put(Version.LUCENE_31, result.get(Version.LUCENE_31) + " (Snowball)");
+        result.put(Version.LUCENE_20, result.get(Version.LUCENE_20) + " (Porter)");
+        return result;
+    }
+
     @Override
     protected TokenStream getTokenStream(final String strOrig,
             final boolean stemsAllowed, final boolean stopWordsAllowed) {

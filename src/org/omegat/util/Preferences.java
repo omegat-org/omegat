@@ -302,6 +302,15 @@ public class Preferences {
 
     public static final String TAGS_VALID_REQUIRED = "tags_valid_required";
 
+    /**
+     * Prefix for keys used to record default tokenizer behavior settings.
+     * Prepend to the full name of the tokenizer, e.g.
+     * 
+     * <code>TOK_BEHAVIOR_PREFIX + tokenizer.class.getName()</code> to obtain
+     * <code>tokenizer_behavior_org.omegat.tokenizer.LuceneXXTokenizer</code>
+     */
+    public static final String TOK_BEHAVIOR_PREFIX = "tokenizer_behavior_";
+
     /** Private constructor, because this file is singleton */
     static {
         m_loaded = false;

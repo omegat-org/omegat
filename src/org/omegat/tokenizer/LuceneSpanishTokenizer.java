@@ -31,7 +31,6 @@ import java.util.Set;
 import org.apache.lucene.analysis.TokenStream;
 import org.apache.lucene.analysis.es.SpanishAnalyzer;
 import org.apache.lucene.analysis.standard.StandardTokenizer;
-import org.apache.lucene.util.Version;
 
 /**
  * @author Aaron Madlon-Kay
@@ -44,10 +43,10 @@ public class LuceneSpanishTokenizer extends BaseTokenizer {
         if (stemsAllowed) {
             Set stopWords = stopWordsAllowed ? SpanishAnalyzer.getDefaultStopSet()
                     : Collections.EMPTY_SET;
-            return new SpanishAnalyzer(Version.LUCENE_36, stopWords).tokenStream("",
+            return new SpanishAnalyzer(getBehavior(), stopWords).tokenStream("",
                     new StringReader(strOrig));
         } else {
-            return new StandardTokenizer(Version.LUCENE_36,
+            return new StandardTokenizer(getBehavior(),
                     new StringReader(strOrig.toLowerCase()));
         }
     }

@@ -30,7 +30,6 @@ import java.io.StringReader;
 import org.apache.lucene.analysis.TokenStream;
 import org.apache.lucene.analysis.cn.smart.SentenceTokenizer;
 import org.apache.lucene.analysis.cn.smart.SmartChineseAnalyzer;
-import org.apache.lucene.util.Version;
 
 /**
  * @author Alex Buloichik (alex73mail@gmail.com)
@@ -38,14 +37,14 @@ import org.apache.lucene.util.Version;
  */
 @Tokenizer(languages = { "zh" }, isDefault = true)
 public class LuceneSmartChineseTokenizer extends BaseTokenizer {
-    private static final SmartChineseAnalyzer AN_STOPS = new SmartChineseAnalyzer(Version.LUCENE_36, true);
-    private static final SmartChineseAnalyzer AN_NOSTOPS = new SmartChineseAnalyzer(Version.LUCENE_36, false);
 
     @Override
     protected TokenStream getTokenStream(final String strOrig,
             final boolean stemsAllowed, final boolean stopWordsAllowed) {
         if (stemsAllowed) {
-            SmartChineseAnalyzer analyzer = stopWordsAllowed ? AN_STOPS : AN_NOSTOPS;
+            SmartChineseAnalyzer analyzer = stopWordsAllowed ?
+                        new SmartChineseAnalyzer(getBehavior(), true) :
+                            new SmartChineseAnalyzer(getBehavior(), false);
             return analyzer.tokenStream("", new StringReader(strOrig));
         } else {
             return new SentenceTokenizer(

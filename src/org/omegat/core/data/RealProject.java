@@ -53,6 +53,7 @@ import java.util.TreeMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.apache.lucene.util.Version;
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
 import org.omegat.core.KnownException;
@@ -180,9 +181,11 @@ public class RealProject implements IProject {
         this.repository = repository;
 
         sourceTokenizer = createTokenizer(Core.getParams().get(ITokenizer.CLI_PARAM_SOURCE), props.getSourceTokenizer());
-        Log.log("Source tokenizer: " + sourceTokenizer.getClass().getName());
+        configTokenizer(Core.getParams().get(ITokenizer.CLI_PARAM_SOURCE_BEHAVIOR), sourceTokenizer);
+        Log.log("Source tokenizer: " + sourceTokenizer.getClass().getName() + " (" + sourceTokenizer.getBehavior() + ")");
         targetTokenizer = createTokenizer(Core.getParams().get(ITokenizer.CLI_PARAM_TARGET), props.getTargetTokenizer());
-        Log.log("Target tokenizer: " + targetTokenizer.getClass().getName());
+        configTokenizer(Core.getParams().get(ITokenizer.CLI_PARAM_TARGET_BEHAVIOR), targetTokenizer);
+        Log.log("Target tokenizer: " + targetTokenizer.getClass().getName() + " (" + targetTokenizer.getBehavior() + ")");
     }
     
     public IRemoteRepository getRepository() {
@@ -1350,6 +1353,43 @@ public class RealProject implements IProject {
         }
         
         return new DefaultTokenizer();
+    }
+
+    /**
+     * Set the tokenizer's behavior. Behaviors are prioritized:
+     * <ol><li>Behavior specified on command line via <code>--ITokenizerBehavior</code>
+     * and <code>--ITokenizerTargetBehavior</code>
+     * <li>Behavior specified in OmegaT preferences</li>
+     * <li>Per-tokenizer default setting</li>
+     * </ol>
+     * @param cmdLine Lucene {@link Version} specified on command line
+     * @param tokenizer The tokenizer to configure
+     */
+    protected void configTokenizer(String cmdLine, ITokenizer tokenizer) {
+        // Set from command line.
+        if (cmdLine != null && cmdLine.length() > 0) {
+            try {
+                tokenizer.setBehavior(Version.valueOf(cmdLine));
+                return;
+            } catch (Throwable e) {
+                throw new RuntimeException(e);
+            }
+        }
+        
+        // Set from OmegaT prefs.
+        String vString = Preferences.getPreferenceDefault(
+                Preferences.TOK_BEHAVIOR_PREFIX + tokenizer.getClass().getName(),
+                null);
+         if (vString != null && vString.length() > 0) {
+             try {
+                 tokenizer.setBehavior(Version.valueOf(vString));
+                 return;
+             }  catch (Throwable e) {
+                 throw new RuntimeException(e);
+             }
+         }
+         
+         // Use tokenizer default as last resort.
     }
 
     /**

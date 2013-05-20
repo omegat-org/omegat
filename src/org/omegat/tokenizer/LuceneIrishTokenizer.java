@@ -30,7 +30,6 @@ import org.apache.lucene.analysis.CharArraySet;
 import org.apache.lucene.analysis.TokenStream;
 import org.apache.lucene.analysis.ga.IrishAnalyzer;
 import org.apache.lucene.analysis.standard.StandardTokenizer;
-import org.apache.lucene.util.Version;
 
 /**
  * @author Aaron Madlon-Kay
@@ -42,11 +41,11 @@ public class LuceneIrishTokenizer extends BaseTokenizer {
             final boolean stemsAllowed, final boolean stopWordsAllowed) {
         if (stemsAllowed) {
             CharArraySet stopWords = stopWordsAllowed ? IrishAnalyzer.getDefaultStopSet()
-                    : new CharArraySet(Version.LUCENE_36, 0, false);
-            return new IrishAnalyzer(Version.LUCENE_36, stopWords).tokenStream("", new StringReader(
+                    : new CharArraySet(getBehavior(), 0, false);
+            return new IrishAnalyzer(getBehavior(), stopWords).tokenStream("", new StringReader(
                     strOrig));
         } else {
-            return new StandardTokenizer(Version.LUCENE_36,
+            return new StandardTokenizer(getBehavior(),
                     new StringReader(strOrig.toLowerCase()));
         }
     }

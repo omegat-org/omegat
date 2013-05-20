@@ -29,14 +29,17 @@ import java.io.IOException;
 import java.text.BreakIterator;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.apache.lucene.analysis.TokenStream;
 import org.apache.lucene.analysis.tokenattributes.CharTermAttribute;
 import org.apache.lucene.analysis.tokenattributes.OffsetAttribute;
+import org.apache.lucene.util.Version;
 import org.omegat.core.CoreEvents;
 import org.omegat.core.events.IProjectEventListener;
+import org.omegat.util.Preferences;
 import org.omegat.util.Token;
 
 /**
@@ -53,6 +56,19 @@ public abstract class BaseTokenizer implements ITokenizer {
     private static Map<String, Token[]> tokenCacheGlossary = new HashMap<String, Token[]>(
             5000);
 
+    /**
+     * A map indicating which {@link Version}s should be used with this tokenizer,
+     * with user-facing strings that describe the versions.
+     * <p>
+     * By default it is populated with all members of the {@link Version} enum;
+     * individual tokenizers should remove inappropriate versions or overwrite version
+     * descriptions with an explanatory string (e.g. noting the algorithm used in that version).
+     * <p>
+     * See {@link LuceneGermanTokenizer} for an example class that modifies this map.
+     */
+    protected static final Map<Version, String> supportedBehaviors = new LinkedHashMap<Version, String>(
+            Version.values().length);
+
     protected static final String[] EMPTY_STOP_WORDS_LIST = new String[0];
     protected static final Token[] EMPTY_TOKENS_LIST = new Token[0];
     protected static final int DEFAULT_TOKENS_COUNT = 64;
@@ -60,12 +76,20 @@ public abstract class BaseTokenizer implements ITokenizer {
     /**
      * Indicates that {@link #tokenizeAllExactly(String)} should use OmegaT's
      * {@link WordIterator} to tokenize "exactly" for display.
-     * 
+     * <p>
      * For language-specific tokenizers that maintain the property that 
-     * (the concatenation of all tokens).equals(original string) == true,
+     * <code>(the concatenation of all tokens).equals(original string) == true</code>,
      * set this to false to use the language-specific tokenizer for everything.
      */
     protected boolean shouldDelegateTokenizeExactly = true;
+
+    /**
+     * Indicates the default behavior to use for the tokenizer.
+     * Each tokenizer may override this with the version most suitable for that language.
+     */
+    protected Version defaultBehavior = Version.LUCENE_CURRENT;
+
+    protected Version currentBehavior = null;
 
     public BaseTokenizer() {
         CoreEvents.registerProjectChangeListener(new IProjectEventListener() {
@@ -83,6 +107,34 @@ public abstract class BaseTokenizer implements ITokenizer {
                 }
             }
         });
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public Map<Version, String> getSupportedBehaviors() {
+        return supportedBehaviors;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public Version getBehavior() {
+        return currentBehavior == null ? defaultBehavior : currentBehavior;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public void setBehavior(Version behavior) {
+        currentBehavior = behavior;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public Version getDefaultBehavior() {
+        return defaultBehavior;
     }
 
     /**
@@ -200,4 +252,14 @@ public abstract class BaseTokenizer implements ITokenizer {
 
     protected abstract TokenStream getTokenStream(final String strOrig,
             final boolean stemsAllowed, final boolean stopWordsAllowed);
+
+    static {
+        for (Version v : Version.values()) {
+            StringBuilder b = new StringBuilder();
+            b.append(v.toString().charAt(0));
+            b.append(v.toString().substring(1).toLowerCase().replace('_', ' '));
+            if (Character.isDigit(b.charAt(b.length() - 1))) b.insert(b.length() - 1, '.');
+            supportedBehaviors.put(v, b.toString());
+        }
+    }
 }

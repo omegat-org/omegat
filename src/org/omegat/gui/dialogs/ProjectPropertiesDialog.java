@@ -45,6 +45,7 @@ import javax.swing.AbstractAction;
 import javax.swing.Action;
 import javax.swing.BorderFactory;
 import javax.swing.Box;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
@@ -62,6 +63,7 @@ import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.EtchedBorder;
 
+import org.apache.lucene.util.Version;
 import org.omegat.core.Core;
 import org.omegat.core.data.CommandVarExpansion;
 import org.omegat.core.data.ProjectProperties;
@@ -79,6 +81,7 @@ import org.omegat.util.StaticUtils;
 import org.omegat.util.StringUtil;
 import org.omegat.util.gui.LanguageComboBoxRenderer;
 import org.omegat.util.gui.OmegaTFileChooser;
+import org.omegat.util.gui.TokenizerBehaviorComboBoxRenderer;
 import org.omegat.util.gui.TokenizerComboBoxRenderer;
 import org.openide.awt.Mnemonics;
 
@@ -292,6 +295,124 @@ public class ProjectPropertiesDialog extends JDialog {
                 m_targetTokenizerField.setSelectedItem(newTok);
             }});
 
+        // Tokenizer behavior box
+        Box bB = Box.createVerticalBox();
+        localesBox.add(bB);
+
+        // Source tokenizer behavior label
+        JLabel m_sourceTokenizerBehaviorLabel = new JLabel();
+        Mnemonics.setLocalizedText(m_sourceTokenizerBehaviorLabel, OStrings.getString("PP_SRC_TOK_BEHAVIOR"));
+        Box bSTB = Box.createHorizontalBox();
+        bSTB.setBorder(emptyBorder);
+        bSTB.add(m_sourceTokenizerBehaviorLabel);
+        bSTB.add(Box.createHorizontalGlue());
+        bB.add(bSTB);
+
+        // Source tokenizer behavior field
+        ITokenizer srcTok = Core.getProject().getSourceTokenizer();
+        final JComboBox m_sourceTokenizerBehaviorField = new JComboBox(
+                srcTok.getSupportedBehaviors().keySet().toArray());
+        m_sourceTokenizerBehaviorField.setEnabled(srcTok.getSupportedBehaviors().size() > 0);
+        if (m_sourceTokenizerBehaviorField.getMaximumRowCount() < 20)
+            m_sourceTokenizerBehaviorField.setMaximumRowCount(20);
+        m_sourceTokenizerBehaviorField.setEditable(false);
+        m_sourceTokenizerBehaviorField.setRenderer(
+                new TokenizerBehaviorComboBoxRenderer(srcTok.getSupportedBehaviors(),
+                        srcTok.getDefaultBehavior()));
+        m_sourceTokenizerBehaviorField.setSelectedItem(srcTok.getBehavior());
+        bB.add(m_sourceTokenizerBehaviorField);
+
+        if (!m_sourceTokenizerField.isEnabled()) m_sourceTokenizerBehaviorField.setEnabled(false);
+
+        final String cliTokSrcBehavior = Core.getParams().get(ITokenizer.CLI_PARAM_SOURCE_BEHAVIOR);
+        if (cliTokSrcBehavior != null) {
+            m_sourceTokenizerBehaviorField.setEnabled(false);
+            m_sourceTokenizerBehaviorField.addItem(cliTokSrcBehavior);
+            m_sourceTokenizerBehaviorField.setSelectedItem(cliTokSrcBehavior);
+        }
+
+        m_sourceTokenizerField.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (!m_sourceTokenizerField.isEnabled()) return;
+                if (cliTokSrcBehavior != null) return;
+                Object cls = m_sourceTokenizerField.getSelectedItem();
+                if (!(cls instanceof Class<?>)) return;
+                ITokenizer newTok;
+                try {
+                    newTok = (ITokenizer)((Class<?>) cls).newInstance();
+                    m_sourceTokenizerBehaviorField.setRenderer(
+                            new TokenizerBehaviorComboBoxRenderer(newTok.getSupportedBehaviors(),
+                                    newTok.getDefaultBehavior()));
+                    m_sourceTokenizerBehaviorField.setModel(new DefaultComboBoxModel(
+                            newTok.getSupportedBehaviors().keySet().toArray()));
+                    if (m_sourceTokenizerBehaviorField.getModel().getSize() > 0) {
+                        m_sourceTokenizerBehaviorField.setEnabled(true);
+                        m_sourceTokenizerBehaviorField.setSelectedItem(newTok.getBehavior());
+                    } else {
+                        m_sourceTokenizerBehaviorField.setEnabled(false);
+                    }
+                } catch (Exception ex) {
+                }
+            }});
+
+        // Target tokenizer behavior label
+        JLabel m_targetTokenizerBehaviorLabel = new JLabel();
+        Mnemonics.setLocalizedText(m_targetTokenizerBehaviorLabel, OStrings.getString("PP_LOC_TOK_BEHAVIOR"));
+        Box bTTB = Box.createHorizontalBox();
+        bTTB.setBorder(emptyBorder);
+        bTTB.add(m_targetTokenizerBehaviorLabel);
+        bTTB.add(Box.createHorizontalGlue());
+        bB.add(bTTB);
+
+        // Target tokenizer behavior field
+        ITokenizer trgTok = Core.getProject().getTargetTokenizer();
+        final JComboBox m_targetTokenizerBehaviorField = new JComboBox(
+                trgTok.getSupportedBehaviors().keySet().toArray());
+        m_targetTokenizerBehaviorField.setEnabled(trgTok.getSupportedBehaviors().size() > 0);
+        if (m_targetTokenizerBehaviorField.getMaximumRowCount() < 20)
+            m_targetTokenizerBehaviorField.setMaximumRowCount(20);
+        m_targetTokenizerBehaviorField.setEditable(false);
+        m_targetTokenizerBehaviorField.setRenderer(
+                new TokenizerBehaviorComboBoxRenderer(trgTok.getSupportedBehaviors(),
+                        trgTok.getDefaultBehavior()));
+        m_targetTokenizerBehaviorField.setSelectedItem(trgTok.getBehavior());
+        bB.add(m_targetTokenizerBehaviorField);
+
+        if (!m_targetTokenizerField.isEnabled()) m_targetTokenizerBehaviorField.setEnabled(false);
+
+        final String cliTokTrgBehavior = Core.getParams().get(ITokenizer.CLI_PARAM_TARGET_BEHAVIOR);
+        if (cliTokTrgBehavior != null) {
+            m_targetTokenizerBehaviorField.setEnabled(false);
+            m_targetTokenizerBehaviorField.addItem(cliTokTrgBehavior);
+            m_targetTokenizerBehaviorField.setSelectedItem(cliTokTrgBehavior);
+        }
+
+        m_targetTokenizerField.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (!m_targetTokenizerField.isEnabled()) return;
+                if (cliTokTrgBehavior != null) return;
+                Object cls = m_targetTokenizerField.getSelectedItem();
+                if (!(cls instanceof Class<?>)) return;
+                ITokenizer newTok;
+                try {
+                    newTok = (ITokenizer)((Class<?>) cls).newInstance();
+                    m_targetTokenizerBehaviorField.setRenderer(
+                            new TokenizerBehaviorComboBoxRenderer(newTok.getSupportedBehaviors(),
+                                    newTok.getDefaultBehavior()));
+                    m_targetTokenizerBehaviorField.setModel(new DefaultComboBoxModel(
+                            newTok.getSupportedBehaviors().keySet().toArray()));
+                    if (m_targetTokenizerBehaviorField.getModel().getSize() > 0) {
+                        m_targetTokenizerBehaviorField.setEnabled(true);
+                        m_targetTokenizerBehaviorField.setSelectedItem(newTok.getBehavior());
+                    } else {
+                        m_targetTokenizerBehaviorField.setEnabled(false);
+                    }
+                } catch (Exception ex) {
+                }
+            }});
+
         centerBox.add(localesBox);
 
         // options
@@ -494,6 +615,7 @@ public class ProjectPropertiesDialog extends JDialog {
         m_okButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 doOK(m_sourceLocaleField, m_targetLocaleField, m_sourceTokenizerField, m_targetTokenizerField,
+                        m_sourceTokenizerBehaviorField, m_targetTokenizerBehaviorField,
                         m_sentenceSegmentingCheckBox, m_srcRootField, m_locRootField, m_glosRootField,
                         m_writeableGlosField, m_tmRootField, m_dictRootField, m_allowDefaultsCheckBox,
                         m_removeTagsCheckBox, m_externalCommandTextArea);
@@ -840,6 +962,7 @@ public class ProjectPropertiesDialog extends JDialog {
 
     private void doOK(JComboBox m_sourceLocaleField, JComboBox m_targetLocaleField,
             JComboBox m_sourceTokenizerField, JComboBox m_targetTokenizerField,
+            JComboBox m_sourceTokenizerBehaviorField, JComboBox m_targetTokenizerBehaviorField,
             JCheckBox m_sentenceSegmentingCheckBox, JTextField m_srcRootField, JTextField m_locRootField,
             JTextField m_glosRootField, JTextField m_writeableGlosField, JTextField m_tmRootField, JTextField m_dictRootField,
             JCheckBox m_allowDefaultsCheckBox, JCheckBox m_removeTagsCheckBox, JTextArea m_customCommandTextArea) {
@@ -871,6 +994,18 @@ public class ProjectPropertiesDialog extends JDialog {
 
         if (m_targetTokenizerField.isEnabled()) {
             projectProperties.setTargetTokenizer((Class<?>)m_targetTokenizerField.getSelectedItem());
+        }
+
+        if (m_sourceTokenizerBehaviorField.isEnabled()) {
+            Class<?> srcTok = (Class<?>)m_sourceTokenizerField.getSelectedItem();
+            Preferences.setPreference(Preferences.TOK_BEHAVIOR_PREFIX + srcTok.getName(),
+                    ((Version)m_sourceTokenizerBehaviorField.getSelectedItem()).toString());
+        }
+
+        if (m_targetTokenizerBehaviorField.isEnabled()) {
+            Class<?> trgTok = (Class<?>)m_targetTokenizerField.getSelectedItem();
+            Preferences.setPreference(Preferences.TOK_BEHAVIOR_PREFIX + trgTok.getName(),
+                    ((Version)m_targetTokenizerBehaviorField.getSelectedItem()).toString());
         }
 
         projectProperties.setSentenceSegmentingEnabled(m_sentenceSegmentingCheckBox.isSelected());

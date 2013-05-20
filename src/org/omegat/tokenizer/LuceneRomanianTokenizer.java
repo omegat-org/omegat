@@ -31,7 +31,6 @@ import java.util.Set;
 import org.apache.lucene.analysis.TokenStream;
 import org.apache.lucene.analysis.ro.RomanianAnalyzer;
 import org.apache.lucene.analysis.standard.StandardTokenizer;
-import org.apache.lucene.util.Version;
 
 /**
  * @author Aaron Madlon-Kay
@@ -44,10 +43,10 @@ public class LuceneRomanianTokenizer extends BaseTokenizer {
         if (stemsAllowed) {
             Set stopWords = stopWordsAllowed ? RomanianAnalyzer.getDefaultStopSet()
                     : Collections.EMPTY_SET;
-            return new RomanianAnalyzer(Version.LUCENE_36, stopWords).tokenStream("",
+            return new RomanianAnalyzer(getBehavior(), stopWords).tokenStream("",
                     new StringReader(strOrig));
         } else {
-            return new StandardTokenizer(Version.LUCENE_36,
+            return new StandardTokenizer(getBehavior(),
                     new StringReader(strOrig.toLowerCase()));
         }
     }

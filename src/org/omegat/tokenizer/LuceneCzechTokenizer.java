@@ -30,7 +30,6 @@ import java.io.StringReader;
 import org.apache.lucene.analysis.TokenStream;
 import org.apache.lucene.analysis.cz.CzechAnalyzer;
 import org.apache.lucene.analysis.standard.StandardTokenizer;
-import org.apache.lucene.util.Version;
 
 /**
  * @author Alex Buloichik (alex73mail@gmail.com)
@@ -44,10 +43,10 @@ public class LuceneCzechTokenizer extends BaseTokenizer {
         if (stemsAllowed) {
             String[] stopWords = stopWordsAllowed ? CzechAnalyzer.CZECH_STOP_WORDS
                     : EMPTY_STOP_WORDS_LIST;
-            return new CzechAnalyzer(Version.LUCENE_36, stopWords).tokenStream("",
+            return new CzechAnalyzer(getBehavior(), stopWords).tokenStream("",
                     new StringReader(strOrig));
         } else {
-            return new StandardTokenizer(Version.LUCENE_36,
+            return new StandardTokenizer(getBehavior(),
                     new StringReader(strOrig.toLowerCase()));
         }
     }

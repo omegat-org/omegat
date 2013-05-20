@@ -37,7 +37,6 @@ import org.apache.lucene.analysis.TokenStream;
 import org.apache.lucene.analysis.cjk.CJKAnalyzer;
 import org.apache.lucene.analysis.tokenattributes.CharTermAttribute;
 import org.apache.lucene.analysis.tokenattributes.OffsetAttribute;
-import org.apache.lucene.util.Version;
 
 /**
  * A tokenizer based on <a href="http://chasen.org/~taku/software/TinySegmenter/">TinySegmenter by Taku Kudo</a>.
@@ -68,7 +67,7 @@ public class TinySegmenterJapaneseTokenizer extends BaseTokenizer {
         if (stemsAllowed) {
             String[] stopWords = stopWordsAllowed ? CJKAnalyzer.STOP_WORDS
                     : EMPTY_STOP_WORDS_LIST;
-            return new StopFilter(Version.LUCENE_36, ts, StopFilter.makeStopSet(stopWords));
+            return new StopFilter(getBehavior(), ts, StopFilter.makeStopSet(stopWords));
         }
         
         return ts;

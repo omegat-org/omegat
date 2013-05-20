@@ -30,7 +30,6 @@ import java.io.StringReader;
 import org.apache.lucene.analysis.TokenStream;
 import org.apache.lucene.analysis.cjk.CJKAnalyzer;
 import org.apache.lucene.analysis.cjk.CJKTokenizer;
-import org.apache.lucene.util.Version;
 
 /**
  * @author Alex Buloichik (alex73mail@gmail.com)
@@ -44,7 +43,7 @@ public class LuceneCJKTokenizer extends BaseTokenizer {
         if (stemsAllowed) {
             String[] stopWords = stopWordsAllowed ? CJKAnalyzer.STOP_WORDS
                     : EMPTY_STOP_WORDS_LIST;
-            return new CJKAnalyzer(Version.LUCENE_36, stopWords).tokenStream("", new StringReader(
+            return new CJKAnalyzer(getBehavior(), stopWords).tokenStream("", new StringReader(
                     strOrig));
         } else {
             return new CJKTokenizer(new StringReader(strOrig.toLowerCase()));

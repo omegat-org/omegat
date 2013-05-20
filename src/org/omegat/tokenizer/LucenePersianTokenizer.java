@@ -30,7 +30,6 @@ import java.io.StringReader;
 import org.apache.lucene.analysis.TokenStream;
 import org.apache.lucene.analysis.fa.PersianAnalyzer;
 import org.apache.lucene.analysis.standard.StandardTokenizer;
-import org.apache.lucene.util.Version;
 
 /**
  * @author Alex Buloichik (alex73mail@gmail.com)
@@ -38,18 +37,17 @@ import org.apache.lucene.util.Version;
  */
 @Tokenizer(languages = { "fa" })
 public class LucenePersianTokenizer extends BaseTokenizer {
-    private static final PersianAnalyzer AN_STOPS = new PersianAnalyzer(Version.LUCENE_36);
-    private static final PersianAnalyzer AN_NOSTOPS = new PersianAnalyzer(Version.LUCENE_36,
-            new String[] {});
 
     @Override
     protected TokenStream getTokenStream(final String strOrig,
             final boolean stemsAllowed, final boolean stopWordsAllowed) {
         if (stemsAllowed) {
-            PersianAnalyzer analyzer = stopWordsAllowed ? AN_STOPS : AN_NOSTOPS;
+            PersianAnalyzer analyzer = stopWordsAllowed ?
+                    new PersianAnalyzer(getBehavior()) :
+                        new PersianAnalyzer(getBehavior(), new String[] {});
             return analyzer.tokenStream("", new StringReader(strOrig));
         } else {
-            return new StandardTokenizer(Version.LUCENE_36,
+            return new StandardTokenizer(getBehavior(),
                     new StringReader(strOrig.toLowerCase()));
         }
     }

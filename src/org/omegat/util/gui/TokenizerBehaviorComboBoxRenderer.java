@@ -26,32 +26,43 @@
 package org.omegat.util.gui;
 
 import java.awt.Component;
+import java.util.Map;
 
 import javax.swing.JList;
 import javax.swing.plaf.basic.BasicComboBoxRenderer;
 
+import org.apache.lucene.util.Version;
+
 /**
- * A class that renders a tokenizer combo box.
+ * A class that renders a tokenizer behavior version combo box cell.
  * 
  * @author Aaron Madlon-Kay
  */
 @SuppressWarnings("serial")
-public class TokenizerComboBoxRenderer extends BasicComboBoxRenderer {
-    public Component getListCellRendererComponent(JList list, Object value, // value
-                                                                            // to
-                                                                            // display
-            int index, // cell index
-            boolean isSelected, // is the cell selected
-            boolean cellHasFocus) // the list and the cell have the focus
-    {
-        if (value instanceof Class<?>) {
-            Class<?> cls = (Class<?>) value;
-            setText(cls.getSimpleName());
+public class TokenizerBehaviorComboBoxRenderer extends BasicComboBoxRenderer {
+
+    private Map<Version, String> names;
+    private Version recommended;
+    
+    public TokenizerBehaviorComboBoxRenderer(Map<Version, String> names, Version recommended) {
+        this.names = names;
+        this.recommended = recommended;
+    }
+    
+    @Override
+    public Component getListCellRendererComponent(JList list, Object value,
+            int index, boolean isSelected, boolean cellHasFocus) {
+        if (value instanceof Version) {
+            String name = names.get((Version) value);
+            if (name == null) name = value.toString();
+            setText((Version)value == recommended ? "* " + name : name);
         } else if (value instanceof String) {
-            setText((String) value);
-        } else {
-            throw new RuntimeException("Unsupported type in tokenizer combobox");
+            setText((String)value);
+        } else if (value != null) {
+            throw new RuntimeException("Unsupported type in tokenizer behavior combobox");
         }
+        
         return this;
     }
+
 }

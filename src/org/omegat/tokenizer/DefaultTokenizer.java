@@ -29,10 +29,12 @@ package org.omegat.tokenizer;
 
 import java.text.BreakIterator;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.lucene.util.Version;
 import org.omegat.core.CoreEvents;
 import org.omegat.core.events.IProjectEventListener;
 import org.omegat.util.PatternConsts;
@@ -203,4 +205,22 @@ public class DefaultTokenizer implements ITokenizer {
         }
         return true;
     }
+
+    @Override
+    public Map<Version, String> getSupportedBehaviors() {
+        return Collections.EMPTY_MAP;
+    }
+
+    @Override
+    public Version getBehavior() {
+        return null;
+    }
+
+    @Override
+    public Version getDefaultBehavior() {
+        return null;
+    }
+
+    @Override
+    public void setBehavior(Version behavior) {}
 }

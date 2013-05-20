@@ -33,7 +33,6 @@ import org.apache.lucene.analysis.TokenStream;
 import org.apache.lucene.analysis.ja.JapaneseAnalyzer;
 import org.apache.lucene.analysis.ja.JapaneseTokenizer;
 import org.apache.lucene.analysis.ja.JapaneseTokenizer.Mode;
-import org.apache.lucene.util.Version;
 
 /**
  * @author Aaron Madlon-Kay
@@ -51,10 +50,10 @@ public class LuceneJapaneseTokenizer extends BaseTokenizer {
             final boolean stemsAllowed, final boolean stopWordsAllowed) {
         if (stemsAllowed) {
             CharArraySet stopWords = stopWordsAllowed ? JapaneseAnalyzer.getDefaultStopSet()
-                    : new CharArraySet(Version.LUCENE_36, 0, false);
+                    : new CharArraySet(getBehavior(), 0, false);
             Set<String> stopTags = stopWordsAllowed ? JapaneseAnalyzer.getDefaultStopTags()
                     : Collections.EMPTY_SET;
-            return new JapaneseAnalyzer(Version.LUCENE_36, null,
+            return new JapaneseAnalyzer(getBehavior(), null,
                     Mode.SEARCH, stopWords, stopTags).tokenStream("", new StringReader(
                     strOrig));
         } else {

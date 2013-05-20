@@ -26,6 +26,9 @@
 
 package org.omegat.tokenizer;
 
+import java.util.Map;
+
+import org.apache.lucene.util.Version;
 import org.omegat.util.Token;
 
 /**
@@ -43,6 +46,32 @@ public interface ITokenizer {
     static final String CLI_PARAM_SOURCE = "ITokenizer";
     /** CLI parameter to specify target tokenizer */
     static final String CLI_PARAM_TARGET = "ITokenizerTarget";
+    /** CLI parameter to specify source tokenizer behavior mode */
+    static final String CLI_PARAM_SOURCE_BEHAVIOR = "ITokenizerBehavior";
+    /** CLI parameter to specify target tokenizer behavior mode */
+    static final String CLI_PARAM_TARGET_BEHAVIOR = "ITokenizerTargetBehavior";
+    
+    /**
+     * Obtain a map indicating the Lucene {@link Version}s supported by this tokenizer.
+     * @return A version-description map
+     */
+    public Map<Version, String> getSupportedBehaviors();
+
+    /**
+     * Obtain the actual Lucene {@link Version} to use for this tokenizer.
+     * @return Preferred version
+     */
+    public Version getBehavior();
+    /**
+     * Set the actual Lucene {@link Version} to use for this tokenizer.
+     * @param behavior Preferred version
+     */
+    public void setBehavior(Version behavior);
+    /**
+     * Obtain the default Lucene {@link Version} to use with this tokenizer.
+     * @return Default versions
+     */
+    public Version getDefaultBehavior();
 
     /**
      * Breaks a string into word-only tokens. Numbers, tags, and other non-word

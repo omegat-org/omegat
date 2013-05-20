@@ -31,7 +31,6 @@ import java.io.StringReader;
 import org.apache.lucene.analysis.TokenStream;
 import org.apache.lucene.analysis.ar.ArabicAnalyzer;
 import org.apache.lucene.analysis.standard.StandardTokenizer;
-import org.apache.lucene.util.Version;
 
 /**
  * @author Alex Buloichik (alex73mail@gmail.com)
@@ -39,18 +38,17 @@ import org.apache.lucene.util.Version;
  */
 @Tokenizer(languages = { "ar" })
 public class LuceneArabicTokenizer extends BaseTokenizer {
-    private static final ArabicAnalyzer AN_STOPS = new ArabicAnalyzer(Version.LUCENE_36);
-    private static final ArabicAnalyzer AN_NOSTOPS = new ArabicAnalyzer(Version.LUCENE_36,
-            new String[] {});
 
     @Override
     protected TokenStream getTokenStream(final String strOrig,
             final boolean stemsAllowed, final boolean stopWordsAllowed) {
         if (stemsAllowed) {
-            ArabicAnalyzer analyzer = stopWordsAllowed ? AN_STOPS : AN_NOSTOPS;
+            ArabicAnalyzer analyzer = stopWordsAllowed ?
+                    new ArabicAnalyzer(getBehavior()) :
+                        new ArabicAnalyzer(getBehavior(), new String[] {});
             return analyzer.tokenStream("", new StringReader(strOrig));
         } else {
-            return new StandardTokenizer(Version.LUCENE_36,
+            return new StandardTokenizer(getBehavior(),
                     new StringReader(strOrig.toLowerCase()));
         }
     }

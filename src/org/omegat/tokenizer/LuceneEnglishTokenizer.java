@@ -34,7 +34,6 @@ import java.util.Set;
 import org.apache.lucene.analysis.TokenStream;
 import org.apache.lucene.analysis.en.EnglishAnalyzer;
 import org.apache.lucene.analysis.standard.StandardTokenizer;
-import org.apache.lucene.util.Version;
 import org.omegat.core.Core;
 
 /**
@@ -84,10 +83,10 @@ public class LuceneEnglishTokenizer extends BaseTokenizer {
     protected TokenStream getTokenStream(final String strOrig,
             final boolean stemsAllowed, final boolean stopWordsAllowed) {
         if (stemsAllowed) {
-            return new EnglishAnalyzer(Version.LUCENE_36, STOP_WORDS).tokenStream("",
+            return new EnglishAnalyzer(getBehavior(), STOP_WORDS).tokenStream("",
                     new StringReader(strOrig));
         } else {
-            return new StandardTokenizer(Version.LUCENE_36,
+            return new StandardTokenizer(getBehavior(),
                     new StringReader(strOrig.toLowerCase()));
         }
     }

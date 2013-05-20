@@ -30,7 +30,6 @@ import java.io.StringReader;
 import org.apache.lucene.analysis.TokenStream;
 import org.apache.lucene.analysis.br.BrazilianAnalyzer;
 import org.apache.lucene.analysis.standard.StandardTokenizer;
-import org.apache.lucene.util.Version;
 
 /**
  * @author Alex Buloichik (alex73mail@gmail.com)
@@ -44,10 +43,10 @@ public class LuceneBrazilianTokenizer extends BaseTokenizer {
         if (stemsAllowed) {
             String[] stopWords = stopWordsAllowed ? BrazilianAnalyzer.BRAZILIAN_STOP_WORDS
                     : EMPTY_STOP_WORDS_LIST;
-            return new BrazilianAnalyzer(Version.LUCENE_36, stopWords).tokenStream("",
+            return new BrazilianAnalyzer(getBehavior(), stopWords).tokenStream("",
                     new StringReader(strOrig));
         } else {
-            return new StandardTokenizer(Version.LUCENE_36,
+            return new StandardTokenizer(getBehavior(),
                     new StringReader(strOrig.toLowerCase()));
         }
     }

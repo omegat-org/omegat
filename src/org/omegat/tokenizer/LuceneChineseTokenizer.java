@@ -26,10 +26,14 @@
 package org.omegat.tokenizer;
 
 import java.io.StringReader;
+import java.io.ObjectInputStream.GetField;
+import java.util.Collections;
+import java.util.Map;
 
 import org.apache.lucene.analysis.TokenStream;
 import org.apache.lucene.analysis.cn.ChineseAnalyzer;
 import org.apache.lucene.analysis.cn.ChineseTokenizer;
+import org.apache.lucene.util.Version;
 
 /**
  * @author Alex Buloichik (alex73mail@gmail.com)
@@ -37,6 +41,12 @@ import org.apache.lucene.analysis.cn.ChineseTokenizer;
  */
 @Tokenizer(languages = { "zh" })
 public class LuceneChineseTokenizer extends BaseTokenizer {
+    
+    @Override
+    public Map<Version, String> getSupportedBehaviors() {
+        return Collections.EMPTY_MAP;
+    }
+    
     @Override
     protected TokenStream getTokenStream(final String strOrig,
             final boolean stemsAllowed, final boolean stopWordsAllowed) {

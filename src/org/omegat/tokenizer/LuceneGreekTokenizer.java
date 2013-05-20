@@ -30,7 +30,6 @@ import java.io.StringReader;
 import org.apache.lucene.analysis.TokenStream;
 import org.apache.lucene.analysis.el.GreekAnalyzer;
 import org.apache.lucene.analysis.standard.StandardTokenizer;
-import org.apache.lucene.util.Version;
 
 /**
  * @author Alex Buloichik (alex73mail@gmail.com)
@@ -44,14 +43,14 @@ public class LuceneGreekTokenizer extends BaseTokenizer {
         if (stemsAllowed) {
             GreekAnalyzer an;
             if (stopWordsAllowed) {
-                an = new GreekAnalyzer(Version.LUCENE_36);
+                an = new GreekAnalyzer(getBehavior());
             } else {
-                an = new GreekAnalyzer(Version.LUCENE_36,
+                an = new GreekAnalyzer(getBehavior(),
                         EMPTY_STOP_WORDS_LIST);
             }
             return an.tokenStream("", new StringReader(strOrig));
         } else {
-            return new StandardTokenizer(Version.LUCENE_36,
+            return new StandardTokenizer(getBehavior(),
                     new StringReader(strOrig.toLowerCase()));
         }
     }

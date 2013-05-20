@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 3.0.2
 ----------------------------------------------------------------------
-   1 Enhancement
+   2 Enhancements
    0 Bug fix
    0 Localisation update
 ----------------------------------------------------------------------
@@ -11,6 +11,9 @@
 
   - View log from within OmegaT
   https://sourceforge.net/p/omegat/feature-requests/243/
+
+  - https://sourceforge.net/p/omegat/feature-requests/866/
+  https://sourceforge.net/p/omegat/feature-requests/866/
 
 ----------------------------------------------------------------------
  OmegaT 3.0.1

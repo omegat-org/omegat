@@ -12,7 +12,7 @@
   - View log from within OmegaT
   https://sourceforge.net/p/omegat/feature-requests/243/
 
-  - https://sourceforge.net/p/omegat/feature-requests/866/
+  - Allow user to adjust tokenizer behavior
   https://sourceforge.net/p/omegat/feature-requests/866/
 
 ----------------------------------------------------------------------

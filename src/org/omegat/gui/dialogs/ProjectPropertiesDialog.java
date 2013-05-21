@@ -192,7 +192,7 @@ public class ProjectPropertiesDialog extends JDialog {
 
         // Source language field
         final JComboBox m_sourceLocaleField = new JComboBox(Language.LANGUAGES);
-        if (m_sourceLocaleField.getMaximumRowCount() < 20)
+        if (m_sourceLocaleField.getMaximumRowCount() < 20) 
             m_sourceLocaleField.setMaximumRowCount(20);
         m_sourceLocaleField.setEditable(true);
         m_sourceLocaleField.setRenderer(new LanguageComboBoxRenderer());
@@ -326,7 +326,9 @@ public class ProjectPropertiesDialog extends JDialog {
         m_sourceTokenizerBehaviorField.setSelectedItem(srcTok.getBehavior());
         bB.add(m_sourceTokenizerBehaviorField);
 
-        if (!m_sourceTokenizerField.isEnabled()) m_sourceTokenizerBehaviorField.setEnabled(false);
+        if (!m_sourceTokenizerField.isEnabled()) {
+            m_sourceTokenizerBehaviorField.setEnabled(false);
+        }
 
         final String cliTokSrcBehavior = Core.getParams().get(ITokenizer.CLI_PARAM_SOURCE_BEHAVIOR);
         if (cliTokSrcBehavior != null) {
@@ -338,10 +340,16 @@ public class ProjectPropertiesDialog extends JDialog {
         m_sourceTokenizerField.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (!m_sourceTokenizerField.isEnabled()) return;
-                if (cliTokSrcBehavior != null) return;
+                if (!m_sourceTokenizerField.isEnabled()) {
+                    return;
+                }
+                if (cliTokSrcBehavior != null) {
+                    return;
+                }
                 Object cls = m_sourceTokenizerField.getSelectedItem();
-                if (!(cls instanceof Class<?>)) return;
+                if (!(cls instanceof Class<?>)) {
+                    return;
+                }
                 ITokenizer newTok;
                 try {
                     newTok = (ITokenizer)((Class<?>) cls).newInstance();
@@ -386,7 +394,9 @@ public class ProjectPropertiesDialog extends JDialog {
         m_targetTokenizerBehaviorField.setSelectedItem(trgTok.getBehavior());
         bB.add(m_targetTokenizerBehaviorField);
 
-        if (!m_targetTokenizerField.isEnabled()) m_targetTokenizerBehaviorField.setEnabled(false);
+        if (!m_targetTokenizerField.isEnabled()) {
+            m_targetTokenizerBehaviorField.setEnabled(false);
+        }
 
         final String cliTokTrgBehavior = Core.getParams().get(ITokenizer.CLI_PARAM_TARGET_BEHAVIOR);
         if (cliTokTrgBehavior != null) {
@@ -398,10 +408,16 @@ public class ProjectPropertiesDialog extends JDialog {
         m_targetTokenizerField.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (!m_targetTokenizerField.isEnabled()) return;
-                if (cliTokTrgBehavior != null) return;
+                if (!m_targetTokenizerField.isEnabled()) {
+                    return;
+                }
+                if (cliTokTrgBehavior != null) {
+                    return;
+                }
                 Object cls = m_targetTokenizerField.getSelectedItem();
-                if (!(cls instanceof Class<?>)) return;
+                if (!(cls instanceof Class<?>)) {
+                    return;
+                }
                 ITokenizer newTok;
                 try {
                     newTok = (ITokenizer)((Class<?>) cls).newInstance();

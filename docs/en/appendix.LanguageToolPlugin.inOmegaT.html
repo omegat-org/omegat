@@ -29,21 +29,21 @@
          <div class="titlepage">
             <div>
                <div>
-                  <h1 class="title"><a name="appendix.LanguageToolPlugin.inOmegaT"></a>Appendix&nbsp;E.&nbsp;LanguageTool plugin<a class="indexterm" name="d0e10854"></a></h1>
+                  <h1 class="title"><a name="appendix.LanguageToolPlugin.inOmegaT"></a>Appendix&nbsp;E.&nbsp;LanguageTool plugin<a class="indexterm" name="d0e10815"></a></h1>
                </div>
             </div>
          </div>
          <div class="toc">
             <dl class="toc">
-               <dt><span class="section"><a href="appendix.LanguageToolPlugin.inOmegaT.html#d0e10859">1. Introduction</a></span></dt>
-               <dt><span class="section"><a href="appendix.LanguageToolPlugin.inOmegaT.html#d0e10878">2. Installation and Use</a></span></dt>
+               <dt><span class="section"><a href="appendix.LanguageToolPlugin.inOmegaT.html#d0e10820">1. Introduction</a></span></dt>
+               <dt><span class="section"><a href="appendix.LanguageToolPlugin.inOmegaT.html#d0e10839">2. Installation and Use</a></span></dt>
             </dl>
          </div>
          <div class="section">
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="d0e10859"></a>1.&nbsp;Introduction
+                     <h2 class="title" style="clear: both"><a name="d0e10820"></a>1.&nbsp;Introduction
                      </h2>
                   </div>
                </div>
@@ -60,7 +60,7 @@
                    checking. LanguageTool will find errors for which a rule has been defined
                    in its language-specific configuration files.
             </p>
-            <div class="figure"><a name="d0e10871"></a><p class="title"><b>Figure&nbsp;E.1.&nbsp;The LanguageTool in OmegaT</b></p>
+            <div class="figure"><a name="d0e10832"></a><p class="title"><b>Figure&nbsp;E.1.&nbsp;The LanguageTool in OmegaT</b></p>
                <div class="figure-contents">
                   <div class="screenshot">
                      <div class="mediaobject"><img src="images/LanguageToolExample.png" alt="The LanguageTool in OmegaT"></div>
@@ -71,19 +71,12 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="d0e10878"></a>2.&nbsp;Installation and Use
+                     <h2 class="title" style="clear: both"><a name="d0e10839"></a>2.&nbsp;Installation and Use
                      </h2>
                   </div>
                </div>
             </div>
-            <p>The LanguageTool plugin for OmegaT can be downloaded from the <a class="ulink" href="http://sourceforge.net/projects/omegat-plugins/files" target="_top">OmegaT plugins
-                      download site</a>. Unzip the files, and put them all in the "plugins"
-                   folder located in OmegaT installation folder, that is the folder that
-                   contains the OmegaT.jar. Create the "plugins" folder first, if it does not
-                   exist.
-            </p>
-            <p>Once installed, the plugin will be used automatically by OmegaT, if
-                   <span class="guimenuitem">Options &gt; Language Checker</span> is checked. The
+            <p>The LanguageTool plugin is included in OmegaT. It will be used automatically by OmegaT if <span class="guimenuitem">Options &gt; Language Checker</span> is checked. The
                    rules applied (if any) will depend on the source and target language of
                    the project. When a rule is triggered, the corresponding phrase will be
                    underlined in blue in the Editor (see <span class="emphasis"><em>also </em></span>and
@@ -91,6 +84,12 @@
                    hovering the mouse over the underlined phrase, an explanation will
                    appear.
             </p>
+            <div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+               <h3 class="title">Incompatibilities</h3>
+               <p>LanguageTool will not work properly if an old version is found in the /plugin folder. Remove LanguageTool from the /plugin
+                  folder before starting OmegaT.
+               </p>
+            </div>
          </div>
       </div>
       <div class="navfooter">

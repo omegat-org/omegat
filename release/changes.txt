@@ -1,4 +1,21 @@
 ----------------------------------------------------------------------
+ OmegaT 3.0.2 update 1
+----------------------------------------------------------------------
+   1 Enhancement
+   1 Bug fix
+   0 Localisation update
+----------------------------------------------------------------------
+3.0.2 update 1 vs. 3.0.2
+
+  Other enhancements:
+
+  - LanguageTool and tokenizer plugin annexes updated in the documentation
+
+  Bug fixes:
+
+  - Creating a new project failed in 3.0.2
+
+----------------------------------------------------------------------
  OmegaT 3.0.2
 ----------------------------------------------------------------------
    2 Enhancements

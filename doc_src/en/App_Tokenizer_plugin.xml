@@ -52,83 +52,14 @@
   </section>
 
   <section>
-    <title>Installation and command line use</title>
+    <title>Installation and use</title>
 
-    <para>A tokenizer package adapted from the Lucene project is distributed
-    as an OmegaT plug-in at
-    http://sourceforge.net/projects/omegat-plugins/files/. Download the most
-    recent files (OmegaT-tokenizers_0.4_2-2.1.zip at the time of this
-    writing).</para>
+	<para>Tokenizers are included in OmegaT. OmegaT automatically selects a tokenizer for the source and the target language according to the language settings of the project. It is possible to select another tokenizer or a different version of the tokenizer from the Project Properties window.</para>
 
-    <para>To install the tokenizer, create a folder with the name "plugins" in
-    the folder where OmegaT.jar is found and unpack the above files within
-    that folder.</para>
-
-    <para>To run OmegaT with the tokenizer you need to specify which tokenizer
-    you'll use for the source language and which tokenizer you'll use for the
-    target language. The syntax is as follows:</para>
-
-    <para><literal>java -jar OmegaT.jar --ITokenizer=[source language
-    tokenizer name] --ITokenizerTarget=[target language tokenizer
-    name]</literal></para>
-
-    <para>The tokenizer names are given in the Readme.txt file distributed
-    with the tokenizer files. For example, if you wish to use the Lucene CJK
-    tokenizer in source and the Lucene French tokenizer in target, your
-    command will look like this:</para>
-
-    <para><literal>java -jar OmegaT.jar
-    --ITokenizer=org.omegat.plugins.tokenizer.LuceneCJKTokenizer
-    --ITokenizerTarget=org.omegat.plugins.tokenizer.LuceneFrenchTokenizer</literal></para>
-  </section>
-
-  <section>
-    <title>Mac OS X specifics</title>
-
-    <para>If you wish to use the tokenizers with the Mac OS X OmegaT.app
-    package, the tokenizer installation described above applies (right-click
-    on OmegaT.app to find the location of OmegaT.jar), but you'll need to
-    specify the tokenizer names in the <filename>info.plist </filename>that
-    contains the Java launch options. Follow the instructions above to access
-    the <filename>info.plist</filename> file and edit it so that it looks as
-    follows for the example we just gave:</para>
-
-    <literallayout><code>
-&lt;key&gt;VMOptions&lt;/key&gt;
-&lt;string&gt;-Xmx1024M&lt;/string&gt;
-
-&lt;key&gt;Arguments&lt;/key&gt;
-&lt;array&gt;
-  &lt;string&gt;--ITokenizer=org.omegat.plugins.tokenizer.LuceneCJKTokenizer&lt;/string&gt;
-  &lt;string&gt;--ITokenizerTarget=org.omegat.plugins.tokenizer.LuceneFrenchTokenizer&lt;/string&gt;
-&lt;/array&gt;</code></literallayout>
-  </section>
-
-  <section>
-    <title>Troubleshooting</title>
-
-    <para>To make sure that the tokenizers are being used, open a project and
-    check the log information from the console. With the example above it
-    should look like that:</para>
-
-    <literallayout><code>
-84528: Info: Source tokenizer: org.omegat.plugins.tokenizer.LuceneCJKTokenizer 
-84528: Info: Target tokenizer: org.omegat.plugins.tokenizer.LuceneFrenchTokenizer 
-</code></literallayout>
-
-    <para>The numbers on the left are likely to be different on your system so
-    make sure that the source and target tokenizer names,specified in the
-    start-up options, correspond to what the log is showing. If the tokenizers
-    are not properly launched, the log will look like this:</para>
-
-    <literallayout><code>
-12719: Info: Source tokenizer: org.omegat.core.matching.Tokenizer 
-12719: Info: Target tokenizer: org.omegat.core.matching.Tokenizer 
-</code></literallayout>
-
-    <para>With the Mac OS X OmegaT.app package, double-click on the
-    <literal>JavaApplicationStub</literal> located in
-    /OmegaT.app/Contents/MacOS/ (see above to access it) to launch OmegaT from
-    the console and get immediate access to the log.</para>
+	<warning>
+		<title>Incompatibilities</title>
+		<para>OmegaT will not launch if tokenizers are found in the /plugin folder. Remove all the tokenizers from the /plugin folder before starting OmegaT.</para>
+	</warning>
+	
   </section>
 </appendix>

@@ -39,20 +39,18 @@
   <section>
     <title>Installation and Use</title>
 
-    <para>The LanguageTool plugin for OmegaT can be downloaded from the <ulink
-    url="http://sourceforge.net/projects/omegat-plugins/files">OmegaT plugins
-    download site</ulink>. Unzip the files, and put them all in the "plugins"
-    folder located in OmegaT installation folder, that is the folder that
-    contains the OmegaT.jar. Create the "plugins" folder first, if it does not
-    exist.</para>
-
-    <para>Once installed, the plugin will be used automatically by OmegaT, if
-    <guimenuitem>Options &gt; Language Checker</guimenuitem> is checked. The
+    <para>The LanguageTool plugin is included in OmegaT. It will be used automatically by OmegaT if <guimenuitem>Options &gt; Language Checker</guimenuitem> is checked. The
     rules applied (if any) will depend on the source and target language of
     the project. When a rule is triggered, the corresponding phrase will be
     underlined in blue in the Editor (see <emphasis>also </emphasis>and
     <emphasis>I didn't do nothing</emphasis> in the picture above). When
     hovering the mouse over the underlined phrase, an explanation will
     appear.</para>
+    
+	<warning>
+		<title>Incompatibilities</title>
+		<para>LanguageTool will not work properly if an old version is found in the /plugin folder. Remove LanguageTool from the /plugin folder before starting OmegaT.</para>
+	</warning>
+
   </section>
 </appendix>

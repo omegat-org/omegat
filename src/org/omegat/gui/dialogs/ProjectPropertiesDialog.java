@@ -311,7 +311,9 @@ public class ProjectPropertiesDialog extends JDialog {
 
         // Source tokenizer behavior field
         ITokenizer srcTok = Core.getProject().getSourceTokenizer();
-        if (srcTok == null) srcTok = new DefaultTokenizer();
+        if (srcTok == null) {
+            srcTok = new DefaultTokenizer();
+        }
         final JComboBox m_sourceTokenizerBehaviorField = new JComboBox(
                 srcTok.getSupportedBehaviors().keySet().toArray());
         m_sourceTokenizerBehaviorField.setEnabled(srcTok.getSupportedBehaviors().size() > 0);
@@ -369,7 +371,9 @@ public class ProjectPropertiesDialog extends JDialog {
 
         // Target tokenizer behavior field
         ITokenizer trgTok = Core.getProject().getTargetTokenizer();
-        if (trgTok == null) trgTok = new DefaultTokenizer();
+        if (trgTok == null) {
+            trgTok = new DefaultTokenizer();
+        }
         final JComboBox m_targetTokenizerBehaviorField = new JComboBox(
                 trgTok.getSupportedBehaviors().keySet().toArray());
         m_targetTokenizerBehaviorField.setEnabled(trgTok.getSupportedBehaviors().size() > 0);

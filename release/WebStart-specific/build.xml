@@ -16,8 +16,8 @@
 			</filterset>
 		</copy>
 
-		<copy todir="${root}/build/webstart">
-			<fileset dir="${root}/lib" includes="*.jar" />
+		<copy todir="${root}/build/webstart" flatten="yes">
+			<fileset dir="${root}/lib" includes="**/*.jar" />
 			<fileset dir="${root}/lib-mnemonics/dist" includes="**/*.jar" />
 			<fileset dir="${root}/dist" includes="OmegaT.jar" />
 		</copy>

@@ -32,12 +32,15 @@
 	<classpathentry kind="lib" path="lib/tinysegmenter.jar"/>
 	<classpathentry kind="lib" path="lib/commons-lang-2.4.jar"/>
 	<classpathentry kind="lib" path="lib/commons-logging-1.1.1.jar"/>
-	<classpathentry kind="lib" path="lib/LanguageTool-data.jar"/>
 	<classpathentry kind="lib" path="lib/orion-ssh2-214.jar"/>
-	<classpathentry kind="lib" path="lib/jwordsplitter-3.4.jar"/>
-	<classpathentry kind="lib" path="lib/languagetool-core-2.1.jar"/>
-	<classpathentry kind="lib" path="lib/morfologik-fsa-1.5.4.jar"/>
-	<classpathentry kind="lib" path="lib/morfologik-stemming-1.5.4.jar"/>
-	<classpathentry kind="lib" path="lib/segment-1.4.1.jar"/>
+	<classpathentry kind="lib" path="lib/LanguageTool/cjftransform-1.0.1.jar"/>
+	<classpathentry kind="lib" path="lib/LanguageTool/ictclas4j-1.0.1.jar"/>
+	<classpathentry kind="lib" path="lib/LanguageTool/jwordsplitter-3.4.jar"/>
+	<classpathentry kind="lib" path="lib/LanguageTool/languagetool-core-2.1.jar"/>
+	<classpathentry kind="lib" path="lib/LanguageTool/LanguageTool-data.jar"/>
+	<classpathentry kind="lib" path="lib/LanguageTool/morfologik-fsa-1.5.4.jar"/>
+	<classpathentry kind="lib" path="lib/LanguageTool/morfologik-speller-1.5.4.jar"/>
+	<classpathentry kind="lib" path="lib/LanguageTool/morfologik-stemming-1.5.4.jar"/>
+	<classpathentry kind="lib" path="lib/LanguageTool/segment-1.4.1.jar"/>
 	<classpathentry kind="output" path="classes"/>
 </classpath>

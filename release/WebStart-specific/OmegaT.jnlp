@@ -56,7 +56,10 @@
 				<jar href="LanguageTool-data.jar" download="lazy" />
 				<jar href="languagetool-core-2.1.jar" download="lazy" />
 				<jar href="morfologik-fsa-1.5.4.jar" download="lazy" />
+				<jar href="morfologik-speller-1.5.4.jar" download="lazy" />
 				<jar href="morfologik-stemming-1.5.4.jar" download="lazy" />
+				<jar href="cjftransform-1.0.1.jar" download="lazy" />
+				<jar href="ictclas4j-1.0.1.jar" download="lazy" />
 				<jar href="segment-1.4.1.jar" download="lazy" />
 				<jar href="pdfbox-app-1.8.1.jar" download="lazy" />
 				<jar href="Fontbox-0.1.0.jar" download="lazy" />

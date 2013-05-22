@@ -14,10 +14,12 @@ Class-Path: lib/lib-mnemonics.jar lib/htmlparser.jar lib/MRJAdapter.jar
   lib/lucene-core-3.6.2.jar lib/lucene-kuromoji-3.6.2.jar
   lib/lucene-smartcn-3.6.2.jar lib/tinysegmenter.jar
   lib/commons-lang-2.4.jar lib/commons-logging-1.1.1.jar
-  lib/jwordSplitter-3.4.jar
-  lib/LanguageTool-data.jar lib/languagetool-core-2.1.jar
-  lib/morfologik-fsa-1.5.4.jar lib/morfologik-stemming-1.5.4.jar
-  lib/segment-1.4.1.jar lib/icu4j-51_1.jar lib/FontBox-0.1.0.jar
+  lib/LanguageTool/LanguageTool/jwordSplitter-3.4.jar
+  lib/LanguageTool/LanguageTool-data.jar lib/LanguageTool/LanguageTool/languagetool-core-2.1.jar
+  lib/LanguageTool/LanguageTool/morfologik-fsa-1.5.4.jar lib/LanguageTool/LanguageTool/morfologik-stemming-1.5.4.jar
+  lib/LanguageTool/LanguageTool/morfologik-speller-1.5.4.jar
+  lib/LanguageTool/LanguageTool/cjftransform-1.0.1.jar lib/LanguageTool/LanguageTool/ictclas4j-1.0.1.jar
+  lib/LanguageTool/LanguageTool/segment-1.4.1.jar lib/icu4j-51_1.jar lib/FontBox-0.1.0.jar
   lib/JempBox-0.2.0.jar lib/pdfbox-app-1.8.1.jar
 OmegaT-Plugins: 
   org.omegat.languagetools.LanguageToolWrapper

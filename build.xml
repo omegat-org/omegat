@@ -67,6 +67,21 @@
     
     <target name="-post-jar">
         <delete file="${dist.dir}/README.TXT"/>
+        <!-- delete LanguageTool libs at the root of lib -->
+        <delete file="${dist.dir}/lib/jwordSplitter-3.4.jar"/>
+        <delete file="${dist.dir}/lib/LanguageTool-data.jar"/>
+        <delete file="${dist.dir}/lib/languagetool-core-2.1.jar"/>      
+        <delete file="${dist.dir}/lib/morfologik-fsa-1.5.4.jar"/>
+        <delete file="${dist.dir}/lib/morfologik-stemming-1.5.4.jar"/>
+        <delete file="${dist.dir}/lib/morfologik-speller-1.5.4.jar"/>
+        <delete file="${dist.dir}/lib/cjftransform-1.0.1.jar"/>
+        <delete file="${dist.dir}/lib/ictclas4j-1.0.1.jar"/>
+        <delete file="${dist.dir}/lib/segment-1.4.1.jar"/>
+        <!-- copy the librairies with the tree-structure -->
+        <mkdir dir="dist/lib"/>
+        <copy todir="dist/lib">
+            <fileset dir="lib" excludes="sources/**"/>
+        </copy>
         <!-- copy the native libraries to the distribution directory -->
         <copy todir="dist/native">
             <fileset dir="native"/>
@@ -178,10 +193,11 @@
         <copy todir="dist/images">
             <fileset dir="images"/>
         </copy>
+        <!-- Already done by post-jar 
         <mkdir dir="dist/lib"/>
         <copy todir="dist/lib">
             <fileset dir="lib" excludes="sources/**"/>
-        </copy>
+        </copy> -->
     </target>
    
     <!-- Builds a ZIP distribution -->    

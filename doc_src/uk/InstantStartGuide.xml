@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<chapter id="chapter.instant.start.guide">
+  <title>Навчіться використовувати ОмегаТ за 5 хвилин!</title>
+
+  <section id="create.and.open.new.project">
+    <title>Створення та відкриття нового проекту<indexterm class="singular">
+        <primary>Проект</primary> <secondary>Створити / Відкрити </secondary>
+      </indexterm></title>
+
+    <para><remark>Зауваження:</remark> на комп'ютерах Apple Mac використовується клавіша <keycap>Command</keycap> замість клавіші <keycap>Ctrl</keycap>.</para>
+
+      <indexterm class="singular">
+        <primary>Меню «Проект»</primary> <secondary>Новий...</secondary>
+      </indexterm>
+
+    <para>Щоб почати використовувати ОмегаТ, спочатку потрібно створити проект, в якому будуть знаходитися ваші файли: вихідні файли, файли пам'яті перекладів, глосаріїв і, звичайно, перекладені файли. В меню <guimenu>«Проект»</guimenu> виберіть пункт <menuchoice><guimenuitem>«Новий...»</guimenuitem></menuchoice> і введіть назву вашого проекту. Запам'ятайте розташування каталогу вашого проекту, надалі він вам знадобиться.</para>
+
+    <para>Після введення імені проекту з'явиться вікно <guilabel>«Створити новий проект»</guilabel>. В верхній частині діалогу виберіть мову початкових файлів, мову перекладу і натисніть <guibutton>«Добре»</guibutton>.</para>
+
+    <para>Якщо надалі ви захочете змінити будь-які налаштування проекту, вікно параметрів проекту завжди можна викликати, натиснувши <keycap>Ctrl+E</keycap>, або через меню «Проект» —&gt; «Властивості...».</para>
+
+    <para>Потім відкриється діалог <guilabel>«Файли проекту»</guilabel>. Щоб обрати початкові файлів натисніть кнопку <guibutton>«Копіювати файли в папку початкових файли ...»</guibutton>. ОмегаТ скопіює обрані файли в папку <filename>/source/</filename> вашого проекту. Після того, як початковий файл з'явиться в панелі <guilabel>Редактор</guilabel>, діалог <guilabel>«Файли проекту»</guilabel> можна буде закрити.
+</para>
+  </section>
+
+  <section id="translate.the.segments.one.by.one">
+    <title>Переклад файлу </title>
+
+    <para>В ОмегаТ можна перекладати лише один сегмент тексту одночасно. Після того, як ви переклали сегмент, натисніть <keycap>Ctrl+U</keycap> для переходу до наступного неперекладеного сегменту (або <keycap>Ctrl+N</keycap> для переходу до наступного сегменту). Коли ви захочете переглянути результат своєї роботи, натисніть <keycap>Ctrl+D</keycap> (або меню «Проект» -&gt; «Створити перекладені документи»), і в папці <filename>/target/</filename> вашого проекту з'являться перекладені файли. Під час перекладу ознайомтеся з меню <guimenu>«Редагувати»</guimenu> та <guimenu>«Перейти до»</guimenu>, в яких міститься багато корисних функцій. </para>
+  </section>
+
+  <section>
+    <title>Перевірка теґів</title>
+
+    <para>Якщо ваш початковий файл містить форматування, як, наприклад, файли Microsoft Word, LibreOffice Writer або HTML-файли, ОмегаТ покаже форматування у вигляді теґів прямо в перекладному тексті. Часто документи містять теґи, які не мають відношення до форматування, але вони відіграють важливу роль як в початкових файлах, так і в файлах перекладу. Оригінальний текст може виглядати так: <mediaobject> <imageobject role="html"> <imagedata align="justify" fileref="images/InstantGuide_1.png"/> </imageobject> <imageobject role="fo"> <imagedata align="justify" fileref="images/InstantGuide_1.png" width="40%"/> </imageobject> </mediaobject>
+    </para>
+
+    <para>а в ОмегаТ він буде представлений так: <mediaobject> <imageobject role="html"> <imagedata align="justify" fileref="images/InstantGuide_2.png"/> </imageobject> <imageobject role="fo"> <imagedata align="justify" fileref="images/InstantGuide_2.png" width="45%"/> </imageobject> </mediaobject>
+    </para>
+    
+    <para>В ОмегаТ теґи виділяються сірим кольором. Теґи захищені, тому ви не зможете змінювати їхній зміст, але ви можете вилучати їх, вводити їх вручну, або перемістити в перекладі.  Але, якщо теґи розставлені некоректно, можуть виникнути проблеми з відкриттям перекладених файлів. Щоб уникнути цього, натисніть <keycap>Ctrl+T</keycap> (або меню «Інструменти» —&gt; «Перевірка теґів») перш ніж створювати перекладені документи і перевірте розташування теґів. </para>
+  </section>
+
+  <section>
+    <title>Створення перекладених файлів </title>
+
+    <para>Після того, як ви перевірили, що у вашому проекті немає помилок пов'язаних з розташуванням теґів, натисніть <keycap>Ctrl+D</keycap> і в папці <filename>/target/</filename> вашого проекту з'являться перекладені документи. </para>
+  </section>
+
+  <section>
+    <title>Ще кілька порад</title>
+
+    <itemizedlist>
+      <listitem>
+        <para>Якщо файл не з'являється в панелі <guilabel>Редактор</guilabel>, можливо, формат цього файлу не підтримується ОмегаТ. Список форматів, які підтримує ОмегаТ, можна знайти в розділі 7 <link linkend="chapter.file.filters">«Файлові фільтри»</link> керівництва користувача ОмегаТ.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Можна створювати новий проект для кожного нового перекладу, або додавати нові файли до вже існуючого проекту. </para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Щоб перевірити налаштування проекту, відкрийте діалог «Редагувати проект», натиснувши <keycap>Ctrl+E</keycap> (або меню «Проект» —&gt; «Властивості...»). Щоб побачити файли, які вже додані в проект, відкрийте діалог <guilabel>«Файли проекту»</guilabel> натиснувши <keycap>Ctrl+L</keycap>(або меню «Проект» —&gt; «Файли проекту...»).</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Після закінчення перекладу, OmagaT зберігає пам'ять перекладів у файли з іменами <filename>«*level1*»</filename>, <filename>«*level2*»</filename> і <filename>«*omegat*»</filename> в папці проекту.  Файли <filename>«*level1*»</filename> і <filename>«*level2*»</filename> можна використовувати в інших програмах, які підтримують пам'ять перекладів. Файл з іменем <filename>«*omegat*»</filename> можна використовувати в самій ОмегаТ у ваших майбутніх проектах. Якщо ви помістите файли з пам'яттю перекладів в папку <filename>/tm/</filename> вашого проекту, то ОмегаТ буде використовувати їх для пошуку подібних сегментів, які називають «нечіткими збігами». </para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Ви можете додавати нові терміни в глосарій натиснувши <keycap>Ctrl+Shift+G</keycap>, або ж скопіювати вже існуючі глосарії в папку <filename>/glossary/</filename> вашого проекту, і ОмегаТ автоматично буде шукати терміни в них.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Часто буває корисно пошукати слова чи фрази в початковому тексті або в перекладі. Якщо натиснути <keycap>Ctrl+F</keycap> (або меню «Редагувати» —&gt; «Пошук в проекті...»), то з'явиться діалог <guilabel>«Текстовий пошук»</guilabel>.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Докладніший посібник можна знайти в розділі <ulink url="http://www.omegat.org/en/tutorial/OmegaT%20for%20Beginners.pdf">«ОмегаТ для початківців»</ulink> на сайті ОмегаТ. Якщо вам знадобиться допомога по ОмегаТ, можете приєднатися до <ulink url="http://tech.groups.yahoo.com/group/OmegaT/">користувацької групи ОмегаТ</ulink>.</para>
+      </listitem>
+    </itemizedlist>
+  </section>
+</chapter>

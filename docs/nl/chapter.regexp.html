@@ -2,22 +2,22 @@
    <head>
       <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
    
-      <title>Hoofdstuk 16. Reguliere uitdrukkingen</title>
+      <title>Hoofdstuk 15. Reguliere uitdrukkingen</title>
       <link rel="stylesheet" type="text/css" href="OmegaT.css">
       <meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
-      <link rel="home" href="index.html" title="OmegaT - Gebruikershandleiding">
-      <link rel="up" href="index.html" title="OmegaT - Gebruikershandleiding">
-      <link rel="prev" href="chapter.searches.html" title="Hoofdstuk 15. Zoeken">
-      <link rel="next" href="chapter.dictionaries.html" title="Hoofdstuk 17. Woordenboeken">
+      <link rel="home" href="index.html" title="OmegaT 3.0 - Gebruikershandleiding">
+      <link rel="up" href="index.html" title="OmegaT 3.0 - Gebruikershandleiding">
+      <link rel="prev" href="chapter.segmentation.html" title="Hoofdstuk 14. Bronsegmentatie">
+      <link rel="next" href="chapter.dictionaries.html" title="Hoofdstuk 16. Woordenboeken">
    </head>
    <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
       <div class="navheader">
          <table width="100%" summary="Navigation header">
             <tr>
-               <th colspan="3" align="center">Hoofdstuk 16. Reguliere uitdrukkingen</th>
+               <th colspan="3" align="center">Hoofdstuk 15. Reguliere uitdrukkingen</th>
             </tr>
             <tr>
-               <td width="20%" align="left"><a accesskey="p" href="chapter.searches.html">Terug</a>&nbsp;
+               <td width="20%" align="left"><a accesskey="p" href="chapter.segmentation.html">Terug</a>&nbsp;
                </td>
                <th width="60%" align="center">&nbsp;</th>
                <td width="20%" align="right">&nbsp;<a accesskey="n" href="chapter.dictionaries.html">Volgende</a></td>
@@ -29,7 +29,7 @@
          <div class="titlepage">
             <div>
                <div>
-                  <h1 class="title"><a name="chapter.regexp"></a>Hoofdstuk 16. Reguliere uitdrukkingen<a class="indexterm" name="d0e7345"></a></h1>
+                  <h1 class="title"><a name="chapter.regexp"></a>Hoofdstuk 15. Reguliere uitdrukkingen<a class="indexterm" name="d0e7139"></a></h1>
                </div>
             </div>
          </div>
@@ -39,7 +39,7 @@
             </dl>
          </div>
          <p>De reguliere uitdrukkingen (of afgekort regex) die worden gebruikt in zoekacties en segmentatieregels zijn die welke worden
-            ondersteund door Java. Als u meer specifieke informatie nodig heeft raadpleeg dan <a class="ulink" href="http://download.oracle.com/javase/1.5.0/docs/api/java/util/regex/Pattern.html" target="_top">documentatie voor Java Regex</a>. Bekijk de aanvullende verwijzingen en voorbeelden hieronder.
+            ondersteund door Java. Als u meer specifieke informatie nodig heeft raadpleeg dan <a class="ulink" href="http://download.oracle.com/javase/1.6.0/docs/api/java/util/regex/Pattern.html" target="_top">documentatie voor Java Regex</a>. Bekijk de aanvullende verwijzingen en voorbeelden hieronder.
          </p>
          <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;">
             <h3 class="title">Opmerking</h3>
@@ -47,7 +47,7 @@
                of meer complexe en krachtigere zoeksleutels moeten kunnen opdelen.
             </p>
          </div>
-         <div class="table"><a name="d0e7360"></a><p class="title"><b>Tabel 16.1. Regex - Vlaggen</b></p>
+         <div class="table"><a name="d0e7154"></a><p class="title"><b>Tabel 15.1. Regex - Vlaggen</b></p>
             <div class="table-contents">
                <table summary="Regex - Vlaggen" border="1">
                   <colgroup>
@@ -68,7 +68,7 @@
                   </tbody>
                </table>
             </div>
-         </div><br class="table-break"><div class="table"><a name="d0e7377"></a><p class="title"><b>Tabel 16.2. Regex - Teken</b></p>
+         </div><br class="table-break"><div class="table"><a name="d0e7171"></a><p class="title"><b>Tabel 15.2. Regex - Teken</b></p>
             <div class="table-contents">
                <table summary="Regex - Teken" border="1">
                   <colgroup>
@@ -137,7 +137,7 @@
                   </tbody>
                </table>
             </div>
-         </div><br class="table-break"><div class="table"><a name="d0e7454"></a><p class="title"><b>Tabel 16.3. Regex - Aanhalingen</b></p>
+         </div><br class="table-break"><div class="table"><a name="d0e7248"></a><p class="title"><b>Tabel 15.3. Regex - Aanhalingen</b></p>
             <div class="table-contents">
                <table summary="Regex - Aanhalingen" border="1">
                   <colgroup>
@@ -172,7 +172,7 @@
                   </tbody>
                </table>
             </div>
-         </div><br class="table-break"><div class="table"><a name="d0e7486"></a><p class="title"><b>Tabel 16.4. Regex - Klassen voor Unicode-blokken en categorieën</b></p>
+         </div><br class="table-break"><div class="table"><a name="d0e7280"></a><p class="title"><b>Tabel 15.4. Regex - Klassen voor Unicode-blokken en categorieën</b></p>
             <div class="table-contents">
                <table summary="Regex - Klassen voor Unicode-blokken en categorieën" border="1">
                   <colgroup>
@@ -188,12 +188,12 @@
                   <tbody>
                      <tr>
                         <td align="left">\p{InGreek}</td>
-                        <td align="left">Een teken in het Griekse blok (eenvoudig <a class="ulink" href="http://download.oracle.com/javase/1.5.0/docs/api/java/util/regex/Pattern.html#ubc" target="_top"> blok</a>)
+                        <td align="left">Een teken in het Griekse blok (eenvoudig <a class="ulink" href="http://download.oracle.com/javase/1.6.0/docs/api/java/util/regex/Pattern.html#ubc" target="_top"> blok</a>)
                         </td>
                      </tr>
                      <tr>
                         <td align="left">\p{Lu}</td>
-                        <td align="left">Een hoofdletter (eenvoudige <a class="ulink" href="http://download.oracle.com/javase/1.5.0/docs/api/java/util/regex/Pattern.html#ubc" target="_top"> categorie</a>)
+                        <td align="left">Een hoofdletter (eenvoudige <a class="ulink" href="http://download.oracle.com/javase/1.6.0/docs/api/java/util/regex/Pattern.html#ubc" target="_top"> categorie</a>)
                         </td>
                      </tr>
                      <tr>
@@ -211,7 +211,7 @@
                   </tbody>
                </table>
             </div>
-         </div><br class="table-break"><div class="table"><a name="d0e7529"></a><p class="title"><b>Tabel 16.5. Regex - Tekenklassen</b></p>
+         </div><br class="table-break"><div class="table"><a name="d0e7323"></a><p class="title"><b>Tabel 15.5. Regex - Tekenklassen</b></p>
             <div class="table-contents">
                <table summary="Regex - Tekenklassen" border="1">
                   <colgroup>
@@ -240,7 +240,7 @@
                   </tbody>
                </table>
             </div>
-         </div><br class="table-break"><div class="table"><a name="d0e7556"></a><p class="title"><b>Tabel 16.6. Regex - Voorgedefinieerde tekenklassen</b></p>
+         </div><br class="table-break"><div class="table"><a name="d0e7350"></a><p class="title"><b>Tabel 15.6. Regex - Voorgedefinieerde tekenklassen</b></p>
             <div class="table-contents">
                <table summary="Regex - Voorgedefinieerde tekenklassen" border="1">
                   <colgroup>
@@ -285,7 +285,7 @@
                   </tbody>
                </table>
             </div>
-         </div><br class="table-break"><div class="table"><a name="d0e7603"></a><p class="title"><b>Tabel 16.7. Regex - Overeenkomsten voor begrenzingen</b></p>
+         </div><br class="table-break"><div class="table"><a name="d0e7397"></a><p class="title"><b>Tabel 15.7. Regex - Overeenkomsten voor begrenzingen</b></p>
             <div class="table-contents">
                <table summary="Regex - Overeenkomsten voor begrenzingen" border="1">
                   <colgroup>
@@ -318,7 +318,7 @@
                   </tbody>
                </table>
             </div>
-         </div><br class="table-break"><div class="table"><a name="d0e7635"></a><p class="title"><b>Tabel 16.8. Regex - Gulzige parameters</b></p>
+         </div><br class="table-break"><div class="table"><a name="d0e7429"></a><p class="title"><b>Tabel 15.8. Regex - Gulzige parameters</b></p>
             <div class="table-contents">
                <table summary="Regex - Gulzige parameters" border="1">
                   <colgroup>
@@ -351,7 +351,7 @@
             <h3 class="title">Opmerking</h3>
             <p>Gulzige parameters zullen overeenkomen met zoveel als voor hen mogelijk is. Bijvoorbeeld: <span class="emphasis"><em>a+?</em></span> zal overeenkomen met de aaa in <span class="emphasis"><em>aaabbb</em></span></p>
          </div>
-         <div class="table"><a name="d0e7676"></a><p class="title"><b>Tabel 16.9. Regex - Weigerachtige (niet-gulzige) parameters</b></p>
+         <div class="table"><a name="d0e7470"></a><p class="title"><b>Tabel 15.9. Regex - Weigerachtige (niet-gulzige) parameters</b></p>
             <div class="table-contents">
                <table summary="Regex - Weigerachtige (niet-gulzige) parameters" border="1">
                   <colgroup>
@@ -384,7 +384,7 @@
             <h3 class="title">Opmerking</h3>
             <p>Weigerachtige (niet-gulzige) parameters zullen overeenkomen met zo weinig als voor hen mogelijk is. <span class="emphasis"><em>a+?</em></span> zal bijvoorbeeld overeen komen met de eerste <span class="emphasis"><em>a</em></span> in <span class="emphasis"><em>aaabbb</em></span></p>
          </div>
-         <div class="table"><a name="d0e7714"></a><p class="title"><b>Tabel 16.10. Regex - Logische operatoren</b></p>
+         <div class="table"><a name="d0e7508"></a><p class="title"><b>Tabel 15.10. Regex - Logische operatoren</b></p>
             <div class="table-contents">
                <table summary="Regex - Logische operatoren" border="1">
                   <colgroup>
@@ -417,7 +417,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="regex.tools.and.examples.of.use"></a>1. <a class="indexterm" name="d0e7743"></a>Regex-programma's en voorbeelden van gebruik<a class="indexterm" name="d0e7749"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="regex.tools.and.examples.of.use"></a>1. <a class="indexterm" name="d0e7537"></a>Regex-programma's en voorbeelden van gebruik<a class="indexterm" name="d0e7543"></a></h2>
                   </div>
                </div>
             </div>
@@ -426,7 +426,7 @@
                uitdrukking (bovenste item) analyseert de zoektekst (tekstvak in het midden), wat de hits oplevert, weergegeven in het tekstvak
                met het resultaat.
             </p>
-            <div class="figure"><a name="regerx.tester"></a><p class="title"><b>Afbeelding 16.1. Regex Tester</b></p>
+            <div class="figure"><a name="regerx.tester"></a><p class="title"><b>Afbeelding 15.1. Regex Tester</b></p>
                <div class="figure-contents">
                   <div class="mediaobject"><img src="images/RegexTester.png" alt="Regex Tester"></div>
                </div>
@@ -435,7 +435,7 @@
             <p>Een fijne collectie van handige gevallen van reguliere uitdrukkingen kan worden gevonden in <span class="application">OmegaT</span> zelf (zie Opties &gt; Segmentatie). De volgende lijst bevat uitdrukkingen die u misschien handig vindt bij het doorzoeken van
                het vertaalgeheugen:
             </p>
-            <div class="table"><a name="d0e7774"></a><p class="title"><b>Tabel 16.11. Regex - Voorbeelden van reguliere uitdrukkingen in vertalingen</b></p>
+            <div class="table"><a name="d0e7568"></a><p class="title"><b>Tabel 15.11. Regex - Voorbeelden van reguliere uitdrukkingen in vertalingen</b></p>
                <div class="table-contents">
                   <table summary="Regex - Voorbeelden van reguliere uitdrukkingen in vertalingen" border="1">
                      <colgroup>
@@ -490,15 +490,15 @@
          <hr>
          <table width="100%" summary="Navigation footer">
             <tr>
-               <td width="40%" align="left"><a accesskey="p" href="chapter.searches.html">Terug</a>&nbsp;
+               <td width="40%" align="left"><a accesskey="p" href="chapter.segmentation.html">Terug</a>&nbsp;
                </td>
                <td width="20%" align="center">&nbsp;</td>
                <td width="40%" align="right">&nbsp;<a accesskey="n" href="chapter.dictionaries.html">Volgende</a></td>
             </tr>
             <tr>
-               <td width="40%" align="left" valign="top">Hoofdstuk 15. Zoeken&nbsp;</td>
+               <td width="40%" align="left" valign="top">Hoofdstuk 14. Bronsegmentatie&nbsp;</td>
                <td width="20%" align="center"><a accesskey="h" href="index.html">Begin</a></td>
-               <td width="40%" align="right" valign="top">&nbsp;Hoofdstuk 17. Woordenboeken</td>
+               <td width="40%" align="right" valign="top">&nbsp;Hoofdstuk 16. Woordenboeken</td>
             </tr>
          </table>
       </div>

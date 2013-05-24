@@ -257,7 +257,7 @@
 
     <para>OmegaT wordt uitgegeven als een pakket dat u kunt downloaden vanaf SourceForge. Hier wordt een platform-onafhankelijk pakket in een standaard Java-vorm overwogen. Alternatieven bevatten een Linux .tar-pakket, een Windows-installatieprogramma - met of zonder een Java Runtime Environment -, een Mac OS X-installatieprogramma en een broncodepakket voor ontwikkelaars.</para>
 
-    <para>Het platform onafhankelijke pakket kan worden gebruikt op elk platform met een werkende Java 1.5 runtime omgeving, inclusief de platforms waarvoor een specifiek pakket bestaat. Het wordt geleverd als een gecomprimeerd bestand (zip- of tar-archief) dat u in de map van uw keuze moet uitpakken om te installeren. Het bestand kan gewoonlijk worden uitgepakt door op het gedownloade pakket te dubbelklikken. Als het archief is uitgepakt zal een map zijn gemaakt met de volgende inhoud:</para>
+    <para>Het platform onafhankelijke pakket kan worden gebruikt op elk platform met een werkende Java 1.6 runtime omgeving, inclusief de platforms waarvoor een specifiek pakket bestaat. Het wordt geleverd als een gecomprimeerd bestand (zip- of tar-archief) dat u in de map van uw keuze moet uitpakken om te installeren. Het bestand kan gewoonlijk worden uitgepakt door op het gedownloade pakket te dubbelklikken. Als het archief is uitgepakt zal een map zijn gemaakt met de volgende inhoud:</para>
 
     <informaltable>
       <tgroup align="left" cols="2" rowsep="1">
@@ -326,7 +326,7 @@
             <programlisting>#!/bin/bash java
 java -jar OmegaT.jar $*</programlisting>
 
-            <para>Linux- en OS X-gebruikers zouden dit handig kunnen vinden. Maak het uitvoerbaar (<literal>chmod +x OmegaT</literal>) vanaf de opdrachtregel nadat u zich er van overtuigd hebt dat u in de map /OmegaT_3.0/ bent. U kunt dan OmegaT starten door dit bestand vanaf de opdrachtregel uit te voeren</para>
+            <para>Linux- en OS X-gebruikers zouden dit handig kunnen vinden. Maak het uitvoerbaar (<literal>chmod +x OmegaT</literal>) vanaf de opdrachtregel nadat u zich er van overtuigd hebt dat u in de toepassingsmap OmegaT bent. U kunt dan OmegaT starten door dit bestand vanaf de opdrachtregel uit te voeren</para>
             </entry>
           </row>
           

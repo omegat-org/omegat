@@ -14,7 +14,7 @@
 
     <para>Als het bestand <filename>MainMenuShortcuts.properties</filename> is gewijzigd, moet <application>OmegaT</application> opnieuw gestart worden om de nieuwe sneltoetsen te kunnen laten werken.</para>
 
-    <para>De syntaxis voor de definitie van de sneltoets is de volgende: <code>&lt;code menuitem&gt;=&lt;sneltoets&gt;</code>, waar <emphasis>&lt;code menuitem&gt;</emphasis> een code is die wordt genomen uit de tabellen hieronder en <emphasis>&lt;sneltoets&gt;</emphasis> een combinatie is van ingedrukte toetsen die wordt gedefinieerd door de gebruiker<footnote>
+    <para>De syntaxis voor de definitie van de sneltoets is de volgende: <code>&lt;code menuitem&gt;=&lt;sneltoets&gt;</code>, waar <emphasis>&lt;code menuitem&gt;</emphasis> een code is die wordt genomen uit de tabellen hieronder en <emphasis>&lt;sneltoets&gt;</emphasis> een combinatie is van ingedrukte toetsen die wordt gedefinieerd door de gebruiker.<footnote>
         <para>De volledige syntaxis voor toetsaanslagen (sneltoetsen) wordt gedefinieerd in de volgende documentatie voor Java 1.6 van Oracle (onderaan de bladzijde): <ulink url="http://docs.oracle.com/javase/6/docs/api/javax/swing/KeyStroke.html">Java 1.6 keystrokes shortcuts</ulink></para>
       </footnote>.</para>
 
@@ -55,7 +55,8 @@
 
     <para>De eerste is de sneltoets voor <guimenuitem>Project openen</guimenuitem>, de tweede voor <guimenuitem>Item voor woordenlijst maken</guimenuitem>.</para>
 
-    <para>Indien u <keycombo> <keycap>Shift</keycap> <keycap>Ctrl</keycap> <keycap>O</keycap> </keycombo> wilt gebruiken om een project te openen, past u <filename>MainMenuShortcuts.properties</filename> als volgt aan:<code> </code></para>
+    <para>Indien u <keycombo> <keycap>Shift</keycap> <keycap>Ctrl</keycap> <keycap>O</keycap> </keycombo> wilt gebruiken om een project te openen, past u <filename>MainMenuShortcuts.properties</filename> als volgt aan:<code>
+    </code></para>
 
     <para><code>projectOpenMenuItem=shift ctrl O</code>.</para>
 

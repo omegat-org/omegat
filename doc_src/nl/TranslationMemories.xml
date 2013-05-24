@@ -15,14 +15,19 @@
 
       <para>Projecten van <application>OmegaT</application> kunnen bestanden voor vertaalgeheugens bevatten - dit zijn bestanden met de extensie tmx - op vijf verschillende plaatsen:</para>
 
-      <variablelist> <varlistentry> <term><indexterm class="singular">
+      <variablelist>
+        <varlistentry>
+          <term><indexterm class="singular">
               <primary>Vertaalgeheugens</primary> <secondary>submap omegat</secondary> <seealso>projectbestanden</seealso>
             </indexterm>map omegat</term>
 
           <listitem>
             <para>De map omegat bevat <filename>project_save.tmx</filename> en mogelijk een aantal back-ups van TMX-bestanden. Het bestand <filename>project_save.tmx</filename> bevat alle segmenten die in het geheugen zijn opgenomen sinds u het project startte. Dit bestand bestaat altijd in een project. De inhoud ervan zal altijd alfabetisch worden gesorteerd op het bronsegment.</para>
           </listitem>
-        </varlistentry> <varlistentry> <term><indexterm class="singular">
+        </varlistentry>
+
+        <varlistentry>
+          <term><indexterm class="singular">
               <primary>Vertaalgeheugens</primary> <secondary>hoofdmap project</secondary>
             </indexterm>hoofdmap project</term>
 
@@ -45,7 +50,10 @@
 
             <para>Deze bestanden zijn kopieën van het bestand <filename>project_save.tmx</filename>, d.i. van het belangrijkste vertaalgeheugen van het project, exclusief de zogenaamde wezen-segmenten. Zij dragen toepasselijk gewijzigde namen, zodat de inhoud ervan steeds kan worden geïdentificeerd, indien elders gebruikt, bijvoorbeeld in de submap <filename>tm</filename> van een ander project (zie hieronder).</para>
           </listitem>
-        </varlistentry> <varlistentry> <term>map <filename><indexterm class="singular">
+        </varlistentry>
+
+        <varlistentry>
+          <term>map <filename><indexterm class="singular">
               <primary>Vertaalgeheugens</primary> <secondary>submap tm</secondary> <seealso>projectbestanden</seealso>
             </indexterm>tm</filename></term>
 
@@ -62,7 +70,10 @@
                 <primary>Vertaalgeheugens</primary> <secondary>gecomprimeerd</secondary>
               </indexterm></para>
           </listitem>
-        </varlistentry> <varlistentry> <term><indexterm class="singular">
+        </varlistentry>
+
+        <varlistentry>
+          <term><indexterm class="singular">
               <primary>Vertaalgeheugens</primary> <secondary>Submap tm/auto</secondary> <seealso>Projectbestanden</seealso>
             </indexterm>map tm/auto<indexterm class="singular">
               <primary>Project</primary> <secondary>vooraf vertalen</secondary>
@@ -71,7 +82,10 @@
           <listitem>
             <para>Als het vanaf het begin duidelijk is dat de vertalingen in een bepaald TM (of TM's) allemaal juist zijn, kan één van hen in de map<emphasis role="bold"> tm/auto</emphasis> worden geplaatst en heel veel van de gevallen van bevestiging met<emphasis> [fuzzy]</emphasis> worden voorkomen. Dit zal de brontekst effectief <emphasis role="bold">vooraf vertalen </emphasis>: alle segmenten in de brontekst, waarvoor vertalingen kunnen worden gevonden in deze &quot;auto&quot;-TM's, zullen zonder interventie van de gebruiker belanden in de belangrijkste TM van het project.</para>
           </listitem>
-        </varlistentry> <varlistentry> <term><indexterm class="singular">
+        </varlistentry>
+
+        <varlistentry>
+          <term><indexterm class="singular">
               <primary>Vertaalgeheugens</primary> <secondary>Submappen tm/penalty-xxx</secondary> <seealso>Projectbestanden</seealso>
             </indexterm>mappen tm/penalty-xxx</term>
 

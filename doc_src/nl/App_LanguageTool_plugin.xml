@@ -30,8 +30,12 @@
   <section>
     <title>Installatie en gebruik</title>
 
-    <para>De plugin LanguageTool voor OmegaT kan worden gedownload van de <ulink url="http://sourceforge.net/projects/omegat-plugins/files">OmegaT plugins downloadsite</ulink>. Pak de bestanden uit en plaats ze allemaal in de map &quot;plugins&quot; die zich bevindt in de installatiemap van OmegaT, dat is de map waarin OmegaT.jar staat. Maak eerst de map &quot;plugins&quot; als die niet bestaat.</para>
+    <para>De plug-in LanguageTool is opgenomen in OmegaT. Hij zal automatisch in OmegaT worden gebruikt als <guimenuitem>Opties &gt; Taalcontrole</guimenuitem> is geselecteerd. De toegepaste regels (indien aanwezig) zullen afhankelijk zijn van de bron- en doeltaal van het project. Wanneer een regel wordt geactiveerd zal de overeenkomende frase met blauw worden onderstreept in het Bewerkingsvenster (bekijk <emphasis>ook </emphasis>en <emphasis>Ik deed niets</emphasis> in de afbeelding hierboven). Indien met de muis over een onderstreepte frase wordt gegaan, zal een omschrijving verschijnen.</para>
+    
+	<warning>
+		<title>Incompatibiliteit</title>
+		<para>LanguageTool zal niet juist werken als er een oude versie wordt gevonden in de map /plugin. Verwijder LanguageTool uit de map /plugin vóórdat OmegaT wordt gestart.</para>
+	</warning>
 
-    <para>Eenmaal geïnstalleerd zal de plug-in automatisch worden gebruikt door OmegaT, als <guimenuitem>Opties &gt; Taalcontrole</guimenuitem> is aangevinkt. De toegepaste regels (indien aanwezig) zullen afhankelijk zijn van de bron- en doeltaal van het project. Wanneer een regel wordt geactiveerd zal de overeenkomende frase met blauw worden onderstreept in het Bewerkingsvenster (bekijk <emphasis>ook </emphasis>en <emphasis>Ik deed niets</emphasis> in de afbeelding hierboven). Indien met de muis over een onderstreepte frase wordt gegaan, zal een omschrijving verschijnen.</para>
   </section>
 </appendix>

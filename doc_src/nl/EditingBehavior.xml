@@ -24,19 +24,27 @@
 
   <para>U vertaalt uw bestanden door van segment naar segment te gaan, waarbij elk segment op zijn beurt wordt bewerkt. Bij het verplaatsen tussen segmenten kunt u bepalen of het bewerkingsveld moet worden gevuld met een bestaande vertaling uit het venster Overeenkomsten of met de brontekst. In <menuchoice> <guimenu>Opties</guimenu> <guimenuitem>Bewerken (gedrag)...</guimenuitem> </menuchoice> biedt <application>OmegaT</application> u de volgende alternatieven:</para>
 
-  <variablelist> <varlistentry> <term>De brontekst</term>
+  <variablelist>
+    <varlistentry>
+      <term>De brontekst</term>
 
       <listitem>
         <para>U kunt de brontekst automatisch ingevoegd hebben in het bewerkingsveld. Dit is handig als teksten veel handelsnamen en andere woorden met hoofdletters bevat die intact gelaten moeten worden.</para>
       </listitem>
-    </varlistentry> <varlistentry> <term>Segment leeg laten<indexterm class="singular">
+    </varlistentry>
+
+    <varlistentry>
+      <term>Segment leeg laten<indexterm class="singular">
           <primary>Menu Opties</primary> <secondary>Bewerken (gedrag)</secondary> <tertiary>Lege vertaling</tertiary>
         </indexterm></term>
 
       <listitem>
         <para>OmegaT laat het bewerkingsveld leeg. Deze optie stelt u in staat om de vertaling in te voeren zonder de brontekst te hoeven verwijderen, hetgeen u een aantal toetsaanslagen scheelt (<emphasis role="bold">Ctrl+A </emphasis>en <emphasis role="bold">Del). </emphasis> Lege vertalingen zijn nu toegestaan. Zij worden als &lt;LEEG&gt; weergegeven in het bewerkingsvenster. Klik met rechts in een segment en selecteer &quot;<emphasis role="bold">Lege vertaling instellen</emphasis>&quot;. Het item <emphasis role="bold">Vertaling verwijderen</emphasis> in hetzelfde pop-upmenu maakt het ook mogelijk de bestaande vertaling van het huidige segment te verwijderen. U bereikt hetzelfde door het doelsegment leeg te maken en te drukken op <guibutton>Enter.</guibutton></para>
       </listitem>
-    </varlistentry> <varlistentry> <term>Beste overeenkomst invoegen<indexterm class="singular">
+    </varlistentry>
+
+    <varlistentry>
+      <term>Beste overeenkomst invoegen<indexterm class="singular">
           <primary>Menu Opties</primary> <secondary>Bewerken (gedrag)</secondary> <tertiary>Fuzzy overeenkomsten invoegen</tertiary>
         </indexterm></term>
 
@@ -48,7 +56,9 @@
 
   <para>De keuzevakken in het onderste gedeelte van het dialoogvenster dienen het volgende doel:</para>
 
-  <variablelist> <varlistentry> <term>Poging om nummers te converteren bij het invoegen van een overeenkomst<indexterm class="singular">
+  <variablelist>
+    <varlistentry>
+      <term>Poging om nummers te converteren bij het invoegen van een overeenkomst<indexterm class="singular">
           <primary>Menu Opties</primary> <secondary>Bewerken (gedrag)</secondary> <tertiary>Getallen converteren</tertiary>
         </indexterm></term>
 
@@ -69,7 +79,12 @@
           </listitem>
         </itemizedlist>
       </listitem>
-    </varlistentry> </variablelist> <variablelist> <varlistentry> <term>Vertaling mag gelijk zijn aan brontekst<indexterm class="singular">
+    </varlistentry>
+  </variablelist>
+
+  <variablelist>
+    <varlistentry>
+      <term>Vertaling mag gelijk zijn aan brontekst<indexterm class="singular">
           <primary>Menu Opties</primary> <secondary>Bewerken (gedrag)</secondary> <tertiary>Vertaling gelijk aan bron</tertiary>
         </indexterm></term>
 
@@ -78,7 +93,12 @@
 
         <para>U zou kunnen besluiten om zulke segmenten niet te vertalen. OmegaT zal deze segmenten dan aanmerken als niet-vertaald. Dit is de standaard. Het alternatief is om een vertaling in te voeren die identiek is aan de brontekst. OmegaT is in staat om te herkennen dat u dit gedaan hebt. Ga naar <menuchoice> <guimenu>Opties</guimenu> <guimenuitem>Bewerken (gedrag)...</guimenuitem> </menuchoice> en selecteer het vak <emphasis role="bold">Vertaling mag gelijk zijn aan brontekst</emphasis>, om dit mogelijk te maken.</para>
       </listitem>
-    </varlistentry> </variablelist> <variablelist> <varlistentry> <term>Segment naar tekstbestanden exporteren<indexterm class="singular">
+    </varlistentry>
+  </variablelist>
+
+  <variablelist>
+    <varlistentry>
+      <term>Segment naar tekstbestanden exporteren<indexterm class="singular">
           <primary>Menu Opties</primary> <secondary>Bewerken (gedrag)</secondary> <tertiary>Het huidige segment exporteren</tertiary>
         </indexterm></term>
 
@@ -101,7 +121,12 @@
 
         <para>De inhoud van de bestanden wordt overschreven als een nieuw segment wordt geopend (source.txt en target.txt) of als een nieuwe selectie wordt geëxporteerd (selection.txt). De bestanden zijn niet-opgemaakte platte tekst-bestanden. Het gehele proces kan worden gestuurd en beheerd via op Tck/Tcl-gebaseerde scripts. Bekijk <ulink url="http://www.omegat.org/en/howtos/text_export.html">De functie Tekst exporteren in OmegaT gebruiken</ulink> voor specificaties, voorbeelden en suggesties.</para>
       </listitem>
-    </varlistentry> </variablelist> <variablelist> <varlistentry> <term>Ga naar volgende niet-vertaalde segment stopt wanneer er ten minste één alternatieve vertaling is<indexterm class="singular">
+    </varlistentry>
+  </variablelist>
+
+  <variablelist>
+    <varlistentry>
+      <term>Ga naar volgende niet-vertaalde segment stopt wanneer er ten minste één alternatieve vertaling is.<indexterm class="singular">
           <primary>Menu Opties</primary> <secondary>Bewerken (gedrag)</secondary> <tertiary>Segmenten met alternatieve vertaling</tertiary>
         </indexterm></term>
 

@@ -5,8 +5,8 @@
       <title>Bijlage E. plug-in LanguageTool</title>
       <link rel="stylesheet" type="text/css" href="OmegaT.css">
       <meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
-      <link rel="home" href="index.html" title="OmegaT - Gebruikershandleiding">
-      <link rel="up" href="index.html" title="OmegaT - Gebruikershandleiding">
+      <link rel="home" href="index.html" title="OmegaT 3.0 - Gebruikershandleiding">
+      <link rel="up" href="index.html" title="OmegaT 3.0 - Gebruikershandleiding">
       <link rel="prev" href="appendix.TokenizerPlugin.inOmegaT.html" title="Bijlage D. plug-in Tokenizer">
       <link rel="next" href="appendix.ScriptingPlugin.inOmegaT.html" title="Bijlage F. plug-in Scripting">
    </head>
@@ -29,21 +29,21 @@
          <div class="titlepage">
             <div>
                <div>
-                  <h1 class="title"><a name="appendix.LanguageToolPlugin.inOmegaT"></a>Bijlage E. plug-in LanguageTool<a class="indexterm" name="d0e10815"></a></h1>
+                  <h1 class="title"><a name="appendix.LanguageToolPlugin.inOmegaT"></a>Bijlage E. plug-in LanguageTool<a class="indexterm" name="d0e10570"></a></h1>
                </div>
             </div>
          </div>
          <div class="toc">
             <dl class="toc">
-               <dt><span class="section"><a href="appendix.LanguageToolPlugin.inOmegaT.html#d0e10820">1. Introductie</a></span></dt>
-               <dt><span class="section"><a href="appendix.LanguageToolPlugin.inOmegaT.html#d0e10839">2. Installatie en gebruik</a></span></dt>
+               <dt><span class="section"><a href="appendix.LanguageToolPlugin.inOmegaT.html#d0e10575">1. Introductie</a></span></dt>
+               <dt><span class="section"><a href="appendix.LanguageToolPlugin.inOmegaT.html#d0e10594">2. Installatie en gebruik</a></span></dt>
             </dl>
          </div>
          <div class="section">
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="d0e10820"></a>1. Introductie
+                     <h2 class="title" style="clear: both"><a name="d0e10575"></a>1. Introductie
                      </h2>
                   </div>
                </div>
@@ -55,7 +55,7 @@
                bijv. verwisselen van hen/hun, no/now etc. Het kan ook enkele grammaticale fouten opsporen. Het bevat geen spellingscontrole.
                LanguageTool zal fouten vinden waarvoor een regel is gedefinieerd in zijn taalspecifieke configuratiebestanden.
             </p>
-            <div class="figure"><a name="d0e10832"></a><p class="title"><b>Afbeelding E.1. De LanguageTool in OmegaT</b></p>
+            <div class="figure"><a name="d0e10587"></a><p class="title"><b>Afbeelding E.1. De LanguageTool in OmegaT</b></p>
                <div class="figure-contents">
                   <div class="screenshot">
                      <div class="mediaobject"><img src="images/LanguageToolExample.png" alt="De LanguageTool in OmegaT"></div>
@@ -66,17 +66,21 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="d0e10839"></a>2. Installatie en gebruik
+                     <h2 class="title" style="clear: both"><a name="d0e10594"></a>2. Installatie en gebruik
                      </h2>
                   </div>
                </div>
             </div>
-            <p>De plugin LanguageTool voor OmegaT kan worden gedownload van de <a class="ulink" href="http://sourceforge.net/projects/omegat-plugins/files" target="_top">OmegaT plugins downloadsite</a>. Pak de bestanden uit en plaats ze allemaal in de map "plugins" die zich bevindt in de installatiemap van OmegaT, dat is
-               de map waarin OmegaT.jar staat. Maak eerst de map "plugins" als die niet bestaat.
+            <p>De plug-in LanguageTool is opgenomen in OmegaT. Hij zal automatisch in OmegaT worden gebruikt als <span class="guimenuitem">Opties &gt; Taalcontrole</span> is geselecteerd. De toegepaste regels (indien aanwezig) zullen afhankelijk zijn van de bron- en doeltaal van het project.
+               Wanneer een regel wordt geactiveerd zal de overeenkomende frase met blauw worden onderstreept in het Bewerkingsvenster (bekijk
+               <span class="emphasis"><em>ook </em></span>en <span class="emphasis"><em>Ik deed niets</em></span> in de afbeelding hierboven). Indien met de muis over een onderstreepte frase wordt gegaan, zal een omschrijving verschijnen.
             </p>
-            <p>Eenmaal geïnstalleerd zal de plug-in automatisch worden gebruikt door OmegaT, als <span class="guimenuitem">Opties &gt; Taalcontrole</span> is aangevinkt. De toegepaste regels (indien aanwezig) zullen afhankelijk zijn van de bron- en doeltaal van het project. Wanneer
-               een regel wordt geactiveerd zal de overeenkomende frase met blauw worden onderstreept in het Bewerkingsvenster (bekijk <span class="emphasis"><em>ook </em></span>en <span class="emphasis"><em>Ik deed niets</em></span> in de afbeelding hierboven). Indien met de muis over een onderstreepte frase wordt gegaan, zal een omschrijving verschijnen.
-            </p>
+            <div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+               <h3 class="title">Incompatibiliteit</h3>
+               <p>LanguageTool zal niet juist werken als er een oude versie wordt gevonden in de map /plugin. Verwijder LanguageTool uit de
+                  map /plugin vóórdat OmegaT wordt gestart.
+               </p>
+            </div>
          </div>
       </div>
       <div class="navfooter">

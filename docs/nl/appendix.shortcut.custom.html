@@ -5,8 +5,8 @@
       <title>Bijlage H. Aanpassen van sneltoetsen toetsenbord</title>
       <link rel="stylesheet" type="text/css" href="OmegaT.css">
       <meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
-      <link rel="home" href="index.html" title="OmegaT - Gebruikershandleiding">
-      <link rel="up" href="index.html" title="OmegaT - Gebruikershandleiding">
+      <link rel="home" href="index.html" title="OmegaT 3.0 - Gebruikershandleiding">
+      <link rel="up" href="index.html" title="OmegaT 3.0 - Gebruikershandleiding">
       <link rel="prev" href="appendix.website.html" title="Bijlage G. OmegaT op het web">
       <link rel="next" href="appendix.legal.notices.html" title="Bijlage I. Auteursrechten">
    </head>
@@ -50,7 +50,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="ch04.shortcuts.customization"></a>1. <a class="indexterm" name="d0e11100"></a>Aanpassen van sneltoetsen toetsenbord
+                     <h2 class="title" style="clear: both"><a name="ch04.shortcuts.customization"></a>1. <a class="indexterm" name="d0e10855"></a>Aanpassen van sneltoetsen toetsenbord
                      </h2>
                   </div>
                </div>
@@ -64,26 +64,26 @@
             </p>
             <p>Als het bestand <code class="filename">MainMenuShortcuts.properties</code> is gewijzigd, moet <span class="application">OmegaT</span> opnieuw gestart worden om de nieuwe sneltoetsen te kunnen laten werken.
             </p>
-            <p>De syntaxis voor de definitie van de sneltoets is de volgende: <code class="code">&lt;code menuitem&gt;=&lt;sneltoets&gt;</code>, waar <span class="emphasis"><em>&lt;code menuitem&gt;</em></span> een code is die wordt genomen uit de tabellen hieronder en <span class="emphasis"><em>&lt;sneltoets&gt;</em></span> een combinatie is van ingedrukte toetsen die wordt gedefinieerd door de gebruiker<a href="#ftn.d0e11135" class="footnote" name="d0e11135"><sup class="footnote">[2]</sup></a>.
+            <p>De syntaxis voor de definitie van de sneltoets is de volgende: <code class="code">&lt;code menuitem&gt;=&lt;sneltoets&gt;</code>, waar <span class="emphasis"><em>&lt;code menuitem&gt;</em></span> een code is die wordt genomen uit de tabellen hieronder en <span class="emphasis"><em>&lt;sneltoets&gt;</em></span> een combinatie is van ingedrukte toetsen die wordt gedefinieerd door de gebruiker.<a href="#ftn.d0e10890" class="footnote" name="d0e10890"><sup class="footnote">[2]</sup></a>.
             </p>
             <p>&lt;sneltoets&gt; moet in de volgende vorm zijn: 0 of meer <code class="code">&lt;modifier&gt;</code> gevolgd door 0 of 1 <code class="code">&lt;event&gt;</code> gevolgd door 1 <code class="code">&lt;key&gt;</code>, waar:
             </p>
             <div class="itemizedlist">
                <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
-                     <p><code class="code">&lt;modifier&gt;</code> kan zijn: <span class="emphasis"><em>shift</em></span>, <span class="emphasis"><em>control</em></span>, <span class="emphasis"><em>ctrl</em></span>, <span class="emphasis"><em>meta</em></span><a href="#ftn.d0e11169" class="footnote" name="d0e11169"><sup class="footnote">[3]</sup></a>, <span class="emphasis"><em>alt</em></span>,
+                     <p><code class="code">&lt;modifier&gt;</code> kan zijn: <span class="emphasis"><em>shift</em></span>, <span class="emphasis"><em>control</em></span>, <span class="emphasis"><em>ctrl</em></span>, <span class="emphasis"><em>meta</em></span><a href="#ftn.d0e10924" class="footnote" name="d0e10924"><sup class="footnote">[3]</sup></a>, <span class="emphasis"><em>alt</em></span>,
                                   <span class="emphasis"><em>altGraph</em></span></p>
                   </li>
                   <li class="listitem">
                      <p><code class="code">&lt;event&gt;</code> kan zijn: <span class="emphasis"><em>typed</em></span>, <span class="emphasis"><em>pressed</em></span>, <span class="emphasis"><em>released</em></span></p>
                   </li>
                   <li class="listitem">
-                     <p>en <code class="code">&lt;key&gt;</code> kan elke toets zijn die beschikbaar is op uw toetsenbord<a href="#ftn.d0e11203" class="footnote" name="d0e11203"><sup class="footnote">[4]</sup></a>.
+                     <p>en <code class="code">&lt;key&gt;</code> kan elke toets zijn die beschikbaar is op uw toetsenbord<a href="#ftn.d0e10958" class="footnote" name="d0e10958"><sup class="footnote">[4]</sup></a>.
                      </p>
                   </li>
                </ul>
             </div>
-            <p>Bijvoorbeeld, de standaard sneltoetsen voor OmegaT<a href="#ftn.d0e11211" class="footnote" name="d0e11211"><sup class="footnote">[5]</sup></a>, kan men vinden:
+            <p>Bijvoorbeeld, de standaard sneltoetsen voor OmegaT<a href="#ftn.d0e10966" class="footnote" name="d0e10966"><sup class="footnote">[5]</sup></a>, kan men vinden:
             </p>
             <div class="itemizedlist">
                <ul class="itemizedlist" style="list-style-type: disc; ">
@@ -97,7 +97,8 @@
             </div>
             <p>De eerste is de sneltoets voor <span class="guimenuitem">Project openen</span>, de tweede voor <span class="guimenuitem">Item voor woordenlijst maken</span>.
             </p>
-            <p>Indien u <span class="keycap"><strong>Shift</strong></span>+<span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>O</strong></span> wilt gebruiken om een project te openen, past u <code class="filename">MainMenuShortcuts.properties</code> als volgt aan:<code class="code"> </code></p>
+            <p>Indien u <span class="keycap"><strong>Shift</strong></span>+<span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>O</strong></span> wilt gebruiken om een project te openen, past u <code class="filename">MainMenuShortcuts.properties</code> als volgt aan:<code class="code">
+                      </code></p>
             <p><code class="code">projectOpenMenuItem=shift ctrl O</code>.
             </p>
             <p>Indien u een Mac gebruikt en u wilt de sneltoets <span class="keycap"><strong>Shift</strong></span>+<span class="keycap"><strong>Command</strong></span>+<span class="keycap"><strong>S</strong></span> toevoegen aan <span class="guimenu">Extra</span> → <span class="guimenuitem">Statistieken</span>, voeg dan de volgende regel toe aan uw <code class="filename">MainMenuShortcuts.properties</code>:<code class="code"></code></p>
@@ -116,7 +117,7 @@
                   </div>
                </div>
             </div>
-            <div class="table"><a name="d0e11288"></a><p class="title"><b>Tabel H.1. menu Project</b></p>
+            <div class="table"><a name="d0e11043"></a><p class="title"><b>Tabel H.1. menu Project</b></p>
                <div class="table-contents">
                   <table summary="menu Project" border="1">
                      <colgroup>
@@ -205,7 +206,7 @@
                   </div>
                </div>
             </div>
-            <div class="table"><a name="d0e11395"></a><p class="title"><b>Tabel H.2. menu Bewerken</b></p>
+            <div class="table"><a name="d0e11150"></a><p class="title"><b>Tabel H.2. menu Bewerken</b></p>
                <div class="table-contents">
                   <table summary="menu Bewerken" border="1">
                      <colgroup>
@@ -344,7 +345,7 @@
                   </div>
                </div>
             </div>
-            <div class="table"><a name="d0e11580"></a><p class="title"><b>Tabel H.3. menu Ga naar</b></p>
+            <div class="table"><a name="d0e11335"></a><p class="title"><b>Tabel H.3. menu Ga naar</b></p>
                <div class="table-contents">
                   <table summary="menu Ga naar" border="1">
                      <colgroup>
@@ -413,8 +414,8 @@
                   </div>
                </div>
             </div>
-            <div class="table"><a name="d0e11671"></a><p class="title"><b>Tabel H.4. menu Weergave</b></p>
-               <div class="table-contents"><a class="indexterm" name="d0e11674"></a><table summary="menu Weergave" border="1">
+            <div class="table"><a name="d0e11426"></a><p class="title"><b>Tabel H.4. menu Weergave</b></p>
+               <div class="table-contents"><a class="indexterm" name="d0e11429"></a><table summary="menu Weergave" border="1">
                      <colgroup>
                         <col align="left" class="1">
                         <col align="left" class="2">
@@ -496,7 +497,7 @@
                   </div>
                </div>
             </div>
-            <div class="table"><a name="d0e11761"></a><p class="title"><b>Tabel H.5. menu Extra</b></p>
+            <div class="table"><a name="d0e11516"></a><p class="title"><b>Tabel H.5. menu Extra</b></p>
                <div class="table-contents">
                   <table summary="menu Extra" border="1">
                      <colgroup>
@@ -540,7 +541,7 @@
                   </div>
                </div>
             </div>
-            <div class="table"><a name="d0e11800"></a><p class="title"><b>Tabel H.6. menu Opties</b></p>
+            <div class="table"><a name="d0e11555"></a><p class="title"><b>Tabel H.6. menu Opties</b></p>
                <div class="table-contents">
                   <table summary="menu Opties" border="1">
                      <colgroup>
@@ -654,7 +655,7 @@
                   </div>
                </div>
             </div>
-            <div class="table"><a name="d0e11920"></a><p class="title"><b>Tabel H.7. menu Help</b></p>
+            <div class="table"><a name="d0e11675"></a><p class="title"><b>Tabel H.7. menu Help</b></p>
                <div class="table-contents">
                   <table summary="menu Help" border="1">
                      <colgroup>
@@ -685,20 +686,20 @@
                </div>
             </div><br class="table-break"></div>
          <div class="footnotes"><br><hr style="width:100; text-align:left;margin-left: 0">
-            <div id="ftn.d0e11135" class="footnote">
-               <p><a href="#d0e11135" class="para"><sup class="para">[2] </sup></a>De volledige syntaxis voor toetsaanslagen (sneltoetsen) wordt gedefinieerd in de volgende documentatie voor Java 1.6 van Oracle
+            <div id="ftn.d0e10890" class="footnote">
+               <p><a href="#d0e10890" class="para"><sup class="para">[2] </sup></a>De volledige syntaxis voor toetsaanslagen (sneltoetsen) wordt gedefinieerd in de volgende documentatie voor Java 1.6 van Oracle
                   (onderaan de bladzijde): <a class="ulink" href="http://docs.oracle.com/javase/6/docs/api/javax/swing/KeyStroke.html" target="_top">Java 1.6 keystrokes shortcuts</a></p>
             </div>
-            <div id="ftn.d0e11169" class="footnote">
-               <p><a href="#d0e11169" class="para"><sup class="para">[3] </sup></a>Op de Mac moet de modifier <span class="emphasis"><em>meta</em></span> worden gebruikt om de toets <span class="emphasis"><em>command</em></span> te specificeren.
+            <div id="ftn.d0e10924" class="footnote">
+               <p><a href="#d0e10924" class="para"><sup class="para">[3] </sup></a>Op de Mac moet de modifier <span class="emphasis"><em>meta</em></span> worden gebruikt om de toets <span class="emphasis"><em>command</em></span> te specificeren.
                </p>
             </div>
-            <div id="ftn.d0e11203" class="footnote">
-               <p><a href="#d0e11203" class="para"><sup class="para">[4] </sup></a>De mogelijke gebeurtenissen voor de toetsen (events) worden opgesomd op de volgende documentatie voor Java 1.6 van Oracle:
+            <div id="ftn.d0e10958" class="footnote">
+               <p><a href="#d0e10958" class="para"><sup class="para">[4] </sup></a>De mogelijke gebeurtenissen voor de toetsen (events) worden opgesomd op de volgende documentatie voor Java 1.6 van Oracle:
                   <a class="ulink" href="http://docs.oracle.com/javase/6/docs/api/java/awt/event/KeyEvent.html" target="_top">Java 1.6 keyEvents description</a></p>
             </div>
-            <div id="ftn.d0e11211" class="footnote">
-               <p><a href="#d0e11211" class="para"><sup class="para">[5] </sup></a>De standaard sneltoetsen voor OmegaT zijn beschikbaar via Sourceforge: <a class="ulink" href="http://omegat.svn.sourceforge.net/viewvc/omegat/branches/release-2-6/src/org/omegat/gui/main/MainMenuShortcuts.properties" target="_top">Default OmegaT Shortcuts</a></p>
+            <div id="ftn.d0e10966" class="footnote">
+               <p><a href="#d0e10966" class="para"><sup class="para">[5] </sup></a>De standaard sneltoetsen voor OmegaT zijn beschikbaar via Sourceforge: <a class="ulink" href="http://omegat.svn.sourceforge.net/viewvc/omegat/branches/release-2-6/src/org/omegat/gui/main/MainMenuShortcuts.properties" target="_top">Default OmegaT Shortcuts</a></p>
                <p>De standaard sneltoetsen voor OmegaT voor de Mac zijn ook beschikbaar via Sourceforge, zij gebruiken allemaal "meta" in plaats
                   van "ctrl": <a class="ulink" href="http://omegat.svn.sourceforge.net/viewvc/omegat/branches/release-2-6/src/org/omegat/gui/main/MainMenuShortcuts.mac.properties" target="_top">Default OmegaT Shortcuts for the Mac</a></p>
             </div>

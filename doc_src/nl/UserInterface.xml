@@ -711,7 +711,7 @@
           <primary>Sneltoetsen</primary> <secondary>Tekst kopiëren - Ctrl+C</secondary>
         </indexterm></guimenuitem>, <guimenuitem>Ctrl+V <indexterm class="singular">
           <primary>Sneltoetsen</primary> <secondary>Tekst plakken - Ctrl+V</secondary>
-        </indexterm></guimenuitem> gebruiken om de inhoud te kopiëren en te plakken. <figure id="ProjectStatistic.Window">
+        </indexterm></guimenuitem> gebruiken om de inhoud te kopiëren en te plakken.<figure id="ProjectStatistic.Window">
           <title>projectstatistieken</title>
 
           <mediaobject>

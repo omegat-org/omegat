@@ -13,7 +13,7 @@
 
     <para><emphasis role="bold">Auteursrechten</emphasis></para>
 
-    <para>De met <application>OmegaT</application> 3.0 gedistribueerde documentatie is inclusief de gebruikershandleiding en het document readme.txt. Voor de documentatie bestaat Copyright ©2013 Vito Smolej. De auteur van het hoofdstuk <emphasis>OmegaT gebruiken in 5 minuten!</emphasis> is Samuel Murray, Copyright ©2005-2012.</para>
+    <para>De met <application>OmegaT</application> gedistribueerde documentatie is inclusief de gebruikershandleiding en het document readme.txt. Voor de documentatie bestaat Copyright ©2013 Vito Smolej. De auteur van het hoofdstuk <emphasis>OmegaT gebruiken in 5 minuten!</emphasis> is Samuel Murray, Copyright ©2005-2012.</para>
 
     <para><emphasis role="bold">Distributie en aanpassingen</emphasis></para>
 
@@ -31,14 +31,14 @@
 
     <para><emphasis role="bold">Auteursrechten</emphasis></para>
 
-    <para><emphasis role="bold"><application>OmegaT</application> 2.6</emphasis> is Copyright © 2000-2013 Keith Godfrey, Zoltan Bartko, Volker Berlin, Didier Briel, Kim Bruning, Alex Buloichik, Thomas Cordonnier, Sandra Jean Chua, Martin Fleurke, Wildrich Fourie, Phillip Hall, Jean-Christophe Helary, Thomas Huriaux, Hans-Peter Jacobs, Ibai Lakunza Velasco, Guido Leenders, Aaron Madlon-Kay, Fabián Mandelbaum, John Moran, Maxym Mykhalchuk, Arno Peters, Henry Pijffers, Briac Pilpré, Tiago Saboga, Andrzej Sawuła, Benjamin Siband, Yu Tang, Rashid Umarov, Antonio Vilei, Martin Wunderlich en Michael Zakharov.</para>
+    <para><emphasis role="bold"><application>OmegaT</application> </emphasis> is Copyright © 2000-2013 Keith Godfrey, Zoltan Bartko, Volker Berlin, Didier Briel, Kim Bruning, Alex Buloichik, Thomas Cordonnier, Sandra Jean Chua, Martin Fleurke, Wildrich Fourie, Phillip Hall, Jean-Christophe Helary, Thomas Huriaux, Hans-Peter Jacobs, Ibai Lakunza Velasco, Guido Leenders, Aaron Madlon-Kay, Fabián Mandelbaum, John Moran, Maxym Mykhalchuk, Arno Peters, Henry Pijffers, Briac Pilpré, Tiago Saboga, Andrzej Sawuła, Benjamin Siband, Yu Tang, Rashid Umarov, Antonio Vilei, Martin Wunderlich en Michael Zakharov.</para>
 
     <para><emphasis role="bold">Distributie en aanpassingen</emphasis></para>
 
-    <para><emphasis role="bold">OmegaT 2.6</emphasis> is vrije software; u mag het verder verspreiden en/of aanpassen onder de bepalingen van de GNU General Public License zoals die is gepubliceerd door de Free Software Foundation; ofwel versie 3 van die License of (indien u dat prefereert) een willekeurige latere versie.</para>
+    <para><emphasis role="bold">OmegaT</emphasis> is vrije software; u mag het verder verspreiden en/of aanpassen onder de bepalingen van de GNU General Public License zoals die is gepubliceerd door de Free Software Foundation; ofwel versie 3 van die License of (indien u dat prefereert) een willekeurige latere versie.</para>
 
     <para><emphasis role="bold">Garantie</emphasis></para>
 
-    <para><emphasis role="bold"> <application>OmegaT</application> 2.6 </emphasis>wordt gedistribueerd in de hoop dat het bruikbaar zal zijn, maar ZONDER ENIGE GARANTIE; zelfs zonder de impliciete garantie voor VERHANDELBAARHEID of GESCHIKTHEID VOOR EEN BEPAALD DOEL. Kijk in de GNU General Public License voor meer details.</para>
+    <para><emphasis role="bold"> <application>OmegaT</application> </emphasis>wordt gedistribueerd in de hoop dat het bruikbaar zal zijn, maar ZONDER ENIGE GARANTIE; zelfs zonder de impliciete garantie voor VERHANDELBAARHEID of GESCHIKTHEID VOOR EEN BEPAALD DOEL. Kijk in de GNU General Public License voor meer details.</para>
   </section>
 </appendix>

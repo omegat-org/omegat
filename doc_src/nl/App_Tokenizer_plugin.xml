@@ -40,56 +40,14 @@
   </section>
 
   <section>
-    <title>Installatie en gebruik van de opdrachtregel</title>
+    <title>Installatie en gebruik</title>
 
-    <para>Een tokenizerpakket dat is afgeleid van het Luceneproject wordt gedistribueerd als een OmegaT plug-in op http://sourceforge.net/projects/omegat-plugins/files/. Download de meest recente bestanden (OmegaT-tokenizers_0.4_2-2.1.zip op het moment van schrijven).</para>
+	<para>Tokenizers zijn opgenoemn in OmegaT. OmegaT selecteert automatisch een tokenizer voor de bron- en de doeltaal overeenkomstig de taalinstellingen van het project. Het is mogelijk om een andere tokenizer te selecteren of een andere versie van de tokenizer in het venster Projecteigenschappen.</para>
 
-    <para>Maak een map met de naam &quot;plug-ins&quot; in de map waar OmegaT.jar staat en pas de bovenstaande bestanden in die map uit om de tokenizer te installeren.</para>
-
-    <para>U moet de tokenizer specificeren die u zal gaan gebruiken voor de brontaal en welke tokenizer u zult gaan gebruiken voor de doeltaal om OmegaT uit te voeren. De syntaxis is als volgt:</para>
-
-    <para><literal>java -jar OmegaT.jar --ITokenizer=[brontaal naam tokenizer] --ITokenizerTarget=[doeltaal naam tokenizer]</literal></para>
-
-    <para>De namen van de tokenizers zijn vermeld in het bestand Readme.txt dat wordt gedistribueerd met de bestanden van de tokenizer. Als u bijvoorbeeld de Lucene CJK tokenizer wilt gebruiken voor de brontaal en de Lucene French tokenizer in de doeltaal, zal uw opdracht er als volgt uitzien:</para>
-
-    <para><literal>java -jar OmegaT.jar
-    --ITokenizer=org.omegat.plugins.tokenizer.LuceneCJKTokenizer
-    --ITokenizerTarget=org.omegat.plugins.tokenizer.LuceneFrenchTokenizer</literal></para>
-  </section>
-
-  <section>
-    <title>Mac OS X specifieken</title>
-
-    <para>Indien u de tokenizers wilt gebruiken met het Mac OS X OmegaT.app pakket is de installatie van de tokenizer zoals die hierboven is vermeld van toepassing (klik met rechts op de OmegaT.app om de locatie van OmegaT.jar te vinden), maar u zult de namen van de tokenizers moeten specificeren in <filename>info.plist </filename>dat de startopties voor Java bevat. Volg bovenstaande instructies om toegang te krijgen tot het bestand <filename>info.plist</filename> en bewerk het zodanig dat het er als volgt uitziet voor het voorbeeld dat we zojuist gaven:</para>
-
-    <literallayout><code>
-&lt;key&gt;VMOptions&lt;/key&gt;
-&lt;string&gt;-Xmx1024M&lt;/string&gt;
-
-&lt;key&gt;Arguments&lt;/key&gt;
-&lt;array&gt;
-  &lt;string&gt;--ITokenizer=org.omegat.plugins.tokenizer.LuceneCJKTokenizer&lt;/string&gt;
-  &lt;string&gt;--ITokenizerTarget=org.omegat.plugins.tokenizer.LuceneFrenchTokenizer&lt;/string&gt;
-&lt;/array&gt;</code></literallayout>
-  </section>
-
-  <section>
-    <title>Probleemoplossing</title>
-
-    <para>Open een project en controleer de informatie in het log van de console om er voor te zorgen dat de tokenizers ook echt worden gebruikt. Met het bovenstaande voorbeeld zou dat er uitzien als:</para>
-
-    <literallayout><code>
-84528: Info: Source tokenizer: org.omegat.plugins.tokenizer.LuceneCJKTokenizer 
-84528: Info: Target tokenizer: org.omegat.plugins.tokenizer.LuceneFrenchTokenizer 
-</code></literallayout>
-
-    <para>De getallen aan de linkerzijde zijn waarschijnlijk anders op uw systeem dus zorg er voor dat de namen voor de tokenizers voor de bron- en de doeltaal, gespecificeerd in de startopties, overeenkomend met wat het log weergeeft. Als de tokenizers niet juist zijn geactiveerd, zal het log er als volgt uitzien:</para>
-
-    <literallayout><code>
-12719: Info: Source tokenizer: org.omegat.core.matching.Tokenizer 
-12719: Info: Target tokenizer: org.omegat.core.matching.Tokenizer 
-</code></literallayout>
-
-    <para>Met het Mac OS X OmegaT.app pakket, dubbelklik op de <literal>JavaApplicationStub</literal> die is geplaatst in /OmegaT.app/Contents/MacOS/ (kijk hierboven om toegang te verkrijgen) om OmegaT te starten vanuit de console en direct toegang te krijgen tot het log.</para>
+	<warning>
+		<title>Incompatibiliteit</title>
+		<para>OmegaT zal niet starten als er tokenizers worden gevondenin de map /plugin. Verwijder alle tokenizers uit de map /plugin vóórdat OmegaT wordt gestart.</para>
+	</warning>
+	
   </section>
 </appendix>

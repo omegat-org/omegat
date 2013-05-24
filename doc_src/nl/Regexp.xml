@@ -5,7 +5,7 @@
       <primary>Reguliere uitdrukkingen</primary> <seealso>segmentatie</seealso> <seealso>zoeken</seealso>
     </indexterm></title>
 
-  <para>De reguliere uitdrukkingen (of afgekort regex) die worden gebruikt in zoekacties en segmentatieregels zijn die welke worden ondersteund door Java. Als u meer specifieke informatie nodig heeft raadpleeg dan <ulink url="http://download.oracle.com/javase/1.5.0/docs/api/java/util/regex/Pattern.html">documentatie voor Java Regex</ulink>. Bekijk de aanvullende verwijzingen en voorbeelden hieronder.</para>
+  <para>De reguliere uitdrukkingen (of afgekort regex) die worden gebruikt in zoekacties en segmentatieregels zijn die welke worden ondersteund door Java. Als u meer specifieke informatie nodig heeft raadpleeg dan <ulink url="http://download.oracle.com/javase/1.6.0/docs/api/java/util/regex/Pattern.html">documentatie voor Java Regex</ulink>. Bekijk de aanvullende verwijzingen en voorbeelden hieronder.</para>
 
   <note>
     <para>Dit hoofdstuk is bedoeld voor gevorderde gebruikers, die hun eigen varianten van segmentatieregels moeten kunnen definiëren of meer complexe en krachtigere zoeksleutels moeten kunnen opdelen.</para>
@@ -191,13 +191,13 @@
         <row>
           <entry>\p{InGreek}</entry>
 
-          <entry>Een teken in het Griekse blok (eenvoudig <ulink url="http://download.oracle.com/javase/1.5.0/docs/api/java/util/regex/Pattern.html#ubc"> blok</ulink>)</entry>
+          <entry>Een teken in het Griekse blok (eenvoudig <ulink url="http://download.oracle.com/javase/1.6.0/docs/api/java/util/regex/Pattern.html#ubc"> blok</ulink>)</entry>
         </row>
 
         <row>
           <entry>\p{Lu}</entry>
 
-          <entry>Een hoofdletter (eenvoudige <ulink url="http://download.oracle.com/javase/1.5.0/docs/api/java/util/regex/Pattern.html#ubc"> categorie</ulink>)</entry>
+          <entry>Een hoofdletter (eenvoudige <ulink url="http://download.oracle.com/javase/1.6.0/docs/api/java/util/regex/Pattern.html#ubc"> categorie</ulink>)</entry>
         </row>
 
         <row>

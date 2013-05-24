@@ -8,67 +8,57 @@
         <primary>Projecte</primary> <secondary>Crear / obrir</secondary>
       </indexterm></title>
 
-    <para><remark>Nota:</remark>En un Mac d'Apple, utilitzeu les tecles <keycap>Cmd</keycap> o <keycap>Apple</keycap> (amb el dibuix d'una poma) en lloc de la tecla <keycap>Ctrl</keycap>.</para>
+    <para><remark>Nota:</remark>En un Mac d'Apple, utilitzeu la tecla <keycap>Command</keycap> en lloc de la tecla <keycap>Control</keycap>.</para>
 
-    <para>Per començar a utilitzar l'OmegaT, cal que creeu un projecte que contindrà tots els vostres fitxers: el fitxer de partida, les memòries de traducció, els glossaris i, finalment, el fitxer traduït. Al menú <guimenu>Projecte</guimenu>, seleccioneu <menuchoice> <guimenuitem>Nou...</guimenuitem> </menuchoice><indexterm class="singular">
+      <indexterm class="singular">
         <primary>Menú Projecte</primary> <secondary>Nou...</secondary>
-      </indexterm> i escriviu un nom per al projecte. Preneu nota d'on esteu creant el projecte, perquè us caldrà saber-ho més endavant.</para>
+      </indexterm>
 
-    <para>Després d'assignar un nom al projecte, s'obrirà el diàleg Crea un projecte nou. A la part superior del diàleg, seleccioneu la llengua del fitxer de partida i la llengua del document traduït i feu clic a <guibutton>D'acord</guibutton>per continuar.</para>
+    <para>Per començar a utilitzar l'OmegaT, cal que creeu un projecte que contindrà tots els vostres fitxers: el fitxer de partida, les memòries de traducció, els glossaris i, finalment, el fitxer traduït. Al menú <guimenu>Projecte</guimenu>, seleccioneu <menuchoice><guimenuitem>Nou...</guimenuitem></menuchoice> i escriviu un nom per al projecte. Preneu nota d'on esteu creant el projecte, perquè us caldrà saber-ho més endavant.</para>
 
-    <para><application>Si voleu configurar altres paràmetres d'aquest diàleg, sempre podeu tornar-hi prement <keycap>Ctrl+E</keycap>.</application></para>
+    <para>Després d'assignar un nom al projecte, s'obrirà el diàleg <guilabel>Crea un projecte nou</guilabel>. A la part superior del diàleg, seleccioneu la llengua del fitxer de partida i la llengua del document traduït i feu clic a <guibutton>D'acord</guibutton>per continuar.</para>
 
-    <para>A continuació, s'obre el diàleg Fitxers del projecte. Feu clic a Importa fitxers de partida... per seleccionar el fitxer de partida. L'OmegaT copiarà el fitxer seleccionat a la subcarpeta <filename>/source/</filename>del projecte que heu creat. Així que el fitxer de partida s'hagi carregat a la subfinestra de l'Editor, podeu tancar el diàleg Fitxers del projecte.</para>
+    <para>Si voleu configurar altres paràmetres d'aquest diàleg, sempre podeu tornar-hi prement <keycap>Ctrl+E</keycap>.</para>
+
+    <para>A continuació, s'obre el diàleg <guilabel>Fitxers del projecte</guilabel>. Feu clic a <guibutton>Copia fitxers a la carpeta de fitxers de partida...</guibutton> per seleccionar els fitxers de partida. L'OmegaT copiarà els fitxers seleccionats a la subcarpeta <filename>/source/</filename> del projecte que heu creat. Així que els fitxers de partida s'hagin carregat a la subfinestra de l'<guilabel>Editor</guilabel>, podeu tancar el diàleg <guilabel>Fitxers del projecte</guilabel>.</para>
   </section>
 
   <section id="translate.the.segments.one.by.one">
     <title>Traduïu el fitxer</title>
 
-    <para>L'OmegaT us mostrarà els segments d'un en un per tal que els aneu traduint. Un cop traduït cada segment, premeu <keycap>Ctrl+U</keycap> per desplaçar-vos fins al següent segment sense traduir. Sempre que vulgueu comprovar com es veurà la traducció en el format final, premeu <keycap>Ctrl+D</keycap>per generar el document traduït, que es crearà a la subcarpeta /target/ de la carpeta del projecte. Durant la traducció, podeu utilitzar els menús <guimenu>Edita</guimenu> i <guimenu>Vés a</guimenu> per realitzar diverses funcions útils.</para>
+    <para>L'OmegaT us mostrarà els segments d'un en un per tal que els aneu traduint. Un cop traduït cada segment, premeu <keycap>Ctrl+U</keycap> per desplaçar-vos fins al següent segment sense traduir (o bé <keycap>Ctrl+Maj+U</keycap> per desplaçar-vos fins al següent segment traduït). Sempre que vulgueu comprovar com es veurà la traducció en el format final, premeu <keycap>Ctrl+D</keycap> per generar els documents traduïts, que es crearan a la subcarpeta <filename>/target/</filename> de la carpeta del projecte. Durant la traducció, podeu utilitzar els menús <guimenu>Edita</guimenu> i <guimenu>Vés a</guimenu> per realitzar diverses funcions útils.</para>
   </section>
 
   <section>
     <title>Valideu les etiquetes</title>
 
-    <para>Si el fitxer de partida és un fitxer amb format, com ara un document del Microsoft Word, LibreOffice Writer o HTML, l'OmegaT convertirà la formatació en etiquetes que envolten el text que esteu traduint. Sovint els documents també tindran etiquetes que no tenen res a veure amb la formatació, però que també són importants i, per tant, cal conservar-los al fitxer de partida (i al fitxer traduït). Per exemple, el fitxer de partida pot contenir una frase com aquesta:</para>
-
-    <para/>
-
-    <mediaobject>
+    <para>Si els fitxers de partida són fitxers amb format, com ara fitxers del Microsoft Word, LibreOffice Writer o HTML, l'OmegaT convertirà la formatació en etiquetes que envolten el text que esteu traduint. Sovint els documents també tindran etiquetes que no tenen res a veure amb la formatació, però que també són importants i, per tant, cal conservar-los als fitxers de partida (i als fitxers traduïts). Per exemple, el fitxer de partida pot contenir una frase com aquesta:<mediaobject>
       <imageobject role="html">
-        <imagedata align="left" fileref="images/InstantGuide_1.png"/>
+        <imagedata align="justify" fileref="images/InstantGuide_1.png"/>
       </imageobject>
-
       <imageobject role="fo">
-        <imagedata align="left" fileref="images/InstantGuide_1.png" width="40%"/>
+        <imagedata align="justify" fileref="images/InstantGuide_1.png" width="40%"/>
       </imageobject>
     </mediaobject>
+    </para>
 
-    <para/>
-
-    <para>L'OmegaT, però, presentarà aquesta frase així:</para>
-
-    <para><literal/></para>
-
-    <mediaobject>
+    <para>L'OmegaT, però, presentarà aquesta frase així:<mediaobject>
       <imageobject role="html">
-        <imagedata align="left" fileref="images/InstantGuide_2.png"/>
+        <imagedata align="justify" fileref="images/InstantGuide_2.png"/>
       </imageobject>
-
       <imageobject role="fo">
-        <imagedata align="left" fileref="images/InstantGuide_2.png" width="45%"/>
+        <imagedata align="justify" fileref="images/InstantGuide_2.png" width="45%"/>
       </imageobject>
     </mediaobject>
-
-    <para/>
-
-    <para>Les etiquetes a l'OmegaT es mostren de color gris per tal que siguin fàcils de reconèixer. No estan protegides, o sigui podeu suprimir-les, escriure-les manualment o moure-les on calgui a la frase traduïda. No obstant això, si heu fet alguna errada en escriure les etiquetes de format, és possible que el fitxer traduït no es pugui obrir. Per tant, premeu <keycap>Ctrl+T</keycap> abans de generar el fitxer traduït, per validar que les etiquetes siguin correctes.</para>
+    </para>
+    
+    <para>Les etiquetes a l'OmegaT es mostren de color gris per tal que siguin fàcils de reconèixer. Estan protegides, o sigui que no podeu modificar-ne el contingut, però podeu suprimir-les, escriure-les manualment o moure-les on calgui a la frase traduïda. No obstant això, si heu fet alguna errada en escriure les etiquetes de format, és possible que els fitxers traduïts no es puguin obrir. Per tant, premeu <keycap>Ctrl+T</keycap> abans de generar els fitxers traduïts, per validar que les etiquetes siguin correctes.</para>
   </section>
 
   <section>
     <title>Genereu el fitxer traduït</title>
 
-    <para>Després d'assegurar-vos que no hi hagi cap error d'etiquetes a la traducció, premeu <keycap>Ctrl+D</keycap>per generar el document traduït, que es crearà a la subcarpeta <filename>/target/</filename> de la carpeta del projecte.</para>
+    <para>Després d'assegurar-vos que no hi hagi cap error d'etiquetes a la traducció, premeu <keycap>Ctrl+D</keycap>per generar els fitxers traduïts, que es crearan a la subcarpeta <filename>/target/</filename> de la carpeta del projecte.</para>
   </section>
 
   <section>
@@ -76,37 +66,37 @@
 
     <itemizedlist>
       <listitem>
-        <para>Si un fitxer no es pot carregar a la subfinestra de l'Editor, és possible que el fitxer de partida tingui un format que no sigui compatible amb l'OmegaT. Vegeu el Capítol 7: Filtres de fitxers al Manual d'usuari per veure una llista dels formats de fitxer que l'OmegaT admet.</para>
+        <para>Si un fitxer no es pot carregar a la subfinestra de l'<guilabel>Editor</guilabel>, és possible que tingui un format que no sigui compatible amb l'OmegaT. Vegeu <link linkend="chapter.file.filters">Filtres de fitxers</link> per veure una llista dels formats de fitxer que l'OmegaT admet.</para>
       </listitem>
     </itemizedlist>
 
     <itemizedlist>
       <listitem>
-        <para>Podeu crear un projecte nou per a cada tasca nova, i podeu afegir diversos fitxers de partida a un projecte a la vegada.</para>
+        <para>Podeu crear un projecte nou per a cada feina nova, i podeu afegir fitxers de partida nous a un projecte en qualsevol moment.</para>
       </listitem>
     </itemizedlist>
 
     <itemizedlist>
       <listitem>
-        <para>Per veure els paràmetres inicials del projecte, obriu el diàleg Configuració del projecte prement <keycap>Ctrl+E</keycap>. Per veure una llista dels fitxers del projecte, obriu el diàleg Fitxers del projecte prement <keycap>Ctrl+L</keycap>.</para>
+        <para>Per veure els paràmetres inicials del projecte, obriu el diàleg de configuració del projecte prement <keycap>Ctrl+E</keycap>. Per veure una llista dels fitxers del projecte, obriu el diàleg <guilabel>Fitxers del projecte</guilabel> prement <keycap>Ctrl+L</keycap>.</para>
       </listitem>
     </itemizedlist>
 
     <itemizedlist>
       <listitem>
-        <para>Al final de la traducció, l'OmegaT exporta tres memòries de traducció, anomenades «level1», «level2» i «omegat», a la carpeta del projecte. Les memòries «level1» i «level2» es poden compartir amb usuaris d'altres programes de traducció. La memòria anomenada «omegat» es pot utilitzar a l'OmegaT en projectes futurs que creeu. Si col·loqueu fitxers de memòria de traducció a la subcarpeta /tm/ de la carpeta del projecte, l'OmegaT els utilitzarà automàticament per cercar-hi segments similars, anomenats «coincidències parcials». .</para>
+        <para>Al final de la traducció, l'OmegaT exporta tres memòries de traducció, anomenades <filename>level1</filename>, <filename>level2</filename> i <filename>omegat</filename>, a la carpeta del projecte. Les memòries <filename>level1</filename> i <filename>level2</filename> es poden compartir amb usuaris d'altres programes de traducció. La memòria anomenada <filename>omegat</filename> es pot utilitzar a l'OmegaT en projectes futurs que creeu. Si col·loqueu fitxers de memòria de traducció a la subcarpeta <filename>/tm/</filename> d'un projecte, l'OmegaT els utilitzarà automàticament per cercar-hi segments similars, anomenats «coincidències parcials».</para>
       </listitem>
     </itemizedlist>
 
     <itemizedlist>
       <listitem>
-        <para>Podeu crear un glossari prement <guibutton>Ctrl+Maj+G</guibutton> o copiar glossaris ja existents a la subcarpeta <filename>/glossary/</filename>de la carpeta del projecte, per tal que l'OmegaT hi cerqui paraules automàticament.</para>
+        <para>Podeu afegir un terme nou al glossari prement <keycap>Ctrl+Maj+G</keycap> o copiar glossaris ja existents a la subcarpeta <filename>/glossary/</filename>de la carpeta del projecte, per tal que l'OmegaT hi cerqui paraules automàticament.</para>
       </listitem>
     </itemizedlist>
 
     <itemizedlist>
       <listitem>
-        <para>Sovint pot ser útil cercar paraules i frases al text de partida i a la traducció. Per fer-ho, premeu <keycap>Ctrl+F</keycap> per obrir el diàleg «Cerca de text» en qualsevol moment.</para>
+        <para>Sovint pot ser útil cercar paraules i frases al text de partida i a la traducció. Per fer-ho, premeu <keycap>Ctrl+F</keycap> per obrir el diàleg <guilabel>Cerca de text</guilabel> en qualsevol moment.</para>
       </listitem>
     </itemizedlist>
 

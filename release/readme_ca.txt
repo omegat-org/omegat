@@ -4,7 +4,7 @@ Mikel Forcada Zubizarreta (versió 1.4)
 Jordi Serratosa Quintana (versió 1.6 a l'actual)
 
 ==============================================================================
-  OmegaT 2.0, fitxer LLEGIU-ME
+  OmegaT 3.0, fitxer LLEGIU-ME
 
   1.  Informació sobre l'OmegaT
   2.  Què és l'OmegaT?
@@ -23,13 +23,13 @@ Podeu trobar la informació més recent sobre l'OmegaT a
 Si us cal assistència, consulteu el grup d'usuaris del Yahoo (multilingüe), 
 on podeu fer cerques en l'arxiu de missatges sense necessitat de 
 subscriure-us-hi:
-     http://groups.yahoo.com/group/OmegaT/
+     http://tech.groups.yahoo.com/group/OmegaT/
 
 Sol·licituds de millores (en anglès), al lloc web de SourceForge:
-     http://sourceforge.net/tracker/?group_id=68187&atid=520350
+     https://sourceforge.net/p/omegat/feature-requests/
 
 Informes d'errors (en anglès), al lloc web de SourceForge:
-     http://sourceforge.net/tracker/?group_id=68187&atid=520347
+     https://sourceforge.net/p/omegat/bugs/
 
 ==============================================================================
   2.  Què és l'OmegaT?
@@ -110,10 +110,10 @@ des del menú Ajuda un cop iniciat l'OmegaT.
  3. Instal·lació de l'OmegaT
 
 3.1 General
-Per poder executar l'OmegaT, és necessari tenir instal·lat al sistema l'entorn
-d'execució de Java (Java Runtime Environment, JRE) versió 1.5 o superior. 
-Actualment, hi ha disponibles paquets de l'OmegaT que inclouen l'entorn 
-d'execució de Java per tal d'estalviar als usuaris la necessitat de 
+Per poder executar l'OmegaT, és necessari tenir instal·lat al sistema 
+l'entorn d'execució de Java (Java Runtime Environment, JRE) versió 1.5 o 
+superior. Actualment, hi ha disponibles paquets de l'OmegaT que inclouen 
+l'entorn d'execució de Java per tal d'estalviar als usuaris la necessitat de 
 seleccionar-lo, de baixar-lo i d'instal·lar-lo. 
 
 Si ja teniu el Java instal·lat, una manera d'instal·lar la versió actual de 
@@ -128,16 +128,16 @@ En les posteriors execucions, no cal que estigueu en línia.
 Durant la instal·lació, en funció del sistema operatiu, és possible que es 
 mostrin diversos avisos de seguretat. El certificat és autosignat per «Didier 
 Briel». 
-Els permisos que doneu a aquesta versió (possiblement s'hi faci referència com
-a un «accés no restringit a l'ordinador») són idèntics als permisos que doneu 
-a la versió local, instal·lada mitjançant el procediment que es descriu més 
-endavant: permeten l'accés al disc dur de l'ordinador. Cada vegada que 
+Els permisos que doneu a aquesta versió (possiblement s'hi faci referència 
+com a un «accés no restringit a l'ordinador») són idèntics als permisos que 
+doneu a la versió local, instal·lada mitjançant el procediment que es descriu 
+més endavant: permeten l'accés al disc dur de l'ordinador. Cada vegada que 
 executeu l'OmegaT.jnlp, es comprovarà si hi ha alguna actualització (si esteu 
 en línia), si n'hi ha alguna s'instal·larà i, a continuació, s'iniciarà 
 l'OmegaT. 
 
-A continuació es descriuen els mètodes alternatius per baixar i per instal·lar
-l'OmegaT. 
+A continuació es descriuen els mètodes alternatius per baixar i per 
+instal·lar l'OmegaT. 
 
 Usuaris del Windows i Linux: 
 Si esteu segur que el sistema ja té instal·lada una versió correcta del JRE, 
@@ -151,14 +151,14 @@ Usuaris del Linux:
 L'OmegaT es pot executar mitjançant la implementació del Java de codi obert 
 que inclouen moltes distribucions del Linux (per exemple, l'Ubuntu), però és 
 possible que es produeixin errors, problemes de visualització o que hi faltin 
-funcions. Per tant, és recomanable que baixeu i instal·leu l'entorn d'execució 
-de Java (JRE) d'Oracle o el paquet de l'OmegaT que inclou el JRE (el paquet 
-.tar.bz2 que conté el text «Linux»). Si instal·leu una versió del Java a 
-nivell del sistema, assegureu-vos que estigui al camí d'execució o crideu-la 
-explícitament en executar l'OmegaT. Si no esteu familiaritzat amb el Linux, 
-és recomanable que instal·leu una versió de l'OmegaT amb el JRE inclòs. Això 
-no comporta cap risc, ja que aquest JRE «local» no interferirà amb altres 
-implementacions del Java que hi hagi instal·lades al sistema.
+funcions. Per tant, és recomanable que baixeu i instal·leu l'entorn 
+d'execució de Java (JRE) d'Oracle o el paquet de l'OmegaT que inclou el JRE 
+(el paquet .tar.bz2 que conté el text «Linux»). Si instal·leu una versió del 
+Java a nivell del sistema, assegureu-vos que estigui al camí d'execució o 
+crideu-la explícitament en executar l'OmegaT. Si no esteu familiaritzat amb 
+el Linux, és recomanable que instal·leu una versió de l'OmegaT amb el JRE 
+inclòs. Això no comporta cap risc, ja que aquest JRE «local» no interferirà 
+amb altres implementacions del Java que hi hagi instal·lades al sistema.
 
 Usuaris del Mac: 
 Les versions del Mac OS X anteriors al Mac OS X 10.7 (Lion) ja tenen 
@@ -167,8 +167,8 @@ una aplicació que necessiti el Java, el sistema els demanarà si volen
 baixar-lo i instal·lar-lo automàticament.
 
 Usuaris del Linux en sistemes PowerPC: 
-Cal baixar el JRE d'IBM, ja que Sun no ofereix cap JRE per a sistemes PPC. En 
-aquest cas, el podeu baixar des d'aquí:
+Cal baixar el JRE d'IBM, ja que Sun no ofereix cap JRE per a sistemes PPC. 
+En aquest cas, el podeu baixar des d'aquí:
 
     http://www.ibm.com/developerworks/java/jdk/linux/download.html 
 
@@ -259,10 +259,10 @@ els desenvolupadors a:
 Per traduir la interfície d'usuari de l'OmegaT, el manual d'usuari o els 
 documents relacionats, llegiu:
       
-      http://www.omegat.org/en/translation-info.html
+      http://www.omegat.org/en/howtos/localizing_omegat.php
 
 I subscriviu-vos a la llista dels traductors:
-      http://lists.sourceforge.net/mailman/listinfo/omegat-l10n
+      https://lists.sourceforge.net/lists/listinfo/omegat-l10n
 
 Per contribuir d'altres maneres, primer subscriviu-vos al grup d'usuaris:
       http://tech.groups.yahoo.com/group/omegat/
@@ -289,6 +289,7 @@ Han participat en el codi:
   Jean-Christophe Helary
   Thomas Huriaux
   Hans-Peter Jacobs
+  Kyle Katarn
   Ibai Lakunza Velasco
   Guido Leenders
   Aaron Madlon-Kay
@@ -327,8 +328,6 @@ L'OmegaT utilitza les biblioteques següents:
   JNA, per Todd Fast, Timothy Wall i altres (llicència LGPL)
   Swing-Layout 1.0.2 (llicència LGPL)
   Jmyspell 2.1.4 (llicència LGPL)
-  JAXB (GPLv2 + excepció classpath)
-  SJXP 1.0.2 (GPL v2)
   SVNKit 1.7.5 (llicència TMate)
   Biblioteca Sequence (llicència de la biblioteca Sequence)
   ANTLR 3.4 (llicència ANTLR 3)
@@ -337,6 +336,22 @@ L'OmegaT utilitza les biblioteques següents:
   JSch (llicència JSch)
   Base64 (domini públic)
   Diff (GPL)
+  orion-ssh2-214 (llicència Orion SSH for Java)
+  lucene-*.jar (llicència Apache 2.0)
+  Els analitzadors lèxics (tokenizers) de l'anglès
+   (org.omegat.tokenizer.SnowballEnglishTokenizer i
+   org.omegat.tokenizer.LuceneEnglishTokenizer) utilitzen mots buits de 
+   l'Okapi (http://okapi.sourceforge.net) (llicència LGPL)
+  tinysegmenter.jar (llicència BSD modificada)
+  commons-*.jar (llicència Apache 2.0)
+  jWordSplitter (llicència Apache 2.0)
+  LanguageTool.jar (llicència LGPL)
+  morfologik-*.jar (llicència Morfologik)
+  segment-1.4.1.jar (llicència Segment)
+  pdfbox-app-1.8.1.jar (llicència Apache 2.0)
+  Fontbox-0.1.0.jar i JempBox-0.2.0.jar (llicència Fontbox)
+  icu4j-51_1.jar (llicència ICU4J)
+
 
 ==============================================================================
  5.  Teniu problemes amb l'OmegaT? Necessiteu ajuda?
@@ -367,11 +382,11 @@ pantalla o qualsevol altra cosa que considereu que pot ajudar els
 desenvolupadors a trobar i a solucionar l'error.
 
 Per navegar per l'arxiu de missatges del grup d'usuaris, visiteu:
-     http://groups.yahoo.com/group/OmegaT/
+     http://tech.groups.yahoo.com/group/OmegaT/
 
 Per navegar per la pàgina d'informes d'errors i, si cal, enviar un informe 
 d'error nou, visiteu:
-     http://sourceforge.net/tracker/?group_id=68187&atid=520347
+     https://sourceforge.net/p/omegat/bugs/
 
 Per fer un seguiment de l'informe d'error, cal que us registreu com a usuari 
 de SourceForge.

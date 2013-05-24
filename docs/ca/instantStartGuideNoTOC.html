@@ -24,18 +24,16 @@
                   </div>
                </div>
             </div>
-            <p><em><span class="remark">Nota:</span></em>En un Mac d'Apple, utilitzeu les tecles <span class="keycap"><strong>Cmd</strong></span> o <span class="keycap"><strong>Apple</strong></span> (amb el dibuix d'una poma) en lloc de la tecla <span class="keycap"><strong>Ctrl</strong></span>.
+            <p><em><span class="remark">Nota:</span></em>En un Mac d'Apple, utilitzeu la tecla <span class="keycap"><strong>Command</strong></span> en lloc de la tecla <span class="keycap"><strong>Control</strong></span>.
+            </p><a class="indexterm" name="d0e22"></a><p>Per començar a utilitzar l'OmegaT, cal que creeu un projecte que contindrà tots els vostres fitxers: el fitxer de partida,
+               les memòries de traducció, els glossaris i, finalment, el fitxer traduït. Al menú <span class="guimenu">Projecte</span>, seleccioneu <span class="guimenuitem">Nou...</span> i escriviu un nom per al projecte. Preneu nota d'on esteu creant el projecte, perquè us caldrà saber-ho més endavant.
             </p>
-            <p>Per començar a utilitzar l'OmegaT, cal que creeu un projecte que contindrà tots els vostres fitxers: el fitxer de partida,
-               les memòries de traducció, els glossaris i, finalment, el fitxer traduït. Al menú <span class="guimenu">Projecte</span>, seleccioneu <span class="guimenuitem">Nou...</span><a class="indexterm" name="d0e33"></a> i escriviu un nom per al projecte. Preneu nota d'on esteu creant el projecte, perquè us caldrà saber-ho més endavant.
+            <p>Després d'assignar un nom al projecte, s'obrirà el diàleg <span class="guilabel">Crea un projecte nou</span>. A la part superior del diàleg, seleccioneu la llengua del fitxer de partida i la llengua del document traduït i feu clic
+               a <span class="guibutton">D'acord</span>per continuar.
             </p>
-            <p>Després d'assignar un nom al projecte, s'obrirà el diàleg Crea un projecte nou. A la part superior del diàleg, seleccioneu
-               la llengua del fitxer de partida i la llengua del document traduït i feu clic a <span class="guibutton">D'acord</span>per continuar.
+            <p>Si voleu configurar altres paràmetres d'aquest diàleg, sempre podeu tornar-hi prement <span class="keycap"><strong>Ctrl+E</strong></span>.
             </p>
-            <p><span class="application">Si voleu configurar altres paràmetres d'aquest diàleg, sempre podeu tornar-hi prement <span class="keycap"><strong>Ctrl+E</strong></span>.</span></p>
-            <p>A continuació, s'obre el diàleg Fitxers del projecte. Feu clic a Importa fitxers de partida... per seleccionar el fitxer de
-               partida. L'OmegaT copiarà el fitxer seleccionat a la subcarpeta <code class="filename">/source/</code>del projecte que heu creat. Així que el fitxer de partida s'hagi carregat a la subfinestra de l'Editor, podeu tancar el diàleg
-               Fitxers del projecte.
+            <p>A continuació, s'obre el diàleg <span class="guilabel">Fitxers del projecte</span>. Feu clic a <span class="guibutton">Copia fitxers a la carpeta de fitxers de partida...</span> per seleccionar els fitxers de partida. L'OmegaT copiarà els fitxers seleccionats a la subcarpeta <code class="filename">/source/</code> del projecte que heu creat. Així que els fitxers de partida s'hagin carregat a la subfinestra de l'<span class="guilabel">Editor</span>, podeu tancar el diàleg <span class="guilabel">Fitxers del projecte</span>.
             </p>
          </div>
          <div class="section">
@@ -47,54 +45,56 @@
                   </div>
                </div>
             </div>
-            <p>L'OmegaT us mostrarà els segments d'un en un per tal que els aneu traduint. Un cop traduït cada segment, premeu <span class="keycap"><strong>Ctrl+U</strong></span> per desplaçar-vos fins al següent segment sense traduir. Sempre que vulgueu comprovar com es veurà la traducció en el format
-               final, premeu <span class="keycap"><strong>Ctrl+D</strong></span>per generar el document traduït, que es crearà a la subcarpeta /target/ de la carpeta del projecte. Durant la traducció, podeu
-               utilitzar els menús <span class="guimenu">Edita</span> i <span class="guimenu">Vés a</span> per realitzar diverses funcions útils.
+            <p>L'OmegaT us mostrarà els segments d'un en un per tal que els aneu traduint. Un cop traduït cada segment, premeu <span class="keycap"><strong>Ctrl+U</strong></span> per desplaçar-vos fins al següent segment sense traduir (o bé <span class="keycap"><strong>Ctrl+Maj+U</strong></span> per desplaçar-vos fins al següent segment traduït). Sempre que vulgueu comprovar com es veurà la traducció en el format final,
+               premeu <span class="keycap"><strong>Ctrl+D</strong></span> per generar els documents traduïts, que es crearan a la subcarpeta <code class="filename">/target/</code> de la carpeta del projecte. Durant la traducció, podeu utilitzar els menús <span class="guimenu">Edita</span> i <span class="guimenu">Vés a</span> per realitzar diverses funcions útils.
             </p>
          </div>
          <div class="section">
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="d0e72"></a>3.&nbsp;Valideu les etiquetes
+                     <h2 class="title" style="clear: both"><a name="d0e89"></a>3.&nbsp;Valideu les etiquetes
                      </h2>
                   </div>
                </div>
             </div>
-            <p>Si el fitxer de partida és un fitxer amb format, com ara un document del Microsoft Word, LibreOffice Writer o HTML, l'OmegaT
+            <p>Si els fitxers de partida són fitxers amb format, com ara fitxers del Microsoft Word, LibreOffice Writer o HTML, l'OmegaT
                convertirà la formatació en etiquetes que envolten el text que esteu traduint. Sovint els documents també tindran etiquetes
-               que no tenen res a veure amb la formatació, però que també són importants i, per tant, cal conservar-los al fitxer de partida
-               (i al fitxer traduït). Per exemple, el fitxer de partida pot contenir una frase com aquesta:
+               que no tenen res a veure amb la formatació, però que també són importants i, per tant, cal conservar-los als fitxers de partida
+               (i als fitxers traduïts). Per exemple, el fitxer de partida pot contenir una frase com aquesta:
             </p>
-            <p></p>
-            <div class="mediaobject" align="left"><img src="images/InstantGuide_1.png" align="left"></div>
-            <p></p>
+            <div class="mediaobject" align="justify"><img src="images/InstantGuide_1.png" align="justify"></div>
+            <p>
+               
+            </p>
             <p>L'OmegaT, però, presentarà aquesta frase així:</p>
-            <p><code class="literal"></code></p>
-            <div class="mediaobject" align="left"><img src="images/InstantGuide_2.png" align="left"></div>
-            <p></p>
-            <p>Les etiquetes a l'OmegaT es mostren de color gris per tal que siguin fàcils de reconèixer. No estan protegides, o sigui podeu
-               suprimir-les, escriure-les manualment o moure-les on calgui a la frase traduïda. No obstant això, si heu fet alguna errada
-               en escriure les etiquetes de format, és possible que el fitxer traduït no es pugui obrir. Per tant, premeu <span class="keycap"><strong>Ctrl+T</strong></span> abans de generar el fitxer traduït, per validar que les etiquetes siguin correctes.
+            <div class="mediaobject" align="justify"><img src="images/InstantGuide_2.png" align="justify"></div>
+            <p>
+               
+            </p>
+            <p>Les etiquetes a l'OmegaT es mostren de color gris per tal que siguin fàcils de reconèixer. Estan protegides, o sigui que no
+               podeu modificar-ne el contingut, però podeu suprimir-les, escriure-les manualment o moure-les on calgui a la frase traduïda.
+               No obstant això, si heu fet alguna errada en escriure les etiquetes de format, és possible que els fitxers traduïts no es
+               puguin obrir. Per tant, premeu <span class="keycap"><strong>Ctrl+T</strong></span> abans de generar els fitxers traduïts, per validar que les etiquetes siguin correctes.
             </p>
          </div>
          <div class="section">
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="d0e99"></a>4.&nbsp;Genereu el fitxer traduït
+                     <h2 class="title" style="clear: both"><a name="d0e113"></a>4.&nbsp;Genereu el fitxer traduït
                      </h2>
                   </div>
                </div>
             </div>
-            <p>Després d'assegurar-vos que no hi hagi cap error d'etiquetes a la traducció, premeu <span class="keycap"><strong>Ctrl+D</strong></span>per generar el document traduït, que es crearà a la subcarpeta <code class="filename">/target/</code> de la carpeta del projecte.
+            <p>Després d'assegurar-vos que no hi hagi cap error d'etiquetes a la traducció, premeu <span class="keycap"><strong>Ctrl+D</strong></span>per generar els fitxers traduïts, que es crearan a la subcarpeta <code class="filename">/target/</code> de la carpeta del projecte.
             </p>
          </div>
          <div class="section">
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="d0e110"></a>5.&nbsp;Més coses que cal tenir en compte
+                     <h2 class="title" style="clear: both"><a name="d0e124"></a>5.&nbsp;Més coses que cal tenir en compte
                      </h2>
                   </div>
                </div>
@@ -102,9 +102,7 @@
             <div class="itemizedlist">
                <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
-                     <p>Si un fitxer no es pot carregar a la subfinestra de l'Editor, és possible que el fitxer de partida tingui un format que no
-                        sigui compatible amb l'OmegaT. Vegeu el Capítol 7: Filtres de fitxers al Manual d'usuari per veure una llista dels formats
-                        de fitxer que l'OmegaT admet.
+                     <p>Si un fitxer no es pot carregar a la subfinestra de l'<span class="guilabel">Editor</span>, és possible que tingui un format que no sigui compatible amb l'OmegaT. Vegeu <a class="link" href="#">Filtres de fitxers</a> per veure una llista dels formats de fitxer que l'OmegaT admet.
                      </p>
                   </li>
                </ul>
@@ -112,14 +110,14 @@
             <div class="itemizedlist">
                <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
-                     <p>Podeu crear un projecte nou per a cada tasca nova, i podeu afegir diversos fitxers de partida a un projecte a la vegada.</p>
+                     <p>Podeu crear un projecte nou per a cada feina nova, i podeu afegir fitxers de partida nous a un projecte en qualsevol moment.</p>
                   </li>
                </ul>
             </div>
             <div class="itemizedlist">
                <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
-                     <p>Per veure els paràmetres inicials del projecte, obriu el diàleg Configuració del projecte prement <span class="keycap"><strong>Ctrl+E</strong></span>. Per veure una llista dels fitxers del projecte, obriu el diàleg Fitxers del projecte prement <span class="keycap"><strong>Ctrl+L</strong></span>.
+                     <p>Per veure els paràmetres inicials del projecte, obriu el diàleg de configuració del projecte prement <span class="keycap"><strong>Ctrl+E</strong></span>. Per veure una llista dels fitxers del projecte, obriu el diàleg <span class="guilabel">Fitxers del projecte</span> prement <span class="keycap"><strong>Ctrl+L</strong></span>.
                      </p>
                   </li>
                </ul>
@@ -127,11 +125,8 @@
             <div class="itemizedlist">
                <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
-                     <p>Al final de la traducció, l'OmegaT exporta tres memòries de traducció, anomenades «level1», «level2» i «omegat», a la carpeta
-                        del projecte. Les memòries «level1» i «level2» es poden compartir amb usuaris d'altres programes de traducció. La memòria
-                        anomenada «omegat» es pot utilitzar a l'OmegaT en projectes futurs que creeu. Si col·loqueu fitxers de memòria de traducció
-                        a la subcarpeta /tm/ de la carpeta del projecte, l'OmegaT els utilitzarà automàticament per cercar-hi segments similars, anomenats
-                        «coincidències parcials». .
+                     <p>Al final de la traducció, l'OmegaT exporta tres memòries de traducció, anomenades <code class="filename">level1</code>, <code class="filename">level2</code> i <code class="filename">omegat</code>, a la carpeta del projecte. Les memòries <code class="filename">level1</code> i <code class="filename">level2</code> es poden compartir amb usuaris d'altres programes de traducció. La memòria anomenada <code class="filename">omegat</code> es pot utilitzar a l'OmegaT en projectes futurs que creeu. Si col·loqueu fitxers de memòria de traducció a la subcarpeta
+                        <code class="filename">/tm/</code> d'un projecte, l'OmegaT els utilitzarà automàticament per cercar-hi segments similars, anomenats «coincidències parcials».
                      </p>
                   </li>
                </ul>
@@ -139,7 +134,7 @@
             <div class="itemizedlist">
                <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
-                     <p>Podeu crear un glossari prement <span class="guibutton">Ctrl+Maj+G</span> o copiar glossaris ja existents a la subcarpeta <code class="filename">/glossary/</code>de la carpeta del projecte, per tal que l'OmegaT hi cerqui paraules automàticament.
+                     <p>Podeu afegir un terme nou al glossari prement <span class="keycap"><strong>Ctrl+Maj+G</strong></span> o copiar glossaris ja existents a la subcarpeta <code class="filename">/glossary/</code>de la carpeta del projecte, per tal que l'OmegaT hi cerqui paraules automàticament.
                      </p>
                   </li>
                </ul>
@@ -147,7 +142,7 @@
             <div class="itemizedlist">
                <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
-                     <p>Sovint pot ser útil cercar paraules i frases al text de partida i a la traducció. Per fer-ho, premeu <span class="keycap"><strong>Ctrl+F</strong></span> per obrir el diàleg «Cerca de text» en qualsevol moment.
+                     <p>Sovint pot ser útil cercar paraules i frases al text de partida i a la traducció. Per fer-ho, premeu <span class="keycap"><strong>Ctrl+F</strong></span> per obrir el diàleg <span class="guilabel">Cerca de text</span> en qualsevol moment.
                      </p>
                   </li>
                </ul>

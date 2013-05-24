@@ -189,10 +189,11 @@
         <copy todir="dist/images">
             <fileset dir="images"/>
         </copy>
+        <!-- Already done by "jar" 
         <mkdir dir="dist/lib"/>
         <copy todir="dist/lib">
             <fileset dir="lib" excludes="sources/**"/>
-        </copy>
+        </copy> -->
     </target>
    
     <!-- Builds a ZIP distribution -->    

@@ -1,7 +1,7 @@
-Tento překlad vypracoval [Josef Molnár], copyright© [2013].
+@@TRANSLATION_NOTICE@@
 
 ==============================================================================
-  OmegaT 2.0, soubor Read Me / Čti mě
+  OmegaT 3.0, soubor Read Me / Čti mě
 
   1.  Informace o aplikaci OmegaT
   2.  Co je OmegaT?
@@ -208,6 +208,7 @@ Do kódu přispěli
   Jean-Christophe Helary
   Thomas Huriaux
   Hans-Peter Jacobs
+  Kyle Katarn
   Ibai Lakunza Velasco
   Guido Leenders
   Aaron Madlon-Kay
@@ -246,8 +247,6 @@ OmegaT používá následující knihovny:
   JNA dodali Todd Fast, Timothy Wall a dalších (LGPL Licence)
   Swing-Layout 1.0.2 (Licence LGPL)
   Jmyspell 2.1.4 (Licence LGPL)
-  JAXB 2.1.7 (GPLv2 + výjimka classpath)
-  SJXP 1.0.2 (GPL v2)
   SVNKit 1.7.5 (Licence TMate)
   Sequence Library (Sequence Library License)
   ANTLR 3.4 (Licence ANTLR 3)
@@ -256,6 +255,8 @@ OmegaT používá následující knihovny:
   JSch (Licence JSch)
   Base64 (public domain)
   Diff (GPL)
+  JSAP (LGPL)
+  orion-ssh2-214 (Orion SSH for Java license)
 
 ==============================================================================
  5.  Máte s aplikací OmegaT problémy? Potřebujete pomoc?

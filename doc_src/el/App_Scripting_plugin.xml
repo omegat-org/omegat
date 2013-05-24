@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<appendix id="appendix.ScriptingPlugin.inOmegaT">
+  <title>Πρόσθετο για Δημιουργία σεναρίων<indexterm class="singular">
+      <primary>Πρόσθετα (Plugins)</primary> <secondary>Δημιουργία σεναρίων (Scripting)</secondary>
+    </indexterm></title>
+
+  <section>
+    <title>Εισαγωγή</title>
+
+    <para>Το πρόσθετο OmegaT-Scripting μας επιτρέπει να τρέχουμε σενάρια που γράφτηκαν σε διάφορες γλώσσες σεναρίων στο OmegaT.</para>
+  </section>
+
+  <section>
+    <title>Εγκατάσταση και Χρήση</title>
+
+    <para>Μπορείτε να κατεβάσετε το πρόσθετο για τη δημιουργία σεναρίων του OmegaT από την <ulink url="http://sourceforge.net/projects/omegat-plugins/files">Ιστοσελίδα μεταφόρτωσης προσθέτων για το OmegaT</ulink>. Αποσυμπιέστε τα αρχεία και βάλτετα όλα στον κατάλογο &quot;Πρόσθετα&quot; που βρίσκεται στον κατάλογο εγκατάστασης του OmegaT. Αυτός είναι ο κατάλογος που περιέχει το OmegaT.jar. Δημιουργείστε πρώτα τον κατάλογο &quot;Πρόσθετα&quot;, αν αυτός δεν υπάρχει ήδη.</para>
+
+    <para>Αυτό θα προσθέσει ένα νέο υπομενού<guisubmenu> Εργαλεία &gt; </guisubmenu><guisubmenu>Δημιουργία σεναρίων.</guisubmenu> κάτω από το υπομενού <guisubmenu>Δημιουργία σεναρίων</guisubmenu>, υπάρχουν στη διάθεση πέντε place holders για τα σενάρια. Αν κάνετε κλικ στη <guisubmenu>Δημιουργία σεναρίων</guisubmenu> θα ανοίξει ο Διάλογος δημιουργίας σεναρίων:<screenshot> <screeninfo>Διάλογος δημιουργίας σεναρίων</screeninfo> <mediaobject> <imageobject> <imagedata fileref="images/ScriptingDialog.png"/> </imageobject> </mediaobject> </screenshot></para>
+
+    <para>Ο Διάλογος δημιουργίας σεναρίων σας επιτρέπει να προσθέσετε ένα προύπάρχον σενάριο στην περιοχή κειμένου και να το τρέξετε πάνω στο ήδη ανοικτό έργο. Για να παραμετροποιήσετε τα χαρακτηριστικά του σεναρίου, κάντε τα εξής:</para>
+
+    <itemizedlist>
+      <listitem>
+        <para>Φορτώστε ένα σενάριο στον editor κάνοντας κλικ στο όνομά του, από τον κατάλογο που βλέπετε στο αριστερό παράθυρο.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Κάντε δεξί κλικ σε ένα κουμπί από το &quot;&lt;1&gt;&quot; ως το &quot;&lt;5&gt;&quot; στο κάτω panel και επιλέξτε &quot;Προσθήκη&quot;. Στο παραπάνω παράδειγμα, έχουν προστεθεί ήδη δύο σενάρια (στις θέσεις 1 και 2).</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Όταν κάνετε αριστερό κλικ στον αριθμό, θα τρέξει το επιλεγμένο σενάριο. Μπορείτε να εκκινήσετε τις επιλεγμένες μακροεντολές από το κύριο μενού, αλλά και χρησιμοποιώντας τις καταχωρήσεις τους στο μενού <guisubmenu>Εργαλεία </guisubmenu> ή πατώντας<keycap> Ctrl+Alt+F#</keycap> (# 1 to 5).</para>
+      </listitem>
+    </itemizedlist>
+
+    <para>Οι παρακάτω γλώσσες δημιουργίας σεναρίων υλοποιήθηκαν:</para>
+
+    <para><itemizedlist>
+        <listitem>
+          <para><emphasis role="bold">NetRexx</emphasis> (http://www.netrexx.org/): υποστηρίζει την κλασική σύνταξη REXX, χωρίς reserved λεξεις-κλειδιά, με σημαντικές προσθήκες για υποστήριξη αντικειμενοστραφούς προγραμματισμού, με τρόπο συμβατό με το μοντέλο των αντικειμένων της Java. Όλες οι υπάρχουσες βιβλιοθήκες κλάσης Java μπορούν να χρησιμοποιούνται χωρίς τροποποίηση  και χωρίς ιδιαίτερη ρύθμιση; συγχρόνως, ένας προγραμαμτιστής Java μπορεί να επιλέξει να χρησιμοποιεί μόνο την κλάση Rexx, από το πακέτο runtime, για μια βελτιωμένη διαχείριση κωδικοσειράς (string) όταν θα γράφει κώδικα προγραμμάτων Java.</para>
+        </listitem>
+      </itemizedlist><itemizedlist>
+        <listitem>
+          <para><emphasis role="bold">XSLT</emphasis> (Extensible Stylesheet Language Transformations): είναι μια declarative γλώσσα, βασισμένη στην XML και που χρησιμοποιείται για την μετατροπή των εγγράφων XML. Το αρχικό έγγραφο δεν άλλαξε: απλώς δημιουργήθηκε ένα νέο έγγραφο, βασισμένο στο περιεχόμενο ενός προϋπάρχοντος εγγράφου. Το νέο έγγραφο μπορεί να σειριοποιηθεί (έξοδος) από τον επεξεργαστή σε πρότυπη σύνταξη XML ή σε μια άλλη μορφή, σαν την HTML, ή σε απλό κείμενο. Το XSLT χρησιμοποιείται συνήθως για τη μετατροπή δεδομένων μεταξύ διαφορετικών σχημάτων XML ή για την μετατροπή των δεδομένων XML σε ιστοσελίδες ή σε έγγραφα PDF.</para>
+        </listitem>
+      </itemizedlist><itemizedlist>
+        <listitem>
+          <para><emphasis role="bold">Groovy</emphasis> (http://groovy.codehaus.org): είναι μια δυναμική γλώσσα για την Εικονική Μηχανή Java Virtual machine. Χτίζει πάνω στα δυνατά σημεία της Java αλλά διαθέτει πρόσθετα ισχυρά χαρακτηρισιτκά που εμπνέονται από γλώσσες σαν την Python, τη Ruby και την Smalltalk.</para>
+        </listitem>
+      </itemizedlist><itemizedlist>
+        <listitem>
+          <para><emphasis role="bold">JavaScript</emphasis> (μερικές φορές, εν συντομία, JS, Να μην συγχέεται με τη Java): είναι μια γλώσσα δημιουργίας σεναρίων βασισμένη σε πρωτότυπα (prototype-based scripting language) που είναι δυναμική, με ασθενή σύνταξη (weakly typed) και διαθέτει συναρτήσεις πρώτης τάξεως (first-class functions). Εϊναι μια γλώσσα multi-paradigm, που υποστηρίζει τα πρότυπα αντικειμενοστραφούς, imperative και λειτουργικού προγραμματισμού. Επειδή είναι η γλώσσα που βρίσκεται πίσω από δημοφιλή λογισμικά, σαν το Firefox, αποτελεί ένα γνωστό και προτιμώμενο εργαλείο προγραμματισμού στο χώρο του Ανοικτού Κώδικα.</para>
+        </listitem>
+      </itemizedlist>Όλες οι γλώσσες έχουν πρόσβαση στο μοντέλο αντικειμώνων του OmegaT, με το ίδιο το έργο να απποτελεί το κορυφαίο αντικείμενο. Το παρακάτω κομματάκι κώδικα σε groovy, π.χ, θα σαρώσει όλα τα τμήματα κειμένου, σε όλα αρχεία του τρέχοντος έργου και, αν η μετάφραση υπάρχει, θα εκτυπώσει το αρχείο προέλευσης και το αρχείο-στόχο του τμήματος:</para>
+
+    <programlisting>    files = project.projectFiles;
+    for (i in 0 ..&lt; files.size())
+    {
+        for (j in 0 ..&lt; files[i].entries.size())
+        {
+            currSegment = files[i].entries[j];
+            if (project.getTranslationInfo(currSegment))
+            {
+                source = currSegment.getSrcText();
+                target = project.getTranslationInfo(currSegment).translation;
+                console.println(source + &quot; &gt;&gt;&gt;&gt; &quot; + target);
+            }     
+        }
+    }</programlisting>
+  </section>
+</appendix>

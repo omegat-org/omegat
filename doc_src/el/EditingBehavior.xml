@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<chapter id="chapter.translation.editing">
+  <title>Συμπεριφορά επεξεργασίας<indexterm class="singular">
+      <primary>Επιλογές</primary> <secondary>Μενού</secondary> <tertiary>Συμπεριφορά Επεξεργασίας...</tertiary>
+    </indexterm></title>
+
+  <para>Ο διάλογος στις <menuchoice> <guimenu>Επιλογές</guimenu> <guimenuitem>Συμπεριφοράς Επεξεργασίας...</guimenuitem> </menuchoice> επιτρέπει στον χρήστη να επιλέγει πως θα πρέπει να γίνεται η αρχικοποίηση και η διαχείριση του τρέχοντος τμήματος, στο πεδίο επεξεργασίας:</para>
+
+  <figure id="editing.behavior.options">
+    <title>Επιλογές Συμπεριφοράς επεξεργασίας</title>
+
+    <mediaobject>
+      <imageobject role="html">
+        <imagedata fileref="images/EditingBehaviourOptions25.png"/>
+      </imageobject>
+	  <imageobject role="fo">
+        <imagedata fileref="images/EditingBehaviourOptions25.png"/>
+      </imageobject>
+    </mediaobject>
+  </figure>
+
+  <para/>
+
+  <para>Μεταφράζετε τα αρχεία σας μετακινούμενοι από τμήμα σε τμήμα, επεξεργαζόμενοι το κάθε τρέχον τμήμα, με τη σειρά. Όταν μετακινείσθε μεταξύ διαφόρων τμημάτων, μπορεί να θέλετε να φορτώσετε στο πεδίο επεξεργασίας, ή μια μετάφραση που ήδη υπάρχει στην περιοχή της ασαφούς αντιστοίχησης (fuzzy match), είτε το κείμενο προέλευσης. Στις <menuchoice> <guimenu>Επιλογές</guimenu> <guimenuitem>Συμπεριφοράς Επεξεργασίας... το</guimenuitem> </menuchoice> <application>OmegaT</application> σας προσφέρει τις εξής εναλλακτικές:</para>
+
+  <variablelist> <varlistentry> <term>Το κείμενο προέλευσης</term>
+
+      <listitem>
+        <para>Μπορεί να θέλετε να κάνετε αυτόματη εισαγωγή του κειμένου προέλευσης μέσα στο πεδίο επεξεργασίας. Αυτό είναι χρήσιμο για κείμενα που περιέχουν πολλά εμπορικά σήματα κατατεθέντα, ή άλλα κύρια ονόματα που θα πρέπει  να αφήσετε απαράλλακτα.</para>
+      </listitem>
+    </varlistentry> <varlistentry> <term>Αφήστε το τμήμα αυτό κενό<indexterm class="singular">
+          <primary>Επιλογές Μενού</primary> <secondary>Συμπεριφορά Επεξεργασίας</secondary> <tertiary>Κενή μετάφραση</tertiary>
+        </indexterm></term>
+
+      <listitem>
+        <para>Το OmegaT αφήνει το πεδίο επεξεργασίας κενό. Αυτή η επιλογή σας επιτρέπει να εισάγετε τη μετάφραση χωρίς να χρειάζεται να διαγράψετε το κείμενο προέλευσης, συνεπώς, γλυτώνοντάς σας δύο επιπλέον πατήματα στο πληκτρολόγιο (<emphasis role="bold">Ctrl+A </emphasis>και <emphasis role="bold">Del). </emphasis> Τώρα επιτρέπονται οι κενές μεταφράσεις. Εμφανίζονται στο πρόγραμμα επεξεργασίας (Editor) ως &lt;ΚΕΝΕΣ&gt;. Για να δημιουργήσετε μια τέτοια, κάντε δεξί κλικ σε ένα τμήμα και επιλέξτε &quot;<emphasis role="bold">Δημιουργία κενής μετάφρασης</emphasis>&quot;. Η καταχώρηση <emphasis role="bold">Διαγραφή μετάφρασης</emphasis> στο ίδιο αναδυόμενο (popup) μενού, σας επιτρέπει, επίσης, τη διαγραφή της υπάρχουσας μετάφρασης του τρέχοντος τμήματος. Μπορείτε να πετύχετε το ίδιο με καθαρισμό του τμήματος-στόχου και πατώντας <guibutton>Enter.</guibutton></para>
+      </listitem>
+    </varlistentry> <varlistentry> <term>Εισαγωγή βέλτιστης ασαφούς επλογής (fuzzy match)<indexterm class="singular">
+          <primary>Επιλογές μενού</primary> <secondary>Συμπεριφορά Επεξεργασίας</secondary> <tertiary>Εισαγωγή ασαφών αντιστοιχίσεων (fuzzy matches)</tertiary>
+        </indexterm></term>
+
+      <listitem>
+        <para>Το OmegaT εισάγει τη μετάφραση της συμβολοσειράς που είναι πιο όμοια με την τρέχουσα πηγή, εφόσον βρίσκεται πάνω από το κατώφλι ομοιότητας που εσείς επιλέξατε σε αυτό τον διάλογο. Το πρόθεμα (από προεπιλογή κενό) μπορεί να χρησιμοποιηθεί για επισήμανση μεταφράσεων με tag, που επιτυγχάνεται μέσω των fuzzy matches. Αν προσθέσετε ένα πρόθεμα (π.χ. [fuzzy]), μπορείτε να εντοπίσετε αργότερα αυτές τις μεταφράσεις, για να δείτε αν είναι σωστές.</para>
+      </listitem>
+    </varlistentry>
+  </variablelist>
+
+  <para>Τα κουτάκια επιλογής (check boxes) στο κάτω μέρος του παραθύρου του διαλόγου χρησιμεύουν στο εξής:</para>
+
+  <variablelist> <varlistentry> <term>Προσπάθεια μετατροπής αριθμών, όταν γινεται εισαγωγή ενός fuzzy match<indexterm class="singular">
+          <primary>Επιλογές μενού</primary> <secondary>Συμπεριφορά επεξεργασίας</secondary> <tertiary>Μετατροπή αριθμών</tertiary>
+        </indexterm></term>
+
+      <listitem>
+        <para>Αν κάνετε αυτή την επιλογή, όταν εισάγετε ένα fuzzy match, είτε χειρονακτικά, είτε αυτόματα, το OmegaT προσπαθεί να μετατρέψει τους αριθμούς στα fuzzy matches, σύμφωνα με τα περιεχόμενα προέλευσης. Υπάρχουν διάφοροι περιορισμοί:</para>
+
+        <itemizedlist>
+          <listitem>
+            <para>Το τμήμα προέλευσης και οι ασαφείς αντιστοιχίσεις (fuzzy matches) πρέπει να περιέχουν την ίδια λίστα αριθμών</para>
+          </listitem>
+        
+          <listitem>
+            <para>Οι αριθμοί πρέπει είναι ακριβώς οι ίδιοι ανάμεσα στης πηγές και τις αντιστοιχίσεις με τους στόχους.</para>
+          </listitem>
+        
+          <listitem>
+            <para>Λαμβάνονται υπ' όψη μόνον integers και simple floats (χρησιμοποιώντας το period σαν δεκαδικό χαρακτήρα, π.χ. 5.4, αλλά όχι 5,4 ή 54E-01).</para>
+          </listitem>
+        </itemizedlist>
+      </listitem>
+    </varlistentry> </variablelist> <variablelist> <varlistentry> <term>Να επιτρέπεται στη μετάφραση να είναι ίδια με τις πηγές<indexterm class="singular">
+          <primary>Επιλογές μενού</primary> <secondary>Συμπεριφορά επεξεργασίας</secondary> <tertiary>Μετάφραση ίδια με τις πηγές</tertiary>
+        </indexterm></term>
+
+      <listitem>
+        <para>Τα έγγραφα προς μετάφραση μπορούν να περιέχουν εμπορικά σήματα κατατεθέντα, ονόματα, ή άλλα στοιχεία, που θα είναι το ίδιο στα μεταφρασμένα έγγραφα. Υπάρχουν δύο στρατηγικές για τμήματα που περιέχουν μόνο τέτοια αμετάβλητα κείμενα.</para>
+
+        <para>Μπορείτε να αποφασίσετε να μη μεταφράσετε καθόλου αυτά τα τμήματα. Το OmegaT θα αναφέρει, στη συνέχεια, αυτά τα τμήματα ως μη μεταφρασμένα. Αυτή είναι η προεπιλογή. Η εναλλακτική είναι να εισάγετε μια μετάφραση που είναι όμοια με το κείμενο προέλευσης. Το OmegaT μπορεί να αντιληφθεί ότι το κάνατε αυτό. ΓΙα να το πετύχετε, πηγαίνετε στις <menuchoice> <guimenu>Επιλογές</guimenu> <guimenuitem>Συμπεριφορά Επεξεργασίας...</guimenuitem> </menuchoice> και επιλέξτε το κουτάκι <emphasis role="bold">Να επιτρέπεται στη μετάφραση να είναι ίδια με τις πηγές</emphasis>.</para>
+      </listitem>
+    </varlistentry> </variablelist> <variablelist> <varlistentry> <term>Εξαγωγή του τμήματος σε αρχεία κειμένου<indexterm class="singular">
+          <primary>Επιλογές μενού</primary> <secondary>Συμπεριφορά επεξεργασίας</secondary> <tertiary>Γίνεται εξαγωγή του τρέχοντος τμήματος</tertiary>
+        </indexterm></term>
+
+      <listitem>
+        <para>Η λειτουργία εξαγωγής κειμένου εξάγει δεδομένα μέσα από το τρέχον έργο <application>OmegaT</application> σε απλά αρχεία κειμένου. Τα δεδομένα εξάγονται όταν ανοίξει το τμήμα. Τα αρχεία εμφανίζονται στον υποκατάλογο /script μέσα στον κατάλογο των αρχείων χρήστη του OmegaT και περιλαμβάνουν:</para>
+
+        <itemizedlist>
+          <listitem>
+            <para>Το περιεχόμενο του τμήματος κειμένου προέλευσης (<filename>source.txt</filename>).</para>
+          </listitem>
+
+          <listitem>
+            <para>Το περιεχόμενο του τμήματος με το κείμενο στόχο (<filename>target.txt</filename>).</para>
+          </listitem>
+
+          <listitem>
+            <para>Το κείμενο που επιλέχθηκε από τον χρήστη, όταν πατά το <keycap>Ctrl+Shift+C</keycap> ή αν επιλέξει το <guimenuitem>Επεξεργασία &gt; Εξαγωγή επιλογής</guimenuitem> (<filename>selection.txt</filename>).</para>
+          </listitem>
+        </itemizedlist>
+
+        <para>Το περιεχόμενο των αρχείων επικαλύπτεται, ή όταν ανοίγει ένα νέο τμήμα (source.txt και target.txt), ή όταν εξάγετε μια νέα επιλογή (selection.txt). Αυτά είναι αμορφοποίητα, απλά αρχεία κειμένου. Η όλη διαδικασία μπορεί να καθοδηγείται και να ελέγχεται μέσω ενός σεναρίου βασισμένου σε Tck/Tcl. Βλέπε <ulink url="http://www.omegat.org/en/howtos/text_export.html">Χρήση της λειτουργίας εξαγωγής κειμένου του OmegaT</ulink> για συγκεκριμμένα παραδείγματα και υποδείξεις.</para>
+      </listitem>
+    </varlistentry> </variablelist> <variablelist> <varlistentry> <term>Η μετάβαση στο Επόμενο αμετάφραστο τμήμα σταματά εκεί όπου υπάρχει, τουλάχιστον, μια εναλλακτκή μετάφραση<indexterm class="singular">
+          <primary>Επιλογές μενού</primary> <secondary>Συμπεριφορά επεξεργασίας</secondary> <tertiary>Τμήματα με εναλλακτική μετάφραση</tertiary>
+        </indexterm></term>
+
+      <listitem>
+        <para>Αν θέλουμε να αποφύγουμε οποιεσδήποτε κακές-μεταφράσεις, σε περίπτωση τμημάτων με πολλά πιθανά περιεχόμενα προέλευσης, η επιλογή μας σε αυτό κουτάκι θα οδηγήσει τη <emphasis role="bold"> Μετάβαση στο επόμενο Αμετάφραστο τμήμα</emphasis>να σταματά στο επόμενο παρόμοι τμήμα, ανεξάρτητα από το αν έχει ήδη μεταφρασθεί ή όχι.</para>
+      </listitem>
+    </varlistentry>
+  </variablelist>
+</chapter>

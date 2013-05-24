@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<appendix id="appendix.keyboard">
+  <title>Συντμεύσεις πληκτρολογίου στο πρόγραμμα επεξεργασίας (editor)</title>
+
+  <para>Αυτό το σύντομο κείμενο περιγράφει τις συμπεριφορές-κλειδί στην περιοχή του editor. Ο όρος &quot;Μετακινηθείτε στο έσω τμήμα&quot; σημαίνει ότι ο δρομέας θα μετακινηθεί στην αρχή του τμήματος, αν προηγουμένως βρισκόταν πριν το τμήμα, ενώ θα μετακινηθεί στο τέλος του τμήματος, αν πριν, βρισκόταν μετά το τμήμα.</para>
+
+  <table>
+    <title>Συμπεριφορά κλειδί στον editor</title>
+
+    <tgroup cols="2">
+      <colspec align="left" colnum="1"/>
+
+      <colspec align="left" colnum="2"/>
+
+      <thead>
+        <row>
+          <entry align="left">Συνδυασμός κλειδί</entry>
+
+          <entry align="left">Ενέργεια</entry>
+        </row>
+      </thead>
+
+      <tbody>
+        <row>
+          <entry><emphasis role="bold">Αριστερά:</emphasis></entry>
+
+          <entry>κατά έναν χαρακτήρα στα αριστερά, αλλά όχι όχι πέρα από την αρχή του τμήματος</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">Δεξιά:</emphasis></entry>
+
+          <entry>κατά έναν χαρακτήρα στα δεξιά, αλλά όχι πέρα από το τέλος του τμήματος&lt;τμήμα 0008&gt;</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">Ctrl+Left: </emphasis></entry>
+
+          <entry>κατά μία λέξη στα αριστερά, αλλά όχι πέρα από την αρχή του τμήματος</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">Ctrl+Right: </emphasis></entry>
+
+          <entry>κατά μία λέξη στα δεξιά, αλλά όχι πέρα από το τέλος του τμήματος</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">PgUp: </emphasis></entry>
+
+          <entry>μετακύλιση προς τα πάνω μέσα στο έγγραφο</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">PgDn: </emphasis></entry>
+
+          <entry>μετακύλιση προς τα κάτω μέσα στο έγγραφο</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">Αριχικό σημείο*</emphasis></entry>
+
+          <entry>μετακίνηση στην αρχή της γραμμής του τμήματος κειμένου</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">Τέλος*</emphasis></entry>
+
+          <entry>μετακίνηση στο τέλος της γραμμής του τμήματος κειμένου</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">Ctrl+Home</emphasis></entry>
+
+          <entry>μετακίνηση στην αρχή του τμήματος</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">Ctrl+End</emphasis></entry>
+
+          <entry>μετακίνηση στο τέλος του τμήματος</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">Ctrl+PgUp</emphasis></entry>
+
+          <entry>μετακίνηση στην αρχή του εγγράφου (Mac: <emphasis role="bold">Cmd+PgUp</emphasis>)</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">Ctrl+PgDn</emphasis></entry>
+
+          <entry>μετακίνηση στο τέλος του εγγράφου (Mac: <emphasis role="bold">Cmd+PgDn</emphasis>)</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">Backspace*</emphasis></entry>
+
+          <entry>διαγραφή του χαρακτήρα πριν τον δρομέα</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">Διαγραφή*</emphasis></entry>
+
+          <entry>διαγραφή του χαρακτήρα μετά τον δρομέα</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">Ctrl+Backspace</emphasis></entry>
+
+          <entry>διαγραφή των χαρακτήρων μέχρι την αρχή της τρέχουσας λέξης (Mac: <emphasis role="bold">Alt+Backspace</emphasis>)</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">Ctrl+Delete</emphasis></entry>
+
+          <entry>διαγραφή των χαρακτήρων μέχρι την αρχή της επόμενης λέξης (Mac: <emphasis role="bold">Alt+Delete</emphasis>)</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">Ctrl+Enter</emphasis></entry>
+
+          <entry>άνοιγμα του προηγούμενου τμήματος κειμένου (Mac: <emphasis role="bold">Cmd+Enter</emphasis>)</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">Ctrl+A</emphasis></entry>
+
+          <entry>επιλογή πλήρους τμήματος κειμένου (Mac: <emphasis role="bold">Cmd+A</emphasis>)</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">Ctrl+Shift+O</emphasis></entry>
+
+          <entry>εναλλαγή RTL-LTR</entry>
+        </row>
+      </tbody>
+    </tgroup>
+  </table>
+
+  <para>* Αυτά τα πλήκτρα συμπεριφέρονται διαφορετικά όταν ο δρομέας είναι έξω από το επεξεργάσιμο τμήμα:</para>
+
+  <itemizedlist>
+    <listitem>
+      <para><emphasis role="bold">Αρχή: </emphasis> ο δρομέας στην αρχή του ενεργού τμήματος</para>
+    </listitem>
+
+    <listitem>
+      <para><emphasis role="bold">Τέλος: </emphasis> ο δρομέας στο τέλος του ενεργού τμήματος</para>
+    </listitem>
+
+    <listitem>
+      <para><emphasis role="bold">Backspace: </emphasis>τίποτε</para>
+    </listitem>
+
+    <listitem>
+      <para><emphasis role="bold">Διαγραφή: </emphasis>τίποτε</para>
+    </listitem>
+
+    <listitem>
+      <para><emphasis role="bold">Αν κάνετε κλικ</emphasis> σε ένα οποιοδήποτε πληκτρο με έναν χαρακτήρα, εκτός του επεξεργάσιμου τμήματος, αυτός θα αγνοηθεί.</para>
+    </listitem>
+  </itemizedlist>
+
+  <para>Το πλήκτρο &quot;Shift&quot; δεν έχει καμία ειδική συμπεριφορά από μόνο του: όταν το πατήσετε, όλα τα πλήκτρα μετακινούν τον δρομέα με τον συνηθισμένο τους τρόπο, εκτός από την περίπτωση του συνδυασμού <literal>Shift+Enter</literal> πουεισάγει μια αλλαγή γραμμής στο κείμενο.</para>
+
+  <para>Οι εντολές που ισχύουν σε όλο το σύστημα: Επιλογή όλων (<keycap>Ctrl+A</keycap>), Επικόλληση (<emphasis role="bold">Ctrl+V</emphasis>), Αποκοπή (<emphasis role="bold">Ctrl+X</emphasis>), Αντιγραφή (<emphasis role="bold">Ctrl+C)</emphasis>, Εισαγωγή αντιστοίχησης <emphasis role="bold">(Ctrl+I</emphasis>) και Εισαγωγή αρχείου προέλευσης (<emphasis role="bold">Ctrl+Shift+I</emphasis>) ενεργούν, επί της αρχής, μόνο πάνω στο κείμενο που βρίσκεται στο τρεχόντως ανοικτό τμήμα.</para>
+
+  <para>Σημειώστε ότι μπορείτε να επαναπροσδιορίσετε τις συντομεύσεις σύμφωνα με τις δικές σας επιθυμίες. Δείτε το <link linkend="ch04.shortcuts.customization">Παράρτημα για την Παραμετροποίηση συντομεύσεων</link></para>
+</appendix>

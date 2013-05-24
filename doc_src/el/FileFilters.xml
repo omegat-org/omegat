@@ -1,0 +1,391 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<chapter id="chapter.file.filters">
+  <title>Φίλτρα αρχείων</title>
+
+  <para>Το OmegaT έχει να επιδείξει φίλτρα υψηλής παραμετροποίησης, που σας επιτρέπουν να ρυθμίζετε πολλά πράγματα. Τα φίλτρα είναι κομμάτια κώδικα ικανά για:</para>
+
+  <itemizedlist>
+    <listitem>
+      <para>Ανάγνωση του εγγράφου σε ορισμένες ειδικές μορφές αρχείου. Για παράδειγμα, απλά αρχεία κειμένου.</para>
+    </listitem>
+  </itemizedlist>
+
+  <itemizedlist>
+    <listitem>
+      <para>Εξαγωγή του μεταφράσιμου περιεχομένου από το αρχείο.</para>
+    </listitem>
+  </itemizedlist>
+
+  <itemizedlist>
+    <listitem>
+      <para>Αυτοματοποίηση της τροποποίησης των ονομάτων αρχείου των μεταφρασμένων εγγράφων, αντικαθιστώντας τα μεταφράσιμα περιεχόμενα με τη μετάφρασή του.</para>
+    </listitem>
+  </itemizedlist>
+
+  <para>Για να δείτε όλες τις μορφές αρχείου που μπορεί να χειριστεί το OmegaT, δείτε το μενού <guimenuitem>Επιλογές &gt; Φϊλτρα αρχείου ... </guimenuitem></para>
+
+  <para>Οι περισσότεροι χρήστες θα βρουν επαρκείς τις προκαθορισμένς επιλογές για τα φίλτρα αρχείου. Αν αυτό δεν ισχύει, ανοίξτε τον κύριο διάλογο επιλέγοντας<emphasis role="bold"> Επιλογές → Φίλτρα αρχείου...</emphasis> από το κύριο μενού. Μπορείτε, επίσης, να ενεργοποιήσετε φίλτρα για το κάθε έργο, που θα χρησιμοποιούνται μόνο στο τρέχον έργο, κάνοντας την επιλογή <emphasis role="bold">Φίλτρα αρχείου...</emphasis>στις Ιδιότητες Έργου.</para>
+
+  <para>Μπορείτε να ενεργοποιήσετε τα ειδικά φίλτρα για το κάθε έργο μέσα από το <emphasis role="bold">Έργο → Ιδιότητες...</emphasis>. Κάντε κλικ στο κουμπί <guibutton>Φίλτρα αρχείου</guibutton> και ενεργοποιήστε το κουτάκι επιλογής (check box) <guimenuitem>Ενεργοποίηση φίλτρων για το κάθε έργο</guimenuitem><indexterm class="singular">
+      <primary>Φίλτρα αρχείου</primary> <secondary>Φίλτρα αρχείου για το κάθε έργο</secondary>
+    </indexterm>. Ένα αντίγραφο με τις ρυθμίσεις των φίλτρων θα αποθηκευθεί μαζί με το έργο σε αυτή την περίπτωση. Αν αλλάξετε αργότερα τα φίλτρα, θα ενημερωθούν μόνο τα φίλτρα του έργου, ενώ τα φίλτρα του χρήστη θα παραμείνουν αμετάβλητα.</para>
+
+  <para><emphasis role="bold">Προειδοποίηση!</emphasis> Αν αλλάξετε τις επιλογές φίλτρου ενόσω το έργο είναι ανοικτό, θα πρέπει να ξαναφορτώσετε το έργο για να μπορέσουν να εφαρμοσθούν οι αλλαγές.</para>
+
+  <section id="file.filters.dialog">
+    <title>Διάλογος φίλτρων αρχείου<indexterm class="singular">
+        <primary>Φϊλτρα αρχείου</primary> <secondary>Διάλογο</secondary>
+      </indexterm></title>
+
+    <para>Αυτός ο κατάλογος εμφανίζει τα διαθέσιμα φίλτρα αρχείου. Αν δεν επιθυμείτε να χρησιμοποιείτε το OmegaT για να μεταφράσετε κάποια είδη αρχείου, μπορείτε να απενεργοποιήσετε το αντίστοιχο φίλτρο αποεπιλέγοντας το αντίστοιχο κουτάκι μετά από το όνομά του. Το OmegaT θα παραβλέψει τα κατάλληλα αρχεία κατά τη φόρτωση των αρχείων και θα τα αντιγράψει αμετάβλητα όταν δημιουργεί τα έγγραφα-στόχο. Όταν επιθυμείτε να ξαναχρησιμοποιήσετε το φίλτρο, απλώς τσεκάρετε το κουτάκι επιλογής. Κάντε κλικ στις <emphasis role="bold">Επιλογές</emphasis> για να ρυθμίσετε τα φίλτρα αρχείων στις προεπιλογές. Για να επεξεργαστείτε ποια αρχεία και σε τι κωδικοποίηση θα πρέπει να επεξεργάζεται το φίλτρο, επιλέξτε το φίλτρο από τη λίστα και κάντε κλικ στο <emphasis role="bold">Επεξεργασία.</emphasis></para>
+  </section>
+
+  <section id="filters.options">
+    <title>Επιλογές φίλτρου<indexterm class="singular">
+        <primary>Φίλτρα αρχείου</primary> <secondary>Επιλογές</secondary>
+      </indexterm></title>
+
+    <para>Διάφορα φίλτρα (Αρχεία κειμένου, αρχεία XHTML, αρχεία HTML και XHTML, αρχεία OpenDocument και αρχεία Microsoft Open XML) διαθέτουν μια ή και περισσότερες ειδικές επιλογές. Για να τροποποιήσετε τις επιλογές, επιλέξτε το φίλτρο από τη λίστα και κάντε κλικ στις <emphasis role="bold">Επιλογές</emphasis>. Οι διαθέσιμες επιλογές είναι:</para>
+
+    <para><emphasis role="bold">Αρχεία κειμένου</emphasis></para>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis>Να γίνεται κατάτμηση παραγράφου στις αλλαγές γραμμής, στις κενές γραμμές ή ποτέ:</emphasis></para>
+
+        <para>Αν είναι ενεργοί οι κανόνες κατάτμησης προτάσεων, το κείμενο θα κατατμηθεί περαιτέρω, σύμφωνα με την επιλογή που κάνετε εδώ.</para>
+      </listitem>
+    </itemizedlist>
+
+    <para><emphasis role="bold">Αρχεία PO</emphasis></para>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis>Να επιτρέπονται κενές μεταφράσεις στο αρχείο στόχος</emphasis>:</para>
+
+        <para>Αν είναι ενεργοποιημένο, όταν ένα τμήμα PO (που μπορεί να είναι και μια ολόκληρη παράγραφος) δεν είναι μεταφρασμένο, η μετάφραση θα είναι κενή στο αρχείο-στόχο. Τεχνικά μιλώντας, το τμήμα <code>msgstr</code> μέσα στο αρχείο-στόχο PO, αν έχει δημιουργηθεί, θα είναι κενό. Επειδή αυτή είναι η προτυποποιημένη (standard) συμπεριφορά στα αρχεία PO, είναι ενεργοποιημένη από προεπιλογή. Αν η επιλογή αυτή είναι απενεργοποιημένη, το κείμενο προέλευσης θα αντιγραφεί στο τμήμα-στόχο.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis>Να παρακαμφθεί η κεφαλίδα PO</emphasis></para>
+
+        <para>Η κεφαλίδα PO θα παραβλεφθεί και θα μείνει αμετάβλητη, αν κάνετε αυτή την επιλογή.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis>Να γίνει αυτόματη αντικατάσταση του 'nplurals=INTEGER; plural=EXPRESSION;' στην κεφαλίδα</emphasis></para>
+
+        <para><emphasis><emphasis>Η επιλογή αυτή επιτρέπει στο OmegaT να παρακάμπτει τις προδιαγραφές της κεφαλίδας του αρχείου PO και να χρησιμοποιεί την προεπιλογή για την γλώσσα-στόχο που επιλέξατε.</emphasis></emphasis></para>
+      </listitem>
+    </itemizedlist>
+
+    <para><emphasis role="bold">Αρχεία XHTML</emphasis></para>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis>Προσθέστε ή ξαναγράψτε τη δήλωση κωδικοποίησης των αρχείων HTML και XHTML</emphasis>: συχνά, τα αρχεία-στόχος πρέπει να έχουν μία διαφορετική ομάδα χαρακτήρων κωδικοποίησης από εκείνη που έχουν τα αρχεία προέλευσης (ανεξάρτητα από το αν ορίζεται ρητά, ή αν υποννοείται). Χρησιμοποιώντας αυτή την επιλογή, ο μεταφραστής μπορεί να ορίσει κατά πόσο τα αρχεία-στόχος πρέπει να περιλαμβάνουν τη δήλωση κωδικοποίησης. Για παράδειγμα, αν το φίλτρο αρχείου προδιορίζει το UTF8 ως σχήμα κωδικοποίησης για τα αρχεία-στόχο, αν επιλεχθεί το Πάντα, θα εξασφαλισθεί ότι αυτές οι πληροφορίες περιλαμβάνονται στα μεταφρασμένα αρχεία.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis>Μεταφράστε τις ακόλουθες ιδιότητες (attributes)</emphasis>: οι επιλεγμένες ιδιότητες θα εμφανίζονται ως τμήματα στο παράθυρο της περιοχής Επεξεργασίας.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis>Έναρξη μιας νέας παραγράφου: η &lt;br&gt;</emphasis> ετικέτα HTML θα αποτελεί μια παράγραφο από την άποψη της κατάτμησης.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis>Να παρακάμπτεται η κανονική έκφραση (regex) για αντιστοίχιση κειμένου</emphasis>: το τμήμα που αντιστοιχίζει την κανονική έκφραση (regex) θα παρακαμφθεί. Θα εμφανίζεται με κόκκινη επισήμανση στον tag validator. Το κείμενο στο τμήμα προέλευσης που αντιστοιχίζεται, εμφανίζεται με πλάγιους χαρακτήρες (italic).</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis>Να μη μεταφράσετε τις ιδιότητες περιεχομένου των μετα-ετικετών ... :</emphasis> Οι παρακάτω μετα-ετικέτες δεν θα μεταφρασθούν.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis>Να μη μεταφράσετε το περιεχόμενο των ετικετών με τα παρακάτω ζεύγη ιδιοτήτων key-value (διαχωρισμένα με κόμματα)</emphasis>: μια αντιστοίχιση στη λίστα των ζευγών key-value, θα οδηγήσει στην παράβλεψη του περιεχομένου των ετικετών</para>
+
+        <para>Ενίοτε είναι χρήσιμο να μπορείτε να κάνετε κάποιες ετικέτες μη-μεταφράσιμες, με βάση την τιμή των ιδιοτήτων. Για παράδειγμα, <literal>&lt;div class=&quot;hide&quot;&gt; &lt;span translate=&quot;no&quot;&gt;</literal> Μπορείτε να ορίσετε ζεύγη key-value για τις ετικέτες που πρέπει να παραμείνουν αμετάφραστες. Στο παραπάνω παράδειγμα, το πεδίο θα πρέπει να περιέχει: <literal>class=hide, translate=no </literal></para>
+      </listitem>
+    </itemizedlist>
+
+    <para><emphasis role="bold">Αρχεία Microsoft Office Open XML</emphasis></para>
+
+    <para>Μπορείτε να επιλέξετε ποια στοιχεία θα μεταφρασθούν. Θα εμφανίζονται ως ξεχωριστά τμήματα στη μετάφραση.</para>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis role="bold">Word:</emphasis> μη-ορατό κείμενο οδηγιών, σχόλια, υποσημειώσεις, σημειώσεις τέλους, υποσέλιδα</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis role="bold">Excel: </emphasis>σχόλια, ονόματα υπολογιστικών φύλλων</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis role="bold">Power Point</emphasis>: σχόλια διαφανειών, slide masters, διάταξη διαφανειών</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis role="bold">Global:</emphasis> γραφήματα, διαγράμματα, σχέδια, WordArt</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis role="bold">Άλλες επιλογές:</emphasis></para>
+
+        <itemizedlist>
+          <listitem>
+            <para><emphasis>Aggregate tags</emphasis>: αν τις επιλέξετε, οι ετικέτες χωρίς μεταφράσιμο κείμενο μεταξύ τους, θα συμπτυχθούν σε μεμονωμένες ετικέτες.</para>
+          </listitem>
+
+          <listitem>
+            <para><emphasis>Διατήρηση διαστημάτων σε όλες τις ετικέτες</emphasis>: αν το επιλέξετε, τα &quot;κενά διαστήματα&quot; (π.χ., διαστήματα και νέες γραμμές) θα διατηρηθούν, ακόμη και αν κάτι τέτοιο δεν ορίσθηκε τεχνικά μέσα στο έγγραφο</para>
+          </listitem>
+        </itemizedlist>
+      </listitem>
+    </itemizedlist>
+
+    <para><emphasis role="bold">Αρχεία HTML και XHTML files</emphasis></para>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis>Προσθέστε ή ξαναγράψτε τη δήλωση κωδικοποίησης στα αρχεί HTML και XHTML</emphasis>: Πάντα (προεπιλογή), Μόνον αν το αρχείο (X)HTML έχει μια κεφαλίδα, Μόνον αν το αρχείο (X)HTML έχει μια δήλωση κωδικοποίησης, Ποτέ</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis>Μεταφράστε τις ακόλουθες ιδιότητες (attributes)</emphasis>: οι επιλεγμένες ιδιότητες θα εμφανίζονται ως τμήματα στο παράθυρο της περιοχής Επεξεργασίας.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis>Αρχίστε μια νέα παράγραφο</emphasis>: η &lt;br&gt; ετικέτα HTML θα αντιπροσωπεύει μια παράγραφο, από τη σκοπιά της κατάτμησης.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis>Να παρακάμπτεται η κανονική έκφραση (regex) για αντιστοίχιση κειμένου</emphasis>: το κείμενο που αντιστοιχεί στην κανονική έκφραση (regex), θα παρακαμφθεί.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis>Να μη μεταφράσετε τις ιδιότητες περιεχομένου των μετα-ετικετών ... :</emphasis> Οι παρακάτω μετα-ετικέτες δεν θα μεταφρασθούν.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis>Να μη μεταφράσετε το περιεχόμενο των ετικετών με τα παρακάτω ζεύγη ιδιοτήτων key-value (διαχωρισμένα με κόμματα)</emphasis>: μια αντιστοίχιση στη λίστα των ζευγών key-value, θα οδηγήσει στην παράβλεψη του περιεχομένου των ετικετών</para>
+      </listitem>
+    </itemizedlist>
+
+    <para><emphasis role="bold">Αρχεία κειμένου</emphasis></para>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis>Να γίνεται κατάτμηση παραγράφου στις αλλαγές γραμμής, στις κενές γραμμές ή ποτέ:</emphasis>:</para>
+
+        <para>Αν είναι ενεργοί οι κανόνες κατάτμησης προτάσεων, το κείμενο θα κατατμηθεί περαιτέρω, σύμφωνα με την επιλογή που κάνετε εδώ.</para>
+      </listitem>
+    </itemizedlist>
+
+    <para><emphasis role="bold">Αρχεία σε μορφή Open Document Format (ODF)</emphasis></para>
+
+    <itemizedlist>
+      <listitem>
+        <para>Μπορείτε να επιλέξετε ποια από τα παρακάτω πράγματα πρέπει να μεταφρασθούν:</para>
+
+        <para>Καταχωρήσεις πίνακα περιεχομένων, σελιδοδείκτες, παραπομπές σελιδοδεικτών, σημειώσεις, σχόλια, σημειώσεις παρουσίασης, σύνδεσμοι (URL), ονόματα λογιστικών φύλλων</para>
+      </listitem>
+    </itemizedlist>
+  </section>
+
+  <section id="edit.filter.dialog">
+    <title>Επεξεργασία διαλόγου φίλτρου<indexterm class="singular">
+        <primary>Αρχεία φίλτρου</primary> <secondary>Επεξεργασία</secondary>
+      </indexterm></title>
+
+    <para>Αυτός ο διάλογος σας επιτρέπει να ορίσετε τα μοτίβα ονόματος αρχείου για τα αρχεία που πρέπει να υποστούν επεξεργασία από το φίλτρο, να παραμετροποιήσετε τα ονόματα αρχείων των μεταφρασμένων αρχείων και να επιλέξετε τις κωδικοποιήσεις που θα πρέπει να χρησιμοποιηθούν για τη φόρτωση και την αποθήκευση του αντίστοιχου μεταφρασμένου αρχείου. Για την τροποποίηση του μοτίβου ενός φίλτρου αρχείου, ή θα πρέπει να τροποποιήσετε άμεσα τα πεδία, ή να κάντε κλικ στο <emphasis role="bold">Επεξεργασία.</emphasis> Για την προσθήκη ενός μοτίβου με φίλτρο αρχείου, κάντε κλικ στο <emphasis role="bold">Προσθήκη</emphasis>. Ο ίδιος διάλογος χρησιμοποιείται για την προσθήκη ενός μοτίβου, ή για την επεξεργασία ενός συγκεκριμένου μοτίβου. Ο διάλογος είναι χρήσιμος, διότι περιλαμβάνει ένα ειδικό πρόγραμμα επεξεργασίας για μοτίβα των ονομάτων αρχείου-στόχου, με τον οποίο μπορείτε να παραμετροποιήσετε τα ονόματα των αρχείων εξόδου.</para>
+
+    <section id="source.filetype.and.filename.pattern">
+      <title><indexterm class="singular">
+          <primary>Αρχεία προέλευσης</primary> <secondary>Τύπος αρχείου και μοτίβο ονόματος</secondary>
+        </indexterm>Τύπος αρχείου προέλευσης, μοτίβο ονόματος αρχείου<indexterm class="singular">
+          <primary>Φίλτρα αρχείου</primary> <secondary>Τύπος αρχείου και μοτίβο ονόματος</secondary>
+        </indexterm></title>
+
+      <para>Όταν το OmegaT εντοπίσει ένα αρχείο στον κατάλογο προέλευσής του, θα προσπαθήσει να επιλέξει το φίλτρο, βασιζόμενο στην επέκταση του αρχείου. Πιο συγκεκριμένα, το OmegaT προσπαθεί να αντιστοιχίσει τα μοτίβα αρχείου προέλευσης για το κάθε φίλτρο, με το όνομα αρχείου. Για παράδειγμα, το μοτίβο <literal>*.xhtml </literal>αντιστοιχίζει οποιοδήποτε αρχείο με την επέκταση <literal>.xhtml</literal>. Αν βρεθεί το κατάλληλο φίλτρο, τότε το αρχείο θα του ανατεθεί για περαιτέρω επεξεργασία. Για παράδειγμα, από προεπιλογή, τα αρχεία XHTML χρησιμοποιούνται για την επεξεργασία αρχείων με την επέκταση .xhtml. Μπορείτε να προσθέσετε ή να αλλάξετε μοτίβα ονόματος αρχείου, για τα αρχεία που θα υποστούν επεξεργασία από το κάθε αρχείο. Τα μοτίβα ονομάτων αρχείου προέλευσης χρησιμοποιούν χαρακτήρες τζόλυ (wild card) σαν εκείνους που χρησιμοποιούνται στις <emphasis role="bold">Αναζητήσεις. </emphasis>Ο χαρακτήρας '*' αντιστοιχίζει μηδέν ή και περισσότερους χαρακτήρες. Ο χαρακτήρας '?' αντιστοιχίζει ακριβώς έναν χαρακτήρα. Όλοι οι αλλοι χαρακτήρες αντιπροσωπεύουν τον εαυτό τους. Για παράδειγμα, αν θέλετε το φίλτρο να χεριίζεται τα αρχεία readme (<literal>readme, read.me</literal> και <literal>readme.txt</literal>) θα πρέπει να χρησιμοποιείτε το μοτίβο <literal>read*</literal>.</para>
+    </section>
+
+    <section id="source.and.target.files.encoding">
+      <title>Κωδικοποίηση αρχείου προέλευσης και στόχου</title>
+
+      <indexterm class="singular">
+        <primary>Αρχεία προέλευσης</primary> <secondary>Κωδικοποίηση</secondary>
+      </indexterm>
+
+      <indexterm class="singular">
+        <primary>Αρχεία στόχος</primary> <secondary>Κωδικοποίηση</secondary>
+      </indexterm>
+
+      <indexterm class="singular">
+        <primary>Φίλτρα αρχείου</primary> <secondary>Πηγή, στόχος - Κωδικοποίηση</secondary>
+      </indexterm>
+
+      <para>Μόνον ένας περιορισμένος αριθμός τύπων αρχείου διευκρινίζουν μια υποχρεωτική κωδικοποίηση. Οι μορφές αρχείου που δεν διευκρινίζουν την κωδικοποίησή τους θα χρησιμοποιήσουν την κωδικοποίηση που ορίσατε γαι την επέκταση που αντιστοιχίζει το όνομά τους. Για παράδειγμα, από προεπιλογή <literal>.txt</literal> τα αρχεία θα φορτώνονται χρησιμοποιώντας την προεπιλεγμένη κωδικοποίηση του λειτουργικού σας συστήματος. Μπορείτε να αλλάξετε την κωδικοποίηση προέλευσης για κάθε διαφορετικό μοτίβο ονόματος αρχείου προέλευσης. Αυτά τα αρχεία μπορούν επίσης να γραφούν με οποιαδήποτε κωδικοποίηση. Από προεπιλογή, η κωδικοποίηση του μεταφρασμένου αρχείου είναι η ίδια με εκείνη του αρχείου προέλευσης. Τα πεδία κωδικοποίησης πηγών και στόχων χρησιμοποιούν κουτιά combo που περιλαμβάνουν όλες τις υποστηριζόμενες κωδικοποιήσεις. Το &lt;auto&gt; αφήνει την επιλογή κωδικοποίησης στο <application>OmegaT</application>. Αυτό λειτουργεί ως εξής:</para>
+
+      <itemizedlist>
+        <listitem>
+          <para>Το OmegaT εντοπίζει την κωδικοποίηση του αρχείου προέλευσης χρησιμοποιώντας την δήλωση κωδικοποίησης, αν υπάρχει (αρχεία HTML, αρχεία βασιζόμενα στο XML)</para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para>Το OmegaT έχει οδηγίες να χρησιμοποιεί μια υποχρεωτική κωδικοποίηση για κάποιες μορφές αρχείου (ιδιότητες Java κλπ)</para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para>Το OmegaT χρησιμοποιεί την κωδικοποίηση προεπιλογής του λειτουργικού συστήματος για τα αρχεία κειμένου.</para>
+        </listitem>
+      </itemizedlist>
+    </section>
+
+    <section id="target.name">
+      <title>Ονόματα αρχείων στόχου<indexterm class="singular">
+          <primary>Αρχεία στόχος</primary> <secondary>Ονόματα αρχείου</secondary>
+        </indexterm></title>
+
+      <para>Μερικές φορές μπορεί να θέλετε να μετονομάσετε αυτομάτως τα αρχεία που μεταφράζετε, για παράδειγμα προσθέτοντας έναν κωδικό γλώσσας μετά το όνομα αρχείου. Το μοτίβο του ονόματος του αρχείου στόχου χρησιμοποιεί μία ειδική σύνταξη, και έτσι, αν επιθυμείτε να επεξργασθείτε αυτό το πεδίο, θα πρέπει να κάνετε κλικ στο <emphasis role="bold">Επεξεργασία...</emphasis>και να χρησιμοποιήσετε τον <indexterm class="singular">
+          <primary>Φϊλτρα αρχείου</primary> <secondary>Διάλογο</secondary>
+        </indexterm>Διάλογο επεξεργασίας μοτίβου. Αν επιθυμείτε να επιστρέψετε στις ρυθμίσεις προεπιλογής του φίλτρου, κάντε κλικ στο <emphasis role="bold">Προεπιλογές.</emphasis> Μπορείτε επίσης να τροποποιήσετε το όνομα άμεσα στο πεδίο για το μοτίβο ονόματος του αρχείου στόχου του διαλόγου φίλτρων αρχείου. Ο Διάλογος επεξεργασίας μοτίβου προσφέρει, μεταξύ των άλλων, τις εξής επιλογές:</para>
+
+      <itemizedlist>
+        <listitem>
+          <para>Η προεπιλογή είναι <literal>${filename}</literal>– το πλήρες όνομα αρχείου του αρχείου προέλευσης με την επέκταση: σε αυτή την περίπτωση το όνομα του μεταφρασμένου αρχείου είναι το ίδιο με εκείνο του αρχείου προέλευσης.</para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para><literal>${nameOnly}</literal>– σας επιτρέπει να εισάγετε μόνο το όνομα του αρχείου προέλευσης χωρίς την επέκταση.</para>
+        </listitem>
+
+        <listitem>
+          <para><literal>${extension} </literal>- η αρχική επέκταση του αρχείου</para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para><literal>${targetLocale}</literal>– ο κωδικός locale για το αρχείο στόχο (σε μορφή &quot;xx_YY&quot;).</para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para><literal>${targetLanguage}</literal>– η γλώσσα στόχος μαζί με τον κωδικό χώρας (σε μορφή &quot;XX-YY&quot;).</para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para><literal>${targetLanguageCode}</literal> – η γλώσσα στόχος - μόνον &quot;XX&quot;</para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para><literal>${targetCountryCode}</literal>– η χώρα στόχος - μόνον &quot;YY&quot;</para>
+        </listitem>
+
+        <listitem>
+          <para><literal>${timestamp-????}</literal> – χρόνος και ημερομηνία συστήματος κατα τη στιγμή δημιουργίας σε διάφορα μοτίβα</para>
+
+          <para>See <ulink url="http://docs.oracle.com/javase/1.4.2/docs/api/java/text/SimpleDateFormat.html">Τεκμηρίωση Oracle</ulink> για παραδείγματα των μοτίβων &quot;SimpleDateFormat&quot;</para>
+        </listitem>
+
+        <listitem>
+          <para><literal>${system-os-name}</literal> - το λειτουργικό σύστημα του υπολογιστή που χρησιμοποιείται</para>
+        </listitem>
+
+        <listitem>
+          <para><literal>${system-user-name}</literal> - όνομα χρήστη του συστήματος</para>
+        </listitem>
+
+        <listitem>
+          <para><literal>${system-host-name}</literal> - όνομα του συστήματος host</para>
+        </listitem>
+
+        <listitem>
+          <para><literal>${file-source-encoding}</literal> - κωδικοποίηση αρχείου προέλευσης</para>
+        </listitem>
+
+        <listitem>
+          <para><literal>${file-target-encoding}</literal> - κωδικοποίηση αρχείου στόχου</para>
+        </listitem>
+
+        <listitem>
+          <para><literal>${targetLocaleLCID}</literal> - Το locale στόχος της Microsoft</para>
+        </listitem>
+      </itemizedlist>
+
+      <para>Διατίθενται πρόσθετες ποικιλίες για τις μεταβλητές ${nameOnly} and ${Extension}. Σε περίπτωση πυ ένα όνομα αρχείου είναι αμφίσημο, μπορεί κάποιος να εφαρμόσει μεταβλητές του είδους <literal>${name only</literal><emphasis>-extension number</emphasis>} και <literal>${extension</literal>-<emphasis>extension number} </emphasis>. Αν, για παράδειγμα, το αρχικό αρχείο λέγεται Document.xx.docx, οι παρακάτω μεταβλητές θα δώσουν τα εξής αποτελέσματα:</para>
+
+      <itemizedlist>
+        <listitem>
+          <para><literal>${nameOnly-0}</literal> Document</para>
+        </listitem>
+
+        <listitem>
+          <para><literal>${nameOnly-1}</literal> Document.xx</para>
+        </listitem>
+
+        <listitem>
+          <para><literal>${nameOnly-2}</literal> Document.xx.docx</para>
+        </listitem>
+
+        <listitem>
+          <para><literal>${extension-0}</literal> docx</para>
+        </listitem>
+
+        <listitem>
+          <para><literal>${extension-1}</literal> xx.docx</para>
+        </listitem>
+
+        <listitem>
+          <para><literal>${extension-2}</literal> Document.xx.docx</para>
+        </listitem>
+      </itemizedlist>
+    </section>
+  </section>
+</chapter>

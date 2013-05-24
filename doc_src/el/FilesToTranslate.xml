@@ -1,0 +1,297 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<chapter id="chapter.files.to.translate">
+  <title>Αρχεία προς μετάφραση</title>
+
+  <section id="file.formats">
+    <title>Μορφές αρχείου<indexterm class="singular">
+        <primary>Αρχεία προέλευσης</primary> <secondary>Μορφές αρχείου</secondary>
+      </indexterm><indexterm class="singular">
+        <primary>Αρχεία στόχος</primary> <secondary>Μορφές αρχείου</secondary>
+      </indexterm></title>
+
+    <para><application>Μπορείτε να χρησιμοποιείτε το OmegaT</application> για να μεταφράσετε αρχεία σε πολλές διαφορετικές μορφές. Υπαρχουν, βασικά, δύο είδη μορφών αρχείου, απλό κείμενο και μορφοποιημένο κείμενο.</para>
+
+    <section>
+      <title>Απλά αρχεία κειμένου<indexterm class="singular">
+          <primary>Αρχεία στόχος</primary> <secondary>Απλά αρχεία κειμένου</secondary>
+        </indexterm><indexterm class="singular">
+          <primary>Αρχεία προέλευσης</primary> <secondary>Απλά αρχεία κειμένου</secondary>
+        </indexterm></title>
+
+      <para>Τα αρχεία απλού κειμένου περιέχουν μόνον κείμενο, οπότε, η μετάφρασή τους είναι τόσο απλή σαν να πληκτρολογείτε τη μετάφραση. Υπάρχουν διάφορες μέθοδοι για να ορίσετε την κωδικοποίηση αρχείου, ούτως ώστε τα αρχεία του να μην είναι αλλοιωμένα όταν ανοίγουν στο <application>OmegaT</application>. Αυτά τα αρχεία δεν περιέχουν καμία πληροφορία μορφοποίησης πέραν του &quot;κενού χώρου&quot; που χρησιμοποιείται για τη στοίχιση του κειμένου, την υπόδειξη παραγράφων, ή την εισαγωγή αλλαγής σελίδας. Δεν μπορούν να περιέχουν ή να διατηρούν πληροφορίες για το χρώμα, τη γραμματοσειρά του κειμένου κλπ.. Τρεχόντως, το <application>OmegaT</application> υποστηρίζει τις εξής μορφές απλού κειμένου:<indexterm class="singular">
+          <primary>Μορφές αρχείου</primary> <secondary>Μη μορφοποιημένα</secondary> <seealso>Αρχεία προέλευσης</seealso>
+        </indexterm></para>
+
+      <itemizedlist>
+        <listitem>
+          <para>Κείμενο με χαρακτήρες ASCII (.txt, κλπ.)</para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para>Κωδικοποιημένο κείμενο (*.UTF8)</para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para>Δεσμίδες πόρων Java resource bundles (*.properties)</para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para>Αρχεία PO (*.po)</para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para>Αρχεία INI key=value (*.ini)</para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para>Αρχεία DTD (*.DTD)</para>
+        </listitem>
+
+        <listitem>
+          <para>Αρχεία DokuWiki (*.txt)</para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para>Αρχεία υποτίτλων SubRip (*.srt)</para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para>Αρχεία Magento CE Locale CSV (*.csv)</para>
+        </listitem>
+      </itemizedlist>
+
+      <para>Το <application>OmegaT</application> μπορεί να χειρίζεται και άλλους τύπους αρχείων απλού κειμένου, συνδέοντας την επέκτασή τους με μία υποστηριζόμενη μορφή αρχείου (π.χ., τα αρχεία .pod μπορούν να συνδεθούν με το φίλτρο κειμένου ASCII) και με την προ-επεξεργασία τους με ειδικούς κανόνες κατάτμησης.</para>
+
+      <para>Τα αρχεία PO<indexterm class="singular">
+          <primary>Αρχεία προέλευσης</primary> <secondary>Αρχεία PO ως δίγλωσσα αρχεία</secondary>
+        </indexterm> μπορούν να περιέχουν τόσο το αρχείο προέλευσης, όσο και το αρχείο στόχο. Από αυτή τη σκοπιά, είναι συγχρόνως αρχεία απλού κειμένου<emphasis> αλλά και</emphasis> μεταφραστικές μνήμες. Αν για ένα δεδομένο τμήμα προέλευσης δεν υπάρχει, ακόμη, μια μετάφραση στη μνήμη του μεταφραστικού έργου (project_save.tmx), τότε η παρούσα μετάφραση θα αποθηκευθεί στο project_save.tmx ως μετάφραση προεπιλογής. Σε περίπτωση, πάντως, που το ίδιο τμήμα προέλευσης υπάρχει ήδη με μια διαφορετική μετάφραση, τότε η νέα μετάφραση θα αποθηκευθεί ως εναλλακτική.</para>
+    </section>
+
+    <section>
+      <title>Μορφοποιημένα αρχεία κειμένου<indexterm class="singular">
+          <primary>Αρχεία στόχος</primary> <secondary>Μορφοποιημένα αρχεία κειμένου</secondary> <seealso>Κείμενο με ετικέτες (tagged)</seealso>
+        </indexterm><indexterm class="singular">
+          <primary>Αρχεία προέλευσης</primary> <secondary>Μορφοποιημένα αρχεία κειμένου</secondary>
+        </indexterm></title>
+
+      <para>Τα μορφοποιημένα αρχεία κειμένου περιέχουν πληροφορίες για το είδος γραμματοσειράς, μέγεθος, χρώμα κλπ. καθώς επίσης και για το κείμενο. Συνήθως, δημιουργούνται με προγράμματα επεξεργασίας κειμένου, ή με προγράμματα επεξεργασίας HTML. Αυτές οι μορφές αρχείου σχεδιάστηκαν για να κρατούν πληροφορίες μορφοποίησης. Οι πληροφορίες μορφοποίησης μπορεί να είναι τόσο απλές όπως “αυτό είναι με bold”, ή τόσο σύνθετες, όπως ένας πίνακας δεδομένων με διαφορετικά μεγέθη γραμματοσειρών, χρώματα, θέσεις, κλπ. Στα περισσότερα εργαλεία μετάφρασης, θεωρείται σημαντικό η μορφοποίηση του αρχικού κειμένου να διακρατάται στη μετάφραση. Το OmegaT σας επιτρέπει να το πετύχετε, επισημαίνοντας τους χαρακτήρες/λέξεις που έχουν μια ειδική μορφοποίηση, με εύκολα διαχειρίσιμες ετικέτες. Απλοποιώντας, η αρχική μορφοποίηση κειμένου συνεισφέρει τα μέγιστα στη μείωση του αριθμού των ετικετών. Όπου είναι εφικτή, η ενοποίηση γραμματοσειρών, μεγέθους, χρωμάτων, κλπ. που χρησιμοποιούνται στο έγγραφο, απλοποιεί το έργο της μετάφρασης και μειώνει τον πιθανό αριθμό των σφαλμάτων ετικέτας. Το OmegaT χειρίζεται διαφορετικά το κάθε είδος αρχείου. Μπορείτε να ορίσετε μια ειδική συμπεριφορά για τα φίλτρα αρχείου. Κατά τη στιγμή που γράφονται αυτές οι εξηγήσεις, το OmegaT υποστηρίζει τις εξής μορφοποιημένες μορφές αρχείου:<indexterm class="singular">
+          <primary>Μορφές αρχείων</primary> <secondary>Μορφοποιημένα</secondary> <seealso>Αρχεία προέλευσης</seealso>
+        </indexterm></para>
+
+      <para><itemizedlist>
+          <listitem>
+            <para>ODF - OASIS Μορφή Ανοιχτών Εγγράφων ODF (*.ods, *.ots, *.odt, *.ott, *.odp, *.otp)</para>
+          </listitem>
+        </itemizedlist><itemizedlist>
+          <listitem>
+            <para>Microsoft Office Open XML (*.docx, *.dotx, *.xlsx, *.xltx,
+            *.pptx)</para>
+          </listitem>
+        </itemizedlist><itemizedlist>
+          <listitem>
+            <para>(X)HTML (*.html, *.xhtml,*.xht)</para>
+          </listitem>
+        </itemizedlist><itemizedlist>
+          <listitem>
+            <para>Μεταγλωττιστής βοήθειας HTML (*.hhc, *.hhk)</para>
+          </listitem>
+        </itemizedlist><itemizedlist>
+          <listitem>
+            <para>DocBook (*.xml)</para>
+          </listitem>
+        </itemizedlist><itemizedlist>
+          <listitem>
+            <para>XLIFF (*.xlf, *.xliff, *.sdlxliff) - of the source=target
+            variety</para>
+          </listitem>
+        </itemizedlist><itemizedlist>
+          <listitem>
+            <para>QuarkXPress CopyFlowGold (*.tag, *.xtg)</para>
+          </listitem>
+        </itemizedlist><itemizedlist>
+          <listitem>
+            <para>Αρχεία ResX (*.resx)</para>
+          </listitem>
+        </itemizedlist><itemizedlist>
+          <listitem>
+            <para>Android resource (*.xml)</para>
+          </listitem>
+        </itemizedlist><itemizedlist>
+          <listitem>
+            <para>LaTex (*.tex, *.latex)</para>
+          </listitem>
+
+          <listitem>
+            <para>Αρχεία Βοήθειας (*.xml) και Εγχειριδίου (*.hmxp)</para>
+          </listitem>
+
+          <listitem>
+            <para>Typo3 LocManager (*.xml)</para>
+          </listitem>
+        </itemizedlist><itemizedlist>
+          <listitem>
+            <para>Τοπικοποίηση WiX (*.wxl)</para>
+          </listitem>
+
+          <listitem>
+            <para>Iceni Infix (*.xml)</para>
+          </listitem>
+
+          <listitem>
+            <para>Εξαγωγή σε Flash XML (*.xml)</para>
+          </listitem>
+
+          <listitem>
+            <para>Wordfast TXML (*.txml)</para>
+          </listitem>
+
+          <listitem>
+            <para>Camtasia για Windows (*.camproj)</para>
+          </listitem>
+
+          <listitem>
+            <para>Visio (*.vxd)</para>
+          </listitem>
+        </itemizedlist></para>
+
+      <para>Το OmegaT μπορεί να χερίζεται και άλλα είδη μορφοροποιημένων αρχείων, συνδέοντας τις επεκτάσεις τους με μια από τις υποστηριζόμενες μορφές αρχείου, υπό την προϋπόθεση ότι οι αντίστοιχοι κανονες κατάτμησης θα τα καταμήσουν σωστά.</para>
+    </section>
+  </section>
+
+  <section id="other.file.formats">
+    <title>Άλλες μορφές αρχείων<indexterm class="singular">
+        <primary>Αρχεία στόχος</primary> <secondary>Άλλες μορφές αρχείων</secondary>
+      </indexterm><indexterm class="singular">
+        <primary>Αρχεία προέλευσης</primary> <secondary>Άλλες μορφές αρχείων</secondary>
+      </indexterm></title>
+
+    <para>Μπορεί να υπάρχουν και άλλες μορφές αρχείου απλού κειμένου, ή και μορφοποιημένου κειμένου, κατάλληλες για επεξεργασία από το OmegaT.</para>
+
+    <para><indexterm class="singular">
+        <primary>Αρχεία στόχος</primary> <secondary>Εργαλεία μετατροπής αρχείων</secondary>
+      </indexterm>Μπορείτε να χρησιμοποιείτε εξωτερικά εργαλεία για μετατροπή των αρχείων στις υποστηριζόμενες μορφές. Τα μεταφρασμένα αρχεία θα πρέπει, μετά, να ξαναμετατραπούν στην αρχική τους μορφή. Για παράδειγμα, αν έχετε μια παρωχημένη έκδοση του Microsoft Word, η οποία δεν μπορεί να χειρισθεί τη μορφή ODT, ορίστε μια άμεση λύση για αρχεία Word με την επέκταση .DOC:</para>
+
+    <itemizedlist>
+      <listitem>
+        <para>Εισαγωγή του αρχείου στο πρόγραμμα επεξεργασίας κειμένου ODF</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Αποθήκευση του αρχείου σε μορφή ODT</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Μεταφράστε το στο αρχείο-στόχο σε μορφή ODT</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Φορτώστε το αρχείο-στόχο στο πρόγραμμα επεξεργασίας κειμένου με ODF</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Αποθηκεύστε το αρχείο σε μορφή DOC</para>
+      </listitem>
+    </itemizedlist>
+
+    <para>Η ποιότητα μορφοποίησης του μεταφρασμένου κειμένου θα εξαρτηθεί από την ποιότητα της διαδικασίας μετατροπής. Πριν προχωρήσετε με τέτοιες μετατροπές, βεβαιωθείτε πως ελέγξατε όλες τις επιλογές. Ελέγξτε την <ulink url="http://www.omegat.org">αρχική σελίδα του OmegaT</ulink> για έναν ενημερωμένο κατάλογο με τα βοηθητικά εργαλεία μετάφρασης.</para>
+  </section>
+
+  <section id="right.to.left.languages">
+    <title>Γλώσσες από-αριστερά-προς-τα-δεξιά<indexterm class="singular">
+        <primary>Γλώσσες από-αριστερά-προς-τα-δεξιά</primary>
+      </indexterm><indexterm class="singular">
+        <primary>Αρχεία στόχος</primary> <secondary>Γλώσσες από δεξιά-προς-τα-αριστερά</secondary>
+      </indexterm><indexterm class="singular">
+        <primary>Αρχεία προέλευσης</primary> <secondary>Γλώσσες από δεξιά-προς-τα-αριστερά</secondary>
+      </indexterm></title>
+
+    <para>Η στοίχιση μεταξύ τμημάτων προέλευσης και στόχου εξαρτάται από τις γλώσσες του έργου. Από προεπιλογή, η αριστερή στοίχιση χρησιμοποιείται για τις γλώσσες από-αριστερά-προς-τα-δεξιά (LTR), ενώ η δεξιά στοίχιση για τις γλώσσες από δεξιά-προς-τα-αριστερά (RTL). Μπορείτε να αλλάζετε μεταξύ των διαφόρων τρόπων εμφάνισης, πατώντας <keycombo> <keycap>Shift</keycap> <keycap>Ctrl</keycap> <keycap>O</keycap> </keycombo> (αυτό είναι το γράμμα O και όχι ο αριθμός 0). Ο τρόπςο εναλλαγής με <keycombo> <keycap>Shift</keycap> <keycap>Ctrl</keycap> <keycap>O</keycap> </keycombo> έχει τρεις καταστάσεις:</para>
+
+    <itemizedlist>
+      <listitem>
+        <para>Στοίχιση προεπιλογής, αυτή ορίζεται από τη γλώσσα</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Αριστερή στοίχιση</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Δεξιά στοίχιση</para>
+      </listitem>
+    </itemizedlist>
+
+    <para>Με τη χρήση του RTL, το <application>OmegaT</application> δεν έχει απολύτως καμία επιρροή στον τρόπο εμφάνισης των μεταφρασμένων εγγράφων που δημιουργήθηκαν στο <application>OmegaT</application>. Ο τρόπος εμφάνισης των μεταφρασμένων εγγράφων πρέπει να τροποποιείται με την ίδια εφαρμογή (πχ. με το Microsoft Word) που χρησιμοποιείτε συνήθως για να τα εμφανίζετε, ή για να τα τροποποιείτε (ελέγξτε τα ανάλογα εγχειρίδια για παραπάνω λεπτομέρειες). Η χρήση του <keycombo> <keycap>Shift</keycap> <keycap>Ctrl</keycap> <keycap>O</keycap> </keycombo> προκαλεί μια αλλαγή στο κείμενο εισαγωγής και εμφάνισης στο <application>OmegaT</application>. Μπορεί να χρησιμοποιείται χωριστά και στις τρεις περιοχές (Επεξεργασίας, Ατελούς αντιστοίχισης/ Fuzzy Match και Γλωσσαρίου), κάνοντας κλικ στην περιοχή και εναλλάσσοντας τον τρόπο εμφάνισης. Μπορεί, επίσης, να χρησιμοποιείται σε όλα τα πεδία εισαγωγής που υπάρχουν στο <application>OmegaT</application> - στο παράθυρο αναζήτησης, για τους κανόνες κατάτμησης κλπ.</para>
+
+    <para>Σημείωση για χρήστες Mac OS X: χρησιμοπιοείτε τη συντόμευση <keycombo> <keycap>Shift</keycap> <keycap>Ctrl</keycap> <keycap>O</keycap> </keycombo>  και <emphasis role="bold">όχι το </emphasis>cmd+Ctrl+O.</para>
+
+    <section>
+      <title>Ανάμειξη συμβολοσειρών RTL και LTR στα τμήματα<indexterm class="singular">
+          <primary>Γλώσσες από-δεξιά-προς-τα-αριστερά</primary> <secondary>Με ανάμειξη συμβολοσειρών RTL και LTR</secondary>
+        </indexterm><indexterm class="singular">
+          <primary>Αρχεία στόχος</primary> <secondary>Με ανάμειξη συμβολοσειρών RTL και LTR</secondary>
+        </indexterm><indexterm class="singular">
+          <primary>Αρχεία προέλευσης</primary> <secondary>Με ανάμειξη συμβολοσειρών RTL και LTR</secondary>
+        </indexterm></title>
+
+      <para>Όταν γράφετε καθαρό κείμενο RTL, μπορείτε να χρησιμοποιείτε την προεπιλεγμένη εμφάνιση (LTR). Σε πολλές περιπτώσεις, πάντως, είναι απαραίτητο να ενσωματώσετε κείμενο LTR σε κείμενο RTL. Για παράδειγμα, στις ετικέτες του OmegaT, τα ονόματα προϊόντων που πρέπει να μείνουν στη γλώσσα πηγής LTR, τοποθετούν holders στα αρχεία τοποικοποίησης και αριθμούς στο κείμενο. Σε περιπτώσεις σαν κι αυτές, καθίσταται απαραίτητη η εναλλαγή σε τρόπο RTL, ούτως ώστε το κείμενο RTL (στην πράξη αμφίδρομο) να εμφανίζεται σωστά. Θα πρέπει να έχετε υπ΄όψη πως όταν το <application>OmegaT</application> είναι σε τρόπο RTL, τόσο οι πηγές κόσο και ource and target are displayed in RTL mode. Αυτό σημαίνει πως αν η γλώσσα προέλευσης είναι LTR και η γλώσσα στόχος είναι RTL, ή το αντίθετο, μπορεί να καταστεί απαραίτητο να εναλάσσεστε μρπςο-πίσω μεταξύ RTL and LTR modes to view the source and enter the target easily in their respective modes.</para>
+    </section>
+
+    <section>
+      <title>Ετικέτες του <application>OmegaT</application> σε τμήματα RTL<indexterm class="singular">
+          <primary>Γλώσσες από-τα-δεξιά-προς-τα-αριστερά</primary> <secondary>Ετικέτες του OmegaT για γλώσσες RTL</secondary>
+        </indexterm></title>
+
+      <para>Όπως είπαμε παραπάνω, οι ετικέτες OmegaT είναι συμβολοσειρές LTR. Όταν μεταφράζετε μεταξύ γλωσσών RTL και LTR, η σωστή ανάγνωση ετικετών από την πηγή και η σωστή εισαγωγή τους στο στόχο μπορεί να απαιτήσουν από τον μεταφραστή να εναλλάσσεται πολλές φορές μεταξύ των τρόπων LTR και RTL.</para>
+
+      <para>Αν το έγγραφο επιτρέπει, ο μεταφραστής ενθαρρύνεται ιδιαίτερα να διαγράφει τις πληροφορίες προτύπων (style) από το αρχικό έγγραφο, ούτως ώστε, στη διεπαφή του OmegaT, να εμφανίζονται όσο λιγώτερες ετικέτες γίνεται. Ακολυθήστε τις οδηγίες που προσφέρονται στις Συμβουλές (Hints) σχετικά με τη διαχείριση ετικετών. Να επικυρώνετε συχνά τις ετικέτες (βλέπε επικύρωση Tag) και να δημιουργείτε μεταφρασμένα έγγραφα (βλέπε παρακάτω και στο Μενού), ανά τακτά διαστήματα, για ευκολώτερο εντοπισμό οποιωνδήποτε προβλημάτων που ανακύπτουν. Μια συμβουλή: μπορεί να αποδειχθεί μικρώτερος μπελάς να μεταφράζετε ένα απλό αρχείο κειμένου και να προσθέσετε τα απαραίτητα πρότυπα μορφοποίησης (style), με την κατάλληλη εφαρμογή, σε ένα μεταγενέστερο στάδιο.</para>
+    </section>
+
+    <section>
+      <title>Δημιουργία μεταφρασμένων εγγράφων RTL<indexterm class="singular">
+          <primary>Γλώσσες από-τα-δεξιά-προς-τα-αριστερά</primary> <secondary>Δημιουργία αρχείων στόχου RTL</secondary>
+        </indexterm><indexterm class="singular">
+          <primary>Γλώσσες από-τα-δεξιά-προς-τα-αριστερά</primary> <secondary>Αρχεία στόχος</secondary>
+        </indexterm><indexterm class="singular">
+          <primary>Γλώσσες από-τα-δεξιά-προς-τα-αριστερά</primary> <secondary>Δημιουργία αρχείων στόχου RTL</secondary>
+        </indexterm></title>
+
+      <para>Όταν δημιουργηθεί το μεταφρασμένο έγγραφο, η κατεύθυνση με την οποία εμφανίζεται θα είναι η ίδια με εκείνη του αρχικού εγγράφου. Αν το αρχικό έγγραφο ήταν σε LTR, η κατεύθυνση εμφάνισης του εγγράφου στόχου πρέπει να αλλαχθεί χειρονακτικά σε RTL με την εφαρμογή που χρησιμοποιείται για την προβολή του. Η κάθε μορφή εξόδου έχει ειδικούτς τρόπους διαχείρισης της εμφάνισης RTL. Ανατρέξτε στα αντίστοιχα εγχειρίδια των εφαρμογών για περισσότερες λεποτομέρειες.</para>
+      
+      <para>Για τα αρχεία .docx, κάποιες αλλαγές γίνονται, πάντως, με αυτόματο τρόπο:<itemizedlist>
+      <listitem>Οι παράγραφοι, οι ενότητες και οι πίνακες έχουν ορισθεί σε bidi</listitem>
+      <listitem>Τα Runs (στοιχεία κειμένου) έχουν ορισθεί σε RTL</listitem>     
+      </itemizedlist>
+      </para>
+
+      <para>Για να αποφύγετε να αλλάζετε τις παραμέτρους εμφάνισης των αρχείων στόχου κάθε φορά που ανοίγουν τα αρχεία, είναι δυνατόν να αλλάξετε τις παραμέτρους εμφάνισης του αρχείου προέλευσης με τρόπο ώστε αυτές οι παράμετροι να κληρονομούνται από τα αρχεία-στόχο. Για παράδειγμα, τέτοιες αλλαγές είναι εφικτές στα αρχεία ODF.</para>
+    </section>
+  </section>
+</chapter>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<appendix id="appendix.legal.notices">
+  <title><indexterm class="singular">
+      <primary>Νομικές Προειδοποιήσεις</primary>
+    </indexterm>Νομικές Προειδοποιήσεις</title>
+
+  <section id="legal.notices.for.documentation">
+    <title>Για την Τεκμηρίωση<indexterm class="singular">
+        <primary>Νομικές Προειδοποιήσεις</primary> <secondary>Για την Τεκμηρίωση</secondary>
+      </indexterm></title>
+
+    <para><emphasis role="bold">Προστασία πνευματικών δικαιωμάτων Copyright</emphasis></para>
+
+    <para>Η τεκμηρίωση που διανέμεται με το <application>OmegaT</application> 3.0 περιλαμβάνει το Εγχειρίδιο Χρήστη και το έγγραφο readme.txt. Η τεκμηρίωση τελεί υπό Copyright ©2013 Vito Smolej. Ο συγγραφέας του Κεφαλαίου <emphasis>Εκμάθηση χρήσης του OmegaT σε 5 λεπτά!</emphasis> είναι ο Samuel Murray, Copyright ©2005-2012.</para>
+
+    <para><emphasis role="bold">Διανομή και τροποποιήσεις</emphasis></para>
+
+    <para>Η τεκμηρίωση είναι ένα ελεύθερο έγγραφο; μπορείτε να το αναδιανέμετε και/ή να το τροποποιείτε, υπό τους όρους της Άδειας Δημόσιας Χρήσης GNU GPL, έτσι όπως δημοσιεύεται από το Ίδρυμα Ελεύθερου Λογισμικού (FSF): ή με την έκδοση 3 της άδειας, είτε (αν προτιμάτε) με μια μεταγενέστερη έκδοση.</para>
+
+    <para><emphasis role="bold">Εγγύηση</emphasis></para>
+
+    <para>Η τεκμηρίωση διανέμεται με την ελπίδα πως θα είναι χρήσιμη, αλλά ΧΩΡΙΣ ΚΑΜΙΑ ΕΓΓΥΗΣΗ: ούτε καν με την υπονοούμενη εγγύηση ΕΜΠΟΡΕΥΣΙΜΟΤΗΤΑΣ ή ΚΑΤΑΛΛΗΛΟΤΗΤΑΣ ΓΙΑ ΚΑΠΟΙΟΝ ΣΥΓΚΕΚΡΙΜΜΕΝΟ ΣΚΟΠΟ. Δείτε την Άδεια Γενικής Δημόσιας χρήσης GNU GPL για περισσότερες λεπτομέρειες.</para>
+  </section>
+
+  <section id="legal.ntices.for.application">
+    <title>Για την εφαρμογή<indexterm class="singular">
+        <primary>Νομικές προειδοποιήσεις</primary> <secondary>Για την εφαρμμογή</secondary>
+      </indexterm></title>
+
+    <para><emphasis role="bold">Προστασία πνευματικών δικαιωμάτων Copyright</emphasis></para>
+
+    <para><emphasis role="bold"><application>Το OmegaT</application> 2.6</emphasis> τελεί υπό από Copyright © 2000-2013 Keith Godfrey, Zoltan Bartko, Volker Berlin, Didier Briel, Kim Bruning, Alex Buloichik, Thomas Cordonnier, Sandra Jean Chua, Martin Fleurke, Wildrich Fourie, Phillip Hall, Jean-Christophe Helary, Thomas Huriaux, Hans-Peter Jacobs, Kyle Katarn, Ibai Lakunza Velasco, Guido Leenders, Aaron Madlon-Kay, Fabián Mandelbaum, John Moran, Maxym Mykhalchuk, Arno Peters, Henry Pijffers, Briac Pilpré, Tiago Saboga, Andrzej Sawuła, Benjamin Siband, Yu Tang, Rashid Umarov, Antonio Vilei, Martin Wunderlich και Michael Zakharov.</para>
+
+    <para><emphasis role="bold">Διανομή και τροποποιήσεις</emphasis></para>
+
+    <para><emphasis role="bold">Το OmegaT 2.6</emphasis> είναι ελεύθερο λογισμικό: μπορείτε να το αναδιανέμετε και/ή να το τροποποιείτε υπό τους όρους της Άδειας GNU GPL όπως δημοσιεύεται από το Ίδρυμα Ελεύθερου Λογιμσικού (FSF): ή με την έκδοση 3 της Άδειας, είτε (αν προτιμάτε) με οποιαδήποτε άλλη μεταγενέστερη έκδοση.</para>
+
+    <para><emphasis role="bold">Εγγύηση</emphasis></para>
+
+    <para><emphasis role="bold"> <application>Το OmegaT</application> 2.6 </emphasis>διανέμεται με την ελπίδα πως θα είναι χρήσιμο, αλλάΧΩΡΙΣ ΚΑΜΙΑ ΕΓΓΥΗΣΗ: ούτε καν με την υπονοούμενη εγγύηση ΕΜΠΟΡΕΥΣΙΜΟΤΗΤΑΣ ή ΚΑΤΑΛΛΗΛΟΤΗΤΑΣ ΓΙΑ ΚΑΠΟΙΟΝ ΣΥΓΚΕΚΡΙΜΜΕΝΟ ΣΚΟΠΟ. Δείτε την Άδεια Γενικής Δημόσιας Χρήσης GNU GPL για περισσότερες λεπτομέρειες.</para>
+  </section>
+</appendix>

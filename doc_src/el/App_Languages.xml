@@ -1,0 +1,954 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<appendix id="appendix.languages">
+  <title>Γλώσσες - Κατάλογος με κωδικούς κατά ISO 639<indexterm class="singular">
+    <primary>Γλώσσες</primary>
+  </indexterm>
+  <indexterm class="singular">
+    <primary>Κωδικοί γλώσσας κατά ISO</primary>
+  </indexterm>
+  <indexterm class="singular">
+    <primary>Έργο</primary> <secondary>Ιδιότητες</secondary> <seealso>Γλώσσες</seealso>
+  </indexterm>
+  </title>
+
+  <para>Παρακαλώ ελέγξτε τους<ulink url="http://www.sil.org/ISO639-3/codes.asp"> Πίνακες με τους κωδικούς κατά ISO 639</ulink> για περισσότερες και πιο πρόσφατες πληροφορίες σχετικά με τους κωδικούς γλώσσας.</para>
+
+  <table id="table.language.code.list">
+    <title>Κατάλογος κωδικών γλώσσας κατά ISO 639-1/639-2</title>
+    <tgroup cols="3" align="left" colsep="1" rowsep="1">
+      <colspec align="left" colnum="1"/>
+      <colspec align="left" colnum="2"/>
+      <colspec align="left" colnum="3"/>
+      <thead>
+        <row>
+          <entry align="left">Όνομα γλώσσας</entry>
+          <entry align="left">ISO 639-1</entry>
+          <entry align="left">ISO 639-2</entry>
+	</row>
+      </thead>
+      <tbody>
+        <row>
+	  <entry>Αμπχαζιανά</entry>
+	  <entry>ab</entry>
+	  <entry>abk</entry>
+	</row>
+        <row>
+	  <entry>Αφάρ</entry>
+	  <entry>aa</entry>
+	  <entry>aar</entry>
+	</row>
+        <row>
+	  <entry>Αφρικάνς, Afrikaans</entry>
+	  <entry>af</entry>
+	  <entry>afr</entry>
+	</row>
+        <row>
+	  <entry>Ακάν</entry>
+	  <entry>ak</entry>
+	  <entry>aka</entry>
+	</row>
+        <row>
+	  <entry>Αλβανικά</entry>
+	  <entry>sq</entry>
+	  <entry>sqi</entry>
+	</row>
+        <row>
+	  <entry>Αμχαρικά</entry>
+	  <entry>am</entry>
+	  <entry>amh</entry>
+	</row>
+        <row>
+	  <entry>Αραβικά</entry>
+	  <entry>ar</entry>
+	  <entry>ara</entry>
+	</row>
+        <row>
+	  <entry>Αραγονέζικα</entry>
+	  <entry>an</entry>
+	  <entry>arg</entry>
+	</row>
+        <row>
+	  <entry>Αρμενικά</entry>
+	  <entry>hy</entry>
+	  <entry>hye</entry>
+	</row>
+        <row>
+	  <entry>Ασσαμέζικα, Assamese</entry>
+	  <entry>as</entry>
+	  <entry>asm</entry>
+	</row>
+        <row>
+	  <entry>Αβαρικά, Avaric</entry>
+	  <entry>av</entry>
+	  <entry>ava</entry>
+	</row>
+        <row>
+	  <entry>Αβεστανικά, Avestan</entry>
+	  <entry>ae</entry>
+	  <entry>ave</entry>
+	</row>
+        <row>
+	  <entry>Αϋμάρα, Aymara</entry>
+	  <entry>ay</entry>
+	  <entry>aym</entry>
+	</row>
+        <row>
+	  <entry>Αζέρικα</entry>
+	  <entry>az</entry>
+	  <entry>aze</entry>
+	</row>
+        <row>
+	  <entry>Μπαμπάρα</entry>
+	  <entry>bm</entry>
+	  <entry>bam</entry>
+	</row>
+        <row>
+	  <entry>Μπασκίρ, Bashkir</entry>
+	  <entry>ba</entry>
+	  <entry>bak</entry>
+	</row>
+        <row>
+	  <entry>Βασκικά</entry>
+	  <entry>eu</entry>
+	  <entry>eus</entry>
+	</row>
+        <row>
+	  <entry>Λευκορωσικά</entry>
+	  <entry>be</entry>
+	  <entry>bel</entry>
+	</row>
+        <row>
+	  <entry>Μπενγκαλέζικα</entry>
+	  <entry>bn</entry>
+	  <entry>ben</entry>
+	</row>
+        <row>
+	  <entry>Μπιχάρι, Bihari</entry>
+	  <entry>bh</entry>
+	  <entry>bih</entry>
+	</row>
+        <row>
+	  <entry>Μπισλάμα</entry>
+	  <entry>bi</entry>
+	  <entry>bis</entry>
+	</row>
+        <row>
+	  <entry>Βοσνιακά</entry>
+	  <entry>bs</entry>
+	  <entry>bos</entry>
+	</row>
+        <row>
+	  <entry>Βρετονικά, Breton</entry>
+	  <entry>br</entry>
+	  <entry>bre</entry>
+	</row>
+        <row>
+	  <entry>Βουλγαρικά</entry>
+	  <entry>bg</entry>
+	  <entry>bul</entry>
+	</row>
+        <row>
+	  <entry>Μπουρμέζικα, Burmese</entry>
+	  <entry>my</entry>
+	  <entry>mya</entry>
+	</row>
+        <row>
+	  <entry>Καταλανικά</entry>
+	  <entry>ca</entry>
+	  <entry>cat</entry>
+	</row>
+        <row>
+	  <entry>Τσαμόρο, Chamorro</entry>
+	  <entry>ch</entry>
+	  <entry>cha</entry>
+	</row>
+        <row>
+	  <entry>Τσετσενικά</entry>
+	  <entry>ce</entry>
+	  <entry>che</entry>
+	</row>
+        <row>
+	  <entry>Τσιτσέβα, Τσέβα, Νυάντζα</entry>
+	  <entry>ny</entry>
+	  <entry>nya</entry>
+	</row>
+        <row>
+	  <entry>Κινεζικά</entry>
+	  <entry>zh</entry>
+	  <entry>zho</entry>
+	</row>
+        <row>
+	  <entry>Τσουβάς, Chuvash</entry>
+	  <entry>cv</entry>
+	  <entry>chv</entry>
+	</row>
+        <row>
+	  <entry>Cornish</entry>
+	  <entry>kw</entry>
+	  <entry>cor</entry>
+	</row>
+        <row>
+	  <entry>Κορσικανικά</entry>
+	  <entry>co</entry>
+	  <entry>cos</entry>
+	</row>
+        <row>
+	  <entry>Cree</entry>
+	  <entry>cr</entry>
+	  <entry>cre</entry>
+	</row>
+        <row>
+	  <entry>Κροατικά</entry>
+	  <entry>hr</entry>
+	  <entry>hrv</entry>
+	</row>
+        <row>
+	  <entry>Τσεχικά</entry>
+	  <entry>cs</entry>
+	  <entry>ces</entry>
+	</row>
+        <row>
+	  <entry>Δανέζικα</entry>
+	  <entry>da</entry>
+	  <entry>dan</entry>
+	</row>
+        <row>
+	  <entry>Ντιβέχι, Ντιβέχι, Μαλδιβιανά</entry>
+	  <entry>dv</entry>
+	  <entry>div</entry>
+	</row>
+        <row>
+	  <entry>Ολανδικά</entry>
+	  <entry>nl</entry>
+	  <entry>nld</entry>
+	</row>
+        <row>
+	  <entry>Τζόνγκα, Dzongkha</entry>
+	  <entry>dz</entry>
+	  <entry>dzo</entry>
+	</row>
+        <row>
+	  <entry>Αγγλικά</entry>
+	  <entry>en</entry>
+	  <entry>eng</entry>
+	</row>
+        <row>
+	  <entry>Εσπεράντο</entry>
+	  <entry>eo</entry>
+	  <entry>epo</entry>
+	</row>
+        <row>
+	  <entry>Εσθονικά</entry>
+	  <entry>et</entry>
+	  <entry>est</entry>
+	</row>
+        <row>
+	  <entry>Ewe</entry>
+	  <entry>ee</entry>
+	  <entry>ewe</entry>
+	</row>
+        <row>
+	  <entry>Faroese</entry>
+	  <entry>fo</entry>
+	  <entry>fao</entry>
+	</row>
+        <row>
+	  <entry>Fijian</entry>
+	  <entry>fj</entry>
+	  <entry>fij</entry>
+	</row>
+        <row>
+	  <entry>Φινλανδικά</entry>
+	  <entry>fi</entry>
+	  <entry>fin</entry>
+	</row>
+        <row>
+	  <entry>Γαλλικά</entry>
+	  <entry>fr</entry>
+	  <entry>fra</entry>
+	</row>
+        <row>
+	  <entry>Φούλα, Φούλα, Πουλάαρ, Πουλάρ</entry>
+	  <entry>ff</entry>
+	  <entry>ful</entry>
+	</row>
+        <row>
+	  <entry>Γαλικιανά</entry>
+	  <entry>gl</entry>
+	  <entry>glg</entry>
+	</row>
+        <row>
+	  <entry>Γεωργιανά</entry>
+	  <entry>ka</entry>
+	  <entry>kat</entry>
+	</row>
+        <row>
+	  <entry>Γερμανικά</entry>
+	  <entry>de</entry>
+	  <entry>deu</entry>
+	</row>
+        <row>
+	  <entry>Ελληνικά, Νέα</entry>
+	  <entry>el</entry>
+	  <entry>ell</entry>
+	</row>
+        <row>
+	  <entry>Γκουαρανί</entry>
+	  <entry>gn</entry>
+	  <entry>grn</entry>
+	</row>
+        <row>
+	  <entry>Γκουτζαράτι</entry>
+	  <entry>gu</entry>
+	  <entry>guj</entry>
+	</row>
+        <row>
+	  <entry>Αϊτιανά, Κρεολικά Αίτιανά</entry>
+	  <entry>ht</entry>
+	  <entry>hat</entry>
+	</row>
+        <row>
+	  <entry>Χάουζα, Hausa</entry>
+	  <entry>ha</entry>
+	  <entry>hau</entry>
+	</row>
+        <row>
+	  <entry>Εβραϊκά (σύγχρονα)</entry>
+	  <entry>he</entry>
+	  <entry>heb</entry>
+	</row>
+        <row>
+	  <entry>Χερέρο</entry>
+	  <entry>hz</entry>
+	  <entry>her</entry>
+	</row>
+        <row>
+	  <entry>Χίντι, Hindi</entry>
+	  <entry>hi</entry>
+	  <entry>hin</entry>
+	</row>
+        <row>
+	  <entry>Χίρι Μότου</entry>
+	  <entry>ho</entry>
+	  <entry>hmo</entry>
+	</row>
+        <row>
+	  <entry>Ουγγρικά</entry>
+	  <entry>hu</entry>
+	  <entry>hun</entry>
+	</row>
+        <row>
+	  <entry>Ιντερλίνγκουα</entry>
+	  <entry>ia</entry>
+	  <entry>ina</entry>
+	</row>
+        <row>
+	  <entry>Ινδονησιακά</entry>
+	  <entry>id</entry>
+	  <entry>ind</entry>
+	</row>
+        <row>
+	  <entry>Interlingue</entry>
+	  <entry>ie</entry>
+	  <entry>ile</entry>
+	</row>
+        <row>
+	  <entry>Ιρλανδικά</entry>
+	  <entry>ga</entry>
+	  <entry>gle</entry>
+	</row>
+        <row>
+	  <entry>Ίγκμπο</entry>
+	  <entry>ig</entry>
+	  <entry>ibo</entry>
+	</row>
+        <row>
+	  <entry>Ινούπιακ</entry>
+	  <entry>ik</entry>
+	  <entry>ipk</entry>
+	</row>
+        <row>
+	  <entry>Ίντο, Ido</entry>
+	  <entry>io</entry>
+	  <entry>ido</entry>
+	</row>
+        <row>
+	  <entry>Ισλανδικά</entry>
+	  <entry>is</entry>
+	  <entry>isl</entry>
+	</row>
+        <row>
+	  <entry>Ιταλικά</entry>
+	  <entry>it</entry>
+	  <entry>ita</entry>
+	</row>
+        <row>
+	  <entry>Ινουκτίτουτ</entry>
+	  <entry>iu</entry>
+	  <entry>iku</entry>
+	</row>
+        <row>
+	  <entry>Ιαπωνικά</entry>
+	  <entry>ja</entry>
+	  <entry>jpn</entry>
+	</row>
+        <row>
+	  <entry>Ιαβαϊκά</entry>
+	  <entry>jv</entry>
+	  <entry>jav</entry>
+	</row>
+        <row>
+	  <entry>Καλάλισουτ, Γροιλανδικά</entry>
+	  <entry>kl</entry>
+	  <entry>kal</entry>
+	</row>
+        <row>
+	  <entry>Κάναντα, Kannada</entry>
+	  <entry>kn</entry>
+	  <entry>kan</entry>
+	</row>
+        <row>
+	  <entry>Κανούρι, Kanuri</entry>
+	  <entry>kr</entry>
+	  <entry>kau</entry>
+	</row>
+        <row>
+	  <entry>Κασμιριανά</entry>
+	  <entry>ks</entry>
+	  <entry>kas</entry>
+	</row>
+        <row>
+	  <entry>Καζακικά</entry>
+	  <entry>kk</entry>
+	  <entry>kaz</entry>
+	</row>
+        <row>
+	  <entry>Χμέρ, Khmer</entry>
+	  <entry>km</entry>
+	  <entry>khm</entry>
+	</row>
+        <row>
+	  <entry>Κικούγιου, Γκικούγιου</entry>
+	  <entry>ki</entry>
+	  <entry>kik</entry>
+	</row>
+        <row>
+	  <entry>Κινυαργουάντα, Kinyarwanda</entry>
+	  <entry>rw</entry>
+	  <entry>kin</entry>
+	</row>
+        <row>
+	  <entry>Κιργιζιανά, Κιργιζία</entry>
+	  <entry>ky</entry>
+	  <entry>kir</entry>
+	</row>
+        <row>
+	  <entry>Κόμι</entry>
+	  <entry>kv</entry>
+	  <entry>kom</entry>
+	</row>
+        <row>
+	  <entry>Κόγκο</entry>
+	  <entry>kg</entry>
+	  <entry>kon</entry>
+	</row>
+        <row>
+	  <entry>Κορεατικά</entry>
+	  <entry>ko</entry>
+	  <entry>kor</entry>
+	</row>
+        <row>
+	  <entry>Κουρδικά</entry>
+	  <entry>ku</entry>
+	  <entry>kur</entry>
+	</row>
+        <row>
+	  <entry>Κουανιάμα, Κουανιάμα</entry>
+	  <entry>kj</entry>
+	  <entry>kua</entry>
+	</row>
+        <row>
+	  <entry>Λατινικά</entry>
+	  <entry>la</entry>
+	  <entry>lat</entry>
+	</row>
+        <row>
+	  <entry>Λουξεμβουργιανά, Letzeburgesch</entry>
+	  <entry>lb</entry>
+	  <entry>ltz</entry>
+	</row>
+        <row>
+	  <entry>Λουγκάντα</entry>
+	  <entry>lg</entry>
+	  <entry>lug</entry>
+	</row>
+        <row>
+	  <entry>Λιμβουργιανά, Limburgan, Limburger</entry>
+	  <entry>li</entry>
+	  <entry>lim</entry>
+	</row>
+        <row>
+	  <entry>Λινγκάλα</entry>
+	  <entry>ln</entry>
+	  <entry>lin</entry>
+	</row>
+        <row>
+	  <entry>Λάο</entry>
+	  <entry>lo</entry>
+	  <entry>lao</entry>
+	</row>
+        <row>
+	  <entry>Λιθουανικά</entry>
+	  <entry>lt</entry>
+	  <entry>lit</entry>
+	</row>
+        <row>
+	  <entry>Λούμπα-Κατάνγκα</entry>
+	  <entry>lu</entry>
+	  <entry>lub</entry>
+	</row>
+        <row>
+	  <entry>Λατβιανά</entry>
+	  <entry>lv</entry>
+	  <entry>lav</entry>
+	</row>
+        <row>
+	  <entry>Μάνξ</entry>
+	  <entry>gv</entry>
+	  <entry>glv</entry>
+	</row>
+        <row>
+	  <entry>Σλαβομακεδονικά</entry>
+	  <entry>mk</entry>
+	  <entry>mkd</entry>
+	</row>
+        <row>
+	  <entry>Μαλαγάσυ</entry>
+	  <entry>mg</entry>
+	  <entry>mlg</entry>
+	</row>
+        <row>
+	  <entry>Μαλαισιανά</entry>
+	  <entry>ms</entry>
+	  <entry>msa</entry>
+	</row>
+        <row>
+	  <entry>Μαλαγιάλαμ</entry>
+	  <entry>ml</entry>
+	  <entry>mal</entry>
+	</row>
+        <row>
+	  <entry>Μαλτεζικά</entry>
+	  <entry>mt</entry>
+	  <entry>mlt</entry>
+	</row>
+        <row>
+	  <entry>Μαορί</entry>
+	  <entry>mi</entry>
+	  <entry>mri</entry>
+	</row>
+        <row>
+	  <entry>Μαράθι (Marāṭhī)</entry>
+	  <entry>mr</entry>
+	  <entry>mar</entry>
+	</row>
+        <row>
+	  <entry>Μαρσαλιανά, Marshallese</entry>
+	  <entry>mh</entry>
+	  <entry>mah</entry>
+	</row>
+        <row>
+	  <entry>Μογγολικά</entry>
+	  <entry>mn</entry>
+	  <entry>mon</entry>
+	</row>
+        <row>
+	  <entry>Ναούρου</entry>
+	  <entry>na</entry>
+	  <entry>nau</entry>
+	</row>
+        <row>
+	  <entry>Ναβάχο, Navaho</entry>
+	  <entry>nv</entry>
+	  <entry>nav</entry>
+	</row>
+        <row>
+	  <entry>Νορβηγικά Bokmål</entry>
+	  <entry>nb</entry>
+	  <entry>nob</entry>
+	</row>
+        <row>
+	  <entry>Βορ. Ντέμπελε</entry>
+	  <entry>nd</entry>
+	  <entry>nde</entry>
+	</row>
+        <row>
+	  <entry>Νεπαλέζικα</entry>
+	  <entry>ne</entry>
+	  <entry>nep</entry>
+	</row>
+        <row>
+	  <entry>Ντόνγκα</entry>
+	  <entry>ng</entry>
+	  <entry>ndo</entry>
+	</row>
+        <row>
+	  <entry>Νορβηγικά Νυνόρσκ</entry>
+	  <entry>nn</entry>
+	  <entry>nno</entry>
+	</row>
+        <row>
+	  <entry>Νορβηγικά</entry>
+	  <entry>no</entry>
+	  <entry>nor</entry>
+	</row>
+        <row>
+	  <entry>Νουόζου, Nuosu</entry>
+	  <entry>ii</entry>
+	  <entry>iii</entry>
+	</row>
+        <row>
+	  <entry>Νοτ. Ντέμπελε</entry>
+	  <entry>nr</entry>
+	  <entry>nbl</entry>
+	</row>
+        <row>
+	  <entry>Οξιτάνικα</entry>
+	  <entry>oc</entry>
+	  <entry>oci</entry>
+	</row>
+        <row>
+	  <entry>Οτζίμπουε, Οτζίμπουε</entry>
+	  <entry>oj</entry>
+	  <entry>oji</entry>
+	</row>
+        <row>
+	  <entry>Σλαβονικά Παλαιοεκκλησιαστικά, Σλαβική Εκκλησία, Σλαβονική Εκκλησία, Παλιά Βουλγαρικά, Παλιά Σλαβονικά</entry>
+	  <entry>cu</entry>
+	  <entry>chu</entry>
+	</row>
+        <row>
+	  <entry>Ορόμο</entry>
+	  <entry>om</entry>
+	  <entry>orm</entry>
+	</row>
+        <row>
+	  <entry>Ορίγια</entry>
+	  <entry>or</entry>
+	  <entry>ori</entry>
+	</row>
+        <row>
+	  <entry>Οσσετιανά, Οσσετικά</entry>
+	  <entry>os</entry>
+	  <entry>oss</entry>
+	</row>
+        <row>
+	  <entry>Παντζάμπι, Punjabi</entry>
+	  <entry>pa</entry>
+	  <entry>pan</entry>
+	</row>
+        <row>
+	  <entry>Πάλι, Pāli</entry>
+	  <entry>pi</entry>
+	  <entry>pli</entry>
+	</row>
+        <row>
+	  <entry>Περσικά</entry>
+	  <entry>fa</entry>
+	  <entry>fas</entry>
+	</row>
+        <row>
+	  <entry>Πολωνικά</entry>
+	  <entry>pl</entry>
+	  <entry>pol</entry>
+	</row>
+        <row>
+	  <entry>Πάστο, Pushto</entry>
+	  <entry>ps</entry>
+	  <entry>pus</entry>
+	</row>
+        <row>
+	  <entry>Πορτογαλικά</entry>
+	  <entry>pt</entry>
+	  <entry>por</entry>
+	</row>
+        <row>
+	  <entry>Κέτσουα</entry>
+	  <entry>qu</entry>
+	  <entry>que</entry>
+	</row>
+        <row>
+	  <entry>Ρωμανικά, Romansh</entry>
+	  <entry>rm</entry>
+	  <entry>roh</entry>
+	</row>
+        <row>
+	  <entry>Κιρούντι</entry>
+	  <entry>rn</entry>
+	  <entry>run</entry>
+	</row>
+        <row>
+	  <entry>Ρουμανικά, Μολδαβικά, Moldovan</entry>
+	  <entry>ro</entry>
+	  <entry>ron</entry>
+	</row>
+        <row>
+	  <entry>Ρωσικά</entry>
+	  <entry>ru</entry>
+	  <entry>rus</entry>
+	</row>
+        <row>
+	  <entry>Σανσκριτικά (Saṁskṛta)</entry>
+	  <entry>sa</entry>
+	  <entry>san</entry>
+	</row>
+        <row>
+	  <entry>Σαρδηνιακά</entry>
+	  <entry>sc</entry>
+	  <entry>srd</entry>
+	</row>
+        <row>
+	  <entry>Σίντι, Sindhi</entry>
+	  <entry>sd</entry>
+	  <entry>snd</entry>
+	</row>
+        <row>
+	  <entry>Βορ. Σάμι</entry>
+	  <entry>se</entry>
+	  <entry>sme</entry>
+	</row>
+        <row>
+	  <entry>Σαμοανικά, Samoan</entry>
+	  <entry>sm</entry>
+	  <entry>smo</entry>
+	</row>
+        <row>
+	  <entry>Σάνγκο</entry>
+	  <entry>sg</entry>
+	  <entry>sag</entry>
+	</row>
+        <row>
+	  <entry>Σερβικά</entry>
+	  <entry>sr</entry>
+	  <entry>srp</entry>
+	</row>
+        <row>
+	  <entry>Σκωτικά Γαελικά, Gaelic</entry>
+	  <entry>gd</entry>
+	  <entry>gla</entry>
+	</row>
+        <row>
+	  <entry>Σόνα, Shona</entry>
+	  <entry>sn</entry>
+	  <entry>sna</entry>
+	</row>
+        <row>
+	  <entry>Σινχάλα, Sinhalese</entry>
+	  <entry>si</entry>
+	  <entry>sin</entry>
+	</row>
+        <row>
+	  <entry>Σλοβακικά</entry>
+	  <entry>sk</entry>
+	  <entry>slk</entry>
+	</row>
+        <row>
+	  <entry>Σλοβενικά</entry>
+	  <entry>sl</entry>
+	  <entry>slv</entry>
+	</row>
+        <row>
+	  <entry>Σομαλέζικα</entry>
+	  <entry>so</entry>
+	  <entry>som</entry>
+	</row>
+        <row>
+	  <entry>Νοτ. Σόθο, Southern Sotho</entry>
+	  <entry>st</entry>
+	  <entry>sot</entry>
+	</row>
+        <row>
+	  <entry>Ισπανικά, Καστίλης</entry>
+	  <entry>es</entry>
+	  <entry>spa</entry>
+	</row>
+        <row>
+	  <entry>Σουδανέζικα</entry>
+	  <entry>su</entry>
+	  <entry>sun</entry>
+	</row>
+        <row>
+	  <entry>Σουαχίλι</entry>
+	  <entry>sw</entry>
+	  <entry>swa</entry>
+	</row>
+        <row>
+	  <entry>Σουάτι, Swati</entry>
+	  <entry>ss</entry>
+	  <entry>ssw</entry>
+	</row>
+        <row>
+	  <entry>Σουηδικά</entry>
+	  <entry>sv</entry>
+	  <entry>swe</entry>
+	</row>
+        <row>
+	  <entry>Ταμίλ</entry>
+	  <entry>ta</entry>
+	  <entry>tam</entry>
+	</row>
+        <row>
+	  <entry>Τελούγκου</entry>
+	  <entry>te</entry>
+	  <entry>tel</entry>
+	</row>
+        <row>
+	  <entry>Τατζικικά, Tajik</entry>
+	  <entry>tg</entry>
+	  <entry>tgk</entry>
+	</row>
+        <row>
+	  <entry>ΤάΪ, Thai</entry>
+	  <entry>th</entry>
+	  <entry>tha</entry>
+	</row>
+        <row>
+	  <entry>Τιγκρίνυα, Tigrinya</entry>
+	  <entry>ti</entry>
+	  <entry>tir</entry>
+	</row>
+        <row>
+	  <entry>Τυπικά Θιβετιανά, Θιβετιανά, Κεντρικά</entry>
+	  <entry>bo</entry>
+	  <entry>bod</entry>
+	</row>
+        <row>
+	  <entry>Τουρκμενικά</entry>
+	  <entry>tk</entry>
+	  <entry>tuk</entry>
+	</row>
+        <row>
+	  <entry>Τάγκαλογκ, Tagalog</entry>
+	  <entry>tl</entry>
+	  <entry>tgl</entry>
+	</row>
+        <row>
+	  <entry>Τσουάνα, Tswana</entry>
+	  <entry>tn</entry>
+	  <entry>tsn</entry>
+	</row>
+        <row>
+	  <entry>Τόγκα (Νήσοι Tonga)</entry>
+	  <entry>to</entry>
+	  <entry>ton</entry>
+	</row>
+        <row>
+	  <entry>Τουρκικά</entry>
+	  <entry>tr</entry>
+	  <entry>tur</entry>
+	</row>
+        <row>
+	  <entry>Τσόγκα, Tsonga</entry>
+	  <entry>ts</entry>
+	  <entry>tso</entry>
+	</row>
+        <row>
+	  <entry>Ταταρικά</entry>
+	  <entry>tt</entry>
+	  <entry>tat</entry>
+	</row>
+        <row>
+	  <entry>Τουί, Twi</entry>
+	  <entry>tw</entry>
+	  <entry>twi</entry>
+	</row>
+        <row>
+	  <entry>ΤαΪτιανά</entry>
+	  <entry>ty</entry>
+	  <entry>tah</entry>
+	</row>
+        <row>
+	  <entry>Ουιγουρικά, Uyghur</entry>
+	  <entry>ug</entry>
+	  <entry>uig</entry>
+	</row>
+        <row>
+	  <entry>Ουκρανικά</entry>
+	  <entry>uk</entry>
+	  <entry>ukr</entry>
+	</row>
+        <row>
+	  <entry>Ούρντου, Urdu</entry>
+	  <entry>ur</entry>
+	  <entry>urd</entry>
+	</row>
+        <row>
+	  <entry>Ουζμπεκικά</entry>
+	  <entry>uz</entry>
+	  <entry>uzb</entry>
+	</row>
+        <row>
+	  <entry>Βέντα, Venda</entry>
+	  <entry>ve</entry>
+	  <entry>ven</entry>
+	</row>
+        <row>
+	  <entry>Βιετναμέζικα</entry>
+	  <entry>vi</entry>
+	  <entry>vie</entry>
+	</row>
+        <row>
+	  <entry>Βόλαπουκ, Volapük</entry>
+	  <entry>vo</entry>
+	  <entry>vol</entry>
+	</row>
+        <row>
+	  <entry>Βαλούν, Walloon</entry>
+	  <entry>wa</entry>
+	  <entry>wln</entry>
+	</row>
+        <row>
+	  <entry>Ουαλικά, Welsh</entry>
+	  <entry>cy</entry>
+	  <entry>cym</entry>
+	</row>
+        <row>
+	  <entry>Γουόλοφ, Wolof</entry>
+	  <entry>wo</entry>
+	  <entry>wol</entry>
+	</row>
+        <row>
+	  <entry>Δυτ. Φρυσικά, West. Frisian</entry>
+	  <entry>fy</entry>
+	  <entry>fry</entry>
+	</row>
+        <row>
+	  <entry>Ξόζα, Xhosa</entry>
+	  <entry>xh</entry>
+	  <entry>xho</entry>
+	</row>
+        <row>
+	  <entry>Γίντις, Yiddish</entry>
+	  <entry>yi</entry>
+	  <entry>yid</entry>
+	</row>
+        <row>
+	  <entry>Γιορούμπα, Yoruba</entry>
+	  <entry>yo</entry>
+	  <entry>yor</entry>
+	</row>
+        <row>
+	  <entry>Ζουάνγκ, Τσουάνγκ</entry>
+	  <entry>za</entry>
+	  <entry>zha</entry>
+	</row>
+        <row>
+	  <entry>Ζουλού</entry>
+	  <entry>zu</entry>
+	  <entry>zul</entry>
+	</row>
+      </tbody>
+    </tgroup>
+  </table>
+</appendix>

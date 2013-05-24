@@ -1,0 +1,872 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE appendix PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<appendix id="appendix.shortcut.custom">
+  <title>Παραμετροποίηση συντομεύσεων</title>
+
+  <section id="ch04.shortcuts.customization">
+    <title><indexterm class="singular">
+        <primary>Παραμετροποίηση</primary> <secondary>συντομεύσεων</secondary>
+      </indexterm>Παραμετροποίηση συντομεύσεων</title>
+
+    <para>Τα περισσότερα πράγματα που εμφανίζονται στο κύριο μενού μπορούν να αντιστοιχηθούν με μια νέα συντόμευση. Μπορείτε να αλλάξετε τις συντομεύσεις που ήδη ορίστηκαν και να προσθέσετε νέες συντομεύσεις, τοποθετώντας ένα αρχείο με ορισμούς συντομεύσεων στον κατάλογό σας με τις προτιμήσεις του OmegaT (βλέπε <link linkend="user.files">Τοποθεσία αρχείων χρήστη</link>).</para>
+
+    <para>Το αρχείο με τους ορισμούς των συντομεύσεων πρέπει να έχει ένα όνομα <filename>MainMenuShortcuts.properties</filename> και πρέπει να περιέχει το πολύ έναν ορισμό συντομεύσεως ανά γραμμή. Οι κενές γραμμές είναι αποδεκτές, ενώ οι σχολιασμένες γραμμές πρέπει να αρχίζουν με ένα &quot;//&quot;. Οτι ακολουθεί μετά το &quot;//&quot; θα αγνοηθεί.</para>
+
+    <para>Μόλις το αρχείο <filename>MainMenuShortcuts.properties</filename> τροποποιηθεί, <application>το OmegaT</application> πρέπει να επανεκκινηθεί, για να εφαρμοσθούν οι νέες συντομεύσεις.</para>
+
+    <para>Η σύνταξη για τον ορισμό νέων συντομεύσεων είναι η εξής: <code>&lt;menu item code&gt;=&lt;shortcut&gt;</code>, όπου: <emphasis>&lt;menu item code&gt;</emphasis> είναι ένας κωδικός που προέρχεται από τους παρακάτω πίνακες, ενώ <emphasis>&lt;shortcut&gt;</emphasis> είναι μια συντόμευση, που μπορεί να ορίσει ο χρήστης, για τα πλήκτρα που πρέπει να πατηθούν. <footnote>
+        <para>Η πλήρης σύνταξη για τα πατήματα πλήκτρων στις συντομεύσεις, παρατίθεται στην παρακάτω τεκμηρίωση Java 1.6 από την Oracle (στο τέλος της σελίδας): <ulink url="http://docs.oracle.com/javase/6/docs/api/javax/swing/KeyStroke.html">Java 1.6 keystrokes shortcuts</ulink></para>
+      </footnote>.</para>
+
+    <para>&lt;shortcut&gt; πρέπει να είναι με την εξής μορφή: 0 ή περισσότερους <code>&lt;modifier&gt;</code> ακολουθούμενοο από ένα 0 ή 1 <code>&lt;event&gt;</code> ακολουθούμενο από 1 <code>&lt;key&gt;</code>, όπου:<itemizedlist>
+        <listitem>
+          <para><code>Ο &lt;modifier&gt;</code> μπορεί να είναι: <emphasis>shift</emphasis>, <emphasis>control</emphasis>, <emphasis>ctrl</emphasis>, <emphasis>meta</emphasis><footnote>
+              <para>Στον Mac, ο τροποποιητής (modifier) <emphasis>meta</emphasis> πρέπει να χρησιμοποιηθεί για να ορισθεί το πλήκτρο <emphasis>εντολής (command)</emphasis>.</para>
+            </footnote>, <emphasis>alt</emphasis>,
+          <emphasis>altGraph</emphasis></para>
+        </listitem>
+
+        <listitem>
+          <para><code>Το &lt;event&gt;</code> μπορεί να είναι: <emphasis>typed</emphasis>, <emphasis>pressed</emphasis>, <emphasis>released</emphasis></para>
+        </listitem>
+
+        <listitem>
+          <para>και το <code>&lt;key&gt;</code> μπορεί να είναι οποιοδήποτε διαθέσιμο πλήκτρο του πληκτρολογίου σας<footnote>
+              <para>Τα εφικτά keyevents (keys) παρέχονται στην παρακάτω περιγραφή τεκμηρίωσης Java 1.6 από την Oracle: <ulink url="http://docs.oracle.com/javase/6/docs/api/java/awt/event/KeyEvent.html">Java 1.6 keyEvents</ulink></para>
+            </footnote>.</para>
+        </listitem>
+      </itemizedlist></para>
+
+    <para>Για παράδειγμα, στις προεπιλεγμένες συντομεύσεις του OmegaT<footnote>
+        <para>Οι προεπιλεγμένες συντομεύσεις του OmegaT προσφέρονται από το Sourceforge: <ulink url="http://omegat.svn.sourceforge.net/viewvc/omegat/branches/release-2-6/src/org/omegat/gui/main/MainMenuShortcuts.properties">Προεπιλεγμένες συντομεύσεις OmegaT</ulink></para>
+
+        <para>Οι προεπιλεγμένες συντομεύσεις του OmegaT για το Mac προσφέρονται επίσης από το Sourceforge, χρησιμοποιούν όλες το &quot;meta&quot; αντί για το &quot;ctrl&quot;: <ulink url="http://omegat.svn.sourceforge.net/viewvc/omegat/branches/release-2-6/src/org/omegat/gui/main/MainMenuShortcuts.mac.properties">Προεπιλεγμένες συντομεύσεις του OmegaT για το Mac</ulink></para>
+      </footnote>, μπορεί κανείς να βρει:</para>
+
+    <itemizedlist>
+      <listitem>
+        <para><code>projectOpenMenuItem=ctrl O</code></para>
+      </listitem>
+
+      <listitem>
+        <para><code>editCreateGlossaryEntryMenuItem=ctrl shift G</code></para>
+      </listitem>
+    </itemizedlist>
+
+    <para>Η πρώτη είναι η συντόμευση για το <guimenuitem>Open Project</guimenuitem>, η δεύτερη για την <guimenuitem>Καταχώρηση Δημιουργίας Γλωσσαρίου</guimenuitem>.</para>
+
+    <para>Αν θέλετε να χρησιμοποιήσετε το <keycombo> <keycap>Shift</keycap> <keycap>Ctrl</keycap> <keycap>O</keycap> </keycombo> για να ανοίξετε ένα έργο, τροποποιήστε το αρχείο <filename>MainMenuShortcuts.properties</filename> ως εξής:<code> </code></para>
+
+    <para><code>projectOpenMenuItem=shift ctrl O</code>.</para>
+
+    <para>Αν δουλεύετε σε Mac και θέλετε να προσθέσετε <keycombo> <keycap>Shift</keycap> <keycap>Command</keycap> <keycap>S</keycap> </keycombo> συντόμευση προς <menuchoice> <guimenu>Εργαλεία</guimenu> <guimenuitem>Στατιστικές</guimenuitem> </menuchoice>, προσθέστε την εξής γραμμή στο αρχείο <filename>MainMenuShortcuts.properties</filename>:<code/></para>
+
+    <para><code> toolsShowStatisticsStandardMenuItem=shift meta
+    S</code></para>
+
+    <para>Αποθηκεύστε το αρχείο και επανεκκινείστε το <application>OmegaT</application>. Τώρα, οι νέες σας συντομεύσεις θα πρέπει να εμφανισθούν δίπλα στις καταχωρήσεις του μενού που τροποποιήσατε. Αν δεν παρουσιαστεί σύγκρουση με τις συντομεύσεις συστήματος, θα πρέπει να είναι διαθέσιμες μέσα από το OmegaT.</para>
+  </section>
+
+  <section id="ch04.shortcuts.ProjectMenu">
+    <title>Μενού έργου</title>
+
+    <table>
+      <title>Μενού έργου</title>
+
+      <tgroup cols="3" colsep="1">
+        <colspec align="left" colname="1" colnum="1"/>
+
+        <colspec align="left" colname="2" colnum="2"/>
+
+        <colspec align="left" colname="3" colnum="3"/>
+
+        <thead>
+          <row>
+            <entry>Καταχώρηση μενού</entry>
+
+            <entry>Προεπιλεγμένη συντόμευση</entry>
+
+            <entry>Κωδικός καταχώρησης μενού</entry>
+          </row>
+        </thead>
+
+        <tbody>
+          <row>
+            <entry>Νέα</entry>
+
+            <entry/>
+
+            <entry>projectNewMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Άνοιγμα</entry>
+
+            <entry><keycap>Ctrl+O</keycap></entry>
+
+            <entry>projectOpenMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Μεταφόρτωση έργου ομάδας</entry>
+
+            <entry/>
+
+            <entry>projectTeamNewMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Εισαγωγή αρχείων προέλευσης...</entry>
+
+            <entry/>
+
+            <entry>projectImportMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Εισαγωγή από το MediaWiki...</entry>
+
+            <entry/>
+
+            <entry>projectWikiImportMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Επαναφόρτωση</entry>
+
+            <entry><keycap>F5</keycap></entry>
+
+            <entry>projectReloadMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Κλείσιμο</entry>
+
+            <entry><keycap>Ctrl+Shift+W</keycap></entry>
+
+            <entry>projectCloseMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Αποθήκευση</entry>
+
+            <entry><keycap>Ctrl+S</keycap></entry>
+
+            <entry>projectSaveMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Δημιουργία μεταφρασμένων εγγράφων</entry>
+
+            <entry><keycap>Ctrl+D</keycap></entry>
+
+            <entry>projectCompileMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Ιδιότητες...</entry>
+
+            <entry><keycap>Ctrl+E</keycap></entry>
+
+            <entry>projectEditMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Αρχεία έργου...</entry>
+
+            <entry><keycap>Ctrl+L</keycap></entry>
+
+            <entry>viewFileListMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Έξοδος</entry>
+
+            <entry><keycap>Ctrl+Q</keycap></entry>
+
+            <entry>projectExitMenuItem</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+  </section>
+
+  <section id="ch04.shortcuts.EditMenu">
+    <title>Επεξεργασία μενού</title>
+
+    <table>
+      <title>Επεξεργασία μενού</title>
+
+      <tgroup cols="3" colsep="1">
+        <colspec align="left" colname="1" colnum="1"/>
+
+        <colspec align="left" colname="2" colnum="2"/>
+
+        <colspec align="left" colname="3" colnum="3"/>
+
+        <thead>
+          <row>
+            <entry>Καταχώρηση μενού</entry>
+
+            <entry>Προεπιλεγμένη συντόμευση</entry>
+
+            <entry>Κωδικός καταχώρησης μενού</entry>
+          </row>
+        </thead>
+
+        <tbody>
+          <row>
+            <entry>Αναίρεση τελευταίας ενέργειας</entry>
+
+            <entry><keycap>Ctrl+Z</keycap></entry>
+
+            <entry>editUndoMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Επαναφορά τελευταίας ενέργειας</entry>
+
+            <entry><keycap>Ctrl+Y</keycap></entry>
+
+            <entry>editRedoMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Αντικατάσταση με μια αντιστοίχιση</entry>
+
+            <entry><keycap>Ctrl+R</keycap></entry>
+
+            <entry>editOverwriteTranslationMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Εισαγωγή αντιστοίχισης</entry>
+
+            <entry><keycap>Ctrl+I</keycap></entry>
+
+            <entry>editInsertTranslationMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Αντικατάσταση με Μετάφραση μέσω μηχανής</entry>
+
+            <entry><keycap>Ctrl+M</keycap></entry>
+
+            <entry>editOverwriteMachineTranslationMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Αντικατάσταση με αρχεία προέλευσης</entry>
+
+            <entry><keycap>Shift+Ctrl+R</keycap></entry>
+
+            <entry>editOverwriteSourceMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Εισαγωγή αρχείου προέλευσης</entry>
+
+            <entry><keycap>Shift+Ctrl+I</keycap></entry>
+
+            <entry>editInsertSourceMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Εισαγωγή ετικετών προέλευσης</entry>
+
+            <entry><keycap>Shift+Ctrl+T</keycap></entry>
+
+            <entry>editTagPainterMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Εξαγωγή επιλογής</entry>
+
+            <entry><keycap>Shift+Ctrl+C</keycap></entry>
+
+            <entry>editExportSelectionMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Δημιουργία καταχώρησης γλωσσαρίου</entry>
+
+            <entry><keycap>Shift+Ctrl+G</keycap></entry>
+
+            <entry>editCreateGlossaryEntryMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Αναζήτηση έργου...</entry>
+
+            <entry><keycap>Ctrl+F</keycap></entry>
+
+            <entry>editFindInProjectMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Επιλογή ασαφούς (Fuzzy) αντιστοίχισης 1</entry>
+
+            <entry><keycap>Ctrl+1</keycap></entry>
+
+            <entry>editSelectFuzzy1MenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Επιλογή ασαφούς (Fuzzy) αντιστοίχισης 2</entry>
+
+            <entry><keycap>Ctrl+2</keycap></entry>
+
+            <entry>editSelectFuzzy2MenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Επιλογή ασαφούς (Fuzzy) αντιστοίχισης 3</entry>
+
+            <entry><keycap>Ctrl+3</keycap></entry>
+
+            <entry>editSelectFuzzy3MenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Επιλογή ασαφούς (Fuzzy) αντιστοίχισης 4</entry>
+
+            <entry><keycap>Ctrl+4</keycap></entry>
+
+            <entry>editSelectFuzzy4MenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Επιλογή ασαφούς (Fuzzy) αντιστοίχισης 5</entry>
+
+            <entry><keycap>Ctrl+5</keycap></entry>
+
+            <entry>editSelectFuzzy5MenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Αλλαγή σε/Μικρά γράμματα</entry>
+
+            <entry/>
+
+            <entry>lowerCaseMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Αλλαγή σε/Κεφαλαία γράμματα</entry>
+
+            <entry/>
+
+            <entry>upperCaseMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Αλλαγή σε/Title Case</entry>
+
+            <entry/>
+
+            <entry>titleCaseMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Cycle case to...</entry>
+
+            <entry><keycap>Shift+F3</keycap></entry>
+
+            <entry>cycleSwitchCaseMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Να χρησιμοποιείται ως προεπιλεγμένη μετάφραση</entry>
+
+            <entry/>
+
+            <entry>editMultipleDefault</entry>
+          </row>
+
+          <row>
+            <entry>Να χρησιμοποιείται ως εναλλακτική μετάφραση</entry>
+
+            <entry/>
+
+            <entry>editMultipleAlternate</entry>
+          </row>
+
+        </tbody>
+      </tgroup>
+    </table>
+  </section>
+
+  <section id="ch04.shortcuts.GoToMenu">
+    <title>Μετάβαση στο Μενού</title>
+
+    <table>
+      <title>Μετάβαση στο Μενού</title>
+
+      <tgroup cols="3" colsep="1">
+        <colspec align="left" colname="1" colnum="1"/>
+
+        <colspec align="left" colname="2" colnum="2"/>
+
+        <colspec align="left" colname="3" colnum="3"/>
+
+        <thead>
+          <row>
+            <entry>Καταχώρηση μενού</entry>
+
+            <entry>Προεπιλεγμένη συντόμευση</entry>
+
+            <entry>Κωδικός καταχώρησης μενού</entry>
+          </row>
+        </thead>
+
+        <tbody>
+          <row>
+            <entry>Επόμενο αμετάφραστο τμήμα</entry>
+
+            <entry><keycap>Ctrl+U</keycap></entry>
+
+            <entry>gotoNextUntranslatedMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Επόμενο τμήμα</entry>
+
+            <entry><keycap>Ctrl+N</keycap> or <keycap>Enter</keycap> or
+            <keycap>Tab</keycap></entry>
+
+            <entry>gotoNextSegmentMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Προηγούμενο τμήμα</entry>
+
+            <entry><keycap>Ctrl+P</keycap> or <keycap>Ctrl+Enter</keycap> or
+            <keycap>Ctrl+Tab</keycap></entry>
+
+            <entry>gotoPreviousSegmentMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Αριθμός τμήματος</entry>
+
+            <entry><keycap>Ctrl+J</keycap></entry>
+
+            <entry>gotoSegmentMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Επόμενη σημείωση</entry>
+
+            <entry/>
+
+            <entry>gotoNextNoteMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Προηγούμενη σημείωση</entry>
+
+            <entry/>
+
+            <entry>gotoPreviousNoteMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Ταξινόμηση σε υψηλή θέση στο ιστορικό...</entry>
+
+            <entry><keycap>Ctrl+Shift+N</keycap></entry>
+
+            <entry>gotoHistoryForwardMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Ταξινόμηση σε χαμηλή θέση στο ιστορικό.....</entry>
+
+            <entry><keycap>Ctrl+Shift+P</keycap></entry>
+
+            <entry>gotoHistoryBackMenuItem</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+  </section>
+
+  <section id="ch04.shortcuts.ViewMenu">
+    <title>Εμφάνιση μενού</title>
+
+    <table>
+      <title>Εμφάνιση μενού</title>
+
+      <indexterm class="singular">
+        <primary>Παραμετροποίηση συντομεύσεων</primary> <secondary>Εμφάνιση μενού</secondary>
+      </indexterm>
+
+      <tgroup cols="3" colsep="1">
+        <colspec align="left" colname="1" colnum="1"/>
+
+        <colspec align="left" colname="2" colnum="2"/>
+
+        <colspec align="left" colname="3" colnum="3"/>
+
+        <thead>
+          <row>
+            <entry>Καταχώρηση μενού</entry>
+
+            <entry>Προεπιλεγμένη συντόμευση</entry>
+
+            <entry>Κωδικός καταχώρησης μενού</entry>
+          </row>
+        </thead>
+
+        <tbody>
+          <row>
+            <entry>Επισήμανση μεταφρασμένων τμημάτων</entry>
+
+            <entry/>
+
+            <entry>viewMarkTranslatedSegmentsCheckBoxMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Επισήμανση αμετάφραστων τμημάτων</entry>
+
+            <entry/>
+
+            <entry>viewMarkUntranslatedSegmentsCheckBoxMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Εμφάνιση αρχείων προέλευσης</entry>
+
+            <entry/>
+
+            <entry>viewDisplaySegmentSourceCheckBoxMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Επισήμανση μη-μοναδικών τμημάτων</entry>
+
+            <entry/>
+
+            <entry>viewMarkNonUniqueSegmentsCheckBoxMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Επισήμανση τμημάτων με σημειώσεις</entry>
+
+            <entry/>
+
+            <entry>viewMarkNotedSegmentsCheckBoxMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Επισήμανση μη-διασπάσιμων διαστημάτων</entry>
+
+            <entry/>
+
+            <entry>viewMarkNBSPCheckBoxMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Επισήμανση κενού χώρου (Whitespace)</entry>
+
+            <entry/>
+
+            <entry>viewMarkWhitespaceCheckBoxMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Επισήμανση χαρακτήρων ελέγχου αμφίδρομων αλγορίθμων</entry>
+
+            <entry/>
+
+            <entry>viewMarkBidiCheckBoxMenuItem</entry>
+          </row>
+
+           <row>
+            <entry>Πληροφορίες τροποποίησης/Να μην εμφανίζεται καμία</entry>
+
+            <entry/>
+
+            <entry>viewDisplayModificationInfoNoneRadioButtonMenuItem</entry>
+          </row>
+
+         <row>
+            <entry>Πληροφορίες τροποποίησης/Επιλεγμένη οθόνη</entry>
+
+            <entry/>
+
+            <entry>viewDisplayModificationInfoSelectedRadioButtonMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Πληροφορίες τροποποίησης/Εμφάνιση όλων</entry>
+
+            <entry/>
+
+            <entry>viewDisplayModificationInfoAllRadioButtonMenuItem</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+  </section>
+
+  <section id="ch04.shortcuts.ToolsMenu">
+    <title>Μενού εργαλείων</title>
+
+    <table>
+      <title>Μενού εργαλείων</title>
+
+      <tgroup cols="3" colsep="1">
+        <colspec align="left" colname="1" colnum="1"/>
+
+        <colspec align="left" colname="2" colnum="2"/>
+
+        <colspec align="left" colname="3" colnum="3"/>
+
+        <thead>
+          <row>
+            <entry>Καταχώρηση μενού</entry>
+
+            <entry>Προεπιλεγμένη συντόμευση</entry>
+
+            <entry>Κωδικός καταχώρησης μενού</entry>
+          </row>
+        </thead>
+
+        <tbody>
+          <row>
+            <entry>Επικύρωση ετικετών</entry>
+
+            <entry><keycap>Ctrl +T</keycap></entry>
+
+            <entry>toolsValidateTagsMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Στατιστικές</entry>
+
+            <entry/>
+
+            <entry>toolsShowStatisticsStandardMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Αντιστοίχιση στατιστικών</entry>
+
+            <entry/>
+
+            <entry>toolsShowStatisticsMatchesMenuItem</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+  </section>
+
+  <section id="ch04.shortcuts.OptionsMenu">
+    <title>Επιλογές μενού</title>
+
+    <table>
+      <title>Επιλογές μενού</title>
+
+      <tgroup cols="3" colsep="1">
+        <colspec align="left" colname="1" colnum="1"/>
+
+        <colspec align="left" colname="2" colnum="2"/>
+
+        <colspec align="left" colname="3" colnum="3"/>
+
+        <thead>
+          <row>
+            <entry>Καταχώρηση μενού</entry>
+
+            <entry>Προεπιλεγμένη συντόμευση</entry>
+
+            <entry>Κωδικός καταχώρησης μενού</entry>
+          </row>
+        </thead>
+
+        <tbody>
+          <row>
+            <entry>Χρήση του TAB για να προχωρήσει</entry>
+
+            <entry/>
+
+            <entry>optionsTabAdvanceCheckBoxMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Πάντα επιβεβαίωση πριν την Έξοδο</entry>
+
+            <entry/>
+
+            <entry>optionsAlwaysConfirmQuitCheckBoxMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Μετάφραση με τη βοήθεια μηχανής</entry>
+
+            <entry/>
+
+            <entry/>
+          </row>
+
+          <row>
+            <entry>TransTips/Ενεργοποίηση Transtips</entry>
+
+            <entry/>
+
+            <entry>optionsTransTipsEnableMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>TransTips/Ακριβής αντιστοίχιση</entry>
+
+            <entry/>
+
+            <entry>optionsTransTipsExactMatchMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Γραμαμματοσειρά...</entry>
+
+            <entry/>
+
+            <entry>optionsFontSelectionMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Φίλτρα αρχείου...</entry>
+
+            <entry/>
+
+            <entry>optionsSetupFileFiltersMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Κατάτμηση...</entry>
+
+            <entry/>
+
+            <entry>optionsSentsegMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Ορθογραφικός έλεγχος...</entry>
+
+            <entry/>
+
+            <entry>optionsSpellCheckMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Συμπεριφορά επεξεργασίας...</entry>
+
+            <entry/>
+
+            <entry>optionsWorkflowMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Επικύρωση ετικέτας...</entry>
+
+            <entry/>
+
+            <entry>optionsTagValidationMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Ομάδα...</entry>
+
+            <entry/>
+
+            <entry>optionsTeamMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Εξωτερικά TMXs...</entry>
+
+            <entry/>
+
+            <entry>optionsExtTMXMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Εμφάνιση...</entry>
+
+            <entry/>
+
+            <entry>optionsViewOptionsMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Αποθήκευση και Έξοδος...</entry>
+
+            <entry/>
+
+            <entry>optionsSaveOptionsMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Σύνδεση με ενδιάμεσο διακομιστή (Proxy login)...</entry>
+
+            <entry/>
+
+            <entry>optionsViewOptionsMenuLoginItem</entry>
+          </row>
+
+          <row>
+            <entry>Ανάκτηση κύριου παραθύρου</entry>
+
+            <entry/>
+
+            <entry>optionsRestoreGUIMenuItem</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+  </section>
+
+  <section id="ch04.shortcuts.HelpMenu">
+    <title>Μενού βοήθειας</title>
+
+    <table>
+      <title>Μενού βοήθειας</title>
+
+      <tgroup cols="3" colsep="1">
+        <colspec align="left" colname="1" colnum="1"/>
+
+        <colspec align="left" colname="2" colnum="2"/>
+
+        <colspec align="left" colname="3" colnum="3"/>
+
+        <thead>
+          <row>
+            <entry>Καταχώρηση μενού</entry>
+
+            <entry>Προεπιλεγμένη συντόμευση</entry>
+
+            <entry>Κωδικός καταχώρησης μενού</entry>
+          </row>
+        </thead>
+
+        <tbody>
+          <row>
+            <entry>Εγχειρίδιο χρήσης...</entry>
+
+            <entry><keycap>F1</keycap></entry>
+
+            <entry>helpContentsMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Σχετικά...</entry>
+
+            <entry/>
+
+            <entry>helpAboutMenuItem</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+  </section>
+</appendix>

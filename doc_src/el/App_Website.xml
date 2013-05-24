@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<appendix id="appendix.website">
+  <title><application><indexterm class="singular">
+      <primary>Το OmegaT στο Διαδίκτυο</primary>
+    </indexterm>Το OmegaT</application> στο διαδίτκυο</title>
+
+  <section id="OmegaT.sites.and.OmegaT.SourceForge.project">
+    <title>Ιστότοποι του <application>OmegaT</application> και  το <application>OmegaT</application> στο έργο SourceForge<indexterm class="singular">
+        <primary>Το OmegaT στο διαδίκτυο</primary> <secondary>Έργο SourceForge</secondary>
+      </indexterm></title>
+
+    <para>Ο ιστότοπος του<ulink url="http://www.omegat.org/"> <application>OmegaT</application>  </ulink>περιέχει συνδέσμους με πολυάριθμους πόρους για το <application>OmegaT</application>. Υποστήριξη χρηστών του <ulink url="http://groups.yahoo.com/group/omegat/"><application>OmegaT</application> προσφέρεται σε εθελοντική βάση στο Yahoo! Ομάδα χρηστών</ulink>. Τα <ulink url="http://tech.groups.yahoo.com/group/omegat/database?method=reportRows&amp;amp;tbl=1">FAQ (Συνηθέστερες ερωτήσεις) </ulink> αποτελούν ένα καλό σημείο εκκίνησης για να βρείτε απαντήσεις στις ερωτήσεις που, ίσως, έχετε. Για την πιο πρόσφατη έκδοση του OmegaT, ανατρέξτε στη σελίδα downloads, στη διεύθυνση www.omegat.org. Μπορείτε, επίσης, να υποβάλετε <ulink url="http://sourceforge.net/tracker/?group_id=68187&amp;amp;atid=520347">Αναφορά σφαλμάτων</ulink> και <ulink url="http://sourceforge.net/tracker/?group_id=68187&amp;amp;atid=52035">Ατιήματα βελτιώσεων.</ulink></para>
+  </section>
+
+  <section id="bug.reports">
+    <title>Αναφορά σφαλμάτων<indexterm class="singular">
+        <primary>Το OmegaT στο διαδίκτυο</primary> <secondary>Αναφορά σφαλμάτων</secondary>
+      </indexterm></title>
+
+    <para>Να θυμάστε ότι μια αναφορά σφάλματος, για να είναι καλή, πρέπει να περιέχει τρία πράγματα:</para>
+
+    <itemizedlist>
+      <listitem>
+        <para>Τα απαραίτητα βήμα για την αναπαραγωγή του</para>
+      </listitem>
+
+      <listitem>
+        <para>Τι θα περιμένατε, κανονικά, να δείτε</para>
+      </listitem>
+
+      <listitem>
+        <para>Τι είδατε, αντιθέτως</para>
+      </listitem>
+    </itemizedlist>
+
+    <para>Μπορείτε να βρείτε περισσότερα στο άρθρο <ulink url="http://www.joelonsoftware.com/articles/fog0000000029.html">Ανώδυνη Αναφορά Σφαλμάτων</ulink> του Joel Spolsky.</para>
+
+    <para>Θα πρέπει να επισυνάψετε αντίγραφα αρχείων, τμήματα του καταλόγου καταγραφής (log), στιγμιότυποα οθόνης και οτιδήποτε άλλο που θεωρείτε ότι θα βοηθήσει τους προγραμματιστές να εντοπίσουν και να διορθώσουν το σφάλμα. Σημειώστε ότι οι αναφορές σφαλμάτων και τα αιτήματα βελτιώσεων είναι όλα δημοσίως ορατά, συνεπώς, δεν θα πρέπει να προσθέσετε οποιαδήποτε ευαίσθητα αρχεία. Αν θέλετε να καταγράψετε στην αναφορά σας τι ακριβώς συμβαίνει, εγγραφείτε ως χρήστης στο SourceForge, συνδεθείτε και καταχωρήστε μια αναφορά σφάλματος ή, απλώς, κάντε κλικ στην Παρακολούθηση, στο πάνω μέρος της αναφοράς.</para>
+  </section>
+
+  <section id="contributing.to.omegat.project">
+    <title>Έργο συνεισφορών στο <application>OmegaT</application><indexterm class="singular">
+        Το <primary>OmegaT στο Διαδίτκυο</primary> <secondary>Συνεισφορές στο OmegaT</secondary>
+      </indexterm></title>
+
+    <para><emphasis role="bold">Για να συνεισφέρετε στο <application>OmegaT</application>:</emphasis></para>
+
+    <para>Κατ' αρχήν, εγγραφείτε στην <ulink url="http://groups.yahoo.com/group/OmegaT/">Ομάδα χρηστών</ulink> (μέσω web, ή στέλνοντας ένα e-mail στο <ulink url="Γράψτε μήνυμα στο: OmegaT-subscribe@yahoogroups.com"><application>OmegaT</application>-subscribe@yahoogroups.com</ulink>). Για να συμμετάσχετε στην προσπάθεια ανάπτυξης του <application>OmegaT</application>  μπορείτε να ενώσετε τις δυνάμεις σας με την ομάδα ανάπτυξης, μέσω του Web, ή στέλνοντας μήνυμα e-mail στο <ulink url="Γράψτε μήνυμα στο: omegat-development-request@list.sourceforge.net?subject=subscribe">omegat-development-request@lists.sourceforge.net</ulink> βάζοντας ως θέμα μηνύματος τη λέξη &quot;subscribe&quot;.</para>
+
+    <para><emphasis role="bold">Για να μεταφράσετε τη Διεπαφή χρήστη του <application>OmegaT</application>, το Εγχειρίδιο χρήστη, ή άλλα συναφή έγγραφα:</emphasis></para>
+
+    <para>Πρώτα από όλα, διαβάστε τον Οδηγό <ulink url="http://www.omegat.org/en/howtos/localizing_omegat.html">Τοπικοποίηση και Παραμετροποίηση <application>του OmegaT</application></ulink> και εγγραφείτε στην ομάδα μεταφραστών του <application>OmegaT</application> μέσω του Web, ή στέλνοντας ένα e-mail στο <ulink url="Γράψτε μήνυμα στο: omegat-development-request@lists.sourceforge.net?subject=subscribe">omegat-l10n-request@lists.sourceforge.net</ulink> βάζοντας ως θέμα τη λέξη &quot;subscribe&quot;.</para>
+
+    <indexterm class="singular">
+      <primary>Το OmegaT στο διαδίκτυο</primary> <secondary>Ανάπτυξη, Τοπικοποίηση</secondary>
+    </indexterm>
+
+    <para>Για να προσφέρετε οικονομική υποστήριξη στο έργο OmegaT:<indexterm class="singular">
+        <primary>Το OmegaT στο διαδίκτυο</primary> <secondary>Οικονομική υποστήριξη</secondary>
+      </indexterm></para>
+
+    <para>Αν θέλετε να βοηθήσετε στη συνέχιση της ανάπτυξης του OmegaT, θα εκτιμηθεί πάρα πολύ - κάντε κλικ σε αυτό τον σύνδεσμο, για να μεταβείτε στο <ulink url="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&amp;hosted_button_id=9UB6Y2BBF99LL"> Λογαριασμός OmegaT στο PayPal </ulink>.</para>
+
+    <indexterm class="singular">
+      <primary>Το OmegaT στο διαδίκτυο</primary> <secondary>Προσφορά δωρεάς στο OmegaT</secondary>
+    </indexterm>
+  </section>
+</appendix>

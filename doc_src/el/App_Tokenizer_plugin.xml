@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<appendix id="appendix.TokenizerPlugin.inOmegaT">
+  <title>Πρόσθετο Σύστημα δημιουργίας λεκτικών μονάδων (Tokenizer plugin)<indexterm class="singular">
+      <primary>Πρόσθετα (Plugins)</primary> <secondary>Σύστημα δημιουργίας λεκτικών μονάδων (Tokenizer)</secondary>
+    </indexterm></title>
+
+  <section>
+    <title>Εισαγωγή<indexterm class="singular">
+        <primary>Lucene</primary>
+
+        <see>Tokenizer</see>
+      </indexterm><indexterm class="singular">
+        <primary>Πρόγραμμα κατάτμησης (Stemmer)</primary> <see>Tokenizer</see>
+      </indexterm></title>
+
+    <para>Οι Tokenizers (ή τα Προγράμματα κατάτμησης /Stemmers) βελτιώνουν την ποιότητα των αντιστοιχίσεων, αναγνωρίζοντας τις λέξεις που κλίνονται, στο κείμενο προέλευσης και στα δεδομένα της μεταφραστικής μνήμης. Βελτιώνουν, επίσης, και την αντιστοίχιση γλωσσαρίου</para>
+
+    <para>Ένα πρόιγραμμα κατάτμησης (stemmer) για τα Αγγλικά, π.χ., πρέπει να εντοπίζει την κωδικοσειρά &quot;cats&quot; (και, κατά δύναμη,  &quot;catlike&quot;, &quot;catty&quot; κλπ.) καθώς βασίζεται στη ρίζα &quot;cat&quot; και τα &quot;stemmer&quot;, &quot;stemming&quot;, &quot;stemmed&quot; καθώς βασίζονται στο &quot;stem&quot;. Ένας αλγόριθμος κατάτμησης μειώνει τις λέξεις &quot;fishing&quot;, &quot;fished&quot;, &quot;fish&quot; και &quot;fisher&quot; στη ρίζα της λέξης, στο &quot;fish&quot;. Αυτό είναι πολύ χρήσιμο στην περίπτωση γλωσσών που χρησιμοποιούν μορφές pre- και postfix για τις ρίζες των λέξεων. Ας δανειστούμε ένα παράδειγμα από τα Σλοβενικά, εδώ &quot;καλός&quot; σε όλες τις δυνατές γραμματικά ορθές μορφές:</para>
+
+    <itemizedlist>
+      <listitem>
+        <para>lep, lepa, lepo - ενικός, αρσενικό, θηλυκό, ουδέτερο</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>lepši, lepša, lepše . - συγκριτικός, ονομαστική, αρσενικό, θηλυκό, ουδέτερο, resp. μορφή Πληθυντικού του επιθέτου</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>najlepših - υπερθετικός, πληθυντικός, γενική για Α,Θ,Ο</para>
+      </listitem>
+    </itemizedlist>
+  </section>
+
+  <section>
+    <title>Εγκατάσταση και χρήση από γραμμή εντολών</title>
+
+    <para>Ένα πακέτο tokenizer που προσαρμόστηκε από το έργο Lucene, διανέμεται σαν πρόσθετο του OmegaT στο http://sourceforge.net/projects/omegat-plugins/files/. Κατεβάστε τα πιο πρόσφατα αρχεία (OmegaT-tokenizers_0.4_2-2.1.zip κατά τη στιγμή που γράφεται το παρόν).</para>
+
+    <para>Για την εγκατάσταση του tokenizer, δημιουργείστε έναν κατάλογο με το όνομα &quot;πρόσθετα&quot; μέσα στον κατάλογο όπου βρίσκεται το OmegaT.jar και αποσυμπιέστε αυτά τα αρχεία μέσα σε αυτό τον κατάλογο.</para>
+
+    <para>Για  να λειτουργήσετε το OmegaT με τον tokenizer, πρέπει να ορίσετε ποιον tokenizer θα χρησιμοποιήσετε για την γλώσσα προέλευσης και ποιον tokenizer θα χρησιμοποιήσετε για την γλώσσα στόχο. Η σύνταξη είναι ως εξής:</para>
+
+    <para><literal>java -jar OmegaT.jar --ITokenizer=[source language
+    tokenizer name] --ITokenizerTarget=[target language tokenizer
+    name]</literal></para>
+
+    <para>Τα ονόματα για τον tokenizer προσφέρονται στο αρχείο Readme.txt που διανέμεται με τα αρχεία tokenizer. Για παράδειγμα, αν θέλετε να χρησιμοποιήσετε τον Lucene CJK tokenizer για την γλώσσα προέλευσης και τον Lucene French tokenizer για τη γλώσσα στόχο, η εντολή σας θα πρέπει να μοιάζει ως εξής:</para>
+
+    <para><literal>java -jar OmegaT.jar
+    --ITokenizer=org.omegat.plugins.tokenizer.LuceneCJKTokenizer
+    --ITokenizerTarget=org.omegat.plugins.tokenizer.LuceneFrenchTokenizer</literal></para>
+  </section>
+
+  <section>
+    <title>Ιδιαιτερότητες του Mac OS X</title>
+
+    <para>If you wish to use the tokenizers with the Mac OS X OmegaT.app
+    package, the tokenizer installation described above applies (right-click
+    on OmegaT.app to find the location of OmegaT.jar), but you'll need to
+    specify the tokenizer names in the <filename>info.plist </filename>that
+    contains the Java launch options. Follow the instructions above to access
+    the <filename>info.plist</filename> file and edit it so that it looks as
+    follows for the example we just gave:</para>
+
+    <literallayout><code>
+&lt;key&gt;VMOptions&lt;/key&gt;
+&lt;string&gt;-Xmx1024M&lt;/string&gt;
+
+&lt;key&gt;Arguments&lt;/key&gt;
+&lt;array&gt;
+  &lt;string&gt;--ITokenizer=org.omegat.plugins.tokenizer.LuceneCJKTokenizer&lt;/string&gt;
+  &lt;string&gt;--ITokenizerTarget=org.omegat.plugins.tokenizer.LuceneFrenchTokenizer&lt;/string&gt;
+&lt;/array&gt;</code></literallayout>
+  </section>
+
+  <section>
+    <title>Troubleshooting</title>
+
+    <para>To make sure that the tokenizers are being used, open a project and
+    check the log information from the console. With the example above it
+    should look like that:</para>
+
+    <literallayout><code>
+84528: Info: Source tokenizer: org.omegat.plugins.tokenizer.LuceneCJKTokenizer 
+84528: Info: Target tokenizer: org.omegat.plugins.tokenizer.LuceneFrenchTokenizer 
+</code></literallayout>
+
+    <para>The numbers on the left are likely to be different on your system so
+    make sure that the source and target tokenizer names,specified in the
+    start-up options, correspond to what the log is showing. If the tokenizers
+    are not properly launched, the log will look like this:</para>
+
+    <literallayout><code>
+12719: Info: Source tokenizer: org.omegat.core.matching.Tokenizer 
+12719: Info: Target tokenizer: org.omegat.core.matching.Tokenizer 
+</code></literallayout>
+
+    <para>With the Mac OS X OmegaT.app package, double-click on the
+    <literal>JavaApplicationStub</literal> located in
+    /OmegaT.app/Contents/MacOS/ (see above to access it) to launch OmegaT from
+    the console and get immediate access to the log.</para>
+  </section>
+</appendix>

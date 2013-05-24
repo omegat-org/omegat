@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<appendix id="appendix.LanguageToolPlugin.inOmegaT">
+  <title>Πρόσθετο Εργαλείο γλώσσας<indexterm class="singular">
+      <primary>Πρόσθετα (Plugins)</primary> <secondary>Εργαλείο γλώσσας</secondary>
+    </indexterm></title>
+
+  <section>
+    <title>Εισαγωγή</title>
+
+    <para><ulink url="http://www.languagetool.org">Το Εργαλείο γλώσσας</ulink> είναι ένα λογισμικό Ανοικτού Κώδικα για αναθεώρηση (proofreading) προτύπων και γραμματικής για Αγγλικά, Γαλλικά, Γερμανικά, Πολωνικά, Ολανδικά, Ρουμανικά και πολλές άλλες γλώσσες - δείτε τον <ulink url="http://www.languagetool.org/languages/">Κατάλογο υποστηριζόμενων γλωσσών</ulink>.</para>
+
+    <para>Μπορείτε να δείτε το Εργαλείο γλώσσας ως πρόγραμμα για τον εντοπισμό σφαλμάτων, που ένας απλός ορθογραφικός διορθωτής δεν μπορεί να βρει, π.χ. σύγχυση των λέξεων there/their, no/now κλπ. Μπορεί να εντοπίζει και μερικά σφάλματα γραμματικής. Δεν περιλαμβάνει ορθογραφικό έλεγχο. Το Εργαλειο γλώσσας θα βρει τα λάθη για τα οποία ορίστηκε ένας κανόνας στα ειδικά αρχεία ρύθμισης της κάθε γλώσσας.</para>
+
+    <figure>
+      <title>Το Εργαλείο Γλώσσας (LanguageTool) στο OmegaT</title>
+
+      <screenshot>
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="images/LanguageToolExample.png"/>
+          </imageobject>
+        </mediaobject>
+      </screenshot>
+    </figure>
+  </section>
+
+  <section>
+    <title>Εγκατάσταση και Χρήση</title>
+
+    <para>Μπορείτε να κατεβάσετε το πρόσθετο Εργαλείο Γλώσσας για το OmegaT από την <ulink url="http://sourceforge.net/projects/omegat-plugins/files">Ιστοσελίδα για πρόσθετα του OmegaT</ulink>. Αποσυμπιέστε τα αρχεία και βάλτετα όλα στον κατάλογο &quot;Πρόσθετα&quot; που βρίσκεται στον κατάλογο εγκατάστασης του OmegaT. Αυτός είναι και ο κατάλογος που περιέχει το αρχείο OmegaT.jar. Δημιουργείστε πρώτα τον κατάλογο &quot;Πρόσθετα&quot;, αν δεν υπάρχει ήδη.</para>
+
+    <para>Μόλις εγκατασταθεί, το OmegaT  θα χρησιμοποιεί αυτομάτως αυτό το πρόσθετο, εφόσον επιλεγούν οι <guimenuitem>Επιλογές &gt; Έλεγχος Γλώσσας</guimenuitem>. Οι κανόνες που εφαρμόζονται (αν υπάρχουν) εξαρτώνται από τη γλώσσα προέλευσης και τη γλώσσα-στόχο του έργου. Όταν ενεργοποιηθεί ένας κανόνας, η αντίστοιχη πρόταση θα υπογραμμίζεται με μπλε χρώμα στον Editor (βλέπε <emphasis>επίσης </emphasis>και το <emphasis>Δεν έκανα τίποτε</emphasis> στην παραπάνω εικόνα). Όταν μετακινείτε το ποντίκι πάνω στην υπογραμμισμένη πρόταση, θα εμφανίζεται μια εξήγηση.</para>
+  </section>
+</appendix>

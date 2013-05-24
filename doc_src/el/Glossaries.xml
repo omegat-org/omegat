@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<chapter id="chapter.glossaries">
+  <title>Γλωσσάρια<indexterm class="singular">
+      <primary>Τα Παράθυρα και οι Περιοχές στο OmegaT</primary> <secondary>Περιιοχή Γλωσσαρίου</secondary>
+    </indexterm><indexterm class="singular">
+      <primary>Γλωσσάρια</primary>
+    </indexterm></title>
+
+  <para>Τα Γλωσσάρια είναι αρχεί που δημιουργούνται και ενημερώνονται χειροκίνητα, προς χρήση με το <application>OmegaT</application>.</para>
+
+  <para>Αν ένα έργο <application>OmegaT</application> περιέχει ένα ή περισσότερα γλωσσάρια, οποιοδήποτε όροι στο γλωσσάρι, οι οποίοι βρίσκονται και στο τρέχον τμήμα, θα προβάλλονται αυτομάτως και στην εμφάνιση του Γλωσσαρίου.</para>
+
+  <para>Θα ορίσετε την τοποθεσία και το όνομά του στον διάλογο 'Ιδιότητες έργου'. Η επέκταση πρέπει να είναι <filename>.txt</filename>(αν όχι, τότε θα προστεθεί). Η τοποθεσία του αρχείου πρέπει να είναι μέσα στον κατάλογο <filename>/glossary</filename>, αλλά μπορεί να είναι και μέσα σε έναν πιο βαθύ κατάλογο (π.χ., <filename>glossary/sub/glossary.txt</filename>). Δεν χρειάζεται να υπάρχει το αρχείο όταν το ρυθμίζετε, θα δημιουργηθεί (αν είναι απαραίτητο) όταν θα προσθέσετε μια καταχώρηση γλωσσαρίου. Αν το αρχείο υπάρει ήδη, δεν γίνεται καμία προσπάθεια επαλήθευσης της μορφής των χαρακτήρων που ορίσθηκαν στο αρχείο: οι νέες καταχωρήσεις θα βρίσκνται πάντα σε μορφή tab-separated και σε UTF-8. Αφού το υπάρχον περιεχόμενο δεν θα πειραχθεί, η βλάβη σε ένα υπάρχον αρχείο θα είναι περιορισμένη.</para>
+
+  <section>
+    <title>Χρήση</title>
+
+    <para>Για να χρησιμοποιήσετε ένα υπάρχον γλωσσάρι, απλώς τοποθετήστετο στον κατάλογο<indexterm class="singular">
+        <primary>Αρχεία έργου</primary> <secondary>Υποκατάλογος Γλωσσαρίου</secondary>
+      </indexterm> <filename>/glossary</filename> αφού πρώτα έχετε δημιουργήσει το έργο. Το <application>OmegaT</application> θα εντοπίσει αυτομάτως τα αρχεία γλωσσαρίου σε αυτό τον κατάλογο όταν ανοίγει ένα έργο. Οι όροι μέσα στο τρέχον τμήμα που το <application>OmegaT</application> βρίσκει στο αρχείο(α) γλωσσαρίου, εμφανίζονται στην Περιοχή γλωσσαρίου:</para>
+
+    <indexterm class="singular">
+      <primary>Γλωσσάρια, Περιοχή γλωσσαρίου</primary>
+    </indexterm>
+
+    <figure>
+      <title>Περιοχή γλωσσαρίου</title>
+
+      <mediaobject>
+        <imageobject role="html">
+          <imagedata fileref="images/GlossaryPane_25.png"/>
+        </imageobject>
+
+        <imageobject role="fo">
+          <imagedata fileref="images/GlossaryPane_25.png" width="60%"/>
+        </imageobject>
+      </mediaobject>
+    </figure>
+
+    <para>Η λέξη πριν από το σύμβολο = είναι ο όρος προέλευσης και η μετάφρασή του είναι οι λέξεις μετά το =. Στην καταχώρηση λεξικού μπορεί να έχει προστεθεί ένα σχόλιο. Η λειτουργία γλωσσαρίου βρίσκει μόνο τις ακριβείς αντιστοιχίσεις με την καταχώρηση γλωσσαρίου (π.χ. δεν βρίσκει τις κεκλιμμένες μορφές λέξεων κλπ.). Οι νέοι όροι μπορούν να προστεθούν χειροκίνητα στο αρχείο(α) γλωσσαρίου κατά τη μετάφραση, π.χ. στο πρόγραμμα επεξεργασίας κειμένου. Οι νέοι όροι που προσετέθησαν δεν θα ανγνωρισθούν μόλις οι αλλαγές στο αρχείο κειμένου αποθηκευθούν.</para>
+
+    <para>Ο όρος προέλευσης δεν χρειάζεται να έχει μια μονολεκτική καταχώρηση, όπως δείχνει και το επόμενο παράδειγμα:</para>
+
+    <figure>
+      <title>Καταχωρήσεις πολλαπλών λέξεων στα γλωσσάρια - παράδειγμα<indexterm class="singular">
+          <primary>Γλωσσάρια</primary> <secondary>Περιοχή γλωσσαρίου</secondary> <tertiary>Καταχωρήσεις πολλαπλών λέξεων</tertiary>
+        </indexterm></title>
+
+      <mediaobject>
+        <imageobject role="html">
+          <imagedata fileref="images/MultiTerm_Glossary_25.png"/>
+        </imageobject>
+
+        <imageobject role="fo">
+          <imagedata fileref="images/MultiTerm_Glossary_25.png" width="80%"/>
+        </imageobject>
+      </mediaobject>
+    </figure>
+
+    <para>Ο υπογραμμισμένος όρος &quot;αναδυόμενο μενού&quot; μπορεί να βρεθεί στην περιοχή γλωσσαρίου ως &quot;pojavni menu&quot;. Αν το επιλέξετε στην Περιοχή γλωσσαρίου και μετά το κλικάρετε, θα εισαχθεί στη θέση του δείκτη, στο τμήμα προορισμού.<footnote>
+        <para>Σημειώστε ότι, στην παραπάνω περίπτωση, αυτή είναι μόνο η μισή ιστορία (ή και ακόμα λιγώτερο), καθώς η γλώσσα προορισμού (Σλοβενικά) χρησιμοποιεί τις κλίσεις των λέξεων. Οπότε, η εισαγωγή του όρου &quot;pojavni meni&quot; στην ονομαστική - πρέπει να αλλαχθεί στο &quot;pojavnem meniju&quot; , δηλ.. στην αιτιατική. Συνεπώς, είναι πιθανόν γρηγορώτερο να πληκτρολογείτε σωστά τον όρο από την αρχή, χωρίς να εμπλακείτε με το γλωσσάρι και τις συντομεύσεις του.</para>
+      </footnote></para>
+  </section>
+
+  <section>
+    <title><indexterm class="singular">
+        <primary>Γλωσσάρια</primary> <secondary>Μορφή αρχείου</secondary>
+      </indexterm>Μορφή αρχείου<indexterm class="singular">
+        <primary>Αρχεία έργου</primary> <secondary>Αρχεία χρήστη</secondary> <seealso>Γλωσσάρια</seealso>
+      </indexterm></title>
+
+    <para>Τα αρχεία γλωσσαρίου είναι απλά αρχεία κειμένμου που περιέχουν τρίστηλους, tab-delimited καταλόγους με τους όρους προέλευσης και προορισμού στην πρώτη και δεύτερη στήλη, αντίστοιχα. Η τρίτη στήλη μπορεί να χρησιμοποιηθεί για πρόσθετες πληροφορίες. Μπορείτε να έχετε καταχωρήσεις όπου λείπει η στήλη προορισμού, π.χ. απλώς περιέχουν τον όρο προέλευσης και το σχόλιο.</para>
+
+    <para>Τα αρχεία γλωσσαρίου μπορούν να είναι ή στην προεπιλεγμένη κωδικοποίησηη συστήματος (υποδεικνύεται με την επέκταση .tab) ή σε UTF-8 (με επέκταση .utf8). Η κωδικοποίηση Unicode (UTF8) προτιμάται για προφανείς λόγους. Υποστηρίζεται επίσης και η μορφή CSV. Αυτή η μορφή είναι η ίδια με εκείνη που διαχωρίζεται με το tab: όρος προέλευσης, όρος προορισμού. Τα πεδία σχολίων χωρίζονται με ένα κόμμα ','. Οι συμβολοσειρές μπορεί να περικλείονται σε εισαγωγικά &quot;, πράγμα που επιτρέπει την ύπαρξη ενός κόμματος μέσα στη συμβολοσειρά:</para>
+
+    <para><literal>&quot;Αυτός είναι ένας όρος προέλευσης που περιέχει ένα κόμμα &quot;,&quot;c'est un terme, qui contient une virgule&quot;</literal></para>
+
+    <para>Εκτός από τη μορφή απλού κειμένου, υποστηρίζεται και η μορφή TBX <indexterm class="singular">
+        <primary>Γλωσσάρια</primary> <secondary>Μορφή TBX</secondary>
+      </indexterm>. TBX - Term Base eXchange - είναι το ανοιχτό πρότυπο βασιμένο στην XML, για ανταλλαγή δομημένων δεδομένων ορολογίας. Το TBX εγκρίθηκε ως διεθνές πρότυπο από τη LISA και το ISO. Αν έχετε ήδη ένα σύστημα διαχείρισης υπάρχουσας ορολογίας - π.χ. το MultiTerm - πιθανότατα προσφέρει την εξαγωγή δεδομένων ορολογίας σε μορφή TBX. Η <ulink url="http://www.microsoft.com/Language/en-US/Terminology.aspx">Συλλογή ορολογίας της Microsoft (Terminology Collection)</ulink> <indexterm class="singular">
+        <primary>Γλωσσάρια</primary> <secondary>Συλλογή ορολογίας της Microsoft</secondary>
+      </indexterm> μπορεί να μεταφορτωθεί σε σχεδόν 100 γλώσσες και να χρησιμεύσει ως ένα βασικό γλωσσάρι IT.</para>
+  </section>
+
+  <section>
+    <title>Πως να δημιουργείτε γλωσσάρια<indexterm class="singular">
+        <primary>Γλωσσάρια</primary> <secondary>Δημιουργία ενός γλωσσαρίου</secondary>
+      </indexterm></title>
+
+    <para>Οι ρυθμίσεις έργου επιτρέπουν την εισαγωγή ενός ονόματος σε ένα εγγράψιμο αρχείο γλωσσαρίου (βλέπει την αρχή αυτού του κεφαλαίου). Κάντε δεξί κλικ στην Περιοχή γλωσσαρίου ή πατήστε <keycap>Ctrl+Shift+G</keycap> για την προσθήκη νέας καταχώρησης. Ανοίγει ένας διάλογος που σας επιτρέπει να εισαγάγετε τον όρο προέλευσης, τον όρο προορισμού και οποιαδήποτε σχόλια που μπορεί να έχετε:</para>
+
+    <mediaobject role="html">
+      <imageobject>
+        <imagedata fileref="images/GlossaryEntry_25.png"/>
+      </imageobject>
+
+      <imageobject role="fo">
+        <imagedata fileref="images/GlossaryEntry_25.png" width="80%"/>
+      </imageobject>
+    </mediaobject>
+
+    <para>Τα περιεχόμενα των αρχείων γλωσσαρίου διατηρούνται στη μνήμη και φορτώνονται όταν το έργο ανοίγει ή επαναφορτώνεται. Η ενημέρωση ενός αρχείου γλωσσαρίου είναι μάλλον απλή. Πατήστε <keycap>Ctrl+Shift+G</keycap> και εισάγετε τον νέο όρο, τη μετάφρασή του και οποιαδήποτε σχόλια που μπορεί να έχετε (αφού βεβαιωθείτε ότι πατήσατε το tab ανάμεσα στα πεδία) και αποθηκεύσετε το αρχείο. Τα περιεχόμενα της Περιοχής γλωσσαρίου θα ενημερωθούν αντίστοιχα.</para>
+
+    <para><indexterm class="singular">
+        <primary>Γλωσσάρια</primary> <secondary>Τοποθεσία του αρχείου εγγράψιμου γλωσσαρίου</secondary>
+      </indexterm>Η τοποθεσία με το εγγράψιμο αρχείο γλωσσαρίου μπορεί να ορισθεί στο <guimenuitem>Έργο &gt; Ιδιότητες ... </guimenuitem>Διάλογος. Οι αναγνωρίσιμες επεκτάσεις είναι <filename>TXT</filename> και <filename>UTF8</filename></para>
+
+    <para><emphasis role="bold">Σημείωση: </emphasis>Ασφαλώς, υπάρχουν και άλλοι τρόποι και μέσα για τη δημιουργία ενός απλού αρχείου με καταχωρήσεις που χωρίζονται με το tab. Δεν υπάρχει καμία αντένδειξη στη χρήση π.χ. του Notepad++ σε περιβάλλον Windows, ή του GEdit στο Linux, ή κάποιου προγράμματος λογιστικών φύλλων για τον σκοπό αυτό: μπορεί να χρησιμοποιηθεί οποιαδήποτε εφαρμογή σε θέση να χειρίζεται το UTF8 και να δείχνει τα κενά διαστήματα (για να μη χάνετε τους απαιτούμενους χαρακτήρες <keycap>TAB</keycap>).</para>
+  </section>
+
+  <section>
+    <title><indexterm class="singular">
+        <primary>Γλωσσάρια</primary> <secondary>Trados MultiTerm</secondary>
+      </indexterm>Χρήση του Trados MultiTerm</title>
+
+    <para>Το  <application>OmegaT</application> μπορεί να χρησιμοποιήσει ως γλωσσάρια τα δεδομένα που εξάγονται από το Trados MultiTerm, χωρίς καμία περαιτέρω τροποποίηση, αρκεί να έχουν την προέκταση αρχείου <filename>.tab</filename> και τα πεδία με τους όρους προέλευσης και προορισμού να είναι στα πρώτα δύο πεδία, αντίστοιχα. Αν κάνετε εξαγωγή με τη χρήση της επιλογής συστήματος &quot;Εξαγωγή Tab-delimited&quot;, θα χρειαστεί να διαγράψετε τις πρώτες 5 στήλες (Seq. Αρ., Ημερομ. δημιουργίας κλπ). Οι νεώτερες εκδόσεις του MultiTerm υποστηρίζουν την εξαγωγή σε μορφή TBX.</para>
+  </section>
+
+  <section>
+    <title><indexterm class="singular">
+        <primary>Γλωσσάρια</primary> <secondary>Προβλήματα με τα γλωσσάρια</secondary>
+      </indexterm>Συνηθισμένα προβλήματα με τα γλωσσάρια</title>
+
+    <para><emphasis role="bold">Πρόβλημα: Δεν εμφανίζεται κανένας όρος στο γλωσσάρι - πιθανές αιτίες:</emphasis></para>
+
+    <itemizedlist>
+      <listitem>
+        <para>Δεν βρέθηκε αρχείο γλωσσαρίου στον κατάλογο &quot;glossary&quot;.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Το αρχείο γλωσσαρίου είναι κενό.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Οι καταχωρήσεις δεν χωρίζονται με έναν χαρακτήρα TAB.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Το αρχείο γλωσσαρίου δεν έχει τη σωστή επέκταση (.tab ή .utf8).</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Δεν υπάρχει ΑΚΡΙΒΗΣ αντιστοίχιση ανάμεσα στην καταχώρηση γλωσσαρίου και το κείμενο προέλευσης στο έγγραφό σας - για την περίπτωση του πληθυντικού.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Το αρχείο γλωσσαρίου δεν έχει τη σωστή κωδικοποίηση.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Δεν υπάρχουν όροι στο τρέχον τμήμα που να αντιστοιχίζονται με οποιουσδήποτε όρους στο γλωσσάρι.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Ένα ή και περισσότερα από τα παραπάνω προβλήματα ενδέχεται να έχουν διορθωθεί, αλλά το έργο δεν ξαναφορτώθηκε.</para>
+      </listitem>
+    </itemizedlist>
+
+    <para><emphasis role="bold">Πρόβλημα: Στην Περιοχή γλωσσαρίου, μερικοί χαρακτήρες δεν εμφανίζονται σωστά</emphasis></para>
+
+    <itemizedlist>
+      <listitem>
+        <para>...ενώ οι ίδιοι χαρακτήρες εμφανίζονται σωστά στην Περιοχή επεξεργασίας: η επέκταση δεν ταιριάζει με την κωδικοποίηση.</para>
+      </listitem>
+    </itemizedlist>
+  </section>
+</chapter>

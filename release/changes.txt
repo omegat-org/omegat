@@ -3,13 +3,24 @@
 ----------------------------------------------------------------------
    0 Enhancement
    1 Bug fix
-   0 Localisation update
+   8 Localisation updates
 ----------------------------------------------------------------------
 3.0.2 update 1 vs. 3.0.2
 
   Bug fixes:
 
   - LanguageTool wasn't working in some languages
+
+  Localisation updates:
+
+  - Catalan localisation updated to 3.0.1 (UI, Instant Start, Readme)
+  - Czech localisation updated to 3.0 (UI, Instant Start, Readme)
+  - Dutch localisation updated to 3.0.2 (UI, Documentation, Readme)
+  - Greek localisation updated to 3.0 (UI, Partial documentation, Instant Start)
+  - Japanese localisation updated to 3.0.2 (UI)
+  - Slovenian localisation updated to 3.0 (UI)
+  - Ukrainian localisation updated to 3.0 (UI, Instant Start, Readme)
+  - Welsh localisation updated to 3.0 (UI)
 
 ----------------------------------------------------------------------
  OmegaT 3.0.2 update 1

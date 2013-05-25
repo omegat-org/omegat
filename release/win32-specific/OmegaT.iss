@@ -50,6 +50,7 @@ Source: "readme_sl.txt"; DestDir: "{app}"; Flags: isreadme; Languages: sl
 Source: "readme_sq.txt"; DestDir: "{app}"; Flags: isreadme; Languages: sq
 Source: "readme_sv.txt"; DestDir: "{app}"; Flags: isreadme; Languages: sv
 Source: "readme_tr.txt"; DestDir: "{app}"; Flags: isreadme; Languages: tr
+Source: "readme_uk.txt"; DestDir: "{app}"; Flags: isreadme; Languages: uk
 Source: "readme_zh_CN.txt"; DestDir: "{app}"; Flags: isreadme; Languages: zh_CN
 Source: "readme_zh_TW.txt"; DestDir: "{app}"; Flags: isreadme; Languages: zh_TW
 Source: "readme*.txt"; DestDir: "{app}";

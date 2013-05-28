@@ -1,11 +1,11 @@
 ----------------------------------------------------------------------
- OmegaT 3.0.2 update 2
+ OmegaT 3.0.3
 ----------------------------------------------------------------------
    3 Enhancements
-   2 Bug fixes
+   3 Bug fixes
    8 Localisation updates
 ----------------------------------------------------------------------
-3.0.2 update 2 vs. 3.0.2 update 1
+3.0.3 vs. 3.0.2 update 1
 
   Implemented requests:
 
@@ -27,6 +27,9 @@ this version, remove the scripting plugin from the plugin folder.
   - When one source term was corresponding to several ones
 (e.g., source term = target term1, target term2) in the glossary pane,
 only the first target term was shown in the TransTip popup menu
+
+  - The autocompleter was sometimes capitalising the first letter of 
+terms when it shouldn’t
 
   Localisation updates:
 

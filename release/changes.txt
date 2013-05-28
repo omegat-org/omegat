@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 3.0.2 update 2
 ----------------------------------------------------------------------
-   1 Enhancement
+   3 Enhancements
    2 Bug fixes
    8 Localisation updates
 ----------------------------------------------------------------------
@@ -11,6 +11,14 @@
 
   - Change script keyboard shortcuts to Ctrl+Shift+Fn 
   https://sourceforge.net/p/omegat/feature-requests/839/
+
+  - Make groovy scripts that ship with Scripting Plugin cross-platform 
+  https://sourceforge.net/p/omegat/feature-requests/864/
+
+  Other enhancements:
+
+  - The Scripting plugin was integrated in OmegaT. When using
+this version, remove the scripting plugin from the plugin folder.
 
   Bug fixes:
 

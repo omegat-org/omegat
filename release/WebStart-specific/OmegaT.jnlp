@@ -64,6 +64,9 @@
 				<jar href="pdfbox-app-1.8.1.jar" download="lazy" />
 				<jar href="Fontbox-0.1.0.jar" download="lazy" />
 				<jar href="icu4j-51_1.jar" download="lazy" />
+				<jar href="bsf-2.4.0.jar" />
+				<jar href="groovy-all-1.8.9.jar" download="lazy" />
+				<jar href="js-rhino-1.7R4.jar" download="lazy" />
 
 			</resources>
 			<resources os="Linux" arch="amd64">

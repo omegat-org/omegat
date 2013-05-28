@@ -73,7 +73,7 @@ org.omegat.tokenizer.LuceneEnglishTokenizer) use stop words from Okapi
 tinysegmenter.jar is distributed under the Modified BSD license
 
 commons-*.jar are distributed under the Apache License 2.0
-(required for LanguageTool)
+(required for LanguageTool, scripting)
 
 jwordSplitter-3.4.jar is distributed under the Apache License 2.0
 (required for LanguageTool)
@@ -93,4 +93,12 @@ Fontbox-0.1.0.jar and JempBox-0.2.0.jar are distributed under the Fonbox license
 
 icu4j-51_1.jar is distributed under the ICU4J license
 
+bsf-2.4.0.jar is distributed under the Apache License 2.0
+(required for scripting)
+
+groovy-all-1.8.9.jar is distributed under the Apache License 2.0
+(required for scripting)
+
+js-rhino-1.7R4.jar is distributed under the Mozilla Public License 2.0
+(required for scripting)
 

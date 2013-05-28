@@ -10,6 +10,7 @@ OmegaT-Plugins:
   org.omegat.filters2.text.TextFilter
   org.omegat.tokenizer.LuceneEnglishTokenizer
   org.omegat.core.machinetranslators.BelazarTranslate
+  org.omegat.gui.scripting.ScriptingWindow
 OmegaT-Plugin: true
 
 Name: org.omegat.filters3.xml.android.AndroidFilter

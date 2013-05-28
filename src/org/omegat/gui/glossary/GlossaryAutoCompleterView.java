@@ -52,7 +52,7 @@ public class GlossaryAutoCompleterView extends AutoCompleterView {
         for (GlossaryEntry entry : Core.getGlossary().getDisplayedEntries()) {
             for (String s : entry.getLocTerms(true)) {
                 if (s.toLowerCase().startsWith(wordChunk.toLowerCase())) {
-                    entryList.add(s);
+                    entryList.add(matchCapitalization(s, wordChunk));
                 }
             }
         }
@@ -61,12 +61,25 @@ public class GlossaryAutoCompleterView extends AutoCompleterView {
                 && entryList.size() == 0) {
             for (GlossaryEntry entry : Core.getGlossary().getDisplayedEntries()) {
                 for (String s : entry.getLocTerms(true)) {
-                    entryList.add(s);
+                    entryList.add(matchCapitalization(s, wordChunk));
                 }
             }
             completer.adjustInsertionPoint(wordChunk.length());
         }
         
         return entryList;
-    }   
+    }
+
+    private static String matchCapitalization(String text, String compare) {
+        if (Character.isUpperCase(compare.charAt(0))) {
+            return Character.isUpperCase(text.charAt(0)) ?
+                    text :
+                    Character.toUpperCase(text.charAt(0)) + text.substring(1);
+        } else if (Character.isLowerCase(compare.charAt(0))) {
+            return Character.isLowerCase(text.charAt(0)) ?
+                    text :
+                    Character.isLowerCase(text.charAt(0)) + text.substring(1);
+        }
+        return text;
+    }
 }

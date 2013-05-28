@@ -347,25 +347,14 @@ public class AutoCompleter {
      * @param selected 
      */
     protected void acceptedListItem(String selected) { 
-        try {
-            if (selected==null || selected.equals(OStrings.getString("AC_NO_SUGGESTIONS"))) 
-                return; 
-     
-            int offset = editor.getCaretPosition();
-            
-            if (editor.getSelectionStart() == editor.getSelectionEnd()) {
-                editor.setSelectionStart(wordChunkStart);
-                editor.setSelectionEnd(offset);
-            }
-            StringBuilder builder = new StringBuilder(selected);
-            if (Character.isUpperCase(editor.getText(offset,1).charAt(0))) {    
-                builder.setCharAt(0, Character.toUpperCase(builder.charAt(0)));
-            }
-            editor.replaceSelection(builder.toString());
-            
-        } catch (BadLocationException ex) {
-            Log.log(ex);
+        if (selected==null || selected.equals(OStrings.getString("AC_NO_SUGGESTIONS"))) 
+            return; 
+        
+        if (editor.getSelectionStart() == editor.getSelectionEnd()) {
+            editor.setSelectionStart(wordChunkStart);
+            editor.setSelectionEnd(editor.getCaretPosition());
         }
+        editor.replaceSelection(selected);
     }
 
     private int nextViewNumber() {

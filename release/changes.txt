@@ -1,11 +1,16 @@
 ----------------------------------------------------------------------
  OmegaT 3.0.2 update 2
 ----------------------------------------------------------------------
-   0 Enhancement
+   1 Enhancement
    2 Bug fixes
    8 Localisation updates
 ----------------------------------------------------------------------
 3.0.2 update 2 vs. 3.0.2 update 1
+
+  Implemented requests:
+
+  - Change script keyboard shortcuts to Ctrl+Shift+Fn 
+  https://sourceforge.net/p/omegat/feature-requests/839/
 
   Bug fixes:
 

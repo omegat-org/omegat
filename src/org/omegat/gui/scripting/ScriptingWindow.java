@@ -177,7 +177,7 @@ public class ScriptingWindow extends JFrame {
             
             // Since the script is run while editing a segment, the shortcut should not interfere
             // with the segment content, so we set it to a Function key.
-            m_quickMenus[i].setAccelerator(KeyStroke.getKeyStroke("alt ctrl F" + (i+1)));
+            m_quickMenus[i].setAccelerator(KeyStroke.getKeyStroke("shift ctrl F" + (i+1)));
 
             toolsMenu.add(menuItem);
         }
@@ -202,7 +202,7 @@ public class ScriptingWindow extends JFrame {
         
         // Since the script is run while editing a segment, the shortcut should not interfere
         // with the segment content, so we set it to a Function key.
-        m_quickMenus[index].setAccelerator(KeyStroke.getKeyStroke("alt ctrl F" + (index+1)));
+        m_quickMenus[index].setAccelerator(KeyStroke.getKeyStroke("shift ctrl F" + (index+1)));
         m_quickMenus[index].setEnabled(true);
 
         Mnemonics.setLocalizedText( m_quickMenus[index], "&" + scriptKey(index) + " - " + scriptName);

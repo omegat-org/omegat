@@ -1,1 +1,500 @@
-<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>第16章 正規表現</title><link rel="stylesheet" type="text/css" href="OmegaT.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="OmegaT 2.6 - 取扱説明書"><link rel="up" href="index.html" title="OmegaT 2.6 - 取扱説明書"><link rel="prev" href="chapter.searches.html" title="第15章 検索"><link rel="next" href="chapter.dictionaries.html" title="第17章 辞書"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">第16章 正規表現</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="chapter.searches.html">戻る</a>&nbsp;</td><th width="60%" align="center">&nbsp;</th><td width="20%" align="right">&nbsp;<a accesskey="n" href="chapter.dictionaries.html">次へ</a></td></tr></table><hr></div><div class="chapter"><div class="titlepage"><div><div><h1 class="title"><a name="chapter.regexp"></a>第16章 正規表現<a class="indexterm" name="d0e7307"></a></h1></div></div></div><div class="toc"><dl class="toc"><dt><span class="section"><a href="chapter.regexp.html#regex.tools.and.examples.of.use">1. 正規表現関連ツールとその使用例</a></span></dt></dl></div><p>文字列検索と分節化規則で使用する正規表現は、Java がサポートしているものです。より詳細な情報については<a class="ulink" href="http://docs.oracle.com/javase/jp/1.5.0/api/java/util/regex/Pattern.html" target="_top">Java の正規表現に関する技術文書</a>を参照してください。以下の構文一覧と使用例も参照してください。</p><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">注記</h3><p>この章は上級者のユーザーを対象にしています。独自の分節化規則を定義したり、こみいった条件での検索を必要とする場合に、参照してください。</p></div><div class="table"><a name="d0e7322"></a><p class="title"><b>表16.1 正規表現 - フラグ</b></p><div class="table-contents"><table summary="正規表現 - フラグ" border="1"><colgroup><col align="left"><col></colgroup><thead><tr><th align="left">構文</th><th align="left">一致対象</th></tr></thead><tbody><tr><td align="left">(?i)</td><td align="left">大文字と小文字を区別しない一致を有効にします（デフォルトでは大文字と小文字を区別します）</td></tr></tbody></table></div></div><br class="table-break"><div class="table"><a name="d0e7339"></a><p class="title"><b>表16.2 正規表現 - 文字</b></p><div class="table-contents"><table summary="正規表現 - 文字" border="1"><colgroup><col align="left"><col></colgroup><thead><tr><th align="left">構文</th><th align="left">一致対象</th></tr></thead><tbody><tr><td align="left">x</td><td align="left">文字 x（以下に示すもの以外）</td></tr><tr><td align="left">\uhhhh</td><td align="left">16 進値&nbsp;0xhhhh を持つ文字</td></tr><tr><td align="left">\t</td><td align="left">タブ文字（'\u0009'）</td></tr><tr><td align="left">\n</td><td align="left">改行（ラインフィード、LF）文字（'\u000A'）</td></tr><tr><td align="left">\r</td><td align="left">キャリッジリターン（CR）文字（'\u000D'）</td></tr><tr><td align="left">\f</td><td align="left">用紙送り文字（'\u000C'）</td></tr><tr><td align="left">\a</td><td align="left">警告 (ベル) 文字（'\u0007'）</td></tr><tr><td align="left">\e</td><td align="left">エスケープ文字（'\u001B'）</td></tr><tr><td align="left">\cx</td><td align="left">x に対応する制御文字</td></tr><tr><td align="left">\0n</td><td align="left">8 進値 0n を持つ文字（0 &lt;= n &lt;= 7）</td></tr><tr><td align="left">\0nn</td><td align="left">8 進値 0nn を持つ文字（0 &lt;= n &lt;= 7）</td></tr><tr><td align="left">\0mnn</td><td align="left">8 進値 0mnn を持つ文字（0 &lt;= m &lt;= 3、0 &lt;= n &lt;= 7）</td></tr><tr><td align="left">\xhh</td><td align="left">16 進値&nbsp;0xhh を持つ文字</td></tr></tbody></table></div></div><br class="table-break"><div class="table"><a name="d0e7416"></a><p class="title"><b>表16.3 正規表現 - 引用</b></p><div class="table-contents"><table summary="正規表現 - 引用" border="1"><colgroup><col align="left"><col></colgroup><thead><tr><th align="left">構文</th><th align="left">一致対象</th></tr></thead><tbody><tr><td align="left">\</td><td align="left">次の文字をエスケープします。以下のメタ文字（!$()*+.&lt;&gt;?[\]^{|}）自体を一致対象としたい場合に入力が必要です</td></tr><tr><td align="left">\\</td><td align="left">たとえば、この構文ではバックスラッシュ文字を表します</td></tr><tr><td align="left">\Q</td><td align="left">\E までのすべての文字をエスケープします</td></tr><tr><td align="left">\E</td><td align="left">\Q で開始された引用をエスケープします</td></tr></tbody></table></div></div><br class="table-break"><div class="table"><a name="d0e7448"></a><p class="title"><b>表16.4 正規表現 - Unicode ブロックとカテゴリのクラス</b></p><div class="table-contents"><table summary="正規表現 - Unicode ブロックとカテゴリのクラス" border="1"><colgroup><col align="left"><col></colgroup><thead><tr><th align="left">構文</th><th align="left">一致対象</th></tr></thead><tbody><tr><td align="left">\p{InGreek}</td><td align="left">ギリシャ語ブロックの文字（単純<a class="ulink" href="http://docs.oracle.com/javase/jp/1.5.0/api/java/util/regex/Pattern.html#ubc" target="_top">ブロック</a>）</td></tr><tr><td align="left">\p{Lu}</td><td align="left">大文字（単純<a class="ulink" href="http://docs.oracle.com/javase/jp/1.5.0/api/java/util/regex/Pattern.html#ubc" target="_top">カテゴリ</a>）</td></tr><tr><td align="left">\p{Sc}</td><td align="left">通貨記号</td></tr><tr><td align="left">\P{InGreek}</td><td align="left">ギリシャ語ブロック以外の文字（否定）</td></tr><tr><td align="left">[\p{L}&amp;&amp;[^\p{Lu}]]</td><td align="left">大文字以外の文字（減算）</td></tr></tbody></table></div></div><br class="table-break"><div class="table"><a name="d0e7491"></a><p class="title"><b>表16.5 正規表現 - 文字クラス</b></p><div class="table-contents"><table summary="正規表現 - 文字クラス" border="1"><colgroup><col align="left"><col></colgroup><thead><tr><th align="left">構文</th><th align="left">一致対象</th></tr></thead><tbody><tr><td align="left">[abc]</td><td align="left">a、b または c（単純クラス）</td></tr><tr><td align="left">[^abc]</td><td align="left">a、b、c 以外の文字（否定）</td></tr><tr><td align="left">[a-zA-Z]</td><td align="left">a 〜 z または A から Z（範囲）</td></tr></tbody></table></div></div><br class="table-break"><div class="table"><a name="d0e7518"></a><p class="title"><b>表16.6 正規表現 - 定義済みの文字クラス</b></p><div class="table-contents"><table summary="正規表現 - 定義済みの文字クラス" border="1"><colgroup><col align="left"><col></colgroup><thead><tr><th align="left">構文</th><th align="left">一致対象</th></tr></thead><tbody><tr><td align="left">.</td><td align="left">任意の文字（行末記号を除く）</td></tr><tr><td align="left">\d</td><td align="left">数字：[0-9]</td></tr><tr><td align="left">\D</td><td align="left">数字以外：[^0-9]</td></tr><tr><td align="left">\s</td><td align="left">空白文字：[ \t\n\x0B\f\r]</td></tr><tr><td align="left">\S</td><td align="left">非空白文字：[^\s]</td></tr><tr><td align="left">\w</td><td align="left">単語構成文字：[a-zA-Z_0-9]</td></tr><tr><td align="left">\W</td><td align="left">非単語文字：[^\w]</td></tr></tbody></table></div></div><br class="table-break"><div class="table"><a name="d0e7565"></a><p class="title"><b>表16.7 正規表現 - 境界正規表現エンジン</b></p><div class="table-contents"><table summary="正規表現 - 境界正規表現エンジン" border="1"><colgroup><col align="left"><col></colgroup><thead><tr><th align="left">構文</th><th align="left">一致対象</th></tr></thead><tbody><tr><td align="left">^</td><td align="left">行の先頭</td></tr><tr><td align="left">$</td><td align="left">行の末尾</td></tr><tr><td align="left">\b</td><td align="left">単語境界</td></tr><tr><td align="left">\B</td><td align="left">非単語境界</td></tr></tbody></table></div></div><br class="table-break"><div class="table"><a name="d0e7597"></a><p class="title"><b>表16.8 正規表現 - 最長一致数量子</b></p><div class="table-contents"><table summary="正規表現 - 最長一致数量子" border="1"><colgroup><col align="left"><col></colgroup><thead><tr><th align="left">構文</th><th align="left">一致対象</th></tr></thead><tbody><tr><td align="left">X<span class="emphasis"><em>?</em></span></td><td align="left">X、1 または 0 回</td></tr><tr><td align="left">X<span class="emphasis"><em>*</em></span></td><td align="left">X、0 回以上</td></tr><tr><td align="left">X<span class="emphasis"><em>+</em></span></td><td align="left">X、1 回以上</td></tr></tbody></table></div></div><br class="table-break"><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">注記</h3><p>最長一致数量子は、指定した文字となるべく多い文字数で一致します。たとえば<span class="emphasis"><em>a+?</em></span>は文字列<span class="emphasis"><em>aaabbb</em></span>にある<span class="emphasis"><em>aaa</em></span>と一致します。</p></div><div class="table"><a name="d0e7642"></a><p class="title"><b>表16.9 正規表現 - 最短一致数量子</b></p><div class="table-contents"><table summary="正規表現 - 最短一致数量子" border="1"><colgroup><col align="left"><col></colgroup><thead><tr><th align="left">構文</th><th align="left">一致対象</th></tr></thead><tbody><tr><td align="left">X??</td><td align="left">X、1 または 0 回</td></tr><tr><td align="left">X*?</td><td align="left">X、0 回以上</td></tr><tr><td align="left">X+?</td><td align="left">X、1 回以上</td></tr></tbody></table></div></div><br class="table-break"><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">注記</h3><p>最短一致数量子は、指定した文字となるべく少ない文字数で一致します。たとえば<span class="emphasis"><em>a+?</em></span>は文字列<span class="emphasis"><em>aaabbb</em></span>にある最初の<span class="emphasis"><em>a</em></span>と一致します。</p></div><div class="table"><a name="d0e7681"></a><p class="title"><b>表16.10 正規表現 - 論理演算子</b></p><div class="table-contents"><table summary="正規表現 - 論理演算子" border="1"><colgroup><col align="left"><col></colgroup><thead><tr><th align="left">構文</th><th align="left">一致対象</th></tr></thead><tbody><tr><td align="left">XY</td><td align="left">X の直後に Y</td></tr><tr><td align="left">X|Y</td><td align="left">X または Y</td></tr><tr><td align="left">(XY)</td><td align="left">XY を 1 つのグループとして扱います</td></tr></tbody></table></div></div><br class="table-break"><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="regex.tools.and.examples.of.use"></a>1.<a class="indexterm" name="d0e7710"></a>正規表現関連ツールとその使用例<a class="indexterm" name="d0e7716"></a></h2></div></div></div><p>正規表現の作成やテストを行える対話式のツールは、たくさんあります。それらのツールは、たいてい同じ使い方ができます（実例は、下の Regular Expression Tester を参照してください）。入力した正規表現（図では最上段の「Regular Expression」）にしたがって対象テキスト（中段の「Search Text」）を検索し、その結果（下段の「Result」）を表示します。</p><div class="figure"><a name="regerx.tester"></a><p class="title"><b>図16.1 Regex Tester</b></p><div class="figure-contents"><div class="mediaobject"><img src="images/RegexTester.png" alt="Regex Tester"></div></div></div><br class="figure-break"><p>Windows、Linux、FreeBSD 向けの単体ツールを探しているなら、<a class="ulink" href="http://weitz.de/regex-coach/" target="_top">The Regex Coach</a>を確認してみてください。このツールは、上の例（Firefox アドオン）とほとんど同じように使えます。</p><p>正規表現の便利な構文例は、<span class="application">OmegaT</span>自体にも含まれています（［設定］→［分節化規則...］を参照してください）。以下は、特に翻訳メモリを検索する場合に便利な正規表現の一覧です：</p><div class="table"><a name="d0e7741"></a><p class="title"><b>表16.11 正規表現 - 翻訳で使える正規表現例</b></p><div class="table-contents"><table summary="正規表現 - 翻訳で使える正規表現例" border="1"><colgroup><col align="left"><col></colgroup><thead><tr><th align="left">正規表現</th><th align="left">検索対象</th></tr></thead><tbody><tr><td align="left">(\b\w+\b)\s\1\b</td><td align="left">重複している単語</td></tr><tr><td align="left">[\.,]\s*[\.,]+</td><td align="left">カンマまたはピリオドの後ろに、０個以上のスペースが続いて、再びカンマまたはピリオド</td></tr><tr><td align="left">\. \s+$</td><td align="left">行末で、ピリオドの後ろに余分なスペースがある箇所</td></tr><tr><td align="left">\s+a\s+[aeiou]</td><td align="left">英語：母音で始まる単語の前に「an」でなく「a」がある箇所</td></tr><tr><td align="left">\s+an\s+[^aeiou]</td><td align="left">英語：子音で始まる単語の前に「a」でなく「an」がある箇所</td></tr><tr><td align="left">\s{2,}</td><td align="left">2 個以上の空白</td></tr><tr><td align="left">\.[A-Z]</td><td align="left">ピリオドの直後に大文字が続く箇所 - 新しい文章の前の空白が欠落している可能性あり？</td></tr><tr><td align="left">\bis\b</td><td align="left">「is」を検索（「this」や「isn't」などに一致させない）</td></tr></tbody></table></div></div><br class="table-break"></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="chapter.searches.html">戻る</a>&nbsp;</td><td width="20%" align="center">&nbsp;</td><td width="40%" align="right">&nbsp;<a accesskey="n" href="chapter.dictionaries.html">次へ</a></td></tr><tr><td width="40%" align="left" valign="top">第15章 検索&nbsp;</td><td width="20%" align="center"><a accesskey="h" href="index.html">ホーム</a></td><td width="40%" align="right" valign="top">&nbsp;第17章 辞書</td></tr></table></div></body></html>
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <title>第16章 正規表現</title>
+      <link rel="stylesheet" type="text/css" href="OmegaT.css">
+      <meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
+      <link rel="home" href="index.html" title="OmegaT 2.6 - 取扱説明書">
+      <link rel="up" href="index.html" title="OmegaT 2.6 - 取扱説明書">
+      <link rel="prev" href="chapter.searches.html" title="第15章 検索">
+      <link rel="next" href="chapter.dictionaries.html" title="第17章 辞書">
+   </head>
+   <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+      <div class="navheader">
+         <table width="100%" summary="Navigation header">
+            <tr>
+               <th colspan="3" align="center">第16章 正規表現</th>
+            </tr>
+            <tr>
+               <td width="20%" align="left"><a accesskey="p" href="chapter.searches.html">戻る</a>&nbsp;
+               </td>
+               <th width="60%" align="center">&nbsp;</th>
+               <td width="20%" align="right">&nbsp;<a accesskey="n" href="chapter.dictionaries.html">次へ</a></td>
+            </tr>
+         </table>
+         <hr>
+      </div>
+      <div class="chapter">
+         <div class="titlepage">
+            <div>
+               <div>
+                  <h1 class="title"><a name="chapter.regexp"></a>第16章 正規表現<a class="indexterm" name="d0e7307"></a></h1>
+               </div>
+            </div>
+         </div>
+         <div class="toc">
+            <dl class="toc">
+               <dt><span class="section"><a href="chapter.regexp.html#regex.tools.and.examples.of.use">1. 正規表現関連ツールとその使用例</a></span></dt>
+            </dl>
+         </div>
+         <p>文字列検索と分節化規則で使用する正規表現は、Java がサポートしているものです。より詳細な情報については <a class="ulink" href="http://docs.oracle.com/javase/jp/1.5.0/api/java/util/regex/Pattern.html" target="_top">Java の正規表現に関する技術文書</a>を参照してください。以下の構文一覧と使用例も参照してください。
+         </p>
+         <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;">
+            <h3 class="title">注記</h3>
+            <p>この章は上級者のユーザーを対象にしています。独自の分節化規則を定義したり、こみいった条件での検索を必要とする場合に、参照してください。</p>
+         </div>
+         <div class="table"><a name="d0e7322"></a><p class="title"><b>表16.1 正規表現 - フラグ</b></p>
+            <div class="table-contents">
+               <table summary="正規表現 - フラグ" border="1">
+                  <colgroup>
+                     <col align="left">
+                     <col>
+                  </colgroup>
+                  <thead>
+                     <tr>
+                        <th align="left">構文</th>
+                        <th align="left">一致対象</th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                     <tr>
+                        <td align="left">(?i)</td>
+                        <td align="left">大文字と小文字を区別しない一致を有効にします（デフォルトでは大文字と小文字を区別します）</td>
+                     </tr>
+                  </tbody>
+               </table>
+            </div>
+         </div><br class="table-break"><div class="table"><a name="d0e7339"></a><p class="title"><b>表16.2 正規表現 - 文字</b></p>
+            <div class="table-contents">
+               <table summary="正規表現 - 文字" border="1">
+                  <colgroup>
+                     <col align="left">
+                     <col>
+                  </colgroup>
+                  <thead>
+                     <tr>
+                        <th align="left">構文</th>
+                        <th align="left">一致対象</th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                     <tr>
+                        <td align="left">x</td>
+                        <td align="left">文字 x（以下に示すもの以外）</td>
+                     </tr>
+                     <tr>
+                        <td align="left">\uhhhh</td>
+                        <td align="left">16 進値&nbsp;0xhhhh を持つ文字</td>
+                     </tr>
+                     <tr>
+                        <td align="left">\t</td>
+                        <td align="left">タブ文字（'\u0009'）</td>
+                     </tr>
+                     <tr>
+                        <td align="left">\n</td>
+                        <td align="left">改行（ラインフィード、LF）文字（'\u000A'）</td>
+                     </tr>
+                     <tr>
+                        <td align="left">\r</td>
+                        <td align="left">キャリッジリターン（CR）文字（'\u000D'）</td>
+                     </tr>
+                     <tr>
+                        <td align="left">\f</td>
+                        <td align="left">用紙送り文字（'\u000C'）</td>
+                     </tr>
+                     <tr>
+                        <td align="left">\a</td>
+                        <td align="left">警告 (ベル) 文字（'\u0007'）</td>
+                     </tr>
+                     <tr>
+                        <td align="left">\e</td>
+                        <td align="left">エスケープ文字（'\u001B'）</td>
+                     </tr>
+                     <tr>
+                        <td align="left">\cx</td>
+                        <td align="left">x に対応する制御文字</td>
+                     </tr>
+                     <tr>
+                        <td align="left">\0n</td>
+                        <td align="left">8 進値 0n を持つ文字（0 &lt;= n &lt;= 7）</td>
+                     </tr>
+                     <tr>
+                        <td align="left">\0nn</td>
+                        <td align="left">8 進値 0nn を持つ文字（0 &lt;= n &lt;= 7）</td>
+                     </tr>
+                     <tr>
+                        <td align="left">\0mnn</td>
+                        <td align="left">8 進値 0mnn を持つ文字（0 &lt;= m &lt;= 3、0 &lt;= n &lt;= 7）</td>
+                     </tr>
+                     <tr>
+                        <td align="left">\xhh</td>
+                        <td align="left">16 進値&nbsp;0xhh を持つ文字</td>
+                     </tr>
+                  </tbody>
+               </table>
+            </div>
+         </div><br class="table-break"><div class="table"><a name="d0e7416"></a><p class="title"><b>表16.3 正規表現 - 引用</b></p>
+            <div class="table-contents">
+               <table summary="正規表現 - 引用" border="1">
+                  <colgroup>
+                     <col align="left">
+                     <col>
+                  </colgroup>
+                  <thead>
+                     <tr>
+                        <th align="left">構文</th>
+                        <th align="left">一致対象</th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                     <tr>
+                        <td align="left">\</td>
+                        <td align="left">次の文字をエスケープします。以下のメタ文字（!$()*+.&lt;&gt;?[\]^{|}）自体を一致対象としたい場合に入力が必要です</td>
+                     </tr>
+                     <tr>
+                        <td align="left">\\</td>
+                        <td align="left">たとえば、この構文ではバックスラッシュ文字を表します</td>
+                     </tr>
+                     <tr>
+                        <td align="left">\Q</td>
+                        <td align="left">\E までのすべての文字をエスケープします</td>
+                     </tr>
+                     <tr>
+                        <td align="left">\E</td>
+                        <td align="left">\Q で開始された引用をエスケープします</td>
+                     </tr>
+                  </tbody>
+               </table>
+            </div>
+         </div><br class="table-break"><div class="table"><a name="d0e7448"></a><p class="title"><b>表16.4 正規表現 - Unicode ブロックとカテゴリのクラス</b></p>
+            <div class="table-contents">
+               <table summary="正規表現 - Unicode ブロックとカテゴリのクラス" border="1">
+                  <colgroup>
+                     <col align="left">
+                     <col>
+                  </colgroup>
+                  <thead>
+                     <tr>
+                        <th align="left">構文</th>
+                        <th align="left">一致対象</th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                     <tr>
+                        <td align="left">\p{InGreek}</td>
+                        <td align="left">ギリシャ語ブロックの文字（単純 <a class="ulink" href="http://docs.oracle.com/javase/jp/1.5.0/api/java/util/regex/Pattern.html#ubc" target="_top">ブロック</a>）
+                        </td>
+                     </tr>
+                     <tr>
+                        <td align="left">\p{Lu}</td>
+                        <td align="left">大文字（単純 <a class="ulink" href="http://docs.oracle.com/javase/jp/1.5.0/api/java/util/regex/Pattern.html#ubc" target="_top">カテゴリ</a>）
+                        </td>
+                     </tr>
+                     <tr>
+                        <td align="left">\p{Sc}</td>
+                        <td align="left">通貨記号</td>
+                     </tr>
+                     <tr>
+                        <td align="left">\P{InGreek}</td>
+                        <td align="left">ギリシャ語ブロック以外の文字（否定）</td>
+                     </tr>
+                     <tr>
+                        <td align="left">[\p{L}&amp;&amp;[^\p{Lu}]]</td>
+                        <td align="left">大文字以外の文字（減算）</td>
+                     </tr>
+                  </tbody>
+               </table>
+            </div>
+         </div><br class="table-break"><div class="table"><a name="d0e7491"></a><p class="title"><b>表16.5 正規表現 - 文字クラス</b></p>
+            <div class="table-contents">
+               <table summary="正規表現 - 文字クラス" border="1">
+                  <colgroup>
+                     <col align="left">
+                     <col>
+                  </colgroup>
+                  <thead>
+                     <tr>
+                        <th align="left">構文</th>
+                        <th align="left">一致対象</th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                     <tr>
+                        <td align="left">[abc]</td>
+                        <td align="left">a、b または c（単純クラス）</td>
+                     </tr>
+                     <tr>
+                        <td align="left">[^abc]</td>
+                        <td align="left">a、b、c 以外の文字（否定）</td>
+                     </tr>
+                     <tr>
+                        <td align="left">[a-zA-Z]</td>
+                        <td align="left">a 〜 z または A から Z（範囲）</td>
+                     </tr>
+                  </tbody>
+               </table>
+            </div>
+         </div><br class="table-break"><div class="table"><a name="d0e7518"></a><p class="title"><b>表16.6 正規表現 - 定義済みの文字クラス</b></p>
+            <div class="table-contents">
+               <table summary="正規表現 - 定義済みの文字クラス" border="1">
+                  <colgroup>
+                     <col align="left">
+                     <col>
+                  </colgroup>
+                  <thead>
+                     <tr>
+                        <th align="left">構文</th>
+                        <th align="left">一致対象</th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                     <tr>
+                        <td align="left">.</td>
+                        <td align="left">任意の文字（行末記号を除く）</td>
+                     </tr>
+                     <tr>
+                        <td align="left">\d</td>
+                        <td align="left">数字：[0-9]</td>
+                     </tr>
+                     <tr>
+                        <td align="left">\D</td>
+                        <td align="left">数字以外：[^0-9]</td>
+                     </tr>
+                     <tr>
+                        <td align="left">\s</td>
+                        <td align="left">空白文字：[ \t\n\x0B\f\r]</td>
+                     </tr>
+                     <tr>
+                        <td align="left">\S</td>
+                        <td align="left">非空白文字：[^\s]</td>
+                     </tr>
+                     <tr>
+                        <td align="left">\w</td>
+                        <td align="left">単語構成文字：[a-zA-Z_0-9]</td>
+                     </tr>
+                     <tr>
+                        <td align="left">\W</td>
+                        <td align="left">非単語文字：[^\w]</td>
+                     </tr>
+                  </tbody>
+               </table>
+            </div>
+         </div><br class="table-break"><div class="table"><a name="d0e7565"></a><p class="title"><b>表16.7 正規表現 - 境界正規表現エンジン</b></p>
+            <div class="table-contents">
+               <table summary="正規表現 - 境界正規表現エンジン" border="1">
+                  <colgroup>
+                     <col align="left">
+                     <col>
+                  </colgroup>
+                  <thead>
+                     <tr>
+                        <th align="left">構文</th>
+                        <th align="left">一致対象</th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                     <tr>
+                        <td align="left">^</td>
+                        <td align="left">行の先頭</td>
+                     </tr>
+                     <tr>
+                        <td align="left">$</td>
+                        <td align="left">行の末尾</td>
+                     </tr>
+                     <tr>
+                        <td align="left">\b</td>
+                        <td align="left">単語境界</td>
+                     </tr>
+                     <tr>
+                        <td align="left">\B</td>
+                        <td align="left">非単語境界</td>
+                     </tr>
+                  </tbody>
+               </table>
+            </div>
+         </div><br class="table-break"><div class="table"><a name="d0e7597"></a><p class="title"><b>表16.8 正規表現 - 最長一致数量子</b></p>
+            <div class="table-contents">
+               <table summary="正規表現 - 最長一致数量子" border="1">
+                  <colgroup>
+                     <col align="left">
+                     <col>
+                  </colgroup>
+                  <thead>
+                     <tr>
+                        <th align="left">構文</th>
+                        <th align="left">一致対象</th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                     <tr>
+                        <td align="left">X<span class="emphasis"><em>?</em></span></td>
+                        <td align="left">X、1 または 0 回</td>
+                     </tr>
+                     <tr>
+                        <td align="left">X<span class="emphasis"><em>*</em></span></td>
+                        <td align="left">X、0 回以上</td>
+                     </tr>
+                     <tr>
+                        <td align="left">X<span class="emphasis"><em>+</em></span></td>
+                        <td align="left">X、1 回以上</td>
+                     </tr>
+                  </tbody>
+               </table>
+            </div>
+         </div><br class="table-break"><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;">
+            <h3 class="title">注記</h3>
+            <p>最長一致数量子は、指定した文字となるべく多い文字数で一致します。たとえば <span class="emphasis"><em>a+?</em></span> は文字列 <span class="emphasis"><em>aaabbb</em></span> にある <span class="emphasis"><em>aaa</em></span> と一致します。
+            </p>
+         </div>
+         <div class="table"><a name="d0e7642"></a><p class="title"><b>表16.9 正規表現 - 最短一致数量子</b></p>
+            <div class="table-contents">
+               <table summary="正規表現 - 最短一致数量子" border="1">
+                  <colgroup>
+                     <col align="left">
+                     <col>
+                  </colgroup>
+                  <thead>
+                     <tr>
+                        <th align="left">構文</th>
+                        <th align="left">一致対象</th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                     <tr>
+                        <td align="left">X??</td>
+                        <td align="left">X、1 または 0 回</td>
+                     </tr>
+                     <tr>
+                        <td align="left">X*?</td>
+                        <td align="left">X、0 回以上</td>
+                     </tr>
+                     <tr>
+                        <td align="left">X+?</td>
+                        <td align="left">X、1 回以上</td>
+                     </tr>
+                  </tbody>
+               </table>
+            </div>
+         </div><br class="table-break"><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;">
+            <h3 class="title">注記</h3>
+            <p>最短一致数量子は、指定した文字となるべく少ない文字数で一致します。たとえば <span class="emphasis"><em>a+?</em></span> は文字列 <span class="emphasis"><em>aaabbb</em></span> にある最初の <span class="emphasis"><em>a</em></span> と一致します。
+            </p>
+         </div>
+         <div class="table"><a name="d0e7681"></a><p class="title"><b>表16.10 正規表現 - 論理演算子</b></p>
+            <div class="table-contents">
+               <table summary="正規表現 - 論理演算子" border="1">
+                  <colgroup>
+                     <col align="left">
+                     <col>
+                  </colgroup>
+                  <thead>
+                     <tr>
+                        <th align="left">構文</th>
+                        <th align="left">一致対象</th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                     <tr>
+                        <td align="left">XY</td>
+                        <td align="left">X の直後に Y</td>
+                     </tr>
+                     <tr>
+                        <td align="left">X|Y</td>
+                        <td align="left">X または Y</td>
+                     </tr>
+                     <tr>
+                        <td align="left">(XY)</td>
+                        <td align="left">XY を 1 つのグループとして扱います</td>
+                     </tr>
+                  </tbody>
+               </table>
+            </div>
+         </div><br class="table-break"><div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="regex.tools.and.examples.of.use"></a>1. <a class="indexterm" name="d0e7710"></a>正規表現関連ツールとその使用例<a class="indexterm" name="d0e7716"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <p>正規表現の作成やテストを行える対話式のツールは、たくさんあります。それらのツールは、たいてい同じ使い方ができます（実例は、下の Regular Expression Tester を参照してください）。入力した正規表現（図では最上段の「Regular
+               Expression」）にしたがって対象テキスト（中段の「Search Text」）を検索し、その結果（下段の「Result」）を表示します。
+            </p>
+            <div class="figure"><a name="regerx.tester"></a><p class="title"><b>図16.1 Regex Tester</b></p>
+               <div class="figure-contents">
+                  <div class="mediaobject"><img src="images/RegexTester.png" alt="Regex Tester"></div>
+               </div>
+            </div><br class="figure-break"><p>Windows、Linux、FreeBSD 向けの単体ツールを探しているなら、<a class="ulink" href="http://weitz.de/regex-coach/" target="_top">The Regex Coach</a> を確認してみてください。このツールは、上の例（Firefox アドオン）とほとんど同じように使えます。
+            </p>
+            <p>正規表現の便利な構文例は、<span class="application">OmegaT</span> 自体にも含まれています（［設定］→［分節化規則...］を参照してください）。以下は、特に翻訳メモリを検索する場合に便利な正規表現の一覧です：
+            </p>
+            <div class="table"><a name="d0e7741"></a><p class="title"><b>表16.11 正規表現 - 翻訳で使える正規表現例</b></p>
+               <div class="table-contents">
+                  <table summary="正規表現 - 翻訳で使える正規表現例" border="1">
+                     <colgroup>
+                        <col align="left">
+                        <col>
+                     </colgroup>
+                     <thead>
+                        <tr>
+                           <th align="left">正規表現</th>
+                           <th align="left">検索対象</th>
+                        </tr>
+                     </thead>
+                     <tbody>
+                        <tr>
+                           <td align="left">(\b\w+\b)\s\1\b</td>
+                           <td align="left">重複している単語</td>
+                        </tr>
+                        <tr>
+                           <td align="left">[\.,]\s*[\.,]+</td>
+                           <td align="left">カンマまたはピリオドの後ろに、０個以上のスペースが続いて、再びカンマまたはピリオド</td>
+                        </tr>
+                        <tr>
+                           <td align="left">\. \s+$</td>
+                           <td align="left">行末で、ピリオドの後ろに余分なスペースがある箇所</td>
+                        </tr>
+                        <tr>
+                           <td align="left">\s+a\s+[aeiou]</td>
+                           <td align="left">英語：母音で始まる単語の前に「an」でなく「a」がある箇所</td>
+                        </tr>
+                        <tr>
+                           <td align="left">\s+an\s+[^aeiou]</td>
+                           <td align="left">英語：子音で始まる単語の前に「a」でなく「an」がある箇所</td>
+                        </tr>
+                        <tr>
+                           <td align="left">\s{2,}</td>
+                           <td align="left">2 個以上の空白</td>
+                        </tr>
+                        <tr>
+                           <td align="left">\.[A-Z]</td>
+                           <td align="left">ピリオドの直後に大文字が続く箇所 - 新しい文章の前の空白が欠落している可能性あり？</td>
+                        </tr>
+                        <tr>
+                           <td align="left">\bis\b</td>
+                           <td align="left">「is」を検索（「this」や「isn't」などに一致させない）</td>
+                        </tr>
+                     </tbody>
+                  </table>
+               </div>
+            </div><br class="table-break"></div>
+      </div>
+      <div class="navfooter">
+         <hr>
+         <table width="100%" summary="Navigation footer">
+            <tr>
+               <td width="40%" align="left"><a accesskey="p" href="chapter.searches.html">戻る</a>&nbsp;
+               </td>
+               <td width="20%" align="center">&nbsp;</td>
+               <td width="40%" align="right">&nbsp;<a accesskey="n" href="chapter.dictionaries.html">次へ</a></td>
+            </tr>
+            <tr>
+               <td width="40%" align="left" valign="top">第15章 検索&nbsp;</td>
+               <td width="20%" align="center"><a accesskey="h" href="index.html">ホーム</a></td>
+               <td width="40%" align="right" valign="top">&nbsp;第17章 辞書</td>
+            </tr>
+         </table>
+      </div>
+   </body>
+</html>

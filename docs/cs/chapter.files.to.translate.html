@@ -39,17 +39,17 @@
                <dt><span class="section"><a href="chapter.files.to.translate.html#file.formats">1. Formáty souborů</a></span></dt>
                <dd>
                   <dl>
-                     <dt><span class="section"><a href="chapter.files.to.translate.html#d0e5107">1.1. Prosté textové soubory</a></span></dt>
-                     <dt><span class="section"><a href="chapter.files.to.translate.html#d0e5186">1.2. Soubory s formátovaným textem</a></span></dt>
+                     <dt><span class="section"><a href="chapter.files.to.translate.html#d0e5293">1.1. Prosté textové soubory</a></span></dt>
+                     <dt><span class="section"><a href="chapter.files.to.translate.html#d0e5372">1.2. Soubory s formátovaným textem</a></span></dt>
                   </dl>
                </dd>
                <dt><span class="section"><a href="chapter.files.to.translate.html#other.file.formats">2. Jiné formáty souborů</a></span></dt>
                <dt><span class="section"><a href="chapter.files.to.translate.html#right.to.left.languages">3. Jazyky se zápisem zprava doleva</a></span></dt>
                <dd>
                   <dl>
-                     <dt><span class="section"><a href="chapter.files.to.translate.html#d0e5403">3.1. Současné užívání řetězců LTR a RTL v segmentech</a></span></dt>
-                     <dt><span class="section"><a href="chapter.files.to.translate.html#d0e5426">3.2. Tagy aplikace <span class="application">OmegaT</span> v segmentech typu RTL</a></span></dt>
-                     <dt><span class="section"><a href="chapter.files.to.translate.html#d0e5441">3.3. Vytvoření dokumentů se zápisem RTL</a></span></dt>
+                     <dt><span class="section"><a href="chapter.files.to.translate.html#d0e5592">3.1. Současné užívání řetězců LTR a RTL v segmentech</a></span></dt>
+                     <dt><span class="section"><a href="chapter.files.to.translate.html#d0e5615">3.2. Tagy aplikace <span class="application">OmegaT</span> v segmentech typu RTL</a></span></dt>
+                     <dt><span class="section"><a href="chapter.files.to.translate.html#d0e5630">3.3. Vytvoření dokumentů se zápisem RTL</a></span></dt>
                   </dl>
                </dd>
             </dl>
@@ -58,7 +58,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="file.formats"></a>1.&nbsp;Formáty souborů<a class="indexterm" name="d0e5092"></a><a class="indexterm" name="d0e5097"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="file.formats"></a>1.&nbsp;Formáty souborů<a class="indexterm" name="d0e5278"></a><a class="indexterm" name="d0e5283"></a></h2>
                   </div>
                </div>
             </div>
@@ -69,14 +69,14 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="d0e5107"></a>1.1.&nbsp;Prosté textové soubory<a class="indexterm" name="d0e5110"></a><a class="indexterm" name="d0e5115"></a></h3>
+                        <h3 class="title"><a name="d0e5293"></a>1.1.&nbsp;Prosté textové soubory<a class="indexterm" name="d0e5296"></a><a class="indexterm" name="d0e5301"></a></h3>
                      </div>
                   </div>
                </div>
                <p>Prosté textové soubory obsahují pouze text, takže jejich překlad je jednoduchý; prostě přímo píšete text překladu. Existuje
                   několik metod jak blíže určit kódování souboru, takže při otevření souboru v programu <span class="application">OmegaT</span> nebude obsah souboru zobrazen chybně.  Takové soubory neobsahují žádné informace k formátování „neviditelných znaků“, kterých
                   se využívá k zarovnání textu, identifikaci odstavců nebo vkládání konce stránek. Takové znaky nemohou obsahovat, čili neumí
-                  vyjádřit informace k textu týkající se barvy, písma a podobných vlastností textu. V současnosti podporuje <span class="application">OmegaT</span> následující formáty prostého textu:<a class="indexterm" name="d0e5128"></a></p>
+                  vyjádřit informace k textu týkající se barvy, písma a podobných vlastností textu. V současnosti podporuje <span class="application">OmegaT</span> následující formáty prostého textu:<a class="indexterm" name="d0e5314"></a></p>
                <div class="itemizedlist">
                   <ul class="itemizedlist" style="list-style-type: disc; ">
                      <li class="listitem">
@@ -118,7 +118,7 @@
                         <p>Soubory DTD (*.DTD)</p>
                      </li>
                      <li class="listitem">
-                        <p>Soubory DocuWiki (*.txt)</p>
+                        <p>Soubory DokuWiky (*.txt)</p>
                      </li>
                   </ul>
                </div>
@@ -139,34 +139,34 @@
                <p>Jiné typy souborů obsahujících prostý text můžou být zpracovány programem <span class="application">OmegaT</span> pomocí asociování své koncovky k podporovanému typu souboru (například soubory .pod mohou být asociovány k filtru ASCII)
                   a jejich předzpracováním se specifickými segmentačními pravidly.
                </p>
-               <p>Soubory PO<a class="indexterm" name="d0e5177"></a> mohou obsahovat jak text zdroje, tak i jeho překlad. Takže když se na to podíváme z této stránky, jedná se o prosté textové
+               <p>Soubory PO<a class="indexterm" name="d0e5363"></a> mohou obsahovat jak text zdroje, tak i jeho překlad. Takže když se na to podíváme z této stránky, jedná se o prosté textové
                   soubory <span class="emphasis"><em>plus</em></span> překladové paměti. Pokud pro určitý zdrojový segment není k dispozici žádný překlad v překladové paměti projektu (project_save.tmx),
-                  pak bude překlad uložen v souboru project_save.tmx jako výchozí překlad. Pokud již překlad stejného zdrojového segmentu již
-                  existuje, ale jakožto odlišný překlad, pak bude nový překlad nahrán jako alternativa.
+                  bude jako výchozí překlad uložen v souboru project_save.tmx aktuální překlad. Nicméně v případě, že stejný zdrojový segment
+                  již existujes jiným překladem, bude nový překlad uložen jakožto alternativa.
                </p>
             </div>
             <div class="section">
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="d0e5186"></a>1.2.&nbsp;Soubory s formátovaným textem<a class="indexterm" name="d0e5189"></a><a class="indexterm" name="d0e5196"></a></h3>
+                        <h3 class="title"><a name="d0e5372"></a>1.2.&nbsp;Soubory s formátovaným textem<a class="indexterm" name="d0e5375"></a><a class="indexterm" name="d0e5382"></a></h3>
                      </div>
                   </div>
                </div>
-               <p>Soubory s formátovaným textem obsahují informace jako je typ písma, velikost, barva atd. stejně jako text samotný. Běžně jsou
-                  vytvářeny pomocí textových procesorů nebo editorů HTML. Takovéto formáty souborů jsou navrženy k tomu, aby přenesly informaci
-                  o formátovaní textu. Informace o formátování mohou být buď jednoduché, jako je „toto tučné písmo„“, nebo složité, jako např.
-                  tabulkové údaje s různými velikostmi písma, barvami, umístěním atd. Ve většině překladatelských zakázek bývá důležité, aby
-                  v přeloženém dokumentu bylo zachováno formátování originálu. OmegaT vám to umožní označením znaků/slov, které mají speciální
-                  formátování pomocí jednoduchých a přehledných tagů. Zjednodušení formátování původního textu ve velké míře přispívá ke snížení
-                  počtu tagů. Kde je to možné, tam se využívá sjednocení tagů pro písmo, velikost písma, barvy, atd. které jsou použity v dokumentu,
+               <p>Soubory s formátovaným textem obsahují informace jako je typ písma, velikost, barva atd. a také samotný text. Běžně jsou vytvářeny
+                  pomocí textových procesorů nebo editorů HTML. Takovéto formáty souborů jsou navrženy k tomu, aby přenesly informaci o formátovaní
+                  textu. Informace o formátování mohou být buď jednoduché, jako „toto je tučné písmo„“, nebo složité, jako např. tabulkové údaje
+                  s různými velikostmi písma, barvami, umístěním atd. Ve většině překladatelských zakázek bývá důležité, aby v přeloženém dokumentu
+                  bylo zachováno formátování originálu. OmegaT vám to umožní označením znaků či slov, které mají speciální formátování pomocí
+                  jednoduchých a přehledných tagů. Zjednodušení formátování původního textu ve velké míře přispívá ke snížení počtu tagů. Kde
+                  je to možné, tam se využívá sjednocení tagů pro písmo, velikost písma, barvy, atd., což jsou vlastnosti použité v dokumentu,
                   a zjednoduší se tak práce na překladu a sníží se možný počet chyb tagů. OmegaT zachází s každým typem souboru jinak. Specifický
-                  přístup lze nastavit ve filtrech souborů. V době psaní tohoto textu podporuje OmegaT následující formáty pro formátovaný text:<a class="indexterm" name="d0e5203"></a></p>
+                  přístup lze nastavit ve filtrech souborů. V době psaní tohoto textu podporuje OmegaT následující formáty pro formátovaný text:<a class="indexterm" name="d0e5389"></a></p>
                <div class="itemizedlist">
                   <ul class="itemizedlist" style="list-style-type: disc; ">
                      <li class="listitem">
-                        <p>OpenOffice.org / OpenDocument (*.ods, *.ots, *.odt, *.ott,
-                                       *.odp, *.otp)
+                        <p>ODF - OASIS Open Document Format (*.ods, *.ots, *.odt,
+                                       *.ott, *.odp, *.otp)
                         </p>
                      </li>
                   </ul>
@@ -204,7 +204,7 @@
                <div class="itemizedlist">
                   <ul class="itemizedlist" style="list-style-type: disc; ">
                      <li class="listitem">
-                        <p>XLIFF (*.xlf, *.xliff, *.sdlxliff) - typy source=target (zdroj=cíl)</p>
+                        <p>XLIFF (*.xlf, *.xliff, *.sdlxliff) – typy source=target (zdroj=cíl)</p>
                      </li>
                   </ul>
                </div>
@@ -218,7 +218,7 @@
                <div class="itemizedlist">
                   <ul class="itemizedlist" style="list-style-type: disc; ">
                      <li class="listitem">
-                        <p>ResX files (*.resx)</p>
+                        <p>Soubory ResX (*.resx)</p>
                      </li>
                   </ul>
                </div>
@@ -259,10 +259,13 @@
                      <li class="listitem">
                         <p>Camtasia pro soubory Windows (*.camproj)</p>
                      </li>
+                     <li class="listitem">
+                        <p>Visio (*.vxd)</p>
+                     </li>
                   </ul>
                </div>
                <p>Jiné typy souborů obsahujících prostý text mohou být zpracovány programem OmegaT pomocí asociování své koncovky k podporovanému
-                  typu souboru, za předpokladu, že budou správně  segmentovány podle odpovídajících segmentačních pravidel.
+                  typu souboru, za předpokladu, že budou správně segmentovány podle odpovídajících segmentačních pravidel.
                </p>
             </div>
          </div>
@@ -270,19 +273,19 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="other.file.formats"></a>2.&nbsp;Jiné formáty souborů<a class="indexterm" name="d0e5278"></a><a class="indexterm" name="d0e5283"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="other.file.formats"></a>2.&nbsp;Jiné formáty souborů<a class="indexterm" name="d0e5467"></a><a class="indexterm" name="d0e5472"></a></h2>
                   </div>
                </div>
             </div>
             <p>Pro aplikaci OmegaT jsou vhodné i jiné souborové formáty prostého nebo formátovaného textu.</p>
-            <p><a class="indexterm" name="d0e5291"></a>Převod souborů na podporované formáty lze provádět prostřednictvím externích nástrojů. Přeložené soubory bude nutno převést
+            <p><a class="indexterm" name="d0e5480"></a>Převod souborů na podporované formáty lze provádět prostřednictvím externích nástrojů. Přeložené soubory bude nutno převést
                zpět do originálního formátu. Například, pokud máte zastaralou verzi Microsoft Word, která neumí pracovat s formátem ODT,
                ukažme si příklad práce s Wordovskými soubory s koncovkou DOC:
             </p>
             <div class="itemizedlist">
                <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
-                     <p>importujte soubor do OpenOffice.org Writer</p>
+                     <p>importujte soubor do Textového editoru pro zpracování formátu ODF (např. LibreOffice Writer, OpenOffice.org Writer)</p>
                   </li>
                </ul>
             </div>
@@ -303,7 +306,9 @@
             <div class="itemizedlist">
                <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
-                     <p>otevřete přeložený cílový soubor do OpenOffice.org Writer</p>
+                     <p>otevřete přeložený cílový soubor do Textového editoru pro zpracování formátu ODF (např. LibreOffice Writer, OpenOffice.org
+                        Writer)
+                     </p>
                   </li>
                </ul>
             </div>
@@ -323,7 +328,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="right.to.left.languages"></a>3.&nbsp;Jazyky se zápisem zprava doleva<a class="indexterm" name="d0e5325"></a><a class="indexterm" name="d0e5328"></a><a class="indexterm" name="d0e5333"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="right.to.left.languages"></a>3.&nbsp;Jazyky se zápisem zprava doleva<a class="indexterm" name="d0e5514"></a><a class="indexterm" name="d0e5517"></a><a class="indexterm" name="d0e5522"></a></h2>
                   </div>
                </div>
             </div>
@@ -354,15 +359,15 @@
             </div>
             <p>Použití módu RTL v aplikaci <span class="application">OmegaT</span> nikterak neovlivní zobrazovací mód přeložených dokumentů, které byly sestaveny prostřednictvím <span class="application">OmegaT</span>. Zobrazovací mód přeloženého dokumentu bude nutno upravit s aplikací, která je běžně určena k zobrazování a úpravě takového
                textu (více informací v konkrétních manuálech). Použití zkratky <span class="keycap"><strong>Shift</strong></span>+<span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>O</strong></span> vyvolá v aplikaci <span class="application">OmegaT</span> změnu jak pro vkládání, tak i pro zobrazení textu. Lze ji použít odděleně pro všechny tři okna (Editor, Přibližné překlady
-               a Glosář). Tuto možnost lze použít i ve všech polích pro zadávání textu v rámci <span class="application">OmegaT</span> - v okně pro vyhledávání, segmentační pravidla atd.
+               a Glosář). Tuto možnost lze použít i ve všech polích pro zadávání textu v rámci <span class="application">OmegaT</span> – v okně pro vyhledávání, segmentační pravidla atd.
             </p>
-            <p>Pozor: Mac OS X používá stejnou zkratku  <span class="keycap"><strong>Shift</strong></span>+<span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>O</strong></span>  (a  <span class="bold"><strong>ne </strong></span>cmd+Ctrl+O) .
+            <p>Pozor: Mac OS X používá stejnou zkratku <span class="keycap"><strong>Shift</strong></span>+<span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>O</strong></span> (a <span class="bold"><strong>ne </strong></span>cmd+Ctrl+O) .
             </p>
             <div class="section">
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="d0e5403"></a>3.1.&nbsp;Současné užívání řetězců LTR a RTL v segmentech<a class="indexterm" name="d0e5406"></a><a class="indexterm" name="d0e5411"></a><a class="indexterm" name="d0e5416"></a></h3>
+                        <h3 class="title"><a name="d0e5592"></a>3.1.&nbsp;Současné užívání řetězců LTR a RTL v segmentech<a class="indexterm" name="d0e5595"></a><a class="indexterm" name="d0e5600"></a><a class="indexterm" name="d0e5605"></a></h3>
                      </div>
                   </div>
                </div>
@@ -378,12 +383,12 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="d0e5426"></a>3.2.&nbsp;Tagy aplikace <span class="application">OmegaT</span> v segmentech typu RTL<a class="indexterm" name="d0e5432"></a></h3>
+                        <h3 class="title"><a name="d0e5615"></a>3.2.&nbsp;Tagy aplikace <span class="application">OmegaT</span> v segmentech typu RTL<a class="indexterm" name="d0e5621"></a></h3>
                      </div>
                   </div>
                </div>
                <p>Jak již byl dříve zmíněno, tagy OmegaT jsou řetězce typu LTR. Když překládáte mezi jazyky RTL a LTR, tak abyste mohli tagy
-                  správně číst ze zdroje a řádně je vkládat do cílového textu,budete mít určitě zájem často přepínat mezi módy LTR a RTL.
+                  správně číst ze zdroje a řádně je vkládat do cílového textu, budete určitě chtít často přepínat mezi módy LTR a RTL.
                </p>
                <p>Pokud to dokument umožní, lze překladateli doporučit odstranit informace o stylu z originálního dokumentu tak, aby se pak
                   v prostředí OmegaT zobrazovalo tagů co nejméně. Bližší informace poskytují údaje v části Tipy pro správu tagů. Často ověřujte
@@ -396,7 +401,7 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="d0e5441"></a>3.3.&nbsp;Vytvoření dokumentů se zápisem RTL<a class="indexterm" name="d0e5444"></a><a class="indexterm" name="d0e5449"></a><a class="indexterm" name="d0e5454"></a></h3>
+                        <h3 class="title"><a name="d0e5630"></a>3.3.&nbsp;Vytvoření dokumentů se zápisem RTL<a class="indexterm" name="d0e5633"></a><a class="indexterm" name="d0e5638"></a><a class="indexterm" name="d0e5643"></a></h3>
                      </div>
                   </div>
                </div>
@@ -404,6 +409,16 @@
                   LTR, směr zobrazování cílového dokumentu se musí změnit ručně na RLT v konkrétní aplikaci, která umí takovéto dokumenty otevírat
                   a zpracovávat. Každý výstupní formát má specifické způsoby jak pracovat se zobrazením RTL; více detailů najdete v nápovědě
                   pro konkrétní aplikace.
+               </p>
+               <p>U souborů .docx byla spousta změn již provedena automaticky:</p>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
+                     <li class="listitem">Odstavce, oddíly a tabulky jsou nastaveny na oba směry.</li>
+                     <li class="listitem">Ucelené textové prvky jsou nastaveny na RTL</li>
+                  </ul>
+               </div>
+               <p>
+                        
                </p>
                <p>Abyste se vyhnuli měnění zobrazovacích parametrů cílového souboru při každém otevření souboru, je u vybraných typů možné změnit
                   zobrazovací parametry u zdrojového souboru a to tak, že tyto parametry budou přeneseny na cílový soubor. Takové úpravy je

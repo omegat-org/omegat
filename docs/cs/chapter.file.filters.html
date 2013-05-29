@@ -78,44 +78,44 @@
             filtrů přes <span class="bold"><strong>Možnosti → Filtry souborů...</strong></span>. Také můžete nastavit filtry souborů specifické pro daný projekt, které se použijí na aktuální projekt, a to vybráním možnosti
             <span class="bold"><strong>Filtry souborů...</strong></span> ve Vlastnostech projektu.
          </p>
-         <p>Můžete povolit použití specifických filtrů přes <span class="bold"><strong>Možnosti → Vlastnosti...</strong></span>. Klikněte na tlačítko <span class="guibutton">Filtry souborů</span> a označte zaškrtávací políčko  <span class="guimenuitem">Upravit nastavení filtru souborů podle konkrétního projektu</span><a class="indexterm" name="d0e4219"></a> Kopie nastavení filtrů se v takovémto případě uloží s projektem. Když později změníte filtry, pak budou aktualizovány jen
+         <p>Můžete povolit použití filtrů specifických pro daný projekt přes <span class="bold"><strong>Možnosti → Vlastnosti...</strong></span>. Klikněte na tlačítko <span class="guibutton">Filtry souborů</span> a označte zaškrtávací políčko <span class="guimenuitem">Upravit nastavení filtru souborů podle konkrétního projektu</span><a class="indexterm" name="d0e4362"></a> Kopie nastavení filtrů se v takovémto případě uloží s projektem. Když později změníte filtry, pak budou aktualizovány jen
             filtry specifické pro tento projekt, zatímco uživatelské filtry zůstanou nezměněny.
          </p>
-         <p><span class="bold"><strong>Upozornění</strong></span>  Když změníte nastavení filtrů v době, kdy máte otevřený projekt, pak musíte daný projekt znovu nahrát, aby se žádané změny
+         <p><span class="bold"><strong>Upozornění</strong></span> Když změníte nastavení filtrů v době, kdy máte otevřený projekt, pak musíte daný projekt znovu nahrát, aby se žádané změny
             projevily.
          </p>
          <div class="section">
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="file.filters.dialog"></a>1.&nbsp;Dialogové okno Filtry souborů<a class="indexterm" name="d0e4232"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="file.filters.dialog"></a>1.&nbsp;Dialogové okno Filtry souborů<a class="indexterm" name="d0e4375"></a></h2>
                   </div>
                </div>
             </div>
             <p>Toto dialogové okno vypisuje dostupné filtry souborů. Pokud nechcete používat aplikaci OmegaT na překlad souborů nějakého
                určitého typu, můžete daný filtr vypnout odznačením zaškrtávacího políčka vedle jeho názvu. OmegaT pak při načítání projektů
                vynechá všechny příslušné soubory, a při vytváření cílových dokumentů je zkopíruje v nezměněné podobě. Když se rozhodnete
-               používat filtr znovu, stačí příslušné políčko opět zaškrtnout. Kliknutím na <span class="bold"><strong>Výchozí nastavení</strong></span> obnovíte výchozí nastavení filtrů. Když chcete upravit nastavení které soubory budou v jakém kódování, vyberte filtr ze seznamu
-               a klikněte na <span class="bold"><strong>Editovat</strong></span>.
+               používat filtr znovu, stačí příslušné políčko opět zaškrtnout. Kliknutím na <span class="bold"><strong>Výchozí nastavení</strong></span> obnovíte výchozí nastavení filtrů. Když chcete upravit nastavení, které soubory budou v jakém kódování, vyberte filtr ze
+               seznamu a klikněte na <span class="bold"><strong>Editovat</strong></span>.
             </p>
          </div>
          <div class="section">
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="filters.options"></a>2.&nbsp;Možnosti filtrů<a class="indexterm" name="d0e4248"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="filters.options"></a>2.&nbsp;Možnosti filtrů<a class="indexterm" name="d0e4391"></a></h2>
                   </div>
                </div>
             </div>
-            <p>Těchto pět filtrů (textové soubory, soubory XHTML, soubory HTML a XHTML, OpenDocument/OpenOffice.org a Microsoft Open XML)
-               mají jednu nebo více specifických možností. Pro změnu možností vyberte filtr ze seznamu a klikněte na <span class="bold"><strong>Možnosti</strong></span> Dostupné možnosti jsou:
+            <p>Několik filtrů (textové soubory, soubory XHTML, soubory HTML a XHTML, OpenDocument/OpenOffice.org a Microsoft Open XML) nabízí
+               jednu nebo více specifických možností. Pro změnu možností vyberte filtr ze seznamu a klikněte na <span class="bold"><strong>Možnosti</strong></span>. Dostupné možnosti jsou:
             </p>
             <p><span class="bold"><strong>Textové soubory</strong></span></p>
             <div class="itemizedlist">
                <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
                      <p><span class="emphasis"><em>Segmentace podle odstavců na zalomení řádků, prázdných řádcích nebo vůbec:</em></span></p>
-                     <p>pokud jsou aktivní pravidla segmentace podle vět, text bude i nadále segmentová podle možnosti, která je zde označena.</p>
+                     <p>pokud jsou aktivní pravidla segmentace podle vět, text bude i nadále segmentován podle možnosti, která je zde označena.</p>
                   </li>
                </ul>
             </div>
@@ -125,14 +125,42 @@
                   <li class="listitem">
                      <p><span class="emphasis"><em>Povolit prázdné překlady v cílových souborech</em></span>:
                      </p>
-                     <p>Jestli je tato možnost povolena, tak když není segment PO (což může být i celý odstavec) přeložen, překlad zůstané v cílovém
+                     <p>Jestli je tato možnost povolena, tak když není segment PO (což může být i celý odstavec) přeložen, překlad zůstane v cílovém
                         souboru prázdný. Technicky řečeno, segment <code class="code">msgstr</code> v PO cílovém souboru, pokud bude tento vytvořen, zůstane prázdný. Protože toto je standardní chování PO souborů a ve výchozím
                         nastavení je tato možnost zapnuta. Pokud je tato možnost vypnuta, do cílového segmentu bude zkopírován zdrojový text.
                      </p>
                   </li>
                </ul>
             </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p><span class="emphasis"><em>Přeskočit hlavičku PO</em></span></p>
+                     <p>Jestliže je tato možnost zaznačena, tak hlavička PO bude přeskočena a ponechána beze změny.</p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p><span class="emphasis"><em>Automaticky v hlavičce nahradit 'nplurals=INTEGER; &amp;plural=EXPRESSION;'</em></span></p>
+                     <p><span class="emphasis"><em><span class="emphasis"><em>Tato možnost umožňuje aplikaci OmegaT přepsat specifikaci v hlavičce souboru PO a použít výchozí hodnoty pro vybraný cílový
+                                    jazyk.</em></span></em></span></p>
+                  </li>
+               </ul>
+            </div>
             <p><span class="bold"><strong>Soubory XHTML</strong></span></p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p><span class="emphasis"><em>Přidat nebo přepsat deklaraci kódování v souborech HTML a XHTML</em></span>: cílové soubory často musí mít kódování znakové sady odlišné od kódování ve zdrojovém souboru (nezáleží na tom, jestli je
+                        to přímo definováno či implicitně obsaženo). Použitím této možnosti si překladatel může určit, zda cílové soubory mají obsahovat
+                        deklaraci kódování. Například, pokud pokud filtr souboru určí UTF8 jako kódovací schéma pro cílové soubory, výběrem možnosti
+                        ‚Vždy‘ zajistí, že tato informace bude obsažena v přeložených souborech.
+                     </p>
+                  </li>
+               </ul>
+            </div>
             <div class="itemizedlist">
                <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
@@ -169,7 +197,7 @@
             <div class="itemizedlist">
                <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
-                     <p><span class="emphasis"><em>Nepřekládejte obsah tagů s následujícími atributy párů key-value[klíč-hodnota] (odděleno čárkou):</em></span>: shoda v seznamu párů klíč-hodnota zapříčiní, že obsah tagů bude ignorován.
+                     <p><span class="emphasis"><em>Nepřekládejte obsah tagů s následujícími atributy párů key-value [klíč-hodnota] (odděleno čárkou):</em></span>: shoda v seznamu párů klíč-hodnota zapříčiní, že obsah tagů bude ignorován.
                      </p>
                      <p>Někdy se to totiž může hodit, když je možno definovat tagy podle hodnoty jejich atributů, a tyto tagy pak nepřekládat. Např.
                         <code class="literal">&lt;div class="hide"&gt; &lt;span translate="no"&gt;</code> Můžete definovat páry klíč-hodnota pro tagy, které mají zůstat nepřeložené. Jako příklad poslouží nahoře uvedený příklad,
@@ -182,7 +210,7 @@
             <div class="itemizedlist">
                <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
-                     <p><span class="bold"><strong>MS Word:</strong></span> - text typu Neviditelné pokyny, komentáře, poznámky, koncové poznámky, zápatí
+                     <p><span class="bold"><strong>MS Word:</strong></span> – text typu Neviditelné pokyny, komentáře, poznámky, koncové poznámky, zápatí
                      </p>
                   </li>
                </ul>
@@ -275,7 +303,7 @@
             <div class="itemizedlist">
                <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
-                     <p><span class="emphasis"><em>Nepřekládejte obsah tagů s následujícími atributy párů key-value[klíč-hodnota] (odděleno čárkou):</em></span>: shoda v seznamu párů klíč-hodnota zapříčiní, že obsah tagů bude ignorován.
+                     <p><span class="emphasis"><em>Nepřekládejte obsah tagů s následujícími atributy párů key-value [klíč-hodnota] (odděleno čárkou):</em></span>: shoda v seznamu párů klíč-hodnota zapříčiní, že obsah tagů bude ignorován.
                      </p>
                   </li>
                </ul>
@@ -286,17 +314,17 @@
                   <li class="listitem">
                      <p><span class="emphasis"><em>Segmentace podle odstavců na zalomení řádků, prázdných řádcích nebo vůbec</em></span>:
                      </p>
-                     <p>pokud jsou aktivní pravidla segmentace podle vět, text bude i nadále segmentová podle možnosti, která je zde označena.</p>
+                     <p>pokud jsou aktivní pravidla segmentace podle vět, text bude i nadále segmentován podle možnosti, která je zde označena.</p>
                   </li>
                </ul>
             </div>
-            <p><span class="bold"><strong>Soubory OpenDocument/OpenOffice.org</strong></span></p>
+            <p><span class="bold"><strong>Soubory formátu Open Document Format (ODF)</strong></span></p>
             <div class="itemizedlist">
                <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
                      <p>Můžete vybrat, které elementy se mají překládat.</p>
                      <p>položky seznamu, záložky, odkazy na záložky, poznámky, komentáře, poznámky k prezentaci, linky (URL), jména listů tabulkového
-                        procesoru
+                        procesoru.
                      </p>
                   </li>
                </ul>
@@ -306,20 +334,20 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="edit.filter.dialog"></a>3.&nbsp;Dialogové okno Editovat Filtr<a class="indexterm" name="d0e4428"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="edit.filter.dialog"></a>3.&nbsp;Dialogové okno Editovat Filtr<a class="indexterm" name="d0e4593"></a></h2>
                   </div>
                </div>
             </div>
             <p>Dialogové okno vám umožní nastavit vzory názvů zdrojových souborů pro soubory, které bude filtr zpracovávat, přizpůsobit si
                názvy přeložených souborů a vybrat, jaké kódování se bude používat pro načtení souboru a uložení jeho přeloženého protějšku.
-               Aby se daly upravovat vzory filtrů souborů, buď změníte daná pole přímo, nebo nakliknutím <span class="bold"><strong>Editovat ...</strong></span>. Nový filtr přidáte kliknutím na <span class="bold"><strong>Přidat...</strong></span>. K přidání vzoru nebo editaci konkrétního vzoru se používá stejné dialogové okno. Dialogové okno je užitečné, protože obsahuje
-               speciální vzory názvů cílových souborů a editor vám umožňuje upravovat názvy výstupních souborů.
+               Aby se daly upravovat vzory filtrů souborů, buď změníte daná pole přímo, nebo nakliknutím <span class="bold"><strong>Editovat ...</strong></span>. Kliknutím na <span class="bold"><strong>Přidat...</strong></span> přidáte nový filtr. K přidání vzoru nebo editaci konkrétního vzoru se používá stejné dialogové okno. Dialogové okno je užitečné,
+               protože obsahuje speciální vzory názvů cílových souborů a editor vám umožňuje upravovat názvy výstupních souborů.
             </p>
             <div class="section">
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="source.filetype.and.filename.pattern"></a>3.1.&nbsp;<a class="indexterm" name="d0e4443"></a>Typ zdrojového souboru, vzor názvu souboru<a class="indexterm" name="d0e4449"></a></h3>
+                        <h3 class="title"><a name="source.filetype.and.filename.pattern"></a>3.1.&nbsp;<a class="indexterm" name="d0e4608"></a>Typ zdrojového souboru, vzor názvu souboru<a class="indexterm" name="d0e4614"></a></h3>
                      </div>
                   </div>
                </div>
@@ -338,7 +366,7 @@
                         </h3>
                      </div>
                   </div>
-               </div><a class="indexterm" name="d0e4477"></a><a class="indexterm" name="d0e4482"></a><a class="indexterm" name="d0e4487"></a><p>Pouze omezené množství formátů souborů uvádí povinné kódování. Formáty souborů, které nespecifikují své kódování, použijí
+               </div><a class="indexterm" name="d0e4642"></a><a class="indexterm" name="d0e4647"></a><a class="indexterm" name="d0e4652"></a><p>Pouze omezené množství formátů souborů uvádí povinné kódování. Formáty souborů, které nespecifikují své kódování, použijí
                   kódování, které zadáte v příponě odpovídající jeho názvu. Například může být implicitně nastaveno, že soubory <code class="literal">.txt</code> budou načítány s použitím výchozího kódování operačního systému. Můžete změnit kódování zdrojového souboru pro každý odlišný
                   vzor názvu zdrojového souboru. Takové soubory mohou být zapsány v jakémkoliv kódování. Při výchozím nastavení je kódování
                   přeloženého souboru stejné jako kódování souboru výchozího. Pole zdrojového a cílového kódování používají nabídky obsahující
@@ -356,7 +384,7 @@
                <div class="itemizedlist">
                   <ul class="itemizedlist" style="list-style-type: disc; ">
                      <li class="listitem">
-                        <p>OmegaT má instrukci použít povinné kódování pro vybrané formáty souborů (Java properties atd.)</p>
+                        <p>OmegaT má instrukci, že se má použít povinné kódování pro vybrané formáty souborů (Java properties atd.)</p>
                      </li>
                   </ul>
                </div>
@@ -372,18 +400,18 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="target.name"></a>3.3.&nbsp;Název cílového souboru<a class="indexterm" name="d0e4515"></a></h3>
+                        <h3 class="title"><a name="target.name"></a>3.3.&nbsp;Název cílového souboru<a class="indexterm" name="d0e4680"></a></h3>
                      </div>
                   </div>
                </div>
                <p>Někdy můžete chtít automaticky přejmenovat soubory které překládáte, např. přidat kód jazyka za název souboru. Vzor názvu
-                  cílového souboru používá speciální syntaxi, takže pokud chcete editovat toto pole, musíte kliknout na <span class="bold"><strong>Editovat ...</strong></span> a použít dialogové okno <a class="indexterm" name="d0e4525"></a>Upravit vzor. Pokud budete chtít obnovit výchozí nastavení filtru, klikněte na <span class="bold"><strong>Výchozí nastavení.</strong></span> Můžete tedy upravovat název přímo v políčku vzoru pro název cílového souboru nebo v dialogovém okně filtrů souborů. Dialogové
+                  cílového souboru používá speciální syntaxi, takže pokud chcete editovat toto pole, musíte kliknout na <span class="bold"><strong>Editovat ...</strong></span> a použít dialogové okno <a class="indexterm" name="d0e4690"></a>Upravit vzor. Pokud budete chtít obnovit výchozí nastavení filtru, klikněte na <span class="bold"><strong>Výchozí nastavení.</strong></span> Můžete tedy upravovat název přímo v políčku vzoru pro název cílového souboru nebo v dialogovém okně filtrů souborů. Dialogové
                   okno Upravit vzor nabízí následující možnosti:
                </p>
                <div class="itemizedlist">
                   <ul class="itemizedlist" style="list-style-type: disc; ">
                      <li class="listitem">
-                        <p>Výchozí nastavení je <code class="literal">${filename}</code> - celý název zdrojového souboru s příponou, takže název přeloženého souboru je stejný jako název zdrojového souboru.
+                        <p>Výchozí nastavení je <code class="literal">${filename}</code> – celý název zdrojového souboru s příponou, takže název přeloženého souboru je stejný jako název zdrojového souboru.
                         </p>
                      </li>
                   </ul>
@@ -391,19 +419,11 @@
                <div class="itemizedlist">
                   <ul class="itemizedlist" style="list-style-type: disc; ">
                      <li class="listitem">
-                        <p><code class="literal">${nameOnly}</code> - umožňuje vložit jen název zdrojového souboru bez přípony.
+                        <p><code class="literal">${nameOnly}</code> – umožňuje vložit jen název zdrojového souboru bez přípony.
                         </p>
                      </li>
                      <li class="listitem">
-                        <p><code class="literal">${extension} </code>- původní koncovka souboru
-                        </p>
-                     </li>
-                  </ul>
-               </div>
-               <div class="itemizedlist">
-                  <ul class="itemizedlist" style="list-style-type: disc; ">
-                     <li class="listitem">
-                        <p><code class="literal">${targetLocale}</code> - kód cílového místního nastavení (ve formátu „xx_YY“).
+                        <p><code class="literal">${extension} </code>– původní koncovka souboru
                         </p>
                      </li>
                   </ul>
@@ -411,7 +431,7 @@
                <div class="itemizedlist">
                   <ul class="itemizedlist" style="list-style-type: disc; ">
                      <li class="listitem">
-                        <p><code class="literal">${targetLanguage}</code> - kód cílového jazyka a země (ve formátu „XX-YY“).
+                        <p><code class="literal">${targetLocale}</code> – kód cílového místního nastavení (ve formátu „xx_YY“).
                         </p>
                      </li>
                   </ul>
@@ -419,7 +439,15 @@
                <div class="itemizedlist">
                   <ul class="itemizedlist" style="list-style-type: disc; ">
                      <li class="listitem">
-                        <p><code class="literal">${targetLanguageCode}</code> - pouze cílový jazyk („XX“).
+                        <p><code class="literal">${targetLanguage}</code> – kód cílového jazyka a země (ve formátu „XX-YY“).
+                        </p>
+                     </li>
+                  </ul>
+               </div>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
+                     <li class="listitem">
+                        <p><code class="literal">${targetLanguageCode}</code> – pouze cílový jazyk („XX“).
                         </p>
                      </li>
                   </ul>
@@ -431,28 +459,34 @@
                         </p>
                      </li>
                      <li class="listitem">
-                        <p><code class="literal">$(timestamp-????)</code> - systémový čas v době generování, v různých formátech
+                        <p><code class="literal">$(timestamp-????)</code> – systémový čas s datumem v době generování, v různých formátech
                         </p>
-                        <p>Příklady formátů jednoduchého formátování datumů najdete v <a class="ulink" href="http://docs.oracle.com/javase/1.4.2/docs/api/java/text/SimpleDateFormat.html" target="_top">Dokumentaci Oracle</a>.
+                        <p>Příklady formátů jednoduchého formátování dat najdete v <a class="ulink" href="http://docs.oracle.com/javase/1.4.2/docs/api/java/text/SimpleDateFormat.html" target="_top">Dokumentaci Oracle</a>.
                         </p>
                      </li>
                      <li class="listitem">
-                        <p>${system-os-name} - operační systém užívaného počítač</p>
+                        <p><code class="literal">${system-os-name}</code> – operační systém užívaného počítač
+                        </p>
                      </li>
                      <li class="listitem">
-                        <p>${system-user-name) - jméno uživatele systému</p>
+                        <p><code class="literal">${system-user-name)</code> – jméno uživatele systému
+                        </p>
                      </li>
                      <li class="listitem">
-                        <p>${system-host-name} - jméno hostitelského systému</p>
+                        <p><code class="literal">${system-host-name}</code> – jméno hostitelského systému
+                        </p>
                      </li>
                      <li class="listitem">
-                        <p>${file-source-encoding} - kódování zdrojového souboru</p>
+                        <p><code class="literal">${file-source-encoding}</code> – kódování zdrojového souboru
+                        </p>
                      </li>
                      <li class="listitem">
-                        <p>${file-target-encoding} - kódování souboru s překladem</p>
+                        <p><code class="literal">${file-target-encoding}</code> – kódování souboru s překladem
+                        </p>
                      </li>
                      <li class="listitem">
-                        <p>${targetLocaleLCID) - cílové umístění ‚Microsoft target locale‛</p>
+                        <p><code class="literal">${targetLocaleLCID)</code> – cílové umístění ‚Microsoft target locale‛
+                        </p>
                      </li>
                   </ul>
                </div>
@@ -462,22 +496,28 @@
                <div class="itemizedlist">
                   <ul class="itemizedlist" style="list-style-type: disc; ">
                      <li class="listitem">
-                        <p>${nameOnly-0} Dokument</p>
+                        <p><code class="literal">${nameOnly-0}</code> Dokument
+                        </p>
                      </li>
                      <li class="listitem">
-                        <p>${nameOnly-1} Dokument.xx</p>
+                        <p><code class="literal">${nameOnly-1}</code> Dokument.xx
+                        </p>
                      </li>
                      <li class="listitem">
-                        <p>${nameOnly-2} Dokument.xx.docx</p>
+                        <p><code class="literal">${nameOnly-2}</code> Dokument.xx.docx
+                        </p>
                      </li>
                      <li class="listitem">
-                        <p>${extension-0} docx</p>
+                        <p><code class="literal">${extension-0}</code> docx
+                        </p>
                      </li>
                      <li class="listitem">
-                        <p>${extension-1} xx.docx</p>
+                        <p><code class="literal">${extension-1}</code> xx.docx
+                        </p>
                      </li>
                      <li class="listitem">
-                        <p>${nameOnly-2} Dokument.xx.docx</p>
+                        <p><code class="literal">${extension-2}</code> Dokument.xx.docx
+                        </p>
                      </li>
                   </ul>
                </div>

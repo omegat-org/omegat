@@ -2,19 +2,19 @@
    <head>
       <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
    
-      <title>Appendix&nbsp;C.&nbsp;Plugin Scripting</title>
+      <title>Appendix&nbsp;F.&nbsp;Plugin Scripting</title>
       <link rel="stylesheet" type="text/css" href="OmegaT.css">
       <meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
       <link rel="home" href="index.html" title="Uživatelská skupina OmegaT">
       <link rel="up" href="index.html" title="Uživatelská skupina OmegaT">
-      <link rel="prev" href="appendix.LanguageToolPlugin.inOmegaT.html" title="Appendix&nbsp;B.&nbsp;Plugin LanguageTool">
-      <link rel="next" href="appendix.website.html" title="Appendix&nbsp;D.&nbsp;OmegaT na webu">
+      <link rel="prev" href="appendix.LanguageToolPlugin.inOmegaT.html" title="Appendix&nbsp;E.&nbsp;Plugin LanguageTool">
+      <link rel="next" href="appendix.website.html" title="Appendix&nbsp;G.&nbsp;OmegaT na webu">
    </head>
    <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
       <div class="navheader">
          <table width="100%" summary="Navigation header">
             <tr>
-               <th colspan="3" align="center">Appendix&nbsp;C.&nbsp;Plugin Scripting</th>
+               <th colspan="3" align="center">Appendix&nbsp;F.&nbsp;Plugin Scripting</th>
             </tr>
             <tr>
                <td width="20%" align="left"><a accesskey="p" href="appendix.LanguageToolPlugin.inOmegaT.html">Prev</a>&nbsp;
@@ -29,21 +29,21 @@
          <div class="titlepage">
             <div>
                <div>
-                  <h1 class="title"><a name="appendix.ScriptingPlugin.inOmegaT"></a>Appendix&nbsp;C.&nbsp;Plugin Scripting<a class="indexterm" name="d0e8694"></a></h1>
+                  <h1 class="title"><a name="appendix.ScriptingPlugin.inOmegaT"></a>Appendix&nbsp;F.&nbsp;Plugin Scripting<a class="indexterm" name="d0e10873"></a></h1>
                </div>
             </div>
          </div>
          <div class="toc">
             <dl class="toc">
-               <dt><span class="section"><a href="appendix.ScriptingPlugin.inOmegaT.html#d0e8699">1. Úvod</a></span></dt>
-               <dt><span class="section"><a href="appendix.ScriptingPlugin.inOmegaT.html#d0e8704">2. Instalace a použití</a></span></dt>
+               <dt><span class="section"><a href="appendix.ScriptingPlugin.inOmegaT.html#d0e10878">1. Úvod</a></span></dt>
+               <dt><span class="section"><a href="appendix.ScriptingPlugin.inOmegaT.html#d0e10883">2. Instalace a použití</a></span></dt>
             </dl>
          </div>
          <div class="section">
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="d0e8699"></a>1.&nbsp;Úvod
+                     <h2 class="title" style="clear: both"><a name="d0e10878"></a>1.&nbsp;Úvod
                      </h2>
                   </div>
                </div>
@@ -54,15 +54,15 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="d0e8704"></a>2.&nbsp;Instalace a použití
+                     <h2 class="title" style="clear: both"><a name="d0e10883"></a>2.&nbsp;Instalace a použití
                      </h2>
                   </div>
                </div>
             </div>
-            <p>Plugin Scriptiong si pro OmegaT stáhnete ze stránek určených pro stahování pluginů (<a class="ulink" href="???" target="_top">http://sourceforge.net/projects/omegat-plugins/files/</a>). Rozbalte soubory a  vložte je všechny do adresáře „plugins“, který se nachází v instalačním adresáři OmegaT, čili v adresáří,
+            <p>Plugin Skriptování pro OmegaT si můžete stáhnout ze <a class="ulink" href="http://sourceforge.net/projects/omegat-plugins/files" target="_top">stránky určené pro stahování pluginů</a>. Rozbalte soubory a vložte je všechny do adresáře „plugins“, který se nachází v instalačním adresáři OmegaT, čili v adresáři,
                kde je uložen soubor OmegaT.jar. Pokud adresář „plugins“ neexistuje, tak jej vytvořte.
             </p>
-            <p>Tímto krokem přidáte další podnabídku <span class="guisubmenu">Nástroje</span><span class="guisubmenu">Skriptování.</span> Pod podnabídkou <span class="guisubmenu">Skriptování</span> naleznete pět řádků, kterým můžete přiřadit skripty. Kliknutím na <span class="guisubmenu">Skriptování</span> otevřete podokno Skriptování:
+            <p>Tímto krokem bude přidána další podnabídka<span class="guisubmenu"> Nástroje &gt; </span><span class="guisubmenu">Skriptování.</span> V podnabídce <span class="guisubmenu">Skriptování</span> naleznete pět zástupných řádků, kterým můžete přiřadit skripty. Kliknutím na <span class="guisubmenu">Skriptování</span> otevřete podokno Skriptování: 
             </p>
             <div class="screenshot">
                <div class="mediaobject"><img src="images/ScriptingDialog.png"></div>
@@ -130,7 +130,7 @@
             <div class="itemizedlist">
                <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
-                     <p><span class="bold"><strong>JavaScript</strong></span>  (někdy se zkracuje jako JS, nezaměňovat s Javou): je skrptovací jazyk založený na prototypech, je dynamický, používá krátký
+                     <p><span class="bold"><strong>JavaScript</strong></span> (někdy se zkracuje jako JS, nezaměňovat s Javou): je skrptovací jazyk založený na prototypech, je dynamický, používá krátký
                         zápis a nabízí prvotřídní funkce. Je to multiplatformní jazyk, podporuje objektově orientované, imperativní a funkční programovací
                         styly. Je jazykem, který stojí za populárním software jako Firefox a představuje tak známý a často využívaný programovací
                         nástroj v oblasti open source.
@@ -139,24 +139,22 @@
                </ul>
             </div>
             <p>Všechny jazyky mají přístup do objektového modelu OmegaT, kde projekt představuje hlavní objekt. Následující ukázka kódu v
-               groovy prochází všechny segmenty ve všech souborech aktuálního projektu:
-            </p>
-            <p><em class="parameter"><code>files = project.projectFiles;</code></em></p>
-            <p><em class="parameter"><code>for (i in 0 ..&lt; files.size())</code></em></p>
-            <p><em class="parameter"><code>{</code></em></p>
-            <p><em class="parameter"><code> for (j in 0 ..&lt;
-                         files[i].entries.size())</code></em></p>
-            <p><em class="parameter"><code> {</code></em></p>
-            <p><em class="parameter"><code> currsegment = files[i].entries[j];</code></em></p>
-            <p><em class="parameter"><code> source = currsegment.getSrcText();</code></em></p>
-            <p><em class="parameter"><code> if (project.getTranslationInfo(ste))</code></em></p>
-            <p><em class="parameter"><code> target =
-                         project.getTranslationInfo(currsegment).translation;</code></em></p>
-            <p><em class="parameter"><code> else</code></em></p>
-            <p><em class="parameter"><code> target = null;</code></em></p>
-            <p><em class="parameter"><code> }</code></em></p>
-            <p><em class="parameter"><code>}</code></em></p>
-         </div>
+               groovy prochází všechny segmenty ve všech souborech aktuálního projektu a, pokud jsou dostupné překlady, zobrazí zdrojový
+               a cílový segment:
+            </p><pre class="programlisting">    files = project.projectFiles;
+    for (i in 0 ..&lt; files.size())
+    {
+        for (j in 0 ..&lt; files[i].entries.size())
+        {
+            currSegment = files[i].entries[j];
+            if (project.getTranslationInfo(currSegment))
+            {
+                source = currSegment.getSrcText();
+                target = project.getTranslationInfo(currSegment).translation;
+                console.println(source + " &gt;&gt;&gt;&gt; " + target);
+            }     
+        }
+    }</pre></div>
       </div>
       <div class="navfooter">
          <hr>
@@ -168,9 +166,9 @@
                <td width="40%" align="right">&nbsp;<a accesskey="n" href="appendix.website.html">Next</a></td>
             </tr>
             <tr>
-               <td width="40%" align="left" valign="top">Appendix&nbsp;B.&nbsp;Plugin LanguageTool&nbsp;</td>
+               <td width="40%" align="left" valign="top">Appendix&nbsp;E.&nbsp;Plugin LanguageTool&nbsp;</td>
                <td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
-               <td width="40%" align="right" valign="top">&nbsp;Appendix&nbsp;D.&nbsp;OmegaT na webu</td>
+               <td width="40%" align="right" valign="top">&nbsp;Appendix&nbsp;G.&nbsp;OmegaT na webu</td>
             </tr>
          </table>
       </div>

@@ -43,10 +43,10 @@
             </dl>
          </div>
          <p>Nástroje pro práci s překladovými paměťmi pracují s textovými jednotkami nazývanými segmenty. <span class="application">OmegaT</span> nabízí dva způsoby segmentace textu: segmentace podle odstavců nebo segmentace na úrovni vět (také zvaná jako „rule-based
-            segmentation“). Pro výběr typu segmentace, vyberte z hlavní nabídky <span class="guimenu"><a class="indexterm" name="d0e6877"></a>Projekt</span> → <span class="guimenuitem">Vlastnosti...</span> a zaškrtněte, nebo zrušte zaškrtnutí nabízeného zaškrtávacího políčka. Segmentace podle odstavců je výhodná jen v určitých
+            segmentation“). Pro výběr typu segmentace, vyberte z hlavní nabídky <span class="guimenu"><a class="indexterm" name="d0e6880"></a>Projekt</span> → <span class="guimenuitem">Vlastnosti...</span> a zaškrtněte, nebo zrušte zaškrtnutí nabízeného zaškrtávacího políčka. Segmentace podle odstavců je výhodná jen v určitých
             případech, jako jsou velmi kreativní nebo stylové překlady, ve kterých překladatel asi bude chtít změnit pořadí celých vět;
             nicméně ve většině projektů je upřednostňovanou volbou právě segmentace podle vět, protože tato poskytuje lepší shody s předchozími
-            překlady. Pokud je vybráno Segmentace na úrovni vět, pak můžete nastavit pravidla vybráním položky <span class="guimenu"><a class="indexterm" name="d0e6888"></a>Možnosti</span> → <span class="guimenuitem">Segmentace...</span> v hlavní nabídce.
+            překlady. Pokud je vybráno Segmentace na úrovni vět, pak můžete nastavit pravidla vybráním položky <span class="guimenu"><a class="indexterm" name="d0e6891"></a>Možnosti</span> → <span class="guimenuitem">Segmentace...</span> v hlavní nabídce.
          </p>
          <p>Spolehlivá pravidla segmentace jsou dostupná pro spoustu jazyků, takže pravděpodobně nebudete potřebovat si psát vlastní pravidla
             segmentace. Na druhou stranu tato funkce může být velmi užitečná ve speciálních případech, kdy můžete zvýšit svou produktivitu
@@ -60,7 +60,7 @@
          </p>
          <div class="variablelist">
             <dl class="variablelist">
-               <dt><span class="term"><a class="indexterm" name="d0e6910"></a>Segmentace na úrovni struktury</span></dt>
+               <dt><span class="term"><a class="indexterm" name="d0e6913"></a>Segmentace na úrovni struktury</span></dt>
                <dd>
                   <p><span class="application">OmegaT</span> nejprve zpracuje text pomocí segmentace na úrovni struktur. Během tohoto procesu je to jen struktura zdrojového souboru,
                      která je použitá na vytvoření segmentů.
@@ -70,7 +70,7 @@
                      Atributy přeložitelných objektů v souborech XHTML nebo HTML lze extrahovat jako samostatné segmenty.
                   </p>
                </dd>
-               <dt><span class="term"><a class="indexterm" name="d0e6925"></a>Segmentace na úrovni vět</span></dt>
+               <dt><span class="term"><a class="indexterm" name="d0e6928"></a>Segmentace na úrovni vět</span></dt>
                <dd>
                   <p>Po segmentaci zdrojového souboru podle logických jednotek, bude <span class="application">OmegaT</span> dále segmentovat tyto bloky do vět.
                   </p>
@@ -81,7 +81,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="segmentation.rules"></a>1.&nbsp;Pravidla segmentace<a class="indexterm" name="d0e6940"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="segmentation.rules"></a>1.&nbsp;Pravidla segmentace<a class="indexterm" name="d0e6943"></a></h2>
                   </div>
                </div>
             </div>
@@ -92,7 +92,7 @@
             <p>Tyto dva typy pravidel se chovají následovně:</p>
             <div class="variablelist">
                <dl class="variablelist">
-                  <dt><span class="term"><a class="indexterm" name="d0e6964"></a>Pravidla zalomení</span></dt>
+                  <dt><span class="term"><a class="indexterm" name="d0e6967"></a>Pravidla zalomení</span></dt>
                   <dd>
                      <p>Rozdělí zdrojový text na segmenty. Například: „<span class="emphasis"><em>Did it make sense? I was not sure.“</em></span> by mělo být rozděleno na dva segmenty. Aby se tak stalo, mělo by tu být pravidlo zalomení pro „?“, po kterém následuje mezera
                         a slovo začínající velkým písmenem. Když chcete definovat pravidlo jako pravidlo zalomení, zaškrtněte zaškrtávací políčko
@@ -103,7 +103,7 @@
             </div>
             <div class="variablelist">
                <dl class="variablelist">
-                  <dt><span class="term"><a class="indexterm" name="d0e6981"></a>Pravidlo výjimky</span></dt>
+                  <dt><span class="term"><a class="indexterm" name="d0e6984"></a>Pravidlo výjimky</span></dt>
                   <dd>
                      <p>Specifikuje, které části textu by NEMĚLY být rozděleny. Nehledě na tečku v <span class="emphasis"><em>„Mrs.  Dalloway“</em></span> by zde neměl být text rozdělen, tzn. mělo by být založeno pravidlo výjimky pro Mrs (stejně tak Mr a Dr a prof atd.), což
                         je normálně následováno tečkou. Když chcete definovat pravidlo jakožto výjimku, nechte zaškrtávací políčko Zlom/Výjimka prázdné.
@@ -120,7 +120,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="rules.priority"></a>2.&nbsp;Pravidla přednosti<a class="indexterm" name="d0e7000"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="rules.priority"></a>2.&nbsp;Pravidla přednosti<a class="indexterm" name="d0e7003"></a></h2>
                   </div>
                </div>
             </div>
@@ -135,7 +135,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="creating.new.rule"></a>3.&nbsp;Vytváření nového pravidla<a class="indexterm" name="d0e7010"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="creating.new.rule"></a>3.&nbsp;Vytváření nového pravidla<a class="indexterm" name="d0e7013"></a></h2>
                   </div>
                </div>
             </div>
@@ -160,7 +160,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="few.simple.examples"></a>4.&nbsp;<a class="indexterm" name="d0e7044"></a>Pár jednoduchých příkladů
+                     <h2 class="title" style="clear: both"><a name="few.simple.examples"></a>4.&nbsp;<a class="indexterm" name="d0e7047"></a>Pár jednoduchých příkladů
                      </h2>
                   </div>
                </div>

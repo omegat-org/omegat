@@ -24,7 +24,7 @@
   <section id="translate.the.segments.one.by.one">
     <title>Překlad souboru</title>
 
-    <para>OmegaT při překládání aktivuje v daném časovém úseku vždy jen jeden segment pro zpracování. Po přeložení celého segmentu stiskem <keycap>Ctrl+U</keycap> přejdete na další nepřeložený segment (nebo stiskem <keycap>Ctrl+Shift+U </keycap>přejděte na další přeložený segment segment). Kdykoliv kdy budete chtít jak bude vypadat překlad v konečném formátu, stiskněte <keycap>Ctrl+D</keycap>, tímto se vygeneruje přeložený dokument, který bude vytvořen v podadresáři /target/ ve vašem projektu. Během překládání používejte nabídky &lt;g2&gt;Upravit&lt;/g2&gt; a <guimenu>Přejít</guimenu>, kde najdete různé užitečné funkce...</para>
+    <para>OmegaT při překládání aktivuje v daném časovém úseku vždy jen jeden segment pro zpracování. Po přeložení celého segmentu stiskem <keycap>Ctrl+U</keycap> přejdete na další nepřeložený segment (nebo stiskem <keycap>Ctrl+Shift+U </keycap>přejděte na další přeložený segment segment). Kdykoliv kdy budete chtít jak bude vypadat překlad v konečném formátu, stiskněte <keycap>Ctrl+D</keycap>, tímto se vygeneruje přeložený dokument, který bude vytvořen v podadresáři /target/ ve vašem projektu. Během překládání používejte nabídky <guimenu>Upravit</guimenu> a <guimenu>Přejít</guimenu>, kde najdete různé užitečné funkce...</para>
   </section>
 
   <section>

@@ -71,14 +71,10 @@ public class GlossaryAutoCompleterView extends AutoCompleterView {
     }
 
     private static String matchCapitalization(String text, String compare) {
-        if (Character.isUpperCase(compare.charAt(0))) {
-            return Character.isUpperCase(text.charAt(0)) ?
-                    text :
-                    Character.toUpperCase(text.charAt(0)) + text.substring(1);
-        } else if (Character.isLowerCase(compare.charAt(0))) {
-            return Character.isLowerCase(text.charAt(0)) ?
-                    text :
-                    Character.isLowerCase(text.charAt(0)) + text.substring(1);
+        if (compare.length() > 0
+                && Character.isUpperCase(compare.charAt(0))
+                && !Character.isUpperCase(text.charAt(0))) {
+            return Character.toUpperCase(text.charAt(0)) + (text.length() > 1 ? text.substring(1) : "");
         }
         return text;
     }

@@ -1,6 +1,6 @@
 #/bin/bash
 
-# installation script 2012-04-08
+# installation script 2012-06-03
 
 # read version number from changes.txt
 
@@ -58,6 +58,27 @@ fi
 
 sudo ln -s /opt/omegat/plugins /opt/omegat/$omtversionul/plugins
 
+# handling scripts folder
+
+if  [ -d /opt/omegat/scripts ] ; then
+
+   # /opt/omegat/scripts exists,
+   # delete /opt/omegat/<OmegaT version>/scripts
+
+   sudo rm -d -f -r /opt/omegat/$omtversionul/scripts
+
+else
+
+   # /opt/omegat/scripts does not exist,
+   # move scripts folder from within application
+
+   sudo mv /opt/omegat/$omtversionul/scripts /opt/omegat
+
+fi
+
+# symlink from /opt/omegat/scripts to scripts folder within OmegaT
+
+sudo ln -s /opt/omegat/scripts /opt/omegat/$omtversionul/scripts
 
 # handling jre folder
 
@@ -110,6 +131,6 @@ sudo ln -s -b /opt/omegat/OmegaT-default/OmegaT /usr/local/bin/omegat
 
 sudo ln -s -b /opt/omegat/OmegaT-default/omegat.kaptn /usr/local/bin/omegat.kaptn
 
-chmod +x /usr/local/bin/omegat*
+sudo chmod +x /usr/local/bin/omegat/omega /usr/local/bin/omegat.kaptn
 
 exit

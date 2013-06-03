@@ -16,11 +16,20 @@ locs :framed :vertical "Locations" -> javaloc jarfileloc optloc ;
 # Location of the Java runtime environment
 
 javaloc "Java runtime environment" -> java_list |! java_pick ;
-java_list "System-wide Java installation" ->  @combow (`ls /usr/lib/jvm/*/jre/bin/java`) ;
-java_pick :horizontal "Custom Java installation" -> @infile("java")="/opt/omegat/jre/bin/java" javaloc_help ;
+java_list :horizontal "System-wide Java installation" ->  @combow ("/usr/bin/java", `ls /usr/lib/jvm/*/jre/bin/java`) javaloc_help ;
+java_pick :horizontal "Custom Java installation" -> @infile("java")="/opt/omegat/jre/bin/java" ;
 javaloc_help :dialog "Help" -> javaloc_m javaloc_hc ;
 javaloc_m :horizontal ->  javaloc_t ;
-javaloc_t "The current default assumes that you have used the linux-install.sh \n installation script and are using a local version of the JRE (i.e. \n you have installed OmegaT with JRE).\n If you are using a system-wide version of Java that is in your \n execution path, replace /opt/omegat/jre/bin/java with java.\n If you are using a system-wide version of Java that is NOT in your \n execution path, replace /opt/omegat/jre/bin/java with the full path of your \n java executable (in quotes). " -> @ ;
+javaloc_t "The current default assumes that you have used the linux-install.sh\n
+installation script and are using a local version of the JRE\n
+(i.e. you have installed OmegaT with JRE).\n
+If you want to use a system-wide version of Java that is in your execution path,\n
+you can either select \"System-wide Java installation\"\n
+(possibly choosing one of the versions from drop-down menu), or replace\n
+\"/opt/omegat/jre/bin/java\" with \"java\" (provided Java is\n
+in your execution path). If you are using a system-wide version of Java\n
+that is NOT in your execution path, replace \"/opt/omegat/jre/bin/java\"\n
+with the full path of your java executable (in quotes) or browse and select it." -> @ ;
 javaloc_hc :horizontal -> @close="Close";
 
 
@@ -28,13 +37,19 @@ javaloc_hc :horizontal -> @close="Close";
 # To make a particular OmegaT.jar file the default, replace =""
 # with ="<full path of OmegaT.jar file>"
 
-jarfileloc "Location of OmegaT.jar" -> jarlist | ! jarpick ;
-jarlist "System-wide OmegaT installation" -> @combow(`find -L /opt/omegat -name "OmegaT.*jar"`);
-jarpick :horizontal "Custom OmegaT installation"-> @infile("OmegaT.jar")="/opt/omegat/OmegaT-default/OmegaT.jar" jarfileloc_help ;
+jarfileloc :vertical "Location of OmegaT.jar" -> jarlist | ! jarpick ;
+jarlist :horizontal "System-wide OmegaT installation" -> @combow(`find -L /opt/omegat -name "OmegaT.*jar"`) jarfileloc_help ;
+jarpick :horizontal "Custom OmegaT installation"-> @infile("OmegaT.jar")="/opt/omegat/OmegaT-default/OmegaT.jar" @action(jvrs)="Ver.";
 jarfileloc_help :dialog "Help" -> jarfileloc_m jarfileloc_hc ;
 jarfileloc_m :horizontal ->  jarfileloc_t ;
-jarfileloc_t "Location of the OmegaT program. Use this menu item to \nselect a different (installed) version of OmegaT, for example for testing." -> @ ;
+jarfileloc_t "Location of the OmegaT program. This launcher defaults to the version\n
+installed with \"linux-install.sh\". Use may use the drop-down menu \n
+to select one of OmegaT versions installed in /opt/omegat. You may also \n
+choose another version by browsing to and selecting the respective OmegaT.jar" -> @ ;
 jarfileloc_hc :horizontal -> @close="Close" ;
+
+jvrs -> "cd `dirname " jarfileloc "` ; zenity --info --title=\"Version\" --text \"$(grep -o -m1 \"OmegaT\\s*[\.0-9]*[0-9 a-z]*\" \.\/changes.txt)\"" ;
+
 
 # Optional file locations
 
@@ -51,7 +66,7 @@ configloc_hc :horizontal -> @close="Close" ;
 # Open a specific project at launch
 
 #projectloc :horizontal "Open specified project immediately" -> @directory projectloc_help ;
-projectloc :horizontal "Open specified project immediately" -> @combow("", `IFS=$(echo "\n\b") && for i in $(find $HOME/Documents $HOME/Desktop -name "omegat.project" -type f); do echo "\"$(dirname $i)\""; done`) projectloc_help ;
+projectloc :vertical "Open specified project immediately" -> @combow("", `IFS=$(echo "\n\b") && for i in $(find $HOME -name "omegat.project" -type f); do echo "\"$(dirname $i)\""; done`) projectloc_help ;
 projectloc_help :dialog "Help" -> projectloc_m projectloc_hc ;
 projectloc_m :horizontal ->  projectloc_t ;
 projectloc_t "Open a specific project immediately after launching OmegaT. \nUsualy superfluous in GUI mode." -> @ ;
@@ -165,13 +180,32 @@ motif "Motif" -> " -Dswing.defaultlaf=com.sun.java.swing.plaf.motif.MotifLookAnd
 laf_help :dialog "Help" -> laf_m laf_hc ;
 laf_m :horizontal ->  laf_t ;
 laf_t "Modern Linux distributions attempt to create \na uniform look and feel, and you may notice little or no difference with these settings." -> @ ;
-laf_hc :horizontal -> @close="Close";
+laf_hc :horizontal -> @close="Close" ;
 
 
 ### About tab
 
 about :framed "About" -> general_t ;
-general_t "About the Kaptain OmegaT Launcher" -> @text="Certain functions and settings of OmegaT are activated or configured at runtime, \ni.e. when OmegaT is launched, by means of command-line options. The Kaptain \nOmegaT Launcher is intended to make the use of these functions and settings easier \nfor Linux users by providing a user-friendly user interface. Information on Kaptain \nand its syntax can be found at: kaptain.sourceforge.net.\n\nThe Kaptain OmegaT Launcher is free software; you can redistribute it and/or modify it \nunder the terms of the GNU General Public License as published by the Free Software \nFoundation; either version 2 of the License, or (at your option) any later version.\n\n(c) Marc Prior, 2012\n\nThis program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; \nwithout even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. \nThe text of the GNU General Public License is provided within OmegaT itself, with which \nthis script is intended to be supplied." ;
+general_t "About the Kaptain OmegaT Launcher" -> @text (<<LONGTEXT
+Certain functions and settings of OmegaT are activated or configured at
+runtime, i.e. when OmegaT is launched, by means of command-line options.
+The Kaptain OmegaT Launcher is intended to make the use of these functions and
+settings easier for GNU/Linux users by providing a user-friendly user interface.
+Information on Kaptain and its syntax can be found at
+http://kaptain.sourceforge.net
+
+The Kaptain OmegaT Launcher is free software; you can redistribute it and/or
+modify it under the terms of the GNU General Public License as published by the
+Free Software Foundation; either version 3 of the License, or (at your option)
+any later version.
+
+This program is distributed in the hope that it will be useful, but WITHOUT ANY
+WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.
+The text of the GNU General Public License is provided within OmegaT itself,
+with which this script is intended to be supplied.
+LONGTEXT
+) ;
 
 
 ### Button bar

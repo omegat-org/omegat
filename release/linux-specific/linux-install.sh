@@ -26,7 +26,7 @@ else
 
    sudo mkdir -p /opt/omegat/$omtversionul
 
-   # copy OmegaT files and folders 
+   # copy OmegaT files and folders
    # to /opt/omegat/<OmegaT version>
 
    sudo cp -r ./* /opt/omegat/$omtversionul
@@ -47,8 +47,8 @@ if  [ -d /opt/omegat/plugins ] ; then
 
 else
 
-   # /opt/omegat/plugins does not exist, 
-   # move plugins folder from within application 
+   # /opt/omegat/plugins does not exist,
+   # move plugins folder from within application
 
    sudo mv /opt/omegat/$omtversionul/plugins /opt/omegat
 
@@ -65,7 +65,7 @@ if  [ -d /opt/omegat/$omtversionul/jre ] ; then
 
    # user is installing OmegaT with JRE
    # deletes old local JRE, if present
-   # move jre folder from within application 
+   # move jre folder from within application
    # symlink from /opt/omegat/jre to jre folder within OmegaT
 
    sudo rm -d -f -r /opt/omegat/jre
@@ -81,7 +81,7 @@ else
 
    if  [ -d /opt/omegat/jre ] ; then
 
-      # /opt/omegat/jre exists, 
+      # /opt/omegat/jre exists,
       # symlink from /opt/omegat/jre to jre folder within OmegaT
 
       sudo ln -s /opt/omegat/jre /opt/omegat/$omtversionul/jre
@@ -96,16 +96,20 @@ else
 
 fi
 
+## symlink just installed version to /opt/omegat/OmegaT-default
 
-# symlink bash OmegaT launch script 
+sudo ln -s -b -T /opt/omegat/$omtversionul /opt/omegat/OmegaT-default
+
+# symlink bash OmegaT launch script
 # from <OmegaT version> to /usr/local/bin
 
-sudo ln -s -b /opt/omegat/$omtversionul/OmegaT /usr/local/bin/omegat
+sudo ln -s -b /opt/omegat/OmegaT-default/OmegaT /usr/local/bin/omegat
 
-# symlink Kaptain OmegaT launch script 
+# symlink Kaptain OmegaT launch script
 # from <OmegaT version> to /usr/local/bin
 
-sudo ln -s -b /opt/omegat/$omtversionul/omegat.kaptn /usr/local/bin/omegat.kaptn
+sudo ln -s -b /opt/omegat/OmegaT-default/omegat.kaptn /usr/local/bin/omegat.kaptn
 
+chmod +x /usr/local/bin/omegat*
 
 exit

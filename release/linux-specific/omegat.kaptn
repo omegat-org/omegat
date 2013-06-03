@@ -1,21 +1,23 @@
 #!/usr/bin/kaptain
 
-# This version of the Kaptain OmegaT Launcher: 2013-04-26
+# This version of the Kaptain OmegaT Launcher: 2013-06-03
 
 start "OmegaT Launcher" -> omticon top bottom ;
   top :tabbed  -> locs mem langs connect appearance about ;
-  bottom :horizontal -> button_bar ; 
+  bottom :horizontal -> button_bar ;
 
 omticon -> @icon("images/OmegaT.png") ;
 
 ### Locations tab
 
-locs :framed "Locations" -> mandloc optloc ;
-mandloc "Mandatory locations" -> javaloc jarfileloc ;
+locs :framed :vertical "Locations" -> javaloc jarfileloc optloc ;
+#mandloc :vertical "Mandatory locations" -> javaloc jarfileloc ;
 
 # Location of the Java runtime environment
 
-javaloc :horizontal "Java runtime environment" -> @infile("java")="/opt/omegat/jre/bin/java" javaloc_help ;
+javaloc "Java runtime environment" -> java_list |! java_pick ;
+java_list "System-wide Java installation" ->  @combow (`ls /usr/lib/jvm/*/jre/bin/java`) ;
+java_pick :horizontal "Custom Java installation" -> @infile("java")="/opt/omegat/jre/bin/java" javaloc_help ;
 javaloc_help :dialog "Help" -> javaloc_m javaloc_hc ;
 javaloc_m :horizontal ->  javaloc_t ;
 javaloc_t "The current default assumes that you have used the linux-install.sh \n installation script and are using a local version of the JRE (i.e. \n you have installed OmegaT with JRE).\n If you are using a system-wide version of Java that is in your \n execution path, replace /opt/omegat/jre/bin/java with java.\n If you are using a system-wide version of Java that is NOT in your \n execution path, replace /opt/omegat/jre/bin/java with the full path of your \n java executable (in quotes). " -> @ ;
@@ -26,7 +28,9 @@ javaloc_hc :horizontal -> @close="Close";
 # To make a particular OmegaT.jar file the default, replace =""
 # with ="<full path of OmegaT.jar file>"
 
-jarfileloc :horizontal "Location of OmegaT.jar" -> @infile("OmegaT.jar")="" jarfileloc_help ;
+jarfileloc "Location of OmegaT.jar" -> jarlist | ! jarpick ;
+jarlist "System-wide OmegaT installation" -> @combow(`find -L /opt/omegat -name "OmegaT.*jar"`);
+jarpick :horizontal "Custom OmegaT installation"-> @infile("OmegaT.jar")="/opt/omegat/OmegaT-default/OmegaT.jar" jarfileloc_help ;
 jarfileloc_help :dialog "Help" -> jarfileloc_m jarfileloc_hc ;
 jarfileloc_m :horizontal ->  jarfileloc_t ;
 jarfileloc_t "Location of the OmegaT program. Use this menu item to \nselect a different (installed) version of OmegaT, for example for testing." -> @ ;
@@ -46,7 +50,8 @@ configloc_hc :horizontal -> @close="Close" ;
 
 # Open a specific project at launch
 
-projectloc :horizontal "Open specified project immediately" -> @directory projectloc_help ;
+#projectloc :horizontal "Open specified project immediately" -> @directory projectloc_help ;
+projectloc :horizontal "Open specified project immediately" -> @combow("", `IFS=$(echo "\n\b") && for i in $(find $HOME/Documents $HOME/Desktop -name "omegat.project" -type f); do echo "\"$(dirname $i)\""; done`) projectloc_help ;
 projectloc_help :dialog "Help" -> projectloc_m projectloc_hc ;
 projectloc_m :horizontal ->  projectloc_t ;
 projectloc_t "Open a specific project immediately after launching OmegaT. \nUsualy superfluous in GUI mode." -> @ ;
@@ -80,7 +85,7 @@ langs :framed "Languages" -> UI ;
 
 UI "User interface" -> UIlang country languages_help ;
 
-UIlang "User interface language (nn)" -> @combow("en", "ar", "ca", "de", "es", "eu", "fr", "hu", "it", "ja", "nl", "pl", "pt", "ru", "zh") ;
+UIlang "User interface language (nn)" -> @combow("en", "ar", "be", "ca", "cs", "cy", "da", "de", "el", "eo", "es", "eu", "fr", "gl", "hu", "id", "it", "ja", "nl", "pl", "pt", "ru", "sh", "sk", "sl", "sq", "sv", "tr", "uk", "zh") ;
 
 # Selection of the user country
 
@@ -93,7 +98,7 @@ languages_hc :horizontal -> @close="Close" ;
 
 ### Connectivity tab
 
-connect :framed "Connectivity" -> proxy gt ;
+connect :framed "Connectivity" -> proxy gt ms ;
 
 proxy "Proxy settings" -> proxyhost proxyport ;
 
@@ -115,6 +120,18 @@ gt_m :horizontal ->  gt_t ;
 gt_t "To use Google Translate within OmegaT, you must order \na password from Google and enter it here." -> @ ;
 gt_hc :horizontal -> @close="Close";
 
+
+# Microsoft Translator API key
+
+ms "Microsoft Translator settings" -> msi msk ms_help ;
+msi "Microsoft Translator API Client ID" -> @password="" ;
+msk "Microsoft Translator API Secret Key" -> @password="" ;
+
+
+ms_help :dialog "Help" -> ms_m ms_hc ;
+ms_m :horizontal ->  ms_t ;
+ms_t "To use Mircrosoft Translator within OmegaT, you must order \na client ID and a secret key from Microsoft Azure Marketplace \n(see https://datamarket.azure.com/dataset/bing/microsofttranslator) \nand enter them here." -> @ ;
+ms_hc :horizontal -> @close="Close";
 
 ### Appearance settings tab
 
@@ -142,15 +159,14 @@ aa_hc :horizontal -> @close="Close";
 
 laf "Look and Feel" -> deflaf | gtk | motif | laf_help ;
 deflaf "Default" -> " " ;
-gtk "GTK" -> " -Dswing.defaultlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel " ;
+#gtk "GTK" -> " -Dswing.defaultlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel " ;
+gtk "GTK" -> " -Dswing.crossplatformlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel ";
 motif "Motif" -> " -Dswing.defaultlaf=com.sun.java.swing.plaf.motif.MotifLookAndFeel " ;
 laf_help :dialog "Help" -> laf_m laf_hc ;
 laf_m :horizontal ->  laf_t ;
 laf_t "Modern Linux distributions attempt to create \na uniform look and feel, and you may notice little or no difference with these settings." -> @ ;
 laf_hc :horizontal -> @close="Close";
 
-
-### About tab
 
 ### About tab
 
@@ -167,4 +183,4 @@ close_button -> @close="Cancel" ;
 
 ### Launch command
 
-omt -> javaloc " -jar " memory " -Duser.language=" UIlang " -Duser.country=" country " -Dgoogle.api.key=" gt " -Dhttp.proxyHost=" proxyhost " -Dhttp.proxyPort=" proxyport " -Dawt.useSystemAAFontSettings=" fontaa laf " " jarfileloc " " projectloc " --config-dir=" configloc ;
+omt -> javaloc " -jar " memory " -Duser.language=" UIlang " -Duser.country=" country " -Dgoogle.api.key=" gt " -Dmicrosoft.api.client_secret=" msk " -Dmicrosoft.api.client_id=" msi " -Dhttp.proxyHost=" proxyhost " -Dhttp.proxyPort=" proxyport " -Dawt.useSystemAAFontSettings=" fontaa laf " " jarfileloc " " projectloc " --config-dir=" configloc ;

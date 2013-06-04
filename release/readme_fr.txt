@@ -1,4 +1,4 @@
-Ce document a été traduit par Didier Briel et Jean-Christophe Helary, copyright© 2007-2012.
+Ce document a été traduit par Didier Briel et Jean-Christophe Helary, copyright© 2007-2013.
 
 ==============================================================================
   OmegaT 3.0, fichier « Lisez-moi »
@@ -276,9 +276,6 @@ OmegaT utilise les bibliothèques suivantes :
   morfologik-*.jar (licence Morfologik)
   segment-1.4.1.jar (licence Segment)
   pdfbox-app-1.8.1.jar (licence Apache 2.0)
-  Fontbox-0.1.0.jar et JempBox-0.2.0.jar (licence Fontbox)
-  icu4j-51_1.jar (licence ICU4J)
-
 
 ==============================================================================
  5.  Est-ce qu'OmegaT vous pose problème ? Avez-vous besoin d'aide ?

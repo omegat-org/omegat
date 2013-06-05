@@ -11,9 +11,6 @@
 	<classpathentry exported="true" kind="lib" path="lib/jmyspell-core-1.0.0-beta-2.jar"/>
 	<classpathentry exported="true" kind="lib" path="test/lib/junit-4.4.jar"/>
 	<classpathentry exported="true" kind="lib" path="test/lib/xmlunit-1.1.jar"/>
-	<classpathentry exported="true" kind="lib" path="lib/icu4j-51_1.jar"/>
-	<classpathentry exported="true" kind="lib" path="lib/FontBox-0.1.0.jar"/>
-	<classpathentry exported="true" kind="lib" path="lib/JempBox-0.2.0.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/pdfbox-app-1.8.1.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/vldocking_2.1.4.jar"/>
 	<classpathentry kind="lib" path="lib/swing-worker-1.2.jar" sourcepath="lib/sources/swing-worker-src-1.2.zip"/>

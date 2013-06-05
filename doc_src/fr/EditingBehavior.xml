@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<chapter id="chapter.translation.editing">
+  <title>Ligne d'édition...<indexterm class="singular">
+      <primary>Menu</primary> <secondary>Options</secondary> <tertiary>Ligne d'édition...</tertiary>
+    </indexterm></title>
+
+  <para>La boîte de dialogue du menu <menuchoice> <guimenu>Options</guimenu> <guimenuitem>Ligne d'édition...</guimenuitem> </menuchoice> permet à l'utilisateur de choisir comment le segment actuellement présent dans la ligne d'édition sera initialisé et géré :</para>
+
+  <figure id="editing.behavior.options">
+    <title>Options de la ligne d'édition</title>
+
+    <mediaobject>
+      <imageobject role="html">
+        <imagedata fileref="images/EditingBehaviourOptions25.png"/>
+      </imageobject>
+	  <imageobject role="fo">
+        <imagedata fileref="images/EditingBehaviourOptions25.png"/>
+      </imageobject>
+    </mediaobject>
+  </figure>
+
+  <para/>
+
+  <para>Vous traduisez vos fichiers en vous déplaçant de segment en segment et en modifiant tour à tour chaque segment. En vous déplaçant d'un segment à l'autre, vous pouvez remplir la ligne d'édition soit avec une traduction pré-existante, située dans le panneau des correspondances, soit avec le texte source. Dans le menu <menuchoice> <guimenu>Options</guimenu> <guimenuitem>Ligne d'édition...</guimenuitem> </menuchoice> <application>OmegaT</application> vous propose les possibilités suivantes :</para>
+
+  <variablelist>
+    <varlistentry>
+      <term>Le texte source</term>
+
+      <listitem>
+        <para>Le texte source sera automatiquement inséré dans la ligne d'édition. Cette option est utile pour les textes contenant de nombreux noms de marque ou autres noms propres qui doivent rester inchangés.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Laisse le segment vide<indexterm class="singular">
+          <primary>Menu Options</primary> <secondary>Ligne d'édition...</secondary> <tertiary>Segment vide</tertiary>
+        </indexterm></term>
+
+      <listitem>
+        <para>OmegaT laisse la ligne d'édition vide. Cette option vous permet de saisir la traduction sans avoir besoin de supprimer le texte source, ce qui vous évite ainsi de devoir faire deux frappes de touches supplémentaires (<emphasis role="bold">Ctrl+A </emphasis>et <emphasis role="bold">Suppr). </emphasis>Les traductions vides sont maintenant permises. Elles sont affichées en tant que &lt;VIDE&gt; dans l'Éditeur. Pour créer une traduction vide, cliquez-droit dans un des segments et sélectionnez « <emphasis role="bold">Définir traduction vide</emphasis> ». Dans le même menu, l'entrée <emphasis role="bold">Supprimer la traduction</emphasis> vous permet également de supprimer la traduction existante du segment. Vous obtiendrez le même résultat en effaçant le segment cible et en appuyant sur <guibutton>Entrée.</guibutton></para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Insère la meilleure correspondance partielle<indexterm class="singular">
+          <primary>Menu Options</primary> <secondary>Ligne d'édition...</secondary> <tertiary>La meilleure correspondance</tertiary>
+        </indexterm></term>
+
+      <listitem>
+        <para>OmegaT insère la traduction de la chaîne de caractères la plus proche du texte source en cours si celle-ci est au-dessus du niveau minimum de correspondance que vous avez sélectionné dans la boîte de dialogue. Le préfixe (vide par défaut) peut être utilisé dans la traduction de balises réalisée via les correspondances partielles. L'ajout d'un préfixe ([correspondance] par exemple), vous permet de contrôler ces traductions ultérieurement pour vous assurer que celles-ci sont correctes.</para>
+      </listitem>
+    </varlistentry>
+  </variablelist>
+
+  <para>Les cases à cocher situées dans la partie inférieure de la boîte de dialogue ont les fonctionnalités suivantes :</para>
+
+  <variablelist>
+    <varlistentry>
+      <term>Essaie de convertir les nombres lors de l'insertion d'une correspondance<indexterm class="singular">
+          <primary>Menu Options</primary> <secondary>Ligne d'édition...</secondary> <tertiary>Essayer de convertir les nombres lors de l'insertion d'une correspondance</tertiary>
+        </indexterm></term>
+
+      <listitem>
+        <para>Si une correspondance est insérée alors que cette case est cochée, OmegaT essaie, manuellement ou automatiquement, de convertir les nombres de la correspondance en fonction du contenu du texte source. Il existe néanmoins quelques restrictions :</para>
+
+        <itemizedlist>
+          <listitem>
+            <para>Le segment source et les correspondances doivent contenir la même liste de nombres</para>
+          </listitem>
+        
+          <listitem>
+            <para>Les nombres du texte source et des correspondances cible doivent être rigoureusement identiques.</para>
+          </listitem>
+        
+          <listitem>
+            <para>Seuls les nombres entiers et les nombres réels simples (utilisant le point comme caractère décimal, soit 5.4 mais pas 5,4 ou 54E-01) sont pris en compte.</para>
+          </listitem>
+        </itemizedlist>
+      </listitem>
+    </varlistentry>
+  </variablelist>
+
+  <variablelist>
+    <varlistentry>
+      <term>Autoriser une traduction identique à la source<indexterm class="singular">
+          <primary>Menu Options</primary> <secondary>Ligne d'édition...</secondary> <tertiary>Autoriser une traduction identique à la source</tertiary>
+        </indexterm></term>
+
+      <listitem>
+        <para>Les documents à traduire peuvent contenir des noms de marque ou autres noms propres qui resteront identiques dans les documents traduits. Il existe deux stratégies pour les segments contenant seulement ce genre de texte invariable.</para>
+
+        <para>Vous pouvez décider de ne pas traduire du tout ces segments. OmegaT affichera alors ces segments comme étant non traduits. Ceci est le paramètre par défaut. L'autre solution consiste à saisir une traduction identique au texte source. OmegaT arrive à reconnaître ce que vous avez fait. Pour que cela soit possible, allez dans <menuchoice> <guimenu>Options</guimenu> <guimenuitem>Ligne d'édition...</guimenuitem> </menuchoice> et cochez la case <emphasis role="bold">Autoriser une traduction identique à la source</emphasis>.</para>
+      </listitem>
+    </varlistentry>
+  </variablelist>
+
+  <variablelist>
+    <varlistentry>
+      <term>Exporter le segment dans des fichiers texte<indexterm class="singular">
+          <primary>Menu Options</primary> <secondary>Ligne d'édition...</secondary> <tertiary>Exporter le segment dans des fichiers texte</tertiary>
+        </indexterm></term>
+
+      <listitem>
+        <para>Cette fonction d'exportation dans des fichiers texte exporte des données depuis le projet <application>OmegaT</application> en cours dans des fichiers de texte brut. Les données sont exportées lorsque le segment est ouvert. Les fichiers apparaissent dans le sous-dossier /script situé dans le dossier de fichiers utilisateur d'OmegaT et comprennent :</para>
+
+        <itemizedlist>
+          <listitem>
+            <para>Le contenu du texte source du segment (<filename>source.txt</filename>).</para>
+          </listitem>
+
+          <listitem>
+            <para>Le contenu du texte cible du segment (<filename>target.txt</filename>).</para>
+          </listitem>
+
+          <listitem>
+            <para>Le texte mis en surbrillance par l'utilisateur lorsque les touches <keycap>Ctrl+Shift+C</keycap> sont appuyées ou lorsque <guimenuitem>Edition &gt; Exporter la sélection</guimenuitem> est sélectionné (<filename>selection.txt</filename>).</para>
+          </listitem>
+        </itemizedlist>
+
+        <para>Le contenu des fichiers est écrasé lorsqu'un nouveau segment est ouvert (source.txt et target.txt) ou qu'une nouvelle sélection est exportée (selection.txt). Les fichiers sont des fichiers de texte brut non formaté. Ce processus peut être dirigé et contrôlé via le langage de script Tck/Tcl (Tool Command Language). Voir le <ulink url="http://www.omegat.org/en/howtos/text_export.html">Guide d'utilisation de la fonction d'exportation de texte d'OmegaT (interface de script) (en anglais)</ulink> pour des détails, des exemples et des suggestions.</para>
+      </listitem>
+    </varlistentry>
+  </variablelist>
+
+  <variablelist>
+    <varlistentry>
+      <term>Atteindre segment non traduit suivant s'arrête lorsqu'il y a au moins une traduction alternative<indexterm class="singular">
+          <primary>Menu Options</primary> <secondary>Ligne d'édition...</secondary> <tertiary>Segments comportant une traduction alternative</tertiary>
+        </indexterm></term>
+
+      <listitem>
+        <para>Pour éviter toute erreur de traduction dans le cas de segments avec plusieurs contenus cible possibles, cocher cette case obligera <emphasis role="bold">Atteindre segment non traduit suivant</emphasis> à s'arrêter au segment suivant de ce type, sans tenir compte du fait qu'il ait été traduit ou non.</para>
+      </listitem>
+    </varlistentry>
+  </variablelist>
+</chapter>

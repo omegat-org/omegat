@@ -1,0 +1,351 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<chapter id="chapter.files.and.folders">
+  <title>Les fichiers et répertoires d'<application>OmegaT</application></title>
+
+  <para><application>OmegaT</application> travaille avec trois types de fichiers.</para>
+
+  <itemizedlist>
+    <listitem>
+      <para>Les fichiers projet de traduction : ils constituent un projet de traduction. Leur perte peut affecter l'intégrité du projet et votre capacité à mener à bien votre travail. Les fichiers projet sont les fichiers les plus importants dans <application>OmegaT</application>. Ce sont les fichiers que vous utilisez quotidiennement pour vos traductions.</para>
+    </listitem>
+  </itemizedlist>
+
+  <itemizedlist>
+    <listitem>
+      <para>Fichiers paramètres d'utilisateur : ils sont créés si le comportement d'OmegaT est modifié par les paramètres de préférence de l'utilisateur. S'ils sont perdus, OmegaT retourne généralement à ses « paramètres d'origine ». Cela peut engendrer quelques problèmes si vous êtes au milieu d'une traduction.</para>
+    </listitem>
+  </itemizedlist>
+
+  <itemizedlist>
+    <listitem>
+      <para>Fichiers application : ils sont inclus dans le paquet que vous téléchargez. La plupart d'entre eux sont nécessaires au bon fonctionnement d'OmegaT. Si, pour quelque raison que ce soit, ces fichiers étaient perdus ou endommagés, il vous suffit de télécharger ou de réinstaller OmegaT pour tout restaurer.</para>
+    </listitem>
+  </itemizedlist>
+
+  <section id="translation.project.files">
+    <title>Fichiers projet de traduction</title>
+
+    <indexterm class="singular">
+      <primary>Fichiers projet</primary> <secondary>Fichiers projet de traduction</secondary>
+    </indexterm>
+
+    <para>Un projet de traduction <application>OmegaT</application> se compose d'un certain nombre de fichiers et de répertoires.</para>
+
+    <para>Lorsque vous créez un projet de traduction, OmegaT crée automatiquement un dossier portant le nom spécifié et une liste de dossiers :</para>
+
+    <figure id="OmegaT.project">
+      <title>Projet OmegaT</title>
+
+      <mediaobject>
+        <imageobject role="html">
+		          <imagedata fileref="images/Omegatproject.png"/>
+       </imageobject>
+      <imageobject role="fo">
+          <imagedata fileref="images/Omegatproject.png" width="60%"/>
+        </imageobject>
+      </mediaobject>
+	  </figure>
+
+    <para>Il est possible de changer l'emplacement de certains des dossiers lors de la création du projet ou durant la traduction. Il est donc possible de sélectionner des dossiers existants ou de créer des dossiers à des emplacements qui s'accordent avec vos habitudes de travail et de gestion de projets. Pour modifier l'emplacement d'un dossier après la création du projet, ouvrez <guimenuitem>Projet &gt; Propriétés...</guimenuitem> dans le menu ou grâce au raccourci<guibutton>Ctrl+E</guibutton> et faites les modifications nécessaires.</para>
+
+    <para>Dans un gestionnaire de fichiers, le projet de traduction ressemble à n'importe quel autre dossier et se comporte de la même façon. Dans l'exemple suivant, le dossier <filename>my projects</filename> contient trois projets OmegaT :</para>
+
+    <para><figure id="OmegaT.projects.and.subfolders">
+        <title>Projets OmegaT et sous-dossiers</title>
+
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="images/OmegaT_projects_and_subfolders.png"/>
+          </imageobject>
+        </mediaobject>
+      </figure></para>
+
+    <para>Un double clic sur l'élément possédant une icône OmegaT suffit à ouvrir le projet. Un projet de traduction<emphasis role="bold">Example_Project</emphasis> utilisant les paramètres par défaut sera créé sous la forme d'un nouveau sous-dossier ayant la structure suivante :</para>
+
+    <section id="file.omegat.project">
+      <title>Dossier racine<indexterm class="singular">
+          <primary>Fichiers projet</primary> <secondary>Fichier omegat.project</secondary>
+        </indexterm></title>
+
+      <para>Le dossier racine d'un projet contient toujours le fichier <filename>OmegaT.Project</filename>, qui contient lui-même les paramètres du projet tels qu'ils sont définis dans la fenêtre de Propriétés du projet (<guimenuitem>Projet &gt; Propriétés</guimenuitem>). Au fur et à mesure de la traduction, des fichiers supplémentaires (<emphasis><filename>project_name</filename></emphasis><filename>-omegat.tmx, project_name-level1.tmx et project_name-level2.tmx</filename>) sont créés (et mis à jour) dans ce dossier. Ils contiennent l'intégralité de la mémoire de traduction (sous différentes formes) qui pourra ainsi être utilisée lors de projets futurs.</para>
+    </section>
+
+    <section>
+      <title>Le sous-dossier dictionnary (dictionnaire)</title>
+
+      <para>Vide à l'origine, ce dossier contiendra les dictionnaires que vous aurez ajoutés au projet. Voir le <link linkend="chapter.dictionaries">chapitre Dictionnaires</link> pour plus d'informations.</para>
+    </section>
+
+    <section>
+      <title>Le sous-dossier glossary (glossaire)</title>
+
+      <para>À l'origine, ce dossier est vide. Il contiendra les glossaires que vous utiliserez pour le projet. Voir le<link linkend="chapter.glossaries">chapitre Glossaires</link> pour plus d'informations.</para>
+    </section>
+
+    <section id="folder.OmegaT">
+      <title>Le sous-dossier omegat<indexterm class="singular">
+          <primary>Fichiers projet</primary> <secondary>Sous-dossier omegat</secondary>
+        </indexterm></title>
+
+      <para>Le sous-dossier<emphasis role="bold">omegat</emphasis> contient au moins un fichier (peut en contenir plus). Le fichier le plus important est <filename>project_save.tmx, </filename>. Il s'agit de la mémoire de traduction du projet actuellement travaillée. Des sauvegardes de ce fichier (avec l'extension bak) sont ajoutées progressivement au sous-dossier : au début, pendant et à la fin de la session de traduction. Ainsi, on évite de perdre des données par inadvertance - voir Prévention des pertes de données dans le chapitre <link linkend="chapter.misc">Divers.</link></para>
+
+      <para>Au cours de la traduction, il est possible que des fichiers supplémentaires soient créés dans ce dossier comme suit</para>
+
+      <para><informaltable>
+          <tgroup align="left" cols="2" rowsep="1">
+            <colspec align="left" colnum="1"/>
+
+            <tbody>
+              <row>
+                <entry>stats.txt</entry>
+
+                <entry><indexterm class="singular">
+                    <primary>Fichiers projet</primary> <secondary>le fichier statistiques</secondary>
+                  </indexterm>contient les dernières statistiques du projet en cours. Vous pouvez les visionner en sélectionnant <guimenuitem>Outils &gt; Statistiques</guimenuitem></entry>
+              </row>
+
+              <row>
+                <entry>ignored_words.txt. learned_words.txt</entry>
+
+                <entry><indexterm class="singular">
+                    <primary>Les fichiers projet</primary> <secondary>ignored_words (mots ignorés)  et learned_words (mots appris)</secondary>
+                  </indexterm>sont créés et utilisés par le vérificateur orthographique. Pour que le vérificateur orthographique ignore/ ajoute des mots que vous avez déjà rencontrés, il suffit de copier les deux fichiers correspondants à ces listes de mots dans le sous-dossier <filename>omegat</filename> du projet en cours.</entry>
+              </row>
+
+              <row>
+                <entry>Le fichier project_stats_match.txt</entry>
+
+                <entry>contient les dernières statistiques des correspondances du projet produites par <guimenuitem>Outils &gt; Statistiques des correspondances</guimenuitem></entry>
+              </row>
+
+              <row>
+                <entry>Le fichier segmentation.conf</entry>
+
+                <entry>contient les règles de segmentation spécifiques au projet si elles existent. Ces règles peuvent être établies dans <guimenuitem>Projet &gt; Propriétés ... </guimenuitem>Voir<link linkend="chapter.project.properties">le chapitre Propriétés du projet</link></entry>
+              </row>
+
+              <row>
+                <entry>Le fichier filters.xml</entry>
+
+                <entry>contient les filtres de fichier spécifiques au projet s'ils existent. Ces filtres peuvent être établis dans <guimenuitem>Projet &gt; Propriétés... </guimenuitem>Voir<link linkend="chapter.project.properties">le chapitre Propriétés du projet</link></entry>
+              </row>
+            </tbody>
+          </tgroup>
+        </informaltable></para>
+    </section>
+
+    <section id="folder.source">
+      <title>Sous-dossier source<indexterm class="singular">
+          <primary>Fichiers projet</primary> <secondary>Sous-dossier source</secondary>
+        </indexterm></title>
+
+      <para>Le sous-dossier source contient les fichiers à traduire. Les fichiers peuvent être ajoutés ultérieurement dans le sous-dossier. Veuillez noter que la structure du sous-dossier source peut prendre la forme que vous souhaitez. Si les fichiers à traduire font partie d'une structure arborescente (comme celle d'un site web), il suffit de spécifier le sous-dossier racine et OmegaT conservera l'ensemble des contenus en gardant cette structure intacte.</para>
+    </section>
+
+    <section id="folder.target">
+      <title>Sous-dossier target (cible)<indexterm class="singular">
+          <primary>Fichiers projet</primary> <secondary>Sous-dossier target (cible)</secondary>
+        </indexterm></title>
+
+      <para>À l'origine, ce sous-dossier est vide. Pour y ajouter du contenu, sélectionnez<menuchoice> <shortcut> <keycombo> <keycap>Ctrl</keycap> <keycap>D</keycap> </keycombo> </shortcut> <guimenu>Projet</guimenu> <guimenuitem>Créer les documents traduits</guimenuitem> </menuchoice>. Les fichiers contenus dans le dossier <filename>source</filename> (qu'ils soient traduits ou non) sont alors produits dans le dossier target (cible) et présentent la même hiérarchie que celle du dossier source. Le contenu du sous-dossier target (cible) montre l'état actuel de la traduction, telle qu'on la trouve dans la mémoire de traduction du projet (qui est sauvegardée dans le fichier<emphasis role="bold">/omegat/project_save.tmx</emphasis> en cours). Les segments non traduits resteront donc dans la langue source.</para>
+    </section>
+  </section>
+
+  <section id="user.files">
+    <title>Fichiers paramètres utilisateur<indexterm class="singular">
+        <primary>Fichiers projet</primary> <secondary>Fichiers paramètres utilisateur</secondary>
+      </indexterm></title>
+
+    <para>Les fichiers utilisateur contiennent les informations qui s'appliquent à l'ensemble des projets pour un utilisateur donné ;</para>
+
+    <informaltable>
+      <tgroup align="left" cols="2" rowsep="1">
+        <colspec align="left" colnum="1"/>
+
+        <tbody>
+          <row>
+            <entry>logs/OmegaT.log</entry>
+
+            <entry>Ce fichier enregistre les messages d'erreur de Java qui surviennent alors qu'<application>OmegaT</application> est en cours d'utilisation. Si vous rencontrez des problèmes avec OmegaT, il est important d'inclure ce fichier ou la partie concernée du fichier dans le rapport de bug</entry>
+          </row>
+
+          <row>
+            <entry>Le dossier script/</entry>
+
+            <entry>contient les fichiers scripts de l'extension script si celle-ci est installée</entry>
+          </row>
+
+          <row>
+            <entry>Le fichier filters.xml</entry>
+
+            <entry>Les filtres de fichiers par défaut des utilisateurs</entry>
+          </row>
+
+          <row>
+            <entry>omegat.prefs</entry>
+
+            <entry>Préférences OmegaT</entry>
+          </row>
+
+          <row>
+            <entry>Le fichier segmentation.conf</entry>
+
+            <entry>Règles de segmentation par défaut des utilisateurs</entry>
+          </row>
+
+          <row>
+            <entry>uiLayout.xml</entry>
+
+            <entry>Un fichier XML contenant tous les paramètres d'options accessibles depuis l'Interface Graphique</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </informaltable>
+
+    <para>Veuillez noter que la segmentation et les filtres de fichiers par défaut peuvent être ignorés si une configuration spécifique à un projet est effectuée (voir ci-dessus). L'emplacement des fichiers utilisateur dépend de la plateforme utilisée :</para>
+
+    <informaltable>
+      <tgroup align="left" cols="2" rowsep="1">
+        <colspec align="left" colnum="1"/>
+
+        <tbody>
+          <row>
+            <entry>Windows 2000 et XP</entry>
+
+            <entry><literal>Documents and Settings\&lt;Nom d'utilisateur&gt;\Application Data\<application>OmegaT</application></literal></entry>
+          </row>
+
+          <row>
+            <entry>Windows Vista et 7</entry>
+
+            <entry><literal>Utilisateurs\&lt;Nom d'utilisateur&gt;\AppData\Roaming\<application>OmegaT</application></literal></entry>
+          </row>
+
+          <row>
+            <entry>Autre Windows</entry>
+
+            <entry><literal>&lt;Quelque chose&gt;\<application>OmegaT</application></literal> (&lt;Quelque chose&gt; correspond à l'emplacement du dossier « personnel » déterminé par Java)</entry>
+          </row>
+
+          <row>
+            <entry>Linux/Solaris/FreeBSD</entry>
+
+            <entry><literal>&lt;User Home&gt;/.omegat </literal>(.omegat est un dossier. Le point qui précède son nom le rend invisible, à moins que vous ne tapiez ls -a ou une commande équivalente)</entry>
+          </row>
+
+          <row>
+            <entry>Mac OS X</entry>
+
+            <entry><filename>&lt;Répertoire utilisateur&gt;/Bibliothèque/Preferences/<application>OmegaT</application></filename></entry>
+          </row>
+
+          <row>
+            <entry>Autres</entry>
+
+            <entry><filename>&lt;Répertoire utilisateur&gt;*</filename></entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </informaltable>
+  </section>
+
+  <section id="application.files">
+    <title>Fichiers Application<indexterm class="singular">
+        <primary>Fichiers projet</primary> <secondary>Fichiers application</secondary>
+      </indexterm></title>
+
+    <para>OmegaT est fourni sous forme de paquet et peut être téléchargé sur SourceForge. Il s'agit d'un paquet multiplateforme dans un format standard de Java. Il existe d'autres possibilités, telles que le paquet Linux .tar, un programme d'installation Windows (avec ou sans environnement d'exécution Java), un programme d'installation Mac OS X et un paquet de code source pour les développeurs.</para>
+
+    <para>Le paquet mutliplateforme peut être utilisé sur n'importe quelle plateforme possédant un environnement d'exécution Java 1.5 en fonctionnement, y compris sur les plates-formes pour lesquelles un paquet spécifique existe également. Il vous est fourni sous la forme d'un fichier compressé (archive zip ou tar) que vous devez extraire vers le dossier de votre choix pour procéder à l'installation. Généralement, le fichier peut être extrait par un double clic sur le paquet téléchargé. Une fois l'archive extraite, un dossier contenant les éléments suivants est créé :</para>
+
+    <informaltable>
+      <tgroup align="left" cols="2" rowsep="1">
+        <colspec align="left" colnum="1"/>
+
+        <tbody>
+          <row>
+            <entry><emphasis role="bold">Fichier/ Sous-dossier</emphasis></entry>
+
+            <entry><emphasis role="bold">Contenu</emphasis></entry>
+          </row>
+
+          <row>
+            <entry><filename>/docs/</filename></entry>
+
+            <entry>Tous les fichiers du manuel de l'utilisateur se trouvent dans ce dossier. Les ouvrir dans un navigateur Internet vous donne accès aux liens externes.</entry>
+          </row>
+
+          <row>
+            <entry><filename>/images/</filename></entry>
+
+            <entry>Icônes et logos graphiques</entry>
+          </row>
+
+          <row>
+            <entry><filename>/lib/</filename></entry>
+
+            <entry>Contient les fichiers Java nécessaires au fonctionnement d'<application>OmegaT</application>.</entry>
+          </row>
+
+          <row>
+            <entry><filename>join.html</filename></entry>
+
+            <entry>Il s'agit d'un fichier HTML ordinaire qui, lorsqu'il est ouvert dans votre navigateur Internet, vous dirige vers le groupe d'utilisateur OmegaT hébergé sur Yahoo! Groupes. Il n'est pas nécessaire de rejoindre le groupe, mais cela vous offre l'accès à des services supplémentaires, comme des fichiers, des questionnaires, et la possibilité de prendre part à des discussions concernant OmegaT. Les archives du groupe sont publiques et peuvent être consultées sans inscription préalable auprès du groupe.</entry>
+          </row>
+
+          <row>
+            <entry><filename>changes.txt</filename></entry>
+
+            <entry>Une liste relativement détaillée des modifications effectuées entre la version actuelle et les versions précédentes.</entry>
+          </row>
+
+          <row>
+            <entry><filename>license.txt</filename></entry>
+
+            <entry>La LICENCE PUBLIQUE GENERALE GNU. Cette licence vous donne certains droits vis-à-vis d'<application>OmegaT</application>, y compris celui de le modifier et de le distribuer. Si vous souhaitez modifier ou distribuer <application>OmegaT</application>, commencez par lire ce document avec attention et assurez-vous de bien en comprendre toutes les implications avant de faire quoi que ce soit. En cas de doute, n'hésitez pas à vous adresser directement aux membres du projet, soit en leur envoyant un courriel depuis la page SourceForge, soit en envoyant un message public au groupe d'utilisateurs.</entry>
+          </row>
+
+          <row>
+            <entry><filename>doc-license.txt</filename></entry>
+
+            <entry>La LICENCE PUBLIQUE GENERALE GNU. Cette licence s'étend au manuel. Voir ci-dessus.</entry>
+          </row>
+
+          <row>
+            <entry><filename>readme.txt</filename></entry>
+
+            <entry>Ce fichier est très important. Assurez-vous de l'avoir lu avant de lancer OmegaT. Il contient des informations générales concernant OmegaT : où trouver des informations supplémentaires, comment contribuer, etc. Il a été traduit dans de nombreuses langues.</entry>
+          </row>
+
+          <row>
+            <entry><application>OmegaT</application></entry>
+
+            <entry><para>Un fichier texte contenant deux lignes :</para>
+
+            <programlisting>#!/bin/bash java
+java -jar OmegaT.jar $*</programlisting>
+
+            <para>Ce fichier peut être utile aux utilisateurs de Linux et d'OS X. Rendez-le exécutable (<literal>chmod +x OmegaT</literal>) à partir de la ligne de commande après vous être assuré que vous êtes dans le dossier où se trouve OmegaT. Vous pourrez ainsi lancer OmegaT en exécutant ce fichier à partir de la ligne de commande.</para>
+            </entry>
+          </row>
+          
+          <row>
+            <entry>OmegaT.bat</entry>
+
+            <entry><para>Un fichier de traitement par lots, utilisé pour lancer <application>OmegaT</application> à partir de la ligne de commande Windows. Il ne contient que la ligne suivante :</para>
+
+            <programlisting>java -jar OmegaT.jar %*</programlisting>
+            </entry>
+          </row>
+          
+          <row>
+            <entry><literal>OmegaT.jar</literal></entry>
+
+            <entry>La principale application d'OmegaT. Pour lancer OmegaT, vous devez lancer ce fichier, soit à partir de la ligne de commande, soit à partir de votre gestionnaire de fichiers, généralement en double-cliquant dessus.</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </informaltable>
+  </section>
+</chapter>

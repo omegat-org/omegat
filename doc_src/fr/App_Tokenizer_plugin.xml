@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<appendix id="appendix.TokenizerPlugin.inOmegaT">
+  <title>Extension module Tokenizer<indexterm class="singular">
+      <primary>Extensions</primary> <secondary>Module Tokenizer</secondary>
+    </indexterm></title>
+
+  <section>
+    <title>Introduction<indexterm class="singular">
+        <primary>Tokenizer</primary> <see>Lucene</see>
+      </indexterm><indexterm class="singular">
+        <primary>Tokenizer</primary> <see>Lemmatiseur</see>
+      </indexterm></title>
+
+    <para>Les Tokenizers (ou lemmatiseurs) améliorent la qualité des correspondances en reconnaissant les mots accordés dans les données source et dans la mémoire de traduction. Ils améliorent également les capacités de correspondance du glossaire.</para>
+
+    <para>Un lemmatiseur Anglais, par exemple, doit pouvoir identifier la chaîne de caractères « chats » (et éventuellement « chattons », « chatière », etc.) comme ayant pour racine la chaîne de caractères « chat », et « lemmatiser », « lemmatisation », « lemmatiseur » comme ayant pour racine la chaîne de caractères « lemmati ». Un algorithme de lemmatisation réduit les mots « pêcher », « pêché », « pêche », et « pêcheur » au mot racine : « pêche ». Ceci est particulièrement utile dans le cas des langues qui accrochent des préfixes et des suffixes aux racines pour former des mots. Par exemple, vous pourrez trouver ci-dessous toutes les formes grammaticalement correctes du mot « bon » en Slovène :</para>
+
+    <itemizedlist>
+      <listitem>
+        <para>lep, lepa, lepo - singulier : masculin, féminin, neutre</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>lepši, lepša, lepše - comparatif nominatif : masculin, féminin, neutre ; qui sont respectivement les formes plurielles des adjectifs</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>najlepših - superlatif, pluriel, génitif pour le masc, fem, neutre</para>
+      </listitem>
+    </itemizedlist>
+  </section>
+
+  <section>
+    <title>Installation et utilisation de la ligne de commande</title>
+
+    <para>Un pack de lemmatisation adapté du projet Lucene est utilisable sur OmegaT en tant qu'extension. Il est téléchargeable sur le site : http://sourceforge.net/projects/omegat-plugins/files/. Téléchargez les fichiers les plus récents (OmegaT-tokenizers_0.4_2-2.1.zip au moment de la rédaction de ce manuel).</para>
+
+    <para>Pour installer le lemmatiseur, créez un dossier que vous appellerez « plugins » dans le dossier où se trouve OmegaT.jar et décompressez les fichiers à l'intérieur du dossier.</para>
+
+    <para>Pour utiliser un lemmatiseur dans OmegaT, vous devez spécifier quel lemmatiseur vous allez utiliser pour la langue source et quel lemmatiseur vous allez utiliser pour la langue cible. La syntaxe est la suivante :</para>
+
+    <para><literal>java -jar OmegaT.jar --ITokenizer=[nom du lemmatiseur pour la langue source] --ITokenizerTarget=[nom du lemmatiseur pour la langue cible]</literal></para>
+
+    <para>Les noms des lemmatiseurs sont écrits dans le fichier lisez-moi ( Readme.txt )  fourni avec les fichiers des lemmatiseurs. Par exemple, pour utiliser le lemmatiseur Lucene CJK pour la langue source et le lemmatiseur Lucene français pour la langue cible, votre ligne de commande devra être rédigée comme ceci :</para>
+
+    <para><literal>java -jar OmegaT.jar
+    --ITokenizer=org.omegat.plugins.tokenizer.LuceneCJKTokenizer
+    --ITokenizerTarget=org.omegat.plugins.tokenizer.LuceneFrenchTokenizer</literal></para>
+  </section>
+
+  <section>
+    <title>Spécificités Mac OS X</title>
+
+    <para>Si vous souhaitez utiliser les lemmatiseurs avec le paquet Mac OS X OmegaT.app, l'installation du lemmatiseur décrite ci-dessus s'applique (clic droit sur OmegaT.app pour trouver l'emplacement du fichier OmegaT.jar), mais vous devrez spécifier les noms des lemmatiseurs dans le fichier<filename>info.plist </filename> qui contient les options de lancement de Java . Suivez les instructions ci-dessus pour accéder au fichier <filename>info.plist</filename> et éditez-le de sorte qu'il soit similaire à ce qui suit (n'oubliez pas de remplacer le nom des lemmatiseurs de l'exemple par ceux que vous aurez choisis) :</para>
+
+    <literallayout><code>
+&lt;key&gt;VMOptions&lt;/key&gt;
+&lt;string&gt;-Xmx1024M&lt;/string&gt;
+
+&lt;key&gt;Arguments&lt;/key&gt;
+&lt;array&gt;
+  &lt;string&gt;--ITokenizer=org.omegat.plugins.tokenizer.LuceneCJKTokenizer&lt;/string&gt;
+  &lt;string&gt;--ITokenizerTarget=org.omegat.plugins.tokenizer.LuceneFrenchTokenizer&lt;/string&gt;
+&lt;/array&gt;</code></literallayout>
+  </section>
+
+  <section>
+    <title>Résolution des problèmes</title>
+
+    <para>Pour être sûr que les lemmatiseurs sont biens utilisés, ouvrez un projet et vérifiez les informations du journal de la console. Pour l'exemple utilisé ci-dessus, vous devriez voir ceci apparaître :</para>
+
+    <literallayout><code>
+84528: Info: Source tokenizer: org.omegat.plugins.tokenizer.LuceneCJKTokenizer 
+84528: Info: Target tokenizer: org.omegat.plugins.tokenizer.LuceneFrenchTokenizer 
+</code></literallayout>
+
+    <para>Les nombres situés sur la gauche seront certainement différents sur votre système. Assurez-vous donc que les noms des lemmatiseurs source et cible, spécifiés dans les options de démarrage, correspondent à ce qu'affiche le journal. Si les lemmatiseurs ne démarrent pas correctement, le journal affichera ceci :</para>
+
+    <literallayout><code>12719: Info: Source tokenizer: org.omegat.core.matching.Tokenizer
+12719: Info: Target tokenizer: org.omegat.core.matching.Tokenizer</code></literallayout>
+
+    <para>Avec le paquet Mac OS X OmegaT.app, double-cliquez sur <literal>JavaApplicationStub</literal> situé dans /OmegaT.app/Contents/MacOS/ (voir ci-dessus comment y accéder) pour lancer OmegaT depuis la console et avoir un accès immédiat au journal.</para>
+  </section>
+</appendix>

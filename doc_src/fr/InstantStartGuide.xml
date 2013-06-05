@@ -10,13 +10,13 @@
 
     <para><remark>Remarque :</remark>Sur un Mac, utilisez la touche <keycap>cmd</keycap> (commande) ou <keycap>Apple</keycap> à la place de la touche <keycap>ctrl</keycap>.</para>
 
-    <para>Pour pouvoir travailler avec OmegaT, vous devez commencer par créer un projet qui contiendra vos fichiers, notamment le fichier source, les mémoires de traduction, les glossaires ainsi que le fichier traduit. Dans le menu <guimenu>Projet</guimenu>, sélectionnez <menuchoice> <guimenu/> <guimenuitem>Nouveau...</guimenuitem> </menuchoice><indexterm class="singular">
+    <para>Pour pouvoir travailler avec OmegaT, commencez par créer un projet qui contiendra tous vos fichiers. On y trouvera notamment le fichier source, les mémoires de traduction, les glossaires ainsi que le fichier traduit (une fois le projet fini). Dans le menu <guimenu>Projet</guimenu>, séléctionnez <menuchoice> <guimenuitem>Nouveau...</guimenuitem> </menuchoice><indexterm class="singular">
         <primary>Menu Projet</primary> <secondary>Nouveau...</secondary>
-      </indexterm> et saisissez le nom du projet. Mémorisez bien l'emplacement du projet car vous devrez y accéder ultérieurement.</para>
+      </indexterm> et saisissez le nom de votre projet. Mémorisez bien l'emplacement de votre projet car vous devrez y retourner par la suite.</para>
 
     <para>Une fois le nom du projet défini, OmegaT ouvre la fenêtre Création du projet. Indiquez la langue du fichier source ainsi que la langue de la traduction, puis cliquez sur <guibutton>OK </guibutton>pour continuer.</para>
 
-    <para><application>Utilisez le raccourci clavier <keycap>Ctrl+E</keycap> si vous avez besoin de revenir aux réglages de cette fenêtre plus tard.</application></para>
+    <para><application>Par la suite, utilisez le raccourci clavier <keycap>Ctrl+E</keycap> pour revenir aux réglages de cette fenêtre.</application></para>
 
     <para>OmegaT ouvre ensuite la fenêtre Fichiers du projet. Cliquez sur Importer des fichiers source... pour sélectionner le fichier source. OmegaT copie le fichier sélectionné dans le sous-dossier <filename>/source/</filename> du projet que vous venez de créer. Une fois le fichier source chargé et affiché dans le volet d'édition, vous pouvez fermer la fenêtre Fichiers du projet.</para>
   </section>
@@ -24,13 +24,13 @@
   <section id="translate.the.segments.one.by.one">
     <title>Traduction du fichier</title>
 
-    <para>OmegaT vous propose un segment à traduire après l'autre. Utilisez le raccourci clavier <keycap>Ctrl+U</keycap> pour accéder au prochain segment non traduit. Si vous souhaitez obtenir un aperçu de votre traduction dans son format final, utilisez le raccourci <keycap>Ctrl+D</keycap> pour générer le document traduit dans le sous-dossier /target/ du dossier projet. Les menus <guimenu>Édition</guimenu> et  <guimenu>Atteindre</guimenu> vous donnent accès à diverses fonctions très utiles pendant le travail de traduction.</para>
+    <para>OmegaT vous propose un segment à traduire à la fois. Utilisez le raccourci clavier <keycap>Ctrl+U</keycap> pour accéder au prochain segment non traduit. Si vous souhaitez obtenir un aperçu de votre traduction dans son format final, utilisez le raccourci <keycap>Ctrl+D</keycap> pour générer le document traduit dans le sous-dossier /target/ du dossier projet. Les menus <guimenu>Édition</guimenu> et <guimenu>Atteindre</guimenu> vous donnent accès à diverses fonctions très utiles pendant le travail de traduction.</para>
   </section>
 
   <section>
     <title>Validation des balises</title>
 
-    <para>Si votre fichier source est un fichier formaté, par exemple au format Microsoft Word, LibreOffice Writer ou HTML, OmegaT convertit le formatage en balises qui encadrent le texte que vous traduisez. Souvent, les documents contiennent également un certain nombre de balises essentielles sans rapport direct avec le formatage. Dans le fichier source (ainsi que dans le fichier traduit), une phrase peut se présenter comme ceci :</para>
+    <para>Si votre fichier source est un fichier formaté, par exemple au format Microsoft Word, LibreOffice Writer ou HTML, OmegaT convertit le formatage en balises qui encadrent le texte que vous traduisez. Souvent, les documents contiennent également un certain nombre de balises essentielles sans rapport direct avec le formatage mais qui sont importantes dans les fichiers sources (ainsi que dans les fichiers traduits). Une phrase peut se présenter comme ceci :</para>
 
     <para/>
 
@@ -38,6 +38,7 @@
       <imageobject role="html">
         <imagedata align="left" fileref="images/InstantGuide_1.png"/>
       </imageobject>
+
       <imageobject role="fo">
         <imagedata align="left" fileref="images/InstantGuide_1.png" width="40%"/>
       </imageobject>
@@ -45,7 +46,7 @@
 
     <para/>
 
-    <para>Ici, OmegaT présente cette phrase de la manière suivante :</para>
+    <para>Mais OmegaT présentera cette phrase de la manière suivante :</para>
 
     <para><literal/></para>
 
@@ -53,14 +54,15 @@
       <imageobject role="html">
         <imagedata align="left" fileref="images/InstantGuide_2.png"/>
       </imageobject>
+
       <imageobject role="fo">
         <imagedata align="left" fileref="images/InstantGuide_2.png" width="45%"/>
       </imageobject>
     </mediaobject>
-    
+
     <para/>
 
-    <para>Les balises dans OmegaT sont grisées pour être facilement reconnaissables. Elles ne sont pas protégées et vous pouvez donc les supprimer, en ajouter manuellement ou les déplacer dans la phrase cible. Toutefois, si vous avez fait des erreurs en saisissant les balises de formatage, l'ouverture du fichier traduit pourra échouer. Par conséquent, assurez-vous que vos balises sont correctes et validez-les avant de générer le fichier traduit (raccourci clavier <keycap>Ctrl+T</keycap>).</para>
+    <para>Les balises dans OmegaT sont écrites en gris pour être facilement reconnaissables. Elles ne sont pas protégées et vous pouvez donc les supprimer, en ajouter manuellement ou les déplacer dans la phrase cible. Toutefois, si vous avez fait des erreurs en saisissant les balises de formatage, l'ouverture du fichier traduit pourra échouer. Par conséquent, assurez-vous que vos balises sont correctes et validez-les avant de générer le fichier traduit (raccourci clavier <keycap>Ctrl+T</keycap>).</para>
   </section>
 
   <section>
@@ -70,11 +72,11 @@
   </section>
 
   <section>
-    <title>D'autres points à retenir</title>
+    <title>Autres points à retenir</title>
 
     <itemizedlist>
       <listitem>
-        <para>Si le chargement d'un fichier source échoue, c'est-à-dire s'il ne s'affiche pas dans le volet d'édition, il s'agit vraisemblablement d'un fichier dont le format est incompatible avec OmegaT. Reportez-vous au chapitre 7 (Filtre de fichiers) du guide de l'utilisateur pour obtenir la liste des formats de fichier gérés par OmegaT. Si le chargement d'un fichier source échoue, c'est-à-dire s'il ne s'affiche pas dans le volet d'édition, il s'agit vraisemblablement d'un fichier dont le format est incompatible avec OmegaT. Reportez-vous au chapitre 7 (Filtre de fichiers) du guide de l'utilisateur pour obtenir la liste des formats de fichier gérés par OmegaT.</para>
+        <para>Si le chargement d'un fichier source échoue, c'est-à-dire s'il ne s'affiche pas dans le volet d'édition, il s'agit vraisemblablement d'un fichier dont le format est incompatible avec OmegaT. Reportez-vous au chapitre 7 (Filtre de fichiers) du guide de l'utilisateur pour obtenir la liste des formats de fichier gérés par OmegaT.</para>
       </listitem>
     </itemizedlist>
 
@@ -92,7 +94,7 @@
 
     <itemizedlist>
       <listitem>
-        <para>OmegaT exporte trois versions (« level1 », « level2 » et « omegat ») de la mémoire de traduction dans le dossier projet. Les mémoires « level1 » et « level2 » sont compatibles avec les outils de TAO prenant en charge les TMX niveaux 1 et 2 et peuvent être partagées avec d'autres utilisateurs. La mémoire « omegat » est une mémoire native, propre à OmegaT et peut être réutilisée dans d'autres projets OmegaT. Si vous placez des mémoires de traduction dans le sous-dossier /tm/ du dossier projet, OmegaT les analyse automatiquement à la recherche de segments semblables et affiche les analogies et les correspondances partielles dans le volet Correspondances. .</para>
+        <para>OmegaT exporte trois versions (« level1 », « level2 » et « omegat ») de la mémoire de traduction dans le dossier projet. Les mémoires « level1 » et « level2 » sont compatibles avec les outils de TAO prenant en charge les TMX niveaux 1 et 2 et peuvent être partagées avec d'autres utilisateurs. La mémoire « omegat » est une mémoire native, propre à OmegaT et peut être réutilisée dans d'autres projets OmegaT. Si vous placez des mémoires de traduction dans le sous-dossier /tm/ du dossier projet, OmegaT les analyse automatiquement à la recherche de segments semblables et affiche les analogies et les correspondances partielles dans le volet Correspondances.</para>
       </listitem>
     </itemizedlist>
 
@@ -110,7 +112,7 @@
 
     <itemizedlist>
       <listitem>
-        <para>Le tutoriel pour débutants <ulink url="http://www.omegat.org/en/tutorial/OmegaT%20for%20Beginners.pdf">OmegaT for Beginners</ulink> (en anglais) est disponible sur le site Web d'OmegaT et vous propose une introduction complète. N'hésitez pas à vous inscrire à la liste de diffusion du <ulink url="http://tech.groups.yahoo.com/group/omegat/">groupe des utilisateurs d'OmegaT</ulink>, vous pouvez y échanger votre expérience et y trouver de l'aide.</para>
+        <para>Le tutoriel pour débutants <ulink url="http://www.omegat.org/en/tutorial/OmegaT%20for%20Beginners.pdf">OmegaT for Beginners</ulink> (en anglais) est disponible sur le site Web d'OmegaT et vous propose une introduction complète. N'hésitez pas à vous inscrire à la liste de diffusion du <ulink url="http://tech.groups.yahoo.com/group/omegat/">groupe des utilisateurs d'OmegaT</ulink>, pour y échanger votre expérience et trouver de l'aide, si besoin est.</para>
       </listitem>
     </itemizedlist>
   </section>

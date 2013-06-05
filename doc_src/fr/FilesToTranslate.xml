@@ -1,0 +1,296 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<chapter id="chapter.files.to.translate">
+  <title>Fichiers à traduire</title>
+
+  <section id="file.formats">
+    <title>Formats de fichier<indexterm class="singular">
+        <primary>Fichiers source</primary> <secondary>Formats de fichier</secondary>
+      </indexterm><indexterm class="singular">
+        <primary>Fichiers cible</primary> <secondary>Formats de fichier</secondary>
+      </indexterm></title>
+
+    <para><application>Vous pouvez utiliser OmegaT</application> pour traduire des fichiers dans un grand nombre de formats. On trouve essentiellement deux types de formats de fichier : les textes bruts et les textes formatés.</para>
+
+    <section>
+      <title>Fichiers texte brut<indexterm class="singular">
+          <primary>Fichiers cible</primary> <secondary>Fichiers texte brut</secondary>
+        </indexterm><indexterm class="singular">
+          <primary>Fichiers source</primary> <secondary>Fichiers texte brut</secondary>
+        </indexterm></title>
+
+      <para>Les fichiers texte brut contiennent uniquement du texte, de sorte que pour effectuer leur traduction il suffit de taper celle-ci dans le logiciel. Il existe différentes méthodes qui permettent de spécifier l'encodage du fichier de sorte que son contenu ne soit pas tronqué lorsque le fichier est ouvert dans <application>OmegaT</application>. Ces fichiers ne contiennent pas d'information de formatage en dehors des « caractères d'espacement » utilisés pour aligner le texte, indiquer la présence d'un paragraphe ou insérer des sauts de page. Ils sont incapables de contenir ou de retenir les informations qui concerneraient la couleur, la police, etc. du texte. À l'heure actuelle, <application>OmegaT</application> prend en charge les formats de texte brut suivants :<indexterm class="singular">
+          <primary>Formats de fichier</primary> <secondary>Non formatés</secondary> <seealso>Fichiers source</seealso>
+        </indexterm></para>
+
+      <itemizedlist>
+        <listitem>
+          <para>Texte ASCII (.txt, etc.)</para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para>Unicode UTF-8 (*.UTF8)</para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para>Paquets de ressource Java (*.properties)</para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para>Fichiers PO (*.po)</para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para>INI (clé=valeur) (*.ini)</para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para>DTD (*.DTD)</para>
+        </listitem>
+
+        <listitem>
+          <para>Fichiers DokuWiki (*.txt)</para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para>Sous-titres SubRip (*.srt)</para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para>Fichiers localisation Magento CE (*.csv)</para>
+        </listitem>
+      </itemizedlist>
+
+      <para>Les autres types de fichiers texte brut peuvent être traités par <application>OmegaT</application>. Leur extension de fichier doit alors être associée à un type de fichier déjà pris en charge (par exemple, les fichiers .pod peuvent être associés au filtre texte ASCII) et les fichiers doivent être pré-traités à l'aide de règles de segmentation spécifiques.</para>
+
+      <para>Les fichiers PO<indexterm class="singular">
+          <primary>Fichiers source</primary> <secondary>Les PO en tant que fichiers bilingues</secondary>
+        </indexterm> peuvent contenir à la fois le texte source et le texte cible. De ce point vue, Ils sont à la fois des fichiers de texte brut <emphasis> et</emphasis> des mémoires de traduction. Si pour un segment source donné, il n'existe pas encore de traduction dans la mémoire de traduction du projet (project_save.tmx), la traduction en cours sera enregistrée dans le fichier project_save.tmx comme traduction par défaut. Cependant, si le même segment source existe déjà et possède une traduction différente, la nouvelle traduction sera enregistrée en tant qu'alternative.</para>
+    </section>
+
+    <section>
+      <title>Fichiers texte formaté<indexterm class="singular">
+          <primary>Fichiers cible</primary> <secondary>Fichiers texte formaté</secondary> <seealso>Texte balisé</seealso>
+        </indexterm><indexterm class="singular">
+          <primary>Fichiers source</primary> <secondary>Fichiers texte formaté</secondary>
+        </indexterm></title>
+
+      <para>Les fichiers de texte formaté contiennent des informations de type : police, taille, couleur etc. aussi bien que du texte. Ils sont généralement créés dans des traitements de texte ou des éditeurs HTML. Ces formats de fichier sont conçus pour retenir les informations de formatage. Une information de formatage peut aller du simple “ceci est en caractère gras”, à un tableau de données complexe utilisant différentes tailles de police, couleurs, positions, etc. Dans la plupart des travaux de traduction, on considère qu'il est important de conserver le formatage du texte original lors de la traduction. OmegaT vous permet de faire cela en marquant les caractères/mots qui ont un formatage spécial avec des balises faciles à manier. Simplifier le formatage du texte original contribue grandement à réduire le nombre de balises. Lorsque cela est possible, unifier les polices, les tailles de police, les couleurs, etc. utilisées dans le document simplifie le travail de traduction et réduit le nombre d'erreurs de balises. Chaque type de fichier est traité différemment par OmegaT. Des comportements spécifiques peuvent être mis en place dans les filtres de fichiers. A l'heure actuelle, OmegaT prend en charge les formats de texte formaté suivants :<indexterm class="singular">
+          <primary>Formats de fichier</primary> <secondary>formatés</secondary> <seealso>Fichiers source</seealso>
+        </indexterm></para>
+
+      <para><itemizedlist>
+          <listitem>
+            <para>Format ODF - OASIS Open Document (*.ods, *.ots, *.odt, *.ott, *.odp, *.otp)</para>
+          </listitem>
+        </itemizedlist><itemizedlist>
+          <listitem>
+            <para>Microsoft Office Open XML (*.docx, *.dotx, *.xlsx, *.xltx,
+            *.pptx)</para>
+          </listitem>
+        </itemizedlist><itemizedlist>
+          <listitem>
+            <para>(X)HTML (.html, .xhtml,.xht)</para>
+          </listitem>
+        </itemizedlist><itemizedlist>
+          <listitem>
+            <para>HTML Help Compiler (.hhc, .hhk)</para>
+          </listitem>
+        </itemizedlist><itemizedlist>
+          <listitem>
+            <para>DocBook (.xml)</para>
+          </listitem>
+        </itemizedlist><itemizedlist>
+          <listitem>
+            <para>XLIFF (*.xlf, *.xliff, *.sdlxliff) - format source = format cible</para>
+          </listitem>
+        </itemizedlist><itemizedlist>
+          <listitem>
+            <para>CopyFlowGold pour QuarkXPress (.tag, .xtg)</para>
+          </listitem>
+        </itemizedlist><itemizedlist>
+          <listitem>
+            <para>Fichiers ResX (*.resx)</para>
+          </listitem>
+        </itemizedlist><itemizedlist>
+          <listitem>
+            <para>Ressource Android (*.xml)</para>
+          </listitem>
+        </itemizedlist><itemizedlist>
+          <listitem>
+            <para>LaTeX (.tex, .latex)</para>
+          </listitem>
+
+          <listitem>
+            <para>Fichiers d'aide (*.xml) et de manuel (*.hmxp)</para>
+          </listitem>
+
+          <listitem>
+            <para>Typo3 LocManager (.xml)</para>
+          </listitem>
+        </itemizedlist><itemizedlist>
+          <listitem>
+            <para>Localisation WiX (*.wxl)</para>
+          </listitem>
+
+          <listitem>
+            <para>Iceni Infix (*.xml</para>
+          </listitem>
+
+          <listitem>
+            <para>Exportation Flash XML (*.xml)</para>
+          </listitem>
+
+          <listitem>
+            <para>Wordfast TXML (*.txml)</para>
+          </listitem>
+
+          <listitem>
+            <para>Camtasia pour Windows (*.camproj)</para>
+          </listitem>
+
+          <listitem>
+            <para>Visio (*.vxd)</para>
+          </listitem>
+        </itemizedlist></para>
+
+      <para>D'autres types de fichier texte formaté peuvent également être pris en charge par OmegaT en associant leur extension de fichier à un type de fichier déjà pris en charge, ceci en supposant que les règles de segmentation correspondantes les segmenteront correctement.</para>
+    </section>
+  </section>
+
+  <section id="other.file.formats">
+    <title>Autres formats de fichier<indexterm class="singular">
+        <primary>Fichiers cible</primary> <secondary>Autres formats de fichier</secondary>
+      </indexterm><indexterm class="singular">
+        <primary>Fichiers source</primary> <secondary>Autres formats de fichier</secondary>
+      </indexterm></title>
+
+    <para>Il est également possible de trouver d'autres fichiers texte brut ou fichiers texte formaté susceptibles d'être pris en charge par OmegaT.</para>
+
+    <para><indexterm class="singular">
+        <primary>Fichiers cible</primary> <secondary>Outils de conversion de fichiers</secondary>
+      </indexterm>Des outils externes peuvent être utilisés pour convertir les fichiers dans des formats pris en charge. Les fichiers traduits devront alors être reconvertis dans le format original. Par exemple, si vous possédez une ancienne version de Microsoft Word, qui ne prend pas en charge le format ODT, vous trouverez ici le moyen de permettre aux fichiers Word portant l'extension DOC de faire l'aller-retour :</para>
+
+    <itemizedlist>
+      <listitem>
+        <para>Importez le fichier dans ODF writer</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Enregistrez le fichier dans un format ODT</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Traduisez-le dans un fichier ODT cible</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Ouvrez le fichier cible dans ODF Writer</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Enregistrez le fichier en tant que fichier DOC</para>
+      </listitem>
+    </itemizedlist>
+
+    <para>La qualité du formatage du fichier traduit va dépendre de la qualité de la conversion aller-retour. Avant de procéder à une telle conversion, assurez-vous d'avoir testé toutes les options. Vérifiez <ulink url="http://www.omegat.org">la page d'accueil d'OmegaT</ulink> pour obtenir une liste à jour des outils de traduction auxiliaires.</para>
+  </section>
+
+  <section id="right.to.left.languages">
+    <title>Les langues qui se lisent de droite à gauche<indexterm class="singular">
+        <primary>Les langues qui se lisent de droite à gauche</primary>
+      </indexterm><indexterm class="singular">
+        <primary>Fichiers cible</primary> <secondary>Langues à lire de droite à gauche</secondary>
+      </indexterm><indexterm class="singular">
+        <primary>Fichiers source</primary> <secondary>Langues à lire de droite à gauche</secondary>
+      </indexterm></title>
+
+    <para>La justification des segments source et cible dépend des langues du projet. Par défaut, la justification à gauche est utilisée pour les langues qui se lisent de gauche à droite (LTR) et la justification à droite pour les langues qui se lisent de droite à gauche (RTL). Vous pouvez basculer d'un mode d'affichage à l'autre en appuyant sur <keycombo> <keycap>Maj</keycap> <keycap>Ctrl</keycap> <keycap>O</keycap> </keycombo> (il s'agit de la lettre O et non du nombre 0). Le basculement<keycombo> <keycap>Maj</keycap> <keycap>Ctrl</keycap> <keycap>O</keycap> </keycombo> vous permet d'osciller entre trois résultats :</para>
+
+    <itemizedlist>
+      <listitem>
+        <para>La justification par défaut, qui est définie par la langue</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>La justification à gauche</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>La justification à droite</para>
+      </listitem>
+    </itemizedlist>
+
+    <para>L'utilisation du mode RTL (de droite à gauche) dans <application>OmegaT</application> n'a aucune influence sur le mode d'affichage des documents traduits dans <application>OmegaT</application>. Le mode d'affichage des documents traduits doit être modifié dans l'application (par exemple, Microsoft Word) qui est généralement utilisée pour les afficher ou les modifier (consultez les manuels correspondants pour plus de détails). Utiliser <keycombo> <keycap>Maj</keycap> <keycap>Ctrl</keycap> <keycap>O</keycap> </keycombo> provoque des changements à la fois au niveau de la saisie du texte et au niveau de l'affichage dans <application>OmegaT</application>. Ce mode peut être utilisé pour chacun des trois volets pris séparément (Éditeur, Correspondances et Glossaires) en cliquant sur le volet choisi et en faisant basculer le mode d'affichage. Il peut également être utilisé dans tous les champs de saisie présents dans <application>OmegaT</application> - dans la fenêtre de recherche, pour les règles de segmentation, etc.</para>
+
+    <para>Remarque pour les utilisateurs de Mac OS X  : utilisez le raccourci <keycombo> <keycap>Maj</keycap> <keycap>Ctrl</keycap> <keycap>O</keycap> </keycombo> et <emphasis role="bold">pas </emphasis>cmd+Ctrl+O.</para>
+
+    <section>
+      <title>Mélange entre les chaînes RTL et LTR dans les segments<indexterm class="singular">
+          <primary>Les langues qui se lisent de droite à gauche</primary> <secondary>Mélange entre les chaînes RTL (droite à gauche) et LTR (gauche à droite)</secondary>
+        </indexterm><indexterm class="singular">
+          <primary>Fichiers cible</primary> <secondary>Mélange entre les chaînes RTL (droite à gauche) et LTR (gauche à droite)</secondary>
+        </indexterm><indexterm class="singular">
+          <primary>Fichiers source</primary> <secondary>Mélange entre les chaînes RTL (droite à gauche) et LTR (gauche à droite)</secondary>
+        </indexterm></title>
+
+      <para>Lors de la rédaction de texte purement RTL, l'affichage par défaut (LTR) peut être utilisé. Dans de nombreux cas, cependant, il est nécessaire d'intégrer le texte LTR dans un texte RTL. Par exemple, pour les balises OmegaT, pour les noms de produits qui doivent être laissés dans une langue source LTR, pour l'emplacement des supports dans les fichiers de localisation, et pour les numéros dans le texte. Dans des cas comme celui-ci, il est nécessaire de basculer en monde RTL, de sorte que le texte RTL (qui est en fait bidirectionnel) soit affiché correctement. Il est à noter que lorsqu'<application>OmegaT</application> est en mode RTL, la source et la cible sont toutes les deux affichées en mode RTL. Ce qui signifie que si la langue source est une LTR et la langue cible une RTL, ou vice-versa, il sera peut-être nécessaire de basculer régulièrement entre les modes RTL et LTR afin de facilement voir la source et saisir la cible dans leur mode respectif.</para>
+    </section>
+
+    <section>
+      <title><application>OmegaT</application> Les balises dans les segments RTL<indexterm class="singular">
+          <primary>Les langues qui se lisent de droite à gauche</primary> <secondary>Les balises OmegaT dans les langues RTL</secondary>
+        </indexterm></title>
+
+      <para>Comme indiqué ci-dessus, les balises d'OmegaT sont des chaînes LTR. Pour les traductions entre langues RTL et LTR, il peut être nécessaire, pour lire correctement les balises de la source et les entrer correctement dans la cible, que le traducteur bascule un grand nombre de fois entre les modes LTR et RTL.</para>
+
+      <para>Si le document le permet, le traducteur est vivement encouragé à retirer un maximum d'informations de style du document original de sorte que le moins de balises possible apparaissent dans l'interface d'OmegaT. Suivez les indications données dans Conseils pour la gestion des balises. De façon générale, validez les balises (voir Validation de balise) et enregistrez les documents traduits (voir ci-dessous et dans le Menu) à intervalles réguliers pour rendre plus facile la résolution des problèmes éventuels. Un conseil : traduire une version texte brut d'un texte et ajouter ultérieurement les styles nécessaires dans l'application appropriée peut s'avérer moins compliqué.</para>
+    </section>
+
+    <section>
+      <title>Création de documents traduits RTL(droite à gauche)<indexterm class="singular">
+          <primary>Les langues qui se lisent de droite à gauche</primary> <secondary>Création de fichiers cible RTL</secondary>
+        </indexterm><indexterm class="singular">
+          <primary>Les langues qui se lisent de droite à gauche</primary> <secondary>Fichiers cible</secondary>
+        </indexterm><indexterm class="singular">
+          <primary>Les langues qui se lisent de droite à gauche</primary> <secondary>Création de texte cible RTL</secondary>
+        </indexterm></title>
+
+      <para>Lorsque le document traduit est créé, la direction qu'il affiche est la même que celle du document original. Si le document original était en LTR, la direction affichée par le document cible doit être basculée manuellement en RTL dans son application de lecture. Chaque format de sortie gère l'affichage RTL à sa façon ; consultez le manuel de l'application appropriée pour plus de détails.</para>
+      
+      <para>Pour les fichiers .docx, un certain nombre de changements sont cependant effectués automatiquement :<itemizedlist>
+      <listitem>Les paragraphes, les sections et les tableaux sont définis de façon bidirectionnelle</listitem>
+      <listitem>Les exécutions (éléments textes) sont définies en RTL</listitem>     
+      </itemizedlist>
+      </para>
+
+      <para>Pour éviter que les paramètres d'affichage des fichiers cible ne changent à chaque fois que les fichiers sont ouverts, il est possible de changer les paramètres d'affichage des fichiers source de sorte que les fichiers cible héritent de ces paramètres. De telles modification sont possibles, par exemple, dans les fichiers ODF.</para>
+    </section>
+  </section>
+</chapter>

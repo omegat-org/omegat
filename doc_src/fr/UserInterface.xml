@@ -1,0 +1,777 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<chapter id="chapter.user.interface">
+  <title>L'interface utilisateur</title>
+
+  <section id="user.interface.items">
+    <title>La fenêtre principale d'OmegaT, les autres fenêtres et les boîtes de dialogue</title>
+
+    <para>La fenêtre principale d'OmegaT contient le menu principal, la barre d'état et différents volets. Des fenêtres supplémentaires sont disponibles, ainsi que des boîtes de dialogue qui permettent de modifier les paramètres du projet OmegaT. Les informations ci-dessous résument leur utilisation ainsi que la façon de les exécuter :</para>
+
+    <table colsep="0" rowsep="0">
+      <title>Fenêtre principale d'OmegaT<indexterm class="singular">
+          <primary>Interface Utilisateur</primary> <secondary>Fenêtre principale d'OmegaT</secondary>
+        </indexterm></title>
+
+      <tgroup cols="2" colsep="0" rowsep="1" title="Main OMegaT window">
+        <colspec align="left" colnum="1"/>
+
+        <colspec align="left" colnum="2"/>
+
+        <tbody>
+          <row>
+            <entry><guimenuitem>Volet Éditeur</guimenuitem></entry>
+
+            <entry>volet dans lequel vous tapez et modifiez la traduction</entry>
+          </row>
+
+          <row>
+            <entry><guimenuitem>Volet Correspondances</guimenuitem></entry>
+
+            <entry>affiche les segments les plus proches provenant des mémoires de traduction</entry>
+          </row>
+
+          <row>
+            <entry><guimenuitem>Volet Glossaires</guimenuitem></entry>
+
+            <entry>affiche la terminologie correspondant aux éléments du segment en cours</entry>
+          </row>
+
+          <row>
+            <entry><guimenuitem>Volet Dictionnaires</guimenuitem></entry>
+
+            <entry>affiche les correspondances du dictionnaire trouvées pour les éléments du segment en cours</entry>
+          </row>
+
+          <row>
+            <entry><guimenuitem>Volet Traduction automatique</guimenuitem></entry>
+
+            <entry>affiche la traduction fournie par les services de traduction automatique</entry>
+          </row>
+
+          <row>
+            <entry><guimenuitem>Volet Notes</guimenuitem></entry>
+
+            <entry>contient les notes concernant le segment en cours (ex. : des traductions alternatives ou la clé en cours dans le cas des fichiers textes Clé=Valeur)</entry>
+          </row>
+
+          <row>
+            <entry><guimenuitem>Volet Commentaires</guimenuitem></entry>
+
+            <entry>contient les commentaires ajoutés par l'auteur dans les fichiers PO ou le nom de l'attribut en cours de traduction (pour les fichiers HTML)</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+
+    <table colsep="0" rowsep="0">
+      <title>Autres fenêtres<indexterm class="singular">
+          <primary>Interface Utilisateur</primary> <secondary>Autres fenêtres</secondary>
+        </indexterm></title>
+
+      <tgroup cols="2" colsep="0" rowsep="1" title="Other windows">
+        <colspec align="left" colnum="1"/>
+
+        <colspec align="left" colnum="2"/>
+
+        <tbody>
+          <row>
+            <entry><guimenuitem><indexterm class="singular">
+                <primary>Raccourcis</primary> <secondary>Validation des balises - Ctrl+T</secondary>
+              </indexterm>Fenêtre de validation des balises</guimenuitem></entry>
+
+            <entry><para>Utilisée pour valider les balises (s'ouvre avec les touches <keycombo> <keycap>Ctrl</keycap> <keycap>T</keycap> </keycombo>, se ferme en appuyant sur <keycap>Echap</keycap>)</para></entry>
+          </row>
+
+          <row>
+            <entry><guimenuitem><indexterm class="singular">
+                <primary>Raccourcis</primary> <secondary>Aide - F1</secondary>
+              </indexterm>Navigateur Aide</guimenuitem></entry>
+
+            <entry><para>Utilisé pour afficher le manuel de l'utilisateur (s'ouvre en appuyant sur <keycap>F1</keycap>, se ferme en appuyant sur <keycap>Echap)</keycap></para></entry>
+          </row>
+
+          <row>
+            <entry><guimenuitem>Fenêtre des Statistiques</guimenuitem></entry>
+
+            <entry><para>Utilisée pour ouvrir la fenêtre contenant les statistiques du projet. Elle s'affiche en allant sur <menuchoice> <guimenu><indexterm class="singular">
+                    <primary>Menu Outils</primary> <secondary>Statistiques</secondary>
+                  </indexterm>Outils</guimenu> <guimenuitem>Statistiques.</guimenuitem> </menuchoice></para></entry>
+          </row>
+
+          <row>
+            <entry><guimenuitem>Fenêtre des statistiques des correpondances</guimenuitem></entry>
+
+            <entry><para>Utilisée pour afficher les statistiques des correspondances du projet. Pour l'ouvrir, sélectionnez <menuchoice> <guimenu><indexterm class="singular">
+                    <primary>Menu Outils</primary> <secondary>Statistiques des correspondances</secondary>
+                  </indexterm>Outils</guimenu> <guimenuitem>Statistiques des correspondances</guimenuitem> </menuchoice>.</para></entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+
+    <table border="0" colsep="0" rowsep="0">
+      <title>Boîte de dialogue des paramètres<indexterm class="singular">
+          <primary>Interface Utilisateur</primary> <secondary>Boîte de dialogue de paramétrage du projet</secondary> <seealso>Modifier le projet</seealso>
+        </indexterm></title>
+
+      <tgroup cols="2" colsep="0" rowsep="1" title="Settings dialogs">
+        <colspec align="left" colnum="1"/>
+
+        <colspec align="left" colnum="2"/>
+
+        <tbody>
+          <row>
+            <entry><guimenuitem>Propriétés du projet<indexterm class="singular">
+                <primary>Menu Projet</primary> <secondary>Propriétés</secondary>
+              </indexterm></guimenuitem> <indexterm class="singular">
+                <primary>Raccourcis</primary> <secondary>Propriétés du projet - Ctrl+E</secondary>
+              </indexterm></entry>
+
+            <entry>Utilisées pour modifier les dossiers du projet et les langues (accès à la boîte de dialogue par le raccourci <guimenuitem>Ctrl+E </guimenuitem>ou par <menuchoice> <guimenu>Projet</guimenu> <guimenuitem>Propriétés...</guimenuitem> </menuchoice>, se ferme en appuyant sur <keycap>Echap)</keycap></entry>
+          </row>
+
+          <row>
+            <entry><guimenuitem>Police<indexterm class="singular">
+                <primary>Paramètres du projet</primary> <secondary>Police</secondary>
+              </indexterm></guimenuitem></entry>
+
+            <entry><para>Utilisée pour modifier la police utilisée par <application>OmegaT</application> pour afficher la source, la traduction, les correspondances et les éléments du glossaire (accès par <menuchoice> <guimenu>Options</guimenu> <guimenuitem>Police...</guimenuitem> </menuchoice>, se ferme en appuyant sur <keycap>Echap</keycap>)</para></entry>
+          </row>
+
+          <row>
+            <entry><guimenuitem>Fichiers et filtres...<indexterm class="singular">
+                <primary>Paramètres du projet</primary> <secondary>Filtres de fichiers</secondary>
+              </indexterm><indexterm class="singular">
+                <primary>Menu Options</primary> <secondary>Fichiers et filtres...</secondary>
+              </indexterm></guimenuitem></entry>
+
+            <entry>Utilisé pour ajuster la gestion des formats pris en charge (accès par <menuchoice> <guimenu>Options</guimenu> <guimenuitem>Fichiers et filtres...</guimenuitem> </menuchoice>, se ferme en appuyant sur <keycap>Échap</keycap>)</entry>
+          </row>
+
+          <row>
+            <entry><guimenuitem>Segmentation...<indexterm class="singular">
+                <primary>Paramètres du projet</primary> <secondary>Segmentation...</secondary>
+              </indexterm><indexterm class="singular">
+                <primary>Menu Options</primary> <secondary>Segmentation...</secondary>
+              </indexterm></guimenuitem></entry>
+
+            <entry>Utilisée pour modifier la façon dont votre texte est segmenté en phrases (accès par <menuchoice> <guimenu>Options</guimenu> <guimenuitem>Segmentation...</guimenuitem> </menuchoice>, se ferme en appuyant sur <keycap>Échap</keycap>)</entry>
+          </row>
+
+          <row>
+            <entry><guimenuitem>Ligne d'édition...<indexterm class="singular">
+                <primary>Menu Options</primary> <secondary>Ligne d'édition...</secondary>
+              </indexterm><indexterm class="singular">
+                <primary>Paramètres du projet</primary> <secondary>Ligne d'édition...</secondary>
+              </indexterm></guimenuitem></entry>
+
+            <entry>Utilisée pour modifier la façon dont <application>OmegaT</application> se comporte lorsque vous passez d'un segment à l'autre (accès par <menuchoice> <guimenu>Options</guimenu> <guimenuitem>Ligne d'édition...</guimenuitem> </menuchoice>, se ferme en appuyant sur<keycap>Échap</keycap>)</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+  </section>
+
+  <section id="OmegaT.main.window">
+    <title><application>OmegaT</application> : fenêtre principale<indexterm class="singular">
+        <primary>Les fenêtres et les volets d'OmegaT</primary> <secondary>Fenêtre principale</secondary>
+      </indexterm></title>
+
+    <figure id="OmegaT.main.window.figure">
+      <title>Fenêtre principale d'OmegaT</title>
+
+      <mediaobject>
+        <imageobject role="html">
+          <imagedata fileref="images/OmegaT_panes_25.png" scale="100"/>
+        </imageobject>
+
+        <imageobject role="fo">
+          <imagedata fileref="images/OmegaT_panes_25.png" width="80%"/>
+        </imageobject>
+      </mediaobject>
+    </figure>
+
+    <para>La fenêtre principale se compose de plusieurs volets, du menu principal et d'une barre d'état. Vous pouvez modifier l'emplacement de n'importe quel volet ou même le détacher dans une fenêtre séparée en cliquant sur le nom du volet et en le faisant glisser. En fonction du statut du volet, des signes différents peuvent être affichés en haut à droite de celui-ci :</para>
+
+    <note>
+      <para>Si vous ne pouvez pas voir tous les volets (s'ils sont ouverts ou réduits), appuyez sur <guisubmenu>Options &gt; Réinitialiser la fenêtre principale</guisubmenu> pour retrouver l'état défini dans l'installation.</para>
+    </note>
+
+    <table>
+      <title>Éléments graphiques des volets<indexterm class="singular">
+          <primary>Fenêtres et volets d'OmegaT</primary> <secondary>Éléments graphiques des volets</secondary>
+        </indexterm></title>
+
+      <tgroup cols="2">
+        <colspec align="left" colnum="1"/>
+
+        <tbody>
+          <row>
+            <entry><inlinemediaobject>
+                <imageobject role="html">
+                  <imagedata fileref="images/Minimize.gif" width="60%"/>
+                </imageobject>
+
+                <imageobject role="fo">
+                  <imagedata fileref="images/Minimize.gif" width="40%"/>
+                </imageobject>
+              </inlinemediaobject></entry>
+
+            <entry>réduit le volet de sorte que seul son nom soit visible en bas de la fenêtre</entry>
+          </row>
+
+          <row>
+            <entry><inlinemediaobject>
+                <imageobject role="html">
+                  <imagedata fileref="images/Maximize.gif" width="60%"/>
+                </imageobject>
+
+                <imageobject role="fo">
+                  <imagedata fileref="images/Maximize.gif" width="40%"/>
+                </imageobject>
+              </inlinemediaobject></entry>
+
+            <entry>agrandit le volet</entry>
+          </row>
+
+          <row>
+            <entry><inlinemediaobject>
+                <imageobject role="html">
+                  <imagedata fileref="images/restore.gif" width="60%"/>
+                </imageobject>
+
+                <imageobject role="fo">
+                  <imagedata fileref="images/restore.gif" width="40%"/>
+                </imageobject>
+              </inlinemediaobject></entry>
+
+            <entry>restaure la mise en page qui existait avant l'étape d'agrandissement</entry>
+          </row>
+
+          <row>
+            <entry><inlinemediaobject>
+                <imageobject role="html">
+                  <imagedata fileref="images/undock.gif" width="60%"/>
+                </imageobject>
+
+                <imageobject role="fo">
+                  <imagedata fileref="images/undock.gif" width="40%"/>
+                </imageobject>
+              </inlinemediaobject></entry>
+
+            <entry>détache le volet de la fenêtre principale</entry>
+          </row>
+
+          <row>
+            <entry><inlinemediaobject>
+                <imageobject role="html">
+                  <imagedata fileref="images/dock.gif" width="60%"/>
+                </imageobject>
+
+                <imageobject role="fo">
+                  <imagedata fileref="images/dock.gif" width="40%"/>
+                </imageobject>
+              </inlinemediaobject></entry>
+
+            <entry>replace le volet dans la fenêtre principale</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+
+    <para>Les volets peuvent se chevaucher si vous le souhaitez. Lorsque cela est fait, les volets affichent un onglet tout en haut. Faites glisser les séparateurs situés entre les volets pour les redimensionner. Vous pouvez à tout moment aller dans <guimenuitem><indexterm class="singular">
+        <primary>fenêtres d'OmegaT</primary> <seealso>Fenêtres et volets d'OmegaT</seealso>
+      </indexterm> <indexterm class="singular">
+        <primary>fenêtres d'OmegaT</primary> <secondary>Restaurer les réglages par défaut</secondary>
+      </indexterm>Options → Réinitialiser la fenêtre principale</guimenuitem> pour retrouver la disposition d'origine.</para>
+
+    <para>Le compteur localisé dans le coin inférieur bas suit la progression de la traduction (les nombres de la colonne de gauche correspondent à l'image ci-dessus) :</para>
+
+    <table>
+      <title>Fenêtre principale - compteurs<indexterm class="singular">
+          <primary>Fenêtres et volets d'OmegaT</primary> <secondary>Compteurs</secondary>
+        </indexterm></title>
+
+      <tgroup cols="2">
+        <colspec align="left" colnum="1"/>
+
+        <tbody>
+          <row>
+            <entry>27/27</entry>
+
+            <entry>Nombre de segments traduits / Nombre total de segments du fichier en cours</entry>
+          </row>
+
+          <row>
+            <entry>9319/16338</entry>
+
+            <entry>nombre de segments uniques traduits / nombre total de segments uniques du projet</entry>
+          </row>
+
+          <row>
+            <entry>31175</entry>
+
+            <entry>Nombre total de segments du projet (y compris les répétitions)</entry>
+          </row>
+
+          <row>
+            <entry>103/114</entry>
+
+            <entry>Nombre de caractères source / nombre de caractères cible dans le segment en cours</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+
+    <para>D'un point de vue pratique, le couple de nombres le plus important est le second : il vous dit quelle quantité de travail a déjà été effectuée par rapport au total ou au nombre de segments uniques. Dans l'exemple, le projet est bien sûr finit puisque tous les segments uniques ont été traduits.</para>
+
+    <section id="editor.pane">
+      <title>Volet Éditeur<indexterm class="singular">
+          <primary>Fenêtres et volets d'OmegaT</primary> <secondary>Volet Éditeur</secondary>
+        </indexterm></title>
+
+      <para>Volet dans lequel vous tapez et modifiez votre traduction. Le volet Éditeur affiche le texte du document partiellement traduit : le texte déjà traduit est affiché dans sa traduction tandis que le texte non traduit reste dans sa langue d'origine. Le texte affiché est séparé en segments. Vous pouvez faire défiler le document et double-cliquer sur n'importe quel segment pour l'ouvrir et le modifier. Dans le cas ci-dessus, les segments déjà traduits sont affichés en jaunes.</para>
+
+      <para>Un des segments ci-dessus est le segment en cours. Il s'agit du segment qui est affiché en deux parties. Le partie supérieure est dans la langue source, en caractère gras et sur un fond vert tandis que la partie inférieure correspond à la ligne d'édition et se termine par un marqueur : <indexterm class="singular">
+          <primary>Marqueur de segments</primary>
+        </indexterm>le marqueur est<literal>&lt;segment nnnn&gt;</literal> avec nnnn correspondant au numéro du segment dans le projet. Utilisez la partie supérieure comme référence et remplacez ou modifiez son contenu par votre traduction dans la ligne d'édition.</para>
+
+      <para>En fonction du comportement que vous avez choisi pour la ligne d'édition, pour un segment non traduit celle-ci peut être : vide, contenir le texte source ou contenir la traduction de la chaîne de caractères la plus proche de celle que vous êtes en train de traduire. Lorsque vous passez au segment suivant, la traduction est validée et sauvegardée. Si vous voulez que la traduction soit identique à la source, il suffit de vider la ligne d'édition en supprimant tout le texte (sélectionnez le texte avec <keycap>Ctrl+A</keycap> et supprimez-le avec <keycap>Suppr</keycap>). OmegaT est capable d'enregistrer les traductions qui sont identiques à la source. Ceci est utile pour les documents qui contiennent des noms de marque, des noms propres, ou des parties qui sont dans une troisième langue et n'ont pas besoin d'être traduites. Voir <emphasis>Options de la ligne d'édition</emphasis> pour plus de détails.</para>
+
+      <para>Si vous effectuez un clic droit dans le volet Editeur, un menu contextuel s'ouvre et propose les options<emphasis role="bold"> Couper, Copier, Coller</emphasis> (soit les mêmes fonctions que les raccourcis <keycombo> <keycap>Ctrl</keycap> <keycap>X</keycap> </keycombo>, <keycombo> <keycap>Ctrl</keycap> <keycap>C</keycap> </keycombo> et <keycombo> <keycap>Ctrl</keycap> <keycap>V</keycap> </keycombo>) ainsi que la fonction <emphasis role="bold">Atteindre un segment</emphasis>.</para>
+    </section>
+
+    <section id="match.viewer">
+      <title>Volet Correspondances<indexterm class="singular">
+          <primary>Fenêtres et volets d'OmegaT</primary> <secondary>Volet Correspondances</secondary>
+        </indexterm></title>
+
+      <para><figure id="matches.pane">
+          <title><indexterm class="singular">
+              <primary>Correspondances</primary> <secondary>Volet Correspondances - Image</secondary>
+            </indexterm><indexterm class="singular">
+              <primary>Fenêtres et volets d'OmegaT</primary> <secondary>Volet Correspondances - Image</secondary>
+            </indexterm>Volet Correspondances</title>
+
+          <mediaobject>
+            <imageobject role="html">
+              <imagedata fileref="images/MatchesPane_25.png"/>
+            </imageobject>
+
+            <imageobject role="fo">
+              <imagedata fileref="images/MatchesPane_25.png" width="80%"/>
+            </imageobject>
+          </mediaobject>
+        </figure></para>
+
+      <para>Le volet Correspondances affiche les segments les plus proches provenant de la mémoire de traduction interne au projet qui est créée en temps réel au cours de votre traduction et des mémoires de traduction secondaires que vous avez importées depuis vos travaux précédents ou que vous avez reçues de la part de votre client ou de votre agence de traduction.</para>
+
+      <para>Lorsque vous passez au segment suivant, la première correspondance (celle ayant le meilleur pourcentage de correspondance) est sélectionnée automatiquement. Vous pouvez sélectionnez une correspondance différente en appuyant sur <guimenuitem>Ctrl+2, 3, 4, ou 5</guimenuitem>.<indexterm>
+          <primary>Raccourcis</primary> <secondary>Sélectionner la correspondance - Ctrl+n (n=Numéro de la correspondance)</secondary>
+        </indexterm> Bien sûr, s'il n'existe pas de correspondance n° 5, appuyer sur <keycombo> <keycap>Ctrl</keycap> <keycap>5</keycap> </keycombo> n'aura aucun effet. Pour utiliser la correspondance sélectionnée dans votre traduction, appuyez sur <guimenuitem>Ctrl+R</guimenuitem><indexterm class="singular">
+          <primary>Raccourcis</primary> <secondary>Remplacer par la correspondance - Ctrl+R</secondary>
+        </indexterm> pour remplacer la ligne d'édition par la correspondance ou appuyez sur <guimenuitem>Ctrl+I<indexterm class="singular">
+          <primary>Raccourcis</primary> <secondary>Insérer la correspondance - Ctrl+I</secondary>
+        </indexterm></guimenuitem> pour l'insérer à l'emplacement du curseur.</para>
+
+      <para>Le pourcentage de correspondances correspond à peu près au nombre de mots communs dans les deux segments correspondants divisé par le nombre de mots présents dans le segment le plus long des deux. La correspondance sélectionnée est mise en gras, les mots qui sont absents dans le segment que vous traduisez sont en bleu et les mots qui entourent les parties manquantes sont en vert. Dans l'exemple ci-dessus, le segment source est <emphasis role="bold">Context menu command</emphasis>. La meilleure correspondance est de 100 % car tous les mots correspondent. C'est la même chose pour les deux correspondances suivantes. La correspondance n° 4 est proche, mais présente des différences. La ligne contenant le pourcentage de correspondances inclut aussi le nom de la mémoire de traduction<indexterm class="singular">
+          <primary>Mémoires de traduction</primary> <secondary>Correspondances </secondary>
+        </indexterm> qui contient la correspondance. Si aucun nom de fichier n'est affiché, cela signifie que la source est la mémoire de traduction interne au projet. Segments orphelins<indexterm class="singular">
+          <primary>Mémoires de traduction</primary> <secondary>Segments orphelins</secondary>
+        </indexterm> (la correspondance n° 2) décrit des segments de la mémoire de traduction par défaut du projet qui n'ont pas de segments source correspondants.</para>
+
+      <para>Il y a en fait trois estimations de correspondances disponibles (66/66/30 dans le cas de la correspondance n° 4 ci-dessus). Elles sont définies comme suit :</para>
+
+      <itemizedlist>
+        <listitem>
+          <para>pourcentage de correspondance lorsque l'extension lemmatiseur est utilisée</para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para>Correspondance par défaut d'OmegaT - le nombre de mots ayant des correspondances (les caractères numériques et les balises sont ignorés) divisé par le nombre total de mots</para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para>Correspondance OmegaT, incluant les caractères numériques et les balises</para>
+        </listitem>
+      </itemizedlist>
+
+      <section>
+        <title>Personnaliser le volet Correspondances<indexterm class="singular">
+            <primary>Fenêtres et volets d'OmegaT</primary> <secondary>Volet Correspondances</secondary> <tertiary>Personnalisation</tertiary>
+          </indexterm><indexterm class="singular">
+            <primary>Fichiers source</primary> <secondary>Traduire une source mise à jour</secondary>
+          </indexterm></title>
+
+        <para>Dans <guimenu>Options &gt; TMX externes...</guimenu>, un certain nombre de variables permettent de configurer l'affichage du volet correspondances :</para>
+
+        <figure id="matches.pane.setup">
+          <title><indexterm class="singular">
+              <primary>Correspondances</primary> <secondary>Paramétrage du volet Correspondances - Image</secondary>
+            </indexterm><indexterm class="singular">
+              <primary>Fenêtres et volets d'OmegaT</primary> <secondary>Paramètres du volet Correspondances - Image</secondary>
+            </indexterm>Paramètres du volet Correspondances</title>
+
+          <mediaobject>
+            <imageobject>
+              <imagedata fileref="images/MatchesPaneSetup.png"/>
+            </imageobject>
+
+            <imageobject role="fo">
+              <imagedata fileref="images/MatchesPaneSetup.png" width="50%"/>
+            </imageobject>
+          </mediaobject>
+        </figure>
+
+        <para>L'image ci-dessus présente le modèle d'affichage par défaut des correspondances. Le contenu peut être personnalisé en utilisant les variables suivantes :</para>
+
+        <table colsep="0" rowsep="0">
+          <title>Paramètres du volet Correspondances<indexterm class="singular">
+              <primary>Interface Utilisateur</primary> <secondary>Paramètres du volet Correspondances</secondary>
+            </indexterm></title>
+
+          <tgroup cols="2" colsep="1" rowsep="1" title="Match pane setup">
+            <colspec align="left" colnum="1"/>
+
+            <colspec align="left" colnum="2"/>
+
+            <tbody>
+              <row>
+                <entry><literal>${id}</literal></entry>
+
+                <entry>Nombre de la correspondance compris entre 1 et 5</entry>
+              </row>
+
+              <row>
+                <entry><literal>${sourceText}</literal></entry>
+
+                <entry>Texte source de la correspondance</entry>
+              </row>
+
+              <row>
+                <entry><literal>${targetText}</literal></entry>
+
+                <entry>Texte cible de la correspondance</entry>
+              </row>
+
+              <row>
+                <entry><literal>${diff}</literal></entry>
+
+                <entry>Chaîne de caractères montrant les différences entre la source et la correspondance.<emphasis> Astuce :</emphasis> utilisez ceci si le texte que vous avez traduit a été mis à jour.</entry>
+              </row>
+
+              <row>
+                <entry><literal>${score}</literal></entry>
+
+                <entry>Pourcentage obtenu avec le lemmatiseur</entry>
+              </row>
+
+              <row>
+                <entry><literal>${noStemScore}</literal></entry>
+
+                <entry>Pourcentage obtenu sans tenir compte des nombres et des balises</entry>
+              </row>
+
+              <row>
+                <entry><literal>${adjustedScore}</literal></entry>
+
+                <entry>Pourcentage ajusté</entry>
+              </row>
+
+              <row>
+                <entry><literal>${fileNameOnly}</literal></entry>
+
+                <entry>Nom de la TMX</entry>
+              </row>
+
+              <row>
+                <entry><literal>${filePath}</literal></entry>
+
+                <entry>Chemin d'accès complet à la TMX</entry>
+              </row>
+
+              <row>
+                <entry><literal>${fileShortPath}</literal></entry>
+
+                <entry>Chemin d'accès à la TMX à partir de la racine /tm</entry>
+              </row>
+
+              <row>
+                <entry><literal>${creationID}</literal></entry>
+
+                <entry>Auteur de la correspondance</entry>
+              </row>
+
+              <row>
+                <entry><literal>${creationDate}</literal></entry>
+
+                <entry>Date de création de la correspondance</entry>
+              </row>
+
+              <row>
+                <entry><literal>${fuzzyFlag}</literal></entry>
+
+                <entry>Indique que la correspondance est partielle (pour le moment, existe uniquement pour les fichiers PO possédant la marque #correspondance partielle)</entry>
+              </row>
+            </tbody>
+          </tgroup>
+        </table>
+      </section>
+    </section>
+
+    <section>
+      <title>Volet Glossaires<indexterm class="singular">
+          <primary>Les fenêtres et les volets dans OmegaT</primary> <secondary>Volet Glossaires</secondary>
+        </indexterm></title>
+
+      <para>Le volet Glossaires vous permet d'accéder à votre propre collection d'expressions et de terminologies spécialisées (que vous avez créées et enregistrées dans vos fichiers glossaires). Il montre la traduction des termes présents dans le segment en cours. Le segment source de l'exemple ci-dessous était « <emphasis>Commande de menu contextuel</emphasis> » (comme dans l'exemple du volet Correspondances ci-dessus) et les termes affichés se trouvaient dans les glossaires disponibles (Microsoft's Term collection et le glossaire slovène du groupe d'utilisateurs Linux).</para>
+
+      <figure id="multiword.pane">
+        <title><indexterm class="singular">
+            <primary>Glossaires</primary>
+          </indexterm>entrées multimots dans le glossaire</title>
+
+        <mediaobject>
+          <imageobject role="html">
+            <imagedata fileref="images/GlossaryPane_25.png"/>
+          </imageobject>
+
+          <imageobject role="fo">
+            <imagedata fileref="images/GlossaryPane_25.png" width="80%"/>
+          </imageobject>
+        </mediaobject>
+      </figure>
+
+      <para>Si l'option TransTips est activée (<guimenuitem>Options → TransTips</guimenuitem>), cliquer-droit sur le mot souligné dans le segment source permet d'ouvrir un menu contextuel qui suggère les traductions proposées par votre glossaire. Sélectionner l'une de ces traductions permet de l'insérer à l'endroit où se trouve le curseur dans le segment cible. Il est également possible de surligner votre alternative préférée dans le volet Glossaires et de l'insérer dans le segment cible en cliquant-droit sur la sélection.</para>
+    </section>
+
+    <section id="dictionaries">
+      <title>Volet Dictionnaires<indexterm class="singular">
+          <primary>Les fenêtres et les volets dans OmegaT</primary> <secondary>Volet Dictionnaires</secondary>
+        </indexterm></title>
+
+      <para>Les dictionnaires sont les équivalents électroniques des dictionnaires papier (comme Merriam Webster, Duden, Larousse etc.) que vous pouvez avoir sur votre bureau. Pour plus de détails, voir le chapitre : <link linkend="chapter.dictionaries">Dictionnaires</link></para>
+    </section>
+
+    <section id="Multiple.Translations">
+      <title>Volet Traductions Multiples<indexterm class="singular">
+          <primary>Les fenêtres et les volets dans OmegaT</primary> <secondary>Volet Traductions Multiples</secondary>
+        </indexterm></title>
+
+      <para>Un même segment source peut avoir différentes traductions en fonction du contexte. Si la traduction actuelle du segment ne convient pas, l'utilisateur peut sélectionner <guisubmenu>Edition → Créer une traduction alternative</guisubmenu>. Le segment cible saisi après cette action sera alors considéré comme une traduction alternative pour le segment source. Il est possible de définir l'une des alternatives - la plus probable d'entre elles par exemple - comme traduction par défaut en sélectionnant <guisubmenu>Edition → Utiliser comme traduction par défaut</guisubmenu></para>
+    </section>
+
+    <section>
+      <title>Volet Notes</title>
+
+      <para>Le traducteur peut adjoindre des notes au segment en cours, ce qui lui permet, par exemple, d'y revenir plus tard et de refaire sa traduction, de vérifier que les traductions alternatives sont correctes ou d'interroger ses collègues pour avoir leur avis. Il est possible de se déplacer d'une note à l'autre en cliquant sur <guisubmenu>Atteindre → Note Suivante</guisubmenu> et <guisubmenu>Atteindre → Note Précédente</guisubmenu>.</para>
+    </section>
+
+    <section>
+      <title>Volet Commentaires</title>
+
+      <para>Certains formats de fichiers conçus spécialement pour le travail de traduction (ex : les fichiers PO) permettent l'ajout de commentaires. De cette façon, le traducteur peut obtenir le contexte entourant le segment à traduire. Dans l'exemple ci-dessous, l'auteur du fichier PO a intégré un avertissement afin que le traducteur vérifie la longueur de la traduction :</para>
+
+      <figure id="comments.pane">
+        <title>Volet Commentaires<indexterm class="singular">
+            <primary>Commentaires</primary> <secondary>Volet Commentaires</secondary>
+          </indexterm></title>
+
+        <mediaobject>
+          <imageobject role="html">
+            <imagedata fileref="images/Comments_25.png"/>
+          </imageobject>
+
+          <imageobject role="fo">
+            <imagedata fileref="images/Comments_25.png" width="80%"/>
+          </imageobject>
+        </mediaobject>
+      </figure>
+    </section>
+
+    <section id="Google.Translate">
+      <title>Volet Traduction automatique<indexterm class="singular">
+          <primary>Les fenêtres et les volets dans OmegaT</primary> <secondary>Volet Traduction automatique</secondary>
+        </indexterm></title>
+
+      <para>Le volet Traduction automatique, lorsqu'il est ouvert, contient les suggestions de traduction proposées par les outils de traduction automatique pour le segment en cours. Appuyer sur <keysym>Ctrl+M </keysym>permet de remplacer la traduction du segment en cours par la traduction suggérée. Pour plus de détails, voir le chapitre : <link linkend="chapter.machine.translate">Traduction automatique</link></para>
+    </section>
+
+    <section>
+      <title id="main.menu">Menu Principal</title>
+
+      <para>Le menu principal donne accès à toutes les fonctions d'<application>OmegaT</application>. Voir l'annexe<emphasis> Menu principal</emphasis> pour une description complète de tous les menus et des éléments de menu. Les fonctions les plus fréquemment utilisées sont accessibles grâce à leur raccourci clavier (une fois habitués à ceux-ci, il ne vous sera plus nécessaire de naviguer entre les menus pendant la traduction). Pour plus de détails, voir le chapitre : <link linkend="chapter.menu">Menus et raccourcis clavier</link>.</para>
+    </section>
+
+    <section id="status.bar">
+      <title>Barre d'état</title>
+
+      <para>La barre d'état affiche les messages relatifs au flux de travail dans le bas de la fenêtre principale. Cette barre donne à l'utilisateur un retour concernant certaines opérations spécifiques en cours. Elle affiche également le nombre de correspondances partielles et de correspondances de glossaire pour le segment en cours.</para>
+    </section>
+  </section>
+
+  <section id="other.windows">
+    <title>Autres fenêtres</title>
+
+    <section id="section.project.files">
+      <title>Fichiers du projet<indexterm class="singular">
+          <primary>Les fenêtres et les volets dans OmegaT</primary> <secondary>Fichiers du projet</secondary>
+        </indexterm></title>
+
+      <para>La fenêtre Fichiers du projet liste les fichiers du projet et affiche d'autres informations relatives au projet. Cette fenêtre s'affiche automatiquement lorsqu'OmegaT charge un projet. Utilisez <guimenuitem>Ctrl+L<indexterm class="singular">
+          <primary>Raccourcis</primary> <secondary>Liste des fichiers du projet - Ctrl+L</secondary>
+        </indexterm></guimenuitem> pour ouvrir cette fenêtre et <keycap>Echap</keycap> pour la fermer. La fenêtre Fichiers du projet affiche les informations suivantes :</para>
+
+      <itemizedlist>
+        <listitem>
+          <para>La liste de tous les fichiers traduisibles du projet. Il s'agit de tous les fichiers présents dans le dossier de fichiers source du projet qui sont écrit dans un format qu'OmegaT est en mesure de traiter. Cliquer sur n'importe lequel de ces fichiers provoquera l'ouverture de celui-ci (dans le volet Editeur, ce qui permet d'effectuer sa traduction).</para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para>Le fichier actuellement ouvert dans le volet Editeur est mis en évidence grâce à un fond bleu. Appuyer sur <keycap>Entrée</keycap> déplacera le volet Editeur au début du fichier sélectionné</para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para>Les entrées de fichier comprennent notamment leur nom, leurs types de filtres de fichier, leur encodage ainsi que le nombre de segments que chaque fichier contient</para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para>le nombre total de segments, le nombre de segments uniques (présents dans l'ensemble du projet), et le nombre de segments uniques déjà traduits sont affichés dans le bas de la fenêtre</para>
+        </listitem>
+      </itemizedlist>
+
+      <para>Le nombre de segments <emphasis role="bold">uniques </emphasis> est calculé en soustrayant les segments doubles à la somme de tous les segments. (La définition du mot « unique » est sensible à la casse : « Run » et « run » sont considérés comme étant deux mots différents)</para>
+
+      <para>La différence entre le « Nombre total de segments » et le « Nombre de segments uniques » donne une idée approximative du nombre de répétitions présentes dans le texte. Veuillez noter cependant que ces chiffres n'indiquent pas si les répétitions sont pertinentes ou non : ils peuvent se rapporter à des phrases relativement longues et répétées un certain nombre de fois (ce qui serait une bonne chose pour vous) ou à un tableau de mots clés (ce qui est moins utile). Le fichier <filename>project_stats.txt</filename> situé dans le dossier omegat de votre projet contient des informations plus détaillées sur les segments. Celles-ci sont séparées par fichier.</para>
+
+      <para>Modifier les règles de segmentation peut avoir pour conséquence la modification du ratio segments/segments uniques. Il est cependant préférable que ceci soit évité une fois la traduction du projet commencée. Pour plus de détails, voir le chapitre : <emphasis>Règles de segmentation</emphasis>.</para>
+
+      <para><emphasis role="bold"><indexterm class="singular">
+          <primary>Fichiers source</primary> <secondary>Ajouter des fichiers au projet</secondary>
+        </indexterm>Ajouter des fichiers au projet : </emphasis>Il est possible d'ajouter des fichiers source au projet en cliquant sur « <guimenuitem>Importer des fichiers source... »</guimenuitem>. Ceci copie les fichiers sélectionnés dans le dossier <filename>source</filename> et recharge le projet pour importer les nouveaux fichiers. Il est également possible d'ajouter des fichiers source provenant de pages internet (MediaWiki) en cliquant sur<guimenuitem> « Importer depuis MediaWiki »</guimenuitem> et en saisissant l'URL correspondant.</para>
+    </section>
+
+    <section id="section.search.window">
+      <title>La fenêtre Recherche textuelle<indexterm class="singular">
+          <primary>Les fenêtres et les volets dans OmegaT</primary> <secondary>La fenêtre Recherche textuelle</secondary>
+        </indexterm></title>
+
+      <para>La fenêtre Recherche textuelle permet de trouver un segment spécifique dans un projet. Plusieurs fenêtres de recherche peuvent être ouvertes simultanément. Pour ouvrir une nouvelle fenêtre de recherche, appuyez sur <keycombo> <keycap>Ctrl</keycap> <keycap>F</keycap> </keycombo>. La fenêtre Recherche textuelle est composée d'un champ de saisie destiné aux chaînes de caractères ou aux mots clés à trouver, de cases à cocher et de boutons d'option (qui permettent de sélectionner les paramètres de la recherche) et d'une zone d'affichage, où apparaissent les résultats de la recherche. Pour plus de détails, voir le chapitre : <emphasis> <link linkend="chapter.user.interface">Recherche</link> </emphasis>.</para>
+    </section>
+
+    <section id="section.tag.validation">
+      <title>Validation des balises<indexterm class="singular">
+          <primary>Validation des balises</primary> <seealso>Raccourcis, Balises</seealso>
+        </indexterm><indexterm class="singular">
+          <primary>Les fenêtres et les volets dans OmegaT</primary> <secondary>Validation des balises</secondary> <seealso>Balises</seealso>
+        </indexterm></title>
+
+      <para>La fenêtre de validation des balises détecte et liste toutes les erreurs et incohérences de balises de la traduction. Pour ouvrir la fenêtre de validation des balises, appuyez sur <guimenuitem>Ctrl+T. </guimenuitem>La fenêtre contient un tableau à 3 colonnes ainsi qu'un lien vers le segment et son contenu source et cible :</para>
+
+      <para><figure id="tag.validator.window">
+          <title><indexterm class="singular">
+              <primary>Validation des balises</primary> <secondary>Fenêtre - Image</secondary> <seealso>Balises</seealso>
+            </indexterm>Fenêtre de validation des balises</title>
+
+          <mediaobject>
+            <imageobject role="html">
+              <imagedata fileref="images/TagValidator.png"/>
+            </imageobject>
+
+            <imageobject role="fo">
+              <imagedata fileref="images/TagValidator.png" width="60%"/>
+            </imageobject>
+          </mediaobject>
+        </figure></para>
+
+      <para>Les balises sont écrites en bleu et en gras pour permettre une meilleure comparaison entre l'original et la traduction. Cliquez sur le lien pour aller directement au segment dans le volet Éditeur. Corrigez l'erreur si nécessaire et appuyez sur <guimenuitem>Ctrl+T</guimenuitem> pour retourner à la fenêtre de validation des balises et corriger d'autres erreurs. Dans le premier et le troisième cas ci-dessus, les balises ne sont pas appariées correctement, et dans le deuxième cas le signe &lt; a été oublié dans la balise de début.</para>
+
+      <para>Les erreurs de balise correspondent à des cas où les balises de la traduction ne correspondent plus, par leur ordre ou par leur nombre, aux balises du segment original. Certaines erreurs de balise signalées dans la fenêtre de validation des balises sont nécessaires et bénignes, d'autres causeront des problèmes lorsque le document traduit sera créé. Les balises représentent généralement un certain type de formatage du texte original. Simplifier le formatage du texte original du fichier source avant le début de la traduction contribue grandement à réduire le nombre de balises.</para>
+    </section>
+
+    <section>
+      <title>Statistiques<indexterm class="singular">
+          <primary>Statistiques</primary> <seealso>Menu Outils</seealso>
+        </indexterm></title>
+
+      <para>La fenêtre des statistiques - accessible via <emphasis role="bold">Outils &gt; Statistiques </emphasis>- affiche les statistiques du projet OmegaT en cours, à la fois sous une forme résumée et en faisant le détail pour chaque fichier à traduire. L'affichage statistique, disponible en tant que fichier à séparation par tabulation <filename>project_stats.txt</filename> (sous-dossier <filename>omegat</filename>), peut être ouvert dans un tableur pour répondre aux besoins de l'utilisateur. Utilisez <guimenuitem>Ctrl+A <indexterm class="singular">
+          <primary>Raccourcis</primary> <secondary>Sélectionner Tout - Ctrl+A</secondary>
+        </indexterm></guimenuitem><guimenuitem>, Ctrl+C <indexterm class="singular">
+          <primary>Raccourcis</primary> <secondary>Copier le texte - Ctrl+C</secondary>
+        </indexterm></guimenuitem>, <guimenuitem>Ctrl+V <indexterm class="singular">
+          <primary>Raccourcis</primary> <secondary>Coller le texte - Ctrl+V</secondary>
+        </indexterm></guimenuitem> pour copier/coller le contenu.<figure id="ProjectStatistic.Window">
+          <title>Statistiques du projet</title>
+
+          <mediaobject>
+            <imageobject role="html">
+              <imagedata fileref="images/StatisticsWindow_25.png"/>
+            </imageobject>
+
+            <imageobject role="fo">
+              <imagedata fileref="images/StatisticsWindow_25.png" width="60%"/>
+            </imageobject>
+          </mediaobject>
+        </figure></para>
+    </section>
+
+    <section>
+      <title>Statistiques des correspondances<indexterm class="singular">
+          <primary>Statistiques des correspondances</primary> <seealso>Menu Outils</seealso>
+        </indexterm></title>
+
+      <para>Les statistiques des correspondances sont accessibles via<guimenuitem> Outils &gt; Statistiques des correspondances.</guimenuitem> L'évaluation est assez gourmande en termes de processeur et peut prendre beaucoup de temps. Pour cette raison, une barre de progression s'affiche pendant le calcul. En ce qui concerne les catégories, les standards qui s'appliquent de facto dans l'industrie et qui classifient les correspondances dans les groupes suivants sont utilisés : Répétitions, Correspondance exacte, 95 %-100 %, 85 %-94 %, 75 %-84 %, 50 %-74 % et Aucune correspondance. Les correspondances sont calculées aussi bien pour les segments que pour les mots et les caractères (incluant ou non les espaces). Veuillez noter qu'il peut exister des petites différences entre les chiffres d'OmegaT et ceux affichés par d'autres outils de TAO.<figure>
+          <title>Statistiques des correspondances</title>
+
+          <mediaobject>
+            <imageobject role="html">
+              <imagedata fileref="images/MatchStatistics.png"/>
+            </imageobject>
+
+            <imageobject role="fo">
+              <imagedata fileref="images/MatchStatistics.png" width="80%"/>
+            </imageobject>
+          </mediaobject>
+        </figure></para>
+
+      <para>Veuillez noter que ces totaux représentent une bonne (ou une aussi bonne que possible) approximation du travail réalisé et peuvent ainsi servir de base à un calcul du coût et du prix de la traduction.</para>
+
+      <para>Les espaces entre les segments ne sont pas pris en compte dans la dernière colonne. Les répétitions sont des segments identiques qui apparaissent plusieurs fois dans le texte. Le premier segment et son contenu sont classés dans le groupe « aucune correspondance », et le reste des segments (semblables) est classé « répétition du premier ». Si la traduction de plusieurs segments source identiques existe déjà dans la mémoire de traduction du projet, ces segments, ainsi que d'autres segments uniques déjà traduits, seront classés « correspondance exacte ». Si besoin est, le nombre de segments uniques est affiché dans la fenêtre des statistiques standards, indépendamment du fait qu'ils aient été traduits ou non.</para>
+
+      <para>Le reste des catégories (50-100%) concerne les segments non traduits possédant une correspondance partielle. Les correspondances partielles peuvent tout aussi bien provenir du dossier <filename>/tm</filename> - et pas uniquement de la mémoire de traduction interne du dossier <filename>/omegaT,</filename> comme c'est le cas pour les répétitions et les correspondances exactes. La seule différence avec la mémoire de traduction <filename>project_save</filename> c'est que les MTs externes ne peuvent pas donner de correspondances exactes à 100%. Pour ne pas utiliser les MTs externes lors du calcul, il faut soit vider le dossier /tm soit changer (temporairement) les paramètres du projet de sorte que la valeur des /tm indique un autre emplacement.</para>
+
+      <para>Les statistiques des correspondance sont séparées par tabulation et il est possible d'utiliser <guimenuitem>Ctrl+A <indexterm class="singular">
+          <primary>Raccourcis</primary> <secondary>Sélectionner Tout - Ctrl+A</secondary>
+        </indexterm></guimenuitem><guimenuitem>, Ctrl+C <indexterm class="singular">
+          <primary>Raccourcis</primary> <secondary>Copier le texte - Ctrl+C</secondary>
+        </indexterm></guimenuitem>et <guimenuitem>Ctrl+V <indexterm class="singular">
+          <primary>Raccourcis</primary> <secondary>Coller le texte - Ctrl+V</secondary>
+        </indexterm></guimenuitem> pour les copier/coller dans un tableur ou dans un logiciel de comptabilité. Une fois calculées, les données sont également accessibles depuis <filename>omegat/project_stats_match.txt.</filename> Veuillez noter que le fichier est horodaté mais que ce calcul (contrairement aux statistiques standards) n'est pas instantané et peut donc rapidement devenir obsolète.</para>
+    </section>
+
+    <section>
+      <title>Navigateur Aide<indexterm class="singular">
+          <primary>Menu Aide</primary> <secondary>Navigateur Aide</secondary>
+        </indexterm></title>
+
+      <para>Le navigateur d'aide (qui affiche ce manuel) peut être ouvert en appuyant sur la touche <keycap><indexterm class="singular">
+          <primary>Raccourcis</primary> <secondary>Aide - F1</secondary>
+        </indexterm>F1</keycap> ou en allant dans <guimenuitem><indexterm class="singular">
+          <primary>Menu Aide</primary> <secondary>Manuel de l'utilisateur...</secondary>
+        </indexterm>Aide → Manuel de l'utilisateur...</guimenuitem> à partir du menu principal. Dans la fenêtre, le manuel ainsi que deux boutons (Retour et Table des matières) apparaissent. Le manuel de l'utilisateur est un document HTML contenant des liens amenant aux différents chapitres. Cliquer sur l'un des liens (comme vous le feriez sur un navigateur web) affiche la page désirée dans la fenêtre du manuel.</para>
+
+      <para>Le manuel de l'utilisateur est situé dans le sous-dossier docs à l'intérieur du dossier d'installation OmegaT, de sorte que vous puissiez, par exemple, voir le manuel en anglais en ouvrant le fichier <filename>docs/en/index.html </filename>dans votre navigateur. Ouvrir le manuel de l'utilisateur par ce biais permet également de suivre des liens externes, dans la mesure où le navigateur d'aide intégré n'accepte pas les liens Internet externes.</para>
+    </section>
+  </section>
+</chapter>

@@ -116,6 +116,8 @@ public class Handler extends DefaultHandler implements LexicalHandler, DeclHandl
     Stack<org.omegat.filters3.Attributes> paragraphTagAttributes = new Stack<org.omegat.filters3.Attributes>();
     /** Keep the attributes of preformat tags. */
     Stack<org.omegat.filters3.Attributes> preformatTagAttributes = new Stack<org.omegat.filters3.Attributes>();
+    /** Keep the attributes of xml tags. */
+    Stack<org.omegat.filters3.Attributes> xmlTagAttributes = new Stack<org.omegat.filters3.Attributes>();
 
     /** Current entry that collects the text surrounded by intact tag. */
     String intacttagName = null;
@@ -125,6 +127,8 @@ public class Handler extends DefaultHandler implements LexicalHandler, DeclHandl
     Stack<String> preformatTagName = new Stack<String>();
     /** Name of the current variable translatable tag */
     Stack<String> translatableTagName = new Stack<String>();
+    /** Names of xml tags. */
+    Stack<String> xmlTagName = new Stack<String>();
     /** Status of the xml:space="preserve" flag */
     private boolean spacePreserve = false;
 
@@ -440,6 +444,8 @@ public class Handler extends DefaultHandler implements LexicalHandler, DeclHandl
         }
         if (xmltag == null) {
             xmltag = new XMLTag(tag, getShortcut(tag), Tag.Type.BEGIN, attributes, this.translator.getTargetLanguage());
+            xmlTagName.push(xmltag.getTag());
+            xmlTagAttributes.push(xmltag.getAttributes());
         }
         currEntry().add(xmltag);
 
@@ -468,7 +474,12 @@ public class Handler extends DefaultHandler implements LexicalHandler, DeclHandl
                         len - 1)).getType() == Tag.Type.BEGIN) && !isClosingTagRequired()) {
             ((XMLTag) currEntry().get(len - 1)).setType(Tag.Type.ALONE);
         } else {
-            currEntry().add(new XMLTag(tag, getShortcut(tag), Tag.Type.END, null, this.translator.getTargetLanguage()));
+            XMLTag xmltag = new XMLTag(tag, getShortcut(tag), Tag.Type.END, null, this.translator.getTargetLanguage());
+            if (xmltag.getTag().equals(xmlTagName.lastElement())) {
+                xmlTagName.pop();
+                xmltag.setStartAttributes(xmlTagAttributes.pop()); // Restore attributes
+            }
+            currEntry().add(xmltag);
         }
     }
 
@@ -631,10 +642,14 @@ public class Handler extends DefaultHandler implements LexicalHandler, DeclHandl
      */
     public boolean isParagraphTag(Tag tag) {
         if ((dialect.getParagraphTags() != null && dialect.getParagraphTags().contains(tag.getTag()))
-                || isPreformattingTag(tag.getTag(), tag.getAttributes()))
+                || isPreformattingTag(tag.getTag(), tag.getAttributes())) {
             return true;
-        else
+        } else if (tag.getType() == Tag.Type.END
+                && isPreformattingTag(tag.getTag(), tag.getStartAttributes())) {
+            return true;
+        } else {
             return dialect.validateParagraphTag(tag.getTag(), tag.getAttributes());
+        }
     }
 
     /**

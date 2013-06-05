@@ -88,6 +88,18 @@ public abstract class Tag implements Element {
         return null;
     }
 
+    /** Attributes of correspondent start tag. */
+    private Attributes startAttributes;
+
+    /** Returns tag's attributes. */
+    public Attributes getStartAttributes() {
+        return startAttributes;
+    }
+
+    public void setStartAttributes(Attributes startAttributes) {
+        this.startAttributes = startAttributes;
+    }
+
     private int index;
 
     /** Returns the index of this tag in the entry. */

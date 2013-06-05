@@ -1,0 +1,189 @@
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <title>Annexe&nbsp;D.&nbsp;Extension module Tokenizer</title>
+      <link rel="stylesheet" type="text/css" href="OmegaT.css">
+      <meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
+      <link rel="home" href="index.html" title="OmegaT - Guide de l'utilisateur">
+      <link rel="up" href="index.html" title="OmegaT - Guide de l'utilisateur">
+      <link rel="prev" href="appendix.TeamProjects.html" title="Annexe&nbsp;C.&nbsp;Projets en équipe d'OmegaT">
+      <link rel="next" href="appendix.LanguageToolPlugin.inOmegaT.html" title="Annexe&nbsp;E.&nbsp;L'extension LanguageTool">
+   </head>
+   <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+      <div class="navheader">
+         <table width="100%" summary="Navigation header">
+            <tr>
+               <th colspan="3" align="center">Annexe&nbsp;D.&nbsp;Extension module Tokenizer</th>
+            </tr>
+            <tr>
+               <td width="20%" align="left"><a accesskey="p" href="appendix.TeamProjects.html">Précédent</a>&nbsp;
+               </td>
+               <th width="60%" align="center">&nbsp;</th>
+               <td width="20%" align="right">&nbsp;<a accesskey="n" href="appendix.LanguageToolPlugin.inOmegaT.html">Suivant</a></td>
+            </tr>
+         </table>
+         <hr>
+      </div>
+      <div class="appendix">
+         <div class="titlepage">
+            <div>
+               <div>
+                  <h1 class="title"><a name="appendix.TokenizerPlugin.inOmegaT"></a>Annexe&nbsp;D.&nbsp;Extension module Tokenizer<a class="indexterm" name="d0e10740"></a></h1>
+               </div>
+            </div>
+         </div>
+         <div class="toc">
+            <dl class="toc">
+               <dt><span class="section"><a href="appendix.TokenizerPlugin.inOmegaT.html#d0e10745">1. Introduction</a></span></dt>
+               <dt><span class="section"><a href="appendix.TokenizerPlugin.inOmegaT.html#d0e10774">2. Installation et utilisation de la ligne de commande</a></span></dt>
+               <dt><span class="section"><a href="appendix.TokenizerPlugin.inOmegaT.html#d0e10791">3. Spécificités Mac OS X</a></span></dt>
+               <dt><span class="section"><a href="appendix.TokenizerPlugin.inOmegaT.html#d0e10805">4. Résolution des problèmes</a></span></dt>
+            </dl>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e10745"></a>1.&nbsp;Introduction<a class="indexterm" name="d0e10748"></a><a class="indexterm" name="d0e10753"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <p>Les Tokenizers (ou lemmatiseurs) améliorent la qualité des correspondances en reconnaissant les mots accordés dans les données
+               source et dans la mémoire de traduction. Ils améliorent également les capacités de correspondance du glossaire.
+            </p>
+            <p>Un lemmatiseur Anglais, par exemple, doit pouvoir identifier la chaîne de caractères « chats » (et éventuellement « chattons
+               », « chatière », etc.) comme ayant pour racine la chaîne de caractères « chat », et « lemmatiser », « lemmatisation », « lemmatiseur
+               » comme ayant pour racine la chaîne de caractères « lemmati ». Un algorithme de lemmatisation réduit les mots « pêcher »,
+               « pêché », « pêche », et « pêcheur » au mot racine : « pêche ». Ceci est particulièrement utile dans le cas des langues qui
+               accrochent des préfixes et des suffixes aux racines pour former des mots. Par exemple, vous pourrez trouver ci-dessous toutes
+               les formes grammaticalement correctes du mot « bon » en Slovène :
+            </p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>lep, lepa, lepo - singulier : masculin, féminin, neutre</p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>lepši, lepša, lepše - comparatif nominatif : masculin, féminin, neutre ; qui sont respectivement les formes plurielles des
+                        adjectifs
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>najlepših - superlatif, pluriel, génitif pour le masc, fem, neutre</p>
+                  </li>
+               </ul>
+            </div>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e10774"></a>2.&nbsp;Installation et utilisation de la ligne de commande
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>Un pack de lemmatisation adapté du projet Lucene est utilisable sur OmegaT en tant qu'extension. Il est téléchargeable sur
+               le site : http://sourceforge.net/projects/omegat-plugins/files/. Téléchargez les fichiers les plus récents (OmegaT-tokenizers_0.4_2-2.1.zip
+               au moment de la rédaction de ce manuel).
+            </p>
+            <p>Pour installer le lemmatiseur, créez un dossier que vous appellerez « plugins » dans le dossier où se trouve OmegaT.jar et
+               décompressez les fichiers à l'intérieur du dossier.
+            </p>
+            <p>Pour utiliser un lemmatiseur dans OmegaT, vous devez spécifier quel lemmatiseur vous allez utiliser pour la langue source
+               et quel lemmatiseur vous allez utiliser pour la langue cible. La syntaxe est la suivante :
+            </p>
+            <p><code class="literal">java -jar OmegaT.jar --ITokenizer=[nom du lemmatiseur pour la langue source] --ITokenizerTarget=[nom du lemmatiseur pour la
+                  langue cible]</code></p>
+            <p>Les noms des lemmatiseurs sont écrits dans le fichier lisez-moi ( Readme.txt )  fourni avec les fichiers des lemmatiseurs.
+               Par exemple, pour utiliser le lemmatiseur Lucene CJK pour la langue source et le lemmatiseur Lucene français pour la langue
+               cible, votre ligne de commande devra être rédigée comme ceci :
+            </p>
+            <p><code class="literal">java -jar OmegaT.jar
+                      --ITokenizer=org.omegat.plugins.tokenizer.LuceneCJKTokenizer
+                      --ITokenizerTarget=org.omegat.plugins.tokenizer.LuceneFrenchTokenizer</code></p>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e10791"></a>3.&nbsp;Spécificités Mac OS X
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>Si vous souhaitez utiliser les lemmatiseurs avec le paquet Mac OS X OmegaT.app, l'installation du lemmatiseur décrite ci-dessus
+               s'applique (clic droit sur OmegaT.app pour trouver l'emplacement du fichier OmegaT.jar), mais vous devrez spécifier les noms
+               des lemmatiseurs dans le fichier<code class="filename">info.plist </code> qui contient les options de lancement de Java . Suivez les instructions ci-dessus pour accéder au fichier <code class="filename">info.plist</code> et éditez-le de sorte qu'il soit similaire à ce qui suit (n'oubliez pas de remplacer le nom des lemmatiseurs de l'exemple
+               par ceux que vous aurez choisis) :
+            </p>
+            <div class="literallayout">
+               <p><code class="code"><br>
+                     &lt;key&gt;VMOptions&lt;/key&gt;<br>
+                     &lt;string&gt;-Xmx1024M&lt;/string&gt;<br>
+                     <br>
+                     &lt;key&gt;Arguments&lt;/key&gt;<br>
+                     &lt;array&gt;<br>
+                     &nbsp;&nbsp;&lt;string&gt;--ITokenizer=org.omegat.plugins.tokenizer.LuceneCJKTokenizer&lt;/string&gt;<br>
+                     &nbsp;&nbsp;&lt;string&gt;--ITokenizerTarget=org.omegat.plugins.tokenizer.LuceneFrenchTokenizer&lt;/string&gt;<br>
+                     &lt;/array&gt;</code></p>
+            </div>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e10805"></a>4.&nbsp;Résolution des problèmes
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>Pour être sûr que les lemmatiseurs sont biens utilisés, ouvrez un projet et vérifiez les informations du journal de la console.
+               Pour l'exemple utilisé ci-dessus, vous devriez voir ceci apparaître :
+            </p>
+            <div class="literallayout">
+               <p><code class="code"><br>
+                     84528:&nbsp;Info:&nbsp;Source&nbsp;tokenizer:&nbsp;org.omegat.plugins.tokenizer.LuceneCJKTokenizer&nbsp;<br>
+                     84528:&nbsp;Info:&nbsp;Target&nbsp;tokenizer:&nbsp;org.omegat.plugins.tokenizer.LuceneFrenchTokenizer&nbsp;<br>
+                     </code></p>
+            </div>
+            <p>Les nombres situés sur la gauche seront certainement différents sur votre système. Assurez-vous donc que les noms des lemmatiseurs
+               source et cible, spécifiés dans les options de démarrage, correspondent à ce qu'affiche le journal. Si les lemmatiseurs ne
+               démarrent pas correctement, le journal affichera ceci :
+            </p>
+            <div class="literallayout">
+               <p><code class="code">12719:&nbsp;Info:&nbsp;Source&nbsp;tokenizer:&nbsp;org.omegat.core.matching.Tokenizer<br>
+                     12719:&nbsp;Info:&nbsp;Target&nbsp;tokenizer:&nbsp;org.omegat.core.matching.Tokenizer</code></p>
+            </div>
+            <p>Avec le paquet Mac OS X OmegaT.app, double-cliquez sur <code class="literal">JavaApplicationStub</code> situé dans /OmegaT.app/Contents/MacOS/ (voir ci-dessus comment y accéder) pour lancer OmegaT depuis la console et avoir un
+               accès immédiat au journal.
+            </p>
+         </div>
+      </div>
+      <div class="navfooter">
+         <hr>
+         <table width="100%" summary="Navigation footer">
+            <tr>
+               <td width="40%" align="left"><a accesskey="p" href="appendix.TeamProjects.html">Précédent</a>&nbsp;
+               </td>
+               <td width="20%" align="center">&nbsp;</td>
+               <td width="40%" align="right">&nbsp;<a accesskey="n" href="appendix.LanguageToolPlugin.inOmegaT.html">Suivant</a></td>
+            </tr>
+            <tr>
+               <td width="40%" align="left" valign="top">Annexe&nbsp;C.&nbsp;Projets en équipe d'OmegaT&nbsp;</td>
+               <td width="20%" align="center"><a accesskey="h" href="index.html">Sommaire</a></td>
+               <td width="40%" align="right" valign="top">&nbsp;Annexe&nbsp;E.&nbsp;L'extension LanguageTool</td>
+            </tr>
+         </table>
+      </div>
+   </body>
+</html>

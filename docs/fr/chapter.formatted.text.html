@@ -1,0 +1,284 @@
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <title>Chapitre&nbsp;12.&nbsp;Travailler avec un texte formaté</title>
+      <link rel="stylesheet" type="text/css" href="OmegaT.css">
+      <meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
+      <link rel="home" href="index.html" title="OmegaT - Guide de l'utilisateur">
+      <link rel="up" href="index.html" title="OmegaT - Guide de l'utilisateur">
+      <link rel="prev" href="chapter.plain.text.html" title="Chapitre&nbsp;11.&nbsp;Travailler avec du texte brut">
+      <link rel="next" href="chapter.translation.memories.html" title="Chapitre&nbsp;13.&nbsp;Mémoires de traduction">
+   </head>
+   <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+      <div class="navheader">
+         <table width="100%" summary="Navigation header">
+            <tr>
+               <th colspan="3" align="center">Chapitre&nbsp;12.&nbsp;Travailler avec un texte formaté</th>
+            </tr>
+            <tr>
+               <td width="20%" align="left"><a accesskey="p" href="chapter.plain.text.html">Précédent</a>&nbsp;
+               </td>
+               <th width="60%" align="center">&nbsp;</th>
+               <td width="20%" align="right">&nbsp;<a accesskey="n" href="chapter.translation.memories.html">Suivant</a></td>
+            </tr>
+         </table>
+         <hr>
+      </div>
+      <div class="chapter">
+         <div class="titlepage">
+            <div>
+               <div>
+                  <h1 class="title"><a name="chapter.formatted.text"></a>Chapitre&nbsp;12.&nbsp;Travailler avec un texte formaté<a class="indexterm" name="d0e6047"></a><a class="indexterm" name="d0e6052"></a></h1>
+               </div>
+            </div>
+         </div>
+         <div class="toc">
+            <dl class="toc">
+               <dt><span class="section"><a href="chapter.formatted.text.html#formatting.tags">1. Balises de formatage</a></span></dt>
+               <dt><span class="section"><a href="chapter.formatted.text.html#tag.operations">2. Fonctionnement des balises</a></span></dt>
+               <dt><span class="section"><a href="chapter.formatted.text.html#tag.group.nesting">3. Imbrication de groupes de balises</a></span></dt>
+               <dt><span class="section"><a href="chapter.formatted.text.html#tag.group.overlapping">4. Chevauchement des groupes de balises</a></span></dt>
+               <dt><span class="section"><a href="chapter.formatted.text.html#d0e6198">5. Options de validation des balises</a></span></dt>
+               <dt><span class="section"><a href="chapter.formatted.text.html#tag.group.validation">6. Validation des groupes de balises</a></span></dt>
+               <dt><span class="section"><a href="chapter.formatted.text.html#hints.for.tag.management">7. Astuces pour la gestion des balises</a></span></dt>
+            </dl>
+         </div>
+         <p>Les informations de formatage présentes dans le fichier source doivent généralement être recopiées dans le fichier cible.
+            Les informations de formatage en ligne rendues possibles par les formats pris en charge (en particulier DocBook, HTML, XHTML,
+            Open Document Format(ODF) et Office Open XML (MS Office 2007 et versions ultérieures) à l'heure de la rédaction de ce manuel)
+            sont affichées sous forme de balises dans OmegaT. Normalement, lorsque plusieurs textes sont comparés pour établir des correspondances,
+            les balises sont ignorées. Les balises reproduites dans le segment traduit seront présentes dans le document traduit.
+         </p>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="formatting.tags"></a>1.&nbsp;Balises de formatage<a class="indexterm" name="d0e6062"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <p><a class="indexterm" name="d0e6066"></a><span class="bold"><strong>Dénomination des balises :</strong></span></p>
+            <p>Les balises sont composées d'un à trois caractères et d'un numéro. La numérotation unique permet de regrouper ensemble les
+               balises qui sont correspondantes et de différencier les balises qui ont le même raccourci mais sont en fait différentes. Les
+               raccourcis utilisés tentent de rappeler le sens de la balise (par exemple b pour bold (gras), i pour italique, etc.)
+            </p>
+            <p><a class="indexterm" name="d0e6076"></a><span class="bold"><strong>Numérotation des balises :</strong></span></p>
+            <p>Les balises sont numérotées par ordre croissant en fonction de leur groupe de balises. Dans ce contexte, les «&nbsp;groupes de
+               balises&nbsp;» représentent une balise unique (telle que &lt;i0&gt; et &lt;/i0&gt;). À l'intérieur d'un segment, le premier groupe (unique
+               ou double) reçoit le numéro 0, le deuxième le numéro 1, etc. ( Le premier exemple ci-dessous présente 3 groupes de balises
+               (un double, un unique puis un autre double), le second exemple n'en présente qu'un (double).
+            </p>
+            <p><a class="indexterm" name="d0e6086"></a><span class="bold"><strong>Uniques et doubles :</strong></span></p>
+            <p>Les balises sont toujours soit uniques, soit doubles. Les balises uniques indiquent les informations de formatage n'affectant
+               pas le texte avoisinant (un espace supplémentaire ou un retour à la ligne par exemple).
+            </p>
+            <p><code class="literal">&lt;b0&gt;&lt;Ctr+N&gt;&lt;/b0&gt;, &lt;br1&gt;&lt;b2&gt;&lt;Entrée&gt;&lt;/b2&gt;&lt;segment 2132&gt;</code></p>
+            <p>&lt;br1&gt; est une balise unique et n'affecte pas le texte avoisinant. Les balises doubles donnent généralement des informations
+               sur le style qui s'applique au texte contenu entre la balise ouvrante et la balise fermante de la balise double. &lt;b0&gt; et &lt;/b0&gt;
+               ci-dessus sont doubles et affectent le texte log.txt . Veuillez noter que la balise ouvrante doit toujours se trouver avant
+               la balise fermante qui lui correspond.
+            </p>
+            <p>&lt;<code class="literal">Fichier journal (&lt;b0&gt;log.txt&lt;/b0&gt;) : pour le suivi des opérations et des erreurs.</code></p>
+            <p><span class="application">OmegaT</span> crée ses balises avant de procéder à la segmentation des phrases. En fonction des règles de segmentation, les paires de balises
+               peuvent être séparées dans deux segments consécutifs, auquel cas la validation des balises marquera les deux segments par
+               règle de précaution.
+            </p>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="tag.operations"></a>2.&nbsp;Fonctionnement des balises<a class="indexterm" name="d0e6111"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <p>Soyez prudents avec les balises. Si elles sont accidentellement modifiées, le formatage du fichier final peut être endommagé.
+               La règle de base veut que l'on conserve l'ordre de la séquence de balises. Cependant, si certaines règles sont respectées
+               scrupuleusement, il est possible de déroger à cette règle.
+            </p>
+            <p><span class="bold"><strong><a class="indexterm" name="d0e6120"></a>Duplication des balises :</strong></span></p>
+            <p>Pour dupliquer un groupe de balises, il suffit de les copier à l'emplacement de votre choix. Gardez bien à l'esprit que pour
+               une paire de balises, la balise ouvrante doit précéder la balise fermante. Le formatage réprésenté par le groupe que vous
+               avez dupliqué sera appliqué aux deux sections.
+            </p>
+            <p>Exemple :</p>
+            <p><code class="literal">&lt;b0&gt;Ce formatage&lt;/b0&gt; va être dupliqué ici.</code></p>
+            <p>Après la duplication :</p>
+            <p><code class="literal">&lt;b0&gt;Ce formatage&lt;/b0&gt; a été &lt;b0&gt;dupliqué ici&lt;/b0&gt;.&lt;segment 0001&gt;</code></p>
+            <p><span class="bold"><strong><a class="indexterm" name="d0e6140"></a>Suppression des groupes de balises :</strong></span></p>
+            <p>Pour supprimer des groupes de balises, il suffit de les retirer du segment. Gardez bien à l'esprit que pour une paire de balises,
+               la balise ouvrante et la balise fermante doivent être toutes les deux supprimées afin de s'assurer que toute trace du formatage
+               a été correctement effacée. Dans le cas contraire, le fichier risquerait d'être endommagé. En supprimant un groupe de balises,
+               vous supprimez le formatage correspondant du fichier traduit.
+            </p>
+            <p>Exemple :</p>
+            <p><code class="literal">&lt;b0&gt;Ce formatage&lt;/b0&gt; va être supprimé.&lt;segment 0001&gt;</code></p>
+            <p>Après la suppression :</p>
+            <p><code class="literal">Ce formatage a été supprimé.</code></p>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="tag.group.nesting"></a>3.&nbsp;Imbrication de groupes de balises<a class="indexterm" name="d0e6161"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <p>La modification de l'ordre d'un groupe de balises peut entraîner l'imbrication d'un groupe de balises à l'intérieur d'un autre
+               groupe de balises. Cela peut fonctionner à condition que le groupe extérieur englobe complètement le groupe intérieur. Autrement
+               dit, lorsque vous déplacez une paire de balises, assurez-vous que la balise ouvrante et la balise fermante sont bien toutes
+               les deux à l'intérieur ou à l'extérieur d'une autre paire de balises. Dans le cas contraire, le fichier traduit risquerait
+               d'être endommagé et de ne pas pouvoir s'ouvrir.
+            </p>
+            <p>Exemple :</p>
+            <p><code class="literal">&lt;b0&gt;Le formatage&lt;/b0&gt; &lt;b1&gt;un&lt;/b1&gt; va être imbriqué dans le formatage zéro.</code></p>
+            <p>Après imbrication :</p>
+            <p><code class="literal">&lt;b0&gt;Le formatage &lt;b1&gt;un&lt;/b1&gt;&lt;/b0&gt; a été imbriqué à l'intérieur du formatage zéro.</code></p>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="tag.group.overlapping"></a>4.&nbsp;Chevauchement des groupes de balises<a class="indexterm" name="d0e6181"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <p>Les chevauchements résultent d'une mauvaise manipulation d'une paire de balises et entraîneront à coup sûr une altération
+               du formatage. Parfois, le fichier traduit ne pourra même pas s'ouvrir.
+            </p>
+            <p>Exemple :</p>
+            <p><code class="literal">&lt;b0&gt;Le formatage&lt;/b0&gt; &lt;b1&gt;un&lt;/b1&gt; va être chamboulé.</code></p>
+            <p>Après une mauvaise manipulation :</p>
+            <p><code class="literal">&lt;b0&gt;Le formatage &lt;b1&gt;un&lt;/b0&gt; &lt;/b1&gt; est à présent complètement chamboulé.</code></p>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e6198"></a>5.&nbsp;Options de validation des balises
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>Pour personnaliser le travail avec des balises, il est possible d'établir quelques règles dans la fenêtre <span class="guimenuitem">Options &gt; Validation des balises...</span>&nbsp;:
+            </p>
+            <div class="mediaobject"><img src="images/OptionsTagValidation_25.png"></div>
+            <p>Le comportement décrit ici s'applique à l'ensemble des fichiers source et pas seulement à certains types de fichiers comme
+               les textes formatés.
+            </p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p><span class="bold"><strong>Variables Printf - pas de vérification, vérification simple, vérification complète</strong></span></p>
+                     <p>OmegaT peut vérifier que les variables de programmation du texte source (par exemple %s) existent dans la traduction. Vous
+                        pouvez décider de ne rien vérifier du tout, de ne vérifier que les variables printf simples (comme %s, %d, etc) ou de vérifier
+                        les variables print de tous types.
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p><span class="bold"><strong>Vérifier les masques Java MessageFormat de type simple</strong></span></p>
+                     <p>Cocher cette case obligera OmegaT à vérifier que les balises simples du Java MessageFormat (comme {0}) sont traitées correctement.</p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p><span class="bold"><strong>Expression régulière pour les balises personnalisées</strong></span></p>
+                     <p>Entrer une expression régulière obligera OmegaT à traiter les cas détectés comme des balises personnalisées. Cela vérifie
+                        que le nombre de balises et leur ordre ne change pas, comme c'est le cas pour les balises d'OmegaT.
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p><span class="bold"><strong>Expression régulière du fragment qui devrait être supprimé de la traduction&nbsp;:</strong></span></p>
+                     <p>Il est possible d'entrer une expression régulière correspondant au contenu indésirable dans la cible. Toutes les correspondances
+                        dans le segment cible seront affichées en rouge et donc faciles à identifier et à corriger. Lors de la recherche de correspondances,
+                        le masque de suppression est ignoré. Une pénalité fixe de cinq points est ajoutée si la partie supprimée ne correspond à aucun
+                        autre segment afin que la correspondance n'atteigne pas les 100&nbsp;%
+                     </p>
+                  </li>
+               </ul>
+            </div>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="tag.group.validation"></a>6.&nbsp;Validation des groupes de balises<a class="indexterm" name="d0e6242"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <p>L'option de validation des balises détecte les modifications survenues dans la séquence de balises (que ce changement soit
+               délibéré ou accidentel) et affiche les segments concernés. Lancer cette option – <span class="guimenuitem">Ctrl+T<a class="indexterm" name="d0e6251"></a></span> - ouvre une fenêtre qui liste tous les segments du fichier contenant des balises qui pourraient être altérées ou fausses
+               dans les segments traduits. L'option de validation des balises permet de réparer les balises et de recréer les documents cibles
+               facilement. La fenêtre qui s'ouvre quand <span class="guimenuitem">Ctrl+T</span> est appuyé se présente sous la forme d'un tableau à 3 colonnes avec un lien vers le segment, sa partie originale et sa partie
+               cible
+            </p>
+            <div class="figure"><a name="tag.validation"></a><p class="title"><b>Figure&nbsp;12.1.&nbsp;Entrée de validation des balises</b></p>
+               <div class="figure-contents">
+                  <div class="mediaobject"><img src="images/TagValidation.png" alt="Entrée de validation des balises"></div>
+               </div>
+            </div><br class="figure-break"><p>Les balises sont en gras et en bleu pour faciliter la comparaison entre le contenu original et le contenu traduit. Cliquez
+               sur le lien pour activer le segment dans l'Éditeur. Corrigez les erreurs si nécessaire (dans le cas ci-dessus, il manque la
+               paire &lt;i2&gt;&lt;/i2&gt;) et appuyez sur <span class="guimenuitem">Ctrl+T</span> pour retourner dans la fenêtre de validation des balises afin de corriger d'autres erreurs. Les erreurs de balises sont des
+               séquences de balises présentes dans la partie traduite pour lesquelles l'ordre et le nombre de balises du segment d'origine
+               ne sont pas respectés. Certaines manipulations de balises sont nécessaires et sans conséquences, mais d'autres poseront problème
+               lors de la création du document traduit.
+            </p>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="hints.for.tag.management"></a>7.&nbsp;Astuces pour la gestion des balises<a class="indexterm" name="d0e6276"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <p><span class="bold"><strong>Simplifiez le texte d'origine</strong></span></p>
+            <p>Les balises représentent généralement le formatage du texte d'origine. La simplification du formatage d'origine contribue
+               grandement à la réduction du nombre de balises. Si les circonstances le permettent,  unifiez les polices, les tailles des
+               caractères, les couleurs, etc. afin de simplifier la traduction et de réduire les possibilités d'erreurs de balises. Lisez
+               la section sur le fonctionnement des balises pour savoir ce qu'il est possible de faire avec des balises. Souvenez-vous que
+               si les balises vous posent problème dans OmegaT et que le formatage n'est pas très important pour la traduction en cours,
+               supprimer les balises peut être la solution la plus facile.
+            </p>
+            <p><span class="bold"><strong>Faites particulièrement attention aux paires de balises</strong></span></p>
+            <p>Si vous avez besoin de voir les balises dans OmegaT mais pas de conserver la plupart du formatage dans le document traduit,
+               il est possible de ne pas inclure les balises dans la traduction. Dans ce cas, faites particulièrement attention aux paires
+               de balises dans la mesure où la suppression d'une seule partie de la paire endommagerait le formatage de votre document. Les
+               balises étant comprises dans le texte, il est possible d'utiliser des règles de segmentation qui créeront des segments comportant
+               moins de balises. Ceci est une fonctionnalité avancée et il faut une certaine expérience pour pouvoir l'utiliser correctement.
+            </p>
+            <p>OmegaT n'arrive pas encore à détecter automatiquement les erreurs de formatage et ne vous préviendra donc pas en cas d'erreur
+               ou de modification du formatage (réalisée en vue d'une meilleure adaptation à la langue cible). Cependant, il peut arriver
+               que votre document traduit ait un aspect étrange et que - dans le pire des cas - il refuse de s'ouvrir.
+            </p>
+         </div>
+      </div>
+      <div class="navfooter">
+         <hr>
+         <table width="100%" summary="Navigation footer">
+            <tr>
+               <td width="40%" align="left"><a accesskey="p" href="chapter.plain.text.html">Précédent</a>&nbsp;
+               </td>
+               <td width="20%" align="center">&nbsp;</td>
+               <td width="40%" align="right">&nbsp;<a accesskey="n" href="chapter.translation.memories.html">Suivant</a></td>
+            </tr>
+            <tr>
+               <td width="40%" align="left" valign="top">Chapitre&nbsp;11.&nbsp;Travailler avec du texte brut&nbsp;</td>
+               <td width="20%" align="center"><a accesskey="h" href="index.html">Sommaire</a></td>
+               <td width="40%" align="right" valign="top">&nbsp;Chapitre&nbsp;13.&nbsp;Mémoires de traduction</td>
+            </tr>
+         </table>
+      </div>
+   </body>
+</html>

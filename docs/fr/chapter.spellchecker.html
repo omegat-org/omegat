@@ -1,0 +1,177 @@
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <title>Chapitre&nbsp;20.&nbsp;Vérificateur orthographique</title>
+      <link rel="stylesheet" type="text/css" href="OmegaT.css">
+      <meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
+      <link rel="home" href="index.html" title="OmegaT - Guide de l'utilisateur">
+      <link rel="up" href="index.html" title="OmegaT - Guide de l'utilisateur">
+      <link rel="prev" href="chapter.machine.translate.html" title="Chapitre&nbsp;19.&nbsp;Traduction automatique">
+      <link rel="next" href="chapter.misc.html" title="Chapitre&nbsp;21.&nbsp;Sujets divers">
+   </head>
+   <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+      <div class="navheader">
+         <table width="100%" summary="Navigation header">
+            <tr>
+               <th colspan="3" align="center">Chapitre&nbsp;20.&nbsp;Vérificateur orthographique</th>
+            </tr>
+            <tr>
+               <td width="20%" align="left"><a accesskey="p" href="chapter.machine.translate.html">Précédent</a>&nbsp;
+               </td>
+               <th width="60%" align="center">&nbsp;</th>
+               <td width="20%" align="right">&nbsp;<a accesskey="n" href="chapter.misc.html">Suivant</a></td>
+            </tr>
+         </table>
+         <hr>
+      </div>
+      <div class="chapter">
+         <div class="titlepage">
+            <div>
+               <div>
+                  <h1 class="title"><a name="chapter.spellchecker"></a>Chapitre&nbsp;20.&nbsp;Vérificateur orthographique<a class="indexterm" name="d0e8397"></a></h1>
+               </div>
+            </div>
+         </div>
+         <div class="toc">
+            <dl class="toc">
+               <dt><span class="section"><a href="chapter.spellchecker.html#d0e8402">1. Installation des dictionnaires orthographiques</a></span></dt>
+               <dt><span class="section"><a href="chapter.spellchecker.html#d0e8462">2. Utilisation des dictionnaires orthographiques</a></span></dt>
+               <dt><span class="section"><a href="chapter.spellchecker.html#hints">3. Conseils</a></span></dt>
+            </dl>
+         </div>
+         <p>OmegaT possède un vérificateur orthographique intégré basé sur le vérificateur d'orthographe utilisée dans Apache OpenOffice,
+            LibreOffice, Firefox et Thunderbird. Il est donc en mesure d'utiliser la vaste gamme de dictionnaires orthographiques gratuits
+            utilisés par ces applications.
+         </p>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e8402"></a>1.&nbsp;Installation des dictionnaires orthographiques
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>Avant de pouvoir utiliser la fonction vérificateur orthographique, il est nécessaire d'installer un ou plusieurs dictionnaires
+               (c.-à.-d. concernant votre langue cible). Pour installer les dictionnaires orthographiques, appliquez la procédure suivante
+               :
+            </p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>Dans votre gestionnaire de fichiers, créez un nouveau dossier dans un endroit convenant au stockage des dictionnaires orthographiques
+                        (D:\Translations\spellcheckers pour l'exemple ci-dessous).
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>Dans OmegaT, sélectionnez <span class="guisubmenu"><a class="indexterm" name="d0e8416"></a></span><span class="guimenuitem">Options &gt; Orthographe...</span>, puis cliquez sur <span class="guibutton">Parcourir... </span> à côté du champ « dossier des fichiers dictionnaire ». Trouvez et sélectionnez le dossier de dictionnaires que vous avez
+                        préalablement créé.
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>Placez les fichiers dictionnaire de votre choix à l'intérieur de ce dossier. Il existe principalement deux façons de réaliser
+                        ceci. Vous pouvez soit copier les fichiers manuellement (depuis n'importe quel endroit de votre système) en utilisant votre
+                        gestionnaire de fichier ; soit utiliser la fonction d'OmegaT <span class="bold"><strong>«&nbsp;Installer un nouveau dictionnaire...&nbsp;»</strong></span> qui vous fournit une liste des dictionnaires disponibles (il vous suffit alors de sélectionner celui qui vous convient).
+                        Veuillez noter que la fonction «&nbsp;Installer&nbsp;» requiert une connexion Internet. Les langues sélectionnées seront ainsi installées
+                        et pourront donc apparaître dans la fenêtre de configuration du vérificateur orthographique (cela peut prendre un certain
+                        temps).
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <p>Copier manuellement les fichiers est intéressant lorsque vous possédez déjà les fichiers dictionnaire adéquats sur votre ordinateur,
+               par exemple, s'ils font partie d'une installation OpenOffice, LibreOffice, Firefox ou Thunderbird. Il est plus simple, cependant,
+               de rechercher des dictionnaires en ligne, en utilisant le champ <span class="bold"><strong>URL des dictionnaires en ligne </strong></span> :
+            </p>
+            <div class="figure"><a name="spellchecker.setup"></a><p class="title"><b>Figure&nbsp;20.1.&nbsp;<a class="indexterm" name="d0e8441"></a>Configuration du vérificateur orthographique</b></p>
+               <div class="figure-contents">
+                  <div class="mediaobject"><img src="images/SpellcheckerSetup_25.png" alt="Configuration du vérificateur orthographique"></div>
+               </div>
+            </div><br class="figure-break"><p>Cliquer sur le bouton <span class="guibutton">Installer un nouveau dictionnaire...</span> permet d'ouvrir la fenêtre d'installation des dictionnaires dans laquelle vous pourrez sélectionner les dictionnaires que
+               vous souhaitez installer.
+            </p>
+            <p>Le nom des fichiers doit correspondre au code de langue de votre langue cible tel qu'il est défini dans la boite de dialogue
+               des propriétés du projet (<span class="guimenu">Projet &gt; Propriétés...</span>). Par exemple, si vous avez sélectionné ES-MX (Espagnol Mexicain) comme langue cible, les fichiers dictionnaire doivent être
+               appelés es_MX.dic et es_MX.aff. Si vous ne disposez que d'un dictionnaire espagnol standard (ayant par exemple pour noms de
+               fichier es_es.dic et es_es.aff), vous pouvez copier ces fichiers et les renommer es_MX.dic et es_MX.aff, et le dictionnaire
+               orthographique fonctionnera. Veuillez noter que celui-ci fera des corrections correspondant évidemment bien plus à l'espagnol
+               standard (Castillan) qu'à l'espagnol mexicain.
+            </p>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e8462"></a>2.&nbsp;Utilisation des dictionnaires orthographiques
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>Il n'est pas nécessaire de préciser à OmegaT quel dictionnaire orthographique utiliser ; OmegaT utilisera automatiquement
+               le bon dictionnaire en se basant sur les codes de langue de votre projet. Assurez-vous toutefois que les codes soient exactement
+               les mêmes : un dictionnaire FR-FR ne fonctionnera pas si vous avez utilisé le code FR pour définir la langue cible. Si nécessaire,
+               modifiez les noms de fichier des dictionnaires ou modifiez les paramètres qui concernent la langue du projet.
+            </p>
+            <p>Pour mettre en fonction le vérificateur orthographique, sélectionnez <span class="guimenuitem">Options &gt; Orthographe...</span> et cochez la case <span class="guilabel">Vérifier automatiquement l'orthographe</span> (voir ci-dessus).
+            </p>
+            <div class="figure"><a name="spellchecker.in.action"></a><p class="title"><b>Figure&nbsp;20.2.&nbsp;Utilisation du vérificateur orthographique</b></p>
+               <div class="figure-contents">
+                  <div class="mediaobject"><img src="images/SpellcheckingText.png" alt="Utilisation du vérificateur orthographique"></div>
+               </div>
+            </div><br class="figure-break"><p>Un clic-droit sur un mot souligné (Artund dans l'image ci-dessus) ouvre un menu déroulant affichant une liste de suggestions
+               pour la correction (Art und). Il est également possible de demander au correcteur orthographique d'ignorer toutes les occurrences
+               du mot mal orthographié ou de l'ajouter au dictionnaire.
+            </p>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="hints"></a>3.&nbsp;Conseils<a class="indexterm" name="d0e8488"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <p>Si le vérificateur orthographique ne marche pas, assurez-vous d'abord que la case <span class="guilabel">«&nbsp;Vérifier automatiquement l'orthographe&nbsp;»</span> est cochée (<span class="guisubmenu">Options &gt; Orthographe...)</span>.
+            </p>
+            <p>Vérifiez également que le code de la langue cible de votre projet est conforme aux lexiques disponibles dans la fenêtre de
+               configuration. Le vérificateur orthographique utilise le code de la langue cible pour déterminer quelle langue va être utilisée
+               : si la langue cible est du portugais brésilien (PT_BR), le sous-dossier contenant les lexiques doit contenir les deux fichiers
+               lexicaux appelés <span class="emphasis"><em>pt_br.aff</em></span> et <span class="emphasis"><em>pt_br.dic</em></span>.
+            </p>
+            <p>Si après avoir déjà traduit une grande quantité de texte, vous vous apercevez que le code de langue de la langue cible de
+               votre projet ne correspond pas à celui du vérificateur orthographique (vous avez pt_BR en langue cible, mais il n'existe aucun
+               lexique pt_BR, par exemple), il suffit de copier les deux fichiers correspondant et de les renommer (ex&nbsp;: passez de <span class="emphasis"><em>pt_PT.aff</em></span> et <span class="emphasis"><em>pt_PT.dic</em></span> à <span class="emphasis"><em>pt._BR.aff</em></span> et <span class="emphasis"><em>pt_BR.dic</em></span>). Il est évidemment plus simple de s'arrêter un moment et de télécharger les versions correctes du vérificateur orthographique.
+            </p>
+            <p>Veuillez noter que <code class="filename">Supprimer</code> supprime physiquement les lexiques sélectionnés. Si ces lexiques sont utilisés par d'autres applications de votre système,
+               ils disparaîtront également de ces applications. Si, pour quelle que raison que ce soit, vous deviez le faire à un moment
+               ou un autre, il pourrait être utile de copier les fichiers concernés dans un dossier différent, spécialement réservé à OmegaT.
+            </p>
+         </div>
+      </div>
+      <div class="navfooter">
+         <hr>
+         <table width="100%" summary="Navigation footer">
+            <tr>
+               <td width="40%" align="left"><a accesskey="p" href="chapter.machine.translate.html">Précédent</a>&nbsp;
+               </td>
+               <td width="20%" align="center">&nbsp;</td>
+               <td width="40%" align="right">&nbsp;<a accesskey="n" href="chapter.misc.html">Suivant</a></td>
+            </tr>
+            <tr>
+               <td width="40%" align="left" valign="top">Chapitre&nbsp;19.&nbsp;Traduction automatique&nbsp;</td>
+               <td width="20%" align="center"><a accesskey="h" href="index.html">Sommaire</a></td>
+               <td width="40%" align="right" valign="top">&nbsp;Chapitre&nbsp;21.&nbsp;Sujets divers</td>
+            </tr>
+         </table>
+      </div>
+   </body>
+</html>

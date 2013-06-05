@@ -1,0 +1,238 @@
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <title>Chapitre&nbsp;14.&nbsp;Segmentation de la source</title>
+      <link rel="stylesheet" type="text/css" href="OmegaT.css">
+      <meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
+      <link rel="home" href="index.html" title="OmegaT - Guide de l'utilisateur">
+      <link rel="up" href="index.html" title="OmegaT - Guide de l'utilisateur">
+      <link rel="prev" href="chapter.translation.memories.html" title="Chapitre&nbsp;13.&nbsp;Mémoires de traduction">
+      <link rel="next" href="chapter.searches.html" title="Chapitre&nbsp;15.&nbsp;Recherches">
+   </head>
+   <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+      <div class="navheader">
+         <table width="100%" summary="Navigation header">
+            <tr>
+               <th colspan="3" align="center">Chapitre&nbsp;14.&nbsp;Segmentation de la source</th>
+            </tr>
+            <tr>
+               <td width="20%" align="left"><a accesskey="p" href="chapter.translation.memories.html">Précédent</a>&nbsp;
+               </td>
+               <th width="60%" align="center">&nbsp;</th>
+               <td width="20%" align="right">&nbsp;<a accesskey="n" href="chapter.searches.html">Suivant</a></td>
+            </tr>
+         </table>
+         <hr>
+      </div>
+      <div class="chapter">
+         <div class="titlepage">
+            <div>
+               <div>
+                  <h1 class="title"><a name="chapter.segmentation"></a>Chapitre&nbsp;14.&nbsp;Segmentation de la source
+                  </h1>
+               </div>
+            </div>
+         </div>
+         <div class="toc">
+            <dl class="toc">
+               <dt><span class="section"><a href="chapter.segmentation.html#segmentation.rules">1. Règles de segmentation</a></span></dt>
+               <dt><span class="section"><a href="chapter.segmentation.html#rules.priority">2. Priorité de la règle</a></span></dt>
+               <dt><span class="section"><a href="chapter.segmentation.html#creating.new.rule">3. Créer une nouvelle règle</a></span></dt>
+               <dt><span class="section"><a href="chapter.segmentation.html#few.simple.examples">4. Quelques exemples simples</a></span></dt>
+            </dl>
+         </div>
+         <p>Les outils à mémoire de traduction travaillent avec des unités textuelles appelées segments. <span class="application">OmegaT</span> peut segmenter un texte de deux façons différentes : par paragraphe ou par phrase (on appelle également cela une « segmentation
+            basée sur des règles »). Pour choisir le type de segmentation, allez dans <span class="guimenu"><a class="indexterm" name="d0e6868"></a>Projet</span> → <span class="guimenuitem">Propriétés...</span> et cochez ou décochez la case «&nbsp;Activer la segmentation par phrase&nbsp;». La segmentation par paragraphe est avantageuse dans
+            certain cas, comme dans le cas de traduction de textes créatifs ou stylistiques pour lesquels le traducteur peut avoir besoin
+            de modifier l'ordre de phrases entières ; la segmentation par phrase est néanmoins préférable pour la majorité des projets
+            de traduction, dans la mesure où elle permet de mieux faire la correspondance avec les traductions antérieures. Si la segmentation
+            par phrase a été choisie, vous pouvez en configurer les règles dans <span class="guimenu"><a class="indexterm" name="d0e6879"></a>Options</span> → <span class="guimenuitem">Segmentation...</span>(dans la barre des menus).
+         </p>
+         <p>Des règles de segmentation adaptées étant déjà disponibles pour de nombreuses langues, il est peu probable que vous ayez à
+            créer vos propres règles de segmentation. Néanmoins, cette fonctionnalité peut vous être très utile dans certains cas, dans
+            la mesure où la modification des règles de segmentation du texte à traduire peut vous permettre d'améliorer votre productivité.
+         </p>
+         <p><span class="bold"><strong>Avertissement :</strong></span> le texte étant segmenté différemment après la modification des options de filtrage, il vous faudra peut-être recommencer
+            la traduction à partir du début. En même temps, les segments déjà validés présents dans la mémoire de traduction du projet
+            deviendront des segments orphelins. Si les modifications des options de segmentation s'effectuent alors que le projet est
+            ouvert, il sera nécessaire de recharger le projet afin que celles-ci soient prises en compte.
+         </p>
+         <p><span class="application">OmegaT</span> passe par les étapes suivantes :
+         </p>
+         <div class="variablelist">
+            <dl class="variablelist">
+               <dt><span class="term"><a class="indexterm" name="d0e6901"></a>Segmentation au niveau de la structure</span></dt>
+               <dd>
+                  <p><span class="application">OmegaT</span> effectue d'abord une analyse du texte pour procéder à une segmentation au niveau de la structure. Au cours de ce processus,
+                     seule la structure du fichier source est prise en compte pour la production des segments.
+                  </p>
+                  <p>Par exemple, les fichiers texte peuvent être segmentés au niveau des sauts de lignes, des lignes vides ou ne présenter aucune
+                     forme de segmentation. Les fichiers contenant des formatages (documents ODF, HTML, etc.) sont segmentés en fonction des balises
+                     délimitant des blocs (paragraphes). Les attributs traduisibles des balises présents dans les fichiers XHTML ou HTML peuvent
+                     être extraits en tant que segments séparés.
+                  </p>
+               </dd>
+               <dt><span class="term"><a class="indexterm" name="d0e6916"></a>Segmentation au niveau des phrases</span></dt>
+               <dd>
+                  <p>Après avoir segmenté le fichier source en unités structurelles, <span class="application">OmegaT</span> continue sa segmentation en segmentant les blocs en phrases.
+                  </p>
+               </dd>
+            </dl>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="segmentation.rules"></a>1.&nbsp;Règles de segmentation<a class="indexterm" name="d0e6931"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <p>Le processus de segmentation peut être représenté comme ceci : le curseur se déplace le long du texte, un caractère à la fois.
+               A chaque position du curseur, des règles (consistant en masques <span class="bold"><strong>Avant </strong></span>et <span class="bold"><strong>Après </strong></span>) sont appliquées dans leur ordre donné pour voir si les masques <span class="bold"><strong> Avant</strong></span> sont valides pour le texte à gauche du curseur et si les masques <span class="bold"><strong>Après</strong></span> correspondant le sont pour le texte situé à sa droite. Si la règle correspond, soit le curseur continue sans créer de rupture
+               de segment (règle d'exception), soit une nouvelle interruption de segment est créée là où se trouve le curseur (règle de segmentation).
+            </p>
+            <p>Les deux types de règles se comportent comme suit :</p>
+            <div class="variablelist">
+               <dl class="variablelist">
+                  <dt><span class="term"><a class="indexterm" name="d0e6955"></a>Règle de segmentation</span></dt>
+                  <dd>
+                     <p>Sépare le texte source en segments. Par exemple, « <span class="emphasis"><em>Cela avait-il un sens ? Je n'étais pas sûr</em></span>. »  doit être divisé en deux segments. Pour faire cela, il est nécessaire d'avoir une règle de segmentation s'appliquant
+                        à « ? », lorsqu'il est suivi d'une espace et d'un mot dont la première lettre est écrite en majuscule. Pour définir une règle
+                        comme étant une règle de segmentation, cochez la case Segmentation/Exception.
+                     </p>
+                  </dd>
+               </dl>
+            </div>
+            <div class="variablelist">
+               <dl class="variablelist">
+                  <dt><span class="term"><a class="indexterm" name="d0e6972"></a>Règle d'exception</span></dt>
+                  <dd>
+                     <p>spécifie quelles parties du texte ne doivent PAS être séparées. Malgré le point, <span class="emphasis"><em>« Mrs. Dalloway »</em></span> ne doit pas être séparé en deux segments. Il est donc nécessaire d'établir une règle d'exception pour le terme Mrs (ainsi
+                        que pour M, Dr, prof etc) suivi d'un point. Pour définir une règle comme étant une règle d'exception, décochez la case Segmentation/Exception.
+                     </p>
+                  </dd>
+               </dl>
+            </div>
+            <p>Les règles de segmentation prédéfinies devraient suffire pour la plupart des langues européennes et le japonais. Il est possible
+               de définir de nouvelles règles d'exception pour votre langue source afin d'avoir des segments plus significatifs et plus cohérents.
+            </p>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="rules.priority"></a>2.&nbsp;Priorité de la règle<a class="indexterm" name="d0e6991"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <p>Tous les groupes de règles de segmentation s'appliquant à un masque de langue sont actifs et sont appliqués dans l'ordre de
+               priorité donné, de sorte que les règles spécifiques à la langue pratiquée passent avant les règles par défaut. Par exemple,
+               les règles relatives à l'anglais américain (EN-US) passent avant les règles relatives à l'anglais (EN.*), et avant les règles
+               par défaut (.*). Ainsi, lors de traduction partant de l'anglais américain, les règles relatives à l'anglais américain (s'il
+               y en a) seront appliquées les premières, suivies par les règles relatives à l'anglais suivies, enfin, par les règles par défaut.
+            </p>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="creating.new.rule"></a>3.&nbsp;Créer une nouvelle règle<a class="indexterm" name="d0e7001"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <p>Il est préférable d'éviter de trop modifier les règles de segmentation, surtout si le premier jet de la traduction a déjà
+               été effectué. Néanmoins, des changements mineurs (comme l'ajout d'abréviations reconnues) peuvent s'avérer intéressants.
+            </p>
+            <p>Pour modifier ou élargir un ensemble de règles existant, cliquez simplement sur le nom de l'ensemble dans le tableau du haut.
+               Les règles de cet ensemble apparaissent alors dans la partie inférieure de la fenêtre.
+            </p>
+            <p>Pour créer un ensemble vide de règle destiné à un nouveau masque de langue, cliquez sur <span class="bold"><strong>Ajouter </strong></span>dans la partie supérieure de la boite de dialogue. Une ligne vide apparaît dans le bas du tableau supérieur (vous devrez peut-être
+               faire défiler le tableau vers le bas pour la voir - la ligne s'appelle « Nouvelle paire langue-pays _ LN-CO »). Changez le
+               nom de l'ensemble de règles et du masque de langue par celui de la langue concernée et de son code (voir <a class="xref" href="appendix.languages.html" title="Annexe&nbsp;A.&nbsp;Langues - Liste de codes ISO 639">Annexe&nbsp;A, <i>Langues - Liste de codes ISO 639
+                       
+                       
+                       </i></a> pour obtenir une liste des codes de langue). La syntaxe du masque de langue est conforme à la syntaxe des expressions régulières.
+               Si votre ensemble de règles prend en charge une paire langue-pays, il est conseillé de le faire remonter en utilisant le bouton
+               <span class="bold"><strong>Glisser vers le haut</strong></span>.
+            </p>
+            <p>Ajouter les masques <span class="bold"><strong>Avant</strong></span> et<span class="bold"><strong> Après</strong></span>. Pour vérifier leur syntaxe et leur applicabilité, il est conseillé d'utiliser des outils qui vous permettent de voir leurs
+               effets directement. Voir le chapitre sur les <a class="link" href="chapter.regexp.html" title="Chapitre&nbsp;16.&nbsp;Expressions régulières">Expressions régulières</a>. Les règles déjà existantes sont toujours un bon point de départ.
+            </p>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="few.simple.examples"></a>4.&nbsp;<a class="indexterm" name="d0e7035"></a>Quelques exemples simples
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <div class="informaltable">
+               <table border="1">
+                  <colgroup>
+                     <col align="left">
+                     <col align="center">
+                     <col align="center">
+                     <col align="left">
+                  </colgroup>
+                  <thead>
+                     <tr>
+                        <th align="left">Intention</th>
+                        <th align="center">Avant</th>
+                        <th align="center">Après</th>
+                        <th align="left">Remarque</th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                     <tr>
+                        <td align="left">Définissez le segment comme commençant après un point (« . ») suivit d'un espace, d'une tabulation...</td>
+                        <td align="center">\.</td>
+                        <td align="center">\s</td>
+                        <td align="left">« \. » représente le point en tant que caractère. « \s » représente tous les caractères espaces blanc (espace, tabulation,
+                           nouvelle page etc.)
+                        </td>
+                     </tr>
+                     <tr>
+                        <td align="left">Ne pas segmenter après M. (Monsieur)</td>
+                        <td align="center">M\.</td>
+                        <td align="center">\s</td>
+                        <td align="left">Ceci étant une règle d'exception, la case Segmentation/Exception doit être décochée.</td>
+                     </tr>
+                     <tr>
+                        <td align="left">Démarrer un segment après « 。 » (point japonais)</td>
+                        <td align="center">。</td>
+                        <td align="center">&nbsp;</td>
+                        <td align="left">Remarquez qu'<code class="literal">après</code> est vide
+                        </td>
+                     </tr>
+                     <tr>
+                        <td align="left">Ne pas segmenter après M. Mr. Mrs. et Ms.</td>
+                        <td align="center">Mr??s??\.</td>
+                        <td align="center">\s</td>
+                        <td align="left">Règle d'exception - voir l'utilisation de ? dans les expressions régulières</td>
+                     </tr>
+                  </tbody>
+               </table>
+            </div>
+         </div>
+      </div>
+      <div class="navfooter">
+         <hr>
+         <table width="100%" summary="Navigation footer">
+            <tr>
+               <td width="40%" align="left"><a accesskey="p" href="chapter.translation.memories.html">Précédent</a>&nbsp;
+               </td>
+               <td width="20%" align="center">&nbsp;</td>
+               <td width="40%" align="right">&nbsp;<a accesskey="n" href="chapter.searches.html">Suivant</a></td>
+            </tr>
+            <tr>
+               <td width="40%" align="left" valign="top">Chapitre&nbsp;13.&nbsp;Mémoires de traduction&nbsp;</td>
+               <td width="20%" align="center"><a accesskey="h" href="index.html">Sommaire</a></td>
+               <td width="40%" align="right" valign="top">&nbsp;Chapitre&nbsp;15.&nbsp;Recherches</td>
+            </tr>
+         </table>
+      </div>
+   </body>
+</html>

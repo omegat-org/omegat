@@ -1,105 +1,390 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <html>
-<head>
-	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
-	<title>Manuel utilisateur pour OmegaT</title>
-    <link rel="stylesheet" type="text/css" href="./omegat.css">
-</head>
-
-<body lang="en-us" dir="ltr">
-<table border="0" cellpadding="2" width="100%">
-<tr><td><img src="OmegaT.png"></td>
-<th>Table des matières</th>
-<td width="35%">&nbsp;</td>
-<td width="35%">suivant: <a 
-href="Intro.html">Introduction</a></td></tr></table>
-
-<h1>Manuel utilisateur pour OmegaT</h1>
-
-<p>OmegaT version 1.4.4
-<br>Ce manuel a été créé par Marc Prior. Jean-Christophe Helary Dmitri Gabinski ont participé aux modifications du texte.
-<!-- Insert Authors of Translation Here -->
-<br>La version originale est la version anglaise.
-<br>Dernières modifications: 20 décembre 2004, coordination par Dmitri Gabinski
-</p>
-
-<p>
-OmegaT est l'œuvre de Keith Godfrey.
-<br>Benjamin Siband, Maxym Mykhalchuk, Sacha Chua et Henry Pijffers ont participé aux modifications du code.
-</p>
-
-<h2>Nouveautés dans la version 1.4.4</h2>
-<ul>
-<li>Système simplifié pour la localisation (localisations en espagnol, biélorusse, français et russe).</li>
-<li>Distribution séparée du code source.</li>
-<li>Possibilité d'aller directement au segment non traduit le plus proche (voir <a href="./Translating.html">Le processus de traduction</a>).</li>
-<li>Nouveau moteur de correspondances:</li>
-	<ul>
-	<li>amélioration des correspondances pour le japonais (et autres langues n'utilisant pas les espaces pour séparer les mots)</li>
-	<li>augmentation du nombre de correspondances</li>
-	</ul>
-<li>Restructuration des filtres HTML et XML pour augmenter les performances et la stabilité.</li>
-<li>Restructuration des filtres fichiers.</li>
-<li>Glossaires encodés en UTF-8 acceptés (voir <a href="./TMFormats.html">Mémoire de traduction et format du glossaire</a>).</li>
-<li>Amélioration du traitement des fichiers HTML: reconnaissance des encodages et transfert des méta-données vers les fichiers cibles.</li>
-<li>Correction de l'affichage multiple de la fenêtre d'aide.</li>
-<li>Non affichage des segments vides.</li>
-<li>Correction de problèmes dans le choix de la fonte</li>
-</ul>
-
-<p><h2>Table des matières</h2>
-
-<h3>Avant de commencer</h3>
-<ul><li><a href="./Intro.html">Introduction</a></li>
-<li><a href="./SysReqs.html">Pré-requis système</a></li>
-<li><a href="./Install.html">Installation et configuration</a></li>
-<li><a href="./Important.html">Important</a></li></ul>
-
-<h3>Premiers pas dans OmegaT</h3>
-<ul><li><a href="./GettingStarted.html">Pour commencer - un projet exemple</a></li>
-<li><a href="./UI.html">L'interface utilisateur</a></li>
-<li><a href="./Segmentation.html">Segmentation</a></li>
-<li><a href="./Translating.html">Le processus de traduction </a></li></ul>
-
-<h3>Pour aller plus loin</h3>
-<ul><li><a href="./Edit.html">Fonctions d'édition</a></li>
-<li><a href="./Navigating.html">Se déplacer dans le texte</a></li>
-<li><a href="./Matches.html">Correspondances totales et approximatives</a></li>
-<li><a href="./Searches.html">Recherches exactes, recherches par mots clefs </a></li>
-<li><a href="./Saving.html">Sauvegarde, révision, compilation </a></li></ul>
-
-<h3>Glossaires, mémoires de traduction et structure du projet</h3>
-<ul><li><a href="./Gloss.html">Glossaires</a></li>
-<li><a href="./WPFormats.html">Formats des fichiers à traduire</a></li>
-<li><a href="./TMFormats.html">Mémoire de traduction et format du glossaire</a></li>
-<li><a href="./FilesDirs.html">Fichiers du projet et répertoires</a></li></ul>
-
-<h3>Usage avancé</h3>
-<ul><li><a href="./Shortcuts.html">Raccourcis clavier</a></li>
-<li><a href="./Tags.html">Modification de textes marqués</a></li>
-<li><a href="./Fonts.html">Utilisations de fontes et de systèmes d'écriture différents</a></li>
-<li><a href="./SO.html">Travailler avec OpenOffice.org et StarOffice</a></li>
-<li><a href="./Tips.html">Conseils et astuces</a></li>
-</ul></p>
-
-<p>Copyright © 2003-2004 Marc Prior</p>
-
-<p>Ce document est distribué dans l'espoir qu'il soit utile, mais sans aucune guarantie, sans même la guarantie qu'il soit utile à un quelconque usage.</p>
-
-<p>Il est donné autorisation de copier, distribuer et/ou modifier ce document selon les termes de la licence GNU Free Documentation, Version 1.2 ou versions suivantes, publiée par la Free Software Foundation, sans les sections "Invariants", sans Front-Cover Texts et sans Back-Cover Texts.</p>
-
-<p>Une copie de la licence GNU Free Documentation peut être obtenue à partir du site de OmegaT, ou à la Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA, ou encore à partir de <a 
-href="./http://www.gnu.org">http://www.gnu.org</a>.</p>
-
-<p>Toutes les marques indiquées dans ce document sont la propriété de leurs propriétaires respectifs.</p>
-
-<p>&nbsp;</p>
-
-<table border="0" width="100%">
-<tr><td><img src="./OmegaT.png"></td>
-<th>Table des matières</th>
-<td width="35%">&nbsp;</td>
-<td width="35%">suivant: <a 
-href="./Intro.html">Introduction</a></td></tr></table>
-</body>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <title>OmegaT - Guide de l'utilisateur</title>
+      <link rel="stylesheet" type="text/css" href="OmegaT.css">
+      <meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
+      <meta name="description" content="Ce manuel est le guide de l'utilisateur officiel d'OmegaT, l'outil libre de Traduction Assistée par Ordinateur. Il contient également les instructions relatives à l'installation.">
+      <link rel="home" href="index.html" title="OmegaT - Guide de l'utilisateur">
+      <link rel="next" href="chapter.about.OmegaT.html" title="Chapitre&nbsp;1.&nbsp;À propos d'OmegaT - introduction">
+   </head>
+   <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+      <div class="navheader">
+         <table width="100%" summary="Navigation header">
+            <tr>
+               <th colspan="3" align="center">OmegaT - Guide de l'utilisateur</th>
+            </tr>
+            <tr>
+               <td width="20%" align="left">&nbsp;</td>
+               <th width="60%" align="center">&nbsp;</th>
+               <td width="20%" align="right">&nbsp;<a accesskey="n" href="chapter.about.OmegaT.html">Suivant</a></td>
+            </tr>
+         </table>
+         <hr>
+      </div>
+      <div lang="fr" class="book">
+         <div class="titlepage">
+            <div>
+               <div>
+                  <h1 class="title"><a name="d0e1"></a>OmegaT - Guide de l'utilisateur
+                  </h1>
+               </div>
+               <div>
+                  <div class="author">
+                     <h3 class="author"><span class="firstname">Vito Smolej</span></h3>
+                  </div>
+               </div>
+               <div>
+                  <p class="pubdate"></p>
+               </div>
+               <div>
+                  <div class="abstract">
+                     <p class="title"><b>Résumé</b></p>
+                     <p>Ce manuel est le guide de l'utilisateur officiel d'OmegaT, l'outil libre de Traduction Assistée par Ordinateur. Il contient
+                        également les instructions relatives à l'installation.
+                     </p>
+                  </div>
+               </div>
+            </div>
+            <hr>
+         </div>
+         <div class="toc">
+            <p><b>Table des matières</b></p>
+            <dl class="toc">
+               <dt><span class="chapter"><a href="chapter.about.OmegaT.html">1. À propos d'<span class="application">OmegaT</span> - introduction</a></span></dt>
+               <dd>
+                  <dl>
+                     <dt><span class="section"><a href="chapter.about.OmegaT.html#OmegaT-Highlists">1. Les atouts d'OmegaT</a></span></dt>
+                     <dt><span class="section"><a href="chapter.about.OmegaT.html#OmegaT.chapters.summary">2. Résumé des chapitres</a></span></dt>
+                  </dl>
+               </dd>
+               <dt><span class="chapter"><a href="chapter.instant.start.guide.html">2. Apprendre à utiliser OmegaT en 5 minutes !</a></span></dt>
+               <dd>
+                  <dl>
+                     <dt><span class="section"><a href="chapter.instant.start.guide.html#create.and.open.new.project">1. Préparation d'un nouveau projet</a></span></dt>
+                     <dt><span class="section"><a href="chapter.instant.start.guide.html#translate.the.segments.one.by.one">2. Traduction du fichier</a></span></dt>
+                     <dt><span class="section"><a href="chapter.instant.start.guide.html#d0e263">3. Validation des balises</a></span></dt>
+                     <dt><span class="section"><a href="chapter.instant.start.guide.html#d0e290">4. Création du fichier traduit</a></span></dt>
+                     <dt><span class="section"><a href="chapter.instant.start.guide.html#d0e301">5. Autres points à retenir</a></span></dt>
+                  </dl>
+               </dd>
+               <dt><span class="chapter"><a href="chapter.installing.and.running.html">3. Installation et exécution d'<span class="application">OmegaT</span></a></span></dt>
+               <dd>
+                  <dl>
+                     <dt><span class="section"><a href="chapter.installing.and.running.html#d0e358">1. Utilisateurs Windows</a></span></dt>
+                     <dt><span class="section"><a href="chapter.installing.and.running.html#Linux.Intel.users">2. Utilisateurs Linux (Intel)</a></span></dt>
+                     <dt><span class="section"><a href="chapter.installing.and.running.html#MAC.OSX.users">3. Utilisateurs Mac OS X</a></span></dt>
+                     <dt><span class="section"><a href="chapter.installing.and.running.html#other.systems">4. Autres systèmes</a></span></dt>
+                     <dt><span class="section"><a href="chapter.installing.and.running.html#using.Java.Web.Start">5. Utilisation de Java Web Start</a></span></dt>
+                     <dt><span class="section"><a href="chapter.installing.and.running.html#d0e1003">6. Démarrer OmegaT à partir d'une ligne de commande.</a></span></dt>
+                     <dt><span class="section"><a href="chapter.installing.and.running.html#building.OmegaT.from.source">7. Construction d'<span class="application">OmegaT</span> à partir de la source</a></span></dt>
+                  </dl>
+               </dd>
+               <dt><span class="chapter"><a href="chapter.user.interface.html">4. L'interface utilisateur</a></span></dt>
+               <dd>
+                  <dl>
+                     <dt><span class="section"><a href="chapter.user.interface.html#user.interface.items">1. La fenêtre principale d'OmegaT, les autres fenêtres et les boîtes de dialogue</a></span></dt>
+                     <dt><span class="section"><a href="chapter.user.interface.html#OmegaT.main.window">2. <span class="application">OmegaT</span> : fenêtre principale</a></span></dt>
+                     <dt><span class="section"><a href="chapter.user.interface.html#other.windows">3. Autres fenêtres</a></span></dt>
+                  </dl>
+               </dd>
+               <dt><span class="chapter"><a href="chapter.menu.html">5. Menus et raccourcis clavier</a></span></dt>
+               <dd>
+                  <dl>
+                     <dt><span class="section"><a href="chapter.menu.html#ch04.main.menu">1. Menu principal</a></span></dt>
+                     <dt><span class="section"><a href="chapter.menu.html#keyboard.shortcuts">2. Raccourcis clavier</a></span></dt>
+                  </dl>
+               </dd>
+               <dt><span class="chapter"><a href="chapter.project.properties.html">6. Propriétés du projet</a></span></dt>
+               <dd>
+                  <dl>
+                     <dt><span class="section"><a href="chapter.project.properties.html#properties.dialog">1. Boîte de dialogue Propriétés</a></span></dt>
+                  </dl>
+               </dd>
+               <dt><span class="chapter"><a href="chapter.file.filters.html">7. Fichiers et filtres</a></span></dt>
+               <dd>
+                  <dl>
+                     <dt><span class="section"><a href="chapter.file.filters.html#file.filters.dialog">1. Boite de dialogue Fichiers et filtres...</a></span></dt>
+                     <dt><span class="section"><a href="chapter.file.filters.html#filters.options">2. Les options de filtrage</a></span></dt>
+                     <dt><span class="section"><a href="chapter.file.filters.html#edit.filter.dialog">3. Modification de la boite de dialogue du filtre</a></span></dt>
+                  </dl>
+               </dd>
+               <dt><span class="chapter"><a href="chapter.files.and.folders.html">8. Les fichiers et répertoires d'<span class="application">OmegaT</span></a></span></dt>
+               <dd>
+                  <dl>
+                     <dt><span class="section"><a href="chapter.files.and.folders.html#translation.project.files">1. Fichiers projet de traduction</a></span></dt>
+                     <dt><span class="section"><a href="chapter.files.and.folders.html#user.files">2. Fichiers paramètres utilisateur</a></span></dt>
+                     <dt><span class="section"><a href="chapter.files.and.folders.html#application.files">3. Fichiers Application</a></span></dt>
+                  </dl>
+               </dd>
+               <dt><span class="chapter"><a href="chapter.files.to.translate.html">9. Fichiers à traduire</a></span></dt>
+               <dd>
+                  <dl>
+                     <dt><span class="section"><a href="chapter.files.to.translate.html#file.formats">1. Formats de fichier</a></span></dt>
+                     <dt><span class="section"><a href="chapter.files.to.translate.html#other.file.formats">2. Autres formats de fichier</a></span></dt>
+                     <dt><span class="section"><a href="chapter.files.to.translate.html#right.to.left.languages">3. Les langues qui se lisent de droite à gauche</a></span></dt>
+                  </dl>
+               </dd>
+               <dt><span class="chapter"><a href="chapter.translation.editing.html">10. Ligne d'édition...</a></span></dt>
+               <dt><span class="chapter"><a href="chapter.plain.text.html">11. Travailler avec du texte brut</a></span></dt>
+               <dd>
+                  <dl>
+                     <dt><span class="section"><a href="chapter.plain.text.html#default.encoding">1. Encodage par défaut</a></span></dt>
+                     <dt><span class="section"><a href="chapter.plain.text.html#OmegaT.solution">2. La solution <span class="application">OmegaT</span></a></span></dt>
+                  </dl>
+               </dd>
+               <dt><span class="chapter"><a href="chapter.formatted.text.html">12. Travailler avec un texte formaté</a></span></dt>
+               <dd>
+                  <dl>
+                     <dt><span class="section"><a href="chapter.formatted.text.html#formatting.tags">1. Balises de formatage</a></span></dt>
+                     <dt><span class="section"><a href="chapter.formatted.text.html#tag.operations">2. Fonctionnement des balises</a></span></dt>
+                     <dt><span class="section"><a href="chapter.formatted.text.html#tag.group.nesting">3. Imbrication de groupes de balises</a></span></dt>
+                     <dt><span class="section"><a href="chapter.formatted.text.html#tag.group.overlapping">4. Chevauchement des groupes de balises</a></span></dt>
+                     <dt><span class="section"><a href="chapter.formatted.text.html#d0e6198">5. Options de validation des balises</a></span></dt>
+                     <dt><span class="section"><a href="chapter.formatted.text.html#tag.group.validation">6. Validation des groupes de balises</a></span></dt>
+                     <dt><span class="section"><a href="chapter.formatted.text.html#hints.for.tag.management">7. Astuces pour la gestion des balises</a></span></dt>
+                  </dl>
+               </dd>
+               <dt><span class="chapter"><a href="chapter.translation.memories.html">13. Mémoires de traduction</a></span></dt>
+               <dd>
+                  <dl>
+                     <dt><span class="section"><a href="chapter.translation.memories.html#OmegaT.and.tmx.files">1. Les mémoires de traduction dans OmegaT</a></span></dt>
+                     <dt><span class="section"><a href="chapter.translation.memories.html#using.translation.memories.from.previous.projects">2. Réutilisation des mémoires de traduction</a></span></dt>
+                     <dt><span class="section"><a href="chapter.translation.memories.html#d0e6763">3. Les sources ayant des traductions existantes</a></span></dt>
+                     <dt><span class="section"><a href="chapter.translation.memories.html#pseudo.translated.memory">4. Mémoire pseudotraduite</a></span></dt>
+                     <dt><span class="section"><a href="chapter.translation.memories.html#upgrading.translation.memories">5. Mise à niveau des mémoires de traduction</a></span></dt>
+                  </dl>
+               </dd>
+               <dt><span class="chapter"><a href="chapter.segmentation.html">14. Segmentation de la source</a></span></dt>
+               <dd>
+                  <dl>
+                     <dt><span class="section"><a href="chapter.segmentation.html#segmentation.rules">1. Règles de segmentation</a></span></dt>
+                     <dt><span class="section"><a href="chapter.segmentation.html#rules.priority">2. Priorité de la règle</a></span></dt>
+                     <dt><span class="section"><a href="chapter.segmentation.html#creating.new.rule">3. Créer une nouvelle règle</a></span></dt>
+                     <dt><span class="section"><a href="chapter.segmentation.html#few.simple.examples">4. Quelques exemples simples</a></span></dt>
+                  </dl>
+               </dd>
+               <dt><span class="chapter"><a href="chapter.searches.html">15. Recherches</a></span></dt>
+               <dd>
+                  <dl>
+                     <dt><span class="section"><a href="chapter.searches.html#search.window">1. La fenêtre Recherche textuelle</a></span></dt>
+                     <dt><span class="section"><a href="chapter.searches.html#using.wild.cards">2. Utilisation de caractères génériques</a></span></dt>
+                     <dt><span class="section"><a href="chapter.searches.html#search.methoids">3. Méthodes de recherche et options</a></span></dt>
+                     <dt><span class="section"><a href="chapter.searches.html#search.result.display">4. Affichage des résultats de la recherche</a></span></dt>
+                  </dl>
+               </dd>
+               <dt><span class="chapter"><a href="chapter.regexp.html">16. Expressions régulières</a></span></dt>
+               <dd>
+                  <dl>
+                     <dt><span class="section"><a href="chapter.regexp.html#regex.tools.and.examples.of.use">1. Outils d'expressions régulières et exemples d'utilisation</a></span></dt>
+                  </dl>
+               </dd>
+               <dt><span class="chapter"><a href="chapter.dictionaries.html">17. Dictionnaires</a></span></dt>
+               <dd>
+                  <dl>
+                     <dt><span class="section"><a href="chapter.dictionaries.html#d0e7837">1. Comment télécharger et installer des dictionnaires</a></span></dt>
+                     <dt><span class="section"><a href="chapter.dictionaries.html#d0e7941">2. Problèmes rencontrés concernant les dictionnaires</a></span></dt>
+                  </dl>
+               </dd>
+               <dt><span class="chapter"><a href="chapter.glossaries.html">18. Glossaires</a></span></dt>
+               <dd>
+                  <dl>
+                     <dt><span class="section"><a href="chapter.glossaries.html#d0e8009">1. Utilisation</a></span></dt>
+                     <dt><span class="section"><a href="chapter.glossaries.html#d0e8064">2. Format de fichier</a></span></dt>
+                     <dt><span class="section"><a href="chapter.glossaries.html#d0e8103">3. Comment créer des glossaires</a></span></dt>
+                     <dt><span class="section"><a href="chapter.glossaries.html#d0e8148">4. Utiliser Trados MultiTerm</a></span></dt>
+                     <dt><span class="section"><a href="chapter.glossaries.html#d0e8164">5. Les problèmes de glossaire les plus courants</a></span></dt>
+                  </dl>
+               </dd>
+               <dt><span class="chapter"><a href="chapter.machine.translate.html">19. Traduction automatique</a></span></dt>
+               <dd>
+                  <dl>
+                     <dt><span class="section"><a href="chapter.machine.translate.html#d0e8220">1. Introduction</a></span></dt>
+                     <dt><span class="section"><a href="chapter.machine.translate.html#introduction">2. Google Translate</a></span></dt>
+                     <dt><span class="section"><a href="chapter.machine.translate.html#d0e8261">3. Utilisateurs <span class="application">OmegaT</span>  et Google Translate</a></span></dt>
+                     <dt><span class="section"><a href="chapter.machine.translate.html#d0e8314">4. Belazar</a></span></dt>
+                     <dt><span class="section"><a href="chapter.machine.translate.html#d0e8326">5. Apertium</a></span></dt>
+                     <dt><span class="section"><a href="chapter.machine.translate.html#Google.Translate.troubleshooting">6. Traduction automatique - résolution des problèmes</a></span></dt>
+                  </dl>
+               </dd>
+               <dt><span class="chapter"><a href="chapter.spellchecker.html">20. Vérificateur orthographique</a></span></dt>
+               <dd>
+                  <dl>
+                     <dt><span class="section"><a href="chapter.spellchecker.html#d0e8402">1. Installation des dictionnaires orthographiques</a></span></dt>
+                     <dt><span class="section"><a href="chapter.spellchecker.html#d0e8462">2. Utilisation des dictionnaires orthographiques</a></span></dt>
+                     <dt><span class="section"><a href="chapter.spellchecker.html#hints">3. Conseils</a></span></dt>
+                  </dl>
+               </dd>
+               <dt><span class="chapter"><a href="chapter.misc.html">21. Sujets divers</a></span></dt>
+               <dd>
+                  <dl>
+                     <dt><span class="section"><a href="chapter.misc.html#omegat.misc.console.mode">1. Mode console d'OmegaT</a></span></dt>
+                     <dt><span class="section"><a href="chapter.misc.html#d0e8710">2. Outil d'alignement automatique des propriétés Java.</a></span></dt>
+                     <dt><span class="section"><a href="chapter.misc.html#font.settings">3. Paramètres des polices</a></span></dt>
+                     <dt><span class="section"><a href="chapter.misc.html#preventing.data.loss">4. Prévention des pertes de données</a></span></dt>
+                  </dl>
+               </dd>
+               <dt><span class="appendix"><a href="appendix.languages.html">A. Langues - Liste de codes ISO 639
+                          
+                          
+                          </a></span></dt>
+               <dt><span class="appendix"><a href="appendix.keyboard.html">B. Raccourcis clavier dans le volet d'édition</a></span></dt>
+               <dt><span class="appendix"><a href="appendix.TeamProjects.html">C. Projets en équipe d'OmegaT</a></span></dt>
+               <dd>
+                  <dl>
+                     <dt><span class="section"><a href="appendix.TeamProjects.html#d0e10424">1. Contrôle des versions - introduction</a></span></dt>
+                     <dt><span class="section"><a href="appendix.TeamProjects.html#d0e10496">2. Partager un projet en utilisant Subversion (SVN)</a></span></dt>
+                     <dt><span class="section"><a href="appendix.TeamProjects.html#d0e10715">3. Utiliser le projet en équipe dans OmegaT</a></span></dt>
+                  </dl>
+               </dd>
+               <dt><span class="appendix"><a href="appendix.TokenizerPlugin.inOmegaT.html">D. Extension module Tokenizer</a></span></dt>
+               <dd>
+                  <dl>
+                     <dt><span class="section"><a href="appendix.TokenizerPlugin.inOmegaT.html#d0e10745">1. Introduction</a></span></dt>
+                     <dt><span class="section"><a href="appendix.TokenizerPlugin.inOmegaT.html#d0e10774">2. Installation et utilisation de la ligne de commande</a></span></dt>
+                     <dt><span class="section"><a href="appendix.TokenizerPlugin.inOmegaT.html#d0e10791">3. Spécificités Mac OS X</a></span></dt>
+                     <dt><span class="section"><a href="appendix.TokenizerPlugin.inOmegaT.html#d0e10805">4. Résolution des problèmes</a></span></dt>
+                  </dl>
+               </dd>
+               <dt><span class="appendix"><a href="appendix.LanguageToolPlugin.inOmegaT.html">E. L'extension LanguageTool</a></span></dt>
+               <dd>
+                  <dl>
+                     <dt><span class="section"><a href="appendix.LanguageToolPlugin.inOmegaT.html#d0e10831">1. Introduction</a></span></dt>
+                     <dt><span class="section"><a href="appendix.LanguageToolPlugin.inOmegaT.html#d0e10850">2. Installation et Utilisation</a></span></dt>
+                  </dl>
+               </dd>
+               <dt><span class="appendix"><a href="appendix.ScriptingPlugin.inOmegaT.html">F. Extension Scripts</a></span></dt>
+               <dd>
+                  <dl>
+                     <dt><span class="section"><a href="appendix.ScriptingPlugin.inOmegaT.html#d0e10877">1. Introduction</a></span></dt>
+                     <dt><span class="section"><a href="appendix.ScriptingPlugin.inOmegaT.html#d0e10882">2. Installation et Utilisation</a></span></dt>
+                  </dl>
+               </dd>
+               <dt><span class="appendix"><a href="appendix.website.html">G. OmegaT sur le web</a></span></dt>
+               <dd>
+                  <dl>
+                     <dt><span class="section"><a href="appendix.website.html#OmegaT.sites.and.OmegaT.SourceForge.project">1. Les sites<span class="application">OmegaT</span> et le <span class="application">projet SourceForge</span> OmegaT</a></span></dt>
+                     <dt><span class="section"><a href="appendix.website.html#bug.reports">2. Rapports de bogues</a></span></dt>
+                     <dt><span class="section"><a href="appendix.website.html#contributing.to.omegat.project">3. Apporter sa contribution au projet <span class="application">OmegaT</span></a></span></dt>
+                  </dl>
+               </dd>
+               <dt><span class="appendix"><a href="appendix.shortcut.custom.html">H. Personnalisation des raccourcis</a></span></dt>
+               <dd>
+                  <dl>
+                     <dt><span class="section"><a href="appendix.shortcut.custom.html#ch04.shortcuts.customization">1. Personnalisation des raccourcis</a></span></dt>
+                     <dt><span class="section"><a href="appendix.shortcut.custom.html#ch04.shortcuts.ProjectMenu">2. Menu Projet</a></span></dt>
+                     <dt><span class="section"><a href="appendix.shortcut.custom.html#ch04.shortcuts.EditMenu">3. Menu Edition</a></span></dt>
+                     <dt><span class="section"><a href="appendix.shortcut.custom.html#ch04.shortcuts.GoToMenu">4. Menu Atteindre</a></span></dt>
+                     <dt><span class="section"><a href="appendix.shortcut.custom.html#ch04.shortcuts.ViewMenu">5. Menu Affichage</a></span></dt>
+                     <dt><span class="section"><a href="appendix.shortcut.custom.html#ch04.shortcuts.ToolsMenu">6. Menu Outils</a></span></dt>
+                     <dt><span class="section"><a href="appendix.shortcut.custom.html#ch04.shortcuts.OptionsMenu">7.  Menu Options</a></span></dt>
+                     <dt><span class="section"><a href="appendix.shortcut.custom.html#ch04.shortcuts.HelpMenu">8. Menu Aide</a></span></dt>
+                  </dl>
+               </dd>
+               <dt><span class="appendix"><a href="appendix.legal.notices.html">I. Mentions légales</a></span></dt>
+               <dd>
+                  <dl>
+                     <dt><span class="section"><a href="appendix.legal.notices.html#legal.notices.for.documentation">1. Concernant le manuel</a></span></dt>
+                     <dt><span class="section"><a href="appendix.legal.notices.html#legal.ntices.for.application">2. Concernant l'application</a></span></dt>
+                  </dl>
+               </dd>
+               <dt><span class="appendix"><a href="appendix.acknowledgements.html">J. Remerciements</a></span></dt>
+               <dd>
+                  <dl>
+                     <dt><span class="section"><a href="appendix.acknowledgements.html#d0e12036">1. Merci à tous !</a></span></dt>
+                  </dl>
+               </dd>
+               <dt><span class="index"><a href="ix01.html">Index</a></span></dt>
+            </dl>
+         </div>
+         <div class="list-of-figures">
+            <p><b>Liste des illustrations</b></p>
+            <dl>
+               <dt>4.1. <a href="chapter.user.interface.html#OmegaT.main.window.figure">Fenêtre principale d'OmegaT</a></dt>
+               <dt>4.2. <a href="chapter.user.interface.html#matches.pane">Volet Correspondances</a></dt>
+               <dt>4.3. <a href="chapter.user.interface.html#matches.pane.setup">Paramètres du volet Correspondances</a></dt>
+               <dt>4.4. <a href="chapter.user.interface.html#multiword.pane">entrées multimots dans le glossaire</a></dt>
+               <dt>4.5. <a href="chapter.user.interface.html#comments.pane">Volet Commentaires</a></dt>
+               <dt>4.6. <a href="chapter.user.interface.html#tag.validator.window">Fenêtre de validation des balises</a></dt>
+               <dt>4.7. <a href="chapter.user.interface.html#ProjectStatistic.Window">Statistiques du projet</a></dt>
+               <dt>4.8. <a href="chapter.user.interface.html#d0e2702">Statistiques des correspondances</a></dt>
+               <dt>6.1. <a href="chapter.project.properties.html#d0e4175">Fenêtre de propriétés du projet</a></dt>
+               <dt>8.1. <a href="chapter.files.and.folders.html#OmegaT.project">Projet OmegaT</a></dt>
+               <dt>8.2. <a href="chapter.files.and.folders.html#OmegaT.projects.and.subfolders">Projets OmegaT et sous-dossiers</a></dt>
+               <dt>10.1. <a href="chapter.translation.editing.html#editing.behavior.options">Options de la ligne d'édition</a></dt>
+               <dt>12.1. <a href="chapter.formatted.text.html#tag.validation">Entrée de validation des balises</a></dt>
+               <dt>15.1. <a href="chapter.searches.html#text.search.window">La fenêtre Recherche textuelle</a></dt>
+               <dt>16.1. <a href="chapter.regexp.html#regerx.tester">Testeur d'Expressions Régulières</a></dt>
+               <dt>17.1. <a href="chapter.dictionaries.html#Dict.Merriam.Webster">Utilisation du dictionnaire Merriam Webster</a></dt>
+               <dt>18.1. <a href="chapter.glossaries.html#d0e8032">Volet Glossaires</a></dt>
+               <dt>18.2. <a href="chapter.glossaries.html#d0e8044">Les entrées à mots-multiples dans les glossaires - exemple</a></dt>
+               <dt>19.1. <a href="chapter.machine.translate.html#moby.dick">Google Translate - exemple</a></dt>
+               <dt>20.1. <a href="chapter.spellchecker.html#spellchecker.setup">Configuration du vérificateur orthographique</a></dt>
+               <dt>20.2. <a href="chapter.spellchecker.html#spellchecker.in.action">Utilisation du vérificateur orthographique</a></dt>
+               <dt>E.1. <a href="appendix.LanguageToolPlugin.inOmegaT.html#d0e10843">LanguageTool dans OmegaT</a></dt>
+            </dl>
+         </div>
+         <div class="list-of-tables">
+            <p><b>Liste des tableaux</b></p>
+            <dl>
+               <dt>4.1. <a href="chapter.user.interface.html#d0e1681">Fenêtre principale d'OmegaT</a></dt>
+               <dt>4.2. <a href="chapter.user.interface.html#d0e1735">Autres fenêtres</a></dt>
+               <dt>4.3. <a href="chapter.user.interface.html#d0e1820">Boîte de dialogue des paramètres</a></dt>
+               <dt>4.4. <a href="chapter.user.interface.html#d0e1990">Éléments graphiques des volets</a></dt>
+               <dt>4.5. <a href="chapter.user.interface.html#d0e2064">Fenêtre principale - compteurs</a></dt>
+               <dt>4.6. <a href="chapter.user.interface.html#d0e2286">Paramètres du volet Correspondances</a></dt>
+               <dt>5.1. <a href="chapter.menu.html#table.main.menu">Menu principal</a></dt>
+               <dt>5.2. <a href="chapter.menu.html#d0e2852">Menu Projet</a></dt>
+               <dt>5.3. <a href="chapter.menu.html#d0e3001">Pour les raccourcis copier/couper/coller</a></dt>
+               <dt>5.4. <a href="chapter.menu.html#d0e3046">Menu Edition</a></dt>
+               <dt>5.5. <a href="chapter.menu.html#d0e3274">Menu Atteindre</a></dt>
+               <dt>5.6. <a href="chapter.menu.html#d0e3405">Menu Affichage</a></dt>
+               <dt>5.7. <a href="chapter.menu.html#d0e3470">Menu Outils</a></dt>
+               <dt>5.8. <a href="chapter.menu.html#d0e3530"> Menu Options</a></dt>
+               <dt>5.9. <a href="chapter.menu.html#d0e3684">Menu Aide</a></dt>
+               <dt>5.10. <a href="chapter.menu.html#d0e3767">Raccourcis gestion de projet</a></dt>
+               <dt>5.11. <a href="chapter.menu.html#d0e3847">Modification des raccourcis</a></dt>
+               <dt>5.12. <a href="chapter.menu.html#d0e3998">Raccourcis déplacement</a></dt>
+               <dt>5.13. <a href="chapter.menu.html#d0e4085">Divers raccourcis</a></dt>
+               <dt>16.1. <a href="chapter.regexp.html#d0e7364">Expressions régulières - Marqueurs</a></dt>
+               <dt>16.2. <a href="chapter.regexp.html#d0e7381">Expressions régulières - Caractère</a></dt>
+               <dt>16.3. <a href="chapter.regexp.html#d0e7458">Expressions régulières - Citation</a></dt>
+               <dt>16.4. <a href="chapter.regexp.html#d0e7490">Expressions régulières - Classes pour les catégories et blocs Unicode</a></dt>
+               <dt>16.5. <a href="chapter.regexp.html#d0e7533">Expressions régulières - Classes de caractères</a></dt>
+               <dt>16.6. <a href="chapter.regexp.html#d0e7560">Expressions régulières - Classes de caractères prédéfinies</a></dt>
+               <dt>16.7. <a href="chapter.regexp.html#d0e7607">Expressions régulières - Spécificateurs de limite</a></dt>
+               <dt>16.8. <a href="chapter.regexp.html#d0e7639">Expressions régulières - Quantificateurs avides</a></dt>
+               <dt>16.9. <a href="chapter.regexp.html#d0e7680">Expressions régulières - quantificateurs réticents (non-avides)</a></dt>
+               <dt>16.10. <a href="chapter.regexp.html#d0e7718">Expressions régulières - Opérateurs logiques</a></dt>
+               <dt>16.11. <a href="chapter.regexp.html#d0e7778">Expressions régulières : exemples d'expressions régulières dans les traductions</a></dt>
+               <dt>A.1. <a href="appendix.languages.html#table.language.code.list">Liste des codes langues ISO 639-1/639-2</a></dt>
+               <dt>B.1. <a href="appendix.keyboard.html#d0e10211">Comportement des touches dans le volet d'édition</a></dt>
+               <dt>H.1. <a href="appendix.shortcut.custom.html#d0e11303">Menu Projet</a></dt>
+               <dt>H.2. <a href="appendix.shortcut.custom.html#d0e11410">Menu Edition</a></dt>
+               <dt>H.3. <a href="appendix.shortcut.custom.html#d0e11595">Menu Atteindre</a></dt>
+               <dt>H.4. <a href="appendix.shortcut.custom.html#d0e11686">Menu Affichage</a></dt>
+               <dt>H.5. <a href="appendix.shortcut.custom.html#d0e11776">Menu Outils</a></dt>
+               <dt>H.6. <a href="appendix.shortcut.custom.html#d0e11815"> Menu Options</a></dt>
+               <dt>H.7. <a href="appendix.shortcut.custom.html#d0e11935">Menu Aide</a></dt>
+            </dl>
+         </div>
+      </div>
+      <div class="navfooter">
+         <hr>
+         <table width="100%" summary="Navigation footer">
+            <tr>
+               <td width="40%" align="left">&nbsp;</td>
+               <td width="20%" align="center">&nbsp;</td>
+               <td width="40%" align="right">&nbsp;<a accesskey="n" href="chapter.about.OmegaT.html">Suivant</a></td>
+            </tr>
+            <tr>
+               <td width="40%" align="left" valign="top">&nbsp;</td>
+               <td width="20%" align="center">&nbsp;</td>
+               <td width="40%" align="right" valign="top">&nbsp;Chapitre&nbsp;1.&nbsp;À propos d'<span class="application">OmegaT</span> - introduction
+               </td>
+            </tr>
+         </table>
+      </div>
+   </body>
 </html>

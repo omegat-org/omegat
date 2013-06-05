@@ -1,0 +1,171 @@
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <title>Chapitre&nbsp;10.&nbsp;Ligne d'édition...</title>
+      <link rel="stylesheet" type="text/css" href="OmegaT.css">
+      <meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
+      <link rel="home" href="index.html" title="OmegaT - Guide de l'utilisateur">
+      <link rel="up" href="index.html" title="OmegaT - Guide de l'utilisateur">
+      <link rel="prev" href="chapter.files.to.translate.html" title="Chapitre&nbsp;9.&nbsp;Fichiers à traduire">
+      <link rel="next" href="chapter.plain.text.html" title="Chapitre&nbsp;11.&nbsp;Travailler avec du texte brut">
+   </head>
+   <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+      <div class="navheader">
+         <table width="100%" summary="Navigation header">
+            <tr>
+               <th colspan="3" align="center">Chapitre&nbsp;10.&nbsp;Ligne d'édition...</th>
+            </tr>
+            <tr>
+               <td width="20%" align="left"><a accesskey="p" href="chapter.files.to.translate.html">Précédent</a>&nbsp;
+               </td>
+               <th width="60%" align="center">&nbsp;</th>
+               <td width="20%" align="right">&nbsp;<a accesskey="n" href="chapter.plain.text.html">Suivant</a></td>
+            </tr>
+         </table>
+         <hr>
+      </div>
+      <div class="chapter">
+         <div class="titlepage">
+            <div>
+               <div>
+                  <h1 class="title"><a name="chapter.translation.editing"></a>Chapitre&nbsp;10.&nbsp;Ligne d'édition...<a class="indexterm" name="d0e5654"></a></h1>
+               </div>
+            </div>
+         </div>
+         <p>La boîte de dialogue du menu <span class="guimenu">Options</span> → <span class="guimenuitem">Ligne d'édition...</span> permet à l'utilisateur de choisir comment le segment actuellement présent dans la ligne d'édition sera initialisé et géré
+            :
+         </p>
+         <div class="figure"><a name="editing.behavior.options"></a><p class="title"><b>Figure&nbsp;10.1.&nbsp;Options de la ligne d'édition</b></p>
+            <div class="figure-contents">
+               <div class="mediaobject"><img src="images/EditingBehaviourOptions25.png" alt="Options de la ligne d'édition"></div>
+            </div>
+         </div><br class="figure-break"><p></p>
+         <p>Vous traduisez vos fichiers en vous déplaçant de segment en segment et en modifiant tour à tour chaque segment. En vous déplaçant
+            d'un segment à l'autre, vous pouvez remplir la ligne d'édition soit avec une traduction pré-existante, située dans le panneau
+            des correspondances, soit avec le texte source. Dans le menu <span class="guimenu">Options</span> → <span class="guimenuitem">Ligne d'édition...</span> <span class="application">OmegaT</span> vous propose les possibilités suivantes :
+         </p>
+         <div class="variablelist">
+            <dl class="variablelist">
+               <dt><span class="term">Le texte source</span></dt>
+               <dd>
+                  <p>Le texte source sera automatiquement inséré dans la ligne d'édition. Cette option est utile pour les textes contenant de nombreux
+                     noms de marque ou autres noms propres qui doivent rester inchangés.
+                  </p>
+               </dd>
+               <dt><span class="term">Laisse le segment vide<a class="indexterm" name="d0e5699"></a></span></dt>
+               <dd>
+                  <p>OmegaT laisse la ligne d'édition vide. Cette option vous permet de saisir la traduction sans avoir besoin de supprimer le
+                     texte source, ce qui vous évite ainsi de devoir faire deux frappes de touches supplémentaires (<span class="bold"><strong>Ctrl+A </strong></span>et <span class="bold"><strong>Suppr). </strong></span>Les traductions vides sont maintenant permises. Elles sont affichées en tant que &lt;VIDE&gt; dans l'Éditeur. Pour créer une traduction
+                     vide, cliquez-droit dans un des segments et sélectionnez «&nbsp;<span class="bold"><strong>Définir traduction vide</strong></span>&nbsp;». Dans le même menu, l'entrée <span class="bold"><strong>Supprimer la traduction</strong></span> vous permet également de supprimer la traduction existante du segment. Vous obtiendrez le même résultat en effaçant le segment
+                     cible et en appuyant sur <span class="guibutton">Entrée.</span></p>
+               </dd>
+               <dt><span class="term">Insère la meilleure correspondance partielle<a class="indexterm" name="d0e5726"></a></span></dt>
+               <dd>
+                  <p>OmegaT insère la traduction de la chaîne de caractères la plus proche du texte source en cours si celle-ci est au-dessus du
+                     niveau minimum de correspondance que vous avez sélectionné dans la boîte de dialogue. Le préfixe (vide par défaut) peut être
+                     utilisé dans la traduction de balises réalisée via les correspondances partielles. L'ajout d'un préfixe ([correspondance]
+                     par exemple), vous permet de contrôler ces traductions ultérieurement pour vous assurer que celles-ci sont correctes.
+                  </p>
+               </dd>
+            </dl>
+         </div>
+         <p>Les cases à cocher situées dans la partie inférieure de la boîte de dialogue ont les fonctionnalités suivantes :</p>
+         <div class="variablelist">
+            <dl class="variablelist">
+               <dt><span class="term">Essaie de convertir les nombres lors de l'insertion d'une correspondance<a class="indexterm" name="d0e5742"></a></span></dt>
+               <dd>
+                  <p>Si une correspondance est insérée alors que cette case est cochée, OmegaT essaie, manuellement ou automatiquement, de convertir
+                     les nombres de la correspondance en fonction du contenu du texte source. Il existe néanmoins quelques restrictions :
+                  </p>
+                  <div class="itemizedlist">
+                     <ul class="itemizedlist" style="list-style-type: disc; ">
+                        <li class="listitem">
+                           <p>Le segment source et les correspondances doivent contenir la même liste de nombres</p>
+                        </li>
+                        <li class="listitem">
+                           <p>Les nombres du texte source et des correspondances cible doivent être rigoureusement identiques.</p>
+                        </li>
+                        <li class="listitem">
+                           <p>Seuls les nombres entiers et les nombres réels simples (utilisant le point comme caractère décimal, soit 5.4 mais pas 5,4
+                              ou 54E-01) sont pris en compte.
+                           </p>
+                        </li>
+                     </ul>
+                  </div>
+               </dd>
+            </dl>
+         </div>
+         <div class="variablelist">
+            <dl class="variablelist">
+               <dt><span class="term">Autoriser une traduction identique à la source<a class="indexterm" name="d0e5766"></a></span></dt>
+               <dd>
+                  <p>Les documents à traduire peuvent contenir des noms de marque ou autres noms propres qui resteront identiques dans les documents
+                     traduits. Il existe deux stratégies pour les segments contenant seulement ce genre de texte invariable.
+                  </p>
+                  <p>Vous pouvez décider de ne pas traduire du tout ces segments. OmegaT affichera alors ces segments comme étant non traduits.
+                     Ceci est le paramètre par défaut. L'autre solution consiste à saisir une traduction identique au texte source. OmegaT arrive
+                     à reconnaître ce que vous avez fait. Pour que cela soit possible, allez dans <span class="guimenu">Options</span> → <span class="guimenuitem">Ligne d'édition...</span> et cochez la case <span class="bold"><strong>Autoriser une traduction identique à la source</strong></span>.
+                  </p>
+               </dd>
+            </dl>
+         </div>
+         <div class="variablelist">
+            <dl class="variablelist">
+               <dt><span class="term">Exporter le segment dans des fichiers texte<a class="indexterm" name="d0e5791"></a></span></dt>
+               <dd>
+                  <p>Cette fonction d'exportation dans des fichiers texte exporte des données depuis le projet <span class="application">OmegaT</span> en cours dans des fichiers de texte brut. Les données sont exportées lorsque le segment est ouvert. Les fichiers apparaissent
+                     dans le sous-dossier /script situé dans le dossier de fichiers utilisateur d'OmegaT et comprennent :
+                  </p>
+                  <div class="itemizedlist">
+                     <ul class="itemizedlist" style="list-style-type: disc; ">
+                        <li class="listitem">
+                           <p>Le contenu du texte source du segment (<code class="filename">source.txt</code>).
+                           </p>
+                        </li>
+                        <li class="listitem">
+                           <p>Le contenu du texte cible du segment (<code class="filename">target.txt</code>).
+                           </p>
+                        </li>
+                        <li class="listitem">
+                           <p>Le texte mis en surbrillance par l'utilisateur lorsque les touches <span class="keycap"><strong>Ctrl+Shift+C</strong></span> sont appuyées ou lorsque <span class="guimenuitem">Edition &gt; Exporter la sélection</span> est sélectionné (<code class="filename">selection.txt</code>).
+                           </p>
+                        </li>
+                     </ul>
+                  </div>
+                  <p>Le contenu des fichiers est écrasé lorsqu'un nouveau segment est ouvert (source.txt et target.txt) ou qu'une nouvelle sélection
+                     est exportée (selection.txt). Les fichiers sont des fichiers de texte brut non formaté. Ce processus peut être dirigé et contrôlé
+                     via le langage de script Tck/Tcl (Tool Command Language). Voir le <a class="ulink" href="http://www.omegat.org/en/howtos/text_export.html" target="_top">Guide d'utilisation de la fonction d'exportation de texte d'OmegaT (interface de script) (en anglais)</a> pour des détails, des exemples et des suggestions.
+                  </p>
+               </dd>
+            </dl>
+         </div>
+         <div class="variablelist">
+            <dl class="variablelist">
+               <dt><span class="term">Atteindre segment non traduit suivant s'arrête lorsqu'il y a au moins une traduction alternative<a class="indexterm" name="d0e5838"></a></span></dt>
+               <dd>
+                  <p>Pour éviter toute erreur de traduction dans le cas de segments avec plusieurs contenus cible possibles, cocher cette case
+                     obligera <span class="bold"><strong>Atteindre segment non traduit suivant</strong></span> à s'arrêter au segment suivant de ce type, sans tenir compte du fait qu'il ait été traduit ou non.
+                  </p>
+               </dd>
+            </dl>
+         </div>
+      </div>
+      <div class="navfooter">
+         <hr>
+         <table width="100%" summary="Navigation footer">
+            <tr>
+               <td width="40%" align="left"><a accesskey="p" href="chapter.files.to.translate.html">Précédent</a>&nbsp;
+               </td>
+               <td width="20%" align="center">&nbsp;</td>
+               <td width="40%" align="right">&nbsp;<a accesskey="n" href="chapter.plain.text.html">Suivant</a></td>
+            </tr>
+            <tr>
+               <td width="40%" align="left" valign="top">Chapitre&nbsp;9.&nbsp;Fichiers à traduire&nbsp;</td>
+               <td width="20%" align="center"><a accesskey="h" href="index.html">Sommaire</a></td>
+               <td width="40%" align="right" valign="top">&nbsp;Chapitre&nbsp;11.&nbsp;Travailler avec du texte brut</td>
+            </tr>
+         </table>
+      </div>
+   </body>
+</html>

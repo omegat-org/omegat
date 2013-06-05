@@ -1,0 +1,164 @@
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <title>Chapitre&nbsp;6.&nbsp;Propriétés du projet</title>
+      <link rel="stylesheet" type="text/css" href="OmegaT.css">
+      <meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
+      <link rel="home" href="index.html" title="OmegaT - Guide de l'utilisateur">
+      <link rel="up" href="index.html" title="OmegaT - Guide de l'utilisateur">
+      <link rel="prev" href="chapter.menu.html" title="Chapitre&nbsp;5.&nbsp;Menus et raccourcis clavier">
+      <link rel="next" href="chapter.file.filters.html" title="Chapitre&nbsp;7.&nbsp;Fichiers et filtres">
+   </head>
+   <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+      <div class="navheader">
+         <table width="100%" summary="Navigation header">
+            <tr>
+               <th colspan="3" align="center">Chapitre&nbsp;6.&nbsp;Propriétés du projet</th>
+            </tr>
+            <tr>
+               <td width="20%" align="left"><a accesskey="p" href="chapter.menu.html">Précédent</a>&nbsp;
+               </td>
+               <th width="60%" align="center">&nbsp;</th>
+               <td width="20%" align="right">&nbsp;<a accesskey="n" href="chapter.file.filters.html">Suivant</a></td>
+            </tr>
+         </table>
+         <hr>
+      </div>
+      <div class="chapter">
+         <div class="titlepage">
+            <div>
+               <div>
+                  <h1 class="title"><a name="chapter.project.properties"></a>Chapitre&nbsp;6.&nbsp;Propriétés du projet<a class="indexterm" name="d0e4150"></a></h1>
+               </div>
+            </div>
+         </div>
+         <div class="toc">
+            <dl class="toc">
+               <dt><span class="section"><a href="chapter.project.properties.html#properties.dialog">1. Boîte de dialogue Propriétés</a></span></dt>
+            </dl>
+         </div>
+         <p></p>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="properties.dialog"></a>1.&nbsp;Boîte de dialogue Propriétés
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>La boîte de dialogue <span class="guimenu">Projet</span> → <span class="guimenuitem">Propriétés...</span> (<span class="shortcut"><strong><span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>E</strong></span></strong></span>) sert à définir et à modifier les dossiers et les langues du projet.
+            </p>
+            <p>Il est possible de modifier les propriétés du projet au cours d'une session de traduction. Veuillez noter que les changements
+               apportés aux paramètres du projet peuvent avoir des conséquences, surtout si vous avez déjà commencé à travailler sur le projet.
+               Si vous n'êtes pas encore tout à fait à l'aise avec OmegaT, il est plus sûr de considérer les paramètres comme étant définitifs
+               une fois la traduction commencée - à moins, bien sûr, que vous ne vous rendiez compte qu'une erreur majeure a été commise.
+               Voir la section Prévention des pertes de données pour savoir comment protéger votre travail.
+            </p>
+            <div class="figure"><a name="d0e4175"></a><p class="title"><b>Figure&nbsp;6.1.&nbsp;Fenêtre de propriétés du projet</b></p>
+               <div class="figure-contents">
+                  <div class="mediaobject"><img src="images/NewProject_26.png" alt="Fenêtre de propriétés du projet"></div>
+               </div>
+            </div><br class="figure-break"><p>Elle contient :</p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p><span class="bold"><strong>Un espace permettant de paramétrer les langues source et cible du projet.</strong></span></p>
+                     <p>Vous pouvez entrer les langues cible et source à la main ou utiliser les menus déroulants. Gardez à l'esprit que la modification
+                        des langues peut rendre les mémoires de traduction actuellement utilisées inutiles puisque leurs paires de langues peuvent
+                        ne plus correspondre aux nouvelles langues.
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>La case <span class="bold"><strong><span class="guilabel">Activer la segmentation par phrase</span> </strong></span></p><a class="indexterm" name="d0e4200"></a><p>Les paramètres de segmentation n'affectent que la façon dont les fichiers sources sont traités par <span class="application">OmegaT</span>. La façon la plus courante de segmenter les fichiers est la segmentation par phrase. En temps normal, cette case doit donc
+                        rester cochée.
+                     </p>
+                     <p>Mais dans certains cas isolés, l'alternative (soit la segmentation par paragraphe) peut être préférée. La modification de
+                        ce marqueur ne modifie pas la segmentation des mémoires de traduction déjà existantes. Si, en plein milieu de la traduction,
+                        vous décidez de passer d'une traduction par phrase à une traduction par paragraphe, la mémoire de traduction interne du projet
+                        ne sera pas modifiée (OmegaT peut mettre à jour des vieilles mémoires de traduction qui n'étaient pas segmentées par phrase,
+                        mais pas l'inverse).
+                     </p>
+                     <p>La modification des paramètres de segmentation peut entraîner la séparation ou la fusion de segments déjà traduits. Dans les
+                        faits, cela va les faire revenir au statut de « non traduits » puisqu'ils ne correspondront plus aux segments enregistrés
+                        dans la mémoire du projet, même si leur traduction de départ y est toujours présente.
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>Bouton <span class="bold"><strong><span class="guibutton">Segmentation...</span> </strong></span><a class="indexterm" name="d0e4222"></a></p>
+                     <p>Les règles de segmentation sont généralement valables pour l'ensemble des projets. Cependant, il est possible que l'utilisateur
+                        ait besoin de créer un nouvel ensemble de règles qui s'appliqueront spécifiquement au projet en question. Appuyez sur ce bouton
+                        pour ouvrir la boîte de dialogue, cochez la case <span class="guimenuitem">Appliquer les règles de segmentation spécifiques au projet</span> puis ajustez les règles de segmentation comme vous le souhaitez. Ce nouvel ensemble de règles sera sauvegardé avec le projet
+                        et n'interférera pas avec l'ensemble général de règles de segmentation. Pour supprimer les règles de segmentation spécifiques
+                        au projet, décochez la case. Voir le chapitre <a class="link" href="chapter.segmentation.html" title="Chapitre&nbsp;14.&nbsp;Segmentation de la source">Segmentation de la source</a> pour plus d'informations concernant les règles de segmentation.<span class="emphasis"><em></em></span></p>
+                     <p><span class="emphasis"><em>Astuce :</em></span> l'ensemble des règles de segmentation spécifiques à un projet est sauvegardé dans le fichier <code class="filename">project/omegat/segmentation.conf.</code></p>
+                  </li>
+                  <li class="listitem">
+                     <p>Bouton<span class="bold"><strong><span class="guibutton">Fichiers et filtres...</span> </strong></span><a class="indexterm" name="d0e4249"></a></p>
+                     <p>De manière similaire, l'utilisateur peut créer des filtres de fichiers spécifiques au projet qui seront sauvegardés avec le
+                        projet et ne seront donc valables que pour le projet en cours. Pour créer un ensemble de filtres de fichiers spécifiques au
+                        projet, cliquez sur le bouton <span class="guibutton">Fichiers et filtres... </span> puis cochez la case <span class="guimenuitem">Appliquer des paramètres de filtres de fichiers spécifiques au projet</span> dans la fenêtre qui s'ouvre. Une copie des modifications apportées à la configuration des filtres sera sauvegardée avec le
+                        projet. Pour supprimer les filtres de fichiers spécifiques au projet, décochez la case. Veuillez noter que dans le menu <span class="guimenuitem">Options -&gt; Fichiers et filtres...</span>, ce sont les filtres globaux des utilisateurs qui sont modifiés, et pas seulement les filtres du projet. Voir chapitre<a class="link" href="chapter.file.filters.html" title="Chapitre&nbsp;7.&nbsp;Fichiers et filtres"> Filtres de fichiers... </a>pour plus d'informations à ce sujet.<span class="emphasis"><em></em></span></p>
+                     <p><span class="emphasis"><em>Astuce :</em></span> l'ensemble des filtres de fichiers d'un projet donné est sauvegardé dans le fichier <code class="filename">project/omegat/filters.xml.</code></p>
+                  </li>
+                  <li class="listitem">
+                     <p>Case <span class="bold"><strong>Propagation automatique des traductions</strong></span><span class="bold"><strong><a class="indexterm" name="d0e4281"></a></strong></span></p>
+                     <p>Dans le cas où il existerait des segments non uniques dans les documents source, la case Propagation automatique des traductions
+                        donne à l'utilisateur les deux possibilités suivantes concernant la traduction automatique : si la case est cochée, le premier
+                        segment traduit sera considéré comme la traduction par défaut et son texte cible sera automatiquement utilisé pour les segments
+                        identiques suivants durant le processus de traduction. Les segments mal traduits pourront bien entendu être corrigés plus
+                        tard manuellement via <span class="guimenuitem">Créer une traduction alternative</span>. Si la case Propagation automatique des traductions n'est pas cochée, les segments ayant des traductions alternatives ne
+                        seront pas traduits jusqu'à ce que l'utilisateur décide du choix de la traduction.
+                     </p>
+                  </li>
+                  <li class="listitem">
+                     <p>Case <span class="bold"><strong>Supprimer les balises</strong></span><a class="indexterm" name="d0e4296"></a></p>
+                     <p>Lorsque cette option est activée, toutes les balises de formatage sont retirées des segments source. Cela est particulièrement
+                        utile pour des textes dont le formatage intégré n'est pas vraiment utile (par exemple des PDF passés par la reconnaissance
+                        optique de caractères, des documents .odt ou .docx mal convertis, etc). Normalement, il doit toujours être possible d'ouvrir
+                        les documents cibles puisque seuls les balises intégrées sont supprimées. Le formatage non visible (c'est-à-dire qui n'apparaît
+                        pas sous forme de balises dans l'Éditeur d'OmegaT) est conservé dans les documents cibles.
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p><span class="bold"><strong>Un espace pour paramétrer les dossiers du projet</strong></span><a class="indexterm" name="d0e4308"></a><a class="indexterm" name="d0e4313"></a></p>
+                     <p>À cet endroit, vous pouvez sélectionner différents sous-dossiers, par exemple le sous-dossier contenant les fichiers source,
+                        le sous-dossier des fichiers cible, etc. Si vous entrez le nom de dossiers qui n'existent pas encore, <span class="application">OmegaT</span> les crée pour vous. Si vous avez décidé de modifier les dossiers du projet, gardez à l'esprit que cela ne déplacera pas les
+                        fichiers existants dans les vieux dossiers vers le nouvel emplacement.
+                     </p>
+                  </li>
+               </ul>
+            </div>
+         </div>
+      </div>
+      <div class="navfooter">
+         <hr>
+         <table width="100%" summary="Navigation footer">
+            <tr>
+               <td width="40%" align="left"><a accesskey="p" href="chapter.menu.html">Précédent</a>&nbsp;
+               </td>
+               <td width="20%" align="center">&nbsp;</td>
+               <td width="40%" align="right">&nbsp;<a accesskey="n" href="chapter.file.filters.html">Suivant</a></td>
+            </tr>
+            <tr>
+               <td width="40%" align="left" valign="top">Chapitre&nbsp;5.&nbsp;Menus et raccourcis clavier&nbsp;</td>
+               <td width="20%" align="center"><a accesskey="h" href="index.html">Sommaire</a></td>
+               <td width="40%" align="right" valign="top">&nbsp;Chapitre&nbsp;7.&nbsp;Fichiers et filtres</td>
+            </tr>
+         </table>
+      </div>
+   </body>
+</html>

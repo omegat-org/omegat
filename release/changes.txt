@@ -260,6 +260,19 @@ OmegaT failed to load the valid ones
   - Turkish localisation updated to 3.0.0 (UI)
 
 ----------------------------------------------------------------------
+ OmegaT 2.6.3 update 3
+----------------------------------------------------------------------
+   0 Enhancement
+   0 Bug fix
+   1 Localisation update
+----------------------------------------------------------------------
+2.6.3 update 2 vs. 2.6.3 update 1
+
+  Localisation updates:
+
+  - French localisation updated to 2.6.3 (Documentation)
+
+----------------------------------------------------------------------
  OmegaT 2.6.3 update 2
 ----------------------------------------------------------------------
    1 Enhancement

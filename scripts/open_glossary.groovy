@@ -2,43 +2,56 @@
  *  Open the writeable glossary in an editor
  *
  * @author  Yu Tang
- * @date    2013-05-23
- * @version 0.2
+ * @date    2013-06-05
+ * @version 0.3
  */
 
 import static javax.swing.JOptionPane.*
 import static org.omegat.util.Platform.*
 
-def textEditor = /path to your editor/
-// E.g., /TextEdit/
+/**
+ * Uncomment the next line if you want to set a default text editor
+ * that will open glossary file
+ */
+// def textEditor = /path to your editor/
+// E.g., /TextMate/
 // /C:\Program Files (x86)\editor\editor.exe/
+// ['x-terminal-emulator', '-e', 'vi']
 
-// declaring local variables
-def os   = osType
-def prop = project.projectProperties
+// make a Closure to show message dialog
+def showMessage = { msg -> showMessageDialog null, msg, 'Open glossary', INFORMATION_MESSAGE }
 
 // abort if a project is not opened yet
+def prop = project.projectProperties
 if (!prop) {
-  final def title = 'Open glossary'
-  final def msg   = 'Please try again after you open a project.'
-  showMessageDialog null, msg, title, INFORMATION_MESSAGE
+  showMessage 'Please try again after you open a project.'
   return
 }
 
-// get command GString to open a file
+// exit if file not found
 def file = prop.writeableGlossary
+if (! new File(file).exists()) {
+  showMessage 'Glossary file not found.'
+  return
+}
+
+// get command GString list to open a file
 def command
-switch (os) {
+switch (osType) {
   case [OsType.WIN64, OsType.WIN32]:
-    command = "\"$textEditor\" \"$file\""
+    command = "cmd /c start \"\" \"$file\""  // default
+    try { command = textEditor instanceof List ? [*textEditor, file] : "\"$textEditor\" \"$file\"" } catch (ignore) {}
     break
   case [OsType.MAC64, OsType.MAC32]:
-    command = "open -a \"$textEditor\" \"$file\""
+    command = ['open', file]  // default
+    try { command = textEditor instanceof List ? [*textEditor, file] : ['open', '-a', textEditor, file] } catch (ignore) {}
     break
   default:  // for Linux or others
-    command = "\"$textEditor\" \"$file\""
+    command = ['xdg-open', file] // default
+    try { command = textEditor instanceof List ? [*textEditor, file] : [textEditor, file] } catch (ignore) {}
     break
 }
 
 // open it
+console.println "command: $command"
 command.execute()

@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 3.0.3
 ----------------------------------------------------------------------
-   3 Enhancements
+   4 Enhancements
    4 Bug fixes
    8 Localisation updates
 ----------------------------------------------------------------------
@@ -20,10 +20,10 @@
   - The Scripting plugin was integrated in OmegaT. When using
 this version, remove the scripting plugin from the plugin folder.
 
-  Bug fixes: 
-
   - Linux: linux-install.sh and omegat.kaptn were improved, notably
 with the inclusion of Microsoft Translate
+
+  Bug fixes: 
 
   - LanguageTool wasn't working in some languages
   

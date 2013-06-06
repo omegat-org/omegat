@@ -472,6 +472,10 @@ public class Handler extends DefaultHandler implements LexicalHandler, DeclHandl
                 && (currEntry().get(len - 1) instanceof XMLTag)
                 && (((XMLTag) currEntry().get(len - 1)).getTag().equals(tag) && ((XMLTag) currEntry().get(
                         len - 1)).getType() == Tag.Type.BEGIN) && !isClosingTagRequired()) {
+            if (((XMLTag) currEntry().get(len - 1)).getTag().equals(xmlTagName.lastElement())) {
+                xmlTagName.pop();
+                xmlTagAttributes.pop();
+            }
             ((XMLTag) currEntry().get(len - 1)).setType(Tag.Type.ALONE);
         } else {
             XMLTag xmltag = new XMLTag(tag, getShortcut(tag), Tag.Type.END, null, this.translator.getTargetLanguage());

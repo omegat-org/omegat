@@ -2,10 +2,15 @@
  OmegaT 2.6.3 update 3
 ----------------------------------------------------------------------
    0 Enhancement
-   0 Bug fix
+   1 Bug fix
    1 Localisation update
 ----------------------------------------------------------------------
 2.6.3 update 2 vs. 2.6.3 update 1
+
+  Bug fixes: 
+
+  - Team projects: duplicate entries could still happen in the writable 
+glossary 
 
   Localisation updates:
 

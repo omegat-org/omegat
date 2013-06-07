@@ -4,6 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
+               2013 Alex Buloichik
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -24,10 +25,13 @@
 
 package org.omegat.gui.glossary;
 
+import org.omegat.util.StringUtil;
+
 /**
  * An entry in the glossary.
  * 
  * @author Keith Godfrey
+ * @author Alex Buloichik <alex73mail@gmail.com>
  */
 public class GlossaryEntry {
     public GlossaryEntry(String src, String loc, String com) {
@@ -53,13 +57,11 @@ public class GlossaryEntry {
         if (this == o) return true;
         if ( o == null || o.getClass() != this.getClass() ) return false;
         GlossaryEntry otherGlossaryEntry = (GlossaryEntry)o;
-        if ((otherGlossaryEntry.m_src == null && this.m_src == null || otherGlossaryEntry.m_src != null && otherGlossaryEntry.m_src.equals(this.m_src)) 
-         && (otherGlossaryEntry.m_loc == null && this.m_loc == null || otherGlossaryEntry.m_loc != null && otherGlossaryEntry.m_loc.equals(this.m_loc))
-         && (otherGlossaryEntry.m_com == null && this.m_com == null || otherGlossaryEntry.m_com != null && otherGlossaryEntry.m_com.equals(this.m_com))
-           ) {
-            return true;
-        }
-        return false;
+        
+        return StringUtil.equalsWithNulls(this.m_src, otherGlossaryEntry.m_src)
+                && StringUtil.equalsWithNulls(this.m_loc, otherGlossaryEntry.m_loc)
+                && StringUtil.equalsWithNulls(this.m_com, otherGlossaryEntry.m_com);
+
     }
 
     @Override

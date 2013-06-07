@@ -27,6 +27,9 @@
 package org.omegat.gui.glossary;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+
+import org.omegat.util.StringUtil;
 
 /**
  * An entry in the glossary.
@@ -153,13 +156,10 @@ public class GlossaryEntry {
         if (this == o) return true;
         if ( o == null || o.getClass() != this.getClass() ) return false;
         GlossaryEntry otherGlossaryEntry = (GlossaryEntry)o;
-        if ((otherGlossaryEntry.m_src == null && this.m_src == null || otherGlossaryEntry.m_src != null && otherGlossaryEntry.m_src.equals(this.m_src)) 
-         && (otherGlossaryEntry.m_loc == null && this.m_loc == null || otherGlossaryEntry.m_loc != null && otherGlossaryEntry.m_loc.equals(this.m_loc))
-         && (otherGlossaryEntry.m_com == null && this.m_com == null || otherGlossaryEntry.m_com != null && otherGlossaryEntry.m_com.equals(this.m_com))
-           ) {
-            return true;
-        }
-        return false;
+
+        return StringUtil.equalsWithNulls(this.m_src, otherGlossaryEntry.m_src)
+                && Arrays.equals(this.m_loc, otherGlossaryEntry.m_loc)
+                && Arrays.equals(this.m_com, otherGlossaryEntry.m_com);
     }
 
     @Override

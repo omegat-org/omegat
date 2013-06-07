@@ -14,7 +14,7 @@
 
     <para>Les Tokenizers (ou lemmatiseurs) améliorent la qualité des correspondances en reconnaissant les mots accordés dans les données source et dans la mémoire de traduction. Ils améliorent également les capacités de correspondance du glossaire.</para>
 
-    <para>Un lemmatiseur Anglais, par exemple, doit pouvoir identifier la chaîne de caractères « chats » (et éventuellement « chattons », « chatière », etc.) comme ayant pour racine la chaîne de caractères « chat », et « lemmatiser », « lemmatisation », « lemmatiseur » comme ayant pour racine la chaîne de caractères « lemmati ». Un algorithme de lemmatisation réduit les mots « pêcher », « pêché », « pêche », et « pêcheur » au mot racine : « pêche ». Ceci est particulièrement utile dans le cas des langues qui accrochent des préfixes et des suffixes aux racines pour former des mots. Par exemple, vous pourrez trouver ci-dessous toutes les formes grammaticalement correctes du mot « bon » en Slovène :</para>
+    <para>Un lemmatiseur anglais, par exemple, doit pouvoir identifier la chaîne de caractères « chats » (et éventuellement « chatons », « chatière », etc.) comme ayant pour racine la chaîne de caractères « chat », et « lemmatiser », « lemmatisation », « lemmatiseur » comme ayant pour racine la chaîne de caractères « lemmati ». Un algorithme de lemmatisation réduit les mots « pêcher », « pêché », « pêche », et « pêcheur » au mot racine : « pêche ». Ceci est particulièrement utile dans le cas des langues qui accrochent des préfixes et des suffixes aux racines pour former des mots. Par exemple, vous pourrez trouver ci-dessous toutes les formes grammaticalement correctes du mot « bon » en Slovène :</para>
 
     <itemizedlist>
       <listitem>

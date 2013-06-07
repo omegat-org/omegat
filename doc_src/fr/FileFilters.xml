@@ -25,7 +25,7 @@
 
   <para>Pour savoir quels formats de fichier peuvent être traités par OmegaT, voir le menu <guimenuitem>Options &gt; Fichiers et filtres ... </guimenuitem></para>
 
-  <para>La plupart des utilisateurs trouveront les options de filtrage de fichiers par défaut suffisantes. Si ce n'est pas votre cas, ouvrez la boite de dialogue en sélectionnant <emphasis role="bold"> Options → Fichiers et filtres...</emphasis>. Vous pouvez également activer des filtres de fichiers spécifiques au projet, qui seront utilisés uniquement pour le projet en cours, en sélectionnant l'option<emphasis role="bold">Fichiers et filtres...</emphasis> dans Projet → Propriétés....</para>
+  <para>La plupart des utilisateurs trouveront les options de filtrage de fichiers par défaut suffisantes. Si ce n'est pas votre cas, ouvrez la boite de dialogue en sélectionnant <emphasis role="bold"> Options → Fichiers et filtres...</emphasis>. Vous pouvez également activer des filtres de fichiers spécifiques au projet, qui seront utilisés uniquement pour le projet en cours, en sélectionnant l'option <emphasis role="bold">Fichiers et filtres...</emphasis> dans Projet → Propriétés....</para>
 
   <para>Vous pouvez activer le filtre de fichiers spécifiques au projet via <emphasis role="bold">Projet → Propriétés...</emphasis>. Cliquez sur le bouton <guibutton>Fichiers et filtres...</guibutton> et cochez la case <guimenuitem>Appliquez des paramètres de filtres de fichiers spécifiques au projet</guimenuitem><indexterm class="singular">
       <primary>Fichiers et filtres...</primary> <secondary>Filtres de fichiers spécifiques au projet</secondary>

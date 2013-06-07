@@ -20,7 +20,7 @@
 
     <itemizedlist>
       <listitem>
-        <para><emphasis role="bold">Gestion de la terminologie</emphasis>: la gestion de la terminologie est importante pour la cohérence de la traduction. OmegaT utilise des glossaires contenant des traductions de mots uniques ou de courtes expressions, soit, un dictionnaire bilingue simplifié dédié à un domaine spécifique. OmegaT affiche la traduction de tous les mots qui peuvent apparaître dans le segment que vous êtes en train de traduire et qui sont enregistrés dans le glossaire.</para>
+        <para><emphasis role="bold">Gestion de la terminologie</emphasis> : la gestion de la terminologie est importante pour la cohérence de la traduction. OmegaT utilise des glossaires contenant des traductions de mots uniques ou de courtes expressions, soit, un dictionnaire bilingue simplifié dédié à un domaine spécifique. OmegaT affiche la traduction de tous les mots qui peuvent apparaître dans le segment que vous êtes en train de traduire et qui sont enregistrés dans le glossaire.</para>
       </listitem>
     </itemizedlist>
 

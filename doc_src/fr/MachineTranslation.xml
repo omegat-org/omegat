@@ -70,7 +70,7 @@
         <primary>Traduction automatique</primary> <secondary>Apertium</secondary>
       </indexterm></title>
 
-    <para><ulink url="http://www.apertium.org/">Apertium</ulink> est une plateforme de traduction automatique libre/à code source ouvert, au départ destinée aux couples de langues proches comme CA, ES, GA, PT, OC et FR mais qui a récemment été étendue à d'autres couples de langues plus éloignés (comme le couple anglais-catalan). Vérifiez le site internet pour avoir la liste la plus récente des couples de langues présents sur cette plateforme.</para>
+    <para><ulink url="http://www.apertium.org/">Apertium</ulink> est une plateforme de traduction automatique libre/à code source ouvert, au départ destinée aux paires de langues proches comme CA, ES, GA, PT, OC et FR mais qui a récemment été étendue à d'autres paires de langues plus éloignées (comme la paire anglais-catalan). Vérifiez le site internet pour avoir la liste la plus récente des paires de langues présents sur cette plateforme.</para>
 
     <para>La plateforme fournit</para>
 
@@ -86,7 +86,7 @@
 
     <itemizedlist>
       <listitem>
-        <para>des données linguistiques pour un nombre croissant de couples de langues</para>
+        <para>des données linguistiques pour un nombre croissant de paires de langues</para>
       </listitem>
     </itemizedlist>
 

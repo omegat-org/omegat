@@ -2,7 +2,7 @@
  OmegaT 3.0.3 update 1
 ----------------------------------------------------------------------
    0 Enhancement
-   1 Bug fix
+   2 Bug fixes
    0 Localisation update
 ----------------------------------------------------------------------
 3.0.3 update 1 vs. 3.0.3
@@ -11,6 +11,10 @@
 
   - Scripts folder is not created in Windows packages  
   https://sourceforge.net/p/omegat/bugs/595/
+
+  - The log contained an exception related to the LanguageTool module.
+This exception was related to a multithreading issue, which has been
+fixed.
 
 ----------------------------------------------------------------------
  OmegaT 3.0.3

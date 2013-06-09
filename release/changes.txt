@@ -2,11 +2,15 @@
  OmegaT 3.0.3 update 1
 ----------------------------------------------------------------------
    0 Enhancement
-   0 Bug fix
+   1 Bug fix
    0 Localisation update
 ----------------------------------------------------------------------
 3.0.3 update 1 vs. 3.0.3
 
+  Bug fixes: 
+
+  - Scripts folder is not created in Windows packages  
+  https://sourceforge.net/p/omegat/bugs/595/
 
 ----------------------------------------------------------------------
  OmegaT 3.0.3

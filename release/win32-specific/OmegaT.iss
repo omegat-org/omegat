@@ -21,6 +21,7 @@ Source: "images\*"; DestDir: "{app}\images"; Flags: recursesubdirs
 Source: "lib\*"; DestDir: "{app}\lib"; Flags: recursesubdirs
 Source: "native\*"; DestDir: "{app}\native"; Flags: recursesubdirs
 Source: "plugins\*"; DestDir: "{app}\plugins"; Flags: recursesubdirs
+Source: "scripts\*"; DestDir: "{app}\scripts"; Flags: recursesubdirs
 Source: "OmegaT.exe"; DestDir: "{app}"
 Source: "OmegaT.l4J.ini"; DestDir: "{app}"; AfterInstall: SetUserLanguage; Flags: onlyifdoesntexist
 Source: "OmegaT.jar"; DestDir: "{app}"

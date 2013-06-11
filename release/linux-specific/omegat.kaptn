@@ -23,13 +23,13 @@ javaloc_m :horizontal ->  javaloc_t ;
 javaloc_t "The current default assumes that you have used the linux-install.sh\n
 installation script and are using a local version of the JRE\n
 (i.e. you have installed OmegaT with JRE).\n
-If you want to use a system-wide version of Java that is in your execution path,\n
-you can either select \"System-wide Java installation\"\n
-(possibly choosing one of the versions from drop-down menu), or replace\n
-\"/opt/omegat/jre/bin/java\" with \"java\" (provided Java is\n
-in your execution path). If you are using a system-wide version of Java\n
-that is NOT in your execution path, replace \"/opt/omegat/jre/bin/java\"\n
-with the full path of your java executable (in quotes) or browse and select it." -> @ ;
+If you want to use a system-wide version of Java, you can either select \n
+\"System-wide Java installation\" (possibly choosing one of the versions \n
+from drop-down menu), or replace \"/opt/omegat/jre/bin/java\" with \"java\"\n
+(provided Java is in your execution path). If you are using a system-wide \n
+version of Java that is NOT in your execution path,\n
+replace \"/opt/omegat/jre/bin/java\" with the full path\n
+of your java executable (in quotes) or browse and select it." -> @ ;
 javaloc_hc :horizontal -> @close="Close";
 
 
@@ -43,12 +43,17 @@ jarpick :horizontal "Custom OmegaT installation"-> @infile("OmegaT.jar")="/opt/o
 jarfileloc_help :dialog "Help" -> jarfileloc_m jarfileloc_hc ;
 jarfileloc_m :horizontal ->  jarfileloc_t ;
 jarfileloc_t "Location of the OmegaT program. This launcher defaults to the version\n
-installed with \"linux-install.sh\". Use may use the drop-down menu \n
+installed with \"linux-install.sh\". You may use the drop-down menu \n
 to select one of OmegaT versions installed in /opt/omegat. You may also \n
 choose another version by browsing to and selecting the respective OmegaT.jar" -> @ ;
 jarfileloc_hc :horizontal -> @close="Close" ;
 
-jvrs -> "cd `dirname " jarfileloc "` ; zenity --info --title=\"Version\" --text \"$(grep -o -m1 \"OmegaT\\s*[\.0-9]*[0-9 a-z]*\" \.\/changes.txt)\"" ;
+jvrs -> "cd `dirname " jarfileloc "` ; \
+echo \"#!/usr/bin/kaptain\" > /tmp/otver.kaptn ;\
+echo \"start \'\"Version\"\' -> ver button \;\" >> /tmp/otver.kaptn ;\
+echo \"button :horizontal -> @close=\'\"Close\"\';\" >> /tmp/otver.kaptn ;\
+echo \"ver \'\"$(grep -o -m1 \"OmegaT\\s*[\.0-9]*[0-9 a-z]*\" \.\/changes.txt)\"\' -> @ ;\" >> /tmp/otver.kaptn ;\
+kaptain /tmp/otver.kaptn && rm /tmp/otver.kaptn" ;
 
 
 # Optional file locations
@@ -66,14 +71,11 @@ configloc_hc :horizontal -> @close="Close" ;
 # Open a specific project at launch
 
 #projectloc :horizontal "Open specified project immediately" -> @directory projectloc_help ;
-projectloc :vertical "Open specified project immediately" -> @combow("", `IFS=$(echo "\n\b") && for i in $(find $HOME -name "omegat.project" -type f); do echo "\"$(dirname $i)\""; done`) projectloc_help ;
+projectloc :horizontal "Open specified project immediately" -> @combow("", `IFS=$(echo "\n\b") && for i in $(find $HOME -name "omegat.project" -type f); do echo "\"$(dirname $i)\""; done`) projectloc_help ;
 projectloc_help :dialog "Help" -> projectloc_m projectloc_hc ;
 projectloc_m :horizontal ->  projectloc_t ;
 projectloc_t "Open a specific project immediately after launching OmegaT. \nUsualy superfluous in GUI mode." -> @ ;
 projectloc_hc :horizontal -> @close="Close" ;
-
-# fillloc -> @fill ;
-
 
 ### Memory tab
 

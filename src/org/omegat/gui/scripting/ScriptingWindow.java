@@ -242,7 +242,7 @@ public class ScriptingWindow extends JFrame {
     }
 
     private void initWindowLayout() {
-        setBounds(100, 100, 742, 546);
+        setBounds(80, 80, 910, 550);
 
         getContentPane().setLayout(new BorderLayout(0, 0));
 
@@ -639,7 +639,7 @@ public class ScriptingWindow extends JFrame {
     private static final String DEFAULT_SCRIPTS_DIR = "scripts";
     private static final String REFRESH_SCRIPT_DIR = "refreshScriptDir";
     
-    private static final int NUMBERS_OF_QUICK_SCRIPTS = 5;
+    private static final int NUMBERS_OF_QUICK_SCRIPTS = 12;
     
     private JList m_scriptList;
     private JEditorPane m_txtResult;

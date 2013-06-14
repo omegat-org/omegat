@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 3.0.3 update 1
 ----------------------------------------------------------------------
-   2 Enhancements
+   3 Enhancements
    2 Bug fixes
    0 Localisation update
 ----------------------------------------------------------------------
@@ -11,6 +11,9 @@
 
   - Add support for monolingual .po files 
   https://sourceforge.net/p/omegat/feature-requests/865/
+
+  - Allow 12 scripts in the Tools menu
+  https://sourceforge.net/p/omegat/feature-requests/843/
 
  Other enhancements:
 

@@ -25,6 +25,7 @@
 
 package org.omegat.filters;
 
+import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -60,6 +61,19 @@ public class POFilterTest extends TestFilterBase {
         checkMulti("source1", null, "", null, null, null);
         checkMulti("source1", null, "other context", null, null, null);
         checkMultiEnd();
+    }
+
+    public void testLoadMonolingual() throws Exception {
+        String f = "test/data/filters/po/file-POFilter-Monolingual.po";
+        PoFilter filter = new PoFilter();
+        Map<String, String> options = new TreeMap<String, String>();
+        options.put(PoFilter.OPTION_FORMAT_MONOLINGUAL, "true");
+        List<ParsedEntry> parsed = parse3(filter, f, options);
+        assertEquals(2, parsed.size());
+        assertEquals("firstId", parsed.get(0).id);
+        assertEquals("first source", parsed.get(0).source);
+        assertEquals("secondId", parsed.get(1).id);
+        assertEquals("second source", parsed.get(1).source);
     }
 
     public void testTranslate() throws Exception {

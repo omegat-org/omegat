@@ -380,7 +380,7 @@ public class PoFilter extends AbstractFilter {
         translatorComments = new StringBuilder();
         extractedComments = new StringBuilder();
         references = new StringBuilder();
-        path = null;
+        path = "";
 
         String s;
         while ((s = in.readLine()) != null) {
@@ -659,7 +659,7 @@ public class PoFilter extends AbstractFilter {
         for (int i=0;i<plurals;i++) {
             targets[i].setLength(0);
         }
-        path = null;
+        path = "";
         translatorComments.setLength(0);
         extractedComments.setLength(0);
         references.setLength(0);

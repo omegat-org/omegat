@@ -1,11 +1,16 @@
 ----------------------------------------------------------------------
  OmegaT 3.0.3 update 1
 ----------------------------------------------------------------------
-   1 Enhancement
+   2 Enhancements
    2 Bug fixes
    0 Localisation update
 ----------------------------------------------------------------------
 3.0.3 update 1 vs. 3.0.3
+
+  Implemented requests:
+
+  - Add support for monolingual .po files 
+  https://sourceforge.net/p/omegat/feature-requests/865/
 
  Other enhancements:
 

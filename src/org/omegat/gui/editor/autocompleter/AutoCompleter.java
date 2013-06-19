@@ -205,62 +205,42 @@ public class AutoCompleter {
     }
     
     /** 
-     * Selects the next item in the list.  It won't change the selection if the 
-     * currently selected item is already the last item. 
+     * Selects the next item in the list.
      */ 
     protected void selectNextPossibleValue() { 
-        int si = list.getSelectedIndex(); 
- 
-        if (si < list.getModel().getSize() - 1) { 
-            list.setSelectedIndex(si + 1); 
-            list.ensureIndexIsVisible(si + 1); 
-        } 
-    } 
+        int i = (list.getSelectedIndex() + 1) % list.getModel().getSize();
+        list.setSelectedIndex(i);
+        list.ensureIndexIsVisible(i);
+    }
 
     /** 
-     * Selects the item in the list following the current one by 10 items or go to the first item. 
-     * currently selected item is already the last item. 
+     * Selects the item in the list following the current one by one page or go to the last item. 
      */ 
     protected void selectNextPossibleValueByPage() { 
-        int si = list.getSelectedIndex(); 
- 
-        int size = list.getModel().getSize();
-        if (si < size - 10) { 
-            list.setSelectedIndex(si + 10); 
-            list.ensureIndexIsVisible(si + 10); 
-        } else {
-            list.setSelectedIndex(size-1);
-            list.ensureIndexIsVisible(size-1);
-        }
-    } 
+        int page = list.getLastVisibleIndex() - list.getFirstVisibleIndex();
+        int i = Math.min(list.getSelectedIndex() + page, list.getModel().getSize() - 1);
+        list.setSelectedIndex(i);
+        list.ensureIndexIsVisible(i);
+    }
 
     /** 
-     * Selects the previous item in the list.  It won't change the selection if the 
-     * currently selected item is already the first item. 
+     * Selects the previous item in the list.
      */ 
-    protected void selectPreviousPossibleValue() { 
-        int si = list.getSelectedIndex(); 
-
-        if (si > 0) { 
-            list.setSelectedIndex(si - 1); 
-            list.ensureIndexIsVisible(si - 1); 
-        } 
+    protected void selectPreviousPossibleValue() {
+        int s = list.getModel().getSize();
+        int i = (list.getSelectedIndex() - 1 + s) % s;
+        list.setSelectedIndex(i);
+        list.ensureIndexIsVisible(i);
     } 
     
     /** 
-     * Selects the item in the list preceding the current one by 10 items or go to the first item.  It won't change the selection if the 
-     * currently selected item is already the first item. 
+     * Selects the item in the list preceding the current one by one page or go to the first item.
      */ 
     protected void selectPreviousPossibleValueByPage() { 
-        int si = list.getSelectedIndex(); 
-
-        if (si > 10) {
-            list.setSelectedIndex(si - 10); 
-            list.ensureIndexIsVisible(si - 10); 
-        } else { 
-            list.setSelectedIndex(0); 
-            list.ensureIndexIsVisible(0); 
-        } 
+        int page = list.getLastVisibleIndex() - list.getFirstVisibleIndex();
+        int i = Math.max(list.getSelectedIndex() - page, 0);
+        list.setSelectedIndex(i);
+        list.ensureIndexIsVisible(i);
     }
     
     /**
@@ -290,6 +270,7 @@ public class AutoCompleter {
             }
             updateViewLabel();
             popup.show(editor, x, y);
+            list.ensureIndexIsVisible(list.getSelectedIndex());
         } else {
             popup.setVisible(false);
         }
@@ -358,13 +339,11 @@ public class AutoCompleter {
     }
 
     private int nextViewNumber() {
-        if (views.size() == 1)
-            return currentView;
-        
-        if (currentView + 1 >= views.size()) {
-            return 0;
-        }
-        return currentView + 1;
+        return (currentView + 1) % views.size();
+    }
+    
+    private int prevViewNumber() {
+        return (currentView - 1 + views.size()) % views.size();
     }
     
     private void updateViewLabel() {
@@ -386,7 +365,7 @@ public class AutoCompleter {
             if (views.size() > 2) {
             sb.append(StaticUtils.format(OStrings.getString("AC_PREV_VIEW"),
                     prevKeyString,
-                    views.get(nextViewNumber()).getName()));
+                    views.get(prevViewNumber()).getName()));
             }
         }
         sb.append(OStrings.getString("AC_LABEL_END"));
@@ -401,14 +380,7 @@ public class AutoCompleter {
     }
 
     private void selectPreviousView() {
-        if (views.size() == 1)
-            return;
-        
-        if (currentView - 1 < 0) {
-            currentView = views.size()-1;
-        } else {
-            currentView--;
-        }
+        currentView = prevViewNumber();
         
         updatePopup();
     }

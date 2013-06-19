@@ -6,7 +6,7 @@
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
                2009 Martin Fleurke, Alex Buloichik, Didier Briel
                2012 Aaron Madlon-Kay
-               2013 Kyle Katarn
+               2013 Kyle Katarn, Aaron Madlon-Kay
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -373,10 +373,10 @@ public class Main {
             for (SourceTextEntry ste : entries) {
                 switch (pseudoTranslateType) {
                 case EQUAL:
-                    data.put(ste.getSrcText(), new TMXEntry(ste.getSrcText(), ste.getSrcText(), null, 0, null, true));
+                    data.put(ste.getSrcText(), new TMXEntry(ste.getSrcText(), ste.getSrcText(), true));
                     break;
                 case EMPTY:
-                    data.put(ste.getSrcText(), new TMXEntry(ste.getSrcText(), "", null, 0, null, true));
+                    data.put(ste.getSrcText(), new TMXEntry(ste.getSrcText(), "", true));
                     break;
                 }
             }

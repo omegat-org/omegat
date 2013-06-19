@@ -7,6 +7,7 @@
                2010 Alex Buloichik
                2011 Alex Buloichik, Martin Fleurke
                2012 Alex Buloichik, Didier Briel
+               2013 Aaron Madlon-Kay
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -51,6 +52,7 @@ import org.omegat.core.data.TMXEntry;
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Martin Fleurke
  * @author Didier Briel
+ * @author Aaron Madlon-Kay
  */
 public class TMXWriter2 {
     private static XMLOutputFactory FACTORY;
@@ -227,6 +229,12 @@ public class TMXWriter2 {
             }
             if (entry.changeDate > 0) {
                 xml.writeAttribute("changedate", tmxDateFormat.format(new Date(entry.changeDate)));
+            }
+            if (!StringUtil.isEmpty(entry.creator)) {
+                xml.writeAttribute("creationid", entry.creator);
+            }
+            if (entry.creationDate > 0) {
+                xml.writeAttribute("creationdate", tmxDateFormat.format(new Date(entry.creationDate)));
             }
             xml.writeCharacters(FileUtil.LINE_SEPARATOR);
 

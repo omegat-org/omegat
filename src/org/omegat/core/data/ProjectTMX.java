@@ -4,6 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2012 Alex Buloichik
+               2013 Aaron Madlon-Kay
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -47,6 +48,7 @@ import org.omegat.util.TMXWriter2;
  * Orphaned or non-orphaned translation calculated by RealProject.
  * 
  * @author Alex Buloichik (alex73mail@gmail.com)
+ * @author Aaron Madlon-Kay
  */
 public class ProjectTMX {
     protected static final String PROP_FILE = "file";
@@ -248,14 +250,18 @@ public class ProjectTMX {
                 // source Tuv not found
                 return false;
             }
+            String creator = null;
+            long created = 0;
             String changer = null;
-            long dt = 0;
+            long changed = 0;
             String translation = null;
 
             if (tuvTarget != null) {
+                creator = StringUtil.nvl(tuvTarget.creationid, tu.creationid);
+                created = StringUtil.nvlLong(tuvTarget.creationdate, tu.creationdate);
                 changer = StringUtil.nvl(tuvTarget.changeid, tuvTarget.creationid, tu.changeid,
-                    tu.creationid);
-                dt = StringUtil.nvlLong(tuvTarget.changedate, tuvTarget.creationdate, tu.changedate,
+                        tu.creationid);
+                changed = StringUtil.nvlLong(tuvTarget.changedate, tuvTarget.creationdate, tu.changedate,
                     tu.creationdate);
                 translation = tuvTarget.text;
             }
@@ -271,8 +277,8 @@ public class ProjectTMX {
                     String segmentTranslation = targets.get(i);
                     EntryKey key = createKeyByProps(segmentSource, tu.props);
                     boolean defaultTranslation = key.file == null;
-                    TMXEntry te = new TMXEntry(segmentSource, segmentTranslation, changer, dt, tu.note,
-                            defaultTranslation);
+                    TMXEntry te = new TMXEntry(segmentSource, segmentTranslation, changer, changed,
+                            creator, created, tu.note, defaultTranslation, null);
                     if (defaultTranslation) {
                         // default translation
                         defaults.put(segmentSource, te);

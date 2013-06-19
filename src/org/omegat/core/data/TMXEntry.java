@@ -5,6 +5,7 @@
 
  Copyright (C) 2010 Alex Buloichik
                2012 Guido Leenders, Thomas Cordonnier
+               2013 Aaron Madlon-Kay
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -35,30 +36,35 @@ import java.util.Map;
  * 
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Guido Leenders
+ * @author Aaron Madlon-Kay
  */
 public class TMXEntry {
     public final String source;
     public final String translation;
     public final String changer;
     public final long changeDate;
+    public final String creator;
+    public final long creationDate;
     public final String note;
     public final boolean defaultTranslation;
     public final Map<String,String> properties;
 
-    public TMXEntry(String source, String translation, String changer, long changeDate, String note,
-            boolean defaultTranslation, Map<String,String> properties) {
+    public TMXEntry(String source, String translation, String changer, long changeDate,
+            String creator, long creationDate, String note, boolean defaultTranslation,
+            Map<String,String> properties) {
         this.source = source;
         this.translation = translation;
         this.changer = changer;
         this.changeDate = changeDate;
+        this.creator = creator;
+        this.creationDate = creationDate;
         this.note = note;
         this.defaultTranslation = defaultTranslation;
         this.properties = properties;
     }
 
-    public TMXEntry(String source, String translation, String changer, long changeDate, String note,
-            boolean defaultTranslation) {
-        this (source, translation, changer, changeDate, note, defaultTranslation, null);
+    public TMXEntry(String source, String translation, boolean defaultTranslation) {
+        this(source, translation, null, 0, null, 0, null, defaultTranslation, null);
     }
 	
     public boolean isTranslated() {

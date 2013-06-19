@@ -5,6 +5,7 @@
 
  Copyright (C) 2010 Alex Buloichik
                2012 Thomas CORDONNIER
+               2013 Aaron Madlon-Kay
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -39,6 +40,8 @@ import org.omegat.util.TMXReader2;
  * Class for store data from TMX from /tm/ folder. They are used only for fuzzy matches.
  * 
  * @author Alex Buloichik (alex73mail@gmail.com)
+ * @author Thomas CORDONNIER
+ * @author Aaron Madlon-Kay
  */
 public class ExternalTMX {
 
@@ -81,8 +84,10 @@ public class ExternalTMX {
                     TMXReader2.ParsedTuv tuvTarget, boolean isParagraphSegtype) {
                 String changer = StringUtil.nvl(tuvTarget.changeid, tuvTarget.creationid, tu.changeid,
                         tu.creationid);
-                long dt = StringUtil.nvlLong(tuvTarget.changedate, tuvTarget.creationdate, tu.changedate,
+                String creator = StringUtil.nvl(tuvTarget.creationid, tu.creationid);
+                long changed = StringUtil.nvlLong(tuvTarget.changedate, tuvTarget.creationdate, tu.changedate,
                         tu.creationdate);
+                long created = StringUtil.nvlLong(tuvTarget.creationdate, tu.creationdate);
 
                 List<String> sources = new ArrayList<String>();
                 List<String> targets = new ArrayList<String>();
@@ -91,7 +96,8 @@ public class ExternalTMX {
                         sources, targets);
 
                 for (int i = 0; i < sources.size(); i++) {
-                    TMXEntry te = new TMXEntry(sources.get(i), targets.get(i), changer, dt, tu.note, true, tu.props);
+                    TMXEntry te = new TMXEntry(sources.get(i), targets.get(i), changer, changed,
+                            creator, created, tu.note, true, tu.props);
                     entries.add(te);
                 }
             }

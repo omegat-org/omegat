@@ -175,7 +175,7 @@ public class FindMatchesThread extends EntryInfoSearchThread<List<NearString>> {
                     }
                     String fileName = project.isOrphaned(source) ? orphanedFileName : null;
                     processEntry(null, source, trans.translation, NearString.MATCH_SOURCE.MEMORY, false, 0, fileName,
-                            trans.changer, trans.changeDate, trans.properties);
+                            trans.creator, trans.creationDate, trans.changer, trans.changeDate, trans.properties);
                 }
             });
         }
@@ -191,7 +191,7 @@ public class FindMatchesThread extends EntryInfoSearchThread<List<NearString>> {
                 }
                 String fileName = project.isOrphaned(source) ? orphanedFileName : null;
                 processEntry(source, source.sourceText, trans.translation, NearString.MATCH_SOURCE.MEMORY, false, 0,
-                        fileName, trans.changer, trans.changeDate, trans.properties);
+                        fileName, trans.creator, trans.creationDate, trans.changer, trans.changeDate, trans.properties);
             }
         });
 
@@ -209,7 +209,7 @@ public class FindMatchesThread extends EntryInfoSearchThread<List<NearString>> {
                     continue;
                 }
                 processEntry(null, tmen.source, tmen.translation, NearString.MATCH_SOURCE.TM, false, penalty,
-                        en.getKey(), tmen.changer, tmen.changeDate, tmen.properties);
+                        en.getKey(), tmen.creator, tmen.creationDate, tmen.changer, tmen.changeDate, tmen.properties);
             }
         }
         
@@ -218,8 +218,8 @@ public class FindMatchesThread extends EntryInfoSearchThread<List<NearString>> {
             checkEntryChanged();
             if (ste.getSourceTranslation() != null) {
                 processEntry(ste.getKey(), ste.getSrcText(), ste.getSourceTranslation(),
-                        NearString.MATCH_SOURCE.MEMORY, ste.isSourceTranslationFuzzy(), 0, ste.getKey().file, "", 0,
-                        null);
+                        NearString.MATCH_SOURCE.MEMORY, ste.isSourceTranslationFuzzy(), 0, ste.getKey().file, 
+                        "", 0, "", 0, null);
             }
         }
 
@@ -248,7 +248,8 @@ public class FindMatchesThread extends EntryInfoSearchThread<List<NearString>> {
      */
     protected void processEntry(final EntryKey key, final String source, final String translation,
             NearString.MATCH_SOURCE comesFrom, final boolean fuzzy, final int penalty, final String tmxName,
-            final String creator, final long creationDate, final Map<String, String> props) {
+            final String creator, final long creationDate, final String changer, final long changedDate,
+            final Map<String, String> props) {
         //remove part that is to be removed prior to tokenize
         String realSource = source;
         String entryRemovedText="";
@@ -314,7 +315,7 @@ public class FindMatchesThread extends EntryInfoSearchThread<List<NearString>> {
         }
 
         addNearString(key, source, translation, comesFrom, fuzzy, similarityStem, similarityNoStem, simAdjusted, null,
-                tmxName, creator, creationDate, props);
+                tmxName, creator, creationDate, changer, changedDate, props);
     }
 
     /**
@@ -366,7 +367,8 @@ public class FindMatchesThread extends EntryInfoSearchThread<List<NearString>> {
     protected void addNearString(final EntryKey key, final String source, final String translation,
             NearString.MATCH_SOURCE comesFrom, final boolean fuzzy, final int similarity, final int similarityNoStem,
             final int simAdjusted, final byte[] similarityData, final String tmxName, final String creator,
-            final long creationDate, final Map<String, String> tuProperties) {
+            final long creationDate, final String changer, final long changedDate,
+            final Map<String, String> tuProperties) {
         // find position for new data
         int pos = 0;
         for (int i = 0; i < result.size(); i++) {
@@ -378,7 +380,7 @@ public class FindMatchesThread extends EntryInfoSearchThread<List<NearString>> {
                 // Consolidate identical matches from different sources into a single NearString with
                 // multiple project entries.
                 result.set(i, NearString.merge(st, key, source, translation, comesFrom, fuzzy, similarity, similarityNoStem,
-                        simAdjusted, similarityData, tmxName, creator, creationDate, tuProperties));
+                        simAdjusted, similarityData, tmxName, creator, creationDate, changer, changedDate, tuProperties));
                 return;
             }
             if (st.scores[0].score < similarity) {
@@ -404,7 +406,7 @@ public class FindMatchesThread extends EntryInfoSearchThread<List<NearString>> {
         }
 
         result.add(pos, new NearString(key, source, translation, comesFrom, fuzzy, similarity, similarityNoStem,
-                simAdjusted, similarityData, tmxName, creator, creationDate, tuProperties));
+                simAdjusted, similarityData, tmxName, creator, creationDate, changer, changedDate, tuProperties));
         if (result.size() > OConsts.MAX_NEAR_STRINGS) {
             result.remove(result.size() - 1);
         }

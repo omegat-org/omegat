@@ -153,14 +153,14 @@ public class RealProjectTest extends TestCase {
     private void setDefault(String source, String translation) {
         EntryKey key = new EntryKey(null, source, null, null, null, null);
         SourceTextEntry ste = new SourceTextEntry(key, 0, null, translation, null);
-        TMXEntry tr = new TMXEntry(source, translation, null, 0, null, true);
+        TMXEntry tr = new TMXEntry(source, translation, true);
         tmx.setTranslation(ste, tr, true);
     }
 
     private void setAlternative(String id, String source, String translation) {
         EntryKey key = new EntryKey("test", source, id, null, null, null);
         SourceTextEntry ste = new SourceTextEntry(key, 0, null, translation, null);
-        TMXEntry tr = new TMXEntry(source, translation, null, 0, null, false);
+        TMXEntry tr = new TMXEntry(source, translation, false);
         tmx.setTranslation(ste, tr, false);
     }
 

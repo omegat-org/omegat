@@ -38,6 +38,8 @@ import java.util.Map;
  * Class to hold a single fuzzy match.
  * 
  * @author Keith Godfrey
+ * @author Maxym Mykhalchuk
+ * @author Thomas Cordonnier
  * @author Aaron Madlon-Kay
  */
 public class NearString {
@@ -48,7 +50,7 @@ public class NearString {
     public NearString(final EntryKey key, final String source, final String translation, MATCH_SOURCE comesFrom,
             final boolean fuzzyMark, final int nearScore, final int nearScoreNoStem, final int adjustedScore,
             final byte[] nearData, final String projName, final String creator, final long creationDate,
-            final Map<String, String> props) {
+            final String changer, final long changedDate, final Map<String, String> props) {
         this.key = key;
         this.source = source;
         this.translation = translation;
@@ -60,12 +62,14 @@ public class NearString {
         this.props = props;
         this.creator = creator;
         this.creationDate = creationDate;
+        this.changer = changer;
+        this.changedDate = changedDate;
     }
     
     public static NearString merge(NearString ns, final EntryKey key, final String source, final String translation,
             MATCH_SOURCE comesFrom, final boolean fuzzyMark, final int nearScore, final int nearScoreNoStem,
             final int adjustedScore, final byte[] nearData, final String projName, final String creator,
-            final long creationDate, final Map<String, String> props) {
+            final long creationDate, final String changer, final long changedDate, final Map<String, String> props) {
         
         List<String> projs = new ArrayList<String>();
         List<Scores> scores = new ArrayList<Scores>();
@@ -79,7 +83,7 @@ public class NearString {
         if (nearScore > ns.scores[0].score) {
             projs.add(0, projName);
             NearString merged = new NearString(key, source, translation, comesFrom, fuzzyMark, nearScore, nearScoreNoStem,
-                    adjustedScore, nearData, null, creator, creationDate, props);
+                    adjustedScore, nearData, null, creator, creationDate, changer, changedDate, props);
             scores.add(0, merged.scores[0]);
             merged.projs = projs.toArray(new String[0]);
             merged.scores = scores.toArray(new Scores[0]);
@@ -108,6 +112,8 @@ public class NearString {
     public Map<String,String> props;
     public String creator;
     public long creationDate;
+    public String changer;
+    public long changedDate;
 
     public static class Scores {
         public final int score;

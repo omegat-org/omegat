@@ -85,7 +85,7 @@ public class TMXWriterTest extends TestFilterBase {
 
         TMXWriter2 wr = new TMXWriter2(outFile, new Language("en-US"), new Language("be-BY"), false, true,
                 false);
-        wr.writeEntry(in, "test", new TMXEntry(null, null, null, 0, null, true), null);
+        wr.writeEntry(in, "test", new TMXEntry(null, null, true), null);
         wr.close();
 
         load(new ArrayList<String>(), null, false, false);
@@ -95,10 +95,10 @@ public class TMXWriterTest extends TestFilterBase {
         TMXWriter2 wr = new TMXWriter2(outFile, new Language("en-US"), new Language("be-BY"), false, true,
                 false);
 
-        wr.writeEntry("source", "target", new TMXEntry(null, null, null, 0, null, true), null);
-        wr.writeEntry("1<a1/>2", "zz", new TMXEntry(null, null, null, 0, null, true), null);
-        wr.writeEntry("3<a1>4</a1>5", "zz", new TMXEntry(null, null, null, 0, null, true), null);
-        wr.writeEntry("6<a1>7", "zz", new TMXEntry(null, null, null, 0, null, true), null);
+        wr.writeEntry("source", "target", new TMXEntry(null, null, true), null);
+        wr.writeEntry("1<a1/>2", "zz", new TMXEntry(null, null, true), null);
+        wr.writeEntry("3<a1>4</a1>5", "zz", new TMXEntry(null, null, true), null);
+        wr.writeEntry("6<a1>7", "zz", new TMXEntry(null, null, true), null);
 
         wr.close();
 
@@ -149,7 +149,7 @@ public class TMXWriterTest extends TestFilterBase {
 
             TMXWriter2 wr = new TMXWriter2(outFile, new Language("en-US"), new Language("be-BY"), false,
                     true, false);
-            wr.writeEntry("source", "tar\nget", new TMXEntry(null, null, null, 0, null, true), null);
+            wr.writeEntry("source", "tar\nget", new TMXEntry(null, null, true), null);
             wr.close();
 
             StringBuilder text = new StringBuilder();

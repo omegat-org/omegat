@@ -76,7 +76,9 @@ public class SnowballEnglishTokenizer extends BaseTokenizer {
     protected TokenStream getTokenStream(final String strOrig,
             final boolean stemsAllowed, final boolean stopWordsAllowed) {
         if (stemsAllowed) {
-            return new SnowballAnalyzer(getBehavior(), "English", STOP_WORDS).tokenStream(
+            return new SnowballAnalyzer(getBehavior(),
+                    "English",
+                    stopWordsAllowed ? STOP_WORDS : new String[0]).tokenStream(
                     null, new StringReader(strOrig));
         } else {
             return new StandardTokenizer(getBehavior(),

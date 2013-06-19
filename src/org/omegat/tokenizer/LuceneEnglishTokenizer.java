@@ -28,6 +28,7 @@ import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.StringReader;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -83,7 +84,8 @@ public class LuceneEnglishTokenizer extends BaseTokenizer {
     protected TokenStream getTokenStream(final String strOrig,
             final boolean stemsAllowed, final boolean stopWordsAllowed) {
         if (stemsAllowed) {
-            return new EnglishAnalyzer(getBehavior(), STOP_WORDS).tokenStream("",
+            return new EnglishAnalyzer(getBehavior(),
+                    stopWordsAllowed ? STOP_WORDS : Collections.EMPTY_SET).tokenStream("",
                     new StringReader(strOrig));
         } else {
             return new StandardTokenizer(getBehavior(),

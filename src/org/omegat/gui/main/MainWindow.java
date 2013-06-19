@@ -7,7 +7,7 @@
                          Benjamin Siband, and Kim Bruning
                2007 Zoltan Bartko
                2008 Andrzej Sawula, Alex Buloichik, Didier Briel
-               2013 Yu Tang
+               2013 Yu Tang, Aaron Madlon-Kay
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -87,6 +87,7 @@ import java.awt.Image;
  * @author Andrzej Sawula
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Yu Tang
+ * @author Aaron Madlon-Kay
  */
 @SuppressWarnings("serial")
 public class MainWindow extends JFrame implements IMainWindow {
@@ -249,7 +250,7 @@ public class MainWindow extends JFrame implements IMainWindow {
             }
             if (near.comesFrom == NearString.MATCH_SOURCE.TM
                     && ExternalTMX.isInPath(new File(Core.getProject().getProjectProperties().getTMRoot(), "mt"),
-                            new File(near.proj))) {
+                            new File(near.projs[0]))) {
                 Core.getEditor().replaceEditTextAndMark(translation);
             } else {
                 Core.getEditor().replaceEditText(translation);

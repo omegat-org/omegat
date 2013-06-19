@@ -26,6 +26,7 @@
 package org.omegat.gui.matches;
 
 import org.omegat.util.VarExpansion;
+import org.omegat.core.data.ProjectProperties;
 import org.omegat.core.matching.DiffDriver;
 import org.omegat.core.matching.DiffDriver.TextRun;
 import org.omegat.core.matching.DiffDriver.Render;
@@ -74,7 +75,7 @@ public class MatchesVarExpansion extends VarExpansion<NearString> {
     };
     
     public static final String DEFAULT_TEMPLATE = VAR_ID + ") " 
-			+ VAR_FUZZY_FLAG
+            + VAR_FUZZY_FLAG
             + VAR_SOURCE_TEXT + "\n"
             + VAR_TARGET_TEXT + "\n"
             + "<" + VAR_SCORE_BASE + "/" 
@@ -109,8 +110,8 @@ public class MatchesVarExpansion extends VarExpansion<NearString> {
     public static class Result {
         public String text; 
         public int sourcePos;
-	public List<TextRun> diffInfo;
-	public int diffPos;
+    public List<TextRun> diffInfo;
+    public int diffPos;
     }
     
     /** A simple interface for making anonymous functions that perform string replacements. */
@@ -171,13 +172,15 @@ public class MatchesVarExpansion extends VarExpansion<NearString> {
             localTemplate = localTemplate.replace(VAR_CREATION_DATE, DateFormat.getInstance().format(new Date (match.creationDate)));
         else
             localTemplate = localTemplate.replace(VAR_CREATION_DATE, "");
-        localTemplate = localTemplate.replace(VAR_SCORE_BASE, Integer.toString(match.score));
-        localTemplate = localTemplate.replace(VAR_SCORE_NOSTEM, Integer.toString(match.scoreNoStem));
-        localTemplate = localTemplate.replace(VAR_SCORE_ADJUSTED, Integer.toString(match.adjustedScore));
+        localTemplate = localTemplate.replace(VAR_SCORE_BASE, Integer.toString(match.scores[0].score));
+        localTemplate = localTemplate.replace(VAR_SCORE_NOSTEM, Integer.toString(match.scores[0].scoreNoStem));
+        localTemplate = localTemplate.replace(VAR_SCORE_ADJUSTED, Integer.toString(match.scores[0].adjustedScore));
         localTemplate = localTemplate.replace(VAR_TARGET_TEXT, match.translation);
-		localTemplate = localTemplate.replace(VAR_FUZZY_FLAG, match.fuzzyMark ? (OStrings.getString("MATCHES_FUZZY_MARK") + " ") : "");
-        localTemplate = expandFileName(localTemplate, match.proj, Core.getProject().getProjectProperties().getTMRoot());
-        
+        localTemplate = localTemplate.replace(VAR_FUZZY_FLAG, match.fuzzyMark ? (OStrings.getString("MATCHES_FUZZY_MARK") + " ") : "");
+        ProjectProperties props = Core.getProject().getProjectProperties();
+        if (props != null) {
+            localTemplate = expandFileNames(localTemplate, match.projs, props.getTMRoot());
+        }
         return localTemplate;
     }
     
@@ -194,7 +197,7 @@ public class MatchesVarExpansion extends VarExpansion<NearString> {
             R.text = expandProperties(R.text, match.props);
         } else {
             R.text = R.text.replaceAll(patternSingleProperty.pattern(), "");
-            R.text = R.text.replaceAll(patternPropertyGroup.pattern(), "");            
+            R.text = R.text.replaceAll(patternPropertyGroup.pattern(), "");
         }
 
         styledComponents.put(R.text.indexOf(VAR_SOURCE_TEXT), sourceTextReplacer);

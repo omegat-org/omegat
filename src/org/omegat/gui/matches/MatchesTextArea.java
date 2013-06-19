@@ -7,7 +7,7 @@
                2007 Zoltan Bartko
                2011 John Moran
                2012 Alex Buloichik, Jean-Christophe Helary, Didier Briel, Thomas Cordonnier, Aaron Madlon-Kay
-               2013 Zoltan Bartko
+               2013 Zoltan Bartko, Aaron Madlon-Kay
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -37,7 +37,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -47,7 +46,6 @@ import javax.swing.text.AttributeSet;
 import javax.swing.text.StyledDocument;
 
 import org.omegat.core.Core;
-import org.omegat.core.data.ExternalTMX;
 import org.omegat.core.data.IProject;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.data.StringData;
@@ -318,7 +316,7 @@ public class MatchesTextArea extends EntryInfoThreadPane<List<NearString>> imple
             }
             // </HP-experiment>
             NearString thebest = matches.get(0);
-            if (thebest.score >= percentage) {
+            if (thebest.scores[0].score >= percentage) {
                 SourceTextEntry currentEntry = Core.getEditor().getCurrentEntry();
                 TMXEntry te = Core.getProject().getTranslationInfo(currentEntry);
                 if (!te.isTranslated()) {
@@ -471,6 +469,26 @@ public class MatchesTextArea extends EntryInfoThreadPane<List<NearString>> imple
         // create the menu
         JPopupMenu popup = new JPopupMenu();
 
+        NearString m = matches.get(clickedItem);
+        if (m.projs.length > 1) {
+            JMenuItem item = popup.add(OStrings.getString("MATCHES_PROJECTS"));
+            item.setEnabled(false);
+            for (int i = 0; i < m.projs.length; i++) {
+                String proj = m.projs[i];
+                StringBuilder b = new StringBuilder();
+                if (proj.equals("")) {
+                    b.append(OStrings.getString("MATCHES_THIS_PROJECT"));
+                } else {
+                    b.append(proj);
+                }
+                b.append(" ");
+                b.append(m.scores[i].toString());
+                JMenuItem pItem = popup.add(b.toString());
+                pItem.setEnabled(false);
+            }
+            popup.addSeparator();
+        }
+        
         JMenuItem item = popup.add(OStrings.getString("MATCHES_INSERT"));
         item.addActionListener(new ActionListener() {
             // the action: insert this match
@@ -491,7 +509,7 @@ public class MatchesTextArea extends EntryInfoThreadPane<List<NearString>> imple
         popup.addSeparator();
 
         final NearString ns = matches.get(clickedItem);
-        String proj = ns.proj;
+        String proj = ns.projs[0];
 
         item = popup.add(OStrings.getString("MATCHES_GO_TO_SEGMENT_SOURCE"));
 

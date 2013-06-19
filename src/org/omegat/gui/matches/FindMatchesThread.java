@@ -6,6 +6,7 @@
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
                2008 Alex Buloichik
                2012 Thomas Cordonnier, Martin Fleurke
+               2013 Aaron Madlon-Kay
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -71,6 +72,7 @@ import org.omegat.util.Token;
  * @author Maxym Mykhalchuk
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Martin Fleurke
+ * @author Aaron Madlon-Kay
  */
 public class FindMatchesThread extends EntryInfoSearchThread<List<NearString>> {
     private static final Logger LOGGER = Logger.getLogger(FindMatchesThread.class.getName());
@@ -335,12 +337,12 @@ public class FindMatchesThread extends EntryInfoSearchThread<List<NearString>> {
             return true;
         }
         NearString st = result.get(result.size() - 1);
-        Boolean chanse = checkScore(st.score, simStem);
+        Boolean chanse = checkScore(st.scores[0].score, simStem);
         if (chanse == null) {
-            chanse = checkScore(st.scoreNoStem, simNoStem);
+            chanse = checkScore(st.scores[0].scoreNoStem, simNoStem);
         }
         if (chanse == null) {
-            chanse = checkScore(st.adjustedScore, simExactly);
+            chanse = checkScore(st.scores[0].adjustedScore, simExactly);
         }
         if (chanse == null) {
             chanse = true;
@@ -369,26 +371,25 @@ public class FindMatchesThread extends EntryInfoSearchThread<List<NearString>> {
         int pos = 0;
         for (int i = 0; i < result.size(); i++) {
             NearString st = result.get(i);
-            if (   tmxName == null 
-                && st.proj.length() == 0 
-                && source.equals(st.source)
-                    && (   translation==null && st.translation == null 
-                        || translation!=null && translation.equals(st.translation)
-                       )
-               ) {
-                // the same source text already in list - don't need to add
-                // only if they are from translations and has the same translation
+            if (source.equals(st.source)
+                 && (translation==null && st.translation == null 
+                     || translation!=null && translation.equals(st.translation)
+                    )) {
+                // Consolidate identical matches from different sources into a single NearString with
+                // multiple project entries.
+                result.set(i, NearString.merge(st, key, source, translation, comesFrom, fuzzy, similarity, similarityNoStem,
+                        simAdjusted, similarityData, tmxName, creator, creationDate, tuProperties));
                 return;
             }
-            if (st.score < similarity) {
+            if (st.scores[0].score < similarity) {
                 break;
             }
-            if (st.score == similarity) {
-                if (st.scoreNoStem < similarityNoStem) {
+            if (st.scores[0].score == similarity) {
+                if (st.scores[0].scoreNoStem < similarityNoStem) {
                     break;
                 }
-                if (st.scoreNoStem == similarityNoStem) {
-                    if (st.adjustedScore < simAdjusted) {
+                if (st.scores[0].scoreNoStem == similarityNoStem) {
+                    if (st.scores[0].adjustedScore < simAdjusted) {
                         break;
                     }
                     // Patch contributed by Antonio Vilei

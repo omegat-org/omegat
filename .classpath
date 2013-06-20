@@ -39,6 +39,7 @@
 	<classpathentry kind="lib" path="lib/LanguageTool/morfologik-speller-1.5.4.jar"/>
 	<classpathentry kind="lib" path="lib/LanguageTool/morfologik-stemming-1.5.4.jar"/>
 	<classpathentry kind="lib" path="lib/LanguageTool/segment-1.4.1.jar"/>
+	<classpathentry kind="lib" path="lib/LanguageTool/lucene-gosen-1.2.1-ipadic.jar"/>
 	<classpathentry kind="lib" path="lib/bsf-2.4.0.jar"/>
 	<classpathentry kind="lib" path="lib/js-rhino-1.7R4.jar"/>
 	<classpathentry kind="lib" path="lib/groovy-all-1.8.9.jar"/>

@@ -1,4 +1,4 @@
-Licenses:
+
 
 htmlparser.jar version 1.6 is distributed under the GNU Lesser  
 General Public License version 2.1 and greater

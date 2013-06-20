@@ -47,15 +47,16 @@
 			<string>$JAVAROOT/lib/vldocking_2.1.4.jar</string>
 			<string>$JAVAROOT/lib/commons-lang-2.4.jar</string>
 			<string>$JAVAROOT/lib/commons-logging-1.1.1.jar</string>
-			<string>$JAVAROOT/lib/LanguageTool/jwordsplitter-3.4.jar</string>
-			<string>$JAVAROOT/lib/LanguageTool/LanguageTool-data.jar</string>
-			<string>$JAVAROOT/lib/LanguageTool/languagetool-core-2.1.jar</string>
-			<string>$JAVAROOT/lib/LanguageTool/morfologik-fsa-1.5.4.jar</string>
-			<string>$JAVAROOT/lib/LanguageTool/morfologik-speller-1.5.4.jar</string>
-			<string>$JAVAROOT/lib/LanguageTool/morfologik-stemming-1.5.4.jar</string>
-			<string>$JAVAROOT/lib/LanguageTool/cjftransform-1.0.1.jar</string>
-			<string>$JAVAROOT/lib/LanguageTool/ictclas4j-1.0.1.jar</string>
-			<string>$JAVAROOT/lib/LanguageTool/segment-1.4.1.jar</string>
+			<string>$JAVAROOT/lib/jwordsplitter-3.4.jar</string>
+			<string>$JAVAROOT/lib/LanguageTool-data.jar</string>
+			<string>$JAVAROOT/lib/languagetool-core-2.1.jar</string>
+			<string>$JAVAROOT/lib/morfologik-fsa-1.5.4.jar</string>
+			<string>$JAVAROOT/lib/morfologik-speller-1.5.4.jar</string>
+			<string>$JAVAROOT/lib/morfologik-stemming-1.5.4.jar</string>
+			<string>$JAVAROOT/lib/cjftransform-1.0.1.jar</string>
+			<string>$JAVAROOT/lib/ictclas4j-1.0.1.jar</string>
+			<string>$JAVAROOT/lib/segment-1.4.1.jar</string>	
+			<string>$JAVAROOT/lib/lucene-gosen-1.2.1-ipadic.jarr</string>
 			<string>$JAVAROOT/lib/pdfbox-app-1.8.1.jar</string>
 			<string>$JAVAROOT/lib/bsf-2.4.0.jar</string>
 			<string>$JAVAROOT/lib/groovy-all-1.8.9.jar</string>

@@ -2,7 +2,7 @@
  OmegaT 3.0.4
 ----------------------------------------------------------------------
    5 Enhancements
-   4 Bug fixes
+   5 Bug fixes
    0 Localisation update
 ----------------------------------------------------------------------
 3.0.3 update 1 vs. 3.0.3
@@ -33,6 +33,9 @@ OmegaT's version, and several typos were corrected
 
   - Stop word discarded from glossary when using tokenizer 
   https://sourceforge.net/p/omegat/bugs/484/
+
+  - Language checker does not work in Japanese 
+  https://sourceforge.net/p/omegat/bugs/593/
 
   - The log contained an exception related to the LanguageTool module.
 This exception was related to a multithreading issue, which has been

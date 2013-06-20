@@ -3,8 +3,8 @@
           with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
- Copyright (C) 2011 Briac Pilpré (briacp@gmail.com)
-               2013 Alex Buloichik
+ Copyright (C) 2011 Briac Pilpre 
+               2013 Alex Buloichik, Yu Tang
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -29,32 +29,37 @@ import javax.swing.JEditorPane;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.Document;
 
+/**
+ * Used to display results in the scripting window
+ * 
+ * @author Briac Pilpre (briacp@gmail.com)
+ * @author Alex Buloichik (alex73mail@gmail.com)
+ * @author Yu Tang
+ * 
+ */
 public class ScriptLogger {
 	private JEditorPane jt;
 
 	ScriptLogger(JEditorPane m_scriptResultTextArea)
 	{
-		this.jt = m_scriptResultTextArea;
+            this.jt = m_scriptResultTextArea;
 	}
 
-	public void print(String s)
-	{
-		Document doc = jt.getDocument();
-		
-		try {
-			doc.insertString(doc.getLength(), s, null);
-		} catch (BadLocationException e) {
-			/* empty */
-		}
+	public void print(Object o) {
+            Document doc = jt.getDocument();
+	
+            try {
+                doc.insertString(doc.getLength(), o.toString(), null);
+            } catch (BadLocationException e) {
+	      /* empty */
+            }
 	}
 	
-	public void println(String s)
-	{
-		print(s + "\n");
+	public void println(Object o) {
+            print(o.toString() + "\n");
 	}
 	
-	public void clear()
-	{
-		jt.setText("");
+	public void clear() {
+            jt.setText("");
 	}
 }

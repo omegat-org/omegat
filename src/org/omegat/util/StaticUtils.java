@@ -1079,9 +1079,13 @@ public class StaticUtils {
                     arg.append(c);
                 }
             } else {
-                if (Character.isWhitespace(c) && currentQuote == noQuote && arg.length() > 0) {
-                    result.add(arg.toString());
-                    arg = new StringBuilder();
+                if (Character.isWhitespace(c) && currentQuote == noQuote) {
+                    if (arg.length() > 0) {
+                        result.add(arg.toString());
+                        arg = new StringBuilder();
+                    } else {
+                        // Discard
+                    }
                 } else {
                     arg.append(c);
                 }

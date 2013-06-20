@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 3.0.4
 ----------------------------------------------------------------------
-   6 Enhancements
+   7 Enhancements
    5 Bug fixes
    0 Localisation update
 ----------------------------------------------------------------------
@@ -23,6 +23,9 @@
 
   - Print non-string data types with console.print() and println() 
   https://sourceforge.net/p/omegat/feature-requests/875/
+
+  - Sorted list of scripts 
+  https://sourceforge.net/p/omegat/feature-requests/878/
 
  Other enhancements:
 

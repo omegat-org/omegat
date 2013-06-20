@@ -3,7 +3,7 @@
           with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
- Copyright (C) 2011 Briac Pilpré (briacp@gmail.com)
+ Copyright (C) 2011 Briac Pilpre (briacp@gmail.com)
                2013 Alex Buloichik
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
@@ -40,6 +40,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -565,6 +566,7 @@ public class ScriptingWindow extends JFrame {
         
         if (m_scriptsDirectory.exists() && m_scriptsDirectory.isDirectory()) {
             scriptList = m_scriptsDirectory.list(); 
+            Arrays.sort(scriptList);
         }
         
         m_scriptList.setListData(scriptList);

@@ -18,17 +18,13 @@
   - Add support for for creationid and creationdate in TMX
   https://sourceforge.net/p/omegat/feature-requests/744/
 
+  - Exactly equal suggestions from diferents tmx show only as one
+  https://sourceforge.net/p/omegat/feature-requests/874/
+
  Other enhancements:
 
   - Linux: Zenity is not needed anymore in omegat.kaptn to display 
 OmegaT's version, and several typos were corrected
-
-  - Consolidate identical matches in the Fuzzy Matches pane. 
-When there are several identical matches, they are grouped into a single 
-one, and the mention "+x more" (x being the number of additional 
-matches) appears in the pane. A right click then give the location
-and percentage (in case some of the matches have a penalty) of each
-match.
 
   Bug fixes: 
 

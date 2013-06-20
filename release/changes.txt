@@ -21,6 +21,9 @@
   - Exactly equal suggestions from diferents tmx show only as one
   https://sourceforge.net/p/omegat/feature-requests/874/
 
+  - Print non-string data types with console.print() and println() 
+  https://sourceforge.net/p/omegat/feature-requests/875/
+
  Other enhancements:
 
   - Linux: Zenity is not needed anymore in omegat.kaptn to display 

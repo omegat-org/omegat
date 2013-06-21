@@ -155,6 +155,10 @@ public class MarkerController {
     public void reprocess(SegmentBuilder[] entryBuilders, int markerIndex) {
         UIThreadsUtil.mustBeSwingThread();
 
+        if (entryBuilders == null) {
+            return;
+        }
+        
         for (SegmentBuilder sb : entryBuilders) {
             remove(sb, markerIndex);
         }

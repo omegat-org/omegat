@@ -2,7 +2,7 @@
  OmegaT 3.0.4
 ----------------------------------------------------------------------
    8 Enhancements
-   5 Bug fixes
+   6 Bug fixes
    0 Localisation update
 ----------------------------------------------------------------------
 3.0.3 update 1 vs. 3.0.3
@@ -51,6 +51,9 @@ This exception was related to a multithreading issue, which has been
 fixed.
 
   - There was a whitespace handling error in the external command parser
+
+  - There was an exception when LanguageTool was enabled with no project
+loaded
 
 ----------------------------------------------------------------------
  OmegaT 3.0.3

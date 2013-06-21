@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 3.0.4
 ----------------------------------------------------------------------
-   8 Enhancements
+   9 Enhancements
    6 Bug fixes
    0 Localisation update
 ----------------------------------------------------------------------
@@ -29,6 +29,8 @@
 
   - Default shortcut for "Insert next Missing Tag" 
   https://sourceforge.net/p/omegat/feature-requests/856/
+
+  - The "check-rules" script now has a GUI
 
  Other enhancements:
 

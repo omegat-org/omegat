@@ -1,3 +1,12 @@
+/*
+ *  QA script
+ *
+ * @author  Briac Pilpre
+ * @author  Kos Ivantsov
+ * @date    2013-06-23
+ * @version 0.2
+ */
+
 import groovy.swing.SwingBuilder
 import java.awt.Component
 import javax.swing.JButton

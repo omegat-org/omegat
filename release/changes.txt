@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 3.0.4
 ----------------------------------------------------------------------
-   9 Enhancements
+  10 Enhancements
    6 Bug fixes
    0 Localisation update
 ----------------------------------------------------------------------
@@ -30,12 +30,14 @@
   - Default shortcut for "Insert next Missing Tag" 
   https://sourceforge.net/p/omegat/feature-requests/856/
 
-  - The "check-rules" script now has a GUI
-
  Other enhancements:
 
   - Linux: Zenity is not needed anymore in omegat.kaptn to display 
 OmegaT's version, and several typos were corrected
+
+  - The "check-rules" script now has a GUI
+
+  - There is a new global spell checking script
 
   Bug fixes: 
 

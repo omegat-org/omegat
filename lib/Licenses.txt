@@ -1,4 +1,4 @@
-
+Licenses:
 
 htmlparser.jar version 1.6 is distributed under the GNU Lesser  
 General Public License version 2.1 and greater
@@ -86,6 +86,10 @@ morfologik-*.jar is distributed under the Morfologik license
 
 segment-1.4.1.jar is distributed under the Segment license
 (required for LanguageTool)
+
+lucene-gosen-2.0.2-ipadic.jar is distributed under the LGPL license
+(required for LanguageTool)
+lucene-gosen sources are available via SVN from http://code.google.com/p/lucene-gosen/source/checkout
 
 pdfbox-app-1.8.1.jar is distributed under the Apache License 2.0
 

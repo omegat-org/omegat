@@ -56,7 +56,7 @@
 			<string>$JAVAROOT/lib/cjftransform-1.0.1.jar</string>
 			<string>$JAVAROOT/lib/ictclas4j-1.0.1.jar</string>
 			<string>$JAVAROOT/lib/segment-1.4.1.jar</string>	
-			<string>$JAVAROOT/lib/lucene-gosen-1.2.1-ipadic.jarr</string>
+			<string>$JAVAROOT/lib/lucene-gosen-2.0.2-ipadic.jar</string>
 			<string>$JAVAROOT/lib/pdfbox-app-1.8.1.jar</string>
 			<string>$JAVAROOT/lib/bsf-2.4.0.jar</string>
 			<string>$JAVAROOT/lib/groovy-all-1.8.9.jar</string>

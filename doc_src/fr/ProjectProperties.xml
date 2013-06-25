@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<chapter id="chapter.project.properties">
+  <title>Propriétés du projet<indexterm class="singular">
+      <primary>Projet</primary> <secondary>Propriétés</secondary>
+    </indexterm></title>
+
+  <para/>
+
+  <section id="properties.dialog">
+    <title>Boîte de dialogue Propriétés</title>
+
+    <para>La boîte de dialogue <menuchoice> <shortcut> <keycombo> <keycap>Ctrl</keycap> <keycap>E</keycap> </keycombo> </shortcut> <guimenu>Projet</guimenu> <guimenuitem>Propriétés...</guimenuitem> </menuchoice> sert à définir et à modifier les dossiers et les langues du projet.</para>
+
+    <para>Il est possible de modifier les propriétés du projet au cours d'une session de traduction. Veuillez noter que les changements apportés aux paramètres du projet peuvent avoir des conséquences, surtout si vous avez déjà commencé à travailler sur le projet. Si vous n'êtes pas encore tout à fait à l'aise avec OmegaT, il est plus sûr de considérer les paramètres comme étant définitifs une fois la traduction commencée - à moins, bien sûr, que vous ne vous rendiez compte qu'une erreur majeure a été commise. Voir la section Prévention des pertes de données pour savoir comment protéger votre travail.</para>
+
+    <figure>
+      <title>Fenêtre de propriétés du projet</title>
+
+      <mediaobject>
+        <imageobject role="html">
+          <imagedata fileref="images/NewProject_26.png"/>
+        </imageobject>
+
+        <imageobject role="fo">
+          <imagedata fileref="images/NewProject_26.png" width="80%"/>
+        </imageobject>
+      </mediaobject>
+    </figure>
+
+    <para>Elle contient :</para>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis role="bold">Un espace permettant de paramétrer les langues source et cible du projet.</emphasis></para>
+
+        <para>Vous pouvez entrer les langues cible et source à la main ou utiliser les menus déroulants. Gardez à l'esprit que la modification des langues peut rendre les mémoires de traduction actuellement utilisées inutiles puisque leurs paires de langues peuvent ne plus correspondre aux nouvelles langues.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>La case <emphasis role="bold"><guilabel>Activer la segmentation par phrase</guilabel> </emphasis></para>
+
+        <indexterm class="singular">
+          <primary>Projet</primary> <secondary>Activer la segmentation par phrase</secondary>
+        </indexterm>
+
+        <para>Les paramètres de segmentation n'affectent que la façon dont les fichiers sources sont traités par <application>OmegaT</application>. La façon la plus courante de segmenter les fichiers est la segmentation par phrase. En temps normal, cette case doit donc rester cochée.</para>
+
+        <para>Mais dans certains cas isolés, l'alternative (soit la segmentation par paragraphe) peut être préférée. La modification de ce marqueur ne modifie pas la segmentation des mémoires de traduction déjà existantes. Si, en plein milieu de la traduction, vous décidez de passer d'une traduction par phrase à une traduction par paragraphe, la mémoire de traduction interne du projet ne sera pas modifiée (OmegaT peut mettre à jour des vieilles mémoires de traduction qui n'étaient pas segmentées par phrase, mais pas l'inverse).</para>
+
+        <para>La modification des paramètres de segmentation peut entraîner la séparation ou la fusion de segments déjà traduits. Dans les faits, cela va les faire revenir au statut de « non traduits » puisqu'ils ne correspondront plus aux segments enregistrés dans la mémoire du projet, même si leur traduction de départ y est toujours présente.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Bouton <emphasis role="bold"><guibutton>Segmentation...</guibutton> </emphasis><indexterm class="singular">
+            <primary>Segmentation</primary> <secondary>générale ou règles de segmentation spécifiques au projet</secondary>
+          </indexterm></para>
+
+        <para>Les règles de segmentation sont généralement valables pour l'ensemble des projets. Cependant, il est possible que l'utilisateur ait besoin de créer un nouvel ensemble de règles qui s'appliqueront spécifiquement au projet en question. Appuyez sur ce bouton pour ouvrir la boîte de dialogue, cochez la case <guimenuitem>Appliquer les règles de segmentation spécifiques au projet</guimenuitem> puis ajustez les règles de segmentation comme vous le souhaitez. Ce nouvel ensemble de règles sera sauvegardé avec le projet et n'interférera pas avec l'ensemble général de règles de segmentation. Pour supprimer les règles de segmentation spécifiques au projet, décochez la case. Voir le chapitre <link linkend="chapter.segmentation">Segmentation de la source</link> pour plus d'informations concernant les règles de segmentation.<emphasis/></para>
+
+        <para><emphasis>Astuce :</emphasis> l'ensemble des règles de segmentation spécifiques à un projet est sauvegardé dans le fichier <filename>project/omegat/segmentation.conf.</filename></para>
+      </listitem>
+
+      <listitem>
+        <para>Bouton<emphasis role="bold"><guibutton>Fichiers et filtres...</guibutton> </emphasis><indexterm class="singular">
+            <primary>Filtres de fichiers</primary> <secondary>généraux ou filtres de fichiers spécifiques au projet</secondary>
+          </indexterm></para>
+
+        <para>De manière similaire, l'utilisateur peut créer des filtres de fichiers spécifiques au projet qui seront sauvegardés avec le projet et ne seront donc valables que pour le projet en cours. Pour créer un ensemble de filtres de fichiers spécifiques au projet, cliquez sur le bouton <guibutton>Fichiers et filtres... </guibutton> puis cochez la case <guimenuitem>Appliquer des paramètres de filtres de fichiers spécifiques au projet</guimenuitem> dans la fenêtre qui s'ouvre. Une copie des modifications apportées à la configuration des filtres sera sauvegardée avec le projet. Pour supprimer les filtres de fichiers spécifiques au projet, décochez la case. Veuillez noter que dans le menu <guimenuitem>Options -&gt; Fichiers et filtres...</guimenuitem>, ce sont les filtres globaux des utilisateurs qui sont modifiés, et pas seulement les filtres du projet. Voir chapitre<link linkend="chapter.file.filters"> Filtres de fichiers... </link>pour plus d'informations à ce sujet.<emphasis/></para>
+
+        <para><emphasis>Astuce :</emphasis> l'ensemble des filtres de fichiers d'un projet donné est sauvegardé dans le fichier <filename>project/omegat/filters.xml.</filename></para>
+      </listitem>
+
+      <listitem>
+        <para>Case <emphasis role="bold">Propagation automatique des traductions</emphasis><emphasis role="bold"><indexterm class="singular">
+            <primary>Projet</primary> <secondary>Option de propagation automatique</secondary>
+          </indexterm></emphasis></para>
+
+        <para>Dans le cas où il existerait des segments non uniques dans les documents source, la case Propagation automatique des traductions donne à l'utilisateur les deux possibilités suivantes concernant la traduction automatique : si la case est cochée, le premier segment traduit sera considéré comme la traduction par défaut et son texte cible sera automatiquement utilisé pour les segments identiques suivants durant le processus de traduction. Les segments mal traduits pourront bien entendu être corrigés plus tard manuellement via <guimenuitem>Créer une traduction alternative</guimenuitem>. Si la case Propagation automatique des traductions n'est pas cochée, les segments ayant des traductions alternatives ne seront pas traduits jusqu'à ce que l'utilisateur décide du choix de la traduction.</para>
+      </listitem>
+
+      <listitem>
+        <para>Case <emphasis role="bold">Supprimer les balises</emphasis><indexterm class="singular">
+            <primary>Projet</primary> <secondary>Option Supprimer les balises</secondary>
+          </indexterm></para>
+
+        <para>Lorsque cette option est activée, toutes les balises de formatage sont retirées des segments source. Cela est particulièrement utile pour des textes dont le formatage intégré n'est pas vraiment utile (par exemple des PDF passés par la reconnaissance optique de caractères, des documents .odt ou .docx mal convertis, etc). Normalement, il doit toujours être possible d'ouvrir les documents cibles puisque seuls les balises intégrées sont supprimées. Le formatage non visible (c'est-à-dire qui n'apparaît pas sous forme de balises dans l'Éditeur d'OmegaT) est conservé dans les documents cibles.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis role="bold">Un espace pour paramétrer les dossiers du projet</emphasis><indexterm class="singular">
+            <primary>Projet</primary> <secondary>Modification de la structure du dossier</secondary>
+          </indexterm><indexterm class="singular">
+            <primary>Glossaires</primary> <secondary>Emplacement du fichier glossaire modifiable</secondary>
+          </indexterm></para>
+
+        <para>À cet endroit, vous pouvez sélectionner différents sous-dossiers, par exemple le sous-dossier contenant les fichiers source, le sous-dossier des fichiers cible, etc. Si vous entrez le nom de dossiers qui n'existent pas encore, <application>OmegaT</application> les crée pour vous. Si vous avez décidé de modifier les dossiers du projet, gardez à l'esprit que cela ne déplacera pas les fichiers existants dans les vieux dossiers vers le nouvel emplacement.</para>
+      </listitem>
+    </itemizedlist>
+  </section>
+</chapter>

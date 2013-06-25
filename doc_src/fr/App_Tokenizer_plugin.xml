@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<appendix id="appendix.TokenizerPlugin.inOmegaT">
+  <title>Extension module Tokenizer<indexterm class="singular">
+      <primary>Extensions</primary> <secondary>Module Tokenizer</secondary>
+    </indexterm></title>
+
+  <section>
+    <title>Introduction<indexterm class="singular">
+        <primary>Tokenizer</primary> <see>Lucene</see>
+      </indexterm><indexterm class="singular">
+        <primary>Tokenizer</primary> <see>Lemmatiseur</see>
+      </indexterm></title>
+
+    <para>Les Tokenizers (ou lemmatiseurs) améliorent la qualité des correspondances en reconnaissant les mots accordés dans les données source et dans la mémoire de traduction. Ils améliorent également les capacités de correspondance du glossaire.</para>
+
+    <para>Un lemmatiseur anglais, par exemple, doit pouvoir identifier la chaîne de caractères « chats » (et éventuellement « chatons », « chatière », etc.) comme ayant pour racine la chaîne de caractères « chat », et « lemmatiser », « lemmatisation », « lemmatiseur » comme ayant pour racine la chaîne de caractères « lemmati ». Un algorithme de lemmatisation réduit les mots « pêcher », « pêché », « pêche », et « pêcheur » au mot racine : « pêche ». Ceci est particulièrement utile dans le cas des langues qui accrochent des préfixes et des suffixes aux racines pour former des mots. Par exemple, vous pourrez trouver ci-dessous toutes les formes grammaticalement correctes du mot « bon » en Slovène :</para>
+
+    <itemizedlist>
+      <listitem>
+        <para>lep, lepa, lepo - singulier : masculin, féminin, neutre</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>lepši, lepša, lepše - comparatif nominatif : masculin, féminin, neutre ; qui sont respectivement les formes plurielles des adjectifs</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>najlepših - superlatif, pluriel, génitif pour le masc, fem, neutre</para>
+      </listitem>
+    </itemizedlist>
+  </section>
+
+  <section>
+    <title>Installation et Utilisation</title>
+
+	<para>Les lemmatiseurs sont inclus dans OmegaT OmegaT sélectionne automatiquement les lemmatiseurs pour les langues sources et cibles en fonction des paramètres du projet. Il est possible de sélectionner un autre lemmatiseur ou une version différente du lemmatiseur dans la fenêtre de Propriétés du projet.</para>
+
+	<warning>
+		<title>Incompatibilités</title>
+		<para>OmegaT ne se lancera pas si des lemmatiseurs sont présents dans le dossier /plugin. Retirer tous les lemmatiseurs du dossier /plugin avant de lancer OmegaT.</para>
+	</warning>
+	
+  </section>
+</appendix>

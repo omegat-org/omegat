@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<chapter id="chapter.searches">
+  <title>Recherches<indexterm class="singular">
+      <primary>Recherches</primary>
+    </indexterm></title>
+
+  <section id="search.window">
+    <title>La fenêtre Recherche textuelle</title>
+
+    <figure id="text.search.window">
+      <title>La fenêtre Recherche textuelle<indexterm class="singular">
+          <primary>La fenêtre Recherche textuelle</primary> <secondary>Exemple</secondary>
+        </indexterm></title>
+
+      <mediaobject>
+        <imageobject role="html">
+          <imagedata fileref="images/TextSearch25.png"/>
+        </imageobject>
+
+        <imageobject role="fo">
+          <imagedata fileref="images/TextSearch25.png" width="90%"/>
+        </imageobject>
+      </mediaobject>
+    </figure>
+
+    <note>
+      <para>La recherche ci-dessus permet de trouver tous les segments cible qui contiennent des caractères, plutôt improbables, dans la langue cible - c.-à.-d. le Slovène.</para>
+    </note>
+
+    <section>
+      <title>Rechercher<indexterm class="singular">
+          <primary>Raccourcis</primary> <secondary>Rechercher - Ctrl+F</secondary>
+        </indexterm></title>
+
+      <para><application>OmegaT</application> vous donne accès à de puissantes fonctions de recherche. Ouvrez la fenêtre de Recherche textuelle en utilisant <keycombo> <keycap>Ctrl</keycap> <keycap>F</keycap> </keycombo> et saisissez dans le champ de recherche le mot ou l'expression que vous souhaitez trouver. Vous pouvez également sélectionner un mot ou une expression dans le volet Editeur et appuyer sur <keycombo> <keycap>Ctrl</keycap> <keycap>F</keycap> </keycombo>. Le mot ou l'expression est alors saisi(e) automatiquement dans le champ de recherche. Il est possible d'avoir plusieurs fenêtres de recherche ouvertes en même temps mais il est préférable de les fermer lorsqu'elles ne sont plus utiles afin de ne pas encombrer le bureau.</para>
+    </section>
+
+    <section>
+      <title>Où chercher ?</title>
+
+      <para>Les recherches sont effectuées par défaut à la fois dans les sections source et cible du projet, mais il est possible de les limiter au seul texte cible ou source. Vous pouvez ainsi choisir de rechercher dans</para>
+
+      <itemizedlist>
+        <listitem>
+          <para>le projet seulement (option par défaut),</para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para>à la fois le projet et les mémoires de traduction de référence présentes dans le dossier /tm/ (cochez <emphasis>Recherche dans les MT)</emphasis>,</para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para>un seul fichier ou dossier contenant un ensemble de fichiers (cochez <emphasis>Rechercher dans les fichiers - en bas de la fenêtre)</emphasis></para>
+        </listitem>
+      </itemizedlist>
+
+      <para>Pour les recherches dans les fichiers (qui s'opposent à celles dans les mémoires de traduction), <application>OmegaT</application> restreint son champ de recherche aux fichiers qui possèdent les formats des fichiers source. En conséquence, même si OmegaT est parfaitement capable de traiter les fichiers<filename> TMX</filename>, ceux-ci ne seront pas inclus dans les fichiers de recherche. En ouvrant <emphasis role="bold"><indexterm class="singular">
+          <primary>Rechercher</primary> <secondary>Options avancées</secondary>
+        </indexterm>Options avancées</emphasis>, il est possible de combiner la recherche avec le nom de l'auteur de la traduction et l'heure de la dernière modification apportée.</para>
+    </section>
+  </section>
+
+  <section id="using.wild.cards">
+    <title>Utilisation de caractères génériques<indexterm class="singular">
+        <primary>Rechercher</primary> <secondary>Utilisation de caractères génériques</secondary>
+      </indexterm></title>
+
+    <para>La recherche avec caractères génériques « * » et « ? » peut être utilisée à la fois dans la recherche exacte et dans la recherche par mot clé. Leur signification est familière pour les utilisateurs de Word :</para>
+
+    <itemizedlist>
+      <listitem>
+        <para>« * » signifie zéro ou plusieurs caractères, partant de la position choisie dans un mot donné jusqu'à la fin de celui-ci. La recherche <literal>« run* »</literal> par exemple, correspondra aux mots <literal>« run »</literal>, <literal>« runs »</literal> et <literal>« running »</literal>.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>« ? » correspond à n'importe quel caractère unique. Par exemple, <literal>« run? »</literal> correspondra au mot <literal>« runs »</literal> et <literal>« runn »</literal> dans le mot <literal>« running »</literal>.</para>
+      </listitem>
+    </itemizedlist>
+
+    <para>Les correspondances seront affichées en bleu et en gras. Remarquez que « * » et « ? » ont une signification particulière dans les expressions régulières, de sorte que la recherche avec caractères génériques, telle qu'elle est décrite ici, ne s'applique qu'à la recherche exacte et par mot clé (voir ci-dessus).</para>
+  </section>
+
+  <section id="search.methoids">
+    <title>Méthodes de recherche et options<indexterm class="singular">
+        <primary>Rechercher</primary> <secondary>Méthodes et options</secondary>
+      </indexterm></title>
+
+    <para>Sélectionnez la méthode en utilisant les boutons d'option. Les méthodes de recherches suivantes sont disponibles :</para>
+
+    <variablelist>
+      <varlistentry>
+        <term>recherche exacte</term>
+
+        <listitem>
+          <para>Recherche les segments contenant exactement la chaîne de caractères spécifiée. Une recherche exacte recherche une expression, c.-à.-d. que si plusieurs mots sont saisis, ils ne sont trouvés que s'ils apparaissent exactement dans l'ordre dans lequel ils ont été saisis. Rechercher <literal>open file</literal> permettra ainsi de trouver toutes les occurrences de la chaîne de caractère <emphasis><literal>open file</literal></emphasis>, mais pas <emphasis><literal>file opened</literal></emphasis> ou <emphasis><literal>open input file</literal></emphasis>.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>recherche par mot clé</term>
+
+        <listitem>
+          <para>Recherche les segments contenant tous les mots clés spécifiés, sans tenir compte de l'ordre. Sélectionnez la recherche par mot clé pour rechercher des mots entiers uniques, quel que soit le nombre de fois où ils apparaissent et l'ordre de leur apparition. OmegaT affiche une liste de tous les segments contenant l'ensemble des mots spécifiés. Les recherches par mot clé sont similaires à des recherches sur les moteurs de recherche (comme Google) incluant « tous les mots suivants » (équivalent au « ET » logique). Utiliser la recherche par mot clé avec <emphasis><literal>open file</literal></emphasis> permettra ainsi de trouver toutes les occurrences de la chaîne de caractères <emphasis><literal>open file</literal>,</emphasis> aussi bien que <emphasis><literal>file opened</literal>, <literal>open input file</literal>, <literal>file may not be safe to open</literal></emphasis>, etc.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><emphasis role="bold">expressions régulières</emphasis></term>
+
+        <listitem>
+          <para>La chaîne de caractères recherchée sera traitée comme une expression régulière. La chaîne de caractères recherchée - [a-zA-Z] + [öäüqwß] - dans l'exemple ci-dessus, cherche dans le segment cible des mots contenant des caractères du clavier allemand. Les expressions régulières sont un moyen efficace de rechercher les apparitions d'une chaîne de caractères. Pour plus de détails, voir le chapitre : <link linkend="chapter.regexp"> Expressions régulières</link></para>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+
+    <para>Outre les méthodes ci-dessus, il est possible d'utiliser les options suivantes :</para>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis role="bold">Respecter la casse</emphasis> : la recherche sera effectuée pour la chaîne de caractères exactement spécifiée, c'est à dire que la recherche tient compte de la casse (majuscule, minuscule).</para>
+      </listitem>
+
+      <listitem>
+        <para><emphasis role="bold">Source :</emphasis> effectue la recherche dans les segments source</para>
+      </listitem>
+
+      <listitem>
+        <para><emphasis role="bold">Traduction :</emphasis> effectue la recherche dans les segments cible</para>
+      </listitem>
+
+      <listitem>
+        <para><emphasis role="bold">Notes :</emphasis> effectue la recherche dans les notes des segments</para>
+      </listitem>
+
+      <listitem>
+        <para><emphasis role="bold">Recherche dans les MT</emphasis> : les mémoires de traduction du dossier <filename>tm</filename> sont incluses dans la recherche.</para>
+      </listitem>
+
+      <listitem>
+        <para><emphasis role="bold">Afficher tous les résultats : </emphasis>décocher cette case conduira OmegaT à n'afficher que la première occurrence trouvée parmi tous les résultats de recherche.</para>
+      </listitem>
+    </itemizedlist>
+
+    <para>Le bouton <guibutton>Options avancées</guibutton> vous donne accès, comme vous pouvez le voir sur l'image ci-dessus, à des critères supplémentaires (auteur de la traduction, date de traduction, etc.).</para>
+  </section>
+
+  <section id="search.result.display">
+    <title>Affichage des résultats de la recherche</title>
+
+    <para>Presser le bouton Rechercher après avoir saisi une chaîne de caractères dans le champ de recherche permet d'afficher tous les segments du projet qui incluent la chaîne de caractères saisie. Comme <application>OmegaT</application> traite les segments identiques comme étant une seule et même entité, seul le premier segment unique est affiché. Les segments sont affichés dans l'ordre de leur apparition dans le projet. Les segments traduits sont affichés avec le texte original au-dessus et le texte traduit en dessous, les segments non traduits n'affichent que la source.</para>
+
+    <para>Cliquer sur un segment permet de l'ouvrir dans l'Éditeur afin d'y apporter des modifications. Il est ensuite possible de retourner à la fenêtre de recherche pour voir le segment trouvé suivant, le vérifier et effectuer, si nécessaire, des corrections terminologiques.</para>
+
+    <para>Plusieurs fenêtres de recherche peuvent être ouvertes en même temps. On peut rapidement connaître leur contenu en regardant leur titre : il contient les termes de recherche utilisés.</para>
+  </section>
+</chapter>

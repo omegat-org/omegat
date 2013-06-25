@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<chapter id="chapter.plain.text">
+  <title>Travailler avec du texte brut<indexterm class="singular">
+      <primary>Fichiers source</primary> <secondary>Fichiers texte brut</secondary>
+    </indexterm></title>
+
+  <section id="default.encoding">
+    <title>Encodage par défaut<indexterm class="singular">
+        <primary>Encodage</primary> <secondary>Fichiers texte brut</secondary>
+      </indexterm><indexterm class="singular">
+        <primary>Fichiers source</primary> <secondary>Encodage</secondary>
+      </indexterm></title>
+
+    <para>Les fichiers texte brut - dans la plupart des cas des fichiers portant l'extension txt - contiennent uniquement des informations textuelles et ne possèdent aucun moyen de préciser clairement à l'ordinateur en quelle langue le texte qu'ils contiennent est écrite. Dans ce cas, OmegaT ne peut que supposer que le texte est écrit dans la même langue que celle utilisée par défaut par l'ordinateur. Ce qui ne pose aucun problème si le fichier est encodé sous Unicode et utilise un jeu d'encodage de caractères 16 bits. Si le texte possède un encodage 8 bits, cependant, il est possible de se retrouver face à des situations délicates comme celle qui suit : pour des caractères japonais, au lieu d'afficher le texte...</para>
+
+    <mediaobject>
+      <imageobject role="html">
+        <imagedata fileref="images/OmT_Japanese.png"/>
+      </imageobject>
+
+      <imageobject role="fo">
+        <imagedata fileref="images/OmT_Japanese.png" width="60%"/>
+      </imageobject>
+    </mediaobject>
+
+    <para>...le système les affichera, par exemple, comme ceci :</para>
+
+    <mediaobject>
+      <imageobject role="html">
+        <imagedata fileref="images/OmT_Cyrillic.png"/>
+      </imageobject>
+
+      <imageobject role="fo">
+        <imagedata fileref="images/OmT_Cyrillic.png" width="60%"/>
+      </imageobject>
+    </mediaobject>
+
+    <para>Si l'ordinateur sur lequel OmegaT est exécuté a le russe comme langue par défaut, il affichera le texte en alphabet cyrillique et pas en Kanji.</para>
+  </section>
+
+  <section id="OmegaT.solution">
+    <title>La solution <application>OmegaT</application></title>
+
+    <para>Il existe 3 façons de palier ce problème dans <application>OmegaT</application>. Elles impliquent toutes l'application de filtres de fichiers dans le menu <emphasis role="bold">Options</emphasis>.</para>
+
+    <variablelist>
+      <varlistentry>
+        <term>Changez l'encodage de vos fichiers en Unicode.</term>
+
+        <listitem>
+          <para>Ouvrez votre fichier source dans un éditeur de texte capable d'interpréter correctement son encodage et enregistrez le fichier sous l'encodage <emphasis role="bold">« UTF-8 »</emphasis>. Changez l'extension de fichier pour passer de <literal>.txt</literal> à <literal>.utf8.</literal> <application>OmegaT</application> interprétera automatiquement le fichier comme étant un fichier UTF-8. Ceci est sans doute la meilleure solution : elle vous épargne des problèmes sur le long terme.</para>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+
+    <variablelist>
+      <varlistentry>
+        <term>Spécifiez l'encodage de vos fichiers texte brut</term>
+
+        <listitem>
+          <para>- c.-à-d. les fichiers portant l'extension <filename>.txt </filename> - : dans la section <emphasis role="bold">Fichiers texte </emphasis>de la boite de dialogue Fichiers et filtres..., changez l'<emphasis role="bold">Encodage du fichier source</emphasis> pour le passer d'&lt;auto&gt; à l'encodage correspondant à votre fichier source <filename>.txt</filename> (pour l'exemple ci-dessus, vous choisirez l'extension .jp).</para>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+
+    <variablelist>
+      <varlistentry>
+        <term>Changez les extensions de vos fichiers source texte brut.</term>
+
+        <listitem>
+          <para>par exemple, passez de <filename>.txt</filename> à <filename>.jp</filename> pour vos textes bruts en japonais : dans la section <emphasis role="bold">Fichiers texte</emphasis> de la boite de dialogue Fichiers et filtres..., ajoutez un nouveau <emphasis role="bold">Masque de nom de fichier source</emphasis> (<filename>*.jp</filename> pour cet exemple) et sélectionnez les paramètres appropriés pour l'encodage source et cible.</para>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+
+    <para>Pour vous faciliter le traitement de certains fichiers texte brut, <application>OmegaT</application> possède déjà, par défaut, la liste suivante :</para>
+
+    <itemizedlist>
+      <listitem>
+        <para>Les fichiers <literal>.txt</literal> sont automatiquement (&lt;auto&gt;) interprétés par <application>OmegaT</application> comme étant encodés par l'encodage par défaut de l'ordinateur.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Les fichiers <literal>.txt1</literal> sont des fichiers ISO-8859-1 et couvrent la plupart des langues <emphasis role="bold">d'Europe occidentale</emphasis>.<indexterm class="singular">
+            <primary>Encodage</primary> <secondary>Occidental</secondary>
+          </indexterm></para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Les fichiers<literal>.txt2</literal> sont des fichiers ISO-8859-2 et couvrent la plupart des langues <emphasis role="bold">d'Europe centrale et orientale</emphasis>.<indexterm class="singular">
+            <primary>Encodage</primary> <secondary>Europe centrale et orientale</secondary>
+          </indexterm></para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Les fichiers <literal>.utf8</literal> sont interprétés par <application>OmegaT</application> comme étant encodés en UTF-8 (un encodage qui couvre presque toutes les langues du monde).<indexterm class="singular">
+            <primary>Encodage</primary> <secondary>Unicode</secondary>
+          </indexterm></para>
+      </listitem>
+    </itemizedlist>
+
+    <para>Vous pouvez vérifier cela vous-même en sélectionnant l'élément <emphasis role="bold">Fichiers et filtres...</emphasis> dans le menu <emphasis role="bold">Options</emphasis>. Par exemple, si vous avez un fichier texte tchèque (très vraisemblablement écrit dans le code <emphasis role="bold">ISO-8859-2</emphasis>) il vous suffit de faire passer l'extension de <literal>.txt</literal> à <literal>.txt2 </literal>pour qu'<application>OmegaT</application> puisse interpréter le contenu correctement. Bien évidemment, pour plus de sécurité, il peut être bon de songer à convertir ce type de fichier en Unicode, c.-à-d.. de les faire passer à un format de fichier <literal>.utf8 </literal>.</para>
+  </section>
+</chapter>

@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<chapter id="chapter.formatted.text">
+  <title>Travailler avec un texte formaté<indexterm class="singular">
+      <primary>Fichiers cible</primary> <secondary>Texte formaté</secondary>
+    </indexterm><indexterm class="singular">
+      <primary>Fichiers source</primary> <secondary>Texte formaté</secondary>
+    </indexterm></title>
+
+  <para>Les informations de formatage présentes dans le fichier source doivent généralement être recopiées dans le fichier cible. Les informations de formatage en ligne rendues possibles par les formats pris en charge (en particulier DocBook, HTML, XHTML, Open Document Format(ODF) et Office Open XML (MS Office 2007 et versions ultérieures) à l'heure de la rédaction de ce manuel) sont affichées sous forme de balises dans OmegaT. Normalement, lorsque plusieurs textes sont comparés pour établir des correspondances, les balises sont ignorées. Les balises reproduites dans le segment traduit seront présentes dans le document traduit.</para>
+
+  <section id="formatting.tags">
+    <title>Balises de formatage<indexterm class="singular">
+        <primary>Balises</primary>
+      </indexterm></title>
+
+    <para><indexterm class="singular">
+        <primary>Balises</primary> <secondary>Dénomination</secondary>
+      </indexterm><emphasis role="bold">Dénomination des balises :</emphasis></para>
+
+    <para>Les balises sont composées d'un à trois caractères et d'un numéro. La numérotation unique permet de regrouper ensemble les balises qui sont correspondantes et de différencier les balises qui ont le même raccourci mais sont en fait différentes. Les raccourcis utilisés tentent de rappeler le sens de la balise (par exemple b pour bold (gras), i pour italique, etc.)</para>
+
+    <para><indexterm class="singular">
+        <primary>Balises</primary> <secondary>Numérotation</secondary>
+      </indexterm><emphasis role="bold">Numérotation des balises :</emphasis></para>
+
+    <para>Les balises sont numérotées par ordre croissant en fonction de leur groupe de balises. Dans ce contexte, les « groupes de balises » représentent une balise unique (telle que &lt;i0&gt; et &lt;/i0&gt;). À l'intérieur d'un segment, le premier groupe (unique ou double) reçoit le numéro 0, le deuxième le numéro 1, etc. ( Le premier exemple ci-dessous présente 3 groupes de balises (un double, un unique puis un autre double), le second exemple n'en présente qu'un (double).</para>
+
+    <para><indexterm class="singular">
+        <primary>Balises</primary> <secondary>Uniques et doubles</secondary>
+      </indexterm><emphasis role="bold">Uniques et doubles :</emphasis></para>
+
+    <para>Les balises sont toujours soit uniques, soit doubles. Les balises uniques indiquent les informations de formatage n'affectant pas le texte avoisinant (un espace supplémentaire ou un retour à la ligne par exemple).</para>
+
+    <para><literal>&lt;b0&gt;&lt;Ctr+N&gt;&lt;/b0&gt;, &lt;br1&gt;&lt;b2&gt;&lt;Entrée&gt;&lt;/b2&gt;&lt;segment 2132&gt;</literal></para>
+
+    <para>&lt;br1&gt; est une balise unique et n'affecte pas le texte avoisinant. Les balises doubles donnent généralement des informations sur le style qui s'applique au texte contenu entre la balise ouvrante et la balise fermante de la balise double. &lt;b0&gt; et &lt;/b0&gt; ci-dessus sont doubles et affectent le texte log.txt . Veuillez noter que la balise ouvrante doit toujours se trouver avant la balise fermante qui lui correspond.</para>
+
+    <para>&lt;<literal>Fichier journal (&lt;b0&gt;log.txt&lt;/b0&gt;) : pour le suivi des opérations et des erreurs.</literal></para>
+
+    <para><application>OmegaT</application> crée ses balises avant de procéder à la segmentation des phrases. En fonction des règles de segmentation, les paires de balises peuvent être séparées dans deux segments consécutifs, auquel cas la validation des balises marquera les deux segments par règle de précaution.</para>
+  </section>
+
+  <section id="tag.operations">
+    <title>Fonctionnement des balises<indexterm class="singular">
+        <primary> Balises</primary> <secondary>Fonctionnement</secondary>
+      </indexterm></title>
+
+    <para>Soyez prudents avec les balises. Si elles sont accidentellement modifiées, le formatage du fichier final peut être endommagé. La règle de base veut que l'on conserve l'ordre de la séquence de balises. Cependant, si certaines règles sont respectées scrupuleusement, il est possible de déroger à cette règle.</para>
+
+    <para><emphasis role="bold"><indexterm class="singular">
+        <primary>Balises</primary> <secondary>Duplication</secondary>
+      </indexterm>Duplication des balises :</emphasis></para>
+
+    <para>Pour dupliquer un groupe de balises, il suffit de les copier à l'emplacement de votre choix. Gardez bien à l'esprit que pour une paire de balises, la balise ouvrante doit précéder la balise fermante. Le formatage réprésenté par le groupe que vous avez dupliqué sera appliqué aux deux sections.</para>
+
+    <para>Exemple :</para>
+
+    <para><literal>&lt;b0&gt;Ce formatage&lt;/b0&gt; va être dupliqué ici.</literal></para>
+
+    <para>Après la duplication :</para>
+
+    <para><literal>&lt;b0&gt;Ce formatage&lt;/b0&gt; a été &lt;b0&gt;dupliqué ici&lt;/b0&gt;.&lt;segment 0001&gt;</literal></para>
+
+    <para><emphasis role="bold"><indexterm class="singular">
+        <primary>Balises</primary> <secondary>Suppression des groupes</secondary>
+      </indexterm>Suppression des groupes de balises :</emphasis></para>
+
+    <para>Pour supprimer des groupes de balises, il suffit de les retirer du segment. Gardez bien à l'esprit que pour une paire de balises, la balise ouvrante et la balise fermante doivent être toutes les deux supprimées afin de s'assurer que toute trace du formatage a été correctement effacée. Dans le cas contraire, le fichier risquerait d'être endommagé. En supprimant un groupe de balises, vous supprimez le formatage correspondant du fichier traduit.</para>
+
+    <para>Exemple :</para>
+
+    <para><literal>&lt;b0&gt;Ce formatage&lt;/b0&gt; va être supprimé.&lt;segment 0001&gt;</literal></para>
+
+    <para>Après la suppression :</para>
+
+    <para><literal>Ce formatage a été supprimé.</literal></para>
+  </section>
+
+  <section id="tag.group.nesting">
+    <title>Imbrication de groupes de balises<indexterm class="singular">
+        <primary>Balises</primary> <secondary>Imbrication de groupes</secondary>
+      </indexterm></title>
+
+    <para>La modification de l'ordre d'un groupe de balises peut entraîner l'imbrication d'un groupe de balises à l'intérieur d'un autre groupe de balises. Cela peut fonctionner à condition que le groupe extérieur englobe complètement le groupe intérieur. Autrement dit, lorsque vous déplacez une paire de balises, assurez-vous que la balise ouvrante et la balise fermante sont bien toutes les deux à l'intérieur ou à l'extérieur d'une autre paire de balises. Dans le cas contraire, le fichier traduit risquerait d'être endommagé et de ne pas pouvoir s'ouvrir.</para>
+
+    <para>Exemple :</para>
+
+    <para><literal>&lt;b0&gt;Le formatage&lt;/b0&gt; &lt;b1&gt;un&lt;/b1&gt; va être imbriqué dans le formatage zéro.</literal></para>
+
+    <para>Après imbrication :</para>
+
+    <para><literal>&lt;b0&gt;Le formatage &lt;b1&gt;un&lt;/b1&gt;&lt;/b0&gt; a été imbriqué à l'intérieur du formatage zéro.</literal></para>
+  </section>
+
+  <section id="tag.group.overlapping">
+    <title>Chevauchement des groupes de balises<indexterm class="singular">
+        <primary>Balises</primary> <secondary>Chevauchement des groupes</secondary>
+      </indexterm></title>
+
+    <para>Les chevauchements résultent d'une mauvaise manipulation d'une paire de balises et entraîneront à coup sûr une altération du formatage. Parfois, le fichier traduit ne pourra même pas s'ouvrir.</para>
+
+    <para>Exemple :</para>
+
+    <para><literal>&lt;b0&gt;Le formatage&lt;/b0&gt; &lt;b1&gt;un&lt;/b1&gt; va être chamboulé.</literal></para>
+
+    <para>Après une mauvaise manipulation :</para>
+
+    <para><literal>&lt;b0&gt;Le formatage &lt;b1&gt;un&lt;/b0&gt; &lt;/b1&gt; est à présent complètement chamboulé.</literal></para>
+  </section>
+
+  <section>
+    <title>Options de validation des balises</title>
+
+    <para>Pour personnaliser le travail avec des balises, il est possible d'établir quelques règles dans la fenêtre <guimenuitem>Options &gt; Validation des balises...</guimenuitem> :</para>
+
+    <mediaobject>
+      <imageobject>
+        <imagedata fileref="images/OptionsTagValidation_25.png"/>
+      </imageobject>
+    </mediaobject>
+
+    <para>Le comportement décrit ici s'applique à l'ensemble des fichiers source et pas seulement à certains types de fichiers comme les textes formatés.</para>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis role="bold">Variables Printf - pas de vérification, vérification simple, vérification complète</emphasis></para>
+
+        <para>OmegaT peut vérifier que les variables de programmation du texte source (par exemple %s) existent dans la traduction. Vous pouvez décider de ne rien vérifier du tout, de ne vérifier que les variables printf simples (comme %s, %d, etc) ou de vérifier les variables print de tous types.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis role="bold">Vérifier les masques Java MessageFormat de type simple</emphasis></para>
+
+        <para>Cocher cette case obligera OmegaT à vérifier que les balises simples du Java MessageFormat (comme {0}) sont traitées correctement.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis role="bold">Expression régulière pour les balises personnalisées</emphasis></para>
+
+        <para>Entrer une expression régulière obligera OmegaT à traiter les cas détectés comme des balises personnalisées. Cela vérifie que le nombre de balises et leur ordre ne change pas, comme c'est le cas pour les balises d'OmegaT.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis role="bold">Expression régulière du fragment qui devrait être supprimé de la traduction :</emphasis></para>
+
+        <para>Il est possible d'entrer une expression régulière correspondant au contenu indésirable dans la cible. Toutes les correspondances dans le segment cible seront affichées en rouge et donc faciles à identifier et à corriger. Lors de la recherche de correspondances, le masque de suppression est ignoré. Une pénalité fixe de cinq points est ajoutée si la partie supprimée ne correspond à aucun autre segment afin que la correspondance n'atteigne pas les 100 %</para>
+      </listitem>
+    </itemizedlist>
+  </section>
+
+  <section id="tag.group.validation">
+    <title>Validation des groupes de balises<indexterm class="singular">
+        <primary>Balises</primary> <secondary>Validation des groupes</secondary>
+      </indexterm></title>
+
+    <para>L'option de validation des balises détecte les modifications survenues dans la séquence de balises (que ce changement soit délibéré ou accidentel) et affiche les segments concernés. Lancer cette option – <guimenuitem>Ctrl+T<indexterm class="singular">
+        <primary>Raccourcis</primary> <secondary>Validation des balises - Ctrl+T</secondary>
+      </indexterm></guimenuitem> - ouvre une fenêtre qui liste tous les segments du fichier contenant des balises qui pourraient être altérées ou fausses dans les segments traduits. L'option de validation des balises permet de réparer les balises et de recréer les documents cibles facilement. La fenêtre qui s'ouvre quand <guimenuitem>Ctrl+T</guimenuitem> est appuyé se présente sous la forme d'un tableau à 3 colonnes avec un lien vers le segment, sa partie originale et sa partie cible</para>
+
+    <figure id="tag.validation">
+      <title>Entrée de validation des balises</title>
+
+      <mediaobject>
+        <imageobject role="html">
+          <imagedata fileref="images/TagValidation.png"/>
+        </imageobject>
+
+        <imageobject role="fo">
+          <imagedata fileref="images/TagValidation.png" width="90%"/>
+        </imageobject>
+      </mediaobject>
+    </figure>
+
+    <para>Les balises sont en gras et en bleu pour faciliter la comparaison entre le contenu original et le contenu traduit. Cliquez sur le lien pour activer le segment dans l'Éditeur. Corrigez les erreurs si nécessaire (dans le cas ci-dessus, il manque la paire &lt;i2&gt;&lt;/i2&gt;) et appuyez sur <guimenuitem>Ctrl+T</guimenuitem> pour retourner dans la fenêtre de validation des balises afin de corriger d'autres erreurs. Les erreurs de balises sont des séquences de balises présentes dans la partie traduite pour lesquelles l'ordre et le nombre de balises du segment d'origine ne sont pas respectés. Certaines manipulations de balises sont nécessaires et sans conséquences, mais d'autres poseront problème lors de la création du document traduit.</para>
+  </section>
+
+  <section id="hints.for.tag.management">
+    <title>Astuces pour la gestion des balises<indexterm class="singular">
+        <primary>Balises</primary> <secondary>Astuces</secondary>
+      </indexterm></title>
+
+    <para><emphasis role="bold">Simplifiez le texte d'origine</emphasis></para>
+
+    <para>Les balises représentent généralement le formatage du texte d'origine. La simplification du formatage d'origine contribue grandement à la réduction du nombre de balises. Si les circonstances le permettent,  unifiez les polices, les tailles des caractères, les couleurs, etc. afin de simplifier la traduction et de réduire les possibilités d'erreurs de balises. Lisez la section sur le fonctionnement des balises pour savoir ce qu'il est possible de faire avec des balises. Souvenez-vous que si les balises vous posent problème dans OmegaT et que le formatage n'est pas très important pour la traduction en cours, supprimer les balises peut être la solution la plus facile.</para>
+
+    <para><emphasis role="bold">Faites particulièrement attention aux paires de balises</emphasis></para>
+
+    <para>Si vous avez besoin de voir les balises dans OmegaT mais pas de conserver la plupart du formatage dans le document traduit, il est possible de ne pas inclure les balises dans la traduction. Dans ce cas, faites particulièrement attention aux paires de balises dans la mesure où la suppression d'une seule partie de la paire endommagerait le formatage de votre document. Les balises étant comprises dans le texte, il est possible d'utiliser des règles de segmentation qui créeront des segments comportant moins de balises. Ceci est une fonctionnalité avancée et il faut une certaine expérience pour pouvoir l'utiliser correctement.</para>
+
+    <para>OmegaT n'arrive pas encore à détecter automatiquement les erreurs de formatage et ne vous préviendra donc pas en cas d'erreur ou de modification du formatage (réalisée en vue d'une meilleure adaptation à la langue cible). Cependant, il peut arriver que votre document traduit ait un aspect étrange et que - dans le pire des cas - il refuse de s'ouvrir.</para>
+  </section>
+</chapter>

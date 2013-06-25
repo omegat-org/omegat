@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<appendix id="appendix.website">
+  <title><application><indexterm class="singular">
+      <primary>OmegaT sur le web</primary>
+    </indexterm>OmegaT</application> sur le web</title>
+
+  <section id="OmegaT.sites.and.OmegaT.SourceForge.project">
+    <title>Les sites<application>OmegaT</application> et le <application>projet SourceForge</application> OmegaT<indexterm class="singular">
+        <primary>OmegaT sur le web</primary> <secondary>Projet SourceForge </secondary>
+      </indexterm></title>
+
+    <para>Le site internet<ulink url="http://www.omegat.org/"> d'<application>OmegaT</application> </ulink>contient des liens vers de nombreuses ressources<application>OmegaT</application>. L'aide aux utilisateurs est offerte de façon bénévole sur le groupe Yahoo! <ulink url="http://tech.groups.yahoo.com/group/omegat/">d'<application>OmegaT</application> Groupe d'utilisateurs</ulink>. La <ulink url="http://tech.groups.yahoo.com/group/OmegaT/database?method=reportRows&amp;tbl=1">FAQ </ulink> est un bon point de départ pour trouver des réponses aux questions que vous pourriez vous poser. Pour la dernière version d'OmegaT, reportez-vous à la page des téléchargements : www.omegat.org. Vous pouvez également rédiger des <ulink url="https://sourceforge.net/p/omegat/bugs/">rapports de bogues</ulink>(bug reports) et des<ulink url="https://sourceforge.net/p/omegat/feature-requests/">demandes d'améliorations</ulink>(requests for enhancements).</para>
+  </section>
+
+  <section id="bug.reports">
+    <title>Rapports de bogues<indexterm class="singular">
+        <primary>OmegaT sur le web</primary> <secondary>Rapports de bogues</secondary>
+      </indexterm></title>
+
+    <para>Rappelez-vous qu'il ne faut que trois choses pour écrire un bon rapport de bogue :</para>
+
+    <itemizedlist>
+      <listitem>
+        <para>Ce que vous avez fait (écrivez toutes les étapes en détails)</para>
+      </listitem>
+
+      <listitem>
+        <para>Ce qui aurait dû arriver</para>
+      </listitem>
+
+      <listitem>
+        <para>Ce qui est arrivé à la place</para>
+      </listitem>
+    </itemizedlist>
+
+    <para>Pour plus d'informations, voir l'article<ulink url="http://www.joelonsoftware.com/articles/fog0000000029.html">Painless Bug Tracking</ulink> écrit par Joel Spolsky.</para>
+
+    <para>Il est important d'ajouter les copies des fichiers, les parties du journal, les captures d'écran, et tout ce qui pourrait aider les développeurs à localiser et à corriger votre bogue. Veuillez noter que les rapports de bogue et les demandes d'améliorations sont visibles publiquement et qu'il vaut donc mieux éviter de poster des fichiers sensibles ou confidentiels. Pour garder une trace des suites données au rapport, enregistrez-vous en tant qu'utilisateur sur SourceForge, connectez-vous et signalez un rapport de bogue ou cliquez simplement sur &quot;Monitor&quot; (dans la partie supérieure du rapport).</para>
+  </section>
+
+  <section id="contributing.to.omegat.project">
+    <title>Apporter sa contribution au projet <application>OmegaT</application><indexterm class="singular">
+        <primary>OmegaT sur le web</primary> <secondary>Apporter sa contribution à OmegaT</secondary>
+      </indexterm></title>
+
+    <para><emphasis role="bold">Pour apporter votre contribution à <application>OmegaT</application> :</emphasis></para>
+
+    <para>Rejoignez d'abord le <ulink url="http://tech.groups.yahoo.com/group/omegat/">groupes d'utilisateurs</ulink> via Internet ou en envoyant un courriel à <ulink url="mailto:OmegaT-subscribe@yahoogroups.com"><application>OmegaT</application>-subscribe@yahoogroups.com</ulink>. Pour participer à l'effort de développement du projet <application>OmegaT</application> vous pouvez joindre le groupe de développeurs via Internet ou en envoyant un courriel à <ulink url="mailto:omegat-development-request@list.sourceforge.net?subject=subscribe">omegat-development-request@lists.sourceforge.net</ulink>, avec « subscribe » en objet.</para>
+
+    <para><emphasis role="bold">Pour participer à la traduction de l'interface utilisateur d'<application>OmegaT</application>, du manuel OmegaT ou de tout autre document lié :</emphasis></para>
+
+    <para>Commencez par lire le guide <ulink url="http://www.omegat.org/en/howtos/localizing_omegat.php">Localisation<application>d'OmegaT</application></ulink>, et rejoignez le groupe de traducteur <application>OmegaT</application> via Internet ou en envoyant un courriel à : <ulink url="mailto:omegat-development-request@lists.sourceforge.net?subject=subscribe">omegat-l10n-request@lists.sourceforge.net</ulink> avec « subscribe » en objet.</para>
+
+    <indexterm class="singular">
+      <primary>OmegaT sur le web</primary> <secondary>Développement, Localisation</secondary>
+    </indexterm>
+
+    <para>Pour aider financièrement le projet OmegaT<indexterm class="singular">
+        <primary>OmegaT sur le web</primary> <secondary>Soutien financier</secondary>
+      </indexterm></para>
+
+    <para>Toute aide apportée au développement continu d'OmegaT sera bien évidemment très appréciée - pour cela, cliquez sur le lien pour vous rendre sur le<ulink url="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&amp;hosted_button_id=9UB6Y2BBF99LL"> compte PayPal d'OmegaT</ulink>.</para>
+
+    <indexterm class="singular">
+      <primary>OmegaT sur le web</primary> <secondary>Faire un don à OmegaT</secondary>
+    </indexterm>
+  </section>
+</appendix>

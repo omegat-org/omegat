@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE appendix PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<appendix id="appendix.acknowledgements">
+  <title>Remerciements</title>
+
+  <section>
+    <title>Merci à tous !</title>
+
+    <para>Quelles que soient les incohérences, omissions et simples erreurs que pourriez trouver dans cette version, je tiens à déclarer que j'en assume l'entière responsabilité. Cependant, ce manuel n'aurait pas pu voir le jour sans l'aide et le soutien d'un grand nombre de personnes. J'exprime donc ma gratitude à :</para>
+
+    <itemizedlist>
+      <listitem>
+        <para>Marc Prior : corriger ma première ébauche a été un acte d'amour pour OmegaT et la langue anglaise.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Didier Briel : je n'aurais rien pu faire sans I'aide patiente et persistante que Didier m'a apportée face à la complexité de DocBook. Sans parler des soins et du zèle dont il a fait preuve pour protéger les référentiels et les tenir en ordre.</para>
+      </listitem>
+
+      <listitem>
+        <para>Samuel Murray : pour le chapitre d'introduction « Apprenez à utiliser OmegaT en 5 minutes ».</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Will Helton : sa lecture finale du projet m'a évité d'avoir honte à de nombreuses reprises. Je ne peux qu'imaginer le nombre de d'articles définis et indéfinis qui manqueraient encore si je n'avais pas bénéficié de son aide précieuse.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Jean-Christophe Helary : remerciements particuliers à JC pour sa description concise de l'exécution d'OmegaT, des paramètres de ses lignes de commandes et de tous les autres petits détails que je n'ai pas encore repérés.</para>
+      </listitem>
+
+      <listitem>
+        <para>Dernier remerciement mais non des moindres : je remercie tous ceux qui ont contribué à <ulink url="https://sourceforge.net/p/omegat/documentation/">l'analyse du manuel d'OmegaT</ulink> pour toutes les incohérences qu'ils ont trouvées dans ses précédentes versions. Continuez votre excellent travail !</para>
+      </listitem>
+    </itemizedlist>
+  </section>
+</appendix>

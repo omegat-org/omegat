@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<appendix id="appendix.keyboard">
+  <title>Raccourcis clavier dans le volet d'édition</title>
+
+  <para>Ce petit texte décrit le comportement des touches dans le volet d'édition. Le terme « Déplacement dans le segment »  signifie que le curseur ira se placer au début du segment actif s'il est positionné avant celui-ci, et qu'il ira se placer à la fin du segment actif s'il est positionné après.</para>
+
+  <table>
+    <title>Comportement des touches dans le volet d'édition</title>
+
+    <tgroup cols="2">
+      <colspec align="left" colnum="1"/>
+
+      <colspec align="left" colnum="2"/>
+
+      <thead>
+        <row>
+          <entry align="left">Combinaison de touches</entry>
+
+          <entry align="left">Action</entry>
+        </row>
+      </thead>
+
+      <tbody>
+        <row>
+          <entry><emphasis role="bold">Gauche :</emphasis></entry>
+
+          <entry>déplacement d'un caractère sur la gauche mais qui ne va pas plus loin que le début du segment</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">Droite :</emphasis></entry>
+
+          <entry>déplacement d'un caractère sur la droite mais qui ne va pas plus loin que la fin du segment</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">Ctrl+Gauche :</emphasis></entry>
+
+          <entry>déplacement d'un mot sur la gauche mais qui ne va pas plus loin que le début du segment</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">Ctrl+Droite :</emphasis></entry>
+
+          <entry>déplacement d'un mot sur la droite mais qui ne va pas plus loin que la fin du segment</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">Pg préc :</emphasis></entry>
+
+          <entry>le document défile vers le haut</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">Pg suiv :</emphasis></entry>
+
+          <entry>le document défile vers le bas</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">Début*</emphasis></entry>
+
+          <entry>déplacement au début de la ligne à l'intérieur du segment</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">Fin*</emphasis></entry>
+
+          <entry>déplacement à la fin de la ligne à l'intérieur du segment</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">Ctrl+Début</emphasis></entry>
+
+          <entry>déplacement au début du segment</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">Ctrl+Fin</emphasis></entry>
+
+          <entry>déplacement à la fin du segment</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">Ctrl+Pg préc</emphasis></entry>
+
+          <entry>déplacement au début du document (Mac : <emphasis role="bold">Cmd+Pg préc</emphasis>)</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">Ctrl+Pg suiv</emphasis></entry>
+
+          <entry>déplacement à la fin du document (Mac: <emphasis role="bold">Cmd+Pg suiv</emphasis>)</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">Retour arrière*</emphasis></entry>
+
+          <entry>supprime le caractère placé avant le curseur</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">Supprimer*</emphasis></entry>
+
+          <entry>supprime le caractère placé après le curseur</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">Ctrl+Retour arrière</emphasis></entry>
+
+          <entry>supprime tous les caractères du mot placé avant le curseur (Mac : <emphasis role="bold">Alt+Retour arrière</emphasis>)</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">Ctrl+Supprimer</emphasis></entry>
+
+          <entry>supprime tous les caractères du mot placé après le curseur (Mac : <emphasis role="bold">Alt+Supprimer</emphasis>)</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">Ctrl+Entrée</emphasis></entry>
+
+          <entry>ouvre le segment précédent (Mac : <emphasis role="bold">Cmd+Enter</emphasis>)</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">Ctrl+A</emphasis></entry>
+
+          <entry>sélectionne le segment complet (Mac : <emphasis role="bold">Cmd+A</emphasis>)</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">Ctrl+Maj+O</emphasis></entry>
+
+          <entry>Passage du mode de lecture droite-à-gauche au mode de lecture gauche-à-droite (et inversement)</entry>
+        </row>
+      </tbody>
+    </tgroup>
+  </table>
+
+  <para>* Ces touches ont un comportement différent lorsque le curseur est à l'extérieur du segment modifiable :</para>
+
+  <itemizedlist>
+    <listitem>
+      <para><emphasis role="bold">Début : </emphasis> déplacement du curseur au début du segment actif</para>
+    </listitem>
+
+    <listitem>
+      <para><emphasis role="bold">Fin : </emphasis> déplacement du curseur à la fin du segment actif</para>
+    </listitem>
+
+    <listitem>
+      <para><emphasis role="bold">Retour arrière : </emphasis>rien ne se passe</para>
+    </listitem>
+
+    <listitem>
+      <para><emphasis role="bold">Supprimer : </emphasis>rien ne se passe</para>
+    </listitem>
+
+    <listitem>
+      <para>Un appui sur <emphasis role="bold">n'importe qu'elle autre touche</emphasis> à l'extérieur du segment modifiable sera ignoré.</para>
+    </listitem>
+  </itemizedlist>
+
+  <para>En elle-même, la touche « Maj » ne provoque pas de comportement particulier : lors d'un appui sur la touche « Maj », toutes les touches déplacent le curseur de manière habituelle, à l'exception de la combinaison <literal>Maj+Entrée</literal> qui insère un retour à la ligne dans le texte.</para>
+
+  <para>Les commandes utilisées pour l'ensemble du système, Tout sélectionner (<keycap>Ctrl+A</keycap>), Coller (<emphasis role="bold">Ctrl+V</emphasis>), Couper (<emphasis role="bold">Ctrl+X</emphasis>), Copier (<emphasis role="bold">Ctrl+C)</emphasis>, Insérer la correspondance <emphasis role="bold">(Ctrl+I</emphasis>) et Insérer le texte source (<emphasis role="bold">Ctrl+Maj+I</emphasis>) fonctionnent par construction uniquement sur le texte à l'intérieur du segment ouvert.</para>
+
+  <para>Notez que vous pouvez reprogrammer les raccourcis selon vos préférences. Voir <link linkend="ch04.shortcuts.customization">Annexe Personnalisation des raccourcis</link></para>
+</appendix>

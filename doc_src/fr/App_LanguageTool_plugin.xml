@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<appendix id="appendix.LanguageToolPlugin.inOmegaT">
+  <title>L'extension LanguageTool<indexterm class="singular">
+      <primary>Extensions</primary> <secondary>LanguageTool</secondary>
+    </indexterm></title>
+
+  <section>
+    <title>Introduction</title>
+
+    <para><ulink url="http://www.languagetool.org">LanguageTool</ulink>est un logiciel à code source ouvert de correction grammaticale et stylistique pour l'anglais, le français, l'allemand, le polonais, le néérlandais, le roumain, et bien d'autres langues - voir la <ulink url="http://www.languagetool.org/languages/">liste des langues disponibles</ulink>.</para>
+
+    <para>LanguageTool est un logiciel conçu pour détecter les erreurs qu'un simple correcteur orthographique ne détecterait pas. Par ex. : des confusions entre des/dès/dés, notre/nôtre, etc. Il peut également détecter certaines erreurs grammaticales. Il n'inclut pas la correction orthographique. LanguageTool trouvera les erreurs pour lesquelles une règle a été définie dans ses fichiers de configuration spécifiques à chaque langue.</para>
+
+    <figure>
+      <title>LanguageTool dans OmegaT</title>
+
+      <screenshot>
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="images/LanguageToolExample.png"/>
+          </imageobject>
+        </mediaobject>
+      </screenshot>
+    </figure>
+  </section>
+
+  <section>
+    <title>Installation et Utilisation</title>
+
+    <para>L'extension LanguageTool est incluse dans OmegaT Elle sera utilisée automatiquement par OmegaT si <guimenuitem>Options &gt; Vérifier automatiquement l'orthographe</guimenuitem> est coché. L'application des règles (le cas échéant) dépendra de la langue source et de la langue cible du projet. Lorsqu'une règle activée n'est pas respectée, la phrase correspondante est soulignée en bleue dans l'Éditeur (voir <emphasis>also</emphasis>et <emphasis>I didn't do nothing</emphasis> dans l'image ci-dessus). Lorsque le curseur de la souris passe au-dessus de la phrase soulignée, une explication apparaît.</para>
+    
+	<warning>
+		<title>Incompatibilités</title>
+		<para>LanguageTool ne fonctionnera pas correctement si une ancienne version se trouve dans le répertoire /plugin. Retirer LanguageTool du répertoire /plugin avant de lancer OmegaT.</para>
+	</warning>
+
+  </section>
+</appendix>

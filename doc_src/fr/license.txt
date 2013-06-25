@@ -1,11 +1,11 @@
-                    Licence Publique Générale GNU
+                    GNU GENERAL PUBLIC LICENSE
                        Version 3, 29 June 2007
 
  Copyright (C) 2007 Free Software Foundation, Inc. <http://fsf.org/>
- Le droit est donné à chacun de copier et de distribuer des copies conformes
- de cette licence mais aucune modification n'est autorisée.
+ Everyone is permitted to copy and distribute verbatim copies
+ of this license document, but changing it is not allowed.
 
-                            Préambule
+                            Preamble
 
   The GNU General Public License is a free, copyleft license for
 software and other kinds of works.
@@ -19,7 +19,8 @@ GNU General Public License for most of our software; it applies also to
 any other work released this way by its authors.  You can apply it to
 your programs, too.
 
-  Quand nous parlons de logiciels libres, nous parlons de liberté, non de prix.  Our General Public Licenses are designed to make sure that you
+  When we speak of free software, we are referring to freedom, not
+price.  Our General Public Licenses are designed to make sure that you
 have the freedom to distribute copies of free software (and charge for
 them if you wish), that you receive source code or can get it if you
 want it, that you can change the software or use pieces of it in new
@@ -64,7 +65,8 @@ avoid the special danger that patents applied to a free program could
 make it effectively proprietary.  To prevent this, the GPL assures that
 patents cannot be used to render the program non-free.
 
-  Les termes exacts et les conditions de copie, distribution et modification sont les suivants :
+  The precise terms and conditions for copying, distribution and
+modification follow.
 
                        TERMS AND CONDITIONS
 
@@ -561,9 +563,11 @@ combination as such.
   14. Revised Versions of this License.
 
   The Free Software Foundation may publish revised and/or new versions of
-the GNU General Public License from time to time.  De telles nouvelles versions seront similaires à la présente version dans l'esprit mais pourront différer dans le détail pour prendre en compte de nouvelles problématiques ou inquiétudes.
+the GNU General Public License from time to time.  Such new versions will
+be similar in spirit to the present version, but may differ in detail to
+address new problems or concerns.
 
-  Chaque version possède un numéro de version la distinguant.  If the
+  Each version is given a distinguishing version number.  If the
 Program specifies that a certain numbered version of the GNU General
 Public License "or any later version" applies to it, you have the
 option of following the terms and conditions either of that numbered
@@ -614,44 +618,47 @@ an absolute waiver of all civil liability in connection with the
 Program, unless a warranty or assumption of liability accompanies a
 copy of the Program in return for a fee.
 
-                     FIN DES CONDITIONS
+                     END OF TERMS AND CONDITIONS
 
-            Comment appliquer ces conditions à vos nouveaux programmes
+            How to Apply These Terms to Your New Programs
 
-  Si vous développez un nouveau programme, et si vous voulez qu'il soit de la plus grande utilité possible pour le public, le meilleur moyen d'y parvenir est d'en faire un logiciel libre que chacun peut redistribuer et modifier au titre des présentes conditions.
+  If you develop a new program, and you want it to be of the greatest
+possible use to the public, the best way to achieve this is to make it
+free software which everyone can redistribute and change under these terms.
 
-  Pour ce faire, munissez le programme des avis qui suivent.  It is safest
+  To do so, attach the following notices to the program.  It is safest
 to attach them to the start of each source file to most effectively
 state the exclusion of warranty; and each file should have at least
 the "copyright" line and a pointer to where the full notice is found.
 
-    [Une ligne donnant le nom du programme et une courte idée de ce qu'il fait.]
-    Copyright (C) [année] [nom de l'auteur] 
+    <one line to give the program's name and a brief idea of what it does.>
+    Copyright (C) <year>  <name of author>
 
     This program is free software: you can redistribute it and/or modify
-    au titre des clauses de la Licence Publique Générale GNU, telle que publiée 
+    it under the terms of the GNU General Public License as published by
     the Free Software Foundation, either version 3 of the License, or
-    ou (à votre discrétion) une version ultérieure quelconque.
+    (at your option) any later version.
 
-    Ce programme est distribué dans l'espoir qu'il sera utile, 
-    mais SANS AUCUNE GARANTIE ; sans même une garantie implicite 
-    de COMMERCIABILITE ou DE CONFORMITE A UNE UTILISATION PARTICULIERE.   Voir la 
-    Licence Publique Générale GNU pour plus de détails.
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
 
-    Vous devriez avoir reçu un exemplaire de la Licence Publique Générale GNU 
+    You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-Ajoutez aussi des informations sur la manière de vous contacter par courrier électronique et courrier postal.
+Also add information on how to contact you by electronic and paper mail.
 
   If the program does terminal interaction, make it output a short
 notice like this when it starts in an interactive mode:
 
     <program>  Copyright (C) <year>  <name of author>
     This program comes with ABSOLUTELY NO WARRANTY; for details type `show w'.
-    Ceci est un logiciel libre et vous êtes invité à le redistribuer 
-    en respectant certaines obligations ; pour plus de détails tapez 'show c'.
+    This is free software, and you are welcome to redistribute it
+    under certain conditions; type `show c' for details.
 
-Les instructions hypothétiques 'show w' et 'show c' sont supposées montrer les parties ad hoc de la Licence Publique Générale.  Of course, your program's commands
+The hypothetical commands `show w' and `show c' should show the appropriate
+parts of the General Public License.  Of course, your program's commands
 might be different; for a GUI interface, you would use an "about box".
 
   You should also get your employer (if you work as a programmer) or school,

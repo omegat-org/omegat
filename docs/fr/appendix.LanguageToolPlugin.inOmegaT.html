@@ -1,0 +1,103 @@
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <title>Annexe&nbsp;E.&nbsp;L'extension LanguageTool</title>
+      <link rel="stylesheet" type="text/css" href="OmegaT.css">
+      <meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
+      <link rel="home" href="index.html" title="OmegaT - Guide de l'utilisateur">
+      <link rel="up" href="index.html" title="OmegaT - Guide de l'utilisateur">
+      <link rel="prev" href="appendix.TokenizerPlugin.inOmegaT.html" title="Annexe&nbsp;D.&nbsp;Extension module Tokenizer">
+      <link rel="next" href="appendix.ScriptingPlugin.inOmegaT.html" title="Annexe&nbsp;F.&nbsp;Extension Scripts">
+   </head>
+   <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+      <div class="navheader">
+         <table width="100%" summary="Navigation header">
+            <tr>
+               <th colspan="3" align="center">Annexe&nbsp;E.&nbsp;L'extension LanguageTool</th>
+            </tr>
+            <tr>
+               <td width="20%" align="left"><a accesskey="p" href="appendix.TokenizerPlugin.inOmegaT.html">Précédent</a>&nbsp;
+               </td>
+               <th width="60%" align="center">&nbsp;</th>
+               <td width="20%" align="right">&nbsp;<a accesskey="n" href="appendix.ScriptingPlugin.inOmegaT.html">Suivant</a></td>
+            </tr>
+         </table>
+         <hr>
+      </div>
+      <div class="appendix">
+         <div class="titlepage">
+            <div>
+               <div>
+                  <h1 class="title"><a name="appendix.LanguageToolPlugin.inOmegaT"></a>Annexe&nbsp;E.&nbsp;L'extension LanguageTool<a class="indexterm" name="d0e10788"></a></h1>
+               </div>
+            </div>
+         </div>
+         <div class="toc">
+            <dl class="toc">
+               <dt><span class="section"><a href="appendix.LanguageToolPlugin.inOmegaT.html#d0e10793">1. Introduction</a></span></dt>
+               <dt><span class="section"><a href="appendix.LanguageToolPlugin.inOmegaT.html#d0e10812">2. Installation et Utilisation</a></span></dt>
+            </dl>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e10793"></a>1.&nbsp;Introduction
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p><a class="ulink" href="http://www.languagetool.org" target="_top">LanguageTool</a>est un logiciel à code source ouvert de correction grammaticale et stylistique pour l'anglais, le français, l'allemand, le
+               polonais, le néérlandais, le roumain, et bien d'autres langues - voir la <a class="ulink" href="http://www.languagetool.org/languages/" target="_top">liste des langues disponibles</a>.
+            </p>
+            <p>LanguageTool est un logiciel conçu pour détecter les erreurs qu'un simple correcteur orthographique ne détecterait pas. Par
+               ex. : des confusions entre des/dès/dés, notre/nôtre, etc. Il peut également détecter certaines erreurs grammaticales. Il n'inclut
+               pas la correction orthographique. LanguageTool trouvera les erreurs pour lesquelles une règle a été définie dans ses fichiers
+               de configuration spécifiques à chaque langue.
+            </p>
+            <div class="figure"><a name="d0e10805"></a><p class="title"><b>Figure&nbsp;E.1.&nbsp;LanguageTool dans OmegaT</b></p>
+               <div class="figure-contents">
+                  <div class="screenshot">
+                     <div class="mediaobject"><img src="images/LanguageToolExample.png" alt="LanguageTool dans OmegaT"></div>
+                  </div>
+               </div>
+            </div><br class="figure-break"></div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e10812"></a>2.&nbsp;Installation et Utilisation
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>L'extension LanguageTool est incluse dans OmegaT Elle sera utilisée automatiquement par OmegaT si <span class="guimenuitem">Options &gt; Vérifier automatiquement l'orthographe</span> est coché. L'application des règles (le cas échéant) dépendra de la langue source et de la langue cible du projet. Lorsqu'une
+               règle activée n'est pas respectée, la phrase correspondante est soulignée en bleue dans l'Éditeur (voir <span class="emphasis"><em>also</em></span>et <span class="emphasis"><em>I didn't do nothing</em></span> dans l'image ci-dessus). Lorsque le curseur de la souris passe au-dessus de la phrase soulignée, une explication apparaît.
+            </p>
+            <div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+               <h3 class="title">Incompatibilités</h3>
+               <p>LanguageTool ne fonctionnera pas correctement si une ancienne version se trouve dans le répertoire /plugin. Retirer LanguageTool
+                  du répertoire /plugin avant de lancer OmegaT.
+               </p>
+            </div>
+         </div>
+      </div>
+      <div class="navfooter">
+         <hr>
+         <table width="100%" summary="Navigation footer">
+            <tr>
+               <td width="40%" align="left"><a accesskey="p" href="appendix.TokenizerPlugin.inOmegaT.html">Précédent</a>&nbsp;
+               </td>
+               <td width="20%" align="center">&nbsp;</td>
+               <td width="40%" align="right">&nbsp;<a accesskey="n" href="appendix.ScriptingPlugin.inOmegaT.html">Suivant</a></td>
+            </tr>
+            <tr>
+               <td width="40%" align="left" valign="top">Annexe&nbsp;D.&nbsp;Extension module Tokenizer&nbsp;</td>
+               <td width="20%" align="center"><a accesskey="h" href="index.html">Sommaire</a></td>
+               <td width="40%" align="right" valign="top">&nbsp;Annexe&nbsp;F.&nbsp;Extension Scripts</td>
+            </tr>
+         </table>
+      </div>
+   </body>
+</html>

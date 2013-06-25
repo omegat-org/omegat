@@ -1,0 +1,122 @@
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <title>Annexe&nbsp;D.&nbsp;Extension module Tokenizer</title>
+      <link rel="stylesheet" type="text/css" href="OmegaT.css">
+      <meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
+      <link rel="home" href="index.html" title="OmegaT - Guide de l'utilisateur">
+      <link rel="up" href="index.html" title="OmegaT - Guide de l'utilisateur">
+      <link rel="prev" href="appendix.TeamProjects.html" title="Annexe&nbsp;C.&nbsp;Projets en équipe d'OmegaT">
+      <link rel="next" href="appendix.LanguageToolPlugin.inOmegaT.html" title="Annexe&nbsp;E.&nbsp;L'extension LanguageTool">
+   </head>
+   <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+      <div class="navheader">
+         <table width="100%" summary="Navigation header">
+            <tr>
+               <th colspan="3" align="center">Annexe&nbsp;D.&nbsp;Extension module Tokenizer</th>
+            </tr>
+            <tr>
+               <td width="20%" align="left"><a accesskey="p" href="appendix.TeamProjects.html">Précédent</a>&nbsp;
+               </td>
+               <th width="60%" align="center">&nbsp;</th>
+               <td width="20%" align="right">&nbsp;<a accesskey="n" href="appendix.LanguageToolPlugin.inOmegaT.html">Suivant</a></td>
+            </tr>
+         </table>
+         <hr>
+      </div>
+      <div class="appendix">
+         <div class="titlepage">
+            <div>
+               <div>
+                  <h1 class="title"><a name="appendix.TokenizerPlugin.inOmegaT"></a>Annexe&nbsp;D.&nbsp;Extension module Tokenizer<a class="indexterm" name="d0e10741"></a></h1>
+               </div>
+            </div>
+         </div>
+         <div class="toc">
+            <dl class="toc">
+               <dt><span class="section"><a href="appendix.TokenizerPlugin.inOmegaT.html#d0e10746">1. Introduction</a></span></dt>
+               <dt><span class="section"><a href="appendix.TokenizerPlugin.inOmegaT.html#d0e10775">2. Installation et Utilisation</a></span></dt>
+            </dl>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e10746"></a>1.&nbsp;Introduction<a class="indexterm" name="d0e10749"></a><a class="indexterm" name="d0e10754"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <p>Les Tokenizers (ou lemmatiseurs) améliorent la qualité des correspondances en reconnaissant les mots accordés dans les données
+               source et dans la mémoire de traduction. Ils améliorent également les capacités de correspondance du glossaire.
+            </p>
+            <p>Un lemmatiseur anglais, par exemple, doit pouvoir identifier la chaîne de caractères « chats » (et éventuellement « chatons
+               », « chatière », etc.) comme ayant pour racine la chaîne de caractères « chat », et « lemmatiser », « lemmatisation », « lemmatiseur
+               » comme ayant pour racine la chaîne de caractères « lemmati ». Un algorithme de lemmatisation réduit les mots « pêcher »,
+               « pêché », « pêche », et « pêcheur » au mot racine : « pêche ». Ceci est particulièrement utile dans le cas des langues qui
+               accrochent des préfixes et des suffixes aux racines pour former des mots. Par exemple, vous pourrez trouver ci-dessous toutes
+               les formes grammaticalement correctes du mot « bon » en Slovène :
+            </p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>lep, lepa, lepo - singulier : masculin, féminin, neutre</p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>lepši, lepša, lepše - comparatif nominatif : masculin, féminin, neutre ; qui sont respectivement les formes plurielles des
+                        adjectifs
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>najlepših - superlatif, pluriel, génitif pour le masc, fem, neutre</p>
+                  </li>
+               </ul>
+            </div>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e10775"></a>2.&nbsp;Installation et Utilisation
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>Les lemmatiseurs sont inclus dans OmegaT OmegaT sélectionne automatiquement les lemmatiseurs pour les langues sources et cibles
+               en fonction des paramètres du projet. Il est possible de sélectionner un autre lemmatiseur ou une version différente du lemmatiseur
+               dans la fenêtre de Propriétés du projet.
+            </p>
+            <div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+               <h3 class="title">Incompatibilités</h3>
+               <p>OmegaT ne se lancera pas si des lemmatiseurs sont présents dans le dossier /plugin. Retirer tous les lemmatiseurs du dossier
+                  /plugin avant de lancer OmegaT.
+               </p>
+            </div>
+         </div>
+      </div>
+      <div class="navfooter">
+         <hr>
+         <table width="100%" summary="Navigation footer">
+            <tr>
+               <td width="40%" align="left"><a accesskey="p" href="appendix.TeamProjects.html">Précédent</a>&nbsp;
+               </td>
+               <td width="20%" align="center">&nbsp;</td>
+               <td width="40%" align="right">&nbsp;<a accesskey="n" href="appendix.LanguageToolPlugin.inOmegaT.html">Suivant</a></td>
+            </tr>
+            <tr>
+               <td width="40%" align="left" valign="top">Annexe&nbsp;C.&nbsp;Projets en équipe d'OmegaT&nbsp;</td>
+               <td width="20%" align="center"><a accesskey="h" href="index.html">Sommaire</a></td>
+               <td width="40%" align="right" valign="top">&nbsp;Annexe&nbsp;E.&nbsp;L'extension LanguageTool</td>
+            </tr>
+         </table>
+      </div>
+   </body>
+</html>

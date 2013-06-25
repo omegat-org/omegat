@@ -1,0 +1,506 @@
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <title>Chapitre&nbsp;16.&nbsp;Expressions régulières</title>
+      <link rel="stylesheet" type="text/css" href="OmegaT.css">
+      <meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
+      <link rel="home" href="index.html" title="OmegaT - Guide de l'utilisateur">
+      <link rel="up" href="index.html" title="OmegaT - Guide de l'utilisateur">
+      <link rel="prev" href="chapter.searches.html" title="Chapitre&nbsp;15.&nbsp;Recherches">
+      <link rel="next" href="chapter.dictionaries.html" title="Chapitre&nbsp;17.&nbsp;Dictionnaires">
+   </head>
+   <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+      <div class="navheader">
+         <table width="100%" summary="Navigation header">
+            <tr>
+               <th colspan="3" align="center">Chapitre&nbsp;16.&nbsp;Expressions régulières</th>
+            </tr>
+            <tr>
+               <td width="20%" align="left"><a accesskey="p" href="chapter.searches.html">Précédent</a>&nbsp;
+               </td>
+               <th width="60%" align="center">&nbsp;</th>
+               <td width="20%" align="right">&nbsp;<a accesskey="n" href="chapter.dictionaries.html">Suivant</a></td>
+            </tr>
+         </table>
+         <hr>
+      </div>
+      <div class="chapter">
+         <div class="titlepage">
+            <div>
+               <div>
+                  <h1 class="title"><a name="chapter.regexp"></a>Chapitre&nbsp;16.&nbsp;Expressions régulières<a class="indexterm" name="d0e7350"></a></h1>
+               </div>
+            </div>
+         </div>
+         <div class="toc">
+            <dl class="toc">
+               <dt><span class="section"><a href="chapter.regexp.html#regex.tools.and.examples.of.use">1. Outils d'expressions régulières et exemples d'utilisation</a></span></dt>
+            </dl>
+         </div>
+         <p>Les expressions régulières (ou regex) utilisées dans les recherches et les règles de segmentation sont celles prises en charge
+            par Java.. Pour avoir accès à des informations spécifiques, consultez la <a class="ulink" href="http://download.oracle.com/javase/1.6.0/docs/api/java/util/regex/Pattern.html" target="_top">documentation Java Regex </a>. Voir les références supplémentaires et les exemples ci-dessous :
+         </p>
+         <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;">
+            <h3 class="title">Note</h3>
+            <p>Ce chapitre est destiné aux utilisateurs confirmés qui éprouvent le besoin de définir leurs propres règles de segmentation
+               et de concevoir des éléments de recherche clé plus complexes et plus puissants.
+            </p>
+         </div>
+         <div class="table"><a name="d0e7365"></a><p class="title"><b>Tableau&nbsp;16.1.&nbsp;Expressions régulières - Marqueurs</b></p>
+            <div class="table-contents">
+               <table summary="Expressions régulières - Marqueurs" border="1">
+                  <colgroup>
+                     <col align="left">
+                     <col>
+                  </colgroup>
+                  <thead>
+                     <tr>
+                        <th align="left">La construction</th>
+                        <th align="left">...correspond à ceci</th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                     <tr>
+                        <td align="left">(?i)</td>
+                        <td align="left">Permet des correspondances qui ne respectent pas la casse (par défaut, le modèle respecte la casse).</td>
+                     </tr>
+                  </tbody>
+               </table>
+            </div>
+         </div><br class="table-break"><div class="table"><a name="d0e7382"></a><p class="title"><b>Tableau&nbsp;16.2.&nbsp;Expressions régulières - Caractère</b></p>
+            <div class="table-contents">
+               <table summary="Expressions régulières - Caractère" border="1">
+                  <colgroup>
+                     <col align="left">
+                     <col>
+                  </colgroup>
+                  <thead>
+                     <tr>
+                        <th align="left">La construction</th>
+                        <th align="left">...correspond à ceci</th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                     <tr>
+                        <td align="left">x</td>
+                        <td align="left">Le caractère x, sauf pour les éléments suivants...</td>
+                     </tr>
+                     <tr>
+                        <td align="left">\uhhhh</td>
+                        <td align="left">Le caractère ayant une valeur hexadécimale 0xhhhh</td>
+                     </tr>
+                     <tr>
+                        <td align="left">\t</td>
+                        <td align="left">La tabulation («&nbsp;\u0009&nbsp;»)</td>
+                     </tr>
+                     <tr>
+                        <td align="left">\n</td>
+                        <td align="left">Le caractère passage à la ligne (ajout de ligne) («&nbsp;\u000A&nbsp;»)</td>
+                     </tr>
+                     <tr>
+                        <td align="left">\r</td>
+                        <td align="left">Le caractère retour de chariot («&nbsp;\u000D&nbsp;»)</td>
+                     </tr>
+                     <tr>
+                        <td align="left">\f</td>
+                        <td align="left">Le caractère saut de page («&nbsp;\u000C&nbsp;»)</td>
+                     </tr>
+                     <tr>
+                        <td align="left">\a</td>
+                        <td align="left">Le caractère d'alerte (signal) («&nbsp;\u0007&nbsp;»)</td>
+                     </tr>
+                     <tr>
+                        <td align="left">\e</td>
+                        <td align="left">Le caractère d'échappement  («&nbsp;\u001B&nbsp;»)</td>
+                     </tr>
+                     <tr>
+                        <td align="left">\cx</td>
+                        <td align="left">Le caractère de contrôle correspondant à x</td>
+                     </tr>
+                     <tr>
+                        <td align="left">\0n</td>
+                        <td align="left">Le caractère de valeur octale 0n (0 &lt;= n &lt;= 7)</td>
+                     </tr>
+                     <tr>
+                        <td align="left">\0nn</td>
+                        <td align="left">Le caractère de valeur octale 0nn (0 &lt;= n &lt;= 7)</td>
+                     </tr>
+                     <tr>
+                        <td align="left">\0mnn</td>
+                        <td align="left">Le caractère de valeur octale 0mnn (0 &lt;= m &lt;= 3, 0 &lt;= n &lt;= 7)</td>
+                     </tr>
+                     <tr>
+                        <td align="left">\xhh</td>
+                        <td align="left">Le caractère de valeur hexadécimale 0xhh</td>
+                     </tr>
+                  </tbody>
+               </table>
+            </div>
+         </div><br class="table-break"><div class="table"><a name="d0e7459"></a><p class="title"><b>Tableau&nbsp;16.3.&nbsp;Expressions régulières - Citation</b></p>
+            <div class="table-contents">
+               <table summary="Expressions régulières - Citation" border="1">
+                  <colgroup>
+                     <col align="left">
+                     <col>
+                  </colgroup>
+                  <thead>
+                     <tr>
+                        <th align="left">La construction</th>
+                        <th align="left">...correspond à ceci</th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                     <tr>
+                        <td align="left">\</td>
+                        <td align="left">Rien, mais cite le caractère suivant. C'est nécessaire si vous souhaitez entrer un des métacaractères suivants !$()*+.&lt;&gt;?[\]^{|}
+                           de sorte qu'il ne corresponde qu'à lui-même.
+                        </td>
+                     </tr>
+                     <tr>
+                        <td align="left">\\</td>
+                        <td align="left">Par exemple, ceci est le caractère d'antislash</td>
+                     </tr>
+                     <tr>
+                        <td align="left">\Q</td>
+                        <td align="left">Rien, mais cite tous les caractères jusqu'à \E</td>
+                     </tr>
+                     <tr>
+                        <td align="left">\E</td>
+                        <td align="left">Rien, mais finit la citation démarrée par \Q</td>
+                     </tr>
+                  </tbody>
+               </table>
+            </div>
+         </div><br class="table-break"><div class="table"><a name="d0e7491"></a><p class="title"><b>Tableau&nbsp;16.4.&nbsp;Expressions régulières - Classes pour les catégories et blocs Unicode</b></p>
+            <div class="table-contents">
+               <table summary="Expressions régulières - Classes pour les catégories et blocs Unicode" border="1">
+                  <colgroup>
+                     <col align="left">
+                     <col>
+                  </colgroup>
+                  <thead>
+                     <tr>
+                        <th align="left">La construction</th>
+                        <th align="left">...correspond à ceci</th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                     <tr>
+                        <td align="left">\p{InGreek}</td>
+                        <td align="left">Un caractère à l'intérieur du bloc grec (<a class="ulink" href="http://download.oracle.com/javase/1.6.0/docs/api/java/util/regex/Pattern.html#ubc" target="_top"> bloc</a> simple)
+                        </td>
+                     </tr>
+                     <tr>
+                        <td align="left">\p{Lu}</td>
+                        <td align="left">Une lettre en majuscules (simple <a class="ulink" href="http://download.oracle.com/javase/1.6.0/docs/api/java/util/regex/Pattern.html#ubc" target="_top"> category</a>)
+                        </td>
+                     </tr>
+                     <tr>
+                        <td align="left">\p{Sc}</td>
+                        <td align="left">Un symbole de devise</td>
+                     </tr>
+                     <tr>
+                        <td align="left">\P{InGreek}</td>
+                        <td align="left">N'importe quel caractère à l'exception de ceux du bloc grec (négation)</td>
+                     </tr>
+                     <tr>
+                        <td align="left">[\p{L}&amp;&amp;[^\p{Lu}]]</td>
+                        <td align="left">N'importe quelle lettre à l'exception d'une lettre majuscule (soustraction)</td>
+                     </tr>
+                  </tbody>
+               </table>
+            </div>
+         </div><br class="table-break"><div class="table"><a name="d0e7534"></a><p class="title"><b>Tableau&nbsp;16.5.&nbsp;Expressions régulières - Classes de caractères</b></p>
+            <div class="table-contents">
+               <table summary="Expressions régulières - Classes de caractères" border="1">
+                  <colgroup>
+                     <col align="left">
+                     <col>
+                  </colgroup>
+                  <thead>
+                     <tr>
+                        <th align="left">La construction</th>
+                        <th align="left">...correspond à ceci</th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                     <tr>
+                        <td align="left">[abc]</td>
+                        <td align="left">a, b, ou c (classe simple)</td>
+                     </tr>
+                     <tr>
+                        <td align="left">[^abc]</td>
+                        <td align="left">N'importe quel caractère à l'exception de a, b, ou c (négation)</td>
+                     </tr>
+                     <tr>
+                        <td align="left">[a-zA-Z]</td>
+                        <td align="left">de a à z ou A à Z, inclus (plage)</td>
+                     </tr>
+                  </tbody>
+               </table>
+            </div>
+         </div><br class="table-break"><div class="table"><a name="d0e7561"></a><p class="title"><b>Tableau&nbsp;16.6.&nbsp;Expressions régulières - Classes de caractères prédéfinies</b></p>
+            <div class="table-contents">
+               <table summary="Expressions régulières - Classes de caractères prédéfinies" border="1">
+                  <colgroup>
+                     <col align="left">
+                     <col>
+                  </colgroup>
+                  <thead>
+                     <tr>
+                        <th align="left">La construction</th>
+                        <th align="left">...correspond à ceci</th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                     <tr>
+                        <td align="left">.</td>
+                        <td align="left">N'importe quel caractère (à l'exception des terminaisons de lignes)</td>
+                     </tr>
+                     <tr>
+                        <td align="left">\d</td>
+                        <td align="left">Un chifffre : équivalent à  [0-9]</td>
+                     </tr>
+                     <tr>
+                        <td align="left">\D</td>
+                        <td align="left">Un caractère qui n'est pas un chiffre : équivalent à [^0-9]</td>
+                     </tr>
+                     <tr>
+                        <td align="left">\s</td>
+                        <td align="left">Un caractère d'espacement : espace, tabulation, retour à la ligne ... équivalent à [ \t\n\r\f\x0B]</td>
+                     </tr>
+                     <tr>
+                        <td align="left">\S</td>
+                        <td align="left">Un caractère n'étant pas un caractère d'espacement : [^\s]</td>
+                     </tr>
+                     <tr>
+                        <td align="left">\w</td>
+                        <td align="left">Un caractère de mot : [a-zA-Z_0-9]</td>
+                     </tr>
+                     <tr>
+                        <td align="left">\W</td>
+                        <td align="left">Un caractère qui n'est pas un caractère de mot : [^\w]</td>
+                     </tr>
+                  </tbody>
+               </table>
+            </div>
+         </div><br class="table-break"><div class="table"><a name="d0e7608"></a><p class="title"><b>Tableau&nbsp;16.7.&nbsp;Expressions régulières - Spécificateurs de limite</b></p>
+            <div class="table-contents">
+               <table summary="Expressions régulières - Spécificateurs de limite" border="1">
+                  <colgroup>
+                     <col align="left">
+                     <col>
+                  </colgroup>
+                  <thead>
+                     <tr>
+                        <th align="left">La construction</th>
+                        <th align="left">...correspond à ceci</th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                     <tr>
+                        <td align="left">^</td>
+                        <td align="left">Le début d'une ligne</td>
+                     </tr>
+                     <tr>
+                        <td align="left">$</td>
+                        <td align="left">La fin d'une ligne</td>
+                     </tr>
+                     <tr>
+                        <td align="left">\b</td>
+                        <td align="left">Extrémité de mot</td>
+                     </tr>
+                     <tr>
+                        <td align="left">\B</td>
+                        <td align="left">N'est pas une extrémité de mot</td>
+                     </tr>
+                  </tbody>
+               </table>
+            </div>
+         </div><br class="table-break"><div class="table"><a name="d0e7640"></a><p class="title"><b>Tableau&nbsp;16.8.&nbsp;Expressions régulières - Quantificateurs avides</b></p>
+            <div class="table-contents">
+               <table summary="Expressions régulières - Quantificateurs avides" border="1">
+                  <colgroup>
+                     <col align="left">
+                     <col>
+                  </colgroup>
+                  <thead>
+                     <tr>
+                        <th align="left">La construction</th>
+                        <th align="left">...correspond à ceci</th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                     <tr>
+                        <td align="left">X<span class="emphasis"><em>?</em></span></td>
+                        <td align="left">X, une seule fois ou pas du tout</td>
+                     </tr>
+                     <tr>
+                        <td align="left">X<span class="emphasis"><em>*</em></span></td>
+                        <td align="left">X, zéro fois ou plus</td>
+                     </tr>
+                     <tr>
+                        <td align="left">X<span class="emphasis"><em>+</em></span></td>
+                        <td align="left">X, une seule fois ou plus</td>
+                     </tr>
+                  </tbody>
+               </table>
+            </div>
+         </div><br class="table-break"><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;">
+            <h3 class="title">Note</h3>
+            <p>les quantificateurs avides feront le plus de correspondances possible. Par exemple, <span class="emphasis"><em>a+?</em></span> correspondra au aaa dans <span class="emphasis"><em>aaabbb</em></span></p>
+         </div>
+         <div class="table"><a name="d0e7681"></a><p class="title"><b>Tableau&nbsp;16.9.&nbsp;Expressions régulières - quantificateurs réticents (non-avides)</b></p>
+            <div class="table-contents">
+               <table summary="Expressions régulières - quantificateurs réticents (non-avides)" border="1">
+                  <colgroup>
+                     <col align="left">
+                     <col>
+                  </colgroup>
+                  <thead>
+                     <tr>
+                        <th align="left">La construction</th>
+                        <th align="left">...correspond à ceci</th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                     <tr>
+                        <td align="left">X??</td>
+                        <td align="left">X, une seule fois ou pas du tout</td>
+                     </tr>
+                     <tr>
+                        <td align="left">X*?</td>
+                        <td align="left">X, zéro fois ou plus</td>
+                     </tr>
+                     <tr>
+                        <td align="left">X+?</td>
+                        <td align="left">X, une seule fois ou plus</td>
+                     </tr>
+                  </tbody>
+               </table>
+            </div>
+         </div><br class="table-break"><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;">
+            <h3 class="title">Note</h3>
+            <p>les quantificateurs non-avides effectueront aussi peu de correspondances que possible. Par exemple, <span class="emphasis"><em>a+?</em></span> correspondra au premier <span class="emphasis"><em>a</em></span> dans <span class="emphasis"><em>aaabbb</em></span></p>
+         </div>
+         <div class="table"><a name="d0e7719"></a><p class="title"><b>Tableau&nbsp;16.10.&nbsp;Expressions régulières - Opérateurs logiques</b></p>
+            <div class="table-contents">
+               <table summary="Expressions régulières - Opérateurs logiques" border="1">
+                  <colgroup>
+                     <col align="left">
+                     <col>
+                  </colgroup>
+                  <thead>
+                     <tr>
+                        <th align="left">La construction</th>
+                        <th align="left">...correspond à ceci</th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                     <tr>
+                        <td align="left">XY</td>
+                        <td align="left">X suivit de Y</td>
+                     </tr>
+                     <tr>
+                        <td align="left">X|Y</td>
+                        <td align="left">Soit X soit Y</td>
+                     </tr>
+                     <tr>
+                        <td align="left">(XY)</td>
+                        <td align="left">XY en tant que groupe unique</td>
+                     </tr>
+                  </tbody>
+               </table>
+            </div>
+         </div><br class="table-break"><div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="regex.tools.and.examples.of.use"></a>1.&nbsp;<a class="indexterm" name="d0e7748"></a>Outils d'expressions régulières et exemples d'utilisation<a class="indexterm" name="d0e7754"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <p>Un grand nombre d'outils interactifs permettent de développer et de tester les expressions régulières. Généralement, ils suivent
+               le même modèle (voir ci-dessous pour un exemple de Testeur d'Expressions Régulières) : l'expression régulière (l'entrée du
+               haut) analyse le texte de recherche (Zone de texte au milieu), rassemble les correspondances trouvées et les affiche dans
+               la zone de texte de résultat.
+            </p>
+            <div class="figure"><a name="regerx.tester"></a><p class="title"><b>Figure&nbsp;16.1.&nbsp;Testeur d'Expressions Régulières</b></p>
+               <div class="figure-contents">
+                  <div class="mediaobject"><img src="images/RegexTester.png" alt="Testeur d'Expressions Régulières"></div>
+               </div>
+            </div><br class="figure-break"><p>Voir<a class="ulink" href="http://weitz.de/regex-coach/" target="_top">Le Regex Coach</a> pour les versions Windows, Linux et FreeBSD d'un outil autonome. Cela ressemble beaucoup à l'exemple ci-dessus.
+            </p>
+            <p>De nombreux cas d'expressions régulières utiles peuvent être trouvés dans <span class="application">OmegaT</span> même (voir Options &gt; Segmentation). Le liste suivante inclut des expressions qui pourront vous être utiles si vous effectuez
+               des recherches dans la mémoire de traduction :
+            </p>
+            <div class="table"><a name="d0e7779"></a><p class="title"><b>Tableau&nbsp;16.11.&nbsp;Expressions régulières : exemples d'expressions régulières dans les traductions</b></p>
+               <div class="table-contents">
+                  <table summary="Expressions régulières : exemples d'expressions régulières dans les traductions" border="1">
+                     <colgroup>
+                        <col align="left">
+                        <col>
+                     </colgroup>
+                     <thead>
+                        <tr>
+                           <th align="left">Une expression régulière</th>
+                           <th align="left">Trouve les éléments suivants :</th>
+                        </tr>
+                     </thead>
+                     <tbody>
+                        <tr>
+                           <td align="left">(\b\w+\b)\s\1\b</td>
+                           <td align="left">mots doubles</td>
+                        </tr>
+                        <tr>
+                           <td align="left">[\.,]\s*[\.,]+</td>
+                           <td align="left">une virgule ou un point, suivis par des espaces puis par une autre virgule ou un autre point</td>
+                        </tr>
+                        <tr>
+                           <td align="left">\. \s+$</td>
+                           <td align="left">des espaces supplémentaires après le point à la fin de la ligne</td>
+                        </tr>
+                        <tr>
+                           <td align="left">\s+a\s+[aeiou]</td>
+                           <td align="left">Anglais : les mots commençant par une voyelle doivent généralement être précédés par un « an » et non un « a »</td>
+                        </tr>
+                        <tr>
+                           <td align="left">\s+an\s+[^aeiou]</td>
+                           <td align="left">Anglais : même vérification que ci-dessus mais pour les consonnes (« a », pas « an »)</td>
+                        </tr>
+                        <tr>
+                           <td align="left">\s{2,}</td>
+                           <td align="left">plus d'un seul espace</td>
+                        </tr>
+                        <tr>
+                           <td align="left">\.[A-Z]</td>
+                           <td align="left">Point, suivit par une majuscule - il est possible qu'il manque un espace entre le point et le début de la nouvelle phrase.</td>
+                        </tr>
+                        <tr>
+                           <td align="left">\bis\b</td>
+                           <td align="left">recherche  « is », pas  « this » ou  « isn't », etc.</td>
+                        </tr>
+                     </tbody>
+                  </table>
+               </div>
+            </div><br class="table-break"></div>
+      </div>
+      <div class="navfooter">
+         <hr>
+         <table width="100%" summary="Navigation footer">
+            <tr>
+               <td width="40%" align="left"><a accesskey="p" href="chapter.searches.html">Précédent</a>&nbsp;
+               </td>
+               <td width="20%" align="center">&nbsp;</td>
+               <td width="40%" align="right">&nbsp;<a accesskey="n" href="chapter.dictionaries.html">Suivant</a></td>
+            </tr>
+            <tr>
+               <td width="40%" align="left" valign="top">Chapitre&nbsp;15.&nbsp;Recherches&nbsp;</td>
+               <td width="20%" align="center"><a accesskey="h" href="index.html">Sommaire</a></td>
+               <td width="40%" align="right" valign="top">&nbsp;Chapitre&nbsp;17.&nbsp;Dictionnaires</td>
+            </tr>
+         </table>
+      </div>
+   </body>
+</html>

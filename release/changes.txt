@@ -3,7 +3,7 @@
 ----------------------------------------------------------------------
   10 Enhancements
    6 Bug fixes
-   0 Localisation update
+   1 Localisation update
 ----------------------------------------------------------------------
 3.0.3 update 1 vs. 3.0.3
 
@@ -58,6 +58,10 @@ fixed.
 
   - There was an exception when LanguageTool was enabled with no project
 loaded
+
+  Localisation updates:
+
+  - French localisation updated to 3.0.2 (Documentation)
 
 ----------------------------------------------------------------------
  OmegaT 3.0.3

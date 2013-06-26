@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
 <chapter id="chapter.instant.start.guide">
-  <title>Apprendre à utiliser OmegaT en 5 minutes !</title>
+  <title>Apprendre à utiliser OmegaT en cinq minutes !</title>
 
   <section id="create.and.open.new.project">
     <title>Préparation d'un nouveau projet<indexterm class="singular">
         <primary>Projet</primary> <secondary>Créer / ouvrir</secondary>
       </indexterm></title>
 
-    <para><remark>Remarque :</remark>Sur un Mac, utilisez la touche <keycap>cmd</keycap> (commande) ou <keycap>Apple</keycap> à la place de la touche <keycap>ctrl</keycap>.</para>
+    <para><remark>Remarque :</remark> Sur un Mac, utilisez la touche <keycap>Commande</keycap> (logo <keycap>Apple</keycap> sur certains claviers) à la place de la touche <keycap>Contrôle</keycap>.</para>
 
-    <para>Pour pouvoir travailler avec OmegaT, commencez par créer un projet qui contiendra tous vos fichiers. On y trouvera notamment le fichier source, les mémoires de traduction, les glossaires ainsi que le fichier traduit (une fois le projet fini). Dans le menu <guimenu>Projet</guimenu>, séléctionnez <menuchoice> <guimenuitem>Nouveau...</guimenuitem> </menuchoice><indexterm class="singular">
+    <para>Pour pouvoir travailler avec OmegaT, commencez par créer un projet qui contiendra tous vos fichiers, notamment le fichier source, les mémoires de traduction, les glossaires ainsi que le fichier traduit. Dans le menu <guimenu>Projet</guimenu>, sélectionnez <menuchoice> <guimenuitem>Nouveau...</guimenuitem> </menuchoice><indexterm class="singular">
         <primary>Menu Projet</primary> <secondary>Nouveau...</secondary>
-      </indexterm> et saisissez le nom de votre projet. Mémorisez bien l'emplacement de votre projet car vous devrez y retourner par la suite.</para>
+      </indexterm> et saisissez le nom du projet. Mémorisez bien l'emplacement du projet car vous devrez y accéder ultérieurement.</para>
 
     <para>Une fois le nom du projet défini, OmegaT ouvre la fenêtre Création du projet. Indiquez la langue du fichier source ainsi que la langue de la traduction, puis cliquez sur <guibutton>OK </guibutton>pour continuer.</para>
 
-    <para><application>Par la suite, utilisez le raccourci clavier <keycap>Ctrl+E</keycap> pour revenir aux réglages de cette fenêtre.</application></para>
+    <para><application>Utilisez le raccourci clavier <keycap>Ctrl+E</keycap> si vous avez besoin de revenir aux réglages de cette fenêtre plus tard.</application></para>
 
     <para>OmegaT ouvre ensuite la fenêtre Fichiers du projet. Cliquez sur Importer des fichiers source... pour sélectionner le fichier source. OmegaT copie le fichier sélectionné dans le sous-dossier <filename>/source/</filename> du projet que vous venez de créer. Une fois le fichier source chargé et affiché dans le volet d'édition, vous pouvez fermer la fenêtre Fichiers du projet.</para>
   </section>
@@ -24,13 +24,13 @@
   <section id="translate.the.segments.one.by.one">
     <title>Traduction du fichier</title>
 
-    <para>OmegaT vous propose un segment à traduire à la fois. Utilisez le raccourci clavier <keycap>Ctrl+U</keycap> pour accéder au prochain segment non traduit. Si vous souhaitez obtenir un aperçu de votre traduction dans son format final, utilisez le raccourci <keycap>Ctrl+D</keycap> pour générer le document traduit dans le sous-dossier /target/ du dossier projet. Les menus <guimenu>Édition</guimenu> et <guimenu>Atteindre</guimenu> vous donnent accès à diverses fonctions très utiles pendant le travail de traduction.</para>
+    <para>OmegaT vous propose un segment à traduire après l'autre. Utilisez le raccourci clavier <keycap>Ctrl+U</keycap> pour accéder au prochain segment non traduit. Si vous souhaitez obtenir un aperçu de votre traduction dans son format final, utilisez le raccourci <keycap>Ctrl+D</keycap> pour générer le document traduit dans le sous-dossier /target/ du dossier projet. Les menus <guimenu>Édition</guimenu> et <guimenu>Atteindre</guimenu> vous donnent accès à diverses fonctions très utiles pendant le travail de traduction.</para>
   </section>
 
   <section>
     <title>Validation des balises</title>
 
-    <para>Si votre fichier source est un fichier formaté, par exemple au format Microsoft Word, LibreOffice Writer ou HTML, OmegaT convertit le formatage en balises qui encadrent le texte que vous traduisez. Souvent, les documents contiennent également un certain nombre de balises essentielles sans rapport direct avec le formatage mais qui sont importantes dans les fichiers sources (ainsi que dans les fichiers traduits). Une phrase peut se présenter comme ceci :</para>
+    <para>Si votre fichier source est un fichier formaté, par exemple au format Microsoft Word, ODT Writer (Apache OpenOffice, LibreOffice) ou HTML, OmegaT convertit le formatage en balises qui encadrent le texte que vous traduisez. Souvent, les documents contiennent également un certain nombre de balises sans rapport direct avec le formatage mais qui sont importantes dans le fichier source (ainsi que dans le fichier traduit). Une phrase peut se présenter comme ceci :</para>
 
     <para/>
 
@@ -46,7 +46,7 @@
 
     <para/>
 
-    <para>Mais OmegaT présentera cette phrase de la manière suivante :</para>
+    <para>OmegaT présenter cette phrase de la manière suivante :</para>
 
     <para><literal/></para>
 
@@ -62,7 +62,7 @@
 
     <para/>
 
-    <para>Les balises dans OmegaT sont écrites en gris pour être facilement reconnaissables. Elles ne sont pas protégées et vous pouvez donc les supprimer, en ajouter manuellement ou les déplacer dans la phrase cible. Toutefois, si vous avez fait des erreurs en saisissant les balises de formatage, l'ouverture du fichier traduit pourra échouer. Par conséquent, assurez-vous que vos balises sont correctes et validez-les avant de générer le fichier traduit (raccourci clavier <keycap>Ctrl+T</keycap>).</para>
+    <para>Les balises dans OmegaT sont grisées pour être facilement reconnaissables. Elles ne sont pas protégées et vous pouvez donc les supprimer, en ajouter manuellement ou les déplacer dans la phrase cible. Toutefois, si vous avez fait des erreurs en saisissant les balises de formatage, l'ouverture du fichier traduit pourra échouer. Par conséquent, assurez-vous que vos balises sont correctes et validez-les avant de générer le fichier traduit (raccourci clavier <keycap>Ctrl+T</keycap>).</para>
   </section>
 
   <section>
@@ -112,7 +112,7 @@
 
     <itemizedlist>
       <listitem>
-        <para>Le tutoriel pour débutants <ulink url="http://www.omegat.org/en/tutorial/OmegaT%20for%20Beginners.pdf">OmegaT for Beginners</ulink> (en anglais) est disponible sur le site Web d'OmegaT et vous propose une introduction complète. N'hésitez pas à vous inscrire à la liste de diffusion du <ulink url="http://tech.groups.yahoo.com/group/omegat/">groupe des utilisateurs d'OmegaT</ulink>, pour y échanger votre expérience et trouver de l'aide, si besoin est.</para>
+        <para>Le tutoriel pour débutants <ulink url="http://www.omegat.org/en/tutorial/OmegaT%20for%20Beginners.pdf">OmegaT for Beginners</ulink> (en anglais) est disponible sur le site Web d'OmegaT et vous propose une introduction complète. N'hésitez pas à vous inscrire à la liste de diffusion du <ulink url="http://tech.groups.yahoo.com/group/omegat/">groupe des utilisateurs d'OmegaT</ulink>, pour y échanger votre expérience et trouver y de l'aide.</para>
       </listitem>
     </itemizedlist>
   </section>

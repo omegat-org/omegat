@@ -43,11 +43,11 @@
             </dl>
          </div>
          <p>Les outils à mémoire de traduction travaillent avec des unités textuelles appelées segments. <span class="application">OmegaT</span> peut segmenter un texte de deux façons différentes : par paragraphe ou par phrase (on appelle également cela une « segmentation
-            basée sur des règles »). Pour choisir le type de segmentation, allez dans <span class="guimenu"><a class="indexterm" name="d0e6869"></a>Projet</span> → <span class="guimenuitem">Propriétés...</span> et cochez ou décochez la case «&nbsp;Activer la segmentation par phrase&nbsp;». La segmentation par paragraphe est avantageuse dans
+            basée sur des règles »). Pour choisir le type de segmentation, allez dans <span class="guimenu"><a class="indexterm" name="d0e6915"></a>Projet</span> → <span class="guimenuitem">Propriétés...</span> et cochez ou décochez la case «&nbsp;Activer la segmentation par phrase&nbsp;». La segmentation par paragraphe est avantageuse dans
             certain cas, comme dans le cas de traduction de textes créatifs ou stylistiques pour lesquels le traducteur peut avoir besoin
             de modifier l'ordre de phrases entières ; la segmentation par phrase est néanmoins préférable pour la majorité des projets
             de traduction, dans la mesure où elle permet de mieux faire la correspondance avec les traductions antérieures. Si la segmentation
-            par phrase a été choisie, vous pouvez en configurer les règles dans <span class="guimenu"><a class="indexterm" name="d0e6880"></a>Options</span> → <span class="guimenuitem">Segmentation...</span>(dans la barre des menus).
+            par phrase a été choisie, vous pouvez en configurer les règles dans <span class="guimenu"><a class="indexterm" name="d0e6926"></a>Options</span> → <span class="guimenuitem">Segmentation...</span>(dans la barre des menus).
          </p>
          <p>Des règles de segmentation adaptées étant déjà disponibles pour de nombreuses langues, il est peu probable que vous ayez à
             créer vos propres règles de segmentation. Néanmoins, cette fonctionnalité peut vous être très utile dans certains cas, dans
@@ -62,7 +62,7 @@
          </p>
          <div class="variablelist">
             <dl class="variablelist">
-               <dt><span class="term"><a class="indexterm" name="d0e6902"></a>Segmentation au niveau de la structure</span></dt>
+               <dt><span class="term"><a class="indexterm" name="d0e6948"></a>Segmentation au niveau de la structure</span></dt>
                <dd>
                   <p><span class="application">OmegaT</span> effectue d'abord une analyse du texte pour procéder à une segmentation au niveau de la structure. Au cours de ce processus,
                      seule la structure du fichier source est prise en compte pour la production des segments.
@@ -73,7 +73,7 @@
                      être extraits en tant que segments séparés.
                   </p>
                </dd>
-               <dt><span class="term"><a class="indexterm" name="d0e6917"></a>Segmentation au niveau des phrases</span></dt>
+               <dt><span class="term"><a class="indexterm" name="d0e6963"></a>Segmentation au niveau des phrases</span></dt>
                <dd>
                   <p>Après avoir segmenté le fichier source en unités structurelles, <span class="application">OmegaT</span> continue sa segmentation en segmentant les blocs en phrases.
                   </p>
@@ -84,7 +84,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="segmentation.rules"></a>1.&nbsp;Règles de segmentation<a class="indexterm" name="d0e6932"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="segmentation.rules"></a>1.&nbsp;Règles de segmentation<a class="indexterm" name="d0e6978"></a></h2>
                   </div>
                </div>
             </div>
@@ -95,7 +95,7 @@
             <p>Les deux types de règles se comportent comme suit :</p>
             <div class="variablelist">
                <dl class="variablelist">
-                  <dt><span class="term"><a class="indexterm" name="d0e6956"></a>Règle de segmentation</span></dt>
+                  <dt><span class="term"><a class="indexterm" name="d0e7002"></a>Règle de segmentation</span></dt>
                   <dd>
                      <p>Sépare le texte source en segments. Par exemple, « <span class="emphasis"><em>Cela avait-il un sens ? Je n'étais pas sûr</em></span>. »  doit être divisé en deux segments. Pour faire cela, il est nécessaire d'avoir une règle de segmentation s'appliquant
                         à « ? », lorsqu'il est suivi d'une espace et d'un mot dont la première lettre est écrite en majuscule. Pour définir une règle
@@ -106,7 +106,7 @@
             </div>
             <div class="variablelist">
                <dl class="variablelist">
-                  <dt><span class="term"><a class="indexterm" name="d0e6973"></a>Règle d'exception</span></dt>
+                  <dt><span class="term"><a class="indexterm" name="d0e7019"></a>Règle d'exception</span></dt>
                   <dd>
                      <p>spécifie quelles parties du texte ne doivent PAS être séparées. Malgré le point, <span class="emphasis"><em>« Mrs. Dalloway »</em></span> ne doit pas être séparé en deux segments. Il est donc nécessaire d'établir une règle d'exception pour le terme Mrs (ainsi
                         que pour M, Dr, prof etc) suivi d'un point. Pour définir une règle comme étant une règle d'exception, décochez la case Segmentation/Exception.
@@ -122,7 +122,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="rules.priority"></a>2.&nbsp;Priorité de la règle<a class="indexterm" name="d0e6992"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="rules.priority"></a>2.&nbsp;Priorité de la règle<a class="indexterm" name="d0e7038"></a></h2>
                   </div>
                </div>
             </div>
@@ -137,7 +137,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="creating.new.rule"></a>3.&nbsp;Créer une nouvelle règle<a class="indexterm" name="d0e7002"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="creating.new.rule"></a>3.&nbsp;Créer une nouvelle règle<a class="indexterm" name="d0e7048"></a></h2>
                   </div>
                </div>
             </div>
@@ -164,7 +164,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="few.simple.examples"></a>4.&nbsp;<a class="indexterm" name="d0e7036"></a>Quelques exemples simples
+                     <h2 class="title" style="clear: both"><a name="few.simple.examples"></a>4.&nbsp;<a class="indexterm" name="d0e7082"></a>Quelques exemples simples
                      </h2>
                   </div>
                </div>

@@ -95,6 +95,7 @@ public final class PluginUtils {
             URL[] urls = new URL[fs.size()];
             for (int i = 0; i < urls.length; i++) {
                 urls[i] = fs.get(i).toURI().toURL();
+                Log.logInfoRB("PLUGIN_LOAD_JAR", urls[i].toString());
             }
             boolean foundMain = false;
             // look on all manifests
@@ -245,6 +246,7 @@ public final class PluginUtils {
                     Method load = c.getMethod("loadPlugins");
                     load.invoke(c);
                     loadedPlugins.add(c);
+                    Log.logInfoRB("PLUGIN_LOAD_OK", clazz);
                 } catch (Throwable ex) {
                     Log.logErrorRB(ex, "PLUGIN_LOAD_ERROR", clazz, ex.getClass().getSimpleName(), ex.getMessage());
                     Core.pluginLoadingError(StaticUtils.format(OStrings.getString("PLUGIN_LOAD_ERROR"), clazz, ex

@@ -1,11 +1,29 @@
 ----------------------------------------------------------------------
+ OmegaT 3.0.4 update 1
+----------------------------------------------------------------------
+  10 Enhancements
+   6 Bug fixes
+   1 Localisation update
+----------------------------------------------------------------------
+3.0.4 update 1 vs. 3.0.4
+
+ Other enhancements:
+
+  - Plugin loading is now logged, to help troubleshoot issues
+
+  Bug fixes: 
+
+  - Glossary synchronisation in team projects was not working properly 
+under Git
+
+----------------------------------------------------------------------
  OmegaT 3.0.4
 ----------------------------------------------------------------------
   10 Enhancements
    6 Bug fixes
    1 Localisation update
 ----------------------------------------------------------------------
-3.0.3 update 1 vs. 3.0.3
+3.0.4 vs. 3.0.3
 
   Implemented requests:
 

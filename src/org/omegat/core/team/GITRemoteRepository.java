@@ -174,7 +174,7 @@ public class GITRemoteRepository implements IRemoteRepository {
     public boolean isUnderVersionControl(File file) throws Exception {
         String relativeFile = FileUtil.computeRelativePath(repository.getWorkTree(), file);
         Status status = new Git(repository).status().call();
-        return status.getUntracked().contains(relativeFile);
+        return !status.getUntracked().contains(relativeFile);
     }
 
     public void setCredentials(String username, String password, boolean forceSavePlainPassword) {

@@ -1,9 +1,9 @@
 ----------------------------------------------------------------------
  OmegaT 3.0.4 update 1
 ----------------------------------------------------------------------
-  10 Enhancements
-   6 Bug fixes
-   1 Localisation update
+   1 Enhancement
+   2 Bug fixes
+   0 Localisation update
 ----------------------------------------------------------------------
 3.0.4 update 1 vs. 3.0.4
 
@@ -12,6 +12,9 @@
   - Plugin loading is now logged, to help troubleshoot issues
 
   Bug fixes: 
+
+  - Virtual config folder path listed instead of real one under Windows Vista/7
+  https://sourceforge.net/p/omegat/bugs/601/
 
   - Glossary synchronisation in team projects was not working properly 
 under Git

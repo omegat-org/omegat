@@ -5,9 +5,9 @@
 
  Copyright (C) 2000-2006 Keith Godfrey, Maxym Mykhalchuk, and Henry Pijffers
                2007 Didier Briel, Zoltan Bartko, Alex Buloichik
-               2008 - 2011 Didier Briel
+               2008-2011 Didier Briel
                2012 Martin Fleurke, Didier Briel
-               2013 Aaron Madlon-Kay, Zoltan Bartko
+               2013 Aaron Madlon-Kay, Zoltan Bartko, Didier Briel
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -499,11 +499,13 @@ public class StaticUtils {
      * is being determined, an empty string will be returned, resulting in the
      * current working directory being used.
      *
-     * Windows XP : <Documents and Settings>\<User name>\Application Data\OmegaT
-     * Windows Vista : User\<User name>\AppData\Roaming Linux: <User
-     * Home>/.omegat Solaris/SunOS: <User Home>/.omegat FreeBSD: <User
-     * Home>/.omegat Mac OS X: <User Home>/Library/Preferences/OmegaT Other:
-     * User home directory
+     * Windows XP : &lt;Documents and Settings&gt;>\&lt;User name&gt;\Application Data\OmegaT
+     * Windows Vista : User\&lt;User name&gt;\AppData\Roaming 
+     * Linux: &lt;User Home&gt;/.omegat 
+     * Solaris/SunOS: &lt;User Home&gt;/.omegat
+     * FreeBSD: &lt;User Home&gt;/.omegat 
+     * Mac OS X: &lt;User Home&gt;/Library/Preferences/OmegaT 
+     * Other: User home directory
      *
      * @return The full path of the directory containing the OmegaT
      *         configuration files, including trailing path separator.
@@ -557,18 +559,21 @@ public class StaticUtils {
 
         // check for Windows versions
         if (os.startsWith("Windows")) {
-            // Trying to locate "Application Data" for 2000 and XP
-            // C:\Documents and Settings\<User>\Application Data
-            // We do not use %APPDATA%
-            File appDataFile = new File(home, "Application Data");
             String appData = null;
-            if (appDataFile.exists())
+
+            // We do not use %APPDATA%
+            // Trying first Vista/7, because "Application Data" exists also as virtual folder, 
+            // so we would not be able to differentiate with 2000/XP otherwise
+            File appDataFile = new File(home, "AppData\\Roaming");
+            if (appDataFile.exists()) {
                 appData = appDataFile.getAbsolutePath();
-            else // No "Application Data", we're trying Vista
-            {
-                File appDataFileVista = new File(home, "AppData\\Roaming");
-                if (appDataFileVista.exists())
-                    appData = appDataFileVista.getAbsolutePath();
+            } else {
+                // Trying to locate "Application Data" for 2000 and XP
+                // C:\Documents and Settings\<User>\Application Data
+                appDataFile = new File(home, "Application Data");
+                if (appDataFile.exists()) {
+                    appData = appDataFile.getAbsolutePath();
+                }
             }
 
             if ((appData != null) && (appData.length() > 0)) {

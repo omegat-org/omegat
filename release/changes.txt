@@ -2,7 +2,7 @@
  OmegaT 2.6.3 update 3
 ----------------------------------------------------------------------
    0 Enhancement
-   1 Bug fix
+   2 Bug fixes
    1 Localisation update
 ----------------------------------------------------------------------
 2.6.3 update 2 vs. 2.6.3 update 1
@@ -11,6 +11,9 @@
 
   - Team projects: duplicate entries could still happen in the writable 
 glossary 
+
+  - Restore default window when saved layout cannot be restored
+  https://sourceforge.net/p/omegat/bugs/602/
 
   Localisation updates:
 

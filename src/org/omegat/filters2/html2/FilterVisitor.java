@@ -209,6 +209,7 @@ public class FilterVisitor extends NodeVisitor {
                     //then translate the value
                     maybeTranslateAttribute(tag, "value");
                 }
+                maybeTranslateAttribute(tag, "placeholder");
             }
             // Special handling of meta-tag: depending on the other attributes
             // the contents-attribute should or should not be translated.

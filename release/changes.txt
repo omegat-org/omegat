@@ -2,7 +2,7 @@
  OmegaT 2.6.3 update 3
 ----------------------------------------------------------------------
    0 Enhancement
-   3 Bug fixes
+   4 Bug fixes
    1 Localisation update
 ----------------------------------------------------------------------
 2.6.3 update 2 vs. 2.6.3 update 1
@@ -17,6 +17,9 @@ glossary
 
   - Glossary synchronisation in team projects was not working properly 
 under Git
+
+  - HTML filter: submit and button input values were translated even  
+ when not configured to do so
 
   Localisation updates:
 

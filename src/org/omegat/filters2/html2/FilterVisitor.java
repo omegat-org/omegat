@@ -193,11 +193,18 @@ public class FilterVisitor extends NodeVisitor {
                 maybeTranslateAttribute(tag, "src");
             maybeTranslateAttribute(tag, "summary");
             maybeTranslateAttribute(tag, "title");
-            if ("INPUT".equals(tag.getTagName())
-                    && (options.getTranslateValue() || "submit".equalsIgnoreCase(tag.getAttribute("type"))
-                            || "button".equalsIgnoreCase(tag.getAttribute("type")) || "reset"
-                            .equalsIgnoreCase(tag.getAttribute("type")) && options.getTranslateButtonValue()))
-                maybeTranslateAttribute(tag, "value");
+            if ("INPUT".equals(tag.getTagName())) { //an input element
+                if (   options.getTranslateValue() //and we translate all input elements
+                    || options.getTranslateButtonValue() // or we translate submit/button/reset elements ...
+                        && (  "submit".equalsIgnoreCase(tag.getAttribute("type"))
+                           || "button".equalsIgnoreCase(tag.getAttribute("type"))
+                           || "reset".equalsIgnoreCase(tag.getAttribute("type"))
+                           ) //and it is a submit/button/reset element.
+                   ) {
+                    //then translate the value
+                    maybeTranslateAttribute(tag, "value");
+                }
+            }
             // Special handling of meta-tag: depending on the other attributes
             // the contents-attribute should or should not be translated.
             // The group of attribute-value pairs indicating non-translation

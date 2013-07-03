@@ -172,7 +172,8 @@ public class MainWindowUI {
                     in.close();
                 }
             } catch (Exception e) {
-                Log.log(e);
+                Log.log(e);                     // In case something wrong happened, it's better to have a default
+                resetDesktopLayout(mainWindow); // screen than a blank one
             }
         }
     }

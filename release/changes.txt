@@ -2,7 +2,7 @@
  OmegaT 2.6.3 update 3
 ----------------------------------------------------------------------
    0 Enhancement
-   2 Bug fixes
+   3 Bug fixes
    1 Localisation update
 ----------------------------------------------------------------------
 2.6.3 update 2 vs. 2.6.3 update 1
@@ -14,6 +14,9 @@ glossary
 
   - Restore default window when saved layout cannot be restored
   https://sourceforge.net/p/omegat/bugs/602/
+
+  - Glossary synchronisation in team projects was not working properly 
+under Git
 
   Localisation updates:
 

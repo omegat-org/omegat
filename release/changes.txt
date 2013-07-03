@@ -2,7 +2,7 @@
  OmegaT 3.0.4 update 1
 ----------------------------------------------------------------------
    1 Enhancement
-   2 Bug fixes
+   1 Bug fix
    0 Localisation update
 ----------------------------------------------------------------------
 3.0.4 update 1 vs. 3.0.4
@@ -15,9 +15,6 @@
 
   - Virtual config folder path listed instead of real one under Windows Vista/7
   https://sourceforge.net/p/omegat/bugs/601/
-
-  - Glossary synchronisation in team projects was not working properly 
-under Git
 
 ----------------------------------------------------------------------
  OmegaT 3.0.4
@@ -355,7 +352,7 @@ OmegaT failed to load the valid ones
  OmegaT 2.6.3 update 3
 ----------------------------------------------------------------------
    0 Enhancement
-   2 Bug fixes
+   3 Bug fixes
    1 Localisation update
 ----------------------------------------------------------------------
 2.6.3 update 2 vs. 2.6.3 update 1
@@ -367,6 +364,9 @@ glossary
 
   - Restore default window when saved layout cannot be restored
   https://sourceforge.net/p/omegat/bugs/602/
+
+  - Glossary synchronisation in team projects was not working properly 
+under Git
 
   Localisation updates:
 

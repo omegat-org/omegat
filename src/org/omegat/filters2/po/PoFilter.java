@@ -590,7 +590,7 @@ public class PoFilter extends AbstractFilter {
     }
 
     protected void flushTranslation(MODE currentMode, FilterContext fc) throws IOException {
-        if (sources[0].length() == 0) {
+        if (sources[0].length() == 0 && path.isEmpty()) {
             if (targets[0].length() == 0) {
                 // there is no text to translate yet
                 return;

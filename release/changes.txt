@@ -360,7 +360,7 @@ OmegaT failed to load the valid ones
    4 Bug fixes
    1 Localisation update
 ----------------------------------------------------------------------
-2.6.3 update 2 vs. 2.6.3 update 1
+2.6.3 update 3 vs. 2.6.3 update 2
 
   Bug fixes: 
 

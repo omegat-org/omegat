@@ -40,17 +40,21 @@ public class GlossaryReaderTBXTest extends TestCore {
     public void testRead() throws Exception {
         Core.setProject(new NotLoadedProject() {
             public ProjectProperties getProjectProperties() {
-                return new ProjectProperties(new File("stub")) {
-                    @Override
-                    public Language getSourceLanguage() {
-                        return new Language("en");
-                    }
+                try {
+                    return new ProjectProperties(new File("stub")) {
+                        @Override
+                        public Language getSourceLanguage() {
+                            return new Language("en");
+                        }
 
-                    @Override
-                    public Language getTargetLanguage() {
-                        return new Language("hu");
-                    }
-                };
+                        @Override
+                        public Language getTargetLanguage() {
+                            return new Language("hu");
+                        }
+                    };
+                } catch (Exception ex) {
+                    throw new RuntimeException(ex);
+                }
             }
         });
         List<GlossaryEntry> g = GlossaryReaderTBX.read(new File(

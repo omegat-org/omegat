@@ -58,8 +58,8 @@ public class ProjectProperties {
     }
 
     /** Default constructor to initialize fields (to get no NPEs). */
-    public ProjectProperties(File projectDir) {
-        setProjectName(projectDir.getName());
+    public ProjectProperties(File projectDir) throws Exception {
+        setProjectName(projectDir.getCanonicalFile().getName());
         setProjectRoot(projectDir.getAbsolutePath() + File.separator);
         setSourceRoot(projectRoot + OConsts.DEFAULT_SOURCE + File.separator);
         setTargetRoot(projectRoot + OConsts.DEFAULT_TARGET + File.separator);

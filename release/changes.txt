@@ -10,7 +10,7 @@
   Implemented requests:
 
   - Translate HTML5 attribute 'placeholder' 
-  https://sourceforge.net/p/omegat/bugs/603/
+  https://sourceforge.net/p/omegat/feature-requests/881/
 
  Other enhancements:
 

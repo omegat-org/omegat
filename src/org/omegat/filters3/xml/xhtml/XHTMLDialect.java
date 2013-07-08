@@ -110,7 +110,7 @@ public class XHTMLDialect extends DefaultXMLDialect {
 
         defineIntactTags(new String[] { "style", "script", "object", "embed", });
 
-        defineTranslatableAttributes(new String[] { "abbr", "alt", "content", "summary", "title", });
+        defineTranslatableAttributes(new String[] { "abbr", "alt", "content", "summary", "title", "placeholder"});
 
         if (options.getTranslateHref())
             defineTranslatableAttribute("href");

@@ -2,7 +2,7 @@
  OmegaT 3.0.4 update 1
 ----------------------------------------------------------------------
    2 Enhancements
-   2 Bug fixes
+   3 Bug fixes
    0 Localisation update
 ----------------------------------------------------------------------
 3.0.4 update 1 vs. 3.0.4
@@ -22,6 +22,9 @@
   https://sourceforge.net/p/omegat/bugs/601/
 
   - PO filter: real empty source segments were not working
+
+  - Project name resolving for execution with 
+"java -jar /omegat/OmegaT.jar ./" was fixed
 
 ----------------------------------------------------------------------
  OmegaT 3.0.4

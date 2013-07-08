@@ -2,7 +2,7 @@
  OmegaT 3.0.4 update 1
 ----------------------------------------------------------------------
    2 Enhancements
-   1 Bug fix
+   2 Bug fixes
    0 Localisation update
 ----------------------------------------------------------------------
 3.0.4 update 1 vs. 3.0.4
@@ -20,6 +20,8 @@
 
   - Virtual config folder path listed instead of real one under Windows Vista/7
   https://sourceforge.net/p/omegat/bugs/601/
+
+  - PO filter: real empty source segments were not working
 
 ----------------------------------------------------------------------
  OmegaT 3.0.4

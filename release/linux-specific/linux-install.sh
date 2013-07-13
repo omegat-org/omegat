@@ -131,6 +131,6 @@ sudo ln -s -b /opt/omegat/OmegaT-default/OmegaT /usr/local/bin/omegat
 
 sudo ln -s -b /opt/omegat/OmegaT-default/omegat.kaptn /usr/local/bin/omegat.kaptn
 
-sudo chmod +x /usr/local/bin/omegat/omega /usr/local/bin/omegat.kaptn
+sudo chmod +x /usr/local/bin/omegat /usr/local/bin/omegat.kaptn
 
 exit

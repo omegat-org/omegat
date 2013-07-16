@@ -38,7 +38,7 @@
   <section>
     <title>Installation et utilisation de la ligne de commande</title>
 
-    <para>Un pack de lemmatisation adapté du projet Lucene est utilisable sur OmegaT en tant qu'extension. Il est téléchargeable sur le site : http://sourceforge.net/projects/omegat-plugins/files/. Téléchargez les fichiers les plus récents (OmegaT-tokenizers_0.4_2-2.1.zip au moment de la rédaction de ce manuel).</para>
+    <para>Un pack de lemmatisation adapté du projet Lucene est utilisable sur OmegaT en tant qu'extension. Il est téléchargeable sur le site : http://sourceforge.net/projects/omegat-plugins/files/. Téléchargez les fichiers les plus récents (OmegaT-tokenizers_0.4_2-2.1.zip au moment de la rédaction de ce guide).</para>
 
     <para>Pour installer le lemmatiseur, créez un dossier que vous appellerez « plugins » dans le dossier où se trouve OmegaT.jar et décompressez les fichiers à l'intérieur du dossier.</para>
 

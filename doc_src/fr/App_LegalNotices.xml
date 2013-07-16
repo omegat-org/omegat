@@ -6,21 +6,21 @@
     </indexterm>Mentions légales</title>
 
   <section id="legal.notices.for.documentation">
-    <title>Concernant le manuel<indexterm class="singular">
-        <primary>Mention légales</primary> <secondary>Concernant le manuel</secondary>
+    <title>Concernant la documentation<indexterm class="singular">
+        <primary>Mention légales</primary> <secondary>Concernant la documentation</secondary>
       </indexterm></title>
 
     <para><emphasis role="bold">Copyright</emphasis></para>
 
-    <para>Le manuel fourni avec<application>OmegaT</application> comprend un Manuel de l'Utilisateur et un document readme.txt. Ce manuel est protégé par le copyright ©2013 Vito Smolej. L'auteur du chapitre<emphasis>Apprendre à utiliser OmegaT en 5 minutes !</emphasis> est Samuel Murray, Copyright ©2005-2012.</para>
+    <para>Le documentation fournie avec<application>OmegaT</application> comprend le guide de l'utilisateur et un document readme.txt. Cette documentation est protégée par le copyright ©2013 Vito Smolej. L'auteur du chapitre<emphasis>Apprendre à utiliser OmegaT en cinq minutes !</emphasis> est Samuel Murray, Copyright ©2005-2012.</para>
 
     <para><emphasis role="bold">Distribution et modifications</emphasis></para>
 
-    <para>Ce manuel est un document libre ; vous pouvez le redistribuer et/ou le modifier selon les termes de la Licence Publique Générale GNU telle qu'elle est publiée par la Free Software Foundation ; soit selon la version 2 de la Licence, soit (si vous préférez) selon n'importe quelle version ultérieure.</para>
+    <para>La documentation constitue un document libre ; vous pouvez la redistribuer et/ou la modifier selon les termes de la Licence Publique Générale GNU telle que publiée par la Free Software Foundation, soit selon la version 2 de la Licence, soit (si vous préférez) selon n'importe quelle version ultérieure.</para>
 
     <para><emphasis role="bold">Garantie</emphasis></para>
 
-    <para>Le manuel est distribué dans l'espoir qu'il sera utile, mais SANS AUCUNE GARANTIE de quelque nature que ce soit ; expresse ou implicite, y compris, mais sans y être limité, les garanties D'APTITUDE À LA VENTE ou À UN BUT PARTICULIER. Voir la Licence Publique Générale GNU pour plus de détails.</para>
+    <para>La documentation est distribuée dans l'espoir qu'elle sera utile, mais SANS AUCUNE GARANTIE de quelque nature que ce soit ; expresse ou implicite, y compris, mais sans y être limité, les garanties D'APTITUDE À LA VENTE ou À UN BUT PARTICULIER. Voir la Licence Publique Générale GNU pour plus de détails.</para>
   </section>
 
   <section id="legal.ntices.for.application">

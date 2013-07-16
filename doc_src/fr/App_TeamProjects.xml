@@ -120,9 +120,9 @@
         </imageobject>
       </mediaobject>
  
-      <para>Entrez l'URL fournie par ProjectLocker dans le champ <emphasis role="bold">URL of repository</emphasis> (URL du référentiel). Assurez-vous que le champ<emphasis role="bold">Checkout directory</emphasis>(Répertoire d'extraction) est correct, c'est-à-dire qu'il définit le dossier vide que vous avez créé, et appuyez sur<emphasis role="bold">OK</emphasis>. Une fois l'opération terminée, vous pouvez vérifier le dossier en question : il doit maintenant contenir un sous-répertoire .svn et un signe vert OK sur son icône qui montre que le contenu du dossier est à jour.</para>
+      <para>Entrez l'URL fournie par ProjectLocker dans le champ <emphasis role="bold">URL of repository</emphasis> (URL du référentiel). Assurez-vous que le champ<emphasis role="bold">Checkout directory</emphasis> (Répertoire d'extraction) est correct, c'est-à-dire qu'il définit le dossier vide que vous avez créé, et appuyez sur<emphasis role="bold">OK</emphasis>. Une fois l'opération terminée, vous pouvez vérifier le dossier en question : il doit maintenant contenir un sous-dossier .svn et un signe vert OK sur son icône indiquant que le contenu du dossier est à jour.</para>
 
-      <para>Lors de l'étape suivante, nous allons ajouter les fichiers d'OmegaT dans le répertoire local. Les fichiers suivants doivent être partagés par les membres de l'équipe et donc être inclus dans tous les cas :</para>
+      <para>Lors de l'étape suivante, nous allons ajouter les fichiers d'OmegaT dans le dossier local. Les fichiers suivants doivent être partagés par les membres de l'équipe et donc être inclus dans tous les cas :</para>
 
       <itemizedlist>
         <listitem>
@@ -144,11 +144,11 @@
 
       <para>L'administrateur peut aussi décider d'ajouter les dossiers suivants ainsi que leurs contenus : <filename>tm</filename>, <filename>glossary</filename> et <filename>dictionary</filename>. Il peut être intéressant de partager les fichiers <filename>ignored_words.txt</filename> et <filename>learned_words.txt</filename> situés dans le dossier <filename>omegat</filename> pour qu'ils soient mis à jour par l'ensemble de l'équipe. Dans tous les cas, évitez d'ajouter les fichiers <filename>bak</filename> , <filename>project_stats.txt</filename> et <filename>project_stats_match.txt</filename> dans le sous-dossier <filename>omegat</filename>  car ils ne feraient qu'encombrer le référentiel sans rien apporter au projet. Il est possible de faire de même pour le dossier <filename>target</filename> (cible) et son contenu.</para>
 
-      <para>Après avoir copié les fichiers requis dans le répertoire d'extraction, vous remarquerez que l'icône a changé : le signe vert OK est remplacé par un point d'exclamation rouge, ce qui indique le changement effectué dans la copie locale du référentiel. Les deux étapes suivantes mettront à jour la version du serveur :</para>
+      <para>Après avoir copié les fichiers requis dans le dossier d'extraction, vous remarquerez que l'icône a changé : le signe vert OK est remplacé par un point d'exclamation rouge, ce qui indique le changement effectué dans la copie locale du référentiel. Les deux étapes suivantes mettront à jour la version du serveur :</para>
 
       <itemizedlist>
         <listitem>
-          <para><emphasis role="bold">ajoutez les fichiers copiés dans la version locale du référentiel :</emphasis> cliquez-droit sur le répertoire commun local et sélectionnez<guilabel>TortoiseSVN &gt; Add. (Ajouter)</guilabel> Une boîte de dialogue s'ouvre, laissez toutes les options telles qu'elles sont réglées par défaut et cliquez sur<guilabel> OK</guilabel>. Une fenêtre Add Finished! semblable à celle ci-dessous va apparaître :</para>
+          <para><emphasis role="bold">Ajout des fichiers copiés dans la version locale du référentiel :</emphasis> faites un clic droit sur le dossier d'extraction local et sélectionnez <guilabel>TortoiseSVN &gt; Add</guilabel>(Ajouter). Une boîte de dialogue s'ouvre, laissez toutes les options telles qu'elles sont réglées par défaut et cliquez sur<guilabel> OK</guilabel>. Une fenêtre Add Finished! semblable à celle ci-dessous va apparaître :</para>
  
       <mediaobject>
         <imageobject role="html">
@@ -159,7 +159,7 @@
         </imageobject>
       </mediaobject>
 	  
-          <para>Le contenu du répertoire d'extraction sera annoté en conséquence :</para>
+          <para>Le contenu du dossier d'extraction sera annoté en conséquence :</para>
 
           <mediaobject>
             <imageobject role="html">
@@ -172,7 +172,7 @@
 
         </listitem>
         <listitem>
-          <para><emphasis role="bold">validez les modifications locales sur le serveur : </emphasis>cliquez-droit sur le répertoire d'extraction local et sélectionnez <guilabel>SVN Commit....</guilabel> La fenêtre de validation s'ouvre (voir ci-dessous) Vérifiez les changements à effectuer (dans le cas présent, les dossiers et les fichiers ajoutés).</para>
+          <para><emphasis role="bold">Validation des modifications locales sur le serveur : </emphasis>faites un clic droit sur le dossier d'extraction local et sélectionnez <guilabel>SVN Commit...</guilabel>. La fenêtre de validation s'ouvre (voir ci-dessous). Vérifiez les changements à effectuer (dans le cas présent, les dossiers et les fichiers ajoutés).</para>
  
           <mediaobject>
             <imageobject role="html">
@@ -187,7 +187,7 @@
         </listitem>
 
         <listitem>
-          <para><emphasis role="bold">mettez à jour les fichiers locaux à partir de la copie locale du référentiel</emphasis> - les modifications reçues depuis le référentiel du serveur sont dans le sous-dossier .svn mais pas encore dans les fichiers et dans les dossiers. Pour mettre à jour les fichiers locaux, cliquez-droit sur le répertoire d'extraction et sélectionnez <guilabel>SVN Update</guilabel>. Vérifiez le contenu du dossier pour confirmer que la copie locale du référentiel et les fichiers et dossiers correspondants sont conformes à la dernière version du serveur :</para>
+          <para><emphasis role="bold">Mise à jour les fichiers locaux à partir de la copie locale du référentiel</emphasis> : les modifications reçues depuis le référentiel du serveur sont dans le sous-dossier .svn mais pas encore dans les fichiers et dans les dossiers. Pour mettre à jour les fichiers locaux, faites un clic droit sur le dossier d'extraction et sélectionnez <guilabel>SVN Update</guilabel>. Vérifiez le contenu du dossier pour confirmer que la copie locale du référentiel et les fichiers et dossiers correspondants sont conformes à la dernière version du serveur :</para>
 
           <mediaobject>
             <imageobject role="html">

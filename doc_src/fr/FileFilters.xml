@@ -88,7 +88,7 @@
 
     <itemizedlist>
       <listitem>
-        <para><emphasis>Ajoute ou réécrit une déclaration d'encodage dans les fichiers HTML et XHTML </emphasis> : généralement, les fichiers cibles doivent posséder un ensemble de caractères d'encodage différent de celui présent dans le fichier source (que cela soit défini explicitement ou implicitement). En utilisant cette option, le traducteur peut spécifier si les fichiers cibles doivent inclure la déclaration d'encodage. Par exemple, si le filtre de fichiers désigne UTF8 comme système d'encodage pour les fichiers cibles, sélectionner « Toujours » permettra de s'assurer que cette information est inscrite dans les fichiers cibles.</para>
+        <para><emphasis>Ajouter ou réécrire une déclaration d'encodage dans les fichiers HTML et XHTML</emphasis> : généralement, les fichiers cibles doivent posséder un jeu de caractères d'encodage différent de celui présent dans le fichier source (que cela soit défini explicitement ou implicitement). En utilisant cette option, le traducteur peut spécifier si les fichiers cibles doivent inclure la déclaration d'encodage. Par exemple, si le filtre de fichiers désigne UTF8 comme système d'encodage pour les fichiers cibles, sélectionner « Toujours » permettra de s'assurer que cette information est inscrite dans les fichiers cibles.</para>
       </listitem>
     </itemizedlist>
 
@@ -331,7 +331,7 @@
         <listitem>
           <para><literal>${timestamp-????}</literal> – date et heure du système au moment de la génération des différents masques</para>
 
-          <para>Voir <ulink url="http://docs.oracle.com/javase/1.4.2/docs/api/java/text/SimpleDateFormat.html">Manuel Oracle</ulink>pour des exemples de masques « SimpleDateFormat »</para>
+          <para>Voir la <ulink url="http://docs.oracle.com/javase/1.4.2/docs/api/java/text/SimpleDateFormat.html">documentation Oracle</ulink>pour des exemples de masques « SimpleDateFormat »</para>
         </listitem>
 
         <listitem>

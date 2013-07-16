@@ -6,7 +6,7 @@
   <section>
     <title>Merci à tous !</title>
 
-    <para>Quelles que soient les incohérences, omissions et simples erreurs que pourriez trouver dans cette version, je tiens à déclarer que j'en assume l'entière responsabilité. Cependant, ce manuel n'aurait pas pu voir le jour sans l'aide et le soutien d'un grand nombre de personnes. J'exprime donc ma gratitude à :</para>
+    <para>Quelles que soient les incohérences, omissions et simples erreurs que vous pourriez trouver dans cette version, je tiens à déclarer que j'en assume l'entière responsabilité. Cependant, ce guide n'aurait pas pu voir le jour sans l'aide et le soutien d'un grand nombre de personnes. J'exprime donc ma gratitude à :</para>
 
     <itemizedlist>
       <listitem>
@@ -20,13 +20,13 @@
       </listitem>
 
       <listitem>
-        <para>Samuel Murray : pour le chapitre d'introduction « Apprenez à utiliser OmegaT en 5 minutes ».</para>
+        <para>Samuel Murray : pour le chapitre d'introduction « Apprenez à utiliser OmegaT en cinq minutes ».</para>
       </listitem>
     </itemizedlist>
 
     <itemizedlist>
       <listitem>
-        <para>Will Helton : sa lecture finale du projet m'a évité d'avoir honte à de nombreuses reprises. Je ne peux qu'imaginer le nombre de d'articles définis et indéfinis qui manqueraient encore si je n'avais pas bénéficié de son aide précieuse.</para>
+        <para>Will Helton : sa lecture finale du projet m'a évité d'avoir honte à de nombreuses reprises. Je ne peux qu'imaginer le nombre d'articles définis et indéfinis qui manqueraient encore si je n'avais pas bénéficié de son aide précieuse.</para>
       </listitem>
     </itemizedlist>
 
@@ -36,7 +36,7 @@
       </listitem>
 
       <listitem>
-        <para>Dernier remerciement mais non des moindres : je remercie tous ceux qui ont contribué à <ulink url="https://sourceforge.net/p/omegat/documentation/">l'analyse du manuel d'OmegaT</ulink> pour toutes les incohérences qu'ils ont trouvées dans ses précédentes versions. Continuez votre excellent travail !</para>
+        <para>Dernier remerciement mais non des moindres : je remercie tous ceux qui ont contribué à <ulink url="https://sourceforge.net/p/omegat/documentation/">l'analyse de la documentation d'OmegaT</ulink> pour toutes les incohérences qu'ils ont trouvées dans ses précédentes versions. Continuez votre excellent travail !</para>
       </listitem>
     </itemizedlist>
   </section>

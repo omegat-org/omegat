@@ -29,64 +29,64 @@
          <div class="titlepage">
             <div>
                <div>
-                  <h1 class="title"><a name="chapter.glossaries"></a>Chapitre&nbsp;18.&nbsp;Glossaires<a class="indexterm" name="d0e7980"></a><a class="indexterm" name="d0e7985"></a></h1>
+                  <h1 class="title"><a name="chapter.glossaries"></a>Chapitre&nbsp;18.&nbsp;Glossaires<a class="indexterm" name="d0e7982"></a><a class="indexterm" name="d0e7987"></a></h1>
                </div>
             </div>
          </div>
          <div class="toc">
             <dl class="toc">
-               <dt><span class="section"><a href="chapter.glossaries.html#d0e8009">1. Utilisation</a></span></dt>
-               <dt><span class="section"><a href="chapter.glossaries.html#d0e8064">2. Format de fichier</a></span></dt>
-               <dt><span class="section"><a href="chapter.glossaries.html#d0e8103">3. Comment créer des glossaires</a></span></dt>
-               <dt><span class="section"><a href="chapter.glossaries.html#d0e8148">4. Utiliser Trados MultiTerm</a></span></dt>
-               <dt><span class="section"><a href="chapter.glossaries.html#d0e8164">5. Les problèmes de glossaire les plus courants</a></span></dt>
+               <dt><span class="section"><a href="chapter.glossaries.html#d0e8011">1. Utilisation</a></span></dt>
+               <dt><span class="section"><a href="chapter.glossaries.html#d0e8066">2. Format de fichier</a></span></dt>
+               <dt><span class="section"><a href="chapter.glossaries.html#d0e8105">3. Création des glossaires</a></span></dt>
+               <dt><span class="section"><a href="chapter.glossaries.html#d0e8150">4. Utilisation de Trados MultiTerm</a></span></dt>
+               <dt><span class="section"><a href="chapter.glossaries.html#d0e8166">5. Problèmes de glossaire les plus courants</a></span></dt>
             </dl>
          </div>
          <p>Les glossaires sont des fichiers créés et mis à jour manuellement pour être utilisés dans <span class="application">OmegaT</span>.
          </p>
-         <p>Si un projet <span class="application">OmegaT</span> contient un ou plusieurs glossaires, tous les termes du glossaire qui se trouvent dans le segment en cours seront affichés
+         <p>Si un projet <span class="application">OmegaT</span> contient un ou plusieurs glossaires, tous les termes du glossaire qui se trouvent dans le segment en cours sont affichés
             automatiquement dans le volet Glossaires.
          </p>
          <p>Vous pouvez définir son emplacement et son nom dans la boite de dialogue des propriétés du projet. Son extension doit être
-            <code class="filename">.txt</code>(Sinon, il ne sera pas ajouté). Le fichier doit se trouver à l'intérieur du dossier <code class="filename">/glossary (glossaire)</code>, mais il peut être inséré dans un sous-dossier (ex&nbsp;: <code class="filename">glossary/sub/glossary.txt</code>). Il n'est pas nécessaire que le fichier existe au moment de la configuration, il sera créé (si besoin est) au moment de
-            l'ajout d'une entrée de glossaire. Si le fichier existe déjà, il n'y a pas de vérification du format ou de l'ensemble des
-            caractères du fichier : les nouvelles entrées seront toujours présentées sous format texte séparé par des tabulations et en
-            UTF-8. Dans la mesure où le contenu existant ne sera pas touché, les dommages faits au fichier existant seront limités.
+            <code class="filename">.txt</code> (sinon, il ne sera pas ajouté). Le fichier doit se trouver à l'intérieur du dossier <code class="filename">/glossary (glossaire)</code>, mais il peut être inséré dans un sous-dossier (ex&nbsp;: <code class="filename">glossary/sub/glossary.txt</code>). Il n'est pas nécessaire que le fichier existe au moment de la configuration, il sera créé (si besoin est) au moment de
+            l'ajout d'une entrée de glossaire. Si le fichier existe déjà, il n'y a pas de vérification du format ou du jeu caractères
+            du fichier&nbsp;: les nouvelles entrées sont toujours présentées sous format texte séparé par des tabulations et en UTF-8. Dans
+            la mesure où le contenu existant n'est pas touché, il y a peu de risque de commettre des erreurs dans le fichier existant.
          </p>
          <div class="section">
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="d0e8009"></a>1.&nbsp;Utilisation
+                     <h2 class="title" style="clear: both"><a name="d0e8011"></a>1.&nbsp;Utilisation
                      </h2>
                   </div>
                </div>
             </div>
-            <p>Pour utiliser un glossaire pré-existant, placez le simplement dans le dossier <a class="indexterm" name="d0e8014"></a> <code class="filename">/glossary</code> après avoir créé le projet. <span class="application">OmegaT</span>détecte automatiquement les fichiers glossaire présents dans ce dossier lorsqu'un projet est ouvert. Les termes du segment
-               en cours qu'<span class="application">OmegaT</span> trouve dans le(s) fichier(s) glossaire sont affichés dans le volet Glossaires :
-            </p><a class="indexterm" name="d0e8029"></a><div class="figure"><a name="d0e8032"></a><p class="title"><b>Figure&nbsp;18.1.&nbsp;Volet Glossaires</b></p>
+            <p>Pour utiliser un glossaire préexistant, placez-le simplement dans le dossier <a class="indexterm" name="d0e8016"></a> <code class="filename">/glossary</code> après avoir créé le projet. <span class="application">OmegaT</span> détecte automatiquement les fichiers glossaire présents dans ce dossier lorsqu'un projet est ouvert. Les termes du segment
+               en cours qu'<span class="application">OmegaT</span> trouve dans le(s) fichier(s) glossaire sont affichés dans le volet Glossaires&nbsp;:
+            </p><a class="indexterm" name="d0e8031"></a><div class="figure"><a name="d0e8034"></a><p class="title"><b>Figure&nbsp;18.1.&nbsp;Volet Glossaires</b></p>
                <div class="figure-contents">
                   <div class="mediaobject"><img src="images/GlossaryPane_25.png" alt="Volet Glossaires"></div>
                </div>
             </div><br class="figure-break"><p>Les mots écrits avant le signe «&nbsp;=&nbsp;» sont les termes source, et le ou les mots écrits après «&nbsp;=&nbsp;» correspondent à leurs traductions.
                L'entrée vocabulaire peut avoir un ou plusieurs commentaires ajoutés. La fonction glossaire ne trouve que les mots qui correspondent
-               exactement aux entrées du glossaire (ex. : il ne reconnaît pas les formes accordées). De nouveaux termes peuvent être ajoutés
-               manuellement au(x) fichier(s) glossaire pendant la traduction en utilisant, par exemple, un éditeur de texte. Les termes nouvellement
-               ajoutés ne seront reconnus qu'une fois les changements du fichier texte enregistrés.
+               exactement aux entrées du glossaire (par exemple, il ne reconnaît pas les formes accordées). De nouveaux termes peuvent être
+               ajoutés manuellement au(x) fichier(s) glossaire pendant la traduction en utilisant, par exemple, un éditeur de texte. Les
+               termes nouvellement ajoutés ne sont reconnus qu'une fois les changements du fichier texte enregistrés.
             </p>
-            <p>Un terme source ne doit pas nécessairement être un mot seul. Comme dans cet exemple :</p>
-            <div class="figure"><a name="d0e8044"></a><p class="title"><b>Figure&nbsp;18.2.&nbsp;Les entrées à mots-multiples dans les glossaires - exemple<a class="indexterm" name="d0e8047"></a></b></p>
+            <p>Un terme source ne doit pas nécessairement être un mot seul. Comme dans cet exemple&nbsp;:</p>
+            <div class="figure"><a name="d0e8046"></a><p class="title"><b>Figure&nbsp;18.2.&nbsp;Les entrées à plusieurs mots dans les glossaires – exemple<a class="indexterm" name="d0e8049"></a></b></p>
                <div class="figure-contents">
-                  <div class="mediaobject"><img src="images/MultiTerm_Glossary_25.png" alt="Les entrées à mots-multiples dans les glossaires - exemple"></div>
+                  <div class="mediaobject"><img src="images/MultiTerm_Glossary_25.png" alt="Les entrées à plusieurs mots dans les glossaires – exemple"></div>
                </div>
-            </div><br class="figure-break"><p>L'élément souligné «&nbsp;pop-up menu&nbsp;» peut se trouver dans le volet Glossaires face à «&nbsp;pojavni menu&nbsp;». Surlignez ce mot dans
-               le volet Glossaires et cliquez-droit dessus après avoir placé votre curseur à la bonne position dans le segment cible.<a href="#ftn.d0e8061" class="footnote" name="d0e8061"><sup class="footnote">[1]</sup></a></p>
+            </div><br class="figure-break"><p>L'élément souligné «&nbsp;free software&nbsp;» figure dans le volet Glossaires face à «&nbsp;logiciel libre&nbsp;». Surlignez ce mot dans le volet
+               Glossaires et faites un clic droit dessus après avoir placé le curseur à la bonne position dans le segment cible.<a href="#ftn.d0e8063" class="footnote" name="d0e8063"><sup class="footnote">[1]</sup></a></p>
          </div>
          <div class="section">
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="d0e8064"></a>2.&nbsp;<a class="indexterm" name="d0e8066"></a>Format de fichier<a class="indexterm" name="d0e8072"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="d0e8066"></a>2.&nbsp;<a class="indexterm" name="d0e8068"></a>Format de fichier<a class="indexterm" name="d0e8074"></a></h2>
                   </div>
                </div>
             </div>
@@ -101,44 +101,43 @@
                sont séparés par une virgule. Les chaînes de caractères peuvent être encadrées par des guillemets, ce qui permet d'inclure
                des virgules à l'intérieur des chaînes de caractères :
             </p>
-            <p><code class="literal">"This is a source term, which contains a comma","c'est un
-                      terme, qui contient une virgule"</code></p>
-            <p>En plus du format texte brut, le format TBX <a class="indexterm" name="d0e8088"></a> est également pris en charge. Le TBX - Term Base eXchange -  est le standard libre basé sur XML utilisé pour l'échange de
-               données terminologiques structurées. TBX a été approuvé, en tant que standard international, par LISA et ISO. Si vous possédez
-               déjà un système de gestion de la terminologie - MultiTerm par exemple - il est possible que celui-ci propose une exportation
-               des données terminologiques via le format TBX. La <a class="ulink" href="http://www.microsoft.com/Language/en-US/Terminology.aspx" target="_top">Banque terminologique Microsoft</a> <a class="indexterm" name="d0e8097"></a> peut être téléchargée dans plus de 100 langues différentes et servir d'élément fondateur pour un glossaire informatique.
+            <p><code class="literal">"This is a source term, which contains a comma","Ceci est un terme, qui contient une virgule"</code></p>
+            <p>En plus du format texte brut, le format TBX <a class="indexterm" name="d0e8090"></a> est également pris en charge. Le TBX (Term Base eXchange), est le standard libre basé sur XML utilisé pour l'échange de données
+               terminologiques structurées. TBX a été approuvé, en tant que standard international, par LISA et ISO. Si vous possédez déjà
+               un système de gestion de la terminologie (MultiTerm par exemple), il est possible que celui-ci propose une exportation des
+               données terminologiques via le format TBX. La <a class="ulink" href="http://www.microsoft.com/Language/en-US/Terminology.aspx" target="_top">Banque terminologique Microsoft</a> <a class="indexterm" name="d0e8099"></a> peut être téléchargée dans plus de 100 langues différentes et servir d'élément fondateur pour un glossaire informatique.
             </p>
          </div>
          <div class="section">
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="d0e8103"></a>3.&nbsp;Comment créer des glossaires<a class="indexterm" name="d0e8106"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="d0e8105"></a>3.&nbsp;Création des glossaires<a class="indexterm" name="d0e8108"></a></h2>
                   </div>
                </div>
             </div>
-            <p>Le paramétrage du projet vous permet d'entrer un nom de fichier glossaire modifiable (voir début de ce chapitre). Cliquez-droit
-               sur le volet Glossaires ou appuyez sur <span class="keycap"><strong>Ctrl+Maj+G</strong></span> pour ajouter une nouvelle entrée. Une boite de dialogue s'ouvre, vous permettant d'entrer le terme source, le terme cible
+            <p>Le paramétrage du projet vous permet d'entrer un nom de fichier glossaire modifiable (voir début de ce chapitre). Faites un
+               clic droit dans le volet Glossaires ou appuyez sur <span class="keycap"><strong>Ctrl+Maj+G</strong></span> pour ajouter une nouvelle entrée. Une boite de dialogue s'ouvre, vous permettant d'entrer le terme source, le terme cible
                et tous les commentaires que vous pourriez avoir :
             </p>
             <div class="mediaobject"><img src="images/GlossaryEntry_25.png"></div>
             <p>Le contenu des fichiers glossaire est gardé en mémoire et chargé lorsque le projet est ouvert ou rechargé. Ainsi, mettre à
-               jour un fichier glossaire est très facile : appuyez sur <span class="keycap"><strong>Ctrl+Maj+G</strong></span> et entrez le nouveau terme, sa traduction et tous les commentaires que vous pourriez avoir (assurez-vous de bien appuyez
+               jour un fichier glossaire est très facile : appuyez sur <span class="keycap"><strong>Ctrl+Maj+G</strong></span> et entrez le nouveau terme, sa traduction et tous les commentaires que vous pourriez avoir (assurez-vous de bien appuyer
                sur la touche Tab entre les différents champs) et enregistrez le fichier. Le contenu du volet Glossaires sera mis à jour en
                conséquence.
             </p>
-            <p><a class="indexterm" name="d0e8127"></a>L'emplacement du fichier glossaire modifiable peut être défini dans la boite de dialogue <span class="guimenuitem">Projet &gt; Propriétés... </span>. Les extensions reconnues sont <code class="filename">TXT</code> et <code class="filename">UTF8</code></p>
+            <p><a class="indexterm" name="d0e8129"></a>L'emplacement du fichier glossaire modifiable peut être défini dans la boite de dialogue <span class="guimenuitem">Projet &gt; Propriétés... </span>. Les extensions reconnues sont <code class="filename">TXT</code> et <code class="filename">UTF8</code></p>
             <p><span class="bold"><strong>Remarque :</strong></span> il existe bien évidemment d'autres façons de créer un fichier simple contenant des entrées délimitées par tabulation. Rien
                n'interdit d'utiliser Notepad++ sous Windows, GEdit sous Linux par exemple ou certains tableurs pour créer un glossaire :
-               n'importe quelle application, capable de prendre en charge UTF8 et d'afficher des caractères d'espacement (afin que vous puissiez
-               distinguer les caractères<span class="keycap"><strong>TAB</strong></span>obligatoires) peut être utilisée.
+               n'importe quelle application, capable de prendre en charge UTF8 et d'afficher des caractères d'espacement (afin de pouvoir
+               distinguer les caractères <span class="keycap"><strong>TAB</strong></span> obligatoires) peut être utilisée.
             </p>
          </div>
          <div class="section">
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="d0e8148"></a>4.&nbsp;<a class="indexterm" name="d0e8150"></a>Utiliser Trados MultiTerm
+                     <h2 class="title" style="clear: both"><a name="d0e8150"></a>4.&nbsp;<a class="indexterm" name="d0e8152"></a>Utilisation de Trados MultiTerm
                      </h2>
                   </div>
                </div>
@@ -153,16 +152,16 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="d0e8164"></a>5.&nbsp;<a class="indexterm" name="d0e8166"></a>Les problèmes de glossaire les plus courants
+                     <h2 class="title" style="clear: both"><a name="d0e8166"></a>5.&nbsp;<a class="indexterm" name="d0e8168"></a>Problèmes de glossaire les plus courants
                      </h2>
                   </div>
                </div>
             </div>
-            <p><span class="bold"><strong>Problème : aucun terme du glossaire n'est affiché - causes possibles :</strong></span></p>
+            <p><span class="bold"><strong>Problème : aucun terme du glossaire n'est affiché. Causes possibles&nbsp;:</strong></span></p>
             <div class="itemizedlist">
                <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
-                     <p>Pas de fichier glossaire trouvé dans le dossier «&nbsp;glossary&nbsp;».</p>
+                     <p>Aucun fichier glossaire n'a été trouvé dans le dossier «&nbsp;glossary&nbsp;».</p>
                   </li>
                </ul>
             </div>
@@ -190,8 +189,8 @@
             <div class="itemizedlist">
                <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
-                     <p>Il n'y a pas de correspondance EXACTE entre l'entrée glossaire et le texte source de votre document - exemple : différence
-                        singulier/pluriel.
+                     <p>Il n'y a pas de correspondance EXACTE entre l'entrée glossaire et le texte source de votre document (exemple : différence
+                        singulier/pluriel).
                      </p>
                   </li>
                </ul>
@@ -206,7 +205,7 @@
             <div class="itemizedlist">
                <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
-                     <p>Il n'y a pas de terme dans le segment en cours qui corresponde à un terme du glossaire.</p>
+                     <p>Aucun terme dans le segment en cours ne correspond à un terme du glossaire.</p>
                   </li>
                </ul>
             </div>
@@ -217,7 +216,7 @@
                   </li>
                </ul>
             </div>
-            <p><span class="bold"><strong>Problème : Dans le volet Glossaires, certains caractères ne sont pas affichés correctement</strong></span></p>
+            <p><span class="bold"><strong>Problème&nbsp;: dans le volet Glossaires, certains caractères ne sont pas affichés correctement</strong></span></p>
             <div class="itemizedlist">
                <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
@@ -229,11 +228,9 @@
             </div>
          </div>
          <div class="footnotes"><br><hr style="width:100; text-align:left;margin-left: 0">
-            <div id="ftn.d0e8061" class="footnote">
-               <p><a href="#d0e8061" class="para"><sup class="para">[1] </sup></a>Veuillez noter que dans l'exemple ci-dessus, il ne s'agit que de la moitié (ou moins) de l'action, dans la mesure ou la langue
-                  cible (le slovène) utilise des déclinaisons. Ainsi la forme nominative «&nbsp;pojavni meni&nbsp;» - doit être transformée en «&nbsp;pojavnem
-                  meniju&nbsp;», soit la forme locative. Il est donc probablement plus rapide de saisir directement le terme correct que d'utiliser
-                  le glossaire et ses raccourcis.
+            <div id="ftn.d0e8063" class="footnote">
+               <p><a href="#d0e8063" class="para"><sup class="para">[1] </sup></a>Pour insérer des termes du glossaire, il est également possible d'effectuer un clic droit sur la partie soulignée en bleu
+                  dans le segment source et de choisir le terme correspondant.  
                </p>
             </div>
          </div>

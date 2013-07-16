@@ -31,7 +31,7 @@
         </listitem>
 
         <listitem>
-          <para>Si vous ne pouvez pas exécuter<application>OmegaT</application> normalement (si aucun environnement graphique n'est disponible) : copiez les fichiers de paramétrage provenant d'une autre installation <application>OmegaT</application> effectuée sur une autre machine vers un répertoire spécifique. Son emplacement n'est pas important dans la mesure où vous pouvez l'ajouter à la ligne de commande au démarrage (voir ci-dessous). Les fichiers importants <literal>filters.conf</literal> et <literal>segmentation.conf</literal> sont situés dans le répertoire personnel de l'utilisateur (soit dans <literal>C:\Documents and Settings\%User%\<application>OmegaT</application></literal> sous Windows, et <literal>%user%/.omegat/</literal> sous Linux)</para>
+          <para>Si vous ne pouvez pas exécuter <application>OmegaT</application> normalement (si aucun environnement graphique n'est disponible) : copiez les fichiers de paramétrage provenant d'une autre installation <application>OmegaT</application> effectuée sur une autre machine vers un dossier spécifique. Son emplacement n'est pas important dans la mesure où vous pouvez l'ajouter à la ligne de commande au démarrage (voir ci-dessous). Les fichiers importants <literal>filters.conf</literal> et <literal>segmentation.conf</literal> sont situés dans le dossier personnel de l'utilisateur (soit dans <literal>C:\Documents and Settings\%User%\<application>OmegaT</application></literal> sous Windows, et <literal>%user%/.omegat/</literal> sous Linux)</para>
         </listitem>
       </itemizedlist>
     </section>

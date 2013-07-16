@@ -7,7 +7,7 @@
       <primary>Fichiers source</primary> <secondary>Texte formaté</secondary>
     </indexterm></title>
 
-  <para>Les informations de formatage présentes dans le fichier source doivent généralement être recopiées dans le fichier cible. Les informations de formatage en ligne rendues possibles par les formats pris en charge (en particulier DocBook, HTML, XHTML, Open Document Format(ODF) et Office Open XML (MS Office 2007 et versions ultérieures) à l'heure de la rédaction de ce manuel) sont affichées sous forme de balises dans OmegaT. Normalement, lorsque plusieurs textes sont comparés pour établir des correspondances, les balises sont ignorées. Les balises reproduites dans le segment traduit seront présentes dans le document traduit.</para>
+  <para>Les informations de formatage présentes dans le fichier source doivent généralement être recopiées dans le fichier cible. Les informations de formatage en ligne rendues possibles par les formats pris en charge (en particulier DocBook, HTML, XHTML, Open Document Format (ODF) et Office Open XML (MS Office 2007 et versions ultérieures) à l'heure de la rédaction de ce guide) sont affichées sous forme de balises dans OmegaT. Normalement, lorsque plusieurs textes sont comparés pour établir des correspondances, les balises sont ignorées. Les balises reproduites dans le segment traduit seront présentes dans le document traduit.</para>
 
   <section id="formatting.tags">
     <title>Balises de formatage<indexterm class="singular">

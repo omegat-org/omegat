@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
 <chapter id="chapter.files.and.folders">
-  <title>Les fichiers et répertoires d'<application>OmegaT</application></title>
+  <title>Les fichiers et dossiers d'<application>OmegaT</application></title>
 
   <para><application>OmegaT</application> travaille avec trois types de fichiers.</para>
 
@@ -30,7 +30,7 @@
       <primary>Fichiers projet</primary> <secondary>Fichiers projet de traduction</secondary>
     </indexterm>
 
-    <para>Un projet de traduction <application>OmegaT</application> se compose d'un certain nombre de fichiers et de répertoires.</para>
+    <para>Un projet de traduction <application>OmegaT</application> se compose d'un certain nombre de fichiers et de dossiers.</para>
 
     <para>Lorsque vous créez un projet de traduction, OmegaT crée automatiquement un dossier portant le nom spécifié et une liste de dossiers :</para>
 
@@ -237,7 +237,7 @@
           <row>
             <entry>Mac OS X</entry>
 
-            <entry><filename>&lt;Répertoire utilisateur&gt;/Bibliothèque/Preferences/<application>OmegaT</application></filename></entry>
+            <entry><filename>&lt;Dossier de départ de l'utilisateur&gt;/Bibliothèque/Preferences/<application>OmegaT</application></filename></entry>
           </row>
 
           <row>
@@ -273,7 +273,7 @@
           <row>
             <entry><filename>/docs/</filename></entry>
 
-            <entry>Tous les fichiers du manuel de l'utilisateur se trouvent dans ce dossier. Les ouvrir dans un navigateur Internet vous donne accès aux liens externes.</entry>
+            <entry>Tous les fichiers du guide de l'utilisateur se trouvent dans ce dossier. Les ouvrir dans un navigateur Internet vous donne accès aux liens externes.</entry>
           </row>
 
           <row>
@@ -309,7 +309,7 @@
           <row>
             <entry><filename>doc-license.txt</filename></entry>
 
-            <entry>La LICENCE PUBLIQUE GENERALE GNU. Cette licence s'étend au manuel. Voir ci-dessus.</entry>
+            <entry>La LICENCE PUBLIQUE GENERALE GNU. Cette licence s'étend à la documentation. Voir ci-dessus.</entry>
           </row>
 
           <row>

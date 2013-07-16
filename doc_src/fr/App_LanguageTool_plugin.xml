@@ -32,7 +32,7 @@
     
 	<warning>
 		<title>Incompatibilités</title>
-		<para>LanguageTool ne fonctionnera pas correctement si une ancienne version se trouve dans le répertoire /plugin. Retirer LanguageTool du répertoire /plugin avant de lancer OmegaT.</para>
+		<para>LanguageTool ne fonctionnera pas correctement si une ancienne version se trouve dans le dossier /plugin. Retirer LanguageTool du dossier /plugin avant de lancer OmegaT.</para>
 	</warning>
 
   </section>

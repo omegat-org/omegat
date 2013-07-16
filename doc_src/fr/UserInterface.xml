@@ -88,7 +88,7 @@
                 <primary>Raccourcis</primary> <secondary>Aide - F1</secondary>
               </indexterm>Navigateur Aide</guimenuitem></entry>
 
-            <entry><para>Utilisé pour afficher le manuel de l'utilisateur (s'ouvre en appuyant sur <keycap>F1</keycap>, se ferme en appuyant sur <keycap>Echap)</keycap></para></entry>
+            <entry><para>Utilisé pour afficher le guide de l'utilisateur (s'ouvre avec <keycap>F1</keycap>, se ferme avec <keycap>Échap)</keycap></para></entry>
           </row>
 
           <row>
@@ -547,7 +547,7 @@
         </mediaobject>
       </figure>
 
-      <para>Si l'option TransTips est activée (<guimenuitem>Options → TransTips</guimenuitem>), cliquer-droit sur le mot souligné dans le segment source permet d'ouvrir un menu contextuel qui suggère les traductions proposées par votre glossaire. Sélectionner l'une de ces traductions permet de l'insérer à l'endroit où se trouve le curseur dans le segment cible. Il est également possible de surligner votre alternative préférée dans le volet Glossaires et de l'insérer dans le segment cible en cliquant-droit sur la sélection.</para>
+      <para>Si l'option TransTips est activée (<guimenuitem>Options → TransTips</guimenuitem>), un clic droit sur le mot souligné dans le segment source permet d'ouvrir un menu contextuel qui suggère les traductions proposées par votre glossaire. Sélectionner l'une de ces traductions permet de l'insérer à l'endroit où se trouve le curseur dans le segment cible. Il est également possible de surligner votre alternative préférée dans le volet Glossaires et de l'insérer dans le segment cible avec un clic droit sur la sélection.</para>
     </section>
 
     <section id="dictionaries">
@@ -765,13 +765,13 @@
           <primary>Menu Aide</primary> <secondary>Navigateur Aide</secondary>
         </indexterm></title>
 
-      <para>Le navigateur d'aide (qui affiche ce manuel) peut être ouvert en appuyant sur la touche <keycap><indexterm class="singular">
+      <para>Le navigateur d'aide (qui affiche ce guide) peut être ouvert en appuyant sur la touche <keycap><indexterm class="singular">
           <primary>Raccourcis</primary> <secondary>Aide - F1</secondary>
         </indexterm>F1</keycap> ou en allant dans <guimenuitem><indexterm class="singular">
-          <primary>Menu Aide</primary> <secondary>Manuel de l'utilisateur...</secondary>
-        </indexterm>Aide → Manuel de l'utilisateur...</guimenuitem> à partir du menu principal. Dans la fenêtre, le manuel ainsi que deux boutons (Retour et Table des matières) apparaissent. Le manuel de l'utilisateur est un document HTML contenant des liens amenant aux différents chapitres. Cliquer sur l'un des liens (comme vous le feriez sur un navigateur web) affiche la page désirée dans la fenêtre du manuel.</para>
+          <primary>Menu Aide</primary> <secondary>Guide de l'utilisateur...</secondary>
+        </indexterm>Aide → Guide de l'utilisateur...</guimenuitem> à partir du menu principal. Dans la fenêtre, le guide ainsi que deux boutons (Retour et Table des matières) apparaissent. Le guide de l'utilisateur est un document HTML contenant des liens vers les différents chapitres. Cliquer sur l'un des liens (comme vous le feriez sur un navigateur Web) affiche la page désirée dans la fenêtre du guide.</para>
 
-      <para>Le manuel de l'utilisateur est situé dans le sous-dossier docs à l'intérieur du dossier d'installation OmegaT, de sorte que vous puissiez, par exemple, voir le manuel en anglais en ouvrant le fichier <filename>docs/en/index.html </filename>dans votre navigateur. Ouvrir le manuel de l'utilisateur par ce biais permet également de suivre des liens externes, dans la mesure où le navigateur d'aide intégré n'accepte pas les liens Internet externes.</para>
+      <para>Le guide de l'utilisateur est situé dans le sous-dossier docs à l'intérieur du dossier d'installation OmegaT. Vous pouvez, par exemple, afficher le guide en anglais en ouvrant le fichier <filename>docs/en/index.html </filename>dans votre navigateur. Ouvrir le guide de l'utilisateur par ce biais permet également de suivre des liens externes, dans la mesure où le navigateur d'aide intégré n'accepte pas les liens Internet externes.</para>
     </section>
   </section>
 </chapter>

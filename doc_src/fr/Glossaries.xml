@@ -9,16 +9,16 @@
 
   <para>Les glossaires sont des fichiers créés et mis à jour manuellement pour être utilisés dans <application>OmegaT</application>.</para>
 
-  <para>Si un projet <application>OmegaT</application> contient un ou plusieurs glossaires, tous les termes du glossaire qui se trouvent dans le segment en cours seront affichés automatiquement dans le volet Glossaires.</para>
+  <para>Si un projet <application>OmegaT</application> contient un ou plusieurs glossaires, tous les termes du glossaire qui se trouvent dans le segment en cours sont affichés automatiquement dans le volet Glossaires.</para>
 
-  <para>Vous pouvez définir son emplacement et son nom dans la boite de dialogue des propriétés du projet. Son extension doit être <filename>.txt</filename>(Sinon, il ne sera pas ajouté). Le fichier doit se trouver à l'intérieur du dossier <filename>/glossary (glossaire)</filename>, mais il peut être inséré dans un sous-dossier (ex : <filename>glossary/sub/glossary.txt</filename>). Il n'est pas nécessaire que le fichier existe au moment de la configuration, il sera créé (si besoin est) au moment de l'ajout d'une entrée de glossaire. Si le fichier existe déjà, il n'y a pas de vérification du format ou de l'ensemble des caractères du fichier : les nouvelles entrées seront toujours présentées sous format texte séparé par des tabulations et en UTF-8. Dans la mesure où le contenu existant ne sera pas touché, les dommages faits au fichier existant seront limités.</para>
+  <para>Vous pouvez définir son emplacement et son nom dans la boite de dialogue des propriétés du projet. Son extension doit être <filename>.txt</filename> (sinon, il ne sera pas ajouté). Le fichier doit se trouver à l'intérieur du dossier <filename>/glossary (glossaire)</filename>, mais il peut être inséré dans un sous-dossier (ex : <filename>glossary/sub/glossary.txt</filename>). Il n'est pas nécessaire que le fichier existe au moment de la configuration, il sera créé (si besoin est) au moment de l'ajout d'une entrée de glossaire. Si le fichier existe déjà, il n'y a pas de vérification du format ou du jeu caractères du fichier : les nouvelles entrées sont toujours présentées sous format texte séparé par des tabulations et en UTF-8. Dans la mesure où le contenu existant n'est pas touché, il y a peu de risque de commettre des erreurs dans le fichier existant.</para>
 
   <section>
     <title>Utilisation</title>
 
-    <para>Pour utiliser un glossaire pré-existant, placez le simplement dans le dossier <indexterm class="singular">
-        <primary>Fichiers du projet</primary> <secondary>Le sous-dossier glossaire</secondary>
-      </indexterm> <filename>/glossary</filename> après avoir créé le projet. <application>OmegaT</application>détecte automatiquement les fichiers glossaire présents dans ce dossier lorsqu'un projet est ouvert. Les termes du segment en cours qu'<application>OmegaT</application> trouve dans le(s) fichier(s) glossaire sont affichés dans le volet Glossaires :</para>
+    <para>Pour utiliser un glossaire préexistant, placez-le simplement dans le dossier <indexterm class="singular">
+        <primary>Fichiers du projet</primary> <secondary>Sous-dossier glossary</secondary>
+      </indexterm> <filename>/glossary</filename> après avoir créé le projet. <application>OmegaT</application> détecte automatiquement les fichiers glossaire présents dans ce dossier lorsqu'un projet est ouvert. Les termes du segment en cours qu'<application>OmegaT</application> trouve dans le(s) fichier(s) glossaire sont affichés dans le volet Glossaires :</para>
 
     <indexterm class="singular">
       <primary>Glossaires, volet Glossaires</primary>
@@ -38,13 +38,13 @@
       </mediaobject>
     </figure>
 
-    <para>Les mots écrits avant le signe « = » sont les termes source, et le ou les mots écrits après « = » correspondent à leurs traductions. L'entrée vocabulaire peut avoir un ou plusieurs commentaires ajoutés. La fonction glossaire ne trouve que les mots qui correspondent exactement aux entrées du glossaire (ex. : il ne reconnaît pas les formes accordées). De nouveaux termes peuvent être ajoutés manuellement au(x) fichier(s) glossaire pendant la traduction en utilisant, par exemple, un éditeur de texte. Les termes nouvellement ajoutés ne seront reconnus qu'une fois les changements du fichier texte enregistrés.</para>
+    <para>Les mots écrits avant le signe « = » sont les termes source, et le ou les mots écrits après « = » correspondent à leurs traductions. L'entrée vocabulaire peut avoir un ou plusieurs commentaires ajoutés. La fonction glossaire ne trouve que les mots qui correspondent exactement aux entrées du glossaire (par exemple, il ne reconnaît pas les formes accordées). De nouveaux termes peuvent être ajoutés manuellement au(x) fichier(s) glossaire pendant la traduction en utilisant, par exemple, un éditeur de texte. Les termes nouvellement ajoutés ne sont reconnus qu'une fois les changements du fichier texte enregistrés.</para>
 
-    <para>Un terme source ne doit pas nécessairement être un mot seul. Comme dans cet exemple :</para>
+    <para>Un terme source ne doit pas nécessairement être un mot seul. Comme dans cet exemple :</para>
 
     <figure>
-      <title>Les entrées à mots-multiples dans les glossaires - exemple<indexterm class="singular">
-          <primary>Glossaires</primary> <secondary>Volet Glossaires</secondary> <tertiary>Entrées à mots-multiples</tertiary>
+      <title>Les entrées à plusieurs mots dans les glossaires – exemple<indexterm class="singular">
+          <primary>Glossaires</primary> <secondary>Volet Glossaires</secondary> <tertiary>Entrées à plusieurs mots</tertiary>
         </indexterm></title>
 
       <mediaobject>
@@ -58,8 +58,8 @@
       </mediaobject>
     </figure>
 
-    <para>L'élément souligné « pop-up menu » peut se trouver dans le volet Glossaires face à « pojavni menu ». Surlignez ce mot dans le volet Glossaires et cliquez-droit dessus après avoir placé votre curseur à la bonne position dans le segment cible.<footnote>
-        <para>Veuillez noter que dans l'exemple ci-dessus, il ne s'agit que de la moitié (ou moins) de l'action, dans la mesure ou la langue cible (le slovène) utilise des déclinaisons. Ainsi la forme nominative « pojavni meni » - doit être transformée en « pojavnem meniju », soit la forme locative. Il est donc probablement plus rapide de saisir directement le terme correct que d'utiliser le glossaire et ses raccourcis.</para>
+    <para>L'élément souligné « free software » figure dans le volet Glossaires face à « logiciel libre ». Surlignez ce mot dans le volet Glossaires et faites un clic droit dessus après avoir placé le curseur à la bonne position dans le segment cible.<footnote>
+        <para>Pour insérer des termes du glossaire, il est également possible d'effectuer un clic droit sur la partie soulignée en bleu dans le segment source et de choisir le terme correspondant.  </para>
       </footnote></para>
   </section>
 
@@ -74,22 +74,21 @@
 
     <para>Les fichiers glossaire peuvent être du type d'encodage par défaut du système (et indiqués par l'extension .tab) ou en UTF-8 (extension .utf8). Le format Unicode (UTF8) est préférable pour des raisons évidentes. Le format CSV est également pris en charge. Ce format est le même que celui à séparation par tabulation : terme source, terme cible. Les champs de commentaire sont séparés par une virgule. Les chaînes de caractères peuvent être encadrées par des guillemets, ce qui permet d'inclure des virgules à l'intérieur des chaînes de caractères :</para>
 
-    <para><literal>&quot;This is a source term, which contains a comma&quot;,&quot;c'est un
-    terme, qui contient une virgule&quot;</literal></para>
+    <para><literal>&quot;This is a source term, which contains a comma&quot;,&quot;Ceci est un terme, qui contient une virgule&quot;</literal></para>
 
     <para>En plus du format texte brut, le format TBX <indexterm class="singular">
         <primary>Glossaires</primary> <secondary>Format TBX</secondary>
-      </indexterm> est également pris en charge. Le TBX - Term Base eXchange -  est le standard libre basé sur XML utilisé pour l'échange de données terminologiques structurées. TBX a été approuvé, en tant que standard international, par LISA et ISO. Si vous possédez déjà un système de gestion de la terminologie - MultiTerm par exemple - il est possible que celui-ci propose une exportation des données terminologiques via le format TBX. La <ulink url="http://www.microsoft.com/Language/en-US/Terminology.aspx">Banque terminologique Microsoft</ulink> <indexterm class="singular">
+      </indexterm> est également pris en charge. Le TBX (Term Base eXchange), est le standard libre basé sur XML utilisé pour l'échange de données terminologiques structurées. TBX a été approuvé, en tant que standard international, par LISA et ISO. Si vous possédez déjà un système de gestion de la terminologie (MultiTerm par exemple), il est possible que celui-ci propose une exportation des données terminologiques via le format TBX. La <ulink url="http://www.microsoft.com/Language/en-US/Terminology.aspx">Banque terminologique Microsoft</ulink> <indexterm class="singular">
         <primary>Glossaires</primary> <secondary>Banque terminologique Microsoft</secondary>
       </indexterm> peut être téléchargée dans plus de 100 langues différentes et servir d'élément fondateur pour un glossaire informatique.</para>
   </section>
 
   <section>
-    <title>Comment créer des glossaires<indexterm class="singular">
+    <title>Création des glossaires<indexterm class="singular">
         <primary>Glossaires</primary> <secondary>Création d'un glossaire</secondary>
       </indexterm></title>
 
-    <para>Le paramétrage du projet vous permet d'entrer un nom de fichier glossaire modifiable (voir début de ce chapitre). Cliquez-droit sur le volet Glossaires ou appuyez sur <keycap>Ctrl+Maj+G</keycap> pour ajouter une nouvelle entrée. Une boite de dialogue s'ouvre, vous permettant d'entrer le terme source, le terme cible et tous les commentaires que vous pourriez avoir :</para>
+    <para>Le paramétrage du projet vous permet d'entrer un nom de fichier glossaire modifiable (voir début de ce chapitre). Faites un clic droit dans le volet Glossaires ou appuyez sur <keycap>Ctrl+Maj+G</keycap> pour ajouter une nouvelle entrée. Une boite de dialogue s'ouvre, vous permettant d'entrer le terme source, le terme cible et tous les commentaires que vous pourriez avoir :</para>
 
     <mediaobject role="html">
       <imageobject>
@@ -101,19 +100,19 @@
       </imageobject>
     </mediaobject>
 
-    <para>Le contenu des fichiers glossaire est gardé en mémoire et chargé lorsque le projet est ouvert ou rechargé. Ainsi, mettre à jour un fichier glossaire est très facile : appuyez sur <keycap>Ctrl+Maj+G</keycap> et entrez le nouveau terme, sa traduction et tous les commentaires que vous pourriez avoir (assurez-vous de bien appuyez sur la touche Tab entre les différents champs) et enregistrez le fichier. Le contenu du volet Glossaires sera mis à jour en conséquence.</para>
+    <para>Le contenu des fichiers glossaire est gardé en mémoire et chargé lorsque le projet est ouvert ou rechargé. Ainsi, mettre à jour un fichier glossaire est très facile : appuyez sur <keycap>Ctrl+Maj+G</keycap> et entrez le nouveau terme, sa traduction et tous les commentaires que vous pourriez avoir (assurez-vous de bien appuyer sur la touche Tab entre les différents champs) et enregistrez le fichier. Le contenu du volet Glossaires sera mis à jour en conséquence.</para>
 
     <para><indexterm class="singular">
         <primary>Glossaires</primary> <secondary>Emplacement du fichier glossaire modifiable</secondary>
       </indexterm>L'emplacement du fichier glossaire modifiable peut être défini dans la boite de dialogue <guimenuitem>Projet &gt; Propriétés... </guimenuitem>. Les extensions reconnues sont <filename>TXT</filename> et <filename>UTF8</filename></para>
 
-    <para><emphasis role="bold">Remarque :</emphasis> il existe bien évidemment d'autres façons de créer un fichier simple contenant des entrées délimitées par tabulation. Rien n'interdit d'utiliser Notepad++ sous Windows, GEdit sous Linux par exemple ou certains tableurs pour créer un glossaire : n'importe quelle application, capable de prendre en charge UTF8 et d'afficher des caractères d'espacement (afin que vous puissiez distinguer les caractères<keycap>TAB</keycap>obligatoires) peut être utilisée.</para>
+    <para><emphasis role="bold">Remarque :</emphasis> il existe bien évidemment d'autres façons de créer un fichier simple contenant des entrées délimitées par tabulation. Rien n'interdit d'utiliser Notepad++ sous Windows, GEdit sous Linux par exemple ou certains tableurs pour créer un glossaire : n'importe quelle application, capable de prendre en charge UTF8 et d'afficher des caractères d'espacement (afin de pouvoir distinguer les caractères <keycap>TAB</keycap> obligatoires) peut être utilisée.</para>
   </section>
 
   <section>
     <title><indexterm class="singular">
         <primary>Glossaires</primary> <secondary>Trados MultiTerm</secondary>
-      </indexterm>Utiliser Trados MultiTerm</title>
+      </indexterm>Utilisation de Trados MultiTerm</title>
 
     <para>Les données exportées depuis Trados MultiTerm peuvent servir de glossaire <application>OmegaT</application> sans avoir à être modifiées, dès lors que leur extension de fichier est <filename>.tab</filename> et que le terme source et le terme cible sont placés respectivement dans le champ un et deux du glossaire. Si vous réalisez l'exportation en utilisant l'option « Exportation délimitée par tabulation », il sera nécessaire que vous supprimiez les 5 premières colonnes (Seq. Nr, Date de création, etc). La nouvelle version de MultiTerm prend en charge l'exportation au format TBX.</para>
   </section>
@@ -121,13 +120,13 @@
   <section>
     <title><indexterm class="singular">
         <primary>Glossaires</primary> <secondary>Problèmes avec les glossaires</secondary>
-      </indexterm>Les problèmes de glossaire les plus courants</title>
+      </indexterm>Problèmes de glossaire les plus courants</title>
 
-    <para><emphasis role="bold">Problème : aucun terme du glossaire n'est affiché - causes possibles :</emphasis></para>
+    <para><emphasis role="bold">Problème : aucun terme du glossaire n'est affiché. Causes possibles :</emphasis></para>
 
     <itemizedlist>
       <listitem>
-        <para>Pas de fichier glossaire trouvé dans le dossier « glossary ».</para>
+        <para>Aucun fichier glossaire n'a été trouvé dans le dossier « glossary ».</para>
       </listitem>
     </itemizedlist>
 
@@ -151,7 +150,7 @@
 
     <itemizedlist>
       <listitem>
-        <para>Il n'y a pas de correspondance EXACTE entre l'entrée glossaire et le texte source de votre document - exemple : différence singulier/pluriel.</para>
+        <para>Il n'y a pas de correspondance EXACTE entre l'entrée glossaire et le texte source de votre document (exemple : différence singulier/pluriel).</para>
       </listitem>
     </itemizedlist>
 
@@ -163,7 +162,7 @@
 
     <itemizedlist>
       <listitem>
-        <para>Il n'y a pas de terme dans le segment en cours qui corresponde à un terme du glossaire.</para>
+        <para>Aucun terme dans le segment en cours ne correspond à un terme du glossaire.</para>
       </listitem>
     </itemizedlist>
 
@@ -173,7 +172,7 @@
       </listitem>
     </itemizedlist>
 
-    <para><emphasis role="bold">Problème : Dans le volet Glossaires, certains caractères ne sont pas affichés correctement</emphasis></para>
+    <para><emphasis role="bold">Problème : dans le volet Glossaires, certains caractères ne sont pas affichés correctement</emphasis></para>
 
     <itemizedlist>
       <listitem>

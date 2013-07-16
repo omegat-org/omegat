@@ -15,7 +15,7 @@
     <para>Une fois le fichier <filename>MainMenuShortcuts.properties</filename> modifié, <application>OmegaT</application> doit être redémarré afin de pouvoir prendre en compte les nouveaux raccourcis.</para>
 
     <para>La syntaxe de la définition d'un raccourci est la suivante : <code>&lt;code de l'élément du menu&gt;=&lt;raccourci&gt;</code>, sachant que <emphasis>&lt;code de l'élément du menu&gt;</emphasis> est un code précis que vous pourrez trouver dans les tableaux ci-dessous et que <emphasis>&lt;raccourci&gt;</emphasis> est une combinaison de touches spécifiée par l'utilisateur<footnote>
-        <para>La syntaxe complète des touches (raccourcis) est définie dans le manuel Java 1.6 édité par Oracle (bas de la page) : <ulink url="http://docs.oracle.com/javase/6/docs/api/javax/swing/KeyStroke.html">Java 1.6 keystrokes shortcuts</ulink></para>
+        <para>La syntaxe complète des touches (raccourcis) est définie dans la documentation Java 1.6 éditée par Oracle (bas de la page) : <ulink url="http://docs.oracle.com/javase/6/docs/api/javax/swing/KeyStroke.html">Java 1.6 keystrokes shortcuts</ulink></para>
       </footnote>.</para>
 
     <para>&lt;raccourci&gt; doit être écrit sous la forme suivante : 0 ou plus <code>&lt;modificateur&gt;</code> suivit par 0 ou 1 <code>&lt;événement&gt;</code> suivit par 1 <code>&lt;touche&gt;</code>, sachant que :<itemizedlist>
@@ -32,7 +32,7 @@
 
         <listitem>
           <para>et <code>&lt;touche&gt;</code> peut désigner n'importe qu'elle touche disponible sur votre clavier<footnote>
-              <para>Les événements de touche (keyevents) possibles sont listés dans ce manuel Java 1.6 édité par Oracle: <ulink url="http://docs.oracle.com/javase/6/docs/api/java/awt/event/KeyEvent.html">Java 1.6 keyEvents description</ulink></para>
+              <para>Les événements de touche (keyevents) possibles sont listés dans cette documentation Java 1.6 éditée par Oracle : <ulink url="http://docs.oracle.com/javase/6/docs/api/java/awt/event/KeyEvent.html">Java 1.6 keyEvents description</ulink></para>
             </footnote>.</para>
         </listitem>
       </itemizedlist></para>
@@ -850,7 +850,7 @@
 
         <tbody>
           <row>
-            <entry>Manuel de l'utilisateur...</entry>
+            <entry>Guide de l'utilisateur...</entry>
 
             <entry><keycap>F1</keycap></entry>
 

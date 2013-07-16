@@ -29,7 +29,7 @@
          <div class="titlepage">
             <div>
                <div>
-                  <h1 class="title"><a name="chapter.formatted.text"></a>Chapitre&nbsp;12.&nbsp;Travailler avec un texte formaté<a class="indexterm" name="d0e6094"></a><a class="indexterm" name="d0e6099"></a></h1>
+                  <h1 class="title"><a name="chapter.formatted.text"></a>Chapitre&nbsp;12.&nbsp;Travailler avec un texte formaté<a class="indexterm" name="d0e6095"></a><a class="indexterm" name="d0e6100"></a></h1>
                </div>
             </div>
          </div>
@@ -39,14 +39,14 @@
                <dt><span class="section"><a href="chapter.formatted.text.html#tag.operations">2. Fonctionnement des balises</a></span></dt>
                <dt><span class="section"><a href="chapter.formatted.text.html#tag.group.nesting">3. Imbrication de groupes de balises</a></span></dt>
                <dt><span class="section"><a href="chapter.formatted.text.html#tag.group.overlapping">4. Chevauchement des groupes de balises</a></span></dt>
-               <dt><span class="section"><a href="chapter.formatted.text.html#d0e6245">5. Options de validation des balises</a></span></dt>
+               <dt><span class="section"><a href="chapter.formatted.text.html#d0e6246">5. Options de validation des balises</a></span></dt>
                <dt><span class="section"><a href="chapter.formatted.text.html#tag.group.validation">6. Validation des groupes de balises</a></span></dt>
                <dt><span class="section"><a href="chapter.formatted.text.html#hints.for.tag.management">7. Astuces pour la gestion des balises</a></span></dt>
             </dl>
          </div>
          <p>Les informations de formatage présentes dans le fichier source doivent généralement être recopiées dans le fichier cible.
             Les informations de formatage en ligne rendues possibles par les formats pris en charge (en particulier DocBook, HTML, XHTML,
-            Open Document Format(ODF) et Office Open XML (MS Office 2007 et versions ultérieures) à l'heure de la rédaction de ce manuel)
+            Open Document Format (ODF) et Office Open XML (MS Office 2007 et versions ultérieures) à l'heure de la rédaction de ce guide)
             sont affichées sous forme de balises dans OmegaT. Normalement, lorsque plusieurs textes sont comparés pour établir des correspondances,
             les balises sont ignorées. Les balises reproduites dans le segment traduit seront présentes dans le document traduit.
          </p>
@@ -54,22 +54,22 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="formatting.tags"></a>1.&nbsp;Balises de formatage<a class="indexterm" name="d0e6109"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="formatting.tags"></a>1.&nbsp;Balises de formatage<a class="indexterm" name="d0e6110"></a></h2>
                   </div>
                </div>
             </div>
-            <p><a class="indexterm" name="d0e6113"></a><span class="bold"><strong>Dénomination des balises :</strong></span></p>
+            <p><a class="indexterm" name="d0e6114"></a><span class="bold"><strong>Dénomination des balises :</strong></span></p>
             <p>Les balises sont composées d'un à trois caractères et d'un numéro. La numérotation unique permet de regrouper ensemble les
                balises qui sont correspondantes et de différencier les balises qui ont le même raccourci mais sont en fait différentes. Les
                raccourcis utilisés tentent de rappeler le sens de la balise (par exemple b pour bold (gras), i pour italique, etc.)
             </p>
-            <p><a class="indexterm" name="d0e6123"></a><span class="bold"><strong>Numérotation des balises :</strong></span></p>
+            <p><a class="indexterm" name="d0e6124"></a><span class="bold"><strong>Numérotation des balises :</strong></span></p>
             <p>Les balises sont numérotées par ordre croissant en fonction de leur groupe de balises. Dans ce contexte, les «&nbsp;groupes de
                balises&nbsp;» représentent une balise unique (telle que &lt;i0&gt; et &lt;/i0&gt;). À l'intérieur d'un segment, le premier groupe (unique
                ou double) reçoit le numéro 0, le deuxième le numéro 1, etc. ( Le premier exemple ci-dessous présente 3 groupes de balises
                (un double, un unique puis un autre double), le second exemple n'en présente qu'un (double).
             </p>
-            <p><a class="indexterm" name="d0e6133"></a><span class="bold"><strong>Uniques et doubles :</strong></span></p>
+            <p><a class="indexterm" name="d0e6134"></a><span class="bold"><strong>Uniques et doubles :</strong></span></p>
             <p>Les balises sont toujours soit uniques, soit doubles. Les balises uniques indiquent les informations de formatage n'affectant
                pas le texte avoisinant (un espace supplémentaire ou un retour à la ligne par exemple).
             </p>
@@ -89,7 +89,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="tag.operations"></a>2.&nbsp;Fonctionnement des balises<a class="indexterm" name="d0e6158"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="tag.operations"></a>2.&nbsp;Fonctionnement des balises<a class="indexterm" name="d0e6159"></a></h2>
                   </div>
                </div>
             </div>
@@ -97,7 +97,7 @@
                La règle de base veut que l'on conserve l'ordre de la séquence de balises. Cependant, si certaines règles sont respectées
                scrupuleusement, il est possible de déroger à cette règle.
             </p>
-            <p><span class="bold"><strong><a class="indexterm" name="d0e6167"></a>Duplication des balises :</strong></span></p>
+            <p><span class="bold"><strong><a class="indexterm" name="d0e6168"></a>Duplication des balises :</strong></span></p>
             <p>Pour dupliquer un groupe de balises, il suffit de les copier à l'emplacement de votre choix. Gardez bien à l'esprit que pour
                une paire de balises, la balise ouvrante doit précéder la balise fermante. Le formatage réprésenté par le groupe que vous
                avez dupliqué sera appliqué aux deux sections.
@@ -106,7 +106,7 @@
             <p><code class="literal">&lt;b0&gt;Ce formatage&lt;/b0&gt; va être dupliqué ici.</code></p>
             <p>Après la duplication :</p>
             <p><code class="literal">&lt;b0&gt;Ce formatage&lt;/b0&gt; a été &lt;b0&gt;dupliqué ici&lt;/b0&gt;.&lt;segment 0001&gt;</code></p>
-            <p><span class="bold"><strong><a class="indexterm" name="d0e6187"></a>Suppression des groupes de balises :</strong></span></p>
+            <p><span class="bold"><strong><a class="indexterm" name="d0e6188"></a>Suppression des groupes de balises :</strong></span></p>
             <p>Pour supprimer des groupes de balises, il suffit de les retirer du segment. Gardez bien à l'esprit que pour une paire de balises,
                la balise ouvrante et la balise fermante doivent être toutes les deux supprimées afin de s'assurer que toute trace du formatage
                a été correctement effacée. Dans le cas contraire, le fichier risquerait d'être endommagé. En supprimant un groupe de balises,
@@ -121,7 +121,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="tag.group.nesting"></a>3.&nbsp;Imbrication de groupes de balises<a class="indexterm" name="d0e6208"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="tag.group.nesting"></a>3.&nbsp;Imbrication de groupes de balises<a class="indexterm" name="d0e6209"></a></h2>
                   </div>
                </div>
             </div>
@@ -140,7 +140,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="tag.group.overlapping"></a>4.&nbsp;Chevauchement des groupes de balises<a class="indexterm" name="d0e6228"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="tag.group.overlapping"></a>4.&nbsp;Chevauchement des groupes de balises<a class="indexterm" name="d0e6229"></a></h2>
                   </div>
                </div>
             </div>
@@ -156,7 +156,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="d0e6245"></a>5.&nbsp;Options de validation des balises
+                     <h2 class="title" style="clear: both"><a name="d0e6246"></a>5.&nbsp;Options de validation des balises
                      </h2>
                   </div>
                </div>
@@ -213,12 +213,12 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="tag.group.validation"></a>6.&nbsp;Validation des groupes de balises<a class="indexterm" name="d0e6289"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="tag.group.validation"></a>6.&nbsp;Validation des groupes de balises<a class="indexterm" name="d0e6290"></a></h2>
                   </div>
                </div>
             </div>
             <p>L'option de validation des balises détecte les modifications survenues dans la séquence de balises (que ce changement soit
-               délibéré ou accidentel) et affiche les segments concernés. Lancer cette option – <span class="guimenuitem">Ctrl+T<a class="indexterm" name="d0e6298"></a></span> - ouvre une fenêtre qui liste tous les segments du fichier contenant des balises qui pourraient être altérées ou fausses
+               délibéré ou accidentel) et affiche les segments concernés. Lancer cette option – <span class="guimenuitem">Ctrl+T<a class="indexterm" name="d0e6299"></a></span> - ouvre une fenêtre qui liste tous les segments du fichier contenant des balises qui pourraient être altérées ou fausses
                dans les segments traduits. L'option de validation des balises permet de réparer les balises et de recréer les documents cibles
                facilement. La fenêtre qui s'ouvre quand <span class="guimenuitem">Ctrl+T</span> est appuyé se présente sous la forme d'un tableau à 3 colonnes avec un lien vers le segment, sa partie originale et sa partie
                cible
@@ -239,7 +239,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="hints.for.tag.management"></a>7.&nbsp;Astuces pour la gestion des balises<a class="indexterm" name="d0e6323"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="hints.for.tag.management"></a>7.&nbsp;Astuces pour la gestion des balises<a class="indexterm" name="d0e6324"></a></h2>
                   </div>
                </div>
             </div>

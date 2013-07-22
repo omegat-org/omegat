@@ -32,11 +32,7 @@ import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.Transferable;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
@@ -50,8 +46,8 @@ import org.omegat.core.data.TMXEntry;
 import org.omegat.core.spellchecker.SpellCheckerMarker;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
-import org.omegat.util.PatternConsts;
 import org.omegat.util.StaticUtils;
+import org.omegat.util.TagUtil;
 import org.omegat.util.gui.UIThreadsUtil;
 
 /**
@@ -351,32 +347,13 @@ public class EditorPopups {
                 return;
             }
 
-            List<String> allTags = new ArrayList<String>();
-            // insert tags
-            SourceTextEntry ste = Core.getEditor().getCurrentEntry();
-            allTags.addAll(Arrays.asList(ste.getProtectedParts().getParts()));
-            // insert other placeholders
-            // TODO: need to change after all filters will support protected
-            // parts
-            String sourceText = Core.getEditor().getCurrentEntry().getSrcText();
-            Pattern placeholderPattern = PatternConsts.getPlaceholderPattern();
-            Matcher placeholderMatcher = placeholderPattern.matcher(sourceText);
-            while (placeholderMatcher.find()) {
-                if (!allTags.contains(placeholderMatcher.group(0))) {
-                    allTags.add(placeholderMatcher.group(0));
-                }
-            }
-
-            String tr = Core.getEditor().getCurrentTranslation();
-            for (final String tag : allTags) {
-                if (!tr.contains(tag)) {
-                    JMenuItem item = menu.add(StaticUtils.format(OStrings.getString("TF_MENU_EDIT_TAG_INSERT_N"), tag));
-                    item.addActionListener(new ActionListener() {
-                        public void actionPerformed(ActionEvent e) {
-                            Core.getEditor().insertText(tag);
-                        }
-                    });
-                }
+            for (final String tag : TagUtil.getAllTagsMissingFromTarget()) {
+                JMenuItem item = menu.add(StaticUtils.format(OStrings.getString("TF_MENU_EDIT_TAG_INSERT_N"), tag));
+                item.addActionListener(new ActionListener() {
+                    public void actionPerformed(ActionEvent e) {
+                        Core.getEditor().insertText(tag);
+                    }
+                });
             }
             menu.addSeparator();
         }

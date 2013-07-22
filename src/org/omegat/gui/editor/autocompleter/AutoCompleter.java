@@ -42,10 +42,12 @@ import javax.swing.text.BadLocationException;
 
 import org.omegat.tokenizer.ITokenizer;
 import org.omegat.gui.editor.EditorTextArea3;
+import org.omegat.gui.editor.TagAutoCompleterView;
 import org.omegat.gui.glossary.GlossaryAutoCompleterView;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
 import org.omegat.util.StaticUtils;
+import org.omegat.util.TagUtil;
 import org.omegat.util.Token;
 
 /**
@@ -85,6 +87,7 @@ public class AutoCompleter {
     public AutoCompleter(EditorTextArea3 editor) { 
         // add any views here
         views.add(new GlossaryAutoCompleterView(this));
+        views.add(new TagAutoCompleterView(this));
         
         this.editor = editor; 
         
@@ -300,7 +303,7 @@ public class AutoCompleter {
                 if (tokens.length != 0) {
                     Token lastToken = tokens[tokens.length - 1];
                     String lastString = prevText.substring(lastToken.getOffset()).trim();
-                    if (lastString.length() > 0) {
+                    if (lastString.length() > 0 && !TagUtil.getAllTagsInSource().contains(lastString)) {
                         wordChunk = lastString;
                         wordChunkStart = translationStart + lastToken.getOffset();
                     }

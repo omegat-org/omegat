@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 3.0.4 update 1
 ----------------------------------------------------------------------
-   2 Enhancements
+   3 Enhancements
    4 Bug fixes
    0 Localisation update
 ----------------------------------------------------------------------
@@ -15,6 +15,9 @@
  Other enhancements:
 
   - Plugin loading is now logged, to help troubleshoot issues
+
+  - The autocompleter popup has a new page, to insert grouped
+missing tags
 
   Bug fixes: 
 

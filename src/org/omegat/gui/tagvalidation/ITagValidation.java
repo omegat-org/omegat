@@ -28,6 +28,7 @@ package org.omegat.gui.tagvalidation;
 import java.util.List;
 
 import org.omegat.core.data.SourceTextEntry;
+import org.omegat.core.tagvalidation.ErrorReport;
 
 /**
  * Interface for tag validation.

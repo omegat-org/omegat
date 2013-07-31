@@ -195,6 +195,10 @@ public class PatternConsts {
      * pattern for text that should be removed from translation. Can be null!
      */
     private static Pattern REMOVE;
+    /**
+     * Pattern for text that should be considered a custom tag. Can be null!
+     */
+    private static Pattern CUSTOM_TAGS;
 
     /**
      * Returns the placeholder pattern (OmegaT tags, printf tags, java MessageFomat tags, custom tags, combined according to user configuration)
@@ -244,5 +248,22 @@ public class PatternConsts {
      */
     public static void updateRemovePattern() {
         REMOVE = null;
+    }
+
+    public static Pattern getCustomTagPattern() {
+        if (CUSTOM_TAGS == null) {
+            String customTagsRegex = Preferences.getPreferenceDefaultAllowEmptyString(Preferences.CHECK_CUSTOM_PATTERN);
+            if (!"".equalsIgnoreCase(customTagsRegex)) {
+                CUSTOM_TAGS = Pattern.compile(customTagsRegex);
+            }
+        }
+        return CUSTOM_TAGS;
+    }
+
+    /**
+     * Resets the remove pattern. Use it when the user has changed tagvalidation configuration.
+     */
+    public static void updateCustomTagPattern() {
+        CUSTOM_TAGS = null;
     }
 }

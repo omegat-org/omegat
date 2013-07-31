@@ -317,6 +317,7 @@ public class TagValidationOptionsDialog extends JDialog {
             Preferences.setPreference(Preferences.TAGS_VALID_REQUIRED, cbTagsValidRequired.isSelected());
             PatternConsts.updatePlaceholderPattern();
             PatternConsts.updateRemovePattern();
+            PatternConsts.updateCustomTagPattern();
             doClose(RET_OK);
         }
     }// GEN-LAST:event_okButtonActionPerformed

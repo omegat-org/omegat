@@ -23,7 +23,7 @@
  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  **************************************************************************/
 
-package org.omegat.gui.tagvalidation;
+package org.omegat.core.tagvalidation;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -44,19 +44,19 @@ import org.omegat.util.OStrings;
  */
 public class ErrorReport {
 
-    final Map<String, TagError> srcErrors = new HashMap<String, TagError>();
-    final Map<String, TagError> transErrors = new HashMap<String, TagError>();
+    final public Map<String, TagError> srcErrors = new HashMap<String, TagError>();
+    final public Map<String, TagError> transErrors = new HashMap<String, TagError>();
 
-    final SourceTextEntry ste;
-    final String source;
-    final String translation;
-    final int entryNum;
+    final public SourceTextEntry ste;
+    final public String source;
+    final public String translation;
+    final public int entryNum;
 
     public ErrorReport(SourceTextEntry ste, String translation) {
         this.ste = ste;
-        this.source = ste.getSrcText();
+        this.source = ste != null ? ste.getSrcText() : null;
         this.translation = translation;
-        this.entryNum = ste.entryNum();
+        this.entryNum = ste != null ? ste.entryNum() : -1;
     }
 
     public boolean isEmpty() {

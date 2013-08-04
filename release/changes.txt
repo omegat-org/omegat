@@ -3,7 +3,7 @@
 ----------------------------------------------------------------------
    0 Enhancement
    1 Bug fix
-   0 Localisation update
+   1 Localisation update
 ----------------------------------------------------------------------
 3.0.4 update 2 vs. 3.0.4 update 1
 
@@ -11,6 +11,10 @@
 
   - java.lang.IndexOutOfBoundsException during strict tag validation 
   http://sourceforge.net/p/omegat/bugs/608/
+
+  Localisation updates:
+
+  - Italian localisation updated to 3.0.4 (UI)
 
 ----------------------------------------------------------------------
  OmegaT 3.0.4 update 1

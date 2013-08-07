@@ -1,4 +1,18 @@
 ----------------------------------------------------------------------
+ OmegaT 2.6.3 update 4
+----------------------------------------------------------------------
+   0 Enhancement
+   1 Bug fix
+   0 Localisation update
+----------------------------------------------------------------------
+2.6.3 update 4 vs. 2.6.3 update 3
+
+  Bug fixes: 
+
+  - Visible tags (wp14:pctWidth" and "wp14:pctHeight") in the Editor
+could prevent opening Word target documents if the content was changed
+
+----------------------------------------------------------------------
  OmegaT 2.6.3 update 3
 ----------------------------------------------------------------------
    0 Enhancement

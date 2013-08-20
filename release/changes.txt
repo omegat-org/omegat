@@ -2,7 +2,7 @@
  OmegaT 2.6.3 update 4
 ----------------------------------------------------------------------
    0 Enhancement
-   1 Bug fix
+   2 Bug fixes
    0 Localisation update
 ----------------------------------------------------------------------
 2.6.3 update 4 vs. 2.6.3 update 3
@@ -11,6 +11,9 @@
 
   - Visible tags (wp14:pctWidth" and "wp14:pctHeight") in the Editor
 could prevent opening Word target documents if the content was changed
+
+  - <releaseinfo> not declared as a paragraph tag in the DocBook filter 
+  https://sourceforge.net/p/omegat/feature-requests/883/
 
 ----------------------------------------------------------------------
  OmegaT 2.6.3 update 3

@@ -50,7 +50,8 @@ public class DocBookDialect extends DefaultXMLDialect {
                 "firstname", "surname", "affiliation", "orgname", "address", "email", "edition", "pubdate",
                 "copyright", "year", "holder", "isbn", "keywordset", "keyword", "preface", "title", "para",
                 "chapter", "table", "tgroup", "thead", "tbody", "row", "entry", "revhistory", "revision",
-                "revnumber", "date", "authorinitials", "revremark", "itemizedlist", "listitem", "member", });
+                "revnumber", "date", "authorinitials", "revremark", "itemizedlist", "listitem", "member", 
+                "releaseinfo"});
 
         defineOutOfTurnTags(new String[] { "indexterm", });
 

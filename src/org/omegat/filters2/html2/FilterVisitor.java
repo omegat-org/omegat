@@ -8,7 +8,7 @@
                2010 Didier Briel
                2011 Didier Briel, Martin Fleurke
                2012 Didier Briel, Martin Fleurke
-               2013 Didier Briel
+               2013 Didier Briel, Alex Buloichik
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 

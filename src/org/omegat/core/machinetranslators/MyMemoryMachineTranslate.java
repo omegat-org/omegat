@@ -70,9 +70,7 @@ public class MyMemoryMachineTranslate extends AbstractMyMemoryTranslate {
         // Get MyMemory response in TMX format
         try {
             tmxResponse = getMyMemoryResponse(sLang, tLang, text, "tmx");
-        }
-        catch(Exception e)
-        {
+        } catch(Exception e) { 
             return e.getLocalizedMessage();
         }
         
@@ -98,35 +96,36 @@ public class MyMemoryMachineTranslate extends AbstractMyMemoryTranslate {
         String MTQuery = String.format("/tmx/body/tu[@creationid='MT!']/tuv[@lang='%s']/seg/text()", targetLang); 
         Object result = null; 
         
-		XPathFactory xPathFactory = XPathFactory.newInstance();
+	XPathFactory xPathFactory = XPathFactory.newInstance();
         XPath xpath = xPathFactory.newXPath();
         
         try {
-	        XPathExpression expr = xpath.compile(MTQuery);
-	        result = expr.evaluate(document, XPathConstants.NODE);
-	        System.out.println(result);
+            XPathExpression expr = xpath.compile(MTQuery);
+	    result = expr.evaluate(document, XPathConstants.NODE);
+	    System.out.println(result);
 	        
-	        Node node = (Node)result;
-	        MTresponse = node.getTextContent();
-        }
-        catch(Exception ex) {       	
-        	// silently catch the exception and provide details to user
-        	MTresponse = "Error extracting MT result from MyMemory response: " + ex.getLocalizedMessage();
+	    Node node = (Node)result;
+	    MTresponse = node.getTextContent();
+        } catch(Exception ex) {       	
+            // silently catch the exception and provide details to user
+            MTresponse = OStrings.getString("MT_ENGINE_MYMEMORY_MACHINE_ERROR") + ex.getLocalizedMessage();;                      
         }
         
-		return MTresponse;
-	}
+	return MTresponse;
+    }
 
 	  
 	/**
 	 * Builds the URL for the XML query
 	 */
-	protected String buildMyMemoryUrl(Language sLang, Language tLang, String text, String format) throws UnsupportedEncodingException {
-    	String sourceLang = mymemoryCode(sLang);
-    	String targetLang = mymemoryCode(tLang);
-    	String url2 = GT_URL2.replace("#sourceLang#", sourceLang).replace("#targetLang#", targetLang).replace("#format#", format);
-    	String url = GT_URL + URLEncoder.encode(text, "UTF-8") + url2;
-    	
-    	return url;
-	}   
+    @Override
+     protected String buildMyMemoryUrl(Language sLang, Language tLang, String text, String format) throws UnsupportedEncodingException {
+        String sourceLang = mymemoryCode(sLang);
+        String targetLang = mymemoryCode(tLang);
+        String url2 = GT_URL2.replace("#sourceLang#", sourceLang).replace("#targetLang#", targetLang).replace("#format#", format);
+        String url = GT_URL + URLEncoder.encode(text, "UTF-8") + url2;
+    
+        return url;
+    }   
+    
 }

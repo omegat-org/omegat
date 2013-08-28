@@ -372,7 +372,7 @@ public class Main {
             System.exit(1);
         }
 
-        System.out.println(OStrings.getString("INITIALIZING"));
+        System.out.println(OStrings.getString("CONSOLE_INITIALIZING"));
         try {
             Core.initializeConsole(params);
         } catch (Throwable ex) {
@@ -391,7 +391,7 @@ public class Main {
 
             TMXWriter.buildTMXFile(tmxFile, false, false, p.getProjectProperties(), data);
 
-            System.out.println(OStrings.getString("FINISHED"));
+            System.out.println(OStrings.getString("CONSOLE_FINISHED"));
         } catch (Exception e) {
             System.err.println("An error has occured: " + e.toString());
             System.exit(1);

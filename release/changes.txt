@@ -386,7 +386,7 @@ OmegaT failed to load the valid ones
  OmegaT 2.6.3 update 4
 ----------------------------------------------------------------------
    0 Enhancement
-   2 Bug fixes
+   3 Bug fixes
    0 Localisation update
 ----------------------------------------------------------------------
 2.6.3 update 4 vs. 2.6.3 update 3
@@ -398,6 +398,11 @@ could prevent opening Word target documents if the content was changed
 
   - <releaseinfo> not declared as a paragraph tag in the DocBook filter 
   https://sourceforge.net/p/omegat/feature-requests/883/
+
+  - When launching OmegaT from the command line in align mode 
+(--mode=console-align), an error message occured: 
+Exception in thread "main" java.util.MissingResourceException: Can't find 
+resource for bundle java.util.PropertyResourceBundle, key INITIALIZING
 
 ----------------------------------------------------------------------
  OmegaT 2.6.3 update 3

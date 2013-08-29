@@ -5,6 +5,7 @@
 
  Copyright (C) 2010 Alex Buloichik, Didier Briel
                2011 Briac Pilpre, Alex Buloichik
+               2013 Didier Briel
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -34,7 +35,6 @@ import java.util.regex.Pattern;
 
 import org.omegat.util.Language;
 import org.omegat.util.OStrings;
-import org.omegat.util.PatternConsts;
 import org.omegat.util.Preferences;
 import org.omegat.util.WikiGet;
 
@@ -127,28 +127,7 @@ public class Google2Translate extends BaseTranslate {
             tr = matcher.group(1);
         }
 
-        // Attempt to clean spaces added by GT
-        // Spaces after
-        Matcher tag = PatternConsts.OMEGAT_TAG_SPACE.matcher(tr);
-        while (tag.find()) {
-            String searchTag = tag.group();
-            if (text.indexOf(searchTag) == -1) { // The tag didn't appear with a
-                // trailing space in the source text
-                String replacement = searchTag.substring(0, searchTag.length() - 1);
-                tr = tr.replace(searchTag, replacement);
-            }
-        }
-
-        // Spaces before
-        tag = PatternConsts.SPACE_OMEGAT_TAG.matcher(tr);
-        while (tag.find()) {
-            String searchTag = tag.group();
-            if (text.indexOf(searchTag) == -1) { // The tag didn't appear with a
-                // leading space in the source text
-                String replacement = searchTag.substring(1, searchTag.length());
-                tr = tr.replace(searchTag, replacement);
-            }
-        }
+        tr = cleanSpacesAroundTags(tr, text);
 
         return tr;
     }

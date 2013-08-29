@@ -4,7 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2010 Alex Buloichik, Ibai Lakunza Velasco, Didier Briel
-               2013 Martin Wunderlich
+               2013 Martin Wunderlich, Didier Briel
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -85,8 +85,11 @@ public class MyMemoryMachineTranslate extends AbstractMyMemoryTranslate {
         Document document = factory.newDocumentBuilder().parse(source);
         
         // Extract MT response and remove MT TU from XML
-        String targetLangCode =  tLang.getLocaleCode().replace('_', '-').toUpperCase(); // MyMemory is using hyphens instead of underscores and uppercase codes in 4-letter locale-codes
+        // MyMemory is using hyphens instead of underscores and uppercase codes in 4-letter locale-codes
+        String targetLangCode =  tLang.getLocaleCode().replace('_', '-').toUpperCase(); 
         machineTranslationMatch = extractMTresponse(document, targetLangCode);
+        
+        machineTranslationMatch = cleanSpacesAroundTags(machineTranslationMatch, text);
         
         return machineTranslationMatch; 
     }
@@ -116,9 +119,9 @@ public class MyMemoryMachineTranslate extends AbstractMyMemoryTranslate {
     }
 
 	  
-	/**
-	 * Builds the URL for the XML query
-	 */
+    /**
+     * Builds the URL for the XML query
+     */
     @Override
      protected String buildMyMemoryUrl(Language sLang, Language tLang, String text, String format) throws UnsupportedEncodingException {
         String sourceLang = mymemoryCode(sLang);

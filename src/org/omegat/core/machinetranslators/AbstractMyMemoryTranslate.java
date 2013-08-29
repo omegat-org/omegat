@@ -94,7 +94,7 @@ public abstract class AbstractMyMemoryTranslate extends BaseTranslate {
             String sourceSeg = "";
             String targetSeg = "";
             String targetSegQueryString = XPATH_QUERY.replace("#langCode#", tLang.getLanguageCode());
-            String sourceSegQueryString = XPATH_QUERY.replace("#langCode#", tLang.getLanguageCode());
+            String sourceSegQueryString = XPATH_QUERY.replace("#langCode#", sLang.getLanguageCode());
             
             String bestTranslation = "";
         
@@ -122,11 +122,15 @@ public abstract class AbstractMyMemoryTranslate extends BaseTranslate {
             return bestTranslation;
 	}
 
-	private String cleanUpText(String str) {
+	protected String cleanUpText(String str) {
 	       str = str.replace("&quot;", "\"");
 	       str = str.replace("&nbsp;", "\u00A0");
 	       str = str.replace("&amp;", "&");
 	       str = str.replace("&apos;", "'");
+	       str = str.replace("&#39;", "'");
+	       str = str.replace("&lt;", "<");
+	       str = str.replace("&gt;", ">");
+	       str = str.trim();
 	       
 		return str;
 	}

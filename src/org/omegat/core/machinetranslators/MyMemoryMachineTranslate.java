@@ -93,25 +93,26 @@ public class MyMemoryMachineTranslate extends AbstractMyMemoryTranslate {
     
     private String extractMTresponse(Document document, String targetLang) {
         String MTresponse = "";
-        String MTQuery = String.format("/tmx/body/tu[@creationid='MT!']/tuv[@lang='%s']/seg/text()", targetLang); 
+        String MTQuery = String.format("/tmx/body/tu[@creationid='MT!']/tuv[starts-with(@lang, '%s')]/seg/text()", targetLang); 
         Object result = null; 
         
-	XPathFactory xPathFactory = XPathFactory.newInstance();
+        XPathFactory xPathFactory = XPathFactory.newInstance();
         XPath xpath = xPathFactory.newXPath();
         
         try {
             XPathExpression expr = xpath.compile(MTQuery);
-	    result = expr.evaluate(document, XPathConstants.NODE);
-	    System.out.println(result);
-	        
-	    Node node = (Node)result;
-	    MTresponse = node.getTextContent();
+            result = expr.evaluate(document, XPathConstants.NODE);
+        	    
+            Node node = (Node)result;
+            MTresponse = node.getTextContent();
         } catch(Exception ex) {       	
             // silently catch the exception and provide details to user
-            MTresponse = OStrings.getString("MT_ENGINE_MYMEMORY_MACHINE_ERROR") + ex.getLocalizedMessage();;                      
+            MTresponse = OStrings.getString("MT_ENGINE_MYMEMORY_MACHINE_ERROR") + ex.getMessage();;                      
         }
         
-	return MTresponse;
+        MTresponse = cleanUpText(MTresponse);
+        
+        return MTresponse;
     }
 
 	  

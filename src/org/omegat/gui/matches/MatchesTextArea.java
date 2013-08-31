@@ -186,6 +186,7 @@ public class MatchesTextArea extends EntryInfoThreadPane<List<NearString>> imple
     /**
      * {@inheritDoc}
      */
+    @Override
     public NearString getActiveMatch() {
         UIThreadsUtil.mustBeSwingThread();
 
@@ -207,6 +208,7 @@ public class MatchesTextArea extends EntryInfoThreadPane<List<NearString>> imple
      * @param targetMatch The target of the match
      * @return The target match with numbers possibly substituted
      */
+    @Override
     public String substituteNumbers(String source, String sourceMatch, String targetMatch) {
 
         ITokenizer sourceTok = Core.getProject().getSourceTokenizer();
@@ -343,6 +345,7 @@ public class MatchesTextArea extends EntryInfoThreadPane<List<NearString>> imple
      * Sets the index of an active match. It basically highlights the fuzzy
      * match string selected. (numbers start from 0)
      */
+    @Override
     public void setActiveMatch(int activeMatch) {
         UIThreadsUtil.mustBeSwingThread();
 
@@ -492,6 +495,7 @@ public class MatchesTextArea extends EntryInfoThreadPane<List<NearString>> imple
         JMenuItem item = popup.add(OStrings.getString("MATCHES_INSERT"));
         item.addActionListener(new ActionListener() {
             // the action: insert this match
+            @Override
             public void actionPerformed(ActionEvent e) {
                 setActiveMatch(clickedItem);
                 mw.doInsertTrans();
@@ -500,6 +504,7 @@ public class MatchesTextArea extends EntryInfoThreadPane<List<NearString>> imple
 
         item = popup.add(OStrings.getString("MATCHES_REPLACE"));
         item.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent e) {
                 setActiveMatch(clickedItem);
                 mw.doRecycleTrans();
@@ -516,6 +521,7 @@ public class MatchesTextArea extends EntryInfoThreadPane<List<NearString>> imple
         if (StringUtil.isEmpty(proj)) {
             final IProject project = Core.getProject();
             item.addActionListener(new ActionListener() {
+                @Override
                 public void actionPerformed(ActionEvent e) {
                     /*
                      * Goto segment with contains matched source. Since it enough rarely executed code, it

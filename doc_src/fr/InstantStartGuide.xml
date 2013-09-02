@@ -14,7 +14,7 @@
         <primary>Menu Projet</primary> <secondary>Nouveau...</secondary>
       </indexterm>
 
-    <para>Pour pouvoir travailler avec OmegaT, commencez par créer un projet qui contiendra tous vos fichiers, notamment le fichier source, les mémoires de traduction, les glossaires ainsi que le fichier traduit. Dans le menu <guimenu>Projet</guimenu>, séléctionnez <menuchoice> <guimenuitem>Nouveau...</guimenuitem> </menuchoice> et saisissez le nom de votre projet. Mémorisez bien l'emplacement du projet car vous devrez y accéder ultérieurement.</para>
+    <para>Pour pouvoir travailler avec OmegaT, commencez par créer un projet qui contiendra tous vos fichiers, notamment le fichier source, les mémoires de traduction, les glossaires ainsi que le fichier traduit. Dans le menu <guimenu>Projet</guimenu>, sélectionnez <menuchoice> <guimenuitem>Nouveau...</guimenuitem> </menuchoice> et saisissez le nom de votre projet. Mémorisez bien l'emplacement du projet car vous devrez y accéder ultérieurement.</para>
 
     <para>Une fois le nom du projet défini, OmegaT ouvre la fenêtre <guilabel>Création du projet</guilabel>. Indiquez la langue du fichier source ainsi que la langue de la traduction, puis cliquez sur <guibutton>OK</guibutton> pour continuer.</para>
 

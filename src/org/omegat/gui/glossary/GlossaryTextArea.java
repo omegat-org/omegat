@@ -111,6 +111,7 @@ public class GlossaryTextArea extends EntryInfoThreadPane<List<GlossaryEntry>> {
         popup = new JPopupMenu();
         JMenuItem menuItem = new JMenuItem(OStrings.getString("GUI_GLOSSARYWINDOW_addentry"));
         menuItem.addActionListener(new ActionListener(){
+            @Override
             public void actionPerformed(ActionEvent e) {
                 Core.getGlossary().showCreateGlossaryEntryDialog();
             }
@@ -154,6 +155,7 @@ public class GlossaryTextArea extends EntryInfoThreadPane<List<GlossaryEntry>> {
      * Sets the list of glossary entries to show in the pane. Each element of the list should be an instance
      * of {@link GlossaryEntry}.
      */
+    @Override
     protected void setFoundResult(SourceTextEntry en, List<GlossaryEntry> entries) {
         UIThreadsUtil.mustBeSwingThread();
 
@@ -247,9 +249,11 @@ public class GlossaryTextArea extends EntryInfoThreadPane<List<GlossaryEntry>> {
         dialog.setVisible(true);
 
         dialog.addWindowFocusListener(new WindowFocusListener() {
+            @Override
             public void windowLostFocus(WindowEvent e) {
             }
 
+            @Override
             public void windowGainedFocus(WindowEvent e) {
                 String sel = Core.getEditor().getSelectedText();
                 if (!StringUtil.isEmpty(sel)) {
@@ -265,6 +269,7 @@ public class GlossaryTextArea extends EntryInfoThreadPane<List<GlossaryEntry>> {
         });
 
         dialog.addWindowListener(new WindowAdapter() {
+            @Override
             public void windowClosed(WindowEvent e) {
                 createGlossaryEntryDialog = null;
                 if (dialog.getReturnStatus() == CreateGlossaryEntry.RET_OK) {

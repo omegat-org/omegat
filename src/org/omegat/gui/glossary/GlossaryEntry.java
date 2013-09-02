@@ -100,6 +100,7 @@ public class GlossaryEntry {
         return m_com;
     }
 
+    @Override
     public String toString() {
         
         StringBuffer buf = new StringBuffer();

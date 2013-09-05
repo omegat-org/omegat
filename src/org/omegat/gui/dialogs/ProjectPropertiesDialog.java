@@ -918,7 +918,7 @@ public class ProjectPropertiesDialog extends JDialog {
         }
 
         // The writeable glossary file must end with .txt or utf8
-        if (glossaryFile && !str.endsWith(OConsts.EXT_TSV_TXT) &&!str.endsWith(OConsts.EXT_TSV_UTF8)) {
+        if (glossaryFile && !str.endsWith(OConsts.EXT_TSV_TXT) &&!str.endsWith(OConsts.EXT_TSV_UTF8) &&!str.endsWith(OConsts.EXT_TSV_DEF)) {
            str += OConsts.EXT_TSV_TXT; // Defaults to .txt
         }
 

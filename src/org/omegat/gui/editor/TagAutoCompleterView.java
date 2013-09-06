@@ -28,7 +28,6 @@ package org.omegat.gui.editor;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.omegat.core.Core;
 import org.omegat.tokenizer.DefaultTokenizer;
 import org.omegat.tokenizer.ITokenizer;
 import org.omegat.gui.editor.autocompleter.AutoCompleter;
@@ -58,16 +57,13 @@ public class TagAutoCompleterView extends AutoCompleterView {
             if (g.startsWith(wordChunk)) matchGroups.add(g);
         }
         
-        // For non-space-delimited languages, show all missing tags as
-        // suggestions for the case of no matching tags.
-        if (!Core.getProject().getProjectProperties().getTargetLanguage().isSpaceDelimited()
-                && matchGroups.size() == 0
-                && missingGroups.size() > 0) {
+        // If there are no partial matches, show all missing tags as suggestions.
+        if (matchGroups.isEmpty()) {
             completer.adjustInsertionPoint(wordChunk.length());
             return missingGroups;
         }
         
-        return missingGroups;
+        return matchGroups;
     }
 
     @Override

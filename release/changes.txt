@@ -2,7 +2,7 @@
  OmegaT 3.0.4 update 3
 ----------------------------------------------------------------------
    1 Enhancement
-   0 Bug fix
+   1 Bug fix
    0 Localisation update
 ----------------------------------------------------------------------
 3.0.4 update 2 vs. 3.0.4 update 1
@@ -11,6 +11,11 @@
 
   - The MyMemory machine translator has been separated into two 
 different options: MyMemory (machine) and MyMemory (human)
+
+  Bug fixes: 
+
+  - The search window search field did not always had focus on window
+opening on a Mac
 
 ----------------------------------------------------------------------
  OmegaT 3.0.4 update 2

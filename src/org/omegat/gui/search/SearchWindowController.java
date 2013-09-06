@@ -130,11 +130,10 @@ public class SearchWindowController {
         // update enabled/selected status of options
         updateOptionStatus();
 
-        form.m_searchField.requestFocus();
-
         initActions();
 
         form.setVisible(true);
+        form.m_searchField.requestFocus();
     }
 
     void initActions() {

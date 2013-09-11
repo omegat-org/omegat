@@ -152,7 +152,7 @@ public class XLIFFFilter extends XMLFilter {
     }
     
     /** 
-     * We're not actually checking whether it is a valid XLIFF file; we just need a place to call define.dialect. 
+     * We're not actually checking whether it is a valid XLIFF file; we just need a place to call defineDialect. 
      */
     @Override
     public boolean isFileSupported(File inFile, Map<String, String> config, FilterContext context) {
@@ -171,18 +171,21 @@ public class XLIFFFilter extends XMLFilter {
         return result;
     }
 
+    @Override
     public void tagStart(String path, Attributes atts) {
-        if (atts != null && "/xliff/file/body/trans-unit".equals(path)) {
+        if (atts != null && path.endsWith("trans-unit")){
             resname = atts.getValue("resname");
         }
     }
 
+    @Override
     public void tagEnd(String path) {
-        if ("/xliff/file/body/trans-unit".equals(path)) {
+        if (path.endsWith("trans-unit")){
             resname = null;
         }
     }
 
+    @Override
     public String translate(String entry, Shortcuts shortcutDetails) {
         if (entryParseCallback != null) {
             entryParseCallback.addEntry(null, entry, null, false, resname, null, this, shortcutDetails);

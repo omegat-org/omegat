@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 3.0.4 update 3
 ----------------------------------------------------------------------
-   1 Enhancement
+   2 Enhancements
    1 Bug fix
    0 Localisation update
 ----------------------------------------------------------------------
@@ -11,6 +11,9 @@
 
   - The MyMemory machine translator has been separated into two 
 different options: MyMemory (machine) and MyMemory (human)
+
+  - XLIFF filter: the <trans-unit> resname attribute is shown in the
+comment pane
 
   Bug fixes: 
 

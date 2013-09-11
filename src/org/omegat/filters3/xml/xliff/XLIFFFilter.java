@@ -5,7 +5,7 @@
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
                2007-2011 Didier Briel
-               2013 Didier Briel
+               2013 Didier Briel, Aaron Madlon-Kay
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -34,9 +34,11 @@ import java.util.Map;
 import org.omegat.core.Core;
 import org.omegat.filters2.FilterContext;
 import org.omegat.filters2.Instance;
+import org.omegat.filters2.Shortcuts;
 import org.omegat.filters3.xml.XMLFilter;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
+import org.xml.sax.Attributes;
 
 /**
  * Filter for XLIFF files.
@@ -44,6 +46,8 @@ import org.omegat.util.OStrings;
  * @author Didier Briel
  */
 public class XLIFFFilter extends XMLFilter {
+
+    private String resname;
 
     /**
      * Register plugin into OmegaT.
@@ -167,5 +171,27 @@ public class XLIFFFilter extends XMLFilter {
         return result;
     }
 
+    public void tagStart(String path, Attributes atts) {
+        if (atts != null && "/xliff/file/body/trans-unit".equals(path)) {
+            resname = atts.getValue("resname");
+        }
+    }
 
+    public void tagEnd(String path) {
+        if ("/xliff/file/body/trans-unit".equals(path)) {
+            resname = null;
+        }
+    }
+
+    public String translate(String entry, Shortcuts shortcutDetails) {
+        if (entryParseCallback != null) {
+            entryParseCallback.addEntry(null, entry, null, false, resname, null, this, shortcutDetails);
+            return entry;
+        } else if (entryTranslateCallback != null) {
+            String translation = entryTranslateCallback.getTranslation(null, entry, null);
+            return translation != null ? translation : entry;
+        } else {
+            return entry;
+        }
+    }
 }

@@ -146,7 +146,7 @@ public class MatchesTextArea extends EntryInfoThreadPane<List<NearString>> imple
 
         matches.addAll(newMatches);
         delimiters.add(0);
-        StringBuffer displayBuffer = new StringBuffer();
+        StringBuilder displayBuffer = new StringBuilder();
 
         MatchesVarExpansion template = new MatchesVarExpansion(Preferences.getPreferenceDefault(Preferences.EXT_TMX_MATCH_TEMPLATE, MatchesVarExpansion.DEFAULT_TEMPLATE));
         
@@ -305,7 +305,7 @@ public class MatchesTextArea extends EntryInfoThreadPane<List<NearString>> imple
             String percentage_s = Preferences.getPreferenceDefault(Preferences.BEST_MATCH_MINIMAL_SIMILARITY,
                     Preferences.BEST_MATCH_MINIMAL_SIMILARITY_DEFAULT);
             // <HP-experiment>
-            int percentage = 0;
+            int percentage;
             try {
                 // int
                 percentage = Integer.parseInt(percentage_s);
@@ -370,44 +370,44 @@ public class MatchesTextArea extends EntryInfoThreadPane<List<NearString>> imple
         
         // Apply sourceText styling
         if (sourcePos.get(activeMatch) != -1) {
-	        Token[] tokens = tokenizer.tokenizeAllExactly(match.source);
-	        // fix for bug 1586397
-	        byte[] attributes = match.attr;
-	        for (int i = 0; i < tokens.length; i++) {
-	            Token token = tokens[i];
-	            int tokstart = start + sourcePos.get(activeMatch) + token.getOffset();
-	            int toklength = token.getLength();
-	            if ((attributes[i] & StringData.UNIQ) != 0) {
-	                doc.setCharacterAttributes(tokstart, toklength, ATTRIBUTES_CHANGED, false);
-	            } else if ((attributes[i] & StringData.PAIR) != 0) {
-	                doc.setCharacterAttributes(tokstart, toklength, ATTRIBUTES_UNCHANGED, false);
-	            }
-	        }
+            Token[] tokens = tokenizer.tokenizeAllExactly(match.source);
+            // fix for bug 1586397
+            byte[] attributes = match.attr;
+            for (int i = 0; i < tokens.length; i++) {
+                Token token = tokens[i];
+                int tokstart = start + sourcePos.get(activeMatch) + token.getOffset();
+                int toklength = token.getLength();
+                if ((attributes[i] & StringData.UNIQ) != 0) {
+                    doc.setCharacterAttributes(tokstart, toklength, ATTRIBUTES_CHANGED, false);
+                } else if ((attributes[i] & StringData.PAIR) != 0) {
+                    doc.setCharacterAttributes(tokstart, toklength, ATTRIBUTES_UNCHANGED, false);
+                }
+            }
         }
         
         // Apply diff styling to ALL diffs, with colors only for activeMatch
         for (int i = 0; i < diffPos.size(); i++) {
-	        List<TextRun> diffInfo = diffInfos.get(i);
-	        if (diffPos.get(i) != -1 && diffInfo != null) {
-		        for (TextRun r : diffInfo) {
-		        	int tokstart = delimiters.get(i) + diffPos.get(i) + r.start;
-		        	switch (r.type) {
-		        	case DELETE:
-		        		doc.setCharacterAttributes(
-		        				tokstart,
-		        				r.length,
-		        				i == activeMatch ? ATTRIBUTES_DELETED_ACTIVE : ATTRIBUTES_DELETED_INACTIVE,
-		        				false);
-		        		break;
-		        	case INSERT:
-		        		doc.setCharacterAttributes(
-		        				tokstart,
-		        				r.length,
-		        				i == activeMatch ? ATTRIBUTES_INSERTED_ACTIVE : ATTRIBUTES_INSERTED_INACTIVE,
-		        				false);
-		        	}
-		        }
-	    	}
+            List<TextRun> diffInfo = diffInfos.get(i);
+            if (diffPos.get(i) != -1 && diffInfo != null) {
+                for (TextRun r : diffInfo) {
+                    int tokstart = delimiters.get(i) + diffPos.get(i) + r.start;
+                    switch (r.type) {
+                    case DELETE:
+                        doc.setCharacterAttributes(
+                            tokstart,
+                            r.length,
+                            i == activeMatch ? ATTRIBUTES_DELETED_ACTIVE : ATTRIBUTES_DELETED_INACTIVE,
+                            false);
+                        break;
+                    case INSERT:
+                        doc.setCharacterAttributes(
+                            tokstart,
+                            r.length,
+                            i == activeMatch ? ATTRIBUTES_INSERTED_ACTIVE : ATTRIBUTES_INSERTED_INACTIVE,
+                            false);
+                    }
+                }
+            }
         }
 
         doc.setCharacterAttributes(start, end - start, ATTRIBUTES_SELECTED, false);

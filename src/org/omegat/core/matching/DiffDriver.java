@@ -64,7 +64,7 @@ public class DiffDriver {
         assert (validate(script, originalStrings, revisedStrings));
 
         Render result = new Render();
-        StringBuffer rawText = new StringBuffer();
+        StringBuilder rawText = new StringBuilder();
 
         // Walk original token strings past the last index in
         // case there was an insertion at the end.

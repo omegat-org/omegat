@@ -55,15 +55,20 @@ public class DiffDriver {
      */
     public static Render render(String original, String revised) {
 
+        Render result = new Render();
+        
         String[] originalStrings = tokenize(original);
         String[] revisedStrings = tokenize(revised);
+        
+        if (originalStrings == null || revisedStrings == null) {
+            return result;
+        }
 
         // Get "change script", a linked list of Diff.changes.
         Diff diff = new Diff(originalStrings, revisedStrings);
         Diff.change script = diff.diff_2(false);
         assert (validate(script, originalStrings, revisedStrings));
 
-        Render result = new Render();
         StringBuilder rawText = new StringBuilder();
 
         // Walk original token strings past the last index in
@@ -179,6 +184,11 @@ public class DiffDriver {
      */
     private static String[] tokenize(String input) {
         ITokenizer tokenizer = Core.getProject().getSourceTokenizer();
+        
+        if (tokenizer == null) {
+            // Project has probably been closed.
+            return null;
+        }
 
         Token[] tokens = tokenizer.tokenizeAllExactly(input);
         String[] strings = new String[tokens.length];

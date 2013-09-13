@@ -25,30 +25,30 @@
 
 package org.omegat.gui.editor.autocompleter;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Point;
 import java.awt.event.KeyEvent;
 import java.security.InvalidParameterException;
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.swing.BorderFactory;
-import javax.swing.DefaultListModel;
 import javax.swing.JLabel;
-import javax.swing.JList;
 import javax.swing.JPopupMenu;
 import javax.swing.JScrollPane;
-import javax.swing.ListModel;
+import javax.swing.border.EmptyBorder;
 import javax.swing.text.BadLocationException;
 
-import org.omegat.tokenizer.ITokenizer;
 import org.omegat.gui.editor.EditorTextArea3;
 import org.omegat.gui.editor.TagAutoCompleterView;
+import org.omegat.gui.editor.autotext.AutotextAutoCompleterView;
+import org.omegat.gui.editor.chartable.CharTableAutoCompleterView;
 import org.omegat.gui.glossary.GlossaryAutoCompleterView;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
 import org.omegat.util.StaticUtils;
-import org.omegat.util.TagUtil;
-import org.omegat.util.Token;
 
 /**
  * The controller part of the auto-completer
@@ -56,12 +56,10 @@ import org.omegat.util.Token;
  * @author Zoltan Bartko <bartkozoltan@bartkozoltan.com>
  * @author Aaron Madlon-Kay
  */
-public class AutoCompleter {
-    ListModel listModel = new DefaultListModel();
+public class AutoCompleter {    
     
-    JList list = new JList(); 
     JPopupMenu popup = new JPopupMenu(); 
-    EditorTextArea3 editor; 
+    private EditorTextArea3 editor; 
     
     boolean onMac = StaticUtils.onMacOSX();
     
@@ -70,41 +68,53 @@ public class AutoCompleter {
     /**
      * insert the selected item from here on.
      */
-    int wordChunkStart;
+    private int wordChunkStart;
+    
+    public final static int pageRowCount = 10;
     
     /**
      * a list of the views associated with this auto-completer
      */
-    List<AutoCompleterView> views = new ArrayList<AutoCompleterView>();
+    List<AbstractAutoCompleterView> views = new ArrayList<AbstractAutoCompleterView>();
     
     /**
      * the current view
      */
-    int currentView = 0;
+    int currentView = -1;
     
+    JScrollPane scroll;
     JLabel viewLabel;
     
     public AutoCompleter(EditorTextArea3 editor) { 
-        // add any views here
-        views.add(new GlossaryAutoCompleterView(this));
-        views.add(new TagAutoCompleterView(this));
-        
         this.editor = editor; 
         
-        JScrollPane scroll = new JScrollPane(list);
+        scroll = new JScrollPane();
         scroll.setBorder(null);
+        scroll.setPreferredSize(new Dimension(200,200));
+        scroll.setColumnHeaderView(null);
+        scroll.setFocusable(false);
  
-        list.setFocusable( false ); 
         scroll.getVerticalScrollBar().setFocusable( false ); 
         scroll.getHorizontalScrollBar().setFocusable( false ); 
         
+        // add any views here
+        views.add(new GlossaryAutoCompleterView(this));
+        views.add(new AutotextAutoCompleterView(this));
+        views.add(new TagAutoCompleterView(this));
+        views.add(new CharTableAutoCompleterView(this));
+
         viewLabel = new JLabel();
-        updateViewLabel();
- 
-        popup.setBorder(BorderFactory.createLineBorder(Color.black)); 
-        popup.add(scroll); 
-        popup.add(viewLabel);
+        viewLabel.setBorder(new EmptyBorder(4, 4, 4, 4));;
+        popup.setBorder(BorderFactory.createLineBorder(Color.black));
+        popup.setLayout(new BorderLayout());
+        popup.add(scroll, BorderLayout.CENTER); 
+        popup.add(viewLabel, BorderLayout.SOUTH);
+        selectNextView();
     } 
+
+    public EditorTextArea3 getEditor() {
+        return editor;
+    }
     
     /**
      * Process the autocompletion keys
@@ -129,50 +139,24 @@ public class AutoCompleter {
         }
         
         if (isVisible()) {
-            if (StaticUtils.isKey(e, KeyEvent.VK_UP, 0)) {
-                // process key UP
-                if (popup.isVisible()) 
-                    selectPreviousPossibleValue();
+            if (views.get(currentView).processKeys(e, popup.isVisible()))
                 return true;
-            } 
-
-            if (StaticUtils.isKey(e, KeyEvent.VK_DOWN, 0)) {
-                // process key DOWN
-                if (popup.isVisible()) 
-                    selectNextPossibleValue(); 
-                return true;
-            } 
-
+            
             if ((StaticUtils.isKey(e, KeyEvent.VK_ENTER, 0))) {
-                // process key ENTER
                 popup.setVisible(false); 
-                acceptedListItem((String)list.getSelectedValue()); 
+                acceptedListItem(getSelectedValue()); 
                 setVisible(false);
                 return true;
             }
             
             if ((StaticUtils.isKey(e, KeyEvent.VK_INSERT, 0))) {
-                acceptedListItem((String)list.getSelectedValue()); 
+                acceptedListItem(getSelectedValue()); 
                 updatePopup();
                 return true;
             }
 
             if ((StaticUtils.isKey(e, KeyEvent.VK_ESCAPE, 0))) {
-                // process key ESCAPE
                 hidePopup();
-                return true;
-            }
-
-            if (StaticUtils.isKey(e,KeyEvent.VK_PAGE_UP, 0)) {
-            if (popup.isVisible()) {
-                    selectPreviousPossibleValueByPage();
-                }
-                return true;
-            }
-    
-            if (StaticUtils.isKey(e,KeyEvent.VK_PAGE_DOWN, 0)) {
-                if (popup.isVisible()) 
-                    selectNextPossibleValueByPage(); 
                 return true;
             }
             
@@ -207,45 +191,14 @@ public class AutoCompleter {
         popup.setVisible(false); 
     }
     
-    /** 
-     * Selects the next item in the list.
-     */ 
-    protected void selectNextPossibleValue() { 
-        int i = (list.getSelectedIndex() + 1) % list.getModel().getSize();
-        list.setSelectedIndex(i);
-        list.ensureIndexIsVisible(i);
+    /**
+     * Returns the currently selected value.
+     * @return 
+     */
+    private String getSelectedValue() {
+        return views.get(currentView).getSelectedValue();
     }
-
-    /** 
-     * Selects the item in the list following the current one by one page or go to the last item. 
-     */ 
-    protected void selectNextPossibleValueByPage() { 
-        int page = list.getLastVisibleIndex() - list.getFirstVisibleIndex();
-        int i = Math.min(list.getSelectedIndex() + page, list.getModel().getSize() - 1);
-        list.setSelectedIndex(i);
-        list.ensureIndexIsVisible(i);
-    }
-
-    /** 
-     * Selects the previous item in the list.
-     */ 
-    protected void selectPreviousPossibleValue() {
-        int s = list.getModel().getSize();
-        int i = (list.getSelectedIndex() - 1 + s) % s;
-        list.setSelectedIndex(i);
-        list.ensureIndexIsVisible(i);
-    } 
-    
-    /** 
-     * Selects the item in the list preceding the current one by one page or go to the first item.
-     */ 
-    protected void selectPreviousPossibleValueByPage() { 
-        int page = list.getLastVisibleIndex() - list.getFirstVisibleIndex();
-        int i = Math.max(list.getSelectedIndex() - page, 0);
-        list.setSelectedIndex(i);
-        list.ensureIndexIsVisible(i);
-    }
-    
+       
     /**
      * Show the popup list.
      */
@@ -253,27 +206,14 @@ public class AutoCompleter {
         if (!isVisible())
             return;
         
-        popup.setVisible(false); 
-        
-        if (editor.isEnabled() && updateListData() && list.getModel().getSize()!=0) { 
-            int size = list.getModel().getSize(); 
-            list.setVisibleRowCount(size<10 ? size : 10); 
-
-            int x = 0; 
-            int y = editor.getHeight();
-            int fontSize = editor.getFont().getSize();
-            try { 
-                int pos = Math.min(editor.getCaret().getDot(), editor.getCaret().getMark()); 
-                x = editor.getUI().modelToView(editor, pos).x; 
-                y = editor.getUI().modelToView(editor, editor.getCaret().getDot()).y
-                        + fontSize;
-            } catch(BadLocationException e) { 
-                // this should never happen!!! 
-                Log.log(e);
-            }
-            updateViewLabel();
-            popup.show(editor, x, y);
-            list.ensureIndexIsVisible(list.getSelectedIndex());
+        if (editor.isEnabled() && updateViewData() && views.get(currentView).getRowCount()!=0) { 
+            scroll.setPreferredSize(new Dimension(
+                    scroll.getPreferredSize().width,
+                    views.get(currentView).getPreferredHeight()));
+            popup.validate();
+            popup.pack();
+            Point p = getDisplayPoint();
+            popup.show(editor, p.x, p.y);
         } else {
             popup.setVisible(false);
         }
@@ -281,49 +221,31 @@ public class AutoCompleter {
     }
     
     /**
+     * Determine the x,y coordinate at which to place the popup.
+     */
+    private Point getDisplayPoint() {
+        int x = 0;
+        int y = editor.getHeight();
+        int fontSize = editor.getFont().getSize();
+        try {
+            int pos = Math.min(editor.getCaret().getDot(), editor.getCaret().getMark());
+            x = editor.getUI().modelToView(editor, pos).x;
+            y = editor.getUI().modelToView(editor, editor.getCaret().getDot()).y
+                    + fontSize;
+        } catch(BadLocationException e) {
+            // this should never happen!!!
+            Log.log(e);
+        }
+        return new Point(x, y);
+    }
+    
+    /**
      * Update the data of the list based on the text at/before the caret position
      * @return 
      */
-    private boolean updateListData() {
-        try {
-            AutoCompleterView currentACView = views.get(currentView);
-            int offset = editor.getCaretPosition();
-            int translationStart = editor.getOmDocument().getTranslationStart();
-            
-            // init - these are going to be overwritten, if something better is found.
-            String wordChunk = "";
-            wordChunkStart = offset;
-            
-            String prevText = editor.getDocument().getText(translationStart, offset - translationStart);
-            
-            if (prevText.length() != 0) {
-                ITokenizer tokenizer = currentACView.getTokenizer();
-                Token[] tokens = tokenizer.tokenizeAllExactly(prevText);
-                
-                if (tokens.length != 0) {
-                    Token lastToken = tokens[tokens.length - 1];
-                    String lastString = prevText.substring(lastToken.getOffset()).trim();
-                    if (lastString.length() > 0 && !TagUtil.getAllTagsInSource().contains(lastString)) {
-                        wordChunk = lastString;
-                        wordChunkStart = translationStart + lastToken.getOffset();
-                    }
-                }
-            }
-            
-            List<String> entryList = currentACView.computeListData(wordChunk);
-            
-            if (entryList.isEmpty()) {
-                entryList.add(OStrings.getString("AC_NO_SUGGESTIONS"));
-            }
-            list.setListData(entryList.toArray());
-            if (!entryList.isEmpty())
-                list.setSelectedIndex(0);
-            
-            return !entryList.isEmpty();
-        } catch (BadLocationException ex) {
-            // what now?
-            return false;
-        }
+    private boolean updateViewData() {
+        AbstractAutoCompleterView currentACView = views.get(currentView);
+        return currentACView.updateViewData();
     }
 
     /**
@@ -331,28 +253,43 @@ public class AutoCompleter {
      * @param selected 
      */
     protected void acceptedListItem(String selected) { 
-        if (selected==null || selected.equals(OStrings.getString("AC_NO_SUGGESTIONS"))) 
-            return; 
-        
+        if (selected == null || selected.equals(OStrings.getString("AC_NO_SUGGESTIONS"))) {
+            return;
+        }
+
+        int offset = editor.getCaretPosition();
+
         if (editor.getSelectionStart() == editor.getSelectionEnd()) {
-            editor.setSelectionStart(wordChunkStart);
-            editor.setSelectionEnd(editor.getCaretPosition());
+            editor.setSelectionStart(getWordChunkStart());
+            editor.setSelectionEnd(offset);
         }
         editor.replaceSelection(selected);
     }
 
+    /**
+     * get the view number of the next view
+     * @return the number
+     */
     private int nextViewNumber() {
         return (currentView + 1) % views.size();
     }
     
+    /**
+     * Get the view number of the previous view.
+     * @return 
+     */
     private int prevViewNumber() {
-        return (currentView - 1 + views.size()) % views.size();
+        return (currentView + views.size() - 1) % views.size();
     }
     
+    /**
+     * Update the view label
+     */
     private void updateViewLabel() {
-        StringBuilder sb = new StringBuilder(OStrings.getString("AC_LABEL_START"));
-        sb.append(StaticUtils.format(OStrings.getString("AC_THIS_VIEW"),
-                views.get(currentView).getName()));
+        StringBuilder sb = new StringBuilder("<html>");
+        sb.append("<b>");
+        sb.append(views.get(currentView).getName());
+        sb.append("</b>");
         
         if (views.size() != 1) {
             int modifier = onMac ? KeyEvent.META_MASK : KeyEvent.CTRL_MASK;
@@ -360,32 +297,41 @@ public class AutoCompleter {
             String prevKeyString = keyText(KeyEvent.VK_PAGE_UP, modifier);
             
             if (views.size() >= 2) {
-            sb.append(StaticUtils.format(OStrings.getString("AC_NEXT_VIEW"),
-                    nextKeyString,
-                    views.get(nextViewNumber()).getName()));
+                sb.append("<br>");
+                sb.append(StaticUtils.format(OStrings.getString("AC_NEXT_VIEW"),
+                        nextKeyString,
+                        views.get(nextViewNumber()).getName()));
             }
             
             if (views.size() > 2) {
-            sb.append(StaticUtils.format(OStrings.getString("AC_PREV_VIEW"),
-                    prevKeyString,
-                    views.get(prevViewNumber()).getName()));
+                sb.append("<br>");
+                sb.append(StaticUtils.format(OStrings.getString("AC_PREV_VIEW"),
+                        prevKeyString,
+                        views.get(prevViewNumber()).getName()));
             }
         }
-        sb.append(OStrings.getString("AC_LABEL_END"));
+        sb.append("</html>");
         
         viewLabel.setText(sb.toString());
-        viewLabel.setPreferredSize(new Dimension(300,50));
     }
 
+    /** go to the next view */
     private void selectNextView() {
         currentView = nextViewNumber();
-        updatePopup();
+        activateView();
     }
 
+    /** activate the current view */
+    private void activateView() {
+        scroll.setViewportView(views.get(currentView).getViewContent());
+        updateViewLabel();
+        updatePopup();
+    }
+    
+    /** select the previous view */
     private void selectPreviousView() {
         currentView = prevViewNumber();
-        
-        updatePopup();
+        activateView();
     }
 
     /**
@@ -402,6 +348,12 @@ public class AutoCompleter {
          this.visible = autoCompleterVisible;
     }
     
+    /** 
+     * get the key text
+     * @param base
+     * @param modifier
+     * @return 
+     */
     public String keyText(int base, int modifier) {
          return KeyEvent.getKeyModifiersText(modifier) + "+" + KeyEvent.getKeyText(base);
     }
@@ -412,11 +364,25 @@ public class AutoCompleter {
      * @param adjustment An integer added to the current insertion point
      */
     public void adjustInsertionPoint(int adjustment) {
-        if (editor.isInActiveTranslation(wordChunkStart + adjustment)) {
-            wordChunkStart += adjustment;
+        if (editor.isInActiveTranslation(getWordChunkStart() + adjustment)) {
+            setWordChunkStart(getWordChunkStart() + adjustment);
         } else {
             throw new InvalidParameterException("Cannot move the insertion point "
                     + "outside of the active translation area.");
         }
+    }
+
+    /**
+     * @return the wordChunkStart
+     */
+    public int getWordChunkStart() {
+        return wordChunkStart;
+    }
+
+    /**
+     * @param wordChunkStart the wordChunkStart to set
+     */
+    public void setWordChunkStart(int wordChunkStart) {
+        this.wordChunkStart = wordChunkStart;
     }
 }

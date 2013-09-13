@@ -30,8 +30,9 @@ import java.util.List;
 
 import org.omegat.tokenizer.DefaultTokenizer;
 import org.omegat.tokenizer.ITokenizer;
+import org.omegat.gui.editor.autocompleter.AutoCompleterItem;
+import org.omegat.gui.editor.autocompleter.AutoCompleterListView;
 import org.omegat.gui.editor.autocompleter.AutoCompleter;
-import org.omegat.gui.editor.autocompleter.AutoCompleterView;
 import org.omegat.util.OStrings;
 import org.omegat.util.TagUtil;
 
@@ -40,17 +41,23 @@ import org.omegat.util.TagUtil;
  * 
  * @author Aaron Madlon-Kay
  */
-public class TagAutoCompleterView extends AutoCompleterView {
+public class TagAutoCompleterView extends AutoCompleterListView {
 
     public TagAutoCompleterView(AutoCompleter completer) {
         super(OStrings.getString("AC_TAG_VIEW"), completer);
     }
 
     @Override
-    public List<String> computeListData(String wordChunk) {
+    public List<AutoCompleterItem> computeListData(String wordChunk) {
         
         List<String> missingGroups = TagUtil.getGroupedMissingTagsFromTarget();
         
+        // If wordChunk is a tag, pretend we have a blank wordChunk.
+        if (TagUtil.getAllTagsInSource().contains(wordChunk)) {
+            completer.adjustInsertionPoint(wordChunk.length());
+            wordChunk = "";
+        }
+
         // Check for partial matches among missing tag groups.
         List<String> matchGroups = new ArrayList<String>();
         for (String g : missingGroups) {
@@ -60,14 +67,27 @@ public class TagAutoCompleterView extends AutoCompleterView {
         // If there are no partial matches, show all missing tags as suggestions.
         if (matchGroups.isEmpty()) {
             completer.adjustInsertionPoint(wordChunk.length());
-            return missingGroups;
+            return convertList(missingGroups);
         }
         
-        return matchGroups;
+        return convertList(matchGroups);
+    }
+
+    private static List<AutoCompleterItem> convertList(List<String> list) {
+        List<AutoCompleterItem> result = new ArrayList<AutoCompleterItem>();
+        for (String s : list) {
+            result.add(new AutoCompleterItem(s, null));
+        }
+        return result;
     }
 
     @Override
     public ITokenizer getTokenizer() {
         return new DefaultTokenizer();
+    }
+
+    @Override
+    public String itemToString(AutoCompleterItem item) {
+        return item.payload;
     }
 }

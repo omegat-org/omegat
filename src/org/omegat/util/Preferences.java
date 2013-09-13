@@ -10,7 +10,7 @@
                2011 John Moran, Didier Briel
                2012 Martin Fleurke, Wildrich Fourie, Didier Briel, Thomas Cordonnier,
                     Aaron Madlon-Kay
-               2013 Aaron Madlon-Kay
+               2013 Aaron Madlon-Kay, Zoltan Bartko
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -311,6 +311,25 @@ public class Preferences {
      * <code>tokenizer_behavior_org.omegat.tokenizer.LuceneXXTokenizer</code>
      */
     public static final String TOK_BEHAVIOR_PREFIX = "tokenizer_behavior_";
+
+    /** glossary auto-completion */
+    public static final String AC_GLOSSARY_SHOW_SOURCE = "ac_glossary_show_source";
+    public static final String AC_GLOSSARY_SHOW_TARGET_BEFORE_SOURCE = "ac_glossary_show_target_before_source";
+    public static final String AC_GLOSSARY_SORT_BY_SOURCE = "ac_glossary_sort_by_source";
+    public static final String AC_GLOSSARY_SORT_BY_LENGTH = "ac_glossary_sort_by_length";
+    public static final String AC_GLOSSARY_SORT_ALPHABETICALLY = "ac_glossary_sort_alphabetically";
+    public static final String AC_GLOSSARY_CAPITALIZE = "ac_glossary_capitalize";
+
+    /** autotext auto-completion */
+    public static final String AC_AUTOTEXT_FILE_NAME = "omegat.autotext";
+    public static final String AC_AUTOTEXT_SORT_BY_LENGTH = "ac_autotext_sort_by_length";
+    public static final String AC_AUTOTEXT_SORT_ALPHABETICALLY = "ac_autotext_sort_alphabetically";
+    public static final String AC_AUTOTEXT_SORT_FULL_TEXT = "ac_autotext_sort_full_text";
+
+    /** char table auto-completion */
+    public static final String AC_CHARTABLE_USE_CUSTOM_CHARS = "ac_chartable_use_custom_chars";
+    public static final String AC_CHARTABLE_CUSTOM_CHAR_STRING = "ac_chartable_custom_char_string";
+    public static final String AC_CHARTABLE_UNIQUE_CUSTOM_CHARS = "ac_chartable_unique_custom_chars";
 
     /** Private constructor, because this file is singleton */
     static {

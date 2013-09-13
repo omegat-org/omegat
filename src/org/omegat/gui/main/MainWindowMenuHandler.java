@@ -54,8 +54,11 @@ import org.omegat.core.tagvalidation.ErrorReport;
 import org.omegat.filters2.master.FilterMaster;
 import org.omegat.filters2.master.PluginUtils;
 import org.omegat.gui.dialogs.AboutDialog;
+import org.omegat.gui.dialogs.AutotextAutoCompleterOptionsDialog;
+import org.omegat.gui.dialogs.CharTableAutoCompleterOptionsDialog;
 import org.omegat.gui.dialogs.ExternalTMXMatchesDialog;
 import org.omegat.gui.dialogs.FontSelectionDialog;
+import org.omegat.gui.dialogs.GlossaryAutoCompleterOptionsDialog;
 import org.omegat.gui.dialogs.LastChangesDialog;
 import org.omegat.gui.dialogs.LogDialog;
 import org.omegat.gui.dialogs.SaveOptionsDialog;
@@ -681,6 +684,18 @@ public class MainWindowMenuHandler {
     public void optionsTransTipsExactMatchMenuItemActionPerformed() {
         Preferences.setPreference(Preferences.TRANSTIPS_EXACT_SEARCH,
                 mainWindow.menu.optionsTransTipsExactMatchMenuItem.isSelected());
+    }
+
+    public void optionsAutoCompleteGlossaryMenuItemActionPerformed() {
+        new GlossaryAutoCompleterOptionsDialog(mainWindow).setVisible(true);
+    }
+
+    public void optionsAutoCompleteAutoTextMenuItemActionPerformed() {
+        new AutotextAutoCompleterOptionsDialog(mainWindow).setVisible(true);
+    }
+
+    public void optionsAutoCompleteCharTableMenuItemActionPerformed() {
+        new CharTableAutoCompleterOptionsDialog(mainWindow).setVisible(true);
     }
 
     /**

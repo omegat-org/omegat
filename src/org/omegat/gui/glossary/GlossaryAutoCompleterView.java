@@ -26,12 +26,16 @@
 package org.omegat.gui.glossary;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import org.omegat.core.Core;
+import org.omegat.gui.editor.autocompleter.AutoCompleterItem;
+import org.omegat.gui.editor.autocompleter.AutoCompleterListView;
 import org.omegat.gui.editor.autocompleter.AutoCompleter;
-import org.omegat.gui.editor.autocompleter.AutoCompleterView;
 import org.omegat.util.OStrings;
+import org.omegat.util.Preferences;
 
 /**
  * The glossary auto-completer view.
@@ -39,43 +43,85 @@ import org.omegat.util.OStrings;
  * @author Zoltan Bartko <bartkozoltan@bartkozoltan.com>
  * @author Aaron Madlon-Kay
  */
-public class GlossaryAutoCompleterView extends AutoCompleterView {
-    
+public class GlossaryAutoCompleterView extends AutoCompleterListView {
+
     public GlossaryAutoCompleterView(AutoCompleter completer) {
         super(OStrings.getString("AC_GLOSSARY_VIEW"), completer);
     }
 
     @Override
-    public List<String> computeListData(String wordChunk) {
-        List<String> entryList = new ArrayList<String>();
+    public List<AutoCompleterItem> computeListData(String wordChunk) {
+        List<AutoCompleterItem> result = new ArrayList<AutoCompleterItem>();
+        boolean capitalize = (wordChunk.length() > 0) ?
+                (Preferences.isPreference(Preferences.AC_GLOSSARY_CAPITALIZE))
+                    && Character.isUpperCase(wordChunk.charAt(0)) 
+                : false;
         
         for (GlossaryEntry entry : Core.getGlossary().getDisplayedEntries()) {
             for (String s : entry.getLocTerms(true)) {
                 if (s.toLowerCase().startsWith(wordChunk.toLowerCase())) {
-                    entryList.add(matchCapitalization(s, wordChunk));
+                   if (capitalize) {
+                        s = s.substring(0,1).toUpperCase() + s.substring(1);
+                    }
+                    result.add(new AutoCompleterItem(s, new String[] { entry.getSrcText() }));
                 }
             }
         }
         
         if (!Core.getProject().getProjectProperties().getTargetLanguage().isSpaceDelimited()
-                && entryList.size() == 0) {
+                && result.size() == 0) {
             for (GlossaryEntry entry : Core.getGlossary().getDisplayedEntries()) {
                 for (String s : entry.getLocTerms(true)) {
-                    entryList.add(matchCapitalization(s, wordChunk));
+                    result.add(new AutoCompleterItem(s, new String[] { entry.getSrcText() }));
                 }
             }
             completer.adjustInsertionPoint(wordChunk.length());
         }
         
-        return entryList;
+        Collections.sort(result, new GlossaryComparator());
+        
+        return result;
     }
 
-    private static String matchCapitalization(String text, String compare) {
-        if (compare.length() > 0
-                && Character.isUpperCase(compare.charAt(0))
-                && !Character.isUpperCase(text.charAt(0))) {
-            return Character.toUpperCase(text.charAt(0)) + (text.length() > 1 ? text.substring(1) : "");
+    @Override
+    public String itemToString(AutoCompleterItem item) {
+        if (Preferences.isPreference(Preferences.AC_GLOSSARY_SHOW_SOURCE) && item.extras != null) {
+            if (Preferences.isPreference(Preferences.AC_GLOSSARY_SHOW_TARGET_BEFORE_SOURCE)) {
+                return item.payload + " \u2190 " + item.extras[0];
+            } else {
+                return item.extras[0] + " \u2192 " + item.payload;
+            }
+        } else {
+            return item.payload;
         }
-        return text;
+    }
+
+    class GlossaryComparator implements Comparator<AutoCompleterItem> {
+        
+        private boolean bySource = Preferences.isPreference(Preferences.AC_GLOSSARY_SORT_BY_SOURCE);
+        private boolean byLength = Preferences.isPreference(Preferences.AC_GLOSSARY_SORT_BY_LENGTH);
+        private boolean alphabetically = Preferences.isPreference(Preferences.AC_GLOSSARY_SORT_ALPHABETICALLY);
+        
+        @Override
+        public int compare(AutoCompleterItem o1, AutoCompleterItem o2) {
+            if (bySource) {
+                int result = o1.extras[0].compareTo(o2.extras[0]);
+                if (result != 0)
+                    return result;
+            }
+            
+            if (byLength) {
+                if (o1.payload.length() < o2.payload.length()) {
+                    return 1;
+                } else if (o1.payload.length() > o2.payload.length()) {
+                    return -1;
+                }
+            }
+            if (alphabetically)
+                return o1.payload.compareTo(o2.payload);
+            
+            return 0;
+        }
+        
     }
 }

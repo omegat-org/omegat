@@ -25,23 +25,25 @@
 
 package org.omegat.gui.editor.autocompleter;
 
+import java.awt.Component;
+import java.awt.event.KeyEvent;
 import java.util.List;
 
 import org.omegat.core.Core;
 import org.omegat.tokenizer.ITokenizer;
 
 /**
- * A view of the auto-completer.
- * 
- * @author Zoltan Bartko <bartkozoltan@bartkozoltan.com>
+ * An abstract auto-completer view.
+ * @author bartkoz
  * @author Aaron Madlon-Kay
  */
-public abstract class AutoCompleterView {
+abstract public class AbstractAutoCompleterView {
+
     /**
      * the name appearing in the auto-completer.
      */
     private String name;
-    
+
     /**
      * the completer
      */
@@ -52,18 +54,11 @@ public abstract class AutoCompleterView {
      * @param name the name of this view
      * @param completer the completer it belongs to
      */
-    public AutoCompleterView(String name, AutoCompleter completer) {
+    public AbstractAutoCompleterView(String name, AutoCompleter completer) {
         this.name = name;
         this.completer = completer;
     }
     
-    /**
-     * Compute the items visible in the auto-completer list
-     * @param wordChunk the string to start with
-     * @return a list of strings.
-     */
-    public abstract List<String> computeListData(String wordChunk);
-
     /**
      * @return the name
      */
@@ -78,5 +73,60 @@ public abstract class AutoCompleterView {
      */
     public ITokenizer getTokenizer() {
         return Core.getProject().getTargetTokenizer();
+    }
+    
+    /**
+     * Process the autocompletion keys
+     * @param e the key event to process
+     * @return true if a key has been processed, false if otherwise.
+     */
+    public abstract boolean processKeys(KeyEvent e, boolean visible);
+    
+    /**
+     * return the size of the data list / array.
+     * @return 
+     */
+    public abstract int getRowCount();
+    
+    /**
+     * get the preferred height of the component
+     * @return 
+     */
+    public abstract int getPreferredHeight();
+    
+    /**
+     * set the list or table data
+     * @param entryList the entries
+     */
+    public abstract void setData(List<AutoCompleterItem> entryList);
+    
+    /**
+     * get the selected value
+     * @return 
+     */
+    public abstract String getSelectedValue();
+    
+    /**
+     * Update the view data
+     * @return true if any update has been done.
+     */
+    public abstract boolean updateViewData();
+    
+    /**
+     * Obtain the content to put in the autocompleter popup.
+     * The view should also do any other preparation necessary for
+     * display.
+     * 
+     * @return the component to show in the autocompleter popup
+     */
+    public abstract Component getViewContent();
+    
+    /**
+     * Return a modified row count. The basic implementation. Override this in the
+     * different view types.
+     * @return a modified row count.
+     */
+    protected int getModifiedRowCount() {
+        return Math.min(getRowCount(), AutoCompleter.pageRowCount);
     }
 }

@@ -1705,6 +1705,7 @@ public class EditorController implements IEditor {
         setEmptyTranslation(false);
     }
 
+    @Override
     public void windowDeactivated() {
         editor.autoCompleter.hidePopup();
     }

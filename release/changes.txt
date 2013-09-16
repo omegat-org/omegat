@@ -1,11 +1,17 @@
 ----------------------------------------------------------------------
  OmegaT 3.0.5
 ----------------------------------------------------------------------
-   2 Enhancements
+   4 Enhancements
    1 Bug fix
    0 Localisation update
 ----------------------------------------------------------------------
 3.0.5 vs. 3.0.4 update 2
+
+  - "Insert symbol" auto-completion view
+  https://sourceforge.net/p/omegat/feature-requests/862/
+
+  - Add auto-text view to auto-completer 
+  https://sourceforge.net/p/omegat/feature-requests/861/
 
  Other enhancements:
 

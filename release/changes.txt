@@ -2,7 +2,7 @@
  OmegaT 3.0.5
 ----------------------------------------------------------------------
    4 Enhancements
-   1 Bug fix
+   2 Bug fixes
    0 Localisation update
 ----------------------------------------------------------------------
 3.0.5 vs. 3.0.4 update 2
@@ -25,6 +25,9 @@ comment pane
 
   - The search window search field did not always had focus on window
 opening on a Mac
+
+  - In some cases, a null pointer exception could happen when quitting
+OmegaT
 
 ----------------------------------------------------------------------
  OmegaT 3.0.4 update 2

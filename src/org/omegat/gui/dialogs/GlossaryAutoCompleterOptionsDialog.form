@@ -166,7 +166,7 @@
       <Properties>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-            <TitledBorder title="Terms with multiple definitions">
+            <TitledBorder title="Terms with multiple targets">
               <ResourceString PropertyName="titleX" bundle="org/omegat/Bundle.properties" key="AC_GLOSSARY_TARGET_PANEL" replaceFormat="OStrings.getString(&quot;{key}&quot;)"/>
             </TitledBorder>
           </Border>

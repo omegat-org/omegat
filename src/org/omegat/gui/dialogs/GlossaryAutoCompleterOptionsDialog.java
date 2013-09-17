@@ -40,13 +40,6 @@ import org.omegat.util.Preferences;
  * @author bartkoz
  */
 public class GlossaryAutoCompleterOptionsDialog extends javax.swing.JDialog {
-
-    /** A return status code - returned if Cancel button has been pressed */
-    public static final int RET_CANCEL = 0;
-    /** A return status code - returned if OK button has been pressed */
-    public static final int RET_OK = 1;
-    
-    private int returnStatus = RET_CANCEL;
     
     /**
      * Creates new form GlossaryAutoCompleterOptionsDialog
@@ -72,9 +65,10 @@ public class GlossaryAutoCompleterOptionsDialog extends javax.swing.JDialog {
         
         // initializing options
         displaySourceCheckBox.setSelected(Preferences.isPreference(Preferences.AC_GLOSSARY_SHOW_SOURCE));
+        activateSourceItems(displaySourceCheckBox.isSelected());
+        sourceFirstRadioButton.setSelected(!Preferences.isPreference(Preferences.AC_GLOSSARY_SHOW_TARGET_BEFORE_SOURCE));
         targetFirstRadioButton.setSelected(Preferences.isPreference(Preferences.AC_GLOSSARY_SHOW_TARGET_BEFORE_SOURCE));
         sortBySourceCheckBox.setSelected(Preferences.isPreference(Preferences.AC_GLOSSARY_SORT_BY_SOURCE));
-        activateSourceItems(displaySourceCheckBox.isSelected());
         longerFirstCheckBox.setSelected(Preferences.isPreference(Preferences.AC_GLOSSARY_SORT_BY_LENGTH));
         sortEntriesCheckBox.setSelected(Preferences.isPreference(Preferences.AC_GLOSSARY_SORT_ALPHABETICALLY));
         followCapitalizationCheckBox.setSelected(Preferences.isPreference(Preferences.AC_GLOSSARY_CAPITALIZE));
@@ -222,14 +216,13 @@ public class GlossaryAutoCompleterOptionsDialog extends javax.swing.JDialog {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void doClose(int retStatus) {
-        returnStatus = retStatus;
+    private void doClose() {
         setVisible(false);
         dispose();
     }
      
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
-        doClose(RET_CANCEL);
+        doClose();
     }//GEN-LAST:event_cancelButtonActionPerformed
 
     private void activateSourceItems(boolean activate) {
@@ -251,7 +244,7 @@ public class GlossaryAutoCompleterOptionsDialog extends javax.swing.JDialog {
         Preferences.setPreference(Preferences.AC_GLOSSARY_SORT_BY_LENGTH, longerFirstCheckBox.isSelected());
         Preferences.setPreference(Preferences.AC_GLOSSARY_SORT_ALPHABETICALLY, sortEntriesCheckBox.isSelected());
         Preferences.setPreference(Preferences.AC_GLOSSARY_CAPITALIZE, followCapitalizationCheckBox.isSelected());
-        doClose(RET_OK);
+        doClose();
     }//GEN-LAST:event_okButtonActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

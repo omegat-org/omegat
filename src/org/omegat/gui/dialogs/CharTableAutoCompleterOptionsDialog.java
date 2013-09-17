@@ -43,13 +43,6 @@ import org.omegat.util.Preferences;
  */
 public class CharTableAutoCompleterOptionsDialog extends javax.swing.JDialog {
 
-        /** A return status code - returned if Cancel button has been pressed */
-    public static final int RET_CANCEL = 0;
-    /** A return status code - returned if OK button has been pressed */
-    public static final int RET_OK = 1;
-    
-    private int returnStatus = RET_CANCEL;
-
     CharTableModel allCharModel = new CharTableModel(null);
     
     CharTableModel selCharModel = new CharTableModel("");
@@ -92,6 +85,9 @@ public class CharTableAutoCompleterOptionsDialog extends javax.swing.JDialog {
         descriptionTextArea.setEnabled(enabled);
         allCharLabel.setEnabled(enabled);
         allCharTable.setEnabled(enabled);
+        if (!enabled) {
+            allCharTable.clearSelection();
+        }
         selCharLabel.setEnabled(enabled);
         selCharTable.setEnabled(enabled);
         uniqueCheckBox.setEnabled(enabled);
@@ -119,6 +115,7 @@ public class CharTableAutoCompleterOptionsDialog extends javax.swing.JDialog {
         uniqueCheckBox = new javax.swing.JCheckBox();
         jScrollPane1 = new javax.swing.JScrollPane();
         allCharTable = new javax.swing.JTable();
+        clearButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle(OStrings.getString("AC_CHARTABLE_DIALOG_TITLE")); // NOI18N
@@ -211,6 +208,13 @@ public class CharTableAutoCompleterOptionsDialog extends javax.swing.JDialog {
         });
         jScrollPane1.setViewportView(allCharTable);
 
+        clearButton.setText(OStrings.getString("AC_CHARTABLE_CLEAR_BUTTON")); // NOI18N
+        clearButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                clearButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout customPanelLayout = new javax.swing.GroupLayout(customPanel);
         customPanel.setLayout(customPanelLayout);
         customPanelLayout.setHorizontalGroup(
@@ -218,13 +222,18 @@ public class CharTableAutoCompleterOptionsDialog extends javax.swing.JDialog {
             .addGroup(customPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(customPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(uniqueCheckBox)
-                    .addGroup(customPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(selCharLabel)
-                        .addComponent(allCharLabel)
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 353, Short.MAX_VALUE)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
+                    .addGroup(customPanelLayout.createSequentialGroup()
+                        .addComponent(uniqueCheckBox)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(clearButton))
+                    .addGroup(customPanelLayout.createSequentialGroup()
+                        .addGroup(customPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(selCharLabel)
+                            .addComponent(allCharLabel)
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 353, Short.MAX_VALUE)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         customPanelLayout.setVerticalGroup(
@@ -237,11 +246,14 @@ public class CharTableAutoCompleterOptionsDialog extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(selCharLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(uniqueCheckBox)
+                .addGroup(customPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(customPanelLayout.createSequentialGroup()
+                        .addComponent(selCharLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(uniqueCheckBox))
+                    .addComponent(clearButton, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addContainerGap())
         );
 
@@ -316,26 +328,26 @@ public class CharTableAutoCompleterOptionsDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_selectedCharsCheckBoxStateChanged
 
     private void okButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_okButtonActionPerformed
-        boolean custom = selectedCharsCheckBox.isSelected();
+        Preferences.setPreference(Preferences.AC_CHARTABLE_USE_CUSTOM_CHARS,
+                selectedCharsCheckBox.isSelected());
         String customCharString = selCharModel.getData();
-        if (custom && !customCharString.isEmpty()) {
-            Preferences.setPreference(Preferences.AC_CHARTABLE_USE_CUSTOM_CHARS, true);
-            Preferences.setPreference(Preferences.AC_CHARTABLE_CUSTOM_CHAR_STRING, 
-                customCharString);
-        } else {
-            Preferences.setPreference(Preferences.AC_CHARTABLE_USE_CUSTOM_CHARS, false);
+        Preferences.setPreference(Preferences.AC_CHARTABLE_CUSTOM_CHAR_STRING, 
+            customCharString);
+        if (customCharString.isEmpty()) {
+            Preferences.setPreference(Preferences.AC_CHARTABLE_USE_CUSTOM_CHARS,
+                    false);
         }
         Preferences.setPreference(Preferences.AC_CHARTABLE_UNIQUE_CUSTOM_CHARS,
                 uniqueCheckBox.isSelected());
-        doClose(RET_OK);
+        doClose();
     }//GEN-LAST:event_okButtonActionPerformed
 
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
-        doClose(RET_CANCEL);
+        doClose();
     }//GEN-LAST:event_cancelButtonActionPerformed
 
     private void allCharTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_allCharTableMouseClicked
-        if (evt.getClickCount() == 2) {
+        if (allCharTable.isEnabled() && evt.getClickCount() == 2) {
             JTable target = (JTable) evt.getSource();
             int row = target.getSelectedRow();
             int col = target.getSelectedColumn();
@@ -344,8 +356,11 @@ public class CharTableAutoCompleterOptionsDialog extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_allCharTableMouseClicked
 
-    private void doClose(int retStatus) {
-        returnStatus = retStatus;
+    private void clearButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearButtonActionPerformed
+        selCharModel.setData("");
+    }//GEN-LAST:event_clearButtonActionPerformed
+
+    private void doClose() {
         setVisible(false);
         dispose();
     }
@@ -354,6 +369,7 @@ public class CharTableAutoCompleterOptionsDialog extends javax.swing.JDialog {
     private javax.swing.JLabel allCharLabel;
     private javax.swing.JTable allCharTable;
     private javax.swing.JButton cancelButton;
+    private javax.swing.JButton clearButton;
     private javax.swing.JPanel customPanel;
     private javax.swing.JTextArea descriptionTextArea;
     private javax.swing.JScrollPane jScrollPane1;

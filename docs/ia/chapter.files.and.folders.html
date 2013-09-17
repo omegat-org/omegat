@@ -1,0 +1,445 @@
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <title>Chapter&nbsp;8.&nbsp;OmegaT Files e Plicas</title>
+      <link rel="stylesheet" type="text/css" href="OmegaT.css">
+      <meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
+      <link rel="home" href="index.html" title="OmegaT - Guida del usuario">
+      <link rel="up" href="index.html" title="OmegaT - Guida del usuario">
+      <link rel="prev" href="chapter.file.filters.html" title="Chapter&nbsp;7.&nbsp;Filtros del file">
+      <link rel="next" href="chapter.files.to.translate.html" title="Chapter&nbsp;9.&nbsp;Files a render">
+   </head>
+   <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+      <div class="navheader">
+         <table width="100%" summary="Navigation header">
+            <tr>
+               <th colspan="3" align="center">Chapter&nbsp;8.&nbsp;<span class="application">OmegaT</span> Files e Plicas
+               </th>
+            </tr>
+            <tr>
+               <td width="20%" align="left"><a accesskey="p" href="chapter.file.filters.html">Prev</a>&nbsp;
+               </td>
+               <th width="60%" align="center">&nbsp;</th>
+               <td width="20%" align="right">&nbsp;<a accesskey="n" href="chapter.files.to.translate.html">Next</a></td>
+            </tr>
+         </table>
+         <hr>
+      </div>
+      <div class="chapter">
+         <div class="titlepage">
+            <div>
+               <div>
+                  <h1 class="title"><a name="chapter.files.and.folders"></a>Chapter&nbsp;8.&nbsp;<span class="application">OmegaT</span> Files e Plicas
+                  </h1>
+               </div>
+            </div>
+         </div>
+         <div class="toc">
+            <dl class="toc">
+               <dt><span class="section"><a href="chapter.files.and.folders.html#translation.project.files">1. Files del projecto de traduction</a></span></dt>
+               <dd>
+                  <dl>
+                     <dt><span class="section"><a href="chapter.files.and.folders.html#file.omegat.project">1.1. Plica vertice</a></span></dt>
+                     <dt><span class="section"><a href="chapter.files.and.folders.html#d0e4956">1.2. Sub plica dictionario</a></span></dt>
+                     <dt><span class="section"><a href="chapter.files.and.folders.html#d0e4964">1.3. Sub plica glossario</a></span></dt>
+                     <dt><span class="section"><a href="chapter.files.and.folders.html#folder.OmegaT">1.4. Sub plica omegat</a></span></dt>
+                     <dt><span class="section"><a href="chapter.files.and.folders.html#folder.source">1.5. Sub plica /source</a></span></dt>
+                     <dt><span class="section"><a href="chapter.files.and.folders.html#folder.target">1.6. Sub plica /target</a></span></dt>
+                  </dl>
+               </dd>
+               <dt><span class="section"><a href="chapter.files.and.folders.html#user.files">2. Files del preparationes del usator</a></span></dt>
+               <dt><span class="section"><a href="chapter.files.and.folders.html#application.files">3. Files del application</a></span></dt>
+            </dl>
+         </div>
+         <p><span class="application">OmegaT</span> opera con tres typos de files.
+         </p>
+         <div class="itemizedlist">
+            <ul class="itemizedlist" style="list-style-type: disc; ">
+               <li class="listitem">
+                  <p>Le files del projecto de traduction: istos forma un projecto de traduction. Perder los pote affliger le integritate del projecto
+                     e tu facultate de compler un obra. le files del projecto es le plus importante files in <span class="application">OmegaT</span>. Illos es le files que tu tracta sur un base quotidian dum tu rende.
+                  </p>
+               </li>
+            </ul>
+         </div>
+         <div class="itemizedlist">
+            <ul class="itemizedlist" style="list-style-type: disc; ">
+               <li class="listitem">
+                  <p>Files del preparationes del usator: istos es create quando le comportamento de OmegaT es modificate per le preferentia del
+                     preparationes del usator. Le perdita de illos resulta habitualmente que OmegaT reverte a su "preparationes de fabrica". Isto
+                     pote alcun veces causar un poco de difficultate quando tu es in le medio de un traduction.
+                  </p>
+               </li>
+            </ul>
+         </div>
+         <div class="itemizedlist">
+            <ul class="itemizedlist" style="list-style-type: disc; ">
+               <li class="listitem">
+                  <p>Files del application: iste es includite in le pacchetto que tu ha discargate. Le major parte de illos son necessari por que
+                     OmegaT functiona debitemente. Si pro qualque ration iste files son perdite o corrupte, discarga vel reinstalla simplemente
+                     OmegaT pro restaurar illos tote.
+                  </p>
+               </li>
+            </ul>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="translation.project.files"></a>1.&nbsp;Files del projecto de traduction
+                     </h2>
+                  </div>
+               </div>
+            </div><a class="indexterm" name="d0e4889"></a><p>Un projecto de traduction <span class="application">OmegaT</span> consiste de plure files e plicas.
+            </p>
+            <p>Quando tu crea un projecto de traduction, OmegaT crea automaticamente un plica con le nomine specificate, e un lista de plicas:</p>
+            <div class="figure"><a name="OmegaT.project"></a><p class="title"><b>Figure&nbsp;8.1.&nbsp;Projecto OmegaT</b></p>
+               <div class="figure-contents">
+                  <div class="mediaobject"><img src="images/Omegatproject.png" alt="Projecto OmegaT"></div>
+               </div>
+            </div><br class="figure-break"><p>On pote seliger locationes alternative pro alicun del plicas al creation del projecto o durante le traduction. Il es dunque
+               possibile seliger plicas existente o crear plicas in ubicationes que reflecte tu fluxo de labor e tu habitudes de gestion
+               del projecto. Pro cambiar le position del plicas postquam un projecto esseva create, aperi <span class="guimenuitem">Projecto &gt; Proprietates...</span> in le menu o con <span class="guibutton">Ctrl+E</span> e face le cambios necessari.
+            </p>
+            <p>In un administrator de file un projecto de traduction appare e age justo como omne altere plica. In le sequente exemplo le
+               plica <code class="filename">my projects</code> contine tres projectos OmegaT:
+            </p>
+            <div class="figure"><a name="OmegaT.projects.and.subfolders"></a><p class="title"><b>Figure&nbsp;8.2.&nbsp;Projectos e sub plicas de OmegaT</b></p>
+               <div class="figure-contents">
+                  <div class="mediaobject"><img src="images/OmegaT_projects_and_subfolders.png" alt="Projectos e sub plicas de OmegaT"></div>
+               </div>
+            </div>
+            <p><br class="figure-break"></p>
+            <p>Cliccar duplice le plica con le icone OmegaT es sufficiente a aperir le projecto. Un projecto de traduction <span class="bold"><strong>Example_Project</strong></span> con le preparationes base essera create como nove sub plica con le structura sequente:
+            </p>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="file.omegat.project"></a>1.1.&nbsp;Plica vertice<a class="indexterm" name="d0e4937"></a></h3>
+                     </div>
+                  </div>
+               </div>
+               <p>Le Plica vertice de un projecto contine semper le file<code class="filename"> OmegaT.Project</code>, continente le parametros del projecto ut definite in le fenestra Proprietates del projecto (<span class="guimenuitem">Projecto &gt; Proprietates</span>). durante que le traduction progrede son create (e renovate in le processo de traduction) in iste plica, additional files
+                  (<span class="emphasis"><em><code class="filename">project_name</code></em></span><code class="filename">-omegat.tmx, project_name-level1.tmx and project_name-level2.tmx</code>). Illos contine un identic memoria de traduction in formas differente, pro ser usate in projectos futur.
+               </p>
+            </div>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="d0e4956"></a>1.2.&nbsp;Sub plica dictionario
+                        </h3>
+                     </div>
+                  </div>
+               </div>
+               <p>initialmente vacue, iste plica continera le dictionarios que tu ha addite al projecto. Vide <a class="link" href="chapter.dictionaries.html" title="Chapter&nbsp;17.&nbsp;Dictionarios">capitulo Dictionarios</a> pro plus re iste subjecto.
+               </p>
+            </div>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="d0e4964"></a>1.3.&nbsp;Sub plica glossario
+                        </h3>
+                     </div>
+                  </div>
+               </div>
+               <p>Iste plica is vacue ab initio. Isto continera le glossarios que tu usara in le projecto. Vide <a class="link" href="chapter.glossaries.html" title="Chapter&nbsp;18.&nbsp;Glossarios">capitulo Glossarios</a> pro plus re iste subjecto.
+               </p>
+            </div>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="folder.OmegaT"></a>1.4.&nbsp;Sub plica omegat<a class="indexterm" name="d0e4975"></a></h3>
+                     </div>
+                  </div>
+               </div>
+               <p>Le sub plica <span class="bold"><strong>omegat</strong></span> contine al minus un possibilemente plures altere files. Le plus importante file hic es le <code class="filename">project_save.tmx, </code>que es le memoria de traduction operative pro le projecto. Copias de reserva de iste file (con extension bak) es addite progressivemente
+                  a iste sub plica, in prime loco al initio del session de traduction, a su fin, e durante que le traduction progrede. Per hic
+                  an perdita datos inadvertente es avertite - vide Impedir le Perdita del Datos in capitulo <a class="link" href="chapter.misc.html" title="Chapter&nbsp;21.&nbsp;Subjectos miscellanee">Miscellanea.</a></p>
+               <p>Durante le translation  pote devenir create files additional in iste sub plica como seque</p>
+               <div class="informaltable">
+                  <table border="1">
+                     <colgroup>
+                        <col align="left">
+                        <col>
+                     </colgroup>
+                     <tbody>
+                        <tr>
+                           <td align="left">stats.txt</td>
+                           <td align="left"><a class="indexterm" name="d0e5001"></a>contine le statisticas currente del projecto currente. Tu pote examinar lo per seliger <span class="guimenuitem">Instrumentos &gt; Statisticas</span></td>
+                        </tr>
+                        <tr>
+                           <td align="left">ignored_words.txt. learned_words.txt</td>
+                           <td align="left"><a class="indexterm" name="d0e5013"></a>son create e usate per le corrector orthographic. Si tu jam ha colligite parolas tu desidera le corrector orthographic ignora
+                              / accepta, tu debe solmente copiar le duo files correspondente in le sub plica <code class="filename">omegat</code>de tu projecto actual.
+                           </td>
+                        </tr>
+                        <tr>
+                           <td align="left">project_stats_match.txt</td>
+                           <td align="left">contine le ultime statisticas del concordantia del projecto, generate con <span class="guimenuitem">Instrumentos &gt; Statisticas del Concordantia</span></td>
+                        </tr>
+                        <tr>
+                           <td align="left">segmentation.conf</td>
+                           <td align="left">si existente, illo contine le regulas de segmentation projecto-specific, si requirite in <span class="guimenuitem">Projecto &gt; Proprietates ... </span>Vide <a class="link" href="chapter.project.properties.html" title="Chapter&nbsp;6.&nbsp;Proprietates del projecto">Capitulo Proprietates del projecto</a></td>
+                        </tr>
+                        <tr>
+                           <td align="left">filters.xml</td>
+                           <td align="left">si existente, illo contine le filtros de file projecto-specific, si requirite in <span class="guimenuitem">Projecto &gt; Proprietates ... </span>Vide <a class="link" href="chapter.project.properties.html" title="Chapter&nbsp;6.&nbsp;Proprietates del projecto">Capitulo Proprietates del projecto</a></td>
+                        </tr>
+                     </tbody>
+                  </table>
+               </div>
+            </div>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="folder.source"></a>1.5.&nbsp;Sub plica /source<a class="indexterm" name="d0e5052"></a></h3>
+                     </div>
+                  </div>
+               </div>
+               <p>Le sub plica /source contine le files a traducer. Tu pote adder a illo le files plus tarde. Nota que le structura del sub
+                  plicas in le sub plica /source poter sumer qualcunque forma tu vole. Si le files a traducer son partes de un structura a arbore
+                  (como in un sito TTT), tu necessita sol specificar le sub plica de maxime nivello e OmegaT mantenera le contentos integre,
+                  dum tene intacte le structura a arbore.
+               </p>
+            </div>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="folder.target"></a>1.6.&nbsp;Sub plica /target<a class="indexterm" name="d0e5062"></a></h3>
+                     </div>
+                  </div>
+               </div>
+               <p>Iste sub plica is vacue ab initio. Pro adder contentos a isto, selige <span class="guimenu">Projecto</span> → <span class="guimenuitem">Crea Documentos Rendite</span> (<span class="shortcut"><strong><span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>D</strong></span></strong></span>). Le files intra le plica <code class="filename">source</code>, si rendite o  non, es alora generate ci, con le identic hierarchia del sub plicas fonte. Sol alora le contentos del sub
+                  plica target reflectera le stato actual del traduction, como presente in le memoria de traduction del projecto, salvate in
+                  le file <span class="bold"><strong>/omegat/project_save.tmx</strong></span>. Le segmentos non rendite remanera in iste documento in le lingua fonte.
+               </p>
+            </div>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="user.files"></a>2.&nbsp;Files del preparationes del usator<a class="indexterm" name="d0e5090"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <p>Le files del usator contine le information, applicabile e omne le projectos pro un certe usator;</p>
+            <div class="informaltable">
+               <table border="1">
+                  <colgroup>
+                     <col align="left">
+                     <col>
+                  </colgroup>
+                  <tbody>
+                     <tr>
+                        <td align="left">logs/OmegaT.log</td>
+                        <td align="left">Iste file recorda le messages de error de Java  durante que <span class="application">OmegaT</span> es functionante. Si OmegaT deberea apparer comportar se erraticamente, il es importante includer iste file o su parte pertinente
+                           in omne reporto de defecto
+                        </td>
+                     </tr>
+                     <tr>
+                        <td align="left">script/</td>
+                        <td align="left">plica, continente files script pro le plugin del script, si installate</td>
+                     </tr>
+                     <tr>
+                        <td align="left">filters.xml</td>
+                        <td align="left">filtros de file base del usator</td>
+                     </tr>
+                     <tr>
+                        <td align="left">omegat.prefs</td>
+                        <td align="left">OmegaT preferentias</td>
+                     </tr>
+                     <tr>
+                        <td align="left">segmentation.conf</td>
+                        <td align="left">regulas de segmentation base del usator</td>
+                     </tr>
+                     <tr>
+                        <td align="left">uiLayout.xml</td>
+                        <td align="left">Un file xml con omne le preparationes del option accessibile per Interfacie Graphic del Usator (Graphical User Interface -
+                           GUI)
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </div>
+            <p>Nota que le regulas de segmentation base e le filtros de file pote esser superscribite per preparationes specific del projecto
+               (vide supra). Le ubication del files del usator depende del platteforma que tu usa:
+            </p>
+            <div class="informaltable">
+               <table border="1">
+                  <colgroup>
+                     <col align="left">
+                     <col>
+                  </colgroup>
+                  <tbody>
+                     <tr>
+                        <td align="left">Windows 2000 e XP</td>
+                        <td align="left"><code class="literal">Documents and Settings\&lt;User
+                                          Name&gt;\Application
+                                          Data\<span class="application">OmegaT</span></code></td>
+                     </tr>
+                     <tr>
+                        <td align="left">Windows Vista e 7</td>
+                        <td align="left"><code class="literal">Users\&lt;User
+                                          Name&gt;\AppData\Roaming\<span class="application">OmegaT</span></code></td>
+                     </tr>
+                     <tr>
+                        <td align="left">Altere Windows</td>
+                        <td align="left"><code class="literal">&lt;Something&gt;\<span class="application">OmegaT</span></code> (&lt;Something&gt; corresponde al location del plica "home" quomodo determinate secundo Java)
+                        </td>
+                     </tr>
+                     <tr>
+                        <td align="left">Linux/Solaris/FreeBSD</td>
+                        <td align="left"><code class="literal">&lt;User Home&gt;/.omegat </code>(.omegat es un plica, le puncto precedente su nomine rende illo invisibile a minus que tu scribe ls -a o un commando equivalente)
+                        </td>
+                     </tr>
+                     <tr>
+                        <td align="left">Mac OS X</td>
+                        <td align="left"><code class="filename">&lt;User
+                                          Home&gt;/Library/Preferences/<span class="application">OmegaT</span></code></td>
+                     </tr>
+                     <tr>
+                        <td align="left">Altere</td>
+                        <td align="left"><code class="filename">&lt;User Home&gt;</code></td>
+                     </tr>
+                  </tbody>
+               </table>
+            </div>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="application.files"></a>3.&nbsp;Files del application<a class="indexterm" name="d0e5189"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <p>OmegaT es supplite como un pacchetto que pote esser discargate ex SourceForge. Ci es considerate un pacchetto independente
+               ab platteformas in un forma Java standard. Le alternativas comprende un pacchetto .tar Linux, un installator Windows – con
+               o sin un Java Runtime Environment (JRE) –, un installator Mac OS X, e un pacchetto codice fonte pro le disveloppatores.
+            </p>
+            <p>Le pacchetto independente ab platteformas pote esser usate sur omne platteforma con un ambiente runtime Java 1.6 functionante,
+               includite le platteformas pro le qual existe alsi un pacchetto specific. Illo es fornite como file comprimite (archivo zip
+               o tar) que tu debe extraher al plica de tu election pro le installation. Le file pote habitualmente esser extrahite per clic
+               duplice sur le pacchetto discargate. Un vice que le archivo esseva extrahite, es create un plica continente le contentos sequente:
+            </p>
+            <div class="informaltable">
+               <table border="1">
+                  <colgroup>
+                     <col align="left">
+                     <col>
+                  </colgroup>
+                  <tbody>
+                     <tr>
+                        <td align="left"><span class="bold"><strong>Sub plica file/ </strong></span></td>
+                        <td align="left"><span class="bold"><strong>Con&amp;tentos</strong></span></td>
+                     </tr>
+                     <tr>
+                        <td align="left"><code class="filename">/docs/</code></td>
+                        <td align="left">Omne le files del manual del usator pote esser trovate in iste plica. Tu pote aperir los in un lector del tela Interrete pro
+                           obtener accesso al ligamines externe.
+                        </td>
+                     </tr>
+                     <tr>
+                        <td align="left"><code class="filename">/images/</code></td>
+                        <td align="left">Icones e logo graphicas</td>
+                     </tr>
+                     <tr>
+                        <td align="left"><code class="filename">/lib/</code></td>
+                        <td align="left">Contine le files Java, necessari al operation de <span class="application">OmegaT</span>.
+                        </td>
+                     </tr>
+                     <tr>
+                        <td align="left"><code class="filename">join.html</code></td>
+                        <td align="left">Isto es un file html ordinari que, quando aperte in tu lector del tela Interrete, dirige te al gruppo del usator OmegaT sur
+                           Yahoo! Gruppos. Non es necessari participar, ma supplera te con accesso a servicios additional, assi como files, questionarios,
+                           e le opportunitate a sumer parte in discussiones re OmegaT. Le archivos del gruppo son public e on pote vider los sin subscription
+                           al gruppo.
+                        </td>
+                     </tr>
+                     <tr>
+                        <td align="left"><code class="filename">changes.txt</code></td>
+                        <td align="left">Un lista del modificationes relativemente detaliate inter iste version e le versiones precedente.</td>
+                     </tr>
+                     <tr>
+                        <td align="left"><code class="filename">license.txt</code></td>
+                        <td align="left">The GNU GENERAL PUBLIC LICENSE. This license allows you to
+                                       do certain things with <span class="application">OmegaT</span>,
+                                       including modifying and distributing it. If you are interested in
+                                       modifying or distributing <span class="application">OmegaT</span>, read
+                                       this document carefully and ensure you understand its implications
+                                       before doing anything. If in doubt, don't hesitate to ask project
+                                       members directly either by sending them an e-mail from the
+                                       SourceForge page or by sending a public mail to the user
+                                       group.
+                        </td>
+                     </tr>
+                     <tr>
+                        <td align="left"><code class="filename">doc-license.txt</code></td>
+                        <td align="left">The GNU GENERAL PUBLIC LICENSE. This license covers the documentation. Vide supra.</td>
+                     </tr>
+                     <tr>
+                        <td align="left"><code class="filename">readme.txt</code></td>
+                        <td align="left">Iste file es multo importante tu deberea assecurar te que tu lege lo ante lancear OmegaT. Illo include information general
+                           re OmegaT, ubi trovar plus information, como contribuer, etc. Illo esseva rendite in plure linguas.
+                        </td>
+                     </tr>
+                     <tr>
+                        <td align="left"><span class="application">omegat</span></td>
+                        <td align="left">
+                           <p>Un file texto continente duo lineas:</p>
+                           
+                                       <pre class="programlisting">#!/bin/bash java
+java -jar OmegaT.jar $*</pre>
+                           
+                                       <p>Le usatores de Linux e OS X pote trovar iste file utile. Rende lo executabile (<code class="literal">chmod +x OmegaT</code>) ab le linea de commando post esser te assecurate que tu es in le plica del application OmegaT. Tu ergo essera capace a lancear
+                              OmegaT con le execution de iste file ab le linea de commando
+                           </p>
+                                       
+                        </td>
+                     </tr>
+                     <tr>
+                        <td align="left">OmegaT.bat</td>
+                        <td align="left">
+                           <p>Un file batch, usate pro lancear  <span class="application">OmegaT</span> a partir del linea de commando de Windows. Il contine sol le linea sequente:
+                           </p>
+                           
+                                       <pre class="programlisting">java -jar OmegaT.jar</pre>
+                                       </td>
+                     </tr>
+                     <tr>
+                        <td align="left"><code class="literal">OmegaT.jar</code></td>
+                        <td align="left">Le principal application OmegaT. Pro lancear OmegaT, tu debe lancear iste file o ab le linea de commando o ab tu administrator
+                           de file, habitualmente per duple-clic sur illo.
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </div>
+         </div>
+      </div>
+      <div class="navfooter">
+         <hr>
+         <table width="100%" summary="Navigation footer">
+            <tr>
+               <td width="40%" align="left"><a accesskey="p" href="chapter.file.filters.html">Prev</a>&nbsp;
+               </td>
+               <td width="20%" align="center">&nbsp;</td>
+               <td width="40%" align="right">&nbsp;<a accesskey="n" href="chapter.files.to.translate.html">Next</a></td>
+            </tr>
+            <tr>
+               <td width="40%" align="left" valign="top">Chapter&nbsp;7.&nbsp;Filtros del file&nbsp;</td>
+               <td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
+               <td width="40%" align="right" valign="top">&nbsp;Chapter&nbsp;9.&nbsp;Files a render</td>
+            </tr>
+         </table>
+      </div>
+   </body>
+</html>

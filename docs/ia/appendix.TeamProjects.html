@@ -1,0 +1,290 @@
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <title>Appendix&nbsp;C.&nbsp;Projectos de equipa OmegaT</title>
+      <link rel="stylesheet" type="text/css" href="OmegaT.css">
+      <meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
+      <link rel="home" href="index.html" title="OmegaT - Guida del usuario">
+      <link rel="up" href="index.html" title="OmegaT - Guida del usuario">
+      <link rel="prev" href="appendix.keyboard.html" title="Appendix&nbsp;B.&nbsp;Vias breve del claviero in le Modifica">
+      <link rel="next" href="appendix.TokenizerPlugin.inOmegaT.html" title="Appendix&nbsp;D.&nbsp;Plugin Tokenizer">
+   </head>
+   <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+      <div class="navheader">
+         <table width="100%" summary="Navigation header">
+            <tr>
+               <th colspan="3" align="center">Appendix&nbsp;C.&nbsp;Projectos de equipa OmegaT</th>
+            </tr>
+            <tr>
+               <td width="20%" align="left"><a accesskey="p" href="appendix.keyboard.html">Prev</a>&nbsp;
+               </td>
+               <th width="60%" align="center">&nbsp;</th>
+               <td width="20%" align="right">&nbsp;<a accesskey="n" href="appendix.TokenizerPlugin.inOmegaT.html">Next</a></td>
+            </tr>
+         </table>
+         <hr>
+      </div>
+      <div class="appendix">
+         <div class="titlepage">
+            <div>
+               <div>
+                  <h1 class="title"><a name="appendix.TeamProjects"></a>Appendix&nbsp;C.&nbsp;Projectos de equipa OmegaT<a class="indexterm" name="d0e10447"></a></h1>
+               </div>
+            </div>
+         </div>
+         <div class="toc">
+            <dl class="toc">
+               <dt><span class="section"><a href="appendix.TeamProjects.html#d0e10454">1. Controlo del version - introduction</a></span></dt>
+               <dt><span class="section"><a href="appendix.TeamProjects.html#d0e10525">2. Participar a un projecto usante SVN</a></span></dt>
+               <dd>
+                  <dl>
+                     <dt><span class="section"><a href="appendix.TeamProjects.html#d0e10546">2.1. Crear un repository</a></span></dt>
+                     <dt><span class="section"><a href="appendix.TeamProjects.html#d0e10606">2.2. Como importar le projecto al deposito SVN - Windows</a></span></dt>
+                  </dl>
+               </dd>
+               <dt><span class="section"><a href="appendix.TeamProjects.html#d0e10743">3. Usar le projecto in equipa in OmegaT</a></span></dt>
+            </dl>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e10454"></a>1.&nbsp;Controlo del version - introduction
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>Le traduction de equipa (in collaboration) offerite ab OmegaT es basate super le 'Functionalitate de version' o 'Controlo
+               de revision', largemente utilisate ab le communitate de software pro mantener le controlo del cambios al codice de un programma
+               e permitter le collaboration sin impedimentos intra le equipa de disveloppamento. OmegaT supporta duo del popular 'systemas
+               de controlo de version' (Version Control Systems = VCS in breve), <a class="ulink" href="http://subversion.apache.org" target="_top">"Subversion" ex Apache</a> frequentemente abbreviate in SVN, secundo le nomine de su commando svn) e <a class="ulink" href="http://git-scm.com/" target="_top">Git</a>. Le avantages de un systema VC pro un equipa de traductores in breve son:
+            </p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>Plure membros del equipa pote operar re le projecto de traduction simultaneemente sin interferentia le un con le altere</p>
+                  </li>
+                  <li class="listitem">
+                     <p>Illes pote usar material in commun, como la memorias de traduction del projecto e su glossarios</p>
+                  </li>
+                  <li class="listitem">
+                     <p>Tote le tres minutas, per arrangiamento initial, un  version renovate del datos in commun es disponibile al resto del equipa</p>
+                  </li>
+                  <li class="listitem">
+                     <p>Le systema gere le controlo de version pro le datos in commun</p>
+                  </li>
+                  <li class="listitem">
+                     <p>Le conflictos - per exemplo traductiones alternative del mesme segmento o entrata del glossario - pote esser examinate, resolute
+                        e mergite
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <p>Le terminos sequente, a usar in le texto in basso, merita un breve explication:</p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p><span class="bold"><strong>Le server VCS - </strong></span>id es le server SVN o le GIT es le ambiente ubi le material commun es conservate e mantenite sur le rete. Le server pote exister
+                        in le rete local, ma in le majoritate del casos illo essera disponibile sur interrete, id es via un adresse URL. Un membro
+                        del equipa, le administrator del projecto, debe cognoscer le tractamento al latere del server, id es le labor re le preparation
+                        del ambiente, como importar le projecto OmegaT, como assignar le derectos de accesso pro e membros del equipa, como resolver
+                        le conflictos, etc..
+                     </p>
+                  </li>
+                  <li class="listitem">
+                     <p><span class="bold"><strong>Le cliente VCS: </strong></span>Pro tu interfacie con le server debe esser installate un cliente SVN o Git sur le computatores del "administratores del projecto"
+                        implicate in le projecto OmegaT. Clientes multo popular pro le ambiente Windows es <a class="ulink" href="http://tortoisesvn.net/" target="_top">TortoiseSVN</a> e <a class="ulink" href="http://code.google.com/p/tortoisegit/" target="_top">TortoiseGit</a>. Altere systemas operative (Linux, OS X) offere pacchettos simile.
+                     </p>
+                  </li>
+                  <li class="listitem">
+                     <p><span class="bold"><strong>deposito: </strong></span>le posto ubi le material in commun es salvate e mantenite, sia sur un rete a accesso local sia in interrete. Le membros del
+                        projecto se connecte con illo via lor cliente VCS.
+                     </p>
+                  </li>
+                  <li class="listitem">
+                     <p><span class="bold"><strong>discarga (checkout):</strong></span> le operation que crea un copia functionante ex le deposito in tu computator local. Le server retene le informationes discargate
+                        durante le discarga, de maniera que plus tarde le consigna (vide in infra) pote esser exequite in un maniera ordinate.
+                     </p>
+                  </li>
+                  <li class="listitem">
+                     <p><span class="bold"><strong>consigna (commit): </strong></span>un vice que un nove version local  del material discargate es preste, on pote lo consignar al deposito e assi lo render disponibile
+                        al resto del equipa Le server assecura se que omne cambios que conflige, per duo membros que opera sur le mesme contentos
+                        discargate, essera resolute.
+                     </p>
+                  </li>
+                  <li class="listitem">
+                     <p><span class="bold"><strong>administrator: </strong></span>le persona responsabile del creation e del mantenimento del deposito, id es le cura del labor del latere del server. Pro evitar
+                        omne problemas, sol un persona  deberea haber iste privilegios al minus initialmente.
+                     </p>
+                  </li>
+                  <li class="listitem">
+                     <p><span class="bold"><strong>usator</strong></span>: un membro del equipa, que collabora sur le projecto commun.
+                     </p>
+                  </li>
+               </ul>
+            </div>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e10525"></a>2.&nbsp;Participar a un projecto usante SVN<a class="indexterm" name="d0e10528"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <p>Il ha duo possibilitates pro exequer un server SVN: tu pote install SVN sur tu proprie server o tu pote usar un servicio hospite.
+               Quando tu usa un servicio externe tu debe esser al currente del implicationes possibile in terminos de confidentialitate,
+               depois que tu es cargante le documento original sur un server for de tu controlo directe. Alias, pro evitar iste question
+               tu pote preparar un server SVN private, per exemplo si tu ja ha un server Apache que include le software in question (per
+               exemplo VisualSVN).
+            </p>
+            <p>Once the SVN server is available, project managers must locally install a SVN client, in order to manage the project contents
+               on their computers. Pro Windows nos recommenda <a class="ulink" href="http://tortoisesvn.net/" target="_top">TortoiseSVN</a>. Pro Mac tu pote discargar le cliente per exemplo ex <a class="ulink" href="https://sourceforge.net/projects/macsvn/" target="_top">SourceForge</a>, Pro Linux vide <a class="ulink" href="www.yolinux.com/TUTORIALS/Subversion.html" target="_top">Commandos e Scriptes de Subversion</a>.
+            </p>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="d0e10546"></a>2.1.&nbsp;Crear un repository<a class="indexterm" name="d0e10549"></a></h3>
+                     </div>
+                  </div>
+               </div>
+               <p>Le procedura presentate ci fide sur le server SVN gratuite (limitate a 2 usatores) offerite per <a class="ulink" href="http://projectlocker.com/" target="_top">ProjectLocker</a>. Nota: le creator del deposito ha implicitemente le privilegios del administrator pro le deposito create. In prime loco signa
+                  in le site o - si il es vostre prime vece sur le site, que vos registra pro illo e que vos nota vos nomine del usator e contrasigno
+                  pro le futur projectos.
+               </p>
+               <div class="orderedlist">
+                  <ol class="orderedlist" type="1">
+                     <li class="listitem">
+                        <p>Crear un nove projecto sur ProjectLocker 2.</p>
+                     </li>
+                     <li class="listitem">
+                        <p>Scribe le nomine e le description del thesauro. ( <code class="literal">OmegaT</code> e <code class="literal">Localisation OmegaT SL</code>in le exemplo utilisate ci)
+                        </p>
+                     </li>
+                     <li class="listitem">
+                        <p>Eliger le<span class="guibutton"> SVN.</span></p>
+                     </li>
+                     <li class="listitem">
+                        <p>Clic <span class="guibutton">Create Project</span></p>
+                     </li>
+                  </ol>
+               </div>
+               <p>Aperi le vista<span class="bold"><strong> Projects</strong></span> pro tu conto. Le URL monstrate sub Servicios de Projecto essera usate per SVN pro connecter le clientes al server SVN que
+                  tu ha justo establite. Isto es alsi le loco pro adder membros del equipa al projecto e assignar a illes lor privilegios. Nota
+                  que le membros del equipa debe esser registrate antea, ante que tu pote adder illes al projecto (Nota: in le version gratuite
+                  de ProjectLocker on es permittite sol duo usatores per projecto).
+               </p>
+               <p>Le projectos pote esser tractate secundo tu stilo de disveloppamento e tu necessitates. Como in le caso del projectos de OmegaT,
+                  tu necessitara depositos separate pro pares de lingua differente. Intra un par de lingua date il es optime servar subjectos
+                  vel clientes differente como depositos separate. Le alternativa es haber un singule deposito con sub plicas<code class="literal">Project1</code>, <code class="literal">Project2</code>, etc., e le material commun via plicas <code class="literal">tm</code>, <code class="literal">glossary</code> e <code class="literal">dictionary</code> commun.
+               </p>
+               <p>Pro le exemplo monstrate ci nos decideva pro le projecto OmegaT uno - un sol deposito pro le rationes de simplicitate.</p>
+            </div>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="d0e10606"></a>2.2.&nbsp;Como importar le projecto al deposito SVN - Windows
+                        </h3>
+                     </div>
+                  </div>
+               </div>
+               <p>Le deposito es vacue in iste momento. Crea in prime loco un plica cliente sur tu disco dur. Crea un plica vacue, ubi tu retenera
+                  tu projecto e clicca con le dextero sur illo. Selige<span class="guilabel"> TortoiseSVN &gt; Checkout.</span> Appare le fenestra de dialogo sequente:
+               </p>
+               <div class="mediaobject"><img src="images/Team_projects_checkout.png"></div>
+               <p>Inscribe le URL, supplite per ProjectLocker, in le campo <span class="bold"><strong>URL of repository</strong></span>. Assecura te que le campo <span class="bold"><strong>Checkout directory</strong></span> es correcte, id es illo specifica le plica vacue que tu ha create, e pulsa <span class="bold"><strong>OK</strong></span>. un vice que le operation ha finite, tu pote controlar le plica dicite: illo deberea ora continer un sub plica .svn e un
+                  placa OK verde sur su icone monstrara, que le contentos del plica son renovate:
+               </p>
+               <p>In le grado successive, nos addera le files OmegaT al plica local. Le files sequente debe esser in commun inter le membros
+                  del equipa e assi debe ser includite in omne caso:
+               </p>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
+                     <li class="listitem">
+                        <p>le file del projecto omegat - <code class="filename">omegat.project</code></p>
+                     </li>
+                     <li class="listitem">
+                        <p>le memoria de traduction - <code class="filename">omegat\project_save.tmx</code></p>
+                     </li>
+                     <li class="listitem">
+                        <p>le contentos del plica fonte</p>
+                     </li>
+                     <li class="listitem">
+                        <p>le definition del filtros projecto-specific - <code class="filename">omegat\filters.xml</code></p>
+                     </li>
+                  </ul>
+               </div>
+               <p>Le administrator pote decider pro comprender le plicas sequente e lor contentos assi como: <code class="filename">tm</code>, <code class="filename">glossary</code> e <code class="filename">dictionary</code>. Etiam <code class="filename">ignored_words.txt</code> e <code class="filename">learned_words.txt</code> in le plica <code class="filename">omegat</code> poter esser conveniente participar e mantener al nivello del equipa. Evitar in omne caso de adder files <code class="filename">bak</code>, <code class="filename">project_stats.txt</code> e <code class="filename">project_stats_match.txt</code>, in le sub plica <code class="filename">omegat</code>, pois que facerea los sin alicun necessitate ni profito justo infla le deposito. Tu pote desirar applicar lo identic al plica
+                  <code class="filename">target</code> e su contentos.
+               </p>
+               <p>Post copiate le files necessari in le plica checkout tu remarcara que su icone cambiava: le placa OK verde cambiava a un signo
+                  de exclamation rubre, marca del cambio in le copia local del deposito. Le duo grados sequente renovara le version del server:
+               </p>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
+                     <li class="listitem">
+                        <p><span class="bold"><strong>adde le files copiate al version local del deposito:</strong></span> clicca con le dextero sur le plica checkout local e selige <span class="guilabel">TortoiseSVN &gt; Add.</span> In le fenestra de dialogo que se displica, lassa omne optiones ut jam arrangiate e clicca<span class="guilabel"> OK</span>. Le Adde es finite! un fenestra, simile  a illo sequente apparera:
+                        </p>
+                        <div class="mediaobject"><img src="images/Team_projects_Add.png"></div>
+                        <p>Le contentos del plica checkout essera marcate in consequentia:</p>
+                        <div class="mediaobject"><img src="images/Team_projects_checkoutAddFolder.png"></div>
+                     </li>
+                     <li class="listitem">
+                        <p><span class="bold"><strong>commit le cambios local al server: </strong></span>clicca con le dextero sur le plica del checkout local e selige <span class="guilabel">SVN Commit....</span> Le fenestra de Commit - se displica, vide in sequito. Controla le cambios a facer - id es le plicas e le files addite in
+                           iste caso.
+                        </p>
+                        <div class="mediaobject"><img src="images/Team_projects_initialCommit.png"></div>
+                        <p>Inscribe un message appropriate in le fenestra message e pulsa <span class="guilabel">OK</span>. Se aperira le fenestra Commit e monstrara le progresso del commando commit. Illo committera in prime loco le contentos currente
+                           al deposito del server e pois renovate le copia local  del deposito - id es le contentos del sub plica .svn - de maniera que
+                           illo es renovate con le ultime version del deposito.
+                        </p>
+                     </li>
+                     <li class="listitem">
+                        <p><span class="bold"><strong>renova le files local ex le copia local del deposito</strong></span> - le cambios recipite del deposito del server demora intra le sub plica .svn ma non ancora in le files e plicas ipse. Pro
+                           renovar le files local , clicca con le dextero sur le plica del checkout e selige <span class="guilabel">SVN Update</span>. Controla le contentos del plica pro confirmar que le copia local del deposito e le files e plicas correspondente corresponde
+                           al ultime version del server:
+                        </p>
+                        <div class="mediaobject"><img src="images/Team_projects_checkoutSVNupdate.png"></div>
+                     </li>
+                  </ul>
+               </div>
+            </div>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e10743"></a>3.&nbsp;Usar le projecto in equipa in OmegaT
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>Un vice que le projecto in equipa es preparate, le membros del equipa debe sol acceder al projecto in equipa con <span class="application">OmegaT</span>. In prime loco, illes necessita usar <span class="guilabel">Projecto &gt; Discarga le Projecto in Equipa </span>. Isto in realitate face un checkout del projecto in un plica local. Le credentiales son registrate, assi non necessita inscriber
+               los cata vice. Sub Linux, si <span class="application">OmegaT</span> demanda ancora pro tu credentiales, tu pote marcar le cassa de marca <span class="guilabel">Fortia le salvamento del contrasigno como texto simple</span>.
+            </p>
+            <p>Pro le uso ulterior, toto lo que necessita es aperir le projecto como qualcunque altere projecto  <span class="application">OmegaT</span>. OmegaT recognoscera que illo es un projecto in equipa, e synchronisara omne cosa automaticamente, tote le tres minutas,
+               per arrangiamento initial.
+            </p>
+         </div>
+      </div>
+      <div class="navfooter">
+         <hr>
+         <table width="100%" summary="Navigation footer">
+            <tr>
+               <td width="40%" align="left"><a accesskey="p" href="appendix.keyboard.html">Prev</a>&nbsp;
+               </td>
+               <td width="20%" align="center">&nbsp;</td>
+               <td width="40%" align="right">&nbsp;<a accesskey="n" href="appendix.TokenizerPlugin.inOmegaT.html">Next</a></td>
+            </tr>
+            <tr>
+               <td width="40%" align="left" valign="top">Appendix&nbsp;B.&nbsp;Vias breve del claviero in le Modifica&nbsp;</td>
+               <td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
+               <td width="40%" align="right" valign="top">&nbsp;Appendix&nbsp;D.&nbsp;Plugin Tokenizer</td>
+            </tr>
+         </table>
+      </div>
+   </body>
+</html>

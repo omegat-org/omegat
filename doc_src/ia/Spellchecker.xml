@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<chapter id="chapter.spellchecker">
+  <title>Corrector orthographic <indexterm class="singular">
+      <primary>Corrector orthographic </primary>
+    </indexterm></title>
+
+  <para>OmegaT include un corrector orthographic basate super le corrector orthographic usate in OpenOffice.org, Firefox e Thunderbird. Illo ergo es habile a usar le enorme extension de dictionarios orthographic gratuite disponibile pro iste applicationes.</para>
+
+  <section>
+    <title>Installar le dictionarios orthographic.</title>
+
+    <para>Ante que le corrector orthographic pote functionar, on debe installar un dictionarios convenibile (i.e. pro tu lingua final). Seque iste procedura pro installar le dictionarios orthographic:</para>
+
+    <itemizedlist>
+      <listitem>
+        <para>In tu administrator de file, crea un nove classificator in un position convenibile ubi immagazinar le dictionarios orthographic (D:\Translations\spellcheckers in le exemplo in basso).</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>In OmegaT, selige <guisubmenu><indexterm class="singular">
+            <primary>Menu Optiones</primary> <secondary>Controlo orthographic</secondary>
+          </indexterm></guisubmenu><guimenuitem>Optiones &gt; Controlo orthographic</guimenuitem>, dunque clicca <guibutton>Elige </guibutton>al latere del campo classificator del file Dictionario. Naviga e selige le classificator que tu creava pro le dictionarios.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Mitte le files dictionario Que tu vole usar in iste classificator. On ha essentialmente duo manieras pro lo far. Tu pote o copiar le files manualmente, i.e. ab alibi in tu systema, con le empleo de tu administrator de file; o tu pote usar le function de OmegaT <emphasis role="bold">&quot;Installa un nove dictionario&quot;</emphasis> pro obtener un lista de dictionarios ex quo seliger lo. Nota que le function &quot;Installa&quot; necessita un connexion a Interrete. Le linguas seligite alora essera installate e eventualmente apparera in tu fenestra de preparation del corrector orthographic (isto pote prender un lapso).</para>
+      </listitem>
+    </itemizedlist>
+
+    <para>Copiar le files manualmente ha senso si tu ha jam files dictionario convenibile in tu systema, per exemplo como parte de tu installation de OpenOffice o Thunderbird. Comocunque il es plus simple, cercar pro dictionarios in interrete, usante le campo <emphasis role="bold">URL del dictionarios in interrete</emphasis> :</para>
+
+    <figure id="spellchecker.setup">
+      <title><indexterm class="singular">
+          <primary>Corrector orthographic</primary> <secondary>preparation del corrector orthographic</secondary>
+        </indexterm>Preparation del corrector orthographic</title>
+
+      <mediaobject>
+        <imageobject role="html">
+          <imagedata fileref="images/SpellcheckerSetup_25.png"/>
+        </imageobject>
+
+        <imageobject role="fo">
+          <imagedata fileref="images/SpellcheckerSetup_25.png" width="80%"/>
+        </imageobject>
+      </mediaobject>
+    </figure>
+
+    <para>Cliccar sur le button <guibutton>Installa un nove dictionario</guibutton>, aperira le fenestra installator de Dictionario, ubi tu pote seliger le dictionarios que tu vole installar.</para>
+
+    <para>Le nomines del files debe exactemente corresponder al codice del lingua de tu lingua final como definite in le fenestra de dialogo Proprietates del projecto (<guimenu>Project &gt; Properties</guimenu>). Per exemplo, si tu ha seligite ES-MX (Mexican Spanish) como le lingua de destination, le files del dictionario debe esser nominate es_MX.dic e es_MX.aff. Si tu ha disponibile sol un dictionario Standard espaniol, con le nomines del file es_es.dic e es_es.aff , tu pote copiar iste files in es_MX.dic e es_MX.aff, e le dictionario orthographic functionara. Nota que illo naturalmente controlara pro le Standard plus tosto que pro le Espaniol Mexicano!)</para>
+  </section>
+
+  <section>
+    <title>Usar le dictionarios orthographic.</title>
+
+    <para>Il non ha alicun necesse a instruer OmegaT pro usar un particular dictionario orthographic; OmegaT usara le dictionario del correcte lingua in base al codices del lingua de tu projecto. Controla comocunque que le codices del lingua es exactemente le mesme: un dictionario FR-FR non laborara con un preparation pro la lingua final FR, per exemplo. Si necessari, edita le  nomines del file del dictionario o cambia tu preparationes pro le lingua de tu projecto.</para>
+
+    <para>Pro habilitar le corrector orthographic, selige <guimenuitem>Optiones &gt; Controlo Orthographic</guimenuitem> e marca le cassa de marca <guilabel>Controla automaticamente le orthographia del texto</guilabel> (vide supra).</para>
+
+    <figure id="spellchecker.in.action">
+      <title>Usar le Controlo Orthographic</title>
+
+      <mediaobject>
+        <imageobject role="html">
+          <imagedata fileref="images/SpellcheckingText.png"/>
+        </imageobject>
+
+        <imageobject role="fo">
+          <imagedata fileref="images/SpellcheckingText.png" width="80%"/>
+        </imageobject>
+      </mediaobject>
+    </figure>
+
+    <para>Cliccante con le dextra sur un parola sublineate (Artund in le figura ante) se displica un menu a cortina listante suggestiones pro le correction (Art und). Tu pote alsi instruer le corrector orthographic pro ignorar omne le occurrentias del parola con cacographia, o los adder al dictionario.</para>
+  </section>
+
+  <section id="hints">
+    <title>Consilios<indexterm class="singular">
+        <primary>Corrector orthographic</primary> <secondary>Consilios</secondary>
+      </indexterm></title>
+
+    <para>Si le corrector orthographic es non functionante, alora face secur in prime loco que le cassa de marca <guilabel>&quot;Controla automaticamente le orthographia del texto&quot;</guilabel> in le fenestra de dialogo del corrector orthographic  (<guisubmenu>Optiones &gt; correction orthographic...)</guisubmenu> es marcate.</para>
+
+    <para>Controla anque que le codice del lingua final de tu projecto contra le vocabularios disponibile in le fenestra de preparation. Le corrector orthographic usa le codice del lingua final pro determinar le lingua a usar: si le lingua final es brasilian portugese (PT_BR), le subclassificator con le vocabularios debe continer le duo files vocabulario nominate <emphasis>pt_br.aff</emphasis> and <emphasis>pt_br.dic</emphasis>.</para>
+
+    <para>Si tu ha jam rendite un grande corpore de texto, e alora realisa que le codice del lingua final del projecto non equala le codice del  lingua del corrector orthographic (per exemplo tu ha specificate pt_BR como le lingua, ma non ha nulle vocabularios pt_BR) tu pote simplemente copiar le duo files correspondente e los renominar (e.g. ab <emphasis>pt_PT.arr</emphasis> e <emphasis>pt_PT.dic</emphasis> a <emphasis>pt._BR.arr</emphasis> e <emphasis>pt_BR.dic</emphasis>). Naturalmente  Il es multo plus prudente, prender un breve pausa e discargar le correcte versiones del corrector orthographic.</para>
+
+    <para>Nota que <filename>Remove</filename> elimina physicamente le vocabularios seligite. Si illos es usate ab alicun altere application sur tu systema, illos disparera alsi ab celle application. Si illos es usate ab alicun altere application sur tu systema, illos disparera alsi ab celle application.</para>
+  </section>
+</chapter>

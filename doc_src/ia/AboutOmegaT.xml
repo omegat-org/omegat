@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<chapter id="chapter.about.OmegaT">
+  <title>Re <application>OmegaT</application> - introduction</title>
+
+  <section id="OmegaT-Highlists">
+    <title>OmegaT aspectos notabile</title>
+
+    <para><application>OmegaT</application> es un instrumento gratuite de traduction assistite ab computator, multo - platteforma, con le sequente aspectos notabile:</para>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis role="bold">Memoria de traduction:</emphasis><application> </application>OmegaT archiva tu traductiones in un file memoria de traduction. In le mesme tempore, il pote usar le files memorias ex previe traductiones pro referentia. Le memorias de traduction pote esser multo utile in un traduction ubi ha numerose repetitiones o segmentos de texto rationabilemente simile. OmegaT usa le memorias de traduction pro registrar tu previe traductiones e alora suggere traductiones verosimilante pro le texto que tu es actualmente traducente.</para>
+
+        <para>Iste memorias de traduction pote esser multo utile in un documento jam rendite, que necessita de actualisation. Le phrases sin alteration es automaticamente rendite, dum le phrases renovate es monstrate con le traduction de phrases senior le plus similabile. Le modificationes al documento original es assi tractate con major facilitate. Si tu ha previe memorias de traduction, per exemplo ab tu agentia de traduction o ab un cliente, OmegaT pote los usar pro memorias de referentia.</para>
+
+        <para>OmegaT usa le formato de file TMX standard pro registrar e acceder le memorias de traduction, le qual garanti que tu pote excambiar tu material de traduction con altere applicationes CAT que supporta le mesme formato de file.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis role="bold">La gestion del terminologia</emphasis>: La gestion del terminologia es importante pro le consistentia del traduction. OmegaT usa glossarios continente traductiones de parolas singule o parve phrases: un dictionario bilingue simplificate pro un specific dominio. Pro tu referentia, OmegaT monstra le traduction de omne le parolas del glossario que sia presente in le segmento e registrate in le glossario.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis role="bold">Processo de traduction:</emphasis> Figura te de deber traducer alique; ab un sol file a un classificator continente subcamisas, cata con plure files in un varietate de formatos. Quando tu face saper a OmegaT le files que tu debe traducer, illo examina le files que comprende, con le regulas de filtration del files, recognosce le partes textual intra illos, divide le gruppos de texto secundo le regulas de segmentation e expone le segmentos uno a uno, de maniera que tu pote proceder con le traduction. OmegaT registra tu traductiones e propone eventual traductiones ab segmentos simile registrate in le files memoria de traduction. Quando tu es preste pro vider le producto final, tu pote exportar le files rendite, los aperir con le application appropriate e examinar le traduction in le formato final...</para>
+      </listitem>
+    </itemizedlist>
+  </section>
+
+  <section id="OmegaT.chapters.summary">
+    <title>Summario del capitulos</title>
+
+    <para>Iste documentation es designate et como parve instruction et como le guida de referentia. Ecce un breve summario del capitulos e de lor contentos.</para>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis role="bold">Guida de initio rapide:</emphasis> iste capitulo es designate como un parve instruction rapide sia pro novicios sia pro gente que jam cognosce le applicationes CAT, monstra le procedura complete ab le apertura de un nove projecto de traduction, al completamento del traduction..</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis role="bold">Installar e executar OmegaT: </emphasis>iste capitulo es utile pro initiar a usar OmegaT. Illo contine le instructiones specific pro installar OmegaT e executar lo sur Windows, Mac OS X e Linux. Pro le usatores avantiate, le capitulo describe le functionamento in modalitate 'linea de commando' e su possibilitates.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis role="bold">Le interfacie del usator</emphasis>,<emphasis role="bold">Menu Principal e Vias Breve del claviero</emphasis>: iste duos capitulos debe probabilemente esser pesantemente consultate, pois que illos explica le interfacie del usator de OmegaT e le functiones utilisabile via le menu principal e le vias breve ex claviero.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis role="bold">Proprietates del projecto </emphasis>, <emphasis role="bold"><application>OmegaT</application> Files e Plicas:</emphasis> un projecto in the contexto de OmegaT es le parte del obra que OmegaT, como instrumento CAT, pote tractar. Iste capitulo describe le proprietates del projecto, como le linguas original e final. Le secundo de iste capitulos describe le varie sub plicas e files in un projecto de traduction e lor rolo, assi como altere files del usator e del applicationes associate con OmegaT.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis role="bold">Comportamento del campo de modifica:</emphasis> un breve capitulo describente como preparar le comportamento del editor pro le segmento a render.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis role="bold">Laborar con texto plan</emphasis> e <emphasis role="bold">Laborar con texto formate</emphasis>: iste duos capitulos explica alcun importante punctos re le textos a render, como le codification (in le caso del files de texto plan) e le tractamento del tags (in le caso del textos formate).</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis role="bold">Memorias de traduction: </emphasis> explica le rolo del varie sub plicas continente memorias de traduction, e provide informationes re altere importante aspectos del memorias de traduction.</para>
+      </listitem>
+
+      <listitem>
+        <para><emphasis role="bold">Segmentation</emphasis>: le instrumentos de memoria de traduction functiona con unitates textual nominate segmentos. In OmegaT, le segmentos pote esser basate sur paragraphos o regulas de segmentation. Le segmentation basate super paragraphos es usate minus frequentemente, ma pote esser utile in casos del textos si-nominate &quot;creative&quot;. Le segmentation basate super le regulas es habitualmente synonyme con le segmentation basate super le phrases. Plure collectiones de regulas es fornite dum additional regulas pote esser definite ab le usator, como describe iste capitulo.</para>
+      </listitem>
+
+      <listitem>
+        <para><emphasis role="bold">Recercas</emphasis> e<emphasis role="bold"> </emphasis><emphasis role="bold">Expressiones regular</emphasis>: Recercas in OmegaT pote esser simple como &quot;<emphasis>lista le segmentos con </emphasis><emphasis>le parola 'kangaroo' &quot;. </emphasis> Istos pote alsi esser complexe, permittente per exemplo de cercar pro segmentos con duos o plus de spatios consecutive. In iste caso le expression regular ^s^s+ essera usate pro trovar un lista de segmentos problematic. Regular expressiones es alsi usate amplemente in le regulas de segmentation.</para>
+      </listitem>
+
+      <listitem>
+        <para><emphasis role="bold">Dictionarios, Glossarios</emphasis>, <emphasis role="bold">traduction a machina</emphasis> , <emphasis role="bold">corrector orthographic, LanguageTool:</emphasis> OmegaT supporta un  extensive uso de dictionarios e glossarios. Si es disponibile un connexion a interrete, on pote usar intra OmegaT, varie servicios de traduction automatic (MT) assi como Google Translate. Si es activate le controlo orthographic, le errores orthographic e le lapsus es identificate e marcate pro esser correcte durante le traduction. Le application LanguageTool, open source, pote esser usate pro corriger commun errores grammatical e stilistic.</para>
+      </listitem>
+
+      <listitem>
+        <para><emphasis role="bold">Miscellanea</emphasis>: tracta altere interessante subjectos, assi como evitar le perdita del datos.</para>
+      </listitem>
+
+      <listitem>
+        <para><emphasis role="bold">Appendices</emphasis> contine le information sequente</para>
+
+        <itemizedlist>
+          <listitem>
+            <para><emphasis role="bold">OmegaT sur le TTT:</emphasis> informationes re le ressources in rete de OmegaT</para>
+          </listitem>
+        </itemizedlist>
+
+        <itemizedlist>
+          <listitem>
+            <para><emphasis role="bold">Linguas:</emphasis> contine le lista del linguas e del codices de lingua ISO. </para>
+          </listitem>
+        </itemizedlist>
+
+        <itemizedlist>
+          <listitem>
+            <para><emphasis role="bold">Vias breve de claviero in le Editor</emphasis>: le lista del vias breve usate pro le Modifica</para>
+          </listitem>
+
+          <listitem>
+            <para><emphasis role="bold">Personalisation del vias breve:</emphasis> le vias breve pote esser personalisate pro adaptar los a tu preferentias personal</para>
+          </listitem>
+        </itemizedlist>
+
+        <itemizedlist>
+          <listitem>
+            <para><emphasis role="bold">Introduction a Tokenizer e al plugins de Scripting</emphasis></para>
+          </listitem>
+
+          <listitem>
+            <para><emphasis role="bold">Projectos in equipa</emphasis></para>
+          </listitem>
+        </itemizedlist>
+
+        <itemizedlist>
+          <listitem>
+            <para><emphasis role="bold">Informationes legal e Recognitiones</emphasis></para>
+          </listitem>
+        </itemizedlist>
+      </listitem>
+
+      <listitem>
+        <para><emphasis role="bold">Indice del parolas clave:</emphasis> un indice extense del parolas clave es fornite pro adjutar le lector a trovar le information pertinente.</para>
+      </listitem>
+    </itemizedlist>
+  </section>
+</chapter>

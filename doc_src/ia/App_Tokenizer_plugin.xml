@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<appendix id="appendix.TokenizerPlugin.inOmegaT">
+  <title>Plugin Tokenizer<indexterm class="singular">
+      <primary>Plugins</primary> <secondary>Cercator de stirpe (tokenizer)</secondary>
+    </indexterm></title>
+
+  <section>
+    <title>Introduction<indexterm class="singular">
+        <primary>Lucene</primary> <see>Tokenizer</see>t
+      </indexterm><indexterm class="singular">
+        <primary>Cercator de radice</primary> <see>Tokenizer</see>
+      </indexterm></title>
+
+    <para>Le cercatores del radice (tokenizers) meliora le qualitate de concordantias con le recognition del parolas declinate in le datos del memoria primari e in le traduction. Illos meliora alsi la concordantia del glossario.</para>
+
+    <para>Un cercator de radice pro le anglese, per exemplo, deberea identificar le linea &quot;cats&quot; (e possibilemente &quot;catlike&quot;, &quot;catty&quot; etc.) como basate super le radice &quot;cat&quot;, e &quot;stemmer&quot;, &quot;stemming&quot;, &quot;stemmed&quot; como basate super &quot;stem&quot;. Un algorithmo de cerca del radice reduce le parolas &quot;fishing&quot;, &quot;fished&quot;, &quot;fish&quot;, e &quot;fisher&quot; al radice, &quot;fish&quot;. Isto es in modo special utile in caso de  linguas que usa formas con pre- e suffixo pro le radices. Faciente se prestar un exemplo ex le sloveno, ci &quot;bon&quot; in omne possibile formas grammaticamente correcte:</para>
+
+    <itemizedlist>
+      <listitem>
+        <para>lep, lepa, lepo - singular, masculin, feminin, neutral</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>lepši, lepša, lepše . - comparative, nominative, masculin, feminin, neutral, resp. Forma plural del adjective</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>najlepših - superlative, plural, genitive pro M,F,N</para>
+      </listitem>
+    </itemizedlist>
+  </section>
+
+  <section>
+    <title>Installation e uso</title>
+
+	<para>Le tokenizers son includite in OmegaT. OmegaT selige automaticamente un tokenizer pro le lingua fonte e uno pro le lingua de destination secundo le preparationes del lingua del projecto. Il es possibile seliger un altere tokenizer o un version differente del tokenizer del fenestra Proprietates del Projecto.</para>
+
+	<warning>
+		<title>Incompatibilitates</title>
+		<para>OmegaT non lanceara se si son trovate tokenizers in le plica /plugin. Leva omne le tokenizers ex le plica  /plugin ante que tu lancea OmegaT.</para>
+	</warning>
+	
+  </section>
+</appendix>

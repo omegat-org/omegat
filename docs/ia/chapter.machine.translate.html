@@ -1,0 +1,227 @@
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <title>Chapter&nbsp;19.&nbsp;Traduction automatica</title>
+      <link rel="stylesheet" type="text/css" href="OmegaT.css">
+      <meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
+      <link rel="home" href="index.html" title="OmegaT - Guida del usuario">
+      <link rel="up" href="index.html" title="OmegaT - Guida del usuario">
+      <link rel="prev" href="chapter.glossaries.html" title="Chapter&nbsp;18.&nbsp;Glossarios">
+      <link rel="next" href="chapter.spellchecker.html" title="Chapter&nbsp;20.&nbsp;Corrector orthographic">
+   </head>
+   <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+      <div class="navheader">
+         <table width="100%" summary="Navigation header">
+            <tr>
+               <th colspan="3" align="center">Chapter&nbsp;19.&nbsp;Traduction automatica</th>
+            </tr>
+            <tr>
+               <td width="20%" align="left"><a accesskey="p" href="chapter.glossaries.html">Prev</a>&nbsp;
+               </td>
+               <th width="60%" align="center">&nbsp;</th>
+               <td width="20%" align="right">&nbsp;<a accesskey="n" href="chapter.spellchecker.html">Next</a></td>
+            </tr>
+         </table>
+         <hr>
+      </div>
+      <div class="chapter">
+         <div class="titlepage">
+            <div>
+               <div>
+                  <h1 class="title"><a name="chapter.machine.translate"></a>Chapter&nbsp;19.&nbsp;Traduction automatica<a class="indexterm" name="d0e8252"></a></h1>
+               </div>
+            </div>
+         </div>
+         <div class="toc">
+            <dl class="toc">
+               <dt><span class="section"><a href="chapter.machine.translate.html#d0e8255">1. Introduction</a></span></dt>
+               <dt><span class="section"><a href="chapter.machine.translate.html#introduction">2. Google Translate</a></span></dt>
+               <dt><span class="section"><a href="chapter.machine.translate.html#d0e8296">3. Usatores de <span class="application">OmegaT</span> e Google Translate</a></span></dt>
+               <dt><span class="section"><a href="chapter.machine.translate.html#d0e8349">4. Belazar</a></span></dt>
+               <dt><span class="section"><a href="chapter.machine.translate.html#d0e8361">5. Apertium</a></span></dt>
+               <dt><span class="section"><a href="chapter.machine.translate.html#Google.Translate.troubleshooting">6. Traduction Automatic - cerca del defectos</a></span></dt>
+            </dl>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e8255"></a>1.&nbsp;Introduction<a class="indexterm" name="d0e8258"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <p>Al contrario del memorias de traduction generate per le usator (como in le caso de <span class="application">OmegaT</span>) le applicationes de Traduction Automatic usa instrumentos linguistic basate sur regulas pro crear un traduction del segmento
+               fonte sin le necessitate de un memoria de traduction. Pro construer un modello de traduction son usate technicas statistic
+               de saper, basate sur textos de origine e final. Le servicios de Traduction Automatic ha complite resultatos bon e constantemente
+               melior in le evalutationes del recerca.
+            </p>
+            <p>Pro activar alicun del servicios de Traduction Automatic, va a <span class="guimenuitem">Optiones &gt; Traduction Automatic...</span> e activa le servicio desiderate. Nota que illos es omne basate sur le TTT: tu debera esser on-line si tu vole usar los.
+            </p>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="introduction"></a>2.&nbsp;Google Translate<a class="indexterm" name="d0e8276"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <p>Google Translate es un servicio pagabile offerite ex Google, pro render phrases, sitos TTT e textos complete inter un numero
+               de linguas semper crescente. Al tempore de scriptura le lista include plus que 50 linguas, ab le albanese al judeogermano,
+               includite naturalmente omne le linguas major. The current version of the service is based on usage, with the price of 20 USD
+               per million characters at the time of writing.<span class="bold"><strong></strong></span></p>
+            <p><span class="bold"><strong>Importante: </strong></span>Google Translate API v2 necessita information pro le factura pro omne le contos ante que tu pote initiar a usar le servicio
+               (vide <a class="ulink" href="https://developers.google.com/translate/v2/pricing?hl=en-US" target="_top">Pricing and Terms of Service</a> pro magis). Pro identificar te quam un usator valide del servicios Google, tu usa tu clave unic private expedite a te per
+               Google, quando tu ha registrate te pro le servicio. Vide capitulo <a class="link" href="chapter.installing.and.running.html" title="Chapter&nbsp;3.&nbsp;Installar e executar OmegaT">Installar e executar</a>, section Argumentos del commando de Lanceamento, pro detalios sur como adder iste clave clave al ambiente OmegaT.
+            </p>
+            <p>Le qualitate del traduction de Google Translate depende sur un latere sur le reservoir de textos del lingua de destination
+               e le disponibilitate de lor versiones bilingue, del altere parte sur le qualitate del modellos construite. Il es assatis certe
+               que dum le qualitate sia insufficiente in alicun casos, unes illo devenira melior con le tempore e non pejor.
+            </p>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e8296"></a>3.&nbsp;Usatores de <span class="application">OmegaT</span> e Google Translate
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>Le usator de <span class="application">OmegaT</span> non es coercite a usar Google Translate. Si usate, ni le decision del usator a acceptar le traduction ni le traduction final
+               son utilisabile per Google. Le fenestra sequente monstra un exemplo de a) le fonte anglese b) le traduction espaniol e c)
+               le traduction sloven de Google Translate.
+            </p>
+            <div class="figure"><a name="moby.dick"></a><p class="title"><b>Figure&nbsp;19.1.&nbsp;Google Translate - exemplo</b></p>
+               <div class="figure-contents">
+                  <div class="mediaobject"><img src="images/MobyDick.png" alt="Google Translate - exemplo"></div>
+               </div>
+            </div><br class="figure-break"><p>Le traduction espaniol es melior que illa sloven. Nota <span class="emphasis"><em>interesar</em></span> e<span class="emphasis"><em> navegar</em></span> in espaniol, son rendite correctemente como verbos interest e sail respectivemente. In le  version sloven ambe le parolas
+               esseva rendite qua nomines. Il es in veritate assatis probabile que le traduction espaniol es basate al minus partialmente
+               sur le traduction real del libro.
+            </p>
+            <p>Un vice que tu ha activate le servicio, un suggestion pro le traduction apparera in le quadro del Traduction Automatic cata
+               vice un nove segmento fonte es aperte. Si tu trova acceptabile le suggestion, pulsa <span class="keycap"><strong><a class="indexterm" name="d0e8327"></a>Ctrl</strong></span>+<span class="keycap"><strong>M</strong></span> pro reimplaciar  le parte de destination del segmento aperte con le suggestion. In le segmento precedente, per exemplo <span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>M</strong></span> reimplaciarea le version espaniol con le suggestion sloven.
+            </p>
+            <p>Si tu non desidera que <span class="application">OmegaT</span> remitte tu segmentos fonte a Google a devenir rendite, leva le marca al entrata del menu Google Translate in Optiones.
+            </p>
+            <p>Nota que sol tu segmento fonte es expedite al servicio de Traduction Automatic. Le version in interrete de Google Translate
+               permitte le usator a corriger le suggestion e inviar le segmento correcte. Iste characteristica, comocunque, non es implementate
+               in OmegaT.
+            </p>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e8349"></a>4.&nbsp;Belazar<a class="indexterm" name="d0e8352"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <p><a class="ulink" href="http://belazar.info/" target="_top">Belazar</a> es un application pro le traduction automatic pro le par del lingua russo-bielorusso.
+            </p>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e8361"></a>5.&nbsp;Apertium<a class="indexterm" name="d0e8364"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <p><a class="ulink" href="http://www.apertium.org/" target="_top">Apertium</a> es un platteforma de traductor automatic gratuite, open source, finalisate initialmente a pares de linguas relative, como
+               CA, ES, GA, PT, OC e FR ma in le ultime tempore expandite pro tractar con plus pares de linguas divergente (assi como anglese-catalano).
+               controla le sito TTT pro le ultime lista del pares de linguas implementate.
+            </p>
+            <p>Le platteforma provide</p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>un ingenio pro le traduction automatic, independente ab le linguas</p>
+                  </li>
+                  <li class="listitem">
+                     <p>applicationes pro administrar le datos linguistic necessari pro construer un systema de traductor automatic pro un date par
+                        de lingua e
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>datos linguistic pro un crescente numero de pares de lingua</p>
+                  </li>
+               </ul>
+            </div>
+            <p>Apertium usa un machina automatic a traduction superficial le qual processa le texto fonte in stages, como in un linea de
+               montage: de-formattation, analyse morphologic, disambiguation del parte del discurso, traduction structural superficial, traduction
+               lexical, generation morphologic, e re-formattation.
+            </p>
+            <p>Il es possibile usar Apertium pro construer systemas de traductor automatic pro plure pares de linguas; pro le qual fin, Apertium
+               usa simple formatos standard basate sur XML pro codificar le datos linguistic necessitate (o per mano o per convertimento
+               de datos existente), que son compilate usante le applicationes fornite in le formatos de alte velocitate usate per le machina.
+            </p>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="Google.Translate.troubleshooting"></a>6.&nbsp;Traduction Automatic - cerca del defectos<a class="indexterm" name="d0e8393"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <p>Si il ha nihil appare in le quadro Traduction Automatic, alora controla le sequente:</p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>Es tu in interrete? Tu necessita esser in interrete pro esser habile a usar un application MT.</p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>Qual es le par de lingua que tu necessita? Controla que le Servicio seligite offere lo.</p>
+                  </li>
+                  <li class="listitem">
+                     <p>Google Translate non functiona: ha tu applicate le <a class="ulink" href="https://developers.google.com/translate/v2/faq" target="_top">Servicio API de traduction</a>? Nota que le servicio Google Translate non es gratuite, vide le capitulo <a class="link" href="chapter.installing.and.running.html" title="Chapter&nbsp;3.&nbsp;Installar e executar OmegaT">Installar e executar</a> (parametros runtime) pro plus sur isto.
+                     </p>
+                  </li>
+                  <li class="listitem">
+                     <p>"Google Translate rendeva le codice responsa HTTP: 403 ...": controla que le clave de 38-characteres, inscribite in le file
+                        pinfo.list, es correcte. Controla que le <a class="ulink" href="https://developers.google.com/translate/v2/faq" target="_top">Servicio API de traduction </a>esseva activate.
+                     </p>
+                  </li>
+                  <li class="listitem">
+                     <p>Google Translate non functiona: - con le clave API Google inscribite como requirite. Controla in Optiones &gt; Traduction Automatic,
+                        que Google Translate V2 es marcate.
+                     </p>
+                  </li>
+                  <li class="listitem">
+                     <p>Google Translate V2 reporta "Bad request" - controla le linguas original e final pro tu projecto. Haver nulle linguas definite
+                        evoca iste genere de responsa.
+                     </p>
+                  </li>
+               </ul>
+            </div>
+         </div>
+      </div>
+      <div class="navfooter">
+         <hr>
+         <table width="100%" summary="Navigation footer">
+            <tr>
+               <td width="40%" align="left"><a accesskey="p" href="chapter.glossaries.html">Prev</a>&nbsp;
+               </td>
+               <td width="20%" align="center">&nbsp;</td>
+               <td width="40%" align="right">&nbsp;<a accesskey="n" href="chapter.spellchecker.html">Next</a></td>
+            </tr>
+            <tr>
+               <td width="40%" align="left" valign="top">Chapter&nbsp;18.&nbsp;Glossarios&nbsp;</td>
+               <td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
+               <td width="40%" align="right" valign="top">&nbsp;Chapter&nbsp;20.&nbsp;Corrector orthographic </td>
+            </tr>
+         </table>
+      </div>
+   </body>
+</html>

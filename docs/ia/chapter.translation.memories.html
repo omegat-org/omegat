@@ -1,0 +1,543 @@
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <title>Chapter&nbsp;13.&nbsp;Memorias de traduction</title>
+      <link rel="stylesheet" type="text/css" href="OmegaT.css">
+      <meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
+      <link rel="home" href="index.html" title="OmegaT - Guida del usuario">
+      <link rel="up" href="index.html" title="OmegaT - Guida del usuario">
+      <link rel="prev" href="chapter.formatted.text.html" title="Chapter&nbsp;12.&nbsp;Operar con le texto formattate">
+      <link rel="next" href="chapter.segmentation.html" title="Chapter&nbsp;14.&nbsp;Segmentation del origine">
+   </head>
+   <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+      <div class="navheader">
+         <table width="100%" summary="Navigation header">
+            <tr>
+               <th colspan="3" align="center">Chapter&nbsp;13.&nbsp;Memorias de traduction</th>
+            </tr>
+            <tr>
+               <td width="20%" align="left"><a accesskey="p" href="chapter.formatted.text.html">Prev</a>&nbsp;
+               </td>
+               <th width="60%" align="center">&nbsp;</th>
+               <td width="20%" align="right">&nbsp;<a accesskey="n" href="chapter.segmentation.html">Next</a></td>
+            </tr>
+         </table>
+         <hr>
+      </div>
+      <div class="chapter">
+         <div class="titlepage">
+            <div>
+               <div>
+                  <h1 class="title"><a name="chapter.translation.memories"></a>Chapter&nbsp;13.&nbsp;Memorias de traduction<a class="indexterm" name="d0e6332"></a><a class="indexterm" name="d0e6335"></a></h1>
+               </div>
+            </div>
+         </div>
+         <div class="toc">
+            <dl class="toc">
+               <dt><span class="section"><a href="chapter.translation.memories.html#OmegaT.and.tmx.files">1. Memorias de traduction in OmegaT</a></span></dt>
+               <dd>
+                  <dl>
+                     <dt><span class="section"><a href="chapter.translation.memories.html#tmx.files.location.and.purpose">1.1. Le plicas pro le tmx - ubication e proposito</a></span></dt>
+                     <dt><span class="section"><a href="chapter.translation.memories.html#tmx.backup">1.2. copia de reserva del tmx </a></span></dt>
+                     <dt><span class="section"><a href="chapter.translation.memories.html#tmx.files.and.language">1.3. files tmx e lingua</a></span></dt>
+                     <dt><span class="section"><a href="chapter.translation.memories.html#d0e6632">1.4. Segmentos orphano</a></span></dt>
+                  </dl>
+               </dd>
+               <dt><span class="section"><a href="chapter.translation.memories.html#using.translation.memories.from.previous.projects">2. Reusar le memorias de traduction</a></span></dt>
+               <dd>
+                  <dl>
+                     <dt><span class="section"><a href="chapter.translation.memories.html#importing.and.exporting.translation.memories">2.1. Importar e exportar le memorias de traduction</a></span></dt>
+                     <dt><span class="section"><a href="chapter.translation.memories.html#Creating.a.translation.memory.for.selected.documents">2.2. Crear un memoria de traduction pro documentos seligite</a></span></dt>
+                     <dt><span class="section"><a href="chapter.translation.memories.html#sharing.translation.memories">2.3. Participar memorias de traduction</a></span></dt>
+                     <dt><span class="section"><a href="chapter.translation.memories.html#d0e6785">2.4. Usar le TMX con pares de lingua alternative</a></span></dt>
+                  </dl>
+               </dd>
+               <dt><span class="section"><a href="chapter.translation.memories.html#d0e6801">3. Fontes con traductiones existente</a></span></dt>
+               <dt><span class="section"><a href="chapter.translation.memories.html#pseudo.translated.memory">4. Memoria Pseudo-rendite</a></span></dt>
+               <dt><span class="section"><a href="chapter.translation.memories.html#upgrading.translation.memories">5. Promover le memorias de traduction</a></span></dt>
+            </dl>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="OmegaT.and.tmx.files"></a>1.&nbsp;Memorias de traduction in OmegaT
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="tmx.files.location.and.purpose"></a>1.1.&nbsp;Le plicas pro le tmx - ubication e proposito
+                        </h3>
+                     </div>
+                  </div>
+               </div>
+               <p>Le projectos <span class="application">OmegaT</span> pote detener files memoria de traduction - id es files con le extension tmx - in cinque distincte locos:
+               </p>
+               <div class="variablelist">
+                  <dl class="variablelist">
+                     <dt><span class="term"><a class="indexterm" name="d0e6354"></a>plica omegat</span></dt>
+                     <dd>
+                        <p>Le plica omegat contine le <code class="filename">project_save.tmx</code> e possibilemente plure files TMX de reserva. Le file <code class="filename">project_save.tmx</code> contine omne le segmentos que esseva registrate in memoria depois que tu ha initiate le projecto. Iste file existe sempre
+                           in le projecto. Su contentos essera sempre ordinate alphabeticamente per le segmento primari.
+                        </p>
+                     </dd>
+                     <dt><span class="term"><a class="indexterm" name="d0e6373"></a>plica principal del projecto</span></dt>
+                     <dd>
+                        <p>Le plica principal del projecto contine 3 files tmx, <code class="filename">project_name-omegat.tmx</code>, <code class="filename">project_name-level1.tmx</code> e <code class="filename">project_name-level2.tmx</code> (project_name es le nomine de tu projecto).
+                        </p>
+                        <div class="itemizedlist">
+                           <ul class="itemizedlist" style="list-style-type: disc; ">
+                              <li class="listitem">
+                                 <p>Le file level1 contine sol information textual.</p>
+                              </li>
+                              <li class="listitem">
+                                 <p>Le file level2 incapsula specific tags <span class="application">OmegaT</span> in correcte tags tmx a fin que on pote usar le file  con su information de formato in un instrumento de traduction que supporta
+                                    memorias tmx nivello 2, o ipse <span class="application">OmegaT</span>.
+                                 </p>
+                              </li>
+                              <li class="listitem">
+                                 <p>Le file <span class="application">OmegaT</span> include tags de formato specific <span class="application">OmegaT</span> de maniera que on pote usar the file in altere projectos <span class="application">OmegaT</span></p>
+                              </li>
+                           </ul>
+                        </div>
+                        <p>Iste files es copias del file <code class="filename">project_save.tmx</code>, id es del memoria de traduction del projecto principal, sin le si-appellate segmentos orphane. Illos porta nomines appropriatemente
+                           cambiate, de sorta que su contentos remane adhuc identificabile, quando alibi usate, per exemplo in le sub plica <code class="filename">tm</code> de alicun altere projecto (vide in sequito).
+                        </p>
+                     </dd>
+                     <dt><span class="term">plica <code class="filename"><a class="indexterm" name="d0e6427"></a>tm</code> </span></dt>
+                     <dd>
+                        <p>Le plica /tm/ pote continer qualcunque numero de  memorias de traduction auxiliar - id es files tmx. On pote crear tal files
+                           in qualcunque del tres varietates ante indicate. On pote crear tal files in qualcunque del tres varietates ante indicate.
+                           Le melior cosa naturalmente es usar files TMX specific pro OmegaT (vide supra), de maniera que le es retenite le formato intra
+                           le segmento.
+                        </p>
+                        <p>Le contentos del memorias de traduction in le sub plica tm serve a generar suggestiones pro le texto(s) a traducer. Omne le
+                           textos, jam rendite e registrate in ille files, apparera inter le concordantias partial, si illo es satis simile al texto
+                           actualmente a render.
+                        </p>
+                        <p>Si le segmento original in uno del TMs auxiliar es identic al texto a render, OmegaT age ut definite in le fenestra de dialogo
+                           <span class="guimenu">Optiones</span> → <span class="guimenuitem">Comportamento del Modifica...</span> . Per exemplo (si le preparation base es acceptate), le traduction ex le TM auxiliar es acceptate e prefixate con<span class="emphasis"><em> [fuzzy]</em></span>, de maniera que le traductor pote revider le traductiones in un grado sequente e controlar si le segmentos etiquettate in
+                           iste modo, esseva rendite correctemente (Vide le capitulo <a class="link" href="chapter.translation.editing.html" title="Chapter&nbsp;10.&nbsp;Comportamento del Modifica">Comportamento del Modifica</a>)<span class="guimenu">.</span> 
+                        </p>
+                        <p>Il pote occurrer, que le memorias de traduction, disponibile in le sub-classificator <code class="filename">tm</code>, contine segmentos con texto primari identic, ma textos final differente. Le files TMX es legite un linea al vice, ordinate,
+                           intra un file TMX date, secundo lor nomines e segmentos. Assi prevalera le ultime segmento con le identic texto fonte (Note:
+                           naturalmente ha plus senso evitar que isto occurre in le prime posto).
+                        </p>
+                        <p>Nota que le le files TMX in le plica tm pote esser comprimite con gzip.<a class="indexterm" name="d0e6466"></a></p>
+                     </dd>
+                     <dt><span class="term"><a class="indexterm" name="d0e6473"></a>plica tm/auto<a class="indexterm" name="d0e6481"></a></span></dt>
+                     <dd>
+                        <p>Si illo es clar a partir del initio, que le traductiones in certe  TMs es omne correcte, on pote mitter los in le plica <span class="bold"><strong> tm/auto</strong></span> e evitar de confirmar multe casos<span class="emphasis"><em> [fuzzy]</em></span>. Isto effectivemente <span class="bold"><strong>pre traducera </strong></span>le texto fonte: omne le segmentos  in le texto fonte, pro le qual on pote trovar traductiones in illos TMs "auto", atterrara
+                           in le TM principal del projecto sin alicun intervention del usator.
+                        </p>
+                     </dd>
+                     <dt><span class="term"><a class="indexterm" name="d0e6500"></a>plicas tm/penalty-xxx</span></dt>
+                     <dd>
+                        <p>Alicun vices, il es utile distinguer inter memorias de traduction de alte qualitate e  illos que es, a causa del stato del
+                           materia subjecto, del cliente, del revision, etc. es minus digne de fide. Pro le memorias de traduction in le plicas con nomine
+                           "penalty-xxx" (con xxx inter 0 e 100), le concordantias essera degradate secundo le nomine del plica: un concordantia 100%
+                           in omne de TMs, residente in un plica nominate Penalty-30 per exemplo, essera diminuite a un concordantia del 70%. Le penalitate
+                           refere a omne le tres percentual de concordantia: concordantias 75, 80, 90 essera in iste caso diminuite a 45, 50, 60.
+                        </p>
+                     </dd>
+                  </dl>
+               </div>
+               <p>Optionalmente, tu pote permitter que <span class="application">OmegaT</span> ha, alicubi tu specifica lo, un file tmx additional (<span class="application">OmegaT</span>-style), continente tote segmentos traducibile del projecto. Vide memoria pseudo-rendite in sequito.
+               </p>
+               <p>Nota que omne le memorias de traduction son cargate in memoria quando le projecto es aperte. Copias de reserva del memoria
+                  de traduction del projecto es producite regularmente (vide le capitulo successive), e <code class="filename">project_save.tmx</code> es alsi salvate/renovate quando le projecto es clause o cargate de nove. Isto significa per exemplo que tu non necessitate
+                  exir de un projecto re qui tu actualmente labora si tu decide de adder a illo un altere TM auxiliar: tu recarga simplemente
+                  le projecto, e le cambia tu ha facite essera includite.
+               </p>
+               <p>Le locationes del varie differente memorias de traduction pro un projecto date son definite per le usator (vide le fenestra
+                  de dialogo Projecto in <a class="link" href="chapter.project.properties.html" title="Chapter&nbsp;6.&nbsp;Proprietates del projecto">Proprietates del Projecto)</a></p>
+               <p>Dependente del situation, es assi possibile strategias differente, per exemplo:</p>
+               <p><span class="bold"><strong>plure projectos sur le mesme subjecto: </strong></span>retene le structura del projecto, e cambia plicas fonte e destination (Fonte = source/order1, destination = target/order1
+                  etc). Nota que tu segmenta ex order1, illo non es presente in order2 e altere obras subsequente, essera taggate como segmentos
+                  orphane; comocunque, illos essera ancora utile pro concordantias partial.
+               </p>
+               <p><span class="bold"><strong>plure traductores laborante sur le mesme projecto:</strong></span> finde le files fonte in source/Alice, source/Bob... e ubica los a membros del equipa (Alice, Bob ...). Illes pote ergo crear
+                  lor proprie projectos e, committer lor proprie <code class="filename">project_save.tmx</code>, quando finite o quando un certe petra milliari columna milliari esseva arrivate. Le files <code class="filename">project_save.tmx</code> son alora colligite e per exemplo son resolute conflictos eventual re respectos del terminologia. Es alora create un nove
+                  version del TM maestro, o pro ser placiate in le sub plicas <span class="emphasis"><em>tm/auto</em></span> del membros del equipa o pro reimplaciar lor files <code class="filename">project_save.tmx</code>. Le equipa pote alsi usar le mesme structura de sub plica pro le files final. Isto permitte los per exemplo a verificar in
+                  omne momento, si le version final pro le projecto complete es ancora OK
+               </p>
+            </div>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="tmx.backup"></a>1.2.&nbsp;copia de reserva del tmx <a class="indexterm" name="d0e6553"></a></h3>
+                     </div>
+                  </div>
+               </div>
+               <p>Quando tu rende tu files, <span class="application">OmegaT</span> registra tu labor a omne instante in <code class="filename">project_save.tmx</code> in le sub plica del projecto /<code class="filename">omegat</code>.
+               </p>
+               <p><span class="application">OmegaT</span> alsi face copias de reserva del memoria de traduction a <code class="filename">project_save.tmx.YEARMMDDHHNN.bak</code> in le mesme sub plica quandocunque un projecto es aperte o recargate. YEAR es le anno in 4 cifras, MM es le mense, DD le
+                  die del mense, e HH e NN son le horas e minutas quando le previe memoria de traduction esseva salvate.
+               </p>
+               <p>Si tu crede que tu ha perdite datos del traduction, seque le procedura sequente:</p>
+               <div class="orderedlist">
+                  <ol class="orderedlist" type="1">
+                     <li class="listitem">
+                        <p>Claude le projecto</p>
+                     </li>
+                     <li class="listitem">
+                        <p>Renomina le file <code class="filename">project_save.tmx</code> actual ( e.g. a <code class="filename">project_save.tmx.temporary</code>)
+                        </p>
+                     </li>
+                     <li class="listitem">
+                        <p>Selige le copia de reserva del memoria de traduction que es le plus probabile a continer le data pro le qual tu quere - per
+                           exemplo le plus recente, o le ultime version ex le die precedente 
+                        </p>
+                     </li>
+                     <li class="listitem">
+                        <p>Copia lo in <code class="filename">project_save.tmx</code></p>
+                     </li>
+                     <li class="listitem">
+                        <p>Aperi le projecto</p>
+                     </li>
+                  </ol>
+               </div>
+            </div>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="tmx.files.and.language"></a>1.3.&nbsp;files tmx e lingua<a class="indexterm" name="d0e6605"></a></h3>
+                     </div>
+                  </div>
+               </div>
+               <p>Le files Tmx contine unitates de traduction, facite de plure segmentos equivalente in alicun linguas. Un unitate de traduction
+                  include al minus duo variantes de unitate de traduction (TUV). Cata uno pote esser usate como le fonte o le destination.
+               </p>
+               <p>Le preparationes in tu projecto indica qual es le lingua fonte e qual le lingua de destination. OmegaT assi sume le segmentos
+                  TUV correspondente al codices fonte e destination del projecto e usa los ut segmentos fonte e destination respectivemente.
+                  OmegaT recognosce le codices lingua usante le duo conventiones standard sequente:
+               </p>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
+                     <li class="listitem">
+                        <p>codice del lingua de 2 litteras (e.g. JA pro japonese), o</p>
+                     </li>
+                     <li class="listitem">
+                        <p>de 2 o 3 litteras sequite per le codice del pais de 2 litteras (exempli gratia EN-US - Vide <a class="xref" href="appendix.languages.html" title="Appendix&nbsp;A.&nbsp;Linguas - lista del codices ISO 639">Appendix&nbsp;A, <i>Linguas - lista del codices ISO 639
+                                   
+                                   
+                                   </i></a> pro un lista partial de codices de lingua e pais).
+                        </p>
+                     </li>
+                  </ul>
+               </div>
+               <p>Si le codices lingua projecto e le codices lingua tmx concorda in detalio, le segmentos son cargate in memoria. Si le linguas
+                  concorda me non le pais, le segmentos ancora es cargate. Si ni le codice lingua ni le codice pais concorda, le segmentos essera
+                  ignorate.
+               </p>
+               <p><a class="indexterm" name="d0e6626"></a>Le files TMX pote continer generalmente unitates de traduction con plure linguas candidate. Si pro un date segmento fonte
+                  il ha nulle entrata pro le lingua de destination seligite, omne altere segmentos destination son cargate, sin reguardo del
+                  lingua. Per exemplo, si le par de lingua del projecto es DE-FR, il pote esser adhuc de alicun adjuta vider in le traduction
+                  DE-EN, si il ha necun in le par DE-FR.
+               </p>
+            </div>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="d0e6632"></a>1.4.&nbsp;Segmentos orphano<a class="indexterm" name="d0e6635"></a></h3>
+                     </div>
+                  </div>
+               </div>
+               <p>Le file <code class="filename">project_save.tmx</code> contine omne le segmentos que esseva rendite depois que tu initiava tu projecto. Si tu modifica le segmentation del projecto
+                  o dele files in le fonte, alcun concordantias pote apparer como <span class="bold"><strong>lineas de characteres orphane</strong></span> in le quadro del concordantia: tal concordantias refere a segmentos que non existe alicun plus in le documentos fonte, pois
+                  que illos corresponde a segmentos rendite e registrate ante que le modificationes habeva loco.
+               </p>
+            </div>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="using.translation.memories.from.previous.projects"></a>2.&nbsp;Reusar le memorias de traduction<a class="indexterm" name="d0e6651"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <p>Initialmente, id es quando le projecto es create, le TM principal del projecto, <code class="filename">project_save.tmx</code> es vacue. Iste TM paulatim deveni plen durante le traduction. Pro accelerar iste processo, pote esser reusate traductiones
+               existente. Si un phrase date esseva jam rendite un vece, e rendite correctemente, il non ha necessitate pro retraducer lo.
+               Le memorias de traduction pote alsi continer traductiones de referentia: legislation multinational, assi como celle del Communitate
+               Europee, es un exemplo typic.
+            </p>
+            <p>Quando tu crea le documentos final in un projecto <span class="application">OmegaT</span>, le memoria de traduction del projecto es emittite in le forma de tres files in le plica radice de tu projecto <span class="application">OmegaT</span> (vide le description precedente). Tu pote considerar iste tres files TMX (<code class="filename">-omegat.tmx</code>, <code class="filename">-level1.tmx</code> e <code class="filename">-level2.tmx</code>) como un "memoria de traduction pro exportation", id es como un exportation de tu contento del projecto actual in forma bilingue.
+            </p>
+            <p>Deberea tu desirar de reusar un memoria de traduction de un projecto previe (per exemplo quia le nove projecto es simile al
+               projecto previe, o usa terminologia que poteva esser usate antea), tu pote usar iste memorias de traduction como "memorias
+               de traduction de ingresso", id es pro importar los in tu nove projecto. In iste caso, pone le memorias de traduction tu desidera
+               usar in le plica <span class="emphasis"><em>/tm</em></span> o <span class="emphasis"><em>/tm</em></span>/auto de tu nove projecto: in le prime caso tu obtenera occurrentias ex iste memorias de traduction in the quadro del concordantias
+               partial, e in le ultime caso iste TMs essera usate pro pre-traducer tu texto fonte.
+            </p>
+            <p>Per arrangiamento initial, le plica /tm es sub le plica radice del projecto (per exemplo ...<span class="emphasis"><em>/MyProject/tm</em></span>), ma tu pote eliger un plica differente in le fenestra de dialogo Proprietates del projecto si tu desira. Isto es utile si
+               tu usa frequentemente memorias de traduction producite in le passato, per exemplo quia illos son re le identic subjecto o
+               pro le mesme cliente. In iste caso, un procedura utile poterea esser:
+            </p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>Crear un plica (un "plica deposito") in un position commode sur tu disco dur pro le memorias de traduction re un cliente o
+                        subjecto particular.
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>Quandocunque tu fini un projecto, copia uno del tres files memoria de traduction "exportation" ex le plica radice del projecto
+                        al plica deposito.
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>Quando tu initia un nove projecto re le mesme subjecto o pro le mesme cliente, naviga al plica deposito in le <span class="guimenuitem">fenestra de dialogo Projecto &gt; Proprietates &gt; Modifica Projecto </span> e selige lo como le plica del memoria de traduction.
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <p>Nota que omne le files TMX in le deposito /tm son analysate quando le projecto es aperte, assi tu, ponente omne le varie TMs
+               que tu pote haber per manos in iste plica, pote inutilemente retardar OmegaT. Tu pote etiam considerar de remover illos que
+               non son plus necessari, un vice que tu ha usate lor contentos pro reimpler le file <code class="filename">project-save.tmx</code>.
+            </p>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="importing.and.exporting.translation.memories"></a>2.1.&nbsp;Importar e exportar le memorias de traduction<a class="indexterm" name="d0e6714"></a></h3>
+                     </div>
+                  </div>
+               </div>
+               <p>OmegaT supporta versiones de tmx importate 1.1-1.4b (tote le duo nivello 1 e nivello 2). Isto habilita le memorias de traduction
+                  producite per altere instrumentos a ser legite per OmegaT. Tamen, OmegaT non supporta in detalio le files TMX nivello 2 importate
+                  (istos registra non sol le traduction, ma alsi le formattation). Le files TMX nivello 2 essera totevia importate e lor contento
+                  textual pote esser vidite in OmegaT, ma le qualitate del concordantias partial essera alquanto inferior.
+               </p>
+               <p>OmegaT seque proceduras multo stricte quando carga files memoria de traduction (tmx). Si es trovate un error in tal fila,
+                  OmegaT marcara le position, intra le file defective, ubi es localisate le error.
+               </p>
+               <p>Qualque applicationes son note producer files tmx invalide sub certe conditiones. Si tu desira usar tal files como traductiones
+                  de referentia in OmegaT, illos debe esser reparate, o OmegaT reportara un error e fallera a cargar los. Le reparationes son
+                  operationes trivial e OmegaT assiste le chassa al defecto con le message de error message pertinente. Tu pote demandar al
+                  Gruppo del usator pro le consilio si tu ha problemas.
+               </p>
+               <p>OmegaT exporta files TMX version 1.4 (ambe nivello 1 e nivello 2). Le exportation nivello 2 non es plenmente conforme con
+                  le standard nivello 2, ma es satis prope e generara concordantias correcte in altere applicationes memoria de traduction que
+                  supporta le TMX nivello 2. Si tu necessita solmente information textual (e non information de formattation), usa le file nivello
+                  1 que OmegaT ha create.
+               </p>
+            </div>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="Creating.a.translation.memory.for.selected.documents"></a>2.2.&nbsp;Crear un memoria de traduction pro documentos seligite
+                        </h3>
+                     </div>
+                  </div>
+               </div>
+               <p>In caso que le traductores necessita participar lor bases TMX e excluder alicun de lor partes o includer justo traductiones
+                  de certe files, participar le complete <code class="filename">ProjectName-omegat.tmx</code> es foras question. Le procedura sequente es justo uno del possibilitates, ma simplice assatis pro sequer e sin ulle periculos
+                  pro le bon qualitates.
+               </p>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
+                     <li class="listitem">
+                        <p>Crea un projecto, separate pro altere projectos, in le par de linguas desiderate, con un nomine appropriate - nota que le
+                           TMXs create includera iste nomine.
+                        </p>
+                     </li>
+                  </ul>
+               </div>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
+                     <li class="listitem">
+                        <p>Copia le documentos, pro le qual tu necessita le memoria de traduction, in le plica fonte del projecto.</p>
+                     </li>
+                  </ul>
+               </div>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
+                     <li class="listitem">
+                        <p>Copia le memorias de traduction, continente le traductiones del documentos precedente, in le sub plica <code class="filename">tm/auto</code> del nove projecto.
+                        </p>
+                     </li>
+                  </ul>
+               </div>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
+                     <li class="listitem">
+                        <p>Initia le projecto. Controla pro eventual errores de Tag con <span class="keycap"><strong>Ctrl+T </strong></span>e segmentos non rendite con <span class="keycap"><strong>Ctrl+U</strong></span>. Pro controlar que omne cosa es ut expectate, tu pote pulsar <span class="keycap"><strong>Ctrl+D</strong></span> pro crear le documentos final e controlar lor contentos.
+                        </p>
+                     </li>
+                  </ul>
+               </div>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
+                     <li class="listitem">
+                        <p>Quando tu termina le projecto. le files TMX in le plica principal del projecto (vide supra) ora contine le traductiones in
+                           le par de linguas seligite, pro le files, que tu ha copiate in le plica /source. Copia los in un posto secur pro referentias
+                           futur.
+                        </p>
+                     </li>
+                  </ul>
+               </div>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
+                     <li class="listitem">
+                        <p>Pro evitar reusar le projecto e ita possibilemente polluting casos futur, dele le plica del projecto o archiva lo foras de
+                           tu posto del labor.
+                        </p>
+                     </li>
+                  </ul>
+               </div>
+            </div>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="sharing.translation.memories"></a>2.3.&nbsp;Participar memorias de traduction<a class="indexterm" name="d0e6774"></a></h3>
+                     </div>
+                  </div>
+               </div>
+               <p>In casos ubi un equipa de traductores es implicate, le traductores preferera divider le memorias de traduction commun plus
+                  tosto que distribuer lor versiones local.
+               </p>
+               <p>OmegaT functiona con SVN e Git, duo commun systemas software pro equipa de controlo de version e revisio (RCS), disponibile
+                  sub licentia open source. In caso de plicas Projecto complete OmegaT - in in altere parolas le memorias de traduction implicate
+                  assi como le plicas fonte, le preparationes del projecto etc - son tractate per le RCS seligite. vide plus in le Capitulo
+               </p>
+            </div>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="d0e6785"></a>2.4.&nbsp;Usar le TMX con pares de lingua alternative<a class="indexterm" name="d0e6788"></a></h3>
+                     </div>
+                  </div>
+               </div>
+               <p>Poterea esser le casos ubi tu ha facite un projecto con per exemplo fontes nederlandese, e un translation in anglese. Pois
+                  tu necessita un traduction in per exemplo chinese, ma tu traductor non comprende le nederlandese; illa, comocunque, comprende
+                  a perfection le anglese. In iste caso fe memoria de traduction NL-EN pote servir como un go-between pro adjutar a generar
+                  le traduction NL-ZH.
+               </p>
+               <p>Le solution in nostre exemplo es de copiar le memoria de traduction existente in le sub plica /tm e renominar lo ZH_CN.tmx
+                  pro indicar le lingua de destination del TMX. Al traductor essera monstrate traductiones anglese pro le segmentos fonte in
+                  nederlandese e usa los pro crear le traduction chinese.
+               </p>
+               <p><span class="bold"><strong>Importante: </strong></span>le TMX que supporta debe esser renominate XX_YY.tmx, ubi XX_YY es le lingua de destination del TMX, per exemplo a ZH_CN.tmx
+                  in le exemplo precedente. Le linguas fonte del projecto e del TMX deberea naturalmente esser identic: - NL, in nostre exemplo.
+                  Nota que sol un TMX pro un date par de linguas es possibile, ergo si deberea implicar plure memorias de traduction, tu necessitara
+                  funder los omne in le XX_YY.tmx.
+               </p>
+            </div>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e6801"></a>3.&nbsp;Fontes con traductiones existente<a class="indexterm" name="d0e6804"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <p>Alicun typos de Files fonte (per exemplo PO, TTX, etc.) son bilingue, id es illos serve ambe como un fonte e como un memoria
+               de traduction. In tal casos, un traduction existente, trovate in le file, es includite in le <code class="filename">project_save.tmx</code>. Illo es tractate como un traduction base, si nulle concordantia esseva trovate, o como traduction alternative, in caso le
+               identic segmento fonte existe, ma con un texto de destination. Le resultato dependera assi ab le ordine in le qual le segmentos
+               fonte esseva cargate.
+            </p>
+            <p>Omne le traductiones ex le documentos fonte son alsi monstrate in le quadro del Commento, in ultra al quadro del Concordantia.
+               In caso de files PO, es applicate un penalitate del 20% al traduction alternative (id es, un concordantia del 100% deveni
+               un concordantia del 80%). Le parola [Fuzzy] es monstrate sur the segmento fonte.
+            </p>
+            <p>Quando tu carga un file TTX segmentate, le segmentos con fonte = destination essera includite, si esseva marcate le cassa
+               "Permitte traduction equal a fonte " in Optiones → Comportamento del Modifica... . Isto pote generar confusion, ita tu pote
+               considerar de levar le marca a iste option in iste caso.
+            </p>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="pseudo.translated.memory"></a>4.&nbsp;Memoria Pseudo-rendite<a class="indexterm" name="d0e6823"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;">
+               <h3 class="title">Note</h3>
+               <p>Interessante sol pro usatores experte!</p>
+            </div>
+            <p>Ante que le segmentos sia rendite, tu pote desirar pre-processar o adressar los in alicun altere maniera que es possibile
+               con OmegaT. Per exemplo, si tu desira crear un pseudo-traduction pro le fines de proba, OmegaT habilita te a crear un file
+               TMX additional que contine omne le segmentos del projecto. Le traduction in iste TMX pote esser o
+            </p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>un traduction equal al fonte (base prefixate initial) o</p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>le segmento rendite es vacue</p>
+                  </li>
+               </ul>
+            </div>
+            <p>Al file TMX pote esser date omne nomine que tu attribue. Un memoria pseudo-rendite pote esser generate con le parametros de
+               linea de commando sequente:
+            </p>
+            <p><code class="literal">java -jar omegat.jar --pseudotranslatetmx=&lt;filename&gt;
+                      [pseudotranslatetype=[equal|empty]]</code></p>
+            <p>Replacia <code class="literal">&lt;filename&gt;</code> con le nomine del file que tu desira crear, o absolute o relative al plica currente (le plica ex le qual tu lancea <span class="application">OmegaT</span>). Le secunde argumento <code class="literal">--pseudotranslatetype</code> es optional. Su valor es o <code class="literal">equal</code> (valor prefixate initial, pro source=target) o <code class="literal">empty</code> (le segmento de destination es vacue). Tu pote processar le TMX generate con qualcunque instrumento tu vole. Pro reusar lo
+               in <span class="application">OmegaT</span> renomina lo in <span class="emphasis"><em>project_save.tmx </em></span> e pone lo in le plica <code class="literal">omegat</code>- de tu projecto.
+            </p>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="upgrading.translation.memories"></a>5.&nbsp;Promover le memorias de traduction<a class="indexterm" name="d0e6875"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <p>Le versiones initial de <span class="application">OmegaT</span> esseva capabile de segmentar le Files fonte in paragraphos solmente e esseva inconsistente le numeration del tags de formattation
+               in  files HTML e Open Document. <span class="application">OmegaT</span> pote discoperir e promover tal files TMX al volo pro accrescer le qualitate del Concordantia partial e elevar melio tu traduction
+               existente, sparniante te del travalio de facer isto manualmente.
+            </p>
+            <p>Un TMX del projecto essera promovite sol un vice, e essera scripte in forma promovite in le <code class="filename">project-save.tmx</code>; le files TMX hereditage essera promovite al volo cata vece le projecto es cargate. Nota que in alicun casos le cambios in
+               le filtros de file in <span class="application">OmegaT</span> pote ducer a segmentation totalmente differente; in consequentia, tu debera promover tu traduction manualmente in tal rar
+               casos.
+            </p>
+         </div>
+      </div>
+      <div class="navfooter">
+         <hr>
+         <table width="100%" summary="Navigation footer">
+            <tr>
+               <td width="40%" align="left"><a accesskey="p" href="chapter.formatted.text.html">Prev</a>&nbsp;
+               </td>
+               <td width="20%" align="center">&nbsp;</td>
+               <td width="40%" align="right">&nbsp;<a accesskey="n" href="chapter.segmentation.html">Next</a></td>
+            </tr>
+            <tr>
+               <td width="40%" align="left" valign="top">Chapter&nbsp;12.&nbsp;Operar con le texto formattate&nbsp;</td>
+               <td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
+               <td width="40%" align="right" valign="top">&nbsp;Chapter&nbsp;14.&nbsp;Segmentation del origine</td>
+            </tr>
+         </table>
+      </div>
+   </body>
+</html>

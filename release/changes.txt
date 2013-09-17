@@ -3,7 +3,7 @@
 ----------------------------------------------------------------------
    5 Enhancements
    2 Bug fixes
-   0 Localisation update
+   1 Localisation update
 ----------------------------------------------------------------------
 3.0.5 vs. 3.0.4 update 2
 
@@ -31,6 +31,10 @@ opening on a Mac
 
   - In some cases, a null pointer exception could happen when quitting
 OmegaT
+
+  Localisation updates:
+
+  - Interlingua localisation updated to 3.0.4 (UI, Documentation, Readme)
 
 ----------------------------------------------------------------------
  OmegaT 3.0.4 update 2

@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<chapter id="chapter.glossaries">
+  <title>Glossarios<indexterm class="singular">
+      <primary>Fenestras e quadros in OmegaT</primary> <secondary>Quadro del glossario</secondary>
+    </indexterm><indexterm class="singular">
+      <primary>Glossarios</primary>
+    </indexterm></title>
+
+  <para>Le glossarios es files create e renovate manualmente pro le uso in <application>OmegaT</application>.</para>
+
+  <para>Si un projecto <application>OmegaT</application> contine un o plus glossarios, omne terminos in le glossario que es trovate alsi in le segmento currente essera monstrate automaticamente in le quadro Glossario.</para>
+
+  <para>Tu defini su ubication e nomine in le fenestra de dialogo proprietates del projecto. Le extension debe esser <filename>.txt</filename> (sinon, illo non essera addite). Le ubication del file debe esser intra le classificator <filename>/glossary </filename> , ma illo pote esser  in un plica plus profunde (e.g., <filename>glossary/sub/glossary.txt</filename>). Le file non debe exister quando on prepara lo, illo essera create (si necessari) quando on addera le prime entrata del glossario. Si le file existe jam, nulle tentativa es facite pro verificar le formato o le serie de character del file: le nove entratas essera semper in formato 'separate per signos de tabulation' e UTF-8. Como le contento existente non essera alterate, eventual damnos a un file existente deberea esser limitate.</para>
+
+  <section>
+    <title>Uso</title>
+
+    <para>Pro usar un glossario existente, placia lo simplemente in le plica<indexterm class="singular">
+        <primary>Files del projecto</primary> <secondary>Sub plica Glossario</secondary>
+      </indexterm> <filename>/glossary</filename> post le creation del projecto. <application>OmegaT</application> releva automaticamente le files glossario in iste plica quando on aperi un projecto. Le terminos in le segmento currente que <application>OmegaT</application> trova in le file(s) glossario es monstrate in le quadro pro le Glossario:</para>
+
+    <indexterm class="singular">
+      <primary>Glossarios, Quadro del glossario</primary>
+    </indexterm>
+
+    <figure>
+      <title>Quadro del glossario</title>
+
+      <mediaobject>
+        <imageobject role="html">
+          <imagedata fileref="images/GlossaryPane_25.png"/>
+        </imageobject>
+
+        <imageobject role="fo">
+          <imagedata fileref="images/GlossaryPane_25.png" width="60%"/>
+        </imageobject>
+      </mediaobject>
+    </figure>
+
+    <para>Le parola avante que le signo = es le termino original, e su traduction es le parola(s) post =. Le entrata del vocabulario pote haber addite un commento. Le function del glossario discoperi solmente concordantias exacte con le entrata del glossario (e.g. non trova le formas declinate et cetera). On pote adder le terminos nove al file(s) glossario manualmente durante le traduction, per exemplo in un editor de texto. Le terminos addite novemente essera trovate un vice que le cambios in le file de texto essera salvate.</para>
+
+    <para>Le termino primari non debe esser un articulo de un sol parola, como monstra le exemplo sequente:</para>
+
+    <figure>
+      <title>entratas con plure parolas in glossarios - exemplo<indexterm class="singular">
+          <primary>Glossarios</primary> <secondary>Quadro del glossario</secondary> <tertiary>entratas con plure parolas</tertiary>
+        </indexterm></title>
+
+      <mediaobject>
+        <imageobject role="html">
+          <imagedata fileref="images/MultiTerm_Glossary_25.png"/>
+        </imageobject>
+
+        <imageobject role="fo">
+          <imagedata fileref="images/MultiTerm_Glossary_25.png" width="80%"/>
+        </imageobject>
+      </mediaobject>
+    </figure>
+
+    <para>Le articulo sublineate  &quot;pop-up menu&quot; pote esser trovate in le quadro pro le Glossario como &quot;pojavni menu&quot;. Marcante lo in le le quadro pro le Glossario e pois cliccante lo con le dextera, insere lo al position del cursor in le segmento final.<footnote>
+        <para>Nota que in le caso precedente, isto es justo medietate (o mesmo minus) del historia, pois que le lingua final (sloveno) usa le declination. Assi le  &quot;pojavni meni&quot; inserite in le forma nominative - debe esser cambiate a &quot;pojavnem meniju&quot; , id es al locativo. Assi il es probabilemente plus rapide dactylographar le termino correctemente juste immediatemente sin penar con le glossario e su vias breve.</para>
+      </footnote></para>
+  </section>
+
+  <section>
+    <title><indexterm class="singular">
+        <primary>Glossarios</primary> <secondary>Formato del file</secondary>
+      </indexterm>Formato del File <indexterm class="singular">
+        <primary>Files del Projecto</primary> <secondary>Files del usator</secondary> <seealso>Glossarios</seealso>
+      </indexterm></title>
+
+    <para>Le files glossario es files de texto simple continente listas de tres columnas, delimitate ab tabulation con le terminos primari e final respectivemente in the prime e secunde columnas. Le tertie columna pote esser usate pro information additional. Tu pote haber entratas con le columna final mancante, id es continente justo le termino primari e le commento.</para>
+
+    <para>Le files glossario pote esser o in codification base del systema (e indicate per le extension .tab) o in UTF-8 (le extension .utf8). Le codification Unicode (UTF8) es ideal pro rationes obvie. Alsi supportate es le formato CSV. Iste formato es le mesme que illo separate per tabulation: termino original, termino final. Le campo del Commento es alsi separate per un virgula ','. Le lineas de character pote esser incluse in virgulettas &quot;, le qual permitte de haber un virgula intra un linea de character:</para>
+
+    <para><literal>&quot;Iste es un termino original, que contine un virgula&quot;,&quot;c'est un terme, qui contient une virgule&quot;</literal></para>
+
+    <para>In plus al formato texto plan es alsi supportate le formato TBX <indexterm class="singular">
+        <primary>Glossarios</primary> <secondary>formato TBX</secondary>
+      </indexterm>. TBX - Term Base eXchange - es le standard aperte, basate sur XML pro le excambio del datos terminologic structurate, TBX esseva approbate quam un standard international per LISA e ISO. Si tu ha un systema de tractamento del terminologia - per exemplo MultiTerm  - il es assatis eventual que illo offere le exportation del datos terminologic con le formato TBX. On pote discargar le <ulink url="http://www.microsoft.com/Language/en-US/Terminology.aspx">Collection de terminologia Microsoft</ulink> <indexterm class="singular">
+        <primary>Glossarios</primary> <secondary>Microsoft Terminology collection</secondary>
+      </indexterm> in quasi 100 linguas e pote servir como le glossario petra angular del technologia informatic (IT).</para>
+  </section>
+
+  <section>
+    <title>Como producer glossarios<indexterm class="singular">
+        <primary>Glossarios</primary> <secondary>Creation de un glossario</secondary>
+      </indexterm></title>
+
+    <para>Le preparation del projecto permitte le entrata de un nomine pro un file glossario scribibile (vide initio de iste capitulo). Clicca con le dextero in le quadro pro le Glossario o calca <keycap>Ctrl+Shift+G</keycap> pro adder un entrata nove. Se displica un fenestra de dialogo, que permitte te de inscriber le termino original, le termino final e omne le commentos que tu vole:</para>
+
+    <mediaobject role="html">
+      <imageobject>
+        <imagedata fileref="images/GlossaryEntry_25.png"/>
+      </imageobject>
+
+      <imageobject role="fo">
+        <imagedata fileref="images/GlossaryEntry_25.png" width="80%"/>
+      </imageobject>
+    </mediaobject>
+
+    <para>Le contentos del files glossario es conservate in memoria e es cargate quando le projecto es aperte o recargate. Il es assatis simplice renovar un file glossario: calca <keycap>Ctrl+Shift+G</keycap> e scribe le termino nove, su traduction e omne le commentos que tu vole (assecurante te que tu calca le clave tabulation intra le campos) e salva le file. Le contentos del quadro pro le Glossario essera renovate in consequentia.</para>
+
+    <para><indexterm class="singular">
+        <primary>Glossarios</primary> <secondary>Ubication del file glossario scribibile</secondary>
+      </indexterm>Le ubication del file glossario scribibile pote esser imponite in le fenestra de dialogo <guimenuitem>Projecto &gt; Proprietates ... </guimenuitem>. Le extensiones admittite es <filename>TXT</filename> e <filename>UTF8</filename></para>
+
+    <para><emphasis role="bold">Nota: </emphasis>naturalmente il habe altere manieras e medios pro crear un simplice file con entratas delimitate per tabulation. Nihil a dicer contra le uso de Notepad++ sur Windows, GEdit sur Linux per exemplo o alicun programma de folio de calculo pro iste proposito: omne application, que pote tractar UTF8 e que pote monstrar spatio blanc (de maniera que tu non care le characteres<keycap>TAB</keycap> ) pote esser utilisate.</para>
+  </section>
+
+  <section>
+    <title><indexterm class="singular">
+        <primary>Glossarios</primary> <secondary>Trados MultiTerm</secondary>
+      </indexterm>Usar Trados MultiTerm</title>
+
+    <para>Le datos exportate ex Trados MultiTerm pote esser usate como glossarios de <application>OmegaT</application> sin ulterior modification, a condition que on provide illos del extension <filename>.tab</filename> e le campos del termino original e final es le prime duo campos respectivemente. Si tu exporta usante le option de systema &quot;Exporta delimitate per character del tabulation&quot;, tu necessitara de deler le prime 5 columnas (Seq. Numero, Data de creation et cetera). Le versiones plus nove de MultiTerm supporta le exportation al formato TBX.</para>
+  </section>
+
+  <section>
+    <title><indexterm class="singular">
+        <primary>Glossarios</primary> <secondary>Problemas con le glossarios</secondary>
+      </indexterm>Problemas commun al glossario </title>
+
+    <para><emphasis role="bold">Problema: Nulle terminos del glossario es exponite - causas possibile:</emphasis></para>
+
+    <itemizedlist>
+      <listitem>
+        <para>Nulle file glossario trovate in le plica &quot;glossary&quot;.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Le file glossario es vacue.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Le articulos non es separate con un character de tabulation.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Le file glossario non ha le extension correcte (.tab o .utf8).</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Il non ha concordantia EXACTE inter le entrata del glossario e le texto original in tu documento - per exemplo plurales.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Le file glossario non ha le codification correcte.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Il non ha nulle terminos in le segmento currente que concorda con alicun terminos in le glossario.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Un o plus del problemas precedente esseva fixate, ma le projecto non esseva recargate.</para>
+      </listitem>
+    </itemizedlist>
+
+    <para><emphasis role="bold">Problema: In le quadro pro le Glossario, qualque characteres non es monstrate debitemente</emphasis></para>
+
+    <itemizedlist>
+      <listitem>
+        <para>...ma le mesme characteres es monstrate debitemente in le quadro pro Editar: le extension e le codification del file non concorda.</para>
+      </listitem>
+    </itemizedlist>
+  </section>
+</chapter>

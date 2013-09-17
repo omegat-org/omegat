@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<chapter id="chapter.formatted.text">
+  <title>Operar con le texto formattate<indexterm class="singular">
+      <primary>Files final</primary> <secondary>Texto formattate</secondary>
+    </indexterm><indexterm class="singular">
+      <primary>Files fonte</primary> <secondary>Texto formattate</secondary>
+    </indexterm></title>
+
+  <para>Habitualmente necessita que le information re le formattation presente in le file fonte es copiate in le file final. Le information in-line de formato facite possible per le formatos supportate (in particular DocBook, HTML, XHTML, Open Document Format(ODF) e Office Open XML (MS Office 2007 e sequente) al tempore de scriptura) es presentate como tags in OmegaT. Normalmente le tags son ignorate quando on considera le similantia inter textos differente, pro le fines del concordantia. Le tags representate in le segmento rendite essera presente in le documento rendite.</para>
+
+  <section id="formatting.tags">
+    <title>Formattar le tags<indexterm class="singular">
+        <primary>Tags</primary>
+      </indexterm></title>
+
+    <para><indexterm class="singular">
+        <primary>Tags</primary> <secondary>Denomination</secondary>
+      </indexterm><emphasis role="bold">Denomination del tag:</emphasis></para>
+
+    <para>Le tags consiste de uno a tres characteres e un numero. Le numeration unic permitte al tags, correspondente a cata altere, de esser regruppate insimul e distincte inter le tags que ha le mesme character de connexion, ma son de facto differente. Le characteres de connexion usate tende a reflecter le natural significato del tag (exempli gratia b pro bold, i pro italics, etc.)</para>
+
+    <para><indexterm class="singular">
+        <primary>Tags</primary> <secondary>Numeration</secondary>
+      </indexterm><emphasis role="bold">Numeration del tag:</emphasis></para>
+
+    <para>Le tags son numerate in modo incremental secundo le gruppo de tag. Le &quot;gruppos de tag&quot; in iste contexto son tag singule (assi como &lt;i0&gt; e &lt;/i0&gt;). Intra un segmento, le prime gruppo (par o singule) recipe le numero 0, le secunde le numero 1 etc. Le prime exemplo in sequito ha 3 gruppos de tag (un par, un singulo, e pois un altere par), le secunde exemplo ha un gruppo solmente (un par).</para>
+
+    <para><indexterm class="singular">
+        <primary>Tags</primary> <secondary>Pares e singulos</secondary>
+      </indexterm><emphasis role="bold">Pares e singulos:</emphasis></para>
+
+    <para>Le tags es sempre o singulos o accopulate. Le tags singule indica information de formattation que non affice le contexto (un spatio supernumerari o  un interruption de linea per exemplo).</para>
+
+    <para><literal>&lt;b0&gt;&lt;Ctr+N&gt;&lt;/b0&gt;,
+    &lt;br1&gt;&lt;b2&gt;&lt;Enter&gt;&lt;/b2&gt;&lt;segment 2132&gt;
+    </literal></para>
+
+    <para>&lt;br1&gt; es un tag singule e non affice alicun contexto. Le tags accopulate habitualmente indica information de stilo que refere se al texto inter le tag de apertura  e le tag de clausura de un par. &lt;b0&gt; e &lt;/b0&gt; in sequito son accopulate e affice le texto log.txt. Nota que le tag de apertura debe semper venir ante que le tag de clausura correspondente:</para>
+
+    <para>&lt;<literal>Le file de log (&lt;b0&gt;log.txt&lt;/b0&gt;) pro revision del operationes e del errores.&lt;segment 3167&gt;</literal></para>
+
+    <para><application>OmegaT</application> crea su tags ante que le processo de segmentation del phrase. Dependente sur le regulas de segmentation, le par de tags pote devenir separate in duo consecutive segmentos e le validation del tag errara a favor del caution e marca le duo segmentos.</para>
+  </section>
+
+  <section id="tag.operations">
+    <title>Operationes del Tag<indexterm class="singular">
+        <primary>Tags</primary> <secondary>Operationes</secondary>
+      </indexterm></title>
+
+    <para>Con le tags debe esser exercitate attention. Si illos es cambiate per accidente, le formattation del file final potera esser corrupte. Le regula basic es que le sequentia de tags debe esser conservate in le identic arrangiamento. Tamen, il es possibile, si certe regulas son sequite strictemente, deviar ab iste regula basic.</para>
+
+    <para><emphasis role="bold"><indexterm class="singular">
+        <primary>Tags</primary>
+
+        <secondary>Duplication</secondary>
+      </indexterm>Duplication del tag:</emphasis></para>
+
+    <para>Pro duplicar gruppos de tag, copia exactemente los in le position que tu desira. Serva in mente que in un par, le tag de apertura debe venir ante que le tag de clausura. Le formattation representate per le gruppo tu ha duplicate essera applicate a ambe sectiones.</para>
+
+    <para>Exemplo:</para>
+
+    <para><literal>&lt;b0&gt;Iste formattation&lt;/b0&gt; va a esser duplicate ci.&lt;segment 0001&gt;</literal></para>
+
+    <para>Post le duplication:</para>
+
+    <para><literal>&lt;b0&gt;Iste formattation&lt;/b0&gt; esseva &lt;b0&gt;duplicate ci&lt;/b0&gt;.&lt;segment 0001&gt;</literal></para>
+
+    <para><emphasis role="bold"><indexterm class="singular">
+        <primary>Tags</primary> <secondary>Deletion de gruppo</secondary>
+      </indexterm>Deletion de gruppo de tag:</emphasis></para>
+
+    <para>Pro deler le gruppos de tag, remove solmente los ex le segmento. Serva in mente que un par debe haber delite ambe su tag de apertura e de clausura pro assecurar que omne le tracias del formattation son delite debitemente, alias le file rendite pote devenir corrupte. Cancellante un gruppo de tag tu removera le formattation pertinente ex le file rendite.</para>
+
+    <para>Exemplo:</para>
+
+    <para><literal>&lt;b0&gt;Iste formattation&lt;/b0&gt; essera delite.&lt;segment 0001&gt;</literal></para>
+
+    <para>Post le deletion:</para>
+
+    <para><literal>Iste formattation esseva delite.&lt;segment 0001&gt;</literal></para>
+  </section>
+
+  <section id="tag.group.nesting">
+    <title>Annidamento de  gruppo de tags<indexterm class="singular">
+        <primary>Tags</primary> <secondary>Annidamento de  gruppo</secondary>
+      </indexterm></title>
+
+    <para>Modificar le arrangiamento del gruppo de tag pote resultar in le annidamento de un gruppo de tag  intra un altere gruppo de tag. Isto es acceptabile, a condition que le gruppo includente include le gruppo incluse totalmente. In altere parolas, quando on move tags accopulate, assecura te que ambe le tag de apertura e de clausura son ambe o intra o foras altere pares de tag, o le file traducite pote esser corrupte e faller a aperir.</para>
+
+    <para>Exemplo:</para>
+
+    <para><literal>&lt;b0&gt;Le formattation&lt;/b0&gt; &lt;b1&gt;uno&lt;/b1&gt; essera annidate intra le formattation zero.&lt;segment 0001&gt;</literal></para>
+
+    <para>Post le annidamento:</para>
+
+    <para><literal>&lt;b0&gt;Le formattation &lt;b1&gt;uno&lt;/b1&gt;&lt;/b0&gt; esseva annidate intra le formattation zero.&lt;segment 0001&gt;</literal></para>
+  </section>
+
+  <section id="tag.group.overlapping">
+    <title>Superposition de gruppo de tag<indexterm class="singular">
+        <primary>Tags</primary> <secondary>Superposition de gruppo</secondary>
+      </indexterm></title>
+
+    <para>Le superposition is le resultato del mal tractamentos del pares de tag e es garantite le resultato del corruption del formattation e alcun veces in le falta del apertura del file rendite.</para>
+
+    <para>Exemplo:</para>
+
+    <para><literal>&lt;b0&gt;Formattation&lt;/b0&gt; &lt;b1&gt;uno&lt;/b1&gt; on va verso le confusion.&lt;segment 0001&gt;</literal></para>
+
+    <para>Post un manipulation mal:</para>
+
+    <para><literal>&lt;b0&gt;Formattation &lt;b1&gt;uno&lt;/b0&gt; &lt;/b1&gt;ora es multo confuse.&lt;segment 0001&gt;</literal></para>
+  </section>
+
+  <section>
+    <title>Optiones de validation del tag</title>
+
+    <para>Pro personalisar le labor con le tags, on pote fixar alicun del regulas in le fenestra <guimenuitem>Optiones &gt; Validation del tag...</guimenuitem>:</para>
+
+    <mediaobject>
+      <imageobject>
+        <imagedata fileref="images/OptionsTagValidation_25.png"/>
+      </imageobject>
+    </mediaobject>
+
+    <para>Le comportamento, ci constatate, refere se a omne le files fonte e non sol a alicun typos de file, como Texto formattate.</para>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis role="bold">Variabiles Printf - non controlar, controlo simple, controla toto</emphasis></para>
+
+        <para>OmegaT pote controlar que le variabiles de programmation (como %s per exemplo) in le fonte existe in le traduction. Tu pote decider de non controlar del toto, controlar pro le variabiles Printf simplice (como %s %d etc) o pro le variabiles de omne typos.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis role="bold">Controla le modellos de java MessageFormat simplice</emphasis></para>
+
+        <para>Activar Iste quadrato de controlo producera que OmegaT controlara si le tags java MessageFormat simplice (como {0}) son processate correctemente.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis role="bold">Expression regular de tag(s) personal:</emphasis></para>
+
+        <para>Un expression regular inscribite ci causara que OmegaT tractara le occurrentias detectate como tags del cliente. Illo controla que le numero del tags e lor ordine es identic, justo como in le caso del tags de OmegaT.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis role="bold">Le fragmentos que deberea esser removite ex le expression regular del traduction</emphasis></para>
+
+        <para>On pote inscriber un expression regular pro contentos non volite in le destination. Cata concordantias in le segmento de destination essera alora colorate rubie, id es facile a identificar e corriger. Quando quere pro le concordantias partial le leva le modello es ignorate. Un penalitate fixe de 5 es addite si le parte removite non concorda alicun altere segmento, assi le concordantia non monstra le 100%</para>
+      </listitem>
+    </itemizedlist>
+  </section>
+
+  <section id="tag.group.validation">
+    <title>Validation de gruppo de tag<indexterm class="singular">
+        <primary>Tags</primary> <secondary>Validation de gruppo</secondary>
+      </indexterm></title>
+
+    <para>Le function Que tu valida tags releva cambios al sequentias del tag (o deliberate o accidental), e monstra le segmentos affectate. Lancear iste function – <guimenuitem>Ctrl+T<indexterm class="singular">
+        <primary>Vias breve</primary> <secondary>Validation del tag - Ctrl+T</secondary>
+      </indexterm></guimenuitem> - Aperi un fenestra continente omne segmentos in le file continente suspecte tags rupte o mal in le traduction. Reparar le tags e recrear le documentos de destination es facile con le function validation de tags. Le fenestra que se displica quando es pressate <guimenuitem>Ctrl+T</guimenuitem> presenta un tabella de tres columnas con un link al segmento, le segmento fonte e le segmento final</para>
+
+    <figure id="tag.validation">
+      <title>Entrata de validation de tag</title>
+
+      <mediaobject>
+        <imageobject role="html">
+          <imagedata fileref="images/TagValidation.png"/>
+        </imageobject>
+
+        <imageobject role="fo">
+          <imagedata fileref="images/TagValidation.png" width="90%"/>
+        </imageobject>
+      </mediaobject>
+    </figure>
+
+    <para>Le tags son marcate in azur hardite pro le comparation facile inter le contentos original e illos rendite. Clicca sur le ligamine pro activar le segmento in le Editor. Corrige le error si necesse (in le caso precedente il es le par &lt;i2&gt;&lt;/i2&gt; mancante) e pulsa <guimenuitem>Ctrl+T</guimenuitem> pro retornar al fenestra de validation tag pro corriger altere errores. Le errores de tag son sequentias de tag in le traduction, ubi non es copiate le identic ordine e numero de tag del segmento original. Alicun manipulationes de tag es necessari e es benigne, alteres producera problemas quando essera create le documento rendite.</para>
+  </section>
+
+  <section id="hints.for.tag.management">
+    <title>Consilios pro le gestion del tags<indexterm class="singular">
+        <primary>Tags</primary> <secondary>Consilios</secondary>
+      </indexterm></title>
+
+    <para><emphasis role="bold">Simplifica le texto original</emphasis></para>
+
+    <para>Le tags generalmente representa le formattation in alicun forma del texto original. Simplificar le formattation original contribue assatis a reducer le numero de tags. Ubi le stato de cosas permitte, unificar le typo de character usate, le dimensiones de typo de character, le colores, etc. deberea esser considerate, ut illo poterea simplificar le traduction e reducer le potential de errores de tag. Lege le section operationes del tag pro vider lo que on pote facer con le tags. Recorda que si tu trova un problema de tags in OmegaT e le formattation non es extrememente relevante pro le traduction currente, remover le tags pote esser le maniera plus facile pro le exito del problemas.</para>
+
+    <para><emphasis role="bold">Presta attention extra al pares de tag</emphasis></para>
+
+    <para>Si tu debe vider le tags in OmegaT ma non debe conservar le major parte del formattation in le documento rendite tu es libere de non includer tags in le traduction. In iste caso presta extra attention al pares de tag post que cancellar un latere del par ma negliger de deler le altere es garantite pro corrumper le formattation de tu documento. Desde le tags es includite in le texto ipse, il es possibile usar le regulas de segmentation pro crear segmentos con minus tags. Isto es un function experte e necessita alicun experientia pro applicar lo debitemente.</para>
+
+    <para>OmegaT non es ancora habile a discoperir in modo completemente automatic le errores in le formattation, assi illo non suggerera te si tu face an error o cambia le formattation pro adaptar lo melio a tu lingua final. Alicun vices, comocunque, tu file rendite pote haver un aspecto singular, e – in le pejor caso – pote etiam rejectar de aperir.</para>
+  </section>
+</chapter>

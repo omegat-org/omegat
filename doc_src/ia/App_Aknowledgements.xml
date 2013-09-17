@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE appendix PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<appendix id="appendix.acknowledgements">
+  <title>Recognitiones</title>
+
+  <section>
+    <title>Gratias a vos omne!</title>
+
+    <para>Qual que sia le contradictiones, le omissiones e le candide errores que tu pote trovar in le actual version, io proclama illes omne, mi proprie. Ce manual, tamen, non esserea possibile sin le auxilio e le appoio de plure gente. Explicite gratias a:</para>
+
+    <itemizedlist>
+      <listitem>
+        <para>Mark Prior: corriger mi prime minuta esseva un acto de amor pro OmegaT e le lingua anglese.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Didier Briel: io non poteva renunciar al adjuta patiente e perseverante de Didier pro le complicationes de DocBook. Pro non mentionar su cura e diligentia pro tener le archivos intacte e in bon ordine.</para>
+      </listitem>
+
+      <listitem>
+        <para>Samuel Murray: pro le capitulo introductive &quot;Apprender a usar OmegaT in 5 minutas!&quot;.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Will Helton: su lectura final del minuta me ha sparniate un lot de embarasso. On pote sol meraviliar se, quante prepositiones esserea ancora perdite sin su inestimabile auxilio.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Jean-Christophe Helary: special gratias a JC pro su concise description del functionamento de OmegaT, del parametros del linea de commando e omne cetere detalios, que io ha ancora a remarcar.</para>
+      </listitem>
+
+      <listitem>
+        <para>Al fin, ma non le minus: mi gratias a omne le contributores al <ulink url="https://sourceforge.net/p/omegat/documentation/">  Revision del documentation de OmegaT</ulink> pro omne le contradictiones trovate in le previe versiones del documentation. Que vos continua vos bon opera!</para>
+      </listitem>
+    </itemizedlist>
+  </section>
+</appendix>

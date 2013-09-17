@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<chapter id="chapter.plain.text">
+  <title>Operar con le texto simple<indexterm class="singular">
+      <primary>Files fonte</primary> <secondary>Files de texto simple</secondary>
+    </indexterm></title>
+
+  <section id="default.encoding">
+    <title>Codification prefixate initial<indexterm class="singular">
+        <primary>Codification</primary> <secondary>Files de texto simple</secondary>
+      </indexterm><indexterm class="singular">
+        <primary>Files fonte</primary> <secondary>Codification</secondary>
+      </indexterm></title>
+
+    <para>Le Files de texto simple - in le major parte del casos files con le extension txt - contine sol information textual e non offere nulle maniera decisemente definite pro informar le computator re qual lingua illos contine. Le maximo que OmegaT pote facer in tal caso, es assumer que le texto es scripte in le mesme lingua que le computator ipse usa. Isto non es problema pro le files codificate in Unicode per serie de codification a character de 16 bit. Si le texto es codificate in 8 bits, tamen, on pote esser affrontate con le difficile situation sequente: in loco de monstrar le texto, pro characteres japonese...</para>
+
+    <mediaobject>
+      <imageobject role="html">
+        <imagedata fileref="images/OmT_Japanese.png"/>
+      </imageobject>
+
+      <imageobject role="fo">
+        <imagedata fileref="images/OmT_Japanese.png" width="60%"/>
+      </imageobject>
+    </mediaobject>
+
+    <para>...le systema monstrara lo affin isto per exemplo:</para>
+
+    <mediaobject>
+      <imageobject role="html">
+        <imagedata fileref="images/OmT_Cyrillic.png"/>
+      </imageobject>
+
+      <imageobject role="fo">
+        <imagedata fileref="images/OmT_Cyrillic.png" width="60%"/>
+      </imageobject>
+    </mediaobject>
+
+    <para>Le computator, ubi functiona OmegaT, ha le russo ut lingua prefixate, e assi monstra le characteres in le alphabeto cyrillic e non in kanji.</para>
+  </section>
+
+  <section id="OmegaT.solution">
+    <title>Le solution  de <application>OmegaT</application></title>
+
+    <para>Il ha in fundo tres manieras pro adressar iste problema in <application>OmegaT</application>. Illos omne implica le application del filtros de file in le menu<emphasis role="bold"> Optiones</emphasis>.</para>
+
+    <variablelist>
+      <varlistentry>
+        <term>Cambia le codification de tu files a Unicode</term>
+
+        <listitem>
+          <para>aperi tu file fonte in un redactor de texto que interpreta correctemente su codification e salva le file in codification <emphasis role="bold">&quot;UTF-8&quot;</emphasis>. Cambia le extension del file ab <literal>.txt</literal> a <literal>.utf8.</literal> <application>OmegaT</application> interpretara automaticamente le file como file UTF-8. Isto es le alternativa le plus sensate, que sparnia te problemas in le perspective longe.</para>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+
+    <variablelist>
+      <varlistentry>
+        <term>Specifica le codification pro tu files de texto simple</term>
+
+        <listitem>
+          <para>- id es le files con le extension <filename>.txt </filename> - : in le section <emphasis role="bold">Files de texto </emphasis>del fenestra de dialogo Filtros de File, cambia le <emphasis role="bold">Codification del File fonte</emphasis> ab &lt;auto&gt; al codification que corresponde a tu file fonte <filename>.txt</filename>, per exemplo al .jp pro le exemplo precedente.</para>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+
+    <variablelist>
+      <varlistentry>
+        <term>Cambia le extensiones de tu files fonte in texto simple</term>
+
+        <listitem>
+          <para>per exemplo ab <filename>.txt</filename> a <filename>.jp</filename> pro le textos simple japonese: in le section <emphasis role="bold">Files de texto</emphasis> del fenestra de dialogo filtros de file, adde nove <emphasis role="bold">Modello de Nomine de fonte</emphasis> (<filename>*.jp</filename> pro iste exemplo) e selige le parametros appropriate pro le codification fonte e de destination</para>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+
+    <para><application>OmegaT</application> ha per base prefixate le sequente lista curte disponibile render lo plus facile pro te tractar con alicun files de texto simple:</para>
+
+    <itemizedlist>
+      <listitem>
+        <para>Le files <literal>.txt</literal> son automaticamente (&lt;auto&gt;) interpretate per <application>OmegaT</application> como codificate in le codification base prefixate del computator.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Le files <literal>.txt1</literal> son files in ISO-8859-1, que coperi le major parte del linguas del <emphasis role="bold">Europa occidental</emphasis>.<indexterm class="singular">
+            <primary>Codification</primary> <secondary>Occidental</secondary>
+          </indexterm></para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Le files <literal>.txt2</literal> son files in ISO-8859-2, que coperi le major parte del linguas del <emphasis role="bold">Europa central e oriental</emphasis>.<indexterm class="singular">
+            <primary>Codification</primary> <secondary>Europee Central e Oriental</secondary>
+          </indexterm></para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Le files <literal>.utf8</literal> son interpretate per <application>OmegaT</application> como codificate in UTF-8 (un codification que concerne quasi tote le linguas in le mundo).<indexterm class="singular">
+            <primary>Codification</primary> <secondary>Unicode</secondary>
+          </indexterm></para>
+      </listitem>
+    </itemizedlist>
+
+    <para>Tu pote controlar ce tu mesme per seliger le commando <emphasis role="bold">Filtros de File</emphasis> in le menu <emphasis role="bold">Optiones</emphasis>. Per exemplo, quando tu ha un file de texto chec (multo probabilemente scripte in le codice <emphasis role="bold">ISO-8859-2</emphasis>) tu debe sol cambiar le extension<literal> .txt</literal> in <literal>.txt2 </literal>e <application>OmegaT</application> interpretara su contentos correctemente. E naturalmente, si tu vole trovar te sur le latere secur, considera converter iste genere de file a Unicode, id es al formato de file <literal>.utf8 </literal>.</para>
+  </section>
+</chapter>

@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<chapter id="chapter.project.properties">
+  <title>Proprietates del projecto<indexterm class="singular">
+      <primary>Proprietates</primary> del <secondary>Projecto</secondary>
+    </indexterm></title>
+
+  <para/>
+
+  <section id="properties.dialog">
+    <title>Dialogo del proprietates</title>
+
+    <para>Le dialogo <menuchoice> <shortcut> <keycombo> <keycap>Ctrl</keycap> <keycap>E</keycap> </keycombo> </shortcut> <guimenu>Projecto</guimenu> <guimenuitem>Proprietates...</guimenuitem> </menuchoice> es usate pro definir e modificar le plicas e le linguas del projecto.</para>
+
+    <para>Il es possibile modificar le proprietates del projecto durante un session de traduction. Nota que le cambios al preparation del projecto pote haber alicun consequentias, specialmente, quando le projecto esseva jam initiate. Usque tu ha qualque experientia con OmegaT, il es plus secur considerar tote le preparationes final un vice que le traduction initiava – a minus que, naturalmente, tu percipe que esseva facite un error major. Vide le section Impedir perdita del datos pro manieras e medios de protection de tu opera.</para>
+
+    <figure>
+      <title>Fenestra Proprietates del projecto</title>
+
+      <mediaobject>
+        <imageobject role="html">
+          <imagedata fileref="images/NewProject_26.png"/>
+        </imageobject>
+
+        <imageobject role="fo">
+          <imagedata fileref="images/NewProject_26.png" width="80%"/>
+        </imageobject>
+      </mediaobject>
+    </figure>
+
+    <para>Illo contine:</para>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis role="bold">Un area pro prefixar le linguas fonte e destination del projecto</emphasis></para>
+
+        <para>Tu pote o inscriber le linguas fonte e destination con mano o usar le menus a tenta cadente. Rememorar te que cambiar le linguas pote render le memorias de traduction actualmente usate inutile pois que lor par de linguas pote non concordar plus longe le nove linguas.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis role="bold"><guilabel>Habilita le segmentation a nivello de phrase</guilabel> </emphasis>quadrato de controlo</para>
+
+        <indexterm class="singular">
+          <primary>Projecto</primary> <secondary>Habilita le segmentation a nivello de phrase</secondary>
+        </indexterm>
+
+        <para>Le preparationes del segmentation adressa sol le maniera con le qual le Files fonte son tractate per <application>OmegaT</application>. Le maniera prevalente del segmentation del fontes es le segmentation a nivello de phrase, ita iste quadrato de controlo deberea in caso normal restar marcate.</para>
+
+        <para>In alicun rar casos le alternativa, id es le segmentation per paragraphos, pote esser preferite. Cambiar iste bandiera non modifica le segmentation del memorias de traduction jam existente. Si tu decide in medio al traduction de cambiar de segmentation a phrase al segmentation a paragrapho, le memoria de traduction interne del projecto non essera cambiate (OmegaT pote promover vetule memorias de traduction que non usa segmentation a phrase, ma non vice versa).</para>
+
+        <para>Cambiar le preparationes del segmentation pote producer alicun segmentos jam rendite ser fisse o mergite. Isto effectivemente los al stato &quot;non rendite&quot;, pois que illos non concordara plus segmentos registrate in le memoria del projecto, etiam quanquam lor traduction original es adhuc eo.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis role="bold"><guibutton>Segmentation...</guibutton>
+        </emphasis>button<indexterm class="singular">
+            <primary>Segmentation</primary> <secondary>regulas global contra regulas del projecto</secondary>
+          </indexterm></para>
+
+        <para>Le regulas del segmentation son generalmente valide trans tote le projectos. Le usator, tamen, pote necessitar de generar un serie de regulas, specific pro le projecto in question. Usa iste button pro aperir un fenestra de dialogo, activar le quadrato de controlo <guimenuitem>Regulas de segmentation specific del projecto</guimenuitem>, deinde proceder a adjustar le regulas de segmentation como desiderate. Le nove serie de regulas essera registrate conjunctemente con le projecto e non interferera con le serie general de regulas de segmentation. Pro deler le regulas de segmentation specific del projecto, leva le marca al quadrato de controlo. Vide le capitulo <link linkend="chapter.segmentation">Segmentation del Fonte</link> pro plus information sur le regulas del segmentation.<emphasis/></para>
+
+        <para><emphasis>Aviso:</emphasis> le serie de regulas de segmentation pro un projecto date es registrate como <filename>project/omegat/segmentation.conf.</filename></para>
+      </listitem>
+
+      <listitem>
+        <para><emphasis role="bold"><guibutton>Filtros de File...</guibutton> </emphasis>button<indexterm class="singular">
+            <primary>Filtros de File</primary> <secondary>filtros de file global contra projecto</secondary>
+          </indexterm></para>
+
+        <para>In un faction similabile como precedentemente le usator pote crear Filtros de File projecto-specific, que essera immagazinate conjunctemente con le projecto e essera valide pro le the currente solmente. Pro crear un serie de filtros de file projecto-specific, clicca sur le button <guibutton>Filtro de File... </guibutton>, tunc activa le quadrato de controlo <guimenuitem>Habilita le filtros specific del projecto</guimenuitem> in le fenestra, que se displica. Un copia del configuration del filtros cambiate essera immagazinate con le projecto. Pro deler le filtros de file specific del projecto, leva le marca al quadrato de controlo. Nota que in le menu <guimenuitem>Optiones-&gt;Filtros de File</guimenuitem>, son cambiate le filtros global del usator, non le filtros del projecto. Vide le capitulo<link linkend="chapter.file.filters"> Filtros de File </link>pro plus de information re le subjecto.<emphasis/></para>
+
+        <para><emphasis>Aviso:</emphasis> le serie de  filtros de file pro un projecto date es registrate ut <filename>project/omegat/filters.xml.</filename></para>
+      </listitem>
+
+      <listitem>
+        <para><emphasis role="bold">Auto-propagation </emphasis>quadrato de controlo<emphasis role="bold"><indexterm class="singular">
+            <primary>Projecto</primary> <secondary>Option de Auto-propagation option</secondary>
+          </indexterm></emphasis></para>
+
+        <para>In caso il ha segmentos non unic in le documentos fonte, le quadrato de controlo del Auto-propagation offere al usator le duo possibilitates sequente respecto al traduction automatic: si marcate, le prime segmento rendite essera assumite como le traduction prefixate e su texto rendite essera usate automaticamente pro le occurrentias sequente durante le processo traduction. Le segmentos mal rendite pote esser naturalmente correcte plus tarde manualmente per le commando <guimenuitem>Crea Traduction Alternative</guimenuitem>. Si le quadrato de controlo Auto-propagation non es marcate, le segmentos con traductiones alternative son lassate non rendite dum le usator decide qual traduction ser usate.</para>
+      </listitem>
+
+      <listitem>
+        <para><emphasis role="bold">Leva le tags</emphasis> quadrato de controlo<indexterm class="singular">
+            <primary>Projecto</primary> <secondary>Option remove le tags</secondary>
+          </indexterm></para>
+
+        <para>Quando habilitate, tote le tags de formato es removite del segmentos fonte. Isto es specialmente utile in le tractamento del textos ubi le formattation in linea non es vermente utile (per exemplo,  PDF ex OCR,  .odt or .docx mal convertite, etc.) In un caso normal il deberea semper esser possibile aperir le documentos final, pois que es removite sol le tags in linea. Le formattation non-visibile (id es, que non appare como tags in le editor de OmegaT) is retenite in le documentos final.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis role="bold">Un area pro le preparation del plicas del projecto</emphasis><indexterm class="singular">
+            <primary>Projecto</primary> <secondary>Cambiar le structura del plicas</secondary>
+          </indexterm><indexterm class="singular">
+            <primary>Glossarios</primary> <secondary>Ubication del file glossario scribibile</secondary>
+          </indexterm></para>
+
+        <para>Ci tu pote seliger sub plicas varie, per exemplo le sub plica con le files fonte, sub plica pro le files final etc. Si tu inscribe nomines de plicas que non existe ancora, <application>OmegaT</application> crea los pro te. In caso que tu decide te a modificar le plicas del projecto, mantene in mente que iste non movera le files existente ex le vetule plicas al nove ubication.</para>
+      </listitem>
+    </itemizedlist>
+  </section>
+</chapter>

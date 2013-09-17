@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<chapter id="chapter.searches">
+  <title>Recercas<indexterm class="singular">
+      <primary>Recercas</primary>
+    </indexterm></title>
+
+  <section id="search.window">
+    <title>Fenestra Recerca</title>
+
+    <figure id="text.search.window">
+      <title>Fenestra de Recerca<indexterm class="singular">
+          <primary>Fenestra de Recerca</primary> <secondary>Exemplo</secondary>
+        </indexterm></title>
+
+      <mediaobject>
+        <imageobject role="html">
+          <imagedata fileref="images/TextSearch25.png"/>
+        </imageobject>
+
+        <imageobject role="fo">
+          <imagedata fileref="images/TextSearch25.png" width="90%"/>
+        </imageobject>
+      </mediaobject>
+    </figure>
+
+    <note>
+      <para>Le recerca precedente trova omne le segmentos de destination que contine characteres, assatis improbabile in le destination - id es lingua sloven.</para>
+    </note>
+
+    <section>
+      <title>Cerca<indexterm class="singular">
+          <primary>Vias breve</primary> <secondary>Cerca - Ctrl+F</secondary>
+        </indexterm></title>
+
+      <para><application>OmegaT</application> provide un potente extension de functiones de recerca. Aperi Le Fenestra de Recerca con <keycombo> <keycap>Ctrl</keycap> <keycap>F</keycap> </keycombo> e inscribe le parola o phrase que tu desira recercar in le Cassa pro le recerca. Alias, in le fenestra Modifica, selige un parola o phrase in le campo de modifica (texto de destination del segmento currente) e pulsa <keycombo> <keycap>Ctrl</keycap> <keycap>F</keycap> </keycombo>. Le parola o phrase is inscribite in le Cassa pro le recerca automaticamente. Tu pote haber plure fenestras de Recerca aperte al mesme tempore, ma claude los quando illos non necessita plus assi que illos non incombra tu scriptorio.</para>
+    </section>
+
+    <section>
+      <title>Ubication del recerca</title>
+
+      <para>Le recercas son effectuate per arrangiamento initial in ambe le sectiones fonte e de destination del projecto, ma tu pote limitar tu recerca al fonte o al destination solmente. Tu pote cercar in</para>
+
+      <itemizedlist>
+        <listitem>
+          <para>le projecto solmente (preparation prefixate initial)</para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para>ambe le projecto e le memorias de traduction referentia in /tm/ (marca <emphasis>Cerca TMs)</emphasis></para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para>un file singule o un plica continente un serie de files (marca <emphasis>Cerca files)</emphasis></para>
+        </listitem>
+      </itemizedlist>
+
+      <para>Quando cerca in files (all contrario del memorias de traduction), <application>OmegaT</application> restringe le recerca al files in Formatos del file fonte. Per consequentia, ben que OmegaT es bastante habile a tractar le files <filename> tmx</filename>, illo non include los in le recerca del Files de recerca. Si tu activa <emphasis role="bold"><indexterm class="singular">
+          <primary>Recercas</primary> <secondary>Optiones Avantiate</secondary>
+        </indexterm>Optiones Experte</emphasis>, tu pote combinar le recerca con le nomine del autor del traduction e le tempore del ultime cambio facite.</para>
+    </section>
+  </section>
+
+  <section id="using.wild.cards">
+    <title>Usar characteres universal<indexterm class="singular">
+        <primary>Recercas</primary> <secondary>Usar characteres universal</secondary>
+      </indexterm></title>
+
+    <para>In ambe le recercas exacte e per parola clave, on pote usar le characteres de recerca universal '*' e '?'. Illos ha le significato, familiar al usatores de Word:</para>
+
+    <itemizedlist>
+      <listitem>
+        <para>'*' concorda zero o plus characteres, ab le position currente in un date parola a su fin. Le termino de recerca <literal>'run*'</literal> per exemplo facerea concordar le parolas <literal>'run'</literal>, <literal>'runs'</literal> e  <literal>'running'</literal>.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>'?' equala omne singule character. Per exemplo, <literal>'run?'</literal> facerea concordar le parola <literal>'runs'</literal> e <literal>'runn'</literal> in le parola <literal>'running'</literal>.</para>
+      </listitem>
+    </itemizedlist>
+
+    <para>Le concordantias essera marcate in azur hardite. Nota que '*' e '?' ha significato particular in le expressiones regular, ita le recerca del carta salvage, como ci describite, refere se solmente al recerca del exacte parola clave (vide in sequito).</para>
+  </section>
+
+  <section id="search.methoids">
+    <title>Methodos de recerca e optiones<indexterm class="singular">
+        <primary>Recercas</primary> <secondary>Methodos e optiones</secondary>
+      </indexterm></title>
+
+    <para>Selige le methodo per le buttones radio. Son disponibile le methodos de recerca sequente:</para>
+
+    <variablelist>
+      <varlistentry>
+        <term>recerca exacte</term>
+
+        <listitem>
+          <para>Recerca pro le segmentos continente le linea de character exacte que tu ha specificate. Un recerca exacte quere pro un phrase, id es si son inscribite plure parolas, illos es trovate solmente si illos occurre justo in celle sequentia. Cercar pro <literal>open file</literal> assi trovara omne le occurrentias del linea de character <emphasis><literal>open file</literal></emphasis>, ma non<emphasis><literal>file opened</literal></emphasis> o <emphasis><literal>open input file</literal></emphasis>.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>cerca parola clave</term>
+
+        <listitem>
+          <para>Recerca le segmentos continente omne le parolas clave que tu ha specificate, in qualcunque ordine. Selige recerca per parola clave pro recercar por cata numero del particular parolas complete, in qualcunque ordine. OmegaT monstra un lista de omne segmentos continente tote le parolas specificate. Recercas per parola clave es simile a un recerca &quot;con omne le  parolas&quot; in un motor de recerca Interrete como Google  (AND logic). Usante le recerca per parola clave con <emphasis><literal>open file</literal></emphasis> trovara assi omne occurrentias del linea de character <emphasis><literal>open file</literal>,</emphasis> assi como <emphasis><literal>file opened</literal>, <literal>open input file</literal>, <literal>file may not be safe to open</literal></emphasis>, etc.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><emphasis role="bold">Expressiones &amp;Regulamentari</emphasis></term>
+
+        <listitem>
+          <para>Le linea de character de recerca essera tractate como un expression regular. Le fila de characteres de recerca - [a-zA-Z]+[öäüqwß] - in le exemplo precedente per exemplo quere pro le parolas in le segmento de destination, continente characteres dubitabile ex un claviero german. Le expressiones regular son un maniera potente pro cercar pro occurrentias de un linea de character. Vide plus in le  capitulo<link linkend="chapter.regexp"> Expressiones regular.</link></para>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+
+    <para>In addition a uno del methodos precedente tu pote seliger le sequente:</para>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis role="bold">sensitive al Character Majuscule Minuscule</emphasis>: le recerca essera effectuate pro le linea de character specificate exacte; id es es observate le  capitalisation.</para>
+      </listitem>
+
+      <listitem>
+        <para><emphasis role="bold">in le fonte: </emphasis>cerca in le segmentos fonte</para>
+      </listitem>
+
+      <listitem>
+        <para><emphasis role="bold">in le traductiones: </emphasis>cerca in le segmentos final</para>
+      </listitem>
+
+      <listitem>
+        <para><emphasis role="bold">in notas: </emphasis>cerca in notas a segmentos</para>
+      </listitem>
+
+      <listitem>
+        <para><emphasis role="bold">recerca TMs</emphasis>: le memorias de traduction in le plica <filename>tm</filename> son includite in le recerca.</para>
+      </listitem>
+
+      <listitem>
+        <para><emphasis role="bold">monstra omne resultatos: </emphasis>deler iste quadrato de controlo causara que OmegaT monstrara sol le prime occurrentia de un pulsa, si existe plure occurrentias</para>
+      </listitem>
+    </itemizedlist>
+
+    <para>Si tu clicca sur le button <guibutton>Optiones avantiate</guibutton> pote esser seligite altere criterios (autor del traduction, data traducite etc) como monstrate in le imagine precedente.</para>
+  </section>
+
+  <section id="search.result.display">
+    <title>Monstra le resultatos del recerca</title>
+
+    <para>Pulsante le button recerca post inscribite un fila de characteres in le campo de recerca monstra omne le segmentos in le projecto que include le fila de characteres inscribite. A mesura que <application>OmegaT</application> tracta segmentos identic como un entitate singule, sol le prime segmento unic es monstrate. Le segmentos son monstrate in ordine de apparition in le projecto. Le segmentos rendite son monstrate con le texto original al alto e le texto rendite al basso, le segmentos non rendite son monstrate con le fonte sol.</para>
+
+    <para>Cliccar sur un segmento aperi lo in le quadro de Modifica pro le modificationes. Tu pote alora cambiar a retro al Fenestra de Recerca pro trovar le segmento successive, per exemplo pro controlar e, si necesse, corriger le terminologia.</para>
+
+    <para>Tu pote haber plure Fenestras de Recerca aperte al mesme tempore. Tu pote rapidemente vider lor contentos querente a lor titulo: il continera le termino de recerca usate.</para>
+  </section>
+</chapter>

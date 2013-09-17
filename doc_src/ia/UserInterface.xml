@@ -1,0 +1,777 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<chapter id="chapter.user.interface">
+  <title>Le interfacie del usator </title>
+
+  <section id="user.interface.items">
+    <title>La fenestra principal de OmegaT, altere fenestras e dialogos</title>
+
+    <para>Le interfacie del usator  Additional fenestras es disponibile, como dialogos, usate pro cambiar le preparationes del projecto OmegaT. Le information in basso reassume le lor uso e  como illos es invocate:</para>
+
+    <table colsep="0" rowsep="0">
+      <title>La fenestra principal de OmegaT<indexterm class="singular">
+          <primary>Interfacie del usator</primary> <secondary>La fenestra principal de OmegaT</secondary>
+        </indexterm></title>
+
+      <tgroup cols="2" colsep="0" rowsep="1" title="Main OMegaT window">
+        <colspec align="left" colnum="1"/>
+
+        <colspec align="left" colnum="2"/>
+
+        <tbody>
+          <row>
+            <entry><guimenuitem>Quadro del Modifica (Editor)</guimenuitem></entry>
+
+            <entry>ubi tu scribe e redige le traduction</entry>
+          </row>
+
+          <row>
+            <entry><guimenuitem>Quadro del concordantias</guimenuitem></entry>
+
+            <entry>expone le segmentos le plus simile ex le memorias de traduction</entry>
+          </row>
+
+          <row>
+            <entry><guimenuitem>Quadro del glossario</guimenuitem></entry>
+
+            <entry>monstra le terminologia trovate pro le articulos in le segmento currente</entry>
+          </row>
+
+          <row>
+            <entry><guimenuitem>Quadro del Dictionario</guimenuitem></entry>
+
+            <entry>monstra le entratas del dictionario trovate pro le articulos in le segmento currente</entry>
+          </row>
+
+          <row>
+            <entry><guimenuitem>Quadro del Traductiones automatic (MT)</guimenuitem></entry>
+
+            <entry>expone le traduction, fornite per servicios de Traductiones automatic (MT)</entry>
+          </row>
+
+          <row>
+            <entry><guimenuitem>Quadro del Notas</guimenuitem></entry>
+
+            <entry>le notas pertinente al segmento currente, e.g. traductiones alternative o le currente clave in caso de clave = valor formatos del file.</entry>
+          </row>
+
+          <row>
+            <entry><guimenuitem>Quadro del Commentos</guimenuitem></entry>
+
+            <entry>Commentos ex le autor in files PO, o le nomine del attributo a render (in XHTML)</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+
+    <table colsep="0" rowsep="0">
+      <title>Altere fenestras<indexterm class="singular">
+          <primary>Interfacie del usator</primary> <secondary>Altere fenestras</secondary>
+        </indexterm></title>
+
+      <tgroup cols="2" colsep="0" rowsep="1" title="Other windows">
+        <colspec align="left" colnum="1"/>
+
+        <colspec align="left" colnum="2"/>
+
+        <tbody>
+          <row>
+            <entry><guimenuitem><indexterm class="singular">
+                <primary>Vias breve</primary> <secondary>Validation del tag - Ctrl+T</secondary>
+              </indexterm>Fenestra Validation del tag</guimenuitem></entry>
+
+            <entry><para>Utilisate pro validar le tags (aperir Con <keycombo> <keycap>Ctrl</keycap> <keycap>T</keycap> </keycombo>, clauder con <keycap>Esc</keycap>)</para></entry>
+          </row>
+
+          <row>
+            <entry><guimenuitem><indexterm class="singular">
+                <primary>Vias breve</primary> <secondary>Adjuta - F1</secondary>
+              </indexterm>Lector del Adjuta</guimenuitem></entry>
+
+            <entry><para>Utilisate pro monstrar le manual del usator (aperir con <keycap>F1</keycap>, clauder con <keycap>Esc)</keycap></para></entry>
+          </row>
+
+          <row>
+            <entry><guimenuitem>Fenestra del statisticas</guimenuitem></entry>
+
+            <entry><para>Utilisate pro aperir le  fenestra  con le statisticas del projecto, monstra los, usante <menuchoice> <guimenu><indexterm class="singular">
+                    <primary>Menu Instrumentos</primary> <secondary>Statisticas</secondary>
+                  </indexterm>Instrumentos</guimenu> <guimenuitem>Statisticas.</guimenuitem> </menuchoice></para></entry>
+          </row>
+
+          <row>
+            <entry><guimenuitem>Fenestra del statisticas del concordantia</guimenuitem></entry>
+
+            <entry><para>Utilisate pro monstrar le statisticas del concordantia del projecto, seligect <menuchoice> <guimenu><indexterm class="singular">
+                    <primary>Menu Instrumentos</primary> <secondary>Statistica del Concordantias</secondary>
+                  </indexterm>Instrumentos</guimenu> <guimenuitem>Statisticas del concordantia</guimenuitem> </menuchoice>pro lo aperir.</para></entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+
+    <table border="0" colsep="0" rowsep="0">
+      <title>Fenestras de dialogo del preparationes<indexterm class="singular">
+          <primary>Interfacie del usator</primary> <secondary>Fenestras de dialogo de preparation</secondary> <seealso>Preparationes Projecto</seealso>
+        </indexterm></title>
+
+      <tgroup cols="2" colsep="0" rowsep="1" title="Settings dialogs">
+        <colspec align="left" colnum="1"/>
+
+        <colspec align="left" colnum="2"/>
+
+        <tbody>
+          <row>
+            <entry><guimenuitem>Proprietates del projecto<indexterm class="singular">
+                <primary>Menu projecto </primary> <secondary>Proprietates</secondary>
+              </indexterm></guimenuitem> <indexterm class="singular">
+                <primary>Vias breve</primary> <secondary>Proprietates del projecto - Ctrl+E</secondary>
+              </indexterm></entry>
+
+            <entry>Utilisate pro modificar le  plicas e  le linguas del projecto (acceder via le via breve <guimenuitem>Ctrl+E </guimenuitem>o <menuchoice> <guimenu>Projecto</guimenu> <guimenuitem>Proprietates...</guimenuitem> </menuchoice>, clauder con <keycap>Esc)</keycap></entry>
+          </row>
+
+          <row>
+            <entry><guimenuitem>Typo de character<indexterm class="singular">
+                <primary>Preparationes del Projecto</primary> <secondary>Typo del character</secondary>
+              </indexterm></guimenuitem></entry>
+
+            <entry><para>Utilisate pro modificar le typo de character usate per <application>OmegaT</application> pro monstrar le terminos fonte, traduction, concordantias e glossario, (accede via <menuchoice> <guimenu>Optiones</guimenu> <guimenuitem>Typo de character...</guimenuitem> </menuchoice>, clauder via <keycap>Esc</keycap>)</para></entry>
+          </row>
+
+          <row>
+            <entry><guimenuitem>Filtros del file<indexterm class="singular">
+                <primary>Preparationes del Projecto</primary> <secondary>Filtros del File</secondary>
+              </indexterm><indexterm class="singular">
+                <primary>Menu Optiones</primary> <secondary>Filtros del File</secondary>
+              </indexterm></guimenuitem></entry>
+
+            <entry>Utilisate pro adjustar le tractamento del formatos del files  supportate (acceder via <menuchoice> <guimenu>Optiones</guimenu> <guimenuitem>Filtros de file...</guimenuitem> </menuchoice>, clauder via <keycap>Esc</keycap>)</entry>
+          </row>
+
+          <row>
+            <entry><guimenuitem>&amp;Segmentation...<indexterm class="singular">
+                <primary>Preparationes del Projecto</primary> <secondary>Segmentation</secondary>
+              </indexterm><indexterm class="singular">
+                <primary>Menu Optiones</primary> <secondary>Segmentation</secondary>
+              </indexterm></guimenuitem></entry>
+
+            <entry>Utilisate pro cambiar le  maniera como tu  texto es segmentate in phrases (acceder via <menuchoice> <guimenu>Optiones</guimenu> <guimenuitem>Segmentation</guimenuitem> </menuchoice>, clauder via <keycap>Esc</keycap>)</entry>
+          </row>
+
+          <row>
+            <entry><guimenuitem>Comportamento del Modifica (editor)<indexterm class="singular">
+                <primary>Menu Optiones</primary> <secondary>Comportamento del Modifica (editor)</secondary>
+              </indexterm><indexterm class="singular">
+                <primary>Preparationes del Projecto</primary> <secondary>Comportamento del Modifica (editor)</secondary>
+              </indexterm></guimenuitem></entry>
+
+            <entry>Utilisate pro cambiar como <application>OmegaT</application> comporta se quando tu itera inter le segmentos (acceder via <menuchoice> <guimenu>Optiones</guimenu> <guimenuitem>Comportamento de modifica...</guimenuitem> </menuchoice>, close via <keycap>Esc</keycap>)</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+  </section>
+
+  <section id="OmegaT.main.window">
+    <title><application>OmegaT</application> fenestra principal<indexterm class="singular">
+        <primary>Fenestras e quadros in OmegaT</primary> <secondary>Fenestra Principal</secondary>
+      </indexterm></title>
+
+    <figure id="OmegaT.main.window.figure">
+      <title>OmegaT fenestra principal</title>
+
+      <mediaobject>
+        <imageobject role="html">
+          <imagedata fileref="images/OmegaT_panes_25.png" scale="100"/>
+        </imageobject>
+
+        <imageobject role="fo">
+          <imagedata fileref="images/OmegaT_panes_25.png" width="80%"/>
+        </imageobject>
+      </mediaobject>
+    </figure>
+
+    <para>Le principal fenestra  consiste in plure quadros, le  menu principal e  un  barra de stato. Tu pote cambiar le position de qualcunque quadro o etiam levar lo a un fenestra separate cliccante e tirante le quadro ab su nomine Dependente del stato del quadro, a su angulo del summitate dextre, pote apparer signos differente a su angulo del summitate dextere:</para>
+
+    <note>
+      <para>Si tu non pote vider omne le quadros (sia los aperte o minimisate), que tu pressa <guisubmenu> Optiones &gt; Restaura Fenestra Principal </guisubmenu> e tu restaurara los al lor preparation initial.</para>
+    </note>
+
+    <table>
+      <title>Etiquettas del Quadro<indexterm class="singular">
+          <primary>Fenestras e quadros in OmegaT</primary> <secondary>Etiquettas del Quadro</secondary>
+        </indexterm></title>
+
+      <tgroup cols="2">
+        <colspec align="left" colnum="1"/>
+
+        <tbody>
+          <row>
+            <entry><inlinemediaobject>
+                <imageobject role="html">
+                  <imagedata fileref="images/Minimize.gif" width="60%"/>
+                </imageobject>
+
+                <imageobject role="fo">
+                  <imagedata fileref="images/Minimize.gif" width="40%"/>
+                </imageobject>
+              </inlinemediaobject></entry>
+
+            <entry>minimisa le quadro, assi que es monstrate sol su nomine al pede del fenestra</entry>
+          </row>
+
+          <row>
+            <entry><inlinemediaobject>
+                <imageobject role="html">
+                  <imagedata fileref="images/Maximize.gif" width="60%"/>
+                </imageobject>
+
+                <imageobject role="fo">
+                  <imagedata fileref="images/Maximize.gif" width="40%"/>
+                </imageobject>
+              </inlinemediaobject></entry>
+
+            <entry>maximisa le quadro</entry>
+          </row>
+
+          <row>
+            <entry><inlinemediaobject>
+                <imageobject role="html">
+                  <imagedata fileref="images/restore.gif" width="60%"/>
+                </imageobject>
+
+                <imageobject role="fo">
+                  <imagedata fileref="images/restore.gif" width="40%"/>
+                </imageobject>
+              </inlinemediaobject></entry>
+
+            <entry>restaura le arrangiamento precedente le grado maximisation</entry>
+          </row>
+
+          <row>
+            <entry><inlinemediaobject>
+                <imageobject role="html">
+                  <imagedata fileref="images/undock.gif" width="60%"/>
+                </imageobject>
+
+                <imageobject role="fo">
+                  <imagedata fileref="images/undock.gif" width="40%"/>
+                </imageobject>
+              </inlinemediaobject></entry>
+
+            <entry>leva le quadro ex le fenestra principal</entry>
+          </row>
+
+          <row>
+            <entry><inlinemediaobject>
+                <imageobject role="html">
+                  <imagedata fileref="images/dock.gif" width="60%"/>
+                </imageobject>
+
+                <imageobject role="fo">
+                  <imagedata fileref="images/dock.gif" width="40%"/>
+                </imageobject>
+              </inlinemediaobject></entry>
+
+            <entry>re pone le quadro intra le fenestra principal</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+
+    <para>Tu, si lo vole, pote superponer le quadros. Quando isto is facite le quadros monstra un linguetta al summitate. Quando isto is facite le quadros monstra un linguetta al summitate. Si tu deberea perder tracia de tu cambios al interfacie del usator, tu pote usar <guimenuitem><indexterm class="singular">
+        <primary>Fenestras de OmegaT</primary> <seealso>Fenestras e quadros in OmegaT</seealso>
+      </indexterm> <indexterm class="singular">
+        <primary>Fenestras de OmegaT</primary> <secondary>Restauration al preparation de fabrica</secondary>
+      </indexterm>Optiones → Restaura le Fenestra Principal</guimenuitem> in omne tempore pro retornar al arrangiamento original.</para>
+
+    <para>Le contatores in le angulo dextre inferior tene tracia del progresso del traduction (le numeros in le columna sinistre refere se al figura precedente):</para>
+
+    <table>
+      <title>Fenestra principal - contatores<indexterm class="singular">
+          <primary>Fenestras e quadros in OmegaT</primary> <secondary>Contatores</secondary>
+        </indexterm></title>
+
+      <tgroup cols="2">
+        <colspec align="left" colnum="1"/>
+
+        <tbody>
+          <row>
+            <entry>27/27</entry>
+
+            <entry>numero de segmentos - rendite contra total in le file currente</entry>
+          </row>
+
+          <row>
+            <entry>9319/16338</entry>
+
+            <entry>numero de segmentos - unic contra total in le Projecto</entry>
+          </row>
+
+          <row>
+            <entry>31175</entry>
+
+            <entry>numero de segmentos total (includente repetitiones) in le projecto</entry>
+          </row>
+
+          <row>
+            <entry>103/114</entry>
+
+            <entry>numero de characteres original e final in le segmento currente</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+
+    <para>Ab un puncto de vista practic, the plus importante par de numeros is the secunde par: illo dice, quanto tu ha intertanto have facite, in relation al total o secunde numero. Le projecto in le exemplo es evidentemente finite, como omne le segmentos unic esseva jam rendite.</para>
+
+    <section id="editor.pane">
+      <title>Quadro del Modifica (Editor)<indexterm class="singular">
+          <primary>Fenestras e quadros in OmegaT</primary> <secondary>Quadro del Modifica (Editor)</secondary>
+        </indexterm></title>
+
+      <para>Isto es ubi tu scribe e modifica (edita) tu traduction. Le quadro Modifica monstra le texto del documento partialmente rendite: le texto ja rendite es displicate in traduction e le texto non rendite es monstrate in le lingua original. Le texto monstrate es fisse in segmentos e tu pote rolar a a transverso del documento e  cliccar duo vices sur cata segmento pro aperir e modificar lo. In le caso precedente, le segmentos jam rendite es monstrate in jalne.</para>
+
+      <para>Uno del segmentos super es le segmento actual. Il es le segmento que es monstrate in duo partes. Le parte superior es in le lingua original, in characteres nigrate con un color de fundo verde, le parte inferior es le campo de modifica, terminate per un marcator: <indexterm class="singular">
+          <primary>Marcator del segmento</primary>
+        </indexterm>le marcator es <literal>&lt;segment nnnn&gt;</literal> ubi nnnn es le un numero del segmento in le projecto. Usa le parte superior como un referentia e reimplacia o modifica le contentos del campo de modifica con tu traduction.</para>
+
+      <para>Secundo le preferentias del comportamento del modifica, le campo pro le modifica del segmentos non rendite pote essere vacue , continer le texto original, o continer le traduction del linea de character maxime simile a uno a render. Quando tu move a un altere segmento, le traduction es validate e registrate in le memoria de traduction. Si tu vole que le traduction sia identic al origine, vacua simplemente le campo de modifica removente omne le texto (selige omne con <keycap>Ctrl+A</keycap> e dele con <keycap>Del</keycap>). OmegaT es capabile de registrar traductiones que es identic al texto primari. Isto es utile pro textos continente marcas commercial, nomines o altere nomines proprie, o partes in un lingua tertia que non require traduction. Vide <emphasis>Modifica (edition) del traduction</emphasis> for plus de detalios.</para>
+
+      <para>Si tu clicca con le dextra sur le quadro Modifica, se displica un menu pop-up menu, offerente <emphasis role="bold"> Talia, Copia, Colla</emphasis> (id es le mesme functiones que <keycombo> <keycap>Ctrl</keycap> <keycap>X</keycap> </keycombo>, <keycombo> <keycap>Ctrl</keycap> <keycap>C</keycap> </keycombo> e <keycombo> <keycap>Ctrl</keycap> <keycap>V</keycap> </keycombo>) e le function <emphasis role="bold">Vade al segmento</emphasis>.</para>
+    </section>
+
+    <section id="match.viewer">
+      <title>Quadro del Concordantias Partial<indexterm class="singular">
+          <primary>Fenestras e quadros in OmegaT</primary> <secondary>Quadro del Concordantias Partial</secondary>
+        </indexterm></title>
+
+      <para><figure id="matches.pane">
+          <title><indexterm class="singular">
+              <primary>Concordantias</primary> <secondary>Quadro del concordantias - figura</secondary>
+            </indexterm><indexterm class="singular">
+              <primary>Fenestras e quadros in OmegaT</primary> <secondary>Quadro del concordantias - figura</secondary>
+            </indexterm>Quadro del concordantias</title>
+
+          <mediaobject>
+            <imageobject role="html">
+              <imagedata fileref="images/MatchesPane_25.png"/>
+            </imageobject>
+
+            <imageobject role="fo">
+              <imagedata fileref="images/MatchesPane_25.png" width="80%"/>
+            </imageobject>
+          </mediaobject>
+        </figure></para>
+
+      <para>Le quadro del concordantias monstra le segmentos le plus similabile, sia ex le memoria de traduction del projecto interne create in tempore actual como tu rende tu projecto e  ex memorias de traduction auxiliar que tu ha importate ex tu obras precedente, o recipite ex tu cliente o agentia del traduction.</para>
+
+      <para>Quando tu move al segmento proxime, le prime concordantia partial (illo con le melior percentage de concordantia) es seligite automaticamente. Tu pote seliger un concordantia differente pressante <guimenuitem>Ctrl+2, 3, 4, o 5</guimenuitem>.<indexterm>
+          <primary>Vias breve</primary> <secondary>Selectionar le concordantia - Ctrl+N</secondary>
+        </indexterm> Naturalmente, pressante <keycombo> <keycap>Ctrl</keycap> <keycap>5</keycap> </keycombo> non habera alicun effecto, si il non ha alicun concordantia #5. Pro usar le concordantia seligite in tu traduction, usa <guimenuitem>Ctrl+R</guimenuitem><indexterm class="singular">
+          <primary>Vias breve</primary> <secondary>Replacia texto - Ctrl+R</secondary>
+        </indexterm> pro reimplaciar le campo final con le concordantia o usa <guimenuitem>Ctrl+I <indexterm class="singular">
+          <primary>Vias breve</primary> <secondary>Insere texto - Ctrl+I</secondary>
+        </indexterm></guimenuitem> pro inserer lo al position del cursor.</para>
+
+      <para>Le percentage de concordantia es grosso modo equivalente a prender le numero de parolas commun in le segmentos concordate e divider los per le numero de parolas in le plus longe del duos. Le concordantia partial seligite es marcate in nigrato, le parolas que es mancante in le segmento que tu es rendente es colorate azur e le parolas adjacente al partes mancante in verde. In le precedente exemplo le segmento fonte es <emphasis role="bold">Commando del menu contexto</emphasis>. Le concordantia summe es 100%, proque omne parolas concorda. Assi facer le sequente duo concordantias, e le concordantia #4 son similabile, ma differente. Le linea con le percentage del concordantia include alsi le nomine del of memoria de traduction <indexterm class="singular">
+          <primary>Memorias de traduction</primary> <secondary>Concordantias</secondary>
+        </indexterm> continente le concordantia. Si il ha nulle nomine del file monstrate, le fonte es le memoria de traduction interne del projecto. Segmentos orphane<indexterm class="singular">
+          <primary>Memorias de traduction</primary> <secondary>Segmentos orphane</secondary>
+        </indexterm> (le concordantia #2) describe segmentos in le memoria de traduction base del projecto que non ha alicun segmento original correspondente.</para>
+
+      <para>Il ha in veritate tres concordantia estimate disponibile (66/66/30 in le caso del concordantia #4 precedente). Illos es definite ut seque:</para>
+
+      <itemizedlist>
+        <listitem>
+          <para>percentage de concorda quando es usate le plugin tokenizer</para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para>concorda OmegaT base - numero de parolas concordate - con valores numeric e tags ignorate - dividite per le conte total de parola</para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para>Concordantia OmegaT, includente numeros, tags</para>
+        </listitem>
+      </itemizedlist>
+
+      <section>
+        <title>Personalisar le quadro pro le Concordantias Partial<indexterm class="singular">
+            <primary>Fenestras e quadros in OmegaT</primary> <secondary>Quadro del concordantias partial (fuzzy)</secondary> <tertiary>Personalisation</tertiary>
+          </indexterm><indexterm class="singular">
+            <primary>Files fonte</primary> <secondary>Render fonte renovate</secondary>
+          </indexterm></title>
+
+        <para>In <guimenu>Optiones &gt;TMXs  Externe</guimenu>, plure variabiles permitte de configurar le apparentia del quadro del concordantias:</para>
+
+        <figure id="matches.pane.setup">
+          <title><indexterm class="singular">
+              <primary>Concordantias</primary> <secondary>Quadro del concordantias - figura</secondary>
+            </indexterm><indexterm class="singular">
+              <primary>Fenestras e quadros in OmegaT</primary> <secondary>Quadro del concordantias - figura</secondary>
+            </indexterm>Preparation del Quadro del concordantias</title>
+
+          <mediaobject>
+            <imageobject>
+              <imagedata fileref="images/MatchesPaneSetup.png"/>
+            </imageobject>
+
+            <imageobject role="fo">
+              <imagedata fileref="images/MatchesPaneSetup.png" width="50%"/>
+            </imageobject>
+          </mediaobject>
+        </figure>
+
+        <para>Le figura precedente monstra le modello base del apparentia del concordantia. Le contentos pote esser personalisate con le variabiles sequente:</para>
+
+        <table colsep="0" rowsep="0">
+          <title>Preparation del Quadro del concordantias<indexterm class="singular">
+              <primary>Interfacie del Usator</primary> <secondary>Preparation del Quadro del concordantias</secondary>
+            </indexterm></title>
+
+          <tgroup cols="2" colsep="1" rowsep="1" title="Match pane setup">
+            <colspec align="left" colnum="1"/>
+
+            <colspec align="left" colnum="2"/>
+
+            <tbody>
+              <row>
+                <entry><literal>${id}</literal></entry>
+
+                <entry>Numero del concordantia ab 1 a 5</entry>
+              </row>
+
+              <row>
+                <entry><literal>${sourceText}</literal></entry>
+
+                <entry>Texto fonte del concordantia</entry>
+              </row>
+
+              <row>
+                <entry><literal>${targetText}</literal></entry>
+
+                <entry>Texto final del concordantia</entry>
+              </row>
+
+              <row>
+                <entry><literal>${diff}</literal></entry>
+
+                <entry>Linea de character monstrante le differentias inter le fonte e le concordantia.<emphasis> Aviso:</emphasis> usa isto si le texto, que tu es rendente  esseva renovate.</entry>
+              </row>
+
+              <row>
+                <entry><literal>${score}</literal></entry>
+
+                <entry>Percentage con tokenizer</entry>
+              </row>
+
+              <row>
+                <entry><literal>${noStemScore}</literal></entry>
+
+                <entry>Percentage sin numeros e tags</entry>
+              </row>
+
+              <row>
+                <entry><literal>${adjustedScore}</literal></entry>
+
+                <entry>Percentage adjustate</entry>
+              </row>
+
+              <row>
+                <entry><literal>${fileNameOnly}</literal></entry>
+
+                <entry>Nomine del TMX</entry>
+              </row>
+
+              <row>
+                <entry><literal>${filePath}</literal></entry>
+
+                <entry>Percurso complete del TMX</entry>
+              </row>
+
+              <row>
+                <entry><literal>${fileShortPath}</literal></entry>
+
+                <entry>Percurso del TMX a partir del radice de /tm</entry>
+              </row>
+
+              <row>
+                <entry><literal>${creationID}</literal></entry>
+
+                <entry>Autor del concordantia</entry>
+              </row>
+
+              <row>
+                <entry><literal>${creationDate}</literal></entry>
+
+                <entry>Data del concordantia</entry>
+              </row>
+
+              <row>
+                <entry><literal>${fuzzyFlag}</literal></entry>
+
+                <entry>Indica que iste concordantia es partial (actualmente sol pro traductiones ex files PO con le marca #fuzzy)</entry>
+              </row>
+            </tbody>
+          </tgroup>
+        </table>
+      </section>
+    </section>
+
+    <section>
+      <title>Quadro del glossario<indexterm class="singular">
+          <primary>Fenestras e quadros in OmegaT</primary> <secondary>Quadro del glossario</secondary>
+        </indexterm></title>
+
+      <para>Le quadro pro le Glossario permitte te de acceder a tu proprie collection de expressiones e terminologia specialistic que tu ha create in tu files glossario Illo monstra le traduction del terminos trovate in le segmento currente. Le segmento original in le exemplo sequente era “<emphasis>Commando del menu contexto</emphasis>”, como in le exemplo de concordantias partial precedente, e le terminos monstrate esseva trovate in le glossarios, disponibile (Microsoft's Term collection e Slovenian Linux User group Glossary).</para>
+
+      <figure id="multiword.pane">
+        <title><indexterm class="singular">
+            <primary>Glossarios</primary>
+          </indexterm>entrata con plure parolas in le glossario</title>
+
+        <mediaobject>
+          <imageobject role="html">
+            <imagedata fileref="images/GlossaryPane_25.png"/>
+          </imageobject>
+
+          <imageobject role="fo">
+            <imagedata fileref="images/GlossaryPane_25.png" width="80%"/>
+          </imageobject>
+        </mediaobject>
+      </figure>
+
+      <para>Si tu ha le option TransTips activate (<guimenuitem>Optiones → TransTips</guimenuitem>), tu pote cliccar con le dextro sur le parola marcate in le segmento fonte pro aperir un menu pop-up con le traduction suggerite, assi como offerite per tu glossarios. Selectionante uno de illos on inserera lo al position currente del cursor in le segmento final. Tu pote anque marcar tu alternativa ideal in le quadro del Glossario atque inserer lo in le destination cliccante con le dextro sur le selection.</para>
+    </section>
+
+    <section id="dictionaries">
+      <title>Quadro del Dictionario<indexterm class="singular">
+          <primary>Fenestras e quadros in OmegaT</primary> <secondary>Quadro del Dictionario</secondary>
+        </indexterm></title>
+
+      <para>Le Dictionarios es le equivalentes electronic de dictionarios imprimite como Merriam Webster, Duden, Larousse et cetera, que on pote haber sur su scriptorio. Vide plus re illos in le capitulo re <link linkend="chapter.dictionaries">Dictionarios</link></para>
+    </section>
+
+    <section id="Multiple.Translations">
+      <title>Quadro del Traductiones multiple<indexterm class="singular">
+          <primary>Fenestras e quadros in OmegaT</primary> <secondary>Quadro del Traductiones multiple</secondary>
+        </indexterm></title>
+
+      <para>Un date segmento fonte pote requirer plure traductiones differente, dependente del contexto. Si le traduction currente del segmento non conveni, le usator pote seliger <guisubmenu>Modifica → Crea Traduction Alternative</guisubmenu>. Le texto final inscribite post que essera tractate ut un traduction alternative del segmento original. Tu pote definir uno del alternativas - per exemplo le plus probabile inter illos - como traduction base seligente <guisubmenu>Modifica → Usa como traduction base</guisubmenu></para>
+    </section>
+
+    <section>
+      <title>Quadro del Notas</title>
+
+      <para>Le traductor pote adder notas al segmento aperte, per exemplo pro retornar plus tarde al segmento e refacer le traduction, controlar que le traductiones alternative es correcte o pro demandar al collegas lor opinion. Tu pote pascer al transverso del notas per <guisubmenu>Vade → Nota sequente</guisubmenu> e <guisubmenu>Vade → Nota previe</guisubmenu>.</para>
+    </section>
+
+    <section>
+      <title>Quadro del Commentos</title>
+
+      <para>Alcun del Formatos del files, specialisate pro le labor de traduction, per exemplo PO, permitte le inclusion de commentos. In iste maniera le traductor pote esser supplite le contexto re le segmento que debe esser rendite. In le exemplo sequente, le autor del file PO ha includite un advertimento pro le traductor pro controlar le longitude del traduction:</para>
+
+      <figure id="comments.pane">
+        <title>Quadro del Commentos<indexterm class="singular">
+            <primary>Commentos</primary> <secondary>Quadro del Commentos</secondary>
+          </indexterm></title>
+
+        <mediaobject>
+          <imageobject role="html">
+            <imagedata fileref="images/Comments_25.png"/>
+          </imageobject>
+
+          <imageobject role="fo">
+            <imagedata fileref="images/Comments_25.png" width="80%"/>
+          </imageobject>
+        </mediaobject>
+      </figure>
+    </section>
+
+    <section id="Google.Translate">
+      <title>Quadro del Traduction automatic (MT)<indexterm class="singular">
+          <primary>Fenestras e quadros in OmegaT</primary> <secondary>Quadro del Traduction automatic (MT)</secondary>
+        </indexterm></title>
+
+      <para>Le quadro del Traduction Automatic, quando aperte, contine le suggestiones ex instrumentos de traductor automatic pro le segmento currente. Pressa <keysym>Ctrl+M </keysym>pro reimplaciar le traduction del segmento currente con le suggerite translation. Plus in le capitulo <link linkend="chapter.machine.translate">Traductor automatic</link></para>
+    </section>
+
+    <section>
+      <title id="main.menu">Menu principal</title>
+
+      <para>Le menu principal provide accesso a omne functiones de <application>OmegaT</application>. Vide le appendice<emphasis> Menu Principal</emphasis> pro un description complete re omne menus e commandos del menu. Le functiones le plus frequentemente usate es accessibile con vias breve del claviero, assi un vice que tu deveni accostumate a illos, tu non necessitara plus navigar a transverso del menus durante que tu traduce. Vide capitulo <link linkend="chapter.menu">Menu e Vias breve del Claviero</link> pro detalios.</para>
+    </section>
+
+    <section id="status.bar">
+      <title>Barra del Stato</title>
+
+      <para>Le barra de stato monstra messages  pertinente le fluxo de labor al fundo del fenestra principal. Iste barra da al usator le information de retorno re specific operationes que es in progresso. Illo alsi monstra le numero de concordantias partial e del glossario pro le segmento actual.</para>
+    </section>
+  </section>
+
+  <section id="other.windows">
+    <title>Altere fenestras</title>
+
+    <section id="section.project.files">
+      <title>Files del projecto<indexterm class="singular">
+          <primary>Fenestras e quadros in OmegaT</primary> <secondary>Files del Projecto</secondary>
+        </indexterm></title>
+
+      <para>Le fenestra Files del Projecto lista le files del projecto e monstra altere information de projecto. Il es monstrate automaticamente quando OmegaT carga un projecto. Usa <guimenuitem>Ctrl+L<indexterm class="singular">
+          <primary>Vias breve</primary> <secondary>Lista del files del Projecto - Ctrl+L</secondary>
+        </indexterm></guimenuitem> pro aperir e  <keycap>Esc</keycap> pro clauder lo. Le fenestra Files del Projecto monstra le information sequente:</para>
+
+      <itemizedlist>
+        <listitem>
+          <para>le lista de omne files traducibile in le projecto. Istos es le files presente in le plica /source in un formato que OmegaT es habile a recognoscer. Cliccar sur omne file aperira lo pro le traduction</para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para>le file actualmente disponibile in le quadro de Modifica es marcate con un fundo blau. Pressante <keycap>Enter</keycap> movera le quadro del Modifica al summitate del file seligite</para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para>Le entratas del file include lor nomines, typos de filtro de file, lor codification e le numero de segmentos que cata file contine</para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para>le numero total de segmentos, le numero de segmentos unic in toto le Projecto, e le numero de segmentos unic jam rendite es monstrate al fundo</para>
+        </listitem>
+      </itemizedlist>
+
+      <para>Le serie de segmentos <emphasis role="bold">Unic </emphasis>es computate per retener omne le segmentos e remover omne le segmentos duplicate. (Le definition de  “unic” is sensibile al majusculas e minusculas: &quot;Run&quot; e &quot;run&quot; es tractate como si es differente)</para>
+
+      <para>Le differentia inter &quot;Numero de segmentos&quot; e &quot;Numero de segmentos unic&quot; provide un idea approximative del numero del repetitiones in le texto. Nota tamen que le numeros non indica ut pertinente es le repetitiones: illos poterea significar phrases relativemente longe repetite plure vices (in le qual caso tu es fortunate) o illo poterea describer un tabula de parolas clave (non assi fortunate). Le file <filename>project_stats.txt</filename> ubicate in le plica omegat de tu projecto, contine information plus detaliate re le segmentos, partite per cata file.</para>
+
+      <para>Le modifica del regulas de segmentation pote modificar le numero del segmentos e del segmentos unic. Isto, comocunque, deberea generalmente esser evitate un vice que tu initiava le traduction del projecto. Vide le capitulo <emphasis>Regulas de segmentation</emphasis>pro plus de information.</para>
+
+      <para><emphasis role="bold"><indexterm class="singular">
+          <primary>Files fonte</primary> <secondary>Adder files al projecto</secondary>
+        </indexterm>Adder files al projecto: </emphasis>Tu pote adder files fonte al projecto cliccante sur le button &quot;<guimenuitem>Importa Files Fonte...&quot;</guimenuitem>. Isto copia le files seligite in le plica <filename>source</filename> e recarga le projecto pro importar le files nove. Tu pote alsi adder files fonte a partir de paginas Interrete, scripte in MediaWiki, cliccante sur le button<guimenuitem> &quot;Importa ex MediaWiki&quot;</guimenuitem> e providente le URL correspondente.</para>
+    </section>
+
+    <section id="section.search.window">
+      <title>Fenestra Recerca<indexterm class="singular">
+          <primary>Fenestras e quadros in OmegaT</primary> <secondary>Quadro del Recerca</secondary>
+        </indexterm></title>
+
+      <para>Tu pote usar le fenestra de recerca pro trovar segmentos specific in un projecto. Tu pote alsi haber plure fenestras de recerca aperte simultaneemente Pro aperir un nove Fenestra de Recerca, usa <keycombo> <keycap>Ctrl</keycap> <keycap>F</keycap> </keycombo> in le fenestra Principal. Le Fenestra de Recerca consiste de un campo de texto pro lineas o parolas clave,  e buttones pro le preparation del recerca e un area de monstra continente le resultatos del recerca. Vide le capitulo<emphasis> <link linkend="chapter.user.interface">Recercas</link> </emphasis>pro plus de information re le Fenestra de Recerca.</para>
+    </section>
+
+    <section id="section.tag.validation">
+      <title>Validation del tags<indexterm class="singular">
+          <primary>Validation del tag</primary> <seealso>Vias breve, Tags</seealso>
+        </indexterm><indexterm class="singular">
+          <primary>Fenestras e quadros in OmegaT</primary> <secondary>Validation del tag</secondary> <seealso>Tags</seealso>
+        </indexterm></title>
+
+      <para>Le fenestra de validation del tag releva e lista omne errores del tag e contradictiones in le traduction. Aperi le fenestra con <guimenuitem>Ctrl+T. </guimenuitem>Le fenestra presenta un tabella con 3 columnas con un ligamine al segmento e a su contentos fonte e final:</para>
+
+      <para><figure id="tag.validator.window">
+          <title><indexterm class="singular">
+              <primary>Validation del tag</primary> <secondary>fenestra - figura</secondary> <seealso>Tags</seealso>
+            </indexterm>Fenestra Validation del tag</title>
+
+          <mediaobject>
+            <imageobject role="html">
+              <imagedata fileref="images/TagValidator.png"/>
+            </imageobject>
+
+            <imageobject role="fo">
+              <imagedata fileref="images/TagValidator.png" width="60%"/>
+            </imageobject>
+          </mediaobject>
+        </figure></para>
+
+      <para>Le tags es marcate in blau nigrato pro un facile comparation inter le original e le contentos rendite. Clicca sur le ligamine pro saltar al segmento in le quadro del Modifica. Corriger le error si necesse e calca <guimenuitem>Ctrl+T</guimenuitem> pro retornar al fenestra de validation del tag pro corriger altere errores. In le prime e tertie caso le tags precedente es arrangiate in pares in modo errate, e in le secunde caso le signo &lt; es mancante in le  prime tag.</para>
+
+      <para>le errores de tag es casos in le qual le tags in le traduction non corresponde in ordine e numero al segmento original. Alicun scenarios de tag languite in le fenestra de validation del tag es necessari e benigne, alteres producera problemas quando es create le documento rendite. Le tags representa generalmente un sorta de formattation in le texto original. Simplificar le formato del texto original in le file fonte ante que comenciar le traduction contribue assatis a reducer le numero de tags.</para>
+    </section>
+
+    <section>
+      <title>Statistica<indexterm class="singular">
+          <primary>Statisticas</primary> <seealso>Instrumentos del Menu</seealso>
+        </indexterm></title>
+
+      <para>Le fenestra del statisticas - accedite con <emphasis role="bold">Instrumentos&gt;Statisticas </emphasis>- monstra le statisticas del projecto OmegaT actual, sia in le forma summario sia in detalio pro cata file a traducer. Le statisticas monstrate es disponibile como un file 'separate per signos de tabulation' <filename>project_stats.txt</filename> (sub plica <filename>omegat</filename>), preste a esser cargate in un programma de folio de calculo pro le commoditate del usator. Tu pote usar <guimenuitem>Ctrl+A <indexterm class="singular">
+          <primary>Vias breve</primary> <secondary>Selige Toto - Ctrl+A</secondary>
+        </indexterm></guimenuitem><guimenuitem>, Ctrl+C <indexterm class="singular">
+          <primary>Vias breve</primary> <secondary>Copia texto - Ctrl+C</secondary>
+        </indexterm></guimenuitem>, <guimenuitem>Ctrl+V <indexterm class="singular">
+          <primary>Vias breve</primary> <secondary>Colla texto - Ctrl+V</secondary>
+        </indexterm></guimenuitem> pro copiar/collar le contentos.<figure id="ProjectStatistic.Window">
+          <title>Statistica del projecto</title>
+
+          <mediaobject>
+            <imageobject role="html">
+              <imagedata fileref="images/StatisticsWindow_25.png"/>
+            </imageobject>
+
+            <imageobject role="fo">
+              <imagedata fileref="images/StatisticsWindow_25.png" width="60%"/>
+            </imageobject>
+          </mediaobject>
+        </figure></para>
+    </section>
+
+    <section>
+      <title>Statistica del concordantias<indexterm class="singular">
+          <primary>Statistica del concordantias</primary> <seealso>Menu Instrumentos</seealso>
+        </indexterm></title>
+
+      <para>Le statisticas del concordantia es accedite via<guimenuitem>Instrumentos&gt;Statisticas del Concordantia.</guimenuitem> Le evalutation es assatis intensive pro le CPU e pote necessitar molto tempore, ergo es monstrate un barra de avantiamento durante le calculation. Re quanto concerne le categorias, es usate le standard del industria re le classification del concordantias in le gruppos sequente: Repetitiones, Concorda exacte, 95%-100%, 85%-94%, 75%-84%, 50%-74% e Nulle concordantia. Iste information es computate pro le segmentos, pro le parolas e pro le characteres (sin e con spatios includite). Nota que es possibile minor differentias inter le contos de OmegaT e le numeros fornite per altere applicationes CAT.<figure>
+          <title>Statistica del concordantias</title>
+
+          <mediaobject>
+            <imageobject role="html">
+              <imagedata fileref="images/MatchStatistics.png"/>
+            </imageobject>
+
+            <imageobject role="fo">
+              <imagedata fileref="images/MatchStatistics.png" width="80%"/>
+            </imageobject>
+          </mediaobject>
+        </figure></para>
+
+      <para>Nota que iste totales es un bon (o bon a mesura il pote esser) approximation del labor implicate in le projecto e  assi pote servir como base pro le calculationes de tu costo e precio.</para>
+
+      <para>Le spatios inter segmentos non es tenite in conto in le  ultime columna. Repetitiones son segmentos identic presente plure vices, in le texto. Le prime segmento e su contentos essera classificate como &quot;no match&quot;, e le resto de illos como un repetition del primo. Si le traduction pro aliquot segmentos fonte identic jam existe in le memoria de traduction del projecto, iste segmentos, conjunctemente con altere, segmentos unic ja traducite, essera classificate ut un &quot;Concordantia exacte&quot;. Le numero de segmentos unic, si il necessita, es supplite in le fenestra del statisticas standard, sin reguardo re illos esseva rendite o non.</para>
+
+      <para>Le resto del categorias (50-100%) involve le segmentos non rendite con un concordantia partial. Le concordantias partial pote venir ex le plica <filename>/tm</filename> assi como - e non solmente ex le memoria de traduction interne in <filename>/omegaT,</filename> qual es le caso pro repetitiones e concordantias exacte. Le sol differentia con le concordantias ex le memoria de traduction <filename>project_save</filename> es que le TMs externe non pote dar concordantias exacte, ma sol 100%. Si on non desidera usar TMs externe pro le computo, on habera o vacuar le plica /tm o cambiar le preparation del projecto (temporaneemente) de maniera que le valor pro /tm puncta a un position differente.</para>
+
+      <para>Le Statisticas del Concordantia es tabellas del texto  'separate per signos de tabulation' e tu pote usar <guimenuitem>Ctrl+A <indexterm class="singular">
+          <primary>Vias breve</primary> <secondary>Selige Toto - Ctrl+A</secondary>
+        </indexterm></guimenuitem><guimenuitem>, Ctrl+C <indexterm class="singular">
+          <primary>Vias breve</primary> <secondary>Copia texto - Ctrl+C</secondary>
+        </indexterm></guimenuitem>, <guimenuitem>Ctrl+V <indexterm class="singular">
+          <primary>Vias breve</primary> <secondary>Colla texto - Ctrl+V</secondary>
+        </indexterm></guimenuitem> pro copiar e collar los, per exemplo in un folio de calculo o in tu application pro le computo del costos. Un vice computate, le data es alsi disponibile in <filename>omegat/project_stats_match.txt.</filename> Nota que le file es annotate con le tempores, pois que le calculo (contrarimente al statisticas standard) non es instantanee e pote assi rapidemente devenir obsolete.</para>
+    </section>
+
+    <section>
+      <title>Lector del Adjuta<indexterm class="singular">
+          <primary>Menu Adjuta</primary> <secondary>Lector del Adjuta</secondary>
+        </indexterm></title>
+
+      <para>Le Lector del Adjuta (que monstra iste manual) pote esser aperte pressante <keycap><indexterm class="singular">
+          <primary>Vias breve</primary> <secondary>Adjuta - F1</secondary>
+        </indexterm>F1</keycap> o navigante a <guimenuitem><indexterm class="singular">
+          <primary>Menu Adjuta</primary> <secondary>Manual del usator...</secondary>
+        </indexterm>Adjuta → Manual del usator...</guimenuitem> in le menu principal. In le fenestra, le manual e duo buttones es monstrate: Retro e Contentos. Le manual del usator es un documento HTML con ligamines a capitulos varie. Le cliccar sur un ligamine, ut tu facerea in un lector de TTT, porta avante le pagina desiderate.</para>
+
+      <para>Le manual del usator es ubicate in le sub plica /docs sub le plica de installation de OmegaT, assi tu potera, per exemplo, examinar le documentation anglese per aperir le file <filename>docs/en/index.html </filename>in tu lector. Le apertura del manual del usator in iste maniera habilita te alsi a sequer ligamines externe, a mesura que le Lector del Adjuta integrate non accepta ligamines externe de Interrete.</para>
+    </section>
+  </section>
+</chapter>

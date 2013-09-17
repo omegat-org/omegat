@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<chapter id="chapter.misc">
+  <title>Subjectos miscellanee<indexterm class="singular">
+      <primary>Miscellanea</primary>
+    </indexterm></title>
+
+  <section id="omegat.misc.console.mode">
+    <title><application><indexterm class="singular">
+        <primary>OmegaT modo consola</primary> <seealso>Miscellanea</seealso>
+      </indexterm>OmegaT</application> Modo Consola<indexterm class="singular">
+        <primary>Miscellanea</primary> <secondary>OmegaT modo consola</secondary>
+      </indexterm></title>
+
+    <note>
+      <para>Interessante sol pro usatores experte!</para>
+    </note>
+
+    <para>Le proposito del modo consola id es linea de commando) es pro permitter le uso <application>de OmegaT</application> como instrumento de traduction in un ambiente de script. Quando on lancea in modo consola, nulle GUI es cargate ( illo in consequentia operara sur qualcunque consola) e le projecto date es rendite automaticamente. Un exemplo esserea un projecto software, con un GUI localisate in plure linguas. Le uso del modo consola pote render un parte del processo de build generante un interfacie localisate .</para>
+
+    <section id="misc.console.mode.prerequisites">
+      <title>Pre-requisitos</title>
+
+      <para>Pro exequer OmegaT, debe esser disponibile un projecto valide. Le ubication es irrelevante, pois que illo debe esser specificate explicitemente sur le linea de commando al lanceamento.</para>
+
+      <para>Si tu necessita preparationes non-standard, le files de configuration correspondente (<literal>filters.conf</literal> e <literal>segmentation.conf</literal>) debe esser presente. Isto pote esser complite in duo manieras:</para>
+
+      <itemizedlist>
+        <listitem>
+          <para>Exequer <application>OmegaT</application> normalmente (con le interfacie graphic, GUI) e adjustar le preparationes. Si tu lancea <application>OmegaT</application> in modo consola, illo usara le preparationes que tu configurava.</para>
+        </listitem>
+
+        <listitem>
+          <para>Si tu non pote lancear <application>OmegaT</application> normalmente (nulle ambiente graphic disponibile): copia le files del preparationes ex alicun altere installation <application>OmegaT</application> sur un altere machina verso un plica specific. Le ubication non face substantia, pois que tu pote adder lo al linea de commando al lanceamento (vide in sequito). Le files pertinente <literal>filters.conf</literal> e <literal>segmentation.conf</literal> pote esser trovate in le plica principal del usator (Per exemplo <literal>C:\Documents and Settings\%User%\<application>OmegaT</application></literal> sub Windows, <literal>%user%/.omegat/</literal> sub Linux)</para>
+        </listitem>
+      </itemizedlist>
+    </section>
+
+    <section id="starting.in.misc.console.mode">
+      <title>Lancear OmegaT in modo consola</title>
+
+      <para>Pro lancear OmegaT in modo consola, tu debe specificar parametros additional al lanceamento. Le plus importante de istos es <literal>&lt;project-dir&gt;</literal>, e optionalmente <literal>--config-dir=&lt;config-dir&gt;</literal>. Exemplo:</para>
+
+      <para><literal>$&gt; java -jar <application>OmegaT</application>.jar
+      /path/to/project \</literal></para>
+
+      <para><literal> --config-dir=/path/to/config-files/ \</literal></para>
+
+      <para><literal> --mode=console-translate \</literal></para>
+
+      <para><literal> --source-pattern={regexp} \</literal></para>
+
+      <para><literal> --tag-validation=[block|warn] </literal></para>
+
+      <para><emphasis role="bold">Explication:</emphasis></para>
+
+      <itemizedlist>
+        <listitem>
+          <para><literal>&lt;project-dir&gt;</literal> indica a <application>OmegaT</application> ubi trovar le projecto a traducer. Si date, <application>OmegaT</application> lancea in modo consola e traduce le projecto date.</para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para><literal>--config-dir=&lt;config-dir&gt;</literal> habilita OmegaT a esser instruite in qual plica son servate le files de configuration. Si non specificate, OmegaT reveni al plica del valores prefixate initial (le plica OmegaT in le plica domo del usator o, si indisponibile: le plica de labor actual).</para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para><literal>--mode=console-translate </literal> <application>OmegaT</application> lancea in modo consola e traduce le projecto date.</para>
+        </listitem>
+
+        <listitem>
+          <para><literal>--source-pattern={regexp} </literal>Le files a traducer pote esser specificate in iste maniera. Ecce un exemplo del expression regular: <filename>test\.html</filename></para>
+        </listitem>
+
+        <listitem>
+          <para><literal>--tag-validation=[abort|warn] </literal> Sur aborto, le programma es abortate quando le validation del tag discoperi errores. Si le valor es warn alora le errores son imprimite, ma OmegaT continua. In omne altere casos non es facite nulle validation.</para>
+        </listitem>
+      </itemizedlist>
+    </section>
+
+    <section id="misc.console.mode.option.quiet">
+      <title>Option Silentiose</title>
+
+      <para>Un altere parametro extra de linea de commando specific pro modo consola: <literal>--quiet</literal>. In le modo quiete, minus informationes son displicate sur le schermo. Le messages que tu trovarea habitualmente in le barra de stato non son monstrate.</para>
+
+      <para>Uso: <literal>java -jar <application>OmegaT</application>.jar /path/to/project --mode=console-translate --quiet</literal></para>
+    </section>
+
+    <section id="misc.console.mode.option.validatetags">
+      <title>Optiones de validation del tag</title>
+
+      <para>Un altere parametro extra de linea de commando specific pro modo consola: <literal>--tag-validation=[abort|warn]</literal>. Quando es addite iste parametro, le validation del tag es facite ante que le traduction/alineamento.. Si le valor es <literal>abort</literal>, alora sur errores tag le errores son imprimite e le programma arresta se. Si le valor es <literal>warn</literal> alora le errores son imprimite, ma OmegaT continua.</para>
+
+      <para>Uso: <literal>java -jar <application>OmegaT</application>.jar /path/to/project --mode=console-translate --tag-validation=abort</literal></para>
+    </section>
+  </section>
+
+  <section>
+    <title>Alineator automatic pro le proprietates de Java<indexterm class="singular">
+        <primary>Miscellanea</primary> <secondary>Alineator automatic pro le proprietates de Java</secondary>
+      </indexterm></title>
+
+    <para>OmegaT pote alinear le .properties di Java in modo consola. Si tu ha le Files del Proprietates fonte e destination pro uno e le mesme contentos in tu par de lingua, iste procedura creara un file tmx correspondente pro iste contentos. Costume</para>
+
+    <para><literal>java -jar OmegaT.jar --mode=console-align /my-project-dir
+    --alignDir=/translatedFiles/ </literal></para>
+
+    <para><filename>alignDir</filename> debe continer un traduction in le lingua de destination del projecto. Per exemplo, si le projecto es EN-&gt;FR, alignDir debe continer un desinentia con _fr. Le TMX resultante es immagazinate in le plica <literal>omegat</literal> sub le nomine <filename>align.tmx</filename>.</para>
+  </section>
+
+  <section id="font.settings">
+    <title>Preparationes del typo de character<indexterm class="singular">
+        <primary>Miscellanea</primary> <secondary>Preparationes del typo de character</secondary>
+      </indexterm></title>
+
+    <para>In iste dialogo on pote definir le typo de character usate per <application>OmegaT</application> in le sequente fenestras:</para>
+
+    <itemizedlist>
+      <listitem>
+        <para><application>OmegaT</application> fenestra principal (Quadro del Modifica, Quadro del Concordantia, Quadro del Glossario)</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Fenestra Recerca</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Fenestra Validation del tag</para>
+      </listitem>
+    </itemizedlist>
+
+    <para>Le dialogo pote esser accedite via le commando <indexterm class="singular">
+        <primary>Menu Optiones</primary> <secondary>Typo del character...</secondary>
+      </indexterm><menuchoice> <guimenu>Optiones</guimenu> <guimenuitem>Typo de character...</guimenuitem> </menuchoice> in le menu principal. Le fenestra de dialogo contine:</para>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis role="bold">Typo de character:</emphasis> menu a tenta pro seliger uno del typos de character disponibile sur tu machina</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis role="bold">Mesura:</emphasis> rediger pro cambiar le mesura del typo de character</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis role="bold">Texto monstra:</emphasis> campo pro vista preliminar immediate del typo de character seligite</para>
+      </listitem>
+    </itemizedlist>
+
+    <para><emphasis role="bold">Nota: </emphasis>In alicun casos il pote sumer assatis alicun tempore por OmegaT renovar le monstra postquam le preparation del typo de character esseva cambiate. Isto es in modo special le caso quando un file grande  continente multe segmentos es aperte in le editor, vel es usate hardware lente. Nota alsi que alicun typo de character comportar se melio pro alicun pares de lingua que pro alteres. In particular, si tu es rendente inter duo linguas con alphabetos vel systemas de scriptura differente (assi como russo e japonese), selige un typo de character que pote esser usate pro tote le duo.</para>
+  </section>
+
+  <section id="preventing.data.loss">
+    <title>Impedir le Perdita del datos<indexterm class="singular">
+        <primary>Miscellanea</primary> <secondary>Impedir le Perdita del datos</secondary>
+      </indexterm></title>
+
+    <para><application>OmegaT</application> es un application robuste. Tamen, tu deberea sumer precautiones erga le perdita de datos quando usa <application>OmegaT</application>, justo como con omne altere application. Quando tu rende tu files, <application>OmegaT</application> registra tote tu progresso in le memoria de traduction <literal>project_save.tmx</literal> que reside in le sub plica del projecto <literal>/omegat</literal>.</para>
+
+    <para>OmegaT alsi reserva le memoria de traduction in project_save.tmx.YEARMMDDHHNN.bak in le identic sub plica cata vice que un projecto es aperte o recargate. YEAR es le anno in 4 cifras, MM es le mense, DD le die del mense, e HH e NN son le horas e minutas quando le previe memoria de traduction esseva salvate.</para>
+
+    <para>Si tu crede que tu ha perdite datos jam rendite, tu pote usar le procedura sequente pro restaurar le projecto a su stato le plus recentemente salvate, habitualmente non precedente que approximativemente 10 minutas o sic:</para>
+
+    <orderedlist>
+      <listitem>
+        <para>claude le projecto</para>
+      </listitem>
+
+      <listitem>
+        <para>renomina le file <filename>project_save.tmx</filename> actual ( per exemplo a <filename>project_save.tmx.temporary</filename>)</para>
+      </listitem>
+
+      <listitem>
+        <para>selige le memoria de traduction copia de reserva que es le plus probabile a continer le data pro le qual tu quere</para>
+      </listitem>
+
+      <listitem>
+        <para>renomina lo <literal>project_save.tmx</literal></para>
+      </listitem>
+
+      <listitem>
+        <para>Aperi le projecto</para>
+      </listitem>
+    </orderedlist>
+
+    <para>Pro evitar le perdita de datos importante:</para>
+
+    <itemizedlist>
+      <listitem>
+        <para>Face copias regular del file /omegat/project_save.tmx in un media de reserva, assi como CD o DVD.</para>
+      </listitem>
+
+      <listitem>
+        <para>Usque tu non es familiar con <application>OmegaT</application>, crea files rendite a intervallos regular e controla que le file rendite contine le ultime version de tu traduction.</para>
+      </listitem>
+
+      <listitem>
+        <para>Presta cura particular al cambios al files in  le plica <literal>/source</literal> durante que es in le medio de un projecto. Si le file fonte es modificate postquam tu ha initiate a render, <application>OmegaT</application> pote esser incapace a trovar un segmento que tu jam habeva rendite.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Usa iste textos de Adjuta pro initiar. Si tu deberea haber problemas, posta un message in le Gruppo del usator de <ulink url="http://tech.groups.yahoo.com/group/OmegaT/"><application>OmegaT</application></ulink>. Non hesitar a postar in le lingua con le qual senti te plus familiar.</para>
+      </listitem>
+    </itemizedlist>
+  </section>
+</chapter>

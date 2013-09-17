@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<chapter id="chapter.dictionaries">
+  <title><indexterm class="singular">
+      <primary>Dictionarios</primary>
+    </indexterm>Dictionarios</title>
+
+  <para/>
+
+  <section>
+    <title>Quomodo discargar e installar le dictionarios<indexterm class="singular">
+        <primary>Dictionarios</primary> <secondary>Discargamento e installation</secondary>
+      </indexterm></title>
+
+    <para>Le dictionarios in <application>OmegaT</application> es basate super le formato DSL StarDict o sur le Lingvo. Pro installar le files necessari pro le formato StarDict, procede como seque:</para>
+
+    <itemizedlist>
+      <listitem>
+        <para>Cerca pro le combination de linguas requirite - per exemplo sur le <ulink url="http://stardict.sourceforge.net/index.php"><indexterm class="singular">
+            <primary>Dictionarios</primary> <secondary>StarDict</secondary>
+          </indexterm>StarDict Platform</ulink> ante.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Discarga le file - isto deberea esser un archivo  <filename>tarball</filename>  (extension <emphasis>tar.bz</emphasis> o <emphasis>tar.bz2</emphasis>).</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Usa le utilitate untar (o un su equivalente, per exemplo<filename> winrar</filename> in Windows) pro extraher su contentos in le classificator  &quot;Dictionary&quot; del projecto. Ibi deberea esser tres files, con extensiones <emphasis>dz, idx </emphasis>e <emphasis>ifo</emphasis>.</para>
+      </listitem>
+    </itemizedlist>
+
+    <para>Nota que extra le dictionarios &quot;original-final&quot; tu pote obtener, usante le characteristica Dictionario, accesso a information como:</para>
+
+    <itemizedlist>
+      <listitem>
+        <para><indexterm class="singular">
+            <primary>Dictionarios</primary> <secondary>Webster</secondary>
+          </indexterm>Dictionario Webster Revised Unabridged (1913)</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para><indexterm class="singular">
+            <primary>Dictionarios</primary> <secondary>Longman</secondary>
+          </indexterm>Dictionario del anglese contemporanee Longman</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para><indexterm class="singular">
+            <primary>Dictionarios</primary> <secondary>Britannica</secondary>
+          </indexterm>Le Concise Encyclopedia Britannic</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>et cetera</para>
+      </listitem>
+    </itemizedlist>
+
+    <para>Alicun del dictionarios non ha nulla lineas de characteres alligate - id es lor uso es &quot;gratuite&quot;, e altere, como le selection supra, es sub Le licentia GPL. Le exemplo sequente monstra le dictionario  Merriam Webster 10th  &quot;in action&quot;:</para>
+
+    <figure id="Dict.Merriam.Webster">
+      <title><indexterm class="singular">
+          <primary>Dictionarios</primary> <secondary>Merriam Webster</secondary> <seealso>Dictionarios</seealso>
+        </indexterm>Dictionario Merriam Webster - uso</title>
+
+      <mediaobject>
+        <imageobject role="html">
+          <imagedata fileref="images/DictMerriamWebster.png"/>
+        </imageobject>
+
+        <imageobject role="fo">
+          <imagedata fileref="images/DictMerriamWebster.png" width="60%"/>
+        </imageobject>
+      </mediaobject>
+    </figure>
+  </section>
+
+  <section>
+    <title><indexterm class="singular">
+        <primary>Dictionarios</primary> <secondary>Problemas con</secondary>
+      </indexterm>Problemas con le dictionarios</title>
+
+    <itemizedlist>
+      <listitem>
+        <para>Controla le qual tu files dict es in le plica correcte (o  in un sub plica sub illo). Controla in <menuchoice> <shortcut> <keycombo> <keycap><indexterm class="singular">
+                    <primary>Vias breve</primary> <secondary>Proprietates del projecto - Ctrl+E</secondary>
+                  </indexterm>Ctrl</keycap> <keycap>E</keycap> </keycombo> </shortcut> <guimenu>Projecto</guimenu> <guimenuitem>Proprietates</guimenuitem> </menuchoice>.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Esque le plica contine tres files del identic nomine, con extensiones? Si es presente sol un file, controla su extension. Si illo es <emphasis>tar.bz</emphasis>, tu ha oblidate a discassar (untar) lo.</para>
+      </listitem>
+    </itemizedlist>
+  </section>
+</chapter>

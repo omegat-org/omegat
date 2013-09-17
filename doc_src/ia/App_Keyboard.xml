@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<appendix id="appendix.keyboard">
+  <title>Vias breve del claviero in le Modifica</title>
+
+  <para>Isto breve texto describe le comportamento de claves in le quadro del Modifica. Le termino &quot;mover se a le interior del segmento&quot; significa, que le cursor se move al comenciamento del segmento si il esseva avante que le segmento, e al fin del segmento si il esseva depost.</para>
+
+  <table>
+    <title>Comportamento del claves in le editor</title>
+
+    <tgroup cols="2">
+      <colspec align="left" colnum="1"/>
+
+      <colspec align="left" colnum="2"/>
+
+      <thead>
+        <row>
+          <entry align="left">Combination de claves</entry>
+
+          <entry align="left">Action</entry>
+        </row>
+      </thead>
+
+      <tbody>
+        <row>
+          <entry><emphasis role="bold">Sinistre:</emphasis></entry>
+
+          <entry>un character a sinistre, salvo non plus quam le comenciamento del segmento</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">Dextre:</emphasis></entry>
+
+          <entry>un character a derecta, salvo non plus quam le fin del segmento</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">Ctrl+Sinistra:</emphasis></entry>
+
+          <entry>un parola a sinistre, salvo non plus quam le comenciamento del segmento</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">Ctrl+Dextra:</emphasis></entry>
+
+          <entry>un parola a Dextra, salvo non plus quam le fin del segmento</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">PgUp: </emphasis></entry>
+
+          <entry>pagina in alto a transverso le documento</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">PgDn: </emphasis></entry>
+
+          <entry>pagina a basso a transverso le documento</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">A domo</emphasis></entry>
+
+          <entry>mover a le comenciamento del linea in le segmento</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">Fin*</emphasis></entry>
+
+          <entry>mover a le fin del linea in le segmento</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">Ctrl+Home</emphasis></entry>
+
+          <entry>mover al comenciamento del segmento</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">Ctrl+Fin</emphasis></entry>
+
+          <entry>mover al fin del segmento</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">Ctrl+PgUp</emphasis></entry>
+
+          <entry>mover ale comenciamento del documento  (Mac: <emphasis role="bold">Cmd+PgUp</emphasis>)</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">Ctrl+PgDn</emphasis></entry>
+
+          <entry>mover al fin del documento  (Mac: <emphasis role="bold">Cmd+PgDn</emphasis>)</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">Spatio a retro*</emphasis></entry>
+
+          <entry>levar le character ante que le cursor</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">Dele*</emphasis></entry>
+
+          <entry>levar le character depost le cursor</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">Ctrl+Spatio a retro</emphasis></entry>
+
+          <entry>levar le characteres usque al comenciamento del parola currente (Mac: Alt+Backspace)<emphasis role="bold"></emphasis></entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">Ctrl+Canc</emphasis></entry>
+
+          <entry>levar le characteres usque a le comenciamento del parola sequente (Mac: <emphasis role="bold">Alt+Canc</emphasis>)</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">Ctrl+Entra</emphasis></entry>
+
+          <entry>aperir le segmento previe (Mac: <emphasis role="bold">Cmd+Enter</emphasis>)</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">Ctrl+A</emphasis></entry>
+
+          <entry>selige le segmento complete (Mac: <emphasis role="bold">Cmd+A</emphasis>)</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">Ctrl+Shift+O</emphasis></entry>
+
+          <entry>Cambio RTL-LTR</entry>
+        </row>
+      </tbody>
+    </tgroup>
+  </table>
+
+  <para>* Iste claves se comporta differentemente quando le cursor es foras del segmento modificabile:</para>
+
+  <itemizedlist>
+    <listitem>
+      <para><emphasis role="bold">Home: </emphasis> cursor a le comenciamento del segmento active</para>
+    </listitem>
+
+    <listitem>
+      <para><emphasis role="bold">Fin: </emphasis> cursor al fin del segmento active</para>
+    </listitem>
+
+    <listitem>
+      <para><emphasis role="bold">Spatio a retro: </emphasis>nihil</para>
+    </listitem>
+
+    <listitem>
+      <para><emphasis role="bold">Dele: </emphasis>nihil</para>
+    </listitem>
+
+    <listitem>
+      <para><emphasis role="bold">Qualcunque clave character,</emphasis> si cliccate foras del segmento modificabile, essera ignorate.</para>
+    </listitem>
+  </itemizedlist>
+
+  <para>Le clave &quot;Shift&quot; non exhibi ulle special comportamento per se: quando on pressa le clave &quot;Shift&quot; , omne le claves move le cursor in su consuete faction, foras que in le caso del  combination <literal>Shift+Enter</literal>, que insere un interruption de linea in le texto.</para>
+
+  <para>Le commandos de systema Selige toto (<keycap>Ctrl+A</keycap>), Colla (<emphasis role="bold">Ctrl+V</emphasis>), Talia (<emphasis role="bold">Ctrl+X</emphasis>), Copia (<emphasis role="bold">Ctrl+C)</emphasis>, Insere le concordantia <emphasis role="bold">(Ctrl+I</emphasis>) e Insere le fonte (<emphasis role="bold">Ctrl+Shift+I</emphasis>) age sol, in principio, re le texto intra le segmento actualmente aperte.</para>
+
+  <para>nota que tu pote re-assignar le vias breve ab claviero a tu preferentias personal. Vide <link linkend="ch04.shortcuts.customization">Appendice personalisation del vias breve</link></para>
+</appendix>

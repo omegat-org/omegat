@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<appendix id="appendix.website">
+  <title><application><indexterm class="singular">
+      <primary>OmegaT sur le TTT</primary>
+    </indexterm>OmegaT</application> sur le TTT</title>
+
+  <section id="OmegaT.sites.and.OmegaT.SourceForge.project">
+    <title>Sitos de <application>OmegaT</application> e projecto <application>OmegaT</application> de SourceForge<indexterm class="singular">
+        <primary>OmegaT sur le TTT</primary> <secondary>Projecto SourceForge</secondary>
+      </indexterm></title>
+
+    <para>Le sito TTT de<ulink url="http://www.omegat.org/"> <application>OmegaT</application> </ulink>contine ligamines verso numerose ressources <application>OmegaT</application>. Le supporto al usator es fornite sur un base voluntarie al <ulink url="http://tech.groups.yahoo.com/group/omegat/"><application>OmegaT</application> Yahoo! Gruppo del usatores</ulink> Le <ulink url="http://tech.groups.yahoo.com/group/OmegaT/database?method=reportRows&amp;tbl=1">FAQ </ulink> es un bon puncto de partita pro discoperir responsas a questiones que tu pote haber. Prole version de OmegaT Ultime, refere pagina del discargamentos a www.omegat.org. On pote alsi depositar <ulink url="https://sourceforge.net/p/omegat/bugs/">reportos de defecto</ulink> e <ulink url="https://sourceforge.net/p/omegat/feature-requests/">demanda de incrementos functional.</ulink></para>
+  </section>
+
+  <section id="bug.reports">
+    <title>Reportos de defecto <indexterm class="singular">
+        <primary>OmegaT sur le TTT</primary> <secondary>Reportos de defectos</secondary>
+      </indexterm></title>
+
+    <para>Recorda que cata bon reporto de defecto necessita justo tres cosas:</para>
+
+    <itemizedlist>
+      <listitem>
+        <para>Passos pro reproducer celles</para>
+      </listitem>
+
+      <listitem>
+        <para>Quod tu expecta vider</para>
+      </listitem>
+
+      <listitem>
+        <para>Quod tu vide in vice</para>
+      </listitem>
+    </itemizedlist>
+
+    <para>Magis pote trovar se in le articulo <ulink url="http://www.joelonsoftware.com/articles/fog0000000029.html">Revision del defectos indolor</ulink> by Joel Spolsky.</para>
+
+    <para>Tu pote adder copias de files, portiones del bloco, paginas del schermo, e alicun altere cosas que tu pensa adjutara le disveloppatores a trovar e reparar tu defecto Nota que le reportos de defecto e le demandas pro incrementos functional es publicamente visibile, assi tu non deberea adder alicun files sensibile. Si tu vole mantener tracia re quod es occurrente a tu reporto, registra te como un usator SourceForge, qualifica te e deposita un reporto de defecto o simplemente clicca monitor al summitate de tu reporto.</para>
+  </section>
+
+  <section id="contributing.to.omegat.project">
+    <title>Contribuer al projecto <application>OmegaT</application><indexterm class="singular">
+        <primary>OmegaT sur le TTT</primary> <secondary>Contribuer a OmegaT</secondary>
+      </indexterm></title>
+
+    <para><emphasis role="bold">Pro contribuer al projecto <application>OmegaT</application>:</emphasis></para>
+
+    <para>in prime loco adhere al <ulink url="http://tech.groups.yahoo.com/group/OmegaT/">Gruppo del usatores</ulink> (via TTT o con un email a <ulink url="mailto:OmegaT-subscribe@yahoogroups.com"><application>OmegaT</application>-subscribe@yahoogroups.com</ulink>). Pro devenir implicate in le effortio de disveloppamento de <application>OmegaT</application> tu pote adherer al gruppo de disveloppatores, viaTTT o con un email a <ulink url="mailto:omegat-development-request@list.sourceforge.net?subject=subscribe">omegat-development-request@lists.sourceforge.net</ulink> con &quot;subscribe&quot; como linea de subjecto.</para>
+
+    <para><emphasis role="bold">Pro traducer le interfacie del usator, le manual del usator o le altere documentos de <application>OmegaT</application>:</emphasis></para>
+
+    <para>in prime loco lege le guida <ulink url="http://www.omegat.org/en/howtos/localizing_omegat.php">Localisation e personalisation de <application>OmegaT</application></ulink> , e adherer al gruppo del traductores de <application>OmegaT</application> via TTT o con un email a <ulink url="mailto:omegat-development-request@lists.sourceforge.net?subject=subscribe">omegat-l10n-request@lists.sourceforge.net</ulink> con subjecto &quot;subscribe&quot;.</para>
+
+    <indexterm class="singular">
+      <primary>OmegaT sur le TTT</primary> <secondary>Disveloppamento, Localisation</secondary>
+    </indexterm>
+
+    <para>Pro supportar financiarimente le projecto OmegaT<indexterm class="singular">
+        <primary>OmegaT sur le TTT</primary> <secondary>Supporto financiari</secondary>
+      </indexterm></para>
+
+    <para>If you amarea sustener adjuta al continue disveloppamento de OmegaT, il esserea permulte appreciate - Clicca sur iste ligamine pro vader al conto <ulink url="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&amp;hosted_button_id=9UB6Y2BBF99LL"> PayPal de OmegaT</ulink>.</para>
+
+    <indexterm class="singular">
+      <primary>OmegaT sur le TTT</primary> <secondary>Donar a OmegaT</secondary>
+    </indexterm>
+  </section>
+</appendix>

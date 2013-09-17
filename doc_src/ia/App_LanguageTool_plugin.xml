@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<appendix id="appendix.LanguageToolPlugin.inOmegaT">
+  <title>LanguageTool plugin<indexterm class="singular">
+      <primary>Plugins</primary>
+
+      <secondary>LanguageTool</secondary>
+    </indexterm></title>
+
+  <section>
+    <title>Introduction</title>
+
+    <para><ulink url="http://www.languagetool.org">LanguageTool</ulink> es un software open source, corrector de stilo e grammatica pro anglese, francese, germano, polaco, nederlandese, romaniano, e plure altere linguas - vide le <ulink url="http://www.languagetool.org/languages/">lista del linguas supportate</ulink>.</para>
+
+    <para>On pote pensar de LanguageTool como un  software pro deteger errores que un simplice corrector orthographic non pote discoperir , e.g. confunder there/their, no/now etc. Illo pote etiam deteger alicun errores de grammatica. Illo non comprende le controlo orthographic. LanguageTool trovara errores pro le qual esseva definite un regula in su files de configuration del specific lingua.</para>
+
+    <figure>
+      <title>LanguageTool in OmegaT</title>
+
+      <screenshot>
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="images/LanguageToolExample.png"/>
+          </imageobject>
+        </mediaobject>
+      </screenshot>
+    </figure>
+  </section>
+
+  <section>
+    <title>Installation e uso</title>
+
+    <para>Le plugin LanguageTool es includite in OmegaT. Illo essera usate automaticamente ab OmegaT si <guimenuitem>Optiones &gt; Corrector del lingua</guimenuitem> es marcate. Le regulas applicate (si ulle) dependera ex le lingua primari e final del projecto. Quando un regula es discatenate, le phrase correspondente essera sublineate in azur in le Editor (vide <emphasis>also </emphasis>e <emphasis>I didn't do nothing</emphasis> in le pictura anterior). Quando on passa le mouse supra le phrase sublineate, comparera un  explication.</para>
+    
+	<warning>
+		<title>Incompatibilitates</title>
+		<para>LanguageTool non laborara debitemente si un version vetule es trovate in le plica /plugin. Remove LanguageTool ex le plica /plugin ante lancear OmegaT.</para>
+	</warning>
+
+  </section>
+</appendix>

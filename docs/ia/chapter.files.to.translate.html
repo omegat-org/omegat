@@ -1,0 +1,448 @@
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <title>Chapter&nbsp;9.&nbsp;Files a render</title>
+      <link rel="stylesheet" type="text/css" href="OmegaT.css">
+      <meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
+      <link rel="home" href="index.html" title="OmegaT - Guida del usuario">
+      <link rel="up" href="index.html" title="OmegaT - Guida del usuario">
+      <link rel="prev" href="chapter.files.and.folders.html" title="Chapter&nbsp;8.&nbsp;OmegaT Files e Plicas">
+      <link rel="next" href="chapter.translation.editing.html" title="Chapter&nbsp;10.&nbsp;Comportamento del Modifica">
+   </head>
+   <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+      <div class="navheader">
+         <table width="100%" summary="Navigation header">
+            <tr>
+               <th colspan="3" align="center">Chapter&nbsp;9.&nbsp;Files a render</th>
+            </tr>
+            <tr>
+               <td width="20%" align="left"><a accesskey="p" href="chapter.files.and.folders.html">Prev</a>&nbsp;
+               </td>
+               <th width="60%" align="center">&nbsp;</th>
+               <td width="20%" align="right">&nbsp;<a accesskey="n" href="chapter.translation.editing.html">Next</a></td>
+            </tr>
+         </table>
+         <hr>
+      </div>
+      <div class="chapter">
+         <div class="titlepage">
+            <div>
+               <div>
+                  <h1 class="title"><a name="chapter.files.to.translate"></a>Chapter&nbsp;9.&nbsp;Files a render
+                  </h1>
+               </div>
+            </div>
+         </div>
+         <div class="toc">
+            <dl class="toc">
+               <dt><span class="section"><a href="chapter.files.to.translate.html#file.formats">1. Formatos del file</a></span></dt>
+               <dd>
+                  <dl>
+                     <dt><span class="section"><a href="chapter.files.to.translate.html#d0e5322">1.1. Files de texto simple</a></span></dt>
+                     <dt><span class="section"><a href="chapter.files.to.translate.html#d0e5401">1.2. Files de texto formattate</a></span></dt>
+                  </dl>
+               </dd>
+               <dt><span class="section"><a href="chapter.files.to.translate.html#other.file.formats">2. Altere formatos del files</a></span></dt>
+               <dt><span class="section"><a href="chapter.files.to.translate.html#right.to.left.languages">3. Linguas ab Dextera a Sinistra</a></span></dt>
+               <dd>
+                  <dl>
+                     <dt><span class="section"><a href="chapter.files.to.translate.html#d0e5621">3.1. Miscer lineas de character RTL e LTR in le segmentos</a></span></dt>
+                     <dt><span class="section"><a href="chapter.files.to.translate.html#d0e5644">3.2. <span class="application">OmegaT</span> tags in le segmentos RTL</a></span></dt>
+                     <dt><span class="section"><a href="chapter.files.to.translate.html#d0e5658">3.3. Crear documentos RTL rendite</a></span></dt>
+                  </dl>
+               </dd>
+            </dl>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="file.formats"></a>1.&nbsp;Formatos del file<a class="indexterm" name="d0e5308"></a><a class="indexterm" name="d0e5313"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <p><span class="application">Tu pote usar OmegaT</span> pro render files in plure formatos de file. Il ha in fundo duo typos de formatos de file, texto simple e texto formattate.
+            </p>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="d0e5322"></a>1.1.&nbsp;Files de texto simple<a class="indexterm" name="d0e5325"></a><a class="indexterm" name="d0e5330"></a></h3>
+                     </div>
+                  </div>
+               </div>
+               <p>Le files de texto simple contine solmente texto, assi lor traduction es simple como dactylographar le traduction. Il ha plure
+                  methodos pro specificar le codification del file de maniera que su contentos non es alterate quando aperte in <span class="application">OmegaT</span>. Tal files non contine ulle information de formattation extra le "spatio blanc" usate pro alinear texto, indicar paragraphos
+                  o inserer interruptiones de pagina. Illos non es habile a continer o servar information re le color, typo de character etc.
+                  del texto. Actualmente, <span class="application">OmegaT</span> supporta Le formatos de simple texto sequente:<a class="indexterm" name="d0e5343"></a></p>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
+                     <li class="listitem">
+                        <p>- texto ASCII (.txt, etc.)</p>
+                     </li>
+                  </ul>
+               </div>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
+                     <li class="listitem">
+                        <p>- texto codificate (*.UTF8)</p>
+                     </li>
+                  </ul>
+               </div>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
+                     <li class="listitem">
+                        <p>- pacchettos  ressource Java (*.properties)</p>
+                     </li>
+                  </ul>
+               </div>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
+                     <li class="listitem">
+                        <p>- files PO (*.po)</p>
+                     </li>
+                  </ul>
+               </div>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
+                     <li class="listitem">
+                        <p>- files INI (key=value) (*.ini)</p>
+                     </li>
+                  </ul>
+               </div>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
+                     <li class="listitem">
+                        <p>- files DTD (*.DTD)</p>
+                     </li>
+                     <li class="listitem">
+                        <p>Files DokuWiki (*.txt)</p>
+                     </li>
+                  </ul>
+               </div>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
+                     <li class="listitem">
+                        <p>- files titulo SubRip (*.srt)</p>
+                     </li>
+                  </ul>
+               </div>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
+                     <li class="listitem">
+                        <p>Files Magento CE Locale CSV (*.csv)</p>
+                     </li>
+                  </ul>
+               </div>
+               <p>Altere typos de file de texto simple pote esser tractate per <span class="application">OmegaT</span> con lor extension associate a un typo de file supportate (per exemplo, le files .pod pote esser associate al filtro de texto
+                  ASCII) e con le pre-processo con regulas de segmentation specific.
+               </p>
+               <p>Le files PO<a class="indexterm" name="d0e5392"></a> pote continer ambe le textos fonte e final.  Vidite de iste puncto de vista, illos son files de texto simple<span class="emphasis"><em> plus</em></span> memorias de traduction. Si pro un date segmento fonte il non ha ancora nulle traduction existente in le memoria de traduction
+                  del projecto, (project_save.tmx), le traduction actual essera salvate in le project_save.tmx como traduction base. In caso
+                  que, comocunque, le mesme segmento fonte jam existe con un traduction differente, le nove translation essera salvate como
+                  un alternativa.
+               </p>
+            </div>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="d0e5401"></a>1.2.&nbsp;Files de texto formattate<a class="indexterm" name="d0e5404"></a><a class="indexterm" name="d0e5411"></a></h3>
+                     </div>
+                  </div>
+               </div>
+               <p>Le files de texto formattate contine information assi como typo de character, mesura, color etc. assi como texto. Illos es
+                  communmente create in processores de parola o redactores HTML. Tal formatos de file son projectate pro continer information
+                  de formattation. Le information de formattation pote esser simple como “isto es hardite”, o assi complexe como tabella datos
+                  con differente dimensiones de typo de character, colores, positiones, etc. In le major parte del obras de traduction, il es
+                  considerate importante esser retenite in le traduction le formattation del texto fonte. OmegaT permitte te facer isto per
+                  le marca del characteres vel parolas que ha un formattation particular con tags facile a tractar. Simplificar le texto original
+                  contribue assatis a reducer le numero del tags. Ubi possibile, unificar the typos de character, lor dimensiones, colores,
+                  etc. usate in le documento simplifica le labor de traduction e reduce le numero de eventual errores del tag. Cata typo de
+                  file es tractate differentemente in OmegaT. In le filtros de file on pote prefixar comportamentos specific. Al tempore del
+                  scriptura, OmegaT supporta le textos formattate in le sequente formatos<a class="indexterm" name="d0e5418"></a></p>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
+                     <li class="listitem">
+                        <p>ODF - OASIS Open Document Format (*.ods, *.ots, *.odt,
+                                       *.ott, *.odp, *.otp)
+                        </p>
+                     </li>
+                  </ul>
+               </div>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
+                     <li class="listitem">
+                        <p>Microsoft Office Open XML (*.docx, *.dotx, *.xlsx, *.xltx,
+                                       *.pptx)
+                        </p>
+                     </li>
+                  </ul>
+               </div>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
+                     <li class="listitem">
+                        <p>- (X)HTML (*.html, *.xhtml,*.xht)</p>
+                     </li>
+                  </ul>
+               </div>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
+                     <li class="listitem">
+                        <p>- HTML Help Compiler (*.hhc, *.hhk)</p>
+                     </li>
+                  </ul>
+               </div>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
+                     <li class="listitem">
+                        <p>- DocBook (*.xml)</p>
+                     </li>
+                  </ul>
+               </div>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
+                     <li class="listitem">
+                        <p>XLIFF (*.xlf, *.xliff, *.sdlxliff) - of the source=target
+                                       variety
+                        </p>
+                     </li>
+                  </ul>
+               </div>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
+                     <li class="listitem">
+                        <p>- QuarkXPress CopyFlowGold (*.tag, *.xtg)</p>
+                     </li>
+                  </ul>
+               </div>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
+                     <li class="listitem">
+                        <p>- Files ResX (*.resx)</p>
+                     </li>
+                  </ul>
+               </div>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
+                     <li class="listitem">
+                        <p>- Ressources Android (*.xml)</p>
+                     </li>
+                  </ul>
+               </div>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
+                     <li class="listitem">
+                        <p>- LaTex (*.tex, *.latex)</p>
+                     </li>
+                     <li class="listitem">
+                        <p>- Files Help (*.xml) e Manual (*.hmxp)</p>
+                     </li>
+                     <li class="listitem">
+                        <p>- Typo3 LocManager (*.xml)</p>
+                     </li>
+                  </ul>
+               </div>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
+                     <li class="listitem">
+                        <p>- WiX localisation (*.wxl)</p>
+                     </li>
+                     <li class="listitem">
+                        <p>- Iceni Infix (*.xml)</p>
+                     </li>
+                     <li class="listitem">
+                        <p>- exportation Flash XML (*.xml)</p>
+                     </li>
+                     <li class="listitem">
+                        <p>- Wordfast TXML (*.txml)</p>
+                     </li>
+                     <li class="listitem">
+                        <p>- Camtasia pro Windows (*.camproj)</p>
+                     </li>
+                     <li class="listitem">
+                        <p>- Visio (*.vxd)</p>
+                     </li>
+                  </ul>
+               </div>
+               <p>Altere typos de file de texto formattate pote alsi esser tractate per OmegaT con lor extension associate a un typo de file
+                  supportate,  supponente que le regulas de segmentation correspondente segmentara illos correctemente.
+               </p>
+            </div>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="other.file.formats"></a>2.&nbsp;Altere formatos del files<a class="indexterm" name="d0e5496"></a><a class="indexterm" name="d0e5501"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <p>Pote alsi exister altere formatos de file de texto simple o texto formattate convenibile pro le processo in OmegaT.</p>
+            <p><a class="indexterm" name="d0e5509"></a>Applicationes externe pote esser usate a converter files a formatos supportate. Le files traducite necessitara esser convertite
+               retro al formato original. Per exemplo, si tu ha un version de Microsoft Word vetule, que non tracta le formato ODT, ecce
+               un giro rondo pro le files Word le the extension DOC
+            </p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>importa le file in un scriptor ODF</p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>salva le file in formato ODT</p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>rende lo in le file ODT de destination</p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>carga le file final in un scriptor ODF</p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>salva le file como file DOC file</p>
+                  </li>
+               </ul>
+            </div>
+            <p>Le qualitate del formattation del traducite file dependera del qualitate del giro rondo de conversion. Ante que proceder con
+               tal conversiones, assecura te de essayar omne le optiones. Controla le <a class="ulink" href="http://www.omegat.org/" target="_top">pagina initial OmegaT</a> pro un lista renovate del applicationes auxiliar de traduction.
+            </p>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="right.to.left.languages"></a>3.&nbsp;Linguas ab Dextera a Sinistra<a class="indexterm" name="d0e5543"></a><a class="indexterm" name="d0e5546"></a><a class="indexterm" name="d0e5551"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <p>Le justification del segmentos fonte e final depende ab le linguas del projecto. Per arrangiamento prefixate initial le justification
+               sinistre es usate pro le linguas ab Sinistra a Dextera (Left-To-Right - LTR) e le justification dextre pro le linguas ab Dextera
+               a Sinistra (Right-To-Left - RTL). Tu pote commutar inter le modos de apparentia differente pulsante <span class="keycap"><strong>Shift</strong></span>+<span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>O</strong></span> (isto es le littera O e non le cifra zero). Le commutator <span class="keycap"><strong>Shift</strong></span>+<span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>O</strong></span> ha tres statos:
+            </p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>justification base prefixate, que es ut definite per le lingua</p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>justification Sinistre</p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>justification Dextre</p>
+                  </li>
+               </ul>
+            </div>
+            <p>Usar le modo RTL in <span class="application">OmegaT</span> non ha influentia alicun sur le modo de apparentia del documentos traducite create in <span class="application">OmegaT</span>. Le modo de apparentia del documentos traducite debe esser modificate intra le application (assi como Microsoft Word) communmente
+               usate pro monstrar o modificar los (controla le manuales pertinente pro le detalios). Usar <span class="keycap"><strong>Shift</strong></span>+<span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>O</strong></span> causa ambe texto inscribite e apparentia in <span class="application">OmegaT</span> cambiar. Illo pote esser usate in modo  separate pro le tres quadros (Modifica, Concordantias Partial e Glossario) cliccante
+               sur le quadro e commutante le modo de apparentia. Illo pote alsi esser usate in omne le campos de input trovate in <span class="application">OmegaT</span> - in le Fenestra de Recerca, pro le regulas de segmentation etc.
+            </p>
+            <p>Usatores de Mac OS X users, nota: usa le connexion  <span class="keycap"><strong>Shift</strong></span>+<span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>O</strong></span> e <span class="bold"><strong>non </strong></span>cmd+Ctrl+O.
+            </p>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="d0e5621"></a>3.1.&nbsp;Miscer lineas de character RTL e LTR in le segmentos<a class="indexterm" name="d0e5624"></a><a class="indexterm" name="d0e5629"></a><a class="indexterm" name="d0e5634"></a></h3>
+                     </div>
+                  </div>
+               </div>
+               <p>Quando on scribe texto RTL pure, pote esser usate le base prefixate (LTR). In multe casos, tamen, il es necessari incastrar
+                  texto LTR in texto RTL. Per exemplo, in le tags OmegaT, nomines de producto que debe restar in le lingua fonte LTR, marca
+                  posto in le files de localisation, e numeros in le texto. In simile casos deveni necessari cambiar al modo RTL, assi que le
+                  texto RTL (de facto bidirectional) es monstrate correctemente. Il sia observate que quando <span class="application">OmegaT</span> es in modo RTL, ambe le fonte e le destination son monstrate in modo RTL. Isto significa que si le lingua fonte es LTR e
+                  le lingua de destination es RTL, o vice versa, il pote esser necessari cambiar in avante e retro inter le modos RTL e LTR
+                  pro vider le fonte e inscriber le destination facilemente in lor modos respective.
+               </p>
+            </div>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="d0e5644"></a>3.2.&nbsp;<span class="application">OmegaT</span> tags in le segmentos RTL<a class="indexterm" name="d0e5649"></a></h3>
+                     </div>
+                  </div>
+               </div>
+               <p>Como constatate precedentemente, le tags OmegaT son lineas LTR. Quando on rende inter linguas RTL e LTR, pro leger correctemente
+                  le tags del fonte e inscriber los debitemente in le destination, le traductor pote necessitar de cambiar inter le modos LTR
+                  e RTL numerose vices.
+               </p>
+               <p>Si le documento permitte, le traductor es fortemente incitate a remover le information de stilo del documento fonte assi que
+                  appare minus tags possibile in le interfacie OmegaT. Seque le indicationes date in Consilios pro le gestion del tags. Que
+                  tu valida sovente le tags (vide Validation del tag) e produce documentos rendite (vide in sequito e Menu) a intervallos regular
+                  pro render plus facile corriger cata problemas que surge. Un aviso: render un version in texto simple del texto e adder le
+                  stilo in le pertinente application a un grado subsequente, poterea resultar minus problematic.
+               </p>
+            </div>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="d0e5658"></a>3.3.&nbsp;Crear documentos RTL rendite<a class="indexterm" name="d0e5661"></a><a class="indexterm" name="d0e5666"></a><a class="indexterm" name="d0e5671"></a></h3>
+                     </div>
+                  </div>
+               </div>
+               <p>Quando le documento traducite es create, su direction de monstra essera identic al documento original. Si le documento original
+                  esseva LTR, le direction del apparentia del documento de destination debe esser cambiate manualmente a RTL in su application.
+                  Cata formato de emission ha manieras specific de tractar con le apparentia RTL; controla le manuales del application pertinente
+                  pro le detalios.
+               </p>
+               <p>Pro le files .docx, alicun cambios son totevia facite automaticamente:</p>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
+                     <li class="listitem">Le paragraphos, sectiones e tabellas son fixate a bidi</li>
+                     <li class="listitem">Le 'runs' (elementos de texto) son fixate a RTL</li>
+                  </ul>
+               </div>
+               <p>
+                        
+               </p>
+               <p>Pro evitar de cambiar del parametros de apparentia del files de destination cata vece le files es aperte, il pote esser possibile
+                  cambiar le parametros de apparentia del files fonte assi como tal parametros es hereditate ex le files final. Iste modificationes
+                  es possibile in files ODF per exemplo.
+               </p>
+            </div>
+         </div>
+      </div>
+      <div class="navfooter">
+         <hr>
+         <table width="100%" summary="Navigation footer">
+            <tr>
+               <td width="40%" align="left"><a accesskey="p" href="chapter.files.and.folders.html">Prev</a>&nbsp;
+               </td>
+               <td width="20%" align="center">&nbsp;</td>
+               <td width="40%" align="right">&nbsp;<a accesskey="n" href="chapter.translation.editing.html">Next</a></td>
+            </tr>
+            <tr>
+               <td width="40%" align="left" valign="top">Chapter&nbsp;8.&nbsp;<span class="application">OmegaT</span> Files e Plicas&nbsp;
+               </td>
+               <td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
+               <td width="40%" align="right" valign="top">&nbsp;Chapter&nbsp;10.&nbsp;Comportamento del Modifica</td>
+            </tr>
+         </table>
+      </div>
+   </body>
+</html>

@@ -1,0 +1,170 @@
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <title>Chapter&nbsp;10.&nbsp;Comportamento del Modifica</title>
+      <link rel="stylesheet" type="text/css" href="OmegaT.css">
+      <meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
+      <link rel="home" href="index.html" title="OmegaT - Guida del usuario">
+      <link rel="up" href="index.html" title="OmegaT - Guida del usuario">
+      <link rel="prev" href="chapter.files.to.translate.html" title="Chapter&nbsp;9.&nbsp;Files a render">
+      <link rel="next" href="chapter.plain.text.html" title="Chapter&nbsp;11.&nbsp;Operar con le texto simple">
+   </head>
+   <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+      <div class="navheader">
+         <table width="100%" summary="Navigation header">
+            <tr>
+               <th colspan="3" align="center">Chapter&nbsp;10.&nbsp;Comportamento del Modifica</th>
+            </tr>
+            <tr>
+               <td width="20%" align="left"><a accesskey="p" href="chapter.files.to.translate.html">Prev</a>&nbsp;
+               </td>
+               <th width="60%" align="center">&nbsp;</th>
+               <td width="20%" align="right">&nbsp;<a accesskey="n" href="chapter.plain.text.html">Next</a></td>
+            </tr>
+         </table>
+         <hr>
+      </div>
+      <div class="chapter">
+         <div class="titlepage">
+            <div>
+               <div>
+                  <h1 class="title"><a name="chapter.translation.editing"></a>Chapter&nbsp;10.&nbsp;Comportamento del Modifica<a class="indexterm" name="d0e5691"></a></h1>
+               </div>
+            </div>
+         </div>
+         <p>Le fenestra de dialogo in <span class="guimenu">Optiones</span> → <span class="guimenuitem">Comportamento del Modifica...</span> habilita le usator a seliger, como le segmento actual in le campo del Modifica debe esser arrangiate al initio e tractate:
+         </p>
+         <div class="figure"><a name="editing.behavior.options"></a><p class="title"><b>Figure&nbsp;10.1.&nbsp;Optiones del comportamento del Modifica</b></p>
+            <div class="figure-contents">
+               <div class="mediaobject"><img src="images/EditingBehaviourOptions25.png" alt="Optiones del comportamento del Modifica"></div>
+            </div>
+         </div><br class="figure-break"><p></p>
+         <p>Tu rende tu files movente te de segmento in segmento, modificante cata segmento currente a tornos. Movente te inter segmentos,
+            tu pote desiderar popular le campo de modifica con un traduction existente in le quadro del concordantia partial o con le
+            texto original. In <span class="guimenu">Optiones</span> → <span class="guimenuitem">Comportamento del Modifica...</span> <span class="application">OmegaT</span> te  offere le alternativas sequente:
+         </p>
+         <div class="variablelist">
+            <dl class="variablelist">
+               <dt><span class="term">Le texto original</span></dt>
+               <dd>
+                  <p>Tu pote haver le texto original inserite automaticamente in le campo de modifica Isto es utile pro textos continente multe
+                     marcas commercial o altere nomines proprie que debe restar sin alteration.
+                  </p>
+               </dd>
+               <dt><span class="term">Leave the segment empty<a class="indexterm" name="d0e5736"></a></span></dt>
+               <dd>
+                  <p>OmegaT lassa blanco le campo del modifica. Iste option permitte te a scriber le traduction sin le necessitate de remover le
+                     texto original, assi tu sparnia duo percussiones de clave (<span class="bold"><strong>Ctrl+A </strong></span>e <span class="bold"><strong>Del). </strong></span>Ora es permittite le traductiones vacue. illos es monstrate como &lt;EMPTY&gt; in le Editor. Pro crear uno, clicca con le dextero
+                     in un segmento, e selige "<span class="bold"><strong>Prepara le traduction vacue</strong></span>". Le entrata <span class="bold"><strong>Remove traduction</strong></span> in le identic menu pop-up permitte alsi a deler le traduction existente del segmento currente. Tu compli le identic per deler
+                     le segmento final e pressar <span class="guibutton">Enter.</span></p>
+               </dd>
+               <dt><span class="term">Insert the best fuzzy match<a class="indexterm" name="d0e5763"></a></span></dt>
+               <dd>
+                  <p>OmegaT insere le traduction del linea maxime similabile al fonte actual, si il es supra le limine del similantia que tu ha
+                     seligite in iste fenestra de dialogo. Le prefixo (per arrangiamento initial vacue) pote esser usate pro etiquettar le traductiones,
+                     facite con concordantias partial. Si tu adde un prefixo (per exemplo [fuzzy]), tu pote calcar illos traductiones plus tarde
+                     pro vider si illos es correcte.
+                  </p>
+               </dd>
+            </dl>
+         </div>
+         <p>Le quadratos de controlo in le medietate  inferior del Fenestra de dialogo servi al proposito sequente:</p>
+         <div class="variablelist">
+            <dl class="variablelist">
+               <dt><span class="term">Tenta de converter le numeros quando on insere un concordantia partial<a class="indexterm" name="d0e5779"></a></span></dt>
+               <dd>
+                  <p>Si es marcate iste option, quando on insere un concordantia partial, o manualmente o automaticamente, OmegaT tenta de converter
+                     le numeros in le concordantia partial secundo le contentos original. Il ha plure restrictiones:
+                  </p>
+                  <div class="itemizedlist">
+                     <ul class="itemizedlist" style="list-style-type: disc; ">
+                        <li class="listitem">
+                           <p>Le segmento fonte e le concordantias partial debe continer le identic lista de numeros</p>
+                        </li>
+                        <li class="listitem">
+                           <p>Le numeros debe esser identic inter le concordantias original e los final.</p>
+                        </li>
+                        <li class="listitem">
+                           <p>sol numeros integre e numeros a virgula mobile simple (usante le periodo ut un character decimal, exempli gratia 5.4, ma non
+                              5,4 ni 54E-01) es considerate.
+                           </p>
+                        </li>
+                     </ul>
+                  </div>
+               </dd>
+            </dl>
+         </div>
+         <div class="variablelist">
+            <dl class="variablelist">
+               <dt><span class="term">Permitte al traduction de esser equal al original<a class="indexterm" name="d0e5803"></a></span></dt>
+               <dd>
+                  <p>Le documentos pro le traduction pote continer marcas de commercio, nomines o altere nomines proprie que essere identic alsi
+                     in le documentos rendite. Il ha duo strategias pro le segmentos que contine solmente tal texto invariabile.
+                  </p>
+                  <p>Tu pote decider de non traducer del toto tal segmentos. OmegaT reportara ergo iste segmentos como non rendite. Isto es le
+                     arrangiamento base initial. Le alternative es scriber un traduction identic al texto original. OmegaT es habile a recognoscer
+                     que tu ha facite isto. pro render possibile isto, va a <span class="guimenu">Optiones</span> → <span class="guimenuitem">Comportamento del Modifica...</span> e marca le cassa <span class="bold"><strong>Permitte traduction equal a fonte</strong></span>.
+                  </p>
+               </dd>
+            </dl>
+         </div>
+         <div class="variablelist">
+            <dl class="variablelist">
+               <dt><span class="term">Exporta le segmento in files texto<a class="indexterm" name="d0e5828"></a></span></dt>
+               <dd>
+                  <p>Le function Exporta texto, exporta datos ex le projecto actual  de <span class="application">OmegaT</span> in files de texto simple. Le datos es exportate quando le segmento es aperte. Le files appare in le sub plica /script in
+                     le plica del files del usator de OmegaT, and include:
+                  </p>
+                  <div class="itemizedlist">
+                     <ul class="itemizedlist" style="list-style-type: disc; ">
+                        <li class="listitem">
+                           <p>Le texto contente in le segmento original (<code class="filename">source.txt</code>).
+                           </p>
+                        </li>
+                        <li class="listitem">
+                           <p>Le texto contente in le segmento final (<code class="filename">target.txt</code>).
+                           </p>
+                        </li>
+                        <li class="listitem">
+                           <p>Le texto marcate per le usator, quando es calcate <span class="keycap"><strong>Ctrl+Shift+C</strong></span> o es seligite <span class="guimenuitem">Modifica &gt; Exporta le Selection</span> (<code class="filename">selection.txt</code>).
+                           </p>
+                        </li>
+                     </ul>
+                  </div>
+                  <p>Le contento del files es superscribite o quando un segmento nove es aperte (source.txt e target.txt) o quando a nove selection
+                     es exportate (selection.txt). Le files es files de texto simple non formattate. Le processo integre pote esser governate e
+                     controlate con scriptes basate sur Tck/Tcl. Vide <a class="ulink" href="http://www.omegat.org/en/howtos/text_export.html" target="_top">Usar le function exporta texto de OmegaT</a> pro specificas, exemplos e suggestiones.
+                  </p>
+               </dd>
+            </dl>
+         </div>
+         <div class="variablelist">
+            <dl class="variablelist">
+               <dt><span class="term">Vade al proxime segmento non rendite, arresta quando il ha al minus un traduction alternativa<a class="indexterm" name="d0e5875"></a></span></dt>
+               <dd>
+                  <p>In le caso de segmentos con plure possibile contentos, si nos vole evitar omne mis-traductiones, le signo de iste quadrato
+                     de controlo causara que le commando <span class="bold"><strong>&nbsp;Va al segmento non rendite sequente</strong></span> arrestara sur le segmento sequente, sin respecto re illo esseva jam rendite o non.
+                  </p>
+               </dd>
+            </dl>
+         </div>
+      </div>
+      <div class="navfooter">
+         <hr>
+         <table width="100%" summary="Navigation footer">
+            <tr>
+               <td width="40%" align="left"><a accesskey="p" href="chapter.files.to.translate.html">Prev</a>&nbsp;
+               </td>
+               <td width="20%" align="center">&nbsp;</td>
+               <td width="40%" align="right">&nbsp;<a accesskey="n" href="chapter.plain.text.html">Next</a></td>
+            </tr>
+            <tr>
+               <td width="40%" align="left" valign="top">Chapter&nbsp;9.&nbsp;Files a render&nbsp;</td>
+               <td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
+               <td width="40%" align="right" valign="top">&nbsp;Chapter&nbsp;11.&nbsp;Operar con le texto simple</td>
+            </tr>
+         </table>
+      </div>
+   </body>
+</html>

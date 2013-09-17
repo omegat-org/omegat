@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<chapter id="chapter.machine.translate">
+  <title>Traduction automatica<indexterm class="singular">
+      <primary>Traduction automatica</primary>
+    </indexterm></title>
+
+  <section>
+    <title>Introduction<indexterm class="singular">
+        <primary>Traduction automatica</primary> <secondary>Introduction</secondary>
+      </indexterm></title>
+
+    <para>Al contrario del memorias de traduction generate per le usator (como in le caso de <application>OmegaT</application>) le applicationes de Traduction Automatic usa instrumentos linguistic basate sur regulas pro crear un traduction del segmento fonte sin le necessitate de un memoria de traduction. Pro construer un modello de traduction son usate technicas statistic de saper, basate sur textos de origine e final. Le servicios de Traduction Automatic ha complite resultatos bon e constantemente melior in le evalutationes del recerca.</para>
+
+    <para>Pro activar alicun del servicios de Traduction Automatic, va a <guimenuitem>Optiones &gt; Traduction Automatic...</guimenuitem> e activa le servicio desiderate. Nota que illos es omne basate sur le TTT: tu debera esser on-line si tu vole usar los.</para>
+  </section>
+
+  <section id="introduction">
+    <title>Google Translate<indexterm class="singular">
+        <primary>Traductor Automatic</primary> <secondary>Google Translate</secondary>
+      </indexterm></title>
+
+    <para>Google Translate es un servicio pagabile offerite ex Google, pro render phrases, sitos TTT e textos complete inter un numero de linguas semper crescente. Al tempore de scriptura le lista include plus que 50 linguas, ab le albanese al judeogermano, includite naturalmente omne le linguas major. The current version of the service is based on usage, with the price of 20 USD per million characters at the time of writing.<emphasis role="bold"/></para>
+
+    <para><emphasis role="bold">Importante: </emphasis>Google Translate API v2 necessita information pro le factura pro omne le contos ante que tu pote initiar a usar le servicio (vide <ulink url="https://developers.google.com/translate/v2/pricing?hl=en-US">Pricing and Terms of Service</ulink> pro magis). Pro identificar te quam un usator valide del servicios Google, tu usa tu clave unic private expedite a te per Google, quando tu ha registrate te pro le servicio. Vide capitulo <link linkend="chapter.installing.and.running">Installar e executar</link>, section Argumentos del commando de Lanceamento, pro detalios sur como adder iste clave clave al ambiente OmegaT.</para>
+
+    <para>Le qualitate del traduction de Google Translate depende sur un latere sur le reservoir de textos del lingua de destination e le disponibilitate de lor versiones bilingue, del altere parte sur le qualitate del modellos construite. Il es assatis certe que dum le qualitate sia insufficiente in alicun casos, unes illo devenira melior con le tempore e non pejor.</para>
+  </section>
+
+  <section>
+    <title>Usatores de <application>OmegaT</application> e Google Translate</title>
+
+    <para>Le usator de <application>OmegaT</application> non es coercite a usar Google Translate. Si usate, ni le decision del usator a acceptar le traduction ni le traduction final son utilisabile per Google. Le fenestra sequente monstra un exemplo de a) le fonte anglese b) le traduction espaniol e c) le traduction sloven de Google Translate.</para>
+
+    <figure id="moby.dick">
+      <title>Google Translate - exemplo</title>
+
+      <mediaobject>
+        <imageobject role="html">
+          <imagedata fileref="images/MobyDick.png"/>
+        </imageobject>
+
+        <imageobject role="fo">
+          <imagedata fileref="images/MobyDick.png" width="60%"/>
+        </imageobject>
+      </mediaobject>
+    </figure>
+
+    <para>Le traduction espaniol es melior que illa sloven. Nota <emphasis>interesar</emphasis> e<emphasis> navegar</emphasis> in espaniol, son rendite correctemente como verbos interest e sail respectivemente. In le  version sloven ambe le parolas esseva rendite qua nomines. Il es in veritate assatis probabile que le traduction espaniol es basate al minus partialmente sur le traduction real del libro.</para>
+
+    <para>Un vice que tu ha activate le servicio, un suggestion pro le traduction apparera in le quadro del Traduction Automatic cata vice un nove segmento fonte es aperte. Si tu trova acceptabile le suggestion, pulsa <keycombo> <keycap><indexterm class="singular">
+            <primary>Vias breve</primary> <secondary>Traduction Automatic - Ctrl+M</secondary>
+          </indexterm>Ctrl</keycap> <keycap>M</keycap> </keycombo> pro reimplaciar  le parte de destination del segmento aperte con le suggestion. In le segmento precedente, per exemplo <keycombo> <keycap>Ctrl</keycap> <keycap>M</keycap> </keycombo> reimplaciarea le version espaniol con le suggestion sloven.</para>
+
+    <para>Si tu non desidera que <application>OmegaT</application> remitte tu segmentos fonte a Google a devenir rendite, leva le marca al entrata del menu Google Translate in Optiones.</para>
+
+    <para>Nota que sol tu segmento fonte es expedite al servicio de Traduction Automatic. Le version in interrete de Google Translate permitte le usator a corriger le suggestion e inviar le segmento correcte. Iste characteristica, comocunque, non es implementate in OmegaT.</para>
+  </section>
+
+  <section>
+    <title>Belazar<indexterm class="singular">
+        <primary>Traduction Automatic</primary> <secondary>Belazar</secondary>
+      </indexterm></title>
+
+    <para><ulink url="http://belazar.info/">Belazar</ulink> es un application pro le traduction automatic pro le par del lingua russo-bielorusso.</para>
+  </section>
+
+  <section>
+    <title>Apertium<indexterm class="singular">
+        <primary>Traduction Automatic</primary> <secondary>Apertium</secondary>
+      </indexterm></title>
+
+    <para><ulink url="http://www.apertium.org/">Apertium</ulink> es un platteforma de traductor automatic gratuite, open source, finalisate initialmente a pares de linguas relative, como CA, ES, GA, PT, OC e FR ma in le ultime tempore expandite pro tractar con plus pares de linguas divergente (assi como anglese-catalano). controla le sito TTT pro le ultime lista del pares de linguas implementate.</para>
+
+    <para>Le platteforma provide</para>
+
+    <itemizedlist>
+      <listitem>
+        <para>un ingenio pro le traduction automatic, independente ab le linguas</para>
+      </listitem>
+
+      <listitem>
+        <para>applicationes pro administrar le datos linguistic necessari pro construer un systema de traductor automatic pro un date par de lingua e</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>datos linguistic pro un crescente numero de pares de lingua</para>
+      </listitem>
+    </itemizedlist>
+
+    <para>Apertium usa un machina automatic a traduction superficial le qual processa le texto fonte in stages, como in un linea de montage: de-formattation, analyse morphologic, disambiguation del parte del discurso, traduction structural superficial, traduction lexical, generation morphologic, e re-formattation.</para>
+
+    <para>Il es possibile usar Apertium pro construer systemas de traductor automatic pro plure pares de linguas; pro le qual fin, Apertium usa simple formatos standard basate sur XML pro codificar le datos linguistic necessitate (o per mano o per convertimento de datos existente), que son compilate usante le applicationes fornite in le formatos de alte velocitate usate per le machina.</para>
+  </section>
+
+  <section id="Google.Translate.troubleshooting">
+    <title>Traduction Automatic - cerca del defectos<indexterm class="singular">
+        <primary>Traduction Automatic</primary> <secondary>Chassa al defecto</secondary>
+      </indexterm></title>
+
+    <para>Si il ha nihil appare in le quadro Traduction Automatic, alora controla le sequente:</para>
+
+    <itemizedlist>
+      <listitem>
+        <para>Es tu in interrete? Tu necessita esser in interrete pro esser habile a usar un application MT.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Qual es le par de lingua que tu necessita? Controla que le Servicio seligite offere lo.</para>
+      </listitem>
+
+      <listitem>
+        <para>Google Translate non functiona: ha tu applicate le <ulink url="https://developers.google.com/translate/v2/faq">Servicio API de traduction</ulink>? Nota que le servicio Google Translate non es gratuite, vide le capitulo <link linkend="chapter.installing.and.running">Installar e executar</link> (parametros runtime) pro plus sur isto.</para>
+      </listitem>
+
+      <listitem>
+        <para>&quot;Google Translate rendeva le codice responsa HTTP: 403 ...&quot;: controla que le clave de 38-characteres, inscribite in le file pinfo.list, es correcte. Controla que le <ulink url="https://developers.google.com/translate/v2/faq">Servicio API de traduction </ulink>esseva activate.</para>
+      </listitem>
+
+      <listitem>
+        <para>Google Translate non functiona: - con le clave API Google inscribite como requirite. Controla in Optiones &gt; Traduction Automatic, que Google Translate V2 es marcate.</para>
+      </listitem>
+
+      <listitem>
+        <para>Google Translate V2 reporta &quot;Bad request&quot; - controla le linguas original e final pro tu projecto. Haver nulle linguas definite evoca iste genere de responsa.</para>
+      </listitem>
+    </itemizedlist>
+  </section>
+</chapter>

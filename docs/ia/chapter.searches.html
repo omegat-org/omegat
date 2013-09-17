@@ -1,0 +1,256 @@
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <title>Chapter&nbsp;15.&nbsp;Recercas</title>
+      <link rel="stylesheet" type="text/css" href="OmegaT.css">
+      <meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
+      <link rel="home" href="index.html" title="OmegaT - Guida del usuario">
+      <link rel="up" href="index.html" title="OmegaT - Guida del usuario">
+      <link rel="prev" href="chapter.segmentation.html" title="Chapter&nbsp;14.&nbsp;Segmentation del origine">
+      <link rel="next" href="chapter.regexp.html" title="Chapter&nbsp;16.&nbsp;Expressiones regular">
+   </head>
+   <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+      <div class="navheader">
+         <table width="100%" summary="Navigation header">
+            <tr>
+               <th colspan="3" align="center">Chapter&nbsp;15.&nbsp;Recercas</th>
+            </tr>
+            <tr>
+               <td width="20%" align="left"><a accesskey="p" href="chapter.segmentation.html">Prev</a>&nbsp;
+               </td>
+               <th width="60%" align="center">&nbsp;</th>
+               <td width="20%" align="right">&nbsp;<a accesskey="n" href="chapter.regexp.html">Next</a></td>
+            </tr>
+         </table>
+         <hr>
+      </div>
+      <div class="chapter">
+         <div class="titlepage">
+            <div>
+               <div>
+                  <h1 class="title"><a name="chapter.searches"></a>Chapter&nbsp;15.&nbsp;Recercas<a class="indexterm" name="d0e7138"></a></h1>
+               </div>
+            </div>
+         </div>
+         <div class="toc">
+            <dl class="toc">
+               <dt><span class="section"><a href="chapter.searches.html#search.window">1. Fenestra Recerca</a></span></dt>
+               <dd>
+                  <dl>
+                     <dt><span class="section"><a href="chapter.searches.html#d0e7160">1.1. Cerca</a></span></dt>
+                     <dt><span class="section"><a href="chapter.searches.html#d0e7184">1.2. Ubication del recerca</a></span></dt>
+                  </dl>
+               </dd>
+               <dt><span class="section"><a href="chapter.searches.html#using.wild.cards">2. Usar characteres universal</a></span></dt>
+               <dt><span class="section"><a href="chapter.searches.html#search.methoids">3. Methodos de recerca e optiones</a></span></dt>
+               <dt><span class="section"><a href="chapter.searches.html#search.result.display">4. Monstra le resultatos del recerca</a></span></dt>
+            </dl>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="search.window"></a>1.&nbsp;Fenestra Recerca
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <div class="figure"><a name="text.search.window"></a><p class="title"><b>Figure&nbsp;15.1.&nbsp;Fenestra de Recerca<a class="indexterm" name="d0e7147"></a></b></p>
+               <div class="figure-contents">
+                  <div class="mediaobject"><img src="images/TextSearch25.png" alt="Fenestra de Recerca"></div>
+               </div>
+            </div><br class="figure-break"><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;">
+               <h3 class="title">Note</h3>
+               <p>Le recerca precedente trova omne le segmentos de destination que contine characteres, assatis improbabile in le destination
+                  - id es lingua sloven.
+               </p>
+            </div>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="d0e7160"></a>1.1.&nbsp;Cerca<a class="indexterm" name="d0e7163"></a></h3>
+                     </div>
+                  </div>
+               </div>
+               <p><span class="application">OmegaT</span> provide un potente extension de functiones de recerca. Aperi Le Fenestra de Recerca con <span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>F</strong></span> e inscribe le parola o phrase que tu desira recercar in le Cassa pro le recerca. Alias, in le fenestra Modifica, selige un
+                  parola o phrase in le campo de modifica (texto de destination del segmento currente) e pulsa <span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>F</strong></span>. Le parola o phrase is inscribite in le Cassa pro le recerca automaticamente. Tu pote haber plure fenestras de Recerca aperte
+                  al mesme tempore, ma claude los quando illos non necessita plus assi que illos non incombra tu scriptorio.
+               </p>
+            </div>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="d0e7184"></a>1.2.&nbsp;Ubication del recerca
+                        </h3>
+                     </div>
+                  </div>
+               </div>
+               <p>Le recercas son effectuate per arrangiamento initial in ambe le sectiones fonte e de destination del projecto, ma tu pote
+                  limitar tu recerca al fonte o al destination solmente. Tu pote cercar in
+               </p>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
+                     <li class="listitem">
+                        <p>le projecto solmente (preparation prefixate initial)</p>
+                     </li>
+                  </ul>
+               </div>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
+                     <li class="listitem">
+                        <p>ambe le projecto e le memorias de traduction referentia in /tm/ (marca <span class="emphasis"><em>Cerca TMs)</em></span></p>
+                     </li>
+                  </ul>
+               </div>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
+                     <li class="listitem">
+                        <p>un file singule o un plica continente un serie de files (marca <span class="emphasis"><em>Cerca files)</em></span></p>
+                     </li>
+                  </ul>
+               </div>
+               <p>Quando cerca in files (all contrario del memorias de traduction), <span class="application">OmegaT</span> restringe le recerca al files in Formatos del file fonte. Per consequentia, ben que OmegaT es bastante habile a tractar le
+                  files <code class="filename"> tmx</code>, illo non include los in le recerca del Files de recerca. Si tu activa <span class="bold"><strong><a class="indexterm" name="d0e7214"></a>Optiones Experte</strong></span>, tu pote combinar le recerca con le nomine del autor del traduction e le tempore del ultime cambio facite.
+               </p>
+            </div>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="using.wild.cards"></a>2.&nbsp;Usar characteres universal<a class="indexterm" name="d0e7224"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <p>In ambe le recercas exacte e per parola clave, on pote usar le characteres de recerca universal '*' e '?'. Illos ha le significato,
+               familiar al usatores de Word:
+            </p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>'*' concorda zero o plus characteres, ab le position currente in un date parola a su fin. Le termino de recerca <code class="literal">'run*'</code> per exemplo facerea concordar le parolas <code class="literal">'run'</code>, <code class="literal">'runs'</code> e  <code class="literal">'running'</code>.
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>'?' equala omne singule character. Per exemplo, <code class="literal">'run?'</code> facerea concordar le parola <code class="literal">'runs'</code> e <code class="literal">'runn'</code> in le parola <code class="literal">'running'</code>.
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <p>Le concordantias essera marcate in azur hardite. Nota que '*' e '?' ha significato particular in le expressiones regular,
+               ita le recerca del carta salvage, como ci describite, refere se solmente al recerca del exacte parola clave (vide in sequito).
+            </p>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="search.methoids"></a>3.&nbsp;Methodos de recerca e optiones<a class="indexterm" name="d0e7268"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <p>Selige le methodo per le buttones radio. Son disponibile le methodos de recerca sequente:</p>
+            <div class="variablelist">
+               <dl class="variablelist">
+                  <dt><span class="term">recerca exacte</span></dt>
+                  <dd>
+                     <p>Recerca pro le segmentos continente le linea de character exacte que tu ha specificate. Un recerca exacte quere pro un phrase,
+                        id es si son inscribite plure parolas, illos es trovate solmente si illos occurre justo in celle sequentia. Cercar pro <code class="literal">open file</code> assi trovara omne le occurrentias del linea de character <span class="emphasis"><em><code class="literal">open file</code></em></span>, ma non<span class="emphasis"><em><code class="literal">file opened</code></em></span> o <span class="emphasis"><em><code class="literal">open input file</code></em></span>.
+                     </p>
+                  </dd>
+                  <dt><span class="term">cerca parola clave</span></dt>
+                  <dd>
+                     <p>Recerca le segmentos continente omne le parolas clave que tu ha specificate, in qualcunque ordine. Selige recerca per parola
+                        clave pro recercar por cata numero del particular parolas complete, in qualcunque ordine. OmegaT monstra un lista de omne
+                        segmentos continente tote le parolas specificate. Recercas per parola clave es simile a un recerca "con omne le  parolas"
+                        in un motor de recerca Interrete como Google  (AND logic). Usante le recerca per parola clave con <span class="emphasis"><em><code class="literal">open file</code></em></span> trovara assi omne occurrentias del linea de character <span class="emphasis"><em><code class="literal">open file</code>,</em></span> assi como <span class="emphasis"><em><code class="literal">file opened</code>, <code class="literal">open input file</code>, <code class="literal">file may not be safe to open</code></em></span>, etc.
+                     </p>
+                  </dd>
+                  <dt><span class="term"><span class="bold"><strong>Expressiones &amp;Regulamentari</strong></span></span></dt>
+                  <dd>
+                     <p>Le linea de character de recerca essera tractate como un expression regular. Le fila de characteres de recerca - [a-zA-Z]+[öäüqwß]
+                        - in le exemplo precedente per exemplo quere pro le parolas in le segmento de destination, continente characteres dubitabile
+                        ex un claviero german. Le expressiones regular son un maniera potente pro cercar pro occurrentias de un linea de character.
+                        Vide plus in le  capitulo<a class="link" href="chapter.regexp.html" title="Chapter&nbsp;16.&nbsp;Expressiones regular"> Expressiones regular.</a></p>
+                  </dd>
+               </dl>
+            </div>
+            <p>In addition a uno del methodos precedente tu pote seliger le sequente:</p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p><span class="bold"><strong>sensitive al Character Majuscule Minuscule</strong></span>: le recerca essera effectuate pro le linea de character specificate exacte; id es es observate le  capitalisation.
+                     </p>
+                  </li>
+                  <li class="listitem">
+                     <p><span class="bold"><strong>in le fonte: </strong></span>cerca in le segmentos fonte
+                     </p>
+                  </li>
+                  <li class="listitem">
+                     <p><span class="bold"><strong>in le traductiones: </strong></span>cerca in le segmentos final
+                     </p>
+                  </li>
+                  <li class="listitem">
+                     <p><span class="bold"><strong>in notas: </strong></span>cerca in notas a segmentos
+                     </p>
+                  </li>
+                  <li class="listitem">
+                     <p><span class="bold"><strong>recerca TMs</strong></span>: le memorias de traduction in le plica <code class="filename">tm</code> son includite in le recerca.
+                     </p>
+                  </li>
+                  <li class="listitem">
+                     <p><span class="bold"><strong>monstra omne resultatos: </strong></span>deler iste quadrato de controlo causara que OmegaT monstrara sol le prime occurrentia de un pulsa, si existe plure occurrentias
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <p>Si tu clicca sur le button <span class="guibutton">Optiones avantiate</span> pote esser seligite altere criterios (autor del traduction, data traducite etc) como monstrate in le imagine precedente.
+            </p>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="search.result.display"></a>4.&nbsp;Monstra le resultatos del recerca
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>Pulsante le button recerca post inscribite un fila de characteres in le campo de recerca monstra omne le segmentos in le projecto
+               que include le fila de characteres inscribite. A mesura que <span class="application">OmegaT</span> tracta segmentos identic como un entitate singule, sol le prime segmento unic es monstrate. Le segmentos son monstrate in
+               ordine de apparition in le projecto. Le segmentos rendite son monstrate con le texto original al alto e le texto rendite al
+               basso, le segmentos non rendite son monstrate con le fonte sol.
+            </p>
+            <p>Cliccar sur un segmento aperi lo in le quadro de Modifica pro le modificationes. Tu pote alora cambiar a retro al Fenestra
+               de Recerca pro trovar le segmento successive, per exemplo pro controlar e, si necesse, corriger le terminologia.
+            </p>
+            <p>Tu pote haber plure Fenestras de Recerca aperte al mesme tempore. Tu pote rapidemente vider lor contentos querente a lor titulo:
+               il continera le termino de recerca usate.
+            </p>
+         </div>
+      </div>
+      <div class="navfooter">
+         <hr>
+         <table width="100%" summary="Navigation footer">
+            <tr>
+               <td width="40%" align="left"><a accesskey="p" href="chapter.segmentation.html">Prev</a>&nbsp;
+               </td>
+               <td width="20%" align="center">&nbsp;</td>
+               <td width="40%" align="right">&nbsp;<a accesskey="n" href="chapter.regexp.html">Next</a></td>
+            </tr>
+            <tr>
+               <td width="40%" align="left" valign="top">Chapter&nbsp;14.&nbsp;Segmentation del origine&nbsp;</td>
+               <td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
+               <td width="40%" align="right" valign="top">&nbsp;Chapter&nbsp;16.&nbsp;Expressiones regular</td>
+            </tr>
+         </table>
+      </div>
+   </body>
+</html>

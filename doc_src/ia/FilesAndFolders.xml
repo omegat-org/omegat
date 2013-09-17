@@ -1,0 +1,363 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<chapter id="chapter.files.and.folders">
+  <title><application>OmegaT</application> Files e Plicas</title>
+
+  <para><application>OmegaT</application> opera con tres typos de files.</para>
+
+  <itemizedlist>
+    <listitem>
+      <para>Le files del projecto de traduction: istos forma un projecto de traduction. Perder los pote affliger le integritate del projecto e tu facultate de compler un obra. le files del projecto es le plus importante files in <application>OmegaT</application>. Illos es le files que tu tracta sur un base quotidian dum tu rende.</para>
+    </listitem>
+  </itemizedlist>
+
+  <itemizedlist>
+    <listitem>
+      <para>Files del preparationes del usator: istos es create quando le comportamento de OmegaT es modificate per le preferentia del preparationes del usator. Le perdita de illos resulta habitualmente que OmegaT reverte a su &quot;preparationes de fabrica&quot;. Isto pote alcun veces causar un poco de difficultate quando tu es in le medio de un traduction.</para>
+    </listitem>
+  </itemizedlist>
+
+  <itemizedlist>
+    <listitem>
+      <para>Files del application: iste es includite in le pacchetto que tu ha discargate. Le major parte de illos son necessari por que OmegaT functiona debitemente. Si pro qualque ration iste files son perdite o corrupte, discarga vel reinstalla simplemente OmegaT pro restaurar illos tote.</para>
+    </listitem>
+  </itemizedlist>
+
+  <section id="translation.project.files">
+    <title>Files del projecto de traduction</title>
+
+    <indexterm class="singular">
+      <primary>Files del projecto</primary> <secondary>Files del projecto de traduction</secondary>
+    </indexterm>
+
+    <para>Un projecto de traduction <application>OmegaT</application> consiste de plure files e plicas.</para>
+
+    <para>Quando tu crea un projecto de traduction, OmegaT crea automaticamente un plica con le nomine specificate, e un lista de plicas:</para>
+
+    <figure id="OmegaT.project">
+      <title>Projecto OmegaT</title>
+
+      <mediaobject>
+        <imageobject role="html">
+		          <imagedata fileref="images/Omegatproject.png"/>
+       </imageobject>
+      <imageobject role="fo">
+          <imagedata fileref="images/Omegatproject.png" width="60%"/>
+        </imageobject>
+      </mediaobject>
+	  </figure>
+
+    <para>On pote seliger locationes alternative pro alicun del plicas al creation del projecto o durante le traduction. Il es dunque possibile seliger plicas existente o crear plicas in ubicationes que reflecte tu fluxo de labor e tu habitudes de gestion del projecto. Pro cambiar le position del plicas postquam un projecto esseva create, aperi <guimenuitem>Projecto &gt; Proprietates...</guimenuitem> in le menu o con <guibutton>Ctrl+E</guibutton> e face le cambios necessari.</para>
+
+    <para>In un administrator de file un projecto de traduction appare e age justo como omne altere plica. In le sequente exemplo le plica <filename>my projects</filename> contine tres projectos OmegaT:</para>
+
+    <para><figure id="OmegaT.projects.and.subfolders">
+        <title>Projectos e sub plicas de OmegaT</title>
+
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="images/OmegaT_projects_and_subfolders.png"/>
+          </imageobject>
+        </mediaobject>
+      </figure></para>
+
+    <para>Cliccar duplice le plica con le icone OmegaT es sufficiente a aperir le projecto. Un projecto de traduction <emphasis role="bold">Example_Project</emphasis> con le preparationes base essera create como nove sub plica con le structura sequente:</para>
+
+    <section id="file.omegat.project">
+      <title>Plica vertice<indexterm class="singular">
+          <primary>Files del Projecto</primary> <secondary>File omegat.project</secondary>
+        </indexterm></title>
+
+      <para>Le Plica vertice de un projecto contine semper le file<filename> OmegaT.Project</filename>, continente le parametros del projecto ut definite in le fenestra Proprietates del projecto (<guimenuitem>Projecto &gt; Proprietates</guimenuitem>). durante que le traduction progrede son create (e renovate in le processo de traduction) in iste plica, additional files (<emphasis><filename>project_name</filename></emphasis><filename>-omegat.tmx, project_name-level1.tmx and project_name-level2.tmx</filename>). Illos contine un identic memoria de traduction in formas differente, pro ser usate in projectos futur.</para>
+    </section>
+
+    <section>
+      <title>Sub plica dictionario</title>
+
+      <para>initialmente vacue, iste plica continera le dictionarios que tu ha addite al projecto. Vide <link linkend="chapter.dictionaries">capitulo Dictionarios</link> pro plus re iste subjecto.</para>
+    </section>
+
+    <section>
+      <title>Sub plica glossario</title>
+
+      <para>Iste plica is vacue ab initio. Isto continera le glossarios que tu usara in le projecto. Vide <link linkend="chapter.glossaries">capitulo Glossarios</link> pro plus re iste subjecto.</para>
+    </section>
+
+    <section id="folder.OmegaT">
+      <title>Sub plica omegat<indexterm class="singular">
+          <primary>Files del Projecto</primary> <secondary>Sub plica omegat</secondary>
+        </indexterm></title>
+
+      <para>Le sub plica <emphasis role="bold">omegat</emphasis> contine al minus un possibilemente plures altere files. Le plus importante file hic es le <filename>project_save.tmx, </filename>que es le memoria de traduction operative pro le projecto. Copias de reserva de iste file (con extension bak) es addite progressivemente a iste sub plica, in prime loco al initio del session de traduction, a su fin, e durante que le traduction progrede. Per hic an perdita datos inadvertente es avertite - vide Impedir le Perdita del Datos in capitulo <link linkend="chapter.misc">Miscellanea.</link></para>
+
+      <para>Durante le translation  pote devenir create files additional in iste sub plica como seque</para>
+
+      <para><informaltable>
+          <tgroup align="left" cols="2" rowsep="1">
+            <colspec align="left" colnum="1"/>
+
+            <tbody>
+              <row>
+                <entry>stats.txt</entry>
+
+                <entry><indexterm class="singular">
+                    <primary>Files del Projecto</primary> <secondary>file del statisticas</secondary>
+                  </indexterm>contine le statisticas currente del projecto currente. Tu pote examinar lo per seliger <guimenuitem>Instrumentos &gt; Statisticas</guimenuitem></entry>
+              </row>
+
+              <row>
+                <entry>ignored_words.txt. learned_words.txt</entry>
+
+                <entry><indexterm class="singular">
+                    <primary>Files del Projecto</primary> <secondary>ignored_words e learned_words</secondary>
+                  </indexterm>son create e usate per le corrector orthographic. Si tu jam ha colligite parolas tu desidera le corrector orthographic ignora / accepta, tu debe solmente copiar le duo files correspondente in le sub plica <filename>omegat</filename>de tu projecto actual.</entry>
+              </row>
+
+              <row>
+                <entry>project_stats_match.txt</entry>
+
+                <entry>contine le ultime statisticas del concordantia del projecto, generate con <guimenuitem>Instrumentos &gt; Statisticas del Concordantia</guimenuitem></entry>
+              </row>
+
+              <row>
+                <entry>segmentation.conf</entry>
+
+                <entry>si existente, illo contine le regulas de segmentation projecto-specific, si requirite in <guimenuitem>Projecto &gt; Proprietates ... </guimenuitem>Vide <link linkend="chapter.project.properties">Capitulo Proprietates del projecto</link></entry>
+              </row>
+
+              <row>
+                <entry>filters.xml</entry>
+
+                <entry>si existente, illo contine le filtros de file projecto-specific, si requirite in <guimenuitem>Projecto &gt; Proprietates ... </guimenuitem>Vide <link linkend="chapter.project.properties">Capitulo Proprietates del projecto</link></entry>
+              </row>
+            </tbody>
+          </tgroup>
+        </informaltable></para>
+    </section>
+
+    <section id="folder.source">
+      <title>Sub plica /source<indexterm class="singular">
+          <primary>Files del Projecto</primary> <secondary>Sub plica /source</secondary>
+        </indexterm></title>
+
+      <para>Le sub plica /source contine le files a traducer. Tu pote adder a illo le files plus tarde. Nota que le structura del sub plicas in le sub plica /source poter sumer qualcunque forma tu vole. Si le files a traducer son partes de un structura a arbore (como in un sito TTT), tu necessita sol specificar le sub plica de maxime nivello e OmegaT mantenera le contentos integre, dum tene intacte le structura a arbore.</para>
+    </section>
+
+    <section id="folder.target">
+      <title>Sub plica /target<indexterm class="singular">
+          <primary>Files del Projecto</primary> <secondary>Sub plica /target</secondary>
+        </indexterm></title>
+
+      <para>Iste sub plica is vacue ab initio. Pro adder contentos a isto, selige <menuchoice> <shortcut> <keycombo> <keycap>Ctrl</keycap> <keycap>D</keycap> </keycombo> </shortcut> <guimenu>Projecto</guimenu> <guimenuitem>Crea Documentos Rendite</guimenuitem> </menuchoice>. Le files intra le plica <filename>source</filename>, si rendite o  non, es alora generate ci, con le identic hierarchia del sub plicas fonte. Sol alora le contentos del sub plica target reflectera le stato actual del traduction, como presente in le memoria de traduction del projecto, salvate in le file <emphasis role="bold">/omegat/project_save.tmx</emphasis>. Le segmentos non rendite remanera in iste documento in le lingua fonte.</para>
+    </section>
+  </section>
+
+  <section id="user.files">
+    <title>Files del preparationes del usator<indexterm class="singular">
+        <primary>Files del Projecto</primary> <secondary>Files del Preparationes del Usator</secondary>
+      </indexterm></title>
+
+    <para>Le files del usator contine le information, applicabile e omne le projectos pro un certe usator;</para>
+
+    <informaltable>
+      <tgroup align="left" cols="2" rowsep="1">
+        <colspec align="left" colnum="1"/>
+
+        <tbody>
+          <row>
+            <entry>logs/OmegaT.log</entry>
+
+            <entry>Iste file recorda le messages de error de Java  durante que <application>OmegaT</application> es functionante. Si OmegaT deberea apparer comportar se erraticamente, il es importante includer iste file o su parte pertinente in omne reporto de defecto</entry>
+          </row>
+
+          <row>
+            <entry>script/</entry>
+
+            <entry>plica, continente files script pro le plugin del script, si installate</entry>
+          </row>
+
+          <row>
+            <entry>filters.xml</entry>
+
+            <entry>filtros de file base del usator</entry>
+          </row>
+
+          <row>
+            <entry>omegat.prefs</entry>
+
+            <entry>OmegaT preferentias</entry>
+          </row>
+
+          <row>
+            <entry>segmentation.conf</entry>
+
+            <entry>regulas de segmentation base del usator</entry>
+          </row>
+
+          <row>
+            <entry>uiLayout.xml</entry>
+
+            <entry>Un file xml con omne le preparationes del option accessibile per Interfacie Graphic del Usator (Graphical User Interface - GUI)</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </informaltable>
+
+    <para>Nota que le regulas de segmentation base e le filtros de file pote esser superscribite per preparationes specific del projecto (vide supra). Le ubication del files del usator depende del platteforma que tu usa:</para>
+
+    <informaltable>
+      <tgroup align="left" cols="2" rowsep="1">
+        <colspec align="left" colnum="1"/>
+
+        <tbody>
+          <row>
+            <entry>Windows 2000 e XP</entry>
+
+            <entry><literal>Documents and Settings\&lt;User
+            Name&gt;\Application
+            Data\<application>OmegaT</application></literal></entry>
+          </row>
+
+          <row>
+            <entry>Windows Vista e 7</entry>
+
+            <entry><literal>Users\&lt;User
+            Name&gt;\AppData\Roaming\<application>OmegaT</application></literal></entry>
+          </row>
+
+          <row>
+            <entry>Altere Windows</entry>
+
+            <entry><literal>&lt;Something&gt;\<application>OmegaT</application></literal> (&lt;Something&gt; corresponde al location del plica &quot;home&quot; quomodo determinate secundo Java)</entry>
+          </row>
+
+          <row>
+            <entry>Linux/Solaris/FreeBSD</entry>
+
+            <entry><literal>&lt;User Home&gt;/.omegat </literal>(.omegat es un plica, le puncto precedente su nomine rende illo invisibile a minus que tu scribe ls -a o un commando equivalente)</entry>
+          </row>
+
+          <row>
+            <entry>Mac OS X</entry>
+
+            <entry><filename>&lt;User
+            Home&gt;/Library/Preferences/<application>OmegaT</application></filename></entry>
+          </row>
+
+          <row>
+            <entry>Altere</entry>
+
+            <entry><filename>&lt;User Home&gt;</filename></entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </informaltable>
+  </section>
+
+  <section id="application.files">
+    <title>Files del application<indexterm class="singular">
+        <primary>Files del Projecto</primary> <secondary>Files application</secondary>
+      </indexterm></title>
+
+    <para>OmegaT es supplite como un pacchetto que pote esser discargate ex SourceForge. Ci es considerate un pacchetto independente ab platteformas in un forma Java standard. Le alternativas comprende un pacchetto .tar Linux, un installator Windows – con o sin un Java Runtime Environment (JRE) –, un installator Mac OS X, e un pacchetto codice fonte pro le disveloppatores.</para>
+
+    <para>Le pacchetto independente ab platteformas pote esser usate sur omne platteforma con un ambiente runtime Java 1.6 functionante, includite le platteformas pro le qual existe alsi un pacchetto specific. Illo es fornite como file comprimite (archivo zip o tar) que tu debe extraher al plica de tu election pro le installation. Le file pote habitualmente esser extrahite per clic duplice sur le pacchetto discargate. Un vice que le archivo esseva extrahite, es create un plica continente le contentos sequente:</para>
+
+    <informaltable>
+      <tgroup align="left" cols="2" rowsep="1">
+        <colspec align="left" colnum="1"/>
+
+        <tbody>
+          <row>
+            <entry><emphasis role="bold">Sub plica file/ </emphasis></entry>
+
+            <entry><emphasis role="bold">Con&amp;tentos</emphasis></entry>
+          </row>
+
+          <row>
+            <entry><filename>/docs/</filename></entry>
+
+            <entry>Omne le files del manual del usator pote esser trovate in iste plica. Tu pote aperir los in un lector del tela Interrete pro obtener accesso al ligamines externe.</entry>
+          </row>
+
+          <row>
+            <entry><filename>/images/</filename></entry>
+
+            <entry>Icones e logo graphicas</entry>
+          </row>
+
+          <row>
+            <entry><filename>/lib/</filename></entry>
+
+            <entry>Contine le files Java, necessari al operation de <application>OmegaT</application>.</entry>
+          </row>
+
+          <row>
+            <entry><filename>join.html</filename></entry>
+
+            <entry>Isto es un file html ordinari que, quando aperte in tu lector del tela Interrete, dirige te al gruppo del usator OmegaT sur Yahoo! Gruppos. Non es necessari participar, ma supplera te con accesso a servicios additional, assi como files, questionarios, e le opportunitate a sumer parte in discussiones re OmegaT. Le archivos del gruppo son public e on pote vider los sin subscription al gruppo.</entry>
+          </row>
+
+          <row>
+            <entry><filename>changes.txt</filename></entry>
+
+            <entry>Un lista del modificationes relativemente detaliate inter iste version e le versiones precedente.</entry>
+          </row>
+
+          <row>
+            <entry><filename>license.txt</filename></entry>
+
+            <entry>The GNU GENERAL PUBLIC LICENSE. This license allows you to
+            do certain things with <application>OmegaT</application>,
+            including modifying and distributing it. If you are interested in
+            modifying or distributing <application>OmegaT</application>, read
+            this document carefully and ensure you understand its implications
+            before doing anything. If in doubt, don't hesitate to ask project
+            members directly either by sending them an e-mail from the
+            SourceForge page or by sending a public mail to the user
+            group.</entry>
+          </row>
+
+          <row>
+            <entry><filename>doc-license.txt</filename></entry>
+
+            <entry>The GNU GENERAL PUBLIC LICENSE. This license covers the documentation. Vide supra.</entry>
+          </row>
+
+          <row>
+            <entry><filename>readme.txt</filename></entry>
+
+            <entry>Iste file es multo importante tu deberea assecurar te que tu lege lo ante lancear OmegaT. Illo include information general re OmegaT, ubi trovar plus information, como contribuer, etc. Illo esseva rendite in plure linguas.</entry>
+          </row>
+
+          <row>
+            <entry><application>omegat</application></entry>
+
+            <entry><para>Un file texto continente duo lineas:</para>
+
+            <programlisting>#!/bin/bash java
+java -jar OmegaT.jar $*</programlisting>
+
+            <para>Le usatores de Linux e OS X pote trovar iste file utile. Rende lo executabile (<literal>chmod +x OmegaT</literal>) ab le linea de commando post esser te assecurate que tu es in le plica del application OmegaT. Tu ergo essera capace a lancear OmegaT con le execution de iste file ab le linea de commando</para>
+            </entry>
+          </row>
+          
+          <row>
+            <entry>OmegaT.bat</entry>
+
+            <entry><para>Un file batch, usate pro lancear  <application>OmegaT</application> a partir del linea de commando de Windows. Il contine sol le linea sequente:</para>
+
+            <programlisting>java -jar OmegaT.jar</programlisting>
+            </entry>
+          </row>
+          
+          <row>
+            <entry><literal>OmegaT.jar</literal></entry>
+
+            <entry>Le principal application OmegaT. Pro lancear OmegaT, tu debe lancear iste file o ab le linea de commando o ab tu administrator de file, habitualmente per duple-clic sur illo.</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </informaltable>
+  </section>
+</chapter>

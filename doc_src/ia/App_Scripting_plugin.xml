@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<appendix id="appendix.ScriptingPlugin.inOmegaT">
+  <title>Plugin Scripting<indexterm class="singular">
+      <primary>Plugins</primary> <secondary>Script</secondary>
+    </indexterm></title>
+
+  <section>
+    <title>Introduction</title>
+
+    <para>OmegaT-Scripting permitte le execution del scriptes in differente linguas.</para>
+  </section>
+
+  <section>
+    <title>Installation e uso</title>
+
+    <para>Le plugin Scripting pro OmegaT pote esser discargate ex le sito de discarga del plugins de <ulink url="http://sourceforge.net/projects/omegat-plugins/files">OmegaT</ulink>. Expande le files, e los mitte toto in le plica  &quot;plugins&quot; ubicate in le classificator de installation de OmegaT, i. e. le classificator que contine OmegaT.jar. In prime loco crea le classificator &quot;plugins&quot;, si illo jam non existe.</para>
+
+    <para>Isto adde un nove sub-menu<guisubmenu> Instrumentos &gt; </guisubmenu><guisubmenu>Scripting</guisubmenu>. Sub le sub-menu <guisubmenu>Scripting</guisubmenu>, il ha cinque postos disponibile pro le scriptes. Cliccar sur <guisubmenu>Scripting</guisubmenu> pro displicar the fenestra de dialogo de Scripting:<screenshot> <screeninfo>Fenestra de dialogo Scripting</screeninfo> <mediaobject> <imageobject> <imagedata fileref="images/ScriptingDialog.png"/> </imageobject> </mediaobject> </screenshot></para>
+
+    <para>Le Fenestra de dialogo Scripting te permitte de cargar un  script existente in le area texto e lo exequer erga le projecto aperte currente. Pro accostumar le characteristica script, face le sequente:</para>
+
+    <itemizedlist>
+      <listitem>
+        <para>Carga un script in le editor cliccante sur su nomine in le lista sur le quadro sinistre.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Clicca con le dextre sur un button de &quot;&lt;1&gt;&quot; a &quot;&lt;5&gt;&quot; in le quadro basse e selige &quot;Adde&quot;. In le exemplo super, duo scriptes (position 1 e 2) esseva jam addite.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Quando tu clicca sur le numero, le script seligite essera exequite. Tu pote lancear le macros seligite ab le menu principal o con lor entratas in le menu  <guisubmenu>Instrumentos </guisubmenu>o pressante<keycap> Ctrl+Alt+F#</keycap> (con # de 1 a 5).</para>
+      </listitem>
+    </itemizedlist>
+
+    <para>Le sequente linguas de script esseva implementate:</para>
+
+    <para><itemizedlist>
+        <listitem>
+          <para><emphasis role="bold">NetRexx</emphasis> (http://www.netrexx.org/): illo supporta un syntaxe classic REXX, con nulle parolas clave reservate, secundo con considerabile additiones pro supportar programmation orientate al objecto in un modo compatibile con le modello de objecto de Java. Omne existente librerias de classe Java pote esser usate sin alteration e sin special preparation; al mesme tempore, un programmator Java pote optar pro usar programmas fonte in syntaxe Java, solmente le classes Rexx ex le pacchetto runtime, pro un tractamento del fila de character meliorate.</para>
+        </listitem>
+      </itemizedlist><itemizedlist>
+        <listitem>
+          <para><emphasis role="bold">XSLT</emphasis> (Extensible Stylesheet Language Transformations): es un lingua declarative basate sur XML, utilisate pro le transformation del documentos XML. Le documento original non es cambiate; plus tosto, un documento nove es create basate super le contento de uno existente. Le nove documento pote esser convertite (output) per le processor in syntaxe standard XML o in un altere formato, assi como le HTML o le texto plan. XSLT es maxime saepe usate pro converter datos inter differente XML schemas o pro converter datos XML in paginas TTT o documentos PDF.</para>
+        </listitem>
+      </itemizedlist><itemizedlist>
+        <listitem>
+          <para><emphasis role="bold">Groovy</emphasis> (http://groovy.codehaus.org): es un lingua dynamic pro le machina virtual Java. Illo es basate sur le punctos forte de  Java ma ha additional characteristicas potente inspirate de linguas como Python, Ruby e Smalltalk.</para>
+        </listitem>
+      </itemizedlist><itemizedlist>
+        <listitem>
+          <para><emphasis role="bold">JavaScript</emphasis> (alicun vices abbreviate JS, non confunder con Java): es un lingua de scripting, basate sur prototypo,  que es dynamic, debilemente typate, e ha le functiones de prima classe. Illo es un lingua  multiparadigma, que supporta stilos de programmation  orientate al objecto, imperative, e functional. Pois que illo es le lingua de un software ultra popular como Firefox, illo es un instrumento de programmation familiar e ideal in le dominio del open-source.</para>
+        </listitem>
+      </itemizedlist>Omne le linguas ha accesso al modello a objectos OmegaT, con le projecto como le objecto culmine. Le sequente retalio de codice in groovy per exemplo scande a transverso de omne le segmentos in omne le files in le projecto currente e, si le traduction existe, stampa le  fonte e le traduction del segmento:</para>
+
+    <programlisting>    files = project.projectFiles;
+    for (i in 0 ..&lt; files.size())
+    {
+        for (j in 0 ..&lt; files[i].entries.size())
+        {
+            currSegment = files[i].entries[j];
+            if (project.getTranslationInfo(currSegment))
+            {
+                source = currSegment.getSrcText();
+                target = project.getTranslationInfo(currSegment).translation;
+                console.println(source + &quot; &gt;&gt;&gt;&gt; &quot; + target);
+            }     
+        }
+    }</programlisting>
+  </section>
+</appendix>

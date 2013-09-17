@@ -8,67 +8,57 @@
         <primary>Projecto</primary> <secondary> Producer /aperir nove</secondary>
       </indexterm></title>
 
-    <para><remark>Nota: </remark> sur un Apple Mac, tu usara le clave <keycap>Cmd </keycap> o <keycap> Apple </keycap> in vice del clave <keycap>Ctrl </keycap></para>
+    <para><remark>Nota: </remark> sur un Apple Mac, tu usara le clave <keycap>Command</keycap> in vice del clave <keycap>Control</keycap></para>
 
-    <para>Pro comenciar a usar OmegaT, in prime loco crea un projecto que detenera omne tu archivos, illo es tu archivos fonte, le memorias de traduction, le glossarios, e eventualmente tu archivo rendite. In le menu <guimenu>Projecto</guimenu>, selige <menuchoice> <guimenuitem>Nove... </guimenuitem> </menuchoice><indexterm class="singular">
-        <primary>Menu projecto </primary> <secondary>Nove...</secondary>
-      </indexterm> e scribe un nomine pro tu projecto. Recorda ubi tu es creante le projecto, quia tu plus tarde habera necessitate de retornar illac.</para>
+      <indexterm class="singular">
+        <primary>Menu projecto </primary> <secondary>Nove ...</secondary>
+      </indexterm>
 
-    <para>Postquam tu ha denominate tu projecto, se displicara le dialogo 'Crea nove projecto &quot;. A le summitate de iste dialogo, selectiona le lingua de tu file fontal e le lingua pro tu file rendite, e clicca <guibutton>OK </guibutton> pro continuar.</para>
+    <para>Pro comenciar a usar OmegaT, in prime loco crea un projecto que detenera omne tu archivos, illo es tu archivos fonte, memorias de traduction, glossarios, e eventualmente tu archivo rendite. In le menu <guimenu>Projecto</guimenu>, selige  <menuchoice><guimenuitem>Nove ... </guimenuitem></menuchoice>  e scribe un nomine pro tu projecto. Recorda ubi tu es creante le projecto, quia tu plus tarde habera necessitate de retornar illac.</para>
 
-    <para><application>Si tu essera interessate re altere preparationes de iste dialogo, tu pote revenir a illo in qualcunque tempore juxta instante <keycap>Ctrl+E</keycap>.</application></para>
+    <para>Postquam tu ha denominate tu projecto, se displicara le fenestra de dialogo <guilabel>Crea un Nove Projecto</guilabel>. A le summitate de iste dialogo, selige le lingua de tu file original e le lingua pro tu file rendite, e clicca <guibutton>OK</guibutton> pro continuar.</para>
 
-    <para>Deinde, se displica le dialogo 'archivos del projecto'. Clicca le Importa archivos fonte... pro seliger tu archivos fonte. Tunc OmegaT copiara le archivos seligite in le sub plica <filename>/source/</filename> de tu nove projecto. Postquam le file primari es cargate in le quadro del Editor, tu pote clauder le fenestra de dialogo 'Files del projecto...' .</para>
+    <para>Si tu essera interessate re altere preparationes de iste dialogo, tu pote revenir a illo in qualcunque tempore juxta instante <keycap>Ctrl+E</keycap>.</para>
+
+    <para>Deinde, se displica le dialogo <guilabel>Files del Projecto</guilabel>. Cliccar sur <guibutton>Copia Files al plica origine...</guibutton> pro seliger tu archivos original. Tunc OmegaT copiara le files seligite in le sub plica <filename>/source/</filename> de tu nove projecto. Postquam le files original ha cargate in le quadro del <guilabel>Editor</guilabel>, tu pote clauder le fenestra de dialogo <guilabel>Files del  Projecto</guilabel>.</para>
   </section>
 
   <section id="translate.the.segments.one.by.one">
     <title>Render le archivo</title>
 
-    <para>OmegaT proponera a te un segmento al vice, pro lo render. Postquam tu ha rendite cata segmento, que pressa <keycap>Ctrl+U </keycap> pro mover al segmento sequente nondum rendite. Quandocunque tu vole vider lo que essera le aspecto de tu traductiones, in su formato final, que tu pressa <keycap>Ctrl+D</keycap> pro generar le documentos rendite, que essera create in le sub plica  /target/ del classificator de tu projecto. Durante le traduction, usa le menus  <guimenu>Modifica</guimenu>  e <guimenu>Vade</guimenu> pro complir varie e utile functiones.</para>
+    <para>OmegaT proponera a te un segmento a un vice, pro render lo. Postquam tu ha rendite cata segmento, pressa <keycap>Ctrl+U </keycap> pro mover al segmento sequente nondum rendite (o <keycap>Ctrl+Shift+U </keycap>pro mover al sequente segmento rendite). Quandocunque tu vole vider lo que essera le aspecto de tu traductiones, in su formato final, que tu pressa <keycap>Ctrl+D</keycap> pro generar le documentos rendite, que essera create in le sub-plica  <filename>/target/</filename> de tu projecto. Durante le traduction, usa le menus <guimenu>Modifica</guimenu> e <guimenu>Vade</guimenu> pro complir functiones varie e utile.</para>
   </section>
 
   <section>
-    <title>Que tu valida tu etiquettas</title>
+    <title>Validar le tags</title>
 
-    <para>Si tu file primari es un file formatate, per exemplo: Microsoft Word, LibreOffice Writer o HTML, OmegaT convertera le formato in tags que ambira le texto que tu va render. Frequentemente le documentos habera alsi tags que ha nihil a facer con le formatos, ma que son alsi importante. In le file primari (e in le file rendite) Un phrase primari poterea parer como.</para>
-
-    <para/>
-
-    <mediaobject>
+    <para>Si tu files primari es files formate, per exemplo: Microsoft Word, LibreOffice Writer o HTML, OmegaT convertera le formato in tags que ambira le texto que tu va render. Frequentemente le documentos habera alicun tags que ha nihil a facer con le formatos, ma que son alsi importante. In le file primari (e in le file rendite). Un phrase primari poterea parer como:<mediaobject>
       <imageobject role="html">
-        <imagedata align="left" fileref="images/InstantGuide_1.png"/>
+        <imagedata align="justify" fileref="images/InstantGuide_1.png"/>
       </imageobject>
-
       <imageobject role="fo">
-        <imagedata align="left" fileref="images/InstantGuide_1.png" width="40%"/>
+        <imagedata align="justify" fileref="images/InstantGuide_1.png" width="40%"/>
       </imageobject>
     </mediaobject>
+    </para>
 
-    <para/>
-
-    <para>OmegaT, comocunque, presentara iste phrase in le sequente faction:</para>
-
-    <para><literal/></para>
-
-    <mediaobject>
+    <para>OmegaT, comocunque, presentara iste phrase in le sequente faction:<mediaobject>
       <imageobject role="html">
-        <imagedata align="left" fileref="images/InstantGuide_2.png"/>
+        <imagedata align="justify" fileref="images/InstantGuide_2.png"/>
       </imageobject>
-
       <imageobject role="fo">
-        <imagedata align="left" fileref="images/InstantGuide_2.png" width="45%"/>
+        <imagedata align="justify" fileref="images/InstantGuide_2.png" width="45%"/>
       </imageobject>
     </mediaobject>
-
-    <para/>
-
-    <para>Le tags in OmegaT es gris, assi illos es facile a recognoscer. Illos son sin protection, assi tu pote deler illos, inscriber illos a mano o mover illos circum le phrase final. Comocunque, si tu face errores quando tu inscribe le tags de formato, tu file rendite pote faller a aperir. Eo, que tu pressa <keycap>Ctrl+T</keycap> ante que tu genera tu file rendite, pro controlar que omne tu etiquettas es correcte.</para>
+    </para>
+    
+    <para>Le tags in OmegaT es gris, assi illos es facile a recognoscer. Illos son sin protection, assi tu pote deler illos, inscriber illos a mano o mover illos circum le phrase final. Comocunque, si tu face errores quando tu inscribe le tags de formato, tu  file rendite pote faller a aperir. Eo, que tu pressa <keycap>Ctrl+T</keycap> ante que tu genera tu file rendite, pro validar que tu tags es correcte.</para>
   </section>
 
   <section>
-    <title>Genera le file rendite</title>
+    <title>Generar le file rendite</title>
 
-    <para>Un vice que tu es certe que non ha nulle errores de etiquettas in tu traduction, que tu pressa  <keycap>Ctrl+D</keycap> pro generar tu files final, le qual essera create in le sub-plica <filename>/target/</filename> del classificator de tu projecto. </para>
+    <para>Un vice que tu es certe que non ha nulle errores de tags in tu traduction, que tu pressa  <keycap>Ctrl+D</keycap> pro generar tu file final, le qual essera create in le subcamisa <filename>/target/</filename> del classificator de tu projecto. </para>
   </section>
 
   <section>
@@ -76,7 +66,7 @@
 
     <itemizedlist>
       <listitem>
-        <para>Si un file non carga in le quadro 'Editor', alora es possibile que tu file primari ha un formato que non functiona in OmegaT. Que tu guarda le capitulo 7: in le 'Manual del usator',  'Filtros de file' pro un lista del formatos que OmegaT pote tractar.</para>
+        <para>Si un file non carga in le quadro <guilabel>Editor'</guilabel>, alora es possibile que tu  file primari ha un formato que non functiona in OmegaT. See <link linkend="chapter.file.filters">File Filters</link> for a list of file formats that OmegaT can handle.</para>
       </listitem>
     </itemizedlist>
 
@@ -88,25 +78,25 @@
 
     <itemizedlist>
       <listitem>
-        <para>Per recordar se del preparationes initial del projecto, aperi le dialogo 'Preparationes del projecto' pressante  <keycap>Ctrl+E</keycap> . Per vider le lista del files in le projecto, aperi le dialogo 'Files del projecto' pressante  <keycap>Ctrl+L</keycap> .</para>
+        <para>Per recordar se del preparationes initial del projecto, aperi le dialogo 'Preparationes del projecto' pressante  <keycap>Ctrl+E</keycap> . Pro vider un lista de files in le projecto, aperi le fenestra de dialogo <guilabel>Files del Projecto</guilabel> pressante <keycap>Ctrl+L</keycap>.</para>
       </listitem>
     </itemizedlist>
 
     <itemizedlist>
       <listitem>
-        <para>Al fin de tu traduction, OmegaT exporta tres memorias de traduction appellate &quot;level1&quot;, &quot;level2&quot; e &quot;omegat&quot; in tu classificator del projecto. Le memorias &quot;level1&quot; e  &quot;level2&quot;  pote esser usate in commun con le usuarios de altere programmas de traduction. Le memoria nominate &quot;omegat&quot;  pote esser usate in OmegaT ipse, in projectos futur que tu creara. Si tu loca unes files de memoria de traduction in le sub-plica /tm/ del classificator de tu projecto, OmegaT los querera automaticamente pro similabile segmentos, nominate &quot;concordantias partial&quot;. .</para>
+        <para>Al fin de tu traduction, OmegaT exporta tres memorias de traduction appellate <filename>level1</filename>, <filename>level2</filename>e <filename>omegat</filename> in tu plica del projecto Le memorias<filename>level1</filename> e <filename>level2</filename>pote esser usate in commun con le usatores de altere programmas de traduction. Le memoria nominate <filename>omegat</filename> pote esser usate in OmegaT ipse, in projectos futur que tu creara. Si tu loca unes files de memoria de traduction in le sub plica <filename>/tm/</filename>de un projecto, OmegaT querera los automaticamente pro similabile segmentos, nominate &quot;concordantias partial&quot;.</para>
       </listitem>
     </itemizedlist>
 
     <itemizedlist>
       <listitem>
-        <para>Tu pote crear un glossario pressante  <guibutton>Ctrl+Shift+G</guibutton> , o copiar glossarios existente in le sub-plica <filename>/glossario/</filename> del classificator de tu projecto, e OmegaT querera automaticamente le parolas in illos.</para>
+        <para>Tu pote adder un nove termino al glossario pressante <keycap>Ctrl+Shift+G</keycap>, o copiar glossarios existente in le sub plica <filename>/glossario/</filename> de tu projecto, e OmegaT querera automaticamente le parolas in illos.</para>
       </listitem>
     </itemizedlist>
 
     <itemizedlist>
       <listitem>
-        <para>Es frequentemente utile recercar parolas e phrases in le texto primari o in tu traduction, assi que tu pressa <keycap>Ctrl+F</keycap> pro le dialogo &quot;Cerca&quot; (Search) in qualcunque tempore.</para>
+        <para>Es frequentemente utile recercar parolas e phrases in le texto primari o in tu traduction, assi que tu pressa <keycap>Ctrl+F</keycap> pro le fenestra de dialogo <guilabel>Cerca Texto</guilabel>in qualcunque tempore.</para>
       </listitem>
     </itemizedlist>
 

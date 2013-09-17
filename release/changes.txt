@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 3.0.5
 ----------------------------------------------------------------------
-   4 Enhancements
+   5 Enhancements
    2 Bug fixes
    0 Localisation update
 ----------------------------------------------------------------------
@@ -12,6 +12,9 @@
 
   - Add auto-text view to auto-completer 
   https://sourceforge.net/p/omegat/feature-requests/861/
+
+  - Optional source term in auto-completer 
+  https://sourceforge.net/p/omegat/feature-requests/887/
 
  Other enhancements:
 

@@ -57,7 +57,8 @@ public class GlossaryAutoCompleterView extends AutoCompleterListView {
                     && Character.isUpperCase(wordChunk.charAt(0)) 
                 : false;
         
-        for (GlossaryEntry entry : Core.getGlossary().getDisplayedEntries()) {
+        List<GlossaryEntry> entries = Core.getGlossary().getDisplayedEntries();
+        for (GlossaryEntry entry : entries) {
             for (String s : entry.getLocTerms(true)) {
                 if (s.toLowerCase().startsWith(wordChunk.toLowerCase())) {
                    if (capitalize) {
@@ -70,7 +71,7 @@ public class GlossaryAutoCompleterView extends AutoCompleterListView {
         
         if (!Core.getProject().getProjectProperties().getTargetLanguage().isSpaceDelimited()
                 && result.size() == 0) {
-            for (GlossaryEntry entry : Core.getGlossary().getDisplayedEntries()) {
+            for (GlossaryEntry entry : entries) {
                 for (String s : entry.getLocTerms(true)) {
                     result.add(new AutoCompleterItem(s, new String[] { entry.getSrcText() }));
                 }
@@ -78,7 +79,7 @@ public class GlossaryAutoCompleterView extends AutoCompleterListView {
             completer.adjustInsertionPoint(wordChunk.length());
         }
         
-        Collections.sort(result, new GlossaryComparator());
+        Collections.sort(result, new GlossaryComparator(entries));
         
         return result;
     }
@@ -96,30 +97,63 @@ public class GlossaryAutoCompleterView extends AutoCompleterListView {
         }
     }
 
-    class GlossaryComparator implements Comparator<AutoCompleterItem> {
+    static class GlossaryComparator implements Comparator<AutoCompleterItem> {
         
         private boolean bySource = Preferences.isPreference(Preferences.AC_GLOSSARY_SORT_BY_SOURCE);
         private boolean byLength = Preferences.isPreference(Preferences.AC_GLOSSARY_SORT_BY_LENGTH);
         private boolean alphabetically = Preferences.isPreference(Preferences.AC_GLOSSARY_SORT_ALPHABETICALLY);
         
+        private List<GlossaryEntry> entries;
+        
+        public GlossaryComparator(List<GlossaryEntry> entries) {
+            this.entries = entries;
+        }
+        
         @Override
         public int compare(AutoCompleterItem o1, AutoCompleterItem o2) {
+            
+            // Sort alphabetically by source term
             if (bySource) {
                 int result = o1.extras[0].compareTo(o2.extras[0]);
-                if (result != 0)
+                if (result != 0) {
                     return result;
-            }
-            
-            if (byLength) {
-                if (o1.payload.length() < o2.payload.length()) {
-                    return 1;
-                } else if (o1.payload.length() > o2.payload.length()) {
-                    return -1;
                 }
             }
-            if (alphabetically)
-                return o1.payload.compareTo(o2.payload);
             
+            // Sorting for same source with multiple targets
+            if (o1.extras[0].equals(o2.extras[0])) {
+                if (byLength) {
+                    if (o1.payload.length() < o2.payload.length()) {
+                        return 1;
+                    } else if (o1.payload.length() > o2.payload.length()) {
+                        return -1;
+                    }
+                }
+                if (alphabetically) {
+                    return o1.payload.compareTo(o2.payload);
+                }
+            }
+            
+            // If we make it here, we should ensure the sorting is the same
+            // as in the original list of entries.
+            int i1 = -1;
+            int i2 = -1;
+            for (int i = 0; i < entries.size(); i++) {
+                if (entries.get(i).getSrcText().equals(o1.extras[0])) {
+                    i1 = i;
+                }
+                if (entries.get(i).getSrcText().equals(o2.extras[0])) {
+                    i2 = i;
+                }
+                if (i1 != -1 && i2 != -1) {
+                    break;
+                }
+            }
+            if (i1 < i2) {
+                return -1;
+            } else if (i1 > i2) {
+                return 1;
+            }
             return 0;
         }
         

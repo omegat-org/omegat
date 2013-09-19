@@ -46,7 +46,7 @@ rules = [
             targetTrailingWhiteSpaces: { s, t -> t =~ /\s+$/ },
             // Segment verification
             doubledWords: { s, t -> t =~ /(?i)(\b\w+)\s+\1\b/ },
-            doubledBlanks: { s, t -> t =~ /[\s ]{2}/ },
+            doubledBlanks: { s, t -> t =~ /[\s\u00A0]{2}/ },
            // Length
            targetShorter: { s, t -> (t.length() / s.length() * 100) < minCharLengthAbove },
            targetLonger: { s, t -> (t.length() / s.length() * 100) > maxCharLengthAbove }

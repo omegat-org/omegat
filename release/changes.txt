@@ -24,6 +24,9 @@ different options: MyMemory (machine) and MyMemory (human)
   - XLIFF filter: the <trans-unit> resname attribute is shown in the
 comment pane
 
+  - The QA script (check_rules.groovy) now checks for double blanks,
+which can contain either normal spaces or non-breaking spaces
+
   Bug fixes: 
 
   - The search window search field did not always had focus on window

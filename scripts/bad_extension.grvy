@@ -1,1 +1,6 @@
+/*
+* Because the extension of this script is "grvy" instead of "groovy", it will be executed
+* by the Javascript engine instead of the Groovy one.
+*/
+
 console.println("Hello!");

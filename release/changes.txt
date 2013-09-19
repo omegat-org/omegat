@@ -29,6 +29,9 @@ which can contain either normal spaces or non-breaking spaces
 
   Bug fixes: 
 
+  - bad_extension.grvy is not so bad
+  https://sourceforge.net/p/omegat/bugs/596/
+
   - The search window search field did not always had focus on window
 opening on a Mac
 

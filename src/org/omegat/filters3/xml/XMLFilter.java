@@ -142,6 +142,7 @@ public abstract class XMLFilter extends AbstractFilter implements Translator {
     /**
      * @return The target language of the project
      */
+    @Override
     public Language getTargetLanguage() {
         return targetLanguage;
     }
@@ -181,6 +182,7 @@ public abstract class XMLFilter extends AbstractFilter implements Translator {
      * 
      * @return <code>false</code>
      */
+    @Override
     public boolean isSourceEncodingVariable() {
         return false;
     }
@@ -190,6 +192,7 @@ public abstract class XMLFilter extends AbstractFilter implements Translator {
      * 
      * @return <code>true</code>
      */
+    @Override
     public boolean isTargetEncodingVariable() {
         return true;
     }
@@ -197,6 +200,7 @@ public abstract class XMLFilter extends AbstractFilter implements Translator {
     /**
      * The method the Handler would call to pass translatable content to OmegaT core and receive translation.
      */
+    @Override
     public String translate(String entry, Shortcuts shortcutDetails) {
         if (entryParseCallback != null) {
             entryParseCallback.addEntry(null, entry, null, false, null, null, this, shortcutDetails);
@@ -269,15 +273,19 @@ public abstract class XMLFilter extends AbstractFilter implements Translator {
         }
     }
     
+    @Override
     public void tagStart(String path, Attributes atts) {
     }
     
+    @Override
     public void tagEnd(String path) {
     }
 
+    @Override
     public void comment(String comment) {
     }
 
+    @Override
     public void text(String text) {
     }
 }

@@ -53,8 +53,6 @@ import org.omegat.util.gui.TextUtil;
  * @author Thomas Cordonnier
  */
 public class CalcMatchStatistics extends LongProcessThread {
-    protected static final boolean EXCLUDE_PROTECTED_PARTS = true;
-
     private String[] header = new String[] { "", OStrings.getString("CT_STATS_Segments"),
             OStrings.getString("CT_STATS_Words"), OStrings.getString("CT_STATS_Characters_NOSP"),
             OStrings.getString("CT_STATS_Characters") };
@@ -144,14 +142,11 @@ public class CalcMatchStatistics extends LongProcessThread {
          */
         FindMatches finder = new FindMatches(Core.getProject().getSourceTokenizer(), OConsts.MAX_NEAR_STRINGS, true, false);
         for (SourceTextEntry ste : untranslatedEntries) {
-            String src = ste.getSrcText();
-            if (EXCLUDE_PROTECTED_PARTS) {
-                src = StaticUtils.stripProtectedParts(src, ste);
-            }
+            String srcNoXmlTags = StaticUtils.stripXmlTags(ste.getSrcText());
 
             List<NearString> nears;
             try {
-                nears = finder.search(Core.getProject(), src, true, false, new IStopped() {
+                nears = finder.search(Core.getProject(), srcNoXmlTags, true, false, new IStopped() {
                     public boolean isStopped() {
                         return isStopped;
                     }
@@ -160,7 +155,7 @@ public class CalcMatchStatistics extends LongProcessThread {
                 return;
             }
 
-            final Token[] strTokensStem = finder.tokenizeAll(src);
+            final Token[] strTokensStem = finder.tokenizeAll(ste.getSrcText());
             int maxSimilarity = 0;
             CACHE: for (NearString near : nears) {
                 final Token[] candTokens = finder.tokenizeAll(near.source);

@@ -80,6 +80,7 @@ public class FindMatches {
 
     private static final int PENALTY_FOR_FUZZY = 20;
     private static final int PENALTY_FOR_REMOVED = 5;
+    private static final int SUBSEGMENT_MATCH_THRESHOLD = 85;
 
     private static final boolean ALLOW_PARTIALY_MATCH = true;
 
@@ -239,12 +240,13 @@ public class FindMatches {
                     // find match for separate segment
                     List<NearString> segmentMatch = separateSegmentMatcher.search(project, onesrc,
                             requiresTranslation, false, stop);
-                    if (segmentMatch.isEmpty()) {
-                        fsrc.add("");
-                        ftrans.add("");
-                    } else {
+                    if (!segmentMatch.isEmpty()
+                            && segmentMatch.get(0).scores[0].score >= SUBSEGMENT_MATCH_THRESHOLD) {
                         fsrc.add(segmentMatch.get(0).source);
                         ftrans.add(segmentMatch.get(0).translation);
+                    } else {
+                        fsrc.add("");
+                        ftrans.add("");
                     }
                 }
                 // glue found sources

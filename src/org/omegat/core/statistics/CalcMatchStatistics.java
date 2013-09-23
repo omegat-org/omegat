@@ -49,6 +49,15 @@ import org.omegat.util.gui.TextUtil;
 /**
  * Thread for calculate match statistics.
  * 
+ * Calculation requires two different tags stripping: one for calculate match percentage, and second for
+ * calculate number of words and chars.
+ * 
+ * Number of words/chars calculation requires to just strip all tags, protected parts, placeholders.
+ * 
+ * Calculation of match percentage requires 2 steps for tags processing: 1) remove only simple XML tags for
+ * find 5 nearest matches(but not protected parts' text: from "<m0>IBM</m0>" only tags should be removed, but
+ * not "IBM" ), then 2) compute better percentage without any tags removing.
+ * 
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Thomas Cordonnier
  */
@@ -95,6 +104,7 @@ public class CalcMatchStatistics extends LongProcessThread {
                 // segment has translation - should be calculated as
                 // "Exact matched"
                 result[1].segments++;
+                /* Number of words and chars calculated without all tags and protected parts. */
                 result[1].words += Statistics.numberOfWords(srcNoTags);
                 result[1].charsWithoutSpaces += Statistics.numberOfCharactersWithoutSpaces(srcNoTags);
                 result[1].charsWithSpaces += Statistics.numberOfCharactersWithSpaces(srcNoTags);
@@ -103,6 +113,7 @@ public class CalcMatchStatistics extends LongProcessThread {
             else if (!isFirst) {
                 // already processed - repetition
                 result[0].segments++;
+                /* Number of words and chars calculated without all tags and protected parts. */
                 result[0].words += Statistics.numberOfWords(srcNoTags);
                 result[0].charsWithoutSpaces += Statistics.numberOfCharactersWithoutSpaces(srcNoTags);
                 result[0].charsWithSpaces += Statistics.numberOfCharactersWithSpaces(srcNoTags);
@@ -171,6 +182,7 @@ public class CalcMatchStatistics extends LongProcessThread {
             String srcNoTags = StaticUtils.stripAllTagsFromSource(ste);
             int row = getRowByPercent(maxSimilarity);
             result[row].segments++;
+            /* Number of words and chars calculated without all tags and protected parts. */
             result[row].words += Statistics.numberOfWords(srcNoTags);
             result[row].charsWithoutSpaces += Statistics.numberOfCharactersWithoutSpaces(srcNoTags);
             result[row].charsWithSpaces += Statistics.numberOfCharactersWithSpaces(srcNoTags);

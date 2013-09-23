@@ -50,6 +50,14 @@ import org.omegat.util.gui.TextUtil;
 /**
  * Thread for calculate standard statistics.
  * 
+ * Calculation requires two different tags stripping: one for calculate unique and remaining, and second for
+ * calculate number of words and chars.
+ * 
+ * Number of words/chars calculation requires to just strip all tags, protected parts, placeholders.
+ * 
+ * Calculation of unique and remaining also requires to just strip all tags, protected parts, placeholders for
+ * standard calculation.
+ * 
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Arno Peters
  */
@@ -138,6 +146,7 @@ public class CalcStandardStatistics extends LongProcessThread {
             }
         }
         for (String noTags : uniqueSegment.keySet()) {
+            /* Number of words and chars calculated without all tags and protected parts. */
             int words = Statistics.numberOfWords(noTags);
             int charsNoSpaces = Statistics.numberOfCharactersWithoutSpaces(noTags);
             int charsWithSpaces = Statistics.numberOfCharactersWithSpaces(noTags);
@@ -165,6 +174,7 @@ public class CalcStandardStatistics extends LongProcessThread {
             for (SourceTextEntry ste : file.entries) {
                 String srcNoTags = StaticUtils.stripAllTagsFromSource(ste);
 
+                /* Number of words and chars calculated without all tags and protected parts. */
                 int words = Statistics.numberOfWords(srcNoTags);
                 int charsNoSpaces = Statistics.numberOfCharactersWithoutSpaces(srcNoTags);
                 int chars = Statistics.numberOfCharactersWithSpaces(srcNoTags);

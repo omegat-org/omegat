@@ -90,26 +90,24 @@ public class CalcMatchStatistics extends LongProcessThread {
         for (int i = 0; i < allEntries.size(); i++) {
             SourceTextEntry ste = allEntries.get(i);
             String src = ste.getSrcText();
-            if (EXCLUDE_PROTECTED_PARTS) {
-                src = StaticUtils.stripProtectedParts(src, ste);
-            }
 
+            String srcNoTags = StaticUtils.stripAllTagsFromSource(ste);
             boolean isFirst = alreadyProcessed.add(src);
             if (Core.getProject().getTranslationInfo(ste).isTranslated()) {
                 // segment has translation - should be calculated as
                 // "Exact matched"
                 result[1].segments++;
-                result[1].words += Statistics.numberOfWords(src);
-                result[1].charsWithoutSpaces += Statistics.numberOfCharactersWithoutSpaces(src);
-                result[1].charsWithSpaces += Statistics.numberOfCharactersWithSpaces(src);
+                result[1].words += Statistics.numberOfWords(srcNoTags);
+                result[1].charsWithoutSpaces += Statistics.numberOfCharactersWithoutSpaces(srcNoTags);
+                result[1].charsWithSpaces += Statistics.numberOfCharactersWithSpaces(srcNoTags);
                 treated ++;
             }
             else if (!isFirst) {
                 // already processed - repetition
                 result[0].segments++;
-                result[0].words += Statistics.numberOfWords(ste.getSrcText());
-                result[0].charsWithoutSpaces += Statistics.numberOfCharactersWithoutSpaces(src);
-                result[0].charsWithSpaces += Statistics.numberOfCharactersWithSpaces(src);
+                result[0].words += Statistics.numberOfWords(srcNoTags);
+                result[0].charsWithoutSpaces += Statistics.numberOfCharactersWithoutSpaces(srcNoTags);
+                result[0].charsWithSpaces += Statistics.numberOfCharactersWithSpaces(srcNoTags);
                 treated ++;
             }
             else {
@@ -175,12 +173,12 @@ public class CalcMatchStatistics extends LongProcessThread {
                 }
             }
 
-            String srcNumber = StaticUtils.stripAllTags(src, ste);
+            String srcNoTags = StaticUtils.stripAllTagsFromSource(ste);
             int row = getRowByPercent(maxSimilarity);
             result[row].segments++;
-            result[row].words += Statistics.numberOfWords(srcNumber);
-            result[row].charsWithoutSpaces += Statistics.numberOfCharactersWithoutSpaces(srcNumber);
-            result[row].charsWithSpaces += Statistics.numberOfCharactersWithSpaces(srcNumber);
+            result[row].words += Statistics.numberOfWords(srcNoTags);
+            result[row].charsWithoutSpaces += Statistics.numberOfCharactersWithoutSpaces(srcNoTags);
+            result[row].charsWithSpaces += Statistics.numberOfCharactersWithSpaces(srcNoTags);
             treated++;
 
             if (isStopped) {

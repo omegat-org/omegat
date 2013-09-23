@@ -125,8 +125,7 @@ public class CalcStandardStatistics extends LongProcessThread {
         Map<String, Integer> uniqueSegment = new HashMap<String, Integer>();
         Set<String> translated = new HashSet<String>();
         for (SourceTextEntry ste : project.getAllEntries()) {
-            String src = ste.getSrcText();
-            src = StaticUtils.stripAllTags(src, ste);
+            String src = StaticUtils.stripAllTagsFromSource(ste);
             Integer count = uniqueSegment.get(src);
             if (count == null) {
                 uniqueSegment.put(src, 1);
@@ -164,12 +163,11 @@ public class CalcStandardStatistics extends LongProcessThread {
             numbers.filename = file.filePath;
             counts.add(numbers);
             for (SourceTextEntry ste : file.entries) {
-                String src = ste.getSrcText();
-                src = StaticUtils.stripAllTags(src, ste);
+                String srcNoTags = StaticUtils.stripAllTagsFromSource(ste);
 
-                int words = Statistics.numberOfWords(src);
-                int charsNoSpaces = Statistics.numberOfCharactersWithoutSpaces(src);
-                int chars = Statistics.numberOfCharactersWithSpaces(src);
+                int words = Statistics.numberOfWords(srcNoTags);
+                int charsNoSpaces = Statistics.numberOfCharactersWithoutSpaces(srcNoTags);
+                int chars = Statistics.numberOfCharactersWithSpaces(srcNoTags);
 
                 // add to total
                 total.segments++;
@@ -192,10 +190,10 @@ public class CalcStandardStatistics extends LongProcessThread {
                 numbers.total.charsWithoutSpaces += charsNoSpaces;
                 numbers.total.charsWithSpaces += chars;
 
-                Integer uniqueCount = uniqueSegment.get(src);
-                Boolean firstSeen = firstSeenUniqueSegment.get(src);
+                Integer uniqueCount = uniqueSegment.get(srcNoTags);
+                Boolean firstSeen = firstSeenUniqueSegment.get(srcNoTags);
                 if (firstSeen == null) {
-                    firstSeenUniqueSegment.put(src, false);
+                    firstSeenUniqueSegment.put(srcNoTags, false);
                     numbers.unique.segments++;
                     numbers.unique.words += words;
                     numbers.unique.charsWithoutSpaces += charsNoSpaces;

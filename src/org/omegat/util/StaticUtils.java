@@ -712,18 +712,16 @@ public class StaticUtils {
     }
 
     /**
-     * Strips all tags.
+     * Strips all tags from source string.
      * 
-     * @param str
-     *            source string
      * @param ste
-     *            info about protected parts
+     *            source entry
      * @param changeToReplacement
      *            true if should be replaced by special char, false if should be
      *            just removed
      */
-    public static String stripAllTags(String str, SourceTextEntry ste) {
-        String s = str;
+    public static String stripAllTagsFromSource(SourceTextEntry ste) {
+        String s = ste.getSrcText();
         for (String tag : ste.getProtectedParts().getParts()) {
             s = s.replace(tag, TAG_REPLACEMENT + "");
         }

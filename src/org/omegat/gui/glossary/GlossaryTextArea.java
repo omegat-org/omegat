@@ -8,7 +8,7 @@
                2009-2010 Wildrich Fourie
                2010 Alex Buloichik
                2012 Jean-Christophe Helary
-               2013 Aaron Madlon-Kay
+               2013 Aaron Madlon-Kay, Alex Buloichik
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 

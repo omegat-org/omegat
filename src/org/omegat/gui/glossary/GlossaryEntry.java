@@ -4,7 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
-               2013 Aaron Madlon-Kay
+               2013 Aaron Madlon-Kay, Alex Buloichik
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -37,6 +37,7 @@ import org.omegat.util.StringUtil;
  * 
  * @author Keith Godfrey
  * @author Aaron Madlon-Kay
+ * @author Alex Buloichik
  */
 public class GlossaryEntry {
     public GlossaryEntry(String src, String[] loc, String[] com, boolean[] fromPriorityGlossary) {

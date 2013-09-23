@@ -47,7 +47,10 @@ import org.omegat.core.matching.FuzzyMatcher;
 import org.omegat.core.matching.ISimilarityCalculator;
 import org.omegat.core.matching.LevenshteinDistance;
 import org.omegat.core.matching.NearString;
+import org.omegat.core.segmentation.Rule;
+import org.omegat.core.segmentation.Segmenter;
 import org.omegat.tokenizer.ITokenizer;
+import org.omegat.util.Language;
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
 import org.omegat.util.PatternConsts;
@@ -78,6 +81,8 @@ public class FindMatches {
     private static final int PENALTY_FOR_FUZZY = 20;
     private static final int PENALTY_FOR_REMOVED = 5;
 
+    private static final boolean ALLOW_PARTIALY_MATCH = true;
+
     private final ISimilarityCalculator distance = new LevenshteinDistance();
 
     /**
@@ -105,9 +110,15 @@ public class FindMatches {
     /** Tokens for original string, includes numbers and tags. */
     private Token[] strTokensAll;
 
-    public FindMatches(ITokenizer sourceTokenizer, int maxCount) {
+    // This finder used for search separate segment matches
+    FindMatches separateSegmentMatcher;
+
+    public FindMatches(ITokenizer sourceTokenizer, int maxCount, boolean allowSeparateSegmentMatch) {
         tok = sourceTokenizer;
         this.maxCount = maxCount;
+        if (allowSeparateSegmentMatch) {
+            separateSegmentMatcher = new FindMatches(sourceTokenizer, 1, false);
+        }
     }
 
     public List<NearString> search(final IProject project, final String searchText,
@@ -199,6 +210,41 @@ public class FindMatches {
                 processEntry(ste.getKey(), ste.getSrcText(), ste.getSourceTranslation(),
                         NearString.MATCH_SOURCE.MEMORY, ste.isSourceTranslationFuzzy(), 0, ste.getKey().file,
                         "", 0, "", 0, null);
+            }
+        }
+
+        if (ALLOW_PARTIALY_MATCH && separateSegmentMatcher != null
+                && !project.getProjectProperties().isSentenceSegmentingEnabled()) {
+            // split paragraph even when segmentation disabled, then find matches for every segment
+            List<StringBuffer> spaces = new ArrayList<StringBuffer>();
+            List<Rule> brules = new ArrayList<Rule>();
+            Language sourceLang = project.getProjectProperties().getSourceLanguage();
+            Language targetLang = project.getProjectProperties().getTargetLanguage();
+            List<String> segments = Segmenter.segment(sourceLang, srcText, spaces, brules);
+            if (segments.size() > 1) {
+                List<String> fsrc = new ArrayList<String>(segments.size());
+                List<String> ftrans = new ArrayList<String>(segments.size());
+                // multiple segments
+                for (short i = 0; i < segments.size(); i++) {
+                    String onesrc = segments.get(i);
+
+                    // find match for separate segment
+                    List<NearString> segmentMatch = separateSegmentMatcher.search(project, onesrc,
+                            requiresTranslation, false, stop);
+                    if (segmentMatch.isEmpty()) {
+                        fsrc.add("");
+                        ftrans.add("");
+                    } else {
+                        fsrc.add(segmentMatch.get(0).source);
+                        ftrans.add(segmentMatch.get(0).translation);
+                    }
+                }
+                // glue found sources
+                String foundSrc = Segmenter.glue(sourceLang, sourceLang, fsrc, spaces, brules);
+                // glue found translations
+                String foundTrans = Segmenter.glue(sourceLang, targetLang, ftrans, spaces, brules);
+                processEntry(null, foundSrc, foundTrans, NearString.MATCH_SOURCE.TM, false, 0, "", "", 0, "",
+                        0, null);
             }
         }
 

@@ -120,6 +120,10 @@ public class TMXReader2 {
         dateFormatOut.setTimeZone(TimeZone.getTimeZone("UTC"));
     }
 
+    public boolean isParagraphSegtype() {
+        return isParagraphSegtype;
+    }
+
     /**
      * Read TMX file.
      */

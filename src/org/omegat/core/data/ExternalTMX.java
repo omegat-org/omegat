@@ -49,10 +49,7 @@ public class ExternalTMX {
 
     private final List<TMXEntry> entries;
 
-    public ExternalTMX(String name, List<TMXEntry> entries) {
-        this.name = name;
-        this.entries = entries;
-    }
+    private final boolean paragraphSegtype;
 
     public ExternalTMX(final ProjectProperties props, final File file, final boolean extTmxLevel2,
             final boolean useSlash) throws Exception {
@@ -103,8 +100,10 @@ public class ExternalTMX {
             }
         };
 
-        new TMXReader2().readTMX(file, props.getSourceLanguage(), props.getTargetLanguage(),
+        TMXReader2 reader = new TMXReader2();
+        reader.readTMX(file, props.getSourceLanguage(), props.getTargetLanguage(),
                 props.isSentenceSegmentingEnabled(), false, extTmxLevel2, useSlash, loader);
+        paragraphSegtype = reader.isParagraphSegtype();
     }
 
     public String getName() {

@@ -85,7 +85,7 @@ public class FindMatchesThread extends EntryInfoSearchThread<List<NearString>> {
         }
 
         try {
-            FindMatches finder = new FindMatches(project.getSourceTokenizer(), OConsts.MAX_NEAR_STRINGS);
+            FindMatches finder = new FindMatches(project.getSourceTokenizer(), OConsts.MAX_NEAR_STRINGS, true);
             List<NearString> result = finder.search(project, processedEntry.getSrcText(), true, true,
                     new IStopped() {
                         public boolean isStopped() {

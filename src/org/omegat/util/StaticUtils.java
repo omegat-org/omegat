@@ -712,6 +712,25 @@ public class StaticUtils {
     }
 
     /**
+     * Strips all tags.
+     * 
+     * @param str
+     *            source string
+     * @param ste
+     *            info about protected parts
+     * @param changeToReplacement
+     *            true if should be replaced by special char, false if should be
+     *            just removed
+     */
+    public static String stripAllTags(String str, SourceTextEntry ste) {
+        String s = str;
+        for (String tag : ste.getProtectedParts().getParts()) {
+            s = s.replace(tag, TAG_REPLACEMENT + "");
+        }
+        return s;
+    }
+
+    /**
      * Strips all XML tags (converts to plain text). Tags detected only by
      * pattern. Protected parts are not used.
      */

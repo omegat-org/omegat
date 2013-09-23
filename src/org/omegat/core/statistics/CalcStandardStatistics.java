@@ -54,8 +54,6 @@ import org.omegat.util.gui.TextUtil;
  * @author Arno Peters
  */
 public class CalcStandardStatistics extends LongProcessThread {
-    protected static final boolean EXCLUDE_PROTECTED_PARTS = true;
-
     private static final String[] htHeaders = new String[] { "", OStrings.getString("CT_STATS_Segments"),
             OStrings.getString("CT_STATS_Words"), OStrings.getString("CT_STATS_Characters_NOSP"),
             OStrings.getString("CT_STATS_Characters") };
@@ -128,9 +126,7 @@ public class CalcStandardStatistics extends LongProcessThread {
         Set<String> translated = new HashSet<String>();
         for (SourceTextEntry ste : project.getAllEntries()) {
             String src = ste.getSrcText();
-            if (EXCLUDE_PROTECTED_PARTS) {
-                src = StaticUtils.stripProtectedParts(src, ste);
-            }
+            src = StaticUtils.stripAllTags(src, ste);
             Integer count = uniqueSegment.get(src);
             if (count == null) {
                 uniqueSegment.put(src, 1);
@@ -169,9 +165,7 @@ public class CalcStandardStatistics extends LongProcessThread {
             counts.add(numbers);
             for (SourceTextEntry ste : file.entries) {
                 String src = ste.getSrcText();
-                if (EXCLUDE_PROTECTED_PARTS) {
-                    src = StaticUtils.stripProtectedParts(src, ste);
-                }
+                src = StaticUtils.stripAllTags(src, ste);
 
                 int words = Statistics.numberOfWords(src);
                 int charsNoSpaces = Statistics.numberOfCharactersWithoutSpaces(src);

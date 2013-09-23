@@ -29,6 +29,8 @@
 package org.omegat.gui.glossary;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
@@ -106,24 +108,37 @@ public class FindGlossaryThread extends EntryInfoSearchThread<List<GlossaryEntry
         }
 
         // After the matched entries have been tokenized and listed.
-        // We remove the duplicates and combine the synonyms.
-        // Then the matches are ordered to display the biggest matches first.
+        // We reorder entries: 1) by priority, 2) by length, 3) by alphabet
+        // Then remove the duplicates and combine the synonyms.
+        sortGlossaryEntries(result);
         result = filterGlossary(result);
-        for (int z = 0; z < result.size(); z++)
-            for (int x = z + 1; x < result.size() - 1; x++) {
-                GlossaryEntry zEntry = (GlossaryEntry) result.get(z);
-                GlossaryEntry xEntry = (GlossaryEntry) result.get(x);
-
-                if (xEntry.getSrcText().length() > zEntry.getSrcText().length()) {
-                    Object temp = result.get(x);
-                    result.set(x, result.get(z));
-                    result.set(z, (GlossaryEntry) temp);
-                }
-            }
         return result;
     }
 
-    private List<GlossaryEntry> filterGlossary(List<GlossaryEntry> result) {
+    static void sortGlossaryEntries(List<GlossaryEntry> entries) {
+        Collections.sort(entries, new Comparator<GlossaryEntry>() {
+            public int compare(GlossaryEntry o1, GlossaryEntry o2) {
+                int p1 = o1.getPriority() ? 1 : 2;
+                int p2 = o2.getPriority() ? 1 : 2;
+                int c = p1 - p2;
+                if (c == 0) {
+                    c = o2.getSrcText().length() - o1.getSrcText().length();
+                }
+                if (c == 0) {
+                    c = o1.getSrcText().compareToIgnoreCase(o2.getSrcText());
+                }
+                if (c == 0) {
+                    c = o1.getSrcText().compareTo(o2.getSrcText());
+                }
+                if (c == 0) {
+                    c = o1.getLocText().compareToIgnoreCase(o2.getLocText());
+                }
+                return c;
+            }
+        });
+    }
+
+    static List<GlossaryEntry> filterGlossary(List<GlossaryEntry> result) {
         // First check that entries exist in the list.
         if (result.size() == 0)
             return result;
@@ -131,7 +146,7 @@ public class FindGlossaryThread extends EntryInfoSearchThread<List<GlossaryEntry
         List<GlossaryEntry> returnList = new LinkedList<GlossaryEntry>();
 
         // The default replace entry
-        GlossaryEntry replaceEntry = new GlossaryEntry("", "", "");
+        GlossaryEntry replaceEntry = new GlossaryEntry("", "", "", false);
 
         // ... Remove the duplicates from the list
         // ..............................
@@ -235,6 +250,7 @@ public class FindGlossaryThread extends EntryInfoSearchThread<List<GlossaryEntry
             String srcTxt = sortList.get(0).getSrcText();
             ArrayList<String> locTxts = new ArrayList<String>();
             ArrayList<String> comTxts = new ArrayList<String>();
+            ArrayList<Boolean> prios = new ArrayList<Boolean>();
 
             for (GlossaryEntry e : sortList) {
                 for (String s : e.getLocTerms(false)) {
@@ -243,9 +259,17 @@ public class FindGlossaryThread extends EntryInfoSearchThread<List<GlossaryEntry
                 for (String s : e.getComments()) {
                     comTxts.add(s);
                 }
+                for (boolean s : e.getPriorities()) {
+                    prios.add(s);
+                }
             }
-            GlossaryEntry combineEntry = new GlossaryEntry(srcTxt,
-                    locTxts.toArray(new String[0]), comTxts.toArray(new String[0]));
+            boolean[] priorities = new boolean[prios.size()];
+            for (int j = 0; j < prios.size(); j++) {
+                priorities[j] = prios.get(j);
+            }
+
+            GlossaryEntry combineEntry = new GlossaryEntry(srcTxt, locTxts.toArray(new String[0]),
+                    comTxts.toArray(new String[0]), priorities);
             returnList.add(combineEntry);
             // ==================================================================
         }

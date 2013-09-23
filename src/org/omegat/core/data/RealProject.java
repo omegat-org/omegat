@@ -711,7 +711,7 @@ public class RealProject implements IProject {
         //Therefore load glossary in memory from file:
         if (repository.isUnderVersionControl(glossaryFile)) {
             //glossary is under version control
-            glossaryEntries = GlossaryReaderTSV.read(glossaryFile);
+            glossaryEntries = GlossaryReaderTSV.read(glossaryFile, true);
             modifiedFiles = new File[]{projectTMXFile, glossaryFile};
             updateGlossary = true;
         } else {
@@ -751,7 +751,7 @@ public class RealProject implements IProject {
         // load base revision
         baseTMX = new ProjectTMX(m_config.getSourceLanguage(), m_config.getTargetLanguage(), m_config.isSentenceSegmentingEnabled(), projectTMXFile, null);
         if (updateGlossary) {
-            baseGlossaryEntries = GlossaryReaderTSV.read(glossaryFile);
+            baseGlossaryEntries = GlossaryReaderTSV.read(glossaryFile, true);
         }
 
         //Maybe user has made local changes to other files. We don't want that. 
@@ -819,7 +819,7 @@ public class RealProject implements IProject {
                 //free up some memory
                 baseGlossaryEntries = null;
             } else {
-                headGlossaryEntries = GlossaryReaderTSV.read(glossaryFile);
+                headGlossaryEntries = GlossaryReaderTSV.read(glossaryFile, true);
                 List<GlossaryEntry> deltaAddedGlossaryLocal = new ArrayList<GlossaryEntry>(glossaryEntries);
                 deltaAddedGlossaryLocal.removeAll(baseGlossaryEntries);
                 List<GlossaryEntry> deltaRemovedGlossaryLocal = new ArrayList<GlossaryEntry>(baseGlossaryEntries);

@@ -78,7 +78,7 @@ public class GlossaryReaderTBX {
         SAX_FACTORY.setValidating(false);
     }
 
-    public static List<GlossaryEntry> read(final File file) throws Exception {
+    public static List<GlossaryEntry> read(final File file, boolean priorityGlossary) throws Exception {
         Martif tbx = load(file);
 
         String sLang = Core.getProject().getProjectProperties().getSourceLanguage().getLanguageCode();
@@ -129,11 +129,11 @@ public class GlossaryReaderTBX {
             for (String s : sTerms) {
                 boolean addedForLang = false;
                 for (String t : tTerms) {
-                    result.add(new GlossaryEntry(s, t, comment.toString()));
+                    result.add(new GlossaryEntry(s, t, comment.toString(), priorityGlossary));
                     addedForLang = true;
                 }
                 if (!addedForLang) { // An entry is created just to get the definition
-                    result.add(new GlossaryEntry(s, "", comment.toString()));
+                    result.add(new GlossaryEntry(s, "", comment.toString(), priorityGlossary));
                 }
             }
             sTerms.clear();

@@ -56,6 +56,7 @@ public class GlossaryManager implements DirectoryMonitor.Callback {
     private final GlossaryTextArea pane;
     private final Map<String, List<GlossaryEntry>> glossaries = new TreeMap<String, List<GlossaryEntry>>();
 
+    protected File priorityGlossary;
     protected final IGlossary[] externalGlossaries;
 
     public GlossaryManager(final GlossaryTextArea pane) {
@@ -74,6 +75,7 @@ public class GlossaryManager implements DirectoryMonitor.Callback {
 
     public void start() {
         File dir = new File(Core.getProject().getProjectProperties().getGlossaryRoot());
+        priorityGlossary = new File(Core.getProject().getProjectProperties().getWriteableGlossary());
         monitor = new DirectoryMonitor(dir, this);
         monitor.start();
     }
@@ -110,19 +112,20 @@ public class GlossaryManager implements DirectoryMonitor.Callback {
      * Loads one glossary file. It choose and calls required required reader.
      */
     private List<GlossaryEntry> loadGlossaryFile(final File file) throws Exception {
+        boolean isPriority = priorityGlossary.equals(file);
         String fname_lower = file.getName().toLowerCase();
         if (fname_lower.endsWith(OConsts.EXT_TSV_DEF)) {
             Log.logRB("CT_LOADING_GLOSSARY", new Object[] { file.getName() });
-            return GlossaryReaderTSV.read(file);
+            return GlossaryReaderTSV.read(file, isPriority);
         } else if (fname_lower.endsWith(OConsts.EXT_TSV_UTF8) || fname_lower.endsWith(OConsts.EXT_TSV_TXT)) {
             Log.logRB("CT_LOADING_GLOSSARY", new Object[] { file.getName() });
-            return GlossaryReaderTSV.read(file);
+            return GlossaryReaderTSV.read(file, isPriority);
         } else if (fname_lower.endsWith(OConsts.EXT_CSV_UTF8)) {
             Log.logRB("CT_LOADING_GLOSSARY", new Object[] { file.getName() });
-            return GlossaryReaderCSV.read(file);
+            return GlossaryReaderCSV.read(file, isPriority);
         } else if (fname_lower.endsWith(OConsts.EXT_TBX)) {
             Log.logRB("CT_LOADING_GLOSSARY", new Object[] { file.getName() });
-            return GlossaryReaderTBX.read(file);
+            return GlossaryReaderTBX.read(file, isPriority);
         } else {
             return null;
         }

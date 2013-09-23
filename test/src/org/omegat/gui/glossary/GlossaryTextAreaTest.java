@@ -51,8 +51,8 @@ public class GlossaryTextAreaTest extends TestCore {
         Preferences.setPreference(org.omegat.util.Preferences.TRANSTIPS, false);
 
         final List<GlossaryEntry> entries = new ArrayList<GlossaryEntry>();
-        entries.add(new GlossaryEntry("source1", "translation1", ""));
-        entries.add(new GlossaryEntry("source2", "translation2", "comment2"));
+        entries.add(new GlossaryEntry("source1", "translation1", "", false));
+        entries.add(new GlossaryEntry("source2", "translation2", "comment2", false));
         final GlossaryTextArea gta = new GlossaryTextArea();
         SwingUtilities.invokeAndWait(new Runnable() {
             public void run() {
@@ -71,8 +71,8 @@ public class GlossaryTextAreaTest extends TestCore {
         Preferences.setPreference(org.omegat.util.Preferences.TRANSTIPS, false);
 
         final List<GlossaryEntry> entries = new ArrayList<GlossaryEntry>();
-        entries.add(new GlossaryEntry("source1", "translation1", ""));
-        entries.add(new GlossaryEntry("source2", "translation2", "comment2"));
+        entries.add(new GlossaryEntry("source1", "translation1", "", false));
+        entries.add(new GlossaryEntry("source2", "translation2", "comment2", false));
         final GlossaryTextArea gta = new GlossaryTextArea();
         SwingUtilities.invokeAndWait(new Runnable() {
             public void run() {

@@ -46,7 +46,7 @@ public class GlossaryReaderCSV {
     /** Fields separator. Can be dependent of regional options. */
     protected static final char SEPARATOR = ',';
 
-    public static List<GlossaryEntry> read(final File file) throws IOException {
+    public static List<GlossaryEntry> read(final File file, boolean priorityGlossary) throws IOException {
         InputStreamReader reader = new InputStreamReader(new FileInputStream(file), OConsts.UTF8);
 
         List<GlossaryEntry> result = new ArrayList<GlossaryEntry>();
@@ -74,7 +74,7 @@ public class GlossaryReaderCSV {
                 String comment = "";
                 if (tokens.length >= 3)
                     comment = tokens[2];
-                result.add(new GlossaryEntry(tokens[0], tokens[1], comment));
+                result.add(new GlossaryEntry(tokens[0], tokens[1], comment, priorityGlossary));
             }
         } finally {
             in.close();

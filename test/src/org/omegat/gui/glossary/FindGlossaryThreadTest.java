@@ -3,7 +3,7 @@
           with fuzzy matching, translation memory, keyword search, 
           glossaries, and translation leveraging into updated projects.
 
- Copyright (C) 2010 Alex Buloichik
+ Copyright (C) 2013 Alex Buloichik
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -22,6 +22,7 @@
  You should have received a copy of the GNU General Public License
  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  **************************************************************************/
+
 package org.omegat.gui.glossary;
 
 import java.util.ArrayList;
@@ -29,38 +30,17 @@ import java.util.List;
 
 import org.omegat.core.TestCore;
 
-/**
- * @author Martin Fleurke
- */
-public class GlossaryEntryTest extends TestCore {
-    public void testRead() throws Exception {
-        GlossaryEntry a = new GlossaryEntry("", "", "", false);
-        GlossaryEntry b = new GlossaryEntry("", "", "", false);
-        assertEquals(a, b);
-
-        GlossaryEntry c = new GlossaryEntry("src", "", "", false);
-        GlossaryEntry d = new GlossaryEntry("src", "", "", false);
-        assertEquals(c, d);
-
-        List<GlossaryEntry> list = new ArrayList<GlossaryEntry>();
-        list.add(a);
-        assertEquals(1, list.size());
-        list.remove(c);
-        assertEquals(1, list.size());
-        list.remove(b);
-        assertEquals(0, list.size());
-        list.add(c);
-        assertEquals(1, list.size());
-        list.remove(d);
-        assertEquals(0, list.size());
-
-        list.add(a);
-        list.add(b);
-        list.add(c);
-        list.add(d);
-        list.remove(a);
-        assertEquals(3, list.size());
-        list.remove(a);
-        assertEquals(2, list.size());
+public class FindGlossaryThreadTest extends TestCore {
+    public void testEntriesSort() {
+        List<GlossaryEntry> entries = new ArrayList<GlossaryEntry>();
+        entries.add(new GlossaryEntry("dog", "doggy", "cdog", false));
+        entries.add(new GlossaryEntry("cat", "catty", "ccat", false));
+        entries.add(new GlossaryEntry("zzz", "zzz", "czzz", true));
+        entries.add(new GlossaryEntry("horse", "catty", "chorse", false));
+        FindGlossaryThread.sortGlossaryEntries(entries);
+        assertEquals("zzz", entries.get(0).getSrcText());
+        assertEquals("horse", entries.get(1).getSrcText());
+        assertEquals("cat", entries.get(2).getSrcText());
+        assertEquals("dog", entries.get(3).getSrcText());
     }
 }

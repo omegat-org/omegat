@@ -49,7 +49,7 @@ import org.omegat.util.StringUtil;
  * @author Alex Buloichik <alex73mail@gmail.com>
  */
 public class GlossaryReaderTSV {
-    public static List<GlossaryEntry> read(final File file) throws IOException {
+    public static List<GlossaryEntry> read(final File file, boolean priorityGlossary) throws IOException {
         InputStreamReader reader;
         String fname_lower = file.getName().toLowerCase();
         if (fname_lower.endsWith(OConsts.EXT_TSV_DEF)) {
@@ -87,7 +87,7 @@ public class GlossaryReaderTSV {
                 String comment = "";
                 if (tokens.length >= 3)
                     comment = tokens[2];
-                result.add(new GlossaryEntry(tokens[0], tokens[1], comment));
+                result.add(new GlossaryEntry(tokens[0], tokens[1], comment, priorityGlossary));
             }
         } finally {
             in.close();

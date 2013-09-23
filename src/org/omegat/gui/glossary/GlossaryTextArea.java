@@ -46,6 +46,8 @@ import java.util.List;
 
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
+import javax.swing.text.AttributeSet;
+import javax.swing.text.StyledDocument;
 
 import org.omegat.core.Core;
 import org.omegat.core.data.ProjectProperties;
@@ -59,6 +61,7 @@ import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
 import org.omegat.util.StringUtil;
 import org.omegat.util.gui.AlwaysVisibleCaret;
+import org.omegat.util.gui.Styles;
 import org.omegat.util.gui.UIThreadsUtil;
 
 /**
@@ -76,6 +79,8 @@ import org.omegat.util.gui.UIThreadsUtil;
 public class GlossaryTextArea extends EntryInfoThreadPane<List<GlossaryEntry>> {
 
     private static final String EXPLANATION = OStrings.getString("GUI_GLOSSARYWINDOW_explanation");
+
+    private static final AttributeSet PRIORITY_ATTRIBUTES = Styles.createAttributeSet(null, null, true, null);
 
     /**
      * Currently processed entry. Used to detect if user moved into new entry. In this case, new find should
@@ -173,12 +178,18 @@ public class GlossaryTextArea extends EntryInfoThreadPane<List<GlossaryEntry>> {
             Core.getEditor().remarkOneMarker(TransTipsMarker.class.getName());
         }
 
-        StringBuffer buf = new StringBuffer();
+        GlossaryEntry.StyledString buf = new GlossaryEntry.StyledString();
         for (GlossaryEntry entry : entries) {
-            buf.append(entry.toString());
+            GlossaryEntry.StyledString str = entry.toStyledString();
+            buf.append(str);
             buf.append("\n\n");
         }
-        setText(buf.toString());
+        setText(buf.text.toString());
+        StyledDocument doc = getStyledDocument();
+        for (int i = 0; i < buf.boldStarts.size(); i++) {
+            doc.setCharacterAttributes(buf.boldStarts.get(i), buf.boldLengths.get(i), PRIORITY_ATTRIBUTES,
+                    true);
+        }
     }
 
     /** Clears up the pane. */
@@ -278,7 +289,7 @@ public class GlossaryTextArea extends EntryInfoThreadPane<List<GlossaryEntry>> {
                     String com = dialog.getCommentText().getText();
                     if (!StringUtil.isEmpty(src) && !StringUtil.isEmpty(loc)) {
                         try {
-                            GlossaryReaderTSV.append(out, new GlossaryEntry(src, loc, com));
+                            GlossaryReaderTSV.append(out, new GlossaryEntry(src, loc, com, true));
                         } catch (Exception ex) {
                             Log.log(ex);
                         }

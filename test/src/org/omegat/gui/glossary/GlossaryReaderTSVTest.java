@@ -35,7 +35,7 @@ import org.omegat.core.TestCore;
 public class GlossaryReaderTSVTest extends TestCore {
     public void testRead() throws Exception {
         List<GlossaryEntry> g = GlossaryReaderTSV.read(new File(
-                "test/data/glossaries/test.tab"));
+                "test/data/glossaries/test.tab"), false);
         assertEquals(2, g.size());
         assertEquals(g.get(0).getSrcText(), "kde");
         assertEquals(g.get(0).getLocText(), "koo moo");

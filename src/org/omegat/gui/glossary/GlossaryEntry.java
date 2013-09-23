@@ -28,6 +28,7 @@ package org.omegat.gui.glossary;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import org.omegat.util.StringUtil;
 
@@ -38,14 +39,15 @@ import org.omegat.util.StringUtil;
  * @author Aaron Madlon-Kay
  */
 public class GlossaryEntry {
-    public GlossaryEntry(String src, String[] loc, String[] com) {
+    public GlossaryEntry(String src, String[] loc, String[] com, boolean[] fromPriorityGlossary) {
         m_src = src;
         m_loc = loc;
         m_com = com;
+        m_priority = fromPriorityGlossary;
     }
-    
-    public GlossaryEntry(String src, String loc, String com) {
-        this(src, new String[] {loc}, new String[] {com});
+
+    public GlossaryEntry(String src, String loc, String com, boolean fromPriorityGlossary) {
+        this(src, new String[] { loc }, new String[] { com }, new boolean[] { fromPriorityGlossary });
     }
 
     public String getSrcText() {
@@ -100,12 +102,19 @@ public class GlossaryEntry {
         return m_com;
     }
 
-    @Override
-    public String toString() {
-        
-        StringBuffer buf = new StringBuffer();
-        buf.append(m_src);
-        buf.append(" = ");
+    public boolean getPriority() {
+        return m_priority.length > 0 ? m_priority[0] : false;
+    }
+
+    public boolean[] getPriorities() {
+        return m_priority;
+    }
+
+    public StyledString toStyledString() {
+        StyledString result=new StyledString();
+
+        result.text.append(m_src);
+        result.text.append(" = ");
         
         StringBuffer comments = new StringBuffer();
         
@@ -120,8 +129,14 @@ public class GlossaryEntry {
                 }
                 continue;
             }
-            if (i > 0) buf.append(", ");
-            buf.append(bracketEntry(m_loc[i]));
+            if (i > 0) result.text.append(", ");
+            if (m_priority[i]) {
+                result.markBoldStart();
+            }
+            result.text.append(bracketEntry(m_loc[i]));
+            if (m_priority[i]) {
+                result.markBoldEnd();
+            }
             commentIndex++;
             if (!m_com[i].equals("")) {
                 comments.append("\n");
@@ -131,9 +146,9 @@ public class GlossaryEntry {
             }
         }
         
-        buf.append(comments);
+        result.text.append(comments);
         
-        return buf.toString();
+        return result;
     }
     
     /**
@@ -172,7 +187,36 @@ public class GlossaryEntry {
         return hash;
     }
 
+    static class StyledString {
+        public StringBuilder text = new StringBuilder();
+        public List<Integer> boldStarts = new ArrayList<Integer>();
+        public List<Integer> boldLengths = new ArrayList<Integer>();
+
+        void markBoldStart() {
+            boldStarts.add(text.length());
+        }
+
+        void markBoldEnd() {
+            int start = boldStarts.get(boldStarts.size() - 1);
+            boldLengths.add(text.length() - start);
+        }
+
+        public void append(StyledString str) {
+            int off = text.length();
+            text.append(str.text);
+            for (int s : str.boldStarts) {
+                boldStarts.add(off + s);
+            }
+            boldLengths.addAll(str.boldLengths);
+        }
+
+        public void append(String str) {
+            text.append(str);
+        }
+    }
+
     private String m_src;
     private String[] m_loc;
     private String[] m_com;
+    private boolean[] m_priority;
 }

@@ -96,6 +96,7 @@ public class FindMatches {
     /** Result list. */
     private List<NearString> result = new ArrayList<NearString>(OConsts.MAX_NEAR_STRINGS + 1);
 
+    private final boolean searchExactlyTheSame;
     private String originalText;
     private String srcText;
 
@@ -113,11 +114,18 @@ public class FindMatches {
     // This finder used for search separate segment matches
     FindMatches separateSegmentMatcher;
 
-    public FindMatches(ITokenizer sourceTokenizer, int maxCount, boolean allowSeparateSegmentMatch) {
+    /**
+     * @param searchExactlyTheSame
+     *            allows to search similarities with the same text as source segment. This mode used only for
+     *            separate sentence match in paragraph project, i.e. where source is just part of current
+     *            source.
+     */
+    public FindMatches(ITokenizer sourceTokenizer, int maxCount, boolean allowSeparateSegmentMatch, boolean searchExactlyTheSame) {
         tok = sourceTokenizer;
         this.maxCount = maxCount;
+        this.searchExactlyTheSame = searchExactlyTheSame;
         if (allowSeparateSegmentMatch) {
-            separateSegmentMatcher = new FindMatches(sourceTokenizer, 1, false);
+            separateSegmentMatcher = new FindMatches(sourceTokenizer, 1, false, true);
         }
     }
 
@@ -153,7 +161,7 @@ public class FindMatches {
             project.iterateByDefaultTranslations(new DefaultTranslationsIterator() {
                 public void iterate(String source, TMXEntry trans) {
                     checkStopped(stop);
-                    if (source.equals(originalText)) {
+                    if (!searchExactlyTheSame && source.equals(originalText)) {
                         // skip original==original entry comparison
                         return;
                     }
@@ -170,7 +178,7 @@ public class FindMatches {
         project.iterateByMultipleTranslations(new MultipleTranslationsIterator() {
             public void iterate(EntryKey source, TMXEntry trans) {
                 checkStopped(stop);
-                if (source.sourceText.equals(originalText)) {
+                if (!searchExactlyTheSame && source.sourceText.equals(originalText)) {
                     // skip original==original entry comparison
                     return;
                 }

@@ -144,7 +144,7 @@ public class CalcMatchStatistics extends LongProcessThread {
          * 
          * Similarity calculates between tokens tokenized by ITokenizer.tokenizeAllExactly() (adjustedScore)
          */
-        FindMatches finder = new FindMatches(Core.getProject().getSourceTokenizer(), 5, true);
+        FindMatches finder = new FindMatches(Core.getProject().getSourceTokenizer(), OConsts.MAX_NEAR_STRINGS, true, false);
         for (int i = 0; i < untranslatedEntries.size(); i++) {
             String source = untranslatedEntries.get(i);
 

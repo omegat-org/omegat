@@ -704,7 +704,9 @@ public class StaticUtils {
     public static String stripProtectedParts(String str, SourceTextEntry ste) {
         String s = str;
         for (String tag : ste.getProtectedParts().getParts()) {
-            s = s.replace(tag, TAG_REPLACEMENT + "");
+            if (ste.getProtectedParts().isProtected(tag)) {
+                s = s.replace(tag, TAG_REPLACEMENT + "");
+            }
         }
         return s;
     }

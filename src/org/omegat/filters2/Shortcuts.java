@@ -36,19 +36,22 @@ import java.util.List;
 public class Shortcuts {
     public final List<String> shortcuts = new ArrayList<String>();
     public final List<String> shortcutDetails = new ArrayList<String>();
+    public final List<Boolean> shortcutProtected = new ArrayList<Boolean>();
 
     public boolean isEmpty() {
         return shortcuts.isEmpty();
     }
 
-    public void put(String shortcut, String details) {
+    public void put(String shortcut, String details, boolean protect) {
         shortcuts.add(shortcut);
         shortcutDetails.add(details);
+        shortcutProtected.add(protect);
     }
 
     public void clear() {
         shortcuts.clear();
         shortcutDetails.clear();
+        shortcutProtected.clear();
     }
 
     public Shortcuts extractFor(String text) {
@@ -57,6 +60,7 @@ public class Shortcuts {
             if (text.contains(shortcuts.get(i))) {
                 r.shortcuts.add(shortcuts.get(i));
                 r.shortcutDetails.add(shortcutDetails.get(i));
+                r.shortcutProtected.add(shortcutProtected.get(i));
             }
         }
         return r;

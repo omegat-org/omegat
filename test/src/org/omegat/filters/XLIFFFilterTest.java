@@ -84,8 +84,11 @@ public class XLIFFFilterTest extends TestFilterBase {
         ste = checkMultiNoPrevNext("About <m0>Gandalf</m0> and <m1>other</m1>.", null, null, null);
         assertEquals(3, ste.getProtectedParts().getParts().length);
         assertEquals("<mrk mtype=\"other\">", ste.getProtectedParts().getDetail("<m1>"));
+        assertEquals(false, ste.getProtectedParts().isProtected("<m1>"));
         assertEquals("</mrk>", ste.getProtectedParts().getDetail("</m1>"));
+        assertEquals(false, ste.getProtectedParts().isProtected("</m1>"));
         assertEquals("<mrk mtype=\"protected\">Gandalf</mrk>", ste.getProtectedParts().getDetail("<m0>Gandalf</m0>"));
+        assertEquals(true, ste.getProtectedParts().isProtected("<m0>Gandalf</m0>"));
         checkMultiNoPrevNext("one <o0>two</o0> three", null, null, null);
         checkMultiNoPrevNext("one <t0/> three", null, null, null);
         checkMultiNoPrevNext("one <w0/> three", null, null, null);

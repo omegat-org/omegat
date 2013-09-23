@@ -156,6 +156,7 @@ public class XLIFFDialect extends DefaultXMLDialect {
                 String shortcut = null;
                 char shortcutLetter;
                 int tagIndex;
+                boolean tagProtected;
                 if ("bpt".equals(tag.getTag())) {
                     // XLIFF specification requires 'rid' and 'id' attributes,
                     // but some tools uses 'i' attribute like for TMX
@@ -164,11 +165,13 @@ public class XLIFFDialect extends DefaultXMLDialect {
                     tagHandler.setTagShortcutLetter(shortcutLetter);
                     tagIndex = tagHandler.endBPT();
                     shortcut = "<" + (shortcutLetter != 0 ? shortcutLetter : 'f') + tagIndex + '>';
+                    tagProtected = false;
                 } else if ("ept".equals(tag.getTag())) {
                     tagHandler.startEPT(tag.getAttribute("rid"), tag.getAttribute("id"), tag.getAttribute("i"));
                     tagIndex = tagHandler.endEPT();
                     shortcutLetter = tagHandler.getTagShortcutLetter();
                     shortcut = "</" + (shortcutLetter != 0 ? shortcutLetter : 'f') + tagIndex + '>';
+                    tagProtected = false;
                 } else if ("it".equals(tag.getTag())) {
                     tagHandler.startOTHER();
                     tagHandler.setCurrentPos(tag.getAttribute("pos"));
@@ -181,27 +184,31 @@ public class XLIFFDialect extends DefaultXMLDialect {
                     } else {
                         shortcut = "<" + (shortcutLetter != 0 ? shortcutLetter : 'f') + tagIndex + '>';
                     }
+                    tagProtected = false;
                 } else if ("ph".equals(tag.getTag())) {
                     tagHandler.startOTHER();
                     tagIndex = tagHandler.endOTHER();
                     shortcutLetter = calcTagShortcutLetter(tag);
                     shortcut = "<" + (shortcutLetter != 0 ? shortcutLetter : 'f') + tagIndex + "/>";
+                    tagProtected = false;
                 } else if ("mrk".equals(tag.getTag())) {
                     tagHandler.startOTHER();
                     tagIndex = tagHandler.endOTHER();
                     shortcutLetter = 'm';
                     shortcut = "<m" + tagIndex + ">" + tag.getIntactContents().sourceToOriginal() + "</m" + tagIndex
                             + ">";
+                    tagProtected = true;
                 } else {
                     shortcutLetter = 'f';
                     tagIndex = -1;
+                    tagProtected = false;
                 }
                 tag.setShortcutLetter(shortcutLetter);
                 tag.setShortcutIndex(tagIndex);
                 tag.setShortcut(shortcut);
                 r.append(shortcut);
                 String details = tag.toOriginal();
-                shortcutDetails.put(shortcut, details);
+                shortcutDetails.put(shortcut, details, tagProtected);
             } else if (el instanceof Tag) {
                 Tag tag = (Tag) el;
                 int tagIndex = tagHandler.paired(tag.getTag(), tag.getType());
@@ -209,7 +216,7 @@ public class XLIFFDialect extends DefaultXMLDialect {
                 String shortcut = tag.toShortcut();
                 r.append(shortcut);
                 String details = tag.toOriginal();
-                shortcutDetails.put(shortcut, details);
+                shortcutDetails.put(shortcut, details, false);
             } else {
                 r.append(el.toShortcut());
             }

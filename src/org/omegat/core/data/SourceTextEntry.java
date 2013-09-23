@@ -43,6 +43,7 @@ public class SourceTextEntry {
         EMPTY_PROTECTED_PARTS = new ProtectedParts();
         EMPTY_PROTECTED_PARTS.parts = new String[0];
         EMPTY_PROTECTED_PARTS.details = new String[0];
+        EMPTY_PROTECTED_PARTS.protect = new boolean[0];
     }
 
     /** Storage for full entry's identifiers, including source text. */
@@ -107,6 +108,10 @@ public class SourceTextEntry {
             this.protectedParts.parts = shortcuts.shortcuts.toArray(new String[shortcuts.shortcuts.size()]);
             this.protectedParts.details = shortcuts.shortcutDetails
                     .toArray(new String[shortcuts.shortcutDetails.size()]);
+            this.protectedParts.protect = new boolean[shortcuts.shortcutProtected.size()];
+            for (int i = 0; i < this.protectedParts.protect.length; i++) {
+                this.protectedParts.protect[i] = shortcuts.shortcutProtected.get(i);
+            }
         }
     }
 
@@ -161,6 +166,7 @@ public class SourceTextEntry {
     public static class ProtectedParts {
         protected String[] parts;
         protected String[] details;
+        protected boolean[] protect;
 
         public String[] getParts() {
             return parts;
@@ -182,6 +188,15 @@ public class SourceTextEntry {
                 }
             }
             return null;
+        }
+
+        public boolean isProtected(String part) {
+            for (int i = 0; i < parts.length; i++) {
+                if (part.equals(parts[i])) {
+                    return protect[i];
+                }
+            }
+            return false;
         }
     }
 }

@@ -78,15 +78,15 @@ public class StaticUtilsTest extends TestCase
 
         tagList.clear();
         Shortcuts pp = new Shortcuts();
-        pp.put("<b0>", "");
-        pp.put("</b0>", "");
+        pp.put("<b0>", "", false);
+        pp.put("</b0>", "", false);
         StaticUtils.buildTagList(str, new SourceTextEntry(null, 0, null, null, pp).getProtectedParts(), tagList);
         assertEquals("Wrong tags found in '" + str + "'", Arrays.asList("<b0>", "</b0>", "<b0>"), tagList);
 
         str = "Tag <test>case</test>.";
         tagList.clear();
         pp.clear();
-        pp.put("<test>case</test>", "");
+        pp.put("<test>case</test>", "", false);
         StaticUtils.buildTagList(str, new SourceTextEntry(null, 0, null, null, pp).getProtectedParts(), tagList);
         assertEquals("Wrong tags found in '" + str + "'", Arrays.asList("<test>case</test>"), tagList);
     }
@@ -97,12 +97,23 @@ public class StaticUtilsTest extends TestCase
         if ( !"Six seven".equals(StaticUtils.compressSpaces("Six\tseven")) ) fail("Space wrongly compressed");
     }
 
-    public void testStripTags() {
+    public void testStripTags1() {
         Shortcuts protectedParts = new Shortcuts();
-        protectedParts.put("#part#", "zz");
+        protectedParts.put("#part#", "zz", true);
         SourceTextEntry ste = new SourceTextEntry(null, 0, null, null, protectedParts);
         assertEquals("1\b2", StaticUtils.stripProtectedParts("1#part#2", ste));
-        protectedParts.clear();
+    }
+
+    public void testStripTags2() {
+        Shortcuts protectedParts = new Shortcuts();
+        protectedParts.put("#part#", "zz", false);
+        SourceTextEntry ste = new SourceTextEntry(null, 0, null, null, protectedParts);
+        assertEquals("1#part#2", StaticUtils.stripProtectedParts("1#part#2", ste));
+    }
+
+    public void testStripTags3() {
+        Shortcuts protectedParts = new Shortcuts();
+        SourceTextEntry ste = new SourceTextEntry(null, 0, null, null, protectedParts);
         assertEquals("1#part#2", StaticUtils.stripProtectedParts("1#part#2", ste));
     }
 }

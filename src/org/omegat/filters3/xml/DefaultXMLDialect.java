@@ -461,7 +461,7 @@ public class DefaultXMLDialect implements XMLDialect {
             r.append(shortcut);
             if (!(el instanceof Text)) {
                 String details = el.toOriginal();
-                shortcutDetails.put(shortcut, details);
+                shortcutDetails.put(shortcut, details, false);
             }
         }
         return r.toString();

@@ -2,7 +2,7 @@
  OmegaT 3.0.5
 ----------------------------------------------------------------------
    7 Enhancements
-   2 Bug fixes
+   3 Bug fixes
    1 Localisation update
 ----------------------------------------------------------------------
 3.0.5 vs. 3.0.4 update 2
@@ -43,6 +43,15 @@ opening on a Mac
 
   - In some cases, a null pointer exception could happen when quitting
 OmegaT
+
+  - The match statistics were based purely on the leftmost percentage,
+without taking into account which matches are really selected to go
+into the fuzzy match pane. This could lead to situation where the 
+statistics and what is seen in the fuzzy match pane was significantly 
+different. The statistics are now using an algorithm giving consistent 
+result with the match pane. The percentage kept is, however, still the 
+rightmost one. As the computation method is different, all statistics 
+will give different results compared with the previous version.
 
   Localisation updates:
 

@@ -83,7 +83,7 @@ public class CalcMatchStatistics extends LongProcessThread {
         ISimilarityCalculator distanceCalculator = new LevenshteinDistance();
         List<SourceTextEntry> allEntries = Core.getProject().getAllEntries();		
 
-        final List<String> untranslatedEntries = new ArrayList<String>(allEntries.size() / 2);
+        final List<SourceTextEntry> untranslatedEntries = new ArrayList<SourceTextEntry>(allEntries.size() / 2);
 
         // We should iterate all segments from all files in project.
         int percent = 0, treated = 0;
@@ -113,7 +113,7 @@ public class CalcMatchStatistics extends LongProcessThread {
                 treated ++;
             }
             else {
-                untranslatedEntries.add(src);
+                untranslatedEntries.add(ste);
             }
 
             if (isStopped) {
@@ -145,12 +145,15 @@ public class CalcMatchStatistics extends LongProcessThread {
          * Similarity calculates between tokens tokenized by ITokenizer.tokenizeAllExactly() (adjustedScore)
          */
         FindMatches finder = new FindMatches(Core.getProject().getSourceTokenizer(), OConsts.MAX_NEAR_STRINGS, true, false);
-        for (int i = 0; i < untranslatedEntries.size(); i++) {
-            String source = untranslatedEntries.get(i);
+        for (SourceTextEntry ste : untranslatedEntries) {
+            String src = ste.getSrcText();
+            if (EXCLUDE_PROTECTED_PARTS) {
+                src = StaticUtils.stripProtectedParts(src, ste);
+            }
 
             List<NearString> nears;
             try {
-                nears = finder.search(Core.getProject(), source, true, false, new IStopped() {
+                nears = finder.search(Core.getProject(), src, true, false, new IStopped() {
                     public boolean isStopped() {
                         return isStopped;
                     }
@@ -159,7 +162,7 @@ public class CalcMatchStatistics extends LongProcessThread {
                 return;
             }
 
-            final Token[] strTokensStem = finder.tokenizeAll(source);
+            final Token[] strTokensStem = finder.tokenizeAll(src);
             int maxSimilarity = 0;
             CACHE: for (NearString near : nears) {
                 final Token[] candTokens = finder.tokenizeAll(near.source);
@@ -172,12 +175,13 @@ public class CalcMatchStatistics extends LongProcessThread {
                 }
             }
 
+            String srcNumber = StaticUtils.stripAllTags(src, ste);
             int row = getRowByPercent(maxSimilarity);
             result[row].segments++;
-            result[row].words += Statistics.numberOfWords(source);
-            result[row].charsWithoutSpaces += Statistics.numberOfCharactersWithoutSpaces(source);
-            result[row].charsWithSpaces += Statistics.numberOfCharactersWithSpaces(source);
-            treated ++;
+            result[row].words += Statistics.numberOfWords(srcNumber);
+            result[row].charsWithoutSpaces += Statistics.numberOfCharactersWithoutSpaces(srcNumber);
+            result[row].charsWithSpaces += Statistics.numberOfCharactersWithSpaces(srcNumber);
+            treated++;
 
             if (isStopped) {
                 return;

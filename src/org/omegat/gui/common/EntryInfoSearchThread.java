@@ -72,7 +72,7 @@ public abstract class EntryInfoSearchThread<T> extends Thread {
      * 
      * @return true if current entry was changed
      */
-    private boolean isEntryChanged() {
+    protected boolean isEntryChanged() {
         return currentlyProcessedEntry != pane.currentlyProcessedEntry;
     }
     

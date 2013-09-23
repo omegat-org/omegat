@@ -33,20 +33,12 @@ import java.io.OutputStreamWriter;
 import java.text.BreakIterator;
 import java.text.DateFormat;
 import java.util.Date;
-import java.util.Map;
 
-import org.omegat.core.Core;
-import org.omegat.core.data.EntryKey;
-import org.omegat.core.data.ExternalTMX;
-import org.omegat.core.data.IProject;
-import org.omegat.core.data.SourceTextEntry;
-import org.omegat.core.data.TMXEntry;
 import org.omegat.tokenizer.DefaultTokenizer;
 import org.omegat.util.Log;
 import org.omegat.util.OConsts;
 import org.omegat.util.PatternConsts;
 import org.omegat.util.StaticUtils;
-import org.omegat.util.Token;
 
 /**
  * Save project statistic into text file.
@@ -63,57 +55,6 @@ public class Statistics {
 
     protected static final int PERCENT_EXACT_MATCH = 101;
     protected static final int PERCENT_REPETITIONS = 102;
-
-    /**
-     * Pre-builds a map with external TMX and orphaned translations
-     * in order to eliminate dupplicates
-     **/
-    public static Map<String, Token[]> buildExternalSourceTexts(final Map<String, Token[]> tokensCache) {
-        final Map<String, Token[]> res = new java.util.HashMap<String, Token[]> ();
-
-        final IProject project = Core.getProject();
-        
-        /* Travel by default orphaned. */
-        project.iterateByDefaultTranslations(new IProject.DefaultTranslationsIterator() {
-            public void iterate(String source, TMXEntry en) {
-                res.put (en.source, tokenizeExactlyWithCache(tokensCache, en.source));
-            }
-        });
-        /* Travel by alternative orphaned. */
-        project.iterateByMultipleTranslations(new IProject.MultipleTranslationsIterator() {
-            public void iterate(EntryKey source, TMXEntry en) {
-                res.put (en.source, tokenizeExactlyWithCache(tokensCache, en.source));
-            }
-        });
-
-        /* Travel by TMs. */
-        for (ExternalTMX tmFile : project.getTransMemories().values()) {
-            for (int i = 0; i < tmFile.getEntries().size(); i++) {
-                TMXEntry tm = tmFile.getEntries().get(i);
-                res.put (tm.source, tokenizeExactlyWithCache(tokensCache, tm.source));
-            }
-        }
-        
-        return res;
-    }
-
-    /**
-     * Get tokens from cache or tokenize and cache it.
-     * 
-     * @param tokensCache
-     *            cache
-     * @param str
-     *            string to tokenize
-     * @return tokens
-     */
-    public static Token[] tokenizeExactlyWithCache(final Map<String, Token[]> tokensCache, final String str) {
-        Token[] result = tokensCache.get(str);
-        if (result == null) {
-            result = Core.getProject().getSourceTokenizer().tokenizeAllExactly(str);
-            tokensCache.put(str, result);
-        }
-        return result;
-    }
 
     /**
      * Computes the number of characters excluding spaces in a string. Special

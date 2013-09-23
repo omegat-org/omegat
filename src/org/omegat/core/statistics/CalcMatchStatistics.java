@@ -26,18 +26,18 @@
 
 package org.omegat.core.statistics;
 
-import java.util.HashMap;
-import java.util.HashSet;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
 import org.omegat.core.Core;
 import org.omegat.core.data.SourceTextEntry;
+import org.omegat.core.events.IStopped;
+import org.omegat.core.matching.FuzzyMatcher;
 import org.omegat.core.matching.ISimilarityCalculator;
 import org.omegat.core.matching.LevenshteinDistance;
-import org.omegat.core.matching.FuzzyMatcher;
+import org.omegat.core.matching.NearString;
 import org.omegat.core.threads.LongProcessThread;
 import org.omegat.gui.stat.StatisticsWindow;
 import org.omegat.util.OConsts;
@@ -68,9 +68,6 @@ public class CalcMatchStatistics extends LongProcessThread {
 
     private StatisticsWindow callback;
 
-    /** Hash for exact tokens. Only for statistics calculation. */
-    private Map<String, Token[]> tokensCache = new HashMap<String, Token[]>();
-
     /** Already processed segments. Used for repetitions detect. */
     private Set<String> alreadyProcessed = new HashSet<String>();
 
@@ -85,8 +82,7 @@ public class CalcMatchStatistics extends LongProcessThread {
         }
         ISimilarityCalculator distanceCalculator = new LevenshteinDistance();
         List<SourceTextEntry> allEntries = Core.getProject().getAllEntries();		
-        
-        final Map<String, Token[]> externalCache = Statistics.buildExternalSourceTexts(tokensCache);
+
         final List<String> untranslatedEntries = new ArrayList<String>(allEntries.size() / 2);
 
         // We should iterate all segments from all files in project.
@@ -120,7 +116,6 @@ public class CalcMatchStatistics extends LongProcessThread {
                 untranslatedEntries.add(src);
             }
 
-
             if (isStopped) {
                 return;
             }
@@ -137,14 +132,39 @@ public class CalcMatchStatistics extends LongProcessThread {
         callback.displayData(outText, false);
         
 
+        /*
+         * For the match calculation, we iterates by untranslated entries. Each untranslated entry compared
+         * with source texts of: 1) default translations, 2) alternative translations, 3) TMs(from
+         * project.getTransMemories()).
+         * 
+         * We need to find best matches, because "adjustedScore" for non-best matches can be better for some
+         * worse "score", what is not so good. It happen because some tags can be repeated many times, or
+         * since we are using not so good tokens comparison. Best matches find will produce the same
+         * similarity like in patches pane.
+         * 
+         * Similarity calculates between tokens tokenized by ITokenizer.tokenizeAllExactly() (adjustedScore)
+         */
+        FindMatches finder = new FindMatches(Core.getProject().getSourceTokenizer(), 5);
         for (int i = 0; i < untranslatedEntries.size(); i++) {
             String source = untranslatedEntries.get(i);
-            final Token[] strTokensStem = Statistics.tokenizeExactlyWithCache(tokensCache, source);
-                        
+
+            List<NearString> nears;
+            try {
+                nears = finder.search(Core.getProject(), source, true, false, new IStopped() {
+                    public boolean isStopped() {
+                        return isStopped;
+                    }
+                });
+            } catch (FindMatches.StoppedException ex) {
+                return;
+            }
+
+            final Token[] strTokensStem = finder.tokenizeAll(source);
             int maxSimilarity = 0;
-        CACHE:
-            for (Token[] candTokens: externalCache.values()) {
-                int newSimilarity = FuzzyMatcher.calcSimilarity(distanceCalculator, strTokensStem, candTokens);
+            CACHE: for (NearString near : nears) {
+                final Token[] candTokens = finder.tokenizeAll(near.source);
+                int newSimilarity = FuzzyMatcher
+                        .calcSimilarity(distanceCalculator, strTokensStem, candTokens);
                 if (newSimilarity > maxSimilarity) {
                     maxSimilarity = newSimilarity;
                     if (newSimilarity >= 95) // enough to say that we are in row 2

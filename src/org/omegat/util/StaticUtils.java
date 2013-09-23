@@ -7,7 +7,7 @@
                2007 Didier Briel, Zoltan Bartko, Alex Buloichik
                2008-2011 Didier Briel
                2012 Martin Fleurke, Didier Briel
-               2013 Aaron Madlon-Kay, Zoltan Bartko, Didier Briel
+               2013 Aaron Madlon-Kay, Zoltan Bartko, Didier Briel, Alex Buloichik
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 

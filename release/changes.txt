@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 3.0.5
 ----------------------------------------------------------------------
-   5 Enhancements
+   6 Enhancements
    2 Bug fixes
    1 Localisation update
 ----------------------------------------------------------------------
@@ -15,6 +15,9 @@
 
   - Optional source term in auto-completer 
   https://sourceforge.net/p/omegat/feature-requests/887/
+
+  - Priority Glossary 
+  https://sourceforge.net/p/omegat/feature-requests/853/
 
  Other enhancements:
 

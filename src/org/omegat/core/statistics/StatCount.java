@@ -37,11 +37,11 @@ public class StatCount {
     /**
      * OmegaT has two possible words calculation modes:
      * 
-     * 1) All protected parts(including tags, placeholders, protected text and linked tags) are not counted in
-     * the word count(default). For example: "<i1>", "<m0>IBM</m0>" will produce 0 words.
+     * 1) All protected parts(including tags, placeholders, protected text and related tags) are not counted in
+     * the word count(default). For example: "<i1>", "<m0>Acme</m0>" will produce 0 words.
      * 
-     * 2) Protected texts are counted, but linked tags are not counted in the word count. For example: "<i1>"
-     * - 0 words, "<m0>IBM</m0>" - 1 word.
+     * 2) Protected texts are counted, but related tags are not counted in the word count. For example: "<i1>"
+     * - 0 words, "<m0>Acme</m0>" - 1 word.
      */
     static final boolean REMOVE_ALL_PROTECTED_PARTS = true;
 

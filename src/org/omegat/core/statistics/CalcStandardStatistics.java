@@ -54,7 +54,7 @@ import org.omegat.util.gui.TextUtil;
  * Calculation requires two different tags stripping: one for calculate unique and remaining, and second for
  * calculate number of words and chars.
  * 
- * Number of words/chars calculation requires to just strip all tags, protected parts, placeholders.
+ * Number of words/chars calculation requires to just strip all tags, protected parts, placeholders(see StatCount.java).
  * 
  * Calculation of unique and remaining also requires to just strip all tags, protected parts, placeholders for
  * standard calculation.
@@ -131,38 +131,27 @@ public class CalcStandardStatistics extends LongProcessThread {
         StatCount remainingUnique = new StatCount();
 
         // find unique segments
-        Map<String, Integer> uniqueSegment = new HashMap<String, Integer>();
+        Map<String, SourceTextEntry> uniqueSegment = new HashMap<String, SourceTextEntry>();
         Set<String> translated = new HashSet<String>();
         for (SourceTextEntry ste : project.getAllEntries()) {
             String src = StaticUtils.stripAllTagsFromSource(ste);
-            Integer count = uniqueSegment.get(src);
-            if (count == null) {
-                uniqueSegment.put(src, 1);
-            } else {
-                uniqueSegment.put(src, count + 1);
+            if (!uniqueSegment.containsKey(src)) {
+                uniqueSegment.put(src, ste);
             }
             TMXEntry tr = project.getTranslationInfo(ste);
             if (tr.isTranslated()) {
                 translated.add(src);
             }
         }
-        for (String noTags : uniqueSegment.keySet()) {
+        for (Map.Entry<String, SourceTextEntry> en : uniqueSegment.entrySet()) {
             /* Number of words and chars calculated without all tags and protected parts. */
-            int words = Statistics.numberOfWords(noTags);
-            int charsNoSpaces = Statistics.numberOfCharactersWithoutSpaces(noTags);
-            int charsWithSpaces = Statistics.numberOfCharactersWithSpaces(noTags);
+            StatCount count = new StatCount(en.getValue());
 
             // add to unique
-            unique.segments++;
-            unique.words += words;
-            unique.charsWithoutSpaces += charsNoSpaces;
-            unique.charsWithSpaces += charsWithSpaces;
+            unique.add(count);
             // add to unique remaining
-            if (!translated.contains(noTags)) {
-                remainingUnique.segments++;
-                remainingUnique.words += words;
-                remainingUnique.charsWithoutSpaces += charsNoSpaces;
-                remainingUnique.charsWithSpaces += charsWithSpaces;
+            if (!translated.contains(en.getKey())) {
+                remainingUnique.add(count);
             }
         }
 
@@ -173,56 +162,35 @@ public class CalcStandardStatistics extends LongProcessThread {
             numbers.filename = file.filePath;
             counts.add(numbers);
             for (SourceTextEntry ste : file.entries) {
-                String srcNoTags = StaticUtils.stripAllTagsFromSource(ste);
+                String src = StaticUtils.stripAllTagsFromSource(ste);
 
                 /* Number of words and chars calculated without all tags and protected parts. */
-                int words = Statistics.numberOfWords(srcNoTags);
-                int charsNoSpaces = Statistics.numberOfCharactersWithoutSpaces(srcNoTags);
-                int chars = Statistics.numberOfCharactersWithSpaces(srcNoTags);
+                StatCount count = new StatCount(ste);
 
                 // add to total
-                total.segments++;
-                total.words += words;
-                total.charsWithoutSpaces += charsNoSpaces;
-                total.charsWithSpaces += chars;
+                total.add(count);
 
                 // add to remaining
                 TMXEntry tr = project.getTranslationInfo(ste);
                 if (!tr.isTranslated()) {
-                    remaining.segments++;
-                    remaining.words += words;
-                    remaining.charsWithoutSpaces += charsNoSpaces;
-                    remaining.charsWithSpaces += chars;
+                    remaining.add(count);
                 }
 
                 // add to file's info
-                numbers.total.segments++;
-                numbers.total.words += words;
-                numbers.total.charsWithoutSpaces += charsNoSpaces;
-                numbers.total.charsWithSpaces += chars;
+                numbers.total.add(count);
 
-                Integer uniqueCount = uniqueSegment.get(srcNoTags);
-                Boolean firstSeen = firstSeenUniqueSegment.get(srcNoTags);
+                Boolean firstSeen = firstSeenUniqueSegment.get(src);
                 if (firstSeen == null) {
-                    firstSeenUniqueSegment.put(srcNoTags, false);
-                    numbers.unique.segments++;
-                    numbers.unique.words += words;
-                    numbers.unique.charsWithoutSpaces += charsNoSpaces;
-                    numbers.unique.charsWithSpaces += chars;
+                    firstSeenUniqueSegment.put(src, false);
+                    numbers.unique.add(count);
 
                     if (!tr.isTranslated()) {
-                        numbers.remainingUnique.segments++;
-                        numbers.remainingUnique.words += words;
-                        numbers.remainingUnique.charsWithoutSpaces += charsNoSpaces;
-                        numbers.remainingUnique.charsWithSpaces += chars;
+                        numbers.remainingUnique.add(count);
                     }
                 }
 
                 if (!tr.isTranslated()) {
-                    numbers.remaining.segments++;
-                    numbers.remaining.words += words;
-                    numbers.remaining.charsWithoutSpaces += charsNoSpaces;
-                    numbers.remaining.charsWithSpaces += chars;
+                    numbers.remaining.add(count);
                 }
             }
         }

@@ -53,7 +53,7 @@ import org.omegat.util.gui.TextUtil;
  * Calculation requires two different tags stripping: one for calculate match percentage, and second for
  * calculate number of words and chars.
  * 
- * Number of words/chars calculation requires to just strip all tags, protected parts, placeholders.
+ * Number of words/chars calculation requires to just strip all tags, protected parts, placeholders(see StatCount.java).
  * 
  * Calculation of match percentage requires 2 steps for tags processing: 1) remove only simple XML tags for
  * find 5 nearest matches(but not protected parts' text: from "<m0>IBM</m0>" only tags should be removed, but
@@ -99,25 +99,17 @@ public class CalcMatchStatistics extends LongProcessThread {
             SourceTextEntry ste = allEntries.get(i);
             String src = ste.getSrcText();
 
-            String srcNoTags = StaticUtils.stripAllTagsFromSource(ste);
+            StatCount count = new StatCount(ste);
             boolean isFirst = alreadyProcessed.add(src);
             if (Core.getProject().getTranslationInfo(ste).isTranslated()) {
                 // segment has translation - should be calculated as
                 // "Exact matched"
-                result[1].segments++;
-                /* Number of words and chars calculated without all tags and protected parts. */
-                result[1].words += Statistics.numberOfWords(srcNoTags);
-                result[1].charsWithoutSpaces += Statistics.numberOfCharactersWithoutSpaces(srcNoTags);
-                result[1].charsWithSpaces += Statistics.numberOfCharactersWithSpaces(srcNoTags);
+                result[1].add(count);
                 treated ++;
             }
             else if (!isFirst) {
                 // already processed - repetition
-                result[0].segments++;
-                /* Number of words and chars calculated without all tags and protected parts. */
-                result[0].words += Statistics.numberOfWords(srcNoTags);
-                result[0].charsWithoutSpaces += Statistics.numberOfCharactersWithoutSpaces(srcNoTags);
-                result[0].charsWithSpaces += Statistics.numberOfCharactersWithSpaces(srcNoTags);
+                result[0].add(count);
                 treated ++;
             }
             else {
@@ -180,13 +172,9 @@ public class CalcMatchStatistics extends LongProcessThread {
                 }
             }
 
-            String srcNoTags = StaticUtils.stripAllTagsFromSource(ste);
+            StatCount count = new StatCount(ste);
             int row = getRowByPercent(maxSimilarity);
-            result[row].segments++;
-            /* Number of words and chars calculated without all tags and protected parts. */
-            result[row].words += Statistics.numberOfWords(srcNoTags);
-            result[row].charsWithoutSpaces += Statistics.numberOfCharactersWithoutSpaces(srcNoTags);
-            result[row].charsWithSpaces += Statistics.numberOfCharactersWithSpaces(srcNoTags);
+            result[row].add(count);
             treated++;
 
             if (isStopped) {

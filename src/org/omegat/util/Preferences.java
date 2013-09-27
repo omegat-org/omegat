@@ -564,9 +564,13 @@ public class Preferences {
             // trying again later
             m_loaded = true;
 
+            File prefsFile = new File(StaticUtils.getConfigDir() + FILE_PREFERENCES);
+            if (!prefsFile.exists()) {
+                prefsFile = new File(StaticUtils.installDir(), FILE_PREFERENCES);
+            }
             XMLStreamReader xml = new XMLStreamReader();
             xml.killEmptyBlocks();
-            xml.setStream(new File(StaticUtils.getConfigDir() + FILE_PREFERENCES));
+            xml.setStream(prefsFile);
             XMLBlock blk;
             List<XMLBlock> lst;
 

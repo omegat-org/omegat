@@ -170,7 +170,7 @@ public class OConsts {
      * Application debug classpath. It is used to calculate the installation
      * directory (in case of debugging -- the sources directory).
      */
-    public static final String DEBUG_CLASSPATH = "build" + File.separator + "classes";
+    public static final String DEBUG_CLASSPATH = File.separator + "classes";
 
     /** Encoding: "UTF-8". */
     public static final String UTF8 = "UTF-8";

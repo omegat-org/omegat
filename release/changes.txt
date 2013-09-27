@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 3.0.5
 ----------------------------------------------------------------------
-   7 Enhancements
+   8 Enhancements
    3 Bug fixes
    1 Localisation update
 ----------------------------------------------------------------------
@@ -32,6 +32,11 @@ comment pane
 
   - The QA script (check_rules.groovy) now checks for double blanks,
 which can contain either normal spaces or non-breaking spaces
+
+  - If there is no preference file (omegat.prefs) in the configuration 
+folder,  i.e., OmegaT has never been launched and quit, and there is one 
+in the installation folder, OmegaT will read preferences from that file.
+That allow distributing a version with customised pre-defined options.
 
   Bug fixes: 
 

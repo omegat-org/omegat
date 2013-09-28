@@ -80,6 +80,7 @@ public class GlossaryTextArea extends EntryInfoThreadPane<List<GlossaryEntry>> {
 
     private static final String EXPLANATION = OStrings.getString("GUI_GLOSSARYWINDOW_explanation");
 
+    private static final AttributeSet NO_ATTRIBUTES = Styles.createAttributeSet(null, null, false, null);
     private static final AttributeSet PRIORITY_ATTRIBUTES = Styles.createAttributeSet(null, null, true, null);
 
     /**
@@ -185,7 +186,9 @@ public class GlossaryTextArea extends EntryInfoThreadPane<List<GlossaryEntry>> {
             buf.append("\n\n");
         }
         setText(buf.text.toString());
+        setCaretPosition(0);
         StyledDocument doc = getStyledDocument();
+        doc.setCharacterAttributes(0, doc.getLength(), NO_ATTRIBUTES, true); // remove old bold settings first
         for (int i = 0; i < buf.boldStarts.size(); i++) {
             doc.setCharacterAttributes(buf.boldStarts.get(i), buf.boldLengths.get(i), PRIORITY_ATTRIBUTES,
                     true);

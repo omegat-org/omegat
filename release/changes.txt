@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 3.0.5
 ----------------------------------------------------------------------
-   8 Enhancements
+   9 Enhancements
    3 Bug fixes
    1 Localisation update
 ----------------------------------------------------------------------
@@ -21,6 +21,9 @@
 
   Fill TMX on segmentation from sentence to paragraph 
   - https://sourceforge.net/p/omegat/feature-requests/825/
+
+  - Do not scroll the glossary pane to the bottom 
+  https://sourceforge.net/p/omegat/feature-requests/729/
 
  Other enhancements:
 

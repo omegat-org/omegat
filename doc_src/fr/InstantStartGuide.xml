@@ -52,7 +52,7 @@
     </mediaobject>
     </para>
     
-    <para>Les balises dans OmegaT sont grisées pour être facilement reconnaissables. Elles sont protégées pour que vous ne puissiez pas modifier leur contenu mais vous pouvez les supprimer, les entrer manuellement ou les déplacer dans la phrase cible. Toutefois, si vous avez fait des erreurs en saisissant les balises de formatage, l'ouverture des fichiers traduits pourra échouer. Par conséquent, assurez-vous que vos balises sont correctes et validez-les avant de générer les fichiers traduits (raccourci clavier <keycap>Ctrl+T</keycap>).</para>
+    <para>Les balises dans OmegaT sont grisées pour être facilement reconnaissables. Elles sont protégées pour que vous ne puissiez pas modifier leur contenu mais vous pouvez les supprimer, les entrer manuellement ou les déplacer dans la phrase cible. Toutefois, si vous avez fait des erreurs en saisissant les balises de formatage, l'ouverture des fichiers traduits pourra échouer. Par conséquent, assurez-vous que vos balises sont correctes et validez-les avant de générer les fichiers traduits (raccourci clavier <keycap>Ctrl+Maj+V</keycap>).</para>
   </section>
 
   <section>

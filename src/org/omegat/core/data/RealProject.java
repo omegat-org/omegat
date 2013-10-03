@@ -739,8 +739,8 @@ public class RealProject implements IProject {
             if (filenameGlossarywithLocalChangesOnBase.exists()) {
                 //empty file first, because we append to it.
                 filenameGlossarywithLocalChangesOnBase.delete();
-                filenameGlossarywithLocalChangesOnBase.createNewFile();
             }
+            filenameGlossarywithLocalChangesOnBase.createNewFile();
             for (GlossaryEntry ge : glossaryEntries) {
                 GlossaryReaderTSV.append(filenameGlossarywithLocalChangesOnBase, ge);
             }

@@ -49,8 +49,9 @@
 				<jar href="sequence-library-1.0.2.jar" />
 				<jar href="org.eclipse.jgit-2.1.0.201209190230-r.jar" />
 				<jar href="jsch-0.1.49.jar" />
-                <jar href="jsr173_1.0_api.jar" />
-                <jar href="swing-worker-1.2.jar" />
+        <jar href="jsr173_1.0_api.jar" />
+        <jar href="swing-worker-1.2.jar" />
+        <jar href="diff.jar" />
 			</resources>
             <resources os="Linux" arch="amd64">
                 <nativelib href="hunspell-linux64.jar" />
@@ -91,7 +92,8 @@
 				<jar href="sequence-library-1.0.2.jar" />
 				<jar href="org.eclipse.jgit-2.1.0.201209190230-r.jar" />
 				<jar href="jsch-0.1.49.jar" />
-                <jar href="swing-worker-1.2.jar" />
+         <jar href="swing-worker-1.2.jar" />
+         <jar href="diff.jar" />
 			</resources>
             <resources os="Linux" arch="amd64">
                 <nativelib href="hunspell-linux64.jar" />
@@ -132,7 +134,8 @@
 				<jar href="sequence-library-1.0.2.jar" />
 				<jar href="org.eclipse.jgit-2.1.0.201209190230-r.jar" />
 				<jar href="jsch-0.1.49.jar" />
-                <jar href="swing-worker-1.2.jar" />
+        <jar href="swing-worker-1.2.jar" />
+ 				<jar href="diff.jar" />
 			</resources>
             <resources os="Linux" arch="amd64">
                 <nativelib href="hunspell-linux64.jar" />

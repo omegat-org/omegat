@@ -19,8 +19,8 @@
   - Priority Glossary 
   https://sourceforge.net/p/omegat/feature-requests/853/
 
-  Fill TMX on segmentation from sentence to paragraph 
-  - https://sourceforge.net/p/omegat/feature-requests/825/
+  - Fill TMX on segmentation from sentence to paragraph 
+  https://sourceforge.net/p/omegat/feature-requests/825/
 
   - Do not scroll the glossary pane to the bottom 
   https://sourceforge.net/p/omegat/feature-requests/729/

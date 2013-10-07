@@ -828,6 +828,7 @@ public class RealProject implements IProject {
                 headGlossaryEntries.removeAll(deltaRemovedGlossaryLocal);
 
                 filenameGlossarywithLocalChangesOnHead = new File(glossaryFilename + "-based_on_" + headRevGlossary + OConsts.NEWFILE_EXTENSION);
+                filenameGlossarywithLocalChangesOnHead.createNewFile();
                 for (GlossaryEntry ge : headGlossaryEntries) {
                     GlossaryReaderTSV.append(filenameGlossarywithLocalChangesOnHead, ge);
                 }

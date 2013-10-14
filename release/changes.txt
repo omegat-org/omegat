@@ -1,11 +1,18 @@
 ----------------------------------------------------------------------
  OmegaT 3.0.5 update 1
 ----------------------------------------------------------------------
-   0 Enhancement
+   2 Enhancements
    0 Bug fix
    1 Localisation update
 ----------------------------------------------------------------------
 3.0.5 vs. 3.0.4 update 2
+
+ Other enhancements:
+
+  - More information is logged when plugins are loaded
+ 
+  - Protected text (from the XLIFF filter currently) remains protected even 
+when Remove Tags is used
 
   Localisation updates:
 

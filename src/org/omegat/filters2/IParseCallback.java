@@ -25,6 +25,10 @@
 
 package org.omegat.filters2;
 
+import java.util.List;
+
+import org.omegat.core.data.ProtectedPart;
+
 
 /**
  * Callback for parse files.
@@ -49,11 +53,11 @@ public interface IParseCallback {
      *            path of segment
      * @param filter
      *            filter which produces entry
-     * @param shortcutDetails
-     *            shortcuts of source text details
+     * @param protectedParts
+     *            protected parts
      */
     void addEntry(String id, String source, String translation, boolean isFuzzy, String comment, String path,
-            IFilter filter, Shortcuts shortcutDetails);
+            IFilter filter, List<ProtectedPart> protectedParts);
 
     /**
      * Old call without path, for compatibility 

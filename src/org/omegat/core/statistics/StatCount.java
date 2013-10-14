@@ -25,8 +25,8 @@
 
 package org.omegat.core.statistics;
 
+import org.omegat.core.data.ProtectedPart;
 import org.omegat.core.data.SourceTextEntry;
-import org.omegat.util.StaticUtils;
 
 /**
  * Bean for store counts in statistics.
@@ -43,7 +43,7 @@ public class StatCount {
      * 2) Protected texts are counted, but related tags are not counted in the word count. For example: "<i1>"
      * - 0 words, "<m0>Acme</m0>" - 1 word.
      */
-    static final boolean REMOVE_ALL_PROTECTED_PARTS = true;
+    static public final boolean REMOVE_ALL_PROTECTED_PARTS = true;
 
     public int segments, words, charsWithoutSpaces, charsWithSpaces;
 
@@ -57,11 +57,9 @@ public class StatCount {
      * Initialize counters with counts from entry's source.
      */
     public StatCount(SourceTextEntry ste) {
-        String src;
-        if (REMOVE_ALL_PROTECTED_PARTS) {
-            src = StaticUtils.stripAllTagsFromSource(ste);
-        } else {
-            src = StaticUtils.stripXmlTags(ste.getSrcText());
+        String src = ste.getSrcText();
+        for (ProtectedPart pp : ste.getProtectedParts()) {
+            src = src.replace(pp.getTextInSourceSegment(), pp.getReplacementWordsCountCalculation());
         }
         segments = 1;
         words = Statistics.numberOfWords(src);

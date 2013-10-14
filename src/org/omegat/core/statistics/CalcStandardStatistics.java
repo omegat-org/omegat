@@ -39,6 +39,7 @@ import org.omegat.core.Core;
 import org.omegat.core.data.IProject;
 import org.omegat.core.data.IProject.FileInfo;
 import org.omegat.core.data.ProjectProperties;
+import org.omegat.core.data.ProtectedPart;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.data.TMXEntry;
 import org.omegat.core.threads.LongProcessThread;
@@ -134,7 +135,10 @@ public class CalcStandardStatistics extends LongProcessThread {
         Map<String, SourceTextEntry> uniqueSegment = new HashMap<String, SourceTextEntry>();
         Set<String> translated = new HashSet<String>();
         for (SourceTextEntry ste : project.getAllEntries()) {
-            String src = StaticUtils.stripAllTagsFromSource(ste);
+            String src = ste.getSrcText();
+            for (ProtectedPart pp : ste.getProtectedParts()) {
+                src = src.replace(pp.getTextInSourceSegment(), pp.getReplacementUniquenessCalculation());
+            }
             if (!uniqueSegment.containsKey(src)) {
                 uniqueSegment.put(src, ste);
             }
@@ -162,7 +166,10 @@ public class CalcStandardStatistics extends LongProcessThread {
             numbers.filename = file.filePath;
             counts.add(numbers);
             for (SourceTextEntry ste : file.entries) {
-                String src = StaticUtils.stripAllTagsFromSource(ste);
+                String src = ste.getSrcText();
+                for (ProtectedPart pp : ste.getProtectedParts()) {
+                    src = src.replace(pp.getTextInSourceSegment(), pp.getReplacementUniquenessCalculation());
+                }
 
                 /* Number of words and chars calculated without all tags and protected parts. */
                 StatCount count = new StatCount(ste);

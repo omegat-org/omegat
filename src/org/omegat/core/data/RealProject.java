@@ -68,7 +68,6 @@ import org.omegat.core.threads.CommandMonitor;
 import org.omegat.filters2.FilterContext;
 import org.omegat.filters2.IAlignCallback;
 import org.omegat.filters2.IFilter;
-import org.omegat.filters2.Shortcuts;
 import org.omegat.filters2.TranslationException;
 import org.omegat.filters2.master.FilterMaster;
 import org.omegat.gui.glossary.GlossaryEntry;
@@ -81,6 +80,7 @@ import org.omegat.util.Language;
 import org.omegat.util.Log;
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
+import org.omegat.util.PatternConsts;
 import org.omegat.util.Preferences;
 import org.omegat.util.ProjectFileStorage;
 import org.omegat.util.RuntimePreferences;
@@ -1458,7 +1458,7 @@ public class RealProject implements IProject {
          * {@inheritDoc}
          */
         protected void addSegment(String id, short segmentIndex, String segmentSource,
-                Shortcuts shortcutDetails, String segmentTranslation, boolean segmentTranslationFuzzy,
+                List<ProtectedPart> protectedParts, String segmentTranslation, boolean segmentTranslationFuzzy,
                 String comment, String prevSegment, String nextSegment, String path) {
             // if the source string is empty, don't add it to TM
             if (segmentSource.length() == 0 || segmentSource.trim().length() == 0) {
@@ -1467,8 +1467,11 @@ public class RealProject implements IProject {
 
             EntryKey ek = new EntryKey(entryKeyFilename, segmentSource, id, prevSegment, nextSegment, path);
 
+            protectedParts = StaticUtils.applyCustomProtectedParts(segmentSource,
+                    PatternConsts.getPlaceholderPattern(), protectedParts);
+
             SourceTextEntry srcTextEntry = new SourceTextEntry(ek, allProjectEntries.size() + 1, comment,
-                    segmentTranslation, shortcutDetails);
+                    segmentTranslation, protectedParts);
             srcTextEntry.setSourceTranslationFuzzy(segmentTranslationFuzzy);
             allProjectEntries.add(srcTextEntry);
             fileInfo.entries.add(srcTextEntry);

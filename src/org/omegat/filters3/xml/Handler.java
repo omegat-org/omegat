@@ -44,7 +44,7 @@ import java.util.Map;
 import java.util.Stack;
 
 import org.omegat.core.Core;
-import org.omegat.filters2.Shortcuts;
+import org.omegat.core.data.ProtectedPart;
 import org.omegat.filters2.TranslationException;
 import org.omegat.filters3.Attribute;
 import org.omegat.filters3.Element;
@@ -551,7 +551,7 @@ public class Handler extends DefaultHandler implements LexicalHandler, DeclHandl
         if (currEntry().size() == 0)
             return;
 
-        Shortcuts shortcutDetails = new Shortcuts();
+        List<ProtectedPart> shortcutDetails = new ArrayList<ProtectedPart>();
         boolean tagsAggregation = isTagsAggregationEnabled();
         String src = currEntry().sourceToShortcut(tagsAggregation, dialect, shortcutDetails);
         Element lead = currEntry().get(0);

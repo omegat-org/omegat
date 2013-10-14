@@ -51,7 +51,6 @@ import org.omegat.filters2.FilterContext;
 import org.omegat.filters2.IFilter;
 import org.omegat.filters2.IParseCallback;
 import org.omegat.filters2.ITranslateCallback;
-import org.omegat.filters2.Shortcuts;
 import org.omegat.filters2.master.FilterMaster;
 import org.omegat.filters2.text.TextFilter;
 
@@ -163,7 +162,7 @@ public abstract class TmxComplianceBase extends TestCase {
             }
 
             public void addEntry(String id, String source, String translation, boolean isFuzzy, String comment,
-                    String path, IFilter filter, Shortcuts shortcutDetails) {
+                    String path, IFilter filter, List<ProtectedPart> protectedParts) {
                 result.addAll(Segmenter.segment(context.getSourceLang(), source, null, null));
             }
 

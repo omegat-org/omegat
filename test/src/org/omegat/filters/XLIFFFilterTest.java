@@ -37,6 +37,7 @@ import org.omegat.filters3.xml.xliff.XLIFFDialect;
 import org.omegat.filters3.xml.xliff.XLIFFFilter;
 import org.omegat.filters3.xml.xliff.XLIFFOptions;
 import org.omegat.util.FileUtil;
+import org.omegat.util.StaticUtils;
 
 public class XLIFFFilterTest extends TestFilterBase {
     XLIFFFilter filter;
@@ -78,17 +79,21 @@ public class XLIFFFilterTest extends TestFilterBase {
         SourceTextEntry ste;
         checkMultiStart(fi, f);
         checkMultiNoPrevNext("Link to <m0>http://localhost</m0>.", null, null, null); // #1988732
-        checkMultiNoPrevNext("About <b0>Gandalf</b0>", null, null, null); // #1988732
+        checkMultiNoPrevNext("About <b0>Gandalf</b0>", null, null, "7"); // #1988732
         checkMultiNoPrevNext("<i0>Tags</i0> translation zz<i1>2</i1>z <b2>-NONTRANSLATED", null, null, null);
         checkMultiNoPrevNext("one <a0> two </b1> three <c2> four </d3> five", null, null, null);
         ste = checkMultiNoPrevNext("About <m0>Gandalf</m0> and <m1>other</m1>.", null, null, null);
-        assertEquals(3, ste.getProtectedParts().getParts().length);
-        assertEquals("<mrk mtype=\"other\">", ste.getProtectedParts().getDetail("<m1>"));
-        assertEquals(false, ste.getProtectedParts().isProtected("<m1>"));
-        assertEquals("</mrk>", ste.getProtectedParts().getDetail("</m1>"));
-        assertEquals(false, ste.getProtectedParts().isProtected("</m1>"));
-        assertEquals("<mrk mtype=\"protected\">Gandalf</mrk>", ste.getProtectedParts().getDetail("<m0>Gandalf</m0>"));
-        assertEquals(true, ste.getProtectedParts().isProtected("<m0>Gandalf</m0>"));
+        assertEquals(3, ste.getProtectedParts().length);
+        assertEquals("<m0>Gandalf</m0>", ste.getProtectedParts()[0].getTextInSourceSegment());
+        assertEquals("<mrk mtype=\"protected\">Gandalf</mrk>",
+                ste.getProtectedParts()[0].getDetailsFromSourceFile());
+        assertEquals("Gandalf", ste.getProtectedParts()[0].getReplacementMatchCalculation());
+        assertEquals("<m1>", ste.getProtectedParts()[1].getTextInSourceSegment());
+        assertEquals("<mrk mtype=\"other\">", ste.getProtectedParts()[1].getDetailsFromSourceFile());
+        assertEquals(StaticUtils.TAG_REPLACEMENT, ste.getProtectedParts()[1].getReplacementMatchCalculation());
+        assertEquals("</m1>", ste.getProtectedParts()[2].getTextInSourceSegment());
+        assertEquals("</mrk>", ste.getProtectedParts()[2].getDetailsFromSourceFile());
+        assertEquals(StaticUtils.TAG_REPLACEMENT, ste.getProtectedParts()[2].getReplacementMatchCalculation());
         checkMultiNoPrevNext("one <o0>two</o0> three", null, null, null);
         checkMultiNoPrevNext("one <t0/> three", null, null, null);
         checkMultiNoPrevNext("one <w0/> three", null, null, null);

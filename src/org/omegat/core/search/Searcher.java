@@ -50,11 +50,11 @@ import org.omegat.core.data.IProject.FileInfo;
 import org.omegat.core.data.ParseEntry;
 import org.omegat.core.data.ProjectProperties;
 import org.omegat.core.data.ProjectTMX;
+import org.omegat.core.data.ProtectedPart;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.data.TMXEntry;
 import org.omegat.filters2.FilterContext;
 import org.omegat.filters2.IParseCallback;
-import org.omegat.filters2.Shortcuts;
 import org.omegat.filters2.TranslationException;
 import org.omegat.filters2.master.FilterMaster;
 import org.omegat.gui.glossary.GlossaryEntry;
@@ -453,7 +453,7 @@ public class Searcher {
 
         @Override
         protected void addSegment(String id, short segmentIndex, String segmentSource,
-                Shortcuts shortcutDetails, String segmentTranslation, boolean segmentTranslationFuzzy,
+                List<ProtectedPart> protectedParts, String segmentTranslation, boolean segmentTranslationFuzzy,
                 String comment, String prevSegment, String nextSegment, String path) {
             searchText(segmentSource, segmentTranslation, filename);
         }

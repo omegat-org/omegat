@@ -37,12 +37,13 @@ import java.util.Map;
 import java.util.Set;
 import java.util.regex.Pattern;
 
-import org.omegat.filters2.Shortcuts;
+import org.omegat.core.data.ProtectedPart;
 import org.omegat.filters3.Attributes;
 import org.omegat.filters3.Element;
 import org.omegat.filters3.Tag;
 import org.omegat.filters3.Text;
 import org.omegat.util.MultiMap;
+import org.omegat.util.StaticUtils;
 import org.xml.sax.InputSource;
 
 /**
@@ -453,15 +454,20 @@ public class DefaultXMLDialect implements XMLDialect {
     /**
      * {@inheritDoc}
      */
-    public String constructShortcuts(List<Element> elements, Shortcuts shortcutDetails) {
-        shortcutDetails.clear();
+    public String constructShortcuts(List<Element> elements, List<ProtectedPart> protectedParts) {
+        protectedParts.clear();
         StringBuilder r = new StringBuilder();
         for (Element el : elements) {
             String shortcut = el.toShortcut();
             r.append(shortcut);
             if (!(el instanceof Text)) {
-                String details = el.toOriginal();
-                shortcutDetails.put(shortcut, details, false);
+                ProtectedPart pp = new ProtectedPart();
+                pp.setTextInSourceSegment(shortcut);
+                pp.setDetailsFromSourceFile(el.toOriginal());
+                pp.setReplacementWordsCountCalculation(StaticUtils.TAG_REPLACEMENT);
+                pp.setReplacementUniquenessCalculation(StaticUtils.TAG_REPLACEMENT);
+                pp.setReplacementMatchCalculation(StaticUtils.TAG_REPLACEMENT);
+                protectedParts.add(pp);
             }
         }
         return r.toString();

@@ -34,7 +34,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.regex.Pattern;
 
-import org.omegat.filters2.Shortcuts;
+import org.omegat.core.data.ProtectedPart;
 import org.omegat.filters3.Attributes;
 import org.omegat.filters3.Element;
 import org.omegat.filters3.Tag;
@@ -91,7 +91,7 @@ public interface XMLDialect {
      * <code>Here's &lt;b&gt;bold text&lt;/b&gt;</code> should return
      * <code>Here's &lt;b0&gt;bold text&lt;/b0&gt;</code>.
      */
-    String constructShortcuts(List<Element> elements, Shortcuts shortcutDetails);
+    String constructShortcuts(List<Element> elements, List<ProtectedPart> protectedParts);
 
     /**
      * Returns the multimap of translatable attributes of each tag.

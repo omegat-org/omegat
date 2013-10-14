@@ -28,12 +28,13 @@ package org.omegat.core.tagvalidation;
 import java.util.ArrayList;
 import java.util.List;
 
+import junit.framework.TestCase;
+
 import org.omegat.core.data.EntryKey;
+import org.omegat.core.data.ProtectedPart;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.tagvalidation.ErrorReport.TagError;
 import org.omegat.util.Preferences;
-
-import junit.framework.TestCase;
 
 /**
  * @author Aaron Madlon-Kay
@@ -211,7 +212,7 @@ public class TagValidationTest extends TestCase {
     
     private ErrorReport makeReport(String source, String translation) {
         EntryKey key = new EntryKey(null, source, null, null, null, null);
-        SourceTextEntry ste = new SourceTextEntry(key, 0, null, null, null);
+        SourceTextEntry ste = new SourceTextEntry(key, 0, null, null, new ArrayList<ProtectedPart>());
         ErrorReport report = new ErrorReport(ste, translation);
         return report;
     }

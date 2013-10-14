@@ -28,10 +28,11 @@ package org.omegat.filters3.xml.android;
 
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
+import org.omegat.core.data.ProtectedPart;
 import org.omegat.filters2.Instance;
-import org.omegat.filters2.Shortcuts;
 import org.omegat.filters3.xml.XMLFilter;
 import org.omegat.util.OStrings;
 import org.xml.sax.Attributes;
@@ -103,7 +104,7 @@ public class AndroidFilter extends XMLFilter {
     /**
      * Filter-specific chars processing.
      */
-    public String translate(String entry, Shortcuts shortcutDetails) {
+    public String translate(String entry, List<ProtectedPart> protectedParts) {
         /**
          * Android sources has some entries without translatable="false" but with this comment. Yes, it's
          * dirty hack, but there is no other way.
@@ -115,7 +116,7 @@ public class AndroidFilter extends XMLFilter {
         String e = entry.replace("\\'", "'");
         String r = null;
         if (entryParseCallback != null) {
-            entryParseCallback.addEntry(id, e, null, false, idComment, null, this, shortcutDetails);
+            entryParseCallback.addEntry(id, e, null, false, idComment, null, this, protectedParts);
             r = e;
         } else if (entryTranslateCallback != null) {
             r = entryTranslateCallback.getTranslation(id, e, null);

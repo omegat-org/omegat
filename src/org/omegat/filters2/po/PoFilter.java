@@ -36,10 +36,12 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.omegat.core.data.ProtectedPart;
 import org.omegat.filters2.AbstractFilter;
 import org.omegat.filters2.FilterContext;
 import org.omegat.filters2.Instance;
@@ -47,6 +49,7 @@ import org.omegat.filters2.TranslationException;
 import org.omegat.util.Language;
 import org.omegat.util.OStrings;
 import org.omegat.util.Log;
+import org.omegat.util.PatternConsts;
 import org.omegat.util.StaticUtils;
 
 /**
@@ -573,9 +576,15 @@ public class PoFilter extends AbstractFilter {
         }
         if (entryParseCallback != null) {
             if (formatMonolingual) {
-                entryParseCallback.addEntry(source, translation, null, fuzzy, comments, path, this, null);
+                List<ProtectedPart> protectedParts = StaticUtils.applyCustomProtectedParts(translation,
+                        PatternConsts.PRINTF_VARS, null);
+                entryParseCallback.addEntry(source, translation, null, fuzzy, comments, path, this,
+                        protectedParts);
             } else {
-                entryParseCallback.addEntry(id, source, translation, fuzzy, comments, path, this, null);
+                List<ProtectedPart> protectedParts = StaticUtils.applyCustomProtectedParts(source,
+                        PatternConsts.PRINTF_VARS, null);
+                entryParseCallback.addEntry(id, source, translation, fuzzy, comments, path, this,
+                        protectedParts);
             }
         } else if (entryAlignCallback != null) {
             entryAlignCallback.addTranslation(id, source, translation, fuzzy, null, this);
@@ -584,8 +593,10 @@ public class PoFilter extends AbstractFilter {
 
     protected void alignHeader(String header, FilterContext fc) {
         if (entryParseCallback != null && !PoFilter.skipHeader) {
-            header = autoFillInPluralStatement(header, fc);
-            entryParseCallback.addEntry(null, unescape(header), null, false, null, path, this, null);
+            header = unescape(autoFillInPluralStatement(header, fc));
+            List<ProtectedPart> protectedParts = StaticUtils.applyCustomProtectedParts(header,
+                    PatternConsts.PRINTF_VARS, null);
+            entryParseCallback.addEntry(null, header, null, false, null, path, this, protectedParts);
         }
     }
 

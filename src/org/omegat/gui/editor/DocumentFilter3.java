@@ -35,6 +35,7 @@ import javax.swing.text.Document;
 import javax.swing.text.DocumentFilter;
 import javax.swing.text.StyleConstants;
 
+import org.omegat.core.data.ProtectedPart;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.util.PatternConsts;
 import org.omegat.util.Preferences;
@@ -110,23 +111,15 @@ public class DocumentFilter3 extends DocumentFilter {
             // check if inside tag
             String text = doc.getText(doc.getTranslationStart(), doc.getTranslationEnd() - doc.getTranslationStart());
             int off = offset - doc.getTranslationStart();
-            for (String tag : ste.getProtectedParts().getParts()) {
+            for (ProtectedPart pp : ste.getProtectedParts()) {
                 int pos = -1;
-                while ((pos = text.indexOf(tag, pos + 1)) >= 0) {
-                    if (off > pos && off < pos + tag.length()) {
+                while ((pos = text.indexOf(pp.getTextInSourceSegment(), pos + 1)) >= 0) {
+                    if (off > pos && off < pos + pp.getTextInSourceSegment().length()) {
                         return false;
                     }
-                    if (off + length > pos && off + length < pos + tag.length()) {
+                    if (off + length > pos && off + length < pos + pp.getTextInSourceSegment().length()) {
                         return false;
                     }
-                }
-            }
-            // check if inside tag by pattern
-            Pattern placeholderPattern = PatternConsts.getPlaceholderPattern();
-            Matcher placeholderMatcher = placeholderPattern.matcher(text);
-            while (placeholderMatcher.find()) {
-                if (placeholderMatcher.start() < off && off < placeholderMatcher.end()) {
-                    return false;
                 }
             }
         }

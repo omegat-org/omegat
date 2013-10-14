@@ -55,6 +55,7 @@ import javax.swing.KeyStroke;
 
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
+import org.omegat.core.data.ProtectedPart;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.data.TMXEntry;
 import org.omegat.core.events.IFontChangedEventListener;
@@ -204,11 +205,10 @@ public class TagValidationFrame extends JFrame {
      * Replace tags with &lt;font
      * color="color"&gt;&lt;b&gt;&lt;tag&gt;&lt;/b&gt;&lt;/font&gt;
      */
-    private String colorTags(String str, String color, Pattern placeholderPattern, Pattern removePattern,
-            SourceTextEntry.ProtectedParts protectedParts, Map<String, TagError> errors) {
+    private String colorTags(String str, String color, Pattern removePattern, ProtectedPart[] protectedParts,
+            Map<String, TagError> errors) {
         // show OmegaT tags in bold and color, and to-remove text also
-        String htmlResult = formatRemoveTagsAndPlaceholders(str, color, placeholderPattern, removePattern,
-                protectedParts, errors);
+        String htmlResult = formatRemoveTagsAndPlaceholders(str, color, removePattern, protectedParts, errors);
 
         // show linefeed as symbol
         Matcher lfMatch = PatternConsts.HTML_BR.matcher(htmlResult);
@@ -222,39 +222,25 @@ public class TagValidationFrame extends JFrame {
      * Formats plain text as html with placeholders in color 
      * @param str the text to format
      * @param color the color to use
-     * @param placeholderPattern the pattern to decide what is a placeholder
      * @return html text
      */
-    private String formatPlaceholders(String str, String color, Pattern placeholderPattern,
-            SourceTextEntry.ProtectedParts protectedParts, Map<String, TagError> errors) {
+    private String formatPlaceholders(String str, String color, ProtectedPart[] protectedParts,
+            Map<String, TagError> errors) {
         List<TextPart> text = new ArrayList<TextPart>();
         text.add(new TextPart(str, false));
         while (true) {
             boolean updated = false;
-            if (protectedParts != null) {
-                for (String p : protectedParts.getParts()) {
-                    for (int i = 0; i < text.size(); i++) {
-                        TextPart tp = text.get(i);
-                        if (tp.highlighted) {
-                            continue;
-                        }
-                        int pos = tp.text.indexOf(p);
-                        if (pos >= 0) {
-                            split(text, i, pos, pos + p.length());
-                            updated = true;
-                        }
+            for (ProtectedPart pp : protectedParts) {
+                for (int i = 0; i < text.size(); i++) {
+                    TextPart tp = text.get(i);
+                    if (tp.highlighted) {
+                        continue;
                     }
-                }
-            }
-            for (int i = 0; i < text.size(); i++) {
-                TextPart tp = text.get(i);
-                if (tp.highlighted) {
-                    continue;
-                }
-                Matcher placeholderMatcher = placeholderPattern.matcher(tp.text);
-                if (placeholderMatcher.find()) {
-                    split(text, i, placeholderMatcher.start(), placeholderMatcher.end());
-                    updated = true;
+                    int pos = tp.text.indexOf(pp.getTextInSourceSegment());
+                    if (pos >= 0) {
+                        split(text, i, pos, pos + pp.getTextInSourceSegment().length());
+                        updated = true;
+                    }
                 }
             }
             if (!updated) {
@@ -304,22 +290,22 @@ public class TagValidationFrame extends JFrame {
      * @param removePattern the pattern to decide what text had to be removed.
      * @return html text
      */
-    private String formatRemoveTagsAndPlaceholders(String str, String color, Pattern placeholderPattern,
-            Pattern removePattern, SourceTextEntry.ProtectedParts protectedParts, Map<String, TagError> errors) {
+    private String formatRemoveTagsAndPlaceholders(String str, String color, Pattern removePattern,
+            ProtectedPart[] protectedParts, Map<String, TagError> errors) {
         if (removePattern != null) {
             Matcher removeMatcher = removePattern.matcher(str);
             String htmlResult="";
             int pos=0;
             while (removeMatcher.find()) {
-                htmlResult += formatPlaceholders(str.substring(pos, removeMatcher.start()), color, placeholderPattern,
+                htmlResult += formatPlaceholders(str.substring(pos, removeMatcher.start()), color,
                         protectedParts, errors);
                 htmlResult += colorize(htmlize(removeMatcher.group(0)), TagError.EXTRANEOUS);
                 pos = removeMatcher.end();
             }
-            htmlResult += formatPlaceholders(str.substring(pos), color, placeholderPattern, protectedParts, errors);
+            htmlResult += formatPlaceholders(str.substring(pos), color, protectedParts, errors);
             return htmlResult;
         } else {
-            return formatPlaceholders(str, color, placeholderPattern, protectedParts, errors);
+            return formatPlaceholders(str, color, protectedParts, errors);
         }
     }
 
@@ -329,7 +315,6 @@ public class TagValidationFrame extends JFrame {
     }
 
     private void update() {
-        Pattern placeholderPattern = PatternConsts.getPlaceholderPattern();
         Pattern removePattern = PatternConsts.getRemovePattern();
 
         m_numFixableErrors = 0;
@@ -368,11 +353,11 @@ public class TagValidationFrame extends JFrame {
             output.append("</a>");
             output.append("</td>");
             output.append("<td>");
-            output.append(colorTags(report.source, "blue", placeholderPattern, null, report.ste.getProtectedParts(),
+            output.append(colorTags(report.source, "blue", null, report.ste.getProtectedParts(),
                     report.srcErrors));
             output.append("</td>");
             output.append("<td>");
-            output.append(colorTags(report.translation, "blue", placeholderPattern, removePattern,
+            output.append(colorTags(report.translation, "blue", removePattern,
                     report.ste.getProtectedParts(), report.transErrors));
             output.append("</td>");
             output.append("<td width=\"10%\">");

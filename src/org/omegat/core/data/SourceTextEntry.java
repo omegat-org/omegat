@@ -26,7 +26,7 @@
 
 package org.omegat.core.data;
 
-import org.omegat.filters2.Shortcuts;
+import java.util.List;
 
 /**
  * Source text entry represents an individual segment for translation pulled
@@ -38,13 +38,7 @@ import org.omegat.filters2.Shortcuts;
  */
 public class SourceTextEntry {
 
-    private static ProtectedParts EMPTY_PROTECTED_PARTS;
-    static {
-        EMPTY_PROTECTED_PARTS = new ProtectedParts();
-        EMPTY_PROTECTED_PARTS.parts = new String[0];
-        EMPTY_PROTECTED_PARTS.details = new String[0];
-        EMPTY_PROTECTED_PARTS.protect = new boolean[0];
-    }
+    private static final ProtectedPart[] EMPTY_PROTECTED_PARTS = new ProtectedPart[0];
 
     /** Storage for full entry's identifiers, including source text. */
     private final EntryKey key;
@@ -77,7 +71,7 @@ public class SourceTextEntry {
      * Protected parts(shortcuts) and details of full content (for tooltips).
      * Read-only info, cat be accessible from any threads. It can't be null.
      */
-    private final ProtectedParts protectedParts;
+    private final ProtectedPart[] protectedParts;
 
     /**
      * Creates a new source text entry.
@@ -93,25 +87,15 @@ public class SourceTextEntry {
      * @param shortcuts
      *            tags shortcuts
      */
-    public SourceTextEntry(EntryKey key, int entryNum, String comment, String sourceTranslation, Shortcuts shortcuts) {
+    public SourceTextEntry(EntryKey key, int entryNum, String comment, String sourceTranslation, List<ProtectedPart> protectedParts) {
         this.key = key;
         m_entryNum = entryNum;
         this.comment = comment;
         this.sourceTranslation = sourceTranslation;
-        if (shortcuts == null || shortcuts.isEmpty()) {
+        if (protectedParts.isEmpty()) {
             this.protectedParts = EMPTY_PROTECTED_PARTS;
         } else {
-            if (shortcuts.shortcuts.size() != shortcuts.shortcutDetails.size()) {
-                throw new RuntimeException("Wrong shortcuts info");
-            }
-            this.protectedParts = new ProtectedParts();
-            this.protectedParts.parts = shortcuts.shortcuts.toArray(new String[shortcuts.shortcuts.size()]);
-            this.protectedParts.details = shortcuts.shortcutDetails
-                    .toArray(new String[shortcuts.shortcutDetails.size()]);
-            this.protectedParts.protect = new boolean[shortcuts.shortcutProtected.size()];
-            for (int i = 0; i < this.protectedParts.protect.length; i++) {
-                this.protectedParts.protect[i] = shortcuts.shortcutProtected.get(i);
-            }
+            this.protectedParts = protectedParts.toArray(new ProtectedPart[protectedParts.size()]);
         }
     }
 
@@ -156,55 +140,7 @@ public class SourceTextEntry {
         this.sourceTranslationFuzzy = sourceTranslationFuzzy;
     }
 
-    public ProtectedParts getProtectedParts() {
+    public ProtectedPart[] getProtectedParts() {
         return protectedParts;
-    }
-
-    /**
-     * Class for store protected parts info.
-     * 
-     * "Protected part" is common term for :
-     * 
-     * <m0>Acme</m0> - protected text(Acme) with related tags (<m0>,</m0>)
-     * 
-     * <i1> - tag
-     * 
-     * $1 - placeholder
-     */
-    public static class ProtectedParts {
-        protected String[] parts;
-        protected String[] details;
-        protected boolean[] protect;
-
-        public String[] getParts() {
-            return parts;
-        }
-
-        public boolean contains(String s) {
-            for (int i = 0; i < parts.length; i++) {
-                if (s.equals(parts[i])) {
-                    return true;
-                }
-            }
-            return false;
-        }
-
-        public String getDetail(String part) {
-            for (int i = 0; i < parts.length; i++) {
-                if (part.equals(parts[i])) {
-                    return details[i];
-                }
-            }
-            return null;
-        }
-
-        public boolean isProtected(String part) {
-            for (int i = 0; i < parts.length; i++) {
-                if (part.equals(parts[i])) {
-                    return protect[i];
-                }
-            }
-            return false;
-        }
     }
 }

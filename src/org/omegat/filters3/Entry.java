@@ -33,12 +33,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.omegat.core.Core;
-import org.omegat.filters2.Shortcuts;
+import org.omegat.core.data.ProtectedPart;
 import org.omegat.filters2.TranslationException;
 import org.omegat.filters3.xml.Handler;
 import org.omegat.filters3.xml.XMLContentBasedTag;
 import org.omegat.filters3.xml.XMLDialect;
-import org.omegat.util.InlineTagHandler;
 import org.omegat.util.PatternConsts;
 import org.omegat.util.StringUtil;
 
@@ -439,7 +438,7 @@ public class Entry {
      * @param shortcutDetails
      *            shortcuts details
      */
-    public String sourceToShortcut(boolean tagsAggregation, XMLDialect xmlDialect, Shortcuts shortcutDetails) {
+    public String sourceToShortcut(boolean tagsAggregation, XMLDialect xmlDialect, List<ProtectedPart> protectedParts) {
         if (tagsAggregation != this.tagsAggregationEnabled) {
             this.tagsAggregationEnabled = tagsAggregation;
             // Each change to tags aggregation setting resets detected tags
@@ -447,14 +446,14 @@ public class Entry {
         }
 
         if (getFirstGood() <= getLastGood()) {
-            return xmlDialect.constructShortcuts(elements.subList(getFirstGood(), getLastGood() + 1), shortcutDetails);
+            return xmlDialect.constructShortcuts(elements.subList(getFirstGood(), getLastGood() + 1), protectedParts);
         } else {
             return "";
         }
     }
 
-    private String sourceToShortcut(XMLDialect xmlDialect, Shortcuts shortcutDetails) {
-        return sourceToShortcut(tagsAggregationEnabled, xmlDialect, shortcutDetails);
+    private String sourceToShortcut(XMLDialect xmlDialect, List<ProtectedPart> protectedParts) {
+        return sourceToShortcut(tagsAggregationEnabled, xmlDialect, protectedParts);
     }
 
     /**
@@ -518,9 +517,9 @@ public class Entry {
      * @throws TranslationException
      *             -- if any tag is missing or tags are ordered incorrectly.
      */
-    public void setTranslation(String translation, XMLDialect xmlDialect, Shortcuts shortcutDetails)
+    public void setTranslation(String translation, XMLDialect xmlDialect, List<ProtectedPart> protectedParts)
             throws TranslationException {
-        if (!sourceToShortcut(xmlDialect, shortcutDetails).equals(translation)) {
+        if (!sourceToShortcut(xmlDialect, protectedParts).equals(translation)) {
             checkAndRecoverTags(translation);
             this.translation = translation;
         }

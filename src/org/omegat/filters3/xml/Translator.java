@@ -31,8 +31,9 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.util.List;
 
-import org.omegat.filters2.Shortcuts;
+import org.omegat.core.data.ProtectedPart;
 import org.omegat.util.Language;
 import org.xml.sax.Attributes;
 
@@ -47,7 +48,7 @@ interface Translator {
      * The method the Handler would call to pass translatable content to OmegaT
      * core and receive translation.
      */
-    String translate(String s, Shortcuts shortcutDetails);
+    String translate(String s, List<ProtectedPart> protectedParts);
 
     /**
      * Creates a special XML-encoding-aware reader of an input file.

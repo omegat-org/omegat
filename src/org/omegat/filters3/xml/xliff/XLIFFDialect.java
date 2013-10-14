@@ -29,7 +29,8 @@ package org.omegat.filters3.xml.xliff;
 
 import java.util.List;
 
-import org.omegat.filters2.Shortcuts;
+import org.omegat.core.data.ProtectedPart;
+import org.omegat.core.statistics.StatCount;
 import org.omegat.filters3.Attributes;
 import org.omegat.filters3.Element;
 import org.omegat.filters3.Tag;
@@ -37,6 +38,7 @@ import org.omegat.filters3.xml.DefaultXMLDialect;
 import org.omegat.filters3.xml.XMLContentBasedTag;
 import org.omegat.filters3.xml.XMLText;
 import org.omegat.util.InlineTagHandler;
+import org.omegat.util.StaticUtils;
 import org.omegat.util.StringUtil;
 
 /**
@@ -144,8 +146,8 @@ public class XLIFFDialect extends DefaultXMLDialect {
     }
 
     @Override
-    public String constructShortcuts(List<Element> elements, Shortcuts shortcutDetails) {
-        shortcutDetails.clear();
+    public String constructShortcuts(List<Element> elements, List<ProtectedPart> protectedParts) {
+        protectedParts.clear();
         // create shortcuts
         InlineTagHandler tagHandler = new InlineTagHandler();
 
@@ -207,16 +209,40 @@ public class XLIFFDialect extends DefaultXMLDialect {
                 tag.setShortcutIndex(tagIndex);
                 tag.setShortcut(shortcut);
                 r.append(shortcut);
-                String details = tag.toOriginal();
-                shortcutDetails.put(shortcut, details, tagProtected);
+                ProtectedPart pp = new ProtectedPart();
+                pp.setTextInSourceSegment(shortcut);
+                pp.setDetailsFromSourceFile(tag.toOriginal());
+                if (tagProtected) {
+                    // protected text with related tags, like <m0>Acme</m0>
+                    if (StatCount.REMOVE_ALL_PROTECTED_PARTS) {
+                        // All protected parts are not counted in the word count(default)
+                        pp.setReplacementWordsCountCalculation(StaticUtils.TAG_REPLACEMENT);
+                    } else {
+                        // Protected texts are counted, but related tags are not counted in the word count
+                        pp.setReplacementWordsCountCalculation(tag.getIntactContents().sourceToOriginal());
+                    }
+                    pp.setReplacementUniquenessCalculation(StaticUtils.TAG_REPLACEMENT);
+                    pp.setReplacementMatchCalculation(tag.getIntactContents().sourceToOriginal());
+                } else {
+                    // simple tag, like <i0>
+                    pp.setReplacementWordsCountCalculation(StaticUtils.TAG_REPLACEMENT);
+                    pp.setReplacementUniquenessCalculation(StaticUtils.TAG_REPLACEMENT);
+                    pp.setReplacementMatchCalculation(StaticUtils.TAG_REPLACEMENT);
+                }
+                protectedParts.add(pp);
             } else if (el instanceof Tag) {
                 Tag tag = (Tag) el;
                 int tagIndex = tagHandler.paired(tag.getTag(), tag.getType());
                 tag.setIndex(tagIndex);
                 String shortcut = tag.toShortcut();
                 r.append(shortcut);
-                String details = tag.toOriginal();
-                shortcutDetails.put(shortcut, details, false);
+                ProtectedPart pp = new ProtectedPart();
+                pp.setTextInSourceSegment(shortcut);
+                pp.setDetailsFromSourceFile(tag.toOriginal());
+                pp.setReplacementWordsCountCalculation(StaticUtils.TAG_REPLACEMENT);
+                pp.setReplacementUniquenessCalculation(StaticUtils.TAG_REPLACEMENT);
+                pp.setReplacementMatchCalculation(StaticUtils.TAG_REPLACEMENT);
+                protectedParts.add(pp);
             } else {
                 r.append(el.toShortcut());
             }

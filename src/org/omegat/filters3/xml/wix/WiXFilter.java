@@ -27,8 +27,10 @@
 
 package org.omegat.filters3.xml.wix;
 
+import java.util.List;
+
+import org.omegat.core.data.ProtectedPart;
 import org.omegat.filters2.Instance;
-import org.omegat.filters2.Shortcuts;
 import org.omegat.filters3.xml.XMLFilter;
 import org.omegat.util.OStrings;
 import org.xml.sax.Attributes;
@@ -81,9 +83,9 @@ public class WiXFilter extends XMLFilter {
     }
 
     @Override
-    public String translate(String entry, Shortcuts shortcutDetails) {
+    public String translate(String entry, List<ProtectedPart> protectedParts) {
         if (entryParseCallback != null) {
-            entryParseCallback.addEntry(id, entry, null, false, null, null, this, shortcutDetails);
+            entryParseCallback.addEntry(id, entry, null, false, null, null, this, protectedParts);
             return entry;
         } else {
             String trans = entryTranslateCallback.getTranslation(id, entry, null);

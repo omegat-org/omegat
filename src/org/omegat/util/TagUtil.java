@@ -26,12 +26,10 @@
 package org.omegat.util;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import org.omegat.core.Core;
+import org.omegat.core.data.ProtectedPart;
 import org.omegat.core.data.SourceTextEntry;
 
 /**
@@ -47,17 +45,8 @@ public class TagUtil {
         
         // Add tags.
         SourceTextEntry ste = Core.getEditor().getCurrentEntry();
-        result.addAll(Arrays.asList(ste.getProtectedParts().getParts()));
-        
-        // Add other placeholders.
-        // TODO: Need to change after all filters support protected parts.
-        String sourceText = Core.getEditor().getCurrentEntry().getSrcText();
-        Pattern placeholderPattern = PatternConsts.getPlaceholderPattern();
-        Matcher placeholderMatcher = placeholderPattern.matcher(sourceText);
-        while (placeholderMatcher.find()) {
-            if (!result.contains(placeholderMatcher.group(0))) {
-                result.add(placeholderMatcher.group(0));
-            }
+        for(ProtectedPart pp:ste.getProtectedParts()) {
+            result.add(pp.getTextInSourceSegment());
         }
         return result;
     }

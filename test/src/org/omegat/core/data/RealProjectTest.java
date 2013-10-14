@@ -25,6 +25,7 @@
 
 package org.omegat.core.data;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.TreeMap;
 
@@ -145,21 +146,22 @@ public class RealProjectTest extends TestCase {
 
     private void addSTE(IProject.FileInfo fi, String id, String source, String translation, boolean translationFuzzy) {
         EntryKey key = new EntryKey("test", source, id, null, null, null);
-        SourceTextEntry ste = new SourceTextEntry(key, fi.entries.size() + 1, null, translation, null);
+        SourceTextEntry ste = new SourceTextEntry(key, fi.entries.size() + 1, null, translation,
+                new ArrayList<ProtectedPart>());
         ste.setSourceTranslationFuzzy(translationFuzzy);
         fi.entries.add(ste);
     }
 
     private void setDefault(String source, String translation) {
         EntryKey key = new EntryKey(null, source, null, null, null, null);
-        SourceTextEntry ste = new SourceTextEntry(key, 0, null, translation, null);
+        SourceTextEntry ste = new SourceTextEntry(key, 0, null, translation, new ArrayList<ProtectedPart>());
         TMXEntry tr = new TMXEntry(source, translation, true);
         tmx.setTranslation(ste, tr, true);
     }
 
     private void setAlternative(String id, String source, String translation) {
         EntryKey key = new EntryKey("test", source, id, null, null, null);
-        SourceTextEntry ste = new SourceTextEntry(key, 0, null, translation, null);
+        SourceTextEntry ste = new SourceTextEntry(key, 0, null, translation, new ArrayList<ProtectedPart>());
         TMXEntry tr = new TMXEntry(source, translation, false);
         tmx.setTranslation(ste, tr, false);
     }

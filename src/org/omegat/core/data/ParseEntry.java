@@ -41,7 +41,6 @@ import org.omegat.core.segmentation.Rule;
 import org.omegat.core.segmentation.Segmenter;
 import org.omegat.filters2.IFilter;
 import org.omegat.filters2.IParseCallback;
-import org.omegat.filters2.Shortcuts;
 import org.omegat.util.Language;
 import org.omegat.util.PatternConsts;
 import org.omegat.util.StaticUtils;
@@ -76,7 +75,7 @@ public abstract class ParseEntry implements IParseCallback {
          * Flush queue.
          */
         for (ParseEntryQueueItem item : parseQueue) {
-            addSegment(item.id, item.segmentIndex, item.segmentSource, item.shortcutDetails, item.segmentTranslation,
+            addSegment(item.id, item.segmentIndex, item.segmentSource, item.protectedParts, item.segmentTranslation,
                     item.segmentTranslationFuzzy, item.comment, item.prevSegment, item.nextSegment, item.path);
         }
 
@@ -132,7 +131,7 @@ public abstract class ParseEntry implements IParseCallback {
      *            shortcuts details
      */
     public void addEntry(String id, String source, String translation, boolean isFuzzy, String comment, String path,
-            IFilter filter, Shortcuts shortcutDetails) {
+            IFilter filter, List<ProtectedPart> protectedParts) {
         if (StringUtil.isEmpty(source)) {
             // empty string - not need to save
             return;
@@ -146,31 +145,24 @@ public abstract class ParseEntry implements IParseCallback {
             translation = stripSomeChars(translation, tmp, m_config.isRemoveTags(), removeSpaces);
         }
 
-        if (shortcutDetails != null && shortcutDetails.isEmpty()) {
-            // don't need to store empty map - will use less memory
-            shortcutDetails = null;
-        }
         if (m_config.isSentenceSegmentingEnabled()) {
             List<StringBuffer> spaces = new ArrayList<StringBuffer>();
             List<Rule> brules = new ArrayList<Rule>();
             Language sourceLang = m_config.getSourceLanguage();
             List<String> segments = Segmenter.segment(sourceLang, source, spaces, brules);
             if (segments.size() == 1) {
-                internalAddSegment(id, (short) 0, segments.get(0), translation, isFuzzy, comment, path, shortcutDetails);
+                internalAddSegment(id, (short) 0, segments.get(0), translation, isFuzzy, comment, path,
+                        protectedParts);
             } else {
                 for (short i = 0; i < segments.size(); i++) {
                     String onesrc = segments.get(i);
-                    Shortcuts segmentShortcutDetails;
-                    if (shortcutDetails != null) {
-                        segmentShortcutDetails = shortcutDetails.extractFor(onesrc);
-                    } else {
-                        segmentShortcutDetails = null;
-                    }
-                    internalAddSegment(id, i, onesrc, null, false, comment, path, segmentShortcutDetails);
+                    List<ProtectedPart> segmentProtectedParts = ProtectedPart.extractFor(protectedParts,
+                            onesrc);
+                    internalAddSegment(id, i, onesrc, null, false, comment, path, segmentProtectedParts);
                 }
             }
         } else {
-            internalAddSegment(id, (short) 0, source, translation, isFuzzy, comment, path, shortcutDetails);
+            internalAddSegment(id, (short) 0, source, translation, isFuzzy, comment, path, protectedParts);
         }
     }
 
@@ -203,7 +195,7 @@ public abstract class ParseEntry implements IParseCallback {
      * Add segment to queue because we possible need to link prev/next segments.
      */
     private void internalAddSegment(String id, short segmentIndex, String segmentSource, String segmentTranslation,
-            boolean segmentTranslationFuzzy, String comment, String path, Shortcuts shortcutDetails) {
+            boolean segmentTranslationFuzzy, String comment, String path, List<ProtectedPart> protectedParts) {
         if (segmentSource.length() == 0 || segmentSource.trim().length() == 0) {
             // skip empty segments
             return;
@@ -212,7 +204,7 @@ public abstract class ParseEntry implements IParseCallback {
         item.id = id;
         item.segmentIndex = segmentIndex;
         item.segmentSource = segmentSource;
-        item.shortcutDetails = shortcutDetails;
+        item.protectedParts = protectedParts;
         item.segmentTranslation = segmentTranslation;
         item.segmentTranslationFuzzy = segmentTranslationFuzzy;
         item.comment = comment;
@@ -230,8 +222,8 @@ public abstract class ParseEntry implements IParseCallback {
      *            Number of the segment-part of the original source string.
      * @param segmentSource
      *            Translatable source string
-     * @param shortcutDetails
-     *            shortcut details
+     * @param protectedParts
+     *            protected parts
      * @param segmentTranslation
      *            translation of the source string, if format supports it
      * @param segmentTranslationFuzzy
@@ -247,7 +239,7 @@ public abstract class ParseEntry implements IParseCallback {
      *            path of segment
      */
     protected abstract void addSegment(String id, short segmentIndex, String segmentSource,
-            Shortcuts shortcutDetails, String segmentTranslation, boolean segmentTranslationFuzzy,
+            List<ProtectedPart> protectedParts, String segmentTranslation, boolean segmentTranslationFuzzy,
             String comment, String prevSegment, String nextSegment, String path);
 
     /**
@@ -330,7 +322,7 @@ public abstract class ParseEntry implements IParseCallback {
         String id;
         short segmentIndex;
         String segmentSource;
-        Shortcuts shortcutDetails;
+        List<ProtectedPart> protectedParts;
         String segmentTranslation;
         boolean segmentTranslationFuzzy;
         String comment;

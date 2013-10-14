@@ -29,12 +29,13 @@ package org.omegat.filters3.xml.xliff;
 
 import java.awt.Dialog;
 import java.io.File;
+import java.util.List;
 import java.util.Map;
 
 import org.omegat.core.Core;
+import org.omegat.core.data.ProtectedPart;
 import org.omegat.filters2.FilterContext;
 import org.omegat.filters2.Instance;
-import org.omegat.filters2.Shortcuts;
 import org.omegat.filters3.xml.XMLFilter;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
@@ -186,9 +187,9 @@ public class XLIFFFilter extends XMLFilter {
     }
 
     @Override
-    public String translate(String entry, Shortcuts shortcutDetails) {
+    public String translate(String entry, List<ProtectedPart> protectedParts) {
         if (entryParseCallback != null) {
-            entryParseCallback.addEntry(null, entry, null, false, resname, null, this, shortcutDetails);
+            entryParseCallback.addEntry(null, entry, null, false, resname, null, this, protectedParts);
             return entry;
         } else if (entryTranslateCallback != null) {
             String translation = entryTranslateCallback.getTranslation(null, entry, null);

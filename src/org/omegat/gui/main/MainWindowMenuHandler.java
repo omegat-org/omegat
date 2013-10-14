@@ -33,11 +33,7 @@
 package org.omegat.gui.main;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
@@ -46,6 +42,7 @@ import org.jdesktop.swingworker.SwingWorker;
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
 import org.omegat.core.KnownException;
+import org.omegat.core.data.ProtectedPart;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.data.TMXEntry;
 import org.omegat.core.segmentation.SRX;
@@ -80,7 +77,6 @@ import org.omegat.util.Language;
 import org.omegat.util.Log;
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
-import org.omegat.util.PatternConsts;
 import org.omegat.util.Preferences;
 import org.omegat.util.StaticUtils;
 import org.omegat.util.StringUtil;
@@ -603,26 +599,13 @@ public class MainWindowMenuHandler {
      * Identify all the placeholders in the source text and automatically inserts them into the target text.
      */
     public void editTagPainterMenuItemActionPerformed() {
-        List<String> allTags = new ArrayList<String>();
-        // insert tags
         SourceTextEntry ste = Core.getEditor().getCurrentEntry();
-        allTags.addAll(Arrays.asList(ste.getProtectedParts().getParts()));
-        // insert other placeholders
-        // TODO: need to change after all filters will support protected
-        // parts
-        String sourceText = Core.getEditor().getCurrentEntry().getSrcText();
-        Pattern placeholderPattern = PatternConsts.getPlaceholderPattern();
-        Matcher placeholderMatcher = placeholderPattern.matcher(sourceText);
-        while (placeholderMatcher.find()) {
-            if (!allTags.contains(placeholderMatcher.group(0))) {
-                allTags.add(placeholderMatcher.group(0));
-            }
-        }
 
+        // insert tags
         String tr = Core.getEditor().getCurrentTranslation();
-        for (String tag : allTags) {
-            if (!tr.contains(tag)) {
-                Core.getEditor().insertText(tag);
+        for (ProtectedPart pp : ste.getProtectedParts()) {
+            if (!tr.contains(pp.getTextInSourceSegment())) {
+                Core.getEditor().insertText(pp.getTextInSourceSegment());
             }
         }
     }
@@ -633,26 +616,13 @@ public class MainWindowMenuHandler {
             return;
         }
 
-        List<String> allTags = new ArrayList<String>();
-        // insert tags
         SourceTextEntry ste = Core.getEditor().getCurrentEntry();
-        allTags.addAll(Arrays.asList(ste.getProtectedParts().getParts()));
-        // insert other placeholders
-        // TODO: need to change after all filters will support protected
-        // parts
-        String sourceText = Core.getEditor().getCurrentEntry().getSrcText();
-        Pattern placeholderPattern = PatternConsts.getPlaceholderPattern();
-        Matcher placeholderMatcher = placeholderPattern.matcher(sourceText);
-        while (placeholderMatcher.find()) {
-            if (!allTags.contains(placeholderMatcher.group(0))) {
-                allTags.add(placeholderMatcher.group(0));
-            }
-        }
 
+        // insert next tag
         String tr = Core.getEditor().getCurrentTranslation();
-        for (String tag : allTags) {
-            if (!tr.contains(tag)) {
-                Core.getEditor().insertText(tag);
+        for (ProtectedPart pp : ste.getProtectedParts()) {
+            if (!tr.contains(pp.getTextInSourceSegment())) {
+                Core.getEditor().insertText(pp.getTextInSourceSegment());
                 break;
             }
         }

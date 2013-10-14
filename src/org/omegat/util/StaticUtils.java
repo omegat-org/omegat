@@ -52,7 +52,7 @@ import java.util.jar.JarFile;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.omegat.core.data.SourceTextEntry;
+import org.omegat.core.data.ProtectedPart;
 
 /**
  * Static functions taken from CommandThread to reduce file size.
@@ -91,7 +91,8 @@ public class StaticUtils {
      * Char which should be used instead protected parts. It should be
      * non-letter char, to be able to have correct words counter.
      */
-    public static final char TAG_REPLACEMENT = '\b';
+    public static final char TAG_REPLACEMENT_CHAR = '\b';
+    public static final String TAG_REPLACEMENT = "\b";
 
     /**
      * Contains the location of the directory containing the configuration
@@ -109,24 +110,14 @@ public class StaticUtils {
      * Builds a list of format tags within the supplied string. Format tags are
      * 'protected parts' and OmegaT style tags: &lt;xx02&gt; or &lt;/yy01&gt;.
      */
-    public static void buildTagList(String str, SourceTextEntry.ProtectedParts protectedParts, List<String> tagList) {
+    public static void buildTagList(String str, ProtectedPart[] protectedParts, List<String> tagList) {
         List<TagOrder> tags = new ArrayList<TagOrder>();
         if (protectedParts != null) {
-            for (String tag : protectedParts.getParts()) {
+            for (ProtectedPart pp : protectedParts) {
                 int pos = -1;
-                while ((pos = str.indexOf(tag, pos + 1)) >= 0) {
-                    tags.add(new TagOrder(pos, tag));
+                while ((pos = str.indexOf(pp.getTextInSourceSegment(), pos + 1)) >= 0) {
+                    tags.add(new TagOrder(pos, pp.getTextInSourceSegment()));
                 }
-            }
-        }
-
-        // add tags which not a 'protected parts' but looks like tags
-        Pattern placeholderPattern = PatternConsts.OMEGAT_TAG;
-        Matcher placeholderMatcher = placeholderPattern.matcher(str);
-        while (placeholderMatcher.find()) {
-            String foundTag = placeholderMatcher.group(0);
-            if (protectedParts == null || !protectedParts.contains(foundTag)) {
-                tagList.add(foundTag);
             }
         }
 
@@ -691,41 +682,33 @@ public class StaticUtils {
     }
 
     /**
-     * Strips all protected parts.
-     * 
-     * @param str
-     *            source string
-     * @param ste
-     *            info about protected parts
-     * @param changeToReplacement
-     *            true if should be replaced by special char, false if should be
-     *            just removed
+     * Find some protected parts defined in Tag Validation Options dialog: printf variables, java
+     * MessageFormat patterns, user defined cusom tags.
      */
-    public static String stripProtectedParts(String str, SourceTextEntry ste) {
-        String s = str;
-        for (String tag : ste.getProtectedParts().getParts()) {
-            if (ste.getProtectedParts().isProtected(tag)) {
-                s = s.replace(tag, TAG_REPLACEMENT + "");
+    public static List<ProtectedPart> applyCustomProtectedParts(String source,
+            Pattern protectedPartsPatterns, List<ProtectedPart> protectedParts) {
+        List<ProtectedPart> result;
+        if (protectedParts != null) {
+            // Remove already define protected parts first for prevent intersection
+            for (ProtectedPart pp : protectedParts) {
+                source = source.replace(pp.getTextInSourceSegment(), StaticUtils.TAG_REPLACEMENT);
             }
+            result = protectedParts;
+        } else {
+            result = new ArrayList<ProtectedPart>();
         }
-        return s;
-    }
 
-    /**
-     * Strips all tags from source string.
-     * 
-     * @param ste
-     *            source entry
-     * @param changeToReplacement
-     *            true if should be replaced by special char, false if should be
-     *            just removed
-     */
-    public static String stripAllTagsFromSource(SourceTextEntry ste) {
-        String s = ste.getSrcText();
-        for (String tag : ste.getProtectedParts().getParts()) {
-            s = s.replace(tag, TAG_REPLACEMENT + "");
+        Matcher placeholderMatcher = protectedPartsPatterns.matcher(source);
+        while (placeholderMatcher.find()) {
+            ProtectedPart pp = new ProtectedPart();
+            pp.setTextInSourceSegment(placeholderMatcher.group());
+            pp.setDetailsFromSourceFile(placeholderMatcher.group());
+            pp.setReplacementWordsCountCalculation(StaticUtils.TAG_REPLACEMENT);
+            pp.setReplacementUniquenessCalculation(StaticUtils.TAG_REPLACEMENT);
+            pp.setReplacementMatchCalculation(StaticUtils.TAG_REPLACEMENT);
+            result.add(pp);
         }
-        return s;
+        return result;
     }
 
     /**

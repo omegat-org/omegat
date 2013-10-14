@@ -4,6 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
+               2013 Alex Buloichik
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -27,13 +28,14 @@ package org.omegat.util;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
+import org.omegat.core.data.ProtectedPart;
 import org.omegat.core.data.SourceTextEntry;
-import org.omegat.filters2.Shortcuts;
 
 /**
  * Tests for (some) static utility methods.
@@ -70,23 +72,33 @@ public class StaticUtilsTest extends TestCase
      */
     public void testBuildTagList() {
         // TODO add your test code below by replacing the default call to fail.
-        String str = "Tag <test> case <b0>one</b0>.<b0>";
+        String str = "Tag <test> case <b0>one</b0>.<b1>";
+        List<ProtectedPart> pps = StaticUtils.applyCustomProtectedParts(str, PatternConsts.OMEGAT_TAG, null);
         ArrayList<String> tagList = new ArrayList<String>();
-        StaticUtils.buildTagList(str, null, tagList);
+        StaticUtils.buildTagList(str, new SourceTextEntry(null, 0, null, null, pps).getProtectedParts(),
+                tagList);
 
-        assertEquals("Wrong tags found in '" + str + "'", Arrays.asList("<b0>", "</b0>", "<b0>"), tagList);
+        assertEquals("Wrong tags found in '" + str + "'", Arrays.asList("<b0>", "</b0>", "<b1>"), tagList);
 
         tagList.clear();
-        Shortcuts pp = new Shortcuts();
-        pp.put("<b0>", "", false);
-        pp.put("</b0>", "", false);
-        StaticUtils.buildTagList(str, new SourceTextEntry(null, 0, null, null, pp).getProtectedParts(), tagList);
-        assertEquals("Wrong tags found in '" + str + "'", Arrays.asList("<b0>", "</b0>", "<b0>"), tagList);
+        ProtectedPart p;
+        List<ProtectedPart> pp = new ArrayList<ProtectedPart>();
+        p = new ProtectedPart();
+        p.setTextInSourceSegment("<b0>");
+        pp.add(p);
+        p = new ProtectedPart();
+        p.setTextInSourceSegment("</b0>");
+        pp.add(p);
+        StaticUtils.buildTagList(str, new SourceTextEntry(null, 0, null, null, pp).getProtectedParts(),
+                tagList);
+        assertEquals("Wrong tags found in '" + str + "'", Arrays.asList("<b0>", "</b0>"), tagList);
 
         str = "Tag <test>case</test>.";
         tagList.clear();
         pp.clear();
-        pp.put("<test>case</test>", "", false);
+        p = new ProtectedPart();
+        p.setTextInSourceSegment("<test>case</test>");
+        pp.add(p);
         StaticUtils.buildTagList(str, new SourceTextEntry(null, 0, null, null, pp).getProtectedParts(), tagList);
         assertEquals("Wrong tags found in '" + str + "'", Arrays.asList("<test>case</test>"), tagList);
     }
@@ -95,25 +107,5 @@ public class StaticUtilsTest extends TestCase
     {
         if ( !"One Two Three Four Five".equals(StaticUtils.compressSpaces(" One Two\nThree   Four\r\nFive ")) ) fail("Space wrongly compressed");
         if ( !"Six seven".equals(StaticUtils.compressSpaces("Six\tseven")) ) fail("Space wrongly compressed");
-    }
-
-    public void testStripTags1() {
-        Shortcuts protectedParts = new Shortcuts();
-        protectedParts.put("#part#", "zz", true);
-        SourceTextEntry ste = new SourceTextEntry(null, 0, null, null, protectedParts);
-        assertEquals("1\b2", StaticUtils.stripProtectedParts("1#part#2", ste));
-    }
-
-    public void testStripTags2() {
-        Shortcuts protectedParts = new Shortcuts();
-        protectedParts.put("#part#", "zz", false);
-        SourceTextEntry ste = new SourceTextEntry(null, 0, null, null, protectedParts);
-        assertEquals("1#part#2", StaticUtils.stripProtectedParts("1#part#2", ste));
-    }
-
-    public void testStripTags3() {
-        Shortcuts protectedParts = new Shortcuts();
-        SourceTextEntry ste = new SourceTextEntry(null, 0, null, null, protectedParts);
-        assertEquals("1#part#2", StaticUtils.stripProtectedParts("1#part#2", ste));
     }
 }

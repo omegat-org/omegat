@@ -37,14 +37,18 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
+import org.omegat.core.data.ProtectedPart;
 import org.omegat.filters2.AbstractFilter;
 import org.omegat.filters2.Instance;
 import org.omegat.util.LinebreakPreservingReader;
 import org.omegat.util.NullBufferedWriter;
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
+import org.omegat.util.PatternConsts;
+import org.omegat.util.StaticUtils;
 import org.omegat.util.StringUtil;
 
 /**
@@ -357,7 +361,9 @@ public class ResourceBundleFilter extends AbstractFilter {
 
     protected String process(String key, String value) {
         if (entryParseCallback != null) {
-            entryParseCallback.addEntry(key, value, null, false, null, null, this, null);
+            List<ProtectedPart> protectedParts = StaticUtils.applyCustomProtectedParts(value,
+                    PatternConsts.SIMPLE_JAVA_MESSAGEFORMAT_PATTERN_VARS, null);
+            entryParseCallback.addEntry(key, value, null, false, null, null, this, protectedParts);
             return value;
         } else if (entryTranslateCallback != null) {
             String trans = entryTranslateCallback.getTranslation(key, value, null);

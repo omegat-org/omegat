@@ -33,6 +33,7 @@ import java.util.List;
 import java.util.Set;
 
 import org.omegat.core.Core;
+import org.omegat.core.data.ProtectedPart;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.events.IStopped;
 import org.omegat.core.matching.FuzzyMatcher;
@@ -43,7 +44,6 @@ import org.omegat.core.threads.LongProcessThread;
 import org.omegat.gui.stat.StatisticsWindow;
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
-import org.omegat.util.StaticUtils;
 import org.omegat.util.Token;
 import org.omegat.util.gui.TextUtil;
 
@@ -56,8 +56,8 @@ import org.omegat.util.gui.TextUtil;
  * Number of words/chars calculation requires to just strip all tags, protected parts, placeholders(see StatCount.java).
  * 
  * Calculation of match percentage requires 2 steps for tags processing: 1) remove only simple XML tags for
- * find 5 nearest matches(but not protected parts' text: from "<m0>IBM</m0>" only tags should be removed, but
- * not "IBM" ), then 2) compute better percentage without any tags removing.
+ * find 5 nearest matches(but not protected parts' text: from "<m0>Acme</m0>" only tags should be removed, but
+ * not "Acme" ), then 2) compute better percentage without any tags removing.
  * 
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Thomas Cordonnier
@@ -146,7 +146,10 @@ public class CalcMatchStatistics extends LongProcessThread {
          */
         FindMatches finder = new FindMatches(Core.getProject().getSourceTokenizer(), OConsts.MAX_NEAR_STRINGS, true, false);
         for (SourceTextEntry ste : untranslatedEntries) {
-            String srcNoXmlTags = StaticUtils.stripXmlTags(ste.getSrcText());
+            String srcNoXmlTags = ste.getSrcText();
+            for (ProtectedPart pp : ste.getProtectedParts()) {
+                srcNoXmlTags = srcNoXmlTags.replace(pp.getTextInSourceSegment(), pp.getReplacementMatchCalculation());
+            }
 
             List<NearString> nears;
             try {

@@ -27,8 +27,10 @@
 
 package org.omegat.filters3.xml.resx;
 
+import java.util.List;
+
+import org.omegat.core.data.ProtectedPart;
 import org.omegat.filters2.Instance;
-import org.omegat.filters2.Shortcuts;
 import org.omegat.filters3.xml.XMLFilter;
 import org.omegat.util.OStrings;
 import org.omegat.util.StringUtil;
@@ -133,7 +135,7 @@ public class ResXFilter extends XMLFilter {
     }
 
     @Override
-    public String translate(String entry, Shortcuts shortcutDetails) {
+    public String translate(String entry, List<ProtectedPart> protectedParts) {
         if (entryParseCallback != null) {
             entryText = entry;
             return entry;

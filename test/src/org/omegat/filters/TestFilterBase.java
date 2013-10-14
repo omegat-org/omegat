@@ -46,6 +46,7 @@ import org.omegat.core.TestCore;
 import org.omegat.core.data.EntryKey;
 import org.omegat.core.data.IProject;
 import org.omegat.core.data.ProjectProperties;
+import org.omegat.core.data.ProtectedPart;
 import org.omegat.core.data.RealProject;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.filters2.AbstractFilter;
@@ -54,7 +55,6 @@ import org.omegat.filters2.IAlignCallback;
 import org.omegat.filters2.IFilter;
 import org.omegat.filters2.IParseCallback;
 import org.omegat.filters2.ITranslateCallback;
-import org.omegat.filters2.Shortcuts;
 import org.omegat.filters2.master.FilterMaster;
 import org.omegat.util.LFileCopy;
 import org.omegat.util.Language;
@@ -93,7 +93,7 @@ public abstract class TestFilterBase extends TestCore {
             }
 
             public void addEntry(String id, String source, String translation, boolean isFuzzy, String comment,
-                    String path, IFilter filter, Shortcuts shortcutDetails) {
+                    String path, IFilter filter, List<ProtectedPart> protectedParts) {
                 if (source.length() > 0)
                     result.add(source);
             }
@@ -116,7 +116,7 @@ public abstract class TestFilterBase extends TestCore {
             }
 
             public void addEntry(String id, String source, String translation, boolean isFuzzy, String comment,
-                    String path, IFilter filter, Shortcuts shortcutDetails) {
+                    String path, IFilter filter, List<ProtectedPart> protectedParts) {
                 if (source.length() > 0)
                     result.add(source);
             }
@@ -138,7 +138,7 @@ public abstract class TestFilterBase extends TestCore {
             }
 
             public void addEntry(String id, String source, String translation, boolean isFuzzy, String comment,
-                    String path, IFilter filter, Shortcuts shortcutDetails) {
+                    String path, IFilter filter, List<ProtectedPart> protectedParts) {
                 String segTranslation = isFuzzy ? null : translation;
                 result.put(source, segTranslation);
                 if (translation != null) {
@@ -167,7 +167,7 @@ public abstract class TestFilterBase extends TestCore {
                 addEntry(id, source, translation, isFuzzy, comment, null, filter, null);
             }
             public void addEntry(String id, String source, String translation, boolean isFuzzy,
-                    String comment, String path, IFilter filter, Shortcuts shortcutDetails) {
+                    String comment, String path, IFilter filter, List<ProtectedPart> protectedParts) {
                 if (source.length() == 0) {
                     return;
                 }
@@ -179,9 +179,6 @@ public abstract class TestFilterBase extends TestCore {
                 e.comment = comment;
                 e.path = path;
                 result.add(e);
-            }
-
-            public void addFileTMXEntry(String source, String translation) {
             }
 
             public void linkPrevNextSegments() {

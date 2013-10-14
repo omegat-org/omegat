@@ -299,21 +299,27 @@ public final class PluginUtils {
             switch (pType) {
             case FILTER:
                 filterClasses.add(classLoader.loadClass(key));
+                Log.logInfoRB("PLUGIN_LOAD_OK", key);
                 break;
             case TOKENIZER:
                 tokenizerClasses.add(classLoader.loadClass(key));
+                Log.logInfoRB("PLUGIN_LOAD_OK", key);
                 break;
             case MARKER:
                 markerClasses.add(classLoader.loadClass(key));
+                Log.logInfoRB("PLUGIN_LOAD_OK", key);
                 break;
             case MACHINETRANSLATOR:
                 machineTranslationClasses.add(classLoader.loadClass(key));
+                Log.logInfoRB("PLUGIN_LOAD_OK", key);
                 break;
             case BASE:
                 basePluginClasses.add(classLoader.loadClass(key));
+                Log.logInfoRB("PLUGIN_LOAD_OK", key);
                 break;
             case GLOSSARY:
                 glossaryClasses.add(classLoader.loadClass(key));
+                Log.logInfoRB("PLUGIN_LOAD_OK", key);
                 break;
             default:
                 Log.logErrorRB("PLUGIN_UNKNOWN", key);

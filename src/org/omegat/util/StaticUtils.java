@@ -684,6 +684,9 @@ public class StaticUtils {
     /**
      * Find some protected parts defined in Tag Validation Options dialog: printf variables, java
      * MessageFormat patterns, user defined cusom tags.
+     * 
+     * These protected parts shouldn't affect statistic but just be displayed in gray in editor and take part
+     * in tag validation.
      */
     public static List<ProtectedPart> applyCustomProtectedParts(String source,
             Pattern protectedPartsPatterns, List<ProtectedPart> protectedParts) {
@@ -703,9 +706,9 @@ public class StaticUtils {
             ProtectedPart pp = new ProtectedPart();
             pp.setTextInSourceSegment(placeholderMatcher.group());
             pp.setDetailsFromSourceFile(placeholderMatcher.group());
-            pp.setReplacementWordsCountCalculation(StaticUtils.TAG_REPLACEMENT);
-            pp.setReplacementUniquenessCalculation(StaticUtils.TAG_REPLACEMENT);
-            pp.setReplacementMatchCalculation(StaticUtils.TAG_REPLACEMENT);
+            pp.setReplacementWordsCountCalculation(placeholderMatcher.group());
+            pp.setReplacementUniquenessCalculation(placeholderMatcher.group());
+            pp.setReplacementMatchCalculation(placeholderMatcher.group());
             result.add(pp);
         }
         return result;

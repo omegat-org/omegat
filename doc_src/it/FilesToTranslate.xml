@@ -75,7 +75,7 @@
         </listitem>
       </itemizedlist>
 
-      <para>Gli altri tipi di file di solo testo possono essere gestiti associando la loro estensione a un tipo di file supportato (per esempio, i file .pod si possono associare al filtro di testo ASCII) e pre-elaborandoli con regole di segmentazione specifiche.</para>
+      <para>Gli altri tipi di file di solo testo possono essere gestiti associando la loro estensione a un tipo di file supportato da <application>OmegaT</application> (per esempio, i file .pod si possono associare al filtro di testo ASCII) e pre-elaborandoli con regole di segmentazione specifiche.</para>
 
       <para>I file PO<indexterm class="singular">
           <primary>File di partenza</primary> <secondary>PO come file bilingui</secondary>

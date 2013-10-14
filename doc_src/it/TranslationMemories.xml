@@ -13,7 +13,7 @@
     <section id="tmx.files.location.and.purpose">
       <title>cartelle tmx - posizione e scopo</title>
 
-      <para>I progetti <application>OmegaT</application> possono possedere file di memoria di traduzione (ossia file con estensione tmx) in quattro posizioni differenti:</para>
+      <para>I progetti <application>OmegaT</application> possono possedere file di memoria di traduzione (ossia file con estensione tmx) in cinque posizioni differenti:</para>
 
       <variablelist>
         <varlistentry>
@@ -105,7 +105,7 @@
 
       <para><emphasis role="bold">diversi progetti sullo stesso soggetto: </emphasis>mantenere la struttura del progetto e modificare le cartelle di origine e di destinazione (Origine = source/ordine1, destinazione = target/ordine1, e così via). Si noti che ai segmenti derivanti da ordine1 non presenti in ordine2 e in altri lavori successivi, saranno contrassegnati come segmenti orfani; tuttavia essi ritorneranno utili per individuare concordanze parziali.</para>
 
-      <para><emphasis role="bold">diversi traduttori che lavorano su uno stesso progetto:</emphasis> dividere i file di partenza in source/Alice, source/Mario... e distribuirli ai membri della squadra (Alice, Mario...). Essi possono creare il proprio progetto e consegnare il proprio file <filename>project_save.tmx</filename>, una volta terminato o raggiunto un determinato obiettivo. I file <filename>project_save.tmx</filename> vengono poi messi insieme e i possibili conflitti, per esempio di terminologia, risolti. Viene poi creata una nuova versione principale della memoria, o inserendo i file <filename>project_save.tmx</filename> nelle sottocartelle <emphasis>tm/auto</emphasis> dei membri della squadra, oppure sostituendoli. La squadra può utilizzare anche la stessa sottocartella per i file di destinazione. Ciò consente loro, per esempio, di verificare in qualsiasi momento se la versione finale del progetto completo è a posto oppure no.</para>
+      <para><emphasis role="bold">diversi traduttori che lavorano su uno stesso progetto:</emphasis> dividere i file di partenza in source/Alice, source/Mario... e distribuirli ai membri della squadra (Alice, Mario...). Essi possono creare il proprio progetto e consegnare il proprio file <filename>project_save.tmx</filename>, una volta terminato o raggiunto un determinato obiettivo. I file <filename>project_save.tmx</filename> vengono poi messi insieme e i possibili conflitti, per esempio di terminologia, risolti. Viene poi creata una nuova versione principale della memoria, o inserendo nelle sottocartelle <emphasis>tm/auto</emphasis> dei membri della squadra i file <filename>project_save.tmx</filename>, oppure sostituendoli. La squadra può utilizzare anche la stessa sottocartella per i file di destinazione. Ciò consente loro, per esempio, di verificare in qualsiasi momento se la versione finale del progetto completo è a posto oppure no.</para>
     </section>
 
     <section id="tmx.backup">
@@ -336,8 +336,8 @@
         <primary>Memorie di traduzione</primary> <secondary>Aggiornare alla segmentazione di frase</secondary>
       </indexterm></title>
 
-    <para>Le primissime versioni di <application>OmegaT</application> segmentavano un file di partenza solo per paragrafi, e la numerazione dei tag di formattazione dei file HTML e Open Document non era coerente. <application>OmegaT</application> 2.5 è in grado di rilevare e aggiornare immediatamente questi file tmx, in modo da migliorare la qualità delle corrispondenze parziali e l'influenza che queste hanno sulle traduzioni precedentemente eseguire, evitando così un lavoro di modifica manuale.</para>
+    <para>Le primissime versioni di <application>OmegaT</application> segmentavano un file di partenza solo per paragrafi, e la numerazione dei tag di formattazione dei file HTML e Open Document non era coerente. <application>OmegaT</application> è in grado di rilevare e aggiornare immediatamente questi file tmx, in modo da migliorare la qualità delle corrispondenze parziali e l'influenza che queste hanno sulle traduzioni precedentemente eseguire, evitando così un lavoro di modifica manuale.</para>
 
-    <para>Un file tmx di un progetto verrà aggiornato solo una volta, e verrà scritto nel <filename>project-save.tmx</filename> nella sua forma aggiornata; i file tmx ereditati saranno aggiornati immediatamente alla riapertura del progetto. Si noti anche che sono stati apportati alcuni cambiamenti ai filtri dei file di <application>OmegaT</application> 2.5 che potrebbero portare a una segmentazione totalmente diversa; pertanto si potrebbero eccezionalmente presentare condizioni in cui viene richiesto l'aggiornamento manuale della propria traduzione.</para>
+    <para>Un file tmx di un progetto verrà aggiornato solo una volta, e verrà scritto nel <filename>project-save.tmx</filename> nella sua forma aggiornata; i file tmx ereditati saranno aggiornati immediatamente alla riapertura del progetto. Si noti anche che sono stati apportati alcuni cambiamenti ai filtri dei file di <application>OmegaT</application> che potrebbero portare a una segmentazione totalmente diversa; pertanto si potrebbero eccezionalmente presentare condizioni in cui viene richiesto l'aggiornamento manuale della propria traduzione.</para>
   </section>
 </chapter>

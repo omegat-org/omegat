@@ -119,7 +119,7 @@
           </listitem>
         </itemizedlist>
 
-        <para>Il contenuto dei file viene sovrascritto se si apre un nuovo segmento (source.txt e target.txt) o si esporta una nuova selezione (selection.txt). I file sono di solo testo. L'intero processo può essere manovrato e controllato tramite script basato su Tck/Tcl. Consultare <ulink url="http://www.omegat.org/en/howtos/text_export.html">Uso della funzione di esportazione testo di OmegaT</ulink> per specifiche, esempi e suggerimenti.</para>
+        <para>Il contenuto dei file viene sovrascritto sia quando un nuovo segmento è aperto (source.txt e target.txt), sia quando una nuova selezione è esportata (selection.txt). I file sono di solo testo. L'intero processo può essere manovrato e controllato tramite script basato su Tck/Tcl. Consultare <ulink url="http://www.omegat.org/en/howtos/text_export.html">Uso della funzione di esportazione testo di OmegaT</ulink> per specifiche, esempi e suggerimenti.</para>
       </listitem>
     </varlistentry>
   </variablelist>

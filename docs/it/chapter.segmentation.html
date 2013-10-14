@@ -5,8 +5,8 @@
       <title>Chapter&nbsp;14.&nbsp;Segmentazione del documento originale</title>
       <link rel="stylesheet" type="text/css" href="OmegaT.css">
       <meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
-      <link rel="home" href="index.html" title="OmegaT - Manuale dell'Utente">
-      <link rel="up" href="index.html" title="OmegaT - Manuale dell'Utente">
+      <link rel="home" href="index.html" title="OmegaT 3.0- Manuale dell'Utente">
+      <link rel="up" href="index.html" title="OmegaT 3.0- Manuale dell'Utente">
       <link rel="prev" href="chapter.translation.memories.html" title="Chapter&nbsp;13.&nbsp;Memorie di traduzione">
       <link rel="next" href="chapter.searches.html" title="Chapter&nbsp;15.&nbsp;Ricerche">
    </head>
@@ -43,11 +43,11 @@
             </dl>
          </div>
          <p>Gli strumenti della memoria di traduzione operano su unità di testo definite “segmenti”. <span class="application">OmegaT</span> utilizza due metodi per segmentare un testo: la segmentazione a livello di paragrafo e quella a livello di frase (chiamata
-            anche “segmentazione basata su regole”). Per selezionare il tipo di segmentazione, selezionare <span class="guimenu"><a class="indexterm" name="d0e6861"></a>Progetto</span> → <span class="guimenuitem">Proprietà...</span> dalla barra dei menu e attivare o disattivare l'appropriata casella di controllo. La segmentazione a livello di paragrafo
+            anche “segmentazione basata su regole”). Per selezionare il tipo di segmentazione, selezionare <span class="guimenu"><a class="indexterm" name="d0e6913"></a>Progetto</span> → <span class="guimenuitem">Proprietà...</span> dalla barra dei menu e attivare o disattivare l'appropriata casella di controllo. La segmentazione a livello di paragrafo
             è utile in alcune situazioni, per esempio nelle traduzioni con stile o altamente creative, in cui il traduttore ritiene di
             dover cambiare l'ordine di intere frasi: per la maggior parte dei progetti, tuttavia, la segmentazione a livello di frase
             è da preferirsi, dato che restituisce concordanze migliori dalle traduzioni precedenti. Se si seleziona la segmentazione a
-            livello di frase, è possibile impostarne le regole dal menu principale <span class="guimenu"><a class="indexterm" name="d0e6872"></a>Opzioni</span> → <span class="guimenuitem">Segmentazione...</span>.
+            livello di frase, è possibile impostarne le regole dal menu principale <span class="guimenu"><a class="indexterm" name="d0e6924"></a>Opzioni</span> → <span class="guimenuitem">Segmentazione...</span>.
          </p>
          <p>Sono già disponibili regole di segmentazione affidabili per molte lingue, dunque molto probabilmente non si dovrà impegnare
             tempo a scrivere le proprie regole di segmentazione. D'altro lato, questa funzionalità può essere molto utile nei particolari
@@ -62,7 +62,7 @@
          </p>
          <div class="variablelist">
             <dl class="variablelist">
-               <dt><span class="term"><a class="indexterm" name="d0e6894"></a>Segmentazione a livello di struttura</span></dt>
+               <dt><span class="term"><a class="indexterm" name="d0e6946"></a>Segmentazione a livello di struttura</span></dt>
                <dd>
                   <p><span class="application">OmegaT</span> prima analizza il testo alla ricerca di una segmentazione a livello della struttura. Nel corso di questo processo, per la
                      generazione dei segmenti, viene utilizzata solo la struttura del testo di partenza.
@@ -73,7 +73,7 @@
                      estratti come segmenti separati.
                   </p>
                </dd>
-               <dt><span class="term"><a class="indexterm" name="d0e6909"></a>Segmentazione a livello di frase</span></dt>
+               <dt><span class="term"><a class="indexterm" name="d0e6961"></a>Segmentazione a livello di frase</span></dt>
                <dd>
                   <p>Dopo aver ultimato la segmentazione del file di partenza in unità strutturali, <span class="application">OmegaT</span> avvierà un'ulteriore segmentazione di tali blocchi in frasi.
                   </p>
@@ -84,7 +84,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="segmentation.rules"></a>1.&nbsp;Regole di segmentazione<a class="indexterm" name="d0e6924"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="segmentation.rules"></a>1.&nbsp;Regole di segmentazione<a class="indexterm" name="d0e6976"></a></h2>
                   </div>
                </div>
             </div>
@@ -96,7 +96,7 @@
             <p>Le due regole si comportano nel modo spiegato di seguito:</p>
             <div class="variablelist">
                <dl class="variablelist">
-                  <dt><span class="term"><a class="indexterm" name="d0e6948"></a>Regola di interruzione</span></dt>
+                  <dt><span class="term"><a class="indexterm" name="d0e7000"></a>Regola di interruzione</span></dt>
                   <dd>
                      <p>Separa il testo di origine in segmenti. Per esempio, la frase "<span class="emphasis"><em>Did it make sense? I was not sure</em></span>." dovrebbe essere divisa in due segmenti. Affinché questo accada, deve esserci una regola di interruzione per "?", quando
                         seguito da spazi e una parola che inizia per maiuscola. Per definire una regola d'interruzione, spuntare la casella Interruzione/Eccezione.
@@ -106,7 +106,7 @@
             </div>
             <div class="variablelist">
                <dl class="variablelist">
-                  <dt><span class="term"><a class="indexterm" name="d0e6965"></a>Regola di eccezione</span></dt>
+                  <dt><span class="term"><a class="indexterm" name="d0e7017"></a>Regola di eccezione</span></dt>
                   <dd>
                      <p>definisce quali parti del testo NON devono essere separate. Nonostante il punto, <span class="emphasis"><em>"Sig. Rossi"</em></span> non dovrebbe essere separato in due segmenti e dovrebbe essere una regola di eccezione per Sig (come pure per Dott., Ing.
                         Avv. e via discorrendo), seguita da un punto. Per definire una regola d'interruzione, lasciare disattivata la casella Interruzione/Eccezione.
@@ -123,7 +123,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="rules.priority"></a>2.&nbsp;Priorità delle regole<a class="indexterm" name="d0e6984"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="rules.priority"></a>2.&nbsp;Priorità delle regole<a class="indexterm" name="d0e7036"></a></h2>
                   </div>
                </div>
             </div>
@@ -139,7 +139,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="creating.new.rule"></a>3.&nbsp;Creazione di una nuova regola<a class="indexterm" name="d0e6994"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="creating.new.rule"></a>3.&nbsp;Creazione di una nuova regola<a class="indexterm" name="d0e7046"></a></h2>
                   </div>
                </div>
             </div>
@@ -165,7 +165,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="few.simple.examples"></a>4.&nbsp;<a class="indexterm" name="d0e7028"></a>Alcuni semplici esempi
+                     <h2 class="title" style="clear: both"><a name="few.simple.examples"></a>4.&nbsp;<a class="indexterm" name="d0e7080"></a>Alcuni semplici esempi
                      </h2>
                   </div>
                </div>
@@ -173,10 +173,10 @@
             <div class="informaltable">
                <table border="1">
                   <colgroup>
-                     <col width="150" align="left">
-                     <col width="60" align="center">
-                     <col width="60" align="center">
-                     <col width="190" align="left">
+                     <col align="left">
+                     <col align="center">
+                     <col align="center">
+                     <col align="left">
                   </colgroup>
                   <thead>
                      <tr>

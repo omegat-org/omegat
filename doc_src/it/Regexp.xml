@@ -5,7 +5,7 @@
       <primary>Espressioni regolari</primary> <seealso>Segmentazione</seealso> <seealso>Ricerca</seealso>
     </indexterm></title>
 
-  <para>Le espressioni regolari (regex, in breve) ammesse per le operazioni di ricerca sono quelle riconosciute da Java. Per ulteriori e più specifiche informazioni, consultare la <ulink url="http://download.oracle.com/javase/1.5.0/docs/api/java/util/regex/Pattern.html">documentazione Java Regex</ulink>. Vedere più avanti per ulteriori riferimenti ed esempi.</para>
+  <para>Le espressioni regolari (regex, in breve) ammesse per le operazioni di ricerca sono quelle riconosciute da Java. Per ulteriori e più specifiche informazioni, consultare la <ulink url="http://download.oracle.com/javase/1.6.0/docs/api/java/util/regex/Pattern.html">documentazione Java Regex</ulink>. Vedere più avanti per ulteriori riferimenti ed esempi.</para>
 
   <note>
     <para>Questo capitolo si rivolge agli utenti avanzati, che hanno la necessità di definire le proprie varianti delle regole di segmentazione o costruire combinazioni di ricerca più complesse ed efficaci.</para>
@@ -15,7 +15,7 @@
     <title>Regex - Flag</title>
 
     <tgroup align="left" cols="2" rowsep="1">
-      <colspec align="left" colnum="1" colwidth="100"/>
+      <colspec align="left" colnum="1"/>
 
       <thead>
         <row>
@@ -39,7 +39,7 @@
     <title>Regex - Carattere</title>
 
     <tgroup align="left" cols="2" rowsep="1">
-      <colspec align="left" colnum="1" colwidth="100"/>
+      <colspec align="left" colnum="1"/>
 
       <thead>
         <row>
@@ -135,7 +135,7 @@
     <title>Regex - Citazione</title>
 
     <tgroup align="left" cols="2" rowsep="1">
-      <colspec align="left" colnum="1" colwidth="100"/>
+      <colspec align="left" colnum="1"/>
 
       <thead>
         <row>
@@ -177,7 +177,7 @@
     <title>Regex - Classi per blocchi e categorie Unicode</title>
 
     <tgroup align="left" cols="2" rowsep="1">
-      <colspec align="left" colnum="1" colwidth="100"/>
+      <colspec align="left" colnum="1"/>
 
       <thead>
         <row>
@@ -191,13 +191,13 @@
         <row>
           <entry>\p{InGreek}</entry>
 
-          <entry>Carattere nel blocco greco (<ulink url="http://download.oracle.com/javase/1.5.0/docs/api/java/util/regex/Pattern.html#ubc"> blocco</ulink> semplice)</entry>
+          <entry>Carattere nel blocco greco (<ulink url="http://download.oracle.com/javase/1.6.0/docs/api/java/util/regex/Pattern.html#ubc"> blocco</ulink> semplice)</entry>
         </row>
 
         <row>
           <entry>\p{Lu}</entry>
 
-          <entry>Lettera maiuscola (<ulink url="http://download.oracle.com/javase/1.5.0/docs/api/java/util/regex/Pattern.html#ubc"> categoria</ulink> semplice)</entry>
+          <entry>Lettera maiuscola (<ulink url="http://download.oracle.com/javase/1.6.0/docs/api/java/util/regex/Pattern.html#ubc"> categoria</ulink> semplice)</entry>
         </row>
 
         <row>
@@ -225,7 +225,7 @@
     <title>Regex - Classi di carattere</title>
 
     <tgroup align="left" cols="2" rowsep="1">
-      <colspec align="left" colnum="1" colwidth="100"/>
+      <colspec align="left" colnum="1"/>
 
       <thead>
         <row>
@@ -261,7 +261,7 @@
     <title>Regex - Classi di carattere predefinite</title>
 
     <tgroup align="left" cols="2" rowsep="1">
-      <colspec align="left" colnum="1" colwidth="100"/>
+      <colspec align="left" colnum="1"/>
 
       <thead>
         <row>
@@ -321,7 +321,7 @@
     <title>Regex - Rilevatori di limitazione</title>
 
     <tgroup align="left" cols="2" rowsep="1">
-      <colspec align="left" colnum="1" colwidth="100"/>
+      <colspec align="left" colnum="1"/>
 
       <thead>
         <row>
@@ -363,7 +363,7 @@
     <title>Regex - Quantificatori di ripetizione</title>
 
     <tgroup align="left" cols="2" rowsep="1">
-      <colspec align="left" colnum="1" colwidth="100"/>
+      <colspec align="left" colnum="1"/>
 
       <thead>
         <row>
@@ -403,7 +403,7 @@
     <title>Regex - Quantificatori riluttanti (non ripetitivi)</title>
 
     <tgroup align="left" cols="2" rowsep="1">
-      <colspec align="left" colnum="1" colwidth="100"/>
+      <colspec align="left" colnum="1"/>
 
       <thead>
         <row>
@@ -443,7 +443,7 @@
     <title>Regex - Operatori logici</title>
 
     <tgroup align="left" cols="2" rowsep="1">
-      <colspec align="left" colnum="1" colwidth="100"/>
+      <colspec align="left" colnum="1"/>
 
       <thead>
         <row>
@@ -506,7 +506,7 @@
       <title>Regex - Esempi di espressioni regolari nelle traduzioni</title>
 
       <tgroup align="left" cols="2" rowsep="1">
-        <colspec align="left" colnum="1" colwidth="100"/>
+        <colspec align="left" colnum="1"/>
 
         <thead>
           <row>

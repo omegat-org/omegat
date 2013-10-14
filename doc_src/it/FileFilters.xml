@@ -35,7 +35,7 @@
 
   <section id="file.filters.dialog">
     <title>Finestra di dialogo &quot;Filtri dei file&quot;<indexterm class="singular">
-        <secondary>Finestra di dialogo</secondary> <primary>Filtri dei file</primary>
+        <primary>Finestra di dialogo</primary> <secondary>Filtri dei file</secondary>
       </indexterm></title>
 
     <para>Questa finestra contiene un elenco dei filtri dei file disponibili. Se non si desidera utilizzare OmegaT per tradurre i file di un certo tipo, sarà sufficiente togliere la spunta alla casella corrispondente al tipo di file, presente nella colonna &quot;Abilitato&quot;. In questo caso, OmegaT, quando caricherà i progetti, ignorerà questo tipo di file e, quando creerà i documenti di arrivo, li copierà senza apportarvi alcuna modifica. Se si desidera utilizzare di nuovo questo filtro, sarà sufficiente attivare la casella di controllo corrispondente. Fate clic sul pulsante <emphasis role="bold">Predefiniti</emphasis> per riportare i filtri dei file alle impostazioni predefinite. Per modificare il modo in cui il filtro interviene sui file e sulla loro codifica, selezionare dall'elenco il filtro e fare clic su <emphasis role="bold">Modifica</emphasis>.</para>
@@ -43,7 +43,7 @@
 
   <section id="filters.options">
     <title>Opzioni dei filtri<indexterm class="singular">
-        <secondary>Opzioni</secondary> <primary>Filtri dei file</primary>
+        <primary>Opzioni</primary> <secondary>Filtri dei file </secondary>
       </indexterm></title>
 
     <para>Diversi filtri (file di testo, file XHTML, file HTML e XHTML, file OpenDocument Microsoft Open XML) hanno una o più opzioni particolari. Per modificare le opzioni selezionare il filtro dall'elenco e premere il pulsante <emphasis role="bold">Opzioni</emphasis>. Le opzioni disponibili sono:</para>
@@ -229,7 +229,7 @@
 
   <section id="edit.filter.dialog">
     <title>Finestra di dialogo &quot;Modifica filtro&quot;<indexterm class="singular">
-        <secondary>Modifica</secondary> <primary>Filtri dei file</primary> 
+        <primary>Modifica</primary> <secondary>Filtri dei file </secondary> 
       </indexterm></title>
 
     <para>Questa finestra di dialogo consente di impostare i modelli dei nomi dei file di partenza per quei file che dovranno essere elaborati dal filtro, di personalizzare i nomi dei file tradotti e di selezionare la codifica da adottare quando viene caricato il file di partenza e salvato quello di arrivo tradotto. Per modificare un modello di filtro dei file, modificare direttamente i campi o fare clic su <emphasis role="bold">Modifica</emphasis>. Per aggiungerne uno nuovo, fare clic su <emphasis role="bold">Aggiungi</emphasis>. Sia che si desideri aggiungere un nuovo modello o modificarne uno esistente, verrà comunque usata la stessa finestra di dialogo. La finestra è utile perché include uno speciale editor dei modelli del nome del file di arrivo, che permette di personalizzare i nomi dei file prodotti.</para>
@@ -286,7 +286,7 @@
         </indexterm></title>
 
       <para>A volte, potrebbe essere necessario assegnare automaticamente un nuovo nome al file, o ai file, che vengono tradotti; è il caso, per esempio, dell'aggiunta di un codice di lingua al nome del file finale. Il modello del nome del file di arrivo utilizza una sintassi particolare; pertanto, se si desidera intervenire su questo campo, si deve fare clic su <emphasis role="bold">Modifica...</emphasis> e usare la finestra di dialogo <indexterm class="singular">
-          <secondary>Finestra di dialogo</secondary> <primary>Filtri dei file</primary>
+          <primary>Finestra di dialogo</primary> <secondary>Filtri dei file</secondary>
         </indexterm>Modifica filtro. Se si vuole tornare alla configurazione predefinita del filtro, fare clic su <emphasis role="bold">Predefiniti.</emphasis> È possibile anche modificare direttamente il nome nel campo del modello del nome del file di arrivo della finestra di dialogo dei filtri dei file. La finestra di dialogo &quot;Modifica modello&quot; offre, tra le altre, le opzioni seguenti:</para>
 
       <itemizedlist>
@@ -339,7 +339,7 @@
         </listitem>
 
         <listitem>
-          <para><literal>${system-user-name)</literal> - il nome utente di sistema</para>
+          <para><literal>${system-user-name}</literal> - il nome dell'utente di sistema</para>
         </listitem>
 
         <listitem>
@@ -355,7 +355,7 @@
         </listitem>
 
         <listitem>
-          <para><literal>${targetLocaleLCID)</literal> - l locale di destinazione Microsoft</para>
+          <para><literal>${targetLocaleLCID}</literal> - il locale di arrivo Microsoft</para>
         </listitem>
       </itemizedlist>
 

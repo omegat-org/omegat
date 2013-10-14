@@ -39,7 +39,7 @@
     <section id="starting.in.misc.console.mode">
       <title>Avvio di OmegaT in modalità console</title>
 
-      <para>Per avviare OmegaT in modalità console, all'avvio devono essere specificati alcuni parametri aggiuntivi. Il più importante di questi è <literal>&lt;project-dir&gt;</literal> e, facoltativamente, <literal>--config-dir=&lt;config-dir&gt;</literal>. Esempio:</para>
+      <para>Per avviare OmegaT in modalità console, all'avvio devono essere specificati alcuni parametri aggiuntivi. Il più importanti di questi è <literal>&lt;project-dir&gt;</literal> e, facoltativamente, <literal>--config-dir=&lt;config-dir&gt;</literal>. Esempio:</para>
 
       <para><literal>$&gt; java -jar <application>OmegaT</application>.jar /percorso/al/progetto \</literal></para>
 
@@ -55,7 +55,7 @@
 
       <itemizedlist>
         <listitem>
-          <para><literal>&lt;project-dir&gt;</literal> dice a <application>OmegaT</application> <literal> dove trovare il progetto da tradurre. Se indicato, <application>OmegaT</application> si avvia in modalità console e traduce il progetto dato.</literal></para>
+          <para><literal>&lt;project-dir&gt;</literal> dice a <application>OmegaT</application> dove trovare il progetto da tradurre. Se indicato, <application>OmegaT</application> si avvia in modalità console e traduce il progetto dato.</para>
         </listitem>
       </itemizedlist>
 

@@ -5,8 +5,8 @@
       <title>Chapter&nbsp;10.&nbsp;Comportamento di modifica</title>
       <link rel="stylesheet" type="text/css" href="OmegaT.css">
       <meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
-      <link rel="home" href="index.html" title="OmegaT - Manuale dell'Utente">
-      <link rel="up" href="index.html" title="OmegaT - Manuale dell'Utente">
+      <link rel="home" href="index.html" title="OmegaT 3.0- Manuale dell'Utente">
+      <link rel="up" href="index.html" title="OmegaT 3.0- Manuale dell'Utente">
       <link rel="prev" href="chapter.files.to.translate.html" title="Chapter&nbsp;9.&nbsp;File da tradurre">
       <link rel="next" href="chapter.plain.text.html" title="Chapter&nbsp;11.&nbsp;Lavorazione di file di solo testo">
    </head>
@@ -29,7 +29,7 @@
          <div class="titlepage">
             <div>
                <div>
-                  <h1 class="title"><a name="chapter.translation.editing"></a>Chapter&nbsp;10.&nbsp;Comportamento di modifica<a class="indexterm" name="d0e5647"></a></h1>
+                  <h1 class="title"><a name="chapter.translation.editing"></a>Chapter&nbsp;10.&nbsp;Comportamento di modifica<a class="indexterm" name="d0e5699"></a></h1>
                </div>
             </div>
          </div>
@@ -53,14 +53,14 @@
                      di traduzione.
                   </p>
                </dd>
-               <dt><span class="term">Lascia il segmento vuoto<a class="indexterm" name="d0e5692"></a></span></dt>
+               <dt><span class="term">Lascia il segmento vuoto<a class="indexterm" name="d0e5744"></a></span></dt>
                <dd>
                   <p>OmegaT lascia vuoto il campo di modifica. Questa opzione consente di inserire la propria traduzione senza aver necessità di
                      eliminare il testo di partenza, facendo così risparmiare due pressioni di tasti (<span class="bold"><strong>Ctrl+A </strong></span>e <span class="bold"><strong>Canc). </strong></span> Ora è possibile usare traduzioni vuote. Esse saranno visualizzate come &lt;VUOTA&gt; all'interno dell'Editor. Per crearne una,
                      fare clic col destro all'interno di un segmento e selezionare "<span class="bold"><strong>Imposta traduzione vuota</strong></span>". Nello stesso menu contestuale, la voce <span class="bold"><strong>Rimuovi traduzione</strong></span> permette di eliminare la traduzione esistente del segmento attivo. È possibile eseguire la stessa azione cancellando il segmento
                      di destinazione e premendo il tasto <span class="guibutton">Invio.</span></p>
                </dd>
-               <dt><span class="term">Inserisci la concordanza parziale migliore<a class="indexterm" name="d0e5719"></a></span></dt>
+               <dt><span class="term">Inserisci la concordanza parziale migliore<a class="indexterm" name="d0e5771"></a></span></dt>
                <dd>
                   <p>OmegaT inserirà la traduzione della stringa più simile a quella di partenza attiva, se è sopra la soglia di somiglianza selezionata
                      nella finestra di dialogo. Per etichettare le traduzioni eseguite tramite concordanze parziali, può essere utilizzato il prefisso,
@@ -73,7 +73,7 @@
          <p>Le opzioni nella metà inferiore della finestra di dialogo hanno le seguenti funzioni:</p>
          <div class="variablelist">
             <dl class="variablelist">
-               <dt><span class="term">Tenta di convertire i numeri quando si inserisce una concordanza parziale (fuzzy)<a class="indexterm" name="d0e5735"></a></span></dt>
+               <dt><span class="term">Tenta di convertire i numeri quando si inserisce una concordanza parziale (fuzzy)<a class="indexterm" name="d0e5787"></a></span></dt>
                <dd>
                   <p>Se l'opzione è attivata, quando viene inserita, in modo automatico o manualmente, una concordanza parziale, OmegaT tenta di
                      convertire i numeri contenuti nelle concordanze parziali in base al contenuto del segmento di partenza. Esistono alcune limitazioni:
@@ -98,7 +98,7 @@
          </div>
          <div class="variablelist">
             <dl class="variablelist">
-               <dt><span class="term">Permetti traduzione uguale all'originale<a class="indexterm" name="d0e5759"></a></span></dt>
+               <dt><span class="term">Permetti traduzione uguale all'originale<a class="indexterm" name="d0e5811"></a></span></dt>
                <dd>
                   <p>I documenti da tradurre possono contenere nomi di marchi di fabbrica, nomi propri, e via discorrendo, che devono essere lasciati
                      inalterati (ovvero non richiedono traduzione) nel documento tradotto. Vi sono due sistemi per operare sui segmenti che contengono
@@ -113,7 +113,7 @@
          </div>
          <div class="variablelist">
             <dl class="variablelist">
-               <dt><span class="term">Esporta il segmento in file di testo<a class="indexterm" name="d0e5784"></a></span></dt>
+               <dt><span class="term">Esporta il segmento in file di testo<a class="indexterm" name="d0e5836"></a></span></dt>
                <dd>
                   <p>La funzione di esportazione testo esporta i dati dall'interno del progetto <span class="application">OmegaT</span> attivo in file solo testo. I dati vengono esportati quando il segmento viene aperto. I file vengono scritti nella cartella
                      secondaria /script all'interno della cartella dei file principale di OmegaT e includono:
@@ -134,16 +134,16 @@
                         </li>
                      </ul>
                   </div>
-                  <p>Il contenuto dei file viene sovrascritto se si apre un nuovo segmento (source.txt e target.txt) o si esporta una nuova selezione
-                     (selection.txt). I file sono di solo testo. L'intero processo può essere manovrato e controllato tramite script basato su
-                     Tck/Tcl. Consultare <a class="ulink" href="http://www.omegat.org/en/howtos/text_export.html" target="_top">Uso della funzione di esportazione testo di OmegaT</a> per specifiche, esempi e suggerimenti.
+                  <p>Il contenuto dei file viene sovrascritto sia quando un nuovo segmento è aperto (source.txt e target.txt), sia quando una nuova
+                     selezione è esportata (selection.txt). I file sono di solo testo. L'intero processo può essere manovrato e controllato tramite
+                     script basato su Tck/Tcl. Consultare <a class="ulink" href="http://www.omegat.org/en/howtos/text_export.html" target="_top">Uso della funzione di esportazione testo di OmegaT</a> per specifiche, esempi e suggerimenti.
                   </p>
                </dd>
             </dl>
          </div>
          <div class="variablelist">
             <dl class="variablelist">
-               <dt><span class="term">"Vai al prossimo segmento non tradotto" si ferma nel punto in cui esiste almeno una traduzione alternativa<a class="indexterm" name="d0e5831"></a></span></dt>
+               <dt><span class="term">"Vai al prossimo segmento non tradotto" si ferma nel punto in cui esiste almeno una traduzione alternativa<a class="indexterm" name="d0e5883"></a></span></dt>
                <dd>
                   <p>Per evitare traduzioni sbagliate, nel caso siano presenti segmenti che presentano la possibilità di più traduzioni, si può
                      attivare l'opzione che ferma il comando <span class="bold"><strong>&nbsp;Vai al prossimo segmento non tradotto</strong></span> segmento uguale successivo, a prescindere che esso sia stato o no tradotto.

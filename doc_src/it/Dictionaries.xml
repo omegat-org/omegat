@@ -94,7 +94,7 @@
       <listitem>
         <para>Verificare che i file di dizionario siano presenti nella cartella corretta (o in una delle sue cartelle secondarie). Verificare <menuchoice> <shortcut> <keycombo> <keycap><indexterm class="singular">
                     <primary>Scorciatoie</primary> <secondary>Proprietà del progetto - Ctrl+E</secondary>
-                  </indexterm>Ctrl</keycap> <keycap>E</keycap> </keycombo> </shortcut> <guimenuitem>Proprietà</guimenuitem> </menuchoice> del <guimenu>progetto</guimenu>.</para>
+                  </indexterm>Ctrl</keycap> <keycap>E</keycap> </keycombo> </shortcut> <guimenu>Proprietà</guimenu> del <guimenuitem>progetto</guimenuitem></menuchoice> .</para>
       </listitem>
     </itemizedlist>
 

@@ -148,7 +148,7 @@
 
     <itemizedlist>
       <listitem>
-        <para><emphasis role="bold">Frammenti da rimuovere dall'espressione regolare della traduzione:</emphasis></para>
+        <para><emphasis role="bold">Frammenti da rimuovere dall'espressione regolare della traduzione</emphasis></para>
 
         <para>È possibile inserire un'espressione regolare per i contenuti che non si vuole che appaiano nel testo di destinazione. Tutte le corrispondenze trovate nel segmento di destinazione verrano evidenziate in rosso, in modo da individuarle facilmente e correggerle. Quando si cercano corrispondenze parziali, il modello per la rimozione viene ignorato. Una penalità fissa di 5 punti viene aggiunta se la parte rimossa non corrisponde a qualche altro segmento, in modo che la corrispondenza non indichi il 100%</para>
       </listitem>

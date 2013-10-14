@@ -14,9 +14,9 @@
         </indexterm></title>
 
       <tgroup cols="2" colsep="0" rowsep="1" title="Main OMegaT window">
-        <colspec align="left" colnum="1" colwidth="90"/>
+        <colspec align="left" colnum="1"/>
 
-        <colspec align="left" colnum="2" colwidth=""/>
+        <colspec align="left" colnum="2"/>
 
         <tbody>
           <row>
@@ -70,9 +70,9 @@
         </indexterm></title>
 
       <tgroup cols="2" colsep="0" rowsep="1" title="Other windows">
-        <colspec align="left" colnum="1" colwidth="90"/>
+        <colspec align="left" colnum="1"/>
 
-        <colspec align="left" colnum="2" colwidth=""/>
+        <colspec align="left" colnum="2"/>
 
         <tbody>
           <row>
@@ -116,9 +116,9 @@
         </indexterm></title>
 
       <tgroup cols="2" colsep="0" rowsep="1" title="Settings dialogs">
-        <colspec align="left" colnum="1" colwidth="90"/>
+        <colspec align="left" colnum="1"/>
 
-        <colspec align="left" colnum="2" colwidth=""/>
+        <colspec align="left" colnum="2"/>
 
         <tbody>
           <row>
@@ -204,7 +204,7 @@
         </indexterm></title>
 
       <tgroup cols="2">
-        <colspec align="left" colnum="1" colwidth="60"/>
+        <colspec align="left" colnum="1"/>
 
         <tbody>
           <row>
@@ -294,7 +294,7 @@
         </indexterm></title>
 
       <tgroup cols="2">
-        <colspec align="left" colnum="1" colwidth="60"/>
+        <colspec align="left" colnum="1"/>
 
         <tbody>
           <row>
@@ -436,9 +436,9 @@
             </indexterm></title>
 
           <tgroup cols="2" colsep="1" rowsep="1" title="Match pane setup">
-            <colspec align="left" colnum="1" colwidth="90"/>
+            <colspec align="left" colnum="1"/>
 
-            <colspec align="left" colnum="2" colwidth=""/>
+            <colspec align="left" colnum="2"/>
 
             <tbody>
               <row>

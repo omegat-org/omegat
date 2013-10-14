@@ -17,9 +17,9 @@
   <table id="table.language.code.list">
     <title>Elenco dei codici di lingua ISO 639-1/639-2</title>
     <tgroup cols="3" align="left" colsep="1" rowsep="1">
-      <colspec align="left" colnum="1" colwidth="200"/>
-      <colspec align="left" colnum="2" colwidth="100"/>
-      <colspec align="left" colnum="3" colwidth="100"/>
+      <colspec align="left" colnum="1"/>
+      <colspec align="left" colnum="2"/>
+      <colspec align="left" colnum="3"/>
       <thead>
         <row>
           <entry align="left">Nome della lingua</entry>
@@ -635,7 +635,7 @@
 	</row>
         <row>
 	  <entry>Oriya</entry>
-	  <entry>or</entry>
+	  <entry>oppure</entry>
 	  <entry>ori</entry>
 	</row>
         <row>
@@ -840,7 +840,7 @@
 	</row>
         <row>
 	  <entry>Tongano (Isole Tonga)</entry>
-	  <entry>to</entry>
+	  <entry>in</entry>
 	  <entry>ton</entry>
 	</row>
         <row>

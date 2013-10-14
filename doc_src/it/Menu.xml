@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
 <chapter id="chapter.menu">
-  <title>Menu e scorciatoie da tastiera</title>
+  <title>Menù e scorciatoie da tastiera</title>
 
   <section id="ch04.main.menu">
     <title><indexterm class="singular">
-        <primary>Menu</primary>
-      </indexterm>Menu principale</title>
+        <primary>Menù</primary>
+      </indexterm>Menù principale</title>
 
     <para>Tutte le funzioni di OmegaT sono accessibili tramite la barra dei menu, posta sopra la finestra dell'Editor. La maggior parte delle funzioni è anche accessibile utilizzando le scorciatoie da tastiera. Le scorciatoie da tastiera sono attivabili premendo il tasto <keycap>Ctrl</keycap> e una lettera. Alcune scorciatoie prevedono l'uso di altri tasti. Per ragioni di leggibilità, i tasti alfabetici vengono qui rappresentati in maiuscolo. <keycap>Ctrl</keycap> vale per i sistemi operativi Windows, UNIX e simili a UNIX dotati di tastiere che prevedono il tasto <keycap>Ctrl</keycap> o <keycap>Control</keycap>. Gli utenti di Mac dovrebbero invece usare il <keycombo><keycap>tasto</keycap> <keycap>Cmd</keycap>  </keycombo>. Nelle tastiere Apple, il tasto &quot;Cmd&quot; presenta la dicitura &quot;comando&quot; o la figura di una mela.</para>
 
     <para>È possibile personalizzare le scorciatoie esistenti o aggiungerne di nuove in base alle proprie preferenze. <link linkend="ch04.shortcuts.customization">Vedere Appendice - Personalizzazione delle scorciatoie</link></para>
 
     <table colsep="1" id="table.main.menu">
-      <title>Menu principale</title>
+      <title>Menù principale</title>
 
       <tgroup cols="7" colsep="1">
         <tbody>
@@ -45,9 +45,9 @@
         <title>Menu del progetto</title>
 
         <tgroup cols="3" colsep="1">
-          <colspec align="left" colnum="1" colwidth="100"/>
+          <colspec align="left" colnum="1"/>
 
-          <colspec align="left" colnum="2" colwidth="100"/>
+          <colspec align="left" colnum="2"/>
 
           <tbody>
             <row>
@@ -179,9 +179,9 @@
         <title>Scorciatoie copia/taglia/incolla</title>
 
         <tgroup cols="3" colsep="1">
-          <colspec align="left" colnum="1" colwidth="100"/>
+          <colspec align="left" colnum="1"/>
 
-          <colspec align="left" colnum="2" colwidth="100"/>
+          <colspec align="left" colnum="2"/>
 
           <tbody>
             <row>
@@ -229,9 +229,9 @@
         <title>Menu Modifica</title>
 
         <tgroup cols="3" colsep="1">
-          <colspec align="left" colnum="1" colwidth="100"/>
+          <colspec align="left" colnum="1"/>
 
-          <colspec align="left" colnum="2" colwidth="100"/>
+          <colspec align="left" colnum="2"/>
 
           <tbody>
             <row>
@@ -333,7 +333,7 @@
                   <keycap>Maiusc</keycap> <keycap>Ctrl</keycap> <keycap>C</keycap>
                 </keycombo></entry>
 
-              <entry>Esporta la selezione attiva in un file di testo per successiva elaborazione. Se non è stato selezionato alcun testo, nel file viene copiato il segmento originale attivo. Quando l'utente chiude <application>OmegaT</application>, questo file non è vuoto, in modo da essere coerente col normale comportamento degli Appunti. Il contenuto esportato viene copiato nel file <filename>selection.txt</filename>, memorizzato nella cartella delle preferenze dell'utente (si veda <xref linkend="chapter.files.and.directories"/>).</entry>
+              <entry>Esporta la selezione attiva in un file di testo per successiva elaborazione. Se non è stato selezionato alcun testo, nel file viene copiato il segmento originale attivo. Quando l'utente chiude <application>OmegaT</application>, questo file non è vuoto, in modo da essere coerente col normale comportamento degli Appunti. Il contenuto esportato viene copiato nel file <filename>selection.txt</filename>, memorizzato nella cartella delle preferenze dell'utente (si veda <xref linkend="chapter.files.and.folders"/>).</entry>
             </row>
 
             <row>
@@ -409,9 +409,9 @@
         <title>Menu Vai</title>
 
         <tgroup cols="3" colsep="1">
-          <colspec align="left" colnum="1" colwidth="100"/>
+          <colspec align="left" colnum="1"/>
 
-          <colspec align="left" colnum="2" colwidth="100"/>
+          <colspec align="left" colnum="2"/>
 
           <tbody>
             <row>
@@ -503,7 +503,7 @@
         <title>Menu Vista</title>
 
         <tgroup cols="2" colsep="1">
-          <colspec align="left" colnum="1" colwidth="100"/>
+          <colspec align="left" colnum="1"/>
 
           <tbody>
             <row>
@@ -573,7 +573,7 @@
         </indexterm>
 
         <tgroup cols="2" colsep="1">
-          <colspec align="left" colnum="1" colwidth="100"/>
+          <colspec align="left" colnum="1"/>
 
           <tbody>
             <row>
@@ -613,7 +613,7 @@
         <title>Menu Opzioni</title>
 
         <tgroup cols="2" colsep="1">
-          <colspec align="left" colnum="1" colwidth="100"/>
+          <colspec align="left" colnum="1"/>
 
           <tbody>
             <row>
@@ -731,7 +731,7 @@
         <title>Menu Aiuto</title>
 
         <tgroup cols="2" colsep="1">
-          <colspec align="left" colnum="1" colwidth="100"/>
+          <colspec align="left" colnum="1"/>
 
           <tbody>
             <row>
@@ -803,9 +803,9 @@
         <title>Scorciatoie per la gestione del progetto</title>
 
         <tgroup cols="3" colsep="1">
-          <colspec align="left" colnum="1" colwidth="100"/>
+          <colspec align="left" colnum="1"/>
 
-          <colspec align="left" colnum="2" colwidth="100"/>
+          <colspec align="left" colnum="2"/>
 
           <tbody>
             <row>
@@ -881,9 +881,9 @@
         <title>Modifica delle scorciatoie</title>
 
         <tgroup cols="3" colsep="1">
-          <colspec align="left" colnum="1" colwidth="100"/>
+          <colspec align="left" colnum="1"/>
 
-          <colspec align="left" colnum="2" colwidth="100"/>
+          <colspec align="left" colnum="2"/>
 
           <tbody>
             <row>
@@ -1035,9 +1035,9 @@
         <title>Scorciatoie per gli spostamenti</title>
 
         <tgroup cols="3" colsep="1">
-          <colspec align="left" colnum="1" colwidth="100"/>
+          <colspec align="left" colnum="1"/>
 
-          <colspec align="left" colnum="2" colwidth="100"/>
+          <colspec align="left" colnum="2"/>
 
           <tbody>
             <row>
@@ -1117,9 +1117,9 @@
         <title>Scorciatoie varie</title>
 
         <tgroup cols="3" colsep="1">
-          <colspec align="left" colnum="1" colwidth="100"/>
+          <colspec align="left" colnum="1"/>
 
-          <colspec align="left" colnum="2" colwidth="100"/>
+          <colspec align="left" colnum="2"/>
 
           <tbody>
             <row>

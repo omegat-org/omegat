@@ -20,13 +20,13 @@
 
     <itemizedlist>
       <listitem>
-        <para><emphasis role="bold">Gestione terminologica</emphasis>: la gestione terminologica è un elemento importante per la coerenza di una traduzione. OmegaT fa uso di glossari che contengono le traduzioni di singoli termini o di brevi frasi: un dizionario bilingue semplificato e dedicato a un argomento specifico. OmegaT visualizza la traduzione di tutte le parole che compaiono all'interno del segmento correntemente attivo.</para>
+        <para><emphasis role="bold">Gestione terminologica</emphasis>: la gestione terminologica è un elemento importante per la coerenza di una traduzione. OmegaT fa uso di glossari che contengono le traduzioni di singoli termini o di brevi frasi: un dizionario bilingue semplificato e dedicato a un argomento specifico. OmegaT visualizza la traduzione di tutte le parole presenti nel segmento e registrate nel glossario.</para>
       </listitem>
     </itemizedlist>
 
     <itemizedlist>
       <listitem>
-        <para><emphasis role="bold">Processo di traduzione:</emphasis> il concetto fondamentale è di dover tradurre qualcosa, da un singolo file a una cartella, suddivisa in cartelle secondarie, che contiene molti file in diversi formati. Quando si indicherà a OmegaT che si ha la necessità di tradurre questi file, il programma cerca i file che è in grado di riconoscere, in base alle regole di filtraggio dei file; riconosce le parti testuali al loro interno, le suddivide in gruppi di testo in base alle regole di segmentazione e, infine, visualizza i singoli segmenti in modo da consentirne la traduzione. OmegaT memorizza le traduzioni e propone scelte per segmenti simili a quelli contenuti in memoria. Quando si è pronti per vedere il risultato finale, è possibile esportare i file tradotti, aprirli con l'applicazione adatta e vedere la traduzione nel suo formato finale...</para>
+        <para><emphasis role="bold">Processo di traduzione:</emphasis> il concetto fondamentale è di dover tradurre qualcosa, da un singolo file a una cartella, suddivisa in cartelle secondarie, che contiene molti file in diversi formati. Quando si indicherà a OmegaT che si ha la necessità di tradurre questi file, il programma cerca i file che è in grado di riconoscere, in base alle regole di filtraggio dei file; riconosce le parti testuali al loro interno, le suddivide in gruppi di testo in base alle regole di segmentazione e, infine, visualizza i singoli segmenti in modo da consentirne la traduzione. OmegaT memorizza le traduzioni e propone scelte per segmenti simili a quelli registrati nei file della memoria di traduzione. Quando si è pronti per vedere il risultato finale, è possibile esportare i file tradotti, aprirli con l'applicazione adatta e vedere la traduzione nel suo formato finale...</para>
       </listitem>
     </itemizedlist>
   </section>
@@ -38,7 +38,7 @@
 
     <itemizedlist>
       <listitem>
-        <para><emphasis role="bold"> Guida di avvio rapido:</emphasis> questo capitolo vuole essere una guida all'avvio rapido per principianti e &quot;pigri&quot;, e tratta il procedimento completo, dall'apertura di un nuovo progetto di traduzione al suo completamento.</para>
+        <para><emphasis role="bold">Imparare a usare OmegaT in cinque minuti!:</emphasis> questo capitolo vuole essere un'esercitazione veloce sia per i principianti, sia per coloro che già conoscono gli strumenti di traduzione assistita (CAT), che mostra tutti i passaggi della procedura, dall'apertura di un nuovo progetto di traduzione fino al completamento.</para>
       </listitem>
     </itemizedlist>
 

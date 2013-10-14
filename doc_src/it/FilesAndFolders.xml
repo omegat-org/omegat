@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
-<chapter id="chapter.files.and.directories">
+<chapter id="chapter.files.and.folders">
   <title>File e cartelle di <application>OmegaT</application></title>
 
   <para><application>OmegaT</application> lavora con tre tipi di file.</para>
@@ -51,12 +51,12 @@
 
     <para>All'interno di un gestore di file, un progetto di traduzione assomiglia a qualsiasi altra cartella. Nell'esempio che segue, la cartella <filename>progetti personali</filename> contiene tre progetti OmegaT:</para>
 
-    <para><figure id="OmegaT.projects.and.subdirectories">
+    <para><figure id="OmegaT.projects.and.subfolders">
         <title>Progetti e sottocartelle di OmegaT</title>
 
         <mediaobject>
           <imageobject>
-            <imagedata fileref="images/OmegaT_projects_and_subdirectories.png"/>
+            <imagedata fileref="images/OmegaT_projects_and_subfolders.png"/>
           </imageobject>
         </mediaobject>
       </figure></para>
@@ -94,7 +94,7 @@
 
       <para><informaltable>
           <tgroup align="left" cols="2" rowsep="1">
-            <colspec align="left" colnum="1" colwidth="120"/>
+            <colspec align="left" colnum="1"/>
 
             <tbody>
               <row>
@@ -161,7 +161,7 @@
 
     <informaltable>
       <tgroup align="left" cols="2" rowsep="1">
-        <colspec align="left" colnum="1" colwidth="100"/>
+        <colspec align="left" colnum="1"/>
 
         <tbody>
           <row>
@@ -207,7 +207,7 @@
 
     <informaltable>
       <tgroup align="left" cols="2" rowsep="1">
-        <colspec align="left" colnum="1" colwidth="100"/>
+        <colspec align="left" colnum="1"/>
 
         <tbody>
           <row>
@@ -257,11 +257,11 @@
 
     <para>OmegaT è fornito come pacchetto scaricabile da SourceForge. Qui viene considerato un pacchetto indipendente dalla piattaforma in una forma Java standard. Le alternative includono un pacchetto Linux .tar, un installatore Windows, con o senza Java Runtime Environment, un installatore Mac OS X e un pacchetto di codice sorgente per gli sviluppatori.</para>
 
-    <para>Il pacchetto indipendente dalla piattaforma può essere usato su qualsiasi piattaforma che abbia installato Java 1.5 runtime environment, incluse quelle per le quali esiste un pacchetto specifico. Viene fornito come file compresso (zip o tar) e va scompattato nella cartella di propria scelta per l'installazione. Il file viene in genere estratto facendo doppio clic sul pacchetto scaricato. Una volta estratto l'archivio, viene creata una cartella che contiene i seguenti elementi:</para>
+    <para>Il pacchetto indipendente dalla piattaforma può essere usato su qualsiasi piattaforma che possegga un Java 1.6 runtime environment funzionante, incluse quelle per le quali esiste un pacchetto specifico. Viene fornito come file compresso (zip o tar) e va scompattato nella cartella di propria scelta per l'installazione. Il file viene in genere estratto facendo doppio clic sul pacchetto scaricato. Una volta estratto l'archivio, viene creata una cartella che contiene i seguenti elementi:</para>
 
     <informaltable>
       <tgroup align="left" cols="2" rowsep="1">
-        <colspec align="left" colnum="1" colwidth="100"/>
+        <colspec align="left" colnum="1"/>
 
         <tbody>
           <row>
@@ -319,43 +319,26 @@
           </row>
 
           <row>
-            <entry rowsep="0"><literal>omegat</literal></entry>
+            <entry><application>OmegaT</application></entry>
 
-            <entry rowsep="0">È un file di testo che contiene due righe:</entry>
+            <entry><para>È un file di testo che contiene due righe:</para>
+
+            <programlisting>#!/bin/bash java
+java -jar OmegaT.jar $*</programlisting>
+
+            <para>Gli utenti di Linux e OS X potrebbero trovare utile questo file. Rendere eseguibile (<literal>chmod +x OmegaT</literal>) dalla riga di comando dopo essersi assicurati di essere nella cartella dell'applicazione di OmegaT. Si sarà in grado di avviare OmegaT eseguendo questo file dalla riga di comando</para>
+            </entry>
           </row>
-
+          
           <row>
-            <entry rowsep="0"/>
+            <entry>OmegaT.bat</entry>
 
-            <entry rowsep="0"><literal>#!/bin/bash java</literal></entry>
+            <entry><para>Un file batch, usato per avviare <application>OmegaT</application> dalla riga di comando di Windows. Contiene solo la seguente riga:</para>
+
+            <programlisting>java -jar OmegaT.jar %*</programlisting>
+            </entry>
           </row>
-
-          <row>
-            <entry rowsep="0"/>
-
-            <entry rowsep="0"><literal>java -jar
-            <application>OmegaT</application>.jar $*</literal></entry>
-          </row>
-
-          <row>
-            <entry/>
-
-            <entry>Gli utenti di Linux e OS X potrebbero trovare utile questo file. Rendere eseguibile (chmod +x OmegaT) dalla riga di comando dopo essersi assicurati di essere nella directory /OmegaT_2.5/. Si sarà in grado di avviare OmegaT eseguendo questo file dalla riga di comando.</entry>
-          </row>
-
-          <row>
-            <entry rowsep="0"><literal>OmegaT.bat</literal></entry>
-
-            <entry rowsep="0">Un file batch, usato per avviare <application>OmegaT</application> dalla riga di comando di Windows. Contiene solo la seguente riga:</entry>
-          </row>
-
-          <row>
-            <entry/>
-
-            <entry><literal>java -jar OmegaT.jar
-            %*</literal></entry>
-          </row>
-
+          
           <row>
             <entry><literal>OmegaT.jar</literal></entry>
 

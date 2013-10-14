@@ -5,8 +5,8 @@
       <title>Chapter&nbsp;12.&nbsp;Lavorazione di testo formattato</title>
       <link rel="stylesheet" type="text/css" href="OmegaT.css">
       <meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
-      <link rel="home" href="index.html" title="OmegaT - Manuale dell'Utente">
-      <link rel="up" href="index.html" title="OmegaT - Manuale dell'Utente">
+      <link rel="home" href="index.html" title="OmegaT 3.0- Manuale dell'Utente">
+      <link rel="up" href="index.html" title="OmegaT 3.0- Manuale dell'Utente">
       <link rel="prev" href="chapter.plain.text.html" title="Chapter&nbsp;11.&nbsp;Lavorazione di file di solo testo">
       <link rel="next" href="chapter.translation.memories.html" title="Chapter&nbsp;13.&nbsp;Memorie di traduzione">
    </head>
@@ -29,7 +29,7 @@
          <div class="titlepage">
             <div>
                <div>
-                  <h1 class="title"><a name="chapter.formatted.text"></a>Chapter&nbsp;12.&nbsp;Lavorazione di testo formattato<a class="indexterm" name="d0e6039"></a><a class="indexterm" name="d0e6044"></a></h1>
+                  <h1 class="title"><a name="chapter.formatted.text"></a>Chapter&nbsp;12.&nbsp;Lavorazione di testo formattato<a class="indexterm" name="d0e6091"></a><a class="indexterm" name="d0e6096"></a></h1>
                </div>
             </div>
          </div>
@@ -39,7 +39,7 @@
                <dt><span class="section"><a href="chapter.formatted.text.html#tag.operations">2. Operazioni sui tag</a></span></dt>
                <dt><span class="section"><a href="chapter.formatted.text.html#tag.group.nesting">3. Annidamento di un gruppo di tag</a></span></dt>
                <dt><span class="section"><a href="chapter.formatted.text.html#tag.group.overlapping">4. Sovrapposizione di un gruppo di tag</a></span></dt>
-               <dt><span class="section"><a href="chapter.formatted.text.html#d0e6190">5. Opzioni di convalida dei tag</a></span></dt>
+               <dt><span class="section"><a href="chapter.formatted.text.html#d0e6242">5. Opzioni di convalida dei tag</a></span></dt>
                <dt><span class="section"><a href="chapter.formatted.text.html#tag.group.validation">6. Convalida di un gruppo di tag</a></span></dt>
                <dt><span class="section"><a href="chapter.formatted.text.html#hints.for.tag.management">7. Consigli per la gestione dei tag</a></span></dt>
             </dl>
@@ -54,23 +54,23 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="formatting.tags"></a>1.&nbsp;Formattazione dei tag<a class="indexterm" name="d0e6054"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="formatting.tags"></a>1.&nbsp;Formattazione dei tag<a class="indexterm" name="d0e6106"></a></h2>
                   </div>
                </div>
             </div>
-            <p><a class="indexterm" name="d0e6058"></a><span class="bold"><strong>Rinomina dei tag:</strong></span></p>
+            <p><a class="indexterm" name="d0e6110"></a><span class="bold"><strong>Rinomina dei tag:</strong></span></p>
             <p>i tag sono composti da uno a tre caratteri e un numero. La numerazione univoca consente di raggruppare i tag che hanno tra
                di loro una corrispondenza e di differenziare quelli che sono associati allo stesso carattere rapido ma che in realtà sono
                diversi. I caratteri rapidi utilizzati tentano di riflettere il valore, celato, della formattazione rappresentato dal tag
                stesso (per es., b per grassetto, bold, i per corsivo, italics, e via discorrendo)
             </p>
-            <p><a class="indexterm" name="d0e6068"></a><span class="bold"><strong>Numerazione dei tag:</strong></span></p>
+            <p><a class="indexterm" name="d0e6120"></a><span class="bold"><strong>Numerazione dei tag:</strong></span></p>
             <p>i tag sono numerati, in modo incrementale, in base al gruppo di tag. In questo contesto, un singolo tag è considerato un "gruppo
                di tag" (come &lt;i0&gt; e &lt;/i0&gt;). All'interno di un segmento, il primo gruppo (in coppia o singolo) è associato al numero 0, il
                secondo al numero 1, e così di seguito. Il primo esempio qui sotto riportato è composto da 3 gruppi di tag (una coppia, un
                singolo e, quindi, un'altra coppia) mentre il secondo esempio ne contiene solo uno (una coppia).
             </p>
-            <p><a class="indexterm" name="d0e6078"></a><span class="bold"><strong>Coppie e singoli:</strong></span></p>
+            <p><a class="indexterm" name="d0e6130"></a><span class="bold"><strong>Coppie e singoli:</strong></span></p>
             <p>I tag sono sempre singoli o accoppiati. I tag singoli indicano le informazioni di formattazione che non coinvolgono il testo
                circostante (per esempio, inserimento di spazio aggiuntivo o di interruzioni di riga).
             </p>
@@ -90,7 +90,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="tag.operations"></a>2.&nbsp;Operazioni sui tag<a class="indexterm" name="d0e6103"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="tag.operations"></a>2.&nbsp;Operazioni sui tag<a class="indexterm" name="d0e6155"></a></h2>
                   </div>
                </div>
             </div>
@@ -98,7 +98,7 @@
                del documento finale potrebbe presentare problemi. La regola di base è che si deve rispettare l'ordine di sequenza dei tag.
                Tuttavia, se si seguono strettamente determinate regole, a volte potrebbe capitare di deviare dalla regola di base.
             </p>
-            <p><span class="bold"><strong><a class="indexterm" name="d0e6112"></a>Duplicazione di tag:</strong></span></p>
+            <p><span class="bold"><strong><a class="indexterm" name="d0e6164"></a>Duplicazione di tag:</strong></span></p>
             <p>per duplicare gruppi di tag sarà sufficiente copiarli nella posizione finale corretta. Si tenga a mente che in un gruppo accoppiato,
                il tag di apertura deve sempre precedere quello di chiusura. La formattazione associata al gruppo duplicato verrà applicata
                a entrambe le sezioni nella quale si è effettuata la duplicazione.
@@ -107,7 +107,7 @@
             <p><code class="literal">&lt;b0&gt;Questa formattazione&lt;/b0&gt; sta per essere duplicata qui.&lt;segmento 0001&gt;</code></p>
             <p>Dopo aver effettuato la duplicazione si otterrà:</p>
             <p><code class="literal">&lt;b0&gt;Questa formattazione&lt;/b0&gt; è stata &lt;b0&gt;duplicatata qui&lt;/b0&gt;.&lt;segmento 0001&gt;</code></p>
-            <p><span class="bold"><strong><a class="indexterm" name="d0e6132"></a>Eliminazione dei gruppi di tag:</strong></span></p>
+            <p><span class="bold"><strong><a class="indexterm" name="d0e6184"></a>Eliminazione dei gruppi di tag:</strong></span></p>
             <p>per eliminare gruppi di tag sarà sufficiente cancellarli dall'interno del segmento. Si tenga però presente che, per eliminare
                tutte le tracce della formattazione, sarà necessario eliminare sia il tag di apertura, sia quello di chiusura; in caso contrario
                il file tradotto potrebbe risultare danneggiato. L'eliminazione di un gruppo di tag rimuoverà dal file finale tradotto tutte
@@ -122,7 +122,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="tag.group.nesting"></a>3.&nbsp;Annidamento di un gruppo di tag<a class="indexterm" name="d0e6153"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="tag.group.nesting"></a>3.&nbsp;Annidamento di un gruppo di tag<a class="indexterm" name="d0e6205"></a></h2>
                   </div>
                </div>
             </div>
@@ -140,7 +140,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="tag.group.overlapping"></a>4.&nbsp;Sovrapposizione di un gruppo di tag<a class="indexterm" name="d0e6173"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="tag.group.overlapping"></a>4.&nbsp;Sovrapposizione di un gruppo di tag<a class="indexterm" name="d0e6225"></a></h2>
                   </div>
                </div>
             </div>
@@ -156,7 +156,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="d0e6190"></a>5.&nbsp;Opzioni di convalida dei tag
+                     <h2 class="title" style="clear: both"><a name="d0e6242"></a>5.&nbsp;Opzioni di convalida dei tag
                      </h2>
                   </div>
                </div>
@@ -199,7 +199,7 @@
             <div class="itemizedlist">
                <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
-                     <p><span class="bold"><strong>Frammenti da rimuovere dall'espressione regolare della traduzione:</strong></span></p>
+                     <p><span class="bold"><strong>Frammenti da rimuovere dall'espressione regolare della traduzione</strong></span></p>
                      <p>È possibile inserire un'espressione regolare per i contenuti che non si vuole che appaiano nel testo di destinazione. Tutte
                         le corrispondenze trovate nel segmento di destinazione verrano evidenziate in rosso, in modo da individuarle facilmente e
                         correggerle. Quando si cercano corrispondenze parziali, il modello per la rimozione viene ignorato. Una penalità fissa di
@@ -214,12 +214,12 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="tag.group.validation"></a>6.&nbsp;Convalida di un gruppo di tag<a class="indexterm" name="d0e6234"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="tag.group.validation"></a>6.&nbsp;Convalida di un gruppo di tag<a class="indexterm" name="d0e6286"></a></h2>
                   </div>
                </div>
             </div>
             <p>La funzione di convalida di tag rileva le modifiche alle sequenze di tag (sia deliberate, sia accidentali) e mostra i segmenti
-               coinvolti. L'avvio di questa funzione – <span class="guimenuitem">Ctrl+T<a class="indexterm" name="d0e6243"></a></span> - apre una finestra che contiene tutti i segmenti nel file che contengono tag danneggiati sospetti o scorretti all'interno
+               coinvolti. L'avvio di questa funzione – <span class="guimenuitem">Ctrl+T<a class="indexterm" name="d0e6295"></a></span> - apre una finestra che contiene tutti i segmenti nel file che contengono tag danneggiati sospetti o scorretti all'interno
                della traduzione. La funzione di convalida dei tag rende semplice la loro riparazione e la ricreazione del documento di arrivo.
                La finestra che si apre premendo <span class="guimenuitem">Ctrl+T</span> mostra una tabella a tre colonne con un collegamento al segmento, quello di partenza e quello di arrivo
             </p>
@@ -238,7 +238,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="hints.for.tag.management"></a>7.&nbsp;Consigli per la gestione dei tag<a class="indexterm" name="d0e6268"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="hints.for.tag.management"></a>7.&nbsp;Consigli per la gestione dei tag<a class="indexterm" name="d0e6320"></a></h2>
                   </div>
                </div>
             </div>

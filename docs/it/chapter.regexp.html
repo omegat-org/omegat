@@ -5,8 +5,8 @@
       <title>Chapter&nbsp;16.&nbsp;Espressioni regolari</title>
       <link rel="stylesheet" type="text/css" href="OmegaT.css">
       <meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
-      <link rel="home" href="index.html" title="OmegaT - Manuale dell'Utente">
-      <link rel="up" href="index.html" title="OmegaT - Manuale dell'Utente">
+      <link rel="home" href="index.html" title="OmegaT 3.0- Manuale dell'Utente">
+      <link rel="up" href="index.html" title="OmegaT 3.0- Manuale dell'Utente">
       <link rel="prev" href="chapter.searches.html" title="Chapter&nbsp;15.&nbsp;Ricerche">
       <link rel="next" href="chapter.dictionaries.html" title="Chapter&nbsp;17.&nbsp;Dizionari">
    </head>
@@ -29,7 +29,7 @@
          <div class="titlepage">
             <div>
                <div>
-                  <h1 class="title"><a name="chapter.regexp"></a>Chapter&nbsp;16.&nbsp;Espressioni regolari<a class="indexterm" name="d0e7342"></a></h1>
+                  <h1 class="title"><a name="chapter.regexp"></a>Chapter&nbsp;16.&nbsp;Espressioni regolari<a class="indexterm" name="d0e7394"></a></h1>
                </div>
             </div>
          </div>
@@ -39,7 +39,7 @@
             </dl>
          </div>
          <p>Le espressioni regolari (regex, in breve) ammesse per le operazioni di ricerca sono quelle riconosciute da Java. Per ulteriori
-            e più specifiche informazioni, consultare la <a class="ulink" href="http://download.oracle.com/javase/1.5.0/docs/api/java/util/regex/Pattern.html" target="_top">documentazione Java Regex</a>. Vedere più avanti per ulteriori riferimenti ed esempi.
+            e più specifiche informazioni, consultare la <a class="ulink" href="http://download.oracle.com/javase/1.6.0/docs/api/java/util/regex/Pattern.html" target="_top">documentazione Java Regex</a>. Vedere più avanti per ulteriori riferimenti ed esempi.
          </p>
          <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;">
             <h3 class="title">Note</h3>
@@ -47,11 +47,11 @@
                o costruire combinazioni di ricerca più complesse ed efficaci.
             </p>
          </div>
-         <div class="table"><a name="d0e7357"></a><p class="title"><b>Table&nbsp;16.1.&nbsp;Regex - Flag</b></p>
+         <div class="table"><a name="d0e7409"></a><p class="title"><b>Table&nbsp;16.1.&nbsp;Regex - Flag</b></p>
             <div class="table-contents">
                <table summary="Regex - Flag" border="1">
                   <colgroup>
-                     <col width="100" align="left">
+                     <col align="left">
                      <col>
                   </colgroup>
                   <thead>
@@ -70,11 +70,11 @@
                   </tbody>
                </table>
             </div>
-         </div><br class="table-break"><div class="table"><a name="d0e7374"></a><p class="title"><b>Table&nbsp;16.2.&nbsp;Regex - Carattere</b></p>
+         </div><br class="table-break"><div class="table"><a name="d0e7426"></a><p class="title"><b>Table&nbsp;16.2.&nbsp;Regex - Carattere</b></p>
             <div class="table-contents">
                <table summary="Regex - Carattere" border="1">
                   <colgroup>
-                     <col width="100" align="left">
+                     <col align="left">
                      <col>
                   </colgroup>
                   <thead>
@@ -139,11 +139,11 @@
                   </tbody>
                </table>
             </div>
-         </div><br class="table-break"><div class="table"><a name="d0e7451"></a><p class="title"><b>Table&nbsp;16.3.&nbsp;Regex - Citazione</b></p>
+         </div><br class="table-break"><div class="table"><a name="d0e7503"></a><p class="title"><b>Table&nbsp;16.3.&nbsp;Regex - Citazione</b></p>
             <div class="table-contents">
                <table summary="Regex - Citazione" border="1">
                   <colgroup>
-                     <col width="100" align="left">
+                     <col align="left">
                      <col>
                   </colgroup>
                   <thead>
@@ -174,11 +174,11 @@
                   </tbody>
                </table>
             </div>
-         </div><br class="table-break"><div class="table"><a name="d0e7483"></a><p class="title"><b>Table&nbsp;16.4.&nbsp;Regex - Classi per blocchi e categorie Unicode</b></p>
+         </div><br class="table-break"><div class="table"><a name="d0e7535"></a><p class="title"><b>Table&nbsp;16.4.&nbsp;Regex - Classi per blocchi e categorie Unicode</b></p>
             <div class="table-contents">
                <table summary="Regex - Classi per blocchi e categorie Unicode" border="1">
                   <colgroup>
-                     <col width="100" align="left">
+                     <col align="left">
                      <col>
                   </colgroup>
                   <thead>
@@ -190,12 +190,12 @@
                   <tbody>
                      <tr>
                         <td align="left">\p{InGreek}</td>
-                        <td align="left">Carattere nel blocco greco (<a class="ulink" href="http://download.oracle.com/javase/1.5.0/docs/api/java/util/regex/Pattern.html#ubc" target="_top"> blocco</a> semplice)
+                        <td align="left">Carattere nel blocco greco (<a class="ulink" href="http://download.oracle.com/javase/1.6.0/docs/api/java/util/regex/Pattern.html#ubc" target="_top"> blocco</a> semplice)
                         </td>
                      </tr>
                      <tr>
                         <td align="left">\p{Lu}</td>
-                        <td align="left">Lettera maiuscola (<a class="ulink" href="http://download.oracle.com/javase/1.5.0/docs/api/java/util/regex/Pattern.html#ubc" target="_top"> categoria</a> semplice)
+                        <td align="left">Lettera maiuscola (<a class="ulink" href="http://download.oracle.com/javase/1.6.0/docs/api/java/util/regex/Pattern.html#ubc" target="_top"> categoria</a> semplice)
                         </td>
                      </tr>
                      <tr>
@@ -213,11 +213,11 @@
                   </tbody>
                </table>
             </div>
-         </div><br class="table-break"><div class="table"><a name="d0e7526"></a><p class="title"><b>Table&nbsp;16.5.&nbsp;Regex - Classi di carattere</b></p>
+         </div><br class="table-break"><div class="table"><a name="d0e7578"></a><p class="title"><b>Table&nbsp;16.5.&nbsp;Regex - Classi di carattere</b></p>
             <div class="table-contents">
                <table summary="Regex - Classi di carattere" border="1">
                   <colgroup>
-                     <col width="100" align="left">
+                     <col align="left">
                      <col>
                   </colgroup>
                   <thead>
@@ -242,11 +242,11 @@
                   </tbody>
                </table>
             </div>
-         </div><br class="table-break"><div class="table"><a name="d0e7553"></a><p class="title"><b>Table&nbsp;16.6.&nbsp;Regex - Classi di carattere predefinite</b></p>
+         </div><br class="table-break"><div class="table"><a name="d0e7605"></a><p class="title"><b>Table&nbsp;16.6.&nbsp;Regex - Classi di carattere predefinite</b></p>
             <div class="table-contents">
                <table summary="Regex - Classi di carattere predefinite" border="1">
                   <colgroup>
-                     <col width="100" align="left">
+                     <col align="left">
                      <col>
                   </colgroup>
                   <thead>
@@ -287,11 +287,11 @@
                   </tbody>
                </table>
             </div>
-         </div><br class="table-break"><div class="table"><a name="d0e7600"></a><p class="title"><b>Table&nbsp;16.7.&nbsp;Regex - Rilevatori di limitazione</b></p>
+         </div><br class="table-break"><div class="table"><a name="d0e7652"></a><p class="title"><b>Table&nbsp;16.7.&nbsp;Regex - Rilevatori di limitazione</b></p>
             <div class="table-contents">
                <table summary="Regex - Rilevatori di limitazione" border="1">
                   <colgroup>
-                     <col width="100" align="left">
+                     <col align="left">
                      <col>
                   </colgroup>
                   <thead>
@@ -320,11 +320,11 @@
                   </tbody>
                </table>
             </div>
-         </div><br class="table-break"><div class="table"><a name="d0e7632"></a><p class="title"><b>Table&nbsp;16.8.&nbsp;Regex - Quantificatori di ripetizione</b></p>
+         </div><br class="table-break"><div class="table"><a name="d0e7684"></a><p class="title"><b>Table&nbsp;16.8.&nbsp;Regex - Quantificatori di ripetizione</b></p>
             <div class="table-contents">
                <table summary="Regex - Quantificatori di ripetizione" border="1">
                   <colgroup>
-                     <col width="100" align="left">
+                     <col align="left">
                      <col>
                   </colgroup>
                   <thead>
@@ -353,11 +353,11 @@
             <h3 class="title">Note</h3>
             <p>i quantificatori di ripetizione rileveranno tutte le ripetizioni possibili. Per esempio, <span class="emphasis"><em>a+?</em></span> rileverà aaa in <span class="emphasis"><em>aaabbb</em></span></p>
          </div>
-         <div class="table"><a name="d0e7673"></a><p class="title"><b>Table&nbsp;16.9.&nbsp;Regex - Quantificatori riluttanti (non ripetitivi)</b></p>
+         <div class="table"><a name="d0e7725"></a><p class="title"><b>Table&nbsp;16.9.&nbsp;Regex - Quantificatori riluttanti (non ripetitivi)</b></p>
             <div class="table-contents">
                <table summary="Regex - Quantificatori riluttanti (non ripetitivi)" border="1">
                   <colgroup>
-                     <col width="100" align="left">
+                     <col align="left">
                      <col>
                   </colgroup>
                   <thead>
@@ -386,11 +386,11 @@
             <h3 class="title">Note</h3>
             <p>i quantificatori riluttanti rileveranno il minor numero di ripetizioni possibili. Per esempio, <span class="emphasis"><em>a+?</em></span> rleverà la prima <span class="emphasis"><em>a</em></span> in <span class="emphasis"><em>aaabbb</em></span></p>
          </div>
-         <div class="table"><a name="d0e7711"></a><p class="title"><b>Table&nbsp;16.10.&nbsp;Regex - Operatori logici</b></p>
+         <div class="table"><a name="d0e7763"></a><p class="title"><b>Table&nbsp;16.10.&nbsp;Regex - Operatori logici</b></p>
             <div class="table-contents">
                <table summary="Regex - Operatori logici" border="1">
                   <colgroup>
-                     <col width="100" align="left">
+                     <col align="left">
                      <col>
                   </colgroup>
                   <thead>
@@ -419,7 +419,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="regex.tools.and.examples.of.use"></a>1.&nbsp;<a class="indexterm" name="d0e7740"></a>Strumenti per le espressioni regolari ed esempi di utilizzo<a class="indexterm" name="d0e7746"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="regex.tools.and.examples.of.use"></a>1.&nbsp;<a class="indexterm" name="d0e7792"></a>Strumenti per le espressioni regolari ed esempi di utilizzo<a class="indexterm" name="d0e7798"></a></h2>
                   </div>
                </div>
             </div>
@@ -436,11 +436,11 @@
             <p>In <span class="application">OmegaT</span> è pure presente una buona raccolta di utili esempi regex (si veda Opzioni &gt; Segmentazione). L'elenco seguente include espressioni
                che potrebbero risultare utili quando si eseguono ricerche attraverso la memoria di traduzione:
             </p>
-            <div class="table"><a name="d0e7771"></a><p class="title"><b>Table&nbsp;16.11.&nbsp;Regex - Esempi di espressioni regolari nelle traduzioni</b></p>
+            <div class="table"><a name="d0e7823"></a><p class="title"><b>Table&nbsp;16.11.&nbsp;Regex - Esempi di espressioni regolari nelle traduzioni</b></p>
                <div class="table-contents">
                   <table summary="Regex - Esempi di espressioni regolari nelle traduzioni" border="1">
                      <colgroup>
-                        <col width="100" align="left">
+                        <col align="left">
                         <col>
                      </colgroup>
                      <thead>

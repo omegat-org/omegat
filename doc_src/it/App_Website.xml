@@ -10,7 +10,7 @@
         <primary>OmegaT sul web</primary> <secondary>Progetto SourceForge</secondary>
       </indexterm></title>
 
-    <para>Il <ulink url="http://www.omegat.org/"> sito web di <application>OmegaT</application> </ulink>contiene i collegamenti alle varie risorse di <application>OmegaT</application>. L'assistenza agli utenti viene fornita su base volontaria nel <ulink url="http://groups.yahoo.com/group/omegat/">Gruppo utenti <application>OmegaT</application> di Yahoo! </ulink>. Le <ulink url="http://tech.groups.yahoo.com/group/omegat/database?method=reportRows&amp;amp;tbl=1">FAQ </ulink> sono un buon punto di partenza per trovare le risposte ai propri dubbi. Per le ultime versioni di OmegaT, fare riferimento alla pagina degli scaricamenti in www.omegat.org. È possibile anche inviare <ulink url="http://sourceforge.net/tracker/?group_id=68187&amp;amp;atid=520347">segnalazioni di errori</ulink> e <ulink url="http://sourceforge.net/tracker/?group_id=68187&amp;amp;atid=52035">proposte di miglioramenti.</ulink></para>
+    <para>Il <ulink url="http://www.omegat.org/"> sito web di <application>OmegaT</application> </ulink>contiene i collegamenti alle varie risorse di <application>OmegaT</application>. L'assistenza agli utenti viene fornita su base volontaria nel <ulink url="http://tech.groups.yahoo.com/group/omegat/">Gruppo utenti <application>OmegaT</application> di Yahoo! </ulink>. Le <ulink url="http://tech.groups.yahoo.com/group/OmegaT/database?method=reportRows&amp;tbl=1">FAQ </ulink> sono un buon punto di partenza per trovare le risposte ai propri dubbi. Per le ultime versioni di OmegaT, fare riferimento alla pagina degli scaricamenti in www.omegat.org. È possibile anche inviare <ulink url="https://sourceforge.net/p/omegat/bugs/">segnalazioni di errori</ulink> e <ulink url="https://sourceforge.net/p/omegat/feature-requests/">proposte di miglioramenti.</ulink></para>
   </section>
 
   <section id="bug.reports">
@@ -46,11 +46,11 @@
 
     <para><emphasis role="bold">Per contribuire a <application>OmegaT</application>:</emphasis></para>
 
-    <para>prima iscriversi al <ulink url="http://groups.yahoo.com/group/OmegaT/">gruppo di utenti</ulink> (via web o inviando un messaggio di posta elettronica a <ulink url="mailto:OmegaT-subscribe@yahoogroups.com"><application>OmegaT</application>-subscribe@yahoogroups.com</ulink>). Per partecipare allo sviluppo di <application>OmegaT</application> ci si può iscrivere al gruppo degli sviluppatori, via web o inviando un messaggio di posta elettronica a <ulink url="mailto:omegat-development-request@list.sourceforge.net?subject=subscribe">omegat-development-request@lists.sourceforge.net</ulink> inserendo &quot;subscribe&quot; nella riga dell'oggetto.</para>
+    <para>prima iscriversi al <ulink url="http://tech.groups.yahoo.com/group/OmegaT/">gruppo di utenti</ulink> (via web o inviando un messaggio di posta elettronica a <ulink url="mailto:OmegaT-subscribe@yahoogroups.com"><application>OmegaT</application>-subscribe@yahoogroups.com</ulink>). Per partecipare allo sviluppo di <application>OmegaT</application> ci si può iscrivere al gruppo degli sviluppatori, via web o inviando un messaggio di posta elettronica a <ulink url="mailto:omegat-development-request@list.sourceforge.net?subject=subscribe">omegat-development-request@lists.sourceforge.net</ulink> inserendo &quot;subscribe&quot; nella riga dell'oggetto.</para>
 
     <para><emphasis role="bold">Per tradurre l'interfaccia utente di <application>OmegaT</application>, il manuale utente o altri documenti correlati:</emphasis></para>
 
-    <para>prima leggere la guida <ulink url="http://www.omegat.org/en/howtos/localizing_omegat.html">Localizing and Customizing <application>OmegaT</application></ulink>, poi iscriversi al gruppo di traduttori di <application>OmegaT</application> via web o inviando un messaggio di posta elettronica a <ulink url="mailto:omegat-development-request@lists.sourceforge.net?subject=subscribe">omegat-l10n-request@lists.sourceforge.net</ulink> inserendo &quot;subscribe&quot; nella riga dell'oggetto.</para>
+    <para>prima leggere la guida <ulink url="http://www.omegat.org/en/howtos/localizing_omegat.php">Localizing and Customizing <application>OmegaT</application></ulink>, poi iscriversi al gruppo di traduttori di <application>OmegaT</application> via web o inviando un messaggio di posta elettronica a <ulink url="mailto:omegat-development-request@lists.sourceforge.net?subject=subscribe">omegat-l10n-request@lists.sourceforge.net</ulink> inserendo &quot;subscribe&quot; nella riga dell'oggetto.</para>
 
     <indexterm class="singular">
       <primary>OmegaT sul web</primary> <secondary>Sviluppo, localizzazione</secondary>
@@ -60,7 +60,7 @@
         <primary>OmegaT sul web</primary> <secondary>Sostegno economico</secondary>
       </indexterm></para>
 
-    <para>Il sostegno economico per consentire lo sviluppo di OmegaT nel tempo è altamente apprezzato: fate clic su questo collegamento per accedere all'<ulink url="https://www.paypal.com/us/cgi-bin/webscr?cmd=_flow&amp;SESSION=Wumx5AKXybfb0RFlBA4Zve2v75W1qGfK9-ujQ1vYZQGSOnjY-hjIb4st1aG&amp;dispatch=5885d80a13c0db1f8e263663d3faee8d569c51c61ce57e9125f793ea33988004">account PayPal di OmegaT</ulink>.</para>
+    <para>Il sostegno economico per consentire lo sviluppo di OmegaT nel tempo è altamente apprezzato: fate clic su questo collegamento per accedere all'<ulink url="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&amp;hosted_button_id=9UB6Y2BBF99LL">account PayPal di OmegaT</ulink>.</para>
 
     <indexterm class="singular">
       <primary>OmegaT sul web</primary> <secondary>Donare a OmegaT</secondary>

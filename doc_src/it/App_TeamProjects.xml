@@ -103,7 +103,7 @@
 
       <para>I progetti possono essere gestiti in base allo stile di sviluppo e necessità. In modo simile ai progetti OmegaT, si avrà bisogno di depositi separati per diverse coppie di lingua. All'interno di una coppia di lingua specifica, è meglio mantenere anche oggetti e client diversi come depositi separati. L'alternativa è avere un singolo deposito con sottocartelle <literal>Progetto1</literal>, <literal>Progetto2</literal>, ecc., e condividere il materiale comune tramite cartelle <literal>tm</literal>, <literal>glossary</literal> e <literal>dictionary</literal> comuni.</para>
 
-      <para>Per l'esempio mostrato qui abbiamo deciso, per ragioni di semplicità, a fronte di un progetto OmegaT, l'uso di un singolo deposito. .</para>
+      <para>Per l'esempio mostrato qui abbiamo deciso, per ragioni di semplicità, a fronte di un progetto OmegaT, l'uso di un singolo deposito.</para>
     </section>
 
     <section>
@@ -120,7 +120,7 @@
         </imageobject>
       </mediaobject>
  
-      <para>Digitare l'URL fornito da ProjectLocker all'interno del campo <emphasis role="bold">URL of repository</emphasis>. Assicurarsi che il campo <emphasis role="bold">Checkout directory</emphasis> sia corretto, ossia che specifichi la cartella vuota creata, poi premere <emphasis role="bold">OK</emphasis>. Una volta completata l'operazione, è possibile controllare la suddetta cartella: deve ora contenere una sottocartella .svn e un segno di spunta OK verde sulla sua icona, che indica che i contenuti della cartella sono aggiornati.</para>
+      <para>Digitare l'URL fornito da ProjectLocker all'interno del campo <emphasis role="bold">URL of repository</emphasis>. Assicurarsi che il campo <emphasis role="bold">Checkout directory</emphasis> sia corretto, ossia che specifichi la cartella vuota creata, poi premere <emphasis role="bold">OK</emphasis>. Una volta completata l'operazione, è possibile controllare la suddetta cartella: deve ora contenere una sottocartella .svn e un segno di spunta OK verde sulla sua icona, che indica che i contenuti della cartella sono aggiornati:</para>
 
       <para>Nel passaggio successivo aggiungeremo i file OmegaT alla cartella locale. I file seguenti devono essere condivisi tra i membri della squadra e devono essere dunque, in ogni modo, inclusi:</para>
 

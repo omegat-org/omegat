@@ -28,8 +28,12 @@
   <section>
     <title>Installazione e uso</title>
 
-    <para>Il plugin di LanguageTool per OmegaT è scaricabile dal <ulink url="http://sourceforge.net/projects/omegat-plugins/files">sito di download dei plugin di OmegaT</ulink>. Decomprimere i file e posizionarli nella cartella &quot;plugins&quot; che si trova nella cartella di installazione di OmegaT, ossia quella in cui è presente OmegaT.jar. Se la cartella &quot;plugins&quot; non esiste, crearla.</para>
+    <para>Il plugin LanguageTool è incluso in OmegaT. Sarà usato automaticamente da OmegaT, se l'opzione presente <guimenuitem>Opzioni &gt; Correzione ortografica</guimenuitem> è attivata. Le regole applicate (se presenti) dipenderanno dalla lingua di partenza e di arrivo del progetto. Quando viene attivata una regola, la frase corrispondente sarà sottolineata in blu all'interno dell'editor (vedere <emphasis>also </emphasis>e <emphasis>I didn't do nothing</emphasis> nell'immagine sopra). Una spiegazione apparirà quando si passa il mouse sopra la frase sottolineata.</para>
+    
+	<warning>
+		<title>Incompatibilità</title>
+		<para>LanguageTool non funzionerà correttamente se viene trovata una vecchia versione nella cartella /plugin. Rimuovere LanguageTool dalla cartella /plugin prima di avviare OmegaT.</para>
+	</warning>
 
-    <para>Una volta installato, il plugin sarà usato automaticamente da OmegaT, se l'opzione presente <guimenuitem>Opzioni &gt; Correzione ortografica</guimenuitem> è attivata. Le regole applicate (se presenti) dipenderanno dalla lingua di partenza e di arrivo del progetto. Quando viene attivata una regola, la frase corrispondente sarà sottolineata in blu all'interno dell'editor (vedere <emphasis>also </emphasis>e <emphasis>I didn't do nothing</emphasis> nell'immagine sopra). Una spiegazione apparirà quando si passa il mouse sopra la frase sottolineata.</para>
   </section>
 </appendix>

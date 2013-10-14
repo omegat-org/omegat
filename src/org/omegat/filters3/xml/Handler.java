@@ -575,7 +575,7 @@ public class Handler extends DefaultHandler implements LexicalHandler, DeclHandl
                 translation = src;
         }
 
-        currEntry().setTranslation(translation, dialect, shortcutDetails);
+        currEntry().setTranslation(translation, dialect, new ArrayList<ProtectedPart>());
     }
 
     /**

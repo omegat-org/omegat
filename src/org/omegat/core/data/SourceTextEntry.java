@@ -95,6 +95,13 @@ public class SourceTextEntry {
         if (protectedParts.isEmpty()) {
             this.protectedParts = EMPTY_PROTECTED_PARTS;
         } else {
+            // remove empty protected parts
+            for (int i = 0; i < protectedParts.size(); i++) {
+                if (protectedParts.get(i).getTextInSourceSegment().isEmpty()) {
+                    protectedParts.remove(i);
+                    i--;
+                }
+            }
             this.protectedParts = protectedParts.toArray(new ProtectedPart[protectedParts.size()]);
         }
     }

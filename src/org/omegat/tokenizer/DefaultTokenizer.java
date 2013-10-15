@@ -223,4 +223,9 @@ public class DefaultTokenizer implements ITokenizer {
 
     @Override
     public void setBehavior(Version behavior) {}
+
+    @Override
+    public String[] getSupportedLanguages() {
+        return new String[0];
+    }
 }

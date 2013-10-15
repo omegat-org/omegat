@@ -253,6 +253,11 @@ public abstract class BaseTokenizer implements ITokenizer {
     protected abstract TokenStream getTokenStream(final String strOrig,
             final boolean stemsAllowed, final boolean stopWordsAllowed);
 
+    public String[] getSupportedLanguages() {
+        Tokenizer ann = getClass().getAnnotation(Tokenizer.class);
+        return ann == null ? new String[0] : ann.languages();
+    }
+
     static {
         for (Version v : Version.values()) {
             StringBuilder b = new StringBuilder();

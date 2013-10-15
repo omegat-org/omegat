@@ -45,6 +45,7 @@ import java.util.jar.Manifest;
 
 import org.omegat.core.Core;
 import org.omegat.tokenizer.DefaultTokenizer;
+import org.omegat.tokenizer.ITokenizer;
 import org.omegat.tokenizer.Tokenizer;
 import org.omegat.util.FileUtil;
 import org.omegat.util.Language;
@@ -167,14 +168,28 @@ public final class PluginUtils {
         if (lang == null) return DefaultTokenizer.class;
         
         // Prefer an exact match on the full ISO language code (XX-YY).
-        Class<?> result = searchForTokenizer(lang.getLanguage());
-        if (result != null) return result;
+        Class<?> exactResult = searchForTokenizer(lang.getLanguage());
+        if (isDefault(exactResult)) {
+            return exactResult;
+        }
         
         // Otherwise return a match for the language only (XX).
-        result = searchForTokenizer(lang.getLanguageCode());
-        if (result != null) return result;
+        Class<?> generalResult = searchForTokenizer(lang.getLanguageCode());
+        if (isDefault(generalResult)) {
+            return generalResult;
+        } else if (exactResult != null) {
+            return exactResult;
+        } else if (generalResult != null) {
+            return generalResult;
+        }
         
         return DefaultTokenizer.class;
+    }
+
+    private static boolean isDefault(Class<?> c) {
+        if (c == null) return false;
+        Tokenizer ann = c.getAnnotation(Tokenizer.class);
+        return ann == null ? false : ann.isDefault();
     }
 
     private static Class<?> searchForTokenizer(String lang) {
@@ -189,7 +204,15 @@ public final class PluginUtils {
         for (Class<?> c : tokenizerClasses) {
             Tokenizer ann = c.getAnnotation(Tokenizer.class);
             if (ann == null) continue;
-            for (String s : ann.languages()) {
+            String[] languages = ann.languages();
+            try {
+                if (languages.length == 1 && languages[0].equals(Tokenizer.DISCOVER_AT_RUNTIME)) {
+                    languages = ((ITokenizer) c.newInstance()).getSupportedLanguages();
+                }
+            } catch (Exception ex) {
+                // Nothing
+            }
+            for (String s : languages) {
                 if (lang.equals(s)) {
                     if (ann.isDefault()) return c; // Return best possible match.
                     else if (fallback == null) fallback = c;

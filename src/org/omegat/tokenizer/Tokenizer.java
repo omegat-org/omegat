@@ -37,6 +37,13 @@ import java.lang.annotation.RetentionPolicy;
 public @interface Tokenizer {
 
     /**
+     * Value for the {@link #languages()} member that indicates that the
+     * supported languages should be determined at runtime via
+     * {@link BaseTokenizer#getSupportedLanguages()}.
+     */
+    public static final String DISCOVER_AT_RUNTIME = "discoverAtRuntime";
+
+    /**
      * The languages supported by the tokenizer.
      * E.g. LuceneCJKTokenizer supports { zh, ja, ko }.
      */

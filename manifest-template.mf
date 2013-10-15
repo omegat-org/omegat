@@ -103,6 +103,9 @@ OmegaT-Plugin: filter
 Name: org.omegat.tokenizer.DefaultTokenizer
 OmegaT-Plugin: tokenizer
 
+Name: org.omegat.tokenizer.HunspellTokenizer
+OmegaT-Plugin: tokenizer
+
 Name: org.omegat.tokenizer.LuceneArabicTokenizer
 OmegaT-Plugin: tokenizer
 

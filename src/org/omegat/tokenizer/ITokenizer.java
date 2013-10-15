@@ -104,4 +104,14 @@ public interface ITokenizer {
      * There is no sense to cache results.
      */
     Token[] tokenizeAllExactly(String str);
+
+    /**
+     * Return an array of language strings (<code>xx-yy</code>) indicating the tokenizer's
+     * supported languages. Meant for tokenizers for which the supported languages
+     * can only be determined at runtime, like the {@link HunspellTokenizer}.
+     * <p>
+     * Indicate that this should be used by setting the {@link Tokenizer} annotation 
+     * to contain only {@link Tokenizer#DISCOVER_AT_RUNTIME}.
+     */
+    public String[] getSupportedLanguages();
 }

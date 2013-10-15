@@ -7,7 +7,12 @@
 ----------------------------------------------------------------------
 3.0.6 vs. 3.0.5
 
- Other enhancements:
+  Implemented requests:
+
+  - Add Hunspell-based tokenizer 
+  https://sourceforge.net/p/omegat/feature-requests/901/
+
+  Other enhancements:
 
   - More information is logged when plugins are loaded
  
@@ -27,6 +32,8 @@ when Remove Tags is used
 ----------------------------------------------------------------------
 3.0.5 vs. 3.0.4 update 2
 
+  Implemented requests:
+
   - "Insert symbol" auto-completion view
   https://sourceforge.net/p/omegat/feature-requests/862/
 
@@ -45,7 +52,7 @@ when Remove Tags is used
   - Do not scroll the glossary pane to the bottom 
   https://sourceforge.net/p/omegat/feature-requests/729/
 
- Other enhancements:
+  Other enhancements:
 
   - The MyMemory machine translator has been separated into two 
 different options: MyMemory (machine) and MyMemory (human)

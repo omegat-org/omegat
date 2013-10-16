@@ -288,7 +288,7 @@ public final class Segmenter {
             sp.append(spaces.get(2 * i - 1));
             sp.append(spaces.get(2 * i));
 
-            if (CJK_LANGUAGES.contains(targetLang.getLanguageCode().toUpperCase(Locale.ENGLISH))) {
+            if (CJK_LANGUAGES.contains(targetLang.getLanguageCode().toUpperCase(Locale.ENGLISH)) && res.length() > 0) {
                 Rule rule = brules.get(i - 1);
                 char lastChar = res.charAt(res.length() - 1);
                 if ((lastChar != '.')

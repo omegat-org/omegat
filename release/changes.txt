@@ -2,7 +2,7 @@
  OmegaT 3.0.6
 ----------------------------------------------------------------------
    2 Enhancements
-   0 Bug fix
+   1 Bug fix
    1 Localisation update
 ----------------------------------------------------------------------
 3.0.6 vs. 3.0.5
@@ -18,6 +18,11 @@
  
   - Protected text (from the XLIFF filter currently) remains protected even 
 when Remove Tags is used
+
+  Bug fixes: 
+
+  - Content of sdl:seg-defs tags should be ignored in OmegaT's XLIFF filter
+  https://sourceforge.net/p/omegat/bugs/624/
 
   Localisation updates:
 

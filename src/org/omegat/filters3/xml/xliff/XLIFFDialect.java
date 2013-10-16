@@ -69,12 +69,12 @@ public class XLIFFDialect extends DefaultXMLDialect {
         if (options.get26Compatibility()) { // Old tag handling compatible with 2.6
             defineIntactTags(new String[] { "source", "header", "bin-unit", "prop-group", "count-group",
                     "alt-trans", "note",
-                    "ph", "bpt", "ept", "it", "context", "seg-source", });
+                    "ph", "bpt", "ept", "it", "context", "seg-source", "sdl:seg-defs"});
 
         } else { // New tag handling
             defineIntactTags(new String[] { "source", "header", "bin-unit", "prop-group", "count-group",
                     "alt-trans", "note",
-                    "context", "seg-source", });
+                    "context", "seg-source", "sdl:seg-defs"});
             
             defineContentBasedTag("bpt", Tag.Type.BEGIN);
             defineContentBasedTag("ept", Tag.Type.END);

@@ -44,7 +44,7 @@ public class XLIFFDialect extends DefaultXMLDialect {
         defineIntactTags(new String[] { "source", "header", "bin-unit", "prop-group", "count-group",
                 "alt-trans", "note",
                 // "mrk", only <mrk mtype="protected"> should be an intact tag
-                "ph", "bpt", "ept", "it", "context", "seg-source", });
+                "ph", "bpt", "ept", "it", "context", "seg-source", "sdl:seg-defs"});
 
     }
 

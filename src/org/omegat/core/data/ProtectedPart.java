@@ -112,6 +112,9 @@ public class ProtectedPart {
     }
 
     public static List<ProtectedPart> extractFor(List<ProtectedPart> original, String text) {
+        if (original == null) {
+            return null;
+        }
         List<ProtectedPart> result = new ArrayList<ProtectedPart>();
         for (ProtectedPart o : original) {
             if (text.contains(o.textInSourceSegment)) {

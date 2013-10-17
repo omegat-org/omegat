@@ -288,13 +288,15 @@ public final class Segmenter {
             sp.append(spaces.get(2 * i - 1));
             sp.append(spaces.get(2 * i));
 
-            if (CJK_LANGUAGES.contains(targetLang.getLanguageCode().toUpperCase(Locale.ENGLISH)) && res.length() > 0) {
+            if (CJK_LANGUAGES.contains(targetLang.getLanguageCode().toUpperCase(Locale.ENGLISH))) {
                 Rule rule = brules.get(i - 1);
-                char lastChar = res.charAt(res.length() - 1);
-                if ((lastChar != '.')
-                        && (!PatternConsts.SPACY_REGEX.matcher(rule.getBeforebreak()).matches() || !PatternConsts.SPACY_REGEX
-                                .matcher(rule.getAfterbreak()).matches()))
-                    sp.setLength(0);
+                if (res.length() > 0) {
+                    char lastChar = res.charAt(res.length() - 1);
+                    if ((lastChar != '.')
+                            && (!PatternConsts.SPACY_REGEX.matcher(rule.getBeforebreak()).matches() || !PatternConsts.SPACY_REGEX
+                                    .matcher(rule.getAfterbreak()).matches()))
+                        sp.setLength(0);
+                }
             } else if (CJK_LANGUAGES.contains(sourceLang.getLanguageCode().toUpperCase(Locale.ENGLISH))
                     && sp.length() == 0)
                 sp.append(" ");

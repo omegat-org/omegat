@@ -142,10 +142,16 @@ public abstract class ParseEntry implements IParseCallback {
         boolean removeSpaces = Core.getFilterMaster().getConfig().isRemoveSpacesNonseg();
         source = stripSomeChars(source, tmp, m_config.isRemoveTags(), removeSpaces);
         if (m_config.isRemoveTags() && protectedParts != null) {
-            for (ProtectedPart p : protectedParts) {
+            for (int i = 0; i < protectedParts.size(); i++) {
+                ProtectedPart p = protectedParts.get(i);
                 String s = p.getTextInSourceSegment();
                 s = PatternConsts.OMEGAT_TAG.matcher(s).replaceAll("");
-                p.setTextInSourceSegment(s);
+                if (s.isEmpty()) {
+                    protectedParts.remove(i);
+                    i--;
+                } else {
+                    p.setTextInSourceSegment(s);
+                }
             }
         }
         if (translation != null) {

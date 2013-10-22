@@ -744,6 +744,7 @@ public class SearchWindow extends JFrame {
     }
 
     private void doFilter() {
+        Core.getEditor().commitAndLeave(); // Otherwise, the current segment being edited is lost
         Core.getEditor().addFilter(m_viewer.getEntryList());
         m_removeFilterButton.setEnabled(true);
     }

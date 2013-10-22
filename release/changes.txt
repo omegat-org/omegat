@@ -480,7 +480,7 @@ OmegaT failed to load the valid ones
  OmegaT 2.6.3 update 5
 ----------------------------------------------------------------------
    0 Enhancement
-   1 Bug fix
+   2 Bug fixes
    0 Localisation update
 ----------------------------------------------------------------------
 2.6.3 update 5 vs. 2.6.3 update 4
@@ -489,6 +489,9 @@ OmegaT failed to load the valid ones
 
   - Ignore content of sdl:seg-defs tags in OmegaT's XLIFF filter
   https://sourceforge.net/p/omegat/bugs/624/
+
+  - Filtering the Editor results in losing unsaved changes in the current segment
+  https://sourceforge.net/p/omegat/bugs/627/
 
 ----------------------------------------------------------------------
  OmegaT 2.6.3 update 4

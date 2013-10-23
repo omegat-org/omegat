@@ -212,6 +212,9 @@ public class MarkerController {
     public String getToolTips(int entryIndex, int pos) {
         UIThreadsUtil.mustBeSwingThread();
 
+        if (entryIndex >= ec.m_docSegList.length) {
+            return null;
+        }
         MarkInfo[][] m = ec.m_docSegList[entryIndex].marks;
         if (m == null) {
             return null;

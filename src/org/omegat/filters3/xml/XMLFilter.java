@@ -289,4 +289,9 @@ public abstract class XMLFilter extends AbstractFilter implements Translator {
     @Override
     public void text(String text) {
     }
+
+    @Override
+    public boolean isInIgnored() {
+        return false;
+    }
 }

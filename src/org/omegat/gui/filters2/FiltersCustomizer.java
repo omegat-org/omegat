@@ -4,7 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
-               2013 Alex Buloichik
+               2013 Alex Buloichik, Yu Tang
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -31,6 +31,8 @@ import gen.core.filters.Filters;
 
 import java.awt.Dimension;
 import java.awt.Frame;
+import java.awt.GraphicsConfiguration;
+import java.awt.Insets;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
@@ -58,6 +60,7 @@ import org.omegat.util.OStrings;
  * 
  * @author Maxym Mykhalchuk
  * @author Alex Buloichik
+ * @author Yu Tang
  */
 @SuppressWarnings("serial")
 public class FiltersCustomizer extends JDialog implements ListSelectionListener {
@@ -136,10 +139,18 @@ public class FiltersCustomizer extends JDialog implements ListSelectionListener 
         tableSize.height = tableSize.height + 70;
         filtersScrollPane.setPreferredSize(tableSize);
         pack();
-        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        Toolkit kit = getToolkit();
+        Dimension screenSize = kit.getScreenSize();
         Dimension dialogSize = getSize();
-        setLocation((screenSize.width - dialogSize.width) / 2, (screenSize.height - dialogSize.height) / 2);
-    }
+        GraphicsConfiguration config = getGraphicsConfiguration();
+        Insets insets = kit.getScreenInsets(config);
+        screenSize.height -= (insets.top + insets.bottom);  // excluding the Windows taskbar
+        if (dialogSize.height > screenSize.height) {
+            dialogSize.height = screenSize.height;
+            setSize(dialogSize);
+        }
+        setLocationRelativeTo(null);
+     }    
 
     /** @return the return status of this dialog - one of RET_OK or RET_CANCEL */
     public int getReturnStatus() {

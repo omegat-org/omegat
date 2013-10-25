@@ -7,7 +7,7 @@
                2008-2009 Alex Buloichik
                2011 Martin Fleurke
                2012 Didier Briel, Aaron Madlon-Kay
-               2013 Aaron Madlon-Kay
+               2013 Aaron Madlon-Kay, Yu Tang
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -34,6 +34,8 @@ import gen.core.filters.Filters;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.GraphicsConfiguration;
+import java.awt.Insets;
 import java.awt.Label;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
@@ -104,6 +106,7 @@ import org.openide.awt.Mnemonics;
  * @author Martin Fleurke
  * @author Didier Briel
  * @author Aaron Madlon-Kay
+ * @author Yu Tang
  */
 @SuppressWarnings("serial")
 public class ProjectPropertiesDialog extends JDialog {
@@ -778,9 +781,17 @@ public class ProjectPropertiesDialog extends JDialog {
 
         setSize(9 * getWidth() / 8, getHeight() + 10);
         this.setResizable(true);
-        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        Toolkit kit = getToolkit();
+        Dimension screenSize = kit.getScreenSize();
         Dimension dialogSize = getSize();
-        setLocation((screenSize.width - dialogSize.width) / 2, (screenSize.height - dialogSize.height) / 2);
+        GraphicsConfiguration config = getGraphicsConfiguration();
+        Insets insets = kit.getScreenInsets(config);
+        screenSize.height -= (insets.top + insets.bottom);  // excluding the Windows taskbar
+        if (dialogSize.height > screenSize.height) {
+            dialogSize.height = screenSize.height;
+            setSize(dialogSize);
+        }
+        setLocationRelativeTo(null);
     }
 
     /**

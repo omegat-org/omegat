@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 3.0.6
 ----------------------------------------------------------------------
-   3 Enhancements
+   4 Enhancements
    1 Bug fix
    1 Localisation update
 ----------------------------------------------------------------------
@@ -11,6 +11,9 @@
 
   - Add Hunspell-based tokenizer 
   https://sourceforge.net/p/omegat/feature-requests/901/
+
+  - Reduce automatically size of Project Properties and File Filter dialogs when they don't fit on screen
+  https://sourceforge.net/p/omegat/feature-requests/899/
 
   Other enhancements:
 

@@ -124,6 +124,10 @@ public class Entry {
         }
     }
 
+    public void resetTagDetected() {
+        tagsDetected = false;
+    }
+
     /**
      * Aggregate tags. The current OpenXML filter finds too many tags, usually
      * causing what users call the "tag soup". Tags aggregation can help

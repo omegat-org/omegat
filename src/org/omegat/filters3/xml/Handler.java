@@ -414,8 +414,8 @@ public class Handler extends DefaultHandler implements LexicalHandler, DeclHandl
                 if (elem instanceof XMLText) {
                     XMLText text = (XMLText) elem;
                     if (text.isInCDATA() == inCDATA) {
-                        currEntry().remove(currEntry().size() - 1);
-                        currEntry().add(new XMLText(text.getText() + s, inCDATA));
+                        currEntry().resetTagDetected();
+                        text.append(s);
                         added = true;
                     }
                 }

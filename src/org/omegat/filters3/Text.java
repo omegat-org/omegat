@@ -36,11 +36,11 @@ import org.omegat.util.StaticUtils;
  */
 public abstract class Text implements Element {
     /** The text itself. */
-    private String text;
+    private StringBuilder text;
 
     /** Returns the piece of text stored. */
     public String getText() {
-        return text;
+        return text.toString();
     }
 
     private boolean meaningEvaluated = false;
@@ -49,7 +49,7 @@ public abstract class Text implements Element {
     /** Whether the text is meaningful, i.e. contains anything but space. */
     public boolean isMeaningful() {
         if (!meaningEvaluated) {
-            meaningful = text.trim().length() > 0;
+            meaningful = text.toString().trim().length() > 0;
             meaningEvaluated = true;
         }
         return meaningful;
@@ -57,7 +57,11 @@ public abstract class Text implements Element {
 
     /** Creates a new instance of Text initialized with some text. */
     public Text(String text) {
-        this.text = text;
+        this.text = new StringBuilder(text);
+    }
+
+    public void append(String text) {
+        this.text.append(text);
     }
 
     /**
@@ -84,7 +88,7 @@ public abstract class Text implements Element {
      * text itself.
      */
     public String toShortcut() {
-        return text;
+        return text.toString();
     }
 
     /**
@@ -93,7 +97,7 @@ public abstract class Text implements Element {
      * should return <code>Rock&amp;Roll</code>.
      */
     public String toTMX() {
-        return StaticUtils.makeValidXML(text);
+        return StaticUtils.makeValidXML(text.toString());
     }
 
     /**

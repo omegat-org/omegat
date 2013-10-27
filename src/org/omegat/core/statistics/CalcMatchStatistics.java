@@ -71,7 +71,7 @@ public class CalcMatchStatistics extends LongProcessThread {
             OStrings.getString("CT_STATSMATCH_RowExactMatch"),
             OStrings.getString("CT_STATSMATCH_RowMatch95"), OStrings.getString("CT_STATSMATCH_RowMatch85"),
             OStrings.getString("CT_STATSMATCH_RowMatch75"), OStrings.getString("CT_STATSMATCH_RowMatch50"),
-            OStrings.getString("CT_STATSMATCH_RowNoMatch") };
+            OStrings.getString("CT_STATSMATCH_RowNoMatch"), OStrings.getString("CT_STATSMATCH_Total") };
     private boolean[] align = new boolean[] { false, true, true, true, true };
 
     private StatisticsWindow callback;
@@ -84,7 +84,7 @@ public class CalcMatchStatistics extends LongProcessThread {
     }
 
     public void run() {
-        StatCount[] result = new StatCount[7];
+        StatCount[] result = new StatCount[8];
         for (int i = 0; i < result.length; i++) {
             result[i] = new StatCount();
         }
@@ -189,8 +189,12 @@ public class CalcMatchStatistics extends LongProcessThread {
                 percent = newPercent;
             }
         }
-        
-        
+
+        // calculate total
+        for (int i = 0; i < 7; i++) {
+            result[7].add(result[i]);
+        }
+
         table = calcTable(result, result.length);
         outText = TextUtil.showTextTable(header, table, align);
 

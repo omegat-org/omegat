@@ -5,7 +5,7 @@
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
                2012 Guido Leenders, Didier Briel
-               2013, Yu Tang Aaron Madlon-Kay
+               2013 Aaron Madlon-Kay, Yu Tang
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 

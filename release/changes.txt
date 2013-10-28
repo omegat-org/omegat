@@ -2,7 +2,7 @@
  OmegaT 2.6.3 update 5
 ----------------------------------------------------------------------
    0 Enhancement
-   2 Bug fixes
+   3 Bug fixes
    0 Localisation update
 ----------------------------------------------------------------------
 2.6.3 update 5 vs. 2.6.3 update 4
@@ -14,6 +14,9 @@
 
   - Filtering the Editor results in losing unsaved changes in the current segment
   https://sourceforge.net/p/omegat/bugs/627/
+
+  - tm/auto folder is created in wrong location
+  https://sourceforge.net/p/omegat/bugs/553/
 
 ----------------------------------------------------------------------
  OmegaT 2.6.3 update 4

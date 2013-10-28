@@ -5,7 +5,7 @@
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
                2012 Guido Leenders, Didier Briel
-               2013 Aaron Madlon-Kay
+               2013 Aaron Madlon-Kay, Yu Tang
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -48,6 +48,7 @@ import org.omegat.util.StringUtil;
  * @author Guido Leenders
  * @author Didier Briel
  * @author Aaron Madlon-Kay
+ * @author Yu Tang
  */
 public class ProjectProperties {
 
@@ -67,9 +68,7 @@ public class ProjectProperties {
         setWriteableGlossary(projectRoot + OConsts.DEFAULT_GLOSSARY + File.separator +
                 projectDir.getName() + OConsts.DEFAULT_W_GLOSSARY);
         setTMRoot(projectRoot + OConsts.DEFAULT_TM + File.separator);
-        setTMAutoRoot(tmRoot + OConsts.AUTO_TM + File.separator);
         setDictRoot(projectRoot + OConsts.DEFAULT_DICT + File.separator);
-        setTMOtherLangRoot(tmRoot + OConsts.DEFAULT_OTHERLANG + File.separator);
 
         setSentenceSegmentingEnabled(true);
         setSupportDefaultTranslations(true);
@@ -142,23 +141,15 @@ public class ProjectProperties {
         this.tmRoot = tmRoot;
     }
     
-    public void setTMOtherLangRoot(String otherLangRoot) {
-        this.tmOtherLangRoot = otherLangRoot;
-	}
-    
+  
     /** Returns The Translation Memory (TMX) with translations to other languages Files Directory */
     public String getTMOtherLangRoot() {
-        return tmOtherLangRoot;
+        return tmRoot + OConsts.DEFAULT_OTHERLANG + File.separator;
     }
 
     /** Returns The Translation Memory (TMX) Files Directory for automatically applied files. */
     public String getTMAutoRoot() {
-        return tmAutoRoot;
-    }
-
-    /** Sets The Translation Memory (TMX) Files Directory for automatically applied files. */
-    public void setTMAutoRoot(String tmAutoRoot) {
-        this.tmAutoRoot = tmAutoRoot;
+        return tmRoot + OConsts.AUTO_TM + File.separator;
     }
 
     /** Returns The Dictionaries Files Directory */
@@ -437,9 +428,7 @@ public class ProjectProperties {
     private String glossaryRoot;
     private String writeableGlossaryFile;
     private String tmRoot;
-    private String tmAutoRoot;
     private String dictRoot;
-    private String tmOtherLangRoot;
 
     private Language sourceLanguage;
     private Language targetLanguage;

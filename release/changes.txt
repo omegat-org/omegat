@@ -3,7 +3,7 @@
 ----------------------------------------------------------------------
    7 Enhancements
    1 Bug fix
-   1 Localisation update
+   2 Localisation updates
 ----------------------------------------------------------------------
 3.0.6 vs. 3.0.5
 
@@ -38,6 +38,7 @@ when Remove Tags is used
   Localisation updates:
 
   - Italian localisation updated to 3.0.5 (UI, Documentation)
+  - Japanese localisation updated to 3.0.6 (UI)
 
 ----------------------------------------------------------------------
  OmegaT 3.0.5

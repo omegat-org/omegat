@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 3.0.6
 ----------------------------------------------------------------------
-   5 Enhancements
+   7 Enhancements
    1 Bug fix
    1 Localisation update
 ----------------------------------------------------------------------
@@ -17,6 +17,9 @@
 
   - Add "Totals" row to match statistics 
   https://sourceforge.net/p/omegat/feature-requests/592/
+
+  - Creating Current Translated Document
+  https://sourceforge.net/p/omegat/feature-requests/880/
 
   Other enhancements:
 

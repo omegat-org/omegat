@@ -10,7 +10,7 @@
                2009 Didier Briel, Alex Buloichik
                2010 Wildrich Fourie, Didier Briel
                2012 Wildrich Fourie, Guido Leenders, Didier Briel
-               2013 Zoltan Bartko, Didier Briel
+               2013 Zoltan Bartko, Didier Briel, Yu Tang
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -94,6 +94,7 @@ import org.omegat.util.StringUtil;
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Didier Briel
  * @author Wildrich Fourie
+ * @author Yu Tang
  */
 public class MainWindowMenuHandler {
     private final MainWindow mainWindow;
@@ -168,6 +169,23 @@ public class MainWindowMenuHandler {
         }
 
         ProjectUICommands.projectCompile();
+    }
+
+    /**
+     * Create current translated document.
+     */
+    public void projectSingleCompileMenuItemActionPerformed() {
+        String midName = Core.getEditor().getCurrentFile();
+        String sourcePattern = StaticUtils.escapeNonRegex(midName);
+        if (Preferences.isPreference(Preferences.TAGS_VALID_REQUIRED)) {
+            List<ErrorReport> stes = Core.getTagValidation().listInvalidTags(sourcePattern);
+            if (stes != null) {
+                Core.getTagValidation().displayTagValidationErrors(stes, OStrings.getString("TF_MESSAGE_COMPILE"));
+                return;
+            }
+        }
+
+        ProjectUICommands.projectSingleCompile(sourcePattern);
     }
 
     /** Edits project's properties */

@@ -45,6 +45,16 @@ public interface ITagValidation {
     List<ErrorReport> listInvalidTags();
 
     /**
+     * Get invalid tags entries from specified files corresponding to sourcePattern.
+     * 
+     * @param sourcePattern
+     *            The regexp of files to validate
+     * @return list of entries with invalid tags, or null if all entries are
+     *         valid
+     */
+    List<ErrorReport> listInvalidTags(String sourcePattern);
+
+    /**
      * Checks invalid tags for one entry.
      * 
      * @param ste

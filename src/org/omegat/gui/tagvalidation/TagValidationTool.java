@@ -32,6 +32,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import javax.swing.JOptionPane;
@@ -152,15 +153,30 @@ public class TagValidationTool implements ITagValidation, IProjectEventListener 
      */
     @Override
     public synchronized List<ErrorReport> listInvalidTags() {
+        return listInvalidTags(".*");
+    }
 
+    /**
+     * Scans project and builds the list of entries which are suspected of
+     * having changed (possibly invalid) tag structures from specified
+     * files corresponding to sourcePattern.
+     */
+    @Override
+    public synchronized List<ErrorReport> listInvalidTags(String sourcePattern) {
+
+        Pattern FILE_PATTERN = Pattern.compile(sourcePattern);
+        
         List<ErrorReport> suspects = new ArrayList<ErrorReport>(16);
         for (FileInfo fi : Core.getProject().getProjectFiles()) {
+            Matcher fileMatch = FILE_PATTERN.matcher(fi.filePath);
+            if (fileMatch.matches()) {
             for (SourceTextEntry ste : fi.entries) {
                 ErrorReport err = checkEntry(fi, ste);
                 if (err != null) {
                     suspects.add(err);
                 }
             } // end loop over entries
+            }
         } // end loop over files
         return suspects.isEmpty() ? null : suspects;
     }

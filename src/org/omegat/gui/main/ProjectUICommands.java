@@ -6,6 +6,7 @@
  Copyright (C) 2008-2010 Alex Buloichik
                2011 Martin Fleurke
                2012 Thomas Cordonnier
+               2013 Yu Tang
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -576,6 +577,28 @@ public class ProjectUICommands {
                 return null;
             }
 
+            protected void done() {
+                try {
+                    get();
+                } catch (Exception ex) {
+                    processSwingWorkerException(ex, "TF_COMPILE_ERROR");
+                }
+            }
+        }.execute();
+    }
+
+    public static void projectSingleCompile(final String sourcePattern) {
+        performProjectMenuItemPreConditions();
+
+        new SwingWorker<Object, Void>() {
+            @Override
+            protected Object doInBackground() throws Exception {
+                Core.getProject().saveProject();
+                Core.getProject().compileProject(sourcePattern);
+                return null;
+            }
+
+            @Override
             protected void done() {
                 try {
                     get();

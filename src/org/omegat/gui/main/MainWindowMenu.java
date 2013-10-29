@@ -11,7 +11,7 @@
                2010 Wildrich Fourie, Didier Briel
                2011 Didier Briel
                2012 Wildrich Fourie, Guido Leenders, Martin Fleurke, Didier Briel
-               2013 Zoltan Bartko, Didier Briel
+               2013 Zoltan Bartko, Didier Briel, Yu Tang
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -81,6 +81,7 @@ import org.openide.awt.Mnemonics;
  * @author Didier Briel
  * @author Wildrich Fourie
  * @author Martin Fleurke
+ * @author Yu Tang
  */
 public class MainWindowMenu implements ActionListener, MenuListener, IMainMenu {
     private static final Logger LOGGER = Logger.getLogger(MainWindowMenu.class.getName());
@@ -251,6 +252,7 @@ public class MainWindowMenu implements ActionListener, MenuListener, IMainMenu {
         projectMenu.add(projectSaveMenuItem = createMenuItem("TF_MENU_FILE_SAVE"));
         projectMenu.add(new JSeparator());
         projectMenu.add(projectCompileMenuItem = createMenuItem("TF_MENU_FILE_COMPILE"));
+        projectMenu.add(projectSingleCompileMenuItem = createMenuItem("TF_MENU_FILE_SINGLE_COMPILE"));
         projectMenu.add(new JSeparator());
         projectMenu.add(projectEditMenuItem = createMenuItem("MW_PROJECTMENU_EDIT"));
         projectMenu.add(viewFileListMenuItem = createMenuItem("TF_MENU_FILE_PROJWIN"));
@@ -564,7 +566,7 @@ public class MainWindowMenu implements ActionListener, MenuListener, IMainMenu {
 
         JMenuItem[] itemsToSwitchOn = new JMenuItem[] { projectImportMenuItem, projectWikiImportMenuItem,
                 projectReloadMenuItem, projectCloseMenuItem, projectSaveMenuItem, projectEditMenuItem,
-                projectCompileMenuItem,
+                projectCompileMenuItem, projectSingleCompileMenuItem,
 
                 editMenu, editFindInProjectMenuItem, editInsertSourceMenuItem, editInsertTranslationMenuItem,
                 editTagPainterMenuItem, editOverwriteSourceMenuItem, editOverwriteTranslationMenuItem,
@@ -674,6 +676,7 @@ public class MainWindowMenu implements ActionListener, MenuListener, IMainMenu {
     JMenuItem optionsViewOptionsMenuLoginItem;
     JMenuItem projectCloseMenuItem;
     JMenuItem projectCompileMenuItem;
+    JMenuItem projectSingleCompileMenuItem;
     JMenuItem projectEditMenuItem;
     JMenuItem projectExitMenuItem;
     JMenuItem projectImportMenuItem;

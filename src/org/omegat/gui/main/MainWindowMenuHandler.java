@@ -176,6 +176,10 @@ public class MainWindowMenuHandler {
      */
     public void projectSingleCompileMenuItemActionPerformed() {
         String midName = Core.getEditor().getCurrentFile();
+        if (StringUtil.isEmpty(midName)) {
+            return;
+        }
+
         String sourcePattern = StaticUtils.escapeNonRegex(midName);
         if (Preferences.isPreference(Preferences.TAGS_VALID_REQUIRED)) {
             List<ErrorReport> stes = Core.getTagValidation().listInvalidTags(sourcePattern);

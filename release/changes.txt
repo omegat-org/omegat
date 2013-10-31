@@ -1,11 +1,16 @@
 ----------------------------------------------------------------------
  OmegaT 2.6.3 update 5
 ----------------------------------------------------------------------
-   0 Enhancement
+   1 Enhancement
    4 Bug fixes
    0 Localisation update
 ----------------------------------------------------------------------
 2.6.3 update 5 vs. 2.6.3 update 4
+
+  Implemented requests:
+
+  - Update JRE to 1.7 
+  https://sourceforge.net/p/omegat/feature-requests/793/
 
   Bug fixes: 
 

@@ -96,7 +96,9 @@ public class ProjectProperties {
 
     /** Sets The Target (Compiled) Files Directory */
     public void setTargetRoot(String targetRoot) {
-        this.targetRoot = targetRoot;
+        if (!StringUtil.isEmpty(targetRoot)) {
+            this.targetRoot = targetRoot;
+        }
     }
 
     /** Returns The Glossary Files Directory */
@@ -106,7 +108,9 @@ public class ProjectProperties {
 
     /** Sets The Glossary Files Directory */
     public void setGlossaryRoot(String glossaryRoot) {
-        this.glossaryRoot = glossaryRoot;
+        if (!StringUtil.isEmpty(glossaryRoot)) {
+            this.glossaryRoot = glossaryRoot;
+        }
     }
 
     /** Returns The Glossary File Location */
@@ -122,8 +126,10 @@ public class ProjectProperties {
     }
 
     /** Sets The Writeable Glossary File Location */
-    public void setWriteableGlossary (String writeableGlossaryFile) {
-        this.writeableGlossaryFile = writeableGlossaryFile;
+    public void setWriteableGlossary(String writeableGlossaryFile) {
+        if (!StringUtil.isEmpty(writeableGlossaryFile)) {
+            this.writeableGlossaryFile = writeableGlossaryFile;
+        }
     }
 
     /** Returns The Translation Memory (TMX) Files Directory */
@@ -133,7 +139,9 @@ public class ProjectProperties {
 
     /** Sets The Translation Memory (TMX) Files Directory */
     public void setTMRoot(String tmRoot) {
-        this.tmRoot = tmRoot;
+        if (!StringUtil.isEmpty(tmRoot)) {
+            this.tmRoot = tmRoot;
+        }
     }
     
   
@@ -154,7 +162,9 @@ public class ProjectProperties {
 
     /** Sets Dictionaries Files Directory */
     public void setDictRoot(String dictRoot) {
-        this.dictRoot = dictRoot;
+        if (!StringUtil.isEmpty(dictRoot)) {
+            this.dictRoot = dictRoot;
+        }
     }
 
     /** Returns the name of the Project */
@@ -189,7 +199,9 @@ public class ProjectProperties {
 
     /** Sets The Source (to be translated) Files Directory */
     public void setSourceRoot(String sourceRoot) {
-        this.sourceRoot = sourceRoot;
+        if (!StringUtil.isEmpty(sourceRoot)) {
+            this.sourceRoot = sourceRoot;
+        }
     }
 
     /**

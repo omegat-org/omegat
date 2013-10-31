@@ -497,7 +497,7 @@ OmegaT failed to load the valid ones
  OmegaT 2.6.3 update 5
 ----------------------------------------------------------------------
    0 Enhancement
-   3 Bug fixes
+   4 Bug fixes
    0 Localisation update
 ----------------------------------------------------------------------
 2.6.3 update 5 vs. 2.6.3 update 4
@@ -512,6 +512,9 @@ OmegaT failed to load the valid ones
 
   - tm/auto folder is created in wrong location
   https://sourceforge.net/p/omegat/bugs/553/
+
+  - If project location properties changed to blank, OmegaT freezes after reloading project 
+  https://sourceforge.net/p/omegat/bugs/632/
 
 ----------------------------------------------------------------------
  OmegaT 2.6.3 update 4

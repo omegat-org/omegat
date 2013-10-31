@@ -3,7 +3,7 @@
           with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
- Copyright (C) 2013 Alex Buloichik (alex73mail@gmail.com)
+ Copyright (C) 2013 Alex Buloichik
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -33,7 +33,7 @@ import org.omegat.util.OStrings;
 
 /**
  *
- * @author alex
+ * @author Alex Buloichik (alex73mail@gmail.com)
  */
 public class SearchWindowForm extends javax.swing.JFrame {
 

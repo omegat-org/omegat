@@ -86,6 +86,9 @@ public abstract class XMLFilter extends AbstractFilter implements Translator {
     /** Detected encoding of the input XML file. */
     private String encoding;
 
+    /** Detected EOL chars. */
+    private String eol;
+
     /**
      * Creates a special XML-encoding-aware reader of an input file.
      * 
@@ -105,6 +108,7 @@ public abstract class XMLFilter extends AbstractFilter implements Translator {
             IOException {
         XMLReader xmlreader = new XMLReader(inFile, inEncoding);
         this.encoding = xmlreader.getEncoding();
+        this.eol = xmlreader.getEol();
         return new BufferedReader(xmlreader);
     }
 
@@ -132,7 +136,7 @@ public abstract class XMLFilter extends AbstractFilter implements Translator {
         if (outFile == null)
             return new BufferedWriter(new StringWriter());
         else
-            return new BufferedWriter(new XMLWriter(outFile, outEncoding));
+            return new BufferedWriter(new XMLWriter(outFile, outEncoding, eol));
     }
 
     /**

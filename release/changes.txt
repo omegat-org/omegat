@@ -2,7 +2,7 @@
  OmegaT 3.0.6
 ----------------------------------------------------------------------
    8 Enhancements
-   1 Bug fix
+   2 Bug fixes
    2 Localisation updates
 ----------------------------------------------------------------------
 3.0.6 vs. 3.0.5
@@ -37,6 +37,9 @@ when Remove Tags is used
 
   - Ignore content of header in OmegaT's XLIFF filter
   https://sourceforge.net/p/omegat/bugs/625/
+
+  - OmT saves XML with LF even if source file is CRLF 
+  https://sourceforge.net/p/omegat/bugs/326/
 
   Localisation updates:
 

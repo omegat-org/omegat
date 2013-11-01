@@ -158,7 +158,7 @@ public class OConsts {
      * The limit of bytes that AbstractFilter.isFileSupported may read. 8k (8192
      * bytes) for now, as this is the default buffer size for BufferedReader.
      */
-    public static final int READ_AHEAD_LIMIT = 8192;
+    public static final int READ_AHEAD_LIMIT = 65536;
 
     /**
      * The name of the OmegaT Jar file. It is used to calculate the installation

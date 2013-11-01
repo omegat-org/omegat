@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 3.0.6
 ----------------------------------------------------------------------
-   7 Enhancements
+   8 Enhancements
    1 Bug fix
    2 Localisation updates
 ----------------------------------------------------------------------
@@ -20,6 +20,9 @@
 
   - Creating Current Translated Document
   https://sourceforge.net/p/omegat/feature-requests/880/
+
+  - Standardize on type of numbering in list for fuzzy matches 
+  https://sourceforge.net/p/omegat/feature-requests/897/
 
   Other enhancements:
 

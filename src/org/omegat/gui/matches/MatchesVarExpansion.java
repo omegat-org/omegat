@@ -89,7 +89,7 @@ public class MatchesVarExpansion extends VarExpansion<NearString> {
         VAR_CHANGED_ID, VAR_CHANGED_DATE, VAR_FUZZY_FLAG
     };
     
-    public static final String DEFAULT_TEMPLATE = VAR_ID + ") " 
+    public static final String DEFAULT_TEMPLATE = VAR_ID + ". " 
             + VAR_FUZZY_FLAG
             + VAR_SOURCE_TEXT + "\n"
             + VAR_TARGET_TEXT + "\n"

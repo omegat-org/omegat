@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 3.0.6
 ----------------------------------------------------------------------
-   8 Enhancements
+   9 Enhancements
    2 Bug fixes
    2 Localisation updates
 ----------------------------------------------------------------------
@@ -32,6 +32,8 @@
 when Remove Tags is used
 
   - The speed of parsing source documents was improved
+
+  - Better detection of untranslated entries for Android filter
 
   Bug fixes: 
 

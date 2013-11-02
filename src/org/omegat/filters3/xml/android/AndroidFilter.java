@@ -43,7 +43,8 @@ import org.xml.sax.Attributes;
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
 public class AndroidFilter extends XMLFilter {
-    static final String DO_NOT_TRANSLATE = "Do not translate";
+    static final String DO_NOT_TRANSLATE = "do not translate";
+    static final String DONT_TRANSLATE = "don't translate";
 
     static Set<String> NAMED_TAGS = new HashSet<String>(Arrays.asList(new String[] { "/resources/string",
             "/resources/color", "/resources/array", "/resources/string-array", "/resources/integer-array" }));
@@ -98,7 +99,11 @@ public class AndroidFilter extends XMLFilter {
     }
 
     public void comment(String comment) {
-        this.comment = comment;
+        if (this.comment == null) {
+            this.comment = comment;
+        } else {
+            this.comment += "\n" + comment;
+        }
     }
 
     /**
@@ -109,8 +114,11 @@ public class AndroidFilter extends XMLFilter {
          * Android sources has some entries without translatable="false" but with this comment. Yes, it's
          * dirty hack, but there is no other way.
          */
-        if (idComment != null && idComment.contains(DO_NOT_TRANSLATE)) {
-            return entry;
+        if (idComment != null) {
+            String c = idComment.toLowerCase();
+            if (c.contains(DO_NOT_TRANSLATE) || c.contains(DONT_TRANSLATE)) {
+                return entry;
+            }
         }
 
         String e = entry.replace("\\'", "'");

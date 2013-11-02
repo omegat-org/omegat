@@ -52,6 +52,8 @@ public class AndroidDialect extends DefaultXMLDialect {
                 Attribute oneAttribute = atts.get(i);
                 if (oneAttribute.getName().equalsIgnoreCase("translatable")) {
                     return "false".equalsIgnoreCase(oneAttribute.getValue());
+                } else if (oneAttribute.getName().equalsIgnoreCase("translate")) {
+                    return "false".equalsIgnoreCase(oneAttribute.getValue());
                 }
             }
         }

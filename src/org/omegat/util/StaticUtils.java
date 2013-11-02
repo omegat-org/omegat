@@ -256,6 +256,11 @@ public class StaticUtils {
      * Returns a list of all files under the root directory by absolute path.
      */
     public static void buildFileList(List<String> lst, File rootDir, boolean recursive) {
+        internalBuildFileList(lst, rootDir, recursive);
+        Collections.sort(lst);
+    }
+
+    private static void internalBuildFileList(List<String> lst, File rootDir, boolean recursive) {
         // read all files in current directory, recurse into subdirs
         // append files to supplied list
         File flist[] = null;

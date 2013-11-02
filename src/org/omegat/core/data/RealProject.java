@@ -955,7 +955,6 @@ public class RealProject implements IProject {
         List<String> srcFileList = new ArrayList<String>();
         File root = new File(m_config.getSourceRoot());
         StaticUtils.buildFileList(srcFileList, root, true);
-        Collections.sort(srcFileList, new FileNameComparator());
 
         for (String filename : srcFileList) {
             // strip leading path information;
@@ -1559,15 +1558,6 @@ public class RealProject implements IProject {
             return existKeys.contains(key);
         }
     };
-
-    static class FileNameComparator implements Comparator<String> {
-        public int compare(String o1, String o2) {
-            // Get the local collator and set its strength to PRIMARY
-            Collator localCollator = Collator.getInstance(Locale.getDefault());
-            localCollator.setStrength(Collator.PRIMARY);
-            return localCollator.compare(o1, o2);
-        }
-    }
 
     void setOnlineMode() {
         if (!isOnlineMode) {

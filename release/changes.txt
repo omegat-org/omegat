@@ -49,7 +49,7 @@ when Remove Tags is used
   Localisation updates:
 
   - Italian localisation updated to 3.0.5 (UI, Documentation)
-  - Japanese localisation updated to 3.0.6 (UI)
+  - Japanese localisation updated to 3.0.6 (UI, Documentation)
 
 ----------------------------------------------------------------------
  OmegaT 3.0.5

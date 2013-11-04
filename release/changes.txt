@@ -2,7 +2,7 @@
  OmegaT 3.0.6
 ----------------------------------------------------------------------
    9 Enhancements
-   2 Bug fixes
+   3 Bug fixes
    2 Localisation updates
 ----------------------------------------------------------------------
 3.0.6 vs. 3.0.5
@@ -42,6 +42,9 @@ when Remove Tags is used
 
   - OmT saves XML with LF even if source file is CRLF 
   https://sourceforge.net/p/omegat/bugs/326/
+
+  - Filelist not sorted during creating translated files
+  https://sourceforge.net/p/omegat/bugs/619/
 
   Localisation updates:
 

@@ -1,42 +1,59 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE appendix PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<!DOCTYPE appendix PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
+"../../../docbook-xml-4.5/docbookx.dtd">
 <appendix id="appendix.acknowledgements">
-  <title>謝辞</title>
+  <title>Acknowledgements</title>
 
   <section>
-    <title>みなさん、ありがとう！</title>
+    <title>Thank you all!</title>
 
-    <para>現行のバージョンに存在する矛盾や記載漏れ、誤記などはすべて、筆者がその責を負うものです。この取扱説明書は、多くの人たちからの助けと支え無しには、存在し得ませんでした。とりわけ、次の方々に感謝します：</para>
+    <para>Whatever the inconsistencies, omissions and straightforward errors
+    you may find in the present version, I declare them all my own. This
+    manual, however, would not be possible without the help and support from a
+    number of people. Explicit thanks to:</para>
 
     <itemizedlist>
       <listitem>
-        <para>Mark Prior へ。わたしの最初の下書きを校正してくれたとき、OmegaT と英語に対する彼の深い愛情を思い知りました。</para>
+        <para>Marc Prior: correcting my first draft was an act of love for
+        OmegaT and the English language.</para>
       </listitem>
     </itemizedlist>
 
     <itemizedlist>
       <listitem>
-        <para>Didier Briel へ。彼の忍耐と、DocBook の厄介な問題に対する不断の助力が無ければ、本文書は完成しなかったでしょう。もちろん、リポジトリを完全な状態に維持するための、彼の注意深さと働きぶりは、言うまでもありません。</para>
+        <para>Didier Briel: I could not do without Didier's patient and
+        persistent help with DocBook intricacies. Not to mention his care and
+        diligence, keeping repositories intact and in good order.</para>
       </listitem>
 
       <listitem>
-        <para>Samuel Murray へ。初心者向けの章「5 分でわかる！ OmegaT の使い方」に対して。</para>
-      </listitem>
-    </itemizedlist>
-
-    <itemizedlist>
-      <listitem>
-        <para>Will Helton へ。彼が下書きの最終チェックをしてくれたおかげで、多くの恥をさらす事態を免れました。彼の貴重な助けがなかったら、いったい幾つの前置詞 the や a が欠落していたことやら。</para>
+        <para>Samuel Murray: for the introductory chapter "Learn to use OmegaT
+        in 5 minutes".</para>
       </listitem>
     </itemizedlist>
 
     <itemizedlist>
       <listitem>
-        <para>Jean-Christophe Helary へ。わたしの知らない OmegaT の実行とコマンドライン引数、その他もろもろに関する簡潔な説明に、深く感謝します。</para>
+        <para>Will Helton: his final reading of the draft has spared me a lot
+        of embarrassment. One could only wonder, how many the and a
+        prepositions would still be missing without his invaluable
+        help.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Jean-Christophe Helary: special thanks to JC for his concise
+        description of OmegaT run, command line parameters and all other
+        details, I have yet to notice.</para>
       </listitem>
 
       <listitem>
-        <para>最後に、旧版の不備を見つけて <ulink url="https://sourceforge.net/p/omegat/documentation/">OmegaT 文書管理システム</ulink>に報告してくれた、すべての貢献者の皆さんへ。引き続き、よろしくお願いします！</para>
+        <para>Last but not least: my thanks to all the contributors to<ulink
+        url="https://sourceforge.net/p/omegat/documentation/">
+        OmegaT documentation tracker</ulink> for all the inconsistencies found
+        in the previous versions of the documentation. Keep up your good
+        work!</para>
       </listitem>
     </itemizedlist>
   </section>

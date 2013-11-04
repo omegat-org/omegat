@@ -41,12 +41,14 @@ import java.io.OutputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
+import java.text.Collator;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Enumeration;
 import java.util.List;
+import java.util.Locale;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 import java.util.regex.Matcher;
@@ -257,7 +259,15 @@ public class StaticUtils {
      */
     public static void buildFileList(List<String> lst, File rootDir, boolean recursive) {
         internalBuildFileList(lst, rootDir, recursive);
-        Collections.sort(lst);
+
+        // Get the local collator and set its strength to PRIMARY
+        final Collator localCollator = Collator.getInstance(Locale.getDefault());
+        localCollator.setStrength(Collator.PRIMARY);
+        Collections.sort(lst, new Comparator<String>() {
+            public int compare(String o1, String o2) {
+                return localCollator.compare(o1, o2);
+            }
+        });
     }
 
     private static void internalBuildFileList(List<String> lst, File rootDir, boolean recursive) {

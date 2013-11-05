@@ -240,6 +240,9 @@ public class RealProject implements IProject {
             loadOtherLanguages();
 
             allProjectEntries = Collections.unmodifiableList(allProjectEntries);
+
+            // clear status message
+            Core.getMainWindow().showStatusMessageRB(null);
         } catch (Exception e) {
             // trouble in tinsletown...
             Log.logErrorRB(e, "CT_ERROR_CREATING_PROJECT");

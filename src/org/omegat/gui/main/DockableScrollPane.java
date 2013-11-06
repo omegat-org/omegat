@@ -43,6 +43,7 @@ public class DockableScrollPane extends JScrollPane implements Dockable {
     DockKey dockKey;
 
     /** Updates the name of the docking pane. */
+    @Override
     public void setName(String name) {
         dockKey.setName(name);
     }
@@ -54,10 +55,12 @@ public class DockableScrollPane extends JScrollPane implements Dockable {
         dockKey.setFloatEnabled(detouchable);
     }
 
+    @Override
     public DockKey getDockKey() {
         return dockKey;
     }
 
+    @Override
     public Component getComponent() {
         return this;
     }

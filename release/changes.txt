@@ -3,7 +3,7 @@
 ----------------------------------------------------------------------
    1 Enhancement
    1 Bug fix
-   0 Localisation update
+   1 Localisation update
 ----------------------------------------------------------------------
 3.0.6 upate 1 vs. 3.0.5
 
@@ -15,6 +15,10 @@
 
   - After creating a new project, the message "Loading TMX files..."
 remained displayed at the bottom of the window
+
+  Localisation updates:
+
+  - Japanese localisation updated to 3.0.6 update 1 (UI)
 
 ----------------------------------------------------------------------
  OmegaT 3.0.6

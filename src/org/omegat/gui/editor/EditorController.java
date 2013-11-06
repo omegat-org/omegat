@@ -297,6 +297,8 @@ public class EditorController implements IEditor {
         }
 
         pane.setName(title);
+        pane.setToolTipText(title);
+
         if (pane.getViewport().getView() != data) {
             pane.setViewportView(data);
         }

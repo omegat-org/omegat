@@ -42,6 +42,12 @@ import com.vlsolutions.swing.docking.DockingConstants;
 public class DockableScrollPane extends JScrollPane implements Dockable {
     DockKey dockKey;
 
+    /** Updates the tool tip text of the docking pane. */
+    @Override
+    public void setToolTipText(String text) {
+        dockKey.setTooltip(text);
+    }
+
     /** Updates the name of the docking pane. */
     @Override
     public void setName(String name) {

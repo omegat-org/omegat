@@ -1,11 +1,15 @@
 ----------------------------------------------------------------------
  OmegaT 3.0.6 update 1
 ----------------------------------------------------------------------
-   0 Enhancement
+   1 Enhancement
    1 Bug fix
    0 Localisation update
 ----------------------------------------------------------------------
 3.0.6 upate 1 vs. 3.0.5
+
+  Other enhancements:
+  
+  - The auto-text file type is displayed in the file selector.
 
   Bug fixes:
 

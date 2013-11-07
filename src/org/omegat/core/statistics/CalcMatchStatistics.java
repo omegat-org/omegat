@@ -131,7 +131,7 @@ public class CalcMatchStatistics extends LongProcessThread {
         MatchStatCounts total = calcTotal(false);
 
         callback.appendData(OStrings.getString("CT_STATSMATCH_FileTotal") + "\n");
-        String[][] table = total.calcTable(rowsPerFile);
+        String[][] table = total.calcTable(rowsTotal);
         String outText = TextUtil.showTextTable(header, table, align);
         callback.appendData(outText + "\n");
 
@@ -143,6 +143,7 @@ public class CalcMatchStatistics extends LongProcessThread {
 
     MatchStatCounts calcTotal(boolean outData) throws InterruptedException {
         MatchStatCounts result = new MatchStatCounts(true);
+        alreadyProcessedInProject.clear();
 
         final List<SourceTextEntry> untranslatedEntries = new ArrayList<SourceTextEntry>();
 

@@ -1,17 +1,26 @@
 ----------------------------------------------------------------------
- OmegaT 3.0.6 update 1
+ OmegaT 3.0.7 
 ----------------------------------------------------------------------
-   2 Enhancements
+   3 Enhancements
    1 Bug fix
    1 Localisation update
 ----------------------------------------------------------------------
-3.0.6 upate 1 vs. 3.0.5
+3.0.7 upate 1 vs. 3.0.6
 
   Other enhancements:
   
   - The auto-text file type is displayed in the file selector.
 
   - In the Editor, the tooltip is now the same as the title
+
+  - There's a new report in Tools: Match Statistics per Files
+It gives the same information as the match statistics for every file,
+plus the total at the end, with the repetitions being split in two 
+lines: 
+"Repetitions within this file" lists repetition for which the first 
+occurence is in this file.
+"Repetitions from other files" list repetition for which the first 
+occurence is in a previous file in the list.
 
   Bug fixes:
 

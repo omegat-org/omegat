@@ -349,6 +349,8 @@ public class MainWindowMenu implements ActionListener, MenuListener, IMainMenu {
                 .add(toolsShowStatisticsStandardMenuItem = createMenuItem("TF_MENU_TOOLS_STATISTICS_STANDARD"));
         toolsMenu
                 .add(toolsShowStatisticsMatchesMenuItem = createMenuItem("TF_MENU_TOOLS_STATISTICS_MATCHES"));
+        toolsMenu
+                .add(toolsShowStatisticsMatchesPerFileMenuItem = createMenuItem("TF_MENU_TOOLS_STATISTICS_MATCHES_PER_FILE"));
 
         optionsMenu
                 .add(optionsTabAdvanceCheckBoxMenuItem = createCheckboxMenuItem("TF_MENU_DISPLAY_ADVANCE"));
@@ -693,6 +695,7 @@ public class MainWindowMenu implements ActionListener, MenuListener, IMainMenu {
     JMenuItem toolsValidateTagsMenuItem;
     JMenuItem toolsShowStatisticsStandardMenuItem;
     JMenuItem toolsShowStatisticsMatchesMenuItem;
+    JMenuItem toolsShowStatisticsMatchesPerFileMenuItem;
     JMenuItem upperCaseMenuItem;
     JCheckBoxMenuItem viewDisplaySegmentSourceCheckBoxMenuItem;
     JCheckBoxMenuItem viewMarkNonUniqueSegmentsCheckBoxMenuItem;

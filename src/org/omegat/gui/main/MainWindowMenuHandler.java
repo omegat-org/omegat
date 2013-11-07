@@ -658,6 +658,10 @@ public class MainWindowMenuHandler {
         new StatisticsWindow(StatisticsWindow.STAT_TYPE.MATCHES).setVisible(true);
     }
 
+    public void toolsShowStatisticsMatchesPerFileMenuItemActionPerformed() {
+        new StatisticsWindow(StatisticsWindow.STAT_TYPE.MATCHES_PER_FILE).setVisible(true);
+    }
+
     public void optionsTabAdvanceCheckBoxMenuItemActionPerformed() {
         Core.getEditor().getSettings()
                 .setUseTabForAdvance(mainWindow.menu.optionsTabAdvanceCheckBoxMenuItem.isSelected());

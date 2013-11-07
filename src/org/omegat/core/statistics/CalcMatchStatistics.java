@@ -156,12 +156,13 @@ public class CalcMatchStatistics extends LongProcessThread {
                 // segment has translation - should be calculated as "Exact matched"
                 result.addExact(count);
                 entryProcessed();
-            } else if (isFirst) {
-                untranslatedEntries.add(ste);
-            } else {
+            } else if (!isFirst) {
                 // already processed - repetition
                 result.addRepetition(count);
                 entryProcessed();
+            } else {
+                // first time
+                untranslatedEntries.add(ste);
             }
         }
 
@@ -195,25 +196,28 @@ public class CalcMatchStatistics extends LongProcessThread {
         for (SourceTextEntry ste : fi.entries) {
             checkInterrupted();
             StatCount count = new StatCount(ste);
-            boolean isFirstInFile = alreadyProcessedInFile.add(ste.getSrcText());
-            boolean isFirstInProject = alreadyProcessedInProject.add(ste.getSrcText());
+            boolean existInFile = alreadyProcessedInFile.contains(ste.getSrcText());
+            boolean existInPreviousFiles = alreadyProcessedInProject.contains(ste.getSrcText());
             if (Core.getProject().getTranslationInfo(ste).isTranslated()) {
                 // segment has translation - should be calculated as
                 // "Exact matched"
                 result.addExact(count);
                 treated++;
-            } else if (isFirstInProject) {
-                untranslatedEntries.add(ste);
+            } else if (existInPreviousFiles) {
+                // exist in other file
+                result.addRepetitionFromOtherFiles(count);
+                entryProcessed();
+            } else if (existInFile) {
+                // exist in this file
+                result.addRepetitionWithinThisFile(count);
+                entryProcessed();
             } else {
-                // isFirstInProject==false
-                if (isFirstInFile) {
-                    // exist in other file
-                    result.addRepetitionFromOtherFiles(count);
-                } else {
-                    result.addRepetitionWithinThisFile(count);
-                }
+                // first time
+                untranslatedEntries.add(ste);
+                alreadyProcessedInFile.add(ste.getSrcText());
             }
         }
+        alreadyProcessedInProject.addAll(alreadyProcessedInFile);
 
         calcSimilarity(untranslatedEntries, result);
 

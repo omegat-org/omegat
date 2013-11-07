@@ -33,6 +33,7 @@ import java.util.List;
 import java.util.Set;
 
 import org.omegat.core.Core;
+import org.omegat.core.data.IProject;
 import org.omegat.core.data.ProtectedPart;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.events.IStopped;
@@ -44,16 +45,18 @@ import org.omegat.core.threads.LongProcessThread;
 import org.omegat.gui.stat.StatisticsWindow;
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
+import org.omegat.util.StaticUtils;
 import org.omegat.util.Token;
 import org.omegat.util.gui.TextUtil;
 
 /**
- * Thread for calculate match statistics.
+ * Thread for calculate match statistics, total and per file.
  * 
  * Calculation requires two different tags stripping: one for calculate match percentage, and second for
  * calculate number of words and chars.
  * 
- * Number of words/chars calculation requires to just strip all tags, protected parts, placeholders(see StatCount.java).
+ * Number of words/chars calculation requires to just strip all tags, protected parts, placeholders(see
+ * StatCount.java).
  * 
  * Calculation of match percentage requires 2 steps for tags processing: 1) remove only simple XML tags for
  * find 5 nearest matches(but not protected parts' text: from "<m0>Acme</m0>" only tags should be removed, but
@@ -67,88 +70,183 @@ public class CalcMatchStatistics extends LongProcessThread {
             OStrings.getString("CT_STATS_Words"), OStrings.getString("CT_STATS_Characters_NOSP"),
             OStrings.getString("CT_STATS_Characters") };
 
-    private String[] rows = new String[] { OStrings.getString("CT_STATSMATCH_RowRepetitions"),
+    private String[] rowsTotal = new String[] { OStrings.getString("CT_STATSMATCH_RowRepetitions"),
+            OStrings.getString("CT_STATSMATCH_RowExactMatch"),
+            OStrings.getString("CT_STATSMATCH_RowMatch95"), OStrings.getString("CT_STATSMATCH_RowMatch85"),
+            OStrings.getString("CT_STATSMATCH_RowMatch75"), OStrings.getString("CT_STATSMATCH_RowMatch50"),
+            OStrings.getString("CT_STATSMATCH_RowNoMatch"), OStrings.getString("CT_STATSMATCH_Total") };
+    private String[] rowsPerFile = new String[] {
+            OStrings.getString("CT_STATSMATCH_RowRepetitionsWithinThisFile"),
+            OStrings.getString("CT_STATSMATCH_RowRepetitionsFromOtherFiles"),
             OStrings.getString("CT_STATSMATCH_RowExactMatch"),
             OStrings.getString("CT_STATSMATCH_RowMatch95"), OStrings.getString("CT_STATSMATCH_RowMatch85"),
             OStrings.getString("CT_STATSMATCH_RowMatch75"), OStrings.getString("CT_STATSMATCH_RowMatch50"),
             OStrings.getString("CT_STATSMATCH_RowNoMatch"), OStrings.getString("CT_STATSMATCH_Total") };
     private boolean[] align = new boolean[] { false, true, true, true, true };
 
-    private StatisticsWindow callback;
+    private final StatisticsWindow callback;
+    private final boolean perFile;
+    private int entriesToProcess;
 
     /** Already processed segments. Used for repetitions detect. */
     private Set<String> alreadyProcessed = new HashSet<String>();
 
-    public CalcMatchStatistics(StatisticsWindow callback) {
+    private ISimilarityCalculator distanceCalculator;
+    private FindMatches finder;
+
+    public CalcMatchStatistics(StatisticsWindow callback, boolean perFile) {
         this.callback = callback;
+        this.perFile = perFile;
     }
 
     public void run() {
-        StatCount[] result = new StatCount[8];
-        for (int i = 0; i < result.length; i++) {
-            result[i] = new StatCount();
+        finder = new FindMatches(Core.getProject().getSourceTokenizer(), OConsts.MAX_NEAR_STRINGS, true,
+                false);
+        distanceCalculator = new LevenshteinDistance();
+        if (perFile) {
+            entriesToProcess = Core.getProject().getAllEntries().size() * 2;
+            calcPerFile();
+        } else {
+            entriesToProcess = Core.getProject().getAllEntries().size();
+            calcTotal(true);
         }
-        ISimilarityCalculator distanceCalculator = new LevenshteinDistance();
-        List<SourceTextEntry> allEntries = Core.getProject().getAllEntries();		
+    }
 
-        final List<SourceTextEntry> untranslatedEntries = new ArrayList<SourceTextEntry>(allEntries.size() / 2);
-
-        // We should iterate all segments from all files in project.
-        int percent = 0, treated = 0;
-        for (int i = 0; i < allEntries.size(); i++) {
-            SourceTextEntry ste = allEntries.get(i);
-            String src = ste.getSrcText();
-
-            StatCount count = new StatCount(ste);
-            boolean isFirst = alreadyProcessed.add(src);
-            if (Core.getProject().getTranslationInfo(ste).isTranslated()) {
-                // segment has translation - should be calculated as
-                // "Exact matched"
-                result[1].add(count);
-                treated ++;
-            }
-            else if (!isFirst) {
-                // already processed - repetition
-                result[0].add(count);
-                treated ++;
-            }
-            else {
-                untranslatedEntries.add(ste);
-            }
-
+    void calcPerFile() {
+        for (IProject.FileInfo fi : Core.getProject().getProjectFiles()) {
+            MatchStatCounts perFile = forFile(fi);
             if (isStopped) {
                 return;
             }
-            int newPercent = treated * 100 / allEntries.size();
-            if (percent != newPercent) {
-                callback.showProgress(newPercent);
-                percent = newPercent;
+
+            String[][] table = perFile.calcTable(rowsPerFile);
+            String outText = TextUtil.showTextTable(header, table, align);
+            callback.appendData(StaticUtils.format(OStrings.getString("CT_STATSMATCH_File"), fi.filePath)
+                    + "\n");
+            callback.appendData(outText + "\n");
+        }
+
+        MatchStatCounts total = calcTotal(false);
+
+        callback.appendData(OStrings.getString("CT_STATSMATCH_FileTotal") + "\n");
+        String[][] table = total.calcTable(rowsPerFile);
+        String outText = TextUtil.showTextTable(header, table, align);
+        callback.appendData(outText + "\n");
+
+        String text = callback.finishData();
+        String fn = Core.getProject().getProjectProperties().getProjectInternal()
+                + OConsts.STATS_MATCH_PER_FILE_FILENAME;
+        Statistics.writeStat(fn, text);
+    }
+
+    MatchStatCounts calcTotal(boolean outData) {
+        MatchStatCounts result = new MatchStatCounts(true);
+
+        final List<SourceTextEntry> untranslatedEntries = new ArrayList<SourceTextEntry>();
+
+        // We should iterate all segments from all files in project.
+        for (SourceTextEntry ste : Core.getProject().getAllEntries()) {
+            StatCount count = new StatCount(ste);
+            boolean isFirst = alreadyProcessed.add(ste.getSrcText());
+            if (Core.getProject().getTranslationInfo(ste).isTranslated()) {
+                // segment has translation - should be calculated as "Exact matched"
+                result.addExact(count);
+                entryProcessed();
+            } else if (isFirst) {
+                untranslatedEntries.add(ste);
+            } else {
+                // already processed - repetition
+                result.addRepetition(count);
+                entryProcessed();
+            }
+
+            if (isStopped) {
+                return null;
             }
         }
-        
-        String[][] table = calcTable(result, 2);
-        String outText = TextUtil.showTextTable(header, table, align);
 
-        callback.displayData(outText, false);
-        
+        if (outData) {
+            String[][] table = result.calcTableWithoutPercentage(rowsTotal);
+            String outText = TextUtil.showTextTable(header, table, align);
+            callback.displayData(outText, false);
+        }
 
-        /*
-         * For the match calculation, we iterates by untranslated entries. Each untranslated entry compared
-         * with source texts of: 1) default translations, 2) alternative translations, 3) TMs(from
-         * project.getTransMemories()).
-         * 
-         * We need to find best matches, because "adjustedScore" for non-best matches can be better for some
-         * worse "score", what is not so good. It happen because some tags can be repeated many times, or
-         * since we are using not so good tokens comparison. Best matches find will produce the same
-         * similarity like in patches pane.
-         * 
-         * Similarity calculates between tokens tokenized by ITokenizer.tokenizeAllExactly() (adjustedScore)
-         */
-        FindMatches finder = new FindMatches(Core.getProject().getSourceTokenizer(), OConsts.MAX_NEAR_STRINGS, true, false);
+        calcSimilarity(untranslatedEntries, result);
+
+        if (outData) {
+            String[][] table = result.calcTable(rowsTotal);
+            String outText = TextUtil.showTextTable(header, table, align);
+            callback.displayData(outText, true);
+            String fn = Core.getProject().getProjectProperties().getProjectInternal()
+                    + OConsts.STATS_MATCH_FILENAME;
+            Statistics.writeStat(fn, outText);
+        }
+
+        return result;
+    }
+
+    MatchStatCounts forFile(IProject.FileInfo fi) {
+        MatchStatCounts result = new MatchStatCounts(false);
+
+        Set<String> alreadyProcessed = new HashSet<String>();
+
+        final List<SourceTextEntry> untranslatedEntries = new ArrayList<SourceTextEntry>();
+
+        // We should iterate all segments from file.
+        for (SourceTextEntry ste : fi.entries) {
+            StatCount count = new StatCount(ste);
+            boolean isFirst = alreadyProcessed.add(ste.getSrcText());
+            if (Core.getProject().getTranslationInfo(ste).isTranslated()) {
+                // segment has translation - should be calculated as
+                // "Exact matched"
+                result.addExact(count);
+                treated++;
+            } else if (isFirst) {
+                untranslatedEntries.add(ste);
+            } else {
+                result.addRepetitionWithinThisFile(count);
+            }
+
+            // untranslated entries may have repetitions in other files
+            for (IProject.FileInfo fiOther : Core.getProject().getProjectFiles()) {
+                if (fiOther == fi) {
+                    continue; // this file
+                }
+                for (SourceTextEntry steo : fiOther.entries) {
+                    if (steo.getSrcText().equals(ste.getSrcText())) {
+                        result.addRepetitionFromOtherFiles(count);
+                    }
+                }
+            }
+
+            if (isStopped) {
+                return null;
+            }
+        }
+
+        calcSimilarity(untranslatedEntries, result);
+
+        return result;
+    }
+
+    /**
+     * For the match calculation, we iterates by untranslated entries. Each untranslated entry compared with
+     * source texts of: 1) default translations, 2) alternative translations, 3) TMs(from
+     * project.getTransMemories()).
+     * 
+     * We need to find best matches, because "adjustedScore" for non-best matches can be better for some worse
+     * "score", what is not so good. It happen because some tags can be repeated many times, or since we are
+     * using not so good tokens comparison. Best matches find will produce the same similarity like in patches
+     * pane.
+     * 
+     * Similarity calculates between tokens tokenized by ITokenizer.tokenizeAllExactly() (adjustedScore)
+     */
+    void calcSimilarity(List<SourceTextEntry> untranslatedEntries, MatchStatCounts counts) {
         for (SourceTextEntry ste : untranslatedEntries) {
             String srcNoXmlTags = ste.getSrcText();
             for (ProtectedPart pp : ste.getProtectedParts()) {
-                srcNoXmlTags = srcNoXmlTags.replace(pp.getTextInSourceSegment(), pp.getReplacementMatchCalculation());
+                srcNoXmlTags = srcNoXmlTags.replace(pp.getTextInSourceSegment(),
+                        pp.getReplacementMatchCalculation());
             }
 
             List<NearString> nears;
@@ -176,81 +274,23 @@ public class CalcMatchStatistics extends LongProcessThread {
             }
 
             StatCount count = new StatCount(ste);
-            int row = getRowByPercent(maxSimilarity);
-            result[row].add(count);
-            treated++;
+            counts.addForPercents(maxSimilarity, count);
 
             if (isStopped) {
                 return;
             }
-            int newPercent = treated * 100 / allEntries.size();
-            if (percent != newPercent) {
-                callback.showProgress(newPercent);
-                percent = newPercent;
-            }
-        }
-
-        // calculate total
-        for (int i = 0; i < 7; i++) {
-            result[7].add(result[i]);
-        }
-
-        table = calcTable(result, result.length);
-        outText = TextUtil.showTextTable(header, table, align);
-
-        callback.displayData(outText, true);
-
-        String fn = Core.getProject().getProjectProperties().getProjectInternal()
-                + OConsts.STATS_MATCH_FILENAME;
-        Statistics.writeStat(fn, outText);
-    }
-
-    /**
-     * Get row index by match percent.
-     * 
-     * @param percent
-     *            match percent
-     * @return row index
-     */
-    public int getRowByPercent(int percent) {
-        if (percent == Statistics.PERCENT_REPETITIONS) {
-            // repetitions
-            return 0;
-        } else if (percent == Statistics.PERCENT_EXACT_MATCH) {
-            // exact match
-            return 1;
-        } else if (percent >= 95) {
-            return 2;
-        } else if (percent >= 85) {
-            return 3;
-        } else if (percent >= 75) {
-            return 4;
-        } else if (percent >= 50) {
-            return 5;
-        } else {
-            return 6;
+            entryProcessed();
         }
     }
 
-    /**
-     * Extract result to text table.
-     * 
-     * @param result
-     *            result
-     * @return text table
-     */
-    public String[][] calcTable(final StatCount[] result, final int rowsCount) {
-        String[][] table = new String[rowsCount][5];
+    int treated, percent;
 
-        // dump result - will be changed for UI
-        for (int i = 0; i < rowsCount; i++) {
-            table[i][0] = rows[i];
-            table[i][1] = Integer.toString(result[i].segments);
-            table[i][2] = Integer.toString(result[i].words);
-            table[i][3] = Integer.toString(result[i].charsWithoutSpaces);
-            table[i][4] = Integer.toString(result[i].charsWithSpaces);
+    void entryProcessed() {
+        treated++;
+        int newPercent = treated * 100 / entriesToProcess;
+        if (percent != newPercent) {
+            callback.showProgress(newPercent);
+            percent = newPercent;
         }
-        return table;
     }
-
 }

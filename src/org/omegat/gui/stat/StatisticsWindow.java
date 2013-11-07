@@ -62,7 +62,7 @@ import org.omegat.util.gui.DockingUI;
 public class StatisticsWindow extends JDialog {
 
     public static enum STAT_TYPE {
-        STANDARD, MATCHES
+        STANDARD, MATCHES, MATCHES_PER_FILE
     };
 
     private JProgressBar progressBar;
@@ -82,7 +82,11 @@ public class StatisticsWindow extends JDialog {
             break;
         case MATCHES:
             setTitle(OStrings.getString("CT_STATSMATCH_WindowHeader"));
-            thread = new CalcMatchStatistics(this);
+            thread = new CalcMatchStatistics(this, false);
+            break;
+        case MATCHES_PER_FILE:
+            setTitle(OStrings.getString("CT_STATSMATCH_PER_FILE_WindowHeader"));
+            thread = new CalcMatchStatistics(this, true);
             break;
         }
 
@@ -146,5 +150,25 @@ public class StatisticsWindow extends JDialog {
                 output.setCaretPosition(0);
             }
         });
+    }
+
+    public void appendData(final String result) {
+        SwingUtilities.invokeLater(new Runnable() {
+            public void run() {
+                output.append(result);
+            }
+        });
+    }
+
+    public String finishData() {
+        SwingUtilities.invokeLater(new Runnable() {
+            public void run() {
+                progressBar.setValue(100);
+                progressBar.setString("");
+                progressBar.setVisible(false);
+                output.setCaretPosition(0);
+            }
+        });
+        return output.getText();
     }
 }

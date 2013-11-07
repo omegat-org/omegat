@@ -67,6 +67,13 @@ public class StatCount {
         charsWithSpaces = Statistics.numberOfCharactersWithSpaces(src);
     }
 
+    public void reset() {
+        segments = 0;
+        words = 0;
+        charsWithoutSpaces = 0;
+        charsWithSpaces = 0;
+    }
+
     public void add(StatCount c) {
         segments += c.segments;
         words += c.words;

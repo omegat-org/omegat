@@ -119,9 +119,9 @@ public class MatchStatCounts {
      * @return text table
      */
     public String[][] calcTable(String[] rows) {
-        // calculate total except repetitions from other files
-        counts[counts.length - 1].add(counts[0]);
-        for (int i = baseForPercents; i < counts.length - 1; i++) {
+        // calculate total
+        counts[counts.length - 1].reset();
+        for (int i = 0; i < counts.length - 1; i++) {
             counts[counts.length - 1].add(counts[i]);
         }
 

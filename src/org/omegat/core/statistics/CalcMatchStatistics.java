@@ -89,7 +89,8 @@ public class CalcMatchStatistics extends LongProcessThread {
     private int entriesToProcess;
 
     /** Already processed segments. Used for repetitions detect. */
-    private Set<String> alreadyProcessed = new HashSet<String>();
+    private Set<String> alreadyProcessedInFile = new HashSet<String>();
+    private Set<String> alreadyProcessedInProject = new HashSet<String>();
 
     private ISimilarityCalculator distanceCalculator;
     private FindMatches finder;
@@ -149,7 +150,7 @@ public class CalcMatchStatistics extends LongProcessThread {
         for (SourceTextEntry ste : Core.getProject().getAllEntries()) {
             checkInterrupted();
             StatCount count = new StatCount(ste);
-            boolean isFirst = alreadyProcessed.add(ste.getSrcText());
+            boolean isFirst = alreadyProcessedInProject.add(ste.getSrcText());
             if (Core.getProject().getTranslationInfo(ste).isTranslated()) {
                 // segment has translation - should be calculated as "Exact matched"
                 result.addExact(count);
@@ -185,8 +186,7 @@ public class CalcMatchStatistics extends LongProcessThread {
 
     MatchStatCounts forFile(IProject.FileInfo fi) throws InterruptedException {
         MatchStatCounts result = new MatchStatCounts(false);
-
-        Set<String> alreadyProcessed = new HashSet<String>();
+        alreadyProcessedInFile.clear();
 
         final List<SourceTextEntry> untranslatedEntries = new ArrayList<SourceTextEntry>();
 
@@ -194,28 +194,22 @@ public class CalcMatchStatistics extends LongProcessThread {
         for (SourceTextEntry ste : fi.entries) {
             checkInterrupted();
             StatCount count = new StatCount(ste);
-            boolean isFirst = alreadyProcessed.add(ste.getSrcText());
+            boolean isFirstInFile = alreadyProcessedInFile.add(ste.getSrcText());
+            boolean isFirstInProject = alreadyProcessedInProject.add(ste.getSrcText());
             if (Core.getProject().getTranslationInfo(ste).isTranslated()) {
                 // segment has translation - should be calculated as
                 // "Exact matched"
                 result.addExact(count);
                 treated++;
-            } else if (isFirst) {
+            } else if (isFirstInProject) {
                 untranslatedEntries.add(ste);
             } else {
-                result.addRepetitionWithinThisFile(count);
-            }
-
-            // untranslated entries may have repetitions in other files
-            for (IProject.FileInfo fiOther : Core.getProject().getProjectFiles()) {
-                if (fiOther == fi) {
-                    continue; // this file
-                }
-                for (SourceTextEntry steo : fiOther.entries) {
-                    checkInterrupted();
-                    if (steo.getSrcText().equals(ste.getSrcText())) {
-                        result.addRepetitionFromOtherFiles(count);
-                    }
+                // isFirstInProject==false
+                if (isFirstInFile) {
+                    // exist in other file
+                    result.addRepetitionFromOtherFiles(count);
+                } else {
+                    result.addRepetitionWithinThisFile(count);
                 }
             }
         }

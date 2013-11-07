@@ -100,24 +100,25 @@ public class CalcMatchStatistics extends LongProcessThread {
     }
 
     public void run() {
-        finder = new FindMatches(Core.getProject().getSourceTokenizer(), OConsts.MAX_NEAR_STRINGS, true,
-                false);
-        distanceCalculator = new LevenshteinDistance();
-        if (perFile) {
-            entriesToProcess = Core.getProject().getAllEntries().size() * 2;
-            calcPerFile();
-        } else {
-            entriesToProcess = Core.getProject().getAllEntries().size();
-            calcTotal(true);
+        try {
+            finder = new FindMatches(Core.getProject().getSourceTokenizer(), OConsts.MAX_NEAR_STRINGS, true,
+                    false);
+            distanceCalculator = new LevenshteinDistance();
+            if (perFile) {
+                entriesToProcess = Core.getProject().getAllEntries().size() * 2;
+                calcPerFile();
+            } else {
+                entriesToProcess = Core.getProject().getAllEntries().size();
+                calcTotal(true);
+            }
+        } catch (InterruptedException ex) {
         }
     }
 
-    void calcPerFile() {
+    void calcPerFile() throws InterruptedException {
         for (IProject.FileInfo fi : Core.getProject().getProjectFiles()) {
             MatchStatCounts perFile = forFile(fi);
-            if (isStopped) {
-                return;
-            }
+            checkInterrupted();
 
             String[][] table = perFile.calcTable(rowsPerFile);
             String outText = TextUtil.showTextTable(header, table, align);
@@ -139,13 +140,14 @@ public class CalcMatchStatistics extends LongProcessThread {
         Statistics.writeStat(fn, text);
     }
 
-    MatchStatCounts calcTotal(boolean outData) {
+    MatchStatCounts calcTotal(boolean outData) throws InterruptedException {
         MatchStatCounts result = new MatchStatCounts(true);
 
         final List<SourceTextEntry> untranslatedEntries = new ArrayList<SourceTextEntry>();
 
         // We should iterate all segments from all files in project.
         for (SourceTextEntry ste : Core.getProject().getAllEntries()) {
+            checkInterrupted();
             StatCount count = new StatCount(ste);
             boolean isFirst = alreadyProcessed.add(ste.getSrcText());
             if (Core.getProject().getTranslationInfo(ste).isTranslated()) {
@@ -158,10 +160,6 @@ public class CalcMatchStatistics extends LongProcessThread {
                 // already processed - repetition
                 result.addRepetition(count);
                 entryProcessed();
-            }
-
-            if (isStopped) {
-                return null;
             }
         }
 
@@ -185,7 +183,7 @@ public class CalcMatchStatistics extends LongProcessThread {
         return result;
     }
 
-    MatchStatCounts forFile(IProject.FileInfo fi) {
+    MatchStatCounts forFile(IProject.FileInfo fi) throws InterruptedException {
         MatchStatCounts result = new MatchStatCounts(false);
 
         Set<String> alreadyProcessed = new HashSet<String>();
@@ -194,6 +192,7 @@ public class CalcMatchStatistics extends LongProcessThread {
 
         // We should iterate all segments from file.
         for (SourceTextEntry ste : fi.entries) {
+            checkInterrupted();
             StatCount count = new StatCount(ste);
             boolean isFirst = alreadyProcessed.add(ste.getSrcText());
             if (Core.getProject().getTranslationInfo(ste).isTranslated()) {
@@ -213,14 +212,11 @@ public class CalcMatchStatistics extends LongProcessThread {
                     continue; // this file
                 }
                 for (SourceTextEntry steo : fiOther.entries) {
+                    checkInterrupted();
                     if (steo.getSrcText().equals(ste.getSrcText())) {
                         result.addRepetitionFromOtherFiles(count);
                     }
                 }
-            }
-
-            if (isStopped) {
-                return null;
             }
         }
 
@@ -241,8 +237,10 @@ public class CalcMatchStatistics extends LongProcessThread {
      * 
      * Similarity calculates between tokens tokenized by ITokenizer.tokenizeAllExactly() (adjustedScore)
      */
-    void calcSimilarity(List<SourceTextEntry> untranslatedEntries, MatchStatCounts counts) {
+    void calcSimilarity(List<SourceTextEntry> untranslatedEntries, MatchStatCounts counts)
+            throws InterruptedException {
         for (SourceTextEntry ste : untranslatedEntries) {
+            checkInterrupted();
             String srcNoXmlTags = ste.getSrcText();
             for (ProtectedPart pp : ste.getProtectedParts()) {
                 srcNoXmlTags = srcNoXmlTags.replace(pp.getTextInSourceSegment(),
@@ -253,7 +251,7 @@ public class CalcMatchStatistics extends LongProcessThread {
             try {
                 nears = finder.search(Core.getProject(), srcNoXmlTags, true, false, new IStopped() {
                     public boolean isStopped() {
-                        return isStopped;
+                        return isInterrupted();
                     }
                 });
             } catch (FindMatches.StoppedException ex) {
@@ -276,9 +274,6 @@ public class CalcMatchStatistics extends LongProcessThread {
             StatCount count = new StatCount(ste);
             counts.addForPercents(maxSimilarity, count);
 
-            if (isStopped) {
-                return;
-            }
             entryProcessed();
         }
     }

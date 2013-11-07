@@ -31,9 +31,13 @@ package org.omegat.core.threads;
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
 public class LongProcessThread extends Thread {
-    protected boolean isStopped = false;
-
     public void fin() {
-        isStopped = true;
+        interrupt();
+    }
+
+    public void checkInterrupted() throws InterruptedException {
+        if (isInterrupted()) {
+            throw new InterruptedException();
+        }
     }
 }

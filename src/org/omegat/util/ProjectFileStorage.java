@@ -7,7 +7,7 @@
                2008 Didier Briel, Alex Buloichik
                2009 Didier Briel
                2012 Didier Briel, Aaron Madlon-Kay
-               2013 Aaron Madlon-Kay
+               2013 Aaron Madlon-Kay, Guido Leenders
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -51,6 +51,7 @@ import org.omegat.filters2.master.PluginUtils;
  * @author Didier Briel
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Aaron Madlon-Kay
+ * @author Guido Leenders
  */
 public class ProjectFileStorage {
 
@@ -266,17 +267,35 @@ public class ProjectFileStorage {
             File abs = new File(absolutePath).getCanonicalFile();
             File root = new File(m_root).getCanonicalFile();
             String prefix = new String();
-            for (int i = 0; i < 2; i++) {
+            //
+            // Try to derive the absolutePath as a relative path
+            // from root.
+            // First test whether the exact match is possible.
+            // Then on each try, one folder is moved up from the root.
+            //
+            // Currently, maximum MAX_PARENT_DIRECTORIES_ABS2REL levels up.
+            // More than these directory levels different seems to be that the paths
+            // were not intended to be related.
+            //
+            for (int i = 0; i <= OConsts.MAX_PARENT_DIRECTORIES_ABS2REL; i++) {
+                //
                 // File separator added to prevent "/MyProject EN-FR/"
-                // to be undesrtood as being inside "/MyProject/" [1879571]
-                if ((abs.getPath() + File.separator).startsWith(root.getPath() + File.separator)) {
-                    res = prefix + abs.getPath().substring(root.getPath().length());
-                    if (res.startsWith(File.separator))
+                // to be understood as being inside "/MyProject/" [1879571]
+                //
+                 if ((abs.getPath() + File.separator).startsWith(root.getPath() + File.separator)) {
+                     res = prefix + abs.getPath().substring(root.getPath().length());
+                     if (res.startsWith(File.separator))
                         res = res.substring(1);
                     break;
                 } else {
                     root = root.getParentFile();
                     prefix += File.separator + "..";
+                    //
+                    // There are no more parent paths.
+                    //
+                    if (root == null) {
+                      break;
+                    }
                 }
             }
             return res.replace(File.separatorChar, '/');

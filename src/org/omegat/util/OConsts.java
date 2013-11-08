@@ -6,6 +6,7 @@
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
                2007 Zoltan Bartko
                2009 Didier Briel
+               2013 Guido Leenders
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -40,6 +41,7 @@ import java.io.File;
  * @author Maxym Mykhalchuk
  * @author Zoltan Bartko (bartkozoltan@bartkozoltan.com)
  * @author Didier Briel
+ * @author Guido Leenders
  */
 public class OConsts {
 
@@ -163,6 +165,15 @@ public class OConsts {
      */
     public static final int READ_AHEAD_LIMIT = 65536;
 
+    /**
+     * The maximum level of parent directories considered a file related to
+     * a project can be rewritten in terms of a path relative to an absolute path.
+     *
+     * Files related to a project includes glossaries, which may be located outside
+     * of the project folder.
+     */
+    public static final int MAX_PARENT_DIRECTORIES_ABS2REL = 5;
+    
     /**
      * The name of the OmegaT Jar file. It is used to calculate the installation
      * directory.

@@ -345,6 +345,7 @@ public class MainWindowMenu implements ActionListener, MenuListener, IMainMenu {
         viewModificationInfoMenu.setIcon(getViewMenuMarkBGIcon(null));
 
         toolsMenu.add(toolsValidateTagsMenuItem = createMenuItem("TF_MENU_TOOLS_VALIDATE"));
+        toolsMenu.add(toolsSingleValidateTagsMenuItem = createMenuItem("TF_MENU_TOOLS_SINGLE_VALIDATE"));
         toolsMenu
                 .add(toolsShowStatisticsStandardMenuItem = createMenuItem("TF_MENU_TOOLS_STATISTICS_STANDARD"));
         toolsMenu
@@ -580,8 +581,9 @@ public class MainWindowMenu implements ActionListener, MenuListener, IMainMenu {
                 gotoMenu, gotoNextSegmentMenuItem, gotoNextUntranslatedMenuItem, gotoPreviousSegmentMenuItem,
                 gotoSegmentMenuItem, gotoNextNoteMenuItem, gotoPreviousNoteMenuItem,
 
-                viewFileListMenuItem, toolsValidateTagsMenuItem, toolsShowStatisticsStandardMenuItem,
-                toolsShowStatisticsMatchesMenuItem, toolsShowStatisticsMatchesPerFileMenuItem };
+                viewFileListMenuItem, toolsValidateTagsMenuItem, toolsSingleValidateTagsMenuItem,
+                toolsShowStatisticsStandardMenuItem, toolsShowStatisticsMatchesMenuItem,
+                toolsShowStatisticsMatchesPerFileMenuItem };
 
         for (JMenuItem item : itemsToSwitchOff) {
             item.setEnabled(!isProjectOpened);
@@ -693,6 +695,7 @@ public class MainWindowMenu implements ActionListener, MenuListener, IMainMenu {
     JMenuItem titleCaseMenuItem;
     JMenu toolsMenu;
     JMenuItem toolsValidateTagsMenuItem;
+    JMenuItem toolsSingleValidateTagsMenuItem;
     JMenuItem toolsShowStatisticsStandardMenuItem;
     JMenuItem toolsShowStatisticsMatchesMenuItem;
     JMenuItem toolsShowStatisticsMatchesPerFileMenuItem;

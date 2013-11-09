@@ -617,6 +617,16 @@ public class MainWindowMenuHandler {
         Core.getTagValidation().displayTagValidationErrors(Core.getTagValidation().listInvalidTags(), null);
     }
 
+    public void toolsSingleValidateTagsMenuItemActionPerformed() {
+        String midName = Core.getEditor().getCurrentFile();
+        List<ErrorReport> stes = null;
+        if (!StringUtil.isEmpty(midName)) {
+            String sourcePattern = StaticUtils.escapeNonRegex(midName);
+            stes = Core.getTagValidation().listInvalidTags(sourcePattern);
+        }
+        Core.getTagValidation().displayTagValidationErrors(stes, null);
+    }
+
     /**
      * Identify all the placeholders in the source text and automatically inserts them into the target text.
      */

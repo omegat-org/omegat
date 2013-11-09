@@ -22,9 +22,9 @@
 It gives the same information as the match statistics for every file,
 plus the total at the end, with the repetitions being split in two 
 lines: 
-"Repetitions within this file" lists repetition for which the first 
+"Repetitions within this file" lists repetitions for which the first 
 occurence is in this file.
-"Repetitions from other files" list repetition for which the first 
+"Repetitions from other files" list repetitions for which the first 
 occurence is in a previous file in the list.
 
   Bug fixes:

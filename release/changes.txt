@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 3.0.7 
 ----------------------------------------------------------------------
-   4 Enhancements
+   5 Enhancements
    1 Bug fix
    1 Localisation update
 ----------------------------------------------------------------------
@@ -11,6 +11,9 @@
 
   - Keep relative addressing in *.project when possible
   https://sourceforge.net/p/omegat/feature-requests/734/
+
+  - Validate tags: constrain to file
+  https://sourceforge.net/p/omegat/feature-requests/669/
 
   Other enhancements:
   

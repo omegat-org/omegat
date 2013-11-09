@@ -56,7 +56,7 @@ public class MatchStatCounts {
     }
 
     public void addExact(StatCount count) {
-        counts[1].add(count);
+        counts[getRowByPercent(Statistics.PERCENT_EXACT_MATCH)].add(count);
     }
 
     public void addForPercents(int percent, StatCount count) {
@@ -71,10 +71,7 @@ public class MatchStatCounts {
      * @return row index
      */
     private int getRowByPercent(int percent) {
-        if (percent == Statistics.PERCENT_REPETITIONS) {
-            // repetitions
-            return 0;
-        } else if (percent == Statistics.PERCENT_EXACT_MATCH) {
+        if (percent == Statistics.PERCENT_EXACT_MATCH) {
             // exact match
             return baseForPercents;
         } else if (percent >= 95) {

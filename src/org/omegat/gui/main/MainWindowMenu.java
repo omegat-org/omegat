@@ -581,7 +581,7 @@ public class MainWindowMenu implements ActionListener, MenuListener, IMainMenu {
                 gotoSegmentMenuItem, gotoNextNoteMenuItem, gotoPreviousNoteMenuItem,
 
                 viewFileListMenuItem, toolsValidateTagsMenuItem, toolsShowStatisticsStandardMenuItem,
-                toolsShowStatisticsMatchesMenuItem };
+                toolsShowStatisticsMatchesMenuItem, toolsShowStatisticsMatchesPerFileMenuItem };
 
         for (JMenuItem item : itemsToSwitchOff) {
             item.setEnabled(!isProjectOpened);

@@ -117,13 +117,17 @@ public class CalcMatchStatistics extends LongProcessThread {
     }
 
     void calcPerFile() throws InterruptedException {
+        int fileNumber = 0;
         for (IProject.FileInfo fi : Core.getProject().getProjectFiles()) {
+            fileNumber++;
+            
             MatchStatCounts perFile = forFile(fi);
             checkInterrupted();
 
             String[][] table = perFile.calcTable(rowsPerFile);
             String outText = TextUtil.showTextTable(header, table, align);
-            callback.appendData(StaticUtils.format(OStrings.getString("CT_STATSMATCH_File"), fi.filePath)
+            callback.appendData(StaticUtils.format(OStrings.getString("CT_STATSMATCH_File"), 
+                    new Object[] { fileNumber, fi.filePath  } )
                     + "\n");
             callback.appendData(outText + "\n");
         }

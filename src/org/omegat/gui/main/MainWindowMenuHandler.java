@@ -349,8 +349,9 @@ public class MainWindowMenuHandler {
             return;
 
         String selection = Core.getEditor().getSelectedText();
-        if (selection != null)
-            selection.trim();
+        if (selection != null) {
+            selection = selection.trim();
+        }
 
         SearchWindowController search = new SearchWindowController(mainWindow, selection);
         mainWindow.addSearchWindow(search);

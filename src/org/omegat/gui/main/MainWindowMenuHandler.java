@@ -306,8 +306,9 @@ public class MainWindowMenuHandler {
             return;
 
         String selection = Core.getEditor().getSelectedText();
-        if (selection != null)
-            selection.trim();
+        if (selection != null) {
+            selection = selection.trim();
+        }
 
         SearchWindow search = new SearchWindow(mainWindow, selection);
         search.setVisible(true);

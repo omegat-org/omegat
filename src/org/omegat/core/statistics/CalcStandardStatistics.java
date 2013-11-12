@@ -103,7 +103,7 @@ public class CalcStandardStatistics extends LongProcessThread {
     public void run() {
         IProject p = Core.getProject();
         String result = buildProjectStats(p, null);
-        callback.displayData(result, true);
+        callback.displayData(result);
 
         String internalDir = p.getProjectProperties().getProjectInternal();
         // removing old stats

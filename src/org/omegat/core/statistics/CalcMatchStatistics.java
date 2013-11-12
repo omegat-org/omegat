@@ -94,6 +94,7 @@ public class CalcMatchStatistics extends LongProcessThread {
 
     private ISimilarityCalculator distanceCalculator;
     private FindMatches finder;
+    private StringBuilder textForLog = new StringBuilder();
 
     public CalcMatchStatistics(StatisticsWindow callback, boolean perFile) {
         this.callback = callback;
@@ -112,7 +113,19 @@ public class CalcMatchStatistics extends LongProcessThread {
                 entriesToProcess = Core.getProject().getAllEntries().size();
                 calcTotal(true);
             }
+            callback.finishData();
         } catch (InterruptedException ex) {
+        }
+    }
+
+    void show(String text, boolean append) {
+        if (append) {
+            textForLog.append(text);
+            callback.appendData(text);
+        } else {
+            textForLog.setLength(0);
+            textForLog.append(text);
+            callback.displayData(text);
         }
     }
 
@@ -126,23 +139,22 @@ public class CalcMatchStatistics extends LongProcessThread {
 
             String[][] table = perFile.calcTable(rowsPerFile);
             String outText = TextUtil.showTextTable(header, table, align);
-            callback.appendData(StaticUtils.format(OStrings.getString("CT_STATSMATCH_File"), 
+            show(StaticUtils.format(OStrings.getString("CT_STATSMATCH_File"), 
                     new Object[] { fileNumber, fi.filePath  } )
-                    + "\n");
-            callback.appendData(outText + "\n");
+                    + "\n", true);
+            show(outText + "\n", true);
         }
 
         MatchStatCounts total = calcTotal(false);
 
-        callback.appendData(OStrings.getString("CT_STATSMATCH_FileTotal") + "\n");
+        show(OStrings.getString("CT_STATSMATCH_FileTotal") + "\n", true);
         String[][] table = total.calcTable(rowsTotal);
         String outText = TextUtil.showTextTable(header, table, align);
-        callback.appendData(outText + "\n");
+        show(outText + "\n", true);
 
-        String text = callback.finishData();
         String fn = Core.getProject().getProjectProperties().getProjectInternal()
                 + OConsts.STATS_MATCH_PER_FILE_FILENAME;
-        Statistics.writeStat(fn, text);
+        Statistics.writeStat(fn, textForLog.toString());
     }
 
     MatchStatCounts calcTotal(boolean outData) throws InterruptedException {
@@ -173,7 +185,7 @@ public class CalcMatchStatistics extends LongProcessThread {
         if (outData) {
             String[][] table = result.calcTableWithoutPercentage(rowsTotal);
             String outText = TextUtil.showTextTable(header, table, align);
-            callback.displayData(outText, false);
+            show(outText, false);
         }
 
         calcSimilarity(untranslatedEntries, result);
@@ -181,7 +193,7 @@ public class CalcMatchStatistics extends LongProcessThread {
         if (outData) {
             String[][] table = result.calcTable(rowsTotal);
             String outText = TextUtil.showTextTable(header, table, align);
-            callback.displayData(outText, true);
+            show(outText, false);
             String fn = Core.getProject().getProjectProperties().getProjectInternal()
                     + OConsts.STATS_MATCH_FILENAME;
             Statistics.writeStat(fn, outText);

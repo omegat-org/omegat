@@ -138,16 +138,10 @@ public class StatisticsWindow extends JDialog {
         });
     }
 
-    public void displayData(final String result, final boolean end) {
+    public void displayData(final String result) {
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
-                if (end) {
-                    progressBar.setValue(100);
-                    progressBar.setString("");
-                    progressBar.setVisible(false);
-                }
                 output.setText(result);
-                output.setCaretPosition(0);
             }
         });
     }
@@ -160,7 +154,7 @@ public class StatisticsWindow extends JDialog {
         });
     }
 
-    public String finishData() {
+    public void finishData() {
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
                 progressBar.setValue(100);
@@ -169,6 +163,5 @@ public class StatisticsWindow extends JDialog {
                 output.setCaretPosition(0);
             }
         });
-        return output.getText();
     }
 }

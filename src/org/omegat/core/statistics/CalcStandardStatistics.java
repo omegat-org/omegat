@@ -104,6 +104,7 @@ public class CalcStandardStatistics extends LongProcessThread {
         IProject p = Core.getProject();
         String result = buildProjectStats(p, null);
         callback.displayData(result);
+        callback.finishData();
 
         String internalDir = p.getProjectProperties().getProjectInternal();
         // removing old stats

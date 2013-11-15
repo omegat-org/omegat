@@ -281,9 +281,6 @@ OmegaT は以下に示すライブラリを使用しています。
   morfologik-*.jar（Morfologik ライセンス）
   segment-1.4.1.jar（Segment ライセンス）
   pdfbox-app-1.8.1.jar（Apache ライセンス 2.0）
-  Fontbox-0.1.0.jar and JempBox-0.2.0.jar（Fontbox ライセンス）
-  icu4j-51_1.jar（ICU4J ライセンス）
-
 
 ==============================================================================
  5.  バグかな？と思ったら

@@ -27,7 +27,7 @@
 
     <para>This adds a new submenu<guisubmenu> Tools &gt;
     </guisubmenu><guisubmenu>Scripting.</guisubmenu> Below the
-    <guisubmenu>Scripting</guisubmenu> submenu , there's five place holders
+    <guisubmenu>Scripting</guisubmenu> submenu , there's 12 place holders
     available for scripts. Clicking <guisubmenu>Scripting</guisubmenu> opens
     the Scripting dialog:<screenshot>
         <screeninfo>Scripting dialog</screeninfo>
@@ -52,7 +52,7 @@
 
     <itemizedlist>
       <listitem>
-        <para>Right-click on a button from "&lt;1&gt;" to "&lt;5&gt;" in the
+        <para>Right-click on a button from "&lt;1&gt;" to "&lt;12&gt;" in the
         bottom panel and select "Add". In the above example, two scripts
         (position 1 and 2) have already been added.</para>
       </listitem>
@@ -63,7 +63,7 @@
         <para>When you left-click on the number, the selected script will run.
         You can start the selected macros from the main menu as well by using
         their entries in the <guisubmenu>Tools </guisubmenu>menu or by
-        pressing<keycap> Ctrl+Alt+F#</keycap> (# 1 to 5).</para>
+        pressing<keycap> Ctrl+Alt+F#</keycap> (# 1 to 12).</para>
       </listitem>
     </itemizedlist>
 

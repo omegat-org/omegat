@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 3.0.7 
 ----------------------------------------------------------------------
-   5 Enhancements
+   6 Enhancements
    1 Bug fix
    1 Localisation update
 ----------------------------------------------------------------------
@@ -29,6 +29,9 @@ lines:
 occurence is in this file.
 "Repetitions from other files" list repetitions for which the first 
 occurence is in a previous file in the list.
+
+  - When Ctrl+F (Cmd+F) is used in the search window, the focus goes
+back to the search field
 
   Bug fixes:
 

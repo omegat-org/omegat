@@ -90,6 +90,7 @@ import org.omegat.gui.main.MainWindow;
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
+import org.omegat.util.StaticUtils;
 import org.omegat.util.gui.UIThreadsUtil;
 import org.openide.awt.Mnemonics;
 
@@ -199,7 +200,6 @@ public class ProjectFrame extends JFrame {
         getRootPane().getActionMap().put("ESCAPE", escapeAction);
 
         Mnemonics.setLocalizedText(m_closeButton, OStrings.getString("BUTTON_CLOSE"));
-        setTitle(OStrings.getString("PF_WINDOW_TITLE"));
 
         statLabel = new JTextArea();
         statLabel.setFont(getFont());
@@ -374,6 +374,7 @@ public class ProjectFrame extends JFrame {
         }
 
         uiUpdateImportButtonStatus();
+        setTitle(StaticUtils.format(OStrings.getString("PF_WINDOW_TITLE"), files.size()));
     }
 
     private void buildTotalTableLayout() {

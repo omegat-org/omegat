@@ -39,7 +39,7 @@ back to the search field
 remained displayed at the bottom of the window
 
   - In external TMXs, beginning <it> tags had a trailing '/' if
-if the option "Use XML for standalone tags was set". This was wrong
+if the option "Use XML for standalone tags" was set. This was wrong
 as beginning <it> tags are not standalone tags, but opening tags.
 
   Localisation updates:

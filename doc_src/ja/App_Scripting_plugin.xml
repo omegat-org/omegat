@@ -16,7 +16,7 @@
 
     <para>OmegaT 用のスクリプト プラグインは、<ulink url="http://sourceforge.net/projects/omegat-plugins/files">OmegaT プラグインのダウンロードサイト</ulink>から入手できます。Zip 圧縮ファイルを解凍して、展開されたすべてのファイルを「plugins」フォルダーに移動してください。「plugins」フォルダーは通常、OmegaT のインストール先フォルダー（OmegaT.jar ファイルを含む）の配下にあります。もし「plugins」フォルダーが見当たらなければ、先にフォルダーを作成してください。</para>
 
-    <para>インストールが完了すると、<guisubmenu>［ツール］</guisubmenu>メニューに新たに<guisubmenu>［スクリプト...］</guisubmenu>サブメニューが追加されます。また<guisubmenu>［スクリプト...］</guisubmenu>サブメニューの下には、スクリプト用の五つのプレースホルダーも追加されます。<guisubmenu>［スクリプト...］</guisubmenu> をクリックすると、スクリプト ダイアログが開きます：<screenshot> <screeninfo>スクリプト ダイアログ</screeninfo> <mediaobject> <imageobject> <imagedata fileref="images/ScriptingDialog.png"/> </imageobject> </mediaobject> </screenshot></para>
+    <para>インストールが完了すると、<guisubmenu>［ツール］</guisubmenu>メニューに新たに<guisubmenu>［スクリプト...］</guisubmenu>サブメニューが追加されます。また<guisubmenu>［スクリプト...］</guisubmenu>サブメニューの下には、スクリプト用の 12 のプレースホルダーも追加されます。<guisubmenu>［スクリプト...］</guisubmenu> をクリックすると、スクリプト ダイアログが開きます：<screenshot> <screeninfo>スクリプト ダイアログ</screeninfo> <mediaobject> <imageobject> <imagedata fileref="images/ScriptingDialog.png"/> </imageobject> </mediaobject> </screenshot></para>
 
     <para>スクリプト ダイアログ上では、既存のスクリプトをテキスト欄に読み込んだり、それをいま開いているプロジェクトに対して実行したりできます。スクリプトをカスタマイズする手順は、次の通りです：</para>
 
@@ -28,13 +28,13 @@
 
     <itemizedlist>
       <listitem>
-        <para>下部にある「1」から「5」のどれかのボタンの上で右クリックし、［スクリプトを設定］を選びます。上の画像では、２つのスクリプトがすでに（ボタン「&lt;1&gt;」と「&lt;2&gt;」に）設定済みです。</para>
+        <para>下部にある「1」から「12」のどれかのボタンの上で右クリックし、［スクリプトを設定］を選びます。上の画像では、２つのスクリプトがすでに（ボタン「&lt;1&gt;」と「&lt;2&gt;」に）設定済みです。</para>
       </listitem>
     </itemizedlist>
 
     <itemizedlist>
       <listitem>
-        <para>数値ボタンを左クリックすると、そこに設定されているスクリプトを実行できます。また<guisubmenu>［ツール］</guisubmenu>メニューからスクリプトを選んだり、割り当てられたショートカットキー <keycap>Ctrl+Alt+F#</keycap>（# は 1 から 5）を使うことでも、同じようにスクリプトを実行できます。</para>
+        <para>数値ボタンを左クリックすると、そこに設定されているスクリプトを実行できます。また<guisubmenu>［ツール］</guisubmenu>メニューからスクリプトを選んだり、割り当てられたショートカットキー <keycap>Ctrl+Alt+F#</keycap>（# は 1 から 12）を使うことでも、同じようにスクリプトを実行できます。</para>
       </listitem>
     </itemizedlist>
 

@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 3.0.7 
 ----------------------------------------------------------------------
-   6 Enhancements
+   7 Enhancements
    2 Bug fixes
    1 Localisation update
 ----------------------------------------------------------------------
@@ -14,6 +14,9 @@
 
   - Validate tags: constrain to file
   https://sourceforge.net/p/omegat/feature-requests/669/
+
+  - List number of files in project
+  https://sourceforge.net/p/omegat/feature-requests/912/
 
   Other enhancements:
   

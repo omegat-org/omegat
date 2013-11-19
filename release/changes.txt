@@ -2,7 +2,7 @@
  OmegaT 3.0.7 
 ----------------------------------------------------------------------
    6 Enhancements
-   1 Bug fix
+   2 Bug fixes
    1 Localisation update
 ----------------------------------------------------------------------
 3.0.7 upate 1 vs. 3.0.6
@@ -37,6 +37,10 @@ back to the search field
 
   - After creating a new project, the message "Loading TMX files..."
 remained displayed at the bottom of the window
+
+  - In external TMXs, beginning <it> tags had a trailing '/' if
+if the option "Use XML for standalone tags was set". This was wrong
+as beginning <it> tags are not standalone tags, but opening tags.
 
   Localisation updates:
 

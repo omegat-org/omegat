@@ -449,10 +449,6 @@ public class TMXReader2 {
                     tagN = inlineTagHandler.endOTHER();
                     if ("end".equals(inlineTagHandler.getCurrentPos())) {
                         slashBefore = true;
-                    } else {
-                        if (useSlash) {
-                            slashAfter = true;
-                        }
                     }
                 } else if ("ph".equals(eEnd.getName().getLocalPart())) {
                     if (tagName != 0) {

@@ -47,7 +47,7 @@ as beginning <it> tags are not standalone tags, but opening tags.
 
   Localisation updates:
 
-  - Japanese localisation updated to 3.0.6 update 1 (UI)
+  - Japanese localisation updated to 3.0.7 (UI, documentation)
 
 ----------------------------------------------------------------------
  OmegaT 3.0.6

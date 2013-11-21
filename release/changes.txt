@@ -5,7 +5,7 @@
    2 Bug fixes
    1 Localisation update
 ----------------------------------------------------------------------
-3.0.7 upate 1 vs. 3.0.6
+3.0.7 vs. 3.0.6
 
   Implemented requests:
 

@@ -2,7 +2,7 @@
  OmegaT 2.6.3 update 5
 ----------------------------------------------------------------------
    1 Enhancement
-   5 Bug fixes
+   6 Bug fixes
    0 Localisation update
 ----------------------------------------------------------------------
 2.6.3 update 5 vs. 2.6.3 update 4
@@ -28,6 +28,8 @@
 
   - When opening the Search window with a search expression, the leading and
 trailing spaces were not removed
+
+  - Workaround for slowness in the Editor with Java 1.7_045
 
 ----------------------------------------------------------------------
  OmegaT 2.6.3 update 4

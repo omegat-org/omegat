@@ -1,1 +1,95 @@
-<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>付録E LanguageTool プラグイン</title><link rel="stylesheet" type="text/css" href="OmegaT.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="index.html" title="OmegaT 3.0 - 取扱説明書"><link rel="up" href="index.html" title="OmegaT 3.0 - 取扱説明書"><link rel="prev" href="appendix.TokenizerPlugin.inOmegaT.html" title="付録D トークナイザー プラグイン"><link rel="next" href="appendix.ScriptingPlugin.inOmegaT.html" title="付録F スクリプト プラグイン"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">付録E LanguageTool プラグイン</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="appendix.TokenizerPlugin.inOmegaT.html">戻る</a>&nbsp;</td><th width="60%" align="center">&nbsp;</th><td width="20%" align="right">&nbsp;<a accesskey="n" href="appendix.ScriptingPlugin.inOmegaT.html">次へ</a></td></tr></table><hr></div><div class="appendix"><div class="titlepage"><div><div><h1 class="title"><a name="appendix.LanguageToolPlugin.inOmegaT"></a>付録E LanguageTool プラグイン<a class="indexterm" name="d0e10815"></a></h1></div></div></div><div class="toc"><dl class="toc"><dt><span class="section"><a href="appendix.LanguageToolPlugin.inOmegaT.html#d0e10820">1. はじめに</a></span></dt><dt><span class="section"><a href="appendix.LanguageToolPlugin.inOmegaT.html#d0e10837">2. インストールと使い方</a></span></dt></dl></div><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="d0e10820"></a>1. はじめに</h2></div></div></div><p>LanguageTool はオープンソースのスタイルと文法チェックツールです。英語、フランス語、ドイツ語、ポーランド語、オランダ語、ルーマニア語など数多くの言語に対応しています。詳しくは<a class="ulink" href="http://www.languagetool.org/" target="_top">対応する言語の一覧</a>を参照してください。</p><p>LanguageTool は、単純な綴り確認機能では検出できないような間違いを検出するためのプログラムです。たとえば、there と their、no と now の取り違えなどが該当します。また、ある種の文法上の間違いも検出できます。綴り確認機能は含みません。LanguageTool は、言語固有の設定ファイルであらかじめ定義された規則に基づいて、間違いを見つけます。</p><div class="figure"><a name="d0e10830"></a><p class="title"><b>図E.1 LanguageTool を OmegaT に組み込む</b></p><div class="figure-contents"><div class="screenshot"><div class="mediaobject"><img src="images/LanguageToolExample.png" alt="LanguageTool を OmegaT に組み込む"></div></div></div></div><br class="figure-break"></div><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="d0e10837"></a>2. インストールと使い方</h2></div></div></div><p>OmegaT 用の LanguageTool プラグインは、<a class="ulink" href="http://sourceforge.net/projects/omegat-plugins/files" target="_top">OmegaT プラグインのダウンロードサイト</a>から入手できます。Zip 圧縮ファイルを解凍して、展開されたすべてのファイルを「plugins」フォルダーに移動してください。「plugins」フォルダーは通常、OmegaT のインストール先フォルダー（OmegaT.jar ファイルを含む）の配下にあります。もし「plugins」フォルダーが見当たらなければ、先にフォルダーを作成してください。</p><p>これでインストールは完了です。<span class="guimenuitem">［設定］→［言語チェッカー］</span>にチェックを入れておくと、OmegaT はプラグインを自動的に利用します。プロジェクトの原文と訳文の言語に応じて、規則が（もしあれば）適用されます。規則が適用されると、編集ウィンドウ上の対応する語句には青い下線が引かれます（上の画像の「<span class="emphasis"><em>also</em></span>」と「<span class="emphasis"><em>I didn't do nothing</em></span>」に注目してください）。下線が引かれた語句の上にマウスカーソルをかざすと、説明が表示されます。</p></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="appendix.TokenizerPlugin.inOmegaT.html">戻る</a>&nbsp;</td><td width="20%" align="center">&nbsp;</td><td width="40%" align="right">&nbsp;<a accesskey="n" href="appendix.ScriptingPlugin.inOmegaT.html">次へ</a></td></tr><tr><td width="40%" align="left" valign="top">付録D トークナイザー プラグイン&nbsp;</td><td width="20%" align="center"><a accesskey="h" href="index.html">ホーム</a></td><td width="40%" align="right" valign="top">&nbsp;付録F スクリプト プラグイン</td></tr></table></div></body></html>
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <title>付録E LanguageTool プラグイン</title>
+      <link rel="stylesheet" type="text/css" href="OmegaT.css">
+      <meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
+      <link rel="home" href="index.html" title="OmegaT 3.0 - 取扱説明書">
+      <link rel="up" href="index.html" title="OmegaT 3.0 - 取扱説明書">
+      <link rel="prev" href="appendix.TokenizerPlugin.inOmegaT.html" title="付録D トークナイザー プラグイン">
+      <link rel="next" href="appendix.ScriptingPlugin.inOmegaT.html" title="付録F スクリプト プラグイン">
+   </head>
+   <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+      <div class="navheader">
+         <table width="100%" summary="Navigation header">
+            <tr>
+               <th colspan="3" align="center">付録E LanguageTool プラグイン</th>
+            </tr>
+            <tr>
+               <td width="20%" align="left"><a accesskey="p" href="appendix.TokenizerPlugin.inOmegaT.html">戻る</a>&nbsp;
+               </td>
+               <th width="60%" align="center">&nbsp;</th>
+               <td width="20%" align="right">&nbsp;<a accesskey="n" href="appendix.ScriptingPlugin.inOmegaT.html">次へ</a></td>
+            </tr>
+         </table>
+         <hr>
+      </div>
+      <div class="appendix">
+         <div class="titlepage">
+            <div>
+               <div>
+                  <h1 class="title"><a name="appendix.LanguageToolPlugin.inOmegaT"></a>付録E LanguageTool プラグイン<a class="indexterm" name="d0e10815"></a></h1>
+               </div>
+            </div>
+         </div>
+         <div class="toc">
+            <dl class="toc">
+               <dt><span class="section"><a href="appendix.LanguageToolPlugin.inOmegaT.html#d0e10820">1. はじめに</a></span></dt>
+               <dt><span class="section"><a href="appendix.LanguageToolPlugin.inOmegaT.html#d0e10837">2. インストールと使い方</a></span></dt>
+            </dl>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e10820"></a>1. はじめに
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>LanguageTool はオープンソースのスタイルと文法チェックツールです。英語、フランス語、ドイツ語、ポーランド語、オランダ語、ルーマニア語など数多くの言語に対応しています。詳しくは<a class="ulink" href="http://www.languagetool.org/" target="_top">対応する言語の一覧</a>を参照してください。
+            </p>
+            <p>LanguageTool は、単純な綴り確認機能では検出できないような間違いを検出するためのプログラムです。たとえば、there と their、no と now の取り違えなどが該当します。また、ある種の文法上の間違いも検出できます。綴り確認機能は含みません。LanguageTool
+               は、言語固有の設定ファイルであらかじめ定義された規則に基づいて、間違いを見つけます。
+            </p>
+            <div class="figure"><a name="d0e10830"></a><p class="title"><b>図E.1 LanguageTool を OmegaT に組み込む</b></p>
+               <div class="figure-contents">
+                  <div class="screenshot">
+                     <div class="mediaobject"><img src="images/LanguageToolExample.png" alt="LanguageTool を OmegaT に組み込む"></div>
+                  </div>
+               </div>
+            </div><br class="figure-break"></div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e10837"></a>2. インストールと使い方
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>OmegaT 用の LanguageTool プラグインは、<a class="ulink" href="http://sourceforge.net/projects/omegat-plugins/files" target="_top">OmegaT プラグインのダウンロードサイト</a>から入手できます。Zip 圧縮ファイルを解凍して、展開されたすべてのファイルを「plugins」フォルダーに移動してください。「plugins」フォルダーは通常、OmegaT のインストール先フォルダー（OmegaT.jar ファイルを含む）の配下にあります。もし「plugins」フォルダーが見当たらなければ、先にフォルダーを作成してください。
+            </p>
+            <p>これでインストールは完了です。<span class="guimenuitem">［設定］→［言語チェッカー］</span>にチェックを入れておくと、OmegaT はプラグインを自動的に利用します。プロジェクトの原文と訳文の言語に応じて、規則が（もしあれば）適用されます。規則が適用されると、編集ウィンドウ上の対応する語句には青い下線が引かれます（上の画像の「<span class="emphasis"><em>also</em></span>」と「<span class="emphasis"><em>I didn't do nothing</em></span>」に注目してください）。下線が引かれた語句の上にマウスカーソルをかざすと、説明が表示されます。
+            </p>
+         </div>
+      </div>
+      <div class="navfooter">
+         <hr>
+         <table width="100%" summary="Navigation footer">
+            <tr>
+               <td width="40%" align="left"><a accesskey="p" href="appendix.TokenizerPlugin.inOmegaT.html">戻る</a>&nbsp;
+               </td>
+               <td width="20%" align="center">&nbsp;</td>
+               <td width="40%" align="right">&nbsp;<a accesskey="n" href="appendix.ScriptingPlugin.inOmegaT.html">次へ</a></td>
+            </tr>
+            <tr>
+               <td width="40%" align="left" valign="top">付録D トークナイザー プラグイン&nbsp;</td>
+               <td width="20%" align="center"><a accesskey="h" href="index.html">ホーム</a></td>
+               <td width="40%" align="right" valign="top">&nbsp;付録F スクリプト プラグイン</td>
+            </tr>
+         </table>
+      </div>
+   </body>
+</html>

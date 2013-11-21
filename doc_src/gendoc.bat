@@ -3,6 +3,7 @@ call ant -Dlanguage=en all
 call ant -Dlanguage=es all
 call ant -Dlanguage=fr all
 call ant -Dlanguage=gl all
+call ant -Dlanguage=ia all
 call ant -Dlanguage=it all
 call ant -Dlanguage=ja html
 call ant -Dlanguage=nl all

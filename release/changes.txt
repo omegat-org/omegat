@@ -556,10 +556,23 @@ OmegaT failed to load the valid ones
   - Turkish localisation updated to 3.0.0 (UI)
 
 ----------------------------------------------------------------------
+ OmegaT 2.6.3 update 6
+----------------------------------------------------------------------
+   0 Enhancement
+   1 Bug fix
+   0 Localisation update
+----------------------------------------------------------------------
+2.6.3 update 6 vs. 2.6.3 update 5
+
+  Bug fixes: 
+
+  - Workaround for slowness in the Editor with Java 1.7_045
+
+----------------------------------------------------------------------
  OmegaT 2.6.3 update 5
 ----------------------------------------------------------------------
    1 Enhancement
-   6 Bug fixes
+   5 Bug fixes
    0 Localisation update
 ----------------------------------------------------------------------
 2.6.3 update 5 vs. 2.6.3 update 4
@@ -585,8 +598,6 @@ OmegaT failed to load the valid ones
 
   - When opening the Search window with a search expression, the leading and
 trailing spaces were not removed
-
-  - Workaround for slowness in the Editor with Java 1.7_045
 
 ----------------------------------------------------------------------
  OmegaT 2.6.3 update 4

@@ -27,9 +27,11 @@ package org.omegat.core.team;
 import java.io.File;
 import java.net.SocketException;
 import java.util.Collection;
+import java.util.logging.Logger;
 
 import org.omegat.util.Log;
 import org.tmatesoft.svn.core.SVNAuthenticationException;
+import org.tmatesoft.svn.core.SVNCommitInfo;
 import org.tmatesoft.svn.core.SVNDepth;
 import org.tmatesoft.svn.core.SVNErrorCode;
 import org.tmatesoft.svn.core.SVNException;
@@ -54,6 +56,8 @@ import org.tmatesoft.svn.core.wc.SVNWCUtil;
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
 public class SVNRemoteRepository implements IRemoteRepository {
+    private static final Logger LOGGER = Logger.getLogger(SVNRemoteRepository.class.getName());
+
     File baseDirectory;
     SVNClientManager ourClientManager;
     boolean readOnly;
@@ -130,8 +134,9 @@ public class SVNRemoteRepository implements IRemoteRepository {
     public void updateFullProject() throws SocketException, Exception {
         Log.logInfoRB("SVN_START", "update");
         try {
-            ourClientManager.getUpdateClient().doUpdate(baseDirectory, SVNRevision.HEAD, SVNDepth.INFINITY,
+            long rev = ourClientManager.getUpdateClient().doUpdate(baseDirectory, SVNRevision.HEAD, SVNDepth.INFINITY,
                     false, false);
+            Log.logDebug(LOGGER, "SVN updated to revision {0}", rev);
             Log.logInfoRB("SVN_FINISH", "update");
         } catch (SVNAuthenticationException ex) {
             // authentication failed - need to ask username/password
@@ -152,8 +157,9 @@ public class SVNRemoteRepository implements IRemoteRepository {
 
         SVNURL url = SVNURL.parseURIDecoded(repositoryURL);
         try {
-            ourClientManager.getUpdateClient().doCheckout(url, baseDirectory, SVNRevision.HEAD,
+            long rev = ourClientManager.getUpdateClient().doCheckout(url, baseDirectory, SVNRevision.HEAD,
                     SVNRevision.HEAD, SVNDepth.INFINITY, false);
+            Log.logDebug(LOGGER, "SVN checkouted to revision {0}", rev);
             Log.logInfoRB("SVN_FINISH", "checkout");
         } catch (SVNAuthenticationException ex) {
             // authentication failed - need to ask username/password
@@ -167,19 +173,22 @@ public class SVNRemoteRepository implements IRemoteRepository {
 
     public String getBaseRevisionId(File file) throws Exception {
         SVNInfo info = ourClientManager.getWCClient().doInfo(file, SVNRevision.BASE);
+        Log.logDebug(LOGGER, "SVN committed revision for file {0} is {1}", file, info.getCommittedRevision().getNumber());
 
         return Long.toString(info.getCommittedRevision().getNumber());
     }
 
     public void restoreBase(File[] files) throws Exception {
         ourClientManager.getWCClient().doRevert(files, SVNDepth.EMPTY, null);
+        Log.logDebug(LOGGER, "SVN restore base for {0}", (Object) files);
     }
 
     public void download(File[] files) throws SocketException, Exception {
         Log.logInfoRB("SVN_START", "download");
         try {
-            ourClientManager.getUpdateClient().doUpdate(files, SVNRevision.HEAD, SVNDepth.INFINITY, false,
-                    false);
+            long[] revs = ourClientManager.getUpdateClient().doUpdate(files, SVNRevision.HEAD, SVNDepth.INFINITY,
+                    false, false);
+            Log.logDebug(LOGGER, "SVN updated files {0} to revisions {1}", files, revs);
             Log.logInfoRB("SVN_FINISH", "download");
         } catch (SVNException ex) {
             Log.logErrorRB("SVN_ERROR", "download", ex.getMessage());
@@ -195,6 +204,7 @@ public class SVNRemoteRepository implements IRemoteRepository {
         Log.logInfoRB("SVN_START", "reset");
         try {
             // not tested. Can anyone confirm this code?
+            Log.logDebug(LOGGER, "SVN revert all files in {0}", baseDirectory);
             ourClientManager.getWCClient().doRevert(new File[] { baseDirectory }, SVNDepth.INFINITY,
                     (Collection<String>) null);
             Log.logInfoRB("SVN_FINISH", "reset");
@@ -213,8 +223,9 @@ public class SVNRemoteRepository implements IRemoteRepository {
 
         Log.logInfoRB("SVN_START", "upload");
         try {
-            ourClientManager.getCommitClient().doCommit(new File[] { file }, false, commitMessage, null,
-                    null, false, false, SVNDepth.INFINITY);
+            SVNCommitInfo info = ourClientManager.getCommitClient().doCommit(new File[] { file }, false, commitMessage,
+                    null, null, false, false, SVNDepth.INFINITY);
+            Log.logDebug(LOGGER, "SVN committed file {0} into new revision {1}", file, info.getNewRevision());
             Log.logInfoRB("SVN_FINISH", "upload");
         } catch (SVNAuthenticationException ex) {
             // authentication failed - need to ask username/password

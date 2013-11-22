@@ -308,4 +308,22 @@ public class Log {
             LOGGER.log(rec);
         }
     }
+
+    /**
+     * Writes debug message to log(without localization)
+     * 
+     * @param message
+     *            message text
+     * @param parameters
+     *            Parameters for the error message. These are inserted by using
+     *            StaticUtils.format.
+     */
+    public static void logDebug(Logger logger, String message, Object... parameters) {
+        if (logger.isLoggable(Level.FINE)) {
+            LogRecord rec = new LogRecord(Level.FINE, message);
+            rec.setParameters(parameters);
+            rec.setLoggerName(logger.getName());
+            logger.log(rec);
+        }
+    }
 }

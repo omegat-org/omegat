@@ -38,18 +38,16 @@ import java.io.InterruptedIOException;
 import java.io.RandomAccessFile;
 import java.nio.channels.FileChannel;
 import java.nio.channels.FileLock;
-import java.text.Collator;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 import java.util.Stack;
 import java.util.TreeMap;
+import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -107,6 +105,7 @@ import org.xml.sax.SAXParseException;
  * @author Aaron Madlon-Kay
  */
 public class RealProject implements IProject {
+    private static final Logger LOGGER = Logger.getLogger(RealProject.class.getName());
 
     protected final ProjectProperties m_config;
     
@@ -713,11 +712,13 @@ public class RealProject implements IProject {
         //Writable glossary is also in memory, but 'outside our reach' and may change if we mess with the file on disk.
         //Therefore load glossary in memory from file:
         if (repository.isUnderVersionControl(glossaryFile)) {
+            Log.logDebug(LOGGER, "rebaseProject: glossary file {0} is under version control", glossaryFile);
             //glossary is under version control
             glossaryEntries = GlossaryReaderTSV.read(glossaryFile, true);
             modifiedFiles = new File[]{projectTMXFile, glossaryFile};
             updateGlossary = true;
         } else {
+            Log.logDebug(LOGGER, "rebaseProject: glossary file {0} is not under version control", glossaryFile);
             modifiedFiles = new File[]{projectTMXFile};
             updateGlossary = false;
         }
@@ -727,9 +728,11 @@ public class RealProject implements IProject {
 
         //get revisions of files
         String baseRevTMX = repository.getBaseRevisionId(projectTMXFile);
+        Log.logDebug(LOGGER, "rebaseProject: TMX base revision: {0}", baseRevTMX);
         String baseRevGlossary = null;
         if (updateGlossary) {
             baseRevGlossary = repository.getBaseRevisionId(glossaryFile);
+            Log.logDebug(LOGGER, "rebaseProject: glossary base revision: {0}", baseRevGlossary);
         }
 
         //save current status to file in case we encounter errors.
@@ -796,6 +799,7 @@ public class RealProject implements IProject {
             //go on to restore changes
         }
         String headRevTMX = repository.getBaseRevisionId(projectTMXFile);
+        Log.logDebug(LOGGER, "rebaseProject: TMX head revision: {0}", headRevTMX);
 
         if (headRevTMX.equals(baseRevTMX)) {
             // don't need rebase
@@ -815,6 +819,7 @@ public class RealProject implements IProject {
         }
         if (updateGlossary) {
             String headRevGlossary = repository.getBaseRevisionId(glossaryFile);
+            Log.logDebug(LOGGER, "rebaseProject: glossary head revision: {0}", headRevGlossary);
             if (headRevGlossary.equals(baseRevGlossary)) {
                 // don't need rebase
                 filenameGlossarywithLocalChangesOnHead = filenameGlossarywithLocalChangesOnBase;

@@ -30,6 +30,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Properties;
+import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -74,6 +75,8 @@ import org.omegat.util.gui.DockingUI;
  * @author Martin Fleurke
  */
 public class GITRemoteRepository implements IRemoteRepository {
+    private static final Logger LOGGER = Logger.getLogger(GITRemoteRepository.class.getName());
+
     protected static String LOCAL_BRANCH = "master";
     protected static String REMOTE_BRANCH = "origin/master";
     protected static String REMOTE = "origin";
@@ -111,6 +114,7 @@ public class GITRemoteRepository implements IRemoteRepository {
     }
 
     public void checkoutFullProject(String repositoryURL) throws Exception {
+        Log.logInfoRB("GIT_START", "clone");
         CloneCommand c = Git.cloneRepository();
         c.setURI(repositoryURL);
         c.setDirectory(localDirectory);
@@ -148,6 +152,7 @@ public class GITRemoteRepository implements IRemoteRepository {
             config.setString("core", null, "autocrlf", "input");
         }
         config.save();
+        Log.logInfoRB("GIT_FINISH", "clone");
     }
 
     static public boolean deleteDirectory(File path) {
@@ -166,15 +171,21 @@ public class GITRemoteRepository implements IRemoteRepository {
       }
 
     public boolean isChanged(File file) throws Exception {
+        Log.logInfoRB("GIT_START", "status");
         String relativeFile = FileUtil.computeRelativePath(repository.getWorkTree(), file);
         Status status = new Git(repository).status().call();
-        return status.getModified().contains(relativeFile);
+        Log.logInfoRB("GIT_FINISH", "status");
+        boolean result = status.getModified().contains(relativeFile);
+        Log.logDebug(LOGGER, "GIT modified status of {0} is {1}", relativeFile, result);
+        return result;
     }
 
     public boolean isUnderVersionControl(File file) throws Exception {
         String relativeFile = FileUtil.computeRelativePath(repository.getWorkTree(), file);
         Status status = new Git(repository).status().call();
-        return !status.getUntracked().contains(relativeFile);
+        boolean result = !status.getUntracked().contains(relativeFile);
+        Log.logDebug(LOGGER, "GIT file {0} is under version control: {1}", relativeFile, result);
+        return result;
     }
 
     public void setCredentials(String username, String password, boolean forceSavePlainPassword) {
@@ -193,6 +204,8 @@ public class GITRemoteRepository implements IRemoteRepository {
         Ref remoteBranch = repository.getRef(REMOTE_BRANCH);
         RevCommit headCommit = walk.lookupCommit(localBranch.getObjectId());
         RevCommit upstreamCommit = walk.lookupCommit(remoteBranch.getObjectId());
+        Log.logDebug(LOGGER, "GIT HEAD rev: {0}", headCommit.getName());
+        Log.logDebug(LOGGER, "GIT origin/master rev: {0}", upstreamCommit.getName());
 
         LogCommand cmd = new Git(repository).log().addRange(upstreamCommit, headCommit);
         Iterable<RevCommit> commitsToUse = cmd.call();
@@ -201,11 +214,13 @@ public class GITRemoteRepository implements IRemoteRepository {
             last = commit;
         }
         RevCommit commonBase = last != null ? last.getParent(0) : upstreamCommit;
+        Log.logDebug(LOGGER, "GIT commonBase rev: {0}", commonBase.getName());
         return commonBase.getName();
     }
 
     public void restoreBase(File[] files) throws Exception {
         String baseRevisionId = getBaseRevisionId(files[0]);
+        Log.logDebug(LOGGER, "GIT restore base {0} for {1}", baseRevisionId, (Object) files);
         //undo local changes of specific file.
         CheckoutCommand checkoutCommand = new Git(repository).checkout();
         for (File f: files) {

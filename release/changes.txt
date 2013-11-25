@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 3.0.7 update 1
 ----------------------------------------------------------------------
-   1 Enhancement
+   2 Enhancements
    0 Bug fix
    0 Localisation update
 ----------------------------------------------------------------------
@@ -11,6 +11,11 @@
 
   - Show XLIFF trans-unit note as a comment 
   https://sourceforge.net/p/omegat/feature-requests/803/
+
+  Other enhancements:
+  
+  - New debugging information about team projects available in the logs
+(if org.omegat.level=FINEST is set in logger.properties)
 
 ----------------------------------------------------------------------
  OmegaT 3.0.7 

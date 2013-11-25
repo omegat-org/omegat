@@ -29,6 +29,7 @@ package org.omegat.filters3.xml.xliff;
 
 import java.awt.Dialog;
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -45,11 +46,18 @@ import org.xml.sax.Attributes;
  * Filter for XLIFF files.
  * 
  * @author Didier Briel
+ * @author Aaron Madlon-Kay
  */
 public class XLIFFFilter extends XMLFilter {
 
     private String resname;
     private boolean ignored;
+    private ArrayList<String> groupResname = new ArrayList<String>();
+    private int groupLevel;
+    private String note;
+    private String text;
+    private String entryText;
+    private List<ProtectedPart> protectedParts;
 
     /**
      * Register plugin into OmegaT.
@@ -173,10 +181,19 @@ public class XLIFFFilter extends XMLFilter {
         return result;
     }
 
+    /** 
+     * Support of group and trans-unit resname attribute and trans-unit <note> as comment, based on ResXFilter code
+     */
     @Override
     public void tagStart(String path, Attributes atts) {
-        if (atts != null && path.endsWith("trans-unit")){
-            resname = atts.getValue("resname");
+        if (atts != null) {
+            if (path.endsWith("/group")) {
+            	// <group> only, it can be nested
+            	groupLevel++;
+            	groupResname.add(atts.getValue("resname"));
+            } else if (path.endsWith("trans-unit")) {
+                resname = atts.getValue("resname");
+            }
         }
         if ("/xliff/file/header".equals(path)) {
             ignored = true;
@@ -185,8 +202,40 @@ public class XLIFFFilter extends XMLFilter {
 
     @Override
     public void tagEnd(String path) {
-        if (path.endsWith("trans-unit")){
+        if (path.endsWith("trans-unit/note")) {
+            // <trans-unit> <note>'s only 
+            note = text;
+        } else if (path.endsWith("trans-unit")) {
+            if (entryParseCallback != null) {
+                StringBuffer buf = new StringBuffer();
+		for (int i = 0; i < groupLevel; i++) {
+		    String temp = groupResname.get(i);
+		    if (temp != null) {
+		        buf.append(temp);
+			buf.append(i == (groupLevel - 1) ? '\n' : '\\');
+	            }
+		}
+
+                if (resname != null) {
+                    buf.append(resname);
+                    buf.append('\n');
+                }
+
+                if (note != null) {
+                    buf.append(note);
+                    buf.append('\n');
+                }
+                
+                String comment = buf.length() == 0 ? null : buf.substring(0, buf.length() - 1);
+                entryParseCallback.addEntry(null, entryText, null, false, comment, null, this, protectedParts);
+            }
+
             resname = null;
+            note = null;
+            entryText = null;
+            protectedParts = null;
+        } else if (path.endsWith("/group")) {
+    	    groupResname.remove(--groupLevel);
         }
         if ("/xliff/file/header".equals(path)) {
             ignored = false;
@@ -199,9 +248,15 @@ public class XLIFFFilter extends XMLFilter {
     }
 
     @Override
+    public void text(String text) {
+        this.text = text;
+    }
+
+    @Override
     public String translate(String entry, List<ProtectedPart> protectedParts) {
         if (entryParseCallback != null) {
-            entryParseCallback.addEntry(null, entry, null, false, resname, null, this, protectedParts);
+            entryText = entry;
+            this.protectedParts = protectedParts;
             return entry;
         } else if (entryTranslateCallback != null) {
             String translation = entryTranslateCallback.getTranslation(null, entry, null);

@@ -279,6 +279,7 @@ Code has been contributed by
   Thomas Huriaux
   Hans-Peter Jacobs
   Kyle Katarn
+  Piotr Kulik
   Ibai Lakunza Velasco
   Guido Leenders
   Aaron Madlon-Kay

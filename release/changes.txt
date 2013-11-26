@@ -3,7 +3,7 @@
 ----------------------------------------------------------------------
    2 Enhancements
    0 Bug fix
-   0 Localisation update
+   1 Localisation update
 ----------------------------------------------------------------------
 3.0.7 update 1 vs. 3.0.7
 
@@ -16,6 +16,10 @@
   
   - New debugging information about team projects available in the logs
 (if org.omegat.level=FINEST is set in logger.properties)
+
+  Localisation updates:
+
+  - Italian localisation updated to 3.0.7 (UI, documentation)
 
 ----------------------------------------------------------------------
  OmegaT 3.0.7 

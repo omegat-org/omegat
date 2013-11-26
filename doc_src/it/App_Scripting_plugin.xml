@@ -16,7 +16,7 @@
 
     <para>Il plugin di script per OmegaT è scaricabile dal <ulink url="http://sourceforge.net/projects/omegat-plugins/files">sito di download dei plugin di OmegaT</ulink>. Decomprimere i file e posizionarli nella cartella &quot;plugins&quot; che si trova nella cartella di installazione di OmegaT, ossia quella in cui è presente OmegaT.jar. Se la cartella &quot;plugins&quot; non esiste, crearla.</para>
 
-    <para>Questo aggiunge un nuovo sottomenu <guisubmenu> Strumenti &gt; </guisubmenu><guisubmenu>Azioni di script.</guisubmenu> Nel sottomenu <guisubmenu>Azioni di script</guisubmenu> sono presenti cinque segnaposti disponibili per gli script. Facendo clic su <guisubmenu>Azioni di script</guisubmenu> si apre la finestra di dialogo per le azioni:<screenshot> <screeninfo>finestra di dialogo per le azioni di script</screeninfo> <mediaobject> <imageobject> <imagedata fileref="images/ScriptingDialog.png"/> </imageobject> </mediaobject> </screenshot></para>
+    <para>Questo aggiunge un nuovo sottomenu <guisubmenu> Strumenti &gt; </guisubmenu><guisubmenu>Azioni di script.</guisubmenu> Nel sottomenu <guisubmenu>Azioni di script</guisubmenu> sono presenti dodici segnaposti disponibili per gli script. Facendo clic su <guisubmenu>Azioni di script</guisubmenu> si apre la finestra di dialogo per le azioni:<screenshot> <screeninfo>finestra di dialogo per le azioni di script</screeninfo> <mediaobject> <imageobject> <imagedata fileref="images/ScriptingDialog.png"/> </imageobject> </mediaobject> </screenshot></para>
 
     <para>La finestra delle Azioni di script consente di caricare uno script esistente all'interno dell'area di testo e avviarlo nel progetto attivo aperto. Per personalizzare le funzionalità di script, osservare la procedura seguente:</para>
 
@@ -28,13 +28,13 @@
 
     <itemizedlist>
       <listitem>
-        <para>Fare clic col destro su un pulsante da &quot;&lt;1&gt;&quot; a &quot;&lt;5&gt;&quot; nella parte inferiore del pannello e selezionare &quot;Aggiungi&quot;. Nell'esempio sopra, sono stati già aggiunti due script (posizione 1 e 2).</para>
+        <para>Fare clic col destro su un pulsante da &quot;&lt;1&gt;&quot; a &quot;&lt;12&gt;&quot; nella parte inferiore del pannello e selezionare &quot;Aggiungi&quot;. Nell'esempio sopra, sono stati già aggiunti due script (posizione 1 e 2).</para>
       </listitem>
     </itemizedlist>
 
     <itemizedlist>
       <listitem>
-        <para>Il clic sinistro sul numero farà avviare lo script selezionato. È possibile avviare le macro selezionate sia dal menu principale, sia tramite le voci all'interno del menu <guisubmenu>Strumenti</guisubmenu>, sia premendo <keycap> Ctrl+Alt+F#</keycap> (# 1 a 5).</para>
+        <para>Il clic sinistro sul numero farà avviare lo script selezionato. È possibile avviare le macro selezionate sia dal menu principale, sia tramite le voci all'interno del menu <guisubmenu>Strumenti</guisubmenu>, sia premendo <keycap> Ctrl+Alt+F#</keycap> (# 1 a 12).</para>
       </listitem>
     </itemizedlist>
 

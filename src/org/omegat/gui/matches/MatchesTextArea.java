@@ -39,6 +39,8 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
@@ -97,8 +99,7 @@ public class MatchesTextArea extends EntryInfoThreadPane<List<NearString>> imple
 
     private final List<Integer> delimiters = new ArrayList<Integer>();
     private final List<Integer> sourcePos = new ArrayList<Integer>();
-    private final List<Integer> diffPos = new ArrayList<Integer>();
-    private final List<List<TextRun>> diffInfos = new ArrayList<List<TextRun>>();
+    private final List<Map<Integer, List<TextRun>>> diffInfos = new ArrayList<Map<Integer, List<TextRun>>>();
     private int activeMatch;
 
     private final MainWindow mw;
@@ -136,7 +137,6 @@ public class MatchesTextArea extends EntryInfoThreadPane<List<NearString>> imple
         matches.clear();
         delimiters.clear();
         sourcePos.clear();
-        diffPos.clear();
         diffInfos.clear();
 
         if (newMatches == null) {
@@ -155,7 +155,6 @@ public class MatchesTextArea extends EntryInfoThreadPane<List<NearString>> imple
             MatchesVarExpansion.Result result = template.apply(match, i + 1);
             displayBuffer.append(result.text);
             sourcePos.add(result.sourcePos);
-            diffPos.add(result.diffPos);
             diffInfos.add(result.diffInfo);
 
             if (i < (newMatches.size() - 1))
@@ -386,25 +385,33 @@ public class MatchesTextArea extends EntryInfoThreadPane<List<NearString>> imple
         }
         
         // Apply diff styling to ALL diffs, with colors only for activeMatch
-        for (int i = 0; i < diffPos.size(); i++) {
-            List<TextRun> diffInfo = diffInfos.get(i);
-            if (diffPos.get(i) != -1 && diffInfo != null) {
-                for (TextRun r : diffInfo) {
-                    int tokstart = delimiters.get(i) + diffPos.get(i) + r.start;
-                    switch (r.type) {
-                    case DELETE:
-                        doc.setCharacterAttributes(
-                            tokstart,
-                            r.length,
-                            i == activeMatch ? ATTRIBUTES_DELETED_ACTIVE : ATTRIBUTES_DELETED_INACTIVE,
-                            false);
-                        break;
-                    case INSERT:
-                        doc.setCharacterAttributes(
-                            tokstart,
-                            r.length,
-                            i == activeMatch ? ATTRIBUTES_INSERTED_ACTIVE : ATTRIBUTES_INSERTED_INACTIVE,
-                            false);
+        // Iterate through (up to) 5 fuzzy matches
+        for (int i = 0; i < diffInfos.size(); i++) {
+            Map<Integer, List<TextRun>> diffInfo = diffInfos.get(i);
+            // Iterate through each diff variant (${diff}, ${diffReversed}, ...)
+            for (Entry<Integer, List<TextRun>> e : diffInfo.entrySet()) {
+                int diffPos = e.getKey();
+                if (diffPos != -1 && diffInfo != null) {
+                    // Iterate through each style chunk (added or deleted)
+                    for (TextRun r : e.getValue()) {
+                        int tokstart = delimiters.get(i) + diffPos + r.start;
+                        switch (r.type) {
+                        case DELETE:
+                            doc.setCharacterAttributes(
+                                tokstart,
+                                r.length,
+                                i == activeMatch ? ATTRIBUTES_DELETED_ACTIVE : ATTRIBUTES_DELETED_INACTIVE,
+                                false);
+                            break;
+                        case INSERT:
+                            doc.setCharacterAttributes(
+                                tokstart,
+                                r.length,
+                                i == activeMatch ? ATTRIBUTES_INSERTED_ACTIVE : ATTRIBUTES_INSERTED_INACTIVE,
+                                false);
+                        case NOCHANGE:
+                            // Nothing
+                        }
                     }
                 }
             }

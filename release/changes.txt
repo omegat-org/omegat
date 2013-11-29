@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 3.0.7 update 1
 ----------------------------------------------------------------------
-   2 Enhancements
+   3 Enhancements
    1 Bug fix
    1 Localisation update
 ----------------------------------------------------------------------
@@ -16,6 +16,9 @@
   
   - New debugging information about team projects available in the logs
 (if org.omegat.level=FINEST is set in logger.properties)
+
+  - A graphical version of the script check_same_segments.groovy was 
+added: show_same_segments.groovy
 
   Bug fixes:
 

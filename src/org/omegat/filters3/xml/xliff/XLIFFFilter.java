@@ -40,6 +40,7 @@ import org.omegat.filters2.Instance;
 import org.omegat.filters3.xml.XMLFilter;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
+import org.omegat.util.StringUtil;
 import org.xml.sax.Attributes;
 
 /**
@@ -57,8 +58,8 @@ public class XLIFFFilter extends XMLFilter {
     private int groupLevel;
     private String note;
     private String text;
-    private String entryText;
-    private List<ProtectedPart> protectedParts;
+    private ArrayList<String> entryText = new ArrayList<String>();
+    private ArrayList<List<ProtectedPart>> protectedParts = new ArrayList<List<ProtectedPart>>();
 
     /**
      * Register plugin into OmegaT.
@@ -187,14 +188,14 @@ public class XLIFFFilter extends XMLFilter {
      */
     @Override
     public void tagStart(String path, Attributes atts) {
-        if (atts != null) {
-            if (path.endsWith("/group")) {
-            	// <group> only, it can be nested
-            	groupLevel++;
-            	groupResname.add(atts.getValue("resname"));
-            } else if (path.endsWith("trans-unit")) {
-                resname = atts.getValue("resname");
-            }
+        if (atts != null && path.endsWith("trans-unit")) {
+            resname = atts.getValue("resname");
+        }
+        // not all <group> tags have resname attribute
+        if (path.endsWith("/group")) {
+            // <group> only, it can be nested
+            groupLevel++;
+            groupResname.add(atts.getValue("resname"));
         }
         if ("/xliff/file/header".equals(path)) {
             ignored = true;
@@ -209,13 +210,14 @@ public class XLIFFFilter extends XMLFilter {
         } else if (path.endsWith("trans-unit")) {
             if (entryParseCallback != null) {
                 StringBuffer buf = new StringBuffer();
-		for (int i = 0; i < groupLevel; i++) {
-		    String temp = groupResname.get(i);
-		    if (temp != null) {
-		        buf.append(temp);
-			buf.append(i == (groupLevel - 1) ? '\n' : '\\');
-	            }
-		}
+                for (int i = 0; i < groupLevel; i++) {
+                    String temp = groupResname.get(i);
+                    if (temp != null) {
+                        buf.append(temp);
+                        // group1/group2/..:resname
+                        buf.append(i == (groupLevel - 1) ? " : " : " / ");
+                    }
+                }
 
                 if (resname != null) {
                     buf.append(resname);
@@ -228,15 +230,18 @@ public class XLIFFFilter extends XMLFilter {
                 }
                 
                 String comment = buf.length() == 0 ? null : buf.substring(0, buf.length() - 1);
-                entryParseCallback.addEntry(null, entryText, null, false, comment, null, this, protectedParts);
+                
+                for (int i = 0; i < entryText.size(); i++) {
+                    entryParseCallback.addEntry(null, entryText.get(i), null, false, comment, null, this, protectedParts.get(i));
+                }
             }
 
             resname = null;
             note = null;
-            entryText = null;
-            protectedParts = null;
+            entryText.clear();
+            protectedParts.clear();
         } else if (path.endsWith("/group")) {
-    	    groupResname.remove(--groupLevel);
+            groupResname.remove(--groupLevel);
         }
         if ("/xliff/file/header".equals(path)) {
             ignored = false;
@@ -256,8 +261,12 @@ public class XLIFFFilter extends XMLFilter {
     @Override
     public String translate(String entry, List<ProtectedPart> protectedParts) {
         if (entryParseCallback != null) {
-            entryText = entry;
-            this.protectedParts = protectedParts;
+            // skip empty entries - no need to collect them.
+            // this IF can be removed because entryParseCallback.addEntry() also checks for empty string
+            if (!StringUtil.isEmpty(entry)) {
+                entryText.add(entry);
+                this.protectedParts.add(protectedParts);
+            }
             return entry;
         } else if (entryTranslateCallback != null) {
             String translation = entryTranslateCallback.getTranslation(null, entry, null);

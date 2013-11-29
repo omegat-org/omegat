@@ -40,7 +40,6 @@ import org.omegat.filters2.Instance;
 import org.omegat.filters3.xml.XMLFilter;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
-import org.omegat.util.StringUtil;
 import org.xml.sax.Attributes;
 
 /**
@@ -261,12 +260,8 @@ public class XLIFFFilter extends XMLFilter {
     @Override
     public String translate(String entry, List<ProtectedPart> protectedParts) {
         if (entryParseCallback != null) {
-            // skip empty entries - no need to collect them.
-            // this IF can be removed because entryParseCallback.addEntry() also checks for empty string
-            if (!StringUtil.isEmpty(entry)) {
-                entryText.add(entry);
-                this.protectedParts.add(protectedParts);
-            }
+            entryText.add(entry);
+            this.protectedParts.add(protectedParts);
             return entry;
         } else if (entryTranslateCallback != null) {
             String translation = entryTranslateCallback.getTranslation(null, entry, null);

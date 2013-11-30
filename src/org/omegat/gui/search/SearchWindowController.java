@@ -227,6 +227,7 @@ public class SearchWindowController {
             @Override
             public void actionPerformed(ActionEvent arg0) {
                 form.m_searchField.requestFocus();
+                form.m_searchField.selectAll();
             }
         };
         form.getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(find, "CTRL+F");

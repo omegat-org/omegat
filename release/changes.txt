@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 3.0.7 update 1
 ----------------------------------------------------------------------
-   5 Enhancements
+   6 Enhancements
    1 Bug fix
    1 Localisation update
 ----------------------------------------------------------------------
@@ -27,12 +27,15 @@ readable.
   - In addition to ${diff}, there is also now ${diffReversed} in the 
 Fuzzy Matches pane display options
 
-  - For the two points above, see
+  For the two points above, see
   - Missing part from matches not highlighted
   https://sourceforge.net/p/omegat/bugs/264/
 and
   - Show where text has been added in match window 
   https://sourceforge.net/p/omegat/feature-requests/183/
+
+  - New option in the XLIFF filter: force shortcut to "f" for 
+<it pos="end"> tags
 
   Bug fixes:
 

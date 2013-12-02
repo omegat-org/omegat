@@ -51,6 +51,8 @@ import org.omegat.util.StringUtil;
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
 public class XLIFFDialect extends DefaultXMLDialect {
+    private boolean forceShortCutToF;
+    
     public XLIFFDialect() {
     }
     
@@ -81,7 +83,8 @@ public class XLIFFDialect extends DefaultXMLDialect {
             defineContentBasedTag("it", Tag.Type.ALONE);
             defineContentBasedTag("ph", Tag.Type.ALONE);
             // "mrk", only <mrk mtype="protected"> is content-based tag. see validateContentBasedTag
-
+            
+            forceShortCutToF = options.getForceShortcutToF();
         }
 
     }
@@ -182,6 +185,11 @@ public class XLIFFDialect extends DefaultXMLDialect {
                     // but some tools may use 'begin/end' values like for TMX
                     shortcutLetter = calcTagShortcutLetter(tag);
                     if ("close".equals(tagHandler.getCurrentPos()) || "end".equals(tagHandler.getCurrentPos())) {
+                        // In some cases, even if we're able to compute a shortcut, it's better to force to "f"
+                        // for better compatibility with corresponding TMX files
+                        if (forceShortCutToF) { 
+                            shortcutLetter = 'f';
+                        }
                         shortcut = "</" + (shortcutLetter != 0 ? shortcutLetter : 'f') + tagIndex + '>';
                     } else {
                         shortcut = "<" + (shortcutLetter != 0 ? shortcutLetter : 'f') + tagIndex + '>';

@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 3.0.7 update 1
 ----------------------------------------------------------------------
-   3 Enhancements
+   5 Enhancements
    1 Bug fix
    1 Localisation update
 ----------------------------------------------------------------------
@@ -19,6 +19,20 @@
 
   - A graphical version of the script check_same_segments.groovy was 
 added: show_same_segments.groovy
+
+  - The ${diff} display is now "optimized" by concatenating consecutive 
+inserts or deletes separated only by whitespace. This makes the diff more 
+readable.
+
+  - In addition to ${diff}, there is also now ${diffReversed} in the 
+Fuzzy Matches pane display options
+
+  - For the two points above, see
+  - Missing part from matches not highlighted
+  https://sourceforge.net/p/omegat/bugs/264/
+and
+  - Show where text has been added in match window 
+  https://sourceforge.net/p/omegat/feature-requests/183/
 
   Bug fixes:
 

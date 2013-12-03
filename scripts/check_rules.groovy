@@ -4,8 +4,8 @@
  * @author  Briac Pilpre
  * @author  Kos Ivantsov
  * @author  Didier Briel
- * @date    2013-06-23
- * @version 0.2
+ * @date    2013-12-03
+ * @version 0.3
  */
 
 import groovy.swing.SwingBuilder
@@ -49,7 +49,10 @@ rules = [
             doubledBlanks: { s, t -> t =~ /[\s\u00A0]{2}/ },
            // Length
            targetShorter: { s, t -> (t.length() / s.length() * 100) < minCharLengthAbove },
-           targetLonger: { s, t -> (t.length() / s.length() * 100) > maxCharLengthAbove }
+           targetLonger: { s, t -> (t.length() / s.length() * 100) > maxCharLengthAbove },
+           // Punctuation
+           differentFullStop: { s, t -> ((s =~ /\.$/) && (t =~ /[^\.]$/)) || ((s =~ /[^\.]$/) && (t =~ /\.$/)) }
+
         ];
 
 segment_count = 0;

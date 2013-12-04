@@ -38,8 +38,8 @@ and
 <it pos="end"> tags
 
   - A new QA rule was added to check_rules.groovy. It will be triggered
-if the source segment ends with a full stop, and the target segment
-does not, or the reverse
+if the target segment ends with a different punctuation sign (.!?;) from 
+the one used in the source segment
 
   Bug fixes:
 

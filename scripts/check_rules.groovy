@@ -52,7 +52,7 @@ rules = [
            targetLonger: { s, t -> (t.length() / s.length() * 100) > maxCharLengthAbove },
            // Punctuation
            differentPunctuation: { s, t -> def s1 = s[-1], t1 = t[-1];
-                                  '.!?;'.contains(s1) ? s1 != t1 : '.!?;'.contains(t1)}
+                                  '.!?;:'.contains(s1) ? s1 != t1 : '.!?;:'.contains(t1)}
 
         ];
 

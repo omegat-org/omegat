@@ -69,7 +69,7 @@ for (i in 0 ..< files.size()) {
         source = ste.getSrcText();
         target = project.getTranslationInfo(ste) ? project.getTranslationInfo(ste).translation : null;
         
-        if ( target == null ) {
+        if ( target == null || target.length() == 0) {
             continue;
         }
         

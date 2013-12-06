@@ -1113,6 +1113,7 @@ public class EditorController implements IEditor {
         // Save the current entry.
         doChangeSegmentActions();
 
+        List<FileInfo> files = Core.getProject().getProjectFiles();
         SourceTextEntry ste;
         int startFileIndex = displayedFileIndex;
         int startEntryIndex = displayedEntryIndex;
@@ -1121,7 +1122,7 @@ public class EditorController implements IEditor {
             if (displayedEntryIndex < 0) {
                 displayedFileIndex--;
                 if (displayedFileIndex < 0) {
-                    displayedFileIndex = 0;
+                    displayedFileIndex = files.size() - 1;
                 }
                 loadDocument();
                 displayedEntryIndex = m_docSegList.length - 1;

@@ -85,38 +85,52 @@ public class OpenXMLFilter extends AbstractFilter {
 
         OpenXMLOptions options = new OpenXMLOptions(config);
 
-        if (options.getTranslateComments())
+        if (options.getTranslateComments()) {
             DOCUMENTS += "|(comments\\.xml)";
-        if (options.getTranslateFootnotes())
+        }
+        if (options.getTranslateFootnotes()) {
             DOCUMENTS += "|(footnotes\\.xml)";
-        if (options.getTranslateEndnotes())
+        }
+        if (options.getTranslateEndnotes()) {
             DOCUMENTS += "|(endnotes\\.xml)";
-        if (options.getTranslateHeaders())
+        }
+        if (options.getTranslateHeaders()) {
             DOCUMENTS += "|(header\\d+\\.xml)";
-        if (options.getTranslateFooters())
+        }
+        if (options.getTranslateFooters()) {
             DOCUMENTS += "|(footer\\d+\\.xml)";
+        }
         DOCUMENTS += "|(sharedStrings\\.xml)";
-        if (options.getTranslateExcelComments())
+        if (options.getTranslateExcelComments()) {
             DOCUMENTS += "|(comments\\d+\\.xml)";
+        }
         DOCUMENTS += "|(slide\\d+\\.xml)";
-        if (options.getTranslateSlideMasters())
+        if (options.getTranslateSlideMasters()) {
             DOCUMENTS += "|(slideMaster\\d+\\.xml)";
-        if (options.getTranslateSlideLayouts())
+        }
+        if (options.getTranslateSlideLayouts()) {
             DOCUMENTS += "|(slideLayout\\d+\\.xml)";
-        if (options.getTranslateSlideComments())
+        }
+        if (options.getTranslateSlideComments()) {
             DOCUMENTS += "|(notesSlide\\d+\\.xml)";
-        if (options.getTranslateDiagrams())
+        }
+        if (options.getTranslateDiagrams()) {
             DOCUMENTS += "|(data\\d+\\.xml)";
-        if (options.getTranslateCharts())
+        }
+        if (options.getTranslateCharts()) {
             DOCUMENTS += "|(chart\\d+\\.xml)";
-        if (options.getTranslateDrawings())
+        }
+        if (options.getTranslateDrawings()) {
             DOCUMENTS += "|(drawing\\d+\\.xml)";
-        if (options.getTranslateSheetNames())
+        }
+        if (options.getTranslateSheetNames()) {
             DOCUMENTS += "|(workbook\\.xml)";
-
+        }
+       
         TRANSLATABLE = Pattern.compile(DOCUMENTS);
     }
 
+    @Override
     protected boolean requirePrevNextFields() {
         return true;
     }
@@ -208,6 +222,7 @@ public class OpenXMLFilter extends AbstractFilter {
             // instead of slide1, slide10, slide 2
             // We also order files arbitrarily, to have, for instance
             // documents.xml before comments.xml
+            @Override
             public int compare(ZipEntry z1, ZipEntry z2) {
                 String s1 = z1.getName();
                 String s2 = z2.getName();
@@ -215,8 +230,7 @@ public class OpenXMLFilter extends AbstractFilter {
                 String[] words2 = s2.split("\\d+\\.");
                 // Digits at the end and same text
                 if ((words1.length > 1 && words2.length > 1) && // Digits
-                        (words1[0].equals(words2[0]))) // Same text
-                {
+                        (words1[0].equals(words2[0]))) {        // Same text
                     int number1 = 0;
                     int number2 = 0;
                     Matcher getDigits = DIGITS.matcher(s1);
@@ -310,11 +324,13 @@ public class OpenXMLFilter extends AbstractFilter {
     }
 
     /** Human-readable Open XML filter name. */
+    @Override
     public String getFileFormatName() {
         return OStrings.getString("OpenXML_FILTER_NAME");
     }
 
     /** Extensions... */
+    @Override
     public Instance[] getDefaultInstances() {
         return new Instance[] { 
             new Instance("*.doc?"), 
@@ -324,11 +340,13 @@ public class OpenXMLFilter extends AbstractFilter {
     }
 
     /** Source encoding cannot be varied by the user. */
+    @Override
     public boolean isSourceEncodingVariable() {
         return false;
     }
 
     /** Target encoding cannot be varied by the user. */
+    @Override
     public boolean isTargetEncodingVariable() {
         return false;
     }
@@ -375,7 +393,8 @@ public class OpenXMLFilter extends AbstractFilter {
 
     @Override
     public String getInEncodingLastParsedFile() {
-        //Encoding is 'binary', it is zipped. Inside there may be many files. It makes no sense to display the encoding of some xml file inside.
+        // Encoding is 'binary', it is zipped. Inside there may be many files. 
+        // It makes no sense to display the encoding of some xml file inside.
         return "OpenXML";
     }
 }

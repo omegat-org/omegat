@@ -98,6 +98,7 @@ public class GlossaryManager implements DirectoryMonitor.Callback {
                 List<GlossaryEntry> entries = loadGlossaryFile(file);
                 if (entries != null) {
                     synchronized (this) {
+                        Log.logRB("CT_LOADING_GLOSSARY_DETAILS", new Object[] { entries.size(), file.getName() });
                         glossaries.put(file.getName(), entries);
                     }
                 }

@@ -28,6 +28,8 @@
 
 package org.omegat.filters3.xml.openxml;
 
+import org.omegat.filters3.Attribute;
+import org.omegat.filters3.Attributes;
 import org.omegat.filters3.xml.DefaultXMLDialect;
 
 /**
@@ -74,6 +76,10 @@ public class OpenXMLDialect extends DefaultXMLDialect {
             defineTranslatableTagAttribute("v:textpath", "string"); // WordArt
         }
 
+        if (options.getTranslateSlideLinks()) {
+            defineTranslatableTagAttribute("Relationship", "Target"); // PowerPoint, only if TargetMode is External
+        }
+        
         boolean aggregationEnabled = options.getAggregateTags();
         /*
          * The current OpenXML filter finds too many tags, usually causing what
@@ -85,5 +91,30 @@ public class OpenXMLDialect extends DefaultXMLDialect {
 
         // If defined in the options, set space preserving for all tags
         setForceSpacePreserving(options.getSpacePreserving());
+    }
+    
+    /**
+     * Returns for a given attribute of a given tag if the attribute should be
+     * translated with the given other attributes present. If the tagAttribute
+     * is returned by getTranslatable(Tag)Attributes(), this function is called
+     * to further test the attribute within its context. This allows for example
+     * the OpenXML filter to not translate the value attribute of Target, except if TargetMode is External
+     */
+    @Override
+    public Boolean validateTranslatableTagAttribute(String tag, String attribute, Attributes atts) {
+        // special case:
+        if ("Relationship".equalsIgnoreCase(tag) && attribute.equalsIgnoreCase("Target") ) {
+            
+                for (int i = 0; i < atts.size(); i++) {
+                    Attribute otherAttribute = atts.get(i);
+                    if ("TargetMode".equalsIgnoreCase(otherAttribute.getName())
+                            && "External".equalsIgnoreCase(otherAttribute.getValue())) {
+                        return super.validateTranslatableTagAttribute(tag, attribute, atts);
+                    }
+                }
+                // Do not translate if TargetMode is not External
+                return false;
+        }
+        return super.validateTranslatableTagAttribute(tag, attribute, atts);
     }
 }

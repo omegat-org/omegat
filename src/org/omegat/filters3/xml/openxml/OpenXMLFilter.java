@@ -126,7 +126,10 @@ public class OpenXMLFilter extends AbstractFilter {
         if (options.getTranslateSheetNames()) {
             DOCUMENTS += "|(workbook\\.xml)";
         }
-       
+        if (options.getTranslateSlideLinks()) {
+            DOCUMENTS += "|(slide\\d+\\.xml\\.rels)";
+        }
+        
         TRANSLATABLE = Pattern.compile(DOCUMENTS);
     }
 

@@ -2,7 +2,7 @@
  OmegaT 3.0.7 update 1
 ----------------------------------------------------------------------
    8 Enhancements
-   2 Bug fixes
+   3 Bug fixes
    1 Localisation update
 ----------------------------------------------------------------------
 3.0.7 update 1 vs. 3.0.7
@@ -51,6 +51,9 @@ the one used in the source segment
 
   - Not going to right note in projects containing several files 
   https://sourceforge.net/p/omegat/bugs/644/
+
+  - Hyperlinks in PowerPoint cannot be translated
+  https://sourceforge.net/p/omegat/bugs/600/
 
   Localisation updates:
 

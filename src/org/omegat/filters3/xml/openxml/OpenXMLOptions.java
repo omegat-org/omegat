@@ -5,7 +5,7 @@
 
  Copyright (C) 2007-2010 Didier Briel
                2010 Antonio Vilei
-               2011 Didier Briel
+               2011-2013 Didier Briel
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -49,6 +49,7 @@ import org.omegat.filters2.AbstractOptions;
  * <li>[+] Slide comments (PowerPoint)
  * <li>[] Slide Masters (PowerPoint)
  * <li>[] Slide Layouts (PowerPoint)
+ * <li>[] External links (PowerPoint)
  * <li>[] Charts (Global)
  * <li>[] Diagrams (Global)
  * <li>[] Drawings (Global)
@@ -75,6 +76,7 @@ public class OpenXMLOptions extends AbstractOptions {
     private static final String OPTION_TRANSLATE_SLIDE_COMMENTS = "translateSlideComments";
     private static final String OPTION_TRANSLATE_SLIDE_MASTERS = "translateSlideMasters";
     private static final String OPTION_TRANSLATE_SLIDE_LAYOUTS = "translateSlideLayouts";
+    private static final String OPTION_TRANSLATE_SLIDE_LINKS = "translateSlideLinks";   
     private static final String OPTION_TRANSLATE_CHARTS = "translateCharts";
     private static final String OPTION_TRANSLATE_DRAWINGS = "translateDrawings";
     private static final String OPTION_TRANSLATE_WORDART = "translateWordArt";
@@ -253,6 +255,22 @@ public class OpenXMLOptions extends AbstractOptions {
         setBoolean(OPTION_TRANSLATE_SLIDE_LAYOUTS, translateSlideLayouts);
     }
 
+    /**
+     * Returns whether Slide Links should be translated.
+     * @return the state of OPTION_TRANSLATE_SLIDE_LINKS
+     */
+    public boolean getTranslateSlideLinks() {
+        return getBoolean(OPTION_TRANSLATE_SLIDE_LINKS, false);
+    }
+
+    /**
+     * Sets whether Slide Links should be translated.
+     * @param translateSlideLinks The option to translate external links
+     */
+    public void setTranslateSlideLinks(boolean translateSlideLinks) {
+        setBoolean(OPTION_TRANSLATE_SLIDE_LINKS, translateSlideLinks);
+    }
+    
     /**
      * Returns whether Charts should be translated.
      */

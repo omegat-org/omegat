@@ -219,6 +219,7 @@ public class DefaultXMLDialect implements XMLDialect {
      * <p>
      * Each entry in a set should be a String class.
      */
+    @Override
     public Set<String> getParagraphTags() {
         return paragraphTags;
     }
@@ -226,6 +227,7 @@ public class DefaultXMLDialect implements XMLDialect {
     /**
      * Returns the set of content based tags.
      */
+    @Override
     public Map<String, Tag.Type> getContentBasedTags() {
         return contentBasedTags;
     }
@@ -235,6 +237,7 @@ public class DefaultXMLDialect implements XMLDialect {
      * <p>
      * Each entry in a set should be a String class.
      */
+    @Override
     public Set<String> getPreformatTags() {
         return preformatTags;
     }
@@ -245,6 +248,7 @@ public class DefaultXMLDialect implements XMLDialect {
      * <p>
      * Each entry in a set should be a String class.
      */
+    @Override
     public Set<String> getIntactTags() {
         return intactTags;
     }
@@ -254,6 +258,7 @@ public class DefaultXMLDialect implements XMLDialect {
      * <p>
      * Each entry should map from a String to a set of Strings.
      */
+    @Override
     public MultiMap<String, String> getTranslatableTagAttributes() {
         return translatableTagAttributes;
     }
@@ -266,6 +271,7 @@ public class DefaultXMLDialect implements XMLDialect {
      * the XHTML filter to not translate the value attribute of an
      * input-element, except when it is a button or submit or reset.
      */
+    @Override
     public Boolean validateTranslatableTagAttribute(String tag, String attribute, Attributes atts) {
         return true;
     }
@@ -283,10 +289,12 @@ public class DefaultXMLDialect implements XMLDialect {
      *            The list of the tag attributes
      * @return <code>true</code> or <code>false</code>
      */
+    @Override
     public Boolean validateIntactTag(String tag, Attributes atts) {
         return false;
     }
 
+    @Override
     public Boolean validateContentBasedTag(String tag, Attributes atts) {
         return false;
     }
@@ -305,6 +313,7 @@ public class DefaultXMLDialect implements XMLDialect {
      *            The list of the tag attributes
      * @return <code>true</code> or <code>false</code>
      */
+    @Override
     public Boolean validateTranslatableTag(String tag, Attributes atts) {
         return true;
     }
@@ -322,6 +331,7 @@ public class DefaultXMLDialect implements XMLDialect {
      *            The list of the tag attributes
      * @return <code>true</code> or <code>false</code>
      */
+    @Override
     public Boolean validateParagraphTag(String tag, Attributes atts) {
         return false;
     }
@@ -339,6 +349,7 @@ public class DefaultXMLDialect implements XMLDialect {
      *            The list of the tag attributes
      * @return <code>true</code> or <code>false</code>
      */
+    @Override
     public Boolean validatePreformatTag(String tag, Attributes atts) {
         return false;
     }
@@ -349,6 +360,7 @@ public class DefaultXMLDialect implements XMLDialect {
      * <p>
      * Each entry in a set should be a String class.
      */
+    @Override
     public Set<String> getTranslatableAttributes() {
         return translatableAttributes;
     }
@@ -360,6 +372,7 @@ public class DefaultXMLDialect implements XMLDialect {
      * <p>
      * Each entry in a set should be a String class.
      */
+    @Override
     public Set<String> getOutOfTurnTags() {
         return outOfTurnTags;
     }
@@ -372,6 +385,7 @@ public class DefaultXMLDialect implements XMLDialect {
      * Each entry should map an {@link Integer} to a {@link Pattern} -- regular
      * expression for a specified constrained string.
      */
+    @Override
     public Map<Integer, Pattern> getConstraints() {
         return constraints;
     }
@@ -380,6 +394,7 @@ public class DefaultXMLDialect implements XMLDialect {
      * Resolves external entites if child filter needs it. Default
      * implementation returns <code>null</code>.
      */
+    @Override
     public InputSource resolveEntity(String publicId, String systemId) {
         return null;
     }
@@ -390,6 +405,7 @@ public class DefaultXMLDialect implements XMLDialect {
      * Each entry should map a {@link String} to a {@link String} -- a tag to
      * its shortcut.
      */
+    @Override
     public Map<String, String> getShortcuts() {
         return shortcuts;
     }
@@ -406,6 +422,7 @@ public class DefaultXMLDialect implements XMLDialect {
      *            The parameter setting wether closing tags should be used or
      *            not for empty tags.
      */
+    @Override
     public void setClosingTagRequired(boolean onOff) {
         closingTagRequired = onOff;
     }
@@ -413,6 +430,7 @@ public class DefaultXMLDialect implements XMLDialect {
     /**
      * Gives the value of closingTag
      */
+    @Override
     public Boolean getClosingTagRequired() {
         return closingTagRequired;
     }
@@ -425,6 +443,7 @@ public class DefaultXMLDialect implements XMLDialect {
     /**
      * {@inheritDoc}
      */
+    @Override
     public void setTagsAggregationEnabled(boolean onOff) {
         tagsAggregationEnabled = onOff;
     }
@@ -432,6 +451,7 @@ public class DefaultXMLDialect implements XMLDialect {
     /**
      * {@inheritDoc}
      */
+    @Override
     public Boolean getTagsAggregationEnabled() {
         return tagsAggregationEnabled;
     }
@@ -440,6 +460,7 @@ public class DefaultXMLDialect implements XMLDialect {
     /**
      * {@inheritDoc}
      */
+    @Override
     public Boolean getForceSpacePreserving() {
         return forceSpacePreserving;
     }
@@ -447,6 +468,7 @@ public class DefaultXMLDialect implements XMLDialect {
     /**
      * {@inheritDoc}
      */
+    @Override
     public void setForceSpacePreserving(boolean onOff) {
         forceSpacePreserving = onOff;
     }
@@ -454,6 +476,7 @@ public class DefaultXMLDialect implements XMLDialect {
     /**
      * {@inheritDoc}
      */
+    @Override
     public String constructShortcuts(List<Element> elements, List<ProtectedPart> protectedParts) {
         protectedParts.clear();
         StringBuilder r = new StringBuilder();

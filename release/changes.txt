@@ -1,11 +1,11 @@
 ----------------------------------------------------------------------
- OmegaT 3.0.7 update 1
+ OmegaT 3.0.8
 ----------------------------------------------------------------------
    8 Enhancements
-   3 Bug fixes
+   4 Bug fixes
    1 Localisation update
 ----------------------------------------------------------------------
-3.0.7 update 1 vs. 3.0.7
+3.0.8 vs. 3.0.7
 
   Implemented requests:
 
@@ -54,6 +54,9 @@ the one used in the source segment
 
   - Hyperlinks in PowerPoint cannot be translated
   https://sourceforge.net/p/omegat/bugs/600/
+
+  - Error: java.lang.IndexOutOfBoundsException on tag validation with custom tags 
+  https://sourceforge.net/p/omegat/bugs/638/
 
   Localisation updates:
 

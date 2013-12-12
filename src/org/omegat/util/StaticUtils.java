@@ -117,7 +117,7 @@ public class StaticUtils {
         if (protectedParts != null) {
             for (ProtectedPart pp : protectedParts) {
                 int pos = -1;
-                while ((pos = str.indexOf(pp.getTextInSourceSegment(), pos + 1)) >= 0) {
+                if ((pos = str.indexOf(pp.getTextInSourceSegment(), pos + 1)) >= 0) {
                     tags.add(new TagOrder(pos, pp.getTextInSourceSegment()));
                 }
             }

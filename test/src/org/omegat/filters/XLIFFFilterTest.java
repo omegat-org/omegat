@@ -98,6 +98,7 @@ public class XLIFFFilterTest extends TestFilterBase {
         checkMultiNoPrevNext("one <t0/> three", null, null, null);
         checkMultiNoPrevNext("one <w0/> three", null, null, null);
         checkMultiNoPrevNext("Nested tags: before <g0><g1><x2/></g1></g0> after", null, null, null);
+        checkMultiNoPrevNext("<m0>Check protected-only tag reading</m0>", null, null, null);
         checkMultiEnd();
 
         File inFile = new File("test/data/filters/xliff/file-XLIFFFilter-tags.xlf");

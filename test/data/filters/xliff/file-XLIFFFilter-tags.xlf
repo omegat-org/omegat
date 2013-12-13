@@ -38,6 +38,10 @@
                 <source>source</source>
                 <target>Nested tags: before <g id="0"><g id="1"><x id="2"/></g></g> after</target>
             </trans-unit>
+            <trans-unit>
+                <source>source</source>
+                <target><mrk mtype="protected">Check protected-only tag reading</mrk></target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

@@ -186,6 +186,9 @@ public class Entry {
                 textStart = i;
                 break;
             }
+            if (elem instanceof XMLContentBasedTag) {
+                textStart = i;
+            }
         }
         for (int i = 0; i < size(); i++) {
             Element elem = get(i);
@@ -211,7 +214,7 @@ public class Entry {
             }
         }
 
-        // if content-based tag is inside text, then expand text into paired cntent-based tag
+        // if content-based tag is inside text, then expand text into paired content-based tag
         for (int i = textStart; i <= textEnd; i++) {
             Element elem = get(i);
             if (elem instanceof XMLContentBasedTag) {

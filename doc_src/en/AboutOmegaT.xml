@@ -60,7 +60,7 @@
         the text groups according to the segmentation rules, and displays the
         segments one by one so that you can proceed with the translation.
         OmegaT stores your translations and proposes possible translations
-        from similar segments in registered in the translation memory files. 
+        from similar segments registered in the translation memory files. 
         When you are ready to view the final product, you can export the
         translated files, open them in the appropriate application and view
         the translation in the final format...</para>

@@ -1,3 +1,16 @@
+ OmegaT 2.6.3 update 7
+----------------------------------------------------------------------
+   0 Enhancement
+   1 Bug fix
+   0 Localisation update
+----------------------------------------------------------------------
+2.6.3 update 7 vs. 2.6.3 update 6
+
+  Bug fixes: 
+
+  - Word plugin causes weird inline code in OmegaT
+  https://sourceforge.net/p/omegat/bugs/645/
+
 ----------------------------------------------------------------------
  OmegaT 2.6.3 update 6
 ----------------------------------------------------------------------

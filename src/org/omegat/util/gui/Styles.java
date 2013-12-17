@@ -51,7 +51,7 @@ public final class Styles {
     public static final Color COLOR_NBSP = new Color(200, 200, 200);
     public static final Color COLOR_WHITESPACE = new Color(128, 128, 128);
     public static final Color COLOR_BIDIMARKERS = new Color(200, 0, 0);
-    public static final Color COLOR_MARK_COMES_FROM_TM = Color.red;
+    public static final Color COLOR_MARK_COMES_FROM_TM = new Color(250,128,114); // Salmon red
 
     /**
      * Construct required attributes set.

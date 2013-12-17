@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 3.0.8
 ----------------------------------------------------------------------
-   9 Enhancements
+  10 Enhancements
    4 Bug fixes
    1 Localisation update
 ----------------------------------------------------------------------
@@ -46,6 +46,9 @@ the one used in the source segment
 
   - In the XLIFF filter, segments containing only protected text
 (e.g., <m0>Protected text only</m0>) now appear in the Editor
+
+  - The background colour used (red) when a match is inserted from an "mt"
+folder was hard to read. It was changed to "salmon red".
 
 
   Bug fixes:

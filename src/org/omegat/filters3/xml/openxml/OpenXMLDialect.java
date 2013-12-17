@@ -66,7 +66,7 @@ public class OpenXMLDialect extends DefaultXMLDialect {
                 // Charts
                 "c:f", "c:formatCode",
                 // Word
-                "wp:align", "wp:posOffset", "wp14:pctWidth", "wp14:pctHeight",
+                "wp:align", "wp:posOffset", "wp14:pctWidth", "wp14:pctHeight", "w:fldChar",
                 // Drawings
                 "xdr:col", "xdr:row", "xdr:colOff", "xdr:rowOff", });
 

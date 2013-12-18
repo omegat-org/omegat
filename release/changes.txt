@@ -50,7 +50,6 @@ the one used in the source segment
   - The background colour used (red) when a match is inserted from an "mt"
 folder was hard to read. It was changed to "salmon red".
 
-
   Bug fixes:
 
   - Missing orion jar in lib folder

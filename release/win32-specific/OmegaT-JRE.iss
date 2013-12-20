@@ -42,6 +42,7 @@ Source: "readme_gl.txt"; DestDir: "{app}"; Flags: isreadme; Languages: gl
 Source: "readme_hu.txt"; DestDir: "{app}"; Flags: isreadme; Languages: hu
 Source: "readme_it.txt"; DestDir: "{app}"; Flags: isreadme; Languages: it
 Source: "readme_ja.txt"; DestDir: "{app}"; Flags: isreadme; Languages: ja
+Source: "readme_ko.txt"; DestDir: "{app}"; Flags: isreadme; Languages: ko
 Source: "readme_nl.txt"; DestDir: "{app}"; Flags: isreadme; Languages: nl
 Source: "readme_pl.txt"; DestDir: "{app}"; Flags: isreadme; Languages: pl
 Source: "readme_pt_BR.txt"; DestDir: "{app}"; Flags: isreadme; Languages: pt_BR
@@ -115,7 +116,7 @@ Name: "el"; MessagesFile: "compiler:Languages\Greek.isl"
 ;Name: "id"; MessagesFile: "compiler:Languages\Indonesian.isl"
 Name: "ja"; MessagesFile: "compiler:Languages\Japanese.isl"
 ;Name: "kk"; MessagesFile: "compiler:Languages\Kazakh.isl"
-;Name: "ko"; MessagesFile: "compiler:Languages\Korean.isl"
+Name: "ko"; MessagesFile: "compiler:Languages\Korean.isl"
 ;Name: "lv"; MessagesFile: "compiler:Languages\Latvian.isl"
 ;Name: "lt"; MessagesFile: "compiler:Languages\Lithuanian.isl"
 ;Name: "lb"; MessagesFile: "compiler:Languages\Luxemburgish.isl"

@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<chapter id="chapter.plain.text">
+  <title>Εγασίες με απλό κείμενο<indexterm class="singular">
+      <primary>Αρχεία προέλευσης</primary> <secondary>Αρχεία απλού κειμένου</secondary>
+    </indexterm></title>
+
+  <section id="default.encoding">
+    <title>Προεπιλεγμένη Κωδικοποίηση<indexterm class="singular">
+        <primary>Κωδικοποίηση</primary> <secondary>Αρχεία απλού κειμένου</secondary>
+      </indexterm><indexterm class="singular">
+        <primary>Αρχεία προέλευσης</primary> <secondary>Κωδικοποίηση</secondary>
+      </indexterm></title>
+
+    <para>Τα αρχεία απλού κειμένου - στις περισσότερες περιπτώσεις έχουν μια επέκτσαση txt - περιέχουν απλώς πληροφορίες κειμένου και δεν δίνουν σαφείς πληροφορίες στον υπολογιστή για τη γλώσσα που περιέχουν. Όλο κι όλο που μπορεί να κάνει το OmegaT σε αυτή την περίπτωση, είναι να θεωρήσει δεδομένο ότι το κείμενο έχει γραφεί στην ίδια γλώσσα που χρησιμοποιεί και ο ίδιος ο υπολογιστής. Αυτό δεν είναι πρόβλημα για αρχεία που είναι κωδικοποιημένα σε Unicode με χρήση ενός set χαρακτήρων με κωδικοποίηση 16-bit. Αν το κείμενο είναι, όμως, κωδικοποιημένο σε 8 bits, μπορεί να βρεθεί κάποιος αντιμέτωπος με την εξής περίερργη κατάσταση: αντί να εμφανίζει το κείμενο, για Ιαπωνικούς χαρακτήρες...</para>
+
+    <mediaobject>
+      <imageobject role="html">
+        <imagedata fileref="images/OmT_Japanese.png"/>
+      </imageobject>
+
+      <imageobject role="fo">
+        <imagedata fileref="images/OmT_Japanese.png" width="60%"/>
+      </imageobject>
+    </mediaobject>
+
+    <para>...το σύστημα θα το εμφανίζει ως εξής, για παράδειγμα:</para>
+
+    <mediaobject>
+      <imageobject role="html">
+        <imagedata fileref="images/OmT_Cyrillic.png"/>
+      </imageobject>
+
+      <imageobject role="fo">
+        <imagedata fileref="images/OmT_Cyrillic.png" width="60%"/>
+      </imageobject>
+    </mediaobject>
+
+    <para>Ο υπολογιστής που τρέχει το OmegaT, έχει τα Ρωσικά ως γώσσα προεπιλογής και, έτσι, δείχνει τους χαρακτήρες σε Κυριλλικό αλφάβητο και όχι σε Kanji.</para>
+  </section>
+
+  <section id="OmegaT.solution">
+    <title>Η λύση του <application>OmegaT</application></title>
+
+    <para>Υπάρχουν, ουσιαστικά, τρεις τρόποι για να αντιμετωπισθεί αυτό το πρόβλημα στο <application>OmegaT</application>. Προβλέπουν όλοι την εφαρμογή των φίλτρων αρχείου στο μενού<emphasis role="bold"> Επιλογές </emphasis>.</para>
+
+    <variablelist> <varlistentry> <term>Αλλάξτε την κωδικοποίηση των αρχείων σας σε Unicode</term>
+
+        <listitem>
+          <para>ανοίξτε το αρχείο προέλευσης σε ένα πρόγραμμα επεξεργασίας απλού κειμένου (text editor) που ερμηνεύει σωστά την κωδικοποίησή του και αποθηκεύει το αρχείο με κωδικοποίηση <emphasis role="bold">&quot;UTF-8&quot;</emphasis> . Αλλάξτε την επέκταση του αρχείου από το <literal>.txt</literal> σε <literal>.utf8.</literal> Το <application>OmegaT</application> θα ερμηνεύσει αυτομάτως το αρχείο ως αρχείο UTF-8. Αυτή είναι η πιο λογική εναλλακτική, η οποία θα σας γλυτώσει από προβλήματα μακροπρόθεσμα.</para>
+        </listitem>
+      </varlistentry> </variablelist> <variablelist> <varlistentry> <term>Καθορίστε την κωδικοποίηση για τα αρχεία σας απλού κειμένου</term>
+
+        <listitem>
+          <para>- π.χ. τα αρχεία με επέκταση <filename>.txt </filename> : στην ενότητα <emphasis role="bold">Αρχεία κειμένου </emphasis>του διαλόγου Φίλτρα αρχείου, αλλάξτε την <emphasis role="bold">Κωδικοποίηση Αρχείου προέλευσης</emphasis> από το &lt;auto&gt; στην κωδικοποίηση που αντιστοιχεί στο αρχείο προέλευσης σας <filename>.txt</filename> , π.χ., στο .jp για το παραπάνω παράδειγμα.</para>
+        </listitem>
+      </varlistentry> </variablelist> <variablelist> <varlistentry> <term>Αλλάξτε τις επεκτάσεις των αρχείων σας με απλό κείμενο</term>
+
+        <listitem>
+          <para>για παράδειγμα από <filename>.txt</filename> σε <filename>.jp</filename> για απλά κείμενα στα Ιαπωνικά: στην ενότητα <emphasis role="bold">Αρχεία κειμένου</emphasis> του διαλόγου Φίλτρα αρχείου και προσθέστε νέο <emphasis role="bold">Μοτίβο Ονόματος αρχείου προέλευσης</emphasis> (<filename>*.jp</filename> στο παράδειγμα αυτό) και επιλέξτε τις κατάλληλες παραμέτρους για την κωδικοποίηση προέλευσης και προορισμού</para>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+
+    <para>Το <application>OmegaT</application> διαθέτει, από προεπιλογή, την εξής σύντομη λίστα για να σας διευκολύνει στον χειρισμό ορισμένων απλών αρχείων κειμένου:</para>
+
+    <itemizedlist>
+      <listitem>
+        <para><literal>.txt</literal> τα αρχεία ερμηνεύονται αυτομάτως (&lt;auto&gt;) από το <application>OmegaT</application> ως κωδικοποιημένα στην προεπιλεγμένη κωδικοποίηση του υπολογιστή.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Τα αρχεία <literal>.txt1</literal> είναι αρχεία σε ISO-8859-1, που καλύπτουν τις περισσότερες <emphasis role="bold">Δυτικοευρωπαϊκές</emphasis> γλώσσες.<indexterm class="singular">
+            <primary>Κωδικοποίηση</primary> <secondary>Δυτικοευρωπαίκή</secondary>
+          </indexterm></para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Τα αρχεία <literal>.txt2</literal> είναι αρχεία σε ISO-8859-2, που καλύπτουν τις περισσότερες <emphasis role="bold">Κεντροευρωπαϊκές και Ανατολικοευρωπαΐκές</emphasis> γλώσσες<indexterm class="singular">
+            <primary>Κωδικοποίηση</primary> <secondary>Κεντιρκής και Ανατολικής Ευρώπης</secondary>
+          </indexterm></para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Τα αρχεία <literal>.utf8</literal> ερμηνεύονται από το <application>OmegaT</application> σαν κωδικοποιημένα σε UTF-8 (μια κωδικοποίηση που καλύπτει σχεδόν όλες τις γλώσσες του κόσμου).<indexterm class="singular">
+            <primary>Κωδικοποίηση</primary> <secondary>Unicode</secondary>
+          </indexterm></para>
+      </listitem>
+    </itemizedlist>
+
+    <para>Μπορείτε να ελέγξετε και εσείς οι ίδιοι, επιλέγοντας την καταχώρηση <emphasis role="bold">Φίλτρα αρχείου</emphasis> στο μενού <emphasis role="bold">Επιλογές</emphasis>. Για παράδειγμα, αν έχετε ένα αρχείο κειμένου στα Τσεχικά (πολύ πιθανό να είναι γραμμένο με κωδικό <emphasis role="bold">ISO-8859-2</emphasis>) πρέπει, απλώς, να αλλάξετε την επέκταση<literal> .txt</literal> σε <literal>.txt2 </literal>και το <application>OmegaT</application> θα ερμηνεύσει σωστά τα περιεχόμενα. Και, ασφαλώς, αν θέλετε να είστε ασφαλείς, εξετάστε την περίπτωση μετατροπής αυτού του είδους αρχείου, σε Unicode, δηλ. σε μορφή αρχείου <literal>.utf8 </literal>.</para>
+  </section>
+</chapter>

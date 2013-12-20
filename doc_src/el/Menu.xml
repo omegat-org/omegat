@@ -1,0 +1,1242 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<chapter id="chapter.menu">
+  <title>Μενού και Συντομεύσεις πληκτρολογίου</title>
+
+  <section id="ch04.main.menu">
+    <title><indexterm class="singular">
+        <primary>Μενού</primary>
+      </indexterm>Κύριο Μενού</title>
+
+    <para>Όλες οι λειτουργίες του OmegaT είναι προσβάσιμες από τη γραμμή μενού, στο πάνω μέρος του παραθύρου Επεξεργασίας. Οι περισσότερες λειτουργίες είναι, επίσης, διαθέσιμες και μέσω συντομεύσεων πληκτρολογίου. Οι Συντομεύσεις πληκτρολογίου ενεργοποιούνται πατώντας <keycap>Ctrl</keycap> και ένα γράμμα. Μερικές συντομεύσεις εμπλέκουν άλλα πλήκτρα. Για λόγους καλύτερης αναγνωσιμότητας, τα γράμματα γράφτηκαν εδώ με κεφαλαία. Το <keycap>Ctrl</keycap> χρησιμοποιείται σε λειτουργικά συστήματα Windows, UNIX και UNIX-οειδή, με πληκτρολόγια που έχουν ένα πλήκτρο <keycap>Ctrl</keycap> ή <keycap>Control</keycap>. Οι χρήστες Mac θα πρέπει, αντιθέτως, να χρησιμοποιούν <keycombo> το <keycap>πλήκτρο</keycap> <keycap>Cmd</keycap> </keycombo>. Το πλήκτρο &quot;Cmd&quot; έχει ή ένα σύμβολο &quot;command&quot;, ή ένα λογότυπo με το μήλο της Apple στο πληκτρολόγιο.</para>
+
+    <para>Μπορείτε να παραμετροποιήσετε τις υπάρχουσες συντομεύσεις, ή να προσθέσετε νέες, σύμφωνα με τις ανάγκες σας. <link linkend="ch04.shortcuts.customization">Βλέπε Παραρτήματα - Παραμετροποίηση συντομεύσεων</link></para>
+
+    <table colsep="1" id="table.main.menu">
+      <title>Κύριο Μενού</title>
+
+      <tgroup cols="7" colsep="1">
+        <tbody>
+          <row>
+            <entry><guimenuitem>Έργο</guimenuitem></entry>
+
+            <entry><guimenuitem>Επεξεργασία</guimenuitem></entry>
+
+            <entry><guimenuitem>Μετάβαση σε</guimenuitem></entry>
+
+            <entry><guimenuitem>Προβολή</guimenuitem></entry>
+
+            <entry><guimenuitem>Εργαλεία</guimenuitem></entry>
+
+            <entry><guimenuitem>Επιλογές</guimenuitem></entry>
+
+            <entry><guimenuitem>Βοήθεια</guimenuitem></entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+
+    <section id="submenu.Project">
+      <title>Έργο<indexterm class="singular">
+          <primary>Μενού</primary> <secondary>'Έργο</secondary>
+        </indexterm></title>
+
+      <table colsep="1">
+        <title>Μενού έργου</title>
+
+        <tgroup cols="3" colsep="1">
+          <colspec align="left" colnum="1"/>
+
+          <colspec align="left" colnum="2"/>
+
+          <tbody>
+            <row>
+              <entry><guimenuitem>Νέο</guimenuitem></entry>
+
+              <entry/>
+
+              <entry>Δημιουργεί και ανοίγει ένα νέο έργο. Ο διάλογος για τη δημιουργία ενός έργου είναι ο ίδιος όπως και για την επεξεργασία του έργου. Βλέπε<xref linkend="chapter.project.properties"/></entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Άνοιγμα</guimenuitem></entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>O</keycap>
+                </keycombo></entry>
+
+              <entry>Ανοίγει ένα έργο που έχει ήδη δημιουργηθεί στο παρελθόν.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Εισαγωγή αρχείων προέλευσης...</guimenuitem></entry>
+
+              <entry/>
+
+              <entry>Αντιγράφει τα επιλεγμένα αρχεία στον κατάλογο <filename>προέλευσης</filename> και ξαναφορτώνει το έργο για τη φόρτωση των νέων αρχείων.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Εισαγωγή από MediaWiki...</guimenuitem></entry>
+
+              <entry/>
+
+              <entry>Εισάγει μονάδες από σελίδες MediaWiki, βασιζόμενο στο URL που βάλατε.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Επαναφόρτωση</guimenuitem></entry>
+
+              <entry><keycap>F5</keycap></entry>
+
+              <entry>Ξαναφορτώνει το έργο για να πάρει υπ' όψη τις εξωτερικές αλλαγές των αρχείων προέλευσης, τις παλιότερες μεταφραστικές μνήμες, τα γλωσσάρια και τις ρυθμίσεις του έργου.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Κλείσιμο</guimenuitem></entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>Shift</keycap>
+
+                  <keycap>W</keycap>
+                </keycombo></entry>
+
+              <entry>Αποθηκεύει τη μετάφραση και κλείνει το έργο.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Αποθήκευση</guimenuitem></entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>S</keycap>
+                </keycombo></entry>
+
+              <entry>Αποθηκεύει την εσωτερική μεταφρραστική μνήμη στον σκληρό δίσκο. Το OmegaT αποθηκεύει αυτόματα τις μεταφράσεις ανά 10 λεπτά, αλλά και όταν κλείνετε το έργο, ή βγείτε από το OmegaT.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Δημιουργία μεταφρασμένων εγγράφων</guimenuitem></entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>D</keycap>
+                </keycombo></entry>
+
+              <entry>Δημιουργεί τα έγγραφα προορισμού βασιζόμενο στη μετάφρασή σας του κειμένου του εγγράφου. Τα δημιουργούμενα έγγραφα προορισμού βρίσκονται στον κατάλογο <filename>προορισμού</filename>.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Ιδιότητες...</guimenuitem></entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>E</keycap>
+                </keycombo></entry>
+
+              <entry>Εμφανίζει τον διάλογο με τις <link linkend="chapter.project.properties">Ιδιότητες έργου</link> για την επεξεργασία των γλωσσών προορισμού και των τοποθεσιών καταλόγου.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Αρχεία έργου...</guimenuitem></entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>L</keycap>
+                </keycombo></entry>
+
+              <entry>Κλείνει ή ανοίγει το <link linkend="section.project.files">Παράθυρο αρχείων έργου</link> (ανάλογα αν είναι ανοικτό ή κλειστό).</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Έξοδος</guimenuitem></entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>Q</keycap>
+                </keycombo></entry>
+
+              <entry>Αποθηκεύει το έργο και βγαίνει από το <application>OmegaT</application>. Αν δεν αποθηκεύσατε ακόμη το έργο, αυτό επιβεβαιώνει χειρονακτικά αν θέλετε πράγματι να βγείτε.</entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+    </section>
+
+    <section>
+      <title>Επεξεργασία<indexterm class="singular">
+          <primary>Μενού</primary> <secondary>Επεξεργασία</secondary>
+        </indexterm></title>
+
+      <para>Σημείωση: τα πράγματα που βρίσκετε στις περισσότερες εφαρμογές (Αντιγραφή/Αποκοπή/Επικόλληση) δεν εμφανίζονται σε αυτό το μενού. Είναι όμως διαθέσιμα, χρησιμοποιώντας τις συντομεύσεις του συστήματός σας. Για παράδειγμα:</para>
+
+      <table colsep="1">
+        <title>Συντομεύσεις για Αντιγραφή/Αποκοπή/Επικόλληση</title>
+
+        <tgroup cols="3" colsep="1">
+          <colspec align="left" colnum="1"/>
+
+          <colspec align="left" colnum="2"/>
+
+          <tbody>
+            <row>
+              <entry><guimenuitem>Αντιγραφή</guimenuitem></entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>C</keycap>
+                </keycombo></entry>
+
+              <entry>Αντιγράφει το επιλεγμένο κείμενο στο πρόχειρο (clipboard).</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Αποκοπή</guimenuitem></entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>X</keycap>
+                </keycombo></entry>
+
+              <entry>Αντιγράφει το επιλεγμένο κείμενο στο πρόχειρο και διαγράφει το επιλεγμένο κείμενο.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Επικόλληση</guimenuitem></entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>V</keycap>
+                </keycombo></entry>
+
+              <entry>Επικολλά το κείμενο από το πρόχειρο, εκεί που βρίσκεται ο δείκτης (cursor).</entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+
+      <para>Το μενού Επεξεργασίας περιέχει τις εξής δυνατότητες:</para>
+
+      <table colsep="1">
+        <title>Επεξργασία μενού</title>
+
+        <tgroup cols="3" colsep="1">
+          <colspec align="left" colnum="1"/>
+
+          <colspec align="left" colnum="2"/>
+
+          <tbody>
+            <row>
+              <entry><guimenuitem>Αναίρεση τελευταίας ενέργειας</guimenuitem></entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>Z</keycap>
+                </keycombo></entry>
+
+              <entry>Ανάκτηση της κατάστασης πριν την εκτέλεση της τελευταίας ενέργειας επεξεργασίας. Αυτή η εντολή δεν λειτουργεί αν το τροποποιημένο τμήμα έχει, ήδη, επικυρωθεί.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Επανάληψη Τελευταίας ενέργειας</guimenuitem></entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>Y</keycap>
+                </keycombo></entry>
+
+              <entry>Ανάκτηση της κατάστασης πριν τη διαγραφή της τελευταίας ενέργειας επεξεργασίας. Αυτή η εντολή δεν λειτουργεί αν το τροποποιημένο τμήμα έχει, ήδη, επικυρωθεί.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Αντικατάσταση με το αποτέλεσμα μιας Αντιστοίχισης</guimenuitem></entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>R</keycap>
+                </keycombo></entry>
+
+              <entry>Αντικαθιστά όλο το τμήμα προορισμού με τη μερική αντιστοίχιση (fuzzy) που επιλέχθηκε τρεχόντως (από προεπιλογή, επιλέγεται η πρώτη αντιστοίχιση).</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Εισαγωγή Αντιστοίχισης</guimenuitem></entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>I</keycap>
+                </keycombo></entry>
+
+              <entry>Εισάγει τη μερική αντιστοίχιση που επιλέχθηκε, εκεί που βρίσκεται ο δείκτης (cursor). Αν επελέγη ένα κομμάτι του τμήματος προορισμού, αυτή η λειτουργία θα γράψει εκ νέου (overwrite) πάνω στην ενότητα που επιλέξατε.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Αντικατάσταση με Μηχανική Μετάφραση</guimenuitem></entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>M</keycap>
+                </keycombo></entry>
+
+              <entry>Αντικαθιστά το τμήμα προορισμού με τη μετάφραση η οποία προτάθηκε από την υπηρεσία Μηχανικής Μετάφρασης που επιλέξατε. Δεν θα γίνει καμία ενέργεια αν δεν ενεργοποιήθηκε καμία υπηρεσία Μηχανικής Μετάφρασης (βλέπε πιο κάτω, Μενού &gt; Επιλογές ).</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Αντικατάσταση με Κείμενο Προέλευσης</guimenuitem></entry>
+
+              <entry><keycombo>
+                  <keycap>Shift</keycap>
+
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>R</keycap>
+                </keycombo></entry>
+
+              <entry>Αντικαθιστά όλο το τμήμα προορισμού με την πηγή.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Εισαγωγή Πηγής</guimenuitem></entry>
+
+              <entry><keycombo>
+                  <keycap>Shift</keycap>
+
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>I</keycap>
+                </keycombo></entry>
+
+              <entry>Εισάγει την πηγή εκεί που βρίσκεται ο δείκτης.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Εισαγωγή Ετικετών προέλευσης</guimenuitem></entry>
+
+              <entry><keycombo>
+                  <keycap>Shift</keycap>
+
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>T</keycap>
+                </keycombo></entry>
+
+              <entry><indexterm class="singular">
+                  <primary>Ετικέτες</primary> <secondary>Εισαγωγή ετικετών προέλευσης</secondary>
+                </indexterm>Εισάγει τις ετικέτες προέλευσης, εκεί που βρίσκεται ο δείκτης. Όλες οι σχετικές ετικέτες στην πηγή - π.χ. οι ετικέτες OmegaT καθώς επίσης και παραμετροποιημένες, Java, printf κλπ - θα εισαχθούν στον τρέχοντα προορισμό, ανεξάρτητα από το αν βρίσκονται ήδη εκεί ή όχι. Τα κείμενα που περικλείονται απο ετικέτες, αντικαθίστανται από διαστήματα: <literal>&lt;f0&gt;&lt;f1&gt;Αυτό είναι κείμενο&lt;/f0&gt;&lt;/f1&gt;</literal> συνεπώς, θα αντιγραφεί ως <literal>&lt;f0&gt;&lt;f1&gt;one_space&lt;/f0&gt;&lt;/f1&gt;</literal></entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Εξαγωγή Επιλογής</guimenuitem></entry>
+
+              <entry><keycombo>
+                  <keycap>Shift</keycap>
+
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>C</keycap>
+                </keycombo></entry>
+
+              <entry>Εξάγει την τρέχουσα επιλογή σε ένα αρχείο κειμένου προς επεξεργασία. Αν δεν επελέγη κανένα κείμενο, το τρέχον τμήμα προέλευσης εγγράφεται σε αυτό το αρχείο. Όταν ο χρήστης βγαίνει από το <application>OmegaT</application>, αυτό το αρχείο δεν αδειάζει, προς χάρη της συνέπειας με τη συνηθισμένη συμπεριφορά του προχείρου. Τα εξαγόμενα περιεχόμενα αντιγράφονται στο αρχείο <filename>selection.txt</filename> που βρίσκεται στον κατάλογο με τα αρχεία ρυθμίσεων χρήστη (βλέπε <xref linkend="chapter.files.and.directories"/>).</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Δημιουργία Καταχώρησης Γλωσσαρίου</guimenuitem></entry>
+
+              <entry><keycombo>
+                  <keycap>Shift</keycap>
+
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>G</keycap>
+                </keycombo></entry>
+
+              <entry>Επιτρέπει στον χρήστη να δημιοθργήσει μια καταχώρηση στο αρχείο του προεπιλεγμένου γλωσσαρίου.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Αναζήτηση Έργου...</guimenuitem></entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>F</keycap>
+                </keycombo></entry>
+
+              <entry>Ανοίγει ένα νέο <link linkend="section.search.window">Παράθυρο Αναζήτησης</link>.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Εναλλαγή γραμμάτων σε...</guimenuitem></entry>
+
+              <entry><keycombo> <keycap>Shift</keycap> <keycap>F3</keycap> </keycombo> (βλέπε κείμενο)</entry>
+
+              <entry>Αλλάζει το είδος γραμμάτων του επιλεγμένου κειμένου του τμήματος προορισμού, στην επιλογή που κάνατε (Μικρά, Κεφαλαία ή Title case). Χρησιμοποιείστε το Shift+F3 <indexterm>
+                  <primary>Συντομεύσεις</primary> <secondary>Επιλογή μικρών-κεφαλαίων γραμμάτων - Shift+F3</secondary>
+                </indexterm>για να μετακινηθείτε ανάμεσα σε αυτές τις τρεις εναλλακτικές. Αν δεν επελέγη κανένα κείμενο, το <application>OmegaT</application> θα επιλέξει τη λέξη που περιέχει το γράμμα αμέσως στα δεξιά του δείκτη.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Επιλογή Μερικής Αντιστοίχισης (Fuzzy Match) #N</guimenuitem></entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>#N</keycap>
+                </keycombo></entry>
+
+              <entry>(Το #N είναι ένα ψηφίο από το 1 ως το 5) - Επιλέγει τη Nth Μερική Αντιστοίχιση που εμφανίζεται στο παράθυρο προβολής αντιστοιχίσεων, για να την αντικαταστήσει ή για να την εισάγει στο τμήμα. Το <xref linkend="match.viewer"/> περιγράφει λεπτομερώς τους κωδικούς χρώματος.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Να χρησιμοποιηθεί ως Μετάφραση Προεπιλογής</guimenuitem></entry>
+
+              <entry/>
+
+              <entry>Αν υπάρχουν διάφορες εναλλακτικές μεταφράσεις για το ενεργό τμήμα, μπορείτε να επισημάνετε την επιλεχθείσα εναλλακτική ως Μετάφραση προεπιλογής. Η καταχώρηση θα εμφανισθεί με γκρι χρώμα, αν υπάρχει μόνο μια διαθέσιμη μετάφραση.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Δημιουργία Εναλλακτικής Μετάφρασης</guimenuitem></entry>
+
+              <entry/>
+
+              <entry>Το ίδιο τμήμα μπορεί, ανάλογα με το context, να απαιτεί διαφορετικές μεταφράσεις. Επιλέξτε αυτή τη δυνατότητα από το Μενού, αν δεν ισχύει η τρέχουσα μετάφραση και εισάγετε την εναλλακτική μετάφραση.</entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+    </section>
+
+    <section id="submenu.GoTo">
+      <title>Μετάβαση σε<indexterm class="singular">
+          <primary>Μενού</primary> <secondary>Μετάβαση σε</secondary>
+        </indexterm></title>
+
+      <table colsep="1">
+        <title>Μεταβείτε στο Μενού</title>
+
+        <tgroup cols="3" colsep="1">
+          <colspec align="left" colnum="1"/>
+
+          <colspec align="left" colnum="2"/>
+
+          <tbody>
+            <row>
+              <entry><guimenuitem>Επόμενο Αμετάφραστο Τμήμα</guimenuitem></entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>U</keycap>
+                </keycombo></entry>
+
+              <entry>Μετακινείται στο επόμενο τμήμα που δεν έχει ισοδύναμο στη μεταφραστική μνήμη.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Επόμενο Τμήμα</guimenuitem></entry>
+
+              <entry><keycombo> <keycap>Ctrl</keycap> <keycap>N</keycap> </keycombo> ή <keycap>Enter</keycap> ή <keycap>Tab</keycap></entry>
+
+              <entry>Μετακινείται στο επόμενο τμήμα. Αν το τρέχον τμήμα είναι το τελευταίο ενός αρχείου, μετακινείται στο πρώτο τμήμα του επόμενου αρχείου.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Προηγούμενο Τμήμα</guimenuitem></entry>
+
+              <entry><keycombo> <keycap>Ctrl</keycap> <keycap>P</keycap> </keycombo> ή <keycombo> <keycap>Ctrl</keycap> <keycap>Enter</keycap> </keycombo> ή <keycombo> <keycap>Ctrl</keycap> <keycap>Tab</keycap> </keycombo></entry>
+
+              <entry>Μετακινείται στο προηγούμενο τμήμα. Αν το τρέχον τμήμα είναι το πρώτο ενός αρχείου, μετακινείται στο τελευταίο τμήμα του προηγούμενου αρχείου.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Αριθμός Τμήματος...</guimenuitem></entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>J</keycap>
+                </keycombo></entry>
+
+              <entry>Το τμήμα ανοίγει όταν εισάγετε τον αριθμό τμήματος.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Επόμενη Σημείωση</guimenuitem></entry>
+
+              <entry/>
+
+              <entry>Θα ανοίξει το επόμενο τμήμα που έχει μια συνημμένη σημείωση.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Προηγούμενη Σημείωση</guimenuitem></entry>
+
+              <entry/>
+
+              <entry>Θα ανοίξει το προηγούμενο τμήμα που έχει μια σημείωση.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Προς τα εμπρός στο Ιστορικό...</guimenuitem></entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>Shift</keycap>
+
+                  <keycap>N</keycap>
+                </keycombo></entry>
+
+              <entry>Το <application>OmegaT</application> θυμάται ποια τμήματα εκτελέσθηκαν. Με αυτή την εντολή, μπορείτε να μετακινηθείτε προς τα εμπρός, στο τμήμα που αφήσατε προηγουμένως με την εντολή <guimenuitem>Προς τα πίσω στο Ιστορικό</guimenuitem>...</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Προς τα πίσω στο Ιστορικό...</guimenuitem></entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>Shift</keycap>
+
+                  <keycap>P</keycap>
+                </keycombo></entry>
+
+              <entry>Με αυτή την εντολή μπορείτε να μετακινηθείτε προς τα πίσω, ένα τμήμα κάθε φορά, για να επιστρέψετε αργότερα στο τρέχον τμήμα, χρησμοποιώντας την παρακάτω εντολή <guimenuitem>Προς τα εμπρός στο Ιστορικό... </guimenuitem>.</entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+    </section>
+
+    <section id="submenu.View">
+      <title>Προβολή<indexterm class="singular">
+          <primary>Μενού</primary> <secondary>Προβολή</secondary>
+        </indexterm></title>
+
+      <table colsep="1">
+        <title>Προβολή Μενού\</title>
+
+        <tgroup cols="2" colsep="1">
+          <colspec align="left" colnum="1"/>
+
+          <tbody>
+            <row>
+              <entry><guimenuitem>Επισήμανση Μεταφρασμένων Τμημάτων</guimenuitem></entry>
+
+              <entry>Αν το τσεκάρετε, τα μεταφρασμένα τμήματα θα επισημανθούν με κίτρινο χρώμα.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Επισήμανση Αμετάφραστων Τμημάτων</guimenuitem></entry>
+
+              <entry>Αν το τσεκάρετε, τα αμετάφραστα τμήματα θα επισημανθούν με μωβ χρώμα.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Εμφάνιση Τμημάτων προέλευσης</guimenuitem></entry>
+
+              <entry>Αν το τσεκάρετε, τα εμφανισθούν τα τμήματα προέλευσης και θα επισημανθούν με πράσινο χρώμα. Αν δεν το τσεκάρετε, δεν θα εμφανίζονται τα τμήματα προέλευσης.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Επισήμανση Μη-Μοναδικών Τμημάτων</guimenuitem></entry>
+
+              <entry>Αν το τσεκάρετε, τα μη-μοναδικά τμήματα θα επισημανθούν με απαλό γκρι χρώμα.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Επισήμαση Τμημάτων με σημειώσεις</guimenuitem></entry>
+
+              <entry>Αν το τσεκάρετε, τα τμήματα με σημειώσεις θα επισημανθούν με γαλάζιο χρώμα. Αυτή η επισήμανση έχει προτεραιότητα έναντι της Επισήμανσης των Μεταφρασμένων και των Αμετάφραστων τμημάτων.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Επισήμανση Μη-διαχωρίσμων Διαστημάτων</guimenuitem></entry>
+
+              <entry>Αν το τσεκάρετε, τα μη-διαχωρίσιμα διαστήματα μέσα στο Τμήμα, θα επισημανθούν με γκρι φόντο.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Πληροφορίες Τροποποίησης</guimenuitem></entry>
+
+              <entry>Αν ρυθμίσετε την επιλογή Τροποποίηση Εμφάνισης στο <emphasis>Επιλεγμένη</emphasis> θα εμφανισθεί ο χρόνος και ο δημιουργός της τελευταίας αλλαγής στο τρέχον τμήμα. Αν τη ρυθμίσετε στο<emphasis> Όλες </emphasis>δείχνει τις πληροφορίες για όλα τα τμήματα, ενώ το <emphasis>Καμία</emphasis> απενεργοποιεί αυτή την επιλογή.</entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+    </section>
+
+    <section id="submenu.Tools">
+      <title>Εργαλεία<indexterm class="singular">
+          <primary>Μενού</primary> <secondary>Εργαλεία</secondary>
+        </indexterm></title>
+
+      <table colsep="1">
+        <title>Μενού εργαλείων</title>
+
+        <indexterm class="singular">
+          <primary>Αντιστοιχίσεις</primary> <secondary>Στατιστικές αντιστοιχίσεων</secondary>
+        </indexterm>
+
+        <indexterm class="singular">
+          <primary>Έργο</primary> <secondary>Στατιστικές αντιστοίχισης</secondary>
+        </indexterm>
+
+        <indexterm class="singular">
+          <primary>Έργο</primary> <secondary>Στατιστικές</secondary>
+        </indexterm>
+
+        <tgroup cols="2" colsep="1">
+          <colspec align="left" colnum="1"/>
+
+          <tbody>
+            <row>
+              <entry><guimenuitem>Επικύρωση ετικετών</guimenuitem></entry>
+
+              <entry><guimenu>Ctrl+T</guimenu>: Ελέγχει για απωλεσθείσες ή για μετακινηθείσες ετικέτες σε μορφοποιημένα αρχεία. Θα εμφανίσει μια λίστα τμημάτων με σφάλματα ετικέτας και πιθανές ασυμβατότητες. Βλέπε <link linkend="section.tag.validation">Επικύρωση Ετικέτας</link> και <xref linkend="chapter.formatted.text"/>.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Διαγραφή ετικετών</guimenuitem></entry>
+
+              <entry>Όταν ενεργοποιηθεί, γίνεται διαγραφή όλων των ετικετών μορφοποίησης από το τμήμα προέλευσης. Αυτό είναι χρήσιμο όταν έχετε να κάνετε με κείμενα όπου η inline μορφοποίηση δεν βρίσκει μια πραγματική χρήση (π.χ., OCRed PDF, κακή μετατροπή των .odt ή των .docx, κλπ.) Διαγράφονται μόνον οι inline ετικέτες, οπότε δεν θα πρέπει να υπάρχει κανένα πρόβλημα με το άνοιγμα των εγγράφων προορισμού. Η μη-ορατή μορφοποίηση (π.χ., που δεν εμφανίζεται ως ετικέτες στην Περιοχή Επεξεργασίς του OmegaT) διατηρείται και στο έγγραφο προορισμού.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Στατιστικές</guimenuitem></entry>
+
+              <entry>Ανοίγει ένα νέο παράθυρο και εμφανίζει τις στατιστικές έργου, π.χ. τα συνολικά δεδομένα του έργου και τα συνολικά για το κάθε αρχείο του έργου.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Στατιστικές αντιστοίχισης</guimenuitem></entry>
+
+              <entry>Εμφανίζει τις Στατιστικές αντιστοίχισης για το έργο: τον αριθμό επαναλήψεων, τις ακριβείς αντιστοιχίσεις, τις μερικές αντιστοιχίσεις (fuzzy matches) και τις μη-αντιστοιχίσεις. για τμήματα, λέξεις και χαρακτήρες.</entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+    </section>
+
+    <section id="submenu.Options">
+      <title><indexterm class="singular">
+          <primary>Μενού</primary> <secondary>Επιλογές</secondary>
+        </indexterm>Επιλογές</title>
+
+      <table colsep="1">
+        <title>Μενού επιλογών</title>
+
+        <tgroup cols="2" colsep="1">
+          <colspec align="left" colnum="1"/>
+
+          <tbody>
+            <row>
+              <entry><guimenuitem>Χρησιμοποιείστε το TAB για να προχωρήσετε</guimenuitem></entry>
+
+              <entry>Ορίζει το κλειδί επικύρωσης στο <guimenuitem>Tab</guimenuitem> αντί για το προεπιλεγμένο <guimenuitem>Enter</guimenuitem>. Αυτή επιλογή είναι χρήσιμη για συστήματα εισαγωγής κάποιων Κινεζικών, Ιαπωνικών ή Κορεατικών χαρακτήρων.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Πάντα επιβεβαίωση πριν την Έξοδο</guimenuitem></entry>
+
+              <entry>Αυτό το πρόγραμμα θα ζητά επιβεβαίωση πριν κλείσει.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Μηχανική Μετάφραση</guimenuitem></entry>
+
+              <entry>Σας επιτρέπει να ενεργοποιείτε/απενεργοποιείτε τα εργαλεία Μηχανικής Μετάφρασης που προσφέρονται. Όταν ενεργοποιηθεί, <keycombo> <keycap>Ctrl</keycap> <keycap>M</keycap> </keycombo> θα εισάγει την πρόταση στο τμήμα προορισμού του τρέχοντος τμήματος.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Γλωσσάρι</guimenuitem></entry>
+
+              <entry>προορίζεται για μελλοντική χρήση από Πρόσθετα (plugins)</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>TransTips</guimenuitem></entry>
+
+              <entry>Σας επιτρέπει να ενεργοποιείτε/απενεργοποιείτε τη δυνατότητα των <emphasis>TransTips </emphasis>και να ορίζετε τη επιλογή για<emphasis> Ακριβή Αντιστοίχιση.</emphasis> Όταν ενεργοποιήσετε τα <emphasis>TransTips</emphasis>, με ένα δεξί κλικ σε μια επιλεγμένη λέξη στα αρχεία προέλευσης, θα ανοίξει ένα αναδυόμενο μενού με τις καταχωρήσεις γλωσσαρίου για τη λέξη που κλικάρατε. Τότε, μπορείτε να κλικάρετε στην προτιμώμενη μετάφραση, για να την εσιάγετε στο τμήμα προορισμού, στην τρέχουσα θέση. Όταν ενεργοποιείτε τα <emphasis>TransTips/Ακριβής Αντιστοίχιση </emphasis>, θα ελέγχονται μόνον οι πλήρεις λέξεις, ειδάλλως θα αντιστοιχίζονται ακόμη και τμήματα λέξεων.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Γραμματοσειρά...</guimenuitem></entry>
+
+              <entry>Εμφανίζει τον διάλογο για να τροποποιήσετε τη γραμματοσειρά εμφάνισης κειμένου. Οι χρήστες παλιών υπολογιστών που θεωρούν ότι η αλλαγή διαστάσεων παραθύρου είναι πολύ αργή μπορούν να δοκιμάσουν να αλλάξουν τη γραμματοσειρά. Βλέπε ρυθμίσεις γραμματοσειρών στα <link linkend="chapter.misc">Διάφορα</link></entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Φίλτρα αρχείου...</guimenuitem></entry>
+
+              <entry>Εμφανίζει τον διάλογο <link linkend="chapter.file.filters">Φίλτρα αρχείου</link> για να ρυθμίσετε τον τρόπο χειρισμού των αρχείων και του parsing.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Κατάτμηση...</guimenuitem></entry>
+
+              <entry>Ανοίγει τον διάλογο <link linkend="chapter.segmentation">Κατάτμηση πηγής</link> για να ρυθμίσετε την κατάτμηση κειμένου.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Ορθογραφικός Έλεγχος...</guimenuitem></entry>
+
+              <entry>Ενφανίζει το παράθυρο <link linkend="chapter.spellchecker">Ρύθμιση ορθογραφικού ελέγχου</link> για την εγκατάσταση, ρύθμιση και ενεργοποίηση του ορθογραφικού διορθωτή.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Συμπεριφορά Επεξεργασίας...</guimenuitem></entry>
+
+              <entry>Εμφανίζει τον διάλογο <link linkend="chapter.translation.editing">Επεξεργασία μετάφρασης</link> προς ρύθμιση.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Επικύρωση ετικέτας...</guimenuitem></entry>
+
+              <entry>Για προγραμματιστές: σας επιτρέπει να ρυθμίζετε τις επιλογές Επικύρωσης ετικέτας, για να ελέγχετε και για μεταβλητές προγραμματισμού (%...).</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Ομάδα...</guimenuitem></entry>
+
+              <entry>Εδώ βάλτε το όνομά σας και θα προσαρτηθεί σε όλα τα τμήματα που μεταφράσατε εσείς.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Εξωτερικά TMXs...</guimenuitem></entry>
+
+              <entry>Επιτρέπει στον χρήστη να αποφασίζει τον τρόπο χειρισμού των ετικετών στα εξωτερικά αρχεία TMX (π.χ. που δεν δημιουργήθηκαν με το OmegaT).</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Προβολή...</guimenuitem></entry>
+
+              <entry>Περιέχει την επιλογή να είναι όλα τα τμήματα προέλευσης με έντονα γράμματα (bold) και για επισήμανση του πρώτου μη-μοναδικού τμήματος.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Αποθήκευση...</guimenuitem></entry>
+
+              <entry>επτιρέπει στον χρήστη να επιλέγει το διάστημα - σε λεπτά και σε δευτερόλεπτα - ανάμεσα στςι διαδοχικές αυτόματες αποθηκεύσεις του έργου. Το ελάχιστο διάστημα είναι τα 10 δευτερόλεπτα.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Σύνδεση με Ενδιάμεσο διακομιστή...</guimenuitem></entry>
+
+              <entry>Εισάγετε το όνομα χρήστη και τον κωδικό σας, αν χρησιμοποιείτε έναν ενδιάμεσο διακομιστή για την πρόσβαση στα έργα σας.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Επαναφορά Κυρίου Παραθύρου</guimenuitem></entry>
+
+              <entry>Επαναφέρει τα συστατικά του κυρίου παραθύρου του OmegaT στην προεπιλεγμένη τους κατάσταση. Χρησιμοποιείστε αυτό το χαρακτηριστικό όταν έχετε μετακινήσει, ή κρύψει, ένα ή και περισσότερα συστατικά και δεν μπορείτε να τα επαναφέρετε στην επιθυμητή κατάσταση. Μπορείτε επίσης να το χρησιμοποιήσετε όταν οι Περιοχές εργασίας δεν εμφανίζονται όπως θα περιμένατε, μετά από μια αναβάθμιση του OmegaT.</entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+    </section>
+
+    <section id="submenu.Help">
+      <title>Βοήθεια<indexterm class="singular">
+          <primary>Μενού</primary> <secondary>Βοήθεια</secondary>
+        </indexterm></title>
+
+      <table colsep="1">
+        <title>Μενού Βοήθειας</title>
+
+        <tgroup cols="2" colsep="1">
+          <colspec align="left" colnum="1"/>
+
+          <tbody>
+            <row>
+              <entry><guimenuitem>Εγχειρίδιο χρήστη...</guimenuitem></entry>
+
+              <entry><keycap>F1:</keycap> Ανοίγει τον Help browser εμφανίζοντας το εγχειρίδιο αυτό σε ένα χωριστό παράθυρο.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Σχετικά με...</guimenuitem></entry>
+
+              <entry>Εμφανίζει πληροφορίες για το copyright, την απόδοση αναγνώρισης (credits) και για την Άδεια.</entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+    </section>
+  </section>
+
+  <section id="keyboard.shortcuts">
+    <title>Συντομεύσεις πληκτρολογίου<indexterm class="singular">
+        <primary>Συντομεύσεις πληκτρολογίου</primary>
+      </indexterm></title>
+
+    <para>Οι παρακάτω συντομεύσεις πληκτρολογίου προσφέρονται μέσα στο κύριο παράθυρο. Όταν στο προσκήνιο βρεθεί ένα άλλο παράθυρο, κάντε κλικ στο κύριο παράθυρο για να το φέρετε στο προσκήνιο ή πατήστερ <keycap>Esc</keycap> για να κλείσετε το άλλο παράθυρο.</para>
+
+    <para>Οι Συντομεύσεις πληκτρολογίου ενεργοποιούνται πατώντας <keycap>Ctrl</keycap> και ένα γράμμα. Μερικές συντομεύσεις εμπλέκουν άλλα πλήκτρα. Για λόγους καλύτερης αναγνωσιμότητας, τα γράμματα γράφτηκαν εδώ με κεφαλαία.</para>
+
+    <para>Το Ctrl χρησιμοποιείται στα λειτουργικά συστήματα Windows, UNIX και UNIX-οειδή, με πληκτρολόγια που έχουν ένα πλήκτρο <keycap>Ctrl</keycap> / <keycap>Control key</keycap>. Οι χρήστες Mac πρέπει, αντιθέτως, να χρησιμοποιούν το <guimenuitem>cmd+key.</guimenuitem> Στα πληκτρολόγια Apple, το πλήκτρο <guimenuitem>cmd</guimenuitem> ή φέρει μια ετικέτα command, ή ένα λογότυπο της Apple.</para>
+
+    <itemizedlist>
+      <listitem>
+        <para>Διαχείριση έργου</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Γίνεται επεξεργασία</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Μετακίνηση στα πέριξ</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Παράθυρα αναφοράς</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Άλλα</para>
+      </listitem>
+    </itemizedlist>
+
+    <section>
+      <title id="keyboard.project.management"><indexterm class="singular">
+          <primary>Συντομεύσεις πληκτρολογίου</primary> <secondary>Έργο</secondary>
+        </indexterm>Διαχείριση έργου<indexterm class="singular">
+          <primary>Έργο</primary> <secondary>Συντομεύσεις διαχείρισης έργου</secondary>
+        </indexterm></title>
+
+      <table colsep="1">
+        <title>Συντομεύσεις διαχείρισης έργου</title>
+
+        <tgroup cols="3" colsep="1">
+          <colspec align="left" colnum="1"/>
+
+          <colspec align="left" colnum="2"/>
+
+          <tbody>
+            <row>
+              <entry>Άνοιγμα έργου</entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>O</keycap>
+                </keycombo></entry>
+
+              <entry>Εμφανίζει έναν διάλογο για τον εντοπισμό ενός υπάρχοντος έργου.</entry>
+            </row>
+
+            <row>
+              <entry>Αποθήκευση</entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>S</keycap>
+                </keycombo></entry>
+
+              <entry>Αποθηκεύει την τρέχουσα εργασία στην εσωτερική μεταφραστική μνήμη (το αρχείο project_save.tmx βρίσκεται στον κατάλογο του έργου <filename>omegat</filename>).</entry>
+            </row>
+
+            <row>
+              <entry>Κλείσιμο έργου</entry>
+
+              <entry><keycombo>
+                  <keycap>Shift</keycap>
+
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>W</keycap>
+                </keycombo></entry>
+
+              <entry>Κλείνει το τρέχον έργο.</entry>
+            </row>
+
+            <row>
+              <entry>Δημιουργία Μεταφρασμένων Εγγράφων</entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>D</keycap>
+                </keycombo></entry>
+
+              <entry>Δημιουργεί τα μεταφρασμένα έγγραφα στον κατάλογο προορισμού του έργου και δημιουργεί αρχεία μετάφρασης (αρχεία level1, level2 και omegat tmx) στον αρχικό κατάλογο (root) του έργου.</entry>
+            </row>
+
+            <row>
+              <entry>Ιδιότητες έργου</entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>E</keycap>
+                </keycombo></entry>
+
+              <entry>Εμφανίζει τις ρυθμίσεις έργου για μια τροποποίηση, αν απαιτείται.</entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+    </section>
+
+    <section id="keyboard.editing">
+      <title><indexterm class="singular">
+          <primary>Συντομεύσεις πληκτρολογίου</primary> <secondary>Επεξεργασία</secondary>
+        </indexterm>Γίνεται επεξεργασία<indexterm class="singular">
+          <primary>Συντομεύσεις πληκτρολογίου</primary> <secondary>Μετάβαση στο</secondary>
+        </indexterm></title>
+
+      <table colsep="1">
+        <title>Γίνεται επεξεργασία συντομεύσεων</title>
+
+        <tgroup cols="3" colsep="1">
+          <colspec align="left" colnum="1"/>
+
+          <colspec align="left" colnum="2"/>
+
+          <tbody>
+            <row>
+              <entry>Αναίρεση τελευταίας ενέργειας</entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>Z</keycap>
+                </keycombo></entry>
+
+              <entry>Αναιρεί τις τελευταίες ενέργειες επεξεργασίας στο τρέχον τμήμα προορισμού</entry>
+            </row>
+
+            <row>
+              <entry>Επανάληψη τελευταίας ενέργειας</entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>Y</keycap>
+                </keycombo></entry>
+
+              <entry>Επαναλαμβάνει τις τελευταίες ενέργειες επεξεργασίας στο τρέχον τμήμα προορισμού</entry>
+            </row>
+
+            <row>
+              <entry>Επιλέξτε τον αριθμό αντιστοίχισης #N</entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>#N</keycap>
+                </keycombo></entry>
+
+              <entry>Το #N είναι ένα ψηφίο από το 1 ως το 5. Η συντόμευση επιλέγει την αντιστοίχιση υπ' αριθμ. Nth που προβάλλεται στο παράθυρο αντιστοίχισης (από προεπιλογή,επιλέγεται η πρώτη αντιστοίχιση)</entry>
+            </row>
+
+            <row>
+              <entry>Αντικατάσταση με την Αντιστοίχιση</entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>R</keycap>
+                </keycombo></entry>
+
+              <entry>Αντικαθιστά τα περιεχόμενα του τρέχοντος τμήματος προορισμού με την επιλεγμένη αντιστοίχιση (από προεπιλογή,επιλέγεται η πρώτη αντιστοίχιση)</entry>
+            </row>
+
+            <row>
+              <entry>Εισαγωγή αντιστοίχισης</entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>I</keycap>
+                </keycombo></entry>
+
+              <entry>Εισάγει την επιλεγμένη αντιστοίχιση στη θέση του δείκτη, στο τρέχον τμήμα προορισμού (από προεπιλογή, επιλέγεται η πρώτη αντιστοίχιση)</entry>
+            </row>
+
+            <row>
+              <entry>Αντικατάσταση με την πηγή</entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>Shift+R</keycap>
+                </keycombo></entry>
+
+              <entry>Αντικαθιστά τα περιεχόμενα του τρέχοντος τμήματος προορισμού με τα περιεχόμενα του κειμένου προέλευσης</entry>
+            </row>
+
+            <row>
+              <entry>Εισαγωγή πηγής</entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>Shift+I</keycap>
+                </keycombo></entry>
+
+              <entry>Εισάγει τα περιεχόμενα του κειμένου προέλευσης στο τμήμα προορισμού, εκεί που βρίσκεται ο δείκτης</entry>
+            </row>
+
+            <row>
+              <entry>Εισαγωγή Ετικετών προέλευσης</entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>Shift+T</keycap>
+                </keycombo></entry>
+
+              <entry>Εισάγει τις ετικέτες προέλευσης στο τμήμα προορισμού, εκεί που βρίσκεται ο δείκτης</entry>
+            </row>
+
+            <row>
+              <entry>Αναζήτηση έργου</entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>F</keycap>
+                </keycombo></entry>
+
+              <entry>Εμφανίζει έναν κατάλογο για να διεξάγετε αναζητήσεις στο έργο</entry>
+            </row>
+
+            <row>
+              <entry>Αντικατάσταση με Μηχανική Μετάφραση</entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>M</keycap>
+                </keycombo></entry>
+
+              <entry>Αντικαθιστά το τμήμα προορισμού με τη Μηχανική Μετάφραση της πηγής. Καμία ενέργεια, αν απενεργοποιήσετε τα μηχανικά εργαλεία  (βλέπε Μενού &gt; Επιλογές &gt; Μηχανική Μετάφραση)</entry>
+            </row>
+
+            <row>
+              <entry>Εξαγωγή Επιλογής</entry>
+
+              <entry><keycombo>
+                  <keycap>Shift</keycap>
+
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>C</keycap>
+                </keycombo></entry>
+
+              <entry>Εξάγει την τρέχουσα επιλογή σε ένα αρχείο κειμένου προς επεξεργασία.</entry>
+            </row>
+
+            <row>
+              <entry>Δημιουργία Καταχώρησης Γλωσσαρίου</entry>
+
+              <entry><keycombo>
+                  <keycap>Shift</keycap>
+
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>G</keycap>
+                </keycombo></entry>
+
+              <entry>Επιτρέπει στον χρήστη να δημιοθργήσει μια καταχώρηση στο αρχείο του προεπιλεγμένου γλωσσαρίου.</entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+    </section>
+
+    <section id="keyboard.moving.around">
+      <title><indexterm class="singular">
+          <primary>Συντομεύσεις πληκτρολογίου</primary> <secondary>Μετάβαση στο</secondary>
+        </indexterm>Μετακίνηση στα πέριξ</title>
+
+      <table colsep="1">
+        <title>Μετακίνηση μεταξύ συντομέυσεων</title>
+
+        <tgroup cols="3" colsep="1">
+          <colspec align="left" colnum="1"/>
+
+          <colspec align="left" colnum="2"/>
+
+          <tbody>
+            <row>
+              <entry>Επόμενο Αμετάφραστο Τμήμα</entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>U</keycap>
+                </keycombo></entry>
+
+              <entry>Μετακινεί το πεδίο επεξεργασίας στο επόμενο τμήμα που δεν κατεγράφη στη μεταφραστική μνήμη του έργου</entry>
+            </row>
+
+            <row>
+              <entry>Επόμενο Τμήμα</entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>N</keycap>
+                </keycombo>, <keycap>Enter</keycap> or
+              <keycap>Return</keycap></entry>
+
+              <entry>Μετακινεί το πεδίο επεξεργασίας στο επόμενο τμήμα.</entry>
+            </row>
+
+            <row>
+              <entry>Προηγούμενο Τμήμα</entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>P</keycap>
+                </keycombo></entry>
+
+              <entry>Μετακινεί το πεδίο επεξεργασίας στο προηγούμενο τμήμα</entry>
+            </row>
+
+            <row>
+              <entry>Αριθμός Τμήματος...</entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>J</keycap>
+                </keycombo></entry>
+
+              <entry>Θα σας μετακινήσει στον αριθμό τμήματος που εισάγατε</entry>
+            </row>
+
+            <row>
+              <entry>Προς τα πίσω στο Ιστορικό...</entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>Shift+P</keycap>
+                </keycombo></entry>
+
+              <entry>Moves one segment back in history</entry>
+            </row>
+
+            <row>
+              <entry>Προς τα εμπρός στο Ιστορικό...</entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>Shift+N</keycap>
+                </keycombo></entry>
+
+              <entry>Θα σας μετακινήσει κατά ένα τμήμα προς τα εμπρός στο ιστορικό</entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+    </section>
+
+    <section id="keyboard.other">
+      <title><indexterm class="singular">
+          <primary>Συντομεύσεις πληκτρολογίου</primary> <secondary>'Αλλα</secondary>
+        </indexterm>Άλλα</title>
+
+      <table colsep="1">
+        <title>Διάφορες συντομεύσεις</title>
+
+        <tgroup cols="3" colsep="1">
+          <colspec align="left" colnum="1"/>
+
+          <colspec align="left" colnum="2"/>
+
+          <tbody>
+            <row>
+              <entry>Κατάλογος Αρχείων έργου</entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>L</keycap>
+                </keycombo></entry>
+
+              <entry>Εμφανίζει τον κατάλογο με τα αρχεία του έργου</entry>
+            </row>
+
+            <row>
+              <entry>Επικύρωση ετικετών</entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>T</keycap>
+                </keycombo></entry>
+
+              <entry>Ανοίγει το παράθυρο επικύρωση ετικέτας.</entry>
+            </row>
+
+            <row>
+              <entry>Εξαγωγή Επιλογής</entry>
+
+              <entry><keycombo>
+                  <keycap>Shift</keycap>
+
+                  <keycap>Ctrl+C</keycap>
+                </keycombo></entry>
+
+              <entry>Εξάγει την τρέχουσα επιλογή ή την τρέχουσα πηγή, αν δεν έχει επιλεγεί κανένα κείμενο. Το κείμενο εξάγεται σε ένα αρχείο απλού κειμένου.</entry>
+            </row>
+
+            <row>
+              <entry>Αναζήτηση έργου</entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>F</keycap>
+                </keycombo></entry>
+
+              <entry>Ανοίγει ένα νέο παράθυρο αναζήτησης.</entry>
+            </row>
+
+            <row>
+              <entry>Αρχεία βοήθειας</entry>
+
+              <entry><keycap>F1</keycap></entry>
+
+              <entry>Εμφανίζει τα αρχεία βοήθειας του <application>OmegaT</application> σε ένα χωριστό παράθυρο</entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+    </section>
+  </section>
+</chapter>

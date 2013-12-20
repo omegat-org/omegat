@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<chapter id="chapter.searches">
+  <title>Αναζητήσεις<indexterm class="singular">
+      <primary>Αναζητήσεις</primary>
+    </indexterm></title>
+
+  <section id="search.window">
+    <title>Παράθυρο αναζήτησης</title>
+
+    <figure id="text.search.window">
+      <title>Παράθυρο αναζήτησης κειμένου<indexterm class="singular">
+          <primary>Παράθυρο αναζήτησης</primary> <secondary>Παράδειγμα</secondary>
+        </indexterm></title>
+
+      <mediaobject>
+        <imageobject role="html">
+          <imagedata fileref="images/TextSearch25.png"/>
+        </imageobject>
+
+        <imageobject role="fo">
+          <imagedata fileref="images/TextSearch25.png" width="90%"/>
+        </imageobject>
+      </mediaobject>
+    </figure>
+
+    <note>
+      <para>Η παραπάνω αναζήτηση βρίσκει όλα τα τμήματα προορισμού που περιέχουν χαρακτήρες, μάλλον απίθανους στον προορισμό - π.χ. Σλοβενική - γλώσσα.</para>
+    </note>
+
+    <section>
+      <title>Γϊνεται αναζήτηση<indexterm class="singular">
+          <primary>Συντομεύσεις</primary> <secondary>Αναζήτηση - Ctrl+F</secondary>
+        </indexterm></title>
+
+      <para>Το <application>OmegaT</application> προσφέρει ένα ευρύ φάσμα με ισχυρές λειτουργίες αναζήτησης. Ανοίξτε το Παράθυρο Αναζήτησης με το <keycombo> <keycap>Ctrl</keycap> <keycap>F</keycap> </keycombo> και βάλτε στο κουτί Αναζήτησης τη λέξη ή τη φράση που θέλετε να αναζητήσετε. Εναλλακτικά, στο παράθυρο Επεξεργασίας, επιλέξτε μια λέξη ή φράση στο πεδίο επεξεργασίας (κείμενο προορισμού του τρέχοντος τμήματος) και πατήστε <keycombo> <keycap>Ctrl</keycap> <keycap>F</keycap> </keycombo>. Η λέξη ή φράση θα εισαχθεί αυτομάτως στο κουτί Αναζήτησης. Μπορείτε να έχετε ανοικτά πολλά Παράθυρα Αναζήτησης ταυτόχρονα, αλλά κλείστε τα όταν δεν σας χρειάζονται άλλο, ούτως ώστε να μην ενοχλούν την επιφάνεια εργασίας σας.</para>
+    </section>
+
+    <section>
+      <title>Τοποθεσία αναζήτησης</title>
+
+      <para>Οι αναζητήσεις διεξάγονται από προεπιλογή τόσο στην ενότητα προέλευσης όσο και προορισμού του έργου, αλλά μπορείτε να περιορίσετε την αναζήτησή σας μόνο στο κείμενο προέλευσης ή προορισμού. Μπορείτε να κάνετε αναζήτηση</para>
+
+      <itemizedlist>
+        <listitem>
+          <para>μόνο στο έργο (ρύθμιση προεπιλογής)</para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para>και στο έργο και στις μεταφραστικές μνήμες αναφοράς στο /tm/ (ελέγξτε <emphasis>Αναζήτηση TMs)</emphasis></para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para>σε ένα μεμονωμένο αρχείο ή έναν κατάλογο που περιέχει μια ομάδα αρχείων (ελέγξτε <emphasis>Αναζήτηση αρχείων)</emphasis></para>
+        </listitem>
+      </itemizedlist>
+
+      <para>Όταν κάνετε αναζήτηση μέσα στα αρχεία (και όχι στις μεταφραστικές μνήμες), το <application>OmegaT</application> περιορίζει την αναζήτηση σε αρχεία πηγαίας μορφής. Κατά συνέπεια, παρόλο που το OmegaT είναι πολύ ικανό να χειρίζεται αρχεία<filename> tmx</filename> , δεν τα περιλαμβάνει στην αναζήτηση αρχείων. Αν ενεργοποιήσετε τις <emphasis role="bold"><indexterm class="singular">
+          <primary>Αναζητήσεις</primary> <secondary>Προχωρημένες επιλογές</secondary>
+        </indexterm>Προχωρημένες Επιλογές</emphasis>, μπορείτε να συνδυάσετε την αναζήτηση με το όνομα του συγγραφέα της μετάφρασης και τη χρονική στιγμή που έγινε η τελευταία αλλαγή.</para>
+    </section>
+  </section>
+
+  <section id="using.wild.cards">
+    <title>Using wild cards<indexterm class="singular">
+        <primary>Αναζητήσεις</primary> <secondary>Χρησιμοποιώντας wild cards</secondary>
+      </indexterm></title>
+
+    <para>In both exact and keyword searches, the wild card search characters
+    '*' and '?' can be used. They have the meaning, familiar to Word
+    users:</para>
+
+    <itemizedlist>
+      <listitem>
+        <para>'*' matches zero or more characters, from the current position
+        in a given word to its end. The search term <literal>'run*'</literal>
+        for example would match words <literal>'run'</literal>,
+        <literal>'runs'</literal> and <literal>'running'</literal>.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Το σύμβολο '?' αντιστοιχίζει οποιονδήποτε μεμονωμένο χαρακτήρα. Για παράδειγμα, η έκφραση <literal>'run?'</literal> θα αντιστοιχίσει τη λέξη <literal>'runs'</literal> αλλά και <literal>'runn'</literal> στη λέξη <literal>'running'</literal>.</para>
+      </listitem>
+    </itemizedlist>
+
+    <para>Οι αντιστοιχίσεις θα εμφανίζονται με βαθύ μπλε. Σημειώστε ότι το '*' και το '?' έχουν ένα ειδικό νόημα στις κανονικές εκφράσεις και, συνεπώς, η αναζήτησης με wild card, όπως την περιγράψαμε εδώ, ισχύει στις ακριβείς και στις λέξεις-κλειδί μόνο (βλέπε πιο κάτω).</para>
+  </section>
+
+  <section id="search.methoids">
+    <title>Μέθοδοι και επιλογές αναζήτησης <indexterm class="singular">
+        <primary>Αναζητήσεις</primary> <secondary>Μέθοδοι και εοιλογές</secondary>
+      </indexterm></title>
+
+    <para>Επιλέξτε τη μέθοδο χρησιμοποιώντας τα κουμπιά radio. Προσφέρονται οι εξής μέθοδοι αναζήτησης:</para>
+
+    <variablelist> <varlistentry> <term>ακριβής αναζήτηση</term>
+
+        <listitem>
+          <para>Αναζήτηση τμημάτων τα οποία περιέχουν την ακριβή συμβολοσειρά που ορίσατε. Η ακριβής αναζήτηση ψάχνει για μια φράση, π.χ. αν εισαχθούν πολλές λέξεις, θα βρεθούν μόνον αν απαντώνται ακριβώς με εκείνη τη σειρά. Αν κάνετε αναζ'ητηση για <literal>ανοιχτό αρχείο</literal> θα βρει, τότε, όλες τις περιστάσεις της συμβολοσειράς <emphasis><literal>ανοιχτό αρχείο</literal></emphasis>, αλλά όχι <emphasis><literal>ανοιχτά αρχεία</literal></emphasis> ή <emphasis><literal>άνοιγμα αρχείου</literal></emphasis>.</para>
+        </listitem>
+      </varlistentry> <varlistentry> <term>αναζήτηση με λέξη κλειδί</term>
+
+        <listitem>
+          <para>Αναζήτηση τμημάτων που περιέχουν όλες τις λέξεις κλειδί που ορίσατε, σε οποιαδήποτε σειρά. Επιλέξτε την ανζήτηση με λέξη κλειδί για να ψάξετε οποιονδήποτε αριθμό μεμονωμένων λέξεων, σε οποιαδήότε σειρά. Το OmegaT εμφανίζει μια λίστα όλων των τμημάτων που περιέχουν όλες τις λέξεις που ορίσατε. Οι αναζητήσεις με λέξεις-κλειδί μοιάζουν με μια αναζήτηση &quot;με όλες τις λέξεις&quot;, σε μια διαδικτυακή μηχανή αναζήτησης σαν τη Google (AND logic). Αν κάνατε την αναζήτηση με τη λέξη κλειδί <emphasis><literal>άνοιγμα αρχείου</literal></emphasis> θα βρει, τότε, όλες τις περιστάσεις της συμβολοσειράς <emphasis><literal>άνοιγμα αρχείου</literal>,</emphasis> αλλά και <emphasis><literal>τελευταίο άνοιγμα του αρχείου</literal>, <literal>άνοιγμα συμπιεσμένου α;ρχείου</literal>, <literal>μπορεί το άνοιγμα αυτού του αρχείου να είναι επικίνδυνο</literal></emphasis>, κλπ.</para>
+        </listitem>
+      </varlistentry> <varlistentry> <term><emphasis role="bold">κανονικές εκφράσεις</emphasis></term>
+
+        <listitem>
+          <para>Η συμβολοσειρά αναζήτησης θα θεωρείται σαν μια κανονική έκφραση. Η συμβολοσειρά αναζήτησης - [a-zA-Z]+[öäüqwß] - στο παραπάνω παράδειγμα, ψάχνει, παρεμπιτπότνως, για λέξεις στο τμήμα προορισμού που περιέχουν δυσανάγνωστους χαρακτήρες από ένα Γερμανικό πληκτρολόγιο. Οι κανονικές εκφράσεις (Regular expressions) είναι ένας ισχυρός τρόπος αναζήτησης και εντοπισμού συμβολοσειρών. Δείτε περισσότερα στο Κεφάλαιο<link linkend="chapter.regexp"> Κανονικές Εκφράσεις.</link></para>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+
+    <para>Εκτός από τις παραπάνω μεθόδους, μπορείτε, επίσης, να επιλέξετε και μία από αυτές που ακολουθούν:</para>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis role="bold">case sensitive</emphasis>: η αναζήτηση θα διεξαχθεί για τον ακριβή εντοπισμό της συμβολοσειράς που ορίσατε, δηλ. θα ληφθεί υπ΄όψη η παρουσία μικρών ή κεφαλαίων γραμμάτων.</para>
+      </listitem>
+
+      <listitem>
+        <para><emphasis role="bold">στην Πηγή: </emphasis>αναζήτηση μέσα στα τμήματα προέλευσης</para>
+      </listitem>
+
+      <listitem>
+        <para><emphasis role="bold">στις μεταφράσεις: </emphasis>αναζήτηση στα τμήματα προορισμού</para>
+      </listitem>
+
+      <listitem>
+        <para><emphasis role="bold">στις σημειώσεις: </emphasis>αναζήτηση στις σημειώσεις των τμημάτων</para>
+      </listitem>
+
+      <listitem>
+        <para><emphasis role="bold">αναζήτηση στις TMs</emphasis>: εδώ θα συμπεριληφθούν στην αναζήτηση και οι μεταφραστικές μνήμες στον κατάλογο<filename>tm</filename>.</para>
+      </listitem>
+
+      <listitem>
+        <para><emphasis role="bold">display all results: </emphasis>clearing
+        this check box will case OmegaT show just the first occurrence of a
+        hit, if several hits exist</para>
+      </listitem>
+    </itemizedlist>
+
+    <para>Αν πατήσετε το κουμπί <guibutton>Προχωρημένες επιλογές</guibutton> τότε μπορείτε να επιλέξετε και άλλα, πρόσθετα κριτήρια (συγγραφέα της μετάφρασης, ημερομηνία μετάφρασης κλπ), όπως δείχνει και η παραπάνω εικόνα.</para>
+  </section>
+
+  <section id="search.result.display">
+    <title>Εμφάνιση αποτελεσμάτων αναζήτησης</title>
+
+    <para>Αν πατήσετε το κουμπί αναζήτησης μετά την εισαγωγή μιας συμβολοσειράς στο πεδίο αναζήτησης, θα εμφανισθούν όλα τα τμήματα του έργου που περιέχουν την συμβολοσειρά που εισήχθη. Επειδή το <application>OmegaT</application> χειρίζεται τα ταυτόσημα τμήματα σαν μια και μοναδική οντότητα, θα εμφανίζεται μόνο το πρώτο μοναδικό τμήμα. Τα τμήματα εμφανίζονται με τη σειρά εμφάνισης μέσα στο έργο. Τα μεταφρασμένα τμήματα εμφανίζονται με το αρχικό κείμενο στην κορυφή, ενώ το μεταφρασμένο κείμενο στο κάτω μέρος και τα αμετάφραστα τμήματα θα εμφανίζονται μόνον ως πηγή.</para>
+
+    <para>Αν κάνετε κλικ σε ενα τμήμα, αυτό θα ανοίξει στην Περιοχή Επεξεργασίας για τροποποιήσεις. Μετά, μπορείτε να επιστρέψετε και πάλι στο παράθυρο αναζήτησης για το επόμενο τμήμα που έχει βρεθεί και, με την ευκαιρία, να το ελέγξετε και, αν χρειάζεται, να διορθώσετε την ορολογία.</para>
+
+    <para>Μπορείτε να έχετε ανοικτά πολλά παράθυρα αναζήτησης, ταυτόχρονα. Μπορείτε γρήγορα να δείτε τα περιεχόμενά τους, κοιτώντας τον τίτλο τους: θα περιέχει τον όρο αναζήτησης που χρησιμοποιήθηκε.</para>
+  </section>
+</chapter>

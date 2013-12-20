@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<chapter id="chapter.misc">
+  <title>Διάφορα θέματα<indexterm class="singular">
+      <primary>Διάφορα</primary>
+    </indexterm></title>
+
+  <section id="omegat.misc.console.mode">
+    <title><application><indexterm class="singular">
+        <primary>Tρόπος κονσοόλας του OmegaT</primary> <seealso>Διάφορα</seealso>
+      </indexterm>OmegaT</application> Τρόπος κονσόλας<indexterm class="singular">
+        <primary>Διάφορα</primary> <secondary>Τρόπος κονσόλας του OmegaT</secondary>
+      </indexterm></title>
+
+    <note>
+      <para>Αφορά μόνο τους προχωρημένους χρήστες!</para>
+    </note>
+
+    <para>Ο σκοπός του τρόπου κονσόλας (δηλ. της γραμής εντολών) είναι να επιτρέψει τη χρήση του <application>OmegaT</application> ως εργαλείο μετάφρασης σε ένα περιβάλλον συγγραφής σεναρίων (scripting). Όταν ξεκινάτε σε τρόπο κονσόλας, δεν φορτώνει κανένα GUI (συνεπώς, θα λειτουργεί σε οποιαδήποτε κονσόλα) και το δεδομένο έργο θα μεταφρασθεί αυτομάτως. Ένα παράδειγμα θα μπορούσε να είναι ένα έργο λογισμικού, με το γραφικό του περιβάλλον GUI που μεταφράζεται σε πολλές γλώσσες. Χρησιμοποιώντας τον τρόπο κονσόλας, one can make generating a localized interface a part of the build process.</para>
+
+    <section id="misc.console.mode.prerequisites">
+      <title>Προϋποθέσεις</title>
+
+      <para>Για να εκτελέσετε το OmegaT, πρέπει να υπάρχει μια έγκυρη έκδοση του OmegaT. Η τοποθεσία είναι χωρίς σημασία, αφού πρέπει να ορίζεται σαφώς στη γραμμή εντολών, κατά την εκκίνηση.</para>
+
+      <para>Αν χρειάζεσθε μη-τυποποιημένες ρυθμίσεις, πρέπει να υπάρχουν τα αντίστοιχα αρχεία ρυθμίσεων (<literal>filters.conf</literal> και <literal>segmentation.conf</literal>). Αυτό μπορεί να γίνει με δύο τρόπους:</para>
+
+      <itemizedlist>
+        <listitem>
+          <para>Εκτελέστε κανονικά το <application>OmegaT</application> (με το GUI) και ρυθμίστε τα ορίσματα. Αν εκκινήσετε το <application>OmegaT</application> με τρόπο κονσόλας, θα χρησιμοποιήσει τις ρυθμίσεις που ορίσατε.</para>
+        </listitem>
+
+        <listitem>
+          <para>Αν δεν μπορείτε να τρέξετε κανονικά το <application>OmegaT</application> (χωρίς γραφικό περιβάλλον διαθέσιμο): αντιγράψτε τα αρχεία ρυθμίσεων από μια άλλη εγκατάσταση <application>OmegaT</application> σε ένα άλλο μηχάνημα, σε έναν συγκεκριμμένο κατάλογο. Η τοποθεσία δεν έχει σημασία, αφού μπορείτε να την προσθέσετε στη γραμμή εντολών κατά την εκκίνηση (βλέπε πιο κάτω). Μπορείτε να βρείτε τα σημαντικά αρχεία <literal>filters.conf</literal> και <literal>segmentation.conf</literal> στον αρχικό κατάλογο χρήστη (π.χ. <literal>C:\Έγγραφα και Ρυθμισεις\%User%\<application>OmegaT</application></literal> στα Windows, ή στο <literal>%user%/.omegat/</literal> στο Linux)</para>
+        </listitem>
+      </itemizedlist>
+    </section>
+
+    <section id="starting.in.misc.console.mode">
+      <title>Εκκίνηση του OmegaT σε τρόπο κονσόλας</title>
+
+      <para>Για την εκκίνηση του OmegaT με τρόπο κονσόλας, πρέπει να ορίσετε πρόσθετες παραμέτρους εκκίνησης. Τα πιο σημαντικά από αυτά είναι <literal>&lt;project-dir&gt;</literal>, και προαιρετικά <literal>--config-dir=&lt;config-dir&gt;</literal>. Παράδειγμα:</para>
+
+      <para><literal>$&gt; java -jar <application>OmegaT</application>.jar
+      /path/to/project \</literal></para>
+
+      <para><literal> --config-dir=/path/to/config-files/ \</literal></para>
+
+      <para><literal> --mode=console-translate \</literal></para>
+
+      <para><literal> --source-pattern={regexp} \</literal></para>
+
+      <para><literal> --tag-validation=[block|warn] </literal></para>
+
+      <para><emphasis role="bold">Επεξήγηση:</emphasis></para>
+
+      <itemizedlist>
+        <listitem>
+          <para>Το <literal>&lt;project-dir&gt;</literal> λέει στο <application>OmegaT</application> που να βρει το έργο προς μετάφραση. Αν δοθεί, το <application>OmegaT</application> ξεκινά με τρόπο κονσόλας και μεταφράζει το δεδομένο έργο.</para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para>Το <literal>--config-dir=&lt;config-dir&gt;</literal> επιτρέπει στο OmegaT να εκπαιδεύεται σε ποιον κατάλογο είναι αποθηκευμένες οι ρυθμίσεις. Αν δεν διευκρινισθεί, το OmegaT επιστρέφει στις προεπιλεγμένες τιμές (ο κατάλογος του OmegaT στον αρχικό κατάλογο home του χρήστη, ή αν δεν υπάρχει: στο τρέχοντα κατάλογο εργασίας).</para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para><literal>--mode=console-translate </literal> Το <application>OmegaT</application> ξεκινά με τρόπο κονσόλας και μεταφράζει το δεδομένο έργο</para>
+        </listitem>
+
+        <listitem>
+          <para><literal>--source-pattern={regexp} </literal>Τα αρχεία προς μετάφραση μπορούν να ορισθούν με αυτόν τον τρόπο. Ακολουθεί ένα παράδειγμα της κανονικής έκφρασης: <filename>test\.html</filename></para>
+        </listitem>
+
+        <listitem>
+          <para><literal>--tag-validation=[abort|warn] </literal> Με το abort, το πρόγραμμα διακόπτεται, μόλις η επικύρωση ετικέτας βρει σφάλματα. Με το warn τα σφάλματα εκτυπώνονται αλλά το πρόγραμμα συνχείζει. Σε όλες τις άλλες περιπτώσεις δεν γίνεται επικύρωση ετικέτας.</para>
+        </listitem>
+      </itemizedlist>
+    </section>
+
+    <section id="misc.console.mode.option.quiet">
+      <title>Σιωπηλή επιλογή</title>
+
+      <para>Μία επιπλέον παράμετρος γραμμής εντολών ειδική για τον τρόπο κονσόλας: <literal>--quiet</literal>. Στον σιωπηλό τρόπο, καταγράφονται λιγώτερες πληροφορίες στην οθόνη. Τα μηνύματα που θα βρείτε, συνήθως, στη γραμμή κατάστασης, δεν εμφανίζονται.</para>
+
+      <para>Χρήση: <literal>java -jar <application>OmegaT</application>.jar /path/to/project --mode=console-translate --quiet</literal></para>
+    </section>
+
+    <section id="misc.console.mode.option.validatetags">
+      <title>Επιλογή επικύρωσης ετικέτας</title>
+
+      <para>Ακόμη μία επιπλέον παράμετρος γραμμής εντολών ειδική για τον τρόπο κονσόλας: <literal>--tag-validation=[abort|warn]</literal>. Όταν προστεθεί αυτή η παράμετρος, γίνεται η επικύρωση ετικέτας πριν γίνει η μετάφραση/στοίχιση. Αν η τιμή είναι <literal>abort</literal>, επί σφαλμάτων ετικέτας, τα σφάλματα εκτυπώνονται και το πρόγραμμα σταματά. Αν η τιμή είναι <literal>warn</literal> τότε τα σφάλματα εκτυπώνονται αλλά το OmegaT συνεχίζει.</para>
+
+      <para>Χρήση: <literal>java -jar <application>OmegaT</application>.jar /path/to/project --mode=console-translate --tag-validation=abort</literal></para>
+    </section>
+  </section>
+
+  <section>
+    <title>Πρόγραμμα αυτόματης στοίχισης ιδιοτήτων Java<indexterm class="singular">
+        <primary>Διάφορα</primary> <secondary>Πρόγραμμα αυτόματης στοίχισης ιδιοτήτων Java</secondary>
+      </indexterm></title>
+
+    <para>Το OmegaT μπορεί να στοιχίζει τις ιδιότητες (.properties) της Java σε τρόπο κονσόλας. Αν έχετε τα αρχεία Ιδιοτήτων προέλευσης και προορισμού για ένα και τα ίδια περιεχόμενα στο δικό σας ζεύγο γλωσσών, αυτή η διαδικασία θα δημιουργήσει ένα αντίστοιχο αρχείο tmx για αυτά τα περιεχόμενα. Χρήση:</para>
+
+    <para><literal>java -jar OmegaT.jar --mode=console-align /my-project-dir
+    --alignDir=/translatedFiles/ </literal></para>
+
+    <para>Το <filename>alignDir </filename>πρέπει να περιέχει μια μετάφραση στη γλώσσα προορισμού του έργου. Π.χ., αν το έργο είναι EN-&gt;FR, το alignDir πρέπει να περιέχει μια δέσμη (bundle) που να τελειώνει με _fr. Το παραγόμενο tmx αποθηκεύεται στον κατάλογο <literal>omegat </literal>υπό το όνομα <filename>align.tmx</filename>.</para>
+  </section>
+
+  <section id="font.settings">
+    <title>Ρυθμίσεις γραμματοσειρών<indexterm class="singular">
+        <primary>Διάφορα</primary> <secondary>Ρυθμίσεις γραμματοσειρών</secondary>
+      </indexterm></title>
+
+    <para>Σε αυτό τον διάλογο, μπορείτε να ορίσετε τη γραμματοσειρά που θα χρησιμοποιεί το <application>OmegaT</application> στα ακόλουθα παράθυρα:</para>
+
+    <itemizedlist>
+      <listitem>
+        <para>Κύριο παράθυρο του <application>OmegaT</application> (Περιοχή Επεξεργασίας, Προβολή αντιστοιχίσεως, Προβολή Γλωσσαρίου)</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Παράθυρο αναζήτησης</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Παράθυρο επικύρωσης ετικέτας</para>
+      </listitem>
+    </itemizedlist>
+
+    <para>Μπορείτε να έχετε πρόσβασαη στον διάλογο με τις <indexterm class="singular">
+        <primary>Επιλογές μενού</primary> <secondary>Γραμματοσειρά...</secondary>
+      </indexterm><menuchoice> <guimenu>Επιλογές</guimenu> <guimenuitem>Γραμματοσειρά...</guimenuitem> </menuchoice> καταχώρηση στο κύριο Μενού. Ο διάλογος περιέχει:</para>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis role="bold">Γραμματοσειρά:</emphasis> αναδυόμενο μενού για την επιλογή μιας απο τις διαθέσιμες γραμματοσειρές στο μηχάνημά σας</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis role="bold">Μέγεθος:</emphasis> επεξεργασία για την αλλαγή μεγέθους της γραμματοσειράς</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis role="bold">Δείγμα κειμένου:</emphasis> πεδίο για άμεση προβολή της επιλεγμένης γραμμτοσειράς</para>
+      </listitem>
+    </itemizedlist>
+
+    <para><emphasis role="bold">Σημείωση: </emphasis>Σε μερικές περιπτώσεις, μπορεί να πάρει αρκετό χρόνο για να μπορέσει το OmegaT να ενημερώσει την προβολή, μετά την αλλαγή των ρυθμίσεων γραμματοσειράς. Αυτό είναι ιδιαίτερα η περίπτωση ενός μεγάλου αρχείου που περιέχει πολλά τμήματα και είναι ανοικτό στην περιοχή επεξεργασίας, και/ή χρησιμοποιείται αργό hardware. Σημειώστε, επίσης, ότι μερικές γραμματοσειρές συμπεριφέρονται καλύτερα με κάποια ζεύγη γλωσσών, σε από ότι με άλλα. Ειδικά, αν μεταφράζετε ανάμεσα σε δύο γλώσσες με διαφορετικές αλφαβήτους/συστήματα γραφής (σαν τα Ρωσικά και τα Ιαπωνικά), επιλέξτε μια γραμματοσειρά που να μπορεί να χρησιμοποιηθεί και από τις δύο.</para>
+  </section>
+
+  <section id="preventing.data.loss">
+    <title>Πρόληψη απώλειας δεδομένων<indexterm class="singular">
+        <primary>Διάφορα</primary> <secondary>Πρόληψη απώλειας δεδομένων</secondary>
+      </indexterm></title>
+
+    <para>Το <application>OmegaT</application> είναι μια στιβαρή εφαρμογή. Πάντωςμ θα πρέπει να λαμβάνετε προφυλάξεις κατά της απώλειας δεδομένων, όταν χρησιμοποιείτε το <application>OmegaT</application>, ακριβώς όπως ισχύει και με όλες τις άλλες εφαρμογές. Όταν μεταφράζετε τα αρχεία σας, το <application>OmegaT</application> αποθηκεύει όλες τις προόδους σας στη μεταφραστική μνήμη <literal>project_save.tmx</literal> η οποία βρίσκεται στον υποκατάλογο του έργου <literal>/omegat</literal>.</para>
+
+    <para>Το OmegaT παίρνει και αντίγραφα ασφαλείας της μεταφραστικής μνήμης στον υποκατάλογο του έργου project_save.tmx.YEARMMDDHHNN.bak , κάθε φορά που ένα έργο ανοίγει, ή επαναφορτώνεται. Το ΕΤΟΣ (YEAR) είναι ένα 4/ψήφιο έτος, το MM είναι ο μήνας, το DD η ημέρα του μνήνα, και τα HH και NN είναι οι ώρες και τα λεπτά, όταν είχε αποθηκευθεί η προηγούμενη μεταφραστικήγ μνήμη.</para>
+
+    <para>Αν πιστεύετε ότι χάσατε μεταφραστικά δεδομένα, μπορείτε να χρησιμοποιείτε την εξής διαδικασία για να αποκαταστήσετε το έργο στην πιο πρόσφατα αποθηκευμένη κατάσταση, συνήθως όχι παλιότερη από περίπου 10 λεπτά, ή κάτι τέτοιο:</para>
+
+    <orderedlist>
+      <listitem>
+        <para>κλείστε το έργο</para>
+      </listitem>
+
+      <listitem>
+        <para>μετονομάστε το τρέχον αρχείο <filename>project_save.tmx </filename> (π.χ. σε <filename>project_save.tmx.temporary</filename>)</para>
+      </listitem>
+
+      <listitem>
+        <para>επιλέξτε το αντίγραφο ασφαλείας της μεταφραστικκής μνήμης που κατά πάσα πιθανότητα περιέχει τα δεδομένα που αναζητάτε</para>
+      </listitem>
+
+      <listitem>
+        <para>μετονομάστε το <literal>project_save.tmx</literal></para>
+      </listitem>
+
+      <listitem>
+        <para>ανοίξτε το έργο</para>
+      </listitem>
+    </orderedlist>
+
+    <para>Για να αποφύγετε την απώλεια σημαντικών δεδομένων:</para>
+
+    <itemizedlist>
+      <listitem>
+        <para>Πάρτε τακτικά αντίγραφα του αρχείου /omegat/project_save.tmx για να έχετε αντίγραφα ασφαλείας μέσων όπως τα CD ή τα DVD.</para>
+      </listitem>
+
+      <listitem>
+        <para>Έως ότου αποκτήσετε εξοικείωση με το <application>OmegaT</application>, δημιουργήστε ανά τακτά διαστήματα μεταφρασμένα αρχεία και ελέγξτε ότι το μεταφρασμένο αρχείο περιέχει την πιο πρόσφατη έκδοση της μετάφρασής σας.</para>
+      </listitem>
+
+      <listitem>
+        <para>Προσέξτε ιδιαίτερα όταν κάνετε αλλαγές αρχείων στην <literal>/πηγή</literal> ενόσω βρίσκετε στα μισά του έργου. Αν τα αρχεία προέλευσης τροποποιηθούν μετά την έναρξη της μετάφρασης, το <application>OmegaT</application> ενδέχεται να μην μπορεί να βρει ένα τμήμα που είχατε ήδη μεταφράσει.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Χρησιμοποιείστε αυτά τα κείμενα Βοήθειας για να αρχίσετε. Σε περίπτωση που έχετε προβλήματα, στείλτε ένα μήνυμα στην ομάδα χρηστών του <ulink url="http://tech.groups.yahoo.com/group/Omegat/"><application>OmegaT</application></ulink>. Μη διστάσετε να το στείλετε στη γλώσσα με στην οποία αισθάνεσθε περισσότερο εξοικειωμένος.</para>
+      </listitem>
+    </itemizedlist>
+  </section>
+</chapter>

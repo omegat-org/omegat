@@ -1,0 +1,571 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<chapter id="chapter.regexp">
+  <title>Κανονικές εκφράσεις<indexterm class="singular">
+      <primary>Κανονικές εκφράσεις</primary> <seealso>Κατάτμηση</seealso> <seealso>Αναζήτηση</seealso>
+    </indexterm></title>
+
+  <para>Οι κανονικές εκφράσεις (ή, εν συντομία, regex) που χρησιμοποιούνται για αναζητήσεις και στους κανόνες κατάτμησης, είναι εκείνες που υποστηρίζονται από τη Java. Αν χρειασθείτε πιο εξειδικευμένες λεπτομέρειες, συμβουλευθείτε την <ulink url="http://download.oracle.com/javase/1.5.0/docs/api/java/util/regex/Pattern.html">Τεκμηρίωση Java Regex</ulink>. Βλέπε πρόσθετες βιβλιογραφίες και παραδείγματα, πιο κάτω.</para>
+
+  <note>
+    <para>Αυτό το κεφάλαιο απευθύνεται σε προχωρημένους χρήστες που πρέπει να ορίσουν τις δικές τους ποικιλίες κανόνων κατάτμησης, ή να επινοήσουν πιο σύνθετους και ισχυρότερους όρους-κλειδί  για την αναζήτηση.</para>
+  </note>
+
+  <table>
+    <title>Regex - Flags</title>
+
+    <tgroup align="left" cols="2" rowsep="1">
+      <colspec align="left" colnum="1"/>
+
+      <thead>
+        <row>
+          <entry align="left">Το construct</entry>
+
+          <entry align="left">... αντιστοιχίζει τα εξής</entry>
+        </row>
+      </thead>
+
+      <tbody>
+        <row>
+          <entry>(?i)</entry>
+
+          <entry>Επιτρέπει την αντιστοίχιση ανεξαρτήτως μικρών-κεφαλαίων γραμμάτων (case-insensitive). Από προεπιλογή, το μοτίβο είναι case-sensitive).</entry>
+        </row>
+      </tbody>
+    </tgroup>
+  </table>
+
+  <table>
+    <title>Regex - Χαρακτήρας</title>
+
+    <tgroup align="left" cols="2" rowsep="1">
+      <colspec align="left" colnum="1"/>
+
+      <thead>
+        <row>
+          <entry align="left">Το construct</entry>
+
+          <entry align="left">... αντιστοιχίζει τα εξής</entry>
+        </row>
+      </thead>
+
+      <tbody>
+        <row>
+          <entry>x</entry>
+
+          <entry>Τον χαρακτήρα x, εκτός από τα παρακάτω...</entry>
+        </row>
+
+        <row>
+          <entry>\uhhhh</entry>
+
+          <entry>Τον χαρακτήρα με δεκαεξαδική τιμή 0xhhhh</entry>
+        </row>
+
+        <row>
+          <entry>\t</entry>
+
+          <entry>Τον χαρακτήρα tab ('\u0009')</entry>
+        </row>
+
+        <row>
+          <entry>\n</entry>
+
+          <entry>Τον χαρακτήρα για νέα γραμμή (line feed) ('\u000A')</entry>
+        </row>
+
+        <row>
+          <entry>\r</entry>
+
+          <entry>Τον χαρακτήρα για αλλαγή γραμμής/ carriage-return ('\u000D')</entry>
+        </row>
+
+        <row>
+          <entry>\f</entry>
+
+          <entry>Τον χαρακτήρα για τροφοδότηση φόρμας/form-feed ('\u000C')</entry>
+        </row>
+
+        <row>
+          <entry>\a</entry>
+
+          <entry>Τον χαρακτήρα alert (bell) ('\u0007')</entry>
+        </row>
+
+        <row>
+          <entry>\e</entry>
+
+          <entry>Τον χαρακτήρα διαφυγής /escape ('\u001B')</entry>
+        </row>
+
+        <row>
+          <entry>\cx</entry>
+
+          <entry>Τον χαρακτήρα ελέγχου που αντιστοιχεί στο x</entry>
+        </row>
+
+        <row>
+          <entry>\0n</entry>
+
+          <entry>Τον χαρακτήρα με οκταδική τιμή 0n (0 &lt;= n &lt;= 7)</entry>
+        </row>
+
+        <row>
+          <entry>\0nn</entry>
+
+          <entry>Τον χαρακτήρα με οκταδική τιμή 0nn (0 &lt;= n &lt;= 7)</entry>
+        </row>
+
+        <row>
+          <entry>\0mnn</entry>
+
+          <entry>Τον χαρακτήρα με οκταδική τιμή 0mnn (0 &lt;= m &lt;= 3, 0 &lt;= n &lt;= 7)</entry>
+        </row>
+
+        <row>
+          <entry>\xhh</entry>
+
+          <entry>Τον χαρακτήρα με δεκαεξαδική τιμή 0xhh</entry>
+        </row>
+      </tbody>
+    </tgroup>
+  </table>
+
+  <table>
+    <title>Regex - Quotation</title>
+
+    <tgroup align="left" cols="2" rowsep="1">
+      <colspec align="left" colnum="1"/>
+
+      <thead>
+        <row>
+          <entry align="left">Το construct</entry>
+
+          <entry align="left">...αντιστοιχίζει τα εξής</entry>
+        </row>
+      </thead>
+
+      <tbody>
+        <row>
+          <entry>\</entry>
+
+          <entry>Τίποτε, αλλά παραθέτει τον εξής χαρακτήρα. Αυτό απαιτείται αν θέλετε να εισάγετε οποιονδήποτε από τους μετα χαρακτήρες !$()*+.&lt;&gt;?[\]^{|} για να αντιστοιχίζονται ως οι εαυτοί τους.</entry>
+        </row>
+
+        <row>
+          <entry>\\</entry>
+
+          <entry>Για παράδειγμα, αυτός είναι ο χαρατκήρας backslash</entry>
+        </row>
+
+        <row>
+          <entry>\Q</entry>
+
+          <entry>Τίποτε, αλλά παραθέτει όλους τους χαρακτήρες μέχρι το \E</entry>
+        </row>
+
+        <row>
+          <entry>\E</entry>
+
+          <entry>Τίποτε, αλλά τελειώνει παραθέτοντας ότι άρχισε με το \Q</entry>
+        </row>
+      </tbody>
+    </tgroup>
+  </table>
+
+  <table>
+    <title>Regex - Κλάσεις για Unicode blocks και κατηγορίες</title>
+
+    <tgroup align="left" cols="2" rowsep="1">
+      <colspec align="left" colnum="1"/>
+
+      <thead>
+        <row>
+          <entry align="left">Το construct</entry>
+
+          <entry align="left">...αντιστοιχίζει τα εξής</entry>
+        </row>
+      </thead>
+
+      <tbody>
+        <row>
+          <entry>\p{InGreek}</entry>
+
+          <entry>Έναν χαρακτήρα στο Greek block (απλό <ulink url="http://download.oracle.com/javase/1.5.0/docs/api/java/util/regex/Pattern.html#ubc"> block</ulink>)</entry>
+        </row>
+
+        <row>
+          <entry>\p{Lu}</entry>
+
+          <entry>Ένα κεφαλαίο γράμμα (απλό <ulink url="http://download.oracle.com/javase/1.5.0/docs/api/java/util/regex/Pattern.html#ubc"> category</ulink>)</entry>
+        </row>
+
+        <row>
+          <entry>\p{Sc}</entry>
+
+          <entry>'Ενα σύμβολο νομίσματος</entry>
+        </row>
+
+        <row>
+          <entry>\P{InGreek}</entry>
+
+          <entry>Οποιονδήποτε χαρακτήρα εκτός από έναν που βρίσκεται στο Greek block (άρνηση)</entry>
+        </row>
+
+        <row>
+          <entry>[\p{L}&amp;&amp;[^\p{Lu}]]</entry>
+
+          <entry>Οποιοδήποτε γράμμα εκτός από κεφαλαία γράμματα (αφαίρεση)</entry>
+        </row>
+      </tbody>
+    </tgroup>
+  </table>
+
+  <table>
+    <title>Regex - Κλασεις χαρακτήρων</title>
+
+    <tgroup align="left" cols="2" rowsep="1">
+      <colspec align="left" colnum="1"/>
+
+      <thead>
+        <row>
+          <entry align="left">Το construct</entry>
+
+          <entry align="left">...αντιστοιχίζει τα εξής</entry>
+        </row>
+      </thead>
+
+      <tbody>
+        <row>
+          <entry>[abc]</entry>
+
+          <entry>a, b, ή c (απλή κλάση)</entry>
+        </row>
+
+        <row>
+          <entry>[^abc]</entry>
+
+          <entry>Οποιονδήποτε χαρακτήρα εκτός από a, b, ή c (άρνηση)</entry>
+        </row>
+
+        <row>
+          <entry>[a-zA-Z]</entry>
+
+          <entry>από το a μέχρι το z ή από το A μέχρι το Z, περιλαμβανομένου του (range)</entry>
+        </row>
+      </tbody>
+    </tgroup>
+  </table>
+
+  <table>
+    <title>Regex - Προκαθορισμένες κλάσεις χαρακτήρων</title>
+
+    <tgroup align="left" cols="2" rowsep="1">
+      <colspec align="left" colnum="1"/>
+
+      <thead>
+        <row>
+          <entry align="left">Το construct</entry>
+
+          <entry align="left">...αντιστοιχίζει τα εξής</entry>
+        </row>
+      </thead>
+
+      <tbody>
+        <row>
+          <entry>.</entry>
+
+          <entry>Οποιονδήποτε χαρακτήρα (εκτός από line terminators)</entry>
+        </row>
+
+        <row>
+          <entry>\d</entry>
+
+          <entry>Ένα ψηφίο: [0-9]</entry>
+        </row>
+
+        <row>
+          <entry>\D</entry>
+
+          <entry>Ένα μη-ψηφίο: [^0-9]</entry>
+        </row>
+
+        <row>
+          <entry>\s</entry>
+
+          <entry>Έναν χαρακτήρα κενού διαστήματος: [ \t\n\x0B\f\r]</entry>
+        </row>
+
+        <row>
+          <entry>\S</entry>
+
+          <entry>Έναν χαρακτήρα μη-κενού διαστήματος: [^\s]</entry>
+        </row>
+
+        <row>
+          <entry>\w</entry>
+
+          <entry>Έναν χαρακτήρα λέξη: [a-zA-Z_0-9]</entry>
+        </row>
+
+        <row>
+          <entry>\W</entry>
+
+          <entry>Έναν χαρακτήρα μη-λέξη: [^\w]</entry>
+        </row>
+      </tbody>
+    </tgroup>
+  </table>
+
+  <table>
+    <title>Regex - Boundary matchers</title>
+
+    <tgroup align="left" cols="2" rowsep="1">
+      <colspec align="left" colnum="1"/>
+
+      <thead>
+        <row>
+          <entry align="left">Το construct</entry>
+
+          <entry align="left">...αντιστοιχίζει τα εξής</entry>
+        </row>
+      </thead>
+
+      <tbody>
+        <row>
+          <entry>^</entry>
+
+          <entry>Η αρχή μιας γραμμής</entry>
+        </row>
+
+        <row>
+          <entry>$</entry>
+
+          <entry>Το τέλος μιας γραμμής</entry>
+        </row>
+
+        <row>
+          <entry>\b</entry>
+
+          <entry>Ένα όριο μιας λέξης</entry>
+        </row>
+
+        <row>
+          <entry>\B</entry>
+
+          <entry>Ένα όριο μιας μη-λέξης</entry>
+        </row>
+      </tbody>
+    </tgroup>
+  </table>
+
+  <table>
+    <title>Regex - 'Άπληστοι ποσοτικοποιητές' (greedy quantifiers)</title>
+
+    <tgroup align="left" cols="2" rowsep="1">
+      <colspec align="left" colnum="1"/>
+
+      <thead>
+        <row>
+          <entry align="left">Το construct</entry>
+
+          <entry align="left">...αντιστοιχίζει τα εξής</entry>
+        </row>
+      </thead>
+
+      <tbody>
+        <row>
+          <entry>X<emphasis>?</emphasis></entry>
+
+          <entry>X, άπαξ ή καθόλου</entry>
+        </row>
+
+        <row>
+          <entry>X<emphasis>*</emphasis></entry>
+
+          <entry>X, μηδέν ή περισσότερες φορές</entry>
+        </row>
+
+        <row>
+          <entry>X<emphasis>+</emphasis></entry>
+
+          <entry>X, μηδέν ή περισσότερες φορές</entry>
+        </row>
+      </tbody>
+    </tgroup>
+  </table>
+
+  <note>
+    <para>Οι 'άπληστοι ποσοτικοποιητές' (greedy quantifiers) θα αντιστοιχίσουν όσο περισσότερο μπορούν. Για παράδειγμα, το <emphasis>a+?</emphasis> θα αντιστοιχίσει το aaa στο <emphasis>aaabbb</emphasis></para>
+  </note>
+
+  <table>
+    <title>Regex - Απρόθυμοι (Reluctant) 'μη-άπληστοι ποσοτικοποιητές'</title>
+
+    <tgroup align="left" cols="2" rowsep="1">
+      <colspec align="left" colnum="1"/>
+
+      <thead>
+        <row>
+          <entry align="left">Το construct</entry>
+
+          <entry align="left">...αντιστοιχίζει τα εξής</entry>
+        </row>
+      </thead>
+
+      <tbody>
+        <row>
+          <entry>X??</entry>
+
+          <entry>X, άπαξ ή καθόλου</entry>
+        </row>
+
+        <row>
+          <entry>X*?</entry>
+
+          <entry>X, μηδέν ή περισσότερες φορές</entry>
+        </row>
+
+        <row>
+          <entry>X+?</entry>
+
+          <entry>X, μηδέν ή περισσότερες φορές</entry>
+        </row>
+      </tbody>
+    </tgroup>
+  </table>
+
+  <note>
+    <para>Οι 'μη-άπληστοι ποσοτικοποιητές' θα αντιστοιχίσουν όσο λιγώτερο μπορούν. Για παράδειγμα, το <emphasis>a+?</emphasis> θα αντιστοιχίσει πρώτα το <emphasis>a</emphasis> στο <emphasis>aaabbb</emphasis></para>
+  </note>
+
+  <table>
+    <title>Regex - Λογικοί τελεστές</title>
+
+    <tgroup align="left" cols="2" rowsep="1">
+      <colspec align="left" colnum="1"/>
+
+      <thead>
+        <row>
+          <entry align="left">Το construct</entry>
+
+          <entry align="left">...αντιστοιχίζει τα εξής</entry>
+        </row>
+      </thead>
+
+      <tbody>
+        <row>
+          <entry>XY</entry>
+
+          <entry>X ακολουθούμενο από το Y</entry>
+        </row>
+
+        <row>
+          <entry>X|Y</entry>
+
+          <entry>Είτε X ή Y</entry>
+        </row>
+
+        <row>
+          <entry>(XY)</entry>
+
+          <entry>XY ως μια ενιαία ομάδα</entry>
+        </row>
+      </tbody>
+    </tgroup>
+  </table>
+
+  <section id="regex.tools.and.examples.of.use">
+    <title><indexterm class="singular">
+        <primary>Κανονικές εκφράσεις</primary> <secondary>Εργαλεία</secondary>
+      </indexterm>Εργαλεία Regex και Παραδείγματα χρήσης<indexterm class="singular">
+        <primary>Κανονικές εκφράσεις</primary> <secondary>Παραδείγματα χρήσης</secondary>
+      </indexterm></title>
+
+    <para>Είναι διαθέσιμα αρκετά διαδραστικά εργαλεία για την ανάπτυξη και δοκιμή κανονικών εκφράσεων. Ακολουθούν, εν πολλοίς, το ίδιιο μοτίβο (για ένα παράδειγμα από τον Δοκιμαστή Κανονικών Εκφράσεων βλέπε πιο κάτω): η κανονική έκφραση (καταχώρηση  στην κορυφή) αναλύει το κείμενο αναζήτησης (Πλαίσιο κειμένου στη μέση), αποδίδοντας τα hits, που εμφανίζονται στο Πλαίσο αποτελεσμάτων κειμένου.</para>
+
+    <figure id="regerx.tester">
+      <title>Δοκιμαστής Regex</title>
+
+      <mediaobject>
+        <imageobject role="html">
+          <imagedata fileref="images/RegexTester.png"/>
+        </imageobject>
+
+        <imageobject role="fo">
+          <imagedata fileref="images/RegexTester.png" width="80%"/>
+        </imageobject>
+      </mediaobject>
+    </figure>
+
+    <para>Βλέπε <ulink url="http://weitz.de/regex-coach/">Ο προπονητής Regex Coach</ulink> εκδόσεις για Windows,Linux, FreeBSD ενός stand-alone εργαλείου. Αυτό είναι πολύ παρόμοιο με το παραπάνω παράδειγμα.</para>
+
+    <para>Μπορείτε να βρείτε μια ωραία συλλογή με χρήσιμες περιπτώσεις regex στο ίδιο το <application>OmegaT</application> (βλέπε επιλογές &gt; Κατάτμηση). Η ακόλουθη λίστα περιλαμβάνει εκφράσεις που μπορεί να σας φανούν χρήσιμες όταν κάνετε αναζήτηση μέσα στη μεταφραστική μνήμη.</para>
+
+    <table>
+      <title>Regex - Παραδείγματα κανονικής έκφρασης σε μεταφράσεις</title>
+
+      <tgroup align="left" cols="2" rowsep="1">
+        <colspec align="left" colnum="1"/>
+
+        <thead>
+          <row>
+            <entry>Κανονική έκφραση (regex)</entry>
+
+            <entry>Βρίσκει τα εξής:</entry>
+          </row>
+        </thead>
+
+        <tbody>
+          <row>
+            <entry>(\b\w+\b)\s\1\b</entry>
+
+            <entry>διπλές λέξεις</entry>
+          </row>
+
+          <row>
+            <entry>[\.,]\s*[\.,]+</entry>
+
+            <entry>κώμμα ή τελεία, ακολουθούμενο από διαστήματα και από ακόμη ένα κώμμα ή τελεία</entry>
+          </row>
+
+          <row>
+            <entry>\. \s+$</entry>
+
+            <entry>επιπλέον διαστήματα μετά από μια τελεία στο τέλος της γραμμής</entry>
+          </row>
+
+          <row>
+            <entry>\s+a\s+[aeiou]</entry>
+
+            <entry>Αγγλικά: οι λέξεις που αρχίζουν με φωνήεντα, θα πρέπει γενικά να προγούνται από  &quot;an&quot; και όχι από &quot;a&quot;</entry>
+          </row>
+
+          <row>
+            <entry>\s+an\s+[^aeiou]</entry>
+
+            <entry>Αγγλικά: ο ίδιος έλεγχος όπως κα πιο πάνω, αλλά για σύμφωνα (&quot;a&quot;, και όχι &quot;an&quot;)</entry>
+          </row>
+
+          <row>
+            <entry>\s{2,}</entry>
+
+            <entry>περισσότερα από ένα διάστημα</entry>
+          </row>
+
+          <row>
+            <entry>\.[A-Z]</entry>
+
+            <entry>Τελεία που ακολουθείται από έναν κεφαλαίο γράμμα - πιθανώς, λείπει ένα διάστημα ανάμεσα στην τελεία και την αρχή μιας νέας προτασης;</entry>
+          </row>
+
+          <row>
+            <entry>\bis\b</entry>
+
+            <entry>αναζήτηση για “is”, όχι για “this” ή για “isn't” κλπ.</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+  </section>
+</chapter>

@@ -1,0 +1,777 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<chapter id="chapter.user.interface">
+  <title>Η διεπαφή χρήστη</title>
+
+  <section id="user.interface.items">
+    <title>Το κύριο παράθυρο του OmegaT, άλλα παράθυρα και διάλογοι</title>
+
+    <para>Το κύριο παράθυρο του OmegaT περιέχει το κύριο μενού, τη γραμμή κατάστασης και διάφορες Περιοχές. Προσφέρονται και άλλα παράθυρα, καθώς και διάλογοι, που χρησιμοποιούνται για την αλλαγή ρυθμίσεων έργου του OmegaT. Οι ακόλουθες πληροφορίες συνοψίζουν τη χρήση τους και πως να τα καλείτε:</para>
+
+    <table colsep="0" rowsep="0">
+      <title>Κύριο παράθυρο του OmegaT<indexterm class="singular">
+          <primary>Διεπαφή χρήστη</primary> <secondary>Κύριο παράθυρο του OmegaT</secondary>
+        </indexterm></title>
+
+      <tgroup cols="2" colsep="0" rowsep="1" title="Main OMegaT window">
+        <colspec align="left" colnum="1"/>
+
+        <colspec align="left" colnum="2"/>
+
+        <tbody>
+          <row>
+            <entry><guimenuitem>Περιοχή Επεξεργασίας</guimenuitem></entry>
+
+            <entry>όπου πληκτρολογείτε και επεξεργάζεσθε τη μετάφραση</entry>
+          </row>
+
+          <row>
+            <entry><guimenuitem>Περιοχή Αντιστοίχισης</guimenuitem></entry>
+
+            <entry>εμφανίζει τα πιο όμοια τμήματα από τις μεταφραστικές μνήμες</entry>
+          </row>
+
+          <row>
+            <entry><guimenuitem>Περιοχή Γλωσσαρίου</guimenuitem></entry>
+
+            <entry>εμφανίζει την ορολογία που βρέθηκε για διάφορα πράγματα, στο τρέχον τμήμα</entry>
+          </row>
+
+          <row>
+            <entry><guimenuitem>Περιοχή Λεξικού</guimenuitem></entry>
+
+            <entry>εμφανίζει τα hits Λεξικού που βρέθηκαν για καταχωρήσεις στο τρέχον τμήμα</entry>
+          </row>
+
+          <row>
+            <entry><guimenuitem>Περιοχή Μηχανικής Μετάφρασης</guimenuitem></entry>
+
+            <entry>εμφανίζει τη μετάφραση, που παρέχεται από τις υπηρεσίες Μηχανικής Μετάφρασης</entry>
+          </row>
+
+          <row>
+            <entry><guimenuitem>Περιοχή Σημειώσεων</guimenuitem></entry>
+
+            <entry>σημειώσεις που αφορούν το τρέχον τμήμα, π.χ. εναλλακτικές μεταφράσεις, ή το τρέχον κλειδί, σε περίπτωση αρχείων με μορφή key=value</entry>
+          </row>
+
+          <row>
+            <entry><guimenuitem>Περιοχή Σχολίων</guimenuitem></entry>
+
+            <entry>Σχόλια του συγγραφέως σε αρχεία PO, ή το όνομα του attribute που μεταφράζεται (σε XHTML)</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+
+    <table colsep="0" rowsep="0">
+      <title>Άλλα παράθυρα<indexterm class="singular">
+          <primary>Διεπαφή χρήστη</primary> <secondary>Άλλα παράθυρα</secondary>
+        </indexterm></title>
+
+      <tgroup cols="2" colsep="0" rowsep="1" title="Other windows">
+        <colspec align="left" colnum="1"/>
+
+        <colspec align="left" colnum="2"/>
+
+        <tbody>
+          <row>
+            <entry><guimenuitem><indexterm class="singular">
+                <primary>Συντομεύσεις</primary> <secondary>Επικύρωση ετικέτας - Ctrl+T</secondary>
+              </indexterm>Παράθυρο Επικύρωσης ετικέτας</guimenuitem></entry>
+
+            <entry><para>Χρησιμοποιείται για την επικύρωση ετικετών (ανοίγει με <keycombo> <keycap>Ctrl</keycap> <keycap>T</keycap> </keycombo>, κλείνει με <keycap>Esc</keycap>)</para></entry>
+          </row>
+
+          <row>
+            <entry><guimenuitem><indexterm class="singular">
+                <primary>Συντομεύσεις</primary> <secondary>Βοήθεια - F1</secondary>
+              </indexterm>Περιηγητής βοήθειας (Help browser)</guimenuitem></entry>
+
+            <entry><para>Χρησιμοποιείται για την εμφάνιση του εγχειριδίου χρήστη (ανοίγει με <keycap>F1</keycap>, κλείνει με <keycap>Esc)</keycap></para></entry>
+          </row>
+
+          <row>
+            <entry><guimenuitem>Παράθυρο στατιστικών</guimenuitem></entry>
+
+            <entry><para>Χρησιμοποιείται για να ανοίγετε το παράθυρο με τις στατιστικές του έργου, την εμφάνισή του και τη για τη χρήση του <menuchoice> <guimenu><indexterm class="singular">
+                    <primary>Μενού εργαλείων</primary> <secondary>Στατιστικές</secondary>
+                  </indexterm>Εργαλεία</guimenu> <guimenuitem>Στατιστικές.</guimenuitem> </menuchoice></para></entry>
+          </row>
+
+          <row>
+            <entry><guimenuitem>Παράθυρο Στατιστικών αντιστοίχισης</guimenuitem></entry>
+
+            <entry><para>Χρησιμοποιείται για την εμφάνιση των στατιστικών αντιστοίχισης του έργου. Επιλέξτε <menuchoice> <guimenu><indexterm class="singular">
+                    <primary>Μενού εργαλείων</primary> <secondary>Στατιστικές αντιστοίχισης</secondary>
+                  </indexterm>Εργαλεία</guimenu> <guimenuitem>Στατιστικές αντιστοίχισης</guimenuitem> </menuchoice>για να το ανοίξετε.</para></entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+
+    <table border="0" colsep="0" rowsep="0">
+      <title>Διάλογοι ρυθμίσεων<indexterm class="singular">
+          <primary>Διεπαφή χρήστη</primary> <secondary>Διάλογοι ρυθμίσεων</secondary> <seealso>Ρυθμίσεις έργου</seealso>
+        </indexterm></title>
+
+      <tgroup cols="2" colsep="0" rowsep="1" title="Settings dialogs">
+        <colspec align="left" colnum="1"/>
+
+        <colspec align="left" colnum="2"/>
+
+        <tbody>
+          <row>
+            <entry><guimenuitem>Ιδιότητες έργου<indexterm class="singular">
+                <primary>Μενού έργου</primary> <secondary>Ιδιότητες</secondary>
+              </indexterm></guimenuitem> <indexterm class="singular">
+                <primary>Συντομεύσεις</primary> <secondary>Ιδιότητες έργου - Ctrl+E</secondary>
+              </indexterm></entry>
+
+            <entry>Χρησιμοποιείται για την τροποποίηση των καταλόγων έργου και των γλωσσών (πρόσβαση με <guimenuitem>Ctrl+E </guimenuitem>Συντόμευση ή <menuchoice> <guimenu>Έργο</guimenu> <guimenuitem>ιδιότητες...</guimenuitem> </menuchoice>, κλείνει με <keycap>Esc)</keycap></entry>
+          </row>
+
+          <row>
+            <entry><guimenuitem>Γραμματοσειρά<indexterm class="singular">
+                <primary>Ιδιότητες έργου</primary> <secondary>Πηγή</secondary>
+              </indexterm></guimenuitem></entry>
+
+            <entry><para>Χρησιμοποιείται για την τροποποίηση της γραμματοσειράς που χρησιμοποιεί το <application>OmegaT</application>, για να εμφανίζει την πηγή, τη μετάφραση, αντιστοιχίσεις και όρους γλωσσαρίου, (πρόσβαση με <menuchoice> <guimenu>Επιλογές</guimenu> <guimenuitem>Γραμματοσειρά...</guimenuitem> </menuchoice>, κλείνει με <keycap>Esc</keycap>)</para></entry>
+          </row>
+
+          <row>
+            <entry><guimenuitem>Φίλτρα αρχείου<indexterm class="singular">
+                <primary>Ιδιότητες έργου</primary> <secondary>Φίλτρα αρχείου</secondary>
+              </indexterm><indexterm class="singular">
+                <primary>Μενού επιλογών</primary> <secondary>Φίλτρα αρχείου</secondary>
+              </indexterm></guimenuitem></entry>
+
+            <entry>Χρησιμοποιείται για την προσαρμογή του τρόπου χειρισμού των υποστηριζόμενων μορφών αρχείων (πρόσβαση με <menuchoice> <guimenu>Επιλογές</guimenu> <guimenuitem>Φίλτρα αρχείου...</guimenuitem> </menuchoice>, κλείσιμο με <keycap>Esc</keycap>)</entry>
+          </row>
+
+          <row>
+            <entry><guimenuitem>Κατάτμηση<indexterm class="singular">
+                <primary>Ρυθμίσεις έργου</primary> <secondary>Κατάτμηση</secondary>
+              </indexterm><indexterm class="singular">
+                <primary>Μενού ιδιοτήτων</primary> <secondary>Κατάτμηση</secondary>
+              </indexterm></guimenuitem></entry>
+
+            <entry>Χρησιμοποιείται για την αλλαγή του τρόπου με τον οποίο γίνεται η κατάτμηση του κειμένου σας σε φράσεις (πρόσβαση με <menuchoice> <guimenu>Επιλογές</guimenu> <guimenuitem>Κατάτμηση</guimenuitem> </menuchoice>, κλείνει με <keycap>Esc</keycap>)</entry>
+          </row>
+
+          <row>
+            <entry><guimenuitem>Συμπεριφορά επεξεργασίας<indexterm class="singular">
+                <primary>Μενού επιλογών</primary> <secondary>Επεξεργασία συμπεριφοράς</secondary>
+              </indexterm><indexterm class="singular">
+                <primary>Ρυθμίσεις έργου</primary> <secondary>Συμπεριφορά επεξεργασίας</secondary>
+              </indexterm></guimenuitem></entry>
+
+            <entry>Χρησιμοποιείται για να αλλάξετε τον τρόπο με τον οποίο συμπεριφέρεται το <application>OmegaT</application> όταν μετακινείσθε επανειλημμένα μεταξύ τμημάτων (πρόσβαση με <menuchoice> <guimenu>Επιλογές</guimenu> <guimenuitem>Συμπεριφορά...</guimenuitem> </menuchoice>, κλείνει με<keycap>Esc</keycap>)</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+  </section>
+
+  <section id="OmegaT.main.window">
+    <title>Τα κύρια παράθυρα του <application>OmegaT</application> <indexterm class="singular">
+        <primary>Παράθυρα και Περιοχές στο OmegaT</primary> <secondary>Κύριο παράθυρο</secondary>
+      </indexterm></title>
+
+    <figure id="OmegaT.main.window.figure">
+      <title>Το κύριο παράθυρο του OmegaT</title>
+
+      <mediaobject>
+        <imageobject role="html">
+          <imagedata fileref="images/OmegaT_panes_25.png" scale="100"/>
+        </imageobject>
+
+        <imageobject role="fo">
+          <imagedata fileref="images/OmegaT_panes_25.png" width="80%"/>
+        </imageobject>
+      </mediaobject>
+    </figure>
+
+    <para>Το κύριο παράθυρο αποτελείται από διάφορες περιοχές, το κύριο μενού και μια γραμμή κατάστασης. Μπορείτε να αλλάξετε τη θέση οποιασδήποτε περιοχής, ή ακόμα και να την απαγκυρώσετε σε ένα χωριστό παράθυρο, κάνοντας κλικ και σύροντας την περιοχή από το όνομά της. Ανάλογα με την κατάσταση της περιοχής, μπορεί να εμφανίζονται διαφορετικά σύμβολα στην πάνω δεξιά γωνία της:</para>
+
+    <note>
+      <para>Αν δεν μπορείτε να δείτε όλες τις περιοχές (είτε είναι ανοικτές, είτε ελαχιστοποιημένες), πατώντας <guisubmenu> Επιλογές &gt; Αποκατάσταση Κυρίου Παραθύρου</guisubmenu>θα τις αποκαταστήσει στην κατάσταση που ορίσθηκε κατά την εγκατάσταση.</para>
+    </note>
+
+    <table>
+      <title>Widgets των Περιοχών<indexterm class="singular">
+          <primary>Τα Παράθυρα και οι Περιοχές στο OmegaT</primary> <secondary>Widgets των Περιοχών</secondary>
+        </indexterm></title>
+
+      <tgroup cols="2">
+        <colspec align="left" colnum="1"/>
+
+        <tbody>
+          <row>
+            <entry><inlinemediaobject>
+                <imageobject role="html">
+                  <imagedata fileref="images/Minimize.gif" width="60%"/>
+                </imageobject>
+
+                <imageobject role="fo">
+                  <imagedata fileref="images/Minimize.gif" width="40%"/>
+                </imageobject>
+              </inlinemediaobject></entry>
+
+            <entry>ελαχιστοποιεί την Περιοχή, έτσι ώστε να εμφανίζεται μόνο το όνομά της στο κάτω μέρος του παραθύρου</entry>
+          </row>
+
+          <row>
+            <entry><inlinemediaobject>
+                <imageobject role="html">
+                  <imagedata fileref="images/Maximize.gif" width="60%"/>
+                </imageobject>
+
+                <imageobject role="fo">
+                  <imagedata fileref="images/Maximize.gif" width="40%"/>
+                </imageobject>
+              </inlinemediaobject></entry>
+
+            <entry>μεγιστοποιεί την Περιοχή</entry>
+          </row>
+
+          <row>
+            <entry><inlinemediaobject>
+                <imageobject role="html">
+                  <imagedata fileref="images/restore.gif" width="60%"/>
+                </imageobject>
+
+                <imageobject role="fo">
+                  <imagedata fileref="images/restore.gif" width="40%"/>
+                </imageobject>
+              </inlinemediaobject></entry>
+
+            <entry>ανακτά τη διάταξη που ίσχυε πριν το βήμα μεγιστοποίησης</entry>
+          </row>
+
+          <row>
+            <entry><inlinemediaobject>
+                <imageobject role="html">
+                  <imagedata fileref="images/undock.gif" width="60%"/>
+                </imageobject>
+
+                <imageobject role="fo">
+                  <imagedata fileref="images/undock.gif" width="40%"/>
+                </imageobject>
+              </inlinemediaobject></entry>
+
+            <entry>Αποδεσμεύει την Περιοχή από το κύριο παράθυρο</entry>
+          </row>
+
+          <row>
+            <entry><inlinemediaobject>
+                <imageobject role="html">
+                  <imagedata fileref="images/dock.gif" width="60%"/>
+                </imageobject>
+
+                <imageobject role="fo">
+                  <imagedata fileref="images/dock.gif" width="40%"/>
+                </imageobject>
+              </inlinemediaobject></entry>
+
+            <entry>ξαναβάζει την Περιοχή πίσω στο κύριο Παράθυρο</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+
+    <para>Μπορείτε να επικαλύπτετε τις Περιοχές, αν το θέλετε. Όταν το κάνετε αυτό, οι Περιοχές εμφανίζουν ένα tab (φάκελλο) στην κορυφή. Τα διαχωριστικά ανάμεσα στις περιοχές μπορείτε να τα σύρετε για να αλλάξετε το μέγεθος των περιοχών. Αν χάσετε το λογαριασμό των αλλαγών που κάνατε στη διεπαφή χρήστη, μπορείτε να χρησιμοποιήσετε τις <guimenuitem><indexterm class="singular">
+        <primary>Παράθυρα του OmegaT</primary> <seealso>Παράθυρα και Περιοχές στο OmegaT</seealso>
+      </indexterm> <indexterm class="singular">
+        <primary>&gt;Παράθυρα του OmegaT</primary> <secondary>Επαναφορά εργοστασιακών ρυθμίσεων</secondary>
+      </indexterm>Επιλογές → Επαναφορά Κυρίου παραθύρου</guimenuitem> ανά πάσα στιγμή, για να επιστρέψετε στην αρχική διάταξη (layout).</para>
+
+    <para>Οι μετρητές στην κάτω δεξιά γωνία παρακολουθούν την πρόοδο της μετάφρασης (οι αριθμοί στην αριστερή στήλη αναφέρονται στον παραπάνω αριθμό):</para>
+
+    <table>
+      <title>Κύριο Παράθυρο - μετρητές<indexterm class="singular">
+          <primary>Παράθυρα και Περιοχές στο OmegaT</primary> <secondary>Μετρητές</secondary>
+        </indexterm></title>
+
+      <tgroup cols="2">
+        <colspec align="left" colnum="1"/>
+
+        <tbody>
+          <row>
+            <entry>27/27</entry>
+
+            <entry>αριθμός τμημάτων - μεταφρασμένα σε σχέση με τα Συνολικά του τρέχοντος αρχείου</entry>
+          </row>
+
+          <row>
+            <entry>9319/16338</entry>
+
+            <entry>αριθμός μοναδικών τμημάτων - μεταφρασμένα σε σχέση με τα Συνολικά του έργου</entry>
+          </row>
+
+          <row>
+            <entry>31175</entry>
+
+            <entry>συνολικός αριθμός τμημάτων (περιλαμβανομένων των επαναλήψεων) στο έργο</entry>
+          </row>
+
+          <row>
+            <entry>103/114</entry>
+
+            <entry>αριθμός χαρακτήρων στο αρχείο προέλευσης και προορισμού του τρέχοντος τμήματος</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+
+    <para>Από πρακτική άποψη, το πιο σημαντικό ζεύγος αριθμών είναι το δεύτερο ζεύγος: σας λέει πόσα κάνατε μέχρι τώρα, σε σχέση με το σύνολο, ή με τον δεύτερο αριθμό. Το έργο του παραδείγματος προφανώς τελείωσε, αφού όλα τα μοναδικά τμήματα μεταφράσθηκαν.</para>
+
+    <section id="editor.pane">
+      <title>Περιοχή Επεξεργασίας<indexterm class="singular">
+          <primary>Παράθυρα και Περιοχές στο OmegaT</primary> <secondary>Περιοχή Επεξεργασίας</secondary>
+        </indexterm></title>
+
+      <para>Εδώ πληκτρολογείτε και επεξεργάζεσθε τη μετάφρασή σας. Η Περιοχή επεξεργασίας εμφανίζει το κείμενο του μερικώς μεταφρασμένου εγγράφου: το ήδη μεταφρασμένο κείμενο προβάλλεται στη γλώσσα μετάφρασης, ενώ το αμετάφραστο κείμενο εμφανίζεται στην αρχική γλώσσα. Το προβαλλόμενο κείμενο διαιρείται σε τμήματα. Μπορείτε να περιηγηθείτε μέσα στο έγγραφο και να κάνετε διπλό κλικ σε οποιοδήποτε τμήμα για να το ανοίξετε και να το επεξεργασθείτε. Στην παραπάνω περίπτωση, τα ήδη μεταφρασμένα τμήματα εμφανίζονται με κίτρινο χρώμα.</para>
+
+      <para>Ένα από τα παραπάνω τμήματα είναι το τρέχον τμήμα. Είναι το τμήμα που εμφανίζεται σε δύο μέρη. Το άνω μέρος είναι η γλώσσα προέλευσης, με έντονα γράμματα (bold) και ένα πράσινο χρώμα στο φόντο, το κάτω μέρος είναι το πεδίο επεξεργασίας, που τελειώνει με μια επισήμανση: <indexterm class="singular">
+          <primary>Επισήμανση Τμήματος</primary>
+        </indexterm>το εργαλείο επισήμασνης είναι το <literal>&lt;τμήμα nnnn&gt;</literal> όπου το nnnn είναι ο αριθμός του τμήματος  στο έργο. Χρησιμοποιείστε το άνω μέρος ως αναφορά και αντικαταστείστε, ή τροποποιείστε, τα περιεχόμενα του πεδίου επεξεργασίας με τη μετάφρασή σας.</para>
+
+      <para>Ανάλογα με την προτιμώμενη συμπεριφορά επεξεργασίας, το πεδίο επεξεργασίας για το αμετάφραστο τμήμα μπορεί να είναι κενό, να περιέχει το κείμενο προέλευσης, ή να περιέχει τη μετάφραση της συμβολοσειράς που μοιάζει περισσότερο με εκείνη που πρόκειται να μεταφρασθεί. Όταν μετακινηθείτε σε ένα άλλο τμήμα, η μετάφραση επικυρώνεται και αποθηκεύεται. Αν θέλετε η μετάφραση να είναι ίδια με την πηγή, απλώς αδειάστε το πεδίο επεξεργασίας διαγράφοντας όλο το κείμενο (επιλέξτε 'Όλα' με το <keycap>Ctrl+A</keycap> και διαγράψτε με το <keycap>Del</keycap>). Το OmegaT μπορεί να αποθηκεύει τις μεταφράσεις που είναι ταυτόσημες με την πηγή. Αυτό είναι χρήσιμο για έγγραφα που περιέχουν εμπορικά σήματα κατατεθέντα, ονόματα, ή μέρη μίας τρίτης γλώσσας που δεν απαιτούν μετάφραση. Βλέπε <emphasis>Επεξεργασία μεταφράσεως</emphasis> για περισσότερες λεπτομέρειες.</para>
+
+      <para>Αν κάνετε δεξί κλικ στην Περιοχή Επεξεργασίας, ανοίγει ένα αναδυόμενο μενού, προσφέροντας<emphasis role="bold"> Αποκοπή, Αντιγραφή, Επικόλληση</emphasis> (π.χ. ίδια λειτουργία όπως και με τις λειτουργίες <keycombo> <keycap>Ctrl</keycap> <keycap>X</keycap> </keycombo>, <keycombo> <keycap>Ctrl</keycap> <keycap>C</keycap> </keycombo> και το <keycombo> <keycap>Ctrl</keycap> <keycap>V</keycap> </keycombo>) και <emphasis role="bold">Ματάβαση στο Τμήμα</emphasis>.</para>
+    </section>
+
+    <section id="match.viewer">
+      <title>Περιοχή μερικών αντιστοιχίσεων<indexterm class="singular">
+          <primary>Παράθυρα και Περιοχές στο OmegaT</primary> <secondary>Περιοχή μερικών αντιστοιχίσεων (fuzzy matches)</secondary>
+        </indexterm></title>
+
+      <para><figure id="matches.pane">
+          <title><indexterm class="singular">
+              <primary>Αντιστοιχίσεις</primary> <secondary>Περιοχή αντιστοιχίσεων - εικόνα</secondary>
+            </indexterm><indexterm class="singular">
+              <primary>Παράθυρα και Περιοχές στο OmegaT</primary> <secondary>Περιοχή Αντιστοιχίσεων - εικόνα</secondary>
+            </indexterm>Περιοχή αντιστοιχίσεων</title>
+
+          <mediaobject>
+            <imageobject role="html">
+              <imagedata fileref="images/MatchesPane_25.png"/>
+            </imageobject>
+
+            <imageobject role="fo">
+              <imagedata fileref="images/MatchesPane_25.png" width="80%"/>
+            </imageobject>
+          </mediaobject>
+        </figure></para>
+
+      <para>Η προβολή αντιστοιχίσεων δείχνει τα πιο όμοια τμήματα από τις μεταφραστικές μνήμες, τόσο από εσωτερικές μνήμες έργου  που δημιουργήθηκαν σε πραγματικό χρόνο, ενώ μεταφράζετε το έργο σας, όσο και από βοηθητικές μεταφραστικές μνήμες που εισάγατε σε προηγούμενες δουλειές σας, ή λάβατε από το πρακτορείο μεταφράσεων του πελάτη σας.</para>
+
+      <para>Όταν μετακινηθείτε στο επόμενο τμήμα, η πρώτη μερική αντιστοίχιση (εκείνη με το καλύτερο ποσοστό αντιστοίχισης) επιλέγεται αυτομάτως. Μπορείτε να επιλέξετε μια διαφορετική αντιστοίχιση πατώντας <guimenuitem>Ctrl+2, 3, 4, ή 5</guimenuitem>.<indexterm>
+          <primary>Συντομεύσεις</primary> <secondary>Επιλογή της αντιστοίχισης - Ctrl+N</secondary>
+        </indexterm> Βέβαια, πατώντας <keycombo> <keycap>Ctrl</keycap> <keycap>5</keycap> </keycombo> δεν θα έχει κανένα αποτέλεσμα, αν δεν υπάρχει καμια αντιστοίχιση #5. Για να χρησιμοποιήσετε την επιλεγμένη αντιστοίχιση στη μετάφρασή σας, χρησιμοποιείστε το <guimenuitem>Ctrl+R</guimenuitem><indexterm class="singular">
+          <primary>Συντομεύσεις</primary> <secondary>Αντικατάσταση κειμένου - Ctrl+R</secondary>
+        </indexterm> για να αντικαταστήσετε το πεδίο προορισμού με την αντιστοίχιση, ή χρησιμοποιείστε το <guimenuitem>Ctrl+I <indexterm class="singular">
+          <primary>Συντομεύσεις</primary> <secondary>Εισαγωγή κειμένου - Ctrl+I</secondary>
+        </indexterm></guimenuitem> για να την εισάγετε εκεί όπου βρίσκεται ο δείκτης.</para>
+
+      <para>Το ποσοστό αντιστοίχισης ισοδυναμεί περίπου με το να πάρετε τον αριθμό κοινών λέξεων στο αντιστοιχισμένο και στο αντιστοιχιζόμενο τμήμα και να το διαιρέσετε διά τον αριθμό λέξεων στο πιο μεγάλο εκ των δύο. Η επιλεγμένη μερική αντιστοίχιση τονίζεται με έντονα γράμματα (bold), οι λέξεις που λείπουν από τμήμα που μεταφράζετε χρωματίζονται μπλε, ενώ οι λέξεις που είναι δίπλα στα κομμάτια που λείπουν, με πράσινο. Στο παραπάνω παράδειγμα το τμήμα προέλευσης είναι <emphasis role="bold">Εντολή Context menu</emphasis>. Η κορυφαία αντιστοίχιση είναι 100%, αφού όλες οι λέξεις αντιστοιχούν. Το ίδιο ισχύει και για τις επόμενες δύο αντιστοιχίσεις και η αντιστοίχιση #4 είναι όμοια, αλλά διαφορετική. Η γραμμή με το ποσοστό αντιστοίχισης περιλαμβάνει και το όνομα της μεταφραστικής μνήμης <indexterm class="singular">
+          <primary>Μεταφραστικές μνήμες</primary> <secondary>Αντιστοιχίσεις</secondary>
+        </indexterm> που περιέχει την αντιστοίχιση. Αν δεν εμφανισθεί κανένα όνομα αρχείου, η πηγή είναι η εσωτερική μεταφραστική μνήμη του έργου. Ορφανά τμήματα<indexterm class="singular">
+          <primary>Μεταφραστικές μνήμες</primary> <secondary>Ορφανά τμήματα</secondary>
+        </indexterm> (η αντιστοίχιση #2) περιγράφει τμήματα στην προεπιλεγμένη μεταφραστική μνήμη του έργου που δεν έχουν αντίστοιχο τμήμα προέλευσης.</para>
+
+      <para>Υπάρχουν, τρεχόντως, τρεις διαθέσιμες εκτιμήσεις (66/66/30 στην περίπτωση της παραπάνω αντιστοίχισης #4). Αυτές ορίζονται ως εξής:</para>
+
+      <itemizedlist>
+        <listitem>
+          <para>ποσοστό αντιστοίχισης όταν χρησιμοποιείται το πρόσθετο του tokenizer</para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para>προεπιλεγμένη αντιστοίχιση στο OmegaT - αριθμός αντιστοιχισμένων λέξεων - αγνοώντας τους αριθμούς και τις εικέτες - διαιρούμενος δια την συνολική καταμέτρηση λέξεων.</para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para>Αντιστοίχιση στο OmegaT, περιλαμβάνοντας αριθμούς, ετικέτες</para>
+        </listitem>
+      </itemizedlist>
+
+      <section>
+        <title>Παραμετροποίηση της Περιοχής Μερικής αντιστοίχισης<indexterm class="singular">
+            <primary>Παράθυρα και Περιοχές στο OmegaT</primary> <secondary>Περιοχές μερικής αντιστοίχισης</secondary> <tertiary>Παραμετροποίηση</tertiary>
+          </indexterm><indexterm class="singular">
+            <primary>Αρχεία προέλευσης</primary> <secondary>Μετάφραση ενημερωμένης πηγής</secondary>
+          </indexterm></title>
+
+        <para>Στις <guimenu>Επιλογές &gt; Εξωτερικά TMX</guimenu>, ένας αριθμός μεταβλητών επιτρέπουν τη ρύθμιση της εμφάνισης της Περιοχής Αντιστοίχισης:</para>
+
+        <figure id="matches.pane.setup">
+          <title><indexterm class="singular">
+              <primary>Αντιστοιχίσεις</primary> <secondary>Ρύθμιση Περιοχής Αντιστοίχισης - εικόνα</secondary>
+            </indexterm><indexterm class="singular">
+              <primary>Παράθυρα και Περιοχές στο OmegaT</primary> <secondary>Ρύθμιση Περιοχής αντιστοίχισης - εικόνα</secondary>
+            </indexterm>Ρύθμιση περιοχής αντιστοίχισης</title>
+
+          <mediaobject>
+            <imageobject>
+              <imagedata fileref="images/MatchesPaneSetup.png"/>
+            </imageobject>
+
+            <imageobject role="fo">
+              <imagedata fileref="images/MatchesPaneSetup.png" width="50%"/>
+            </imageobject>
+          </mediaobject>
+        </figure>
+
+        <para>Ο παραπάνω αριθμός δείχνει το προεπιλεγμένο πρότυπο για την εμφάνιση αντιστοίχισης. Τα περιεχόμενα μπορούν να παραμετροποιηθούν χρησιμοποιώντας μεταβλητές:</para>
+
+        <table colsep="0" rowsep="0">
+          <title>Ρύθμιση Περιοχής αντιστοίχισης<indexterm class="singular">
+              <primary>Διεπαφή χρήστη</primary> <secondary>Ρύθμιση Περιοχής αντιστοίχισης</secondary>
+            </indexterm></title>
+
+          <tgroup cols="2" colsep="1" rowsep="1" title="Match pane setup">
+            <colspec align="left" colnum="1"/>
+
+            <colspec align="left" colnum="2"/>
+
+            <tbody>
+              <row>
+                <entry><literal>${id}</literal></entry>
+
+                <entry>Αριθμός της αντιστοίχισης από το 1 ως το 5</entry>
+              </row>
+
+              <row>
+                <entry><literal>${sourceText}</literal></entry>
+
+                <entry>Κείμενο προέλευσης της αντιστοίχισης</entry>
+              </row>
+
+              <row>
+                <entry><literal>${targetText}</literal></entry>
+
+                <entry>Κείμενο προορισμού της αντιστοίχισης</entry>
+              </row>
+
+              <row>
+                <entry><literal>${diff}</literal></entry>
+
+                <entry>Συμβολοσειρά που δείχνει τις διαφορές ανάμεσα στην πηγή και την αντιστοίχιση.<emphasis> Συμβουλή:</emphasis> χρησιμοποιείστε αυτό, αν το κείμενο που μεταφράσατε έχει ενημερωθεί.</entry>
+              </row>
+
+              <row>
+                <entry><literal>${score}</literal></entry>
+
+                <entry>Ποσοστό με το tokenizer</entry>
+              </row>
+
+              <row>
+                <entry><literal>${noStemScore}</literal></entry>
+
+                <entry>Ποσοστό χωρίς αριθμούς και ετικέτες</entry>
+              </row>
+
+              <row>
+                <entry><literal>${adjustedScore}</literal></entry>
+
+                <entry>Προσαρμοσμένο ποσοστό</entry>
+              </row>
+
+              <row>
+                <entry><literal>${fileNameOnly}</literal></entry>
+
+                <entry>Όνομα του TMX</entry>
+              </row>
+
+              <row>
+                <entry><literal>${filePath}</literal></entry>
+
+                <entry>Πλήρης διαδρομή του TMX</entry>
+              </row>
+
+              <row>
+                <entry><literal>${fileShortPath}</literal></entry>
+
+                <entry>Διαδρομή του TMX που αρχίζει με το root του /tm</entry>
+              </row>
+
+              <row>
+                <entry><literal>${creationID}</literal></entry>
+
+                <entry>Συγγραφέας της αντιστοίχισης</entry>
+              </row>
+
+              <row>
+                <entry><literal>${creationDate}</literal></entry>
+
+                <entry>Ημερομηνία της αντιστοίχισης</entry>
+              </row>
+
+              <row>
+                <entry><literal>${fuzzyFlag}</literal></entry>
+
+                <entry>Επισημαίνει ότι αυτή η αντιστοίχιση είναι μερική (τρεχόντως, μόνο για μεταφράσεις αρχείων PO με τη βαθμολογία #fuzzy mark)</entry>
+              </row>
+            </tbody>
+          </tgroup>
+        </table>
+      </section>
+    </section>
+
+    <section>
+      <title>Περιοχή Γλωσσαρίου<indexterm class="singular">
+          <primary>Παράθυρα και Περιοχές στο OmegaT</primary> <secondary>Περιοχή Γλωσσαρίου</secondary>
+        </indexterm></title>
+
+      <para>Η Περιοχή γλωσσαρίου σας επιτρέπει να έχετε πρόσβαση στη συλλογή σας με εκφράσεις και εξειδικευμένη ορολογία που χτίσατε στα αρχεία γλωσσαρίου. Δείχνει μετάφραση όρων που βρίσκονται στο τρέχον τμήμα. Το τμήμα προέλευσης στο παρακάτω παράδειγμα ήταν “<emphasis>Εντολή Context menu</emphasis>”, όπως και στο παραπάνω παράδειγμα Μερικών αντιστοιχίσεων, και οι όροι που εμφανίζονται βρέθηκαν στα διαθέσιμα γλωσσάρια (Συλλογή Ορολογίας της Microsoft και το Γλωσσάρι του Σλοβενικού Linux User group).</para>
+
+      <figure id="multiword.pane">
+        <title><indexterm class="singular">
+            <primary>Γλωσσάρια</primary>
+          </indexterm>Εισαγωγή πολλαπλών λέξεων στο γλωσσάρι</title>
+
+        <mediaobject>
+          <imageobject role="html">
+            <imagedata fileref="images/GlossaryPane_25.png"/>
+          </imageobject>
+
+          <imageobject role="fo">
+            <imagedata fileref="images/GlossaryPane_25.png" width="80%"/>
+          </imageobject>
+        </mediaobject>
+      </figure>
+
+      <para>Αν ενεργοποιήσατε την επιλογή TransTips (<guimenuitem>Επιλογές → TransTips</guimenuitem>), μπορείτε να κάνετε δεξί κλικ στην επιλεγμένη (τονισμένη) λέξη στο τμήμα προέλευσης, για να ανοίξει ένα αναδυόμενο μενού με προτεινόμενη μετάφραση, όπως προσφέρεται στο γλωσσάρι σας. Αν επιλέξετε ένα από αυτά, θα το εισάγει εκεί που βρίσκεται τρεχόντως ο δείκτης στο τμήμα προορισμού. Μπορείτε και να επιλέξετε (τονίσετε) την προτιμώμενη εναλλακτική σας στην Περιοχή γλωσσαρίου και να την εισάγετε στον προορισμό μέσω δεξιού κλικ στην επιλογή.</para>
+    </section>
+
+    <section id="dictionaries">
+      <title>Περιοχή λεξικού<indexterm class="singular">
+          <primary>Παράθυρα και Περιοχές στο OmegaT</primary> <secondary>Περιοχή Λεξικού</secondary>
+        </indexterm></title>
+
+      <para>Τα λεξικά είναι το ηλεκτρονικό ισοδύναμο των έντυπων λεξικών, σαν το Merriam Webster, το Duden, το Larousse κλπ., που μπορεί να έχετε πάνω στο γραφείο σας. Δείτε περισσότερες λεπτομέρειες για αυτά στο Κεφάλαιιο <link linkend="chapter.dictionaries">Λεξικά</link></para>
+    </section>
+
+    <section id="Multiple.Translations">
+      <title>Περιοχή Πολλαπλών μεταφράσεων<indexterm class="singular">
+          <primary>Παράθυρα και Περιοχές στο OmegaT</primary> <secondary>Περιοχή Πολλαπλών μεταφράσεων</secondary>
+        </indexterm></title>
+
+      <para>Ένα δεδομένο τμήμα προέλευσης μπορεί να απαιτεί διαφορετικές μεταφράσεις, ανάλογα με τα συμφραζόμενα. Αν η τρέχουσα μετάφραση του τμήματος δεν ταιριάζει, ο χρήστης μπορεί να επιλέξει <guisubmenu>Επεξεργασία → Δημιουργία εναλλακτικής Μετάφρασης</guisubmenu>. Το κείμενο προορισμού που εισήχθη μετά από αυτό, θα θεωρείται ως εναλλακτική μετάφραση του τμήματος προέλευσης. Μπορείτε να ορίσετε μια από τις εναλλακτικές - παρεμπιπτόντως, την πιθανότερη ανάμεσά τους - ως μετάφραση προεπιλογής, επιλέγοντας <guisubmenu>Επεξεργασία → Χρήση ως Μετάφραση προεπιλογής</guisubmenu></para>
+    </section>
+
+    <section>
+      <title>Περιοχή Σημειώσεων</title>
+
+      <para>Ο μεταφραστής μπορεί να προσθέτει σημειώσεις στο ανοικτό τμήμα, π.χ, για να πειστρέψετε αργότερα στο τμήμα και να ξανακάνετε τη μετάφραση, να ελέγξετε ότι οι εναλλακτικές μεταφράσεις είναι σωστές, ή να ζητήσετε τη γνώμη συναδέλφων. Μπορείτε να περιηγείσθε στις σημειώσεις χρησιμοποιώντας το <guisubmenu>Μετάβαση σε → Επόμενη σημείωση</guisubmenu> και το <guisubmenu>Μετάβαση σε → Προηγούμενη Σημείωση</guisubmenu>.</para>
+    </section>
+
+    <section>
+      <title>Περιοχή Σχολίων</title>
+
+      <para>Μερικές μορφές αρχείων ειδικές για τις εργασίες μετάφρασης, π.χ. τα αρχεία PO, επιτρέπουν την συμπερίληψη σχολίων. Με αυτό τον τρόπο, ο μεταφραστής μπορεί να έχει πρόσβαση στα συμφραζόμενα (context) για το τμήμα που είναι προς μετάφραση. Στο παρακάτω παράδειγμα, ο συγγραφέας του αρχείου PO συμπεριέλαβε μια προειδοποίηση για να πάει ο μεταφραστής να ελέγξει το μέγεθος της μετάφρασης:</para>
+
+      <figure id="comments.pane">
+        <title>Περιοχή Σχολίων<indexterm class="singular">
+            <primary>Σχόλια</primary> <secondary>Περιοχή Σχολίων</secondary>
+          </indexterm></title>
+
+        <mediaobject>
+          <imageobject role="html">
+            <imagedata fileref="images/Comments_25.png"/>
+          </imageobject>
+
+          <imageobject role="fo">
+            <imagedata fileref="images/Comments_25.png" width="80%"/>
+          </imageobject>
+        </mediaobject>
+      </figure>
+    </section>
+
+    <section id="Google.Translate">
+      <title>Περιοχή Μηχανικής Μετάφρασης<indexterm class="singular">
+          <primary>Παράθυρα και Περιοχές στο OmegaT</primary> <secondary>Περιοχή Μηχανικής Μετάφρασης</secondary>
+        </indexterm></title>
+
+      <para>Όταν ανοίξετε την περιοχή Μηχανικής Μετάφρασης, αυτή περιέχει προτάσεις των εργαλείων της μηχανής μετάφρασης για το τρέχον τμήμα. Πατείστε <keysym>Ctrl+M </keysym>για να αντικαταστήσετε τη μετάφραση του τρέχοντος τμήματος με την προτεινόμενη μετάφραση. Παραπάνω στο κεφάλαιο <link linkend="chapter.machine.translate">Μηχανική Μετάφραση</link></para>
+    </section>
+
+    <section>
+      <title id="main.menu">Κύριο Μενού</title>
+
+      <para>Το κύριο μενού προσφέρει πρόσβαση σε όλες τις λειτουργίες του <application>OmegaT</application>. Δείτε το Παράρτημα του<emphasis> Κύριου Μενού</emphasis> για μια πλήρη περιγραφή όλων των μενού κα των επί μέρους επιλογών τους. Οι λειτουργίες που χρησιμοποιούνται περισσότερο, είναι διαθέσιμες μέσω συντομεύσεων πληκτρολογίου, και μόλις εξοικειωθείτε με αυτές, δεν θα χρειάζεται πλέον να περιηγείσθε στα μενού καθώς μεταφράζετε. Βλέπε Κεφάλαιο <link linkend="chapter.menu">Μενού και Συντομεύσεις πληκτρολογίου</link> για λεπτομέρειες.</para>
+    </section>
+
+    <section id="status.bar">
+      <title>Γραμμή κατάστασης</title>
+
+      <para>Η γραμμή κατάστασης εμφανίζει συσχετιζόμενα μηνύματα ως προς τη ροή εργασίας, στο κάτω μέρος του κύριου παραθύρου. Αυτή η γραμμή προσφέρει στον χρήστη ανάδραση για συγκεκριμμένες λειτουργίες που βρίσκονται σε εξέλιξη. Εμφανίζει επίσης και τον αριθμό των μερικών αντιστοιχίσεων και των αντιστοιχίσεων γλωσσαρίου για το τρέχον τμήμα.</para>
+    </section>
+  </section>
+
+  <section id="other.windows">
+    <title>Άλλα παράθυρα</title>
+
+    <section id="section.project.files">
+      <title>Αρχεία έργου<indexterm class="singular">
+          <primary>Παράθυρα και Περιοχές στο OmegaT</primary> <secondary>Αρχεία έργου</secondary>
+        </indexterm></title>
+
+      <para>Το Παράθυρο με τα Αρχεία έργου παραθέτει τα αρχεία του έργου και εμφανίζει και άλλες πληροφορίες για το έργο. Εμφανίζεται αυτομάτως όταν το OmegaT φορτώνει ένα έργο. Χρήση <guimenuitem>Ctrl+L<indexterm class="singular">
+          <primary>Συντομεύσεις</primary> <secondary>Κατάλογος αρχείων έργου - Ctrl+L</secondary>
+        </indexterm></guimenuitem> για να το ανοίξετε και <keycap>Esc</keycap> για να το κλείσετε. Το Παράθυρο Αρχείων έργου εμφανίζει τις ακόλουθες ποληροφορίες:</para>
+
+      <itemizedlist>
+        <listitem>
+          <para>τον κατάλογο όλων των μεταφράσιμων αρχείων στο έργο. Αυτά είναι τα αρχεία που βρίσκονται στον κατάλογο με τα αρχεία προέλευσης, σε μια μορφή που το OmegaT να μπορεί να αναγνωρίζει. Κάνοντας κλικ σε οποιοδήποτε αρχείο θα το ανοίξει προς μετάφραση</para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para>το αρχείο που είναι τρεχόντως διαθέσιμο στην Περιοχή επεξεργασίας επισημαίνεται με μπλε φόντο. Πατώντας <keycap>Enter</keycap> θα μετακινήσει την Περιοχή Επεξεργασίας στην κορυφή του επιλεγμένου αρχείου</para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para>Οι καταχωρήσεις αρχείου περιλαμβάνουν τα ονόματά τους, τα είδη φίλτρων αρχείου, την κωδικοποίησή τους και τον αριθμό τμημάτων που περιέχει το κάθε τμήμα</para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para>Στο κάτω μέρος εμφανίζεται ο συνολικός αριθμός τμημάτων, ο αριθμός μοναδικών τμημάτων σε όλο το έργο και ο αριθμός μοναδικών τμημάτων που ήδη μεταφράσθηκαν</para>
+        </listitem>
+      </itemizedlist>
+
+      <para>Η ομάδα των <emphasis role="bold">Μοναδικών </emphasis>τμημάτων υπολογίζεται παίρνοντας όλα τα τμήματα και διαγράφοντας όλα τα τμήματα εις διπλούν. (Ο ορισμός του “μοναδικού” είναι ευαίσθητος στα μικρά ή στα κεφαλαία γράμματα: Οι λέξεις &quot;Εκτέλεση&quot; και &quot;εκτέλεση&quot; θεωρούνται ως διαφορετικές)</para>
+
+      <para>Η διαφορά ανάμεσα στο &quot;Αριθμός τμημάτων&quot; και στο &quot;Αριθμός μοναδικών τμημάτων&quot; προσφέρει μια ιδέα κατά προσέγγιση για τον αριθμό των επαναλήψεων μέσα στο κείμενο. Σημειώστε, πάντως, ότι οι αριθμοί δεν δείχνουν πόσο σημαντικές είναι οι επαναλήψεις: μπορεί και να σημαίνουν σχετικά μεγάλες προτάσεις που επαναλαμβάνονται επί κάποιες φορές (οπότε είστε τυχερός) ή μπορεί και να περιγράφουν έναν πίνακα με λέξεις κλειδιά (όχι και τόσο τυχερός). Το <filename>project_stats.txt</filename> που βρίσκεται στον κατάλογο omegat του έργου σας, περιέχει περισσότερες λεπτομερείς πληροφορίες για τα τμήματα, με ανάλυση ανά αρχείο.</para>
+
+      <para>Η τροποποίηση των κανόνων κατάτμησης μπορεί να οδηγήσει στην τροποποίηση του αριθμού τμημάτων/μοναδικών τμημάτων. Αυτό, πάντως, θα πρέπει γενικά να αποφεύγεται, άπαξ και αρχίσετε τη μετάφραση του έργου. Δείτε το κεφάλαιο <emphasis>Κανόνες κατάτμησης</emphasis> για παραπάνω πληροφορίες.</para>
+
+      <para><emphasis role="bold"><indexterm class="singular">
+          <primary>Αρχεία προέλευσης</primary> <secondary>Προσθήκη αρχείων στο έργο</secondary>
+        </indexterm>Προσθήκη αρχείων στο έργο: </emphasis>Μπορείτε να προσθέσετε αρχεία προέλευσης στο έργο, κάνοντας κλικ στο κουμπί &quot;<guimenuitem>Εισαγωγή Αρχείων προέλευσης...&quot;</guimenuitem>. Αυτό αντιγράφει τα επιλεγμένα αρχεία στον κατάλογο <filename>προέλευσης</filename> και επαναφορτώνει το έργο για να εισάγει τα νέα αρχεία. Μπορείτε, επίσης, να προσθέσετε αρχεία προέλευσης από σελίδες του Ίντερνετ, γραμμένες σε MediaWiki, κάνοντας κλικ στο κουμπί<guimenuitem> &quot;Εισαγωγή από MediaWiki&quot;</guimenuitem> και παρέχοντας το αντίστοιχο URL.</para>
+    </section>
+
+    <section id="section.search.window">
+      <title>Παράθυρο αναζήτησης<indexterm class="singular">
+          <primary>Παράθυρα και Περιοχές στο OmegaT</primary> <secondary>Περιοχή Αναζήτησης</secondary>
+        </indexterm></title>
+
+      <para>Μπορείτε να χρησιμοποιείτε το παράθυρο αναζήτησης για να βρείτε ειδικά τμήματα σε ένα έργο. Μπορείτε, επίσης, να κρατάτε ανοιχτά πολλά παράθυρα αναζήτησης ταυτοχρόνως. Για να ανοίξετε ένα νέο παράθυρο αναζήτησης, χρησιμοποιείστε <keycombo> <keycap>Ctrl</keycap> <keycap>F</keycap> </keycombo> στο κύριο παράθυρο. Το Παράθυρο αναζήτησης αποτελείται από ένα πεδίο κειμένου για αναζήτηση συμβολοσειρών. ή λέξεων, flags και κουμπιά radio για τη ρύθμιση της αναζήτησης και μια περιοχή εμφάνισης με τα αποτελέσματα της αναζήτησης. Δείτε το κεφάλαιο<emphasis> <link linkend="chapter.user.interface">Αναζητήσεις</link> </emphasis>για παραπάνω πληροφορίες σχετικά με το παράθυρο αναζήτησης.</para>
+    </section>
+
+    <section id="section.tag.validation">
+      <title>Επικύρωση ετικέτας<indexterm class="singular">
+          <primary>Επικύρωση ετικέτας</primary> <seealso>Συντομεύσεις, Ετικέτες</seealso>
+        </indexterm><indexterm class="singular">
+          <primary>Παράθυρα και Περιοχές στο OmegaT</primary> <secondary>Επικύρωση ετικέτας</secondary> <seealso>Ετικέτες</seealso>
+        </indexterm></title>
+
+      <para>Το παράθυρο Επικύρωσης ετικέτας εντοπίζει και παραθέτει οποιαδήποτε σφάλματα ετικέτας και ασυνέπειες στη μετάφραση. Ανοίξτε το παράθυρο με <guimenuitem>Ctrl+T. </guimenuitem>Το παράθυρο έχει έναν τρίστηλο πίνακα με έναν σύνδεσμο στο τμήμα και στα περιεχόμενα προέλευσης και προορισμού του:</para>
+
+      <para><figure id="tag.validator.window">
+          <title><indexterm class="singular">
+              <primary>Επικύρωση ετικέτας</primary> <secondary>Παράθυρο - εικόνα</secondary> <seealso>Ετικέτες</seealso>
+            </indexterm>Παράθυρο επικύρωσης ετικέτας</title>
+
+          <mediaobject>
+            <imageobject role="html">
+              <imagedata fileref="images/TagValidator.png"/>
+            </imageobject>
+
+            <imageobject role="fo">
+              <imagedata fileref="images/TagValidator.png" width="60%"/>
+            </imageobject>
+          </mediaobject>
+        </figure></para>
+
+      <para>Οι ετικέτες τονίζονται με έντονο μπλέ για εύκολη σύγκριση ανάμεσα στα αρχικά και τα μεταφρασμένα περιεχόμενα. Κάντε κλικ στον σύνδεσμο για να μεταβείτε στο τμήμα που είναι στην Περιοχή επεξεργασίας. Διορθώστε το σφάλμα αν είναι απαραίτητο και πατήστε <guimenuitem>Ctrl+T</guimenuitem> για να επιστρέψετε στο παράθυρο επικύρωσης ετικέτας και να διορθώσετε άλλα σφάλματα. Στην πρώτη και την τρίτη από τις παραπάνω περιπτώσεις, οι ετικέτες δεν είναι σωστά συνδυασμένες, ενώ στη δεύτερη περίπτωση, λείπει το σύμβολο &lt; από την ετικέτα έναρξης.</para>
+
+      <para>Τα σφάλματα ετικέτας είναι περιπώσεις όπου οι ετικέτες στη μετάφραση δεν αντιστοιχούν στη σειρά και τον αριθμό με το αρχικό τμήμα. Μερικά σενάρια ετικετών που είναι flagged στο παράθυρο επκύρωσης ετικετών, είναι απαραίτητα και είναι αθώα, ενώ άλλα, θα προκαλέσουν προβλήματα όταν δημιουργηθεί το μεταφρασμένο έγγραφο. Οι ετικέτες γενικά αντιπροσωπεύουν κάποιο είδος μορφοποίησης στο αρχικό κείμενο. Η απλοποίηση της μορφοποίησης του αρχικού κειμένου στο αρχείο προέλευσης, πριν αρχίσει η μετάφραση, συνεισφέρει τα μέγιστα στην ελλάττωση του αριθμού των ετικετών.</para>
+    </section>
+
+    <section>
+      <title>Στατιστικές<indexterm class="singular">
+          <primary>Στατιστικές</primary> <seealso>Μενού εργαλείων</seealso>
+        </indexterm></title>
+
+      <para>Το παράθυρο στατιστικών - στο οποίο έχετε πρόσβαση με τα <emphasis role="bold">Εργαλεία&gt;Στατιστικές </emphasis>- δείχνει τις στατιστικές του τρέχοντος έργου OmegaT, τόσο σε μορφή περίληψης, όσο και λεπτομερειακά για κάθε αρχείο προς μετάφραση. Οι στατιστικές που δείχνει είναι διαθέσιμες και σαν αρχείο χωρισμένο-με-tab <filename>project_stats.txt</filename> (υποκατάλογος <filename>omegat</filename>), έτοιμο για φόρτωση σε ένα πρόγραμμα λογιστικών φύλλων, για την εξυπηρέτηση του χρήστη. Μπορείτε να χρησιμοποιείτε το <guimenuitem>Ctrl+A <indexterm class="singular">
+          <primary>Συντομεύσεις</primary> <secondary>Επιλογή όλων - Ctrl+A</secondary>
+        </indexterm></guimenuitem><guimenuitem>, Ctrl+C <indexterm class="singular">
+          <primary>Συντομεύσεις</primary> <secondary>Αντιγραφή κειμένου - Ctrl+C</secondary>
+        </indexterm></guimenuitem>, <guimenuitem>Ctrl+V <indexterm class="singular">
+          <primary>Συντομεύσεις</primary> <secondary>Επικόλληση κειμένου - Ctrl+V</secondary>
+        </indexterm></guimenuitem> για να κάνετε αντιγραφή/επικόλληση των περιεχομένων. <figure id="ProjectStatistic.Window">
+          <title>στατιστικά έργου</title>
+
+          <mediaobject>
+            <imageobject role="html">
+              <imagedata fileref="images/StatisticsWindow_25.png"/>
+            </imageobject>
+
+            <imageobject role="fo">
+              <imagedata fileref="images/StatisticsWindow_25.png" width="60%"/>
+            </imageobject>
+          </mediaobject>
+        </figure></para>
+    </section>
+
+    <section>
+      <title>Στατιστικές αντιστοίχισης<indexterm class="singular">
+          <primary>Στατιστικές αντιστοίχισης</primary> <seealso>Μενού εργαλείων</seealso>
+        </indexterm></title>
+
+      <para>Η πρόσβαση στις στατιστικές αντιστοίχισης γίνεται με τα<guimenuitem>Εργαλεία&gt;Στατιστικές Αντιστοίχισης.</guimenuitem> Η διεργασία αυτή είναι μάλλον απαιτητική σε πόρους CPU και μπορεί να είναι χρονοβόρα και για αυτό εμφανίζεται μια γραμμή προόδου κατά τη διάρκεια του υπολογισμού. Σε ότι αφορά τις κατηγορίες, χρησιμοποιείται το de facto βιομηχανικό πρότυπο για την κατάταξη των αντιστοιχίσεων στις εξής κατηγορίες: Επαναλήψεις, Ακριβής αντιστοίχιση, 95%-100%, 85%-94%, 75%-84%, 50%-74% και Καμία αντιστοίχιση. Οι πληροφορίες υπολογίζονται για τμήματα, αλλά και για λέξεις και χαρακτήρες (χωρίς και συμπεριλαμβανομένων των διαστημάτων). Σημειώστε ότι μπορεί να υπάρχουν μικρές διαφορές ανάμεσα στους υπολογισμούς του OmegaT και τους αριθμούς που προσφέρουν άλλα εργαλεία CAT.<figure>
+          <title>Στατιστικές αντιστοίχισης</title>
+
+          <mediaobject>
+            <imageobject role="html">
+              <imagedata fileref="images/MatchStatistics.png"/>
+            </imageobject>
+
+            <imageobject role="fo">
+              <imagedata fileref="images/MatchStatistics.png" width="80%"/>
+            </imageobject>
+          </mediaobject>
+        </figure></para>
+
+      <para>Σημειώστε ότι αυτά τα σύνολα είναι μια καλή προσέγγιση (ή όσο πιο καλή γίνεται) της εργασίας που περιέχεται στο έργο και, άρα, μπορούν να αποτελέσουν μια βάση για τον υπολογισμό κόστους και τιμής που θα κάνετε.</para>
+
+      <para>Τα διαστήματα ανάμεσα στα τμήματα δεν λαμβάνονται υπ' όψη στην τελευταία στήλη. Επαναλήψεις σημαίνει τα ταυτόσημα τμήματα που βρίσκονται πολλές φορές μέσα στο κείμενο. Το πρώτο τμήμα και τα περιεχόμενά του θα ταξινομηθούν ως &quot;καμία αντιστοίχιση&quot;, ενώ τα υπόλοιπα, ως μια επανάληψη του πρώτου. Αν η μετάφραση για πολλά ταυτόσημα τμήματα προέλευσης υπάρχει ήδη στη μεταφραστική μνήμη του έργου, αυτά τα τμήματα, μαζί με τα άλλα, τα ήδη μεταφρασμένα μοναδικά τμήματα, θα ταξινομηθούν ως &quot;Ακριβής αντιστοίχιση&quot;. Ο αριθμός μοναδικών τμημάτων, αν χρειάζεται, προσφέρεται στο πρότυπο παράθυρο στατιστικών, ανεξάρτητα από το αν έχουν μεταφρασθεί ή όχι.</para>
+
+      <para>Οι υπόλοιπες κατηγορίες (50-100%) περιλαμβάνουν αμετάφραστα τμήματα με μια μερική αντιστοίχιση. Οι μερικές ατνιστοιχίσεις μπορεί επίσης να προέρχονται και από τον κατάλογο <filename>/tm</filename> - και όχι μόνον από την εσωτερική μεταφραστική μνήμη στο <filename>/omegaT,</filename> όπως ισχύει για τις επαναλήψεις και τις αντιστοιχίσεις κειμένου. Η μόνη διαφορά από τις αντιστοιχίσεις από την μεταφραστική μνήμη <filename>project_save</filename> είναι ότι οι εξωτερικές μεταφραστικές μνήμες TMs δεν μπορούν να δώσουν ακριβείς αντιστοιχίσεις, μόνο 100%. Αν δεν επιθυμείτε να χρησιμοποιήσετε εξωτερικές TMs για την καταμέτρηση, θα πρέπει ή να αδειάσετε τον κατάλογο /tm ή να αλλάξετε (προσωρινά) τη ρύθμιση του έργου έτσι ώστε η τιμή για /tm να δείχνει προς μια διαφορετική τοποθεσία.</para>
+
+      <para>Οι στατιστικές αντιστοίχισης είναι tab-separated και μπορείτε να χρησιμοποιείτε <guimenuitem>Ctrl+A <indexterm class="singular">
+          <primary>Συντομεύσεις</primary> <secondary>Επιλογή όλων - Ctrl+A</secondary>
+        </indexterm></guimenuitem><guimenuitem>, Ctrl+C <indexterm class="singular">
+          <primary>Συντομεύσεις</primary> <secondary>Αντιγραφή κειμένου - Ctrl+C</secondary>
+        </indexterm></guimenuitem>, <guimenuitem>Ctrl+V <indexterm class="singular">
+          <primary>Συντομεύσεις</primary> <secondary>Επικόλληση κειμένου - Ctrl+V</secondary>
+        </indexterm></guimenuitem> για να τις κάνετε αντιγραφή/επικόλληση, π.χ. σε ένα λογιστικό φύλλο, ή στην εφαρμογή σας για υπολογισμό κοστους και τήρηση λογιστικών. Μόλις υπολογισθούν, τα δεδομένα είναι διαθέσιμα και στο <filename>omegat/project_stats_match.txt.</filename> Σημειώστε ότι το αρχείο είναι time-stamped, καθώς ο υπολογισμός (αντίθετα με τις πρότυπες στατιστικές) δεν είναι στιγμιαίος και έτσι μπορεί γρήγορα να καταντήσει απαρχαιωμένος και άχρηστος.</para>
+    </section>
+
+    <section>
+      <title>Περιηγητής βοήθειας (Help browser)<indexterm class="singular">
+          <primary>Μενού βοήθειας</primary> <secondary>Περιηγητής βοήθειας</secondary>
+        </indexterm></title>
+
+      <para>Μπορείτε να ανοίξετε τον περιηγητή βοήθειας (που εμφανίζει αυτό το εγχειρίδιο) πατώντας <keycap><indexterm class="singular">
+          <primary>Συντομεύσεις</primary> <secondary>Βοήθεια - F1</secondary>
+        </indexterm>F1</keycap> ή πλοηγούμενοι στο <guimenuitem><indexterm class="singular">
+          <primary>Μενού βοήθειας</primary> <secondary>Εγχειρίδιο χρήστη...</secondary>
+        </indexterm>Βοήθεια → Εγχειρίδιο χρήστη...</guimenuitem> στο κύριο μενού. Στο παράθυρο, εμφανίζονται το Εγχειρίδιο και δύο κουμπιά: Πίσω κα Περιεχόμενα. Το εγχειρίδιο χρήστη είναι ένα έγγραφο HTML με συνδέσμους προς διάφορα κεφάλαια. Κάντε κλικ σε έναν σύνδεσμο όπως θα κάνατε και με έναν web browser και η επιθυμητή σελίδα θα έρθει μπροστά σας.</para>
+
+      <para>Το εγχειρίδιο χρήστη βρίσκεται στον υποκατάλογο docs, κάτω από τον κατάλογο εγκατάστασης του OmegaT, οπότε μπορείτε, π.χ., να δείτε την Αγγλική τεκμηρίωση, ανοίγοντας το αρχείο <filename>docs/en/index.html </filename>στον περιηγητή σας (browser). Ανοίγοντας το εγχειρίδιο χρήστη με αυτό τον τρόπο, μπορείτε, επίσης, να ακολουθείτε εξωτερικούς συνδέσμους, αφού ο ενσωματωμένος περιηγητής βοήθειας (built-in help browser) δεν αποδέχεται εξωτερικούς συνδέσμους Internet.</para>
+    </section>
+  </section>
+</chapter>

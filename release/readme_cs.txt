@@ -1,4 +1,4 @@
-@@TRANSLATION_NOTICE@@
+Tento překlad vypracoval [Josef Molnár], copyright© [2013].
 
 ==============================================================================
   OmegaT 3.0, soubor Read Me / Čti mě
@@ -18,13 +18,13 @@ Nejaktuálnější informace o aplikaci OmegaT naleznete na adrese:
       http://www.omegat.org/
 
 Uživatelská podpora, v rámci uživatelské skupiny na Yahoo! (vícejazyčně), je zde možno prohledávat archívy i bez registrace:
-     http://groups.yahoo.com/group/OmegaT/
+     http://tech.groups.yahoo.com/group/OmegaT/
 
 Požadavky a návrhy na zlepšení (anglicky), na stránce SourceForge:
-     http://sourceforge.net/tracker/?group_id=68187&atid=520350
+     https://sourceforge.net/p/omegat/feature-requests/
 
 Požadavky a návrhy na zlepšení (anglicky), na stránce SourceForge:
-     http://sourceforge.net/tracker/?group_id=68187&atid=520347
+     https://sourceforge.net/p/omegat/bugs/
 
 ==============================================================================
   2.  Co je OmegaT?
@@ -178,10 +178,10 @@ Jestli chcete přispívat při vývoji aplikace OmegaT, spojte se s vývojáři 
 
 Jestli máte zájem o překlad uživatelského rozhraní OmegaT, uživatelské příručky nebo jiných příbuzných dokumentů, tak si nejprve přečtěte tyto informace:
       
-      http://www.omegat.org/en/translation-info.html
+      http://www.omegat.org/en/howtos/localizing_omegat.php
 
 a přihlaste se do konference pro překladatele:
-      http://lists.sourceforge.net/mailman/listinfo/omegat-l10n
+      https://lists.sourceforge.net/lists/listinfo/omegat-l10n
 
 Když byste chtěli přispívat jinak, přihlaste se nejdříve do uživatelské skupiny na adrese:
       http://tech.groups.yahoo.com/group/omegat/
@@ -255,8 +255,20 @@ OmegaT používá následující knihovny:
   JSch (Licence JSch)
   Base64 (public domain)
   Diff (GPL)
-  JSAP (LGPL)
   orion-ssh2-214 (Orion SSH for Java license)
+  lucene-*.jar (Apache License 2.0)
+  Tokenizery pro angličtinu (org.omegat.tokenizer.SnowballEnglishTokenizer a
+  org.omegat.tokenizer.LuceneEnglishTokenizer) používají stop slova z Okapi (http://okapi.sourceforge.net) (LGPL licence)
+  tinysegmenter.jar (Modified BSD license)
+  commons-*.jar (Apache License 2.0)
+  jWordSplitter (Apache License 2.0)
+  LanguageTool.jar (LGPL license)
+  morfologik-*.jar (Morfologik license)
+  segment-1.4.1.jar (Segment license)
+  pdfbox-app-1.8.1.jar (Apache License 2.0)
+  Fontbox-0.1.0.jar and JempBox-0.2.0.jar (Fontbox license)
+  icu4j-51_1.jar (ICU4J license)
+
 
 ==============================================================================
  5.  Máte s aplikací OmegaT problémy? Potřebujete pomoc?
@@ -275,10 +287,10 @@ Každé dobré hlášení o chybě potřebuje přesně tři věci.
 Můžete přidat kopie souborů, části logu, snímky obrazovky, prostě cokoliv, o čem si myslíte, že pomůže vývojářům nalézt a opravit vámi hlášenou chybu.
 
 Archívy uživatelské skupiny můžete prohlížet na adrese:
-     http://groups.yahoo.com/group/OmegaT/
+     http://tech.groups.yahoo.com/group/OmegaT/
 
 Prohlížet stránku hlášení o chybách a v případě potřeby přidat nové hlášení můžete zde:
-     http://sourceforge.net/tracker/?group_id=68187&atid=520347
+     https://sourceforge.net/p/omegat/bugs/
 
 Abyste byli informování o tom, co se děje s vaším hlášením o chybě, můžete se zaregistrovat jako uživatel Source Forge.
 

@@ -44,29 +44,17 @@
 
     <para><application>OmegaT</application> má v podstatě k dispozici tři způsoby jak na věc. Všechny zahrnují použití filtrů souborů z nabídky <emphasis role="bold">Možnosti</emphasis>.</para>
 
-    <variablelist>
-      <varlistentry>
-        <term>Změňte kódování svých souborů na Unicode.</term>
+    <variablelist><varlistentry><term>Změňte kódování svých souborů na Unicode.</term>
 
         <listitem>
           <para>Otevřete zdrojový soubor v textovém editoru, který správně interpretuje použité kódování a uložte soubor s kódováním <emphasis role="bold">„UTF-8“</emphasis>. Změňte koncovku souboru z <literal>.txt</literal> na <literal>.utf8.</literal> <application>OmegaT</application> bude soubor automaticky interpretovat jako soubor v kódování UTF-8. Toto je nejběžnější alternativa, která vám nakonec ušetří spoustu problémů. </para>
         </listitem>
-      </varlistentry>
-    </variablelist>
-
-    <variablelist>
-      <varlistentry>
-        <term>Specifikace kódování v prostých textových souborech.</term>
+      </varlistentry></variablelist><variablelist><varlistentry><term>Specifikace kódování v prostých textových souborech.</term>
 
         <listitem>
           <para>- tj. soubory s koncovkou <filename>.txt </filename>): v části <emphasis role="bold">Textové soubory</emphasis> dialogového okna Filtry souborů, změňte <emphasis role="bold">Kódování zdrojového souboru</emphasis> z &lt;auto&gt; na kódování odpovídající vašemu zdrojovému souboru <filename>.txt</filename>, např. na .jp dle nahoře uvedeného příkladu.</para>
         </listitem>
-      </varlistentry>
-    </variablelist>
-
-    <variablelist>
-      <varlistentry>
-        <term>Změňte koncovky vašich prostých textových souborů.</term>
+      </varlistentry></variablelist><variablelist><varlistentry><term>Změňte koncovky vašich prostých textových souborů.</term>
 
         <listitem>
           <para>Například z <filename>.txt</filename> na <filename>.jp</filename> pro prosté textové soubory v japonštině: v části <emphasis role="bold">Textové soubory</emphasis> okna Filtry souborů, přidejte nový <emphasis role="bold">Vzor pro názvy zdrojových souborů</emphasis> (např. <filename>*.jp</filename> v tomto případě) a vyberte vhodné parametry pro kódování zdroje a cíle.</para>

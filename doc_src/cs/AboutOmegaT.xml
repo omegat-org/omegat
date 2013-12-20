@@ -20,13 +20,13 @@
 
     <itemizedlist>
       <listitem>
-        <para><emphasis role="bold">Správa terminologie:</emphasis> Správa terminologie je důležitá pro konzistentnost překladu. OmegaT používá glosáře, které obsahují překlady jednotlivých slov nebo malých frází: čili druh zjednodušeného dvoujazyčného slovníku pro specifické pole působnosti. To tedy znamená, že OmegaT zobrazí překlad jakéhokoliv slova, které je přítomno v právě aktivním segmentu.</para>
+        <para><emphasis role="bold">Správa terminologie:</emphasis> Správa terminologie je důležitá pro konzistentnost překladu. OmegaT používá glosáře, které obsahují překlady jednotlivých slov nebo malých frází: čili druh zjednodušeného dvoujazyčného slovníku pro specifické pole působnosti. Pro srovnání, OmegaT zobrazuje překlad jakéhokoliv slova, které je přítomné jak v segmentu, tak registrováno v glosáři.</para>
       </listitem>
     </itemizedlist>
 
     <itemizedlist>
       <listitem>
-        <para><emphasis role="bold">Proces překladu:</emphasis> Představte si, že máte něco přeložit: v rozsahu od jediného souboru až po adresář s podadresáři, ve kterých jsou spousty souborů v různých formátech. Když programu OmegaT zadáte, že potřebujete přeložit tyto soubory, tak OmegaT vyhledá podle pravidel pro filtrování souborů podporované formáty souborů, rozpozná v nich textové části, rozdělí skupiny textu v souladu s pravidly segmentace a zobrazí segmenty jeden za druhým, a vy je můžete jednotlivě překládat. OmegaT uloží vaše překlady a navrhne možné překlady podobných segmentů z již existujících dřívějších překladových pamětí. Jakmile budete chtít zobrazit hotový přeložený text, můžete exportovat přeložené soubory, otevřít je v odpovídající aplikaci a zobrazit překlad ve výsledném formátu...</para>
+        <para><emphasis role="bold">Proces překladu:</emphasis> Představte si, že máte něco přeložit: v rozsahu od jediného souboru až po adresář s podadresáři, ve kterých jsou spousty souborů v různých formátech. Když programu OmegaT zadáte, že potřebujete přeložit tyto soubory, tak OmegaT vyhledá podle pravidel pro filtrování souborů podporované formáty souborů, rozpozná v nich textové části, rozdělí skupiny textu v souladu s pravidly segmentace a zobrazí segmenty jeden za druhým, a vy je můžete jednotlivě překládat. OmegaT ukládá vaše překlady a nabízí možné překlady podobných segmentů, které jsou již uložené v souborech překladové paměti. Jakmile budete chtít zobrazit hotový přeložený text, můžete exportovat přeložené soubory, otevřít je v odpovídající aplikaci a zobrazit překlad ve výsledném formátu...</para>
       </listitem>
     </itemizedlist>
   </section>
@@ -38,7 +38,7 @@
 
     <itemizedlist>
       <listitem>
-        <para><emphasis role="bold">Stručný úvodní průvodce:</emphasis> tato kapitola má sloužit jako Stručný úvodní průvodce pro začátečníky a potenciální vážné zájemce o používání OmegaT; ukazuje ucelený postup od otevření nového překladového projektu až po dokončení překladu.</para>
+        <para>Kapitola <emphasis role="bold">Naučte se používat aplikaci OmegaT za 5 minut</emphasis>: tato kapitola má plnit funkci rychlého návodu pro začátečníky, ale i pro uživatele, kteří již znají nástroje CAT, ukazuje kompletní proceduru od otevření nového překladového projektu až k dokončení překladu.</para>
       </listitem>
     </itemizedlist>
 
@@ -86,7 +86,7 @@
       </listitem>
 
       <listitem>
-        <para><emphasis role="bold">Slovníky, Glosáře</emphasis>, <emphasis role="bold">Strojový překlad</emphasis> a <emphasis role="bold">Kontrola pravopisu, kontrola stylu a gramatiky „LanguageTool“:</emphasis> OmegaT podporuje široké užití slovníků a glosářů. Pokud je k dispozici internetové připojení, pak je možno využít různé služby strojového překladu jako Překladače od Google a Microsoftu přímo v prostředí OmegaT. Jestliže si aktivujete kontrolu pravopisu, program rozezná pravopisné chyby a překlepy a uživatel text opravuje již během překladu. OpenSource program „LanguageTool“ slouží ke korektuře běžných gramatických a stylistických chyb vybraných jazyků.</para>
+        <para><emphasis role="bold">Slovníky, Glosáře</emphasis>, <emphasis role="bold">Strojový překlad</emphasis> a <emphasis role="bold">Kontrola pravopisu, kontrola stylu a gramatiky „LanguageTool“:</emphasis> OmegaT podporuje široké užití slovníků a glosářů. Pokud je k dispozici internetové připojení, pak je možno využít různé služby strojového překladu jako Překladače od Google a Microsoftu přímo v prostředí OmegaT. Jestliže si aktivujete kontrolu pravopisu, program rozezná pravopisné chyby a překlepy a uživatel text opravuje již během překladu. Open source nástroj LanguageTool lze použít k opravám běžných gramatických a stylistických chyb.</para>
       </listitem>
 
       <listitem>

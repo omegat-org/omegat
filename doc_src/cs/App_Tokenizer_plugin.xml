@@ -40,56 +40,14 @@
   </section>
 
   <section>
-    <title>Instalace a použití v prostředí příkazového řádku</title>
+    <title>Instalace a použití</title>
 
-    <para>Balíček tokenizeru, který vychází z projektu Lucene je distribuován jako plugin pro OmegaT na adrese http://sourceforge.net/projects/omegat-plugins/files/.  Stáhněte si nejaktuálnější soubory (v době psaní tohoto textu je nejnovější verze OmegaT-tokenizers_0.4_2-2.1.zip)</para>
+	<para>Tokenizery jsou v OmegaT obsaženy. OmegaT automaticky vybere tokenizer pro zdrojový a cílový jazyk podle jazykových nastavení projektu. Je možné vybrat jiný tokenizer nebo jinou verzi tokenizeru v okně Vlastnosti projektu.</para>
 
-    <para>Pro instalaci tokenizeru vytvořte v adresáři, kde je instalován soubor OmegaT.jar, adresář s názvem „plugins“ a do tohoto nového adresáře rozbalte nahoře zmíněný zip archiv.</para>
-
-    <para>Aby bylo možno spouštět OmegaT s tokenizerem, potřebujete specifikovat, který tokenizer budete používat pro zdrojový jazyk, a který tokenizer budete používat pro jazyk překladu. Syntax takového příkazu je následující:</para>
-
-    <para><literal>java -jar OmegaT.jar --ITokenizer=[jméno tokenizeru pro zdrojový jazyk] --ITokenizerTarget=[jméno tokenizeru pro jazyk překladu]</literal></para>
-
-    <para>Jména tokenizerů jsou zadána v souboru Readme.txt, který se stáhne současně se soubory tokenizeru. Například, pokud budete chtít použít tokenizer Lucene CJK pro zdrojový jazyk a tokenzer Lucene French pro jazyk překladu, váš příkaz pro spuštění bude vypadat takto:</para>
-
-    <para><literal>java -jar OmegaT.jar
-    --ITokenizer=org.omegat.plugins.tokenizer.LuceneCJKTokenizer
-    --ITokenizerTarget=org.omegat.plugins.tokenizer.LuceneFrenchTokenizer</literal></para>
-  </section>
-
-  <section>
-    <title>Specifika systému Mac OS X</title>
-
-    <para>Pokud chcete používat tokenizery s balíčkem Mac OS X OmegaT.app, tak platí instalace popsaná nahoře (umístění OmegaT.jar naleznete tak, že kliknete pravým tlačítkem myši na OmegaT.app), ale budete muset specifikovat názvy tokenizerů v souboru <filename>info.plist </filename>který obsahuje možnosti spouštění Javy. Následujte výše uvedené pokyny ke zpracování souboru <filename>info.plist</filename> a upravte jej tak, aby pro výše uvedený příklad vypadal následovně:</para>
-
-    <literallayout><code>
-&lt;key&gt;VMOptions&lt;/key&gt;
-&lt;string&gt;-Xmx1024M&lt;/string&gt;
-
-&lt;key&gt;Arguments&lt;/key&gt;
-&lt;array&gt;
-  &lt;string&gt;--ITokenizer=org.omegat.plugins.tokenizer.LuceneCJKTokenizer&lt;/string&gt;
-  &lt;string&gt;--ITokenizerTarget=org.omegat.plugins.tokenizer.LuceneFrenchTokenizer&lt;/string&gt;
-&lt;/array&gt;</code></literallayout>
-  </section>
-
-  <section>
-    <title>Odstraňování problémů</title>
-
-    <para>Abyste se ujistili, že tokenizery se používají, otevřete projekt a přes příkazový řádek zkontrolujte informace v logu (v protokolu příkazového řádku). S výše zmíněným příkladem by to mělo vypadat takto:</para>
-
-    <literallayout><code>
-84528: Info: Source tokenizer: org.omegat.plugins.tokenizer.LuceneCJKTokenizer 
-84528: Info: Target tokenizer: org.omegat.plugins.tokenizer.LuceneFrenchTokenizer 
-</code></literallayout>
-
-    <para>Číslice vlevo asi budou na vašem systému odlišné, ale hlavně se ujistěte, že názvy tokenizerů pro zdroj a překlad, které specifikujete v možnostech spouštění, odpovídají tomu, co najdete v logu. Pokud tokenizery nejsou správně spuštěny, protokol (tzv. ‚log‘) bude vypadat podobně:</para>
-
-    <literallayout><code>
-12719: Info: Source tokenizer: org.omegat.core.matching.Tokenizer 
-12719: Info: Target tokenizer: org.omegat.core.matching.Tokenizer 
-</code></literallayout>
-
-    <para>S balíčkem Mac OS X OmegaT.app, budete muset dvakrát kliknout na soubor <literal>JavaApplicationStub</literal>, který najdete v /OmegaT.app/Contents/MacOS/ (přístup je popsán výše), a spustíte tak OmegaT z příkazového řádku a máte tak přímý přístup k logu.</para>
+	<warning>
+		<title>Případy nefunkčnosti</title>
+		<para>OmegaT se nespustí, pokud v adresáři /plugin budou nějaké tokenizery. Ještě před startem OmegaT odstraňte z adresáře /plugin případné soubory tokenizeru.</para>
+	</warning>
+	
   </section>
 </appendix>

@@ -8,19 +8,19 @@
         <primary>Klávesové zkratky</primary> <secondary>Přizpůsobení</secondary>
       </indexterm>Přizpůsobení klávesových zkratek</title>
 
-    <para>Většině položek, které jsou dostupné v Hlavní nabídce může být přiřazena nová klávesová zkratka. Jen ty nejčastěji používané položky nabídky mají přiřazené klávesové zkratky již ve výchozím nastavení programu. Můžete změnit již přiřazené klávesové zkratky a přidat nové zkratky tak, že přidáte soubor definic klávesových zkratek do svého adresáře OmegaT (<link linkend="user.files">Umístění souborů uživatele</link>).</para>
+    <para>Většině položek, které jsou dostupné v Hlavní nabídce může být přiřazena nová klávesová zkratka. Můžete změnit již přiřazené klávesové zkratky a přidat nové zkratky tak, že přidáte soubor definic klávesových zkratek do svého adresáře OmegaT (<link linkend="user.files">Umístění souborů uživatele</link>).</para>
 
     <para>Soubor definic klávesových zkratek musí být pojmenován <filename>MainMenuShortcuts.properties</filename> a musí obsahovat nanejvýš jednu definici klávesové zkratky na jednom řádku. Prázdné řádky jsou akceptovány a řádky s komentářem musí začínat dvěma lomítky „//“.  Cokoliv za „//“ bude ignorováno.</para>
 
     <para>Jakmile upravíte soubor <filename>MainMenuShortcuts.properties</filename>, je pak nutno <application>OmegaT</application> restartovat, aby se načetlo nastavení nových klávesových zkratek.</para>
 
-    <para>Syntaxe definice klávesové zkratky je tato: <code>&lt;kód položky nabídky&gt;=&lt;klávesová zkratka&gt;</code>, kde <emphasis>&lt;kód položky nabídky&gt;</emphasis> je kód, který si vezmete z tabulek níže a <emphasis>&lt;klávesová zkratka&gt;</emphasis> je kombinace kláves definovaná uživatele.<footnote>
+    <para>Syntaxe definice klávesové zkratky je tato: <code>&lt;kód položky nabídky&gt;=&lt;klávesová zkratka&gt;</code>, kde <emphasis>&lt;kód položky nabídky&gt;</emphasis> je kód, který si vezmete z tabulek níže a <emphasis>&lt;klávesová zkratka&gt;</emphasis> je kombinace kláves definovaná uživatele.
         <para>Kompletní syntax stisku kláves (klávesových zkratek) je definovaná v následující dokumentaci Java 1.6 od Oracle (na konci stránky): <ulink url="http://docs.oracle.com/javase/6/docs/api/javax/swing/KeyStroke.html">Java 1.6 klávesové zkratky</ulink></para>
       </footnote>.</para>
 
     <para>&lt;klávesová zkratka&gt; musí mít jednu z následujících podob: 0 nebo více <code>&lt;modifikátor&gt;</code> následován 0 nebo 1 <code>&lt;událost&gt;</code> následován 1 <code>&lt;klávesa&gt;</code>, kde:<itemizedlist>
         <listitem>
-          <para><code>&lt;modifikátor&gt;</code> může být: <emphasis>shift</emphasis>, <emphasis>control</emphasis>, <emphasis>ctrl</emphasis>, <emphasis>meta</emphasis><footnote>
+          <para><code>&lt;modifikátor&gt;</code> může být: <emphasis>shift</emphasis>, <emphasis>control</emphasis>, <emphasis>ctrl</emphasis>, <emphasis>meta</emphasis>
               <para>Na počítačích Mac je nutno použít modifikátor <emphasis>meta</emphasis>, aby se tak specifikovala klávesa <emphasis>command</emphasis>.</para>
             </footnote>, <emphasis>alt</emphasis>,
           <emphasis>altGraph</emphasis></para>
@@ -31,17 +31,17 @@
         </listitem>
 
         <listitem>
-          <para>a <code>&lt;klávesa&gt;</code> může být jakákoliv klávesa dostupná na vaší klávesnici<footnote>
+          <para>a <code>&lt;klávesa&gt;</code> může být jakákoliv klávesa dostupná na vaší klávesnici
               <para>Možné události (reakce kláves) jsou uvedeny v následující dokumentaci Java 1.6 od Oracle: <ulink url="http://docs.oracle.com/javase/6/docs/api/java/awt/event/KeyEvent.html">Popis klávesových událostí Java 1.6</ulink></para>
             </footnote>.</para>
         </listitem>
       </itemizedlist></para>
 
-    <para>Podívejme se například na výchozí klávesové zkratky OmegaT<footnote>
-        <para>Výchozí klávesové zkratky OmegaT jsou dostupné přes Sourceforge: <ulink url="http://omegat.svn.sourceforge.net/viewvc/omegat/branches/release-2-5/src/org/omegat/gui/main/MainMenuShortcuts.properties">Výchozí klávesové zkratky OmegaT</ulink></para>
+    <para>Podívejme se například na výchozí klávesové zkratky OmegaT
+        <para>Výchozí klávesové zkratky OmegaT jsou dostupné přes Sourceforge: <ulink url="http://omegat.svn.sourceforge.net/viewvc/omegat/branches/release-2-6/src/org/omegat/gui/main/MainMenuShortcuts.properties">Výchozí klávesové zkratky OmegaT</ulink></para>
 
-        <para>Výchozí klávesové zkratky OmegaT pro Mac jsou také dostupné přes Sourceforge, všechny používají „meta“ místo „ctrl“: <ulink url="http://omegat.svn.sourceforge.net/viewvc/omegat//branches/release-2-5/src/org/omegat/gui/main/MainMenuShortcuts.mac.properties">Výchozí klávesové zkratky OmegaT pro Mac</ulink></para>
-      </footnote>nalezneme např.:</para>
+        <para>Výchozí klávesové zkratky OmegaT pro Mac jsou také dostupné přes Sourceforge, všechny používají „meta“ místo „ctrl“: <ulink url="http://omegat.svn.sourceforge.net/viewvc/omegat/branches/release-2-6/src/org/omegat/gui/main/MainMenuShortcuts.mac.properties">Výchozí klávesové zkratky OmegaT pro Mac</ulink></para>
+      </footnote>, one can find:</para>
 
     <itemizedlist>
       <listitem>
@@ -55,8 +55,7 @@
 
     <para>První je klávesová zkratka pro otevření projektu <guimenuitem>Otevřít</guimenuitem>, druhá odpovídá <guimenuitem>Vytvořit nový záznam Glosáře</guimenuitem>.</para>
 
-    <para>Pokud byste chtěli použít <keycombo> <keycap>Shift</keycap> <keycap>Ctrl</keycap> <keycap>O</keycap> </keycombo> k otevření projektu, upravte příslušný řádek v souboru <filename>MainMenuShortcuts.properties</filename> následovně: <code>
-    </code></para>
+    <para>Pokud byste chtěli použít <keycombo> <keycap>Shift</keycap> <keycap>Ctrl</keycap> <keycap>O</keycap> </keycombo> k otevření projektu, upravte příslušný řádek v souboru <filename>MainMenuShortcuts.properties</filename> následovně: </para>
 
     <para><code>projectOpenMenuItem=shift ctrl O</code>.</para>
 
@@ -75,9 +74,9 @@
       <title>Nabídka ‚Projekt‛</title>
 
       <tgroup cols="3" colsep="1">
-        <colspec align="left" colname="1" colnum="1" colwidth="120"/>
+        <colspec align="left" colname="1" colnum="1"/>
 
-        <colspec align="left" colname="2" colnum="2" colwidth="80"/>
+        <colspec align="left" colname="2" colnum="2"/>
 
         <colspec align="left" colname="3" colnum="3"/>
 
@@ -106,6 +105,14 @@
             <entry><keycap>Ctrl+O</keycap></entry>
 
             <entry>projectOpenMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Download Team Project</entry>
+
+            <entry/>
+
+            <entry>projectTeamNewMenuItem</entry>
           </row>
 
           <row>
@@ -191,9 +198,9 @@
       <title>Nabídka ‚Upravit‛</title>
 
       <tgroup cols="3" colsep="1">
-        <colspec align="left" colname="1" colnum="1" colwidth="120"/>
+        <colspec align="left" colname="1" colnum="1"/>
 
-        <colspec align="left" colname="2" colnum="2" colwidth="80"/>
+        <colspec align="left" colname="2" colnum="2"/>
 
         <colspec align="left" colname="3" colnum="3"/>
 
@@ -337,7 +344,7 @@
           </row>
 
           <row>
-            <entry>malá písmena</entry>
+            <entry>Switch Case to/Lower Case</entry>
 
             <entry/>
 
@@ -345,7 +352,7 @@
           </row>
 
           <row>
-            <entry>VELKÁ PÍSMENA</entry>
+            <entry>Switch Case to/Upper Case</entry>
 
             <entry/>
 
@@ -353,7 +360,7 @@
           </row>
 
           <row>
-            <entry>Velká První Písmena</entry>
+            <entry>Switch Case to/Title Case</entry>
 
             <entry/>
 
@@ -367,6 +374,23 @@
 
             <entry>cycleSwitchCaseMenuItem</entry>
           </row>
+
+          <row>
+            <entry>Použít jako výchozí překlad</entry>
+
+            <entry/>
+
+            <entry>editMultipleDefault</entry>
+          </row>
+
+          <row>
+            <entry>Vytvořit alternativní překlad</entry>
+
+            <entry/>
+
+            <entry>editMultipleAlternate</entry>
+          </row>
+
         </tbody>
       </tgroup>
     </table>
@@ -379,9 +403,9 @@
       <title>Nabídka ‚Přejít‛</title>
 
       <tgroup cols="3" colsep="1">
-        <colspec align="left" colname="1" colnum="1" colwidth="120"/>
+        <colspec align="left" colname="1" colnum="1"/>
 
-        <colspec align="left" colname="2" colnum="2" colwidth="80"/>
+        <colspec align="left" colname="2" colnum="2"/>
 
         <colspec align="left" colname="3" colnum="3"/>
 
@@ -429,17 +453,33 @@
           </row>
 
           <row>
-            <entry>Zpět v historii</entry>
+            <entry>Další poznámka</entry>
 
-            <entry><keycap>Ctrl+Shift+P</keycap></entry>
+            <entry/>
 
-            <entry>gotoHistoryForwardMenuItem</entry>
+            <entry>gotoNextNoteMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Předchozí poznámka</entry>
+
+            <entry/>
+
+            <entry>gotoPreviousNoteMenuItem</entry>
           </row>
 
           <row>
             <entry>Vpřed v historii</entry>
 
             <entry><keycap>Ctrl+Shift+N</keycap></entry>
+
+            <entry>gotoHistoryForwardMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Zpět v historii</entry>
+
+            <entry><keycap>Ctrl+Shift+P</keycap></entry>
 
             <entry>gotoHistoryBackMenuItem</entry>
           </row>
@@ -459,9 +499,9 @@
       </indexterm>
 
       <tgroup cols="3" colsep="1">
-        <colspec align="left" colname="1" colnum="1" colwidth="120"/>
+        <colspec align="left" colname="1" colnum="1"/>
 
-        <colspec align="left" colname="2" colnum="2" colwidth="80"/>
+        <colspec align="left" colname="2" colnum="2"/>
 
         <colspec align="left" colname="3" colnum="3"/>
 
@@ -509,6 +549,38 @@
           </row>
 
           <row>
+            <entry>Označit segmenty s Poznámkami</entry>
+
+            <entry/>
+
+            <entry>viewMarkNotedSegmentsCheckBoxMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Označit nezlomitelné mezery</entry>
+
+            <entry/>
+
+            <entry>viewMarkNBSPCheckBoxMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Označit netisknutelné znaky</entry>
+
+            <entry/>
+
+            <entry>viewMarkWhitespaceCheckBoxMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Označit řídicí znak bidirekcionálního algoritmu</entry>
+
+            <entry/>
+
+            <entry>viewMarkBidiCheckBoxMenuItem</entry>
+          </row>
+
+           <row>
             <entry>Informace k úpravám / Nezobrazovat žádné</entry>
 
             <entry/>
@@ -516,7 +588,7 @@
             <entry>viewDisplayModificationInfoNoneRadioButtonMenuItem</entry>
           </row>
 
-          <row>
+         <row>
             <entry>Informace k úpravám / Zobrazovat u otevřeného segmentu</entry>
 
             <entry/>
@@ -543,9 +615,9 @@
       <title>Nabídka ‚Nástroje‛</title>
 
       <tgroup cols="3" colsep="1">
-        <colspec align="left" colname="1" colnum="1" colwidth="120"/>
+        <colspec align="left" colname="1" colnum="1"/>
 
-        <colspec align="left" colname="2" colnum="2" colwidth="80"/>
+        <colspec align="left" colname="2" colnum="2"/>
 
         <colspec align="left" colname="3" colnum="3"/>
 
@@ -595,9 +667,9 @@
       <title>Nabídka ‚Možnosti‛</title>
 
       <tgroup cols="3" colsep="1">
-        <colspec align="left" colname="1" colnum="1" colwidth="120"/>
+        <colspec align="left" colname="1" colnum="1"/>
 
-        <colspec align="left" colname="2" colnum="2" colwidth="80"/>
+        <colspec align="left" colname="2" colnum="2"/>
 
         <colspec align="left" colname="3" colnum="3"/>
 
@@ -725,7 +797,7 @@
           </row>
 
           <row>
-            <entry>Ukládat automaticky...</entry>
+            <entry>Uložení a výstup...</entry>
 
             <entry/>
 
@@ -759,9 +831,9 @@
       <title>Nabídka ‚Nápověda‛</title>
 
       <tgroup cols="3" colsep="1">
-        <colspec align="left" colname="1" colnum="1" colwidth="120"/>
+        <colspec align="left" colname="1" colnum="1"/>
 
-        <colspec align="left" colname="2" colnum="2" colwidth="80"/>
+        <colspec align="left" colname="2" colnum="2"/>
 
         <colspec align="left" colname="3" colnum="3"/>
 

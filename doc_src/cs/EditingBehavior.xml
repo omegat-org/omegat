@@ -24,27 +24,19 @@
 
   <para>Při překladu svých souborů zpracováváte segmenty jeden za druhým, tj. v daném okamžiku je pro úpravu aktivní jen jeden segment. Při přechodu na další segment možná budete chtít, aby bylo pole editace vyplněno buď dostupným překladem z podokna Přibližné překlady, nebo zdrojovým textem. V položce <menuchoice> <guimenu>Možnosti</guimenu> <guimenuitem>Nastavení editace...</guimenuitem> </menuchoice> vám <application>OmegaT</application> nabízí následující volby:</para>
 
-  <variablelist>
-    <varlistentry>
-      <term>Zdrojový text</term>
+  <variablelist> <varlistentry> <term>Zdrojový text</term>
 
       <listitem>
         <para>Je možno nechat do pole editace automaticky vložit zdrojový text. Toto se hodí u textů, které obsahují spousty obchodních značek nebo vlastních jmen, které musí zůstat nezměněny.</para>
       </listitem>
-    </varlistentry>
-
-    <varlistentry>
-      <term>Ponechat segment prázdný<indexterm class="singular">
+    </varlistentry><varlistentry><term>Ponechat segment prázdný<indexterm class="singular">
           <primary>Nabídka Možnosti</primary> <secondary>Nastavení editace...</secondary> <tertiary>Ponechat segment prázdný</tertiary>
         </indexterm></term>
 
       <listitem>
         <para>OmegaT ponechá pole editace prázdné. Tato možnost vám umožní překládat bez potřeby odstraňovat zdrojový text, a tak vám ušetří množství přebytečných stisků kláves při mazání (<emphasis role="bold">Ctrl+A </emphasis>a <emphasis role="bold">Del). </emphasis> Prázdné překlady jsou tímto povoleny. V Editoru jsou zobrazeny s označením &lt;EMPTY&gt;. Prázdný překlad vytvoříte tak, že kliknete pravým tlačítkem na segment, a vyberete možnost „<emphasis role="bold">Použít prázdný překlad</emphasis>&quot; Položka <emphasis role="bold">Odstranit překlad</emphasis> v téže pop up nabídce také umožňuje smazat stávající překlad v aktuálním segmentu. Stejného efektu dosáhnete smazáním cílového segmentu a stiskem <guibutton>Enter.</guibutton></para>
       </listitem>
-    </varlistentry>
-
-    <varlistentry>
-      <term>Vložit nejpřibližnější překlad<indexterm class="singular">
+    </varlistentry> <varlistentry> <term>Vložit nejpřibližnější překlad<indexterm class="singular">
           <primary>Nabídka Možnosti</primary> <secondary>Nastavení editace...</secondary> <tertiary>Vložit nejpřibližnější překlad</tertiary>
         </indexterm></term>
 
@@ -56,9 +48,7 @@
 
   <para>Zaškrtávací políčka v dolní polovině dialogového okna slouží těmto účelům:</para>
 
-  <variablelist>
-    <varlistentry>
-      <term>Pokusit se převést čísla při vkládání přibližného překladu.<indexterm class="singular">
+  <variablelist> <varlistentry> <term>Pokusit se převést čísla při vkládá&amp;ní přibližného překladu.<indexterm class="singular">
           <primary>Nabídka Možnosti</primary> <secondary>Nastavení editace...</secondary> <tertiary>Převod čísel</tertiary>
         </indexterm></term>
 
@@ -79,12 +69,7 @@
           </listitem>
         </itemizedlist>
       </listitem>
-    </varlistentry>
-  </variablelist>
-
-  <variablelist>
-    <varlistentry>
-      <term>Povolit překlad rovnající se zdroji<indexterm class="singular">
+    </varlistentry> </variablelist> <variablelist> <varlistentry> <term>Povolit překlad rovnající se zdroji<indexterm class="singular">
           <primary>Nabídka Možnosti</primary> <secondary>Nastavení editace...</secondary> <tertiary>Překlad rovnající se zdroji</tertiary>
         </indexterm></term>
 
@@ -93,12 +78,7 @@
 
         <para>Můžete se rozhodnout takové segmenty vůbec nepřekládat. OmegaT bude pak takové segmenty reportovat jako nepřeložené. Toto odpovídá výchozímu nastavení. Alternativa je vložit překlad, který je identický se zdrojovým textem. OmegaT je schopna takovýto krok rozeznat. Aby to bylo možné, přejděte na <menuchoice> <guimenu>Možnosti</guimenu> <guimenuitem>Nastavení editace...</guimenuitem> </menuchoice> a zaškrtněte políčko <emphasis role="bold">Povolit překlad rovnající se zdroji</emphasis>.</para>
       </listitem>
-    </varlistentry>
-  </variablelist>
-
-  <variablelist>
-    <varlistentry>
-      <term>Exportovat segment do textového souboru<indexterm class="singular">
+    </varlistentry></variablelist><variablelist><varlistentry><term>Exportovat segment do textového souboru<indexterm class="singular">
           <primary>Nabídka Možnosti</primary> <secondary>Nastavení editace...</secondary> <tertiary>Export aktuálního segmentu</tertiary>
         </indexterm></term>
 
@@ -121,12 +101,7 @@
 
         <para>Obsah těchto souborů bude přepsán buď když otevřete nový segment (source.txt a target.txt) nebo když exportujete nový výběr (selection.txt) Jedná se o textové soubory s neformátovaným prostým textem. Celý proces je možno řídit a ovládat přes skriptování založené na Tck/Tcl. Pro specifika, příklady a návrhy viz <ulink url="http://www.omegat.org/en/howtos/text_export.html">OmegaT – použití funkce export textu</ulink>.</para>
       </listitem>
-    </varlistentry>
-  </variablelist>
-
-  <variablelist>
-    <varlistentry>
-      <term>Funkce ‚Přejít na další nepřeložený segment‛ se zastaví, když narazí na segment s minimálně jedním alternativním překladem.<indexterm class="singular">
+    </varlistentry> </variablelist> <variablelist> <varlistentry> <term>Funkce ‚Přejít na další nepřeložený segment‛ se zastaví, když narazí na segment s minimálně jedním alternativním překladem.<indexterm class="singular">
           <primary>Nabídka Možnosti</primary> <secondary>Nastavení editace...</secondary> <tertiary>Segmenty s alternativním překladem</tertiary>
         </indexterm></term>
 

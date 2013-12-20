@@ -118,7 +118,7 @@
       </listitem>
 
       <listitem>
-        <para>„Google Překladač vrátil odpověď HTTP kód: 403 ...“: zkontrolujte jestli je 38 znakový klíč správně zadán v souboru pinfo.list. Překontrolujte jestli je služba <ulink url="https://developers.google.com/translate/v2/faq">Translate API service </ulink> aktivována.</para>
+        <para>„Google Překladač vrátil odpověď HTTP kód: 403 ...“: zkontrolujte jestli je klíč o 38 znacích zadán správně v souboru pinfo.list. Překontrolujte jestli je služba <ulink url="https://developers.google.com/translate/v2/faq">Translate API service </ulink> aktivována.</para>
       </listitem>
 
       <listitem>

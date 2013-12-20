@@ -103,7 +103,7 @@
 
       <para>Projekty můžete spravovat dle vlastního vývojářského stylu a potřeb. Podobně jako v případě projektů OmegaT, budete potřebovat mít oddělené úložiště pro různé jazykové páry. V rámci daného jazykového páru je také velmi dobrou volbou rozlišovat odlišné obory anebo klienty jako samostatné úložiště. Alternativa by pak byla mít jediné úložiště s podadresáři <literal>Projekt1</literal>, <literal>Projekt2</literal>, atd., a sdílet společný materiál přes společné adresáře <literal>tm</literal>, <literal>glossary</literal> a <literal>dictionary</literal>. </para>
 
-      <para>Například, jak je ukázáno zde, jsme se rozhodli pro jeden projekt OmegaT - jedno úložiště z důvodů jednoduchosti. .</para>
+      <para>Například, jak je ukázáno zde, jsme se rozhodli pro jeden projekt OmegaT - jedno úložiště z důvodů jednoduchosti.</para>
     </section>
 
     <section>

@@ -94,25 +94,17 @@
 
     <para>Metodu hledání vyberte pomocí přepínacích tlačítek. Dostupné jsou následující metody hledání:</para>
 
-    <variablelist>
-      <varlistentry>
-        <term>Přesné vyhledávání</term>
+    <variablelist><varlistentry><term>Přesné vyhledávání</term>
 
         <listitem>
           <para>Vyhledávání segmentů obsahujících zadaný řetězec. Přesné vyhledávání hledá slovní spojení, tj. pokud je zadaných několik slov, budou tato nalezena jen pokud se nacházejí v přesně stejném pořadí. Vyhledávání slovního spojení <literal>open file</literal> nalezne tedy všechny výskyty řetězce <emphasis><literal>open file</literal></emphasis>, ale ne <emphasis><literal>file opened</literal></emphasis> nebo <emphasis><literal>open input file</literal></emphasis>.</para>
         </listitem>
-      </varlistentry>
-
-      <varlistentry>
-        <term>Hledat podle klíčových slov</term>
+      </varlistentry><varlistentry><term>Hledat podle klíčových slov</term>
 
         <listitem>
           <para>Hledá segmenty obsahující všechna zadaná klíčová slova v jakémkoliv pořadí. Označte Hledat podle klíčových slov, a bude se vyhledávat jakékoliv množství samostatných slov, v jakémkoliv pořadí. OmegaT zobrazí seznam všech segmentů, ve kterých se všechna tato slova vyskytují. Vyhledávání podle klíčových slov je podobné jako hledání „se všemi slovy“ v internetovém vyhledávači typu Google (operátor AND). Když použijete volbu Hledat podle klíčových slov pro toto slovní spojení <emphasis><literal>open file</literal></emphasis>, pak budou nalezeny všechny výskyty řetězce <emphasis><literal>open file</literal>,</emphasis> stejně jako <emphasis><literal>file opened</literal>, <literal>open input file</literal>, <literal>file may not be safe to open</literal></emphasis>, atd.</para>
         </listitem>
-      </varlistentry>
-
-      <varlistentry>
-        <term><emphasis role="bold">Regulární výrazy</emphasis></term>
+      </varlistentry><varlistentry><term><emphasis role="bold">Regulární výrazy</emphasis></term>
 
         <listitem>
           <para>Řetězec znaků pro vyhledávání bude zpracován jako regulární výraz. Řetězec znaků pro vyhledávání – [a-zA-Z]+[öäüqwß] – například jako v příkladě nahoře hledá slova v cílovém segmentu, a to taková, která obsahují zadané zvláštní znaky na německé klávesnici. Regulární výrazy představují účinný způsob hledání různých podob daného řetězce. Více najdete v kapitole <link linkend="chapter.regexp">Regulární výrazy.</link></para>

@@ -45,9 +45,9 @@
         <title>Nabídka ‚Projekt‛</title>
 
         <tgroup cols="3" colsep="1">
-          <colspec align="left" colnum="1" colwidth="100"/>
+          <colspec align="left" colnum="1"/>
 
-          <colspec align="left" colnum="2" colwidth="100"/>
+          <colspec align="left" colnum="2"/>
 
           <tbody>
             <row>
@@ -183,9 +183,9 @@
         <title>Klávesové zkratky pro kopírovat/vyjmout/vložit</title>
 
         <tgroup cols="3" colsep="1">
-          <colspec align="left" colnum="1" colwidth="100"/>
+          <colspec align="left" colnum="1"/>
 
-          <colspec align="left" colnum="2" colwidth="100"/>
+          <colspec align="left" colnum="2"/>
 
           <tbody>
             <row>
@@ -233,9 +233,9 @@
         <title>Nabídka ‚Upravit‛</title>
 
         <tgroup cols="3" colsep="1">
-          <colspec align="left" colnum="1" colwidth="100"/>
+          <colspec align="left" colnum="1"/>
 
-          <colspec align="left" colnum="2" colwidth="100"/>
+          <colspec align="left" colnum="2"/>
 
           <tbody>
             <row>
@@ -353,7 +353,7 @@
                   <keycap>C</keycap>
                 </keycombo></entry>
 
-              <entry>Exportuje aktuální výběr do textového souboru k dalšímu zpracování. Pokud nebyl vybrán žádný text, bude do tohoto souboru zapsán aktuální zdrojový segment. Když uživatel zavře <application>OmegaT</application> nebude tento soubor smazán, jak je tomu zvykem s běžným chováním schránky v operačním systému. Exportovaný obsah je zkopírován do souboru <filename>selection.txt</filename>, který se nachází v adresáři dle předvoleb uživatele (viz <xref linkend="chapter.files.and.directories"/>).</entry>
+              <entry>Exportuje aktuální výběr do textového souboru k dalšímu zpracování. Pokud nebyl vybrán žádný text, bude do tohoto souboru zapsán aktuální zdrojový segment. Když uživatel zavře <application>OmegaT</application> nebude tento soubor smazán, jak je tomu zvykem s běžným chováním schránky v operačním systému. Exportovaný obsah je zkopírován do souboru <filename>selection.txt</filename>, který se nachází v adresáři dle předvoleb uživatele (viz <xref linkend="chapter.files.and.folders"/>).</entry>
             </row>
 
             <row>
@@ -433,9 +433,9 @@
         <title>Nabídka ‚Přejít‛</title>
 
         <tgroup cols="3" colsep="1">
-          <colspec align="left" colnum="1" colwidth="100"/>
+          <colspec align="left" colnum="1"/>
 
-          <colspec align="left" colnum="2" colwidth="100"/>
+          <colspec align="left" colnum="2"/>
 
           <tbody>
             <row>
@@ -535,7 +535,7 @@
         <title>Nabídka ‚Zobrazit‛</title>
 
         <tgroup cols="2" colsep="1">
-          <colspec align="left" colnum="1" colwidth="100"/>
+          <colspec align="left" colnum="1"/>
 
           <tbody>
             <row>
@@ -605,7 +605,7 @@
         </indexterm>
 
         <tgroup cols="2" colsep="1">
-          <colspec align="left" colnum="1" colwidth="100"/>
+          <colspec align="left" colnum="1"/>
 
           <tbody>
             <row>
@@ -645,7 +645,7 @@
         <title>Nabídka ‚Možnosti‛</title>
 
         <tgroup cols="2" colsep="1">
-          <colspec align="left" colnum="1" colwidth="100"/>
+          <colspec align="left" colnum="1"/>
 
           <tbody>
             <row>
@@ -763,7 +763,7 @@
         <title>Nabídka ‚Nápověda‛</title>
 
         <tgroup cols="2" colsep="1">
-          <colspec align="left" colnum="1" colwidth="100"/>
+          <colspec align="left" colnum="1"/>
 
           <tbody>
             <row>
@@ -835,9 +835,9 @@
         <title>Klávesové zkratky pro Správu projektu</title>
 
         <tgroup cols="3" colsep="1">
-          <colspec align="left" colnum="1" colwidth="100"/>
+          <colspec align="left" colnum="1"/>
 
-          <colspec align="left" colnum="2" colwidth="100"/>
+          <colspec align="left" colnum="2"/>
 
           <tbody>
             <row>
@@ -917,9 +917,9 @@
         <title>Klávesové zkratky nabídky ‚Upravit‛</title>
 
         <tgroup cols="3" colsep="1">
-          <colspec align="left" colnum="1" colwidth="100"/>
+          <colspec align="left" colnum="1"/>
 
-          <colspec align="left" colnum="2" colwidth="100"/>
+          <colspec align="left" colnum="2"/>
 
           <tbody>
             <row>
@@ -1083,9 +1083,9 @@
         <title>Klávesové zkratky pro Pohyb mezi segmenty</title>
 
         <tgroup cols="3" colsep="1">
-          <colspec align="left" colnum="1" colwidth="100"/>
+          <colspec align="left" colnum="1"/>
 
-          <colspec align="left" colnum="2" colwidth="100"/>
+          <colspec align="left" colnum="2"/>
 
           <tbody>
             <row>
@@ -1169,9 +1169,9 @@
         <title>Různé klávesové zkratky</title>
 
         <tgroup cols="3" colsep="1">
-          <colspec align="left" colnum="1" colwidth="100"/>
+          <colspec align="left" colnum="1"/>
 
-          <colspec align="left" colnum="2" colwidth="100"/>
+          <colspec align="left" colnum="2"/>
 
           <tbody>
             <row>

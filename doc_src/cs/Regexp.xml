@@ -5,7 +5,7 @@
       <primary>Regulární výrazy</primary> <seealso>Segmentace</seealso> <seealso>Vyhledávání</seealso>
     </indexterm></title>
 
-  <para>Regulární výrazy (uváděné i zkráceně jako ‚regex‘ – z anglického ‚REGular EXpressions‘) používané při vyhledávání a v segmentačních pravidlech jsou identické s těmi, které podporuje Java. Pokud potřebujete bližší informace, navštivte stránku <ulink url="http://download.oracle.com/javase/1.5.0/docs/api/java/util/regex/Pattern.html">Java Regex documentation</ulink>. Projděte si dodatečné odkazy a příklady níže.</para>
+  <para>Regulární výrazy (uváděné i zkráceně jako ‚regex‘ – z anglického ‚REGular EXpressions‘) používané při vyhledávání a v segmentačních pravidlech jsou identické s těmi, které podporuje Java. Pokud potřebujete bližší informace, navštivte stránku <ulink url="http://download.oracle.com/javase/1.6.0/docs/api/java/util/regex/Pattern.html">Java Regex documentation</ulink>. Projděte si dodatečné odkazy a příklady níže.</para>
 
   <note>
     <para>Tato kapitola se obrací především na pokročilé uživatele, kteří potřebují definovat vlastní varianty pravidel segmentace nebo chtějí získat komplexnější a účinnější nástroj při vyhledávání.</para>
@@ -15,7 +15,7 @@
     <title>Regulární výrazy – Označení</title>
 
     <tgroup align="left" cols="2" rowsep="1">
-      <colspec align="left" colnum="1" colwidth="100"/>
+      <colspec align="left" colnum="1"/>
 
       <thead>
         <row>
@@ -39,7 +39,7 @@
     <title>Regulární výrazy – Znak</title>
 
     <tgroup align="left" cols="2" rowsep="1">
-      <colspec align="left" colnum="1" colwidth="100"/>
+      <colspec align="left" colnum="1"/>
 
       <thead>
         <row>
@@ -135,7 +135,7 @@
     <title>Regulární výrazy – Uvozování</title>
 
     <tgroup align="left" cols="2" rowsep="1">
-      <colspec align="left" colnum="1" colwidth="100"/>
+      <colspec align="left" colnum="1"/>
 
       <thead>
         <row>
@@ -177,7 +177,7 @@
     <title>Regulární výrazy – Třídy pro bloky a kategorie Unicode</title>
 
     <tgroup align="left" cols="2" rowsep="1">
-      <colspec align="left" colnum="1" colwidth="100"/>
+      <colspec align="left" colnum="1"/>
 
       <thead>
         <row>
@@ -191,13 +191,13 @@
         <row>
           <entry>\p{řecky}</entry>
 
-          <entry>Znak v řecké sadě (jednoduchá <ulink url="http://download.oracle.com/javase/1.5.0/docs/api/java/util/regex/Pattern.html#ubc">sada</ulink>)</entry>
+          <entry>Znak v řecké sadě (jednoduchá <ulink url="http://download.oracle.com/javase/1.6.0/docs/api/java/util/regex/Pattern.html#ubc">sada</ulink>)</entry>
         </row>
 
         <row>
           <entry>\p{Lu}</entry>
 
-          <entry>Velké písmeno (jednoduchá <ulink url="http://download.oracle.com/javase/1.5.0/docs/api/java/util/regex/Pattern.html#ubc">kategorie</ulink>)</entry>
+          <entry>Velké písmeno (jednoduchá <ulink url="http://download.oracle.com/javase/1.6.0/docs/api/java/util/regex/Pattern.html#ubc">kategorie</ulink>)</entry>
         </row>
 
         <row>
@@ -225,7 +225,7 @@
     <title>Regulární výrazy – Třídy znaků</title>
 
     <tgroup align="left" cols="2" rowsep="1">
-      <colspec align="left" colnum="1" colwidth="100"/>
+      <colspec align="left" colnum="1"/>
 
       <thead>
         <row>
@@ -261,7 +261,7 @@
     <title>Regulární výrazy – Předdefinované třídy znaků</title>
 
     <tgroup align="left" cols="2" rowsep="1">
-      <colspec align="left" colnum="1" colwidth="100"/>
+      <colspec align="left" colnum="1"/>
 
       <thead>
         <row>
@@ -321,7 +321,7 @@
     <title>Regulární výrazy - Označení hranic</title>
 
     <tgroup align="left" cols="2" rowsep="1">
-      <colspec align="left" colnum="1" colwidth="100"/>
+      <colspec align="left" colnum="1"/>
 
       <thead>
         <row>
@@ -363,7 +363,7 @@
     <title>Regulární výrazy – Hladové kvantifikátory</title>
 
     <tgroup align="left" cols="2" rowsep="1">
-      <colspec align="left" colnum="1" colwidth="100"/>
+      <colspec align="left" colnum="1"/>
 
       <thead>
         <row>
@@ -403,7 +403,7 @@
     <title>Regulární výrazy – Líné kvantifikátory</title>
 
     <tgroup align="left" cols="2" rowsep="1">
-      <colspec align="left" colnum="1" colwidth="100"/>
+      <colspec align="left" colnum="1"/>
 
       <thead>
         <row>
@@ -443,7 +443,7 @@
     <title>Regulární výrazy – Logické operátory</title>
 
     <tgroup align="left" cols="2" rowsep="1">
-      <colspec align="left" colnum="1" colwidth="100"/>
+      <colspec align="left" colnum="1"/>
 
       <thead>
         <row>
@@ -506,7 +506,7 @@
       <title>Regulární výrazy  Příklady regulárních výrazů v překladech</title>
 
       <tgroup align="left" cols="2" rowsep="1">
-        <colspec align="left" colnum="1" colwidth="100"/>
+        <colspec align="left" colnum="1"/>
 
         <thead>
           <row>

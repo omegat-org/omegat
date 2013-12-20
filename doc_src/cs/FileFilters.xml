@@ -339,7 +339,7 @@
         </listitem>
 
         <listitem>
-          <para><literal>${system-user-name)</literal> – jméno uživatele systému</para>
+          <para><literal>${system-user-name}</literal> - system user name</para>
         </listitem>
 
         <listitem>
@@ -355,7 +355,7 @@
         </listitem>
 
         <listitem>
-          <para><literal>${targetLocaleLCID)</literal> – cílové umístění ‚Microsoft target locale‛</para>
+          <para><literal>${targetLocaleLCID}</literal> - Microsoft target locale</para>
         </listitem>
       </itemizedlist>
 

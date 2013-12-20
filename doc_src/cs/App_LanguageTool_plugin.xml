@@ -28,8 +28,12 @@
   <section>
     <title>Instalace a použití</title>
 
-    <para>Plugin LanguageTool pro OmegaT si můžete stáhnout ze <ulink url="http://sourceforge.net/projects/omegat-plugins/files">stránky určené pro stahování pluginů</ulink>. Rozbalte soubory a vložte je všechny do adresáře „plugins“, který se nachází v instalačním adresáři OmegaT, čili v adresáři, kde je uložen soubor OmegaT.jar. Pokud adresář „plugins“ neexistuje, tak jej vytvořte.</para>
+    <para>Plugin LanguageTool je v OmegaT již obsažen. OmegaT jej automaticky použije, pokud máte zaškrtnuto <guimenuitem>Možnosti &gt; Jazyková korektura</guimenuitem>. Použitá pravidla (pokud jsou k dispozici) závisí na zdrojovém a cílovém jazyku projektu. Pokud je pravidlo aplikováno, odpovídající fráze bude podtržena modrou vlnovkou v editoru (viz <emphasis>also </emphasis>a <emphasis>I didn't do nothing</emphasis> na obrázku nahoře). Při přejetí myší přes podtrženou frázi se zobrazí vysvětlení.</para>
+    
+	<warning>
+		<title>Případy nefunkčnosti</title>
+		<para>LanguageTool nebude správně pracovat, pokud se v adresáři /plugin nachází stará verze. Před startem OmegaT odstraňte LanguageTool z adresáře /plugin.</para>
+	</warning>
 
-    <para>Po instalaci a restartu bude OmegaT plugin automaticky využívat, samozřejmě za předpokladu, že zaznačíte odpovídající položku v <guimenuitem>Možnosti &gt; Jazyková korektura</guimenuitem>. Použitá pravidla (pokud jsou k dispozici) závisí na zdrojovém a cílovém jazyku projektu. Pokud je pravidlo aplikováno, odpovídající fráze bude podtržena modrou vlnovkou v editoru (viz <emphasis>also </emphasis>a <emphasis>I didn't do nothing</emphasis> na obrázku nahoře). Při přejetí myší přes podtrženou frázi se zobrazí vysvětlení.</para>
   </section>
 </appendix>

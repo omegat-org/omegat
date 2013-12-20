@@ -13,21 +13,16 @@
     <section id="tmx.files.location.and.purpose">
       <title>adresáře překladových pamětí – umístění a účel</title>
 
-      <para>Projekty <application>OmegaT</application> mohou obsahovat soubory překladových pamětí – tj. soubory s koncovkou tmx, a tyto soubory mohou být na čtyřech různých místech:</para>
+      <para>Projekty <application>OmegaT</application> mohou obsahovat soubory překladových pamětí – tj. soubory s koncovkou tmx, a tyto soubory mohou být na pěti různých místech:</para>
 
-      <variablelist>
-        <varlistentry>
-          <term><indexterm class="singular">
+      <variablelist><varlistentry><term><indexterm class="singular">
               <primary>Překladové paměti</primary> <secondary>Podadresář omegat</secondary> <seealso>Soubory projektu</seealso>
             </indexterm>Adresář omegat</term>
 
           <listitem>
             <para>Adresář omegat obsahuje <filename>project_save.tmx</filename> a případně několik záložních souborů TMX.  Soubor <filename>project_save.tmx</filename> obsahuje všechny segmenty, které byly uložené do paměti od okamžiku, kdy jste začali práci na projektu. Tento soubor je v projektu vždy obsažen. Jeho obsah bude vždy řazen abecedně podle zdrojových segmentů.</para>
           </listitem>
-        </varlistentry>
-
-        <varlistentry>
-          <term><indexterm class="singular">
+        </varlistentry><varlistentry><term><indexterm class="singular">
               <primary>Překladové paměti</primary> <secondary>Hlavní adresář projektu</secondary>
             </indexterm>Hlavní adresář projektu</term>
 
@@ -50,10 +45,7 @@
 
             <para>Tyto soubory jsou kopiemi souboru <filename>project_save.tmx</filename>, tj. hlavní překladové paměti projektu, kromě tak zvaných nespárovaných (osiřelých) segmentů. Mají odpovídajícím způsobem změněná jména, takže jejich obsah je možno identifikovat, i když je používáte jinde, například v podadresáři <filename>tm</filename> nebo v jiném projektu (viz níže).</para>
           </listitem>
-        </varlistentry>
-
-        <varlistentry>
-          <term>adresář <filename><indexterm class="singular">
+        </varlistentry> <varlistentry> <term>adresář <filename><indexterm class="singular">
               <primary>Překladové paměti</primary> <secondary>Podadresář tm</secondary> <seealso>Soubory projektu</seealso>
             </indexterm>tm</filename></term>
 
@@ -70,10 +62,7 @@
                 <primary>Překladové paměti</primary> <secondary>komprimování</secondary>
               </indexterm></para>
           </listitem>
-        </varlistentry>
-
-        <varlistentry>
-          <term><indexterm class="singular">
+        </varlistentry><varlistentry><term><indexterm class="singular">
               <primary>Překladové paměti</primary> <secondary>Podadresář tm/auto</secondary> <seealso>Soubory projektu</seealso>
             </indexterm>adresář tm/auto<indexterm class="singular">
               <primary>Projekt</primary> <secondary>Předběžný překlad</secondary>
@@ -82,12 +71,9 @@
           <listitem>
             <para>Pokud je na samotném začátku jasné, že překlady v dané překladové paměti (nebo více pamětech) jsou správné, je možné je vložit do adresáře <emphasis role="bold">tm/auto</emphasis> a vyhnout se tak potvrzování spousty případů <emphasis>[přibližně]</emphasis>. Tímto způsobem dojde k efektivnímu <emphasis role="bold">předběžnému překladu</emphasis> zdrojového textu: všechny segmenty ve zdrojovém textu, pro které lze najít překlady v této „automatické“ překladové paměti, se tak bez dalšího zásahu uživatele dostanou do hlavní překladové paměti projektu.</para>
           </listitem>
-        </varlistentry>
-
-        <varlistentry>
-          <term><indexterm class="singular">
+        </varlistentry> <varlistentry> <term><indexterm class="singular">
               <primary>Překladové paměti</primary> <secondary>Podadresář tm/penalty-xxx</secondary> <seealso>Soubory projektu</seealso>
-            </indexterm>adresáře penalty-xxx</term>
+            </indexterm>adresáře negativního hodnocení tm/penalty-xxx</term>
 
           <listitem>
             <para>Někdy je užitečné rozlišovat mezi překladovými pamětmi, kde je kladen důraz na kvalitu, a takovými, které nejsou tolik spolehlivé, čili, kde se tolik neklade důraz na obsah, klienta, revizi, status, atd. Pro překladové paměti v adresářích s názvem „penalty-xxx“ (s hodnotou xxx mezi 0 a 100), jsou přibližné překlady negativně hodnoceny dle názvu adresáře: např. 100% shody v jakékoli překladové paměti, která je v adresáři nazvaném Penalty-30, bude snížena na 70% shody. Snížení míry shody je pak aplikováno na všechny tři typy procentní shody: shody 75, 80, 90 budou v takovém případě sníženy na 45, 50, 60.</para>
@@ -338,6 +324,6 @@
 
     <para>Velmi rané verze <application>OmegaT</application> umožňovaly segmentaci zdrojových souborů jen po odstavcích a byly nekonzistentní, když se provádělo číslování formátovacích tagů v HTML a souborech Open Document. <application>OmegaT</application> 2.5 umí detekovat a aktualizovat takové soubory tmx za provozu a zvýšit tak kvalitu shody v přibližných překladech a zefektnivní tak váš existující překlad, ušetří vám práci, kterou byste jinak museli dělat ručně.</para>
 
-    <para>Překladová paměť projektu bude aktualizována jen jednou a bude zapsána v aktualizované formě do souboru <filename>project-save.tmx</filename>; zastaralé soubory tmx budou aktualizované za provozu pokaždé, když bude projekt načítán. Všimněte si, že v některých případech mohou změny ve filtrech souborů v <application>OmegaT</application> 2.5 vést ke zcela odlišné segmentaci; jako následek takové situace bude nutno aktualizovat překlad ručně, ale to se stává jen velmi zřídka.</para>
+    <para>Překladová paměť projektu bude aktualizována jen jednou a bude zapsána v aktualizované formě do souboru <filename>project-save.tmx</filename>; zastaralé soubory tmx budou aktualizované za provozu pokaždé, když bude projekt načítán. V některých případech ale mohou změny ve filtrech souborů v <application>OmegaT</application> vést ke zcela odlišné segmentaci; jako následek takové situace bude nutno aktualizovat překlad ručně, ale to se stává jen velmi zřídka.</para>
   </section>
 </chapter>

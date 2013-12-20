@@ -31,7 +31,7 @@
         </listitem>
 
         <listitem>
-          <para>Když nejde <application>OmegaT</application> spustit běžným způsobem (není dostupné žádné grafické prostředí): zkopírujte do patřičného adresáře soubory nastavení z jiné instalace aplikace <application>OmegaT</application> na jiném počítači. Umístění samo o sobě není tak důležité, protože se tento údaj stejně zadává v příkazovém řádku při startu (vizte níže). Relevantní soubory jsou <literal>filters.conf</literal> a <literal>segmentation.conf</literal> a můžete se s nimi setkat v domovském adresáři uživatele (např. <literal>C:\Dokumenty a nastavení\%Uživatel%\<application>OmegaT</application></literal> ve Windows, <literal>%uživatel%/.omegat/</literal> v Linuxu)</para>
+          <para>Pokud se vám nedaří <application>OmegaT</application> spustit běžným způsobem (není dostupné žádné grafické prostředí): zkopírujte do patřičného adresáře soubory nastavení z jiné instalace aplikace <application>OmegaT</application> na jiném počítači. Umístění samo o sobě není tak důležité, protože se tento údaj stejně zadává v příkazovém řádku při startu (vizte níže). Relevantní soubory jsou <literal>filters.conf</literal> a <literal>segmentation.conf</literal> a můžete se s nimi setkat v domovském adresáři uživatele (např. <literal>C:\Dokumenty a nastavení\%Uživatel%\<application>OmegaT</application></literal> ve Windows, <literal>%uživatel%/.omegat/</literal> v Linuxu)</para>
         </listitem>
       </itemizedlist>
     </section>

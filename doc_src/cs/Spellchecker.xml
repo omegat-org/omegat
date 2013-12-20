@@ -32,7 +32,7 @@
       </listitem>
     </itemizedlist>
 
-    <para>Ruční kopírování využijete jen tehdy, když máte vhodné soubory slovníků již ve svém systému, např. jako součást instalace OpenOffice.org nebo Thunderbirdu. Nicméně je jednodušší vyhledávat slovníky online za použití políčka <emphasis role="bold">URL online slovníků</emphasis> </para>
+    <para>Ruční kopírování využijete jen tehdy, když máte vhodné soubory slovníků již ve svém systému, např. jako součást instalace Apache OpenOffice, LibreOffice, Firefoxu nebo Thunderbirdu. Nicméně je jednodušší vyhledávat slovníky online za použití políčka <emphasis role="bold">URL online slovníků</emphasis> </para>
 
     <figure id="spellchecker.setup">
       <title><indexterm class="singular">
@@ -88,7 +88,7 @@
 
     <para>Zkontrolujte také, zda jazykový kód cíle vašeho projektu odpovídá dostupným slovníkům v okně nastavení Kontroly pravopisu. Kontrola pravopisu užívá kód jazyku překladu k určení jazyka, který se použije při kontrole pravopisu: pokud je cílový jazyk Brazilská portugalština (PT_BR), musí podadresář se slovníky obsahovat dva slovníkové soubory pojmenované <emphasis>pt_br.aff</emphasis> a <emphasis>pt_br.dic</emphasis>.</para>
 
-    <para>Pokud jste již přeložili velkou část textu, ale až posléze jste si uvědomili, že kód cílového jazyka projektu nesouhlasí s kódem jazyka v Kontrole pravopisu (zadali jste jazyk pt_BR, ale nemáte pt_BR slovník) můžete jednoduše zkopírovat oba potřebné soubory a kopie přejmenovat (např. z <emphasis>pt_PT.aff</emphasis> a <emphasis>pt_PT.dic</emphasis> na <emphasis>pt._BR.aff</emphasis> a <emphasis>pt_BR.dic</emphasis>). Samozřejmě je lepší, práci na chvíli přerušit a stáhnout si správnou verzi kontroly pravopisu.</para>
+    <para>Pokud jste již přeložili velkou část textu, ale až posléze jste si uvědomili, že kód cílového jazyka projektu nesouhlasí s kódem jazyka v Kontrole pravopisu (zadali jste jazyk pt_BR, ale nemáte pt_BR slovník) můžete jednoduše zkopírovat oba potřebné soubory a kopie přejmenovat (např. z <emphasis>pt_PT.aff</emphasis> a <emphasis>pt_PT.dic</emphasis> na <emphasis>pt_BR.aff</emphasis> a <emphasis>pt_BR.dic</emphasis>). Samozřejmě je lepší, práci na chvíli přerušit a stáhnout si správnou verzi kontroly pravopisu.</para>
 
     <para>Pozor: volba <filename>Odstranit</filename> fyzicky odstraní vybrané slovníky. Pokud jsou tyto slovníky používány jinou aplikací ve vašem systému, budou odstraněny i z této aplikace. Pokud z jakéhokoliv důvodu budete potřebovat slovníky opakovaně instalovat a odstraňovat, bude lepší zkopírovat potřebné soubory do jiného adresáře, který bude sloužit jen pro účely OmegaT.</para>
   </section>

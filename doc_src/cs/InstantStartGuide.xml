@@ -8,67 +8,56 @@
         <primary>Projekt</primary> <secondary>Vytvořit / otevřít nový</secondary>
       </indexterm></title>
 
-    <para><remark>Poznámka:</remark> Na počítačích Apple Mac používejte klávesu <keycap>Cmd</keycap> nebo <keycap>Apple</keycap> místo <keycap>Ctrl</keycap></para>
+    <para><remark>Poznámka:</remark> Na počítačích Apple Mac používejte klávesu <keycap>Command</keycap> místo <keycap>Ctrl&lt;/k3&gt;.</para>
 
-    <para>Prvním krokem při používání OmegaT je vytvoření projektu, který bude obsahovat všechny vaše soubory, jako např. zdrojové soubory, překladové paměti, glosáře a nakonec také váš překlad. V nabídce <guimenu>Projekt</guimenu> vyberte položku<menuchoice> <guimenuitem> Nový...</guimenuitem> </menuchoice><indexterm class="singular">
+      <indexterm class="singular">
         <primary>Nabídka Projekt</primary> <secondary>Nový...</secondary>
-      </indexterm> a zadejte název vašeho projektu. Při vytváření projektu nezapomeňte kam jste ho uložili, protože později se k němu budete potřebovat vracet.</para>
+      </indexterm>
 
-    <para>Po zadání jména projektu se otevře dialogové okno Vytvořit nový projekt. V horní části dialogového okna vyberte jazyk vašich zdrojových souborů a jazyk překladu a pro pokračování klikněte na <guibutton>OK</guibutton>.</para>
+    <para>Prvním krokem při používání OmegaT je vytvoření projektu, který bude obsahovat všechny vaše soubory, jako např. zdrojové soubory, překladové paměti, glosáře a nakonec také váš překlad. V nabídce <guimenu>Projekt</guimenu> vyberte položku<menuchoice> <guimenuitem> Nový...</guimenuitem> </menuchoice>&lt;i3/&gt; a zadejte název vašeho projektu. Při vytváření projektu nezapomeňte kam jste ho uložili, protože později se k němu budete potřebovat vracet.</para>
 
-    <para><application>Pokud máte zájem poznat další nastavení tohoto dialogového okna, můžete se k němu vrátit kdykoliv stisknutím <keycap>Ctrl+E.</keycap> </application></para>
+    <para>Po zadání jména projektu se otevře dialogové okno Vytvořit nový projekt. V horní části dialogového okna vyberte jazyk vašich zdrojových souborů a jazyk překladu a pro pokračování klikněte na <guilabel>OK</guilabel>.</para>
 
-    <para>V dalším kroku se otevře dialogové okno Soubory projektu. Zdrojový soubor si vyberete kliknutím na položku Importovat zdrojové soubory... OmegaT pak zkopíruje vybraný soubor do podadresáře <filename>/source/</filename> ve vašem nově vytvořeném projektu. Jakmile je zdrojový soubor nahrán do podokna Editoru, můžete dialogové okno Soubory projektu zavřít.</para>
+    <para>Pokud máte zájem poznat další nastavení tohoto dialogového okna, můžete se k němu vrátit kdykoliv stisknutím <keycap>Ctrl+E.</keycap> </para>
+
+    <para>V dalším kroku se otevře dialogové okno <guilabel>Soubory projektu</guilabel>. Click on <guibutton>Copy Files to Source Folder...</guibutton> to select your source files. OmegaT will then copy the selected files to the <filename>/source/</filename> subfolder of your newly created project. After the source files have loaded in the <guilabel>Editor</guilabel> pane, you can close the <guilabel>Project Files</guilabel> dialog.</para>
   </section>
 
   <section id="translate.the.segments.one.by.one">
     <title>Překlad souboru</title>
 
-    <para>OmegaT při překládání aktivuje v daném časovém úseku vždy jen jeden segment pro zpracování. Po přeložení celého segmentu stiskem <keycap>Ctrl+U</keycap> přejdete na další nepřeložený segment (nebo stiskem <keycap>Ctrl+Shift+U </keycap>přejděte na další přeložený segment segment). Kdykoliv kdy budete chtít jak bude vypadat překlad v konečném formátu, stiskněte <keycap>Ctrl+D</keycap>, tímto se vygeneruje přeložený dokument, který bude vytvořen v podadresáři /target/ ve vašem projektu. Během překládání používejte nabídky <guimenu>Upravit</guimenu> a <guimenu>Přejít</guimenu>, kde najdete různé užitečné funkce...</para>
+    <para>OmegaT při překládání aktivuje v daném časovém úseku vždy jen jeden segment pro zpracování. After you have translated each segment, press <keycap>Ctrl+U</keycap> to move to the next untranslated segment (or <keycap>Ctrl+Shift+U</keycap> to move to the next translated segment). Whenever you want to see what your translation will look like in its final format, press <keycap>Ctrl+D</keycap> to generate the translated documents, which will be created in the <filename>/target/</filename> subfolder of your project folder. During translation, use the <guimenu>Edit</guimenu> and <guimenu>Go To</guimenu> menus to perform various useful functions.</para>
   </section>
 
   <section>
     <title>Ověřujte tagy</title>
 
-    <para>Pokud zdrojový soubor obsahuje formátovaný text, např. Microsoft Word, LibreOffice Writer nebo HTML, OmegaT zkonvertuje formátování do tagů, které obklopují překládaný text. Často dokumenty obsahují i takové tagy, které nemají s formátováním nic společného, ale které jsou také důležité. Ve zdrojovém souboru (a v přeloženém souboru) zdrojová věta může vypadat takto</para>
+    <para>If your source files are formatted files, e.g. Microsoft Word, LibreOffice Writer nebo HTML, OmegaT zkonvertuje formátování do tagů, které obklopují překládaný text. Often documents will also have tags that have nothing to do with formatting, but which are also important in the source files (and in the translated files). A source sentence might look like: <mediaobject> <imageobject role="html"> <imagedata align="justify" fileref="images/InstantGuide_1.png"/> </imageobject> <imageobject role="fo"> <imagedata align="justify" fileref="images/InstantGuide_1.png" width="40%"/> </imageobject> </mediaobject>
+    </para>
 
-    <para/>
-
+    <para>OmegaT, however, will present this sentence in the following
+    fashion:
+    
     <mediaobject>
       <imageobject role="html">
-        <imagedata align="left" fileref="images/InstantGuide_1.png"/>
+        <imagedata align="justify" fileref="images/InstantGuide_2.png"/>
       </imageobject>
-
       <imageobject role="fo">
-        <imagedata align="left" fileref="images/InstantGuide_1.png" width="40%"/>
+        <imagedata align="justify" fileref="images/InstantGuide_2.png" width="45%"/>
       </imageobject>
     </mediaobject>
-
-    <para/>
-
-    <para>Nicméně OmegaT zobrazí tuto větu tímto způsobem:</para>
-
-    <para><literal/></para>
-
-    <mediaobject>
-      <imageobject role="html">
-        <imagedata align="left" fileref="images/InstantGuide_2.png"/>
-      </imageobject>
-
-      <imageobject role="fo">
-        <imagedata align="left" fileref="images/InstantGuide_2.png" width="45%"/>
-      </imageobject>
-    </mediaobject>
-
-    <para/>
-
-    <para>Tagy jsou v OmegaT zašedlé, takže je jednoduché je odlišit od textu. Nemají žádnou ochranu, takže je můžete smazat, vložit ručně nebo s nimi pohybovat v rámci přeložené věty. Pokud ale uděláte chybu při zapisování formátovacích tagů, může se stát, že přeložený soubor nepůjde otevřít. Proto použijte <keycap>Ctrl+T</keycap> před generováním přeložených souborů, proběhne tak ověření tagů, zda jsou správně zapsány.</para>
+    </para>
+    
+    <para>Tagy jsou v OmegaT zašedlé, takže je jednoduché je odlišit od textu. They are protected, so that you cannot modify their contents, but you can delete them, enter them by hand or move them around in the target sentence. However, if you made mistakes when you typed the formatting tags, your translated files might fail to open. Therefore, press <keycap>Ctrl+T</keycap> before you generate your translated files, to validate that your tags are correct.</para>
   </section>
 
   <section>
     <title>Generování přeloženého souboru.</title>
 
-    <para>Jakmile jste se ujistili, že v překladu nejsou žádné chyby tagů, stiskněte <keycap>Ctrl+D</keycap>, a tím se vygeneruje cílový soubor, který bude vytvořen v podadresáři <filename> /target/</filename> vašeho projektu.</para>
+    <para>Once you have made certain that there are no tag errors in your
+    translation, press <keycap>Ctrl+D</keycap> to generate the target files,
+    which will be created in the <filename>/target/</filename> subfolder of
+    your project folder.</para>
   </section>
 
   <section>
@@ -76,37 +65,54 @@
 
     <itemizedlist>
       <listitem>
-        <para>Když se stane, že se soubor nenahraje do podokna Editoru, pak to může znamenat, že zdrojový soubor je ve formátu, který OmegaT nepodporuje. Podívejte se na kapitolu 7: Filtry souborů v Uživatelské příručce, najdete zde seznam formátů souborů, které umí OmegaT zpracovat.</para>
+        <para>If a file does not load into the <guilabel>Editor</guilabel> pane, then it could be that it is in a format that doesn't work in OmegaT. See
+        <link linkend="chapter.file.filters">File Filters</link> for a list of file formats that OmegaT can handle.</para>
       </listitem>
     </itemizedlist>
 
     <itemizedlist>
       <listitem>
-        <para>Pro každou zakázku můžete vytvořit nový projekt a také je možné přidat hned několik zdrojových souborů do jednoho projektu současně.</para>
+        <para>You can create a new project for each new job, and you can add
+        new source files to a project at anytime time.</para>
       </listitem>
     </itemizedlist>
 
     <itemizedlist>
       <listitem>
-        <para>Původní nastaven projektu si můžete kdykoliv zobrazit otevřením dialogového okna Vlastnosti projektu, a to stiskem <keycap>Ctrl+E</keycap>. Seznam souborů v projektu uvidíte v dialogovém okně Soubory projektu, které otevřete stiskem <keycap>Ctrl+L</keycap>.</para>
+        <para>To remind yourself of the project's initial settings, open the
+        project settings dialog by pressing <keycap>Ctrl+E</keycap>. To see a
+        list of files in the project, open the <guilabel>Project Files</guilabel> dialog by
+        pressing <keycap>Ctrl+L</keycap>.</para>
       </listitem>
     </itemizedlist>
 
     <itemizedlist>
       <listitem>
-        <para>Po dokončení práce na překladu exportuje OmegaT tři překladové paměti zvané „level1“ („úroveň 1“), „level2“ („úroveň 2“) a „omegat“ do projektového adresáře. Paměti „level1“ a „level2“ je možno sdílet s jinými překladatelskými programy. Paměť nazvaná „omegat“ se dá použít jen s OmegaT, a to v jakémkoliv budoucím projektu, který si vytvoříte. Když umístíte soubory překladové paměti do podadresáře /tm/ uvnitř vašeho projektového adresáře, OmegaT je automaticky bude prohledávat, aby našla podobné segmenty, též zvané „Přibližné překlady“ .</para>
+        <para>At the end of your translation, OmegaT exports three translation
+        memories called <filename>level1</filename>, <filename>level2</filename> and <filename>omegat</filename> to your project
+        folder. The <filename>level1</filename> and <filename>level2</filename> memories can be shared with users of
+        other translation programs. The memory named <filename>omegat</filename> can be used by
+        OmegaT itself, in future projects that you create. If you place such
+        translation memory files in the <filename>/tm/</filename> subfolder of a project,
+        OmegaT will automatically search them for similar segments, called
+        &quot;fuzzy matches&quot;.</para>
       </listitem>
     </itemizedlist>
 
     <itemizedlist>
       <listitem>
-        <para>Můžete si vytvořit glosář, a to stiskem <guibutton>Ctrl+Shift+G</guibutton>, nebo zkopírováním existujících glosářů do podadresáře <filename>/glossary/</filename> ve vašem projektovém adresáři a OmegaT v nich bude automaticky hledat slovíčka.</para>
+        <para>You can add a new term to the glossary by pressing
+        <keycap>Ctrl+Shift+G</keycap>, or copy existing glossaries to
+        the <filename>/glossary/</filename> subfolder of your project folder,
+        and OmegaT will automatically look up words in them.</para>
       </listitem>
     </itemizedlist>
 
     <itemizedlist>
       <listitem>
-        <para>Často je užitečné hledat slova a fráze ve zdrojovém textu a v překladu, proto stiskněte <keycap>Ctrl+F</keycap> a zobrazí se dialogové okno „Hledat v textu“.</para>
+        <para>It is often useful to search for words and phrases in the source
+        text and in your translation, so press <keycap>Ctrl+F</keycap> for the
+        <guilabel>Text Search</guilabel> dialog at any time.</para>
       </listitem>
     </itemizedlist>
 

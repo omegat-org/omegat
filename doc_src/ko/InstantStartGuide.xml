@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<chapter id="chapter.instant.start.guide">
+  <title>5분 만에 OmegaT 사용법을 배우세요!</title>
+
+  <section id="create.and.open.new.project">
+    <title>새 프로젝트 설정<indexterm class="singular">
+        <primary>프로젝트</primary> <secondary>만들기 / 새로 열기</secondary>
+      </indexterm></title>
+
+    <para><remark>참고:</remark> 애플 맥에서는 ctrl 키 대신 <keycap>Command</keycap><keycap>Control</keycap> 키를 사용 합니다.</para>
+
+      <indexterm class="singular">
+        <primary>메뉴 프로젝트</primary> <secondary>새로운...</secondary>
+      </indexterm>
+
+    <para>OmegaT를 사용 하려면, 원본 파일, 번역 메모리, 용어집, 번역된 파일 등 모든 파일을 묶은 프로젝트를 먼저 만듭니다. <guimenu>프로젝트</guimenu> 메뉴에서 <menuchoice> <guimenuitem>새 작업...(&amp;N)</guimenuitem> </menuchoice>을 선택하고 프로젝트 이름을 입력합니다. 나중에 다시 사용하니깐, 잘 기억해 두세요.</para>
+
+    <para>프로젝트 이름을 정한 다음에, <guilabel>새 프로젝트 만들기</guilabel> 대화 상자가 열립니다. 이 대화 상자의 위쪽에 있는, 원본 파일의 언어 및 번역된 파일의 언어를 선택하세요, 계속하려면 <guibutton>확인</guibutton> 을 클릭합니다.</para>
+
+    <para>다른 설정에 관심이 있다면, 언제든지 <keycap>Ctrl+E</keycap>를 눌러 돌아갈 수 있습니다.</para>
+
+    <para>다음으로, <guilabel>프로젝트 파일</guilabel> 대화 상자가 열립니다. 원본 파일을 선택 하려면 <guibutton>원본 폴더에 파일 복사...</guibutton>를 클릭하세요. OmegaT가 새로 만든 프로젝트의 <filename>/source/</filename> 하위 폴더에 선택된 파일을 복사합니다. <guilabel>편집기</guilabel>창으로 원본 파일을 불러온 뒤, <guilabel>프로젝트 파일</guilabel> 대화 상자를 닫을 수 있습니다.</para>
+  </section>
+
+  <section id="translate.the.segments.one.by.one">
+    <title>파일을 번역</title>
+
+    <para>OmegaT는 한번에 번역할 한 부분을 소개합니다. 각 부분을 번역 후, <keycap>Ctrl+U</keycap>를 누르면 다음 미번역 부분으로 이동합니다 .(또는 <keycap>Ctrl+Shift+U</keycap>를 누르면 다음 번역된 부분으로 이동합니다.)번역이 최종적으로 어떻게 보이는지 보고 싶다면 언제든지 <keycap>Ctrl+D</keycap> 키를 눌러 번역된 문서를 만들 수 있습니다. 파일은 프로젝트 폴더의 <filename>/target/</filename>폴더에 생성됩니다. 번역 중, <guimenu>편집</guimenu>과 <guimenu>이동</guimenu> 메뉴를 사용하여 다양하고 유용한 기능을 수행할 수 있습니다.</para>
+  </section>
+
+  <section>
+    <title>태그 유효성을 검사하세요.</title>
+
+    <para>만약 원본 파일이 서식된 파일(예를 들어, Microsoft Word, LibreOffice Writer or HTML)이면, OmegaT는 텍스트를 둘러싸고 있는 태그의 서식을 변환합니다. 종종 문서에 서식을 가지지 않은 태그들이 있지만, 이 작업은 원본 파일 및 번역된 파일에 역시 중요합니다. 원본 문장은 다음과 같습니다. :<mediaobject>
+      <imageobject role="html">
+        <imagedata align="justify" fileref="images/InstantGuide_1.png"/>
+      </imageobject>
+      <imageobject role="fo">
+        <imagedata align="justify" fileref="images/InstantGuide_1.png" width="40%"/>
+      </imageobject>
+    </mediaobject>
+    </para>
+
+    <para>그러나, OmegaT는 다음과 같은 방식으로 이 문장을 제시합니다. :<mediaobject>
+      <imageobject role="html">
+        <imagedata align="justify" fileref="images/InstantGuide_2.png"/>
+      </imageobject>
+      <imageobject role="fo">
+        <imagedata align="justify" fileref="images/InstantGuide_2.png" width="45%"/>
+      </imageobject>
+    </mediaobject>
+    </para>
+    
+    <para>OmegaT의 태그는 회색이기 때문에 알아보기 쉽습니다. 그것의 내용을 한문장씩 수정할 수 없지만. 한꺼번에 묶어서 직접 삭제하고, 입력하고, 움직일 수 있습니다. 그러나, 서식 태그를 입력할 때 실수를 했다면, 번역된 파일을 열 때 실패할 수 있습니다. 따라서, 번역 된 파일을 생성하기 전에 태그가 올바른지<keycap>Ctrl+Shift+V</keycap>를 눌러 유효성을 검사하세요.</para>
+  </section>
+
+  <section>
+    <title>번역된 파일을 생성</title>
+
+    <para>일단 여러분이 만든 번역에 태그 오류가 없으면, <keycap>Ctrl+D</keycap> 키를 눌러, 대상 파일을 생성하세요. 프로젝트 폴더 안 <filename>/target/</filename> 폴더에 생성됩니다.</para>
+  </section>
+
+  <section>
+    <title>몇 가지 더 기억할게 있습니다,</title>
+
+    <itemizedlist>
+      <listitem>
+        <para><guilabel>편집기</guilabel> 창에 파일을 불러올 수 없는 경우, OmegaT에서는 작동하지 않는 형식입니다. OmegaT가 처리할 수 있는 파일 형식의 목록은 <link linkend="chapter.file.filters">파일 필터</link>를 참조 해 주세요.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>여러분은 새 작업에 대해 각각 새 프로젝트를 만들 수 있고, 프로젝트에 언제든지 새 원본 파일을 추가할 수 있습니다.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>프로젝트의 초기 설정을 다시 알아보려면, <keycap>Ctrl+E</keycap>키를 눌러 프로젝트 설정 대화 상자를 엽니다. 프로젝트에 있는 파일의 목록을 보려면, <keycap>Ctrl+L</keycap>을 눌러 <guilabel>프로젝트 파일</guilabel>대화 상자를 엽니다.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>번역이 끝나면, OmegaT는 프로젝트 폴더에 <filename>level1</filename>, <filename>level2</filename>, <filename>omegat</filename>의 3개 번역 메모리를 내보냅니다. <filename>Level1</filename> 및 <filename>level2</filename> 메모리는 다른 번역 프로그램의 사용자와 공유할 수 있습니다. <filename>Omegat</filename> 메모리는 앞으로 OmegaT의 프로젝트에 사용할 수 있습니다. 프로젝트의 <filename>/tm/</filename> 하위 폴더에 이러한 번역 메모리 파일을 배치할 경우, OmegaT는 유사한 부분을 자동으로 검색해 &quot;비슷한 일치 항목&quot; 창에 표시합니다.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para><keycap>Ctrl+Shift+G</keycap>를 누르거나 프로젝트 폴더의 <filename>/glossary/</filename> 하위 폴더에 있는 기존 용어집에 새 용어를 추가할 수 있습니다. 그리면 OmegaT는 부분에 단어가 포함되면 자동으로 보여줍니다.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>가끔 원본과 번역 텍스트의 단어 및 문구 검색이 필요합니다, 그러면 언제든지 <keycap>Ctrl + F</keycap>을 눌러 <guilabel>텍스트 검색</guilabel> 대화 상자를 열 수 있습니다.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>더 포괄적인 소개가 필요하면 OmegaT 웹 사이트에 <ulink url="http://www.omegat.org/en/tutorial/OmegaT%20for%20Beginners.pdf">초보자를 위한 OmegaT</ulink>를 참조하세요. 여러분이 OmegaT를 사용하는데 어떤 도움이라도 필요하면, <ulink url="http://tech.groups.yahoo.com/group/OmegaT/">OmegaT 사용자 그룹</ulink>에 가입해주세요.</para>
+      </listitem>
+    </itemizedlist>
+  </section>
+</chapter>

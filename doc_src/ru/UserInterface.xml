@@ -14,9 +14,9 @@
         </indexterm></title>
 
       <tgroup cols="2" colsep="0" rowsep="1" title="Main OMegaT window">
-        <colspec align="left" colnum="1" colwidth="90"/>
+        <colspec align="left" colnum="1"/>
 
-        <colspec align="left" colnum="2" colwidth=""/>
+        <colspec align="left" colnum="2"/>
 
         <tbody>
           <row>
@@ -70,9 +70,9 @@
         </indexterm></title>
 
       <tgroup cols="2" colsep="0" rowsep="1" title="Other windows">
-        <colspec align="left" colnum="1" colwidth="90"/>
+        <colspec align="left" colnum="1"/>
 
-        <colspec align="left" colnum="2" colwidth=""/>
+        <colspec align="left" colnum="2"/>
 
         <tbody>
           <row>
@@ -116,9 +116,9 @@
         </indexterm></title>
 
       <tgroup cols="2" colsep="0" rowsep="1" title="Settings dialogs">
-        <colspec align="left" colnum="1" colwidth="90"/>
+        <colspec align="left" colnum="1"/>
 
-        <colspec align="left" colnum="2" colwidth=""/>
+        <colspec align="left" colnum="2"/>
 
         <tbody>
           <row>
@@ -204,7 +204,7 @@
         </indexterm></title>
 
       <tgroup cols="2">
-        <colspec align="left" colnum="1" colwidth="60"/>
+        <colspec align="left" colnum="1"/>
 
         <tbody>
           <row>
@@ -294,7 +294,7 @@
         </indexterm></title>
 
       <tgroup cols="2">
-        <colspec align="left" colnum="1" colwidth="60"/>
+        <colspec align="left" colnum="1"/>
 
         <tbody>
           <row>
@@ -436,9 +436,9 @@
             </indexterm></title>
 
           <tgroup cols="2" colsep="1" rowsep="1" title="Match pane setup">
-            <colspec align="left" colnum="1" colwidth="90"/>
+            <colspec align="left" colnum="1"/>
 
-            <colspec align="left" colnum="2" colwidth=""/>
+            <colspec align="left" colnum="2"/>
 
             <tbody>
               <row>
@@ -711,7 +711,7 @@
           <primary>Сочетания клавиш</primary> <secondary>Копировать - CTRL+C</secondary>
         </indexterm></guimenuitem>, <guimenuitem>CTRL+V <indexterm class="singular">
           <primary>Сочетания клавиш</primary> <secondary>Вставить - CTRL+V</secondary>
-        </indexterm></guimenuitem>.<figure id="ProjectStatistic.Window">
+        </indexterm></guimenuitem>. <figure id="ProjectStatistic.Window">
           <title>статистика проекта</title>
 
           <mediaobject>
@@ -731,7 +731,7 @@
           <primary>Статистика по совпадениям</primary> <seealso>Меню «Инструменты»</seealso>
         </indexterm></title>
 
-      <para>Статистику по совпадениям можно просмотреть, выбрав пункт меню <guimenuitem>«Инструменты&gt;Статистика по совпадениям».</guimenuitem> Расчёт совпадений довольно интенсивно нагружает процессор и может занять некоторое время, поэтому во время расчётов показывается индикатор выполнения. Стандартом де-факто является разбиение совпадений на следующие группы: повторения, точные совпадения, 95 %—100 %, 85 %—94 %, 75 %—84 %, 50 %—74 % и без совпадений. Расчёт данных проводится для сегментов, слов и символов (с пробелами и без). Заметьте, что методики расчёта совпадений в ОмегаТ и в других системах автоматизированного перевода могут различаться.<figure>
+      <para>Статистику по совпадениям можно просмотреть, выбрав пункт меню <guimenuitem>«Инструменты&gt;Статистика по совпадениям».</guimenuitem> Расчёт совпадений довольно интенсивно нагружает процессор и может занять некоторое время, поэтому во время расчётов показывается индикатор выполнения. Стандартом де-факто является разбиение совпадений на следующие группы: повторения, точные совпадения, 95 %—100 %, 85 %—94 %, 75 %—84 %, 50 %—74 % и без совпадений. Расчёт данных проводится для сегментов, слов и символов (с пробелами и без). Note that there could be minor differences between the OmegaT counts and the numbers, provided by other CAT tools.<figure>
           <title>Статистика по совпадениям</title>
 
           <mediaobject>

@@ -16,7 +16,7 @@
         <see>Tokenizer</see>
       </indexterm></title>
 
-    <para>Модуль морфологического поиска (называемый также алгоритмом выделения корней) используется для улучшения нахождения совпадений за счёт выделения в исходных сегментах и переводе склоняемых слов. Также модуль улучшает поиск в глоссарии.</para>
+    <para>Модуль морфологического поиска (называемый также алгоритмом выделения корней или токенизатором) используется для улучшения нахождения совпадений за счёт выделения в исходных сегментах и переводе склоняемых слов. Также модуль улучшает поиск в глоссарии.</para>
 
     <para>Например, модуль морфологического поиска для английского языка определит, что строка «cats» (и, возможно, «catlike», «catty» и т. д.) имеет корень «cat», а «stemmer», «stemming», «stemmed» образованы от «stem». Алгоритм выделит в словах «fishing», «fished», «fish», и «fisher» общий корень «fish». Этот модуль особенно полезен для языков, в которых активно используются приставки, суффиксы и окончания. В качестве примера рассмотрим склонение слова «хороший» в словенском языке:</para>
 
@@ -40,56 +40,14 @@
   </section>
 
   <section>
-    <title>Установка и использование из командной строки</title>
+    <title>Установка и использование</title>
 
-    <para>Модуль «Tokenizer», адаптированный для ОмегаТ из проекта Lucene можно загрузить с официального сайта модулей ОмегаТ (http://sourceforge.net/projects/omegat-plugins/files/). Загрузите самую новую версию (OmegaT-tokenizers_0.4_2-2.1.zip на момент написания этого руководства).</para>
+	<para>Модуль «Tokenizer» теперь поставляется вместе с ОмегаТ. ОмегаТ автоматически выбирает токенизаторы исходного языка и языка перевода в соответствии с настройками проекта. В диалоговом окне «Проект &gt; Свойства...» можно выбрать другой токенизатор или настроить используемую версию.</para>
 
-    <para>Для установки, в главном каталоге ОмегаТ (каталоге, содержащем OmegaT.jar) создайте подкаталог «plugins» и распакуйте в него архив с модулем.</para>
-
-    <para>Для запуска ОмегаТ с модулем «Tokenizer» необходимо указать алгоритмы выделения корней для исходного языка и языка перевода. Команда запуска должна выглядеть так:</para>
-
-    <para><literal>java -jar OmegaT.jar --ITokenizer=[алгоритм для языка исходных файлов] --ITokenizerTarget=[алгоритм для языка переведённых файлов]</literal></para>
-
-    <para>Названия алгоритмов для различных языков приведены в файле «Readme.txt», распространяемом в архиве, вместе с самим модулем. Например, если вы хотите использовать алгоритм Lucene CJK для исходного текста и Lucene French для переведённого текста, команда запуска должна выглядеть примерно так:</para>
-
-    <para><literal>java -jar OmegaT.jar
-    --ITokenizer=org.omegat.plugins.tokenizer.LuceneCJKTokenizer
-    --ITokenizerTarget=org.omegat.plugins.tokenizer.LuceneFrenchTokenizer</literal></para>
-  </section>
-
-  <section>
-    <title>Особенности использования в Mac OS X</title>
-
-    <para>Если вы хотите использовать модуль морфологического поиска в ОмегаТ, запущенной на Mac OS X, следуйте приведённым выше инструкциям (чтобы узнать расположение OmegaT.jar, щёлкните правой кнопкой мыши по OmegaT.app), с той лишь разницей, что названия алгоритмов следует указывать в файле <filename>info.plist</filename>, который содержит опции запуска Java. Откройте <filename>info.plist</filename> и отредактируйте его нужным образом. Вот как этот файл должен выглядеть для примера выше:</para>
-
-    <literallayout><code>
-&lt;key&gt;VMOptions&lt;/key&gt;
-&lt;string&gt;-Xmx1024M&lt;/string&gt;
-
-&lt;key&gt;Arguments&lt;/key&gt;
-&lt;array&gt;
-  &lt;string&gt;--ITokenizer=org.omegat.plugins.tokenizer.LuceneCJKTokenizer&lt;/string&gt;
-  &lt;string&gt;--ITokenizerTarget=org.omegat.plugins.tokenizer.LuceneFrenchTokenizer&lt;/string&gt;
-&lt;/array&gt;</code></literallayout>
-  </section>
-
-  <section>
-    <title>Если модуль не работает</title>
-
-    <para>Чтобы убедится, что алгоритмы для обоих языков заданы правильно, запустите ОмегаТ из командной строки, откройте проект и посмотрите на сообщения, которые появятся в окне терминала. Для вышеприведённого примера они должны выглядеть так:</para>
-
-    <literallayout><code>
-84528: Info: Source tokenizer: org.omegat.plugins.tokenizer.LuceneCJKTokenizer 
-84528: Info: Target tokenizer: org.omegat.plugins.tokenizer.LuceneFrenchTokenizer 
-</code></literallayout>
-
-    <para>Цифры слева скорее всего будут отличаться, главное убедиться в том, что заданные имена алгоритмов для исходного и переведённого текстов совпадают с именами, появившимися в окне терминала. Если алгоритмы указаны неправильно, сообщения будут выглядеть примерно так:</para>
-
-    <literallayout><code>
-12719: Info: Source tokenizer: org.omegat.core.matching.Tokenizer 
-12719: Info: Target tokenizer: org.omegat.core.matching.Tokenizer 
-</code></literallayout>
-
-    <para>Для запуска ОмегаТ из командной строки в Mac OS X, дважды щёлкните мышью по файлу <literal>JavaApplicationStub</literal>, расположенному в «/OmegaT.app/Contents/MacOS/».</para>
+	<warning>
+		<title>Несовместимость</title>
+		<para>ОмегаТ не сможет запуститься, если в каталоге «/plugin» установлена более старая версия модуля «tokenizer». Перед запуском ОмегаТ удалите все файлы модуля из каталога «/plugin».</para>
+	</warning>
+	
   </section>
 </appendix>

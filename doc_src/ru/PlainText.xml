@@ -46,7 +46,7 @@
 
     <variablelist>
       <varlistentry>
-        <term>Измените кодировку исходных файлов на Юникод.</term>
+        <term>Change the encoding of your files to Unicode</term>
 
         <listitem>
           <para>откройте исходный файл в текстовом редакторе, который корректно распознаёт кодировку и сохраните файл в кодировке <emphasis role="bold">«UTF-8»</emphasis>. Измените расширения файла с <literal>.txt</literal> на <literal>.utf8.</literal> <application>ОмегаТ</application> автоматически распознает его как UTF-8 файл. Этот подход наиболее разумен, так как позволяет избавиться от многих проблем в дальнейшем.</para>
@@ -56,7 +56,7 @@
 
     <variablelist>
       <varlistentry>
-        <term>Укажите кодировку текстовых файлов</term>
+        <term>Specify the encoding for your plain text files</term>
 
         <listitem>
           <para>то есть файлов с расширением <filename>.txt </filename>: в секции <emphasis role="bold">Текстовые файлы</emphasis> диалогового окна «Файловые фильтры» измените <emphasis role="bold">кодировку исходных файлов</emphasis> с «&lt;auto&gt;» на кодировку, соответствующую вашим исходным <filename>.txt</filename>-файлам, например, на «.jp» для примера выше.</para>
@@ -66,7 +66,7 @@
 
     <variablelist>
       <varlistentry>
-        <term>Измените расширение исходных текстовых файлов</term>
+        <term>Change the extensions of your plain text source files</term>
 
         <listitem>
           <para>например, для японских текстовых файлов с <filename>.txt</filename> на <filename>.jp</filename>: в секции <emphasis role="bold">Текстовые файлы</emphasis> диалогового окна «Файловые фильтры» добавьте новый <emphasis role="bold">Шаблон имени исходного файла</emphasis> (например, на <filename>*.jp</filename> для вышеприведённого примера) и выберите необходимые кодировки оригинала и перевода.</para>

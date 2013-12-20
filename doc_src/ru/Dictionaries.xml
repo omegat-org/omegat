@@ -30,7 +30,7 @@
 
     <itemizedlist>
       <listitem>
-        <para>С помощью команды untar (или аналогичной, к примеру, <filename> winrar</filename> в Windows)  извлеките содержимое архива в папку «dictionary» текущего проекта. В архиве обычно содержатся 3 файла с расширениями <emphasis>dz, idx </emphasis>и <emphasis>ifo</emphasis>.</para>
+        <para>С помощью команды untar (или аналогичной, к примеру, <filename> winrar</filename> в Windows) извлеките содержимое архива в папку «dictionary» текущего проекта. В архиве обычно содержатся 3 файла с расширениями <emphasis>dz, idx </emphasis>и <emphasis>ifo</emphasis>.</para>
       </listitem>
     </itemizedlist>
 

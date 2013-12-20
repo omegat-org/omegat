@@ -45,9 +45,9 @@
         <title>Меню «Проект»</title>
 
         <tgroup cols="3" colsep="1">
-          <colspec align="left" colnum="1" colwidth="100"/>
+          <colspec align="left" colnum="1"/>
 
-          <colspec align="left" colnum="2" colwidth="100"/>
+          <colspec align="left" colnum="2"/>
 
           <tbody>
             <row>
@@ -167,9 +167,9 @@
         <title>Сочетания клавиш для копирования/вырезания/вставки текста</title>
 
         <tgroup cols="3" colsep="1">
-          <colspec align="left" colnum="1" colwidth="100"/>
+          <colspec align="left" colnum="1"/>
 
-          <colspec align="left" colnum="2" colwidth="100"/>
+          <colspec align="left" colnum="2"/>
 
           <tbody>
             <row>
@@ -211,9 +211,9 @@
         <title>Меню «Правка»</title>
 
         <tgroup cols="3" colsep="1">
-          <colspec align="left" colnum="1" colwidth="100"/>
+          <colspec align="left" colnum="1"/>
 
-          <colspec align="left" colnum="2" colwidth="100"/>
+          <colspec align="left" colnum="2"/>
 
           <tbody>
             <row>
@@ -305,7 +305,7 @@
                   <keycap>SHIFT</keycap> <keycap>CTRL</keycap> <keycap>C</keycap>
                 </keycombo></entry>
 
-              <entry>Экспортирует выделенный текст в файл для дальнейшей обработки. Если ничего не выделено, то экспортируется текущий сегмент целиком. Когда пользователь закрывает <application>ОмегаТ</application>, содержимое этого файла не стирается, по аналогии с обычным поведением буфера обмена. Экспортированный фрагмент копируется в файл <filename>selection.txt</filename>, расположенный в папке с пользовательскими настройками (см. раздел <xref linkend="chapter.files.and.directories"/>).</entry>
+              <entry>Экспортирует выделенный текст в файл для дальнейшей обработки. Если ничего не выделено, то экспортируется текущий сегмент целиком. Когда пользователь закрывает <application>ОмегаТ</application>, содержимое этого файла не стирается, по аналогии с обычным поведением буфера обмена. Экспортированный фрагмент копируется в файл <filename>selection.txt</filename>, расположенный в папке с пользовательскими настройками (см. раздел <xref linkend="chapter.files.and.folders"/>).</entry>
             </row>
 
             <row>
@@ -377,9 +377,9 @@
         <title>Меню «Переход»</title>
 
         <tgroup cols="3" colsep="1">
-          <colspec align="left" colnum="1" colwidth="100"/>
+          <colspec align="left" colnum="1"/>
 
-          <colspec align="left" colnum="2" colwidth="100"/>
+          <colspec align="left" colnum="2"/>
 
           <tbody>
             <row>
@@ -467,7 +467,7 @@
         <title>Меню «Вид»</title>
 
         <tgroup cols="2" colsep="1">
-          <colspec align="left" colnum="1" colwidth="100"/>
+          <colspec align="left" colnum="1"/>
 
           <tbody>
             <row>
@@ -537,7 +537,7 @@
         </indexterm>
 
         <tgroup cols="2" colsep="1">
-          <colspec align="left" colnum="1" colwidth="100"/>
+          <colspec align="left" colnum="1"/>
 
           <tbody>
             <row>
@@ -577,7 +577,7 @@
         <title>Меню «Параметры»</title>
 
         <tgroup cols="2" colsep="1">
-          <colspec align="left" colnum="1" colwidth="100"/>
+          <colspec align="left" colnum="1"/>
 
           <tbody>
             <row>
@@ -695,7 +695,7 @@
         <title>Меню «Справка»</title>
 
         <tgroup cols="2" colsep="1">
-          <colspec align="left" colnum="1" colwidth="100"/>
+          <colspec align="left" colnum="1"/>
 
           <tbody>
             <row>
@@ -767,9 +767,9 @@
         <title>Сочетания клавиш для управления проектом</title>
 
         <tgroup cols="3" colsep="1">
-          <colspec align="left" colnum="1" colwidth="100"/>
+          <colspec align="left" colnum="1"/>
 
-          <colspec align="left" colnum="2" colwidth="100"/>
+          <colspec align="left" colnum="2"/>
 
           <tbody>
             <row>
@@ -837,9 +837,9 @@
         <title>Сочетания клавиш для редактирования текста</title>
 
         <tgroup cols="3" colsep="1">
-          <colspec align="left" colnum="1" colwidth="100"/>
+          <colspec align="left" colnum="1"/>
 
-          <colspec align="left" colnum="2" colwidth="100"/>
+          <colspec align="left" colnum="2"/>
 
           <tbody>
             <row>
@@ -975,9 +975,9 @@
         <title>Сочетания клавиш для перемещения</title>
 
         <tgroup cols="3" colsep="1">
-          <colspec align="left" colnum="1" colwidth="100"/>
+          <colspec align="left" colnum="1"/>
 
-          <colspec align="left" colnum="2" colwidth="100"/>
+          <colspec align="left" colnum="2"/>
 
           <tbody>
             <row>
@@ -1051,9 +1051,9 @@
         <title>Различные сочетания клавиш</title>
 
         <tgroup cols="3" colsep="1">
-          <colspec align="left" colnum="1" colwidth="100"/>
+          <colspec align="left" colnum="1"/>
 
-          <colspec align="left" colnum="2" colwidth="100"/>
+          <colspec align="left" colnum="2"/>
 
           <tbody>
             <row>

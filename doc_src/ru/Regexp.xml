@@ -5,7 +5,7 @@
       <primary>Регулярные выражения</primary> <seealso>Сегментация</seealso> <seealso>Поиск</seealso>
     </indexterm></title>
 
-  <para>При поиске и создании правил сегментации используются регулярные выражения, поддерживаемые платформой Java. Более подробную информацию можно найти в <ulink url="http://download.oracle.com/javase/1.5.0/docs/api/java/util/regex/Pattern.html">документации Java</ulink>. Ниже приведены несколько примеров и ссылок.</para>
+  <para>При поиске и создании правил сегментации используются регулярные выражения, поддерживаемые платформой Java. Более подробную информацию можно найти в <ulink url="http://download.oracle.com/javase/1.6.0/docs/api/java/util/regex/Pattern.html">документации Java</ulink>. Ниже приведены несколько примеров и ссылок.</para>
 
   <note>
     <para>Этот раздел предназначен для опытных пользователей, которым требуется создавать собственные правила сегментации или использовать сложные и мощные функции поиска.</para>
@@ -15,7 +15,7 @@
     <title>Регулярные выражения - Модификаторы</title>
 
     <tgroup align="left" cols="2" rowsep="1">
-      <colspec align="left" colnum="1" colwidth="100"/>
+      <colspec align="left" colnum="1"/>
 
       <thead>
         <row>
@@ -39,7 +39,7 @@
     <title>Регулярные выражения - Символы</title>
 
     <tgroup align="left" cols="2" rowsep="1">
-      <colspec align="left" colnum="1" colwidth="100"/>
+      <colspec align="left" colnum="1"/>
 
       <thead>
         <row>
@@ -135,7 +135,7 @@
     <title>Регулярные выражения - Экранирование</title>
 
     <tgroup align="left" cols="2" rowsep="1">
-      <colspec align="left" colnum="1" colwidth="100"/>
+      <colspec align="left" colnum="1"/>
 
       <thead>
         <row>
@@ -177,7 +177,7 @@
     <title>Регулярные выражения - Классы блоков и категорий Юникода</title>
 
     <tgroup align="left" cols="2" rowsep="1">
-      <colspec align="left" colnum="1" colwidth="100"/>
+      <colspec align="left" colnum="1"/>
 
       <thead>
         <row>
@@ -191,13 +191,13 @@
         <row>
           <entry>\p{InGreek}</entry>
 
-          <entry>Символ из греческого блока (простой <ulink url="http://download.oracle.com/javase/1.5.0/docs/api/java/util/regex/Pattern.html#ubc">блок</ulink>)</entry>
+          <entry>Символ из греческого блока (простой <ulink url="http://download.oracle.com/javase/1.6.0/docs/api/java/util/regex/Pattern.html#ubc">блок</ulink>)</entry>
         </row>
 
         <row>
           <entry>\p{Lu}</entry>
 
-          <entry>Прописная буква (см. <ulink url="http://download.oracle.com/javase/1.5.0/docs/api/java/util/regex/Pattern.html#ubc">категории</ulink>)</entry>
+          <entry>Прописная буква (см. <ulink url="http://download.oracle.com/javase/1.6.0/docs/api/java/util/regex/Pattern.html#ubc">категории</ulink>)</entry>
         </row>
 
         <row>
@@ -225,7 +225,7 @@
     <title>Регулярные выражения - Наборы символов</title>
 
     <tgroup align="left" cols="2" rowsep="1">
-      <colspec align="left" colnum="1" colwidth="100"/>
+      <colspec align="left" colnum="1"/>
 
       <thead>
         <row>
@@ -261,7 +261,7 @@
     <title>Регулярные выражения - Предустановленные наборы символов</title>
 
     <tgroup align="left" cols="2" rowsep="1">
-      <colspec align="left" colnum="1" colwidth="100"/>
+      <colspec align="left" colnum="1"/>
 
       <thead>
         <row>
@@ -321,7 +321,7 @@
     <title>Регулярные выражения - Границы</title>
 
     <tgroup align="left" cols="2" rowsep="1">
-      <colspec align="left" colnum="1" colwidth="100"/>
+      <colspec align="left" colnum="1"/>
 
       <thead>
         <row>
@@ -363,7 +363,7 @@
     <title>Регулярные выражения - Жадные кванторы</title>
 
     <tgroup align="left" cols="2" rowsep="1">
-      <colspec align="left" colnum="1" colwidth="100"/>
+      <colspec align="left" colnum="1"/>
 
       <thead>
         <row>
@@ -403,7 +403,7 @@
     <title>Регулярные выражения - Ленивые кванторы</title>
 
     <tgroup align="left" cols="2" rowsep="1">
-      <colspec align="left" colnum="1" colwidth="100"/>
+      <colspec align="left" colnum="1"/>
 
       <thead>
         <row>
@@ -443,7 +443,7 @@
     <title>Регулярные выражения - Логические операторы</title>
 
     <tgroup align="left" cols="2" rowsep="1">
-      <colspec align="left" colnum="1" colwidth="100"/>
+      <colspec align="left" colnum="1"/>
 
       <thead>
         <row>
@@ -506,7 +506,7 @@
       <title>Регулярные выражения - Примеры использования регулярных выражений при поиске по переводам</title>
 
       <tgroup align="left" cols="2" rowsep="1">
-        <colspec align="left" colnum="1" colwidth="100"/>
+        <colspec align="left" colnum="1"/>
 
         <thead>
           <row>

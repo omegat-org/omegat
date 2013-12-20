@@ -39,7 +39,7 @@
     <section id="starting.in.misc.console.mode">
       <title>Запуск ОмегаТ в режиме командной строки</title>
 
-      <para>Для того, чтобы запустить ОмегаТ в режиме командной строки, нужно передать ей при запуске несколько параметров. Самый важный из них — <literal>&lt;project-dir&gt;</literal>, <literal> --config-dir=&lt;config-dir&gt;</literal> можно не указывать. Пример:</para>
+      <para>Для того, чтобы запустить ОмегаТ в режиме командной строки, нужно передать ей при запуске несколько параметров. Самый важный из них — <literal>&lt;project-dir&gt;</literal>, <literal>--config-dir=&lt;config-dir&gt;</literal> можно не указывать. Пример:</para>
 
       <para><literal>$&gt; java -jar <application>OmegaT</application>.jar /путь/к/проекту \</literal></para>
 

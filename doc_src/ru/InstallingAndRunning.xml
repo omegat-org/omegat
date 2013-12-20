@@ -11,15 +11,15 @@
     <section>
       <title id="which.package.to.download.windows">Загрузка пакета</title>
 
-      <para>Установлена ли у вас версия Java, совместимая с Oracle Java 1.5 JRE?</para>
+      <para>Установлена ли у вас версия Java, совместимая с Oracle Java 1.6 JRE?</para>
 
       <itemizedlist>
         <listitem>
-          <para><emphasis role="bold">Да: </emphasis>загрузите <emphasis>OmegaT_2.6.x_Windows_without_JRE.exe</emphasis>.</para>
+          <para><emphasis role="bold">Да: </emphasis>загрузите <emphasis>OmegaT_3.n.n_Windows_without_JRE.exe</emphasis>.</para>
         </listitem>
 
         <listitem>
-          <para><emphasis role="bold">Нет / не знаю:</emphasis> загрузите<emphasis> OmegaT_2.6.x_Windows.exe.</emphasis></para>
+          <para><emphasis role="bold">Нет / не знаю:</emphasis> загрузите<emphasis> OmegaT_3.n.n_Windows.exe.</emphasis></para>
 
           <para>В этот пакет включена Oracle Java Runtime Environment. Эта JRE не будет конфликтовать с другими реализациями Java, которые могут быть уже установлены на вашей системе.</para>
         </listitem>
@@ -100,15 +100,15 @@
     <section id="which.package.to.download.Linux">
       <title>Загрузка нужного пакета</title>
 
-      <para>Установлена ли у вас версия Java, совместимая с Oracle Java 1.5 JRE?</para>
+      <para>Установлена ли у вас версия Java, совместимая с Oracle Java 1.6 JRE?</para>
 
       <itemizedlist>
         <listitem>
-          <para><emphasis role="bold">Да: </emphasis>загрузите <emphasis>OmegaT_2.6.x_Without_JRE.zip</emphasis>.</para>
+          <para><emphasis role="bold">Да: </emphasis>загрузите <emphasis>OmegaT_3.n.n_Without_JRE.exe</emphasis>.</para>
         </listitem>
 
         <listitem>
-          <para><emphasis role="bold">Нет / не знаю:</emphasis> загрузите<emphasis> OmegaT_2.6.x_Linux.tar.bz2.</emphasis></para>
+          <para><emphasis role="bold">Нет / не знаю:</emphasis> загрузите<emphasis> OmegaT_3.n.n_Linux.tar.bz2.</emphasis></para>
 
           <para>В этот пакет включена Oracle Java Runtime Environment. Эта JRE не будет конфликтовать с другими реализациями Java, которые могут быть уже установлены на вашей системе.</para>
         </listitem>
@@ -198,15 +198,15 @@
     <section id="which.package.to.download.OSX">
       <title>Загрузка пакета</title>
 
-      <para>Для запуска <application>ОмегаТ</application> 2.6 требуется Java 1.5. Для того, чтобы обновить Java, нужно воспользоваться пунктом «Обновление программ...» из меню Apple.</para>
+      <para>Для запуска <application>ОмегаТ</application> 2.6 требуется Java 1.6. Для того, чтобы обновить Java, нужно воспользоваться пунктом «Обновление программ...» из меню Apple.</para>
 
-      <para>Загрузите <emphasis>OmegaT_2.6.x_Mac.zip.</emphasis></para>
+      <para>Загрузите <emphasis>OmegaT_3.n.n_Mac.zip.</emphasis></para>
     </section>
 
     <section id="OmegaT.installation.OSX">
       <title><application>Установка ОмегаТ</application></title>
 
-      <para>Дважды щёлкните на файле <emphasis>OmegaT_2.6.x_Mac.zip</emphasis>, чтобы распаковать его. Будет создана папка <emphasis> <application>OmegaT</application> </emphasis>. В папке находятся 2 файла: «index.html» и <emphasis><application>OmegaT</application>.app.</emphasis> Скопируйте папку в подходящее место (например, в «Applications»). После этого можно удалить файл <emphasis>OmegaT_2.6.x_Mac.zip</emphasis>, он вам больше не понадобится.</para>
+      <para>Дважды щёлкните на файле <emphasis>OmegaT_3.n.n_Mac.zip</emphasis>, чтобы распаковать его. Будет создана папка <emphasis> <application>OmegaT</application> </emphasis>. В папке находятся 2 файла: «index.html» и <emphasis><application>OmegaT</application>.app.</emphasis> Скопируйте папку в подходящее место (например, в «Applications»). После этого можно удалить файл <emphasis>OmegaT_3.n.n_Mac.zip</emphasis>, он вам больше не понадобится.</para>
     </section>
 
     <section id="adding.OmegaT.to.the.dock">
@@ -222,7 +222,7 @@
 
       <para>Дважды щёлкните на <emphasis> <application>OmegaT</application>.app</emphasis> или на его ярлыке в Доке.</para>
 
-      <para>Чтобы получить доступ к <application><emphasis>Info.plist</emphasis></application>, щёлкните правой кнопкой мыши по <emphasis><application>OmegaT</application>.app</emphasis> и выберите «Показать содержимое пакета», а затем откройте файл, снова щёлкнув правой кнопкой мыши и выбрав предпочитаемый текстовый редактор. Также в командной строке вы можете выполнить команду «cd», чтобы перейти в нужную папку и открыть <application><emphasis>Info.plist</emphasis> в каком-нибудь консольном редакторе, например, Emacs или vi</application>.<emphasis> <indexterm class="singular">
+      <para>Чтобы получить доступ к <application><emphasis>Info.plist</emphasis></application>, щёлкните правой кнопкой мыши по <emphasis><application>OmegaT</application>.app</emphasis> и выберите «Показать содержимое пакета», а затем откройте файл, снова щёлкнув правой кнопкой мыши и выбрав предпочитаемый текстовый редактор. You can also &quot;cd&quot; there directly from the command line and open <application><emphasis>Info.plist</emphasis> in a command line editor like emacs or vi</application>.<emphasis> <indexterm class="singular">
           <primary>Настройка ОмегаТ</primary> <secondary>OS X</secondary> <tertiary>Параметры запуска</tertiary>
         </indexterm></emphasis></para>
 
@@ -232,7 +232,7 @@
 
       <para>Чтобы одновременно запустить несколько копий <emphasis><application>OmegaT</application>.app</emphasis>, отредактируйте файл <emphasis>JavaApplicationStub</emphasis>, расположенный в <emphasis><application>OmegaT</application>.app/ Contents/MacOS/</emphasis>.</para>
 
-      <para><emphasis><application> </application></emphasis>Для запуска <application>ОмегаТ</application> из командной строки, используйте файл <emphasis><application>OmegaT</application>.jar</emphasis>, находящийся в каталоге <emphasis><application>OmegaT</application>.app/Contents/Resources/Java/</emphasis>. Более подробная информация приведена далее, в разделе «Запуск из командной строки».</para>
+      <para><emphasis><application> </application></emphasis>Use <emphasis><application>OmegaT</application>.jar</emphasis> file located in <emphasis><application>OmegaT</application>.app/Contents/Resources/Java/</emphasis> to launch <application>OmegaT</application> from the command line. Более подробная информация приведена далее, в разделе «Запуск из командной строки».</para>
     </section>
 
     <section id="Mac.OSX.goodies">
@@ -254,11 +254,11 @@
 
       <para>Пакеты <application>ОмегаТ</application> со встроенной Oracle Java JRE существуют для только платформ GNU/Linux (Intel x86) и Windows. Пользователи других платформ (GNU/Linux PowerPC, GNU/Linux x64, Solaris SPARC/x86/x64, Windows x64 и т. д.) должны удостовериться, что в их системе установлена подходящая реализация Java JRE.</para>
 
-      <para>Установлена ли у вас версия Java, совместимая с Oracle Java 1.5 JRE?</para>
+      <para>Установлена ли у вас версия Java, совместимая с Oracle Java 1.6 JRE?</para>
 
       <itemizedlist>
         <listitem>
-          <para><emphasis role="bold">Да: </emphasis>загрузите <emphasis>OmegaT_2.6.x_Windows_without_JRE.</emphasis>zip. Этот пакет можно использовать на любой платформе, где установлена версия JRE, совместимая с Java 1.5 JRE.</para>
+          <para><emphasis role="bold">Да: </emphasis>загрузите <emphasis>OmegaT_3.n.n_Windows_without_JRE.</emphasis>zip. Этот пакет можно использовать на любой платформе, где установлена версия JRE, совместимая с Java 1.6 JRE.</para>
         </listitem>
 
         <listitem>
@@ -266,9 +266,9 @@
         </listitem>
 
         <listitem>
-          <para><emphasis role="bold">Нет:</emphasis> установите версию Java JRE для вашей платформы (смотри ниже) и загрузите пакет <emphasis>OmegaT_2.6.x_Without_JRE.zip</emphasis>.</para>
+          <para><emphasis role="bold">Нет:</emphasis> установите версию Java JRE для вашей платформы (смотри ниже) и загрузите пакет <emphasis>OmegaT_3.n.n_Without_JRE.zip</emphasis>.</para>
 
-          <para>Oracle предоставляет пакеты с JRE для Solaris SPARC/x86 (Java 1.5) и GNU/Linux x64, Solaris x64, Windows x64 (Java 1.5): <ulink url="http://www.oracle.com/technetwork/java/archive-139210.html">http://www.oracle.com/technetwork/java/archive-139210.html</ulink>.</para>
+          <para>Oracle предоставляет пакеты с JRE для Solaris SPARC/x86 (Java 1.6) и GNU/Linux x64, Solaris x64, Windows x64 (Java 1.6): <ulink url="http://www.oracle.com/technetwork/java/archive-139210.html">http://www.oracle.com/technetwork/java/archive-139210.html</ulink>.</para>
 
           <para>IBM предоставляет JRE для GNU/Linux PowerPC: <ulink url="http://www.ibm.com/developerworks/java/jdk/linux/download.html">http://www.ibm.com/developerworks/java/jdk/linux/download.htm</ulink></para>
 
@@ -282,7 +282,7 @@
           <primary>Установка ОмегаТ</primary> <secondary>Другие системы</secondary>
         </indexterm></title>
 
-      <para>Чтобы установить <application>ОмегаТ</application>, просто распакуйте файл <emphasis role="bold">OmegaT_2.6.x_Without_JRE.zip</emphasis>. В текущей папке будет создан каталог <emphasis>./OmegaT_2.6.x_Without_JRE/</emphasis>, в котором вы найдёте все файлы, необходимые для запуска <application>ОмегаТ</application>.</para>
+      <para>Чтобы установить <application>ОмегаТ</application>, просто распакуйте файл <emphasis role="bold">OmegaT_3.n.n_Without_JRE.zip</emphasis>. В текущей папке будет создан каталог <emphasis>./OmegaT_3.n.n_Without_JRE/</emphasis>, в котором вы найдёте все файлы, необходимые для запуска <application>ОмегаТ</application>.</para>
     </section>
 
     <section id="installing.convenient.shortcuts">
@@ -305,7 +305,7 @@
         <primary>Запуск ОмегаТ</primary> <secondary>Использование Java Web Start</secondary>
       </indexterm></title>
 
-    <para>С помощью технологии Java Web Start (часть Java 1.5 и выше) приложения Java можно установить напрямую из Интернета всего одним щелчком мыши. Java Web Start обеспечивает установку самой последней версии приложения и нужной версии Java Runtime Environment (JRE). Чтобы установить ОмегаТ с помощью Java Web Start, перейдите по следующей ссылке:</para>
+    <para>С помощью технологии Java Web Start (часть Java 1.6 и выше) приложения Java можно установить напрямую из Интернета всего одним щелчком мыши. Java Web Start обеспечивает установку самой последней версии приложения и нужной версии Java Runtime Environment (JRE). Чтобы установить ОмегаТ с помощью Java Web Start, перейдите по следующей ссылке:</para>
 
     <para><emphasis>http://omegat.sourceforge.net/webstart/<application>OmegaT</application>.jnlp</emphasis></para>
 
@@ -399,7 +399,7 @@
 
       <itemizedlist>
         <listitem>
-          <para><emphasis role="bold">Сглаживание шрифтов</emphasis> - (только для Java 1.5)</para>
+          <para><emphasis role="bold">Сглаживание шрифтов</emphasis> - (только для Java 1.6)</para>
 
           <para><emphasis role="bold">-Dswing.aatext=true<indexterm class="singular">
               <primary>Запуск ОмегаТ</primary> <secondary>Аргументы скрипта запуска</secondary> <tertiary>Сглаживание шрифтов</tertiary>
@@ -455,7 +455,7 @@
         </listitem>
 
         <listitem>
-          <para><emphasis role="bold">Командные проекты<parameter><indexterm class="singular">
+          <para><emphasis role="bold">Team project option<parameter><indexterm class="singular">
               <primary>Запуск ОмегаТ</primary> <secondary>Аргументы скрипта запуска</secondary> <tertiary>Параметр «no-team»</tertiary>
             </indexterm></parameter></emphasis></para>
 
@@ -647,7 +647,7 @@
         <primary>Запуск ОмегаТ</primary> <secondary>Сборка ОмегаТ из исходного кода</secondary>
       </indexterm></title>
 
-    <para>Для сборки ОмегаТ из исходного кода вам понадобится утилита ant (<emphasis>http://ant.apache.org/bindownload.cgi</emphasis>). Распакуйте файл <emphasis>OmegaT_2.6.x_Source.zip</emphasis> и перейдите в каталог OmegaT_2.5.x_Source или в каталог <emphasis>./omegat/</emphasis>, если вы загрузили исходные коды из SVN. Проверьте, есть ли в этом каталоге файл «build.xml». Затем в командной строке наберите:</para>
+    <para>Для сборки ОмегаТ из исходного кода вам понадобится утилита ant (<emphasis>http://ant.apache.org/bindownload.cgi</emphasis>). Распакуйте файл <emphasis>OmegaT_3.n.n_Source.zip</emphasis> и перейдите в каталог OmegaT_3.n.n_Source или в каталог <emphasis>./omegat/</emphasis>, если вы загрузили исходные коды из SVN. Проверьте, есть ли в этом каталоге файл «build.xml». Затем в командной строке наберите:</para>
 
     <para><literal>$ ant jar release</literal></para>
 

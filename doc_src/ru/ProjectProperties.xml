@@ -76,7 +76,8 @@
       </listitem>
 
       <listitem>
-        <para>Флажок <emphasis role="bold">Автоматическое копирование переводов</emphasis><emphasis role="bold"><indexterm class="singular">
+        <para><emphasis role="bold">Autopropagation </emphasis>check
+        box<emphasis role="bold"><indexterm class="singular">
             <primary>Проект</primary> <secondary>Автоматическое копирование переводов</secondary>
           </indexterm></emphasis></para>
 

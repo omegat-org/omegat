@@ -26,7 +26,7 @@
 
   <variablelist>
     <varlistentry>
-      <term>Текст оригинала</term>
+      <term>The source text</term>
 
       <listitem>
         <para>Вы можете автоматически заполнять поле редактирования текстом оригинала. Это полезно при переводе текста, содержащего много торговых марок или других имён собственных, которые нужно оставить как есть.</para>
@@ -34,7 +34,7 @@
     </varlistentry>
 
     <varlistentry>
-      <term>Оставить сегмент пустым<indexterm class="singular">
+      <term>Leave the segment empty<indexterm class="singular">
           <primary>Менб «Параметры»</primary> <secondary>Параметры редактирования</secondary> <tertiary>Оставить сегмент пустым</tertiary>
         </indexterm></term>
 
@@ -44,7 +44,7 @@
     </varlistentry>
 
     <varlistentry>
-      <term>Вставлять лучшее нечёткое совпадение<indexterm class="singular">
+      <term>Insert the best fuzzy match<indexterm class="singular">
           <primary>Меню «Параметры»</primary> <secondary>Параметры редактирования</secondary> <tertiary>Вставка нечётких совпадений</tertiary>
         </indexterm></term>
 
@@ -58,7 +58,7 @@
 
   <variablelist>
     <varlistentry>
-      <term>Попытаться преобразовать числа при вставке нечёткого совпадения<indexterm class="singular">
+      <term>Attempt to convert numbers when inserting a fuzzy match<indexterm class="singular">
           <primary>Меню «Параметры»</primary> <secondary>Параметры редактирования</secondary> <tertiary>Преобразование чисел</tertiary>
         </indexterm></term>
 
@@ -84,7 +84,7 @@
 
   <variablelist>
     <varlistentry>
-      <term>Разрешить перевод, идентичный оригиналу<indexterm class="singular">
+      <term>Allow the translation to be equal to source<indexterm class="singular">
           <primary>Меню «Параметры»</primary> <secondary>Параметры редактирования</secondary> <tertiary>Перевод, идентичный оригиналу</tertiary>
         </indexterm></term>
 
@@ -98,7 +98,7 @@
 
   <variablelist>
     <varlistentry>
-      <term>Экспортировать сегмент в текстовый файл<indexterm class="singular">
+      <term>Export the segment to text files<indexterm class="singular">
           <primary>Меню «Параметры»</primary> <secondary>Параметры редактирования</secondary> <tertiary>Экспорт текущего сегмента</tertiary>
         </indexterm></term>
 
@@ -126,7 +126,8 @@
 
   <variablelist>
     <varlistentry>
-      <term>Переход к следующему непереведённому сегменту приостанавливается, если есть хотя бы один альтернативный вариант перевода<indexterm class="singular">
+      <term>Go To Next Untranslated Segment stops where there is at least one
+      alternative translation<indexterm class="singular">
           <primary>Меню «Параметры»</primary> <secondary>Параметры редактирования</secondary> <tertiary>Сегменты с альтернативными вариантами перевода</tertiary>
         </indexterm></term>
 

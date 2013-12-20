@@ -13,13 +13,13 @@
     <section id="tmx.files.location.and.purpose">
       <title>Каталоги tmx - расположение и назначение</title>
 
-      <para>В проектах <application>ОмегаТ</application> файлы памяти перевода, т. е. файлы с расширением «tmx», могут храниться в четырёх разных местах.</para>
+      <para>В проектах <application>ОмегаТ</application> файлы памяти перевода, т. е. файлы с расширением «tmx», могут храниться в пяти разных местах.</para>
 
       <variablelist>
         <varlistentry>
           <term><indexterm class="singular">
               <primary>Память переводов</primary> <secondary>Подкаталог «omegat»</secondary> <seealso>Файлы прокта</seealso>
-            </indexterm>подкаталог «omegat»</term>
+            </indexterm>omegat folder</term>
 
           <listitem>
             <para>Папка «omegat» содержит файл <filename>project_save.tmx</filename> и, возможно, некоторое количество его резервных копий. Файл <filename>project_save.tmx</filename> содержит все сегменты, которые были сохранены в памяти программы с момента начала проекта. Этот файл всегда присутствует во всех проектах. Его содержимое всегда отсортировано по исходным сегментам в алфавитном порядке.</para>
@@ -29,7 +29,7 @@
         <varlistentry>
           <term><indexterm class="singular">
               <primary>Память переводов</primary> <secondary>Главный каталог проекта</secondary>
-            </indexterm>главный каталог проекта</term>
+            </indexterm>main project folder</term>
 
           <listitem>
             <para>Главный каталог проекта содержит три TMX-файла: <filename>имя_проекта-omegat.tmx</filename>, <filename>имя_проекта-level1.tmx</filename> и <filename>имя_проекта-level2.tmx</filename>.</para>
@@ -53,9 +53,9 @@
         </varlistentry>
 
         <varlistentry>
-          <term>подкаталог <filename><indexterm class="singular">
+          <term><filename><indexterm class="singular">
               <primary>Память переводов</primary> <secondary>Подкаталог «tm»</secondary> <seealso>Файлы прокта</seealso>
-            </indexterm>«tm»</filename></term>
+            </indexterm>tm</filename> folder</term>
 
           <listitem>
             <para>Каталог «/tm/» может содержать любое количество справочных TMX-файлов. Эти файлы могут быть в любом из трёх описанных выше вариантах. Заметьте, что другие системы автоматизированного перевода могут также производить экспорт (и импорт) TMX-файлов во всех вариантах. Лучше всего, конечно, использовать TMX-файлы со специфичными для ОмегаТ тегами (см. выше), чтобы сохранить информацию о внутреннем форматировании сегментов.</para>
@@ -75,7 +75,7 @@
         <varlistentry>
           <term><indexterm class="singular">
               <primary>Память переводов</primary> <secondary>Подкаталог «tm/auto»</secondary> <seealso>Файлы проекта</seealso>
-            </indexterm>подкаталог «tm/auto»<indexterm class="singular">
+            </indexterm>tm/auto folder<indexterm class="singular">
               <primary>Проект</primary> <secondary>Предварительный перевод</secondary>
             </indexterm></term>
 
@@ -87,7 +87,7 @@
         <varlistentry>
           <term><indexterm class="singular">
               <primary>Память переводов</primary> <secondary>Подкаталоги tm/penalty-xxx</secondary> <seealso>Файлы проекта</seealso>
-            </indexterm>подкаталоги «tm/penalty-xxx»</term>
+            </indexterm>tm/penalty-xxx folders</term>
 
           <listitem>
             <para>Иногда требуется отделить высококачественные файлы памяти переводов от менее надёжных (например, относящихся к другой тематике или ещё не отредактированных). Для памяти переводов, хранящейся в подкаталогах «penalty-xxx» (где «xxx» это число от 0 до 100), будет автоматически занижаться процент совпадений, в соответствии с названием каталога, например, точные совпадения из памяти переводов, хранящейся в каталоге «penalty-30», будут помечаться как семидесятипроцентные. Это относится и к остальным совпадениям: сегменты с 75, 80 и 90 процентами совпадений будут отмечаться как имеющие 45, 50 и 60 %.</para>
@@ -336,8 +336,8 @@
         <primary>Память переводов</primary> <secondary>Обновление файлов памяти переводов для сегментации по предложениям</secondary>
       </indexterm></title>
 
-    <para>Ранние версии <application>ОмегаТ</application> умели производить сегментацию исходных файлов только по абзацам и непоследовательно нумеровали теги форматирования в файлах HTML и Open Document. <application>ОмегаТ</application> 2.5 может определять и исправлять такие TMX-файлы «на лету», что позволяет улучшить качество нечётких совпадений и более эффективно использовать существующие переводы, тем самым освобождая переводчика от лишней работы.</para>
+    <para>Ранние версии <application>ОмегаТ</application> умели производить сегментацию исходных файлов только по абзацам и непоследовательно нумеровали теги форматирования в файлах HTML и Open Document. <application>ОмегаТ</application> может определять и исправлять такие TMX-файлы «на лету», что позволяет улучшить качество нечётких совпадений и более эффективно использовать существующие переводы, тем самым освобождая переводчика от лишней работы.</para>
 
-    <para>Главный TMX-файл проекта обновляется только один раз и записывается в <filename>project-save.tmx</filename>. Обычные старые TMX-файлы обновляются «на лету» каждый раз при загрузке проекта. Следует иметь в виду, что некоторые изменения в фильтрах <application>ОмегаТ</application> 2.5 могут привести к совершенно другой сегментации, поэтому иногда (в редких случаях) вам придётся обновлять перевод вручную.</para>
+    <para>Главный TMX-файл проекта обновляется только один раз и записывается в <filename>project-save.tmx</filename>. Обычные старые TMX-файлы обновляются «на лету» каждый раз при загрузке проекта. Следует иметь в виду, что некоторые изменения в фильтрах <application>ОмегаТ</application> могут привести к совершенно другой сегментации, поэтому иногда (в редких случаях) вам придётся обновлять перевод вручную.</para>
   </section>
 </chapter>

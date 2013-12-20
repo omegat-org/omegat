@@ -1,0 +1,351 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<chapter id="chapter.files.and.folders">
+  <title>Файлы и каталоги <application>ОмегаТ</application></title>
+
+  <para><application>ОмегаТ</application> работает с файлами трёх типов.</para>
+
+  <itemizedlist>
+    <listitem>
+      <para>Файлы проекта перевода: они представляют собой проект перевода. Их потеря может повлиять на целостность проекта и на успешное завершение вашей работы. Это самые важные файлы в <application>ОмегаТ</application>. С этими файлами вы будете сталкиваться каждый день в процессе перевода.</para>
+    </listitem>
+  </itemizedlist>
+
+  <itemizedlist>
+    <listitem>
+      <para>Файлы пользовательских настроек: они создаются, когда пользователь изменяет настройки ОмегаТ. Их потеря приведёт к тому, что ОмегаТ вернётся к настройкам по умолчанию. Может быть весьма неприятно, если это случится посреди процесса перевода.</para>
+    </listitem>
+  </itemizedlist>
+
+  <itemizedlist>
+    <listitem>
+      <para>Файлы приложения ОмегаТ: они включены в пакет, который вы загружаете. Большинство из них необходимы для нормальной работы программы. Если по какой-то причине эти файлы были удалены или испорчены, просто повторно загрузите и/или переустановите ОмегаТ.</para>
+    </listitem>
+  </itemizedlist>
+
+  <section id="translation.project.files">
+    <title>Файлы проекта перевода</title>
+
+    <indexterm class="singular">
+      <primary>Файлы проекта</primary> <secondary>Файлы проекта перевода</secondary>
+    </indexterm>
+
+    <para>Проект перевода <application>ОмегаТ</application> состоит из нескольких файлов и каталогов.</para>
+
+    <para>При создании проекта, ОмегаТ автоматически создаёт одноимённый каталог и несколько подкаталогов внутри него:</para>
+
+    <figure id="OmegaT.project">
+      <title>Проект ОмегаТ</title>
+
+      <mediaobject>
+        <imageobject role="html">
+		          <imagedata fileref="images/Omegatproject.png"/>
+       </imageobject>
+      <imageobject role="fo">
+          <imagedata fileref="images/Omegatproject.png" width="60%"/>
+        </imageobject>
+      </mediaobject>
+	  </figure>
+
+    <para>При создании проекта, и в дальнейшем, в процессе перевода, для некоторых из этих подкаталогов можно задать другое расположение. Таким образом, возможно выбрать уже существующие каталоги или создать их там, где вы посчитаете нужным, в соответствии с вашим рабочим процессом. Чтобы изменить расположение каталогов после создания проекта, выберите пункт меню <guimenuitem>«Проект → Свойства...»</guimenuitem>, или нажмите клавиши <guibutton>CTRL+E</guibutton>, и внесите необходимые изменения.</para>
+
+    <para>В файловом менеджере проект перевода выглядит так же, как и любая другая папка. На иллюстрации ниже в папке <filename>my projects</filename> находятся три проекта ОмегаТ:</para>
+
+    <para><figure id="OmegaT.projects.and.subfolders">
+        <title>Проекты ОмегаТ и подкаталоги</title>
+
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="images/OmegaT_projects_and_subfolders.png"/>
+          </imageobject>
+        </mediaobject>
+      </figure></para>
+
+    <para>Чтобы открыть проект, достаточно дважды щёлкнуть мышкой по любой из записей со значком ОмегаТ. Переводческий проект <emphasis role="bold">Тестовый проект</emphasis>, созданный с настройками по умолчанию, будет представлять из себя новую вложенную папку со следующей структурой:</para>
+
+    <section id="file.omegat.project">
+      <title>Главная (корневая) папка<indexterm class="singular">
+          <primary>Файлы проекта</primary> <secondary>Файл «omegat.project»</secondary>
+        </indexterm></title>
+
+      <para>В главной папке находится файл <filename> OmegaT.Project</filename>, в котором хранятся все настройки проекта, заданные через соответствующее диалоговое окно (<guimenuitem>«Проект &gt; Свойства»</guimenuitem>). В процессе перевода в этой папке также создаются и периодически пополняются другие файлы (<emphasis><filename>имя_проекта</filename></emphasis><filename>-omegat.tmx, имя_проекта-level1.tmx и имя_проекта-level2.tmx</filename>). В них, в немного разном виде, хранится память переводов, которую можно использовать в последующих проектах.</para>
+    </section>
+
+    <section>
+      <title>Подкаталог «dictionary»</title>
+
+      <para>Изначально этот подкаталог пуст, в него вы можете самостоятельно добавить словари, которые планируете использовать в проекте. Более подробную информацию можно найти в разделе <link linkend="chapter.dictionaries">Словари</link></para>
+    </section>
+
+    <section>
+      <title>Подкаталог «glossary»</title>
+
+      <para>Изначально этот каталог пуст. В нём будут храниться глоссарии проекта. Более подробную информацию можно найти в разделе <link linkend="chapter.glossaries">Глоссарии</link></para>
+    </section>
+
+    <section id="folder.OmegaT">
+      <title>Подкаталог «omegat»<indexterm class="singular">
+          <primary>Файлы проекта</primary> <secondary>Подкаталог «omegat»</secondary>
+        </indexterm></title>
+
+      <para>В подкаталоге <emphasis role="bold">omegat</emphasis> содержится как минимум один из описанных ниже файлов. Самый важный файл — <filename>project_save.tmx</filename>, рабочая память переводов проекта. В том же подкаталоге регулярно появляются резервные копии этого файла (с расширением «bak»), в начале и конце сеанса перевода, а также по мере работы. Тем самым, ОмегаТ предотвращает потерю важных данных, более подробная информация представлена в разделе <link linkend="chapter.misc">Разное</link>.</para>
+
+      <para>По мере перевода, в этом подкаталоге могут быть созданы следующие файлы:</para>
+
+      <para><informaltable>
+          <tgroup align="left" cols="2" rowsep="1">
+            <colspec align="left" colnum="1"/>
+
+            <tbody>
+              <row>
+                <entry>stats.txt</entry>
+
+                <entry><indexterm class="singular">
+                    <primary>Файлы проекта</primary> <secondary>файл статистики</secondary>
+                  </indexterm>в этом файле хранится статистика проекта. Вы можете просмотреть её, выбрав пункт меню <guimenuitem>«Инструменты &gt; Статистика»</guimenuitem></entry>
+              </row>
+
+              <row>
+                <entry>ignored_words.txt. learned_words.txt</entry>
+
+                <entry><indexterm class="singular">
+                    <primary>Файлы проекта</primary> <secondary>ignored_words и learned_words</secondary>
+                  </indexterm>эти файлы создаются и используются при проверке орфографии. Если у вас уже есть списки слов, которые надо игнорировать или добавить в словарь, их можно просто скопировать в соответствующие файлы в каталоге <filename>omegat</filename>.</entry>
+              </row>
+
+              <row>
+                <entry>project_stats_match.txt</entry>
+
+                <entry>в этом файле содержится статистика по совпадениям в проекте, созданная при выборе пункта меню <guimenuitem>«Инструменты &gt; Статистика по совпадениям»</guimenuitem></entry>
+              </row>
+
+              <row>
+                <entry>segmentation.conf</entry>
+
+                <entry>в этом файле (если он существует) содержатся настройки сегментации, используемые только для текущего проекта. Эти настройки задаются в диалоговом окне <guimenuitem>«Проект &gt; Свойства...»</guimenuitem>. См. раздел <link linkend="chapter.project.properties">Свойства проекта</link></entry>
+              </row>
+
+              <row>
+                <entry>filters.xml</entry>
+
+                <entry>в этом файле (если он существует) содержатся настройки файловых фильтров, используемые только для текущего проекта. Эти настройки задаются в диалоговом окне <guimenuitem>Проект &gt; Свойства... </guimenuitem>. См. раздел <link linkend="chapter.project.properties">Свойства проекта</link></entry>
+              </row>
+            </tbody>
+          </tgroup>
+        </informaltable></para>
+    </section>
+
+    <section id="folder.source">
+      <title>Подкаталог «source»<indexterm class="singular">
+          <primary>Файлы проекта</primary> <secondary>Подкаталог «source»</secondary>
+        </indexterm></title>
+
+      <para>В подкаталоге «source» хранятся файлы, которые нужно перевести. Вы можете добавить их позже. Структура папки «source» может быть какой угодно. Если файлы для перевода — часть сложной иерархической структуры папок, вам нужно лишь указать папку верхнего уровня и ОмегаТ скопирует всё её содержимое, сохранив изначальную структуру каталогов и файлов.</para>
+    </section>
+
+    <section id="folder.target">
+      <title>Подкаталог «target»<indexterm class="singular">
+          <primary>Файлы проекта</primary> <secondary>Подкаталог «target»</secondary>
+        </indexterm></title>
+
+      <para>Изначально этот подкаталог пуст. Чтобы добавить в него файлы, выберите пункт меню <menuchoice> <shortcut> <keycombo> <keycap>CTRL</keycap> <keycap>D</keycap> </keycombo> </shortcut> <guimenu>«Проект</guimenu> <guimenuitem>Создать переведённые документы»</guimenuitem> </menuchoice>. В каталоге будут созданы файлы из каталога <filename>source</filename>, вне зависимости от того, были ли они переведены или нет, с той же иерархией, что и в самом каталоге «source». Созданные в каталоге «target» файлы будут отражать текущее состояние проекта, все сегменты, для которых в <emphasis role="bold">/omegat/project_save.tmx</emphasis> имеется перевод, будут переведены. Не переведённые сегменты останутся на языке оригинала.</para>
+    </section>
+  </section>
+
+  <section id="user.files">
+    <title>Файлы пользовательских настроек<indexterm class="singular">
+        <primary>Файлы проекта</primary> <secondary>Файлы пользовательских настроек</secondary>
+      </indexterm></title>
+
+    <para>Пользовательские файлы содержат информацию, относящуюся ко всем проектам данного пользователя.</para>
+
+    <informaltable>
+      <tgroup align="left" cols="2" rowsep="1">
+        <colspec align="left" colnum="1"/>
+
+        <tbody>
+          <row>
+            <entry>logs/OmegaT.log</entry>
+
+            <entry>В этом файле записываются ошибки Java, возникающие при работе <application>ОмегаТ</application>. Если вы считаете, что ОмегаТ работает неправильно, то к сообщению об ошибке нужно прикрепить этот файл.</entry>
+          </row>
+
+          <row>
+            <entry>script/</entry>
+
+            <entry>в этой папке хранятся скрипты для модуля «Scripting», если он установлен</entry>
+          </row>
+
+          <row>
+            <entry>filters.xml</entry>
+
+            <entry>Пользовательские файловые фильтры по умолчанию</entry>
+          </row>
+
+          <row>
+            <entry>omegat.prefs</entry>
+
+            <entry>Настройки ОмегаТ</entry>
+          </row>
+
+          <row>
+            <entry>segmentation.conf</entry>
+
+            <entry>Пользовательские правила сегментации по умолчанию</entry>
+          </row>
+
+          <row>
+            <entry>uiLayout.xml</entry>
+
+            <entry>XML-файл, в котором хранятся параметры, настраиваемые через пользовательский интерфейс.</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </informaltable>
+
+    <para>Заметьте, что настройки по умолчанию для правил сегментации и файловых фильтров имеют меньший приоритет, чем настройки для конкретного проекта (см. выше). Расположение пользовательских файлов зависит от операционной системы.</para>
+
+    <informaltable>
+      <tgroup align="left" cols="2" rowsep="1">
+        <colspec align="left" colnum="1"/>
+
+        <tbody>
+          <row>
+            <entry>Windows 2000 и XP</entry>
+
+            <entry><literal>Documents and Settings\&lt;Имя пользователя&gt;\Application Data\<application>OmegaT</application></literal></entry>
+          </row>
+
+          <row>
+            <entry>Windows Vista и 7</entry>
+
+            <entry><literal>Users\&lt;Имя пользователя&gt;\AppData\Roaming\<application>OmegaT</application></literal></entry>
+          </row>
+
+          <row>
+            <entry>другие версии Windows</entry>
+
+            <entry><literal>&lt;Где-то-что-то&gt;\<application>OmegaT</application></literal> (&lt;Где-то-что-то&gt; соответствует расположению папки «home», как она определена для Java)</entry>
+          </row>
+
+          <row>
+            <entry>GNU/Linux / Solaris / FreeBSD</entry>
+
+            <entry><literal>&lt;домашний каталог&gt;/.omegat</literal> (.omegat — это каталог, точка перед именем делает его скрытым, если только вы не введёте команду «ls -a» или эквивалентную ей.)</entry>
+          </row>
+
+          <row>
+            <entry>Mac OS X</entry>
+
+            <entry><filename>&lt;Домашний каталог&gt;/Library/Preferences/<application>OmegaT</application></filename></entry>
+          </row>
+
+          <row>
+            <entry>Другие</entry>
+
+            <entry><filename>&lt;Домашний каталог пользователя&gt;</filename></entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </informaltable>
+  </section>
+
+  <section id="application.files">
+    <title>Файлы приложения<indexterm class="singular">
+        <primary>Файлы проекта</primary> <secondary>Файлы приложения</secondary>
+      </indexterm></title>
+
+    <para>ОмегаТ поставляется в виде установочного пакета, который можно загрузить с SourceForge. Здесь идёт речь об обычном, платформо-независимом java пакете. Среди других пакетов — пакет «.tar» для GNU/Linux, программа установки для Windows с или без Java Runtime Environment, программа установки для Mac OS X и пакет с исходными кодами программы для разработчиков.</para>
+
+    <para>Платформо-независимый пакет можно использовать на любой системе, где установлена JRE 1.6, включая платформы, для которых существуют специальные пакеты. Этот пакет представляет собой архив (ZIP или TAR), который нужно распаковать в любую папку на ваш выбор. Распаковка обычно осуществляется двойным щелчком мыши по загруженному файлу. После распаковки будет создана папка, со следующим содержимым:</para>
+
+    <informaltable>
+      <tgroup align="left" cols="2" rowsep="1">
+        <colspec align="left" colnum="1"/>
+
+        <tbody>
+          <row>
+            <entry><emphasis role="bold">Файл/подкаталог</emphasis></entry>
+
+            <entry><emphasis role="bold">Содержимое</emphasis></entry>
+          </row>
+
+          <row>
+            <entry><filename>/docs/</filename></entry>
+
+            <entry>Здесь находятся все файлы руководства пользователя. Для того, чтобы пользоваться ссылками на внешние ресурсы, нужно открыть эти файлы в веб-браузере.</entry>
+          </row>
+
+          <row>
+            <entry><filename>/images/</filename></entry>
+
+            <entry>Значки и логотипы</entry>
+          </row>
+
+          <row>
+            <entry><filename>/lib/</filename></entry>
+
+            <entry>Java-файлы, необходимые для работы <application>ОмегаТ</application>.</entry>
+          </row>
+
+          <row>
+            <entry><filename>join.html</filename></entry>
+
+            <entry>Это обычный HTML-файл; если вы откроете его в веб-браузере, он перенаправит вас на страницу списка рассылки пользователей ОмегаТ на сервере Yahoo! Groups. Вам не обязательно подписываться на него, но подписка откроет вам доступ к дополнительным возможностям, например, к загрузке некоторых файлов и к опросам. Кроме того, вы сможете принять участие в обсуждении ОмегаТ. Архивы обсуждений находятся в открытом доступе, для чтения подписка не требуется.</entry>
+          </row>
+
+          <row>
+            <entry><filename>changes.txt</filename></entry>
+
+            <entry>Относительно полный список изменений по сравнению с предыдущими версиями программы.</entry>
+          </row>
+
+          <row>
+            <entry><filename>license.txt</filename></entry>
+
+            <entry>Лицензия GNU GENERAL PUBLIC LICENSE. Согласно этой лицензии, в отношении <application>ОмегаТ</application> у вас имеются некоторые свободы, включая право изменять и распространять эту программу. Если вы собираетесь это делать, то сначала внимательно ознакомьтесь с текстом лицензии и удостоверьтесь, что вы правильно понимаете и осознаете всё, о чём там написано. Если возникают сомнения — не стесняйтесь задавать вопросы участникам проекта. Вы можете написать им напрямую со страницы SourceForge или послать сообщение в пользовательский список рассылки.</entry>
+          </row>
+
+          <row>
+            <entry><filename>doc-license.txt</filename></entry>
+
+            <entry>Лицензия GNU GENERAL PUBLIC LICENSE. Документация также выпущена под этой лицензией. Смотри выше.</entry>
+          </row>
+
+          <row>
+            <entry><filename>readme.txt</filename></entry>
+
+            <entry>Этот файл очень важен. Обязательно прочтите его до первого запуска ОмегаТ. В нём содержится основная информация о программе, о том, где найти дополнительную информацию, как помочь проекту и т. п. Он переведён на несколько языков.</entry>
+          </row>
+
+          <row>
+            <entry><application>OmegaT</application></entry>
+
+            <entry><para>Текстовый файл, который содержит две строки:</para>
+
+            <programlisting>#!/bin/bash java
+java -jar OmegaT.jar $*</programlisting>
+
+            <para>Этот файл может оказаться полезным для пользователей GNU/Linux и OS X. Откройте командную строку, перейдите в каталог программы и сделайте файл исполняемым (<literal>chmod +x OmegaT</literal>). После этого вы сможете запускать ОмегаТ, вызывая из командной строки файл</para>
+            </entry>
+          </row>
+          
+          <row>
+            <entry>OmegaT.bat</entry>
+
+            <entry><para>Пакетный файл, который используется для запуска <application>ОмегаТ</application> из командной строки Windows. Он содержит только одну строку:</para>
+
+            <programlisting>java -jar OmegaT.jar %*</programlisting>
+            </entry>
+          </row>
+          
+          <row>
+            <entry><literal>OmegaT.jar</literal></entry>
+
+            <entry>Собственно, программа ОмегаТ. Для запуска ОмегаТ вам нужно либо вызвать этот файл из командной строки, либо запустить его из вашего файлового менеджера двойным щелчком мыши.</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </informaltable>
+  </section>
+</chapter>

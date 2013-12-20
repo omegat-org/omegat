@@ -1,4 +1,4 @@
-@@TRANSLATION_NOTICE@@
+Перевод на русский язык: © Андрей Кутузов, Андрей Сербовец, Павел Марьянов, Михаил Васильев 2013.
 
 ==============================================================================
   ОмегаТ 3.0, файл Read Me
@@ -18,13 +18,13 @@
       http://www.omegat.org/
 
 Поддержка пользователей осуществляется в многоязычной почтовой рассылке на Yahoo (архивы рассылки доступны без подписки):
-     http://groups.yahoo.com/group/OmegaT/
+     http://tech.groups.yahoo.com/group/OmegaT/
 
 Запросы на новые возможности (на английском языке) можно разместить на SourceForge:
-     http://sourceforge.net/tracker/?group_id=68187&atid=520350
+     https://sourceforge.net/p/omegat/feature-requests/
 
 Там же можно опубликовать сообщения об ошибках (на английском языке):
-     http://sourceforge.net/tracker/?group_id=68187&atid=520347
+     https://sourceforge.net/p/omegat/bugs/
 
 ==============================================================================
   2.  Что собой представляет ОмегаТ?
@@ -186,10 +186,10 @@ omegat.kaptn
 
 Если вы хотите перевести интерфейс ОмегаТ, руководство пользователя или другие документы, прочитайте этот текст:
       
-      http://www.omegat.org/en/translation-info.html
+      http://www.omegat.org/en/howtos/localizing_omegat.php
 
 И подпишитесь на список рассылки переводчиков:
-      http://lists.sourceforge.net/mailman/listinfo/omegat-l10n
+      https://lists.sourceforge.net/lists/listinfo/omegat-l10n
 
 Если у вас есть другие предложения, подпишитесь на список рассылки для пользователей:
       http://tech.groups.yahoo.com/group/omegat/
@@ -261,8 +261,17 @@ omegat.kaptn
   JSch (лицензия JSch)
   Base64 (общественное достояние)
   Diff (лицензия GPL)
-  JSAP (лицензия LGPL)
   orion-ssh2-214 (лицензия Orion SSH для Java)
+  lucene-*.jar (лицензия Apache 2.0)
+  Токенизаторы для английского языка (org.omegat.tokenizer.SnowballEnglishTokenizer и
+  org.omegat.tokenizer.LuceneEnglishTokenizer) используют список стоп-слов от проекта Okapi (http://okapi.sourceforge.net) (лицензия LGPL)
+  tinysegmenter.jar (модифицированная лицензия BSD)
+  commons-*.jar (лицензия Apache 2.0)
+  jWordSplitter (лицензия Apache 2.0)
+  LanguageTool.jar (лицензия LGPL)
+  morfologik-*.jar (лицензия Morfologik)
+  segment-1.4.1.jar (лицензия Segment)
+  pdfbox-app-1.8.1.jar (лицензия Apache 2.0)
 
 ==============================================================================
  5.  ОмегаТ работает неправильно? Нужна помощь?
@@ -279,12 +288,12 @@ omegat.kaptn
 Вы можете прикрепить копии файлов, фрагменты логов, скриншоты — всё, что по вашему мнению, поможет разработчикам найти и исправить ошибку.
 
 Чтобы просмотреть архивы списка рассылки для пользователей ОмегаТ, зайдите на:
-     http://groups.yahoo.com/group/OmegaT/
+     http://tech.groups.yahoo.com/group/OmegaT/
 
 Чтобы просмотреть страницу сообщений об ошибках и отправить новое сообщение, перейдите на страницу по адресу:
-     http://sourceforge.net/tracker/?group_id=68187&atid=520347
+     https://sourceforge.net/p/omegat/bugs/
 
-Чтобы отслеживать состояние своего сообщения об ошибке, можно зарегистрироваться на SourceFourge.
+Чтобы отслеживать состояние своего сообщения об ошибке, стоит зарегистрироваться на SourceForge.
 
 ==============================================================================
 6.   Сведения о выпуске

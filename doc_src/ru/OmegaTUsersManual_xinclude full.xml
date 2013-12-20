@@ -2,7 +2,7 @@
 <!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
 <book lang="ru">
   <bookinfo>
-    <title>Руководство пользователя ОмегаТ</title>
+    <title>Руководство пользователя ОмегаТ 3.0</title>
 
     <authorinitials>vs</authorinitials>
 
@@ -31,7 +31,7 @@
 
   <xi:include href="FileFilters.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
 
-  <xi:include href="FilesAndDirectories.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+  <xi:include href="FilesAndFolders.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
 
   <xi:include href="FilesToTranslate.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
 

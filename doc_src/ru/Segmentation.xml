@@ -19,7 +19,7 @@
     <varlistentry>
       <term><indexterm class="singular">
           <primary>Сегментация</primary> <secondary>Сегментация на уровне структуры текста</secondary>
-        </indexterm>Сегментация на уровне структуры текста</term>
+        </indexterm>Structure level segmentation</term>
 
       <listitem>
         <para>Сначала <application>ОмегаТ</application> просматривает текст для осуществления сегментации на уровне структуры. На этом этапе для сегментации используется только информация о структуре текста.</para>
@@ -31,7 +31,7 @@
     <varlistentry>
       <term><indexterm class="singular">
           <primary>Сегментация</primary> <secondary>Сегментация на уровне предложений</secondary>
-        </indexterm>Сегментация на уровне предложений</term>
+        </indexterm>Sentence level segmentation</term>
 
       <listitem>
         <para>После сегментации исходного файла на структурные фрагменты, <application>ОмегаТ</application> начинает их сегментирование по предложениям.</para>
@@ -52,7 +52,7 @@
       <varlistentry>
         <term><indexterm class="singular">
             <primary>Сегментация</primary> <secondary>Правила</secondary> <tertiary>Правило разрыва</tertiary>
-          </indexterm>Правило разрыва</term>
+          </indexterm>Break rule</term>
 
         <listitem>
           <para>Разделяет исходный текст на сегменты. Например, предложение «<emphasis>Стоило ли это делать? Не уверен</emphasis>.» должно быть разделено на два сегмента. То есть, нужно определить правило разрыва для символа «?», за которым следует пробел и слово с прописной буквы. Флажок «Разрывы/исключения» определяет, является ли правило разрывом (флажок установлен) или исключением (флажок снят).</para>
@@ -64,7 +64,7 @@
       <varlistentry>
         <term><indexterm class="singular">
             <primary>Сегментация</primary> <secondary>Правила</secondary> <tertiary>Правило-исключение</tertiary>
-          </indexterm>Правило-исключение</term>
+          </indexterm>Exception rule</term>
 
         <listitem>
           <para>Определяет, в какой части текста НЕ должна происходить сегментация. Несмотря на точку, словосочетание <emphasis>«Mrs. Dalloway»</emphasis> не нужно разделять на два сегмента, поэтому нужно определить правило-исключение для строки Mrs (а также Mr, Dr, prof и т. д.) с точкой справа. Чтобы указать, что правило является исключением, оставьте флажок «Разрыв/исключение» снятым.</para>
@@ -104,13 +104,13 @@
 
     <informaltable>
       <tgroup cols="4">
-        <colspec align="left" colnum="1" colwidth="150"/>
+        <colspec align="left" colnum="1"/>
 
-        <colspec align="center" colnum="2" colwidth="60"/>
+        <colspec align="center" colnum="2"/>
 
-        <colspec align="center" colnum="3" colwidth="60"/>
+        <colspec align="center" colnum="3"/>
 
-        <colspec align="left" colnum="4" colwidth="190"/>
+        <colspec align="left" colnum="4"/>
 
         <thead>
           <row>

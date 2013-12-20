@@ -9,14 +9,14 @@
 
   Localisation updates:
 
-- Italian localisation updated to 3.0.8 (UI, documentation)
-- Hungarian localisation updated to 3.0.8 (Tutorial)
-- Czech localisation updated to 3.0.2 (UI, documentation)
+- Italian localisation updated to 3.0.8 (UI, Documentation)
+- Hungarian localisation updated to 3.0.8 (Instant Start)
+- Czech localisation updated to 3.0.2 (UI, Documentation)
 - German localisation updated to 3.0 (UI)
-- Russian localisation updated to 3.0.3 (UI, documentation)
-- Greek localisation updated to 3.0 (Manual)
-- Belarus localisation updated to 3.0 (UI, tutorial, readme)
-- Korean localisation added at 3.0.7 (UI, tutorial, readme)
+- Russian localisation updated to 3.0.3 (UI, Documentation)
+- Greek localisation updated to 3.0 (Documentation)
+- Belarus localisation updated to 3.0 (UI, Instant Start, Readme)
+- Korean localisation added at 3.0.7 (UI, Instant Start, Readme)
 - Dutch localisation updated to 3.0.8 (UI)
 - Simplified Chinese localisation updated to 3.0.7 (UI)
 

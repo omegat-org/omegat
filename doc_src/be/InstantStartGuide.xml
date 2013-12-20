@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<chapter id="chapter.instant.start.guide">
+  <title>Навучэцеся карыстацца OmegaT за 5 хвілін!</title>
+
+  <section id="create.and.open.new.project">
+    <title>Стварыць новы праект<indexterm class="singular">
+        <primary>Праект</primary> <secondary>стварыць / адчыніць</secondary>
+      </indexterm></title>
+
+    <para><remark>Заўвага:</remark>На кампутарах Apple Mac клявіша <keycap>Command</keycap> выкарыстоўваецца замест <keycap>Ctrl</keycap>.</para>
+
+      <indexterm class="singular">
+        <primary>Мэню Праект</primary> <secondary>Стварыць праект</secondary>
+      </indexterm>
+
+    <para>Каб пачаць выкарыстоўваць OmegaT, спачатку неабходна стварыць праект, які будзе ўтрымліваць усе файлы, такія як зыходны файл, файлы памяці перакладаў, глясар, а таксама файлы зь перакладамі. У мэню <guimenu>Праект</guimenu> выбраць <menuchoice><guimenuitem>Стварыць праект…</guimenuitem></menuchoice>, надрукаваць назву праекта. Памятайце, дзе вы ствараеце праект, таму што потым спатрэбіцца вярнуцца да яго.</para>
+
+    <para>Пасьля таго як вы падасьце назву праекта, зьявіцца дыялёгавае вакно стварэньня новага праекта<guilabel></guilabel>. У верхняй частцы гэтага дыялёгавага вакна трэба выбраць мову зыходнага файла і мову перакладу, затым націснуць <guibutton>ОК</guibutton>, каб працягнуць.</para>
+
+    <para>Зьмяніць іншыя парамэтры ў гэтым дыялогу можна ў які заўгодна час, дастаткова вызваць яго, націснуўшы <keycap>Ctrl+E.</keycap></para>
+
+    <para>Далей зьявіцца дыялёгавае вакно файлаў праекта<guilabel></guilabel>. Каб выбраць зыходныя файлы, трэба націснуць «Імпарт зыходных файлаў…».<guibutton></guibutton> OmegaT затым скапіюе выбраныя файлы ў паддырэкторыю <filename>/source/</filename> новага праекта. Пасля таго, як зыходныя файлы загружаныя ў панэль рэдагаваньня<guilabel></guilabel><guilabel></guilabel>, можна зачыніць дыялёг файлаў праекта.</para>
+  </section>
+
+  <section id="translate.the.segments.one.by.one">
+    <title>Перакладаньне файла</title>
+
+    <para>Падчас перакладаньня OmegaT паказвае тэкст сэгмэнт за сэгмэнтам. Пераклаўшы сэгмэнт, націскайце <keycap>Ctrl+U</keycap>, каб перайсьці да наступнага неперакладзенага сэгмэнта (або <keycap>Ctrl+Shift+U</keycap>, каб перайсьці да наступнага перакладзенага сэгмэнта). Каб пабачыць, як будзе выглядаць пераклад у канчатковым фармаце, трэба націснуць <keycap>Ctrl+D</keycap> для кампіляцыі дакумэнта перакладу, які будзе створаны ў паддырэкторыі праекта <filename>/target/</filename>. У працэсе перакладу карыстайцеся функцыямі з мэню <guimenu>Праўка</guimenu> і <guimenu>Пераход</guimenu>.</para>
+  </section>
+
+  <section>
+    <title>Праверка тэгаў</title>
+
+    <para>Калі зыходны файл утрымлівае тэкст з фарматаваньнем (напрыклад, Microsoft Word, LibreOffice Writer або HTML), OmegaT пераўтворыць фарматаваньне ў тэгі, якія атачаюць перакладаны тэкст. Часта дакументы будуць мець тэгі, якія ня маюць нічога агульнага з фарматаваньнем, але таксама зьяўляюцца важнымі (як для зыходных файлаў, так і для перакладаў). У зыходным файле зыходны сказ можа выглядаць наступным чынам:<mediaobject>
+      <imageobject role="html">
+        <imagedata align="justify" fileref="images/InstantGuide_1.png"/>
+      </imageobject>
+      <imageobject role="fo">
+        <imagedata align="justify" fileref="images/InstantGuide_1.png" width="40%"/>
+      </imageobject>
+    </mediaobject>
+    </para>
+
+    <para>А OmegaT прадставіць яго вось як:<mediaobject>
+      <imageobject role="html">
+        <imagedata align="justify" fileref="images/InstantGuide_2.png"/>
+      </imageobject>
+      <imageobject role="fo">
+        <imagedata align="justify" fileref="images/InstantGuide_2.png" width="45%"/>
+      </imageobject>
+    </mediaobject>
+    </para>
+    
+    <para>Тэгі ў OmegaT выдзяляюцца шэрым колерам, таму іх лёгка пазнаць. Яны абароненыя, і таму іх нельга зьмяняць уручную, але можна выдаляць, уводзіць уручную або перасоўваць у тэксьце перакладу. Аднак, калі зробленыя памылкі пры ўводзе тэгаў фарматаваньня, перакладзены файл можа не адкрыцца. Таму перад кампіляцыяй дакумэнтаў перакладаў націскайце <keycap>Ctrl+Shift+V</keycap>, каб праверыць правільнасьць тэгаў.</para>
+  </section>
+
+  <section>
+    <title>Кампіляцыя перакладу</title>
+
+    <para>Пераканаўшыся ў адсутнасьці памылак тэгаў у перакладзе, націскайце <keycap>Ctrl+D</keycap> для кампіляцыі файлаў перакладу, якія будуць створаныя ў паддырэкторыі <filename>/target/</filename> вашага праекта.</para>
+  </section>
+
+  <section>
+    <title>Што яшчэ варта памятаць</title>
+
+    <itemizedlist>
+      <listitem>
+        <para>Калі файл не загружаецца ў панэль рэдагаваньня<guilabel></guilabel>, магчыма, ён мае фармат, які не падтрымліваецца OmegaT. Гл. сьпіс фарматаў файлаў, якія OmegaT можа апрацаваць, у разьдзеле <link linkend="chapter.file.filters">«Файлавыя фільтры»</link>.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Можна ствараць новы праект для кожнай новай працы, а таксама можна дадаваць новыя зыходныя файлы ў праект у які заўгодна момант.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Каб удакладніць наладкі праекта, адкрыйце дыялёгавае вакно праўкі праекта, націснуўшы <keycap>Ctrl+E</keycap>. Каб праглядзець сьпіс файлаў у праекце, адкрыйце дыялёгавае вакно <guilabel>файлаў праекта</guilabel>, націснуўшы <keycap>Ctrl+L</keycap>.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Пасьля завяршэньня перакладу OmegaT робіць экспарт у тры файлы памяці перакладаў, якія маюць у сваіх назвах <filename>“level1”</filename>, <filename>“level2”</filename> і <filename>“omegat”</filename>, у дырэкторыі праекта. Файлы з <filename>“level1”</filename> або <filename>“level2”</filename> у назвах можна выкарыстоўваць для абмену зь іншымі праграмамі аўтаматызацыі перакладу. Файл з <filename>omegat</filename> у назьве можна выкарыстаць у самой OmegaT, у будучых праектах, якія вы створыце. Калі памясьціць такія файлы памяці перакладаў у паддырэкторыю <filename>/tm/</filename> праекта, OmegaT будзе аўтаматычна шукаць у іх падобныя сэгмэнты, г. зв. «недакладныя супадзеньні».</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Можна дадаваць новыя тэрміны ў глясар, націскаючы <keycap>Ctrl+Shift+G</keycap>, або капіяваць існуючыя глясары ў паддырэкторыю <filename>/glossary/</filename> дырэкторыі праекта, і OmegaT аўтаматычна пачне шукаць словы ў іх.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Вельмі часта карысна пашукаць словы і фразы ў зыходным тэксце і ў перакладзе, таму націскайце <keycap>Ctrl+F</keycap>, каб вызваць дыялёг пошуку тэксту <guilabel></guilabel>ў які заўгодна час.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Больш падрабязныя ўводзіны ўтрымліваюцца ў дапаможніку <ulink url="http://www.omegat.org/en/tutorial/OmegaT%20for%20Beginners.pdf">OmegaT для пачаткоўцаў</ulink> на сайце OmegaT (на ангельскай мове). Калі спатрэбіцца дапамога ў любым аспэкце OmegaT, далучайцеся да <ulink url="http://tech.groups.yahoo.com/group/OmegaT/">групы карыстальнікаў OmegaT</ulink>.</para>
+      </listitem>
+    </itemizedlist>
+  </section>
+</chapter>

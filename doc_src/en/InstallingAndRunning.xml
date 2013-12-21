@@ -822,7 +822,7 @@
       the command would be:</para>
 
       <para><literal>java -Dswing.aatext=true -Duser.language=pt
-      -Duser.country=BR -Xmx1024M <application>-DDhttp.proxyHost=192.168.1.1
+      -Duser.country=BR -Xmx1024M <application>-Dhttp.proxyHost=192.168.1.1
       -Dhttp.proxyport<emphasis role="bold">=</emphasis>3128 -jar
       -OmegaT</application>.jar</literal></para>
     </section>

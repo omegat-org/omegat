@@ -18,7 +18,7 @@
 - Belarus localisation updated to 3.0 (UI, Instant Start, Readme)
 - Korean localisation added at 3.0.7 (UI, Instant Start, Readme)
 - Dutch localisation updated to 3.0.8 (UI)
-- Simplified Chinese localisation updated to 3.0.7 (UI)
+- Simplified Chinese localisation updated to 3.0.8 (UI)
 
 ----------------------------------------------------------------------
  OmegaT 3.0.8

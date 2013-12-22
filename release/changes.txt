@@ -3,22 +3,23 @@
 ----------------------------------------------------------------------
    0 Enhancement
    0 Bug fix
-   10 Localisation updates
+   11 Localisation updates
 ----------------------------------------------------------------------
 3.0.8 update 1 vs. 3.0.8
 
   Localisation updates:
 
-- Italian localisation updated to 3.0.8 (UI, Documentation)
-- Hungarian localisation updated to 3.0.8 (Instant Start)
-- Czech localisation updated to 3.0.2 (UI, Documentation)
-- German localisation updated to 3.0 (UI)
-- Russian localisation updated to 3.0.3 (UI, Documentation)
-- Greek localisation updated to 3.0 (Documentation)
-- Belarus localisation updated to 3.0 (UI, Instant Start, Readme)
-- Korean localisation added at 3.0.7 (UI, Instant Start, Readme)
-- Dutch localisation updated to 3.0.8 (UI)
-- Simplified Chinese localisation updated to 3.0.8 (UI)
+  - Italian localisation updated to 3.0.8 (UI, Documentation)
+  - Hungarian localisation updated to 3.0.8 (Instant Start)
+  - Czech localisation updated to 3.0.2 (UI, Documentation)
+  - German localisation updated to 3.0 (UI)
+  - Russian localisation updated to 3.0.3 (UI, Documentation)
+  - Greek localisation updated to 3.0 (Documentation)
+  - Belarus localisation updated to 3.0 (UI, Instant Start, Readme)
+  - Korean localisation added at 3.0.7 (UI, Instant Start, Readme)
+  - Dutch localisation updated to 3.0.8 (UI)
+  - Simplified Chinese localisation updated to 3.0.8 (UI)
+  - Japanese localisation updated to 3.0.8 (UI, Documentation)
 
 ----------------------------------------------------------------------
  OmegaT 3.0.8

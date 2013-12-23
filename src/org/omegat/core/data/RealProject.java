@@ -144,6 +144,11 @@ public class RealProject implements IProject {
 
     protected ProjectTMX projectTMX;
 
+    /**
+     * True if project loaded successfully.
+     */
+    private boolean loaded = false;
+
     // Sets of exist entries for check orphaned
     private Set<String> existSource = new HashSet<String>();
     private Set<EntryKey> existKeys = new HashSet<EntryKey>();
@@ -303,6 +308,8 @@ public class RealProject implements IProject {
 
             allProjectEntries = Collections.unmodifiableList(allProjectEntries);
 
+            loaded = true;
+
             // Project Loaded...
             Core.getMainWindow().showStatusMessageRB(null);
 
@@ -366,7 +373,7 @@ public class RealProject implements IProject {
      * {@inheritDoc}
      */
     public boolean isProjectLoaded() {
-        return projectTMX != null;
+        return loaded;
     }
 
     /**

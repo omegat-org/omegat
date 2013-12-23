@@ -49,8 +49,8 @@ public class ProjectFactory {
      */
     public static void createProject(ProjectProperties newProps) {
         RealProject p = new RealProject(newProps, null);
-        p.createProject();
         Core.setProject(p);
+        p.createProject();
         Core.getAutoSave().enable();
         CoreEvents.fireProjectChange(IProjectEventListener.PROJECT_CHANGE_TYPE.CREATE);
     }
@@ -65,11 +65,13 @@ public class ProjectFactory {
     public static void loadProject(ProjectProperties props, IRemoteRepository repository, boolean onlineMode) {
         Core.getAutoSave().disable();
         RealProject p = new RealProject(props, repository);
+        Core.setProject(p);
         p.loadProject(onlineMode);
         if (p.isProjectLoaded()) {
-            Core.setProject(p);
             Core.getAutoSave().enable();
             CoreEvents.fireProjectChange(IProjectEventListener.PROJECT_CHANGE_TYPE.LOAD);
+        } else {
+            Core.setProject(new NotLoadedProject());
         }
     }
 

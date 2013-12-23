@@ -48,6 +48,7 @@ import javax.swing.UIManager;
 import org.omegat.convert.ConvertConfigs;
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
+import org.omegat.core.data.NotLoadedProject;
 import org.omegat.core.data.ProjectProperties;
 import org.omegat.core.data.RealProject;
 import org.omegat.core.data.SourceTextEntry;
@@ -462,13 +463,12 @@ public class Main {
         }
 
         RealProject p = new RealProject(projectProperties);
+        Core.setProject(p);
         if (loadProject) {
             p.loadProject(true);
-            if (p.isProjectLoaded()) {
-                Core.setProject(p);
+            if (!p.isProjectLoaded()) {
+                Core.setProject(new NotLoadedProject());
             }
-        } else {
-            Core.setProject(p);
         }
         return p;
     }

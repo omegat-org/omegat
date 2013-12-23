@@ -2,10 +2,15 @@
  OmegaT 3.0.8 update 1
 ----------------------------------------------------------------------
    0 Enhancement
-   0 Bug fix
+   1 Bug fix
    11 Localisation updates
 ----------------------------------------------------------------------
 3.0.8 update 1 vs. 3.0.8
+
+  Bug fixes:
+
+  - Word: anything placed before the leading tag is omitted in translated document 
+  https://sourceforge.net/p/omegat/bugs/634/
 
   Localisation updates:
 

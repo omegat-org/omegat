@@ -7,7 +7,7 @@
                2007 Didier Briel
                2010 Antonio Vilei
                2012 Didier Briel
-               2013 Alex Buloichik
+               2013 Alex Buloichik, Didier Briel
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -338,7 +338,12 @@ public class Entry {
         if (!found)
             lastGood = textEnd;
 
-        boolean removeTags = Core.getFilterMaster().getConfig().isRemoveTags();
+        boolean removeTags;
+        if (Core.getProject().getProjectProperties().isRemoveTags()) { // If Remove Tags is on
+            removeTags = true;                                         // Remove leading and trailing tags must be on
+        } else {
+            removeTags = Core.getFilterMaster().getConfig().isRemoveTags();
+        }
         // tags was already removed - restore they if need
         if (!removeTags) {
             for (int i = firstGood - 1; i >= 0; i--) {

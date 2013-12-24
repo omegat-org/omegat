@@ -63,7 +63,7 @@
         </indexterm></term>
 
       <listitem>
-        <para>If this option is checked, when a fuzzy match is inserted, either manually or automatically, OmegaT attempts to convert the numbers in the fuzzy matches according to the source contents. Er zijn een aantal beperkingen:</para>
+        <para>Indien deze optie is geselecteerd zal OmegaT, wanneer een fuzzy overeenkomst wordt ingevoegd, handmatig of automatisch, de getallen in de fuzzy overeenkomst proberen te converteren in overeenstemming met de inhoud van de bron. Er zijn een aantal beperkingen:</para>
 
         <itemizedlist>
           <listitem>

@@ -88,7 +88,7 @@
             <primary>Project</primary> <secondary>Optie Tags verwijderen</secondary>
           </indexterm></para>
 
-        <para>Indien ingeschakeld worden alle tags voor opmaak verwijderd uit de bronsegmenten. Dit is in het bijzonder handig als teksten worden afgehandeld waarin in-regelige opmaak geen echt nut heeft (bijv. ge-OCRde pdf, slecht geconverteerde .odt of docx, etc.) In een normaal geval zou het altijd mogelijk moeten zijn om de doeldocumenten te kunnen openen, omdat alleen de in-regelige tags worden verwijderd. Niet-zichtbare opmaak (d.i. die niet als tags verschijnen in de bewerker van OmegaT) wordt in de doeldocumenten behouden.</para>
+        <para>Indien ingeschakeld worden alle tags voor opmaak verwijderd uit de bronsegmenten. Dit is in het bijzonder handig als teksten worden afgehandeld waarin in-regelige opmaak geen echt nut heeft (bijv. ge-OCRde pdf, slecht geconverteerde .odt of .docx, etc.) In een normaal geval zou het altijd mogelijk moeten zijn om de doeldocumenten te kunnen openen, omdat alleen de in-regelige tags worden verwijderd. Niet-zichtbare opmaak (d.i. die niet als tags verschijnen in de bewerker van OmegaT) wordt in de doeldocumenten behouden.</para>
       </listitem>
     </itemizedlist>
 

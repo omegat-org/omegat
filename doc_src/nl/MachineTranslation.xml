@@ -52,7 +52,7 @@
             <primary>Sneltoetsen</primary> <secondary>Machinevertaling - Ctrl+M</secondary>
           </indexterm>Ctrl</keycap> <keycap>M</keycap> </keycombo> om het doelgedeelte van het geopende segment te vervangen. In het segment hierboven, bijvoorbeeld, zou <keycombo> <keycap>Ctrl</keycap> <keycap>M</keycap> </keycombo> de Spaanse versie overschrijven met de Sloveense suggestie.</para>
 
-    <para>Indien u niet wilt dat <application>OmegaT</application> uw bronsegmenten verstuurt naar Google om te worden vertaald, verwijdert u het vinkje vóór het menuitem Google Translate in Opties.</para>
+    <para>Indien u niet wilt dat <application>OmegaT</application> uw bronsegmenten verstuurt naar Google om te worden vertaald, verwijdert u het vinkje vóór het menu-item Google Translate in Opties.</para>
 
     <para>Onthoud dat er niets anders dan het bronsegment wordt verzonden naar de service van de machinevertaling. De online versie van Google Translate maakt het de gebruiker mogelijk om de suggestie te corrigeren en het gecorrigeerde segment in te sturen. Deze mogelijkheid is echter niet geïmplementeerd in OmegaT.</para>
   </section>

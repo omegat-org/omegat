@@ -52,7 +52,7 @@
     <para>In een bestandsbeheerder ziet een vertaalproject er precies zo uit als elke andere map en gedraagt zich ook zo. In het volgende voorbeeld bevat de map <filename>mijn projecten</filename> drie projecten van OmegaT:</para>
 
     <para><figure id="OmegaT.projects.and.subfolders">
-        <title>OmegaT projecten en mappen</title>
+        <title>OmegaT projecten en submappen</title>
 
         <mediaobject>
           <imageobject>
@@ -90,7 +90,7 @@
 
       <para>De submap <emphasis role="bold">omegat</emphasis> bevat ten minste één en mogelijk meerdere andere bestanden. Het meest belangrijke bestand is hier <filename>project_save.tmx, </filename>dat het werkende vertaalgeheugen voor het project is. Back-ups van dit bestand (met de extensie bak) worden progressief toegevoegd aan deze map, eerst aan het begin van de vertaalsessie, aan het einde daarvan en als de vertaling vordert. Op deze manier wordt een onbedoeld verlies van gegevens vermeden - bekijk Gegevensverlies voorkomen in hoofdstuk <link linkend="chapter.misc">Diverse onderwerpen.</link></para>
 
-      <para>Gedurende de vertaling kunnen als volgt aanvullende bestanden in deze map worden gecreëerd</para>
+      <para>Gedurende de vertaling kunnen als volgt aanvullende bestanden in deze submap worden gecreëerd</para>
 
       <para><informaltable>
           <tgroup align="left" cols="2" rowsep="1">
@@ -326,7 +326,7 @@
             <programlisting>#!/bin/bash java
 java -jar OmegaT.jar $*</programlisting>
 
-            <para>Linux- en OS X-gebruikers zouden dit handig kunnen vinden. Maak het uitvoerbaar (<literal>chmod +x OmegaT</literal>) vanaf de opdrachtregel nadat u zich er van overtuigd hebt dat u in de toepassingsmap OmegaT bent. U kunt dan OmegaT starten door dit bestand vanaf de opdrachtregel uit te voeren</para>
+            <para>Linux- en OS X-gebruikers zouden dit handig kunnen vinden. Maak het uitvoerbaar (<literal>chmod +x OmegaT</literal>) vanaf de opdrachtregel nadat u zich er van overtuigd hebt dat u in de toepassingsmap van OmegaT bent. U kunt dan OmegaT starten door dit bestand vanaf de opdrachtregel uit te voeren.</para>
             </entry>
           </row>
           

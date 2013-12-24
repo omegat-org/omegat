@@ -2,7 +2,7 @@
 <!DOCTYPE appendix PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
 <appendix id="appendix.TeamProjects">
   <title>OmegaT Teamprojecten<indexterm class="singular">
-      <primary>OmegaT</primary> <secondary>Team projects</secondary> <seealso>Teamprojecten</seealso>
+      <primary>OmegaT</primary> <secondary>Teamprojecten</secondary> <seealso>Teamprojecten</seealso>
     </indexterm></title>
 
   <section>
@@ -122,7 +122,7 @@
  
       <para>Voer, in het veld <emphasis role="bold">URL of repository</emphasis>, de URL in die werd verschaft door ProjectLocker. Zorg er voor dat het veld <emphasis role="bold">Checkout directory</emphasis> juist is correct, d.i. de lege map specificeert die u hebt gemaakt, en druk op <emphasis role="bold">OK</emphasis>. Als de bewerking eenmaal is voltooid kunt u de betreffende map controleren: die zou nu een submap .svn moeten bevatten en een groen schild OK op het pictogram ervan zal aangeven dat de inhoud van de map up-to-date is:</para>
 
-      <para>In de volgende stap zullen we de bestanden voor OmegaT  aan de lokale map toevoegen. De volgende bestanden dienen te worden gedeeld door de leden van het team en dienen dus in elk geval daarin te worden opgenomen:</para>
+      <para>In de volgende stap zullen we de bestanden voor OmegaT aan de lokale map toevoegen. De volgende bestanden dienen te worden gedeeld door de leden van het team en dienen dus in elk geval daarin te worden opgenomen:</para>
 
       <itemizedlist>
         <listitem>
@@ -172,7 +172,7 @@
 
         </listitem>
         <listitem>
-          <para><emphasis role="bold">indienen (commit) van lokale wijzigingen naar de server: </emphasis>klik met rechts op de map voor de lokale checkout en selecteer <guilabel>SVN Commit....</guilabel> Het venster Commit - zie hierionder - opent. Vink de wijzigingen aan die moeten worden gemaakt - d.i. de mappen en bestanden die in dit geval moeten worden toegevoegd.</para>
+          <para><emphasis role="bold">indienen (commit) van lokale wijzigingen naar de server: </emphasis>klik met rechts op de map voor de lokale checkout en selecteer <guilabel>SVN Commit....</guilabel> Het venster Commit - zie hieronder - opent. Vink de wijzigingen aan die moeten worden gemaakt - d.i. de mappen en bestanden die in dit geval moeten worden toegevoegd.</para>
  
           <mediaobject>
             <imageobject role="html">
@@ -187,7 +187,7 @@
         </listitem>
 
         <listitem>
-          <para><emphasis role="bold">lokale bestanden in de kopie op de lokale opslagplaats bijwerken</emphasis> - de ontvangen wijzigingen van de opslagplaats op de server bevinden zich in de map .svn  maar nog niet in de bestanden en mappen zelf. Klik met rechts op de map voor de checkout en selecteer <guilabel>SVN Update</guilabel> om de lokale bestanden bij te werken. Vink de inhoud van de map aan om te bevestigen dat de lokale kopie van de opslagplaats en de overeenkomstige bestanden en mappen overeenkomen met de laatste versie op de server:</para>
+          <para><emphasis role="bold">lokale bestanden in de kopie op de lokale opslagplaats bijwerken</emphasis> - de ontvangen wijzigingen van de opslagplaats op de server bevinden zich in de map .svn maar nog niet in de bestanden en mappen zelf. Klik met rechts op de map voor de checkout en selecteer <guilabel>SVN Update</guilabel> om de lokale bestanden bij te werken. Vink de inhoud van de map aan om te bevestigen dat de lokale kopie van de opslagplaats en de overeenkomstige bestanden en mappen overeenkomen met de laatste versie op de server:</para>
 
           <mediaobject>
             <imageobject role="html">

@@ -113,7 +113,7 @@
           <primary>Vertaalgeheugens</primary> <secondary>back-up</secondary>
         </indexterm></title>
 
-      <para>Tijdens het vertalen van uw bestanden slaat <application>OmegaT</application> uw werk doorlopend op in <filename>project_save.tmx</filename> in de submap /<filename>omegat</filename> van het project.</para>
+      <para>Tijdens het vertalen van uw bestanden slaat <application>OmegaT</application> uw werk op in <filename>project_save.tmx</filename> in de submap /<filename>omegat</filename> van het project.</para>
 
       <para><application>OmegaT</application> maakt ook, elke keer als een project wordt geopend of herladen, een back-up van het vertaalgeheugen in <filename>project_save.tmx.JAARMMDDUUMM.bak</filename> in dezelfde submap. JAAR is 4-getallen jaar, MM is een maand, DD dag van de maand, UU en MM zijn uren en minuten van wanneer het vorige vertaalgeheugen werd opgeslagen.</para>
 
@@ -281,7 +281,7 @@
           <primary>Vertaalgeheugens</primary> <secondary>Alternatieve paren van taal</secondary>
         </indexterm></title>
 
-      <para>Er kunnen gevallen zijn waar u een project hebt gedaan met bijvoorbeeld Nederlandstalige bronnen en een vertaling in, zeg Engels. Dan hebt u ene vertaling nodig voor bijvoorbeeld Chinees, maar uw vertaler begrijpt geen Nederlands; zij begrijpt echter uitstekend Engels. In dit geval kan het vertaalgeheugen voor NL-EN dienen als een tussenstation om een NL-ZH-vertaling te genereren.</para>
+      <para>Er kunnen gevallen zijn waar u een project hebt gedaan met bijvoorbeeld Nederlandstalige bronnen en een vertaling in, zeg Engels. Dan hebt u een vertaling nodig voor bijvoorbeeld Chinees, maar uw vertaler begrijpt geen Nederlands; zij begrijpt echter uitstekend Engels. In dit geval kan het vertaalgeheugen voor NL-EN dienen als een tussenstation om een NL-ZH-vertaling te genereren.</para>
 
       <para>De oplossing in ons voorbeeld is om het bestaande vertaalgeheugen te kopiëren naar de submap tm en ze te hernoemen naar ZH_CN.tmx om de doeltaal van de tmx aan te geven. De vertaler zal Engelse vertalingen te zien krijgen voor bronsegmenten in Nederlands en die gebruiken om de Chinese vertaling te maken.</para>
 
@@ -336,8 +336,8 @@
         <primary>Vertaalgeheugens</primary> <secondary>bijwerken naar zinsegmentatie</secondary>
       </indexterm></title>
 
-    <para>Hele vroege versies van <application>OmegaT</application> waren slechts in staat bronbestanden in alinea's te segmenteren en nummerden de tags voor opmaak in HTML- en Open Document-bestanden niet consistent. <application>OmegaT</application> 2.5 kan dergelijke TMX-bestanden herkennen en direct bijwerken om de kwaliteit van de fuzzy overeenkomsten te vergroten en uw vertaling op peil te brengen, zodat u dat werk niet handmatig hoeft te doen.</para>
+    <para>Hele vroege versies van <application>OmegaT</application> waren slechts in staat bronbestanden in alinea's te segmenteren en nummerden de tags voor opmaak in HTML- en Open Document-bestanden niet consistent. <application>OmegaT</application> kan dergelijke TMX-bestanden herkennen en direct bijwerken om de kwaliteit van de fuzzy overeenkomsten te vergroten en uw vertaling op peil te brengen, zodat u dat werk niet handmatig hoeft te doen.</para>
 
-    <para>De TMX van een project wordt maar één keer bijgewerkt en zal in de bijgewerkte vorm worden weggeschreven in <filename>project-save.tmx</filename>; eerder gemaakte TMX-bestanden worden, elke keer als het project wordt geladen, direct bijgewerkt. Wees er attent op dat sommige wijzigingen in bestandsfilters in <application>OmegaT</application> 2.5 zouden kunnen leiden tot totaal afwijkende segmentatie; als resultaat daarvan moet u in zulke zeer uitzonderlijke gevallen uw vertaling handmatig bijwerken.</para>
+    <para>De TMX van een project wordt maar één keer bijgewerkt en zal in de bijgewerkte vorm worden weggeschreven in <filename>project-save.tmx</filename>; eerder gemaakte TMX-bestanden worden, elke keer als het project wordt geladen, direct bijgewerkt. Wees er attent op dat sommige wijzigingen in bestandsfilters in <application>OmegaT</application> zouden kunnen leiden tot totaal afwijkende segmentatie; als resultaat daarvan moet u in zulke zeer uitzonderlijke gevallen uw vertaling handmatig bijwerken.</para>
   </section>
 </chapter>

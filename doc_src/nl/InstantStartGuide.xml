@@ -8,31 +8,31 @@
         <primary>Project</primary> <secondary>Maak / open nieuw</secondary>
       </indexterm></title>
 
-    <para><remark>Opmerking:</remark> Op een Apple Mac, gebruik de toets <keycap>Command</keycap> in plaats van de toets <keycap>Ctrl</keycap></para>
+    <para><remark>Opmerking:</remark> Gebruik, op een Apple Mac, de toets <keycap>Cmd</keycap> in plaats van de toets <keycap>Ctrl</keycap></para>
 
       <indexterm class="singular">
         <primary>menu Project</primary> <secondary>Nieuw...</secondary>
       </indexterm>
 
-    <para>Maak eerst een project dat al uw bestanden zal bevatten, zoals uw bronbestanden, vertaalgeheugens, woordenlijsten en uiteindelijk uw vertaalde bestand, om te beginnen met het gebruiken van OmegaT. In het menu <guimenu>Project</guimenu>, selecteer <menuchoice><guimenuitem>Nieuw...</guimenuitem></menuchoice> en typ een naam in voor uw project. Onthoud waar u het project maakt, omdat u er later naar terug moet keren.</para>
+    <para>Maak eerst een project dat al uw bestanden zal bevatten, zoals uw bronbestanden, vertaalgeheugens, woordenlijsten en uiteindelijk uw vertaalde bestand, om te beginnen met het gebruiken van OmegaT. In het menu <guimenu>Project</guimenu>, selecteer <menuchoice> <guimenuitem>Nieuw...</guimenuitem> </menuchoice> en typ een naam in voor uw project. Onthoud waar u het project maakt, omdat u er later naar terug moet keren.</para>
 
     <para>Nadat u het project een naam hebt gegeven, zal het dialoogvenster <guilabel>Nieuw project maken</guilabel> openen. Selecteer, aan het begin van dat dialoogvenster, uw taal voor de bronbestanden en de taal waarin uw vertaalde bestand moet zijn, en klik op <guibutton>OK </guibutton>om door te gaan.</para>
 
     <para>Indien u geïnteresseerd bent in andere instellingen van dit dialoogvenster, kunt u er op elk moment naar terugkeren door te drukken op <keycap>Ctrl+E.</keycap></para>
 
-    <para>Vervolgens opent het dialoogvenster <guilabel>Projectbestanden</guilabel>. Klik op <guibutton>Kopieer bestanden naar map Bronbestanden...</guibutton> om uw bronbestanden te selecteren. OmegaT zal dan de geselecteerde bestanden kopiëren naar de submap <filename>/source/</filename>van uw nieuw gemaakte project. Nadat de bronbestanden zijn geladen in het venster <guilabel>Bewerken</guilabel> kunt u het dialoogvenster <guilabel>Projectbestanden</guilabel> sluiten.</para>
+    <para>Vervolgens opent het dialoogvenster <guilabel>Projectbestanden</guilabel>. Klik op <guibutton>Bronbestanden importeren...</guibutton> om uw bronbestanden te selecteren. OmegaT zal dan de geselecteerde bestanden kopiëren naar de submap <filename>/source/</filename>van uw nieuw gemaakte project. Nadat de bronbestanden zijn geladen in het venster <guilabel>Bewerken</guilabel> kunt u het dialoogvenster <guilabel>Projectbestanden</guilabel> sluiten.</para>
   </section>
 
   <section id="translate.the.segments.one.by.one">
     <title>Vertaal het bestand</title>
 
-    <para>OmegaT zal één segment per keer presenteren om door u te worden vertaald. Nadat u elk segment hebt vertaald, druk op <keycap>Ctrl+U </keycap>om naar het volgende niet-vertaalde segment te gaan (of druk op <keycap>Ctrl+Shift+U </keycap>om naar het volgende vertaalde segment te gaan). Wanneer u wilt zien hoe uw vertaling eruit zal zien in zijn uiteindelijke opmaak, druk op <keycap>Ctrl+D</keycap> om het vertaalde document te genereren, dat zal worden gemaakt in de submap <filename>/target/</filename> van uw projectmap. Gebruik, gedurende het vertalen, de menu's <guimenu>Bewerken</guimenu> en <guimenu>Ga naar</guimenu> om verschillende handige functies uit te voeren.</para>
+    <para>OmegaT zal één segment per keer presenteren om door u te worden vertaald. Nadat u elk segment hebt vertaald, druk op <keycap>Ctrl+U </keycap>om naar het volgende niet-vertaalde segment te gaan (of op <keycap>Ctrl+Shift+U</keycap> om naar het volgende vertaalde segment te gaan). Wanneer u wilt zien hoe uw vertaling eruit zal zien in zijn uiteindelijke opmaak, druk op <keycap>Ctrl+D</keycap> om het vertaalde document te genereren, dat zal worden gemaakt in de submap <filename>/target/</filename> van uw projectmap. Gebruik, gedurende het vertalen, de menu's <guimenu>Bewerken</guimenu> en <guimenu>Ga naar</guimenu> om verschillende handige functies uit te voeren.</para>
   </section>
 
   <section>
     <title>Valideren van uw tags</title>
 
-    <para>Als uw bronbestanden opgemaakte bestanden zijn, bijv. Microsoft Word, LibreOffice Writer of HTML, zal OmegaT de opmaak converteren naar tags die de tekst die u vertaalt omsluiten. Documenten hebben ook vaak tags die niets te maken hebben met opmaak, maar die ook belangrijk zijn in de bronbestanden (en in de vertaalde bestanden).  Een zin in de bron zou er uit kunnen zien als:<mediaobject>
+    <para>Als uw bronbestanden opgemaakte bestanden zijn, bijv. Microsoft Word, LibreOffice Writer of HTML, zal OmegaT de opmaak converteren naar tags die de tekst die u vertaalt omsluiten. Documenten hebben ook vaak tags die niets te maken hebben met opmaak, maar die ook belangrijk zijn in de bronbestanden (en in de vertaalde bestanden). Een bronzin zou er uit kunnen zien als:<mediaobject>
       <imageobject role="html">
         <imagedata align="justify" fileref="images/InstantGuide_1.png"/>
       </imageobject>
@@ -52,13 +52,13 @@
     </mediaobject>
     </para>
     
-    <para>De tags in OmegaT zijn grijs, zodat zij eenvoudig te herkennen zijn. Zij zijn beveiligd zodat u de inhoud ervan niet kunt aanpassen, maar u kunt ze verwijderen, ze handmatig invoeren of ze verplaatsen in de doelzin. Indien u echter fouten maakte bij het typen van de tags voor de opmaak, kan het zijn dat uw vertaalde bestanden niet willen openen. Druk daarom op <keycap>Ctrl+T</keycap> vóórdat u uw vertaalde bestanden genereert, om te valideren dat uw tags juist zijn.</para>
+    <para>De tags in OmegaT zijn grijs, zodat zij eenvoudig te herkennen zijn. Zij zijn beveiligd, zodat u hun inhoud niet kunt wijzigen, maar u kunt ze verwijderen, ze handmatig invoeren of ze verplaatsen in de doelzin. Indien u echter fouten maakte bij het typen van de tags voor de opmaak, kan het zijn dat uw vertaalde bestanden niet willen openen. Druk daarom op <keycap>Ctrl+Shift+V</keycap> vóórdat u uw vertaalde document genereert, om te valideren dat uw tags juist zijn.</para>
   </section>
 
   <section>
     <title>Genereren van het vertaalde bestand</title>
 
-    <para>Als u zich er eenmaal van overtuigd hebt dat er geen tagfouten meer in uw vertaling staan, druk dan op <keycap>Ctrl+D</keycap> om de doelbestanden te genereren, die zullen worden gemaakt in de submap <filename>/target/</filename> van uw projectmap.</para>
+    <para>Als u zich er eenmaal van overtuigd hebt dat er geen tagfouten meer in uw vertaling staan, druk dan op <keycap>Ctrl+D</keycap> om de doelbestanden te genereren, die zullen worden gemaakt in de submap<filename> /target/</filename> van uw projectmap.</para>
   </section>
 
   <section>
@@ -66,7 +66,7 @@
 
     <itemizedlist>
       <listitem>
-        <para>Indien een bestand niet wordt geladen in het venster <guilabel>Bewerken</guilabel>, dan zou het kunnen zijn dat uw bronbestand in een indeling is die niet werkt in OmegaT. Zie <link linkend="chapter.file.filters">Bestandsfilters</link> voor een lijst van bestandsindelingen die OmegaT kan afhandelen.</para>
+        <para>Indien een bestand niet wordt geladen in het venster <guilabel>Bewerken</guilabel>, dan zou het kunnen zijn dat het in een indeling is die niet werkt in OmegaT. Zie <link linkend="chapter.file.filters">Bestandsfilters</link> voor een lijst van bestandsindelingen die OmegaT kan afhandelen.</para>
       </listitem>
     </itemizedlist>
 
@@ -84,13 +84,13 @@
 
     <itemizedlist>
       <listitem>
-        <para>Aan het einde van uw vertaling exporteert OmegaT drie vertaalgeheugens, genaamd <filename>level1</filename>, <filename>level2</filename> en <filename>omegat</filename> naar uw projectmap. De geheugens <filename>level1</filename> en <filename>level2</filename> kunnen worden gedeeld met gebruikers van andere vertaalprogramma's. Het geheugen genaamd <filename>omegat</filename> kan worden gebruikt in OmegaT zelf, in toekomstige projecten die u maakt. Als u bestanden van vertaalgeheugens plaatst in de submap <filename>/tm/</filename> van een project, zal OmegaT automatisch daarin zoeken naar overeenkomstige segmenten, genaamd &quot;fuzzy overeenkomsten&quot;.</para>
+        <para>Aan het einde van uw vertaling exporteert OmegaT drie vertaalgeheugens, genaamd <filename>level1</filename>, <filename>level2</filename> en <filename>omegat</filename> naar uw projectmap. De geheugens <filename>level1</filename> en <filename>level2</filename> kunnen worden gedeeld met gebruikers van andere vertaalprogramma's. Het geheugen genaamd <filename>omegat</filename> kan worden gebruikt in OmegaT zelf, in toekomstige projecten die u maakt. Als u bestanden van vertaalgeheugens plaats in de submap <filename>/tm/</filename> van uw projectmap, zal OmegaT automatisch daarin zoeken naar overeenkomstige segmenten, genaamd &quot;fuzzy overeenkomsten&quot;.</para>
       </listitem>
     </itemizedlist>
 
     <itemizedlist>
       <listitem>
-        <para>U kunt een nieuwe term aan een woordenlijst toevoegen door te drukken op <keycap>Ctrl+Shift+G</keycap>, of bestaande woordenlijsten te kopiëren naar de submap <filename>/glossary/</filename> van uw projectmap en OmegaT zal automatisch daarin woorden opzoeken.</para>
+        <para>U kunt een nieuwe term aan een woordenlijst toevoegen door te drukken op <keycap>Ctrl+Shift+G</keycap>, of bestaande woordenlijsten kopiëren naar de submap <filename>/glossary/</filename> van uw projectmap en OmegaT zal automatisch daarin woorden opzoeken.</para>
       </listitem>
     </itemizedlist>
 
@@ -102,7 +102,7 @@
 
     <itemizedlist>
       <listitem>
-        <para>Voor een meer uitgebreide introductie, bekijk <ulink url="http://www.omegat.org/en/tutorial/OmegaT%20for%20Beginners.pdf">OmegaT for Beginners</ulink> op de OmegaT website. Als u ondersteuning nodig hebt met enig aspect van OmegaT, neem dan vrijblijvend deel aan de <ulink url="http://tech.groups.yahoo.com/group/Omegat/">OmegaT gebruikersgroep.</ulink></para>
+        <para>Voor een meer uitgebreide introductie, bekijk <ulink url="http://www.omegat.org/en/tutorial/OmegaT%20for%20Beginners.pdf">OmegaT for Beginners</ulink> op de website van OmegaT. Als u ondersteuning nodig hebt met enig aspect van OmegaT, neem dan vrijblijvend deel aan de <ulink url="http://tech.groups.yahoo.com/group/OmegaT/">OmegaT gebruikersgroep.</ulink></para>
       </listitem>
     </itemizedlist>
   </section>

@@ -2,9 +2,7 @@
 <!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
 <appendix id="appendix.LanguageToolPlugin.inOmegaT">
   <title>plug-in LanguageTool<indexterm class="singular">
-      <primary>Plugins</primary>
-
-      <secondary>LanguageTool</secondary>
+      <primary>Plug-ins</primary> <secondary>LanguageTool</secondary>
     </indexterm></title>
 
   <section>
@@ -30,11 +28,11 @@
   <section>
     <title>Installatie en gebruik</title>
 
-    <para>De plug-in LanguageTool is opgenomen in OmegaT. Hij zal automatisch in OmegaT worden gebruikt als <guimenuitem>Opties &gt; Taalcontrole</guimenuitem> is geselecteerd. De toegepaste regels (indien aanwezig) zullen afhankelijk zijn van de bron- en doeltaal van het project. Wanneer een regel wordt geactiveerd zal de overeenkomende frase met blauw worden onderstreept in het Bewerkingsvenster (bekijk <emphasis>ook </emphasis>en <emphasis>Ik deed niets</emphasis> in de afbeelding hierboven). Indien met de muis over een onderstreepte frase wordt gegaan, zal een omschrijving verschijnen.</para>
+    <para>De plug-in LanguageTool is opgenomen in OmegaT. De plug-in zal automatisch door OmegaT worden gebruikt als <guimenuitem>Opties &gt; Taalcontrole</guimenuitem> is aangevinkt. De toegepaste regels (indien aanwezig) zullen afhankelijk zijn van de bron- en doeltaal van het project. Wanneer een regel wordt geactiveerd zal de overeenkomende frase met blauw worden onderstreept in het Bewerkingsvenster (bekijk <emphasis>ook </emphasis>en <emphasis>Ik deed niets</emphasis> in de afbeelding hierboven). Indien met de muis over een onderstreepte frase wordt gegaan, zal een omschrijving verschijnen.</para>
     
 	<warning>
-		<title>Incompatibiliteit</title>
-		<para>LanguageTool zal niet juist werken als er een oude versie wordt gevonden in de map /plugin. Verwijder LanguageTool uit de map /plugin vóórdat OmegaT wordt gestart.</para>
+		<title>Niet compatibel</title>
+		<para>LanguageTool zal niet goed werken als een oude versie wordt gevonden in de map /plugin. Verwijder LanguageTool uit de map /plugin vóórdat OmegaT wordt gestart.</para>
 	</warning>
 
   </section>

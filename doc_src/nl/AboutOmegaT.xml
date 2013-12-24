@@ -20,7 +20,7 @@
 
     <itemizedlist>
       <listitem>
-        <para><emphasis role="bold">Terminologiebeheer</emphasis>: Terminologiebeheer is belangrijk voor consistentie in de vertalingen. OmegaT gebruikt woordenlijsten die vertalingen van woorden of korte frasen bevatten, een soort vereenvoudigd tweetalig woordenboek op een bepaald terrein. Voor uw verwijzing toont OmegaT de vertaling van elk woord als dat aanwezig is in het segment en is geregistreerd in de woordenlijst.</para>
+        <para><emphasis role="bold">Terminologiebeheer</emphasis>: Terminologiebeheer is belangrijk voor consistentie in de vertalingen. OmegaT gebruikt woordenlijsten die vertalingen van woorden of korte frasen bevatten, een soort vereenvoudigd tweetalig woordenboek op een bepaald terrein. Voor uw verwijzing geeft OmegaT de vertaling van woorden weer als die zowel aanwezig zijn in het segment en ook zijn geregistreerd in de woordenlijst.</para>
       </listitem>
     </itemizedlist>
 
@@ -38,7 +38,7 @@
 
     <itemizedlist>
       <listitem>
-        <para><emphasis role="bold">Leren OmegaT te gebruiken binnen 5 minuten!:</emphasis> dit hoofdstuk is bedoeld als een snelle handleiding voor beginners en ook voor mensen die al CAT-programma's kennen en toont de complete procedure vanaf het openen van een nieuw vertaalproject tot het voltoien van de vertaling.</para>
+        <para><emphasis role="bold">gids Snel starten:</emphasis> dit hoofdstuk is bedoeld als een gids Snel starten voor beginners en voor mensen die al bekend zijn met CAT-programma's, het geeft de complete procedure weer vanaf het openen van een nieuw project voor vertalingen tot en met het voltooien van de vertaling.</para>
       </listitem>
     </itemizedlist>
 
@@ -56,7 +56,7 @@
 
     <itemizedlist>
       <listitem>
-        <para><emphasis role="bold">Projecteigenschappen</emphasis>, <emphasis role="bold"><application>OmegaT</application> bestanden en mappen:</emphasis> een project in de context van OmegaT is het gedeelte werk dat OmegaT in staat is als CAT-gereedschap af te handelen. Dit hoofdstuk beschrijft de projecteigenschappen, zoals de bron- en doeltalen. Het tweede hoofdstuk beschrijft de verschillende submappen en bestanden in een vertaalproject en hun rol als ook andere gebruikers- en toepassingsbestanden die zijn geassocieerd met OmegaT.</para>
+        <para><emphasis role="bold">Projecteigenschappen</emphasis>, <emphasis role="bold"><application>OmegaT</application> bestanden en mappen:</emphasis> een project in de context van OmegaT is het gedeelte werk dat OmegaT in staat is als CAT-programma af te handelen. Dit hoofdstuk beschrijft de projecteigenschappen, zoals de bron- en doeltalen. Het tweede hoofdstuk beschrijft de verschillende submappen en bestanden in een vertaalproject en hun rol als ook andere gebruikers- en toepassingsbestanden die zijn geassocieerd met OmegaT.</para>
       </listitem>
     </itemizedlist>
 
@@ -98,7 +98,7 @@
 
         <itemizedlist>
           <listitem>
-            <para><emphasis role="bold">OmegaT op het web:</emphasis> informatie met betrekking tot on-line bronnen voor OmegaT</para>
+            <para><emphasis role="bold">OmegaT op het web:</emphasis> informatie met betrekking tot online bronnen voor OmegaT</para>
           </listitem>
         </itemizedlist>
 

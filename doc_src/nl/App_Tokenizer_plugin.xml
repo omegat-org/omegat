@@ -42,11 +42,11 @@
   <section>
     <title>Installatie en gebruik</title>
 
-	<para>Tokenizers zijn opgenoemn in OmegaT. OmegaT selecteert automatisch een tokenizer voor de bron- en de doeltaal overeenkomstig de taalinstellingen van het project. Het is mogelijk om een andere tokenizer te selecteren of een andere versie van de tokenizer in het venster Projecteigenschappen.</para>
+	<para>Tokenizers zijn opgenomen in OmegaT. OmegaT selecteert automatisch een tokenizer voor de bron- en de doeltaal, overeenkomstig de taalinstellingen van het project. Het is mogelijk om een andere tokenizer te selecteren of een andere versie van de tokenizer in het venster Projecteigenschappen.</para>
 
 	<warning>
-		<title>Incompatibiliteit</title>
-		<para>OmegaT zal niet starten als er tokenizers worden gevondenin de map /plugin. Verwijder alle tokenizers uit de map /plugin vóórdat OmegaT wordt gestart.</para>
+		<title>Niet compatibel</title>
+		<para>OmegaT zal niet starten als er tokenizers worden gevonden in de map /plugin. Verwijder alle tokenizers uit de map /plugin vóórdat OmegaT wordt gestart.</para>
 	</warning>
 	
   </section>

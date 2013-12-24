@@ -180,7 +180,7 @@
       </mediaobject>
     </figure>
 
-    <para>De tags worden vet blauw geaccentueerd voor eenvoudige vergelijking tussen de originele en de vertaalde inhoud. Klik op de koppeling om het segment in het venster Bewerken te activeren. Verbeter, indien nodig, de fout (in het geval hierboven is dat het ontbrekende paar &lt;i2&gt;&lt;/i2&gt;) en druk op <guimenuitem>Ctrl+T</guimenuitem> om terug te keren naar het venster Tags valideren om andere fouten te corrigeren. Tagfouten zijn volgordes van tags in de vertaling die niet dezelfde volgorde en nummering van tags produceren als die in het originele segment. Sommige tagbewerkingen zijn noodzakelijk en zijn goedaardig, sommige zullen problemen veroorzaken als het vertaalde document wordt gemaakt.</para>
+    <para>De tags worden vet blauw geaccentueerd voor eenvoudige vergelijking tussen de originele en de vertaalde inhoud. Klik op de koppeling om het segment in het venster Bewerken te activeren. Verbeter, indien nodig, de fout (in het geval hierboven is dat het ontbrekende paar &lt;i2&gt;&lt;/i2&gt;) en druk op <guimenuitem>Ctrl+T</guimenuitem> om terug te keren naar het venster Tags valideren om andere fouten te corrigeren. Tagfouten zijn volgordes van tags in de vertaling die niet dezelfde volgorde en nummering van tags produceren als die in het originele segment. Sommige bewerkingen aan tags zijn noodzakelijk en zijn goedaardig, sommige zullen problemen veroorzaken als het vertaalde document wordt gemaakt.</para>
   </section>
 
   <section id="hints.for.tag.management">

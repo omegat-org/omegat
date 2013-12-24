@@ -31,7 +31,7 @@
 
       <para>Dubbelklik op het programma dat u hebt gedownload om <application>OmegaT</application> te installeren.</para>
 
-      <para>Bij het begin van de installatie kunt u de taal selecteren die moet wordne gebruikt gedurende de installatie. In het volgende venster kunt u aangeven dat de geselecteerde taal moet worden gebruikt in OmegaT. Als u het overeenkomende keuzevak selecteert, wordt het bestand OmegaT.l4J.ini aangepast om de geselecteerde taal te gebruiken (zie het volgende gedeelte voor details). Later, nadat u de licentieovereenkomst hebt geaccepteerd, zal het programma u vragen of u een map in het menu <emphasis>Start</emphasis> wilt maken en of u een snelkoppeling op het bureaublad en in het systeemvak wilt maken - u kunt deze snelkoppelingen later maken door <emphasis><application>OmegaT</application>.exe</emphasis> naar het bureaublad of het menu Start te slepen om het van daaruit te koppelen. Het laatste frame biedt u de mogelijkheid om de bestanden readme en changes te bekijken voor de versie die u hebt geïnstalleerd.</para>
+      <para>Bij het begin van de installatie kunt u de taal selecteren die moet worden gebruikt gedurende de installatie. In het volgende venster kunt u aangeven dat de geselecteerde taal moet worden gebruikt in OmegaT. Als u het overeenkomende keuzevak selecteert, wordt het bestand OmegaT.l4J.ini aangepast om de geselecteerde taal te gebruiken (zie het volgende gedeelte voor details). Later, nadat u de licentieovereenkomst hebt geaccepteerd, zal het programma u vragen of u een map in het menu <emphasis>Start</emphasis> wilt maken en of u een snelkoppeling op het bureaublad en in het systeemvak wilt maken - u kunt deze snelkoppelingen later maken door <emphasis><application>OmegaT</application>.exe</emphasis> naar het bureaublad of het menu Start te slepen om het van daaruit te koppelen. Het laatste frame biedt u de mogelijkheid om de bestanden readme en changes te bekijken voor de versie die u hebt geïnstalleerd.</para>
     </section>
 
     <section id="running.OmegaT.Windows">
@@ -104,7 +104,7 @@
 
       <itemizedlist>
         <listitem>
-          <para><emphasis role="bold">Ja: </emphasis>download <emphasis>OmegaT_3.n.n_Without_JRE.zip</emphasis>.</para>
+          <para><emphasis role="bold">Ja: </emphasis>download <emphasis>OmegaT_3.n.n_Windows_without_JRE.exe</emphasis>.</para>
         </listitem>
 
         <listitem>
@@ -446,7 +446,7 @@
               <primary>OmegaT uitvoeren</primary> <secondary>Argumenten voor bestand om op te starten</secondary> <tertiary>Microsoft Translator</tertiary>
             </indexterm></para>
 
-          <para>Zorg er voor dat u een gratis account voor free Microsoft hebt. U heeft dat nodig om in te loggen op <ulink url="http://datamarket.azure.com/dataset/bing/microsofttranslator#schema">Windows Azure Marketplace</ulink> en de service Translator te gebruiken. Onthoud dat tot en met 2M tekens per maand gratis is. De twee vereiste items zijn beschikbaar op uw <ulink url="https://datamarket.azure.com/account">pagina van het account</ulink> onder Primary account key en Customer-ID:</para>
+          <para>Zorg er voor dat u een gratis account voor Microsoft hebt. U heeft dat nodig om in te loggen op <ulink url="http://datamarket.azure.com/dataset/bing/microsofttranslator#schema">Windows Azure Marketplace</ulink> en de service Translator te gebruiken. Onthoud dat tot en met 2M tekens per maand gratis is. De twee vereiste items zijn beschikbaar op uw <ulink url="https://datamarket.azure.com/account">pagina van het account</ulink> onder Primary account key en Customer-ID:</para>
 
           <para><emphasis role="bold">-Dmicrosoft.api.client_id=</emphasis><emphasis role="bold">XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX</emphasis></para>
 

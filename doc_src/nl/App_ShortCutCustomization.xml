@@ -40,7 +40,7 @@
     <para>Bijvoorbeeld, de standaard sneltoetsen voor OmegaT<footnote>
         <para>De standaard sneltoetsen voor OmegaT zijn beschikbaar via Sourceforge: <ulink url="http://omegat.svn.sourceforge.net/viewvc/omegat/branches/release-2-6/src/org/omegat/gui/main/MainMenuShortcuts.properties">Default OmegaT Shortcuts</ulink></para>
 
-        <para>De standaard sneltoetsen voor OmegaT voor de Mac zijn ook beschikbaar via Sourceforge, zij gebruiken allemaal &quot;meta&quot; in plaats van &quot;ctrl&quot;: <ulink url="http://omegat.svn.sourceforge.net/viewvc/omegat/branches/release-2-6/src/org/omegat/gui/main/MainMenuShortcuts.mac.properties">Default OmegaT Shortcuts for the Mac</ulink></para>
+        <para>De standaard sneltoetsen voor OmegaT voor de Mac zijn ook beschikbaar via Sourceforge, zij gebruiken allemaal &quot;meta&quot; in plaats van &quot;ctrl&quot;: <ulink url="http://omegat.svn.sourceforge.net/viewvc/omegat//branches/release-2-6/src/org/omegat/gui/main/MainMenuShortcuts.mac.properties">Default OmegaT Shortcuts for the Mac</ulink></para>
       </footnote>, kan men vinden:</para>
 
     <itemizedlist>
@@ -65,7 +65,7 @@
     <para><code> toolsShowStatisticsStandardMenuItem=shift meta
     S</code></para>
 
-    <para>Sla dan het bestand op en start <application>OmegaT</application> opnieuw op. Uw nieuwe sneltoetsen zouden nu naast de menuitems moeten verschijnen die u hebt aangepast. Als zij niet conflicteren met sneltoetsen van het systeem, zouden zij beschikbaar moeten zijn binnen OmegaT.</para>
+    <para>Sla dan het bestand op en start <application>OmegaT</application> opnieuw op. Uw nieuwe sneltoetsen zouden nu naast de menu-items moeten verschijnen die u hebt aangepast. Als zij niet conflicteren met sneltoetsen van het systeem, zouden zij beschikbaar moeten zijn binnen OmegaT.</para>
   </section>
 
   <section id="ch04.shortcuts.ProjectMenu">
@@ -345,7 +345,7 @@
           </row>
 
           <row>
-            <entry>Schakel letters naar kleine letters</entry>
+            <entry>Schakel Hoofd-/kleine letters naar /kleine letters</entry>
 
             <entry/>
 
@@ -353,7 +353,7 @@
           </row>
 
           <row>
-            <entry>Schakel letters naar Hoofdletters</entry>
+            <entry>Schakel Hoofd-/kleine letters naar /Hoofdletters</entry>
 
             <entry/>
 
@@ -361,7 +361,7 @@
           </row>
 
           <row>
-            <entry>Schakel letters naar Alle woorden hoofdletter</entry>
+            <entry>Schakel Hoofd-/kleine letters naar /alle woorden hoofdletters</entry>
 
             <entry/>
 

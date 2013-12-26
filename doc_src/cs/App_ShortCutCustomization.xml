@@ -14,13 +14,13 @@
 
     <para>Jakmile upravíte soubor <filename>MainMenuShortcuts.properties</filename>, je pak nutno <application>OmegaT</application> restartovat, aby se načetlo nastavení nových klávesových zkratek.</para>
 
-    <para>Syntaxe definice klávesové zkratky je tato: <code>&lt;kód položky nabídky&gt;=&lt;klávesová zkratka&gt;</code>, kde <emphasis>&lt;kód položky nabídky&gt;</emphasis> je kód, který si vezmete z tabulek níže a <emphasis>&lt;klávesová zkratka&gt;</emphasis> je kombinace kláves definovaná uživatele.
+    <para>Syntaxe definice klávesové zkratky je tato: <code>&lt;kód položky nabídky&gt;=&lt;klávesová zkratka&gt;</code>, kde <emphasis>&lt;kód položky nabídky&gt;</emphasis> je kód, který si vezmete z tabulek níže a <emphasis>&lt;klávesová zkratka&gt;</emphasis> je kombinace kláves definovaná uživatele.<footnote>
         <para>Kompletní syntax stisku kláves (klávesových zkratek) je definovaná v následující dokumentaci Java 1.6 od Oracle (na konci stránky): <ulink url="http://docs.oracle.com/javase/6/docs/api/javax/swing/KeyStroke.html">Java 1.6 klávesové zkratky</ulink></para>
       </footnote>.</para>
 
     <para>&lt;klávesová zkratka&gt; musí mít jednu z následujících podob: 0 nebo více <code>&lt;modifikátor&gt;</code> následován 0 nebo 1 <code>&lt;událost&gt;</code> následován 1 <code>&lt;klávesa&gt;</code>, kde:<itemizedlist>
         <listitem>
-          <para><code>&lt;modifikátor&gt;</code> může být: <emphasis>shift</emphasis>, <emphasis>control</emphasis>, <emphasis>ctrl</emphasis>, <emphasis>meta</emphasis>
+          <para><code>&lt;modifikátor&gt;</code> může být: <emphasis>shift</emphasis>, <emphasis>control</emphasis>, <emphasis>ctrl</emphasis>, <emphasis>meta</emphasis><footnote>
               <para>Na počítačích Mac je nutno použít modifikátor <emphasis>meta</emphasis>, aby se tak specifikovala klávesa <emphasis>command</emphasis>.</para>
             </footnote>, <emphasis>alt</emphasis>,
           <emphasis>altGraph</emphasis></para>
@@ -31,14 +31,14 @@
         </listitem>
 
         <listitem>
-          <para>a <code>&lt;klávesa&gt;</code> může být jakákoliv klávesa dostupná na vaší klávesnici
+          <para>a <code>&lt;klávesa&gt;</code> může být jakákoliv klávesa dostupná na vaší klávesnici<footnote>
               <para>Možné události (reakce kláves) jsou uvedeny v následující dokumentaci Java 1.6 od Oracle: <ulink url="http://docs.oracle.com/javase/6/docs/api/java/awt/event/KeyEvent.html">Popis klávesových událostí Java 1.6</ulink></para>
             </footnote>.</para>
         </listitem>
       </itemizedlist></para>
 
     <para>Podívejme se například na výchozí klávesové zkratky OmegaT
-        <para>Výchozí klávesové zkratky OmegaT jsou dostupné přes Sourceforge: <ulink url="http://omegat.svn.sourceforge.net/viewvc/omegat/branches/release-2-6/src/org/omegat/gui/main/MainMenuShortcuts.properties">Výchozí klávesové zkratky OmegaT</ulink></para>
+        <para>Výchozí klávesové zkratky OmegaT jsou dostupné přes Sourceforge: <ulink url="http://omegat.svn.sourceforge.net/viewvc/omegat/branches/release-2-6/src/org/omegat/gui/main/MainMenuShortcuts.properties">Výchozí klávesové zkratky OmegaT</ulink></para><footnote>
 
         <para>Výchozí klávesové zkratky OmegaT pro Mac jsou také dostupné přes Sourceforge, všechny používají „meta“ místo „ctrl“: <ulink url="http://omegat.svn.sourceforge.net/viewvc/omegat/branches/release-2-6/src/org/omegat/gui/main/MainMenuShortcuts.mac.properties">Výchozí klávesové zkratky OmegaT pro Mac</ulink></para>
       </footnote>, one can find:</para>

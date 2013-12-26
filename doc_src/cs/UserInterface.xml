@@ -731,7 +731,7 @@
           <primary>Statistika shody</primary> <seealso>Nabídka ‚Nástroje‛</seealso>
         </indexterm></title>
 
-      <para>Statistiku shody najdete pod <guimenuitem>Nástroje&gt;Statistika shody.</guimenuitem> Zpracování statistiky je náročné na možnosti CPU a může nějakou dobu trvat, proto se během zpracování zobrazí ukazatel průběhu. Pracuje se tu s určitými kategoriemi, které de facto představují průmyslový standard při klasifikaci shody na následující skupiny: Přesná shoda 95%-100%, 85%-94%, 75%-84%, 50%-74% a Žádná shoda. Tato informace je počítána jak pro segmenty, tak i pro slova a znaky (bez a s mezerami). Nicméně se zde ovšem mohou vyskytnout drobné rozdíly mezi počty OmegaT a čísly, které poskytnou jiné nástroje CAT.
+      <para>Statistiku shody najdete pod <guimenuitem>Nástroje&gt;Statistika shody.</guimenuitem> Zpracování statistiky je náročné na možnosti CPU a může nějakou dobu trvat, proto se během zpracování zobrazí ukazatel průběhu. Pracuje se tu s určitými kategoriemi, které de facto představují průmyslový standard při klasifikaci shody na následující skupiny: Přesná shoda 95%-100%, 85%-94%, 75%-84%, 50%-74% a Žádná shoda. Tato informace je počítána jak pro segmenty, tak i pro slova a znaky (bez a s mezerami). Nicméně se zde ovšem mohou vyskytnout drobné rozdíly mezi počty OmegaT a čísly, které poskytnou jiné nástroje CAT.<figure>
           <title>Statistika shody</title>
 
           <mediaobject>

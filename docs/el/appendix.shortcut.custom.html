@@ -1,0 +1,725 @@
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <title>Παράρτημα H. Παραμετροποίηση συντομεύσεων</title>
+      <link rel="stylesheet" type="text/css" href="OmegaT.css">
+      <meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
+      <link rel="home" href="index.html" title="OmegaT - Εγχειρίδιο χρήστη">
+      <link rel="up" href="index.html" title="OmegaT - Εγχειρίδιο χρήστη">
+      <link rel="prev" href="appendix.website.html" title="Παράρτημα G. Το OmegaT στο διαδίτκυο">
+      <link rel="next" href="appendix.legal.notices.html" title="Παράρτημα I. Νομικές Προειδοποιήσεις">
+   </head>
+   <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+      <div class="navheader">
+         <table width="100%" summary="Navigation header">
+            <tr>
+               <th colspan="3" align="center">Παράρτημα H. Παραμετροποίηση συντομεύσεων</th>
+            </tr>
+            <tr>
+               <td width="20%" align="left"><a accesskey="p" href="appendix.website.html">Προηγ</a>&nbsp;
+               </td>
+               <th width="60%" align="center">&nbsp;</th>
+               <td width="20%" align="right">&nbsp;<a accesskey="n" href="appendix.legal.notices.html">Επόμενο</a></td>
+            </tr>
+         </table>
+         <hr>
+      </div>
+      <div class="appendix">
+         <div class="titlepage">
+            <div>
+               <div>
+                  <h1 class="title"><a name="appendix.shortcut.custom"></a>Παράρτημα H. Παραμετροποίηση συντομεύσεων
+                  </h1>
+               </div>
+            </div>
+         </div>
+         <div class="toc">
+            <dl class="toc">
+               <dt><span class="section"><a href="appendix.shortcut.custom.html#ch04.shortcuts.customization">1. Παραμετροποίηση συντομεύσεων</a></span></dt>
+               <dt><span class="section"><a href="appendix.shortcut.custom.html#ch04.shortcuts.ProjectMenu">2. Μενού έργου</a></span></dt>
+               <dt><span class="section"><a href="appendix.shortcut.custom.html#ch04.shortcuts.EditMenu">3. Επεξεργασία μενού</a></span></dt>
+               <dt><span class="section"><a href="appendix.shortcut.custom.html#ch04.shortcuts.GoToMenu">4. Μετάβαση στο Μενού</a></span></dt>
+               <dt><span class="section"><a href="appendix.shortcut.custom.html#ch04.shortcuts.ViewMenu">5. Εμφάνιση μενού</a></span></dt>
+               <dt><span class="section"><a href="appendix.shortcut.custom.html#ch04.shortcuts.ToolsMenu">6. Μενού εργαλείων</a></span></dt>
+               <dt><span class="section"><a href="appendix.shortcut.custom.html#ch04.shortcuts.OptionsMenu">7. Επιλογές μενού</a></span></dt>
+               <dt><span class="section"><a href="appendix.shortcut.custom.html#ch04.shortcuts.HelpMenu">8. Μενού βοήθειας</a></span></dt>
+            </dl>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="ch04.shortcuts.customization"></a>1. <a class="indexterm" name="d0e10868"></a>Παραμετροποίηση συντομεύσεων
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>Τα περισσότερα πράγματα που εμφανίζονται στο κύριο μενού μπορούν να αντιστοιχηθούν με μια νέα συντόμευση. Μπορείτε να αλλάξετε
+               τις συντομεύσεις που ήδη ορίστηκαν και να προσθέσετε νέες συντομεύσεις, τοποθετώντας ένα αρχείο με ορισμούς συντομεύσεων στον
+               κατάλογό σας με τις προτιμήσεις του OmegaT (βλέπε <a class="link" href="chapter.files.and.directories.html#user.files" title="2. User settings files">Τοποθεσία αρχείων χρήστη</a>).
+            </p>
+            <p>Το αρχείο με τους ορισμούς των συντομεύσεων πρέπει να έχει ένα όνομα <code class="filename">MainMenuShortcuts.properties</code> και πρέπει να περιέχει το πολύ έναν ορισμό συντομεύσεως ανά γραμμή. Οι κενές γραμμές είναι αποδεκτές, ενώ οι σχολιασμένες
+               γραμμές πρέπει να αρχίζουν με ένα "//". Οτι ακολουθεί μετά το "//" θα αγνοηθεί.
+            </p>
+            <p>Μόλις το αρχείο <code class="filename">MainMenuShortcuts.properties</code> τροποποιηθεί, <span class="application">το OmegaT</span> πρέπει να επανεκκινηθεί, για να εφαρμοσθούν οι νέες συντομεύσεις.
+            </p>
+            <p>Η σύνταξη για τον ορισμό νέων συντομεύσεων είναι η εξής: <code class="code">&lt;menu item code&gt;=&lt;shortcut&gt;</code>, όπου: <span class="emphasis"><em>&lt;menu item code&gt;</em></span> είναι ένας κωδικός που προέρχεται από τους παρακάτω πίνακες, ενώ <span class="emphasis"><em>&lt;shortcut&gt;</em></span> είναι μια συντόμευση, που μπορεί να ορίσει ο χρήστης, για τα πλήκτρα που πρέπει να πατηθούν. <a href="#ftn.d0e10903" class="footnote" name="d0e10903"><sup class="footnote">[2]</sup></a>.
+            </p>
+            <p>&lt;shortcut&gt; πρέπει να είναι με την εξής μορφή: 0 ή περισσότερους <code class="code">&lt;modifier&gt;</code> ακολουθούμενοο από ένα 0 ή 1 <code class="code">&lt;event&gt;</code> ακολουθούμενο από 1 <code class="code">&lt;key&gt;</code>, όπου:
+            </p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p><code class="code">Ο &lt;modifier&gt;</code> μπορεί να είναι: <span class="emphasis"><em>shift</em></span>, <span class="emphasis"><em>control</em></span>, <span class="emphasis"><em>ctrl</em></span>, <span class="emphasis"><em>meta</em></span><a href="#ftn.d0e10937" class="footnote" name="d0e10937"><sup class="footnote">[3]</sup></a>, <span class="emphasis"><em>alt</em></span>,
+                                  <span class="emphasis"><em>altGraph</em></span></p>
+                  </li>
+                  <li class="listitem">
+                     <p><code class="code">Το &lt;event&gt;</code> μπορεί να είναι: <span class="emphasis"><em>typed</em></span>, <span class="emphasis"><em>pressed</em></span>, <span class="emphasis"><em>released</em></span></p>
+                  </li>
+                  <li class="listitem">
+                     <p>και το <code class="code">&lt;key&gt;</code> μπορεί να είναι οποιοδήποτε διαθέσιμο πλήκτρο του πληκτρολογίου σας<a href="#ftn.d0e10971" class="footnote" name="d0e10971"><sup class="footnote">[4]</sup></a>.
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <p>Για παράδειγμα, στις προεπιλεγμένες συντομεύσεις του OmegaT<a href="#ftn.d0e10979" class="footnote" name="d0e10979"><sup class="footnote">[5]</sup></a>, μπορεί κανείς να βρει:
+            </p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p><code class="code">projectOpenMenuItem=ctrl O</code></p>
+                  </li>
+                  <li class="listitem">
+                     <p><code class="code">editCreateGlossaryEntryMenuItem=ctrl shift G</code></p>
+                  </li>
+               </ul>
+            </div>
+            <p>Η πρώτη είναι η συντόμευση για το <span class="guimenuitem">Open Project</span>, η δεύτερη για την <span class="guimenuitem">Καταχώρηση Δημιουργίας Γλωσσαρίου</span>.
+            </p>
+            <p>Αν θέλετε να χρησιμοποιήσετε το <span class="keycap"><strong>Shift</strong></span>+<span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>O</strong></span> για να ανοίξετε ένα έργο, τροποποιήστε το αρχείο <code class="filename">MainMenuShortcuts.properties</code> ως εξής:<code class="code"> </code></p>
+            <p><code class="code">projectOpenMenuItem=shift ctrl O</code>.
+            </p>
+            <p>Αν δουλεύετε σε Mac και θέλετε να προσθέσετε <span class="keycap"><strong>Shift</strong></span>+<span class="keycap"><strong>Command</strong></span>+<span class="keycap"><strong>S</strong></span> συντόμευση προς <span class="guimenu">Εργαλεία</span> → <span class="guimenuitem">Στατιστικές</span>, προσθέστε την εξής γραμμή στο αρχείο <code class="filename">MainMenuShortcuts.properties</code>:<code class="code"></code></p>
+            <p><code class="code"> toolsShowStatisticsStandardMenuItem=shift meta
+                      S</code></p>
+            <p>Αποθηκεύστε το αρχείο και επανεκκινείστε το <span class="application">OmegaT</span>. Τώρα, οι νέες σας συντομεύσεις θα πρέπει να εμφανισθούν δίπλα στις καταχωρήσεις του μενού που τροποποιήσατε. Αν δεν παρουσιαστεί
+               σύγκρουση με τις συντομεύσεις συστήματος, θα πρέπει να είναι διαθέσιμες μέσα από το OmegaT.
+            </p>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="ch04.shortcuts.ProjectMenu"></a>2. Μενού έργου
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <div class="table"><a name="d0e11056"></a><p class="title"><b>Πίνακας H.1. Μενού έργου</b></p>
+               <div class="table-contents">
+                  <table summary="Μενού έργου" border="1">
+                     <colgroup>
+                        <col align="left" class="1">
+                        <col align="left" class="2">
+                        <col align="left" class="3">
+                     </colgroup>
+                     <thead>
+                        <tr>
+                           <th align="left">Καταχώρηση μενού</th>
+                           <th align="left">Προεπιλεγμένη συντόμευση</th>
+                           <th align="left">Κωδικός καταχώρησης μενού</th>
+                        </tr>
+                     </thead>
+                     <tbody>
+                        <tr>
+                           <td align="left">Νέα</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">projectNewMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Άνοιγμα</td>
+                           <td align="left"><span class="keycap"><strong>Ctrl+O</strong></span></td>
+                           <td align="left">projectOpenMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Μεταφόρτωση έργου ομάδας</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">projectTeamNewMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Εισαγωγή αρχείων προέλευσης...</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">projectImportMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Εισαγωγή από το MediaWiki...</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">projectWikiImportMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Επαναφόρτωση</td>
+                           <td align="left"><span class="keycap"><strong>F5</strong></span></td>
+                           <td align="left">projectReloadMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Κλείσιμο</td>
+                           <td align="left"><span class="keycap"><strong>Ctrl+Shift+W</strong></span></td>
+                           <td align="left">projectCloseMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Αποθήκευση</td>
+                           <td align="left"><span class="keycap"><strong>Ctrl+S</strong></span></td>
+                           <td align="left">projectSaveMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Δημιουργία μεταφρασμένων εγγράφων</td>
+                           <td align="left"><span class="keycap"><strong>Ctrl+D</strong></span></td>
+                           <td align="left">projectCompileMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Ιδιότητες...</td>
+                           <td align="left"><span class="keycap"><strong>Ctrl+E</strong></span></td>
+                           <td align="left">projectEditMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Αρχεία έργου...</td>
+                           <td align="left"><span class="keycap"><strong>Ctrl+L</strong></span></td>
+                           <td align="left">viewFileListMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Έξοδος</td>
+                           <td align="left"><span class="keycap"><strong>Ctrl+Q</strong></span></td>
+                           <td align="left">projectExitMenuItem</td>
+                        </tr>
+                     </tbody>
+                  </table>
+               </div>
+            </div><br class="table-break"></div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="ch04.shortcuts.EditMenu"></a>3. Επεξεργασία μενού
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <div class="table"><a name="d0e11163"></a><p class="title"><b>Πίνακας H.2. Επεξεργασία μενού</b></p>
+               <div class="table-contents">
+                  <table summary="Επεξεργασία μενού" border="1">
+                     <colgroup>
+                        <col align="left" class="1">
+                        <col align="left" class="2">
+                        <col align="left" class="3">
+                     </colgroup>
+                     <thead>
+                        <tr>
+                           <th align="left">Καταχώρηση μενού</th>
+                           <th align="left">Προεπιλεγμένη συντόμευση</th>
+                           <th align="left">Κωδικός καταχώρησης μενού</th>
+                        </tr>
+                     </thead>
+                     <tbody>
+                        <tr>
+                           <td align="left">Αναίρεση τελευταίας ενέργειας</td>
+                           <td align="left"><span class="keycap"><strong>Ctrl+Z</strong></span></td>
+                           <td align="left">editUndoMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Επαναφορά τελευταίας ενέργειας</td>
+                           <td align="left"><span class="keycap"><strong>Ctrl+Y</strong></span></td>
+                           <td align="left">editRedoMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Αντικατάσταση με μια αντιστοίχιση</td>
+                           <td align="left"><span class="keycap"><strong>Ctrl+R</strong></span></td>
+                           <td align="left">editOverwriteTranslationMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Εισαγωγή αντιστοίχισης</td>
+                           <td align="left"><span class="keycap"><strong>Ctrl+I</strong></span></td>
+                           <td align="left">editInsertTranslationMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Αντικατάσταση με Μετάφραση μέσω μηχανής</td>
+                           <td align="left"><span class="keycap"><strong>Ctrl+M</strong></span></td>
+                           <td align="left">editOverwriteMachineTranslationMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Αντικατάσταση με αρχεία προέλευσης</td>
+                           <td align="left"><span class="keycap"><strong>Shift+Ctrl+R</strong></span></td>
+                           <td align="left">editOverwriteSourceMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Εισαγωγή αρχείου προέλευσης</td>
+                           <td align="left"><span class="keycap"><strong>Shift+Ctrl+I</strong></span></td>
+                           <td align="left">editInsertSourceMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Εισαγωγή ετικετών προέλευσης</td>
+                           <td align="left"><span class="keycap"><strong>Shift+Ctrl+T</strong></span></td>
+                           <td align="left">editTagPainterMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Εξαγωγή επιλογής</td>
+                           <td align="left"><span class="keycap"><strong>Shift+Ctrl+C</strong></span></td>
+                           <td align="left">editExportSelectionMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Δημιουργία καταχώρησης γλωσσαρίου</td>
+                           <td align="left"><span class="keycap"><strong>Shift+Ctrl+G</strong></span></td>
+                           <td align="left">editCreateGlossaryEntryMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Αναζήτηση έργου...</td>
+                           <td align="left"><span class="keycap"><strong>Ctrl+F</strong></span></td>
+                           <td align="left">editFindInProjectMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Επιλογή ασαφούς (Fuzzy) αντιστοίχισης 1</td>
+                           <td align="left"><span class="keycap"><strong>Ctrl+1</strong></span></td>
+                           <td align="left">editSelectFuzzy1MenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Επιλογή ασαφούς (Fuzzy) αντιστοίχισης 2</td>
+                           <td align="left"><span class="keycap"><strong>Ctrl+2</strong></span></td>
+                           <td align="left">editSelectFuzzy2MenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Επιλογή ασαφούς (Fuzzy) αντιστοίχισης 3</td>
+                           <td align="left"><span class="keycap"><strong>Ctrl+3</strong></span></td>
+                           <td align="left">editSelectFuzzy3MenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Επιλογή ασαφούς (Fuzzy) αντιστοίχισης 4</td>
+                           <td align="left"><span class="keycap"><strong>Ctrl+4</strong></span></td>
+                           <td align="left">editSelectFuzzy4MenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Επιλογή ασαφούς (Fuzzy) αντιστοίχισης 5</td>
+                           <td align="left"><span class="keycap"><strong>Ctrl+5</strong></span></td>
+                           <td align="left">editSelectFuzzy5MenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Αλλαγή σε/Μικρά γράμματα</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">lowerCaseMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Αλλαγή σε/Κεφαλαία γράμματα</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">upperCaseMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Αλλαγή σε/Title Case</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">titleCaseMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Cycle case to...</td>
+                           <td align="left"><span class="keycap"><strong>Shift+F3</strong></span></td>
+                           <td align="left">cycleSwitchCaseMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Να χρησιμοποιείται ως προεπιλεγμένη μετάφραση</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">editMultipleDefault</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Να χρησιμοποιείται ως εναλλακτική μετάφραση</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">editMultipleAlternate</td>
+                        </tr>
+                     </tbody>
+                  </table>
+               </div>
+            </div><br class="table-break"></div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="ch04.shortcuts.GoToMenu"></a>4. Μετάβαση στο Μενού
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <div class="table"><a name="d0e11348"></a><p class="title"><b>Πίνακας H.3. Μετάβαση στο Μενού</b></p>
+               <div class="table-contents">
+                  <table summary="Μετάβαση στο Μενού" border="1">
+                     <colgroup>
+                        <col align="left" class="1">
+                        <col align="left" class="2">
+                        <col align="left" class="3">
+                     </colgroup>
+                     <thead>
+                        <tr>
+                           <th align="left">Καταχώρηση μενού</th>
+                           <th align="left">Προεπιλεγμένη συντόμευση</th>
+                           <th align="left">Κωδικός καταχώρησης μενού</th>
+                        </tr>
+                     </thead>
+                     <tbody>
+                        <tr>
+                           <td align="left">Επόμενο αμετάφραστο τμήμα</td>
+                           <td align="left"><span class="keycap"><strong>Ctrl+U</strong></span></td>
+                           <td align="left">gotoNextUntranslatedMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Επόμενο τμήμα</td>
+                           <td align="left"><span class="keycap"><strong>Ctrl+N</strong></span> or <span class="keycap"><strong>Enter</strong></span> or
+                                          <span class="keycap"><strong>Tab</strong></span></td>
+                           <td align="left">gotoNextSegmentMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Προηγούμενο τμήμα</td>
+                           <td align="left"><span class="keycap"><strong>Ctrl+P</strong></span> or <span class="keycap"><strong>Ctrl+Enter</strong></span> or
+                                          <span class="keycap"><strong>Ctrl+Tab</strong></span></td>
+                           <td align="left">gotoPreviousSegmentMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Αριθμός τμήματος</td>
+                           <td align="left"><span class="keycap"><strong>Ctrl+J</strong></span></td>
+                           <td align="left">gotoSegmentMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Επόμενη σημείωση</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">gotoNextNoteMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Προηγούμενη σημείωση</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">gotoPreviousNoteMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Ταξινόμηση σε υψηλή θέση στο ιστορικό...</td>
+                           <td align="left"><span class="keycap"><strong>Ctrl+Shift+N</strong></span></td>
+                           <td align="left">gotoHistoryForwardMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Ταξινόμηση σε χαμηλή θέση στο ιστορικό.....</td>
+                           <td align="left"><span class="keycap"><strong>Ctrl+Shift+P</strong></span></td>
+                           <td align="left">gotoHistoryBackMenuItem</td>
+                        </tr>
+                     </tbody>
+                  </table>
+               </div>
+            </div><br class="table-break"></div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="ch04.shortcuts.ViewMenu"></a>5. Εμφάνιση μενού
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <div class="table"><a name="d0e11439"></a><p class="title"><b>Πίνακας H.4. Εμφάνιση μενού</b></p>
+               <div class="table-contents"><a class="indexterm" name="d0e11442"></a><table summary="Εμφάνιση μενού" border="1">
+                     <colgroup>
+                        <col align="left" class="1">
+                        <col align="left" class="2">
+                        <col align="left" class="3">
+                     </colgroup>
+                     <thead>
+                        <tr>
+                           <th align="left">Καταχώρηση μενού</th>
+                           <th align="left">Προεπιλεγμένη συντόμευση</th>
+                           <th align="left">Κωδικός καταχώρησης μενού</th>
+                        </tr>
+                     </thead>
+                     <tbody>
+                        <tr>
+                           <td align="left">Επισήμανση μεταφρασμένων τμημάτων</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">viewMarkTranslatedSegmentsCheckBoxMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Επισήμανση αμετάφραστων τμημάτων</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">viewMarkUntranslatedSegmentsCheckBoxMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Εμφάνιση αρχείων προέλευσης</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">viewDisplaySegmentSourceCheckBoxMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Επισήμανση μη-μοναδικών τμημάτων</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">viewMarkNonUniqueSegmentsCheckBoxMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Επισήμανση τμημάτων με σημειώσεις</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">viewMarkNotedSegmentsCheckBoxMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Επισήμανση μη-διασπάσιμων διαστημάτων</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">viewMarkNBSPCheckBoxMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Επισήμανση κενού χώρου (Whitespace)</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">viewMarkWhitespaceCheckBoxMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Επισήμανση χαρακτήρων ελέγχου αμφίδρομων αλγορίθμων</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">viewMarkBidiCheckBoxMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Πληροφορίες τροποποίησης/Να μην εμφανίζεται καμία</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">viewDisplayModificationInfoNoneRadioButtonMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Πληροφορίες τροποποίησης/Επιλεγμένη οθόνη</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">viewDisplayModificationInfoSelectedRadioButtonMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Πληροφορίες τροποποίησης/Εμφάνιση όλων</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">viewDisplayModificationInfoAllRadioButtonMenuItem</td>
+                        </tr>
+                     </tbody>
+                  </table>
+               </div>
+            </div><br class="table-break"></div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="ch04.shortcuts.ToolsMenu"></a>6. Μενού εργαλείων
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <div class="table"><a name="d0e11529"></a><p class="title"><b>Πίνακας H.5. Μενού εργαλείων</b></p>
+               <div class="table-contents">
+                  <table summary="Μενού εργαλείων" border="1">
+                     <colgroup>
+                        <col align="left" class="1">
+                        <col align="left" class="2">
+                        <col align="left" class="3">
+                     </colgroup>
+                     <thead>
+                        <tr>
+                           <th align="left">Καταχώρηση μενού</th>
+                           <th align="left">Προεπιλεγμένη συντόμευση</th>
+                           <th align="left">Κωδικός καταχώρησης μενού</th>
+                        </tr>
+                     </thead>
+                     <tbody>
+                        <tr>
+                           <td align="left">Επικύρωση ετικετών</td>
+                           <td align="left"><span class="keycap"><strong>Ctrl +T</strong></span></td>
+                           <td align="left">toolsValidateTagsMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Στατιστικές</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">toolsShowStatisticsStandardMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Αντιστοίχιση στατιστικών</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">toolsShowStatisticsMatchesMenuItem</td>
+                        </tr>
+                     </tbody>
+                  </table>
+               </div>
+            </div><br class="table-break"></div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="ch04.shortcuts.OptionsMenu"></a>7. Επιλογές μενού
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <div class="table"><a name="d0e11568"></a><p class="title"><b>Πίνακας H.6. Επιλογές μενού</b></p>
+               <div class="table-contents">
+                  <table summary="Επιλογές μενού" border="1">
+                     <colgroup>
+                        <col align="left" class="1">
+                        <col align="left" class="2">
+                        <col align="left" class="3">
+                     </colgroup>
+                     <thead>
+                        <tr>
+                           <th align="left">Καταχώρηση μενού</th>
+                           <th align="left">Προεπιλεγμένη συντόμευση</th>
+                           <th align="left">Κωδικός καταχώρησης μενού</th>
+                        </tr>
+                     </thead>
+                     <tbody>
+                        <tr>
+                           <td align="left">Χρήση του TAB για να προχωρήσει</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">optionsTabAdvanceCheckBoxMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Πάντα επιβεβαίωση πριν την Έξοδο</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">optionsAlwaysConfirmQuitCheckBoxMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Μετάφραση με τη βοήθεια μηχανής</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">&nbsp;</td>
+                        </tr>
+                        <tr>
+                           <td align="left">TransTips/Ενεργοποίηση Transtips</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">optionsTransTipsEnableMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">TransTips/Ακριβής αντιστοίχιση</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">optionsTransTipsExactMatchMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Γραμαμματοσειρά...</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">optionsFontSelectionMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Φίλτρα αρχείου...</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">optionsSetupFileFiltersMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Κατάτμηση...</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">optionsSentsegMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Ορθογραφικός έλεγχος...</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">optionsSpellCheckMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Συμπεριφορά επεξεργασίας...</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">optionsWorkflowMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Επικύρωση ετικέτας...</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">optionsTagValidationMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Ομάδα...</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">optionsTeamMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Εξωτερικά TMXs...</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">optionsExtTMXMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Εμφάνιση...</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">optionsViewOptionsMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Αποθήκευση και Έξοδος...</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">optionsSaveOptionsMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Σύνδεση με ενδιάμεσο διακομιστή (Proxy login)...</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">optionsViewOptionsMenuLoginItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Ανάκτηση κύριου παραθύρου</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">optionsRestoreGUIMenuItem</td>
+                        </tr>
+                     </tbody>
+                  </table>
+               </div>
+            </div><br class="table-break"></div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="ch04.shortcuts.HelpMenu"></a>8. Μενού βοήθειας
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <div class="table"><a name="d0e11688"></a><p class="title"><b>Πίνακας H.7. Μενού βοήθειας</b></p>
+               <div class="table-contents">
+                  <table summary="Μενού βοήθειας" border="1">
+                     <colgroup>
+                        <col align="left" class="1">
+                        <col align="left" class="2">
+                        <col align="left" class="3">
+                     </colgroup>
+                     <thead>
+                        <tr>
+                           <th align="left">Καταχώρηση μενού</th>
+                           <th align="left">Προεπιλεγμένη συντόμευση</th>
+                           <th align="left">Κωδικός καταχώρησης μενού</th>
+                        </tr>
+                     </thead>
+                     <tbody>
+                        <tr>
+                           <td align="left">Εγχειρίδιο χρήσης...</td>
+                           <td align="left"><span class="keycap"><strong>F1</strong></span></td>
+                           <td align="left">helpContentsMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Σχετικά...</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">helpAboutMenuItem</td>
+                        </tr>
+                     </tbody>
+                  </table>
+               </div>
+            </div><br class="table-break"></div>
+         <div class="footnotes"><br><hr style="width:100; text-align:left;margin-left: 0">
+            <div id="ftn.d0e10903" class="footnote">
+               <p><a href="#d0e10903" class="para"><sup class="para">[2] </sup></a>Η πλήρης σύνταξη για τα πατήματα πλήκτρων στις συντομεύσεις, παρατίθεται στην παρακάτω τεκμηρίωση Java 1.6 από την Oracle
+                  (στο τέλος της σελίδας): <a class="ulink" href="http://docs.oracle.com/javase/6/docs/api/javax/swing/KeyStroke.html" target="_top">Java 1.6 keystrokes shortcuts</a></p>
+            </div>
+            <div id="ftn.d0e10937" class="footnote">
+               <p><a href="#d0e10937" class="para"><sup class="para">[3] </sup></a>Στον Mac, ο τροποποιητής (modifier) <span class="emphasis"><em>meta</em></span> πρέπει να χρησιμοποιηθεί για να ορισθεί το πλήκτρο <span class="emphasis"><em>εντολής (command)</em></span>.
+               </p>
+            </div>
+            <div id="ftn.d0e10971" class="footnote">
+               <p><a href="#d0e10971" class="para"><sup class="para">[4] </sup></a>Τα εφικτά keyevents (keys) παρέχονται στην παρακάτω περιγραφή τεκμηρίωσης Java 1.6 από την Oracle: <a class="ulink" href="http://docs.oracle.com/javase/6/docs/api/java/awt/event/KeyEvent.html" target="_top">Java 1.6 keyEvents</a></p>
+            </div>
+            <div id="ftn.d0e10979" class="footnote">
+               <p><a href="#d0e10979" class="para"><sup class="para">[5] </sup></a>Οι προεπιλεγμένες συντομεύσεις του OmegaT προσφέρονται από το Sourceforge: <a class="ulink" href="http://omegat.svn.sourceforge.net/viewvc/omegat/branches/release-2-6/src/org/omegat/gui/main/MainMenuShortcuts.properties" target="_top">Προεπιλεγμένες συντομεύσεις OmegaT</a></p>
+               <p>Οι προεπιλεγμένες συντομεύσεις του OmegaT για το Mac προσφέρονται επίσης από το Sourceforge, χρησιμοποιούν όλες το "meta"
+                  αντί για το "ctrl": <a class="ulink" href="http://omegat.svn.sourceforge.net/viewvc/omegat/branches/release-2-6/src/org/omegat/gui/main/MainMenuShortcuts.mac.properties" target="_top">Προεπιλεγμένες συντομεύσεις του OmegaT για το Mac</a></p>
+            </div>
+         </div>
+      </div>
+      <div class="navfooter">
+         <hr>
+         <table width="100%" summary="Navigation footer">
+            <tr>
+               <td width="40%" align="left"><a accesskey="p" href="appendix.website.html">Προηγ</a>&nbsp;
+               </td>
+               <td width="20%" align="center">&nbsp;</td>
+               <td width="40%" align="right">&nbsp;<a accesskey="n" href="appendix.legal.notices.html">Επόμενο</a></td>
+            </tr>
+            <tr>
+               <td width="40%" align="left" valign="top">Παράρτημα G. Το OmegaT στο διαδίτκυο&nbsp;</td>
+               <td width="20%" align="center"><a accesskey="h" href="index.html">Αρχή</a></td>
+               <td width="40%" align="right" valign="top">&nbsp;Παράρτημα I. Νομικές Προειδοποιήσεις</td>
+            </tr>
+         </table>
+      </div>
+   </body>
+</html>

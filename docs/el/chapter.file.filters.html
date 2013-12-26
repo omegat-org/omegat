@@ -1,0 +1,558 @@
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <title>Κεφάλαιο 7. Φίλτρα αρχείων</title>
+      <link rel="stylesheet" type="text/css" href="OmegaT.css">
+      <meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
+      <link rel="home" href="index.html" title="OmegaT - Εγχειρίδιο χρήστη">
+      <link rel="up" href="index.html" title="OmegaT - Εγχειρίδιο χρήστη">
+      <link rel="prev" href="chapter.project.properties.html" title="Κεφάλαιο 6. Ιδιότητες έργου">
+      <link rel="next" href="chapter.files.and.directories.html" title="Κεφάλαιο 8. OmegaT Αρχεία και Κατάλογοι">
+   </head>
+   <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+      <div class="navheader">
+         <table width="100%" summary="Navigation header">
+            <tr>
+               <th colspan="3" align="center">Κεφάλαιο 7. Φίλτρα αρχείων</th>
+            </tr>
+            <tr>
+               <td width="20%" align="left"><a accesskey="p" href="chapter.project.properties.html">Προηγ</a>&nbsp;
+               </td>
+               <th width="60%" align="center">&nbsp;</th>
+               <td width="20%" align="right">&nbsp;<a accesskey="n" href="chapter.files.and.directories.html">Επόμενο</a></td>
+            </tr>
+         </table>
+         <hr>
+      </div>
+      <div class="chapter">
+         <div class="titlepage">
+            <div>
+               <div>
+                  <h1 class="title"><a name="chapter.file.filters"></a>Κεφάλαιο 7. Φίλτρα αρχείων
+                  </h1>
+               </div>
+            </div>
+         </div>
+         <div class="toc">
+            <dl class="toc">
+               <dt><span class="section"><a href="chapter.file.filters.html#file.filters.dialog">1. Διάλογος φίλτρων αρχείου</a></span></dt>
+               <dt><span class="section"><a href="chapter.file.filters.html#filters.options">2. Επιλογές φίλτρου</a></span></dt>
+               <dt><span class="section"><a href="chapter.file.filters.html#edit.filter.dialog">3. Επεξεργασία διαλόγου φίλτρου</a></span></dt>
+               <dd>
+                  <dl>
+                     <dt><span class="section"><a href="chapter.file.filters.html#source.filetype.and.filename.pattern">3.1. Τύπος αρχείου προέλευσης, μοτίβο ονόματος αρχείου</a></span></dt>
+                     <dt><span class="section"><a href="chapter.file.filters.html#source.and.target.files.encoding">3.2. Κωδικοποίηση αρχείου προέλευσης και στόχου</a></span></dt>
+                     <dt><span class="section"><a href="chapter.file.filters.html#target.name">3.3. Ονόματα αρχείων στόχου</a></span></dt>
+                  </dl>
+               </dd>
+            </dl>
+         </div>
+         <p>Το OmegaT έχει να επιδείξει φίλτρα υψηλής παραμετροποίησης, που σας επιτρέπουν να ρυθμίζετε πολλά πράγματα. Τα φίλτρα είναι
+            κομμάτια κώδικα ικανά για:
+         </p>
+         <div class="itemizedlist">
+            <ul class="itemizedlist" style="list-style-type: disc; ">
+               <li class="listitem">
+                  <p>Ανάγνωση του εγγράφου σε ορισμένες ειδικές μορφές αρχείου. Για παράδειγμα, απλά αρχεία κειμένου.</p>
+               </li>
+            </ul>
+         </div>
+         <div class="itemizedlist">
+            <ul class="itemizedlist" style="list-style-type: disc; ">
+               <li class="listitem">
+                  <p>Εξαγωγή του μεταφράσιμου περιεχομένου από το αρχείο.</p>
+               </li>
+            </ul>
+         </div>
+         <div class="itemizedlist">
+            <ul class="itemizedlist" style="list-style-type: disc; ">
+               <li class="listitem">
+                  <p>Αυτοματοποίηση της τροποποίησης των ονομάτων αρχείου των μεταφρασμένων εγγράφων, αντικαθιστώντας τα μεταφράσιμα περιεχόμενα
+                     με τη μετάφρασή του.
+                  </p>
+               </li>
+            </ul>
+         </div>
+         <p>Για να δείτε όλες τις μορφές αρχείου που μπορεί να χειριστεί το OmegaT, δείτε το μενού <span class="guimenuitem">Επιλογές &gt; Φϊλτρα αρχείου ... </span></p>
+         <p>Οι περισσότεροι χρήστες θα βρουν επαρκείς τις προκαθορισμένς επιλογές για τα φίλτρα αρχείου. Αν αυτό δεν ισχύει, ανοίξτε τον
+            κύριο διάλογο επιλέγοντας<span class="bold"><strong> Επιλογές → Φίλτρα αρχείου...</strong></span> από το κύριο μενού. Μπορείτε, επίσης, να ενεργοποιήσετε φίλτρα για το κάθε έργο, που θα χρησιμοποιούνται μόνο στο τρέχον
+            έργο, κάνοντας την επιλογή <span class="bold"><strong>Φίλτρα αρχείου...</strong></span>στις Ιδιότητες Έργου.
+         </p>
+         <p>Μπορείτε να ενεργοποιήσετε τα ειδικά φίλτρα για το κάθε έργο μέσα από το <span class="bold"><strong>Έργο → Ιδιότητες...</strong></span>. Κάντε κλικ στο κουμπί <span class="guibutton">Φίλτρα αρχείου</span> και ενεργοποιήστε το κουτάκι επιλογής (check box) <span class="guimenuitem">Ενεργοποίηση φίλτρων για το κάθε έργο</span><a class="indexterm" name="d0e4365"></a>. Ένα αντίγραφο με τις ρυθμίσεις των φίλτρων θα αποθηκευθεί μαζί με το έργο σε αυτή την περίπτωση. Αν αλλάξετε αργότερα τα
+            φίλτρα, θα ενημερωθούν μόνο τα φίλτρα του έργου, ενώ τα φίλτρα του χρήστη θα παραμείνουν αμετάβλητα.
+         </p>
+         <p><span class="bold"><strong>Προειδοποίηση!</strong></span> Αν αλλάξετε τις επιλογές φίλτρου ενόσω το έργο είναι ανοικτό, θα πρέπει να ξαναφορτώσετε το έργο για να μπορέσουν να εφαρμοσθούν
+            οι αλλαγές.
+         </p>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="file.filters.dialog"></a>1. Διάλογος φίλτρων αρχείου<a class="indexterm" name="d0e4378"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <p>Αυτός ο κατάλογος εμφανίζει τα διαθέσιμα φίλτρα αρχείου. Αν δεν επιθυμείτε να χρησιμοποιείτε το OmegaT για να μεταφράσετε
+               κάποια είδη αρχείου, μπορείτε να απενεργοποιήσετε το αντίστοιχο φίλτρο αποεπιλέγοντας το αντίστοιχο κουτάκι μετά από το όνομά
+               του. Το OmegaT θα παραβλέψει τα κατάλληλα αρχεία κατά τη φόρτωση των αρχείων και θα τα αντιγράψει αμετάβλητα όταν δημιουργεί
+               τα έγγραφα-στόχο. Όταν επιθυμείτε να ξαναχρησιμοποιήσετε το φίλτρο, απλώς τσεκάρετε το κουτάκι επιλογής. Κάντε κλικ στις <span class="bold"><strong>Επιλογές</strong></span> για να ρυθμίσετε τα φίλτρα αρχείων στις προεπιλογές. Για να επεξεργαστείτε ποια αρχεία και σε τι κωδικοποίηση θα πρέπει να
+               επεξεργάζεται το φίλτρο, επιλέξτε το φίλτρο από τη λίστα και κάντε κλικ στο <span class="bold"><strong>Επεξεργασία.</strong></span></p>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="filters.options"></a>2. Επιλογές φίλτρου<a class="indexterm" name="d0e4393"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <p>Διάφορα φίλτρα (Αρχεία κειμένου, αρχεία XHTML, αρχεία HTML και XHTML, αρχεία OpenDocument και αρχεία Microsoft Open XML) διαθέτουν
+               μια ή και περισσότερες ειδικές επιλογές. Για να τροποποιήσετε τις επιλογές, επιλέξτε το φίλτρο από τη λίστα και κάντε κλικ
+               στις <span class="bold"><strong>Επιλογές</strong></span>. Οι διαθέσιμες επιλογές είναι:
+            </p>
+            <p><span class="bold"><strong>Αρχεία κειμένου</strong></span></p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p><span class="emphasis"><em>Να γίνεται κατάτμηση παραγράφου στις αλλαγές γραμμής, στις κενές γραμμές ή ποτέ:</em></span></p>
+                     <p>Αν είναι ενεργοί οι κανόνες κατάτμησης προτάσεων, το κείμενο θα κατατμηθεί περαιτέρω, σύμφωνα με την επιλογή που κάνετε εδώ.</p>
+                  </li>
+               </ul>
+            </div>
+            <p><span class="bold"><strong>Αρχεία PO</strong></span></p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p><span class="emphasis"><em>Να επιτρέπονται κενές μεταφράσεις στο αρχείο στόχος</em></span>:
+                     </p>
+                     <p>Αν είναι ενεργοποιημένο, όταν ένα τμήμα PO (που μπορεί να είναι και μια ολόκληρη παράγραφος) δεν είναι μεταφρασμένο, η μετάφραση
+                        θα είναι κενή στο αρχείο-στόχο. Τεχνικά μιλώντας, το τμήμα <code class="code">msgstr</code> μέσα στο αρχείο-στόχο PO, αν έχει δημιουργηθεί, θα είναι κενό. Επειδή αυτή είναι η προτυποποιημένη (standard) συμπεριφορά
+                        στα αρχεία PO, είναι ενεργοποιημένη από προεπιλογή. Αν η επιλογή αυτή είναι απενεργοποιημένη, το κείμενο προέλευσης θα αντιγραφεί
+                        στο τμήμα-στόχο.
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p><span class="emphasis"><em>Να παρακαμφθεί η κεφαλίδα PO</em></span></p>
+                     <p>Η κεφαλίδα PO θα παραβλεφθεί και θα μείνει αμετάβλητη, αν κάνετε αυτή την επιλογή.</p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p><span class="emphasis"><em>Να γίνει αυτόματη αντικατάσταση του 'nplurals=INTEGER; plural=EXPRESSION;' στην κεφαλίδα</em></span></p>
+                     <p><span class="emphasis"><em><span class="emphasis"><em>Η επιλογή αυτή επιτρέπει στο OmegaT να παρακάμπτει τις προδιαγραφές της κεφαλίδας του αρχείου PO και να χρησιμοποιεί την προεπιλογή
+                                    για την γλώσσα-στόχο που επιλέξατε.</em></span></em></span></p>
+                  </li>
+               </ul>
+            </div>
+            <p><span class="bold"><strong>Αρχεία XHTML</strong></span></p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p><span class="emphasis"><em>Προσθέστε ή ξαναγράψτε τη δήλωση κωδικοποίησης των αρχείων HTML και XHTML</em></span>: συχνά, τα αρχεία-στόχος πρέπει να έχουν μία διαφορετική ομάδα χαρακτήρων κωδικοποίησης από εκείνη που έχουν τα αρχεία προέλευσης
+                        (ανεξάρτητα από το αν ορίζεται ρητά, ή αν υποννοείται). Χρησιμοποιώντας αυτή την επιλογή, ο μεταφραστής μπορεί να ορίσει κατά
+                        πόσο τα αρχεία-στόχος πρέπει να περιλαμβάνουν τη δήλωση κωδικοποίησης. Για παράδειγμα, αν το φίλτρο αρχείου προδιορίζει το
+                        UTF8 ως σχήμα κωδικοποίησης για τα αρχεία-στόχο, αν επιλεχθεί το Πάντα, θα εξασφαλισθεί ότι αυτές οι πληροφορίες περιλαμβάνονται
+                        στα μεταφρασμένα αρχεία.
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p><span class="emphasis"><em>Μεταφράστε τις ακόλουθες ιδιότητες (attributes)</em></span>: οι επιλεγμένες ιδιότητες θα εμφανίζονται ως τμήματα στο παράθυρο της περιοχής Επεξεργασίας.
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p><span class="emphasis"><em>Έναρξη μιας νέας παραγράφου: η &lt;br&gt;</em></span> ετικέτα HTML θα αποτελεί μια παράγραφο από την άποψη της κατάτμησης.
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p><span class="emphasis"><em>Να παρακάμπτεται η κανονική έκφραση (regex) για αντιστοίχιση κειμένου</em></span>: το τμήμα που αντιστοιχίζει την κανονική έκφραση (regex) θα παρακαμφθεί. Θα εμφανίζεται με κόκκινη επισήμανση στον tag validator.
+                        Το κείμενο στο τμήμα προέλευσης που αντιστοιχίζεται, εμφανίζεται με πλάγιους χαρακτήρες (italic).
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p><span class="emphasis"><em>Να μη μεταφράσετε τις ιδιότητες περιεχομένου των μετα-ετικετών ... :</em></span> Οι παρακάτω μετα-ετικέτες δεν θα μεταφρασθούν.
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p><span class="emphasis"><em>Να μη μεταφράσετε το περιεχόμενο των ετικετών με τα παρακάτω ζεύγη ιδιοτήτων key-value (διαχωρισμένα με κόμματα)</em></span>: μια αντιστοίχιση στη λίστα των ζευγών key-value, θα οδηγήσει στην παράβλεψη του περιεχομένου των ετικετών
+                     </p>
+                     <p>Ενίοτε είναι χρήσιμο να μπορείτε να κάνετε κάποιες ετικέτες μη-μεταφράσιμες, με βάση την τιμή των ιδιοτήτων. Για παράδειγμα,
+                        <code class="literal">&lt;div class="hide"&gt; &lt;span translate="no"&gt;</code> Μπορείτε να ορίσετε ζεύγη key-value για τις ετικέτες που πρέπει να παραμείνουν αμετάφραστες. Στο παραπάνω παράδειγμα, το
+                        πεδίο θα πρέπει να περιέχει: <code class="literal">class=hide, translate=no </code></p>
+                  </li>
+               </ul>
+            </div>
+            <p><span class="bold"><strong>Αρχεία Microsoft Office Open XML</strong></span></p>
+            <p>Μπορείτε να επιλέξετε ποια στοιχεία θα μεταφρασθούν. Θα εμφανίζονται ως ξεχωριστά τμήματα στη μετάφραση.</p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p><span class="bold"><strong>Word:</strong></span> μη-ορατό κείμενο οδηγιών, σχόλια, υποσημειώσεις, σημειώσεις τέλους, υποσέλιδα
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p><span class="bold"><strong>Excel: </strong></span>σχόλια, ονόματα υπολογιστικών φύλλων
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p><span class="bold"><strong>Power Point</strong></span>: σχόλια διαφανειών, slide masters, διάταξη διαφανειών
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p><span class="bold"><strong>Global:</strong></span> γραφήματα, διαγράμματα, σχέδια, WordArt
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p><span class="bold"><strong>Άλλες επιλογές:</strong></span></p>
+                     <div class="itemizedlist">
+                        <ul class="itemizedlist" style="list-style-type: circle; ">
+                           <li class="listitem">
+                              <p><span class="emphasis"><em>Aggregate tags</em></span>: αν τις επιλέξετε, οι ετικέτες χωρίς μεταφράσιμο κείμενο μεταξύ τους, θα συμπτυχθούν σε μεμονωμένες ετικέτες.
+                              </p>
+                           </li>
+                           <li class="listitem">
+                              <p><span class="emphasis"><em>Διατήρηση διαστημάτων σε όλες τις ετικέτες</em></span>: αν το επιλέξετε, τα "κενά διαστήματα" (π.χ., διαστήματα και νέες γραμμές) θα διατηρηθούν, ακόμη και αν κάτι τέτοιο δεν ορίσθηκε
+                                 τεχνικά μέσα στο έγγραφο
+                              </p>
+                           </li>
+                        </ul>
+                     </div>
+                  </li>
+               </ul>
+            </div>
+            <p><span class="bold"><strong>Αρχεία HTML και XHTML files</strong></span></p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p><span class="emphasis"><em>Προσθέστε ή ξαναγράψτε τη δήλωση κωδικοποίησης στα αρχεί HTML και XHTML</em></span>: Πάντα (προεπιλογή), Μόνον αν το αρχείο (X)HTML έχει μια κεφαλίδα, Μόνον αν το αρχείο (X)HTML έχει μια δήλωση κωδικοποίησης,
+                        Ποτέ
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p><span class="emphasis"><em>Μεταφράστε τις ακόλουθες ιδιότητες (attributes)</em></span>: οι επιλεγμένες ιδιότητες θα εμφανίζονται ως τμήματα στο παράθυρο της περιοχής Επεξεργασίας.
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p><span class="emphasis"><em>Αρχίστε μια νέα παράγραφο</em></span>: η &lt;br&gt; ετικέτα HTML θα αντιπροσωπεύει μια παράγραφο, από τη σκοπιά της κατάτμησης.
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p><span class="emphasis"><em>Να παρακάμπτεται η κανονική έκφραση (regex) για αντιστοίχιση κειμένου</em></span>: το κείμενο που αντιστοιχεί στην κανονική έκφραση (regex), θα παρακαμφθεί.
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p><span class="emphasis"><em>Να μη μεταφράσετε τις ιδιότητες περιεχομένου των μετα-ετικετών ... :</em></span> Οι παρακάτω μετα-ετικέτες δεν θα μεταφρασθούν.
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p><span class="emphasis"><em>Να μη μεταφράσετε το περιεχόμενο των ετικετών με τα παρακάτω ζεύγη ιδιοτήτων key-value (διαχωρισμένα με κόμματα)</em></span>: μια αντιστοίχιση στη λίστα των ζευγών key-value, θα οδηγήσει στην παράβλεψη του περιεχομένου των ετικετών
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <p><span class="bold"><strong>Αρχεία κειμένου</strong></span></p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p><span class="emphasis"><em>Να γίνεται κατάτμηση παραγράφου στις αλλαγές γραμμής, στις κενές γραμμές ή ποτέ:</em></span>:
+                     </p>
+                     <p>Αν είναι ενεργοί οι κανόνες κατάτμησης προτάσεων, το κείμενο θα κατατμηθεί περαιτέρω, σύμφωνα με την επιλογή που κάνετε εδώ.</p>
+                  </li>
+               </ul>
+            </div>
+            <p><span class="bold"><strong>Αρχεία σε μορφή Open Document Format (ODF)</strong></span></p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>Μπορείτε να επιλέξετε ποια από τα παρακάτω πράγματα πρέπει να μεταφρασθούν:</p>
+                     <p>Καταχωρήσεις πίνακα περιεχομένων, σελιδοδείκτες, παραπομπές σελιδοδεικτών, σημειώσεις, σχόλια, σημειώσεις παρουσίασης, σύνδεσμοι
+                        (URL), ονόματα λογιστικών φύλλων
+                     </p>
+                  </li>
+               </ul>
+            </div>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="edit.filter.dialog"></a>3. Επεξεργασία διαλόγου φίλτρου<a class="indexterm" name="d0e4596"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <p>Αυτός ο διάλογος σας επιτρέπει να ορίσετε τα μοτίβα ονόματος αρχείου για τα αρχεία που πρέπει να υποστούν επεξεργασία από
+               το φίλτρο, να παραμετροποιήσετε τα ονόματα αρχείων των μεταφρασμένων αρχείων και να επιλέξετε τις κωδικοποιήσεις που θα πρέπει
+               να χρησιμοποιηθούν για τη φόρτωση και την αποθήκευση του αντίστοιχου μεταφρασμένου αρχείου. Για την τροποποίηση του μοτίβου
+               ενός φίλτρου αρχείου, ή θα πρέπει να τροποποιήσετε άμεσα τα πεδία, ή να κάντε κλικ στο <span class="bold"><strong>Επεξεργασία.</strong></span> Για την προσθήκη ενός μοτίβου με φίλτρο αρχείου, κάντε κλικ στο <span class="bold"><strong>Προσθήκη</strong></span>. Ο ίδιος διάλογος χρησιμοποιείται για την προσθήκη ενός μοτίβου, ή για την επεξεργασία ενός συγκεκριμένου μοτίβου. Ο διάλογος
+               είναι χρήσιμος, διότι περιλαμβάνει ένα ειδικό πρόγραμμα επεξεργασίας για μοτίβα των ονομάτων αρχείου-στόχου, με τον οποίο
+               μπορείτε να παραμετροποιήσετε τα ονόματα των αρχείων εξόδου.
+            </p>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="source.filetype.and.filename.pattern"></a>3.1. <a class="indexterm" name="d0e4611"></a>Τύπος αρχείου προέλευσης, μοτίβο ονόματος αρχείου<a class="indexterm" name="d0e4617"></a></h3>
+                     </div>
+                  </div>
+               </div>
+               <p>Όταν το OmegaT εντοπίσει ένα αρχείο στον κατάλογο προέλευσής του, θα προσπαθήσει να επιλέξει το φίλτρο, βασιζόμενο στην επέκταση
+                  του αρχείου. Πιο συγκεκριμένα, το OmegaT προσπαθεί να αντιστοιχίσει τα μοτίβα αρχείου προέλευσης για το κάθε φίλτρο, με το
+                  όνομα αρχείου. Για παράδειγμα, το μοτίβο <code class="literal">*.xhtml </code>αντιστοιχίζει οποιοδήποτε αρχείο με την επέκταση <code class="literal">.xhtml</code>. Αν βρεθεί το κατάλληλο φίλτρο, τότε το αρχείο θα του ανατεθεί για περαιτέρω επεξεργασία. Για παράδειγμα, από προεπιλογή,
+                  τα αρχεία XHTML χρησιμοποιούνται για την επεξεργασία αρχείων με την επέκταση .xhtml. Μπορείτε να προσθέσετε ή να αλλάξετε
+                  μοτίβα ονόματος αρχείου, για τα αρχεία που θα υποστούν επεξεργασία από το κάθε αρχείο. Τα μοτίβα ονομάτων αρχείου προέλευσης
+                  χρησιμοποιούν χαρακτήρες τζόλυ (wild card) σαν εκείνους που χρησιμοποιούνται στις <span class="bold"><strong>Αναζητήσεις. </strong></span>Ο χαρακτήρας '*' αντιστοιχίζει μηδέν ή και περισσότερους χαρακτήρες. Ο χαρακτήρας '?' αντιστοιχίζει ακριβώς έναν χαρακτήρα.
+                  Όλοι οι αλλοι χαρακτήρες αντιπροσωπεύουν τον εαυτό τους. Για παράδειγμα, αν θέλετε το φίλτρο να χεριίζεται τα αρχεία readme
+                  (<code class="literal">readme, read.me</code> και <code class="literal">readme.txt</code>) θα πρέπει να χρησιμοποιείτε το μοτίβο <code class="literal">read*</code>.
+               </p>
+            </div>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="source.and.target.files.encoding"></a>3.2. Κωδικοποίηση αρχείου προέλευσης και στόχου
+                        </h3>
+                     </div>
+                  </div>
+               </div><a class="indexterm" name="d0e4645"></a><a class="indexterm" name="d0e4650"></a><a class="indexterm" name="d0e4655"></a><p>Μόνον ένας περιορισμένος αριθμός τύπων αρχείου διευκρινίζουν μια υποχρεωτική κωδικοποίηση. Οι μορφές αρχείου που δεν διευκρινίζουν
+                  την κωδικοποίησή τους θα χρησιμοποιήσουν την κωδικοποίηση που ορίσατε γαι την επέκταση που αντιστοιχίζει το όνομά τους. Για
+                  παράδειγμα, από προεπιλογή <code class="literal">.txt</code> τα αρχεία θα φορτώνονται χρησιμοποιώντας την προεπιλεγμένη κωδικοποίηση του λειτουργικού σας συστήματος. Μπορείτε να αλλάξετε
+                  την κωδικοποίηση προέλευσης για κάθε διαφορετικό μοτίβο ονόματος αρχείου προέλευσης. Αυτά τα αρχεία μπορούν επίσης να γραφούν
+                  με οποιαδήποτε κωδικοποίηση. Από προεπιλογή, η κωδικοποίηση του μεταφρασμένου αρχείου είναι η ίδια με εκείνη του αρχείου προέλευσης.
+                  Τα πεδία κωδικοποίησης πηγών και στόχων χρησιμοποιούν κουτιά combo που περιλαμβάνουν όλες τις υποστηριζόμενες κωδικοποιήσεις.
+                  Το &lt;auto&gt; αφήνει την επιλογή κωδικοποίησης στο <span class="application">OmegaT</span>. Αυτό λειτουργεί ως εξής:
+               </p>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
+                     <li class="listitem">
+                        <p>Το OmegaT εντοπίζει την κωδικοποίηση του αρχείου προέλευσης χρησιμοποιώντας την δήλωση κωδικοποίησης, αν υπάρχει (αρχεία HTML,
+                           αρχεία βασιζόμενα στο XML)
+                        </p>
+                     </li>
+                  </ul>
+               </div>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
+                     <li class="listitem">
+                        <p>Το OmegaT έχει οδηγίες να χρησιμοποιεί μια υποχρεωτική κωδικοποίηση για κάποιες μορφές αρχείου (ιδιότητες Java κλπ)</p>
+                     </li>
+                  </ul>
+               </div>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
+                     <li class="listitem">
+                        <p>Το OmegaT χρησιμοποιεί την κωδικοποίηση προεπιλογής του λειτουργικού συστήματος για τα αρχεία κειμένου.</p>
+                     </li>
+                  </ul>
+               </div>
+            </div>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="target.name"></a>3.3. Ονόματα αρχείων στόχου<a class="indexterm" name="d0e4683"></a></h3>
+                     </div>
+                  </div>
+               </div>
+               <p>Μερικές φορές μπορεί να θέλετε να μετονομάσετε αυτομάτως τα αρχεία που μεταφράζετε, για παράδειγμα προσθέτοντας έναν κωδικό
+                  γλώσσας μετά το όνομα αρχείου. Το μοτίβο του ονόματος του αρχείου στόχου χρησιμοποιεί μία ειδική σύνταξη, και έτσι, αν επιθυμείτε
+                  να επεξργασθείτε αυτό το πεδίο, θα πρέπει να κάνετε κλικ στο <span class="bold"><strong>Επεξεργασία...</strong></span>και να χρησιμοποιήσετε τον <a class="indexterm" name="d0e4693"></a>Διάλογο επεξεργασίας μοτίβου. Αν επιθυμείτε να επιστρέψετε στις ρυθμίσεις προεπιλογής του φίλτρου, κάντε κλικ στο <span class="bold"><strong>Προεπιλογές.</strong></span> Μπορείτε επίσης να τροποποιήσετε το όνομα άμεσα στο πεδίο για το μοτίβο ονόματος του αρχείου στόχου του διαλόγου φίλτρων
+                  αρχείου. Ο Διάλογος επεξεργασίας μοτίβου προσφέρει, μεταξύ των άλλων, τις εξής επιλογές:
+               </p>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
+                     <li class="listitem">
+                        <p>Η προεπιλογή είναι <code class="literal">${filename}</code>– το πλήρες όνομα αρχείου του αρχείου προέλευσης με την επέκταση: σε αυτή την περίπτωση το όνομα του μεταφρασμένου αρχείου
+                           είναι το ίδιο με εκείνο του αρχείου προέλευσης.
+                        </p>
+                     </li>
+                  </ul>
+               </div>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
+                     <li class="listitem">
+                        <p><code class="literal">${nameOnly}</code>– σας επιτρέπει να εισάγετε μόνο το όνομα του αρχείου προέλευσης χωρίς την επέκταση.
+                        </p>
+                     </li>
+                     <li class="listitem">
+                        <p><code class="literal">${extension} </code>- η αρχική επέκταση του αρχείου
+                        </p>
+                     </li>
+                  </ul>
+               </div>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
+                     <li class="listitem">
+                        <p><code class="literal">${targetLocale}</code>– ο κωδικός locale για το αρχείο στόχο (σε μορφή "xx_YY").
+                        </p>
+                     </li>
+                  </ul>
+               </div>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
+                     <li class="listitem">
+                        <p><code class="literal">${targetLanguage}</code>– η γλώσσα στόχος μαζί με τον κωδικό χώρας (σε μορφή "XX-YY").
+                        </p>
+                     </li>
+                  </ul>
+               </div>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
+                     <li class="listitem">
+                        <p><code class="literal">${targetLanguageCode}</code> – η γλώσσα στόχος - μόνον "XX"
+                        </p>
+                     </li>
+                  </ul>
+               </div>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
+                     <li class="listitem">
+                        <p><code class="literal">${targetCountryCode}</code>– η χώρα στόχος - μόνον "YY"
+                        </p>
+                     </li>
+                     <li class="listitem">
+                        <p><code class="literal">${timestamp-????}</code> – χρόνος και ημερομηνία συστήματος κατα τη στιγμή δημιουργίας σε διάφορα μοτίβα
+                        </p>
+                        <p>See <a class="ulink" href="http://docs.oracle.com/javase/1.4.2/docs/api/java/text/SimpleDateFormat.html" target="_top">Τεκμηρίωση Oracle</a> για παραδείγματα των μοτίβων "SimpleDateFormat"
+                        </p>
+                     </li>
+                     <li class="listitem">
+                        <p><code class="literal">${system-os-name}</code> - το λειτουργικό σύστημα του υπολογιστή που χρησιμοποιείται
+                        </p>
+                     </li>
+                     <li class="listitem">
+                        <p><code class="literal">${system-user-name}</code> - όνομα χρήστη του συστήματος
+                        </p>
+                     </li>
+                     <li class="listitem">
+                        <p><code class="literal">${system-host-name}</code> - όνομα του συστήματος host
+                        </p>
+                     </li>
+                     <li class="listitem">
+                        <p><code class="literal">${file-source-encoding}</code> - κωδικοποίηση αρχείου προέλευσης
+                        </p>
+                     </li>
+                     <li class="listitem">
+                        <p><code class="literal">${file-target-encoding}</code> - κωδικοποίηση αρχείου στόχου
+                        </p>
+                     </li>
+                     <li class="listitem">
+                        <p><code class="literal">${targetLocaleLCID}</code> - Το locale στόχος της Microsoft
+                        </p>
+                     </li>
+                  </ul>
+               </div>
+               <p>Διατίθενται πρόσθετες ποικιλίες για τις μεταβλητές ${nameOnly} and ${Extension}. Σε περίπτωση πυ ένα όνομα αρχείου είναι αμφίσημο,
+                  μπορεί κάποιος να εφαρμόσει μεταβλητές του είδους <code class="literal">${name only</code><span class="emphasis"><em>-extension number</em></span>} και <code class="literal">${extension</code>-<span class="emphasis"><em>extension number} </em></span>. Αν, για παράδειγμα, το αρχικό αρχείο λέγεται Document.xx.docx, οι παρακάτω μεταβλητές θα δώσουν τα εξής αποτελέσματα:
+               </p>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
+                     <li class="listitem">
+                        <p><code class="literal">${nameOnly-0}</code> Document
+                        </p>
+                     </li>
+                     <li class="listitem">
+                        <p><code class="literal">${nameOnly-1}</code> Document.xx
+                        </p>
+                     </li>
+                     <li class="listitem">
+                        <p><code class="literal">${nameOnly-2}</code> Document.xx.docx
+                        </p>
+                     </li>
+                     <li class="listitem">
+                        <p><code class="literal">${extension-0}</code> docx
+                        </p>
+                     </li>
+                     <li class="listitem">
+                        <p><code class="literal">${extension-1}</code> xx.docx
+                        </p>
+                     </li>
+                     <li class="listitem">
+                        <p><code class="literal">${extension-2}</code> Document.xx.docx
+                        </p>
+                     </li>
+                  </ul>
+               </div>
+            </div>
+         </div>
+      </div>
+      <div class="navfooter">
+         <hr>
+         <table width="100%" summary="Navigation footer">
+            <tr>
+               <td width="40%" align="left"><a accesskey="p" href="chapter.project.properties.html">Προηγ</a>&nbsp;
+               </td>
+               <td width="20%" align="center">&nbsp;</td>
+               <td width="40%" align="right">&nbsp;<a accesskey="n" href="chapter.files.and.directories.html">Επόμενο</a></td>
+            </tr>
+            <tr>
+               <td width="40%" align="left" valign="top">Κεφάλαιο 6. Ιδιότητες έργου&nbsp;</td>
+               <td width="20%" align="center"><a accesskey="h" href="index.html">Αρχή</a></td>
+               <td width="40%" align="right" valign="top">&nbsp;Κεφάλαιο 8. <span class="application">OmegaT</span> Αρχεία και Κατάλογοι
+               </td>
+            </tr>
+         </table>
+      </div>
+   </body>
+</html>

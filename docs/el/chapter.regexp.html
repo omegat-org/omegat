@@ -1,0 +1,508 @@
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <title>Κεφάλαιο 15. Κανονικές εκφράσεις</title>
+      <link rel="stylesheet" type="text/css" href="OmegaT.css">
+      <meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
+      <link rel="home" href="index.html" title="OmegaT - Εγχειρίδιο χρήστη">
+      <link rel="up" href="index.html" title="OmegaT - Εγχειρίδιο χρήστη">
+      <link rel="prev" href="chapter.searches.html" title="Κεφάλαιο 14. Αναζητήσεις">
+      <link rel="next" href="chapter.dictionaries.html" title="Κεφάλαιο 16. Λεξικά">
+   </head>
+   <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+      <div class="navheader">
+         <table width="100%" summary="Navigation header">
+            <tr>
+               <th colspan="3" align="center">Κεφάλαιο 15. Κανονικές εκφράσεις</th>
+            </tr>
+            <tr>
+               <td width="20%" align="left"><a accesskey="p" href="chapter.searches.html">Προηγ</a>&nbsp;
+               </td>
+               <th width="60%" align="center">&nbsp;</th>
+               <td width="20%" align="right">&nbsp;<a accesskey="n" href="chapter.dictionaries.html">Επόμενο</a></td>
+            </tr>
+         </table>
+         <hr>
+      </div>
+      <div class="chapter">
+         <div class="titlepage">
+            <div>
+               <div>
+                  <h1 class="title"><a name="chapter.regexp"></a>Κεφάλαιο 15. Κανονικές εκφράσεις<a class="indexterm" name="d0e7108"></a></h1>
+               </div>
+            </div>
+         </div>
+         <div class="toc">
+            <dl class="toc">
+               <dt><span class="section"><a href="chapter.regexp.html#regex.tools.and.examples.of.use">1. Εργαλεία Regex και Παραδείγματα χρήσης</a></span></dt>
+            </dl>
+         </div>
+         <p>Οι κανονικές εκφράσεις (ή, εν συντομία, regex) που χρησιμοποιούνται για αναζητήσεις και στους κανόνες κατάτμησης, είναι εκείνες
+            που υποστηρίζονται από τη Java. Αν χρειασθείτε πιο εξειδικευμένες λεπτομέρειες, συμβουλευθείτε την <a class="ulink" href="http://download.oracle.com/javase/1.5.0/docs/api/java/util/regex/Pattern.html" target="_top">Τεκμηρίωση Java Regex</a>. Βλέπε πρόσθετες βιβλιογραφίες και παραδείγματα, πιο κάτω.
+         </p>
+         <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;">
+            <h3 class="title">Σημείωση</h3>
+            <p>Αυτό το κεφάλαιο απευθύνεται σε προχωρημένους χρήστες που πρέπει να ορίσουν τις δικές τους ποικιλίες κανόνων κατάτμησης, ή
+               να επινοήσουν πιο σύνθετους και ισχυρότερους όρους-κλειδί  για την αναζήτηση.
+            </p>
+         </div>
+         <div class="table"><a name="d0e7123"></a><p class="title"><b>Πίνακας 15.1. Regex - Flags</b></p>
+            <div class="table-contents">
+               <table summary="Regex - Flags" border="1">
+                  <colgroup>
+                     <col align="left">
+                     <col>
+                  </colgroup>
+                  <thead>
+                     <tr>
+                        <th align="left">Το construct</th>
+                        <th align="left">... αντιστοιχίζει τα εξής</th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                     <tr>
+                        <td align="left">(?i)</td>
+                        <td align="left">Επιτρέπει την αντιστοίχιση ανεξαρτήτως μικρών-κεφαλαίων γραμμάτων (case-insensitive). Από προεπιλογή, το μοτίβο είναι case-sensitive).</td>
+                     </tr>
+                  </tbody>
+               </table>
+            </div>
+         </div><br class="table-break"><div class="table"><a name="d0e7140"></a><p class="title"><b>Πίνακας 15.2. Regex - Χαρακτήρας</b></p>
+            <div class="table-contents">
+               <table summary="Regex - Χαρακτήρας" border="1">
+                  <colgroup>
+                     <col align="left">
+                     <col>
+                  </colgroup>
+                  <thead>
+                     <tr>
+                        <th align="left">Το construct</th>
+                        <th align="left">... αντιστοιχίζει τα εξής</th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                     <tr>
+                        <td align="left">x</td>
+                        <td align="left">Τον χαρακτήρα x, εκτός από τα παρακάτω...</td>
+                     </tr>
+                     <tr>
+                        <td align="left">\uhhhh</td>
+                        <td align="left">Τον χαρακτήρα με δεκαεξαδική τιμή 0xhhhh</td>
+                     </tr>
+                     <tr>
+                        <td align="left">\t</td>
+                        <td align="left">Τον χαρακτήρα tab ('\u0009')</td>
+                     </tr>
+                     <tr>
+                        <td align="left">\n</td>
+                        <td align="left">Τον χαρακτήρα για νέα γραμμή (line feed) ('\u000A')</td>
+                     </tr>
+                     <tr>
+                        <td align="left">\r</td>
+                        <td align="left">Τον χαρακτήρα για αλλαγή γραμμής/ carriage-return ('\u000D')</td>
+                     </tr>
+                     <tr>
+                        <td align="left">\f</td>
+                        <td align="left">Τον χαρακτήρα για τροφοδότηση φόρμας/form-feed ('\u000C')</td>
+                     </tr>
+                     <tr>
+                        <td align="left">\a</td>
+                        <td align="left">Τον χαρακτήρα alert (bell) ('\u0007')</td>
+                     </tr>
+                     <tr>
+                        <td align="left">\e</td>
+                        <td align="left">Τον χαρακτήρα διαφυγής /escape ('\u001B')</td>
+                     </tr>
+                     <tr>
+                        <td align="left">\cx</td>
+                        <td align="left">Τον χαρακτήρα ελέγχου που αντιστοιχεί στο x</td>
+                     </tr>
+                     <tr>
+                        <td align="left">\0n</td>
+                        <td align="left">Τον χαρακτήρα με οκταδική τιμή 0n (0 &lt;= n &lt;= 7)</td>
+                     </tr>
+                     <tr>
+                        <td align="left">\0nn</td>
+                        <td align="left">Τον χαρακτήρα με οκταδική τιμή 0nn (0 &lt;= n &lt;= 7)</td>
+                     </tr>
+                     <tr>
+                        <td align="left">\0mnn</td>
+                        <td align="left">Τον χαρακτήρα με οκταδική τιμή 0mnn (0 &lt;= m &lt;= 3, 0 &lt;= n &lt;= 7)</td>
+                     </tr>
+                     <tr>
+                        <td align="left">\xhh</td>
+                        <td align="left">Τον χαρακτήρα με δεκαεξαδική τιμή 0xhh</td>
+                     </tr>
+                  </tbody>
+               </table>
+            </div>
+         </div><br class="table-break"><div class="table"><a name="d0e7217"></a><p class="title"><b>Πίνακας 15.3. Regex - Quotation</b></p>
+            <div class="table-contents">
+               <table summary="Regex - Quotation" border="1">
+                  <colgroup>
+                     <col align="left">
+                     <col>
+                  </colgroup>
+                  <thead>
+                     <tr>
+                        <th align="left">Το construct</th>
+                        <th align="left">...αντιστοιχίζει τα εξής</th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                     <tr>
+                        <td align="left">\</td>
+                        <td align="left">Τίποτε, αλλά παραθέτει τον εξής χαρακτήρα. Αυτό απαιτείται αν θέλετε να εισάγετε οποιονδήποτε από τους μετα χαρακτήρες !$()*+.&lt;&gt;?[\]^{|}
+                           για να αντιστοιχίζονται ως οι εαυτοί τους.
+                        </td>
+                     </tr>
+                     <tr>
+                        <td align="left">\\</td>
+                        <td align="left">Για παράδειγμα, αυτός είναι ο χαρατκήρας backslash</td>
+                     </tr>
+                     <tr>
+                        <td align="left">\Q</td>
+                        <td align="left">Τίποτε, αλλά παραθέτει όλους τους χαρακτήρες μέχρι το \E</td>
+                     </tr>
+                     <tr>
+                        <td align="left">\E</td>
+                        <td align="left">Τίποτε, αλλά τελειώνει παραθέτοντας ότι άρχισε με το \Q</td>
+                     </tr>
+                  </tbody>
+               </table>
+            </div>
+         </div><br class="table-break"><div class="table"><a name="d0e7249"></a><p class="title"><b>Πίνακας 15.4. Regex - Κλάσεις για Unicode blocks και κατηγορίες</b></p>
+            <div class="table-contents">
+               <table summary="Regex - Κλάσεις για Unicode blocks και κατηγορίες" border="1">
+                  <colgroup>
+                     <col align="left">
+                     <col>
+                  </colgroup>
+                  <thead>
+                     <tr>
+                        <th align="left">Το construct</th>
+                        <th align="left">...αντιστοιχίζει τα εξής</th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                     <tr>
+                        <td align="left">\p{InGreek}</td>
+                        <td align="left">Έναν χαρακτήρα στο Greek block (απλό <a class="ulink" href="http://download.oracle.com/javase/1.5.0/docs/api/java/util/regex/Pattern.html#ubc" target="_top"> block</a>)
+                        </td>
+                     </tr>
+                     <tr>
+                        <td align="left">\p{Lu}</td>
+                        <td align="left">Ένα κεφαλαίο γράμμα (απλό <a class="ulink" href="http://download.oracle.com/javase/1.5.0/docs/api/java/util/regex/Pattern.html#ubc" target="_top"> category</a>)
+                        </td>
+                     </tr>
+                     <tr>
+                        <td align="left">\p{Sc}</td>
+                        <td align="left">'Ενα σύμβολο νομίσματος</td>
+                     </tr>
+                     <tr>
+                        <td align="left">\P{InGreek}</td>
+                        <td align="left">Οποιονδήποτε χαρακτήρα εκτός από έναν που βρίσκεται στο Greek block (άρνηση)</td>
+                     </tr>
+                     <tr>
+                        <td align="left">[\p{L}&amp;&amp;[^\p{Lu}]]</td>
+                        <td align="left">Οποιοδήποτε γράμμα εκτός από κεφαλαία γράμματα (αφαίρεση)</td>
+                     </tr>
+                  </tbody>
+               </table>
+            </div>
+         </div><br class="table-break"><div class="table"><a name="d0e7292"></a><p class="title"><b>Πίνακας 15.5. Regex - Κλασεις χαρακτήρων</b></p>
+            <div class="table-contents">
+               <table summary="Regex - Κλασεις χαρακτήρων" border="1">
+                  <colgroup>
+                     <col align="left">
+                     <col>
+                  </colgroup>
+                  <thead>
+                     <tr>
+                        <th align="left">Το construct</th>
+                        <th align="left">...αντιστοιχίζει τα εξής</th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                     <tr>
+                        <td align="left">[abc]</td>
+                        <td align="left">a, b, ή c (απλή κλάση)</td>
+                     </tr>
+                     <tr>
+                        <td align="left">[^abc]</td>
+                        <td align="left">Οποιονδήποτε χαρακτήρα εκτός από a, b, ή c (άρνηση)</td>
+                     </tr>
+                     <tr>
+                        <td align="left">[a-zA-Z]</td>
+                        <td align="left">από το a μέχρι το z ή από το A μέχρι το Z, περιλαμβανομένου του (range)</td>
+                     </tr>
+                  </tbody>
+               </table>
+            </div>
+         </div><br class="table-break"><div class="table"><a name="d0e7319"></a><p class="title"><b>Πίνακας 15.6. Regex - Προκαθορισμένες κλάσεις χαρακτήρων</b></p>
+            <div class="table-contents">
+               <table summary="Regex - Προκαθορισμένες κλάσεις χαρακτήρων" border="1">
+                  <colgroup>
+                     <col align="left">
+                     <col>
+                  </colgroup>
+                  <thead>
+                     <tr>
+                        <th align="left">Το construct</th>
+                        <th align="left">...αντιστοιχίζει τα εξής</th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                     <tr>
+                        <td align="left">.</td>
+                        <td align="left">Οποιονδήποτε χαρακτήρα (εκτός από line terminators)</td>
+                     </tr>
+                     <tr>
+                        <td align="left">\d</td>
+                        <td align="left">Ένα ψηφίο: [0-9]</td>
+                     </tr>
+                     <tr>
+                        <td align="left">\D</td>
+                        <td align="left">Ένα μη-ψηφίο: [^0-9]</td>
+                     </tr>
+                     <tr>
+                        <td align="left">\s</td>
+                        <td align="left">Έναν χαρακτήρα κενού διαστήματος: [ \t\n\x0B\f\r]</td>
+                     </tr>
+                     <tr>
+                        <td align="left">\S</td>
+                        <td align="left">Έναν χαρακτήρα μη-κενού διαστήματος: [^\s]</td>
+                     </tr>
+                     <tr>
+                        <td align="left">\w</td>
+                        <td align="left">Έναν χαρακτήρα λέξη: [a-zA-Z_0-9]</td>
+                     </tr>
+                     <tr>
+                        <td align="left">\W</td>
+                        <td align="left">Έναν χαρακτήρα μη-λέξη: [^\w]</td>
+                     </tr>
+                  </tbody>
+               </table>
+            </div>
+         </div><br class="table-break"><div class="table"><a name="d0e7366"></a><p class="title"><b>Πίνακας 15.7. Regex - Boundary matchers</b></p>
+            <div class="table-contents">
+               <table summary="Regex - Boundary matchers" border="1">
+                  <colgroup>
+                     <col align="left">
+                     <col>
+                  </colgroup>
+                  <thead>
+                     <tr>
+                        <th align="left">Το construct</th>
+                        <th align="left">...αντιστοιχίζει τα εξής</th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                     <tr>
+                        <td align="left">^</td>
+                        <td align="left">Η αρχή μιας γραμμής</td>
+                     </tr>
+                     <tr>
+                        <td align="left">$</td>
+                        <td align="left">Το τέλος μιας γραμμής</td>
+                     </tr>
+                     <tr>
+                        <td align="left">\b</td>
+                        <td align="left">Ένα όριο μιας λέξης</td>
+                     </tr>
+                     <tr>
+                        <td align="left">\B</td>
+                        <td align="left">Ένα όριο μιας μη-λέξης</td>
+                     </tr>
+                  </tbody>
+               </table>
+            </div>
+         </div><br class="table-break"><div class="table"><a name="d0e7398"></a><p class="title"><b>Πίνακας 15.8. Regex - 'Άπληστοι ποσοτικοποιητές' (greedy quantifiers)</b></p>
+            <div class="table-contents">
+               <table summary="Regex - 'Άπληστοι ποσοτικοποιητές' (greedy quantifiers)" border="1">
+                  <colgroup>
+                     <col align="left">
+                     <col>
+                  </colgroup>
+                  <thead>
+                     <tr>
+                        <th align="left">Το construct</th>
+                        <th align="left">...αντιστοιχίζει τα εξής</th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                     <tr>
+                        <td align="left">X<span class="emphasis"><em>?</em></span></td>
+                        <td align="left">X, άπαξ ή καθόλου</td>
+                     </tr>
+                     <tr>
+                        <td align="left">X<span class="emphasis"><em>*</em></span></td>
+                        <td align="left">X, μηδέν ή περισσότερες φορές</td>
+                     </tr>
+                     <tr>
+                        <td align="left">X<span class="emphasis"><em>+</em></span></td>
+                        <td align="left">X, μηδέν ή περισσότερες φορές</td>
+                     </tr>
+                  </tbody>
+               </table>
+            </div>
+         </div><br class="table-break"><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;">
+            <h3 class="title">Σημείωση</h3>
+            <p>Οι 'άπληστοι ποσοτικοποιητές' (greedy quantifiers) θα αντιστοιχίσουν όσο περισσότερο μπορούν. Για παράδειγμα, το <span class="emphasis"><em>a+?</em></span> θα αντιστοιχίσει το aaa στο <span class="emphasis"><em>aaabbb</em></span></p>
+         </div>
+         <div class="table"><a name="d0e7439"></a><p class="title"><b>Πίνακας 15.9. Regex - Απρόθυμοι (Reluctant) 'μη-άπληστοι ποσοτικοποιητές'</b></p>
+            <div class="table-contents">
+               <table summary="Regex - Απρόθυμοι (Reluctant) 'μη-άπληστοι ποσοτικοποιητές'" border="1">
+                  <colgroup>
+                     <col align="left">
+                     <col>
+                  </colgroup>
+                  <thead>
+                     <tr>
+                        <th align="left">Το construct</th>
+                        <th align="left">...αντιστοιχίζει τα εξής</th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                     <tr>
+                        <td align="left">X??</td>
+                        <td align="left">X, άπαξ ή καθόλου</td>
+                     </tr>
+                     <tr>
+                        <td align="left">X*?</td>
+                        <td align="left">X, μηδέν ή περισσότερες φορές</td>
+                     </tr>
+                     <tr>
+                        <td align="left">X+?</td>
+                        <td align="left">X, μηδέν ή περισσότερες φορές</td>
+                     </tr>
+                  </tbody>
+               </table>
+            </div>
+         </div><br class="table-break"><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;">
+            <h3 class="title">Σημείωση</h3>
+            <p>Οι 'μη-άπληστοι ποσοτικοποιητές' θα αντιστοιχίσουν όσο λιγώτερο μπορούν. Για παράδειγμα, το <span class="emphasis"><em>a+?</em></span> θα αντιστοιχίσει πρώτα το <span class="emphasis"><em>a</em></span> στο <span class="emphasis"><em>aaabbb</em></span></p>
+         </div>
+         <div class="table"><a name="d0e7477"></a><p class="title"><b>Πίνακας 15.10. Regex - Λογικοί τελεστές</b></p>
+            <div class="table-contents">
+               <table summary="Regex - Λογικοί τελεστές" border="1">
+                  <colgroup>
+                     <col align="left">
+                     <col>
+                  </colgroup>
+                  <thead>
+                     <tr>
+                        <th align="left">Το construct</th>
+                        <th align="left">...αντιστοιχίζει τα εξής</th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                     <tr>
+                        <td align="left">XY</td>
+                        <td align="left">X ακολουθούμενο από το Y</td>
+                     </tr>
+                     <tr>
+                        <td align="left">X|Y</td>
+                        <td align="left">Είτε X ή Y</td>
+                     </tr>
+                     <tr>
+                        <td align="left">(XY)</td>
+                        <td align="left">XY ως μια ενιαία ομάδα</td>
+                     </tr>
+                  </tbody>
+               </table>
+            </div>
+         </div><br class="table-break"><div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="regex.tools.and.examples.of.use"></a>1. <a class="indexterm" name="d0e7506"></a>Εργαλεία Regex και Παραδείγματα χρήσης<a class="indexterm" name="d0e7512"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <p>Είναι διαθέσιμα αρκετά διαδραστικά εργαλεία για την ανάπτυξη και δοκιμή κανονικών εκφράσεων. Ακολουθούν, εν πολλοίς, το ίδιιο
+               μοτίβο (για ένα παράδειγμα από τον Δοκιμαστή Κανονικών Εκφράσεων βλέπε πιο κάτω): η κανονική έκφραση (καταχώρηση  στην κορυφή)
+               αναλύει το κείμενο αναζήτησης (Πλαίσιο κειμένου στη μέση), αποδίδοντας τα hits, που εμφανίζονται στο Πλαίσο αποτελεσμάτων
+               κειμένου.
+            </p>
+            <div class="figure"><a name="regerx.tester"></a><p class="title"><b>Σχήμα 15.1. Δοκιμαστής Regex</b></p>
+               <div class="figure-contents">
+                  <div class="mediaobject"><img src="images/RegexTester.png" alt="Δοκιμαστής Regex"></div>
+               </div>
+            </div><br class="figure-break"><p>Βλέπε <a class="ulink" href="http://weitz.de/regex-coach/" target="_top">Ο προπονητής Regex Coach</a> εκδόσεις για Windows,Linux, FreeBSD ενός stand-alone εργαλείου. Αυτό είναι πολύ παρόμοιο με το παραπάνω παράδειγμα.
+            </p>
+            <p>Μπορείτε να βρείτε μια ωραία συλλογή με χρήσιμες περιπτώσεις regex στο ίδιο το <span class="application">OmegaT</span> (βλέπε επιλογές &gt; Κατάτμηση). Η ακόλουθη λίστα περιλαμβάνει εκφράσεις που μπορεί να σας φανούν χρήσιμες όταν κάνετε αναζήτηση
+               μέσα στη μεταφραστική μνήμη.
+            </p>
+            <div class="table"><a name="d0e7537"></a><p class="title"><b>Πίνακας 15.11. Regex - Παραδείγματα κανονικής έκφρασης σε μεταφράσεις</b></p>
+               <div class="table-contents">
+                  <table summary="Regex - Παραδείγματα κανονικής έκφρασης σε μεταφράσεις" border="1">
+                     <colgroup>
+                        <col align="left">
+                        <col>
+                     </colgroup>
+                     <thead>
+                        <tr>
+                           <th align="left">Κανονική έκφραση (regex)</th>
+                           <th align="left">Βρίσκει τα εξής:</th>
+                        </tr>
+                     </thead>
+                     <tbody>
+                        <tr>
+                           <td align="left">(\b\w+\b)\s\1\b</td>
+                           <td align="left">διπλές λέξεις</td>
+                        </tr>
+                        <tr>
+                           <td align="left">[\.,]\s*[\.,]+</td>
+                           <td align="left">κώμμα ή τελεία, ακολουθούμενο από διαστήματα και από ακόμη ένα κώμμα ή τελεία</td>
+                        </tr>
+                        <tr>
+                           <td align="left">\. \s+$</td>
+                           <td align="left">επιπλέον διαστήματα μετά από μια τελεία στο τέλος της γραμμής</td>
+                        </tr>
+                        <tr>
+                           <td align="left">\s+a\s+[aeiou]</td>
+                           <td align="left">Αγγλικά: οι λέξεις που αρχίζουν με φωνήεντα, θα πρέπει γενικά να προγούνται από  "an" και όχι από "a"</td>
+                        </tr>
+                        <tr>
+                           <td align="left">\s+an\s+[^aeiou]</td>
+                           <td align="left">Αγγλικά: ο ίδιος έλεγχος όπως κα πιο πάνω, αλλά για σύμφωνα ("a", και όχι "an")</td>
+                        </tr>
+                        <tr>
+                           <td align="left">\s{2,}</td>
+                           <td align="left">περισσότερα από ένα διάστημα</td>
+                        </tr>
+                        <tr>
+                           <td align="left">\.[A-Z]</td>
+                           <td align="left">Τελεία που ακολουθείται από έναν κεφαλαίο γράμμα - πιθανώς, λείπει ένα διάστημα ανάμεσα στην τελεία και την αρχή μιας νέας
+                              προτασης;
+                           </td>
+                        </tr>
+                        <tr>
+                           <td align="left">\bis\b</td>
+                           <td align="left">αναζήτηση για “is”, όχι για “this” ή για “isn't” κλπ.</td>
+                        </tr>
+                     </tbody>
+                  </table>
+               </div>
+            </div><br class="table-break"></div>
+      </div>
+      <div class="navfooter">
+         <hr>
+         <table width="100%" summary="Navigation footer">
+            <tr>
+               <td width="40%" align="left"><a accesskey="p" href="chapter.searches.html">Προηγ</a>&nbsp;
+               </td>
+               <td width="20%" align="center">&nbsp;</td>
+               <td width="40%" align="right">&nbsp;<a accesskey="n" href="chapter.dictionaries.html">Επόμενο</a></td>
+            </tr>
+            <tr>
+               <td width="40%" align="left" valign="top">Κεφάλαιο 14. Αναζητήσεις&nbsp;</td>
+               <td width="20%" align="center"><a accesskey="h" href="index.html">Αρχή</a></td>
+               <td width="40%" align="right" valign="top">&nbsp;Κεφάλαιο 16. Λεξικά</td>
+            </tr>
+         </table>
+      </div>
+   </body>
+</html>

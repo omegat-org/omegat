@@ -1,0 +1,156 @@
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <title>Κεφάλαιο 11. Εγασίες με απλό κείμενο</title>
+      <link rel="stylesheet" type="text/css" href="OmegaT.css">
+      <meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
+      <link rel="home" href="index.html" title="OmegaT - Εγχειρίδιο χρήστη">
+      <link rel="up" href="index.html" title="OmegaT - Εγχειρίδιο χρήστη">
+      <link rel="prev" href="chapter.translation.editing.html" title="Κεφάλαιο 10. Συμπεριφορά επεξεργασίας">
+      <link rel="next" href="chapter.translation.memories.html" title="Κεφάλαιο 12. Μεταφραστικές μνήμες">
+   </head>
+   <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+      <div class="navheader">
+         <table width="100%" summary="Navigation header">
+            <tr>
+               <th colspan="3" align="center">Κεφάλαιο 11. Εγασίες με απλό κείμενο</th>
+            </tr>
+            <tr>
+               <td width="20%" align="left"><a accesskey="p" href="chapter.translation.editing.html">Προηγ</a>&nbsp;
+               </td>
+               <th width="60%" align="center">&nbsp;</th>
+               <td width="20%" align="right">&nbsp;<a accesskey="n" href="chapter.translation.memories.html">Επόμενο</a></td>
+            </tr>
+         </table>
+         <hr>
+      </div>
+      <div class="chapter">
+         <div class="titlepage">
+            <div>
+               <div>
+                  <h1 class="title"><a name="chapter.plain.text"></a>Κεφάλαιο 11. Εγασίες με απλό κείμενο<a class="indexterm" name="d0e5859"></a></h1>
+               </div>
+            </div>
+         </div>
+         <div class="toc">
+            <dl class="toc">
+               <dt><span class="section"><a href="chapter.plain.text.html#default.encoding">1. Προεπιλεγμένη Κωδικοποίηση</a></span></dt>
+               <dt><span class="section"><a href="chapter.plain.text.html#OmegaT.solution">2. Η λύση του <span class="application">OmegaT</span></a></span></dt>
+            </dl>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="default.encoding"></a>1. Προεπιλεγμένη Κωδικοποίηση<a class="indexterm" name="d0e5867"></a><a class="indexterm" name="d0e5872"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <p>Τα αρχεία απλού κειμένου - στις περισσότερες περιπτώσεις έχουν μια επέκτσαση txt - περιέχουν απλώς πληροφορίες κειμένου και
+               δεν δίνουν σαφείς πληροφορίες στον υπολογιστή για τη γλώσσα που περιέχουν. Όλο κι όλο που μπορεί να κάνει το OmegaT σε αυτή
+               την περίπτωση, είναι να θεωρήσει δεδομένο ότι το κείμενο έχει γραφεί στην ίδια γλώσσα που χρησιμοποιεί και ο ίδιος ο υπολογιστής.
+               Αυτό δεν είναι πρόβλημα για αρχεία που είναι κωδικοποιημένα σε Unicode με χρήση ενός set χαρακτήρων με κωδικοποίηση 16-bit.
+               Αν το κείμενο είναι, όμως, κωδικοποιημένο σε 8 bits, μπορεί να βρεθεί κάποιος αντιμέτωπος με την εξής περίερργη κατάσταση:
+               αντί να εμφανίζει το κείμενο, για Ιαπωνικούς χαρακτήρες...
+            </p>
+            <div class="mediaobject"><img src="images/OmT_Japanese.png"></div>
+            <p>...το σύστημα θα το εμφανίζει ως εξής, για παράδειγμα:</p>
+            <div class="mediaobject"><img src="images/OmT_Cyrillic.png"></div>
+            <p>Ο υπολογιστής που τρέχει το OmegaT, έχει τα Ρωσικά ως γώσσα προεπιλογής και, έτσι, δείχνει τους χαρακτήρες σε Κυριλλικό αλφάβητο
+               και όχι σε Kanji.
+            </p>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="OmegaT.solution"></a>2. Η λύση του <span class="application">OmegaT</span></h2>
+                  </div>
+               </div>
+            </div>
+            <p>Υπάρχουν, ουσιαστικά, τρεις τρόποι για να αντιμετωπισθεί αυτό το πρόβλημα στο <span class="application">OmegaT</span>. Προβλέπουν όλοι την εφαρμογή των φίλτρων αρχείου στο μενού<span class="bold"><strong> Επιλογές </strong></span>.
+            </p>
+            <div class="variablelist">
+               <dl class="variablelist">
+                  <dt><span class="term">Αλλάξτε την κωδικοποίηση των αρχείων σας σε Unicode</span></dt>
+                  <dd>
+                     <p>ανοίξτε το αρχείο προέλευσης σε ένα πρόγραμμα επεξεργασίας απλού κειμένου (text editor) που ερμηνεύει σωστά την κωδικοποίησή
+                        του και αποθηκεύει το αρχείο με κωδικοποίηση <span class="bold"><strong>"UTF-8"</strong></span> . Αλλάξτε την επέκταση του αρχείου από το <code class="literal">.txt</code> σε <code class="literal">.utf8.</code> Το <span class="application">OmegaT</span> θα ερμηνεύσει αυτομάτως το αρχείο ως αρχείο UTF-8. Αυτή είναι η πιο λογική εναλλακτική, η οποία θα σας γλυτώσει από προβλήματα
+                        μακροπρόθεσμα.
+                     </p>
+                  </dd>
+               </dl>
+            </div>
+            <div class="variablelist">
+               <dl class="variablelist">
+                  <dt><span class="term">Καθορίστε την κωδικοποίηση για τα αρχεία σας απλού κειμένου</span></dt>
+                  <dd>
+                     <p>- π.χ. τα αρχεία με επέκταση <code class="filename">.txt </code> : στην ενότητα <span class="bold"><strong>Αρχεία κειμένου </strong></span>του διαλόγου Φίλτρα αρχείου, αλλάξτε την <span class="bold"><strong>Κωδικοποίηση Αρχείου προέλευσης</strong></span> από το &lt;auto&gt; στην κωδικοποίηση που αντιστοιχεί στο αρχείο προέλευσης σας <code class="filename">.txt</code> , π.χ., στο .jp για το παραπάνω παράδειγμα.
+                     </p>
+                  </dd>
+               </dl>
+            </div>
+            <div class="variablelist">
+               <dl class="variablelist">
+                  <dt><span class="term">Αλλάξτε τις επεκτάσεις των αρχείων σας με απλό κείμενο</span></dt>
+                  <dd>
+                     <p>για παράδειγμα από <code class="filename">.txt</code> σε <code class="filename">.jp</code> για απλά κείμενα στα Ιαπωνικά: στην ενότητα <span class="bold"><strong>Αρχεία κειμένου</strong></span> του διαλόγου Φίλτρα αρχείου και προσθέστε νέο <span class="bold"><strong>Μοτίβο Ονόματος αρχείου προέλευσης</strong></span> (<code class="filename">*.jp</code> στο παράδειγμα αυτό) και επιλέξτε τις κατάλληλες παραμέτρους για την κωδικοποίηση προέλευσης και προορισμού
+                     </p>
+                  </dd>
+               </dl>
+            </div>
+            <p>Το <span class="application">OmegaT</span> διαθέτει, από προεπιλογή, την εξής σύντομη λίστα για να σας διευκολύνει στον χειρισμό ορισμένων απλών αρχείων κειμένου:
+            </p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p><code class="literal">.txt</code> τα αρχεία ερμηνεύονται αυτομάτως (&lt;auto&gt;) από το <span class="application">OmegaT</span> ως κωδικοποιημένα στην προεπιλεγμένη κωδικοποίηση του υπολογιστή.
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>Τα αρχεία <code class="literal">.txt1</code> είναι αρχεία σε ISO-8859-1, που καλύπτουν τις περισσότερες <span class="bold"><strong>Δυτικοευρωπαϊκές</strong></span> γλώσσες.<a class="indexterm" name="d0e5990"></a></p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>Τα αρχεία <code class="literal">.txt2</code> είναι αρχεία σε ISO-8859-2, που καλύπτουν τις περισσότερες <span class="bold"><strong>Κεντροευρωπαϊκές και Ανατολικοευρωπαΐκές</strong></span> γλώσσες<a class="indexterm" name="d0e6005"></a></p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>Τα αρχεία <code class="literal">.utf8</code> ερμηνεύονται από το <span class="application">OmegaT</span> σαν κωδικοποιημένα σε UTF-8 (μια κωδικοποίηση που καλύπτει σχεδόν όλες τις γλώσσες του κόσμου).<a class="indexterm" name="d0e6020"></a></p>
+                  </li>
+               </ul>
+            </div>
+            <p>Μπορείτε να ελέγξετε και εσείς οι ίδιοι, επιλέγοντας την καταχώρηση <span class="bold"><strong>Φίλτρα αρχείου</strong></span> στο μενού <span class="bold"><strong>Επιλογές</strong></span>. Για παράδειγμα, αν έχετε ένα αρχείο κειμένου στα Τσεχικά (πολύ πιθανό να είναι γραμμένο με κωδικό <span class="bold"><strong>ISO-8859-2</strong></span>) πρέπει, απλώς, να αλλάξετε την επέκταση<code class="literal"> .txt</code> σε <code class="literal">.txt2 </code>και το <span class="application">OmegaT</span> θα ερμηνεύσει σωστά τα περιεχόμενα. Και, ασφαλώς, αν θέλετε να είστε ασφαλείς, εξετάστε την περίπτωση μετατροπής αυτού του
+               είδους αρχείου, σε Unicode, δηλ. σε μορφή αρχείου <code class="literal">.utf8 </code>.
+            </p>
+         </div>
+      </div>
+      <div class="navfooter">
+         <hr>
+         <table width="100%" summary="Navigation footer">
+            <tr>
+               <td width="40%" align="left"><a accesskey="p" href="chapter.translation.editing.html">Προηγ</a>&nbsp;
+               </td>
+               <td width="20%" align="center">&nbsp;</td>
+               <td width="40%" align="right">&nbsp;<a accesskey="n" href="chapter.translation.memories.html">Επόμενο</a></td>
+            </tr>
+            <tr>
+               <td width="40%" align="left" valign="top">Κεφάλαιο 10. Συμπεριφορά επεξεργασίας&nbsp;</td>
+               <td width="20%" align="center"><a accesskey="h" href="index.html">Αρχή</a></td>
+               <td width="40%" align="right" valign="top">&nbsp;Κεφάλαιο 12. Μεταφραστικές μνήμες</td>
+            </tr>
+         </table>
+      </div>
+   </body>
+</html>

@@ -1,0 +1,266 @@
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <title>Κεφάλαιο 14. Αναζητήσεις</title>
+      <link rel="stylesheet" type="text/css" href="OmegaT.css">
+      <meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
+      <link rel="home" href="index.html" title="OmegaT - Εγχειρίδιο χρήστη">
+      <link rel="up" href="index.html" title="OmegaT - Εγχειρίδιο χρήστη">
+      <link rel="prev" href="chapter.segmentation.html" title="Κεφάλαιο 13. Κατάτμηση αρχείων προέλευσης">
+      <link rel="next" href="chapter.regexp.html" title="Κεφάλαιο 15. Κανονικές εκφράσεις">
+   </head>
+   <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+      <div class="navheader">
+         <table width="100%" summary="Navigation header">
+            <tr>
+               <th colspan="3" align="center">Κεφάλαιο 14. Αναζητήσεις</th>
+            </tr>
+            <tr>
+               <td width="20%" align="left"><a accesskey="p" href="chapter.segmentation.html">Προηγ</a>&nbsp;
+               </td>
+               <th width="60%" align="center">&nbsp;</th>
+               <td width="20%" align="right">&nbsp;<a accesskey="n" href="chapter.regexp.html">Επόμενο</a></td>
+            </tr>
+         </table>
+         <hr>
+      </div>
+      <div class="chapter">
+         <div class="titlepage">
+            <div>
+               <div>
+                  <h1 class="title"><a name="chapter.searches"></a>Κεφάλαιο 14. Αναζητήσεις<a class="indexterm" name="d0e6858"></a></h1>
+               </div>
+            </div>
+         </div>
+         <div class="toc">
+            <dl class="toc">
+               <dt><span class="section"><a href="chapter.searches.html#search.window">1. Παράθυρο αναζήτησης</a></span></dt>
+               <dd>
+                  <dl>
+                     <dt><span class="section"><a href="chapter.searches.html#d0e6880">1.1. Γϊνεται αναζήτηση</a></span></dt>
+                     <dt><span class="section"><a href="chapter.searches.html#d0e6905">1.2. Τοποθεσία αναζήτησης</a></span></dt>
+                  </dl>
+               </dd>
+               <dt><span class="section"><a href="chapter.searches.html#using.wild.cards">2. Using wild cards</a></span></dt>
+               <dt><span class="section"><a href="chapter.searches.html#search.methoids">3. Μέθοδοι και επιλογές αναζήτησης </a></span></dt>
+               <dt><span class="section"><a href="chapter.searches.html#search.result.display">4. Εμφάνιση αποτελεσμάτων αναζήτησης</a></span></dt>
+            </dl>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="search.window"></a>1. Παράθυρο αναζήτησης
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <div class="figure"><a name="text.search.window"></a><p class="title"><b>Σχήμα 14.1. Παράθυρο αναζήτησης κειμένου<a class="indexterm" name="d0e6867"></a></b></p>
+               <div class="figure-contents">
+                  <div class="mediaobject"><img src="images/TextSearch25.png" alt="Παράθυρο αναζήτησης κειμένου"></div>
+               </div>
+            </div><br class="figure-break"><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;">
+               <h3 class="title">Σημείωση</h3>
+               <p>Η παραπάνω αναζήτηση βρίσκει όλα τα τμήματα προορισμού που περιέχουν χαρακτήρες, μάλλον απίθανους στον προορισμό - π.χ. Σλοβενική
+                  - γλώσσα.
+               </p>
+            </div>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="d0e6880"></a>1.1. Γϊνεται αναζήτηση<a class="indexterm" name="d0e6883"></a></h3>
+                     </div>
+                  </div>
+               </div>
+               <p>Το <span class="application">OmegaT</span> προσφέρει ένα ευρύ φάσμα με ισχυρές λειτουργίες αναζήτησης. Ανοίξτε το Παράθυρο Αναζήτησης με το <span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>F</strong></span> και βάλτε στο κουτί Αναζήτησης τη λέξη ή τη φράση που θέλετε να αναζητήσετε. Εναλλακτικά, στο παράθυρο Επεξεργασίας, επιλέξτε
+                  μια λέξη ή φράση στο πεδίο επεξεργασίας (κείμενο προορισμού του τρέχοντος τμήματος) και πατήστε <span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>F</strong></span>. Η λέξη ή φράση θα εισαχθεί αυτομάτως στο κουτί Αναζήτησης. Μπορείτε να έχετε ανοικτά πολλά Παράθυρα Αναζήτησης ταυτόχρονα,
+                  αλλά κλείστε τα όταν δεν σας χρειάζονται άλλο, ούτως ώστε να μην ενοχλούν την επιφάνεια εργασίας σας.
+               </p>
+            </div>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="d0e6905"></a>1.2. Τοποθεσία αναζήτησης
+                        </h3>
+                     </div>
+                  </div>
+               </div>
+               <p>Οι αναζητήσεις διεξάγονται από προεπιλογή τόσο στην ενότητα προέλευσης όσο και προορισμού του έργου, αλλά μπορείτε να περιορίσετε
+                  την αναζήτησή σας μόνο στο κείμενο προέλευσης ή προορισμού. Μπορείτε να κάνετε αναζήτηση
+               </p>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
+                     <li class="listitem">
+                        <p>μόνο στο έργο (ρύθμιση προεπιλογής)</p>
+                     </li>
+                  </ul>
+               </div>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
+                     <li class="listitem">
+                        <p>και στο έργο και στις μεταφραστικές μνήμες αναφοράς στο /tm/ (ελέγξτε <span class="emphasis"><em>Αναζήτηση TMs)</em></span></p>
+                     </li>
+                  </ul>
+               </div>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
+                     <li class="listitem">
+                        <p>σε ένα μεμονωμένο αρχείο ή έναν κατάλογο που περιέχει μια ομάδα αρχείων (ελέγξτε <span class="emphasis"><em>Αναζήτηση αρχείων)</em></span></p>
+                     </li>
+                  </ul>
+               </div>
+               <p>Όταν κάνετε αναζήτηση μέσα στα αρχεία (και όχι στις μεταφραστικές μνήμες), το <span class="application">OmegaT</span> περιορίζει την αναζήτηση σε αρχεία πηγαίας μορφής. Κατά συνέπεια, παρόλο που το OmegaT είναι πολύ ικανό να χειρίζεται αρχεία<code class="filename"> tmx</code> , δεν τα περιλαμβάνει στην αναζήτηση αρχείων. Αν ενεργοποιήσετε τις <span class="bold"><strong><a class="indexterm" name="d0e6935"></a>Προχωρημένες Επιλογές</strong></span>, μπορείτε να συνδυάσετε την αναζήτηση με το όνομα του συγγραφέα της μετάφρασης και τη χρονική στιγμή που έγινε η τελευταία
+                  αλλαγή.
+               </p>
+            </div>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="using.wild.cards"></a>2. Using wild cards<a class="indexterm" name="d0e6945"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <p>In both exact and keyword searches, the wild card search characters
+                   '*' and '?' can be used. They have the meaning, familiar to Word
+                   users:
+            </p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>'*' matches zero or more characters, from the current position
+                                in a given word to its end. The search term <code class="literal">'run*'</code>
+                                for example would match words <code class="literal">'run'</code>,
+                                <code class="literal">'runs'</code> and <code class="literal">'running'</code>.
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>Το σύμβολο '?' αντιστοιχίζει οποιονδήποτε μεμονωμένο χαρακτήρα. Για παράδειγμα, η έκφραση <code class="literal">'run?'</code> θα αντιστοιχίσει τη λέξη <code class="literal">'runs'</code> αλλά και <code class="literal">'runn'</code> στη λέξη <code class="literal">'running'</code>.
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <p>Οι αντιστοιχίσεις θα εμφανίζονται με βαθύ μπλε. Σημειώστε ότι το '*' και το '?' έχουν ένα ειδικό νόημα στις κανονικές εκφράσεις
+               και, συνεπώς, η αναζήτησης με wild card, όπως την περιγράψαμε εδώ, ισχύει στις ακριβείς και στις λέξεις-κλειδί μόνο (βλέπε
+               πιο κάτω).
+            </p>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="search.methoids"></a>3. Μέθοδοι και επιλογές αναζήτησης <a class="indexterm" name="d0e6989"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <p>Επιλέξτε τη μέθοδο χρησιμοποιώντας τα κουμπιά radio. Προσφέρονται οι εξής μέθοδοι αναζήτησης:</p>
+            <div class="variablelist">
+               <dl class="variablelist">
+                  <dt><span class="term">ακριβής αναζήτηση</span></dt>
+                  <dd>
+                     <p>Αναζήτηση τμημάτων τα οποία περιέχουν την ακριβή συμβολοσειρά που ορίσατε. Η ακριβής αναζήτηση ψάχνει για μια φράση, π.χ.
+                        αν εισαχθούν πολλές λέξεις, θα βρεθούν μόνον αν απαντώνται ακριβώς με εκείνη τη σειρά. Αν κάνετε αναζ'ητηση για <code class="literal">ανοιχτό αρχείο</code> θα βρει, τότε, όλες τις περιστάσεις της συμβολοσειράς <span class="emphasis"><em><code class="literal">ανοιχτό αρχείο</code></em></span>, αλλά όχι <span class="emphasis"><em><code class="literal">ανοιχτά αρχεία</code></em></span> ή <span class="emphasis"><em><code class="literal">άνοιγμα αρχείου</code></em></span>.
+                     </p>
+                  </dd>
+                  <dt><span class="term">αναζήτηση με λέξη κλειδί</span></dt>
+                  <dd>
+                     <p>Αναζήτηση τμημάτων που περιέχουν όλες τις λέξεις κλειδί που ορίσατε, σε οποιαδήποτε σειρά. Επιλέξτε την ανζήτηση με λέξη κλειδί
+                        για να ψάξετε οποιονδήποτε αριθμό μεμονωμένων λέξεων, σε οποιαδήότε σειρά. Το OmegaT εμφανίζει μια λίστα όλων των τμημάτων
+                        που περιέχουν όλες τις λέξεις που ορίσατε. Οι αναζητήσεις με λέξεις-κλειδί μοιάζουν με μια αναζήτηση "με όλες τις λέξεις",
+                        σε μια διαδικτυακή μηχανή αναζήτησης σαν τη Google (AND logic). Αν κάνατε την αναζήτηση με τη λέξη κλειδί <span class="emphasis"><em><code class="literal">άνοιγμα αρχείου</code></em></span> θα βρει, τότε, όλες τις περιστάσεις της συμβολοσειράς <span class="emphasis"><em><code class="literal">άνοιγμα αρχείου</code>,</em></span> αλλά και <span class="emphasis"><em><code class="literal">τελευταίο άνοιγμα του αρχείου</code>, <code class="literal">άνοιγμα συμπιεσμένου α;ρχείου</code>, <code class="literal">μπορεί το άνοιγμα αυτού του αρχείου να είναι επικίνδυνο</code></em></span>, κλπ.
+                     </p>
+                  </dd>
+                  <dt><span class="term"><span class="bold"><strong>κανονικές εκφράσεις</strong></span></span></dt>
+                  <dd>
+                     <p>Η συμβολοσειρά αναζήτησης θα θεωρείται σαν μια κανονική έκφραση. Η συμβολοσειρά αναζήτησης - [a-zA-Z]+[öäüqwß] - στο παραπάνω
+                        παράδειγμα, ψάχνει, παρεμπιτπότνως, για λέξεις στο τμήμα προορισμού που περιέχουν δυσανάγνωστους χαρακτήρες από ένα Γερμανικό
+                        πληκτρολόγιο. Οι κανονικές εκφράσεις (Regular expressions) είναι ένας ισχυρός τρόπος αναζήτησης και εντοπισμού συμβολοσειρών.
+                        Δείτε περισσότερα στο Κεφάλαιο<a class="link" href="chapter.regexp.html" title="Κεφάλαιο 15. Κανονικές εκφράσεις"> Κανονικές Εκφράσεις.</a></p>
+                  </dd>
+               </dl>
+            </div>
+            <p>Εκτός από τις παραπάνω μεθόδους, μπορείτε, επίσης, να επιλέξετε και μία από αυτές που ακολουθούν:</p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p><span class="bold"><strong>case sensitive</strong></span>: η αναζήτηση θα διεξαχθεί για τον ακριβή εντοπισμό της συμβολοσειράς που ορίσατε, δηλ. θα ληφθεί υπ΄όψη η παρουσία μικρών
+                        ή κεφαλαίων γραμμάτων.
+                     </p>
+                  </li>
+                  <li class="listitem">
+                     <p><span class="bold"><strong>στην Πηγή: </strong></span>αναζήτηση μέσα στα τμήματα προέλευσης
+                     </p>
+                  </li>
+                  <li class="listitem">
+                     <p><span class="bold"><strong>στις μεταφράσεις: </strong></span>αναζήτηση στα τμήματα προορισμού
+                     </p>
+                  </li>
+                  <li class="listitem">
+                     <p><span class="bold"><strong>στις σημειώσεις: </strong></span>αναζήτηση στις σημειώσεις των τμημάτων
+                     </p>
+                  </li>
+                  <li class="listitem">
+                     <p><span class="bold"><strong>αναζήτηση στις TMs</strong></span>: εδώ θα συμπεριληφθούν στην αναζήτηση και οι μεταφραστικές μνήμες στον κατάλογο<code class="filename">tm</code>.
+                     </p>
+                  </li>
+                  <li class="listitem">
+                     <p><span class="bold"><strong>display all results: </strong></span>clearing
+                                this check box will case OmegaT show just the first occurrence of a
+                                hit, if several hits exist
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <p>Αν πατήσετε το κουμπί <span class="guibutton">Προχωρημένες επιλογές</span> τότε μπορείτε να επιλέξετε και άλλα, πρόσθετα κριτήρια (συγγραφέα της μετάφρασης, ημερομηνία μετάφρασης κλπ), όπως δείχνει
+               και η παραπάνω εικόνα.
+            </p>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="search.result.display"></a>4. Εμφάνιση αποτελεσμάτων αναζήτησης
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>Αν πατήσετε το κουμπί αναζήτησης μετά την εισαγωγή μιας συμβολοσειράς στο πεδίο αναζήτησης, θα εμφανισθούν όλα τα τμήματα
+               του έργου που περιέχουν την συμβολοσειρά που εισήχθη. Επειδή το <span class="application">OmegaT</span> χειρίζεται τα ταυτόσημα τμήματα σαν μια και μοναδική οντότητα, θα εμφανίζεται μόνο το πρώτο μοναδικό τμήμα. Τα τμήματα εμφανίζονται
+               με τη σειρά εμφάνισης μέσα στο έργο. Τα μεταφρασμένα τμήματα εμφανίζονται με το αρχικό κείμενο στην κορυφή, ενώ το μεταφρασμένο
+               κείμενο στο κάτω μέρος και τα αμετάφραστα τμήματα θα εμφανίζονται μόνον ως πηγή.
+            </p>
+            <p>Αν κάνετε κλικ σε ενα τμήμα, αυτό θα ανοίξει στην Περιοχή Επεξεργασίας για τροποποιήσεις. Μετά, μπορείτε να επιστρέψετε και
+               πάλι στο παράθυρο αναζήτησης για το επόμενο τμήμα που έχει βρεθεί και, με την ευκαιρία, να το ελέγξετε και, αν χρειάζεται,
+               να διορθώσετε την ορολογία.
+            </p>
+            <p>Μπορείτε να έχετε ανοικτά πολλά παράθυρα αναζήτησης, ταυτόχρονα. Μπορείτε γρήγορα να δείτε τα περιεχόμενά τους, κοιτώντας
+               τον τίτλο τους: θα περιέχει τον όρο αναζήτησης που χρησιμοποιήθηκε.
+            </p>
+         </div>
+      </div>
+      <div class="navfooter">
+         <hr>
+         <table width="100%" summary="Navigation footer">
+            <tr>
+               <td width="40%" align="left"><a accesskey="p" href="chapter.segmentation.html">Προηγ</a>&nbsp;
+               </td>
+               <td width="20%" align="center">&nbsp;</td>
+               <td width="40%" align="right">&nbsp;<a accesskey="n" href="chapter.regexp.html">Επόμενο</a></td>
+            </tr>
+            <tr>
+               <td width="40%" align="left" valign="top">Κεφάλαιο 13. Κατάτμηση αρχείων προέλευσης&nbsp;</td>
+               <td width="20%" align="center"><a accesskey="h" href="index.html">Αρχή</a></td>
+               <td width="40%" align="right" valign="top">&nbsp;Κεφάλαιο 15. Κανονικές εκφράσεις</td>
+            </tr>
+         </table>
+      </div>
+   </body>
+</html>

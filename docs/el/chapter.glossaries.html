@@ -1,0 +1,251 @@
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <title>Κεφάλαιο 17. Γλωσσάρια</title>
+      <link rel="stylesheet" type="text/css" href="OmegaT.css">
+      <meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
+      <link rel="home" href="index.html" title="OmegaT - Εγχειρίδιο χρήστη">
+      <link rel="up" href="index.html" title="OmegaT - Εγχειρίδιο χρήστη">
+      <link rel="prev" href="chapter.dictionaries.html" title="Κεφάλαιο 16. Λεξικά">
+      <link rel="next" href="chapter.machine.translate.html" title="Κεφάλαιο 18. Μηχανική Μετάφραση">
+   </head>
+   <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+      <div class="navheader">
+         <table width="100%" summary="Navigation header">
+            <tr>
+               <th colspan="3" align="center">Κεφάλαιο 17. Γλωσσάρια</th>
+            </tr>
+            <tr>
+               <td width="20%" align="left"><a accesskey="p" href="chapter.dictionaries.html">Προηγ</a>&nbsp;
+               </td>
+               <th width="60%" align="center">&nbsp;</th>
+               <td width="20%" align="right">&nbsp;<a accesskey="n" href="chapter.machine.translate.html">Επόμενο</a></td>
+            </tr>
+         </table>
+         <hr>
+      </div>
+      <div class="chapter">
+         <div class="titlepage">
+            <div>
+               <div>
+                  <h1 class="title"><a name="chapter.glossaries"></a>Κεφάλαιο 17. Γλωσσάρια<a class="indexterm" name="d0e7736"></a><a class="indexterm" name="d0e7741"></a></h1>
+               </div>
+            </div>
+         </div>
+         <div class="toc">
+            <dl class="toc">
+               <dt><span class="section"><a href="chapter.glossaries.html#d0e7765">1. Χρήση</a></span></dt>
+               <dt><span class="section"><a href="chapter.glossaries.html#d0e7820">2. Μορφή αρχείου</a></span></dt>
+               <dt><span class="section"><a href="chapter.glossaries.html#d0e7859">3. Πως να δημιουργείτε γλωσσάρια</a></span></dt>
+               <dt><span class="section"><a href="chapter.glossaries.html#d0e7904">4. Χρήση του Trados MultiTerm</a></span></dt>
+               <dt><span class="section"><a href="chapter.glossaries.html#d0e7920">5. Συνηθισμένα προβλήματα με τα γλωσσάρια</a></span></dt>
+            </dl>
+         </div>
+         <p>Τα Γλωσσάρια είναι αρχεί που δημιουργούνται και ενημερώνονται χειροκίνητα, προς χρήση με το <span class="application">OmegaT</span>.
+         </p>
+         <p>Αν ένα έργο <span class="application">OmegaT</span> περιέχει ένα ή περισσότερα γλωσσάρια, οποιοδήποτε όροι στο γλωσσάρι, οι οποίοι βρίσκονται και στο τρέχον τμήμα, θα προβάλλονται
+            αυτομάτως και στην εμφάνιση του Γλωσσαρίου.
+         </p>
+         <p>Θα ορίσετε την τοποθεσία και το όνομά του στον διάλογο 'Ιδιότητες έργου'. Η επέκταση πρέπει να είναι <code class="filename">.txt</code>(αν όχι, τότε θα προστεθεί). Η τοποθεσία του αρχείου πρέπει να είναι μέσα στον κατάλογο <code class="filename">/glossary</code>, αλλά μπορεί να είναι και μέσα σε έναν πιο βαθύ κατάλογο (π.χ., <code class="filename">glossary/sub/glossary.txt</code>). Δεν χρειάζεται να υπάρχει το αρχείο όταν το ρυθμίζετε, θα δημιουργηθεί (αν είναι απαραίτητο) όταν θα προσθέσετε μια καταχώρηση
+            γλωσσαρίου. Αν το αρχείο υπάρει ήδη, δεν γίνεται καμία προσπάθεια επαλήθευσης της μορφής των χαρακτήρων που ορίσθηκαν στο
+            αρχείο: οι νέες καταχωρήσεις θα βρίσκνται πάντα σε μορφή tab-separated και σε UTF-8. Αφού το υπάρχον περιεχόμενο δεν θα πειραχθεί,
+            η βλάβη σε ένα υπάρχον αρχείο θα είναι περιορισμένη.
+         </p>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e7765"></a>1. Χρήση
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>Για να χρησιμοποιήσετε ένα υπάρχον γλωσσάρι, απλώς τοποθετήστετο στον κατάλογο<a class="indexterm" name="d0e7770"></a> <code class="filename">/glossary</code> αφού πρώτα έχετε δημιουργήσει το έργο. Το <span class="application">OmegaT</span> θα εντοπίσει αυτομάτως τα αρχεία γλωσσαρίου σε αυτό τον κατάλογο όταν ανοίγει ένα έργο. Οι όροι μέσα στο τρέχον τμήμα που
+               το <span class="application">OmegaT</span> βρίσκει στο αρχείο(α) γλωσσαρίου, εμφανίζονται στην Περιοχή γλωσσαρίου:
+            </p><a class="indexterm" name="d0e7785"></a><div class="figure"><a name="d0e7788"></a><p class="title"><b>Σχήμα 17.1. Περιοχή γλωσσαρίου</b></p>
+               <div class="figure-contents">
+                  <div class="mediaobject"><img src="images/GlossaryPane_25.png" alt="Περιοχή γλωσσαρίου"></div>
+               </div>
+            </div><br class="figure-break"><p>Η λέξη πριν από το σύμβολο = είναι ο όρος προέλευσης και η μετάφρασή του είναι οι λέξεις μετά το =. Στην καταχώρηση λεξικού
+               μπορεί να έχει προστεθεί ένα σχόλιο. Η λειτουργία γλωσσαρίου βρίσκει μόνο τις ακριβείς αντιστοιχίσεις με την καταχώρηση γλωσσαρίου
+               (π.χ. δεν βρίσκει τις κεκλιμμένες μορφές λέξεων κλπ.). Οι νέοι όροι μπορούν να προστεθούν χειροκίνητα στο αρχείο(α) γλωσσαρίου
+               κατά τη μετάφραση, π.χ. στο πρόγραμμα επεξεργασίας κειμένου. Οι νέοι όροι που προσετέθησαν δεν θα ανγνωρισθούν μόλις οι αλλαγές
+               στο αρχείο κειμένου αποθηκευθούν.
+            </p>
+            <p>Ο όρος προέλευσης δεν χρειάζεται να έχει μια μονολεκτική καταχώρηση, όπως δείχνει και το επόμενο παράδειγμα:</p>
+            <div class="figure"><a name="d0e7800"></a><p class="title"><b>Σχήμα 17.2. Καταχωρήσεις πολλαπλών λέξεων στα γλωσσάρια - παράδειγμα<a class="indexterm" name="d0e7803"></a></b></p>
+               <div class="figure-contents">
+                  <div class="mediaobject"><img src="images/MultiTerm_Glossary_25.png" alt="Καταχωρήσεις πολλαπλών λέξεων στα γλωσσάρια - παράδειγμα"></div>
+               </div>
+            </div><br class="figure-break"><p>Ο υπογραμμισμένος όρος "αναδυόμενο μενού" μπορεί να βρεθεί στην περιοχή γλωσσαρίου ως "pojavni menu". Αν το επιλέξετε στην
+               Περιοχή γλωσσαρίου και μετά το κλικάρετε, θα εισαχθεί στη θέση του δείκτη, στο τμήμα προορισμού.<a href="#ftn.d0e7817" class="footnote" name="d0e7817"><sup class="footnote">[1]</sup></a></p>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e7820"></a>2. <a class="indexterm" name="d0e7822"></a>Μορφή αρχείου<a class="indexterm" name="d0e7828"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <p>Τα αρχεία γλωσσαρίου είναι απλά αρχεία κειμένμου που περιέχουν τρίστηλους, tab-delimited καταλόγους με τους όρους προέλευσης
+               και προορισμού στην πρώτη και δεύτερη στήλη, αντίστοιχα. Η τρίτη στήλη μπορεί να χρησιμοποιηθεί για πρόσθετες πληροφορίες.
+               Μπορείτε να έχετε καταχωρήσεις όπου λείπει η στήλη προορισμού, π.χ. απλώς περιέχουν τον όρο προέλευσης και το σχόλιο.
+            </p>
+            <p>Τα αρχεία γλωσσαρίου μπορούν να είναι ή στην προεπιλεγμένη κωδικοποίησηη συστήματος (υποδεικνύεται με την επέκταση .tab) ή
+               σε UTF-8 (με επέκταση .utf8). Η κωδικοποίηση Unicode (UTF8) προτιμάται για προφανείς λόγους. Υποστηρίζεται επίσης και η μορφή
+               CSV. Αυτή η μορφή είναι η ίδια με εκείνη που διαχωρίζεται με το tab: όρος προέλευσης, όρος προορισμού. Τα πεδία σχολίων χωρίζονται
+               με ένα κόμμα ','. Οι συμβολοσειρές μπορεί να περικλείονται σε εισαγωγικά ", πράγμα που επιτρέπει την ύπαρξη ενός κόμματος
+               μέσα στη συμβολοσειρά:
+            </p>
+            <p><code class="literal">"Αυτός είναι ένας όρος προέλευσης που περιέχει ένα κόμμα ","c'est un terme, qui contient une virgule"</code></p>
+            <p>Εκτός από τη μορφή απλού κειμένου, υποστηρίζεται και η μορφή TBX <a class="indexterm" name="d0e7844"></a>. TBX - Term Base eXchange - είναι το ανοιχτό πρότυπο βασιμένο στην XML, για ανταλλαγή δομημένων δεδομένων ορολογίας. Το TBX
+               εγκρίθηκε ως διεθνές πρότυπο από τη LISA και το ISO. Αν έχετε ήδη ένα σύστημα διαχείρισης υπάρχουσας ορολογίας - π.χ. το MultiTerm
+               - πιθανότατα προσφέρει την εξαγωγή δεδομένων ορολογίας σε μορφή TBX. Η <a class="ulink" href="http://www.microsoft.com/Language/en-US/Terminology.aspx" target="_top">Συλλογή ορολογίας της Microsoft (Terminology Collection)</a> <a class="indexterm" name="d0e7853"></a> μπορεί να μεταφορτωθεί σε σχεδόν 100 γλώσσες και να χρησιμεύσει ως ένα βασικό γλωσσάρι IT.
+            </p>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e7859"></a>3. Πως να δημιουργείτε γλωσσάρια<a class="indexterm" name="d0e7862"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <p>Οι ρυθμίσεις έργου επιτρέπουν την εισαγωγή ενός ονόματος σε ένα εγγράψιμο αρχείο γλωσσαρίου (βλέπει την αρχή αυτού του κεφαλαίου).
+               Κάντε δεξί κλικ στην Περιοχή γλωσσαρίου ή πατήστε <span class="keycap"><strong>Ctrl+Shift+G</strong></span> για την προσθήκη νέας καταχώρησης. Ανοίγει ένας διάλογος που σας επιτρέπει να εισαγάγετε τον όρο προέλευσης, τον όρο προορισμού
+               και οποιαδήποτε σχόλια που μπορεί να έχετε:
+            </p>
+            <div class="mediaobject"><img src="images/GlossaryEntry_25.png"></div>
+            <p>Τα περιεχόμενα των αρχείων γλωσσαρίου διατηρούνται στη μνήμη και φορτώνονται όταν το έργο ανοίγει ή επαναφορτώνεται. Η ενημέρωση
+               ενός αρχείου γλωσσαρίου είναι μάλλον απλή. Πατήστε <span class="keycap"><strong>Ctrl+Shift+G</strong></span> και εισάγετε τον νέο όρο, τη μετάφρασή του και οποιαδήποτε σχόλια που μπορεί να έχετε (αφού βεβαιωθείτε ότι πατήσατε το tab
+               ανάμεσα στα πεδία) και αποθηκεύσετε το αρχείο. Τα περιεχόμενα της Περιοχής γλωσσαρίου θα ενημερωθούν αντίστοιχα.
+            </p>
+            <p><a class="indexterm" name="d0e7883"></a>Η τοποθεσία με το εγγράψιμο αρχείο γλωσσαρίου μπορεί να ορισθεί στο <span class="guimenuitem">Έργο &gt; Ιδιότητες ... </span>Διάλογος. Οι αναγνωρίσιμες επεκτάσεις είναι <code class="filename">TXT</code> και <code class="filename">UTF8</code></p>
+            <p><span class="bold"><strong>Σημείωση: </strong></span>Ασφαλώς, υπάρχουν και άλλοι τρόποι και μέσα για τη δημιουργία ενός απλού αρχείου με καταχωρήσεις που χωρίζονται με το tab.
+               Δεν υπάρχει καμία αντένδειξη στη χρήση π.χ. του Notepad++ σε περιβάλλον Windows, ή του GEdit στο Linux, ή κάποιου προγράμματος
+               λογιστικών φύλλων για τον σκοπό αυτό: μπορεί να χρησιμοποιηθεί οποιαδήποτε εφαρμογή σε θέση να χειρίζεται το UTF8 και να δείχνει
+               τα κενά διαστήματα (για να μη χάνετε τους απαιτούμενους χαρακτήρες <span class="keycap"><strong>TAB</strong></span>).
+            </p>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e7904"></a>4. <a class="indexterm" name="d0e7906"></a>Χρήση του Trados MultiTerm
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>Το  <span class="application">OmegaT</span> μπορεί να χρησιμοποιήσει ως γλωσσάρια τα δεδομένα που εξάγονται από το Trados MultiTerm, χωρίς καμία περαιτέρω τροποποίηση,
+               αρκεί να έχουν την προέκταση αρχείου <code class="filename">.tab</code> και τα πεδία με τους όρους προέλευσης και προορισμού να είναι στα πρώτα δύο πεδία, αντίστοιχα. Αν κάνετε εξαγωγή με τη χρήση
+               της επιλογής συστήματος "Εξαγωγή Tab-delimited", θα χρειαστεί να διαγράψετε τις πρώτες 5 στήλες (Seq. Αρ., Ημερομ. δημιουργίας
+               κλπ). Οι νεώτερες εκδόσεις του MultiTerm υποστηρίζουν την εξαγωγή σε μορφή TBX.
+            </p>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e7920"></a>5. <a class="indexterm" name="d0e7922"></a>Συνηθισμένα προβλήματα με τα γλωσσάρια
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p><span class="bold"><strong>Πρόβλημα: Δεν εμφανίζεται κανένας όρος στο γλωσσάρι - πιθανές αιτίες:</strong></span></p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>Δεν βρέθηκε αρχείο γλωσσαρίου στον κατάλογο "glossary".</p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>Το αρχείο γλωσσαρίου είναι κενό.</p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>Οι καταχωρήσεις δεν χωρίζονται με έναν χαρακτήρα TAB.</p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>Το αρχείο γλωσσαρίου δεν έχει τη σωστή επέκταση (.tab ή .utf8).</p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>Δεν υπάρχει ΑΚΡΙΒΗΣ αντιστοίχιση ανάμεσα στην καταχώρηση γλωσσαρίου και το κείμενο προέλευσης στο έγγραφό σας - για την περίπτωση
+                        του πληθυντικού.
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>Το αρχείο γλωσσαρίου δεν έχει τη σωστή κωδικοποίηση.</p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>Δεν υπάρχουν όροι στο τρέχον τμήμα που να αντιστοιχίζονται με οποιουσδήποτε όρους στο γλωσσάρι.</p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>Ένα ή και περισσότερα από τα παραπάνω προβλήματα ενδέχεται να έχουν διορθωθεί, αλλά το έργο δεν ξαναφορτώθηκε.</p>
+                  </li>
+               </ul>
+            </div>
+            <p><span class="bold"><strong>Πρόβλημα: Στην Περιοχή γλωσσαρίου, μερικοί χαρακτήρες δεν εμφανίζονται σωστά</strong></span></p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>...ενώ οι ίδιοι χαρακτήρες εμφανίζονται σωστά στην Περιοχή επεξεργασίας: η επέκταση δεν ταιριάζει με την κωδικοποίηση.</p>
+                  </li>
+               </ul>
+            </div>
+         </div>
+         <div class="footnotes"><br><hr style="width:100; text-align:left;margin-left: 0">
+            <div id="ftn.d0e7817" class="footnote">
+               <p><a href="#d0e7817" class="para"><sup class="para">[1] </sup></a>Σημειώστε ότι, στην παραπάνω περίπτωση, αυτή είναι μόνο η μισή ιστορία (ή και ακόμα λιγώτερο), καθώς η γλώσσα προορισμού (Σλοβενικά)
+                  χρησιμοποιεί τις κλίσεις των λέξεων. Οπότε, η εισαγωγή του όρου "pojavni meni" στην ονομαστική - πρέπει να αλλαχθεί στο "pojavnem
+                  meniju" , δηλ.. στην αιτιατική. Συνεπώς, είναι πιθανόν γρηγορώτερο να πληκτρολογείτε σωστά τον όρο από την αρχή, χωρίς να
+                  εμπλακείτε με το γλωσσάρι και τις συντομεύσεις του.
+               </p>
+            </div>
+         </div>
+      </div>
+      <div class="navfooter">
+         <hr>
+         <table width="100%" summary="Navigation footer">
+            <tr>
+               <td width="40%" align="left"><a accesskey="p" href="chapter.dictionaries.html">Προηγ</a>&nbsp;
+               </td>
+               <td width="20%" align="center">&nbsp;</td>
+               <td width="40%" align="right">&nbsp;<a accesskey="n" href="chapter.machine.translate.html">Επόμενο</a></td>
+            </tr>
+            <tr>
+               <td width="40%" align="left" valign="top">Κεφάλαιο 16. Λεξικά&nbsp;</td>
+               <td width="20%" align="center"><a accesskey="h" href="index.html">Αρχή</a></td>
+               <td width="40%" align="right" valign="top">&nbsp;Κεφάλαιο 18. Μηχανική Μετάφραση</td>
+            </tr>
+         </table>
+      </div>
+   </body>
+</html>

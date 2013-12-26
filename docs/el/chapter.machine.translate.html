@@ -1,0 +1,232 @@
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <title>Κεφάλαιο 18. Μηχανική Μετάφραση</title>
+      <link rel="stylesheet" type="text/css" href="OmegaT.css">
+      <meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
+      <link rel="home" href="index.html" title="OmegaT - Εγχειρίδιο χρήστη">
+      <link rel="up" href="index.html" title="OmegaT - Εγχειρίδιο χρήστη">
+      <link rel="prev" href="chapter.glossaries.html" title="Κεφάλαιο 17. Γλωσσάρια">
+      <link rel="next" href="chapter.spellchecker.html" title="Κεφάλαιο 19. Ορθογραφικός διορθωτής">
+   </head>
+   <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+      <div class="navheader">
+         <table width="100%" summary="Navigation header">
+            <tr>
+               <th colspan="3" align="center">Κεφάλαιο 18. Μηχανική Μετάφραση</th>
+            </tr>
+            <tr>
+               <td width="20%" align="left"><a accesskey="p" href="chapter.glossaries.html">Προηγ</a>&nbsp;
+               </td>
+               <th width="60%" align="center">&nbsp;</th>
+               <td width="20%" align="right">&nbsp;<a accesskey="n" href="chapter.spellchecker.html">Επόμενο</a></td>
+            </tr>
+         </table>
+         <hr>
+      </div>
+      <div class="chapter">
+         <div class="titlepage">
+            <div>
+               <div>
+                  <h1 class="title"><a name="chapter.machine.translate"></a>Κεφάλαιο 18. Μηχανική Μετάφραση<a class="indexterm" name="d0e7973"></a></h1>
+               </div>
+            </div>
+         </div>
+         <div class="toc">
+            <dl class="toc">
+               <dt><span class="section"><a href="chapter.machine.translate.html#d0e7976">1. Εισαγωγή</a></span></dt>
+               <dt><span class="section"><a href="chapter.machine.translate.html#introduction">2. Google Translate</a></span></dt>
+               <dt><span class="section"><a href="chapter.machine.translate.html#d0e8017">3. <span class="application">OmegaT</span> χρήστες και το Google Translate</a></span></dt>
+               <dt><span class="section"><a href="chapter.machine.translate.html#d0e8069">4. Belazar</a></span></dt>
+               <dt><span class="section"><a href="chapter.machine.translate.html#d0e8082">5. Apertium</a></span></dt>
+               <dt><span class="section"><a href="chapter.machine.translate.html#Google.Translate.troubleshooting">6. Μηχανική Μετάφραση - Επίλυση προβλημάτων</a></span></dt>
+            </dl>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e7976"></a>1. Εισαγωγή<a class="indexterm" name="d0e7979"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <p>Σε αντίθεση με τις μεταφραστικές μνήμες που δημιουργούνται από τον χρήστη (όπως στην περίπτωση του <span class="application">OmegaT</span>) τα εργαλεία Μηχανικής Μετάφρασης (MT) χρησιμοποιούν γλωσσολογικά εργαλεία βασισμένα σε κανόνες, για τη δημιουργία μιας μετάφρασης
+               του τμήματος προέλευσης χωρίς την ανάγκη μιας μεταφραστικής μνήμης. Στατιστικές τεχνικές μάθησης, βασισμένες σε κείμενα προέλευσης
+               και προορισμού, χρησιμοποιούνται για να χτιστεί ένα μοντέλο μετάφρασης. Οι υπηρεσίες Μηχανικής Μετάφρασης κατάφεραν να επιτύχουν
+               καλές και ικανοποιητικές επιδόσεις, βελτιώνοντας τάχιστα τα αποτελέσματα των ερευνητικών αναζητήσεων.
+            </p>
+            <p>Για την ενεργοποίηση οποιωνδήποτε υπηρεσιών Μηχανικής Μετάφρασης, μεταβείτε στο <span class="guimenuitem">Επιλογές &gt; Μηχανική Μετάφραση ...</span> και ενεργοποιείστε τις επιθυμητές υπηρεσίες. Σημειώστε ότι βασίζονται όλες στο διαδίκτυο (web-based): θα πρέπει, δηλαδή,
+               να είστε συνδεδεμένοι (online) αν θέλετε να τις χρησιμοποιήσετε.
+            </p>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="introduction"></a>2. Google Translate<a class="indexterm" name="d0e7997"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <p>Το Google Translate είναι μια υπηρεσία επί πληρωμή που προσφέρεται από την Google, για τη μετάφραση προτάσεων, ιστοσελίδων
+               (web sites) και ολόκληρων κειμένων, σε έναν ολοένα αυξανόμενο αριθμό γλωσσών. Κατά τη στιγμή που συντάσσεται αυτός ο κατάλογος,
+               περιλαμβάνει πάνω από 50 γλώσσες, από τα Αλβανικά στα Εβραϊκά Yiddish, περιλαμβάνοντας, ασφαλώς, και όλες τις άλλες μεγάλες
+               γλωσσες. Η τρέχουσα έκδοση της υπηρεσίας βασίζεται στη χρήση, στην τιμή των 20 US $ ανά εκατομ. χαρακτήρων, κατά τη στιγμή
+               που συντάσσεται αυτό το κείμενο.<span class="bold"><strong></strong></span></p>
+            <p><span class="bold"><strong>Σημαντικό: </strong></span>Το Google Translate API v2 απαιτεί πληροφορίες χρέωσης για όλους τους λογαρισμούς, πριν μπορέσετε να αρχίσετε να χρησιμοποιείτε
+               την υπηρεσία (βλέπε <a class="ulink" href="https://developers.google.com/translate/v2/pricing?hl=en-US" target="_top">Τιμοκατάλογος και Όροι χρήσης της υπηρεσίας</a> για περισσότερες λεπτομέρειες). Για να ταυτοποιηθείτε ως έγκυρος χρήστης των υπηρεσιών της Google, χρησιμοποιείστε το δικό
+               σας μοναδικό ιδιωτικό κλειδί που σας έστειλε η Google, όταν κάνατε την εγγραφή σας στην υπηρεσία. Βλέπε Κεφάλαιο <a class="link" href="chapter.installing.and.running.html" title="Κεφάλαιο 3. Εγκατάσταση και Λειτουργία του OmegaT">Εγκατάσταση και Εκτέλεση</a>, ενότητα Ορίσματα Εντολής εκτέλεσης, για λεπτομέρειες για το πως να προσθέσετε αυτό το κλειδί στο περιβάλλον του OmegaT.
+            </p>
+            <p>Η ποιότητα των μεταφράσεων του Google Translate εξαρτάται από τη μια πλευρά, από το αποθετήριο κειμένων στη γλώσσα προορισμού
+               και τη διαθεσιμότητα των δίγλωσσω εκδόσεών τους, και από την άλλη, από την ποιότητα του μπντέλου που φτιάχτηκε. Είναι απολύτως
+               βέβαιο ότι, ενώ η ποιότητα μπορεί να είναι ανπεπαρκής σε κάποιες περιπτώσεις, σαφώς και θα βελτιωθεί συν τω χρόνω και όχι
+               το αντίθετο.
+            </p>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e8017"></a>3. <span class="application">OmegaT</span> χρήστες και το Google Translate
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>Ο χρήστης του <span class="application">OmegaT</span> δεν είναι υποχρεωμένος να χρησιμοποιήσει το Google Translate. Αν το χρησιμοποιήσει, ούτε η απόφαση του χρήστη να αποδεχθεί
+               τη μετάφραση, ούτε η τελική μετάφραση θα γνωστοποιηθούν στη Google. Το ακόλουθο παράθυρο δείχνει ένα παράδειγμα της a) Αγγλικής
+               πηγής και b) της Ισπανικής και d c) της Σλοβενικής εμτάφρασης του Google Translate.
+            </p>
+            <div class="figure"><a name="moby.dick"></a><p class="title"><b>Σχήμα 18.1. Google Translate - παράδειγμα</b></p>
+               <div class="figure-contents">
+                  <div class="mediaobject"><img src="images/MobyDick.png" alt="Google Translate - παράδειγμα"></div>
+               </div>
+            </div><br class="figure-break"><p>Η Ισπανική μετάφραση είναι καλύτερη από τη Σλοβενική. Σημείωση <span class="emphasis"><em>interesar</em></span> και<span class="emphasis"><em> navegar</em></span> στα Ισπανικά, είναι σωστά μεταφρασμένα, όπως ισχύει και για τα ρήματα interest και sail αντίστοιχα. Στη Σλοβενική γλώσσα
+               αμφότερες οι λέξεις μεταφράσθηκαν σαν ουσιαστικά. Ουσιαστικά, είναι αρκετά πιθανό η Ισπανική μετάφραση να βασίσθηκε, τουλάχιστον
+               εν μέρει, στην πραγματική μετάφραση του βιβλίου.
+            </p>
+            <p>Μόλις ενεργοποιήσετε την υπηρεσία, θα εμφανισθεί μία συμβουλή για τη μετάφραση, στην Περιοχή Μηχανικής Μετάφρασης, κάθε φορά
+               που ανοίγει ένα νέο τμήμα προέλευσης. Αν κρίνετε τη συμβουλή ως αποδεκτή, πατήστε <span class="keycap"><strong><a class="indexterm" name="d0e8047"></a>Ctrl</strong></span>+<span class="keycap"><strong>M</strong></span> για να αντικαταστήσετε το κομμάτι προορισμού του ανοικτού τμήματος με τη συμβουλή. Στο παραπάνω τμήμα, π.χ., το <span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>M</strong></span> θα αντικαταστήσει την Ισπανική έκδοση με τη Σλοβενική συμβουλή.
+            </p>
+            <p>Αν δεν θέλετε το <span class="application">OmegaT</span> να αποστέλλει τα δικά σας τμήματα προέλευσης στη Google για να μεταφρασθούν, αποεπιλέξτε την καταχώρηση μενού για το Google
+               Translate, στις Επιλογές.
+            </p>
+            <p>Σημειώστε ότι τίποτε άλλο πέρα από τα δικά σας τμήματα προέλευσης δεν αποστέλλεται στην υπηρεσία MT. Η online έκδοση του Google
+               Translate aεπιτρέπει στον χρήστη να διορθώνει τη συμβουλή και να αποστέλλει το διορθωμένο τμήμα. Αυτό το χαρακτηριστικό, πάντως,
+               δεν υλοποιείται στο OmegaT.
+            </p>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e8069"></a>4. Belazar<a class="indexterm" name="d0e8072"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <p>Η <a class="ulink" href="http://belazar.info/" target="_top">Belazar</a> είναι ένα εργαλείο μετάφρασης σε γλώσσα μηχανής για το ζεύγος γλωσσών Ρωσικά-Λευκορωσικά.
+            </p>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e8082"></a>5. Apertium<a class="indexterm" name="d0e8085"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <p>Το <a class="ulink" href="http://www.apertium.org/" target="_top">Apertium</a> είναι μια πλατφόρμα ΕΛ/ΛΑΚ Μηχανικής Μετάφρασης, η οποία αρχικά στόχευε σε ζεύγη συσχετιζόμενων γλωσσών, όπως CA, ES, GA,
+               PT, OC και FR αλλά, πρόσφατα, επεξετάθη και σε περισσότερο αποκλίνοντα ζεύγη γλωσσών (όπως Αγγλικά-Καταλανικά). Ελέγξτε τον
+               ιστότοπο για τις πιο πρόσφατες λίστες με υλοποιημένα ζεύγη γλωσσών.
+            </p>
+            <p>Η πλατφόρμα παρέχει</p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>μια μηχανή μηχανικής μετάφρασης ανεξάρτητη-γλώσσας</p>
+                  </li>
+                  <li class="listitem">
+                     <p>εργαλεία για τη διαχείριση των γλωσσολογικών δεδομένων που είναι απαραίτητα για το χτίσιμο ενός συστήματος μηχανικής μετάφρασης
+                        για ένα δεδομένο ζεύγος γλώσσας και
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>γλωσσολογικά δεδομένα για έναν αυξανόμενο αριθμό γλωσσικών ζευγών</p>
+                  </li>
+               </ul>
+            </div>
+            <p>Το Apertium χρησιμοποιεί μια μηχανή μετάφρασης ρηχής-μεταφοράς (shallow-transfer) η οποία επεξεργάζεται το κείμενο εισόδου
+               σε στάδια, όπως σε μια γραμμή συναρμολόγησης: απο-μορφοποίηση, μορφολογική ανάλυση, αποσαφήνιση (disambiguation) τμημάτων-λόγου,
+               ρηχή δομική μεταφορά, λεξικολογική μεταφορά, μορφολογική παραγωγή και επαναμορφοποίηση.
+            </p>
+            <p>Είναι δυνατόν να χρησιμοποιήσετε το Apertium για να χτίσετε συστήματα μηχανικής μετάφρασης για μια ποικιλία γλωσσικών ζευγών.
+               Για τον σκοπό αυτό, το Apertium χρησιμοποιεί απλά πρότυπα μορφών αρχείου, βασισμένα σε XML για την κωδικοποίηση των γλωσσολογικών
+               δεδομένων που απαιτούνται (είτε χειρονακτικά, είτε μετατρέποντας υπάρχοντα δεδομένα), που μεταγλωττίζονται, χρησιμοποιώντας
+               τα παρεχόμενα εργαλεία, στις μορφές αρχείου υψηλής-ταχύτητας που χρησιμοποιούνται από τη μηχανή.
+            </p>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="Google.Translate.troubleshooting"></a>6. Μηχανική Μετάφραση - Επίλυση προβλημάτων<a class="indexterm" name="d0e8115"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <p>Αν δεν εμφανίζεται τίποτε στην Περιοχή Μηχανικής Μετάφρασης, τότε ελέγξτε τα εξής:</p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>Είστε συνδεδεμένος; Πρέπει να είστε συνδεδεμένος για να μπορείτε να χρησιμοποιήσετε ένα εργαλείο MT.</p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>Ποιο είναι το ζεύγος γλωσσών που χρειάζεστε; Ελέγξτε αν η επιλεγμένη υπηρεσία το προσφέρει.</p>
+                  </li>
+                  <li class="listitem">
+                     <p>Η υπηρεσία Google Translate δεν λειτουργεί: εφαρμόσατε την <a class="ulink" href="https://developers.google.com/translate/v2/faq" target="_top">υπηρεσία Translate API</a>; Σημειώστε ότι η υπηρεσία Google Translate δεν είναι δωρεάν, βλέπε Κεφάλαιο <a class="link" href="chapter.installing.and.running.html" title="Κεφάλαιο 3. Εγκατάσταση και Λειτουργία του OmegaT">Εγκατάσταση και Εκτέλεση</a> (παράμετροι runtime) για περισσότερες λεπτομέρειες σχετικά με αυτό.
+                     </p>
+                  </li>
+                  <li class="listitem">
+                     <p>"Google Translate returned HTTP response code: 403 ...": ελέγξτε ότι το κλειδί 38-χαρακτήρων, που εισάγατε στο αρχείο pinfo.list,
+                        είναι σωστό. Βεβαιωθείτε ότι η <a class="ulink" href="https://developers.google.com/translate/v2/faq" target="_top">υπηρεσία Translate API </a>ενεργοποιήθηκε.
+                     </p>
+                  </li>
+                  <li class="listitem">
+                     <p>Το Google Translate δεν λειτουργεί: - έχοντας εισάγει το κλειδί Google API key όπως σας ζητήθηκε. Βεβαιωθείτε ότι στις Επιλογές
+                        &gt; Μηχανική μετάφραση, είναι ενεργοποιημένο το Google Translate V2.
+                     </p>
+                  </li>
+                  <li class="listitem">
+                     <p>Το Google Translate V2 αναφέρει "Bad request" - ελέγξτε τις γλώσσες προέλευσης και προορισμού για το έργο σας. Αν δεν έχετε
+                        ορίσει κάποιες γλώσσες, τότε προκαλείται αυτή η απάντηση.
+                     </p>
+                  </li>
+               </ul>
+            </div>
+         </div>
+      </div>
+      <div class="navfooter">
+         <hr>
+         <table width="100%" summary="Navigation footer">
+            <tr>
+               <td width="40%" align="left"><a accesskey="p" href="chapter.glossaries.html">Προηγ</a>&nbsp;
+               </td>
+               <td width="20%" align="center">&nbsp;</td>
+               <td width="40%" align="right">&nbsp;<a accesskey="n" href="chapter.spellchecker.html">Επόμενο</a></td>
+            </tr>
+            <tr>
+               <td width="40%" align="left" valign="top">Κεφάλαιο 17. Γλωσσάρια&nbsp;</td>
+               <td width="20%" align="center"><a accesskey="h" href="index.html">Αρχή</a></td>
+               <td width="40%" align="right" valign="top">&nbsp;Κεφάλαιο 19. Ορθογραφικός διορθωτής</td>
+            </tr>
+         </table>
+      </div>
+   </body>
+</html>

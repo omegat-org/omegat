@@ -1,0 +1,349 @@
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <title>Κεφάλαιο 20. Διάφορα θέματα</title>
+      <link rel="stylesheet" type="text/css" href="OmegaT.css">
+      <meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
+      <link rel="home" href="index.html" title="OmegaT - Εγχειρίδιο χρήστη">
+      <link rel="up" href="index.html" title="OmegaT - Εγχειρίδιο χρήστη">
+      <link rel="prev" href="chapter.spellchecker.html" title="Κεφάλαιο 19. Ορθογραφικός διορθωτής">
+      <link rel="next" href="appendix.languages.html" title="Παράρτημα A. Γλώσσες - Κατάλογος με κωδικούς κατά ISO 639">
+   </head>
+   <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+      <div class="navheader">
+         <table width="100%" summary="Navigation header">
+            <tr>
+               <th colspan="3" align="center">Κεφάλαιο 20. Διάφορα θέματα</th>
+            </tr>
+            <tr>
+               <td width="20%" align="left"><a accesskey="p" href="chapter.spellchecker.html">Προηγ</a>&nbsp;
+               </td>
+               <th width="60%" align="center">&nbsp;</th>
+               <td width="20%" align="right">&nbsp;<a accesskey="n" href="appendix.languages.html">Επόμενο</a></td>
+            </tr>
+         </table>
+         <hr>
+      </div>
+      <div class="chapter">
+         <div class="titlepage">
+            <div>
+               <div>
+                  <h1 class="title"><a name="chapter.misc"></a>Κεφάλαιο 20. Διάφορα θέματα<a class="indexterm" name="d0e8288"></a></h1>
+               </div>
+            </div>
+         </div>
+         <div class="toc">
+            <dl class="toc">
+               <dt><span class="section"><a href="chapter.misc.html#omegat.misc.console.mode">1. OmegaT Τρόπος κονσόλας</a></span></dt>
+               <dd>
+                  <dl>
+                     <dt><span class="section"><a href="chapter.misc.html#misc.console.mode.prerequisites">1.1. Προϋποθέσεις</a></span></dt>
+                     <dt><span class="section"><a href="chapter.misc.html#starting.in.misc.console.mode">1.2. Εκκίνηση του OmegaT σε τρόπο κονσόλας</a></span></dt>
+                     <dt><span class="section"><a href="chapter.misc.html#misc.console.mode.option.quiet">1.3. Σιωπηλή επιλογή</a></span></dt>
+                     <dt><span class="section"><a href="chapter.misc.html#misc.console.mode.option.validatetags">1.4. Επιλογή επικύρωσης ετικέτας</a></span></dt>
+                  </dl>
+               </dd>
+               <dt><span class="section"><a href="chapter.misc.html#d0e8469">2. Πρόγραμμα αυτόματης στοίχισης ιδιοτήτων Java</a></span></dt>
+               <dt><span class="section"><a href="chapter.misc.html#font.settings">3. Ρυθμίσεις γραμματοσειρών</a></span></dt>
+               <dt><span class="section"><a href="chapter.misc.html#preventing.data.loss">4. Πρόληψη απώλειας δεδομένων</a></span></dt>
+            </dl>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="omegat.misc.console.mode"></a>1. <span class="application"><a class="indexterm" name="d0e8294"></a>OmegaT</span> Τρόπος κονσόλας<a class="indexterm" name="d0e8301"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;">
+               <h3 class="title">Σημείωση</h3>
+               <p>Αφορά μόνο τους προχωρημένους χρήστες!</p>
+            </div>
+            <p>Ο σκοπός του τρόπου κονσόλας (δηλ. της γραμής εντολών) είναι να επιτρέψει τη χρήση του <span class="application">OmegaT</span> ως εργαλείο μετάφρασης σε ένα περιβάλλον συγγραφής σεναρίων (scripting). Όταν ξεκινάτε σε τρόπο κονσόλας, δεν φορτώνει κανένα
+               GUI (συνεπώς, θα λειτουργεί σε οποιαδήποτε κονσόλα) και το δεδομένο έργο θα μεταφρασθεί αυτομάτως. Ένα παράδειγμα θα μπορούσε
+               να είναι ένα έργο λογισμικού, με το γραφικό του περιβάλλον GUI που μεταφράζεται σε πολλές γλώσσες. Χρησιμοποιώντας τον τρόπο
+               κονσόλας, one can make generating a localized interface a part of the build process.
+            </p>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="misc.console.mode.prerequisites"></a>1.1. Προϋποθέσεις
+                        </h3>
+                     </div>
+                  </div>
+               </div>
+               <p>Για να εκτελέσετε το OmegaT, πρέπει να υπάρχει μια έγκυρη έκδοση του OmegaT. Η τοποθεσία είναι χωρίς σημασία, αφού πρέπει
+                  να ορίζεται σαφώς στη γραμμή εντολών, κατά την εκκίνηση.
+               </p>
+               <p>Αν χρειάζεσθε μη-τυποποιημένες ρυθμίσεις, πρέπει να υπάρχουν τα αντίστοιχα αρχεία ρυθμίσεων (<code class="literal">filters.conf</code> και <code class="literal">segmentation.conf</code>). Αυτό μπορεί να γίνει με δύο τρόπους:
+               </p>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
+                     <li class="listitem">
+                        <p>Εκτελέστε κανονικά το <span class="application">OmegaT</span> (με το GUI) και ρυθμίστε τα ορίσματα. Αν εκκινήσετε το <span class="application">OmegaT</span> με τρόπο κονσόλας, θα χρησιμοποιήσει τις ρυθμίσεις που ορίσατε.
+                        </p>
+                     </li>
+                     <li class="listitem">
+                        <p>Αν δεν μπορείτε να τρέξετε κανονικά το <span class="application">OmegaT</span> (χωρίς γραφικό περιβάλλον διαθέσιμο): αντιγράψτε τα αρχεία ρυθμίσεων από μια άλλη εγκατάσταση <span class="application">OmegaT</span> σε ένα άλλο μηχάνημα, σε έναν συγκεκριμμένο κατάλογο. Η τοποθεσία δεν έχει σημασία, αφού μπορείτε να την προσθέσετε στη γραμμή
+                           εντολών κατά την εκκίνηση (βλέπε πιο κάτω). Μπορείτε να βρείτε τα σημαντικά αρχεία <code class="literal">filters.conf</code> και <code class="literal">segmentation.conf</code> στον αρχικό κατάλογο χρήστη (π.χ. <code class="literal">C:\Έγγραφα και Ρυθμισεις\%User%\<span class="application">OmegaT</span></code> στα Windows, ή στο <code class="literal">%user%/.omegat/</code> στο Linux)
+                        </p>
+                     </li>
+                  </ul>
+               </div>
+            </div>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="starting.in.misc.console.mode"></a>1.2. Εκκίνηση του OmegaT σε τρόπο κονσόλας
+                        </h3>
+                     </div>
+                  </div>
+               </div>
+               <p>Για την εκκίνηση του OmegaT με τρόπο κονσόλας, πρέπει να ορίσετε πρόσθετες παραμέτρους εκκίνησης. Τα πιο σημαντικά από αυτά
+                  είναι <code class="literal">&lt;project-dir&gt;</code>, και προαιρετικά <code class="literal">--config-dir=&lt;config-dir&gt;</code>. Παράδειγμα:
+               </p>
+               <p><code class="literal">$&gt; java -jar <span class="application">OmegaT</span>.jar
+                           /path/to/project \</code></p>
+               <p><code class="literal"> --config-dir=/path/to/config-files/ \</code></p>
+               <p><code class="literal"> --mode=console-translate \</code></p>
+               <p><code class="literal"> --source-pattern={regexp} \</code></p>
+               <p><code class="literal"> --tag-validation=[block|warn] </code></p>
+               <p><span class="bold"><strong>Επεξήγηση:</strong></span></p>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
+                     <li class="listitem">
+                        <p>Το <code class="literal">&lt;project-dir&gt;</code> λέει στο <span class="application">OmegaT</span> που να βρει το έργο προς μετάφραση. Αν δοθεί, το <span class="application">OmegaT</span> ξεκινά με τρόπο κονσόλας και μεταφράζει το δεδομένο έργο.
+                        </p>
+                     </li>
+                  </ul>
+               </div>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
+                     <li class="listitem">
+                        <p>Το <code class="literal">--config-dir=&lt;config-dir&gt;</code> επιτρέπει στο OmegaT να εκπαιδεύεται σε ποιον κατάλογο είναι αποθηκευμένες οι ρυθμίσεις. Αν δεν διευκρινισθεί, το OmegaT
+                           επιστρέφει στις προεπιλεγμένες τιμές (ο κατάλογος του OmegaT στον αρχικό κατάλογο home του χρήστη, ή αν δεν υπάρχει: στο τρέχοντα
+                           κατάλογο εργασίας).
+                        </p>
+                     </li>
+                  </ul>
+               </div>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
+                     <li class="listitem">
+                        <p><code class="literal">--mode=console-translate </code> Το <span class="application">OmegaT</span> ξεκινά με τρόπο κονσόλας και μεταφράζει το δεδομένο έργο
+                        </p>
+                     </li>
+                     <li class="listitem">
+                        <p><code class="literal">--source-pattern={regexp} </code>Τα αρχεία προς μετάφραση μπορούν να ορισθούν με αυτόν τον τρόπο. Ακολουθεί ένα παράδειγμα της κανονικής έκφρασης: <code class="filename">test\.html</code></p>
+                     </li>
+                     <li class="listitem">
+                        <p><code class="literal">--tag-validation=[abort|warn] </code> Με το abort, το πρόγραμμα διακόπτεται, μόλις η επικύρωση ετικέτας βρει σφάλματα. Με το warn τα σφάλματα εκτυπώνονται αλλά
+                           το πρόγραμμα συνχείζει. Σε όλες τις άλλες περιπτώσεις δεν γίνεται επικύρωση ετικέτας.
+                        </p>
+                     </li>
+                  </ul>
+               </div>
+            </div>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="misc.console.mode.option.quiet"></a>1.3. Σιωπηλή επιλογή
+                        </h3>
+                     </div>
+                  </div>
+               </div>
+               <p>Μία επιπλέον παράμετρος γραμμής εντολών ειδική για τον τρόπο κονσόλας: <code class="literal">--quiet</code>. Στον σιωπηλό τρόπο, καταγράφονται λιγώτερες πληροφορίες στην οθόνη. Τα μηνύματα που θα βρείτε, συνήθως, στη γραμμή κατάστασης,
+                  δεν εμφανίζονται.
+               </p>
+               <p>Χρήση: <code class="literal">java -jar <span class="application">OmegaT</span>.jar /path/to/project --mode=console-translate --quiet</code></p>
+            </div>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="misc.console.mode.option.validatetags"></a>1.4. Επιλογή επικύρωσης ετικέτας
+                        </h3>
+                     </div>
+                  </div>
+               </div>
+               <p>Ακόμη μία επιπλέον παράμετρος γραμμής εντολών ειδική για τον τρόπο κονσόλας: <code class="literal">--tag-validation=[abort|warn]</code>. Όταν προστεθεί αυτή η παράμετρος, γίνεται η επικύρωση ετικέτας πριν γίνει η μετάφραση/στοίχιση. Αν η τιμή είναι <code class="literal">abort</code>, επί σφαλμάτων ετικέτας, τα σφάλματα εκτυπώνονται και το πρόγραμμα σταματά. Αν η τιμή είναι <code class="literal">warn</code> τότε τα σφάλματα εκτυπώνονται αλλά το OmegaT συνεχίζει.
+               </p>
+               <p>Χρήση: <code class="literal">java -jar <span class="application">OmegaT</span>.jar /path/to/project --mode=console-translate --tag-validation=abort</code></p>
+            </div>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e8469"></a>2. Πρόγραμμα αυτόματης στοίχισης ιδιοτήτων Java<a class="indexterm" name="d0e8472"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <p>Το OmegaT μπορεί να στοιχίζει τις ιδιότητες (.properties) της Java σε τρόπο κονσόλας. Αν έχετε τα αρχεία Ιδιοτήτων προέλευσης
+               και προορισμού για ένα και τα ίδια περιεχόμενα στο δικό σας ζεύγο γλωσσών, αυτή η διαδικασία θα δημιουργήσει ένα αντίστοιχο
+               αρχείο tmx για αυτά τα περιεχόμενα. Χρήση:
+            </p>
+            <p><code class="literal">java -jar OmegaT.jar --mode=console-align /my-project-dir
+                      --alignDir=/translatedFiles/ </code></p>
+            <p>Το <code class="filename">alignDir </code>πρέπει να περιέχει μια μετάφραση στη γλώσσα προορισμού του έργου. Π.χ., αν το έργο είναι EN-&gt;FR, το alignDir πρέπει να περιέχει
+               μια δέσμη (bundle) που να τελειώνει με _fr. Το παραγόμενο tmx αποθηκεύεται στον κατάλογο <code class="literal">omegat </code>υπό το όνομα <code class="filename">align.tmx</code>.
+            </p>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="font.settings"></a>3. Ρυθμίσεις γραμματοσειρών<a class="indexterm" name="d0e8496"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <p>Σε αυτό τον διάλογο, μπορείτε να ορίσετε τη γραμματοσειρά που θα χρησιμοποιεί το <span class="application">OmegaT</span> στα ακόλουθα παράθυρα:
+            </p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>Κύριο παράθυρο του <span class="application">OmegaT</span> (Περιοχή Επεξεργασίας, Προβολή αντιστοιχίσεως, Προβολή Γλωσσαρίου)
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>Παράθυρο αναζήτησης</p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>Παράθυρο επικύρωσης ετικέτας</p>
+                  </li>
+               </ul>
+            </div>
+            <p>Μπορείτε να έχετε πρόσβασαη στον διάλογο με τις <a class="indexterm" name="d0e8523"></a><span class="guimenu">Επιλογές</span> → <span class="guimenuitem">Γραμματοσειρά...</span> καταχώρηση στο κύριο Μενού. Ο διάλογος περιέχει:
+            </p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p><span class="bold"><strong>Γραμματοσειρά:</strong></span> αναδυόμενο μενού για την επιλογή μιας απο τις διαθέσιμες γραμματοσειρές στο μηχάνημά σας
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p><span class="bold"><strong>Μέγεθος:</strong></span> επεξεργασία για την αλλαγή μεγέθους της γραμματοσειράς
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p><span class="bold"><strong>Δείγμα κειμένου:</strong></span> πεδίο για άμεση προβολή της επιλεγμένης γραμμτοσειράς
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <p><span class="bold"><strong>Σημείωση: </strong></span>Σε μερικές περιπτώσεις, μπορεί να πάρει αρκετό χρόνο για να μπορέσει το OmegaT να ενημερώσει την προβολή, μετά την αλλαγή
+               των ρυθμίσεων γραμματοσειράς. Αυτό είναι ιδιαίτερα η περίπτωση ενός μεγάλου αρχείου που περιέχει πολλά τμήματα και είναι ανοικτό
+               στην περιοχή επεξεργασίας, και/ή χρησιμοποιείται αργό hardware. Σημειώστε, επίσης, ότι μερικές γραμματοσειρές συμπεριφέρονται
+               καλύτερα με κάποια ζεύγη γλωσσών, σε από ότι με άλλα. Ειδικά, αν μεταφράζετε ανάμεσα σε δύο γλώσσες με διαφορετικές αλφαβήτους/συστήματα
+               γραφής (σαν τα Ρωσικά και τα Ιαπωνικά), επιλέξτε μια γραμματοσειρά που να μπορεί να χρησιμοποιηθεί και από τις δύο.
+            </p>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="preventing.data.loss"></a>4. Πρόληψη απώλειας δεδομένων<a class="indexterm" name="d0e8559"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <p>Το <span class="application">OmegaT</span> είναι μια στιβαρή εφαρμογή. Πάντωςμ θα πρέπει να λαμβάνετε προφυλάξεις κατά της απώλειας δεδομένων, όταν χρησιμοποιείτε το
+               <span class="application">OmegaT</span>, ακριβώς όπως ισχύει και με όλες τις άλλες εφαρμογές. Όταν μεταφράζετε τα αρχεία σας, το <span class="application">OmegaT</span> αποθηκεύει όλες τις προόδους σας στη μεταφραστική μνήμη <code class="literal">project_save.tmx</code> η οποία βρίσκεται στον υποκατάλογο του έργου <code class="literal">/omegat</code>.
+            </p>
+            <p>Το OmegaT παίρνει και αντίγραφα ασφαλείας της μεταφραστικής μνήμης στον υποκατάλογο του έργου project_save.tmx.YEARMMDDHHNN.bak
+               , κάθε φορά που ένα έργο ανοίγει, ή επαναφορτώνεται. Το ΕΤΟΣ (YEAR) είναι ένα 4/ψήφιο έτος, το MM είναι ο μήνας, το DD η ημέρα
+               του μνήνα, και τα HH και NN είναι οι ώρες και τα λεπτά, όταν είχε αποθηκευθεί η προηγούμενη μεταφραστικήγ μνήμη.
+            </p>
+            <p>Αν πιστεύετε ότι χάσατε μεταφραστικά δεδομένα, μπορείτε να χρησιμοποιείτε την εξής διαδικασία για να αποκαταστήσετε το έργο
+               στην πιο πρόσφατα αποθηκευμένη κατάσταση, συνήθως όχι παλιότερη από περίπου 10 λεπτά, ή κάτι τέτοιο:
+            </p>
+            <div class="orderedlist">
+               <ol class="orderedlist" type="1">
+                  <li class="listitem">
+                     <p>κλείστε το έργο</p>
+                  </li>
+                  <li class="listitem">
+                     <p>μετονομάστε το τρέχον αρχείο <code class="filename">project_save.tmx </code> (π.χ. σε <code class="filename">project_save.tmx.temporary</code>)
+                     </p>
+                  </li>
+                  <li class="listitem">
+                     <p>επιλέξτε το αντίγραφο ασφαλείας της μεταφραστικκής μνήμης που κατά πάσα πιθανότητα περιέχει τα δεδομένα που αναζητάτε</p>
+                  </li>
+                  <li class="listitem">
+                     <p>μετονομάστε το <code class="literal">project_save.tmx</code></p>
+                  </li>
+                  <li class="listitem">
+                     <p>ανοίξτε το έργο</p>
+                  </li>
+               </ol>
+            </div>
+            <p>Για να αποφύγετε την απώλεια σημαντικών δεδομένων:</p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>Πάρτε τακτικά αντίγραφα του αρχείου /omegat/project_save.tmx για να έχετε αντίγραφα ασφαλείας μέσων όπως τα CD ή τα DVD.</p>
+                  </li>
+                  <li class="listitem">
+                     <p>Έως ότου αποκτήσετε εξοικείωση με το <span class="application">OmegaT</span>, δημιουργήστε ανά τακτά διαστήματα μεταφρασμένα αρχεία και ελέγξτε ότι το μεταφρασμένο αρχείο περιέχει την πιο πρόσφατη έκδοση
+                        της μετάφρασής σας.
+                     </p>
+                  </li>
+                  <li class="listitem">
+                     <p>Προσέξτε ιδιαίτερα όταν κάνετε αλλαγές αρχείων στην <code class="literal">/πηγή</code> ενόσω βρίσκετε στα μισά του έργου. Αν τα αρχεία προέλευσης τροποποιηθούν μετά την έναρξη της μετάφρασης, το <span class="application">OmegaT</span> ενδέχεται να μην μπορεί να βρει ένα τμήμα που είχατε ήδη μεταφράσει.
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>Χρησιμοποιείστε αυτά τα κείμενα Βοήθειας για να αρχίσετε. Σε περίπτωση που έχετε προβλήματα, στείλτε ένα μήνυμα στην ομάδα
+                        χρηστών του <a class="ulink" href="http://tech.groups.yahoo.com/group/Omegat/" target="_top"><span class="application">OmegaT</span></a>. Μη διστάσετε να το στείλετε στη γλώσσα με στην οποία αισθάνεσθε περισσότερο εξοικειωμένος.
+                     </p>
+                  </li>
+               </ul>
+            </div>
+         </div>
+      </div>
+      <div class="navfooter">
+         <hr>
+         <table width="100%" summary="Navigation footer">
+            <tr>
+               <td width="40%" align="left"><a accesskey="p" href="chapter.spellchecker.html">Προηγ</a>&nbsp;
+               </td>
+               <td width="20%" align="center">&nbsp;</td>
+               <td width="40%" align="right">&nbsp;<a accesskey="n" href="appendix.languages.html">Επόμενο</a></td>
+            </tr>
+            <tr>
+               <td width="40%" align="left" valign="top">Κεφάλαιο 19. Ορθογραφικός διορθωτής&nbsp;</td>
+               <td width="20%" align="center"><a accesskey="h" href="index.html">Αρχή</a></td>
+               <td width="40%" align="right" valign="top">&nbsp;Παράρτημα A. Γλώσσες - Κατάλογος με κωδικούς κατά ISO 639
+                    
+                    
+                    
+               </td>
+            </tr>
+         </table>
+      </div>
+   </body>
+</html>

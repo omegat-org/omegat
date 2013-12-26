@@ -1,0 +1,295 @@
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <title>Παράρτημα C. Ομαδικά έργα του OmegaT</title>
+      <link rel="stylesheet" type="text/css" href="OmegaT.css">
+      <meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
+      <link rel="home" href="index.html" title="OmegaT - Εγχειρίδιο χρήστη">
+      <link rel="up" href="index.html" title="OmegaT - Εγχειρίδιο χρήστη">
+      <link rel="prev" href="appendix.keyboard.html" title="Παράρτημα B. Συντμεύσεις πληκτρολογίου στο πρόγραμμα επεξεργασίας (editor)">
+      <link rel="next" href="appendix.TokenizerPlugin.inOmegaT.html" title="Παράρτημα D. Πρόσθετο Σύστημα δημιουργίας λεκτικών μονάδων (Tokenizer plugin)">
+   </head>
+   <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+      <div class="navheader">
+         <table width="100%" summary="Navigation header">
+            <tr>
+               <th colspan="3" align="center">Παράρτημα C. Ομαδικά έργα του OmegaT</th>
+            </tr>
+            <tr>
+               <td width="20%" align="left"><a accesskey="p" href="appendix.keyboard.html">Προηγ</a>&nbsp;
+               </td>
+               <th width="60%" align="center">&nbsp;</th>
+               <td width="20%" align="right">&nbsp;<a accesskey="n" href="appendix.TokenizerPlugin.inOmegaT.html">Επόμενο</a></td>
+            </tr>
+         </table>
+         <hr>
+      </div>
+      <div class="appendix">
+         <div class="titlepage">
+            <div>
+               <div>
+                  <h1 class="title"><a name="appendix.TeamProjects"></a>Παράρτημα C. Ομαδικά έργα του OmegaT<a class="indexterm" name="d0e10176"></a></h1>
+               </div>
+            </div>
+         </div>
+         <div class="toc">
+            <dl class="toc">
+               <dt><span class="section"><a href="appendix.TeamProjects.html#d0e10183">1. Έλεγχος έκδοσης (Version control) - Εισαγωγή</a></span></dt>
+               <dt><span class="section"><a href="appendix.TeamProjects.html#d0e10254">2. Διαμοιρασμός ενός έργου με τη χρήση SVN</a></span></dt>
+               <dd>
+                  <dl>
+                     <dt><span class="section"><a href="appendix.TeamProjects.html#d0e10275">2.1. Δημιουργία αποθετηρίου</a></span></dt>
+                     <dt><span class="section"><a href="appendix.TeamProjects.html#d0e10335">2.2. Εισαγωγή του έργου στο αποθετήριο SVN - Windows</a></span></dt>
+                  </dl>
+               </dd>
+               <dt><span class="section"><a href="appendix.TeamProjects.html#d0e10472">3. Χρήση Ομαδικού έργου στο OmegaT</a></span></dt>
+            </dl>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e10183"></a>1. Έλεγχος έκδοσης (Version control) - Εισαγωγή
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>Η συνεργατική μετάφραση που προσφέρει το OmegaT βασίζεται στη λειτουργικότητα της έκδοσης ή στον έλεγχο αναθεωρήσεων, που
+               χρησιμοποιείται ευρέως από την κοινότητα λογισμικού για να διατηρεί τον έλεγχο των αλλαγών του κώδικα προγραμματισμού ενός
+               προγράμματος και για να επιτρέψει μια ανεμπόδιστη συνεργασία μέσα στην ίδια την ομάδα ανάπτυξης. Το OmegaT υποστηρίζει δύο
+               από τα πιο δημοφιλή συστήματα ελέγχου εκδόσεων (εν συντομία, VCS), το <a class="ulink" href="http://subversion.apache.org" target="_top">Apache Subversion</a> (συχνά συντομογραφημένη ως SVN, μετά το όνομα της εντολής svn) και το <a class="ulink" href="http://git-scm.com/" target="_top">Git</a>. Τα πλεονεκτήματα ενός συστήματος VC για μια ομάδα μεταφραστών, μπορούν να συνοψισθούν ως εξής:
+            </p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>Πολλά μέλη της ομάδας μπορούν να εργασσθούν σε ένα έργο μετάφρασης ταυτόχορνα, χωρίς ο ένας να παρεμβαίνει στη δουλειά του
+                        άλλου.
+                     </p>
+                  </li>
+                  <li class="listitem">
+                     <p>Μπορούν να διαμοιράζονται κοινό υλικό, όπως δεδομένα μεταφραστικής μνήμης του έργου, καθώς και το γλωσσάρι του</p>
+                  </li>
+                  <li class="listitem">
+                     <p>Κάθε τρία λεπτά, από προεπιλογή, μια ενημερωμένη έκδοση των διαμοιρασμένων δεδομένων είναι διαθέσιμη για την υπόλοιπη ομάδα</p>
+                  </li>
+                  <li class="listitem">
+                     <p>Το σύστημα διατηρεί ένα σύστημα ελέγχου εκδόσεων για τα διαμοιραζόμενα δεδομένα</p>
+                  </li>
+                  <li class="listitem">
+                     <p>Συγκρούσεις - για παράδειγμα, οι εναλλακτικές μεταφράσεις του ίδιου τμήματος ή της καταχώρησης γλωσσαρίου - μπορούν να παρακολουθούνται,
+                        να επιλύονται και να συγχωνεύονται.
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <p>Οι ακόλουθοι όροι που θα χρησιμοποιηθούν στο παρακάτω κείμενο, αξίζουν μια σύντομη εξήγηση:</p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p><span class="bold"><strong>VCS server - </strong></span>π.χ. ο διακομιστής SVN ή Git είναι το περιβάλλον όπου φυλάσσεται το κοινό υλικό και συντηρείται στο δίκτυο. Ο διακομιστής
+                        μπορεί να υπάρχει στο τοπικό δίκτυο, αλλά στην πλειοψηφία των περιπτώσεων, θα είναι διαθέσιμος στο internet, π.χ. μέσω διευθύνσεων
+                        URL. Άλλα μέλη της ομάδας, όπως ο διαχειριστής του έργου, πρέπει να εξοικειωθούν με τη διαχείριση της πλευράς του διακομιστή,
+                        π.χ. με την εργασία ρύθμισης του περιβάλλοντος, της εισαγωγής ενός έργου OmegaT, της απόδοσης δικαιωμάτων πρόσβασης για τα
+                        διάφορα μέλη της ομάδας, της επίλυσης συγκρούσεων, κλπ.
+                     </p>
+                  </li>
+                  <li class="listitem">
+                     <p><span class="bold"><strong>Πελάτης VCS: </strong></span>Για να αλληλεπιδράτε με έναν διακομιστή SVN ή Git, πρέπει να εγκατασταθεί ένας πελάτης στους υπολογιστές των "διαχειριστών
+                        έργου" που εμπλέκονται σε ένα έργο OmegaT. Πολλοί δημοφιλείς πελάτες για το περιβάλλον των Windows είναι οι <a class="ulink" href="http://tortoisesvn.net/" target="_top">TortoiseSVN</a> και <a class="ulink" href="http://code.google.com/p/tortoisegit/" target="_top">TortoiseGit</a>. Άλλα λειτουργικά συστήματα (Linux, OS X) προσφέρουν παρόμοια πακέτα.
+                     </p>
+                  </li>
+                  <li class="listitem">
+                     <p><span class="bold"><strong>αποθετήριο (repository): </strong></span>τομέρος όπου αποθηκεύεται και συντηρείται το διαμοιραζόμενο υλικό, είτε σε ένα δίκτυο με τοπική πρόσβαση, ή στο Internet.
+                        Τα μέλη της ομάδας συνδέονται με  αυτό, μέσω του πελάτη τους VCS.
+                     </p>
+                  </li>
+                  <li class="listitem">
+                     <p><span class="bold"><strong>checkout:</strong></span> η λειτουργία που δημιουργεί ένα λειτουργικό αντίγραφο, από το αποθετήριο, στον τοπικό σας υπολογιστή. Ο διακομιστής φυλά
+                        τις πληροφορίες στα checkouts, ώστε τα επόμενα commits (βλέπε πιο κάτω) μπορούν να γίνουν με οργανωμένο τρόπο.
+                     </p>
+                  </li>
+                  <li class="listitem">
+                     <p><span class="bold"><strong>commit: </strong></span>όταν μία νέα τοπική έκδοση του υλικού που έχει ελεγχθεί, είναι έτοιμη, μπορεί να γίνει committed στο αποθετήριο και,έτσι,
+                        να γίνει διαθέσιμη για την υπόλοιπη ομάδα. Ο διακομιστής εξασφαλίζει θα επιλύονται οποιεσδήποτε αλλαγές που παρουσιάζουν συγκρούσεις,
+                        οφειλόμενες σε δύο μέλη που εργάζονται στα ίδια περιεχόμενα υπό έλεγχο.
+                     </p>
+                  </li>
+                  <li class="listitem">
+                     <p><span class="bold"><strong>διαχειριστής: </strong></span>ο υπεύθυνος για τη δημιουργία και συντήρηση του αποθετηρίου, δηλ. εκείνος που φροντίζει τον διακομιστή  που εξυπηρετεί τις
+                        εργασίες. Για την αποφυγή οποιωνδηποτε προβλημάτων, μόνον ένα άτομο πρέπει να έχει αυτά τα δικαιώματα, τουλάχιστον στην αρχή.
+                     </p>
+                  </li>
+                  <li class="listitem">
+                     <p><span class="bold"><strong>χρήσης</strong></span>: ένα μέλος της ομάδας, που συνεργάζεται σε ένα κοινό έργο.
+                     </p>
+                  </li>
+               </ul>
+            </div>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e10254"></a>2. Διαμοιρασμός ενός έργου με τη χρήση SVN<a class="indexterm" name="d0e10257"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <p>Υπάρχουν δύο τρόποι για να τρέχετε έναν διακομιστή SVN: μπορείτε να εγκαταστήσετε το SVN στον δικό σασς διακομιστή, ή μπορείτε
+               να χρησιμοποιήσετε μια φιλοξενούμενη υπηρεσία (hosted service). Όταν χρησιμοποιείτε μία εξωτερική υπηρεσία, πρέπει να συνηδοτηποιήσετε
+               τις ενδεχόμενες συνέπειες, από άποψη εμπιστευτικότητας, αφού φορτώνετε το αρχικό έγγραφο σε έναν διακομιστή εκτός του δικού
+               σας άμεσου ελέγχου. Εναλλακτικά, προς αποφυγή αυτού του θέματος, μπορείτε να στήσετε έναν ιδιωτικό διακομιστή SVN, π.χ. αν
+               ήδη έχετε έναν διακομιστή Apache που περιλαμβάνει το εν λόγω λογισμικό (π.χ. VisualSVN).
+            </p>
+            <p>Όταν ο διακομιστής SVN θα είναι διαθέσιμος, οι διαχειριστές του έργου πρέπει να εγκαταστήσουν τοπικά έναν πελάτη SVN, για
+               να μπορούν να διαχειρίζονται τα περιεχόμενα του έργου στους δικούς τους υπολογιστές. Για τα Windows συστήνουμε το <a class="ulink" href="http://tortoisesvn.net/" target="_top">TortoiseSVN</a>. Για τα Mac μπορείτε να κατεβάσετε τον πελάτη, παρεμπιπτόντως από το <a class="ulink" href="https://sourceforge.net/projects/macsvn/" target="_top">SourceForge</a>, Για το Linux βλέπε <a class="ulink" href="www.yolinux.com/TUTORIALS/Subversion.html" target="_top">Subversion Commands and Scripts</a>.
+            </p>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="d0e10275"></a>2.1. Δημιουργία αποθετηρίου<a class="indexterm" name="d0e10278"></a></h3>
+                     </div>
+                  </div>
+               </div>
+               <p>Θ διαδικασία που παρουσιάζεται εδώ, βασίζεται στον ελεύθερο διακομιστή SVN (περιορίζεται σε 2 χρήστες) που προσφέρεται από
+                  την <a class="ulink" href="http://projectlocker.com/" target="_top">ProjectLocker</a>. Σημειώστε ότι ο δημιουργός του αποθετηρίου διαθέτει, εξ' ορισμού, δικαιώματα διαχειριστή για το δημιουργηθέν αποθετήριο.
+                  Συνδεθείτε πρώτα στον ιστότοπο, ή - αν αυτή είναι η πρώτη σας φορά σε αυτό τον ιστότοπο, εγγραφείτε και σημειώστε το όνομα
+                  χρήστη και τον κωδικό σας για μελλοντικά έργα.
+               </p>
+               <div class="orderedlist">
+                  <ol class="orderedlist" type="1">
+                     <li class="listitem">
+                        <p>Δημιουργία ενός νέου έργου στο ProjectLocker</p>
+                     </li>
+                     <li class="listitem">
+                        <p>Πληκτρολογείστε το όνομα και την περιγραφή του αποθετηρίου. (Στο παράδειγμα που χρησιμοποιήθηκε εδώ, <code class="literal">OmegaT</code> και <code class="literal">OmegaT SL Localization </code>)
+                        </p>
+                     </li>
+                     <li class="listitem">
+                        <p>Επιλέξτε<span class="guibutton"> SVN.</span></p>
+                     </li>
+                     <li class="listitem">
+                        <p>Κάντε κλικ στη <span class="guibutton">Δημιουργία έργου</span></p>
+                     </li>
+                  </ol>
+               </div>
+               <p>ΑΝοίξτε την προβολή<span class="bold"><strong> Έργα</strong></span> για τον λογαριασμό σας. Το URL που εμφανίζεται στις Υπηρεσίες Έργου, θα χρησιμοποιηθεί από το SVN για να συνδεθεί με πελάτες
+                  στον διακομιστή SVN που μόλις στήσατε. Αυτή είναι και η τοποθεσία όπου μπορείτε να προσθέσετε μέλη στην ομάδα και να τους
+                  αναθέσετε δικαιώματα. Σημειώστε ότι τα μελη της ομάδας πρέπει πρώτα να εγγραφούν, πριν μπορέσετε να τα προσθέσετε στο έργο
+                  (Σημείωση: η ελεύθερη έκδοση του ProjectLocker, σας επιτρέπει μόνο 2 χρήστες ανά έργο).
+               </p>
+               <p>Μπορείτε να διαχειρίζεσθε τα έργα, σύμφωνα με το στυλ ανάπτυξης και τις ανάγκες σας. Αντίστοιχα με αυτό που ισχύει για τα
+                  έργα του OmegaT, πρέπει να έχετε χωριστά αποθετήρια για τα διαφορετικά ζεύγη γλωσσών. Μέσα σε ένα δεδομέν ζεύγος γλωσσών,
+                  είναι προτιμώτερο να διατηρείτε διαφορετικά θέματα και/ή πελάτες, και ως διαφορετικά αποθετήρια. Η εναλλακτική είναι να έχετε
+                  ένα ενιαίο αποθετήριο με υποκαταλόγους <code class="literal">Project1</code>, <code class="literal">Project2</code>, κπ., και να διαμοιράζεσθε το κοινό υλικό μέσω κοινών καταλόγων <code class="literal">tm</code>, <code class="literal">γλωσσαρίου</code> και <code class="literal">λεξικού</code>.
+               </p>
+               <p>Για το παράδειγμα που δείχνουμε εδώ, κλίναμε υπέρ του ενός ενιαίου έργου OmegaT - ένα ενιαίο αποθετήριο, για λόγους απλότητας.</p>
+            </div>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="d0e10335"></a>2.2. Εισαγωγή του έργου στο αποθετήριο SVN - Windows
+                        </h3>
+                     </div>
+                  </div>
+               </div>
+               <p>Το αποθετήριο είναι κενό αυτή τη στιγμή. Πρώτα δημιουργείτε έναν κενό κατάλογο πελάτη, στον δίσκο σας. Δημιουργήστε έναν κενό
+                  κατάλογο, όπου θα φυλάσσετε το έργο σας και κάντε δεξί κλικ επάνω του. Επιλέξτε<span class="guilabel"> TortoiseSVN &gt; Checkout.</span> Θα εμφανισθεί ο εξής διάλογος:
+               </p>
+               <div class="mediaobject"><img src="images/Team_projects_checkout.png"></div>
+               <p>Εισάγετε το URL που σας προσφέρει το ProjectLocker, στο πεδίο <span class="bold"><strong>URL του αποθετηρίου</strong></span>. Βεβαιωθείτε ότι το πεδίο <span class="bold"><strong>Κατάλογος Checkout</strong></span> είναι σωστό, δηλ. ορίζει τον κεν΄κατάλογο που φτιάξατε, και πατήστε <span class="bold"><strong>OK</strong></span>. Όταν η λειτουργία αυτή τελειώσει, μπορείτε να ελέγξετε τον παραπάνω φάκελλο: τώρα θα περιέχει έναν υποκατάλογο .svn και
+                  θα εμφανισθεί ένα πράσινο σήμα OK στο εικονίδιό του, ότι τα περιεχόμενα του καταλόγου είναι ενημερωμένα:
+               </p>
+               <p>Στο επόμενο βήμα, θα προσθέσουμε τα αρχεία του OmegaT στον τοπικό κατάλογο. Τα ακόλουθα αρχεία θα διαμοιρασθούν στα μέλη της
+                  ομάδας και, έτσι, πρέπει να συμπεριληφθούν σε κάθε περίπτωση:
+               </p>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
+                     <li class="listitem">
+                        <p>το αρχείο έργου omegat - <code class="filename">omegat.project</code></p>
+                     </li>
+                     <li class="listitem">
+                        <p>η μεταφραστική μνήμη - <code class="filename">omegat\project_save.tmx</code></p>
+                     </li>
+                     <li class="listitem">
+                        <p>τα περιεχόμενα του καταλόγου προέλευσης</p>
+                     </li>
+                     <li class="listitem">
+                        <p>ο ορισμός των φίλτρων ειδικών για το έργο - <code class="filename">omegat\filters.xml</code></p>
+                     </li>
+                  </ul>
+               </div>
+               <p>Ο διαχειριστής μπορεί να αποφασίσει να συμπεριλάβει τους ακόλουθους καταλόγους, καθώς και τα περιεχόμενά τουςl: <code class="filename">tm</code>, <code class="filename">γλωσσάρι</code> και <code class="filename">λεξικό</code>. Μπορεί, επίσης, να αξίζει τον κόπο να γίνει διαμοιρασμός των <code class="filename">ignored_words.txt</code> και <code class="filename">learned_words.txt</code> iστον κατάλογο <code class="filename">omegat</code> και συντήρηση σε επίπεδο ομάδας. Αποφύγετε, σε κάθε περίπτωση, να προσθέσετε αρχεία <code class="filename">bak</code> , <code class="filename">project_stats.txt</code> και <code class="filename">project_stats_match.txt</code>, στον υποκατάλογο <code class="filename">omegat</code> , αφού θα προκαλούσαν το 'σκάσιμο' του αποθετηρίου, χωρίς να είναι καθόλου απαραίτητο και χωρίς κανένα κέρδος. Μπορεί να
+                  θέλετε να κάνετε το ίδιο στον κατάλογο <code class="filename">προορισμού</code> και στα περιεχόμενά του.
+               </p>
+               <p>Μετά την αντιγραφή των απαιτούμενων αρχείων στον κατάλογο checkout, θα παρατηρήσετε ότι το εικονίδιό του άλλαξε: το πράσινο
+                  σήμα OK άλλαξε σε κόκκινο θαυμαστικό, που επισημαίνει την αλλαγή στο τοπικό αντίγραφο του αποθετηρίου. Τα επόμενα δύο βήματα
+                  θα ενημερώσουν την έκδοση του διακομιστή:
+               </p>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
+                     <li class="listitem">
+                        <p><span class="bold"><strong>προσθέστε τα αντιγραμμένα αρχεία στην τοπική έκδοση του αποθετηρίου:</strong></span> κάντε δεξί κλικ στον τοπικό κατάλογο checkout και επιλέξτε <span class="guilabel">TortoiseSVN &gt; Προσθήκη.</span> Στον διάλογο που θα ανοίξει, αφήστε όλες τις επιλογές ως έχουν εκ προεπιλογής και κάντε κλικ στο<span class="guilabel"> OK</span>. Η Προσθήκη τελείωσε! Θα ανοίξει ένα παράθυρο όμοιο με αυτό πιο κάτω:
+                        </p>
+                        <div class="mediaobject"><img src="images/Team_projects_Add.png"></div>
+                        <p>Τα περιεχόμενα του καταλόγου checkout θα επισημανθούν δεόντως:</p>
+                        <div class="mediaobject"><img src="images/Team_projects_checkoutAddFolder.png"></div>
+                     </li>
+                     <li class="listitem">
+                        <p><span class="bold"><strong>υποβολή (commit) των τοπικών αλλαγών στον διακομιστή: </strong></span>κάντε δεξί κλικ στον τοπικό κατάλογο checkout και επιλέξτε <span class="guilabel">Υποβολή (commit) SVN....</span> Θα ανοίξει το παράθυρο Υποβολής (Commit) - βλέπε πιο κάτω. Ελέγξτε τις αλλαγές που πρέπει να γίνουν - δηλ. τους καταλόγους
+                           και τα αρχεία που προστέθηκαν σε αυτή την περίπτωση.
+                        </p>
+                        <div class="mediaobject"><img src="images/Team_projects_initialCommit.png"></div>
+                        <p>Εισάγετε ένα κατάλληλο μήνυμα στο παράθυρο μηνυμάτων και πατήστε <span class="guilabel">OK</span>. Ανοίγει το παράθυρο υποβολής (commit) και θα δείξει την πρόοδο της εντολής για υποβολή (commit). Πρώτα θα υποβάλλει τα τρέχοντα
+                           περιεχόμενα στο αποθετήριο του διακομιστή και, μετά, θα ενημερώσει το τοπικό αντίγραφο του αποθετηρίου - δηλ. τα περιεχόμενα
+                           του υποκαταλόγου .svn - για να είναι ενημερωμένο με την πιο πρόσφατη έκδοση του αποθετηρίου.
+                        </p>
+                     </li>
+                     <li class="listitem">
+                        <p><span class="bold"><strong>Ενημέρωση των τοπικών αρχείων από το αντίγραφο τοπικού αποθετηρίου</strong></span> - οι αλλαγές που λαμβάνονται στο αποθετήριο του διακομιστή, βρίσκονται μέσα στον υποκατάλογο .svn αλλά όχι ακόμη στα ίδια
+                           τα αρχεία και στους καταλόγους αυτούς καθ' εαυτούς. Για να ενημερωθούν τα τοπικά αρχεία, κάντε δεξί κλικ στον κατάλογο checkout
+                           και επιλέξτε <span class="guilabel">Ενημέρωση SVN</span>. Ελέγξτε τα περιεχόμενα του καταλόγου για να επιβεβαιώσετε ότι το τοπικό αντίγραφο του αποθετηρίου και τα αντίστοιχα αρχεία
+                           και κατάλογοι, αντιστοιχούν στην πιο πρόσφατη έκδοση του διακομιστή:
+                        </p>
+                        <div class="mediaobject"><img src="images/Team_projects_checkoutSVNupdate.png"></div>
+                     </li>
+                  </ul>
+               </div>
+            </div>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e10472"></a>3. Χρήση Ομαδικού έργου στο OmegaT
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>Όταν το οΟμαδικό έργο ρυθμισθεί, τα μέλη της ομάδας χρειάζονται μόνο να μπορεί το <span class="application">OmegaT</span> να έχει πρόσβαση στο Ομαδικό έργο. Πρώτα, πρέπει να χρησιμοποιήσουν το <span class="guilabel">Έργο &gt; Μεταφόρτωση Ομαδικού έργου</span>. Αυτό θα κάνει πραγματικά έναν έλεγχο του έργου σε έναν τοπικό κατάλογο. Τα πιστοποιητικά αποθηκεύονται, έτσι ώστε να μη
+               χρειάζεται να τα βάζετε κάθε φορά. Στο Linux, αν το <span class="application">OmegaT</span> σας ζητά ακόμη τα πιστοποιητικά σας, μπορείτε να τσεκάρετε το κουτί επιλογής <span class="guilabel">Βίαια αποθήκευση του κωδικού σε μορφή απλού κειμένου</span> .
+            </p>
+            <p>Για τις επόμενες χρήσεις, το μόνο που χρειάζεται είναι να ανοίξετε το έργο σαν οποιοδήποτε άλλο έργο <span class="application">OmegaT</span> . Το OmegaT θα το αναγνωρίσει σαν Ομαδικό έργο και θα συγχρονίζει τα πάντα αυτόματα, κάθε τρία λεπτά, από προεπιλογή.
+            </p>
+         </div>
+      </div>
+      <div class="navfooter">
+         <hr>
+         <table width="100%" summary="Navigation footer">
+            <tr>
+               <td width="40%" align="left"><a accesskey="p" href="appendix.keyboard.html">Προηγ</a>&nbsp;
+               </td>
+               <td width="20%" align="center">&nbsp;</td>
+               <td width="40%" align="right">&nbsp;<a accesskey="n" href="appendix.TokenizerPlugin.inOmegaT.html">Επόμενο</a></td>
+            </tr>
+            <tr>
+               <td width="40%" align="left" valign="top">Παράρτημα B. Συντμεύσεις πληκτρολογίου στο πρόγραμμα επεξεργασίας (editor)&nbsp;</td>
+               <td width="20%" align="center"><a accesskey="h" href="index.html">Αρχή</a></td>
+               <td width="40%" align="right" valign="top">&nbsp;Παράρτημα D. Πρόσθετο Σύστημα δημιουργίας λεκτικών μονάδων (Tokenizer plugin)</td>
+            </tr>
+         </table>
+      </div>
+   </body>
+</html>

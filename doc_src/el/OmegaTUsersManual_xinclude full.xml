@@ -39,7 +39,7 @@
 
   <xi:include href="PlainText.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
 
-  <xi:include href="FormattedText.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+  <!--<xi:include href="FormattedText.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>-->
 
   <xi:include href="TranslationMemories.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
 

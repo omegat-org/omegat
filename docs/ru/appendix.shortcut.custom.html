@@ -5,8 +5,8 @@
       <title>Приложение H. Настройка сочетаний клавиш</title>
       <link rel="stylesheet" type="text/css" href="OmegaT.css">
       <meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
-      <link rel="home" href="index.html" title="Руководство пользователя ОмегаТ">
-      <link rel="up" href="index.html" title="Руководство пользователя ОмегаТ">
+      <link rel="home" href="index.html" title="Руководство пользователя ОмегаТ 3.0">
+      <link rel="up" href="index.html" title="Руководство пользователя ОмегаТ 3.0">
       <link rel="prev" href="appendix.website.html" title="Приложение G. ОмегаТ в Интернете">
       <link rel="next" href="appendix.legal.notices.html" title="Приложение I. Авторские права">
    </head>
@@ -50,40 +50,46 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="ch04.shortcuts.customization"></a>1. <a class="indexterm" name="d0e11083"></a>Настройка сочетаний клавиш
+                     <h2 class="title" style="clear: both"><a name="ch04.shortcuts.customization"></a>1. <a class="indexterm" name="d0e11069"></a>Настройка сочетаний клавиш
                      </h2>
                   </div>
                </div>
             </div>
-            <p>Для большинства элементов главного меню можно настроить сочетание клавиш. По умолчанию, сочетания клавиш присвоены только
-               наиболее используемым пунктам меню. Вы можете изменить сочетания клавиш по умолчанию и добавить новые, поместив в каталог
-               настроек ОмегаТ файл с соответствующими определениями (см. раздел <a class="link" href="chapter.files.and.directories.html#user.files" title="2. Файлы пользовательских настроек">Расположение пользовательских файлов</a>).
+            <p>Для большинства элементов главного меню можно настроить сочетание клавиш. Вы можете изменить сочетания клавиш по умолчанию
+               и добавить новые, поместив в каталог настроек ОмегаТ файл с соответствующими определениями (см. раздел <a class="link" href="chapter.files.and.folders.html#user.files" title="2. Файлы пользовательских настроек">Расположение пользовательских файлов</a>).
             </p>
             <p>Файл с определениями сочетаний клавиш должен называться <code class="filename">MainMenuShortcuts.properties</code> и содержать не более одного сочетания в каждой строке. Допускается наличие пустых строк и строк комментария, которые начинаются
                с «//». Все символы после знака «//» будут проигнорированы.
             </p>
             <p>Чтобы новые сочетания клавиш вступили в силу, после изменения <code class="filename">MainMenuShortcuts.properties</code> <span class="application">ОмегаТ</span> должна быть перезапущена.
             </p>
-            <p>Новые сочетания клавиш должны определяться следующим образом: <code class="code">&lt;кодовое обозначение пункта меню&gt;=&lt;сочетание клавиш&gt;</code>, где <span class="emphasis"><em>&lt;кодовое обозначение пункта меню&gt;</em></span>&nbsp;— код из приведённых ниже таблиц, а <span class="emphasis"><em>&lt;сочетание клавиш&gt;</em></span>&nbsp;— заданная пользователем комбинация клавиш, которую надо нажать.<a href="#ftn.d0e11118" class="footnote" name="d0e11118"><sup class="footnote">[2]</sup></a>.
+            <p>The shortcut definition syntax is the following: <code class="code">&lt;menu item
+                      code&gt;=&lt;shortcut&gt;</code>, where <span class="emphasis"><em>&lt;menu item
+                         code&gt;</em></span> is a code taken from the tables below and
+                   <span class="emphasis"><em>&lt;shortcut&gt;</em></span> is a combination of pressed keys
+                   specified by the user<a href="#ftn.d0e11104" class="footnote" name="d0e11104"><sup class="footnote">[2]</sup></a>.
             </p>
             <p>&lt;сочетание клавиш&gt; имеет следующий формат: 0 или 1 <code class="code">&lt;модификатор&gt;</code>, затем 0 или 1 <code class="code">&lt;состояние&gt;</code> и 1 <code class="code">&lt;клавиша&gt;</code>, где:
             </p>
             <div class="itemizedlist">
                <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
-                     <p><code class="code">&lt;модификатор&gt;</code> может принимать значения: <span class="emphasis"><em>shift</em></span>, <span class="emphasis"><em>control</em></span>, <span class="emphasis"><em>ctrl</em></span>, <span class="emphasis"><em>meta</em></span><a href="#ftn.d0e11152" class="footnote" name="d0e11152"><sup class="footnote">[3]</sup></a>, <span class="emphasis"><em>alt</em></span>,
+                     <p><code class="code">&lt;modifier&gt;</code> can be:
+                                  <span class="emphasis"><em>shift</em></span>, <span class="emphasis"><em>control</em></span>,
+                                  <span class="emphasis"><em>ctrl</em></span>, <span class="emphasis"><em>meta</em></span><a href="#ftn.d0e11138" class="footnote" name="d0e11138"><sup class="footnote">[3]</sup></a>, <span class="emphasis"><em>alt</em></span>,
                                   <span class="emphasis"><em>altGraph</em></span></p>
                   </li>
                   <li class="listitem">
                      <p><code class="code">&lt;состояние&gt;</code> может принимать значение: <span class="emphasis"><em>typed</em></span>, <span class="emphasis"><em>pressed</em></span>, <span class="emphasis"><em>released</em></span></p>
                   </li>
                   <li class="listitem">
-                     <p>и <code class="code">&lt;клавиша&gt;</code> может соответствовать любой доступной на клавиатуре клавише<a href="#ftn.d0e11186" class="footnote" name="d0e11186"><sup class="footnote">[4]</sup></a>.
+                     <p>and <code class="code">&lt;key&gt;</code> can be any key available on your
+                                  keyboard<a href="#ftn.d0e11172" class="footnote" name="d0e11172"><sup class="footnote">[4]</sup></a>.
                      </p>
                   </li>
                </ul>
             </div>
-            <p>Например, в сочетаниях клавиш, используемых ОмегаТ по умолчанию<a href="#ftn.d0e11194" class="footnote" name="d0e11194"><sup class="footnote">[5]</sup></a> можно найти:
+            <p>For example, in the default OmegaT shortcuts<a href="#ftn.d0e11180" class="footnote" name="d0e11180"><sup class="footnote">[5]</sup></a>, one can find:
             </p>
             <div class="itemizedlist">
                <ul class="itemizedlist" style="list-style-type: disc; ">
@@ -97,7 +103,8 @@
             </div>
             <p>Первое сочетание клавиш используется для <span class="guimenuitem">открытия проекта</span>, а второе для <span class="guimenuitem">добавления записи в глоссарий</span>.
             </p>
-            <p>Если для открытия проекта вы хотите использовать сочетание клавиш <span class="keycap"><strong>SHIFT</strong></span>+<span class="keycap"><strong>CTRL</strong></span>+<span class="keycap"><strong>O</strong></span>, измените <code class="filename">MainMenuShortcuts.properties</code> следующим образом:<code class="code">
+            <p>If you want to use <span class="keycap"><strong>Shift</strong></span>+<span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>O</strong></span> to open a project, modify your
+                   <code class="filename">MainMenuShortcuts.properties</code> as follows:<code class="code">
                       </code></p>
             <p><code class="code">projectOpenMenuItem=shift ctrl O</code>.
             </p>
@@ -117,12 +124,12 @@
                   </div>
                </div>
             </div>
-            <div class="table"><a name="d0e11265"></a><p class="title"><b>Таблица H.1. Меню «Проект»</b></p>
+            <div class="table"><a name="d0e11251"></a><p class="title"><b>Таблица H.1. Меню «Проект»</b></p>
                <div class="table-contents">
                   <table summary="Меню «Проект»" border="1">
                      <colgroup>
-                        <col width="120" align="left" class="1">
-                        <col width="80" align="left" class="2">
+                        <col align="left" class="1">
+                        <col align="left" class="2">
                         <col align="left" class="3">
                      </colgroup>
                      <thead>
@@ -142,6 +149,11 @@
                            <td align="left">Открыть</td>
                            <td align="left"><span class="keycap"><strong>CTRL+O</strong></span></td>
                            <td align="left">projectOpenMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Загрузить командный проект</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">projectTeamNewMenuItem</td>
                         </tr>
                         <tr>
                            <td align="left">Импортировать исходные файлы...</td>
@@ -201,12 +213,12 @@
                   </div>
                </div>
             </div>
-            <div class="table"><a name="d0e11366"></a><p class="title"><b>Таблица H.2. Меню «Правка»</b></p>
+            <div class="table"><a name="d0e11358"></a><p class="title"><b>Таблица H.2. Меню «Правка»</b></p>
                <div class="table-contents">
                   <table summary="Меню «Правка»" border="1">
                      <colgroup>
-                        <col width="120" align="left" class="1">
-                        <col width="80" align="left" class="2">
+                        <col align="left" class="1">
+                        <col align="left" class="2">
                         <col align="left" class="3">
                      </colgroup>
                      <thead>
@@ -298,17 +310,17 @@
                            <td align="left">editSelectFuzzy5MenuItem</td>
                         </tr>
                         <tr>
-                           <td align="left">Строчные буквы</td>
+                           <td align="left">Сменить регистр на/Строчные буквы</td>
                            <td align="left">&nbsp;</td>
                            <td align="left">lowerCaseMenuItem</td>
                         </tr>
                         <tr>
-                           <td align="left">Прописные буквы</td>
+                           <td align="left">Сменить регистр на/Прописные буквы</td>
                            <td align="left">&nbsp;</td>
                            <td align="left">upperCaseMenuItem</td>
                         </tr>
                         <tr>
-                           <td align="left">Каждое слово с прописной буквы</td>
+                           <td align="left">Сменить регистр на/Каждое слово с прописной буквы</td>
                            <td align="left">&nbsp;</td>
                            <td align="left">titleCaseMenuItem</td>
                         </tr>
@@ -316,6 +328,16 @@
                            <td align="left">Изменять регистр в цикле…</td>
                            <td align="left"><span class="keycap"><strong>SHIFT+F3</strong></span></td>
                            <td align="left">cycleSwitchCaseMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Использовать как перевод по умолчанию</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">editMultipleDefault</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Создать вариант перевода</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">editMultipleAlternate</td>
                         </tr>
                      </tbody>
                   </table>
@@ -330,12 +352,12 @@
                   </div>
                </div>
             </div>
-            <div class="table"><a name="d0e11539"></a><p class="title"><b>Таблица H.3. Меню «Переход»</b></p>
+            <div class="table"><a name="d0e11543"></a><p class="title"><b>Таблица H.3. Меню «Переход»</b></p>
                <div class="table-contents">
                   <table summary="Меню «Переход»" border="1">
                      <colgroup>
-                        <col width="120" align="left" class="1">
-                        <col width="80" align="left" class="2">
+                        <col align="left" class="1">
+                        <col align="left" class="2">
                         <col align="left" class="3">
                      </colgroup>
                      <thead>
@@ -367,13 +389,23 @@
                            <td align="left">gotoSegmentMenuItem</td>
                         </tr>
                         <tr>
-                           <td align="left">Назад...</td>
-                           <td align="left"><span class="keycap"><strong>CTRL+SHIFT+P</strong></span></td>
-                           <td align="left">gotoHistoryForwardMenuItem</td>
+                           <td align="left">Следующее примечание</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">gotoNextNoteMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Предыдущее примечание</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">gotoPreviousNoteMenuItem</td>
                         </tr>
                         <tr>
                            <td align="left">Вперёд...</td>
                            <td align="left"><span class="keycap"><strong>CTRL+SHIFT+N</strong></span></td>
+                           <td align="left">gotoHistoryForwardMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Назад...</td>
+                           <td align="left"><span class="keycap"><strong>CTRL+SHIFT+P</strong></span></td>
                            <td align="left">gotoHistoryBackMenuItem</td>
                         </tr>
                      </tbody>
@@ -389,11 +421,11 @@
                   </div>
                </div>
             </div>
-            <div class="table"><a name="d0e11618"></a><p class="title"><b>Таблица H.4. Меню «Вид»</b></p>
-               <div class="table-contents"><a class="indexterm" name="d0e11621"></a><table summary="Меню «Вид»" border="1">
+            <div class="table"><a name="d0e11634"></a><p class="title"><b>Таблица H.4. Меню «Вид»</b></p>
+               <div class="table-contents"><a class="indexterm" name="d0e11637"></a><table summary="Меню «Вид»" border="1">
                      <colgroup>
-                        <col width="120" align="left" class="1">
-                        <col width="80" align="left" class="2">
+                        <col align="left" class="1">
+                        <col align="left" class="2">
                         <col align="left" class="3">
                      </colgroup>
                      <thead>
@@ -425,6 +457,26 @@
                            <td align="left">viewMarkNonUniqueSegmentsCheckBoxMenuItem</td>
                         </tr>
                         <tr>
+                           <td align="left">Выделить сегменты с примечаниями</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">viewMarkNotedSegmentsCheckBoxMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Выделить неразрывные пробелы</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">viewMarkNBSPCheckBoxMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Выделить пробелы</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">viewMarkWhitespaceCheckBoxMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Выделить управляющие символы алгоритма отображения двунаправленного текста</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">viewMarkBidiCheckBoxMenuItem</td>
+                        </tr>
+                        <tr>
                            <td align="left">Сведения об изменении/Ничего не показывать</td>
                            <td align="left">&nbsp;</td>
                            <td align="left">viewDisplayModificationInfoNoneRadioButtonMenuItem</td>
@@ -452,12 +504,12 @@
                   </div>
                </div>
             </div>
-            <div class="table"><a name="d0e11684"></a><p class="title"><b>Таблица H.5. Меню «Инструменты»</b></p>
+            <div class="table"><a name="d0e11724"></a><p class="title"><b>Таблица H.5. Меню «Инструменты»</b></p>
                <div class="table-contents">
                   <table summary="Меню «Инструменты»" border="1">
                      <colgroup>
-                        <col width="120" align="left" class="1">
-                        <col width="80" align="left" class="2">
+                        <col align="left" class="1">
+                        <col align="left" class="2">
                         <col align="left" class="3">
                      </colgroup>
                      <thead>
@@ -496,12 +548,12 @@
                   </div>
                </div>
             </div>
-            <div class="table"><a name="d0e11723"></a><p class="title"><b>Таблица H.6. Меню «Параметры»</b></p>
+            <div class="table"><a name="d0e11763"></a><p class="title"><b>Таблица H.6. Меню «Параметры»</b></p>
                <div class="table-contents">
                   <table summary="Меню «Параметры»" border="1">
                      <colgroup>
-                        <col width="120" align="left" class="1">
-                        <col width="80" align="left" class="2">
+                        <col align="left" class="1">
+                        <col align="left" class="2">
                         <col align="left" class="3">
                      </colgroup>
                      <thead>
@@ -583,7 +635,7 @@
                            <td align="left">optionsViewOptionsMenuItem</td>
                         </tr>
                         <tr>
-                           <td align="left">Сохранить</td>
+                           <td align="left">Параметры сохранения и создания документов...</td>
                            <td align="left">&nbsp;</td>
                            <td align="left">optionsSaveOptionsMenuItem</td>
                         </tr>
@@ -610,12 +662,12 @@
                   </div>
                </div>
             </div>
-            <div class="table"><a name="d0e11843"></a><p class="title"><b>Таблица H.7. Меню «Справка»</b></p>
+            <div class="table"><a name="d0e11883"></a><p class="title"><b>Таблица H.7. Меню «Справка»</b></p>
                <div class="table-contents">
                   <table summary="Меню «Справка»" border="1">
                      <colgroup>
-                        <col width="120" align="left" class="1">
-                        <col width="80" align="left" class="2">
+                        <col align="left" class="1">
+                        <col align="left" class="2">
                         <col align="left" class="3">
                      </colgroup>
                      <thead>
@@ -641,19 +693,19 @@
                </div>
             </div><br class="table-break"></div>
          <div class="footnotes"><br><hr style="width:100; text-align:left;margin-left: 0">
-            <div id="ftn.d0e11118" class="footnote">
-               <p><a href="#d0e11118" class="para"><sup class="para">[2] </sup></a>Полный синтаксис определения сочетаний клавиш описан в документации Java 1.6 от компании Oracle (внизу страницы): <a class="ulink" href="http://docs.oracle.com/javase/6/docs/api/javax/swing/KeyStroke.html" target="_top">Сочетания клавиш Java 1.6</a></p>
+            <div id="ftn.d0e11104" class="footnote">
+               <p><a href="#d0e11104" class="para"><sup class="para">[2] </sup></a>Полный синтаксис определения сочетаний клавиш описан в документации Java 1.6 от компании Oracle (внизу страницы): <a class="ulink" href="http://docs.oracle.com/javase/6/docs/api/javax/swing/KeyStroke.html" target="_top">Сочетания клавиш Java 1.6</a></p>
             </div>
-            <div id="ftn.d0e11152" class="footnote">
-               <p><a href="#d0e11152" class="para"><sup class="para">[3] </sup></a>На Mac OS&nbsp;X модификатор <span class="emphasis"><em>meta</em></span> используется для обозначения клавиши <span class="emphasis"><em>COMMAND</em></span>.
+            <div id="ftn.d0e11138" class="footnote">
+               <p><a href="#d0e11138" class="para"><sup class="para">[3] </sup></a>На Mac OS&nbsp;X модификатор <span class="emphasis"><em>meta</em></span> используется для обозначения клавиши <span class="emphasis"><em>COMMAND</em></span>.
                </p>
             </div>
-            <div id="ftn.d0e11186" class="footnote">
-               <p><a href="#d0e11186" class="para"><sup class="para">[4] </sup></a>Все возможные клавиши перечислены в документации Java 1.6 от компании Oracle: <a class="ulink" href="http://docs.oracle.com/javase/6/docs/api/java/awt/event/KeyEvent.html" target="_top">Описание Java 1.6 keyEvents</a></p>
+            <div id="ftn.d0e11172" class="footnote">
+               <p><a href="#d0e11172" class="para"><sup class="para">[4] </sup></a>Все возможные клавиши перечислены в документации Java 1.6 от компании Oracle: <a class="ulink" href="http://docs.oracle.com/javase/6/docs/api/java/awt/event/KeyEvent.html" target="_top">Описание Java 1.6 keyEvents</a></p>
             </div>
-            <div id="ftn.d0e11194" class="footnote">
-               <p><a href="#d0e11194" class="para"><sup class="para">[5] </sup></a>Сочетания клавиш по умолчанию в ОмегаТ доступны на SourceForge: <a class="ulink" href="http://omegat.svn.sourceforge.net/viewvc/omegat/branches/release-2-5/src/org/omegat/gui/main/MainMenuShortcuts.properties" target="_top">Сочетания клавиш по умолчанию</a></p>
-               <p>Сочетания клавиш по умолчанию для Mac также доступны на SourceForge, в них вместо «ctrl» используется «meta»: <a class="ulink" href="http://omegat.svn.sourceforge.net/viewvc/omegat//branches/release-2-5/src/org/omegat/gui/main/MainMenuShortcuts.mac.properties" target="_top">Сочетания клавиш по умолчанию для Mac</a></p>
+            <div id="ftn.d0e11180" class="footnote">
+               <p><a href="#d0e11180" class="para"><sup class="para">[5] </sup></a>Сочетания клавиш по умолчанию в ОмегаТ доступны на SourceForge: <a class="ulink" href="http://omegat.svn.sourceforge.net/viewvc/omegat/branches/release-2-6/src/org/omegat/gui/main/MainMenuShortcuts.properties" target="_top">Сочетания клавиш по умолчанию</a></p>
+               <p>Сочетания клавиш по умолчанию для Mac также доступны на SourceForge, в них вместо «ctrl» используется «meta»: <a class="ulink" href="http://omegat.svn.sourceforge.net/viewvc/omegat/branches/release-2-6/src/org/omegat/gui/main/MainMenuShortcuts.mac.properties" target="_top">Сочетания клавиш по умолчанию для Mac</a></p>
             </div>
          </div>
       </div>

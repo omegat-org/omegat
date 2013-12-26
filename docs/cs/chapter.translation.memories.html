@@ -5,8 +5,8 @@
       <title>Chapter&nbsp;13.&nbsp;Překladové paměti</title>
       <link rel="stylesheet" type="text/css" href="OmegaT.css">
       <meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
-      <link rel="home" href="index.html" title="Uživatelská skupina OmegaT">
-      <link rel="up" href="index.html" title="Uživatelská skupina OmegaT">
+      <link rel="home" href="index.html" title="OmegaT 3.0 - Uživatelská příručka">
+      <link rel="up" href="index.html" title="OmegaT 3.0 - Uživatelská příručka">
       <link rel="prev" href="chapter.formatted.text.html" title="Chapter&nbsp;12.&nbsp;Práce s formátovaným textem">
       <link rel="next" href="chapter.segmentation.html" title="Chapter&nbsp;14.&nbsp;Segmentace zdroje">
    </head>
@@ -29,7 +29,7 @@
          <div class="titlepage">
             <div>
                <div>
-                  <h1 class="title"><a name="chapter.translation.memories"></a>Chapter&nbsp;13.&nbsp;Překladové paměti<a class="indexterm" name="d0e6307"></a><a class="indexterm" name="d0e6310"></a></h1>
+                  <h1 class="title"><a name="chapter.translation.memories"></a>Chapter&nbsp;13.&nbsp;Překladové paměti<a class="indexterm" name="d0e6317"></a><a class="indexterm" name="d0e6320"></a></h1>
                </div>
             </div>
          </div>
@@ -41,7 +41,7 @@
                      <dt><span class="section"><a href="chapter.translation.memories.html#tmx.files.location.and.purpose">1.1. adresáře překladových pamětí – umístění a účel</a></span></dt>
                      <dt><span class="section"><a href="chapter.translation.memories.html#tmx.backup">1.2. Zálohy TMX</a></span></dt>
                      <dt><span class="section"><a href="chapter.translation.memories.html#tmx.files.and.language">1.3. Soubory TMX a jazyk</a></span></dt>
-                     <dt><span class="section"><a href="chapter.translation.memories.html#d0e6606">1.4. Nespárované segmenty</a></span></dt>
+                     <dt><span class="section"><a href="chapter.translation.memories.html#d0e6616">1.4. Nespárované segmenty</a></span></dt>
                   </dl>
                </dd>
                <dt><span class="section"><a href="chapter.translation.memories.html#using.translation.memories.from.previous.projects">2. Opětovné používání překladových pamětí</a></span></dt>
@@ -50,10 +50,10 @@
                      <dt><span class="section"><a href="chapter.translation.memories.html#importing.and.exporting.translation.memories">2.1. Import a export překladových pamětí</a></span></dt>
                      <dt><span class="section"><a href="chapter.translation.memories.html#Creating.a.translation.memory.for.selected.documents">2.2. Vytvoření překladové paměti pro vybrané dokumenty</a></span></dt>
                      <dt><span class="section"><a href="chapter.translation.memories.html#sharing.translation.memories">2.3. Sdílení projektových pamětí</a></span></dt>
-                     <dt><span class="section"><a href="chapter.translation.memories.html#d0e6759">2.4. Použití překladových pamětí s alternativními jazykovými páry</a></span></dt>
+                     <dt><span class="section"><a href="chapter.translation.memories.html#d0e6769">2.4. Použití překladových pamětí s alternativními jazykovými páry</a></span></dt>
                   </dl>
                </dd>
-               <dt><span class="section"><a href="chapter.translation.memories.html#d0e6775">3. Zdroje s existujícími překlady</a></span></dt>
+               <dt><span class="section"><a href="chapter.translation.memories.html#d0e6785">3. Zdroje s existujícími překlady</a></span></dt>
                <dt><span class="section"><a href="chapter.translation.memories.html#pseudo.translated.memory">4. Paměť pseudopřekladu</a></span></dt>
                <dt><span class="section"><a href="chapter.translation.memories.html#upgrading.translation.memories">5. Aktualizace překladových pamětí</a></span></dt>
             </dl>
@@ -76,17 +76,17 @@
                      </div>
                   </div>
                </div>
-               <p>Projekty <span class="application">OmegaT</span> mohou obsahovat soubory překladových pamětí – tj. soubory s koncovkou tmx, a tyto soubory mohou být na čtyřech různých místech:
+               <p>Projekty <span class="application">OmegaT</span> mohou obsahovat soubory překladových pamětí – tj. soubory s koncovkou tmx, a tyto soubory mohou být na pěti různých místech:
                </p>
                <div class="variablelist">
                   <dl class="variablelist">
-                     <dt><span class="term"><a class="indexterm" name="d0e6329"></a>Adresář omegat</span></dt>
+                     <dt><span class="term"><a class="indexterm" name="d0e6339"></a>Adresář omegat</span></dt>
                      <dd>
                         <p>Adresář omegat obsahuje <code class="filename">project_save.tmx</code> a případně několik záložních souborů TMX.  Soubor <code class="filename">project_save.tmx</code> obsahuje všechny segmenty, které byly uložené do paměti od okamžiku, kdy jste začali práci na projektu. Tento soubor je v
                            projektu vždy obsažen. Jeho obsah bude vždy řazen abecedně podle zdrojových segmentů.
                         </p>
                      </dd>
-                     <dt><span class="term"><a class="indexterm" name="d0e6348"></a>Hlavní adresář projektu</span></dt>
+                     <dt><span class="term"><a class="indexterm" name="d0e6358"></a>Hlavní adresář projektu</span></dt>
                      <dd>
                         <p>Hlavní adresář projektu obsahuje tři soubory tmx, <code class="filename">project_name-omegat.tmx</code>, <code class="filename">project_name-level1.tmx</code> a <code class="filename">project_name-level2.tmx</code> (project_name znamená název daného projektu).
                         </p>
@@ -110,7 +110,7 @@
                            změněná jména, takže jejich obsah je možno identifikovat, i když je používáte jinde, například v podadresáři <code class="filename">tm</code> nebo v jiném projektu (viz níže).
                         </p>
                      </dd>
-                     <dt><span class="term">adresář <code class="filename"><a class="indexterm" name="d0e6403"></a>tm</code></span></dt>
+                     <dt><span class="term">adresář <code class="filename"><a class="indexterm" name="d0e6413"></a>tm</code></span></dt>
                      <dd>
                         <p>Adresář /tm/ může obsahovat libovolné množství vedlejších překladových pamětí, čili souborů tmx. Takové soubory mohly být
                            vytvořeny jakýmkoliv z výše jmenovaných způsobů. Všimněte si, že jiné nástroje CAT umí exportovat (a také importovat) soubory
@@ -130,16 +130,16 @@
                            svých názvů a segmenty obsažené v dané překladové paměti jsou načítány po řádcích. Poslední segment s identickým zdrojovým
                            textem má tedy větší váhu (samozřejmě je smysluplnější v první řadě takovýmto situacím předcházet).
                         </p>
-                        <p>Soubory překladových pamětí v adresáři tm mohou být komprimovány jako gzip.<a class="indexterm" name="d0e6440"></a></p>
+                        <p>Soubory překladových pamětí v adresáři tm mohou být komprimovány jako gzip.<a class="indexterm" name="d0e6450"></a></p>
                      </dd>
-                     <dt><span class="term"><a class="indexterm" name="d0e6447"></a>adresář tm/auto<a class="indexterm" name="d0e6455"></a></span></dt>
+                     <dt><span class="term"><a class="indexterm" name="d0e6457"></a>adresář tm/auto<a class="indexterm" name="d0e6465"></a></span></dt>
                      <dd>
                         <p>Pokud je na samotném začátku jasné, že překlady v dané překladové paměti (nebo více pamětech) jsou správné, je možné je vložit
                            do adresáře <span class="bold"><strong>tm/auto</strong></span> a vyhnout se tak potvrzování spousty případů <span class="emphasis"><em>[přibližně]</em></span>. Tímto způsobem dojde k efektivnímu <span class="bold"><strong>předběžnému překladu</strong></span> zdrojového textu: všechny segmenty ve zdrojovém textu, pro které lze najít překlady v této „automatické“ překladové paměti,
                            se tak bez dalšího zásahu uživatele dostanou do hlavní překladové paměti projektu.
                         </p>
                      </dd>
-                     <dt><span class="term"><a class="indexterm" name="d0e6474"></a>adresáře penalty-xxx</span></dt>
+                     <dt><span class="term"><a class="indexterm" name="d0e6484"></a>adresáře negativního hodnocení tm/penalty-xxx</span></dt>
                      <dd>
                         <p>Někdy je užitečné rozlišovat mezi překladovými pamětmi, kde je kladen důraz na kvalitu, a takovými, které nejsou tolik spolehlivé,
                            čili, kde se tolik neklade důraz na obsah, klienta, revizi, status, atd. Pro překladové paměti v adresářích s názvem „penalty-xxx“
@@ -175,7 +175,7 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="tmx.backup"></a>1.2.&nbsp;Zálohy TMX<a class="indexterm" name="d0e6527"></a></h3>
+                        <h3 class="title"><a name="tmx.backup"></a>1.2.&nbsp;Zálohy TMX<a class="indexterm" name="d0e6537"></a></h3>
                      </div>
                   </div>
                </div>
@@ -212,7 +212,7 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="tmx.files.and.language"></a>1.3.&nbsp;Soubory TMX a jazyk<a class="indexterm" name="d0e6579"></a></h3>
+                        <h3 class="title"><a name="tmx.files.and.language"></a>1.3.&nbsp;Soubory TMX a jazyk<a class="indexterm" name="d0e6589"></a></h3>
                      </div>
                   </div>
                </div>
@@ -242,7 +242,7 @@
                   ale ne země, segmenty se také načtou do paměti. Pokud se neshodují ani kódy jazyka ani země, segmenty se do paměti nenačtou
                   a budou ignorovány.
                </p>
-               <p><a class="indexterm" name="d0e6600"></a>Soubory překladových pamětí obecně obsahují překladové jednotky s několika možnými jazyky. Pokud pro daný zdrojový segment
+               <p><a class="indexterm" name="d0e6610"></a>Soubory překladových pamětí obecně obsahují překladové jednotky s několika možnými jazyky. Pokud pro daný zdrojový segment
                   není záznam ve vybraném cílovém jazyce, pak budou nahrány jiné cílové segmenty, nehledě na jazyk. Například, pokud je jazykový
                   pár projektu DE-FR, tak i tak může do jisté míry pomoci vidět návrh překladu u jazykového páru DE-EN, pokud není právě k dispozici
                   pár DE-FR.
@@ -252,7 +252,7 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="d0e6606"></a>1.4.&nbsp;Nespárované segmenty<a class="indexterm" name="d0e6609"></a></h3>
+                        <h3 class="title"><a name="d0e6616"></a>1.4.&nbsp;Nespárované segmenty<a class="indexterm" name="d0e6619"></a></h3>
                      </div>
                   </div>
                </div>
@@ -266,7 +266,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="using.translation.memories.from.previous.projects"></a>2.&nbsp;Opětovné používání překladových pamětí<a class="indexterm" name="d0e6625"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="using.translation.memories.from.previous.projects"></a>2.&nbsp;Opětovné používání překladových pamětí<a class="indexterm" name="d0e6635"></a></h2>
                   </div>
                </div>
             </div>
@@ -323,7 +323,7 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="importing.and.exporting.translation.memories"></a>2.1.&nbsp;Import a export překladových pamětí<a class="indexterm" name="d0e6688"></a></h3>
+                        <h3 class="title"><a name="importing.and.exporting.translation.memories"></a>2.1.&nbsp;Import a export překladových pamětí<a class="indexterm" name="d0e6698"></a></h3>
                      </div>
                   </div>
                </div>
@@ -413,7 +413,7 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="sharing.translation.memories"></a>2.3.&nbsp;Sdílení projektových pamětí<a class="indexterm" name="d0e6748"></a></h3>
+                        <h3 class="title"><a name="sharing.translation.memories"></a>2.3.&nbsp;Sdílení projektových pamětí<a class="indexterm" name="d0e6758"></a></h3>
                      </div>
                   </div>
                </div>
@@ -430,7 +430,7 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="d0e6759"></a>2.4.&nbsp;Použití překladových pamětí s alternativními jazykovými páry<a class="indexterm" name="d0e6762"></a></h3>
+                        <h3 class="title"><a name="d0e6769"></a>2.4.&nbsp;Použití překladových pamětí s alternativními jazykovými páry<a class="indexterm" name="d0e6772"></a></h3>
                      </div>
                   </div>
                </div>
@@ -453,7 +453,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="d0e6775"></a>3.&nbsp;Zdroje s existujícími překlady<a class="indexterm" name="d0e6778"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="d0e6785"></a>3.&nbsp;Zdroje s existujícími překlady<a class="indexterm" name="d0e6788"></a></h2>
                   </div>
                </div>
             </div>
@@ -475,7 +475,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="pseudo.translated.memory"></a>4.&nbsp;Paměť pseudopřekladu<a class="indexterm" name="d0e6797"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="pseudo.translated.memory"></a>4.&nbsp;Paměť pseudopřekladu<a class="indexterm" name="d0e6807"></a></h2>
                   </div>
                </div>
             </div>
@@ -514,7 +514,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="upgrading.translation.memories"></a>5.&nbsp;Aktualizace překladových pamětí<a class="indexterm" name="d0e6849"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="upgrading.translation.memories"></a>5.&nbsp;Aktualizace překladových pamětí<a class="indexterm" name="d0e6859"></a></h2>
                   </div>
                </div>
             </div>
@@ -522,9 +522,9 @@
                tagů v HTML a souborech Open Document. <span class="application">OmegaT</span> 2.5 umí detekovat a aktualizovat takové soubory tmx za provozu a zvýšit tak kvalitu shody v přibližných překladech a zefektnivní
                tak váš existující překlad, ušetří vám práci, kterou byste jinak museli dělat ručně.
             </p>
-            <p>Překladová paměť projektu bude aktualizována jen jednou a bude zapsána v aktualizované formě do souboru <code class="filename">project-save.tmx</code>; zastaralé soubory tmx budou aktualizované za provozu pokaždé, když bude projekt načítán. Všimněte si, že v některých případech
-               mohou změny ve filtrech souborů v <span class="application">OmegaT</span> 2.5 vést ke zcela odlišné segmentaci; jako následek takové situace bude nutno aktualizovat překlad ručně, ale to se stává
-               jen velmi zřídka.
+            <p>Překladová paměť projektu bude aktualizována jen jednou a bude zapsána v aktualizované formě do souboru <code class="filename">project-save.tmx</code>; zastaralé soubory tmx budou aktualizované za provozu pokaždé, když bude projekt načítán. V některých případech ale mohou
+               změny ve filtrech souborů v <span class="application">OmegaT</span> vést ke zcela odlišné segmentaci; jako následek takové situace bude nutno aktualizovat překlad ručně, ale to se stává jen
+               velmi zřídka.
             </p>
          </div>
       </div>

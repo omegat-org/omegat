@@ -5,8 +5,8 @@
       <title>Chapter&nbsp;12.&nbsp;Práce s formátovaným textem</title>
       <link rel="stylesheet" type="text/css" href="OmegaT.css">
       <meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
-      <link rel="home" href="index.html" title="Uživatelská skupina OmegaT">
-      <link rel="up" href="index.html" title="Uživatelská skupina OmegaT">
+      <link rel="home" href="index.html" title="OmegaT 3.0 - Uživatelská příručka">
+      <link rel="up" href="index.html" title="OmegaT 3.0 - Uživatelská příručka">
       <link rel="prev" href="chapter.plain.text.html" title="Chapter&nbsp;11.&nbsp;Práce s prostým textem">
       <link rel="next" href="chapter.translation.memories.html" title="Chapter&nbsp;13.&nbsp;Překladové paměti">
    </head>
@@ -29,7 +29,7 @@
          <div class="titlepage">
             <div>
                <div>
-                  <h1 class="title"><a name="chapter.formatted.text"></a>Chapter&nbsp;12.&nbsp;Práce s formátovaným textem<a class="indexterm" name="d0e6059"></a><a class="indexterm" name="d0e6064"></a></h1>
+                  <h1 class="title"><a name="chapter.formatted.text"></a>Chapter&nbsp;12.&nbsp;Práce s formátovaným textem<a class="indexterm" name="d0e6069"></a><a class="indexterm" name="d0e6074"></a></h1>
                </div>
             </div>
          </div>
@@ -39,7 +39,7 @@
                <dt><span class="section"><a href="chapter.formatted.text.html#tag.operations">2. Operace s tagy</a></span></dt>
                <dt><span class="section"><a href="chapter.formatted.text.html#tag.group.nesting">3. Vnořování skupiny tagů</a></span></dt>
                <dt><span class="section"><a href="chapter.formatted.text.html#tag.group.overlapping">4. Překrývání skupiny tagů</a></span></dt>
-               <dt><span class="section"><a href="chapter.formatted.text.html#d0e6209">5. Možnosti Ověření tagů</a></span></dt>
+               <dt><span class="section"><a href="chapter.formatted.text.html#d0e6219">5. Možnosti Ověření tagů</a></span></dt>
                <dt><span class="section"><a href="chapter.formatted.text.html#tag.group.validation">6. Ověření skupiny tagů</a></span></dt>
                <dt><span class="section"><a href="chapter.formatted.text.html#hints.for.tag.management">7. Tipy pro správu tagů</a></span></dt>
             </dl>
@@ -54,22 +54,22 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="formatting.tags"></a>1.&nbsp;Formátovací tagy<a class="indexterm" name="d0e6074"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="formatting.tags"></a>1.&nbsp;Formátovací tagy<a class="indexterm" name="d0e6084"></a></h2>
                   </div>
                </div>
             </div>
-            <p><a class="indexterm" name="d0e6078"></a><span class="bold"><strong>Pojmenování tagů:</strong></span></p>
+            <p><a class="indexterm" name="d0e6088"></a><span class="bold"><strong>Pojmenování tagů:</strong></span></p>
             <p>Tagy se skládají z jednoho až tří písmen a čísla. Jedinečné číslování umožňuje vzájemně si odpovídající tagy seskupovat do
                skupin a rozlišovat mezi tagy, které mají stejné písmeno v názvu, ale ve skutečnosti zastupují jinou vlastnost. Znaky mohou,
                ale nemusí odrážet hodnotu formátování, kterou reprezentují tagy (např. tučně (‚b‛ pro ‚bold‛), kurzíva (‚i‛ pro ‚italics‛),
                atd.) tučně (‚b‛ pro ‚bold‛), kurzíva (‚i‛ pro ‚italics‛), atd.)&lt;
             </p>
-            <p><a class="indexterm" name="d0e6088"></a><span class="bold"><strong>Číslování tagů:</strong></span></p>
+            <p><a class="indexterm" name="d0e6098"></a><span class="bold"><strong>Číslování tagů:</strong></span></p>
             <p>Tagy jsou číslovány postupně, vždy podle jednotlivých skupin. „Skupiny tagů“ reprezentují v tomto kontextu ucelené tagy (jako
                například &lt;i0&gt; a &lt;/i0&gt;). Uvnitř segmentu pak první skupina (párový nebo samostatný tag) obdrží číslo 0, druhá číslo 1 atd.
                První příklad uvedený níže má tři skupiny tagů (pár, samostatný a pak další pár), druhý příklad má jen jednu skupinu (pár).
             </p>
-            <p><a class="indexterm" name="d0e6098"></a><span class="bold"><strong>Párové a nepárové:</strong></span></p>
+            <p><a class="indexterm" name="d0e6108"></a><span class="bold"><strong>Párové a nepárové:</strong></span></p>
             <p>Tagy jsou vždy buď  párové nebo nepárové. Nepárové, čili jednoduché tagy označují formátovací informaci, která neovlivňuje
                okolní text (např. mezera navíc nebo zalomení řádku).
             </p>
@@ -89,7 +89,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="tag.operations"></a>2.&nbsp;Operace s tagy<a class="indexterm" name="d0e6122"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="tag.operations"></a>2.&nbsp;Operace s tagy<a class="indexterm" name="d0e6132"></a></h2>
                   </div>
                </div>
             </div>
@@ -97,7 +97,7 @@
                zní, že sekvence tagů se musí zachovat ve stejném pořadí. Nicméně, pokud pevně dodržujete určitá pravidla, je možné se od
                tohoto základního pravidla odchýlit.
             </p>
-            <p><span class="bold"><strong><a class="indexterm" name="d0e6131"></a>Duplikace tagů:</strong></span></p>
+            <p><span class="bold"><strong><a class="indexterm" name="d0e6141"></a>Duplikace tagů:</strong></span></p>
             <p>Skupiny tagů můžete duplikovat prostým nakopírováním na pozici dle vašeho výběru. Pamatujte ale, že v rámci páru musí být
                otevírací tag umístěn před uzavíracím. Formátování zapsané pomocí duplikované skupiny bude uplatněno obě části textu.
             </p>
@@ -105,7 +105,7 @@
             <p><code class="literal">&lt;b0&gt;Toto formátování&lt;/b0&gt; bude duplikováno sem.&lt;segment 0001&gt;</code></p>
             <p>Po duplikaci:</p>
             <p><code class="literal">&lt;b0&gt;Toto formátování&lt;/b0&gt; bylo &lt;b0&gt;duplikováno sem&lt;/b0&gt;.&lt;segment 0001&gt;</code></p>
-            <p><span class="bold"><strong><a class="indexterm" name="d0e6151"></a>Smazání skupiny tagů:</strong></span></p>
+            <p><span class="bold"><strong><a class="indexterm" name="d0e6161"></a>Smazání skupiny tagů:</strong></span></p>
             <p>Skupinu tagů smažete jejím prostým odstraněním ze segmentu. Nezapomeňte, že u párových tagů musí být smazán jak příslušný
                otevírací, tak také příslušný ukončovací tag, a jenom tak se zajistí, že jsou řádně odebrány všechny stopy formátování, jinak
                může dojít k poškození přeloženého souboru. Vymazáním skupiny tagů odstraníte příslušné formátování z přeloženého souboru.
@@ -119,7 +119,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="tag.group.nesting"></a>3.&nbsp;Vnořování skupiny tagů<a class="indexterm" name="d0e6172"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="tag.group.nesting"></a>3.&nbsp;Vnořování skupiny tagů<a class="indexterm" name="d0e6182"></a></h2>
                   </div>
                </div>
             </div>
@@ -137,7 +137,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="tag.group.overlapping"></a>4.&nbsp;Překrývání skupiny tagů<a class="indexterm" name="d0e6192"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="tag.group.overlapping"></a>4.&nbsp;Překrývání skupiny tagů<a class="indexterm" name="d0e6202"></a></h2>
                   </div>
                </div>
             </div>
@@ -153,7 +153,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="d0e6209"></a>5.&nbsp;Možnosti Ověření tagů
+                     <h2 class="title" style="clear: both"><a name="d0e6219"></a>5.&nbsp;Možnosti Ověření tagů
                      </h2>
                   </div>
                </div>
@@ -213,12 +213,12 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="tag.group.validation"></a>6.&nbsp;Ověření skupiny tagů<a class="indexterm" name="d0e6253"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="tag.group.validation"></a>6.&nbsp;Ověření skupiny tagů<a class="indexterm" name="d0e6263"></a></h2>
                   </div>
                </div>
             </div>
             <p>Funkce Ověření tagů detekuje změny v sekvenci tagů (ať už byli změněny cíleně nebo nechtěně) a ukáže dotyčný segment. Spuštění
-               této funkce - stiskem <span class="guimenuitem">Ctrl+T<a class="indexterm" name="d0e6262"></a></span> – otevřete okno obsahující všechny segmenty souboru, které obsahují pravděpodobně poškozené nebo chybné tagy v překladu.
+               této funkce - stiskem <span class="guimenuitem">Ctrl+T<a class="indexterm" name="d0e6272"></a></span> – otevřete okno obsahující všechny segmenty souboru, které obsahují pravděpodobně poškozené nebo chybné tagy v překladu.
                Za použití funkce Ověření tagů je oprava tagů a opětovné vytvoření cílových dokumentů opravdu jednoduché. Okno, které se otevře
                po stisku <span class="guimenuitem">Ctrl+T</span>, zobrazí tabulku se třemi sloupci, které obsahují odkaz na segment, původní segment a segment s překladem.
             </p>
@@ -237,7 +237,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="hints.for.tag.management"></a>7.&nbsp;Tipy pro správu tagů<a class="indexterm" name="d0e6287"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="hints.for.tag.management"></a>7.&nbsp;Tipy pro správu tagů<a class="indexterm" name="d0e6297"></a></h2>
                   </div>
                </div>
             </div>

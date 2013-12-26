@@ -5,8 +5,8 @@
       <title>Chapter&nbsp;16.&nbsp;Regulární výrazy</title>
       <link rel="stylesheet" type="text/css" href="OmegaT.css">
       <meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
-      <link rel="home" href="index.html" title="Uživatelská skupina OmegaT">
-      <link rel="up" href="index.html" title="Uživatelská skupina OmegaT">
+      <link rel="home" href="index.html" title="OmegaT 3.0 - Uživatelská příručka">
+      <link rel="up" href="index.html" title="OmegaT 3.0 - Uživatelská příručka">
       <link rel="prev" href="chapter.searches.html" title="Chapter&nbsp;15.&nbsp;Vyhledávání">
       <link rel="next" href="chapter.dictionaries.html" title="Chapter&nbsp;17.&nbsp;Slovníky">
    </head>
@@ -29,7 +29,7 @@
          <div class="titlepage">
             <div>
                <div>
-                  <h1 class="title"><a name="chapter.regexp"></a>Chapter&nbsp;16.&nbsp;Regulární výrazy<a class="indexterm" name="d0e7361"></a></h1>
+                  <h1 class="title"><a name="chapter.regexp"></a>Chapter&nbsp;16.&nbsp;Regulární výrazy<a class="indexterm" name="d0e7371"></a></h1>
                </div>
             </div>
          </div>
@@ -39,7 +39,7 @@
             </dl>
          </div>
          <p>Regulární výrazy (uváděné i zkráceně jako ‚regex‘ – z anglického ‚REGular EXpressions‘) používané při vyhledávání a v segmentačních
-            pravidlech jsou identické s těmi, které podporuje Java. Pokud potřebujete bližší informace, navštivte stránku <a class="ulink" href="http://download.oracle.com/javase/1.5.0/docs/api/java/util/regex/Pattern.html" target="_top">Java Regex documentation</a>. Projděte si dodatečné odkazy a příklady níže.
+            pravidlech jsou identické s těmi, které podporuje Java. Pokud potřebujete bližší informace, navštivte stránku <a class="ulink" href="http://download.oracle.com/javase/1.6.0/docs/api/java/util/regex/Pattern.html" target="_top">Java Regex documentation</a>. Projděte si dodatečné odkazy a příklady níže.
          </p>
          <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;">
             <h3 class="title">Note</h3>
@@ -47,11 +47,11 @@
                chtějí získat komplexnější a účinnější nástroj při vyhledávání.
             </p>
          </div>
-         <div class="table"><a name="d0e7376"></a><p class="title"><b>Table&nbsp;16.1.&nbsp;Regulární výrazy – Označení</b></p>
+         <div class="table"><a name="d0e7386"></a><p class="title"><b>Table&nbsp;16.1.&nbsp;Regulární výrazy – Označení</b></p>
             <div class="table-contents">
                <table summary="Regulární výrazy – Označení" border="1">
                   <colgroup>
-                     <col width="100" align="left">
+                     <col align="left">
                      <col>
                   </colgroup>
                   <thead>
@@ -68,11 +68,11 @@
                   </tbody>
                </table>
             </div>
-         </div><br class="table-break"><div class="table"><a name="d0e7393"></a><p class="title"><b>Table&nbsp;16.2.&nbsp;Regulární výrazy – Znak</b></p>
+         </div><br class="table-break"><div class="table"><a name="d0e7403"></a><p class="title"><b>Table&nbsp;16.2.&nbsp;Regulární výrazy – Znak</b></p>
             <div class="table-contents">
                <table summary="Regulární výrazy – Znak" border="1">
                   <colgroup>
-                     <col width="100" align="left">
+                     <col align="left">
                      <col>
                   </colgroup>
                   <thead>
@@ -137,11 +137,11 @@
                   </tbody>
                </table>
             </div>
-         </div><br class="table-break"><div class="table"><a name="d0e7470"></a><p class="title"><b>Table&nbsp;16.3.&nbsp;Regulární výrazy – Uvozování</b></p>
+         </div><br class="table-break"><div class="table"><a name="d0e7480"></a><p class="title"><b>Table&nbsp;16.3.&nbsp;Regulární výrazy – Uvozování</b></p>
             <div class="table-contents">
                <table summary="Regulární výrazy – Uvozování" border="1">
                   <colgroup>
-                     <col width="100" align="left">
+                     <col align="left">
                      <col>
                   </colgroup>
                   <thead>
@@ -172,11 +172,11 @@
                   </tbody>
                </table>
             </div>
-         </div><br class="table-break"><div class="table"><a name="d0e7502"></a><p class="title"><b>Table&nbsp;16.4.&nbsp;Regulární výrazy – Třídy pro bloky a kategorie Unicode</b></p>
+         </div><br class="table-break"><div class="table"><a name="d0e7512"></a><p class="title"><b>Table&nbsp;16.4.&nbsp;Regulární výrazy – Třídy pro bloky a kategorie Unicode</b></p>
             <div class="table-contents">
                <table summary="Regulární výrazy – Třídy pro bloky a kategorie Unicode" border="1">
                   <colgroup>
-                     <col width="100" align="left">
+                     <col align="left">
                      <col>
                   </colgroup>
                   <thead>
@@ -188,12 +188,12 @@
                   <tbody>
                      <tr>
                         <td align="left">\p{řecky}</td>
-                        <td align="left">Znak v řecké sadě (jednoduchá <a class="ulink" href="http://download.oracle.com/javase/1.5.0/docs/api/java/util/regex/Pattern.html#ubc" target="_top">sada</a>)
+                        <td align="left">Znak v řecké sadě (jednoduchá <a class="ulink" href="http://download.oracle.com/javase/1.6.0/docs/api/java/util/regex/Pattern.html#ubc" target="_top">sada</a>)
                         </td>
                      </tr>
                      <tr>
                         <td align="left">\p{Lu}</td>
-                        <td align="left">Velké písmeno (jednoduchá <a class="ulink" href="http://download.oracle.com/javase/1.5.0/docs/api/java/util/regex/Pattern.html#ubc" target="_top">kategorie</a>)
+                        <td align="left">Velké písmeno (jednoduchá <a class="ulink" href="http://download.oracle.com/javase/1.6.0/docs/api/java/util/regex/Pattern.html#ubc" target="_top">kategorie</a>)
                         </td>
                      </tr>
                      <tr>
@@ -211,11 +211,11 @@
                   </tbody>
                </table>
             </div>
-         </div><br class="table-break"><div class="table"><a name="d0e7545"></a><p class="title"><b>Table&nbsp;16.5.&nbsp;Regulární výrazy – Třídy znaků</b></p>
+         </div><br class="table-break"><div class="table"><a name="d0e7555"></a><p class="title"><b>Table&nbsp;16.5.&nbsp;Regulární výrazy – Třídy znaků</b></p>
             <div class="table-contents">
                <table summary="Regulární výrazy – Třídy znaků" border="1">
                   <colgroup>
-                     <col width="100" align="left">
+                     <col align="left">
                      <col>
                   </colgroup>
                   <thead>
@@ -240,11 +240,11 @@
                   </tbody>
                </table>
             </div>
-         </div><br class="table-break"><div class="table"><a name="d0e7572"></a><p class="title"><b>Table&nbsp;16.6.&nbsp;Regulární výrazy – Předdefinované třídy znaků</b></p>
+         </div><br class="table-break"><div class="table"><a name="d0e7582"></a><p class="title"><b>Table&nbsp;16.6.&nbsp;Regulární výrazy – Předdefinované třídy znaků</b></p>
             <div class="table-contents">
                <table summary="Regulární výrazy – Předdefinované třídy znaků" border="1">
                   <colgroup>
-                     <col width="100" align="left">
+                     <col align="left">
                      <col>
                   </colgroup>
                   <thead>
@@ -285,11 +285,11 @@
                   </tbody>
                </table>
             </div>
-         </div><br class="table-break"><div class="table"><a name="d0e7619"></a><p class="title"><b>Table&nbsp;16.7.&nbsp;Regulární výrazy - Označení hranic</b></p>
+         </div><br class="table-break"><div class="table"><a name="d0e7629"></a><p class="title"><b>Table&nbsp;16.7.&nbsp;Regulární výrazy - Označení hranic</b></p>
             <div class="table-contents">
                <table summary="Regulární výrazy - Označení hranic" border="1">
                   <colgroup>
-                     <col width="100" align="left">
+                     <col align="left">
                      <col>
                   </colgroup>
                   <thead>
@@ -318,11 +318,11 @@
                   </tbody>
                </table>
             </div>
-         </div><br class="table-break"><div class="table"><a name="d0e7651"></a><p class="title"><b>Table&nbsp;16.8.&nbsp;Regulární výrazy – Hladové kvantifikátory</b></p>
+         </div><br class="table-break"><div class="table"><a name="d0e7661"></a><p class="title"><b>Table&nbsp;16.8.&nbsp;Regulární výrazy – Hladové kvantifikátory</b></p>
             <div class="table-contents">
                <table summary="Regulární výrazy – Hladové kvantifikátory" border="1">
                   <colgroup>
-                     <col width="100" align="left">
+                     <col align="left">
                      <col>
                   </colgroup>
                   <thead>
@@ -351,11 +351,11 @@
             <h3 class="title">Note</h3>
             <p>Hladové kvantifikátory se budou snažit najít tolik shody, jak je to jen možné. Například: <span class="emphasis"><em>a+?</em></span> bude odpovídat aaa v <span class="emphasis"><em>aaabbb</em></span></p>
          </div>
-         <div class="table"><a name="d0e7692"></a><p class="title"><b>Table&nbsp;16.9.&nbsp;Regulární výrazy – Líné kvantifikátory</b></p>
+         <div class="table"><a name="d0e7702"></a><p class="title"><b>Table&nbsp;16.9.&nbsp;Regulární výrazy – Líné kvantifikátory</b></p>
             <div class="table-contents">
                <table summary="Regulární výrazy – Líné kvantifikátory" border="1">
                   <colgroup>
-                     <col width="100" align="left">
+                     <col align="left">
                      <col>
                   </colgroup>
                   <thead>
@@ -384,11 +384,11 @@
             <h3 class="title">Note</h3>
             <p>Líné kvantifikátory se budou snažit najít co nejmíň shody, jak je to jen možné. Například: <span class="emphasis"><em>a+?</em></span> bude odpovídat prvnímu <span class="emphasis"><em>a</em></span> v <span class="emphasis"><em>aaabbb</em></span></p>
          </div>
-         <div class="table"><a name="d0e7730"></a><p class="title"><b>Table&nbsp;16.10.&nbsp;Regulární výrazy – Logické operátory</b></p>
+         <div class="table"><a name="d0e7740"></a><p class="title"><b>Table&nbsp;16.10.&nbsp;Regulární výrazy – Logické operátory</b></p>
             <div class="table-contents">
                <table summary="Regulární výrazy – Logické operátory" border="1">
                   <colgroup>
-                     <col width="100" align="left">
+                     <col align="left">
                      <col>
                   </colgroup>
                   <thead>
@@ -417,7 +417,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="regex.tools.and.examples.of.use"></a>1.&nbsp;<a class="indexterm" name="d0e7759"></a>Nástroje regex a příklady použití<a class="indexterm" name="d0e7765"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="regex.tools.and.examples.of.use"></a>1.&nbsp;<a class="indexterm" name="d0e7769"></a>Nástroje regex a příklady použití<a class="indexterm" name="d0e7775"></a></h2>
                   </div>
                </div>
             </div>
@@ -433,11 +433,11 @@
             </p>
             <p>Malá sbírka užitečných regulárních výrazů se nachází přímo v aplikaci <span class="application">OmegaT</span> (vizte Možnosti &gt; Segmentace). Následující seznam zahrnuje výrazy, které se mohou hodit při prohledávání překladové paměti:
             </p>
-            <div class="table"><a name="d0e7790"></a><p class="title"><b>Table&nbsp;16.11.&nbsp;Regulární výrazy  Příklady regulárních výrazů v překladech</b></p>
+            <div class="table"><a name="d0e7800"></a><p class="title"><b>Table&nbsp;16.11.&nbsp;Regulární výrazy  Příklady regulárních výrazů v překladech</b></p>
                <div class="table-contents">
                   <table summary="Regulární výrazy  Příklady regulárních výrazů v překladech" border="1">
                      <colgroup>
-                        <col width="100" align="left">
+                        <col align="left">
                         <col>
                      </colgroup>
                      <thead>

@@ -5,8 +5,8 @@
       <title>Глава 19. Машинный перевод</title>
       <link rel="stylesheet" type="text/css" href="OmegaT.css">
       <meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
-      <link rel="home" href="index.html" title="Руководство пользователя ОмегаТ">
-      <link rel="up" href="index.html" title="Руководство пользователя ОмегаТ">
+      <link rel="home" href="index.html" title="Руководство пользователя ОмегаТ 3.0">
+      <link rel="up" href="index.html" title="Руководство пользователя ОмегаТ 3.0">
       <link rel="prev" href="chapter.glossaries.html" title="Глава 18. Глоссарии">
       <link rel="next" href="chapter.spellchecker.html" title="Глава 20. Проверка орфографии">
    </head>
@@ -29,17 +29,17 @@
          <div class="titlepage">
             <div>
                <div>
-                  <h1 class="title"><a name="chapter.machine.translate"></a>Глава 19. Машинный перевод<a class="indexterm" name="d0e8196"></a></h1>
+                  <h1 class="title"><a name="chapter.machine.translate"></a>Глава 19. Машинный перевод<a class="indexterm" name="d0e8221"></a></h1>
                </div>
             </div>
          </div>
          <div class="toc">
             <dl class="toc">
-               <dt><span class="section"><a href="chapter.machine.translate.html#d0e8199">1. Введение</a></span></dt>
+               <dt><span class="section"><a href="chapter.machine.translate.html#d0e8224">1. Введение</a></span></dt>
                <dt><span class="section"><a href="chapter.machine.translate.html#introduction">2. Google Translate</a></span></dt>
-               <dt><span class="section"><a href="chapter.machine.translate.html#d0e8240">3. Пользователи <span class="application">ОмегаТ</span> и Google Translate</a></span></dt>
-               <dt><span class="section"><a href="chapter.machine.translate.html#d0e8293">4. Belazar</a></span></dt>
-               <dt><span class="section"><a href="chapter.machine.translate.html#d0e8305">5. Apertium</a></span></dt>
+               <dt><span class="section"><a href="chapter.machine.translate.html#d0e8265">3. Пользователи <span class="application">ОмегаТ</span> и Google Translate</a></span></dt>
+               <dt><span class="section"><a href="chapter.machine.translate.html#d0e8318">4. Belazar</a></span></dt>
+               <dt><span class="section"><a href="chapter.machine.translate.html#d0e8330">5. Apertium</a></span></dt>
                <dt><span class="section"><a href="chapter.machine.translate.html#Google.Translate.troubleshooting">6. Машинный перевод - решение проблем</a></span></dt>
             </dl>
          </div>
@@ -47,7 +47,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="d0e8199"></a>1. Введение<a class="indexterm" name="d0e8202"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="d0e8224"></a>1. Введение<a class="indexterm" name="d0e8227"></a></h2>
                   </div>
                </div>
             </div>
@@ -63,7 +63,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="introduction"></a>2. Google Translate<a class="indexterm" name="d0e8220"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="introduction"></a>2. Google Translate<a class="indexterm" name="d0e8245"></a></h2>
                   </div>
                </div>
             </div>
@@ -71,7 +71,7 @@
                набором языков. На момент написания этого руководства список включал более 50 языков, от албанского до идиш, и в том числе,
                конечно, все основные мировые языки. Стоимость услуги зависит от объёма переводимых текстов, на момент написания документации,
                20 долларов США за миллион символов.<span class="bold"><strong></strong></span></p>
-            <p><span class="bold"><strong>Внимание: </strong></span>прежде чем начать использовать сервис Google Translate, в вашей учётной записи необходимо указать номер счёта (для получения
+            <p><span class="bold"><strong>Внимание! </strong></span>прежде чем начать использовать сервис Google Translate, в вашей учётной записи необходимо указать номер счёта (для получения
                более подробной информации, посетите страницу <a class="ulink" href="https://developers.google.com/translate/v2/pricing?hl=en-US" target="_top">Pricing and Terms of Service</a>). Чтобы идентифицировать себя как пользователя сервисов Google, надо воспользоваться уникальным персональным ключом, выданным
                вам Google при регистрации. Подробную информацию о том, как передать ключ ОмегаТ, можно найти в разделе <a class="link" href="chapter.installing.and.running.html" title="Глава 3. Установка и запуск ОмегаТ">Установка и запуск</a>, подраздел «Аргументы команды запуска».
             </p>
@@ -84,7 +84,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="d0e8240"></a>3. Пользователи <span class="application">ОмегаТ</span> и Google Translate
+                     <h2 class="title" style="clear: both"><a name="d0e8265"></a>3. Пользователи <span class="application">ОмегаТ</span> и Google Translate
                      </h2>
                   </div>
                </div>
@@ -98,12 +98,12 @@
                <div class="figure-contents">
                   <div class="mediaobject"><img src="images/MobyDick.png" alt="Google Translate - пример"></div>
                </div>
-            </div><br class="figure-break"><p>Испанский перевод лучше, чем словенский. Обратите внимание на слова <span class="emphasis"><em>interesar</em></span> и <span class="emphasis"><em> navegar</em></span> в испанском тексте, которые являются корректными переводами глаголов «interest» &nbsp;и «sail». В словенской версии оба слова
-               были переведены существительными. Вполне возможно, что испанский перевод хотя бы частично основан на переводе схожего предложения
+            </div><br class="figure-break"><p>Испанский перевод лучше, чем словенский. Обратите внимание на слова <span class="emphasis"><em>interesar</em></span> и <span class="emphasis"><em> navegar</em></span> в испанском тексте, которые являются корректными переводами глаголов «interest» и «sail». В словенской версии оба слова были
+               переведены существительными. Вполне возможно, что испанский перевод хотя бы частично основан на переводе схожего предложения
                другим человеком.
             </p>
             <p>После того, как вы подключили сервис, при каждом переходе к новому сегменту в области машинного перевода будут появляться
-               соответствующие подсказки/варианты перевода. Если предложенный перевод кажется вам удачным, нажмите <span class="keycap"><strong><a class="indexterm" name="d0e8271"></a>CTRL</strong></span>+<span class="keycap"><strong>M</strong></span>, и он будет вставлен в поле редактирования перевода текущего сегмента. Например, в сегменте, приведённом на иллюстрации выше,
+               соответствующие подсказки/варианты перевода. Если предложенный перевод кажется вам удачным, нажмите <span class="keycap"><strong><a class="indexterm" name="d0e8296"></a>CTRL</strong></span>+<span class="keycap"><strong>M</strong></span>, и он будет вставлен в поле редактирования перевода текущего сегмента. Например, в сегменте, приведённом на иллюстрации выше,
                при нажатии <span class="keycap"><strong>CTRL</strong></span>+<span class="keycap"><strong>M</strong></span> испанский перевод будет заменён на словенский.
             </p>
             <p>Если вы не хотите, чтобы <span class="application">ОмегаТ</span> отсылала в Google переводимые вами сегменты, в меню «Параметры» снимите флажок «Google Translate».
@@ -116,7 +116,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="d0e8293"></a>4. Belazar<a class="indexterm" name="d0e8296"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="d0e8318"></a>4. Belazar<a class="indexterm" name="d0e8321"></a></h2>
                   </div>
                </div>
             </div>
@@ -127,7 +127,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="d0e8305"></a>5. Apertium<a class="indexterm" name="d0e8308"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="d0e8330"></a>5. Apertium<a class="indexterm" name="d0e8333"></a></h2>
                   </div>
                </div>
             </div>
@@ -167,7 +167,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="Google.Translate.troubleshooting"></a>6. Машинный перевод - решение проблем<a class="indexterm" name="d0e8337"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="Google.Translate.troubleshooting"></a>6. Машинный перевод - решение проблем<a class="indexterm" name="d0e8362"></a></h2>
                   </div>
                </div>
             </div>

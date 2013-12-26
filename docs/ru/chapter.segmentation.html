@@ -5,8 +5,8 @@
       <title>Глава 14. Сегментация исходного текста</title>
       <link rel="stylesheet" type="text/css" href="OmegaT.css">
       <meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
-      <link rel="home" href="index.html" title="Руководство пользователя ОмегаТ">
-      <link rel="up" href="index.html" title="Руководство пользователя ОмегаТ">
+      <link rel="home" href="index.html" title="Руководство пользователя ОмегаТ 3.0">
+      <link rel="up" href="index.html" title="Руководство пользователя ОмегаТ 3.0">
       <link rel="prev" href="chapter.translation.memories.html" title="Глава 13. Память переводов">
       <link rel="next" href="chapter.searches.html" title="Глава 15. Поиск">
    </head>
@@ -43,9 +43,9 @@
             </dl>
          </div>
          <p>Программы памяти переводов работают с текстовыми единицами, которые называются «сегменты». <span class="application">ОмегаТ</span> сегментирует текст двумя способами: по абзацам и по предложениям (сегментацию по предложениям иногда называют «сегментация
-            на основе правил»). Чтобы задать тип сегментации, выберите пункт меню <span class="guimenu"><a class="indexterm" name="d0e6845"></a>«Проект</span> → <span class="guimenuitem">Свойства...»</span> и установите или снимите соответствующий флажок. В некоторых случаях, сегментация по абзацам может быть полезной, например,
+            на основе правил»). Чтобы задать тип сегментации, выберите пункт меню <span class="guimenu"><a class="indexterm" name="d0e6870"></a>«Проект</span> → <span class="guimenuitem">Свойства...»</span> и установите или снимите соответствующий флажок. В некоторых случаях, сегментация по абзацам может быть полезной, например,
             при творческом переводе, если переводчик захочет изменить порядок предложений. В остальных же случаях предпочтительной будет
-            сегментация по предложениям. Если выбрана сегментация по предложениям, её правила можно настроить, выбрав в главном меню <span class="guimenu"><a class="indexterm" name="d0e6856"></a>«Параметры</span> → <span class="guimenuitem">Сегментация...»</span>.
+            сегментация по предложениям. Если выбрана сегментация по предложениям, её правила можно настроить, выбрав в главном меню <span class="guimenu"><a class="indexterm" name="d0e6881"></a>«Параметры</span> → <span class="guimenuitem">Сегментация...»</span>.
          </p>
          <p>Для многих языков правила сегментации уже разработаны, и скорее всего, вам их будет вполне достаточно. С другой стороны, в
             некоторых случаях возможность слегка изменить правила сегментации для работы с определённым текстом может оказаться очень
@@ -59,7 +59,7 @@
          </p>
          <div class="variablelist">
             <dl class="variablelist">
-               <dt><span class="term"><a class="indexterm" name="d0e6879"></a>Сегментация на уровне структуры текста</span></dt>
+               <dt><span class="term"><a class="indexterm" name="d0e6904"></a>Structure level segmentation</span></dt>
                <dd>
                   <p>Сначала <span class="application">ОмегаТ</span> просматривает текст для осуществления сегментации на уровне структуры. На этом этапе для сегментации используется только
                      информация о структуре текста.
@@ -69,7 +69,7 @@
                      объектов в XHTML или HTML можно извлечь как отдельные сегменты.
                   </p>
                </dd>
-               <dt><span class="term"><a class="indexterm" name="d0e6895"></a>Сегментация на уровне предложений</span></dt>
+               <dt><span class="term"><a class="indexterm" name="d0e6920"></a>Sentence level segmentation</span></dt>
                <dd>
                   <p>После сегментации исходного файла на структурные фрагменты, <span class="application">ОмегаТ</span> начинает их сегментирование по предложениям.
                   </p>
@@ -80,7 +80,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="segmentation.rules"></a>1. Правила сегментации<a class="indexterm" name="d0e6910"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="segmentation.rules"></a>1. Правила сегментации<a class="indexterm" name="d0e6935"></a></h2>
                   </div>
                </div>
             </div>
@@ -91,7 +91,7 @@
             <p>Существуют два типа правил:</p>
             <div class="variablelist">
                <dl class="variablelist">
-                  <dt><span class="term"><a class="indexterm" name="d0e6934"></a>Правило разрыва</span></dt>
+                  <dt><span class="term"><a class="indexterm" name="d0e6959"></a>Break rule</span></dt>
                   <dd>
                      <p>Разделяет исходный текст на сегменты. Например, предложение «<span class="emphasis"><em>Стоило ли это делать? Не уверен</em></span>.» должно быть разделено на два сегмента. То есть, нужно определить правило разрыва для символа «?», за которым следует пробел
                         и слово с прописной буквы. Флажок «Разрывы/исключения» определяет, является ли правило разрывом (флажок установлен) или исключением
@@ -102,7 +102,7 @@
             </div>
             <div class="variablelist">
                <dl class="variablelist">
-                  <dt><span class="term"><a class="indexterm" name="d0e6951"></a>Правило-исключение</span></dt>
+                  <dt><span class="term"><a class="indexterm" name="d0e6976"></a>Exception rule</span></dt>
                   <dd>
                      <p>Определяет, в какой части текста НЕ должна происходить сегментация. Несмотря на точку, словосочетание <span class="emphasis"><em>«Mrs. Dalloway»</em></span> не нужно разделять на два сегмента, поэтому нужно определить правило-исключение для строки Mrs (а также Mr, Dr, prof и т.&nbsp;д.)
                         с точкой справа. Чтобы указать, что правило является исключением, оставьте флажок «Разрыв/исключение» снятым.
@@ -118,7 +118,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="rules.priority"></a>2. Приоритет правил<a class="indexterm" name="d0e6970"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="rules.priority"></a>2. Приоритет правил<a class="indexterm" name="d0e6995"></a></h2>
                   </div>
                </div>
             </div>
@@ -133,7 +133,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="creating.new.rule"></a>3. Создание нового правила<a class="indexterm" name="d0e6980"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="creating.new.rule"></a>3. Создание нового правила<a class="indexterm" name="d0e7005"></a></h2>
                   </div>
                </div>
             </div>
@@ -158,7 +158,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="few.simple.examples"></a>4. <a class="indexterm" name="d0e7014"></a>Несколько простых примеров
+                     <h2 class="title" style="clear: both"><a name="few.simple.examples"></a>4. <a class="indexterm" name="d0e7039"></a>Несколько простых примеров
                      </h2>
                   </div>
                </div>
@@ -166,10 +166,10 @@
             <div class="informaltable">
                <table border="1">
                   <colgroup>
-                     <col width="150" align="left">
-                     <col width="60" align="center">
-                     <col width="60" align="center">
-                     <col width="190" align="left">
+                     <col align="left">
+                     <col align="center">
+                     <col align="center">
+                     <col align="left">
                   </colgroup>
                   <thead>
                      <tr>

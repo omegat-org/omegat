@@ -5,8 +5,8 @@
       <title>Глава 12. Работа с форматированным текстом</title>
       <link rel="stylesheet" type="text/css" href="OmegaT.css">
       <meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
-      <link rel="home" href="index.html" title="Руководство пользователя ОмегаТ">
-      <link rel="up" href="index.html" title="Руководство пользователя ОмегаТ">
+      <link rel="home" href="index.html" title="Руководство пользователя ОмегаТ 3.0">
+      <link rel="up" href="index.html" title="Руководство пользователя ОмегаТ 3.0">
       <link rel="prev" href="chapter.plain.text.html" title="Глава 11. Работа с простыми текстовыми файлами">
       <link rel="next" href="chapter.translation.memories.html" title="Глава 13. Память переводов">
    </head>
@@ -29,7 +29,7 @@
          <div class="titlepage">
             <div>
                <div>
-                  <h1 class="title"><a name="chapter.formatted.text"></a>Глава 12. Работа с форматированным текстом<a class="indexterm" name="d0e6026"></a><a class="indexterm" name="d0e6031"></a></h1>
+                  <h1 class="title"><a name="chapter.formatted.text"></a>Глава 12. Работа с форматированным текстом<a class="indexterm" name="d0e6051"></a><a class="indexterm" name="d0e6056"></a></h1>
                </div>
             </div>
          </div>
@@ -39,7 +39,7 @@
                <dt><span class="section"><a href="chapter.formatted.text.html#tag.operations">2. Операции с тегами</a></span></dt>
                <dt><span class="section"><a href="chapter.formatted.text.html#tag.group.nesting">3. Вложенные группы тегов</a></span></dt>
                <dt><span class="section"><a href="chapter.formatted.text.html#tag.group.overlapping">4. Перекрывающиеся группы тегов</a></span></dt>
-               <dt><span class="section"><a href="chapter.formatted.text.html#d0e6178">5. Параметры проверки тегов</a></span></dt>
+               <dt><span class="section"><a href="chapter.formatted.text.html#d0e6203">5. Параметры проверки тегов</a></span></dt>
                <dt><span class="section"><a href="chapter.formatted.text.html#tag.group.validation">6. Проверка групп тегов</a></span></dt>
                <dt><span class="section"><a href="chapter.formatted.text.html#hints.for.tag.management">7. Советы по управлению тегами</a></span></dt>
             </dl>
@@ -53,23 +53,23 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="formatting.tags"></a>1. Теги форматирования<a class="indexterm" name="d0e6041"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="formatting.tags"></a>1. Теги форматирования<a class="indexterm" name="d0e6066"></a></h2>
                   </div>
                </div>
             </div>
-            <p><a class="indexterm" name="d0e6045"></a><span class="bold"><strong>Названия тегов:</strong></span></p>
+            <p><a class="indexterm" name="d0e6070"></a><span class="bold"><strong>Названия тегов:</strong></span></p>
             <p>Названия тегов состоят из одной, двух или трёх букв и цифры. Уникальный номер позволяет, с одной стороны, группировать схожие
                теги, а с другой, различать те из них, которые названы одинаковыми буквами, но на самом деле представляют собой разные сущности.
                Буквы, используемые при наименовании тега, по возможности отражают форматирование, которое представляет данный тег (например,
                «b» обозначает «bold», полужирный шрифт, а «i» обозначает «italic», курсив).
             </p>
-            <p><a class="indexterm" name="d0e6055"></a><span class="bold"><strong>Нумерация тегов</strong></span></p>
+            <p><a class="indexterm" name="d0e6080"></a><span class="bold"><strong>Нумерация тегов</strong></span></p>
             <p>Теги нумеруются в порядке возрастания, по группам. Под «группой тегов» в данном контексте понимаются один или два связанных
                по смыслу тега (например, &lt;i0&gt; и &lt;/i0&gt;). Внутри сегмента первая группа (пара или одиночный тег) получает номер 0, вторая&nbsp;—
                номер 1 и так далее. В первом примере ниже есть три группы тегов (пара, одиночный тег, затем снова пара тегов), во втором
                примере только одна группа (пара).
             </p>
-            <p><a class="indexterm" name="d0e6065"></a><span class="bold"><strong>Парные и одиночные теги:</strong></span></p>
+            <p><a class="indexterm" name="d0e6090"></a><span class="bold"><strong>Парные и одиночные теги:</strong></span></p>
             <p>Теги могут быть либо одиночными, либо парными. Одиночные теги используются для представления форматирования, которое не затрагивает
                окружающий текст (например, дополнительный пробел или разрыв строки).
             </p>
@@ -88,7 +88,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="tag.operations"></a>2. Операции с тегами<a class="indexterm" name="d0e6091"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="tag.operations"></a>2. Операции с тегами<a class="indexterm" name="d0e6116"></a></h2>
                   </div>
                </div>
             </div>
@@ -96,7 +96,7 @@
                надёжным решением будет всегда сохранять в переводе исходные теги в исходном порядке. Однако, при соблюдении некоторых условий,
                от этого правила можно иногда отступать.
             </p>
-            <p><span class="bold"><strong><a class="indexterm" name="d0e6100"></a>Повторение тегов</strong></span></p>
+            <p><span class="bold"><strong><a class="indexterm" name="d0e6125"></a>Повторение тегов</strong></span></p>
             <p>Чтобы повторить группу тегов, просто скопируйте их в желаемое место в тексте. Помните, что открывающий тег всегда должен находиться
                перед закрывающим. Форматирование, представленное группой, которую вы продублировали, будет применено к тому месту, куда было
                произведено копирование.
@@ -105,7 +105,7 @@
             <p><code class="literal">&lt;b0&gt;Это форматирование&lt;/b0&gt; будет применено здесь&lt;сегмент 0001&gt;</code></p>
             <p>После копирования:</p>
             <p><code class="literal">&lt;b0&gt;Это форматирование&lt;/b0&gt; было применено &lt;b0&gt;здесь&lt;/b0&gt;.&lt;сегмент 0001&gt;</code></p>
-            <p><span class="bold"><strong><a class="indexterm" name="d0e6120"></a>Удаление групп тегов</strong></span></p>
+            <p><span class="bold"><strong><a class="indexterm" name="d0e6145"></a>Удаление групп тегов</strong></span></p>
             <p>Чтобы убрать группу тегов, просто удалите её из сегмента. Помните, что нужно удалить как открывающие, так и закрывающие теги
                и убедиться, что все следы форматирования действительно стёрты. В противном случае созданный файл будет повреждён. Удаляя
                группу тегов, вы удаляете соответствующее форматирование из переведённого файла.
@@ -119,7 +119,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="tag.group.nesting"></a>3. Вложенные группы тегов<a class="indexterm" name="d0e6141"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="tag.group.nesting"></a>3. Вложенные группы тегов<a class="indexterm" name="d0e6166"></a></h2>
                   </div>
                </div>
             </div>
@@ -137,7 +137,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="tag.group.overlapping"></a>4. Перекрывающиеся группы тегов<a class="indexterm" name="d0e6161"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="tag.group.overlapping"></a>4. Перекрывающиеся группы тегов<a class="indexterm" name="d0e6186"></a></h2>
                   </div>
                </div>
             </div>
@@ -153,7 +153,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="d0e6178"></a>5. Параметры проверки тегов
+                     <h2 class="title" style="clear: both"><a name="d0e6203"></a>5. Параметры проверки тегов
                      </h2>
                   </div>
                </div>
@@ -209,12 +209,12 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="tag.group.validation"></a>6. Проверка групп тегов<a class="indexterm" name="d0e6222"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="tag.group.validation"></a>6. Проверка групп тегов<a class="indexterm" name="d0e6247"></a></h2>
                   </div>
                </div>
             </div>
             <p>Функция проверки тегов определяет сегменты, в которых теги оригинала и перевода не совпадают и показывает их. При нажатии
-               сочетания клавиш <span class="guimenuitem">CTRL+T<a class="indexterm" name="d0e6231"></a></span> откроется окно с сегментами, при переводе которых теги возможно были расставлены неправильно. С помощью этого окна можно
+               сочетания клавиш <span class="guimenuitem">CTRL+T<a class="indexterm" name="d0e6256"></a></span> откроется окно с сегментами, при переводе которых теги возможно были расставлены неправильно. С помощью этого окна можно
                легко исправить теги и создать переведённые документы с правильным форматированием. Открывающееся при нажатии <span class="guimenuitem">CTRL+T</span> окно содержит таблицу из трёх столбцов, в которой для каждого сегмента с ошибками в тегах содержатся ссылка на него, а также
                текст оригинала и перевода.
             </p>
@@ -233,7 +233,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="hints.for.tag.management"></a>7. Советы по управлению тегами<a class="indexterm" name="d0e6256"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="hints.for.tag.management"></a>7. Советы по управлению тегами<a class="indexterm" name="d0e6281"></a></h2>
                   </div>
                </div>
             </div>

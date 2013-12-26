@@ -5,8 +5,8 @@
       <title>Глава 13. Память переводов</title>
       <link rel="stylesheet" type="text/css" href="OmegaT.css">
       <meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
-      <link rel="home" href="index.html" title="Руководство пользователя ОмегаТ">
-      <link rel="up" href="index.html" title="Руководство пользователя ОмегаТ">
+      <link rel="home" href="index.html" title="Руководство пользователя ОмегаТ 3.0">
+      <link rel="up" href="index.html" title="Руководство пользователя ОмегаТ 3.0">
       <link rel="prev" href="chapter.formatted.text.html" title="Глава 12. Работа с форматированным текстом">
       <link rel="next" href="chapter.segmentation.html" title="Глава 14. Сегментация исходного текста">
    </head>
@@ -29,7 +29,7 @@
          <div class="titlepage">
             <div>
                <div>
-                  <h1 class="title"><a name="chapter.translation.memories"></a>Глава 13. Память переводов<a class="indexterm" name="d0e6276"></a><a class="indexterm" name="d0e6279"></a></h1>
+                  <h1 class="title"><a name="chapter.translation.memories"></a>Глава 13. Память переводов<a class="indexterm" name="d0e6301"></a><a class="indexterm" name="d0e6304"></a></h1>
                </div>
             </div>
          </div>
@@ -41,7 +41,7 @@
                      <dt><span class="section"><a href="chapter.translation.memories.html#tmx.files.location.and.purpose">1.1. Каталоги tmx - расположение и назначение</a></span></dt>
                      <dt><span class="section"><a href="chapter.translation.memories.html#tmx.backup">1.2. Резервное копирование TMX-файлов</a></span></dt>
                      <dt><span class="section"><a href="chapter.translation.memories.html#tmx.files.and.language">1.3. TMX-файлы и язык</a></span></dt>
-                     <dt><span class="section"><a href="chapter.translation.memories.html#d0e6577">1.4. Ничейные сегменты</a></span></dt>
+                     <dt><span class="section"><a href="chapter.translation.memories.html#d0e6602">1.4. Ничейные сегменты</a></span></dt>
                   </dl>
                </dd>
                <dt><span class="section"><a href="chapter.translation.memories.html#using.translation.memories.from.previous.projects">2. Повторное использование памяти переводов</a></span></dt>
@@ -50,10 +50,10 @@
                      <dt><span class="section"><a href="chapter.translation.memories.html#importing.and.exporting.translation.memories">2.1. Импорт и экспорт памяти переводов</a></span></dt>
                      <dt><span class="section"><a href="chapter.translation.memories.html#Creating.a.translation.memory.for.selected.documents">2.2. Создание отдельной памяти переводов для некоторых документов</a></span></dt>
                      <dt><span class="section"><a href="chapter.translation.memories.html#sharing.translation.memories">2.3. Использование общей памяти переводов</a></span></dt>
-                     <dt><span class="section"><a href="chapter.translation.memories.html#d0e6724">2.4. Использование TMX-файлов с другими языковыми парами</a></span></dt>
+                     <dt><span class="section"><a href="chapter.translation.memories.html#d0e6749">2.4. Использование TMX-файлов с другими языковыми парами</a></span></dt>
                   </dl>
                </dd>
-               <dt><span class="section"><a href="chapter.translation.memories.html#d0e6740">3. Исходные документы с уже имеющимися переводами</a></span></dt>
+               <dt><span class="section"><a href="chapter.translation.memories.html#d0e6765">3. Исходные документы с уже имеющимися переводами</a></span></dt>
                <dt><span class="section"><a href="chapter.translation.memories.html#pseudo.translated.memory">4. Память псевдо-перевода</a></span></dt>
                <dt><span class="section"><a href="chapter.translation.memories.html#upgrading.translation.memories">5. Обновление файлов памяти переводов</a></span></dt>
             </dl>
@@ -76,17 +76,17 @@
                      </div>
                   </div>
                </div>
-               <p>В проектах <span class="application">ОмегаТ</span> файлы памяти перевода, т.&nbsp;е. файлы с расширением «tmx», могут храниться в четырёх разных местах.
+               <p>В проектах <span class="application">ОмегаТ</span> файлы памяти перевода, т.&nbsp;е. файлы с расширением «tmx», могут храниться в пяти разных местах.
                </p>
                <div class="variablelist">
                   <dl class="variablelist">
-                     <dt><span class="term"><a class="indexterm" name="d0e6298"></a>подкаталог «omegat»</span></dt>
+                     <dt><span class="term"><a class="indexterm" name="d0e6323"></a>omegat folder</span></dt>
                      <dd>
                         <p>Папка «omegat» содержит файл <code class="filename">project_save.tmx</code> и, возможно, некоторое количество его резервных копий. Файл <code class="filename">project_save.tmx</code> содержит все сегменты, которые были сохранены в памяти программы с момента начала проекта. Этот файл всегда присутствует
                            во всех проектах. Его содержимое всегда отсортировано по исходным сегментам в алфавитном порядке.
                         </p>
                      </dd>
-                     <dt><span class="term"><a class="indexterm" name="d0e6317"></a>главный каталог проекта</span></dt>
+                     <dt><span class="term"><a class="indexterm" name="d0e6342"></a>main project folder</span></dt>
                      <dd>
                         <p>Главный каталог проекта содержит три TMX-файла: <code class="filename">имя_проекта-omegat.tmx</code>, <code class="filename">имя_проекта-level1.tmx</code> и <code class="filename">имя_проекта-level2.tmx</code>.
                         </p>
@@ -111,7 +111,7 @@
                            подкаталоге <code class="filename">«tm»</code> другого проекта.
                         </p>
                      </dd>
-                     <dt><span class="term">подкаталог <code class="filename"><a class="indexterm" name="d0e6372"></a>«tm»</code></span></dt>
+                     <dt><span class="term"><code class="filename"><a class="indexterm" name="d0e6396"></a>tm</code> folder</span></dt>
                      <dd>
                         <p>Каталог «/tm/» может содержать любое количество справочных TMX-файлов. Эти файлы могут быть в любом из трёх описанных выше
                            вариантах. Заметьте, что другие системы автоматизированного перевода могут также производить экспорт (и импорт) TMX-файлов
@@ -129,16 +129,16 @@
                            строка за строкой. Соответственно, последний из сегментов с одинаковым исходным текстом будет иметь преимущество (примечание:
                            хотя, конечно же, подобного рода ситуации следует избегать).
                         </p>
-                        <p>Заметьте, что TMX-файлы в каталоге «tm» могут быть сжаты утилитой gzip.<a class="indexterm" name="d0e6409"></a></p>
+                        <p>Заметьте, что TMX-файлы в каталоге «tm» могут быть сжаты утилитой gzip.<a class="indexterm" name="d0e6434"></a></p>
                      </dd>
-                     <dt><span class="term"><a class="indexterm" name="d0e6416"></a>подкаталог «tm/auto»<a class="indexterm" name="d0e6424"></a></span></dt>
+                     <dt><span class="term"><a class="indexterm" name="d0e6441"></a>tm/auto folder<a class="indexterm" name="d0e6449"></a></span></dt>
                      <dd>
                         <p>Если заранее известно, что хранящиеся в TMX-файле переводы корректны (полностью подходят для текущего проекта), можно поместить
                            TMX-файл в подкаталог <span class="bold"><strong>tm/auto</strong></span>, что позволит избежать необходимости удалять подстроку <span class="emphasis"><em>[нечёткое совпадение]</em></span> из множества автоматически вставленных переводов. Это позволит легко создать <span class="bold"><strong>предварительный перевод</strong></span> исходного текста: все исходные сегменты, для которых в файлах из папки «auto» найдутся точные совпадения, будут переведены
                            без какого-либо участия со стороны пользователя.
                         </p>
                      </dd>
-                     <dt><span class="term"><a class="indexterm" name="d0e6443"></a>подкаталоги «tm/penalty-xxx»</span></dt>
+                     <dt><span class="term"><a class="indexterm" name="d0e6468"></a>tm/penalty-xxx folders</span></dt>
                      <dd>
                         <p>Иногда требуется отделить высококачественные файлы памяти переводов от менее надёжных (например, относящихся к другой тематике
                            или ещё не отредактированных). Для памяти переводов, хранящейся в подкаталогах «penalty-xxx» (где «xxx» это число от 0 до
@@ -173,7 +173,7 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="tmx.backup"></a>1.2. Резервное копирование TMX-файлов<a class="indexterm" name="d0e6497"></a></h3>
+                        <h3 class="title"><a name="tmx.backup"></a>1.2. Резервное копирование TMX-файлов<a class="indexterm" name="d0e6522"></a></h3>
                      </div>
                   </div>
                </div>
@@ -210,7 +210,7 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="tmx.files.and.language"></a>1.3. TMX-файлы и язык<a class="indexterm" name="d0e6550"></a></h3>
+                        <h3 class="title"><a name="tmx.files.and.language"></a>1.3. TMX-файлы и язык<a class="indexterm" name="d0e6575"></a></h3>
                      </div>
                   </div>
                </div>
@@ -238,7 +238,7 @@
                <p>Если языковые коды проекта и файла TMX полностью совпадают, сегменты загружаются в память. Если совпадает только язык, но
                   не страна, сегменты всё равно загружаются в память. Если не совпадает ни один код, сегменты не загружаются.
                </p>
-               <p><a class="indexterm" name="d0e6571"></a>В общем случае TMX-файлы могут содержать единицы перевода на разных языках. Если в памяти переводов для текущего сегмента
+               <p><a class="indexterm" name="d0e6596"></a>В общем случае TMX-файлы могут содержать единицы перевода на разных языках. Если в памяти переводов для текущего сегмента
                   нет совпадений на языке перевода, будут показаны все остальные совпадения, вне зависимости от языка. Например, если в проекте
                   производится перевод с немецкого на французский, перевод текущего сегмента с немецкого на английский может всё равно оказаться
                   полезным.
@@ -248,7 +248,7 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="d0e6577"></a>1.4. Ничейные сегменты<a class="indexterm" name="d0e6580"></a></h3>
+                        <h3 class="title"><a name="d0e6602"></a>1.4. Ничейные сегменты<a class="indexterm" name="d0e6605"></a></h3>
                      </div>
                   </div>
                </div>
@@ -262,7 +262,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="using.translation.memories.from.previous.projects"></a>2. Повторное использование памяти переводов<a class="indexterm" name="d0e6596"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="using.translation.memories.from.previous.projects"></a>2. Повторное использование памяти переводов<a class="indexterm" name="d0e6621"></a></h2>
                   </div>
                </div>
             </div>
@@ -318,7 +318,7 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="importing.and.exporting.translation.memories"></a>2.1. Импорт и экспорт памяти переводов<a class="indexterm" name="d0e6653"></a></h3>
+                        <h3 class="title"><a name="importing.and.exporting.translation.memories"></a>2.1. Импорт и экспорт памяти переводов<a class="indexterm" name="d0e6678"></a></h3>
                      </div>
                   </div>
                </div>
@@ -403,7 +403,7 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="sharing.translation.memories"></a>2.3. Использование общей памяти переводов<a class="indexterm" name="d0e6713"></a></h3>
+                        <h3 class="title"><a name="sharing.translation.memories"></a>2.3. Использование общей памяти переводов<a class="indexterm" name="d0e6738"></a></h3>
                      </div>
                   </div>
                </div>
@@ -419,7 +419,7 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="d0e6724"></a>2.4. Использование TMX-файлов с другими языковыми парами<a class="indexterm" name="d0e6727"></a></h3>
+                        <h3 class="title"><a name="d0e6749"></a>2.4. Использование TMX-файлов с другими языковыми парами<a class="indexterm" name="d0e6752"></a></h3>
                      </div>
                   </div>
                </div>
@@ -442,7 +442,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="d0e6740"></a>3. Исходные документы с уже имеющимися переводами<a class="indexterm" name="d0e6743"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="d0e6765"></a>3. Исходные документы с уже имеющимися переводами<a class="indexterm" name="d0e6768"></a></h2>
                   </div>
                </div>
             </div>
@@ -462,7 +462,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="pseudo.translated.memory"></a>4. Память псевдо-перевода<a class="indexterm" name="d0e6762"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="pseudo.translated.memory"></a>4. Память псевдо-перевода<a class="indexterm" name="d0e6787"></a></h2>
                   </div>
                </div>
             </div>
@@ -499,16 +499,16 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="upgrading.translation.memories"></a>5. Обновление файлов памяти переводов<a class="indexterm" name="d0e6814"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="upgrading.translation.memories"></a>5. Обновление файлов памяти переводов<a class="indexterm" name="d0e6839"></a></h2>
                   </div>
                </div>
             </div>
             <p>Ранние версии <span class="application">ОмегаТ</span> умели производить сегментацию исходных файлов только по абзацам и непоследовательно нумеровали теги форматирования в файлах
-               HTML и Open Document. <span class="application">ОмегаТ</span> 2.5 может определять и исправлять такие TMX-файлы «на лету», что позволяет улучшить качество нечётких совпадений и более
-               эффективно использовать существующие переводы, тем самым освобождая переводчика от лишней работы.
+               HTML и Open Document. <span class="application">ОмегаТ</span> может определять и исправлять такие TMX-файлы «на лету», что позволяет улучшить качество нечётких совпадений и более эффективно
+               использовать существующие переводы, тем самым освобождая переводчика от лишней работы.
             </p>
             <p>Главный TMX-файл проекта обновляется только один раз и записывается в <code class="filename">project-save.tmx</code>. Обычные старые TMX-файлы обновляются «на лету» каждый раз при загрузке проекта. Следует иметь в виду, что некоторые изменения
-               в фильтрах <span class="application">ОмегаТ</span> 2.5 могут привести к совершенно другой сегментации, поэтому иногда (в редких случаях) вам придётся обновлять перевод вручную.
+               в фильтрах <span class="application">ОмегаТ</span> могут привести к совершенно другой сегментации, поэтому иногда (в редких случаях) вам придётся обновлять перевод вручную.
             </p>
          </div>
       </div>

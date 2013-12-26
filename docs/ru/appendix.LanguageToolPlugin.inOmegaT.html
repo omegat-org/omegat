@@ -5,8 +5,8 @@
       <title>Приложение E. Модуль «LanguageTool»</title>
       <link rel="stylesheet" type="text/css" href="OmegaT.css">
       <meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
-      <link rel="home" href="index.html" title="Руководство пользователя ОмегаТ">
-      <link rel="up" href="index.html" title="Руководство пользователя ОмегаТ">
+      <link rel="home" href="index.html" title="Руководство пользователя ОмегаТ 3.0">
+      <link rel="up" href="index.html" title="Руководство пользователя ОмегаТ 3.0">
       <link rel="prev" href="appendix.TokenizerPlugin.inOmegaT.html" title="Приложение D. Модуль «tokenizer»">
       <link rel="next" href="appendix.ScriptingPlugin.inOmegaT.html" title="Приложение F. Модуль «Scripting»">
    </head>
@@ -29,21 +29,21 @@
          <div class="titlepage">
             <div>
                <div>
-                  <h1 class="title"><a name="appendix.LanguageToolPlugin.inOmegaT"></a>Приложение E. Модуль «LanguageTool»<a class="indexterm" name="d0e10802"></a></h1>
+                  <h1 class="title"><a name="appendix.LanguageToolPlugin.inOmegaT"></a>Приложение E. Модуль «LanguageTool»<a class="indexterm" name="d0e10788"></a></h1>
                </div>
             </div>
          </div>
          <div class="toc">
             <dl class="toc">
-               <dt><span class="section"><a href="appendix.LanguageToolPlugin.inOmegaT.html#d0e10807">1. Введение</a></span></dt>
-               <dt><span class="section"><a href="appendix.LanguageToolPlugin.inOmegaT.html#d0e10826">2. Установка и использование</a></span></dt>
+               <dt><span class="section"><a href="appendix.LanguageToolPlugin.inOmegaT.html#d0e10793">1. Введение</a></span></dt>
+               <dt><span class="section"><a href="appendix.LanguageToolPlugin.inOmegaT.html#d0e10812">2. Установка и использование</a></span></dt>
             </dl>
          </div>
          <div class="section">
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="d0e10807"></a>1. Введение
+                     <h2 class="title" style="clear: both"><a name="d0e10793"></a>1. Введение
                      </h2>
                   </div>
                </div>
@@ -55,7 +55,7 @@
                эта программа может обнаруживать некоторые грамматические ошибки. А вот поиском собственно орфографических ошибок она не занимается.
                LanguageTool ищет ошибки согласно определённым правилам языка, которые записаны в соответствующих файлах конфигурации.
             </p>
-            <div class="figure"><a name="d0e10819"></a><p class="title"><b>Рисунок E.1. LanguageTool и ОмегаТ</b></p>
+            <div class="figure"><a name="d0e10805"></a><p class="title"><b>Рисунок E.1. LanguageTool и ОмегаТ</b></p>
                <div class="figure-contents">
                   <div class="screenshot">
                      <div class="mediaobject"><img src="images/LanguageToolExample.png" alt="LanguageTool и ОмегаТ"></div>
@@ -66,18 +66,20 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="d0e10826"></a>2. Установка и использование
+                     <h2 class="title" style="clear: both"><a name="d0e10812"></a>2. Установка и использование
                      </h2>
                   </div>
                </div>
             </div>
-            <p>Модуль «LanguageTool» для ОмегаТ можно загрузить с <a class="ulink" href="http://sourceforge.net/projects/omegat-plugins/files" target="_top">официального сайта модулей ОмегаТ</a>. Разархивируйте файлы и скопируйте их в подкаталог «plugins» основного каталога ОмегаТ (это каталог, в котором хранится «OmegaT.jar»).
-               Если каталога «plugins» нет, создайте его.
+            <p>Модуль «LanguageTool» теперь поставляется вместе с ОмегаТ. Установите флажок «<span class="guimenuitem">Параметры &gt; Проверка грамматики</span>», и модуль будет запущен. Применяемые правила зависят от используемой в проекте языковой пары. Если правило нарушается, в
+               области редактирования соответствующая фраза подчёркивается синим (см. <span class="emphasis"><em>«also» </em></span>и <span class="emphasis"><em>«I didn't do nothing»</em></span> на иллюстрации выше). Если на подчёркнутую фразу навести курсор, будет показано краткое пояснение.
             </p>
-            <p>Если флажок «<span class="guimenuitem">Параметры &gt; Проверка грамматики</span>» установлен, ОмегаТ автоматически начнёт использовать модуль, сразу после его установки. Применяемые правила зависят от используемой
-               в проекте языковой пары. Если правило нарушается, в области редактирования соответствующая фраза подчёркивается синим (см.
-               <span class="emphasis"><em>«also» </em></span>и <span class="emphasis"><em>«I didn't do nothing»</em></span> на иллюстрации выше). Если на подчёркнутую фразу навести курсор, будет показано краткое пояснение.
-            </p>
+            <div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+               <h3 class="title">Несовместимость</h3>
+               <p>Модуль «LanguageTool» не будет работать корректно, если в каталоге «/plugin» установлена более старая версия. Перед запуском
+                  ОмегаТ удалите старую версию модуля «LanguageTool» из каталога «/plugin».
+               </p>
+            </div>
          </div>
       </div>
       <div class="navfooter">

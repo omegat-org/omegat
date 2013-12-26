@@ -5,8 +5,8 @@
       <title>Appendix&nbsp;E.&nbsp;Plugin LanguageTool</title>
       <link rel="stylesheet" type="text/css" href="OmegaT.css">
       <meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
-      <link rel="home" href="index.html" title="Uživatelská skupina OmegaT">
-      <link rel="up" href="index.html" title="Uživatelská skupina OmegaT">
+      <link rel="home" href="index.html" title="OmegaT 3.0 - Uživatelská příručka">
+      <link rel="up" href="index.html" title="OmegaT 3.0 - Uživatelská příručka">
       <link rel="prev" href="appendix.TokenizerPlugin.inOmegaT.html" title="Appendix&nbsp;D.&nbsp;Plugin Tokenizer">
       <link rel="next" href="appendix.ScriptingPlugin.inOmegaT.html" title="Appendix&nbsp;F.&nbsp;Plugin Scripting">
    </head>
@@ -29,21 +29,21 @@
          <div class="titlepage">
             <div>
                <div>
-                  <h1 class="title"><a name="appendix.LanguageToolPlugin.inOmegaT"></a>Appendix&nbsp;E.&nbsp;Plugin LanguageTool<a class="indexterm" name="d0e10830"></a></h1>
+                  <h1 class="title"><a name="appendix.LanguageToolPlugin.inOmegaT"></a>Appendix&nbsp;E.&nbsp;Plugin LanguageTool<a class="indexterm" name="d0e10801"></a></h1>
                </div>
             </div>
          </div>
          <div class="toc">
             <dl class="toc">
-               <dt><span class="section"><a href="appendix.LanguageToolPlugin.inOmegaT.html#d0e10835">1. Úvod</a></span></dt>
-               <dt><span class="section"><a href="appendix.LanguageToolPlugin.inOmegaT.html#d0e10854">2. Instalace a použití</a></span></dt>
+               <dt><span class="section"><a href="appendix.LanguageToolPlugin.inOmegaT.html#d0e10806">1. Úvod</a></span></dt>
+               <dt><span class="section"><a href="appendix.LanguageToolPlugin.inOmegaT.html#d0e10825">2. Instalace a použití</a></span></dt>
             </dl>
          </div>
          <div class="section">
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="d0e10835"></a>1.&nbsp;Úvod
+                     <h2 class="title" style="clear: both"><a name="d0e10806"></a>1.&nbsp;Úvod
                      </h2>
                   </div>
                </div>
@@ -55,7 +55,7 @@
                záměna zdroj/stroj, pro/proč atd. Umí tedy detekovat některé gramatické chyby. Neobsahuje kontrolu pravopisu. LanguageTool
                najde chyby, pro které bylo definováno pravidlo v konfiguračním souboru příslušného jazyka.
             </p>
-            <div class="figure"><a name="d0e10847"></a><p class="title"><b>Figure&nbsp;E.1.&nbsp;LanguageTool v OmegaT</b></p>
+            <div class="figure"><a name="d0e10818"></a><p class="title"><b>Figure&nbsp;E.1.&nbsp;LanguageTool v OmegaT</b></p>
                <div class="figure-contents">
                   <div class="screenshot">
                      <div class="mediaobject"><img src="images/LanguageToolExample.png" alt="LanguageTool v OmegaT"></div>
@@ -66,18 +66,20 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="d0e10854"></a>2.&nbsp;Instalace a použití
+                     <h2 class="title" style="clear: both"><a name="d0e10825"></a>2.&nbsp;Instalace a použití
                      </h2>
                   </div>
                </div>
             </div>
-            <p>Plugin LanguageTool pro OmegaT si můžete stáhnout ze <a class="ulink" href="http://sourceforge.net/projects/omegat-plugins/files" target="_top">stránky určené pro stahování pluginů</a>. Rozbalte soubory a vložte je všechny do adresáře „plugins“, který se nachází v instalačním adresáři OmegaT, čili v adresáři,
-               kde je uložen soubor OmegaT.jar. Pokud adresář „plugins“ neexistuje, tak jej vytvořte.
-            </p>
-            <p>Po instalaci a restartu bude OmegaT plugin automaticky využívat, samozřejmě za předpokladu, že zaznačíte odpovídající položku
-               v <span class="guimenuitem">Možnosti &gt; Jazyková korektura</span>. Použitá pravidla (pokud jsou k dispozici) závisí na zdrojovém a cílovém jazyku projektu. Pokud je pravidlo aplikováno, odpovídající
+            <p>Plugin LanguageTool je v OmegaT již obsažen. OmegaT jej automaticky použije, pokud máte zaškrtnuto <span class="guimenuitem">Možnosti &gt; Jazyková korektura</span>. Použitá pravidla (pokud jsou k dispozici) závisí na zdrojovém a cílovém jazyku projektu. Pokud je pravidlo aplikováno, odpovídající
                fráze bude podtržena modrou vlnovkou v editoru (viz <span class="emphasis"><em>also </em></span>a <span class="emphasis"><em>I didn't do nothing</em></span> na obrázku nahoře). Při přejetí myší přes podtrženou frázi se zobrazí vysvětlení.
             </p>
+            <div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+               <h3 class="title">Případy nefunkčnosti</h3>
+               <p>LanguageTool nebude správně pracovat, pokud se v adresáři /plugin nachází stará verze. Před startem OmegaT odstraňte LanguageTool
+                  z adresáře /plugin.
+               </p>
+            </div>
          </div>
       </div>
       <div class="navfooter">

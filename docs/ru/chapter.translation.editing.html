@@ -5,8 +5,8 @@
       <title>Глава 10. Параметры редактирования</title>
       <link rel="stylesheet" type="text/css" href="OmegaT.css">
       <meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
-      <link rel="home" href="index.html" title="Руководство пользователя ОмегаТ">
-      <link rel="up" href="index.html" title="Руководство пользователя ОмегаТ">
+      <link rel="home" href="index.html" title="Руководство пользователя ОмегаТ 3.0">
+      <link rel="up" href="index.html" title="Руководство пользователя ОмегаТ 3.0">
       <link rel="prev" href="chapter.files.to.translate.html" title="Глава 9. Файлы для перевода">
       <link rel="next" href="chapter.plain.text.html" title="Глава 11. Работа с простыми текстовыми файлами">
    </head>
@@ -29,7 +29,7 @@
          <div class="titlepage">
             <div>
                <div>
-                  <h1 class="title"><a name="chapter.translation.editing"></a>Глава 10. Параметры редактирования<a class="indexterm" name="d0e5639"></a></h1>
+                  <h1 class="title"><a name="chapter.translation.editing"></a>Глава 10. Параметры редактирования<a class="indexterm" name="d0e5664"></a></h1>
                </div>
             </div>
          </div>
@@ -45,13 +45,13 @@
          </p>
          <div class="variablelist">
             <dl class="variablelist">
-               <dt><span class="term">Текст оригинала</span></dt>
+               <dt><span class="term">The source text</span></dt>
                <dd>
                   <p>Вы можете автоматически заполнять поле редактирования текстом оригинала. Это полезно при переводе текста, содержащего много
                      торговых марок или других имён собственных, которые нужно оставить как есть.
                   </p>
                </dd>
-               <dt><span class="term">Оставить сегмент пустым<a class="indexterm" name="d0e5684"></a></span></dt>
+               <dt><span class="term">Leave the segment empty<a class="indexterm" name="d0e5709"></a></span></dt>
                <dd>
                   <p>ОмегаТ оставит поле редактирования пустым. Эта настройка позволяет вам вводить перевод сразу, без необходимости удалять текст
                      оригинала, то есть избавляет вас от двух нажатий клавиш (<span class="bold"><strong>CTRL+A </strong></span>и <span class="bold"><strong>DEL). </strong></span> Теперь, можно задавать «пустые» переводы (переводы, в которых вообще нет текста). В области редактирования они отображаются
@@ -59,7 +59,7 @@
                      «<span class="bold"><strong>Установить пустой перевод</strong></span>». Пункт <span class="bold"><strong>Удалить перевод</strong></span> в том же меню позволяет удалить перевод текущего сегмента. Того же эффекта можно достичь, просто удалив перевод и нажав <span class="guibutton">ВВОД</span>.
                   </p>
                </dd>
-               <dt><span class="term">Вставлять лучшее нечёткое совпадение<a class="indexterm" name="d0e5712"></a></span></dt>
+               <dt><span class="term">Insert the best fuzzy match<a class="indexterm" name="d0e5737"></a></span></dt>
                <dd>
                   <p>ОмегаТ вставит перевод строки, наиболее похожей на текущий оригинал, если эта строка превышает настраиваемый тут же порог
                      схожести. Чтобы отмечать переводы, полученные из нечётких совпадений, можно использовать специальный префикс (по умолчанию
@@ -72,7 +72,7 @@
          <p>В нижней части окна можно включить следующие функции:</p>
          <div class="variablelist">
             <dl class="variablelist">
-               <dt><span class="term">Попытаться преобразовать числа при вставке нечёткого совпадения<a class="indexterm" name="d0e5728"></a></span></dt>
+               <dt><span class="term">Attempt to convert numbers when inserting a fuzzy match<a class="indexterm" name="d0e5753"></a></span></dt>
                <dd>
                   <p>Если флажок установлен, при вставке нечёткого совпадения, ОмегаТ попытается преобразовать числа из нечёткого совпадения таким
                      образом, чтобы они совпали с числами из исходного сегмента. Существует несколько ограничений:
@@ -97,7 +97,7 @@
          </div>
          <div class="variablelist">
             <dl class="variablelist">
-               <dt><span class="term">Разрешить перевод, идентичный оригиналу<a class="indexterm" name="d0e5752"></a></span></dt>
+               <dt><span class="term">Allow the translation to be equal to source<a class="indexterm" name="d0e5777"></a></span></dt>
                <dd>
                   <p>Ваши документы могут содержать торговые марки или имена собственные, которые в переведённых документах должны оставаться неизменными.
                      Для обработки сегментов, которые содержат такой неизменяемый текст есть две стратегии.
@@ -111,7 +111,7 @@
          </div>
          <div class="variablelist">
             <dl class="variablelist">
-               <dt><span class="term">Экспортировать сегмент в текстовый файл<a class="indexterm" name="d0e5777"></a></span></dt>
+               <dt><span class="term">Export the segment to text files<a class="indexterm" name="d0e5802"></a></span></dt>
                <dd>
                   <p>Функция экспорта текста позволяет сохранять части текущего проекта <span class="application">ОмегаТ</span> в простые текстовые файлы. Экспорт происходит при переходе к очередному сегменту. В подкаталоге «/script» в папке файлов
                      пользователя ОмегаТ появляются файлы со следующим содержимым:
@@ -140,7 +140,8 @@
          </div>
          <div class="variablelist">
             <dl class="variablelist">
-               <dt><span class="term">Переход к следующему непереведённому сегменту приостанавливается, если есть хотя бы один альтернативный вариант перевода<a class="indexterm" name="d0e5823"></a></span></dt>
+               <dt><span class="term">Go To Next Untranslated Segment stops where there is at least one
+                           alternative translation<a class="indexterm" name="d0e5848"></a></span></dt>
                <dd>
                   <p>Если вы хотите избежать возможных ошибок при переводе идентичных сегментов, для которых есть разные варианты перевода, установите
                      этот флажок, и переход на <span class="bold"><strong>Следующий непереведённый сегменты</strong></span> будет затрагивать и идентичные сегменты, вне зависимости от того, были они переведены или нет.

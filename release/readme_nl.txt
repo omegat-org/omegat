@@ -221,6 +221,7 @@ Code is bijgedragen door
   Thomas Huriaux
   Hans-Peter Jacobs
   Kyle Katarn
+  Piotr Kulik
   Ibai Lakunza Velasco
   Guido Leenders
   Aaron Madlon-Kay
@@ -252,12 +253,12 @@ Andere bijdragen door
 
 OmegaT gebruikt de volgende bibliotheken:
   HTMLParser 1.6 van Somik Raha, Derrick Oswald en anderen (LGPL License)
-  MRJ Adapter 1.0.8 door Steve Roy (LGPL License)
-  VLDocking Framework 2.1.4 van VLSolutions (CeCILL-licentie)
-  Hunspell van László Németh en anderen (LGPL-licentie)
-  JNA van Todd Fast, Timothy Wall en anderen (LGPL-licentie)
-  Swing-Layout 1.0.2 (LGPL-licentie)
-  Jmyspell 2.1.4 (LGPL-licentie)
+  MRJ Adapter 1.0.8 van Steve Roy (LGPL License)
+  VLDocking Framework 2.1.4 van VLSolutions (CeCILL License)
+  Hunspell van László Németh en anderen (LGPL License)
+  JNA van Todd Fast, Timothy Wall en anderen (LGPL License)
+  Swing-Layout 1.0.2 (LGPL License)
+  Jmyspell 2.1.4 (LGPL License)
   SVNKit 1.7.5 (TMate License)
   Sequence Library (Sequence Library License)
   ANTLR 3.4 (ANTLR 3 licentie)
@@ -275,7 +276,7 @@ OmegaT gebruikt de volgende bibliotheken:
   commons-*.jar (Apache License 2.0)
   jWordSplitter (Apache License 2.0)
   LanguageTool.jar (LGPL-licentie)
-  morfologik-*.jar (Morfologik-licentie)
+  morfologik-*.jar (Morfologik licentie)
   segment-1.4.1.jar (Segment-licentie)
   pdfbox-app-1.8.1.jar (Apache License 2.0)
 

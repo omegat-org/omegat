@@ -1,0 +1,153 @@
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <title>5분 만에 OmegaT 사용법을 배우세요!</title>
+      <link rel="stylesheet" type="text/css" href="OmegaT.css">
+      <meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
+   </head>
+   <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+      <div class="chapter">
+         <div class="titlepage">
+            <div>
+               <div>
+                  <h2 class="title"><a name="chapter.instant.start.guide"></a>5분 만에 OmegaT 사용법을 배우세요!
+                  </h2>
+               </div>
+            </div>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="create.and.open.new.project"></a>1.&nbsp;새 프로젝트 설정<a class="indexterm" name="d0e7"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <p><em><span class="remark">참고:</span></em> 애플 맥에서는 ctrl 키 대신 <span class="keycap"><strong>Command</strong></span><span class="keycap"><strong>Control</strong></span> 키를 사용 합니다.
+            </p><a class="indexterm" name="d0e21"></a><p>OmegaT를 사용 하려면, 원본 파일, 번역 메모리, 용어집, 번역된 파일 등 모든 파일을 묶은 프로젝트를 먼저 만듭니다. <span class="guimenu">프로젝트</span> 메뉴에서 <span class="guimenuitem">새 작업...(&amp;N)</span>을 선택하고 프로젝트 이름을 입력합니다. 나중에 다시 사용하니깐, 잘 기억해 두세요.
+            </p>
+            <p>프로젝트 이름을 정한 다음에, <span class="guilabel">새 프로젝트 만들기</span> 대화 상자가 열립니다. 이 대화 상자의 위쪽에 있는, 원본 파일의 언어 및 번역된 파일의 언어를 선택하세요, 계속하려면 <span class="guibutton">확인</span> 을 클릭합니다.
+            </p>
+            <p>다른 설정에 관심이 있다면, 언제든지 <span class="keycap"><strong>Ctrl+E</strong></span>를 눌러 돌아갈 수 있습니다.
+            </p>
+            <p>다음으로, <span class="guilabel">프로젝트 파일</span> 대화 상자가 열립니다. 원본 파일을 선택 하려면 <span class="guibutton">원본 폴더에 파일 복사...</span>를 클릭하세요. OmegaT가 새로 만든 프로젝트의 <code class="filename">/source/</code> 하위 폴더에 선택된 파일을 복사합니다. <span class="guilabel">편집기</span>창으로 원본 파일을 불러온 뒤, <span class="guilabel">프로젝트 파일</span> 대화 상자를 닫을 수 있습니다.
+            </p>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="translate.the.segments.one.by.one"></a>2.&nbsp;파일을 번역
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>OmegaT는 한번에 번역할 한 부분을 소개합니다. 각 부분을 번역 후, <span class="keycap"><strong>Ctrl+U</strong></span>를 누르면 다음 미번역 부분으로 이동합니다 .(또는 <span class="keycap"><strong>Ctrl+Shift+U</strong></span>를 누르면 다음 번역된 부분으로 이동합니다.)번역이 최종적으로 어떻게 보이는지 보고 싶다면 언제든지 <span class="keycap"><strong>Ctrl+D</strong></span> 키를 눌러 번역된 문서를 만들 수 있습니다. 파일은 프로젝트 폴더의 <code class="filename">/target/</code>폴더에 생성됩니다. 번역 중, <span class="guimenu">편집</span>과 <span class="guimenu">이동</span> 메뉴를 사용하여 다양하고 유용한 기능을 수행할 수 있습니다.
+            </p>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e88"></a>3.&nbsp;태그 유효성을 검사하세요.
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>만약 원본 파일이 서식된 파일(예를 들어, Microsoft Word, LibreOffice Writer or HTML)이면, OmegaT는 텍스트를 둘러싸고 있는 태그의 서식을 변환합니다. 종종 문서에 서식을 가지지
+               않은 태그들이 있지만, 이 작업은 원본 파일 및 번역된 파일에 역시 중요합니다. 원본 문장은 다음과 같습니다. :
+            </p>
+            <div class="mediaobject" align="justify"><img src="images/InstantGuide_1.png" align="justify"></div>
+            <p>
+               
+            </p>
+            <p>그러나, OmegaT는 다음과 같은 방식으로 이 문장을 제시합니다. :</p>
+            <div class="mediaobject" align="justify"><img src="images/InstantGuide_2.png" align="justify"></div>
+            <p>
+               
+            </p>
+            <p>OmegaT의 태그는 회색이기 때문에 알아보기 쉽습니다. 그것의 내용을 한문장씩 수정할 수 없지만. 한꺼번에 묶어서 직접 삭제하고, 입력하고, 움직일 수 있습니다. 그러나, 서식 태그를 입력할 때 실수를 했다면, 번역된
+               파일을 열 때 실패할 수 있습니다. 따라서, 번역 된 파일을 생성하기 전에 태그가 올바른지<span class="keycap"><strong>Ctrl+Shift+V</strong></span>를 눌러 유효성을 검사하세요.
+            </p>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e112"></a>4.&nbsp;번역된 파일을 생성
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>일단 여러분이 만든 번역에 태그 오류가 없으면, <span class="keycap"><strong>Ctrl+D</strong></span> 키를 눌러, 대상 파일을 생성하세요. 프로젝트 폴더 안 <code class="filename">/target/</code> 폴더에 생성됩니다.
+            </p>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e123"></a>5.&nbsp;몇 가지 더 기억할게 있습니다,
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p><span class="guilabel">편집기</span> 창에 파일을 불러올 수 없는 경우, OmegaT에서는 작동하지 않는 형식입니다. OmegaT가 처리할 수 있는 파일 형식의 목록은 <a class="link" href="#">파일 필터</a>를 참조 해 주세요.
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>여러분은 새 작업에 대해 각각 새 프로젝트를 만들 수 있고, 프로젝트에 언제든지 새 원본 파일을 추가할 수 있습니다.</p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>프로젝트의 초기 설정을 다시 알아보려면, <span class="keycap"><strong>Ctrl+E</strong></span>키를 눌러 프로젝트 설정 대화 상자를 엽니다. 프로젝트에 있는 파일의 목록을 보려면, <span class="keycap"><strong>Ctrl+L</strong></span>을 눌러 <span class="guilabel">프로젝트 파일</span>대화 상자를 엽니다.
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>번역이 끝나면, OmegaT는 프로젝트 폴더에 <code class="filename">level1</code>, <code class="filename">level2</code>, <code class="filename">omegat</code>의 3개 번역 메모리를 내보냅니다. <code class="filename">Level1</code> 및 <code class="filename">level2</code> 메모리는 다른 번역 프로그램의 사용자와 공유할 수 있습니다. <code class="filename">Omegat</code> 메모리는 앞으로 OmegaT의 프로젝트에 사용할 수 있습니다. 프로젝트의 <code class="filename">/tm/</code> 하위 폴더에 이러한 번역 메모리 파일을 배치할 경우, OmegaT는 유사한 부분을 자동으로 검색해 "비슷한 일치 항목" 창에 표시합니다.
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p><span class="keycap"><strong>Ctrl+Shift+G</strong></span>를 누르거나 프로젝트 폴더의 <code class="filename">/glossary/</code> 하위 폴더에 있는 기존 용어집에 새 용어를 추가할 수 있습니다. 그리면 OmegaT는 부분에 단어가 포함되면 자동으로 보여줍니다.
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>가끔 원본과 번역 텍스트의 단어 및 문구 검색이 필요합니다, 그러면 언제든지 <span class="keycap"><strong>Ctrl + F</strong></span>을 눌러 <span class="guilabel">텍스트 검색</span> 대화 상자를 열 수 있습니다.
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>더 포괄적인 소개가 필요하면 OmegaT 웹 사이트에 <a class="ulink" href="http://www.omegat.org/en/tutorial/OmegaT%20for%20Beginners.pdf" target="_top">초보자를 위한 OmegaT</a>를 참조하세요. 여러분이 OmegaT를 사용하는데 어떤 도움이라도 필요하면, <a class="ulink" href="http://tech.groups.yahoo.com/group/OmegaT/" target="_top">OmegaT 사용자 그룹</a>에 가입해주세요.
+                     </p>
+                  </li>
+               </ul>
+            </div>
+         </div>
+      </div>
+   </body>
+</html>

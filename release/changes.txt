@@ -16,7 +16,7 @@
 
   - In the Search window, the shortcut Alt+f was allocated both to Files 
 and Filter, and no shortcut was allocated to Translated. The new shortcuts
-are Alt+l for Files, Alt+f for Filter and Alt+t for Translated.
+are Alt+l for Files, Alt+f for Filter and Alt+t for Translated
 
   Localisation updates:
 

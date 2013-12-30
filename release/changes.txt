@@ -2,7 +2,7 @@
  OmegaT 3.0.8 update 2
 ----------------------------------------------------------------------
    1 Enhancement
-   0 Bug fix
+   1 Bug fix
    1 Localisation update
 ----------------------------------------------------------------------
 3.0.8 update 2 vs. 3.0.8 update 1
@@ -11,6 +11,12 @@
 
   - XLIFF filter: Ignore type and ctype attributes when building <ph> tag shortcuts 
   https://sourceforge.net/p/omegat/feature-requests/938/
+
+  Bug fixes:
+
+  - In the Search window, the shortcut Alt+f was allocated both to Files 
+and Filter, and no shortcut was allocated to Translated. The new shortcuts
+are Alt+l for Files, Alt+f for Filter and Alt+t for Translated.
 
   Localisation updates:
 

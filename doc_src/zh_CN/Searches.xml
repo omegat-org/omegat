@@ -15,22 +15,22 @@
 
       <mediaobject>
         <imageobject role="html">
-          <imagedata fileref="images/TextSearch.png"/>
+          <imagedata fileref="images/TextSearch25.png"/>
         </imageobject>
 
         <imageobject role="fo">
-          <imagedata fileref="images/TextSearch.png" width="95%"/>
+          <imagedata fileref="images/TextSearch25.png" width="90%"/>
         </imageobject>
       </mediaobject>
     </figure>
 
     <note>
-      <para>上面的搜索查找所有含有两个或更多空格（即包含 \s\s+）的目标片段。</para>
+      <para>上面的搜索查找所有包含目标中不太可能出现的字符（即斯洛文尼亚语字符）的目标片段。</para>
     </note>
 
     <section>
       <title>搜索<indexterm class="singular">
-          <primary>快捷键</primary> <secondary>Ctrl+F - 搜索</secondary>
+          <primary>快捷键</primary> <secondary>搜索——Ctrl+F</secondary>
         </indexterm></title>
 
       <para><application>OmegaT</application> 提供了强大的搜索功能。使用 <keycombo> <keycap>Ctrl</keycap> <keycap>F</keycap> </keycombo> 调出搜索窗口，在查找文本框输入要搜索的单词或短语。此外，还可以在编辑区域（当前片段的目标文本）选择一个单词或短语，然后按 <keycombo> <keycap>Ctrl</keycap> <keycap>F</keycap> </keycombo>键。在该情况下，单词或者短语将会自动输入到查找文本框中。您可以同时打开多个搜索窗口，但别忘记在不需要时关闭它们，这样它们才不会弄乱您的桌面。</para>
@@ -39,7 +39,7 @@
     <section>
       <title>搜索位置</title>
 
-      <para>默认情况下同时对项目的源和目标部分进行搜索，不过可以限制只在源或目标文本中进行。您可以在下列位置进行搜索</para>
+      <para>缺省情况下同时对项目的源和目标部分进行搜索，不过可以限制只在源或目标文本中进行。您可以在下列位置进行搜索</para>
 
       <itemizedlist>
         <listitem>
@@ -70,29 +70,29 @@
         <primary>搜索</primary> <secondary>使用通配符</secondary>
       </indexterm></title>
 
-    <para>无论是精确还是关键词搜索，都可以使用通配符 '*' 和 '?'。要使用通配符，不能选中正则表达式选项，因为 '*' 和 '?' 在正则表达式中具有特殊含义。</para>
+    <para>无论是精确还是关键词搜索，都可以使用通配符 '*' 和 '?'。它们的含义Word用户很熟悉：</para>
 
     <itemizedlist>
       <listitem>
-        <para>'*' 匹配零个或多个字符，从指定单词的当前位置开始到它结束的部分。例如搜索条件 <literal>'run*'</literal> 将会匹配单词 <literal>'run'</literal>、<literal>'runs'</literal> 和 <literal>'running'</literal>。</para>
+        <para>‘*’匹配零个或多个字符，从指定单词的当前位置开始到它结束的部分。例如搜索条件<literal>‘run*’</literal>将会匹配单词<literal>‘run’</literal>、<literal>‘runs’</literal>和<literal>‘running’</literal>。</para>
       </listitem>
     </itemizedlist>
 
     <itemizedlist>
       <listitem>
-        <para>'?' 匹配任何单个字符。例如，<literal>'run?' </literal>会匹配单词  <literal>'runs'</literal> 和 <literal>'running'</literal> 单词中的 <literal>'runn'</literal>。</para>
+        <para>‘?’匹配任何单个字符。例如，<literal>‘run?’ </literal>会匹配单词<literal>‘runs’</literal>和<literal>‘running’</literal>单词中的<literal>‘runn’</literal>。</para>
       </listitem>
     </itemizedlist>
 
-    <para>匹配将显示为蓝色粗体。</para>
+    <para>匹配将显示为蓝色粗体。需要注意‘*’和‘?’在正则表达式中有特殊含义，所以这里所说的通配符搜索只适用于精确搜索和关键字搜索（见下文）。</para>
   </section>
 
   <section id="search.methoids">
-    <title>搜索方法<indexterm class="singular">
-        <primary>搜索</primary> <secondary>方法</secondary>
+    <title>搜索方式和选项<indexterm class="singular">
+        <primary>搜索</primary> <secondary>方式和选项</secondary>
       </indexterm></title>
 
-    <para>使用单选按钮选择搜索方法。您可以在两个方法之中选择其一：</para>
+    <para>使用单选按钮选择搜索方法。下面是可用的搜索方式：</para>
 
     <variablelist>
       <varlistentry>
@@ -104,15 +104,23 @@
       </varlistentry>
 
       <varlistentry>
-        <term>关键词搜索</term>
+        <term>关键字搜索</term>
 
         <listitem>
-          <para>找出所有包括指定关键字的片段，不考虑顺序。选择关键词搜索以搜索任何数目、任何顺序出现的所有词汇。OmegaT 会显示所有词汇都出现了的片段清单。关键词搜索和互联网 Google 搜索引擎的 “使用所有词”方式相似（AND 逻辑）。使用关键此搜索 <emphasis><literal>open file</literal></emphasis> 将找到所有 <emphasis><literal>open file</literal>、</emphasis>、<emphasis><literal>file opened</literal>、<literal>open input file</literal> 以及 <literal>file may not be safe to open</literal></emphasis> 等字符串出现的地方。</para>
+          <para>找出所有包括指定关键字的片段，不考虑顺序。选择关键字搜索以搜索任何数目、任何顺序出现的所有词汇。OmegaT 会显示所有词汇都出现了的片段清单。关键字搜索和互联网 Google 搜索引擎的 “使用所有词”方式相似（AND 逻辑）。使用关键字<emphasis><literal>open file</literal></emphasis>进行搜索将找到所有<emphasis><literal>open file</literal>、</emphasis><emphasis><literal>file opened</literal>、<literal>open input file</literal>以及<literal>file may not be safe to open</literal></emphasis>等字符串出现的地方。</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><emphasis role="bold">正则表达式</emphasis></term>
+
+        <listitem>
+          <para>搜索字符串将会被当作正则表达式进行处理。例如在上文示例中的搜索字符串[a-zA-Z]+[öäüqwß]在目标片段中寻找包含疑似来自德语键盘的字符的单词。正则表达式是一种功能强大的字符串实例查找方法。请到<link linkend="chapter.regexp">正则表达式</link>章节了解更多信息。</para>
         </listitem>
       </varlistentry>
     </variablelist>
 
-    <para>对于以上两种方法，均可以在下列三个选项中选择：</para>
+    <para>对上面的几种方式，您还可以选择下列选项：</para>
 
     <itemizedlist>
       <listitem>
@@ -120,22 +128,36 @@
       </listitem>
 
       <listitem>
-        <para><emphasis role="bold">正则表达式</emphasis>：搜索字符串将会被当作正则表达式进行处理。正则表达式是一种功能强大的字符串实例查找方法。它和通配符搜索类似，但灵活性要大得多。在搜索中使用的是Java所支持的那些正则表达式。请到正则表达式章节了解更多细节。</para>
+        <para><emphasis role="bold">源片段：</emphasis>在源片段中搜索</para>
       </listitem>
 
       <listitem>
-        <para><emphasis role="bold">搜索翻译记忆</emphasis>：在搜索时也把 <filename>tm</filename> 目录中的翻译记忆纳入其中。</para>
+        <para><emphasis role="bold">目标片段：</emphasis>在目标片段中搜索</para>
+      </listitem>
+
+      <listitem>
+        <para><emphasis role="bold">笔记：</emphasis>在笔记中搜索</para>
+      </listitem>
+
+      <listitem>
+        <para><emphasis role="bold">搜索翻译记忆</emphasis>：在搜索时也把<filename>tm</filename>目录中的翻译记忆纳入其中。</para>
+      </listitem>
+
+      <listitem>
+        <para><emphasis role="bold">显示所有结果：</emphasis>清除该复选框会使OmegaT在存在许多hit时仅显示首个提示的位置。</para>
       </listitem>
     </itemizedlist>
+
+    <para>点击<guibutton>高级选项</guibutton>按钮会出现可供选择的附加条件（如翻译作者、翻译日期等），如上图所示。</para>
   </section>
 
   <section id="search.result.display">
     <title>搜索结果展示</title>
 
-    <para>在搜索字段输入一个字符串然后点击搜索按钮，会把项目中所有包含输入字符串的片段显示出来。由于 <application>OmegaT</application> 将相同片段视为同一实体，因此将只显示第一个独特的片段。</para>
+    <para>在搜索字段输入一个字符串然后点击搜索按钮，会把项目中所有包含输入字符串的片段显示出来。由于 <application>OmegaT</application> 将相同片段视为同一实体，因此将只显示第一个独特的片段。片段以在项目中出现的顺序显示。已译片段会以上面显示原文、下面显示译文的形式显示，而未译片段只显示原始文本。</para>
 
-    <para>片段以在项目中出现的顺序显示。已译片段会以上面显示原文、下面显示译文的形式显示，而未译片段只显示原始文本。</para>
+    <para>点击某片段将会编辑器中将它打开。然后您可以转回搜索窗口以编辑找到的下一个片段，例如进行检查或者在必要时调整术语。</para>
 
-    <para>点击某片段将会编辑器中将它打开。然后您可以转回搜索窗口以编辑下一找到的片段，例如进行检查或者在必要时调整术语。</para>
+    <para>可以同时打开多个搜索窗口。通过标题您可以快速了解它们的搜索内容：标题中包含了搜索用词。</para>
   </section>
 </chapter>

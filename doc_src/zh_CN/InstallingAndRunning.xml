@@ -11,40 +11,32 @@
     <section>
       <title id="which.package.to.download.windows">下载安装包</title>
 
-      <para>安装了与 Oracle 的 Java 1.5 JRE 兼容的 Java 实现了吗？</para>
+      <para>安装了与Oracle的Java 1.6 JRE兼容的Java实现了吗？</para>
 
       <itemizedlist>
         <listitem>
-          <para><emphasis role="bold">是：</emphasis>下载 <emphasis>OmegaT_2.5.x_Windows_without_JRE.exe</emphasis>。</para>
+          <para><emphasis role="bold">是：</emphasis>下载<emphasis>OmegaT_3.n.n_Windows_without_JRE.exe</emphasis>。</para>
         </listitem>
 
         <listitem>
-          <para><emphasis role="bold">否 / 我不知道：</emphasis>下载<emphasis> OmegaT_2.5.x_Windows.exe。</emphasis></para>
+          <para><emphasis role="bold">否/我不知道：</emphasis>下载<emphasis> OmegaT_3.n.n_Windows.exe</emphasis>。</para>
 
-          <para>该安装包捆绑了 Oracle 的 Java 运行环境。该 JRE 不会与系统中可能已安装的其它 Java 实现相冲突。</para>
+          <para>该安装包捆绑了Oracle的Java运行环境。该JRE不会与系统中可能已安装的其它 Java 实现相冲突。</para>
         </listitem>
       </itemizedlist>
     </section>
 
     <section id="OmegaT.installation.Windows">
-      <title><application>安装 OmegaT</application></title>
+      <title><application>安装OmegaT</application></title>
 
-      <para>要安装 <application>OmegaT</application>，仅需双击下载的程序并按照指示操作。</para>
-    </section>
+      <para>要安装<application>OmegaT</application>，只需双击已下载的程序。</para>
 
-    <section id="adding.OmegaT.to.the.start.menu.or.desktop">
-      <title>向启动菜单或桌面添加 <application>OmegaT</application><indexterm class="singular">
-          <primary>定制 OmegaT</primary> <secondary>Windows</secondary>
-        </indexterm></title>
-
-      <para>在安装过程中，安装程序将询问是否要在<emphasis>开始</emphasis>菜单中创建一个文件夹，以及是否想在桌面和快速启动栏创建快捷方式。</para>
-
-      <para>在完成安装之后您仍然可以创建快捷方式，只需将 <emphasis><application>OmegaT</application>.exe</emphasis> 拖动到桌面或开始菜单，以将其连接到该处。</para>
+      <para>安装开始时您可以选择在安装过程中使用的语言。在接着的窗口中您可以选择在OmegaT使用的语言。如果您选中了相应的复选框，则会修改OmegaT.l4J.ini文件以使用选择的语言（请参阅下一部分了解详情）。然后，当您接受了许可协议后，安装程序将询问是否要在<emphasis>开始</emphasis>菜单中创建文件夹以及在桌面和快速启动栏创建快捷方式（以后您可以拖动<emphasis><application>OmegaT</application>.exe</emphasis>到桌面或开始菜单来创建快捷方式）。最后一个画面提议您看看所安装版本的自述文件和更新文件。</para>
     </section>
 
     <section id="running.OmegaT.Windows">
       <title>运行 <application>OmegaT<indexterm class="singular">
-          <primary>运行 OmegaT</primary> <secondary>Windows</secondary>
+          <primary>运行OmegaT</primary> <secondary>Windows</secondary>
         </indexterm></application></title>
 
       <para>一旦安装好 <application>OmegaT</application>，您可以通过点击 <emphasis><application>OmegaT</application>.jar</emphasis> 或者从命令行启动它。</para>
@@ -58,7 +50,7 @@
 
     <section>
       <title>升级 OmegaT<indexterm class="singular">
-          <primary>升级 OmegaT</primary> <secondary>Windows</secondary>
+          <primary>升级OmegaT</primary> <secondary>Windows</secondary>
         </indexterm></title>
 
       <para><emphasis>这里的内容只适用于通过“传统”方式安装的 OmegaT 的 Windows 版本。它不适用于 Web Start 版本（它会自动更新），也不适用在 Windows 上安装的跨平台版本。</emphasis></para>
@@ -101,23 +93,23 @@
     <section id="which.package.to.download.Linux">
       <title>下载正确的安装包</title>
 
-      <para>安装了与 Oracle 的 Java 1.5 JRE 兼容的 Java 实现了吗？</para>
+      <para>安装了与Oracle的Java 1.6 JRE兼容的Java实现了吗？</para>
 
       <itemizedlist>
         <listitem>
-          <para><emphasis role="bold">是：</emphasis>下载 <emphasis>OmegaT_2.5.x_Without_JRE.zip</emphasis>。</para>
+          <para><emphasis role="bold">是：</emphasis>下载<emphasis>OmegaT_3.n.n_Without_JRE.zip</emphasis>。</para>
         </listitem>
 
         <listitem>
-          <para><emphasis role="bold">否/我不知道：</emphasis>下载 <emphasis>OmegaT_2.5.x_Linux.tar.bz2。</emphasis></para>
+          <para><emphasis role="bold">否/我不知道：</emphasis>下载<emphasis>OmegaT_3.n.n_Linux.tar.bz2</emphasis>。</para>
 
-          <para>该安装包捆绑了 Oracle 的 Java 运行环境。该 JRE 不会与系统中可能已安装的其它 Java 实现相冲突。</para>
+          <para>该安装包捆绑了Oracle的Java运行环境。该JRE不会与系统中可能已安装的其它 Java 实现相冲突。</para>
         </listitem>
       </itemizedlist>
     </section>
 
     <section id="OmegaT.installation.Linux">
-      <title><application>安装 OmegaT</application></title>
+      <title><application>安装OmegaT</application></title>
 
       <para>解压下载的文件。该操作将会在工作目录中创建一个 omegat/ 目录，在该目录中可以找到运行 <application>OmegaT</application> 所需的所有文件。要解压 <emphasis>.tar.gz</emphasis> 文件：</para>
 
@@ -129,7 +121,7 @@
 
       <section id="KDE.users">
         <title>KDE 4 用户<indexterm class="singular">
-            <primary>定制 OmegaT</primary> <secondary>KDE 4</secondary>
+            <primary>定制OmegaT</primary> <secondary>Linux</secondary>
           </indexterm></title>
 
         <para>可按下列步骤添加 <application>OmegaT</application> 到菜单中：</para>
@@ -162,9 +154,7 @@
       </section>
 
       <section id="GNOME.users">
-        <title>GNOME 用户<indexterm class="singular">
-            <primary>定制 OmegaT</primary> <secondary>GNOME</secondary>
-          </indexterm></title>
+        <title>GNOME 用户</title>
 
         <para>可按下列步骤添加 <application>OmegaT</application> 到菜单中：</para>
 
@@ -195,46 +185,38 @@
 
   <section id="MAC.OSX.users">
     <title>Mac OS X 用户<indexterm class="singular">
-        <primary>OS X</primary> <secondary>安装 OmegaT</secondary>
-      </indexterm><indexterm class="singular">
         <primary>安装 OmegaT</primary> <secondary>OS X</secondary>
       </indexterm></title>
 
     <section id="which.package.to.download.OSX">
       <title>下载安装包</title>
 
-      <para><application>OmegaT</application> 2.5 的运行需要 1.5。从苹果菜单调用 &quot;软件更新（Software Update）...&quot; 以更新 Java 的版本。</para>
+      <para><application>OmegaT</application>需要Java 1.6才能运行。从苹果菜单调用 &quot;软件更新（Software Update）...&quot; 以更新 Java 的版本。</para>
 
-      <para>下载 <emphasis>OmegaT_2.5.x_Mac.zip.</emphasis></para>
+      <para>下载<emphasis>OmegaT_3.n.n_Mac.zip</emphasis>。</para>
     </section>
 
     <section id="OmegaT.installation.OSX">
-      <title><application>安装 OmegaT</application></title>
+      <title><application>安装OmegaT</application></title>
 
-      <para>双击 <emphasis>OmegaT_2.5.x_Mac.zip</emphasis> 解压缩。该操作会创建一个名为<emphasis> <application>OmegaT</application> </emphasis> 的文件夹。此文件夹中包含两个文件：index.html 和 <emphasis><application>OmegaT</application>.app.</emphasis> 将文件夹复制到合适的文件夹（如：Applications)。完成上述操作后，即可删除 <emphasis>OmegaT_2.5.x_Mac.zip</emphasis> 文件。</para>
+      <para>双击<emphasis>OmegaT_3.n.n_Mac.zip</emphasis>解压出来。该操作会创建一个名为<emphasis> <application>OmegaT</application> </emphasis> 的文件夹。此文件夹中包含两个文件：index.html 和 <emphasis><application>OmegaT</application>.app.</emphasis> 将文件夹复制到合适的文件夹（如：Applications)。完成上述操作后，即可删除<emphasis>OmegaT_3.n.n_Mac.zip</emphasis>文件。</para>
     </section>
 
     <section id="adding.OmegaT.to.the.dock">
-      <title>添加 <application>OmegaT</application> 到 Dock<indexterm class="singular">
-          <primary>OS X</primary> <secondary>添加 OmegaT 到 Dock</secondary> <seealso>定制 OmegaT</seealso>
-        </indexterm></title>
+      <title>添加 <application>OmegaT</application> 到 Dock</title>
 
       <para>拖放 <emphasis><application>OmegaT</application>.app</emphasis> 到 Dock 中。</para>
     </section>
 
     <section id="running.OmegaT.OSX">
       <title>运行 <application>OmegaT<indexterm class="singular">
-          <primary>OS X</primary> <secondary>运行 OmegaT</secondary>
-        </indexterm><indexterm class="singular">
           <primary>运行 OmegaT</primary> <secondary>OS X</secondary>
         </indexterm></application></title>
 
       <para>双击 <emphasis> <application>OmegaT</application>.app</emphasis> 或点击它在 Dock 中的位置。</para>
 
       <para>要访问 <application><emphasis>Info.plist</emphasis></application>，请右键点击 <emphasis><application>OmegaT</application>.app</emphasis> 并选择［显示包内容］&quot;Show Package Contents&quot;，然后右键点击该文件并选择文本编辑器来将其打开。您还可以在命令行 &quot;cd&quot; 到这里并在<application>命令行编辑器（例如 emacs 或 vi）中打开 <emphasis>Info.plist</emphasis></application>。<emphasis> <indexterm class="singular">
-          <primary>OS X</primary> <secondary>定制 OmegaT</secondary> <tertiary>启动参数</tertiary>
-        </indexterm><indexterm class="singular">
-          <primary>OS X</primary> <secondary>定制 OmegaT</secondary>
+          <primary>定制OmegaT</primary> <secondary>OS X</secondary> <tertiary>启动参数</tertiary>
         </indexterm></emphasis></para>
 
       <para>您可以修改 <emphasis>Properties</emphasis> 和 <emphasis>VMOptions</emphasis> 部分。</para>
@@ -265,21 +247,21 @@
 
       <para><application>OmegaT</application> 提供一种为Linux (Intel x86) 和 Windows 平台准备的捆绑了 Oracle Java JRE 的版本。其他平台的用户（Linux PowerPC, Linux x64, Solaris SPARC/x86/x64, Windows x64 等) 要使用 <application>OmegaT</application> 必须安装与系统兼容的 Java JRE。</para>
 
-      <para>安装了与 Oracle 的 Java 1.5 JRE 兼容的 Java 实现了吗？</para>
+      <para>安装了与Oracle的Java 1.6 JRE兼容的Java实现了吗？</para>
 
       <itemizedlist>
         <listitem>
-          <para><emphasis role="bold">是：</emphasis>下载 <emphasis>OmegaT_2.5.x_Windows_without_JRE.</emphasis>zip。该安装包可用在任何安装了 Java 1.5 JRE 兼容 JRE 的平台上。</para>
+          <para><emphasis role="bold">是：</emphasis>下载<emphasis>OmegaT_3.n.n_Windows_without_JRE.</emphasis>zip。该安装包可用在安装了兼容Java 1.6 JRE的JRE的任何平台上。</para>
         </listitem>
 
         <listitem>
-          <para><emphasis role="bold">我不知道：</emphasis>打开终端，输入 &quot;java -version&quot;。如果返回了 &quot;command not found&quot; 或类似的信息，系统很有可能没有安装 Java</para>
+          <para><emphasis role="bold">我不知道：</emphasis>打开终端，输入“java -version”。如果返回了“command not found”或类似的信息，系统很有可能没有安装 Java</para>
         </listitem>
 
         <listitem>
-          <para><emphasis role="bold">否：</emphasis>获取适用于您系统的 Java JRE（见下文）并下载 <emphasis>OmegaT_2.5.x_Without_JRE.zip</emphasis>。</para>
+          <para><emphasis role="bold">否：</emphasis>获取适用于您系统的Java JRE（见下文）并下载<emphasis>OmegaT_3.n.n_Without_JRE.zip</emphasis>。</para>
 
-          <para>Oracle 在 <ulink url="http://www.oracle.com/technetwork/java/archive-139210.html">http://www.oracle.com/technetwork/java/archive-139210.html</ulink> 提供了用于 Solaris SPARC/x86 (Java 1.5) 和 Linux x64、Solaris x64、Windows x64 (Java 1.5) 的 JRE</para>
+          <para>Oracle在<ulink url="http://www.oracle.com/technetwork/java/archive-139210.html">http://www.oracle.com/technetwork/java/archive-139210.html</ulink>提供了用于Solaris SPARC/x86（Java 1.6）和Linux x64、Solaris x64、Windows x64（Java 1.6）的JRE</para>
 
           <para>IBM 在 <ulink url="http://www.ibm.com/developerworks/java/jdk/linux/download.html">http://www.ibm.com/developerworks/java/jdk/linux/download.htm</ulink> 提供了用于 Linux PowerPC 的 JRE</para>
 
@@ -289,11 +271,11 @@
     </section>
 
     <section id="OmegaT.installation.other">
-      <title><application>安装 OmegaT</application><indexterm class="singular">
+      <title><application>安装OmegaT</application><indexterm class="singular">
           <primary>安装 OmegaT</primary> <secondary>其他系统</secondary>
         </indexterm></title>
 
-      <para>要安装 <application>OmegaT</application>，仅需解压 <emphasis role="bold">OmegaT_2.5.x_Without_JRE.zip</emphasis> 文件。该操作会在工作目录中创建 <emphasis>./OmegaT_2.5.x_Without_JRE/</emphasis> 目录，该目录包含运行 <application>OmegaT</application> 需要的所有文件。</para>
+      <para>要安装<application>OmegaT</application>，只需解压<emphasis role="bold">OmegaT_3.n.n_Without_JRE.zip</emphasis>文件。这样会在工作目录中创建<emphasis>./OmegaT_3.n.n_Without_JRE/</emphasis>文件夹，且其中包含运行<application>OmegaT</application>需要的所有文件。</para>
     </section>
 
     <section id="installing.convenient.shortcuts">
@@ -316,7 +298,7 @@
         <primary>运行 OmegaT</primary> <secondary>使用 Java Web Start</secondary>
       </indexterm></title>
 
-    <para>使用 Java Web Start技术（对Java 1.5 及以上版本），只需一次点击就可通过网络部署独立的 Java 应用软件。Java Web Start 能够保证部署应用程序的最新版本以及使用正确 Java运行环境（JRE）版本。为首次通过 Java Web Start 启用 OmegaT，在浏览器中输入下面的 URL：</para>
+    <para>通过Java Web Start技术（Java 1.6及以上版本的一部分），只需一次点击就可通过网络部署独立的Java应用软件。Java Web Start 能够保证部署应用程序的最新版本以及使用正确 Java运行环境（JRE）版本。为首次通过Java Web Start启用OmegaT，在浏览器中输入下面的网址：</para>
 
     <para><emphasis>http://omegat.sourceforge.net/webstart/<application>OmegaT</application>.jnlp</emphasis></para>
 
@@ -365,9 +347,9 @@
       <para><literal>java -jar
       <application>OmegaT</application>.jar</literal></para>
 
-      <para>请注意如果输入错误的大小写形式例如 <emphasis>omegat</emphasis> 而不是 <emphasis>OmegaT </emphasis>，那么程序将不会启动!</para>
+      <para>请注意如果在Windows外的其中操作系统中输入错误的大小写形式，例如输入<emphasis>omegat</emphasis> 而不是<emphasis>OmegaT </emphasis>，那么程序将不会启动！</para>
 
-      <para>该方法对于找出问题的根源有特别的意义：如果在使用程序过程中发生了错误，在终端窗口所显示的错误信息对查找原因提供了有益的信息。</para>
+      <para>该方法对于找出问题的根源有特别的意义：如果在使用程序过程中发生了错误，在终端窗口所显示的错误信息对查找原因提供了有用的信息。</para>
 
       <para>上面的方法对于经常性启动一个程序来说是不切实际的。为此，上述两条命令被包含在一份文件（一份脚本、在 Windows 上也叫做一份 “.bat 文件”）。</para>
 
@@ -388,8 +370,8 @@
           <para><emphasis role="bold">用户界面语言</emphasis></para>
 
           <para><emphasis role="bold">-Duser.language=XX</emphasis><indexterm class="singular">
-              <primary>运行 OmegaT</primary> <secondary>启动脚本参数</secondary> <tertiary>User.language</tertiary>
-            </indexterm> 正常情况下，也就是 <application>OmegaT</application> 不带任何参数启动的情况下，程序将首先检测用户操作系统所使用的语言。如果存在所用语言的界面， <application>OmegaT</application> 将会使用它。因此，如果用户的操作系统为俄语版，而 <application>OmageT</application> 有俄语版的本地化版本，<application>OmegaT</application> 将显示为俄语用户界面、俄语菜单等等。如果用户系统的语言不存在，<application>OmegaT</application> 将默认使用英语。这是标准行为。</para>
+              <primary>运行OmegaT</primary> <secondary>启动脚本参数</secondary> <tertiary>用户界面语言</tertiary>
+            </indexterm> 正常情况下，也就是 <application>OmegaT</application> 不带任何参数启动的情况下，程序将首先检测用户操作系统所使用的语言。如果存在所用语言的界面， <application>OmegaT</application> 将会使用它。因此，如果用户的操作系统为俄语版，而 <application>OmageT</application> 有俄语版的本地化版本，<application>OmegaT</application> 将显示为俄语用户界面、俄语菜单等等。如果不存在用户系统的语言，<application>OmegaT</application>缺省使用英语。这是标准行为。</para>
 
           <para><emphasis>&quot;-Duser.language=XX&quot;</emphasis> 参数会使得 <application>OmegaT</application> 使用指定的语言而不是用户操作系统的语言。命令中的 &quot;XX&quot; 代表所需语言的双数字代码。要想 <application>OmegaT</application> 以法语界面运行（例如在俄语操作系统上），该命令应该为：</para>
 
@@ -400,17 +382,17 @@
 
       <itemizedlist>
         <listitem>
-          <para><emphasis role="bold">用户国家设置</emphasis></para>
+          <para><emphasis role="bold">用户国家</emphasis></para>
 
           <para><emphasis role="bold">-Duser.country=XX</emphasis><indexterm class="singular">
-              <primary>运行 OmegaT</primary> <secondary>启动脚本参数</secondary> <tertiary>User.country</tertiary>
+              <primary>运行OmegaT</primary> <secondary>启动脚本参数</secondary> <tertiary>用户国家</tertiary>
             </indexterm> 语言之后，您也可以指定国家，例如对于中文情况下的 CN 或 TW 。要使用期望的语言显示即时入门指南，您必须同时指定语言和国家。甚至在只要一种可用组合的情况下，这也是必须的，比如 Portuguese / Brazil 情况下的  pt_BR 。</para>
         </listitem>
       </itemizedlist>
 
       <itemizedlist>
         <listitem>
-          <para><emphasis role="bold">字体抗锯齿</emphasis> - (仅 Java 1.5)</para>
+          <para><emphasis role="bold">字体抗锯齿</emphasis>——（仅Java 1.6）</para>
 
           <para><emphasis role="bold">-Dswing.aatext=true<indexterm class="singular">
               <primary>运行 OmegaT</primary> <secondary>启动脚本参数</secondary> <tertiary>字体抗锯齿</tertiary>
@@ -422,7 +404,7 @@
 
           <para><emphasis role="bold">-XmxZZM </emphasis><indexterm class="singular">
               <primary>运行 OmegaT</primary> <secondary>启动脚本参数</secondary> <tertiary>内存分配</tertiary>
-            </indexterm>该命令给 <application>OmegaT</application> 分配更多内存。缺省情况下，将会分配 256 MB 内存，因此分配低于此大小的内存是没有好处的。&quot;ZZ&quot; 代表以兆字节为单位的内存。因此，启动 <application>OmegaT</application> 时分配 1024 MB(1G)内存的命令是：</para>
+            </indexterm>该命令给 <application>OmegaT</application> 分配更多内存。缺省情况下，将会分配512 MB内存，因此分配低于此大小的内存是没有好处的。“ZZ”代表以兆字节为单位的内存。因此，启动 <application>OmegaT</application> 时分配 1024 MB(1G)内存的命令是：</para>
 
           <para><literal>java -Xmx1024M -jar
           <application>OmegaT</application>.jar</literal></para>
@@ -432,24 +414,45 @@
           <para><emphasis role="bold">代理服务器主机 IP 地址</emphasis></para>
 
           <para><emphasis role="bold"><emphasis role="bold">-Dhttp.proxyHost=nnn.nnn.nnn.nnn</emphasis> <indexterm class="singular">
-              <primary>运行 OmegaT</primary> <secondary>启动脚本参数</secondary> <tertiary>代理服务器 IP 地址</tertiary>
+              <primary>运行OmegaT</primary> <secondary>启动脚本参数</secondary> <tertiary>代理主机IP地址</tertiary>
             </indexterm></emphasis> 如果您系统上使用代理服务器，在这里指定它的地址。</para>
         </listitem>
 
         <listitem>
-          <para><emphasis role="bold">代理服务器端口</emphasis></para>
+          <para><emphasis role="bold">代理主机端口</emphasis></para>
 
           <para><emphasis role="bold">-Dhttp.proxyPort=NNNN</emphasis> <indexterm class="singular">
-              <primary>运行 OmegaT</primary> <secondary>启动脚本参数</secondary> <tertiary>代理服务器端口</tertiary>
+              <primary>运行OmegaT</primary> <secondary>启动脚本参数</secondary> <tertiary>代理主机端口</tertiary>
             </indexterm> 访问代理服务器使用的端口。</para>
         </listitem>
 
         <listitem>
-          <para><emphasis role="bold">谷歌翻译 v2</emphasis></para>
+          <para><emphasis role="bold">谷歌翻译v2</emphasis></para>
 
           <para><emphasis role="bold">-Dgoogle.api.key=A123456789B123456789C123456789D12345678 </emphasis><emphasis role="bold"><indexterm class="singular">
               <primary>运行 OmegaT</primary> <secondary>启动脚本参数</secondary> <tertiary>谷歌翻译 V2</tertiary>
             </indexterm></emphasis> 如果您签约了谷歌翻译服务，请在这里输入您私有的谷歌 API 密钥。请注意该密钥长度为 38 个字符。</para>
+        </listitem>
+
+        <listitem>
+          <para><emphasis role="bold">Microsoft
+          Translator</emphasis><indexterm class="singular">
+              <primary>运行OmegaT</primary> <secondary>启动脚本参数</secondary> <tertiary>Microsoft Translator</tertiary>
+            </indexterm></para>
+
+          <para>确保您已经有了免费的微软账户。您需要把它注册到<ulink url="http://datamarket.azure.com/dataset/bing/microsofttranslator#schema">Windows Azure Marketplace</ulink>并使用Translator服务。注意免费账户每月最多可用2M字符数。在您<ulink url="https://datamarket.azure.com/account">账户页面</ulink>中有必须的主账户密钥和客户ID两个条目：</para>
+
+          <para><emphasis role="bold">-Dmicrosoft.api.client_id=</emphasis><emphasis role="bold">XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX</emphasis></para>
+
+          <para>-<emphasis role="bold">Dmicrosoft.api.client_secret=XXXX9xXxX9xXXxxXXX9xxX99xXXXX9xx9XXxXxXXXXX=</emphasis></para>
+        </listitem>
+
+        <listitem>
+          <para><emphasis role="bold">团队项目选项<parameter><indexterm class="singular">
+              <primary>运行OmegaT</primary> <secondary>启动脚本参数</secondary> <tertiary>no-team option</tertiary>
+            </indexterm></parameter></emphasis></para>
+
+          <para><emphasis role="bold">-no-team</emphasis>处理团队工作的项目设置。使用此参数能让OmegaT不同步项目内容。</para>
         </listitem>
       </itemizedlist>
 
@@ -481,7 +484,7 @@
           </listitem>
 
           <listitem>
-            <para>如果您无法正常运行 <application>OmegaT</application>（没有可用的图形界面）：可将另一机器上安装的 <application>OmegaT</application> 设置文件复制到特定的目录。位置并不重要，因为无论如何，启动时您都必须将位置添加到命令行。相关的文件是可在用户主目录找到的 <literal>filters.conf</literal> 和 <literal>segmentation.conf</literal>（如：Windows 系统中的 <literal>C:\Documents and Settings\%User%\<application>OmegaT</application></literal> 或 Linux 系统中的 <literal>%user%/.omegat/</literal>）</para>
+            <para>如果您无法正常运行<application>OmegaT</application>（没有可用的图形界面）：可将另一机器上安装的<application>OmegaT</application>设置文件复制到特定的文件夹。位置并不重要，因为无论如何，启动时您都必须将位置添加到命令行。相关的文件是可在用户主目录找到的<literal>filters.conf</literal>和<literal>segmentation.conf</literal>（如：Windows系统中的<literal>C:\Documents and Settings\%User%\<application>OmegaT</application></literal>或Linux系统中的<literal>%user%/.omegat/</literal>）</para>
           </listitem>
         </itemizedlist>
       </section>
@@ -513,7 +516,7 @@
 
         <itemizedlist>
           <listitem>
-            <para><literal>--config-dir=&lt;config-dir&gt;</literal> 告知 <application>OmegaT</application> 配置文件所在的目录。如果没有给出该参数，<application>OmegaT</application> 将转而使用缺省值（即用户主目录中的 <application>OmegaT</application> 目录，如果不可用的话则是当前的工作目录）。请注意两个 - 字符</para>
+            <para><literal>--config-dir=&lt;config-dir&gt;</literal>告知<application>OmegaT</application>配置文件所在文件夹。如果没有给出该参数，<application>OmegaT</application>将转而使用缺省值（即用户主目录中的<application>OmegaT</application>文件夹，如果不可用的话则是当前的工作目录）。请注意两个 - 字符</para>
           </listitem>
         </itemizedlist>
 
@@ -568,15 +571,48 @@
               <listitem>
                 <para><literal>test\.html</literal></para>
 
-                <para>只有根目录下的 test.html 文件将会被翻译。如果在其它目录下有名为 test.html 的文件，它们将会被忽略。</para>
+                <para>仅翻译source文件夹下当前目录中的test.html。如果在其子目录下有名为test.html的文件，它们会被忽略。</para>
               </listitem>
 
               <listitem>
                 <para><literal>dir-10\\test\.html</literal></para>
 
-                <para>仅翻译 dir-10 目录中的 test.html 文件。再次强调反斜杠也需要进行转义。</para>
+                <para>仅翻译dir-10文件夹中的test.html文件。再次强调反斜杠也需要进行转义。</para>
               </listitem>
             </itemizedlist>
+          </listitem>
+
+          <listitem>
+            <para><literal>--output-tag-validation-={regexp} </literal></para>
+
+            <para>如果使用了模式，则该选项将指定要自动翻译的文件。如果未使用该选项，则处理所有文件。这里是一些限制源文件匹配的实际例子：</para>
+
+            <itemizedlist>
+              <listitem>
+                <para><emphasis><literal>.*\.html</literal></emphasis></para>
+
+                <para>此时将翻译所有的 HTML 文件，需要注意到 *.html 在正则表达式中指定时需要进行转义 (\.)。</para>
+              </listitem>
+
+              <listitem>
+                <para><literal>test\.html</literal></para>
+
+                <para>仅翻译source文件夹下当前目录中的test.html。如果在其子目录下有名为test.html的文件，它们会被忽略。</para>
+              </listitem>
+
+              <listitem>
+                <para><literal>dir-10\\test\.html</literal></para>
+
+                <para>仅翻译dir-10文件夹中的test.html文件。再次强调反斜杠也需要进行转义。</para>
+              </listitem>
+            </itemizedlist>
+          </listitem>
+
+          <listitem>
+            <para><literal>--tag-validation=[abort|warn]</literal><parameter>
+            outputFileName</parameter></para>
+
+            <para>该选项支持在批处理模式中进行标签验证。如果选择了<literal>abort </literal>，则标签验证器会在遇到首个非法片段时停止。如果使用<literal>warn</literal>，则标签验证器会处理所有片段并把含非法标签片段的警告写入指定文件。</para>
           </listitem>
         </itemizedlist>
       </section>
@@ -588,7 +624,7 @@
 
         <para>用法：<literal>java -jar <application>OmegaT</application>.jar /path/to/project --mode=console-translate --quiet</literal></para>
       </section>
-      
+
       <section id="console.mode.option.validatetags">
         <title>标记验证选项</title>
 
@@ -604,7 +640,7 @@
         <primary>运行 OmegaT</primary> <secondary>从源代码编译 OmegaT</secondary>
       </indexterm></title>
 
-    <para>请注意您还需要 ant 程序（<emphasis>http://ant.apache.org/bindownload.cgi</emphasis>）来编译 OmegaT。解压 <emphasis>OmegaT_2.5.x_Source.zip</emphasis> 文件，并进入 OmegaT_2.5.x_Source 目录或进入 SVN 检出代码的 <emphasis>./omegat/</emphasis> 目录。请确认 build.xml 文件存在该目录中。然后，在命令行输入：</para>
+    <para>请注意您还需要 ant 程序（<emphasis>http://ant.apache.org/bindownload.cgi</emphasis>）来编译 OmegaT。解压<emphasis>OmegaT_3.n.n_Source.zip</emphasis>文件并进入OmegaT_3.n.n_Source文件夹或SVN检出代码的<emphasis>./omegat/</emphasis>文件夹。请确认 build.xml 文件存在该目录中。然后，在命令行输入：</para>
 
     <para><literal>$ ant jar release</literal></para>
 

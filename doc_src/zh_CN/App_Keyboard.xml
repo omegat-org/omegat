@@ -9,9 +9,9 @@
     <title>编辑器中的按键行为</title>
 
     <tgroup cols="2">
-      <colspec align="left" colnum="1" colwidth="90"/>
+      <colspec align="left" colnum="1"/>
 
-      <colspec align="left" colnum="2" colwidth="300"/>
+      <colspec align="left" colnum="2"/>
 
       <thead>
         <row>
@@ -121,7 +121,7 @@
         <row>
           <entry><emphasis role="bold">Ctrl+Enter</emphasis></entry>
 
-          <entry>打开上一个片段 (Mac: <emphasis role="bold">Cmd+Enter</emphasis>)</entry>
+          <entry>打开前一个片段（Mac：<emphasis role="bold">Cmd+Enter</emphasis>）</entry>
         </row>
 
         <row>
@@ -163,7 +163,9 @@
     </listitem>
   </itemizedlist>
 
-  <para>&quot;Shift&quot; 键不会表现出特殊的行为：在按下 &quot;Shift&quot; 时使用上面快捷键也会以相同的方式移动。</para>
+  <para>“Shift”键不会表现出特殊的行为：在按下 &quot;Shift&quot; 时使用上面快捷键也会以相同的方式移动，唯一的例外是<literal>Shift+Enter</literal>组合键会在文本中插入新行符。</para>
 
-  <para>系统范围的命令：粘贴（<emphasis role="bold">Ctrl+V</emphasis> 或 <emphasis role="bold">Ctrl+Insert</emphasis>），剪切（<emphasis role="bold">Ctrl+X</emphasis> 或 <emphasis role="bold">Ctrl+C）</emphasis>，插入匹配 <emphasis role="bold">（Ctrl+I</emphasis>）和插入源（<emphasis role="bold">Ctrl+Shift+I</emphasis>）原则上可以用于任何选区，包括超出当前片段的那些。此时选区会被分割到片段边界。</para>
+  <para>系统范围的命令全选（<keycap>Ctrl+A</keycap>）、粘贴（<emphasis role="bold">Ctrl+V</emphasis>）、剪切（<emphasis role="bold">Ctrl+X</emphasis>）、复制（<emphasis role="bold">Ctrl+C</emphasis>）、插入匹配（<emphasis role="bold">Ctrl+I</emphasis>）和插入源（<emphasis role="bold">Ctrl+Shift+I</emphasis>）原则上只作用于当前打开的片段。</para>
+
+  <para>请注意，您可以按自己的偏好重新分配快捷键。请参阅<link linkend="ch04.shortcuts.customization">附录自定义快捷键</link></para>
 </appendix>

@@ -59,23 +59,27 @@
         </listitem>
 
         <listitem>
-          <para>DocuWiki 文件（*.txt）</para>
+          <para>DokuWiki文件（*.txt）</para>
         </listitem>
       </itemizedlist>
 
-        <itemizedlist>
-          <listitem>
-            <para>SubRip 标题文件 (*.srt)</para>
-          </listitem>
-        </itemizedlist>
-        
-       <itemizedlist>
+      <itemizedlist>
         <listitem>
-          <para>Magento CE Locale CSV 文件 (*.csv)</para>
+          <para>SubRip 标题文件（*.srt）</para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para>Magento CE Locale CSV文件（*.csv）</para>
         </listitem>
       </itemizedlist>
 
       <para><application>OmegaT</application> 可以处理的其它的纯文本文件可以通过将其文件扩展名关联到所支持的文件类型（比方说，.pod 文件可以关联到 ASCII 文本过滤器）并使用特定的分割 规则来进行预处理。</para>
+
+      <para>PO文件<indexterm class="singular">
+          <primary>源文件</primary> <secondary>PO双语文件</secondary>
+        </indexterm>可以同时包含源和目标文本。从这个角度看，它们是纯文本<emphasis>加上</emphasis>翻译记忆。如果一个片段在项目翻译记忆project_save.tmx中还没有译文，则会把当前译文作为默认译文保存到project_save.tmx中。然而如果相同的源片段已经存在不同的翻译，则新译文会被保存为可选译文。</para>
     </section>
 
     <section>
@@ -91,8 +95,8 @@
 
       <para><itemizedlist>
           <listitem>
-            <para>OpenOffice.org / OpenDocument (*.ods, *.ots, *.odt, *.ott,
-            *.odp, *.otp)</para>
+            <para>ODF - OASIS Open Document Format (*.ods, *.ots, *.odt,
+            *.ott, *.odp, *.otp)</para>
           </listitem>
         </itemizedlist><itemizedlist>
           <listitem>
@@ -113,7 +117,7 @@
           </listitem>
         </itemizedlist><itemizedlist>
           <listitem>
-            <para>XLIFF (*.xlf, *.xliff, *.sdlxliff) - 单语的，即对于指定项目只有一种可能的语言组合</para>
+            <para>XLIFF (*.xlf, *.xliff, *.sdlxliff)——一个源对应多个目标</para>
           </listitem>
         </itemizedlist><itemizedlist>
           <listitem>
@@ -151,13 +155,18 @@
           <listitem>
             <para>Flash XML export (*.xml)</para>
           </listitem>
+
           <listitem>
             <para>Wordfast TXML (*.txml)</para>
           </listitem>
+
           <listitem>
             <para>Camtasia for Windows (*.camproj)</para>
           </listitem>
 
+          <listitem>
+            <para>Visio (*.vxd)</para>
+          </listitem>
         </itemizedlist></para>
 
       <para>其它的格式化文本文件可以通过将其文件扩展名关联到所支持的文件类型（假设相应的分割规则可以正确分割它们）来让 OmegaT 进行处理。</para>
@@ -179,7 +188,7 @@
 
     <itemizedlist>
       <listitem>
-        <para>将文件导入到 OpenOffice.org writer</para>
+        <para>将文件导入到ODF writer</para>
       </listitem>
     </itemizedlist>
 
@@ -197,7 +206,7 @@
 
     <itemizedlist>
       <listitem>
-        <para>在 OpenOffice.org writer 中加载目标文件</para>
+        <para>在ODF writer中加载目标文件</para>
       </listitem>
     </itemizedlist>
 
@@ -219,11 +228,11 @@
         <primary>源文件</primary> <secondary>自右向左语言</secondary>
       </indexterm></title>
 
-    <para>原文和译文的区分取决于项目的语言设置。默认情况下，LTR 语言使用左对齐而 RTL 语言使用右对齐。通过按下 <keycombo> <keycap>Shift</keycap> <keycap>Ctrl</keycap> <keycap>O</keycap> </keycombo>（字母 O 而不是数字 0）来切换不同的显示模式。<keycombo> <keycap>Shift</keycap> <keycap>Ctrl</keycap> <keycap>O</keycap> </keycombo>切换有三种状态：</para>
+    <para>原文和译文的区分取决于项目的语言设置。缺省情况下，LTR 语言使用左对齐而 RTL 语言使用右对齐。通过按下 <keycombo> <keycap>Shift</keycap> <keycap>Ctrl</keycap> <keycap>O</keycap> </keycombo>（字母 O 而不是数字 0）来切换不同的显示模式。<keycombo> <keycap>Shift</keycap> <keycap>Ctrl</keycap> <keycap>O</keycap> </keycombo>切换有三种状态：</para>
 
     <itemizedlist>
       <listitem>
-        <para>默认对齐方式，这由语言决定的</para>
+        <para>缺省对齐方式，这由语言决定的</para>
       </listitem>
     </itemizedlist>
 
@@ -275,8 +284,14 @@
         </indexterm></title>
 
       <para>在创建已译文档时，其显示方向将与源文本相同。如果源文档是自左向右的，目标文档的显示方向可以在其查看程序中手动修改为自右向左。每个输出方式都有特定方法来处理自右向左显示，可查阅相关应用程序手册了解更多细节。</para>
+      
+      <para>无论如何对于.docx文件会自动进行一些更改：<itemizedlist>
+      <listitem>段落、节和表被设为双向</listitem>
+      <listitem>阅读方向（文本元素）被设为RTL</listitem>     
+      </itemizedlist>
+      </para>
 
-      <para>为避免每次打开目标文件时都要改变其显示参数，可能修改源文件的显示参数以确保这些参数被目标文件所继承。举例来说，这样的修改对 OpenOffice.org 文件是可行的。</para>
+      <para>为避免每次打开目标文件时都要改变其显示参数，可能修改源文件的显示参数以确保这些参数被目标文件所继承。举例来说，这样的修改对ODF文件是可行的。</para>
     </section>
   </section>
 </chapter>

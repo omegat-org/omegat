@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<appendix id="appendix.LanguageToolPlugin.inOmegaT">
+  <title>LanguageTool插件<indexterm class="singular">
+      <primary>插件</primary> <secondary>LanguageTool</secondary>
+    </indexterm></title>
+
+  <section>
+    <title>介绍</title>
+
+    <para><ulink url="http://www.languagetool.org">LanguageTool</ulink>是开源风格的文法较对软件，可用于英语、法语、德语、波兰语、荷兰语、罗马尼亚语及其他语言（请参阅<ulink url="http://www.languagetool.org/languages/">支持语言列表</ulink>）。</para>
+
+    <para>您可以把LanguageTool视为可检测出简单的拼写检查器无法发现的错误的软件，例如混用了there/their、no/now等。它还可以检测一些语法错误。它不包括拼写检查。LanguageTool能发现对应于针对特定语言的配置文件中已定义规则的错误。</para>
+
+    <figure>
+      <title>OmegaT中的LanguageTool</title>
+
+      <screenshot>
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="images/LanguageToolExample.png"/>
+          </imageobject>
+        </mediaobject>
+      </screenshot>
+    </figure>
+  </section>
+
+  <section>
+    <title>安装和使用</title>
+
+    <para>LanguageTool插件包含在OmegaT中。如果选择了<guimenuitem>选项&gt;语言检查器</guimenuitem>，则OmegaT会自动使用这个工具。适用的规则（如果有的话）取决于项目的源语言和目标语言。触发规则后，编辑器中相应的短语会加上蓝色下划线（请参阅上面图片中的<emphasis>also </emphasis>和<emphasis>I didn't do nothing</emphasis>）。在加了下划线的短语上悬停鼠标时，会出现相应的说明。</para>
+    
+	<warning>
+		<title>不兼容性</title>
+		<para>如果在/plugin文件夹中找到旧版本的LanguageTool，则它无法正常工作。请在启动OmegaT前删除/plugin文件夹中的LanguageTool。</para>
+	</warning>
+
+  </section>
+</appendix>

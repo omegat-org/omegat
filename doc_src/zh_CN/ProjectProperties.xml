@@ -12,15 +12,18 @@
 
     <para><menuchoice> <shortcut> <keycombo> <keycap>Ctrl</keycap> <keycap>E</keycap> </keycombo> </shortcut> <guimenu>项目</guimenu> <guimenuitem>属性……</guimenuitem> </menuchoice>对话框可用来修改项目文件夹和语种。</para>
 
+    <para>可以在翻译进行的过程中对项目的属性进行修改。请注意对项目设置的变更可能已经产生结果，特别是在重新加载项目后。在您还没有丰富的OmegaT使用经验时，最安全的办法是在翻译开始的时候决定好所有的设置——除非您意识到自己犯了一个严重的错误。查阅防止数据丢失部分了解如何保护您的工作成果。</para>
+
     <figure>
       <title>项目属性窗口</title>
 
       <mediaobject>
         <imageobject role="html">
-          <imagedata fileref="images/NewProject.png"/>
+          <imagedata fileref="images/NewProject_26.png"/>
         </imageobject>
+
         <imageobject role="fo">
-          <imagedata fileref="images/NewProject.png" width="80%"/>
+          <imagedata fileref="images/NewProject_26.png" width="80%"/>
         </imageobject>
       </mediaobject>
     </figure>
@@ -29,65 +32,75 @@
 
     <itemizedlist>
       <listitem>
-        <para>使用下拉菜单选择项目源和目标语言的区域</para>
+        <para><emphasis role="bold">设置项目的源和目标语言的区域</emphasis></para>
+
+        <para>您可以手动输入语种或者通过下拉菜单选择。必须要记住：修改语言可能会导致当前使用的翻译记忆变得不可用，由于它的语言对不再与新语言相匹配。</para>
       </listitem>
     </itemizedlist>
 
     <itemizedlist>
       <listitem>
-        <para>分割规则设置标志</para>
+        <para><emphasis role="bold"><guilabel>启用语句级分割</guilabel> </emphasis>复选框</para>
+
+        <indexterm class="singular">
+          <primary>项目</primary> <secondary>启用语句级分割</secondary>
+        </indexterm>
+
+        <para>分割规则设置只影响 <application>OmegaT</application> 处理源文件的方式。语句级分割是主要的分割方式，所以正常情况下应该选中该复选框。</para>
+
+        <para>在一些罕见的情况下，可能优先选择其替代方案即段落级分割方式。改变该标志不会对已经译好翻译记忆进行修改。如果您在翻译中决定从语句分割切换为段落分割，项目的内部翻译记忆不会改变（OmegaT 可能会更新未使用语句分割的旧翻译记忆，但反过来却不会）。</para>
+
+        <para>改变分割规则设置可能导致一些已经译好的片段被分拆或者合并。这实际上会让它们回到“未译”状态，因为它们不再和记录在翻译记忆中的片段相匹配，即便旧的的匹配翻译仍然存在。</para>
       </listitem>
     </itemizedlist>
 
     <itemizedlist>
       <listitem>
-        <para>设置项目文件夹的区域</para>
+        <para><emphasis role="bold"><guibutton>分割规则……</guibutton> </emphasis>按钮<indexterm class="singular">
+            <primary>分割规则</primary> <secondary>全局与项目规则</secondary>
+          </indexterm></para>
+
+        <para>分割规则通常应用于所有项目。但是用户可能需要设置一些针对当前项目的一些规则。点击此按钮打开对话框，选中其中的<guimenuitem>项目专用分割规则</guimenuitem>复选框，然后根据需要调整分割规则。新的规则集将和项目保存在一起，而不与通用分割规则集相冲突。要删除项目专用分割规则，请取消选中此复选框。请参阅<link linkend="chapter.segmentation">源分割规则</link>章节了解更多关于分割规则的信息。<emphasis/></para>
+
+        <para><emphasis>暗示：</emphasis>特定项目的分割规则集保存在<filename>project/omegat/segmentation.conf</filename>。</para>
       </listitem>
-    </itemizedlist>
 
-    <para>所有的字段都是可编辑的。您可以手动输入语种或者通过下拉菜单选择。如果您输入了还不存在的文件夹名称，则 <application>OmegaT</application> 会创建它们。</para>
-  </section>
-
-  <section id="language.modification">
-    <title>修改项目属性</title>
-
-    <para>请注意对项目设置的变更可能已经产生结果，特别是在重新加载项目后。</para>
-
-    <itemizedlist>
       <listitem>
-        <para><emphasis role="bold">改变源或目标语言：<indexterm class="singular">
-            <primary>项目</primary> <secondary>源和目标语言</secondary>
+        <para><emphasis role="bold"><guibutton>文件过滤器……</guibutton> </emphasis>按钮<indexterm class="singular">
+            <primary>文件过滤器</primary> <secondary>全局与项目文件过滤器</secondary>
+          </indexterm></para>
+
+        <para>和上面类似，用户可以创建项目专用文件过滤器，它和项目保存在一起并仅对当前项目有效。要创建项目专用文件过滤器集，点击<guibutton>文件过滤器……</guibutton>按钮，并在打开的窗口中选中<guimenuitem>启用项目专用过滤器</guimenuitem>复选框。更新后的文件过滤器配置文件的副本会与项目保存在一起。要删除项目专用文件过滤器，请取消选中此复选框。注意在<guimenuitem>选项-&gt;文件过滤器</guimenuitem>菜单中，修改的是全局用户过滤器而不是项目专用过滤器。请参阅<link linkend="chapter.file.filters">文件过滤器</link>章节了解关于本主题的更多信息。<emphasis/></para>
+
+        <para><emphasis>提示：</emphasis>特定项目的文件过滤器集保存在<filename>project/omegat/filters.xml</filename>。</para>
+      </listitem>
+
+      <listitem>
+        <para><emphasis role="bold">自动传播翻译</emphasis>复选框<emphasis role="bold"><indexterm class="singular">
+            <primary>项目</primary> <secondary>自动传播翻译选项</secondary>
           </indexterm></emphasis></para>
 
-        <para>必须要记住：修改语言可能会导致当前使用的翻译记忆变得不可用，由于它的语言对不再与新语言相匹配。</para>
+        <para>源文档中包含非唯一片段时，自动传播翻译复选框为用户提供了下面两种类似自动翻译的功能：选中时，首次翻译的片段将被假定为默认翻译，其目标文本会自动用于以后翻译过程中的提示。当然误译片段可以之后手动通过<guimenuitem>创建可选译文</guimenuitem>进行纠正。如果未选中自动传播复选框，则含可选译文的片段会保持未译状态至用户决定使用哪种译文。</para>
       </listitem>
 
       <listitem>
-        <para><emphasis role="bold">修改分割规则：<indexterm class="singular">
-            <primary>项目</primary> <secondary>修改分割规则</secondary>
-          </indexterm></emphasis></para>
+        <para><emphasis role="bold">移除标签</emphasis>复选框<indexterm class="singular">
+            <primary>项目</primary> <secondary>移除标签选项</secondary>
+          </indexterm></para>
 
-        <para>分割规则设置只影响 <application>OmegaT</application> 处理源文件的方式。它不会对已经译好翻译记忆进行修改。</para>
-
-        <para>如果改变了分割规则设置，一些已经译好的片段可能被分拆或者合并。这实际上会让它们回到“未译”状态，因为它们不在和记录在翻译记忆中的片段相匹配，即便旧的的匹配翻译仍然存在。</para>
-
-        <para>OmegaT 可能会升级旧的未使用句子片段的翻译记忆，但反过来却不会。如果您在翻译中决定从句子分割切换为段落分割，项目的内部翻译记忆不会改变。</para>
+        <para>启用该选项后，会从源片段中移除所有格式化标签。在处理含无用内联格式的文本（如OCRed PDF、转换错误的.odt或.docx等）时特别有用。一般情况下都能正常打开目标文档，因为只移除了内联标签。不可见的格式信息（即在OmegaT编辑器中不显示为标签的那些）会保留在目标文档中。</para>
       </listitem>
+    </itemizedlist>
 
+    <itemizedlist>
       <listitem>
-        <para><emphasis role="bold">改变文件夹结构：<indexterm class="singular">
+        <para><emphasis role="bold">设置项目文件夹的区域</emphasis><indexterm class="singular">
             <primary>项目</primary> <secondary>改变文件夹结构</secondary>
-          </indexterm></emphasis></para>
+          </indexterm><indexterm class="singular">
+            <primary>词汇表</primary> <secondary>可写词汇表的位置</secondary>
+          </indexterm></para>
 
-        <para>在想要修改项目文件夹的情况下，必须紧记这样做并不会将所包含的文件从旧文件夹移动到新的位置。</para>
-      </listitem>
-
-      <listitem>
-        <para><emphasis role="bold">在翻译过程中修改项目属性：<indexterm class="singular">
-            <primary>项目</primary> <secondary>在翻译时修改</secondary>
-          </indexterm></emphasis></para>
-
-        <para>可以在翻译进行的过程中对项目的属性进行修改。然而，如果您还没有丰富的 OmegaT 使用经验时，最安全的办法是在翻译启动的时候考虑所有的设置问题——除非您意识到自己犯了一个严重的错误。查阅防止数据丢失部分了解如何保护您的工作成果。</para>
+        <para>此处您可选择不同的子文件夹，如源文件子文件夹、目标文件子文件夹等。如果您输入了还不存在的文件夹名称，则 <application>OmegaT</application> 会创建它们。如果您要修改项目文件夹，必须紧记这样做并不会将现有的文件从旧文件夹移动到新的位置。</para>
       </listitem>
     </itemizedlist>
   </section>

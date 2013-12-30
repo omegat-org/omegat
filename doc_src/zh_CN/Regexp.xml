@@ -5,7 +5,7 @@
       <primary>正则表达式</primary> <seealso>分割规则</seealso> <seealso>搜索</seealso>
     </indexterm></title>
 
-  <para>在搜索和片段切分规则中使用的是 Java 支持的正则表达式(或简称为 regex)。如果需要更详细的信息，请参阅 <ulink url="http://download.oracle.com/javase/1.5.0/docs/api/java/util/regex/Pattern.html">Java Regex 文档</ulink>. 查阅下面提到的附加参考和范例。</para>
+  <para>在搜索和片段切分规则中使用的是 Java 支持的正则表达式(或简称为 regex)。如果需要更详细的信息，请参阅 <ulink url="http://download.oracle.com/javase/1.6.0/docs/api/java/util/regex/Pattern.html">Java Regex 文档</ulink>. 查阅下面提到的附加参考和范例。</para>
 
   <note>
     <para>本章内容是为高级用户准备的，用于定义多变的分割规则或使用更复杂和强大的搜索功能。</para>
@@ -15,7 +15,7 @@
     <title>Regex - 标志</title>
 
     <tgroup align="left" cols="2" rowsep="1">
-      <colspec align="left" colnum="1" colwidth="100"/>
+      <colspec align="left" colnum="1"/>
 
       <thead>
         <row>
@@ -39,7 +39,7 @@
     <title>Regex - 字符</title>
 
     <tgroup align="left" cols="2" rowsep="1">
-      <colspec align="left" colnum="1" colwidth="100"/>
+      <colspec align="left" colnum="1"/>
 
       <thead>
         <row>
@@ -135,7 +135,7 @@
     <title>Regex - 引用</title>
 
     <tgroup align="left" cols="2" rowsep="1">
-      <colspec align="left" colnum="1" colwidth="100"/>
+      <colspec align="left" colnum="1"/>
 
       <thead>
         <row>
@@ -177,7 +177,7 @@
     <title>Regex - 用于 Unicode 字块和分类的类</title>
 
     <tgroup align="left" cols="2" rowsep="1">
-      <colspec align="left" colnum="1" colwidth="100"/>
+      <colspec align="left" colnum="1"/>
 
       <thead>
         <row>
@@ -191,13 +191,13 @@
         <row>
           <entry>\p{InGreek}</entry>
 
-          <entry>希腊字块中的字符（简单的<ulink url="http://download.oracle.com/javase/1.5.0/docs/api/java/util/regex/Pattern.html#ubc">字块</ulink>）</entry>
+          <entry>希腊字块中的字符（简单的<ulink url="http://download.oracle.com/javase/1.6.0/docs/api/java/util/regex/Pattern.html#ubc">字块</ulink>）</entry>
         </row>
 
         <row>
           <entry>\p{Lu}</entry>
 
-          <entry>大写字母（简单的<ulink url="http://download.oracle.com/javase/1.5.0/docs/api/java/util/regex/Pattern.html#ubc">分类</ulink>）</entry>
+          <entry>大写字母（简单的<ulink url="http://download.oracle.com/javase/1.6.0/docs/api/java/util/regex/Pattern.html#ubc">分类</ulink>）</entry>
         </row>
 
         <row>
@@ -225,7 +225,7 @@
     <title>Regex - 字符类</title>
 
     <tgroup align="left" cols="2" rowsep="1">
-      <colspec align="left" colnum="1" colwidth="100"/>
+      <colspec align="left" colnum="1"/>
 
       <thead>
         <row>
@@ -261,7 +261,7 @@
     <title>Regex - 预定义字符类</title>
 
     <tgroup align="left" cols="2" rowsep="1">
-      <colspec align="left" colnum="1" colwidth="100"/>
+      <colspec align="left" colnum="1"/>
 
       <thead>
         <row>
@@ -321,7 +321,7 @@
     <title>Regex - 边界匹配</title>
 
     <tgroup align="left" cols="2" rowsep="1">
-      <colspec align="left" colnum="1" colwidth="100"/>
+      <colspec align="left" colnum="1"/>
 
       <thead>
         <row>
@@ -363,7 +363,7 @@
     <title>Regex - 贪婪量词</title>
 
     <tgroup align="left" cols="2" rowsep="1">
-      <colspec align="left" colnum="1" colwidth="100"/>
+      <colspec align="left" colnum="1"/>
 
       <thead>
         <row>
@@ -403,7 +403,7 @@
     <title>Regex - 非贪婪量词</title>
 
     <tgroup align="left" cols="2" rowsep="1">
-      <colspec align="left" colnum="1" colwidth="100"/>
+      <colspec align="left" colnum="1"/>
 
       <thead>
         <row>
@@ -443,7 +443,7 @@
     <title>Regex - 逻辑操作符</title>
 
     <tgroup align="left" cols="2" rowsep="1">
-      <colspec align="left" colnum="1" colwidth="100"/>
+      <colspec align="left" colnum="1"/>
 
       <thead>
         <row>
@@ -506,7 +506,7 @@
       <title>Regex - 用于译文的正则表达式示例</title>
 
       <tgroup align="left" cols="2" rowsep="1">
-        <colspec align="left" colnum="1" colwidth="100"/>
+        <colspec align="left" colnum="1"/>
 
         <thead>
           <row>
@@ -548,7 +548,7 @@
           </row>
 
           <row>
-            <entry>\s\s+</entry>
+            <entry>\s{2,}</entry>
 
             <entry>一个以上空格</entry>
           </row>
@@ -557,6 +557,12 @@
             <entry>\.[A-Z]</entry>
 
             <entry>句点，跟着一个大写字母——是否在句点和下一个句子间遗漏了空格？</entry>
+          </row>
+
+          <row>
+            <entry>\bis\b</entry>
+
+            <entry>匹配“is”，但不是“this”或“isn't”等。</entry>
           </row>
         </tbody>
       </tgroup>

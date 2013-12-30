@@ -1,406 +1,109 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
 <chapter id="chapter.instant.start.guide">
-  <title>快速入门指南</title>
-
-  <section>
-    <title>五分钟内学会使用 <application>OmegaT</application>！</title>
-
-    <para>这份快速入门指南只包括了 OmegaT 中最基础的功能。理论上，用户均应该阅读用户手册来熟悉 <application>OmegaT</application> 所提供的一切。Mac 用户注意：这里描述的快捷方式使用 &quot;<keycombo> <keycap>Ctrl</keycap> <keycap>key</keycap> </keycombo>&quot; 约定，但 Mac 用户应该改为使用 &quot;<keycombo> <keycap>Cmd</keycap> <keycap>key</keycap> </keycombo>&quot;。&quot;<keycap>Cmd</keycap>&quot; 键就是在苹果键盘上印有 &quot;command&quot; 或“苹果”符号的那个键。</para>
-
-    <para><application>OmegaT</application> 界面由五个不同的窗格组成的空间构成<indexterm class="singular">
-        <primary>OmegaT 窗口</primary>
-      </indexterm>。每个窗口都可以使用鼠标调整大小。左边的窗口是输入翻译文本的编辑器［Editor］。在右边，上面是匹配查看器［Match Viewer］，其中显示翻译记忆中的匹配内容。下面是词汇表查看器［Glossary Viewer］，用于显示词汇表的匹配内容。在窗口底部两个附加的标签用来打开词典和机器翻译窗格。（注：您可以把这些窗格调整为自己喜欢的布局，上面的描述是指刚安装好 OmegaT 时的情况）。</para>
-
-    <para>在编辑器窗格中，OmegaT 将源文本分割成句子（或段落）来显示。然后可以逐一对这些片段进行翻译。在您从一个片段翻译到另一个片段的同时，翻译均被记录在翻译记忆中。一旦所有的片段都被翻译好之后（如果您要求的话，或者完成之前也可以）<application>OmegaT</application> 会使用翻译记忆在“目标”［Target］目录中生成翻译好的文档。</para>
-
-    <para>OmegaT 将您的翻译工作组织成翻译项目［Project］。OmegaT 为每个项目创建一系列文件夹，这些文件夹依次保存要翻译的源文档、希望用到的词汇表，以及任何可能用到的翻译记忆。同时 OmegaT 也创建“Target” 文件夹，用来保存最后的已译文档。</para>
-  </section>
-
-  <section>
-    <title>使用 <application>OmegaT</application> 翻译</title>
-
-    <section id="create.and.open.new.project">
-      <title>创建并打开一个新的项目<indexterm class="singular">
-          <primary>项目</primary> <secondary>新创建/打开</secondary>
-        </indexterm></title>
-
-      <para>从菜单中选择 <menuchoice> <guimenu>项目</guimenu> <guimenuitem>新建…</guimenuitem> </menuchoice><indexterm class="singular">
-          <primary>项目菜单</primary> <secondary>新建……</secondary>
-        </indexterm>。</para>
-
-      <para>找到您想保存项目文件的文件夹，并为该翻译项目输入一个名字。该名字将被用作项目的主文件夹名，项目的所有文件将被保存在这个文件夹及其子文件夹中。</para>
-
-      <para><application>OmegaT</application> 将使用下面的对话框提示您确认或者改变要创建的项目文件夹。</para>
-
-      <figure id="New.project.dialog.window">
-        <title><indexterm class="singular">
-            <primary>项目</primary> <secondary>项目对话窗口 - 图示</secondary>
-          </indexterm>新建项目 - 对话窗口</title>
-
-        <mediaobject>
-          <imageobject role="html">
-            <imagedata fileref="images/NewProject.png"/>
-          </imageobject>
-          <imageobject role="fo">
-            <imagedata fileref="images/NewProject.png" width="80%"/>
-          </imageobject>
-        </mediaobject>
-      </figure>
-
-      <para>您仅需简单地接受子文件夹的位置，但是必须首先确认源和目标语言编码是正确的。从下拉列表中选择语言代码（2字母）或语言和地区代码（2 + 2 字母），或直接手工输入代码（语言代码可以为 2 到 3 个字母）。记下目标文件夹（用于保存译好文档）的位置。如果希望 OmegaT 根据句子而不是段落进行片段分割，请阅读片段分割规则章节<indexterm class="singular">
-          <primary>分割</primary> <secondary>片段分割规则</secondary>
-        </indexterm>。</para>
-
-      <para>点击确认接受项目设置之后，OmegaT 会提示您选择要导入的源文档。您可以通过 <firstterm>项目&gt;导入源文件</firstterm>来导入单个的文件，也可以手动复制多个文件甚至整个文件夹的树形结构（包括所有子文件夹中的所有文件）到 OmegaT 项目的源文件夹中（例如使用您系统的文件管理器）。如果您不小心导入了错误的文档，或者过多的文档，仅需从 OmegaT 源文件夹中删除它们。</para>
-
-      <para>要查看待译文件清单，请打开<emphasis role="bold">项目文件</emphasis> <indexterm class="singular">
-          <primary>项目文件</primary> <secondary>源文件</secondary>
-        </indexterm>窗口（如果没有自动开启的话，可使用菜单：<menuchoice> <guimenu>项目</guimenu> <guimenuitem>项目文件……</guimenuitem> </menuchoice>,<indexterm class="singular">
-          <primary>项目菜单</primary> <secondary>项目文件……</secondary>
-        </indexterm>）。如果改变了源文件夹的内容，记住首先要重新载入项目（菜单：<menuchoice> <shortcut> <keycap>F5</keycap> </shortcut> <guimenu>项目</guimenu> <guimenuitem>重新载入</guimenuitem> </menuchoice>）。缺省情况下，<application>OmegaT</application> 打开项目清单中的第一个文件。请记住，<application>OmegaT</application> 仅能翻译下面列出的能够被文件过滤器所匹配的格式的文件。其它任何文件将会被忽略。<indexterm class="singular">
-          <primary>源文件</primary> <secondary>文件格式</secondary>
-        </indexterm></para>
-
-      <itemizedlist>
-        <listitem>
-          <para><emphasis role="bold">纯文本文件格式<indexterm class="singular">
-              <primary>文件格式</primary> <secondary>纯文本文件</secondary>
-            </indexterm></emphasis><itemizedlist>
-              <listitem>
-                <para>ASCII 文本（.txt 等）</para>
-              </listitem>
-
-              <listitem>
-                <para>编码文本（*.UTF8）</para>
-              </listitem>
-            </itemizedlist><itemizedlist>
-              <listitem>
-                <para>Java 资源文件（*.properties）</para>
-              </listitem>
-            </itemizedlist><itemizedlist>
-              <listitem>
-                <para>PO 文件（*.po）</para>
-              </listitem>
-            </itemizedlist><itemizedlist>
-              <listitem>
-                <para>INI (key=value) 文件（*.ini）</para>
-              </listitem>
-            </itemizedlist>
-            <itemizedlist>
-              <listitem>
-                <para>DTD 文件（*.DTD）</para>
-              </listitem>
-
-              <listitem>
-                <para>DocuWiki 文件（*.txt）</para>
-              </listitem>
-            </itemizedlist></para>
-
-    		<itemizedlist>
-			  <listitem>
-				<para>SubRip 标题文件 (*.srt)</para>
-			  </listitem>
-			</itemizedlist>
-
-            <itemizedlist>
-              <listitem>
-                <para>Magento CE Locale CSV (*.csv)</para>
-              </listitem>
-            </itemizedlist>
-
-        </listitem>
-      </itemizedlist>
-
-      <itemizedlist>
-        <listitem>
-          <para><emphasis role="bold">标记文本文件格式<indexterm class="singular">
-              <primary>文件格式</primary> <secondary>格式化</secondary>
-            </indexterm></emphasis></para>
-
-          <itemizedlist>
-            <listitem>
-              <para>OpenOffice.org / OpenDocument (*.odt, *.ott, *.ods, *.ots,
-              *.odp, *.otp)</para>
-            </listitem>
-          </itemizedlist>
-
-          <itemizedlist>
-            <listitem>
-              <para>Microsoft Open XML (*.docx, *.xlsx, *.pptx)</para>
-            </listitem>
-          </itemizedlist>
-
-          <itemizedlist>
-            <listitem>
-              <para>(X)HTML (*.html, *.xhtml,*.xht)</para>
-            </listitem>
-          </itemizedlist>
-
-          <itemizedlist>
-            <listitem>
-              <para>HTML Help Compiler (*.hhc, *.hhk)</para>
-            </listitem>
-          </itemizedlist>
-
-          <itemizedlist>
-            <listitem>
-              <para>DocBook (*.xml)</para>
-            </listitem>
-          </itemizedlist>
-
-          <itemizedlist>
-            <listitem>
-              <para>单语 XLIFF (*.xlf, *.xliff, *.sdlxliff)</para>
-            </listitem>
-          </itemizedlist>
-
-          <itemizedlist>
-            <listitem>
-              <para>QuarkXPress CopyFlowGold (*.tag, *.xtg)</para>
-            </listitem>
-          </itemizedlist>
-
-          <itemizedlist>
-            <listitem>
-              <para>ResX 文件 (*.resx)</para>
-            </listitem>
-          </itemizedlist>
-
-          <itemizedlist>
-            <listitem>
-              <para>Android 资源 (*.xml)</para>
-            </listitem>
-          </itemizedlist>
-
-          <itemizedlist>
-            <listitem>
-              <para>LaTex (*.tex, *.latex)</para>
-            </listitem>
-
-            <listitem>
-              <para>Help (*.xml) 和 Manual (*.hmxp) 文件</para>
-            </listitem>
-
-            <listitem>
-              <para>Typo3 LocManager (*.xml)</para>
-            </listitem>
-          </itemizedlist>
-
-          <itemizedlist>
-            <listitem>
-              <para>WiX Localization (*.wxl)</para>
-            </listitem>
-
-            <listitem>
-              <para>Iceni Infix (*.xml)</para>
-            </listitem>
-
-            <listitem>
-              <para>Flash XML export (*.xml)</para>
-            </listitem>
-
-          <listitem>
-            <para>Wordfast TXML (*.txml)</para>
-          </listitem>
-
-          <listitem>
-            <para>Camtasia for Windows (*.camproj)</para>
-          </listitem>
-
-          </itemizedlist>
-        </listitem>
-      </itemizedlist>
-
-      <para>除了您想翻译的文本，标记文本文件还包含在 OmegaT 以“标记”的形式显示的格式信息。这些标记必须出现在译文中，包括那些不需要“翻译”的格式信息。如果不小心遗漏或错位了标记，那么生成的文本可能不会按预期的显示且译文可能损坏——请参阅下面的“标记验证”章节。</para>
-    </section>
-
-    <section id="translate.the.segments.one.by.one">
-      <title>逐片段翻译</title>
-
-      <para>一旦定义好项目以及要翻译的文件之后，<application>OmegaT</application> 将会在编辑器中打开第一份源文件。</para>
-
-      <para>处于激活状态的片段将以绿色高亮度显示，在下方的“目标区域”将会显示一段源文本的副本。（此时，目标区域之外的所有文本都受到保护无法修改。）您必须在标记&lt;<literal>segment 0001&gt;</literal> 之前输入译文。可以进行设置让 OmegaT 自动复制原文到目标文本（请参阅<emphasis>选项&gt;编辑行为……</emphasis>），可用于当部分源文本需要保持不变的时候。此时您将覆盖源文本。按下 <emphasis role="bold">&quot;ENTER&quot;</emphasis> 以进入下一个片段。注意：</para>
-
-      <itemizedlist>
-        <listitem>
-          <para>如果想移动到文本的任何其它部分，无论是前面还是后面，可用鼠标双击想打开的段落或者句子。</para>
-        </listitem>
-
-        <listitem>
-          <para>如果希望在空白的目标区域输入译文，可在<menuchoice> <guimenu>选项</guimenu> <guimenuitem>编辑行为……<indexterm class="singular">
-                  <primary>菜单选项</primary> <secondary>编辑行为……</secondary>
-                </indexterm></guimenuitem> </menuchoice>进行设置。</para>
-        </listitem>
-
-        <listitem>
-          <para>您可以通过主菜单的查看项中修改编辑器窗格的设置（例如是否显示原文、高亮显示已译文本等等）。</para>
-
-          <para>当您按下 <emphasis role="bold">&quot;ENTER&quot;</emphasis>，在内部发生几件事情：<application>OmegaT</application> 将片段对（原文片段和译文）添加到翻译记忆中。同时自动翻译了其它项目文件中所找到的相同片段。此外，它也对即将打开下一个未译片段在翻译记忆和词汇表中进行匹配搜索。</para>
-        </listitem>
-      </itemizedlist>
-    </section>
-
-    <section id="use.matches.in.TMs.dictionaries.and.glossaries">
-      <title>使用翻译记忆、词汇表和字典中的匹配项</title>
-
-      <section id="translation.memory.matches">
-        <title>翻译记忆匹配<indexterm class="singular">
-            <primary>翻译记忆</primary> <secondary>模糊匹配</secondary>
-          </indexterm><indexterm class="singular">
-            <primary>翻译记忆</primary> <secondary>匹配</secondary>
-          </indexterm></title>
-
-        <figure>
-          <title>匹配窗格</title>
-
-          <mediaobject>
-            <imageobject role="html">
-              <imagedata fileref="images/MatchesPane.png"/>
-            </imageobject>
-
-            <imageobject role="fo">
-              <imagedata fileref="images/MatchesPane.png" width="80%"/>
-            </imageobject>
-          </mediaobject>
-        </figure>
-
-        <para>如果 <application>OmegaT</application> 在项目的翻译记忆中找到了下一片段的模糊匹配（相似度在 30% 或者更高），它将在匹配查看器中显示结果。缺省情况下，将预先选中匹配查看器中的第一条匹配结果。</para>
-
-        <itemizedlist>
-          <listitem>
-            <para>按 <keycombo> <keycap>Ctrl</keycap> <keycap>I</keycap> </keycombo><indexterm class="singular">
-                <primary>快捷键</primary> <secondary>Ctrl+I - 插入文本</secondary>
-              </indexterm> 将预选的匹配插入当前光标位置或……</para>
-          </listitem>
-
-          <listitem>
-            <para>按 <keycombo> <keycap>Ctrl</keycap> <keycap>R</keycap> </keycombo> <indexterm class="singular">
-                    <primary>快捷键</primary> <secondary>Ctrl+R - 替换文本</secondary>
-                  </indexterm><indexterm class="singular">
-                    <secondary>替换文本</secondary>
-                  </indexterm> 用预选的匹配覆盖整个片段。</para>
-          </listitem>
-        </itemizedlist>
-
-        <para>如果发现了多个匹配，而您又不想使用预选中的匹配：</para>
-
-        <itemizedlist>
-          <listitem>
-            <para>在匹配查看器中选择喜欢的匹配：<keycombo> <keycap>Ctrl</keycap> <keycap>2</keycap> </keycombo> 选择第二个显示的匹配，<keycombo> <keycap>Ctrl</keycap> <keycap>3</keycap> </keycombo> 选择第三个，依此类推。</para>
-          </listitem>
-
-          <listitem>
-            <para>然后像刚才那样使用 <keycombo> <keycap>Ctrl</keycap> <keycap>I</keycap> </keycombo> 或 <keycombo> <keycap>Ctrl</keycap> <keycap>R</keycap> </keycombo> 快捷键。</para>
-          </listitem>
-        </itemizedlist>
-
-        <para>您可以让 OmegaT 打开片段时自动插入任何高于指定匹配百分比的第一个匹配。可通过<menuchoice> <guimenu>选项</guimenu> </menuchoice> 来设置该选项</para>
-      </section>
-
-      <section id="glossary.and.dictionary.matches">
-        <title>词汇表和词典匹配<indexterm class="singular">
-            <primary>匹配</primary> <secondary>词汇表、词典匹配</secondary>
-          </indexterm></title>
-
-        <para>项目中可能包含的词汇表和词典中的匹配术语将在词汇和字典显示窗格以供参考。</para>
-      </section>
-
-      <section id="use.searches">
-        <title>使用搜索功能</title>
-
-        <para><application>OmegaT</application> 提供了强大的搜索功能。使用 <keycombo> <keycap>Ctrl</keycap> <keycap>F</keycap> </keycombo> 调出搜索窗口，在“查找”文本框输入要搜索的单词或短语。另一种方法，在编辑器窗格的任意位置选择一个单词或短语，然后按 <keycombo> <keycap>Ctrl</keycap> <keycap>F</keycap> </keycombo>：刚才选中的单词或短语将自动插入之后打开的搜索窗口的“查找”文本框中。</para>
-      </section>
-
-      <section id="use.Google.Translate">
-        <title>使用机器翻译服务<indexterm class="singular">
-            <primary>匹配</primary> <secondary>机器翻译</secondary>
-          </indexterm></title>
-
-        <para>在机器翻译窗格中，如果激活了某种服务（请参阅<emphasis>选项&gt;机器翻译</emphasis>），那么您会看到一个当前片段的翻译建议。按 <emphasis>Ctrl+M </emphasis> 以用该建议替换目标片段。</para>
-      </section>
-    </section>
-
-    <section id="create.translated.documents">
-      <title>创建已译文档<indexterm class="singular">
-          <primary>项目文件</primary> <secondary>目标文件</secondary>
-        </indexterm></title>
-
-      <para>完成所有片段的翻译之后（如果愿意的话，也可在更早的时候），<application>OmegaT</application> 将会使用翻译记忆中储存的翻译更新目标文档。要完成这项工作，请选择菜单 <menuchoice> <shortcut> <keycombo> <keycap>Ctrl</keycap> <keycap>D</keycap> </keycombo> </shortcut> <guimenu>项目</guimenu> <guimenuitem>创建已译文档</guimenuitem> </menuchoice><indexterm class="singular">
-          <primary>快捷键</primary> <secondary>Ctrl+D - 创建已译文档</secondary>
-        </indexterm> <indexterm class="singular">
-          <primary>项目菜单</primary> <secondary>创建已译文档</secondary>
-        </indexterm>。<application>OmegaT</application> 将会为项目源文件夹中所有可翻译文档创建已译版本，无论它们是否已经被完整翻译。被完整或部分翻译的文件将会被保存到项目的目标文件夹中。为终结翻译工作，可用相关的应用程序打开目标文件（浏览器、字处理器……）对翻译成果的内容和格式进行检查。然后，可以回到 <application>OmegaT</application> 进行任何必须的修正工作，但不要忘记重新创建已译文档。</para>
-    </section>
-  </section>
-
-  <section id="how.to.handle.tagged.text">
-    <title>处理标记文本<indexterm class="singular">
-        <primary>标记文本</primary>
+  <title>五分钟内学会使用OmegaT！</title>
+
+  <section id="create.and.open.new.project">
+    <title>创建新项目<indexterm class="singular">
+        <primary>项目</primary> <secondary>新创建/打开</secondary>
       </indexterm></title>
 
-    <para><application>OmegaT</application> 使用特殊标签做标记以确保源文档的格式（如加粗、斜体等）不会丢失。<application>OmegaT</application> 标记由一个或多个字母跟着一个或多个数字组成，使用 &quot;/&quot; 字符来封闭（例如：&lt;f0&gt;，&lt;/f0&gt; &lt;br&gt;, &lt;/s2&gt; 等等）。您必须小心处理这些标记，以确保它们以正确的风格出现在目标片段中（参阅标记操作）。</para>
+    <para><remark>注：</remark>在Apple Mac上，请使用<keycap>Command</keycap>代替<keycap>Control</keycap>键。</para>
 
-    <section>
-      <title>一个例子……<indexterm class="singular">
-          <primary>标记文本</primary> <secondary>一个例子</secondary>
-        </indexterm></title>
+      <indexterm class="singular">
+        <primary>项目菜单</primary> <secondary>新建……</secondary>
+      </indexterm>
 
-      <para>在这些例子中，我们将它们突出显示以便更容易看到，但是在 <application>OmegaT</application> 中它们并不会被突出显示。以蓝色突出显示的 HTML 标记在 <application>OmegaT</application> 中将会被忽略，因为它们完整地包围某个片段。以绿色突出显示的标记必须由 <application>OmegaT</application> 进行处理，因为它们出现在片段之内。下面是一个 HTML 中的片段例子：</para>
+    <para>开始使用OmegaT时首先要创建项目，用来保存您的所有文件，例如源文件、翻译记忆、词汇表及您要翻译的文件。在<guimenu>项目</guimenu>菜单中选择<menuchoice><guimenuitem>新建……</guimenuitem></menuchoice>并输入项目名称。记住您创建项目的位置，之后还需要返回这里。</para>
 
-      <para><literal>&lt;p&gt;A different display font can be selected via
-      the &lt;b&gt;Display Font&lt;/b&gt;dialog. Open it via
-      the &lt;i&gt;Options&lt;/i&gt; →&lt;i&gt;Display Font...&lt;/i&gt; menu
-      item. The font type and size can be changed from the
-      dialog.&lt;/p&gt;</literal></para>
+    <para>给项目命名后将出现<guilabel>创建新项目</guilabel>对话框。在该对话框顶端选择源文件语言和目标语言，并点击<guibutton>OK</guibutton>继续。</para>
 
-      <para>下面是 <application>OmegaT</application> 如何以南非荷兰语译文来显示它们：</para>
+    <para>如果对该对话框中的其他设置有兴趣，您可在任何时候按下<keycap>Ctrl+E</keycap>来将其打开。</para>
 
-      <figure id="fig.tagged.segment.source">
-        <title>源 <indexterm class="singular">
-            <primary>片段、源和目标 - 图示</primary>
-          </indexterm>HTML 片段</title>
+    <para>接着，<guilabel>项目文件</guilabel>对话框出现。点击<guibutton>导入源文件……</guibutton>按钮选择源文件。OmegaT跟着会复制选择的文件到新建项目的<filename>/source/</filename>子文件夹。当<guilabel>编辑器</guilabel>窗格中加载了源文件后，您可以关闭<guilabel>项目文件</guilabel>对话框。</para>
+  </section>
 
-        <mediaobject>
-          <imageobject role="html">
-            <imagedata fileref="images/tagged_segment.png"/>
-          </imageobject>
+  <section id="translate.the.segments.one.by.one">
+    <title>翻译文件</title>
 
-          <imageobject role="fo">
-            <imagedata fileref="images/tagged_segment.png" width="80%"/>
-          </imageobject>
-        </mediaobject>
-      </figure>
+    <para>OmegaT每次呈现一个片段供您翻译。翻译一个片段后，按下<keycap>Ctrl+U</keycap>将前往下一个未译片段（或使用<keycap>Ctrl+Shift+U</keycap>前往下一个已译片段）。当您想看看译文的最终格式时，按下<keycap>Ctrl+D</keycap>会生成已译文档，它们在项目文件夹中的<filename>/target/</filename>子文件夹。在翻译过程中使用<guimenu>编辑</guimenu>和<guimenu>前往</guimenu>菜单可以执行多种有用的功能。</para>
+  </section>
 
-      <para>当 <application>OmegaT</application> 创建已译文档时，HTML 看起来将像下面的样子：</para>
+  <section>
+    <title>检验标签</title>
 
-      <figure id="fig.tagged.segment.target">
-        <title>目标 HTML 片段</title>
+    <para>如果源文件是格式化文件，如Microsoft Word、LibreOffice Writer或HTML，OmegaT会把待译文本周围的格式转换为标签。经常文档都会含有无需处理的格式标签，但它们对源文件（和已译文件）也很重要。源语言也许类似这样：<mediaobject>
+      <imageobject role="html">
+        <imagedata align="justify" fileref="images/InstantGuide_1.png"/>
+      </imageobject>
+      <imageobject role="fo">
+        <imagedata align="justify" fileref="images/InstantGuide_1.png" width="40%"/>
+      </imageobject>
+    </mediaobject>
+    </para>
 
-        <mediaobject>
-          <imageobject role="html">
-            <imagedata fileref="images/tagged_segment_target.png"/>
-          </imageobject>
+    <para>但OmegaT会把该语句以下面的样式呈现：<mediaobject>
+      <imageobject role="html">
+        <imagedata align="justify" fileref="images/InstantGuide_2.png"/>
+      </imageobject>
+      <imageobject role="fo">
+        <imagedata align="justify" fileref="images/InstantGuide_2.png" width="45%"/>
+      </imageobject>
+    </mediaobject>
+    </para>
+    
+    <para>OmegaT中的标记为灰色，因此很容易识别。这些标签受到保护，这样您无法修改它们的内容，可以删除、手动输入或移动它们在目标语句中的位置。无论如何当您输入了错误的格式标签，那么已译文件可能无法打开。因此，在生成已译文件前请按下<keycap>Ctrl+Shift+V</keycap>以检验标签是否正确。</para>
+  </section>
 
-          <imageobject role="fo">
-            <imagedata fileref="images/tagged_segment_target.png" width="80%"/>
-          </imageobject>
-        </mediaobject>
-      </figure>
-    </section>
+  <section>
+    <title>生成已译文件</title>
 
-    <section id="tag.verification">
-      <title>标记验证<indexterm class="singular">
-          <primary>标记文本</primary> <secondary>标记验证</secondary>
-        </indexterm><indexterm class="singular">
-          <primary>标记验证</primary>
-        </indexterm></title>
+    <para>当您确定在翻译中没有标签错误后，按下<keycap>Ctrl+D</keycap>则会在项目文件夹的<filename>/target/</filename>子文件夹中生成目标文件。</para>
+  </section>
 
-      <para><application>OmegaT</application> 不会自动检测已译文档中的错误标签。因此在将文档交付给客户之前，您必须检查标签的错误。从菜单中选择 <menuchoice> <shortcut> <keycombo> <keycap>Ctrl</keycap> <keycap>T</keycap> </keycombo> </shortcut> <guimenu>工具</guimenu> <guimenuitem>检验标签……</guimenuitem> </menuchoice>。将在一个表格中显示原文和目标中标签不一致的那些片段。点击片段序号。编辑器将把您自动带到错误片段处，然后您就可以纠正错误的标签了。进行修正后，再次按下 <keycombo> <keycap>Ctrl</keycap> <keycap>T<indexterm class="singular">
-              <primary>快捷键</primary> <secondary>Ctrl+T - 标记验证</secondary> <seealso>标记文本</seealso>
-            </indexterm></keycap> </keycombo> 来检查其他。请注意标签检查可能会把正确的标记识别为错误——例如，为了让翻译符合语法而调整标记的顺序时。请把这种情况视为标签检查引起的副作用。</para>
+  <section>
+    <title>了解更多</title>
 
-      <para>某些情况下，错误的标签甚至可能导致文档无法打开。此时无需惊慌——您仍然还有可用的源文件及翻译，您只需在创建翻译文档之前，确保已经修正了所有的标签错误。最后一点，您应该总是通过相关的阅读或编辑器打开已译文档来仔细检查最终格式。</para>
-    </section>
+    <itemizedlist>
+      <listitem>
+        <para>如果某个文件无法加载到<guilabel>编辑器</guilabel>窗格，那么该文件可能是OmegaT无法处理的格式。请参阅<link linkend="chapter.file.filters">文件过滤器</link>了解OmegaT能处理的文件格式列表。</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>您可以为每个新工作创建新项目，且随时可以添加新的源文件到项目中。</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>要让自己想起项目的最初设置，请按下<keycap>Ctrl+E</keycap>打开项目设置对话框。要查看项目中文件列表，请按下<keycap>Ctrl+L</keycap>打开<guilabel>项目文件</guilabel>对话框。</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>在翻译结束后，OmegaT会导出名称分别为<filename>level1</filename>、<filename>level2</filename>和<filename>omegat</filename>的三种翻译记忆文件到项目文件夹。<filename>level1</filename>和<filename>level2</filename>翻译记忆可以共享给使用其他翻译工具的用户。名称为<filename>omegat</filename>的翻译记忆可被OmegaT自身用于将来创建的项目。如果您把这种翻译记忆文件放在项目的<filename>/tm/</filename>子文件夹，则OmegaT会自动在其中搜索类似的片段（被称为“模糊匹配”）。</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>按下<keycap>Ctrl+Shift+G</keycap>可以添加新术语到词汇表，也可以复制现有的词汇表到项目文件夹的<filename>/glossary/</filename>子文件夹，OmegaT会自动在其中搜索单词。</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>常常需要在源文本和翻译中搜索单词和短语，需要时请按下<keycap>Ctrl+F</keycap>打开<guilabel>文本搜索</guilabel>对话框。</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>更全面的介绍请参阅Omegat网站上的<ulink url="http://www.omegat.org/en/tutorial/OmegaT%20for%20Beginners.pdf">OmegaT初学者入门</ulink>。如果您需要关于OmegaT某些方面的帮助，可随时加入<ulink url="http://tech.groups.yahoo.com/group/OmegaT/">OmegaT用户组</ulink>。</para>
+      </listitem>
+    </itemizedlist>
   </section>
 </chapter>

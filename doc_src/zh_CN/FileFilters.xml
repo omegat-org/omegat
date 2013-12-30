@@ -23,7 +23,13 @@
     </listitem>
   </itemizedlist>
 
+  <para>要查看OmegaT能处理哪些文件格式，请打开<guimenuitem>选项&gt;文件过滤器……</guimenuitem>菜单</para>
+
   <para>多数用户应该会对缺省的文件过滤器选项感到满意。如果不满意，可以从主菜单<emphasis role="bold">选项→文件过滤器……</emphasis>打开主对话框。通过选择项目属性中的<emphasis role="bold">文件过滤器……</emphasis>属性，您还可以启用仅用于当前项目的项目专用文件过滤器.</para>
+
+  <para>通过<emphasis role="bold">项目→属性……</emphasis>您还可以启用项目专用过滤器。点击<guibutton>文件过滤器</guibutton>按钮并选中<guimenuitem>启用项目专用过滤器</guimenuitem><indexterm class="singular">
+      <primary>文件过滤器</primary> <secondary>项目专用文件过滤器</secondary>
+    </indexterm>复选框。此时文件过滤器配置文件的副本会与项目保存在一起。如果以后您改变了过滤器，则只更新当前项目的过滤器而用户过滤器保持不变。</para>
 
   <para><emphasis role="bold">警告！</emphasis>如果您在项目打开的时候改变过滤器选项，您必须重新载入项目以使改变生效。</para>
 
@@ -32,7 +38,7 @@
         <primary>文件过滤器</primary> <secondary>对话框</secondary>
       </indexterm></title>
 
-    <para>该对话框列出了可用的文件过滤器。如果您不想使用 OmegaT 翻译某些类型的文件，您可以将它们文件名旁边的复选框的对勾符号去掉来关闭该过滤器。这样一来，在载入项目时 OmegaT 会忽略这些文件，并且在创建目标文档时对它们进行原封不动的复制。如果之后您又决定使用这些过滤器，只需勾上这些复选框。点击<emphasis role="bold">缺省【Defaults】</emphasis>可将文件过滤器恢复为缺省设置。要编辑过滤器处理文件时使用的编码，请从列表中选中该过滤器然后点击<emphasis role="bold">编辑</emphasis>按钮。</para>
+    <para>该对话框列出了可用的文件过滤器。如果您不想使用 OmegaT 翻译某种类型的文件，您可以取消选中该文件名旁边的复选框来关闭其过滤器。这样一来，在载入项目时 OmegaT 会忽略这些文件，并且在创建目标文档时对它们进行原封不动的复制。如果之后您又决定使用这些过滤器，只需勾上这些复选框。点击<emphasis role="bold">缺省【Defaults】</emphasis>可将文件过滤器恢复为缺省设置。要编辑过滤器处理文件时使用的编码，请从列表中选中该过滤器然后点击<emphasis role="bold">编辑</emphasis>按钮。</para>
   </section>
 
   <section id="filters.options">
@@ -40,7 +46,7 @@
         <primary>文件过滤器</primary> <secondary>选项</secondary>
       </indexterm></title>
 
-    <para>五种过滤器（文本文件、 XHTML 文件、HTML 和 XHTML 文件、开放文档／OpenOffice.org 文件和 微软开放 XML 文件）有一个或多个特殊选项。要修改这些选项，请从列表中选中该过滤器，并点击 <emphasis role="bold">选项【Options】</emphasis>按钮。可用选项包括：</para>
+    <para>多种过滤器（文本文件、XHTML文件、HTML和XHTML文件、OpenDocument文件和Microsoft Open XML文件）有一个或多个特殊选项。要修改这些选项，请从列表中选中该过滤器，并点击 <emphasis role="bold">选项【Options】</emphasis>按钮。可用选项包括：</para>
 
     <para><emphasis role="bold">文本文件</emphasis></para>
 
@@ -62,11 +68,33 @@
       </listitem>
     </itemizedlist>
 
+    <itemizedlist>
+      <listitem>
+        <para><emphasis>跳过PO头部</emphasis></para>
+
+        <para>如果选中此选项，则PO头部会被跳过而保持不变。</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis>自动替换头部中的‘nplurals=INTEGER; plural=EXPRESSION;’</emphasis></para>
+
+        <para><emphasis><emphasis>此选项会让OmegaT覆盖PO文件头部的规范并在选择的目标语言中使用默认规范。</emphasis></emphasis></para>
+      </listitem>
+    </itemizedlist>
+
     <para><emphasis role="bold">XHTML 文件</emphasis></para>
 
     <itemizedlist>
       <listitem>
-        <para><emphasis>翻译下列属性</emphasis>——已选择的属性会作为片段出现在编辑器窗口中。</para>
+        <para><emphasis>新增或重写HTML和XHTML文件中的编码声明</emphasis>：目标文件通常使用与源文件不同的编码字符集（不论是显式或隐式定义）。通过该选项译者可以指定目标文件是否包含编码声明。例如，如果文件过滤器指定目标文件的编码方案为UTF8，则选择总是能确保已译文件中包含此信息。</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis>翻译下列属性</emphasis>：已选择的属性会作为片段出现在编辑器窗口中。</para>
       </listitem>
     </itemizedlist>
 
@@ -78,13 +106,21 @@
 
     <itemizedlist>
       <listitem>
-        <para><emphasis>忽略匹配正则表达式的文本</emphasis>：匹配该正则表达式的文本会被忽略。</para>
+        <para><emphasis>忽略匹配正则表达式的文本</emphasis>：匹配该正则表达式的文本会被忽略。它在标签检验中显示为渲染红。源片段中匹配的文本以斜体显示。</para>
       </listitem>
     </itemizedlist>
 
     <itemizedlist>
       <listitem>
-        <para><emphasis>不要翻译元标签的属性内容……：</emphasis>属性键值对，用逗号分隔，将保持未译状态</para>
+        <para><emphasis>不翻译元标签……的内容属性：</emphasis>下列元标签将不进行翻译。</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis>不翻译含下列属性键值对（逗号分隔）的标签内容</emphasis>：匹配列表中键值对的标签内容将被忽略。</para>
+
+        <para>在需要根据属性值来不翻译一些标签时很有用。例如，对于<literal>&lt;div class=&quot;hide&quot;&gt; &lt;span translate=&quot;no&quot;&gt;</literal>您可以定义键值对来保持其未译状态。对于上面这个例子，定义字段应包含：<literal>class=hide, translate=no </literal></para>
       </listitem>
     </itemizedlist>
 
@@ -160,7 +196,13 @@
 
     <itemizedlist>
       <listitem>
-        <para><emphasis>不要翻译元标签的属性内容……：</emphasis>属性键值对，用逗号分隔，将保持未译状态</para>
+        <para><emphasis>不翻译元标签……的内容属性：</emphasis>下列元标签将不进行翻译。</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis>不翻译含下列属性键值对（逗号分隔）的标签内容</emphasis>：匹配列表中键值对的标签内容将被忽略。</para>
       </listitem>
     </itemizedlist>
 
@@ -174,7 +216,7 @@
       </listitem>
     </itemizedlist>
 
-    <para><emphasis role="bold">开放文档/OpenOffice.org 文件</emphasis></para>
+    <para><emphasis role="bold">Open Document格式（ODF）文件</emphasis></para>
 
     <itemizedlist>
       <listitem>
@@ -194,9 +236,9 @@
 
     <section id="source.filetype.and.filename.pattern">
       <title><indexterm class="singular">
-          <primary>源文件</primary> <secondary>文件类型、文件名模式</secondary>
+          <primary>源文件</primary> <secondary>文件类型和文件名模式</secondary>
         </indexterm>源文件类型、文件名模式<indexterm class="singular">
-          <primary>文件过滤器</primary> <secondary>源文件类型、文件名</secondary>
+          <primary>文件过滤器</primary> <secondary>文件类型和文件名模式</secondary>
         </indexterm></title>
 
       <para>当 OmegaT 在源文件夹中发现一个文件时，它将首先根据文件的扩展名试着选择过滤器。更确切地说，OmegaT 尝试着用每个过滤器的源文件名模式对文件名进行匹配。例如，<literal>*.xhtml </literal>模式将会匹配任何扩展名为 <literal>.xhtml</literal> 的文件。如果找到了合适的过滤器，它将被用来处理该文件。比如说在缺省情况下 XHTML 过滤器将会用来处理扩展名为 .xhtml 的文件。 您可以对每个文件过滤器要处理文件的名称模式进行修改或增添。源文件名模式中使用的匹配字符与<emphasis role="bold">搜索中所使用的类似。</emphasis>'*' 字符匹配零个或多个字符。'?' 字符只匹配一个字符。其他所有字符代表自身。比如，如果您希望文本过滤器处理 readme 文件（<literal>readme, read.me</literal> 和 <literal>readme.txt</literal>），那么您应该使用模式 <literal>read*</literal>.</para>
@@ -214,7 +256,7 @@
       </indexterm>
 
       <indexterm class="singular">
-        <primary>文件过滤器</primary> <secondary>源编码、目标编码</secondary>
+        <primary>文件过滤器</primary> <secondary>源、目标——编码</secondary>
       </indexterm>
 
       <para>仅少量文件格式必须指定强制性的编码方式。未指定编码方式的文件格式将使用您所设定的匹配该名称的扩展名的编码方式。例如，缺省情况下 <literal>.txt</literal> 文件将会使用系统缺省的编码导入。您可以对每种源文件名模式的源编码进行修改。这些文件也可以任何编码方式输出。缺省情况下，已译文件的编码与源文件的编码相同。源和目标编码字段使用的组合框包括了所支持的全部编码。&lt;自动&gt;将编码选择工作留给 <application>OmegaT</application>。以下是其工作原理：</para>
@@ -233,7 +275,7 @@
 
       <itemizedlist>
         <listitem>
-          <para><application>OmegaT</application> 为文本文件使用缺省的系统编码。</para>
+          <para>OmegaT 为文本文件使用缺省的系统编码。</para>
         </listitem>
       </itemizedlist>
     </section>
@@ -245,7 +287,7 @@
 
       <para>有时您也需希望系统自动将译好的的文件重新命名，比如在文件名后加上语言代码。目标文件名模式使用特殊的语法规则，因此如果希望编辑这些字段的话，您必须点击<emphasis role="bold">编辑……</emphasis>以使用<indexterm class="singular">
           <primary>文件过滤器</primary> <secondary>对话框</secondary>
-        </indexterm>编辑模式对话框。如果您想恢复到缺省的过滤器设置，点击<emphasis role="bold">缺省</emphasis>。您也可以在文件过滤器对话框中的目标文件名模式字段中直接修改名称。模式编辑对话框提供了以下选项：</para>
+        </indexterm>编辑模式对话框。如果您想恢复到缺省的过滤器设置，点击<emphasis role="bold">缺省</emphasis>。您也可以在文件过滤器对话框中的目标文件名模式字段中直接修改名称。编辑模式对话框提供了以下选项：</para>
 
       <itemizedlist>
         <listitem>
@@ -257,29 +299,91 @@
         <listitem>
           <para><literal>${nameOnly}</literal>——只插入源文件的名称，而不包括扩展名。</para>
         </listitem>
-      </itemizedlist>
 
-      <itemizedlist>
         <listitem>
-          <para><literal>${targetLocale}</literal>——目标文件区域设置代码（形式为 &quot;xx_YY&quot;）。</para>
+          <para><literal>${extension} </literal>——源文件扩展名</para>
         </listitem>
       </itemizedlist>
 
       <itemizedlist>
         <listitem>
-          <para><literal>${targetLanguage}</literal>——目标语言和国家代码（形式为 &quot;XX-YY&quot;）。</para>
+          <para><literal>${targetLocale}</literal>——目标文件区域设置代码（形式为“xx_YY”）。</para>
         </listitem>
       </itemizedlist>
 
       <itemizedlist>
         <listitem>
-          <para><literal>${targetLanguageCode}</literal>——目标语言代码（&quot;XX&quot;）。</para>
+          <para><literal>${targetLanguage}</literal>——目标语言和国家代码（形式为“XX-YY”）。</para>
         </listitem>
       </itemizedlist>
 
       <itemizedlist>
         <listitem>
-          <para><literal>${targetCountryCode}</literal>——目标国家代码（&quot;YY&quot;）。</para>
+          <para><literal>${targetLanguageCode}</literal>——目标语言——仅“XX”</para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para><literal>${targetCountryCode}</literal>——目标国家——仅“YY”</para>
+        </listitem>
+
+        <listitem>
+          <para><literal>${timestamp-????}</literal>——多种格式的生成时间系统日期时间</para>
+
+          <para>请参阅<ulink url="http://docs.oracle.com/javase/1.4.2/docs/api/java/text/SimpleDateFormat.html">Oracle文档</ulink>了解“SimpleDateFormat”格式示例</para>
+        </listitem>
+
+        <listitem>
+          <para><literal>${system-os-name}</literal>——电脑使用的操作系统</para>
+        </listitem>
+
+        <listitem>
+          <para><literal>${system-user-name}</literal>——系统用户名</para>
+        </listitem>
+
+        <listitem>
+          <para><literal>${system-host-name}</literal>——系统主机名</para>
+        </listitem>
+
+        <listitem>
+          <para><literal>${file-source-encoding}</literal>——源文件编码</para>
+        </listitem>
+
+        <listitem>
+          <para><literal>${file-target-encoding}</literal>——目标文件编码</para>
+        </listitem>
+
+        <listitem>
+          <para><literal>${targetLocaleLCID}</literal>——微软目标区域设置</para>
+        </listitem>
+      </itemizedlist>
+
+      <para>对${nameOnly}和${Extension}变量还有附加变量可用。在文件名存在疑义的情况下，其中某个可以适用于<literal>${仅文件名</literal><emphasis>-扩展数字</emphasis>} and <literal>${扩展名</literal>-<emphasis>扩展数字} </emphasis>形式的变量。例如如果原始文件名为Document.xx.docx，则变量与其对应的结果如下：</para>
+
+      <itemizedlist>
+        <listitem>
+          <para><literal>${nameOnly-0}</literal> Document</para>
+        </listitem>
+
+        <listitem>
+          <para><literal>${nameOnly-1}</literal> Document.xx</para>
+        </listitem>
+
+        <listitem>
+          <para><literal>${nameOnly-2}</literal> Document.xx.docx</para>
+        </listitem>
+
+        <listitem>
+          <para><literal>${extension-0}</literal> docx</para>
+        </listitem>
+
+        <listitem>
+          <para><literal>${extension-1}</literal> xx.docx</para>
+        </listitem>
+
+        <listitem>
+          <para><literal>${extension-2}</literal> Document.xx.docx</para>
         </listitem>
       </itemizedlist>
     </section>

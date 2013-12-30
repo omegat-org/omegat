@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
 <appendix id="appendix.languages">
-  <title>语言 - ISO 639 代码列表<indexterm class="singular">
+  <title>语言－ISO 639 代码列表<indexterm class="singular">
     <primary>语言</primary>
   </indexterm>
   <indexterm class="singular">
-    <primary>ISO 语言代码</primary>
+    <primary>ISO语言代码</primary>
   </indexterm>
   <indexterm class="singular">
     <primary>项目</primary> <secondary>属性</secondary> <seealso>语言</seealso>
   </indexterm>
   </title>
 
-  <para>请检查 <ulink url="http://www.sil.org/ISO639-3/codes.asp"> ISO 639 代码表</ulink> 来了解更多和更新的语言代码信息。</para>
+  <para>请检查<ulink url="http://www.sil.org/ISO639-3/codes.asp">ISO 639代码表</ulink>来了解更多和更新的语言代码信息。</para>
 
   <table id="table.language.code.list">
     <title>ISO 639-1/639-2 语言代码列表</title>
     <tgroup cols="3" align="left" colsep="1" rowsep="1">
-      <colspec align="left" colnum="1" colwidth="200"/>
-      <colspec align="left" colnum="2" colwidth="100"/>
-      <colspec align="left" colnum="3" colwidth="100"/>
+      <colspec align="left" colnum="1"/>
+      <colspec align="left" colnum="2"/>
+      <colspec align="left" colnum="3"/>
       <thead>
         <row>
           <entry align="left">语言名称</entry>
@@ -29,12 +29,12 @@
       </thead>
       <tbody>
         <row>
-	  <entry>Abkhaz</entry>
+	  <entry>阿布卡兹语</entry>
 	  <entry>ab</entry>
 	  <entry>abk</entry>
 	</row>
         <row>
-	  <entry>Afar</entry>
+	  <entry>阿法尔语</entry>
 	  <entry>aa</entry>
 	  <entry>aar</entry>
 	</row>
@@ -44,7 +44,7 @@
 	  <entry>afr</entry>
 	</row>
         <row>
-	  <entry>Akan</entry>
+	  <entry>库阿语</entry>
 	  <entry>ak</entry>
 	  <entry>aka</entry>
 	</row>
@@ -64,32 +64,32 @@
 	  <entry>ara</entry>
 	</row>
         <row>
-	  <entry>Aragonese</entry>
+	  <entry>阿拉贡语</entry>
 	  <entry>an</entry>
 	  <entry>arg</entry>
 	</row>
         <row>
-	  <entry>Armenian</entry>
+	  <entry>亚美尼亚语</entry>
 	  <entry>hy</entry>
 	  <entry>hye</entry>
 	</row>
         <row>
-	  <entry>Assamese</entry>
+	  <entry>阿萨姆语</entry>
 	  <entry>as</entry>
 	  <entry>asm</entry>
 	</row>
         <row>
-	  <entry>Avaric</entry>
+	  <entry>阿瓦尔语</entry>
 	  <entry>av</entry>
 	  <entry>ava</entry>
 	</row>
         <row>
-	  <entry>Avestan</entry>
+	  <entry>阿维斯陀语</entry>
 	  <entry>ae</entry>
 	  <entry>ave</entry>
 	</row>
         <row>
-	  <entry>Aymara</entry>
+	  <entry>艾马拉语</entry>
 	  <entry>ay</entry>
 	  <entry>aym</entry>
 	</row>
@@ -99,12 +99,12 @@
 	  <entry>aze</entry>
 	</row>
         <row>
-	  <entry>Bambara</entry>
+	  <entry>班巴拉语</entry>
 	  <entry>bm</entry>
 	  <entry>bam</entry>
 	</row>
         <row>
-	  <entry>Bashkir</entry>
+	  <entry>巴什基尔语</entry>
 	  <entry>ba</entry>
 	  <entry>bak</entry>
 	</row>
@@ -124,12 +124,12 @@
 	  <entry>ben</entry>
 	</row>
         <row>
-	  <entry>Bihari</entry>
+	  <entry>比尔哈语</entry>
 	  <entry>bh</entry>
 	  <entry>bih</entry>
 	</row>
         <row>
-	  <entry>Bislama</entry>
+	  <entry>比斯拉马语</entry>
 	  <entry>bi</entry>
 	  <entry>bis</entry>
 	</row>
@@ -149,7 +149,7 @@
 	  <entry>bul</entry>
 	</row>
         <row>
-	  <entry>Burmese</entry>
+	  <entry>缅甸语</entry>
 	  <entry>my</entry>
 	  <entry>mya</entry>
 	</row>
@@ -159,42 +159,42 @@
 	  <entry>cat</entry>
 	</row>
         <row>
-	  <entry>Chamorro</entry>
+	  <entry>查莫罗语</entry>
 	  <entry>ch</entry>
 	  <entry>cha</entry>
 	</row>
         <row>
-	  <entry>Chechen</entry>
+	  <entry>车臣语</entry>
 	  <entry>ce</entry>
 	  <entry>che</entry>
 	</row>
         <row>
-	  <entry>Chichewa, Chewa, Nyanja</entry>
+	  <entry>奇契瓦语、切瓦语、尼安哈语</entry>
 	  <entry>ny</entry>
 	  <entry>nya</entry>
 	</row>
         <row>
-	  <entry>Chinese</entry>
+	  <entry>中文</entry>
 	  <entry>zh</entry>
 	  <entry>zho</entry>
 	</row>
         <row>
-	  <entry>Chuvash</entry>
+	  <entry>楚瓦什语</entry>
 	  <entry>cv</entry>
 	  <entry>chv</entry>
 	</row>
         <row>
-	  <entry>Cornish</entry>
+	  <entry>凯尔特语</entry>
 	  <entry>kw</entry>
 	  <entry>cor</entry>
 	</row>
         <row>
-	  <entry>Corsican</entry>
+	  <entry>科西嘉文</entry>
 	  <entry>co</entry>
 	  <entry>cos</entry>
 	</row>
         <row>
-	  <entry>Cree</entry>
+	  <entry>克里语</entry>
 	  <entry>cr</entry>
 	  <entry>cre</entry>
 	</row>
@@ -214,7 +214,7 @@
 	  <entry>dan</entry>
 	</row>
         <row>
-	  <entry>Divehi, Dhivehi, Maldivian</entry>
+	  <entry>地维希语、迪维希语、马尔代夫语</entry>
 	  <entry>dv</entry>
 	  <entry>div</entry>
 	</row>
@@ -244,17 +244,17 @@
 	  <entry>est</entry>
 	</row>
         <row>
-	  <entry>Ewe</entry>
+	  <entry>埃维语</entry>
 	  <entry>ee</entry>
 	  <entry>ewe</entry>
 	</row>
         <row>
-	  <entry>Faroese</entry>
+	  <entry>法罗语</entry>
 	  <entry>fo</entry>
 	  <entry>fao</entry>
 	</row>
         <row>
-	  <entry>Fijian</entry>
+	  <entry>飞济群岛语</entry>
 	  <entry>fj</entry>
 	  <entry>fij</entry>
 	</row>
@@ -269,7 +269,7 @@
 	  <entry>fra</entry>
 	</row>
         <row>
-	  <entry>Fula, Fulah, Pulaar, Pular</entry>
+	  <entry>弗拉语、富拉语、弗拉尼语、普拉尔语</entry>
 	  <entry>ff</entry>
 	  <entry>ful</entry>
 	</row>
@@ -279,7 +279,7 @@
 	  <entry>glg</entry>
 	</row>
         <row>
-	  <entry>Georgian</entry>
+	  <entry>格鲁吉亚语</entry>
 	  <entry>ka</entry>
 	  <entry>kat</entry>
 	</row>
@@ -289,12 +289,12 @@
 	  <entry>deu</entry>
 	</row>
         <row>
-	  <entry>Greek, Modern</entry>
+	  <entry>希腊语（现代）</entry>
 	  <entry>el</entry>
 	  <entry>ell</entry>
 	</row>
         <row>
-	  <entry>Guaraní</entry>
+	  <entry>瓜拉尼语</entry>
 	  <entry>gn</entry>
 	  <entry>grn</entry>
 	</row>
@@ -304,22 +304,22 @@
 	  <entry>guj</entry>
 	</row>
         <row>
-	  <entry>Haitian, Haitian Creole</entry>
+	  <entry>海地语、海地克里奥尔语</entry>
 	  <entry>ht</entry>
 	  <entry>hat</entry>
 	</row>
         <row>
-	  <entry>Hausa</entry>
+	  <entry>豪撒语</entry>
 	  <entry>ha</entry>
 	  <entry>hau</entry>
 	</row>
         <row>
-	  <entry>Hebrew (modern)</entry>
+	  <entry>希伯来语（现代）</entry>
 	  <entry>he</entry>
 	  <entry>heb</entry>
 	</row>
         <row>
-	  <entry>Herero</entry>
+	  <entry>赫勒娄语</entry>
 	  <entry>hz</entry>
 	  <entry>her</entry>
 	</row>
@@ -329,7 +329,7 @@
 	  <entry>hin</entry>
 	</row>
         <row>
-	  <entry>Hiri Motu</entry>
+	  <entry>希里莫图语</entry>
 	  <entry>ho</entry>
 	  <entry>hmo</entry>
 	</row>
@@ -339,17 +339,17 @@
 	  <entry>hun</entry>
 	</row>
         <row>
-	  <entry>Interlingua</entry>
+	  <entry>国际语</entry>
 	  <entry>ia</entry>
 	  <entry>ina</entry>
 	</row>
         <row>
-	  <entry>Indonesian</entry>
+	  <entry>印尼语群</entry>
 	  <entry>id</entry>
 	  <entry>ind</entry>
 	</row>
         <row>
-	  <entry>Interlingue</entry>
+	  <entry>国际语</entry>
 	  <entry>ie</entry>
 	  <entry>ile</entry>
 	</row>
@@ -359,22 +359,22 @@
 	  <entry>gle</entry>
 	</row>
         <row>
-	  <entry>Igbo</entry>
+	  <entry>伊博语</entry>
 	  <entry>ig</entry>
 	  <entry>ibo</entry>
 	</row>
         <row>
-	  <entry>Inupiaq</entry>
+	  <entry>依努皮亚语</entry>
 	  <entry>ik</entry>
 	  <entry>ipk</entry>
 	</row>
         <row>
-	  <entry>Ido</entry>
+	  <entry>伊多语</entry>
 	  <entry>io</entry>
 	  <entry>ido</entry>
 	</row>
         <row>
-	  <entry>Icelandic</entry>
+	  <entry>冰岛语</entry>
 	  <entry>is</entry>
 	  <entry>isl</entry>
 	</row>
@@ -384,7 +384,7 @@
 	  <entry>ita</entry>
 	</row>
         <row>
-	  <entry>Inuktitut</entry>
+	  <entry>伊努伊特语</entry>
 	  <entry>iu</entry>
 	  <entry>iku</entry>
 	</row>
@@ -394,12 +394,12 @@
 	  <entry>jpn</entry>
 	</row>
         <row>
-	  <entry>Javanese</entry>
+	  <entry>爪哇语</entry>
 	  <entry>jv</entry>
 	  <entry>jav</entry>
 	</row>
         <row>
-	  <entry>Kalaallisut, Greenlandic</entry>
+	  <entry>格陵兰语</entry>
 	  <entry>kl</entry>
 	  <entry>kal</entry>
 	</row>
@@ -409,27 +409,27 @@
 	  <entry>kan</entry>
 	</row>
         <row>
-	  <entry>Kanuri</entry>
+	  <entry>卡努里语</entry>
 	  <entry>kr</entry>
 	  <entry>kau</entry>
 	</row>
         <row>
-	  <entry>Kashmiri</entry>
+	  <entry>克什米尔语</entry>
 	  <entry>ks</entry>
 	  <entry>kas</entry>
 	</row>
         <row>
-	  <entry>Kazakh</entry>
+	  <entry>哈萨克语</entry>
 	  <entry>kk</entry>
 	  <entry>kaz</entry>
 	</row>
         <row>
-	  <entry>Khmer</entry>
+	  <entry>高棉语</entry>
 	  <entry>km</entry>
 	  <entry>khm</entry>
 	</row>
         <row>
-	  <entry>Kikuyu, Gikuyu</entry>
+	  <entry>吉库犹语</entry>
 	  <entry>ki</entry>
 	  <entry>kik</entry>
 	</row>
@@ -439,17 +439,17 @@
 	  <entry>kin</entry>
 	</row>
         <row>
-	  <entry>Kirghiz, Kyrgyz</entry>
+	  <entry>吉尔吉斯语</entry>
 	  <entry>ky</entry>
 	  <entry>kir</entry>
 	</row>
         <row>
-	  <entry>Komi</entry>
+	  <entry>科米语</entry>
 	  <entry>kv</entry>
 	  <entry>kom</entry>
 	</row>
         <row>
-	  <entry>Kongo</entry>
+	  <entry>刚果语</entry>
 	  <entry>kg</entry>
 	  <entry>kon</entry>
 	</row>
@@ -464,32 +464,32 @@
 	  <entry>kur</entry>
 	</row>
         <row>
-	  <entry>Kwanyama, Kuanyama</entry>
+	  <entry>库瓦亚马语</entry>
 	  <entry>kj</entry>
 	  <entry>kua</entry>
 	</row>
         <row>
-	  <entry>Latin</entry>
+	  <entry>拉丁语</entry>
 	  <entry>la</entry>
 	  <entry>lat</entry>
 	</row>
         <row>
-	  <entry>Luxembourgish, Letzeburgesch</entry>
+	  <entry>卢森堡语</entry>
 	  <entry>lb</entry>
 	  <entry>ltz</entry>
 	</row>
         <row>
-	  <entry>Luganda</entry>
+	  <entry>卢干达语</entry>
 	  <entry>lg</entry>
 	  <entry>lug</entry>
 	</row>
         <row>
-	  <entry>Limburgish, Limburgan, Limburger</entry>
+	  <entry>林堡语</entry>
 	  <entry>li</entry>
 	  <entry>lim</entry>
 	</row>
         <row>
-	  <entry>Lingala</entry>
+	  <entry>林加拉语</entry>
 	  <entry>ln</entry>
 	  <entry>lin</entry>
 	</row>
@@ -504,7 +504,7 @@
 	  <entry>lit</entry>
 	</row>
         <row>
-	  <entry>Luba-Katanga</entry>
+	  <entry>卢巴-加丹加语</entry>
 	  <entry>lu</entry>
 	  <entry>lub</entry>
 	</row>
@@ -514,7 +514,7 @@
 	  <entry>lav</entry>
 	</row>
         <row>
-	  <entry>Manx</entry>
+	  <entry>马恩岛语</entry>
 	  <entry>gv</entry>
 	  <entry>glv</entry>
 	</row>
@@ -524,7 +524,7 @@
 	  <entry>mkd</entry>
 	</row>
         <row>
-	  <entry>Malagasy</entry>
+	  <entry>马达加斯加语</entry>
 	  <entry>mg</entry>
 	  <entry>mlg</entry>
 	</row>
@@ -539,22 +539,22 @@
 	  <entry>mal</entry>
 	</row>
         <row>
-	  <entry>Maltese</entry>
+	  <entry>马其他语</entry>
 	  <entry>mt</entry>
 	  <entry>mlt</entry>
 	</row>
         <row>
-	  <entry>Māori</entry>
+	  <entry>毛利语</entry>
 	  <entry>mi</entry>
 	  <entry>mri</entry>
 	</row>
         <row>
-	  <entry>Marathi (Marāṭhī)</entry>
+	  <entry>马拉地语（Marāṭhī）</entry>
 	  <entry>mr</entry>
 	  <entry>mar</entry>
 	</row>
         <row>
-	  <entry>Marshallese</entry>
+	  <entry>马绍尔语</entry>
 	  <entry>mh</entry>
 	  <entry>mah</entry>
 	</row>
@@ -564,12 +564,12 @@
 	  <entry>mon</entry>
 	</row>
         <row>
-	  <entry>Nauru</entry>
+	  <entry>瑙鲁语</entry>
 	  <entry>na</entry>
 	  <entry>nau</entry>
 	</row>
         <row>
-	  <entry>Navajo, Navaho</entry>
+	  <entry>纳瓦伙语</entry>
 	  <entry>nv</entry>
 	  <entry>nav</entry>
 	</row>
@@ -579,7 +579,7 @@
 	  <entry>nob</entry>
 	</row>
         <row>
-	  <entry>North Ndebele</entry>
+	  <entry>北恩德贝勒语</entry>
 	  <entry>nd</entry>
 	  <entry>nde</entry>
 	</row>
@@ -589,7 +589,7 @@
 	  <entry>nep</entry>
 	</row>
         <row>
-	  <entry>Ndonga</entry>
+	  <entry>恩敦加语</entry>
 	  <entry>ng</entry>
 	  <entry>ndo</entry>
 	</row>
@@ -599,38 +599,37 @@
 	  <entry>nno</entry>
 	</row>
         <row>
-	  <entry>Norwegian</entry>
+	  <entry>挪威语</entry>
 	  <entry>no</entry>
 	  <entry>nor</entry>
 	</row>
         <row>
-	  <entry>Nuosu</entry>
+	  <entry>彝语</entry>
 	  <entry>ii</entry>
 	  <entry>iii</entry>
 	</row>
         <row>
-	  <entry>South Ndebele</entry>
+	  <entry>南恩德贝勒语</entry>
 	  <entry>nr</entry>
 	  <entry>nbl</entry>
 	</row>
         <row>
-	  <entry>Occitan</entry>
+	  <entry>奥西坦语</entry>
 	  <entry>oc</entry>
 	  <entry>oci</entry>
 	</row>
         <row>
-	  <entry>Ojibwe, Ojibwa</entry>
+	  <entry>欧吉布瓦语</entry>
 	  <entry>oj</entry>
 	  <entry>oji</entry>
 	</row>
         <row>
-	  <entry>Old Church Slavonic, Church Slavic, Church Slavonic, Old
-          Bulgarian, Old Slavonic</entry>
+	  <entry>古教会斯拉夫语、教会斯拉夫语、古斯拉夫语</entry>
 	  <entry>cu</entry>
 	  <entry>chu</entry>
 	</row>
         <row>
-	  <entry>Oromo</entry>
+	  <entry>库希特语言</entry>
 	  <entry>om</entry>
 	  <entry>orm</entry>
 	</row>
@@ -640,22 +639,22 @@
 	  <entry>ori</entry>
 	</row>
         <row>
-	  <entry>Ossetian, Ossetic</entry>
+	  <entry>奥塞特语</entry>
 	  <entry>os</entry>
 	  <entry>oss</entry>
 	</row>
         <row>
-	  <entry>Panjabi, Punjabi</entry>
+	  <entry>旁遮普语</entry>
 	  <entry>pa</entry>
 	  <entry>pan</entry>
 	</row>
         <row>
-	  <entry>Pāli</entry>
+	  <entry>巴利语</entry>
 	  <entry>pi</entry>
 	  <entry>pli</entry>
 	</row>
         <row>
-	  <entry>Persian</entry>
+	  <entry>波斯语</entry>
 	  <entry>fa</entry>
 	  <entry>fas</entry>
 	</row>
@@ -665,7 +664,7 @@
 	  <entry>pol</entry>
 	</row>
         <row>
-	  <entry>Pashto, Pushto</entry>
+	  <entry>普什图语</entry>
 	  <entry>ps</entry>
 	  <entry>pus</entry>
 	</row>
@@ -675,22 +674,22 @@
 	  <entry>por</entry>
 	</row>
         <row>
-	  <entry>Quechua</entry>
+	  <entry>盖丘亚语</entry>
 	  <entry>qu</entry>
 	  <entry>que</entry>
 	</row>
         <row>
-	  <entry>Romansh</entry>
+	  <entry>罗曼斯语</entry>
 	  <entry>rm</entry>
 	  <entry>roh</entry>
 	</row>
         <row>
-	  <entry>Kirundi</entry>
+	  <entry>基隆迪语</entry>
 	  <entry>rn</entry>
 	  <entry>run</entry>
 	</row>
         <row>
-	  <entry>Romanian, Moldavian, Moldovan</entry>
+	  <entry>罗马尼亚语、摩尔达维亚语</entry>
 	  <entry>ro</entry>
 	  <entry>ron</entry>
 	</row>
@@ -700,32 +699,32 @@
 	  <entry>rus</entry>
 	</row>
         <row>
-	  <entry>Sanskrit (Saṁskṛta)</entry>
+	  <entry>梵语（Saṁskṛta）</entry>
 	  <entry>sa</entry>
 	  <entry>san</entry>
 	</row>
         <row>
-	  <entry>Sardinian</entry>
+	  <entry>撒丁语</entry>
 	  <entry>sc</entry>
 	  <entry>srd</entry>
 	</row>
         <row>
-	  <entry>Sindhi</entry>
+	  <entry>信德语</entry>
 	  <entry>sd</entry>
 	  <entry>snd</entry>
 	</row>
         <row>
-	  <entry>Northern Sami</entry>
+	  <entry>北萨米语</entry>
 	  <entry>se</entry>
 	  <entry>sme</entry>
 	</row>
         <row>
-	  <entry>Samoan</entry>
+	  <entry>萨摩亚语</entry>
 	  <entry>sm</entry>
 	  <entry>smo</entry>
 	</row>
         <row>
-	  <entry>Sango</entry>
+	  <entry>桑戈语</entry>
 	  <entry>sg</entry>
 	  <entry>sag</entry>
 	</row>
@@ -735,17 +734,17 @@
 	  <entry>srp</entry>
 	</row>
         <row>
-	  <entry>Scottish Gaelic, Gaelic</entry>
+	  <entry>苏格兰盖尔语, Gaelic</entry>
 	  <entry>gd</entry>
 	  <entry>gla</entry>
 	</row>
         <row>
-	  <entry>Shona</entry>
+	  <entry>修纳语</entry>
 	  <entry>sn</entry>
 	  <entry>sna</entry>
 	</row>
         <row>
-	  <entry>Sinhala, Sinhalese</entry>
+	  <entry>锡兰语</entry>
 	  <entry>si</entry>
 	  <entry>sin</entry>
 	</row>
@@ -755,12 +754,12 @@
 	  <entry>slk</entry>
 	</row>
         <row>
-	  <entry>Slovene</entry>
+	  <entry>斯洛文尼亚语</entry>
 	  <entry>sl</entry>
 	  <entry>slv</entry>
 	</row>
         <row>
-	  <entry>Somali</entry>
+	  <entry>索马利语</entry>
 	  <entry>so</entry>
 	  <entry>som</entry>
 	</row>
@@ -770,12 +769,12 @@
 	  <entry>sot</entry>
 	</row>
         <row>
-	  <entry>Spanish, Castilian</entry>
+	  <entry>西班牙语、卡斯提语</entry>
 	  <entry>es</entry>
 	  <entry>spa</entry>
 	</row>
         <row>
-	  <entry>Sundanese</entry>
+	  <entry>巽他语</entry>
 	  <entry>su</entry>
 	  <entry>sun</entry>
 	</row>
@@ -800,7 +799,7 @@
 	  <entry>tam</entry>
 	</row>
         <row>
-	  <entry>Telugu</entry>
+	  <entry>泰卢固语</entry>
 	  <entry>te</entry>
 	  <entry>tel</entry>
 	</row>
@@ -815,22 +814,22 @@
 	  <entry>tha</entry>
 	</row>
         <row>
-	  <entry>Tigrinya</entry>
+	  <entry>蒂格里亚语</entry>
 	  <entry>ti</entry>
 	  <entry>tir</entry>
 	</row>
         <row>
-	  <entry>Tibetan Standard, Tibetan, Central</entry>
+	  <entry>标准藏语、西藏语、主要的</entry>
 	  <entry>bo</entry>
 	  <entry>bod</entry>
 	</row>
         <row>
-	  <entry>Turkmen</entry>
+	  <entry>土库曼语</entry>
 	  <entry>tk</entry>
 	  <entry>tuk</entry>
 	</row>
         <row>
-	  <entry>Tagalog</entry>
+	  <entry>塔加拉族语</entry>
 	  <entry>tl</entry>
 	  <entry>tgl</entry>
 	</row>
@@ -840,8 +839,8 @@
 	  <entry>tsn</entry>
 	</row>
         <row>
-	  <entry>Tonga (Tonga Islands)</entry>
-	  <entry>to</entry>
+	  <entry>汤加语（汤加群岛）</entry>
+	  <entry>修改为</entry>
 	  <entry>ton</entry>
 	</row>
         <row>
@@ -855,7 +854,7 @@
 	  <entry>tso</entry>
 	</row>
         <row>
-	  <entry>Tatar</entry>
+	  <entry>鞑靼语</entry>
 	  <entry>tt</entry>
 	  <entry>tat</entry>
 	</row>
@@ -865,12 +864,12 @@
 	  <entry>twi</entry>
 	</row>
         <row>
-	  <entry>Tahitian</entry>
+	  <entry>大溪地语</entry>
 	  <entry>ty</entry>
 	  <entry>tah</entry>
 	</row>
         <row>
-	  <entry>Uighur, Uyghur</entry>
+	  <entry>维吾尔语</entry>
 	  <entry>ug</entry>
 	  <entry>uig</entry>
 	</row>
@@ -880,12 +879,12 @@
 	  <entry>ukr</entry>
 	</row>
         <row>
-	  <entry>Urdu</entry>
+	  <entry>乌尔都语</entry>
 	  <entry>ur</entry>
 	  <entry>urd</entry>
 	</row>
         <row>
-	  <entry>Uzbek</entry>
+	  <entry>乌兹别克语</entry>
 	  <entry>uz</entry>
 	  <entry>uzb</entry>
 	</row>
@@ -900,12 +899,12 @@
 	  <entry>vie</entry>
 	</row>
         <row>
-	  <entry>Volapük</entry>
+	  <entry>沃拉卜克语</entry>
 	  <entry>vo</entry>
 	  <entry>vol</entry>
 	</row>
         <row>
-	  <entry>Walloon</entry>
+	  <entry>瓦隆语</entry>
 	  <entry>wa</entry>
 	  <entry>wln</entry>
 	</row>
@@ -915,12 +914,12 @@
 	  <entry>cym</entry>
 	</row>
         <row>
-	  <entry>Wolof</entry>
+	  <entry>沃洛夫语</entry>
 	  <entry>wo</entry>
 	  <entry>wol</entry>
 	</row>
         <row>
-	  <entry>Western Frisian</entry>
+	  <entry>西弗里斯兰语</entry>
 	  <entry>fy</entry>
 	  <entry>fry</entry>
 	</row>
@@ -930,17 +929,17 @@
 	  <entry>xho</entry>
 	</row>
         <row>
-	  <entry>Yiddish</entry>
+	  <entry>意第续语</entry>
 	  <entry>yi</entry>
 	  <entry>yid</entry>
 	</row>
         <row>
-	  <entry>Yoruba</entry>
+	  <entry>约鲁巴语</entry>
 	  <entry>yo</entry>
 	  <entry>yor</entry>
 	</row>
         <row>
-	  <entry>Zhuang, Chuang</entry>
+	  <entry>藏语</entry>
 	  <entry>za</entry>
 	  <entry>zha</entry>
 	</row>

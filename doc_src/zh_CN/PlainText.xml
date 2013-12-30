@@ -7,9 +7,9 @@
 
   <section id="default.encoding">
     <title>缺省编码<indexterm class="singular">
-        <primary>缺省编码</primary> <secondary>纯文本文件</secondary>
+        <primary>编码</primary> <secondary>纯文本文件</secondary>
       </indexterm><indexterm class="singular">
-        <primary>源文件</primary> <secondary>缺省编码</secondary>
+        <primary>源文件</primary> <secondary>编码</secondary>
       </indexterm></title>
 
     <para>纯文本文件（在大多数情况下扩展名为 txt）只包含了文本信息，目前还没有明确的办法告诉计算机该文件包含了何种语言的内容。在这种情况下，一般 OmegaT 会假设该文本写入时使用了当前计算机所使用相同语言。这对于使用 16 位字符集 Unicode 进行编码的文件不会产生问题。然而，如果文本使用 8 位编码，那么可能会遇到这样困惑的情况：不是显示日文的文本……</para>
@@ -36,13 +36,11 @@
       </imageobject>
     </mediaobject>
 
-    <para>运行 OmegaT 的电脑的默认语言为俄语，因此它使用西里尔字符集而不是汉字字符集显示字符。</para>
+    <para>运行 OmegaT 的电脑的缺省语言为俄语，因此它使用西里尔字符集而不是汉字字符集显示字符。</para>
   </section>
 
   <section id="OmegaT.solution">
-    <title><application>OmegaT</application> 解决方案<indexterm class="singular">
-        <primary>缺省编码</primary> <secondary>OmegaT 解决方案</secondary>
-      </indexterm></title>
+    <title><application>OmegaT</application> 解决方案</title>
 
     <para>基本上 <application>OmegaT</application> 中有三种方法解决这个问题。它们都与<emphasis role="bold">选项</emphasis>菜单中的文件过滤器应用程序有关。</para>
 
@@ -87,7 +85,7 @@
     <itemizedlist>
       <listitem>
         <para><literal>.txt1</literal> 是以 ISO-8859-1 进行编码的，包括绝大多数<emphasis role="bold">西欧</emphasis>语言。<indexterm class="singular">
-            <primary>缺省编码</primary> <secondary>西方</secondary>
+            <primary>编码</primary> <secondary>西方</secondary>
           </indexterm></para>
       </listitem>
     </itemizedlist>
@@ -95,7 +93,7 @@
     <itemizedlist>
       <listitem>
         <para><literal>.txt2</literal> 文件是以 ISO-8859-2 进行编码的，包括绝大多数<emphasis role="bold">中欧和东欧</emphasis>语言<indexterm class="singular">
-            <primary>缺省编码</primary> <secondary>中欧和东欧</secondary>
+            <primary>编码</primary> <secondary>中欧和东欧</secondary>
           </indexterm></para>
       </listitem>
     </itemizedlist>
@@ -103,7 +101,7 @@
     <itemizedlist>
       <listitem>
         <para><literal>.utf8</literal> 文件会被 <application>OmegaT</application> 以 UTF-8 编码进行解释（一种几乎涵盖了世界上所有语言的编码）。<indexterm class="singular">
-            <primary>缺省编码</primary> <secondary>Unicode</secondary>
+            <primary>编码</primary> <secondary>Unicode</secondary>
           </indexterm></para>
       </listitem>
     </itemizedlist>

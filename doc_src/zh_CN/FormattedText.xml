@@ -7,7 +7,7 @@
       <primary>源文件</primary> <secondary>格式化文本</secondary>
     </indexterm></title>
 
-  <para>在源文件中表示的格式化信息通常需要在目标文中重新创建。在 OmegaT 中，由所支持格式（尤其是在写入 DocBook、HTML、XHTML、开放文档（OpenOffice.org）和 Office 开放 XML（MS Office 2007 及更高版本）的时候）产生的内部格式化信息以标签的形式出现。一般情况下，为匹配目的而比较不同文本的相似性时将忽略标签。在已译片段中重新创建的标签将会出现在译后文档中。</para>
+  <para>在源文件中表示的格式化信息通常需要在目标文中重新创建。在OmegaT中，由所支持格式（尤其是在写入DocBook、HTML、XHTML、开放文档格式（ODF）和 Office 开放 XML（MS Office 2007及更高版本）的时候）产生的内部格式化信息以标签的形式出现。一般情况下，为匹配目的而比较不同文本的相似性时将忽略标签。在已译片段中重新创建的标签将会出现在译后文档中。</para>
 
   <section id="formatting.tags">
     <title>格式化标签<indexterm class="singular">
@@ -106,7 +106,53 @@
 
     <para>错误维护后：</para>
 
-    <para><literal>&lt;b0&gt;格式&lt;b1&gt;一&lt;/b0&gt;&lt;/b1&gt;现在变乱了。&lt;片段结束 0001&gt;</literal></para>
+    <para><literal>&lt;b0&gt;格式&lt;b1&gt;一&lt;/b0&gt; &lt;/b1&gt;正被弄乱了。&lt;segment 0001&gt;</literal></para>
+  </section>
+
+  <section>
+    <title>标签验证选项</title>
+
+    <para>要定制标签的操作，可在<guimenuitem>选项&gt;标签验证</guimenuitem>窗口中设置一些规则：</para>
+
+    <mediaobject>
+      <imageobject>
+        <imagedata fileref="images/OptionsTagValidation_25.png"/>
+      </imageobject>
+    </mediaobject>
+
+    <para>此处的行为、状态适用于所有的源文件而不只是某些类型的文件，如格式化文本。</para>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis role="bold">Printf变量——不检查、简单检查、全检查</emphasis></para>
+
+        <para>OmegaT可以检查源文本中的程序变量如（%s）在译文中是否存在。您可以决定是否检查、检查简单的printf变量（如%s %d等）或检查所有类型的printf变量。</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis role="bold">检查简单的java MessageFormat模式</emphasis></para>
+
+        <para>选中该复选框能让OmegaT检查简单的java MessageFormat标签（如{0}）是否处理正确。</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis role="bold">自定义标签正则表达式：</emphasis></para>
+
+        <para>此处输入的正则表达式会让OmegaT把它的匹配实例视为客户标签。它会检查标签的编号和顺序是否一致，就如同检查omegat标签一样。</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis role="bold">应从译文中移除的碎片正则表达式</emphasis></para>
+
+        <para>可以输入表示希望在目标删除的内容的正则表达式。之后在目标片段中的任何匹配将显示为红色，这样就很容易发现和纠正。寻找模糊匹配时忽略该移除模式。如果被移除部分不匹配其他片段，则增加5个固定罚点，因此匹配度就不会显示高达100%</para>
+      </listitem>
+    </itemizedlist>
   </section>
 
   <section id="tag.group.validation">
@@ -115,7 +161,7 @@
       </indexterm></title>
 
     <para>验证标签功能检测发生变化的标签序列（无论是有意的还是无意的），并显示受影响的片段。通过按下 <guimenuitem>Ctrl+T<indexterm class="singular">
-        <primary>快捷键</primary> <secondary>Ctrl+T - 检验标签</secondary>
+        <primary>快捷键</primary> <secondary>标签验证——Ctrl+T</secondary>
       </indexterm></guimenuitem> 组合键可调用该功能，它将打开一个窗口，显示文件的译文中所有可能包含断裂或错误的标签的片段。通过标签检验功能可以轻松地修正标签和重新创建目标文档。按 <guimenuitem>Ctrl+T</guimenuitem> 打开的窗口显示了一个三列表格，其中列出了指向该片段、原文片段和译文片段的链接：</para>
 
     <figure id="tag.validation">

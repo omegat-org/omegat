@@ -1,0 +1,352 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<chapter id="chapter.files.and.folders">
+  <title><application>OmegaT</application>文件和文件夹</title>
+
+  <para><application>OmegaT</application> 运行时使用三种文件。</para>
+
+  <itemizedlist>
+    <listitem>
+      <para>翻译项目文件：它们构成了翻译项目。丢失这些文件可能会影响项目的完整性并导致您无法完成翻译工作。项目文件是 <application>OmegaT</application> 最重要的文件。它们是您在翻译时处理文件的日常基础。</para>
+    </listitem>
+  </itemizedlist>
+
+  <itemizedlist>
+    <listitem>
+      <para>用户设置文件：它们是用户通过首选项改变 OmegaT 的行为时创建的文件。丢失这些文件可能导致 OmegaT 恢复“出厂”设置。如果您正处于翻译工作的中期，这将会导致一个小问题。</para>
+    </listitem>
+  </itemizedlist>
+
+  <itemizedlist>
+    <listitem>
+      <para>应用程序文件：它们包含在您下载的安装包中。其中大部分对于 OmegaT 的正常运行来说是必须的。如果出于某种原因丢失或损坏了这些文件，仅需下载并重新安装 OmegaT 以恢复它们。</para>
+    </listitem>
+  </itemizedlist>
+
+  <section id="translation.project.files">
+    <title>翻译项目文件</title>
+
+    <indexterm class="singular">
+      <primary>项目文件</primary> <secondary>翻译项目文件</secondary>
+    </indexterm>
+
+    <para>一个 <application>OmegaT</application> 翻译项目由多个文件和文件夹组成。</para>
+
+    <para>创建翻译项目时，OmegaT会自动创建一个您指定名称的文件夹和一系列文件夹：</para>
+
+    <figure id="OmegaT.project">
+      <title>OmegaT项目</title>
+
+      <mediaobject>
+        <imageobject role="html">
+		          <imagedata fileref="images/Omegatproject.png"/>
+       </imageobject>
+      <imageobject role="fo">
+          <imagedata fileref="images/Omegatproject.png" width="60%"/>
+        </imageobject>
+      </mediaobject>
+	  </figure>
+
+    <para>在项目创建或翻译过程中可对一些目录的位置进行变更。根据您的工作流程和项目管理习惯，可以选择现有目录或创新目录。项目创建之后要改变目录的位置，请打开菜单中的<guimenuitem>项目&gt;属性……</guimenuitem>或使用 <guibutton>Ctrl+E</guibutton> 进行必要的修改。</para>
+
+    <para>在文件管理器中翻译项目在外观和操作上和其他文件夹一样。下面的例子中<filename>my projects</filename>文件夹包含三个OmegaT项目：</para>
+
+    <para><figure id="OmegaT.projects.and.subfolders">
+        <title>OmegaT项目和子文件夹</title>
+
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="images/OmegaT_projects_and_subfolders.png"/>
+          </imageobject>
+        </mediaobject>
+      </figure></para>
+
+    <para>双击以 OmegaT 图标显示的项足以打开这个项目。用缺省设置创建的 <emphasis role="bold">Example_Project</emphasis> 项目将被创建为一个新的子目录，其结构如下：</para>
+
+    <section id="file.omegat.project">
+      <title>根文件夹<indexterm class="singular">
+          <primary>项目文件</primary> <secondary>文件 omegat.project</secondary>
+        </indexterm></title>
+
+      <para>项目的根文件夹总是包含<filename> OmegaT.Project</filename>文件，其内容为项目属性窗口（<guimenuitem>项目&gt;属性</guimenuitem>）中定义的项目参数。在翻译时会在此文件夹中创建（且在翻译过程中更新）附加文件（<emphasis><filename>project_name</filename></emphasis><filename>-omegat.tmx、project_name-level1.tmx和project_name-level2.tmx</filename>）。它们包含了不同形式的相同翻译记忆内容，以用于以后的项目。</para>
+    </section>
+
+    <section>
+      <title>词典子文件夹</title>
+
+      <para>该文件夹初始为空的，它将包含您添加到项目的词典文件。请参阅<link linkend="chapter.dictionaries">词典章节</link>了解关于该主题的更多信息。</para>
+    </section>
+
+    <section>
+      <title>词汇表子文件夹</title>
+
+      <para>该文件夹初始为空的。它将包含您在项目中使用的词汇表。请参阅<link linkend="chapter.glossaries">词汇表章节</link>部分了解关于该主题的更多信息。</para>
+    </section>
+
+    <section id="folder.OmegaT">
+      <title>omegat子文件夹<indexterm class="singular">
+          <primary>项目文件</primary> <secondary>子目录omegat</secondary>
+        </indexterm></title>
+
+      <para><emphasis role="bold">omegat</emphasis>子目录至少包含一个或多个其他文件。其中最重要的文件是<filename>project_save.tmx</filename>，它是项目的有效翻译记忆文件。此文件的备份（含扩展名bak）会不断增加到这个子文件夹：在翻译开始时、结束时和过程中。这样可以避免意外丢失数据——请参阅<link linkend="chapter.misc">杂项</link>部分的防止数据丢失。</para>
+
+      <para>在翻译时还可能会在该子文件夹中创建的附加文件如下</para>
+
+      <para><informaltable>
+          <tgroup align="left" cols="2" rowsep="1">
+            <colspec align="left" colnum="1"/>
+
+            <tbody>
+              <row>
+                <entry>stats.txt</entry>
+
+                <entry><indexterm class="singular">
+                    <primary>项目文件</primary> <secondary>统计文件</secondary>
+                  </indexterm>包含当前项目的当前统计信息。您可以选择<guimenuitem>工具&gt;统计</guimenuitem>查看该文件</entry>
+              </row>
+
+              <row>
+                <entry>ignored_words.txt. learned_words.txt</entry>
+
+                <entry><indexterm class="singular">
+                    <primary>项目文件</primary> <secondary>ignored_words和learned_words</secondary>
+                  </indexterm>由拼写检查器创建和使用。如果您已经收集了希望拼写检查器忽略/接受的单词，只需复制相应的两个文件到当前项目的<filename>omegat</filename>子目录。</entry>
+              </row>
+
+              <row>
+                <entry>project_stats_match.txt</entry>
+
+                <entry>由<guimenuitem>工具&gt;匹配统计</guimenuitem>创建的最新项目匹配信息</entry>
+              </row>
+
+              <row>
+                <entry>segmentation.conf</entry>
+
+                <entry>若存在，则它包含<guimenuitem>项目&gt;属性……</guimenuitem>需要的项目专用分割规则。请参阅<link linkend="chapter.project.properties">项目属性章节</link></entry>
+              </row>
+
+              <row>
+                <entry>filters.xml</entry>
+
+                <entry>若存在，则它包含<guimenuitem>项目&gt;属性……</guimenuitem>需要的项目专用文件过滤器。请参阅<link linkend="chapter.project.properties">项目属性章节</link></entry>
+              </row>
+            </tbody>
+          </tgroup>
+        </informaltable></para>
+    </section>
+
+    <section id="folder.source">
+      <title>source子文件夹<indexterm class="singular">
+          <primary>项目文件</primary> <secondary>源子文件夹</secondary>
+        </indexterm></title>
+
+      <para>source子文件夹包含待译文件。之后您也可添加文件到其中。要注意的是source子目录的结构完全由您决定。如果要翻译的文件是结构树的一部分（例如网站上的文件），您只需指定最上级子目录，而 OmegaT 将会保持完整的树形结构和全部内容。</para>
+    </section>
+
+    <section id="folder.target">
+      <title>target子文件夹<indexterm class="singular">
+          <primary>项目文件</primary> <secondary>目标子目录</secondary>
+        </indexterm></title>
+
+      <para>该子文件夹初始为空的。要添加内容到其中，请选择<menuchoice> <shortcut> <keycombo> <keycap>Ctrl</keycap> <keycap>D</keycap> </keycombo> </shortcut><guimenu>项目</guimenu> <guimenuitem>创建已译文档</guimenuitem> </menuchoice>。<filename>source</filename>文件夹中的文件，无论是否已经翻译，都会以相同的层级结构生成到这里。target子文件夹的内容将反映当前的翻译状态，如同在当前<emphasis role="bold">/omegat/project_save.tmx</emphasis>中保存的项目翻译记忆一样。因此未译片段将仍为源语言。</para>
+    </section>
+  </section>
+
+  <section id="user.files">
+    <title>用户设置文件<indexterm class="singular">
+        <primary>项目文件</primary> <secondary>用户设置文件</secondary>
+      </indexterm></title>
+
+    <para>用户文件包含特定用户在所有项目中适用的信息；</para>
+
+    <informaltable>
+      <tgroup align="left" cols="2" rowsep="1">
+        <colspec align="left" colnum="1"/>
+
+        <tbody>
+          <row>
+            <entry>logs/OmegaT.log</entry>
+
+            <entry>该文件记录了 <application>OmegaT</application> 运行时的 Java 错误信息。当 OmegaT 表现异常时，在错误报告中加入这份文件或相关部分是件很重要的事情</entry>
+          </row>
+
+          <row>
+            <entry>script/</entry>
+
+            <entry>安装了脚本插件时该文件夹包含了作为脚本插件的脚本文件。</entry>
+          </row>
+
+          <row>
+            <entry>filters.xml</entry>
+
+            <entry>用户默认文件过滤器</entry>
+          </row>
+
+          <row>
+            <entry>omegat.prefs</entry>
+
+            <entry>OmegaT首选项</entry>
+          </row>
+
+          <row>
+            <entry>segmentation.conf</entry>
+
+            <entry>用户默认分割规则</entry>
+          </row>
+
+          <row>
+            <entry>uiLayout.xml</entry>
+
+            <entry>一份包含所有 GUI 可访问选项设置的 XML 文件</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </informaltable>
+
+    <para>注意默认的分割规则和文件过滤器可以被项目专用设置所覆盖（见上文）。用户文件的位置取决于当前使用的平台：</para>
+
+    <informaltable>
+      <tgroup align="left" cols="2" rowsep="1">
+        <colspec align="left" colnum="1"/>
+
+        <tbody>
+          <row>
+            <entry>Windows 2000 和 XP</entry>
+
+            <entry><literal>Documents and Settings\&lt;用户名&gt;\Application Data\<application>OmegaT</application></literal></entry>
+          </row>
+
+          <row>
+            <entry>Windows Vista 和 7</entry>
+
+            <entry><literal>Users\&lt;用户名&gt;\AppData\Roaming\<application>OmegaT</application></literal></entry>
+          </row>
+
+          <row>
+            <entry>其他 Windows</entry>
+
+            <entry><literal>&lt;Something&gt;\<application>OmegaT</application></literal> (&lt;Something&gt; 对应于 Java 所确定的主目录［&quot;home&quot;］的位置)</entry>
+          </row>
+
+          <row>
+            <entry>Linux/Solaris/FreeBSD</entry>
+
+            <entry><literal>&lt;User Home&gt;/.omegat </literal>（.omegat 是一个目录，名称前面的句点让它在使用 ls -a 或等效命令之外的情形下保持不可见状态）</entry>
+          </row>
+
+          <row>
+            <entry>MAC OS X</entry>
+
+            <entry><filename>&lt;User
+            Home&gt;/Library/Preferences/<application>OmegaT</application></filename></entry>
+          </row>
+
+          <row>
+            <entry>其它</entry>
+
+            <entry><filename>&lt;User Home&gt;</filename></entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </informaltable>
+  </section>
+
+  <section id="application.files">
+    <title>应用程序文件<indexterm class="singular">
+        <primary>项目文件</primary> <secondary>应用程序文件</secondary>
+      </indexterm></title>
+
+    <para>OmegaT 是以可以从 SourceForge 下载的安装包的形式提供的。在这里应先考虑的是标准Java形式的平台独立安装包。可选的程序包还有Linux .tar安装包、Windows安装程序（含或不含Java运行环境）、Mac OS X安装程序以及为开发人员准备的源码包。</para>
+
+    <para>该平台独立安装包可在任何运行Java 1.6运行时环境的平台上使用，包括安装有特定包的平台。它是一份压缩文件（zip或tar存档），您需把它们解压缩到您选择的安装目录中。通常可通过双击已下载的安装包来解压缩文件。解压缩后将创建一个包含下列内容的目录：</para>
+
+    <informaltable>
+      <tgroup align="left" cols="2" rowsep="1">
+        <colspec align="left" colnum="1"/>
+
+        <tbody>
+          <row>
+            <entry><emphasis role="bold">文件/子目录</emphasis></entry>
+
+            <entry><emphasis role="bold">目录</emphasis></entry>
+          </row>
+
+          <row>
+            <entry><filename>/docs/</filename></entry>
+
+            <entry>所有的手册文件都在该目录中。您可在网络浏览器中打开它们以访问其外部链接。</entry>
+          </row>
+
+          <row>
+            <entry><filename>/images/</filename></entry>
+
+            <entry>图标和标志图片。</entry>
+          </row>
+
+          <row>
+            <entry><filename>/lib/</filename></entry>
+
+            <entry>包含正常运行<application>OmegaT</application>所需的Java文件。</entry>
+          </row>
+
+          <row>
+            <entry><filename>join.html</filename></entry>
+
+            <entry>这是一份普通的HTML文件，在网络浏览器打开时将会导航到Yahoo! Gourps中托管的OmegaT用户组。不是一定要加入这个讨论组，但加入后可为您提供一些额外的服务，例如可访问某些文件和参与投票以及参加 OmegaT 相关的讨论。该讨论组的存档是公开的，无须订阅该讨论组就可进行查看。</entry>
+          </row>
+
+          <row>
+            <entry><filename>changes.txt</filename></entry>
+
+            <entry>关于本版本和之前版本的一份较详细的变更清单。</entry>
+          </row>
+
+          <row>
+            <entry><filename>license.txt</filename></entry>
+
+            <entry>GNU 通用公共许可证。该许可证允许您对 <application>OmegaT</application> 做某些事情，包括修改和发布。如果您有兴趣修改和发布 <application>OmegaT</application>，请仔细查阅该文档并确保在进行操作前掌握其全部含义。如果有任何疑问，请直接向项目成员请教，可通过 Source Forge 页面给他们发送邮件或向用户讨论组发送一份公开邮件。</entry>
+          </row>
+
+          <row>
+            <entry><filename>doc-license.txt</filename></entry>
+
+            <entry>GNU 通用公共许可证。该许可证包含了文档。参阅上文。</entry>
+          </row>
+
+          <row>
+            <entry><filename>readme.txt</filename></entry>
+
+            <entry>该文件非常重要，在启动 OmegaT 之前请务必阅读一遍。它包含了 OmegaT 的一般性信息，如：在哪里可以找到更多信息以及如何提供帮助等等。它被译为了多种语言。</entry>
+          </row>
+
+          <row>
+            <entry><application>OmegaT</application></entry>
+
+            <entry><para>只包含两行的文本文件：</para>
+
+            <programlisting>#!/bin/bash java
+java -jar OmegaT.jar $*</programlisting>
+
+            <para>Linux和OS X用户可能会发现此文件有用。在确认处于OmegaT程序目录后，从命令行运行<literal>chmod +x OmegaT</literal>来把它转换为可执行文件。从此，您可以从命令行调用该文件来启动 OmegaT 。</para>
+            </entry>
+          </row>
+          
+          <row>
+            <entry>OmegaT.bat</entry>
+
+            <entry><para>批处理文件，用于从 Windows 命令行启动 <application>OmegaT </application> 。它只包括下面几行：</para>
+
+            <programlisting>java -jar OmegaT.jar %*</programlisting>
+            </entry>
+          </row>
+          
+          <row>
+            <entry><literal>OmegaT.jar</literal></entry>
+
+            <entry>OmegaT 主程序。要启动 OmegaT，或是从命令行调用该文件，或者通过文件管理器运行它（通常是使用鼠标双击）。</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </informaltable>
+  </section>
+</chapter>

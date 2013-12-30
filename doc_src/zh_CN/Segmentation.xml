@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
 <chapter id="chapter.segmentation">
-  <title>源片段</title>
+  <title>源片段分割规则</title>
 
   <para>翻译记忆工具的使用以叫做片段的文本为单位。<application>OmegaT</application> 使用两种方式对文本进行片段分割：段落分割或句子分割（也被称为“基于分割的规则”）。要选择分割类型，请从主菜单选择<menuchoice> <guimenu><indexterm class="singular">
           <primary>项目</primary> <secondary>属性</secondary>
@@ -24,14 +24,14 @@
       <listitem>
         <para><application>OmegaT</application> 首先将文本分割成结构级别的片段。在这个过程中，只有源文本的结构被用于创建片段。</para>
 
-        <para>例如：文本文件可能会在行终止、空行进行片段分割或根本进行分割。格式化文件（OpenOffice.org 文档、HTML 文档等等）在块级别（段落）标签处进行分割。XHTML 或 HTML 文件的可翻译对象属性可以被提取为独立的片段。</para>
+        <para>例如：文本文件可能会在行终止、空行进行片段分割或根本进行分割。格式化文件（ODF文档、HTML 文档等等）在块级别（段落）标签处进行分割。XHTML 或 HTML 文件的可翻译对象属性可以被提取为独立的片段。</para>
       </listitem>
     </varlistentry>
 
     <varlistentry>
       <term><indexterm class="singular">
-          <primary>片段分割</primary> <secondary>句子层分割</secondary>
-        </indexterm>句子层分割</term>
+          <primary>片段分割</primary> <secondary>语句级分割</secondary>
+        </indexterm>语句级分割</term>
 
       <listitem>
         <para>在将源文件分割为结构单元之后， <application>OmegaT</application> 将进一步把这些块分割为语句。</para>
@@ -80,7 +80,7 @@
         <primary>片段分割</primary> <secondary>规则优先级</secondary>
       </indexterm></title>
 
-    <para>为匹配的语言模式定义的所有片段分割规则会按照规定的优先级别得到应用，因此为特定语言定义的规则优先级会比缺省规则要高。例如，为加拿大法语 (FR-CA) 创建的规则优先级应该比为法语 (FR.*) 创建规则的优先级要高，也比缺省规则(.*) 要高。因此，在翻译加拿大法语时，会首先应用加拿大法语规则（如果存在的话），接着是法语规则，最后为默认规则。</para>
+    <para>为匹配的语言模式定义的所有片段分割规则会按照规定的优先级别得到应用，因此为特定语言定义的规则优先级会比缺省规则要高。例如，为加拿大法语 (FR-CA) 创建的规则优先级应该比为法语 (FR.*) 创建规则的优先级要高，也比缺省规则(.*) 要高。因此，在翻译加拿大法语时，会首先应用加拿大法语规则（如果存在的话），接着是法语规则，最后为缺省规则。</para>
   </section>
 
   <section id="creating.new.rule">
@@ -104,65 +104,65 @@
 
     <informaltable>
       <tgroup cols="4">
-        <colspec align="left" colnum="1" colwidth="150"/>
+        <colspec align="left" colnum="1"/>
 
-        <colspec align="center" colnum="2" colwidth="60"/>
+        <colspec align="center" colnum="2"/>
 
-        <colspec align="center" colnum="3" colwidth="60"/>
+        <colspec align="center" colnum="3"/>
 
-        <colspec align="left" colnum="4" colwidth="190"/>
+        <colspec align="left" colnum="4"/>
 
         <thead>
           <row>
-            <entry>意图</entry>
+            <entry>目的</entry>
 
-            <entry align="center">之前</entry>
+            <entry align="center">前模式</entry>
 
-            <entry align="center">之后</entry>
+            <entry align="center">后模式</entry>
 
-            <entry>注意</entry>
+            <entry>说明</entry>
           </row>
         </thead>
 
         <tbody>
           <row>
-            <entry>在句点 ('.') 后且空格前进行分割。</entry>
+            <entry>设置在句点（‘.’）后跟着空格、Tab等的位置后开始新片段。</entry>
 
             <entry align="center">\.</entry>
 
             <entry align="center">\s</entry>
 
-            <entry>&quot;\.&quot; 表示字符 &quot;.&quot; &quot;\s&quot; 表示任何空白字符（空格，tab，新页符等）。</entry>
+            <entry>“\.”表示句点字符。“\s”表示任意空白字符（空格、Tab、新行符等）。</entry>
           </row>
 
           <row>
-            <entry>不要在 Mr. 后进行分割</entry>
+            <entry>不要在Mr.后进行分割</entry>
 
             <entry align="center">Mr\.</entry>
 
             <entry align="center">\s</entry>
 
-            <entry>这是一条例外规则，因此必须将规则复选框设为未选中。</entry>
+            <entry>这是一条例外规则，因此必须取消选中规则的复选框。</entry>
           </row>
 
           <row>
-            <entry>在 &quot;。&quot;（日文句点）后进行分割。</entry>
+            <entry>在“。”（日文句点）后进行分割</entry>
 
             <entry align="center">。</entry>
 
             <entry align="center"/>
 
-            <entry>注意<literal>之后</literal>规则是空的</entry>
+            <entry>注意<literal>后模式</literal>规则是空的</entry>
           </row>
 
           <row>
-            <entry>不要对 M. Mr. Mrs. 和 Ms. 之后的内容进行分割</entry>
+            <entry>不要对M.、Mr.、Mrs.、和Ms.之后的内容进行分割</entry>
 
             <entry align="center">Mr??s??\.</entry>
 
             <entry align="center">\s</entry>
 
-            <entry>例外规则 - ?在正则表达式中的使用</entry>
+            <entry>例外规则——请查阅?在正则表达式中的用途</entry>
           </row>
         </tbody>
       </tgroup>

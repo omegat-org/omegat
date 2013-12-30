@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
-<book lang="zh_CN">
+<book lang="en">
   <bookinfo>
-    <title>OmegaT - 用户向导</title>
+    <title>OmegaT 3.0——用户向导</title>
 
     <authorinitials>vs</authorinitials>
-        <author><firstname>Vito</firstname>
-<surname>Smolej</surname>
+
+    <author>
+      <firstname>Vito Smolej</firstname>
     </author>
 
-    <pubdate><?dbtimestamp?></pubdate>
+    <pubdate/>
 
     <abstract>
       <para>该文档是正式的 OmegaT（免费的计算机辅助翻译工具）用户指南。其中还包含了安装说明。</para>
     </abstract>
-
   </bookinfo>
 
   <xi:include href="AboutOmegaT.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
@@ -31,25 +31,23 @@
 
   <xi:include href="FileFilters.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
 
-  <xi:include href="FilesAndDirectories.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+  <xi:include href="FilesAndFolders.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
 
   <xi:include href="FilesToTranslate.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
 
   <xi:include href="EditingBehavior.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
 
-  <xi:include href="Font.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>            
+  <xi:include href="PlainText.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
 
   <xi:include href="FormattedText.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
-
-  <xi:include href="PlainText.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
 
   <xi:include href="TranslationMemories.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
 
   <xi:include href="Segmentation.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
 
-  <xi:include href="Regexp.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
-
   <xi:include href="Searches.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+
+  <xi:include href="Regexp.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
 
   <xi:include href="Dictionaries.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
 
@@ -61,11 +59,21 @@
 
   <xi:include href="Miscelanea.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
 
-  <xi:include href="App_Website.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
-
   <xi:include href="App_Languages.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
 
   <xi:include href="App_Keyboard.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+
+  <xi:include href="App_TeamProjects.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+
+  <xi:include href="App_Tokenizer_plugin.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+
+  <xi:include href="App_LanguageTool_plugin.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+
+  <xi:include href="App_Scripting_plugin.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+
+  <xi:include href="App_Website.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+
+  <xi:include href="App_ShortCutCustomization.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
 
   <xi:include href="App_LegalNotices.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
 

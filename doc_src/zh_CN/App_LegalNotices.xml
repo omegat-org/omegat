@@ -12,11 +12,11 @@
 
     <para><emphasis role="bold">版权所有</emphasis></para>
 
-    <para>本文档与包含用户手册及 readme.txt 文档的 <application>OmegaT</application> 2.5 同时发布。本文档版权归 ©2011 Vito Smolej 所有。快速入门指南由 Samuel Murray 进行了进一步的开发，版权 ©2005-2008.</para>
+    <para>本文档与包含用户手册及readme.txt文档的 <application>OmegaT</application>同时发布。本文档版权归©2013 Vito Smolej所有。<emphasis>五分钟内学会OmegaT！</emphasis>章的作者是Samuel Murray，版权所有©2005-2012。</para>
 
     <para><emphasis role="bold">发布和修改</emphasis></para>
 
-    <para>该文档是免费文档，在遵守自由软件基金会（FSF）发布的的 GNU 通用公共许可证的版本2或者更高版本的前提下，您可以对它进行编辑或者重新发布。</para>
+    <para>本文档是自由文档，在遵守自由软件基金会（FSF）发布的的 GNU 通用公共许可证的版本3或者更高版本的前提下，您可以对它进行修改或者重新发布。</para>
 
     <para><emphasis role="bold">保证</emphasis></para>
 
@@ -30,14 +30,21 @@
 
     <para><emphasis role="bold">版权所有</emphasis></para>
 
-    <para><emphasis role="bold"><application>OmegaT</application> 2.5</emphasis> 版权所有 © 2000-2011 Keith Godfrey, Maxym Mykhalchuk, Zoltan Bartko, Didier Briel, Kim Bruning, Alex Buloichik, Sandra Jean Chua, Martin Fleurke, Thomas Huriaux, Ibai Lakunza Velasco, Guido Leenders, Fabián Mandelbaum, John Moran, Arno Peters, Henry Pijffers, Briac Pilpré, Tiago Saboga, Andrzej Sawuła, Benjamin Siband, Rashid Umarov, Antonio Vilei, Martin Wunderlich and Michael Zakharov.</para>
+    <para><emphasis role="bold"><application>OmegaT</application>
+    </emphasis> is Copyright © 2000-2013 Keith Godfrey, Zoltan Bartko, Volker Berlin, Didier Briel,
+    Kim Bruning, Alex Buloichik, Thomas Cordonnier, Sandra Jean Chua, 
+    Martin Fleurke, Wildrich Fourie, Phillip Hall, Jean-Christophe Helary, Thomas Huriaux, 
+    Hans-Peter Jacobs, Kyle Katarn, Piotr Kulik, Ibai Lakunza Velasco, Guido Leenders, Aaron Madlon-Kay, 
+    Fabián Mandelbaum, John Moran, Maxym Mykhalchuk, Arno Peters, 
+    Henry Pijffers, Briac Pilpré, Tiago Saboga, Andrzej Sawuła, 
+    Benjamin Siband, Yu Tang, Rashid Umarov, Antonio Vilei, Martin Wunderlich and Michael Zakharov.</para>
 
     <para><emphasis role="bold">发布和修改</emphasis></para>
 
-    <para><emphasis role="bold">O</emphasis><emphasis role="bold">megaT 2.5</emphasis> 是自由软件，在遵守自由软件基金会（FSF）发布的 GNU 通用公共许可证的版本2或者更高版本的前提下，您可以对它进行修改或者重新发布。</para>
+    <para><emphasis role="bold">OmegaT </emphasis>是自由软件，在遵守自由软件基金会（FSF）发布的 GNU 通用公共许可证的版本3或者更高版本的前提下，您可以对它进行修改或者重新发布。</para>
 
     <para><emphasis role="bold">保证</emphasis></para>
 
-    <para><emphasis role="bold"> <application>OmegaT</application> 2.5 </emphasis> 的目的是希望它有用，但没有任何担保，甚至没有适销性或针对特定用途的隐含的担保。请参阅 GNU 通用公共许可证了解更多信息。</para>
+    <para><emphasis role="bold"> <application>OmegaT</application> </emphasis>发布的目的是希望它有用，但没有任何担保，甚至没有适销性或针对特定用途的隐含的担保。请参阅 GNU 通用公共许可证了解更多信息。</para>
   </section>
 </appendix>

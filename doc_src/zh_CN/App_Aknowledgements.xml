@@ -10,13 +10,17 @@
 
     <itemizedlist>
       <listitem>
-        <para>Mark Prior：由于热爱 OmegaT 和英语而改正我最初的草稿。</para>
+        <para>Marc Prior：由于热爱 OmegaT 和英语而改正我最初的草稿。</para>
       </listitem>
     </itemizedlist>
 
     <itemizedlist>
       <listitem>
-        <para>Didier Briel：如果没有 Didier 耐心和持久的帮助，我处理不了 DocBook 复杂。还必须提及他的细心和努力保持了代码库的完整和良好顺序。</para>
+        <para>Didier Briel：如果没有 Didier 耐心和持久的帮助，我处理不了 DocBook 复杂情况。还必须提及他的细心和努力保持了代码库的完整和良好顺序。</para>
+      </listitem>
+
+      <listitem>
+        <para>Samuel Murray：写了“五分钟内学会OmegaT”入门篇章。</para>
       </listitem>
     </itemizedlist>
 
@@ -28,15 +32,11 @@
 
     <itemizedlist>
       <listitem>
-        <para>Jean-Christophe Helary：特别感谢 JC 对 OmegaT 运行和命令行参数的简洁说明。</para>
+        <para>Jean-Christophe Helary：特别感谢 JC 对 OmegaT 运行和命令行参数及我注意到的所有其他细节的简洁说明。</para>
       </listitem>
 
       <listitem>
-        <para>Samual Murray：他写的可以节省在学习“快速入门指南”时间的“五分钟上手 OmegaT”，所以在这里提及是需要的。</para>
-      </listitem>
-
-      <listitem>
-        <para>最后但同样重要的：感谢所有找出 OmegaT 前一版本文档不一致性的贡献者（<ulink url="http://sourceforge.net/tracker/?group_id=68187&amp;atid=912617">OmegaT 文档跟踪者</ulink>）。继续好好努力！</para>
+        <para>最后但同样重要的：感谢所有找出OmegaT 前一版本文档不一致性的<ulink url="https://sourceforge.net/p/omegat/documentation/">OmegaT 文档跟踪器</ulink>贡献者。继续好好努力！</para>
       </listitem>
     </itemizedlist>
   </section>

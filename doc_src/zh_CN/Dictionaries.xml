@@ -12,15 +12,13 @@
         <primary>词典</primary> <secondary>下载和安装</secondary>
       </indexterm></title>
 
-    <para><application>OmegaT</application> 中的词典基于 StartDict 平台。要安装必须的文件，进行如下操作：</para>
+    <para><application>OmegaT</application>的词典基于StarDict或为Lingvo DSL格式。要为StarDict格式安装必须的文件，进行如下操作：</para>
 
     <itemizedlist>
       <listitem>
-        <para>搜索所需的语言组合——例如在上面的 <ulink url="http://stardict.sourceforge.net/index.php"><indexterm class="singular">
-            <primary>FreeDict</primary> <seealso>词典</seealso>
-          </indexterm>StartDict 平台</ulink> 或在 <ulink url="http://www.freedict.org/en/list.html">FreeDict<indexterm class="singular">
-            <primary>Stardict</primary> <seealso>词典</seealso>
-          </indexterm></ulink></para>
+        <para>搜索所需的语言组合，例如上面的<ulink url="http://stardict.sourceforge.net/index.php"><indexterm class="singular">
+            <primary>词典</primary> <secondary>StarDict</secondary>
+          </indexterm>StarDict平台</ulink>。</para>
       </listitem>
     </itemizedlist>
 
@@ -41,7 +39,7 @@
     <itemizedlist>
       <listitem>
         <para><indexterm class="singular">
-            <primary>Webster</primary> <seealso>词典</seealso>
+            <primary>词典</primary> <secondary>Webster</secondary>
           </indexterm>韦氏修订同义词词典（1913）</para>
       </listitem>
     </itemizedlist>
@@ -49,7 +47,7 @@
     <itemizedlist>
       <listitem>
         <para><indexterm class="singular">
-            <primary>Longman</primary> <seealso>词典</seealso>
+            <primary>词典</primary> <secondary>朗曼</secondary>
           </indexterm>朗文当代英语词典</para>
       </listitem>
     </itemizedlist>
@@ -57,7 +55,7 @@
     <itemizedlist>
       <listitem>
         <para><indexterm class="singular">
-            <primary>Britannica</primary> <seealso>词典</seealso>
+            <primary>词典</primary> <secondary>Britannica</secondary>
           </indexterm>不列颠简明百科全书</para>
       </listitem>
     </itemizedlist>
@@ -72,11 +70,7 @@
 
     <figure id="Dict.Merriam.Webster">
       <title><indexterm class="singular">
-          <primary>Dictionary</primary>
-
-          <secondary>Merriam Webster - figure</secondary>
-
-          <seealso>Dictionaries</seealso>
+          <primary>词典</primary> <secondary>Merriam Webster</secondary> <seealso>词典</seealso>
         </indexterm>Merriam Webster 词典——实际使用</title>
 
       <mediaobject>
@@ -98,15 +92,15 @@
 
     <itemizedlist>
       <listitem>
-        <para>检查文件夹中的词典文件（或其中的子文件夹）。查看<menuchoice> <shortcut> <keycombo> <keycap><indexterm class="singular">
-                    <primary>快捷键</primary> <secondary>Ctrl+E - 项目属性</secondary>
+        <para>检查词典文件是否放在正确的文件夹（或其子文件夹）中。查看<menuchoice> <shortcut> <keycombo> <keycap><indexterm class="singular">
+                    <primary>快捷键</primary> <secondary>项目属性——Ctrl+E</secondary>
                   </indexterm>Ctrl</keycap> <keycap>E</keycap> </keycombo> </shortcut> <guimenu>项目</guimenu> <guimenuitem>属性</guimenuitem> </menuchoice>.</para>
       </listitem>
     </itemizedlist>
 
     <itemizedlist>
       <listitem>
-        <para>文件夹中是否包含了三份名称相同，而扩展名分别为  dict.dz,  idx 和 ifo 的文件?如果只有一份与预期相同的文件，那么检查下它的扩展名。如果扩展名为<emphasis>tar.bz</emphasis>，那么是因为您忘记解压了。</para>
+        <para>文件夹中是否包含了三个名称相同，且带扩展名的文件?如果只有一份与预期相同的文件，那么检查下它的扩展名。如果扩展名为<emphasis>tar.bz</emphasis>，那么是因为您忘记解压了。</para>
       </listitem>
     </itemizedlist>
   </section>

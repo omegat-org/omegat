@@ -1,10 +1,10 @@
-本文翻译工作由 amnesiac 完成，版权所有© 2012
+本文翻译工作由胡杨完成，版权所有© 2013
 
 ==============================================================================
-  OmegaT 2.0, 自述文件
+  OmegaT 3.0，自述文件
 
   1.  关于 OmegaT
-  2.  OmegaT 为何物？  3.  安装 OmegaT
+  2.  OmegaT 为何物？  3.  安装OmegaT
   4.  为 OmegaT 做点贡献
   5.  使用 OmegaT 过程中遇到了 Bug？需要帮助吗？  6.  发布细节
 
@@ -16,13 +16,13 @@
       http://www.omegat.org/
 
 在 Yahoo 用户组可以获得（多语种）用户支持，无需订阅也可以对归档邮件进行搜索，网址是：
-     http://groups.yahoo.com/group/OmegaT/
+     http://tech.groups.yahoo.com/group/OmegaT/
 
 在 SourceForge 网站的下列网址可以（用英语）提出改进建议：
-     http://sourceforge.net/tracker/?group_id=68187&atid=520350
+     https://sourceforge.net/p/omegat/feature-requests/
 
 在 SourceForge 的下列网址可以（用英语）报告 Bug：
-     http://sourceforge.net/tracker/?group_id=68187&atid=520347
+     https://sourceforge.net/p/omegat/bugs/
 
 ==============================================================================
   2.  OmegaT 为何物？
@@ -45,34 +45,41 @@ OmegaT的主要特性包括：
   - 被本地化成多种语言
 
 OmegaT 直接支持下列文件格式：
-  - 纯文本
-  - HTML 和 XHTML
-  - HTML 帮助编译文件
-  - OpenDocument/OpenOffice.org
-  - Java 资源文件 (.properties)
-  - INI 文件 （使用任何编码的键值对文件）
-  - PO 文件
-  - DocBook 文档文件格式
-  - 微软 OpenXML 格式文件
-  - Okapi 单语 XLIFF 文件
-  - QuarkXPress CopyFlowGold
-  - 字幕文件 (SRT)
-  - ResX
-  - Android 资源
-  - LaTeX
-  - Typo3 LocManager
-  - Help & Manual
-  - Windows RC 资源
-  - Mozilla DTD
-  - DokuWiki
-  - Wix  
-  - Infix
-  - Flash XML export
-  - Wordfast TXML
-  - Magento CE Locale CSV
-  - Camtasia for Windows
 
--还可以定制 OmegaT 以支持其它文件格式。
+- 纯文本文件格式
+
+  - ASCII 文本（.txt等）
+  - 已编码文本（*.UTF8）
+  - Java资源文件（*.properties）
+  - PO文件（*.po）
+  - INI（key=value）文件（*.ini）
+  - DTD文件（*.DTD）
+  - DocuWiki文件（*.txt）
+  - SubRip标题文件（*.srt）
+  - Magento CE Locale CSV（*.csv）
+
+- 标记文本文件格式
+
+  - OpenOffice.org / OpenDocument（*.odt, *.ott, *.ods, *.ots, *.odp, *.otp）
+  - Microsoft Open XML（*.docx, *.xlsx, *.pptx）
+  - (X)HTML（*.html, *.xhtml,*.xht）
+  - HTML Help Compiler（*.hhc, *.hhk）
+  - DocBook（*.xml）
+  - 单语XLIFF（*.xlf, *.xliff, *.sdlxliff）
+  - QuarkXPress CopyFlowGold（*.tag, *.xtg）
+  - ResX文件（*.resx）
+  - Android资源（*.xml）
+  - LaTex（*.tex, *.latex）
+  - Help（*.xml）和Manual（*.hmxp）文件
+  - Typo3 LocManager（*.xml）
+  - WiX Localization（*.wxl）
+  - Iceni Infix（*.xml）
+  - Flash XML export（*.xml）
+  - Wordfast TXML（*.txml）
+  - Camtasia for Windows（*.camproj）
+  - Visio（*.vxd）
+
+还可以定制 OmegaT 以支持其它文件格式。
 
 即便是遇到极复杂的源目录层次结构，OmegaT 也可以自动进行分析以访问所有支持的文件，并产生一个结构完全相同且包含所有不支持文件的目标目录。
 
@@ -81,12 +88,12 @@ OmegaT 直接支持下列文件格式：
 用户手册就在您刚才下载的文件包中，启动 OmegaT 后可从【帮助】菜单中阅读它。
 
 ==============================================================================
- 3. 安装 OmegaT
+ 3. 安装OmegaT
 
 3.1综述
-为了运行 OmegaT，系统必须安装了 1.5 或更高版本的 Java 运行环境 (JRE)。为了省去用户选择、获取和安装的麻烦，现在标准的 OmegaT 与 Java 运行环境一道被提供。 
+为了运行 OmegaT，系统必须安装了 1.5 或更高版本的 Java 运行环境 (JRE)。现在提供了包含Java运行环境的OmegaT文件包以省去用户选择、获取和安装的麻烦。 
 
-如果已经安装了 Java，安装 OmegaT 当前版本的最简便方法是使用 Java Web Start。为此，需要下载下面的文件并运行它：
+如果已经安装了 Java，安装 OmegaT 当前版本的一种方法是使用 Java Web Start。为此，需要下载下面的文件并运行它：
 
    http://omegat.sourceforge.net/webstart/OmegaT.jnlp
 
@@ -96,66 +103,87 @@ OmegaT 直接支持下列文件格式：
 
 另一种方法下载并安装 OmegaT 的方法如下所述： 
 
-Windows 和 Linux 用户：如果确信系统已经安装了合适的 JRE 版本，您可以安装不带 JRE 的 OmegaT 版本（版本名称中标明为 without_JRE）。如果还是有疑问，我们建议您使用“标准”版本，即带有 JRE 的版本。这是件安全的事情，因为即便系统中已经安装了 JRE ,该版本也不会与之冲突。
+Windows 和 Linux 用户：如果确信系统已经安装了合适的 JRE 版本，您可以安装不带 JRE 的 OmegaT 版本（版本名称中标明为 without_JRE）。如果存有疑问，我们建议您使用带有 JRE 的版本。这样做是安全的，因为即便系统中已经安装了JRE，该版本也不会与之冲突。
 
-Linux 用户：要注意 OmegaT 无法与一些 Linux 发行版（如 Ubuntu）中的免费开源 Java 实现一起运行，因为它们或是过时，或是不完整。可以通过上述网址下载安装 Sun 公司的 Java 运行环境（JRE）或者直接下载安装捆绑了 JRE 的 OmegaT（标记了“Linux”的.tar.gz 包文件）。
+Linux用户：
+OmegaT将运行于随许多Linux发行版（如Ubuntu）一起打包的开源实现的Java，但您可能遇到bug、显示问题或遗失的功能。因此我们建议您下载安装 Oracle Java 运行环境（JRE）或者直接下载安装捆绑了JRE的OmegaT文件包（标记了“Linux”的.tar.gz 包文件）。如果您系统上已经安装了Java，您必须确保它在运行路径中，否则需要在启动OmegaT时明确调用。如果您不熟悉Linux，我们建议您安装带有JRE的OmegaT版本。这样做是安全的，因为该JRE不会与系统中已安装的其它Java相冲突。
 
-Mac 用户：Mac OS X 上已经安装了 JRE。
+Mac用户：
+在Mac OS X 10.7 (Lion)之前的Mac OS X已经安装了JRE。当Lion用户首次运行需要Java的程序时，系统将提示用户且最后会自动下载并安装。
 
-PowerPC 上的 Linux 用户：由于 Sun 公司未提供用于 PPC 系统的 JRE，用户必须下载 IBM 公司的 JRE。在此情况下可从下列网址下载：
+PowerPC系统上的Linux：
+用户需要下载IBM的JRE，因为Sun没有为PPC系统提供JRE。在此情况下可从下列网址下载：
 
-    http://www-128.ibm.com/developerworks/java/jdk/linux/download.html 
+    http://www.ibm.com/developerworks/java/jdk/linux/download.html 
 
 
 3.2安装
-* Windows 用户: 仅需运行安装程序。如果需要，安装程序可以创建启动 OmegaT 的快捷方式。* 其他用户：为安装 OmegaT，仅需为 OmegaT 创建一个适当的文件夹（例如：Linux 系统上的 /usr/local/lib）。将 OmegaT 的 zip 或 tar.gz 存档文件复制到该文件夹并将其在该处解压缩。
+* Windows用户：
+仅需启动安装程序。如果需要，安装程序可以创建启动OmegaT的快捷方式。
 
-3.3启动 OmegaT 可以通过多种途径启动 OmegaT。
+* Linux用户：
+把压缩包放在适当的文件夹并解压后就可以启动OmegaT了。不过您可以使用安装脚本（linux-install.sh）进行更整洁和友好的安装过程。要使用此脚本，请打开终端窗口（控制台），进入包含OmegaT.jar和linux-install.sh的目录并执行./linux-install.sh。
 
-* Windows 用户：通过双击 OmegaT.exe 文件。如果在文件管理器（Windows Explorer）中仅看到 OmegaT 而不是 OmegaT.exe 文件，请变更设置以显示文件扩展名。
+* Mac 用户：
+复制OmegaT.zip压缩包到适当的位置并解压，这样可以可到一个包含HTML文档索引文件和OmegaT.app程序文件的文件夹了。
 
-* 通过双击 OmegaT.jar 文件。该方法仅当 .jar 文件类型与系统中的 Java 相关联时有效。
+* 其他（如Solaris、FreeBSD）：
+安装OmegaT时只需为其创建适当的文件夹。复制OmegaT zip或tar.bz2压缩包到这个文件夹并解压。
 
-* 从命令行运行。启动 OmegaT 的命令为：
+3.3启动OmegaT
+按如下方式启动OmegaT。
+
+* Windows用户：
+若在安装时您选择创建了桌面快捷方式，那么双击它。或者双击OmegaT.exe文件。如果您能在文件管理器（Windows资源管理器）中看到OmegaT但没有OmegaT.exe文件，请修改此设置以显示文件扩展名。
+
+* Linux用户：
+如果您用所提供的脚本实施安装，那么可以这样启动OmegaT：
+Alt+F2
+然后：
+omegat
+
+* Mac用户：
+双击OmegaT.app文件。
+
+* 从文件管理器（所有系统）：
+双击OmegaT.jar文件。该方法仅当.jar文件类型与系统中的Java相关联时有效。
+
+* 从命令行（所有系统）：
+启动OmegaT的命令为：
 
 cd <OmegaT.jar 文件所在文件夹>
 
 <Java 可执行文件的路径和名称> -jar OmegaT.jar
 
-（Java 可执行文件即 Linux 系统中的 java 文件和 Windows 系统中的 java.exe 文件。如果 Java 安装为系统级，则无须输入完整路径。）
+（Java 可执行文件即 Linux 系统中的 java 文件和 Windows 系统中的 java.exe 文件。如果系统上安装了Java且处于命令行路径中，则无需输入它的完整路径。）
 
-* Windows 用户：安装程序可为您在开始菜单、桌面或快速启动区中创建快捷方式。您也可以手动将 OmegaT.exe 文件拖动到开始菜单、桌面或快速启动区，以将其链接到该处。
+定制OmegaT启动方式：
 
-* Linux KDE 用户：可按下列步骤将 OmegaT 添加到菜单中：
+* Windows用户：
+安装程序可以在开始菜单、桌面和快速启动栏创建快捷方式。您也可以手动将 OmegaT.exe 文件拖动到开始菜单、桌面或快速启动栏，以将其链接到该处。
 
-［控制中心］－［桌面］－［面板］－［菜单］－［编辑 K 菜单］－［文件］－［新菜单项／新子菜单］。
+* Linux用户：
+要更友好的启动OmegaT，您可以使用一起提供的Kaptain脚本（omegat.kaptn）。要使用此脚本必须首先安装Kaptain。然后您可以用Alt+F2运行Kaptain启动脚本omegat.kaptn。
 
-然后选择适当的菜单，通过［文件］－［新子菜单］ 和［文件］－［新项目］ 添加一个子菜单／项目。输入 OmegaT 作为新菜单项的名称。
+关于Kaptain脚本及在Linux上添加菜单项和启动图标的详细信息，请参阅OmegaT on Linux HowTo。
 
-在“命令［Command］”字段中，通过导航［navigation］按钮找到 OmegaT  启动脚本并加以选中。 
-
-点击图标按钮（在 Name/Description/Comment 字段的右边），其它图标［Other Icons］ - 浏览［Browse］，导航至 OmegaT 应用程序文件夹的 /images 子文件夹。选中 OmegaT.png 图标。
-
-最后，通过“文件-保存”［File－Save］保存所作变更。
-
-* Linux GNOME 用户：可通过下列步骤将 OmegaT 添加到面板（屏幕顶部的条区）：
-
-在面板单击鼠标右键 － “添加到面板”［Add New Launcher］。在［名称］（Name）字段输入 "OmegaT"，在【命令】（Command）字段使用［导航］按钮找到 OmegaT 启动的脚本。选中并通过［确定］（OK）按钮进行确认。
+Mac用户：
+拖动OmegaT.app到dock面板或Finder窗口的工具栏以便从任意位置启动此程序。您还可以在Spotlight搜索区域中进行调用。
 
 ==============================================================================
- 4. 参与 OmegaT 项目
+ 4. 参与OmegaT项目
 
 如果想参与 OmegaT 的开发，可通过下列网址和开发者取得联系：
     http://lists.sourceforge.net/lists/listinfo/omegat-development
 
 如果想翻译 OmegaT 的用户界面、用户手册或者其它相关文档，请访问以下网址：
       
-      http://www.omegat.org/en/translation-info.html
+      http://www.omegat.org/en/howtos/localizing_omegat.php
 
 并订阅下列地址的译者邮件列表：
-      http://lists.sourceforge.net/mailman/listinfo/omegat-l10n
+      https://lists.sourceforge.net/lists/listinfo/omegat-l10n
 
-如欲提供其它形式帮助，请先订阅下列用户组：
+如欲提供其它形式的帮助，请先订阅下列用户组：
       http://tech.groups.yahoo.com/group/omegat/
 
 并对 OmegaT 世界正在发生的事情做一些了解……
@@ -171,11 +199,18 @@ cd <OmegaT.jar 文件所在文件夹>
   Kim Bruning
   Alex Buloichik (开发人员主管)
   Sandra Jean Chua
+  Thomas Cordonnier
   Martin Fleurke  
   Wildrich Fourie
+  Phillip Hall
+  Jean-Christophe Helary
   Thomas Huriaux
-  Guido Leenders
+  Hans-Peter Jacobs
+  Kyle Katarn
+  Piotr Kulik
   Ibai Lakunza Velasco
+  Guido Leenders
+  Aaron Madlon-Kay
   Fabián Mandelbaum
   John Moran
   Maxym Mykhalchuk 
@@ -185,6 +220,7 @@ cd <OmegaT.jar 文件所在文件夹>
   Tiago Saboga
   Andrzej Sawuła
   Benjamin Siband
+  Yu Tang
   Rashid Umarov  
   Antonio Vilei
   Martin Wunderlich
@@ -199,28 +235,36 @@ cd <OmegaT.jar 文件所在文件夹>
   Marc Prior 
   以及非常、非常多的提供了帮助的人们。
 
-（如果您认为自己曾为 OmegaT 项目做出过突出贡献，但未出现在该列表中，请联系我们）
+（如果您认为自己曾为 OmegaT 项目做出过突出贡献，但未出现在该列表中，请随时联系我们）
 
 OmegaT 使用了下列类库：
-
-  Somik Raha, Derrick Oswald 等人的HTMLParser （LGPL 许可协议）
-  http://sourceforge.net/projects/htmlparser
-
-  Steve Roy 的 MRJ Adapter （LGPL 许可协议）
-  http://homepage.mac.com/sroy/mrjadapter/
-
-  VLSolutions 的 VLDocking Framework（CeCILL 许可协议）
-  http://www.vlsolutions.com/en/products/docking/
-
-  László Németh 等人的 Hunspell（LGPL 许可协议）
-
-  Todd Fast 、 Timothy Wall 等人的 JNA（LGPL 许可协议）
-
-  Swing-Layout 1.0.2（LGPL 许可协议）
-
-  Jmyspell 2.1.4（LGPL 许可协议）
-
-  JAXB 2.1.7（GPLv2 + classpath exception）
+  Somik Raha, Derrick Oswald 等人的 HTMLParser （LGPL 许可）
+  Steve Roy 的 MRJ Adapter （LGPL 许可）
+  VLSolutions 的 VLDocking Framework（CeCILL 许可）
+  László Németh 等人的 Hunspell（LGPL 许可）
+  Todd Fast、Timothy Wall 等人的 JNA（LGPL 许可）
+  Swing-Layout 1.0.2（LGPL 许可）
+  Jmyspell 2.1.4（LGPL 许可）
+  SVNKit 1.7.5（TMate许可）
+  Sequence Library（Sequence Library许可）
+  ANTLR 3.4（ANTLR 3许可）
+  SQLJet 1.1.3（GPL v2）
+  JGit（Eclipse分发许可）
+  JSch（JSch许可）
+  Base64（公共领域）
+  Diff（GPL）
+  orion-ssh2-214（Java的Orion SSH许可）
+  lucene-*.jar（Apache License 2.0）
+  英语解析器（org.omegat.tokenizer.SnowballEnglishTokenizer和
+  org.omegat.tokenizer.LuceneEnglishTokenizer）使用Okapi的分割词汇
+（http://okapi.sourceforge.net）（LGPL许可）
+  tinysegmenter.jar（修改过的BSD许可）
+  commons-*.jar（Apache License 2.0）
+  jWordSplitter（Apache License 2.0）
+  LanguageTool.jar（LGPL许可）
+  morfologik-*.jar（Morfologik许可）
+  segment-1.4.1.jar（Segment许可）
+  pdfbox-app-1.8.1.jar（Apache License 2.0）
 
 ==============================================================================
  5.  使用 OmegaT 过程中遇到了 Bug？需要帮助吗？
@@ -236,10 +280,10 @@ OmegaT 使用了下列类库：
 您可以将文件的副本、部分日志、屏幕截图，以及其他任何可以帮助开发人员找到并处理您所遇到的 Bug 的内容添加到报告中。
 
 以下网址可以查阅用户组的归档文件：
-     http://groups.yahoo.com/group/OmegaT/
+     http://tech.groups.yahoo.com/group/OmegaT/
 
 以下网址可以浏览 Bug 报告，在必要的情况下也可以书写一份新的 Bug 报告：
-     http://sourceforge.net/tracker/?group_id=68187&atid=520347
+     https://sourceforge.net/p/omegat/bugs/
 
 如果您想跟进所报告的 BUG 之后续情况，您可能需要注册成为 Source Forge 的用户。
 

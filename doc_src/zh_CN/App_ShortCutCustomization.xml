@@ -1,0 +1,871 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE appendix PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<appendix id="appendix.shortcut.custom">
+  <title>自定义快捷键</title>
+
+  <section id="ch04.shortcuts.customization">
+    <title><indexterm class="singular">
+        <primary>快捷键</primary> <secondary>自定义</secondary>
+      </indexterm>自定义快捷键</title>
+
+    <para>在主菜单中的大部分菜单项可设置新的快捷键。通过 OmegaT 首选项文件夹（请参阅<link linkend="user.files">用户文件位置</link>）中的快捷键定义文件，您可改变已分配的快捷键或添加新的快捷键。</para>
+
+    <para>快捷键定义文件名称必须为 <filename>MainMenuShortcuts.properties</filename>，同时每行最多包含一个快捷键的定义。可接受空行，而注释行应以 &quot;//&quot; 开头。在 &quot;//&quot; 后的所有内容将被忽略。</para>
+
+    <para>修改 <filename>MainMenuShortcuts.properties</filename> 文件后，必须重新运行 <application>OmegaT</application> 才能让新的快捷键生效。</para>
+
+    <para>快捷键定义的语法如下：<code>&lt;menu item code&gt;=&lt;shortcut&gt;</code>，其中<emphasis>&lt;menu item code&gt;</emphasis>取自下表，而<emphasis>&lt;shortcut&gt;</emphasis>是用户指定的按键组合<footnote>
+        <para>按键（快捷键）的全部语法的定义在来自 Oracle Java 1.6 文档（页面底部）：<ulink url="http://docs.oracle.com/javase/6/docs/api/javax/swing/KeyStroke.html">Java 1.6 快捷键</ulink></para>
+      </footnote>.</para>
+
+    <para>&lt;shortcut&gt;必须为下面的形式：0或多个<code>&lt;modifier&gt;</code>后跟着0或1个<code>&lt;event&gt;</code>后跟着1个<code>&lt;key&gt;</code>，其中：<itemizedlist>
+        <listitem>
+          <para><code>&lt;modifier&gt;</code> 可以为：<emphasis>shift</emphasis>, <emphasis>control</emphasis>, <emphasis>ctrl</emphasis>, <emphasis>meta</emphasis><footnote>
+              <para>在 Mac 系统中，必须使用 <emphasis>meta</emphasis> 修饰符来指定 <emphasis>command</emphasis> 键。</para>
+            </footnote>, <emphasis>alt</emphasis>,
+          <emphasis>altGraph</emphasis></para>
+        </listitem>
+
+        <listitem>
+          <para><code>&lt;event&gt;</code> 可以为：<emphasis>typed</emphasis>, <emphasis>pressed</emphasis>, <emphasis>released</emphasis></para>
+        </listitem>
+
+        <listitem>
+          <para>而 <code>&lt;key&gt;</code> 可以为您键盘上有效的任何键。<footnote>
+              <para>可用的按键事件在来自 Oracle 的 Java 1.6 文档中列出：<ulink url="http://docs.oracle.com/javase/6/docs/api/java/awt/event/KeyEvent.html">Java 1.6 按键事件说明</ulink></para>
+            </footnote>.</para>
+        </listitem>
+      </itemizedlist></para>
+
+    <para>例如，缺省的OmegaT快捷键<footnote>
+        <para>缺省的 OmegaT 快捷键设置可从 Sourceforge 获取：<ulink url="http://omegat.svn.sourceforge.net/viewvc/omegat/branches/release-2-6/src/org/omegat/gui/main/MainMenuShortcuts.properties">缺省的 OmegaT 快捷键</ulink></para>
+
+        <para>在Mac系统中缺省的OmegaT快捷键同样可从Sourceforge获取，其中把所有的“ctrl”都被替换为“meta”：<ulink url="http://omegat.svn.sourceforge.net/viewvc/omegat/branches/release-2-6/src/org/omegat/gui/main/MainMenuShortcuts.mac.properties">Mac 系统上缺省的OmegaT快捷键</ulink></para>
+      </footnote>，其中可以看到：</para>
+
+    <itemizedlist>
+      <listitem>
+        <para><code>projectOpenMenuItem=ctrl O</code></para>
+      </listitem>
+
+      <listitem>
+        <para><code>editCreateGlossaryEntryMenuItem=ctrl shift G</code></para>
+      </listitem>
+    </itemizedlist>
+
+    <para>第一个是<guimenuitem>打开项目</guimenuitem>的快捷键，第二个为<guimenuitem>创建词汇表条目</guimenuitem>。</para>
+
+    <para>如果想用<keycombo> <keycap>Shift</keycap> <keycap>Ctrl</keycap> <keycap>O</keycap> </keycombo>来打开项目，请把<filename>MainMenuShortcuts.properties</filename>修改成这样：<code>
+    </code></para>
+
+    <para><code>projectOpenMenuItem=shift ctrl O</code>.</para>
+
+    <para>如果您用Mac且想设置<keycombo> <keycap>Shift</keycap> <keycap>Command</keycap> <keycap>S</keycap> </keycombo>为<menuchoice> <guimenu>工具</guimenu> <guimenuitem>统计</guimenuitem> </menuchoice>的快捷方式，请在<filename>MainMenuShortcuts.properties</filename>中添加此行：<code/></para>
+
+    <para><code> toolsShowStatisticsStandardMenuItem=shift meta
+    S</code></para>
+
+    <para>然后保存文件并重新启动<application>OmegaT</application>。现在新的快捷键应该出现在刚修改的菜单项旁边。不会和系统快捷键冲突的话，它们在OmegaT中应该有效了。</para>
+  </section>
+
+  <section id="ch04.shortcuts.ProjectMenu">
+    <title>项目菜单</title>
+
+    <table>
+      <title>项目菜单</title>
+
+      <tgroup cols="3" colsep="1">
+        <colspec align="left" colname="1" colnum="1"/>
+
+        <colspec align="left" colname="2" colnum="2"/>
+
+        <colspec align="left" colname="3" colnum="3"/>
+
+        <thead>
+          <row>
+            <entry>菜单项</entry>
+
+            <entry>缺省快捷键</entry>
+
+            <entry>菜单项代码</entry>
+          </row>
+        </thead>
+
+        <tbody>
+          <row>
+            <entry>新建</entry>
+
+            <entry/>
+
+            <entry>projectNewMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>打开</entry>
+
+            <entry><keycap>Ctrl+O</keycap></entry>
+
+            <entry>projectOpenMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>下载团队项目</entry>
+
+            <entry/>
+
+            <entry>projectTeamNewMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>导入源文件</entry>
+
+            <entry/>
+
+            <entry>projectImportMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>从MediaWiki导入……</entry>
+
+            <entry/>
+
+            <entry>projectWikiImportMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>重新载入</entry>
+
+            <entry><keycap>F5</keycap></entry>
+
+            <entry>projectReloadMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>关闭</entry>
+
+            <entry><keycap>Ctrl+Shift+W</keycap></entry>
+
+            <entry>projectCloseMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>保存</entry>
+
+            <entry><keycap>Ctrl+S</keycap></entry>
+
+            <entry>projectSaveMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>创建已译文档</entry>
+
+            <entry><keycap>Ctrl+D</keycap></entry>
+
+            <entry>projectCompileMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>属性……</entry>
+
+            <entry><keycap>Ctrl+E</keycap></entry>
+
+            <entry>projectEditMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>项目文件……</entry>
+
+            <entry><keycap>Ctrl+L</keycap></entry>
+
+            <entry>viewFileListMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>退出</entry>
+
+            <entry><keycap>Ctrl+Q</keycap></entry>
+
+            <entry>projectExitMenuItem</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+  </section>
+
+  <section id="ch04.shortcuts.EditMenu">
+    <title>编辑菜单</title>
+
+    <table>
+      <title>编辑菜单</title>
+
+      <tgroup cols="3" colsep="1">
+        <colspec align="left" colname="1" colnum="1"/>
+
+        <colspec align="left" colname="2" colnum="2"/>
+
+        <colspec align="left" colname="3" colnum="3"/>
+
+        <thead>
+          <row>
+            <entry>菜单项</entry>
+
+            <entry>缺省快捷键</entry>
+
+            <entry>菜单项代码</entry>
+          </row>
+        </thead>
+
+        <tbody>
+          <row>
+            <entry>取消前一操作</entry>
+
+            <entry><keycap>Ctrl+Z</keycap></entry>
+
+            <entry>editUndoMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>重做前一操作</entry>
+
+            <entry><keycap>Ctrl+Y</keycap></entry>
+
+            <entry>editRedoMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>用匹配替换</entry>
+
+            <entry><keycap>Ctrl+R</keycap></entry>
+
+            <entry>editOverwriteTranslationMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>插入匹配</entry>
+
+            <entry><keycap>Ctrl+I</keycap></entry>
+
+            <entry>editInsertTranslationMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>用机器翻译替换</entry>
+
+            <entry><keycap>Ctrl+M</keycap></entry>
+
+            <entry>editOverwriteMachineTranslationMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>用源文本替换</entry>
+
+            <entry><keycap>Shift+Ctrl+R</keycap></entry>
+
+            <entry>editOverwriteSourceMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>插入源文本</entry>
+
+            <entry><keycap>Shift+Ctrl+I</keycap></entry>
+
+            <entry>editInsertSourceMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>插入源标签</entry>
+
+            <entry><keycap>Shift+Ctrl+T</keycap></entry>
+
+            <entry>editTagPainterMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>导出选中部分</entry>
+
+            <entry><keycap>Shift+Ctrl+C</keycap></entry>
+
+            <entry>editExportSelectionMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>创建词汇表条目</entry>
+
+            <entry><keycap>Shift+Ctrl+G</keycap></entry>
+
+            <entry>editCreateGlossaryEntryMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>在项目中搜索……</entry>
+
+            <entry><keycap>Ctrl+F</keycap></entry>
+
+            <entry>editFindInProjectMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>选择第一匹配</entry>
+
+            <entry><keycap>Ctrl+1</keycap></entry>
+
+            <entry>editSelectFuzzy1MenuItem</entry>
+          </row>
+
+          <row>
+            <entry>选择第二匹配</entry>
+
+            <entry><keycap>Ctrl+2</keycap></entry>
+
+            <entry>editSelectFuzzy2MenuItem</entry>
+          </row>
+
+          <row>
+            <entry>选择第三匹配</entry>
+
+            <entry><keycap>Ctrl+3</keycap></entry>
+
+            <entry>editSelectFuzzy3MenuItem</entry>
+          </row>
+
+          <row>
+            <entry>选择第四匹配</entry>
+
+            <entry><keycap>Ctrl+4</keycap></entry>
+
+            <entry>editSelectFuzzy4MenuItem</entry>
+          </row>
+
+          <row>
+            <entry>选择第五匹配</entry>
+
+            <entry><keycap>Ctrl+5</keycap></entry>
+
+            <entry>editSelectFuzzy5MenuItem</entry>
+          </row>
+
+          <row>
+            <entry>转换大小写为/小写</entry>
+
+            <entry/>
+
+            <entry>lowerCaseMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>转换大小写为/大写</entry>
+
+            <entry/>
+
+            <entry>upperCaseMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>转换大小写为/首字母大写</entry>
+
+            <entry/>
+
+            <entry>titleCaseMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>循环转换大小写……</entry>
+
+            <entry><keycap>Shift+F3</keycap></entry>
+
+            <entry>cycleSwitchCaseMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>用作缺省译文</entry>
+
+            <entry/>
+
+            <entry>editMultipleDefault</entry>
+          </row>
+
+          <row>
+            <entry>创建可选译文</entry>
+
+            <entry/>
+
+            <entry>editMultipleAlternate</entry>
+          </row>
+
+        </tbody>
+      </tgroup>
+    </table>
+  </section>
+
+  <section id="ch04.shortcuts.GoToMenu">
+    <title>前往菜单</title>
+
+    <table>
+      <title>前往菜单</title>
+
+      <tgroup cols="3" colsep="1">
+        <colspec align="left" colname="1" colnum="1"/>
+
+        <colspec align="left" colname="2" colnum="2"/>
+
+        <colspec align="left" colname="3" colnum="3"/>
+
+        <thead>
+          <row>
+            <entry>菜单项</entry>
+
+            <entry>缺省快捷键</entry>
+
+            <entry>菜单项代码</entry>
+          </row>
+        </thead>
+
+        <tbody>
+          <row>
+            <entry>后一未译片段</entry>
+
+            <entry><keycap>Ctrl+U</keycap></entry>
+
+            <entry>gotoNextUntranslatedMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>后一片段</entry>
+
+            <entry><keycap>Ctrl+N</keycap>或<keycap>Enter</keycap>或<keycap>Tab</keycap></entry>
+
+            <entry>gotoNextSegmentMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>前一片段</entry>
+
+            <entry><keycap>Ctrl+P</keycap>或<keycap>Ctrl+Enter</keycap>或<keycap>Ctrl+Tab</keycap></entry>
+
+            <entry>gotoPreviousSegmentMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>片段序号……</entry>
+
+            <entry><keycap>Ctrl+J</keycap></entry>
+
+            <entry>gotoSegmentMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>后一笔记</entry>
+
+            <entry/>
+
+            <entry>gotoNextNoteMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>前一笔记</entry>
+
+            <entry/>
+
+            <entry>gotoPreviousNoteMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>在历史中前进……</entry>
+
+            <entry><keycap>Ctrl+Shift+N</keycap></entry>
+
+            <entry>gotoHistoryForwardMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>在历史中回退……</entry>
+
+            <entry><keycap>Ctrl+Shift+P</keycap></entry>
+
+            <entry>gotoHistoryBackMenuItem</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+  </section>
+
+  <section id="ch04.shortcuts.ViewMenu">
+    <title>查看菜单</title>
+
+    <table>
+      <title>查看菜单</title>
+
+      <indexterm class="singular">
+        <primary>自定义快捷键</primary> <secondary>查看菜单</secondary>
+      </indexterm>
+
+      <tgroup cols="3" colsep="1">
+        <colspec align="left" colname="1" colnum="1"/>
+
+        <colspec align="left" colname="2" colnum="2"/>
+
+        <colspec align="left" colname="3" colnum="3"/>
+
+        <thead>
+          <row>
+            <entry>菜单项</entry>
+
+            <entry>缺省快捷键</entry>
+
+            <entry>菜单项代码</entry>
+          </row>
+        </thead>
+
+        <tbody>
+          <row>
+            <entry>标记已译片段</entry>
+
+            <entry/>
+
+            <entry>viewMarkTranslatedSegmentsCheckBoxMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>标记未译片段</entry>
+
+            <entry/>
+
+            <entry>viewMarkUntranslatedSegmentsCheckBoxMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>显示源片段</entry>
+
+            <entry/>
+
+            <entry>viewDisplaySegmentSourceCheckBoxMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>标记非独特片段</entry>
+
+            <entry/>
+
+            <entry>viewMarkNonUniqueSegmentsCheckBoxMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>标记含笔记片段</entry>
+
+            <entry/>
+
+            <entry>viewMarkNotedSegmentsCheckBoxMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>标记非中断空白</entry>
+
+            <entry/>
+
+            <entry>viewMarkNBSPCheckBoxMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>标记空白字符</entry>
+
+            <entry/>
+
+            <entry>viewMarkWhitespaceCheckBoxMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>标记双向控制字符</entry>
+
+            <entry/>
+
+            <entry>viewMarkBidiCheckBoxMenuItem</entry>
+          </row>
+
+           <row>
+            <entry>修改信息/不显示</entry>
+
+            <entry/>
+
+            <entry>viewDisplayModificationInfoNoneRadioButtonMenuItem</entry>
+          </row>
+
+         <row>
+            <entry>修改信息/显示选中部分</entry>
+
+            <entry/>
+
+            <entry>viewDisplayModificationInfoSelectedRadioButtonMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>修改信息/显示所有</entry>
+
+            <entry/>
+
+            <entry>viewDisplayModificationInfoAllRadioButtonMenuItem</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+  </section>
+
+  <section id="ch04.shortcuts.ToolsMenu">
+    <title>工具菜单</title>
+
+    <table>
+      <title>工具菜单</title>
+
+      <tgroup cols="3" colsep="1">
+        <colspec align="left" colname="1" colnum="1"/>
+
+        <colspec align="left" colname="2" colnum="2"/>
+
+        <colspec align="left" colname="3" colnum="3"/>
+
+        <thead>
+          <row>
+            <entry>菜单项</entry>
+
+            <entry>缺省快捷键</entry>
+
+            <entry>菜单项代码</entry>
+          </row>
+        </thead>
+
+        <tbody>
+          <row>
+            <entry>检验标签</entry>
+
+            <entry><keycap>Ctrl +T</keycap></entry>
+
+            <entry>toolsValidateTagsMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>统计(&amp;S)</entry>
+
+            <entry/>
+
+            <entry>toolsShowStatisticsStandardMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>匹配统计(&amp;M)</entry>
+
+            <entry/>
+
+            <entry>toolsShowStatisticsMatchesMenuItem</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+  </section>
+
+  <section id="ch04.shortcuts.OptionsMenu">
+    <title>选项菜单</title>
+
+    <table>
+      <title>选项菜单</title>
+
+      <tgroup cols="3" colsep="1">
+        <colspec align="left" colname="1" colnum="1"/>
+
+        <colspec align="left" colname="2" colnum="2"/>
+
+        <colspec align="left" colname="3" colnum="3"/>
+
+        <thead>
+          <row>
+            <entry>菜单项</entry>
+
+            <entry>缺省快捷键</entry>
+
+            <entry>菜单项代码</entry>
+          </row>
+        </thead>
+
+        <tbody>
+          <row>
+            <entry>使用 Tab 前进</entry>
+
+            <entry/>
+
+            <entry>optionsTabAdvanceCheckBoxMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>退出前总是确认</entry>
+
+            <entry/>
+
+            <entry>optionsAlwaysConfirmQuitCheckBoxMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>机器翻译</entry>
+
+            <entry/>
+
+            <entry/>
+          </row>
+
+          <row>
+            <entry>翻译提示/启用翻译提示</entry>
+
+            <entry/>
+
+            <entry>optionsTransTipsEnableMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>翻译提示/精确匹配</entry>
+
+            <entry/>
+
+            <entry>optionsTransTipsExactMatchMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>字体……</entry>
+
+            <entry/>
+
+            <entry>optionsFontSelectionMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>文件过滤器……</entry>
+
+            <entry/>
+
+            <entry>optionsSetupFileFiltersMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>分割规则……</entry>
+
+            <entry/>
+
+            <entry>optionsSentsegMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>拼写检查……</entry>
+
+            <entry/>
+
+            <entry>optionsSpellCheckMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>编辑行为……</entry>
+
+            <entry/>
+
+            <entry>optionsWorkflowMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>标签验证……</entry>
+
+            <entry/>
+
+            <entry>optionsTagValidationMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>团队……</entry>
+
+            <entry/>
+
+            <entry>optionsTeamMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>外部 TMX ……</entry>
+
+            <entry/>
+
+            <entry>optionsExtTMXMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>查看……</entry>
+
+            <entry/>
+
+            <entry>optionsViewOptionsMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>保存和输出……</entry>
+
+            <entry/>
+
+            <entry>optionsSaveOptionsMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>登录代理……</entry>
+
+            <entry/>
+
+            <entry>optionsViewOptionsMenuLoginItem</entry>
+          </row>
+
+          <row>
+            <entry>恢复主窗口</entry>
+
+            <entry/>
+
+            <entry>optionsRestoreGUIMenuItem</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+  </section>
+
+  <section id="ch04.shortcuts.HelpMenu">
+    <title>帮助菜单</title>
+
+    <table>
+      <title>帮助菜单</title>
+
+      <tgroup cols="3" colsep="1">
+        <colspec align="left" colname="1" colnum="1"/>
+
+        <colspec align="left" colname="2" colnum="2"/>
+
+        <colspec align="left" colname="3" colnum="3"/>
+
+        <thead>
+          <row>
+            <entry>菜单项</entry>
+
+            <entry>缺省快捷键</entry>
+
+            <entry>菜单项代码</entry>
+          </row>
+        </thead>
+
+        <tbody>
+          <row>
+            <entry>用户手册……</entry>
+
+            <entry><keycap>F1</keycap></entry>
+
+            <entry>helpContentsMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>关于……</entry>
+
+            <entry/>
+
+            <entry>helpAboutMenuItem</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+  </section>
+</appendix>

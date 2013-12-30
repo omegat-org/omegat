@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<appendix id="appendix.TokenizerPlugin.inOmegaT">
+  <title>解析器插件<indexterm class="singular">
+      <primary>插件</primary> <secondary>解析器</secondary>
+    </indexterm></title>
+
+  <section>
+    <title>介绍<indexterm class="singular">
+        <primary>Lucene</primary> <see>解析器</see>
+      </indexterm><indexterm class="singular">
+        <primary>Stemmer</primary> <see>解析器</see>
+      </indexterm></title>
+
+    <para>分解器（或 stemmer，词干分析器）提高了识别源和翻译记忆数据中的词形变化的匹配质量。同时也提高了词汇表的匹配度。</para>
+
+    <para>英语中的词干分析器，例如能识别字符串 &quot;cats&quot;（以及 &quot;catlike&quot;, &quot;catty&quot; 等）的词根是 &quot;cat&quot;，而 &quot;stemmer&quot;, &quot;stemming&quot;, &quot;stemmed&quot; 的词根是 &quot;stem&quot;。词干分析算法能还原单词 &quot;fishing&quot;、&quot;fished&quot;、&quot;fish&quot; 以及 &quot;fisher&quot; 为相应的词根 &quot;fish&quot;。这对通过词根加上前缀和后缀形式组成单词的语言特别有用。看看斯洛文尼亚语的一个例子，这些是 &quot;good&quot; 的所有正确的语法形式：</para>
+
+    <itemizedlist>
+      <listitem>
+        <para>lep, lepa, lepo - singular, masculine, feminine, neutral</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>lepši, lepša, lepše . - comparative, nominative, masculine,
+        feminine, neutral, resp. Plural form of the adjective</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>najlepših - superlative, plural, genitive for M,F,N</para>
+      </listitem>
+    </itemizedlist>
+  </section>
+
+  <section>
+    <title>安装和使用</title>
+
+	<para>OmegaT中已包含了解析器。OmegaT会根据项目语言设置中的源语言和目标语言自动选择相应的解析器。还可以在项目属性窗口中选择另一个解析器或当前解析器的不同版本。</para>
+
+	<warning>
+		<title>不兼容性</title>
+		<para>如果在/plugin文件夹找到解析器则OmegaT将不会运行。在启动OmegaT前请删除/plugin文件夹中的所有解析器。</para>
+	</warning>
+	
+  </section>
+</appendix>

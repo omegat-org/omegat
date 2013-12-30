@@ -4,203 +4,207 @@
   <title>用户界面</title>
 
   <section id="user.interface.items">
-    <title>用户界面项目</title>
+    <title>OmegaT主窗口、其他窗口及对话框</title>
 
-    <section id="windows.you.will.use.frequently">
-      <title>常用窗口<indexterm class="singular">
-          <primary>OmegaT 窗口和窗格</primary>
+    <para>OmegaT主窗口包括主菜单、状态栏和几个窗格。还有另外的用来改变OmegaT项目设置的窗口和对话框。下面的信息概述了它们的用途和调用方式：</para>
+
+    <table colsep="0" rowsep="0">
+      <title>OmegaT主窗口<indexterm class="singular">
+          <primary>用户界面</primary> <secondary>OmegaT主窗口</secondary>
         </indexterm></title>
 
-      <variablelist>
-        <varlistentry>
-          <term><application>OmegaT</application> 主窗口</term>
+      <tgroup cols="2" colsep="0" rowsep="1" title="Main OMegaT window">
+        <colspec align="left" colnum="1"/>
 
-          <listitem>
-            <para>包含主菜单、状态栏和几个窗格：</para>
+        <colspec align="left" colnum="2"/>
 
-            <itemizedlist>
-              <listitem>
-                <para>编辑器——输入编辑译文的地方</para>
-              </listitem>
+        <tbody>
+          <row>
+            <entry><guimenuitem>编辑器窗格</guimenuitem></entry>
 
-              <listitem>
-                <para>匹配查看器——显示翻译记忆中最相似的片段</para>
-              </listitem>
+            <entry>输入编辑译文的地方</entry>
+          </row>
 
-              <listitem>
-                <para>词汇表查看器——显示术语</para>
-              </listitem>
+          <row>
+            <entry><guimenuitem>匹配窗格</guimenuitem></entry>
 
-              <listitem>
-                <para>词典查看器——显示词典提供的信息</para>
-              </listitem>
+            <entry>显示翻译记忆中最相似的片段</entry>
+          </row>
 
-              <listitem>
-                <para>翻译记忆——显示由机器翻译服务提供的译文，例如谷歌翻译</para>
-              </listitem>
-            </itemizedlist>
-          </listitem>
-        </varlistentry>
+          <row>
+            <entry><guimenuitem>词汇表窗格</guimenuitem></entry>
 
-        <varlistentry>
-          <term><indexterm class="singular">
-              <primary>快捷键</primary> <secondary>Ctrl+L - 项目文件窗口</secondary>
-            </indexterm>项目文件窗口</term>
+            <entry>显示当前片段中存在的术语</entry>
+          </row>
 
-          <listitem>
-            <para>可译文件列表（通过 <keycombo> <keycap>Ctrl</keycap> <keycap>L</keycap> </keycombo> 打开，使用 <keycap>Esc</keycap> 关闭）</para>
-          </listitem>
-        </varlistentry>
+          <row>
+            <entry><guimenuitem>词典窗格</guimenuitem></entry>
 
-        <varlistentry>
-          <term><indexterm class="singular">
-              <primary>快捷键</primary> <secondary>Ctrl+F - 搜索窗口</secondary>
-            </indexterm>搜索窗口</term>
+            <entry>显示当前片段中词汇的词典提示</entry>
+          </row>
 
-          <listitem>
-            <para>用来搜索项目中的特定片段（通过<keycombo> <keycap>Ctrl</keycap> <keycap>F</keycap> </keycombo>打开，使用 <keycap>Esc</keycap> 关闭）</para>
-          </listitem>
-        </varlistentry>
-      </variablelist>
-    </section>
+          <row>
+            <entry><guimenuitem>机器翻译窗格</guimenuitem></entry>
 
-    <section id="windows.you.may.use.now.and.then">
-      <title>不常用窗口</title>
+            <entry>显示由机器翻译服务提供的译文</entry>
+          </row>
 
-      <variablelist>
-        <varlistentry>
-          <term><indexterm class="singular">
-              <primary>快捷键</primary> <secondary>Ctrl+T - 标签验证窗口</secondary>
-            </indexterm>标签验证窗口</term>
+          <row>
+            <entry><guimenuitem>笔记窗格</guimenuitem></entry>
 
-          <listitem>
-            <para>用来检查译文中的标签错误（通过<keycombo> <keycap>Ctrl</keycap> <keycap>T</keycap> </keycombo>打开，使用 <keycap>Esc</keycap> 关闭）</para>
-          </listitem>
-        </varlistentry>
+            <entry>注解附属于当前片段，例如可选译文或键值对格式中的当前键</entry>
+          </row>
 
-        <varlistentry>
-          <term><indexterm class="singular">
-              <primary>快捷键</primary> <secondary>F1 - 帮助</secondary>
-            </indexterm>帮助浏览器</term>
+          <row>
+            <entry><guimenuitem>注解面板</guimenuitem></entry>
 
-          <listitem>
-            <para>用来阅读用户手册（通过 <keycap>F1</keycap> 打开，使用 <keycap>Esc</keycap> 关闭）</para>
-          </listitem>
-        </varlistentry>
+            <entry>对于PO文件为作者的注解，对于XHTML为待译属性名称。</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
 
-        <varlistentry>
-          <term>匹配统计窗口</term>
+    <table colsep="0" rowsep="0">
+      <title>其它窗口<indexterm class="singular">
+          <primary>用户界面</primary> <secondary>其他窗口</secondary>
+        </indexterm></title>
 
-          <listitem>
-            <para>用来查看项目统计的窗口，通过<menuchoice> <guimenu><indexterm class="singular">
+      <tgroup cols="2" colsep="0" rowsep="1" title="Other windows">
+        <colspec align="left" colnum="1"/>
+
+        <colspec align="left" colnum="2"/>
+
+        <tbody>
+          <row>
+            <entry><guimenuitem><indexterm class="singular">
+                <primary>快捷键</primary> <secondary>标签验证——Ctrl+T</secondary>
+              </indexterm>标签验证窗口</guimenuitem></entry>
+
+            <entry><para>用来检验标签（用<keycombo> <keycap>Ctrl</keycap> <keycap>T</keycap> </keycombo>打开、<keycap>Esc</keycap>关闭）</para></entry>
+          </row>
+
+          <row>
+            <entry><guimenuitem><indexterm class="singular">
+                <primary>快捷键</primary> <secondary>F1——帮助</secondary>
+              </indexterm>帮助浏览器</guimenuitem></entry>
+
+            <entry><para>用来显示用户手册（用<keycap>F1</keycap>打开、<keycap>Esc</keycap>关闭）</para></entry>
+          </row>
+
+          <row>
+            <entry><guimenuitem>统计窗口</guimenuitem></entry>
+
+            <entry><para>用来查看项目统计信息的窗口，通过<menuchoice> <guimenu><indexterm class="singular">
+                    <primary>菜单工具</primary> <secondary>统计</secondary>
+                  </indexterm>工具</guimenu> <guimenuitem>统计</guimenuitem> </menuchoice>打开。</para></entry>
+          </row>
+
+          <row>
+            <entry><guimenuitem>匹配统计窗口</guimenuitem></entry>
+
+            <entry><para>用来查看项目匹配统计的窗口，通过<menuchoice> <guimenu><indexterm class="singular">
                     <primary>菜单工具</primary> <secondary>匹配统计</secondary>
-                  </indexterm>工具</guimenu> <guimenuitem>匹配统计</guimenuitem> </menuchoice>打开。</para>
-          </listitem>
-        </varlistentry>
-      </variablelist>
-    </section>
+                  </indexterm>工具</guimenu> <guimenuitem>匹配统计</guimenuitem> </menuchoice>打开。</para></entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
 
-    <section id="dialogs.to.change.settings">
-      <title>项目设置对话框<indexterm class="singular">
-          <primary>项目</primary> <secondary>项目设置</secondary>
+    <table border="0" colsep="0" rowsep="0">
+      <title>设置对话框<indexterm class="singular">
+          <primary>用户界面</primary> <secondary>设置对话框</secondary> <seealso>项目设置</seealso>
         </indexterm></title>
 
-      <para>下面的对话框用来修改 OmegaT 的项目设置。每个都在单独的部分进行详细描述，它们的信息概述了它们的用途和调用方式：</para>
+      <tgroup cols="2" colsep="0" rowsep="1" title="Settings dialogs">
+        <colspec align="left" colnum="1"/>
 
-      <variablelist>
-        <varlistentry>
-          <term><indexterm class="singular">
-              <primary>快捷键</primary> <secondary>Ctrl+E - 项目属性</secondary>
-            </indexterm><indexterm class="singular">
-              <primary>项目菜单</primary> <secondary>属性</secondary>
-            </indexterm>项目属性</term>
+        <colspec align="left" colnum="2"/>
 
-          <listitem>
-            <para>用来修改项目文件夹和语言（通过<menuchoice> <shortcut> <keycombo> <keycap>Ctrl</keycap> <keycap>E</keycap> </keycombo> </shortcut> <guimenu>项目</guimenu> <guimenuitem>属性……</guimenuitem> </menuchoice>打开，通过 <keycap>Esc</keycap> 关闭</para>
-          </listitem>
-        </varlistentry>
+        <tbody>
+          <row>
+            <entry><guimenuitem>项目属性<indexterm class="singular">
+                <primary>项目菜单</primary> <secondary>属性</secondary>
+              </indexterm></guimenuitem> <indexterm class="singular">
+                <primary>快捷键</primary> <secondary>项目属性——Ctrl+E</secondary>
+              </indexterm></entry>
 
-        <varlistentry>
-          <term><indexterm class="singular">
-              <primary>项目设置</primary> <secondary>字体</secondary>
-            </indexterm>字体<indexterm class="singular">
-              <primary>选项菜单</primary> <secondary>字体</secondary>
-            </indexterm></term>
+            <entry>用来修改项目文件夹和语言（通过<guimenuitem>Ctrl+E </guimenuitem>快捷键或<menuchoice> <guimenu>项目</guimenu> <guimenuitem>属性……</guimenuitem> </menuchoice>打开、<keycap>Esc</keycap>关闭）</entry>
+          </row>
 
-          <listitem>
-            <para>用来修改 <application>OmegaT 用来</application>显示源、译文、匹配和词汇表术语的字体（通过<menuchoice> <guimenu>选项</guimenu> <guimenuitem>字体……</guimenuitem> </menuchoice>打开，通过 <keycap>Esc</keycap><keycap>关闭</keycap></para>
-          </listitem>
-        </varlistentry>
+          <row>
+            <entry><guimenuitem>字体<indexterm class="singular">
+                <primary>项目设置</primary> <secondary>字体</secondary>
+              </indexterm></guimenuitem></entry>
 
-        <varlistentry>
-          <term><indexterm class="singular">
-              <primary>项目设置</primary> <secondary>文件过滤器</secondary>
-            </indexterm>文件过滤器<indexterm class="singular">
-              <primary>选项菜单</primary> <secondary>文件过滤器</secondary>
-            </indexterm></term>
+            <entry><para>用来修改<application>OmegaT</application>显示原文、译文、匹配和词汇表术语的字体（通过<menuchoice> <guimenu>选项</guimenu> <guimenuitem>字体……</guimenuitem> </menuchoice>打开、<keycap>Esc</keycap>）</para></entry>
+          </row>
 
-          <listitem>
-            <para>用来调整所支持格式的处理方式（通过<menuchoice> <guimenu>选项</guimenu> <guimenuitem>文件过滤器……</guimenuitem> </menuchoice>打开，通过 <keycap>Esc</keycap> 关闭）</para>
-          </listitem>
-        </varlistentry>
+          <row>
+            <entry><guimenuitem>文件过滤器<indexterm class="singular">
+                <primary>项目设置</primary> <secondary>文件过滤器</secondary>
+              </indexterm><indexterm class="singular">
+                <primary>选项菜单</primary> <secondary>文件过滤器</secondary>
+              </indexterm></guimenuitem></entry>
 
-        <varlistentry>
-          <term><indexterm class="singular">
-              <primary>项目设置</primary> <secondary>片段分割</secondary>
-            </indexterm>分割规则<indexterm class="singular">
-              <primary>选项菜单</primary> <secondary>分割规则</secondary>
-            </indexterm></term>
+            <entry>用来调整所支持格式的处理方式（通过<menuchoice> <guimenu>选项</guimenu> <guimenuitem>文件过滤器……</guimenuitem> </menuchoice>打开，通过 <keycap>Esc</keycap> 关闭）</entry>
+          </row>
 
-          <listitem>
-            <para>用来改变把源文本分割成句子的方式（通过<menuchoice> <guimenu>选项</guimenu> <guimenuitem>片段分割</guimenuitem> </menuchoice> 打开，通过 <keycap>Esc</keycap> 关闭）</para>
-          </listitem>
-        </varlistentry>
+          <row>
+            <entry><guimenuitem>分割规则<indexterm class="singular">
+                <primary>项目设置</primary> <secondary>片段分割</secondary>
+              </indexterm><indexterm class="singular">
+                <primary>选项菜单</primary> <secondary>分割规则</secondary>
+              </indexterm></guimenuitem></entry>
 
-        <varlistentry>
-          <term><indexterm class="singular">
-              <primary>项目设置</primary> <secondary>编辑行为</secondary>
-            </indexterm>编辑行为<indexterm class="singular">
-              <primary>选项菜单</primary> <secondary>编辑行为</secondary>
-            </indexterm></term>
+            <entry>用来改变把源文本分割成句子的方式（通过<menuchoice> <guimenu>选项</guimenu> <guimenuitem>片段分割</guimenuitem> </menuchoice> 打开，通过 <keycap>Esc</keycap> 关闭）</entry>
+          </row>
 
-          <listitem>
-            <para>用来改变在片段间往返移动时 <application>OmegaT</application> 的行为（通过<menuchoice> <guimenu>选项</guimenu> <guimenuitem>编辑行为……</guimenuitem> </menuchoice>关闭，通过 <keycap>Esc</keycap> 关闭）</para>
-          </listitem>
-        </varlistentry>
-      </variablelist>
-    </section>
+          <row>
+            <entry><guimenuitem>编辑行为<indexterm class="singular">
+                <primary>选项菜单</primary> <secondary>编辑行为</secondary>
+              </indexterm><indexterm class="singular">
+                <primary>项目设置</primary> <secondary>编辑行为</secondary>
+              </indexterm></guimenuitem></entry>
+
+            <entry>用来改变在片段间往返移动时 <application>OmegaT</application> 的行为（通过<menuchoice> <guimenu>选项</guimenu> <guimenuitem>编辑行为……</guimenuitem> </menuchoice>关闭，通过 <keycap>Esc</keycap> 关闭）</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
   </section>
 
   <section id="OmegaT.main.window">
     <title><application>OmegaT</application> 主窗口<indexterm class="singular">
-        <primary>OmegaT 窗口和窗格</primary> <secondary>主窗口</secondary> <tertiary>- 配置</tertiary>
-      </indexterm><indexterm class="singular">
         <primary>OmegaT 窗口和窗格</primary> <secondary>主窗口</secondary>
       </indexterm></title>
 
-    <figure>
-      <title>OmegaT 窗格</title>
+    <figure id="OmegaT.main.window.figure">
+      <title>OmegaT 主窗口</title>
 
       <mediaobject>
         <imageobject role="html">
-          <imagedata fileref="images/OmegaT_panes.png"/>
+          <imagedata fileref="images/OmegaT_panes_25.png" scale="100"/>
         </imageobject>
 
         <imageobject role="fo">
-          <imagedata fileref="images/OmegaT_panes.png" width="80%"/>
+          <imagedata fileref="images/OmegaT_panes_25.png" width="80%"/>
         </imageobject>
       </mediaobject>
     </figure>
 
     <para>主窗口由几个窗格、主菜单和状态栏组成。您可以改变任何窗格的位置，甚至可以通过点击和拖动窗格的名称将其变成独立的窗口。根据窗格的不同状态，在它的右上角可能会显示不同的标志：</para>
 
+    <note>
+      <para>如果您无法看到所有窗格（处于打开或最小化状态），按下<guisubmenu>选项&gt;恢复主窗口</guisubmenu>将把它们恢复为原始状态。</para>
+    </note>
+
     <table>
       <title>窗格 widget<indexterm class="singular">
-          <primary>OmegaT 窗口和面板</primary> <secondary>窗格 widget</secondary>
+          <primary>OmegaT 窗口和窗格</primary> <secondary>窗格 widget</secondary>
         </indexterm></title>
 
       <tgroup cols="2">
-        <colspec align="left" colnum="1" colwidth="60"/>
+        <colspec align="left" colnum="1"/>
 
         <tbody>
           <row>
@@ -214,7 +218,7 @@
                 </imageobject>
               </inlinemediaobject></entry>
 
-            <entry>最小化窗口，这样只在窗口底部显示它的名称。</entry>
+            <entry>最小化窗格后，这样只它的名称在窗口的底部</entry>
           </row>
 
           <row>
@@ -234,6 +238,20 @@
           <row>
             <entry><inlinemediaobject>
                 <imageobject role="html">
+                  <imagedata fileref="images/restore.gif" width="60%"/>
+                </imageobject>
+
+                <imageobject role="fo">
+                  <imagedata fileref="images/restore.gif" width="40%"/>
+                </imageobject>
+              </inlinemediaobject></entry>
+
+            <entry>恢复最大化操作前的布局</entry>
+          </row>
+
+          <row>
+            <entry><inlinemediaobject>
+                <imageobject role="html">
                   <imagedata fileref="images/undock.gif" width="60%"/>
                 </imageobject>
 
@@ -242,7 +260,7 @@
                 </imageobject>
               </inlinemediaobject></entry>
 
-            <entry>从主窗口中移出窗格。</entry>
+            <entry>从主窗口中移出窗格</entry>
           </row>
 
           <row>
@@ -256,13 +274,13 @@
                 </imageobject>
               </inlinemediaobject></entry>
 
-            <entry>把窗格停靠到主窗口。</entry>
+            <entry>把窗格停靠到主窗口内</entry>
           </row>
         </tbody>
       </tgroup>
     </table>
 
-    <para>需要时您可以重叠面板。重叠后面板将在顶部显示一个标签。窗格之间的分割线可以拖动来改变窗格的尺寸。当您忘记了对用户界面进行哪些调整后，可在任何时候使用<guimenuitem><indexterm class="singular">
+    <para>需要时您可以重叠窗格。重叠后的窗格将在顶部显示一个标签。窗格之间的分割线可以拖动来改变窗格的尺寸。当您忘记了对用户界面进行哪些调整后，可在任何时候使用<guimenuitem><indexterm class="singular">
         <primary>OmegaT 窗口</primary> <seealso>OmegaT 窗口和窗格</seealso>
       </indexterm> <indexterm class="singular">
         <primary>OmegaT 窗口</primary> <secondary>恢复原始设置</secondary>
@@ -276,29 +294,29 @@
         </indexterm></title>
 
       <tgroup cols="2">
-        <colspec align="left" colnum="1" colwidth="60"/>
+        <colspec align="left" colnum="1"/>
 
         <tbody>
           <row>
-            <entry>33/33</entry>
+            <entry>27/27</entry>
 
             <entry>片段数 - 已译/总数（当前文件）</entry>
           </row>
 
           <row>
-            <entry>2780/2780</entry>
+            <entry>9319/16338</entry>
 
             <entry>独特片段数 - 已译/总数（整个项目）</entry>
           </row>
 
           <row>
-            <entry>3760</entry>
+            <entry>31175</entry>
 
-            <entry>项目中的总片段数（包括重复）</entry>
+            <entry>项目中的片段总数（包括重复）</entry>
           </row>
 
           <row>
-            <entry>126/127</entry>
+            <entry>103/114</entry>
 
             <entry>在当前片段中原文和译文中的单词数</entry>
           </row>
@@ -313,7 +331,7 @@
           <primary>OmegaT 窗口和窗格</primary> <secondary>编辑器窗格</secondary>
         </indexterm></title>
 
-      <para>这是输入和编辑译文的地方。编辑窗格显示部分被翻译的文本：已经被翻译好的文本将会显示为已翻译，而未翻译的文本以原始语言显示。显示的文本被分成片段，您可以在文档中上下移动或者双击某个片段进行编辑。在上面的情况中，已译片段显示为黄色，然而可以修改此设置以符合自己的喜好（请参阅<xref linkend="submenu.View"/>）。</para>
+      <para>这是输入和编辑译文的地方。编辑窗格显示部分被翻译的文本：已经被翻译好的文本将会显示为已翻译，而未翻译的文本以原始语言显示。显示的文本被分成片段，您可以在文档中上下移动或者双击某个片段进行编辑。在上面的情况中，已译片段显示为黄色。</para>
 
       <para>其中某个片段是激活状态的片段。这是那个显示为两部分的片段。上面部分是源语言，使用绿色背景并加粗字体显示；下面部分是编辑区域，以标记结尾：<indexterm class="singular">
           <primary>片段标记</primary>
@@ -325,7 +343,9 @@
     </section>
 
     <section id="match.viewer">
-      <title>匹配查看器</title>
+      <title>模糊匹配窗格<indexterm class="singular">
+          <primary>OmegaT窗口和窗格</primary> <secondary>模糊匹配窗格</secondary>
+        </indexterm></title>
 
       <para><figure id="matches.pane">
           <title><indexterm class="singular">
@@ -336,11 +356,11 @@
 
           <mediaobject>
             <imageobject role="html">
-              <imagedata fileref="images/MatchesPane.png"/>
+              <imagedata fileref="images/MatchesPane_25.png"/>
             </imageobject>
 
             <imageobject role="fo">
-              <imagedata fileref="images/MatchesPane.png" width="80%"/>
+              <imagedata fileref="images/MatchesPane_25.png" width="80%"/>
             </imageobject>
           </mediaobject>
         </figure></para>
@@ -348,104 +368,244 @@
       <para>匹配查看器中显示译法记忆中最相似的片段，包括您在项目翻译过程中创建的项目翻译记忆，也包括从您早前工作中导入的辅助记忆，或者是您从客户或翻译代理那里得到得到的。</para>
 
       <para>当您进入下一片段，第一个模糊匹配（拥有最高匹配百分比的那个）自动被选中。您可以使用 <guimenuitem>Ctrl+2, 3, 4 或 5</guimenuitem>选择另一个。<indexterm>
-          <primary>快捷键</primary> <secondary>Ctrl+N - 选择匹配</secondary>
+          <primary>快捷键</primary> <secondary>选择匹配——Ctrl+N</secondary>
         </indexterm>当然，如果没有第 5 号匹配，按下<keycombo> <keycap>Ctrl</keycap> <keycap>5</keycap> </keycombo>是没有效果的。要在译文中使用选中的匹配，请使用 <guimenuitem>Ctrl+R</guimenuitem><indexterm class="singular">
-          <primary>快捷键</primary> <secondary>Ctrl+R - 替换文本</secondary>
+          <primary>快捷键</primary> <secondary>替换文本——Ctrl+R</secondary>
         </indexterm> 以用匹配替换目标区域，或使用 <guimenuitem>Ctrl+I <indexterm class="singular">
-          <primary>快捷键</primary> <secondary>Ctrl+I - 插入文本</secondary>
+          <primary>快捷键</primary> <secondary>插入——Ctrl+I</secondary>
         </indexterm></guimenuitem> 以将匹配插入到当前光标位置。</para>
 
-      <para>匹配率大体上相当于匹配片段和被匹配片段中相同的单词数量，并除以两者单词数量中较大者。被选中的模糊匹配会以粗体突出显示，对正在翻译片段中缺少的单词显示为蓝色，而在缺少单词旁边的单词显示为绿色。在上面示例中源片段为 <emphasis role="bold">Duration of exposure &lt;15 min</emphasis>。最高的匹配是 60%，因为在 5 个单词中有 3 个相同。在显示匹配率的这一行还包括了包含这个匹配的翻译记忆的名称<indexterm class="singular">
+      <para>匹配率大体上相当于匹配片段和被匹配片段中相同的单词数量，并除以两者单词数量中较大者。被选中的模糊匹配会以粗体突出显示，对正在翻译片段中缺少的单词显示为蓝色，而在缺少单词旁边的单词显示为绿色。在上述示例中源片段为<emphasis role="bold">Context menu command</emphasis>。第一个匹配度是100%，因为所有的单词都相同。而接下来的两个匹配和第4个匹配是类似的，但不同。在显示匹配率的这一行还显示了包含该匹配的翻译记忆的名称<indexterm class="singular">
           <primary>翻译记忆</primary> <secondary>匹配</secondary>
-        </indexterm>。如果未显示文件名，则发现匹配的源为默认项目的翻译记忆。孤立片段<indexterm class="singular">
+        </indexterm>。如果未显示文件名，则发现匹配的源为缺省项目的翻译记忆。孤立片段<indexterm class="singular">
           <primary>翻译记忆</primary> <secondary>孤立片段</secondary>
-        </indexterm> （第 4 号匹配）表示该片段存在默认项目的翻译记忆中，但不存在于项目的源片段。</para>
+        </indexterm>（第2个匹配）表示该片段存在默认项目的翻译记忆中，但不存在于项目的源片段。</para>
 
-      <para>实际上是三个可用的评价（在上面首个匹配中为 60/60/54）。它们的含义如下：</para>
+      <para>实际上还有三个可用的匹配估计（在上面第4个匹配中为66/66/30）。它们的含义如下：</para>
 
       <itemizedlist>
         <listitem>
-          <para>使用解析器插件（tokenizer plugin）后的匹配百分率</para>
+          <para>使用解析器插件后的匹配百分率</para>
         </listitem>
       </itemizedlist>
 
       <itemizedlist>
         <listitem>
-          <para>默认的 OmegaT 匹配 - 匹配的词汇数 - 忽略数字和标签 - 除以总的词汇数</para>
+          <para>缺省的OmegaT匹配度，即忽略数字和标签后匹配词汇数除以总的词汇数</para>
         </listitem>
       </itemizedlist>
 
       <itemizedlist>
         <listitem>
-          <para>OmegaT 匹配，包括数字、标签</para>
+          <para>包含数字、标签的OmegaT匹配度</para>
         </listitem>
       </itemizedlist>
-    </section>
 
-    <section>
-      <title>词汇表<indexterm class="singular">
-          <primary>OmegaT 窗口和窗格</primary> <secondary>词汇表窗格</secondary>
-        </indexterm></title>
+      <section>
+        <title>定制模糊匹配窗格<indexterm class="singular">
+            <primary>OmegaT窗口和窗格</primary> <secondary>模糊匹配窗格</secondary> <tertiary>定制</tertiary>
+          </indexterm><indexterm class="singular">
+            <primary>源文件</primary> <secondary>翻译更新过的源文件</secondary>
+          </indexterm></title>
 
-      <para>词汇表窗格允许您使用个人收集的词汇和专业术语，这些词汇都存放在词汇表文件中。它显示当前片段中找到的术语，但只用来做参考之用，无法将其译文插入或替换术语。</para>
+        <para>在<guimenu>选项&gt;外部TMX</guimenu>中有一些用来配置匹配窗格显示的选项。</para>
 
-      <para><figure id="glossary.pane">
+        <figure id="matches.pane.setup">
           <title><indexterm class="singular">
-              <primary>词汇表</primary> <secondary>词汇表窗口 - 图示</secondary>
-            </indexterm>词汇表窗格</title>
+              <primary>匹配</primary> <secondary>匹配窗口设置——图示</secondary>
+            </indexterm><indexterm class="singular">
+              <primary>OmegaT窗口和窗格</primary> <secondary>匹配窗格设置——图示</secondary>
+            </indexterm>匹配窗格设置</title>
 
           <mediaobject>
-            <imageobject role="html">
-              <imagedata fileref="images/Glossary_pane.png"/>
+            <imageobject>
+              <imagedata fileref="images/MatchesPaneSetup.png"/>
             </imageobject>
 
             <imageobject role="fo">
-              <imagedata fileref="images/Glossary_pane.png" width="60%"/>
+              <imagedata fileref="images/MatchesPaneSetup.png" width="50%"/>
             </imageobject>
           </mediaobject>
-        </figure></para>
+        </figure>
 
-      <para>上例中的源片段为“I<emphasis>n most translation jobs it is considered important to have the translated document look similar to the original</emphasis>.”，在词汇表文件中找到了两个单词：document 和 translation。<application>OmegaT</application> 还支持多词术语：</para>
+        <para>上图显示了默认的匹配显示模板。可以下列变量定制该内容：</para>
+
+        <table colsep="0" rowsep="0">
+          <title>匹配窗格设置<indexterm class="singular">
+              <primary>用户界面</primary> <secondary>匹配窗口设置</secondary>
+            </indexterm></title>
+
+          <tgroup cols="2" colsep="1" rowsep="1" title="Match pane setup">
+            <colspec align="left" colnum="1"/>
+
+            <colspec align="left" colnum="2"/>
+
+            <tbody>
+              <row>
+                <entry><literal>${id}</literal></entry>
+
+                <entry>从1到5的匹配编号</entry>
+              </row>
+
+              <row>
+                <entry><literal>${sourceText}</literal></entry>
+
+                <entry>当前匹配的原文</entry>
+              </row>
+
+              <row>
+                <entry><literal>${targetText}</literal></entry>
+
+                <entry>当前匹配的目标文本</entry>
+              </row>
+
+              <row>
+                <entry><literal>${diff}</literal></entry>
+
+                <entry>显示源和匹配之间差异的字符串。<emphasis>提示：</emphasis>如果您正在翻译的文本经过了更新请使用该变量。</entry>
+              </row>
+
+              <row>
+                <entry><literal>${score}</literal></entry>
+
+                <entry>解析器得出的百分率</entry>
+              </row>
+
+              <row>
+                <entry><literal>${noStemScore}</literal></entry>
+
+                <entry>不计算数字和标签的百分率</entry>
+              </row>
+
+              <row>
+                <entry><literal>${adjustedScore}</literal></entry>
+
+                <entry>校准的百分率</entry>
+              </row>
+
+              <row>
+                <entry><literal>${fileNameOnly}</literal></entry>
+
+                <entry>TMX的名称</entry>
+              </row>
+
+              <row>
+                <entry><literal>${filePath}</literal></entry>
+
+                <entry>TMX的完整路径</entry>
+              </row>
+
+              <row>
+                <entry><literal>${fileShortPath}</literal></entry>
+
+                <entry>相对于/tm根目录的TMX路径</entry>
+              </row>
+
+              <row>
+                <entry><literal>${creationID}</literal></entry>
+
+                <entry>译文作者</entry>
+              </row>
+
+              <row>
+                <entry><literal>${creationDate}</literal></entry>
+
+                <entry>译文创建日期</entry>
+              </row>
+
+              <row>
+                <entry><literal>${fuzzyFlag}</literal></entry>
+
+                <entry>表示该匹配为模糊匹配（当前仅用于来自PO文件中带#fuzzy标志的翻译）</entry>
+              </row>
+            </tbody>
+          </tgroup>
+        </table>
+      </section>
+    </section>
+
+    <section>
+      <title>词汇表窗格<indexterm class="singular">
+          <primary>OmegaT 窗口和窗格</primary> <secondary>词汇表窗格</secondary>
+        </indexterm></title>
+
+      <para>词汇表窗格允许您使用个人收集的词汇和专业术语，这些词汇都存放在词汇表文件中。它显示当前片段中找到的术语。下面例子中源片段为“<emphasis>Context menu command</emphasis>”（就像上面例子中模糊匹配显示的一样），显示出在可用的词汇表（微软术语集和斯洛文尼亚语Linux用户组词汇表）中找到的术语。</para>
 
       <figure id="multiword.pane">
         <title><indexterm class="singular">
-            <primary>词汇表</primary> <secondary>在词汇表中的多词条目 - 图示</secondary>
+            <primary>词汇表</primary>
           </indexterm>词汇表中的多词条目</title>
 
         <mediaobject>
           <imageobject role="html">
-            <imagedata fileref="images/MultiTerm_Glossary.png"/>
+            <imagedata fileref="images/GlossaryPane_25.png"/>
           </imageobject>
 
           <imageobject role="fo">
-            <imagedata fileref="images/MultiTerm_Glossary.png" width="80%"/>
+            <imagedata fileref="images/GlossaryPane_25.png" width="80%"/>
           </imageobject>
         </mediaobject>
       </figure>
 
-      <para>如果您激活<guimenuitem>选项→翻译提示</guimenuitem>中的翻译提示，那么可在源片段中突出显示的单词上点击右键，以打开包含由词汇表提供的可选译文的弹出菜单。选择其中一个可将其插入目标片段的当前位置。您可以让词汇表窗格中的首选译文突出显示，并通过右键点击选区来将它插入目标片段中。</para>
+      <para>如果您激活<guimenuitem>选项→翻译提示</guimenuitem>中的翻译提示，那么可在源片段中突出显示的单词上点击右键来打开包含由词汇表提供的可选译文的弹出菜单。选择其中一个可将其插入到目标片段的当前光标位置。您可以让词汇表窗格中的首选译文突出显示，并通过右键点击选区来将它插入目标片段中。</para>
     </section>
 
     <section id="dictionaries">
-      <title>词典查看器<indexterm class="singular">
+      <title>词典窗格<indexterm class="singular">
           <primary>OmegaT 窗口和窗格</primary> <secondary>词典窗格</secondary>
         </indexterm></title>
 
-      <para>词典是等同于 Merriam Webster、Duden、Larousse 等桌面上的印刷词典的电子版本。</para>
+      <para>词典是等同于 Merriam Webster、Duden、Larousse 等桌面上的印刷词典的电子版本。请在<link linkend="chapter.dictionaries">词典</link>章节中了解关于它们的更多信息</para>
+    </section>
+
+    <section id="Multiple.Translations">
+      <title>多选译文窗格<indexterm class="singular">
+          <primary>OmegaT窗口和窗格</primary> <secondary>多选译文窗格</secondary>
+        </indexterm></title>
+
+      <para>特定的源片段在不同的语境中可能需要集中不同的翻译。如果片段的当前译文不适合，则用户可选择<guisubmenu>编辑→创建可选译文</guisubmenu>。之后输入的目标文本会被视为当前源片段的可选译文。您可以通过<guisubmenu>编辑→用作默认译文</guisubmenu>指定某个可选译文（例如其中可能性最大的译文）为默认译文。</para>
+    </section>
+
+    <section>
+      <title>笔记窗格</title>
+
+      <para>译员可添加笔记到打开的片段（例如之后返回该片段并撤销译文、检查可选译文是否正确或询问同事的看法。您可通过<guisubmenu>前往→后一笔记</guisubmenu>和<guisubmenu>前往→前一笔记</guisubmenu>以浏览笔记。</para>
+    </section>
+
+    <section>
+      <title>注解面板</title>
+
+      <para>某些专门用于翻译工作的文件格式（例如PO）允许包含注释。这样就为译者提供了待译片段的相关信息。在下面的示例中，包含为译者提供警告的PO文件可用于其作者检查译文的长度：</para>
+
+      <figure id="comments.pane">
+        <title>注解面板<indexterm class="singular">
+            <primary>注解</primary> <secondary>注解面板</secondary>
+          </indexterm></title>
+
+        <mediaobject>
+          <imageobject role="html">
+            <imagedata fileref="images/Comments_25.png"/>
+          </imageobject>
+
+          <imageobject role="fo">
+            <imagedata fileref="images/Comments_25.png" width="80%"/>
+          </imageobject>
+        </mediaobject>
+      </figure>
     </section>
 
     <section id="Google.Translate">
-      <title>机器翻译<indexterm class="singular">
-          <primary>OmegaT 窗口和窗格</primary> <secondary>机器翻译</secondary>
+      <title>机器翻译窗格<indexterm class="singular">
+          <primary>OmegaT窗口和窗格</primary> <secondary>机器翻译窗格</secondary>
         </indexterm></title>
 
-      <para>在机器翻译窗格中，打开后其中会包含由机器翻译工具为当前片段提供的翻译建议。按 <keysym>Ctrl+M </keysym>可使用建议译文替换当前片段的译文。</para>
+      <para>在机器翻译窗格中，打开后其中会包含由机器翻译工具为当前片段提供的翻译建议。按 <keysym>Ctrl+M </keysym>可使用建议译文替换当前片段的译文。请到<link linkend="chapter.machine.translate">机器翻译</link>章节了解更多</para>
     </section>
 
     <section>
       <title id="main.menu">主菜单</title>
 
-      <para>通过主菜单可访问 <application>OmegaT</application> 的所有功能。参阅<emphasis>主菜单</emphasis>附录了解所有菜单和菜单项的完整描述。最常用的功能可以使用键盘快捷键访问，因此当您习惯了使用它们之后，在翻译的时候根本不需要使用菜单。</para>
+      <para>通过主菜单可访问 <application>OmegaT</application> 的所有功能。参阅<emphasis>主菜单</emphasis>附录了解所有菜单和菜单项的完整描述。最常用的功能可以使用键盘快捷键访问，因此当您习惯了使用它们之后，在翻译的时候根本不需要使用菜单。请参阅<link linkend="chapter.menu">菜单和键盘快捷键</link>了解细节。</para>
     </section>
 
     <section id="status.bar">
@@ -464,30 +624,30 @@
         </indexterm></title>
 
       <para>项目文件窗口显示所有的项目文件和其他项目的信息。当 OmegaT 载入项目时这个窗口自动出现。使用 <guimenuitem>Ctrl+L<indexterm class="singular">
-          <primary>快捷键</primary> <secondary>Ctrl+L - 项目文件列表</secondary>
+          <primary>快捷键</primary> <secondary>项目文件列表——Ctrl+L</secondary>
         </indexterm></guimenuitem> 打开，使用 <keycap>Esc</keycap> 关闭。项目文件窗口显示了下列信息：</para>
 
       <itemizedlist>
         <listitem>
-          <para>项目中所有可译文件组成的列表。这是目前在源文件文件夹中OmegaT 能够识别的文件。点击任何一份文件将打开它进行翻译</para>
+          <para>项目中所有待译文件组成的列表。这是在源文件文件夹中OmegaT当前能够识别的文件。点击任何一份文件将打开它用于翻译</para>
         </listitem>
       </itemizedlist>
 
       <itemizedlist>
         <listitem>
-          <para>当前在编辑窗格中打开的文件用蓝色背景突出显示。按 <keycap>Enter</keycap> 将在编辑窗格中移动到选中文件的开始处</para>
+          <para>当前在编辑窗格中打开的文件用蓝色背景突出显示。按<keycap>Enter</keycap>将在编辑窗格中移动到选中文件的开始处</para>
         </listitem>
       </itemizedlist>
 
       <itemizedlist>
         <listitem>
-          <para>每个文件包含的片段数量现在在文件名的右边</para>
+          <para>每个文件条目包含它的名称、文件过滤器类型、编码和它所包含的片段数</para>
         </listitem>
       </itemizedlist>
 
       <itemizedlist>
         <listitem>
-          <para>整个项目的总片段数、独特片段数和已译独特片段数显示在底部</para>
+          <para>整个项目的片段总数、独特片段数和已译独特片段数显示在底部</para>
         </listitem>
       </itemizedlist>
 
@@ -495,11 +655,11 @@
 
       <para>通过“片段数”和“独特片段数”的差异可粗略估算出文本中有多少重复内容。但是请注意：该数字并未透露这些重复的相关性，它们可能是多次重复的相当长的句子（此时是幸运的）或关键字表格（不那么幸运了）。项目 omegat 文件夹中的 <filename>project_stats.txt</filename> 提供了每份文件更多的片段细节信息。</para>
 
-      <para>修改分割规则可能改变片段数和独特片段数。然而，一旦启动项目的翻译工作，就应该避免发生这样的事情。请参阅<emphasis>片段分割规则</emphasis>了解更多信息。</para>
+      <para>修改分割规则可能改变片段数和独特片段数。然而，一旦启动项目的翻译工作，就应该避免发生这样的事情。请参阅<emphasis>分割规则</emphasis>章节了解更多信息。</para>
 
       <para><emphasis role="bold"><indexterm class="singular">
           <primary>源文件</primary> <secondary>添加文件到项目</secondary>
-        </indexterm>添加文件到项目：</emphasis>您可以通过点击<guimenuitem>“导入源文件”</guimenuitem>按钮将源文件添加到项目中。它将选中的文件拷贝到 <filename>/source</filename> 目录并重新载入项目以导入新文件。通过点击<guimenuitem>“从 MediaWiki 导入”</guimenuitem>按钮并输入相应的 URL，您还可以添加互联网页中用 MediaWiki 编写的源文件。</para>
+        </indexterm>添加文件到项目：</emphasis>您可以通过点击<guimenuitem>“导入源文件”</guimenuitem>按钮将源文件添加到项目中。它将选中的文件拷贝到 <filename>/source</filename> 目录并重新载入项目以导入新文件。通过点击<guimenuitem>“从 MediaWiki 导入”</guimenuitem>按钮并输入相应的网址，您还可以添加互联网页中用MediaWiki编写的源文件。</para>
     </section>
 
     <section id="section.search.window">
@@ -507,7 +667,7 @@
           <primary>OmegaT 窗口和窗格</primary> <secondary>搜索面板</secondary>
         </indexterm></title>
 
-      <para>您可以用使用搜索窗口查找项目中的某个片段。可以同时打开多个搜索窗口。在主窗口中使用<keycombo> <keycap>Ctrl</keycap> <keycap>F</keycap> </keycombo>可打开一个新的搜索窗口。搜索窗口由三个部分组成：用于输入搜索字符串或关键字的文本框、用于设置搜索的标志和单选按钮、包含搜索结果的显示区域。请参阅<emphasis> <link linkend="chapter.user.interface">搜索</link> </emphasis>来了解关于搜索窗口的更多信息。</para>
+      <para>您可以用使用搜索窗口查找项目中的某个片段。可以同时打开多个搜索窗口。在主窗口中使用<keycombo> <keycap>Ctrl</keycap> <keycap>F</keycap> </keycombo>可打开一个新的搜索窗口。搜索窗口由三个部分组成：用于输入搜索字符串或关键字的文本框、用于设置搜索的标志和单选按钮、包含搜索结果的显示区域。请参阅<emphasis> <link linkend="chapter.user.interface">搜索</link> </emphasis>章节来了解关于搜索窗口的更多信息。</para>
     </section>
 
     <section id="section.tag.validation">
@@ -541,64 +701,62 @@
     </section>
 
     <section>
+      <title>统计(&amp;S)<indexterm class="singular">
+          <primary>统计</primary> <seealso>菜单工具</seealso>
+        </indexterm></title>
+
+      <para>统计窗口（通过<emphasis role="bold">工具&gt;统计</emphasis>打开）显示了OmegaT当前项目的统计信息，包括整个项目的总的统计信息和其中每个待译文件的详细情况。这里显示的统计信息是tab分隔的<filename>project_stats.txt</filename>文件（在<filename>omegat</filename>子文件夹），方便用户加载到电子表格程序。您可用<guimenuitem>Ctrl+A <indexterm class="singular">
+          <primary>快捷键</primary> <secondary>选择所有——Ctrl+A</secondary>
+        </indexterm></guimenuitem><guimenuitem>、Ctrl+C <indexterm class="singular">
+          <primary>快捷键</primary> <secondary>复制文本——Ctrl+C</secondary>
+        </indexterm></guimenuitem>、<guimenuitem>Ctrl+V <indexterm class="singular">
+          <primary>快捷键</primary> <secondary>粘贴文本——Ctrl+V</secondary>
+        </indexterm></guimenuitem>复制/粘贴其中的内容。<figure id="ProjectStatistic.Window">
+          <title>项目统计</title>
+
+          <mediaobject>
+            <imageobject role="html">
+              <imagedata fileref="images/StatisticsWindow_25.png"/>
+            </imageobject>
+
+            <imageobject role="fo">
+              <imagedata fileref="images/StatisticsWindow_25.png" width="60%"/>
+            </imageobject>
+          </mediaobject>
+        </figure></para>
+    </section>
+
+    <section>
       <title>匹配统计<indexterm class="singular">
           <primary>匹配统计</primary> <seealso>工具菜单</seealso>
         </indexterm></title>
 
-      <para>通过<guimenuitem>工具/匹配统计</guimenuitem>可访问统计信息。该统计需要 CPU 进行繁重的运算且耗时的，所以在计算时会显示进度条。至于相关的分类，使用工业标准的分类匹配到下面的组中：</para>
+      <para>通过<guimenuitem>工具/匹配统计</guimenuitem>可访问统计信息。该统计需要CPU进行繁重的运算而耗时较多，所以在计算时会显示进度条。至于相关的分类，下面这些组的分类符合工业标准：重复率、精确匹配、95%-100%、85%-94%、75%-84%、50%-74%和无匹配。该信息根据片段、单词和字符（含和不含空格）计算出来的。请注意在OmegaT中的统计数值可能与其他CAT工具略有差异。<figure>
+          <title>匹配统计</title>
 
-      <itemizedlist>
-        <listitem>
-          <para>精确匹配</para>
-        </listitem>
+          <mediaobject>
+            <imageobject role="html">
+              <imagedata fileref="images/MatchStatistics.png"/>
+            </imageobject>
 
-        <listitem>
-          <para>95%-100%</para>
-        </listitem>
+            <imageobject role="fo">
+              <imagedata fileref="images/MatchStatistics.png" width="80%"/>
+            </imageobject>
+          </mediaobject>
+        </figure></para>
 
-        <listitem>
-          <para>85%-94%</para>
-        </listitem>
-
-        <listitem>
-          <para>75%-84%</para>
-        </listitem>
-
-        <listitem>
-          <para>50%-74%</para>
-        </listitem>
-
-        <listitem>
-          <para>无匹配</para>
-        </listitem>
-      </itemizedlist>
-
-      <para>单词数等同于在项目文件窗口中的数字，是严格遵循 OmegaT 的计算方法，计算术语上的一些区别是概念上的。统计片段、单词和字符（含和不含空格）的该信息。注意：这些总数是较接近项目中工作量的近似值，因此可作为您计算费用或价格的参考。</para>
-
-      <screenshot>
-        <screeninfo>匹配统计</screeninfo>
-
-        <mediaobject>
-          <imageobject role="html">
-            <imagedata fileref="images/MatchStatistics.png"/>
-          </imageobject>
-
-          <imageobject role="fo">
-            <imagedata fileref="images/MatchStatistics.png" width="60%"/>
-          </imageobject>
-        </mediaobject>
-      </screenshot>
+      <para>注意：这些总数是较接近项目中工作量的近似值，因此可作为您计算费用或价格的参考。</para>
 
       <para>在最后一列片段间的空格无需考虑。重复表示多次出现在文本中的相同片段。第一个片段及其内容将被归类到“无匹配”中，而剩余片段则被视为第一个的重复。如果在项目的翻译记忆中存在多个相同源片段的译文，这些及其他已译独特片段将被归类为“精确匹配”。在需要时，标准统计窗口中会显示独特片段数，不论它们是否已经翻译。</para>
 
       <para>分类中的其他部分 (50-100%) 包含了具有模糊匹配的未译片段。在统计重复和精确匹配时模糊匹配不仅可以来自 <filename>/omegaT</filename>，也可以可以来自 <filename>/tm</filename> 文件夹。与 <filename>project_save</filename> 翻译记忆的匹配的唯一区别是外部 TM 中的统计不会得到精确匹配，而只是 100%。如果不想使用外部翻译记忆参与统计，可以让 /tm 文件夹为空或临时改变项目设置以让 /tm 指向其他地方。</para>
 
       <para>该匹配统计是 tab 分割的，您可用 <guimenuitem>Ctrl+A <indexterm class="singular">
-          <primary>快捷键</primary> <secondary>Ctrl+A - 全选</secondary>
+          <primary>快捷键</primary> <secondary>选择所有——Ctrl+A</secondary>
         </indexterm></guimenuitem><guimenuitem>, Ctrl+C <indexterm class="singular">
-          <primary>快捷键</primary> <secondary>Ctrl+C - 复制文本</secondary>
+          <primary>快捷键</primary> <secondary>复制文本——Ctrl+C</secondary>
         </indexterm></guimenuitem>, <guimenuitem>Ctrl+V <indexterm class="singular">
-          <primary>快捷键</primary> <secondary>Ctrl+V - 粘贴文本</secondary>
+          <primary>快捷键</primary> <secondary>粘贴文本——Ctrl+V</secondary>
         </indexterm></guimenuitem> 来复制/粘贴它们，例如到工作表或费用统计程序中。在计算后，该数据还可以在 <filename>omegat/project_stats_match.txt</filename> 中找到。需要注意的是该文件是有时间戳记录的，因为计算不是瞬时的（相对于统计），所以可能很快过时。</para>
     </section>
 
@@ -608,7 +766,7 @@
         </indexterm></title>
 
       <para>帮助浏览器（显示本手册）可通过按 <keycap><indexterm class="singular">
-          <primary>快捷键</primary> <secondary>F1 - 帮助</secondary>
+          <primary>快捷键</primary> <secondary>F1——帮助</secondary>
         </indexterm>F1</keycap> 或调用主菜单中的<guimenuitem><indexterm class="singular">
           <primary>帮助菜单</primary> <secondary>用户手册……</secondary>
         </indexterm>帮助→用户手册……</guimenuitem>条目来打开。在该窗口中会显示手册和两个按钮：退后和内容。用户手册是一份包含各个不同章节链接的 HTML 文档。像在网页浏览器中那样点击一个链接将会打开要看的页面。</para>

@@ -23,7 +23,7 @@
 
       <para>为运行 OmegaT，必须存在有效的 OmegaT 项目。位置并不重要，因为无论如何，启动时您都必须在命令行中明确指定它的位置。</para>
 
-      <para>如果不使用标准设置，必须提供相应的配置文件（<literal>filters.conf</literal> 和 <literal>segmentation.conf)</literal>）。可通过两种方式达到这个目的：</para>
+      <para>如果不使用标准设置，则必须提供相应的配置文件（<literal>filters.conf</literal>和<literal>segmentation.conf)</literal>）。可通过两种方式达到这个目的：</para>
 
       <itemizedlist>
         <listitem>
@@ -31,7 +31,7 @@
         </listitem>
 
         <listitem>
-          <para>如果您无法正常运行 <application>OmegaT</application>（没有可用的图形界面）：可将另一机器上安装的 <application>OmegaT</application> 设置文件复制到指定目录。位置并不重要，因为无论如何，启动时您都必须将位置添加到命令行。相关的文件是可在用户主目录找到的 <literal>filters.conf</literal> 和 <literal>segmentation.conf</literal>（如：Windows 系统中的 <literal>C:\Documents and Settings\%User%\<application>OmegaT</application></literal> 或 Linux 系统中的 <literal>%user%/.omegat/</literal>）</para>
+          <para>如果您无法正常运行<application>OmegaT</application>（没有可用的图形界面）：可将另一机器上安装的<application>OmegaT</application>设置文件复制到指定文件夹。位置并不重要，因为无论如何，启动时您都必须将位置添加到命令行。相关的文件<literal>filters.conf</literal>和<literal>segmentation.conf</literal>可在用户主目录找到（如Windows 系统中的<literal>C:\Documents and Settings\%User%\<application>OmegaT</application></literal>或Linux系统中的<literal>%user%/.omegat/</literal>）</para>
         </listitem>
       </itemizedlist>
     </section>
@@ -39,7 +39,7 @@
     <section id="starting.in.misc.console.mode">
       <title>以控制台模式运行 OmegaT</title>
 
-      <para>要以控制台模式启动 OmegaT，必须在启动时传入另外的参数。最重要的是 <literal>&lt;project-dir&gt;</literal>，以及可选的 <literal>--config-dir=&lt;config-dir&gt;。</literal>例如：</para>
+      <para>要以控制台模式启动 OmegaT，必须在启动时传入另外的参数。其中最重要的是<literal>&lt;project-dir&gt;</literal>，还可以加上<literal>--config-dir=&lt;config-dir&gt;</literal>。例如：</para>
 
       <para><literal>$&gt; java -jar <application>OmegaT</application>.jar
       /path/to/project \</literal></para>
@@ -48,7 +48,9 @@
 
       <para><literal> --mode=console-translate \</literal></para>
 
-      <para><literal> --source-pattern={regexp}</literal></para>
+      <para><literal> --source-pattern={regexp} \</literal></para>
+
+      <para><literal> --tag-validation=[block|warn] </literal></para>
 
       <para><emphasis role="bold">说明：</emphasis></para>
 
@@ -60,7 +62,7 @@
 
       <itemizedlist>
         <listitem>
-          <para><literal>--config-dir=&lt;config-dir&gt;</literal> 向 OmegaT 指示配置文件所在的目录。如果不给定该参数，OmegaT 将转而使用缺省值（即用户主目录中的 OmegaT 目录，如果不可用的话则是当前的工作目录）。</para>
+          <para><literal>--config-dir=&lt;config-dir&gt;</literal> 向 OmegaT 指示配置文件所在的目录。如果没有给出该参数，OmegaT 将转而使用缺省值（即用户主目录中的OmegaT文件夹，如果不可用的话则是当前的工作目录）。</para>
         </listitem>
       </itemizedlist>
 
@@ -70,7 +72,11 @@
         </listitem>
 
         <listitem>
-          <para>--source-pattern={regexp} 可使用这种方式指定要翻译的文件。这是一个正则表达式的例子：<filename>test\.html</filename></para>
+          <para><literal>--source-pattern={regexp} </literal>可使用这种方式指定要翻译的文件。这是一个正则表达式的例子：<filename>test\.html</filename></para>
+        </listitem>
+
+        <listitem>
+          <para><literal>--tag-validation=[abort|warn]</literal>若使用abort，在标签检验发现错误时会中止。用warn则打印错误且OmegaT继续执行。在其他情况下（即不使用此参数时）不会进行标签验证操作。</para>
         </listitem>
       </itemizedlist>
     </section>
@@ -78,7 +84,7 @@
     <section id="misc.console.mode.option.quiet">
       <title>静默选项</title>
 
-      <para>控制台模式专用的一个附加命令行参数： <literal>--quiet</literal>。在静默【Quiet】模式下，屏幕上将显示更少的日志信息。在状态栏通常可以看到的所有信息都不会被显示。</para>
+      <para>控制台模式专用的一个附加命令行参数：<literal>--quiet</literal>。在静默模式下，屏幕上将显示更少的日志信息。在状态栏通常可以看到的所有信息都不会被显示。</para>
 
       <para>用法：<literal>java -jar <application>OmegaT</application>.jar /path/to/project --mode=console-translate --quiet</literal></para>
     </section>
@@ -86,15 +92,15 @@
     <section id="misc.console.mode.option.validatetags">
       <title>标记验证选项</title>
 
-      <para>控制台模式专用的一个附加命令行参数：<literal>--tag-validation=[abort|warn]。</literal>添加此参数后，会在翻译/文本对齐之前验证标签。如果该参数值为 <literal>abort</literal>，那么在遇到标签错误时打印出错误，同时程序停止。如果该参数值为 <literal>warn</literal>，则打印错误且 OmegaT 继续执行。</para>
+      <para>控制台模式专用的另一个附加命令行参数： <literal>--tag-validation=[abort|warn]</literal>。添加此参数后，标签验证操作先于翻译/对齐进行。如果该参数值为 <literal>abort</literal>，那么在遇到标签错误时打印出错误，同时程序停止。如果该参数值为 <literal>warn</literal>，则打印错误且 OmegaT 继续执行。</para>
 
       <para>用法：<literal>java -jar <application>OmegaT</application>.jar /path/to/project --mode=console-translate --tag-validation=abort</literal></para>
     </section>
   </section>
 
   <section>
-    <title>自动 Java 属性对齐器<indexterm class="singular">
-        <primary>杂项</primary> <secondary>用于 Java 属性的自动对齐器</secondary> <seealso>杂项</seealso>
+    <title>自动Java属性对齐器<indexterm class="singular">
+        <primary>杂项</primary> <secondary>用于Java属性的自动对齐器</secondary>
       </indexterm></title>
 
     <para>OmegaT 可以在控制台模式中对齐 Java .properties。如果您有以您需要的语言对表示的源和目标属性文件，这个过程将创建包含这些内容的 TMX 文件。用法：</para>
@@ -160,7 +166,7 @@
         <primary>杂项</primary> <secondary>防止数据丢失</secondary>
       </indexterm></title>
 
-    <para><application>OmegaT</application> 是健壮的应用程序。然而就像使用其他任何程序一样，使用 <application>OmegaT</application> 时还是应该对数据丢失保持警惕。在翻译文件时，<application>OmegaT</application> 在项目的 <literal>/omegat </literal> 目录的翻译记忆 <literal>project_save.tmx</literal> 中储存您所有的进度信息。</para>
+    <para><application>OmegaT</application> 是健壮的应用程序。然而就像使用其他任何程序一样，使用 <application>OmegaT</application> 时还是应该对数据丢失保持警惕。在翻译文件时，<application>OmegaT</application>在项目的<literal>/omegat </literal>子文件夹的翻译记忆文件<literal>project_save.tmx</literal>中储存您所有的进度信息。</para>
 
     <para>OmegaT 在每次打开或重新载入项目时，也将翻译记忆备份到同一子目录下的 project_save.tmx.YEARMMDDHHNN.bak 文件中。YEAR 是 4 位数的年份；MM 是月份；DD 是日期；而 HH 和 NN 是前一份翻译记忆保存时的小时和分钟。</para>
 
@@ -200,7 +206,7 @@
       </listitem>
 
       <listitem>
-        <para>在项目进行过程中，对 <literal>/source</literal> 目录中的文件进行修改要特别小心。如果在开始翻译后对源文件进行了修改，<application>OmegaT</application> 也许会找不到您已经翻译的某个片段。</para>
+        <para>在项目进行过程中，对<literal>/source</literal>目录中的文件进行修改要特别小心。如果在开始翻译后对源文件进行了修改，<application>OmegaT</application> 也许会找不到您已经翻译的某个片段。</para>
       </listitem>
     </itemizedlist>
 

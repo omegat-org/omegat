@@ -5,7 +5,7 @@
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
                2007-2010 Didier Briel
-               2013 Alex Buloichik, Didier Briel
+               2013 Alex Buloichik, Didier Briel, Piotr Kulik
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -49,9 +49,11 @@ import org.omegat.util.StringUtil;
  * 
  * @author Didier Briel
  * @author Alex Buloichik (alex73mail@gmail.com)
+ * @author Piotr Kulik
  */
 public class XLIFFDialect extends DefaultXMLDialect {
     private boolean forceShortCutToF;
+    private boolean ignoreTypeForPhTags;
     
     public XLIFFDialect() {
     }
@@ -85,6 +87,7 @@ public class XLIFFDialect extends DefaultXMLDialect {
             // "mrk", only <mrk mtype="protected"> is content-based tag. see validateContentBasedTag
             
             forceShortCutToF = options.getForceShortcutToF();
+            ignoreTypeForPhTags = options.getIgnoreTypeForPhTags();
         }
 
     }
@@ -198,7 +201,7 @@ public class XLIFFDialect extends DefaultXMLDialect {
                 } else if ("ph".equals(tag.getTag())) {
                     tagHandler.startOTHER();
                     tagIndex = tagHandler.endOTHER();
-                    shortcutLetter = calcTagShortcutLetter(tag);
+                    shortcutLetter = calcTagShortcutLetter(tag, ignoreTypeForPhTags);
                     shortcut = "<" + (shortcutLetter != 0 ? shortcutLetter : 'f') + tagIndex + "/>";
                     tagProtected = false;
                 } else if ("mrk".equals(tag.getTag())) {
@@ -259,13 +262,17 @@ public class XLIFFDialect extends DefaultXMLDialect {
     }
 
     private char calcTagShortcutLetter(XMLContentBasedTag tag) {
+    	return calcTagShortcutLetter(tag, false);
+    }
+
+    private char calcTagShortcutLetter(XMLContentBasedTag tag, boolean ignoreTypeForPhtags) {
         char s;
         if (tag.getIntactContents().size() > 0 && (tag.getIntactContents().get(0) instanceof XMLText)) {
             XMLText xmlText = (XMLText) tag.getIntactContents().get(0);
             s = StringUtil.getFirstLetterLowercase(xmlText.getText());
         } else {
             String type = StringUtil.nvl(tag.getAttribute("ctype"), tag.getAttribute("type"));
-            if (type != null) {
+            if (type != null && !ignoreTypeForPhtags) {
                 s = StringUtil.getFirstLetterLowercase(type);
             } else {
                 s = 0;

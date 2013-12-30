@@ -4,7 +4,8 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
-               2007-2013 Didier Briel
+               2007-2012 Didier Briel
+               2013 Didier Briel, Piotr Kulik
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -43,6 +44,7 @@ import org.omegat.util.OStrings;
  * 
  * @author Maxym Mykhalchuk
  * @author Didier Briel
+ * @author Piotr Kulik
  */
 @SuppressWarnings("serial")
 public class EditXLIFFOptionsDialog extends javax.swing.JDialog {
@@ -59,7 +61,8 @@ public class EditXLIFFOptionsDialog extends javax.swing.JDialog {
 
         compatibility26CB.setSelected(options.get26Compatibility());
         forceshortcut2fCB.setSelected(options.getForceShortcutToF());
-
+        ignoreTypeForPhTagsCB.setSelected(options.getIgnoreTypeForPhTags());
+                
         // Handle escape key to close the window
         KeyStroke escape = KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0, false);
         Action escapeAction = new AbstractAction() {
@@ -101,7 +104,9 @@ public class EditXLIFFOptionsDialog extends javax.swing.JDialog {
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         compatibility26CB = new javax.swing.JCheckBox();
+        jLabel1 = new javax.swing.JLabel();
         forceshortcut2fCB = new javax.swing.JCheckBox();
+        ignoreTypeForPhTagsCB = new javax.swing.JCheckBox();
 
         setTitle(OStrings.getString("XLIFF_OPTIONS_TITLE")); // NOI18N
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -137,15 +142,20 @@ public class EditXLIFFOptionsDialog extends javax.swing.JDialog {
         jPanel1.setMinimumSize(new java.awt.Dimension(167, 121));
         jPanel1.setLayout(new java.awt.GridLayout(0, 1));
 
-        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("org/omegat/Bundle"); // NOI18N
-        org.openide.awt.Mnemonics.setLocalizedText(jLabel2, bundle.getString("XLIFF_OPTIONS_LABEL")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(jLabel2, OStrings.getString("XLIFF_OPTIONS_LABEL")); // NOI18N
         jPanel1.add(jLabel2);
 
-        org.openide.awt.Mnemonics.setLocalizedText(compatibility26CB, bundle.getString("XLIFF_OPTIONS_26")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(compatibility26CB, OStrings.getString("XLIFF_OPTIONS_26")); // NOI18N
         jPanel1.add(compatibility26CB);
 
-        org.openide.awt.Mnemonics.setLocalizedText(forceshortcut2fCB, bundle.getString("XLIFF_OPTIONS_FORCE2F")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(jLabel1, OStrings.getString("XLIFF_OPTIONS_36_ONLY")); // NOI18N
+        jPanel1.add(jLabel1);
+
+        org.openide.awt.Mnemonics.setLocalizedText(forceshortcut2fCB, OStrings.getString("XLIFF_OPTIONS_FORCE2F")); // NOI18N
         jPanel1.add(forceshortcut2fCB);
+
+        org.openide.awt.Mnemonics.setLocalizedText(ignoreTypeForPhTagsCB, OStrings.getString("XLIFF_OPTIONS_IGNORE4PH")); // NOI18N
+        jPanel1.add(ignoreTypeForPhTagsCB);
 
         getContentPane().add(jPanel1, java.awt.BorderLayout.CENTER);
 
@@ -158,6 +168,7 @@ public class EditXLIFFOptionsDialog extends javax.swing.JDialog {
     {
         options.set26Compatibility(compatibility26CB.isSelected());
         options.setForceShortcutToF(forceshortcut2fCB.isSelected());
+        options.setIgnoreTypeForPhTags(ignoreTypeForPhTagsCB.isSelected());
 
         doClose(RET_OK);
     }// GEN-LAST:event_okButtonActionPerformed
@@ -186,6 +197,8 @@ public class EditXLIFFOptionsDialog extends javax.swing.JDialog {
     private javax.swing.JButton cancelButton;
     private javax.swing.JCheckBox compatibility26CB;
     private javax.swing.JCheckBox forceshortcut2fCB;
+    private javax.swing.JCheckBox ignoreTypeForPhTagsCB;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JButton okButton;

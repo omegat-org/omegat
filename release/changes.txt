@@ -1,11 +1,16 @@
 ----------------------------------------------------------------------
  OmegaT 3.0.8 update 2
 ----------------------------------------------------------------------
-   0 Enhancement
+   1 Enhancement
    0 Bug fix
    1 Localisation update
 ----------------------------------------------------------------------
 3.0.8 update 2 vs. 3.0.8 update 1
+
+  Implemented requests:
+
+  - XLIFF filter: Ignore type and ctype attributes when building <ph> tag shortcuts 
+  https://sourceforge.net/p/omegat/feature-requests/938/
 
   Localisation updates:
 

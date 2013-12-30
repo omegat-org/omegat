@@ -3,7 +3,8 @@
           with fuzzy matching, translation memory, keyword search, 
           glossaries, and translation leveraging into updated projects.
 
- Copyright (C) 2007-2013 Didier Briel
+ Copyright (C) 2007-2012 Didier Briel
+               2013 Piotr Kulik
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -38,13 +39,16 @@ import org.omegat.filters2.AbstractOptions;
  * <ul>
  * <li>[] Compatibility with 2.6
  * <li>[]Force shortcut to "f" for &lt;it pos="end&gt; tags
+ * <li>[]Ignore type and ctype attributes when building &lt;ph&gt; tag shortcuts
  * </ul>
  * 
  * @author Didier Briel
+ * @author Piotr Kulik
  */
 public class XLIFFOptions extends AbstractOptions {
     private static final String OPTION_26_COMPATIBILITY = "compatibility26";
     private static final String OPTION_FORCE_SHORTCUT_2_F = "forceshortcut2f";
+    private static final String OPTION_IGNORE_TYPE_4_PH_TAGS = "ignoretype4phtags";
 
     public XLIFFOptions(Map<String, String> config) {
         super(config);
@@ -78,6 +82,22 @@ public class XLIFFOptions extends AbstractOptions {
      */
     public void setForceShortcutToF(boolean forceshortcut2f) {
         setBoolean(OPTION_FORCE_SHORTCUT_2_F, forceshortcut2f);    
+    }
+
+    /** 
+     * Return whether the type and ctype attributes of 
+     * &lt;ph&gt; tag should be ignored when building shortcuts
+     */
+    public boolean getIgnoreTypeForPhTags() {
+        return getBoolean(OPTION_IGNORE_TYPE_4_PH_TAGS, false);
+    }
+    
+    /** 
+     * Set whether the type and ctype attributes of 
+     * &lt;ph&gt; tag should be ignored when building shortcuts
+     */
+    public void setIgnoreTypeForPhTags(boolean ignoreTypeForPhTags) {
+        setBoolean(OPTION_IGNORE_TYPE_4_PH_TAGS, ignoreTypeForPhTags);    
     }
 
 }

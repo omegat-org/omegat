@@ -5,7 +5,7 @@
    0 Bug fix
    1 Localisation update
 ----------------------------------------------------------------------
-3.0.8 update 1 vs. 3.0.8 update 2
+3.0.8 update 2 vs. 3.0.8 update 1
 
   Localisation updates:
 

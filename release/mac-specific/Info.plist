@@ -74,6 +74,9 @@
 			<string>true</string>
             <key>apple.awt.graphics.UseQuartz</key>
             <string>true</string>
+<!-- PUT YOUR OWN GOOGLE API KEY HERE -->
+            <key>google.api.key</key>
+			<string>0123456789A0123456789B0123456789C0123456789D</string>
 		</dict>
 		<key>VMOptions</key>
 		<string>-Xmx1024M</string>

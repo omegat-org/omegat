@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 3.0.8 update 2
 ----------------------------------------------------------------------
-   1 Enhancement
+   2 Enhancements
    1 Bug fix
    1 Localisation update
 ----------------------------------------------------------------------
@@ -11,6 +11,11 @@
 
   - XLIFF filter: Ignore type and ctype attributes when building <ph> tag shortcuts 
   https://sourceforge.net/p/omegat/feature-requests/938/
+
+  Other enhancements:
+  
+  - Added dummy Google Translate API key in the info.plist file of the Mac package
+  https://sourceforge.net/p/omegat/feature-requests/940/
 
   Bug fixes:
 

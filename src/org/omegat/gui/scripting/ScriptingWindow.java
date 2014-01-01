@@ -97,10 +97,12 @@ public class ScriptingWindow extends JFrame {
 
     public static void loadPlugins() {
         CoreEvents.registerApplicationEventListener(new IApplicationEventListener() {
+            @Override
             public void onApplicationStartup() {
                 window = new ScriptingWindow();
             }
 
+            @Override
             public void onApplicationShutdown() {
             }
         });
@@ -119,6 +121,7 @@ public class ScriptingWindow extends JFrame {
         // Handle escape key to close the window
         KeyStroke escape = KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0, false);
         Action escapeAction = new AbstractAction() {
+            @Override
             public void actionPerformed(ActionEvent e) {
                 dispose();
             }
@@ -152,6 +155,7 @@ public class ScriptingWindow extends JFrame {
         JMenuItem scriptMenu = new JMenuItem();
         Mnemonics.setLocalizedText(scriptMenu, OStrings.getString("TF_MENU_TOOLS_SCRIPTING"));
         scriptMenu.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent e) {
                 ScriptingWindow.this.setVisible(true);
             }
@@ -213,6 +217,7 @@ public class ScriptingWindow extends JFrame {
             this.index = index;
         }
 
+        @Override
         public void actionPerformed(ActionEvent e) {
             runQuickScript(index);
         }
@@ -236,6 +241,7 @@ public class ScriptingWindow extends JFrame {
         appliRootPane.getInputMap(JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT).put(
                 KeyStroke.getKeyStroke(KeyEvent.VK_R, InputEvent.CTRL_DOWN_MASK | InputEvent.ALT_DOWN_MASK , false), "RUN_CURRENT_SCRIPT");
         appliRootPane.getActionMap().put("RUN_CURRENT_SCRIPT",  new AbstractAction() {
+            @Override
             public void actionPerformed(ActionEvent e) {
                 runScript();
             }
@@ -263,6 +269,7 @@ public class ScriptingWindow extends JFrame {
         
         m_txtScriptsDir.setColumns(40);
         m_txtScriptsDir.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent evt) {
                 directoryTextFieldActionPerformed(evt);
             }
@@ -271,6 +278,7 @@ public class ScriptingWindow extends JFrame {
         JButton btnBrowse = new JButton();
         Mnemonics.setLocalizedText(btnBrowse, OStrings.getString("SCW_SCRIPTS_FOLDER_CHOOSE"));
         btnBrowse.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent evt) {
                 directoryChooserButtonActionPerformed(evt);
             }
@@ -285,6 +293,7 @@ public class ScriptingWindow extends JFrame {
         JScrollPane scrollPaneList = new JScrollPane(m_scriptList);
 
         m_scriptList.addListSelectionListener(new ListSelectionListener() {
+            @Override
             public void valueChanged(ListSelectionEvent evt) {
                 try {
                     m_txtScriptEditor.setText(getStringFromFile(new File(m_scriptsDirectory, 
@@ -305,6 +314,7 @@ public class ScriptingWindow extends JFrame {
         JMenuItem menuItem = new JMenuItem(OStrings.getString("SCW_SAVE_SCRIPT"));
         menuItem.setAccelerator(KeyStroke.getKeyStroke("ctrl S"));
         menuItem.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent evt) {
                 try {
                     File f = new File(m_scriptsDirectory, m_scriptList.getSelectedValue().toString());
@@ -312,10 +322,10 @@ public class ScriptingWindow extends JFrame {
                     out.write(m_txtScriptEditor.getText());
                     out.close();
                     logResult(StaticUtils.format(OStrings.getString("SCW_SAVE_OK"), f.getAbsolutePath()));
-                 } catch (IOException e) {
-                     logResult(OStrings.getString("SCW_SAVE_ERROR"));
-                     logResult(e.getMessage());
-                 }
+                } catch (IOException e) {
+                    logResult(OStrings.getString("SCW_SAVE_ERROR"));
+                    logResult(e.getMessage());
+                }
             }
         });
         editorPopUp.add(menuItem);
@@ -604,7 +614,7 @@ public class ScriptingWindow extends JFrame {
     }
 
     // Taken from languages.properties in the bsf.jar file.
-    private static HashMap<String, String> engines = new HashMap<String, String>();
+    private static final HashMap<String, String> engines = new HashMap<String, String>();
     static {
         engines.put("JavaScript", "org.apache.bsf.engines.javascript.JavaScriptEngine");
         engines.put("Jacl", "org.apache.bsf.engines.jacl.JaclEngine");

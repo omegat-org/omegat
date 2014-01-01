@@ -34,12 +34,14 @@ import java.awt.event.ActionListener;
 import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
+import java.io.ByteArrayInputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
@@ -85,6 +87,9 @@ import org.omegat.gui.editor.IEditor;
 import org.omegat.gui.editor.mark.Mark;
 import org.omegat.gui.glossary.GlossaryTextArea;
 import org.omegat.gui.main.IMainWindow;
+import org.omegat.util.LFileCopy;
+import org.omegat.util.LinebreakPreservingReader;
+import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
 import org.omegat.util.StaticUtils;
@@ -231,7 +236,7 @@ public class ScriptingWindow extends JFrame {
         }
 
         logResult(StaticUtils.format(OStrings.getString("SCW_QUICK_RUN"), (index+1)));
-        File scriptFile = new File(m_scriptsDirectory, m_quickScripts[index] );
+        ScriptFile scriptFile = new ScriptFile(m_scriptsDirectory, m_quickScripts[index]);
         
         executeScriptFile(scriptFile, true);
     }
@@ -295,9 +300,13 @@ public class ScriptingWindow extends JFrame {
         m_scriptList.addListSelectionListener(new ListSelectionListener() {
             @Override
             public void valueChanged(ListSelectionEvent evt) {
+                if (m_scriptList.isSelectionEmpty()) {
+                    return;
+                }
                 try {
-                    m_txtScriptEditor.setText(getStringFromFile(new File(m_scriptsDirectory, 
-                            m_scriptList.getSelectedValue().toString())));
+                    m_currentScriptFile = new ScriptFile(m_scriptsDirectory,
+                            m_scriptList.getSelectedValue().toString());
+                    m_txtScriptEditor.setText(m_currentScriptFile.getText());
                     m_txtScriptEditor.setCaretPosition(0);
                 } catch (IOException e) {
                     logResult(OStrings.getString("SCW_CANNOT_READ_SCRIPT"));
@@ -317,11 +326,9 @@ public class ScriptingWindow extends JFrame {
             @Override
             public void actionPerformed(ActionEvent evt) {
                 try {
-                    File f = new File(m_scriptsDirectory, m_scriptList.getSelectedValue().toString());
-                    BufferedWriter out = new BufferedWriter(new FileWriter(f));
-                    out.write(m_txtScriptEditor.getText());
-                    out.close();
-                    logResult(StaticUtils.format(OStrings.getString("SCW_SAVE_OK"), f.getAbsolutePath()));
+                    m_currentScriptFile.setText(m_txtScriptEditor.getText());
+                    logResult(StaticUtils.format(OStrings.getString("SCW_SAVE_OK"), 
+                            m_currentScriptFile.getAbsolutePath()));
                 } catch (IOException e) {
                     logResult(OStrings.getString("SCW_SAVE_ERROR"));
                     logResult(e.getMessage());
@@ -452,26 +459,25 @@ public class ScriptingWindow extends JFrame {
 
     private void runScript() {
         
-        if (m_scriptList.getSelectedValue() == null) {
+        if (m_currentScriptFile == null) {
             logResult(OStrings.getString("SCW_NO_SCRIPT_SELECTED"));
             return;
         }
 
-        File scriptFile = new File(m_scriptsDirectory, m_scriptList.getSelectedValue().toString());
-        
-        if (! scriptFile.canRead()) {
+        if (! m_currentScriptFile.canRead()) {
             logResult(OStrings.getString("SCW_CANNOT_READ_SCRIPT"));
             return;
         }
 
         m_txtResult.setText("");
-        logResult(StaticUtils.format(OStrings.getString("SCW_RUNNING_SCRIPT"), scriptFile.getAbsolutePath()));
+        logResult(StaticUtils.format(OStrings.getString("SCW_RUNNING_SCRIPT"), 
+                m_currentScriptFile.getAbsolutePath()));
         
-        executeScriptFile(scriptFile, false);
+        executeScriptFile(m_currentScriptFile, false);
 
     }
 
-    private void executeScriptFile(File scriptFile, boolean forceFromFile) {
+    private void executeScriptFile(ScriptFile scriptFile, boolean forceFromFile) {
         BSFManager manager = new BSFManager();
         manager.setClassLoader(this.getClass().getClassLoader());
         
@@ -502,14 +508,17 @@ public class ScriptingWindow extends JFrame {
         try {
             String scriptString;
             if (forceFromFile) {
-                scriptString = getStringFromFile(scriptFile);
+                scriptString = scriptFile.getText();
             } else if ("".equals(m_txtScriptEditor.getText().trim())) {
-                scriptString = getStringFromFile(scriptFile);
+                scriptString = scriptFile.getText();
                 m_txtScriptEditor.setText(scriptString);   
             } else {
                 scriptString = m_txtScriptEditor.getText();
             }
 
+            if (! scriptString.endsWith("\n")) {
+                scriptString += "\n";
+            }
             manager.exec(language.toLowerCase(), scriptFile.getName(), -1, -1, scriptString);
             manager.terminate();
         } catch (Throwable e) {
@@ -530,19 +539,6 @@ public class ScriptingWindow extends JFrame {
         } catch (BadLocationException e1) {
             /* empty */
         }
-    }
-
-    private String getStringFromFile(File file) throws FileNotFoundException, IOException {
-
-        BufferedReader b = new BufferedReader(new FileReader(file));
-        StringBuffer sb = new StringBuffer();
-        String str;
-        while ((str = b.readLine()) != null) {
-            sb.append(str);
-            sb.append('\n');
-        }
-
-        return sb.toString();
     }
     
     private void directoryTextFieldActionPerformed(java.awt.event.ActionEvent evt) {
@@ -659,6 +655,7 @@ public class ScriptingWindow extends JFrame {
     private JButton m_btnRunScript;
 
     private File m_scriptsDirectory;
+    private ScriptFile m_currentScriptFile;
     private Map<String, String> m_availableEngines;
     private JTextField m_txtScriptsDir;
     private JFileChooser m_fileChooser = new JFileChooser();
@@ -666,5 +663,74 @@ public class ScriptingWindow extends JFrame {
     private String[] m_quickScripts = new String[NUMBERS_OF_QUICK_SCRIPTS];
     private JMenuItem[] m_quickMenus = new JMenuItem[NUMBERS_OF_QUICK_SCRIPTS];
     private JButton[] m_quickScriptButtons = new JButton[NUMBERS_OF_QUICK_SCRIPTS];
-    
+
+    /**
+     * An abstract representation of script file.
+     * The content is treated as UTF-8.
+     */
+    private class ScriptFile extends File {
+
+        private final String BOM = "\uFEFF";
+        private boolean startsWithBOM = false;
+        private String lineBreak = System.getProperty("line.separator");
+
+        public ScriptFile(String pathname) {
+            super(pathname);
+        }
+
+        public ScriptFile(File parent, String child) {
+            super(parent, child);
+        }
+
+        public String getText() throws FileNotFoundException, IOException {
+            String ret = "";
+            LinebreakPreservingReader lpin = null;
+            try {
+                lpin = getUTF8LinebreakPreservingReader(this);
+                StringBuilder sb = new StringBuilder();
+                String s = lpin.readLine();
+                startsWithBOM = s.startsWith(BOM);
+                if (startsWithBOM) {
+                    s = s.substring(1);  // eat BOM
+                }
+                while (s != null) {
+                    sb.append(s);
+                    String br = lpin.getLinebreak();
+                    if (! br.isEmpty()) {
+                        lineBreak = br;
+                        sb.append('\n');
+                    }
+                    s = lpin.readLine();
+                }
+                ret = sb.toString();
+            } finally {
+                if (lpin != null) {
+                    try {
+                        lpin.close();
+                    } catch (IOException ex) {
+                        // Eat exception silently
+                    }
+                }
+            }
+            return ret;
+        }
+
+        private LinebreakPreservingReader getUTF8LinebreakPreservingReader(File file) throws FileNotFoundException, UnsupportedEncodingException {
+            InputStream is = new FileInputStream(file);
+            InputStreamReader isr = new InputStreamReader(is, OConsts.UTF8);
+            BufferedReader in = new BufferedReader(isr);
+            return new LinebreakPreservingReader(in);
+        }
+
+        public void setText(String text) throws UnsupportedEncodingException, IOException {
+            text = text.replaceAll("\n", lineBreak);
+            if (startsWithBOM) {
+                text = BOM + text;
+            }
+
+            InputStream is = new ByteArrayInputStream(text.getBytes(OConsts.UTF8));
+            LFileCopy.copy(is, this);
+        }
+    }
+
 }

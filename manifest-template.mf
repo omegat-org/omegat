@@ -173,6 +173,9 @@ OmegaT-Plugin: tokenizer
 Name: org.omegat.tokenizer.LuceneJapaneseTokenizer
 OmegaT-Plugin: tokenizer
 
+Name: org.omegat.tokenizer.LuceneKoreanTokenizer
+OmegaT-Plugin: tokenizer
+
 Name: org.omegat.tokenizer.LuceneLatvianTokenizer
 OmegaT-Plugin: tokenizer
 

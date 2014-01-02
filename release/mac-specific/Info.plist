@@ -48,6 +48,7 @@
 			<string>$JAVAROOT/lib/commons-lang-2.4.jar</string>
 			<string>$JAVAROOT/lib/commons-logging-1.1.1.jar</string>
 			<string>$JAVAROOT/lib/jwordsplitter-3.4.jar</string>
+			<string>$JAVAROOT/lib/KoreanAnalyzer-3x-120223.jar</string>
 			<string>$JAVAROOT/lib/LanguageTool-data.jar</string>
 			<string>$JAVAROOT/lib/languagetool-core-2.1.jar</string>
 			<string>$JAVAROOT/lib/morfologik-fsa-1.5.4.jar</string>

@@ -43,5 +43,6 @@
 	<classpathentry kind="lib" path="lib/bsf-2.4.0.jar"/>
 	<classpathentry kind="lib" path="lib/js-rhino-1.7R4.jar"/>
 	<classpathentry kind="lib" path="lib/groovy-all-1.8.9.jar"/>
+	<classpathentry kind="lib" path="lib/KoreanAnalyzer-3x-120223.jar"/>
 	<classpathentry kind="output" path="classes"/>
 </classpath>

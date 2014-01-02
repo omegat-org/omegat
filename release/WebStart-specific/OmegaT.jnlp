@@ -53,6 +53,7 @@
 				<jar href="commons-lang-2.4.jar" download="lazy" />
 				<jar href="commons-logging-1.1.1.jar" download="lazy" />
 				<jar href="jwordsplitter-3.4.jar" download="lazy" />
+				<jar href="KoreanAnalyzer-3x-120223.jar" />
 				<jar href="LanguageTool-data.jar" download="lazy" />
 				<jar href="languagetool-core-2.1.jar" download="lazy" />
 				<jar href="morfologik-fsa-1.5.4.jar" download="lazy" />

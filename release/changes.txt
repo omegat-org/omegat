@@ -17,6 +17,9 @@
   - Added dummy Google Translate API key in the info.plist file of the Mac package
   https://sourceforge.net/p/omegat/feature-requests/940/
 
+  - New Korean tokenizer. As it is still "beta", it it not yet the default
+tokenizer for Korean, and has to be selected manually in the list.
+
   Bug fixes:
 
   - In the Search window, the shortcut Alt+f was allocated both to Files 

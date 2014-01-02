@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 3.0.8 update 2
 ----------------------------------------------------------------------
-   2 Enhancements
+   4 Enhancements
    1 Bug fix
    1 Localisation update
 ----------------------------------------------------------------------
@@ -19,6 +19,9 @@
 
   - New Korean tokenizer. As it is still "beta", it it not yet the default
 tokenizer for Korean, and has to be selected manually in the list.
+
+  - Scripts are now interpreted as being written in UTF-8. This will remove
+ambiguity and ease exchanging files across different platforms.
 
   Bug fixes:
 

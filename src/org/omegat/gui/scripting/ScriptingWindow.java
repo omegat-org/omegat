@@ -29,6 +29,7 @@ import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.InputEvent;
@@ -338,6 +339,8 @@ public class ScriptingWindow extends JFrame {
         editorPopUp.add(menuItem);
         
         m_txtScriptEditor.setComponentPopupMenu(editorPopUp);
+        m_txtScriptEditor.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 
+                m_txtScriptEditor.getFont().getSize()));
         JScrollPane scrollPaneEditor = new JScrollPane(m_txtScriptEditor);
         
 

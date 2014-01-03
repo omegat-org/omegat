@@ -301,16 +301,8 @@ public class ScriptingWindow extends JFrame {
         m_scriptList.addListSelectionListener(new ListSelectionListener() {
             @Override
             public void valueChanged(ListSelectionEvent evt) {
-                if (m_scriptList.isSelectionEmpty()) {
-                    return;
-                }
-                try {
-                    m_currentScriptFile = new ScriptFile(m_scriptsDirectory,
-                            m_scriptList.getSelectedValue().toString());
-                    m_txtScriptEditor.setText(m_currentScriptFile.getText());
-                    m_txtScriptEditor.setCaretPosition(0);
-                } catch (IOException e) {
-                    logResult(OStrings.getString("SCW_CANNOT_READ_SCRIPT"));
+                if (!evt.getValueIsAdjusting()) {
+                    onListSelectionChanged();
                 }
             }
         });
@@ -610,6 +602,20 @@ public class ScriptingWindow extends JFrame {
         }
 
         return availableEngines;
+    }
+
+    private void onListSelectionChanged() {
+        if (m_scriptList.isSelectionEmpty()) {
+            return;
+        }
+        try {
+            m_currentScriptFile = new ScriptFile(m_scriptsDirectory,
+                    m_scriptList.getSelectedValue().toString());
+            m_txtScriptEditor.setText(m_currentScriptFile.getText());
+            m_txtScriptEditor.setCaretPosition(0);
+        } catch (IOException e) {
+            logResult(OStrings.getString("SCW_CANNOT_READ_SCRIPT"));
+        }
     }
 
     // Taken from languages.properties in the bsf.jar file.

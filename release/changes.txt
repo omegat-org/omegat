@@ -2,7 +2,7 @@
  OmegaT 3.0.8 update 2
 ----------------------------------------------------------------------
    5 Enhancements
-   1 Bug fix
+   2 Bug fixes
    1 Localisation update
 ----------------------------------------------------------------------
 3.0.8 update 2 vs. 3.0.8 update 1
@@ -30,6 +30,9 @@ ambiguity and ease exchanging files across different platforms.
   - In the Search window, the shortcut Alt+f was allocated both to Files 
 and Filter, and no shortcut was allocated to Translated. The new shortcuts
 are Alt+l for Files, Alt+f for Filter and Alt+t for Translated
+
+  - After creating a project, both Copy Files to Source Folder and
+Download MediaWiki Page were greyed out
 
   Localisation updates:
 

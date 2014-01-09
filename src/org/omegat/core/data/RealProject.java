@@ -244,6 +244,8 @@ public class RealProject implements IProject {
             loadOtherLanguages();
 
             allProjectEntries = Collections.unmodifiableList(allProjectEntries);
+            
+            loaded = true;
 
             // clear status message
             Core.getMainWindow().showStatusMessageRB(null);

@@ -697,7 +697,7 @@ OmegaT failed to load the valid ones
  OmegaT 2.6.3 update 7
 ----------------------------------------------------------------------
    0 Enhancement
-   1 Bug fix
+   2 Bug fixes
    0 Localisation update
 ----------------------------------------------------------------------
 2.6.3 update 7 vs. 2.6.3 update 6
@@ -706,6 +706,9 @@ OmegaT failed to load the valid ones
 
   - Word plugin causes weird inline code in OmegaT
   https://sourceforge.net/p/omegat/bugs/645/
+
+  - NullPointerException when loading project with HHC files 
+  https://sourceforge.net/p/omegat/bugs/651/
 
 ----------------------------------------------------------------------
  OmegaT 2.6.3 update 6

@@ -50,6 +50,7 @@ class HHCFilterVisitor extends FilterVisitor {
     /** Do we collect the translatable text now. */
     boolean text = false;
 
+    @Override
     public void visitTag(Tag tag) {
         if (isParagraphTag(tag) && text)
             endup();

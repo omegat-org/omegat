@@ -37,6 +37,7 @@ import java.nio.charset.CharsetEncoder;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.TreeMap;
 import java.util.Vector;
 import java.util.regex.Matcher;
 
@@ -68,7 +69,13 @@ public class FilterVisitor extends NodeVisitor {
 
     public FilterVisitor(HTMLFilter2 htmlfilter, BufferedWriter bufwriter, HTMLOptions options) {
         this.filter = htmlfilter;
-        this.options = options; // HHC filter has no options
+        // HHC filter has no options
+        if (options != null) {       
+            this.options = options;  
+        } else {                                                           
+            // To prevent a null pointer exception later, see https://sourceforge.net/p/omegat/bugs/651/
+            this.options = new HTMLOptions(new TreeMap<String, String>()); 
+        }
         this.writer = bufwriter;
     }
 

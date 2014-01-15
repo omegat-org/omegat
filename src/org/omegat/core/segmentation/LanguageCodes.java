@@ -88,6 +88,7 @@ public final class LanguageCodes {
         codeKeyHash.put(DUTCH_CODE, DUTCH_KEY);
         codeKeyHash.put(POLISH_CODE, POLISH_KEY);
         codeKeyHash.put(RUSSIAN_CODE, RUSSIAN_KEY);
+        codeKeyHash.put(SWEDISH_CODE, SWEDISH_KEY);
         codeKeyHash.put(DEFAULT_CODE, DEFAULT_KEY);
         codeKeyHash.put(F_TEXT_CODE, F_TEXT_KEY);
         codeKeyHash.put(F_HTML_CODE, F_HTML_KEY);

@@ -2,7 +2,7 @@
  OmegaT 3.0.8 update 2
 ----------------------------------------------------------------------
    5 Enhancements
-   2 Bug fixes
+   3 Bug fixes
    1 Localisation update
 ----------------------------------------------------------------------
 3.0.8 update 2 vs. 3.0.8 update 1
@@ -33,6 +33,8 @@ are Alt+l for Files, Alt+f for Filter and Alt+t for Translated
 
   - After creating a project, both Copy Files to Source Folder and
 Download MediaWiki Page were greyed out
+
+  - Swedish segmentation rules were not properly displayed in the Segmentation Rules dialog
 
   Localisation updates:
 

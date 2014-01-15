@@ -4303,7 +4303,30 @@
         </rule>
       </languagerule>
       
-      <!-- SV
+       <!-- RU
+      Russian non-break rules
+      including http://sourceforge.net/support/tracker.php?aid=2835535 -->
+
+      <languagerule languagerulename="Russian">
+        <rule break="no">
+          <beforebreak>(?i)т\.е\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule>
+        <rule break="no">
+          <beforebreak>(?i)т\.к\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule>
+        <rule break="no">
+          <beforebreak>рт\.ст\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule>
+        <rule break="no">
+          <beforebreak>рт\.\sст\.</beforebreak>
+          <afterbreak>\s</afterbreak>
+        </rule>
+      </languagerule>
+      
+     <!-- SV
       Swedish non-break rules, contributed by Per Tunedal -->
 
       <languagerule languagerulename="Swedish">
@@ -4597,29 +4620,6 @@
         </rule>
         <rule break="no">
           <beforebreak>\säv\.</beforebreak>
-          <afterbreak>\s</afterbreak>
-        </rule>
-      </languagerule>
-
-      <!-- RU
-      Russian non-break rules
-      including http://sourceforge.net/support/tracker.php?aid=2835535 -->
-
-      <languagerule languagerulename="Russian">
-        <rule break="no">
-          <beforebreak>(?i)т\.е\.</beforebreak>
-          <afterbreak>\s</afterbreak>
-        </rule>
-        <rule break="no">
-          <beforebreak>(?i)т\.к\.</beforebreak>
-          <afterbreak>\s</afterbreak>
-        </rule>
-        <rule break="no">
-          <beforebreak>рт\.ст\.</beforebreak>
-          <afterbreak>\s</afterbreak>
-        </rule>
-        <rule break="no">
-          <beforebreak>рт\.\sст\.</beforebreak>
           <afterbreak>\s</afterbreak>
         </rule>
       </languagerule>

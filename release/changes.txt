@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 3.0.8 update 2
 ----------------------------------------------------------------------
-   5 Enhancements
+   6 Enhancements
    3 Bug fixes
    1 Localisation update
 ----------------------------------------------------------------------
@@ -24,6 +24,9 @@ tokenizer for Korean, and has to be selected manually in the list.
 ambiguity and ease exchanging files across different platforms.
 
   - Scripts now use a monospaced font
+
+  - Chinese (ZH.*) segmentation rules added
+  http://sourceforge.net/p/omegat/feature-requests/945/
 
   Bug fixes:
 

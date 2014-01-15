@@ -52,6 +52,7 @@ public final class LanguageCodes {
     public static final String POLISH_CODE = "Polish";
     public static final String RUSSIAN_CODE = "Russian";
     public static final String SWEDISH_CODE = "Swedish";
+    public static final String CHINESE_CODE = "Chinese";
     public static final String DEFAULT_CODE = "Default";
     public static final String F_TEXT_CODE = "Text";
     public static final String F_HTML_CODE = "HTML";
@@ -69,6 +70,7 @@ public final class LanguageCodes {
     public static final String POLISH_KEY = "CORE_SRX_RULES_LANG_POLISH";
     public static final String RUSSIAN_KEY = "CORE_SRX_RULES_LANG_RUSSIAN";
     public static final String SWEDISH_KEY = "CORE_SRX_RULES_LANG_SWEDISH";
+    public static final String CHINESE_KEY = "CORE_SRX_RULES_LANG_CHINESE";
     public static final String DEFAULT_KEY = "CORE_SRX_RULES_LANG_DEFAULT";
     public static final String F_TEXT_KEY = "CORE_SRX_RULES_FORMATTING_TEXT";
     public static final String F_HTML_KEY = "CORE_SRX_RULES_FORMATTING_HTML";
@@ -89,6 +91,7 @@ public final class LanguageCodes {
         codeKeyHash.put(POLISH_CODE, POLISH_KEY);
         codeKeyHash.put(RUSSIAN_CODE, RUSSIAN_KEY);
         codeKeyHash.put(SWEDISH_CODE, SWEDISH_KEY);
+        codeKeyHash.put(CHINESE_CODE, CHINESE_KEY);
         codeKeyHash.put(DEFAULT_CODE, DEFAULT_KEY);
         codeKeyHash.put(F_TEXT_CODE, F_TEXT_KEY);
         codeKeyHash.put(F_HTML_CODE, F_HTML_KEY);

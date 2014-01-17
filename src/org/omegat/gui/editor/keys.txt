@@ -1,4 +1,4 @@
-This short text describes key behavior in the editor.
+﻿This short text describes key behavior in the editor.
 
 Terms:
  "move to inside segment" means that caret will be moved to the begin of segment if previous position was before segment, and to the end of segment, if previous position was after segment.
@@ -23,6 +23,7 @@ Keys definitions:
 
 
  Backspace (Delete): remove char before caret
+ Ctrl+H: same as Backspace
  Delete (Fn+Delete / "Delete ⌦" on full keyboards): remove char after caret
  Ctrl+Backspace (Alt+Delete): remove to the begin of word
  Ctrl+Delete (Alt+Fn+Delete / Alt+"Delete ⌦"): remove to the begin of next word
@@ -37,6 +38,7 @@ Keys definitions, which behavior differ than caret outside editable segment beha
  End (Down): "move to inside segment"
 
  Backspace (Delete): nothing
+ Ctrl+H: same as Backspace
  Delete (Fn+Delete / "Delete ⌦"): nothing
  Any char key, if clicked outside editable segment, will be ignored.
 

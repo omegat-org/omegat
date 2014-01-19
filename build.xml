@@ -258,33 +258,21 @@ Custom strings from release\win32-specific must be added manually to the languag
     </target>
 
     <!-- Builds a Mac distribution -->    
-    <target name="mac" description="Build Mac distro. PRE: A Mac Java Application Stub must be present in ../" depends="jar,release,check-mac-java-stub" if="mac-java-stub.exists">
+    <target name="mac" description="Build Mac distro. PRE: A MacOS JRE must be present in ../jre-mac/" depends="jar,release,check-jre-mac">
         <!-- Build directories -->
         <mkdir dir="dist2"/>
-        <mkdir dir="dist2/mac/"/>
-        <mkdir dir="dist2/mac/OmegaT.app"/>
-        <mkdir dir="dist2/mac/OmegaT.app/Contents"/>
-        <mkdir dir="dist2/mac/OmegaT.app/Contents/MacOS"/>
-        <mkdir dir="dist2/mac/OmegaT.app/Contents/Resources"/>
-        <mkdir dir="dist2/mac/OmegaT.app/Contents/Resources/Java"/>
-        
-        <copy todir="dist2/mac/" file="release/mac-specific/index.html"/>
-        <copy todir="dist2/mac/OmegaT.app/Contents" file="release/mac-specific/OmegaT.css"/>       
+
         <filter token="VERSION_NUMBER_SUBST" value="${distversion}"/>
-        <copy todir="dist2/mac/OmegaT.app/Contents" file="release/mac-specific/Info.plist" filtering="on"/>
-        <copy todir="dist2/mac/OmegaT.app/Contents" file="release/mac-specific/PkgInfo"/>
-        <copy todir="dist2/mac/OmegaT.app/Contents/MacOS" file="../JavaApplicationStub"/>
-        <copy todir="dist2/mac/OmegaT.app/Contents/Resources" file="release/mac-specific/OmegaT.icns"/>
-        
-        <copy todir="dist2/mac/OmegaT.app/Contents/Resources/Java">
-            <fileset dir="dist" excludes="OmegaT OmegaT-JRE linux-install.sh omegat.kaptn OmegaT.exe OmegaT.bat OmegaT.iss OmegaT-JRE.iss OmegaT.l4J.ini l10n-project"/> 
-        </copy>
+        <copy todir="build/" file="release/mac-specific/OmegaT.app/Contents/Info.plist" filtering="on"/>
 
         <zip destfile="dist2/OmegaT_${distversion}${beta}_Mac.zip">
-            <zipfileset dir="dist2/mac/" excludes="OmegaT.app/Contents/MacOS/JavaApplicationStub"/>
-            <zipfileset dir="dist2/mac/" includes="OmegaT.app/Contents/MacOS/JavaApplicationStub" filemode="755"/>
+            <zipfileset dir="dist" excludes="OmegaT OmegaT-JRE linux-install.sh omegat.kaptn OmegaT.exe OmegaT.bat OmegaT.iss OmegaT-JRE.iss OmegaT.l4J.ini l10n-project" prefix="OmegaT.app/Contents/MacOS/Java"/>
+            <zipfileset dir="release/mac-specific/" excludes="OmegaT.app/Contents/Info.plist,OmegaT.app/Contents/MacOS/OmegaT.sh"/>
+            <zipfileset dir="build/" includes="Info.plist" prefix="OmegaT.app/Contents/"/>
+            <zipfileset dir="release/mac-specific/" includes="OmegaT.app/Contents/MacOS/OmegaT.sh" filemode="755"/>
+            <zipfileset dir="../jre-mac/" excludes="bin/" prefix="OmegaT.app/Contents/MacOS/jre/"/>
+            <zipfileset dir="../jre-mac/" includes="bin/" prefix="OmegaT.app/Contents/MacOS/jre/" filemode="755"/>
         </zip>
-        
     </target>
 
     <target name="check-win" depends="init">
@@ -304,8 +292,11 @@ Custom strings from release\win32-specific must be added manually to the languag
         <available file="../jre-linux" type="dir" property="jre-linux.exists" />
     </target>
 
-    <target name="check-mac-java-stub">
-        <available file="../JavaApplicationStub" type="file" property="mac-java-stub.exists" />
+    <target name="check-jre-mac">
+        <available file="../jre-mac/bin/java" type="file" property="mac-java-stub.exists1" />
+        <fail message="There is no Java for MacOS in the ../jre-mac/bin/java" unless="mac-java-stub.exists1" />
+        <available file="../jre-mac/lib/rt.jar" type="file" property="mac-java-stub.exists2" />
+        <fail message="There is no Java for MacOS in the ../jre-mac/lib/rt.jar" unless="mac-java-stub.exists2" />
     </target>   
 
     <target name="win" description="Build Win32 distro if on Windows. PRE: Inno Setup (http://www.jrsoftware.org/isinfo.php) with all optional language packs must be installed and available on the path, and for the JRE-version a JRE must be present in ..\\jre\\ "

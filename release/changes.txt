@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 3.0.8 update 2
 ----------------------------------------------------------------------
-   6 Enhancements
+   7 Enhancements
    3 Bug fixes
    1 Localisation update
 ----------------------------------------------------------------------
@@ -14,7 +14,7 @@
 
   Other enhancements:
   
-  - Added dummy Google Translate API key in the info.plist file of the Mac package
+  - Added dummy Google Translate API key in the Mac package
   https://sourceforge.net/p/omegat/feature-requests/940/
 
   - New Korean tokenizer. As it is still "beta", it it not yet the default
@@ -27,6 +27,10 @@ ambiguity and ease exchanging files across different platforms.
 
   - Chinese (ZH.*) segmentation rules added
   http://sourceforge.net/p/omegat/feature-requests/945/
+
+  - The Mac version now contains the JRE (1.7). Runtime parameters 
+(e.g., user language, Google API key, etc.) can be edited in 
+OmegaT.app/Contents/MacOS/OmegaT.sh.
 
   Bug fixes:
 

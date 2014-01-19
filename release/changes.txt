@@ -3,7 +3,7 @@
 ----------------------------------------------------------------------
    7 Enhancements
    3 Bug fixes
-   1 Localisation update
+   2 Localisation updates
 ----------------------------------------------------------------------
 3.0.8 update 2 vs. 3.0.8 update 1
 
@@ -46,6 +46,7 @@ Download MediaWiki Page were greyed out
   Localisation updates:
 
   - Simplified Chinese localisation updated to 3.0.8 (UI, Documentation)
+  - Japanese localisation updated to 3.0.8 update 2 (UI, Documentation, Readme)
 
 ----------------------------------------------------------------------
  OmegaT 3.0.8 update 1 (2013-12-26)

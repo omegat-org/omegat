@@ -224,6 +224,7 @@ OmegaT のユーザーインターフェースや取扱説明書、他の関連�
   Thomas Huriaux
   Hans-Peter Jacobs
   Kyle Katarn
+  Piotr Kulik
   Ibai Lakunza Velasco
   Guido Leenders
   Aaron Madlon-Kay
@@ -281,6 +282,7 @@ OmegaT は以下に示すライブラリを使用しています。
   morfologik-*.jar（Morfologik ライセンス）
   segment-1.4.1.jar（Segment ライセンス）
   pdfbox-app-1.8.1.jar（Apache ライセンス 2.0）
+  KoreanAnalyzer-3x-120223.jar（Apache ライセンス 2.0）
 
 ==============================================================================
  5.  バグかな？と思ったら

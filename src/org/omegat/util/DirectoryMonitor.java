@@ -26,6 +26,7 @@
 package org.omegat.util;
 
 import java.io.File;
+import java.io.FileFilter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -118,8 +119,11 @@ public class DirectoryMonitor extends Thread {
         }
 
         // find new files
-        List<File> foundFiles = new ArrayList<File>();
-        readDir(dir, foundFiles);
+        List<File> foundFiles = FileUtil.findFiles(dir, new FileFilter() {
+            public boolean accept(File pathname) {
+                return true;
+            }
+        });
         for (File f : foundFiles) {
             if (stopped)
                 return;
@@ -129,19 +133,6 @@ public class DirectoryMonitor extends Thread {
                 LOGGER.finer("File '" + f + "' added");
                 existFiles.put(fn, new FileInfo(f));
                 callback.fileChanged(f);
-            }
-        }
-    }
-
-    protected void readDir(final File dir, final List<File> found) {
-        File[] files = dir.listFiles();
-        if (files != null) {
-            for (File f : files) {
-                if (f.isDirectory()) {
-                    readDir(f, found);
-                } else {
-                    found.add(f);
-                }
             }
         }
     }

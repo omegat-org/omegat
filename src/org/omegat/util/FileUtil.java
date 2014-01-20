@@ -44,7 +44,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+
 import org.omegat.gui.help.HelpFrame;
 
 /**
@@ -180,7 +183,8 @@ public class FileUtil {
      */
     public static List<File> findFiles(final File dir, final FileFilter filter) {
         final List<File> result = new ArrayList<File>();
-        findFiles(dir, filter, result);
+        Set<String> knownDirs = new HashSet<String>();
+        findFiles(dir, filter, result, knownDirs);
         return result;
     }
 
@@ -194,12 +198,24 @@ public class FileUtil {
      * @param result
      *            list of filtered found files
      */
-    private static void findFiles(final File dir, final FileFilter filter, final List<File> result) {
+    private static void findFiles(final File dir, final FileFilter filter, final List<File> result,
+            final Set<String> knownDirs) {
+        String curr_dir;
+        try {
+            // check for recursive
+            curr_dir = dir.getCanonicalPath();
+            if (!knownDirs.add(curr_dir)) {
+                return;
+            }
+        } catch (IOException ex) {
+            Log.log(ex);
+            return;
+        }
         File[] list = dir.listFiles();
         if (list != null) {
             for (File f : list) {
                 if (f.isDirectory()) {
-                    findFiles(f, filter, result);
+                    findFiles(f, filter, result, knownDirs);
                 } else {
                     if (filter.accept(f)) {
                         result.add(f);

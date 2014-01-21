@@ -2,7 +2,7 @@
  OmegaT 3.0.8 update 2
 ----------------------------------------------------------------------
    7 Enhancements
-   3 Bug fixes
+   4 Bug fixes
    2 Localisation updates
 ----------------------------------------------------------------------
 3.0.8 update 2 vs. 3.0.8 update 1
@@ -33,6 +33,9 @@ ambiguity and ease exchanging files across different platforms.
 OmegaT.app/Contents/MacOS/OmegaT.sh.
 
   Bug fixes:
+
+  - OutOfMemoryError in DirectoryMonitor if monitored path contains recursive symlinks 
+  https://sourceforge.net/p/omegat/bugs/652/
 
   - In the Search window, the shortcut Alt+f was allocated both to Files 
 and Filter, and no shortcut was allocated to Translated. The new shortcuts

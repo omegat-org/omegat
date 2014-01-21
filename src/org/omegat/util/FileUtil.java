@@ -6,6 +6,7 @@
  Copyright (C) 2008 Alex Buloichik
                2009 Didier Briel
                2012 Alex Buloichik, Didier Briel
+               2014 Alex Buloichik
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 

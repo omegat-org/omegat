@@ -2,6 +2,8 @@
 
 cd `dirname $0`/Java
 
+MACOS="-Xdock:name=OmegaT -Xdock:icon=../../Resources/OmegaT.icns"
+
 #LANGUAGE="-Duser.language=en"
 #COUNTRY="-Duser.country=GB"
 # Settings to access the Internet behind a proxy
@@ -13,4 +15,4 @@ cd `dirname $0`/Java
 #MS_CLIENT_ID="-Dmicrosoft.api.client_id=xxxxx"
 #MS_CLIENT_SECRET="-Dmicrosoft.api.client_secret=xxxxx'
 
-../jre/bin/java -Xdock:name="OmegaT" -Xdock:icon="../../Resources/OmegaT.icns" -Xmx1024m ${LANGUAGE} ${COUNTRY} ${PROXY_HOST} ${PROXY_PORT} ${GOOGLE_API_KEY} ${MS_CLIENT_ID} ${MS_CLIENT_SECRET} -jar OmegaT.jar
+../jre/bin/java -Xmx1024m ${MACOS} ${LANGUAGE} ${COUNTRY} ${PROXY_HOST} ${PROXY_PORT} ${GOOGLE_API_KEY} ${MS_CLIENT_ID} ${MS_CLIENT_SECRET} -jar OmegaT.jar

@@ -2,25 +2,25 @@
    <head>
       <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
    
-      <title>第&nbsp;7&nbsp;章&nbsp;文件过滤器</title>
+      <title>Chapter&nbsp;7.&nbsp;文件过滤器</title>
       <link rel="stylesheet" type="text/css" href="OmegaT.css">
       <meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
-      <link rel="home" href="index.html" title="OmegaT - 用户向导">
-      <link rel="up" href="index.html" title="OmegaT - 用户向导">
-      <link rel="prev" href="chapter.project.properties.html" title="第&nbsp;6&nbsp;章&nbsp;项目属性">
-      <link rel="next" href="chapter.files.and.directories.html" title="第&nbsp;8&nbsp;章&nbsp;OmegaT 文件和目录">
+      <link rel="home" href="index.html" title="OmegaT 3.0——用户向导">
+      <link rel="up" href="index.html" title="OmegaT 3.0——用户向导">
+      <link rel="prev" href="chapter.project.properties.html" title="Chapter&nbsp;6.&nbsp;项目属性">
+      <link rel="next" href="chapter.files.and.folders.html" title="Chapter&nbsp;8.&nbsp;OmegaT文件和文件夹">
    </head>
    <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
       <div class="navheader">
          <table width="100%" summary="Navigation header">
             <tr>
-               <th colspan="3" align="center">第&nbsp;7&nbsp;章&nbsp;文件过滤器</th>
+               <th colspan="3" align="center">Chapter&nbsp;7.&nbsp;文件过滤器</th>
             </tr>
             <tr>
-               <td width="20%" align="left"><a accesskey="p" href="chapter.project.properties.html">上一页</a>&nbsp;
+               <td width="20%" align="left"><a accesskey="p" href="chapter.project.properties.html">Prev</a>&nbsp;
                </td>
                <th width="60%" align="center">&nbsp;</th>
-               <td width="20%" align="right">&nbsp;<a accesskey="n" href="chapter.files.and.directories.html">下一页</a></td>
+               <td width="20%" align="right">&nbsp;<a accesskey="n" href="chapter.files.and.folders.html">Next</a></td>
             </tr>
          </table>
          <hr>
@@ -29,7 +29,7 @@
          <div class="titlepage">
             <div>
                <div>
-                  <h1 class="title"><a name="chapter.file.filters"></a>第&nbsp;7&nbsp;章&nbsp;文件过滤器
+                  <h1 class="title"><a name="chapter.file.filters"></a>Chapter&nbsp;7.&nbsp;文件过滤器
                   </h1>
                </div>
             </div>
@@ -70,7 +70,11 @@
                </li>
             </ul>
          </div>
+         <p>要查看OmegaT能处理哪些文件格式，请打开<span class="guimenuitem">选项&gt;文件过滤器……</span>菜单
+         </p>
          <p>多数用户应该会对缺省的文件过滤器选项感到满意。如果不满意，可以从主菜单<span class="bold"><strong>选项→文件过滤器……</strong></span>打开主对话框。通过选择项目属性中的<span class="bold"><strong>文件过滤器……</strong></span>属性，您还可以启用仅用于当前项目的项目专用文件过滤器.
+         </p>
+         <p>通过<span class="bold"><strong>项目→属性……</strong></span>您还可以启用项目专用过滤器。点击<span class="guibutton">文件过滤器</span>按钮并选中<span class="guimenuitem">启用项目专用过滤器</span><a class="indexterm" name="d0e4415"></a>复选框。此时文件过滤器配置文件的副本会与项目保存在一起。如果以后您改变了过滤器，则只更新当前项目的过滤器而用户过滤器保持不变。
          </p>
          <p><span class="bold"><strong>警告！</strong></span>如果您在项目打开的时候改变过滤器选项，您必须重新载入项目以使改变生效。
          </p>
@@ -78,22 +82,22 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="file.filters.dialog"></a>1.&nbsp;文件过滤器对话框<a class="indexterm" name="d0e5210"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="file.filters.dialog"></a>1.&nbsp;文件过滤器对话框<a class="indexterm" name="d0e4428"></a></h2>
                   </div>
                </div>
             </div>
-            <p>该对话框列出了可用的文件过滤器。如果您不想使用 OmegaT 翻译某些类型的文件，您可以将它们文件名旁边的复选框的对勾符号去掉来关闭该过滤器。这样一来，在载入项目时 OmegaT 会忽略这些文件，并且在创建目标文档时对它们进行原封不动的复制。如果之后您又决定使用这些过滤器，只需勾上这些复选框。点击<span class="bold"><strong>缺省【Defaults】</strong></span>可将文件过滤器恢复为缺省设置。要编辑过滤器处理文件时使用的编码，请从列表中选中该过滤器然后点击<span class="bold"><strong>编辑</strong></span>按钮。
+            <p>该对话框列出了可用的文件过滤器。如果您不想使用 OmegaT 翻译某种类型的文件，您可以取消选中该文件名旁边的复选框来关闭其过滤器。这样一来，在载入项目时 OmegaT 会忽略这些文件，并且在创建目标文档时对它们进行原封不动的复制。如果之后您又决定使用这些过滤器，只需勾上这些复选框。点击<span class="bold"><strong>缺省【Defaults】</strong></span>可将文件过滤器恢复为缺省设置。要编辑过滤器处理文件时使用的编码，请从列表中选中该过滤器然后点击<span class="bold"><strong>编辑</strong></span>按钮。
             </p>
          </div>
          <div class="section">
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="filters.options"></a>2.&nbsp;过滤器选项<a class="indexterm" name="d0e5226"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="filters.options"></a>2.&nbsp;过滤器选项<a class="indexterm" name="d0e4444"></a></h2>
                   </div>
                </div>
             </div>
-            <p>五种过滤器（文本文件、 XHTML 文件、HTML 和 XHTML 文件、开放文档／OpenOffice.org 文件和 微软开放 XML 文件）有一个或多个特殊选项。要修改这些选项，请从列表中选中该过滤器，并点击 <span class="bold"><strong>选项【Options】</strong></span>按钮。可用选项包括：
+            <p>多种过滤器（文本文件、XHTML文件、HTML和XHTML文件、OpenDocument文件和Microsoft Open XML文件）有一个或多个特殊选项。要修改这些选项，请从列表中选中该过滤器，并点击 <span class="bold"><strong>选项【Options】</strong></span>按钮。可用选项包括：
             </p>
             <p><span class="bold"><strong>文本文件</strong></span></p>
             <div class="itemizedlist">
@@ -115,11 +119,35 @@
                   </li>
                </ul>
             </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p><span class="emphasis"><em>跳过PO头部</em></span></p>
+                     <p>如果选中此选项，则PO头部会被跳过而保持不变。</p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p><span class="emphasis"><em>自动替换头部中的‘nplurals=INTEGER; plural=EXPRESSION;’</em></span></p>
+                     <p><span class="emphasis"><em><span class="emphasis"><em>此选项会让OmegaT覆盖PO文件头部的规范并在选择的目标语言中使用默认规范。</em></span></em></span></p>
+                  </li>
+               </ul>
+            </div>
             <p><span class="bold"><strong>XHTML 文件</strong></span></p>
             <div class="itemizedlist">
                <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
-                     <p><span class="emphasis"><em>翻译下列属性</em></span>——已选择的属性会作为片段出现在编辑器窗口中。
+                     <p><span class="emphasis"><em>新增或重写HTML和XHTML文件中的编码声明</em></span>：目标文件通常使用与源文件不同的编码字符集（不论是显式或隐式定义）。通过该选项译者可以指定目标文件是否包含编码声明。例如，如果文件过滤器指定目标文件的编码方案为UTF8，则选择总是能确保已译文件中包含此信息。
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p><span class="emphasis"><em>翻译下列属性</em></span>：已选择的属性会作为片段出现在编辑器窗口中。
                      </p>
                   </li>
                </ul>
@@ -135,7 +163,7 @@
             <div class="itemizedlist">
                <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
-                     <p><span class="emphasis"><em>忽略匹配正则表达式的文本</em></span>：匹配该正则表达式的文本会被忽略。
+                     <p><span class="emphasis"><em>忽略匹配正则表达式的文本</em></span>：匹配该正则表达式的文本会被忽略。它在标签检验中显示为渲染红。源片段中匹配的文本以斜体显示。
                      </p>
                   </li>
                </ul>
@@ -143,8 +171,17 @@
             <div class="itemizedlist">
                <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
-                     <p><span class="emphasis"><em>不要翻译元标签的属性内容……：</em></span>属性键值对，用逗号分隔，将保持未译状态
+                     <p><span class="emphasis"><em>不翻译元标签……的内容属性：</em></span>下列元标签将不进行翻译。
                      </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p><span class="emphasis"><em>不翻译含下列属性键值对（逗号分隔）的标签内容</em></span>：匹配列表中键值对的标签内容将被忽略。
+                     </p>
+                     <p>在需要根据属性值来不翻译一些标签时很有用。例如，对于<code class="literal">&lt;div class="hide"&gt; &lt;span translate="no"&gt;</code>您可以定义键值对来保持其未译状态。对于上面这个例子，定义字段应包含：<code class="literal">class=hide, translate=no </code></p>
                   </li>
                </ul>
             </div>
@@ -237,7 +274,15 @@
             <div class="itemizedlist">
                <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
-                     <p><span class="emphasis"><em>不要翻译元标签的属性内容……：</em></span>属性键值对，用逗号分隔，将保持未译状态
+                     <p><span class="emphasis"><em>不翻译元标签……的内容属性：</em></span>下列元标签将不进行翻译。
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p><span class="emphasis"><em>不翻译含下列属性键值对（逗号分隔）的标签内容</em></span>：匹配列表中键值对的标签内容将被忽略。
                      </p>
                   </li>
                </ul>
@@ -252,7 +297,7 @@
                   </li>
                </ul>
             </div>
-            <p><span class="bold"><strong>开放文档/OpenOffice.org 文件</strong></span></p>
+            <p><span class="bold"><strong>Open Document格式（ODF）文件</strong></span></p>
             <div class="itemizedlist">
                <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
@@ -266,7 +311,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="edit.filter.dialog"></a>3.&nbsp;编辑过滤器对话框<a class="indexterm" name="d0e5388"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="edit.filter.dialog"></a>3.&nbsp;编辑过滤器对话框<a class="indexterm" name="d0e4647"></a></h2>
                   </div>
                </div>
             </div>
@@ -276,7 +321,7 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="source.filetype.and.filename.pattern"></a>3.1.&nbsp;<a class="indexterm" name="d0e5403"></a>源文件类型、文件名模式<a class="indexterm" name="d0e5409"></a></h3>
+                        <h3 class="title"><a name="source.filetype.and.filename.pattern"></a>3.1.&nbsp;<a class="indexterm" name="d0e4662"></a>源文件类型、文件名模式<a class="indexterm" name="d0e4668"></a></h3>
                      </div>
                   </div>
                </div>
@@ -291,7 +336,7 @@
                         </h3>
                      </div>
                   </div>
-               </div><a class="indexterm" name="d0e5437"></a><a class="indexterm" name="d0e5442"></a><a class="indexterm" name="d0e5447"></a><p>仅少量文件格式必须指定强制性的编码方式。未指定编码方式的文件格式将使用您所设定的匹配该名称的扩展名的编码方式。例如，缺省情况下 <code class="literal">.txt</code> 文件将会使用系统缺省的编码导入。您可以对每种源文件名模式的源编码进行修改。这些文件也可以任何编码方式输出。缺省情况下，已译文件的编码与源文件的编码相同。源和目标编码字段使用的组合框包括了所支持的全部编码。&lt;自动&gt;将编码选择工作留给 <span class="application">OmegaT</span>。以下是其工作原理：
+               </div><a class="indexterm" name="d0e4696"></a><a class="indexterm" name="d0e4701"></a><a class="indexterm" name="d0e4706"></a><p>仅少量文件格式必须指定强制性的编码方式。未指定编码方式的文件格式将使用您所设定的匹配该名称的扩展名的编码方式。例如，缺省情况下 <code class="literal">.txt</code> 文件将会使用系统缺省的编码导入。您可以对每种源文件名模式的源编码进行修改。这些文件也可以任何编码方式输出。缺省情况下，已译文件的编码与源文件的编码相同。源和目标编码字段使用的组合框包括了所支持的全部编码。&lt;自动&gt;将编码选择工作留给 <span class="application">OmegaT</span>。以下是其工作原理：
                </p>
                <div class="itemizedlist">
                   <ul class="itemizedlist" style="list-style-type: disc; ">
@@ -310,8 +355,7 @@
                <div class="itemizedlist">
                   <ul class="itemizedlist" style="list-style-type: disc; ">
                      <li class="listitem">
-                        <p><span class="application">OmegaT</span> 为文本文件使用缺省的系统编码。
-                        </p>
+                        <p>OmegaT 为文本文件使用缺省的系统编码。</p>
                      </li>
                   </ul>
                </div>
@@ -320,11 +364,11 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="target.name"></a>3.3.&nbsp;目标文件名<a class="indexterm" name="d0e5477"></a></h3>
+                        <h3 class="title"><a name="target.name"></a>3.3.&nbsp;目标文件名<a class="indexterm" name="d0e4734"></a></h3>
                      </div>
                   </div>
                </div>
-               <p>有时您也需希望系统自动将译好的的文件重新命名，比如在文件名后加上语言代码。目标文件名模式使用特殊的语法规则，因此如果希望编辑这些字段的话，您必须点击<span class="bold"><strong>编辑……</strong></span>以使用<a class="indexterm" name="d0e5487"></a>编辑模式对话框。如果您想恢复到缺省的过滤器设置，点击<span class="bold"><strong>缺省</strong></span>。您也可以在文件过滤器对话框中的目标文件名模式字段中直接修改名称。模式编辑对话框提供了以下选项：
+               <p>有时您也需希望系统自动将译好的的文件重新命名，比如在文件名后加上语言代码。目标文件名模式使用特殊的语法规则，因此如果希望编辑这些字段的话，您必须点击<span class="bold"><strong>编辑……</strong></span>以使用<a class="indexterm" name="d0e4744"></a>编辑模式对话框。如果您想恢复到缺省的过滤器设置，点击<span class="bold"><strong>缺省</strong></span>。您也可以在文件过滤器对话框中的目标文件名模式字段中直接修改名称。编辑模式对话框提供了以下选项：
                </p>
                <div class="itemizedlist">
                   <ul class="itemizedlist" style="list-style-type: disc; ">
@@ -340,12 +384,8 @@
                         <p><code class="literal">${nameOnly}</code>——只插入源文件的名称，而不包括扩展名。
                         </p>
                      </li>
-                  </ul>
-               </div>
-               <div class="itemizedlist">
-                  <ul class="itemizedlist" style="list-style-type: disc; ">
                      <li class="listitem">
-                        <p><code class="literal">${targetLocale}</code>——目标文件区域设置代码（形式为 "xx_YY"）。
+                        <p><code class="literal">${extension} </code>——源文件扩展名
                         </p>
                      </li>
                   </ul>
@@ -353,7 +393,7 @@
                <div class="itemizedlist">
                   <ul class="itemizedlist" style="list-style-type: disc; ">
                      <li class="listitem">
-                        <p><code class="literal">${targetLanguage}</code>——目标语言和国家代码（形式为 "XX-YY"）。
+                        <p><code class="literal">${targetLocale}</code>——目标文件区域设置代码（形式为“xx_YY”）。
                         </p>
                      </li>
                   </ul>
@@ -361,7 +401,7 @@
                <div class="itemizedlist">
                   <ul class="itemizedlist" style="list-style-type: disc; ">
                      <li class="listitem">
-                        <p><code class="literal">${targetLanguageCode}</code>——目标语言代码（"XX"）。
+                        <p><code class="literal">${targetLanguage}</code>——目标语言和国家代码（形式为“XX-YY”）。
                         </p>
                      </li>
                   </ul>
@@ -369,7 +409,75 @@
                <div class="itemizedlist">
                   <ul class="itemizedlist" style="list-style-type: disc; ">
                      <li class="listitem">
-                        <p><code class="literal">${targetCountryCode}</code>——目标国家代码（"YY"）。
+                        <p><code class="literal">${targetLanguageCode}</code>——目标语言——仅“XX”
+                        </p>
+                     </li>
+                  </ul>
+               </div>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
+                     <li class="listitem">
+                        <p><code class="literal">${targetCountryCode}</code>——目标国家——仅“YY”
+                        </p>
+                     </li>
+                     <li class="listitem">
+                        <p><code class="literal">${timestamp-????}</code>——多种格式的生成时间系统日期时间
+                        </p>
+                        <p>请参阅<a class="ulink" href="http://docs.oracle.com/javase/1.4.2/docs/api/java/text/SimpleDateFormat.html" target="_top">Oracle文档</a>了解“SimpleDateFormat”格式示例
+                        </p>
+                     </li>
+                     <li class="listitem">
+                        <p><code class="literal">${system-os-name}</code>——电脑使用的操作系统
+                        </p>
+                     </li>
+                     <li class="listitem">
+                        <p><code class="literal">${system-user-name}</code>——系统用户名
+                        </p>
+                     </li>
+                     <li class="listitem">
+                        <p><code class="literal">${system-host-name}</code>——系统主机名
+                        </p>
+                     </li>
+                     <li class="listitem">
+                        <p><code class="literal">${file-source-encoding}</code>——源文件编码
+                        </p>
+                     </li>
+                     <li class="listitem">
+                        <p><code class="literal">${file-target-encoding}</code>——目标文件编码
+                        </p>
+                     </li>
+                     <li class="listitem">
+                        <p><code class="literal">${targetLocaleLCID}</code>——微软目标区域设置
+                        </p>
+                     </li>
+                  </ul>
+               </div>
+               <p>对${nameOnly}和${Extension}变量还有附加变量可用。在文件名存在疑义的情况下，其中某个可以适用于<code class="literal">${仅文件名</code><span class="emphasis"><em>-扩展数字</em></span>} and <code class="literal">${扩展名</code>-<span class="emphasis"><em>扩展数字} </em></span>形式的变量。例如如果原始文件名为Document.xx.docx，则变量与其对应的结果如下：
+               </p>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
+                     <li class="listitem">
+                        <p><code class="literal">${nameOnly-0}</code> Document
+                        </p>
+                     </li>
+                     <li class="listitem">
+                        <p><code class="literal">${nameOnly-1}</code> Document.xx
+                        </p>
+                     </li>
+                     <li class="listitem">
+                        <p><code class="literal">${nameOnly-2}</code> Document.xx.docx
+                        </p>
+                     </li>
+                     <li class="listitem">
+                        <p><code class="literal">${extension-0}</code> docx
+                        </p>
+                     </li>
+                     <li class="listitem">
+                        <p><code class="literal">${extension-1}</code> xx.docx
+                        </p>
+                     </li>
+                     <li class="listitem">
+                        <p><code class="literal">${extension-2}</code> Document.xx.docx
                         </p>
                      </li>
                   </ul>
@@ -381,15 +489,15 @@
          <hr>
          <table width="100%" summary="Navigation footer">
             <tr>
-               <td width="40%" align="left"><a accesskey="p" href="chapter.project.properties.html">上一页</a>&nbsp;
+               <td width="40%" align="left"><a accesskey="p" href="chapter.project.properties.html">Prev</a>&nbsp;
                </td>
                <td width="20%" align="center">&nbsp;</td>
-               <td width="40%" align="right">&nbsp;<a accesskey="n" href="chapter.files.and.directories.html">下一页</a></td>
+               <td width="40%" align="right">&nbsp;<a accesskey="n" href="chapter.files.and.folders.html">Next</a></td>
             </tr>
             <tr>
-               <td width="40%" align="left" valign="top">第&nbsp;6&nbsp;章&nbsp;项目属性&nbsp;</td>
-               <td width="20%" align="center"><a accesskey="h" href="index.html">起始页</a></td>
-               <td width="40%" align="right" valign="top">&nbsp;第&nbsp;8&nbsp;章&nbsp;<span class="application">OmegaT</span> 文件和目录
+               <td width="40%" align="left" valign="top">Chapter&nbsp;6.&nbsp;项目属性&nbsp;</td>
+               <td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
+               <td width="40%" align="right" valign="top">&nbsp;Chapter&nbsp;8.&nbsp;<span class="application">OmegaT</span>文件和文件夹
                </td>
             </tr>
          </table>

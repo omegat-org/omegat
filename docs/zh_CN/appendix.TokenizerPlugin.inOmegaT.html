@@ -1,0 +1,111 @@
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <title>Appendix&nbsp;D.&nbsp;解析器插件</title>
+      <link rel="stylesheet" type="text/css" href="OmegaT.css">
+      <meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
+      <link rel="home" href="index.html" title="OmegaT 3.0——用户向导">
+      <link rel="up" href="index.html" title="OmegaT 3.0——用户向导">
+      <link rel="prev" href="appendix.TeamProjects.html" title="Appendix&nbsp;C.&nbsp;OmegaT团队项目">
+      <link rel="next" href="appendix.LanguageToolPlugin.inOmegaT.html" title="Appendix&nbsp;E.&nbsp;LanguageTool插件">
+   </head>
+   <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+      <div class="navheader">
+         <table width="100%" summary="Navigation header">
+            <tr>
+               <th colspan="3" align="center">Appendix&nbsp;D.&nbsp;解析器插件</th>
+            </tr>
+            <tr>
+               <td width="20%" align="left"><a accesskey="p" href="appendix.TeamProjects.html">Prev</a>&nbsp;
+               </td>
+               <th width="60%" align="center">&nbsp;</th>
+               <td width="20%" align="right">&nbsp;<a accesskey="n" href="appendix.LanguageToolPlugin.inOmegaT.html">Next</a></td>
+            </tr>
+         </table>
+         <hr>
+      </div>
+      <div class="appendix">
+         <div class="titlepage">
+            <div>
+               <div>
+                  <h1 class="title"><a name="appendix.TokenizerPlugin.inOmegaT"></a>Appendix&nbsp;D.&nbsp;解析器插件<a class="indexterm" name="d0e10782"></a></h1>
+               </div>
+            </div>
+         </div>
+         <div class="toc">
+            <dl class="toc">
+               <dt><span class="section"><a href="appendix.TokenizerPlugin.inOmegaT.html#d0e10787">1. 介绍</a></span></dt>
+               <dt><span class="section"><a href="appendix.TokenizerPlugin.inOmegaT.html#d0e10816">2. 安装和使用</a></span></dt>
+            </dl>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e10787"></a>1.&nbsp;介绍<a class="indexterm" name="d0e10790"></a><a class="indexterm" name="d0e10795"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <p>分解器（或 stemmer，词干分析器）提高了识别源和翻译记忆数据中的词形变化的匹配质量。同时也提高了词汇表的匹配度。</p>
+            <p>英语中的词干分析器，例如能识别字符串 "cats"（以及 "catlike", "catty" 等）的词根是 "cat"，而 "stemmer", "stemming", "stemmed" 的词根是 "stem"。词干分析算法能还原单词 "fishing"、"fished"、"fish"
+               以及 "fisher" 为相应的词根 "fish"。这对通过词根加上前缀和后缀形式组成单词的语言特别有用。看看斯洛文尼亚语的一个例子，这些是 "good" 的所有正确的语法形式：
+            </p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>lep, lepa, lepo - singular, masculine, feminine, neutral</p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>lepši, lepša, lepše . - comparative, nominative, masculine,
+                                feminine, neutral, resp. Plural form of the adjective
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>najlepših - superlative, plural, genitive for M,F,N</p>
+                  </li>
+               </ul>
+            </div>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e10816"></a>2.&nbsp;安装和使用
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>OmegaT中已包含了解析器。OmegaT会根据项目语言设置中的源语言和目标语言自动选择相应的解析器。还可以在项目属性窗口中选择另一个解析器或当前解析器的不同版本。</p>
+            <div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+               <h3 class="title">不兼容性</h3>
+               <p>如果在/plugin文件夹找到解析器则OmegaT将不会运行。在启动OmegaT前请删除/plugin文件夹中的所有解析器。</p>
+            </div>
+         </div>
+      </div>
+      <div class="navfooter">
+         <hr>
+         <table width="100%" summary="Navigation footer">
+            <tr>
+               <td width="40%" align="left"><a accesskey="p" href="appendix.TeamProjects.html">Prev</a>&nbsp;
+               </td>
+               <td width="20%" align="center">&nbsp;</td>
+               <td width="40%" align="right">&nbsp;<a accesskey="n" href="appendix.LanguageToolPlugin.inOmegaT.html">Next</a></td>
+            </tr>
+            <tr>
+               <td width="40%" align="left" valign="top">Appendix&nbsp;C.&nbsp;OmegaT团队项目&nbsp;</td>
+               <td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
+               <td width="40%" align="right" valign="top">&nbsp;Appendix&nbsp;E.&nbsp;LanguageTool插件</td>
+            </tr>
+         </table>
+      </div>
+   </body>
+</html>

@@ -2,25 +2,25 @@
    <head>
       <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
    
-      <title>第&nbsp;13&nbsp;章&nbsp;处理纯文本</title>
+      <title>Chapter&nbsp;11.&nbsp;处理纯文本</title>
       <link rel="stylesheet" type="text/css" href="OmegaT.css">
       <meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
-      <link rel="home" href="index.html" title="OmegaT - 用户向导">
-      <link rel="up" href="index.html" title="OmegaT - 用户向导">
-      <link rel="prev" href="chapter.formatted.text.html" title="第&nbsp;12&nbsp;章&nbsp;处理格式化文本">
-      <link rel="next" href="chapter.translation.memories.html" title="第&nbsp;14&nbsp;章&nbsp;翻译记忆">
+      <link rel="home" href="index.html" title="OmegaT 3.0——用户向导">
+      <link rel="up" href="index.html" title="OmegaT 3.0——用户向导">
+      <link rel="prev" href="chapter.translation.editing.html" title="Chapter&nbsp;10.&nbsp;编辑行为">
+      <link rel="next" href="chapter.formatted.text.html" title="Chapter&nbsp;12.&nbsp;处理格式化文本">
    </head>
    <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
       <div class="navheader">
          <table width="100%" summary="Navigation header">
             <tr>
-               <th colspan="3" align="center">第&nbsp;13&nbsp;章&nbsp;处理纯文本</th>
+               <th colspan="3" align="center">Chapter&nbsp;11.&nbsp;处理纯文本</th>
             </tr>
             <tr>
-               <td width="20%" align="left"><a accesskey="p" href="chapter.formatted.text.html">上一页</a>&nbsp;
+               <td width="20%" align="left"><a accesskey="p" href="chapter.translation.editing.html">Prev</a>&nbsp;
                </td>
                <th width="60%" align="center">&nbsp;</th>
-               <td width="20%" align="right">&nbsp;<a accesskey="n" href="chapter.translation.memories.html">下一页</a></td>
+               <td width="20%" align="right">&nbsp;<a accesskey="n" href="chapter.formatted.text.html">Next</a></td>
             </tr>
          </table>
          <hr>
@@ -29,7 +29,7 @@
          <div class="titlepage">
             <div>
                <div>
-                  <h1 class="title"><a name="chapter.plain.text"></a>第&nbsp;13&nbsp;章&nbsp;处理纯文本<a class="indexterm" name="d0e6730"></a></h1>
+                  <h1 class="title"><a name="chapter.plain.text"></a>Chapter&nbsp;11.&nbsp;处理纯文本<a class="indexterm" name="d0e5911"></a></h1>
                </div>
             </div>
          </div>
@@ -43,7 +43,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="default.encoding"></a>1.&nbsp;缺省编码<a class="indexterm" name="d0e6738"></a><a class="indexterm" name="d0e6743"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="default.encoding"></a>1.&nbsp;缺省编码<a class="indexterm" name="d0e5919"></a><a class="indexterm" name="d0e5924"></a></h2>
                   </div>
                </div>
             </div>
@@ -53,13 +53,14 @@
             <div class="mediaobject"><img src="images/OmT_Japanese.png"></div>
             <p>相反地，系统将显示类似这样的内容：</p>
             <div class="mediaobject"><img src="images/OmT_Cyrillic.png"></div>
-            <p>运行 OmegaT 的电脑的默认语言为俄语，因此它使用西里尔字符集而不是汉字字符集显示字符。</p>
+            <p>运行 OmegaT 的电脑的缺省语言为俄语，因此它使用西里尔字符集而不是汉字字符集显示字符。</p>
          </div>
          <div class="section">
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="OmegaT.solution"></a>2.&nbsp;<span class="application">OmegaT</span> 解决方案<a class="indexterm" name="d0e6769"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="OmegaT.solution"></a>2.&nbsp;<span class="application">OmegaT</span> 解决方案
+                     </h2>
                   </div>
                </div>
             </div>
@@ -105,21 +106,21 @@
             <div class="itemizedlist">
                <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
-                     <p><code class="literal">.txt1</code> 是以 ISO-8859-1 进行编码的，包括绝大多数<span class="bold"><strong>西欧</strong></span>语言。<a class="indexterm" name="d0e6864"></a></p>
+                     <p><code class="literal">.txt1</code> 是以 ISO-8859-1 进行编码的，包括绝大多数<span class="bold"><strong>西欧</strong></span>语言。<a class="indexterm" name="d0e6040"></a></p>
                   </li>
                </ul>
             </div>
             <div class="itemizedlist">
                <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
-                     <p><code class="literal">.txt2</code> 文件是以 ISO-8859-2 进行编码的，包括绝大多数<span class="bold"><strong>中欧和东欧</strong></span>语言<a class="indexterm" name="d0e6878"></a></p>
+                     <p><code class="literal">.txt2</code> 文件是以 ISO-8859-2 进行编码的，包括绝大多数<span class="bold"><strong>中欧和东欧</strong></span>语言<a class="indexterm" name="d0e6054"></a></p>
                   </li>
                </ul>
             </div>
             <div class="itemizedlist">
                <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
-                     <p><code class="literal">.utf8</code> 文件会被 <span class="application">OmegaT</span> 以 UTF-8 编码进行解释（一种几乎涵盖了世界上所有语言的编码）。<a class="indexterm" name="d0e6892"></a></p>
+                     <p><code class="literal">.utf8</code> 文件会被 <span class="application">OmegaT</span> 以 UTF-8 编码进行解释（一种几乎涵盖了世界上所有语言的编码）。<a class="indexterm" name="d0e6068"></a></p>
                   </li>
                </ul>
             </div>
@@ -131,15 +132,15 @@
          <hr>
          <table width="100%" summary="Navigation footer">
             <tr>
-               <td width="40%" align="left"><a accesskey="p" href="chapter.formatted.text.html">上一页</a>&nbsp;
+               <td width="40%" align="left"><a accesskey="p" href="chapter.translation.editing.html">Prev</a>&nbsp;
                </td>
                <td width="20%" align="center">&nbsp;</td>
-               <td width="40%" align="right">&nbsp;<a accesskey="n" href="chapter.translation.memories.html">下一页</a></td>
+               <td width="40%" align="right">&nbsp;<a accesskey="n" href="chapter.formatted.text.html">Next</a></td>
             </tr>
             <tr>
-               <td width="40%" align="left" valign="top">第&nbsp;12&nbsp;章&nbsp;处理格式化文本&nbsp;</td>
-               <td width="20%" align="center"><a accesskey="h" href="index.html">起始页</a></td>
-               <td width="40%" align="right" valign="top">&nbsp;第&nbsp;14&nbsp;章&nbsp;翻译记忆</td>
+               <td width="40%" align="left" valign="top">Chapter&nbsp;10.&nbsp;编辑行为&nbsp;</td>
+               <td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
+               <td width="40%" align="right" valign="top">&nbsp;Chapter&nbsp;12.&nbsp;处理格式化文本</td>
             </tr>
          </table>
       </div>

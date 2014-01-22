@@ -2,25 +2,25 @@
    <head>
       <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
    
-      <title>第&nbsp;14&nbsp;章&nbsp;翻译记忆</title>
+      <title>Chapter&nbsp;13.&nbsp;翻译记忆</title>
       <link rel="stylesheet" type="text/css" href="OmegaT.css">
       <meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
-      <link rel="home" href="index.html" title="OmegaT - 用户向导">
-      <link rel="up" href="index.html" title="OmegaT - 用户向导">
-      <link rel="prev" href="chapter.plain.text.html" title="第&nbsp;13&nbsp;章&nbsp;处理纯文本">
-      <link rel="next" href="chapter.segmentation.html" title="第&nbsp;15&nbsp;章&nbsp;源片段">
+      <link rel="home" href="index.html" title="OmegaT 3.0——用户向导">
+      <link rel="up" href="index.html" title="OmegaT 3.0——用户向导">
+      <link rel="prev" href="chapter.formatted.text.html" title="Chapter&nbsp;12.&nbsp;处理格式化文本">
+      <link rel="next" href="chapter.segmentation.html" title="Chapter&nbsp;14.&nbsp;源片段分割规则">
    </head>
    <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
       <div class="navheader">
          <table width="100%" summary="Navigation header">
             <tr>
-               <th colspan="3" align="center">第&nbsp;14&nbsp;章&nbsp;翻译记忆</th>
+               <th colspan="3" align="center">Chapter&nbsp;13.&nbsp;翻译记忆</th>
             </tr>
             <tr>
-               <td width="20%" align="left"><a accesskey="p" href="chapter.plain.text.html">上一页</a>&nbsp;
+               <td width="20%" align="left"><a accesskey="p" href="chapter.formatted.text.html">Prev</a>&nbsp;
                </td>
                <th width="60%" align="center">&nbsp;</th>
-               <td width="20%" align="right">&nbsp;<a accesskey="n" href="chapter.segmentation.html">下一页</a></td>
+               <td width="20%" align="right">&nbsp;<a accesskey="n" href="chapter.segmentation.html">Next</a></td>
             </tr>
          </table>
          <hr>
@@ -29,7 +29,7 @@
          <div class="titlepage">
             <div>
                <div>
-                  <h1 class="title"><a name="chapter.translation.memories"></a>第&nbsp;14&nbsp;章&nbsp;翻译记忆<a class="indexterm" name="d0e6923"></a></h1>
+                  <h1 class="title"><a name="chapter.translation.memories"></a>Chapter&nbsp;13.&nbsp;翻译记忆<a class="indexterm" name="d0e6348"></a><a class="indexterm" name="d0e6351"></a></h1>
                </div>
             </div>
          </div>
@@ -41,17 +41,21 @@
                      <dt><span class="section"><a href="chapter.translation.memories.html#tmx.files.location.and.purpose">1.1. tmx 文件夹 - 位置及用途</a></span></dt>
                      <dt><span class="section"><a href="chapter.translation.memories.html#tmx.backup">1.2. TMX 备份</a></span></dt>
                      <dt><span class="section"><a href="chapter.translation.memories.html#tmx.files.and.language">1.3. tmx 文件和语种</a></span></dt>
-                     <dt><span class="section"><a href="chapter.translation.memories.html#d0e7184">1.4. 孤立片段</a></span></dt>
+                     <dt><span class="section"><a href="chapter.translation.memories.html#d0e6646">1.4. 孤立片段</a></span></dt>
                   </dl>
                </dd>
                <dt><span class="section"><a href="chapter.translation.memories.html#using.translation.memories.from.previous.projects">2. 重用翻译记忆</a></span></dt>
                <dd>
                   <dl>
-                     <dt><span class="section"><a href="chapter.translation.memories.html#d0e7267">2.1. 导入和导出翻译记忆</a></span></dt>
+                     <dt><span class="section"><a href="chapter.translation.memories.html#importing.and.exporting.translation.memories">2.1. 导入和导出翻译记忆</a></span></dt>
+                     <dt><span class="section"><a href="chapter.translation.memories.html#Creating.a.translation.memory.for.selected.documents">2.2. 创建所选文档的翻译记忆</a></span></dt>
+                     <dt><span class="section"><a href="chapter.translation.memories.html#sharing.translation.memories">2.3. 分享翻译记忆</a></span></dt>
+                     <dt><span class="section"><a href="chapter.translation.memories.html#d0e6798">2.4. 使用包含可选语言对的翻译记忆文件</a></span></dt>
                   </dl>
                </dd>
-               <dt><span class="section"><a href="chapter.translation.memories.html#pseudo.translated.memory">3. 伪翻译记忆</a></span></dt>
-               <dt><span class="section"><a href="chapter.translation.memories.html#upgrading.translation.memories">4. 更新翻译记忆</a></span></dt>
+               <dt><span class="section"><a href="chapter.translation.memories.html#d0e6814">3. 带有现存译文的源</a></span></dt>
+               <dt><span class="section"><a href="chapter.translation.memories.html#pseudo.translated.memory">4. 伪翻译记忆</a></span></dt>
+               <dt><span class="section"><a href="chapter.translation.memories.html#upgrading.translation.memories">5. 更新翻译记忆</a></span></dt>
             </dl>
          </div>
          <div class="section">
@@ -72,16 +76,16 @@
                      </div>
                   </div>
                </div>
-               <p><span class="application">OmegaT</span> 项目含有在四个不同位置的翻译记忆文件，即扩展名为 tmx 的文件：
+               <p><span class="application">OmegaT</span>项目含有在五个不同位置的翻译记忆文件，即扩展名为tmx的文件：
                </p>
                <div class="variablelist">
                   <dl class="variablelist">
-                     <dt><span class="term"><a class="indexterm" name="d0e6939"></a>omegat 文件夹</span></dt>
+                     <dt><span class="term"><a class="indexterm" name="d0e6369"></a>omegat 文件夹</span></dt>
                      <dd>
                         <p>omegat 文件夹包含 <code class="filename">project_save.tmx</code> 文件，以及一些备份的 TMX 文件。<code class="filename">project_save.tmx</code> 文件包含了自项目开始以来所有被保存的片段。项目中总是存在此文件。其内容总是根据源片段的字母进行排序。
                         </p>
                      </dd>
-                     <dt><span class="term"><a class="indexterm" name="d0e6958"></a>项目主文件夹</span></dt>
+                     <dt><span class="term"><a class="indexterm" name="d0e6388"></a>项目主文件夹</span></dt>
                      <dd>
                         <p>项目主文件夹中包含 3 个 tmx 文件：<code class="filename">project_name-omegat.tmx</code>，<code class="filename">project_name-level1.tmx</code> 以及 <code class="filename">project_name-level2.tmx</code>（project_name 是项目的名称）。
                         </p>
@@ -100,43 +104,50 @@
                               </li>
                            </ul>
                         </div>
-                        <p>这些文件是 <code class="filename">project_save.tmx</code>文件的副本，即不包括被称为孤立片段的主翻译记忆。它们使用适当但稍变化的名称，这样在其他地方使用时容易识别其中包含的内容，例如在其中项目的 <code class="filename"> tm</code> 子文件夹（请参阅下面）。
+                        <p>这些文件是 <code class="filename">project_save.tmx</code>文件的副本，即不包括被称为孤立片段的主翻译记忆。它们使用适当变化的名称，这样在其他地方使用时容易识别其中包含的内容，例如在其他项目的<code class="filename">tm</code>子文件夹（见下面）。
                         </p>
                      </dd>
-                     <dt><span class="term"><code class="filename"><a class="indexterm" name="d0e7011"></a>tm</code> 目录</span></dt>
+                     <dt><span class="term"><code class="filename"><a class="indexterm" name="d0e6441"></a>tm</code> 目录</span></dt>
                      <dd>
-                        <p>/tm/ 可包含任何数量的辅助翻译记忆，即 TMX 文件。这样的文件可创建为上面提示的三种形式。注意：其他 CAT 也能导出（以及导入）TMX 文件，一般也有三种形式。最好的来源是使用 OmegaT 特定的 TMX 文件（请参阅上面），这样可以保持片段中的内联格式。</p>
+                        <p>/tm/ 可包含任何数量的辅助翻译记忆，即 TMX 文件。这样的文件可创建为上面提示的三种形式。注意：其他 CAT 也能导出（以及导入）TMX 文件，一般也有三种形式。最好的来源是使用 OmegaT 特定的 TMX 文件（见上文），这样可以保持片段中的内联格式。</p>
                         <p>在 tm 子目录中翻译记忆的内容是为要翻译文本提供建议。这些文件中已经保存并翻译的任何文本，当它们与正在翻译的文本十分相似时，将出现在模糊匹配窗格中。</p>
-                        <p>如果某个辅助 TM 中的某个源片段与待译的文本完全相同，OmegaT 会进行在<span class="guimenu">选项</span> → <span class="guimenuitem">编辑行为……</span>对话框中设置的操作。例如（使用缺省设置），在辅助 TM 中的译文被接受并加上前缀<span class="emphasis"><em> [模糊]</em></span>，这样译员随后可以通过这个标记检查译文是否正确翻译（请参阅<a class="link" href="chapter.translation.editing.html" title="第&nbsp;10&nbsp;章&nbsp;编辑行为">编辑行为</a>章节）<span class="guimenu">。</span></p>
+                        <p>如果某个辅助TM中的某个源片段与待译的文本完全相同，OmegaT会安装在<span class="guimenu">选项</span> → <span class="guimenuitem">编辑行为……</span>对话框中的设置进行操作。例如（使用缺省设置），在辅助TM中的译文被接受并加上前缀<span class="emphasis"><em>[模糊]</em></span>，这样译员随后可以通过这个标记检查译文是否正确翻译（请参阅<a class="link" href="chapter.translation.editing.html" title="Chapter&nbsp;10.&nbsp;编辑行为">编辑行为</a>章节）<span class="guimenu">。</span></p>
+                        <p>可能出现这样的情况：在<code class="filename">tm</code>子文件夹的翻译记忆中多个片段含有相同的源文本，但目标译文不同。在指定的TMX文件中是根据每行的名称和片段逐行读取TMX文件的。因此含相同源文本的最后一个片段将获得采用（注：当然预先避免这种情况发生会更有意义）。
+                        </p>
+                        <p>注意在tm文件夹中的TMX文件可使用gzip压缩。<a class="indexterm" name="d0e6479"></a></p>
                      </dd>
-                     <dt><span class="term"><a class="indexterm" name="d0e7044"></a>tm/auto 目录<a class="indexterm" name="d0e7052"></a></span></dt>
+                     <dt><span class="term"><a class="indexterm" name="d0e6486"></a>tm/auto 目录<a class="indexterm" name="d0e6494"></a></span></dt>
                      <dd>
                         <p>如果在提供的 TM 中的译文完全可靠的话，那么可以把它们放到 <span class="bold"><strong> tm/auto</strong></span> 目录以避免需要对大量的 <span class="emphasis"><em> [模糊]</em></span>进行确认。这样能更有效地<span class="bold"><strong>预翻译</strong></span>源文本：在源文本中其翻译可以在那些“自动”TM 中找到的所有片段，将会自动加载到项目的主 TM 中。
                         </p>
+                     </dd>
+                     <dt><span class="term"><a class="indexterm" name="d0e6513"></a>tm/penalty-xxx文件夹</span></dt>
+                     <dd>
+                        <p>有时由于题材、客户、版本状态等，需要从翻译记忆中区分出高质量译文与不可靠译文。在名称为“penalty-xxx”（其中xxx在0到100之间）文件夹中的翻译记忆产生的匹配其匹配度将减少文件夹名称中的数字：例如Penalty-30文件夹中所有TM中100%匹配的条目将减低至70%的匹配度。罚点适用于所有的三种匹配百分率：此时匹配度75、80、90将减低至45、50和60。</p>
                      </dd>
                   </dl>
                </div>
                <p>或者，您可以让 <span class="application">OmegaT</span> 制作一份附加的 TMX 文件（<span class="application">OmegaT</span> 风格）到您指定的地方，包含了项目所有的可译片段。请参阅下面的伪翻译记忆。
                </p>
-               <p>注意：打开项目时会把所有的翻译记忆加载到内存中。对项目翻译记忆的备份会定期进行（请参阅下一章），同时在打开或关闭项目时也会保存/更新 <code class="filename">project_save.tmx</code>。这里的意思是，例如如果您想添加一个辅助 TM 到当前正在工作的项目时，无需退出项目：只要简单地重新载入项目，所做的更改就会生效。
+               <p>注意：打开项目时会把所有的翻译记忆加载到内存中。对项目翻译记忆的备份会定期进行（请参阅下一章），同时在打开或关闭项目时也会保存/更新<code class="filename">project_save.tmx</code>。这里的意思是，例如如果您想添加一个辅助 TM 到当前正在工作的项目时，无需退出项目：只要简单地重新载入项目，所做的更改就会生效。
                </p>
-               <p>对于指定的项目，多种不同翻译记忆的位置是由用户定义的（请参阅<a class="link" href="chapter.instant.start.guide.html" title="第&nbsp;2&nbsp;章&nbsp;快速入门指南">快速入门指南</a>中的项目对话框窗口）。
+               <p>对于指定的项目，多种不同翻译记忆的位置是由用户定义的（请参阅<a class="link" href="chapter.project.properties.html" title="Chapter&nbsp;6.&nbsp;项目属性">项目属性</a>中的项目对话框）。
                </p>
                <p>根据不同的情况可采取不同的策略，例如：</p>
-               <p><span class="bold"><strong>在相同主题中保存多个项目：</strong></span>保留项目结构，同时改变源和目标目录（Source = source/order1，target = target/order1 等）。需要注意到来自 order1 的片段，而不是 order2 或其他系列的任务，会被标记为孤立片段；不过这样仍可用来获取模糊匹配。
+               <p><span class="bold"><strong>在相同主题中保存多个项目：</strong></span>保留项目结构，同时改变源和目标目录（Source = source/order1，target = target/order1等）。需要注意存在于order1而不在order2或后续任务中的片段，会被标记为孤立片段，不过这样仍可用来获取模糊匹配。
                </p>
-               <p><span class="bold"><strong>多个译员工作于相同项目：</strong></span>把源文件分成 source/Alice, source/Bob 等，同时把它们分配给项目成员 (Alice, Bob ...)。随后他们可创建自己的项目，当结束或到达阶段性目标时实现他们自己的 <code class="filename">project_save.tmx</code>。然后收集 <code class="filename">project_save.tmx</code>，并解决可能存在的用词冲突。 之后创建新的主 TM，或者放到项目成员的 <span class="emphasis"><em>tm/auto</em></span>子目录或替换他们的 <code class="filename">project_save.tmx</code> 文件。该团队还可以使用相同的子目录结构来保存目标文件。这样允许他们，例如在任何时刻进行检查整个项目的目标版本是否已经完成。
+               <p><span class="bold"><strong>多个译员工作于相同项目：</strong></span>把源文件分成 source/Alice, source/Bob 等，同时把它们分配给项目成员 (Alice, Bob ...)。随后他们可创建自己的项目，当结束或到达阶段性目标时实现他们自己的 <code class="filename">project_save.tmx</code>。然后收集 <code class="filename">project_save.tmx</code>，并解决可能存在的用词冲突。 之后创建新的主翻译记忆，可以放到项目成员的<span class="emphasis"><em>tm/auto</em></span>子文件夹或覆盖他们的<code class="filename">project_save.tmx</code>文件。该团队还可以使用相同的子目录结构来保存目标文件。这样允许他们，例如在任何时刻进行检查整个项目的目标版本是否已经完成。
                </p>
             </div>
             <div class="section">
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="tmx.backup"></a>1.2.&nbsp;TMX 备份<a class="indexterm" name="d0e7112"></a></h3>
+                        <h3 class="title"><a name="tmx.backup"></a>1.2.&nbsp;TMX 备份<a class="indexterm" name="d0e6567"></a></h3>
                      </div>
                   </div>
                </div>
-               <p>进行翻译时，<span class="application">OmegaT</span> 会持续在项目 /<code class="filename">omegat</code> 子目录的 <code class="filename">project_save.tmx</code> 文件中保存您的工作。
+               <p>翻译时，<span class="application">OmegaT</span>会不断在项目/<code class="filename">omegat</code>子文件夹的<code class="filename">project_save.tmx</code>文件中保存您的工作。
                </p>
                <p><span class="application">OmegaT</span> 还会在每次项目被打开或重新载入时备份翻译记忆到同一子目录的 <code class="filename">project_save.tmx.YEARMMDDHHNN.bak</code>。YEAR 是 4 位数的年份；MM 是月份；DD 是日期；HH 和 NN 是前一份翻译记忆保存时的小时和分钟。
                </p>
@@ -166,19 +177,19 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="tmx.files.and.language"></a>1.3.&nbsp;tmx 文件和语种<a class="indexterm" name="d0e7164"></a></h3>
+                        <h3 class="title"><a name="tmx.files.and.language"></a>1.3.&nbsp;tmx 文件和语种<a class="indexterm" name="d0e6619"></a></h3>
                      </div>
                   </div>
                </div>
-               <p>tmx 文件包含的翻译单元由一定数量不同语言的等同片段组成。一个翻译单元至少由两个翻译单元变体 (tuv) 组成。每个都可以当作源或者目标使用。</p>
-               <p>项目的设置将指出哪个是源语言，哪个是目标语言。因此 OmegaT 与项目的源和目标语言代码对应的 tuv 片段，并把它们分别用作源和目标片段。OmegaT 使用下面两个标准约定来识别语言代码：</p>
+               <p>tmx文件包含了由一定数量多种语言的等义片段组成的翻译单元。一个翻译单元至少包含了两个翻译单元变体（tuv）组成。每个都可以当作源或者目标使用。</p>
+               <p>项目的设置将指出哪个是源语言，哪个是目标语言。因此OmegaT抓取符合项目的源和目标语言代码的tuv片段，并把它们分别作为源和目标片段使用。OmegaT 使用下面两个标准约定来识别语言代码：</p>
                <div class="itemizedlist">
                   <ul class="itemizedlist" style="list-style-type: disc; ">
                      <li class="listitem">
                         <p>2 字母（例如对于 Japanese 为 JA），或者</p>
                      </li>
                      <li class="listitem">
-                        <p>2 或 3 个字母的语言代码后跟着 2 个字母的国家代码（例如 EN-US - 请参阅<a class="xref" href="appendix.languages.html" title="附录&nbsp;B.&nbsp;语言 - ISO 639 代码列表">附录&nbsp;B, <i>语言 - ISO 639 代码列表
+                        <p>2 或 3 个字母的语言代码后跟着 2 个字母的国家代码（例如 EN-US - 请参阅<a class="xref" href="appendix.languages.html" title="Appendix&nbsp;A.&nbsp;语言－ISO 639 代码列表">Appendix&nbsp;A, <i>语言－ISO 639 代码列表
                                    
                                    
                                    </i></a>了解部分的语言和国家代码）。
@@ -187,12 +198,14 @@
                   </ul>
                </div>
                <p>如果项目语言代码和 TMX 语言代码完全匹配，片段将会导入内存中。如果语言匹配但国家不匹配，仍会导入片段。如果语言代码和国家代码都不符合，片段将被忽略。</p>
+               <p><a class="indexterm" name="d0e6640"></a>TMX文件通常包含有多种候选语言的翻译单元。如果一个指定的源片段在选择的目标语言中没有条目，则不考虑语言而加载其他所有目标片段。例如如果项目的语言对为DE-FR，则在不存在DE-FR对的情况下，看看DE-EN翻译仍然会有些帮助。
+               </p>
             </div>
             <div class="section">
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="d0e7184"></a>1.4.&nbsp;孤立片段<a class="indexterm" name="d0e7187"></a></h3>
+                        <h3 class="title"><a name="d0e6646"></a>1.4.&nbsp;孤立片段<a class="indexterm" name="d0e6649"></a></h3>
                      </div>
                   </div>
                </div>
@@ -204,17 +217,17 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="using.translation.memories.from.previous.projects"></a>2.&nbsp;重用翻译记忆<a class="indexterm" name="d0e7202"></a><a class="indexterm" name="d0e7207"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="using.translation.memories.from.previous.projects"></a>2.&nbsp;重用翻译记忆<a class="indexterm" name="d0e6664"></a></h2>
                   </div>
                </div>
             </div>
             <p>在创建项目时，项目的主 TM <code class="filename">project_save.tmx</code> 是空的。该 TM 文件会在翻译时逐步进行填充。要加快这个过程，可重用现有的翻译。如果指定的片段已翻译过一次且翻译正确，则无需再次翻译它们。翻译记忆还可以包含参考翻译：多国法律，例如欧共体的法律是个实际的例子。
             </p>
-            <p>在 <span class="application">OmegaT</span> 项目中创建目标文档时，项目的翻译记忆将会在 <span class="application">OmegaT</span> 项目根目录中输出三份文件（查阅之前的表述）。可将这三份 TMX 文件（<code class="filename">-omegat.tmx</code>，<code class="filename">-level1.tmx</code> 和 <code class="filename">-level2.tmx</code>）视为一份“导出的翻译记忆”，即当前项目的可导出双语形式。
+            <p>在<span class="application">OmegaT</span>项目中创建目标文档时，项目的翻译记忆记忆将会在<span class="application">OmegaT</span>项目的根目录中输出三份文件（查阅之前的表述）。可将这三份 TMX 文件（<code class="filename">-omegat.tmx</code>，<code class="filename">-level1.tmx</code> 和 <code class="filename">-level2.tmx</code>）视为一份“导出的翻译记忆”，即当前项目的可导出双语形式。
             </p>
-            <p>如果希望复用之前某个项目的翻译记忆（例如新的项目与之前的项目非常相似，或者使用了之前可能用到的术语），您可以将这些用法记忆用作“输入翻译记忆”，也就是说导入您的新项目。在此情况下，可将这些译法记忆文件放置在新项目的 <span class="emphasis"><em>\tm</em></span> 或 <span class="emphasis"><em>\tm</em></span>\auto 目录下：以前您将在模糊匹配查看器中获取来自这些翻译记忆的提示，现在开始将使用这些翻译记忆预翻译您的源文本。
+            <p>如果希望复用之前某个项目的翻译记忆（例如新的项目与之前的项目非常相似，或者使用了之前可能用到的术语），您可以将这些用法记忆用作“输入翻译记忆”，也就是说导入您的新项目。在此情况下，可将这些翻译记忆记忆文件放置在新项目的<span class="emphasis"><em>/tm</em></span>或<span class="emphasis"><em>/tm</em></span>/auto目录下：以前您将在模糊匹配查看器中获取来自这些翻译记忆的提示，现在开始将使用这些翻译记忆预翻译您的源文本。
             </p>
-            <p>默认情况下，\tm 文件夹位于项目的根文件夹中（例如： ...<span class="emphasis"><em>\MyProject\tm)</em></span>，但如果您想的话也可以在项目属性对话框中选择不同的文件夹。如果您频繁使用过去创建的翻译记忆，这将非常有用，比方说因为您一直在同一领域或为同一客户服务。在此情况下，有益的过程可能包括如下步骤：
+            <p>默认情况下，/tm文件夹位于项目的根文件夹中（例如：...<span class="emphasis"><em>/MyProject/tm)</em></span>，但如果您愿意您也可以在项目属性对话框中选择不同的文件夹。如果您频繁使用过去创建的翻译记忆，这将非常有用，比方说因为您一直在同一领域或为同一客户服务。在此情况下，有益的过程可能包括如下步骤：
             </p>
             <div class="itemizedlist">
                <ul class="itemizedlist" style="list-style-type: disc; ">
@@ -238,14 +251,13 @@
                   </li>
                </ul>
             </div>
-            <p>注意在程序启动时，/tm 仓库中的所有 TMX 文件将会被解析，因此将手头所有的 TMX 文件导入将会不必要地减慢 OmegaT 的运行。每当翻译记忆文件的内容已经转到 <code class="filename">project-save.tmx </code>文件的时候，您可能要考虑移除那些不再需要的文件。
+            <p>注意在程序启动时，/tm 仓库中的所有 TMX 文件将会被解析，因此将手头所有的 TMX 文件导入将会不必要地减慢 OmegaT 的运行。每当翻译记忆文件的内容已经转到<code class="filename">project-save.tmx</code>文件的时候，您可能要考虑移除那些不再需要的文件。
             </p>
             <div class="section">
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="d0e7267"></a>2.1.&nbsp;导入和导出翻译记忆
-                        </h3>
+                        <h3 class="title"><a name="importing.and.exporting.translation.memories"></a>2.1.&nbsp;导入和导出翻译记忆<a class="indexterm" name="d0e6727"></a></h3>
                      </div>
                   </div>
                </div>
@@ -254,8 +266,88 @@
                </p>
                <p>OmegaT在加载翻译记忆文件（TMX 文件）时遵循非常严格的过程。如果在文件中发现了错误，则 OmegaT 将提示问题文件中发现错误的位置。</p>
                <p>已知有些工具在某些情况下会产生非法的TMX文件。如果您想在 OmegaT 中使用这样的文件作为参考翻译，您必须对它们进行修补，否则 OmegaT 会加载失败并报告错误。修补是琐碎的操作，OmegaT 将会在相关的错误信息中给您一些提示。如果遇到麻烦，可以向用户组垂询。</p>
-               <p><span class="application"></span>OmegaT 导出 1.4 版本的 TMX 文件（包括级别 1 和级别 2）。导出的级别 2 不是标准的级别 2，但是足以在支持 TMX 级别 2 的翻译工具中产生正确的匹配。如果您只需要文本信息（而不是格式信息），可以使用 OmegaT 创建的级别
+               <p>OmegaT 导出 1.4 版本的 TMX 文件（包括级别 1 和级别 2）。导出的级别 2 不是标准的级别 2，但是足以在支持 TMX 级别 2 的翻译工具中产生正确的匹配。如果您只需要文本信息（而不是格式信息），可以使用 OmegaT 创建的级别
                   1 文件。
+               </p>
+            </div>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="Creating.a.translation.memory.for.selected.documents"></a>2.2.&nbsp;创建所选文档的翻译记忆
+                        </h3>
+                     </div>
+                  </div>
+               </div>
+               <p>在译员需要与别人分享排除或仅包含某些文件的TMX翻译记忆文件时，此时无法分享<code class="filename">ProjectName-omegat.tmx</code>文件。下面的窍门只是其中一种方法，不过非常简单、容易操作且没有危险性。
+               </p>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
+                     <li class="listitem">
+                        <p>使用希望的语言对和名称（注创建的翻译记忆文件也包含此名称）创建一个独立于其他项目的项目。</p>
+                     </li>
+                  </ul>
+               </div>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
+                     <li class="listitem">
+                        <p>复制您希望获取翻译记忆的源文档到项目的源文件夹。</p>
+                     </li>
+                  </ul>
+               </div>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
+                     <li class="listitem">
+                        <p>复制包含上述源文档翻译的翻译记忆到新项目的<code class="filename">tm/auto</code>子文件夹。
+                        </p>
+                     </li>
+                  </ul>
+               </div>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
+                     <li class="listitem">
+                        <p>打开项目。使用<span class="keycap"><strong>Ctrl+T </strong></span>检查标签错误，并用<span class="keycap"><strong>Ctrl+U</strong></span>检查未译片段。一切就绪后，按下<span class="keycap"><strong>Ctrl+D</strong></span>创建目标文档并检查其内容。
+                        </p>
+                     </li>
+                  </ul>
+               </div>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
+                     <li class="listitem">
+                        <p>在退出项目时，现在在项目主文件夹（见上面）中的翻译记忆文件包含了所选语言对和您所复制到源文件夹中的所选文件的翻译。把它们复制到安全位置供将来使用。</p>
+                     </li>
+                  </ul>
+               </div>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
+                     <li class="listitem">
+                        <p>要避免重用该项目而可能破坏将来的情况，则删除项目或存档到工作区外的其他位置。</p>
+                     </li>
+                  </ul>
+               </div>
+            </div>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="sharing.translation.memories"></a>2.3.&nbsp;分享翻译记忆<a class="indexterm" name="d0e6787"></a></h3>
+                     </div>
+                  </div>
+               </div>
+               <p>在一个翻译团队参与的情况下，译员更喜欢分享公共的翻译记忆而不是发布他们的本地版本。</p>
+               <p>OmegaT为SVN和Git提供了界面，它们是在开源许可下提供的版本控制系统的两种常用协作软件。在OmegaT中完整的项目文件夹（即包含翻译记忆、源文件夹、项目设置等）都由所选的RCS进行管理。在**章节中可进一步了解</p>
+            </div>
+            <div class="section">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="d0e6798"></a>2.4.&nbsp;使用包含可选语言对的翻译记忆文件<a class="indexterm" name="d0e6801"></a></h3>
+                     </div>
+                  </div>
+               </div>
+               <p>可能会遇到这样的情况：项目源语言为荷兰语、目标语言为英语。然而您需要翻译成中文，但您的译员不懂荷兰语，不过她英语极好。此时NL-EN的翻译记忆可作为桥梁以帮助生成NL-ZH的译文。</p>
+               <p>我们的解决方法是复制已有的翻译记忆到tm子文件夹并重命名为ZH_CN.tmx以表明TMX的目标语言。这样将显示给译员荷兰语的源片段其译文为英文，并使用它们创建中文译文。</p>
+               <p><span class="bold"><strong>重要提示：</strong></span>受支持的TMX必须重命名为XX_YY.tmx，其中XX_YY为TMX的目标语言，例如上面例子中的ZH_CN.tmx。当然项目和TMX的源语言必须一致，此例中为NL。请注意，对于指定的语言对只有一个TMX是可行的，所以当应该包含多个翻译记忆时您需要将它们全部合并到XX_YY.tmx。
                </p>
             </div>
          </div>
@@ -263,19 +355,32 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="pseudo.translated.memory"></a>3.&nbsp;伪翻译记忆<a class="indexterm" name="d0e7282"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="d0e6814"></a>3.&nbsp;带有现存译文的源<a class="indexterm" name="d0e6817"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <p>某些类型的源文件（例如PO、TTX等）是双语文件，即它们即作为源文件又作为翻译记忆。此时在文件中的已有译文会包含到<code class="filename">project_save.tmx</code>。在没有找到匹配的源片段中这些译文被视为默认译文，当已含有目标译文的相同源片段中它们被作为可选译文。因此结果取决于其中源片段被加载的顺序。
+            </p>
+            <p>源片段的所有译文除显示在匹配窗格外，还显示在注解窗格。如果是PO文件，会对可选译文应用20%的罚点（即100%的匹配度变成80%）。[模糊]短语会显示在源片段中。</p>
+            <p>当您加载片段化的TTX文件时，如果选中了选项→编辑行为……中的“允许译文和原文相同”选项时将会包含源文本与目标文本相同的片段。这样可能引起混乱，所以此时您应考虑取消该选项。</p>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="pseudo.translated.memory"></a>4.&nbsp;伪翻译记忆<a class="indexterm" name="d0e6836"></a></h2>
                   </div>
                </div>
             </div>
             <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;">
-               <h3 class="title">注意</h3>
+               <h3 class="title">Note</h3>
                <p>这些内容为感兴趣的高级用户准备的！</p>
             </div>
             <p>在翻译片段之前，您可能想以不同于 OmegaT 的其他方式预处理它们。例如，如果想创建伪翻译进行测试，OmegaT 能为您创建包含项目所有片段的附加 TMX 文件。该翻译记忆中的译文可以是：</p>
             <div class="itemizedlist">
                <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
-                     <p>和原文相同的译文（默认）</p>
+                     <p>和原文相同的译文（缺省）</p>
                   </li>
                </ul>
             </div>
@@ -289,20 +394,20 @@
             <p>翻译记忆文件的名称可以任意指定。通过下列命令行参数可生成伪翻译记忆：</p>
             <p><code class="literal">java -jar omegat.jar --pseudotranslatetmx=&lt;filename&gt;
                       [pseudotranslatetype=[equal|empty]]</code></p>
-            <p>把其中的 <code class="literal">&lt;filename&gt;</code> 替换为想创建的文件名，可以是绝对的也可以相对于工作目录（启动 <span class="application">OmegaT</span> 的目录）。第二个参数 <code class="literal">--pseudotranslatetype</code> 是可选的。它的值可以是 <code class="literal">equal</code>（默认值，此时 source=target）或 <code class="literal">empty</code>（目标片段为空）。可以使用任何工具处理生成的 tmx 文件。要在 <span class="application">OmegaT</span> 重用这个文件，请把它更名为 <span class="emphasis"><em>project_save.tmx </em></span> 并放置到项目的 <code class="literal">omegat</code> 文件夹。
+            <p>把其中的<code class="literal">&lt;filename&gt;</code>替换为想创建的文件名，可以为绝对目录或也可以相对于工作目录（<span class="application">OmegaT</span>的启动文件夹）。第二个参数 <code class="literal">--pseudotranslatetype</code> 是可选的。它的值可以是 <code class="literal">equal</code>（缺省值，此时 source=target）或 <code class="literal">empty</code>（目标片段为空）。可以使用任何工具处理生成的 tmx 文件。要在 <span class="application">OmegaT</span> 重用这个文件，请把它更名为 <span class="emphasis"><em>project_save.tmx </em></span> 并放置到项目的 <code class="literal">omegat</code> 文件夹。
             </p>
          </div>
          <div class="section">
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="upgrading.translation.memories"></a>4.&nbsp;更新翻译记忆<a class="indexterm" name="d0e7334"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="upgrading.translation.memories"></a>5.&nbsp;更新翻译记忆<a class="indexterm" name="d0e6888"></a></h2>
                   </div>
                </div>
             </div>
-            <p><span class="application">OmegaT</span> 的早期版本只能将源文本按照段落切割成片段，而且对HTML和开放文档文件的格式标签编号时会出现前后不一致。<span class="application">OmegaT</span> 2.5 可以实时检测并更新这样的 TMX 文件，以此提高模糊匹配的质量、提高现有翻译的水平，节省您手动完成此操作的时间。
+            <p><span class="application">OmegaT</span> 的早期版本只能将源文本按照段落切割成片段，而且对HTML和开放文档文件的格式标签编号时会出现前后不一致。<span class="application">OmegaT</span>可以实时检测并更新这样的TMX文件，以此提高模糊匹配的质量、提高现有翻译的水平，减少您的手工操作。
             </p>
-            <p>项目的 TMX 只会更新一次，且会以更新过的格式写入 <code class="filename">project-save.tmx</code>，而每次项目被载入时都会对所继承的TMX文件进行更新。注意：在 <span class="application">OmegaT</span> 2.5 中对文件过滤器的一些修改可能会导致完全不同的片段分割，因此在少数情况下您必须手动更新译文。
+            <p>项目的 TMX 只会更新一次，且会以更新过的格式写入 <code class="filename">project-save.tmx</code>，而每次项目被载入时都会对所继承的TMX文件进行更新。注意：修改<span class="application">OmegaT</span>中的文件过滤器在某些情况下可能会导致完全不同的片段分割结构，结果在少数情况下您必须手动更新译文。
             </p>
          </div>
       </div>
@@ -310,15 +415,15 @@
          <hr>
          <table width="100%" summary="Navigation footer">
             <tr>
-               <td width="40%" align="left"><a accesskey="p" href="chapter.plain.text.html">上一页</a>&nbsp;
+               <td width="40%" align="left"><a accesskey="p" href="chapter.formatted.text.html">Prev</a>&nbsp;
                </td>
                <td width="20%" align="center">&nbsp;</td>
-               <td width="40%" align="right">&nbsp;<a accesskey="n" href="chapter.segmentation.html">下一页</a></td>
+               <td width="40%" align="right">&nbsp;<a accesskey="n" href="chapter.segmentation.html">Next</a></td>
             </tr>
             <tr>
-               <td width="40%" align="left" valign="top">第&nbsp;13&nbsp;章&nbsp;处理纯文本&nbsp;</td>
-               <td width="20%" align="center"><a accesskey="h" href="index.html">起始页</a></td>
-               <td width="40%" align="right" valign="top">&nbsp;第&nbsp;15&nbsp;章&nbsp;源片段</td>
+               <td width="40%" align="left" valign="top">Chapter&nbsp;12.&nbsp;处理格式化文本&nbsp;</td>
+               <td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
+               <td width="40%" align="right" valign="top">&nbsp;Chapter&nbsp;14.&nbsp;源片段分割规则</td>
             </tr>
          </table>
       </div>

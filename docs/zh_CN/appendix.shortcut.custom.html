@@ -1,0 +1,718 @@
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <title>Appendix&nbsp;H.&nbsp;自定义快捷键</title>
+      <link rel="stylesheet" type="text/css" href="OmegaT.css">
+      <meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
+      <link rel="home" href="index.html" title="OmegaT 3.0——用户向导">
+      <link rel="up" href="index.html" title="OmegaT 3.0——用户向导">
+      <link rel="prev" href="appendix.website.html" title="Appendix&nbsp;G.&nbsp;网上的 OmegaT">
+      <link rel="next" href="appendix.legal.notices.html" title="Appendix&nbsp;I.&nbsp;法律声明">
+   </head>
+   <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+      <div class="navheader">
+         <table width="100%" summary="Navigation header">
+            <tr>
+               <th colspan="3" align="center">Appendix&nbsp;H.&nbsp;自定义快捷键</th>
+            </tr>
+            <tr>
+               <td width="20%" align="left"><a accesskey="p" href="appendix.website.html">Prev</a>&nbsp;
+               </td>
+               <th width="60%" align="center">&nbsp;</th>
+               <td width="20%" align="right">&nbsp;<a accesskey="n" href="appendix.legal.notices.html">Next</a></td>
+            </tr>
+         </table>
+         <hr>
+      </div>
+      <div class="appendix">
+         <div class="titlepage">
+            <div>
+               <div>
+                  <h1 class="title"><a name="appendix.shortcut.custom"></a>Appendix&nbsp;H.&nbsp;自定义快捷键
+                  </h1>
+               </div>
+            </div>
+         </div>
+         <div class="toc">
+            <dl class="toc">
+               <dt><span class="section"><a href="appendix.shortcut.custom.html#ch04.shortcuts.customization">1. 自定义快捷键</a></span></dt>
+               <dt><span class="section"><a href="appendix.shortcut.custom.html#ch04.shortcuts.ProjectMenu">2. 项目菜单</a></span></dt>
+               <dt><span class="section"><a href="appendix.shortcut.custom.html#ch04.shortcuts.EditMenu">3. 编辑菜单</a></span></dt>
+               <dt><span class="section"><a href="appendix.shortcut.custom.html#ch04.shortcuts.GoToMenu">4. 前往菜单</a></span></dt>
+               <dt><span class="section"><a href="appendix.shortcut.custom.html#ch04.shortcuts.ViewMenu">5. 查看菜单</a></span></dt>
+               <dt><span class="section"><a href="appendix.shortcut.custom.html#ch04.shortcuts.ToolsMenu">6. 工具菜单</a></span></dt>
+               <dt><span class="section"><a href="appendix.shortcut.custom.html#ch04.shortcuts.OptionsMenu">7. 选项菜单</a></span></dt>
+               <dt><span class="section"><a href="appendix.shortcut.custom.html#ch04.shortcuts.HelpMenu">8. 帮助菜单</a></span></dt>
+            </dl>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="ch04.shortcuts.customization"></a>1.&nbsp;<a class="indexterm" name="d0e11112"></a>自定义快捷键
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>在主菜单中的大部分菜单项可设置新的快捷键。通过 OmegaT 首选项文件夹（请参阅<a class="link" href="chapter.files.and.folders.html#user.files" title="2.&nbsp;用户设置文件">用户文件位置</a>）中的快捷键定义文件，您可改变已分配的快捷键或添加新的快捷键。
+            </p>
+            <p>快捷键定义文件名称必须为 <code class="filename">MainMenuShortcuts.properties</code>，同时每行最多包含一个快捷键的定义。可接受空行，而注释行应以 "//" 开头。在 "//" 后的所有内容将被忽略。
+            </p>
+            <p>修改 <code class="filename">MainMenuShortcuts.properties</code> 文件后，必须重新运行 <span class="application">OmegaT</span> 才能让新的快捷键生效。
+            </p>
+            <p>快捷键定义的语法如下：<code class="code">&lt;menu item code&gt;=&lt;shortcut&gt;</code>，其中<span class="emphasis"><em>&lt;menu item code&gt;</em></span>取自下表，而<span class="emphasis"><em>&lt;shortcut&gt;</em></span>是用户指定的按键组合<a href="#ftn.d0e11147" class="footnote" name="d0e11147"><sup class="footnote">[2]</sup></a>.
+            </p>
+            <p>&lt;shortcut&gt;必须为下面的形式：0或多个<code class="code">&lt;modifier&gt;</code>后跟着0或1个<code class="code">&lt;event&gt;</code>后跟着1个<code class="code">&lt;key&gt;</code>，其中：
+            </p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p><code class="code">&lt;modifier&gt;</code> 可以为：<span class="emphasis"><em>shift</em></span>, <span class="emphasis"><em>control</em></span>, <span class="emphasis"><em>ctrl</em></span>, <span class="emphasis"><em>meta</em></span><a href="#ftn.d0e11181" class="footnote" name="d0e11181"><sup class="footnote">[3]</sup></a>, <span class="emphasis"><em>alt</em></span>,
+                                  <span class="emphasis"><em>altGraph</em></span></p>
+                  </li>
+                  <li class="listitem">
+                     <p><code class="code">&lt;event&gt;</code> 可以为：<span class="emphasis"><em>typed</em></span>, <span class="emphasis"><em>pressed</em></span>, <span class="emphasis"><em>released</em></span></p>
+                  </li>
+                  <li class="listitem">
+                     <p>而 <code class="code">&lt;key&gt;</code> 可以为您键盘上有效的任何键。<a href="#ftn.d0e11215" class="footnote" name="d0e11215"><sup class="footnote">[4]</sup></a>.
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <p>例如，缺省的OmegaT快捷键<a href="#ftn.d0e11223" class="footnote" name="d0e11223"><sup class="footnote">[5]</sup></a>，其中可以看到：
+            </p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p><code class="code">projectOpenMenuItem=ctrl O</code></p>
+                  </li>
+                  <li class="listitem">
+                     <p><code class="code">editCreateGlossaryEntryMenuItem=ctrl shift G</code></p>
+                  </li>
+               </ul>
+            </div>
+            <p>第一个是<span class="guimenuitem">打开项目</span>的快捷键，第二个为<span class="guimenuitem">创建词汇表条目</span>。
+            </p>
+            <p>如果想用<span class="keycap"><strong>Shift</strong></span>+<span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>O</strong></span>来打开项目，请把<code class="filename">MainMenuShortcuts.properties</code>修改成这样：<code class="code">
+                      </code></p>
+            <p><code class="code">projectOpenMenuItem=shift ctrl O</code>.
+            </p>
+            <p>如果您用Mac且想设置<span class="keycap"><strong>Shift</strong></span>+<span class="keycap"><strong>Command</strong></span>+<span class="keycap"><strong>S</strong></span>为<span class="guimenu">工具</span> → <span class="guimenuitem">统计</span>的快捷方式，请在<code class="filename">MainMenuShortcuts.properties</code>中添加此行：<code class="code"></code></p>
+            <p><code class="code"> toolsShowStatisticsStandardMenuItem=shift meta
+                      S</code></p>
+            <p>然后保存文件并重新启动<span class="application">OmegaT</span>。现在新的快捷键应该出现在刚修改的菜单项旁边。不会和系统快捷键冲突的话，它们在OmegaT中应该有效了。
+            </p>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="ch04.shortcuts.ProjectMenu"></a>2.&nbsp;项目菜单
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <div class="table"><a name="d0e11300"></a><p class="title"><b>Table&nbsp;H.1.&nbsp;项目菜单</b></p>
+               <div class="table-contents">
+                  <table summary="项目菜单" border="1">
+                     <colgroup>
+                        <col align="left" class="1">
+                        <col align="left" class="2">
+                        <col align="left" class="3">
+                     </colgroup>
+                     <thead>
+                        <tr>
+                           <th align="left">菜单项</th>
+                           <th align="left">缺省快捷键</th>
+                           <th align="left">菜单项代码</th>
+                        </tr>
+                     </thead>
+                     <tbody>
+                        <tr>
+                           <td align="left">新建</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">projectNewMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">打开</td>
+                           <td align="left"><span class="keycap"><strong>Ctrl+O</strong></span></td>
+                           <td align="left">projectOpenMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">下载团队项目</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">projectTeamNewMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">导入源文件</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">projectImportMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">从MediaWiki导入……</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">projectWikiImportMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">重新载入</td>
+                           <td align="left"><span class="keycap"><strong>F5</strong></span></td>
+                           <td align="left">projectReloadMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">关闭</td>
+                           <td align="left"><span class="keycap"><strong>Ctrl+Shift+W</strong></span></td>
+                           <td align="left">projectCloseMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">保存</td>
+                           <td align="left"><span class="keycap"><strong>Ctrl+S</strong></span></td>
+                           <td align="left">projectSaveMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">创建已译文档</td>
+                           <td align="left"><span class="keycap"><strong>Ctrl+D</strong></span></td>
+                           <td align="left">projectCompileMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">属性……</td>
+                           <td align="left"><span class="keycap"><strong>Ctrl+E</strong></span></td>
+                           <td align="left">projectEditMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">项目文件……</td>
+                           <td align="left"><span class="keycap"><strong>Ctrl+L</strong></span></td>
+                           <td align="left">viewFileListMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">退出</td>
+                           <td align="left"><span class="keycap"><strong>Ctrl+Q</strong></span></td>
+                           <td align="left">projectExitMenuItem</td>
+                        </tr>
+                     </tbody>
+                  </table>
+               </div>
+            </div><br class="table-break"></div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="ch04.shortcuts.EditMenu"></a>3.&nbsp;编辑菜单
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <div class="table"><a name="d0e11407"></a><p class="title"><b>Table&nbsp;H.2.&nbsp;编辑菜单</b></p>
+               <div class="table-contents">
+                  <table summary="编辑菜单" border="1">
+                     <colgroup>
+                        <col align="left" class="1">
+                        <col align="left" class="2">
+                        <col align="left" class="3">
+                     </colgroup>
+                     <thead>
+                        <tr>
+                           <th align="left">菜单项</th>
+                           <th align="left">缺省快捷键</th>
+                           <th align="left">菜单项代码</th>
+                        </tr>
+                     </thead>
+                     <tbody>
+                        <tr>
+                           <td align="left">取消前一操作</td>
+                           <td align="left"><span class="keycap"><strong>Ctrl+Z</strong></span></td>
+                           <td align="left">editUndoMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">重做前一操作</td>
+                           <td align="left"><span class="keycap"><strong>Ctrl+Y</strong></span></td>
+                           <td align="left">editRedoMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">用匹配替换</td>
+                           <td align="left"><span class="keycap"><strong>Ctrl+R</strong></span></td>
+                           <td align="left">editOverwriteTranslationMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">插入匹配</td>
+                           <td align="left"><span class="keycap"><strong>Ctrl+I</strong></span></td>
+                           <td align="left">editInsertTranslationMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">用机器翻译替换</td>
+                           <td align="left"><span class="keycap"><strong>Ctrl+M</strong></span></td>
+                           <td align="left">editOverwriteMachineTranslationMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">用源文本替换</td>
+                           <td align="left"><span class="keycap"><strong>Shift+Ctrl+R</strong></span></td>
+                           <td align="left">editOverwriteSourceMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">插入源文本</td>
+                           <td align="left"><span class="keycap"><strong>Shift+Ctrl+I</strong></span></td>
+                           <td align="left">editInsertSourceMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">插入源标签</td>
+                           <td align="left"><span class="keycap"><strong>Shift+Ctrl+T</strong></span></td>
+                           <td align="left">editTagPainterMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">导出选中部分</td>
+                           <td align="left"><span class="keycap"><strong>Shift+Ctrl+C</strong></span></td>
+                           <td align="left">editExportSelectionMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">创建词汇表条目</td>
+                           <td align="left"><span class="keycap"><strong>Shift+Ctrl+G</strong></span></td>
+                           <td align="left">editCreateGlossaryEntryMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">在项目中搜索……</td>
+                           <td align="left"><span class="keycap"><strong>Ctrl+F</strong></span></td>
+                           <td align="left">editFindInProjectMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">选择第一匹配</td>
+                           <td align="left"><span class="keycap"><strong>Ctrl+1</strong></span></td>
+                           <td align="left">editSelectFuzzy1MenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">选择第二匹配</td>
+                           <td align="left"><span class="keycap"><strong>Ctrl+2</strong></span></td>
+                           <td align="left">editSelectFuzzy2MenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">选择第三匹配</td>
+                           <td align="left"><span class="keycap"><strong>Ctrl+3</strong></span></td>
+                           <td align="left">editSelectFuzzy3MenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">选择第四匹配</td>
+                           <td align="left"><span class="keycap"><strong>Ctrl+4</strong></span></td>
+                           <td align="left">editSelectFuzzy4MenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">选择第五匹配</td>
+                           <td align="left"><span class="keycap"><strong>Ctrl+5</strong></span></td>
+                           <td align="left">editSelectFuzzy5MenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">转换大小写为/小写</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">lowerCaseMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">转换大小写为/大写</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">upperCaseMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">转换大小写为/首字母大写</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">titleCaseMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">循环转换大小写……</td>
+                           <td align="left"><span class="keycap"><strong>Shift+F3</strong></span></td>
+                           <td align="left">cycleSwitchCaseMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">用作缺省译文</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">editMultipleDefault</td>
+                        </tr>
+                        <tr>
+                           <td align="left">创建可选译文</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">editMultipleAlternate</td>
+                        </tr>
+                     </tbody>
+                  </table>
+               </div>
+            </div><br class="table-break"></div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="ch04.shortcuts.GoToMenu"></a>4.&nbsp;前往菜单
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <div class="table"><a name="d0e11592"></a><p class="title"><b>Table&nbsp;H.3.&nbsp;前往菜单</b></p>
+               <div class="table-contents">
+                  <table summary="前往菜单" border="1">
+                     <colgroup>
+                        <col align="left" class="1">
+                        <col align="left" class="2">
+                        <col align="left" class="3">
+                     </colgroup>
+                     <thead>
+                        <tr>
+                           <th align="left">菜单项</th>
+                           <th align="left">缺省快捷键</th>
+                           <th align="left">菜单项代码</th>
+                        </tr>
+                     </thead>
+                     <tbody>
+                        <tr>
+                           <td align="left">后一未译片段</td>
+                           <td align="left"><span class="keycap"><strong>Ctrl+U</strong></span></td>
+                           <td align="left">gotoNextUntranslatedMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">后一片段</td>
+                           <td align="left"><span class="keycap"><strong>Ctrl+N</strong></span>或<span class="keycap"><strong>Enter</strong></span>或<span class="keycap"><strong>Tab</strong></span></td>
+                           <td align="left">gotoNextSegmentMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">前一片段</td>
+                           <td align="left"><span class="keycap"><strong>Ctrl+P</strong></span>或<span class="keycap"><strong>Ctrl+Enter</strong></span>或<span class="keycap"><strong>Ctrl+Tab</strong></span></td>
+                           <td align="left">gotoPreviousSegmentMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">片段序号……</td>
+                           <td align="left"><span class="keycap"><strong>Ctrl+J</strong></span></td>
+                           <td align="left">gotoSegmentMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">后一笔记</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">gotoNextNoteMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">前一笔记</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">gotoPreviousNoteMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">在历史中前进……</td>
+                           <td align="left"><span class="keycap"><strong>Ctrl+Shift+N</strong></span></td>
+                           <td align="left">gotoHistoryForwardMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">在历史中回退……</td>
+                           <td align="left"><span class="keycap"><strong>Ctrl+Shift+P</strong></span></td>
+                           <td align="left">gotoHistoryBackMenuItem</td>
+                        </tr>
+                     </tbody>
+                  </table>
+               </div>
+            </div><br class="table-break"></div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="ch04.shortcuts.ViewMenu"></a>5.&nbsp;查看菜单
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <div class="table"><a name="d0e11683"></a><p class="title"><b>Table&nbsp;H.4.&nbsp;查看菜单</b></p>
+               <div class="table-contents"><a class="indexterm" name="d0e11686"></a><table summary="查看菜单" border="1">
+                     <colgroup>
+                        <col align="left" class="1">
+                        <col align="left" class="2">
+                        <col align="left" class="3">
+                     </colgroup>
+                     <thead>
+                        <tr>
+                           <th align="left">菜单项</th>
+                           <th align="left">缺省快捷键</th>
+                           <th align="left">菜单项代码</th>
+                        </tr>
+                     </thead>
+                     <tbody>
+                        <tr>
+                           <td align="left">标记已译片段</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">viewMarkTranslatedSegmentsCheckBoxMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">标记未译片段</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">viewMarkUntranslatedSegmentsCheckBoxMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">显示源片段</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">viewDisplaySegmentSourceCheckBoxMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">标记非独特片段</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">viewMarkNonUniqueSegmentsCheckBoxMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">标记含笔记片段</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">viewMarkNotedSegmentsCheckBoxMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">标记非中断空白</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">viewMarkNBSPCheckBoxMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">标记空白字符</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">viewMarkWhitespaceCheckBoxMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">标记双向控制字符</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">viewMarkBidiCheckBoxMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">修改信息/不显示</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">viewDisplayModificationInfoNoneRadioButtonMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">修改信息/显示选中部分</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">viewDisplayModificationInfoSelectedRadioButtonMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">修改信息/显示所有</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">viewDisplayModificationInfoAllRadioButtonMenuItem</td>
+                        </tr>
+                     </tbody>
+                  </table>
+               </div>
+            </div><br class="table-break"></div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="ch04.shortcuts.ToolsMenu"></a>6.&nbsp;工具菜单
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <div class="table"><a name="d0e11773"></a><p class="title"><b>Table&nbsp;H.5.&nbsp;工具菜单</b></p>
+               <div class="table-contents">
+                  <table summary="工具菜单" border="1">
+                     <colgroup>
+                        <col align="left" class="1">
+                        <col align="left" class="2">
+                        <col align="left" class="3">
+                     </colgroup>
+                     <thead>
+                        <tr>
+                           <th align="left">菜单项</th>
+                           <th align="left">缺省快捷键</th>
+                           <th align="left">菜单项代码</th>
+                        </tr>
+                     </thead>
+                     <tbody>
+                        <tr>
+                           <td align="left">检验标签</td>
+                           <td align="left"><span class="keycap"><strong>Ctrl +T</strong></span></td>
+                           <td align="left">toolsValidateTagsMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">统计(&amp;S)</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">toolsShowStatisticsStandardMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">匹配统计(&amp;M)</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">toolsShowStatisticsMatchesMenuItem</td>
+                        </tr>
+                     </tbody>
+                  </table>
+               </div>
+            </div><br class="table-break"></div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="ch04.shortcuts.OptionsMenu"></a>7.&nbsp;选项菜单
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <div class="table"><a name="d0e11812"></a><p class="title"><b>Table&nbsp;H.6.&nbsp;选项菜单</b></p>
+               <div class="table-contents">
+                  <table summary="选项菜单" border="1">
+                     <colgroup>
+                        <col align="left" class="1">
+                        <col align="left" class="2">
+                        <col align="left" class="3">
+                     </colgroup>
+                     <thead>
+                        <tr>
+                           <th align="left">菜单项</th>
+                           <th align="left">缺省快捷键</th>
+                           <th align="left">菜单项代码</th>
+                        </tr>
+                     </thead>
+                     <tbody>
+                        <tr>
+                           <td align="left">使用 Tab 前进</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">optionsTabAdvanceCheckBoxMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">退出前总是确认</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">optionsAlwaysConfirmQuitCheckBoxMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">机器翻译</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">&nbsp;</td>
+                        </tr>
+                        <tr>
+                           <td align="left">翻译提示/启用翻译提示</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">optionsTransTipsEnableMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">翻译提示/精确匹配</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">optionsTransTipsExactMatchMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">字体……</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">optionsFontSelectionMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">文件过滤器……</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">optionsSetupFileFiltersMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">分割规则……</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">optionsSentsegMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">拼写检查……</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">optionsSpellCheckMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">编辑行为……</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">optionsWorkflowMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">标签验证……</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">optionsTagValidationMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">团队……</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">optionsTeamMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">外部 TMX ……</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">optionsExtTMXMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">查看……</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">optionsViewOptionsMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">保存和输出……</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">optionsSaveOptionsMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">登录代理……</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">optionsViewOptionsMenuLoginItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">恢复主窗口</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">optionsRestoreGUIMenuItem</td>
+                        </tr>
+                     </tbody>
+                  </table>
+               </div>
+            </div><br class="table-break"></div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="ch04.shortcuts.HelpMenu"></a>8.&nbsp;帮助菜单
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <div class="table"><a name="d0e11932"></a><p class="title"><b>Table&nbsp;H.7.&nbsp;帮助菜单</b></p>
+               <div class="table-contents">
+                  <table summary="帮助菜单" border="1">
+                     <colgroup>
+                        <col align="left" class="1">
+                        <col align="left" class="2">
+                        <col align="left" class="3">
+                     </colgroup>
+                     <thead>
+                        <tr>
+                           <th align="left">菜单项</th>
+                           <th align="left">缺省快捷键</th>
+                           <th align="left">菜单项代码</th>
+                        </tr>
+                     </thead>
+                     <tbody>
+                        <tr>
+                           <td align="left">用户手册……</td>
+                           <td align="left"><span class="keycap"><strong>F1</strong></span></td>
+                           <td align="left">helpContentsMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">关于……</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">helpAboutMenuItem</td>
+                        </tr>
+                     </tbody>
+                  </table>
+               </div>
+            </div><br class="table-break"></div>
+         <div class="footnotes"><br><hr style="width:100; text-align:left;margin-left: 0">
+            <div id="ftn.d0e11147" class="footnote">
+               <p><a href="#d0e11147" class="para"><sup class="para">[2] </sup></a>按键（快捷键）的全部语法的定义在来自 Oracle Java 1.6 文档（页面底部）：<a class="ulink" href="http://docs.oracle.com/javase/6/docs/api/javax/swing/KeyStroke.html" target="_top">Java 1.6 快捷键</a></p>
+            </div>
+            <div id="ftn.d0e11181" class="footnote">
+               <p><a href="#d0e11181" class="para"><sup class="para">[3] </sup></a>在 Mac 系统中，必须使用 <span class="emphasis"><em>meta</em></span> 修饰符来指定 <span class="emphasis"><em>command</em></span> 键。
+               </p>
+            </div>
+            <div id="ftn.d0e11215" class="footnote">
+               <p><a href="#d0e11215" class="para"><sup class="para">[4] </sup></a>可用的按键事件在来自 Oracle 的 Java 1.6 文档中列出：<a class="ulink" href="http://docs.oracle.com/javase/6/docs/api/java/awt/event/KeyEvent.html" target="_top">Java 1.6 按键事件说明</a></p>
+            </div>
+            <div id="ftn.d0e11223" class="footnote">
+               <p><a href="#d0e11223" class="para"><sup class="para">[5] </sup></a>缺省的 OmegaT 快捷键设置可从 Sourceforge 获取：<a class="ulink" href="http://omegat.svn.sourceforge.net/viewvc/omegat/branches/release-2-6/src/org/omegat/gui/main/MainMenuShortcuts.properties" target="_top">缺省的 OmegaT 快捷键</a></p>
+               <p>在Mac系统中缺省的OmegaT快捷键同样可从Sourceforge获取，其中把所有的“ctrl”都被替换为“meta”：<a class="ulink" href="http://omegat.svn.sourceforge.net/viewvc/omegat/branches/release-2-6/src/org/omegat/gui/main/MainMenuShortcuts.mac.properties" target="_top">Mac 系统上缺省的OmegaT快捷键</a></p>
+            </div>
+         </div>
+      </div>
+      <div class="navfooter">
+         <hr>
+         <table width="100%" summary="Navigation footer">
+            <tr>
+               <td width="40%" align="left"><a accesskey="p" href="appendix.website.html">Prev</a>&nbsp;
+               </td>
+               <td width="20%" align="center">&nbsp;</td>
+               <td width="40%" align="right">&nbsp;<a accesskey="n" href="appendix.legal.notices.html">Next</a></td>
+            </tr>
+            <tr>
+               <td width="40%" align="left" valign="top">Appendix&nbsp;G.&nbsp;网上的 OmegaT&nbsp;</td>
+               <td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
+               <td width="40%" align="right" valign="top">&nbsp;Appendix&nbsp;I.&nbsp;法律声明</td>
+            </tr>
+         </table>
+      </div>
+   </body>
+</html>

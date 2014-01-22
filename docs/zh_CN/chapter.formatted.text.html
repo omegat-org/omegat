@@ -2,25 +2,25 @@
    <head>
       <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
    
-      <title>第&nbsp;12&nbsp;章&nbsp;处理格式化文本</title>
+      <title>Chapter&nbsp;12.&nbsp;处理格式化文本</title>
       <link rel="stylesheet" type="text/css" href="OmegaT.css">
       <meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
-      <link rel="home" href="index.html" title="OmegaT - 用户向导">
-      <link rel="up" href="index.html" title="OmegaT - 用户向导">
-      <link rel="prev" href="chapter.font.html" title="第&nbsp;11&nbsp;章&nbsp;字体设置">
-      <link rel="next" href="chapter.plain.text.html" title="第&nbsp;13&nbsp;章&nbsp;处理纯文本">
+      <link rel="home" href="index.html" title="OmegaT 3.0——用户向导">
+      <link rel="up" href="index.html" title="OmegaT 3.0——用户向导">
+      <link rel="prev" href="chapter.plain.text.html" title="Chapter&nbsp;11.&nbsp;处理纯文本">
+      <link rel="next" href="chapter.translation.memories.html" title="Chapter&nbsp;13.&nbsp;翻译记忆">
    </head>
    <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
       <div class="navheader">
          <table width="100%" summary="Navigation header">
             <tr>
-               <th colspan="3" align="center">第&nbsp;12&nbsp;章&nbsp;处理格式化文本</th>
+               <th colspan="3" align="center">Chapter&nbsp;12.&nbsp;处理格式化文本</th>
             </tr>
             <tr>
-               <td width="20%" align="left"><a accesskey="p" href="chapter.font.html">上一页</a>&nbsp;
+               <td width="20%" align="left"><a accesskey="p" href="chapter.plain.text.html">Prev</a>&nbsp;
                </td>
                <th width="60%" align="center">&nbsp;</th>
-               <td width="20%" align="right">&nbsp;<a accesskey="n" href="chapter.plain.text.html">下一页</a></td>
+               <td width="20%" align="right">&nbsp;<a accesskey="n" href="chapter.translation.memories.html">Next</a></td>
             </tr>
          </table>
          <hr>
@@ -29,7 +29,7 @@
          <div class="titlepage">
             <div>
                <div>
-                  <h1 class="title"><a name="chapter.formatted.text"></a>第&nbsp;12&nbsp;章&nbsp;处理格式化文本<a class="indexterm" name="d0e6522"></a><a class="indexterm" name="d0e6527"></a></h1>
+                  <h1 class="title"><a name="chapter.formatted.text"></a>Chapter&nbsp;12.&nbsp;处理格式化文本<a class="indexterm" name="d0e6099"></a><a class="indexterm" name="d0e6104"></a></h1>
                </div>
             </div>
          </div>
@@ -39,26 +39,25 @@
                <dt><span class="section"><a href="chapter.formatted.text.html#tag.operations">2. 标签操作</a></span></dt>
                <dt><span class="section"><a href="chapter.formatted.text.html#tag.group.nesting">3. 标签组嵌套</a></span></dt>
                <dt><span class="section"><a href="chapter.formatted.text.html#tag.group.overlapping">4. 标签组重叠</a></span></dt>
-               <dt><span class="section"><a href="chapter.formatted.text.html#tag.group.validation">5. 标签组检验</a></span></dt>
-               <dt><span class="section"><a href="chapter.formatted.text.html#hints.for.tag.management">6. 标签管理的几点提示</a></span></dt>
+               <dt><span class="section"><a href="chapter.formatted.text.html#d0e6250">5. 标签验证选项</a></span></dt>
+               <dt><span class="section"><a href="chapter.formatted.text.html#tag.group.validation">6. 标签组检验</a></span></dt>
+               <dt><span class="section"><a href="chapter.formatted.text.html#hints.for.tag.management">7. 标签管理的几点提示</a></span></dt>
             </dl>
          </div>
-         <p>在源文件中表示的格式化信息通常需要在目标文中重新创建。在 OmegaT 中，由所支持格式（尤其是在写入 DocBook、HTML、XHTML、开放文档（OpenOffice.org）和 Office 开放 XML（MS Office 2007
-            及更高版本）的时候）产生的内部格式化信息以标签的形式出现。一般情况下，为匹配目的而比较不同文本的相似性时将忽略标签。在已译片段中重新创建的标签将会出现在译后文档中。
-         </p>
+         <p>在源文件中表示的格式化信息通常需要在目标文中重新创建。在OmegaT中，由所支持格式（尤其是在写入DocBook、HTML、XHTML、开放文档格式（ODF）和 Office 开放 XML（MS Office 2007及更高版本）的时候）产生的内部格式化信息以标签的形式出现。一般情况下，为匹配目的而比较不同文本的相似性时将忽略标签。在已译片段中重新创建的标签将会出现在译后文档中。</p>
          <div class="section">
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="formatting.tags"></a>1.&nbsp;格式化标签<a class="indexterm" name="d0e6537"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="formatting.tags"></a>1.&nbsp;格式化标签<a class="indexterm" name="d0e6114"></a></h2>
                   </div>
                </div>
             </div>
-            <p><a class="indexterm" name="d0e6541"></a><span class="bold"><strong>标签的命名：</strong></span></p>
+            <p><a class="indexterm" name="d0e6118"></a><span class="bold"><strong>标签的命名：</strong></span></p>
             <p>标签由一到三个字符和一个数字组成。唯一的编号允许我们将彼此相对应的标签组织在一起，不同的标签允许有相同的快捷字符，但实际上并不一样。使用的快捷字符尝试反映标签所代表的格式含义（例如 b 表示粗体，i 表示斜体）。</p>
-            <p><a class="indexterm" name="d0e6551"></a><span class="bold"><strong>标签的编号：</strong></span></p>
+            <p><a class="indexterm" name="d0e6128"></a><span class="bold"><strong>标签的编号：</strong></span></p>
             <p>标签以标签组自增长方式进行编号。在这里“标签组”是单个标签（例如 &lt;i0&gt; 和 &lt;/i0&gt;）。在片段中，第一个组（成对或单个的）获得编号 0，第二个编号为 1，以此类推。下面的第一个例子中有3个标签组（一组成对的，一组单个，另一组成对的），第二个例子中只有一组（成对的）。</p>
-            <p><a class="indexterm" name="d0e6561"></a><span class="bold"><strong>成对的和单个的：</strong></span></p>
+            <p><a class="indexterm" name="d0e6138"></a><span class="bold"><strong>成对的和单个的：</strong></span></p>
             <p>标签不是单个的就是成对的。单个标签指的是对周边文本没有影响的格式化信息（例如：额外的空格或者行终止）。</p>
             <p><code class="literal">&lt;b0&gt;&lt;Ctr+N&gt;&lt;/b0&gt;, &lt;br1&gt;&lt;b2&gt;&lt;Enter&gt;&lt;/b2&gt;&lt;片段 2132&gt;</code></p>
             <p>&lt;br1&gt;是单个标签，对周围的文本不产生任何影响。成对标签通常指对开标签和闭标签之间的文本使用格式信息的标签对。下面的 &lt;b0&gt; 和 &lt;/b0&gt; 是成对的且影响文本 log.txt。请注意开标签总是出现在闭标签的前面：</p>
@@ -70,18 +69,18 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="tag.operations"></a>2.&nbsp;标签操作<a class="indexterm" name="d0e6586"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="tag.operations"></a>2.&nbsp;标签操作<a class="indexterm" name="d0e6163"></a></h2>
                   </div>
                </div>
             </div>
             <p>对于标签的操作必须谨慎。如果它们被意外地改变，最终的文件格式也许会被破坏。基本的做法是标签序列必须保持相同的顺序。然而，在可能的情况下，如果必须严格遵循某些规则，则不必拘泥于这个基本做法。</p>
-            <p><span class="bold"><strong><a class="indexterm" name="d0e6595"></a>标签的复制：</strong></span></p>
+            <p><span class="bold"><strong><a class="indexterm" name="d0e6172"></a>标签的复制：</strong></span></p>
             <p>要复制标签组，只需将它们复制到您选择的位置。但请记住：成对的标签组中，开标签必须出现在闭标签之前。您复制的标签组所代表的格式将会应用到原标签和复制标签的两个部分。</p>
             <p>例如：</p>
             <p><code class="literal">&lt;b0&gt;此格式&lt;/b0&gt;即将被复制到此处。&lt;片段 0001&gt;</code></p>
             <p>复制后：</p>
             <p><code class="literal">&lt;b0&gt;此格式&lt;/b0&gt;已经被&lt;b0&gt;复制到此处&lt;/b0&gt;。&lt;片段 0001&gt;</code></p>
-            <p><span class="bold"><strong><a class="indexterm" name="d0e6615"></a>标签组删除：</strong></span></p>
+            <p><span class="bold"><strong><a class="indexterm" name="d0e6192"></a>标签组删除：</strong></span></p>
             <p>要删除标签组，仅需将它们从片段中移除。请记住：必须同时删去一个标签组的开标签和闭标签，以确保它们所进行的格式化操作被完全清除，否则译后文件可能遭破坏而无法打开。删除一个标签组的同时，您将会从已译文件中删除相关的格式。</p>
             <p>例如：</p>
             <p><code class="literal">&lt;b0&gt;此格式&lt;/b0&gt;即将被删除。&lt;片段 0001&gt;</code></p>
@@ -92,7 +91,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="tag.group.nesting"></a>3.&nbsp;标签组嵌套<a class="indexterm" name="d0e6636"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="tag.group.nesting"></a>3.&nbsp;标签组嵌套<a class="indexterm" name="d0e6213"></a></h2>
                   </div>
                </div>
             </div>
@@ -106,7 +105,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="tag.group.overlapping"></a>4.&nbsp;标签组重叠<a class="indexterm" name="d0e6656"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="tag.group.overlapping"></a>4.&nbsp;标签组重叠<a class="indexterm" name="d0e6233"></a></h2>
                   </div>
                </div>
             </div>
@@ -114,19 +113,65 @@
             <p>例如：</p>
             <p><code class="literal">&lt;b0&gt;格式&lt;/b0&gt;&lt;b1&gt;一&lt;/b1&gt;即将被弄乱。&lt;片段 0001&gt;</code></p>
             <p>错误维护后：</p>
-            <p><code class="literal">&lt;b0&gt;格式&lt;b1&gt;一&lt;/b0&gt;&lt;/b1&gt;现在变乱了。&lt;片段结束 0001&gt;</code></p>
+            <p><code class="literal">&lt;b0&gt;格式&lt;b1&gt;一&lt;/b0&gt; &lt;/b1&gt;正被弄乱了。&lt;segment 0001&gt;</code></p>
          </div>
          <div class="section">
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="tag.group.validation"></a>5.&nbsp;标签组检验<a class="indexterm" name="d0e6676"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="d0e6250"></a>5.&nbsp;标签验证选项
+                     </h2>
                   </div>
                </div>
             </div>
-            <p>验证标签功能检测发生变化的标签序列（无论是有意的还是无意的），并显示受影响的片段。通过按下 <span class="guimenuitem">Ctrl+T<a class="indexterm" name="d0e6685"></a></span> 组合键可调用该功能，它将打开一个窗口，显示文件的译文中所有可能包含断裂或错误的标签的片段。通过标签检验功能可以轻松地修正标签和重新创建目标文档。按 <span class="guimenuitem">Ctrl+T</span> 打开的窗口显示了一个三列表格，其中列出了指向该片段、原文片段和译文片段的链接：
+            <p>要定制标签的操作，可在<span class="guimenuitem">选项&gt;标签验证</span>窗口中设置一些规则：
             </p>
-            <div class="figure"><a name="tag.validation"></a><p class="title"><b>图&nbsp;12.1.&nbsp;标签检验条目</b></p>
+            <div class="mediaobject"><img src="images/OptionsTagValidation_25.png"></div>
+            <p>此处的行为、状态适用于所有的源文件而不只是某些类型的文件，如格式化文本。</p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p><span class="bold"><strong>Printf变量——不检查、简单检查、全检查</strong></span></p>
+                     <p>OmegaT可以检查源文本中的程序变量如（%s）在译文中是否存在。您可以决定是否检查、检查简单的printf变量（如%s %d等）或检查所有类型的printf变量。</p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p><span class="bold"><strong>检查简单的java MessageFormat模式</strong></span></p>
+                     <p>选中该复选框能让OmegaT检查简单的java MessageFormat标签（如{0}）是否处理正确。</p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p><span class="bold"><strong>自定义标签正则表达式：</strong></span></p>
+                     <p>此处输入的正则表达式会让OmegaT把它的匹配实例视为客户标签。它会检查标签的编号和顺序是否一致，就如同检查omegat标签一样。</p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p><span class="bold"><strong>应从译文中移除的碎片正则表达式</strong></span></p>
+                     <p>可以输入表示希望在目标删除的内容的正则表达式。之后在目标片段中的任何匹配将显示为红色，这样就很容易发现和纠正。寻找模糊匹配时忽略该移除模式。如果被移除部分不匹配其他片段，则增加5个固定罚点，因此匹配度就不会显示高达100%</p>
+                  </li>
+               </ul>
+            </div>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="tag.group.validation"></a>6.&nbsp;标签组检验<a class="indexterm" name="d0e6294"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <p>验证标签功能检测发生变化的标签序列（无论是有意的还是无意的），并显示受影响的片段。通过按下 <span class="guimenuitem">Ctrl+T<a class="indexterm" name="d0e6303"></a></span> 组合键可调用该功能，它将打开一个窗口，显示文件的译文中所有可能包含断裂或错误的标签的片段。通过标签检验功能可以轻松地修正标签和重新创建目标文档。按 <span class="guimenuitem">Ctrl+T</span> 打开的窗口显示了一个三列表格，其中列出了指向该片段、原文片段和译文片段的链接：
+            </p>
+            <div class="figure"><a name="tag.validation"></a><p class="title"><b>Figure&nbsp;12.1.&nbsp;标签检验条目</b></p>
                <div class="figure-contents">
                   <div class="mediaobject"><img src="images/TagValidation.png" alt="标签检验条目"></div>
                </div>
@@ -137,7 +182,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="hints.for.tag.management"></a>6.&nbsp;标签管理的几点提示<a class="indexterm" name="d0e6710"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="hints.for.tag.management"></a>7.&nbsp;标签管理的几点提示<a class="indexterm" name="d0e6328"></a></h2>
                   </div>
                </div>
             </div>
@@ -152,15 +197,15 @@
          <hr>
          <table width="100%" summary="Navigation footer">
             <tr>
-               <td width="40%" align="left"><a accesskey="p" href="chapter.font.html">上一页</a>&nbsp;
+               <td width="40%" align="left"><a accesskey="p" href="chapter.plain.text.html">Prev</a>&nbsp;
                </td>
                <td width="20%" align="center">&nbsp;</td>
-               <td width="40%" align="right">&nbsp;<a accesskey="n" href="chapter.plain.text.html">下一页</a></td>
+               <td width="40%" align="right">&nbsp;<a accesskey="n" href="chapter.translation.memories.html">Next</a></td>
             </tr>
             <tr>
-               <td width="40%" align="left" valign="top">第&nbsp;11&nbsp;章&nbsp;字体设置&nbsp;</td>
-               <td width="20%" align="center"><a accesskey="h" href="index.html">起始页</a></td>
-               <td width="40%" align="right" valign="top">&nbsp;第&nbsp;13&nbsp;章&nbsp;处理纯文本</td>
+               <td width="40%" align="left" valign="top">Chapter&nbsp;11.&nbsp;处理纯文本&nbsp;</td>
+               <td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
+               <td width="40%" align="right" valign="top">&nbsp;Chapter&nbsp;13.&nbsp;翻译记忆</td>
             </tr>
          </table>
       </div>

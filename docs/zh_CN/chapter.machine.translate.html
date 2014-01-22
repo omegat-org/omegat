@@ -2,25 +2,25 @@
    <head>
       <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
    
-      <title>第&nbsp;20&nbsp;章&nbsp;机器翻译</title>
+      <title>Chapter&nbsp;19.&nbsp;机器翻译</title>
       <link rel="stylesheet" type="text/css" href="OmegaT.css">
       <meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
-      <link rel="home" href="index.html" title="OmegaT - 用户向导">
-      <link rel="up" href="index.html" title="OmegaT - 用户向导">
-      <link rel="prev" href="chapter.glossaries.html" title="第&nbsp;19&nbsp;章&nbsp;词汇表">
-      <link rel="next" href="chapter.spellchecker.html" title="第&nbsp;21&nbsp;章&nbsp;拼写检查">
+      <link rel="home" href="index.html" title="OmegaT 3.0——用户向导">
+      <link rel="up" href="index.html" title="OmegaT 3.0——用户向导">
+      <link rel="prev" href="chapter.glossaries.html" title="Chapter&nbsp;18.&nbsp;词汇表">
+      <link rel="next" href="chapter.spellchecker.html" title="Chapter&nbsp;20.&nbsp;拼写检查">
    </head>
    <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
       <div class="navheader">
          <table width="100%" summary="Navigation header">
             <tr>
-               <th colspan="3" align="center">第&nbsp;20&nbsp;章&nbsp;机器翻译</th>
+               <th colspan="3" align="center">Chapter&nbsp;19.&nbsp;机器翻译</th>
             </tr>
             <tr>
-               <td width="20%" align="left"><a accesskey="p" href="chapter.glossaries.html">上一页</a>&nbsp;
+               <td width="20%" align="left"><a accesskey="p" href="chapter.glossaries.html">Prev</a>&nbsp;
                </td>
                <th width="60%" align="center">&nbsp;</th>
-               <td width="20%" align="right">&nbsp;<a accesskey="n" href="chapter.spellchecker.html">下一页</a></td>
+               <td width="20%" align="right">&nbsp;<a accesskey="n" href="chapter.spellchecker.html">Next</a></td>
             </tr>
          </table>
          <hr>
@@ -29,17 +29,17 @@
          <div class="titlepage">
             <div>
                <div>
-                  <h1 class="title"><a name="chapter.machine.translate"></a>第&nbsp;20&nbsp;章&nbsp;机器翻译<a class="indexterm" name="d0e8727"></a></h1>
+                  <h1 class="title"><a name="chapter.machine.translate"></a>Chapter&nbsp;19.&nbsp;机器翻译<a class="indexterm" name="d0e8265"></a></h1>
                </div>
             </div>
          </div>
          <div class="toc">
             <dl class="toc">
-               <dt><span class="section"><a href="chapter.machine.translate.html#d0e8730">1. 介绍</a></span></dt>
+               <dt><span class="section"><a href="chapter.machine.translate.html#d0e8268">1. 介绍</a></span></dt>
                <dt><span class="section"><a href="chapter.machine.translate.html#introduction">2. 谷歌翻译</a></span></dt>
-               <dt><span class="section"><a href="chapter.machine.translate.html#d0e8771">3. <span class="application">OmegaT</span> 用户和谷歌翻译</a></span></dt>
-               <dt><span class="section"><a href="chapter.machine.translate.html#d0e8822">4. Belazar</a></span></dt>
-               <dt><span class="section"><a href="chapter.machine.translate.html#d0e8834">5. Apertium</a></span></dt>
+               <dt><span class="section"><a href="chapter.machine.translate.html#d0e8309">3. <span class="application">OmegaT</span> 用户和谷歌翻译</a></span></dt>
+               <dt><span class="section"><a href="chapter.machine.translate.html#d0e8360">4. Belazar</a></span></dt>
+               <dt><span class="section"><a href="chapter.machine.translate.html#d0e8372">5. Apertium</a></span></dt>
                <dt><span class="section"><a href="chapter.machine.translate.html#Google.Translate.troubleshooting">6. 机器翻译 - 故障排除</a></span></dt>
             </dl>
          </div>
@@ -47,7 +47,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="d0e8730"></a>1.&nbsp;介绍<a class="indexterm" name="d0e8733"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="d0e8268"></a>1.&nbsp;介绍<a class="indexterm" name="d0e8271"></a></h2>
                   </div>
                </div>
             </div>
@@ -60,13 +60,13 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="introduction"></a>2.&nbsp;谷歌翻译<a class="indexterm" name="d0e8751"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="introduction"></a>2.&nbsp;谷歌翻译<a class="indexterm" name="d0e8289"></a></h2>
                   </div>
                </div>
             </div>
             <p>谷歌翻译是由谷歌提供的付费服务，可用于翻译句子，网站和日益增多的语言的竞争文本。在编写此文档时，其支持的语言超过50多种，从阿尔巴尼亚语到意第绪语，其中当然包括所有主要语言。该服务的当前版本根据使用付费的，在编写此文档时每百万字符 20 USD
                的价格。<span class="bold"><strong></strong></span></p>
-            <p><span class="bold"><strong>重要提示：</strong></span>在您使用谷歌翻译 API v2 的服务前需要所有客户的账单信息（请参阅<a class="ulink" href="http://code.google.com/intl/en-US/apis/language/translate/v2/pricing.html" target="_top">价格和服务条款</a>了解更多信息）。为了向谷歌服务表明您是合法用户，您需要使用在注册服务后谷歌发给您的唯一的私匙。请参阅<a class="link" href="chapter.installing.and.running.html" title="第&nbsp;3&nbsp;章&nbsp;安装和运行 OmegaT">安装和运行</a>章节的运行命令参数部分，了解如何添加该密钥到 OmegaT 环境中的详细情况。
+            <p><span class="bold"><strong>重要提示：</strong></span>在您使用谷歌翻译 API v2 的服务前需要所有客户的账单信息（请参阅<a class="ulink" href="https://developers.google.com/translate/v2/pricing?hl=en-US" target="_top">价格和服务条款</a>了解更多信息）。为了向谷歌服务表明您是合法用户，您需要使用在注册服务后谷歌发给您的唯一的私匙。请参阅<a class="link" href="chapter.installing.and.running.html" title="Chapter&nbsp;3.&nbsp;安装和运行 OmegaT">安装和运行</a>章节的运行命令参数部分，了解如何添加该密钥到 OmegaT 环境中的详细情况。
             </p>
             <p>谷歌翻译的质量当然一方面取决于目标语言文本和双语版本的可用性，另一方面取决于所创建模型的质量。有一点可以肯定，在某些情况下，其质量肯定不够好，但它肯定会不断提高，而不是变差。</p>
          </div>
@@ -74,20 +74,20 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="d0e8771"></a>3.&nbsp;<span class="application">OmegaT</span> 用户和谷歌翻译
+                     <h2 class="title" style="clear: both"><a name="d0e8309"></a>3.&nbsp;<span class="application">OmegaT</span> 用户和谷歌翻译
                      </h2>
                   </div>
                </div>
             </div>
             <p><span class="application">OmegaT</span> 并不强迫用户使用谷歌翻译。如果用了，既不表示用户要接受该译文，更不表示最终译文会提供给谷歌。下面的窗口展示了一个 a) 英文原文 b) 西班牙语 和 c) 斯洛文尼亚语 的谷歌翻译译文。
             </p>
-            <div class="figure"><a name="moby.dick"></a><p class="title"><b>图&nbsp;20.1.&nbsp;谷歌翻译 - 示例</b></p>
+            <div class="figure"><a name="moby.dick"></a><p class="title"><b>Figure&nbsp;19.1.&nbsp;谷歌翻译 - 示例</b></p>
                <div class="figure-contents">
                   <div class="mediaobject"><img src="images/MobyDick.png" alt="谷歌翻译 - 示例"></div>
                </div>
             </div><br class="figure-break"><p>西班牙语译文要好于斯洛文尼亚语的。注意西班牙语中的 <span class="emphasis"><em>interesar</em></span> 和 <span class="emphasis"><em> navegar</em></span> 被正确地翻译成动词 "interest" 和 "sail"。在斯洛文尼亚语版本中，两个词都被译成了名词。很可能西班牙语的翻译至少部分基于实际的书籍译文。
             </p>
-            <p>当您激活了该服务后，每次打开新的源片段时，其对应的翻译建议将会出现在机器翻译窗格中。如果发现了可接受的建议，按下 <span class="keycap"><strong><a class="indexterm" name="d0e8800"></a>Ctrl</strong></span>+<span class="keycap"><strong>M</strong></span> 可使用它替换已打开片段的目标部分。例如在上面的片段中，使用 <span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>M</strong></span> 将会用斯洛文尼亚语的建议版本覆盖西班牙语的版本。
+            <p>当您激活了该服务后，每次打开新的源片段时，其对应的翻译建议将会出现在机器翻译窗格中。如果发现了可接受的建议，按下 <span class="keycap"><strong><a class="indexterm" name="d0e8338"></a>Ctrl</strong></span>+<span class="keycap"><strong>M</strong></span> 可使用它替换已打开片段的目标部分。例如在上面的片段中，使用 <span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>M</strong></span> 将会用斯洛文尼亚语的建议版本覆盖西班牙语的版本。
             </p>
             <p>如果不希望 <span class="application">OmegaT</span> 把源片段发送至谷歌获取译文，请取消选项菜单中的谷歌翻译菜单项。
             </p>
@@ -97,18 +97,18 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="d0e8822"></a>4.&nbsp;Belazar<a class="indexterm" name="d0e8825"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="d0e8360"></a>4.&nbsp;Belazar<a class="indexterm" name="d0e8363"></a></h2>
                   </div>
                </div>
             </div>
-            <p><a class="ulink" href="http://belsoft.tut.by/belazar/" target="_top">Belazar</a> 是用于俄罗斯－白俄罗斯语言对的机器语言翻译工具。
+            <p><a class="ulink" href="http://belazar.info/" target="_top">Belazar</a> 是用于俄罗斯－白俄罗斯语言对的机器语言翻译工具。
             </p>
          </div>
          <div class="section">
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="d0e8834"></a>5.&nbsp;Apertium<a class="indexterm" name="d0e8837"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="d0e8372"></a>5.&nbsp;Apertium<a class="indexterm" name="d0e8375"></a></h2>
                   </div>
                </div>
             </div>
@@ -139,7 +139,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="Google.Translate.troubleshooting"></a>6.&nbsp;机器翻译 - 故障排除<a class="indexterm" name="d0e8866"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="Google.Translate.troubleshooting"></a>6.&nbsp;机器翻译 - 故障排除<a class="indexterm" name="d0e8404"></a></h2>
                   </div>
                </div>
             </div>
@@ -157,11 +157,18 @@
                      <p>进行翻译的语言对是什么？检查选择的服务是否支持。</p>
                   </li>
                   <li class="listitem">
-                     <p>谷歌翻译无法工作：检查 选项&gt;机器翻译：谷歌翻译服务的名称为谷歌翻译 V2。名称为“谷歌翻译”的旧版服务在过时的 OmegaT 版本中可用，现在已经不赞成且不再有效了。</p>
+                     <p>谷歌翻译无法工作：您申请了<a class="ulink" href="https://developers.google.com/translate/v2/faq" target="_top">Translate API service</a>吗？注意谷歌翻译服务需要付费，请参阅<a class="link" href="chapter.installing.and.running.html" title="Chapter&nbsp;3.&nbsp;安装和运行 OmegaT">安装和运行</a>章节（运行时参数）了解更多相关信息。
+                     </p>
                   </li>
                   <li class="listitem">
-                     <p>"Google Translate returned HTTP response code: 403 ..."：请检查 38 个字符的密钥，输入到 pinfo.list 文件时是否正确。请检查是否激活<a class="ulink" href="???" target="_top">翻译 API 服务</a>。
+                     <p>"Google Translate returned HTTP response code: 403 ..."：请检查 38 个字符的密钥，输入到 pinfo.list 文件时是否正确。请检查是否激活<a class="ulink" href="https://developers.google.com/translate/v2/faq" target="_top">翻译 API 服务</a>。
                      </p>
+                  </li>
+                  <li class="listitem">
+                     <p>谷歌翻译无法工作：请在请求时输入谷歌API密钥。检查选项&gt;机器翻译中的谷歌翻译V2是否选中。</p>
+                  </li>
+                  <li class="listitem">
+                     <p>Google Translate V2报告“Bad request”——请检查项目的源和目标语言。包含未定义的语言会引起此类响应。</p>
                   </li>
                </ul>
             </div>
@@ -171,15 +178,15 @@
          <hr>
          <table width="100%" summary="Navigation footer">
             <tr>
-               <td width="40%" align="left"><a accesskey="p" href="chapter.glossaries.html">上一页</a>&nbsp;
+               <td width="40%" align="left"><a accesskey="p" href="chapter.glossaries.html">Prev</a>&nbsp;
                </td>
                <td width="20%" align="center">&nbsp;</td>
-               <td width="40%" align="right">&nbsp;<a accesskey="n" href="chapter.spellchecker.html">下一页</a></td>
+               <td width="40%" align="right">&nbsp;<a accesskey="n" href="chapter.spellchecker.html">Next</a></td>
             </tr>
             <tr>
-               <td width="40%" align="left" valign="top">第&nbsp;19&nbsp;章&nbsp;词汇表&nbsp;</td>
-               <td width="20%" align="center"><a accesskey="h" href="index.html">起始页</a></td>
-               <td width="40%" align="right" valign="top">&nbsp;第&nbsp;21&nbsp;章&nbsp;拼写检查</td>
+               <td width="40%" align="left" valign="top">Chapter&nbsp;18.&nbsp;词汇表&nbsp;</td>
+               <td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
+               <td width="40%" align="right" valign="top">&nbsp;Chapter&nbsp;20.&nbsp;拼写检查</td>
             </tr>
          </table>
       </div>

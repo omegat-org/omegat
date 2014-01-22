@@ -1,0 +1,95 @@
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <title>Appendix&nbsp;E.&nbsp;LanguageTool插件</title>
+      <link rel="stylesheet" type="text/css" href="OmegaT.css">
+      <meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
+      <link rel="home" href="index.html" title="OmegaT 3.0——用户向导">
+      <link rel="up" href="index.html" title="OmegaT 3.0——用户向导">
+      <link rel="prev" href="appendix.TokenizerPlugin.inOmegaT.html" title="Appendix&nbsp;D.&nbsp;解析器插件">
+      <link rel="next" href="appendix.ScriptingPlugin.inOmegaT.html" title="Appendix&nbsp;F.&nbsp;脚本化插件">
+   </head>
+   <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+      <div class="navheader">
+         <table width="100%" summary="Navigation header">
+            <tr>
+               <th colspan="3" align="center">Appendix&nbsp;E.&nbsp;LanguageTool插件</th>
+            </tr>
+            <tr>
+               <td width="20%" align="left"><a accesskey="p" href="appendix.TokenizerPlugin.inOmegaT.html">Prev</a>&nbsp;
+               </td>
+               <th width="60%" align="center">&nbsp;</th>
+               <td width="20%" align="right">&nbsp;<a accesskey="n" href="appendix.ScriptingPlugin.inOmegaT.html">Next</a></td>
+            </tr>
+         </table>
+         <hr>
+      </div>
+      <div class="appendix">
+         <div class="titlepage">
+            <div>
+               <div>
+                  <h1 class="title"><a name="appendix.LanguageToolPlugin.inOmegaT"></a>Appendix&nbsp;E.&nbsp;LanguageTool插件<a class="indexterm" name="d0e10829"></a></h1>
+               </div>
+            </div>
+         </div>
+         <div class="toc">
+            <dl class="toc">
+               <dt><span class="section"><a href="appendix.LanguageToolPlugin.inOmegaT.html#d0e10834">1. 介绍</a></span></dt>
+               <dt><span class="section"><a href="appendix.LanguageToolPlugin.inOmegaT.html#d0e10853">2. 安装和使用</a></span></dt>
+            </dl>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e10834"></a>1.&nbsp;介绍
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p><a class="ulink" href="http://www.languagetool.org" target="_top">LanguageTool</a>是开源风格的文法较对软件，可用于英语、法语、德语、波兰语、荷兰语、罗马尼亚语及其他语言（请参阅<a class="ulink" href="http://www.languagetool.org/languages/" target="_top">支持语言列表</a>）。
+            </p>
+            <p>您可以把LanguageTool视为可检测出简单的拼写检查器无法发现的错误的软件，例如混用了there/their、no/now等。它还可以检测一些语法错误。它不包括拼写检查。LanguageTool能发现对应于针对特定语言的配置文件中已定义规则的错误。</p>
+            <div class="figure"><a name="d0e10846"></a><p class="title"><b>Figure&nbsp;E.1.&nbsp;OmegaT中的LanguageTool</b></p>
+               <div class="figure-contents">
+                  <div class="screenshot">
+                     <div class="mediaobject"><img src="images/LanguageToolExample.png" alt="OmegaT中的LanguageTool"></div>
+                  </div>
+               </div>
+            </div><br class="figure-break"></div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e10853"></a>2.&nbsp;安装和使用
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>LanguageTool插件包含在OmegaT中。如果选择了<span class="guimenuitem">选项&gt;语言检查器</span>，则OmegaT会自动使用这个工具。适用的规则（如果有的话）取决于项目的源语言和目标语言。触发规则后，编辑器中相应的短语会加上蓝色下划线（请参阅上面图片中的<span class="emphasis"><em>also </em></span>和<span class="emphasis"><em>I didn't do nothing</em></span>）。在加了下划线的短语上悬停鼠标时，会出现相应的说明。
+            </p>
+            <div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+               <h3 class="title">不兼容性</h3>
+               <p>如果在/plugin文件夹中找到旧版本的LanguageTool，则它无法正常工作。请在启动OmegaT前删除/plugin文件夹中的LanguageTool。</p>
+            </div>
+         </div>
+      </div>
+      <div class="navfooter">
+         <hr>
+         <table width="100%" summary="Navigation footer">
+            <tr>
+               <td width="40%" align="left"><a accesskey="p" href="appendix.TokenizerPlugin.inOmegaT.html">Prev</a>&nbsp;
+               </td>
+               <td width="20%" align="center">&nbsp;</td>
+               <td width="40%" align="right">&nbsp;<a accesskey="n" href="appendix.ScriptingPlugin.inOmegaT.html">Next</a></td>
+            </tr>
+            <tr>
+               <td width="40%" align="left" valign="top">Appendix&nbsp;D.&nbsp;解析器插件&nbsp;</td>
+               <td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
+               <td width="40%" align="right" valign="top">&nbsp;Appendix&nbsp;F.&nbsp;脚本化插件</td>
+            </tr>
+         </table>
+      </div>
+   </body>
+</html>

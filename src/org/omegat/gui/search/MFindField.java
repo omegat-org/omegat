@@ -30,11 +30,11 @@ package org.omegat.gui.search;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
-import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 
 import javax.swing.AbstractAction;
@@ -45,8 +45,6 @@ import javax.swing.text.Document;
 import javax.swing.text.PlainDocument;
 import javax.swing.text.StringContent;
 import javax.swing.undo.UndoManager;
-
-import org.omegat.util.StaticUtils;
 
 /**
  * "Default text" feature inspired by http://stackoverflow.com/a/1739037/448068
@@ -59,9 +57,8 @@ import org.omegat.util.StaticUtils;
 public class MFindField extends JTextField implements FocusListener {
     public MFindField() {
         // Handle undo (CtrlCmd+Z);
-        KeyStroke undo = StaticUtils.onMacOSX() ? KeyStroke.getKeyStroke(KeyEvent.VK_Z,
-                InputEvent.META_MASK, false) : KeyStroke.getKeyStroke(KeyEvent.VK_Z,
-                InputEvent.CTRL_MASK, false);
+        KeyStroke undo = KeyStroke.getKeyStroke(KeyEvent.VK_Z,
+                Toolkit.getDefaultToolkit().getMenuShortcutKeyMask(), false);
         Action undoAction = new AbstractAction() {
             public void actionPerformed(ActionEvent e) {
                 undo();
@@ -71,9 +68,8 @@ public class MFindField extends JTextField implements FocusListener {
         getActionMap().put("UNDO", undoAction);
 
         // Handle redo (CtrlCmd+Y);
-        KeyStroke redo = StaticUtils.onMacOSX() ? KeyStroke.getKeyStroke(KeyEvent.VK_Y,
-                InputEvent.META_MASK, false) : KeyStroke.getKeyStroke(KeyEvent.VK_Y,
-                InputEvent.CTRL_MASK, false);
+        KeyStroke redo = KeyStroke.getKeyStroke(KeyEvent.VK_Y,
+                Toolkit.getDefaultToolkit().getMenuShortcutKeyMask(), false);
         Action redoAction = new AbstractAction() {
             public void actionPerformed(ActionEvent e) {
                 redo();

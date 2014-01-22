@@ -164,7 +164,7 @@ public final class Mnemonics extends Object {
         
         // OmegaT tweak
         // if we're running on non-MacOSX, we don't set any mnemonics
-		if( System.getProperty("os.name").toLowerCase().startsWith("mac os x") ) {   
+		if( System.getProperty("os.name").contains("OS X") ) {   
 			setMnemonic(item, 0);
         }
         else {

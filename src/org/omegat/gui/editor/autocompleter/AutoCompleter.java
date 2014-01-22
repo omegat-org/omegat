@@ -29,6 +29,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Point;
+import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import java.security.InvalidParameterException;
 import java.util.ArrayList;
@@ -160,18 +161,16 @@ public class AutoCompleter {
                 return true;
             }
             
-            if ((!onMac && StaticUtils.isKey(e, KeyEvent.VK_PAGE_UP, KeyEvent.CTRL_MASK))
-                    || (onMac && StaticUtils.isKey(e, KeyEvent.VK_PAGE_UP, KeyEvent.META_MASK))) {
+            if (StaticUtils.isKey(e, KeyEvent.VK_PAGE_UP,
+                    Toolkit.getDefaultToolkit().getMenuShortcutKeyMask())) {
                 if (popup.isVisible()) {
                     selectPreviousView();
                 }
                 return true;
             }
             
-            if ((!onMac && StaticUtils.isKey(e, KeyEvent.VK_SPACE, KeyEvent.CTRL_MASK))
-                    || (onMac && StaticUtils.isKey(e, KeyEvent.VK_SPACE, KeyEvent.META_MASK))
-                    || (!onMac && StaticUtils.isKey(e, KeyEvent.VK_PAGE_DOWN, KeyEvent.CTRL_MASK))
-                    || (onMac && StaticUtils.isKey(e, KeyEvent.VK_PAGE_DOWN, KeyEvent.META_MASK))) {
+            if (StaticUtils.isKey(e, KeyEvent.VK_SPACE, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask())
+                    || StaticUtils.isKey(e, KeyEvent.VK_PAGE_DOWN, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask())) {
                 if (popup.isVisible()) {
                     selectNextView();
                 }
@@ -292,9 +291,8 @@ public class AutoCompleter {
         sb.append("</b>");
         
         if (views.size() != 1) {
-            int modifier = onMac ? KeyEvent.META_MASK : KeyEvent.CTRL_MASK;
-            String nextKeyString = keyText(KeyEvent.VK_PAGE_DOWN, modifier);
-            String prevKeyString = keyText(KeyEvent.VK_PAGE_UP, modifier);
+            String nextKeyString = keyText(KeyEvent.VK_PAGE_DOWN, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask());
+            String prevKeyString = keyText(KeyEvent.VK_PAGE_UP, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask());
             
             if (views.size() >= 2) {
                 sb.append("<br>");

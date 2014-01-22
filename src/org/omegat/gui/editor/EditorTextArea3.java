@@ -29,6 +29,7 @@
 package org.omegat.gui.editor;
 
 import java.awt.Cursor;
+import java.awt.Toolkit;
 import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
@@ -278,8 +279,8 @@ public class EditorTextArea3 extends JEditorPane {
             } else {
                 processed = true;
             }
-        } else if ((!mac && StaticUtils.isKey(e, KeyEvent.VK_ENTER, InputEvent.CTRL_MASK))
-                || (mac && StaticUtils.isKey(e, KeyEvent.VK_ENTER, InputEvent.META_MASK))) {
+        } else if ((StaticUtils.isKey(e, KeyEvent.VK_ENTER,
+                Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()))) {
             // press Ctrl+ENTER (Cmd+Enter for MacOS)
             if (!controller.settings.isUseTabForAdvance()) {
                 controller.prevEntry();
@@ -290,8 +291,8 @@ public class EditorTextArea3 extends JEditorPane {
             KeyEvent ke = new KeyEvent(e.getComponent(), e.getID(), e.getWhen(), 0, KeyEvent.VK_ENTER, '\n');
             super.processKeyEvent(ke);
             processed = true;
-        } else if ((!mac && StaticUtils.isKey(e, KeyEvent.VK_A, InputEvent.CTRL_MASK))
-                || (mac && StaticUtils.isKey(e, KeyEvent.VK_A, InputEvent.META_MASK))) {
+        } else if (StaticUtils.isKey(e, KeyEvent.VK_A,
+                Toolkit.getDefaultToolkit().getMenuShortcutKeyMask())) {
             // handling Ctrl+A manually (Cmd+A for MacOS)
             setSelectionStart(doc.getTranslationStart());
             setSelectionEnd(doc.getTranslationEnd());
@@ -303,8 +304,8 @@ public class EditorTextArea3 extends JEditorPane {
             controller.toggleOrientation();
             this.setCursor(oldCursor);
             processed = true;
-        } else if ((!mac && StaticUtils.isKey(e, KeyEvent.VK_BACK_SPACE, InputEvent.CTRL_MASK))
-                || (mac && StaticUtils.isKey(e, KeyEvent.VK_BACK_SPACE, InputEvent.ALT_MASK))) {
+        } else if (StaticUtils.isKey(e, KeyEvent.VK_BACK_SPACE,
+                mac ? InputEvent.ALT_MASK : InputEvent.CTRL_MASK)) {
             // handle Ctrl+Backspace (Alt+Backspace for MacOS)
             try {
                 processed = wholeTagDelete(false);
@@ -321,8 +322,8 @@ public class EditorTextArea3 extends JEditorPane {
             } catch (BadLocationException ex) {
                 // do nothing
             }
-        } else if ((!mac && StaticUtils.isKey(e, KeyEvent.VK_DELETE, InputEvent.CTRL_MASK))
-                || (mac && StaticUtils.isKey(e, KeyEvent.VK_DELETE, InputEvent.ALT_MASK))) {
+        } else if (StaticUtils.isKey(e, KeyEvent.VK_DELETE,
+                mac ? InputEvent.ALT_MASK : InputEvent.CTRL_MASK)) {
             // handle Ctrl+Backspace (Alt+Delete for MacOS)
             try {
                 processed = wholeTagDelete(true);
@@ -339,26 +340,22 @@ public class EditorTextArea3 extends JEditorPane {
             } catch (BadLocationException ex) {
                 // do nothing
             }
-        } else if ((!mac && StaticUtils.isKey(e, KeyEvent.VK_PAGE_UP, InputEvent.CTRL_MASK))
-                || (mac && StaticUtils.isKey(e, KeyEvent.VK_PAGE_UP, InputEvent.META_MASK))) {
+        } else if (StaticUtils.isKey(e, KeyEvent.VK_PAGE_UP,
+                Toolkit.getDefaultToolkit().getMenuShortcutKeyMask())) {
             // Ctrl+PgUp - to the begin of document(Cmd+PgUp for MacOS)
             setCaretPosition(0);
             processed = true;
-        } else if ((!mac && StaticUtils.isKey(e, KeyEvent.VK_PAGE_DOWN, InputEvent.CTRL_MASK))
-                || (mac && StaticUtils.isKey(e, KeyEvent.VK_PAGE_DOWN, InputEvent.META_MASK))) {
+        } else if (StaticUtils.isKey(e, KeyEvent.VK_PAGE_DOWN,
+                Toolkit.getDefaultToolkit().getMenuShortcutKeyMask())) {
             // Ctrl+PgDn - to the end of document(Cmd+PgDn for MacOS)
             setCaretPosition(getOmDocument().getLength());
             processed = true;
-        } else if ((!mac && StaticUtils.isKey(e, KeyEvent.VK_LEFT, InputEvent.CTRL_MASK))
-                || (mac && StaticUtils.isKey(e, KeyEvent.VK_LEFT, InputEvent.ALT_MASK))
-                || (!mac && StaticUtils.isKey(e, KeyEvent.VK_LEFT, InputEvent.CTRL_MASK | InputEvent.SHIFT_MASK))
-                || (mac && StaticUtils.isKey(e, KeyEvent.VK_LEFT, InputEvent.ALT_MASK | InputEvent.SHIFT_MASK))) {
+        } else if (StaticUtils.isKey(e, KeyEvent.VK_LEFT, mac ? InputEvent.ALT_MASK : InputEvent.CTRL_MASK)
+                || StaticUtils.isKey(e, KeyEvent.VK_LEFT, (mac ? InputEvent.ALT_MASK : InputEvent.CTRL_MASK) | InputEvent.SHIFT_MASK)) {
             // Ctrl+Left - skip to the end of tag (Alt+Left for MacOS)
             processed = moveCursorOverTag((e.getModifiers() & KeyEvent.SHIFT_MASK) != 0, false);
-        } else if ((!mac && StaticUtils.isKey(e, KeyEvent.VK_RIGHT, InputEvent.CTRL_MASK))
-                || (mac && StaticUtils.isKey(e, KeyEvent.VK_RIGHT, InputEvent.ALT_MASK))
-                || (!mac && StaticUtils.isKey(e, KeyEvent.VK_RIGHT, InputEvent.CTRL_MASK | InputEvent.SHIFT_MASK))
-                || (mac && StaticUtils.isKey(e, KeyEvent.VK_RIGHT, InputEvent.ALT_MASK | InputEvent.SHIFT_MASK))) {
+        } else if (StaticUtils.isKey(e, KeyEvent.VK_RIGHT, mac ? InputEvent.ALT_MASK : InputEvent.CTRL_MASK)
+                || StaticUtils.isKey(e, KeyEvent.VK_RIGHT, (mac ? InputEvent.ALT_MASK : InputEvent.CTRL_MASK) | InputEvent.SHIFT_MASK)) {
             // Ctrl+Right - skip to the end of tag (Alt+Right for MacOS)
             processed = moveCursorOverTag((e.getModifiers() & KeyEvent.SHIFT_MASK) != 0, true);
         }

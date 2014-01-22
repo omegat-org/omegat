@@ -58,7 +58,7 @@ public final class Platform {
         if (osName != null && osArch != null) {
             if (osName.startsWith("Linux")) {
                 osType = osArch.contains("64") ? OsType.LINUX64 : OsType.LINUX32;
-            } else if (osName.startsWith("Mac")) {
+            } else if (osName.contains("OS X")) {
                 osType = osArch.contains("64") ? OsType.MAC64 : OsType.MAC32;
             } else if (osName.startsWith("Windows")) {
                 osType = osArch.contains("64") ? OsType.WIN64 : OsType.WIN32;

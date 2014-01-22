@@ -27,6 +27,7 @@ package org.omegat.gui.editor.autocompleter;
 
 import java.awt.Component;
 import java.awt.Point;
+import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import java.util.List;
 
@@ -85,7 +86,6 @@ public abstract class AutoCompleterTableView extends AbstractAutoCompleterView {
     
     @Override
     public boolean processKeys(KeyEvent e, boolean visible) {
-        boolean onMac = StaticUtils.onMacOSX();
         
         if (StaticUtils.isKey(e, KeyEvent.VK_UP, 0)) {
             // process key UP
@@ -133,16 +133,14 @@ public abstract class AutoCompleterTableView extends AbstractAutoCompleterView {
             return true;
         }
         
-        if ((!onMac && StaticUtils.isKey(e, KeyEvent.VK_HOME, KeyEvent.CTRL_MASK))
-                    || (onMac && StaticUtils.isKey(e, KeyEvent.VK_HOME, KeyEvent.META_MASK))) {
+        if (StaticUtils.isKey(e, KeyEvent.VK_HOME, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask())) {
             if (visible) {
                 selectFirstPossibleValue();
             }
             return true;
         }
 
-        if ((!onMac && StaticUtils.isKey(e, KeyEvent.VK_END, KeyEvent.CTRL_MASK))
-                    || (onMac && StaticUtils.isKey(e, KeyEvent.VK_END, KeyEvent.META_MASK))) {
+        if (StaticUtils.isKey(e, KeyEvent.VK_END, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask())) {
             if (visible) {
                 selectLastPossibleValue();
             }

@@ -55,6 +55,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.omegat.core.data.ProtectedPart;
+import org.omegat.util.Platform.OsType;
 
 /**
  * Static functions taken from CommandThread to reduce file size.
@@ -530,14 +531,11 @@ public class StaticUtils {
             return m_configDir;
         }
 
-        String os; // name of operating system
+        OsType os = Platform.getOsType(); // name of operating system
         String home; // user home directory
 
         // get os and user home properties
         try {
-            // get the name of the operating system
-            os = System.getProperty("os.name");
-
             // get the user's home directory
             home = System.getProperty("user.home");
         } catch (SecurityException e) {
@@ -557,14 +555,14 @@ public class StaticUtils {
 
         // if os or user home is null or empty, we cannot reliably determine
         // the config dir, so we use the current working dir (= empty string)
-        if ((os == null) || (os.length() == 0) || (home == null) || (home.length() == 0)) {
+        if ((os == null) || (home == null) || (home.length() == 0)) {
             // set the config dir to the current working dir
             m_configDir = new File(".").getAbsolutePath() + File.separator;
             return m_configDir;
         }
 
         // check for Windows versions
-        if (os.startsWith("Windows")) {
+        if (os == OsType.WIN32 || os == OsType.WIN64) {
             String appData = null;
 
             // We do not use %APPDATA%
@@ -595,14 +593,13 @@ public class StaticUtils {
         }
         // Check for UNIX varieties
         // Solaris is generally detected as SunOS
-        else if (os.equals("Linux") || os.equals("SunOS") || os.equals("Solaris") || os.equals("FreeBSD") ||
-                 os.equals("NetBSD") || os.equals("DragonFly")) {
+        else if (os == OsType.LINUX32 || os == OsType.LINUX64 || os == OsType.OTHER) {
             // set the config dir to the user's home dir + "/.omegat/", so it's
             // hidden
             m_configDir = home + UNIX_CONFIG_DIR;
         }
         // check for Mac OS X
-        else if (os.equals("Mac OS X")) {
+        else if (onMacOSX()) {
             // set the config dir to the user's home dir +
             // "/Library/Preferences/OmegaT/"
             m_configDir = home + OSX_CONFIG_DIR;
@@ -682,18 +679,9 @@ public class StaticUtils {
      * Returns true if running on Mac OS X
      */
     public static boolean onMacOSX() {
-        // get os property
-        String os; // name of operating system
-        try {
-            // get the name of the operating system
-            os = System.getProperty("os.name");
-        } catch (SecurityException e) {
-            // access to the os property is restricted,
-            // assume we're not on a Mac
-            return false;
-        }
+        OsType os = Platform.getOsType();
+        return os == OsType.MAC32 || os == OsType.MAC64;
 
-        return os.equals("Mac OS X");
     }
 
     /**

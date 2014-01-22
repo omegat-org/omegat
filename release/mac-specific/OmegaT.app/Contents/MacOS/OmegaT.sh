@@ -1,6 +1,6 @@
 #!/bin/bash
 
-cd `dirname $0`/Java
+cd "$(dirname "$0")/Java"
 
 MACOS="-Xdock:name=OmegaT -Xdock:icon=../../Resources/OmegaT.icns"
 

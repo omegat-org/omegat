@@ -29,7 +29,7 @@
          <div class="titlepage">
             <div>
                <div>
-                  <h1 class="title"><a name="chapter.translation.memories"></a>第13章 翻訳メモリ<a class="indexterm" name="d0e6323"></a><a class="indexterm" name="d0e6326"></a></h1>
+                  <h1 class="title"><a name="chapter.translation.memories"></a>第13章 翻訳メモリ<a class="indexterm" name="d0e6320"></a><a class="indexterm" name="d0e6323"></a></h1>
                </div>
             </div>
          </div>
@@ -41,7 +41,7 @@
                      <dt><span class="section"><a href="chapter.translation.memories.html#tmx.files.location.and.purpose">1.1. tmx フォルダー − 場所と目的</a></span></dt>
                      <dt><span class="section"><a href="chapter.translation.memories.html#tmx.backup">1.2. TMX ファイルのバックアップ</a></span></dt>
                      <dt><span class="section"><a href="chapter.translation.memories.html#tmx.files.and.language">1.3. TMX ファイルと言語</a></span></dt>
-                     <dt><span class="section"><a href="chapter.translation.memories.html#d0e6609">1.4. 現在の原文に存在しない分節</a></span></dt>
+                     <dt><span class="section"><a href="chapter.translation.memories.html#d0e6606">1.4. 現在の原文に存在しない分節</a></span></dt>
                   </dl>
                </dd>
                <dt><span class="section"><a href="chapter.translation.memories.html#using.translation.memories.from.previous.projects">2. 翻訳メモリの再利用</a></span></dt>
@@ -50,10 +50,10 @@
                      <dt><span class="section"><a href="chapter.translation.memories.html#importing.and.exporting.translation.memories">2.1. 翻訳メモリのインポートとエクスポート</a></span></dt>
                      <dt><span class="section"><a href="chapter.translation.memories.html#Creating.a.translation.memory.for.selected.documents">2.2. 特定文書向け翻訳メモリの作成</a></span></dt>
                      <dt><span class="section"><a href="chapter.translation.memories.html#sharing.translation.memories">2.3. 翻訳メモリの共有</a></span></dt>
-                     <dt><span class="section"><a href="chapter.translation.memories.html#d0e6760">2.4. TMX ファイルと代替言語ペア</a></span></dt>
+                     <dt><span class="section"><a href="chapter.translation.memories.html#d0e6757">2.4. TMX ファイルと代替言語ペア</a></span></dt>
                   </dl>
                </dd>
-               <dt><span class="section"><a href="chapter.translation.memories.html#d0e6776">3. 対訳付きの原文ファイル</a></span></dt>
+               <dt><span class="section"><a href="chapter.translation.memories.html#d0e6773">3. 対訳付きの原文ファイル</a></span></dt>
                <dt><span class="section"><a href="chapter.translation.memories.html#pseudo.translated.memory">4. 疑似（Pseudo）翻訳メモリ</a></span></dt>
                <dt><span class="section"><a href="chapter.translation.memories.html#upgrading.translation.memories">5. 翻訳メモリの更新</a></span></dt>
             </dl>
@@ -80,12 +80,12 @@
                </p>
                <div class="variablelist">
                   <dl class="variablelist">
-                     <dt><span class="term"><a class="indexterm" name="d0e6344"></a>omegat フォルダー</span></dt>
+                     <dt><span class="term"><a class="indexterm" name="d0e6341"></a>omegat フォルダー</span></dt>
                      <dd>
                         <p>omegat フォルダーには、<code class="filename">project_save.tmx</code> と、おそらく複数のバックアップファイルが含まれています。<code class="filename">project_save.tmx</code> ファイルには、プロジェクトを開始してから記録されたすべての分節が含まれています。このファイルはプロジェクトに必ず存在します。内容は、常に原文分節のアルファベット順に並べ替えされています。
                         </p>
                      </dd>
-                     <dt><span class="term"><a class="indexterm" name="d0e6363"></a>メインプロジェクトフォルダー</span></dt>
+                     <dt><span class="term"><a class="indexterm" name="d0e6360"></a>メインプロジェクトフォルダー</span></dt>
                      <dd>
                         <p>メインプロジェクトフォルダーには３つの TMX ファイルが作成されます。<code class="filename">プロジェクト名-omegat.tmx</code>、<code class="filename">プロジェクト名-level1.tmx</code>、<code class="filename">プロジェクト名-level2.tmx</code> です。「プロジェクト名」の部分には、実際のプロジェクト名が入ります。
                         </p>
@@ -107,7 +107,7 @@
                         <p>これらのファイルは、プロジェクトの内部翻訳メモリ <code class="filename">project_save.tmx</code> の複製と言えます。ただし、現在の原文に存在しない分節は含みません。これらのファイルは名前が変わっただけで、その内容については同一性を保っています。そのため、別のプロジェクトの <code class="filename">tm</code> フォルダーにコピーして使うことができます（次の項を参照してください）。
                         </p>
                      </dd>
-                     <dt><span class="term"><code class="filename"><a class="indexterm" name="d0e6416"></a>tm</code> フォルダー</span></dt>
+                     <dt><span class="term"><code class="filename"><a class="indexterm" name="d0e6413"></a>tm</code> フォルダー</span></dt>
                      <dd>
                         <p>tm フォルダーには補助的な翻訳メモリ（TMX ファイル）をいくつでも置いておくことができます。これらのファイルは、上記で説明した３つの形態のいずれでも使用できます。他のコンピューター翻訳支援ツールがエクスポート（あるいはインポート）できる TMX
                            ファイルの形式も、たいていはこの３つのうちのどれかです。可能であれば、OmegaT 専用形式の TMX ファイル（上記を参照）を使うのが、もちろん望ましい方法です。そうすれば、分節内の整形情報も利用できます。
@@ -117,14 +117,14 @@
                         </p>
                         <p><code class="filename">tm</code> フォルダーの翻訳メモリに、同一の原文分節が複数存在し、しかもそれぞれの訳文が異なる、という事態はじゅうぶんに起こりえることです。複数の TMX ファイルは、そのファイル名の順番で読み込まれます。また TMX ファイル内の分節は、一行ずつ順次読み込まれます。この場合、原文分節が一致する最後の分節が、優先的に使われることになります（注意：もちろん、そもそもこのような事態が起こらないようにできるなら、それが一番望ましい対応です）。
                         </p>
-                        <p>tm フォルダーに配置する TMX ファイルは、gzip 形式で圧縮しておくこともできます。<a class="indexterm" name="d0e6450"></a></p>
+                        <p>tm フォルダーに配置する TMX ファイルは、gzip 形式で圧縮しておくこともできます。<a class="indexterm" name="d0e6447"></a></p>
                      </dd>
-                     <dt><span class="term"><a class="indexterm" name="d0e6457"></a>tm/auto フォルダー<a class="indexterm" name="d0e6465"></a></span></dt>
+                     <dt><span class="term"><a class="indexterm" name="d0e6454"></a>tm/auto フォルダー<a class="indexterm" name="d0e6462"></a></span></dt>
                      <dd>
                         <p>補助的な翻訳メモリの内容がすべて正しい、ということがあらかじめはっきりと分かっている場合は、そのファイルを <span class="bold"><strong>tm/auto</strong></span> フォルダーに置いてください。そこから自動挿入される訳文には、「<span class="emphasis"><em>[参考]</em></span>」という接頭辞が付きません。この方法は、効率の良い<span class="bold"><strong>下訳</strong></span>になります。「auto」の翻訳メモリから原文が一致する分節が見つかった箇所は、ユーザーの手を一切わずらわせることなく、すべてプロジェクトのメイン翻訳メモリに移し替えられます。
                         </p>
                      </dd>
-                     <dt><span class="term"><a class="indexterm" name="d0e6484"></a>tm/penalty-xxx フォルダー</span></dt>
+                     <dt><span class="term"><a class="indexterm" name="d0e6481"></a>tm/penalty-xxx フォルダー</span></dt>
                      <dd>
                         <p>品質の高い翻訳メモリと、そうではない翻訳メモリを区別できると役に立つ場合があります。分野の違いや依頼主の都合、改版の状態など、理由はいろいろあるでしょう。「penalty-xxx」（「xxx」は 0 から 100 までの数値）という名前のフォルダーに翻訳メモリを置くと、そこから見つかった参考訳文の一致率は、フォルダー名の末尾に付いた数値の分だけ引き下げられます。たとえば「Penalty-30」という名前のフォルダーがあったとします。そこに置かれた翻訳メモリから
                            100% 一致する分節が見つかった場合、一致率は 70% に引き下げられて表示されます。このペナルティは、参考訳文候補に併記される３種類の一致率すべてに適用されます。一致率 75、80、90 の場合は、45、50、60 に引き下げられます。
@@ -149,7 +149,7 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="tmx.backup"></a>1.2. TMX ファイルのバックアップ<a class="indexterm" name="d0e6535"></a></h3>
+                        <h3 class="title"><a name="tmx.backup"></a>1.2. TMX ファイルのバックアップ<a class="indexterm" name="d0e6532"></a></h3>
                      </div>
                   </div>
                </div>
@@ -184,7 +184,7 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="tmx.files.and.language"></a>1.3. TMX ファイルと言語<a class="indexterm" name="d0e6582"></a></h3>
+                        <h3 class="title"><a name="tmx.files.and.language"></a>1.3. TMX ファイルと言語<a class="indexterm" name="d0e6579"></a></h3>
                      </div>
                   </div>
                </div>
@@ -205,7 +205,7 @@
                   </ul>
                </div>
                <p>プロジェクトの言語コードと TMX の言語コードが完全に一致すると、分節がメモリに読み込まれます。言語コードが一致して国コードが一致しない場合でも、分節はやはり読み込まれます。言語コードと国コードいずれも一致しない場合、その分節は無視されます。</p>
-               <p><a class="indexterm" name="d0e6603"></a>TMX ファイルには通常、複数の異なる言語要素から成る翻訳単位が含まれています。もし原文分節と一致する言語要素が見つかったにもかかわらず、訳文言語に当たる言語要素が存在しない場合は、他のすべての言語要素が（その言語が何であるかに関わらず）読み込まれます。たとえばプロジェクトの言語ペアが
+               <p><a class="indexterm" name="d0e6600"></a>TMX ファイルには通常、複数の異なる言語要素から成る翻訳単位が含まれています。もし原文分節と一致する言語要素が見つかったにもかかわらず、訳文言語に当たる言語要素が存在しない場合は、他のすべての言語要素が（その言語が何であるかに関わらず）読み込まれます。たとえばプロジェクトの言語ペアが
                   DE-FR だったとしましょう。この場合、翻訳メモリに DE-FR ペアが見つからず、DE-EN しかなかったとしても、それを表示することによって何がしかの助けにはなるはずです。
                </p>
             </div>
@@ -213,7 +213,7 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="d0e6609"></a>1.4. 現在の原文に存在しない分節<a class="indexterm" name="d0e6612"></a></h3>
+                        <h3 class="title"><a name="d0e6606"></a>1.4. 現在の原文に存在しない分節<a class="indexterm" name="d0e6609"></a></h3>
                      </div>
                   </div>
                </div>
@@ -225,7 +225,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="using.translation.memories.from.previous.projects"></a>2. 翻訳メモリの再利用<a class="indexterm" name="d0e6627"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="using.translation.memories.from.previous.projects"></a>2. 翻訳メモリの再利用<a class="indexterm" name="d0e6624"></a></h2>
                   </div>
                </div>
             </div>
@@ -267,7 +267,7 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="importing.and.exporting.translation.memories"></a>2.1. 翻訳メモリのインポートとエクスポート<a class="indexterm" name="d0e6689"></a></h3>
+                        <h3 class="title"><a name="importing.and.exporting.translation.memories"></a>2.1. 翻訳メモリのインポートとエクスポート<a class="indexterm" name="d0e6686"></a></h3>
                      </div>
                   </div>
                </div>
@@ -342,7 +342,7 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="sharing.translation.memories"></a>2.3. 翻訳メモリの共有<a class="indexterm" name="d0e6749"></a></h3>
+                        <h3 class="title"><a name="sharing.translation.memories"></a>2.3. 翻訳メモリの共有<a class="indexterm" name="d0e6746"></a></h3>
                      </div>
                   </div>
                </div>
@@ -353,7 +353,7 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="d0e6760"></a>2.4. TMX ファイルと代替言語ペア<a class="indexterm" name="d0e6763"></a></h3>
+                        <h3 class="title"><a name="d0e6757"></a>2.4. TMX ファイルと代替言語ペア<a class="indexterm" name="d0e6760"></a></h3>
                      </div>
                   </div>
                </div>
@@ -368,7 +368,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="d0e6776"></a>3. 対訳付きの原文ファイル<a class="indexterm" name="d0e6779"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="d0e6773"></a>3. 対訳付きの原文ファイル<a class="indexterm" name="d0e6776"></a></h2>
                   </div>
                </div>
             </div>
@@ -383,7 +383,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="pseudo.translated.memory"></a>4. 疑似（Pseudo）翻訳メモリ<a class="indexterm" name="d0e6798"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="pseudo.translated.memory"></a>4. 疑似（Pseudo）翻訳メモリ<a class="indexterm" name="d0e6795"></a></h2>
                   </div>
                </div>
             </div>
@@ -417,7 +417,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="upgrading.translation.memories"></a>5. 翻訳メモリの更新<a class="indexterm" name="d0e6849"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="upgrading.translation.memories"></a>5. 翻訳メモリの更新<a class="indexterm" name="d0e6846"></a></h2>
                   </div>
                </div>
             </div>

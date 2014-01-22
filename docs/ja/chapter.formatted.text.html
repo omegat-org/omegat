@@ -29,7 +29,7 @@
          <div class="titlepage">
             <div>
                <div>
-                  <h1 class="title"><a name="chapter.formatted.text"></a>第12章 整形されたテキストを扱う<a class="indexterm" name="d0e6075"></a><a class="indexterm" name="d0e6080"></a></h1>
+                  <h1 class="title"><a name="chapter.formatted.text"></a>第12章 整形されたテキストを扱う<a class="indexterm" name="d0e6072"></a><a class="indexterm" name="d0e6077"></a></h1>
                </div>
             </div>
          </div>
@@ -39,7 +39,7 @@
                <dt><span class="section"><a href="chapter.formatted.text.html#tag.operations">2. タグ操作</a></span></dt>
                <dt><span class="section"><a href="chapter.formatted.text.html#tag.group.nesting">3. タググループの入れ子</a></span></dt>
                <dt><span class="section"><a href="chapter.formatted.text.html#tag.group.overlapping">4. タググループの重なり</a></span></dt>
-               <dt><span class="section"><a href="chapter.formatted.text.html#d0e6225">5. タグ検証の設定</a></span></dt>
+               <dt><span class="section"><a href="chapter.formatted.text.html#d0e6222">5. タグ検証の設定</a></span></dt>
                <dt><span class="section"><a href="chapter.formatted.text.html#tag.group.validation">6. タググループの検証</a></span></dt>
                <dt><span class="section"><a href="chapter.formatted.text.html#hints.for.tag.management">7. タグ管理についてのヒント</a></span></dt>
             </dl>
@@ -51,17 +51,17 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="formatting.tags"></a>1. 整形タグ<a class="indexterm" name="d0e6090"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="formatting.tags"></a>1. 整形タグ<a class="indexterm" name="d0e6087"></a></h2>
                   </div>
                </div>
             </div>
-            <p><a class="indexterm" name="d0e6094"></a><span class="bold"><strong>タグの名前：</strong></span></p>
+            <p><a class="indexterm" name="d0e6091"></a><span class="bold"><strong>タグの名前：</strong></span></p>
             <p>タグ名は１から３文字の文字と数字からなります。タグにはショートカット文字が割り当てられますが、異なるタグが同じショートカット文字を共有する場合もあります。しかしタグの種類に応じて異なる数字が割り振られるため、区別できるようになっています。ショートカット文字は、できるだけタグの意味を反映するように選ばれます（たとえば太字の
                Bold には b、斜体の Italics には i など）。
             </p>
-            <p><a class="indexterm" name="d0e6104"></a><span class="bold"><strong>タグの番号付け</strong></span></p>
+            <p><a class="indexterm" name="d0e6101"></a><span class="bold"><strong>タグの番号付け</strong></span></p>
             <p>タグに付けられる数字は、タググループごとに増えていきます。ここで言う「タググループ」とは、単一タグ（&lt;i0&gt; と &lt;/i0&gt; のような）を指します。分節のなかで最初のグループ（ペアもしくは単一）が数字 0 となり、次が 1 となります。以下に示す最初の例には、３つのタググループ（ペア、単一、そしてまた別のペア）があります。２つめの例にあるのは、１つのグループ（ペア）だけです。</p>
-            <p><a class="indexterm" name="d0e6114"></a><span class="bold"><strong>単一とペア：</strong></span></p>
+            <p><a class="indexterm" name="d0e6111"></a><span class="bold"><strong>単一とペア：</strong></span></p>
             <p>タグは常に単一であるか、ペアになっています。単一タグは、タグの周囲にあるテキストには影響しない整形情報を示します（たとえば、追加の空白や改行などです）。</p>
             <p><code class="literal">&lt;b0&gt;&lt;Ctr+N&gt;&lt;/b0&gt;, &lt;br1&gt;&lt;b2&gt;&lt;Enter&gt;&lt;/b2&gt;&lt;分節 2132&gt;</code></p>
             <p>&lt;br1&gt;が単一タグで、周囲のテキストにはまったく影響しません。通常、ペアになったタグは、開きタグと閉じタグの間に挟まれた文字列に適用される整形情報を示しています。下の例の &lt;b0&gt; と &lt;/b0&gt; がペアになっており、テキスト「log.txt」に作用しています。開きタグは必ず、対応する閉じタグの前に現れる点に、注意してください。</p>
@@ -73,18 +73,18 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="tag.operations"></a>2. タグ操作<a class="indexterm" name="d0e6138"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="tag.operations"></a>2. タグ操作<a class="indexterm" name="d0e6135"></a></h2>
                   </div>
                </div>
             </div>
             <p>タグを操作する場合には細心の注意が必要です。もし誤って変更してしまうと、最終的なファイルの整形が壊れてしまうかもしれません。基本原則は「タグが連続する場合は、その順番を崩さない」です。しかし、ある一定のルールを遵守すれば、この基本原則を曲げることも可能です。</p>
-            <p><span class="bold"><strong><a class="indexterm" name="d0e6147"></a>タグの複製：</strong></span></p>
+            <p><span class="bold"><strong><a class="indexterm" name="d0e6144"></a>タグの複製：</strong></span></p>
             <p>タググループを複製するには、単に好きな場所にコピーするだけです。タグがペアになっているタググループでは、開きタグは閉じタグの前になければならないということを忘れないでください。グループを複製した箇所は、元と同じように整形されます。</p>
             <p>例：</p>
             <p><code class="literal">&lt;b0&gt;この書式&lt;/b0&gt;を、こちらにも適用しましょう。&lt;分節 0001&gt;</code></p>
             <p>複製後：</p>
             <p><code class="literal">&lt;b0&gt;この書式&lt;/b0&gt;を、&lt;b0&gt;こちらにも適用&lt;/b0&gt;しました。&lt;分節 0001&gt;</code></p>
-            <p><span class="bold"><strong><a class="indexterm" name="d0e6167"></a>タググループの削除：</strong></span></p>
+            <p><span class="bold"><strong><a class="indexterm" name="d0e6164"></a>タググループの削除：</strong></span></p>
             <p>タググループを削除するには、分節から取り除けばいいだけです。ペアになっているタググループでは、整形情報を適切に削除するため、開きタグと閉じタグの両方を削除しなければならないことに注意してください。さもなければ訳文ファイルが壊れてしまう可能性があります。タググループを削除することで、関連する整形情報が訳文ファイルから削除されます。</p>
             <p>例：</p>
             <p><code class="literal">&lt;b0&gt;この書式&lt;/b0&gt;を削除します。&lt;分節 0001&gt;</code></p>
@@ -95,7 +95,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="tag.group.nesting"></a>3. タググループの入れ子<a class="indexterm" name="d0e6188"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="tag.group.nesting"></a>3. タググループの入れ子<a class="indexterm" name="d0e6185"></a></h2>
                   </div>
                </div>
             </div>
@@ -109,7 +109,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="tag.group.overlapping"></a>4. タググループの重なり<a class="indexterm" name="d0e6208"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="tag.group.overlapping"></a>4. タググループの重なり<a class="indexterm" name="d0e6205"></a></h2>
                   </div>
                </div>
             </div>
@@ -123,7 +123,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="d0e6225"></a>5. タグ検証の設定
+                     <h2 class="title" style="clear: both"><a name="d0e6222"></a>5. タグ検証の設定
                      </h2>
                   </div>
                </div>
@@ -169,11 +169,11 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="tag.group.validation"></a>6. タググループの検証<a class="indexterm" name="d0e6269"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="tag.group.validation"></a>6. タググループの検証<a class="indexterm" name="d0e6266"></a></h2>
                   </div>
                </div>
             </div>
-            <p>タグ検証機能は、（故意か過失かによらず）変更されたタグを検知し、影響のある分節を表示します。<span class="guimenuitem">Ctrl+T<a class="indexterm" name="d0e6278"></a></span> でこの機能を使用できます。専用のウィンドウには、壊れたもしくは誤ったと思しきタグを含む分節がすべて表示されます。タグ検証機能により、タグの修正と翻訳文書の再生成が簡単になります。<span class="guimenuitem">Ctrl+T</span> により表示されるウインドウには３列の表があります。それぞれ分節へのリンク、原文の分節、訳文の分節です。
+            <p>タグ検証機能は、（故意か過失かによらず）変更されたタグを検知し、影響のある分節を表示します。<span class="guimenuitem">Ctrl+T<a class="indexterm" name="d0e6275"></a></span> でこの機能を使用できます。専用のウィンドウには、壊れたもしくは誤ったと思しきタグを含む分節がすべて表示されます。タグ検証機能により、タグの修正と翻訳文書の再生成が簡単になります。<span class="guimenuitem">Ctrl+T</span> により表示されるウインドウには３列の表があります。それぞれ分節へのリンク、原文の分節、訳文の分節です。
             </p>
             <div class="figure"><a name="tag.validation"></a><p class="title"><b>図12.1 タグ検証項目</b></p>
                <div class="figure-contents">
@@ -186,7 +186,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="hints.for.tag.management"></a>7. タグ管理についてのヒント<a class="indexterm" name="d0e6303"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="hints.for.tag.management"></a>7. タグ管理についてのヒント<a class="indexterm" name="d0e6300"></a></h2>
                   </div>
                </div>
             </div>

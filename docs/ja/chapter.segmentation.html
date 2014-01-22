@@ -42,7 +42,7 @@
                <dt><span class="section"><a href="chapter.segmentation.html#few.simple.examples">4. 簡単な設定例</a></span></dt>
             </dl>
          </div>
-         <p>翻訳メモリツールは、分節と呼ばれるテキスト単位で処理を行います。<span class="application">OmegaT</span> がテキストを分節化する方法は２つあります。段落単位の分節化と、文単位の分節化（「ルールベースの分節化」とも呼ばれます）です。分節化の方法を選択するには、メインメニューから<span class="guimenu"><a class="indexterm" name="d0e6880"></a>［プロジェクト］</span> → <span class="guimenuitem">［プロジェクト設定...］</span>を開き、表示されるチェックボックスを使用してください。段落単位の分節化は、高度に文学的または芸術的な翻訳のような、一部のケースでは有用です。これらの翻訳では、文脈に応じて翻訳者が文の順番を入れ替えることがあるためです。しかし大半のプロジェクトでは、文単位の分節化が望ましいでしょう。その方が、過去の翻訳と一致しやすい（再利用しやすい）ためです。文単位の分節化を選択した場合、分節化規則は、メインメニューの<span class="guimenu"><a class="indexterm" name="d0e6891"></a>［設定］</span> → <span class="guimenuitem">［分節化...］</span>で設定できます。
+         <p>翻訳メモリツールは、分節と呼ばれるテキスト単位で処理を行います。<span class="application">OmegaT</span> がテキストを分節化する方法は２つあります。段落単位の分節化と、文単位の分節化（「ルールベースの分節化」とも呼ばれます）です。分節化の方法を選択するには、メインメニューから<span class="guimenu"><a class="indexterm" name="d0e6877"></a>［プロジェクト］</span> → <span class="guimenuitem">［プロジェクト設定...］</span>を開き、表示されるチェックボックスを使用してください。段落単位の分節化は、高度に文学的または芸術的な翻訳のような、一部のケースでは有用です。これらの翻訳では、文脈に応じて翻訳者が文の順番を入れ替えることがあるためです。しかし大半のプロジェクトでは、文単位の分節化が望ましいでしょう。その方が、過去の翻訳と一致しやすい（再利用しやすい）ためです。文単位の分節化を選択した場合、分節化規則は、メインメニューの<span class="guimenu"><a class="indexterm" name="d0e6888"></a>［設定］</span> → <span class="guimenuitem">［分節化...］</span>で設定できます。
          </p>
          <p>信頼できる分節化規則が多くの言語で設定済みのため、新たな独自規則を作成する必要は、あまりないでしょう。一方で、特定の状況では、翻訳する原文に合わせて分節化規則を調整することで、大きく生産性を上げることができるようになります。</p>
          <p><span class="bold"><strong>警告：</strong></span>ファイルフィルターの設定を変更すると、分節が変化することがあります。場合によっては、翻訳を一からやり直すことになるかもしれません。このとき、以前は有効だった翻訳済みの分節は、翻訳メモリ内で、現在の原文に存在しない分節になります。またプロジェクトを開いているときに分節化の設定を変更すると、変更を適用するためにプロジェクトの再読み込みが必要になります。
@@ -51,7 +51,7 @@
          </p>
          <div class="variablelist">
             <dl class="variablelist">
-               <dt><span class="term"><a class="indexterm" name="d0e6913"></a>構造単位の分節化</span></dt>
+               <dt><span class="term"><a class="indexterm" name="d0e6910"></a>構造単位の分節化</span></dt>
                <dd>
                   <p><span class="application">OmegaT</span> は、まず構造単位の分節化を行うため、文書の構文を解析します。この処理のあいだ、分節作成のために参照される内容は、原文ファイルの構造のみです。
                   </p>
@@ -59,7 +59,7 @@
                      や HTML ファイルでは、オブジェクトの属性も翻訳の対象になることがあります。このような場合は、属性値だけを分節として取り出します。
                   </p>
                </dd>
-               <dt><span class="term"><a class="indexterm" name="d0e6928"></a>文単位の分節化</span></dt>
+               <dt><span class="term"><a class="indexterm" name="d0e6925"></a>文単位の分節化</span></dt>
                <dd>
                   <p>原文ファイルを論理的な区切りで分節化した後、<span class="application">OmegaT</span> はさらにそれらを文単位で分節化します。
                   </p>
@@ -70,7 +70,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="segmentation.rules"></a>1. 分節化規則<a class="indexterm" name="d0e6943"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="segmentation.rules"></a>1. 分節化規則<a class="indexterm" name="d0e6940"></a></h2>
                   </div>
                </div>
             </div>
@@ -79,7 +79,7 @@
             <p>規則には、次に示す２種類があります：</p>
             <div class="variablelist">
                <dl class="variablelist">
-                  <dt><span class="term"><a class="indexterm" name="d0e6961"></a>分節規則</span></dt>
+                  <dt><span class="term"><a class="indexterm" name="d0e6958"></a>分節規則</span></dt>
                   <dd>
                      <p>原文テキストを２つの分節に分割します。たとえば「<span class="emphasis"><em>Did it make sense? I was not sure.</em></span>」というテキストは、意味的に２つの分節に分けられるべきです。そのためには「?」に関する分節規則（後ろにスペースと大文字で始まる単語が続く場合、という条件付きで）があるほうがよいでしょう。改節するための規則を定義する場合は、［分節 または 例外］チェックボックスにチェックを入れます。
                      </p>
@@ -88,7 +88,7 @@
             </div>
             <div class="variablelist">
                <dl class="variablelist">
-                  <dt><span class="term"><a class="indexterm" name="d0e6978"></a>例外規則</span></dt>
+                  <dt><span class="term"><a class="indexterm" name="d0e6975"></a>例外規則</span></dt>
                   <dd>
                      <p>分けられるべき「でない」テキストを指定します。「<span class="emphasis"><em>Mrs. Dalloway</em></span>」というテキストはピリオドを含みますが、２つに分節化されるべきではありません。したがって、ピリオドの前に「Mrs」（他に Mr、Dr、prof など）がある場合についての例外規則が必要になります。改節を禁止するための規則を定義する場合は、［分節
                         または 例外］チェックボックスにチェックを入れずにおきます。
@@ -102,7 +102,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="rules.priority"></a>2. 規則の優先順位<a class="indexterm" name="d0e6997"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="rules.priority"></a>2. 規則の優先順位<a class="indexterm" name="d0e6994"></a></h2>
                   </div>
                </div>
             </div>
@@ -112,7 +112,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="creating.new.rule"></a>3. 規則の新規作成<a class="indexterm" name="d0e7007"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="creating.new.rule"></a>3. 規則の新規作成<a class="indexterm" name="d0e7004"></a></h2>
                   </div>
                </div>
             </div>
@@ -130,7 +130,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="few.simple.examples"></a>4. <a class="indexterm" name="d0e7040"></a>簡単な設定例
+                     <h2 class="title" style="clear: both"><a name="few.simple.examples"></a>4. <a class="indexterm" name="d0e7037"></a>簡単な設定例
                      </h2>
                   </div>
                </div>

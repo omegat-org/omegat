@@ -12,11 +12,14 @@
   - XLIFF filter: Ignore type and ctype attributes when building <ph> tag shortcuts 
   https://sourceforge.net/p/omegat/feature-requests/938/
 
-  Other enhancements:
-  
   - Added dummy Google Translate API key in the Mac package
   https://sourceforge.net/p/omegat/feature-requests/940/
 
+  - Chinese (ZH.*) segmentation rules added
+  http://sourceforge.net/p/omegat/feature-requests/945/
+
+  Other enhancements:
+  
   - New Korean tokenizer. As it is still "beta", it it not yet the default
 tokenizer for Korean, and has to be selected manually in the list.
 
@@ -24,9 +27,6 @@ tokenizer for Korean, and has to be selected manually in the list.
 ambiguity and ease exchanging files across different platforms.
 
   - Scripts now use a monospaced font
-
-  - Chinese (ZH.*) segmentation rules added
-  http://sourceforge.net/p/omegat/feature-requests/945/
 
   - The Mac version now contains the JRE (1.7). Runtime parameters 
 (e.g., user language, Google API key, etc.) can be edited in 

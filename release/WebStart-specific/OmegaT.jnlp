@@ -50,23 +50,23 @@
 				<jar href="lucene-kuromoji-3.6.2.jar" />
 				<jar href="lucene-smartcn-3.6.2.jar" />
 				<jar href="tinysegmenter.jar" />
-				<jar href="commons-lang-2.4.jar" download="lazy" />
-				<jar href="commons-logging-1.1.1.jar" download="lazy" />
-				<jar href="jwordsplitter-3.4.jar" download="lazy" />
+				<jar href="commons-lang-2.4.jar"  />
+				<jar href="commons-logging-1.1.1.jar"  />
+				<jar href="jwordsplitter-3.4.jar"  />
 				<jar href="KoreanAnalyzer-3x-120223.jar" />
-				<jar href="LanguageTool-data.jar" download="lazy" />
-				<jar href="languagetool-core-2.1.jar" download="lazy" />
-				<jar href="morfologik-fsa-1.5.4.jar" download="lazy" />
-				<jar href="morfologik-speller-1.5.4.jar" download="lazy" />
-				<jar href="morfologik-stemming-1.5.4.jar" download="lazy" />
-				<jar href="cjftransform-1.0.1.jar" download="lazy" />
-				<jar href="ictclas4j-1.0.1.jar" download="lazy" />
-				<jar href="segment-1.4.1.jar" download="lazy" />		
-				<jar href="lucene-gosen-2.0.2-ipadic.jar" download="lazy" />
-				<jar href="pdfbox-app-1.8.1.jar" download="lazy" />
+				<jar href="LanguageTool-data.jar"  />
+				<jar href="languagetool-core-2.1.jar"  />
+				<jar href="morfologik-fsa-1.5.4.jar"  />
+				<jar href="morfologik-speller-1.5.4.jar"  />
+				<jar href="morfologik-stemming-1.5.4.jar"  />
+				<jar href="cjftransform-1.0.1.jar"  />
+				<jar href="ictclas4j-1.0.1.jar"  />
+				<jar href="segment-1.4.1.jar"  />		
+				<jar href="lucene-gosen-2.0.2-ipadic.jar"  />
+				<jar href="pdfbox-app-1.8.1.jar"  />
 				<jar href="bsf-2.4.0.jar" />
-				<jar href="groovy-all-1.8.9.jar" download="lazy" />
-				<jar href="js-rhino-1.7R4.jar" download="lazy" />
+				<jar href="groovy-all-1.8.9.jar"  />
+				<jar href="js-rhino-1.7R4.jar"  />
 				<jar href="diff.jar" />
 
 			</resources>

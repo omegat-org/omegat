@@ -1,4 +1,17 @@
 ----------------------------------------------------------------------
+ OmegaT 2.6.3 update 8 
+----------------------------------------------------------------------
+   0 Enhancement
+   1 Bug fix
+   0 Localisation update
+----------------------------------------------------------------------
+2.6.3 update 8 vs. 2.6.3 update 7
+
+  - The fix for "mixed content" introduced in 2.6.3 update 7 made
+sometimes OmegaT unusable since a change introduced in Java 1.7_51. We have 
+removed it, so users get again a warning about mixed content.
+
+----------------------------------------------------------------------
  OmegaT 2.6.3 update 7 (2014-01-15)
 ----------------------------------------------------------------------
    1 Enhancement

@@ -78,16 +78,18 @@ public class ProjectUICommands {
             return;
         }
 
+        // ask for new project dir
+        NewProjectFileChooser ndc = new NewProjectFileChooser();
+        int ndcResult = ndc.showSaveDialog(Core.getMainWindow().getApplicationFrame());
+        if (ndcResult != OmegaTFileChooser.APPROVE_OPTION) {
+            // user press 'Cancel' in project creation dialog
+            return;
+        }
+        final File dir = ndc.getSelectedFile();
+
         new SwingWorker<Object, Void>() {
             protected Object doInBackground() throws Exception {
-                // ask for new project dir
-                NewProjectFileChooser ndc = new NewProjectFileChooser();
-                int ndcResult = ndc.showSaveDialog(Core.getMainWindow().getApplicationFrame());
-                if (ndcResult != OmegaTFileChooser.APPROVE_OPTION) {
-                    // user press 'Cancel' in project creation dialog
-                    return null;
-                }
-                File dir = ndc.getSelectedFile();
+
                 dir.mkdirs();
 
                 // ask about new project properties
@@ -287,20 +289,21 @@ public class ProjectUICommands {
             return;
         }
 
+        final File projectRootFolder;
+        if (projectDirectory == null) {
+            // select existing project file - open it
+            OmegaTFileChooser pfc = new OpenProjectFileChooser();
+            if (OmegaTFileChooser.APPROVE_OPTION != pfc.showOpenDialog(Core.getMainWindow()
+                    .getApplicationFrame())) {
+                return;
+            }
+            projectRootFolder = pfc.getSelectedFile();
+        } else {
+            projectRootFolder = projectDirectory;
+        }
+
         new SwingWorker<Object, Void>() {
             protected Object doInBackground() throws Exception {
-                final File projectRootFolder;
-                if (projectDirectory == null) {
-                    // select existing project file - open it
-                    OmegaTFileChooser pfc = new OpenProjectFileChooser();
-                    if (OmegaTFileChooser.APPROVE_OPTION != pfc.showOpenDialog(Core.getMainWindow()
-                            .getApplicationFrame())) {
-                        return null;
-                    }
-                    projectRootFolder = pfc.getSelectedFile();
-                } else {
-                    projectRootFolder = projectDirectory;
-                }
 
                 IMainWindow mainWindow = Core.getMainWindow();
                 Cursor hourglassCursor = new Cursor(Cursor.WAIT_CURSOR);
@@ -320,16 +323,20 @@ public class ProjectUICommands {
 
                 final IRemoteRepository repository;
                 // check for team-project
-                if (Core.getParams().containsKey("no-team")) {
-                    // disable team functionality
-                    repository = null;
-                } else if (SVNRemoteRepository.isSVNDirectory(projectRootFolder)) {
-                    // SVN selected
-                    repository = new SVNRemoteRepository(projectRootFolder);
-                } else if (GITRemoteRepository.isGITDirectory(projectRootFolder)) {
-                    repository = new GITRemoteRepository(projectRootFolder);
-                } else {
-                    repository = null;
+                try {
+                    if (Core.getParams().containsKey("no-team")) {
+                        // disable team functionality
+                        repository = null;
+                    } else if (SVNRemoteRepository.isSVNDirectory(projectRootFolder)) {
+                        // SVN selected
+                        repository = new SVNRemoteRepository(projectRootFolder);
+                    } else if (GITRemoteRepository.isGITDirectory(projectRootFolder)) {
+                        repository = new GITRemoteRepository(projectRootFolder);
+                    } else {
+                        repository = null;
+                    }
+                } catch (Exception e) {
+                    return null;
                 }
 
                 if (repository != null) {

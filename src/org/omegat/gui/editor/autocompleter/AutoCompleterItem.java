@@ -3,7 +3,7 @@
           with fuzzy matching, translation memory, keyword search, 
           glossaries, and translation leveraging into updated projects.
 
- Copyright (C) 2013 Aaron Madlon-Kay
+ Copyright (C) 2013, 2014 Aaron Madlon-Kay
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -41,9 +41,17 @@ package org.omegat.gui.editor.autocompleter;
 public class AutoCompleterItem {
     public final String payload;
     public final String[] extras;
+    public final int cursorAdjust;
     
     public AutoCompleterItem(String payload, String[] extras) {
         this.payload = payload;
         this.extras = extras;
+        this.cursorAdjust = 0;
+    }
+    
+    public AutoCompleterItem(String payload, String[] extras, int cursorAdjust) {
+        this.payload = payload;
+        this.extras = extras;
+        this.cursorAdjust = cursorAdjust;
     }
 }

@@ -4,6 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2013 Zoltan Bartko, Aaron Madlon-Kay
+               2014 Aaron Madlon-Kay
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -194,7 +195,7 @@ public class AutoCompleter {
      * Returns the currently selected value.
      * @return 
      */
-    private String getSelectedValue() {
+    private AutoCompleterItem getSelectedValue() {
         return views.get(currentView).getSelectedValue();
     }
        
@@ -251,8 +252,8 @@ public class AutoCompleter {
      * Replace the text in the editor with the accepted item.
      * @param selected 
      */
-    protected void acceptedListItem(String selected) { 
-        if (selected == null || selected.equals(OStrings.getString("AC_NO_SUGGESTIONS"))) {
+    protected void acceptedListItem(AutoCompleterItem selected) { 
+        if (selected == null) {
             return;
         }
 
@@ -262,7 +263,10 @@ public class AutoCompleter {
             editor.setSelectionStart(getWordChunkStart());
             editor.setSelectionEnd(offset);
         }
-        editor.replaceSelection(selected);
+        editor.replaceSelection(selected.payload);
+        if (selected.cursorAdjust != 0) {
+            editor.getCaret().setDot(editor.getCaretPosition() + selected.cursorAdjust);
+        }
     }
 
     /**
@@ -362,6 +366,9 @@ public class AutoCompleter {
      * @param adjustment An integer added to the current insertion point
      */
     public void adjustInsertionPoint(int adjustment) {
+        if (adjustment == 0) {
+            return;
+        }
         if (editor.isInActiveTranslation(getWordChunkStart() + adjustment)) {
             setWordChunkStart(getWordChunkStart() + adjustment);
         } else {

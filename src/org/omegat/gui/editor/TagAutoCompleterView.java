@@ -4,6 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2013 Aaron Madlon-Kay, Zoltan Bartko
+               2014 Aaron Madlon-Kay
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -76,7 +77,16 @@ public class TagAutoCompleterView extends AutoCompleterListView {
     private static List<AutoCompleterItem> convertList(List<String> list) {
         List<AutoCompleterItem> result = new ArrayList<AutoCompleterItem>();
         for (String s : list) {
-            result.add(new AutoCompleterItem(s, null));
+            int sep = s.indexOf(TagUtil.TAG_SEPARATOR_SENTINEL);
+            String cleaned = s;
+            String display = s;
+            int adjustment = 0;
+            if (sep > -1) {
+                cleaned = s.replace(TagUtil.TAG_SEPARATOR_SENTINEL, "");
+                display = s.replace(TagUtil.TAG_SEPARATOR_SENTINEL, "|");
+                adjustment = - (s.length() - 1 - sep);
+            }
+            result.add(new AutoCompleterItem(cleaned, new String[] { display }, adjustment));
         }
         return result;
     }
@@ -88,6 +98,6 @@ public class TagAutoCompleterView extends AutoCompleterListView {
 
     @Override
     public String itemToString(AutoCompleterItem item) {
-        return item.payload;
+        return item.extras[0];
     }
 }

@@ -4,6 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2013 Zoltan Bartko, Aaron Madlon-Kay
+               2014 Aaron Madlon-Kay
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -277,13 +278,13 @@ public abstract class AutoCompleterTableView extends AbstractAutoCompleterView {
     }
     
     @Override
-    public String getSelectedValue() {
+    public AutoCompleterItem getSelectedValue() {
         Point p = getSelectionPoint();
         Object selection = getTable().getModel().getValueAt(p.y, p.x);
         if (selection instanceof Character) {
-            return selection.toString();
+            return new AutoCompleterItem(selection.toString(), null);
         }
-        return (String) selection;
+        return new AutoCompleterItem((String) selection, null);
     }
     
     @Override

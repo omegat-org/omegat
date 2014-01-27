@@ -4,6 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2013 Zoltan Bartko, Aaron Madlon-Kay
+               2014 Aaron Madlon-Kay
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -104,7 +105,7 @@ abstract public class AbstractAutoCompleterView {
      * get the selected value
      * @return 
      */
-    public abstract String getSelectedValue();
+    public abstract AutoCompleterItem getSelectedValue();
     
     /**
      * Update the view data

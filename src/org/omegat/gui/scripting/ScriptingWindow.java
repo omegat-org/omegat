@@ -30,6 +30,7 @@ import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.InputEvent;
@@ -52,6 +53,8 @@ import java.util.Map.Entry;
 
 import javax.swing.AbstractAction;
 import javax.swing.Action;
+import javax.swing.Box;
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JEditorPane;
@@ -70,7 +73,6 @@ import javax.swing.JSplitPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.KeyStroke;
-import javax.swing.SwingConstants;
 import javax.swing.WindowConstants;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -364,14 +366,14 @@ public class ScriptingWindow extends JFrame {
         });
 
         JPanel panelSouth = new JPanel();
-        FlowLayout fl_panelSouth = (FlowLayout) panelSouth.getLayout();
-        fl_panelSouth.setAlignment(FlowLayout.RIGHT);
+        panelSouth.setLayout(new BoxLayout(panelSouth, BoxLayout.LINE_AXIS));
+
         getContentPane().add(panelSouth, BorderLayout.SOUTH);
         
         for (int i = 0; i < NUMBERS_OF_QUICK_SCRIPTS; i++) {
             final int index = i;
             final int scriptKey = scriptKey(index);
-            m_quickScriptButtons[i] = new JButton(" " + scriptKey + " ");
+            m_quickScriptButtons[i] = new JButton(String.valueOf(scriptKey));
 
             String scriptName = Preferences.getPreferenceDefault("scripts_quick_" + scriptKey, null);
             
@@ -423,7 +425,7 @@ public class ScriptingWindow extends JFrame {
                     logResult(StaticUtils.format(OStrings.getString("SCW_REMOVED_QUICK_SCRIPT"), sn, scriptKey));
                     Preferences.setPreference("scripts_quick_" + scriptKey, "");
                     m_quickScriptButtons[index].setToolTipText(OStrings.getString("SCW_NO_SCRIPT_SET"));
-                    m_quickScriptButtons[index].setText(" " + scriptKey + " ");
+                    m_quickScriptButtons[index].setText(String.valueOf(scriptKey));
                     
                     unsetQuickScriptMenu(sn, index);
                 }
@@ -435,12 +437,10 @@ public class ScriptingWindow extends JFrame {
             
             panelSouth.add(m_quickScriptButtons[i]);
         }
-        panelSouth.add(new JSeparator());
+        panelSouth.add(Box.createHorizontalStrut(10));
         
         m_btnRunScript = new JButton();
         Mnemonics.setLocalizedText(m_btnRunScript, OStrings.getString("SCW_RUN_SCRIPT"));
-        m_btnRunScript.setAlignmentX(Component.RIGHT_ALIGNMENT);
-        m_btnRunScript.setHorizontalAlignment(SwingConstants.LEFT);
         m_btnRunScript.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent a) {
@@ -448,6 +448,8 @@ public class ScriptingWindow extends JFrame {
             }
         });
         panelSouth.add(m_btnRunScript);
+
+        adjustButtons(panelSouth);
 
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
     }
@@ -470,6 +472,21 @@ public class ScriptingWindow extends JFrame {
         
         executeScriptFile(m_currentScriptFile, false);
 
+    }
+
+    private void adjustButtons(JPanel panel) {
+        for (Component component: panel.getComponents()) {
+            if (component instanceof JButton) {
+                JButton button = (JButton) component;
+                // cut LR margins and extend max width
+                Insets margin = button.getMargin();
+                margin.set(margin.top, 0, margin.bottom, 0);
+                Dimension maximumSize = button.getMaximumSize();
+                maximumSize.width = 500;
+                button.setMargin(margin);
+                button.setMaximumSize(maximumSize);
+            }
+        }
     }
 
     private void executeScriptFile(ScriptFile scriptFile, boolean forceFromFile) {

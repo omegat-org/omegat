@@ -1,11 +1,15 @@
 ----------------------------------------------------------------------
  OmegaT 3.0.8 update 3
 ----------------------------------------------------------------------
-   0 Enhancement
+   1 Enhancement
    1 Bug fix
    0 Localisation update
 ----------------------------------------------------------------------
 3.0.8 update 3 vs. 3.0.8 update 2
+
+  Other enhancements:
+
+  - New Project can now be called with the Ctrl+Shift+N shortcut
 
   Bug fixes:
 

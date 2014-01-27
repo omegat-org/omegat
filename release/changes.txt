@@ -1,11 +1,16 @@
 ----------------------------------------------------------------------
  OmegaT 3.0.8 update 3
 ----------------------------------------------------------------------
-   1 Enhancement
+   2 Enhancements
    1 Bug fix
    0 Localisation update
 ----------------------------------------------------------------------
 3.0.8 update 3 vs. 3.0.8 update 2
+
+  Implemented requests:
+
+  - Insert Next Missing Tag Pair 
+  https://sourceforge.net/p/omegat/feature-requests/947/
 
   Other enhancements:
 

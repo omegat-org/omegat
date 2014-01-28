@@ -801,20 +801,6 @@
           role="bold">Dmicrosoft.api.client_secret=XXXX9xXxX9xXXxxXXX9xxX99xXXXX9xx9XXxXxXXXXX=</emphasis></para>
         </listitem>
 
-        <listitem>
-          <para><emphasis role="bold">Team project option<parameter><indexterm
-              class="singular">
-              <primary>Running OmegaT</primary>
-
-              <secondary>Launch script arguments</secondary>
-
-              <tertiary>no-team option</tertiary>
-            </indexterm></parameter></emphasis></para>
-
-          <para><emphasis role="bold">-no-team</emphasis> addresses projects
-          set up for team work. Use it if OmegaT is not to synchronize the
-          project contents.</para>
-        </listitem>
       </itemizedlist>
 
       <para>Arguments can be combined: to launch
@@ -1055,6 +1041,15 @@
             specified.</para>
           </listitem>
         </itemizedlist>
+        
+        <itemizedlist>
+          <listitem>
+            <para><literal>--no-team</literal> addresses projects
+          set up for team work. Use it if OmegaT is not to synchronize the
+          project contents.</para>
+          </listitem>
+        </itemizedlist>
+
       </section>
 
       <section id="console.mode.option.quiet">

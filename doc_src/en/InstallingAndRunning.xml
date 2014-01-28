@@ -1050,6 +1050,15 @@
           </listitem>
         </itemizedlist>
 
+        <itemizedlist>
+          <listitem>
+            <para><literal>--disable-project-locking</literal> allows, under Windows, to open the same project 
+            with several instances of OmegaT. By default, under Windows, <literal>omegat.project</literal>
+            is locked, and an error message is received when trying to open a project already opened in
+            another instance of OmegaT. With that option, no locking occurs.</para>
+          </listitem>
+        </itemizedlist>
+
       </section>
 
       <section id="console.mode.option.quiet">

@@ -81,12 +81,14 @@ public class TagAutoCompleterView extends AutoCompleterListView {
             String cleaned = s;
             String display = s;
             int adjustment = 0;
+            boolean keepSelection = false;
             if (sep > -1) {
                 cleaned = s.replace(TagUtil.TAG_SEPARATOR_SENTINEL, "");
                 display = s.replace(TagUtil.TAG_SEPARATOR_SENTINEL, "|");
                 adjustment = - (s.length() - 1 - sep);
+                keepSelection = true;
             }
-            result.add(new AutoCompleterItem(cleaned, new String[] { display }, adjustment));
+            result.add(new AutoCompleterItem(cleaned, new String[] { display }, adjustment, keepSelection));
         }
         return result;
     }

@@ -263,9 +263,13 @@ public class AutoCompleter {
             editor.setSelectionStart(getWordChunkStart());
             editor.setSelectionEnd(offset);
         }
+        String selection = editor.getSelectedText();
         editor.replaceSelection(selected.payload);
         if (selected.cursorAdjust != 0) {
             editor.getCaret().setDot(editor.getCaretPosition() + selected.cursorAdjust);
+        }
+        if (selected.keepSelection) {
+            editor.replaceSelection(selection);
         }
     }
 

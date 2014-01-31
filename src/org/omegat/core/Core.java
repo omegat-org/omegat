@@ -50,6 +50,7 @@ import org.omegat.gui.editor.mark.IMarker;
 import org.omegat.gui.editor.mark.NBSPMarker;
 import org.omegat.gui.editor.mark.ProtectedPartsMarker;
 import org.omegat.gui.editor.mark.RemoveTagMarker;
+import org.omegat.gui.editor.mark.ReplaceMarker;
 import org.omegat.gui.editor.mark.WhitespaceMarkerFactory;
 import org.omegat.gui.exttrans.IMachineTranslation;
 import org.omegat.gui.exttrans.MachineTranslateTextArea;
@@ -204,6 +205,7 @@ public class Core {
         Core.registerMarker(new BidiMarkerFactory.PDFMarker());
         Core.registerMarker(new BidiMarkerFactory.LROMarker());
         Core.registerMarker(new BidiMarkerFactory.RLOMarker());
+        Core.registerMarker(new ReplaceMarker());
 
         // 3. Initialize other components. They add themselves to the main window.
         editor = new EditorController(me);

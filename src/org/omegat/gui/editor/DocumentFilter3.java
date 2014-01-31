@@ -26,9 +26,6 @@
 
 package org.omegat.gui.editor;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.Document;
@@ -37,7 +34,6 @@ import javax.swing.text.StyleConstants;
 
 import org.omegat.core.data.ProtectedPart;
 import org.omegat.core.data.SourceTextEntry;
-import org.omegat.util.PatternConsts;
 import org.omegat.util.Preferences;
 import org.omegat.util.gui.UIThreadsUtil;
 

@@ -282,6 +282,7 @@ public class MainWindowMenu implements ActionListener, MenuListener, IMainMenu {
         editMenu.add(editCreateGlossaryEntryMenuItem = createMenuItem("TF_MENU_EDIT_CREATE_GLOSSARY_ENTRY"));
         editMenu.add(new JSeparator());
         editMenu.add(editFindInProjectMenuItem = createMenuItem("TF_MENU_EDIT_FIND"));
+        editMenu.add(editReplaceInProjectMenuItem = createMenuItem("TF_MENU_EDIT_REPLACE"));
         editMenu.add(new JSeparator());
         editMenu.add(switchCaseSubMenu = createMenu("TF_EDIT_MENU_SWITCH_CASE"));
         editMenu.add(selectFuzzySubMenu = createMenu("TF_MENU_EDIT_COMPARE"));
@@ -571,7 +572,8 @@ public class MainWindowMenu implements ActionListener, MenuListener, IMainMenu {
                 projectReloadMenuItem, projectCloseMenuItem, projectSaveMenuItem, projectEditMenuItem,
                 projectCompileMenuItem, projectSingleCompileMenuItem,
 
-                editMenu, editFindInProjectMenuItem, editInsertSourceMenuItem, editInsertTranslationMenuItem,
+                editMenu, editFindInProjectMenuItem, editReplaceInProjectMenuItem,
+                editInsertSourceMenuItem, editInsertTranslationMenuItem,
                 editTagPainterMenuItem, editOverwriteSourceMenuItem, editOverwriteTranslationMenuItem,
                 editRedoMenuItem, editSelectFuzzy1MenuItem, editSelectFuzzy2MenuItem,
                 editSelectFuzzy3MenuItem, editSelectFuzzy4MenuItem, editSelectFuzzy5MenuItem,
@@ -615,6 +617,7 @@ public class MainWindowMenu implements ActionListener, MenuListener, IMainMenu {
 
     JMenuItem cycleSwitchCaseMenuItem;
     JMenuItem editFindInProjectMenuItem;
+    JMenuItem editReplaceInProjectMenuItem;
     JMenuItem editInsertSourceMenuItem;
     JMenuItem editInsertTranslationMenuItem;
     JMenu editMenu;

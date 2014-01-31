@@ -52,6 +52,7 @@ public final class Styles {
     public static final Color COLOR_WHITESPACE = new Color(128, 128, 128);
     public static final Color COLOR_BIDIMARKERS = new Color(200, 0, 0);
     public static final Color COLOR_MARK_COMES_FROM_TM = new Color(250,128,114); // Salmon red
+    public static final Color COLOR_REPLACE = Color.blue;
 
     /**
      * Construct required attributes set.

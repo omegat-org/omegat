@@ -3,7 +3,7 @@
           with fuzzy matching, translation memory, keyword search, 
           glossaries, and translation leveraging into updated projects.
 
- Copyright (C) 2009 Alex Buloichik
+ Copyright (C) 2009-2013 Alex Buloichik
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -35,9 +35,9 @@ public class LongProcessThread extends Thread {
         interrupt();
     }
 
-    public void checkInterrupted() throws InterruptedException {
+    public void checkInterrupted() throws LongProcessInterruptedException {
         if (isInterrupted()) {
-            throw new InterruptedException();
+            throw new LongProcessInterruptedException();
         }
     }
 }

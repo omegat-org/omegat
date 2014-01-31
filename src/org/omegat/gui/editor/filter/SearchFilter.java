@@ -23,51 +23,45 @@
  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  **************************************************************************/
 
-package org.omegat.gui.editor.mark;
+package org.omegat.gui.editor.filter;
 
-import java.util.ArrayList;
-import java.util.Collections;
+import java.awt.Component;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.HashSet;
 import java.util.List;
-
-import javax.swing.text.Highlighter.HighlightPainter;
+import java.util.Set;
 
 import org.omegat.core.Core;
 import org.omegat.core.data.SourceTextEntry;
-import org.omegat.core.search.SearchMatch;
 import org.omegat.gui.editor.IEditorFilter;
-import org.omegat.gui.editor.filter.ReplaceFilter;
-import org.omegat.util.gui.Styles;
 
 /**
- * Marker for replace candidate.
+ * Editor filter implementation.
  * 
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
-public class ReplaceMarker implements IMarker {
-    protected static final HighlightPainter PAINTER = new TransparentHighlightPainter(Styles.COLOR_REPLACE,
-            0.4F);
+public class SearchFilter implements IEditorFilter {
+    private final Set<Integer> entriesList = new HashSet<Integer>();
+    private FilterBarSearch controlComponent;
+
+    public SearchFilter(List<Integer> entries) {
+        entriesList.addAll(entries);
+        controlComponent = new FilterBarSearch();
+        controlComponent.btnRemoveFilter.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                Core.getEditor().removeFilter();
+            }
+        });
+    }
 
     @Override
-    public List<Mark> getMarksForEntry(SourceTextEntry ste, String sourceText, String translationText,
-            boolean isActive) throws Exception {
+    public boolean allowed(SourceTextEntry ste) {
+        return entriesList.contains(ste.entryNum());
+    }
 
-        IEditorFilter filter = Core.getEditor().getFilter();
-        if (filter == null || !(filter instanceof ReplaceFilter)) {
-            return Collections.emptyList();
-        }
-
-        ReplaceFilter replaceFilter = (ReplaceFilter) filter;
-        List<SearchMatch> matches = replaceFilter.getReplacementsForEntry(translationText);
-        if (matches == null) {
-            return Collections.emptyList();
-        }
-
-        List<Mark> r = new ArrayList<Mark>(matches.size());
-        for (SearchMatch s : matches) {
-            Mark m = new Mark(Mark.ENTRY_PART.TRANSLATION, s.getStart(), s.getEnd());
-            m.painter = PAINTER;
-            r.add(m);
-        }
-        return r;
+    @Override
+    public Component getControlComponent() {
+        return controlComponent;
     }
 }

@@ -39,6 +39,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.File;
+import java.text.MessageFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -57,8 +58,12 @@ import javax.swing.event.ChangeListener;
 
 import org.omegat.core.Core;
 import org.omegat.core.search.SearchExpression;
+import org.omegat.core.search.SearchMode;
 import org.omegat.core.search.SearchResultEntry;
+import org.omegat.core.search.Searcher;
 import org.omegat.core.threads.SearchThread;
+import org.omegat.gui.editor.filter.ReplaceFilter;
+import org.omegat.gui.editor.filter.SearchFilter;
 import org.omegat.gui.main.MainWindow;
 import org.omegat.util.Log;
 import org.omegat.util.OConsts;
@@ -84,10 +89,12 @@ import org.omegat.util.gui.UIThreadsUtil;
  */
 public class SearchWindowController {
 
-    SearchWindowForm form;
+    private final SearchWindowForm form;
+    private final SearchMode mode;
 
-    public SearchWindowController(MainWindow par, String startText) {
+    public SearchWindowController(MainWindow par, String startText, SearchMode mode) {
         form = new SearchWindowForm();
+        this.mode = mode;
 
         m_parent = par;
 
@@ -133,6 +140,25 @@ public class SearchWindowController {
 
         initActions();
 
+        switch (mode) {
+        case SEARCH:
+            form.setTitle(OStrings.getString("SW_TITLE"));
+            form.m_replaceLabel.setVisible(false);
+            form.m_replaceField.setVisible(false);
+            form.m_replaceAllButton.setVisible(false);
+            form.m_replaceButton.setVisible(false);
+            break;
+        case REPLACE:
+            form.setTitle(OStrings.getString("SW_TITLE_REPLACE"));
+            form.m_SearchInProjectPane.setVisible(false);
+            form.m_SearchInDirPane.setVisible(false);
+            form.m_allResultsCB.setVisible(false);
+            form.m_filterButton.setVisible(false);
+            form.m_numberLabel.setVisible(false);;
+            form.m_numberOfResults.setVisible(false);
+            break;
+        }
+
         form.setVisible(true);
         form.m_searchField.requestFocus();
     }
@@ -149,6 +175,16 @@ public class SearchWindowController {
         form.m_filterButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 doFilter();
+            }
+        });
+        form.m_replaceButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                doReplace();
+            }
+        });
+        form.m_replaceAllButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                doReplaceAll();
             }
         });
         form.m_removeFilterButton.addActionListener(new ActionListener() {
@@ -450,14 +486,16 @@ public class SearchWindowController {
     /**
      * Show search result for user
      */
-    public void displaySearchResult(final List<SearchResultEntry> entries) {
+    public void displaySearchResult(final Searcher searcher) {
         UIThreadsUtil.executeInSwingThread(new Runnable() {
             public void run() {
                 EntryListPane viewer = (EntryListPane) form.m_viewer;
-                viewer.displaySearchResult(entries, ((Integer) form.m_numberOfResults.getValue()));
+                viewer.displaySearchResult(searcher, ((Integer) form.m_numberOfResults.getValue()));
                 form.m_resultsLabel.setText(StaticUtils.format(OStrings.getString("SW_NR_OF_RESULTS"),
                         new Object[] { new Integer(viewer.getNrEntries()) }));
                 form.m_filterButton.setEnabled(true);
+                form.m_replaceButton.setEnabled(true);
+                form.m_replaceAllButton.setEnabled(true);
                 viewer.requestFocus();
             }
         });
@@ -493,8 +531,32 @@ public class SearchWindowController {
     private void doFilter() {
         EntryListPane viewer = (EntryListPane) form.m_viewer;
         Core.getEditor().commitAndLeave(); // Otherwise, the current segment being edited is lost
-        Core.getEditor().addFilter(viewer.getEntryList());
+        Core.getEditor().setFilter(new SearchFilter(viewer.getEntryList()));
         form.m_removeFilterButton.setEnabled(true);
+    }
+
+    private void doReplace() {
+        EntryListPane viewer = (EntryListPane) form.m_viewer;
+        Core.getEditor().commitAndLeave(); // Otherwise, the current segment being edited is lost
+        Core.getEditor()
+                .setFilter(
+                        new ReplaceFilter(viewer.getEntryList(), viewer.getSearcher(), form.m_replaceField
+                                .getText()));
+        form.m_removeFilterButton.setEnabled(true);
+    }
+
+    private void doReplaceAll() {
+        EntryListPane viewer = (EntryListPane) form.m_viewer;
+        Core.getEditor().commitAndDeactivate(); // Otherwise, the current segment being edited is lost
+        int count = viewer.getEntryList().size();
+        String msg = MessageFormat.format(OStrings.getString("SW_REPLACE_ALL_CONFIRM"), count);
+        int r = JOptionPane.showConfirmDialog(form, msg, OStrings.getString("CONFIRM_DIALOG_TITLE"),
+                JOptionPane.YES_NO_OPTION);
+        if (r == JOptionPane.YES_OPTION) {
+            new ReplaceFilter(viewer.getEntryList(), viewer.getSearcher(), form.m_replaceField.getText())
+                    .replaceAll();
+        }
+        Core.getEditor().activateEntry();
     }
 
     private void doRemoveFilter() {
@@ -546,6 +608,7 @@ public class SearchWindowController {
         }
 
         SearchExpression s = new SearchExpression();
+        s.mode = mode;
         s.text = form.m_searchField.getText();
         s.rootDir = root;
         s.recursive = form.m_recursiveCB.isSelected();
@@ -553,10 +616,10 @@ public class SearchWindowController {
         s.keyword = form.m_keywordSearchRB.isSelected();
         s.regex = form.m_regexpSearchRB.isSelected();
         s.caseSensitive = form.m_caseCB.isSelected();
-        s.glossary = form.m_cbSearchInGlossaries.isSelected();
-        s.memory = form.m_cbSearchInMemory.isSelected();
-        s.tm = form.m_cbSearchInTMs.isSelected();
-        s.allResults = form.m_allResultsCB.isSelected();
+        s.glossary = mode == SearchMode.SEARCH ? form.m_cbSearchInGlossaries.isSelected() : false;
+        s.memory = mode == SearchMode.SEARCH ? form.m_cbSearchInMemory.isSelected() : true;
+        s.tm = mode == SearchMode.SEARCH ? form.m_cbSearchInTMs.isSelected() : false;
+        s.allResults = mode == SearchMode.SEARCH ? form.m_allResultsCB.isSelected() : true;
         s.searchSource = form.m_searchSourceCB.isSelected();
         s.searchTarget = form.m_searchTargetCB.isSelected();
         s.searchTranslatedOnly = form.m_cbTranslated.isSelected();
@@ -567,10 +630,12 @@ public class SearchWindowController {
         s.dateAfter = m_dateFromModel.getDate().getTime();
         s.searchDateBefore = form.m_dateToCB.isSelected();
         s.dateBefore = m_dateToModel.getDate().getTime();
-        s.numberOfResults = ((Integer) form.m_numberOfResults.getValue());
+        s.numberOfResults = mode == SearchMode.SEARCH ? ((Integer) form.m_numberOfResults.getValue())
+                : Integer.MAX_VALUE;
 
+        Searcher searcher = new Searcher(Core.getProject(), s);
         // start the search in a separate thread
-        m_thread = new SearchThread(this, s);
+        m_thread = new SearchThread(this, searcher);
         m_thread.start();
     }
 

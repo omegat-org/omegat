@@ -7,6 +7,7 @@
                2006 Henry Pijffers
                2009 Didier Briel
                2010 Martin Fleurke, Antonio Vilei, Didier Briel
+               2013 Alex Buloichik
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -29,12 +30,9 @@
 package org.omegat.core.threads;
 
 import java.io.IOException;
-import java.util.List;
 import java.util.regex.PatternSyntaxException;
 
 import org.omegat.core.Core;
-import org.omegat.core.search.SearchExpression;
-import org.omegat.core.search.SearchResultEntry;
 import org.omegat.core.search.Searcher;
 import org.omegat.filters2.TranslationException;
 import org.omegat.gui.search.SearchWindowController;
@@ -51,7 +49,7 @@ import org.omegat.util.Log;
  * @author Martin Fleurke
  * @author Antonio Vilei
  */
-public class SearchThread extends Thread implements Searcher.ISearchCheckStop {
+public class SearchThread extends LongProcessThread {
     /**
      * Starts a new search. To search current project only, set rootDir to null.
      * 
@@ -63,9 +61,10 @@ public class SearchThread extends Thread implements Searcher.ISearchCheckStop {
      *           m_searching to be set to true. This variable is set to true in
      *           this function on successful setting of the search parameters.
      */
-    public SearchThread(SearchWindowController window, SearchExpression expression) {
+    public SearchThread(SearchWindowController window, Searcher searcher) {
         m_window = window;
-        m_searchExpression = expression;
+        m_searcher = searcher;
+        m_searcher.setThread(this);
     }
 
     // /////////////////////////////////////////////////////////
@@ -74,14 +73,13 @@ public class SearchThread extends Thread implements Searcher.ISearchCheckStop {
     public void run() {
         try {
             try {
-                List<SearchResultEntry> resultsList = new Searcher(Core.getProject(), this)
-                        .getSearchResults(m_searchExpression);
+                m_searcher.search();
 
-                if (stopped) {
-                    return;
-                }
+                checkInterrupted();
 
-                m_window.displaySearchResult(resultsList);
+                m_window.displaySearchResult(m_searcher);
+            } catch(LongProcessInterruptedException ex) {
+                // interrupted - nothing to do
             } catch (PatternSyntaxException e) {
                 // bad regexp input
                 // alert user to badness
@@ -103,18 +101,6 @@ public class SearchThread extends Thread implements Searcher.ISearchCheckStop {
         }
     }
 
-    public boolean isStopped() {
-        return stopped;
-    }
-
-    /**
-     * Stop search.
-     */
-    public void fin() {
-        stopped = true;
-    }
-
-    private boolean stopped;
     private SearchWindowController m_window;
-    private SearchExpression m_searchExpression;
+    private Searcher m_searcher;
 }

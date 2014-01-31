@@ -45,6 +45,7 @@ import org.omegat.core.KnownException;
 import org.omegat.core.data.ProtectedPart;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.data.TMXEntry;
+import org.omegat.core.search.SearchMode;
 import org.omegat.core.segmentation.SRX;
 import org.omegat.core.spellchecker.ISpellChecker;
 import org.omegat.core.tagvalidation.ErrorReport;
@@ -353,7 +354,20 @@ public class MainWindowMenuHandler {
             selection = selection.trim();
         }
 
-        SearchWindowController search = new SearchWindowController(mainWindow, selection);
+        SearchWindowController search = new SearchWindowController(mainWindow, selection, SearchMode.SEARCH);
+        mainWindow.addSearchWindow(search);
+    }
+
+    public void editReplaceInProjectMenuItemActionPerformed() {
+        if (!Core.getProject().isProjectLoaded())
+            return;
+
+        String selection = Core.getEditor().getSelectedText();
+        if (selection != null) {
+            selection = selection.trim();
+        }
+
+        SearchWindowController search = new SearchWindowController(mainWindow, selection, SearchMode.REPLACE);
         mainWindow.addSearchWindow(search);
     }
 

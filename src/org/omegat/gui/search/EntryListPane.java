@@ -43,6 +43,7 @@ import javax.swing.text.DefaultStyledDocument;
 import org.omegat.core.Core;
 import org.omegat.core.search.SearchMatch;
 import org.omegat.core.search.SearchResultEntry;
+import org.omegat.core.search.Searcher;
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
@@ -109,8 +110,10 @@ class EntryListPane extends JTextPane {
     /**
      * Show search result for user
      */
-    public void displaySearchResult(List<SearchResultEntry> entries, int numberOfResults) {
+    public void displaySearchResult(Searcher searcher, int numberOfResults) {
         UIThreadsUtil.mustBeSwingThread();
+
+        m_searcher = searcher;
 
         this.numberOfResults = numberOfResults;
 
@@ -118,13 +121,13 @@ class EntryListPane extends JTextPane {
         m_entryList.clear();
         m_offsetList.clear();
 
-        if (entries == null) {
+        if (searcher == null || searcher.getSearchResults() == null) {
             // empty marks - just reset
             setText("");
             return;
         }
 
-        currentlyDisplayedMatches = new DisplayMatches(entries);
+        currentlyDisplayedMatches = new DisplayMatches(searcher.getSearchResults());
     }
 
     protected class DisplayMatches implements Runnable {
@@ -216,7 +219,7 @@ class EntryListPane extends JTextPane {
 
             List<SearchMatch> display = matches.subList(0, Math.min(MARKS_PER_REQUEST, matches.size()));
             for (SearchMatch m : display) {
-                doc.setCharacterAttributes(m.start, m.length, FOUND_MARK, true);
+                doc.setCharacterAttributes(m.getStart(), m.getLength(), FOUND_MARK, true);
             }
             display.clear();
 
@@ -269,6 +272,11 @@ class EntryListPane extends JTextPane {
         return m_entryList;
     }
 
+    public Searcher getSearcher() {
+        return m_searcher;
+    }
+
+    private volatile Searcher m_searcher;
     private final List<Integer> m_entryList = new ArrayList<Integer>();
     private final List<Integer> m_offsetList = new ArrayList<Integer>();
     private DisplayMatches currentlyDisplayedMatches;

@@ -3,7 +3,7 @@
           with fuzzy matching, translation memory, keyword search, 
           glossaries, and translation leveraging into updated projects.
 
- Copyright (C) 2010-2013 Alex Buloichik
+ Copyright (C) 2013 Alex Buloichik
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -23,38 +23,20 @@
  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  **************************************************************************/
 
-package org.omegat.core.search;
+package org.omegat.gui.editor;
+
+import java.awt.Component;
+
+import org.omegat.core.data.SourceTextEntry;
+
 
 /**
- * Class for store info about matching position.
+ * Interface for editor's filter.
  * 
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
-public class SearchMatch implements Comparable<SearchMatch> {
-    public int start, end;
+public interface IEditorFilter {
+    boolean allowed(SourceTextEntry ste);
 
-    public SearchMatch(int start, int end) {
-        this.start = start;
-        this.end = end;
-    }
-
-    public int compareTo(SearchMatch o) {
-        int diff = start - o.start;
-        if (diff == 0) {
-            diff = end - o.end;
-        }
-        return diff;
-    }
-
-    public int getStart() {
-        return start;
-    }
-
-    public int getEnd() {
-        return end;
-    }
-
-    public int getLength() {
-        return end - start;
-    }
+    Component getControlComponent();
 }

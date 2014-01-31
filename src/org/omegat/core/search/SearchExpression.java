@@ -43,6 +43,7 @@ import org.omegat.util.OConsts;
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
 public class SearchExpression {
+    public SearchMode mode;
     public String text;
     public String rootDir;
     public boolean recursive = true;

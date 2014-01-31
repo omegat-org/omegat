@@ -59,7 +59,8 @@ public class SearchWindowForm extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         m_searchLabel = new javax.swing.JLabel();
         m_searchField = new MFindField();
-        filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(10, 0), new java.awt.Dimension(10, 0), new java.awt.Dimension(10, 32767));
+        m_replaceLabel = new javax.swing.JLabel();
+        m_replaceField = new javax.swing.JTextField();
         m_searchButton = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         m_exactSearchRB = new javax.swing.JRadioButton();
@@ -118,23 +119,53 @@ public class SearchWindowForm extends javax.swing.JFrame {
         filler13 = new javax.swing.Box.Filler(new java.awt.Dimension(10, 0), new java.awt.Dimension(10, 0), new java.awt.Dimension(10, 32767));
         jPanel7 = new javax.swing.JPanel();
         filler12 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
+        m_replaceAllButton = new javax.swing.JButton();
+        filler18 = new javax.swing.Box.Filler(new java.awt.Dimension(5, 0), new java.awt.Dimension(5, 0), new java.awt.Dimension(5, 32767));
+        m_replaceButton = new javax.swing.JButton();
+        filler17 = new javax.swing.Box.Filler(new java.awt.Dimension(5, 0), new java.awt.Dimension(5, 0), new java.awt.Dimension(5, 32767));
         m_removeFilterButton = new javax.swing.JButton();
+        filler16 = new javax.swing.Box.Filler(new java.awt.Dimension(5, 0), new java.awt.Dimension(5, 0), new java.awt.Dimension(5, 32767));
         m_filterButton = new javax.swing.JButton();
+        filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(5, 0), new java.awt.Dimension(5, 0), new java.awt.Dimension(5, 32767));
         m_dismissButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle(OStrings.getString("SW_TITLE")); // NOI18N
         getContentPane().setLayout(new java.awt.GridBagLayout());
 
-        jPanel1.setLayout(new javax.swing.BoxLayout(jPanel1, javax.swing.BoxLayout.LINE_AXIS));
+        jPanel1.setLayout(new java.awt.GridBagLayout());
 
         org.openide.awt.Mnemonics.setLocalizedText(m_searchLabel, OStrings.getString("SW_SEARCH_TEXT")); // NOI18N
-        jPanel1.add(m_searchLabel);
-        jPanel1.add(m_searchField);
-        jPanel1.add(filler1);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        jPanel1.add(m_searchLabel, gridBagConstraints);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(0, 3, 0, 10);
+        jPanel1.add(m_searchField, gridBagConstraints);
+
+        org.openide.awt.Mnemonics.setLocalizedText(m_replaceLabel, OStrings.getString("SW_REPLACE_TEXT")); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        jPanel1.add(m_replaceLabel, gridBagConstraints);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.insets = new java.awt.Insets(0, 3, 0, 10);
+        jPanel1.add(m_replaceField, gridBagConstraints);
 
         org.openide.awt.Mnemonics.setLocalizedText(m_searchButton, OStrings.getString("BUTTON_SEARCH")); // NOI18N
-        jPanel1.add(m_searchButton);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 0;
+        jPanel1.add(m_searchButton, gridBagConstraints);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -430,13 +461,25 @@ public class SearchWindowForm extends javax.swing.JFrame {
         jPanel7.setLayout(new javax.swing.BoxLayout(jPanel7, javax.swing.BoxLayout.LINE_AXIS));
         jPanel7.add(filler12);
 
+        org.openide.awt.Mnemonics.setLocalizedText(m_replaceAllButton, OStrings.getString("BUTTON_REPLACE_ALL")); // NOI18N
+        m_replaceAllButton.setEnabled(false);
+        jPanel7.add(m_replaceAllButton);
+        jPanel7.add(filler18);
+
+        org.openide.awt.Mnemonics.setLocalizedText(m_replaceButton, OStrings.getString("BUTTON_REPLACE")); // NOI18N
+        m_replaceButton.setEnabled(false);
+        jPanel7.add(m_replaceButton);
+        jPanel7.add(filler17);
+
         org.openide.awt.Mnemonics.setLocalizedText(m_removeFilterButton, OStrings.getString("BUTTON_REMOVEFILTER")); // NOI18N
         m_removeFilterButton.setEnabled(false);
         jPanel7.add(m_removeFilterButton);
+        jPanel7.add(filler16);
 
         org.openide.awt.Mnemonics.setLocalizedText(m_filterButton, OStrings.getString("BUTTON_FILTER")); // NOI18N
         m_filterButton.setEnabled(false);
         jPanel7.add(m_filterButton);
+        jPanel7.add(filler1);
 
         org.openide.awt.Mnemonics.setLocalizedText(m_dismissButton, OStrings.getString("BUTTON_CLOSE")); // NOI18N
         jPanel7.add(m_dismissButton);
@@ -501,6 +544,9 @@ public class SearchWindowForm extends javax.swing.JFrame {
     javax.swing.Box.Filler filler13;
     javax.swing.Box.Filler filler14;
     javax.swing.Box.Filler filler15;
+    javax.swing.Box.Filler filler16;
+    javax.swing.Box.Filler filler17;
+    javax.swing.Box.Filler filler18;
     javax.swing.Box.Filler filler2;
     javax.swing.Box.Filler filler3;
     javax.swing.Box.Filler filler4;
@@ -551,6 +597,10 @@ public class SearchWindowForm extends javax.swing.JFrame {
     javax.swing.JCheckBox m_recursiveCB;
     javax.swing.JRadioButton m_regexpSearchRB;
     javax.swing.JButton m_removeFilterButton;
+    javax.swing.JButton m_replaceAllButton;
+    javax.swing.JButton m_replaceButton;
+    javax.swing.JTextField m_replaceField;
+    javax.swing.JLabel m_replaceLabel;
     javax.swing.JLabel m_resultsLabel;
     javax.swing.JButton m_searchButton;
     javax.swing.JTextField m_searchField;

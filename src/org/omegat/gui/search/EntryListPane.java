@@ -44,6 +44,7 @@ import org.omegat.core.Core;
 import org.omegat.core.search.SearchMatch;
 import org.omegat.core.search.SearchResultEntry;
 import org.omegat.core.search.Searcher;
+import org.omegat.util.Log;
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
@@ -158,8 +159,10 @@ class EntryListPane extends JTextPane {
             }
 
             try {
+                doc.remove(0, doc.getLength());
                 doc.insertString(0, m_stringBuf.toString(), null);
             } catch (Exception ex) {
+                Log.log(ex);
             }
             setDocument(doc);
             setCaretPosition(0);
@@ -186,7 +189,7 @@ class EntryListPane extends JTextPane {
                 }
                 if (srcMatches != null) {
                     for (SearchMatch m : srcMatches) {
-                        m.start += m_stringBuf.length();
+                        m.move(m_stringBuf.length());
                         matches.add(m);
                     }
                 }
@@ -197,7 +200,7 @@ class EntryListPane extends JTextPane {
                 m_stringBuf.append("-- ");
                 if (targetMatches != null) {
                     for (SearchMatch m : targetMatches) {
-                        m.start += m_stringBuf.length();
+                        m.move(m_stringBuf.length());
                         matches.add(m);
                     }
                 }

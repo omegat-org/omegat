@@ -100,8 +100,8 @@ public class ReplaceFilter implements IEditorFilter {
                 int off = 0;
                 StringBuilder o = new StringBuilder(trans);
                 for (SearchMatch m : found) {
-                    o.replace(m.start + off, m.end + off, replacement);
-                    off += replacement.length() - (m.end - m.start);
+                    o.replace(m.getStart() + off, m.getEnd() + off, replacement);
+                    off += replacement.length() - m.getLength();
                 }
                 if (en != null) {
                     Core.getProject().setTranslation(ste, o.toString(), en.note, en.defaultTranslation);
@@ -168,7 +168,7 @@ public class ReplaceFilter implements IEditorFilter {
                 continue; // no replacements
             }
             for (SearchMatch m : found) {
-                ec.gotoEntry(i, new EditorController.CaretPosition(m.start, m.end));
+                ec.gotoEntry(i, new EditorController.CaretPosition(m.getStart(), m.getEnd()));
                 ec.requestFocus();
                 return;
             }
@@ -188,7 +188,7 @@ public class ReplaceFilter implements IEditorFilter {
                 continue; // no replacements
             }
             for (SearchMatch m : found) {
-                ec.gotoEntry(i, new EditorController.CaretPosition(m.start, m.end));
+                ec.gotoEntry(i, new EditorController.CaretPosition(m.getStart(), m.getEnd()));
                 ec.requestFocus();
                 return;
             }
@@ -208,7 +208,7 @@ public class ReplaceFilter implements IEditorFilter {
             for (SearchMatch m : getReplacementsForEntry(str)) {
                 if (m.getStart() <= pos && pos <= m.getEnd()) {
                     // yes - replace
-                    ec.replacePartOfTextAndMark(replacement, m.start, m.end);
+                    ec.replacePartOfTextAndMark(replacement, m.getStart(), m.getEnd());
                     break;
                 }
             }

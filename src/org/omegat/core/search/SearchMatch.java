@@ -31,7 +31,7 @@ package org.omegat.core.search;
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
 public class SearchMatch implements Comparable<SearchMatch> {
-    public int start, end;
+    private int start, end;
 
     public SearchMatch(int start, int end) {
         this.start = start;
@@ -56,5 +56,10 @@ public class SearchMatch implements Comparable<SearchMatch> {
 
     public int getLength() {
         return end - start;
+    }
+
+    public void move(int offset) {
+        start += offset;
+        end += offset;
     }
 }

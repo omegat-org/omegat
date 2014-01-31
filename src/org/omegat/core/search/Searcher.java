@@ -513,8 +513,9 @@ public class Searcher {
             // check for overlapped
             if (pr.getStart() <= cu.getStart() && pr.getEnd() >= cu.getStart()) {
                 int end = Math.max(cu.getEnd(), pr.getEnd());
-                pr.end = end;
                 // leave only one region
+                pr = new SearchMatch(pr.getStart(), end);
+                foundMatches.set(i-1, pr);
                 foundMatches.remove(i);
             } else {
                 i++;

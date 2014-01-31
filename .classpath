@@ -7,7 +7,6 @@
 	<classpathentry exported="true" kind="lib" path="lib/htmlparser.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/jna.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/MRJAdapter.jar" sourcepath="lib/sources/MRJAdapter-source.zip"/>
-	<classpathentry exported="true" kind="lib" path="lib/swing-layout-1.0.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/jmyspell-core-1.0.0-beta-2.jar"/>
 	<classpathentry exported="true" kind="lib" path="test/lib/junit-4.4.jar"/>
 	<classpathentry exported="true" kind="lib" path="test/lib/xmlunit-1.1.jar"/>
@@ -44,5 +43,8 @@
 	<classpathentry kind="lib" path="lib/js-rhino-1.7R4.jar"/>
 	<classpathentry kind="lib" path="lib/groovy-all-1.8.9.jar"/>
 	<classpathentry kind="lib" path="lib/KoreanAnalyzer-3x-120223.jar"/>
+	<classpathentry kind="lib" path="lib/beansbinding-1.2.1.jar"/>
+	<classpathentry kind="lib" path="lib/SuperTMXMerge-for_OmegaT.jar"/>
+	<classpathentry kind="lib" path="lib/swing-layout-1.0.4.jar"/>
 	<classpathentry kind="output" path="classes"/>
 </classpath>

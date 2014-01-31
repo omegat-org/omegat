@@ -191,6 +191,8 @@ public interface IEditor {
      */
     void refreshViewAfterFix(List<Integer> fixedEntries);
 
+    void refreshView(boolean doCommit);
+    
     /**
      * Set current focus to editor.
      */

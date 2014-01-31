@@ -36,7 +36,7 @@
 				<jar href="jna.jar" />
 				<jar href="lib-mnemonics.jar" />
 				<jar href="MRJAdapter.jar" />
-				<jar href="swing-layout-1.0.jar" />
+				<jar href="swing-layout-1.0.4.jar" />
 				<jar href="vldocking_2.1.4.jar" />
 				<jar href="svnkit-1.7.5.jar" />
 				<jar href="antlr-runtime-3.4.jar" />
@@ -68,6 +68,8 @@
 				<jar href="groovy-all-1.8.9.jar"  />
 				<jar href="js-rhino-1.7R4.jar"  />
 				<jar href="diff.jar" />
+				<jar href="beansbinding-1.2.1.jar" />
+				<jar href="SuperTMXMerge-for_OmegaT.jar" />
 
 			</resources>
 			<resources os="Linux" arch="amd64">

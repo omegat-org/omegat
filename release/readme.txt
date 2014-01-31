@@ -316,7 +316,7 @@ OmegaT uses the following libraries:
   VLDocking Framework 2.1.4 by VLSolutions (CeCILL License)
   Hunspell by László Németh and others (LGPL License)
   JNA by Todd Fast, Timothy Wall and others (LGPL License)
-  Swing-Layout 1.0.2 (LGPL License)
+  Swing-Layout 1.0.4 (LGPL License)
   Jmyspell 2.1.4 (LGPL License)
   SVNKit 1.7.5 (TMate License)
   Sequence Library (Sequence Library License)
@@ -339,6 +339,8 @@ OmegaT uses the following libraries:
   segment-1.4.1.jar (Segment license)
   pdfbox-app-1.8.1.jar (Apache License 2.0)
   KoreanAnalyzer-3x-120223.jar (Apache License 2.0)
+  beansbinding-1.2.1.jar (LGPL license)
+  SuperTMXMerge-for_OmegaT.jar (LGPL license)
 
 ==============================================================================
  5.  Is OmegaT bugging you? Do you need help?

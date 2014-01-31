@@ -24,7 +24,7 @@ Some Hunspell librairies may correspond to older versions
 Sources are all available from
 https://sourceforge.net/project/showfiles.php?group_id=143754&package_id=157912
 
-swing-layout-1.0.2.jar is distributed under the GNU Lesser General  
+swing-layout-1.0.4.jar is distributed under the GNU Lesser General  
 Public License version 2.1 and greater
 Sources are available in OmegaT sources, in the directory lib/sources
 
@@ -102,3 +102,6 @@ groovy-all-1.8.9.jar is distributed under the Apache License 2.0
 js-rhino-1.7R4.jar is distributed under the Mozilla Public License 2.0
 (required for scripting)
 
+beansbinding-1.2.1.jar is distributed under the LGPL license
+
+SuperTMXMerge-for_OmegaT.jar is distributed under the LGPL license

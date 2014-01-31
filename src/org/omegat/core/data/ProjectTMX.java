@@ -415,4 +415,10 @@ public class ProjectTMX {
             }
         }
     }
+    
+    public void replaceContent(ProjectTMX tmx) {
+        defaults = tmx.defaults;
+        alternatives = tmx.alternatives;
+
+    }
 }

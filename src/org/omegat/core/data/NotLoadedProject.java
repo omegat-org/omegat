@@ -119,6 +119,9 @@ public class NotLoadedProject implements IProject {
     public void saveProject() {
     }
 
+    public void saveProject(boolean doTeamSync) {
+    }
+
     public void saveProjectProperties() throws IOException {
     }
 

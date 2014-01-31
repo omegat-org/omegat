@@ -1242,11 +1242,16 @@ public class EditorController implements IEditor {
     }
 
     public void refreshViewAfterFix(List<Integer> fixedEntries) {
-        UIThreadsUtil.mustBeSwingThread();
-
         // Don't commit the current translation text if we fixed this entry
         // or one of its duplicates (the fixed version will be clobbered).
-        if (fixedEntries != null && fixedEntries.contains(getCurrentEntryNumber())) {
+        boolean doCommit = fixedEntries != null && fixedEntries.contains(getCurrentEntryNumber());
+        refreshView(doCommit);
+    }
+    
+    public void refreshView(boolean doCommit) {
+        UIThreadsUtil.mustBeSwingThread();
+        
+        if (!doCommit) {
             deactivateWithoutCommit();
         }
         int currentEntry = getCurrentEntryNumber();

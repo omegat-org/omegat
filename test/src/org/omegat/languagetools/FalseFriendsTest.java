@@ -71,6 +71,9 @@ public class FalseFriendsTest extends TestCore {
 
             public void saveProject() {
             }
+            
+            public void saveProject(boolean doTeamSync) {
+            }
 
             public void iterateByMultipleTranslations(MultipleTranslationsIterator it) {
             }

@@ -208,6 +208,9 @@ public class GlossaryTextAreaTest extends TestCore {
 
             public void windowDeactivated() {
             }
+
+            public void refreshView(boolean doCommit) {
+            }
         });
     }
 }

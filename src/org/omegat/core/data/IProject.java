@@ -53,6 +53,8 @@ public interface IProject {
      */
     void saveProject();
 
+    void saveProject(boolean doTeamSync);
+
     /**
      * Close project.
      */

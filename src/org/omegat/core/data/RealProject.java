@@ -51,7 +51,10 @@ import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import javax.swing.SwingUtilities;
+
 import org.apache.lucene.util.Version;
+import org.madlonkay.supertmxmerge.SuperTmxMerge;
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
 import org.omegat.core.KnownException;
@@ -612,6 +615,10 @@ public class RealProject implements IProject {
 
     /** Saves the translation memory and preferences */
     public synchronized void saveProject() {
+        saveProject(true);
+    }
+    
+    public synchronized void saveProject(boolean doTeamSync) {
         Log.logInfoRB("LOG_DATAENGINE_SAVE_START");
         UIThreadsUtil.mustNotBeSwingThread();
 
@@ -629,7 +636,7 @@ public class RealProject implements IProject {
 
                     projectTMX.save(m_config, s, isProjectModified());
 
-                    if (repository != null) {
+                    if (repository != null && doTeamSync) {
                         Core.getMainWindow().showStatusMessageRB("TEAM_SYNCHRONIZE");
                         rebaseProject();
                     }
@@ -735,130 +742,158 @@ public class RealProject implements IProject {
             needUpload = true;
         }
 
-        //get revisions of files
-        String baseRevTMX = repository.getBaseRevisionId(projectTMXFile);
-        Log.logDebug(LOGGER, "rebaseProject: TMX base revision: {0}", baseRevTMX);
-        String baseRevGlossary = null;
-        if (updateGlossary) {
-            baseRevGlossary = repository.getBaseRevisionId(glossaryFile);
-            Log.logDebug(LOGGER, "rebaseProject: glossary base revision: {0}", baseRevGlossary);
-        }
-
-        //save current status to file in case we encounter errors.
-        // save into ".new" file
-        filenameTMXwithLocalChangesOnBase = new File(projectTMXFilename + "-based_on_" + baseRevTMX + OConsts.NEWFILE_EXTENSION);
-        filenameGlossarywithLocalChangesOnBase = null;
-        projectTMX.exportTMX(m_config, filenameTMXwithLocalChangesOnBase, false, false, true); //overwrites file if it exists
-        if (updateGlossary) {
-            filenameGlossarywithLocalChangesOnBase = new File(glossaryFilename + "-based_on_" + baseRevGlossary + OConsts.NEWFILE_EXTENSION);
-            if (filenameGlossarywithLocalChangesOnBase.exists()) {
-                //empty file first, because we append to it.
-                filenameGlossarywithLocalChangesOnBase.delete();
+        while (true) {
+            boolean again = false;
+            
+            //get revisions of files
+            String baseRevTMX = repository.getBaseRevisionId(projectTMXFile);
+            Log.logDebug(LOGGER, "rebaseProject: TMX base revision: {0}", baseRevTMX);
+            String baseRevGlossary = null;
+            if (updateGlossary) {
+                baseRevGlossary = repository.getBaseRevisionId(glossaryFile);
+                Log.logDebug(LOGGER, "rebaseProject: glossary base revision: {0}", baseRevGlossary);
             }
-            filenameGlossarywithLocalChangesOnBase.createNewFile();
-            for (GlossaryEntry ge : glossaryEntries) {
-                GlossaryReaderTSV.append(filenameGlossarywithLocalChangesOnBase, ge);
-            }
-        }
-
-        // restore BASE revision
-        repository.restoreBase(modifiedFiles);
-        // load base revision
-        baseTMX = new ProjectTMX(m_config.getSourceLanguage(), m_config.getTargetLanguage(), m_config.isSentenceSegmentingEnabled(), projectTMXFile, null);
-        if (updateGlossary) {
-            baseGlossaryEntries = GlossaryReaderTSV.read(glossaryFile, true);
-        }
-
-        //Maybe user has made local changes to other files. We don't want that. 
-        //Every translator in a project should work on the SAME=equal project.
-        //Now is a good time to 'clean' the project.
-        //Note that we can replace restoreBase with reset for the same functionality.
-        //Here I keep a separate call, just to make it clear what and why we are doing
-        //and to allow to make this feature optional in future releases
-        unlockProject(); // So that we are able to replace omegat.project
-        try {
-            repository.reset();
-        } finally {
-            lockProject(); // we restore the lock
-        }
-
-        /* project is now in a bad state!
-         * If an error is raised before we reach the end of this function, we have backups in .new files.
-         * The user can use them to fix stuff, because
-         * -The tmx is still in memory, and on save it will be updated (but we can't assume that).
-         * -the glossary will be updated to the base, so we lost that.
-         */
-
-        // update to HEAD revision from repository and load
-        try {
-            //NB: if glossary is updated, this will cause the GlossaryManager to reload the file :(
-            //I can live with that; we will update it a few lines down, so loss of info is only temporary. Only reloading of big files might take resources.
-            repository.download(modifiedFiles);
-            //download succeeded, we are online!
-            setOnlineMode();
-        } catch (IRemoteRepository.NetworkException ex) {
-            //network problems, we are offline.
-            setOfflineMode();
-            //not on HEAD, so upload will fail
-            needUpload = false;
-            //go on to restore changes
-        } catch (Exception ex) {
-            //not on HEAD, so upload will fail
-            needUpload = false;
-            //go on to restore changes
-        }
-        String headRevTMX = repository.getBaseRevisionId(projectTMXFile);
-        Log.logDebug(LOGGER, "rebaseProject: TMX head revision: {0}", headRevTMX);
-
-        if (headRevTMX.equals(baseRevTMX)) {
-            // don't need rebase
-            filenameTMXwithLocalChangesOnHead = filenameTMXwithLocalChangesOnBase;
-            filenameTMXwithLocalChangesOnBase = null;
-            //free up some memory
-            baseTMX = null;
-        } else {
-            // need rebase
-            headTMX = new ProjectTMX(m_config.getSourceLanguage(), m_config.getTargetLanguage(), m_config.isSentenceSegmentingEnabled(), projectTMXFile, null);
-            //calculate delta with base, and apply delta on head and replace translations with new head.
-            projectTMX.calculateDeltaAndApply(baseTMX, headTMX);
-            filenameTMXwithLocalChangesOnHead = new File(projectTMXFilename + "-based_on_" + headRevTMX + OConsts.NEWFILE_EXTENSION);
-            projectTMX.exportTMX(m_config, filenameTMXwithLocalChangesOnHead, false, false, true);
-            //free memory
-            headTMX = null;
-        }
-        if (updateGlossary) {
-            String headRevGlossary = repository.getBaseRevisionId(glossaryFile);
-            Log.logDebug(LOGGER, "rebaseProject: glossary head revision: {0}", headRevGlossary);
-            if (headRevGlossary.equals(baseRevGlossary)) {
-                // don't need rebase
-                filenameGlossarywithLocalChangesOnHead = filenameGlossarywithLocalChangesOnBase;
-                filenameGlossarywithLocalChangesOnBase = null;
-                //free up some memory
-                baseGlossaryEntries = null;
-            } else {
-                headGlossaryEntries = GlossaryReaderTSV.read(glossaryFile, true);
-                List<GlossaryEntry> deltaAddedGlossaryLocal = new ArrayList<GlossaryEntry>(glossaryEntries);
-                deltaAddedGlossaryLocal.removeAll(baseGlossaryEntries);
-                List<GlossaryEntry> deltaRemovedGlossaryLocal = new ArrayList<GlossaryEntry>(baseGlossaryEntries);
-                deltaRemovedGlossaryLocal.removeAll(glossaryEntries);
-                headGlossaryEntries.addAll(deltaAddedGlossaryLocal);
-                headGlossaryEntries.removeAll(deltaRemovedGlossaryLocal);
-
-                filenameGlossarywithLocalChangesOnHead = new File(glossaryFilename + "-based_on_" + headRevGlossary + OConsts.NEWFILE_EXTENSION);
-                filenameGlossarywithLocalChangesOnHead.createNewFile();
-                for (GlossaryEntry ge : headGlossaryEntries) {
-                    GlossaryReaderTSV.append(filenameGlossarywithLocalChangesOnHead, ge);
+    
+            //save current status to file in case we encounter errors.
+            // save into ".new" file
+            filenameTMXwithLocalChangesOnBase = new File(projectTMXFilename + "-based_on_" + baseRevTMX + OConsts.NEWFILE_EXTENSION);
+            filenameGlossarywithLocalChangesOnBase = null;
+            projectTMX.exportTMX(m_config, filenameTMXwithLocalChangesOnBase, false, false, true); //overwrites file if it exists
+            if (updateGlossary) {
+                filenameGlossarywithLocalChangesOnBase = new File(glossaryFilename + "-based_on_" + baseRevGlossary + OConsts.NEWFILE_EXTENSION);
+                if (filenameGlossarywithLocalChangesOnBase.exists()) {
+                    //empty file first, because we append to it.
+                    filenameGlossarywithLocalChangesOnBase.delete();
                 }
-
-                //free memory
-                headGlossaryEntries = null;
-                baseGlossaryEntries = null;
-                glossaryEntries = null;
+                filenameGlossarywithLocalChangesOnBase.createNewFile();
+                for (GlossaryEntry ge : glossaryEntries) {
+                    GlossaryReaderTSV.append(filenameGlossarywithLocalChangesOnBase, ge);
+                }
             }
-        } else {
-            filenameGlossarywithLocalChangesOnHead = null;
+    
+            // restore BASE revision
+            repository.restoreBase(modifiedFiles);
+            // load base revision
+            baseTMX = new ProjectTMX(m_config.getSourceLanguage(), m_config.getTargetLanguage(), m_config.isSentenceSegmentingEnabled(), projectTMXFile, null);
+            if (updateGlossary) {
+                baseGlossaryEntries = GlossaryReaderTSV.read(glossaryFile, true);
+            }
+    
+            //Maybe user has made local changes to other files. We don't want that. 
+            //Every translator in a project should work on the SAME=equal project.
+            //Now is a good time to 'clean' the project.
+            //Note that we can replace restoreBase with reset for the same functionality.
+            //Here I keep a separate call, just to make it clear what and why we are doing
+            //and to allow to make this feature optional in future releases
+            unlockProject(); // So that we are able to replace omegat.project
+            try {
+                repository.reset();
+            } finally {
+                lockProject(); // we restore the lock
+            }
+    
+            /* project is now in a bad state!
+             * If an error is raised before we reach the end of this function, we have backups in .new files.
+             * The user can use them to fix stuff, because
+             * -The tmx is still in memory, and on save it will be updated (but we can't assume that).
+             * -the glossary will be updated to the base, so we lost that.
+             */
+    
+            // update to HEAD revision from repository and load
+            try {
+                //NB: if glossary is updated, this will cause the GlossaryManager to reload the file :(
+                //I can live with that; we will update it a few lines down, so loss of info is only temporary. Only reloading of big files might take resources.
+                repository.download(modifiedFiles);
+                //download succeeded, we are online!
+                setOnlineMode();
+            } catch (IRemoteRepository.NetworkException ex) {
+                //network problems, we are offline.
+                setOfflineMode();
+                //not on HEAD, so upload will fail
+                needUpload = false;
+                //go on to restore changes
+            } catch (Exception ex) {
+                //not on HEAD, so upload will fail
+                needUpload = false;
+                //go on to restore changes
+            }
+            String headRevTMX = repository.getBaseRevisionId(projectTMXFile);
+            Log.logDebug(LOGGER, "rebaseProject: TMX head revision: {0}", headRevTMX);
+    
+            if (headRevTMX.equals(baseRevTMX)) {
+                // don't need rebase
+                filenameTMXwithLocalChangesOnHead = filenameTMXwithLocalChangesOnBase;
+                filenameTMXwithLocalChangesOnBase = null;
+                //free up some memory
+                baseTMX = null;
+            } else {
+                // need rebase
+                again = true;
+                headTMX = new ProjectTMX(m_config.getSourceLanguage(), m_config.getTargetLanguage(), m_config.isSentenceSegmentingEnabled(), projectTMXFile, null);
+                
+                // Do 3-way merge of:
+                // Base: baseTMX
+                // File 1: projectTMX (mine)
+                // File 2: headTMX (theirs)
+                synchronized (projectTMX) {
+                    ProjectTMX mergedTMX = SuperTmxMerge.merge(baseTMX, OStrings.getString("TMX_MERGE_BASE"),
+                            projectTMX, OStrings.getString("TMX_MERGE_MINE"),
+                            headTMX, OStrings.getString("TMX_MERGE_THEIRS"),
+                            m_config.getSourceLanguage().getLanguage(), m_config.getTargetLanguage().getLanguage());
+                    projectTMX.replaceContent(mergedTMX);
+                }
+                
+                // Refresh view immediately to make sure changes are applied properly.
+                SwingUtilities.invokeAndWait(new Runnable() {
+                    @Override
+                    public void run() {
+                        Core.getEditor().refreshView(false);
+                    }
+                });
+                
+                filenameTMXwithLocalChangesOnHead = new File(projectTMXFilename + "-based_on_" + headRevTMX + OConsts.NEWFILE_EXTENSION);
+                projectTMX.exportTMX(m_config, filenameTMXwithLocalChangesOnHead, false, false, true);
+                //free memory
+                headTMX = null;
+            }
+            if (updateGlossary) {
+                String headRevGlossary = repository.getBaseRevisionId(glossaryFile);
+                Log.logDebug(LOGGER, "rebaseProject: glossary head revision: {0}", headRevGlossary);
+                if (headRevGlossary.equals(baseRevGlossary)) {
+                    // don't need rebase
+                    filenameGlossarywithLocalChangesOnHead = filenameGlossarywithLocalChangesOnBase;
+                    filenameGlossarywithLocalChangesOnBase = null;
+                    //free up some memory
+                    baseGlossaryEntries = null;
+                } else {
+                    again = true;
+                    headGlossaryEntries = GlossaryReaderTSV.read(glossaryFile, true);
+                    List<GlossaryEntry> deltaAddedGlossaryLocal = new ArrayList<GlossaryEntry>(glossaryEntries);
+                    deltaAddedGlossaryLocal.removeAll(baseGlossaryEntries);
+                    List<GlossaryEntry> deltaRemovedGlossaryLocal = new ArrayList<GlossaryEntry>(baseGlossaryEntries);
+                    deltaRemovedGlossaryLocal.removeAll(glossaryEntries);
+                    headGlossaryEntries.addAll(deltaAddedGlossaryLocal);
+                    headGlossaryEntries.removeAll(deltaRemovedGlossaryLocal);
+    
+                    filenameGlossarywithLocalChangesOnHead = new File(glossaryFilename + "-based_on_" + headRevGlossary + OConsts.NEWFILE_EXTENSION);
+                    filenameGlossarywithLocalChangesOnHead.createNewFile();
+                    for (GlossaryEntry ge : headGlossaryEntries) {
+                        GlossaryReaderTSV.append(filenameGlossarywithLocalChangesOnHead, ge);
+                    }
+    
+                    //free memory
+                    headGlossaryEntries = null;
+                    baseGlossaryEntries = null;
+                    glossaryEntries = null;
+                }
+            } else {
+                filenameGlossarywithLocalChangesOnHead = null;
+            }
+            
+            if (!again) {
+                break;
+            }
         }
-
         /* project_save.tmx / writableGlossary are now the head version (or still the base version, if offline)
          * the old situation is in based_on_<base>.new files
          * the new situation is in based_on_<head>.new files

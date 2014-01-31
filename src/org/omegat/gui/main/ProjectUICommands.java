@@ -579,7 +579,7 @@ public class ProjectUICommands {
 
         new SwingWorker<Object, Void>() {
             protected Object doInBackground() throws Exception {
-                Core.getProject().saveProject();
+                Core.getProject().saveProject(false);
                 Core.getProject().compileProject(".*");
                 return null;
             }
@@ -600,7 +600,7 @@ public class ProjectUICommands {
         new SwingWorker<Object, Void>() {
             @Override
             protected Object doInBackground() throws Exception {
-                Core.getProject().saveProject();
+                Core.getProject().saveProject(false);
                 Core.getProject().compileProject(sourcePattern);
                 return null;
             }

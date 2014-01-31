@@ -634,7 +634,7 @@ public class PoFilter extends AbstractFilter {
 
                 if (out != null) {
                     // Header is always written
-                    out.write("msgstr " + getTranslation(targets[0], false, true, fc, 0) + "\n");
+                    out.write("msgstr " + getTranslation(null, targets[0], false, true, fc, 0) + "\n");
                 } else {
                     alignHeader(targets[0].toString(), fc);
                 }
@@ -645,16 +645,23 @@ public class PoFilter extends AbstractFilter {
             if (sources[1].length() == 0) {
                 // non-plurals
                 if (out != null) {
-                    out.write("msgstr " + getTranslation(sources[0], allowBlank, false, fc, 0) + "\n");
+                    if (formatMonolingual) {
+                        out.write("msgstr "
+                                + getTranslation(sources[0].toString(), targets[0], allowBlank, false, fc, 0)
+                                + "\n");
+                    } else {
+                        out.write("msgstr " + getTranslation(null, sources[0], allowBlank, false, fc, 0)
+                                + "\n");
+                    }
                 } else {
                     align(0);
                 }
             } else {
                 // plurals
                 if (out != null) {
-                    out.write("msgstr[0] " + getTranslation(sources[0], allowBlank, false, fc, 0) + "\n");
+                    out.write("msgstr[0] " + getTranslation(null, sources[0], allowBlank, false, fc, 0) + "\n");
                     for (int i=1;i<plurals;i++) {
-                        out.write("msgstr["+i+"] " + getTranslation(sources[1], allowBlank, false, fc, i) + "\n");
+                        out.write("msgstr["+i+"] " + getTranslation(null, sources[1], allowBlank, false, fc, i) + "\n");
                     }
                 } else {
                     align(0);
@@ -704,9 +711,8 @@ public class PoFilter extends AbstractFilter {
      * @return The translated entry, within double quotes on each line (thus ready to be printed to target
      *         file immediately)
      **/
-    private String getTranslation(StringBuilder en, boolean allowNull, boolean isHeader, FilterContext fc, int plural) {
+    private String getTranslation(String id, StringBuilder en, boolean allowNull, boolean isHeader, FilterContext fc, int plural) {
         String entry = unescape(en.toString());
-        String id = null;
 
         if (plural > 1) {
             id = "["+plural+"]"+entry;

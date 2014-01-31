@@ -155,7 +155,7 @@ public class EditorController implements IEditor {
     Document3.ORIENTATION currentOrientation;
     protected boolean sourceLangIsRTL, targetLangIsRTL;
 
-    private volatile IEditorFilter entriesFilter;
+    volatile IEditorFilter entriesFilter;
     private Component entriesFilterControlComponent;
 
     private boolean emptyTranslation = false;

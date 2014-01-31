@@ -39,4 +39,10 @@ public interface IEditorFilter {
     boolean allowed(SourceTextEntry ste);
 
     Component getControlComponent();
+
+    /**
+     * True if editor should insert source text as empty translation even if it's not allowed by editor
+     * behavior settings.
+     */
+    boolean isSourceAsEmptyTranslation();
 }

@@ -56,6 +56,11 @@ public class SearchFilter implements IEditorFilter {
     }
 
     @Override
+    public boolean isSourceAsEmptyTranslation() {
+        return true;
+    }
+
+    @Override
     public boolean allowed(SourceTextEntry ste) {
         return entriesList.contains(ste.entryNum());
     }

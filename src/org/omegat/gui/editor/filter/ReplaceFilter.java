@@ -88,6 +88,11 @@ public class ReplaceFilter implements IEditorFilter {
         });
     }
 
+    @Override
+    public boolean isSourceAsEmptyTranslation() {
+        return true;
+    }
+
     /**
      * Replace all occurrences in all entries.
      */

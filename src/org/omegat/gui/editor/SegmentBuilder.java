@@ -249,12 +249,18 @@ public class SegmentBuilder {
             if (trans.isTranslated()) {
                 //translation exist
                 translationText = trans.translation;
-            } else if (!Preferences.isPreference(Preferences.DONT_INSERT_SOURCE_TEXT)) {
-                // need to insert source text on empty translation
-                translationText = ste.getSrcText();
             } else {
-                // empty text on non-exist translation
-                translationText = "";
+                boolean insertSource = !Preferences.isPreference(Preferences.DONT_INSERT_SOURCE_TEXT);
+                if (controller.entriesFilter != null && controller.entriesFilter.isSourceAsEmptyTranslation()) {
+                    insertSource = true;
+                }
+                if (insertSource) {
+                    // need to insert source text on empty translation
+                    translationText = ste.getSrcText();
+                } else {
+                    // empty text on non-exist translation
+                    translationText = "";
+                }
             }
 
             addActiveSegPart(translationText);

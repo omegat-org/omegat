@@ -47,6 +47,7 @@ import javax.xml.stream.Location;
 import javax.xml.stream.XMLEventReader;
 import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLReporter;
+import javax.xml.stream.XMLResolver;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.events.Attribute;
 import javax.xml.stream.events.Characters;
@@ -111,7 +112,7 @@ public class TMXReader2 {
                 warningsCount++;
             }
         });
-        
+        factory.setXMLResolver(TMX_DTD_RESOLVER_2);
         dateFormat1 = new SimpleDateFormat("yyyyMMdd'T'HHmmss'Z'", Locale.ENGLISH);
         dateFormat1.setTimeZone(TimeZone.getTimeZone("UTC"));
         dateFormat2 = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.ENGLISH);
@@ -620,6 +621,19 @@ public class TMXReader2 {
                 return new InputSource(TMXReader2.class.getResourceAsStream("/schemas/tmx11.dtd"));
             } else if (systemId.endsWith("tmx14.dtd")) {
                 return new InputSource(TMXReader2.class.getResourceAsStream("/schemas/tmx14.dtd"));
+            } else {
+                return null;
+            }
+        }
+    };
+
+    public static final XMLResolver TMX_DTD_RESOLVER_2 = new XMLResolver() {
+        public Object resolveEntity(String publicId, String systemId,
+                String baseURI, String namespace) throws XMLStreamException {
+            if (systemId.endsWith("tmx11.dtd")) {
+                return TMXReader2.class.getResourceAsStream("/schemas/tmx11.dtd");
+            } else if (systemId.endsWith("tmx14.dtd")) {
+                return TMXReader2.class.getResourceAsStream("/schemas/tmx14.dtd");
             } else {
                 return null;
             }

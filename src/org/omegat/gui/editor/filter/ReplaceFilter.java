@@ -174,7 +174,7 @@ public class ReplaceFilter implements IEditorFilter {
             }
         }
         // find from the beginning of project
-        for (int i = minEntryNum; i <= currentEntryNumber; i++) {
+        for (int i = minEntryNum; i < currentEntryNumber; i++) {
             SourceTextEntry ste = entries.get(i);
             if (ste == null) {
                 continue; // entry not filtered
@@ -193,6 +193,8 @@ public class ReplaceFilter implements IEditorFilter {
                 return;
             }
         }
+        // not found
+        ec.activateEntry();
     }
 
     private void replace() {
@@ -201,11 +203,14 @@ public class ReplaceFilter implements IEditorFilter {
         // is caret inside match ?
         int pos = ec.getCurrentPositionInEntryTranslation();
         String str = ec.getCurrentTranslation();
-        for (SearchMatch m : getReplacementsForEntry(str)) {
-            if (m.getStart() <= pos && pos <= m.getEnd()) {
-                // yes - replace
-                ec.replacePartOfTextAndMark(replacement, m.start, m.end);
-                break;
+        List<SearchMatch> found = getReplacementsForEntry(str);
+        if (found != null) {
+            for (SearchMatch m : getReplacementsForEntry(str)) {
+                if (m.getStart() <= pos && pos <= m.getEnd()) {
+                    // yes - replace
+                    ec.replacePartOfTextAndMark(replacement, m.start, m.end);
+                    break;
+                }
             }
         }
         // skip to next

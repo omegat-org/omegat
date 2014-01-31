@@ -43,13 +43,23 @@ import org.omegat.util.OConsts;
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
 public class SearchExpression {
+    public enum SearchExpressionType {
+        EXACT, KEYWORD, REGEXP
+    };
+
+    public enum SearchPlace {
+        SOURCE_TRANSLATION, SOURCE_ONLY, TRANSLATION_ONLY
+    };
+
+    public enum SearchState {
+        TRANSLATED_UNTRANSLATED, TRANSLATED, UNTRANSLATED
+    };
+
     public SearchMode mode;
     public String text;
     public String rootDir;
     public boolean recursive = true;
-    public boolean exact = true;
-    public boolean keyword = false;
-    public boolean regex = false;
+    public SearchExpressionType searchExpressionType;
     public boolean caseSensitive = false;
     public boolean glossary = true;
     public boolean memory = true;
@@ -57,8 +67,12 @@ public class SearchExpression {
     public boolean allResults = false;
     public boolean searchSource = true;
     public boolean searchTarget = true;
-    public boolean searchTranslatedOnly = false;
+    public boolean searchTranslated;
+    public boolean replaceTranslated;
+    public boolean replaceUntranslated;
+    public boolean searchUntranslated;
     public boolean searchNotes = true;
+    public boolean searchComments = true;
     public boolean searchAuthor = false;
     public String author = "";
     public boolean searchDateAfter = false;

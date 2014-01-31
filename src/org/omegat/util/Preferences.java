@@ -98,11 +98,14 @@ public class Preferences {
     public static final String SEARCHWINDOW_X = "search_window_x";
     public static final String SEARCHWINDOW_Y = "search_window_y";
     public static final String SEARCHWINDOW_SEARCH_TYPE = "search_window_search_type";
+    public static final String SEARCHWINDOW_REPLACE_TYPE = "search_window_replace_type";
     public static final String SEARCHWINDOW_CASE_SENSITIVE = "search_window_case_sensitive";
-    public static final String SEARCHWINDOW_SEARCH_SOURCE = "search_window_search_source";
-    public static final String SEARCHWINDOW_SEARCH_TARGET = "search_window_search_target";
-    public static final String SEARCHWINDOW_SEARCH_TRANSLATED = "search_window_search_translated";
+    public static final String SEARCHWINDOW_CASE_SENSITIVE_REPLACE = "search_window_case_sensitive_replace";
+    public static final String SEARCHWINDOW_REPLACE_UNTRANSLATED = "search_window_replace_untranslated";
+    public static final String SEARCHWINDOW_SEARCH_PLACE = "search_window_search_place";
+    public static final String SEARCHWINDOW_SEARCH_STATE = "search_window_search_state";
     public static final String SEARCHWINDOW_SEARCH_NOTES = "search_window_search_notes";
+    public static final String SEARCHWINDOW_SEARCH_COMMENTS = "search_window_search_comments";
     public static final String SEARCHWINDOW_REG_EXPRESSIONS = "search_window_reg_expressions";
     public static final String SEARCHWINDOW_GLOSSARY_SEARCH = "search_window_glossary_search";
     public static final String SEARCHWINDOW_MEMORY_SEARCH = "search_window_memory_search";
@@ -445,7 +448,31 @@ public class Preferences {
         }
         return val;
     }
-    
+
+    /**
+     * Returns the value of some preference out of OmegaT's preferences file, if it exists.
+     * <p>
+     * If the key is not found, returns the default value provided and sets the preference to the default
+     * value.
+     * 
+     * @param key
+     *            name of the key to look up, usually OConsts.PREF_...
+     * @param defaultValue
+     *            default value for the key
+     * @return preference value as enum
+     */
+    public static <T extends Enum<T>> Enum<T> getPreferenceEnumDefault(String key, Enum<T> defaultValue) {
+        String val = getPreference(key);
+        Enum<T> r;
+        try {
+            r = Enum.valueOf(defaultValue.getDeclaringClass(), val);
+        } catch (IllegalArgumentException ex) {
+            r = defaultValue;
+            setPreference(key, defaultValue);
+        }
+        return r;
+    }
+
     /**
      * Returns the value of some preference out of OmegaT's preferences file, if
      * it exists.
@@ -505,6 +532,33 @@ public class Preferences {
             } else {
                 // mapping exists - reset defaultValue to new
                 m_valList.set(i.intValue(), value);
+            }
+        }
+    }
+
+    /**
+     * Sets the value of some preference.
+     * 
+     * @param name
+     *            preference key name, usually Preferences.PREF_...
+     * @param value
+     *            preference value as enum
+     */
+    public static void setPreference(String name, Enum<?> value) {
+        m_changed = true;
+        if (name != null && name.length() != 0 && value != null) {
+            if (!m_loaded)
+                doLoad();
+            Integer i = m_preferenceMap.get(name);
+            if (i == null) {
+                // defaultValue doesn't exist - add it
+                i = m_valList.size();
+                m_preferenceMap.put(name, i);
+                m_valList.add(value.name());
+                m_nameList.add(name);
+            } else {
+                // mapping exists - reset defaultValue to new
+                m_valList.set(i.intValue(), value.name());
             }
         }
     }

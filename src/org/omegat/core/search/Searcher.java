@@ -137,17 +137,17 @@ public class Searcher {
         // search string; otherwise, if keyword, break up the string into
         // separate words (= multiple search strings)
 
-        if (expression.exact) {
+        switch (expression.searchExpressionType) {
+        case EXACT:
+        default:
             // escape the search string, it's not supposed to be a regular
             // expression
             text = StaticUtils.escapeNonRegex(text, false);
 
             // create a matcher for the search string
             m_matchers.add(Pattern.compile(text, flags).matcher(""));
-        } else if (expression.regex) {
-            // create a matcher for the search string
-            m_matchers.add(Pattern.compile(text, flags).matcher(""));
-        } else {
+            break;
+        case KEYWORD:
             // break the search string into keywords,
             // each of which is a separate search string
             text = text.trim();
@@ -165,8 +165,7 @@ public class Searcher {
                     if (word.length() > 0) {
                         // escape the word, if it's not supposed to be a regular
                         // expression
-                        if (!expression.regex)
-                            word = StaticUtils.escapeNonRegex(word, false);
+                        word = StaticUtils.escapeNonRegex(word, false);
 
                         // create a matcher for the word
                         m_matchers.add(Pattern.compile(word, flags).matcher(""));
@@ -176,9 +175,14 @@ public class Searcher {
                     wordStart = (spacePos == -1) ? text.length() : spacePos + 1;
                 }
             }
+            break;
+        case REGEXP:
+            // create a matcher for the search string
+            m_matchers.add(Pattern.compile(text, flags).matcher(""));
+            break;
         }
         // create a matcher for the author search string
-        if (!expression.regex)
+        if (expression.searchExpressionType != SearchExpression.SearchExpressionType.REGEXP)
             author = StaticUtils.escapeNonRegex(author, false);
 
         m_author = Pattern.compile(author, flags).matcher("");
@@ -359,28 +363,47 @@ public class Searcher {
      */
     protected void checkEntry(String srcText, String locText, TMXEntry entry, int entryNum, String intro) {
         SearchMatch[] srcMatches = null;
-        if (expression.searchSource) {
-            if (searchString(srcText)) {
-                srcMatches = foundMatches.toArray(new SearchMatch[foundMatches.size()]);
-            }
-        }
         SearchMatch[] targetMatches = null;
-        if (expression.searchTarget) {
-            if (searchString(locText)) {
-                targetMatches = foundMatches.toArray(new SearchMatch[foundMatches.size()]);
-            }
-        }
         SearchMatch[] noteMatches = null;
-        if (expression.searchNotes) {
-            if (entry != null && searchString(entry.note)) {
-                noteMatches = foundMatches.toArray(new SearchMatch[foundMatches.size()]);
-            }
-        }
 
-        if (m_searchExpression.searchTranslatedOnly) {
-            if (locText == null) {
-                return;
+        switch (m_searchExpression.mode) {
+        case SEARCH:
+            if (locText!=null) {
+                if (!expression.searchTranslated) {
+                    return;
+                }
+            }else {
+                if (!expression.searchUntranslated) {
+                    return;
+                }
             }
+            if (expression.searchSource) {
+                if (searchString(srcText)) {
+                    srcMatches = foundMatches.toArray(new SearchMatch[foundMatches.size()]);
+                }
+            }
+            if (expression.searchTarget) {
+                if (searchString(locText)) {
+                    targetMatches = foundMatches.toArray(new SearchMatch[foundMatches.size()]);
+                }
+            }
+            if (expression.searchNotes) {
+                if (entry != null && searchString(entry.note)) {
+                    noteMatches = foundMatches.toArray(new SearchMatch[foundMatches.size()]);
+                }
+            }
+            break;
+        case REPLACE:
+            if (m_searchExpression.replaceTranslated && locText != null) {
+                if (searchString(locText)) {
+                    targetMatches = foundMatches.toArray(new SearchMatch[foundMatches.size()]);
+                }
+            } else if (m_searchExpression.replaceUntranslated && locText == null) {
+                if (searchString(srcText)) {
+                    srcMatches = foundMatches.toArray(new SearchMatch[foundMatches.size()]);
+                }
+            }
+            break;
         }
         // if the search expression is satisfied, report the hit
         if ((srcMatches != null || targetMatches != null || noteMatches != null)
@@ -548,7 +571,7 @@ public class Searcher {
 
         checkStop.checkInterrupted();
 
-        if (m_searchExpression.searchTranslatedOnly) {
+        if (!m_searchExpression.searchTranslated) {
             if (translation == null) {
                 return;
             }

@@ -94,7 +94,10 @@ public class ReplaceFilter implements IEditorFilter {
     public void replaceAll() {
         for (SourceTextEntry ste : entries.values()) {
             TMXEntry en = Core.getProject().getTranslationInfo(ste);
-            String trans = en != null ? en.translation : ste.getSourceTranslation();
+            String trans = getEntryText(ste, en);
+            if (trans == null) {
+                continue;
+            }
             List<SearchMatch> found = getReplacementsForEntry(trans);
             if (found != null) {
                 int off = 0;
@@ -103,7 +106,7 @@ public class ReplaceFilter implements IEditorFilter {
                     o.replace(m.getStart() + off, m.getEnd() + off, replacement);
                     off += replacement.length() - m.getLength();
                 }
-                if (en != null) {
+                if (en.isTranslated()) {
                     Core.getProject().setTranslation(ste, o.toString(), en.note, en.defaultTranslation);
                 } else {
                     // new translation - set as default
@@ -159,11 +162,12 @@ public class ReplaceFilter implements IEditorFilter {
             if (ste == null) {
                 continue; // entry not filtered
             }
-            TMXEntry trans = Core.getProject().getTranslationInfo(ste);
+            TMXEntry en = Core.getProject().getTranslationInfo(ste);
+            String trans = getEntryText(ste, en);
             if (trans == null) {
-                continue; // there is no translation
+                continue;
             }
-            found = getReplacementsForEntry(trans.translation);
+            found = getReplacementsForEntry(trans);
             if (found == null) {
                 continue; // no replacements
             }
@@ -179,11 +183,12 @@ public class ReplaceFilter implements IEditorFilter {
             if (ste == null) {
                 continue; // entry not filtered
             }
-            TMXEntry trans = Core.getProject().getTranslationInfo(ste);
+            TMXEntry en = Core.getProject().getTranslationInfo(ste);
+            String trans = getEntryText(ste, en);
             if (trans == null) {
-                continue; // there is no translation
+                continue;
             }
-            found = getReplacementsForEntry(trans.translation);
+            found = getReplacementsForEntry(trans);
             if (found == null) {
                 continue; // no replacements
             }
@@ -215,5 +220,19 @@ public class ReplaceFilter implements IEditorFilter {
         }
         // skip to next
         skip();
+    }
+
+    /**
+     * Returns text of entry where replacement should be found. It can be translation or source text depends
+     * on settings, or null if entry should be skipped.
+     */
+    private String getEntryText(SourceTextEntry ste, TMXEntry en) {
+        if (en.isTranslated()) {
+            return en.translation;
+        } else if (searcher.getExpression().replaceUntranslated) {
+            return ste.getSrcText();
+        } else {
+            return null;
+        }
     }
 }

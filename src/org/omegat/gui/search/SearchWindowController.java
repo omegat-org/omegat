@@ -44,7 +44,6 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
 
 import javax.swing.AbstractAction;
 import javax.swing.Action;
@@ -59,7 +58,6 @@ import javax.swing.event.ChangeListener;
 import org.omegat.core.Core;
 import org.omegat.core.search.SearchExpression;
 import org.omegat.core.search.SearchMode;
-import org.omegat.core.search.SearchResultEntry;
 import org.omegat.core.search.Searcher;
 import org.omegat.core.threads.SearchThread;
 import org.omegat.gui.editor.filter.ReplaceFilter;
@@ -156,6 +154,10 @@ public class SearchWindowController {
             form.m_filterButton.setVisible(false);
             form.m_numberLabel.setVisible(false);;
             form.m_numberOfResults.setVisible(false);
+            form.m_keywordSearchRB.setEnabled(false);
+            if (form.m_keywordSearchRB.isSelected()) {
+                form.m_exactSearchRB.setSelected(true);
+            }
             break;
         }
 
@@ -185,11 +187,6 @@ public class SearchWindowController {
         form.m_replaceAllButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 doReplaceAll();
-            }
-        });
-        form.m_removeFilterButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                doRemoveFilter();
             }
         });
 
@@ -532,7 +529,6 @@ public class SearchWindowController {
         EntryListPane viewer = (EntryListPane) form.m_viewer;
         Core.getEditor().commitAndLeave(); // Otherwise, the current segment being edited is lost
         Core.getEditor().setFilter(new SearchFilter(viewer.getEntryList()));
-        form.m_removeFilterButton.setEnabled(true);
     }
 
     private void doReplace() {
@@ -542,7 +538,6 @@ public class SearchWindowController {
                 .setFilter(
                         new ReplaceFilter(viewer.getEntryList(), viewer.getSearcher(), form.m_replaceField
                                 .getText()));
-        form.m_removeFilterButton.setEnabled(true);
     }
 
     private void doReplaceAll() {
@@ -557,11 +552,6 @@ public class SearchWindowController {
                     .replaceAll();
         }
         Core.getEditor().activateEntry();
-    }
-
-    private void doRemoveFilter() {
-        form.m_removeFilterButton.setEnabled(false);
-        Core.getEditor().removeFilter();
     }
 
     private void doSearch() {

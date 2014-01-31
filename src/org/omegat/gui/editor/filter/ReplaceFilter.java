@@ -205,10 +205,10 @@ public class ReplaceFilter implements IEditorFilter {
             if (m.getStart() <= pos && pos <= m.getEnd()) {
                 // yes - replace
                 ec.replacePartOfTextAndMark(replacement, m.start, m.end);
-                // then skip to next
-                skip();
-                return;
+                break;
             }
         }
+        // skip to next
+        skip();
     }
 }

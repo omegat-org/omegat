@@ -122,8 +122,6 @@ public class SearchWindowForm extends javax.swing.JFrame {
         m_replaceAllButton = new javax.swing.JButton();
         filler18 = new javax.swing.Box.Filler(new java.awt.Dimension(5, 0), new java.awt.Dimension(5, 0), new java.awt.Dimension(5, 32767));
         m_replaceButton = new javax.swing.JButton();
-        filler17 = new javax.swing.Box.Filler(new java.awt.Dimension(5, 0), new java.awt.Dimension(5, 0), new java.awt.Dimension(5, 32767));
-        m_removeFilterButton = new javax.swing.JButton();
         filler16 = new javax.swing.Box.Filler(new java.awt.Dimension(5, 0), new java.awt.Dimension(5, 0), new java.awt.Dimension(5, 32767));
         m_filterButton = new javax.swing.JButton();
         filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(5, 0), new java.awt.Dimension(5, 0), new java.awt.Dimension(5, 32767));
@@ -469,11 +467,6 @@ public class SearchWindowForm extends javax.swing.JFrame {
         org.openide.awt.Mnemonics.setLocalizedText(m_replaceButton, OStrings.getString("BUTTON_REPLACE")); // NOI18N
         m_replaceButton.setEnabled(false);
         jPanel7.add(m_replaceButton);
-        jPanel7.add(filler17);
-
-        org.openide.awt.Mnemonics.setLocalizedText(m_removeFilterButton, OStrings.getString("BUTTON_REMOVEFILTER")); // NOI18N
-        m_removeFilterButton.setEnabled(false);
-        jPanel7.add(m_removeFilterButton);
         jPanel7.add(filler16);
 
         org.openide.awt.Mnemonics.setLocalizedText(m_filterButton, OStrings.getString("BUTTON_FILTER")); // NOI18N
@@ -545,7 +538,6 @@ public class SearchWindowForm extends javax.swing.JFrame {
     javax.swing.Box.Filler filler14;
     javax.swing.Box.Filler filler15;
     javax.swing.Box.Filler filler16;
-    javax.swing.Box.Filler filler17;
     javax.swing.Box.Filler filler18;
     javax.swing.Box.Filler filler2;
     javax.swing.Box.Filler filler3;
@@ -596,7 +588,6 @@ public class SearchWindowForm extends javax.swing.JFrame {
     javax.swing.JRadioButton m_rbProject;
     javax.swing.JCheckBox m_recursiveCB;
     javax.swing.JRadioButton m_regexpSearchRB;
-    javax.swing.JButton m_removeFilterButton;
     javax.swing.JButton m_replaceAllButton;
     javax.swing.JButton m_replaceButton;
     javax.swing.JTextField m_replaceField;

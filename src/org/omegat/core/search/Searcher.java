@@ -246,7 +246,7 @@ public class Searcher {
                 SourceTextEntry ste = dataEngine.getAllEntries().get(i);
                 TMXEntry te = m_project.getTranslationInfo(ste);
 
-                checkEntry(ste.getSrcText(), te.translation, te, i, null);
+                checkEntry(ste.getSrcText(), te.translation, ste.getComment(), te, i, null);
                 checkStop.checkInterrupted();
             }
 
@@ -262,7 +262,7 @@ public class Searcher {
                     }
                     checkStop.checkInterrupted();
                     if (m_project.isOrphaned(source)) {
-                        checkEntry(en.source, en.translation, en, -1, file);
+                        checkEntry(en.source, en.translation, null, en, -1, file);
                     }
                 }
             });
@@ -277,7 +277,7 @@ public class Searcher {
                     }
                     checkStop.checkInterrupted();
                     if (m_project.isOrphaned(source)) {
-                        checkEntry(en.source, en.translation, en, -1, file);
+                        checkEntry(en.source, en.translation, null, en, -1, file);
                     }
                 }
             });
@@ -308,7 +308,7 @@ public class Searcher {
             String intro = OStrings.getString("SW_GLOSSARY_RESULT");
             List<GlossaryEntry> entries = Core.getGlossaryManager().getGlossaryEntries(m_searchExpression.text);
             for (GlossaryEntry en : entries) {
-                checkEntry(en.getSrcText(), en.getLocText(), null, -1, intro);
+                checkEntry(en.getSrcText(), en.getLocText(), null, null, -1, intro);
                 // stop searching if the max. nr of hits has been reached
                 if (m_numFinds >= expression.numberOfResults) {
                     return;
@@ -340,7 +340,7 @@ public class Searcher {
             //for alternative translations:
             //- it is not feasible to get the sourcetextentry that matches the tm.source, so we cannot get the entryNum and real translation
             //- although the 'trnalsation' is used as 'source', we search it as translation, else we cannot show to which real source it belongs
-            checkEntry(tm.source, tm.translation, null, -1, tmxID);
+            checkEntry(tm.source, tm.translation, null, null, -1, tmxID);
 
             checkStop.checkInterrupted();
         }
@@ -361,10 +361,12 @@ public class Searcher {
      * @param intro
      *            file
      */
-    protected void checkEntry(String srcText, String locText, TMXEntry entry, int entryNum, String intro) {
+    protected void checkEntry(String srcText, String locText, String comment, TMXEntry entry, int entryNum,
+            String intro) {
         SearchMatch[] srcMatches = null;
         SearchMatch[] targetMatches = null;
         SearchMatch[] noteMatches = null;
+        SearchMatch[] commentMatches = null;
 
         switch (m_searchExpression.mode) {
         case SEARCH:
@@ -392,6 +394,11 @@ public class Searcher {
                     noteMatches = foundMatches.toArray(new SearchMatch[foundMatches.size()]);
                 }
             }
+            if (expression.searchComments) {
+                if (comment != null && searchString(comment)) {
+                    commentMatches = foundMatches.toArray(new SearchMatch[foundMatches.size()]);
+                }
+            }
             break;
         case REPLACE:
             if (m_searchExpression.replaceTranslated && locText != null) {
@@ -406,7 +413,7 @@ public class Searcher {
             break;
         }
         // if the search expression is satisfied, report the hit
-        if ((srcMatches != null || targetMatches != null || noteMatches != null)
+        if ((srcMatches != null || targetMatches != null || noteMatches != null || commentMatches != null)
                 && (!expression.searchAuthor || entry != null && searchAuthor(entry))
                 && (!expression.searchDateBefore || entry != null && entry.changeDate != 0
                         && entry.changeDate < expression.dateBefore)

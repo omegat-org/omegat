@@ -552,6 +552,8 @@ public class SearchWindowController {
                     .replaceAll();
         }
         Core.getEditor().activateEntry();
+        form.m_replaceButton.setEnabled(false);
+        form.m_replaceAllButton.setEnabled(false);
     }
 
     private void doSearch() {

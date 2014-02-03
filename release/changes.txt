@@ -2,7 +2,7 @@
  OmegaT 3.1.0 
 ----------------------------------------------------------------------
    0 Enhancement
-   2 Bug fixes
+   3 Bug fixes
    0 Localisation update
 ----------------------------------------------------------------------
 3.1.0 vs. 3.0.8 update 3
@@ -14,6 +14,9 @@
 
   - Error on saving team project without glossary file 
   https://sourceforge.net/p/omegat/bugs/657/
+
+  - Problem using Filter in search window when no matches are returned 
+  https://sourceforge.net/p/omegat/bugs/653/
 
 ----------------------------------------------------------------------
  OmegaT 3.0.8 update 3 (2014-01-27)

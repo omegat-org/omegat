@@ -27,6 +27,7 @@ package org.omegat.gui.matches;
 
 import org.omegat.util.VarExpansion;
 import org.omegat.core.data.ProjectProperties;
+import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.matching.DiffDriver;
 import org.omegat.core.matching.DiffDriver.TextRun;
 import org.omegat.core.matching.DiffDriver.Render;
@@ -115,8 +116,9 @@ public class MatchesVarExpansion extends VarExpansion<NearString> {
     private static Replacer diffReplacer = new Replacer() {
         public void replace(Result R, NearString match) {
             int diffPos = R.text.indexOf(VAR_DIFF);
-            if (diffPos != -1) {
-                Render diffRender = DiffDriver.render(match.source, Core.getEditor().getCurrentEntry().getSrcText(), true);
+            SourceTextEntry ste = Core.getEditor().getCurrentEntry();
+            if (diffPos != -1 && ste != null) {
+                Render diffRender = DiffDriver.render(match.source, ste.getSrcText(), true);
                 R.diffInfo.put(diffPos, diffRender.formatting);
                 R.text = R.text.replace(VAR_DIFF, diffRender.text);
             }
@@ -126,8 +128,9 @@ public class MatchesVarExpansion extends VarExpansion<NearString> {
     private static Replacer diffReversedReplacer = new Replacer() {
         public void replace(Result R, NearString match) {
             int diffPos = R.text.indexOf(VAR_DIFF_REVERSED);
-            if (diffPos != -1) {
-                Render diffRender = DiffDriver.render(Core.getEditor().getCurrentEntry().getSrcText(), match.source, true);
+            SourceTextEntry ste = Core.getEditor().getCurrentEntry();
+            if (diffPos != -1 && ste != null) {
+                Render diffRender = DiffDriver.render(ste.getSrcText(), match.source, true);
                 R.diffInfo.put(diffPos, diffRender.formatting);
                 R.text = R.text.replace(VAR_DIFF_REVERSED, diffRender.text);
             }

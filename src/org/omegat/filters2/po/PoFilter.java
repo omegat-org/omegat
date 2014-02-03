@@ -50,6 +50,7 @@ import org.omegat.filters2.TranslationException;
 import org.omegat.util.Language;
 import org.omegat.util.OStrings;
 import org.omegat.util.Log;
+import org.omegat.util.OConsts;
 import org.omegat.util.PatternConsts;
 import org.omegat.util.StaticUtils;
 
@@ -276,7 +277,8 @@ public class PoFilter extends AbstractFilter {
     }
 
     public Instance[] getDefaultInstances() {
-        return new Instance[] { new Instance("*.po"), new Instance("*.pot") };
+        return new Instance[] 
+            { new Instance("*.po", OConsts.UTF8, OConsts.UTF8), new Instance("*.pot", OConsts.UTF8, OConsts.UTF8) };
     }
 
     public boolean isSourceEncodingVariable() {

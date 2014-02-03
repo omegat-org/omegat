@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 3.1.0 
 ----------------------------------------------------------------------
-   5 Enhancements
+   6 Enhancements
    3 Bug fixes
    0 Localisation update
 ----------------------------------------------------------------------
@@ -25,6 +25,9 @@ put on each side of the selection
 
   - Synchronisation does not occur anymore when creating translated
 documents in team projects
+
+  - The default character set for the PO filter is now UTF-8, as it
+is the most common encoding for those files
 
   Bug fixes:
 

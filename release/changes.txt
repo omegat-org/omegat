@@ -1,11 +1,16 @@
 ----------------------------------------------------------------------
  OmegaT 3.1.0 
 ----------------------------------------------------------------------
-   0 Enhancement
+   1 Enhancement
    3 Bug fixes
    0 Localisation update
 ----------------------------------------------------------------------
 3.1.0 vs. 3.0.8 update 3
+
+  Other enhancements:
+  
+  - If there is a selection When inserting a tag pair, the tags are
+put on each side of the selection
 
   Bug fixes:
 

@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 3.1.0 
 ----------------------------------------------------------------------
-   3 Enhancements
+   4 Enhancements
    3 Bug fixes
    0 Localisation update
 ----------------------------------------------------------------------
@@ -14,6 +14,9 @@
 
   - Find and Replace (poss. with regex) 
   https://sourceforge.net/p/omegat/feature-requests/66/
+
+  - Search in comments
+  https://sourceforge.net/p/omegat/feature-requests/943/
 
   Other enhancements:
   

@@ -23,7 +23,7 @@
   - If there is a selection When inserting a tag pair, the tags are
 put on each side of the selection
 
-  - Synchronisation do not occur anymore when creating translated
+  - Synchronisation does not occur anymore when creating translated
 documents in team projects
 
   Bug fixes:

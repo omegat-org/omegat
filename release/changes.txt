@@ -1,11 +1,16 @@
 ----------------------------------------------------------------------
  OmegaT 3.1.0 
 ----------------------------------------------------------------------
-   1 Enhancement
+   2 Enhancements
    3 Bug fixes
    0 Localisation update
 ----------------------------------------------------------------------
 3.1.0 vs. 3.0.8 update 3
+
+  Implemented requests:
+
+  - Add facility for conflict resolution during team sync
+  https://sourceforge.net/p/omegat/feature-requests/950/
 
   Other enhancements:
   

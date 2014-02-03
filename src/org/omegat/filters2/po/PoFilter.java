@@ -8,6 +8,7 @@
                2008 Martin Fleurke
                2009 Alex Buloichik
                2011 Didier Briel
+               2013-1014 Alex Buloichik
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 

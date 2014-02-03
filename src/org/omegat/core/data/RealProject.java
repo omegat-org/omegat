@@ -839,7 +839,8 @@ public class RealProject implements IProject {
                     ProjectTMX mergedTMX = SuperTmxMerge.merge(baseTMX, OStrings.getString("TMX_MERGE_BASE"),
                             projectTMX, OStrings.getString("TMX_MERGE_MINE"),
                             headTMX, OStrings.getString("TMX_MERGE_THEIRS"),
-                            m_config.getSourceLanguage().getLanguage(), m_config.getTargetLanguage().getLanguage());
+                            m_config.getSourceLanguage().getLanguage(), m_config.getTargetLanguage().getLanguage(),
+                            OStrings.getResourceBundle());
                     projectTMX.replaceContent(mergedTMX);
                 }
                 

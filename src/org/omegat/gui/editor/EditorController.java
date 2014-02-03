@@ -1709,20 +1709,20 @@ public class EditorController implements IEditor {
         pane.revalidate();
 
         SourceTextEntry curEntry = getCurrentEntry();
-        int curEntryNum = curEntry.entryNum();
         Document3 doc = editor.getOmDocument();
         IProject project = Core.getProject();
-        if (doc != null && project != null && project.getProjectFiles() != null) { // prevent
-                                                                                   // nullpointererrors
-                                                                                   // in
-                                                                                   // loadDocument.
-                                                                                   // Only
-                                                                                   // load
-                                                                                   // if
-                                                                                   // there
-                                                                                   // is
-                                                                                   // a
-                                                                                   // document.
+        if (doc != null && project != null && project.getProjectFiles() != null // prevent
+                && curEntry != null) {                                          // nullpointererrors
+                                                                                // in
+                                                                                // loadDocument.
+                                                                                // Only
+                                                                                // load
+                                                                                // if
+                                                                                // there
+                                                                                // is
+                                                                                // a
+                                                                                // document.
+            int curEntryNum = curEntry.entryNum();
             loadDocument(); // rebuild entrylist
             if (entriesFilter == null || entriesFilter.allowed(curEntry)) {
                 gotoEntry(curEntry.entryNum());

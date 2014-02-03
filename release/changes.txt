@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 3.1.0 
 ----------------------------------------------------------------------
-   4 Enhancements
+   5 Enhancements
    3 Bug fixes
    0 Localisation update
 ----------------------------------------------------------------------
@@ -22,6 +22,9 @@
   
   - If there is a selection When inserting a tag pair, the tags are
 put on each side of the selection
+
+  - Synchronisation do not occur anymore when creating translated
+documents in team projects
 
   Bug fixes:
 

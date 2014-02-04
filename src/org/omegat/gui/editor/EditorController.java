@@ -11,6 +11,7 @@
                2011 Alex Buloichik, Martin Fleurke, Didier Briel
                2012 Guido Leenders, Didier Briel
                2013 Zoltan Bartko, Alex Buloichik, Aaron Madlon-Kay
+               2014 Aaron Madlon-Kay
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 

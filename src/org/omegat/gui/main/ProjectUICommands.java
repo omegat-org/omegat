@@ -7,6 +7,7 @@
                2011 Martin Fleurke
                2012 Thomas Cordonnier
                2013 Yu Tang
+               2014 Aaron Madlon-Kay
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 

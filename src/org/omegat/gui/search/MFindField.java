@@ -6,7 +6,7 @@
  Copyright (C) 2000-2006 Keith Godfrey
                2006 Henry Pijffers
                2009-2012 Didier Briel
-               2013 Aaron Madlon-Kay
+               2013-2014 Aaron Madlon-Kay
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 

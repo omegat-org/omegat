@@ -6,6 +6,7 @@
  Copyright (C) 2010 Alex Buloichik
                2012 Thomas Cordonnier
                2013 Alex Buloichik
+               2014 Aaron Madlon-Kay
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 

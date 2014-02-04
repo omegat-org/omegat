@@ -7,6 +7,7 @@
                2009 Didier Briel
                2010 Wildrich Fourie
                2013 Zoltan Bartko
+               2014 Aaron Madlon-Kay
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 

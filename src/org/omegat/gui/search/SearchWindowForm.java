@@ -4,6 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2013 Alex Buloichik
+               2014 Aaron Madlon-Kay
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -126,7 +127,8 @@ public class SearchWindowForm extends javax.swing.JFrame {
         m_dirButton = new javax.swing.JButton();
         m_advancedVisiblePane = new javax.swing.JPanel();
         m_authorCB = new javax.swing.JCheckBox();
-        m_authorField = new javax.swing.JTextField();
+        m_authorField = new org.omegat.gui.search.MFindField();
+        m_authorField.setDefaultText(OStrings.getString("TF_CUR_SEGMENT_UNKNOWN_AUTHOR"));
         m_dateFromCB = new javax.swing.JCheckBox();
         m_dateFromButton = new javax.swing.JButton();
         m_dateToCB = new javax.swing.JCheckBox();
@@ -668,7 +670,7 @@ public class SearchWindowForm extends javax.swing.JFrame {
     javax.swing.JPanel m_advancedVisiblePane;
     javax.swing.JCheckBox m_allResultsCB;
     javax.swing.JCheckBox m_authorCB;
-    javax.swing.JTextField m_authorField;
+    org.omegat.gui.search.MFindField m_authorField;
     javax.swing.JCheckBox m_cbSearchInGlossaries;
     javax.swing.JCheckBox m_cbSearchInMemory;
     javax.swing.JCheckBox m_cbSearchInTMs;

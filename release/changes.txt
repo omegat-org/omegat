@@ -3,7 +3,7 @@
 ----------------------------------------------------------------------
    6 Enhancements
    3 Bug fixes
-   0 Localisation update
+   1 Localisation update
 ----------------------------------------------------------------------
 3.1.0 vs. 3.0.8 update 3
 
@@ -39,6 +39,10 @@ is the most common encoding for those files
 
   - Problem using Filter in search window when no matches are returned 
   https://sourceforge.net/p/omegat/bugs/653/
+
+  Localisation updates:
+
+  - Japanese localisation updated to 3.1.0 (UI, Documentation, Readme)
 
 ----------------------------------------------------------------------
  OmegaT 3.0.8 update 3 (2014-01-27)

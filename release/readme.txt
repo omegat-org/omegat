@@ -339,7 +339,6 @@ OmegaT uses the following libraries:
   segment-1.4.1.jar (Segment license)
   pdfbox-app-1.8.1.jar (Apache License 2.0)
   KoreanAnalyzer-3x-120223.jar (Apache License 2.0)
-  beansbinding-1.2.1.jar (LGPL license)
   SuperTMXMerge-for_OmegaT.jar (LGPL license)
 
 ==============================================================================

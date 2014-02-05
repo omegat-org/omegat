@@ -68,7 +68,6 @@
 				<jar href="groovy-all-1.8.9.jar"  />
 				<jar href="js-rhino-1.7R4.jar"  />
 				<jar href="diff.jar" />
-				<jar href="beansbinding-1.2.1.jar" />
 				<jar href="SuperTMXMerge-for_OmegaT.jar" />
 
 			</resources>

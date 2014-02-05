@@ -220,17 +220,17 @@
 
       <para><emphasis><application>OmegaT</application>.app</emphasis> をダブルクリックするか、ドックのアイコンをクリックします。</para>
 
-      <para>まず <emphasis><application>OmegaT</application>.app</emphasis> を右クリックして、［パッケージの内容を表示］を選びます。次に、Contents フォルダーにある <application><emphasis>Info.plist</emphasis></application> を右クリックして、任意のテキストエディターで開きます。あるいはコマンドラインから「cd」コマンドで目的の階層に移動し、<application>emacs</application> や <application>vi</application> のようなコマンドラインエディターで <emphasis>Info.plist</emphasis> を開いてもよいでしょう。<emphasis> <indexterm class="singular">
+      <para>OmegaT の挙動は、<application><emphasis>Info.plist</emphasis></application> ファイルの <emphasis>Properties</emphasis> 部分と <emphasis>VMOptions</emphasis> 部分を編集することでカスタマイズできます。</para>
+      
+      <para>まず <emphasis><application>OmegaT</application>.app</emphasis> を右クリックして、［パッケージの内容を表示］を選びます。次に、Contents フォルダーにある <application><emphasis>Info.plist</emphasis></application> を右クリックして、任意のテキストエディターで開きます。あるいはコマンドラインから「cd」コマンドで目的の階層に移動し、<application>emacs</application> や <application>vi</application> のようなコマンドラインエディターで <emphasis>Info.plist</emphasis> を開いてもよいでしょう。<indexterm class="singular">
           <primary>OmegaT のカスタマイズ</primary> <secondary>OS X</secondary> <tertiary>起動引数</tertiary>
-        </indexterm></emphasis></para>
-
-      <para>「Java」の下にある <emphasis>Properties</emphasis> 部分と <emphasis>VMOptions</emphasis> 部分がカスタマイズの対象になります。</para>
+        </indexterm></para>
 
       <para><emphasis>VMOptions</emphasis> に値を追加したい場合は、値と値のあいだに空白を入れてください。たとえば <filename>-Xmx1024M -Duser.language=ja</filename> とすると、最大 1024MB のメモリを確保できる設定で、日本語のユーザーインターフェースで<application>OmegaT</application> を起動します。</para>
 
       <para><emphasis><application>OmegaT</application>.app</emphasis> を複数起動したい場合は、代わりに <emphasis><application>OmegaT</application>.app/Contents/MacOS/</emphasis> にある <emphasis>JavaApplicationStub</emphasis> ファイルをダブルクリックしてください。</para>
 
-      <para><emphasis><application> </application></emphasis><application>OmegaT</application> をコマンドラインから起動する場合は、<emphasis><application>OmegaT</application>.app/Contents/Resources/Java/</emphasis> にある <emphasis><application>OmegaT</application>.jar</emphasis> ファイルを指定してください。詳細は「コマンドラインから OmegaT を起動する」を参照してください。</para>
+      <para><application>OmegaT</application> をコマンドラインから起動する場合は、<emphasis><application>OmegaT</application>.app/Contents/Resources/Java/</emphasis> にある <emphasis><application>OmegaT</application>.jar</emphasis> ファイルを指定してください。詳細は「コマンドラインから OmegaT を起動する」を参照してください。</para>
     </section>
 
     <section id="Mac.OSX.goodies">
@@ -451,13 +451,6 @@
           <para>-<emphasis role="bold">Dmicrosoft.api.client_secret=XXXX9xXxX9xXXxxXXX9xxX99xXXXX9xx9XXxXxXXXXX=</emphasis></para>
         </listitem>
 
-        <listitem>
-          <para><emphasis role="bold">チームプロジェクトのオプション設定<parameter><indexterm class="singular">
-              <primary>OmegaT の実行</primary> <secondary>起動スクリプトの引数</secondary> <tertiary>no-team オプション</tertiary>
-            </indexterm></parameter></emphasis></para>
-
-          <para><emphasis role="bold">-no-team</emphasis> チーム作業用のプロジェクトに関連する引数です。この引数を指定すると、チームプロジェクトを開いても同期しません。</para>
-        </listitem>
       </itemizedlist>
 
       <para>複数の引数を、組み合わせて指定することもできます。上記で例示したすべての引数を使用して <application>OmegaT</application> を起動する場合、コマンドは以下のようになります：</para>
@@ -615,6 +608,19 @@
             <para>この設定は、バッチモードでタグ検証を可能にします。「<literal>abort</literal>」を指定した場合は、不正なタグを見つけた時点で、タグ検証を中止します。「<literal>warn</literal>」を指定した場合は、すべての分節についてタグ検証を実施し、不正なタグについては警告を出力します。</para>
           </listitem>
         </itemizedlist>
+        
+        <itemizedlist>
+          <listitem>
+            <para><literal>--no-team</literal> チーム作業用のプロジェクトに関連する引数です。この引数を指定すると、チームプロジェクトを開いても同期しません。</para>
+          </listitem>
+        </itemizedlist>
+
+        <itemizedlist>
+          <listitem>
+            <para><literal>--disable-project-locking</literal> Windows において、OmegaT の複数のインスタンスが同じプロジェクトを開けるようになります。Windows 上では、OmegaT がプロジェクトを開くと、既定で <literal>omegat.project</literal> ファイルをロックします。そのため、OmegaT の別のインスタンスが使用中のプロジェクトを開こうとすると、エラーメッセージが表示されます。この引数を指定すると、ロックしません。</para>
+          </listitem>
+        </itemizedlist>
+
       </section>
 
       <section id="console.mode.option.quiet">

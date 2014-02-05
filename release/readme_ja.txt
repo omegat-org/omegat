@@ -260,7 +260,7 @@ OmegaT は以下に示すライブラリを使用しています。
   VLSolutions 社による VLDocking Framework 2.1.4（CeCILL ライセンス）
   László Németh などによる Hunspell（LGPL ライセンス）
   Todd Fast, Timothy Wall などによる JNA（LGPL ライセンス）
-  Swing-Layout 1.0.2（LGPL ライセンス）
+  Swing-Layout 1.0.4（LGPL ライセンス）
   Jmyspell 2.1.4（LGPL ライセンス）
   SVNKit 1.7.5（TMate ライセンス）
   Sequence Library（Sequence Library ライセンス）
@@ -283,6 +283,8 @@ OmegaT は以下に示すライブラリを使用しています。
   segment-1.4.1.jar（Segment ライセンス）
   pdfbox-app-1.8.1.jar（Apache ライセンス 2.0）
   KoreanAnalyzer-3x-120223.jar（Apache ライセンス 2.0）
+  beansbinding-1.2.1.jar（LGPL ライセンス）
+  SuperTMXMerge-for_OmegaT.jar（LGPL ライセンス）
 
 ==============================================================================
  5.  バグかな？と思ったら

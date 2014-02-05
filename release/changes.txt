@@ -2,7 +2,7 @@
  OmegaT 3.1.0 
 ----------------------------------------------------------------------
    6 Enhancements
-   3 Bug fixes
+   4 Bug fixes
    1 Localisation update
 ----------------------------------------------------------------------
 3.1.0 vs. 3.0.8 update 3
@@ -39,6 +39,8 @@ is the most common encoding for those files
 
   - Problem using Filter in search window when no matches are returned 
   https://sourceforge.net/p/omegat/bugs/653/
+
+  - XLIFF filter: untranslatable text (translate="no") appeared in the Editor
 
   Localisation updates:
 

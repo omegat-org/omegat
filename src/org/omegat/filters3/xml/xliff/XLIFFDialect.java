@@ -136,7 +136,7 @@ public class XLIFFDialect extends DefaultXMLDialect {
 
         if (atts != null) {
             if ("no".equalsIgnoreCase(atts.getValueByName("translate"))) {
-                return false;
+                return true;
             }
         }
         return false;

@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 3.1.0 
 ----------------------------------------------------------------------
-   6 Enhancements
+   7 Enhancements
    4 Bug fixes
    1 Localisation update
 ----------------------------------------------------------------------
@@ -17,6 +17,9 @@
 
   - Search in comments
   https://sourceforge.net/p/omegat/feature-requests/943/
+
+  - Show XLIFF multiple trans-unit notes 
+  https://sourceforge.net/p/omegat/feature-requests/949/
 
   Other enhancements:
   

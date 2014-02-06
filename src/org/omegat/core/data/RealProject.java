@@ -886,13 +886,14 @@ public class RealProject implements IProject {
                     //free memory
                     headGlossaryEntries = null;
                     baseGlossaryEntries = null;
-                    glossaryEntries = null;
                 }
             } else {
                 filenameGlossarywithLocalChangesOnHead = null;
             }
             
             if (!again) {
+                // free memory
+                glossaryEntries = null;
                 break;
             }
         }

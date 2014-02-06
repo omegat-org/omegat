@@ -111,6 +111,7 @@ public class SearchWindowForm extends javax.swing.JFrame {
         filler22 = new javax.swing.Box.Filler(new java.awt.Dimension(5, 0), new java.awt.Dimension(5, 0), new java.awt.Dimension(5, 32767));
         m_replaceUntranslated = new javax.swing.JCheckBox();
         filler11 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
+        m_SearchInPane = new javax.swing.JPanel();
         m_SearchInProjectPane = new javax.swing.JPanel();
         m_rbProject = new javax.swing.JRadioButton();
         m_cbSearchInMemory = new javax.swing.JCheckBox();
@@ -331,7 +332,9 @@ public class SearchWindowForm extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(3, 3, 3, 3);
         getContentPane().add(m_panelReplace, gridBagConstraints);
 
-        m_SearchInProjectPane.setBorder(javax.swing.BorderFactory.createTitledBorder(OStrings.getString("SW_SEARCH_IN_BOX"))); // NOI18N
+        m_SearchInPane.setBorder(javax.swing.BorderFactory.createTitledBorder(OStrings.getString("SW_SEARCH_IN_BOX"))); // NOI18N
+        m_SearchInPane.setLayout(new java.awt.GridLayout(1, 2));
+
         m_SearchInProjectPane.setLayout(new java.awt.GridBagLayout());
 
         buttonGroup2.add(m_rbProject);
@@ -375,13 +378,8 @@ public class SearchWindowForm extends javax.swing.JFrame {
         gridBagConstraints.weightx = 1.0;
         m_SearchInProjectPane.add(jPanel9, gridBagConstraints);
 
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.weightx = 1.0;
-        getContentPane().add(m_SearchInProjectPane, gridBagConstraints);
+        m_SearchInPane.add(m_SearchInProjectPane);
 
-        m_SearchInDirPane.setBorder(javax.swing.BorderFactory.createTitledBorder(OStrings.getString("SW_SEARCH_IN_BOX"))); // NOI18N
         m_SearchInDirPane.setLayout(new java.awt.GridBagLayout());
 
         jPanel10.setOpaque(false);
@@ -428,10 +426,13 @@ public class SearchWindowForm extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(3, 3, 3, 3);
         m_SearchInDirPane.add(m_dirButton, gridBagConstraints);
 
+        m_SearchInPane.add(m_SearchInDirPane);
+
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        getContentPane().add(m_SearchInDirPane, gridBagConstraints);
+        getContentPane().add(m_SearchInPane, gridBagConstraints);
 
         m_advancedVisiblePane.setLayout(new java.awt.GridBagLayout());
 
@@ -665,6 +666,7 @@ public class SearchWindowForm extends javax.swing.JFrame {
     javax.swing.JPanel jPanel9;
     javax.swing.JScrollPane jScrollPane1;
     javax.swing.JPanel m_SearchInDirPane;
+    javax.swing.JPanel m_SearchInPane;
     javax.swing.JPanel m_SearchInProjectPane;
     javax.swing.JButton m_advancedButton;
     javax.swing.JPanel m_advancedVisiblePane;

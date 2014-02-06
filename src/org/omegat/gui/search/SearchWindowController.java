@@ -9,6 +9,7 @@
                2010 Martin Fleurke, Antonio Vilei, Didier Briel
                2012 Didier Briel
                2013 Aaron Madlon-Kay, Alex Buloichik
+               2014 Aaron Madlon-Kay
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -150,8 +151,7 @@ public class SearchWindowController {
             break;
         case REPLACE:
             form.setTitle(OStrings.getString("SW_TITLE_REPLACE"));
-            form.m_SearchInProjectPane.setVisible(false);
-            form.m_SearchInDirPane.setVisible(false);
+            form.m_SearchInPane.setVisible(false);
             form.m_allResultsCB.setVisible(false);
             form.m_filterButton.setVisible(false);
             form.m_numberLabel.setVisible(false);;

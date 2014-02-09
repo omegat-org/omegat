@@ -25,6 +25,9 @@
 
 package org.omegat.core.statistics;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * Class for store some statistic data.
  * 
@@ -34,4 +37,5 @@ public class StatisticsInfo {
     public int numberofTranslatedSegments;
     public int numberOfUniqueSegments;
     public int numberOfSegmentsTotal;
+    public Map<String,Integer> uniqueCountsByFile = new HashMap<String, Integer>();
 }

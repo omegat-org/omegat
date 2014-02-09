@@ -415,13 +415,16 @@ public class ProjectFilesListController {
                     return fi.fileEncoding;
                 case 3:
                     return fi.entries.size();
+                case 4:
+                    StatisticsInfo stat = Core.getProject().getStatistics();
+                    return stat.uniqueCountsByFile.get(fi.filePath);
                 default:
                     return null;
                 }
             }
 
             public int getColumnCount() {
-                return 4;
+                return 5;
             }
 
             public int getRowCount() {
@@ -437,6 +440,8 @@ public class ProjectFilesListController {
                 case 2:
                     return String.class;
                 case 3:
+                    return Integer.class;
+                case 4:
                     return Integer.class;
                 default:
                     return null;
@@ -459,10 +464,14 @@ public class ProjectFilesListController {
         TableColumn cCount = new TableColumn(3, 50);
         cCount.setHeaderValue(OStrings.getString("PF_NUM_SEGMENTS"));
         cCount.setCellRenderer(new CustomRenderer(files, SwingConstants.RIGHT, ",##0"));
+        TableColumn cUnique = new TableColumn(4, 50);
+        cUnique.setHeaderValue(OStrings.getString("PF_NUM_UNIQUE_SEGMENTS"));
+        cUnique.setCellRenderer(new CustomRenderer(files, SwingConstants.RIGHT, ",##0"));
         columns.addColumn(cFile);
         columns.addColumn(cFilter);
         columns.addColumn(cEncoding);
         columns.addColumn(cCount);
+        columns.addColumn(cUnique);
         columns.addColumnModelListener(new TableColumnModelListener() {
             public void columnAdded(TableColumnModelEvent e) {
             }
@@ -506,6 +515,8 @@ public class ProjectFilesListController {
                     return "";
                 } else if (columnIndex == 2) {
                     return "";
+                } else if (columnIndex == 3) {
+                    return "";
                 } else {
                     StatisticsInfo stat = Core.getProject().getStatistics();
                     switch (rowIndex) {
@@ -521,7 +532,7 @@ public class ProjectFilesListController {
             }
 
             public int getColumnCount() {
-                return 4;
+                return 5;
             }
 
             public int getRowCount() {
@@ -539,10 +550,13 @@ public class ProjectFilesListController {
         cEncoding.setCellRenderer(new CustomRenderer(null, SwingConstants.LEFT, null));
         TableColumn cCount = new TableColumn(3, 50);
         cCount.setCellRenderer(new CustomRenderer(null, SwingConstants.RIGHT, ",##0"));
+        TableColumn cUnique = new TableColumn(4, 50);
+        cUnique.setCellRenderer(new CustomRenderer(null, SwingConstants.RIGHT, ",##0"));
         columns.addColumn(cFile);
         columns.addColumn(cFilter);
         columns.addColumn(cEncoding);
         columns.addColumn(cCount);
+        columns.addColumn(cUnique);
         list.tableTotal.setColumnModel(columns);
     }
 
@@ -798,6 +812,7 @@ public class ProjectFilesListController {
             for (int i = 0; i < viewToModel.size(); i++) {
                 viewToModel.set(i, i);
             }
+            final StatisticsInfo stat = Core.getProject().getStatistics();
             Collections.sort(viewToModel, new Comparator<Integer>() {
                 public int compare(Integer o1, Integer o2) {
                     IProject.FileInfo f1 = files.get(o1);
@@ -815,6 +830,11 @@ public class ProjectFilesListController {
                         break;
                     case 3:
                         c = new Integer(f1.entries.size()).compareTo(new Integer(f2.entries.size()));
+                        break;
+                    case 4:
+                        int n1 = stat.uniqueCountsByFile.get(f1.filePath);
+                        int n2 = stat.uniqueCountsByFile.get(f2.filePath);
+                        c = new Integer(n1).compareTo(new Integer(n2));
                         break;
                     }
                     if (sortKey.getSortOrder() == SortOrder.DESCENDING) {

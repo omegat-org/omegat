@@ -220,6 +220,10 @@ public class CalcStandardStatistics extends LongProcessThread {
             hotStat.numberOfSegmentsTotal = total.segments;
             hotStat.numberofTranslatedSegments = translated.size();
             hotStat.numberOfUniqueSegments = unique.segments;
+            hotStat.uniqueCountsByFile.clear();
+            for (FileData fd : counts) {
+                hotStat.uniqueCountsByFile.put(fd.filename, fd.unique.segments);
+            }
         }
 
         return result.toString();

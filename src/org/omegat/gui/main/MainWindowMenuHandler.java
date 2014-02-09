@@ -204,16 +204,7 @@ public class MainWindowMenuHandler {
             return;
         }
 
-        // if the project window is not shown or in the background, show it
-        if (!mainWindow.m_projWin.isActive()) {
-            mainWindow.m_projWin.buildDisplay();
-            mainWindow.m_projWin.setVisible(true);
-            mainWindow.m_projWin.toFront();
-        }
-        // otherwise hide it
-        else {
-            mainWindow.m_projWin.setVisible(false);
-        }
+        mainWindow.m_projWin.setActive(!mainWindow.m_projWin.isActive());
     }
 
     /**

@@ -34,6 +34,7 @@ import java.awt.Container;
 import java.awt.Font;
 import java.awt.Frame;
 import java.awt.HeadlessException;
+import java.awt.Image;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.File;
@@ -55,7 +56,7 @@ import org.omegat.core.data.ExternalTMX;
 import org.omegat.core.events.IApplicationEventListener;
 import org.omegat.core.events.IProjectEventListener;
 import org.omegat.core.matching.NearString;
-import org.omegat.gui.filelist.ProjectFrame;
+import org.omegat.gui.filelist.ProjectFilesListController;
 import org.omegat.gui.search.SearchWindowController;
 import org.omegat.util.LFileCopy;
 import org.omegat.util.OConsts;
@@ -72,7 +73,6 @@ import com.vlsolutions.swing.docking.Dockable;
 import com.vlsolutions.swing.docking.DockableState;
 import com.vlsolutions.swing.docking.DockingDesktop;
 import com.vlsolutions.swing.docking.FloatingDialog;
-import java.awt.Image;
 
 /**
  * The main window of OmegaT application (unless the application is started in
@@ -93,7 +93,7 @@ import java.awt.Image;
 public class MainWindow extends JFrame implements IMainWindow {
     public final MainWindowMenu menu;
 
-    protected ProjectFrame m_projWin;
+    protected ProjectFilesListController m_projWin;
 
     /**
      * The font for main window (source and target text) and for match and

@@ -44,7 +44,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
-import org.omegat.gui.filelist.ProjectFrame;
+import org.omegat.gui.filelist.ProjectFilesListController;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
@@ -75,7 +75,7 @@ public class MainWindowUI {
      * Create main UI panels.
      */
     public static void createMainComponents(final MainWindow mainWindow, final Font font) {
-        mainWindow.m_projWin = new ProjectFrame(mainWindow);
+        mainWindow.m_projWin = new ProjectFilesListController(mainWindow);
     }
 
     /**

@@ -215,6 +215,9 @@ public class GlossaryTextAreaTest extends TestCore {
 
             public void refreshView(boolean doCommit) {
             }
+
+            public void registerIdenticalTranslation() {
+            }
         });
     }
 }

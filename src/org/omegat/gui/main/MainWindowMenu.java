@@ -297,6 +297,7 @@ public class MainWindowMenu implements ActionListener, MenuListener, IMainMenu {
         editMenu.add(new JSeparator());
         editMenu.add(editMultipleDefault = createMenuItem("MULT_MENU_DEFAULT"));
         editMenu.add(editMultipleAlternate = createMenuItem("MULT_MENU_MULTIPLE"));
+        editMenu.add(editRegisterIdenticalMenuItem = createMenuItem("TF_MENU_EDIT_IDENTICAL_TRANSLATION"));
 
         switchCaseSubMenu.add(lowerCaseMenuItem = createMenuItem("TF_EDIT_MENU_SWITCH_CASE_TO_LOWER"));
         switchCaseSubMenu.add(upperCaseMenuItem = createMenuItem("TF_EDIT_MENU_SWITCH_CASE_TO_UPPER"));
@@ -578,7 +579,7 @@ public class MainWindowMenu implements ActionListener, MenuListener, IMainMenu {
                 editRedoMenuItem, editSelectFuzzy1MenuItem, editSelectFuzzy2MenuItem,
                 editSelectFuzzy3MenuItem, editSelectFuzzy4MenuItem, editSelectFuzzy5MenuItem,
                 editUndoMenuItem, switchCaseSubMenu, editOverwriteMachineTranslationMenuItem,
-                editMultipleDefault, editMultipleAlternate,
+                editMultipleDefault, editMultipleAlternate, editRegisterIdenticalMenuItem,
 
                 gotoMenu, gotoNextSegmentMenuItem, gotoNextUntranslatedMenuItem, gotoPreviousSegmentMenuItem,
                 gotoSegmentMenuItem, gotoNextNoteMenuItem, gotoPreviousNoteMenuItem,
@@ -640,6 +641,7 @@ public class MainWindowMenu implements ActionListener, MenuListener, IMainMenu {
     JMenuItem editTagNextMissedMenuItem;
     JMenuItem editExportSelectionMenuItem;
     JMenuItem editCreateGlossaryEntryMenuItem;
+    JMenuItem editRegisterIdenticalMenuItem;
     public JMenuItem gotoHistoryBackMenuItem;
     public JMenuItem gotoHistoryForwardMenuItem;
     JMenu gotoMenu;

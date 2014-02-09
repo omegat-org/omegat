@@ -405,6 +405,10 @@ public class MainWindowMenuHandler {
         Core.getEditor().setAlternateTranslationForCurrentEntry(true);
     }
 
+    public void editRegisterIdenticalMenuItemActionPerformed() {
+        Core.getEditor().registerIdenticalTranslation();
+    }
+
     public void cycleSwitchCaseMenuItemActionPerformed() {
         Core.getEditor().changeCase(IEditor.CHANGE_CASE_TO.CYCLE);
     }

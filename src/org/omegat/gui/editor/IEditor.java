@@ -334,4 +334,9 @@ public interface IEditor {
      * Perform any necessary actions for window deactivation.
      */
     void windowDeactivated();
+
+    /**
+     * Register translation to be identical to source.
+     */
+    void registerIdenticalTranslation();
 }

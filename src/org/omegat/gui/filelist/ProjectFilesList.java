@@ -138,6 +138,7 @@ public class ProjectFilesList extends javax.swing.JFrame {
         gridBagConstraints = new GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 6;
+        gridBagConstraints.gridwidth = 2;
         gridBagConstraints.fill = GridBagConstraints.BOTH;
         gridBagConstraints.insets = new Insets(10, 0, 0, 0);
         getContentPane().add(jPanel1, gridBagConstraints);
@@ -145,19 +146,19 @@ public class ProjectFilesList extends javax.swing.JFrame {
         jPanel2.setLayout(new BoxLayout(jPanel2, BoxLayout.Y_AXIS));
         jPanel2.add(filler6);
 
-        Mnemonics.setLocalizedText(btnFirst, "Move First");
+        Mnemonics.setLocalizedText(btnFirst, OStrings.getString("PF_MOVE_FIRST")); // NOI18N
         jPanel2.add(btnFirst);
         jPanel2.add(filler8);
 
-        Mnemonics.setLocalizedText(btnUp, "Move Up");
+        Mnemonics.setLocalizedText(btnUp, OStrings.getString("PF_MOVE_UP")); // NOI18N
         jPanel2.add(btnUp);
         jPanel2.add(filler7);
 
-        Mnemonics.setLocalizedText(btnDown, "Move Down");
+        Mnemonics.setLocalizedText(btnDown, OStrings.getString("PF_MOVE_DOWN")); // NOI18N
         jPanel2.add(btnDown);
         jPanel2.add(filler9);
 
-        Mnemonics.setLocalizedText(btnLast, "Move Last");
+        Mnemonics.setLocalizedText(btnLast, OStrings.getString("PF_MOVE_LAST")); // NOI18N
         jPanel2.add(btnLast);
         jPanel2.add(filler5);
 

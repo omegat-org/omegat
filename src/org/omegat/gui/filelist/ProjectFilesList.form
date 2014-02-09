@@ -63,7 +63,7 @@
     <Container class="javax.swing.JPanel" name="jPanel1">
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
-          <GridBagConstraints gridX="0" gridY="6" gridWidth="1" gridHeight="1" fill="1" ipadX="0" ipadY="0" insetsTop="10" insetsLeft="0" insetsBottom="0" insetsRight="0" anchor="10" weightX="0.0" weightY="0.0"/>
+          <GridBagConstraints gridX="0" gridY="6" gridWidth="2" gridHeight="1" fill="1" ipadX="0" ipadY="0" insetsTop="10" insetsLeft="0" insetsBottom="0" insetsRight="0" anchor="10" weightX="0.0" weightY="0.0"/>
         </Constraint>
       </Constraints>
 
@@ -167,7 +167,9 @@
         </Component>
         <Component class="javax.swing.JButton" name="btnFirst">
           <Properties>
-            <Property name="text" type="java.lang.String" value="First"/>
+            <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+              <ResourceString bundle="org/omegat/Bundle.properties" key="PF_MOVE_FIRST" replaceFormat="OStrings.getString(&quot;{key}&quot;)"/>
+            </Property>
           </Properties>
         </Component>
         <Component class="javax.swing.Box$Filler" name="filler8">
@@ -188,7 +190,9 @@
         </Component>
         <Component class="javax.swing.JButton" name="btnUp">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Up"/>
+            <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+              <ResourceString bundle="org/omegat/Bundle.properties" key="PF_MOVE_UP" replaceFormat="OStrings.getString(&quot;{key}&quot;)"/>
+            </Property>
           </Properties>
         </Component>
         <Component class="javax.swing.Box$Filler" name="filler7">
@@ -209,7 +213,9 @@
         </Component>
         <Component class="javax.swing.JButton" name="btnDown">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Down"/>
+            <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+              <ResourceString bundle="org/omegat/Bundle.properties" key="PF_MOVE_DOWN" replaceFormat="OStrings.getString(&quot;{key}&quot;)"/>
+            </Property>
           </Properties>
         </Component>
         <Component class="javax.swing.Box$Filler" name="filler9">
@@ -230,7 +236,9 @@
         </Component>
         <Component class="javax.swing.JButton" name="btnLast">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Last"/>
+            <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+              <ResourceString bundle="org/omegat/Bundle.properties" key="PF_MOVE_LAST" replaceFormat="OStrings.getString(&quot;{key}&quot;)"/>
+            </Property>
           </Properties>
         </Component>
         <Component class="javax.swing.Box$Filler" name="filler5">

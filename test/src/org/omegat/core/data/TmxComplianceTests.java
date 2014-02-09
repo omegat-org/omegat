@@ -26,7 +26,6 @@
 package org.omegat.core.data;
 
 import java.io.File;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
@@ -210,7 +209,7 @@ public class TmxComplianceTests extends TmxComplianceBase {
         ProjectTMX tmx = new ProjectTMX(props.getSourceLanguage(), props.getTargetLanguage(), props.isSentenceSegmentingEnabled(), outFile, orphanedCallback);
 
         for (int i = 0; i < sources.size(); i++) {
-            tmx.defaults.put(sources.get(i), new TMXEntry(sources.get(i), translations.get(i), true));
+            tmx.defaults.put(sources.get(i), createTMXEntry(sources.get(i), translations.get(i), true));
         }
 
         tmx.exportTMX(props, outFile, false, false, true);
@@ -285,7 +284,7 @@ public class TmxComplianceTests extends TmxComplianceBase {
         config.put(HTMLOptions.OPTION_SKIP_META, "true");
 
         Map<String, TMXEntry> fix = new TreeMap<String, TMXEntry>();
-        fix.put("Picture:", new TMXEntry("Picture:", "Image:", true));
+        fix.put("Picture:", createTMXEntry("Picture:", "Image:", true));
         translateUsingTmx(new HTMLFilter2(), config, "ImportTest2A.htm", "UTF-8", "ImportTest2A.tmx",
                 "windows-1252", props, fix);
         
@@ -343,11 +342,19 @@ public class TmxComplianceTests extends TmxComplianceBase {
         ProjectTMX tmx = new ProjectTMX(props.getSourceLanguage(), props.getTargetLanguage(), props.isSentenceSegmentingEnabled(), outFile, orphanedCallback);
 
         for (int i = 0; i < sources.size(); i++) {
-            tmx.defaults.put(sources.get(i), new TMXEntry(sources.get(i), translations.get(i), true));
+            tmx.defaults.put(sources.get(i), createTMXEntry(sources.get(i), translations.get(i), true));
         }
 
         tmx.exportTMX(props, outFile, false, true, true);
 
         compareTMX(tmxFile, outFile, 12);
+    }
+
+    TMXEntry createTMXEntry(String source, String translation, boolean def) {
+        PrepareTMXEntry tr = new PrepareTMXEntry();
+        tr.source = source;
+        tr.translation = translation;
+        tr.defaultTranslation = def;
+        return new TMXEntry(tr);
     }
 }

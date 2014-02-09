@@ -77,6 +77,9 @@ public class NotLoadedProject implements IProject {
     public void iterateByMultipleTranslations(MultipleTranslationsIterator it) {
     }
 
+    public void setNote(SourceTextEntry entry, TMXEntry oldTrans, String note) {
+    }
+
     public boolean isOrphaned(String source) {
         return false;
     }
@@ -125,7 +128,7 @@ public class NotLoadedProject implements IProject {
     public void saveProjectProperties() throws IOException {
     }
 
-    public void setTranslation(SourceTextEntry entry, String trans, String note, boolean isDefault) {
+    public void setTranslation(SourceTextEntry entry, PrepareTMXEntry trans) {
     }
 
     public ITokenizer getSourceTokenizer() {

@@ -93,9 +93,17 @@ public class ExternalTMX {
                         sources, targets);
 
                 for (int i = 0; i < sources.size(); i++) {
-                    TMXEntry te = new TMXEntry(sources.get(i), targets.get(i), changer, changed,
-                            creator, created, tu.note, true, tu.props);
-                    entries.add(te);
+                    PrepareTMXEntry te = new PrepareTMXEntry();
+                    te.source = sources.get(i);
+                    te.translation = targets.get(i);
+                    te.changer = changer;
+                    te.changeDate = changed;
+                    te.creator = creator;
+                    te.creationDate = created;
+                    te.note = tu.note;
+                    te.defaultTranslation = true;
+                    te.otherProperties = tu.props;
+                    entries.add(new TMXEntry(te));
                 }
             }
         };

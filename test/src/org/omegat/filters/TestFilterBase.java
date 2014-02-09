@@ -290,7 +290,7 @@ public abstract class TestFilterBase extends TestCore {
 
     protected IProject.FileInfo loadSourceFiles(IFilter filter, String file) throws Exception {
         ProjectPropertiesTest props = new ProjectPropertiesTest();
-        RealProjectTest p = new RealProjectTest(props);
+        TestProject p = new TestProject(props);
         return p.loadSourceFiles(filter, file);
     }
 
@@ -342,10 +342,10 @@ public abstract class TestFilterBase extends TestCore {
     /**
      * RealProject successor for load file testing only.
      */
-    protected static class RealProjectTest extends RealProject {
+    protected static class TestProject extends RealProject {
         protected FilterContext context = new FilterContext(new Language("en"), new Language("be"), false);
 
-        public RealProjectTest(ProjectProperties props) {
+        public TestProject(ProjectProperties props) {
             super(props);
         }
 

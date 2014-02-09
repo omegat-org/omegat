@@ -35,8 +35,8 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.omegat.core.data.PrepareTMXEntry;
 import org.omegat.core.data.ProjectProperties;
-import org.omegat.core.data.TMXEntry;
 
 /**
  * Class that store TMX (Translation Memory Exchange) files.
@@ -62,7 +62,7 @@ public class TMXWriter {
      * @throws IOException
      */
     public static void buildTMXFile(final String filename, final boolean forceValidTMX,
-            final boolean levelTwo, final ProjectProperties m_config, final Map<String, TMXEntry> data)
+            final boolean levelTwo, final ProjectProperties m_config, final Map<String, PrepareTMXEntry> data)
             throws IOException {
         // we got this far, so assume lang codes are proper
         String sourceLocale = m_config.getSourceLanguage().toString();
@@ -110,8 +110,8 @@ public class TMXWriter {
         String source = null;
         String target = null;
         String note = null;
-        for (Map.Entry<String, TMXEntry> en : data.entrySet()) {
-            TMXEntry transEntry = en.getValue();
+        for (Map.Entry<String, PrepareTMXEntry> en : data.entrySet()) {
+            PrepareTMXEntry transEntry = en.getValue();
             source = forceValidTMX ? StaticUtils.stripXmlTags(en.getKey()) : en.getKey();
             target = forceValidTMX ? StaticUtils.stripXmlTags(transEntry.translation) : transEntry.translation;
             source = StaticUtils.makeValidXML(source);

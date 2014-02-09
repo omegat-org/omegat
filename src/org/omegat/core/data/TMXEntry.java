@@ -29,10 +29,16 @@ package org.omegat.core.data;
 
 import org.omegat.util.StringUtil;
 
+import java.util.Collections;
 import java.util.Map;
- 
+
 /**
  * Storage for TMX entry.
+ * 
+ * Variables in this class can be changed only before store to ProjectTMX. After that, all values must be
+ * unchangeable.
+ * 
+ * Only RealProject can create and change TMXEntry objects.
  * 
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Guido Leenders
@@ -47,30 +53,25 @@ public class TMXEntry {
     public final long creationDate;
     public final String note;
     public final boolean defaultTranslation;
-    public final Map<String,String> properties;
+    public final Map<String, String> otherProperties;
 
-    public TMXEntry(String source, String translation, String changer, long changeDate,
-            String creator, long creationDate, String note, boolean defaultTranslation,
-            Map<String,String> properties) {
-        this.source = source;
-        this.translation = translation;
-        this.changer = changer;
-        this.changeDate = changeDate;
-        this.creator = creator;
-        this.creationDate = creationDate;
-        this.note = note;
-        this.defaultTranslation = defaultTranslation;
-        this.properties = properties;
+    TMXEntry(PrepareTMXEntry from) {
+        this.source = from.source;
+        this.translation = from.translation;
+        this.changer = from.changer;
+        this.changeDate = from.changeDate;
+        this.creator = from.creator;
+        this.creationDate = from.creationDate;
+        this.note = from.note;
+        this.defaultTranslation = from.defaultTranslation;
+        this.otherProperties = from.otherProperties == null ? null : Collections
+                .unmodifiableMap(from.otherProperties);
     }
 
-    public TMXEntry(String source, String translation, boolean defaultTranslation) {
-        this(source, translation, null, 0, null, 0, null, defaultTranslation, null);
-    }
-	
     public boolean isTranslated() {
         return translation != null;
     }
-    
+
     public boolean hasNote() {
         return note != null;
     }

@@ -55,6 +55,7 @@ import javax.swing.KeyStroke;
 
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
+import org.omegat.core.data.PrepareTMXEntry;
 import org.omegat.core.data.ProtectedPart;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.data.TMXEntry;
@@ -503,7 +504,12 @@ public class TagValidationFrame extends JFrame {
         
         // Put modified translation back into project.
         if (fixed != null) {
-            Core.getProject().setTranslation(report.ste, fixed, prevTrans.note, prevTrans.defaultTranslation);
+            PrepareTMXEntry tr = new PrepareTMXEntry();
+            tr.source = report.ste.getSrcText();
+            tr.translation = fixed;
+            tr.note = prevTrans.note;
+            tr.defaultTranslation = prevTrans.defaultTranslation;
+            Core.getProject().setTranslation(report.ste, tr);
         }
         
         return true;

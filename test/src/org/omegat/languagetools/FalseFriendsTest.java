@@ -34,6 +34,7 @@ import org.omegat.core.TestCore;
 import org.omegat.core.data.EntryKey;
 import org.omegat.core.data.ExternalTMX;
 import org.omegat.core.data.IProject;
+import org.omegat.core.data.PrepareTMXEntry;
 import org.omegat.core.data.ProjectProperties;
 import org.omegat.core.data.ProjectTMX;
 import org.omegat.core.data.SourceTextEntry;
@@ -63,7 +64,10 @@ public class FalseFriendsTest extends TestCore {
         };
 
         Core.setProject(new IProject() {
-            public void setTranslation(SourceTextEntry entry, String trans, String note, boolean isDefault) {
+            public void setTranslation(SourceTextEntry entry, PrepareTMXEntry trans) {
+            }
+
+            public void setNote(SourceTextEntry entry, TMXEntry oldTrans, String note) {
             }
 
             public void saveProjectProperties() throws Exception {

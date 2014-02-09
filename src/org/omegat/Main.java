@@ -49,6 +49,7 @@ import org.omegat.convert.ConvertConfigs;
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
 import org.omegat.core.data.NotLoadedProject;
+import org.omegat.core.data.PrepareTMXEntry;
 import org.omegat.core.data.ProjectProperties;
 import org.omegat.core.data.RealProject;
 import org.omegat.core.data.SourceTextEntry;
@@ -370,16 +371,19 @@ public class Main {
             }
 
             // prepare tmx
-            Map<String, TMXEntry> data = new HashMap<String, TMXEntry>();
+            Map<String, PrepareTMXEntry> data = new HashMap<String, PrepareTMXEntry>();
             for (SourceTextEntry ste : entries) {
+                PrepareTMXEntry entry = new PrepareTMXEntry();
+                entry.source = ste.getSrcText();
                 switch (pseudoTranslateType) {
                 case EQUAL:
-                    data.put(ste.getSrcText(), new TMXEntry(ste.getSrcText(), ste.getSrcText(), true));
+                    entry.translation = ste.getSrcText();
                     break;
                 case EMPTY:
-                    data.put(ste.getSrcText(), new TMXEntry(ste.getSrcText(), "", true));
+                    entry.translation = "";
                     break;
                 }
+                data.put(ste.getSrcText(), entry);
             }
 
             try {
@@ -427,10 +431,14 @@ public class Main {
             System.out.println(StaticUtils.format(OStrings.getString("CONSOLE_ALIGN_AGAINST"), dir));
 
             Map<String, TMXEntry> data = p.align(p.getProjectProperties(), new File(dir));
+            Map<String, PrepareTMXEntry> result = new TreeMap<String, PrepareTMXEntry>();
+            for (Map.Entry<String, TMXEntry> en : data.entrySet()) {
+                result.put(en.getKey(), new PrepareTMXEntry(en.getValue()));
+            }
 
             String tmxFile = p.getProjectProperties().getProjectInternal() + "align.tmx";
 
-            TMXWriter.buildTMXFile(tmxFile, false, false, p.getProjectProperties(), data);
+            TMXWriter.buildTMXFile(tmxFile, false, false, p.getProjectProperties(), result);
 
             System.out.println(OStrings.getString("FINISHED"));
         } catch (Exception e) {

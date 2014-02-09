@@ -41,6 +41,7 @@ import javax.swing.text.BadLocationException;
 import javax.swing.text.JTextComponent;
 
 import org.omegat.core.Core;
+import org.omegat.core.data.PrepareTMXEntry;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.data.TMXEntry;
 import org.omegat.core.spellchecker.SpellCheckerMarker;
@@ -327,8 +328,12 @@ public class EditorPopups {
                 return;
             }
             TMXEntry prevTrans = Core.getProject().getTranslationInfo(ste);
-            Core.getProject().setTranslation(ste, v, Core.getNotes().getNoteText(),
-                    prevTrans.defaultTranslation);
+            PrepareTMXEntry trans = new PrepareTMXEntry();
+            trans.source = ste.getSrcText();
+            trans.translation = v;
+            trans.note = Core.getNotes().getNoteText();
+            trans.defaultTranslation = prevTrans.defaultTranslation;
+            Core.getProject().setTranslation(ste, trans);
             Core.getEditor().replaceEditText("");
             Core.getEditor().commitAndLeave();
         }

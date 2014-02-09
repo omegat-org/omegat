@@ -161,7 +161,7 @@ public class RealProject implements IProject {
     protected final List<FileInfo> projectFilesList = new ArrayList<FileInfo>();
 
     /** This instance returned if translation not exist. */
-    private static final TMXEntry EMPTY_TRANSLATION = new TMXEntry("", null, true);
+    private final TMXEntry EMPTY_TRANSLATION;
     
     private boolean allowTranslationEqualToSource = Preferences.isPreference(Preferences.ALLOW_TRANS_EQUAL_TO_SRC);
 
@@ -185,6 +185,10 @@ public class RealProject implements IProject {
     }
 
     public RealProject(final ProjectProperties props, IRemoteRepository repository) {
+        PrepareTMXEntry empty = new PrepareTMXEntry();
+        empty.source = "";
+        EMPTY_TRANSLATION = new TMXEntry(empty);
+
         m_config = props;
         this.repository = repository;
 
@@ -1108,14 +1112,17 @@ public class RealProject implements IProject {
                     continue;
                 }
 
+                PrepareTMXEntry prepare = new PrepareTMXEntry();
+                prepare.source = ste.getSrcText();
                 // project with default translations
                 if (m_config.isSupportDefaultTranslations()) {
                     // can we import as default translation ?
                     TMXEntry enDefault = projectTMX.getDefaultTranslation(ste.getSrcText());
                     if (enDefault == null) {
                         // default not exist yet - yes, we can
-                        TMXEntry tr = new TMXEntry(ste.getSrcText(), ste.getSourceTranslation(), true);
-                        projectTMX.setTranslation(ste, tr, true);
+                        prepare.translation = ste.getSourceTranslation();
+                        prepare.defaultTranslation = true;
+                        projectTMX.setTranslation(ste, new TMXEntry(prepare), true);
                         allowToImport.put(ste.getSrcText(), ste.getSourceTranslation());
                     } else {
                         // default translation already exist - did we just
@@ -1125,8 +1132,9 @@ public class RealProject implements IProject {
                         if (justImported != null && !ste.getSourceTranslation().equals(justImported)) {
                             // we just imported default and it doesn't equals to
                             // current - import as alternative
-                            TMXEntry tr = new TMXEntry(ste.getSrcText(), ste.getSourceTranslation(), false);
-                            projectTMX.setTranslation(ste, tr, false);
+                            prepare.translation = ste.getSourceTranslation();
+                            prepare.defaultTranslation = false;
+                            projectTMX.setTranslation(ste, new TMXEntry(prepare), false);
                         }
                     }
                 } else { // project without default translations
@@ -1134,8 +1142,9 @@ public class RealProject implements IProject {
                     TMXEntry en = projectTMX.getMultipleTranslation(ste.getKey());
                     if (en == null) {
                         // not exist yet - yes, we can
-                        TMXEntry tr = new TMXEntry(ste.getSrcText(), ste.getSourceTranslation(), false);
-                        projectTMX.setTranslation(ste, tr, false);
+                        prepare.translation = ste.getSourceTranslation();
+                        prepare.defaultTranslation = false;
+                        projectTMX.setTranslation(ste, new TMXEntry(prepare), false);
                     }
                 }
             }
@@ -1278,62 +1287,76 @@ public class RealProject implements IProject {
         return m_modifiedFlag;
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    public void setTranslation(final SourceTextEntry entry, final String trans, String note, boolean isDefault) {
+    @Override
+    public void setTranslation(final SourceTextEntry entry, final PrepareTMXEntry trans) {
+        if (trans == null) {
+            throw new IllegalArgumentException("RealProject.setTranslation(tr) can't be null");
+        }
 
-        TMXEntry prevTrEntry = isDefault ? projectTMX.getDefaultTranslation(entry.getSrcText()) : projectTMX
+        TMXEntry prevTrEntry = trans.defaultTranslation ? projectTMX
+                .getDefaultTranslation(entry.getSrcText()) : projectTMX
                 .getMultipleTranslation(entry.getKey());
-        
-        String creator;
-        long creationDate;
-        String changer = Preferences.getPreferenceDefault(Preferences.TEAM_AUTHOR,
+
+        trans.changer = Preferences.getPreferenceDefault(Preferences.TEAM_AUTHOR,
                 System.getProperty("user.name"));
-        long changeDate = System.currentTimeMillis();
+        trans.changeDate = System.currentTimeMillis();
 
         if (prevTrEntry == null) {
             // there was no translation yet
             prevTrEntry = EMPTY_TRANSLATION;
-            creationDate = changeDate;
-            creator = changer;
+            trans.creationDate = trans.changeDate;
+            trans.creator = trans.changer;
         } else {
-            creationDate = prevTrEntry.creationDate;
-            creator = prevTrEntry.creator;
+            trans.creationDate = prevTrEntry.creationDate;
+            trans.creator = prevTrEntry.creator;
         }
-        
+
+        if (StringUtil.isEmpty(trans.note)) {
+            trans.note = null;
+        }
+
+        trans.source = entry.getSrcText();
+
         TMXEntry newTrEntry;
-        if (StringUtil.equalsWithNulls(prevTrEntry.translation, trans)) {
-            // translation not changed
-            if (StringUtil.nvl(prevTrEntry.note, "").equals(StringUtil.nvl(note, ""))) {
-                // note was not changed also
-                return;
-            }
-            // only note was changed
-            newTrEntry = new TMXEntry(prevTrEntry.source, prevTrEntry.translation, prevTrEntry.changer,
-                    prevTrEntry.changeDate, prevTrEntry.creator, prevTrEntry.creationDate,
-                    (StringUtil.isEmpty(note) ? null : note), prevTrEntry.defaultTranslation, null);
+
+        if (trans.translation == null && trans.note == null) {
+            // no translation, no note
+            newTrEntry = null;
         } else {
-            // translation was changed
-            if (trans == null && StringUtil.isEmpty(note)) {
-                // no translation, no note
-                newTrEntry = null;
-            } else {
-                newTrEntry = new TMXEntry(entry.getSrcText(), trans, changer, changeDate,
-                        creator, creationDate, (StringUtil.isEmpty(note) ? null : note), isDefault, null);
-            }
+            newTrEntry = new TMXEntry(trans);
         }
 
         m_modifiedFlag = true;
 
-        projectTMX.setTranslation(entry, newTrEntry, isDefault);
+        projectTMX.setTranslation(entry, newTrEntry, trans.defaultTranslation);
 
         /**
          * Calculate how to statistics should be changed.
          */
         int diff = prevTrEntry.translation == null ? 0 : -1;
-        diff += trans == null ? 0 : +1;
+        diff += trans.translation == null ? 0 : +1;
         hotStat.numberofTranslatedSegments += diff;
+    }
+
+    @Override
+    public void setNote(final SourceTextEntry entry, final TMXEntry oldTE, final String note) {
+        if (oldTE == null) {
+            throw new IllegalArgumentException("RealProject.setNote(tr) can't be null");
+        }
+
+        TMXEntry prevTrEntry = oldTE.defaultTranslation ? projectTMX
+                .getDefaultTranslation(entry.getSrcText()) : projectTMX
+                .getMultipleTranslation(entry.getKey());
+        if (prevTrEntry == null) {
+            throw new IllegalArgumentException("RealProject.setNote() must have previous translation");
+        }
+
+        PrepareTMXEntry en = new PrepareTMXEntry(prevTrEntry);
+        en.note = note;
+
+        m_modifiedFlag = true;
+
+        projectTMX.setTranslation(entry, new TMXEntry(en), en.defaultTranslation);
     }
 
     public void iterateByDefaultTranslations(DefaultTranslationsIterator it) {
@@ -1575,6 +1598,8 @@ public class RealProject implements IProject {
                 boolean removeSpaces = Core.getFilterMaster().getConfig().isRemoveSpacesNonseg();
                 String sourceS = ParseEntry.stripSomeChars(source, spr, config.isRemoveTags(), removeSpaces);
                 String transS = ParseEntry.stripSomeChars(translation, spr, config.isRemoveTags(), removeSpaces);
+
+                PrepareTMXEntry tr = new PrepareTMXEntry();
                 if (config.isSentenceSegmentingEnabled()) {
                     List<String> segmentsSource = Segmenter.segment(config.getSourceLanguage(), sourceS, null, null);
                     List<String> segmentsTranslation = Segmenter
@@ -1583,7 +1608,10 @@ public class RealProject implements IProject {
                         if (isFuzzy) {
                             transS = "[" + filter.getFuzzyMark() + "] " + transS;
                         }
-                        data.put(sourceS, new TMXEntry(sourceS, transS, true));
+                        tr.source = sourceS;
+                        tr.translation = transS;
+                        tr.defaultTranslation = true;
+                        data.put(sourceS, new TMXEntry(tr));
                     } else {
                         for (short i = 0; i < segmentsSource.size(); i++) {
                             String oneSrc = segmentsSource.get(i);
@@ -1591,14 +1619,20 @@ public class RealProject implements IProject {
                             if (isFuzzy) {
                                 oneTrans = "[" + filter.getFuzzyMark() + "] " + oneTrans;
                             }
-                            data.put(sourceS, new TMXEntry(oneSrc, oneTrans, true));
+                            tr.source = oneSrc;
+                            tr.translation = oneTrans;
+                            tr.defaultTranslation = true;
+                            data.put(sourceS, new TMXEntry(tr));
                         }
                     }
                 } else {
                     if (isFuzzy) {
                         transS = "[" + filter.getFuzzyMark() + "] " + transS;
                     }
-                    data.put(sourceS, new TMXEntry(sourceS, transS, true));
+                    tr.source = sourceS;
+                    tr.translation = transS;
+                    tr.defaultTranslation = true;
+                    data.put(sourceS, new TMXEntry(tr));
                 }
             }
         }

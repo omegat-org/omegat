@@ -35,6 +35,7 @@ import java.util.Map;
 import java.util.Set;
 
 import org.omegat.core.Core;
+import org.omegat.core.data.PrepareTMXEntry;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.data.TMXEntry;
 import org.omegat.core.search.SearchMatch;
@@ -111,11 +112,13 @@ public class ReplaceFilter implements IEditorFilter {
                     o.replace(m.getStart() + off, m.getEnd() + off, replacement);
                     off += replacement.length() - m.getLength();
                 }
+                PrepareTMXEntry prepare = new PrepareTMXEntry(en);
+                prepare.translation = o.toString();
                 if (en.isTranslated()) {
-                    Core.getProject().setTranslation(ste, o.toString(), en.note, en.defaultTranslation);
+                    Core.getProject().setTranslation(ste, prepare);
                 } else {
                     // new translation - set as default
-                    Core.getProject().setTranslation(ste, o.toString(), null, true);
+                    Core.getProject().setTranslation(ste, prepare);
                 }
             }
         }

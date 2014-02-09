@@ -110,11 +110,21 @@ public interface IProject {
      * @param entry
      *            entry
      * @param trans
-     *            translation. Null for remove translation, empty string for empty transation.
-     * @param isDefault
-     *            true if default translation should be changed
+     *            translation. It can't be null
      */
-    void setTranslation(SourceTextEntry entry, String trans, String note, boolean isDefault);
+    void setTranslation(SourceTextEntry entry, PrepareTMXEntry trans);
+
+    /**
+     * Change note only for translation.
+     * 
+     * @param entry
+     *            entry
+     * @param oldTrans
+     *            old translation
+     * @param note
+     *            note text
+     */
+    void setNote(SourceTextEntry entry, TMXEntry oldTrans, String note);
 
     /**
      * Get statistics for project.

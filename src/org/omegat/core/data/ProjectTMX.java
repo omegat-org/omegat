@@ -226,6 +226,12 @@ public class ProjectTMX {
                     alternatives.remove(ste.getKey());
                 }
             } else {
+                if (!ste.getSrcText().equals(te.source)) {
+                    throw new IllegalArgumentException("Source must be the same as in SourceTextEntry");
+                }
+                if (isDefault != te.defaultTranslation) {
+                    throw new IllegalArgumentException("Default/alternative must be the same");
+                }
                 if (isDefault) {
                     defaults.put(ste.getKey().sourceText, te);
                 } else {
@@ -280,14 +286,23 @@ public class ProjectTMX {
                     String segmentTranslation = targets.get(i);
                     EntryKey key = createKeyByProps(segmentSource, tu.props);
                     boolean defaultTranslation = key.file == null;
-                    TMXEntry te = new TMXEntry(segmentSource, segmentTranslation, changer, changed,
-                            creator, created, tu.note, defaultTranslation, null);
+
+                    PrepareTMXEntry te = new PrepareTMXEntry();
+                    te.source = segmentSource;
+                    te.translation = segmentTranslation;
+                    te.changer = changer;
+                    te.changeDate = changed;
+                    te.creator = creator;
+                    te.creationDate = created;
+                    te.note = tu.note;
+                    te.defaultTranslation = defaultTranslation;
+
                     if (defaultTranslation) {
                         // default translation
-                        defaults.put(segmentSource, te);
+                        defaults.put(segmentSource, new TMXEntry(te));
                     } else {
                         // multiple translation
-                        alternatives.put(key, te);
+                        alternatives.put(key, new TMXEntry(te));
                     }
                 }
             }

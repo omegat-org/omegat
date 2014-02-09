@@ -63,6 +63,7 @@ import org.omegat.core.CoreEvents;
 import org.omegat.core.data.EntryKey;
 import org.omegat.core.data.IProject;
 import org.omegat.core.data.IProject.FileInfo;
+import org.omegat.core.data.PrepareTMXEntry;
 import org.omegat.core.data.ProjectTMX;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.data.TMXEntry;
@@ -807,30 +808,49 @@ public class EditorController implements IEditor {
             // segment was active
             SegmentBuilder sb = m_docSegList[displayedEntryIndex];
             entry = sb.ste;
-            
+
+            PrepareTMXEntry newen = new PrepareTMXEntry();
+            newen.source = sb.getSourceText();
             TMXEntry oldTE = Core.getProject().getTranslationInfo(entry);
-            
+
             if (StringUtil.isEmpty(oldTE.translation) && StringUtil.isEmpty(newTrans)) {
                 // It's an empty translation which should remain empty
                 setEmptyTranslation(true);
             }
 
-            if ((oldTE.translation == null && StringUtil.isEmpty(newTrans)) ||
-                (StringUtil.isEmpty(newTrans) && !isEmptyTransation())) {
+            if ((oldTE.translation == null && StringUtil.isEmpty(newTrans))
+                    || (StringUtil.isEmpty(newTrans) && !isEmptyTransation())) {
                 // There was no translation, nothing changed, or the user enters an empty translation, which
                 // means removing the translation (but not necessary the TU, since there could be a note),
                 // unless it's an empty translation.
                 newTrans = null;
             }
-            
-            String note = Core.getNotes().getNoteText();
+
+            newen.note = Core.getNotes().getNoteText();
+            newen.defaultTranslation = sb.isDefaultTranslation();
 
             // update memory
             if (entry.getSrcText().equals(newTrans)
                     && !Preferences.isPreference(Preferences.ALLOW_TRANS_EQUAL_TO_SRC)) {
                 newTrans = null;
             }
-            Core.getProject().setTranslation(entry, newTrans, note, sb.isDefaultTranslation());
+
+            if (newTrans != null && oldTE.translation != null && newTrans.equals(oldTE.translation)) {
+                // translation wasn't changed
+                newTrans = null;
+            }
+
+            if (newTrans == null) {
+                // translation wasn't changed
+                if (!StringUtil.nvl(oldTE.note, "").equals(StringUtil.nvl(newen.note, ""))) {
+                    // note was changed
+                    Core.getProject().setNote(entry, oldTE, newen.note);
+                }
+            } else {
+                // translation was changed
+                newen.translation = newTrans;
+                Core.getProject().setTranslation(entry, newen);
+            }
 
             m_docSegList[displayedEntryIndex].createSegmentElement(false);
 
@@ -1780,7 +1800,10 @@ public class EditorController implements IEditor {
         if (!alternate) {
             // remove alternative translation from project
             SourceTextEntry ste = sb.getSourceTextEntry();
-            Core.getProject().setTranslation(ste, null, null, false);
+            PrepareTMXEntry en = new PrepareTMXEntry();
+            en.source = ste.getSrcText();
+            en.defaultTranslation = false;
+            Core.getProject().setTranslation(ste, en);
 
             // switch to default translation
             sb.setDefaultTranslation(true);

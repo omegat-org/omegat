@@ -70,6 +70,7 @@ public class OConsts {
     public static final String LAST_CHANGES_FILE = "changes.txt";
 
     // status file consts
+    public static final String FILES_ORDER_FILENAME = "files_order.txt";
     public static final String STATUS_EXTENSION = "project_save.tmx";
     public static final String STATUS_RECOVER_EXTENSION = ".recover";
     public static final String BACKUP_EXTENSION = ".bak";

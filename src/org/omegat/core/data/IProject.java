@@ -5,6 +5,7 @@
 
  Copyright (C) 2008 Alex Buloichik
                2010 Didier Briel
+               2014 Alex Buloichik
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -184,6 +185,16 @@ public interface IProject {
      * synchronization to read it.
      */
     List<FileInfo> getProjectFiles();
+
+    /**
+     * Get ordered list of source file names.
+     */
+    List<String> getSourceFilesOrder();
+
+    /**
+     * Set ordered list of source file names.
+     */
+    void setSourceFilesOrder(List<String> filesList);
 
     public static class FileInfo {
         public String filePath;

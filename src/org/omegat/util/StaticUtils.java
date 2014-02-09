@@ -8,7 +8,7 @@
                2008-2011 Didier Briel
                2012 Martin Fleurke, Didier Briel
                2013 Aaron Madlon-Kay, Zoltan Bartko, Didier Briel, Alex Buloichik
-               2014 Aaron Madlon-Kay
+               2014 Aaron Madlon-Kay, Alex Buloichik
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -268,6 +268,37 @@ public class StaticUtils {
         Collections.sort(lst, new Comparator<String>() {
             public int compare(String o1, String o2) {
                 return localCollator.compare(o1, o2);
+            }
+        });
+    }
+
+    /**
+     * Sorts list by order. New lines sorted by alphabet.
+     */
+    public static void sortByList(final List<String> list, final List<String> order) {
+        Collections.sort(list, new Comparator<String>() {
+            public int compare(String o1, String o2) {
+                int pos1, pos2;
+                if (order != null) {
+                    pos1 = order.indexOf(o1);
+                    pos2 = order.indexOf(o2);
+                } else {
+                    pos1 = 0;
+                    pos2 = 0;
+                }
+                if (pos1 < 0) {
+                    pos1 = Integer.MAX_VALUE;
+                }
+                if (pos2 < 0) {
+                    pos2 = Integer.MAX_VALUE;
+                }
+                if (pos1 < pos2) {
+                    return -1;
+                } else if (pos1 > pos2) {
+                    return 1;
+                } else {
+                    return o1.compareToIgnoreCase(o2);
+                }
             }
         });
     }

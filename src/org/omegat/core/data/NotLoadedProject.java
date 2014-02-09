@@ -141,4 +141,11 @@ public class NotLoadedProject implements IProject {
 
     public void findNonUniqueSegments() {
     }
+
+    public List<String> getSourceFilesOrder() {
+        return null;
+    }
+
+    public void setSourceFilesOrder(List<String> filesList) {
+    }
 }

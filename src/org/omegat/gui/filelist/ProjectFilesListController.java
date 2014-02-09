@@ -680,13 +680,33 @@ public class ProjectFilesListController {
         private Integer[] modelToView;
         private List<Integer> viewToModel;
 
-        public Sorter(List<IProject.FileInfo> files) {
+        public Sorter(final List<IProject.FileInfo> files) {
             this.files = files;
             modelToView = new Integer[files.size()];
             viewToModel = new ArrayList<Integer>(files.size());
             for (int i = 0; i < modelToView.length; i++) {
                 viewToModel.add(i);
             }
+
+            final List<String> filenames = new ArrayList<String>();
+            for (IProject.FileInfo fi : files) {
+                filenames.add(fi.filePath);
+            }
+            StaticUtils.sortByList(filenames, Core.getProject().getSourceFilesOrder());
+            Collections.sort(viewToModel, new Comparator<Integer>() {
+                public int compare(Integer o1, Integer o2) {
+                    int pos1 = filenames.indexOf(files.get(o1).filePath);
+                    int pos2 = filenames.indexOf(files.get(o2).filePath);
+                    if (pos1 < pos2) {
+                        return -1;
+                    } else if (pos1 > pos2) {
+                        return 1;
+                    } else {
+                        return 0;
+                    }
+                }
+            });
+
             recalc();
         }
 
@@ -707,7 +727,6 @@ public class ProjectFilesListController {
 
         @Override
         public void modelStructureChanged() {
-            throw new RuntimeException("Not implemented");
         }
 
         @Override
@@ -762,6 +781,7 @@ public class ProjectFilesListController {
                 sortKey = new SortKey(column, SortOrder.ASCENDING);
             }
             sort();
+            save();
         }
 
         @Override
@@ -819,8 +839,18 @@ public class ProjectFilesListController {
             int n = viewToModel.remove(currentPos);
             viewToModel.add(newPos, n);
             recalc();
+            save();
             list.tableFiles.repaint();
             return newPos;
+        }
+
+        private void save() {
+            List<String> filenames = new ArrayList<String>();
+            for (int i = 0; i < viewToModel.size(); i++) {
+                String fn = files.get(viewToModel.get(i)).filePath;
+                filenames.add(fn);
+            }
+            Core.getProject().setSourceFilesOrder(filenames);
         }
     }
 }

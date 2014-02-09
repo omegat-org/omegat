@@ -9,7 +9,7 @@
                2009-2010 Didier Briel
                2012 Alex Buloichik, Guido Leenders, Didier Briel, Martin Fleurke
                2013 Aaron Madlon-Kay, Didier Briel
-               2014 Aaron Madlon-Kay
+               2014 Aaron Madlon-Kay, Alex Buloichik
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -33,14 +33,21 @@ package org.omegat.core.data;
 
 import gen.core.filters.Filters;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.InterruptedIOException;
+import java.io.OutputStreamWriter;
 import java.io.RandomAccessFile;
 import java.nio.channels.FileChannel;
 import java.nio.channels.FileLock;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -158,7 +165,7 @@ public class RealProject implements IProject {
     private Set<EntryKey> existKeys = new HashSet<EntryKey>();
 
     /** Segments count in project files. */
-    protected final List<FileInfo> projectFilesList = new ArrayList<FileInfo>();
+    protected List<FileInfo> projectFilesList = new ArrayList<FileInfo>();
 
     /** This instance returned if translation not exist. */
     private final TMXEntry EMPTY_TRANSLATION;
@@ -1014,11 +1021,15 @@ public class RealProject implements IProject {
         List<String> srcFileList = new ArrayList<String>();
         File root = new File(m_config.getSourceRoot());
         StaticUtils.buildFileList(srcFileList, root, true);
+        for (int i = 0; i < srcFileList.size(); i++) {
+            srcFileList.set(i, srcFileList.get(i).substring(m_config.getSourceRoot().length()));
+        }
+        StaticUtils.sortByList(srcFileList, getSourceFilesOrder());
 
         for (String filename : srcFileList) {
             // strip leading path information;
             // feed file name to project window
-            String filepath = filename.substring(m_config.getSourceRoot().length());
+            String filepath = filename;
 
             Core.getMainWindow().showStatusMessageRB("CT_LOAD_FILE_MX", filepath);
 
@@ -1029,7 +1040,8 @@ public class RealProject implements IProject {
 
             loadFilesCallback.setCurrentFile(fi);
 
-            IFilter filter = fm.loadFile(filename, new FilterContext(m_config), loadFilesCallback);
+            IFilter filter = fm.loadFile(m_config.getSourceRoot() + filename, new FilterContext(m_config),
+                    loadFilesCallback);
 
             loadFilesCallback.fileFinished();
 
@@ -1483,6 +1495,39 @@ public class RealProject implements IProject {
      */
     public List<FileInfo> getProjectFiles() {
         return Collections.unmodifiableList(projectFilesList);
+    }
+
+    @Override
+    public List<String> getSourceFilesOrder() {
+        final String file = m_config.getProjectInternal() + OConsts.FILES_ORDER_FILENAME;
+        try {
+            BufferedReader rd = new BufferedReader(new InputStreamReader(new FileInputStream(file), "UTF-8"));
+            List<String> result = new ArrayList<String>();
+            String s;
+            while ((s = rd.readLine()) != null) {
+                result.add(s);
+            }
+            rd.close();
+            return result;
+        } catch (Exception ex) {
+            return null;
+        }
+    }
+
+    @Override
+    public void setSourceFilesOrder(List<String> filesList) {
+        final String file = m_config.getProjectInternal() + OConsts.FILES_ORDER_FILENAME;
+        try {
+            BufferedWriter wr = new BufferedWriter(
+                    new OutputStreamWriter(new FileOutputStream(file), "UTF-8"));
+            for (String f : filesList) {
+                wr.write(f);
+                wr.write('\n');
+            }
+            wr.close();
+        } catch (Exception ex) {
+            Log.log(ex);
+        }
     }
 
     /**

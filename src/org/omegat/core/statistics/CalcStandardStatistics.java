@@ -5,7 +5,7 @@
 
  Copyright (C) 2009 Alex Buloichik
                2010 Arno Peters
-               2013 Alex Buloichik
+               2013-2014 Alex Buloichik
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -66,12 +66,12 @@ import org.omegat.util.gui.TextUtil;
 public class CalcStandardStatistics extends LongProcessThread {
     private static final String[] htHeaders = new String[] { "", OStrings.getString("CT_STATS_Segments"),
             OStrings.getString("CT_STATS_Words"), OStrings.getString("CT_STATS_Characters_NOSP"),
-            OStrings.getString("CT_STATS_Characters") };
+            OStrings.getString("CT_STATS_Characters"), OStrings.getString("CT_STATS_Files") };
 
     private static final String[] htRows = new String[] { OStrings.getString("CT_STATS_Total"),
             OStrings.getString("CT_STATS_Remaining"), OStrings.getString("CT_STATS_Unique"),
             OStrings.getString("CT_STATS_Unique_Remaining") };
-    private static final boolean[] htAlign = new boolean[] { false, true, true, true, true };
+    private static final boolean[] htAlign = new boolean[] { false, true, true, true, true, true };
 
     private static final String[] ftHeaders = new String[] { OStrings.getString("CT_STATS_FILE_Name"),
             OStrings.getString("CT_STATS_FILE_Total_Segments"),
@@ -148,17 +148,23 @@ public class CalcStandardStatistics extends LongProcessThread {
                 translated.add(src);
             }
         }
+        Set<String> filesUnique = new HashSet<String>();
+        Set<String> filesRemainingUnique = new HashSet<String>();
         for (Map.Entry<String, SourceTextEntry> en : uniqueSegment.entrySet()) {
             /* Number of words and chars calculated without all tags and protected parts. */
             StatCount count = new StatCount(en.getValue());
 
             // add to unique
             unique.add(count);
+            filesUnique.add(en.getValue().getKey().file);
             // add to unique remaining
             if (!translated.contains(en.getKey())) {
                 remainingUnique.add(count);
+                filesRemainingUnique.add(en.getValue().getKey().file);
             }
         }
+        unique.addFiles(filesUnique.size());
+        remainingUnique.addFiles(filesRemainingUnique.size());
 
         List<FileData> counts = new ArrayList<FileData>();
         Map<String, Boolean> firstSeenUniqueSegment = new HashMap<String, Boolean>();
@@ -166,6 +172,8 @@ public class CalcStandardStatistics extends LongProcessThread {
             FileData numbers = new FileData();
             numbers.filename = file.filePath;
             counts.add(numbers);
+            int fileTotal = 0;
+            int fileRemaining = 0;
             for (SourceTextEntry ste : file.entries) {
                 String src = ste.getSrcText();
                 for (ProtectedPart pp : ste.getProtectedParts()) {
@@ -177,11 +185,13 @@ public class CalcStandardStatistics extends LongProcessThread {
 
                 // add to total
                 total.add(count);
+                fileTotal = 1;
 
                 // add to remaining
                 TMXEntry tr = project.getTranslationInfo(ste);
                 if (!tr.isTranslated()) {
                     remaining.add(count);
+                    fileRemaining = 1;
                 }
 
                 // add to file's info
@@ -201,6 +211,8 @@ public class CalcStandardStatistics extends LongProcessThread {
                     numbers.remaining.add(count);
                 }
             }
+            total.addFiles(fileTotal);
+            remaining.addFiles(fileRemaining);
         }
 
         StringBuilder result = new StringBuilder();
@@ -230,7 +242,7 @@ public class CalcStandardStatistics extends LongProcessThread {
     }
 
     protected static String[][] calcHeaderTable(final StatCount[] result) {
-        String[][] table = new String[result.length][5];
+        String[][] table = new String[result.length][6];
 
         for (int i = 0; i < result.length; i++) {
             table[i][0] = htRows[i];
@@ -238,6 +250,7 @@ public class CalcStandardStatistics extends LongProcessThread {
             table[i][2] = Integer.toString(result[i].words);
             table[i][3] = Integer.toString(result[i].charsWithoutSpaces);
             table[i][4] = Integer.toString(result[i].charsWithSpaces);
+            table[i][5] = Integer.toString(result[i].files);
         }
         return table;
     }

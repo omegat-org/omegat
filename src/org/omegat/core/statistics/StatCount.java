@@ -3,7 +3,7 @@
           with fuzzy matching, translation memory, keyword search, 
           glossaries, and translation leveraging into updated projects.
 
- Copyright (C) 2009-2013 Alex Buloichik
+ Copyright (C) 2009-2014 Alex Buloichik
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -45,7 +45,7 @@ public class StatCount {
      */
     static public final boolean REMOVE_ALL_PROTECTED_PARTS = true;
 
-    public int segments, words, charsWithoutSpaces, charsWithSpaces;
+    public int segments, words, charsWithoutSpaces, charsWithSpaces, files;
 
     /**
      * Initialize counts with zeros.
@@ -79,5 +79,9 @@ public class StatCount {
         words += c.words;
         charsWithoutSpaces += c.charsWithoutSpaces;
         charsWithSpaces += c.charsWithSpaces;
+    }
+
+    public void addFiles(int count) {
+        files += count;
     }
 }

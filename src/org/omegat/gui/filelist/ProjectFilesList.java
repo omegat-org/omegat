@@ -145,19 +145,19 @@ public class ProjectFilesList extends javax.swing.JFrame {
         jPanel2.setLayout(new BoxLayout(jPanel2, BoxLayout.Y_AXIS));
         jPanel2.add(filler6);
 
-        Mnemonics.setLocalizedText(btnFirst, "First");
+        Mnemonics.setLocalizedText(btnFirst, "Move First");
         jPanel2.add(btnFirst);
         jPanel2.add(filler8);
 
-        Mnemonics.setLocalizedText(btnUp, "Up");
+        Mnemonics.setLocalizedText(btnUp, "Move Up");
         jPanel2.add(btnUp);
         jPanel2.add(filler7);
 
-        Mnemonics.setLocalizedText(btnDown, "Down");
+        Mnemonics.setLocalizedText(btnDown, "Move Down");
         jPanel2.add(btnDown);
         jPanel2.add(filler9);
 
-        Mnemonics.setLocalizedText(btnLast, "Last");
+        Mnemonics.setLocalizedText(btnLast, "Move Last");
         jPanel2.add(btnLast);
         jPanel2.add(filler5);
 

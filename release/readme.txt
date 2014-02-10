@@ -272,6 +272,7 @@ Code has been contributed by
   Alex Buloichik (lead developer)
   Sandra Jean Chua
   Thomas Cordonnier
+  Enrique Estévez Fernández
   Martin Fleurke  
   Wildrich Fourie
   Phillip Hall

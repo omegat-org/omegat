@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 3.1.0 
 ----------------------------------------------------------------------
-  11 Enhancements
+  12 Enhancements
    4 Bug fixes
    1 Localisation update
 ----------------------------------------------------------------------
@@ -42,6 +42,9 @@ documents in team projects
 is the most common encoding for those files
 
   - The About dialog can now be resized
+
+  - In the Mozilla DTD filter, an option allows to not
+include untranslated strings in the target files 
 
   Bug fixes:
 

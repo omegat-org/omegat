@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 3.1.0 
 ----------------------------------------------------------------------
-   9 Enhancements
+  10 Enhancements
    4 Bug fixes
    1 Localisation update
 ----------------------------------------------------------------------
@@ -23,6 +23,9 @@
 
   - Allow custom sorting order of project files
   https://sourceforge.net/p/omegat/feature-requests/788/
+
+  - Improve exception processing in console mode
+  https://sourceforge.net/p/omegat/bugs/607/
 
   Other enhancements:
   

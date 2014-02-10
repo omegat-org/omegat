@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 3.1.0 
 ----------------------------------------------------------------------
-  10 Enhancements
+  11 Enhancements
    4 Bug fixes
    1 Localisation update
 ----------------------------------------------------------------------
@@ -26,6 +26,9 @@
 
   - Improve exception processing in console mode
   https://sourceforge.net/p/omegat/bugs/607/
+
+  - Extend project statistics with the number of files in which they occur
+  https://sourceforge.net/p/omegat/feature-requests/910/
 
   Other enhancements:
   

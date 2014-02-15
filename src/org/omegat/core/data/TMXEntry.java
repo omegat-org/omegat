@@ -27,10 +27,11 @@
 
 package org.omegat.core.data;
 
-import org.omegat.util.StringUtil;
-
 import java.util.Collections;
+import java.util.List;
 import java.util.Map;
+
+import org.omegat.util.StringUtil;
 
 /**
  * Storage for TMX entry.
@@ -54,6 +55,9 @@ public class TMXEntry {
     public final String note;
     public final boolean defaultTranslation;
     public final Map<String, String> otherProperties;
+    public final List<String> xICE;
+    public final List<String> x100PC;
+    public final boolean xAUTO;
 
     TMXEntry(PrepareTMXEntry from) {
         this.source = from.source;
@@ -66,6 +70,9 @@ public class TMXEntry {
         this.defaultTranslation = from.defaultTranslation;
         this.otherProperties = from.otherProperties == null ? null : Collections
                 .unmodifiableMap(from.otherProperties);
+        this.xICE = from.xICE == null ? null : Collections.unmodifiableList(from.xICE);
+        this.x100PC = from.x100PC == null ? null : Collections.unmodifiableList(from.x100PC);
+        this.xAUTO = from.xAUTO;
     }
 
     public boolean isTranslated() {

@@ -28,8 +28,12 @@
 
 package org.omegat.core.data;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
+
+import org.omegat.util.TMXReader2;
 
 /**
  * Class for prepare TMXEntry content before save unchangeable copy in the ProjectTMX. We can't use just
@@ -53,6 +57,9 @@ public class PrepareTMXEntry {
     public String note;
     public boolean defaultTranslation = true;
     public Map<String, String> otherProperties;
+    public List<String> xICE;
+    public List<String> x100PC;
+    public boolean xAUTO;
 
     public PrepareTMXEntry() {
     }
@@ -67,5 +74,31 @@ public class PrepareTMXEntry {
         note = e.note;
         defaultTranslation = e.defaultTranslation;
         otherProperties = e.otherProperties == null ? null : new TreeMap<String, String>(e.otherProperties);
+        this.xICE = e.xICE == null ? null : new ArrayList<String>(e.xICE);
+        this.x100PC = e.x100PC == null ? null : new ArrayList<String>(e.x100PC);
+        this.xAUTO = e.xAUTO;
+    }
+
+    public void readFromTU(List<TMXReader2.Prop> props) {
+        for (TMXReader2.Prop p : props) {
+            if (ProjectTMX.PROP_XICE.equals(p.type)) {
+                if (xICE == null) {
+                    xICE = new ArrayList<String>();
+                }
+                xICE.add(p.value);
+            } else if (ProjectTMX.PROP_X100PC.equals(p.type)) {
+                if (x100PC == null) {
+                    x100PC = new ArrayList<String>();
+                }
+                x100PC.add(p.value);
+            } else if (ProjectTMX.PROP_XAUTO.equals(p.type)) {
+                xAUTO = true;
+            } else {
+                if (otherProperties == null) {
+                    otherProperties = new TreeMap<String, String>();
+                }
+                otherProperties.put(p.type, p.value);
+            }
+        }
     }
 }

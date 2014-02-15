@@ -194,7 +194,9 @@ public class Preferences {
     alternative translation */
     public static final String STOP_ON_ALTERNATIVE_TRANSLATION="wf_stopOnAlternativeTranslation";
     /** Workflow Option: Attempt to convert numbers when inserting a fuzzy match */
-    public static final String CONVERT_NUMBERS="wf_convertNumbers";
+    public static final String CONVERT_NUMBERS = "wf_convertNumbers";
+    /** Workflow Option: Save auto-populated status */
+    public static final String SAVE_AUTO_STATUS = "save_auto_status";
     
     /** Tag Validation Option: Don't check printf-tags */
     public static final String DONT_CHECK_PRINTF_TAGS = "tagValidation_noCheck";

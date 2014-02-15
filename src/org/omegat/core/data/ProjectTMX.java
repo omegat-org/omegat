@@ -59,6 +59,9 @@ public class ProjectTMX {
     protected static final String PROP_PREV = "prev";
     protected static final String PROP_NEXT = "next";
     protected static final String PROP_PATH = "path";
+    protected static final String PROP_XICE = "x-ice";
+    protected static final String PROP_X100PC = "x-100pc";
+    protected static final String PROP_XAUTO = "x-auto";
 
     /**
      * Storage for default translations for current project.
@@ -179,17 +182,41 @@ public class ProjectTMX {
                 }
             }
 
+            List<String> p=new ArrayList<String>();
             wr.writeComment(" Default translations ");
             for (Map.Entry<String, TMXEntry> en : new TreeMap<String, TMXEntry>(tempDefaults).entrySet()) {
-                wr.writeEntry(en.getKey(), en.getValue().translation, en.getValue(), null);
+                p.clear();
+                if (en.getValue().xAUTO) {
+                    p.add(PROP_XAUTO);
+                    p.add("auto");
+                }
+                wr.writeEntry(en.getKey(), en.getValue().translation, en.getValue(), p);
             }
 
             wr.writeComment(" Alternative translations ");
-            for (Map.Entry<EntryKey, TMXEntry> en : new TreeMap<EntryKey, TMXEntry>(tempAlternatives).entrySet()) {
+            for (Map.Entry<EntryKey, TMXEntry> en : new TreeMap<EntryKey, TMXEntry>(tempAlternatives)
+                    .entrySet()) {
                 EntryKey k = en.getKey();
-                wr.writeEntry(en.getKey().sourceText, en.getValue().translation, en.getValue(), new String[] {
-                        PROP_FILE, k.file, PROP_ID, k.id, PROP_PREV, k.prev, PROP_NEXT, k.next, PROP_PATH,
-                        k.path });
+                p.clear();
+                p.add(PROP_FILE);
+                p.add(k.file);
+                p.add(PROP_ID);
+                p.add(k.id);
+                p.add(PROP_PREV);
+                p.add(k.prev);
+                p.add(PROP_NEXT);
+                p.add(k.next);
+                p.add(PROP_PATH);
+                p.add(k.path);
+                if (en.getValue().xICE != null) {
+                    p.add(PROP_XICE);
+                    p.add(en.getValue().xICE.get(0));
+                }
+                if (en.getValue().x100PC != null) {
+                    p.add(PROP_X100PC);
+                    p.add(en.getValue().x100PC.get(0));
+                }
+                wr.writeEntry(en.getKey().sourceText, en.getValue().translation, en.getValue(), p);
             }
         } finally {
             wr.close();
@@ -284,8 +311,6 @@ public class ProjectTMX {
                 for (int i = 0; i < sources.size(); i++) {
                     String segmentSource = sources.get(i);
                     String segmentTranslation = targets.get(i);
-                    EntryKey key = createKeyByProps(segmentSource, tu.props);
-                    boolean defaultTranslation = key.file == null;
 
                     PrepareTMXEntry te = new PrepareTMXEntry();
                     te.source = segmentSource;
@@ -295,9 +320,15 @@ public class ProjectTMX {
                     te.creator = creator;
                     te.creationDate = created;
                     te.note = tu.note;
-                    te.defaultTranslation = defaultTranslation;
+                    te.readFromTU(tu.props);
 
-                    if (defaultTranslation) {
+                    EntryKey key = createKeyByProps(segmentSource, te.otherProperties);
+                    te.defaultTranslation = key.file == null;
+                    if (te.otherProperties != null && te.otherProperties.isEmpty()) {
+                        te.otherProperties = null;
+                    }
+
+                    if (te.defaultTranslation) {
                         // default translation
                         defaults.put(segmentSource, new TMXEntry(te));
                     } else {
@@ -311,8 +342,12 @@ public class ProjectTMX {
     };
 
     private EntryKey createKeyByProps(String src, Map<String, String> props) {
-        return new EntryKey(props.get(PROP_FILE), src, props.get(PROP_ID), props.get(PROP_PREV),
-                props.get(PROP_NEXT), props.get(PROP_PATH));
+        if (props != null) {
+            return new EntryKey(props.remove(PROP_FILE), src, props.remove(PROP_ID), props.remove(PROP_PREV),
+                    props.remove(PROP_NEXT), props.remove(PROP_PATH));
+        } else {
+            return new EntryKey(null, src, null, null, null, null);
+        }
     }
 
     /**

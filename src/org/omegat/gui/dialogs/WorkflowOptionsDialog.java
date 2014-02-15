@@ -28,6 +28,7 @@
 
 package org.omegat.gui.dialogs;
 
+import java.awt.Dimension;
 import java.awt.Frame;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
@@ -72,6 +73,9 @@ public class WorkflowOptionsDialog extends JDialog {
         // END HP
 
         initComponents();
+        Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
+        Dimension dialogSize = getSize();
+        setLocation((screenSize.width-dialogSize.width)/2,(screenSize.height-dialogSize.height)/2);
 
         getRootPane().setDefaultButton(okButton);
 
@@ -102,6 +106,7 @@ public class WorkflowOptionsDialog extends JDialog {
         convertNumbers.setSelected(Preferences.isPreference(Preferences.CONVERT_NUMBERS));
         allowTagEditing.setSelected(Preferences.isPreference(Preferences.ALLOW_TAG_EDITING));
         tagValidateOnLeave.setSelected(Preferences.isPreference(Preferences.TAG_VALIDATE_ON_LEAVE));
+        cbSaveAutoStatus.setSelected(Preferences.isPreference(Preferences.SAVE_AUTO_STATUS));
         invalidate();
         pack();
     }
@@ -138,6 +143,7 @@ public class WorkflowOptionsDialog extends JDialog {
         stopOnAlternativeTranslation = new javax.swing.JCheckBox();
         allowTagEditing = new javax.swing.JCheckBox();
         tagValidateOnLeave = new javax.swing.JCheckBox();
+        cbSaveAutoStatus = new javax.swing.JCheckBox();
 
         setTitle(OStrings.getString("GUI_TITLE_Workflow_Options")); // NOI18N
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -194,7 +200,7 @@ public class WorkflowOptionsDialog extends JDialog {
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 12;
+        gridBagConstraints.gridy = 20;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.SOUTHEAST;
         gridBagConstraints.weighty = 1.0;
         gridBagConstraints.insets = new java.awt.Insets(14, 4, 4, 4);
@@ -208,7 +214,7 @@ public class WorkflowOptionsDialog extends JDialog {
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
-        gridBagConstraints.gridy = 12;
+        gridBagConstraints.gridy = 20;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.SOUTHEAST;
         gridBagConstraints.weighty = 1.0;
         gridBagConstraints.insets = new java.awt.Insets(14, 4, 4, 4);
@@ -350,10 +356,19 @@ public class WorkflowOptionsDialog extends JDialog {
         gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
         getContentPane().add(tagValidateOnLeave, gridBagConstraints);
 
+        org.openide.awt.Mnemonics.setLocalizedText(cbSaveAutoStatus, OStrings.getString("WG_SAVE_AUTO_STATUS")); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 12;
+        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
+        gridBagConstraints.ipadx = 1;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+        getContentPane().add(cbSaveAutoStatus, gridBagConstraints);
+
         pack();
-        java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
-        java.awt.Dimension dialogSize = getSize();
-        setLocation((screenSize.width-dialogSize.width)/2,(screenSize.height-dialogSize.height)/2);
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void radiosActionPerformed(java.awt.event.ActionEvent evt)// GEN-FIRST:event_radiosActionPerformed
@@ -383,6 +398,7 @@ public class WorkflowOptionsDialog extends JDialog {
         Preferences.setPreference(Preferences.CONVERT_NUMBERS, convertNumbers.isSelected());
         Preferences.setPreference(Preferences.ALLOW_TAG_EDITING, allowTagEditing.isSelected());
         Preferences.setPreference(Preferences.TAG_VALIDATE_ON_LEAVE, tagValidateOnLeave.isSelected());
+        Preferences.setPreference(Preferences.SAVE_AUTO_STATUS, cbSaveAutoStatus.isSelected());
 
         doClose(RET_OK);
     }// GEN-LAST:event_okButtonActionPerformed
@@ -408,6 +424,7 @@ public class WorkflowOptionsDialog extends JDialog {
     private javax.swing.JCheckBox allowTagEditing;
     private javax.swing.JCheckBox allowTranslationEqualToSource;
     private javax.swing.JButton cancelButton;
+    private javax.swing.JCheckBox cbSaveAutoStatus;
     private javax.swing.JCheckBox convertNumbers;
     private javax.swing.JRadioButton defaultRadio;
     private javax.swing.JTextArea descriptionTextArea;

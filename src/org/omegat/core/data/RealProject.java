@@ -47,7 +47,6 @@ import java.nio.channels.FileChannel;
 import java.nio.channels.FileLock;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -129,7 +128,9 @@ public class RealProject implements IProject {
     private boolean m_modifiedFlag;
 
     /** List of all segments in project. */
-    private List<SourceTextEntry> allProjectEntries = new ArrayList<SourceTextEntry>(4096);
+    protected List<SourceTextEntry> allProjectEntries = new ArrayList<SourceTextEntry>(4096);
+
+    protected ImportFromAutoTMX importHandler;
 
     private final StatisticsInfo hotStat = new StatisticsInfo();
 
@@ -254,12 +255,13 @@ public class RealProject implements IProject {
 
             loadTranslations();
 
+            allProjectEntries = Collections.unmodifiableList(allProjectEntries);
+            importHandler = new ImportFromAutoTMX(this, allProjectEntries);
+
             loadTM();
 
             loadOtherLanguages();
 
-            allProjectEntries = Collections.unmodifiableList(allProjectEntries);
-            
             loaded = true;
 
             // clear status message
@@ -312,6 +314,9 @@ public class RealProject implements IProject {
 
             loadTranslations();
 
+            allProjectEntries = Collections.unmodifiableList(allProjectEntries);
+            importHandler = new ImportFromAutoTMX(this, allProjectEntries);
+
             importTranslationsFromSources();
 
             loadTM();
@@ -322,8 +327,6 @@ public class RealProject implements IProject {
             String stat = CalcStandardStatistics.buildProjectStats(this, hotStat);
             String fn = m_config.getProjectInternal() + OConsts.STATS_FILENAME;
             Statistics.writeStat(fn, stat);
-
-            allProjectEntries = Collections.unmodifiableList(allProjectEntries);
 
             loaded = true;
 
@@ -1249,21 +1252,9 @@ public class RealProject implements IProject {
     /**
      * Append new translation from auto TMX.
      */
-    private void appendFromAutoTMX(ExternalTMX tmx) {
-        Set<String> existSources = new HashSet<String>(allProjectEntries.size());
-        for (SourceTextEntry ste : allProjectEntries) {
-            existSources.add(ste.getSrcText());
-        }
+    void appendFromAutoTMX(ExternalTMX tmx) {
         synchronized (projectTMX) {
-            for (TMXEntry e : tmx.getEntries()) {
-                if (existSources.contains(e.source)) {
-                    // source exist
-                    if (!projectTMX.defaults.containsKey(e.source)) {
-                        // translation not exist
-                        projectTMX.defaults.put(e.source, e);
-                    }
-                }
-            }
+            importHandler.process(tmx);
         }
     }
 

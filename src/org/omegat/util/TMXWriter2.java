@@ -34,6 +34,7 @@ import java.io.FileOutputStream;
 import java.io.OutputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 import java.util.TimeZone;
 import java.util.regex.Matcher;
@@ -152,7 +153,7 @@ public class TMXWriter2 {
      * @param propValues
      *            pairs with property name and values
      */
-    public void writeEntry(String source, String translation, TMXEntry entry, String[] propValues)
+    public void writeEntry(String source, String translation, TMXEntry entry, List<String> propValues)
             throws Exception {
         xml.writeCharacters("    ");
         xml.writeStartElement("tu");
@@ -160,15 +161,15 @@ public class TMXWriter2 {
 
         // add properties
         if (propValues != null) {
-            for (int i = 0; i < propValues.length; i += 2) {
-                if (propValues[i + 1] == null) {
+            for (int i = 0; i < propValues.size(); i += 2) {
+                if (propValues.get(i + 1) == null) {
                     // value is null - not need to write
                     continue;
                 }
                 xml.writeCharacters("      ");
                 xml.writeStartElement("prop");
-                xml.writeAttribute("type", propValues[i]);
-                xml.writeCharacters(propValues[i + 1]);
+                xml.writeAttribute("type", propValues.get(i));
+                xml.writeCharacters(propValues.get(i + 1));
                 xml.writeEndElement(); // prop
                 xml.writeCharacters(FileUtil.LINE_SEPARATOR);
             }

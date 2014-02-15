@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tmx SYSTEM "tmx11.dtd">
+<tmx version="1.1">
+  <header srclang="en" />
+  <body>
+	<tu>
+		<tuv xml:lang="en"><seg>Edit</seg></tuv>
+		<tuv xml:lang="fr"><seg>Edition</seg></tuv>
+		<prop type="x-ice">11</prop>
+	</tu>
+	
+	<tu>
+		<tuv xml:lang="en"><seg>Edit</seg></tuv>
+		<tuv xml:lang="fr"><seg>Modifier</seg></tuv>
+		<prop type="x-100pc">10</prop>
+		<prop type="x-ice">12</prop>
+	</tu>
+  </body>
+</tmx>

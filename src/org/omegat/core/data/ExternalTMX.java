@@ -30,6 +30,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.TreeMap;
 
 import org.omegat.core.segmentation.Segmenter;
 import org.omegat.util.FileUtil;
@@ -102,7 +103,7 @@ public class ExternalTMX {
                     te.creationDate = created;
                     te.note = tu.note;
                     te.defaultTranslation = true;
-                    te.otherProperties = tu.props;
+                    te.readFromTU(tu.props);
                     entries.add(new TMXEntry(te));
                 }
             }

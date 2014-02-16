@@ -61,7 +61,7 @@ public class LatexFilter extends AbstractFilter {
     }
 
     public Instance[] getDefaultInstances() {
-        return new Instance[] { new Instance("*.tex"), new Instance("*.latex"), };
+        return new Instance[] { new Instance("*.tex"), new Instance("*.latex"), new Instance("*.texi"), };
     }
 
     public boolean isSourceEncodingVariable() {

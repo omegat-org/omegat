@@ -3,7 +3,7 @@
 ----------------------------------------------------------------------
   12 Enhancements
    4 Bug fixes
-   1 Localisation update
+   2 Localisation updates
 ----------------------------------------------------------------------
 3.1.0 vs. 3.0.8 update 3
 
@@ -62,6 +62,7 @@ include untranslated strings in the target files
   Localisation updates:
 
   - Japanese localisation updated to 3.1.0 (UI, Documentation, Readme)
+  - Italian localisation updated to 3.0.8 update 3 (UI, Documentation)
 
 ----------------------------------------------------------------------
  OmegaT 3.0.8 update 3 (2014-01-27)

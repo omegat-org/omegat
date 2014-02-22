@@ -215,17 +215,17 @@
 
       <para>Fare doppio-clic su <emphasis> <application>OmegaT</application>.app</emphasis> o sulla sua posizione nella Dock.</para>
 
-      <para>Aprire il file <application><emphasis>Info.plist</emphasis></application>, facendo clic col pulsante destro su <emphasis><application>OmegaT</application>.app</emphasis> e selezionare &quot;Show Package Contents&quot;, poi aprirlo facendovi sopra clic col pulsante destro e selezionando il proprio editor di testo preferito. È possibile anche arrivare direttamente alla cartella dalla riga di comando (con &quot;cd&quot;) e aprire <application><emphasis>Info.plist</emphasis> in un editor a riga di comando come emacs o vi</application>.<emphasis> <indexterm class="singular">
+      <para>È possibile cambiare il comportamento di OmegaT modificando sia la sezione <emphasis>Proprietà</emphasis>, sia quella <emphasis>VMOptions</emphasis> del file <application><emphasis>Info.plist</emphasis></application>.</para>
+      
+      <para>Aprire il file <application><emphasis>Info.plist</emphasis></application>, facendo clic col pulsante destro su <emphasis><application>OmegaT</application>.app</emphasis> e selezionare &quot;Show Package Contents&quot;, poi aprirlo facendovi sopra clic col pulsante destro e selezionando il proprio editor di testo preferito. È possibile anche arrivare direttamente alla cartella dalla riga di comando (con &quot;cd&quot;) e aprire <application><emphasis>Info.plist</emphasis> in un editor a riga di comando come emacs o vi</application>.<indexterm class="singular">
           <primary>Personalizzazione di OmegaT</primary> <secondary>OS X</secondary> <tertiary>Parametri di avvio</tertiary>
-        </indexterm></emphasis></para>
+        </indexterm></para>
 
-      <para>È possibile modificare sia la sezione <emphasis>Properties</emphasis> sia <emphasis>VMOptions</emphasis>.</para>
-
-      <para>Se si vogliono aggiungere valori a <emphasis> VMOptions</emphasis>, inserire tra loro uno spazio. Per esempio, <filename>-Xmx1024M -Duser.language=ja</filename> avvierà <application>OmegaT</application> con 1024 MB di memoria e con l'interfaccia giapponese.</para>
+      <para>Se si vogliono aggiungere valori a <emphasis>VMOptions</emphasis>, inserire tra loro uno spazio. Per esempio, <filename>-Xmx1024M -Duser.language=ja</filename> avvierà <application>OmegaT</application> con 1024 MB di memoria e con l'interfaccia giapponese.</para>
 
       <para>Per avviare più istanze di <emphasis><application>OmegaT</application>.app</emphasis>, fare doppio-clic sul file <emphasis>JavaApplicationStub</emphasis> che si trova in <emphasis><application>OmegaT</application>.app/ Contents/MacOS/</emphasis>.</para>
 
-      <para><emphasis><application> </application></emphasis>Per avviare il programma dalla riga di comando, usare il file <emphasis><application>OmegaT</application>.jar</emphasis> che si trova in <emphasis><application>OmegaT</application>.app/Contents/Resources/Java/</emphasis><application>OmegaT</application> . Per ulteriori informazioni consultare la sezione &quot;Avvio da riga di comando&quot; più sotto.</para>
+      <para>Per avviare il programma dalla riga di comando, usare il file <emphasis><application>OmegaT</application>.jar</emphasis> che si trova in <emphasis><application>OmegaT</application>.app/Contents/Resources/Java/</emphasis><application>OmegaT</application> . Per ulteriori informazioni consultare la sezione &quot;Avvio da riga di comando&quot; più sotto.</para>
     </section>
 
     <section id="Mac.OSX.goodies">
@@ -456,7 +456,10 @@
 
       <para>Gli argomenti possono essere combinati: per avviare <application>OmegaT</application> con tutti gli esempi descritti sopra, il comando deve essere:</para>
 
-      <para><literal>java -Dswing.aatext=true -Duser.language=it -Duser.country=IT -Xmx1024M <application>-DDhttp.proxyHost=192.168.1.1 -Dhttp.proxyport<emphasis role="bold">=</emphasis>3128 -jar -OmegaT</application>.jar</literal></para>
+      <para><literal>java -Dswing.aatext=true -Duser.language=pt
+      -Duser.country=BR -Xmx1024M <application>-Dhttp.proxyHost=192.168.1.1
+      -Dhttp.proxyport<emphasis role="bold">=</emphasis>3128 -jar
+      -OmegaT</application>.jar</literal></para>
     </section>
 
     <section id="omegat.command.arguments">

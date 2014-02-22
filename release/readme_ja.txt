@@ -212,9 +212,9 @@ OmegaT のユーザーインターフェースや取扱説明書、他の関連�
 コードに関する貢献者
   Zoltan Bartko
   Volker Berlin
-  Didier Briel（開発担当）
+  Didier Briel（開発マネージャー）
   Kim Bruning
-  Alex Buloichik（開発リーダー）
+  Alex Buloichik（リード開発者）
   Sandra Jean Chua
   Thomas Cordonnier
   Martin Fleurke  

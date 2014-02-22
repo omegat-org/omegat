@@ -28,8 +28,12 @@
   <section>
     <title>インストールと使い方</title>
 
-    <para>OmegaT 用の LanguageTool プラグインは、<ulink url="http://sourceforge.net/projects/omegat-plugins/files">OmegaT プラグインのダウンロードサイト</ulink>から入手できます。Zip 圧縮ファイルを解凍して、展開されたすべてのファイルを「plugins」フォルダーに移動してください。「plugins」フォルダーは通常、OmegaT のインストール先フォルダー（OmegaT.jar ファイルを含む）の配下にあります。もし「plugins」フォルダーが見当たらなければ、先にフォルダーを作成してください。</para>
+    <para>LanguageTool プラグインは OmegaT 本体に統合されました。<guimenuitem>［設定］→［言語チェッカー］</guimenuitem>にチェックを入れておくと、OmegaT は LanguageTool を自動的に利用します。プロジェクトの原文と訳文の言語に応じて、規則が（もしあれば）適用されます。規則が適用されると、編集ウィンドウ上の対応する語句には青い下線が引かれます（上の画像の「<emphasis>also</emphasis>」と「<emphasis>I didn't do nothing</emphasis>」に注目してください）。下線が引かれた語句の上にマウスカーソルをかざすと、説明が表示されます。</para>
+    
+	<warning>
+		<title>互換性に関する注意点</title>
+		<para>LanguageTool は、plugin フォルダーに古いバージョンのファイルが存在すると、正常に機能しません。plugin フォルダーに LanguageTool があれば、OmegaT を起動する前に削除してください。</para>
+	</warning>
 
-    <para>これでインストールは完了です。<guimenuitem>［設定］→［言語チェッカー］</guimenuitem>にチェックを入れておくと、OmegaT はプラグインを自動的に利用します。プロジェクトの原文と訳文の言語に応じて、規則が（もしあれば）適用されます。規則が適用されると、編集ウィンドウ上の対応する語句には青い下線が引かれます（上の画像の「<emphasis>also</emphasis>」と「<emphasis>I didn't do nothing</emphasis>」に注目してください）。下線が引かれた語句の上にマウスカーソルをかざすと、説明が表示されます。</para>
   </section>
 </appendix>

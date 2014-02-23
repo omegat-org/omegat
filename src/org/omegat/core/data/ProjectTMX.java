@@ -39,6 +39,7 @@ import org.omegat.core.segmentation.Segmenter;
 import org.omegat.util.Language;
 import org.omegat.util.Log;
 import org.omegat.util.OConsts;
+import org.omegat.util.Preferences;
 import org.omegat.util.StringUtil;
 import org.omegat.util.TMXReader2;
 import org.omegat.util.TMXWriter2;
@@ -186,9 +187,11 @@ public class ProjectTMX {
             wr.writeComment(" Default translations ");
             for (Map.Entry<String, TMXEntry> en : new TreeMap<String, TMXEntry>(tempDefaults).entrySet()) {
                 p.clear();
-                if (en.getValue().linked == TMXEntry.ExternalLinked.xAUTO) {
-                    p.add(PROP_XAUTO);
-                    p.add("auto");
+                if (Preferences.isPreferenceDefault(Preferences.SAVE_AUTO_STATUS, false)) {
+                    if (en.getValue().linked == TMXEntry.ExternalLinked.xAUTO) {
+                        p.add(PROP_XAUTO);
+                        p.add("auto");
+                    }
                 }
                 wr.writeEntry(en.getKey(), en.getValue().translation, en.getValue(), p);
             }
@@ -208,12 +211,14 @@ public class ProjectTMX {
                 p.add(k.next);
                 p.add(PROP_PATH);
                 p.add(k.path);
-                if (en.getValue().linked == TMXEntry.ExternalLinked.xICE) {
-                    p.add(PROP_XICE);
-                    p.add(k.id);
-                } else if (en.getValue().linked == TMXEntry.ExternalLinked.x100PC) {
-                    p.add(PROP_X100PC);
-                    p.add(k.id);
+                if (Preferences.isPreferenceDefault(Preferences.SAVE_AUTO_STATUS, false)) {
+                    if (en.getValue().linked == TMXEntry.ExternalLinked.xICE) {
+                        p.add(PROP_XICE);
+                        p.add(k.id);
+                    } else if (en.getValue().linked == TMXEntry.ExternalLinked.x100PC) {
+                        p.add(PROP_X100PC);
+                        p.add(k.id);
+                    }
                 }
                 wr.writeEntry(en.getKey().sourceText, en.getValue().translation, en.getValue(), p);
             }

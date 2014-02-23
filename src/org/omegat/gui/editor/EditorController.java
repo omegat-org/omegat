@@ -912,6 +912,9 @@ public class EditorController implements IEditor {
      * {@inheritDoc}
      */
     public void commitAndLeave() {
+        if (Core.getProject().getAllEntries().isEmpty()) {
+            return; // empty project
+        }
     //
     // Memorize current position of cursor.
     // After deactivating and activating with shrinking and expanding text, we might

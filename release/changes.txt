@@ -2,7 +2,7 @@
  OmegaT 3.1.0 
 ----------------------------------------------------------------------
   12 Enhancements
-   4 Bug fixes
+   5 Bug fixes
    2 Localisation updates
 ----------------------------------------------------------------------
 3.1.0 vs. 3.0.8 update 3
@@ -58,6 +58,9 @@ include untranslated strings in the target files
   https://sourceforge.net/p/omegat/bugs/653/
 
   - XLIFF filter: untranslatable text (translate="no") appeared in the Editor
+
+  - "Rebase" (i.e., synchronisation) for team projects had an
+issue with time stamping
 
   Localisation updates:
 

@@ -6,6 +6,7 @@
  Copyright (C) 2010 Alex Buloichik
                2012 Thomas CORDONNIER
                2013 Aaron Madlon-Kay
+               2014 Alex Buloichik
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -30,7 +31,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.TreeMap;
 
 import org.omegat.core.segmentation.Segmenter;
 import org.omegat.util.FileUtil;
@@ -48,14 +48,12 @@ public class ExternalTMX {
 
     private final String name;
 
-    private final List<TMXEntry> entries;
-
-    private final boolean paragraphSegtype;
+    private final List<PrepareTMXEntry> entries;
 
     public ExternalTMX(final ProjectProperties props, final File file, final boolean extTmxLevel2,
             final boolean useSlash) throws Exception {
         this.name = file.getName();
-        entries = new ArrayList<TMXEntry>();
+        entries = new ArrayList<PrepareTMXEntry>();
 
         TMXReader2.LoadCallback loader = new TMXReader2.LoadCallback() {
             public boolean onEntry(TMXReader2.ParsedTu tu, TMXReader2.ParsedTuv tuvSource,
@@ -102,9 +100,8 @@ public class ExternalTMX {
                     te.creator = creator;
                     te.creationDate = created;
                     te.note = tu.note;
-                    te.defaultTranslation = true;
-                    te.readFromTU(tu.props);
-                    entries.add(new TMXEntry(te));
+                    te.otherProperties = tu.props;
+                    entries.add(te);
                 }
             }
         };
@@ -112,14 +109,13 @@ public class ExternalTMX {
         TMXReader2 reader = new TMXReader2();
         reader.readTMX(file, props.getSourceLanguage(), props.getTargetLanguage(),
                 props.isSentenceSegmentingEnabled(), false, extTmxLevel2, useSlash, loader);
-        paragraphSegtype = reader.isParagraphSegtype();
     }
 
     public String getName() {
         return name;
     }
 
-    public List<TMXEntry> getEntries() {
+    public List<PrepareTMXEntry> getEntries() {
         return entries;
     }
 

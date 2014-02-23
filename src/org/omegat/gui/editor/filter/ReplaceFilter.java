@@ -114,12 +114,7 @@ public class ReplaceFilter implements IEditorFilter {
                 }
                 PrepareTMXEntry prepare = new PrepareTMXEntry(en);
                 prepare.translation = o.toString();
-                if (en.isTranslated()) {
-                    Core.getProject().setTranslation(ste, prepare);
-                } else {
-                    // new translation - set as default
-                    Core.getProject().setTranslation(ste, prepare);
-                }
+                Core.getProject().setTranslation(ste, prepare, en.defaultTranslation, null);
             }
         }
         EditorController ec = (EditorController) Core.getEditor();

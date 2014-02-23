@@ -49,7 +49,7 @@ public class ComesFromAutoTMMarker implements IMarker {
             String translationText, boolean isActive) {
         TMXEntry e = Core.getProject().getTranslationInfo(ste);
         List<Mark> marks = new ArrayList<Mark>(1);
-        if (e.xAUTO || e.x100PC != null || e.xICE != null) {
+        if (e.linked != null) {
             Mark m = new Mark(Mark.ENTRY_PART.TRANSLATION, 0, translationText.length());
             m.painter = PAINTER;
             marks.add(m);

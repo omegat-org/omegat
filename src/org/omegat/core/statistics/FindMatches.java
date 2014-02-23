@@ -40,6 +40,7 @@ import org.omegat.core.data.ExternalTMX;
 import org.omegat.core.data.IProject;
 import org.omegat.core.data.IProject.DefaultTranslationsIterator;
 import org.omegat.core.data.IProject.MultipleTranslationsIterator;
+import org.omegat.core.data.PrepareTMXEntry;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.data.TMXEntry;
 import org.omegat.core.events.IStopped;
@@ -54,6 +55,7 @@ import org.omegat.util.Language;
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
 import org.omegat.util.PatternConsts;
+import org.omegat.util.TMXProp;
 import org.omegat.util.Token;
 
 /**
@@ -172,7 +174,7 @@ public class FindMatches {
                     String fileName = project.isOrphaned(source) ? orphanedFileName : null;
                     processEntry(null, source, trans.translation, NearString.MATCH_SOURCE.MEMORY, false, 0,
                             fileName, trans.creator, trans.creationDate, trans.changer, trans.changeDate,
-                            trans.otherProperties);
+                            null);
                 }
             });
         }
@@ -189,7 +191,7 @@ public class FindMatches {
                 String fileName = project.isOrphaned(source) ? orphanedFileName : null;
                 processEntry(source, source.sourceText, trans.translation, NearString.MATCH_SOURCE.MEMORY,
                         false, 0, fileName, trans.creator, trans.creationDate, trans.changer,
-                        trans.changeDate, trans.otherProperties);
+                        trans.changeDate, null);
             }
         });
 
@@ -201,7 +203,7 @@ public class FindMatches {
             if (matcher.find()) {
                 penalty = Integer.parseInt(matcher.group(1));
             }
-            for (TMXEntry tmen : en.getValue().getEntries()) {
+            for (PrepareTMXEntry tmen : en.getValue().getEntries()) {
                 checkStopped(stop);
                 if (requiresTranslation && tmen.translation == null) {
                     continue;
@@ -280,7 +282,7 @@ public class FindMatches {
     protected void processEntry(final EntryKey key, final String source, final String translation,
             NearString.MATCH_SOURCE comesFrom, final boolean fuzzy, final int penalty, final String tmxName,
             final String creator, final long creationDate, final String changer, final long changedDate,
-            final Map<String, String> props) {
+            final List<TMXProp> props) {
         // remove part that is to be removed prior to tokenize
         String realSource = source;
         String entryRemovedText = "";
@@ -399,7 +401,7 @@ public class FindMatches {
             NearString.MATCH_SOURCE comesFrom, final boolean fuzzy, final int similarity,
             final int similarityNoStem, final int simAdjusted, final byte[] similarityData,
             final String tmxName, final String creator, final long creationDate, final String changer,
-            final long changedDate, final Map<String, String> tuProperties) {
+            final long changedDate, final List<TMXProp> tuProperties) {
         // find position for new data
         int pos = 0;
         for (int i = 0; i < result.size(); i++) {

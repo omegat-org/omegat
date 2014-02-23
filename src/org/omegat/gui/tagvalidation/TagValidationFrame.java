@@ -508,8 +508,7 @@ public class TagValidationFrame extends JFrame {
             tr.source = report.ste.getSrcText();
             tr.translation = fixed;
             tr.note = prevTrans.note;
-            tr.defaultTranslation = prevTrans.defaultTranslation;
-            Core.getProject().setTranslation(report.ste, tr);
+            Core.getProject().setTranslation(report.ste, tr, prevTrans.defaultTranslation, null);
         }
         
         return true;

@@ -27,7 +27,6 @@ package org.omegat.core.data;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 import junit.framework.TestCase;
 
@@ -52,13 +51,12 @@ public class AutoTmxTest extends TestCase {
         File file = new File("test/data/autotmx/auto1.tmx");
         ExternalTMX autoTMX = new ExternalTMX(props, file, false, false);
 
-        TMXEntry e1 = autoTMX.getEntries().get(0);
-        checkListValues(e1.xICE, "11");
-        checkListValues(e1.x100PC);
+        PrepareTMXEntry e1 = autoTMX.getEntries().get(0);
+        checkListValues(e1, ProjectTMX.PROP_XICE, "11");
 
-        TMXEntry e2 = autoTMX.getEntries().get(1);
-        checkListValues(e2.xICE, "12");
-        checkListValues(e2.x100PC, "10");
+        PrepareTMXEntry e2 = autoTMX.getEntries().get(1);
+        checkListValues(e2, ProjectTMX.PROP_XICE, "12");
+        checkListValues(e2, ProjectTMX.PROP_X100PC, "10");
 
         Core.initializeConsole(new HashMap<String, String>());
 
@@ -79,9 +77,9 @@ public class AutoTmxTest extends TestCase {
         p.allProjectEntries.add(ste12 = createSTE("12", "Edit"));
         p.importHandler = new ImportFromAutoTMX(p, p.allProjectEntries);
         p.appendFromAutoTMX(autoTMX);
-        checkTranslation(ste10, "Modifier", null, "10");
-        checkTranslation(ste11, "Edition", "11", null);
-        checkTranslation(ste12, "Modifier", "12", null);
+        checkTranslation(ste10, "Modifier", TMXEntry.ExternalLinked.x100PC);
+        checkTranslation(ste11, "Edition", TMXEntry.ExternalLinked.xICE);
+        checkTranslation(ste12, "Modifier", TMXEntry.ExternalLinked.xICE);
     }
 
     SourceTextEntry createSTE(String id, String source) {
@@ -89,32 +87,15 @@ public class AutoTmxTest extends TestCase {
         return new SourceTextEntry(ek, 0, null, null, new ArrayList<ProtectedPart>());
     }
 
-    void checkListValues(List<String> list, String... values) {
-        if (list == null && values.length == 0) {
-            return;
-        }
-        assertEquals(list.size(), values.length);
-        for (int i = 0; i < values.length; i++) {
-            assertEquals(list.get(i), values[i]);
-        }
+    void checkListValues(PrepareTMXEntry en, String propType, String propValue) {
+        assertTrue(en.hasPropValue(propType, propValue));
     }
 
-    void checkTranslation(SourceTextEntry ste, String expectedTranslation, String expectedXICE,
-            String expectedX100PC) {
+    void checkTranslation(SourceTextEntry ste, String expectedTranslation,
+            TMXEntry.ExternalLinked expectedExternalLinked) {
         TMXEntry e = p.getTranslationInfo(ste);
         assertTrue(e.isTranslated());
         assertEquals(expectedTranslation, e.translation);
-        if (expectedXICE == null) {
-            assertNull(e.xICE);
-        } else {
-            assertEquals(1, e.xICE.size());
-            assertEquals(expectedXICE, e.xICE.get(0));
-        }
-        if (expectedX100PC == null) {
-            assertNull(e.x100PC);
-        } else {
-            assertEquals(1, e.x100PC.size());
-            assertEquals(expectedX100PC, e.x100PC.get(0));
-        }
+        assertEquals(expectedExternalLinked, e.linked);
     }
 }

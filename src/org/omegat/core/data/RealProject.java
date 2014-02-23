@@ -195,7 +195,7 @@ public class RealProject implements IProject {
     public RealProject(final ProjectProperties props, IRemoteRepository repository) {
         PrepareTMXEntry empty = new PrepareTMXEntry();
         empty.source = "";
-        EMPTY_TRANSLATION = new TMXEntry(empty);
+        EMPTY_TRANSLATION = new TMXEntry(empty, true, null);
 
         m_config = props;
         this.repository = repository;
@@ -1136,8 +1136,7 @@ public class RealProject implements IProject {
                     if (enDefault == null) {
                         // default not exist yet - yes, we can
                         prepare.translation = ste.getSourceTranslation();
-                        prepare.defaultTranslation = true;
-                        projectTMX.setTranslation(ste, new TMXEntry(prepare), true);
+                        projectTMX.setTranslation(ste, new TMXEntry(prepare, true, null), true);
                         allowToImport.put(ste.getSrcText(), ste.getSourceTranslation());
                     } else {
                         // default translation already exist - did we just
@@ -1148,8 +1147,7 @@ public class RealProject implements IProject {
                             // we just imported default and it doesn't equals to
                             // current - import as alternative
                             prepare.translation = ste.getSourceTranslation();
-                            prepare.defaultTranslation = false;
-                            projectTMX.setTranslation(ste, new TMXEntry(prepare), false);
+                            projectTMX.setTranslation(ste, new TMXEntry(prepare, false, null), false);
                         }
                     }
                 } else { // project without default translations
@@ -1158,8 +1156,7 @@ public class RealProject implements IProject {
                     if (en == null) {
                         // not exist yet - yes, we can
                         prepare.translation = ste.getSourceTranslation();
-                        prepare.defaultTranslation = false;
-                        projectTMX.setTranslation(ste, new TMXEntry(prepare), false);
+                        projectTMX.setTranslation(ste, new TMXEntry(prepare, false, null), false);
                     }
                 }
             }
@@ -1291,14 +1288,13 @@ public class RealProject implements IProject {
     }
 
     @Override
-    public void setTranslation(final SourceTextEntry entry, final PrepareTMXEntry trans) {
+    public void setTranslation(final SourceTextEntry entry, final PrepareTMXEntry trans, boolean defaultTranslation, TMXEntry.ExternalLinked externalLinked) {
         if (trans == null) {
             throw new IllegalArgumentException("RealProject.setTranslation(tr) can't be null");
         }
 
-        TMXEntry prevTrEntry = trans.defaultTranslation ? projectTMX
-                .getDefaultTranslation(entry.getSrcText()) : projectTMX
-                .getMultipleTranslation(entry.getKey());
+        TMXEntry prevTrEntry = defaultTranslation ? projectTMX.getDefaultTranslation(entry.getSrcText())
+                : projectTMX.getMultipleTranslation(entry.getKey());
 
         trans.changer = Preferences.getPreferenceDefault(Preferences.TEAM_AUTHOR,
                 System.getProperty("user.name"));
@@ -1326,12 +1322,12 @@ public class RealProject implements IProject {
             // no translation, no note
             newTrEntry = null;
         } else {
-            newTrEntry = new TMXEntry(trans);
+            newTrEntry = new TMXEntry(trans, defaultTranslation, externalLinked);
         }
 
         m_modifiedFlag = true;
 
-        projectTMX.setTranslation(entry, newTrEntry, trans.defaultTranslation);
+        projectTMX.setTranslation(entry, newTrEntry, defaultTranslation);
 
         /**
          * Calculate how to statistics should be changed.
@@ -1359,7 +1355,7 @@ public class RealProject implements IProject {
 
         m_modifiedFlag = true;
 
-        projectTMX.setTranslation(entry, new TMXEntry(en), en.defaultTranslation);
+        projectTMX.setTranslation(entry, new TMXEntry(en, prevTrEntry.defaultTranslation, prevTrEntry.linked), prevTrEntry.defaultTranslation);
     }
 
     public void iterateByDefaultTranslations(DefaultTranslationsIterator it) {
@@ -1396,7 +1392,7 @@ public class RealProject implements IProject {
         return transMemories;
     }
 
-    public Map<Language,ProjectTMX> getOtherTargetLanguageTMs() {
+    public Map<Language, ProjectTMX> getOtherTargetLanguageTMs() {
         return otherTargetLangTMs;
     }
 
@@ -1646,8 +1642,7 @@ public class RealProject implements IProject {
                         }
                         tr.source = sourceS;
                         tr.translation = transS;
-                        tr.defaultTranslation = true;
-                        data.put(sourceS, new TMXEntry(tr));
+                        data.put(sourceS, new TMXEntry(tr, true, null));
                     } else {
                         for (short i = 0; i < segmentsSource.size(); i++) {
                             String oneSrc = segmentsSource.get(i);
@@ -1657,8 +1652,7 @@ public class RealProject implements IProject {
                             }
                             tr.source = oneSrc;
                             tr.translation = oneTrans;
-                            tr.defaultTranslation = true;
-                            data.put(sourceS, new TMXEntry(tr));
+                            data.put(sourceS, new TMXEntry(tr, true, null));
                         }
                     }
                 } else {
@@ -1667,8 +1661,7 @@ public class RealProject implements IProject {
                     }
                     tr.source = sourceS;
                     tr.translation = transS;
-                    tr.defaultTranslation = true;
-                    data.put(sourceS, new TMXEntry(tr));
+                    data.put(sourceS, new TMXEntry(tr, true, null));
                 }
             }
         }

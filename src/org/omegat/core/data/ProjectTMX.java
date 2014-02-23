@@ -4,7 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2012 Alex Buloichik
-               2013-2014 Aaron Madlon-Kay
+               2013-2014 Aaron Madlon-Kay, Alex Buloichik
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -186,7 +186,7 @@ public class ProjectTMX {
             wr.writeComment(" Default translations ");
             for (Map.Entry<String, TMXEntry> en : new TreeMap<String, TMXEntry>(tempDefaults).entrySet()) {
                 p.clear();
-                if (en.getValue().xAUTO) {
+                if (en.getValue().linked == TMXEntry.ExternalLinked.xAUTO) {
                     p.add(PROP_XAUTO);
                     p.add("auto");
                 }
@@ -208,13 +208,12 @@ public class ProjectTMX {
                 p.add(k.next);
                 p.add(PROP_PATH);
                 p.add(k.path);
-                if (en.getValue().xICE != null) {
+                if (en.getValue().linked == TMXEntry.ExternalLinked.xICE) {
                     p.add(PROP_XICE);
-                    p.add(en.getValue().xICE.get(0));
-                }
-                if (en.getValue().x100PC != null) {
+                    p.add(k.id);
+                } else if (en.getValue().linked == TMXEntry.ExternalLinked.x100PC) {
                     p.add(PROP_X100PC);
-                    p.add(en.getValue().x100PC.get(0));
+                    p.add(k.id);
                 }
                 wr.writeEntry(en.getKey().sourceText, en.getValue().translation, en.getValue(), p);
             }
@@ -320,20 +319,25 @@ public class ProjectTMX {
                     te.creator = creator;
                     te.creationDate = created;
                     te.note = tu.note;
-                    te.readFromTU(tu.props);
+                    te.otherProperties = tu.props;
 
-                    EntryKey key = createKeyByProps(segmentSource, te.otherProperties);
-                    te.defaultTranslation = key.file == null;
+                    EntryKey key = new EntryKey(te.getPropValue(PROP_FILE), te.source,
+                            te.getPropValue(PROP_ID), te.getPropValue(PROP_PREV), te.getPropValue(PROP_NEXT),
+                            te.getPropValue(PROP_PATH));
+
+                    TMXEntry.ExternalLinked externalLinkedMode = calcExternalLinkedMode(te);
+
+                    boolean defaultTranslation = key.file == null;
                     if (te.otherProperties != null && te.otherProperties.isEmpty()) {
                         te.otherProperties = null;
                     }
 
-                    if (te.defaultTranslation) {
+                    if (defaultTranslation) {
                         // default translation
-                        defaults.put(segmentSource, new TMXEntry(te));
+                        defaults.put(segmentSource, new TMXEntry(te, true, externalLinkedMode));
                     } else {
                         // multiple translation
-                        alternatives.put(key, new TMXEntry(te));
+                        alternatives.put(key, new TMXEntry(te, false, externalLinkedMode));
                     }
                 }
             }
@@ -341,18 +345,23 @@ public class ProjectTMX {
         }
     };
 
-    private EntryKey createKeyByProps(String src, Map<String, String> props) {
-        if (props != null) {
-            return new EntryKey(props.remove(PROP_FILE), src, props.remove(PROP_ID), props.remove(PROP_PREV),
-                    props.remove(PROP_NEXT), props.remove(PROP_PATH));
-        } else {
-            return new EntryKey(null, src, null, null, null, null);
+    private TMXEntry.ExternalLinked calcExternalLinkedMode(PrepareTMXEntry te) {
+        String id = te.getPropValue(PROP_ID);
+        TMXEntry.ExternalLinked externalLinked = null;
+        if (externalLinked == null && te.hasPropValue(PROP_XICE, id)) {
+            externalLinked = TMXEntry.ExternalLinked.xICE;
         }
+        if (externalLinked == null && te.hasPropValue(PROP_X100PC, id)) {
+            externalLinked = TMXEntry.ExternalLinked.x100PC;
+        }
+        if (externalLinked == null && te.hasPropValue(PROP_XAUTO, null)) {
+            externalLinked = TMXEntry.ExternalLinked.xAUTO;
+        }
+        return externalLinked;
     }
 
     /**
      * Returns the collection of TMX entries that have a default translation
-     * @return
      */
     public Collection<TMXEntry> getDefaults() {
         return defaults.values();

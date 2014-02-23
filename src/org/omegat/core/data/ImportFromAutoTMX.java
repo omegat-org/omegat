@@ -55,7 +55,7 @@ public class ImportFromAutoTMX {
     }
 
     void process(ExternalTMX tmx) {
-        for (TMXEntry e : tmx.getEntries()) { // iterate by all entries in TMX
+        for (PrepareTMXEntry e : tmx.getEntries()) { // iterate by all entries in TMX
             List<SourceTextEntry> list = existEntries.get(e.source);
             if (list == null) {
                 continue; // there is no entries for this source
@@ -63,78 +63,49 @@ public class ImportFromAutoTMX {
             for (SourceTextEntry ste : list) { // for each TMX entry - get all sources in project
                 TMXEntry existTranslation = project.getTranslationInfo(ste);
 
-                if (e.xICE == null && e.x100PC == null) {// TMXEntry without x-ids
+                String id = ste.getKey().id;
+                boolean hasICE = id != null && e.hasPropValue(ProjectTMX.PROP_XICE, id);
+                boolean has100PC = id != null && e.hasPropValue(ProjectTMX.PROP_X100PC, id);
+
+                if (!hasICE && !has100PC) {// TMXEntry without x-ids
                     if (!existTranslation.defaultTranslation) {
                         // alternative exist - skip
                         continue;
                     }
                     if (existTranslation.isTranslated()) { // default translation already exist
-                        if (existTranslation.xAUTO
+                        if (existTranslation.linked == TMXEntry.ExternalLinked.xAUTO
                                 && !StringUtil.equalsWithNulls(existTranslation.translation, e.translation)) {
                             // translation already from auto and really changed
-                            setDefaultTranslation(project, ste, e);
+                            project.setTranslation(ste, e, true, TMXEntry.ExternalLinked.xAUTO);
                         }
                     } else {
                         // default translation not exist - use from auto tmx
-                        setDefaultTranslation(project, ste, e);
+                        project.setTranslation(ste, e, true, TMXEntry.ExternalLinked.xAUTO);
                     }
                 } else {// TMXEntry with x-ids
                     if (!existTranslation.isTranslated() || existTranslation.defaultTranslation) {
                         // need to update if id in xICE or x100PC
-                        if (isContainsId(e.xICE, ste.getKey().id) || isContainsId(e.x100PC, ste.getKey().id)) {
-                            String xICE = isContainsId(e.xICE, ste.getKey().id) ? ste.getKey().id : null;
-                            String x100PC = isContainsId(e.x100PC, ste.getKey().id) ? ste.getKey().id : null;
-                            setAlternativeTranslation(project, ste, e, xICE, x100PC);
+                        if (hasICE) {
+                            project.setTranslation(ste, e, false, TMXEntry.ExternalLinked.xICE);
+                        } else if (has100PC) {
+                            project.setTranslation(ste, e, false, TMXEntry.ExternalLinked.x100PC);
                         }
-                    } else if (existTranslation.xICE != null) {
+                    } else if (existTranslation.linked == TMXEntry.ExternalLinked.xICE
+                            || existTranslation.linked == TMXEntry.ExternalLinked.x100PC) {
                         // already contains x-ice
-                        if (e.xICE.contains(ste.getKey().id)
+                        if (hasICE
                                 && !StringUtil.equalsWithNulls(existTranslation.translation, e.translation)) {
-                            setAlternativeTranslation(project, ste, e, ste.getKey().id, null);
+                            project.setTranslation(ste, e, false, TMXEntry.ExternalLinked.xICE);
                         }
-                    } else if (existTranslation.x100PC != null) {
+                    } else if (existTranslation.linked == TMXEntry.ExternalLinked.x100PC) {
                         // already contains x-100pc
-                        if ((e.xICE.contains(ste.getKey().id) || e.x100PC.contains(ste.getKey().id))
+                        if (has100PC
                                 && !StringUtil.equalsWithNulls(existTranslation.translation, e.translation)) {
-                            setAlternativeTranslation(project, ste, e, ste.getKey().id, null);
+                            project.setTranslation(ste, e, false, TMXEntry.ExternalLinked.x100PC);
                         }
                     }
                 }
             }
         }
-    }
-
-    boolean isContainsId(List<String> list, String id) {
-        if (list == null) {
-            return false;
-        }
-        return list.contains(id);
-    }
-
-    void setDefaultTranslation(RealProject p, SourceTextEntry ste, TMXEntry entryFromTmx) {
-        PrepareTMXEntry tr = new PrepareTMXEntry();
-        tr.defaultTranslation = true;
-        tr.source = entryFromTmx.source;
-        tr.translation = entryFromTmx.translation;
-        tr.note = entryFromTmx.note;
-        p.setTranslation(ste, tr);
-    }
-
-    void setAlternativeTranslation(RealProject p, SourceTextEntry ste, TMXEntry entryFromTmx, String xICE,
-            String x100PC) {
-        PrepareTMXEntry tr = new PrepareTMXEntry();
-        tr.defaultTranslation = false;
-        tr.source = entryFromTmx.source;
-        tr.translation = entryFromTmx.translation;
-        tr.note = entryFromTmx.note;
-        if (xICE != null) {
-            tr.xICE = new ArrayList<String>(1);
-            tr.xICE.add(xICE);
-        }
-        if (x100PC != null) {
-            tr.x100PC = new ArrayList<String>(1);
-            tr.x100PC.add(x100PC);
-        }
-        p.setTranslation(ste, tr);
     }
 }

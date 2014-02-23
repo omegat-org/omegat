@@ -158,8 +158,7 @@ public class RealProjectTest extends TestCase {
         PrepareTMXEntry tr = new PrepareTMXEntry();
         tr.source = source;
         tr.translation = translation;
-        tr.defaultTranslation = true;
-        tmx.setTranslation(ste, new TMXEntry(tr), true);
+        tmx.setTranslation(ste, new TMXEntry(tr, true, null), true);
     }
 
     private void setAlternative(String id, String source, String translation) {
@@ -168,8 +167,7 @@ public class RealProjectTest extends TestCase {
         PrepareTMXEntry tr = new PrepareTMXEntry();
         tr.source = source;
         tr.translation = translation;
-        tr.defaultTranslation = false;
-        tmx.setTranslation(ste, new TMXEntry(tr), false);
+        tmx.setTranslation(ste, new TMXEntry(tr, false, null), false);
     }
 
     private void checkDefault(String source, String translation) {
@@ -216,6 +214,6 @@ public class RealProjectTest extends TestCase {
     }
 
     public static TMXEntry createEmptyTMXEntry() {
-        return new TMXEntry(new PrepareTMXEntry());
+        return new TMXEntry(new PrepareTMXEntry(), true, null);
     }
 }

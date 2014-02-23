@@ -8,6 +8,7 @@
                2009 Didier Briel
                2010 Martin Fleurke, Antonio Vilei, Alex Buloichik, Didier Briel
                2013 Aaron Madlon-Kay, Alex Buloichik
+               2014 Alex Buloichik
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -48,6 +49,7 @@ import org.omegat.core.data.ExternalTMX;
 import org.omegat.core.data.IProject;
 import org.omegat.core.data.IProject.FileInfo;
 import org.omegat.core.data.ParseEntry;
+import org.omegat.core.data.PrepareTMXEntry;
 import org.omegat.core.data.ProjectProperties;
 import org.omegat.core.data.ProjectTMX;
 import org.omegat.core.data.ProtectedPart;
@@ -291,13 +293,13 @@ public class Searcher {
             if (!expression.searchAuthor && !expression.searchDateAfter && !expression.searchDateBefore) {
                 for (Map.Entry<String, ExternalTMX> tmEn : m_project.getTransMemories().entrySet()) {
                     final String fileTM = tmEn.getKey();
-                    if (!searchEntries(tmEn.getValue().getEntries(), fileTM, false)) return;
+                    if (!searchEntries(tmEn.getValue().getEntries(), fileTM)) return;
                     checkStop.checkInterrupted();
                 }
                 for (Map.Entry<Language, ProjectTMX> tmEn : m_project.getOtherTargetLanguageTMs().entrySet()) {
                     final Language langTM = tmEn.getKey();
-                    if (!searchEntries(tmEn.getValue().getDefaults(), langTM.getLanguage(), true)) return;
-                    if (!searchEntries(tmEn.getValue().getAlternatives(), langTM.getLanguage(), true)) return;
+                    if (!searchEntriesAlternative(tmEn.getValue().getDefaults(), langTM.getLanguage())) return;
+                    if (!searchEntriesAlternative(tmEn.getValue().getAlternatives(), langTM.getLanguage())) return;
                     checkStop.checkInterrupted();
                 }
             }
@@ -328,8 +330,25 @@ public class Searcher {
      * @return true when finished and all entries checked,
      *         false when search has stopped before all entries have been checked.
      */
-    private boolean searchEntries(Collection<TMXEntry> tmEn,
-        final String tmxID, boolean isAlternativeSource) {
+    private boolean searchEntries(Collection<PrepareTMXEntry> tmEn, final String tmxID) {
+        for (PrepareTMXEntry tm : tmEn) {
+            // stop searching if the max. nr of hits has been
+            // reached
+            if (m_numFinds >= expression.numberOfResults) {
+                return false;
+            }
+
+            //for alternative translations:
+            //- it is not feasible to get the sourcetextentry that matches the tm.source, so we cannot get the entryNum and real translation
+            //- although the 'trnalsation' is used as 'source', we search it as translation, else we cannot show to which real source it belongs
+            checkEntry(tm.source, tm.translation, null, null, -1, tmxID);
+
+            checkStop.checkInterrupted();
+        }
+        return true;
+    }
+
+    private boolean searchEntriesAlternative(Collection<TMXEntry> tmEn, final String tmxID) {
         for (TMXEntry tm : tmEn) {
             // stop searching if the max. nr of hits has been
             // reached

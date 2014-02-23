@@ -5,6 +5,7 @@
 
  Copyright (C) 2012 Thomas Cordonnier, Aaron Madlon-Kay
                2013-2014 Aaron Madlon-Kay
+               2014 Alex Buloichik
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -25,6 +26,7 @@
  **************************************************************************/
 package org.omegat.gui.matches;
 
+import org.omegat.util.TMXProp;
 import org.omegat.util.VarExpansion;
 import org.omegat.core.data.ProjectProperties;
 import org.omegat.core.data.SourceTextEntry;
@@ -173,10 +175,10 @@ public class MatchesVarExpansion extends VarExpansion<NearString> {
      * @param props Map of properties
      * @return Expanded template
      */
-    public String expandProperties (String localTemplate, Map<String,String> props) {
+    public String expandProperties (String localTemplate, List<TMXProp> props) {
         Matcher matcher;
         while ((matcher = patternSingleProperty.matcher(localTemplate)).find()) {
-            String value = props.get(matcher.group(1));
+            String value = getPropValue(props, matcher.group(1));
             localTemplate = localTemplate.replace (matcher.group(), value == null ? "" : value);
         }
         while ((matcher = patternPropertyGroup.matcher(localTemplate)).find()) {
@@ -185,9 +187,9 @@ public class MatchesVarExpansion extends VarExpansion<NearString> {
             separator2 = separator2.replace("\\n","\n");
             Pattern pattern = Pattern.compile(patternStr.replace("*","(.*)").replace("?","(.)"));
             StringBuilder res = new StringBuilder();
-            for (Map.Entry<String, String> me: props.entrySet()) {
-                if (pattern.matcher(me.getKey().toString()).matches())
-                    res.append(me.getKey()).append(separator1).append(me.getValue()).append(separator2);
+            for (TMXProp me: props) {
+                if (pattern.matcher(me.getType().toString()).matches())
+                    res.append(me.getType()).append(separator1).append(me.getValue()).append(separator2);
             }
             if (res.toString().endsWith(separator2))
                 res.replace(res.toString().lastIndexOf(separator2), res.length(), "");
@@ -195,7 +197,16 @@ public class MatchesVarExpansion extends VarExpansion<NearString> {
         }        
         return localTemplate;        
     }
-    
+
+    private String getPropValue(List<TMXProp> props, String type) {
+        for (TMXProp me : props) {
+            if (type.equals(me.getType())) {
+                return me.getValue();
+            }
+        }
+        return null;
+    }
+
     @Override
     public String expandVariables (NearString match) {
         String localTemplate = this.template; // do not modify template directly, so that we can reuse for another change

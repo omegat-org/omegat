@@ -31,6 +31,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
+import org.omegat.core.data.TMXEntry.ExternalLinked;
 import org.omegat.core.segmentation.SRX;
 import org.omegat.core.statistics.StatisticsInfo;
 import org.omegat.core.team.IRemoteRepository;
@@ -128,7 +129,8 @@ public class NotLoadedProject implements IProject {
     public void saveProjectProperties() throws IOException {
     }
 
-    public void setTranslation(SourceTextEntry entry, PrepareTMXEntry trans) {
+    public void setTranslation(SourceTextEntry entry, PrepareTMXEntry trans, boolean defaultTranslation,
+            ExternalLinked externalLinked) {
     }
 
     public ITokenizer getSourceTokenizer() {

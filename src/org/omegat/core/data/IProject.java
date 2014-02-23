@@ -113,7 +113,7 @@ public interface IProject {
      * @param trans
      *            translation. It can't be null
      */
-    void setTranslation(SourceTextEntry entry, PrepareTMXEntry trans);
+    void setTranslation(SourceTextEntry entry, PrepareTMXEntry trans, boolean defaultTranslation, TMXEntry.ExternalLinked externalLinked);
 
     /**
      * Change note only for translation.

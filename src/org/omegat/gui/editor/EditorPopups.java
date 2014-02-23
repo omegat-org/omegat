@@ -332,8 +332,7 @@ public class EditorPopups {
             trans.source = ste.getSrcText();
             trans.translation = v;
             trans.note = Core.getNotes().getNoteText();
-            trans.defaultTranslation = prevTrans.defaultTranslation;
-            Core.getProject().setTranslation(ste, trans);
+            Core.getProject().setTranslation(ste, trans, prevTrans.defaultTranslation, null);
             Core.getEditor().replaceEditText("");
             Core.getEditor().commitAndLeave();
         }

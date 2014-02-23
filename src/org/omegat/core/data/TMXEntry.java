@@ -6,6 +6,7 @@
  Copyright (C) 2010 Alex Buloichik
                2012 Guido Leenders, Thomas Cordonnier
                2013 Aaron Madlon-Kay
+               2014 Alex Buloichik
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -27,10 +28,6 @@
 
 package org.omegat.core.data;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
-
 import org.omegat.util.StringUtil;
 
 /**
@@ -46,6 +43,11 @@ import org.omegat.util.StringUtil;
  * @author Aaron Madlon-Kay
  */
 public class TMXEntry {
+    public enum ExternalLinked {
+        // declares how this entry linked to external TMX in the tm/auto/
+        xICE, x100PC, xAUTO
+    };
+
     public final String source;
     public final String translation;
     public final String changer;
@@ -54,12 +56,9 @@ public class TMXEntry {
     public final long creationDate;
     public final String note;
     public final boolean defaultTranslation;
-    public final Map<String, String> otherProperties;
-    public final List<String> xICE;
-    public final List<String> x100PC;
-    public final boolean xAUTO;
+    public final ExternalLinked linked;
 
-    TMXEntry(PrepareTMXEntry from) {
+    TMXEntry(PrepareTMXEntry from, boolean defaultTranslation, ExternalLinked linked) {
         this.source = from.source;
         this.translation = from.translation;
         this.changer = from.changer;
@@ -67,12 +66,9 @@ public class TMXEntry {
         this.creator = from.creator;
         this.creationDate = from.creationDate;
         this.note = from.note;
-        this.defaultTranslation = from.defaultTranslation;
-        this.otherProperties = from.otherProperties == null ? null : Collections
-                .unmodifiableMap(from.otherProperties);
-        this.xICE = from.xICE == null ? null : Collections.unmodifiableList(from.xICE);
-        this.x100PC = from.x100PC == null ? null : Collections.unmodifiableList(from.x100PC);
-        this.xAUTO = from.xAUTO;
+
+        this.defaultTranslation = defaultTranslation;
+        this.linked = linked;
     }
 
     public boolean isTranslated() {

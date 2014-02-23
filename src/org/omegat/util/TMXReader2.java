@@ -38,9 +38,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
-import java.util.Map;
 import java.util.TimeZone;
-import java.util.TreeMap;
 import java.util.zip.GZIPInputStream;
 
 import javax.xml.namespace.QName;
@@ -310,7 +308,7 @@ public class TMXReader2 {
             case XMLEvent.END_ELEMENT:
                 EndElement eEnd = (EndElement) e;
                 if ("prop".equals(eEnd.getName().getLocalPart())) {
-                    currentTu.props.add(new Prop(propType, propContent.toString()));
+                    currentTu.props.add(new TMXProp(propType, propContent.toString()));
                     return;
                 }
                 break;
@@ -593,7 +591,7 @@ public class TMXReader2 {
         public String creationid;
         public long creationdate;
         public String note;
-        public List<Prop> props = new ArrayList<Prop>();
+        public List<TMXProp> props = new ArrayList<TMXProp>();
         public List<ParsedTuv> tuvs = new ArrayList<ParsedTuv>();
 
         void clear() {
@@ -601,7 +599,7 @@ public class TMXReader2 {
             changedate = 0;
             creationid = null;
             creationdate = 0;
-            props = new ArrayList<Prop>(); // do not CLEAR, because it may be shared
+            props = new ArrayList<TMXProp>(); // do not CLEAR, because it may be shared
             tuvs = new ArrayList<ParsedTuv>();
             note = null;
         }
@@ -614,16 +612,6 @@ public class TMXReader2 {
         public String creationid;
         public long creationdate;
         public String text;
-    }
-
-    public static class Prop {
-        public String type;
-        public String value;
-
-        public Prop(String type, String value) {
-            this.type = type;
-            this.value = value;
-        }
     }
 
     public static final EntityResolver TMX_DTD_RESOLVER = new EntityResolver() {

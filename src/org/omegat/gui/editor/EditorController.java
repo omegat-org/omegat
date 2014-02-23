@@ -827,7 +827,7 @@ public class EditorController implements IEditor {
             }
 
             newen.note = Core.getNotes().getNoteText();
-            newen.defaultTranslation = sb.isDefaultTranslation();
+            boolean defaultTranslation = sb.isDefaultTranslation();
 
             // update memory
             if (entry.getSrcText().equals(newTrans)
@@ -849,7 +849,7 @@ public class EditorController implements IEditor {
             } else {
                 // translation was changed
                 newen.translation = newTrans;
-                Core.getProject().setTranslation(entry, newen);
+                Core.getProject().setTranslation(entry, newen, defaultTranslation, null);
             }
 
             m_docSegList[displayedEntryIndex].createSegmentElement(false);
@@ -1802,8 +1802,7 @@ public class EditorController implements IEditor {
             SourceTextEntry ste = sb.getSourceTextEntry();
             PrepareTMXEntry en = new PrepareTMXEntry();
             en.source = ste.getSrcText();
-            en.defaultTranslation = false;
-            Core.getProject().setTranslation(ste, en);
+            Core.getProject().setTranslation(ste, en, false, null);
 
             // switch to default translation
             sb.setDefaultTranslation(true);

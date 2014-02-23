@@ -863,6 +863,8 @@ public class EditorController implements IEditor {
                 if (m_docSegList[i].ste.getSrcText().equals(entry.getSrcText())) {
                     // the same source text - need to update
                     m_docSegList[i].createSegmentElement(false);
+                    // then add new marks
+                    markerController.reprocessImmediately(m_docSegList[i]);
                 }
             }
         }

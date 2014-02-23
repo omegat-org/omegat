@@ -41,19 +41,34 @@ import org.omegat.util.gui.Styles;
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
 public class ComesFromAutoTMMarker implements IMarker {
-    protected final HighlightPainter PAINTER = new TransparentHighlightPainter(
-            Styles.COLOR_MARK_COMES_FROM_TM, 0.5F);
+    protected final HighlightPainter PAINTER_XICE = new TransparentHighlightPainter(
+            Styles.COLOR_MARK_COMES_FROM_TM_XICE, 0.5F);
+    protected final HighlightPainter PAINTER_X100PC = new TransparentHighlightPainter(
+            Styles.COLOR_MARK_COMES_FROM_TM_X100PC, 0.5F);
+    protected final HighlightPainter PAINTER_XAUTO = new TransparentHighlightPainter(
+            Styles.COLOR_MARK_COMES_FROM_TM_XAUTO, 0.5F);
 
     @Override
     public synchronized List<Mark> getMarksForEntry(SourceTextEntry ste, String sourceText,
             String translationText, boolean isActive) {
         TMXEntry e = Core.getProject().getTranslationInfo(ste);
         List<Mark> marks = new ArrayList<Mark>(1);
-        if (e.linked != null) {
+        if (Core.getEditor().getSettings().isMarkAutoPopulated() && e.linked != null) {
             Mark m = new Mark(Mark.ENTRY_PART.TRANSLATION, 0, translationText.length());
-            m.painter = PAINTER;
+            switch (e.linked) {
+            case xICE:
+                m.painter = PAINTER_XICE;
+                break;
+            case x100PC:
+                m.painter = PAINTER_X100PC;
+                break;
+            case xAUTO:
+                m.painter = PAINTER_XAUTO;
+                break;
+            }
             marks.add(m);
         }
+
         return marks;
     }
 }

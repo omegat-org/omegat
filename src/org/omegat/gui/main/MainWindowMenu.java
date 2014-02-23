@@ -324,6 +324,7 @@ public class MainWindowMenu implements ActionListener, MenuListener, IMainMenu {
         viewMenu.add(viewMarkNBSPCheckBoxMenuItem = createCheckboxMenuItem("MW_VIEW_MENU_MARK_NBSP"));
         viewMenu.add(viewMarkWhitespaceCheckBoxMenuItem = createCheckboxMenuItem("MW_VIEW_MENU_MARK_WHITESPACE"));
         viewMenu.add(viewMarkBidiCheckBoxMenuItem = createCheckboxMenuItem("MW_VIEW_MENU_MARK_BIDI"));
+        viewMenu.add(viewMarkAutoPopulatedCheckBoxMenuItem = createCheckboxMenuItem("MW_VIEW_MENU_MARK_AUTOPOPULATED"));
         viewMenu.add(viewModificationInfoMenu = createMenu("MW_VIEW_MENU_MODIFICATION_INFO"));
         ButtonGroup viewModificationInfoMenuBG = new ButtonGroup();
         viewModificationInfoMenu
@@ -345,6 +346,8 @@ public class MainWindowMenu implements ActionListener, MenuListener, IMainMenu {
         viewMarkWhitespaceCheckBoxMenuItem.setIcon(getViewMenuMarkBGIcon(Styles.COLOR_WHITESPACE));
         viewMarkBidiCheckBoxMenuItem.setIcon(getViewMenuMarkBGIcon(Styles.COLOR_BIDIMARKERS));
         viewModificationInfoMenu.setIcon(getViewMenuMarkBGIcon(null));
+        viewMarkAutoPopulatedCheckBoxMenuItem
+                .setIcon(getViewMenuMarkBGIcon(Styles.COLOR_MARK_COMES_FROM_TM_XICE));
 
         toolsMenu.add(toolsValidateTagsMenuItem = createMenuItem("TF_MENU_TOOLS_VALIDATE"));
         toolsMenu.add(toolsSingleValidateTagsMenuItem = createMenuItem("TF_MENU_TOOLS_SINGLE_VALIDATE"));
@@ -453,6 +456,8 @@ public class MainWindowMenu implements ActionListener, MenuListener, IMainMenu {
                 .isMarkWhitespace());
         viewMarkBidiCheckBoxMenuItem.setSelected(Core.getEditor().getSettings()
                 .isMarkBidi());
+        viewMarkAutoPopulatedCheckBoxMenuItem.setSelected(Core.getEditor().getSettings()
+                .isMarkAutoPopulated());
 
         viewDisplayModificationInfoNoneRadioButtonMenuItem
                 .setSelected(EditorSettings.DISPLAY_MODIFICATION_INFO_NONE.equals(Core.getEditor()
@@ -711,6 +716,7 @@ public class MainWindowMenu implements ActionListener, MenuListener, IMainMenu {
     JCheckBoxMenuItem viewMarkNBSPCheckBoxMenuItem;
     JCheckBoxMenuItem viewMarkWhitespaceCheckBoxMenuItem;
     JCheckBoxMenuItem viewMarkBidiCheckBoxMenuItem;
+    JCheckBoxMenuItem viewMarkAutoPopulatedCheckBoxMenuItem;
     JMenu viewModificationInfoMenu;
     JRadioButtonMenuItem viewDisplayModificationInfoNoneRadioButtonMenuItem;
     JRadioButtonMenuItem viewDisplayModificationInfoSelectedRadioButtonMenuItem;

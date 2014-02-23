@@ -170,6 +170,8 @@ public class Preferences {
     /** Mark the translated segments with a different color */
     public static final String MARK_TRANSLATED_SEGMENTS = "mark_translated_segments";
 
+    public static final String MARK_AUTOPOPULATED = "mark_autopopulated";
+
     /** Mark the untranslated segments with a different color */
     public static final String MARK_UNTRANSLATED_SEGMENTS = "mark_untranslated_segments";
 

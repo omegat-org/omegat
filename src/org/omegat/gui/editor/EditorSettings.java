@@ -51,6 +51,7 @@ public class EditorSettings {
     private boolean useTabForAdvance;
     private boolean markTranslated;
     private boolean markUntranslated;
+    private boolean markAutoPopulated;
     private boolean displaySegmentSources;
     private boolean markNonUniqueSegments;
     private boolean markNoted;
@@ -82,6 +83,7 @@ public class EditorSettings {
         displayModificationInfo = Preferences.getPreferenceDefault(Preferences.DISPLAY_MODIFICATION_INFO,
                 DISPLAY_MODIFICATION_INFO_NONE);
         autoSpellChecking = Preferences.isPreference(Preferences.ALLOW_AUTO_SPELLCHECKING);
+        markAutoPopulated = Preferences.isPreference(Preferences.MARK_AUTOPOPULATED);
 
         //options from menu options->view
         viewSourceBold = Preferences.isPreference(Preferences.VIEW_OPTION_SOURCE_ALL_BOLD);
@@ -125,6 +127,24 @@ public class EditorSettings {
 
     public boolean isMarkUntranslated() {
         return markUntranslated;
+    }
+
+    public boolean isMarkAutoPopulated() {
+        return markAutoPopulated;
+    }
+
+    public void setMarkAutoPopulated(boolean val) {
+        UIThreadsUtil.mustBeSwingThread();
+
+        parent.commitAndDeactivate();
+
+        this.markAutoPopulated = val;
+        Preferences.setPreference(Preferences.MARK_AUTOPOPULATED, markAutoPopulated);
+
+        if (Core.getProject().isProjectLoaded()) {
+            parent.loadDocument();
+            parent.activateEntry();
+        }
     }
 
     public void setMarkUntranslated(boolean markUntranslated) {

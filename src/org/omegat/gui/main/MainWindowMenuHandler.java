@@ -608,6 +608,11 @@ public class MainWindowMenuHandler {
                         mainWindow.menu.viewMarkBidiCheckBoxMenuItem.isSelected());
     }
 
+    public void viewMarkAutoPopulatedCheckBoxMenuItemActionPerformed() {
+        Core.getEditor().getSettings()
+                .setMarkAutoPopulated(mainWindow.menu.viewMarkAutoPopulatedCheckBoxMenuItem.isSelected());
+    }
+
     public void viewDisplayModificationInfoNoneRadioButtonMenuItemActionPerformed() {
         Core.getEditor().getSettings()
                 .setDisplayModificationInfo(EditorSettings.DISPLAY_MODIFICATION_INFO_NONE);

@@ -304,37 +304,28 @@ public class EditorPopups {
                 return;
             }
 
-            JMenuItem itemEmpty = menu.add(OStrings.getString("TRANS_POP_EMPTY_TRANSLATION"));
-            itemEmpty.addActionListener(new ActionListener() {
-                public void actionPerformed(ActionEvent e) {
-                    Core.getEditor().setEmptyTranslation(true);
-                    setTranslation("");
-                    Core.getEditor().replaceEditText("");
-                }
-            });
-            JMenuItem itemRemove = menu.add(OStrings.getString("TRANS_POP_REMOVE_TRANSLATION"));
-            itemRemove.addActionListener(new ActionListener() {
-                public void actionPerformed(ActionEvent e) {
-                    setTranslation(null);
-                    Core.getEditor().replaceEditText("");
-                }
-            });
+            menu.add(OStrings.getString("TRANS_POP_EMPTY_TRANSLATION")).addActionListener(
+                    new ActionListener() {
+                        public void actionPerformed(ActionEvent e) {
+                            ec.commitAndDeactivate(EditorController.ForceTranslation.EMPTY, null);
+                            ec.activateEntry();
+                        }
+                    });
+            menu.add(OStrings.getString("TRANS_POP_REMOVE_TRANSLATION")).addActionListener(
+                    new ActionListener() {
+                        public void actionPerformed(ActionEvent e) {
+                            ec.commitAndDeactivate(EditorController.ForceTranslation.UNTRANSLATED, null);
+                            ec.activateEntry();
+                        }
+                    });
+            menu.add(OStrings.getString("TRANS_POP_IDENTICAL_TRANSLATION")).addActionListener(
+                    new ActionListener() {
+                        public void actionPerformed(ActionEvent e) {
+                            ec.commitAndDeactivate(EditorController.ForceTranslation.EQUALS_TO_SOURCE, null);
+                            ec.activateEntry();
+                        }
+                    });
             menu.addSeparator();
-        }
-
-        protected void setTranslation(String v) {
-            SourceTextEntry ste = Core.getEditor().getCurrentEntry();
-            if (ste == null) {
-                return;
-            }
-            TMXEntry prevTrans = Core.getProject().getTranslationInfo(ste);
-            PrepareTMXEntry trans = new PrepareTMXEntry();
-            trans.source = ste.getSrcText();
-            trans.translation = v;
-            trans.note = Core.getNotes().getNoteText();
-            Core.getProject().setTranslation(ste, trans, prevTrans.defaultTranslation, null);
-            Core.getEditor().replaceEditText("");
-            Core.getEditor().commitAndLeave();
         }
     }
 

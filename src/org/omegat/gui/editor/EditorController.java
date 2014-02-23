@@ -117,6 +117,11 @@ public class EditorController implements IEditor {
     /** Local logger. */
     private static final Logger LOGGER = Logger.getLogger(EditorController.class.getName());
 
+    /** Some predefined translations that OmegaT can assign by popup. */
+    enum ForceTranslation {
+        UNTRANSLATED, EMPTY, EQUALS_TO_SOURCE;
+    }
+
     /** Dockable pane for editor. */
     private DockablePanel pane;
     private JScrollPane scrollPane;
@@ -159,8 +164,6 @@ public class EditorController implements IEditor {
 
     volatile IEditorFilter entriesFilter;
     private Component entriesFilterControlComponent;
-
-    private boolean emptyTranslation = false;
 
     private SegmentExportImport segmentExportImport;
 
@@ -742,7 +745,7 @@ public class EditorController implements IEditor {
 
         int segmentAtLocation = getSegmentIndexAtLocation(location);
         if (displayedEntryIndex != segmentAtLocation) {
-            doChangeSegmentActions();
+            commitAndDeactivate();
             displayedEntryIndex = segmentAtLocation;
             activateEntry();
             return true;
@@ -801,73 +804,93 @@ public class EditorController implements IEditor {
         }
 
         String newTrans = doc.extractTranslation();
+        if (newTrans != null) {
+            commitAndDeactivate(null, newTrans);
+        }
+    }
+
+    void commitAndDeactivate(ForceTranslation forceTranslation, String newTrans) {
+        UIThreadsUtil.mustBeSwingThread();
+
+        Document3 doc = editor.getOmDocument();
         doc.stopEditMode();
 
-        SourceTextEntry entry = null;
-        if (newTrans != null) {
-            // segment was active
-            SegmentBuilder sb = m_docSegList[displayedEntryIndex];
-            entry = sb.ste;
+        // segment was active
+        SegmentBuilder sb = m_docSegList[displayedEntryIndex];
+        SourceTextEntry entry = sb.ste;
 
-            PrepareTMXEntry newen = new PrepareTMXEntry();
-            newen.source = sb.getSourceText();
-            TMXEntry oldTE = Core.getProject().getTranslationInfo(entry);
+        TMXEntry oldTE = Core.getProject().getTranslationInfo(entry);
 
-            if (StringUtil.isEmpty(oldTE.translation) && StringUtil.isEmpty(newTrans)) {
-                // It's an empty translation which should remain empty
-                setEmptyTranslation(true);
+        PrepareTMXEntry newen = new PrepareTMXEntry();
+        newen.source = sb.getSourceText();
+        newen.note = Core.getNotes().getNoteText();
+        boolean defaultTranslation = sb.isDefaultTranslation();
+        if (forceTranslation != null) { // there is force translation
+            switch (forceTranslation) {
+            case UNTRANSLATED:
+                newen.translation = null;
+                break;
+            case EMPTY:
+                newen.translation = "";
+                break;
+            case EQUALS_TO_SOURCE:
+                newen.translation = newen.source;
+                break;
             }
-
-            if ((oldTE.translation == null && StringUtil.isEmpty(newTrans))
-                    || (StringUtil.isEmpty(newTrans) && !isEmptyTransation())) {
-                // There was no translation, nothing changed, or the user enters an empty translation, which
-                // means removing the translation (but not necessary the TU, since there could be a note),
-                // unless it's an empty translation.
-                newTrans = null;
-            }
-
-            newen.note = Core.getNotes().getNoteText();
-            boolean defaultTranslation = sb.isDefaultTranslation();
-
-            // update memory
-            if (entry.getSrcText().equals(newTrans)
-                    && !Preferences.isPreference(Preferences.ALLOW_TRANS_EQUAL_TO_SRC)) {
-                newTrans = null;
-            }
-
-            if (newTrans != null && oldTE.translation != null && newTrans.equals(oldTE.translation)) {
-                // translation wasn't changed
-                newTrans = null;
-            }
-
-            if (newTrans == null) {
-                // translation wasn't changed
-                if (!StringUtil.nvl(oldTE.note, "").equals(StringUtil.nvl(newen.note, ""))) {
-                    // note was changed
-                    Core.getProject().setNote(entry, oldTE, newen.note);
+        } else { // translation from editor
+            if (newTrans.isEmpty()) {// empty translation
+                if (oldTE.isTranslated() && "".equals(oldTE.translation)) {
+                    // It's an empty translation which should remain empty
+                    newen.translation = "";
+                } else {
+                    newen.translation = null;// will be untranslated
+                }
+            } else if (newTrans.equals(newen.source)) {// equals to source
+                if (Preferences.isPreference(Preferences.ALLOW_TRANS_EQUAL_TO_SRC)) {
+                    // translation can be equals to source
+                    newen.translation = newTrans;
+                } else {
+                    // translation can't be equals to source
+                    if (oldTE.source.equals(oldTE.translation)) {
+                        // but it was equals to source before
+                        newen.translation = oldTE.translation;
+                    } else {
+                        // set untranslated
+                        newen.translation = null;
+                    }
                 }
             } else {
-                // translation was changed
+                // new translation is not empty and not equals to source - just change
                 newen.translation = newTrans;
-                Core.getProject().setTranslation(entry, newen, defaultTranslation, null);
-            }
-
-            m_docSegList[displayedEntryIndex].createSegmentElement(false);
-
-            // find all identical sources and redraw them
-            for (int i = 0; i < m_docSegList.length; i++) {
-                if (i == displayedEntryIndex) {
-                    // current entry, skip
-                    continue;
-                }
-                if (m_docSegList[i].ste.getSrcText().equals(entry.getSrcText())) {
-                    // the same source text - need to update
-                    m_docSegList[i].createSegmentElement(false);
-                    // then add new marks
-                    markerController.reprocessImmediately(m_docSegList[i]);
-                }
             }
         }
+
+        if (StringUtil.equalsWithNulls(oldTE.translation, newen.translation)) {
+            // translation wasn't changed
+            if (!StringUtil.nvl(oldTE.note, "").equals(StringUtil.nvl(newen.note, ""))) {
+                // note was changed
+                Core.getProject().setNote(entry, oldTE, newen.note);
+            }
+        } else {
+            Core.getProject().setTranslation(entry, newen, defaultTranslation, null);
+        }
+
+        m_docSegList[displayedEntryIndex].createSegmentElement(false);
+
+        // find all identical sources and redraw them
+        for (int i = 0; i < m_docSegList.length; i++) {
+            if (i == displayedEntryIndex) {
+                // current entry, skip
+                continue;
+            }
+            if (m_docSegList[i].ste.getSrcText().equals(entry.getSrcText())) {
+                // the same source text - need to update
+                m_docSegList[i].createSegmentElement(false);
+                // then add new marks
+                markerController.reprocessImmediately(m_docSegList[i]);
+            }
+        }
+
         Core.getNotes().clear();
 
         // then add new marks
@@ -935,7 +958,7 @@ public class EditorController implements IEditor {
         Cursor oldCursor = this.editor.getCursor();
         this.editor.setCursor(hourglassCursor);
 
-        doChangeSegmentActions();
+        commitAndDeactivate();
 
         List<FileInfo> files = Core.getProject().getProjectFiles();
         SourceTextEntry ste;
@@ -973,7 +996,7 @@ public class EditorController implements IEditor {
         Cursor oldCursor = this.editor.getCursor();
         this.editor.setCursor(hourglassCursor);
 
-        doChangeSegmentActions();
+        commitAndDeactivate();
 
         List<FileInfo> files = Core.getProject().getProjectFiles();
         SourceTextEntry ste;
@@ -1023,7 +1046,7 @@ public class EditorController implements IEditor {
         this.editor.setCursor(hourglassCursor);
 
         // save the current entry
-        doChangeSegmentActions();
+        commitAndDeactivate();
 
         List<FileInfo> files = Core.getProject().getProjectFiles();
         SourceTextEntry ste;
@@ -1104,7 +1127,7 @@ public class EditorController implements IEditor {
         this.editor.setCursor(hourglassCursor);
 
         // Save the current entry.
-        doChangeSegmentActions();
+        commitAndDeactivate();
 
         List<FileInfo> files = Core.getProject().getProjectFiles();
         SourceTextEntry ste;
@@ -1159,7 +1182,7 @@ public class EditorController implements IEditor {
         this.editor.setCursor(hourglassCursor);
 
         // Save the current entry.
-        doChangeSegmentActions();
+        commitAndDeactivate();
 
         List<FileInfo> files = Core.getProject().getProjectFiles();
         SourceTextEntry ste;
@@ -1217,7 +1240,7 @@ public class EditorController implements IEditor {
             return;
         }
 
-        doChangeSegmentActions();
+        commitAndDeactivate();
 
         displayedFileIndex = fileIndex;
         displayedEntryIndex = 0;
@@ -1246,7 +1269,7 @@ public class EditorController implements IEditor {
         Cursor hourglassCursor = new Cursor(Cursor.WAIT_CURSOR);
         Cursor oldCursor = this.editor.getCursor();
         this.editor.setCursor(hourglassCursor);
-        doChangeSegmentActions();
+        commitAndDeactivate();
 
         if (entryNum == 0) {
             // it was empty project, need to display first entry
@@ -1822,31 +1845,12 @@ public class EditorController implements IEditor {
     public void registerIdenticalTranslation() {
         UIThreadsUtil.mustBeSwingThread();
 
-        //TODO
+        commitAndDeactivate(ForceTranslation.EQUALS_TO_SOURCE, null);
     }
 
-    /*
-     * {@inheritDoc}
-     */
+    @Override
     public void setEmptyTranslation(boolean flag) {
-        emptyTranslation = flag;
-    }
-
-    /*
-     * Return whether the current translation is empty or not.
-     * Used to distinguish between a null and an empty translation.
-     */
-    private boolean isEmptyTransation() {
-        return emptyTranslation;
-    }
-
-    /*
-     * Do the necessary actions before changing segment.
-     */
-    private void doChangeSegmentActions() {
-        commitAndDeactivate();
-        // Reset the empty translation status
-        setEmptyTranslation(false);
+        commitAndDeactivate(ForceTranslation.EMPTY, null);
     }
 
     @Override

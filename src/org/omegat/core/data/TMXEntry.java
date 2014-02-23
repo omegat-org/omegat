@@ -83,7 +83,11 @@ public class TMXEntry {
         if (other == null) {
             return false;
         }
-        if (changeDate != other.changeDate) {
+        /*
+         * Dates can't be just checked for equals since date stored in memory with 1 milliseconds accuracy,
+         * but written to file with 1 second accuracy.
+         */
+        if (Math.abs(changeDate - other.changeDate) > 1000) {
             return false;
         }
         if (!StringUtil.equalsWithNulls(translation, other.translation)) {

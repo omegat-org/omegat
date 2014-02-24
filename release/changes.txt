@@ -1,11 +1,11 @@
 ----------------------------------------------------------------------
  OmegaT 3.1.0 
 ----------------------------------------------------------------------
-  13 Enhancements
+  12 Enhancements
    5 Bug fixes
    2 Localisation updates
 ----------------------------------------------------------------------
-3.1.0 vs. 3.0.8 update 3
+3.1.0 vs. 3.0.8 update 4
 
   Implemented requests:
 
@@ -46,9 +46,6 @@ is the most common encoding for those files
   - In the Mozilla DTD filter, an option allows to not
 include untranslated strings in the target files 
 
-  - Mac: a pre-defined line in OmegaT.sh makes it easier to use  
-system Java 1.6 on OS X
-
   Bug fixes:
 
   - Monolingual .po: msgstr in exported files are empty 
@@ -73,11 +70,16 @@ issue with time stamping
 ----------------------------------------------------------------------
  OmegaT 3.0.8 update 4 
 ----------------------------------------------------------------------
-   0 Enhancement
+   1 Enhancement
    0 Bug fix
    1 Localisation update
 ----------------------------------------------------------------------
 3.0.8 update 4 vs. 3.0.8 update 3
+
+  Other enhancements:
+
+  - Mac: a pre-defined line in OmegaT.sh makes it easier to use  
+system Java 1.6 on OS X
 
   Localisation updates:
 

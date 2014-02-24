@@ -1,11 +1,16 @@
 ----------------------------------------------------------------------
  OmegaT 3.0.8 update 4 
 ----------------------------------------------------------------------
-   0 Enhancement
+   1 Enhancement
    0 Bug fix
    1 Localisation update
 ----------------------------------------------------------------------
 3.0.8 update 4 vs. 3.0.8 update 3
+
+  Other enhancements:
+
+  - Mac: a pre-defined line in OmegaT.sh makes it easier to use  
+system Java 1.6 on OS X
 
   Localisation updates:
 

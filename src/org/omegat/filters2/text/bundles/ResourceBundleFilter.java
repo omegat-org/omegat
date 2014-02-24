@@ -6,6 +6,7 @@
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
                2009 Alex Buloichik
                2011 Martin Fleurke
+               2013 Enrique Estévez
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -27,6 +28,7 @@
 
 package org.omegat.filters2.text.bundles;
 
+import java.awt.Dialog;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -43,6 +45,7 @@ import java.util.Map;
 import org.omegat.core.data.ProtectedPart;
 import org.omegat.filters2.AbstractFilter;
 import org.omegat.filters2.Instance;
+import org.omegat.util.Log;
 import org.omegat.util.LinebreakPreservingReader;
 import org.omegat.util.NullBufferedWriter;
 import org.omegat.util.OConsts;
@@ -59,10 +62,22 @@ import org.omegat.util.StringUtil;
  * @author Keith Godfrey
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Martin Fleurke
+ *
+ * Option to remove untranslated segments in the target files
+ * Code adapted from the file: MozillaDTDFilter.java
+ *
+ * @author Enrique Estévez (keko.gl@gmail.com)
  */
 public class ResourceBundleFilter extends AbstractFilter {
 
+    public static final String OPTION_REMOVE_STRINGS_UNTRANSLATED = "unremoveStringsUntranslated";
+
     protected Map<String, String> align;
+
+    /**
+     * If true, will remove non-translated segments in the target files
+     */
+    public static boolean removeStringsUntranslated = false;
 
     public String getFileFormatName() {
         return OStrings.getString("RBFILTER_FILTER_NAME");
@@ -242,7 +257,20 @@ public class ResourceBundleFilter extends AbstractFilter {
         LinebreakPreservingReader lbpr = new LinebreakPreservingReader(reader); // fix for bug 1462566
         String str;
         boolean noi18n = false;
+
+        // Parameter in the options of filter to customize the target file
+        String removeStringsUntranslatedStr = processOptions.get(OPTION_REMOVE_STRINGS_UNTRANSLATED);
+        if ((removeStringsUntranslatedStr == null) || (removeStringsUntranslatedStr.equalsIgnoreCase("true"))) {
+            removeStringsUntranslated = true;
+        } else {
+            removeStringsUntranslated = false;
+        }
+
         while ((str = getNextLine(lbpr)) != null) {
+
+            // Variable to check if a segment is translated
+            boolean translatedSegment = true;
+
             String trimmed = str.trim();
 
             // skipping empty strings
@@ -284,7 +312,8 @@ public class ResourceBundleFilter extends AbstractFilter {
             else
                 key = str.trim();
             key = removeExtraSlashes(key);
-            outfile.write(toAscii(key, true));
+            // writing segment is delayed until verifying that the translation was made
+            // outfile.write(toAscii(key, true));
 
             // advance if there're spaces or tabs after =
             if (equalsPos >= 0) {
@@ -296,7 +325,8 @@ public class ResourceBundleFilter extends AbstractFilter {
                     equalsEnd++;
                 }
                 String equals = str.substring(equalsPos, equalsEnd);
-                outfile.write(equals);
+                // writing segment is delayed until verifying that the translation was made
+                // outfile.write(equals);
 
                 // value, if any
                 String value;
@@ -312,15 +342,26 @@ public class ResourceBundleFilter extends AbstractFilter {
                 } else {
                     value = value.replaceAll("\\n\\n", "\n \n");
                     String trans = process(key, value);
+                    // Check if the segment is not translated
+	            if (trans == "--untranslated_yet--") {
+                        translatedSegment = false;
+                        trans = value;
+                    }
                     trans = trans.replaceAll("\\n\\s\\n", "\n\n");
                     trans = toAscii(trans, false);
                     if (trans.length() > 0 && trans.charAt(0) == ' ')
                         trans = '\\' + trans;
-                    outfile.write(trans);
+                    // Non-translated segments are written based on the filter options 
+                    if (translatedSegment == true || removeStringsUntranslated == false) {
+                        outfile.write(toAscii(key, true));
+                        outfile.write(equals);
+                        outfile.write(trans);
+                        outfile.write(lbpr.getLinebreak()); // fix for bug 1462566
+                    }
                 }
             }
-
-            outfile.write(lbpr.getLinebreak()); // fix for bug 1462566
+            // This line of code is moved up to avoid blank lines
+            // outfile.write(lbpr.getLinebreak()); // fix for bug 1462566
         }
     }
 
@@ -367,7 +408,7 @@ public class ResourceBundleFilter extends AbstractFilter {
             return value;
         } else if (entryTranslateCallback != null) {
             String trans = entryTranslateCallback.getTranslation(key, value, null);
-            return trans != null ? trans : value;
+            return trans != null ? trans : "--untranslated_yet--";
         } else if (entryAlignCallback != null) {
             align.put(key, value);
         }
@@ -395,4 +436,31 @@ public class ResourceBundleFilter extends AbstractFilter {
     public String getInEncodingLastParsedFile() {
         return OConsts.ISO88591;
     }
+
+
+    @Override
+    public Map<String, String> changeOptions(Dialog parent, Map<String, String> config) {
+        try {
+            ResourceBundleOptionsDialog dialog = new ResourceBundleOptionsDialog(parent, config);
+            dialog.setVisible(true);
+            if (ResourceBundleOptionsDialog.RET_OK == dialog.getReturnStatus())
+                return dialog.getOptions();
+            else
+                return null;
+        } catch (Exception e) {
+            Log.log(OStrings.getString("RB_FILTER_EXCEPTION"));
+            Log.log(e);
+            return null;
+        }
+    }
+
+    /**
+     * Returns true to indicate that Java Resource Bundles filter has options.
+     * 
+     */
+    @Override
+    public boolean hasOptions() {
+        return true;
+    }
+
 }

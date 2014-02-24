@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 3.1.0 
 ----------------------------------------------------------------------
-  12 Enhancements
+  13 Enhancements
    5 Bug fixes
    2 Localisation updates
 ----------------------------------------------------------------------
@@ -44,6 +44,9 @@ is the most common encoding for those files
   - The About dialog can now be resized
 
   - In the Mozilla DTD filter, an option allows to not
+include untranslated strings in the target files 
+
+  - In the bundle properties filter, an option allows to not
 include untranslated strings in the target files 
 
   Bug fixes:

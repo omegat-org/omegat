@@ -72,13 +72,11 @@ public class TMXEntry {
         if (other == null) {
             return false;
         }
-        if (changeDate != other.changeDate) {
-            return false;
-        }
+        /*
+         * Dates can't be just checked for equals since date stored in memory with 1 milliseconds accuracy,
+         * but written to file with 1 second accuracy.
+         */
         if (!StringUtil.equalsWithNulls(translation, other.translation)) {
-            return false;
-        }
-        if (!StringUtil.equalsWithNulls(changer, other.changer)) {
             return false;
         }
         if (!StringUtil.equalsWithNulls(note, other.note)) {

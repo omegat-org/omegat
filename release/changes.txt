@@ -2,7 +2,7 @@
  OmegaT 3.1.0 
 ----------------------------------------------------------------------
   13 Enhancements
-   5 Bug fixes
+   6 Bug fixes
    2 Localisation updates
 ----------------------------------------------------------------------
 3.1.0 vs. 3.0.8 update 4
@@ -64,6 +64,8 @@ include untranslated strings in the target files
 
   - "Rebase" (i.e., synchronisation) for team projects had an
 issue with time stamping
+
+  - When inserting a missing tag pair, any selected text was deleted
 
   Localisation updates:
 

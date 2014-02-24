@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 3.1.0 
 ----------------------------------------------------------------------
-  12 Enhancements
+  13 Enhancements
    5 Bug fixes
    2 Localisation updates
 ----------------------------------------------------------------------
@@ -45,6 +45,9 @@ is the most common encoding for those files
 
   - In the Mozilla DTD filter, an option allows to not
 include untranslated strings in the target files 
+
+  - Mac: a pre-defined line in OmegaT.sh makes it easier to use  
+system Java 1.6 on OS X
 
   Bug fixes:
 

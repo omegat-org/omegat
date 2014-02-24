@@ -71,6 +71,19 @@ issue with time stamping
   - Italian localisation updated to 3.1.0 (UI, Documentation)
 
 ----------------------------------------------------------------------
+ OmegaT 3.0.8 update 4 
+----------------------------------------------------------------------
+   0 Enhancement
+   0 Bug fix
+   1 Localisation update
+----------------------------------------------------------------------
+3.0.8 update 4 vs. 3.0.8 update 3
+
+  Localisation updates:
+
+  - Italian localisation updated to 3.0.8 update 2 (UI)
+
+----------------------------------------------------------------------
  OmegaT 3.0.8 update 3 (2014-01-27)
 ----------------------------------------------------------------------
    2 Enhancements

@@ -6,7 +6,7 @@
  Copyright (C) 2010 Alex Buloichik
                2012 Guido Leenders, Thomas Cordonnier
                2013 Aaron Madlon-Kay
-               2014 Alex Buloichik
+               2014 Alex Buloichik, Aaron Madlon-Kay
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -99,6 +99,28 @@ public class TMXEntry {
         if (!StringUtil.equalsWithNulls(note, other.note)) {
             return false;
         }
+        if (!StringUtil.equalsWithNulls(linked, other.linked)) {
+            return false;
+        }
         return true;
     }
+    
+    public static TMXEntry merge(TMXEntry a, TMXEntry b) throws CannotMergeException {
+        if (!StringUtil.equalsWithNulls(a.translation, b.translation)) {
+            throw new CannotMergeException();
+        }
+        if (!StringUtil.equalsWithNulls(a.linked, b.linked)) {
+            throw new CannotMergeException();
+        }
+        if (a.note != null && b.note != null && !a.note.equals(b.note)) {
+            throw new CannotMergeException();
+        }
+        TMXEntry newer = Math.round((a.changeDate - b.changeDate) / 1000.0) >= 0 ? a : b;
+        TMXEntry older = newer == a ? b : a;
+        PrepareTMXEntry prep = new PrepareTMXEntry(newer);
+        prep.note = StringUtil.nvl(newer.note, older.note);
+        return new TMXEntry(prep, newer.defaultTranslation, newer.linked);
+    }
+    
+    public static class CannotMergeException extends Exception {}
 }

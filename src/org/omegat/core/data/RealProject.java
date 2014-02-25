@@ -61,6 +61,7 @@ import java.util.regex.Pattern;
 import javax.swing.SwingUtilities;
 
 import org.apache.lucene.util.Version;
+import org.madlonkay.supertmxmerge.StmProperties;
 import org.madlonkay.supertmxmerge.SuperTmxMerge;
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
@@ -851,11 +852,14 @@ public class RealProject implements IProject {
                 // File 1: projectTMX (mine)
                 // File 2: headTMX (theirs)
                 synchronized (projectTMX) {
-                    ProjectTMX mergedTMX = SuperTmxMerge.merge(baseTMX, OStrings.getString("TMX_MERGE_BASE"),
-                            projectTMX, OStrings.getString("TMX_MERGE_MINE"),
-                            headTMX, OStrings.getString("TMX_MERGE_THEIRS"),
+                    StmProperties props = new StmProperties().setBaseTmxName(OStrings.getString("TMX_MERGE_BASE"))
+                            .setTmx1Name(OStrings.getString("TMX_MERGE_MINE"))
+                            .setTmx2Name(OStrings.getString("TMX_MERGE_THEIRS"))
+                            .setLanguageResource(OStrings.getResourceBundle())
+                            .setParentWindow(Core.getMainWindow().getApplicationFrame());
+                    ProjectTMX mergedTMX = SuperTmxMerge.merge(baseTMX, projectTMX, headTMX,
                             m_config.getSourceLanguage().getLanguage(), m_config.getTargetLanguage().getLanguage(),
-                            OStrings.getResourceBundle());
+                            props);
                     projectTMX.replaceContent(mergedTMX);
                 }
                 

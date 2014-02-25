@@ -131,6 +131,9 @@ public class OmegaTLogFormatter extends Formatter {
         } else {
             format = record.getMessage();
         }
+        if (format == null) {
+            format = "null";
+        }
         if (record.getParameters() == null) {
             message = format;
         } else {

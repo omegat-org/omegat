@@ -1,5 +1,5 @@
 ----------------------------------------------------------------------
- OmegaT 3.0.8 update 4 
+ OmegaT 3.0.8 update 4 (2014-02-25)
 ----------------------------------------------------------------------
    1 Enhancement
    0 Bug fix
@@ -746,6 +746,23 @@ OmegaT failed to load the valid ones
   - Japanese localisation updated to 3.0.0 (UI)
   - Russian localisation updated to 3.0.0 (UI, readme, Instant Start)
   - Turkish localisation updated to 3.0.0 (UI)
+
+----------------------------------------------------------------------
+ OmegaT 2.6.3 update 8 (2014-02-25)
+----------------------------------------------------------------------
+   0 Enhancement
+   2 Bug fixes
+   0 Localisation update
+----------------------------------------------------------------------
+2.6.3 update 8 vs. 2.6.3 update 7
+
+  - The fix for "mixed content" introduced in 2.6.3 update 7 made
+sometimes OmegaT unusable since a change introduced in Java 1.7_51. We have 
+removed it, so users get again a warning about mixed content.
+
+  - "Rebase" (i.e., synchronisation) for team projects had an
+issue with time stamping. As a result, newer translations could
+sometimes be overwritten by older ones.
 
 ----------------------------------------------------------------------
  OmegaT 2.6.3 update 7 (2014-01-15)

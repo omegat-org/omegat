@@ -1846,6 +1846,7 @@ public class EditorController implements IEditor {
         UIThreadsUtil.mustBeSwingThread();
 
         commitAndDeactivate(ForceTranslation.EQUALS_TO_SOURCE, null);
+        activateEntry();
     }
 
     @Override

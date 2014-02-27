@@ -36,7 +36,7 @@ import org.omegat.core.data.TMXEntry;
 import org.omegat.util.gui.Styles;
 
 /**
- * Marker for marks entries from auto TMX.
+ * Marker for marks entries from TMX that come automatically from tm/auto/ folder.
  * 
  * @author Alex Buloichik (alex73mail@gmail.com)
  */

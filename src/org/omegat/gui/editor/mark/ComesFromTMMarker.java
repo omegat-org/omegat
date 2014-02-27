@@ -36,12 +36,13 @@ import org.omegat.core.events.IEntryEventListener;
 import org.omegat.util.gui.Styles;
 
 /**
- * Marker for be able to add marks when a match is inserted from such a TMX.
+ * Marker for be able to add marks when a match is inserted from such a TMX manually. TMX should be in tm/mt/
+ * folder.
  * 
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
 public class ComesFromTMMarker implements IMarker {
-   // protected final HighlightPainter PAINTER = new TransparentHighlightPainter(Styles.COLOR_MARK_COMES_FROM_TM, 0.5F);
+    protected final HighlightPainter PAINTER = new TransparentHighlightPainter(Styles.COLOR_MARK_COMES_FROM_TM, 0.5F);
 
     private SourceTextEntry markedSte;
     private String markedText;
@@ -70,16 +71,15 @@ public class ComesFromTMMarker implements IMarker {
     @Override
     public synchronized List<Mark> getMarksForEntry(SourceTextEntry ste, String sourceText, String translationText,
             boolean isActive) {
-        return null;
-//        synchronized (this) {
-//            if (!isActive || ste != markedSte || !translationText.equals(markedText)) {
-//                return null;
-//            }
-//        }
-//        Mark m = new Mark(Mark.ENTRY_PART.TRANSLATION, 0, translationText.length());
-//        m.painter = PAINTER;
-//        List<Mark> marks = new ArrayList<Mark>(1);
-//        marks.add(m);
-//        return marks;
+        synchronized (this) {
+            if (!isActive || ste != markedSte || !translationText.equals(markedText)) {
+                return null;
+            }
+        }
+        Mark m = new Mark(Mark.ENTRY_PART.TRANSLATION, 0, translationText.length());
+        m.painter = PAINTER;
+        List<Mark> marks = new ArrayList<Mark>(1);
+        marks.add(m);
+        return marks;
     }
 }

@@ -218,6 +218,12 @@ public class GlossaryTextAreaTest extends TestCore {
 
             public void registerIdenticalTranslation() {
             }
+
+            public void registerEmptyTranslation() {
+            }
+
+            public void registerUntranslated() {
+            }
         });
     }
 }

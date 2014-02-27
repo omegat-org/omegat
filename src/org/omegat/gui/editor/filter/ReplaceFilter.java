@@ -216,7 +216,7 @@ public class ReplaceFilter implements IEditorFilter {
             for (SearchMatch m : getReplacementsForEntry(str)) {
                 if (m.getStart() <= pos && pos <= m.getEnd()) {
                     // yes - replace
-                    ec.replacePartOfTextAndMark(replacement, m.getStart(), m.getEnd());
+                    ec.replacePartOfText(replacement, m.getStart(), m.getEnd());
                     break;
                 }
             }

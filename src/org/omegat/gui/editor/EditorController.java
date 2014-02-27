@@ -1842,16 +1842,27 @@ public class EditorController implements IEditor {
     }
 
     @Override
+    public void registerUntranslated() {
+        UIThreadsUtil.mustBeSwingThread();
+
+        commitAndDeactivate(ForceTranslation.UNTRANSLATED, null);
+        activateEntry();
+    }
+
+    @Override
+    public void registerEmptyTranslation() {
+        UIThreadsUtil.mustBeSwingThread();
+
+        commitAndDeactivate(ForceTranslation.EMPTY, null);
+        activateEntry();
+    }
+
+    @Override
     public void registerIdenticalTranslation() {
         UIThreadsUtil.mustBeSwingThread();
 
         commitAndDeactivate(ForceTranslation.EQUALS_TO_SOURCE, null);
         activateEntry();
-    }
-
-    @Override
-    public void setEmptyTranslation(boolean flag) {
-        commitAndDeactivate(ForceTranslation.EMPTY, null);
     }
 
     @Override

@@ -405,6 +405,14 @@ public class MainWindowMenuHandler {
         Core.getEditor().setAlternateTranslationForCurrentEntry(true);
     }
 
+    public void editRegisterUntranslatedMenuItemActionPerformed() {
+        Core.getEditor().registerUntranslated();
+    }
+
+    public void editRegisterEmptyMenuItemActionPerformed() {
+        Core.getEditor().registerEmptyTranslation();
+    }
+
     public void editRegisterIdenticalMenuItemActionPerformed() {
         Core.getEditor().registerIdenticalTranslation();
     }

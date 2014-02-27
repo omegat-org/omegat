@@ -216,12 +216,6 @@ public interface IEditor {
     void replaceEditTextAndMark(String text);
 
     /**
-     * Defines the current translation as empty.
-     * This is reset after each going out of a segment.
-     */
-    void setEmptyTranslation(boolean flag);
-
-    /**
      * Inserts text at the cursor position.
      * 
      * Must be called only from UI thread.
@@ -334,6 +328,16 @@ public interface IEditor {
      * Perform any necessary actions for window deactivation.
      */
     void windowDeactivated();
+
+    /**
+     * Register untranslated.
+     */
+    void registerUntranslated();
+
+    /**
+     * Register as empty.
+     */
+    void registerEmptyTranslation();
 
     /**
      * Register translation to be identical to source.

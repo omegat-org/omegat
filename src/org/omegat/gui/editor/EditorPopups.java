@@ -307,22 +307,19 @@ public class EditorPopups {
             menu.add(OStrings.getString("TRANS_POP_EMPTY_TRANSLATION")).addActionListener(
                     new ActionListener() {
                         public void actionPerformed(ActionEvent e) {
-                            ec.commitAndDeactivate(EditorController.ForceTranslation.EMPTY, null);
-                            ec.activateEntry();
+                            ec.registerEmptyTranslation();
                         }
                     });
             menu.add(OStrings.getString("TRANS_POP_REMOVE_TRANSLATION")).addActionListener(
                     new ActionListener() {
                         public void actionPerformed(ActionEvent e) {
-                            ec.commitAndDeactivate(EditorController.ForceTranslation.UNTRANSLATED, null);
-                            ec.activateEntry();
+                            ec.registerUntranslated();
                         }
                     });
             menu.add(OStrings.getString("TRANS_POP_IDENTICAL_TRANSLATION")).addActionListener(
                     new ActionListener() {
                         public void actionPerformed(ActionEvent e) {
-                            ec.commitAndDeactivate(EditorController.ForceTranslation.EQUALS_TO_SOURCE, null);
-                            ec.activateEntry();
+                            ec.registerIdenticalTranslation();
                         }
                     });
             menu.addSeparator();

@@ -79,6 +79,9 @@ public class TMXEntry {
         return note != null;
     }
 
+    /**
+     * We assume that both TMXEntry have the same key, with the same different/alternative.
+     */
     public boolean equalsTranslation(TMXEntry other) {
         if (other == null) {
             return false;
@@ -87,13 +90,10 @@ public class TMXEntry {
          * Dates can't be just checked for equals since date stored in memory with 1 milliseconds accuracy,
          * but written to file with 1 second accuracy.
          */
-        if (Math.abs(changeDate - other.changeDate) > 1000) {
+        if (changeDate / 1000 != other.changeDate / 1000) {
             return false;
         }
         if (!StringUtil.equalsWithNulls(translation, other.translation)) {
-            return false;
-        }
-        if (!StringUtil.equalsWithNulls(changer, other.changer)) {
             return false;
         }
         if (!StringUtil.equalsWithNulls(note, other.note)) {
@@ -104,23 +104,18 @@ public class TMXEntry {
         }
         return true;
     }
-    
-    public static TMXEntry merge(TMXEntry a, TMXEntry b) throws CannotMergeException {
-        if (!StringUtil.equalsWithNulls(a.translation, b.translation)) {
-            throw new CannotMergeException();
-        }
-        if (!StringUtil.equalsWithNulls(a.linked, b.linked)) {
-            throw new CannotMergeException();
-        }
-        if (a.note != null && b.note != null && !a.note.equals(b.note)) {
-            throw new CannotMergeException();
-        }
-        TMXEntry newer = Math.round((a.changeDate - b.changeDate) / 1000.0) >= 0 ? a : b;
+
+    /**
+     * This method constructs one TMXEntry from two different. We assume that both TMXEntry's are not equals
+     * by {@link #equalsTranslation(TMXEntry)}.
+     */
+    public static TMXEntry autoMerge(TMXEntry a, TMXEntry b) {
+        TMXEntry newer = a.changeDate / 1000 > b.changeDate / 1000 ? a : b;
         TMXEntry older = newer == a ? b : a;
+
         PrepareTMXEntry prep = new PrepareTMXEntry(newer);
         prep.note = StringUtil.nvl(newer.note, older.note);
+
         return new TMXEntry(prep, newer.defaultTranslation, newer.linked);
     }
-    
-    public static class CannotMergeException extends Exception {}
 }

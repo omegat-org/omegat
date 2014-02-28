@@ -79,6 +79,11 @@ public class TMXEntry {
         return note != null;
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        throw new RuntimeException("equalsTranslation() should be executed instead");
+    }
+
     /**
      * We assume that both TMXEntry have the same key, with the same different/alternative.
      */

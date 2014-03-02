@@ -1,0 +1,281 @@
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <title>Chapter&nbsp;12.&nbsp;Operar con le texto formattate</title>
+      <link rel="stylesheet" type="text/css" href="OmegaT.css">
+      <meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
+      <link rel="home" href="index.html" title="OmegaT 2.6.3_07 - Guida del usator">
+      <link rel="up" href="index.html" title="OmegaT 2.6.3_07 - Guida del usator">
+      <link rel="prev" href="chapter.plain.text.html" title="Chapter&nbsp;11.&nbsp;Operar con le texto simple">
+      <link rel="next" href="chapter.translation.memories.html" title="Chapter&nbsp;13.&nbsp;Memorias de traduction:">
+   </head>
+   <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+      <div class="navheader">
+         <table width="100%" summary="Navigation header">
+            <tr>
+               <th colspan="3" align="center">Chapter&nbsp;12.&nbsp;Operar con le texto formattate</th>
+            </tr>
+            <tr>
+               <td width="20%" align="left"><a accesskey="p" href="chapter.plain.text.html">Prev</a>&nbsp;
+               </td>
+               <th width="60%" align="center">&nbsp;</th>
+               <td width="20%" align="right">&nbsp;<a accesskey="n" href="chapter.translation.memories.html">Next</a></td>
+            </tr>
+         </table>
+         <hr>
+      </div>
+      <div class="chapter">
+         <div class="titlepage">
+            <div>
+               <div>
+                  <h1 class="title"><a name="chapter.formatted.text"></a>Chapter&nbsp;12.&nbsp;Operar con le texto formattate<a class="indexterm" name="d0e6038"></a><a class="indexterm" name="d0e6043"></a></h1>
+               </div>
+            </div>
+         </div>
+         <div class="toc">
+            <dl class="toc">
+               <dt><span class="section"><a href="chapter.formatted.text.html#formatting.tags">1. Formattar le tags</a></span></dt>
+               <dt><span class="section"><a href="chapter.formatted.text.html#tag.operations">2. Operationes del Tag</a></span></dt>
+               <dt><span class="section"><a href="chapter.formatted.text.html#tag.group.nesting">3. Annidamento de  gruppo de tags</a></span></dt>
+               <dt><span class="section"><a href="chapter.formatted.text.html#tag.group.overlapping">4. Superposition de gruppo de tag</a></span></dt>
+               <dt><span class="section"><a href="chapter.formatted.text.html#d0e6189">5. Optiones de validation del tag</a></span></dt>
+               <dt><span class="section"><a href="chapter.formatted.text.html#tag.group.validation">6. Validation de gruppo de tag</a></span></dt>
+               <dt><span class="section"><a href="chapter.formatted.text.html#hints.for.tag.management">7. Consilios pro le gestion del tags</a></span></dt>
+            </dl>
+         </div>
+         <p>Habitualmente necessita que le information re le formattation presente in le file fonte es copiate in le file final. Le information
+            in-line de formato facite possibile per le formatos supportate (in particular DocBook, HTML, XHTML, Open Document Format(ODF)
+            e Office Open XML (MS Office 2007 e sequente) al tempore de scriptura) son presentate como tags in OmegaT. Normalmente le
+            tags son ignorate quando on considera le similantia inter textos differente, pro le fines del concordantia. Le tags representate
+            in le segmento rendite essera presente in le documento rendite.
+         </p>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="formatting.tags"></a>1.&nbsp;Formattar le tags<a class="indexterm" name="d0e6053"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <p><a class="indexterm" name="d0e6057"></a><span class="bold"><strong>Denomination del tag:</strong></span></p>
+            <p>Le tags consiste de uno a tres characteres e un numero. Le numeration unic permitte al tags, correspondente a cata altere,
+               de esser regruppate insimul e distincte inter le tags que ha le mesme character de connexion, ma son de facto differente.
+               Le characteres de connexion usate tende a reflecter le natural significato del tag (exempli gratia b pro bold, i pro italics,
+               etc.)
+            </p>
+            <p><a class="indexterm" name="d0e6067"></a><span class="bold"><strong>Numeration del tag:</strong></span></p>
+            <p>Le tags son numerate in modo incremental secundo le gruppo de tag. Le "gruppos de tag" in iste contexto son tag singule (assi
+               como &lt;i0&gt; e &lt;/i0&gt;). Intra un segmento, le prime gruppo (par o singule) recipe le numero 0, le secunde le numero 1 etc. Le
+               prime exemplo in sequito ha 3 gruppos de tag (un par, un singulo, e pois un altere par), le secunde exemplo ha un gruppo solmente
+               (un par).
+            </p>
+            <p><a class="indexterm" name="d0e6077"></a><span class="bold"><strong>Pares e singulos:</strong></span></p>
+            <p>Le tags es sempre o singulos o accopulate. Le tags singule indica information de formattation que non affice le contexto (un
+               spatio supernumerari o  un interruption de linea per exemplo).
+            </p>
+            <p><code class="literal">&lt;b0&gt;&lt;Ctr+N&gt;&lt;/b0&gt;,
+                      &lt;br1&gt;&lt;b2&gt;&lt;Enter&gt;&lt;/b2&gt;&lt;segment 2132&gt;
+                      </code></p>
+            <p>&lt;br1&gt; es un tag singule e non affice alicun contexto. Le tags accopulate habitualmente indica information de stilo que refere
+               se al texto inter le tag de apertura  e le tag de clausura de un par. &lt;b0&gt; e &lt;/b0&gt; in sequito son accopulate e affice le texto
+               log.txt. Nota que le tag de apertura debe semper venir ante que le tag de clausura correspondente:
+            </p>
+            <p>&lt;<code class="literal">Le file de log (&lt;b0&gt;log.txt&lt;/b0&gt;) pro revision del operationes e del errores.&lt;segment 3167&gt;</code></p>
+            <p><span class="application">OmegaT</span> crea su tags ante que le processo de segmentation del phrase. Dependente sur le regulas de segmentation, le par de tags pote
+               devenir separate in duo consecutive segmentos e le validation del tag errara a favor del caution e marca le duo segmentos.
+            </p>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="tag.operations"></a>2.&nbsp;Operationes del Tag<a class="indexterm" name="d0e6102"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <p>Con le tags debe esser exercitate attention. Si illos es cambiate per accidente, le formattation del file final potera esser
+               corrupte. Le regula basic es que le sequentia de tags debe esser conservate in le identic arrangiamento. Tamen, il es possibile,
+               si certe regulas son sequite strictemente, deviar ab iste regula basic.
+            </p>
+            <p><span class="bold"><strong><a class="indexterm" name="d0e6111"></a>Duplication del tag:</strong></span></p>
+            <p>Pro duplicar gruppos de tag, copia exactemente los in le position que tu desira. Serva in mente que in un par, le tag de apertura
+               debe venir ante que le tag de clausura. Le formattation representate per le gruppo tu ha duplicate essera applicate a ambe
+               sectiones.
+            </p>
+            <p>Exemplo:</p>
+            <p><code class="literal">&lt;b0&gt;Iste formattation&lt;/b0&gt; va a esser duplicate ci.&lt;segment 0001&gt;</code></p>
+            <p>Post le duplication:</p>
+            <p><code class="literal">&lt;b0&gt;Iste formattation&lt;/b0&gt; esseva &lt;b0&gt;duplicate ci&lt;/b0&gt;.&lt;segment 0001&gt;</code></p>
+            <p><span class="bold"><strong><a class="indexterm" name="d0e6131"></a>Deletion de gruppo de tag:</strong></span></p>
+            <p>Pro deler le gruppos de tag, remove solmente los ex le segmento. Serva in mente que un par debe haber delite ambe su tag de
+               apertura e de clausura pro assecurar que omne le tracias del formattation son delite debitemente, alias le file rendite pote
+               devenir corrupte. Cancellante un gruppo de tag tu removera le formattation pertinente ex le file rendite.
+            </p>
+            <p>Exemplo:</p>
+            <p><code class="literal">&lt;b0&gt;Iste formattation&lt;/b0&gt; essera delite.&lt;segment 0001&gt;</code></p>
+            <p>Post le deletion:</p>
+            <p><code class="literal">Iste formattation esseva delite.&lt;segment 0001&gt;</code></p>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="tag.group.nesting"></a>3.&nbsp;Annidamento de  gruppo de tags<a class="indexterm" name="d0e6152"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <p>Modificar le ordine del gruppo de tag pote resultar in le annidamento de un gruppo de tag inter un altere gruppo de tag. Isto
+               es acceptabile, a condition que le gruppo includente include totalmente le gruppo incluse. In altere parolas, quando tu move
+               tags accopulate, assecurar te que tote le duo tags de apertura e de clausura son ambe o interior o externe al altere pares
+               de tag, o le file rendite pote esser corrupte e faller a aperir se.
+            </p>
+            <p>Exemplo:</p>
+            <p><code class="literal">&lt;b0&gt;Le formattation&lt;/b0&gt; &lt;b1&gt;uno&lt;/b1&gt; essera annidate intra le formattation zero.&lt;segment 0001&gt;</code></p>
+            <p>Post le annidamento:</p>
+            <p><code class="literal">&lt;b0&gt;Le formattation &lt;b1&gt;uno&lt;/b1&gt;&lt;/b0&gt; esseva annidate intra le formattation zero.&lt;segment 0001&gt;</code></p>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="tag.group.overlapping"></a>4.&nbsp;Superposition de gruppo de tag<a class="indexterm" name="d0e6172"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <p>Le superposition es le resultato del mal tractamentos de pares de tag e es garantite resultar in in corruption del formato
+               e alicun vices in le file rendite que non aperi del toto.
+            </p>
+            <p>Exemplo:</p>
+            <p><code class="literal">&lt;b0&gt;Formattation&lt;/b0&gt; &lt;b1&gt;uno&lt;/b1&gt; va esser confuse.&lt;segment 0001&gt;</code></p>
+            <p>Post un manipulation mal:</p>
+            <p><code class="literal">&lt;b0&gt;Formattation &lt;b1&gt;uno&lt;/b0&gt; &lt;/b1&gt;es multo confuse ora.&lt;segment 0001&gt;</code></p>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e6189"></a>5.&nbsp;Optiones de validation del tag
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>Pro personalisar le obra con tags, on pote fixar alicun del regulas in le fenestra <span class="guimenuitem">Optiones &gt; Validation del tag...</span>:
+            </p>
+            <div class="mediaobject"><img src="images/OptionsTagValidation_25.png"></div>
+            <p>Le comportamento, fixate ci, refere se a omne le files fonte e non sol a alicun del typos del file, como texto formattate.</p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p><span class="bold"><strong>Variabiles Printf - non controlar, controlo simple, controla toto</strong></span></p>
+                     <p>OmegaT pote controlar que le variabiles de programmation (como %s per exemplo) existe in le fonte in le traduction. Tu pote
+                        decider non controlar del toto, controlar pro variabiles printf simplice (como %s %d et cetera) o pro variabiles stampa de
+                        omne typos.
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p><span class="bold"><strong>Controla modellos simplice MessageFormat java</strong></span></p>
+                     <p>Activar iste quadrato de controlo causara que OmegaT controlara si le tags simplice in java MessageFormat (como {0}) son processate
+                        correctemente.
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p><span class="bold"><strong>Expression regular de tag(s) usual:</strong></span></p>
+                     <p>Un expression regular entrate ci producera que OmegaT tracta le occurrentias detectate quam tags del cliente. Illo controla
+                        que le numero de tags e lor ordine es identic, justo como il es le caso pro le tags-omegat.
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p><span class="bold"><strong>Le fragmento(s) que deberea esser removite ex le expression regular del traduction</strong></span></p>
+                     <p>On pote scriber un expression regular pro contentos importun in le destination. Omne concordantias in le segmento de destination
+                        essera alora colorate in rubre, id es facile a identificar e corriger. Quando quere pro concordantias partial le Leva le modello
+                        es ignorate. Un penalitate fixe de 5 es addite si le parte removite non concorda alicun altere segmento, assi le concordantia
+                        non non monstra fin a 100%
+                     </p>
+                  </li>
+               </ul>
+            </div>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="tag.group.validation"></a>6.&nbsp;Validation de gruppo de tag<a class="indexterm" name="d0e6233"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <p>Le function valida tags releva cambios al sequentias del tag (an deliberate o accidental), e monstra le segmentos affligite.
+               lanceante iste function con – <span class="guimenuitem">Ctrl+T<a class="indexterm" name="d0e6242"></a></span> - Aperi a fenestra continente omne segmentos in the file continente in le traduction, tags suspecte rupte o mal. Reparar
+               le tags e recrear le documentos de destination es facile con le function Valida tags. Le fenestra que se displica quando es
+               pulsate <span class="guimenuitem">Ctrl+T</span> functiona con un tabella de 3 columnas con un ligamine al segmento, le segmento fontal e le segmento de destination
+            </p>
+            <div class="figure"><a name="tag.validation"></a><p class="title"><b>Figure&nbsp;12.1.&nbsp;Entrata de validation de tag</b></p>
+               <div class="figure-contents">
+                  <div class="mediaobject"><img src="images/TagValidation.png" alt="Entrata de validation de tag"></div>
+               </div>
+            </div><br class="figure-break"><p>Le tags es marcate in blau nigrato pro un facile comparation inter los original e le contentos rendite. Clicca sur le ligamine
+               pro activar le segmento in le Editor. Corrige le error si necessari (in le caso precedente le par &lt;i2&gt;&lt;/i2&gt; es mancante) e
+               pressa <span class="guimenuitem">Ctrl+T</span> to pro retornar al fenestra de validation del tag pro corriger altere errores. Le errores de tag son sequentias de tag, in
+               le traduction, in le qual le mesme arrangiamento de tag del segmento original non es representate. Alicun manipulationes de
+               tag es necessari e es benigne, alteres producera problemas quando essera create le documento rendite.
+            </p>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="hints.for.tag.management"></a>7.&nbsp;Consilios pro le gestion del tags<a class="indexterm" name="d0e6267"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <p><span class="bold"><strong>Simplifica le texto original</strong></span></p>
+            <p>Le tags generalmente representa le formattation in alicun forma del texto original. Simplificar le formattation original contribue
+               assatis a reducer le numero de tags. Unificar le typos de character usate, le dimensiones de typo de character, le colores,
+               et cetera, ubi le stato de cosas permitte le, simplifica le labor de traduction e reduce le possibile numero del errores de
+               tag. Lege le section operationes del tag pro vider lo que on pote facer con le tags. Recorda que si tu trova le tags un problema
+               in OmegaT e le formattation non es extrememente relevante pro le traduction actual, remover le tags pote esser le maniera
+               plus facile pro le exito del problemas.
+            </p>
+            <p><span class="bold"><strong>Paga attention extra al pares de tag</strong></span></p>
+            <p>Si tu debe vider le tags in OmegaT ma non necessita conservar le major parte del formattation in le documento rendite tu es
+               libere ne includer le tags in le traduction. In iste caso presta extra attention al pares de tag post que cancellar un latere
+               del par ma negliger de deler le altere es garantite pro corrumper le formattation de tu documento. Desde le tags es includite
+               in le ipse texto, il es possibile usar le regulas de segmentation pro crear segmentos con minus tags. Isto es un function
+               experte e necessita alicun experientia pro applicar lo debitemente.
+            </p>
+            <p>OmegaT non es ancora habile a discoperir in modo completemente automatic le errores in le formattation, assi illo non suggerera
+               te si tu face an error o cambia le formattation pro adaptar lo melio a tu lingua final. Alicun vices, comocunque, tu file
+               rendite pote haver un aspecto singular, e – in le pejor caso – pote etiam rejectar de aperir.
+            </p>
+         </div>
+      </div>
+      <div class="navfooter">
+         <hr>
+         <table width="100%" summary="Navigation footer">
+            <tr>
+               <td width="40%" align="left"><a accesskey="p" href="chapter.plain.text.html">Prev</a>&nbsp;
+               </td>
+               <td width="20%" align="center">&nbsp;</td>
+               <td width="40%" align="right">&nbsp;<a accesskey="n" href="chapter.translation.memories.html">Next</a></td>
+            </tr>
+            <tr>
+               <td width="40%" align="left" valign="top">Chapter&nbsp;11.&nbsp;Operar con le texto simple&nbsp;</td>
+               <td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
+               <td width="40%" align="right" valign="top">&nbsp;Chapter&nbsp;13.&nbsp;Memorias de traduction:</td>
+            </tr>
+         </table>
+      </div>
+   </body>
+</html>

@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<chapter id="chapter.segmentation">
+  <title>Segmentation del texto fonte</title>
+
+  <para>Le instrumentos de memoria de traduction functiona con unitates textual nominate segmentos. <application>OmegaT</application> ha duo manieras a segmentar un texto: per paragrapho o per segmentation a phrase (alsi referite como &quot;segmentation basate sur le regulas”). Pro seliger le typo del segmentation, selige <menuchoice> <guimenu><indexterm class="singular">
+          <primary>Projecto</primary> <secondary>Proprietates</secondary>
+        </indexterm>Projecto</guimenu> <guimenuitem>Proprietates...</guimenuitem> </menuchoice> ex le menu principal e marca o leva le marca in le quadrato de controlo supplite. Le segmentation a paragrapho es avantagiose in certe casos, assi como traductiones multo creative o stilistic in le qual le traductor pote desiderar de cambiar le ordine de phrases integre; pro le majoritate del projectos, comocunque, le segmentation a phrase es un selection a preferer, pois que illo delivra concordantias melior ex traductiones previe. Si le segmentation per phrase esseva seligite, tu pote prefixar le regulas con <menuchoice> <guimenu><indexterm class="singular">
+          <primary>Projecto</primary> <secondary>Optiones</secondary>
+        </indexterm>Optiones</guimenu> <guimenuitem>Segmentation...</guimenuitem> </menuchoice>del menu principal.</para>
+
+  <para>Son jam disponibile regulas de segmentation confidibile pro plurime linguas, assi il es verisimile que tu non necessitara de ser implicate con le scriptura de tu proprie regulas de segmentation. Al altere latere iste functionalitate pote esser multo utile in casos particular, ubi tu pote accrescer tu productivitate accordante le regulas de segmentation al texto a traducer.</para>
+
+  <para><emphasis role="bold">Advertimento: </emphasis>viste que le texto essera segmentate differentemente postquam le optiones del filtro esseva cambiate, ergo tu pote deber initiar a render de zero. Al mesme tempore le segmentos valide previe in le memoria de traduction del projecto rotara in segmentos orphane. Si tu cambia le optiones de segmentation durante que un projecto es aperte, tu debe recargar le projecto pro que le cambios sume effecto.</para>
+
+  <para><application>OmegaT</application> usa le sequentia de grados sequente:</para>
+
+  <variablelist>
+    <varlistentry>
+      <term><indexterm class="singular">
+          <primary>Segmentation</primary> <secondary>Segmentation a nivello de fonte</secondary>
+        </indexterm>Segmentation a nivello de structura</term>
+
+      <listitem>
+        <para><application>OmegaT</application> in prime loco analysa le texto pro le segmentation a nivello de structura. Durante iste processo il es solmente le structura del file fonte que es usate pro generar le segmentos.</para>
+
+        <para>Per exemplo, le files de texto pote esser segmentate sur interruptiones de linea, lineas vacue, o non esser segmentate del toto. Files continente formattation (documentos ODF, documentos HTML, et cetera) son segmentate sur le  tags de nivello de bloco (paragrapho). Le attributos de objecto traducibile in le files XHTML o HTML pote esser extrahite como segmentos separate.</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term><indexterm class="singular">
+          <primary>Segmentation</primary> <secondary>Segmentation a nivello de phrase</secondary>
+        </indexterm>Segmentation a nivello de phrase</term>
+
+      <listitem>
+        <para>Post le segmentation del file fonte in unitates structural, <application>OmegaT</application>segmentara iste blocos ulteriormente in phrases.</para>
+      </listitem>
+    </varlistentry>
+  </variablelist>
+
+  <section id="segmentation.rules">
+    <title>Regulas de Segmentation<indexterm class="singular">
+        <primary>Segmentation</primary> <secondary>Regulas</secondary>
+      </indexterm></title>
+
+    <para>Le processo de segmentation pote esser illustrate assi: le cursor move se secundo le le, un character a un vece. A cata position del cursor, le regulas, consistente de un modello <emphasis role="bold">Ante </emphasis>e  <emphasis role="bold">Post </emphasis>, son applicate in lor ordine date pro vider si alicun del modellos<emphasis role="bold"> Ante</emphasis> es valide pro le texto sur le sinistra e le correspondente modello <emphasis role="bold">Post</emphasis> pro le texto al dextra del cursor. Si le regula concorda, o le cursor move se super sin inserer un interruption de segmento (pro un regula de exception) o es create un interruption de segmento nove al position del cursor actual (pro le regula de interruption).</para>
+
+    <para>Le duo typos de regulas conduce se como seque:</para>
+
+    <variablelist>
+      <varlistentry>
+        <term><indexterm class="singular">
+            <primary>Segmentation</primary> <secondary>Regulas</secondary> <tertiary>Regula de interruption</tertiary>
+          </indexterm>Regula de interruption</term>
+
+        <listitem>
+          <para>Separa le texto fonte in segmentos. Per exemplo, &quot;<emphasis>Did it make sense? I was not sure</emphasis>.&quot; deberea esser fisse in duo segmentos. Pro que isto accide, ibi deberea esser un regula de interruption pro le &quot;?&quot;, quando sequite per spatios e un parola majuscule. Pro definir un regula quam regula de interruption, marca le quadrato de controlo Interruption/Exception.</para>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+
+    <variablelist>
+      <varlistentry>
+        <term><indexterm class="singular">
+            <primary>Segmentation</primary> <secondary>Regulas</secondary> <tertiary>Regula de exception</tertiary>
+          </indexterm>Regula exception</term>
+
+        <listitem>
+          <para>specifica qual partes de texto NON deberea esser separate. Nonobstante le periodo, <emphasis>&quot;Mrs. Dalloway &quot;</emphasis> non deberea esser fisse in duo segmentos, assi unregula de exception deberea esser establite pro Mrs (e pro Mr, pro Dr, pro prof et cetera), sequite per un periodo. Pro definir un regula quam regula de exception, lassa le quadrato de controlo Interruption/Exception non marcate.</para>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+
+    <para>Le regulas de interruption prefixate deberea esser bastante pro le major parte del linguas europee e le japonese. in viste del flexibilitate, tu pote considerar de definir magis regulas de exception pro tu lingua fonte, pro suppler segmentos plus significative e coherente.</para>
+  </section>
+
+  <section id="rules.priority">
+    <title>Prioritate del Regula<indexterm class="singular">
+        <primary>Segmentation</primary> <secondary>Prioritate del regulas</secondary>
+      </indexterm></title>
+
+    <para>Omne le collectiones de regula de segmentation pro un modello de lingua que concorda son active e son applicate in le ordine de prioritate date, assi regulas pro lingua specific deberea esser superior in ordine de prioritate quam los base. Per exemplo, le regulas pro le francese canadian (FR-CA) debe esser superior que le regulas pro le francese (FR.*), e superior que los Base (.*) . Assi, quando rendente ab francese canadian le regulas pro francese canadian - si alicun - essera applicate antea, sequite per le Regulas pro le francese e in fin, per le regulas Base.</para>
+  </section>
+
+  <section id="creating.new.rule">
+    <title>Creation de un regula nove<indexterm class="singular">
+        <primary>Segmentation</primary> <secondary>Crear un regula nove</secondary> <seealso>Expressiones regular</seealso>
+      </indexterm></title>
+
+    <para>Major cambios al regulas de segmentation deberea esser generalmente evitate, in modo special post le completamento del prime minuta, sed cambios minor, ut le addition de un abbreviation admittite, pote esser avantagiose.</para>
+
+    <para>Pro modificar o expander un collection de regulas existente, clicca simplemente sur illo in le summitate del tabella. Le regulas pro ce collection apparera in le medietate basso del fenestra.</para>
+
+    <para>Pro crear un collection de regulas vacue pro un modello de lingua nove clicca <emphasis role="bold">Adde </emphasis>in le medietate superior del fenestra de dialogo. Un linea vacue apparera al fundo del tabella superior (tu pote deber rolar in basso pro vider lo). Cambia le nomine del collection de regula, le modello de lingua al lingua concernite e su codice (vide <xref linkend="appendix.languages"/> pro un lista del codices de lingua). Le syntaxe del schema del lingua conforma al syntaxe del expression regular. Si tu collection de regulas tracta un par lingua-pais, nos monera te a mover lo al summitate usante le button <emphasis role="bold">Move in alto</emphasis>.</para>
+
+    <para>Adde le modellos <emphasis role="bold">Ante</emphasis> e<emphasis role="bold"> Post</emphasis>. Pro verificar lor syntaxe e lor applicabilitate, il es consiliabile usar instrumentos que permitte te pro vider lor effecto directemente. Vide le capitulo re le <link linkend="chapter.regexp">Expressiones regular</link>. Un bon puncto de initio essera semper le regulas existente.</para>
+  </section>
+
+  <section id="few.simple.examples">
+    <title><indexterm class="singular">
+        <primary>Segmentation</primary> <secondary>Exemplos</secondary>
+      </indexterm>Alicun exemplos simplice</title>
+
+    <informaltable>
+      <tgroup cols="4">
+        <colspec align="left" colnum="1"/>
+
+        <colspec align="center" colnum="2"/>
+
+        <colspec align="center" colnum="3"/>
+
+        <colspec align="left" colnum="4"/>
+
+        <thead>
+          <row>
+            <entry>Intention</entry>
+
+            <entry align="center">Ante</entry>
+
+            <entry align="center">Postt</entry>
+
+            <entry>Nota</entry>
+          </row>
+        </thead>
+
+        <tbody>
+          <row>
+            <entry>Impone que le segmento initia post un periodo ('.') sequite per un spatio, tabulation ...</entry>
+
+            <entry align="center">\.</entry>
+
+            <entry align="center">\s</entry>
+
+            <entry>&quot;\.&quot; sta pro le character periodo. &quot;\s&quot; significa qualcunque character spatio blanc (spatio, tabulation, pagina nove et cetera.)</entry>
+          </row>
+
+          <row>
+            <entry>Non segmentar post Mr.</entry>
+
+            <entry align="center">mr</entry>
+
+            <entry align="center">\s</entry>
+
+            <entry>Isto es un regula de exception, ergo le quadrato de controlo del regula non debe esser marcate</entry>
+          </row>
+
+          <row>
+            <entry>Prefixa un segmento post &quot;。&quot; (periodo japonese)</entry>
+
+            <entry align="center">。</entry>
+
+            <entry align="center"/>
+
+            <entry>Note que <literal>after</literal> es vacue</entry>
+          </row>
+
+          <row>
+            <entry>Non segmentar post M. Mr. Mrs. e Ms.</entry>
+
+            <entry align="center">Mr??s??\.</entry>
+
+            <entry align="center">\s</entry>
+
+            <entry>Regula de exception - vide le uso del ? in expressiones regular</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </informaltable>
+  </section>
+</chapter>

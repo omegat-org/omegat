@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<appendix id="appendix.TokenizerPlugin.inOmegaT">
+  <title>Plugin Tokenizer&amp;<indexterm class="singular">
+      <primary>Plugins</primary>
+
+      <secondary>Tokenizer</secondary>
+    </indexterm></title>
+
+  <section>
+    <title>Introduction<indexterm class="singular">
+        <primary>Lucene</primary>
+
+        <see>Tokenizer</see>
+      </indexterm><indexterm class="singular">
+        <primary>Cercator de stirpe</primary> <see>Tokenizer</see>
+      </indexterm></title>
+
+    <para>Le cercatores del stirpe meliora le qualitate de concordantias con le recognition del parolas declinate in le datos del memoria primari e in le traduction. Illos meliora alsi la concordantia del glossario.</para>
+
+    <para>Un cercator del stirpe pro le anglese deberea identificar, exempli gratia, le linea de character &quot;cats&quot; (e possibilemente &quot;catlike&quot;, &quot;catty&quot; etc.) como basate sur le mesme radice &quot;cat&quot;, e &quot;stemmer&quot;, &quot;stemming&quot;, &quot;stemmed&quot; como basate sur &quot;stem&quot;. Un algorithmo de cerca del stirpe reduce le parolas &quot;fishing&quot;, &quot;fished&quot;, &quot;fish&quot;, e &quot;fisher&quot; al radice, &quot;fish&quot;. Isto es in modo special utile in caso de linguas que usa formas con prefixo e suffixo pro le parolas stirpe. Faciente se prestar un exemplo ex le sloveno, ci &quot;bon&quot; in omne possibile formas grammaticamente correcte:</para>
+
+    <itemizedlist>
+      <listitem>
+        <para>lep, lepa, lepo - singular, masculin, feminin, neutral</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>lepši, lepša, lepše . - comparative, nominative, masculin, feminin, neutral, resp. Forma plural del adjective</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>najlepših - superlative, plural, genitive pro M, F,  N</para>
+      </listitem>
+    </itemizedlist>
+  </section>
+
+  <section>
+    <title>Installation e uso del linea de commando</title>
+
+    <para>Un pacchetto tokenizer conformate a partir del projecto Lucene es distribuite quam un plug-in OmegaT al ligamine http://sourceforge.net/projects/omegat-plugins/files/. Discarga le plus recente  files (OmegaT-tokenizers_0.4_2-2.1.zip al tempore de iste scriptura).</para>
+
+    <para>Pro installar le tokenizer, crea un plica con le nomine &quot;plugins&quot; in le plica ubi OmegaT.jar is trovate e dispacchetta le files precedente intra celle plica.</para>
+
+    <para>Pro exequer OmegaT con le tokenizer tu necessita specificar qual tokenizer tu usara pro le lingua fonte e qual tokenizer tu usara pro le lingua de destination. Le syntaxe es como seque:</para>
+
+    <para><literal>java -jar OmegaT.jar --ITokenizer=[source language
+    tokenizer name] --ITokenizerTarget=[target language tokenizer
+    name]</literal></para>
+
+    <para>Le nomines del tokenizer es date in le file Readme.txt distribuite con le files tokenizer. Per exemplo, si tu desira usar le Lucene CJK tokenizer in le fonte e le Lucene French tokenizer in le destination, tu  commando habera un aspecto como isto:</para>
+
+    <para><literal>java -jar OmegaT.jar
+    --ITokenizer=org.omegat.plugins.tokenizer.LuceneCJKTokenizer
+    --ITokenizerTarget=org.omegat.plugins.tokenizer.LuceneFrenchTokenizer</literal></para>
+  </section>
+
+  <section>
+    <title>Specificas pro Mac OS X</title>
+
+    <para>Si tu desira usar le  tokenizers con le pacchetto OmegaT.app de Mac OS X, le installation de tokenizer describite supra se refere (Clicca con le dextero sur OmegaT.app pro trovar le ubication de OmegaT.jar), sed tu debera specificar le nomines del tokenizer in le  <filename>info.plist </filename>que contine le optiones de lanceamento de Java. Seque le instructiones precedente pro acceder le file <filename>info.plist</filename> e modifica los de maniera que Seque pro le exemplo que justo dava:</para>
+
+    <literallayout><code>
+&lt;key&gt;VMOptions&lt;/key&gt;
+&lt;string&gt;-Xmx1024M&lt;/string&gt;
+
+&lt;key&gt;Arguments&lt;/key&gt;
+&lt;array&gt;
+  &lt;string&gt;--ITokenizer=org.omegat.plugins.tokenizer.LuceneCJKTokenizer&lt;/string&gt;
+  &lt;string&gt;--ITokenizerTarget=org.omegat.plugins.tokenizer.LuceneFrenchTokenizer&lt;/string&gt;
+&lt;/array&gt;</code></literallayout>
+  </section>
+
+  <section>
+    <title>Chassa al defecto</title>
+
+    <para>Pro assecurar se que le tokenizers es usate, aperi un projecto e controla le bloco del information ab le consola. Con le exemplo precedente illo deberea haber un aspecto simile a isso:</para>
+
+    <literallayout><code>
+84528: Info: Source tokenizer: org.omegat.plugins.tokenizer.LuceneCJKTokenizer 
+84528: Info: Target tokenizer: org.omegat.plugins.tokenizer.LuceneFrenchTokenizer 
+</code></literallayout>
+
+    <para>Le numeros al leva es probabilemente differente sur tu systema assi assecura te que le nomines del tokenizer fonte e destination, specificate in le optiones de initio, corresponde a illos que monstra le bloco. Si le tokenizers non es debitemente lanceate, le bloco habera un aspecto simile a isto:</para>
+
+    <literallayout><code>
+12719: Info: Source tokenizer: org.omegat.core.matching.Tokenizer 
+12719: Info: Target tokenizer: org.omegat.core.matching.Tokenizer 
+</code></literallayout>
+
+    <para>Con le pacchetto OmegaT.app de Mac OS X, clicca duo vices sur le <literal>JavaApplicationStub</literal> ubicate in /OmegaT.app/Contents/MacOS/ (vide supra pro acceder illo) pro lancear OmegaT ab le consola e obtene accesso immediate al bloco.</para>
+  </section>
+</appendix>

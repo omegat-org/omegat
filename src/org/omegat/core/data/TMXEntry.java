@@ -111,6 +111,22 @@ public class TMXEntry {
     }
 
     /**
+     * Determines whether two TMXEntrys can be merged. The requirement is:
+     *  <ul><li>The translation must be identical.
+     *  <li>The notes must be one of the following:
+     *  <ul><li>both null
+     *  <li>one null, one non-null
+     *  <li>both non-null AND equal
+     *  </ul>
+     */
+    public static boolean canMerge(TMXEntry a, TMXEntry b) {
+        if (!StringUtil.equalsWithNulls(a.translation, b.translation)) {
+            return false;
+        }
+        return (a.note != null && b.note != null) ? a.note.equals(b.note) : true;
+    }
+
+    /**
      * This method constructs one TMXEntry from two different. We assume that both TMXEntry's are not equals
      * by {@link #equalsTranslation(TMXEntry)}.
      */

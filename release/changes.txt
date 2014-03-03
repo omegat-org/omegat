@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 3.1.0 
 ----------------------------------------------------------------------
-  13 Enhancements
+  14 Enhancements
    5 Bug fixes
    2 Localisation updates
 ----------------------------------------------------------------------
@@ -29,6 +29,9 @@
 
   - Extend project statistics with the number of files in which they occur
   https://sourceforge.net/p/omegat/feature-requests/910/
+
+  - Mark auto-populated segments 
+  https://sourceforge.net/p/omegat/feature-requests/963/
 
   Other enhancements:
   

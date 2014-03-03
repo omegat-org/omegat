@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 3.1.0 
 ----------------------------------------------------------------------
-  14 Enhancements
+  15 Enhancements
    5 Bug fixes
    2 Localisation updates
 ----------------------------------------------------------------------
@@ -51,6 +51,10 @@ include untranslated strings in the target files
 
   - In the bundle properties filter, an option allows to not
 include untranslated strings in the target files 
+
+  - A new script (svn_commit_source_files.groovy) allows
+uploading new or modified source files of a team project
+without having to use an sVN client
 
   Bug fixes:
 

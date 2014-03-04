@@ -8,6 +8,7 @@
                2011 Martin Fleurke
                2012 Didier Briel, Aaron Madlon-Kay
                2013 Aaron Madlon-Kay, Yu Tang
+               2014 Aaron Madlon-Kay
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -668,7 +669,15 @@ public class ProjectPropertiesDialog extends JDialog {
 
         m_glosBrowse.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                // Test now, because result may change after doBrowseDirectory().
+                boolean isDefaultGlossaryFile = projectProperties.isDefaultWriteableGlossaryFile();
                 doBrowseDirectoy(3, m_glosRootField);
+                // If file started as default, automatically use new default.
+                if (isDefaultGlossaryFile) {
+                    String newDefault = projectProperties.computeDefaultWriteableGlossaryFile();
+                    projectProperties.setWriteableGlossary(newDefault);
+                    m_writeableGlosField.setText(newDefault);
+                }
             }
         });
 

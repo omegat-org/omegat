@@ -6,6 +6,7 @@
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
                2012 Guido Leenders, Didier Briel
                2013 Aaron Madlon-Kay, Yu Tang
+               2014 Aaron Madlon-Kay
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -65,8 +66,7 @@ public class ProjectProperties {
         setSourceRoot(projectRoot + OConsts.DEFAULT_SOURCE + File.separator);
         setTargetRoot(projectRoot + OConsts.DEFAULT_TARGET + File.separator);
         setGlossaryRoot(projectRoot + OConsts.DEFAULT_GLOSSARY + File.separator);
-        setWriteableGlossary(projectRoot + OConsts.DEFAULT_GLOSSARY + File.separator +
-                projectDir.getName() + OConsts.DEFAULT_W_GLOSSARY);
+        setWriteableGlossary(projectRoot + OConsts.DEFAULT_GLOSSARY + File.separator + OConsts.DEFAULT_W_GLOSSARY);
         setTMRoot(projectRoot + OConsts.DEFAULT_TM + File.separator);
         setDictRoot(projectRoot + OConsts.DEFAULT_DICT + File.separator);
 
@@ -134,6 +134,22 @@ public class ProjectProperties {
     public void setWriteableGlossary(String writeableGlossaryFile) {
         if (!StringUtil.isEmpty(writeableGlossaryFile)) {
             this.writeableGlossaryFile = writeableGlossaryFile;
+        }
+    }
+
+    public boolean isDefaultWriteableGlossaryFile() {
+        return writeableGlossaryFile.equals(computeDefaultWriteableGlossaryFile());
+    }
+
+    public String computeDefaultWriteableGlossaryFile() {
+        // Default glossary file name depends on where glossaryDir is:
+        //  - Inside project folder: glossary.txt
+        //  - Outside project folder: ${projectName}-glossary.txt
+        String glossaryDir = getGlossaryRoot();
+        if (glossaryDir.startsWith(projectRoot)) {
+            return glossaryDir + OConsts.DEFAULT_W_GLOSSARY;
+        } else {
+            return glossaryDir + projectName + OConsts.DEFAULT_W_GLOSSARY_SUFF;
         }
     }
 

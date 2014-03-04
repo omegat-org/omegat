@@ -7,6 +7,7 @@
                2007 Zoltan Bartko
                2009 Didier Briel
                2013 Guido Leenders
+               2014 Aaron Madlon-Kay
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -82,8 +83,10 @@ public class OConsts {
     public static final String DEFAULT_TARGET = "target";
     /** Project subfolder for glossaries default name. */
     public static final String DEFAULT_GLOSSARY = "glossary";
-    /** Default name for the project writeable glossary file */
-    public static final String DEFAULT_W_GLOSSARY = "-glossary.txt";
+    /** Default name for the project writeable glossary file (inside project) */
+    public static final String DEFAULT_W_GLOSSARY = "glossary.txt";
+    /** Default suffix for project writeable glossary file (outside of project)  */
+    public static final String DEFAULT_W_GLOSSARY_SUFF = "-glossary.txt";
     /** Project subfolder for legacy translation memories default name. */
     public static final String DEFAULT_TM = "tm";
     /** Project subfolder for automatically applied translation memories within the tm folder. */

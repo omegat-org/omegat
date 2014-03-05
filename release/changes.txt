@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 3.1.0 
 ----------------------------------------------------------------------
-  15 Enhancements
+  16 Enhancements
    5 Bug fixes
    2 Localisation updates
 ----------------------------------------------------------------------
@@ -70,6 +70,8 @@ without having to use an sVN client
   - XLIFF filter: untranslatable text (translate="no") appeared in the Editor
 
   - When inserting a missing tag pair, any selected text was deleted
+
+  - On Mac, the quit and About menu behaviour was fixed
 
   Localisation updates:
 

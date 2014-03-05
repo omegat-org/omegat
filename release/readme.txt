@@ -313,7 +313,6 @@ but you don't see your name on the lists, feel free to contact us.)
 
 OmegaT uses the following libraries:
   HTMLParser 1.6 by Somik Raha, Derrick Oswald and others (LGPL License)
-  MRJ Adapter 1.0.8 by Steve Roy (LGPL License)
   VLDocking Framework 2.1.4 by VLSolutions (CeCILL License)
   Hunspell by László Németh and others (LGPL License)
   JNA by Todd Fast, Timothy Wall and others (LGPL License)

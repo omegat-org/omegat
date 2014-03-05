@@ -53,8 +53,6 @@ import javax.swing.JSeparator;
 import javax.swing.event.MenuEvent;
 import javax.swing.event.MenuListener;
 
-import net.roydesign.mac.MRJAdapter;
-
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
 import org.omegat.core.events.IApplicationEventListener;
@@ -64,6 +62,7 @@ import org.omegat.util.Log;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
 import org.omegat.util.StaticUtils;
+import org.omegat.util.gui.OSXIntegration;
 import org.omegat.util.gui.Styles;
 import org.openide.awt.Mnemonics;
 
@@ -479,12 +478,12 @@ public class MainWindowMenu implements ActionListener, MenuListener, IMainMenu {
     private void initMacSpecific() {
         try {
             // MacOSX-specific
-            MRJAdapter.addQuitApplicationListener(new ActionListener() {
+            OSXIntegration.setQuitHandler(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
                     mainWindowMenuHandler.projectExitMenuItemActionPerformed();
                 }
             });
-            MRJAdapter.addAboutListener(new ActionListener() {
+            OSXIntegration.setAboutHandler(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
                     mainWindowMenuHandler.helpAboutMenuItemActionPerformed();
                 }

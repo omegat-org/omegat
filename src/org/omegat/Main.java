@@ -67,6 +67,7 @@ import org.omegat.util.RuntimePreferences;
 import org.omegat.util.StaticUtils;
 import org.omegat.util.StringUtil;
 import org.omegat.util.TMXWriter;
+import org.omegat.util.gui.OSXIntegration;
 
 import com.vlsolutions.swing.docking.DockingDesktop;
 
@@ -214,6 +215,9 @@ public class Main {
         // MacOSX-specific - they must be setted BEFORE any GUI calls
         System.setProperty("apple.laf.useScreenMenuBar", "true");
         System.setProperty("com.apple.mrj.application.apple.menu.about.name", "OmegaT");
+        if (StaticUtils.onMacOSX()) {
+            OSXIntegration.init();
+        }
 
         Log.log("Docking Framework version: " + DockingDesktop.getDockingFrameworkVersion());
         Log.log("");

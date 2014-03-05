@@ -407,7 +407,9 @@ public class MainWindowMenu implements ActionListener, MenuListener, IMainMenu {
         setActionCommands();
         MainWindowMenuShortcuts.setShortcuts(mainMenu);
 
-        initMacSpecific();
+        if (StaticUtils.onMacOSX()) {
+            initMacSpecific();
+        }
 
         CoreEvents.registerApplicationEventListener(new IApplicationEventListener() {
             public void onApplicationStartup() {

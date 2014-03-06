@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 3.1.0 
 ----------------------------------------------------------------------
-  16 Enhancements
+  17 Enhancements
    5 Bug fixes
    2 Localisation updates
 ----------------------------------------------------------------------
@@ -55,6 +55,19 @@ include untranslated strings in the target files
   - A new script (svn_commit_source_files.groovy) allows
 uploading new or modified source files of a team project
 without having to use an sVN client
+
+- The default name of the writeable glossary was changed,
+to make it more useful in various circumstances. If the glossary folder
+is within the project, the glossary file will now be named glossary.txt
+instead of <project-name>-glossary.txt. That way, in case of team projects
+everyone downloading the project will have the same writeable glossary, regardless
+of the local name of the folder. If the glossary folder is outside the project,
+the default name will <project-name>-glossary.txt as before, so that all glossary 
+names will be different when one uses a central glossary repository. There is a further 
+enhancement: when changing the location of the glossary folder, it was previously 
+necessary to change by hand the location of the writeable glossary, otherwise an
+error message occurred. Now, when the location of the glossary folder is changed, the
+glossary path name (if it was a default glossary name) is changed automatically.
 
   Bug fixes:
 

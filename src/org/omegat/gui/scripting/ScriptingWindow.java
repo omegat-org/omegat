@@ -255,7 +255,7 @@ public class ScriptingWindow extends JFrame {
     }
 
     private void initWindowLayout() {
-        setBounds(80, 80, 910, 550);
+        setBounds(80, 80, 1100, 550);
 
         getContentPane().setLayout(new BorderLayout(0, 0));
 
@@ -315,6 +315,9 @@ public class ScriptingWindow extends JFrame {
         JPopupMenu editorPopUp = new JPopupMenu();
         JMenuItem menuItem = new JMenuItem(OStrings.getString("SCW_SAVE_SCRIPT"));
         menuItem.setAccelerator(KeyStroke.getKeyStroke("ctrl S"));
+
+// ctrl+S doesn't work on OSX and is not documented in the manual
+
         menuItem.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent evt) {
@@ -346,7 +349,7 @@ public class ScriptingWindow extends JFrame {
 
         JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, scrollPaneList, splitPane1);
         splitPane.setOneTouchExpandable(true);
-        splitPane.setDividerLocation(150);
+        splitPane.setDividerLocation(250);
         
         Dimension minimumSize = new Dimension(100, 50);
         scrollPaneList.setMinimumSize(minimumSize);
@@ -356,6 +359,9 @@ public class ScriptingWindow extends JFrame {
 
         // Refresh the file list with F5        
         getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("F5"), REFRESH_SCRIPT_DIR);
+
+// "F5" is not documented in the manual
+        
         getRootPane().getActionMap().put(REFRESH_SCRIPT_DIR, new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -365,13 +371,26 @@ public class ScriptingWindow extends JFrame {
 
         JPanel panelSouth = new JPanel();
         FlowLayout fl_panelSouth = (FlowLayout) panelSouth.getLayout();
-        fl_panelSouth.setAlignment(FlowLayout.RIGHT);
+        fl_panelSouth.setAlignment(FlowLayout.LEFT);
         getContentPane().add(panelSouth, BorderLayout.SOUTH);
+
+      m_btnRunScript = new JButton();
+        Mnemonics.setLocalizedText(m_btnRunScript, OStrings.getString("SCW_RUN_SCRIPT"));
+        m_btnRunScript.setAlignmentX(Component.LEFT_ALIGNMENT);
+        m_btnRunScript.setHorizontalAlignment(SwingConstants.LEFT);
+        m_btnRunScript.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent a) {
+                runScript();
+            }
+        });
+        panelSouth.add(m_btnRunScript);
+
         
         for (int i = 0; i < NUMBERS_OF_QUICK_SCRIPTS; i++) {
             final int index = i;
             final int scriptKey = scriptKey(index);
-            m_quickScriptButtons[i] = new JButton(" " + scriptKey + " ");
+            m_quickScriptButtons[i] = new JButton("" + scriptKey + "");
 
             String scriptName = Preferences.getPreferenceDefault("scripts_quick_" + scriptKey, null);
             
@@ -435,20 +454,8 @@ public class ScriptingWindow extends JFrame {
             
             panelSouth.add(m_quickScriptButtons[i]);
         }
-        panelSouth.add(new JSeparator());
         
-        m_btnRunScript = new JButton();
-        Mnemonics.setLocalizedText(m_btnRunScript, OStrings.getString("SCW_RUN_SCRIPT"));
-        m_btnRunScript.setAlignmentX(Component.RIGHT_ALIGNMENT);
-        m_btnRunScript.setHorizontalAlignment(SwingConstants.LEFT);
-        m_btnRunScript.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent a) {
-                runScript();
-            }
-        });
-        panelSouth.add(m_btnRunScript);
-
+  
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
     }
 

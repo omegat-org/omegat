@@ -50,6 +50,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import javax.script.ScriptContext;
+import javax.script.ScriptEngine;
+import javax.script.ScriptEngineFactory;
+import javax.script.ScriptEngineManager;
+import javax.script.SimpleBindings;
 import javax.swing.AbstractAction;
 import javax.swing.Action;
 import javax.swing.JButton;
@@ -78,8 +83,6 @@ import javax.swing.text.BadLocationException;
 import javax.swing.text.Document;
 import javax.swing.text.Highlighter.HighlightPainter;
 
-import org.apache.bsf.BSFException;
-import org.apache.bsf.BSFManager;
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
 import org.omegat.core.data.IProject;
@@ -138,15 +141,27 @@ public class ScriptingWindow extends JFrame {
         
         addScriptCommandToOmegaT();
         addRunShortcutToOmegaT();
-        
-        m_availableEngines = getAvailableEngines();
 
         initWindowLayout();
 
         StringBuilder sb = new StringBuilder(OStrings.getString("SCW_LIST_ENGINES") + "\n");
-        for (String engine : m_availableEngines.keySet()) {
+        for (ScriptEngineFactory engine : manager.getEngineFactories()) {
             sb.append(" - ");
-            sb.append(engine);
+            sb.append(engine.getEngineName());
+            sb.append(" ");
+            sb.append(engine.getLanguageName());
+            sb.append(" v.");
+            sb.append(engine.getLanguageVersion());
+            sb.append(" (extensions: ");
+            boolean hasMore = false;
+            for (String ext : engine.getExtensions()) {
+              	if (hasMore) {
+            		sb.append(", ");
+            	}
+            	sb.append(ext);
+            	hasMore = true;
+            }
+            sb.append(")");
             sb.append("\n");
         }
         
@@ -467,6 +482,7 @@ public class ScriptingWindow extends JFrame {
             return;
         }
 
+
         m_txtResult.setText("");
         logResult(StaticUtils.format(OStrings.getString("SCW_RUNNING_SCRIPT"), 
                 m_currentScriptFile.getAbsolutePath()));
@@ -474,33 +490,43 @@ public class ScriptingWindow extends JFrame {
         executeScriptFile(m_currentScriptFile, false);
 
     }
+    
+    private String getFileExtension(ScriptFile file)
+    {
+    	String extension = "";
+    	
+    	if (file == null)
+    	{
+    		return extension;
+    	}
+
+    	String fileName = file.getName();
+    	int i = fileName.lastIndexOf('.');
+
+    	if (i >= 0 && i != -1) {
+    	    extension = fileName.substring(i+1);
+    	}
+    	
+    	return extension;
+    }
 
     private void executeScriptFile(ScriptFile scriptFile, boolean forceFromFile) {
-        BSFManager manager = new BSFManager();
-        manager.setClassLoader(this.getClass().getClassLoader());
-        
         ScriptLogger scriptLogger = new ScriptLogger(m_txtResult);
-
-        String language = DEFAULT_SCRIPT;
-        try {
-
-            language = BSFManager.getLangFromFilename(scriptFile.getName());
-            logResult(StaticUtils.format(OStrings.getString("SCW_SELECTED_LANGUAGE"), language));
-        } catch (BSFException e1) {
-            // append(OStrings.getString("SCW_RUN_SCRIPT") + " " + e1.getMessage());
-        }
+        ScriptEngine scriptEngine = manager.getEngineByExtension(getFileExtension(scriptFile));
          
-        try {
-            manager.declareBean(VAR_PROJECT, Core.getProject(), IProject.class);
-            manager.declareBean(VAR_EDITOR, Core.getEditor(), IEditor.class);
-            manager.declareBean(VAR_GLOSSARY, Core.getGlossary(), GlossaryTextArea.class);
-            manager.declareBean(VAR_MAINWINDOW, Core.getMainWindow(), IMainWindow.class);
-            manager.declareBean(VAR_CONSOLE, scriptLogger, ScriptLogger.class);
-        } catch (BSFException e1) {
-            logResult(OStrings.getString("SCW_SCRIPT_ERROR"));
-            logResult(e1.getMessage());
-        }
-
+         if (scriptEngine == null)
+         {
+        	 scriptEngine = manager.getEngineByName(DEFAULT_SCRIPT);
+         }
+         
+        logResult(StaticUtils.format(OStrings.getString("SCW_SELECTED_LANGUAGE"), scriptEngine.getFactory().getEngineName()));
+        
+    	SimpleBindings bindings = new SimpleBindings();
+    	bindings.put(VAR_PROJECT, Core.getProject());
+    	bindings.put(VAR_EDITOR, Core.getEditor());
+    	bindings.put(VAR_GLOSSARY, Core.getGlossary());
+    	bindings.put(VAR_MAINWINDOW, Core.getMainWindow());
+    	bindings.put(VAR_CONSOLE, scriptLogger);
 
         // evaluate JavaScript code from String
         try {
@@ -517,8 +543,13 @@ public class ScriptingWindow extends JFrame {
             if (! scriptString.endsWith("\n")) {
                 scriptString += "\n";
             }
-            manager.exec(language.toLowerCase(), scriptFile.getName(), -1, -1, scriptString);
-            manager.terminate();
+            
+            Object eval = scriptEngine.eval(scriptString, bindings);
+            if (eval != null)
+            {
+                logResult(OStrings.getString("SCW_SCRIPT_RESULT"));
+                logResult(eval.toString());
+            }
         } catch (Throwable e) {
             logResult(OStrings.getString("SCW_SCRIPT_ERROR"));
             logResult(e.getMessage());
@@ -592,21 +623,6 @@ public class ScriptingWindow extends JFrame {
         return Collections.EMPTY_LIST;
     }
 
-    private Map<String, String> getAvailableEngines() {
-
-        Map<String, String> availableEngines = new HashMap<String, String>();
-        for (Entry<String, String> e : engines.entrySet()) {
-            try {
-                Class.forName(e.getValue());
-                availableEngines.put(e.getKey(), e.getValue());
-            } catch (Throwable ex) {
-                /* empty */
-            }
-        }
-
-        return availableEngines;
-    }
-
     private void onListSelectionChanged() {
         if (m_scriptList.isSelectionEmpty()) {
             return;
@@ -621,35 +637,7 @@ public class ScriptingWindow extends JFrame {
         }
     }
 
-    // Taken from languages.properties in the bsf.jar file.
-    private static final HashMap<String, String> engines = new HashMap<String, String>();
-    static {
-        engines.put("JavaScript", "org.apache.bsf.engines.javascript.JavaScriptEngine");
-        engines.put("Jacl", "org.apache.bsf.engines.jacl.JaclEngine");
-        engines.put("NetRexx", "org.apache.bsf.engines.netrexx.NetRexxEngine");
-        engines.put("Java", "org.apache.bsf.engines.java.JavaEngine");
-        engines.put("JavaClass", "org.apache.bsf.engines.javaclass.JavaClassEngine");
-        engines.put("BML", "org.apache.bml.ext.BMLEngine");
-        engines.put("VBScript", "org.apache.bsf.engines.activescript.ActiveScriptEngine");
-        engines.put("JScript", "org.apache.bsf.engines.activescript.ActiveScriptEngine");
-        engines.put("PerlScript", "org.apache.bsf.engines.activescript.ActiveScriptEngine");
-        engines.put("Perl", "org.apache.bsf.engines.perl.PerlEngine");
-        engines.put("JPython", "org.apache.bsf.engines.jpython.JPythonEngine");
-        engines.put("Jython", "org.apache.bsf.engines.jython.JythonEngine");
-        engines.put("LotusScript", "org.apache.bsf.engines.lotusscript.LsEngine");
-        engines.put("XSLT", "org.apache.bsf.engines.xslt.XSLTEngine");
-        engines.put("Pnuts", "pnuts.ext.PnutsBSFEngine");
-        engines.put("BeanBasic", "org.apache.bsf.engines.beanbasic.BeanBasicEngine");
-        engines.put("BeanShell", "bsh.util.BeanShellBSFEngine");
-        engines.put("Ruby", "org.jruby.javasupport.bsf.JRubyEngine");
-        engines.put("JudoScript", "com.judoscript.BSFJudoEngine");
-        engines.put("Groovy", "org.codehaus.groovy.bsf.GroovyEngine");
-        engines.put("ObjectScript", "oscript.bsf.ObjectScriptEngine");
-        engines.put("Prolog", "ubc.cs.JLog.Extras.BSF.JLogBSFEngine");
-        engines.put("Rexx", "org.rexxla.bsf.engines.rexx.RexxEngine");
-    }
-
-    private static final String DEFAULT_SCRIPT = "JavaScript";
+    private static final String DEFAULT_SCRIPT = "javascript";
     private static final String VAR_CONSOLE = "console";
     private static final String VAR_MAINWINDOW = "mainWindow";
     private static final String VAR_GLOSSARY = "glossary";
@@ -665,10 +653,11 @@ public class ScriptingWindow extends JFrame {
     private JEditorPane m_txtResult;
     private JTextArea m_txtScriptEditor;
     private JButton m_btnRunScript;
+    
+	private ScriptEngineManager manager = new ScriptEngineManager(getClass().getClassLoader());
 
     private File m_scriptsDirectory;
     private ScriptFile m_currentScriptFile;
-    private Map<String, String> m_availableEngines;
     private JTextField m_txtScriptsDir;
     private JFileChooser m_fileChooser = new JFileChooser();
 

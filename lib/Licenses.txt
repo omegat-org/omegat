@@ -85,13 +85,7 @@ lucene-gosen sources are available via SVN from http://code.google.com/p/lucene-
 
 pdfbox-app-1.8.1.jar is distributed under the Apache License 2.0
 
-bsf-2.4.0.jar is distributed under the Apache License 2.0
-(required for scripting)
-
 groovy-all-1.8.9.jar is distributed under the Apache License 2.0
-(required for scripting)
-
-js-rhino-1.7R4.jar is distributed under the Mozilla Public License 2.0
 (required for scripting)
 
 SuperTMXMerge-for_OmegaT.jar is distributed under the GNU Lesser General  

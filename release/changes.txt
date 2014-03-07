@@ -69,6 +69,14 @@ necessary to change by hand the location of the writeable glossary, otherwise an
 error message occurred. Now, when the location of the glossary folder is changed, the
 glossary path name (if it was a default glossary name) is changed automatically.
 
+  - The scripting interface now the Java 6 native implementation 
+of JSR-223 script interface instead of the Bean Scripting Framework. 
+The list of available script engines should properly reflect the 
+engines installed on OmegaT classpath. Since Java6 includes by 
+default a javascript engine, we don't need Rhino anymore.
+The value returned by the executed script is displayed in the script 
+console.
+
   Bug fixes:
 
   - Monolingual .po: msgstr in exported files are empty 

@@ -98,26 +98,6 @@ public class MergeTest extends TestCase {
     }
 
     @Test
-    public void testAutoMerge() throws Exception {
-        PrepareTMXEntry e1 = new PrepareTMXEntry();
-        e1.translation = "t1";
-        e1.changeDate = 10000;
-        PrepareTMXEntry e2 = new PrepareTMXEntry();
-        e2.translation = "t2";
-        e2.changeDate = 20000;
-        TMXEntry r;
-
-        r = TMXEntry.autoMerge(new TMXEntry(e1, true, null), new TMXEntry(e2, true, null));
-        assertEquals("t2", r.translation);
-        assertNull(r.note);
-
-        e1.note = "123";
-        r = TMXEntry.autoMerge(new TMXEntry(e1, true, null), new TMXEntry(e2, true, null));
-        assertEquals("t2", r.translation);
-        assertEquals("123", r.note);
-    }
-
-    @Test
     public void testProjectTMXMerge() throws Exception {
         ProjectTMX baseTMX, projectTMX, headTMX;
 

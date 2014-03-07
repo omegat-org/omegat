@@ -81,21 +81,50 @@ public class TMXEntry {
 
     @Override
     public boolean equals(Object obj) {
-        throw new RuntimeException("equalsTranslation() should be executed instead");
-    }
-
-    /**
-     * We assume that both TMXEntry have the same key, with the same different/alternative.
-     */
-    public boolean equalsTranslation(TMXEntry other) {
-        if (other == null) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
             return false;
         }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        TMXEntry other = (TMXEntry) obj;
         /*
          * Dates can't be just checked for equals since date stored in memory with 1 milliseconds accuracy,
          * but written to file with 1 second accuracy.
          */
         if (changeDate / 1000 != other.changeDate / 1000) {
+            return false;
+        }
+        if (creationDate / 1000 != other.creationDate / 1000) {
+            return false;
+        }
+        if (!equalsTranslation(other)) {
+            return false;
+        }
+        if (!StringUtil.equalsWithNulls(changer, other.changer)) {
+            return false;
+        }
+        if (!StringUtil.equalsWithNulls(creator, other.creator)) {
+            return false;
+        }
+        if (defaultTranslation != other.defaultTranslation) {
+            return false;
+        }
+        if (!StringUtil.equalsWithNulls(source, other.source)) {
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     * Two TMXEntrys are considered interchangeable if this method returns true,
+     * even if equals() != true.
+     */
+    public boolean equalsTranslation(TMXEntry other) {
+        if (other == null) {
             return false;
         }
         if (!StringUtil.equalsWithNulls(translation, other.translation)) {
@@ -109,34 +138,13 @@ public class TMXEntry {
         }
         return true;
     }
-
-    /**
-     * Determines whether two TMXEntrys can be merged. The requirement is:
-     *  <ul><li>The translation must be identical.
-     *  <li>The notes must be one of the following:
-     *  <ul><li>both null
-     *  <li>one null, one non-null
-     *  <li>both non-null AND equal
-     *  </ul>
-     */
-    public static boolean canMerge(TMXEntry a, TMXEntry b) {
-        if (!StringUtil.equalsWithNulls(a.translation, b.translation)) {
-            return false;
-        }
-        return (a.note != null && b.note != null) ? a.note.equals(b.note) : true;
-    }
-
-    /**
-     * This method constructs one TMXEntry from two different. We assume that both TMXEntry's are not equals
-     * by {@link #equalsTranslation(TMXEntry)}.
-     */
-    public static TMXEntry autoMerge(TMXEntry a, TMXEntry b) {
-        TMXEntry newer = a.changeDate / 1000 > b.changeDate / 1000 ? a : b;
-        TMXEntry older = newer == a ? b : a;
-
-        PrepareTMXEntry prep = new PrepareTMXEntry(newer);
-        prep.note = StringUtil.nvl(newer.note, older.note);
-
-        return new TMXEntry(prep, newer.defaultTranslation, newer.linked);
+    
+    public int compareTo(TMXEntry other) {
+        /*
+         * Dates can't be just checked for equals since date stored in memory with 1 milliseconds accuracy,
+         * but written to file with 1 second accuracy.
+         */
+        return changeDate / 1000 > other.changeDate / 1000 ? 1 :
+                changeDate / 1000 < other.changeDate / 1000 ? -1 : 0;
     }
 }

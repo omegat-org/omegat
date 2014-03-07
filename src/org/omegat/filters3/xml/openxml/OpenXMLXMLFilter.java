@@ -42,10 +42,12 @@ public class OpenXMLXMLFilter extends XMLFilter {
         super(new OpenXMLDialect());
     }
 
+    @Override
     public Instance[] getDefaultInstances() {
         return new Instance[] { new Instance("*.xml", OConsts.UTF8, OConsts.UTF8), };
     }
 
+    @Override
     public String getFileFormatName() {
         throw new RuntimeException("Not implemented!");
     }

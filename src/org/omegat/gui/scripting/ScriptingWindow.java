@@ -255,7 +255,7 @@ public class ScriptingWindow extends JFrame {
     }
 
     private void initWindowLayout() {
-        setBounds(80, 80, 1100, 550);
+        setBounds(50, 80, 1150, 650);
 
         getContentPane().setLayout(new BorderLayout(0, 0));
 
@@ -316,8 +316,6 @@ public class ScriptingWindow extends JFrame {
         JMenuItem menuItem = new JMenuItem(OStrings.getString("SCW_SAVE_SCRIPT"));
         menuItem.setAccelerator(KeyStroke.getKeyStroke("ctrl S"));
 
-// ctrl+S doesn't work on OSX and is not documented in the manual
-
         menuItem.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent evt) {
@@ -341,7 +339,7 @@ public class ScriptingWindow extends JFrame {
 
         JSplitPane splitPane1 = new JSplitPane(JSplitPane.VERTICAL_SPLIT, scrollPaneEditor, scrollPaneResults);
         splitPane1.setOneTouchExpandable(true);
-        splitPane1.setDividerLocation(200);
+        splitPane1.setDividerLocation(430);
         Dimension minimumSize1 = new Dimension(100, 50);
         scrollPaneEditor.setMinimumSize(minimumSize1);
         scrollPaneResults.setMinimumSize(minimumSize1);
@@ -360,8 +358,6 @@ public class ScriptingWindow extends JFrame {
         // Refresh the file list with F5        
         getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("F5"), REFRESH_SCRIPT_DIR);
 
-// "F5" is not documented in the manual
-        
         getRootPane().getActionMap().put(REFRESH_SCRIPT_DIR, new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {

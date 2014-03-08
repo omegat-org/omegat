@@ -152,7 +152,7 @@ public class ScriptingWindow extends JFrame {
             sb.append(engine.getLanguageName());
             sb.append(" v.");
             sb.append(engine.getLanguageVersion());
-            sb.append(" (extensions: ");
+            sb.append(" (").append(OStrings.getString("SCW_EXTENSIONS")).append(" ");
             boolean hasMore = false;
             for (String ext : engine.getExtensions()) {
               	if (hasMore) {

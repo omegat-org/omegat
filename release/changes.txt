@@ -77,6 +77,8 @@ default a javascript engine, we don't need Rhino anymore.
 The value returned by the executed script is displayed in the script 
 console.
 
+  - Upgraded Groovy version from 1.8.9 to 2.2.2
+
   Bug fixes:
 
   - Monolingual .po: msgstr in exported files are empty 

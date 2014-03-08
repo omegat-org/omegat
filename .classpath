@@ -37,7 +37,7 @@
 	<classpathentry kind="lib" path="lib/LanguageTool/morfologik-stemming-1.5.4.jar"/>
 	<classpathentry kind="lib" path="lib/LanguageTool/segment-1.4.1.jar"/>
 	<classpathentry kind="lib" path="lib/LanguageTool/lucene-gosen-2.0.2-ipadic.jar"/>
-	<classpathentry kind="lib" path="lib/groovy-all-1.8.9.jar"/>
+	<classpathentry kind="lib" path="lib/groovy-all-2.2.2.jar"/>
 	<classpathentry kind="lib" path="lib/KoreanAnalyzer-3x-120223.jar"/>
 	<classpathentry kind="lib" path="lib/SuperTMXMerge-for_OmegaT.jar"/>
 	<classpathentry kind="lib" path="lib/swing-layout-1.0.4.jar"/>

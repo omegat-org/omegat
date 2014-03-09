@@ -10,9 +10,9 @@
  * copy, move, merge or any other svn commands are not available.
  *
  * @author  Yu Tang
- * @date    2014-03-06
+ * @date    2014-03-09
  * @since   2014-03-03
- * @version 0.3
+ * @version 0.4
  */
 
 import static javax.swing.JOptionPane.*
@@ -29,11 +29,15 @@ import org.tmatesoft.svn.core.wc.ISVNStatusHandler
 import static org.tmatesoft.svn.core.wc.SVNRevision.WORKING
 import static org.tmatesoft.svn.core.wc.SVNStatusType.*
 
+// constants (for v3.1.0 or later)
+final def RET_VAL_COMMIT_NOT_EXECUTED = "Your commit is not executed."
+final def RET_VAL_COMMIT_EXECUTED     = "Your commit is executed. Wait a little while and see detailed information."
+
 def repo = project.getRepository()
 
 // abort when valid svn repository is not available
 if (!availSvnRepo(repo)) {
-    return
+    return RET_VAL_COMMIT_NOT_EXECUTED
 }
 
 def sourceDir = new File(project.projectProperties.sourceRoot)
@@ -51,32 +55,38 @@ def packet = getPacket(commitClient, sourceDir)
 if (!items2BAdded && !items2BDeleted && !packet.commitItems) {
     packet.dispose()
     console.println "No commit items found."
-    return
+    return RET_VAL_COMMIT_NOT_EXECUTED
 }
 
 // ask user for commit
-int ret = askUserForCommit(items2BAdded, items2BDeleted, packet.commitItems, sourceDir)
+def commitItemList = getCommitItemListString(items2BAdded, items2BDeleted, packet.commitItems, sourceDir)
+int ret = askUserForCommit(commitItemList)
 packet.dispose()
 if (ret == CANCEL_OPTION) {
     console.println "Commit operation has been canceled by user."
-    return
+    return RET_VAL_COMMIT_NOT_EXECUTED
 }
 
-// add items
+// svn add items
 items2BAdded.each { status ->
     WCClient.doAdd(status.file, false, false, false, EMPTY, false, false)
 }
 
-// delete items
+// svn delete items
 items2BDeleted.each { status ->
     WCClient.doDelete(status.file, false, false)
 }
 
 // commit
-doCommit(man, sourceDir, repo)
+Log.logInfoRB "SVN_START", "upload"
+mainWindow.showStatusMessageRB "TEAM_SYNCHRONIZE"
+console.println "Now uploading ..."
+Thread.start {
+    doCommit(man, sourceDir, repo, commitItemList)
+}
 
 // exit
-return
+return RET_VAL_COMMIT_EXECUTED
 
 // ===================================================================
 
@@ -125,19 +135,25 @@ def getPacket(commitClient, sourceDir) {
 }
 
 // ask user for commit
-def askUserForCommit(items2BAdded, items2BDeleted, commitItems, sourceRoot) {
+def askUserForCommit(commitItemListString) {
     def title = "Commit source items"
-    def msg = "Your commit includes these changes:\n"
+    def msg = "Your commit includes these changes:\n" + commitItemListString
+    mainWindow.showConfirmDialog(msg, title, OK_CANCEL_OPTION, PLAIN_MESSAGE)
+}
+
+// commit item list string
+def getCommitItemListString(items2BAdded, items2BDeleted, commitItems, sourceRoot) {
+    def ret = ""
     def op = "Add"
     items2BAdded.each {status ->
         def kind = status.file.isFile() ? FILE : DIR
         def path = computeRelativePath(sourceRoot, status.file)
-        msg += "\n$op ($kind) $path"
+        ret += "\n$op ($kind) $path"
     }
     op = "Del"
     items2BDeleted.each {status ->
         def path = computeRelativePath(sourceRoot, status.file)
-        msg += "\n$op ($status.kind) $path"
+        ret += "\n$op ($status.kind) $path"
     }
     commitItems.each { item ->
         op = "Unk"
@@ -146,41 +162,36 @@ def askUserForCommit(items2BAdded, items2BDeleted, commitItems, sourceRoot) {
         } else if (item.isContentsModified()) {
             op = "Mod"
         } else if (item.isCopied()) {
-            op = "Copy"
+            op = "Copy"  // just in case
         } else if (item.isDeleted()) {
             op = "Del"
         }
         def path = computeRelativePath(sourceRoot, item.file)
-        msg += "\n$op ($item.kind) $path"
+        ret += "\n$op ($item.kind) $path"
     }
-    mainWindow.showConfirmDialog(msg, title, OK_CANCEL_OPTION, PLAIN_MESSAGE)
+    ret
 }
 
 // commit
-def doCommit(manager, sourceDir, repository) {
+def doCommit(manager, sourceDir, repository, commitItemList) {
     def author = getPreferenceDefault(TEAM_AUTHOR, System.getProperty("user.name"))
     def commitMessage = "Changed source item(s) by $author"
-    Log.logInfoRB "SVN_START", "upload"
-    console.println "Now uploading ..."  //@@@TODO move to another thread
 
     try {
         def client = manager.commitClient
         def packet = getPacket(client, sourceDir)
         def info = client.doCommit(packet, false, commitMessage)
         if (info.errorMessage) {
-            Log.logErrorRB "SVN_ERROR", "upload", info.errorMessage
-            console.println "Commit failed: ${info.errorMessage}"
-            manager.WCClient.doCleanup sourceDir, true
-        } else {
-            console.println "Commit completed."
-            packet.commitItems.each { item ->
-                Log.logDebug repository.LOGGER, "SVN committed file {0} into new revision {1}", item.file, info.newRevision
-            }
-            Log.logInfoRB "SVN_FINISH", "upload"
+            throw new IOException(info.errorMessage)
         }
+        console.println "Commit completed." + commitItemList
+        Log.logDebug SVNRemoteRepository.LOGGER, "SVN committed followed files into new revision {0}" + commitItemList, info.newRevision
+        Log.logInfoRB "SVN_FINISH", "upload"
+        mainWindow.showStatusMessageRB null
     } catch(ex) {
         Log.logErrorRB "SVN_ERROR", "upload", ex.message
         console.println "Commit failed: ${ex.message}"
+        mainWindow.showStatusMessageRB "SVN_ERROR", "upload", ex.message
     } finally {
         packet.dispose()
         manager.WCClient.doCleanup sourceDir, true

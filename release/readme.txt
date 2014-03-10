@@ -340,6 +340,7 @@ OmegaT uses the following libraries:
   pdfbox-app-1.8.1.jar (Apache License 2.0)
   KoreanAnalyzer-3x-120223.jar (Apache License 2.0)
   SuperTMXMerge-for_OmegaT.jar (LGPL license)
+  groovy-all-2.2.2.jar (Apache Licence 2.0)
 
 ==============================================================================
  5.  Is OmegaT bugging you? Do you need help?

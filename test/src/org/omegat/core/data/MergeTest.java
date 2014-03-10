@@ -32,11 +32,7 @@ import java.util.TimeZone;
 import junit.framework.TestCase;
 
 import org.junit.Test;
-import org.madlonkay.supertmxmerge.StmProperties;
-import org.madlonkay.supertmxmerge.SuperTmxMerge;
-import org.omegat.core.Core;
 import org.omegat.core.data.TMXEntry.ExternalLinked;
-import org.omegat.util.OStrings;
 
 /**
  * Tests for merge in team project.
@@ -64,15 +60,15 @@ public class MergeTest extends TestCase {
         e2.changeDate = 123456999;
 
         // test equals
-        assertTrue(new TMXEntry(e1, true, null).equalsTranslation(new TMXEntry(e2, true, null)));
+        assertTrue(new TMXEntry(e1, true, null).equals(new TMXEntry(e2, true, null)));
 
         e2.changeDate = 123456000;
         // test truncated time
-        assertTrue(new TMXEntry(e1, true, null).equalsTranslation(new TMXEntry(e2, true, null)));
+        assertTrue(new TMXEntry(e1, true, null).equals(new TMXEntry(e2, true, null)));
 
         e2.changeDate = 123457000;
         // test other time
-        assertFalse(new TMXEntry(e1, true, null).equalsTranslation(new TMXEntry(e2, true, null)));
+        assertFalse(new TMXEntry(e1, true, null).equals(new TMXEntry(e2, true, null)));
         e2.changeDate = 123456999;
 
         e2.translation = "t";
@@ -95,62 +91,5 @@ public class MergeTest extends TestCase {
                 ExternalLinked.x100PC)));
         assertFalse(new TMXEntry(e1, true, ExternalLinked.xICE)
                 .equalsTranslation(new TMXEntry(e2, true, null)));
-    }
-
-    @Test
-    public void testProjectTMXMerge() throws Exception {
-        ProjectTMX baseTMX, projectTMX, headTMX;
-
-        baseTMX = createEmptyTMX();
-        projectTMX = createTMX(10000, "t1");
-        headTMX = createEmptyTMX();
-        checkTMXMerge(baseTMX, projectTMX, headTMX, "t1");
-
-        baseTMX = createEmptyTMX();
-        projectTMX = createEmptyTMX();
-        headTMX = createTMX(10000, "t2");
-        checkTMXMerge(baseTMX, projectTMX, headTMX, "t2");
-
-        baseTMX = createEmptyTMX();
-        projectTMX = createTMX(10000, "t11");
-        headTMX = createTMX(20000, "t21");
-        checkTMXMerge(baseTMX, projectTMX, headTMX, "t21");
-
-        baseTMX = createEmptyTMX();
-        projectTMX = createTMX(30000, "t12");
-        headTMX = createTMX(20000, "t22");
-        checkTMXMerge(baseTMX, projectTMX, headTMX, "t12");
-
-        baseTMX = createTMX(30000, "t12");
-        projectTMX = createEmptyTMX();
-        headTMX = createTMX(20000, "t22");
-        checkTMXMerge(baseTMX, projectTMX, headTMX, null);
-    }
-
-    ProjectTMX createEmptyTMX() {
-        return new ProjectTMX();
-    }
-
-    ProjectTMX createTMX(long changeDate, String translation) {
-        ProjectTMX tmx = new ProjectTMX();
-        PrepareTMXEntry e = new PrepareTMXEntry();
-        e.translation = translation;
-        tmx.defaults.put("source", new TMXEntry(e, true, null));
-        return tmx;
-    }
-
-    String getTMXTrans(ProjectTMX tmx) {
-        TMXEntry e = tmx.defaults.get("source");
-        return e == null ? null : e.translation;
-    }
-
-    void checkTMXMerge(ProjectTMX baseTMX, ProjectTMX projectTMX, ProjectTMX headTMX, String trans) {
-        StmProperties props = new StmProperties().setBaseTmxName(OStrings.getString("TMX_MERGE_BASE"))
-                .setTmx1Name(OStrings.getString("TMX_MERGE_MINE"))
-                .setTmx2Name(OStrings.getString("TMX_MERGE_THEIRS"))
-                .setLanguageResource(OStrings.getResourceBundle())
-                .setParentWindow(Core.getMainWindow().getApplicationFrame());
-        ProjectTMX mergedTMX = SuperTmxMerge.merge(baseTMX, projectTMX, headTMX, "en", "be", props);
-        assertEquals(trans, getTMXTrans(mergedTMX));
     }
 }

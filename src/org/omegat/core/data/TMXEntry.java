@@ -138,13 +138,4 @@ public class TMXEntry {
         }
         return true;
     }
-    
-    public int compareTo(TMXEntry other) {
-        /*
-         * Dates can't be just checked for equals since date stored in memory with 1 milliseconds accuracy,
-         * but written to file with 1 second accuracy.
-         */
-        return changeDate / 1000 > other.changeDate / 1000 ? 1 :
-                changeDate / 1000 < other.changeDate / 1000 ? -1 : 0;
-    }
 }

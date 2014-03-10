@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 3.1.0 
 ----------------------------------------------------------------------
-  18 Enhancements
+  19 Enhancements
    6 Bug fixes
    2 Localisation updates
 ----------------------------------------------------------------------
@@ -78,6 +78,13 @@ The value returned by the executed script is displayed in the script
 console.
 
   - Upgraded Groovy version from 1.8.9 to 2.2.2
+
+  - Addition of two new scripts to deal with extra tags. 
+replace_with_match_no_tags.groovy will replace the target segment with a match 
+without the tags.
+replace_strip_tags.groovy will remove any tag form the target segment.
+Other related scripts are available from 
+http://libretraduko.wordpress.com/2013/06/26/stripping-tags-everywhere-groovy-way/
 
   Bug fixes:
 

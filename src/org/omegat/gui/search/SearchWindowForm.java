@@ -59,7 +59,6 @@ public class SearchWindowForm extends javax.swing.JFrame {
         buttonGroup2 = new javax.swing.ButtonGroup();
         buttonGroupReplace = new javax.swing.ButtonGroup();
         buttonGroupSearchState = new javax.swing.ButtonGroup();
-        buttonGroupSearchPlace = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         m_searchLabel = new javax.swing.JLabel();
         m_searchField = new MFindField();
@@ -79,12 +78,10 @@ public class SearchWindowForm extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         m_searchCase = new javax.swing.JCheckBox();
         filler5 = new javax.swing.Box.Filler(new java.awt.Dimension(5, 0), new java.awt.Dimension(5, 0), new java.awt.Dimension(5, 32767));
-        m_searchSourceTranslation = new javax.swing.JRadioButton();
-        filler6 = new javax.swing.Box.Filler(new java.awt.Dimension(5, 0), new java.awt.Dimension(5, 0), new java.awt.Dimension(5, 32767));
-        m_searchSourceOnly = new javax.swing.JRadioButton();
+        m_searchSource = new javax.swing.JCheckBox();
         filler17 = new javax.swing.Box.Filler(new java.awt.Dimension(5, 0), new java.awt.Dimension(5, 0), new java.awt.Dimension(5, 32767));
-        m_searchTranslationOnly = new javax.swing.JRadioButton();
-        filler7 = new javax.swing.Box.Filler(new java.awt.Dimension(5, 0), new java.awt.Dimension(5, 0), new java.awt.Dimension(5, 32767));
+        m_searchTranslation = new javax.swing.JCheckBox();
+        filler6 = new javax.swing.Box.Filler(new java.awt.Dimension(5, 0), new java.awt.Dimension(5, 0), new java.awt.Dimension(5, 32767));
         m_searchNotesCB = new javax.swing.JCheckBox();
         filler24 = new javax.swing.Box.Filler(new java.awt.Dimension(5, 0), new java.awt.Dimension(5, 0), new java.awt.Dimension(5, 32767));
         m_searchCommentsCB = new javax.swing.JCheckBox();
@@ -238,21 +235,15 @@ public class SearchWindowForm extends javax.swing.JFrame {
         jPanel3.add(m_searchCase);
         jPanel3.add(filler5);
 
-        buttonGroupSearchPlace.add(m_searchSourceTranslation);
-        m_searchSourceTranslation.setSelected(true);
-        org.openide.awt.Mnemonics.setLocalizedText(m_searchSourceTranslation, OStrings.getString("SW_SEARCH_SOURCETRANSLATION")); // NOI18N
-        jPanel3.add(m_searchSourceTranslation);
-        jPanel3.add(filler6);
-
-        buttonGroupSearchPlace.add(m_searchSourceOnly);
-        org.openide.awt.Mnemonics.setLocalizedText(m_searchSourceOnly, OStrings.getString("SW_SEARCH_SOURCEONLY")); // NOI18N
-        jPanel3.add(m_searchSourceOnly);
+        m_searchSource.setSelected(true);
+        org.openide.awt.Mnemonics.setLocalizedText(m_searchSource, OStrings.getString("SW_SEARCH_SOURCE")); // NOI18N
+        jPanel3.add(m_searchSource);
         jPanel3.add(filler17);
 
-        buttonGroupSearchPlace.add(m_searchTranslationOnly);
-        org.openide.awt.Mnemonics.setLocalizedText(m_searchTranslationOnly, OStrings.getString("SW_SEARCH_TRANSLATIONONLY")); // NOI18N
-        jPanel3.add(m_searchTranslationOnly);
-        jPanel3.add(filler7);
+        m_searchTranslation.setSelected(true);
+        org.openide.awt.Mnemonics.setLocalizedText(m_searchTranslation, OStrings.getString("SW_SEARCH_TRANSLATION")); // NOI18N
+        jPanel3.add(m_searchTranslation);
+        jPanel3.add(filler6);
 
         m_searchNotesCB.setSelected(true);
         org.openide.awt.Mnemonics.setLocalizedText(m_searchNotesCB, OStrings.getString("SW_SEARCH_NOTES")); // NOI18N
@@ -633,7 +624,6 @@ public class SearchWindowForm extends javax.swing.JFrame {
     javax.swing.ButtonGroup buttonGroup2;
     javax.swing.ButtonGroup buttonGroupReplace;
     javax.swing.ButtonGroup buttonGroupSearch;
-    javax.swing.ButtonGroup buttonGroupSearchPlace;
     javax.swing.ButtonGroup buttonGroupSearchState;
     javax.swing.Box.Filler filler1;
     javax.swing.Box.Filler filler10;
@@ -660,7 +650,6 @@ public class SearchWindowForm extends javax.swing.JFrame {
     javax.swing.Box.Filler filler4;
     javax.swing.Box.Filler filler5;
     javax.swing.Box.Filler filler6;
-    javax.swing.Box.Filler filler7;
     javax.swing.Box.Filler filler8;
     javax.swing.Box.Filler filler9;
     javax.swing.JPanel jPanel1;
@@ -726,11 +715,10 @@ public class SearchWindowForm extends javax.swing.JFrame {
     javax.swing.JLabel m_searchLabel;
     javax.swing.JCheckBox m_searchNotesCB;
     javax.swing.JRadioButton m_searchRegexpSearchRB;
-    javax.swing.JRadioButton m_searchSourceOnly;
-    javax.swing.JRadioButton m_searchSourceTranslation;
+    javax.swing.JCheckBox m_searchSource;
     javax.swing.JRadioButton m_searchTranslated;
     javax.swing.JRadioButton m_searchTranslatedUntranslated;
-    javax.swing.JRadioButton m_searchTranslationOnly;
+    javax.swing.JCheckBox m_searchTranslation;
     javax.swing.JRadioButton m_searchUntranslated;
     javax.swing.JTextPane m_viewer;
     // End of variables declaration//GEN-END:variables

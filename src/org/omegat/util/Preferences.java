@@ -102,7 +102,8 @@ public class Preferences {
     public static final String SEARCHWINDOW_CASE_SENSITIVE = "search_window_case_sensitive";
     public static final String SEARCHWINDOW_CASE_SENSITIVE_REPLACE = "search_window_case_sensitive_replace";
     public static final String SEARCHWINDOW_REPLACE_UNTRANSLATED = "search_window_replace_untranslated";
-    public static final String SEARCHWINDOW_SEARCH_PLACE = "search_window_search_place";
+    public static final String SEARCHWINDOW_SEARCH_SOURCE = "search_window_search_source";
+    public static final String SEARCHWINDOW_SEARCH_TRANSLATION = "search_window_search_translation";
     public static final String SEARCHWINDOW_SEARCH_STATE = "search_window_search_state";
     public static final String SEARCHWINDOW_SEARCH_NOTES = "search_window_search_notes";
     public static final String SEARCHWINDOW_SEARCH_COMMENTS = "search_window_search_comments";

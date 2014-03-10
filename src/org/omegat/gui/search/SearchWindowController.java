@@ -282,9 +282,8 @@ public class SearchWindowController {
 
         form.m_searchCase.addActionListener(searchFieldRequestFocus);
 
-        form.m_searchSourceTranslation.addActionListener(searchFieldRequestFocus);
-        form.m_searchSourceOnly.addActionListener(searchFieldRequestFocus);
-        form.m_searchTranslationOnly.addActionListener(searchFieldRequestFocus);
+        form.m_searchSource.addActionListener(searchFieldRequestFocus);
+        form.m_searchTranslation.addActionListener(searchFieldRequestFocus);
 
         form.m_searchTranslatedUntranslated.addActionListener(searchFieldRequestFocus);
         form.m_searchTranslated.addActionListener(searchFieldRequestFocus);
@@ -400,21 +399,11 @@ public class SearchWindowController {
                 Preferences.SEARCHWINDOW_CASE_SENSITIVE, false));
 
         // search source
-        SearchExpression.SearchPlace searchPlace = SearchExpression.SearchPlace.valueOf(Preferences
-                .getPreferenceEnumDefault(Preferences.SEARCHWINDOW_SEARCH_PLACE,
-                        SearchExpression.SearchPlace.SOURCE_TRANSLATION).name());
-        switch (searchPlace) {
-        case SOURCE_TRANSLATION:
-        default:
-            form.m_searchSourceTranslation.setSelected(true);
-            break;
-        case SOURCE_ONLY:
-            form.m_searchSourceOnly.setSelected(true);
-            break;
-        case TRANSLATION_ONLY:
-            form.m_searchTranslationOnly.setSelected(true);
-            break;
-        }
+        form.m_searchSource.setSelected(Preferences.isPreferenceDefault(
+                Preferences.SEARCHWINDOW_SEARCH_SOURCE, true));
+        form.m_searchTranslation.setSelected(Preferences.isPreferenceDefault(
+                Preferences.SEARCHWINDOW_SEARCH_TRANSLATION, true));
+
         SearchExpression.SearchState searchState = SearchExpression.SearchState.valueOf(Preferences
                 .getPreferenceEnumDefault(Preferences.SEARCHWINDOW_SEARCH_STATE,
                         SearchExpression.SearchState.TRANSLATED_UNTRANSLATED).name());
@@ -497,16 +486,10 @@ public class SearchWindowController {
 
         // search options
         Preferences.setPreference(Preferences.SEARCHWINDOW_CASE_SENSITIVE, form.m_searchCase.isSelected());
-        if (form.m_searchSourceTranslation.isSelected()) {
-            Preferences.setPreference(Preferences.SEARCHWINDOW_SEARCH_PLACE,
-                    SearchExpression.SearchPlace.SOURCE_TRANSLATION.name());
-        } else if (form.m_searchSourceOnly.isSelected()) {
-            Preferences.setPreference(Preferences.SEARCHWINDOW_SEARCH_PLACE,
-                    SearchExpression.SearchPlace.SOURCE_ONLY.name());
-        } else if (form.m_searchTranslationOnly.isSelected()) {
-            Preferences.setPreference(Preferences.SEARCHWINDOW_SEARCH_PLACE,
-                    SearchExpression.SearchPlace.TRANSLATION_ONLY.name());
-        }
+
+        Preferences.setPreference(Preferences.SEARCHWINDOW_SEARCH_SOURCE, form.m_searchSource.isSelected());
+        Preferences.setPreference(Preferences.SEARCHWINDOW_SEARCH_TRANSLATION, form.m_searchTranslation.isSelected());
+
         if (form.m_searchTranslatedUntranslated.isSelected()) {
             Preferences.setPreference(Preferences.SEARCHWINDOW_SEARCH_STATE,
                     SearchExpression.SearchState.TRANSLATED_UNTRANSLATED.name());
@@ -713,16 +696,8 @@ public class SearchWindowController {
             s.memory = mode == SearchMode.SEARCH ? form.m_cbSearchInMemory.isSelected() : true;
             s.tm = mode == SearchMode.SEARCH ? form.m_cbSearchInTMs.isSelected() : false;
             s.allResults = mode == SearchMode.SEARCH ? form.m_allResultsCB.isSelected() : true;
-            if (form.m_searchSourceTranslation.isSelected()) {
-                s.searchSource = true;
-                s.searchTarget = true;
-            } else if (form.m_searchSourceOnly.isSelected()) {
-                s.searchSource = true;
-                s.searchTarget = false;
-            } else if (form.m_searchTranslationOnly.isSelected()) {
-                s.searchSource = false;
-                s.searchTarget = true;
-            }
+            s.searchSource = form.m_searchSource.isSelected();
+            s.searchTarget = form.m_searchTranslation.isSelected();
             if (form.m_searchTranslatedUntranslated.isSelected()) {
                 s.searchTranslated = true;
                 s.searchUntranslated = true;

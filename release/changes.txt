@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 3.1.0 
 ----------------------------------------------------------------------
-  19 Enhancements
+  20 Enhancements
    6 Bug fixes
    2 Localisation updates
 ----------------------------------------------------------------------
@@ -85,6 +85,11 @@ without the tags.
 replace_strip_tags.groovy will remove any tag form the target segment.
 Other related scripts are available from 
 http://libretraduko.wordpress.com/2013/06/26/stripping-tags-everywhere-groovy-way/
+
+  - When reading a level-2 project_save.tmx, standalone tags (e.g., <f0>) will have
+a trailing '/' or not depending on the option in Options > External TMXs. Previously, a
+trailing / was never added. This will improve compatibility when translating XML content and 
+when project_save was not produced by OmegaT.
 
   Bug fixes:
 

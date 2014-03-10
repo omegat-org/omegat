@@ -97,7 +97,7 @@ public class ProjectTMX {
                 isSentenceSegmentingEnabled,
                 false,
                 true,
-                false,
+                Preferences.isPreference(Preferences.EXT_TMX_USE_SLASH),
                 new Loader(sourceLanguage, targetLanguage, isSentenceSegmentingEnabled));
     }
 

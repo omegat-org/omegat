@@ -2,7 +2,7 @@
  OmegaT 3.1.0 
 ----------------------------------------------------------------------
   18 Enhancements
-   5 Bug fixes
+   6 Bug fixes
    2 Localisation updates
 ----------------------------------------------------------------------
 3.1.0 vs. 3.0.8 update 4
@@ -95,6 +95,9 @@ console.
   - When inserting a missing tag pair, any selected text was deleted
 
   - On Mac, the quit and About menu behaviour was fixed
+
+  - Scripting window layout leaves "RUN" button out 
+  https://sourceforge.net/p/omegat/bugs/646/
 
   Localisation updates:
 

@@ -78,6 +78,8 @@ The value returned by the executed script is displayed in the script
 console.
 
   - Upgraded Groovy version from 1.8.9 to 2.2.2
+  
+  - The size and position of the scripting windows are saved in the preferences.
 
   - Addition of two new scripts to deal with extra tags. 
 replace_with_match_no_tags.groovy will replace the target segment with a match 

@@ -255,6 +255,12 @@ public class Preferences {
     public static final String SCRIPTS_QUICK_9 = "scripts_quick_9";
     public static final String SCRIPTS_QUICK_0 = "scripts_quick_0";
 
+    /** Script window */
+    public static final String SCRIPTWINDOW_WIDTH = "script_window_width";
+    public static final String SCRIPTWINDOW_HEIGHT = "script_window_height";
+    public static final String SCRIPTWINDOW_X = "script_window_x";
+    public static final String SCRIPTWINDOW_Y = "script_window_y";
+
     /**
      * display the segment sources
      */

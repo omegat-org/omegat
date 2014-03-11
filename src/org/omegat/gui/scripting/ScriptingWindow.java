@@ -116,6 +116,14 @@ public class ScriptingWindow extends JFrame {
             }
         });
     }
+    
+    @Override
+    public void dispose()
+    {
+    	savePreferences();
+    	super.dispose();
+    }
+    
 
     public static void unloadPlugins() {
         if (window != null) {
@@ -270,7 +278,7 @@ public class ScriptingWindow extends JFrame {
     }
 
     private void initWindowLayout() {
-        setBounds(50, 80, 1150, 650);
+    	loadPreferences();
 
         getContentPane().setLayout(new BorderLayout(0, 0));
 
@@ -611,6 +619,40 @@ public class ScriptingWindow extends JFrame {
                     m_scriptsDirectory.getAbsolutePath()) + "\n");
         }
     }
+    
+    /**
+     * Loads the position and size of the script window
+     */
+    private void loadPreferences() {
+        // window size and position
+        try {
+            String dx = Preferences.getPreference(Preferences.SCRIPTWINDOW_X);
+            String dy = Preferences.getPreference(Preferences.SCRIPTWINDOW_Y);
+            int x = Integer.parseInt(dx);
+            int y = Integer.parseInt(dy);
+            setLocation(x, y);
+            String dw = Preferences.getPreference(Preferences.SCRIPTWINDOW_WIDTH);
+            String dh = Preferences.getPreference(Preferences.SCRIPTWINDOW_HEIGHT);
+            int w = Integer.parseInt(dw);
+            int h = Integer.parseInt(dh);
+            setSize(w, h);
+        } catch (NumberFormatException nfe) {
+            // set default size and position
+        	setBounds(50, 80, 1150, 650);
+        }
+    }
+    
+    /**
+     * Saves the size and position of the script window
+     */
+    private void savePreferences() {
+        // window size and position
+        Preferences.setPreference(Preferences.SCRIPTWINDOW_WIDTH, getWidth());
+        Preferences.setPreference(Preferences.SCRIPTWINDOW_HEIGHT, getHeight());
+        Preferences.setPreference(Preferences.SCRIPTWINDOW_X, getX());
+        Preferences.setPreference(Preferences.SCRIPTWINDOW_Y, getY());
+    }
+    
     
 
     public HighlightPainter getPainter() {

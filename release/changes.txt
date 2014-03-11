@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 3.1.0 
 ----------------------------------------------------------------------
-  20 Enhancements
+  21 Enhancements
    6 Bug fixes
    2 Localisation updates
 ----------------------------------------------------------------------
@@ -90,6 +90,11 @@ http://libretraduko.wordpress.com/2013/06/26/stripping-tags-everywhere-groovy-wa
 a trailing '/' or not depending on the option in Options > External TMXs. Previously, a
 trailing / was never added. This will improve compatibility when translating XML content and 
 when project_save was not produced by OmegaT.
+
+  - XLIFF filter option: Ignore type and ctype attributes when building <bpt> and 
+<ept> tag shortcuts. This is similar to the option already available for <ph> tags:
+https://sourceforge.net/p/omegat/feature-requests/938/
+
 
   Bug fixes:
 

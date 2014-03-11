@@ -5,6 +5,7 @@
 
  Copyright (C) 2007-2012 Didier Briel
                2013 Piotr Kulik
+               2014 Didier Briel
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -40,6 +41,7 @@ import org.omegat.filters2.AbstractOptions;
  * <li>[] Compatibility with 2.6
  * <li>[]Force shortcut to "f" for &lt;it pos="end&gt; tags
  * <li>[]Ignore type and ctype attributes when building &lt;ph&gt; tag shortcuts
+ * <li>[]Ignore type and ctype attributes when building &lt;bpt&gt;/&lt;ept&gt; tag shortcuts
  * </ul>
  * 
  * @author Didier Briel
@@ -49,7 +51,8 @@ public class XLIFFOptions extends AbstractOptions {
     private static final String OPTION_26_COMPATIBILITY = "compatibility26";
     private static final String OPTION_FORCE_SHORTCUT_2_F = "forceshortcut2f";
     private static final String OPTION_IGNORE_TYPE_4_PH_TAGS = "ignoretype4phtags";
-
+    private static final String OPTION_IGNORE_TYPE_4_BPT_TAGS = "ignoretype4bpttags";
+    
     public XLIFFOptions(Map<String, String> config) {
         super(config);
     }
@@ -100,4 +103,19 @@ public class XLIFFOptions extends AbstractOptions {
         setBoolean(OPTION_IGNORE_TYPE_4_PH_TAGS, ignoreTypeForPhTags);    
     }
 
+    /** 
+     * Return whether the type and ctype attributes of 
+     * &lt;bpt&gt;/&lt;ept&gt; tags should be ignored when building shortcuts
+     */
+    public boolean getIgnoreTypeForBptTags() {
+        return getBoolean(OPTION_IGNORE_TYPE_4_BPT_TAGS, false);
+    }
+    
+    /** 
+     * Set whether the type and ctype attributes of 
+     * &lt;bpt&gt;/&lt;ept&gt; tags should be ignored when building shortcuts
+     */
+    public void setIgnoreTypeForBptTags(boolean ignoreTypeForBptTags) {
+        setBoolean(OPTION_IGNORE_TYPE_4_BPT_TAGS, ignoreTypeForBptTags);    
+    }
 }

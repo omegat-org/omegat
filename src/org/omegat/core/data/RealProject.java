@@ -856,7 +856,9 @@ public class RealProject implements IProject {
                             .setTmx1Name(OStrings.getString("TMX_MERGE_MINE"))
                             .setTmx2Name(OStrings.getString("TMX_MERGE_THEIRS"))
                             .setLanguageResource(OStrings.getResourceBundle())
-                            .setParentWindow(Core.getMainWindow().getApplicationFrame());
+                            .setParentWindow(Core.getMainWindow().getApplicationFrame())
+                            // More than this number of conflicts will trigger List View by default.
+                            .setListViewThreshold(5);
                     ProjectTMX mergedTMX = SuperTmxMerge.merge(baseTMX, projectTMX, headTMX,
                             m_config.getSourceLanguage().getLanguage(), m_config.getTargetLanguage().getLanguage(),
                             props);

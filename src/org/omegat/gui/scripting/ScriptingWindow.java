@@ -34,15 +34,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
-import java.io.BufferedReader;
-import java.io.ByteArrayInputStream;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
@@ -91,9 +85,7 @@ import org.omegat.gui.editor.IEditor;
 import org.omegat.gui.editor.mark.Mark;
 import org.omegat.gui.glossary.GlossaryTextArea;
 import org.omegat.gui.main.IMainWindow;
-import org.omegat.util.LFileCopy;
-import org.omegat.util.LinebreakPreservingReader;
-import org.omegat.util.OConsts;
+import org.omegat.util.DirectoryMonitor;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
 import org.omegat.util.StaticUtils;
@@ -121,6 +113,7 @@ public class ScriptingWindow extends JFrame {
     public void dispose()
     {
     	savePreferences();
+    	monitor.stop();
     	super.dispose();
     }
     
@@ -151,8 +144,27 @@ public class ScriptingWindow extends JFrame {
         addRunShortcutToOmegaT();
 
         initWindowLayout();
+        
+        monitor = new ScriptsMonitor(m_scriptList, getAvailableScriptExtensions());
+        monitor.start(m_scriptsDirectory);
 
-        StringBuilder sb = new StringBuilder(OStrings.getString("SCW_LIST_ENGINES") + "\n");
+        logResult(listScriptEngine().toString());
+
+    }
+    
+	private List<String> getAvailableScriptExtensions() {
+		ArrayList<String> extensions = new ArrayList<String>();
+        for (ScriptEngineFactory engine : manager.getEngineFactories()) {
+            for (String ext : engine.getExtensions()) {
+              	extensions.add(ext);
+            }
+        }
+
+        return extensions;
+	}
+
+	private StringBuilder listScriptEngine() {
+		StringBuilder sb = new StringBuilder(OStrings.getString("SCW_LIST_ENGINES") + "\n");
         for (ScriptEngineFactory engine : manager.getEngineFactories()) {
             sb.append(" - ");
             sb.append(engine.getEngineName());
@@ -173,9 +185,8 @@ public class ScriptingWindow extends JFrame {
             sb.append("\n");
         }
         
-        logResult(sb.toString());
-
-    }
+        return sb;
+	}
 
     private void addScriptCommandToOmegaT() {
         JMenu toolsMenu = Core.getMainWindow().getMainMenu().getToolsMenu();
@@ -318,7 +329,6 @@ public class ScriptingWindow extends JFrame {
         m_scriptsDirectory = new File(m_txtScriptsDir.getText());
         
         m_scriptList = new JList();
-        updateScriptsList(false);
         JScrollPane scrollPaneList = new JScrollPane(m_scriptList);
 
         m_scriptList.addListSelectionListener(new ListSelectionListener() {
@@ -377,16 +387,6 @@ public class ScriptingWindow extends JFrame {
         scrollPaneResults.setMinimumSize(minimumSize);
         
         getContentPane().add(splitPane, BorderLayout.CENTER);
-
-        // Refresh the file list with F5        
-        getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("F5"), REFRESH_SCRIPT_DIR);
-
-        getRootPane().getActionMap().put(REFRESH_SCRIPT_DIR, new AbstractAction() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                updateScriptsList(true);
-            }
-        });
 
         JPanel panelSouth = new JPanel();
         FlowLayout fl_panelSouth = (FlowLayout) panelSouth.getLayout();
@@ -499,16 +499,10 @@ public class ScriptingWindow extends JFrame {
 
     }
     
-    private String getFileExtension(ScriptFile file)
+    protected static String getFileExtension(String fileName)
     {
     	String extension = "";
-    	
-    	if (file == null)
-    	{
-    		return extension;
-    	}
 
-    	String fileName = file.getName();
     	int i = fileName.lastIndexOf('.');
 
     	if (i >= 0 && i != -1) {
@@ -520,7 +514,8 @@ public class ScriptingWindow extends JFrame {
 
     private void executeScriptFile(ScriptFile scriptFile, boolean forceFromFile) {
         ScriptLogger scriptLogger = new ScriptLogger(m_txtResult);
-        ScriptEngine scriptEngine = manager.getEngineByExtension(getFileExtension(scriptFile));
+
+        ScriptEngine scriptEngine = manager.getEngineByExtension(getFileExtension(scriptFile.getName()));
          
          if (scriptEngine == null)
          {
@@ -601,23 +596,8 @@ public class ScriptingWindow extends JFrame {
         m_scriptsDirectory = new File(scriptsDir);
         Preferences.setPreference(Preferences.SCRIPTS_DIRECTORY, scriptsDir);
 
-        updateScriptsList(true);
-    }
-    
-    private void updateScriptsList(boolean withMsg) {
-        String[] scriptList = new String[]{  };
-        
-        if (m_scriptsDirectory.exists() && m_scriptsDirectory.isDirectory()) {
-            scriptList = m_scriptsDirectory.list(); 
-            Arrays.sort(scriptList);
-        }
-        
-        m_scriptList.setListData(scriptList);
-        
-        if (withMsg) {
-            logResult(m_txtResult,  StaticUtils.format(OStrings.getString("SCW_REFRESH_SCRIPT_DIR"), 
-                    m_scriptsDirectory.getAbsolutePath()) + "\n");
-        }
+        monitor.stop();
+        monitor.start(m_scriptsDirectory);
     }
     
     /**
@@ -687,7 +667,6 @@ public class ScriptingWindow extends JFrame {
     private static final String VAR_PROJECT = "project";
 
     private static final String DEFAULT_SCRIPTS_DIR = "scripts";
-    private static final String REFRESH_SCRIPT_DIR = "refreshScriptDir";
     
     private static final int NUMBERS_OF_QUICK_SCRIPTS = 12;
     
@@ -698,6 +677,8 @@ public class ScriptingWindow extends JFrame {
     
 	private ScriptEngineManager manager = new ScriptEngineManager(getClass().getClassLoader());
 
+	protected ScriptsMonitor monitor;
+	
     private File m_scriptsDirectory;
     private ScriptFile m_currentScriptFile;
     private JTextField m_txtScriptsDir;
@@ -706,74 +687,5 @@ public class ScriptingWindow extends JFrame {
     private String[] m_quickScripts = new String[NUMBERS_OF_QUICK_SCRIPTS];
     private JMenuItem[] m_quickMenus = new JMenuItem[NUMBERS_OF_QUICK_SCRIPTS];
     private JButton[] m_quickScriptButtons = new JButton[NUMBERS_OF_QUICK_SCRIPTS];
-
-    /**
-     * An abstract representation of script file.
-     * The content is treated as UTF-8.
-     */
-    private class ScriptFile extends File {
-
-        private final String BOM = "\uFEFF";
-        private boolean startsWithBOM = false;
-        private String lineBreak = System.getProperty("line.separator");
-
-        public ScriptFile(String pathname) {
-            super(pathname);
-        }
-
-        public ScriptFile(File parent, String child) {
-            super(parent, child);
-        }
-
-        public String getText() throws FileNotFoundException, IOException {
-            String ret = "";
-            LinebreakPreservingReader lpin = null;
-            try {
-                lpin = getUTF8LinebreakPreservingReader(this);
-                StringBuilder sb = new StringBuilder();
-                String s = lpin.readLine();
-                startsWithBOM = s.startsWith(BOM);
-                if (startsWithBOM) {
-                    s = s.substring(1);  // eat BOM
-                }
-                while (s != null) {
-                    sb.append(s);
-                    String br = lpin.getLinebreak();
-                    if (! br.isEmpty()) {
-                        lineBreak = br;
-                        sb.append('\n');
-                    }
-                    s = lpin.readLine();
-                }
-                ret = sb.toString();
-            } finally {
-                if (lpin != null) {
-                    try {
-                        lpin.close();
-                    } catch (IOException ex) {
-                        // Eat exception silently
-                    }
-                }
-            }
-            return ret;
-        }
-
-        private LinebreakPreservingReader getUTF8LinebreakPreservingReader(File file) throws FileNotFoundException, UnsupportedEncodingException {
-            InputStream is = new FileInputStream(file);
-            InputStreamReader isr = new InputStreamReader(is, OConsts.UTF8);
-            BufferedReader in = new BufferedReader(isr);
-            return new LinebreakPreservingReader(in);
-        }
-
-        public void setText(String text) throws UnsupportedEncodingException, IOException {
-            text = text.replaceAll("\n", lineBreak);
-            if (startsWithBOM) {
-                text = BOM + text;
-            }
-
-            InputStream is = new ByteArrayInputStream(text.getBytes(OConsts.UTF8));
-            LFileCopy.copy(is, this);
-        }
-    }
 
 }

@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 3.1.0 
 ----------------------------------------------------------------------
-  22 Enhancements
+  21 Enhancements
    6 Bug fixes
    2 Localisation updates
 ----------------------------------------------------------------------
@@ -96,8 +96,6 @@ when project_save was not produced by OmegaT.
   - XLIFF filter option: Ignore type and ctype attributes when building <bpt> and 
 <ept> tag shortcuts. This is similar to the option already available for <ph> tags:
 https://sourceforge.net/p/omegat/feature-requests/938/
-
-  - The size and position of the scripting window are saved in the preferences
 
 
   Bug fixes:

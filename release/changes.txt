@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 3.1.0 
 ----------------------------------------------------------------------
-  22 Enhancements
+  23 Enhancements
    6 Bug fixes
    2 Localisation updates
 ----------------------------------------------------------------------
@@ -80,6 +80,12 @@ console.
   - Upgraded Groovy version from 1.8.9 to 2.2.2
   
   - The size and position of the scripting windows are saved in the preferences.
+    
+  - The script directory is monitored every seconds to see if a script has
+ been added or deleted. This way, it is not necessary to use "F5" to refresh the
+ script list.
+ 
+  - The script window list only displays supported script files.
 
   - Addition of two new scripts to deal with extra tags. 
 replace_with_match_no_tags.groovy will replace the target segment with a match 

@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 3.1.0 
 ----------------------------------------------------------------------
-  21 Enhancements
+  22 Enhancements
    6 Bug fixes
    2 Localisation updates
 ----------------------------------------------------------------------
@@ -97,6 +97,8 @@ when project_save was not produced by OmegaT.
 <ept> tag shortcuts. This is similar to the option already available for <ph> tags:
 https://sourceforge.net/p/omegat/feature-requests/938/
 
+  - The script svn_cleanup.groovy was renamed to svn_cleanup_selected.groovy. When
+no project is loaded, it allows doing "svn cleanup" on any SVN repository.
 
   Bug fixes:
 

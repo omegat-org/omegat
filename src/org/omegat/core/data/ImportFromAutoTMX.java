@@ -76,36 +76,55 @@ public class ImportFromAutoTMX {
                         if (existTranslation.linked == TMXEntry.ExternalLinked.xAUTO
                                 && !StringUtil.equalsWithNulls(existTranslation.translation, e.translation)) {
                             // translation already from auto and really changed
-                            project.setTranslation(ste, e, true, TMXEntry.ExternalLinked.xAUTO);
+                            setTranslation(ste, e, true, TMXEntry.ExternalLinked.xAUTO);
                         }
                     } else {
                         // default translation not exist - use from auto tmx
-                        project.setTranslation(ste, e, true, TMXEntry.ExternalLinked.xAUTO);
+                        setTranslation(ste, e, true, TMXEntry.ExternalLinked.xAUTO);
                     }
                 } else {// TMXEntry with x-ids
                     if (!existTranslation.isTranslated() || existTranslation.defaultTranslation) {
                         // need to update if id in xICE or x100PC
                         if (hasICE) {
-                            project.setTranslation(ste, e, false, TMXEntry.ExternalLinked.xICE);
+                            setTranslation(ste, e, false, TMXEntry.ExternalLinked.xICE);
                         } else if (has100PC) {
-                            project.setTranslation(ste, e, false, TMXEntry.ExternalLinked.x100PC);
+                            setTranslation(ste, e, false, TMXEntry.ExternalLinked.x100PC);
                         }
                     } else if (existTranslation.linked == TMXEntry.ExternalLinked.xICE
                             || existTranslation.linked == TMXEntry.ExternalLinked.x100PC) {
                         // already contains x-ice
                         if (hasICE
                                 && !StringUtil.equalsWithNulls(existTranslation.translation, e.translation)) {
-                            project.setTranslation(ste, e, false, TMXEntry.ExternalLinked.xICE);
+                            setTranslation(ste, e, false, TMXEntry.ExternalLinked.xICE);
                         }
                     } else if (existTranslation.linked == TMXEntry.ExternalLinked.x100PC) {
                         // already contains x-100pc
                         if (has100PC
                                 && !StringUtil.equalsWithNulls(existTranslation.translation, e.translation)) {
-                            project.setTranslation(ste, e, false, TMXEntry.ExternalLinked.x100PC);
+                            setTranslation(ste, e, false, TMXEntry.ExternalLinked.x100PC);
                         }
                     }
                 }
             }
         }
+    }
+    
+    private void setTranslation(SourceTextEntry entry, PrepareTMXEntry trans, boolean defaultTranslation,
+            TMXEntry.ExternalLinked externalLinked) {
+        if (StringUtil.isEmpty(trans.note)) {
+            trans.note = null;
+        }
+
+        trans.source = entry.getSrcText();
+
+        TMXEntry newTrEntry;
+
+        if (trans.translation == null && trans.note == null) {
+            // no translation, no note
+            newTrEntry = null;
+        } else {
+            newTrEntry = new TMXEntry(trans, defaultTranslation, externalLinked);
+        }
+        project.projectTMX.setTranslation(entry, newTrEntry, defaultTranslation);
     }
 }

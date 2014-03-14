@@ -847,6 +847,13 @@ public class RealProject implements IProject {
                 again = true;
                 headTMX = new ProjectTMX(m_config.getSourceLanguage(), m_config.getTargetLanguage(), m_config.isSentenceSegmentingEnabled(), projectTMXFile, null);
                 
+                SwingUtilities.invokeAndWait(new Runnable() {
+                    @Override
+                    public void run() {
+                        Core.getEditor().commitAndLeave();
+                    }
+                });
+                
                 // Do 3-way merge of:
                 // Base: baseTMX
                 // File 1: projectTMX (mine)
@@ -869,7 +876,7 @@ public class RealProject implements IProject {
                 SwingUtilities.invokeAndWait(new Runnable() {
                     @Override
                     public void run() {
-                        Core.getEditor().refreshView(true);
+                        Core.getEditor().refreshView(false);
                     }
                 });
                 

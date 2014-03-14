@@ -869,7 +869,7 @@ public class RealProject implements IProject {
                 SwingUtilities.invokeAndWait(new Runnable() {
                     @Override
                     public void run() {
-                        Core.getEditor().refreshView(false);
+                        Core.getEditor().refreshView(true);
                     }
                 });
                 

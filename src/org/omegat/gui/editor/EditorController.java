@@ -1330,8 +1330,9 @@ public class EditorController implements IEditor {
             deactivateWithoutCommit();
         }
         int currentEntry = getCurrentEntryNumber();
+        int caretPosition = getCurrentPositionInEntryTranslation();
         gotoFile(displayedFileIndex);
-        gotoEntry(currentEntry);
+        gotoEntry(currentEntry, new CaretPosition(caretPosition));
     }
 
     /**

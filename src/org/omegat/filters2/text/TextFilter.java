@@ -4,6 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
+               2014 Didier Briel
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -46,6 +47,7 @@ import org.omegat.util.OStrings;
  * 
  * @author Keith Godfrey
  * @author Maxym Mykhalchuk
+ * @author Didier Briel
  */
 public class TextFilter extends AbstractFilter {
 
@@ -63,7 +65,18 @@ public class TextFilter extends AbstractFilter {
     public static final String SEGMENT_NEVER = "NEVER";
 
     public static final String OPTION_SEGMENT_ON = "segmentOn";
+    
+    /**
+     * Length at which a line break should occur in target documents
+     */
+    public static final String OPTION_LINE_LENGTH = "lineLength";
+    
+    /**
+     * Maximum line length in target documents
+     */
+    public static final String OPTION_MAX_LINE_LENGTH = "maxLineLength";
 
+    
     /**
      * Register plugin into OmegaT.
      */

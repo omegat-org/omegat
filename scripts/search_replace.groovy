@@ -64,7 +64,7 @@ def doReplace(search_string, replace_string) {
 		}
 	}
 
-	console.println("Modified Segments:") + segment_count);
+	console.println("Modified Segments:") + segment_count;
 }
 
 

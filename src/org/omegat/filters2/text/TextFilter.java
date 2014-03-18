@@ -74,19 +74,23 @@ public class TextFilter extends AbstractFilter {
     public static void unloadPlugins() {
     }
 
+    @Override
     public String getFileFormatName() {
         return OStrings.getString("TEXTFILTER_FILTER_NAME");
     }
 
+    @Override
     public Instance[] getDefaultInstances() {
         return new Instance[] { new Instance("*.txt"), new Instance("*.txt1", OConsts.ISO88591, OConsts.ISO88591),
                 new Instance("*.txt2", OConsts.ISO88592, OConsts.ISO88592), new Instance("*.utf8", OConsts.UTF8, OConsts.UTF8) };
     }
 
+    @Override
     public boolean isSourceEncodingVariable() {
         return true;
     }
 
+    @Override
     public boolean isTargetEncodingVariable() {
         return true;
     }

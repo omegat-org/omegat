@@ -56,7 +56,7 @@ public class TextFilter extends AbstractFilter {
      */
     public static final String SEGMENT_BREAKS = "BREAKS";
     /**
-     * Defult. Text filter should segmentOn text into paragraphs on empty lines.
+     * Default. Text filter should segmentOn text into paragraphs on empty lines.
      */
     public static final String SEGMENT_EMPTYLINES = "EMPTYLINES";
     /**
@@ -121,13 +121,32 @@ public class TextFilter extends AbstractFilter {
         if (ch != 0xFEFF)
             in.reset();
 
+        int lineLength, maxLineLength;
+        try {
+            lineLength = Integer.parseInt(processOptions.get(TextFilter.OPTION_LINE_LENGTH));
+        } catch (Exception ex) {
+            lineLength = 0;
+        }
+        try {
+            maxLineLength = Integer.parseInt(processOptions.get(TextFilter.OPTION_MAX_LINE_LENGTH));
+        } catch (Exception ex) {
+            maxLineLength = 0;
+        }
+        Writer output;
+        if (lineLength != 0 && maxLineLength != 0) {
+            output = new LineLengthLimitWriter(out, lineLength, maxLineLength, Core.getProject()
+                    .getTargetTokenizer());
+        } else {
+            output = out;
+        }
+
         String segmentOn = processOptions.get(TextFilter.OPTION_SEGMENT_ON);
         if (SEGMENT_BREAKS.equals(segmentOn)) {
-            processSegLineBreaks(in, out);
+            processSegLineBreaks(in, output);
         } else if (SEGMENT_NEVER.equals(segmentOn)) {
-            processNonSeg(in, out);
+            processNonSeg(in, output);
         } else {
-            processSegEmptyLines(in, out);
+            processSegEmptyLines(in, output);
         }
     }
 

@@ -76,7 +76,7 @@ public class AutoTmxTest extends TestCase {
         p.allProjectEntries.add(ste11 = createSTE("11", "Edit"));
         p.allProjectEntries.add(ste12 = createSTE("12", "Edit"));
         p.importHandler = new ImportFromAutoTMX(p, p.allProjectEntries);
-        p.appendFromAutoTMX(autoTMX);
+        p.appendFromAutoTMX(autoTMX, false);
         checkTranslation(ste10, "Modifier", TMXEntry.ExternalLinked.x100PC);
         checkTranslation(ste11, "Edition", TMXEntry.ExternalLinked.xICE);
         checkTranslation(ste12, "Modifier", TMXEntry.ExternalLinked.xICE);

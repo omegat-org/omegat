@@ -217,6 +217,7 @@ OmegaT のユーザーインターフェースや取扱説明書、他の関連�
   Alex Buloichik（リード開発者）
   Sandra Jean Chua
   Thomas Cordonnier
+  Enrique Estévez Fernández
   Martin Fleurke  
   Wildrich Fourie
   Phillip Hall

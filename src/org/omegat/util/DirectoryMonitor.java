@@ -38,6 +38,7 @@ import java.util.logging.Logger;
  * some files changed.
  * 
  * @author Alex Buloichik <alex73mail@gmail.com>
+ * @author Briac Pilpre
  */
 public class DirectoryMonitor extends Thread {
     /** Local logger. */
@@ -46,6 +47,7 @@ public class DirectoryMonitor extends Thread {
     private boolean stopped = false;
     protected final File dir;
     protected final Callback callback;
+    protected final DirectoryCallback directoryCallback;
     private final Map<String, FileInfo> existFiles = new TreeMap<String, FileInfo>();
     protected static final long LOOKUP_PERIOD = 1000;
 
@@ -58,8 +60,16 @@ public class DirectoryMonitor extends Thread {
     public DirectoryMonitor(final File dir, final Callback callback) {
         this.dir = dir;
         this.callback = callback;
+        this.directoryCallback = null;
     }
 
+    public DirectoryMonitor(final File dir, final Callback callback, final DirectoryCallback directoryCallback) {
+        this.dir = dir;
+        this.callback = callback;
+        // Can't call this(dir, callback) because fields are final.
+        this.directoryCallback = directoryCallback;
+    }
+    
     public File getDir() {
         return dir;
     }
@@ -97,6 +107,7 @@ public class DirectoryMonitor extends Thread {
      * DON'T EXECUTE IT WHEN THREAD STARTED ! Because working with map not synchronized.
      */
     public void checkChanges() {
+    	boolean directoryChanged = false;
         // find deleted or changed files
         for (String fn : new ArrayList<String>(existFiles.keySet())) {
             if (stopped)
@@ -107,6 +118,7 @@ public class DirectoryMonitor extends Thread {
                 LOGGER.finer("File '" + f + "' removed");
                 existFiles.remove(fn);
                 callback.fileChanged(f);
+                directoryChanged = true;
             } else {
                 FileInfo fi = new FileInfo(f);
                 if (!fi.equals(existFiles.get(fn))) {
@@ -114,6 +126,7 @@ public class DirectoryMonitor extends Thread {
                     LOGGER.finer("File '" + f + "' changed");
                     existFiles.put(fn, fi);
                     callback.fileChanged(f);
+                    directoryChanged = true;
                 }
             }
         }
@@ -133,7 +146,13 @@ public class DirectoryMonitor extends Thread {
                 LOGGER.finer("File '" + f + "' added");
                 existFiles.put(fn, new FileInfo(f));
                 callback.fileChanged(f);
+                directoryChanged = true;
             }
+        }
+        
+        if (directoryCallback != null && directoryChanged)
+        {
+        	directoryCallback.directoryChanged(dir);
         }
     }
 
@@ -163,5 +182,12 @@ public class DirectoryMonitor extends Thread {
          * Called on any file changes - created, modified, deleted.
          */
         void fileChanged(File file);
+    }
+    
+    public interface DirectoryCallback {
+        /**
+         * Called once for every directory where a file was changed - created, modified, deleted.
+         */
+        void directoryChanged(File file);
     }
 }

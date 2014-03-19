@@ -1,4 +1,5 @@
-/*
+/* :name=Strip Tags :description=Remove tags in the current target 
+ *
  * #Purpose: Remove tags in the current target 
  * #Details: http: // wp.me/p3fHEs-4W
  * 

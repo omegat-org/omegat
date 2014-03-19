@@ -1,5 +1,6 @@
-/*
- *  Open current file
+/* :name=Open Current File		:description=Open the current translated file
+ * 
+ * Open current file
  *
  * @author  Yu Tang
  * @date    2013-06-05

@@ -1,5 +1,6 @@
-/*
- *  QA script
+/* :name=QA - Check Rules     :description=The rules are based on the Checkmate Quality check 
+ * 
+ * QA script
  *
  * @author  Briac Pilpre
  * @author  Kos Ivantsov

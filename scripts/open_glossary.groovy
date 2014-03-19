@@ -1,5 +1,6 @@
-/*
- *  Open the writeable glossary in an editor
+/* :name=Open Glossary :description=Open the writeable glossary in an editor
+ * 
+ * Open the writeable glossary in an editor
  *
  * @author  Yu Tang
  * @date    2013-06-05

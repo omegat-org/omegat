@@ -1,4 +1,5 @@
-/**
+/** :name=SVN - Commit Source File :description=Commit source file changes to SVN remote repository
+ * 
  *  Commit source file changes to SVN remote repository
  *
  * Supported basic operations are shown in the next list.

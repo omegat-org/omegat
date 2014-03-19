@@ -1,4 +1,5 @@
-/*
+/* :name=Currency Translator :description=Translate currencies representation according to source and target locale.\nThis will translate a string like "$123,399.99" to "123 399,99 USD"
+ * 
  *  Translate currencies representation accorfing to source and target locale.
  *  This will translate a string like "$123,399.99" to "123 399,99 USD"
  *

@@ -1,5 +1,6 @@
-/*
- *  Open project folder
+/* :name=Open Project Folder :description=Open the project folder in the operating system
+ * 
+ * Open project folder
  *
  * @author  Yu Tang
  * @date    2013-06-05

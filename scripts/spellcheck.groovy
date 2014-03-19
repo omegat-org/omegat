@@ -1,5 +1,6 @@
-/*
- *  Global spell checking
+/* :name=Spellcheck :description=Global Spell Checking
+ *
+ * Global spell checking
  *
  * @author  Piotr Kulik
  * @date    2013-06-23

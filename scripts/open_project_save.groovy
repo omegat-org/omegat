@@ -1,5 +1,6 @@
-/*
- *  Open project_save.tmx in an editor
+/* :name=Open project_save.tmx :description=Open project_save.tmx in an editor
+ * 
+ * Open project_save.tmx in an editor
  *
  * @author  Yu Tang
  * @date    2013-06-05

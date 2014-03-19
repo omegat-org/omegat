@@ -29,7 +29,8 @@ def doReplace(search_string, replace_string) {
 
 	// "console" is an object from the OmegaT application. It represents the logging window, at the bottom of the 
 	// script interface. It has only three methods: print, println and clear.
-	console.println("Simple search and replace script");
+	// "res" is the ResourceBundle use to localize the script in different language.
+	console.println(res.getString("description"));
 
 	// Like "console", "project" is binded from OmegaT. This is the currently opened project.
 	// The allEntries member will return all the segments of the project, and each segment will
@@ -64,7 +65,7 @@ def doReplace(search_string, replace_string) {
 		}
 	}
 
-	console.println("Modified Segments:") + segment_count;
+	console.println(res.getString("modified_segments") + segment_count);
 }
 
 
@@ -73,30 +74,30 @@ def doReplace(search_string, replace_string) {
 // and a button to launch the replacement.
 
 new SwingBuilder().edt {
-	frame(title:"Example - Search and Replace", size: [350, 200], show: true) {
+	frame(title:res.getString("name"), size: [350, 200], show: true) {
 		borderLayout(vgap: 5)
 
 		panel(constraints: BL.CENTER,
 		border: compoundBorder([
 			emptyBorder(10),
-			titledBorder("Simple search and replace script")
+			titledBorder(res.getString("description"))
 		])) {
 	        // Just as in a HTML form, we can use a Table layout
 	        // To with labels and Textfields.
 			tableLayout {
 				tr {
-					td { label "Search: " }
+					td { label res.getString("search") }
 					td { textField search_string, columns: 20  }
 				}
 				tr {
-					td { label "Replace: " }
+					td { label res.getString("replace") }
 					td { textField replace_string, columns: 20  }
 				}
 				tr {
 					td { label "" }
 					td {
 						// When the button is clicked, the doReplace function will be called
-						button(text: "Search and Replace",
+						button(text:res.getString("button"),
 						actionPerformed: { doReplace(search_string, replace_string) },
 						constraints:BL.SOUTH)
 					}

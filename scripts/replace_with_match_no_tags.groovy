@@ -1,4 +1,5 @@
-/*
+/* :name=Tag-Free Match :description=Replace current target with tag-free match
+ * 
  * #Purpose: Replace current target with tag-free match 
  * #Details: href="http://wp.me/p3fHEs-4W
  * 

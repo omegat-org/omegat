@@ -37,14 +37,10 @@ import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 
-import javax.script.ScriptContext;
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineFactory;
 import javax.script.ScriptEngineManager;
@@ -79,13 +75,8 @@ import javax.swing.text.Highlighter.HighlightPainter;
 
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
-import org.omegat.core.data.IProject;
 import org.omegat.core.events.IApplicationEventListener;
-import org.omegat.gui.editor.IEditor;
 import org.omegat.gui.editor.mark.Mark;
-import org.omegat.gui.glossary.GlossaryTextArea;
-import org.omegat.gui.main.IMainWindow;
-import org.omegat.util.DirectoryMonitor;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
 import org.omegat.util.StaticUtils;
@@ -96,6 +87,8 @@ public class ScriptingWindow extends JFrame {
 
     static ScriptingWindow window;
 
+    // XXX Still needed ?
+    /** @deprecated */
     public static void loadPlugins() {
         CoreEvents.registerApplicationEventListener(new IApplicationEventListener() {
             @Override
@@ -118,6 +111,7 @@ public class ScriptingWindow extends JFrame {
     }
     
 
+    /** @deprecated */
     public static void unloadPlugins() {
         if (window != null) {
             window.dispose();
@@ -131,7 +125,9 @@ public class ScriptingWindow extends JFrame {
         // Handle escape key to close the window
         KeyStroke escape = KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0, false);
         Action escapeAction = new AbstractAction() {
-            @Override
+			private static final long serialVersionUID = 1L;
+
+			@Override
             public void actionPerformed(ActionEvent e) {
                 dispose();
             }
@@ -145,7 +141,7 @@ public class ScriptingWindow extends JFrame {
 
         initWindowLayout();
         
-        monitor = new ScriptsMonitor(m_scriptList, getAvailableScriptExtensions());
+        monitor = new ScriptsMonitor(this, m_scriptList, getAvailableScriptExtensions());
         monitor.start(m_scriptsDirectory);
 
         logResult(listScriptEngine().toString());
@@ -209,11 +205,12 @@ public class ScriptingWindow extends JFrame {
 
             String scriptName = Preferences.getPreferenceDefault("scripts_quick_" + scriptKey(i), null);
 
+            File scriptDir = new File(Preferences.getPreferenceDefault("scripts_dir", new File(".", DEFAULT_SCRIPTS_DIR).getAbsolutePath()));
             
             if (scriptName != null || "".equals(scriptName)) {
-                setQuickScriptMenu(scriptName, i);
+                setQuickScriptMenu(new ScriptItem(new File(scriptDir, scriptName)), i);
             } else {
-                unsetQuickScriptMenu(scriptName, i);
+                unsetQuickScriptMenu(i);
             }
             
             // Since the script is run while editing a segment, the shortcut should not interfere
@@ -231,14 +228,14 @@ public class ScriptingWindow extends JFrame {
         return i+1 == NUMBERS_OF_QUICK_SCRIPTS ? 0 : i + 1;
     }
     
-    private void unsetQuickScriptMenu(String scriptName, int index) {
+    private void unsetQuickScriptMenu(int index) {
         m_quickScripts[index] = null;
         m_quickMenus[index].setEnabled(false);
         Mnemonics.setLocalizedText(m_quickMenus[index], "&" + scriptKey(index) + " - " + OStrings.getString("SCW_SCRIPTS_NONE"));
     }
     
-    private void setQuickScriptMenu(String scriptName, int index) {
-        m_quickScripts[index] = scriptName;
+    private void setQuickScriptMenu(ScriptItem scriptItem, int index) {
+        m_quickScripts[index] = scriptItem.getName();
         
         m_quickMenus[index].addActionListener(new QuickScriptActionListener(index));
         
@@ -246,8 +243,12 @@ public class ScriptingWindow extends JFrame {
         // with the segment content, so we set it to a Function key.
         m_quickMenus[index].setAccelerator(KeyStroke.getKeyStroke("shift ctrl F" + (index+1)));
         m_quickMenus[index].setEnabled(true);
+        if ("".equals(scriptItem.getDescription()))
+        {
+        	m_quickMenus[index].setToolTipText(scriptItem.getDescription());
+        }
 
-        Mnemonics.setLocalizedText( m_quickMenus[index], "&" + scriptKey(index) + " - " + scriptName);
+        Mnemonics.setLocalizedText( m_quickMenus[index], "&" + scriptKey(index) + " - " + scriptItem.getScriptName());
     }
 
     private class QuickScriptActionListener implements ActionListener {
@@ -271,8 +272,8 @@ public class ScriptingWindow extends JFrame {
         }
 
         logResult(StaticUtils.format(OStrings.getString("SCW_QUICK_RUN"), (index+1)));
-        ScriptFile scriptFile = new ScriptFile(m_scriptsDirectory, m_quickScripts[index]);
-        
+        ScriptItem scriptFile = new ScriptItem(new File(m_scriptsDirectory, m_quickScripts[index]));
+
         executeScriptFile(scriptFile, true);
     }
 
@@ -281,7 +282,9 @@ public class ScriptingWindow extends JFrame {
         appliRootPane.getInputMap(JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT).put(
                 KeyStroke.getKeyStroke(KeyEvent.VK_R, InputEvent.CTRL_DOWN_MASK | InputEvent.ALT_DOWN_MASK , false), "RUN_CURRENT_SCRIPT");
         appliRootPane.getActionMap().put("RUN_CURRENT_SCRIPT",  new AbstractAction() {
-            @Override
+			private static final long serialVersionUID = 1L;
+
+			@Override
             public void actionPerformed(ActionEvent e) {
                 runScript();
             }
@@ -290,7 +293,6 @@ public class ScriptingWindow extends JFrame {
 
     private void initWindowLayout() {
     	loadPreferences();
-
         getContentPane().setLayout(new BorderLayout(0, 0));
 
         JPanel panelNorth = new JPanel();
@@ -298,34 +300,8 @@ public class ScriptingWindow extends JFrame {
         fl_panelNorth.setAlignment(FlowLayout.LEFT);
         getContentPane().add(panelNorth, BorderLayout.NORTH);
         
-        JLabel lblScriptsDirectory = new JLabel(OStrings.getString("SCW_SCRIPTS_FOLDER"));
-        panelNorth.add(lblScriptsDirectory);
+        setupDirectorySelection(panelNorth);
         
-        m_txtScriptsDir = new JTextField();
-        panelNorth.add(m_txtScriptsDir);
-        
-        m_txtScriptsDir.setText(Preferences.getPreferenceDefault(Preferences.SCRIPTS_DIRECTORY, 
-                new File(".", DEFAULT_SCRIPTS_DIR).getAbsolutePath()));
-        
-        m_txtScriptsDir.setColumns(40);
-        m_txtScriptsDir.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent evt) {
-                directoryTextFieldActionPerformed(evt);
-            }
-        });
-        
-        JButton btnBrowse = new JButton();
-        Mnemonics.setLocalizedText(btnBrowse, OStrings.getString("SCW_SCRIPTS_FOLDER_CHOOSE"));
-        btnBrowse.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent evt) {
-                directoryChooserButtonActionPerformed(evt);
-            }
-        });
-
-        panelNorth.add(btnBrowse);
-
         m_scriptsDirectory = new File(m_txtScriptsDir.getText());
         
         m_scriptList = new JList();
@@ -353,9 +329,9 @@ public class ScriptingWindow extends JFrame {
             @Override
             public void actionPerformed(ActionEvent evt) {
                 try {
-                    m_currentScriptFile.setText(m_txtScriptEditor.getText());
+                    m_currentScriptItem.setText(m_txtScriptEditor.getText());
                     logResult(StaticUtils.format(OStrings.getString("SCW_SAVE_OK"), 
-                            m_currentScriptFile.getAbsolutePath()));
+                            m_currentScriptItem.getAbsolutePath()));
                 } catch (IOException e) {
                     logResult(OStrings.getString("SCW_SAVE_ERROR"));
                     logResult(e.getMessage());
@@ -387,13 +363,48 @@ public class ScriptingWindow extends JFrame {
         scrollPaneResults.setMinimumSize(minimumSize);
         
         getContentPane().add(splitPane, BorderLayout.CENTER);
-
+ 
         JPanel panelSouth = new JPanel();
         FlowLayout fl_panelSouth = (FlowLayout) panelSouth.getLayout();
         fl_panelSouth.setAlignment(FlowLayout.LEFT);
         getContentPane().add(panelSouth, BorderLayout.SOUTH);
+        setupRunButtons(panelSouth);
+  
+        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+    }
 
-      m_btnRunScript = new JButton();
+	private void setupDirectorySelection(JPanel panel) {
+		JLabel lblScriptsDirectory = new JLabel(OStrings.getString("SCW_SCRIPTS_FOLDER"));
+        panel.add(lblScriptsDirectory);
+        
+        m_txtScriptsDir = new JTextField();
+        panel.add(m_txtScriptsDir);
+        
+        m_txtScriptsDir.setText(Preferences.getPreferenceDefault(Preferences.SCRIPTS_DIRECTORY, 
+                new File(".", DEFAULT_SCRIPTS_DIR).getAbsolutePath()));
+        
+        m_txtScriptsDir.setColumns(40);
+        m_txtScriptsDir.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent evt) {
+                directoryTextFieldActionPerformed(evt);
+            }
+        });
+        
+        JButton btnBrowse = new JButton();
+        Mnemonics.setLocalizedText(btnBrowse, OStrings.getString("SCW_SCRIPTS_FOLDER_CHOOSE"));
+        btnBrowse.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent evt) {
+                directoryChooserButtonActionPerformed(evt);
+            }
+        });
+
+        panel.add(btnBrowse);
+	}
+
+	private void setupRunButtons(JPanel panel) {
+		m_btnRunScript = new JButton();
         Mnemonics.setLocalizedText(m_btnRunScript, OStrings.getString("SCW_RUN_SCRIPT"));
         m_btnRunScript.setAlignmentX(Component.LEFT_ALIGNMENT);
         m_btnRunScript.setHorizontalAlignment(SwingConstants.LEFT);
@@ -403,7 +414,7 @@ public class ScriptingWindow extends JFrame {
                 runScript();
             }
         });
-        panelSouth.add(m_btnRunScript);
+        panel.add(m_btnRunScript);
 
         
         for (int i = 0; i < NUMBERS_OF_QUICK_SCRIPTS; i++) {
@@ -440,14 +451,14 @@ public class ScriptingWindow extends JFrame {
             addQuickScriptMenuItem.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent evt) {
-                    String sn = m_scriptList.getSelectedValue().toString();
-                    Preferences.setPreference("scripts_quick_" + scriptKey, sn);
-                    m_quickScriptButtons[index].setToolTipText( sn);
+                	ScriptItem scriptItem = (ScriptItem) m_scriptList.getSelectedValue();
+                    Preferences.setPreference("scripts_quick_" + scriptKey, scriptItem.getName());
+                    m_quickScriptButtons[index].setToolTipText(scriptItem.getToolTip());
                     m_quickScriptButtons[index].setText("<" + scriptKey + ">");
                     
-                    setQuickScriptMenu(sn, index);
+                    setQuickScriptMenu(scriptItem, index);
                     
-                    logResult(StaticUtils.format(OStrings.getString("SCW_SAVE_QUICK_SCRIPT"), sn, scriptKey));
+                    logResult(StaticUtils.format(OStrings.getString("SCW_SAVE_QUICK_SCRIPT"), scriptItem, scriptKey));
                 }
             });
             quickScriptPopup.add(addQuickScriptMenuItem);
@@ -457,13 +468,13 @@ public class ScriptingWindow extends JFrame {
             removeQuickScriptMenuItem.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent evt) {
-                    String sn = m_scriptList.getSelectedValue().toString();
-                    logResult(StaticUtils.format(OStrings.getString("SCW_REMOVED_QUICK_SCRIPT"), sn, scriptKey));
+                	ScriptItem scriptItem = (ScriptItem) m_scriptList.getSelectedValue();
+                    logResult(StaticUtils.format(OStrings.getString("SCW_REMOVED_QUICK_SCRIPT"), scriptItem.getName(), scriptKey));
                     Preferences.setPreference("scripts_quick_" + scriptKey, "");
                     m_quickScriptButtons[index].setToolTipText(OStrings.getString("SCW_NO_SCRIPT_SET"));
                     m_quickScriptButtons[index].setText(" " + scriptKey + " ");
                     
-                    unsetQuickScriptMenu(sn, index);
+                    unsetQuickScriptMenu(index);
                 }
             });
             quickScriptPopup.add(removeQuickScriptMenuItem);
@@ -471,21 +482,18 @@ public class ScriptingWindow extends JFrame {
 
             m_quickScriptButtons[i].setComponentPopupMenu(quickScriptPopup);
             
-            panelSouth.add(m_quickScriptButtons[i]);
+            panel.add(m_quickScriptButtons[i]);
         }
-        
-  
-        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-    }
+	}
 
     private void runScript() {
         
-        if (m_currentScriptFile == null) {
+        if (m_currentScriptItem == null) {
             logResult(OStrings.getString("SCW_NO_SCRIPT_SELECTED"));
             return;
         }
 
-        if (! m_currentScriptFile.canRead()) {
+        if (! m_currentScriptItem.canRead()) {
             logResult(OStrings.getString("SCW_CANNOT_READ_SCRIPT"));
             return;
         }
@@ -493,36 +501,27 @@ public class ScriptingWindow extends JFrame {
 
         m_txtResult.setText("");
         logResult(StaticUtils.format(OStrings.getString("SCW_RUNNING_SCRIPT"), 
-                m_currentScriptFile.getAbsolutePath()));
+                m_currentScriptItem.getAbsolutePath()));
         
-        executeScriptFile(m_currentScriptFile, false);
+        executeScriptFile(m_currentScriptItem, false);
 
+    }
+
+    public void executeScriptFile(ScriptItem scriptItem, boolean forceFromFile) {
+    	executeScriptFile(scriptItem, forceFromFile, null);
     }
     
-    protected static String getFileExtension(String fileName)
-    {
-    	String extension = "";
-
-    	int i = fileName.lastIndexOf('.');
-
-    	if (i >= 0 && i != -1) {
-    	    extension = fileName.substring(i+1);
-    	}
-    	
-    	return extension;
-    }
-
-    private void executeScriptFile(ScriptFile scriptFile, boolean forceFromFile) {
+    public void executeScriptFile(ScriptItem scriptItem, boolean forceFromFile, Map<String, Object> additionalBindings) {
         ScriptLogger scriptLogger = new ScriptLogger(m_txtResult);
 
-        ScriptEngine scriptEngine = manager.getEngineByExtension(getFileExtension(scriptFile.getName()));
+        ScriptEngine scriptEngine = manager.getEngineByExtension(getFileExtension(scriptItem.getName()));
          
          if (scriptEngine == null)
          {
         	 scriptEngine = manager.getEngineByName(DEFAULT_SCRIPT);
          }
          
-        logResult(StaticUtils.format(OStrings.getString("SCW_SELECTED_LANGUAGE"), scriptEngine.getFactory().getEngineName()));
+        //logResult(StaticUtils.format(OStrings.getString("SCW_SELECTED_LANGUAGE"), scriptEngine.getFactory().getEngineName()));
         
     	SimpleBindings bindings = new SimpleBindings();
     	bindings.put(VAR_PROJECT, Core.getProject());
@@ -530,14 +529,20 @@ public class ScriptingWindow extends JFrame {
     	bindings.put(VAR_GLOSSARY, Core.getGlossary());
     	bindings.put(VAR_MAINWINDOW, Core.getMainWindow());
     	bindings.put(VAR_CONSOLE, scriptLogger);
-
+    	bindings.put(VAR_RESOURCES, scriptItem.getResourceBundle());
+    	
+    	if (additionalBindings != null)
+    	{
+    		bindings.putAll(additionalBindings);
+    	}
+    	
         // evaluate JavaScript code from String
         try {
             String scriptString;
             if (forceFromFile) {
-                scriptString = scriptFile.getText();
+                scriptString = scriptItem.getText();
             } else if ("".equals(m_txtScriptEditor.getText().trim())) {
-                scriptString = scriptFile.getText();
+                scriptString = scriptItem.getText();
                 m_txtScriptEditor.setText(scriptString);   
             } else {
                 scriptString = m_txtScriptEditor.getText();
@@ -650,13 +655,45 @@ public class ScriptingWindow extends JFrame {
             return;
         }
         try {
-            m_currentScriptFile = new ScriptFile(m_scriptsDirectory,
-                    m_scriptList.getSelectedValue().toString());
-            m_txtScriptEditor.setText(m_currentScriptFile.getText());
+        	m_currentScriptItem = (ScriptItem) m_scriptList.getSelectedValue();
+            m_txtScriptEditor.setText(m_currentScriptItem.getText());
             m_txtScriptEditor.setCaretPosition(0);
         } catch (IOException e) {
             logResult(OStrings.getString("SCW_CANNOT_READ_SCRIPT"));
         }
+    }
+
+    /** Returns the filename without the extension */
+    protected static String getBareFileName(String fileName)
+    {
+    	if (fileName == null)
+    	{
+    		return null;
+    	}
+    	
+    	
+    	String bare = fileName;
+    	int i = fileName.lastIndexOf('.');
+
+    	if (i >= 0 && i != -1) {
+    	    bare = fileName.substring(0, i);
+    	}
+    	
+    	return bare;
+    }
+
+    /** Returns the extension of file. */
+    protected static String getFileExtension(String fileName)
+    {
+    	String extension = "";
+
+    	int i = fileName.lastIndexOf('.');
+
+    	if (i >= 0 && i != -1) {
+    	    extension = fileName.substring(i+1);
+    	}
+    	
+    	return extension;
     }
 
     private static final String DEFAULT_SCRIPT = "javascript";
@@ -665,6 +702,7 @@ public class ScriptingWindow extends JFrame {
     private static final String VAR_GLOSSARY = "glossary";
     private static final String VAR_EDITOR = "editor";
     private static final String VAR_PROJECT = "project";
+    private static final String VAR_RESOURCES = "res";
 
     private static final String DEFAULT_SCRIPTS_DIR = "scripts";
     
@@ -680,7 +718,7 @@ public class ScriptingWindow extends JFrame {
 	protected ScriptsMonitor monitor;
 	
     private File m_scriptsDirectory;
-    private ScriptFile m_currentScriptFile;
+    private ScriptItem m_currentScriptItem;
     private JTextField m_txtScriptsDir;
     private JFileChooser m_fileChooser = new JFileChooser();
 

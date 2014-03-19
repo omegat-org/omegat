@@ -9,7 +9,7 @@
                2009-2010 Didier Briel
                2012 Alex Buloichik, Guido Leenders, Didier Briel, Martin Fleurke
                2013 Aaron Madlon-Kay, Didier Briel
-               2014 Aaron Madlon-Kay, Alex Buloichik
+               2014 Aaron Madlon-Kay, Alex Buloichik, Didier Briel
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -1206,9 +1206,12 @@ public class RealProject implements IProject {
                         // Please note the use of "/". FileUtil.computeRelativePath rewrites all other
                         // directory separators into "/".
                         //
-                        if (FileUtil.computeRelativePath(tmRoot, file).startsWith(OConsts.AUTO_TM + "/")) {
-                            appendFromAutoTMX(newTMX);
-                        }
+                        if (FileUtil.computeRelativePath(tmRoot, file).startsWith(OConsts.AUTO_TM + "/")) {                         
+                            appendFromAutoTMX(newTMX, false);
+                        } else if (FileUtil.computeRelativePath(tmRoot, file).startsWith(OConsts.AUTO_ENFORCE_TM + '/')) {
+                                appendFromAutoTMX(newTMX, true);
+                        }                          
+
                     } catch (Exception e) {
                         String filename = file.getPath();
                         Log.logErrorRB(e, "TF_TM_LOAD_ERROR", filename);
@@ -1262,9 +1265,9 @@ public class RealProject implements IProject {
     /**
      * Append new translation from auto TMX.
      */
-    void appendFromAutoTMX(ExternalTMX tmx) {
+    void appendFromAutoTMX(ExternalTMX tmx, boolean isEnforcedTMX) {
         synchronized (projectTMX) {
-            importHandler.process(tmx);
+            importHandler.process(tmx, isEnforcedTMX);
         }
     }
 

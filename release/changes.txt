@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 3.1.0 
 ----------------------------------------------------------------------
-  23 Enhancements
+  24 Enhancements
    6 Bug fixes
    2 Localisation updates
 ----------------------------------------------------------------------
@@ -32,6 +32,9 @@
 
   - Mark auto-populated segments 
   https://sourceforge.net/p/omegat/feature-requests/963/
+
+  - Priority TM to override project_save.tmx 
+  https://sourceforge.net/p/omegat/feature-requests/957/
 
   Other enhancements:
   

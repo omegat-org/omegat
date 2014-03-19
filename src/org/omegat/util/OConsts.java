@@ -91,6 +91,9 @@ public class OConsts {
     public static final String DEFAULT_TM = "tm";
     /** Project subfolder for automatically applied translation memories within the tm folder. */
     public static final String AUTO_TM = "auto";
+    /** Project subfolder for automatically applied translation memories within the tm folder. Existing
+        translation are overwritten */
+    public static final String AUTO_ENFORCE_TM = "enforce";
     /** Project subfolder for dictionaries default name. */
     public static final String DEFAULT_DICT = "dictionary";
     /** Project subfolder for project's translation memory. */

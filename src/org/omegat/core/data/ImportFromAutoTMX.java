@@ -3,7 +3,7 @@
           with fuzzy matching, translation memory, keyword search, 
           glossaries, and translation leveraging into updated projects.
 
- Copyright (C) 2014 Alex Buloichik
+ Copyright (C) 2014 Alex Buloichik, Didier Briel
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -36,6 +36,7 @@ import org.omegat.util.StringUtil;
  * Utility class for import translations from tm/auto/ files.
  * 
  * @author Alex Buloichik (alex73mail@gmail.com)
+ * @author Didier Briel
  */
 public class ImportFromAutoTMX {
     final RealProject project;
@@ -54,7 +55,13 @@ public class ImportFromAutoTMX {
         }
     }
 
-    void process(ExternalTMX tmx) {
+    /**
+     * Process a TMX from an automatic folder
+     * @param tmx The name of the TMX to process
+     * @param isEnforcedTMX If true, existing default translations will be overwritten in all cases
+     */
+    void process(ExternalTMX tmx, boolean isEnforcedTMX) {
+               
         for (PrepareTMXEntry e : tmx.getEntries()) { // iterate by all entries in TMX
             List<SourceTextEntry> list = existEntries.get(e.source);
             if (list == null) {
@@ -74,8 +81,10 @@ public class ImportFromAutoTMX {
                     }
                     if (existTranslation.isTranslated()) { // default translation already exist
                         if (existTranslation.linked == TMXEntry.ExternalLinked.xAUTO
-                                && !StringUtil.equalsWithNulls(existTranslation.translation, e.translation)) {
-                            // translation already from auto and really changed
+                                && !StringUtil.equalsWithNulls(existTranslation.translation, e.translation) 
+                                || isEnforcedTMX) {
+                            // translation already from auto and really changed or translation comes 
+                            // from the enforce folder
                             setTranslation(ste, e, true, TMXEntry.ExternalLinked.xAUTO);
                         }
                     } else {

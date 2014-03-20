@@ -84,7 +84,9 @@ public class ScriptsMonitor implements DirectoryMonitor.DirectoryCallback, Direc
      * Executed on file changed.
      */
 	@Override
-	public void fileChanged(File file) { /* empty */ }
+	public void fileChanged(File file) {
+		
+	}
 	@Override
 	public void directoryChanged(File file) {
         if (! (m_scriptDir.exists() && m_scriptDir.isDirectory())) {
@@ -234,6 +236,8 @@ public class ScriptsMonitor implements DirectoryMonitor.DirectoryCallback, Direc
         if (entryActivatedDir.exists())
         {
         	ArrayList<ScriptItem> eventScripts = m_eventsScript.get(eventType);
+        	// Avoid executing scripts that may be deleted during the directory change.
+        	eventScripts.clear();
 
             for (File script : entryActivatedDir.listFiles(m_filter))
             {

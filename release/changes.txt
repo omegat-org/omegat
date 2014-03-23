@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 3.1.0 
 ----------------------------------------------------------------------
-  24 Enhancements
+  29 Enhancements
    6 Bug fixes
    2 Localisation updates
 ----------------------------------------------------------------------
@@ -35,6 +35,12 @@
 
   - Priority TM to override project_save.tmx 
   https://sourceforge.net/p/omegat/feature-requests/957/
+
+  - Localisation support for scripts 
+  https://sourceforge.net/p/omegat/feature-requests/975/
+
+  - Event for scripts 
+  https://sourceforge.net/p/omegat/feature-requests/976/
 
   Other enhancements:
   
@@ -72,7 +78,7 @@ necessary to change by hand the location of the writeable glossary, otherwise an
 error message occurred. Now, when the location of the glossary folder is changed, the
 glossary path name (if it was a default glossary name) is changed automatically.
 
-  - The scripting interface now the Java 6 native implementation 
+  - The scripting interface uses now the Java 6 native implementation 
 of JSR-223 script interface instead of the Bean Scripting Framework. 
 The list of available script engines should properly reflect the 
 engines installed on OmegaT classpath. Since Java6 includes by 
@@ -108,6 +114,9 @@ https://sourceforge.net/p/omegat/feature-requests/938/
 
   - The script svn_cleanup.groovy was renamed to svn_cleanup_selected.groovy. When
 no project is loaded, it allows doing "svn cleanup" on any SVN repository.
+
+  - Standard scripts now have a user friendly name and description, which is displayed 
+instead of displaying the file name
 
   Bug fixes:
 

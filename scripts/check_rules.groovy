@@ -5,8 +5,8 @@
  * @author  Briac Pilpre
  * @author  Kos Ivantsov
  * @author  Didier Briel
- * @date    2013-12-03
- * @version 0.3
+ * @date    2014-03-23
+ * @version 0.4
  */
 
 import groovy.swing.SwingBuilder
@@ -53,8 +53,11 @@ rules = [
            targetLonger: { s, t -> (t.length() / s.length() * 100) > maxCharLengthAbove },
            // Punctuation
            differentPunctuation: { s, t -> def s1 = s[-1], t1 = t[-1];
-                                  '.!?;:'.contains(s1) ? s1 != t1 : '.!?;:'.contains(t1)}
-
+                                  '.!?;:'.contains(s1) ? s1 != t1 : '.!?;:'.contains(t1)},
+           // Case of first letter in segment
+           differentStartCase: { s, t -> def s1 = s[0] =~ /^\p{Lu}/ ? 'up' : 'low'
+                                t1 = t[0] =~ /^\p{Lu}/ ? 'up' : 'low'
+                                s1 != t1 }
         ];
 
 segment_count = 0;

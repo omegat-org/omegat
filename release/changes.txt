@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 3.1.0 
 ----------------------------------------------------------------------
-  29 Enhancements
+  30 Enhancements
    6 Bug fixes
    2 Localisation updates
 ----------------------------------------------------------------------
@@ -117,6 +117,9 @@ no project is loaded, it allows doing "svn cleanup" on any SVN repository.
 
   - Standard scripts now have a user friendly name and description, which is displayed 
 instead of displaying the file name
+
+  - New QA rule in check_rules.groovy that checks the case of the first character 
+in source and target
 
   Bug fixes:
 

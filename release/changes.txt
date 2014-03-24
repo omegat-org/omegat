@@ -2,10 +2,15 @@
  OmegaT 2.6.3 update 9
 ----------------------------------------------------------------------
    0 Enhancement
-   0 Bug fix
+   1 Bug fix
    1 Localisation update
 ----------------------------------------------------------------------
 2.6.3 update 8 vs. 2.6.3 update 7
+
+  Bug fixes: 
+  
+  - There was still an issue with team projects, where newer translations 
+could sometimes be overwritten by older ones. It should now be fixed.
 
   Localisation updates:
 
@@ -19,6 +24,8 @@
    0 Localisation update
 ----------------------------------------------------------------------
 2.6.3 update 8 vs. 2.6.3 update 7
+
+  Bug fixes: 
 
   - The fix for "mixed content" introduced in 2.6.3 update 7 made
 sometimes OmegaT unusable since a change introduced in Java 1.7_51. We have 

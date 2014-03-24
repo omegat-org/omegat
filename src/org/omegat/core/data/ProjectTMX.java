@@ -349,14 +349,14 @@ public class ProjectTMX {
         for (Map.Entry<String, TMXEntry> en : baseTMX.defaults.entrySet()) {
             TMXEntry newEntry = changedTMX.defaults.get(en.getKey());
 
-            if (!en.getValue().equalsTranslation(newEntry)) {
+            if (!en.getValue().equalsTranslation(newEntry) && en.getValue().changeDate > newEntry.changeDate) {
                 delta.defaults.put(en.getKey(), newEntry);
             }
         }
         for (Map.Entry<EntryKey, TMXEntry> en : baseTMX.alternatives.entrySet()) {
             TMXEntry newEntry = changedTMX.alternatives.get(en.getKey());
 
-            if (!en.getValue().equalsTranslation(newEntry)) {
+            if (!en.getValue().equalsTranslation(newEntry) && en.getValue().changeDate > newEntry.changeDate) {
                 delta.alternatives.put(en.getKey(), newEntry);
             }
         }

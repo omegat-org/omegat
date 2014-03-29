@@ -50,7 +50,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="ch04.shortcuts.customization"></a>1.&nbsp;<a class="indexterm" name="d0e11097"></a>Shortcuts customization
+                     <h2 class="title" style="clear: both"><a name="ch04.shortcuts.customization"></a>1.&nbsp;<a class="indexterm" name="d0e11119"></a>Shortcuts customization
                      </h2>
                   </div>
                </div>
@@ -75,7 +75,7 @@
                       code&gt;=&lt;shortcut&gt;</code>, where <span class="emphasis"><em>&lt;menu item
                          code&gt;</em></span> is a code taken from the tables below and
                    <span class="emphasis"><em>&lt;shortcut&gt;</em></span> is a combination of pressed keys
-                   specified by the user<a href="#ftn.d0e11132" class="footnote" name="d0e11132"><sup class="footnote">[2]</sup></a>.
+                   specified by the user<a href="#ftn.d0e11154" class="footnote" name="d0e11154"><sup class="footnote">[2]</sup></a>.
             </p>
             <p>&lt;shortcut&gt; must be of the following form: 0 or more
                    <code class="code">&lt;modifier&gt;</code> followed by 0 or 1
@@ -87,7 +87,7 @@
                   <li class="listitem">
                      <p><code class="code">&lt;modifier&gt;</code> can be:
                                   <span class="emphasis"><em>shift</em></span>, <span class="emphasis"><em>control</em></span>,
-                                  <span class="emphasis"><em>ctrl</em></span>, <span class="emphasis"><em>meta</em></span><a href="#ftn.d0e11166" class="footnote" name="d0e11166"><sup class="footnote">[3]</sup></a>, <span class="emphasis"><em>alt</em></span>,
+                                  <span class="emphasis"><em>ctrl</em></span>, <span class="emphasis"><em>meta</em></span><a href="#ftn.d0e11188" class="footnote" name="d0e11188"><sup class="footnote">[3]</sup></a>, <span class="emphasis"><em>alt</em></span>,
                                   <span class="emphasis"><em>altGraph</em></span></p>
                   </li>
                   <li class="listitem">
@@ -96,12 +96,12 @@
                   </li>
                   <li class="listitem">
                      <p>and <code class="code">&lt;key&gt;</code> can be any key available on your
-                                  keyboard<a href="#ftn.d0e11200" class="footnote" name="d0e11200"><sup class="footnote">[4]</sup></a>.
+                                  keyboard<a href="#ftn.d0e11222" class="footnote" name="d0e11222"><sup class="footnote">[4]</sup></a>.
                      </p>
                   </li>
                </ul>
             </div>
-            <p>For example, in the default OmegaT shortcuts<a href="#ftn.d0e11208" class="footnote" name="d0e11208"><sup class="footnote">[5]</sup></a>, one can find:
+            <p>For example, in the default OmegaT shortcuts<a href="#ftn.d0e11230" class="footnote" name="d0e11230"><sup class="footnote">[5]</sup></a>, one can find:
             </p>
             <div class="itemizedlist">
                <ul class="itemizedlist" style="list-style-type: disc; ">
@@ -141,7 +141,7 @@
                   </div>
                </div>
             </div>
-            <div class="table"><a name="d0e11285"></a><p class="title"><b>Table&nbsp;H.1.&nbsp;Project Menu</b></p>
+            <div class="table"><a name="d0e11307"></a><p class="title"><b>Table&nbsp;H.1.&nbsp;Project Menu</b></p>
                <div class="table-contents">
                   <table summary="Project Menu" border="1">
                      <colgroup>
@@ -159,7 +159,7 @@
                      <tbody>
                         <tr>
                            <td align="left">New</td>
-                           <td align="left">&nbsp;</td>
+                           <td align="left"><span class="keycap"><strong>Shift+Ctrl+N</strong></span></td>
                            <td align="left">projectNewMenuItem</td>
                         </tr>
                         <tr>
@@ -198,9 +198,14 @@
                            <td align="left">projectSaveMenuItem</td>
                         </tr>
                         <tr>
-                           <td align="left">Create translated documents</td>
+                           <td align="left">Create Translated Documents</td>
                            <td align="left"><span class="keycap"><strong>Ctrl+D</strong></span></td>
                            <td align="left">projectCompileMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Create Current Translated Documents</td>
+                           <td align="left"><span class="keycap"><strong>Shift+Ctrl+D</strong></span></td>
+                           <td align="left">projectSingleCompileMenuItem</td>
                         </tr>
                         <tr>
                            <td align="left">Properties...</td>
@@ -230,7 +235,7 @@
                   </div>
                </div>
             </div>
-            <div class="table"><a name="d0e11392"></a><p class="title"><b>Table&nbsp;H.2.&nbsp;Edit Menu</b></p>
+            <div class="table"><a name="d0e11424"></a><p class="title"><b>Table&nbsp;H.2.&nbsp;Edit Menu</b></p>
                <div class="table-contents">
                   <table summary="Edit Menu" border="1">
                      <colgroup>
@@ -287,6 +292,11 @@
                            <td align="left">editTagPainterMenuItem</td>
                         </tr>
                         <tr>
+                           <td align="left">Insert Next Missing Tag</td>
+                           <td align="left"><span class="keycap"><strong>Ctrl+T</strong></span></td>
+                           <td align="left">editTagNextMissedMenuItem</td>
+                        </tr>
+                        <tr>
                            <td align="left">Export Selection</td>
                            <td align="left"><span class="keycap"><strong>Shift+Ctrl+C</strong></span></td>
                            <td align="left">editExportSelectionMenuItem</td>
@@ -300,6 +310,21 @@
                            <td align="left">Search Project...</td>
                            <td align="left"><span class="keycap"><strong>Ctrl+F</strong></span></td>
                            <td align="left">editFindInProjectMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Search and Replace...</td>
+                           <td align="left"><span class="keycap"><strong>Ctrl+K</strong></span></td>
+                           <td align="left">editReplaceInProjectMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Select Previous Match</td>
+                           <td align="left"><span class="keycap"><strong>Ctrl+↑</strong></span></td>
+                           <td align="left">editSelectFuzzyPrevMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Select Next Match</td>
+                           <td align="left"><span class="keycap"><strong>Ctrl+↓</strong></span></td>
+                           <td align="left">editSelectFuzzyNextMenuItem</td>
                         </tr>
                         <tr>
                            <td align="left">Select Fuzzy Match 1</td>
@@ -327,22 +352,22 @@
                            <td align="left">editSelectFuzzy5MenuItem</td>
                         </tr>
                         <tr>
-                           <td align="left">Switch Case to/Lower Case</td>
+                           <td align="left">Switch Case To/Lower Case</td>
                            <td align="left">&nbsp;</td>
                            <td align="left">lowerCaseMenuItem</td>
                         </tr>
                         <tr>
-                           <td align="left">Switch Case to/Upper Case</td>
+                           <td align="left">Switch Case To/Upper Case</td>
                            <td align="left">&nbsp;</td>
                            <td align="left">upperCaseMenuItem</td>
                         </tr>
                         <tr>
-                           <td align="left">Switch Case to/Title Case</td>
+                           <td align="left">Switch Case To/Title Case</td>
                            <td align="left">&nbsp;</td>
                            <td align="left">titleCaseMenuItem</td>
                         </tr>
                         <tr>
-                           <td align="left">Cycle case to...</td>
+                           <td align="left">Cycle Case To...</td>
                            <td align="left"><span class="keycap"><strong>Shift+F3</strong></span></td>
                            <td align="left">cycleSwitchCaseMenuItem</td>
                         </tr>
@@ -355,6 +380,11 @@
                            <td align="left">Create Alternative Translation</td>
                            <td align="left">&nbsp;</td>
                            <td align="left">editMultipleAlternate</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Register Identical Translation</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">editRegisterIdenticalMenuItem</td>
                         </tr>
                      </tbody>
                   </table>
@@ -369,7 +399,7 @@
                   </div>
                </div>
             </div>
-            <div class="table"><a name="d0e11577"></a><p class="title"><b>Table&nbsp;H.3.&nbsp;GoTo Menu</b></p>
+            <div class="table"><a name="d0e11647"></a><p class="title"><b>Table&nbsp;H.3.&nbsp;GoTo Menu</b></p>
                <div class="table-contents">
                   <table summary="GoTo Menu" border="1">
                      <colgroup>
@@ -391,15 +421,18 @@
                            <td align="left">gotoNextUntranslatedMenuItem</td>
                         </tr>
                         <tr>
+                           <td align="left">Next Translated Segment</td>
+                           <td align="left"><span class="keycap"><strong>Shift+Ctrl+U</strong></span></td>
+                           <td align="left">gotoNextTranslatedMenuItem</td>
+                        </tr>
+                        <tr>
                            <td align="left">Next Segment</td>
-                           <td align="left"><span class="keycap"><strong>Ctrl+N</strong></span> or <span class="keycap"><strong>Enter</strong></span> or
-                                          <span class="keycap"><strong>Tab</strong></span></td>
+                           <td align="left"><span class="keycap"><strong>Ctrl+N</strong></span> or <span class="keycap"><strong>Enter</strong></span> or <span class="keycap"><strong>Tab</strong></span></td>
                            <td align="left">gotoNextSegmentMenuItem</td>
                         </tr>
                         <tr>
                            <td align="left">Previous Segment</td>
-                           <td align="left"><span class="keycap"><strong>Ctrl+P</strong></span> or <span class="keycap"><strong>Ctrl+Enter</strong></span> or
-                                          <span class="keycap"><strong>Ctrl+Tab</strong></span></td>
+                           <td align="left"><span class="keycap"><strong>Ctrl+P</strong></span> or <span class="keycap"><strong>Ctrl+Enter</strong></span> or <span class="keycap"><strong>Ctrl+Tab</strong></span></td>
                            <td align="left">gotoPreviousSegmentMenuItem</td>
                         </tr>
                         <tr>
@@ -440,8 +473,8 @@
                   </div>
                </div>
             </div>
-            <div class="table"><a name="d0e11668"></a><p class="title"><b>Table&nbsp;H.4.&nbsp;View Menu</b></p>
-               <div class="table-contents"><a class="indexterm" name="d0e11671"></a><table summary="View Menu" border="1">
+            <div class="table"><a name="d0e11746"></a><p class="title"><b>Table&nbsp;H.4.&nbsp;View Menu</b></p>
+               <div class="table-contents"><a class="indexterm" name="d0e11749"></a><table summary="View Menu" border="1">
                      <colgroup>
                         <col align="left" class="1">
                         <col align="left" class="2">
@@ -523,7 +556,7 @@
                   </div>
                </div>
             </div>
-            <div class="table"><a name="d0e11758"></a><p class="title"><b>Table&nbsp;H.5.&nbsp;Tools Menu</b></p>
+            <div class="table"><a name="d0e11836"></a><p class="title"><b>Table&nbsp;H.5.&nbsp;Tools Menu</b></p>
                <div class="table-contents">
                   <table summary="Tools Menu" border="1">
                      <colgroup>
@@ -541,8 +574,13 @@
                      <tbody>
                         <tr>
                            <td align="left">Validate Tags</td>
-                           <td align="left"><span class="keycap"><strong>Ctrl +T</strong></span></td>
+                           <td align="left"><span class="keycap"><strong>Shift+Ctrl+V</strong></span></td>
                            <td align="left">toolsValidateTagsMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Validate Tags for Current Document</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">toolsSingleValidateTagsMenuItem</td>
                         </tr>
                         <tr>
                            <td align="left">Statistics</td>
@@ -553,6 +591,11 @@
                            <td align="left">Match Statistics</td>
                            <td align="left">&nbsp;</td>
                            <td align="left">toolsShowStatisticsMatchesMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Match Statistics per File</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">toolsShowStatisticsMatchesPerFileMenuItem</td>
                         </tr>
                      </tbody>
                   </table>
@@ -567,7 +610,7 @@
                   </div>
                </div>
             </div>
-            <div class="table"><a name="d0e11797"></a><p class="title"><b>Table&nbsp;H.6.&nbsp;Options Menu</b></p>
+            <div class="table"><a name="d0e11887"></a><p class="title"><b>Table&nbsp;H.6.&nbsp;Options Menu</b></p>
                <div class="table-contents">
                   <table summary="Options Menu" border="1">
                      <colgroup>
@@ -607,6 +650,21 @@
                            <td align="left">TransTips/Exact Match</td>
                            <td align="left">&nbsp;</td>
                            <td align="left">optionsTransTipsExactMatchMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Auto-completion/Glossary...</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">optionsAutoCompleteGlossaryMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Auto-completion/Auto-text...</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">optionsAutoCompleteAutoTextMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Auto-completion/Character Table...</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">optionsAutoCompleteCharTableMenuItem</td>
                         </tr>
                         <tr>
                            <td align="left">Font...</td>
@@ -659,7 +717,7 @@
                            <td align="left">optionsSaveOptionsMenuItem</td>
                         </tr>
                         <tr>
-                           <td align="left">Proxy login...</td>
+                           <td align="left">Proxy Login...</td>
                            <td align="left">&nbsp;</td>
                            <td align="left">optionsViewOptionsMenuLoginItem</td>
                         </tr>
@@ -681,7 +739,7 @@
                   </div>
                </div>
             </div>
-            <div class="table"><a name="d0e11917"></a><p class="title"><b>Table&nbsp;H.7.&nbsp;Help Menu</b></p>
+            <div class="table"><a name="d0e12025"></a><p class="title"><b>Table&nbsp;H.7.&nbsp;Help Menu</b></p>
                <div class="table-contents">
                   <table summary="Help Menu" border="1">
                      <colgroup>
@@ -707,28 +765,38 @@
                            <td align="left">&nbsp;</td>
                            <td align="left">helpAboutMenuItem</td>
                         </tr>
+                        <tr>
+                           <td align="left">Last Changes...</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">helpLastChangesMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Log...</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">helpLogMenuItem</td>
+                        </tr>
                      </tbody>
                   </table>
                </div>
             </div><br class="table-break"></div>
          <div class="footnotes"><br><hr style="width:100; text-align:left;margin-left: 0">
-            <div id="ftn.d0e11132" class="footnote">
-               <p><a href="#d0e11132" class="para"><sup class="para">[2] </sup></a>The full syntax for keystrokes (shortcuts) is defined in the
+            <div id="ftn.d0e11154" class="footnote">
+               <p><a href="#d0e11154" class="para"><sup class="para">[2] </sup></a>The full syntax for keystrokes (shortcuts) is defined in the
                           following Java 1.6 documentation from Oracle (bottom of page): <a class="ulink" href="http://docs.oracle.com/javase/6/docs/api/javax/swing/KeyStroke.html" target="_top">Java
                              1.6 keystrokes shortcuts</a></p>
             </div>
-            <div id="ftn.d0e11166" class="footnote">
-               <p><a href="#d0e11166" class="para"><sup class="para">[3] </sup></a>On the Mac, the modifier <span class="emphasis"><em>meta</em></span> must be
+            <div id="ftn.d0e11188" class="footnote">
+               <p><a href="#d0e11188" class="para"><sup class="para">[3] </sup></a>On the Mac, the modifier <span class="emphasis"><em>meta</em></span> must be
                                 used to specify the <span class="emphasis"><em>command</em></span> key.
                </p>
             </div>
-            <div id="ftn.d0e11200" class="footnote">
-               <p><a href="#d0e11200" class="para"><sup class="para">[4] </sup></a>The possible keyevents (keys) are listed in the following
+            <div id="ftn.d0e11222" class="footnote">
+               <p><a href="#d0e11222" class="para"><sup class="para">[4] </sup></a>The possible keyevents (keys) are listed in the following
                                 Java 1.6 documentation from Oracle: <a class="ulink" href="http://docs.oracle.com/javase/6/docs/api/java/awt/event/KeyEvent.html" target="_top">Java
                                    1.6 keyEvents description</a></p>
             </div>
-            <div id="ftn.d0e11208" class="footnote">
-               <p><a href="#d0e11208" class="para"><sup class="para">[5] </sup></a>The default OmegaT shortcuts are available from Sourceforge:
+            <div id="ftn.d0e11230" class="footnote">
+               <p><a href="#d0e11230" class="para"><sup class="para">[5] </sup></a>The default OmegaT shortcuts are available from Sourceforge:
                           <a class="ulink" href="http://omegat.svn.sourceforge.net/viewvc/omegat/branches/release-2-6/src/org/omegat/gui/main/MainMenuShortcuts.properties" target="_top">Default
                              OmegaT Shortcuts</a></p>
                <p>The default OmegaT shortcuts for the Mac are also available from

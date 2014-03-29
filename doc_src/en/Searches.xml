@@ -256,4 +256,28 @@
     quickly see their contents by looking at their title: it will contain the
     search term used.</para>
   </section>
+  
+  <section id="search.filter">
+    <title>Filter entries in editor according to search</title>
+    
+    <para>For easier navigation in the search result set, you can apply the search to
+  the editor. Press the <emphasis role="bold">Filter</emphasis> button on the bottom to limit the shown entries 
+  in the editor window to those that match the current search. You can use 
+  normal navigation to go to e.g. the next (untranslated) segment that matches
+  the search criteria.</para>
+  
+   <para>NB:</para>
+   
+    <itemizedlist>
+      <listitem>A search may be limited to 1000 items, so if you search on a common
+  phrase, the editor then shows only those 1000 matching entries, and not all 
+  entries that match the search criteria.</listitem>
+      <listitem>A file might have no matching entries, so it will show empty.</listitem>
+      <listitem>If a search removes duplicates, those duplicates will not be in the Editor.</listitem>
+    </itemizedlist>
+    
+    <para>To remove a filter, press the <emphasis role="bold">Remove filter</emphasis> button, or reload a project.</para>
+ </section>
+      
+    
 </chapter>

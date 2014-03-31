@@ -899,6 +899,19 @@ OmegaT failed to load the valid ones
   - Turkish localisation updated to 3.0.0 (UI)
 
 ----------------------------------------------------------------------
+ OmegaT 2.6.3 update 10 
+----------------------------------------------------------------------
+   0 Enhancement
+   1 Bug fix
+   0 Localisation update
+----------------------------------------------------------------------
+2.6.3 update 10 vs. 2.6.3 update 9
+
+  Bug fixes: 
+
+  - Swedish segmentation rules were using a wrong language code
+
+----------------------------------------------------------------------
  OmegaT 2.6.3 update 9 (2014-03-24)
 ----------------------------------------------------------------------
    0 Enhancement

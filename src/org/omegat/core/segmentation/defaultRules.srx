@@ -4705,7 +4705,7 @@
       <languagemap languagepattern="NL.*" languagerulename="Dutch"/>
       <languagemap languagepattern="PL.*" languagerulename="Polish"/>
       <languagemap languagepattern="RU.*" languagerulename="Russian"/>
-      <languagemap languagepattern="SE.*" languagerulename="Swedish"/>
+      <languagemap languagepattern="SV.*" languagerulename="Swedish"/>
       <languagemap languagepattern="ZH.*" languagerulename="Chinese"/>
       <languagemap languagepattern=".*" languagerulename="Default"/>
       <languagemap languagepattern=".*" languagerulename="Text"/>

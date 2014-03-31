@@ -5,7 +5,7 @@
    1 Bug fix
    1 Localisation update
 ----------------------------------------------------------------------
-2.6.3 update 8 vs. 2.6.3 update 7
+2.6.3 update 9 vs. 2.6.3 update 8
 
   Bug fixes: 
   

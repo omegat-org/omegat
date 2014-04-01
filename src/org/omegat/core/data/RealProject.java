@@ -1209,7 +1209,7 @@ public class RealProject implements IProject {
                         if (FileUtil.computeRelativePath(tmRoot, file).startsWith(OConsts.AUTO_TM + "/")) {                         
                             appendFromAutoTMX(newTMX, false);
                         } else if (FileUtil.computeRelativePath(tmRoot, file).startsWith(OConsts.AUTO_ENFORCE_TM + '/')) {
-                                appendFromAutoTMX(newTMX, true);
+                            appendFromAutoTMX(newTMX, true);
                         }                          
 
                     } catch (Exception e) {

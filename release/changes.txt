@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 3.1.0 
 ----------------------------------------------------------------------
-  30 Enhancements
+  31 Enhancements
    6 Bug fixes
    2 Localisation updates
 ----------------------------------------------------------------------
@@ -110,6 +110,8 @@ instead of displaying the file name
 
   - New QA rule in check_rules.groovy that checks the case of the first character 
 in source and target
+
+  - Modifying project properties is disabled for team projects
 
   Bug fixes:
 

@@ -201,6 +201,8 @@ public class OConsts {
     public static final String ISO88592 = "ISO-8859-2";
     /** Encoding: "UTF-16LE". */
     public static final String UTF16LE = "UTF-16LE";
+    /** Encoding: "ASCII". */
+    public static final String ASCII = "US-ASCII";
 
     public static final String REMOTE_SC_DICTIONARY_LIST_LOCATION = "http://download.services.openoffice.org/files/contrib/dictionaries/";
 

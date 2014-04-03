@@ -6,7 +6,7 @@
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
                2009 Alex Buloichik
                2011 Martin Fleurke
-               2013 Enrique Estévez
+               2013-2014 Enrique Estévez, Didier Briel
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -32,12 +32,12 @@ import java.awt.Dialog;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.UnsupportedEncodingException;
+import java.nio.charset.Charset;
+import java.nio.charset.CharsetEncoder;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -62,55 +62,66 @@ import org.omegat.util.StringUtil;
  * @author Keith Godfrey
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Martin Fleurke
+ * @author Enrique Estévez (keko.gl@gmail.com)
+ * @author Didier Briel
  *
  * Option to remove untranslated segments in the target files
  * Code adapted from the file: MozillaDTDFilter.java
+ * Support for encoding outside the ASCII encoding. The management depends of the user.
+ * The user have to choose the encoding of the file, source and target. 
+ * The default is ASCII, which corresponds to the standard behaviour: in that case, any character above 127 is encoded
+ * according to the specifications of the bundle files. If another character set is chosen, no encoding takes place
+ * and it's up to the user to select a charset compatible with the characters used.
+ * "auto" for the target encoding is considered as being ASCII.
  *
- * @author Enrique Estévez (keko.gl@gmail.com)
  */
 public class ResourceBundleFilter extends AbstractFilter {
 
     public static final String OPTION_REMOVE_STRINGS_UNTRANSLATED = "unremoveStringsUntranslated";
 
     protected Map<String, String> align;
-
+    
+    private String targetEncoding;
+    
     /**
      * If true, will remove non-translated segments in the target files
      */
     public static boolean removeStringsUntranslated = false;
 
+    @Override
     public String getFileFormatName() {
         return OStrings.getString("RBFILTER_FILTER_NAME");
     }
 
+    /**
+     * 
+     * @return true, because it is possible to change source encoding
+     */
+    @Override
     public boolean isSourceEncodingVariable() {
-        return false;
+        return true;
     }
 
+    /**
+     * 
+     * @return true, because it is possible to change target encoding
+     */
+    @Override
     public boolean isTargetEncodingVariable() {
-        return false;
+        return true;
     }
 
+    /**
+     * The default encoding is OConsts.ASCII 
+    */
+    @Override
     public Instance[] getDefaultInstances() {
-        return new Instance[] { new Instance("*.properties", null, null, TFP_NAMEONLY + "_"
+        return new Instance[] { new Instance("*.properties", OConsts.ASCII, OConsts.ASCII, TFP_NAMEONLY + "_"
                 + TFP_TARGET_LOCALE + "." + TFP_EXTENSION) };
     }
 
     /**
-     * Creating an input stream to read the source resource bundle.
-     * <p>
-     * NOTE: resource bundles use always ISO-8859-1 encoding.
-     */
-    @Override
-    public BufferedReader createReader(File infile, String encoding) throws UnsupportedEncodingException,
-            IOException {
-        return new BufferedReader(new InputStreamReader(new FileInputStream(infile), OConsts.ISO88591));
-    }
-
-    /**
      * Creating an output stream to save a localized resource bundle.
-     * <p>
-     * NOTE: resource bundles use always ISO-8859-1 encoding.
      * <p>
      * NOTE: the name of localized resource bundle is different from the name of
      * original one. e.g. "Bundle.properties" -> Russian =
@@ -119,8 +130,11 @@ public class ResourceBundleFilter extends AbstractFilter {
     @Override
     public BufferedWriter createWriter(File outfile, String encoding) throws UnsupportedEncodingException,
             IOException {
-        // resource bundles use ASCII encoding
-        return new BufferedWriter(new OutputStreamWriter(new FileOutputStream(outfile), OConsts.ISO88591));
+        if (encoding == null) { // Automatic target is considered as being ASCII
+            encoding = OConsts.ASCII;
+        }
+        targetEncoding = encoding;
+        return new BufferedWriter(new OutputStreamWriter(new FileOutputStream(outfile), encoding));
     }
 
     /**
@@ -177,8 +191,18 @@ public class ResourceBundleFilter extends AbstractFilter {
      *            Whether it's a key of the key-value pair (' ', ':', '=' MUST
      *            be escaped in a key and MAY be escaped in value, but we don't
      *            escape these).
+     * @param encodingAscii
+     *            If false, keep the text in the source encoding (if assume what
+     *            it is UTF-8, what is the another supported encoding)
      */
     private String toAscii(String text, boolean key) {
+        
+            
+        if (targetEncoding == null) {
+            targetEncoding = OConsts.ASCII;
+        }
+        CharsetEncoder charsetEncoder = Charset.forName(targetEncoding).newEncoder();
+        
         StringBuffer result = new StringBuffer();
 
         for (int i = 0; i < text.length(); i++) {
@@ -197,7 +221,7 @@ public class ResourceBundleFilter extends AbstractFilter {
                 result.append("\\=");
             else if (key && ch == ':')
                 result.append("\\:");
-            else if (ch >= 32 && ch < 127)
+            else if ((ch >= 32 && ch < 127) || charsetEncoder.canEncode(ch)) 
                 result.append(ch);
             else {
                 String code = Integer.toString(ch, 16);
@@ -207,7 +231,8 @@ public class ResourceBundleFilter extends AbstractFilter {
             }
         }
 
-        return result.toString();
+            return result.toString();
+        
     }
 
     /**
@@ -283,7 +308,6 @@ public class ResourceBundleFilter extends AbstractFilter {
             char firstChar = trimmed.charAt(0);
             if (firstChar == '#' || firstChar == '!') {
                 outfile.write(toAscii(str, false) + lbpr.getLinebreak());
-
                 // checking if the next string shouldn't be internationalized
                 if (trimmed.indexOf("NOI18N") >= 0)
                     noi18n = true;
@@ -432,12 +456,7 @@ public class ResourceBundleFilter extends AbstractFilter {
         }
     }
 
-    @Override
-    public String getInEncodingLastParsedFile() {
-        return OConsts.ISO88591;
-    }
-
-
+    
     @Override
     public Map<String, String> changeOptions(Dialog parent, Map<String, String> config) {
         try {
@@ -462,5 +481,5 @@ public class ResourceBundleFilter extends AbstractFilter {
     public boolean hasOptions() {
         return true;
     }
-
+    
 }

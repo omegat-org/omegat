@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 3.1.0 
 ----------------------------------------------------------------------
-  31 Enhancements
+  32 Enhancements
    6 Bug fixes
    2 Localisation updates
 ----------------------------------------------------------------------
@@ -44,6 +44,9 @@
 
   - Set the glossary folder as default folder for the writable glossary file 
   https://sourceforge.net/p/omegat/feature-requests/982/
+
+  - Allow changing charset for .properties 
+  https://sourceforge.net/p/omegat/feature-requests/807/
 
   Other enhancements:
   

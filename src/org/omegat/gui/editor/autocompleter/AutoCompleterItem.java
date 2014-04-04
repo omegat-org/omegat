@@ -43,18 +43,21 @@ public class AutoCompleterItem {
     public final String[] extras;
     public final int cursorAdjust;
     public final boolean keepSelection;
+    public final int replacementLength;
     
-    public AutoCompleterItem(String payload, String[] extras) {
+    public AutoCompleterItem(String payload, String[] extras, int replacementLength) {
         this.payload = payload;
         this.extras = extras;
         this.cursorAdjust = 0;
         this.keepSelection = false;
+        this.replacementLength = replacementLength;
     }
     
-    public AutoCompleterItem(String payload, String[] extras, int cursorAdjust, boolean keepSelection) {
+    public AutoCompleterItem(String payload, String[] extras, int cursorAdjust, boolean keepSelection, int replacementLength) {
         this.payload = payload;
         this.extras = extras;
         this.cursorAdjust = cursorAdjust;
         this.keepSelection = keepSelection;
+        this.replacementLength = replacementLength;
     }
 }

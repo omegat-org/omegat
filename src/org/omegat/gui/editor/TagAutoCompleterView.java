@@ -49,13 +49,13 @@ public class TagAutoCompleterView extends AutoCompleterListView {
     }
 
     @Override
-    public List<AutoCompleterItem> computeListData(String wordChunk) {
+    public List<AutoCompleterItem> computeListData(String prevText) {
+        String wordChunk = getLastToken(prevText);
         
         List<String> missingGroups = TagUtil.getGroupedMissingTagsFromTarget();
         
         // If wordChunk is a tag, pretend we have a blank wordChunk.
         if (TagUtil.getAllTagsInSource().contains(wordChunk)) {
-            completer.adjustInsertionPoint(wordChunk.length());
             wordChunk = "";
         }
 
@@ -67,14 +67,13 @@ public class TagAutoCompleterView extends AutoCompleterListView {
         
         // If there are no partial matches, show all missing tags as suggestions.
         if (matchGroups.isEmpty()) {
-            completer.adjustInsertionPoint(wordChunk.length());
-            return convertList(missingGroups);
+            return convertList(missingGroups, 0);
         }
         
-        return convertList(matchGroups);
+        return convertList(matchGroups, wordChunk.length());
     }
 
-    private static List<AutoCompleterItem> convertList(List<String> list) {
+    private static List<AutoCompleterItem> convertList(List<String> list, int replacementLength) {
         List<AutoCompleterItem> result = new ArrayList<AutoCompleterItem>();
         for (String s : list) {
             int sep = s.indexOf(TagUtil.TAG_SEPARATOR_SENTINEL);
@@ -88,7 +87,7 @@ public class TagAutoCompleterView extends AutoCompleterListView {
                 adjustment = - (s.length() - 1 - sep);
                 keepSelection = true;
             }
-            result.add(new AutoCompleterItem(cleaned, new String[] { display }, adjustment, keepSelection));
+            result.add(new AutoCompleterItem(cleaned, new String[] { display }, adjustment, keepSelection, replacementLength));
         }
         return result;
     }

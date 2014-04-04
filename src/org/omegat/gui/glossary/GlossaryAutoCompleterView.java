@@ -50,7 +50,9 @@ public class GlossaryAutoCompleterView extends AutoCompleterListView {
     }
 
     @Override
-    public List<AutoCompleterItem> computeListData(String wordChunk) {
+    public List<AutoCompleterItem> computeListData(String prevText) {
+        String wordChunk = getLastToken(prevText);
+        
         List<AutoCompleterItem> result = new ArrayList<AutoCompleterItem>();
         boolean capitalize = (wordChunk.length() > 0) ?
                 (Preferences.isPreference(Preferences.AC_GLOSSARY_CAPITALIZE))
@@ -64,7 +66,7 @@ public class GlossaryAutoCompleterView extends AutoCompleterListView {
                    if (capitalize) {
                         s = s.substring(0,1).toUpperCase() + s.substring(1);
                     }
-                    result.add(new AutoCompleterItem(s, new String[] { entry.getSrcText() }));
+                    result.add(new AutoCompleterItem(s, new String[] { entry.getSrcText() }, wordChunk.length()));
                 }
             }
         }
@@ -73,10 +75,9 @@ public class GlossaryAutoCompleterView extends AutoCompleterListView {
                 && result.size() == 0) {
             for (GlossaryEntry entry : entries) {
                 for (String s : entry.getLocTerms(true)) {
-                    result.add(new AutoCompleterItem(s, new String[] { entry.getSrcText() }));
+                    result.add(new AutoCompleterItem(s, new String[] { entry.getSrcText() }, 0));
                 }
             }
-            completer.adjustInsertionPoint(wordChunk.length());
         }
         
         Collections.sort(result, new GlossaryComparator(entries));

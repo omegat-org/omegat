@@ -282,9 +282,9 @@ public abstract class AutoCompleterTableView extends AbstractAutoCompleterView {
         Point p = getSelectionPoint();
         Object selection = getTable().getModel().getValueAt(p.y, p.x);
         if (selection instanceof Character) {
-            return new AutoCompleterItem(selection.toString(), null);
+            return new AutoCompleterItem(selection.toString(), null, 0);
         }
-        return new AutoCompleterItem((String) selection, null);
+        return new AutoCompleterItem((String) selection, null, 0);
     }
     
     @Override

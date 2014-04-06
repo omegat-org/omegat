@@ -49,7 +49,7 @@
   https://sourceforge.net/p/omegat/feature-requests/807/
 
   - Ignore <style>, <path>, <image> contents in SVG files
-  https://sourceforge.net/p/omegat/bugs/670/
+  https://sourceforge.net/p/omegat/feature-requests/983/
 
   Other enhancements:
   

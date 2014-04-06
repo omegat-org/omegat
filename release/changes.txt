@@ -48,7 +48,7 @@
   - Allow changing charset for .properties 
   https://sourceforge.net/p/omegat/feature-requests/807/
 
-  - Ignore <style>, <path>, <image> contents in SVG files
+  - Ignore <image>, <style> and <path> content in SVG files
   https://sourceforge.net/p/omegat/feature-requests/983/
 
   Other enhancements:

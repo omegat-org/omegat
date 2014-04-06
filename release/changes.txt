@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 3.1.0 
 ----------------------------------------------------------------------
-  32 Enhancements
+  33 Enhancements
    6 Bug fixes
    2 Localisation updates
 ----------------------------------------------------------------------
@@ -47,6 +47,9 @@
 
   - Allow changing charset for .properties 
   https://sourceforge.net/p/omegat/feature-requests/807/
+
+  - Ignore <style>, <path>, <image> contents in SVG files
+  https://sourceforge.net/p/omegat/bugs/670/
 
   Other enhancements:
   

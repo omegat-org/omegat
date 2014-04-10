@@ -3,13 +3,14 @@
 ----------------------------------------------------------------------
    0 Enhancement
    1 Bug fix
-   0 Localisation update
+   1 Localisation update
 ----------------------------------------------------------------------
 2.6.3 update 10 vs. 2.6.3 update 9
 
   Bug fixes: 
 
   - Swedish segmentation rules were using a wrong language code
+  - Japanese localisation updated to 2.6.3 update 7 (Documentation)
 
 ----------------------------------------------------------------------
  OmegaT 2.6.3 update 9 (2014-03-24)

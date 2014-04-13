@@ -68,39 +68,76 @@ public class LineLengthLimitWriter extends Writer {
             return;
         }
         Token[] tokens = tokenizer.tokenizeAllExactly(str.toString());
-        again: while (str.length() > 0) {
-            for (int i = 0; i < tokens.length; i++) {
-                Token t = tokens[i];
-                if (t == null) {
-                    // less than begin
-                    continue;
-                }
-                if (t.getOffset() >= lineLength) {
-                    if (t.getOffset() < maxLineLength) {
-                        if (t.getLength() == 1 && Character.isWhitespace(str.charAt(t.getOffset()))) {
-                            // space - use next token
-                            continue;
-                        }
-                        // ok, just break
-                        breakAt(t.getOffset(), tokens);
-                        continue again;
-                    } else {
-                        // max exceed - use previously
-                        if (i > 0 && tokens[i - 1] != null) {
-                            breakAt(tokens[i - 1].getOffset(), tokens);
-                            continue again;
-                        } else {
-                            // previous not exist
-                            breakAt(t.getOffset(), tokens);
-                            continue again;
-                        }
-                    }
+        while (str.length() > 0) {
+            int p = getBreakPos(tokens);
+            breakAt(p, tokens);
+        }
+    }
+
+    int getBreakPos(Token[] tokens) {
+        // try to break on the space boundaries
+        for (int i = 0; i < tokens.length; i++) {
+            Token t = tokens[i];
+            if (t == null) {
+                // less than begin
+                continue;
+            }
+            if (t.getOffset() >= lineLength && t.getOffset() < maxLineLength) {
+                if (isSpaces(t)) {
+                    return t.getOffset();
                 }
             }
-            // length not exceed limit, but need to write tail
-            out.write(str.toString());
-            str.setLength(0);
+            if (t.getOffset() + t.getLength() >= lineLength && t.getOffset() + t.getLength() < maxLineLength) {
+                if (isSpaces(t)) {
+                    return t.getOffset() + t.getLength();
+                }
+            }
         }
+        // impossible to break on space boundaries - break at any token
+        for (int i = 0; i < tokens.length; i++) {
+            Token t = tokens[i];
+            if (t == null) {
+                // less than begin
+                continue;
+            }
+            if (t.getOffset() >= lineLength && t.getOffset() < maxLineLength) {
+                return t.getOffset();
+            }
+            if (t.getOffset() + t.getLength() >= lineLength && t.getOffset() + t.getLength() < maxLineLength) {
+                return t.getOffset() + t.getLength();
+            }
+        }
+        // use latest token before line length
+        for (int i = 0; i < tokens.length; i++) {
+            Token t = tokens[i];
+            if (t == null) {
+                // less than begin
+                continue;
+            }
+            if (t.getOffset() >= lineLength) {
+                if (i > 0) {
+                    Token tp = tokens[i - 1];
+                    if (tp != null && tp.getOffset() > 0) {
+                        return tp.getOffset();
+                    } else {
+                        return t.getOffset();
+                    }
+                } else {
+                    return t.getOffset() + t.getLength();
+                }
+            }
+        }
+        // use full line
+        return str.length();
+    }
+
+    boolean isSpaces(Token token) {
+        for (int i = 0; i < token.getLength(); i++) {
+            if (!Character.isWhitespace(str.charAt(token.getOffset() + i))) {
+                return false;
+            }
+        }
+        return true;
     }
 
     /**

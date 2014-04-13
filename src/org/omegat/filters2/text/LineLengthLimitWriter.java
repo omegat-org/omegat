@@ -42,6 +42,8 @@ public class LineLengthLimitWriter extends Writer {
     final int maxLineLength;
     final ITokenizer tokenizer;
     final StringBuilder str = new StringBuilder();
+    int breakChars;
+    char eol1, eol2;
 
     public LineLengthLimitWriter(Writer out, int lineLength, int maxLineLength, ITokenizer tokenizer) {
         this.out = out;
@@ -54,27 +56,99 @@ public class LineLengthLimitWriter extends Writer {
     public void write(char[] cbuf, int off, int len) throws IOException {
         for (int i = 0; i < len; i++) {
             char ch = cbuf[off + i];
+            if (breakChars > 0 && ch == str.charAt(str.length() - 1)) {
+                // the same eol char - flush
+                outLine();
+            }
+            str.append(ch);
             if (ch == '\n' || ch == '\r') {
-                out();
-                out.write(ch);
+                breakChars++;
+                if (breakChars > 1) {
+                    // 2 eol chars - flush
+                    outLine();
+                }
             } else {
-                str.append(ch);
+                if (breakChars > 0) {
+                    // was eol char - flush
+                    outLine();
+                }
             }
         }
     }
 
-    void out() throws IOException {
+    void outLine() throws IOException {
         if (str.length() == 0) {
             return;
         }
-        Token[] tokens = tokenizer.tokenizeAllExactly(str.toString());
-        while (str.length() > 0) {
-            int p = getBreakPos(tokens);
-            breakAt(p, tokens);
+        char ch = str.charAt(str.length() - 1);
+        if (ch == '\n' || ch == '\r') {
+            // get latest eol char
+            eol2 = ch;
+            str.setLength(str.length() - 1);
         }
+        if (str.length() > 0) {
+            // get pre-latest eol char
+            ch = str.charAt(str.length() - 1);
+            if (ch == '\n' || ch == '\r') {
+                eol1 = ch;
+                str.setLength(str.length() - 1);
+            }
+        }
+        if (str.length() == 0) {
+            // was empty line
+            writeEol();
+        } else {
+            Token[] tokens = tokenizer.tokenizeAllExactly(str.toString());
+            while (str.length() > 0) {
+                int p = getBreakPos(tokens);
+                breakAt(p, tokens);
+            }
+        }
+        breakChars = 0;
+        eol1 = 0;
+        eol2 = 0;
     }
 
     int getBreakPos(Token[] tokens) {
+        if (str.length() <= maxLineLength) {
+            // line no longer than max length - use full line
+            return str.length();
+        }
+        // check if spaces only more than max length
+        int latestNonSpacesTokenPos = 0;
+        for (int i = tokens.length - 1; i >= 0; i--) {
+            Token t = tokens[i];
+            if (t == null) {
+                // less than begin
+                continue;
+            }
+            if (isSpaces(t)) {
+                continue;
+            }
+            // non-spaces token
+            latestNonSpacesTokenPos = t.getOffset() + t.getLength();
+            break;
+        }
+        if (latestNonSpacesTokenPos <= maxLineLength) {
+            return str.length();
+        }
+        // try to break on the space ends
+        boolean wasSpaces = false;
+        for (int i = 0; i < tokens.length; i++) {
+            Token t = tokens[i];
+            if (t == null) {
+                // less than begin
+                continue;
+            }
+            boolean isSpaces = isSpaces(t);
+            if (t.getOffset() >= lineLength) {
+                // spaces can be after max length
+                if (wasSpaces && !isSpaces) {
+                    return t.getOffset();
+                }
+            }
+            wasSpaces = isSpaces;
+        }
         // try to break on the space boundaries
         for (int i = 0; i < tokens.length; i++) {
             Token t = tokens[i];
@@ -145,7 +219,7 @@ public class LineLengthLimitWriter extends Writer {
      */
     void breakAt(int pos, Token[] tokens) throws IOException {
         out.write(str.toString(), 0, pos);
-        out.write("\n");// TODO
+        writeEol();
         str.delete(0, pos);
         for (int i = 0; i < tokens.length; i++) {
             Token t = tokens[i];
@@ -157,15 +231,24 @@ public class LineLengthLimitWriter extends Writer {
         }
     }
 
+    void writeEol() throws IOException {
+        if (eol1 != 0) {
+            out.write(eol1);
+        }
+        if (eol2 != 0) {
+            out.write(eol2);
+        }
+
+    }
+
     @Override
     public void flush() throws IOException {
-        out();
-        out.flush();
     }
 
     @Override
     public void close() throws IOException {
-        out();
+        outLine();
+        out.flush();
         out.close();
     }
 }

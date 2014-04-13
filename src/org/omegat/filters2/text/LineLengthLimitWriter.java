@@ -133,21 +133,26 @@ public class LineLengthLimitWriter extends Writer {
             return str.length();
         }
         // try to break on the space ends
-        boolean wasSpaces = false;
+        int spacesStart = -1;
         for (int i = 0; i < tokens.length; i++) {
             Token t = tokens[i];
             if (t == null) {
                 // less than begin
                 continue;
             }
-            boolean isSpaces = isSpaces(t);
             if (t.getOffset() >= lineLength) {
                 // spaces can be after max length
-                if (wasSpaces && !isSpaces) {
+                if (spacesStart >= 0 && spacesStart < maxLineLength) {
                     return t.getOffset();
                 }
             }
-            wasSpaces = isSpaces;
+            if (isSpaces(t)) {
+                if (spacesStart < 0) {
+                    spacesStart = t.getOffset();
+                }
+            } else {
+                spacesStart = -1;
+            }
         }
         // try to break on the space boundaries
         for (int i = 0; i < tokens.length; i++) {

@@ -163,7 +163,7 @@
     </listitem>
   </itemizedlist>
 
-  <para>En elle-même, la touche « Maj » ne provoque pas de comportement particulier : lors d'un appui sur la touche « Maj », toutes les touches déplacent le curseur de manière habituelle, à l'exception de la combinaison <literal>Maj+Entrée</literal> qui insère un retour à la ligne dans le texte.</para>
+  <para>En elle-même, la touche « Maj » ne provoque pas de comportement particulier : lorsque vous appuyez sur la touche « Maj », toutes les touches déplacent le curseur de manière habituelle, à l'exception de la combinaison <literal>Maj+Entrée</literal> qui insère un retour à la ligne dans le texte.</para>
 
   <para>Les commandes utilisées pour l'ensemble du système, Tout sélectionner (<keycap>Ctrl+A</keycap>), Coller (<emphasis role="bold">Ctrl+V</emphasis>), Couper (<emphasis role="bold">Ctrl+X</emphasis>), Copier (<emphasis role="bold">Ctrl+C)</emphasis>, Insérer la correspondance <emphasis role="bold">(Ctrl+I</emphasis>) et Insérer le texte source (<emphasis role="bold">Ctrl+Maj+I</emphasis>) fonctionnent uniquement sur le texte à l'intérieur du segment ouvert.</para>
 

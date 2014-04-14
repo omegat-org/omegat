@@ -215,17 +215,17 @@
 
       <para>Double-cliquez sur <emphasis> <application>OmegaT</application>.app</emphasis> ou cliquez sur son emplacement dans le Dock.</para>
 
-      <para>Pour accéder à <application><emphasis>Info.plist</emphasis></application>, faites un clic droit sur <emphasis><application>OmegaT</application>.app</emphasis> et sélectionnez « Afficher le contenu du paquet », puis ouvrez le fichier avec un clic droit et en sélectionnant l'éditeur de texte de votre choix. Vous pouvez également utiliser la commande UNIX « cd » directement à partir de la ligne de commande et ouvrir <application><emphasis>Info.plist</emphasis> dans un éditeur de ligne de commande comme emacs ou vi</application>.<emphasis> <indexterm class="singular">
+      <para>Vous pouvez modifier le comportement d'OmegaT en modifiant les <emphasis>Propriétés</emphasis> ainsi que la partie <emphasis>VMOptions</emphasis> du paquet <application><emphasis>Info.plist</emphasis></application> file.</para>
+      
+      <para>Pour accéder à <application><emphasis>Info.plist</emphasis></application>, faites un clic droit sur <emphasis><application>OmegaT</application>.app</emphasis> et sélectionnez « Afficher le contenu du paquet », puis ouvrez le fichier avec un clic droit et en sélectionnant l'éditeur de texte de votre choix. Vous pouvez également utiliser la commande UNIX « cd » directement à partir de la ligne de commande et ouvrir <application><emphasis>Info.plist</emphasis> dans un éditeur de ligne de commande comme emacs ou vi</application>.<indexterm class="singular">
           <primary>Personnaliser OmegaT</primary> <secondary>OS X</secondary> <tertiary>Paramètres de lancement</tertiary>
-        </indexterm></emphasis></para>
+        </indexterm></para>
 
-      <para>Il est possible de modifier les <emphasis>Propriétés</emphasis> ainsi que la partie <emphasis>VMOptions</emphasis>.</para>
-
-      <para>Pour ajouter des valeurs à <emphasis> VMOptions</emphasis>, séparez-les par une espace. Par exemple, <filename>-Xmx1024M -Duser.language=ja</filename> lancera <application>OmegaT</application> avec une mémoire de 1024 Mo et une interface utilisateur en japonais.</para>
+      <para>Pour ajouter des valeurs à <emphasis>VMOptions</emphasis>, séparez-les par une espace. Par exemple, <filename>-Xmx1024M -Duser.language=ja</filename> lancera <application>OmegaT</application> avec une mémoire de 1024 Mo et une interface utilisateur en japonais.</para>
 
       <para>Pour lancer plusieurs instances d'<emphasis><application>OmegaT</application>.app</emphasis>, double-cliquez sur le fichier <emphasis>JavaApplicationStub</emphasis> situé dans <emphasis><application>OmegaT</application>.app/ Contents/MacOS/</emphasis>.</para>
 
-      <para><emphasis><application> </application></emphasis>Utilisez le fichier <emphasis><application>OmegaT</application>.jar</emphasis> situé dans <emphasis><application>OmegaT</application>.app/Contents/Resources/Java/</emphasis> pour lancer <application>OmegaT</application> à partir de la ligne de commande. Voir « Lancement des lignes de commandes » ci-dessous pour plus d'informations.</para>
+      <para>Utilisez le fichier <emphasis><application>OmegaT</application>.jar</emphasis> situé dans <emphasis><application>OmegaT</application>.app/Contents/Resources/Java/</emphasis> pour lancer <application>OmegaT</application> à partir de la ligne de commande. Voir « Lancement des lignes de commandes » ci-dessous pour plus d'informations.</para>
     </section>
 
     <section id="Mac.OSX.goodies">
@@ -446,19 +446,12 @@
           <para>-<emphasis role="bold">Dmicrosoft.api.client_secret=XXXX9xXxX9xXXxxXXX9xxX99xXXXX9xx9XXxXxXXXXX=</emphasis></para>
         </listitem>
 
-        <listitem>
-          <para><emphasis role="bold">Option projet en équipe<parameter><indexterm class="singular">
-              <primary>Exécution d'OmegaT</primary> <secondary>Arguments de scripts de lancement</secondary> <tertiary>option no-team</tertiary>
-            </indexterm></parameter></emphasis></para>
-
-          <para><emphasis role="bold">-no-team</emphasis> est destinée aux projets prévus pour un travail en équipe. Utilisez-la si vous voulez qu'OmegaT ne synchronise pas le contenu du projet.</para>
-        </listitem>
       </itemizedlist>
 
       <para>Les arguments peuvent être combinés. Pour lancer <application>OmegaT</application> avec tous les exemples décrits plus haut, la commande serait :</para>
 
       <para><literal>java -Dswing.aatext=true -Duser.language=pt
-      -Duser.country=BR -Xmx1024M <application>-DDhttp.proxyHost=192.168.1.1
+      -Duser.country=BR -Xmx1024M <application>-Dhttp.proxyHost=192.168.1.1
       -Dhttp.proxyport<emphasis role="bold">=</emphasis>3128 -jar
       -OmegaT</application>.jar</literal></para>
     </section>
@@ -614,6 +607,19 @@
             <para>Cette option permet d'effectuer une validation des balises en mode batch (par lots). Si <literal>abort</literal> est sélectionné, le validateur de balises s'arrêtera au premier segment invalide. Si <literal>warn</literal> est précisé, le validateur de balises traitera tous les segments et affichera des avertissements dans le fichier concerné pour tout segment contenant des balises invalides.</para>
           </listitem>
         </itemizedlist>
+        
+        <itemizedlist>
+          <listitem>
+            <para><literal>--no-team</literal> est destinée aux projets prévus pour un travail en équipe. Utilisez-la si vous voulez qu'OmegaT ne synchronise pas le contenu du projet.</para>
+          </listitem>
+        </itemizedlist>
+
+        <itemizedlist>
+          <listitem>
+            <para><literal>--disable-project-locking</literal> permet, sous Windows, d'ouvrir le même projet avec plusieurs instances d'OmegaT. Par défaut, sous Windows, <literal>omegat.project</literal> est verrouillé et un message d'erreur est reçu lors d'une tentative d'ouverture d'un projet déjà ouvert dans une autre instance d'OmegaT. Avec cette option, aucun verrouillage ne survient.</para>
+          </listitem>
+        </itemizedlist>
+
       </section>
 
       <section id="console.mode.option.quiet">

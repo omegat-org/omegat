@@ -16,7 +16,7 @@
 
     <para>Le module d'extension concernant les scripts d'OmegaT peut être téléchargé sur le <ulink url="http://sourceforge.net/projects/omegat-plugins/files">site de téléchargement de modules d'extensions d'OmegaT</ulink>. Décompressez les fichiers et mettez-les tous dans le dossier « plugins »  situé dans le dossier d'installation d'OmegaT, c'est-à-dire dans le dossier contenant OmegaT.jar. S'il n'existe pas, commencez par créer le dossier « plugins ».</para>
 
-    <para>Un nouveau sous-menu est ajouté : <guisubmenu> Outils &gt; </guisubmenu><guisubmenu>Scripts.</guisubmenu> En dessous du sous-menu <guisubmenu>Scripts</guisubmenu>, il y a cinq marques de réservation disponibles pour des scripts. En cliquant sur <guisubmenu>Scripts</guisubmenu> une boîte de dialogue de Script s'ouvre : <screenshot> <screeninfo>Boîte de dialogue Script</screeninfo> <mediaobject> <imageobject> <imagedata fileref="images/ScriptingDialog.png"/> </imageobject> </mediaobject> </screenshot></para>
+    <para>Un nouveau sous-menu est ajouté : <guisubmenu> Outils &gt; </guisubmenu><guisubmenu>Scripts.</guisubmenu> En dessous du sous-menu <guisubmenu>Scripts</guisubmenu>, il y a 12 marques de réservation disponibles pour des scripts. En cliquant sur <guisubmenu>Scripts</guisubmenu> une boîte de dialogue de Script s'ouvre : <screenshot> <screeninfo>Boîte de dialogue Script</screeninfo> <mediaobject> <imageobject> <imagedata fileref="images/ScriptingDialog.png"/> </imageobject> </mediaobject> </screenshot></para>
 
     <para>La boîte de dialogue Script vous permet de charger un script pré-éxistant dans la zone de texte et de l'exécuter sur l'emplacement du projet en cours. Pour personnaliser les caractéristiques du script, suivez les étapes ci-dessous :</para>
 
@@ -28,13 +28,13 @@
 
     <itemizedlist>
       <listitem>
-        <para>Faites un clic droit sur un des boutons allant de « &lt;1&gt; » à « &lt;5&gt; » dans le panneau inférieur et sélectionnez « Ajouter ». Dans l'exemple ci-dessus, deux scripts (position 1 et 2) ont déjà été ajoutés.</para>
+        <para>Faites un clic droit sur un des boutons allant de « &lt;1&gt; » à « &lt;12&gt; » dans le panneau inférieur et sélectionnez « Ajouter ». Dans l'exemple ci-dessus, deux scripts (position 1 et 2) ont déjà été ajoutés.</para>
       </listitem>
     </itemizedlist>
 
     <itemizedlist>
       <listitem>
-        <para>Un clic gauche sur un des chiffres lance le script sélectionné correspondant. Vous pouvez lancer les macros sélectionnées soit à partir du menu principal, soit en passant par leurs entrées dans le menu <guisubmenu>Outils </guisubmenu>, soit en appuyant sur <keycap> Ctrl+Alt+F#</keycap> (# de 1 à 5).</para>
+        <para>Un clic gauche sur un des chiffres lance le script sélectionné correspondant. Vous pouvez lancer les macros sélectionnées soit à partir du menu principal, soit en passant par leurs entrées dans le menu <guisubmenu>Outils </guisubmenu>, soit en appuyant sur <keycap> Ctrl+Alt+F#</keycap> (# de 1 à 12).</para>
       </listitem>
     </itemizedlist>
 

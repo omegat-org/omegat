@@ -160,4 +160,22 @@
 
     <para>Plusieurs fenêtres de recherche peuvent être ouvertes en même temps. On peut rapidement connaître leur contenu en regardant leur titre : il contient les termes de recherche utilisés.</para>
   </section>
+  
+  <section id="search.filter">
+    <title>Filtrer le contenu de l'éditeur en fonction de la recherche</title>
+    
+    <para>Pour une navigation plus facile dans les résultats de recherche, vous pouvez appliquer la recherche à l'Éditeur. Appuyez sur le bouton <emphasis role="bold">Filtrer</emphasis> en bas de la fenêtre pour limiter les entrées affichées dans la fenêtre de l'Éditeur à celles correspondant à la recherche actuelle. Vous pouvez utiliser la navigation habituelle pour, par exemple, atteindre le segment (non traduit) suivant correspondant aux critères de recherche.</para>
+  
+   <para>N.B. :</para>
+   
+    <itemizedlist>
+      <listitem>Il est possible qu'une recherche soit limitée à 1000 éléments. Dans ce cas, si vous rechercher une expression courante, l'Éditeur ne vous montre que les 1000 entrées correspondantes, et non pas toutes les entrées correspondant aux critères de recherche.</listitem>
+      <listitem>Si un fichier ne contient aucune entrée correspondante, il sera affiché vide.</listitem>
+      <listitem>Si une recherche supprime les doublons, ceux-ci ne seront pas présentes dans l'Éditeur.</listitem>
+    </itemizedlist>
+    
+    <para>Pour supprimer un filtre, appuyez sur le bouton <emphasis role="bold">Supprimer le filtre</emphasis> ou rechargez le projet.</para>
+ </section>
+      
+    
 </chapter>

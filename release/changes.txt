@@ -1,11 +1,11 @@
 ----------------------------------------------------------------------
  OmegaT 3.1.0 
 ----------------------------------------------------------------------
-  33 Enhancements
+  34 Enhancements
    6 Bug fixes
    2 Localisation updates
 ----------------------------------------------------------------------
-3.1.0 vs. 3.0.8 update 4
+3.1.0 vs. 3.0.8 update 5
 
   Implemented requests:
 
@@ -50,6 +50,9 @@
 
   - Ignore <image>, <style> and <path> content in SVG files
   https://sourceforge.net/p/omegat/feature-requests/983/
+
+  - Limit line length of target text files
+  https://sourceforge.net/p/omegat/feature-requests/985/
 
   Other enhancements:
   

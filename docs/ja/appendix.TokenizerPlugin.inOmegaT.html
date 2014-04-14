@@ -29,23 +29,21 @@
          <div class="titlepage">
             <div>
                <div>
-                  <h1 class="title"><a name="appendix.TokenizerPlugin.inOmegaT"></a>付録D トークナイザー プラグイン<a class="indexterm" name="d0e10726"></a></h1>
+                  <h1 class="title"><a name="appendix.TokenizerPlugin.inOmegaT"></a>付録D トークナイザー プラグイン<a class="indexterm" name="d0e10748"></a></h1>
                </div>
             </div>
          </div>
          <div class="toc">
             <dl class="toc">
-               <dt><span class="section"><a href="appendix.TokenizerPlugin.inOmegaT.html#d0e10731">1. はじめに</a></span></dt>
-               <dt><span class="section"><a href="appendix.TokenizerPlugin.inOmegaT.html#d0e10760">2. インストールとコマンドラインの使い方</a></span></dt>
-               <dt><span class="section"><a href="appendix.TokenizerPlugin.inOmegaT.html#d0e10777">3. Mac OS X での使い方</a></span></dt>
-               <dt><span class="section"><a href="appendix.TokenizerPlugin.inOmegaT.html#d0e10791">4. トラブルシューティング</a></span></dt>
+               <dt><span class="section"><a href="appendix.TokenizerPlugin.inOmegaT.html#d0e10753">1. はじめに</a></span></dt>
+               <dt><span class="section"><a href="appendix.TokenizerPlugin.inOmegaT.html#d0e10782">2. インストールと使い方</a></span></dt>
             </dl>
          </div>
          <div class="section">
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="d0e10731"></a>1. はじめに<a class="indexterm" name="d0e10734"></a><a class="indexterm" name="d0e10739"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="d0e10753"></a>1. はじめに<a class="indexterm" name="d0e10756"></a><a class="indexterm" name="d0e10761"></a></h2>
                   </div>
                </div>
             </div>
@@ -77,66 +75,16 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="d0e10760"></a>2. インストールとコマンドラインの使い方
+                     <h2 class="title" style="clear: both"><a name="d0e10782"></a>2. インストールと使い方
                      </h2>
                   </div>
                </div>
             </div>
-            <p>Lucene プロジェクトを組み込んだトークナイザーのパッケージは、OmegaT プラグインのダウンロードサイト（http://sourceforge.net/projects/omegat-plugins/files/）から入手できます。最新のファイルをダウンロードしてください（執筆時点では、OmegaT-tokenizers_0.5-2.1.zip
-               が最新です）。
-            </p>
-            <p>トークナイザーをインストールするには、OmegaT.jar が配置されているフォルダー配下に「plugins」という名前のフォルダーを（まだ無ければ）作成し、そのフォルダー内にパッケージを解凍します。</p>
-            <p>OmegaT で実際にトークナイザーを使うには、原文言語と訳文言語それぞれについて、どのトークナイザーを使うのかを指定する必要があります。構文は、次の通りです：</p>
-            <p><code class="literal">java -jar OmegaT.jar --ITokenizer=[原文言語のトークナイザー名] --ITokenizerTarget=[訳文言語のトークナイザー名]</code></p>
-            <p>トークナイザー名は、トークナイザーのファイルと一緒に配布される Readme.txt ファイルに一覧が記載されています。たとえば、原文言語に Lucene Japanese tokenizer を、訳文言語に Lucene French tokenizer
-               を使う場合のコマンドは、次のようになります：
-            </p>
-            <p><code class="literal">java -jar OmegaT.jar --ITokenizer=org.omegat.plugins.tokenizer.LuceneJapaneseTokenizer --ITokenizerTarget=org.omegat.plugins.tokenizer.LuceneFrenchTokenizer</code></p>
-         </div>
-         <div class="section">
-            <div class="titlepage">
-               <div>
-                  <div>
-                     <h2 class="title" style="clear: both"><a name="d0e10777"></a>3. Mac OS X での使い方
-                     </h2>
-                  </div>
-               </div>
+            <p>トークナイザー プラグインは OmegaT 本体に統合されました。プロジェクトの原文と訳文の言語に応じて、OmegaT がトークナイザーを自動的に設定します。プロジェクト設定ウィンドウから、トークナイザーの種類やバージョンを変更できます。</p>
+            <div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+               <h3 class="title">互換性に関する注意点</h3>
+               <p>トークナイザーは、plugin フォルダーに古いバージョンのファイルが存在すると、正常に機能しません。plugin フォルダーにトークナイザーがあれば、OmegaT を起動する前にすべて削除してください。</p>
             </div>
-            <p>Mac OS X の OmegaT.app パッケージでトークナイザーを使う場合、トークナイザーのインストールは上記で説明されている通りです（OmegaT.app を右クリックすれば、OmegaT.jar の場所が分かります）。ただし、使用するトークナイザー名は
-               Java 起動オプションに含まれる <code class="filename">info.plist</code> で指定する必要があります。上記の説明通り、<code class="filename">info.plist</code> ファイルを探して編集します。先ほどの例を使うと、次のようになります：
-            </p>
-            <div class="literallayout">
-               <p><code class="code">&lt;key&gt;VMOptions&lt;/key&gt;<br>
-                     &lt;string&gt;-Xmx1024M&lt;/string&gt;<br>
-                     <br>
-                     &lt;key&gt;Arguments&lt;/key&gt;<br>
-                     &lt;array&gt;<br>
-                     &nbsp;&nbsp;&lt;string&gt;--ITokenizer=org.omegat.plugins.tokenizer.LuceneJapaneseTokenizer&lt;/string&gt;<br>
-                     &nbsp;&nbsp;&lt;string&gt;--ITokenizerTarget=org.omegat.plugins.tokenizer.LuceneFrenchTokenizer&lt;/string&gt;<br>
-                     &lt;/array&gt;</code></p>
-            </div>
-         </div>
-         <div class="section">
-            <div class="titlepage">
-               <div>
-                  <div>
-                     <h2 class="title" style="clear: both"><a name="d0e10791"></a>4. トラブルシューティング
-                     </h2>
-                  </div>
-               </div>
-            </div>
-            <p>指定したトークナイザーが本当に使われているかどうかを確認するには、プロジェクトを開き、コンソール ウィンドウに出力されるログをチェックしてください。たとえば、それはこんな風に出力されるはずです：</p>
-            <div class="literallayout">
-               <p><code class="code">84528:&nbsp;Info:&nbsp;Source&nbsp;tokenizer:&nbsp;org.omegat.plugins.tokenizer.LuceneJapaneseTokenizer<br>
-                     84528:&nbsp;Info:&nbsp;Target&nbsp;tokenizer:&nbsp;org.omegat.plugins.tokenizer.LuceneFrenchTokenizer</code></p>
-            </div>
-            <p>行頭の数値はシステムによって異なりますので、気にする必要はありません。Source tokenizer と target tokenizer の名前を確認してください。起動オプションで指定した名前が、ログに表示されます。トークナイザーが正常起動しなかった場合は、次のようなログになります：</p>
-            <div class="literallayout">
-               <p><code class="code">12719:&nbsp;Info:&nbsp;Source&nbsp;tokenizer:&nbsp;org.omegat.core.matching.Tokenizer<br>
-                     12719:&nbsp;Info:&nbsp;Target&nbsp;tokenizer:&nbsp;org.omegat.core.matching.Tokenizer</code></p>
-            </div>
-            <p>Mac OS X の OmegaT.app パッケージでログを確認するには、/OmegaT.app/Contents/MacOS/（アクセス方法は前述の通り）にある <code class="literal">JavaApplicationStub</code> をダブルクリックして、OmegaT をコンソールから起動します。
-            </p>
          </div>
       </div>
       <div class="navfooter">

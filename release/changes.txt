@@ -75,7 +75,7 @@ include untranslated strings in the target files
 
   - A new script (svn_commit_source_files.groovy) allows
 uploading new or modified source files of a team project
-without having to use an sVN client
+without having to use an SVN client
 
   - The scripting interface uses now the Java 6 native implementation 
 of JSR-223 script interface instead of the Bean Scripting Framework. 

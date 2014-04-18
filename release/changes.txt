@@ -2,7 +2,7 @@
  OmegaT 3.1.0 update 1
 ----------------------------------------------------------------------
    1 Enhancements
-   0 Bug fixes
+   1 Bug fix
    0 Localisation updates
 ----------------------------------------------------------------------
 3.1.0 update 1 vs. 3.1.0
@@ -11,6 +11,11 @@
 
   - Add Illustrator xml export format support to the SVG filter
   https://sourceforge.net/p/omegat/feature-requests/987/
+
+  Bug fixes:
+  In replace mode, the last change made before pressing Cancel 
+could be lost
+
 ----------------------------------------------------------------------
  OmegaT 3.1.0 (2014-04-14)
 ----------------------------------------------------------------------

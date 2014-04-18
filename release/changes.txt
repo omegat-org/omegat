@@ -13,8 +13,9 @@
   https://sourceforge.net/p/omegat/feature-requests/987/
 
   Bug fixes:
-  In replace mode, the last change made before pressing Cancel 
-could be lost
+
+  - When using a search or replace filter, the last change made before 
+removing the filter or pressing Cancel could be lost
 
 ----------------------------------------------------------------------
  OmegaT 3.1.0 (2014-04-14)

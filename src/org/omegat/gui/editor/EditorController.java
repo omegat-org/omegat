@@ -1799,8 +1799,6 @@ public class EditorController implements IEditor {
     public void removeFilter() {
         UIThreadsUtil.mustBeSwingThread();
         
-        commitAndDeactivate(); // Make sure that any change done in the current segment is not lost
-
         entriesFilter = null;
         if (entriesFilterControlComponent != null) {
             pane.remove(entriesFilterControlComponent);

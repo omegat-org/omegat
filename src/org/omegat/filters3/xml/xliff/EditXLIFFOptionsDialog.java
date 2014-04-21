@@ -64,7 +64,9 @@ public class EditXLIFFOptionsDialog extends javax.swing.JDialog {
         forceshortcut2fCB.setSelected(options.getForceShortcutToF());
         ignoreTypeForPhTagsCB.setSelected(options.getIgnoreTypeForPhTags());
         ignoreTypeForBptTagsCB.setSelected(options.getIgnoreTypeForBptTags());
-                
+        prevAndNextRB.setSelected(!options.getAltTransID());
+        transIDRB.setSelected(options.getAltTransID());
+        
         // Handle escape key to close the window
         KeyStroke escape = KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0, false);
         Action escapeAction = new AbstractAction() {
@@ -106,6 +108,9 @@ public class EditXLIFFOptionsDialog extends javax.swing.JDialog {
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         compatibility26CB = new javax.swing.JCheckBox();
+        jLabel3 = new javax.swing.JLabel();
+        prevAndNextRB = new javax.swing.JRadioButton();
+        transIDRB = new javax.swing.JRadioButton();
         jLabel1 = new javax.swing.JLabel();
         forceshortcut2fCB = new javax.swing.JCheckBox();
         ignoreTypeForPhTagsCB = new javax.swing.JCheckBox();
@@ -151,6 +156,17 @@ public class EditXLIFFOptionsDialog extends javax.swing.JDialog {
         org.openide.awt.Mnemonics.setLocalizedText(compatibility26CB, OStrings.getString("XLIFF_OPTIONS_26")); // NOI18N
         jPanel1.add(compatibility26CB);
 
+        org.openide.awt.Mnemonics.setLocalizedText(jLabel3, OStrings.getString("XLIFF_OPTIONS_ID")); // NOI18N
+        jPanel1.add(jLabel3);
+
+        buttonGroup1.add(prevAndNextRB);
+        org.openide.awt.Mnemonics.setLocalizedText(prevAndNextRB, OStrings.getString("XLIFF_OPTIONS_ID_NEXT_PREV")); // NOI18N
+        jPanel1.add(prevAndNextRB);
+
+        buttonGroup1.add(transIDRB);
+        org.openide.awt.Mnemonics.setLocalizedText(transIDRB, OStrings.getString("XLIFF_OPTIONS_ID_TRANS_UNIT")); // NOI18N
+        jPanel1.add(transIDRB);
+
         org.openide.awt.Mnemonics.setLocalizedText(jLabel1, OStrings.getString("XLIFF_OPTIONS_36_ONLY")); // NOI18N
         jPanel1.add(jLabel1);
 
@@ -176,6 +192,11 @@ public class EditXLIFFOptionsDialog extends javax.swing.JDialog {
         options.setForceShortcutToF(forceshortcut2fCB.isSelected());
         options.setIgnoreTypeForPhTags(ignoreTypeForPhTagsCB.isSelected());
         options.setIgnoreTypeForBptTags(ignoreTypeForBptTagsCB.isSelected());
+        if (prevAndNextRB.isSelected()) {
+            options.setAltTransID(false);
+        } else {
+            options.setAltTransID(true);
+        }
 
         doClose(RET_OK);
     }// GEN-LAST:event_okButtonActionPerformed
@@ -208,7 +229,10 @@ public class EditXLIFFOptionsDialog extends javax.swing.JDialog {
     private javax.swing.JCheckBox ignoreTypeForPhTagsCB;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JButton okButton;
+    private javax.swing.JRadioButton prevAndNextRB;
+    private javax.swing.JRadioButton transIDRB;
     // End of variables declaration//GEN-END:variables
 }

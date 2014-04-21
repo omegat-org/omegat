@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 3.1.0 update 1
 ----------------------------------------------------------------------
-   2 Enhancements
+   3 Enhancements
    1 Bug fix
    0 Localisation updates
 ----------------------------------------------------------------------
@@ -11,6 +11,9 @@
 
   - Add Illustrator xml export format support to the SVG filter
   https://sourceforge.net/p/omegat/feature-requests/987/
+
+  - Allow using <trans-unit> ID as identifier of alternative translations in XLIFF filter 
+  https://sourceforge.net/p/omegat/feature-requests/989/
 
   Other enhancements:
 

@@ -56,6 +56,10 @@ public class XLIFFDialect extends DefaultXMLDialect {
     private boolean forceShortCutToF;
     private boolean ignoreTypeForPhTags;
     private boolean ignoreTypeForBptTags;
+    /**
+     * Sets whether alternative translations are identified by previous and next paragraphs or by &lt;trans-unit&gt; ID
+    */
+    protected boolean useTransUnitID;
     
     public XLIFFDialect() {
     }
@@ -91,6 +95,7 @@ public class XLIFFDialect extends DefaultXMLDialect {
             forceShortCutToF = options.getForceShortcutToF();
             ignoreTypeForPhTags = options.getIgnoreTypeForPhTags();
             ignoreTypeForBptTags = options.getIgnoreTypeForBptTags();
+            useTransUnitID = options.getAltTransID();
         }
 
     }

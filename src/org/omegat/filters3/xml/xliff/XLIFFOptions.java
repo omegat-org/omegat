@@ -39,6 +39,8 @@ import org.omegat.filters2.AbstractOptions;
  * Translatable elements:
  * <ul>
  * <li>[] Compatibility with 2.6
+ * <li>[x]Previous and next paragraphs
+ * <li>[]&lt;trans-unit&gt;> ID
  * <li>[]Force shortcut to "f" for &lt;it pos="end&gt; tags
  * <li>[]Ignore type and ctype attributes when building &lt;ph&gt; tag shortcuts
  * <li>[]Ignore type and ctype attributes when building &lt;bpt&gt;/&lt;ept&gt; tag shortcuts
@@ -52,6 +54,7 @@ public class XLIFFOptions extends AbstractOptions {
     private static final String OPTION_FORCE_SHORTCUT_2_F = "forceshortcut2f";
     private static final String OPTION_IGNORE_TYPE_4_PH_TAGS = "ignoretype4phtags";
     private static final String OPTION_IGNORE_TYPE_4_BPT_TAGS = "ignoretype4bpttags";
+    private static final String OPTION_ALT_TRANS_ID = "alttransid";
     
     public XLIFFOptions(Map<String, String> config) {
         super(config);
@@ -118,4 +121,21 @@ public class XLIFFOptions extends AbstractOptions {
     public void setIgnoreTypeForBptTags(boolean ignoreTypeForBptTags) {
         setBoolean(OPTION_IGNORE_TYPE_4_BPT_TAGS, ignoreTypeForBptTags);    
     }
+    
+    /** 
+     * Return whether the ID for alternative translations should be previous and nex paragraph (false)
+     * or the &lt;trans-unit&gt; id (true)
+     */
+    public boolean getAltTransID() {
+        return getBoolean(OPTION_ALT_TRANS_ID, false);
+    }
+    
+    /** 
+     * Set whether the ID for alternative translations should be previous and nex paragraph (false)
+     * or the &lt;trans-unit&gt; id (true)
+     */
+    public void setAltTransID(boolean altTransID) {
+        setBoolean(OPTION_ALT_TRANS_ID, altTransID);
+    }
+
 }

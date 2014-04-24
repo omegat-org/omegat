@@ -603,11 +603,6 @@ public class MainWindowMenu implements ActionListener, MenuListener, IMainMenu {
         for (JMenuItem item : itemsToSwitchOn) {
             item.setEnabled(isProjectOpened);
         }
-        
-        if (isProjectOpened) {
-            // Don't allow editing project properties for team projects.
-            projectEditMenuItem.setEnabled(Core.getProject().getRepository() == null);
-        }
     }
 
     public JMenu getMachineTranslationMenu() {

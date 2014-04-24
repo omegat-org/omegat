@@ -96,7 +96,7 @@ public class ProjectUICommands {
                 // ask about new project properties
                 ProjectPropertiesDialog newProjDialog = new ProjectPropertiesDialog(
                         new ProjectProperties(dir), dir.getAbsolutePath(),
-                        ProjectPropertiesDialog.NEW_PROJECT);
+                        ProjectPropertiesDialog.Mode.NEW_PROJECT);
                 newProjDialog.setVisible(true);
                 newProjDialog.dispose();
 
@@ -385,7 +385,7 @@ public class ProjectUICommands {
                             // to fix it
                             ProjectPropertiesDialog prj = new ProjectPropertiesDialog(props, new File(
                                     projectRootFolder, OConsts.FILE_PROJECT).getAbsolutePath(),
-                                    ProjectPropertiesDialog.RESOLVE_DIRS);
+                                    ProjectPropertiesDialog.Mode.RESOLVE_DIRS);
                             prj.setVisible(true);
                             props = prj.getResult();
                             prj.dispose();
@@ -536,7 +536,8 @@ public class ProjectUICommands {
         // displaying the dialog to change paths and other properties
         ProjectPropertiesDialog prj = new ProjectPropertiesDialog(Core.getProject().getProjectProperties(),
                 Core.getProject().getProjectProperties().getProjectName(),
-                ProjectPropertiesDialog.EDIT_PROJECT);
+                Core.getProject().getRepository() == null ? ProjectPropertiesDialog.Mode.EDIT_PROJECT
+                        : ProjectPropertiesDialog.Mode.EDIT_TEAM_PROJECT);
         prj.setVisible(true);
         final ProjectProperties newProps = prj.getResult();
         prj.dispose();
@@ -557,9 +558,10 @@ public class ProjectUICommands {
 
             protected Object doInBackground() throws Exception {
                 Core.getProject().saveProject();
+                IRemoteRepository repo = Core.getProject().getRepository();
                 ProjectFactory.closeProject();
 
-                ProjectFactory.loadProject(newProps, null, true);
+                ProjectFactory.loadProject(newProps, repo, true);
                 Core.getProject().saveProjectProperties();
                 return null;
             }

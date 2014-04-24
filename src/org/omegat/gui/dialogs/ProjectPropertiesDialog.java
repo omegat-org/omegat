@@ -113,29 +113,38 @@ import org.openide.awt.Mnemonics;
 public class ProjectPropertiesDialog extends JDialog {
     private ProjectProperties projectProperties;
 
-    /** This dialog is used to create a new project. */
-    public static final int NEW_PROJECT = 1;
-    /**
-     * This dialog is used to resolve missing directories of existing project
-     * (upon opening the project).
-     */
-    public static final int RESOLVE_DIRS = 2;
-    /**
-     * This dialog is used to edit project's properties: where directories
-     * reside, languages, etc.
-     */
-    public static final int EDIT_PROJECT = 3;
+    public enum Mode {
+        /** This dialog is used to create a new project. */
+        NEW_PROJECT,
+        /**
+         * This dialog is used to resolve missing directories of existing project
+         * (upon opening the project).
+         */
+        RESOLVE_DIRS,
+        /**
+         * This dialog is used to edit project's properties: where directories
+         * reside, languages, etc.
+         */
+        EDIT_PROJECT,
+        /**
+         * Project properties stored in omegat.project are not editable for team
+         * projects, but access is available through this dialog to the project-specific
+         * filter settings and segmentation settings.
+         */
+        EDIT_TEAM_PROJECT
+    }
 
     /**
      * The type of the dialog:
      * <ul>
-     * <li>Creating project == {@link #NEW_PROJECT}
+     * <li>Creating project == {@link Mode#NEW_PROJECT}
      * <li>Resolving the project's directories (existing project with some dirs
-     * missing) == {@link #RESOLVE_DIRS}
-     * <li>Editing project properties == {@link #EDIT_PROJECT}
+     * missing) == {@link Mode#RESOLVE_DIRS}
+     * <li>Editing project properties == {@link Mode#EDIT_PROJECT}
+     * <li>Editing filter or segmentation settings for team project == {@link Mode#EDIT_TEAM_PROJECT}
      * </ul>
      */
-    private int dialogType;
+    private Mode dialogType;
 
     /** Project SRX. */
     private SRX srx;
@@ -155,7 +164,7 @@ public class ProjectPropertiesDialog extends JDialog {
      *            {@link #RESOLVE_DIRS} or {@link #EDIT_PROJECT}).
      */
     public ProjectPropertiesDialog(final ProjectProperties projectProperties, String projFileName,
-            int dialogTypeValue) {
+            Mode dialogTypeValue) {
         super(Core.getMainWindow().getApplicationFrame(), true);
         this.projectProperties = projectProperties;
         this.srx = projectProperties.getProjectSRX();
@@ -512,16 +521,16 @@ public class ProjectPropertiesDialog extends JDialog {
         final JScrollPane m_externalCommandScrollPane = new JScrollPane();
         m_externalCommandScrollPane.setViewportView(m_externalCommandTextArea);
         optionsBox.add(m_externalCommandScrollPane);
+        final JLabel m_variablesLabel = new javax.swing.JLabel();
+        final JComboBox m_variablesList = new javax.swing.JComboBox(CommandVarExpansion.COMMAND_VARIABLES);
+        final JButton m_insertButton = new javax.swing.JButton();
         // Add variable insertion controls only if project external commands are enabled.
         if (Preferences.isPreference(Preferences.ALLOW_PROJECT_EXTERN_CMD)) {
             Box bIC = Box.createHorizontalBox();
             bIC.setBorder(emptyBorder);
-            final JLabel m_variablesLabel = new javax.swing.JLabel();
             Mnemonics.setLocalizedText(m_variablesLabel, OStrings.getString("EXT_TMX_MATCHES_TEMPLATE_VARIABLES"));
             bIC.add(m_variablesLabel);
-            final JComboBox m_variablesList = new javax.swing.JComboBox(CommandVarExpansion.COMMAND_VARIABLES);
             bIC.add(m_variablesList);
-            final JButton m_insertButton = new javax.swing.JButton();
             Mnemonics.setLocalizedText(m_insertButton, OStrings.getString("BUTTON_INSERT"));
             m_insertButton.addActionListener(new java.awt.event.ActionListener() {
                 public void actionPerformed(ActionEvent e) {
@@ -752,7 +761,14 @@ public class ProjectPropertiesDialog extends JDialog {
             m_targetLocaleField.setEnabled(false);
             m_sourceTokenizerField.setEnabled(false);
             m_targetTokenizerField.setEnabled(false);
+            m_sourceTokenizerBehaviorField.setEnabled(false);
+            m_targetTokenizerBehaviorField.setEnabled(false);
             m_sentenceSegmentingCheckBox.setEnabled(false);
+            m_allowDefaultsCheckBox.setEnabled(false);
+            m_removeTagsCheckBox.setEnabled(false);
+            m_externalCommandTextArea.setEnabled(false);
+            m_insertButton.setEnabled(false);
+            m_variablesList.setEnabled(false);
 
             // marking missing folder RED
             File f = new File(m_srcRootField.getText());
@@ -782,6 +798,31 @@ public class ProjectPropertiesDialog extends JDialog {
                 m_tmRootField.setForeground(Color.RED);
 
             break;
+        case EDIT_TEAM_PROJECT:
+            m_sourceLocaleField.setEnabled(false);
+            m_targetLocaleField.setEnabled(false);
+            m_sourceTokenizerField.setEnabled(false);
+            m_targetTokenizerField.setEnabled(false);
+            m_sourceTokenizerBehaviorField.setEnabled(false);
+            m_targetTokenizerBehaviorField.setEnabled(false);
+            m_sentenceSegmentingCheckBox.setEnabled(false);
+            m_allowDefaultsCheckBox.setEnabled(false);
+            m_removeTagsCheckBox.setEnabled(false);
+            m_externalCommandTextArea.setEnabled(false);
+            m_insertButton.setEnabled(false);
+            m_variablesList.setEnabled(false);
+            m_srcBrowse.setEnabled(false);
+            m_srcRootField.setEnabled(false);
+            m_tmBrowse.setEnabled(false);
+            m_tmRootField.setEnabled(false);
+            m_glosBrowse.setEnabled(false);
+            m_glosRootField.setEnabled(false);
+            m_wGlosBrowse.setEnabled(false);
+            m_writeableGlosField.setEnabled(false);
+            m_dictBrowse.setEnabled(false);
+            m_dictRootField.setEnabled(false);
+            m_locBrowse.setEnabled(false);
+            m_locRootField.setEnabled(false);
         }
 
         updateUIText(m_messageArea);
@@ -1063,7 +1104,7 @@ public class ProjectPropertiesDialog extends JDialog {
         if (!projectProperties.getSourceRoot().endsWith(File.separator))
             projectProperties.setSourceRoot(projectProperties.getSourceRoot() + File.separator);
 
-        if (dialogType != NEW_PROJECT && !new File(projectProperties.getSourceRoot()).exists()) {
+        if (dialogType != Mode.NEW_PROJECT && !new File(projectProperties.getSourceRoot()).exists()) {
             JOptionPane.showMessageDialog(this, OStrings.getString("NP_SOURCEDIR_DOESNT_EXIST"),
                     OStrings.getString("TF_ERROR"), JOptionPane.ERROR_MESSAGE);
             m_srcRootField.requestFocusInWindow();
@@ -1073,7 +1114,7 @@ public class ProjectPropertiesDialog extends JDialog {
         projectProperties.setTargetRoot(m_locRootField.getText());
         if (!projectProperties.getTargetRoot().endsWith(File.separator))
             projectProperties.setTargetRoot(projectProperties.getTargetRoot() + File.separator);
-        if (dialogType != NEW_PROJECT && !new File(projectProperties.getTargetRoot()).exists()) {
+        if (dialogType != Mode.NEW_PROJECT && !new File(projectProperties.getTargetRoot()).exists()) {
             JOptionPane.showMessageDialog(this, OStrings.getString("NP_TRANSDIR_DOESNT_EXIST"),
                     OStrings.getString("TF_ERROR"), JOptionPane.ERROR_MESSAGE);
             m_locRootField.requestFocusInWindow();
@@ -1083,7 +1124,7 @@ public class ProjectPropertiesDialog extends JDialog {
         projectProperties.setGlossaryRoot(m_glosRootField.getText());
         if (!projectProperties.getGlossaryRoot().endsWith(File.separator))
             projectProperties.setGlossaryRoot(projectProperties.getGlossaryRoot() + File.separator);
-        if (dialogType != NEW_PROJECT && !new File(projectProperties.getGlossaryRoot()).exists()) {
+        if (dialogType != Mode.NEW_PROJECT && !new File(projectProperties.getGlossaryRoot()).exists()) {
             JOptionPane.showMessageDialog(this, OStrings.getString("NP_GLOSSDIR_DOESNT_EXIST"),
                     OStrings.getString("TF_ERROR"), JOptionPane.ERROR_MESSAGE);
             m_glosRootField.requestFocusInWindow();
@@ -1091,7 +1132,7 @@ public class ProjectPropertiesDialog extends JDialog {
         }
 
         projectProperties.setWriteableGlossary(m_writeableGlosField.getText());
-        if (dialogType != NEW_PROJECT && !new File(projectProperties.getWriteableGlossaryDir()).exists()) {
+        if (dialogType != Mode.NEW_PROJECT && !new File(projectProperties.getWriteableGlossaryDir()).exists()) {
             JOptionPane.showMessageDialog(this, OStrings.getString("NP_W_GLOSSDIR_DOESNT_EXIST"),
                     OStrings.getString("TF_ERROR"), JOptionPane.ERROR_MESSAGE);
             m_writeableGlosField.requestFocusInWindow();
@@ -1112,7 +1153,7 @@ public class ProjectPropertiesDialog extends JDialog {
         projectProperties.setTMRoot(m_tmRootField.getText());
         if (!projectProperties.getTMRoot().endsWith(File.separator))
             projectProperties.setTMRoot(projectProperties.getTMRoot() + File.separator);
-        if (dialogType != NEW_PROJECT && !new File(projectProperties.getTMRoot()).exists()) {
+        if (dialogType != Mode.NEW_PROJECT && !new File(projectProperties.getTMRoot()).exists()) {
             JOptionPane.showMessageDialog(this, OStrings.getString("NP_TMDIR_DOESNT_EXIST"),
                     OStrings.getString("TF_ERROR"), JOptionPane.ERROR_MESSAGE);
             m_tmRootField.requestFocusInWindow();
@@ -1122,7 +1163,7 @@ public class ProjectPropertiesDialog extends JDialog {
         projectProperties.setDictRoot(m_dictRootField.getText());
         if (!projectProperties.getDictRoot().endsWith(File.separator))
             projectProperties.setDictRoot(projectProperties.getDictRoot() + File.separator);
-        if (dialogType != NEW_PROJECT && !new File(projectProperties.getDictRoot()).exists()) {
+        if (dialogType != Mode.NEW_PROJECT && !new File(projectProperties.getDictRoot()).exists()) {
             JOptionPane.showMessageDialog(this, OStrings.getString("NP_DICTDIR_DOESNT_EXIST"),
                     OStrings.getString("TF_ERROR"), JOptionPane.ERROR_MESSAGE);
             m_dictRootField.requestFocusInWindow();
@@ -1141,7 +1182,7 @@ public class ProjectPropertiesDialog extends JDialog {
         // to fix bug 1476591 the project root is created before everything else
         // and if the new project is cancelled, the project root still exists,
         // so it must be deleted
-        if (dialogType == NEW_PROJECT)
+        if (dialogType == Mode.NEW_PROJECT)
             new File(projectProperties.getProjectRoot()).delete();
 
         m_dialogCancelled = true;
@@ -1163,6 +1204,7 @@ public class ProjectPropertiesDialog extends JDialog {
             m_messageArea.setText(OStrings.getString("PP_MESSAGE_BADPROJ"));
             break;
         case EDIT_PROJECT:
+        case EDIT_TEAM_PROJECT:
             setTitle(OStrings.getString("PP_EDIT_PROJECT"));
             m_messageArea.setText(OStrings.getString("PP_MESSAGE_EDITPROJ"));
             break;

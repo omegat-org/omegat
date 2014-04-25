@@ -445,13 +445,6 @@
           <para>-<emphasis role="bold">Dmicrosoft.api.client_secret=XXXX9xXxX9xXXxxXXX9xxX99xXXXX9xx9XXxXxXXXXX=</emphasis></para>
         </listitem>
 
-        <listitem>
-          <para><emphasis role="bold">Opzione progetto in collaborazione<parameter><indexterm class="singular">
-              <primary>Avvio di OmegaT</primary> <secondary>Argomenti dello script di avvio</secondary> <tertiary>opzione no-team</tertiary>
-            </indexterm></parameter></emphasis></para>
-
-          <para><emphasis role="bold">-no-team</emphasis> indirizza i progetti affinché la configurazione di collaborazione funzioni. Usarla se OmegaT non sincronizza il contenuto del progetto.</para>
-        </listitem>
       </itemizedlist>
 
       <para>Gli argomenti possono essere combinati: per avviare <application>OmegaT</application> con tutti gli esempi descritti sopra, il comando deve essere:</para>
@@ -612,6 +605,19 @@
             <para>Questa opzione permette la convalida dei tag in modalità batch. Se si <literal>termina </literal>la procedura, la convalida di tag si bloccherà sul primo segmento non valido. Se si seleziona l'opzione di <literal>warn</literal>, il programma di convalida analizzerà tutti i segmenti e registrerà gli avvisi di quelli con tag non validi, all'interno del file specificato.</para>
           </listitem>
         </itemizedlist>
+        
+        <itemizedlist>
+          <listitem>
+            <para><literal>--no-team</literal> indirizza i progetti affinché la configurazione di collaborazione funzioni. Usarla se OmegaT non sincronizza il contenuto del progetto.</para>
+          </listitem>
+        </itemizedlist>
+
+        <itemizedlist>
+          <listitem>
+            <para><literal>--disable-project-locking</literal> consente, sotto Windows, di aprire il medesimo progetto tramite più istanze di OmegaT. Per impostazione predefinita, sotto Windows, <literal>omegat.project</literal> è bloccato, e viene restituito un errore quando si tenta di aprire un progetto già aperto in un'altra istanza di OmegaT. Con tale opzione, non si produce alcun blocco.</para>
+          </listitem>
+        </itemizedlist>
+
       </section>
 
       <section id="console.mode.option.quiet">

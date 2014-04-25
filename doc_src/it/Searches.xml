@@ -160,4 +160,22 @@
 
     <para>Si potranno aprire insieme più finestre di ricerca. È possibile visualizzare rapidamente il loro contenuto leggendone il titolo, che contiene il termine di ricerca utilizzato.</para>
   </section>
+  
+  <section id="search.filter">
+    <title>Voci dei filtri nell'editor in base alla ricerca</title>
+    
+    <para>Al fine di una navigazione più facile all'interno dell'insieme dei risultati di ricerca, è possibile applicare la ricerca all'interno dell'editor. Per limitare le voci visualizzate nella finestra dell'editor a quelle che corrispondono alla ricerca corrente, premere il pulsante <emphasis role="bold">Filtro</emphasis> in basso. Utilizzare la normale navigazione per spostarsi, ad esempio, al successivo segmento (non tradotto) che corrisponde al criterio di ricerca.</para>
+  
+   <para>N.B.:</para>
+   
+    <itemizedlist>
+      <listitem>la ricerca può essere limitata a 1000 voci; se si effettua, dunque, una ricerca su una frase comune, l'editor mostrerà solo quelle 1000 voci e non tutte quelle che corrispondono al criterio di ricerca.</listitem>
+      <listitem>un file potrebbe non contenere corrispondenze, dunque la finestra sarà vuota.</listitem>
+      <listitem>se una ricerca rimuove i duplicati, essi non saranno presenti nell'Editor.</listitem>
+    </itemizedlist>
+    
+    <para>Per rimuovere un filtro, premere il pulsante <emphasis role="bold">Rimuovi filtro</emphasis> o ricaricare il progetto.</para>
+ </section>
+      
+    
 </chapter>

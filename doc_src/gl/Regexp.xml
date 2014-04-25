@@ -5,7 +5,7 @@
       <primary>Expresións regulares</primary> <seealso>Segmentación</seealso> <seealso>Busca</seealso>
     </indexterm></title>
 
-  <para>As expresións regulares (ou regex para acortar) empregadas nas buscas e regras de segmentación son as compatíbeis con Java. En caso de necesitar información máis específica, consulte a <ulink url="http://download.oracle.com/javase/1.5.0/docs/api/java/util/regex/Pattern.html">Documentación sobre Regex de Java</ulink>. Vexa referencias adicionais e exemplos máis adiante.</para>
+  <para>As expresións regulares (ou regex para acortar) empregadas nas buscas e regras de segmentación son as compatíbeis con Java. En caso de necesitar información máis específica, consulte a <ulink url="http://download.oracle.com/javase/1.6.0/docs/api/java/util/regex/Pattern.html">Documentación sobre Regex de Java</ulink>. Vexa referencias adicionais e exemplos máis adiante.</para>
 
   <note>
     <para>Este capítulo está pensado para usuarios avanzados, que necesitar definir as súas propias variantes de regras de segmentación ou que necesitan facer buscas máis complexas e exhaustivas.</para>
@@ -191,13 +191,13 @@
         <row>
           <entry>\p{InGreek}</entry>
 
-          <entry>Un carácter no bloque Grego (<ulink url="http://download.oracle.com/javase/1.5.0/docs/api/java/util/regex/Pattern.html#ubc">bloque</ulink> simple)</entry>
+          <entry>Un carácter no bloque Grego (<ulink url="http://download.oracle.com/javase/1.6.0/docs/api/java/util/regex/Pattern.html#ubc">bloque</ulink> simple)</entry>
         </row>
 
         <row>
           <entry>\p{Lu}</entry>
 
-          <entry>Unha letra maiúscula (<ulink url="http://download.oracle.com/javase/1.5.0/docs/api/java/util/regex/Pattern.html#ubc">categoría</ulink> simple)</entry>
+          <entry>Unha letra maiúscula (<ulink url="http://download.oracle.com/javase/1.6.0/docs/api/java/util/regex/Pattern.html#ubc">categoría</ulink> simple)</entry>
         </row>
 
         <row>

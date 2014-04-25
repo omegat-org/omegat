@@ -353,7 +353,7 @@
                   <keycap>C</keycap>
                 </keycombo></entry>
 
-              <entry>Exporta a selección actual a un ficheiro de texto para ser procesada. Se non se seleccionou ningún texto, o segmento de orixe activo se escribirá neste ficheiro. Cando o usuario saia de <application>OmegaT</application>, non se baleirará este ficheiro, de modo que sexa consistente co comportamento normal do portapapeis. Os contidos exportados se copiarán ao ficheiro <filename>selection.txt</filename> localizado no cartafol de ficheiros de configuración do usuario (vexa <xref linkend="chapter.files.and.directories"/>)</entry>
+              <entry>Exporta a selección actual a un ficheiro de texto para ser procesada. Se non se seleccionou ningún texto, o segmento de orixe activo se escribirá neste ficheiro. Cando o usuario saia de <application>OmegaT</application>, non se baleirará este ficheiro, de modo que sexa consistente co comportamento normal do portapapeis. Os contidos exportados se copiarán ao ficheiro <filename>selection.txt</filename> localizado no cartafol de ficheiros de configuración do usuario (vexa <xref linkend="chapter.files.and.folders"/>)</entry>
             </row>
 
             <row>

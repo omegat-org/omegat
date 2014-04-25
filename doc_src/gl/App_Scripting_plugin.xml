@@ -16,7 +16,7 @@
 
     <para>O engadido de Scrpting para OmegaT pode descargarse dende o <ulink url="http://sourceforge.net/projects/omegat-plugins/files">sitio de descarga de engadidos de OmegaT</ulink>. Descomprima os ficheiros e gárdeos no cartafol «plugins» dentro da carpeta de instalación de OmegaT, é dicir, o cartafol que contén o ficheiro OmegaT.jar. Primeiro cree o cartafol «plugins», de non existir un xa.</para>
 
-    <para>Isto engade un submenú novo <guisubmenu>Ferramentas &gt; </guisubmenu><guisubmenu>Scripting.</guisubmenu> Baixo o submenú de <guisubmenu>Scripting</guisubmenu>, hai dispoñíbeis cinco lugares para scripts. Facendo clic en <guisubmenu>Scripting</guisubmenu>, abre o diálogo do engadido:<screenshot> <screeninfo>Diálogo de Scripting</screeninfo> <mediaobject> <imageobject> <imagedata fileref="images/ScriptingDialog.png"/> </imageobject> </mediaobject> </screenshot></para>
+    <para>Isto engade un submenú novo <guisubmenu>Ferramentas &gt; </guisubmenu><guisubmenu>Scripting.</guisubmenu> Baixo o submenú de <guisubmenu>Scripting</guisubmenu>, hai dispoñíbeis 12 lugares para scripts. Facendo clic en <guisubmenu>Scripting</guisubmenu>, abre o diálogo do engadido:<screenshot> <screeninfo>Diálogo de Scripting</screeninfo> <mediaobject> <imageobject> <imagedata fileref="images/ScriptingDialog.png"/> </imageobject> </mediaobject> </screenshot></para>
 
     <para>O diálogo do engadido permítelle cargar un script existente na área de texto e executalo no proxecto aberto nese momento. Para personalizar a funcionalidade dos scripts, faga o seguinte:</para>
 
@@ -28,13 +28,13 @@
 
     <itemizedlist>
       <listitem>
-        <para>Faga clic dereito nun botón dende o «&lt;1&gt;» ao «&lt;5&gt;» no panel inferior e seleccione «Engadir». No exemplo anterior, xa se engadiron dous scripts (posición 1 e 2).</para>
+        <para>Faga clic dereito nun botón dende o «&lt;1&gt;» ao «&lt;12&gt;» no panel inferior e seleccione «Engadir». No exemplo anterior, xa se engadiron dous scripts (posición 1 e 2).</para>
       </listitem>
     </itemizedlist>
 
     <itemizedlist>
       <listitem>
-        <para>Cando faga clic esquerdo no número, executarase o script. Pode iniciar as macros seleccionadas dende o menú principal ou ben empregando as entradas no menú de <guisubmenu>Ferramentas</guisubmenu> ou premendo <keycap>Ctrl+Alt+F#</keycap> (sendo # un número do 1 ao 5).</para>
+        <para>Cando faga clic esquerdo no número, executarase o script. Pode iniciar as macros seleccionadas dende o menú principal ou ben empregando as entradas no menú de <guisubmenu>Ferramentas</guisubmenu> ou premendo <keycap>Ctrl+Alt+F#</keycap> (sendo # un número do 1 ao 12).</para>
       </listitem>
     </itemizedlist>
 

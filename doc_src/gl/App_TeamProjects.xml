@@ -120,9 +120,9 @@
         </imageobject>
       </mediaobject>
  
-      <para>Insira o enderezo URL que lle ofreceu ProjectLocker no campo <emphasis role="bold">URL of repository (URL do repositorio)</emphasis>. Asegúrese de que o campo <emphasis role="bold">Checkout directory (directorio para realizar o checkout)</emphasis> é correcto, é dicir, que especifica o cartafol baleiro que creou, e prema <emphasis role="bold">Aceptar</emphasis>. Unha vez que acabe a operación, pode comprobar o devandito cartafol: debería conter un subdirectorio .svn e aparecerá na icona unha etiqueta verde de OK, o que indica que os contidos do cartafol están actualizados:</para>
+      <para>Insira o enderezo URL que lle ofreceu ProjectLocker no campo <emphasis role="bold">URL of repository (URL do repositorio)</emphasis>. Asegúrese de que o campo <emphasis role="bold">Checkout directory (directorio para realizar o checkout)</emphasis> é correcto, é dicir, que especifica o cartafol baleiro que creou, e prema <emphasis role="bold">Aceptar</emphasis>. Unha vez que acabe a operación, pode comprobar o devandito cartafol: debería conter un subcartafol .svn e aparecerá na icona unha etiqueta verde de OK, o que indica que os contidos do cartafol están actualizados:</para>
 
-      <para>No seguinte paso, engadiremos os ficheiros de OmegaT ao directorio local. Os seguintes ficheiros son para compartir entre os membros do equipo e teñen que incluírse sexa cal sexa o caso:</para>
+      <para>No seguinte paso, engadiremos os ficheiros de OmegaT ao cartafol local. Os seguintes ficheiros son para compartir entre os membros do equipo e teñen que incluírse sexa cal sexa o caso:</para>
 
       <itemizedlist>
         <listitem>
@@ -148,7 +148,7 @@
 
       <itemizedlist>
         <listitem>
-          <para><emphasis role="bold">engadir os ficheiros copiados da versión local do repositorio:</emphasis> faga clic dereito no directorio local para o checkout e seleccione <guilabel>TortoiseSvn &gt; Add (engadir)</guilabel>. No diálogo que se abre, deixe todas as opcións predeterminadas e prema <guilabel>OK (Aceptar)</guilabel> Aparecerá a ventá Add Finished! (Adición finalizada) aparecerá unha xanela similar á seguinte:</para>
+          <para>!!<emphasis role="bold">engadir os ficheiros copiados da versión local do repositorio:</emphasis> faga clic dereito no cartafol local para o checkout e seleccione <guilabel>TortoiseSvn &gt; Add (engadir)</guilabel>. No diálogo que se abre, deixe todas as opcións predeterminadas e prema <guilabel>OK (Aceptar)</guilabel> Aparecerá a ventá Add Finished! (Adición finalizada) aparecerá unha xanela similar á seguinte:</para>
  
       <mediaobject>
         <imageobject role="html">
@@ -159,7 +159,7 @@
         </imageobject>
       </mediaobject>
 	  
-          <para>Os contidos do directorio para o checkout marcaranse conforme a iso:</para>
+          <para>Os contidos do cartafol para o checkout marcaranse conforme a iso:</para>
 
           <mediaobject>
             <imageobject role="html">
@@ -172,7 +172,7 @@
 
         </listitem>
         <listitem>
-          <para><emphasis role="bold">remitir cambios locais ao servidor:</emphasis> faga clic dereito no directorio local para o checkout e seleccione <guilabel>SVN Commit... (Remisión SVN)</guilabel> Abrirase a xanela de remisión (vexa máis adiante). Comprobe que se levaron a cabo os cambios, é dicir, os cartafoles e ficheiros engadidos neste caso.</para>
+          <para><emphasis role="bold">remitir cambios locais ao servidor:</emphasis> faga clic dereito no cartafol local para o checkout e seleccione <guilabel>SVN Commit... (Remisión SVN)</guilabel> Abrirase a xanela de remisión (vexa máis adiante). Comprobe que se levaron a cabo os cambios, é dicir, os cartafoles e ficheiros engadidos neste caso.</para>
  
           <mediaobject>
             <imageobject role="html">

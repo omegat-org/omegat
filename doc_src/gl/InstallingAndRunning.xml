@@ -11,15 +11,15 @@
     <section>
       <title id="which.package.to.download.windows">Descarga do paquete</title>
 
-      <para>Ten unha implementación de Java compatíbel co Java 1.5 JRE de Oracle?</para>
+      <para>Ten unha implementación de Java compatíbel co Java 1.6 JRE de Oracle?</para>
 
       <itemizedlist>
         <listitem>
-          <para><emphasis role="bold">Si:</emphasis> descargue <emphasis>OmegaT_2.6.x_Windows_without_JRE.exe</emphasis>.</para>
+          <para><emphasis role="bold">Si:</emphasis> descargue <emphasis>OmegaT_3.n.n_Windows_without_JRE.exe</emphasis>.</para>
         </listitem>
 
         <listitem>
-          <para><emphasis role="bold">Non / Non sei:</emphasis> descargue <emphasis>OmegaT_2.6.x_Windows.exe.</emphasis></para>
+          <para><emphasis role="bold">Non / Non sei:</emphasis> descargue <emphasis>OmegaT_3.n.n_Windows.exe.</emphasis></para>
 
           <para>Este paquete inclúe o Java Runtime Environment de Oracle. Este JRE non interferirá con outras implementacións de Java que poida ter instaladas no seu sistema.</para>
         </listitem>
@@ -93,15 +93,15 @@
     <section id="which.package.to.download.Linux">
       <title>Descarga do paquete correcto</title>
 
-      <para>Ten unha implementación de Java compatíbel co Java 1.5 JRE de Oracle?</para>
+      <para>Ten unha implementación de Java compatíbel co Java 1.6 JRE de Oracle?</para>
 
       <itemizedlist>
         <listitem>
-          <para><emphasis role="bold">Si:</emphasis> descargue <emphasis>OmegaT_2.6.x_Without_JRE.zip</emphasis>.</para>
+          <para><emphasis role="bold">Si:</emphasis> descargue <emphasis>OmegaT_3.n.n_Windows_without_JRE.zip</emphasis>.</para>
         </listitem>
 
         <listitem>
-          <para><emphasis role="bold">Non / Non sei:</emphasis> descargue <emphasis>OmegaT_2.6.x_Linux.tar.bz2.</emphasis></para>
+          <para><emphasis role="bold">Non / Non sei:</emphasis> descargue <emphasis>OmegaT_3.n.n_Linux.tar.bz2.</emphasis></para>
 
           <para>Este paquete inclúe o Java Runtime Environment de Oracle. Este JRE non interferirá con outras implementacións de Java que poida ter instaladas no seu sistema.</para>
         </listitem>
@@ -194,13 +194,13 @@
 
       <para><application>OmegaT</application> 2.6 necesita Java 1.5 para poder executarse. Empregue «Actualizar software...» do menú de Apple para actualizar a súa versión de Java.</para>
 
-      <para>Descargue <emphasis>OmegaT_2.6.x_Mac.zip.</emphasis></para>
+      <para>Descargue <emphasis>OmegaT_3.n.n_Mac.zip.</emphasis></para>
     </section>
 
     <section id="OmegaT.installation.OSX">
       <title><application>Instalar OmegaT</application></title>
 
-      <para>Faga dobre clic en <emphasis>OmegaT_2.6.x_Mac.zip</emphasis> para desempaquetalo. Isto creará un cartafol chamado <emphasis> <application>OmegaT</application> </emphasis>. O cartafol contén dous ficheiros: index.html e<emphasis><application>OmegaT</application>.app.</emphasis> Copie o cartafol a un cartafol apropiado (por exemplo, Aplicacións). Unha vez feito, pode eliminar o ficheiro <emphasis>OmegaT_2.6.x_Mac.zip</emphasis>, pois non o vai necesitar máis.</para>
+      <para>Faga dobre clic en <emphasis>OmegaT_3.n.n_Mac.zip</emphasis> para desempaquetalo. Isto creará un cartafol chamado <emphasis> <application>OmegaT</application> </emphasis>. O cartafol contén dous ficheiros: index.html e<emphasis><application>OmegaT</application>.app.</emphasis> Copie o cartafol a un cartafol apropiado (por exemplo, Aplicacións). Unha vez feito, pode eliminar o ficheiro <emphasis>OmegaT_3.n.n_Mac.zip</emphasis>, pois non o vai necesitar máis.</para>
     </section>
 
     <section id="adding.OmegaT.to.the.dock">
@@ -216,17 +216,17 @@
 
       <para>Faga dobre clic en<emphasis> <application>OmegaT</application>.app</emphasis> ou faga clic na súa localización do dock.</para>
 
-      <para>Para acceder a <application><emphasis>Info.plist</emphasis></application>, faga clic dereito en <emphasis><application>OmegaT</application>.app</emphasis> e seleccione «Amosar o contido do paquete», despois abra o ficheiro facendo clic dereito nel e seleccionando o editor de textos que desexe. Tamén pode empregar «cd» para acceder aquí directamente desde a liña de ordes e abrir <application><emphasis>Info.plist</emphasis> nun editor de liña de ordes como emacs ou vi</application>.<emphasis> <indexterm class="singular">
+      <para>Pode modificar o comportamento de OmegaT editando as <emphasis>Propiedades</emphasis> así como as <emphasis>OpciónsVM</emphasis> parte do ficheiro <application><emphasis>Info.plist</emphasis></application> do paquete.</para>
+      
+      <para>Para acceder a <application><emphasis>Info.plist</emphasis></application>, faga clic dereito en <emphasis><application>OmegaT</application>.app</emphasis> e seleccione «Amosar o contido do paquete», despois abra o ficheiro facendo clic dereito nel e seleccionando o editor de textos que desexe. Tamén pode empregar «cd» para acceder aquí directamente desde a liña de ordes e abrir <application><emphasis>Info.plist</emphasis> nun editor de liña de ordes como emacs ou vi</application>.<indexterm class="singular">
           <primary>Personalizar OmegaT</primary> <secondary>OS X</secondary> <tertiary>Parámetros de inicio</tertiary>
-        </indexterm></emphasis></para>
+        </indexterm></para>
 
-      <para>Pode modificar tanto a parte de <emphasis>Properties</emphasis> como a de <emphasis>VMOptions</emphasis>.</para>
-
-      <para>Se desexa engadir valores a <emphasis>VMOptions</emphasis>, poña un espazo entre eles. Por exemplo, <filename>-Xmx1024M -Duser.language=ja</filename> iniciará <application>OmegaT</application> con 1024MB de memoria e coa interface de usuario en xaponés.</para>
+      <para>Se desexa engadir valores a <emphasis>OpciónsVM</emphasis>, poña un espazo entre eles. Por exemplo, <filename>-Xmx1024M -Duser.language=ja</filename> iniciará <application>OmegaT</application> con 1024MB de memoria e coa interface de usuario en xaponés.</para>
 
       <para>Para iniciar varias instancias de <emphasis><application>OmegaT</application>.app</emphasis>, faga dobre clic no ficheiro <emphasis>JavaApplicationStub</emphasis> situado en <emphasis><application>OmegaT</application>.app/ Contents/MacOS/</emphasis>.</para>
 
-      <para><emphasis><application> </application></emphasis>Empregue o ficheiro <emphasis><application>OmegaT</application>.jar</emphasis> situado en <emphasis><application>OmegaT</application>.app/Contents/Resources/Java/</emphasis> para iniciar <application>OmegaT</application> desde a liña de ordes. Comprobe «Inicio mediante a liña de ordes» máis adiante para máis información.</para>
+      <para>Empregue o ficheiro <emphasis><application>OmegaT</application>.jar</emphasis> situado en <emphasis><application>OmegaT</application>.app/Contents/Resources/Java/</emphasis> para iniciar <application>OmegaT</application> desde a liña de ordes. Comprobe «Inicio mediante a liña de ordes» máis adiante para máis información.</para>
     </section>
 
     <section id="Mac.OSX.goodies">
@@ -248,11 +248,11 @@
 
       <para><application>OmegaT</application> está dispoñíbel cunha versión de Java JRE de Oracle incluída para as plataformas Linux (Intel x86) e Windows. Os usuarios de outras plataformas (Linux PowerPC, Linux x64, Solaris SPARC/x86/x64, Windows x64, etc.) deben ter un Java JRE compatíbel no seu sistema para poder usar <application>OmegaT</application>.</para>
 
-      <para>Ten unha implementación de Java compatíbel co Java 1.5 JRE de Oracle?</para>
+      <para>Ten unha implementación de Java compatíbel co Java 1.6 JRE de Oracle?</para>
 
       <itemizedlist>
         <listitem>
-          <para><emphasis role="bold">Si:</emphasis> descargue <emphasis>OmegaT_2.6.x_Windows_without_JRE.</emphasis>zip.. Este paquete pode usarse en calquera plataforma onde haxa instalado un JRE compatíbel con Java 1.5 JRE.</para>
+          <para><emphasis role="bold">Si:</emphasis> descargue <emphasis>OmegaT_3.n.n_Windows_without_JRE.</emphasis>zip. Este paquete pode usarse en calquera plataforma onde haxa instalado un JRE compatíbel con Java 1.6 JRE.</para>
         </listitem>
 
         <listitem>
@@ -260,9 +260,9 @@
         </listitem>
 
         <listitem>
-          <para><emphasis role="bold">Non:</emphasis> consiga un Java JRE para o seu sistema (vexa máis adiante) e descargue <emphasis>OmegaT_2.6.x_Without_JRE.zip</emphasis>.</para>
+          <para><emphasis role="bold">Non:</emphasis> consiga un Java JRE para o seu sistema (vexa máis adiante) e descargue <emphasis>OmegaT_3.n.n_Without_JRE.zip</emphasis>.</para>
 
-          <para>Oracle ofrece JREs para Solaris SPARC/x86 (Java 1.5) e para Linux x64, Solaris x64, Windows x64 (Java 1.5) en <ulink url="http://www.oracle.com/technetwork/java/archive-139210.html">http://www.oracle.com/technetwork/java/archive-139210.html</ulink>.</para>
+          <para>Oracle ofrece JREs para Solaris SPARC/x86 (Java 1.6) e para Linux x64, Solaris x64, Windows x64 (Java 1.6) en <ulink url="http://www.oracle.com/technetwork/java/archive-139210.html">http://www.oracle.com/technetwork/java/archive-139210.html</ulink>.</para>
 
           <para>IBM ofrece JREs para Linux PowerPC en <ulink url="http://www.ibm.com/developerworks/java/jdk/linux/download.html">http://www.ibm.com/developerworks/java/jdk/linux/download.htm</ulink></para>
 
@@ -276,7 +276,7 @@
           <primary>Instalar OmegaT</primary> <secondary>Outros sistemas</secondary>
         </indexterm></title>
 
-      <para>Para instalar <application>OmegaT</application>, simplemente extraia o ficheiro <emphasis role="bold">OmegaT_2.6.x_Without_JRE.zip</emphasis>. Isto creará un directorio <emphasis>./OmegaT_2.6.x_Without_JRE/</emphasis> no cartafol activo con todos os ficheiros necesarios para executar <application>OmegaT</application>.</para>
+      <para>Para instalar <application>OmegaT</application>, simplemente extraia o ficheiro <emphasis role="bold">OmegaT_3.n.n_Without_JRE.zip</emphasis>. Isto creará un directorio <emphasis>./OmegaT_3.n.n_Without_JRE/</emphasis> no cartafol activo con todos os ficheiros necesarios para executar <application>OmegaT</application>.</para>
     </section>
 
     <section id="installing.convenient.shortcuts">
@@ -299,7 +299,7 @@
         <primary>Executar OmegaT</primary> <secondary>Empregar Java Web Start</secondary>
       </indexterm></title>
 
-    <para>A tecnoloxía Java Web Start (parte de Java 1.5 e superiores) pode empregarse para executar aplicacións de software Java independentes cun so clic sobre a rede. Java Web Start asegura que se executará a última versión da aplicación, así como que se emprega a versión correcta de Java Runtime Environment (JRE). Para iniciar OmegT por primeira vez con Java Web Start, cargue a seguinte ligazón no seu navegador:</para>
+    <para>A tecnoloxía Java Web Start (parte de Java 1.6 e superiores) pode empregarse para executar aplicacións de software Java independentes cun so clic sobre a rede. Java Web Start asegura que se executará a última versión da aplicación, así como que se emprega a versión correcta de Java Runtime Environment (JRE). Para iniciar OmegT por primeira vez con Java Web Start, cargue a seguinte ligazón no seu navegador:</para>
 
     <para><emphasis>http://omegat.sourceforge.net/webstart/<application>OmegaT</application>.jnlp</emphasis></para>
 
@@ -392,7 +392,7 @@
 
       <itemizedlist>
         <listitem>
-          <para><emphasis role="bold">Antidistorsión de fontes</emphasis> - (só en Java 1.5)</para>
+          <para><emphasis role="bold">Antidistorsión de fontes</emphasis> - (só en Java 1.6)</para>
 
           <para><emphasis role="bold">-Dswing.aatext=true<indexterm class="singular">
               <primary>Executar OmegaT</primary> <secondary>Argumentos do script de inicio</secondary> <tertiary>Antidistorsión de fontes</tertiary>
@@ -440,26 +440,19 @@
               <primary>Executar OmegaT</primary> <secondary>Argumentos do script de inicio</secondary> <tertiary>Microsoft Translator</tertiary>
             </indexterm></para>
 
-          <para>Asegúrese de que ten unha conta gratuíta de Microsoft. Necesitará acceder ao <ulink url="http://datamarket.azure.com/dataset/bing/microsofttranslator#schema">Windows Azure Marketplace</ulink> e empregar o servizo de tradución. Teña en conta que ten ata 2 millóns de caracteres por mes gratis. as dúas entradas requiridas están dispoñíbeis na súa <ulink url="https://datamarket.azure.com/account">páxina persoal da conta</ulink> baixo chave da conta principal e identificador de cliente</para>
+          <para>Asegúrese de que ten unha conta gratuíta de Microsoft. Necesitará acceder ao <ulink url="http://datamarket.azure.com/dataset/bing/microsofttranslator#schema">Windows Azure Marketplace</ulink> e empregar o servizo de tradución. Teña en conta que ten ata 2 millóns de caracteres por mes gratis. As dúas entradas requiridas están dispoñíbeis na súa <ulink url="https://datamarket.azure.com/account">páxina persoal da conta</ulink> baixo chave da conta principal e identificador de cliente:</para>
 
           <para><emphasis role="bold">-Dmicrosoft.api.client_id=</emphasis><emphasis role="bold">XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX</emphasis></para>
 
           <para>-<emphasis role="bold">Dmicrosoft.api.client_secret=XXXX9xXxX9xXXxxXXX9xxX99xXXXX9xx9XXxXxXXXXX=</emphasis></para>
         </listitem>
 
-        <listitem>
-          <para><emphasis role="bold">Opción de proxecto en equipo<parameter><indexterm class="singular">
-              <primary>Executar OmegaT</primary> <secondary>Argumentos do script de inicio</secondary> <tertiary>opción no-team</tertiary>
-            </indexterm></parameter></emphasis></para>
-
-          <para><emphasis role="bold">-no-team</emphasis> trata a preparación dos proxectos para o traballo en equipo. Empregar se OmegaT non sincroniza os contidos do proxecto</para>
-        </listitem>
       </itemizedlist>
 
       <para>Os argumentos poden combinarse: para iniciar <application>OmegaT</application> con todos os exemplos descritos anteriormente, a orde sería:</para>
 
       <para><literal>java -Dswing.aatext=true -Duser.language=pt
-      -Duser.country=BR -Xmx1024M <application>-DDhttp.proxyHost=192.168.1.1
+      -Duser.country=BR -Xmx1024M <application>-Dhttp.proxyHost=192.168.1.1
       -Dhttp.proxyport<emphasis role="bold">=</emphasis>3128 -jar
       -OmegaT</application>.jar</literal></para>
     </section>
@@ -614,6 +607,19 @@
             <para>Esta opción permite a validación de etiquetas en modo de lotes. Se se selecciona <literal>abort </literal>, a validación de etiquetas se deterá no primeiro segmento non válido. Se se especifica <literal>warn</literal>, a validación de etiquetas procesará todos os segmentos e escribirá notas de atención sobre os segmentos con etiquetas non válidas dentro do ficheiro especificado.</para>
           </listitem>
         </itemizedlist>
+        
+        <itemizedlist>
+          <listitem>
+            <para><literal>-no-team</literal> trata a preparación dos proxectos para o traballo en equipo. Empregar se OmegaT non sincroniza os contidos do proxecto</para>
+          </listitem>
+        </itemizedlist>
+
+        <itemizedlist>
+          <listitem>
+            <para><literal>--disable-project-locking</literal> permite, en Windows, abrir o mesmo proxecto en diferentes instancias de OmegaT. De xeito predefinido, en Windows, <literal>omegat.project</literal>está bloqueado e aparecerá unha mensaxe de erro cando abra un proxecto que xa estea aberto noutra instancia de OmegaT. Con esta opción, non sucede ese bloqueo.</para>
+          </listitem>
+        </itemizedlist>
+
       </section>
 
       <section id="console.mode.option.quiet">
@@ -639,7 +645,7 @@
         <primary>Executar OmegaT</primary> <secondary>Construír OmegaT desde o código fonte</secondary>
       </indexterm></title>
 
-    <para>Teña en conta que necesitará o programa ant (<emphasis>http://ant.apache.org/bindownload.cgi</emphasis>) para construír a súa propia versión de OmegaT. Extraia o ficheiro <emphasis>OmegaT_2.6.x_Source.zip</emphasis> e entre no cartafol OmegaT_2.6.x_Source ou o directorio <emphasis>./omegat/</emphasis> do código SVN. Asegúrese de que o ficheiro build.xml está presente no cartafol. Entón, escriba desde a liña de ordes:</para>
+    <para>Teña en conta que necesitará o programa ant (<emphasis>http://ant.apache.org/bindownload.cgi</emphasis>) para construír a súa propia versión de OmegaT. Extraia o ficheiro <emphasis>OmegaT_3.n.n_Source.zip</emphasis> e entre no cartafol OmegaT_3.n.n_Source ou o directorio <emphasis>./omegat/</emphasis> do código SVN. Asegúrese de que o ficheiro build.xml está presente no cartafol. Entón, escriba desde a liña de ordes:</para>
 
     <para><literal>$ ant jar release</literal></para>
 

@@ -336,8 +336,8 @@
         <primary>Memorias de tradución</primary> <secondary>Actualizar a segmentación por frase</secondary>
       </indexterm></title>
 
-    <para>En versións anteriores, <application>OmegaT</application> era só capaz de segmentar os ficheiros de orixe en parágrafos, e numeraba de modo inconsistente as etiquetas de formato en ficheiros HTML e Open Document. <application>OmegaT</application> 2.6 pode detectar e actualizar os devanditos ficheiros tmx no momento para incrementar a calidade das coincidencias parciais e tomar maior vantaxe da tradución existente, gardando o traballo manualmente.</para>
+    <para>En versións anteriores, <application>OmegaT</application> era só capaz de segmentar os ficheiros de orixe en parágrafos, e numeraba de modo inconsistente as etiquetas de formato en ficheiros HTML e Open Document. <application>OmegaT</application> pode detectar e actualizar os devanditos ficheiros tmx no momento para incrementar a calidade das coincidencias parciais e tomar maior vantaxe da tradución existente, gardando o traballo manualmente.</para>
 
-    <para>A tmx dun proxecto se actualizará só unha vez, e cando se escribirá de forma actualizada no ficheiro <filename>project_save.tmx</filename>; os ficheiros tmx herdados se actualizarán ao momento cada vez que se cargue o proxecto. Teña en conta que nalgúns casos os cambios nos filtros de ficheiro de <application>OmegaT</application> 2.6 pode levar a unha segmentación totalmente diferente, polo que terá que actualizar a súa tradución manualmente nestes escasos casos.</para>
+    <para>A tmx dun proxecto se actualizará só unha vez, e cando se escribirá de forma actualizada no ficheiro <filename>project_save.tmx</filename>; os ficheiros tmx herdados se actualizarán ao momento cada vez que se cargue o proxecto. Teña en conta que nalgúns casos os cambios nos filtros de ficheiro de <application>OmegaT</application> pode levar a unha segmentación totalmente diferente, polo que terá que actualizar a súa tradución manualmente nestes escasos casos.</para>
   </section>
 </chapter>

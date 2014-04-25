@@ -36,53 +36,14 @@
   </section>
 
   <section>
-    <title>Instalación e emprego da liña de ordes</title>
+    <title>Instalación e uso</title>
 
-    <para>Distribúese un paquete de tokenizer adaptado do proxecto Lucene coma un engadido de OmegaT en http://sourceforge.net/projects/omegat-plugins/files/. Descargue os ficheiros máis recentes (OmegaT-tikenizers_0.5-2.1.zip no momento en que se escribe este documento).</para>
+	<para>Os tokenizers están incluídos en OmegaT. OmegaT selecciona automaticamente un tokenizer para as linguas de orixe e destino segundo a configuración das linguas do proxecto. É posible seleccionar outro tokenizer dunha versión diferente desde a xanela de Propiedades do proxecto.</para>
 
-    <para>Para instalar o tokenizer, cree un cartafol co nome «plugins» no cartafol no que se atopa o ficheiro OmegaT.jar e extraia os ficheiros indicados anteriormente nese cartafol.</para>
-
-    <para>Para executar OmegaT co tokenizer, necesita especificar que tokenizer empregará para o idioma de orixe e cal para o idioma de destino. A sintaxe é a seguinte:</para>
-
-    <para><literal>java -jar OmegaT.jar --ITokenizer=[nome do tokenizer do idioma de orixe] --ITokenizerTarget=[nome do tokenizer do idioma de destino]</literal></para>
-
-    <para>O nome dos tokenizer veñen no ficheiro Readme.txt incluído no cartafol do tokenizer. Por exemplo, se desexa empregar o tokenizer Lucene CJK no idioma de orixe e o Lucene French na de destino, a súa orde tería que ser a seguinte:</para>
-
-    <para><literal>java -jar OmegaT.jar
-    --ITokenizer=org.omegat.plugins.tokenizer.LuceneCJKTokenizer
-    --ITokenizerTarget=org.omegat.plugins.tokenizer.LuceneFrenchTokenizer</literal></para>
-  </section>
-
-  <section>
-    <title>Especificacións para Mac OS X</title>
-
-    <para>Se desexa empregar os tokenizers co paquete OmegaT.app para Mac OS X, ten que realizar a instalación anterior (clic dereito en OmegaT.app para atopar a localización de OmegaT.jar), mais necesitará especificar o nome dos tokenizer no ficheiro <filename>info.plist</filename> que contén as opcións de inicio de Java. Siga as instrucións anteriores para acceder ao ficheiro <filename>info.plist</filename> e editalo de modo que quede así para o exemplo dado anteriormente:</para>
-
-    <literallayout><code>
-&lt;key&gt;VMOptions&lt;/key&gt;
-&lt;string&gt;-Xmx1024M&lt;/string&gt;
-
-&lt;key&gt;Arguments&lt;/key&gt;
-&lt;array&gt;
-  &lt;string&gt;--ITokenizer=org.omegat.plugins.tokenizer.LuceneCJKTokenizer&lt;/string&gt;
-  &lt;string&gt;--ITokenizerTarget=org.omegat.plugins.tokenizer.LuceneFrenchTokenizer&lt;/string&gt;
-&lt;/array&gt;</code></literallayout>
-  </section>
-
-  <section>
-    <title>Resolución de problemas</title>
-
-    <para>Para asegurarse de que os tokenizers están activos, abra un proxecto e comprobe a información do log desde a consola. Co exemplo anterior, debería aparecer así:</para>
-
-    <literallayout><code>
-84528: Info: Source tokenizer: org.omegat.plugins.tokenizer.LuceneCJKTokenizer 
-84528: Info: Target tokenizer: org.omegat.plugins.tokenizer.LuceneFrenchTokenizer 
-</code></literallayout>
-
-    <para>Os números da esquerda poden ser diferentes no seu sistema así que asegúrese de que o nome do tokenizer de orixe e destino, especificados nas opcións de inicio, corresponden co que amosa o log. Se os tokenizers non se iniciar adecuadamente, o log amosará isto:</para>
-
-    <literallayout><code>84528: Info: Source tokenizer: org.omegat.plugins.tokenizer.LuceneCJKTokenizer 84528: Info: Target tokenizer: org.omegat.plugins.tokenizer.LuceneFrenchTokenizer</code></literallayout>
-
-    <para>Co paquete OmegaT.app para Mac OS X, faga dobre clic no <literal>JavaApplicationStub</literal> situado en /OmegaT.app/Contents/MacOS/ (vexa máis arriba como acceder a el) para iniciar OmegaT desde unha consola e ter acceso inmediato ao log.</para>
+	<warning>
+		<title>Incompatibilidades</title>
+		<para>OmegaT non iniciará se hai tokenizers no cartafol /plugin. Elimine todos os tokenizers do cartafol /plugin antes de iniciar OmegaT.</para>
+	</warning>
+	
   </section>
 </appendix>

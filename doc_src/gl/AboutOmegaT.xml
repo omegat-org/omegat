@@ -20,13 +20,13 @@
 
     <itemizedlist>
       <listitem>
-        <para><emphasis role="bold">Xestión da terminoloxía</emphasis>: A xestión da terminoloxía é importante para que a tradución sexa consistente. OmegaT usa glosarios que conteñen traducións de palabras soltas ou de pequenas frases: un dicionario bilingüe simplificado para unha área en concreto. OmegaT mostra a tradución de calquera palabra que estea no segmento no que está a traballar nese momento para que a poida tomar como referencia.</para>
+        <para><emphasis role="bold">Xestión da terminoloxía</emphasis>: A xestión da terminoloxía é importante para que a tradución sexa consistente. OmegaT usa glosarios que conteñen traducións de palabras soltas ou de pequenas frases: un dicionario bilingüe simplificado para unha área en concreto. OmegaT mostra a tradución de calquera palabra que estea no segmento e estea rexistrado no glosario.</para>
       </listitem>
     </itemizedlist>
 
     <itemizedlist>
       <listitem>
-        <para><emphasis role="bold">Proceso de tradución:</emphasis> Imaxine ter que traducir algo, dende un só ficheiro ata un cartafol que conteña subcartafoles cada un con diferentes ficheiros con diferentes formatos. Cando deixas que OmegaT analice os ficheiros a traducir, busca os ficheiros que entende baseándose en regras de filtrado, recoñece as partes textuais dos mesmos, divide os textos segundo as regras de segmentación e mostra os segmentos un por un de modo que poidas comezar coa tradución. OmegaT almacena as traducións e propón posíbeis traducións extraídas de segmentos similares en ficheiros de memoria previos. Cando estea preparado para ver o produto final, pode exportar os ficheiros traducidos, abrilos coa aplicación apropiada e ver a tradución no formato definitivo.</para>
+        <para><emphasis role="bold">Proceso de tradución:</emphasis> Imaxine ter que traducir algo, dende un só ficheiro ata un cartafol que conteña subcartafoles cada un con diferentes ficheiros con diferentes formatos. Cando deixas que OmegaT analice os ficheiros a traducir, busca os ficheiros que entende baseándose en regras de filtrado, recoñece as partes textuais dos mesmos, divide os textos segundo as regras de segmentación e mostra os segmentos un por un de modo que poidas comezar coa tradución. OmegaT almacena as traducións e propón posíbeis traducións extraídas de segmentos similares rexistrados en ficheiros de memorias de tradución. Cando estea preparado para ver o produto final, pode exportar os ficheiros traducidos, abrilos coa aplicación apropiada e ver a tradución no formato definitivo.</para>
       </listitem>
     </itemizedlist>
   </section>
@@ -38,7 +38,7 @@
 
     <itemizedlist>
       <listitem>
-        <para><emphasis role="bold">Guía de inicio rápido:</emphasis> este capítulo está pensado como una guía de inicio rápido para principiantes e indecisos. Mostra o procedemento completo desde abrir un novo proxecto de tradución ata completar a tradución. </para>
+        <para><emphasis role="bold">Aprenda a usar OmegaT en 5 minutos!:</emphasis> este capítulo está pensado como un titorial rápido para principiantes así como para a xente que xa coñece ferramentas de tradución asistida. Este capítulo amosa o procedemento completo desde a apertura dun novo proxecto de tradución ata completalo.</para>
       </listitem>
     </itemizedlist>
 

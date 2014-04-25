@@ -160,4 +160,22 @@
 
     <para>Pode ter moitas xanelas de busca abertas simultaneamente. Pode ver rapidamente os seus contidos fixándose no seu título: conterá o termo de busca empregado.</para>
   </section>
+  
+  <section id="search.filter">
+    <title>Filtrar entradas do editor segundo a busca</title>
+    
+    <para>Para unha navegación máis senxela dos resultados, pode aplicar a busca ao editor. Prema o botón <emphasis role="bold">Filtro</emphasis> ao final para limitar as entradas amosadas na xanela de edición a aquelas que coincidan coa busca actual. Pode usar a navegación normal para ir, por exemplo, ao seguinte segmento (sen traducir) que concida cos criterios de busca.</para>
+  
+   <para>NB:</para>
+   
+    <itemizedlist>
+      <listitem>Unha busca pode limitarse a 1000 entradas, así que se busca unha frase común, o editor só amosará 1000 das entradas coincidentes e non todas as entradas que coincidan cos criterios de busca.</listitem>
+      <listitem>Un ficheiro pode non conter entradas coincidentes, así que estará baleiro.</listitem>
+      <listitem>Se unha busca elimina duplicados, non aparecerán no Editor.</listitem>
+    </itemizedlist>
+    
+    <para>Para eliminar un filtro, prema o botón de <emphasis role="bold">Eliminar filtro</emphasis> ou recargue o proxecto.</para>
+ </section>
+      
+    
 </chapter>

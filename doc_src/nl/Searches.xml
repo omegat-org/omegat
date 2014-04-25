@@ -160,4 +160,22 @@
 
     <para>U kunt meerdere vensters Tekst zoeken tegelijkertijd geopend hebben. U kunt hun inhoud snel zien door te kijken naar hun titel: het zal de gebruikte zoekterm bevatten.</para>
   </section>
+  
+  <section id="search.filter">
+    <title>Filteritems in bewerker overeenkomstig de zoekactie</title>
+    
+    <para>Om eenvoudiger te navigeren in de resultaten van de zoekactie, kunt u de zoekactie toepassen in de bewerker. Druk onderaan op de knop <emphasis role="bold">Filter</emphasis> om de weergegeven items in het venster Bewerken te beperken tot die welke overeenkomen met de huidige zoekactie. U kunt de normale navigatie gebruiken om bijv. naar het volgende (niet-vertaalde) segment te gaan dat overeenkomt met de zoekcriteria.</para>
+  
+   <para>NB:</para>
+   
+    <itemizedlist>
+      <listitem>Een zoekactie kan beperkt zijn tot 1000 items, dus als u zoekt op een veel voorkomende frase, geeft de bewerker alleen die 1000 overeenkomende items weer, en niet alle items die overeenkomen met de zoekcriteria.</listitem>
+      <listitem>Een bestand zou geen overeenkomende items kunnen hebben, dus ziet het er leeg uit.</listitem>
+      <listitem>Als een zoekactie duplicaten verwijdert, zullen die duplicaten niet in het venster Bewerken staan.</listitem>
+    </itemizedlist>
+    
+    <para>Druk op de knop <emphasis role="bold">Filter verwijderen</emphasis>, of laadt een project opnieuw om een filter te verwijderen .</para>
+ </section>
+      
+    
 </chapter>

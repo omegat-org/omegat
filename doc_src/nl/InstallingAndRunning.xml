@@ -222,17 +222,17 @@
 
       <para>Dubbelklik op<emphasis> <application>OmegaT</application>.app</emphasis> of klik op zijn locatie in het dock</para>
 
-      <para>Klik met rechts op <emphasis><application>OmegaT</application>.app</emphasis> en selecteer &quot;Pakketinhoud weergeven&quot; om toegang te krijgen tot <application><emphasis>Info.plist</emphasis></application>, en open het bestand door er met rechts op te klikken en selecteer uw tekstverwerker van uw keuze. U kunt ook met &quot;cd&quot; daar rechtstreeks naartoe gaan vanaf de opdrachtregel en <application><emphasis>Info.plist</emphasis> openen in een verwerker voor de opdrachtregel zoals emacs of vi</application>.<emphasis> <indexterm class="singular">
+      <para>U kunt het gedrag van OmegaT aanpassen door de <emphasis>Eigenschappen</emphasis> als ook het gedeelte <emphasis>VMOptions</emphasis> te bewerken van het bestand <application><emphasis>Info.plist</emphasis></application> van het pakket.</para>
+      
+      <para>Klik met rechts op <emphasis><application>OmegaT</application>.app</emphasis> en selecteer &quot;Pakketinhoud weergeven&quot; om toegang te krijgen tot <application><emphasis>Info.plist</emphasis></application>, en open het bestand door er met rechts op te klikken en selecteer uw tekstverwerker van uw keuze. U kunt ook met &quot;cd&quot; daar rechtstreeks naartoe gaan vanaf de opdrachtregel en <application><emphasis>Info.plist</emphasis> openen in een verwerker voor de opdrachtregel zoals emacs of vi</application>.<indexterm class="singular">
           <primary>OmegaT aanpassen</primary> <secondary>OS X</secondary> <tertiary>Startparameters</tertiary>
-        </indexterm></emphasis></para>
-
-      <para>U kunt het gedeelte <emphasis>Properties</emphasis> en ook het gedeelte <emphasis>VMOptions</emphasis> aanpassen.</para>
+        </indexterm></para>
 
       <para>Indien u waarden wilt toevoegen aan <emphasis>VMOptions</emphasis>, plaatst u er een spatie tussen. Bijvoorbeeld: <filename>-Xmx1024M -Duser.language=ja</filename> zal <application>OmegaT</application> opstarten met 1024MB aan geheugen en de gebruikersinterface in het Japans.</para>
 
       <para>Als u meerdere instanties van <emphasis><application>OmegaT</application>.app</emphasis> moet uitvoeren, gebruik dan in plaats daarvan het bestand <emphasis>JavaApplicationStub</emphasis> dat zich bevind in <emphasis><application>OmegaT</application>.app/ Contents/MacOS/</emphasis>.</para>
 
-      <para><emphasis><application> </application></emphasis>Gebruik het bestand <emphasis><application>OmegaT</application>.jar</emphasis> dat zich bevindt in <emphasis><application>OmegaT</application>.app/Contents/Resources/Java/</emphasis> om <application>OmegaT</application> vanaf de opdrachtregel te starten. Bekijk &quot;Starten vanaf de opdrachtregel&quot; hieronder voor meer informatie.</para>
+      <para>Gebruik het bestand <emphasis><application>OmegaT</application>.jar</emphasis> dat zich bevindt in <emphasis><application>OmegaT</application>.app/Contents/Resources/Java/</emphasis> om <application>OmegaT</application> vanaf de opdrachtregel te starten. Bekijk &quot;Starten vanaf de opdrachtregel&quot; hieronder voor meer informatie.</para>
     </section>
 
     <section id="Mac.OSX.goodies">
@@ -453,19 +453,12 @@
           <para>-<emphasis role="bold">Dmicrosoft.api.client_secret=XXXX9xXxX9xXXxxXXX9xxX99xXXXX9xx9XXxXxXXXXX=</emphasis></para>
         </listitem>
 
-        <listitem>
-          <para><emphasis role="bold">optie Teamproject<parameter><indexterm class="singular">
-              <primary>OmegaT uitvoeren</primary> <secondary>Argumenten voor bestand om op te starten</secondary> <tertiary>optie voor geen team</tertiary>
-            </indexterm></parameter></emphasis></para>
-
-          <para><emphasis role="bold">-no-team</emphasis> adresseert projecten die zijn ingesteld voor werken in teamverband. Gebruik hem als OmegaT de inhoud van het project niet moet synchroniseren.</para>
-        </listitem>
       </itemizedlist>
 
       <para>Argumenten mogen worden gecombineerd: Voor het starten van <application>OmegaT</application> met alle hierboven genoemde voorbeelden zou de opdracht zijn:</para>
 
       <para><literal>java -Dswing.aatext=true -Duser.language=pt
-      -Duser.country=BR -Xmx1024M <application>-DDhttp.proxyHost=192.168.1.1
+      -Duser.country=BR -Xmx1024M <application>-Dhttp.proxyHost=192.168.1.1
       -Dhttp.proxyport<emphasis role="bold">=</emphasis>3128 -jar
       -OmegaT</application>.jar</literal></para>
     </section>
@@ -620,6 +613,19 @@
             <para>Deze optie maakt het mogelijk het valideren van tags in modus batch uit te voeren. Als <literal>abort </literal>is geselecteerd zal het valideren van tags stoppen bij het eerste ongeldige segment. Als <literal>warn</literal> is gespecificeerd zal het valideren van tags alle segmenten verwerken en waarschuwingen over segmenten met ongeldige tags in het gespecificeerde bestand schrijven.</para>
           </listitem>
         </itemizedlist>
+        
+        <itemizedlist>
+          <listitem>
+            <para><literal>-no-team</literal> adresseert projecten die zijn ingesteld voor werken in teamverband. Gebruik hem als OmegaT de inhoud van het project niet moet synchroniseren.</para>
+          </listitem>
+        </itemizedlist>
+
+        <itemizedlist>
+          <listitem>
+            <para><literal>--disable-project-locking</literal> maakt het, onder Windows, mogelijk om hetzelfde project met verschillende instanties van OmegaT te openen. Onder Windows is <literal>omegat.project</literal> standaard vergendeld en wordt een foutbericht ontvangen als wordt geprobeerd een project te openen dat al is geopend door een andere instantie van OmegaT. Met die optie wordt er niet vergrendeld.</para>
+          </listitem>
+        </itemizedlist>
+
       </section>
 
       <section id="console.mode.option.quiet">

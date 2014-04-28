@@ -238,11 +238,11 @@
         <copy todir="dist2/linux-64/OmegaT/jre">
             <fileset dir="../jre-linux-64"/>
         </copy>
-        <tar destfile="dist2/OmegaT_${distversion}_Linux-64.tar">
+        <tar destfile="dist2/OmegaT_${distversion}_Linux_64.tar">
             <tarfileset dir="dist2/linux-64" excludes="OmegaT/OmegaT OmegaT/linux-install.sh OmegaT/omegat.kaptn OmegaT/jre/bin/java"/>           
             <tarfileset dir="dist2/linux-64" includes="OmegaT/OmegaT OmegaT/linux-install.sh OmegaT/omegat.kaptn OmegaT/jre/bin/java" filemode="755"/>
         </tar>
-        <bzip2 zipfile="dist2/OmegaT_${distversion}${beta}_Linux-64.tar.bz2" src="dist2/OmegaT_${distversion}_Linux-64.tar"/>
+        <bzip2 zipfile="dist2/OmegaT_${distversion}${beta}_Linux_64.tar.bz2" src="dist2/OmegaT_${distversion}_Linux_64.tar"/>
    </target>
 
 

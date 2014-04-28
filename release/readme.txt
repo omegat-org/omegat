@@ -285,6 +285,7 @@ Code has been contributed by
   Guido Leenders
   Aaron Madlon-Kay
   Fabián Mandelbaum
+  Manfred Martin
   John Moran
   Maxym Mykhalchuk 
   Arno Peters

@@ -5,6 +5,7 @@
 
  Copyright (C) 2010 Alex Buloichik, Ibai Lakunza Velasco, Didier Briel
                2013 Martin Wunderlich
+               2014 Manfred Martin
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -47,8 +48,11 @@ import javax.xml.xpath.XPathExpressionException;
  * @author Ibai Lakunza Velasco
  * @author Didier Briel
  * @author Martin Wunderlich
+ * @author Manfred Martin
  */
 public abstract class AbstractMyMemoryTranslate extends BaseTranslate {
+	
+    private static final String MYMEMORY_API_EMAIL = "mymemory.api.email";
     protected static String GT_URL = "http://mymemory.translated.net/api/get?q=";
     protected static String MYMEMORYLABEL_TRANSLATION = "translation";
     protected static String MYMEMORYLABEL_MATCHQUALITYPERCENTAGE = "match";
@@ -155,6 +159,12 @@ public abstract class AbstractMyMemoryTranslate extends BaseTranslate {
 
 	protected String getMyMemoryResponse(Language sLang, Language tLang, String text, String format) throws UnsupportedEncodingException, IOException {
         String url = buildMyMemoryUrl(sLang, tLang, text, format);
+        
+        // Get email from systemProperties to enable 1000rq/day instead of 100 rq/day
+        String email = System.getProperty(MYMEMORY_API_EMAIL);
+        if (email != null) {
+          url = url + "&de=" + email;
+        }
 
         // Get the results from MyMemory
         String myMemoryResponse = "";

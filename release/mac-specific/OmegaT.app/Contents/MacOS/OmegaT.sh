@@ -19,5 +19,7 @@ JAVA=../jre/bin/java
 # Microsoft Translator credentials
 #MS_CLIENT_ID="-Dmicrosoft.api.client_id=xxxxx"
 #MS_CLIENT_SECRET="-Dmicrosoft.api.client_secret=xxxxx'
+# MyMemory email
+#MY_MEMORY_EMAIL="-Dmymemory.api.email=xxxxx@xxxxx.xx"
 
-${JAVA} -Xmx1024m ${MACOS} ${LANGUAGE} ${COUNTRY} ${PROXY_HOST} ${PROXY_PORT} ${GOOGLE_API_KEY} ${MS_CLIENT_ID} ${MS_CLIENT_SECRET} -jar OmegaT.jar
+${JAVA} -Xmx1024m ${MACOS} ${LANGUAGE} ${COUNTRY} ${PROXY_HOST} ${PROXY_PORT} ${GOOGLE_API_KEY} ${MS_CLIENT_ID} ${MS_CLIENT_SECRET} ${MY_MEMORY_EMAIL} -jar OmegaT.jar

@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 3.1.0 update 1
 ----------------------------------------------------------------------
-   3 Enhancements
+   4 Enhancements
    3 Bug fixes
    3 Localisation updates
 ----------------------------------------------------------------------
@@ -20,6 +20,10 @@
   - In replace mode, "Cancel" was replaced by "Finish", because
 "Cancel" could lead to believe that changes already done would be
 undone
+
+  - By giving an email in -Dmymemory.api.email for MyMemory machine 
+translation, it is possible to use 1000 requests per day instead 
+of 100 ones
 
   Bug fixes:
 

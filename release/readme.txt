@@ -116,7 +116,7 @@ It will install the correct environment for your computer and the application
 itself on the first run. Later calls do not need to be online.
 
 During the installation, depending on your operating system, you may receive 
-several security warnings. The certificate is self-signed by "Didier Briel". 
+several security warnings. The certificate is by "PnS Concept". 
 The permissions you give to this version (which might be mentioned as an 
 "unrestricted access to the computer") are identical  to permissions you give 
 to the local version, as installed by a procedure, described later: they allow 

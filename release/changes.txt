@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 3.1.0 update 1
 ----------------------------------------------------------------------
-   4 Enhancements
+   5 Enhancements
    3 Bug fixes
    3 Localisation updates
 ----------------------------------------------------------------------
@@ -24,6 +24,8 @@ undone
   - By giving an email in -Dmymemory.api.email for MyMemory machine 
 translation, it is possible to use 1000 requests per day instead 
 of 100 ones
+
+  - The Linux version is now available also with a 64-bit JRE
 
   Bug fixes:
 

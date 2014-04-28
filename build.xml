@@ -226,6 +226,25 @@
         </tar>
         <bzip2 zipfile="dist2/OmegaT_${distversion}${beta}_Linux.tar.bz2" src="dist2/OmegaT_${distversion}_Linux.tar"/>
    </target>
+   
+   <!-- Builds a Linux-64 (tar, bz2) distribution -->    
+   <target name="linux-64" description="Build Linux distro" depends="jar,release, check-jre-linux-64" if="jre-linux-64.exists">
+        <mkdir dir="dist2"/>
+        <mkdir dir="dist2/linux-64"/>
+        <copy todir="dist2/linux-64/OmegaT">
+            <fileset dir="dist" excludes="OmegaT OmegaT-JRE OmegaT.exe OmegaT.bat OmegaT.iss OmegaT-JRE.iss OmegaT.l4J.ini l10n-project"/>           
+        </copy>
+        <copy file="dist/OmegaT-JRE" tofile="dist2/linux-64/OmegaT/OmegaT"/>
+        <copy todir="dist2/linux-64/OmegaT/jre">
+            <fileset dir="../jre-linux-64"/>
+        </copy>
+        <tar destfile="dist2/OmegaT_${distversion}_Linux-64.tar">
+            <tarfileset dir="dist2/linux-64" excludes="OmegaT/OmegaT OmegaT/linux-install.sh OmegaT/omegat.kaptn OmegaT/jre/bin/java"/>           
+            <tarfileset dir="dist2/linux-64" includes="OmegaT/OmegaT OmegaT/linux-install.sh OmegaT/omegat.kaptn OmegaT/jre/bin/java" filemode="755"/>
+        </tar>
+        <bzip2 zipfile="dist2/OmegaT_${distversion}${beta}_Linux-64.tar.bz2" src="dist2/OmegaT_${distversion}_Linux-64.tar"/>
+   </target>
+
 
     <!-- Creates a Windows Installer -->
     <target name="do-win" depends="init,jar,zip" description="Creates a Windows Installer. PRE: Inno Setup (http://www.jrsoftware.org/isinfo.php) with all optional language packs must be installed and available on the path.
@@ -291,6 +310,11 @@ Custom strings from release\win32-specific must be added manually to the languag
     <target name="check-jre-linux">
         <available file="../jre-linux" type="dir" property="jre-linux.exists" />
     </target>
+    
+    <target name="check-jre-linux-64">
+        <available file="../jre-linux-64" type="dir" property="jre-linux-64.exists" />
+    </target>
+
 
     <target name="check-jre-mac">
         <available file="../jre-mac/bin/java" type="file" property="mac-java-stub.exists1" />

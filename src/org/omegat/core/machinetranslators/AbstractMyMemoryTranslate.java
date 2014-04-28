@@ -42,6 +42,7 @@ import org.omegat.core.matching.LevenshteinDistance;
 
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathExpressionException;
+import org.apache.lucene.analysis.kr.utils.StringUtil;
 
 
 /**
@@ -162,8 +163,8 @@ public abstract class AbstractMyMemoryTranslate extends BaseTranslate {
         
         // Get email from systemProperties to enable 1000rq/day instead of 100 rq/day
         String email = System.getProperty(MYMEMORY_API_EMAIL);
-        if (email != null) {
-          url = url + "&de=" + email;
+        if (!StringUtil.isEmpty(email)) {
+            url = url + "&de=" + email;
         }
 
         // Get the results from MyMemory

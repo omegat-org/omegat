@@ -64,6 +64,8 @@ public class PoOptionsDialog extends javax.swing.JDialog {
 
         String allowBlank = options.get(PoFilter.OPTION_ALLOW_BLANK);
         allowBlankCB.setSelected("true".equalsIgnoreCase(allowBlank));
+        String allowEditingBlankSegment = options.get(PoFilter.OPTION_ALLOW_EDITING_BLANK_SEGMENT);
+        allowEditingBlankSegmentCB.setSelected("true".equalsIgnoreCase(allowEditingBlankSegment));
         String skipHeader = options.get(PoFilter.OPTION_SKIP_HEADER);
         skipHeaderCB.setSelected("true".equalsIgnoreCase(skipHeader));
         String autoFillInPluralStatement = options.get(PoFilter.OPTION_AUTO_FILL_IN_PLURAL_STATEMENT);
@@ -116,6 +118,7 @@ public class PoOptionsDialog extends javax.swing.JDialog {
         jLabel1 = new javax.swing.JLabel();
         formatStandardRB = new javax.swing.JRadioButton();
         formatMonolingualRB = new javax.swing.JRadioButton();
+        allowEditingBlankSegmentCB = new javax.swing.JCheckBox();
 
         setTitle(OStrings.getString("POFILTER_OPTIONS_TITLE")); // NOI18N
         setResizable(false);
@@ -152,7 +155,7 @@ public class PoOptionsDialog extends javax.swing.JDialog {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.gridwidth = 4;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.insets = new java.awt.Insets(3, 3, 3, 3);
@@ -161,8 +164,8 @@ public class PoOptionsDialog extends javax.swing.JDialog {
         org.openide.awt.Mnemonics.setLocalizedText(skipHeaderCB, OStrings.getString("POFILTER_SKIP_HEADER")); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 1;
-        gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.gridwidth = 4;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.insets = new java.awt.Insets(3, 3, 3, 3);
@@ -171,8 +174,8 @@ public class PoOptionsDialog extends javax.swing.JDialog {
         org.openide.awt.Mnemonics.setLocalizedText(autoFillInPluralStatementCB, OStrings.getString("POFILTER_AUTO_FILL_IN_PLURAL_STATEMENT")); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 2;
-        gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.gridwidth = 4;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.insets = new java.awt.Insets(3, 3, 3, 3);
@@ -181,7 +184,7 @@ public class PoOptionsDialog extends javax.swing.JDialog {
         org.openide.awt.Mnemonics.setLocalizedText(jLabel1, OStrings.getString("POFILTER_FORMAT_LABEL")); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 3;
+        gridBagConstraints.gridy = 4;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.insets = new java.awt.Insets(3, 3, 3, 3);
         jPanel1.add(jLabel1, gridBagConstraints);
@@ -190,7 +193,7 @@ public class PoOptionsDialog extends javax.swing.JDialog {
         org.openide.awt.Mnemonics.setLocalizedText(formatStandardRB, OStrings.getString("POFILTER_FORMAT_STANDARD")); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 3;
+        gridBagConstraints.gridy = 4;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.insets = new java.awt.Insets(3, 3, 3, 3);
         jPanel1.add(formatStandardRB, gridBagConstraints);
@@ -199,10 +202,20 @@ public class PoOptionsDialog extends javax.swing.JDialog {
         org.openide.awt.Mnemonics.setLocalizedText(formatMonolingualRB, OStrings.getString("POFILTER_FORMAT_MONOLINGUAL")); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 3;
+        gridBagConstraints.gridy = 4;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.insets = new java.awt.Insets(3, 3, 3, 3);
         jPanel1.add(formatMonolingualRB, gridBagConstraints);
+
+        org.openide.awt.Mnemonics.setLocalizedText(allowEditingBlankSegmentCB, OStrings.getString("POFILTER_ALLOW_BLANK_SEGMENT")); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridwidth = 4;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.insets = new java.awt.Insets(3, 3, 3, 3);
+        jPanel1.add(allowEditingBlankSegmentCB, gridBagConstraints);
 
         getContentPane().add(jPanel1, java.awt.BorderLayout.CENTER);
 
@@ -213,6 +226,7 @@ public class PoOptionsDialog extends javax.swing.JDialog {
     private void okButtonActionPerformed(java.awt.event.ActionEvent evt)// GEN-FIRST:event_okButtonActionPerformed
     {
         options.put(PoFilter.OPTION_ALLOW_BLANK, Boolean.toString(allowBlankCB.isSelected()));
+        options.put(PoFilter.OPTION_ALLOW_EDITING_BLANK_SEGMENT, Boolean.toString(allowEditingBlankSegmentCB.isSelected()));
         options.put(PoFilter.OPTION_SKIP_HEADER, Boolean.toString(skipHeaderCB.isSelected()));
         options.put(PoFilter.OPTION_AUTO_FILL_IN_PLURAL_STATEMENT, Boolean.toString(autoFillInPluralStatementCB.isSelected()));
         options.put(PoFilter.OPTION_FORMAT_MONOLINGUAL, Boolean.toString(formatMonolingualRB.isSelected()));
@@ -239,6 +253,7 @@ public class PoOptionsDialog extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JCheckBox allowBlankCB;
+    private javax.swing.JCheckBox allowEditingBlankSegmentCB;
     private javax.swing.JCheckBox autoFillInPluralStatementCB;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JPanel buttonPanel;

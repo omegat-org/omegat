@@ -7,7 +7,7 @@
                2007 Zoltan Bartko
                2008 Alex Buloichik, Didier Briel
                2012 Martin Fleurke
-               2014 Alex Buloichik
+               2014 Alex Buloichik Piotr Kulik
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -107,6 +107,7 @@ import org.omegat.util.gui.UIThreadsUtil;
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Didier Briel
  * @author Martin Fleurke
+ * @author Piotr Kulik
  */
 public class ProjectFilesListController {
     private static final Color COLOR_STANDARD_FG = Color.BLACK;
@@ -256,10 +257,13 @@ public class ProjectFilesListController {
 
     ActionListener moveAction = new ActionListener() {
         public void actionPerformed(ActionEvent e) {
-            int pos = list.tableFiles.getSelectedRow();
-            if (pos < 0) {
+            int[] selected = list.tableFiles.getSelectedRows();
+            if (selected.length == 0) {
                 return;
             }
+
+            int pos = selected[0];
+            
             int newPos;
             if (e.getSource() == list.btnUp) {
                 newPos = pos - 1;
@@ -272,8 +276,8 @@ public class ProjectFilesListController {
             } else {
                 return;
             }
-            pos = currentSorter.moveTo(pos, newPos);
-            list.tableFiles.getSelectionModel().setSelectionInterval(pos, pos);
+            pos = currentSorter.moveTo(selected, newPos);
+            list.tableFiles.getSelectionModel().setSelectionInterval(pos, pos + selected.length - 1);
         }
     };
 
@@ -283,10 +287,32 @@ public class ProjectFilesListController {
 
     public void setActive(boolean active) {
         if (active) {
+            // moved current file selection here so it will be properly set on each activation
+            selectCurrentFile(Core.getProject().getProjectFiles());
             list.setVisible(true);
             list.toFront();
         } else {
             list.setVisible(false);
+        }
+    }
+
+    /**
+    * Selects current file on project files table
+    */
+    private void selectCurrentFile(List<IProject.FileInfo> files) {
+        // clear selection from possible previous multiple selections
+        list.tableFiles.getSelectionModel().clearSelection();
+        String currentFile = Core.getEditor().getCurrentFile();
+        // set current file as default selection
+        for (int i = 0; i < files.size(); i++) {
+            if (files.get(i).filePath.equals(currentFile)) {
+                int pos = list.tableFiles.convertRowIndexToView(i);
+                // set selection to currently edited file
+                list.tableFiles.getSelectionModel().setSelectionInterval(pos, pos);
+                // set current file visible in scroller
+                list.tableFiles.scrollRectToVisible(list.tableFiles.getCellRect(pos, 0, true));
+                break;
+            }
         }
     }
 
@@ -353,18 +379,6 @@ public class ProjectFilesListController {
         String statText = MessageFormat.format(OStrings.getString("PF_STAT_PATH"), path);
         list.statLabel.setText(statText);
 
-        String currentFile = Core.getEditor().getCurrentFile();
-        // set current file as default selection
-        for (int i = 0; i < files.size(); i++) {
-            if (files.get(i).filePath.equals(currentFile)) {
-                // set selection to currently edited file
-                list.tableFiles.getSelectionModel().setSelectionInterval(i, i);
-                // set current file visible in scroller
-                list.tableFiles.scrollRectToVisible(list.tableFiles.getCellRect(i, 0, true));
-                break;
-            }
-        }
-
         uiUpdateImportButtonStatus();
         list.setTitle(StaticUtils.format(OStrings.getString("PF_WINDOW_TITLE"), files.size()));
 
@@ -387,7 +401,7 @@ public class ProjectFilesListController {
     private void createTableFiles() {
         applyColors(list.tableFiles);
 
-        list.tableFiles.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
+        list.tableFiles.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
 
         list.tableFiles.addComponentListener(new ComponentAdapter() {
             public void componentResized(ComponentEvent e) {
@@ -852,14 +866,23 @@ public class ProjectFilesListController {
             }
         }
 
-        public int moveTo(int currentPos, int newPos) {
-            newPos = Math.max(newPos, 0);
-            newPos = Math.min(newPos, viewToModel.size() - 1);
+        public int moveTo(int[] selected, int newPos) {
+            int[] temp = new int[selected.length];
+            int n = selected.length;
+            for(int i = 0; i < selected.length; i++) {
+                temp[i] = viewToModel.remove(selected[--n]);
+            }
 
-            int n = viewToModel.remove(currentPos);
-            viewToModel.add(newPos, n);
+            newPos = Math.max(newPos, 0);
+            newPos = Math.min(newPos, viewToModel.size());
+
+            for(int i = 0; i < temp.length; i++) {
+                viewToModel.add(newPos, temp[i]);
+            }
             recalc();
             save();
+            list.tableFiles.scrollRectToVisible(list.tableFiles.getCellRect(newPos, 0, true)
+                    .union(list.tableFiles.getCellRect(newPos + temp.length, 0, true)));
             list.tableFiles.repaint();
             return newPos;
         }

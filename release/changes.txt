@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
- OmegaT 3.1.0 update 1
+ OmegaT 3.1.1
 ----------------------------------------------------------------------
-   5 Enhancements
+   6 Enhancements
    3 Bug fixes
    3 Localisation updates
 ----------------------------------------------------------------------
@@ -14,6 +14,9 @@
 
   - Allow using <trans-unit> ID as identifier of alternative translations in XLIFF filter 
   https://sourceforge.net/p/omegat/feature-requests/989/
+
+  - Mozilla .lang files filter
+  https://sourceforge.net/p/omegat/feature-requests/962/
 
   Other enhancements:
 

@@ -100,6 +100,7 @@ public class Preferences {
     public static final String SEARCHWINDOW_SEARCH_TYPE = "search_window_search_type";
     public static final String SEARCHWINDOW_REPLACE_TYPE = "search_window_replace_type";
     public static final String SEARCHWINDOW_CASE_SENSITIVE = "search_window_case_sensitive";
+    public static final String SEARCHWINDOW_SPACE_MATCH_NBSP = "search_window_space_match_nbsp";
     public static final String SEARCHWINDOW_CASE_SENSITIVE_REPLACE = "search_window_case_sensitive_replace";
     public static final String SEARCHWINDOW_REPLACE_UNTRANSLATED = "search_window_replace_untranslated";
     public static final String SEARCHWINDOW_SEARCH_SOURCE = "search_window_search_source";

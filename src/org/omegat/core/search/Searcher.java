@@ -146,6 +146,11 @@ public class Searcher {
             // expression
             text = StaticUtils.escapeNonRegex(text, false);
 
+            // space match nbsp (\u00a0)
+            if (expression.spaceMatchNbsp) {
+                text = text.replaceAll(" ", "( |\u00A0)");
+            }
+
             // create a matcher for the search string
             m_matchers.add(Pattern.compile(text, flags).matcher(""));
             break;
@@ -179,6 +184,12 @@ public class Searcher {
             }
             break;
         case REGEXP:
+            // space match nbsp (\u00a0)
+            if (expression.spaceMatchNbsp) {
+                text = text.replaceAll(" ", "( |\u00A0)");
+                text = text.replaceAll("\\\\s", "(\\\\s|\u00A0)");
+            }
+
             // create a matcher for the search string
             m_matchers.add(Pattern.compile(text, flags).matcher(""));
             break;

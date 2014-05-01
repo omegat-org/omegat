@@ -77,6 +77,8 @@ public class SearchWindowForm extends javax.swing.JFrame {
         filler2 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
         jPanel3 = new javax.swing.JPanel();
         m_searchCase = new javax.swing.JCheckBox();
+        filler29 = new javax.swing.Box.Filler(new java.awt.Dimension(5, 0), new java.awt.Dimension(5, 0), new java.awt.Dimension(5, 32767));
+        m_searchSpaceMatchNbsp = new javax.swing.JCheckBox();
         filler5 = new javax.swing.Box.Filler(new java.awt.Dimension(5, 0), new java.awt.Dimension(5, 0), new java.awt.Dimension(5, 32767));
         m_searchSource = new javax.swing.JCheckBox();
         filler17 = new javax.swing.Box.Filler(new java.awt.Dimension(5, 0), new java.awt.Dimension(5, 0), new java.awt.Dimension(5, 32767));
@@ -233,6 +235,10 @@ public class SearchWindowForm extends javax.swing.JFrame {
         m_searchCase.setSelected(true);
         org.openide.awt.Mnemonics.setLocalizedText(m_searchCase, OStrings.getString("SW_CASE_SENSITIVE")); // NOI18N
         jPanel3.add(m_searchCase);
+        jPanel3.add(filler29);
+
+        org.openide.awt.Mnemonics.setLocalizedText(m_searchSpaceMatchNbsp, OStrings.getString("SW_SEARCH_SPACE_MATCH_NBSP")); // NOI18N
+        jPanel3.add(m_searchSpaceMatchNbsp);
         jPanel3.add(filler5);
 
         m_searchSource.setSelected(true);
@@ -646,6 +652,7 @@ public class SearchWindowForm extends javax.swing.JFrame {
     javax.swing.Box.Filler filler26;
     javax.swing.Box.Filler filler27;
     javax.swing.Box.Filler filler28;
+    javax.swing.Box.Filler filler29;
     javax.swing.Box.Filler filler3;
     javax.swing.Box.Filler filler4;
     javax.swing.Box.Filler filler5;
@@ -716,6 +723,7 @@ public class SearchWindowForm extends javax.swing.JFrame {
     javax.swing.JCheckBox m_searchNotesCB;
     javax.swing.JRadioButton m_searchRegexpSearchRB;
     javax.swing.JCheckBox m_searchSource;
+    javax.swing.JCheckBox m_searchSpaceMatchNbsp;
     javax.swing.JRadioButton m_searchTranslated;
     javax.swing.JRadioButton m_searchTranslatedUntranslated;
     javax.swing.JCheckBox m_searchTranslation;

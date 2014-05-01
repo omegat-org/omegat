@@ -281,6 +281,7 @@ public class SearchWindowController {
         form.m_searchRegexpSearchRB.addActionListener(searchFieldRequestFocus);
 
         form.m_searchCase.addActionListener(searchFieldRequestFocus);
+        form.m_searchSpaceMatchNbsp.addActionListener(searchFieldRequestFocus);
 
         form.m_searchSource.addActionListener(searchFieldRequestFocus);
         form.m_searchTranslation.addActionListener(searchFieldRequestFocus);
@@ -398,6 +399,10 @@ public class SearchWindowController {
         form.m_searchCase.setSelected(Preferences.isPreferenceDefault(
                 Preferences.SEARCHWINDOW_CASE_SENSITIVE, false));
 
+        // nbsp as space
+        form.m_searchSpaceMatchNbsp.setSelected(Preferences.isPreferenceDefault(
+                Preferences.SEARCHWINDOW_SPACE_MATCH_NBSP, false));
+
         // search source
         form.m_searchSource.setSelected(Preferences.isPreferenceDefault(
                 Preferences.SEARCHWINDOW_SEARCH_SOURCE, true));
@@ -486,6 +491,7 @@ public class SearchWindowController {
 
         // search options
         Preferences.setPreference(Preferences.SEARCHWINDOW_CASE_SENSITIVE, form.m_searchCase.isSelected());
+        Preferences.setPreference(Preferences.SEARCHWINDOW_SPACE_MATCH_NBSP, form.m_searchSpaceMatchNbsp.isSelected());
 
         Preferences.setPreference(Preferences.SEARCHWINDOW_SEARCH_SOURCE, form.m_searchSource.isSelected());
         Preferences.setPreference(Preferences.SEARCHWINDOW_SEARCH_TRANSLATION, form.m_searchTranslation.isSelected());
@@ -692,6 +698,7 @@ public class SearchWindowController {
                 s.searchExpressionType = SearchExpression.SearchExpressionType.REGEXP;
             }
             s.caseSensitive = form.m_searchCase.isSelected();
+            s.spaceMatchNbsp = form.m_searchSpaceMatchNbsp.isSelected();
             s.glossary = mode == SearchMode.SEARCH ? form.m_cbSearchInGlossaries.isSelected() : false;
             s.memory = mode == SearchMode.SEARCH ? form.m_cbSearchInMemory.isSelected() : true;
             s.tm = mode == SearchMode.SEARCH ? form.m_cbSearchInTMs.isSelected() : false;
@@ -716,6 +723,7 @@ public class SearchWindowController {
                 s.searchExpressionType = SearchExpression.SearchExpressionType.REGEXP;
             }
             s.caseSensitive = form.m_replaceCase.isSelected();
+            s.spaceMatchNbsp = false;
             s.glossary = false;
             s.memory = true;
             s.tm = false;

@@ -55,6 +55,7 @@ removing the filter or pressing Cancel could be lost
   - Dutch localisation updated to 3.1.0 (UI, Documentation, Readme)
   - Galician localisation updated to 3.1.0 (UI, Documentation, Readme)
   - Italian localisation updated to 3.1.0 (UI, Documentation)
+  - Japanese localisation updated to 3.1.1 (UI, Readme)
 
 ----------------------------------------------------------------------
  OmegaT 3.1.0 (2014-04-14)

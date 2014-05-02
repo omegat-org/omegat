@@ -9,7 +9,7 @@
                2010 Martin Fleurke, Antonio Vilei, Didier Briel
                2012 Didier Briel
                2013 Aaron Madlon-Kay, Alex Buloichik
-               2014 Aaron Madlon-Kay
+               2014 Aaron Madlon-Kay, Piotr Kulik
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -85,6 +85,7 @@ import org.omegat.util.gui.UIThreadsUtil;
  * @author Antonio Vilei
  * @author Aaron Madlon-Kay
  * @author Alex Buloichik (alex73mail@gmail.com)
+ * @author Piotr Kulik
  */
 public class SearchWindowController {
 

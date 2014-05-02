@@ -8,7 +8,7 @@
                2009 Didier Briel
                2010 Martin Fleurke, Antonio Vilei, Alex Buloichik, Didier Briel
                2013 Aaron Madlon-Kay, Alex Buloichik
-               2014 Alex Buloichik
+               2014 Alex Buloichik, Piotr Kulik
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -77,6 +77,7 @@ import org.omegat.util.StaticUtils;
  * @author Antonio Vilei
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Aaron Madlon-Kay
+ * @author Piotr Kulik
  */
 public class Searcher {
 

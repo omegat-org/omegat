@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 3.1.1
 ----------------------------------------------------------------------
-   9 Enhancements
+  10 Enhancements
    3 Bug fixes
    4 Localisation updates
 ----------------------------------------------------------------------
@@ -38,6 +38,9 @@ translation, it is possible to use 1000 requests per day instead
 of 100 ones
 
   - The Linux version is now available also with a 64-bit JRE
+
+  - Bundle (.properties) filter now displays comments (# or !)
+preceding a segment in the Comments pane
 
   Bug fixes:
 

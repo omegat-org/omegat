@@ -278,19 +278,23 @@ public class PoFilter extends AbstractFilter {
 
     private BufferedWriter out;
 
+    @Override
     public String getFileFormatName() {
         return OStrings.getString("POFILTER_FILTER_NAME");
     }
 
+    @Override
     public Instance[] getDefaultInstances() {
         return new Instance[] 
             { new Instance("*.po", OConsts.UTF8, OConsts.UTF8), new Instance("*.pot", OConsts.UTF8, OConsts.UTF8) };
     }
 
+    @Override
     public boolean isSourceEncodingVariable() {
         return true;
     }
 
+    @Override
     public boolean isTargetEncodingVariable() {
         return true;
     }

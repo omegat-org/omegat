@@ -53,6 +53,9 @@ removing the filter or pressing Cancel could be lost
   - "Properties..." menu is disabled in team projects 
   https://sourceforge.net/p/omegat/bugs/673/
 
+  - OmegaT shows incorrect match statistics for bilingual documents when source=target
+  https://sourceforge.net/p/omegat/bugs/662/
+
   Localisation updates:
 
   - Dutch localisation updated to 3.1.0 (UI, Documentation, Readme)

@@ -1595,6 +1595,11 @@ public class RealProject implements IProject {
             protectedParts = StaticUtils.applyCustomProtectedParts(segmentSource,
                     PatternConsts.getPlaceholderPattern(), protectedParts);
 
+            //If Allow translation equals to source is not set, we ignore such existing translations
+            if (ek.sourceText.equals(segmentTranslation) && 
+                    !allowTranslationEqualToSource) {
+                segmentTranslation = null;
+            }
             SourceTextEntry srcTextEntry = new SourceTextEntry(ek, allProjectEntries.size() + 1, comment,
                     segmentTranslation, protectedParts);
             srcTextEntry.setSourceTranslationFuzzy(segmentTranslationFuzzy);

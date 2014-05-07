@@ -429,6 +429,10 @@ public class SearchWindowController {
         // case sensitivity
         form.m_replaceCase.setSelected(Preferences.isPreferenceDefault(Preferences.SEARCHWINDOW_CASE_SENSITIVE_REPLACE, false));
 
+                // nbsp as space
+        form.m_replaceSpaceMatchNbsp.setSelected(Preferences.isPreferenceDefault(
+                Preferences.SEARCHWINDOW_SPACE_MATCH_NBSP_REPLACE, false));
+
         // replace type
         SearchExpression.SearchExpressionType replaceType = SearchExpression.SearchExpressionType
                 .valueOf(Preferences.getPreferenceEnumDefault(Preferences.SEARCHWINDOW_REPLACE_TYPE,
@@ -511,6 +515,8 @@ public class SearchWindowController {
         // replace options
         Preferences.setPreference(Preferences.SEARCHWINDOW_CASE_SENSITIVE_REPLACE,
                 form.m_replaceCase.isSelected());
+        Preferences.setPreference(Preferences.SEARCHWINDOW_SPACE_MATCH_NBSP_REPLACE,
+                form.m_replaceSpaceMatchNbsp.isSelected());
         if (form.m_replaceExactSearchRB.isSelected()) {
             Preferences.setPreference(Preferences.SEARCHWINDOW_REPLACE_TYPE,
                     SearchExpression.SearchExpressionType.EXACT);
@@ -724,7 +730,7 @@ public class SearchWindowController {
                 s.searchExpressionType = SearchExpression.SearchExpressionType.REGEXP;
             }
             s.caseSensitive = form.m_replaceCase.isSelected();
-            s.spaceMatchNbsp = false;
+            s.spaceMatchNbsp = form.m_replaceSpaceMatchNbsp.isSelected();
             s.glossary = false;
             s.memory = true;
             s.tm = false;

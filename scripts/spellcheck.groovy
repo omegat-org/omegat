@@ -24,10 +24,10 @@ defaultSortColumn = 0;
 // if TRUE column will be sorted in reverse
 defaultSortOrderDescending = false
 // if TRUE specified escaped characters will be removed from target before tokenization
-removeEscapedCharacters = true
+removeEscapedCharacters = false
 ESCAPED_CHARACTERS_REGEX = "\\[\\abfnrtv]"
 // if TRUE specified mnemonic chars will be removed from target before tokenization
-removeMnemonicChars = true
+removeMnemonicChars = false
 MNEMONIC_CHARACTERS = "^.+[]{}()&|-:=!<>"
 
 import groovy.swing.SwingBuilder
@@ -40,6 +40,9 @@ import javax.swing.JButton
 import javax.swing.JTable
 import javax.swing.table.*
 import javax.swing.event.*
+import javax.swing.RowSorter.SortKey
+import javax.swing.RowSorter
+import javax.swing.SortOrder
 import java.awt.event.*
 import static javax.swing.JOptionPane.*
 import static org.omegat.util.Platform.*
@@ -293,11 +296,9 @@ def interfejs(locationxy = new Point(0, 0), width = 500, height = 550, scrollpos
 		rowSorter.setComparator(0, new IntegerComparator());
 		rowSorter.setSortable(2, false);
 		rowSorter.setSortable(3, false);
-		rowSorter.toggleSortOrder(sortColumn);
-		rowSorter.sort();
-		if (sortOrderDescending) {
-			rowSorter.toggleSortOrder(sortColumn);
-		}
+		sortKeyz = new ArrayList<RowSorter.SortKey>();
+		sortKeyz.add(new RowSorter.SortKey(sortColumn, sortOrderDescending ? SortOrder.DESCENDING : SortOrder.ASCENDING));
+		rowSorter.setSortKeys(sortKeyz);
 		tab.setRowSorter(rowSorter);
 
 		skroll.getVerticalScrollBar().setValue(scrollpos);

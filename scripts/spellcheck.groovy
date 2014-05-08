@@ -324,13 +324,13 @@ def interfejs(locationxy = new Point(0, 0), width = 500, height = 550, scrollpos
 					ignoreGlossaryCase = !ignoreGlossaryCase;
 				},
 				constraints:gbc(gridx:2, gridy:0, weightx: 0.5, fill:GridBagConstraints.HORIZONTAL, insets:[5,5,0,5]))
-			checkBox(text:'Remove escaped',
+			checkBox(text:'Remove escaped sequences (\\a, \\b, \\f, \\n, \\r, \\t, \\v)',
 				selected: removeEscapedCharacters,
 				actionPerformed: {
 					removeEscapedCharacters = !removeEscapedCharacters;
 				},
 				constraints:gbc(gridx:0, gridy:1, weightx: 0.5, fill:GridBagConstraints.HORIZONTAL, insets:[5,5,0,0]))
-			checkBox(text:'Remove mnemonics',
+			checkBox(text:'Remove mnemonics (^.+[]{}()&|-:=!<>)',
 				selected: removeMnemonicChars,
 				actionPerformed: {
 					removeMnemonicChars = !removeMnemonicChars;

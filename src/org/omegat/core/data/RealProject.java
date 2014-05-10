@@ -1362,16 +1362,20 @@ public class RealProject implements IProject {
         TMXEntry prevTrEntry = oldTE.defaultTranslation ? projectTMX
                 .getDefaultTranslation(entry.getSrcText()) : projectTMX
                 .getMultipleTranslation(entry.getKey());
-        if (prevTrEntry == null) {
-            throw new IllegalArgumentException("RealProject.setNote() must have previous translation");
+        if (prevTrEntry != null) {
+            PrepareTMXEntry en = new PrepareTMXEntry(prevTrEntry);
+            en.note = note;
+            projectTMX.setTranslation(entry, new TMXEntry(en, prevTrEntry.defaultTranslation,
+                    prevTrEntry.linked), prevTrEntry.defaultTranslation);
+        } else {
+            PrepareTMXEntry en = new PrepareTMXEntry();
+            en.source = entry.getSrcText();
+            en.note = note;
+            en.translation = null;
+            projectTMX.setTranslation(entry, new TMXEntry(en, true, null), true);
         }
 
-        PrepareTMXEntry en = new PrepareTMXEntry(prevTrEntry);
-        en.note = note;
-
         m_modifiedFlag = true;
-
-        projectTMX.setTranslation(entry, new TMXEntry(en, prevTrEntry.defaultTranslation, prevTrEntry.linked), prevTrEntry.defaultTranslation);
     }
 
     public void iterateByDefaultTranslations(DefaultTranslationsIterator it) {

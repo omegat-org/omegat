@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 3.1.1
 ----------------------------------------------------------------------
-  10 Enhancements
+  11 Enhancements
    4 Bug fixes
    4 Localisation updates
 ----------------------------------------------------------------------
@@ -26,6 +26,9 @@
 
   - In search, make space match non-breaking space
   https://sourceforge.net/p/omegat/feature-requests/969/
+
+  - Enable sorting by column in in the Spellchecker window (script)
+  https://sourceforge.net/p/omegat/feature-requests/972/
 
   Other enhancements:
 

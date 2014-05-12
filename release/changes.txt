@@ -2,7 +2,7 @@
  OmegaT 3.1.1
 ----------------------------------------------------------------------
   11 Enhancements
-   4 Bug fixes
+   5 Bug fixes
    4 Localisation updates
 ----------------------------------------------------------------------
 3.1.0 update 1 vs. 3.1.0
@@ -27,7 +27,7 @@
   - In search, make space match non-breaking space
   https://sourceforge.net/p/omegat/feature-requests/969/
 
-  - Enable sorting by column in in the Spellchecker window (script)
+  - Enable sorting by column in the Spellchecker window (script)
   https://sourceforge.net/p/omegat/feature-requests/972/
 
   Other enhancements:
@@ -58,6 +58,9 @@ removing the filter or pressing Cancel could be lost
 
   - OmegaT shows incorrect match statistics for bilingual documents when source=target
   https://sourceforge.net/p/omegat/bugs/662/
+
+  - Unable to save note for untranslated segment 
+  https://sourceforge.net/p/omegat/bugs/677/
 
   Localisation updates:
 

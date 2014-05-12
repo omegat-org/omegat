@@ -72,6 +72,9 @@ public final class Segmenter {
      */
     public static List<String> segment(Language lang, String paragraph, List<StringBuffer> spaces,
             List<Rule> brules) {
+        if (paragraph == null) {
+            return null;
+        }
         List<String> segments = breakParagraph(lang, paragraph, brules);
         List<String> sentences = new ArrayList<String>(segments.size());
         if (spaces == null)
@@ -175,7 +178,7 @@ public final class Segmenter {
 
         Matcher bbm = null;
         if (rule.getBeforebreak() != null)
-            bbm = rule.getCompiledBeforebreak().matcher(paragraph);
+                bbm = rule.getCompiledBeforebreak().matcher(paragraph);
         Matcher abm = null;
         if (rule.getAfterbreak() != null)
             abm = rule.getCompiledAfterbreak().matcher(paragraph);
@@ -314,15 +317,18 @@ public final class Segmenter {
             Language targetLang, String targetEntry, List<String> sourceSegments, List<String> targetSegments) {
         if (needResegment) {
             List<String> srcSegments = Segmenter.segment(sourceLang, sourceEntry, null, null);
-            List<String> tarSegments = Segmenter.segment(targetLang, targetEntry, null, null);
+            if (targetEntry != null) { // There is no translation for this entry, because for instance it's a note
+                                       // on an untranslated entry
+                List<String> tarSegments = Segmenter.segment(targetLang, targetEntry, null, null);
 
-            if (srcSegments.size() == tarSegments.size()) {
-                sourceSegments.addAll(srcSegments);
-                targetSegments.addAll(tarSegments);
-                return;
+                if (srcSegments.size() == tarSegments.size()) {
+                    sourceSegments.addAll(srcSegments);
+                    targetSegments.addAll(tarSegments);
+                    return;
+                }
             }
         }
-        // not need to resegment, or segments counts not equals
+        // No need to resegment, or segments counts not equals, or no translation
         sourceSegments.add(sourceEntry);
         targetSegments.add(targetEntry);
 

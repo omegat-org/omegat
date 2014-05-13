@@ -29,7 +29,7 @@
          <div class="titlepage">
             <div>
                <div>
-                  <h1 class="title"><a name="chapter.searches"></a>Chapter&nbsp;15.&nbsp;Ricerche<a class="indexterm" name="d0e7143"></a></h1>
+                  <h1 class="title"><a name="chapter.searches"></a>Chapter&nbsp;15.&nbsp;Ricerche<a class="indexterm" name="d0e7142"></a></h1>
                </div>
             </div>
          </div>
@@ -38,13 +38,14 @@
                <dt><span class="section"><a href="chapter.searches.html#search.window">1. Finestra di ricerca</a></span></dt>
                <dd>
                   <dl>
-                     <dt><span class="section"><a href="chapter.searches.html#d0e7165">1.1. Ricerca nel progetto</a></span></dt>
-                     <dt><span class="section"><a href="chapter.searches.html#d0e7189">1.2. Posizione di ricerca</a></span></dt>
+                     <dt><span class="section"><a href="chapter.searches.html#d0e7164">1.1. Ricerca nel progetto</a></span></dt>
+                     <dt><span class="section"><a href="chapter.searches.html#d0e7188">1.2. Posizione di ricerca</a></span></dt>
                   </dl>
                </dd>
                <dt><span class="section"><a href="chapter.searches.html#using.wild.cards">2. Uso dei caratteri jolly</a></span></dt>
                <dt><span class="section"><a href="chapter.searches.html#search.methoids">3. Metodi e opzioni di ricerca</a></span></dt>
                <dt><span class="section"><a href="chapter.searches.html#search.result.display">4. Visualizzazione dei risultati</a></span></dt>
+               <dt><span class="section"><a href="chapter.searches.html#search.filter">5. Voci dei filtri nell'editor in base alla ricerca</a></span></dt>
             </dl>
          </div>
          <div class="section">
@@ -56,7 +57,7 @@
                   </div>
                </div>
             </div>
-            <div class="figure"><a name="text.search.window"></a><p class="title"><b>Figure&nbsp;15.1.&nbsp;Finestra di ricerca testo<a class="indexterm" name="d0e7152"></a></b></p>
+            <div class="figure"><a name="text.search.window"></a><p class="title"><b>Figure&nbsp;15.1.&nbsp;Finestra di ricerca testo<a class="indexterm" name="d0e7151"></a></b></p>
                <div class="figure-contents">
                   <div class="mediaobject"><img src="images/TextSearch25.png" alt="Finestra di ricerca testo"></div>
                </div>
@@ -70,7 +71,7 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="d0e7165"></a>1.1.&nbsp;Ricerca nel progetto<a class="indexterm" name="d0e7168"></a></h3>
+                        <h3 class="title"><a name="d0e7164"></a>1.1.&nbsp;Ricerca nel progetto<a class="indexterm" name="d0e7167"></a></h3>
                      </div>
                   </div>
                </div>
@@ -85,7 +86,7 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="d0e7189"></a>1.2.&nbsp;Posizione di ricerca
+                        <h3 class="title"><a name="d0e7188"></a>1.2.&nbsp;Posizione di ricerca
                         </h3>
                      </div>
                   </div>
@@ -116,7 +117,7 @@
                   </ul>
                </div>
                <p>Quando si esegue una ricerca all'interno dei file (al contrario delle memorie di traduzione), <span class="application">OmegaT</span> restringe la ricerca ai file nei formati di file di partenza. Di conseguenza, sebbene OmegaT sia perfettamente in grado di
-                  gestire i file <code class="filename"> tmx</code>, non li include durante la ricerca all'interno dei file. Quando si attivano le <span class="bold"><strong><a class="indexterm" name="d0e7220"></a>Opzioni avanzate</strong></span>, è possibile combinare la ricerca col nome dell'autore della traduzione e la data dell'ultima modifica apportata.
+                  gestire i file <code class="filename"> tmx</code>, non li include durante la ricerca all'interno dei file. Quando si attivano le <span class="bold"><strong><a class="indexterm" name="d0e7219"></a>Opzioni avanzate</strong></span>, è possibile combinare la ricerca col nome dell'autore della traduzione e la data dell'ultima modifica apportata.
                </p>
             </div>
          </div>
@@ -124,7 +125,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="using.wild.cards"></a>2.&nbsp;Uso dei caratteri jolly<a class="indexterm" name="d0e7230"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="using.wild.cards"></a>2.&nbsp;Uso dei caratteri jolly<a class="indexterm" name="d0e7229"></a></h2>
                   </div>
                </div>
             </div>
@@ -157,7 +158,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="search.methoids"></a>3.&nbsp;Metodi e opzioni di ricerca<a class="indexterm" name="d0e7274"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="search.methoids"></a>3.&nbsp;Metodi e opzioni di ricerca<a class="indexterm" name="d0e7273"></a></h2>
                   </div>
                </div>
             </div>
@@ -242,6 +243,33 @@
             </p>
             <p>Si potranno aprire insieme più finestre di ricerca. È possibile visualizzare rapidamente il loro contenuto leggendone il titolo,
                che contiene il termine di ricerca utilizzato.
+            </p>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="search.filter"></a>5.&nbsp;Voci dei filtri nell'editor in base alla ricerca
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>Al fine di una navigazione più facile all'interno dell'insieme dei risultati di ricerca, è possibile applicare la ricerca
+               all'interno dell'editor. Per limitare le voci visualizzate nella finestra dell'editor a quelle che corrispondono alla ricerca
+               corrente, premere il pulsante <span class="bold"><strong>Filtro</strong></span> in basso. Utilizzare la normale navigazione per spostarsi, ad esempio, al successivo segmento (non tradotto) che corrisponde
+               al criterio di ricerca.
+            </p>
+            <p>N.B.:</p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">la ricerca può essere limitata a 1000 voci; se si effettua, dunque, una ricerca su una frase comune, l'editor mostrerà solo
+                     quelle 1000 voci e non tutte quelle che corrispondono al criterio di ricerca.
+                  </li>
+                  <li class="listitem">un file potrebbe non contenere corrispondenze, dunque la finestra sarà vuota.</li>
+                  <li class="listitem">se una ricerca rimuove i duplicati, essi non saranno presenti nell'Editor.</li>
+               </ul>
+            </div>
+            <p>Per rimuovere un filtro, premere il pulsante <span class="bold"><strong>Rimuovi filtro</strong></span> o ricaricare il progetto.
             </p>
          </div>
       </div>

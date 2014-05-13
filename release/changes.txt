@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 3.1.1
 ----------------------------------------------------------------------
-  12 Enhancements
+  13 Enhancements
    5 Bug fixes
    4 Localisation updates
 ----------------------------------------------------------------------
@@ -47,6 +47,8 @@ of 100 ones
 
   - Bundle (.properties) filter now displays comments (# or !)
 preceding a segment in the Comments pane
+
+- The spell checking script can ignore mnemonic characters and escape sequences
 
   Bug fixes:
 

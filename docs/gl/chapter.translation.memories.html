@@ -5,8 +5,8 @@
       <title>Chapter&nbsp;13.&nbsp;Memorias de tradución</title>
       <link rel="stylesheet" type="text/css" href="OmegaT.css">
       <meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
-      <link rel="home" href="index.html" title="OmegaT - Guía de usuario">
-      <link rel="up" href="index.html" title="OmegaT - Guía de usuario">
+      <link rel="home" href="index.html" title="OmegaT 3.0 - Guía de usuario">
+      <link rel="up" href="index.html" title="OmegaT 3.0 - Guía de usuario">
       <link rel="prev" href="chapter.formatted.text.html" title="Chapter&nbsp;12.&nbsp;Traballar con texto formatado">
       <link rel="next" href="chapter.segmentation.html" title="Chapter&nbsp;14.&nbsp;Segmentación do segmento orixe">
    </head>
@@ -29,7 +29,7 @@
          <div class="titlepage">
             <div>
                <div>
-                  <h1 class="title"><a name="chapter.translation.memories"></a>Chapter&nbsp;13.&nbsp;Memorias de tradución<a class="indexterm" name="d0e6292"></a><a class="indexterm" name="d0e6295"></a></h1>
+                  <h1 class="title"><a name="chapter.translation.memories"></a>Chapter&nbsp;13.&nbsp;Memorias de tradución<a class="indexterm" name="d0e6333"></a><a class="indexterm" name="d0e6336"></a></h1>
                </div>
             </div>
          </div>
@@ -41,7 +41,7 @@
                      <dt><span class="section"><a href="chapter.translation.memories.html#tmx.files.location.and.purpose">1.1. Cartafoles das tmx - localización e propósito</a></span></dt>
                      <dt><span class="section"><a href="chapter.translation.memories.html#tmx.backup">1.2. Copia de seguridade da TMX</a></span></dt>
                      <dt><span class="section"><a href="chapter.translation.memories.html#tmx.files.and.language">1.3. Ficheiros TMX e idioma</a></span></dt>
-                     <dt><span class="section"><a href="chapter.translation.memories.html#d0e6593">1.4. Segmentos orfos</a></span></dt>
+                     <dt><span class="section"><a href="chapter.translation.memories.html#d0e6634">1.4. Segmentos orfos</a></span></dt>
                   </dl>
                </dd>
                <dt><span class="section"><a href="chapter.translation.memories.html#using.translation.memories.from.previous.projects">2. Reutilizar memorias de tradución</a></span></dt>
@@ -50,10 +50,10 @@
                      <dt><span class="section"><a href="chapter.translation.memories.html#importing.and.exporting.translation.memories">2.1. Importar e exportar memorias de tradución</a></span></dt>
                      <dt><span class="section"><a href="chapter.translation.memories.html#Creating.a.translation.memory.for.selected.documents">2.2. Crear unha memoria de tradución para os documentos seleccionados</a></span></dt>
                      <dt><span class="section"><a href="chapter.translation.memories.html#sharing.translation.memories">2.3. Compartir memorias de tradución</a></span></dt>
-                     <dt><span class="section"><a href="chapter.translation.memories.html#d0e6746">2.4. Empregar TMX con pares de idiomas alternativos</a></span></dt>
+                     <dt><span class="section"><a href="chapter.translation.memories.html#d0e6787">2.4. Empregar TMX con pares de idiomas alternativos</a></span></dt>
                   </dl>
                </dd>
-               <dt><span class="section"><a href="chapter.translation.memories.html#d0e6762">3. Orixe con traducións existentes</a></span></dt>
+               <dt><span class="section"><a href="chapter.translation.memories.html#d0e6803">3. Orixe con traducións existentes</a></span></dt>
                <dt><span class="section"><a href="chapter.translation.memories.html#pseudo.translated.memory">4. Memoria pseudotraducida</a></span></dt>
                <dt><span class="section"><a href="chapter.translation.memories.html#upgrading.translation.memories">5. Actualizando memorias de tradución</a></span></dt>
             </dl>
@@ -80,13 +80,13 @@
                </p>
                <div class="variablelist">
                   <dl class="variablelist">
-                     <dt><span class="term"><a class="indexterm" name="d0e6314"></a>Cartafol omegat</span></dt>
+                     <dt><span class="term"><a class="indexterm" name="d0e6355"></a>Cartafol omegat</span></dt>
                      <dd>
                         <p>O cartafol omegat contén o ficheiro <code class="filename">project_save.tmx</code> e posibelmente varios ficheiros TMX de copia de seguridade. O ficheiro <code class="filename">project_save.tmx</code> contén todos os segmentos que se gravaron na memoria desde que comezou o proxecto. Este ficheiro sempre existe no proxecto.
                            Os seus contidos sempre estarán ordenados alfabeticamente polo segmento de orixe.
                         </p>
                      </dd>
-                     <dt><span class="term"><a class="indexterm" name="d0e6333"></a>Cartafol principal do proxecto</span></dt>
+                     <dt><span class="term"><a class="indexterm" name="d0e6374"></a>Cartafol principal do proxecto</span></dt>
                      <dd>
                         <p>O cartafol principal do proxecto contén tres ficheiros tmx: <code class="filename">nome_do_proxecto-omegat.tmx</code>, <code class="filename">nome_do_proxecto-level1.tmx</code> e <code class="filename">nome_do_proxecto-level2.tmx</code> (nome_do_proxecto é o nome do seu proxecto).
                         </p>
@@ -110,7 +110,7 @@
                            para que os seus contidos aínda sexan identificábeis cando se empreguen noutro lugar, por exemplo, no subcartafol <code class="filename">tm</code> ou noutro proxecto (vexa máis adiante).
                         </p>
                      </dd>
-                     <dt><span class="term">Cartafol <code class="filename"><a class="indexterm" name="d0e6388"></a>tm</code></span></dt>
+                     <dt><span class="term">Cartafol <code class="filename"><a class="indexterm" name="d0e6429"></a>tm</code></span></dt>
                      <dd>
                         <p>O cartafol /tm/ pode conten calquera número de memorias de tradución (ficheiros tmx) secundarias. Estes ficheiros poden crearse
                            en calquera das tres variantes presentadas anteriormente. Teña en conta que outras ferramentas de tradución asistida poden
@@ -130,16 +130,16 @@
                            os seus nomes e os segmentos dentro dun ficheiro TMX dado liña por liña. O último segmento cun texto de orixe idéntico será
                            o que prevaleza (Nota: por suposto, ten máis sentido evitar isto en primeiro lugar).
                         </p>
-                        <p>Teña en conta que os ficheiros TMX no cartafol tm poden comprimirse con gzip.<a class="indexterm" name="d0e6426"></a></p>
+                        <p>Teña en conta que os ficheiros TMX no cartafol tm poden comprimirse con gzip.<a class="indexterm" name="d0e6467"></a></p>
                      </dd>
-                     <dt><span class="term"><a class="indexterm" name="d0e6433"></a>Cartafol tm/auto<a class="indexterm" name="d0e6441"></a></span></dt>
+                     <dt><span class="term"><a class="indexterm" name="d0e6474"></a>Cartafol tm/auto<a class="indexterm" name="d0e6482"></a></span></dt>
                      <dd>
                         <p>Se está claro desde o principio que as traducións nunha memoria (ou memorias) de tradución dadas son todas correctas, un pode
                            engadilas no cartafol <span class="bold"><strong>tm/auto</strong></span> e evitar confirmar moitos casos <span class="emphasis"><em>[parciais]</em></span>. Isto <span class="bold"><strong>pretraducirá</strong></span> o texto de orixe: todos os segmentos no texto de orixe para os que se atope algunha tradución nas memorias de tradución «automáticas»,
                            se pasarán á memoria de tradución principal do proxecto sen necesitar ningunha acción por parte do usuario.
                         </p>
                      </dd>
-                     <dt><span class="term"><a class="indexterm" name="d0e6460"></a>Cartafoles tm/penalty-xxx</span></dt>
+                     <dt><span class="term"><a class="indexterm" name="d0e6501"></a>Cartafoles tm/penalty-xxx</span></dt>
                      <dd>
                         <p>Ás veces, é útil distinguir entre unha memoria de tradución de boa calidade e as que son, debido á materia, cliente, estado
                            de revisión, etc., menos fiábeis. As memorias de tradución nos cartafoles con nome «penalty-xxx» (sendo xxx un número entre
@@ -176,7 +176,7 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="tmx.backup"></a>1.2.&nbsp;Copia de seguridade da TMX<a class="indexterm" name="d0e6514"></a></h3>
+                        <h3 class="title"><a name="tmx.backup"></a>1.2.&nbsp;Copia de seguridade da TMX<a class="indexterm" name="d0e6555"></a></h3>
                      </div>
                   </div>
                </div>
@@ -213,7 +213,7 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="tmx.files.and.language"></a>1.3.&nbsp;Ficheiros TMX e idioma<a class="indexterm" name="d0e6566"></a></h3>
+                        <h3 class="title"><a name="tmx.files.and.language"></a>1.3.&nbsp;Ficheiros TMX e idioma<a class="indexterm" name="d0e6607"></a></h3>
                      </div>
                   </div>
                </div>
@@ -243,7 +243,7 @@
                   Se as linguas coinciden mais non o país, aínda así se cargarán os segmentos. Se non coinciden nin o código de idioma nin o
                   de país, se ignorarán os segmentos.
                </p>
-               <p><a class="indexterm" name="d0e6587"></a>Os ficheiros TMX normalmente conteñen unidades de tradución con varias linguas candidatas. Se para un segmento de orixe dado
+               <p><a class="indexterm" name="d0e6628"></a>Os ficheiros TMX normalmente conteñen unidades de tradución con varias linguas candidatas. Se para un segmento de orixe dado
                   non hai unha entrada para o idioma seleccionado, todos os demais segmentos de destino se cargarán, sen importar o seu idioma.
                   Por exemplo, se o par de idiomas do proxecto é DE-FR, pode que aínda así sexa de axuda ver coincidencias da tradución DE-EN,
                   se non hai ningunha do par DE-FR.
@@ -253,7 +253,7 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="d0e6593"></a>1.4.&nbsp;Segmentos orfos<a class="indexterm" name="d0e6596"></a></h3>
+                        <h3 class="title"><a name="d0e6634"></a>1.4.&nbsp;Segmentos orfos<a class="indexterm" name="d0e6637"></a></h3>
                      </div>
                   </div>
                </div>
@@ -267,7 +267,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="using.translation.memories.from.previous.projects"></a>2.&nbsp;Reutilizar memorias de tradución<a class="indexterm" name="d0e6612"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="using.translation.memories.from.previous.projects"></a>2.&nbsp;Reutilizar memorias de tradución<a class="indexterm" name="d0e6653"></a></h2>
                   </div>
                </div>
             </div>
@@ -323,7 +323,7 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="importing.and.exporting.translation.memories"></a>2.1.&nbsp;Importar e exportar memorias de tradución<a class="indexterm" name="d0e6675"></a></h3>
+                        <h3 class="title"><a name="importing.and.exporting.translation.memories"></a>2.1.&nbsp;Importar e exportar memorias de tradución<a class="indexterm" name="d0e6716"></a></h3>
                      </div>
                   </div>
                </div>
@@ -414,7 +414,7 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="sharing.translation.memories"></a>2.3.&nbsp;Compartir memorias de tradución<a class="indexterm" name="d0e6735"></a></h3>
+                        <h3 class="title"><a name="sharing.translation.memories"></a>2.3.&nbsp;Compartir memorias de tradución<a class="indexterm" name="d0e6776"></a></h3>
                      </div>
                   </div>
                </div>
@@ -431,7 +431,7 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="d0e6746"></a>2.4.&nbsp;Empregar TMX con pares de idiomas alternativos<a class="indexterm" name="d0e6749"></a></h3>
+                        <h3 class="title"><a name="d0e6787"></a>2.4.&nbsp;Empregar TMX con pares de idiomas alternativos<a class="indexterm" name="d0e6790"></a></h3>
                      </div>
                   </div>
                </div>
@@ -454,7 +454,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="d0e6762"></a>3.&nbsp;Orixe con traducións existentes<a class="indexterm" name="d0e6765"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="d0e6803"></a>3.&nbsp;Orixe con traducións existentes<a class="indexterm" name="d0e6806"></a></h2>
                   </div>
                </div>
             </div>
@@ -475,7 +475,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="pseudo.translated.memory"></a>4.&nbsp;Memoria pseudotraducida<a class="indexterm" name="d0e6784"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="pseudo.translated.memory"></a>4.&nbsp;Memoria pseudotraducida<a class="indexterm" name="d0e6825"></a></h2>
                   </div>
                </div>
             </div>
@@ -513,17 +513,17 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="upgrading.translation.memories"></a>5.&nbsp;Actualizando memorias de tradución<a class="indexterm" name="d0e6836"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="upgrading.translation.memories"></a>5.&nbsp;Actualizando memorias de tradución<a class="indexterm" name="d0e6877"></a></h2>
                   </div>
                </div>
             </div>
             <p>En versións anteriores, <span class="application">OmegaT</span> era só capaz de segmentar os ficheiros de orixe en parágrafos, e numeraba de modo inconsistente as etiquetas de formato en
-               ficheiros HTML e Open Document. <span class="application">OmegaT</span> 2.6 pode detectar e actualizar os devanditos ficheiros tmx no momento para incrementar a calidade das coincidencias parciais
+               ficheiros HTML e Open Document. <span class="application">OmegaT</span> pode detectar e actualizar os devanditos ficheiros tmx no momento para incrementar a calidade das coincidencias parciais
                e tomar maior vantaxe da tradución existente, gardando o traballo manualmente.
             </p>
             <p>A tmx dun proxecto se actualizará só unha vez, e cando se escribirá de forma actualizada no ficheiro <code class="filename">project_save.tmx</code>; os ficheiros tmx herdados se actualizarán ao momento cada vez que se cargue o proxecto. Teña en conta que nalgúns casos
-               os cambios nos filtros de ficheiro de <span class="application">OmegaT</span> 2.6 pode levar a unha segmentación totalmente diferente, polo que terá que actualizar a súa tradución manualmente nestes
-               escasos casos.
+               os cambios nos filtros de ficheiro de <span class="application">OmegaT</span> pode levar a unha segmentación totalmente diferente, polo que terá que actualizar a súa tradución manualmente nestes escasos
+               casos.
             </p>
          </div>
       </div>

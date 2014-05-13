@@ -5,8 +5,8 @@
       <title>Appendix&nbsp;H.&nbsp;Personalización de atallos de teclado</title>
       <link rel="stylesheet" type="text/css" href="OmegaT.css">
       <meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
-      <link rel="home" href="index.html" title="OmegaT - Guía de usuario">
-      <link rel="up" href="index.html" title="OmegaT - Guía de usuario">
+      <link rel="home" href="index.html" title="OmegaT 3.0 - Guía de usuario">
+      <link rel="up" href="index.html" title="OmegaT 3.0 - Guía de usuario">
       <link rel="prev" href="appendix.website.html" title="Appendix&nbsp;G.&nbsp;OmegaT na rede">
       <link rel="next" href="appendix.legal.notices.html" title="Appendix&nbsp;I.&nbsp;Aviso legal">
    </head>
@@ -50,40 +50,40 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="ch04.shortcuts.customization"></a>1.&nbsp;<a class="indexterm" name="d0e11107"></a>Personalización de atallos de teclado
+                     <h2 class="title" style="clear: both"><a name="ch04.shortcuts.customization"></a>1.&nbsp;<a class="indexterm" name="d0e11132"></a>Personalización de atallos de teclado
                      </h2>
                   </div>
                </div>
             </div>
             <p>A maior parte dos elementos que aparecen no menú principal poden asignarse a un novo atallo de teclado. Pode cambiar os atallos
                de teclado xa asignados e engadir novos atallos de teclado poñendo un ficheiro de definición de atallos de teclado no cartafol
-               de preferencias de OmegaT (vexa <a class="link" href="chapter.files.and.directories.html#user.files" title="2.&nbsp;Ficheiros de configuración do usuario">Localización dos ficheiros de usuario</a>).
+               de preferencias de OmegaT (vexa <a class="link" href="chapter.files.and.folders.html#user.files" title="2.&nbsp;Ficheiros de configuración do usuario">Localización dos ficheiros de usuario</a>).
             </p>
             <p>O ficheiro de definición de atallos de teclado debe nomearse <code class="filename">MainManuShortcuts.properties</code> e debe conter como máximo unha definición de atallo de teclado por liña. Tamén se aceptan as liñas baleiras e as liñas comentadas
                deben comezar con «//». Todo o que estea despois de «//» será ignorado.
             </p>
             <p>Unha ver que se modifique o ficheiro <code class="filename">MainMenuShortcuts.properties</code>, debe reiniciarse <span class="application">OmegaT</span> para que se estabelezan os novos atallos de teclado.
             </p>
-            <p>A sintaxe de definición de atallos de teclado é a seguinte:<code class="code">&lt;código do elemento do menú&gt;=&lt;atallo de teclado&gt;</code>, onde <span class="emphasis"><em>&lt;código do elemento do menú&gt;</em></span> é un código tomado das táboas abaixo indicadas e <span class="emphasis"><em>&lt;atallo de teclado&gt;</em></span> é unha combinación de teclas especificada polo usuario<a href="#ftn.d0e11142" class="footnote" name="d0e11142"><sup class="footnote">[2]</sup></a>.
+            <p>A sintaxe de definición de atallos de teclado é a seguinte:<code class="code">&lt;código do elemento do menú&gt;=&lt;atallo de teclado&gt;</code>, onde <span class="emphasis"><em>&lt;código do elemento do menú&gt;</em></span> é un código tomado das táboas abaixo indicadas e <span class="emphasis"><em>&lt;atallo de teclado&gt;</em></span> é unha combinación de teclas especificada polo usuario<a href="#ftn.d0e11167" class="footnote" name="d0e11167"><sup class="footnote">[2]</sup></a>.
             </p>
             <p>&lt;atallo de teclado&gt; debe ter unha das seguintes formas: 0 ou máis <code class="code">&lt;modificadores&gt;</code> seguido por 0 ou 1 <code class="code">&lt;evento&gt;</code> seguido por 1 <code class="code">&lt;tecla&gt;</code>, onde:
             </p>
             <div class="itemizedlist">
                <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
-                     <p><code class="code">&lt;modificador&gt;</code> pode ser: <span class="emphasis"><em>shift</em></span>, <span class="emphasis"><em>control</em></span>, <span class="emphasis"><em>ctrl</em></span>, <span class="emphasis"><em>meta</em></span><a href="#ftn.d0e11176" class="footnote" name="d0e11176"><sup class="footnote">[3]</sup></a>, <span class="emphasis"><em>alt</em></span>,
+                     <p><code class="code">&lt;modificador&gt;</code> pode ser: <span class="emphasis"><em>shift</em></span>, <span class="emphasis"><em>control</em></span>, <span class="emphasis"><em>ctrl</em></span>, <span class="emphasis"><em>meta</em></span><a href="#ftn.d0e11201" class="footnote" name="d0e11201"><sup class="footnote">[3]</sup></a>, <span class="emphasis"><em>alt</em></span>,
                                   <span class="emphasis"><em>altGraph</em></span></p>
                   </li>
                   <li class="listitem">
                      <p><code class="code">&lt;evento&gt;</code> pode ser: <span class="emphasis"><em>typed</em></span>, <span class="emphasis"><em>pressed</em></span>, <span class="emphasis"><em>released</em></span></p>
                   </li>
                   <li class="listitem">
-                     <p>e <code class="code">&lt;tecla&gt;</code> pode ser calquera tecla dispoñíbel no teclado<a href="#ftn.d0e11210" class="footnote" name="d0e11210"><sup class="footnote">[4]</sup></a>.
+                     <p>e <code class="code">&lt;tecla&gt;</code> pode ser calquera tecla dispoñíbel no teclado<a href="#ftn.d0e11235" class="footnote" name="d0e11235"><sup class="footnote">[4]</sup></a>.
                      </p>
                   </li>
                </ul>
             </div>
-            <p>Por exemplo, nos atallos de teclado predeterminados de OmegaT<a href="#ftn.d0e11218" class="footnote" name="d0e11218"><sup class="footnote">[5]</sup></a>, un pode atopar:
+            <p>Por exemplo, nos atallos de teclado predeterminados de OmegaT<a href="#ftn.d0e11243" class="footnote" name="d0e11243"><sup class="footnote">[5]</sup></a>, un pode atopar:
             </p>
             <div class="itemizedlist">
                <ul class="itemizedlist" style="list-style-type: disc; ">
@@ -117,7 +117,7 @@
                   </div>
                </div>
             </div>
-            <div class="table"><a name="d0e11295"></a><p class="title"><b>Table&nbsp;H.1.&nbsp;Menú Proxecto</b></p>
+            <div class="table"><a name="d0e11320"></a><p class="title"><b>Table&nbsp;H.1.&nbsp;Menú Proxecto</b></p>
                <div class="table-contents">
                   <table summary="Menú Proxecto" border="1">
                      <colgroup>
@@ -135,7 +135,7 @@
                      <tbody>
                         <tr>
                            <td align="left">Novo</td>
-                           <td align="left">&nbsp;</td>
+                           <td align="left"><span class="keycap"><strong>Shift+Ctrl+N</strong></span></td>
                            <td align="left">projectNewMenuItem</td>
                         </tr>
                         <tr>
@@ -179,6 +179,11 @@
                            <td align="left">projectCompileMenuItem</td>
                         </tr>
                         <tr>
+                           <td align="left">Crear documento actual traducido</td>
+                           <td align="left"><span class="keycap"><strong>Shift+Ctrl+D</strong></span></td>
+                           <td align="left">projectSingleCompileMenuItem</td>
+                        </tr>
+                        <tr>
                            <td align="left">Propiedades...</td>
                            <td align="left"><span class="keycap"><strong>Ctrl+E</strong></span></td>
                            <td align="left">projectEditMenuItem</td>
@@ -206,7 +211,7 @@
                   </div>
                </div>
             </div>
-            <div class="table"><a name="d0e11402"></a><p class="title"><b>Table&nbsp;H.2.&nbsp;Editar menú</b></p>
+            <div class="table"><a name="d0e11437"></a><p class="title"><b>Table&nbsp;H.2.&nbsp;Editar menú</b></p>
                <div class="table-contents">
                   <table summary="Editar menú" border="1">
                      <colgroup>
@@ -263,6 +268,11 @@
                            <td align="left">editTagPainterMenuItem</td>
                         </tr>
                         <tr>
+                           <td align="left">Inserir seguinte etiqueta restante</td>
+                           <td align="left"><span class="keycap"><strong>Ctrl +T</strong></span></td>
+                           <td align="left">editTagNextMissedMenuItem</td>
+                        </tr>
+                        <tr>
                            <td align="left">Exportar selección</td>
                            <td align="left"><span class="keycap"><strong>Shift+Ctrl+C</strong></span></td>
                            <td align="left">editExportSelectionMenuItem</td>
@@ -276,6 +286,21 @@
                            <td align="left">Buscar no proxecto...</td>
                            <td align="left"><span class="keycap"><strong>Ctrl+F</strong></span></td>
                            <td align="left">editFindInProjectMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Buscar e substituír</td>
+                           <td align="left"><span class="keycap"><strong>Ctrl+K</strong></span></td>
+                           <td align="left">editReplaceInProjectMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Seleccionar coincidencia previa</td>
+                           <td align="left"><span class="keycap"><strong>Ctrl+↑</strong></span></td>
+                           <td align="left">editSelectFuzzyPrevMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Seleccionar seguinte coincidencia</td>
+                           <td align="left"><span class="keycap"><strong>Ctrl+↓</strong></span></td>
+                           <td align="left">editSelectFuzzyNextMenuItem</td>
                         </tr>
                         <tr>
                            <td align="left">Seleccionar coincidencia parcial 1</td>
@@ -332,6 +357,11 @@
                            <td align="left">&nbsp;</td>
                            <td align="left">editMultipleAlternate</td>
                         </tr>
+                        <tr>
+                           <td align="left">Rexistrar tradución idéntica</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">editRegisterIdenticalMenuItem</td>
+                        </tr>
                      </tbody>
                   </table>
                </div>
@@ -345,7 +375,7 @@
                   </div>
                </div>
             </div>
-            <div class="table"><a name="d0e11587"></a><p class="title"><b>Table&nbsp;H.3.&nbsp;Menú Ir a</b></p>
+            <div class="table"><a name="d0e11660"></a><p class="title"><b>Table&nbsp;H.3.&nbsp;Menú Ir a</b></p>
                <div class="table-contents">
                   <table summary="Menú Ir a" border="1">
                      <colgroup>
@@ -365,6 +395,11 @@
                            <td align="left">Seguinte segmento non traducido</td>
                            <td align="left"><span class="keycap"><strong>Ctrl+U</strong></span></td>
                            <td align="left">gotoNextUntranslatedMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Seguinte segmento traducido</td>
+                           <td align="left"><span class="keycap"><strong>Shift+Ctrl+U</strong></span></td>
+                           <td align="left">gotoNextTranslatedMenuItem</td>
                         </tr>
                         <tr>
                            <td align="left">Seguinte segmento</td>
@@ -414,8 +449,8 @@
                   </div>
                </div>
             </div>
-            <div class="table"><a name="d0e11678"></a><p class="title"><b>Table&nbsp;H.4.&nbsp;Menú Ver</b></p>
-               <div class="table-contents"><a class="indexterm" name="d0e11681"></a><table summary="Menú Ver" border="1">
+            <div class="table"><a name="d0e11759"></a><p class="title"><b>Table&nbsp;H.4.&nbsp;Menú Ver</b></p>
+               <div class="table-contents"><a class="indexterm" name="d0e11762"></a><table summary="Menú Ver" border="1">
                      <colgroup>
                         <col align="left" class="1">
                         <col align="left" class="2">
@@ -497,7 +532,7 @@
                   </div>
                </div>
             </div>
-            <div class="table"><a name="d0e11768"></a><p class="title"><b>Table&nbsp;H.5.&nbsp;Menú Ferramentas</b></p>
+            <div class="table"><a name="d0e11849"></a><p class="title"><b>Table&nbsp;H.5.&nbsp;Menú Ferramentas</b></p>
                <div class="table-contents">
                   <table summary="Menú Ferramentas" border="1">
                      <colgroup>
@@ -515,8 +550,13 @@
                      <tbody>
                         <tr>
                            <td align="left">Validar etiquetas</td>
-                           <td align="left"><span class="keycap"><strong>Ctrl +T</strong></span></td>
+                           <td align="left"><span class="keycap"><strong>Shift+Ctrl+V</strong></span></td>
                            <td align="left">toolsValidateTagsMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Validar etiquetas do documento actual</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">toolsSingleValidateTagsMenuItem</td>
                         </tr>
                         <tr>
                            <td align="left">Estatísticas</td>
@@ -527,6 +567,11 @@
                            <td align="left">Estatísticas das coincidencias</td>
                            <td align="left">&nbsp;</td>
                            <td align="left">toolsShowStatisticsMatchesMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Estadísticas de coincidencias por ficheiro</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">toolsShowStatisticsMatchesPerFileMenuItem</td>
                         </tr>
                      </tbody>
                   </table>
@@ -541,7 +586,7 @@
                   </div>
                </div>
             </div>
-            <div class="table"><a name="d0e11807"></a><p class="title"><b>Table&nbsp;H.6.&nbsp;Menú Opcións</b></p>
+            <div class="table"><a name="d0e11900"></a><p class="title"><b>Table&nbsp;H.6.&nbsp;Menú Opcións</b></p>
                <div class="table-contents">
                   <table summary="Menú Opcións" border="1">
                      <colgroup>
@@ -581,6 +626,21 @@
                            <td align="left">TransTips/Coincidencia exacta</td>
                            <td align="left">&nbsp;</td>
                            <td align="left">optionsTransTipsExactMatchMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Autocompletado/Glosario...</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">optionsAutoCompleteGlossaryMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Autocompletado/Autotexto...</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">optionsAutoCompleteAutoTextMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Autocompletado/Táboa de caracteres...</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">optionsAutoCompleteCharTableMenuItem</td>
                         </tr>
                         <tr>
                            <td align="left">Tipo de letra...</td>
@@ -655,7 +715,7 @@
                   </div>
                </div>
             </div>
-            <div class="table"><a name="d0e11927"></a><p class="title"><b>Table&nbsp;H.7.&nbsp;Menú Axuda</b></p>
+            <div class="table"><a name="d0e12038"></a><p class="title"><b>Table&nbsp;H.7.&nbsp;Menú Axuda</b></p>
                <div class="table-contents">
                   <table summary="Menú Axuda" border="1">
                      <colgroup>
@@ -681,24 +741,34 @@
                            <td align="left">&nbsp;</td>
                            <td align="left">helpAboutMenuItem</td>
                         </tr>
+                        <tr>
+                           <td align="left">Últimos cambios...</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">helpLastChangesMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Rexistro...</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">helpLogMenuItem</td>
+                        </tr>
                      </tbody>
                   </table>
                </div>
             </div><br class="table-break"></div>
          <div class="footnotes"><br><hr style="width:100; text-align:left;margin-left: 0">
-            <div id="ftn.d0e11142" class="footnote">
-               <p><a href="#d0e11142" class="para"><sup class="para">[2] </sup></a>A sintaxe completa para a combinación de teclas (atallos de teclado) está definida na seguinte documentación de Oracle sobre
+            <div id="ftn.d0e11167" class="footnote">
+               <p><a href="#d0e11167" class="para"><sup class="para">[2] </sup></a>A sintaxe completa para a combinación de teclas (atallos de teclado) está definida na seguinte documentación de Oracle sobre
                   Java 1.6 (ao final da páxina): <a class="ulink" href="http://docs.oracle.com/javase/6/docs/api/javax/swing/KeyStroke.html" target="_top">Atallos de teclado e combinacións de teclas en Java 1.6</a></p>
             </div>
-            <div id="ftn.d0e11176" class="footnote">
-               <p><a href="#d0e11176" class="para"><sup class="para">[3] </sup></a>En Mac, o modificador <span class="emphasis"><em>meta</em></span> debe empregarse para especificar a tecla de <span class="emphasis"><em>comando</em></span>.
+            <div id="ftn.d0e11201" class="footnote">
+               <p><a href="#d0e11201" class="para"><sup class="para">[3] </sup></a>En Mac, o modificador <span class="emphasis"><em>meta</em></span> debe empregarse para especificar a tecla de <span class="emphasis"><em>comando</em></span>.
                </p>
             </div>
-            <div id="ftn.d0e11210" class="footnote">
-               <p><a href="#d0e11210" class="para"><sup class="para">[4] </sup></a>As posíbeis combinacións de teclas están descritas na seguinte documentación de Oracle sobre Java 1.6: <a class="ulink" href="http://docs.oracle.com/javase/6/docs/api/java/awt/event/KeyEvent.html" target="_top">Descrición das combinacións de teclas en Java 1.6</a></p>
+            <div id="ftn.d0e11235" class="footnote">
+               <p><a href="#d0e11235" class="para"><sup class="para">[4] </sup></a>As posíbeis combinacións de teclas están descritas na seguinte documentación de Oracle sobre Java 1.6: <a class="ulink" href="http://docs.oracle.com/javase/6/docs/api/java/awt/event/KeyEvent.html" target="_top">Descrición das combinacións de teclas en Java 1.6</a></p>
             </div>
-            <div id="ftn.d0e11218" class="footnote">
-               <p><a href="#d0e11218" class="para"><sup class="para">[5] </sup></a>Os atallos de teclado predeterminados de OmegaT están dispoñíbeis desde Sourceforge: <a class="ulink" href="http://omegat.svn.sourceforge.net/viewvc/omegat/branches/release-2-6/src/org/omegat/gui/main/MainMenuShortcuts.properties" target="_top">Atallos de teclado predeterminados de OmegaT</a></p>
+            <div id="ftn.d0e11243" class="footnote">
+               <p><a href="#d0e11243" class="para"><sup class="para">[5] </sup></a>Os atallos de teclado predeterminados de OmegaT están dispoñíbeis desde Sourceforge: <a class="ulink" href="http://omegat.svn.sourceforge.net/viewvc/omegat/branches/release-2-6/src/org/omegat/gui/main/MainMenuShortcuts.properties" target="_top">Atallos de teclado predeterminados de OmegaT</a></p>
                <p>Os atallos de teclado predeterminados de OmegaT para Mac están dispoñíbeis tamén en Sourceforge. Todos empregan «meta» en
                   vez de «ctrl»: <a class="ulink" href="http://omegat.svn.sourceforge.net/viewvc/omegat/branches/release-2-6/src/org/omegat/gui/main/MainMenuShortcuts.mac.properties" target="_top">Atallos de teclado predeterminados de OmegaT para Mac</a></p>
             </div>

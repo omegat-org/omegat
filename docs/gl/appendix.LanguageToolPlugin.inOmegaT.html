@@ -5,8 +5,8 @@
       <title>Appendix&nbsp;E.&nbsp;Engadido de LanguageTool</title>
       <link rel="stylesheet" type="text/css" href="OmegaT.css">
       <meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
-      <link rel="home" href="index.html" title="OmegaT - Guía de usuario">
-      <link rel="up" href="index.html" title="OmegaT - Guía de usuario">
+      <link rel="home" href="index.html" title="OmegaT 3.0 - Guía de usuario">
+      <link rel="up" href="index.html" title="OmegaT 3.0 - Guía de usuario">
       <link rel="prev" href="appendix.TokenizerPlugin.inOmegaT.html" title="Appendix&nbsp;D.&nbsp;Engadido de Tokenizer">
       <link rel="next" href="appendix.ScriptingPlugin.inOmegaT.html" title="Appendix&nbsp;F.&nbsp;Engadido de Scripting">
    </head>
@@ -29,21 +29,21 @@
          <div class="titlepage">
             <div>
                <div>
-                  <h1 class="title"><a name="appendix.LanguageToolPlugin.inOmegaT"></a>Appendix&nbsp;E.&nbsp;Engadido de LanguageTool<a class="indexterm" name="d0e10823"></a></h1>
+                  <h1 class="title"><a name="appendix.LanguageToolPlugin.inOmegaT"></a>Appendix&nbsp;E.&nbsp;Engadido de LanguageTool<a class="indexterm" name="d0e10848"></a></h1>
                </div>
             </div>
          </div>
          <div class="toc">
             <dl class="toc">
-               <dt><span class="section"><a href="appendix.LanguageToolPlugin.inOmegaT.html#d0e10828">1. Introdución</a></span></dt>
-               <dt><span class="section"><a href="appendix.LanguageToolPlugin.inOmegaT.html#d0e10847">2. Instalación e uso</a></span></dt>
+               <dt><span class="section"><a href="appendix.LanguageToolPlugin.inOmegaT.html#d0e10853">1. Introdución</a></span></dt>
+               <dt><span class="section"><a href="appendix.LanguageToolPlugin.inOmegaT.html#d0e10872">2. Instalación e uso</a></span></dt>
             </dl>
          </div>
          <div class="section">
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="d0e10828"></a>1.&nbsp;Introdución
+                     <h2 class="title" style="clear: both"><a name="d0e10853"></a>1.&nbsp;Introdución
                      </h2>
                   </div>
                </div>
@@ -55,7 +55,7 @@
                detectar, por exemplo, mesturar palabras semellantes, etc. Tamén pode detectar algúns erros gramaticais, mais non inclúe verificación
                ortográfica. LanguageTool atopará erros para os que se definiu unha regra nos ficheiros de configuración específicos dun idioma.
             </p>
-            <div class="figure"><a name="d0e10840"></a><p class="title"><b>Figure&nbsp;E.1.&nbsp;LanguageTool en OmegaT</b></p>
+            <div class="figure"><a name="d0e10865"></a><p class="title"><b>Figure&nbsp;E.1.&nbsp;LanguageTool en OmegaT</b></p>
                <div class="figure-contents">
                   <div class="screenshot">
                      <div class="mediaobject"><img src="images/LanguageToolExample.png" alt="LanguageTool en OmegaT"></div>
@@ -66,17 +66,20 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="d0e10847"></a>2.&nbsp;Instalación e uso
+                     <h2 class="title" style="clear: both"><a name="d0e10872"></a>2.&nbsp;Instalación e uso
                      </h2>
                   </div>
                </div>
             </div>
-            <p>O engadido de LanguageTool para OmegaT pode descargarse dende o <a class="ulink" href="http://sourceforge.net/projects/omegat-plugins/files" target="_top">sitio de descarga de engadidos de OmegaT</a>. Descomprima os ficheiros e gárdeos no cartafol «plugins» dentro da carpeta de instalación de OmegaT, é dicir, o cartafol
-               que contén o ficheiro OmegaT.jar. Primeiro cree o cartafol «plugins», de non existir un xa.
-            </p>
-            <p>Unha vez instalado, OmegaT usará automaticamente o engadido, sempre e cando estea activado <span class="guimenuitem">Opcións &gt; Verificación ortográfica</span> As regras aplicadas (de houber) dependerán no idioma de orixe e de destino do proxecto. Cando se dispara unha regra, a frase
+            <p>O engadido LanguageTool está incluído en OmegaT. Empregarase automaticamente se está marcado <span class="guimenuitem">Opcións &gt; Verificación de idioma</span>. As regras aplicadas (de houber) dependerán no idioma de orixe e de destino do proxecto. Cando se dispara unha regra, a frase
                correspondente subliñarase en azul no editor (ver <span class="emphasis"><em>tamén </em></span>e <span class="emphasis"><em>eu non fixen nada</em></span>na imaxe anterior. Cando poña o rato sobre a frase subliñada, aparecerá unha explicación.
             </p>
+            <div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+               <h3 class="title">Incompatibilidades</h3>
+               <p>LanguageTool non funcionará correctamente se hai unha versión anterior no cartafol /plugin. Elimine LanguageTool do cartafol
+                  /plugin antes de iniciar OmegaT.
+               </p>
+            </div>
          </div>
       </div>
       <div class="navfooter">

@@ -5,8 +5,8 @@
       <title>Chapter&nbsp;16.&nbsp;Expresións regulares</title>
       <link rel="stylesheet" type="text/css" href="OmegaT.css">
       <meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
-      <link rel="home" href="index.html" title="OmegaT - Guía de usuario">
-      <link rel="up" href="index.html" title="OmegaT - Guía de usuario">
+      <link rel="home" href="index.html" title="OmegaT 3.0 - Guía de usuario">
+      <link rel="up" href="index.html" title="OmegaT 3.0 - Guía de usuario">
       <link rel="prev" href="chapter.searches.html" title="Chapter&nbsp;15.&nbsp;Buscas">
       <link rel="next" href="chapter.dictionaries.html" title="Chapter&nbsp;17.&nbsp;Dicionarios">
    </head>
@@ -29,7 +29,7 @@
          <div class="titlepage">
             <div>
                <div>
-                  <h1 class="title"><a name="chapter.regexp"></a>Chapter&nbsp;16.&nbsp;Expresións regulares<a class="indexterm" name="d0e7347"></a></h1>
+                  <h1 class="title"><a name="chapter.regexp"></a>Chapter&nbsp;16.&nbsp;Expresións regulares<a class="indexterm" name="d0e7410"></a></h1>
                </div>
             </div>
          </div>
@@ -39,7 +39,7 @@
             </dl>
          </div>
          <p>As expresións regulares (ou regex para acortar) empregadas nas buscas e regras de segmentación son as compatíbeis con Java.
-            En caso de necesitar información máis específica, consulte a <a class="ulink" href="http://download.oracle.com/javase/1.5.0/docs/api/java/util/regex/Pattern.html" target="_top">Documentación sobre Regex de Java</a>. Vexa referencias adicionais e exemplos máis adiante.
+            En caso de necesitar información máis específica, consulte a <a class="ulink" href="http://download.oracle.com/javase/1.6.0/docs/api/java/util/regex/Pattern.html" target="_top">Documentación sobre Regex de Java</a>. Vexa referencias adicionais e exemplos máis adiante.
          </p>
          <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;">
             <h3 class="title">Note</h3>
@@ -47,7 +47,7 @@
                ou que necesitan facer buscas máis complexas e exhaustivas.
             </p>
          </div>
-         <div class="table"><a name="d0e7362"></a><p class="title"><b>Table&nbsp;16.1.&nbsp;Regex - Bandeiras</b></p>
+         <div class="table"><a name="d0e7425"></a><p class="title"><b>Table&nbsp;16.1.&nbsp;Regex - Bandeiras</b></p>
             <div class="table-contents">
                <table summary="Regex - Bandeiras" border="1">
                   <colgroup>
@@ -70,7 +70,7 @@
                   </tbody>
                </table>
             </div>
-         </div><br class="table-break"><div class="table"><a name="d0e7379"></a><p class="title"><b>Table&nbsp;16.2.&nbsp;Regex - Carácter</b></p>
+         </div><br class="table-break"><div class="table"><a name="d0e7442"></a><p class="title"><b>Table&nbsp;16.2.&nbsp;Regex - Carácter</b></p>
             <div class="table-contents">
                <table summary="Regex - Carácter" border="1">
                   <colgroup>
@@ -139,7 +139,7 @@
                   </tbody>
                </table>
             </div>
-         </div><br class="table-break"><div class="table"><a name="d0e7456"></a><p class="title"><b>Table&nbsp;16.3.&nbsp;Regex - Citación</b></p>
+         </div><br class="table-break"><div class="table"><a name="d0e7519"></a><p class="title"><b>Table&nbsp;16.3.&nbsp;Regex - Citación</b></p>
             <div class="table-contents">
                <table summary="Regex - Citación" border="1">
                   <colgroup>
@@ -174,7 +174,7 @@
                   </tbody>
                </table>
             </div>
-         </div><br class="table-break"><div class="table"><a name="d0e7488"></a><p class="title"><b>Table&nbsp;16.4.&nbsp;Regex - Clases para bloques e categorías Unicode</b></p>
+         </div><br class="table-break"><div class="table"><a name="d0e7551"></a><p class="title"><b>Table&nbsp;16.4.&nbsp;Regex - Clases para bloques e categorías Unicode</b></p>
             <div class="table-contents">
                <table summary="Regex - Clases para bloques e categorías Unicode" border="1">
                   <colgroup>
@@ -190,12 +190,12 @@
                   <tbody>
                      <tr>
                         <td align="left">\p{InGreek}</td>
-                        <td align="left">Un carácter no bloque Grego (<a class="ulink" href="http://download.oracle.com/javase/1.5.0/docs/api/java/util/regex/Pattern.html#ubc" target="_top">bloque</a> simple)
+                        <td align="left">Un carácter no bloque Grego (<a class="ulink" href="http://download.oracle.com/javase/1.6.0/docs/api/java/util/regex/Pattern.html#ubc" target="_top">bloque</a> simple)
                         </td>
                      </tr>
                      <tr>
                         <td align="left">\p{Lu}</td>
-                        <td align="left">Unha letra maiúscula (<a class="ulink" href="http://download.oracle.com/javase/1.5.0/docs/api/java/util/regex/Pattern.html#ubc" target="_top">categoría</a> simple)
+                        <td align="left">Unha letra maiúscula (<a class="ulink" href="http://download.oracle.com/javase/1.6.0/docs/api/java/util/regex/Pattern.html#ubc" target="_top">categoría</a> simple)
                         </td>
                      </tr>
                      <tr>
@@ -213,7 +213,7 @@
                   </tbody>
                </table>
             </div>
-         </div><br class="table-break"><div class="table"><a name="d0e7531"></a><p class="title"><b>Table&nbsp;16.5.&nbsp;Regex - Clases de caracteres</b></p>
+         </div><br class="table-break"><div class="table"><a name="d0e7594"></a><p class="title"><b>Table&nbsp;16.5.&nbsp;Regex - Clases de caracteres</b></p>
             <div class="table-contents">
                <table summary="Regex - Clases de caracteres" border="1">
                   <colgroup>
@@ -242,7 +242,7 @@
                   </tbody>
                </table>
             </div>
-         </div><br class="table-break"><div class="table"><a name="d0e7558"></a><p class="title"><b>Table&nbsp;16.6.&nbsp;Regez - Clases predeterminadas de caracteres</b></p>
+         </div><br class="table-break"><div class="table"><a name="d0e7621"></a><p class="title"><b>Table&nbsp;16.6.&nbsp;Regez - Clases predeterminadas de caracteres</b></p>
             <div class="table-contents">
                <table summary="Regez - Clases predeterminadas de caracteres" border="1">
                   <colgroup>
@@ -287,7 +287,7 @@
                   </tbody>
                </table>
             </div>
-         </div><br class="table-break"><div class="table"><a name="d0e7605"></a><p class="title"><b>Table&nbsp;16.7.&nbsp;Regex - Límite de coincidencias</b></p>
+         </div><br class="table-break"><div class="table"><a name="d0e7668"></a><p class="title"><b>Table&nbsp;16.7.&nbsp;Regex - Límite de coincidencias</b></p>
             <div class="table-contents">
                <table summary="Regex - Límite de coincidencias" border="1">
                   <colgroup>
@@ -320,7 +320,7 @@
                   </tbody>
                </table>
             </div>
-         </div><br class="table-break"><div class="table"><a name="d0e7637"></a><p class="title"><b>Table&nbsp;16.8.&nbsp;Regex - Cuantificadores cobizosos</b></p>
+         </div><br class="table-break"><div class="table"><a name="d0e7700"></a><p class="title"><b>Table&nbsp;16.8.&nbsp;Regex - Cuantificadores cobizosos</b></p>
             <div class="table-contents">
                <table summary="Regex - Cuantificadores cobizosos" border="1">
                   <colgroup>
@@ -353,7 +353,7 @@
             <h3 class="title">Note</h3>
             <p>os cuantificadores cobizosos coincidirán tanto coma sexa posíbel. Por exemplo, <span class="emphasis"><em>a+?</em></span> debe coincidir con aaa en <span class="emphasis"><em>aaabbb</em></span></p>
          </div>
-         <div class="table"><a name="d0e7678"></a><p class="title"><b>Table&nbsp;16.9.&nbsp;Regex - Cuantificadores tímidos (non cobizosos)</b></p>
+         <div class="table"><a name="d0e7741"></a><p class="title"><b>Table&nbsp;16.9.&nbsp;Regex - Cuantificadores tímidos (non cobizosos)</b></p>
             <div class="table-contents">
                <table summary="Regex - Cuantificadores tímidos (non cobizosos)" border="1">
                   <colgroup>
@@ -386,7 +386,7 @@
             <h3 class="title">Note</h3>
             <p>os cuantificadores non cobizosos coincidirán o mínimo posíbel. Por exemplo, <span class="emphasis"><em>a+?</em></span> debe coincidir coa primeira <span class="emphasis"><em>a</em></span> en <span class="emphasis"><em>aaabbb</em></span></p>
          </div>
-         <div class="table"><a name="d0e7716"></a><p class="title"><b>Table&nbsp;16.10.&nbsp;Regex - operadores lóxicos</b></p>
+         <div class="table"><a name="d0e7779"></a><p class="title"><b>Table&nbsp;16.10.&nbsp;Regex - operadores lóxicos</b></p>
             <div class="table-contents">
                <table summary="Regex - operadores lóxicos" border="1">
                   <colgroup>
@@ -419,7 +419,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="regex.tools.and.examples.of.use"></a>1.&nbsp;<a class="indexterm" name="d0e7745"></a>Ferramentas e exemplos de uso de expresións regulares<a class="indexterm" name="d0e7751"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="regex.tools.and.examples.of.use"></a>1.&nbsp;<a class="indexterm" name="d0e7808"></a>Ferramentas e exemplos de uso de expresións regulares<a class="indexterm" name="d0e7814"></a></h2>
                   </div>
                </div>
             </div>
@@ -435,7 +435,7 @@
             </p>
             <p>Pode atopar unha gran colección de casos de expresións regulares útiles no propio <span class="application">OmegaT</span> (vexa Opcións &gt; Segmentación). A seguinte lista inclúe expresións que pode atopar útiles cando busque na memoria de tradución:
             </p>
-            <div class="table"><a name="d0e7776"></a><p class="title"><b>Table&nbsp;16.11.&nbsp;Regex - Exemplos de expresións regulares en traducións</b></p>
+            <div class="table"><a name="d0e7839"></a><p class="title"><b>Table&nbsp;16.11.&nbsp;Regex - Exemplos de expresións regulares en traducións</b></p>
                <div class="table-contents">
                   <table summary="Regex - Exemplos de expresións regulares en traducións" border="1">
                      <colgroup>

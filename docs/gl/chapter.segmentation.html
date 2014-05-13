@@ -5,8 +5,8 @@
       <title>Chapter&nbsp;14.&nbsp;Segmentación do segmento orixe</title>
       <link rel="stylesheet" type="text/css" href="OmegaT.css">
       <meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
-      <link rel="home" href="index.html" title="OmegaT - Guía de usuario">
-      <link rel="up" href="index.html" title="OmegaT - Guía de usuario">
+      <link rel="home" href="index.html" title="OmegaT 3.0 - Guía de usuario">
+      <link rel="up" href="index.html" title="OmegaT 3.0 - Guía de usuario">
       <link rel="prev" href="chapter.translation.memories.html" title="Chapter&nbsp;13.&nbsp;Memorias de tradución">
       <link rel="next" href="chapter.searches.html" title="Chapter&nbsp;15.&nbsp;Buscas">
    </head>
@@ -43,10 +43,10 @@
             </dl>
          </div>
          <p>As ferramentas de memoria de tradución funcionan con unidades textuais chamadas segmentos. <span class="application">OmegaT</span> ten dúas formas de segmentar un texto: por parágrafo ou por frase (tamén chamada «segmentación baseada en regras»). Para
-            seleccionar o tipo de segmentación, seleccione <span class="guimenu"><a class="indexterm" name="d0e6867"></a>Proxecto</span> → <span class="guimenuitem">Propiedades...</span> desde o menú principal e marque ou desmarque a caixa dispoñíbel para tal efecto. A segmentación por parágrafos é mellor en
+            seleccionar o tipo de segmentación, seleccione <span class="guimenu"><a class="indexterm" name="d0e6908"></a>Proxecto</span> → <span class="guimenuitem">Propiedades...</span> desde o menú principal e marque ou desmarque a caixa dispoñíbel para tal efecto. A segmentación por parágrafos é mellor en
             certos casos, como en traducións moi creativas ou estilísticas nas que o tradutor pode querer cambiar a orde de frases enteiras;
             na maioría dos proxectos, porén, é preferíbel a segmentación por frase, xa que consegue mellores coincidencias de traducións
-            anteriores. Se se seleccionou a segmentación por frase, pode editar as regras seleccionando <span class="guimenu"><a class="indexterm" name="d0e6878"></a>Opcións</span> → <span class="guimenuitem">Segmentación...</span>desde o menú principal.
+            anteriores. Se se seleccionou a segmentación por frase, pode editar as regras seleccionando <span class="guimenu"><a class="indexterm" name="d0e6919"></a>Opcións</span> → <span class="guimenuitem">Segmentación...</span>desde o menú principal.
          </p>
          <p>Xa hai regras de segmentación dispoñíbeis para moitas linguas, así que é pouco probábel que necesite escribir as súas propias
             regras de segmentación Pola outra banda, esta funcionalidade pode ser moi útil en casos especiais nos que queira incrementar
@@ -60,7 +60,7 @@
          </p>
          <div class="variablelist">
             <dl class="variablelist">
-               <dt><span class="term"><a class="indexterm" name="d0e6900"></a>Estrutura do nivel de segmentación</span></dt>
+               <dt><span class="term"><a class="indexterm" name="d0e6941"></a>Estrutura do nivel de segmentación</span></dt>
                <dd>
                   <p><span class="application">OmegaT</span> primeiro analiza o texto para estruturar o nivel de segmentación. Durante este proceso, só estrutura o ficheiro de orixe
                      que se utiliza para producir segmentos.
@@ -70,7 +70,7 @@
                      de obxecto traducíbeis en ficheiros XHTML ou HTML se poden extraer coma segmentos separados.
                   </p>
                </dd>
-               <dt><span class="term"><a class="indexterm" name="d0e6915"></a>Segmentación a nivel de frase</span></dt>
+               <dt><span class="term"><a class="indexterm" name="d0e6956"></a>Segmentación a nivel de frase</span></dt>
                <dd>
                   <p>Despois de segmentar o ficheiro de orixe en unidades estruturais, <span class="application">OmegaT</span> segmentara estes bloques aínda máis en frases.
                   </p>
@@ -81,7 +81,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="segmentation.rules"></a>1.&nbsp;Regras de segmentación<a class="indexterm" name="d0e6930"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="segmentation.rules"></a>1.&nbsp;Regras de segmentación<a class="indexterm" name="d0e6971"></a></h2>
                   </div>
                </div>
             </div>
@@ -92,7 +92,7 @@
             <p>Os dous tipos de regras se comportan do seguinte xeito:</p>
             <div class="variablelist">
                <dl class="variablelist">
-                  <dt><span class="term"><a class="indexterm" name="d0e6954"></a>Regra de quebra</span></dt>
+                  <dt><span class="term"><a class="indexterm" name="d0e6995"></a>Regra de quebra</span></dt>
                   <dd>
                      <p>Divide o texto de orixe en segmentos. Por exemplo, «<span class="emphasis"><em>Tiña sentido? Non estaba seguro</em></span>.» debería dividirse en dous segmentos. Para que isto suceda, debería haber unha regra de quebra para o carácter «?» cando
                         lle sigan algún espazo e unha palabra en maiúscula. Para definir unha regra como una regra de quebra, marque a caixa de verificación
@@ -103,7 +103,7 @@
             </div>
             <div class="variablelist">
                <dl class="variablelist">
-                  <dt><span class="term"><a class="indexterm" name="d0e6971"></a>Regra de excepción</span></dt>
+                  <dt><span class="term"><a class="indexterm" name="d0e7012"></a>Regra de excepción</span></dt>
                   <dd>
                      <p>especifica que partes do texto NON deben ser divididas. A pesar do punto, <span class="emphasis"><em>«Sr. Dalloway»</em></span> non debería dividirse en dous segmentos, polo que debería estabelecerse unha regra de excepción para Sr (e para Srª, Dr,
                         Prof, etc.), seguidos dun punto Para definir unha regra como unha regra de excepción, deixe a caixa de verificación Quebra/Excepción
@@ -121,7 +121,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="rules.priority"></a>2.&nbsp;Prioridade das regras<a class="indexterm" name="d0e6990"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="rules.priority"></a>2.&nbsp;Prioridade das regras<a class="indexterm" name="d0e7031"></a></h2>
                   </div>
                </div>
             </div>
@@ -136,7 +136,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="creating.new.rule"></a>3.&nbsp;Crear unha nova regra<a class="indexterm" name="d0e7000"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="creating.new.rule"></a>3.&nbsp;Crear unha nova regra<a class="indexterm" name="d0e7041"></a></h2>
                   </div>
                </div>
             </div>
@@ -162,7 +162,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="few.simple.examples"></a>4.&nbsp;<a class="indexterm" name="d0e7034"></a>Algúns exemplos sinxelos
+                     <h2 class="title" style="clear: both"><a name="few.simple.examples"></a>4.&nbsp;<a class="indexterm" name="d0e7075"></a>Algúns exemplos sinxelos
                      </h2>
                   </div>
                </div>

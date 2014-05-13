@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 3.1.1
 ----------------------------------------------------------------------
-  11 Enhancements
+  12 Enhancements
    5 Bug fixes
    4 Localisation updates
 ----------------------------------------------------------------------
@@ -29,6 +29,9 @@
 
   - Enable sorting by column in the Spellchecker window (script)
   https://sourceforge.net/p/omegat/feature-requests/972/
+
+  Extend check_rules.groovy with ability to find untranslated and source=target segments
+  - https://sourceforge.net/p/omegat/feature-requests/993/
 
   Other enhancements:
 

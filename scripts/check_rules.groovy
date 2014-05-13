@@ -5,8 +5,8 @@
  * @author  Briac Pilpre
  * @author  Kos Ivantsov
  * @author  Didier Briel
- * @date    2014-03-23
- * @version 0.4
+ * @date    2014-05-13
+ * @version 0.5
  */
 
 import groovy.swing.SwingBuilder
@@ -39,52 +39,58 @@ console.println("Check rules.\n");
 // Prefs
 maxCharLengthAbove=240
 minCharLengthAbove=40
+QA_empty = 'empty_target'
 
 rules = [
-            
-            // Text unit verification
-            targetLeadingWhiteSpaces: { s, t ->  t =~ /^\s+/ },
-            targetTrailingWhiteSpaces: { s, t -> t =~ /\s+$/ },
-            // Segment verification
-            doubledWords: { s, t -> t =~ /(?i)(\b\w+)\s+\1\b/ },
-            doubledBlanks: { s, t -> t =~ /[\s\u00A0]{2}/ },
-           // Length
-           targetShorter: { s, t -> (t.length() / s.length() * 100) < minCharLengthAbove },
-           targetLonger: { s, t -> (t.length() / s.length() * 100) > maxCharLengthAbove },
-           // Punctuation
-           differentPunctuation: { s, t -> def s1 = s[-1], t1 = t[-1];
-                                  '.!?;:'.contains(s1) ? s1 != t1 : '.!?;:'.contains(t1)},
-           // Case of first letter in segment
-           differentStartCase: { s, t -> def s1 = s[0] =~ /^\p{Lu}/ ? 'up' : 'low'
-                                t1 = t[0] =~ /^\p{Lu}/ ? 'up' : 'low'
-                                s1 != t1 }
-        ];
+
+		// Text unit verification
+			targetLeadingWhiteSpaces: { s, t ->  t =~ /^\s+/ },
+			targetTrailingWhiteSpaces: { s, t -> t =~ /\s+$/ },
+		// Segment verification
+			doubledWords: { s, t -> t =~ /(?i)(\b\w+)\s+\1\b/ },
+			doubledBlanks: { s, t -> t =~ /[\s\u00A0]{2}/ },
+		// Length
+			targetShorter: { s, t -> if (t != QA_empty){(t.length() / s.length() * 100) < minCharLengthAbove} },
+			targetLonger: { s, t -> if (t != QA_empty){(t.length() / s.length() * 100) > maxCharLengthAbove} },
+		// Punctuation
+			differentPunctuation: { s, t -> if (t != QA_empty){def s1 = s[-1], t1 = t[-1];
+				'.!?;:'.contains(s1) ? s1 != t1 : '.!?;:'.contains(t1)}},
+		// Case of first letter in segment
+			differentStartCase: { s, t -> if (t != QA_empty){def s1 = s[0] =~ /^\p{Lu}/ ? 'up' : 'low'
+				t1 = t[0] =~ /^\p{Lu}/ ? 'up' : 'low'
+				s1 != t1 }},
+		// Source = Target
+			equalSourceTarget: { s, t -> t == s },
+		// Untranslated
+		untranslatedSegment: { s, t -> t == QA_empty }
+
+		];
 
 segment_count = 0;
 
 files = project.projectFiles;
 
 for (i in 0 ..< files.size()) {
-    fi = files[i];
-    
-    //console.println(fi.filePath);
-    for (j in 0 ..< fi.entries.size()) {
-        ste = fi.entries[j];
-        source = ste.getSrcText();
-        target = project.getTranslationInfo(ste) ? project.getTranslationInfo(ste).translation : null;
-        
-        if ( target == null || target.length() == 0) {
-            continue;
-        }
-        
-        rules.each { k, v ->
-            if (rules[k](source, target)) {
-                console.println(ste.entryNum() + "\t" + k + /*"\t[" + source + "]" + */"\t[" + target + "]");
-                data.add([ seg: ste.entryNum(), rule: k, source: source, target: target ]);	
-                segment_count++;
-            }
-        }
-    }
+	fi = files[i];
+
+	//console.println(fi.filePath);
+	for (j in 0 ..< fi.entries.size()) {
+		ste = fi.entries[j];
+		source = ste.getSrcText();
+		target = project.getTranslationInfo(ste) ? project.getTranslationInfo(ste).translation : null;
+
+		if ( target == null || target.length() == 0) {
+			target = QA_empty
+		}
+
+		rules.each { k, v ->
+			if (rules[k](source, target)) {
+				console.println(ste.entryNum() + "\t" + k + /*"\t[" + source + "]" + */"\t[" + target + "]");
+				data.add([ seg: ste.entryNum(), rule: k, source: source, target: target ]);	
+				segment_count++;
+			}
+		}
+	}
 }
 
 console.println("Segments found : " + segment_count);

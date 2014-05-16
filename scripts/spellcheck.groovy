@@ -35,7 +35,7 @@ defaultSortColumn = 0;
 defaultSortOrderDescending = false
 // if TRUE specified escaped characters in target will be replaced with space before tokenization
 replaceEscapedCharacters = false
-ESCAPED_CHARACTERS_REGEX = "\\[abfnrtv]"
+ESCAPED_CHARACTERS_REGEX = "\\\\[abfnrtv]"
 // if TRUE specified mnemonic chars will be removed from target before tokenization
 removeMnemonicChars = true
 MNEMONIC_CHARACTERS = "&~"

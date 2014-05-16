@@ -110,7 +110,7 @@ def cleanupTarget(String text) {
 
     // remove OmegaT-like tags which have a lower case letter before and after it
     if (removeOmegaTags) {
-        text = OMEGAT_TAG_REMOVE_PATTERN.matcher(text).replaceAll("\\1\\3");
+        text = OMEGAT_TAG_REMOVE_PATTERN.matcher(text).replaceAll("\$1\$3");
     }
     
     // remove OmegaT-like tags

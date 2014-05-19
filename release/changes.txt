@@ -2,7 +2,7 @@
  OmegaT 3.1.1 update 1
 ----------------------------------------------------------------------
    1 Enhancement
-   1 Bug fix
+   2 Bug fixes
    0 Localisation update
 ----------------------------------------------------------------------
 3.1.1 update 1 vs. 3.1.1
@@ -16,6 +16,9 @@
 
   - OmegaT HTML filter confuses <head> and <header> 
   https://sourceforge.net/p/omegat/bugs/680/
+
+  - Open xxx (e.g., Open glossary) scripts under Windows were not compatible 
+with Samba shares
 
 ----------------------------------------------------------------------
  OmegaT 3.1.1 (2014-05-13)

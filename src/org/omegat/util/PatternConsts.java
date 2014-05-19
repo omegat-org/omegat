@@ -84,8 +84,9 @@ public class PatternConsts {
             "<meta.*?content\\s*=\\s*[\"']\\s*text/html\\s*;\\s*charset\\s*=\\s*(\\S+?)[\"'].*?/?\\s*>",
             Pattern.CASE_INSENSITIVE);
 
-    /** compiled pattern to look for HTML file HEAD declaration */
-    public static final Pattern HTML_HEAD = Pattern.compile("<head.*?>", Pattern.CASE_INSENSITIVE);
+    /** Compiled pattern to look for HTML file HEAD declaration. 
+     Using [^e] instead of . prevents confusing &lt;head&gt; with &lt;header&gt; from HTML 5*/
+    public static final Pattern HTML_HEAD = Pattern.compile("<head[^e]*?>", Pattern.CASE_INSENSITIVE);
 
     /** compiled pattern to look for HTML file HTML declaration */
     public static final Pattern HTML_HTML = Pattern.compile("<html.*?>", Pattern.CASE_INSENSITIVE);

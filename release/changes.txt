@@ -52,8 +52,8 @@ with Samba shares
   - Enable sorting by column in the Spellchecker window (script)
   https://sourceforge.net/p/omegat/feature-requests/972/
 
-  Extend check_rules.groovy with ability to find untranslated and source=target segments
-  - https://sourceforge.net/p/omegat/feature-requests/993/
+  - Extend check_rules.groovy with ability to find untranslated and source=target segments
+  https://sourceforge.net/p/omegat/feature-requests/993/
 
   Other enhancements:
 

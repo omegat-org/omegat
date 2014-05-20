@@ -140,6 +140,34 @@ public class StaticUtils {
     }
 
     /**
+     * Builds a list of all occurrences of all protected parts.
+     */
+    public static List<TagOrder> buildAllTagList(String str, ProtectedPart[] protectedParts) {
+        List<TagOrder> tags = new ArrayList<TagOrder>();
+        if (protectedParts != null) {
+            for (ProtectedPart pp : protectedParts) {
+                int pos = -1;
+                do {
+                    if ((pos = str.indexOf(pp.getTextInSourceSegment(), pos + 1)) >= 0) {
+                        tags.add(new TagOrder(pos, pp.getTextInSourceSegment()));
+                    }
+                } while (pos >= 0);
+            }
+        }
+
+        if (tags.isEmpty()) {
+            return Collections.emptyList();
+        }
+        Collections.sort(tags, new Comparator<TagOrder>() {
+            @Override
+            public int compare(TagOrder o1, TagOrder o2) {
+                return o1.pos - o2.pos;
+            }
+        });
+        return tags;
+    }
+
+    /**
      * Builds a list of format tags within the supplied string. Format tags are
      * OmegaT style tags: &lt;xx02&gt; or &lt;/yy01&gt;.
      * @return a string containing the tags
@@ -169,9 +197,9 @@ public class StaticUtils {
         return e.getKeyCode() == code && e.getModifiers() == modifiers;
     }
 
-    static class TagOrder {
-        final int pos;
-        final String tag;
+    public static class TagOrder {
+        public final int pos;
+        public final String tag;
 
         public TagOrder(int pos, String tag) {
             this.pos = pos;

@@ -60,8 +60,8 @@ public class LineLengthLimitWriter extends Writer {
                 // the same eol char - flush
                 outLine();
             }
-            str.append(ch);
             if (ch == '\n' || ch == '\r') {
+                str.append(ch);
                 breakChars++;
                 if (breakChars > 1) {
                     // 2 eol chars - flush
@@ -72,6 +72,7 @@ public class LineLengthLimitWriter extends Writer {
                     // was eol char - flush
                     outLine();
                 }
+                str.append(ch);
             }
         }
     }

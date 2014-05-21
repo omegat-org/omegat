@@ -2,7 +2,7 @@
  OmegaT 3.1.1 update 1
 ----------------------------------------------------------------------
    1 Enhancement
-   2 Bug fixes
+   4 Bug fixes
    0 Localisation update
 ----------------------------------------------------------------------
 3.1.1 update 1 vs. 3.1.1
@@ -19,6 +19,12 @@
 
   - Open xxx (e.g., Open glossary) scripts under Windows were not compatible 
 with Samba shares
+
+  - In the text filter, the line length limit was not respected if
+the source document was using LF instead of CR+LF for end of lines
+
+  - In the XLIFF filter, protected tags (<mrk mtype="protected") were
+not converted back to real tags in the target document
 
 ----------------------------------------------------------------------
  OmegaT 3.1.1 (2014-05-13)

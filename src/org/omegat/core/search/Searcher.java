@@ -230,18 +230,23 @@ public class Searcher {
             return;
         }
 
+        String key = src + target;
         if (entryNum >= 0) {
-            if (!m_entrySet.contains(src + target) || expression.allResults) {
+            if (!m_entrySet.contains(key) || expression.allResults) {
                 // HP, duplicate entry prevention
                 // entries are referenced at offset 1 but stored at offset 0
                 addEntry(entryNum + 1, null, (entryNum + 1) + "> ", src, target,
                         note, srcMatches, targetMatches, noteMatches);
                 if (!expression.allResults) // If we filter results
-                    m_entrySet.add(src + target); // HP
+                    m_entrySet.add(key); // HP
             }
         } else {
-            addEntry(entryNum, intro, null, src, target, note,
-                    srcMatches, targetMatches, noteMatches);
+            if (!m_entrySet.contains(key) || expression.allResults) {
+                addEntry(entryNum, intro, null, src, target, note,
+                        srcMatches, targetMatches, noteMatches);
+                if (!expression.allResults) // If we filter results
+                    m_entrySet.add(key); // HP
+            }
         }
     }
 

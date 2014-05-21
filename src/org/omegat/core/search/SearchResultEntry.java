@@ -4,6 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2010 Antonio Vilei
+               2014 Piotr Kulik
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -43,16 +44,20 @@ public class SearchResultEntry {
      *            Source text of the corresponding entry within a project
      * @param target
      *            Target text of the corresponding entry within a project
+     * @param note
+     *            Note text of the corresponding entry within a project
      */
     public SearchResultEntry(int num, String preamble, String srcPrefix, String src, String target,
-            SearchMatch[] srcMatch, SearchMatch[] targetMatch) {
+            String note, SearchMatch[] srcMatch, SearchMatch[] targetMatch, SearchMatch[] noteMatch) {
         m_num = num;
         m_preamble = preamble;
         m_srcPrefix = srcPrefix;
         m_src = src;
         m_target = target;
+        m_note = note;
         m_srcMatch = srcMatch;
         m_targetMatch = targetMatch;
+        m_noteMatch = noteMatch;
     }
 
     /**
@@ -81,6 +86,11 @@ public class SearchResultEntry {
         return (m_target);
     }
 
+    /** Returns the note text of the corresponding entry within a project. */
+    public String getNote() {
+        return (m_note);
+    }
+
     public String getSrcPrefix() {
         return m_srcPrefix;
     }
@@ -93,11 +103,17 @@ public class SearchResultEntry {
         return m_targetMatch;
     }
 
+    public SearchMatch[] getNoteMatch() {
+        return m_noteMatch;
+    }
+
     private int m_num;
     private String m_preamble;
     private String m_srcPrefix;
     private String m_src;
     private String m_target;
+    private String m_note;
     private SearchMatch[] m_srcMatch;
     private SearchMatch[] m_targetMatch;
+    private SearchMatch[] m_noteMatch;
 }

@@ -7,6 +7,7 @@
                          Benjamin Siband, and Kim Bruning
                2007 Zoltan Bartko
                2008 Andrzej Sawula, Alex Buloichik
+               2014 Piotr Kulik
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -34,6 +35,8 @@ import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GraphicsEnvironment;
 import java.awt.Rectangle;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -44,6 +47,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
+import org.omegat.core.Core;
+import org.omegat.gui.editor.EditorController;
 import org.omegat.gui.filelist.ProjectFilesListController;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
@@ -67,9 +72,15 @@ import com.vlsolutions.swing.docking.event.DockableStateWillChangeListener;
  * @author Zoltan Bartko - bartkozoltan@bartkozoltan.com
  * @author Andrzej Sawula
  * @author Alex Buloichik (alex73mail@gmail.com)
+ * @author Piotr Kulik
  */
 public class MainWindowUI {
     public static String UI_LAYOUT_FILE = "uiLayout.xml";
+    
+    public enum STATUS_BAR_MODE {
+        DEFAULT,
+        PRECENTAGE,
+    };
 
     /**
      * Create main UI panels.
@@ -105,10 +116,46 @@ public class MainWindowUI {
 
         mainWindow.statusLabel.setFont(new Font("MS Sans Serif", 0, 11));
 
-        Mnemonics.setLocalizedText(mainWindow.progressLabel, OStrings.getString("MW_PROGRESS_DEFAULT"));
-        mainWindow.progressLabel.setToolTipText(OStrings.getString("MW_PROGRESS_TOOLTIP"));
+        final STATUS_BAR_MODE progressMode = STATUS_BAR_MODE.valueOf(
+                Preferences.getPreferenceEnumDefault(Preferences.SB_PROGRESS_MODE,
+                        STATUS_BAR_MODE.DEFAULT).name());
+
+        String statusText = "MW_PROGRESS_DEFAULT";
+        String tooltipText = "MW_PROGRESS_TOOLTIP";
+        if (progressMode == STATUS_BAR_MODE.PRECENTAGE) {
+            statusText = "MW_PROGRESS_DEFAULT_PRECENTAGE";
+            tooltipText = "MW_PROGRESS_TOOLTIP_PRECENTAGE";
+        }
+        Mnemonics.setLocalizedText(mainWindow.progressLabel, OStrings.getString(statusText));
+        mainWindow.progressLabel.setToolTipText(OStrings.getString(tooltipText));
+
         mainWindow.progressLabel.setBorder(BorderFactory.createLineBorder(Color.black));
         mainWindow.progressLabel.setHorizontalTextPosition(SwingConstants.CENTER);
+        mainWindow.progressLabel.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                STATUS_BAR_MODE progressMode = STATUS_BAR_MODE.valueOf(
+                        Preferences.getPreferenceEnumDefault(Preferences.SB_PROGRESS_MODE,
+                                STATUS_BAR_MODE.DEFAULT).name());
+                progressMode = STATUS_BAR_MODE.values()[(progressMode.ordinal() + 1) % STATUS_BAR_MODE.values().length];
+
+                Preferences.setPreference(Preferences.SB_PROGRESS_MODE, progressMode);
+
+                String statusText = "MW_PROGRESS_DEFAULT";
+                String tooltipText = "MW_PROGRESS_TOOLTIP";
+                if (progressMode == STATUS_BAR_MODE.PRECENTAGE) {
+                    statusText = "MW_PROGRESS_DEFAULT_PRECENTAGE";
+                    tooltipText = "MW_PROGRESS_TOOLTIP_PRECENTAGE";
+                }
+
+                if (Core.getProject().isProjectLoaded()) {
+                    ((EditorController)Core.getEditor()).showStat();
+                } else {
+                    Core.getMainWindow().showProgressMessage(OStrings.getString(statusText));
+                }
+                ((MainWindow)Core.getMainWindow()).setProgressToolTipText(OStrings.getString(tooltipText));
+            }
+        });
 
         Mnemonics.setLocalizedText(mainWindow.lengthLabel, OStrings.getString("MW_SEGMENT_LENGTH_DEFAULT"));
         mainWindow.lengthLabel.setToolTipText(OStrings.getString("MW_SEGMENT_LENGTH_TOOLTIP"));

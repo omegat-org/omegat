@@ -7,7 +7,7 @@
                2011 Martin Fleurke
                2012 Thomas Cordonnier
                2013 Yu Tang
-               2014 Aaron Madlon-Kay
+               2014 Aaron Madlon-Kay, Piotr Kulik
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -515,6 +515,13 @@ public class ProjectUICommands {
 
                 Core.getMainWindow().showStatusMessageRB("MW_STATUS_SAVED");
                 mainWindow.setCursor(oldCursor);
+
+                // fix - reset progress bar to defaults
+                Core.getMainWindow().showLengthMessage(OStrings.getString("MW_SEGMENT_LENGTH_DEFAULT"));
+                Core.getMainWindow().showProgressMessage(OStrings.getString(MainWindowUI.STATUS_BAR_MODE.valueOf(
+                        Preferences.getPreferenceEnumDefault(Preferences.SB_PROGRESS_MODE,
+                                MainWindowUI.STATUS_BAR_MODE.DEFAULT).name()) == MainWindowUI.STATUS_BAR_MODE.DEFAULT
+                        ? "MW_PROGRESS_DEFAULT" : "MW_PROGRESS_DEFAULT_PRECENTAGE"));
 
                 return null;
             }

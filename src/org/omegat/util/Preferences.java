@@ -11,6 +11,7 @@
                2012 Martin Fleurke, Wildrich Fourie, Didier Briel, Thomas Cordonnier,
                     Aaron Madlon-Kay
                2013 Aaron Madlon-Kay, Zoltan Bartko
+               2014 Piotr Kulik
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -346,6 +347,9 @@ public class Preferences {
     public static final String AC_CHARTABLE_USE_CUSTOM_CHARS = "ac_chartable_use_custom_chars";
     public static final String AC_CHARTABLE_CUSTOM_CHAR_STRING = "ac_chartable_custom_char_string";
     public static final String AC_CHARTABLE_UNIQUE_CUSTOM_CHARS = "ac_chartable_unique_custom_chars";
+
+    /** status bar progress mode */
+    public static final String SB_PROGRESS_MODE = "sb_progress_mode";
 
     /** Private constructor, because this file is singleton */
     static {

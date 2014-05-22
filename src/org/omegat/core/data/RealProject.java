@@ -1350,7 +1350,8 @@ public class RealProject implements IProject {
          */
         int diff = prevTrEntry.translation == null ? 0 : -1;
         diff += trans.translation == null ? 0 : +1;
-        hotStat.numberofTranslatedSegments += diff;
+        hotStat.numberofTranslatedSegments = Math.max(0, 
+                Math.min(hotStat.numberOfUniqueSegments, hotStat.numberofTranslatedSegments + diff));
     }
 
     @Override

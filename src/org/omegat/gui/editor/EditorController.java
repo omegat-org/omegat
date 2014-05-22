@@ -11,7 +11,7 @@
                2011 Alex Buloichik, Martin Fleurke, Didier Briel
                2012 Guido Leenders, Didier Briel
                2013 Zoltan Bartko, Alex Buloichik, Aaron Madlon-Kay
-               2014 Aaron Madlon-Kay
+               2014 Aaron Madlon-Kay, Piotr Kulik
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -92,6 +92,7 @@ import org.omegat.util.gui.UIThreadsUtil;
 import com.vlsolutions.swing.docking.DockingDesktop;
 import com.vlsolutions.swing.docking.event.DockableSelectionEvent;
 import com.vlsolutions.swing.docking.event.DockableSelectionListener;
+import org.omegat.gui.main.MainWindowUI;
 
 /**
  * Class for control all editor operations.
@@ -111,6 +112,7 @@ import com.vlsolutions.swing.docking.event.DockableSelectionListener;
  * @author Martin Fleurke
  * @author Guido Leenders
  * @Author Aaron Madlon-Kay
+ * @author Piotr Kulik
  */
 public class EditorController implements IEditor {
 
@@ -714,23 +716,63 @@ public class EditorController implements IEditor {
     /**
      * Calculate statistic for file, request statistic for project and display in status bar.
      */
-    private void showStat() {
+    public void showStat() {
         IProject project = Core.getProject();
         IProject.FileInfo fi = project.getProjectFiles().get(displayedFileIndex);
         int translatedInFile = 0;
+        int translatedUniqueInFile = 0;
+        int uniqueInFile = 0;
+        boolean isUnique;
         for (SourceTextEntry ste : fi.entries) {
+            isUnique = ste.getDuplicate() != SourceTextEntry.DUPLICATE.NEXT;
+            if (isUnique) {
+                uniqueInFile++;
+            }
             if (project.getTranslationInfo(ste).isTranslated()) {
                 translatedInFile++;
+                if (isUnique) {
+                    translatedUniqueInFile++;
+                }
             }
         }
 
         StatisticsInfo stat = project.getStatistics();
+        StringBuilder pMsg = new StringBuilder(1024).append(" ");
+        final MainWindowUI.STATUS_BAR_MODE progressMode = MainWindowUI.STATUS_BAR_MODE.valueOf(
+                Preferences.getPreferenceEnumDefault(Preferences.SB_PROGRESS_MODE,
+                        MainWindowUI.STATUS_BAR_MODE.DEFAULT).name());
+        
+        if (progressMode == MainWindowUI.STATUS_BAR_MODE.DEFAULT) {
+            pMsg.append(translatedInFile).append("/").append(fi.entries.size()).append(" (")
+                    .append(stat.numberofTranslatedSegments).append("/").append(stat.numberOfUniqueSegments)
+                    .append(", ").append(stat.numberOfSegmentsTotal).append(") ");
+        } else {
+            /*
+             * Precentage mode based on idea by Yu Tang
+             * http://dirtysexyquery.blogspot.tw/2013/03/omegat-custom-progress-format.html
+             */
+            java.text.NumberFormat nfPer = java.text.NumberFormat.getPercentInstance();
+            nfPer.setRoundingMode(java.math.RoundingMode.DOWN);
+            nfPer.setMaximumFractionDigits(1);
+            if (translatedUniqueInFile == 0) {
+                pMsg.append("0%");
+            } else {
+                pMsg.append(nfPer.format((double)translatedUniqueInFile / uniqueInFile));
+            }
+            pMsg.append(" (").append(uniqueInFile - translatedUniqueInFile)
+                    .append(OStrings.getString("MW_PROGRESS_LEFT_LABEL")).append(") / ");
 
-        String pMsg = " " + Integer.toString(translatedInFile) + "/" + Integer.toString(fi.entries.size())
-                + " (" + Integer.toString(stat.numberofTranslatedSegments) + "/"
-                + Integer.toString(stat.numberOfUniqueSegments) + ", "
-                + Integer.toString(stat.numberOfSegmentsTotal) + ") ";
-        Core.getMainWindow().showProgressMessage(pMsg);
+            if (stat.numberofTranslatedSegments == 0) {
+                pMsg.append("0%");
+            } else {
+                pMsg.append(nfPer.format((double)stat.numberofTranslatedSegments / stat.numberOfUniqueSegments));
+            }
+            pMsg.append(" (").append(stat.numberOfUniqueSegments - stat.numberofTranslatedSegments)
+                    .append(OStrings.getString("MW_PROGRESS_LEFT_LABEL")).append(") ")
+                    .append(", ").append(stat.numberOfSegmentsTotal).append(" ");
+        }
+
+        Core.getMainWindow().showProgressMessage(pMsg.toString());
     }
 
     /**

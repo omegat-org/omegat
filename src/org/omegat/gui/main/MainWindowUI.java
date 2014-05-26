@@ -79,7 +79,7 @@ public class MainWindowUI {
     
     public enum STATUS_BAR_MODE {
         DEFAULT,
-        PRECENTAGE,
+        PERCENTAGE,
     };
 
     /**
@@ -122,9 +122,9 @@ public class MainWindowUI {
 
         String statusText = "MW_PROGRESS_DEFAULT";
         String tooltipText = "MW_PROGRESS_TOOLTIP";
-        if (progressMode == STATUS_BAR_MODE.PRECENTAGE) {
-            statusText = "MW_PROGRESS_DEFAULT_PRECENTAGE";
-            tooltipText = "MW_PROGRESS_TOOLTIP_PRECENTAGE";
+        if (progressMode == STATUS_BAR_MODE.PERCENTAGE) {
+            statusText = "MW_PROGRESS_DEFAULT_PERCENTAGE";
+            tooltipText = "MW_PROGRESS_TOOLTIP_PERCENTAGE";
         }
         Mnemonics.setLocalizedText(mainWindow.progressLabel, OStrings.getString(statusText));
         mainWindow.progressLabel.setToolTipText(OStrings.getString(tooltipText));
@@ -143,9 +143,9 @@ public class MainWindowUI {
 
                 String statusText = "MW_PROGRESS_DEFAULT";
                 String tooltipText = "MW_PROGRESS_TOOLTIP";
-                if (progressMode == STATUS_BAR_MODE.PRECENTAGE) {
-                    statusText = "MW_PROGRESS_DEFAULT_PRECENTAGE";
-                    tooltipText = "MW_PROGRESS_TOOLTIP_PRECENTAGE";
+                if (progressMode == STATUS_BAR_MODE.PERCENTAGE) {
+                    statusText = "MW_PROGRESS_DEFAULT_PERCENTAGE";
+                    tooltipText = "MW_PROGRESS_TOOLTIP_PERCENTAGE";
                 }
 
                 if (Core.getProject().isProjectLoaded()) {

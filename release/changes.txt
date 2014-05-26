@@ -125,7 +125,7 @@ removing the filter or pressing Cancel could be lost
 ----------------------------------------------------------------------
  OmegaT 3.1.0 (2014-04-14)
 ----------------------------------------------------------------------
-  34 Enhancements
+  35 Enhancements
    7 Bug fixes
    2 Localisation updates
 ----------------------------------------------------------------------
@@ -177,6 +177,9 @@ removing the filter or pressing Cancel could be lost
 
   - Limit line length of target text files
   https://sourceforge.net/p/omegat/feature-requests/985/
+
+  - Shortcut key to register source equals target for a specific segment
+  https://sourceforge.net/p/omegat/feature-requests/906/
 
   Other enhancements:
   

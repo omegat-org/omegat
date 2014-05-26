@@ -1,4 +1,18 @@
 ----------------------------------------------------------------------
+ OmegaT 3.1.1 update 2
+----------------------------------------------------------------------
+   1 Enhancement
+   0 Bug fix
+   0 Localisation update
+----------------------------------------------------------------------
+3.1.1 update 2 vs. 3.1.1 update 1
+
+  Implemented requests:
+
+  - Include notes from orphan segments and external TMXs in search
+  https://sourceforge.net/p/omegat/feature-requests/965/
+
+----------------------------------------------------------------------
  OmegaT 3.1.1 update 1 (2014-05-21)
 ----------------------------------------------------------------------
    1 Enhancement

@@ -12,7 +12,8 @@
   - Include notes from orphan segments and external TMXs in search
   https://sourceforge.net/p/omegat/feature-requests/965/
 
-  - Display all results in search window affects also entries outside project       https://sourceforge.net/p/omegat/feature-requests/936/
+  - Display all results in search window affects also entries outside project
+  https://sourceforge.net/p/omegat/feature-requests/936/
 
   - Dual mode progress bar 
   http://sourceforge.net/p/omegat/feature-requests/959

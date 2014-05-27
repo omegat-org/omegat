@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 3.1.1 update 2
 ----------------------------------------------------------------------
-   3 Enhancements
+   4 Enhancements
    0 Bug fix
    0 Localisation update
 ----------------------------------------------------------------------
@@ -17,6 +17,8 @@
 
   - Dual mode progress bar 
   http://sourceforge.net/p/omegat/feature-requests/959
+
+  - When --no-team is used, Project > Dowload team project is disabled
 
 ----------------------------------------------------------------------
  OmegaT 3.1.1 update 1 (2014-05-21)

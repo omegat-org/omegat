@@ -349,7 +349,7 @@ public class MainWindowMenu implements ActionListener, MenuListener, IMainMenu {
         viewMarkBidiCheckBoxMenuItem.setIcon(getViewMenuMarkBGIcon(Styles.COLOR_BIDIMARKERS));
         viewModificationInfoMenu.setIcon(getViewMenuMarkBGIcon(null));
         viewMarkAutoPopulatedCheckBoxMenuItem
-                .setIcon(getViewMenuMarkBGIcon(Styles.COLOR_MARK_COMES_FROM_TM_XICE));
+                .setIcon(getViewMenuMarkBGIcon(Styles.COLOR_MARK_COMES_FROM_TM_XAUTO));
 
         toolsMenu.add(toolsValidateTagsMenuItem = createMenuItem("TF_MENU_TOOLS_VALIDATE"));
         toolsMenu.add(toolsSingleValidateTagsMenuItem = createMenuItem("TF_MENU_TOOLS_SINGLE_VALIDATE"));

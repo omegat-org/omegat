@@ -2,7 +2,7 @@
  OmegaT 3.1.1 update 2
 ----------------------------------------------------------------------
    5 Enhancements
-   0 Bug fix
+   1 Bug fix
    0 Localisation update
 ----------------------------------------------------------------------
 3.1.1 update 2 vs. 3.1.1 update 1
@@ -23,6 +23,12 @@
   - When --no-team is used, Project > Dowload team project is disabled
 
   - Make "auto" colors more distinctive
+
+  Bug fixes:
+
+  - The color used in the View menu to identify "auto" colors was
+COLOR_MARK_COMES_FROM_TM_XICE instead of COLOR_MARK_COMES_FROM_TM_XAUTO
+used by most users
 
 ----------------------------------------------------------------------
  OmegaT 3.1.1 update 1 (2014-05-21)

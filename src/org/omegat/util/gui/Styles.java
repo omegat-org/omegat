@@ -52,9 +52,9 @@ public final class Styles {
     public static final Color COLOR_WHITESPACE = new Color(128, 128, 128);
     public static final Color COLOR_BIDIMARKERS = new Color(200, 0, 0);
     public static final Color COLOR_MARK_COMES_FROM_TM = new Color(250,128,114); // Salmon red
-    public static final Color COLOR_MARK_COMES_FROM_TM_XICE = new Color(255, 153, 0);
-    public static final Color COLOR_MARK_COMES_FROM_TM_X100PC = new Color(255, 187, 84);
-    public static final Color COLOR_MARK_COMES_FROM_TM_XAUTO = new Color(255, 213, 150);
+    public static final Color COLOR_MARK_COMES_FROM_TM_XICE = new Color(175, 118, 223); // Purple 
+    public static final Color COLOR_MARK_COMES_FROM_TM_X100PC = new Color(255, 148, 8); // Dark Orange 
+    public static final Color COLOR_MARK_COMES_FROM_TM_XAUTO = new Color(255, 213, 150); // Orange
     public static final Color COLOR_REPLACE = Color.blue;
 
     /**

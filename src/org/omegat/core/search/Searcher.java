@@ -129,6 +129,8 @@ public class Searcher {
         m_entrySet = null; // HP
 
         m_entrySet = new HashSet<String>(); // HP
+        
+        m_tmxSet = new HashSet<String>();
 
         // create a list of matchers
         m_matchers = new ArrayList<Matcher>();
@@ -231,6 +233,7 @@ public class Searcher {
         }
 
         String key = src + target;
+        // entries from project memory
         if (entryNum >= 0) {
             if (!m_entrySet.contains(key) || expression.allResults) {
                 // HP, duplicate entry prevention
@@ -241,11 +244,12 @@ public class Searcher {
                     m_entrySet.add(key); // HP
             }
         } else {
-            if (!m_entrySet.contains(key) || expression.allResults) {
+        // entries outside project memory
+            if (!m_tmxSet.contains(key) || expression.allResults) {
                 addEntry(entryNum, intro, null, src, target, note,
                         srcMatches, targetMatches, noteMatches);
                 if (!expression.allResults) // If we filter results
-                    m_entrySet.add(key); // HP
+                    m_tmxSet.add(key); // HP
             }
         }
     }
@@ -639,6 +643,7 @@ public class Searcher {
 
     private volatile List<SearchResultEntry> m_searchResults;
     private IProject m_project;
+    private Set<String> m_tmxSet; // keeps track of previous results not from project memory
     private Set<String> m_entrySet; // HP: keeps track of previous results, to
                                     // avoid duplicate entries
     private List<Matcher> m_matchers; // HP: contains a matcher for each search

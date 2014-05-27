@@ -603,6 +603,9 @@ public class MainWindowMenu implements ActionListener, MenuListener, IMainMenu {
         for (JMenuItem item : itemsToSwitchOn) {
             item.setEnabled(isProjectOpened);
         }
+        if (Core.getParams().containsKey("no-team")) {
+        	projectTeamNewMenuItem.setEnabled(false);
+        }
     }
 
     public JMenu getMachineTranslationMenu() {

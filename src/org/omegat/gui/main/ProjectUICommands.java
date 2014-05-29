@@ -521,7 +521,7 @@ public class ProjectUICommands {
                 Core.getMainWindow().showProgressMessage(OStrings.getString(MainWindowUI.STATUS_BAR_MODE.valueOf(
                         Preferences.getPreferenceEnumDefault(Preferences.SB_PROGRESS_MODE,
                                 MainWindowUI.STATUS_BAR_MODE.DEFAULT).name()) == MainWindowUI.STATUS_BAR_MODE.DEFAULT
-                        ? "MW_PROGRESS_DEFAULT" : "MW_PROGRESS_DEFAULT_PRECENTAGE"));
+                        ? "MW_PROGRESS_DEFAULT" : "MW_PROGRESS_DEFAULT_PERCENTAGE"));
 
                 return null;
             }

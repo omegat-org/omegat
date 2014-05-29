@@ -748,7 +748,7 @@ public class EditorController implements IEditor {
                     .append(", ").append(stat.numberOfSegmentsTotal).append(") ");
         } else {
             /*
-             * Precentage mode based on idea by Yu Tang
+             * Percentage mode based on idea by Yu Tang
              * http://dirtysexyquery.blogspot.tw/2013/03/omegat-custom-progress-format.html
              */
             java.text.NumberFormat nfPer = java.text.NumberFormat.getPercentInstance();

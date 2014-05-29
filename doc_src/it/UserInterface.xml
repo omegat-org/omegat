@@ -6,7 +6,7 @@
   <section id="user.interface.items">
     <title>Finestra principale di OmegaT, altre finestre di dialogo</title>
 
-    <para>La finstra principale di OmegaT contiene il menu principale, la barra di stato e vari pannelli. Sono disponibili svariate altre finestre, utilizzate per modificare le impostazioni del progetto OmegaT. Le informazioni di seguito riportate riepilogano il loro uso e richiamo:</para>
+    <para>La finestra principale di OmegaT contiene il menù principale, la barra di stato e vari pannelli. Sono disponibili svariate altre finestre, utilizzate per modificare le impostazioni del progetto OmegaT. Le informazioni di seguito riportate riepilogano il loro uso e richiamo:</para>
 
     <table colsep="0" rowsep="0">
       <title>Finestra principale di OmegaT<indexterm class="singular">
@@ -95,7 +95,7 @@
             <entry><guimenuitem>Finestra delle statistiche</guimenuitem></entry>
 
             <entry><para>Usato per aprire la finestra con le statistiche del progetto, visualizzarlo utilizzando il comando <menuchoice> <guimenu><indexterm class="singular">
-                    <primary>Menu Strumenti</primary> <secondary>statistiche</secondary>
+                    <primary>Menù Strumenti</primary> <secondary>statistiche</secondary>
                   </indexterm>Strumenti</guimenu> <guimenuitem>Statistiche.</guimenuitem> </menuchoice></para></entry>
           </row>
 
@@ -103,7 +103,7 @@
             <entry><guimenuitem>Finestra statistiche delle concordanze</guimenuitem></entry>
 
             <entry><para>Usata per visualizzare le statistiche delle concordanze del progetto, per aprirlo selezionare <menuchoice> <guimenu><indexterm class="singular">
-                    <primary>Menu Strumenti</primary> <secondary>Statistiche delle concordanze</secondary>
+                    <primary>Menù Strumenti</primary> <secondary>Statistiche delle concordanze</secondary>
                   </indexterm>Strumenti</guimenu> <guimenuitem>Statistiche delle concordanze</guimenuitem> </menuchoice>.</para></entry>
           </row>
         </tbody>
@@ -123,7 +123,7 @@
         <tbody>
           <row>
             <entry><guimenuitem>Proprietà del progetto<indexterm class="singular">
-                <primary>Menu Progetto</primary> <secondary>Proprietà</secondary>
+                <primary>Menù Progetto</primary> <secondary>Proprietà</secondary>
               </indexterm></guimenuitem> <indexterm class="singular">
                 <primary>Scorciatoie</primary> <secondary>Proprietà del progetto - Ctrl+E</secondary>
               </indexterm></entry>
@@ -143,7 +143,7 @@
             <entry><guimenuitem>Filtri dei file<indexterm class="singular">
                 <primary>Impostazioni del progetto</primary> <secondary>Filtri dei file</secondary>
               </indexterm><indexterm class="singular">
-                <primary>Menu Opzioni</primary> <secondary>Filtri dei file</secondary>
+                <primary>Menù Opzioni</primary> <secondary>Filtri dei file</secondary>
               </indexterm></guimenuitem></entry>
 
             <entry>Usata per regolare la gestione dei formati di file supportati (si accede da <menuchoice> <guimenu>Opzioni</guimenu> <guimenuitem>Filtri dei file...</guimenuitem> </menuchoice>, si chiude con <keycap>Esc</keycap>)</entry>
@@ -153,7 +153,7 @@
             <entry><guimenuitem>Segmentazione<indexterm class="singular">
                 <primary>Impostazioni del progetto</primary> <secondary>Segmentazione</secondary>
               </indexterm><indexterm class="singular">
-                <primary>Menu Opzioni</primary> <secondary>Segmentazione</secondary>
+                <primary>Menù Opzioni</primary> <secondary>Segmentazione</secondary>
               </indexterm></guimenuitem></entry>
 
             <entry>Usata per modificare il modo in cui il testo è segmentato in frasi (si accede da <menuchoice> <guimenu>Opzioni</guimenu> <guimenuitem>Segmentazione</guimenuitem> </menuchoice>, si chiude con <keycap>Esc</keycap>)</entry>
@@ -161,7 +161,7 @@
 
           <row>
             <entry><guimenuitem>Comportamento di modifica<indexterm class="singular">
-                <primary>Menu Opzioni</primary> <secondary>Comportamento di modifica</secondary>
+                <primary>Menù Opzioni</primary> <secondary>Comportamento di modifica</secondary>
               </indexterm><indexterm class="singular">
                 <primary>Impostazioni del progetto</primary> <secondary>Comportamento di modifica</secondary>
               </indexterm></guimenuitem></entry>
@@ -339,7 +339,7 @@
 
       <para>A seconda dell'impostazione del comportamento di modifica, il campo di modifica del segmento da tradurre può risultare vuoto oppure contenere il testo di partenza o la traduzione della stringa più simile a quella da tradurre. Quando ci si sposta a un altro segmento, la traduzione verrà confermata e memorizzata. Se si desidera che la traduzione sia uguale al testo originario, sarà sufficiente svuotare il campo di modifica, rimuovendo tutto il testo (selezionare il contenuto con <keycap>Ctrl+A</keycap> ed eliminarlo con <keycap>Canc</keycap>). OmegaT è in grado di memorizzare traduzioni che risultano uguali al testo di partenza. Si tratta di una funzione particolarmente utile quando i documenti contengono marchi di fabbrica, nomi o altri nomi propri, oppure parti che devono rimanere nella loro lingua originaria e non richiedono, quindi, traduzione. Per ulteriori informazioni si veda <emphasis>Modifica della traduzione</emphasis>.</para>
 
-      <para>Il clic col pulsante destro del mouse, all'interno della finestra dell'Editor, apre un menu contestuale in cui è possibile scegliere le funzioni <emphasis role="bold">Taglia, Copia, Incolla</emphasis> (ossia le stesse funzioni relative alla combinazione di tasti <keycombo> <keycap>Ctrl</keycap> <keycap>X</keycap> </keycombo>, <keycombo> <keycap>Ctrl</keycap> <keycap>C</keycap> </keycombo> e <keycombo> <keycap>Ctrl</keycap> <keycap>V</keycap> </keycombo>) <emphasis role="bold">Vai al segmento</emphasis>.</para>
+      <para>Il clic col pulsante destro del mouse, all'interno della finestra dell'Editor, apre un menù contestuale in cui è possibile scegliere le funzioni <emphasis role="bold">Taglia, Copia, Incolla</emphasis> (ossia le stesse funzioni relative alla combinazione di tasti <keycombo> <keycap>Ctrl</keycap> <keycap>X</keycap> </keycombo>, <keycombo> <keycap>Ctrl</keycap> <keycap>C</keycap> </keycombo> e <keycombo> <keycap>Ctrl</keycap> <keycap>V</keycap> </keycombo>) <emphasis role="bold">Vai al segmento</emphasis>.</para>
     </section>
 
     <section id="match.viewer">
@@ -603,9 +603,9 @@
     </section>
 
     <section>
-      <title id="main.menu">Menu principale</title>
+      <title id="main.menu">Menù principale</title>
 
-      <para>Il menu principale permette l'accesso a tutte le funzioni di <application>OmegaT</application>. Per una descrizione completa di tutte le voci di menu e dei corrispondenti comandi si faccia riferimento all'appendice <emphasis>Menu principale</emphasis>. Le funzioni più frequentemente utilizzate sono attivabili anche con scorciatoie da tastiera; pertanto, dopo averle imparate, non sarà più necessario accedere alla barra dei menu per attivarne la funzione corrispondente. Per ulteriori dettagli, consultare il capitolo <link linkend="chapter.menu">Menu e scorciatoie da tastiera</link>.</para>
+      <para>Il menù principale permette l'accesso a tutte le funzioni di <application>OmegaT</application>. Per una descrizione completa di tutte le voci di menù e dei corrispondenti comandi si faccia riferimento all'appendice <emphasis>Menù principale</emphasis>. Le funzioni più frequentemente utilizzate sono attivabili anche con scorciatoie da tastiera; pertanto, dopo averle imparate, non sarà più necessario accedere alla barra dei menù per attivarne la funzione corrispondente. Per ulteriori dettagli, consultare il capitolo <link linkend="chapter.menu">Menù e scorciatoie da tastiera</link>.</para>
     </section>
 
     <section id="status.bar">
@@ -702,7 +702,7 @@
 
     <section>
       <title>Statistiche<indexterm class="singular">
-          <primary>Statistiche</primary> <seealso>Menu Strumenti</seealso>
+          <primary>Statistiche</primary> <seealso>Menù Strumenti</seealso>
         </indexterm></title>
 
       <para>La finestra delle statistiche - cui si può accedere tramite <emphasis role="bold">Strumenti &gt; Statistiche </emphasis>- mostra le statistiche del progetto OmegaT attivo, sia sotto forma di riepilogo, sia nel dettaglio per ciascun file da tradurre. Le stesse statistiche sono disponibili nel file <filename>project_stats.txt</filename> (nella sottocartella <filename>omegat</filename>), in un formato separato da tabulazioni, pronto per essere caricato in un foglio di calcolo, in base alle proprie esigenze. Per copiare e incollare il suo contenuto, è possibile usare la sequenza di comandi <guimenuitem>Ctrl+A <indexterm class="singular">
@@ -728,10 +728,10 @@
 
     <section>
       <title>Statistiche delle concordanze<indexterm class="singular">
-          <primary>Statistiche delle concordanze</primary> <seealso>Menu Strumenti</seealso>
+          <primary>Statistiche delle concordanze</primary> <seealso>Menù Strumenti</seealso>
         </indexterm></title>
 
-      <para>Alle statistiche delle concordanze si accede dal menu <guimenuitem>Strumenti &gt; Statistiche delle concordanze.</guimenuitem> Il calcolo usa il processore in modo elevato e può occupare del tempo, per tale motivo durante l'operazione viene mostrata una barra di avanzamento. Per ciò che concerne le categorie utilizzate per l'operazione, viene lo standard de facto di classificazione delle concordanze, ossia: ripetizioni, concordanza esatta, 95%-100%, 85%-94%, 75%-84%, 50%-74% e nessuna concordanza. Questa informazione viene calcolata sia per i segmenti, sia per le parole e i caratteri (con o senza spazi). Si noti che possono verificarsi piccole differenze tra i conteggi eseguiti da OmegaT e quelli forniti da altri strumenti CAT.<figure>
+      <para>Alle statistiche delle concordanze si accede dal menù <guimenuitem>Strumenti &gt; Statistiche delle concordanze.</guimenuitem> Il calcolo usa il processore in modo elevato e può occupare del tempo, per tale motivo durante l'operazione viene mostrata una barra di avanzamento. Per ciò che concerne le categorie utilizzate per l'operazione, viene lo standard de facto di classificazione delle concordanze, ossia: ripetizioni, concordanza esatta, 95%-100%, 85%-94%, 75%-84%, 50%-74% e nessuna concordanza. Questa informazione viene calcolata sia per i segmenti, sia per le parole e i caratteri (con o senza spazi). Si noti che possono verificarsi piccole differenze tra i conteggi eseguiti da OmegaT e quelli forniti da altri strumenti CAT.<figure>
           <title>Statistiche delle concordanze</title>
 
           <mediaobject>
@@ -762,14 +762,14 @@
 
     <section>
       <title>Navigatore della Guida<indexterm class="singular">
-          <primary>Menu Aiuto</primary> <secondary>Navigatore della Guida</secondary>
+          <primary>Menù Aiuto</primary> <secondary>Navigatore della Guida</secondary>
         </indexterm></title>
 
       <para>Il sistema della guida (che contiene questo manuale) può essere richiamato premendo <keycap><indexterm class="singular">
           <primary>Scorciatoie</primary> <secondary>Aiuto - F1</secondary>
         </indexterm>F1</keycap> oppure navigando in <guimenuitem><indexterm class="singular">
-          <primary>Menu Aiuto</primary> <secondary>Manuale dell'utente...</secondary>
-        </indexterm>Aiuto → Manuale dell'utente...</guimenuitem>, all'interno del menu principale. La finestra che viene aperta contiene il manuale e due pulsanti: Indietro e Sommario. Il manuale dell'Utente è un documento HTML contenente i collegamenti ai vari capitoli. Quando si fa clic su un collegamento, proprio come si farebbe all'interno di una comune pagina Web, si accede direttamente alla prima pagina del capitolo.</para>
+          <primary>Menù Aiuto</primary> <secondary>Manuale dell'utente...</secondary>
+        </indexterm>Aiuto → Manuale dell'utente...</guimenuitem>, all'interno del menù principale. La finestra che viene aperta contiene il manuale e due pulsanti: Indietro e Sommario. Il manuale dell'Utente è un documento HTML contenente i collegamenti ai vari capitoli. Quando si fa clic su un collegamento, proprio come si farebbe all'interno di una comune pagina Web, si accede direttamente alla prima pagina del capitolo.</para>
 
       <para>Il manuale dell'utente si trova nella sottocartella &quot;docs&quot; della cartella di installazione di OmegaT, pertanto si potrà, per esempio, consultare la documentazione in inglese aprendo nel proprio navigatore il file <filename>docs/en/index.html </filename>. Aprire in tal modo il manuale dell'utente significa anche poter aprire i collegamenti esterni, dato che il navigatore interno integrato non è in grado di gestire i collegamenti per Internet.</para>
     </section>

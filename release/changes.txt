@@ -3,7 +3,7 @@
 ----------------------------------------------------------------------
    5 Enhancements
    1 Bug fix
-   0 Localisation update
+   1 Localisation update
 ----------------------------------------------------------------------
 3.1.1 update 2 vs. 3.1.1 update 1
 
@@ -29,6 +29,10 @@
   - The color used in the View menu to identify "auto" colors was
 COLOR_MARK_COMES_FROM_TM_XICE instead of COLOR_MARK_COMES_FROM_TM_XAUTO
 used by most users
+
+  Localisation updates:
+
+  - Italian localisation updated to 3.1.0 (UI, Documentation)
 
 ----------------------------------------------------------------------
  OmegaT 3.1.1 update 1 (2014-05-21)

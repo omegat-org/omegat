@@ -75,6 +75,10 @@ public class SearchResultEntry {
     public String getPreamble() {
         return (m_preamble);
     }
+    
+    public void setPreamble(String preamble) {
+        m_preamble = preamble;
+    }
 
     /** Returns the source text of the corresponding entry within a project. */
     public String getSrcText() {

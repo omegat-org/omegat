@@ -35,14 +35,12 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.HashSet;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
-
 import org.omegat.core.Core;
 import org.omegat.core.data.EntryKey;
 import org.omegat.core.data.ExternalTMX;
@@ -107,6 +105,26 @@ public class Searcher {
      * Returns list of search results
      */
     public List<SearchResultEntry> getSearchResults() {
+        if (m_preprocessResults) {
+            // function can be called multiple times after search
+            // results preprocess should occur only one time
+            m_preprocessResults = false;
+            if (!expression.allResults) {
+                for (SearchResultEntry entry : m_searchResults) {
+                    String key = entry.getSrcText() + entry.getTranslation();
+                    if (entry.getEntryNum() < 0) {
+                        if (m_tmxMap.containsKey(key) && (m_tmxMap.get(key) > 0)) {
+                            entry.setPreamble(entry.getPreamble() + " "
+                                    + StaticUtils.format(OStrings.getString("SW_NR_OF_MORE"),
+                                            new Object[]{m_tmxMap.get(key)}));
+                        }
+                    } else if (m_entryMap.containsKey(key) && (m_entryMap.get(key) > 0)) {
+                        entry.setPreamble(StaticUtils.format(OStrings.getString("SW_NR_OF_MORE"),
+                                new Object[]{m_entryMap.get(key)}));
+                    }
+                }
+            }
+        }
         return m_searchResults;
     }
 
@@ -125,12 +143,14 @@ public class Searcher {
 
         m_searchResults = new ArrayList<SearchResultEntry>();
         m_numFinds = 0;
+        // ensures that results will be preprocessed only one time
+        m_preprocessResults = true;
 
-        m_entrySet = null; // HP
+        m_entryMap = null; // HP
 
-        m_entrySet = new HashSet<String>(); // HP
+        m_entryMap = new HashMap<String, Integer>(); // HP
         
-        m_tmxSet = new HashSet<String>();
+        m_tmxMap = new HashMap<String, Integer>();
 
         // create a list of matchers
         m_matchers = new ArrayList<Matcher>();
@@ -235,21 +255,27 @@ public class Searcher {
         String key = src + target;
         // entries from project memory
         if (entryNum >= 0) {
-            if (!m_entrySet.contains(key) || expression.allResults) {
+            if (!m_entryMap.containsKey(key) || expression.allResults) {
                 // HP, duplicate entry prevention
                 // entries are referenced at offset 1 but stored at offset 0
                 addEntry(entryNum + 1, null, (entryNum + 1) + "> ", src, target,
                         note, srcMatches, targetMatches, noteMatches);
                 if (!expression.allResults) // If we filter results
-                    m_entrySet.add(key); // HP
+                    m_entryMap.put(key, 0); // HP
+            } else if (!expression.allResults) {
+                m_entryMap.put(key, m_entryMap.get(key) + 1);
             }
         } else {
         // entries outside project memory
-            if (!m_tmxSet.contains(key) || expression.allResults) {
+            if (!m_tmxMap.containsKey(key) || expression.allResults) {
                 addEntry(entryNum, intro, null, src, target, note,
                         srcMatches, targetMatches, noteMatches);
-                if (!expression.allResults) // If we filter results
-                    m_tmxSet.add(key); // HP
+                if (!expression.allResults)
+                    // first occurence
+                    m_tmxMap.put(key, 0);
+            } else if (!expression.allResults) {
+                // next occurence
+                m_tmxMap.put(key, m_tmxMap.get(key) + 1);
             }
         }
     }
@@ -642,9 +668,10 @@ public class Searcher {
     }
 
     private volatile List<SearchResultEntry> m_searchResults;
+    private boolean m_preprocessResults;
     private IProject m_project;
-    private Set<String> m_tmxSet; // keeps track of previous results not from project memory
-    private Set<String> m_entrySet; // HP: keeps track of previous results, to
+    private Map<String, Integer> m_tmxMap; // keeps track of previous results not from project memory
+    private Map<String, Integer> m_entryMap; // HP: keeps track of previous results, to
                                     // avoid duplicate entries
     private List<Matcher> m_matchers; // HP: contains a matcher for each search
                                       // string

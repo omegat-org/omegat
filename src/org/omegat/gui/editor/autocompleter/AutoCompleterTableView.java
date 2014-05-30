@@ -30,6 +30,8 @@ import java.awt.Component;
 import java.awt.Point;
 import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.List;
 
 import javax.swing.JTable;
@@ -68,6 +70,19 @@ public abstract class AutoCompleterTableView extends AbstractAutoCompleterView {
             table.setCellSelectionEnabled(true);
             table.setFocusable(false);
             table.setTableHeader(null);
+            table.addMouseListener(new MouseAdapter() {
+            	@Override
+            	public void mouseClicked(MouseEvent e) {
+            		if (e.getClickCount() == 2) {
+            			Point p = e.getPoint();
+            			int r = table.rowAtPoint(p);
+            			int c = table.columnAtPoint(p);
+            			if (table.getSelectedRow() == r && table.getSelectedColumn() == c) {
+            				completer.doSelection();
+            			}
+            		}
+            	}
+			});
         }
         return table;
     }

@@ -139,9 +139,7 @@ public class AutoCompleter {
                 return true;
             
             if ((StaticUtils.isKey(e, KeyEvent.VK_ENTER, 0))) {
-                popup.setVisible(false); 
-                acceptedListItem(getSelectedValue()); 
-                setVisible(false);
+                doSelection();
                 return true;
             }
             
@@ -175,6 +173,12 @@ public class AutoCompleter {
         
         // otherwise
         return false;
+    }
+    
+    public void doSelection() {
+    	popup.setVisible(false); 
+        acceptedListItem(getSelectedValue()); 
+        setVisible(false);
     }
 
     /**

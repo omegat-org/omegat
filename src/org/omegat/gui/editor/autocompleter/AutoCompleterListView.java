@@ -26,7 +26,10 @@
 package org.omegat.gui.editor.autocompleter;
 
 import java.awt.Component;
+import java.awt.Point;
 import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.List;
 
 import javax.swing.DefaultListCellRenderer;
@@ -68,6 +71,18 @@ public abstract class AutoCompleterListView extends AbstractAutoCompleterView {
             list.setFixedCellHeight(12);
             renderer = new CellRenderer(this);
             list.setCellRenderer(renderer);
+            list.addMouseListener(new MouseAdapter() {
+            	@Override
+            	public void mouseClicked(MouseEvent e) {
+            		if (e.getClickCount() == 2) {
+            			Point p = e.getPoint();
+            			int i = list.locationToIndex(p);
+            			if (list.getSelectedIndex() == i && list.getCellBounds(i, i).contains(p)) {
+            				completer.doSelection();
+            			}
+            		}
+            	}
+			});
         }
         return list;
     }

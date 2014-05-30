@@ -70,6 +70,9 @@ public class EntryKey implements Comparable<EntryKey> {
     }
 
     public boolean equals(Object obj) {
+    	if (!(obj instanceof EntryKey)) {
+    		return false;
+    	}
         EntryKey o = (EntryKey) obj;
         return StringUtil.equalsWithNulls(sourceText, o.sourceText) && // source
                 StringUtil.equalsWithNulls(file, o.file) && // file

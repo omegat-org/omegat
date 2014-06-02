@@ -112,15 +112,18 @@ public class Searcher {
             if (!expression.allResults) {
                 for (SearchResultEntry entry : m_searchResults) {
                     String key = entry.getSrcText() + entry.getTranslation();
-                    if (entry.getEntryNum() < 0) {
+                    if (entry.getEntryNum() == ENTRY_ORIGIN_TRANSLATION_MEMORY) {
                         if (m_tmxMap.containsKey(key) && (m_tmxMap.get(key) > 0)) {
                             entry.setPreamble(entry.getPreamble() + " "
                                     + StaticUtils.format(OStrings.getString("SW_NR_OF_MORE"),
                                             new Object[]{m_tmxMap.get(key)}));
                         }
-                    } else if (m_entryMap.containsKey(key) && (m_entryMap.get(key) > 0)) {
-                        entry.setPreamble(StaticUtils.format(OStrings.getString("SW_NR_OF_MORE"),
-                                new Object[]{m_entryMap.get(key)}));
+                    } else if (entry.getEntryNum() > ENTRY_ORIGIN_PROJECT_MEMORY) {
+                        // at this stage each PM entry num is increased by 1
+                        if (m_entryMap.containsKey(key) && (m_entryMap.get(key) > 0)) {
+                            entry.setPreamble(StaticUtils.format(OStrings.getString("SW_NR_OF_MORE"),
+                                    new Object[]{m_entryMap.get(key)}));
+                        }
                     }
                 }
             }
@@ -254,7 +257,7 @@ public class Searcher {
 
         String key = src + target;
         // entries from project memory
-        if (entryNum >= 0) {
+        if (entryNum >= ENTRY_ORIGIN_PROJECT_MEMORY) {
             if (!m_entryMap.containsKey(key) || expression.allResults) {
                 // HP, duplicate entry prevention
                 // entries are referenced at offset 1 but stored at offset 0
@@ -265,8 +268,8 @@ public class Searcher {
             } else if (!expression.allResults) {
                 m_entryMap.put(key, m_entryMap.get(key) + 1);
             }
-        } else {
-        // entries outside project memory
+        } else if (entryNum == ENTRY_ORIGIN_TRANSLATION_MEMORY) {
+        // entries from translation memory
             if (!m_tmxMap.containsKey(key) || expression.allResults) {
                 addEntry(entryNum, intro, null, src, target, note,
                         srcMatches, targetMatches, noteMatches);
@@ -277,6 +280,10 @@ public class Searcher {
                 // next occurence
                 m_tmxMap.put(key, m_tmxMap.get(key) + 1);
             }
+        } else {
+        // all other entries
+            addEntry(entryNum, intro, null, src, target, note,
+                    srcMatches, targetMatches, noteMatches);
         }
     }
 
@@ -312,7 +319,7 @@ public class Searcher {
                     }
                     checkStop.checkInterrupted();
                     if (m_project.isOrphaned(source)) {
-                        checkEntry(en.source, en.translation, en.note, null, en, -1, file);
+                        checkEntry(en.source, en.translation, en.note, null, en, ENTRY_ORIGIN_ORPHAN, file);
                     }
                 }
             });
@@ -327,7 +334,7 @@ public class Searcher {
                     }
                     checkStop.checkInterrupted();
                     if (m_project.isOrphaned(source)) {
-                        checkEntry(en.source, en.translation, en.note, null, en, -1, file);
+                        checkEntry(en.source, en.translation, en.note, null, en, ENTRY_ORIGIN_ORPHAN, file);
                     }
                 }
             });
@@ -358,7 +365,7 @@ public class Searcher {
             String intro = OStrings.getString("SW_GLOSSARY_RESULT");
             List<GlossaryEntry> entries = Core.getGlossaryManager().getGlossaryEntries(m_searchExpression.text);
             for (GlossaryEntry en : entries) {
-                checkEntry(en.getSrcText(), en.getLocText(), null, null, null, -1, intro);
+                checkEntry(en.getSrcText(), en.getLocText(), null, null, null, ENTRY_ORIGIN_GLOSSARY, intro);
                 // stop searching if the max. nr of hits has been reached
                 if (m_numFinds >= expression.numberOfResults) {
                     return;
@@ -389,7 +396,7 @@ public class Searcher {
             //for alternative translations:
             //- it is not feasible to get the sourcetextentry that matches the tm.source, so we cannot get the entryNum and real translation
             //- although the 'trnalsation' is used as 'source', we search it as translation, else we cannot show to which real source it belongs
-            checkEntry(tm.source, tm.translation, tm.note, null, null, -1, tmxID);
+            checkEntry(tm.source, tm.translation, tm.note, null, null, ENTRY_ORIGIN_TRANSLATION_MEMORY, tmxID);
 
             checkStop.checkInterrupted();
         }
@@ -407,7 +414,7 @@ public class Searcher {
             //for alternative translations:
             //- it is not feasible to get the sourcetextentry that matches the tm.source, so we cannot get the entryNum and real translation
             //- although the 'trnalsation' is used as 'source', we search it as translation, else we cannot show to which real source it belongs
-            checkEntry(tm.source, tm.translation, tm.note, null, null, -1, tmxID);
+            checkEntry(tm.source, tm.translation, tm.note, null, null, ENTRY_ORIGIN_ALTERNATIVE, tmxID);
 
             checkStop.checkInterrupted();
         }
@@ -659,7 +666,7 @@ public class Searcher {
         if (searchString(seg)) {
             SearchMatch[] matches = foundMatches.toArray(new SearchMatch[foundMatches.size()]);
             // found a match - do something about it
-            foundString(-1, filename, seg, null, null, matches, null, null);
+            foundString(ENTRY_ORIGIN_TEXT, filename, seg, null, null, matches, null, null);
         }
     }
 
@@ -684,4 +691,13 @@ public class Searcher {
     private final SearchExpression expression;
     private LongProcessThread checkStop;
     private final List<SearchMatch> foundMatches = new ArrayList<SearchMatch>();
+    
+    // PM entries 0+
+    // Only PM and TM are counted (separately) for '+X more' statistics
+    private final int ENTRY_ORIGIN_PROJECT_MEMORY = 0;
+    private final int ENTRY_ORIGIN_TRANSLATION_MEMORY = -1;
+    private final int ENTRY_ORIGIN_ORPHAN = -2;
+    private final int ENTRY_ORIGIN_ALTERNATIVE = -3;
+    private final int ENTRY_ORIGIN_GLOSSARY = -4;
+    private final int ENTRY_ORIGIN_TEXT = -5;
 }

@@ -51,19 +51,23 @@ public class XtagFilter extends AbstractFilter {
 
     protected static final String EOL = "\r\n";
 
+    @Override
     public String getFileFormatName() {
         return OStrings.getString("XTAGFILTER_FILTER_NAME");
     }
 
+    @Override
     public Instance[] getDefaultInstances() {
         return new Instance[] { new Instance("*.tag", OConsts.UTF16LE, OConsts.UTF16LE),
                 new Instance("*.xtg", OConsts.UTF16LE, OConsts.UTF16LE), };
     }
 
+    @Override
     public boolean isSourceEncodingVariable() {
         return true;
     }
 
+    @Override
     public boolean isTargetEncodingVariable() {
         return true;
     }
@@ -73,6 +77,7 @@ public class XtagFilter extends AbstractFilter {
         return true;
     }
 
+    @Override
     public void processFile(BufferedReader in, BufferedWriter out, FilterContext fc) throws IOException, TranslationException {
         // BOM (byte order mark) bugfix
         in.mark(1);

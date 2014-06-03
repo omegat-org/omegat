@@ -67,7 +67,7 @@ public abstract class TranslateEntry implements ITranslateCallback {
     }
 
     /**
-     * Set current pass number, i.e. 1 or 2.
+     * {@inheritDoc}
      */
     @Override
     public void setPass(int pass) {
@@ -87,12 +87,7 @@ public abstract class TranslateEntry implements ITranslateCallback {
     }
     
     /**
-     * Get translation for specified entry to write output file.
-     * 
-     * @param entry
-     *            entry ID
-     * @param source
-     *            source text
+     * {@inheritDoc}
      */
     @Override
     public String getTranslation(final String id, final String origSource, final String path) {
@@ -169,13 +164,7 @@ public abstract class TranslateEntry implements ITranslateCallback {
     }
 
     /**
-     * Get translation for specified entry to write output file.
-     * Old call without path, for compatibility
-     *
-     * @param entry
-     *            entry ID
-     * @param source
-     *            source text
+     * {@inheritDoc}
      */
     @Override
     public String getTranslation(final String id, final String origSource) {

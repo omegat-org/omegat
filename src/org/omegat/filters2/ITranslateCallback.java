@@ -32,10 +32,11 @@ package org.omegat.filters2;
  */
 public interface ITranslateCallback {
     /**
-     * Set current pass number, i.e. 1 or 2.
+     * Set current pass number
      * 
      * Any filter called in one-pass mode by default. But if it require second pass for support prev/next
      * segments, it can set flag 'needSecondPass'.
+     * @param pass The current path number, i.e., 1 or 2
      */
     void setPass(int pass);
 
@@ -60,6 +61,11 @@ public interface ITranslateCallback {
 
     /**
      * Old call without path, for compatibility
+     * @param id
+     *              ID in source file, or null if ID not supported by format
+     * @param source
+     *              source entry text
+     * @return translation or null if translation not exist
      */
     String getTranslation(String id, String source);
 

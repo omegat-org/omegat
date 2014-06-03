@@ -88,6 +88,7 @@ public abstract class ParseEntry implements IParseCallback {
     /**
      * {@inheritDoc}
      */
+    @Override
     public void linkPrevNextSegments() {
         for (int i = 0; i < parseQueue.size(); i++) {
             ParseEntryQueueItem item = parseQueue.get(i);
@@ -127,9 +128,10 @@ public abstract class ParseEntry implements IParseCallback {
      *            path of entry infile
      * @param filter
      *            filter which produces entry
-     * @param shortcutDetails
-     *            shortcuts details
+     * @param protectedParts
+     *            protected parts  
      */
+    @Override
     public void addEntry(String id, String source, String translation, boolean isFuzzy, String comment, String path,
             IFilter filter, List<ProtectedPart> protectedParts) {
         if (StringUtil.isEmpty(source)) {
@@ -199,6 +201,7 @@ public abstract class ParseEntry implements IParseCallback {
      * @param filter
      *            filter which produces entry
      */
+    @Override
     public void addEntry(String id, String source, String translation, boolean isFuzzy, String comment,
             IFilter filter) {
         addEntry(id, source, translation, isFuzzy, comment, null, filter, null);

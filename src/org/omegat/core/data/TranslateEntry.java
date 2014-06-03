@@ -69,6 +69,7 @@ public abstract class TranslateEntry implements ITranslateCallback {
     /**
      * Set current pass number, i.e. 1 or 2.
      */
+    @Override
     public void setPass(int pass) {
         this.pass = pass;
         currentlyProcessedSegment = 0;
@@ -176,6 +177,7 @@ public abstract class TranslateEntry implements ITranslateCallback {
      * @param source
      *            source text
      */
+    @Override
     public String getTranslation(final String id, final String origSource) {
         return getTranslation(id, origSource, null);
     }
@@ -183,6 +185,7 @@ public abstract class TranslateEntry implements ITranslateCallback {
     /**
      * {@inheritDoc}
      */
+    @Override
     public void linkPrevNextSegments() {
         for (int i = 0; i < translateQueue.size(); i++) {
             TranslateEntryQueueItem item = translateQueue.get(i);

@@ -1,152 +1,407 @@
-/* :name=QA - Check Rules     :description=The rules are based on the Checkmate Quality check 
- * 
+/* 
  * QA script
  *
  * @author  Briac Pilpre
+ * @author  Piotr Kulik
  * @author  Kos Ivantsov
  * @author  Didier Briel
- * @date    2014-05-13
+ * @date	2014-06-03
  * @version 0.5
  */
 
+// if FALSE only current file will be checked
+checkWholeProject = false
+// 0 - segment number, 1 - rule, 2 - source, 3 - target
+defaultSortColumn = 1
+// if TRUE column will be sorted in reverse
+defaultSortOrderDescending = false
+
 import groovy.swing.SwingBuilder
-import java.awt.Component
+import groovy.beans.Bindable
 import javax.swing.JButton
 import javax.swing.JTable
 import javax.swing.table.*
 import javax.swing.event.*
+import javax.swing.RowSorter.SortKey
+import javax.swing.RowSorter
+import javax.swing.SortOrder
+import static javax.swing.JOptionPane.*
+import java.awt.Component
+import java.awt.Point
+import java.awt.Rectangle
+import java.awt.Dimension
 import java.awt.event.*
-import javax.swing.JOptionPane.*
-import org.omegat.util.Platform.*
 import java.awt.BorderLayout as BL
+import java.awt.GridBagConstraints
+
+class QACheckData {
+	@Bindable data = []
+}
+public class IntegerComparator implements Comparator<Integer> {
+	public int compare(Integer o1, Integer o2) {
+		return o1 - o2
+	}
+}
+
+checkLeadSpace = true
+nameLeadSpace = res.getString("nameLeadSpace")
+checkTrailSpace = true
+nameTrailSpace = res.getString("nameTrailSpace")
+checkDoubleSpace = true
+nameDoubleSpace = res.getString("nameDoubleSpace")
+checkDoubleWords = true
+nameDoubleWords = res.getString("nameDoubleWords")
+checkTargetShorter = true
+nameTargetShorter = res.getString("nameTargetShorter")
+checkTargetLonger = true
+nameTargetLonger = res.getString("nameTargetLonger")
+checkDiffPunctuation = true
+nameDiffPunctuation = res.getString("nameDiffPunctuation")
+checkDiffStartCase = true
+nameDiffStartCase = res.getString("nameDiffStartCase")
+checkEqualSourceTarget = true
+nameEqualSourceTarget = res.getString("nameEqualSourceTarget")
+checkUntranslated = true
+nameUntranslated = res.getString("nameUntranslated")
+checkTagNumber = true
+nameTagNumber = res.getString("nameTagNumber")
+checkTagSpace = true
+nameTagSpace = res.getString("nameTagSpace")
+checkTagOrder = true
+nameTagOrder = res.getString("nameTagOrder")
+checkNumErr = true
+nameNumErr = res.getString("nameNumErr")
+
+
 /*
  The rules are based on the Checkmate Quality check 
  http://www.opentag.com/okapi/wiki/index.php?title=CheckMate_-_Quality_Check_Configuration
  Each rule is a block of groovy code, 'source' and 'target' are the two parameters of this block
  */
+ruleset = [
+
+		// Spaces verification
+			(nameLeadSpace): { s, t ->  t =~ /^\s+/ },
+			(nameTrailSpace): { s, t -> t =~ /\s+$/ },
+			(nameDoubleSpace): { s, t -> t =~ /[\s\u00A0]{2}/ },
+		// Segment verification
+			(nameDoubleWords): { s, t -> t =~ /(?i)(\b\w+)\s+\1\b/ },
+		// Length
+			(nameTargetShorter): { s, t -> if (t != QA_empty){(t.length() / s.length() * 100) < minCharLengthAbove}
+				},
+			(nameTargetLonger): { s, t -> if (t != QA_empty){(t.length() / s.length() * 100) > maxCharLengthAbove}
+				},
+		// Punctuation
+			(nameDiffPunctuation): { s, t -> if (t != QA_empty){def s1 = s[-1], t1 = t[-1];
+				'.!?;:'.contains(s1) ? s1 != t1 : '.!?;:'.contains(t1)}
+				},
+		// Case of first letter in segment
+			(nameDiffStartCase): { s, t -> if (t != QA_empty){def s1 = s[0] =~ /^\p{Lu}/ ? 'up' : 'low'
+				t1 = t[0] =~ /^\p{Lu}/ ? 'up' : 'low'
+				s1 != t1 }
+				},
+		// Source = Target
+			(nameEqualSourceTarget): { s, t -> t == s },
+		// Untranslated
+			(nameUntranslated): { s, t -> t == QA_empty },
+		// Tag Errors
+			(nameTagNumber): { s, t -> if (t != QA_empty){def tt = t.findAll(/<\/?[a-z]+[0-9]* ?\/?>/), 
+				st = s.findAll(/<\/?[a-z]+[0-9]* ?\/?>/)
+				st.size() != tt.size() }
+				},
+			(nameTagSpace): { s, t -> if (t != QA_empty){def tt = t.findAll(/\s?<\/?[a-z]+[0-9]* ?\/?>\s?/),
+				st = s.findAll(/\s?<\/?[a-z]+[0-9]* ?\/?>\s?/)
+					if (st.size() == tt.size())
+					st.sort() != tt.sort()
+					}
+				},
+			(nameTagOrder): { s, t -> if (t != QA_empty){def tt = t.findAll(/<\/?[a-z]+[0-9]* ?\/?>/),
+				st = s.findAll(/<\/?[a-z]+[0-9]* ?\/?>/)
+					if (st.size() == tt.size())
+					st != tt
+					}
+				},
+			(nameNumErr): {s, t -> if (t != QA_empty){def tt = t.replaceAll(/<\/?[a-z]+[0-9]* ?\/?>/, ''),
+				st = s.replaceAll(/<\/?[a-z]+[0-9]* ?\/?>/, ''),
+				tn = tt.findAll(/\d+/), sn = st.findAll(/\d+/)
+					sn != tn
+					}
+				}
+
+			]
+
+def segment_count
 
 def prop = project.projectProperties
 if (!prop) {
-  final def title = 'Check rules'
-  final def msg   = 'Please try again after you open a project.'
-  showMessageDialog null, msg, title, INFORMATION_MESSAGE
-  return
+	final def title = res.getString("title")
+	final def msg   = res.getString("noProjMsg")
+	console.clear()
+	console.println(title + "\n${"-"*15}\n" + msg)
+	showMessageDialog null, msg, title, INFORMATION_MESSAGE
+	return
 }
 
-data=[]
-console.println("Check rules.\n");
-
+def QAcheck() {
+	rules = ruleset.clone()
 // Prefs
-maxCharLengthAbove=240
-minCharLengthAbove=40
-QA_empty = 'empty_target'
+	maxCharLengthAbove=240
+	minCharLengthAbove=40
+	QA_empty = ''
+// Run with preferred rules
+	if (!checkLeadSpace) {
+		rules.remove(nameLeadSpace)
+	}
+	if (!checkTrailSpace) {
+		rules.remove(nameTrailSpace)
+	}
+	if (!checkDoubleSpace) {
+		rules.remove(nameDoubleSpace)
+	}
+	if (!checkDoubleWords) {
+		rules.remove(nameDoubleWords)
+	}
+	if (!checkTargetShorter) {
+		rules.remove(nameTargetShorter)
+	}
+	if (!checkTargetLonger) {
+		rules.remove(nameTargetLonger)
+	}
+	if (!checkDiffPunctuation) {
+		rules.remove(nameDiffPunctuation)
+	}
+	if (!checkDiffStartCase) {
+		rules.remove(nameDiffStartCase)
+	}
+	if (!checkEqualSourceTarget) {
+		rules.remove(nameEqualSourceTarget)
+	}
+	if (!checkUntranslated) {
+		rules.remove(nameUntranslated)
+	}
+	if (!checkTagNumber) {
+		rules.remove(nameTagNumber)
+	}
+	if (!checkTagSpace) {
+		rules.remove(nameTagSpace)
+	}
+	if (!checkTagOrder) {
+		rules.remove(nameTagOrder)
+	}
+	if (!checkNumErr) {
+		rules.remove(nameNumErr)
+	}
 
-rules = [
 
-		// Text unit verification
-			targetLeadingWhiteSpaces: { s, t ->  t =~ /^\s+/ },
-			targetTrailingWhiteSpaces: { s, t -> t =~ /\s+$/ },
-		// Segment verification
-			doubledWords: { s, t -> t =~ /(?i)(\b\w+)\s+\1\b/ },
-			doubledBlanks: { s, t -> t =~ /[\s\u00A0]{2}/ },
-		// Length
-			targetShorter: { s, t -> if (t != QA_empty){(t.length() / s.length() * 100) < minCharLengthAbove} },
-			targetLonger: { s, t -> if (t != QA_empty){(t.length() / s.length() * 100) > maxCharLengthAbove} },
-		// Punctuation
-			differentPunctuation: { s, t -> if (t != QA_empty){def s1 = s[-1], t1 = t[-1];
-				'.!?;:'.contains(s1) ? s1 != t1 : '.!?;:'.contains(t1)}},
-		// Case of first letter in segment
-			differentStartCase: { s, t -> if (t != QA_empty){def s1 = s[0] =~ /^\p{Lu}/ ? 'up' : 'low'
-				t1 = t[0] =~ /^\p{Lu}/ ? 'up' : 'low'
-				s1 != t1 }},
-		// Source = Target
-			equalSourceTarget: { s, t -> t == s },
-		// Untranslated
-		untranslatedSegment: { s, t -> t == QA_empty }
 
-		];
+	model = new QACheckData()
+	segment_count = 0
 
-segment_count = 0;
+	console.clear()
+	console.println(res.getString("title")+"\n${'-'*15}");
+	files = project.projectFiles
 
-files = project.projectFiles;
 
-for (i in 0 ..< files.size()) {
-	fi = files[i];
+	if (!checkWholeProject) {
+		files = project.projectFiles.subList(editor.@displayedFileIndex, editor.@displayedFileIndex + 1);
+	}
 
-	//console.println(fi.filePath);
-	for (j in 0 ..< fi.entries.size()) {
-		ste = fi.entries[j];
-		source = ste.getSrcText();
-		target = project.getTranslationInfo(ste) ? project.getTranslationInfo(ste).translation : null;
+	for (i in 0 ..< files.size()) {
+		fi = files[i]
 
-		if ( target == null || target.length() == 0) {
-			target = QA_empty
-		}
+		for (j in 0 ..< fi.entries.size()) {
+			ste = fi.entries[j];
+			source = ste.getSrcText();
+			target = project.getTranslationInfo(ste) ? project.getTranslationInfo(ste).translation : null;
 
-		rules.each { k, v ->
-			if (rules[k](source, target)) {
-				console.println(ste.entryNum() + "\t" + k + /*"\t[" + source + "]" + */"\t[" + target + "]");
-				data.add([ seg: ste.entryNum(), rule: k, source: source, target: target ]);	
-				segment_count++;
+			if ( target == null || target.length() == 0) {
+				target = QA_empty
+			}
+
+
+			rules.each { k, v ->
+				if (rules[k](source, target)) {
+					console.println(ste.entryNum() + "\t" + k + /*"\t[" + source + "]" + */"\t[" + target + "]");
+					model.data.add([ seg: ste.entryNum(), rule: k, source: source, target: target ]);
+					segment_count++;
+				}
 			}
 		}
 	}
+	console.print("${'-'*15}\n" + res.getString("errors_count") + segment_count)
 }
-
-console.println("Segments found : " + segment_count);
-
 
 swing = new SwingBuilder()
 
-frame = swing.frame(title:'Check rules', preferredSize: [800, 500]) {
-    scrollPane {
-        table() {
-            tableModel(list:data) {
-                propertyColumn(editable: true, header:'Segment', propertyName:'seg', minWidth: 80, maxWidth: 80, preferredWidth: 80,
-                        cellEditor: new TableCellEditor()
-                        {
-                            public void cancelCellEditing()                             {}
-                            public boolean stopCellEditing()                            {   return false;   }
-                            public Object getCellEditorValue()                          {   return value;   }
-                            public boolean isCellEditable(EventObject anEvent)          {   return true;    }
-                            public boolean shouldSelectCell(EventObject anEvent)        {   return true;   }
-                            public void addCellEditorListener(CellEditorListener l)     {}
-                            public void removeCellEditorListener(CellEditorListener l)  {}
-                            public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row, int column)
-                            {
-                                println("value: " + value);
-                                org.omegat.core.Core.getEditor().gotoEntry(value);
-                            }
-                            
-                        },
-                        cellRenderer: new TableCellRenderer()
-                        {
-                            public Component getTableCellRendererComponent(JTable table,
-                            Object value,
-                            boolean isSelected,
-                            boolean hasFocus,
-                            int row,
-                            int column)
-                            {
-                                def btn = new JButton()
-                                btn.setText(value.toString())
-                                return btn
-                                
-                            }
-                        }
-                        )                
-                propertyColumn(editable: false, header:'Rule',propertyName:'rule', minWidth: 120, maxWidth: 200, preferredWidth: 150)
-                propertyColumn(editable: false, header:'Source',propertyName:'source', minWidth: 150, preferredWidth: 350)
-                propertyColumn(editable: false, header:'Target',propertyName:'target', minWidth: 150, preferredWidth: 350)
-            }
-        }
-        
-    }
-     panel(constraints: BL.SOUTH){
-            button('Quit', actionPerformed:{
-                frame.visible = false
-            })
+def interfejs(locationxy = new Point(0, 0), width = 900, height = 550, scrollpos = 0, sortColumn = defaultSortColumn, sortOrderDescending = defaultSortOrderDescending) {
+	def frame
+	frame = swing.frame(title: res.getString("title") + ". " + res.getString("errors_count") + segment_count, minimumSize: [width, height], pack: true, show: true) {
+		def tab
+		def skroll
+		skroll = scrollPane {
+			tab = table() {
+				tableModel(list: model.data) {
+					propertyColumn(editable: true, header:res.getString("segment"), propertyName:'seg', minWidth: 80, maxWidth: 80, preferredWidth: 80,
+						cellEditor: new TableCellEditor()
+						{
+							public void cancelCellEditing()                             {   }
+							public boolean stopCellEditing()                            {   return false;   }
+							public Object getCellEditorValue()                          {   return value;   }
+							public boolean isCellEditable(EventObject anEvent)          {   return true;	}
+							public boolean shouldSelectCell(EventObject anEvent)        {   return true;   }
+							public void addCellEditorListener(CellEditorListener l)     {}
+							public void removeCellEditorListener(CellEditorListener l)  {}
+							public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row, int column)
+							{
+								org.omegat.core.Core.getEditor().gotoEntry(value);
+							}
+						},
+						cellRenderer: new TableCellRenderer()
+						{
+							public Component getTableCellRendererComponent(JTable table,
+								Object value,
+								boolean isSelected,
+								boolean hasFocus,
+								int row,
+								int column)
+							{
+								def btn = new JButton()
+								btn.setText(value.toString())
+								return btn
+							}
+						}
+					)
+					propertyColumn(editable: false, header:res.getString("rule"), propertyName:'rule', minWidth: 120, preferredWidth: 180)
+					propertyColumn(editable: false, header:res.getString("target"), propertyName:'target', minWidth: 200, preferredWidth: 320)
+					propertyColumn(editable: false, header:res.getString("source"), propertyName:'source', minWidth: 200, preferredWidth: 320)
+				}
+			}
+			tab.getTableHeader().setReorderingAllowed(false);
 		}
+		rowSorter = new TableRowSorter(tab.model);
+		rowSorter.setComparator(0, new IntegerComparator());
+		sortKeyz = new ArrayList<RowSorter.SortKey>();
+		sortKeyz.add(new RowSorter.SortKey(sortColumn, sortOrderDescending ? SortOrder.DESCENDING : SortOrder.ASCENDING));
+		rowSorter.setSortKeys(sortKeyz);
+		tab.setRowSorter(rowSorter);
+
+		skroll.getVerticalScrollBar().setValue(scrollpos);
+		tab.scrollRectToVisible(new Rectangle (0, scrollpos, 1, scrollpos + 1));
+		skroll.repaint();
+		panel(constraints:BL.SOUTH) {
+			gridBagLayout();
+			checkBox(text:res.getString("checkWholeProject"),
+				selected: checkWholeProject,
+				actionPerformed: {
+					checkWholeProject = !checkWholeProject;
+				},
+				constraints:gbc(gridx:0, gridy:0, weightx: 0.5, fill:GridBagConstraints.HORIZONTAL, insets:[0,5,0,0]))
+
+
+			checkBox(text:res.getString("checkLeadSpace"),
+				selected: checkLeadSpace,
+				actionPerformed: {
+					checkLeadSpace = !checkLeadSpace;
+				},
+				constraints:gbc(gridx:1, gridy:0, weightx: 0.5, fill:GridBagConstraints.HORIZONTAL, insets:[0,5,0,0]))
+			checkBox(text:res.getString("checkTrailSpace"),
+				selected: checkTrailSpace,
+				actionPerformed: {
+					checkTrailSpace = !checkTrailSpace;
+				},
+				constraints:gbc(gridx:1, gridy:1, weightx: 0.5, fill:GridBagConstraints.HORIZONTAL, insets:[0,5,0,0]))
+			checkBox(text:res.getString("checkDoubleSpace"),
+				selected: checkDoubleSpace,
+				actionPerformed: {
+					checkDoubleSpace = !checkDoubleSpace;
+				},
+				constraints:gbc(gridx:1, gridy:2, weightx: 0.5, fill:GridBagConstraints.HORIZONTAL, insets:[0,5,0,0]))
+			checkBox(text:res.getString("checkDoubleWords"),
+				selected: checkDoubleWords,
+				actionPerformed: {
+					checkDoubleWords = !checkDoubleWords;
+				},
+				constraints:gbc(gridx:1, gridy:3, weightx: 0.5, fill:GridBagConstraints.HORIZONTAL, insets:[0,5,0,0]))
+			checkBox(text:res.getString("checkDiffStartCase"),
+				selected: checkDiffStartCase,
+				actionPerformed: {
+					checkDiffStartCase = !checkDiffStartCase;
+				},
+				constraints:gbc(gridx:1, gridy:4, weightx: 0.5, fill:GridBagConstraints.HORIZONTAL, insets:[0,5,0,0]))
+			checkBox(text:res.getString("checkDiffPunctuation"),
+				selected: checkDiffPunctuation,
+				actionPerformed: {
+					checkDiffPunctuation = !checkDiffPunctuation;
+				},
+				constraints:gbc(gridx:1, gridy:5, weightx: 0.5, fill:GridBagConstraints.HORIZONTAL, insets:[0,5,0,0]))
+			checkBox(text:res.getString("checkNumErr"),
+				selected: checkNumErr,
+				actionPerformed: {
+					checkNumErr = !checkNumErr;
+				},
+				constraints:gbc(gridx:1, gridy:6, weightx: 0.5, fill:GridBagConstraints.HORIZONTAL, insets:[0,5,0,0]))
+
+
+			checkBox(text:res.getString("checkTargetShorter"),
+				selected: checkTargetShorter,
+				actionPerformed: {
+					checkTargetShorter = !checkTargetShorter;
+				},
+				constraints:gbc(gridx:2, gridy:0, weightx: 0.5, fill:GridBagConstraints.HORIZONTAL, insets:[0,5,0,0]))
+			checkBox(text:res.getString("checkTargetLonger"),
+				selected: checkTargetLonger,
+				actionPerformed: {
+					checkTargetLonger = !checkTargetLonger;
+				},
+				constraints:gbc(gridx:2, gridy:1, weightx: 0.5, fill:GridBagConstraints.HORIZONTAL, insets:[0,5,0,0]))
+			checkBox(text:res.getString("checkEqualSourceTarget"),
+				selected: checkEqualSourceTarget,
+				actionPerformed: {
+					checkEqualSourceTarget = !checkEqualSourceTarget;
+				},
+				constraints:gbc(gridx:2, gridy:2, weightx: 0.5, fill:GridBagConstraints.HORIZONTAL, insets:[0,5,0,0]))
+			checkBox(text:res.getString("checkUntranslated"),
+				selected: checkUntranslated,
+				actionPerformed: {
+					checkUntranslated = !checkUntranslated;
+				},
+				constraints:gbc(gridx:2, gridy:3, weightx: 0.5, fill:GridBagConstraints.HORIZONTAL, insets:[0,5,0,0]))
+			checkBox(text:res.getString("checkTagNumber"),
+				selected: checkTagNumber,
+				actionPerformed: {
+					checkTagNumber = !checkTagNumber;
+				},
+				constraints:gbc(gridx:2, gridy:4, weightx: 0.5, fill:GridBagConstraints.HORIZONTAL, insets:[0,5,0,0]))
+			checkBox(text:res.getString("checkTagSpace"),
+				selected: checkTagSpace,
+				actionPerformed: {
+					checkTagSpace = !checkTagSpace;
+				},
+				constraints:gbc(gridx:2, gridy:5, weightx: 0.5, fill:GridBagConstraints.HORIZONTAL, insets:[0,5,0,0]))
+			checkBox(text:res.getString("checkTagOrder"),
+				selected: checkTagOrder,
+				actionPerformed: {
+					checkTagOrder = !checkTagOrder;
+				},
+				constraints:gbc(gridx:2, gridy:6, weightx: 0.5, fill:GridBagConstraints.HORIZONTAL, insets:[0,5,0,0]))
+
+
+			button(text:res.getString("refresh"),
+				actionPerformed: {
+					QAcheck();
+					locationxy = frame.getLocation();
+					sizerw = frame.getWidth();
+					sizerh = frame.getHeight();
+					skropos = skroll.getVerticalScrollBar().getValue();
+					sort = tab.getRowSorter().getSortKeys()[0];
+					frame.setVisible(false);
+					frame.dispose();
+					interfejs(locationxy, sizerw, sizerh, skropos, sort.getColumn(), sort.getSortOrder() == javax.swing.SortOrder.DESCENDING)},
+				constraints:gbc(gridx:0, gridy:7, gridwidth:3, weightx:1.0, fill:GridBagConstraints.HORIZONTAL, insets:[5,5,5,5]))
+		}
+	}
+
+	frame.setLocation(locationxy);
 }
-frame.pack()
-frame.show()
+QAcheck()
+interfejs()

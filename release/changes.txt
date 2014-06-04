@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 3.1.1 update 2
 ----------------------------------------------------------------------
-   6 Enhancements
+   7 Enhancements
    1 Bug fix
    1 Localisation update
 ----------------------------------------------------------------------
@@ -17,6 +17,9 @@
 
   - Dual mode progress bar 
   http://sourceforge.net/p/omegat/feature-requests/959
+
+  - Extend check_rules.groovy with ability to sort by error type 
+  https://sourceforge.net/p/omegat/feature-requests/992/
 
   Other enhancements:
 

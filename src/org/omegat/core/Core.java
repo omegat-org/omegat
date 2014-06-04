@@ -182,6 +182,15 @@ public class Core {
     }
 
     /**
+     * Get comments area
+     * 
+     * @return the comment area
+     */
+    public static CommentsTextArea getComments() {
+        return comments;
+    }
+    
+    /**
      * Initialize application components.
      */
     public static void initializeGUI(final Map<String, String> params) throws Exception {

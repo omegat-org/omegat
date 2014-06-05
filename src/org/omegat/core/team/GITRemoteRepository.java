@@ -47,6 +47,7 @@ import org.eclipse.jgit.api.ResetCommand;
 import org.eclipse.jgit.api.Status;
 import org.eclipse.jgit.api.errors.GitAPIException;
 import org.eclipse.jgit.api.errors.InvalidRemoteException;
+import org.eclipse.jgit.api.errors.JGitInternalException;
 import org.eclipse.jgit.api.errors.TransportException;
 import org.eclipse.jgit.errors.UnsupportedCredentialItem;
 import org.eclipse.jgit.lib.ProgressMonitor;
@@ -626,19 +627,30 @@ public class GITRemoteRepository implements IRemoteRepository {
 
     /**
      * Determines whether or not the supplied URL represents a valid Git repository.
+     * 
+     * <p>Does the equivalent of <code>git ls-remote <i>url</i></code>.
+     * 
      * @param url URL of supposed remote repository
      * @return true if repository appears to be valid, false otherwise
      */
     public static boolean isGitRepository(String url) {
+        // Heuristics to save some waiting time
+        if (url.startsWith("svn://") || url.startsWith("svn+")) {
+            return false;
+        }
         File temp = FileUtil.createTempDir();
         DummyCredentialsProvider dummyProvider = new DummyCredentialsProvider();
         try {
+            // A temporary local repository appears to be required even though
+            // we're just calling `git ls-remote`.
             Repository repo = Git.init().setDirectory(temp).call().getRepository();
             CredentialsProvider.setDefault(dummyProvider);
             new LsRemoteCommand(repo).setRemote(url).call();
         } catch (GitAPIException ex) {
-            ex.printStackTrace();
             return dummyProvider.wasAccessed;
+        } catch (JGitInternalException ex) {
+            // Happens if the URL is a Subversion URL like svn://...
+            return false;
         } finally {
             FileUtil.deleteTree(temp);
         }

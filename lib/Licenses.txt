@@ -91,3 +91,6 @@ groovy-all-2.2.2.jar is distributed under the Apache License 2.0
 SuperTMXMerge-for_OmegaT.jar is distributed under the GNU Lesser General  
 Public License version 2.1 and greater
 Sources are available in OmegaT sources, in the directory lib/sources
+
+OmegaT code uses the method createTempDir from Google Guava
+(https://code.google.com/p/guava-libraries/), licensed under the Apache License 2.0.

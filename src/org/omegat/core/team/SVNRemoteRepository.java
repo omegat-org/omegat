@@ -303,7 +303,19 @@ public class SVNRemoteRepository implements IRemoteRepository {
     };
     
     public static boolean isSVNRepository(String url) {
-        // TODO
-        return false;
+        // Heuristics to save some waiting time
+        if (url.startsWith("git://")) {
+            return false;
+        }
+        try {
+            SVNURL svnurl = SVNURL.parseURIDecoded(url);
+            SVNClientManager manager = SVNClientManager.newInstance(SVNWCUtil.createDefaultOptions(true), SVNWCUtil.createDefaultAuthenticationManager());
+            manager.getWCClient().doInfo(svnurl, SVNRevision.HEAD, SVNRevision.HEAD);
+        } catch (SVNAuthenticationException ex) {
+            return true;
+        } catch (SVNException ex) {
+            return false;
+        }
+        return true;
     }
 }

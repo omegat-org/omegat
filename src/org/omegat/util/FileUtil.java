@@ -6,7 +6,7 @@
  Copyright (C) 2008 Alex Buloichik
                2009 Didier Briel
                2012 Alex Buloichik, Didier Briel
-               2014 Alex Buloichik
+               2014 Alex Buloichik, Aaron Madlon-Kay
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -56,6 +56,7 @@ import org.omegat.gui.help.HelpFrame;
  * 
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Didier Briel
+ * @author Aaron Madlon-Kay
  */
 public class FileUtil {
     private static final int MAX_BACKUPS = 11;

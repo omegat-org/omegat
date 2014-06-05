@@ -4,6 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2012 Alex Buloichik
+               2014 Aaron Madlon-Kay
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -29,9 +30,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.Collection;
 import java.util.Properties;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -78,6 +77,7 @@ import org.omegat.util.gui.DockingUI;
  * 
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Martin Fleurke
+ * @author Aaron Madlon-Kay
  */
 public class GITRemoteRepository implements IRemoteRepository {
     private static final Logger LOGGER = Logger.getLogger(GITRemoteRepository.class.getName());

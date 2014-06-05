@@ -4,6 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2012 Alex Buloichik
+               2014 Aaron Madlon-Kay
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -57,6 +58,7 @@ import org.tmatesoft.svn.core.wc.SVNWCUtil;
  * SVN repository connection implementation.
  * 
  * @author Alex Buloichik (alex73mail@gmail.com)
+ * @author Aaron Madlon-Kay
  */
 public class SVNRemoteRepository implements IRemoteRepository {
     private static final Logger LOGGER = Logger.getLogger(SVNRemoteRepository.class.getName());
@@ -302,6 +304,14 @@ public class SVNRemoteRepository implements IRemoteRepository {
         }
     };
     
+    /**
+     * Determines whether or not the supplied URL represents a valid Subversion repository.
+     * 
+     * <p>Does the equivalent of <code>svn info <i>url</i></code>.
+     * 
+     * @param url URL of supposed remote repository
+     * @return true if repository appears to be valid, false otherwise
+     */
     public static boolean isSVNRepository(String url) {
         // Heuristics to save some waiting time
         if (url.startsWith("git://")) {

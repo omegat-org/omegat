@@ -141,7 +141,9 @@ public class ProjectUICommands {
             protected Object doInBackground() throws Exception {
                 Core.getMainWindow().showStatusMessageRB(null);
 
-                final NewTeamProject dialog = displayTeamDialog();
+                final NewTeamProject dialog = new NewTeamProject(Core.getMainWindow().getApplicationFrame(), true);
+                DockingUI.displayCentered(dialog);
+                dialog.setVisible(true);
 
                 IMainWindow mainWindow = Core.getMainWindow();
                 Cursor hourglassCursor = new Cursor(Cursor.WAIT_CURSOR);
@@ -156,10 +158,10 @@ public class ProjectUICommands {
                         mainWindow.setCursor(oldCursor);
                         return null;
                     }
-                    if (dialog.rbSVN.isSelected()) {
+                    if (dialog.repoType == NewTeamProject.REPOSITORY_TYPE.REPO_SVN) {
                         // SVN selected
                         repository = new SVNRemoteRepository(localDirectory);
-                    } else if (dialog.rbGIT.isSelected()) {
+                    } else if (dialog.repoType == NewTeamProject.REPOSITORY_TYPE.REPO_GIT) {
                         // GIT selected
                         repository = new GITRemoteRepository(localDirectory);
                     } else {
@@ -211,70 +213,6 @@ public class ProjectUICommands {
                 return null;
             }
         }.execute();
-    }
-
-    public static NewTeamProject displayTeamDialog() {
-        final NewTeamProject dialog = new NewTeamProject(Core.getMainWindow().getApplicationFrame(), true);
-        DockingUI.displayCentered(dialog);
-        dialog.btnCancel.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                dialog.rbGIT.setSelected(false);
-                dialog.rbSVN.setSelected(false);
-                dialog.dispose();
-            }
-        });
-        dialog.btnOk.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                dialog.dispose();
-                dialog.ok = true;
-            }
-        });
-        dialog.btnDirectory.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                NewProjectFileChooser ndc = new NewProjectFileChooser();
-                int ndcResult = ndc.showSaveDialog(Core.getMainWindow().getApplicationFrame());
-                if (ndcResult == OmegaTFileChooser.APPROVE_OPTION) {
-                    dialog.txtDirectory.setText(ndc.getSelectedFile().getPath());
-                }
-            }
-        });
-
-        DocumentListener newTeamProjectOkHider = new DocumentListener() {
-            public void changedUpdate(DocumentEvent e) {
-                checkNewTeamProjectDialog(dialog);
-            }
-
-            public void removeUpdate(DocumentEvent e) {
-                checkNewTeamProjectDialog(dialog);
-            }
-
-            public void insertUpdate(DocumentEvent e) {
-                checkNewTeamProjectDialog(dialog);
-            }
-        };
-
-        dialog.txtDirectory.getDocument().addDocumentListener(newTeamProjectOkHider);
-        dialog.txtRepositoryURL.getDocument().addDocumentListener(newTeamProjectOkHider);
-        dialog.rbGIT.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                checkNewTeamProjectDialog(dialog);
-            }
-        });
-        dialog.rbSVN.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                checkNewTeamProjectDialog(dialog);
-            }
-        });
-
-        dialog.setVisible(true);
-        return dialog;
-    }
-
-    public static void checkNewTeamProjectDialog(NewTeamProject dialog) {
-        boolean enabled = dialog.rbGIT.isSelected() || dialog.rbSVN.isSelected();
-        enabled &= !StringUtil.isEmpty(dialog.txtRepositoryURL.getText());
-        enabled &= !StringUtil.isEmpty(dialog.txtDirectory.getText());
-        dialog.btnOk.setEnabled(enabled);
     }
 
     /**

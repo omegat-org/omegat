@@ -301,4 +301,9 @@ public class SVNRemoteRepository implements IRemoteRepository {
             return true;
         }
     };
+    
+    public static boolean isSVNRepository(String url) {
+        // TODO
+        return false;
+    }
 }

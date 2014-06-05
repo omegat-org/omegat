@@ -29,7 +29,9 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.Collection;
 import java.util.Properties;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -40,8 +42,10 @@ import org.eclipse.jgit.api.CheckoutCommand;
 import org.eclipse.jgit.api.CloneCommand;
 import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.api.LogCommand;
+import org.eclipse.jgit.api.LsRemoteCommand;
 import org.eclipse.jgit.api.ResetCommand;
 import org.eclipse.jgit.api.Status;
+import org.eclipse.jgit.api.errors.GitAPIException;
 import org.eclipse.jgit.api.errors.InvalidRemoteException;
 import org.eclipse.jgit.api.errors.TransportException;
 import org.eclipse.jgit.errors.UnsupportedCredentialItem;
@@ -589,5 +593,46 @@ public class GITRemoteRepository implements IRemoteRepository {
             password = null;
         }
 
+    }
+    
+    private static class WrappedBoolean {
+    	public boolean value = false;
+    }
+    
+    public static boolean isGitRepository(String url) throws Exception {
+    	File temp;
+    	temp = File.createTempFile("omegat", "git");
+    	final WrappedBoolean authResult = new WrappedBoolean();
+        try {
+            temp.delete();
+            temp.mkdir();
+            Repository repo = Git.init().setDirectory(temp).call().getRepository();
+            
+            CredentialsProvider.setDefault(new CredentialsProvider() {
+				@Override
+				public boolean supports(CredentialItem... items) {
+					authResult.value = true;
+					return false;
+				}
+				@Override
+				public boolean isInteractive() {
+					authResult.value = true;
+					return false;
+				}
+				@Override
+				public boolean get(URIish uri, CredentialItem... items)
+						throws UnsupportedCredentialItem {
+					authResult.value = true;
+					return false;
+				}
+			});
+            new LsRemoteCommand(repo).setRemote(url).call();
+        } catch (GitAPIException ex) {
+            ex.printStackTrace();
+            return authResult.value;
+        } finally {
+        	// TODO: Delete temp
+        }
+        return true;
     }
 }

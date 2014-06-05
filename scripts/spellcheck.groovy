@@ -1,10 +1,13 @@
-/* :name=Spellcheck :description=Global Spell Checking
+/* :name=Spellcheck :description=Global spell checking
  *
  * Global spell checking
  *
  * @author  Piotr Kulik
  * @date    2014-05-14
- * @version 0.3
+ * @version 0.4
+ *
+ * Changes since 0.3:
+ * - added localization
  *
  * Changes since 0.2:
  * - fragments defined for removal in Tag Verification are always removed first
@@ -115,7 +118,7 @@ def cleanupTarget(String text) {
     
     // remove OmegaT-like tags
     //  can be skipped - tokenizers handle such tags properly and break at it
-    //  text = OMEGAT_TAG_REPLACE_PATTERN.matcher(text).replaceAll(" ");
+    text = OMEGAT_TAG_REPLACE_PATTERN.matcher(text).replaceAll(" ");
 
     // replace with space custom tags defined in Tag Verification
     if (replaceCustomTags) {
@@ -145,8 +148,8 @@ public class IntegerComparator implements Comparator<Integer> {
 
 def prop = project.projectProperties
 if (!prop) {
-    final def title = 'Spellchecker'
-    final def msg   = 'Please try again after you open a project.'
+    final def title = res.getString("msgTitle")
+    final def msg   = res.getString("msgNoProject")
     showMessageDialog null, msg, title, INFORMATION_MESSAGE
     return
 }
@@ -203,21 +206,21 @@ def spellcheck() {
         }
     }
 
-    console.println("Errors found: " + model.data.size());
-    println("Errors found: " + model.data.size());
+    console.println(res.getString("logErrorsFound") + model.data.size());
+    println(res.getString("logErrorsFound") + model.data.size());
 }
 
 swing = new SwingBuilder()
 
 def interfejs(locationxy = new Point(0, 0), width = 500, height = 550, scrollpos = 0, sortColumn = defaultSortColumn, sortOrderDescending = defaultSortOrderDescending) {
     def frame
-    frame = swing.frame(title:'Spellcheck - errors found: ' + model.data.size(), minimumSize: [width, height], pack: true, show: true) {
+    frame = swing.frame(title:res.getString("windowTitle") + model.data.size(), minimumSize: [width, height], pack: true, show: true) {
         def tab
         def skroll
         skroll = scrollPane {
             tab = table() {
                 tableModel(list: model.data) {
-                    propertyColumn(editable: true, header:'Segment', propertyName:'seg', minWidth: 80, maxWidth: 80, preferredWidth: 80,
+                    propertyColumn(editable: true, header:res.getString("tabHeaderSegment"), propertyName:'seg', minWidth: 80, maxWidth: 80, preferredWidth: 80,
                         cellEditor: new TableCellEditor()
                         {
                             public void cancelCellEditing()                             {}
@@ -249,8 +252,8 @@ def interfejs(locationxy = new Point(0, 0), width = 500, height = 550, scrollpos
                             }
                         }
                     )
-                    propertyColumn(editable: false, header:'Target', propertyName:'target', minWidth: 200, preferredWidth: 250)
-                    propertyColumn(editable: true, header:'Ignore', propertyName:'ignore', minWidth: 80, maxWidth: 80, preferredWidth: 80,
+                    propertyColumn(editable: false, header:res.getString("tabHeaderTarget"), propertyName:'target', minWidth: 200, preferredWidth: 250)
+                    propertyColumn(editable: true, header:res.getString("tabHeaderIgnore"), propertyName:'ignore', minWidth: 80, maxWidth: 80, preferredWidth: 80,
                         cellEditor: new TableCellEditor()
                         {
                             public void cancelCellEditing()                             {}
@@ -266,7 +269,7 @@ def interfejs(locationxy = new Point(0, 0), width = 500, height = 550, scrollpos
                                     String svalue = table.getValueAt(row, 1)
                                     for (i in 0 ..< table.getRowCount()) {
                                         if (table.getValueAt(i, 1) == svalue) {
-                                            table.setValueAt("IGNORED: " + svalue, i, 1);
+                                            table.setValueAt(res.getString("tabTextIgnored") + svalue, i, 1);
                                             table.setValueAt(false, i, 2)
                                             table.setValueAt(false, i, 3)
                                         }
@@ -275,7 +278,7 @@ def interfejs(locationxy = new Point(0, 0), width = 500, height = 550, scrollpos
                                     org.omegat.core.Core.getSpellChecker().ignoreWord(svalue);
                                     //										org.omegat.core.Core.getSpellChecker().saveWordLists();
                                     org.omegat.core.Core.getEditor().remarkOneMarker(org.omegat.core.spellchecker.SpellCheckerMarker.class.getName());
-                                    println("IGNORED: " + svalue);
+                                    println(res.getString("logIgnored") + svalue);
                                 }
                             }
 								
@@ -291,14 +294,14 @@ def interfejs(locationxy = new Point(0, 0), width = 500, height = 550, scrollpos
                             {
                                 if (value) {
                                     def btn = new JButton()
-                                    btn.setText('Ignore')
+                                    btn.setText(res.getString("btnIgnore"))
                                     return btn;
                                 }
                                 return null;
                             }
                         }
                     )
-                    propertyColumn(editable: true, header:'Learn', propertyName:'learn', minWidth: 80, maxWidth: 80, preferredWidth: 80,
+                    propertyColumn(editable: true, header:res.getString("tabHeaderLearn"), propertyName:'learn', minWidth: 80, maxWidth: 80, preferredWidth: 80,
                         cellEditor: new TableCellEditor()
                         {
                             public void cancelCellEditing()                             {}
@@ -314,7 +317,7 @@ def interfejs(locationxy = new Point(0, 0), width = 500, height = 550, scrollpos
                                     String svalue = table.getValueAt(row, 1)
                                     for (i in 0 ..< table.getRowCount()) {
                                         if (table.getValueAt(i, 1) == svalue) {
-                                            table.setValueAt("LEARNED: " + svalue, i, 1);
+                                            table.setValueAt(res.getString("tabTextLearned") + svalue, i, 1);
                                             table.setValueAt(false, i, 2)
                                             table.setValueAt(false, i, 3)
                                         }
@@ -323,7 +326,7 @@ def interfejs(locationxy = new Point(0, 0), width = 500, height = 550, scrollpos
                                     org.omegat.core.Core.getSpellChecker().learnWord(svalue);
                                     //										org.omegat.core.Core.getSpellChecker().saveWordLists();
                                     org.omegat.core.Core.getEditor().remarkOneMarker(org.omegat.core.spellchecker.SpellCheckerMarker.class.getName());
-                                    println("LEARNED: " + svalue);
+                                    println(res.getString("logLearned") + svalue);
                                 }
                             }
 								
@@ -339,7 +342,7 @@ def interfejs(locationxy = new Point(0, 0), width = 500, height = 550, scrollpos
                             {
                                 if (value) {
                                     def btn = new JButton()
-                                    btn.setText('Learn')
+                                    btn.setText(res.getString("btnLearn"))
                                     return btn;
                                 }
                                 return null;
@@ -364,55 +367,55 @@ def interfejs(locationxy = new Point(0, 0), width = 500, height = 550, scrollpos
         skroll.repaint();
         panel(constraints:BL.SOUTH) {
             gridBagLayout();
-            checkBox(text:'Check whole project',
+            checkBox(text:res.getString("cbCheckWholeProject"),
                 selected: checkWholeProject,
                 actionPerformed: {
                     checkWholeProject = !checkWholeProject;
                 },
                 constraints:gbc(gridx:0, gridy:0, weightx: 0.5, fill:GridBagConstraints.HORIZONTAL, insets:[0,5,0,0]))
-            checkBox(text:'Use glossary',
+            checkBox(text:res.getString("cbUseGlossary"),
                 selected: useGlossary,
                 actionPerformed: {
                     useGlossary = !useGlossary;
                 },
                 constraints:gbc(gridx:1, gridy:0, weightx: 0.5, fill:GridBagConstraints.HORIZONTAL, insets:[0,5,0,0]))
-            checkBox(text:'Ignore glossary case',
+            checkBox(text:res.getString("cbIgnoreGlossaryCase"),
                 selected: ignoreGlossaryCase,
                 actionPerformed: {
                     ignoreGlossaryCase = !ignoreGlossaryCase;
                 },
                 constraints:gbc(gridx:2, gridy:0, weightx: 0.5, fill:GridBagConstraints.HORIZONTAL, insets:[0,5,0,5]))
-            checkBox(text:'<html>' + 'Replace escaped sequences with space' + '<br> (\\a, \\b, \\f, \\n, \\r, \\t, \\v)</html>',
+            checkBox(text:'<html>' + res.getString("cbReplaceEscaped") + '<br> (\\a, \\b, \\f, \\n, \\r, \\t, \\v)</html>',
                 selected: replaceEscapedCharacters,
                 actionPerformed: {
                     replaceEscapedCharacters = !replaceEscapedCharacters;
                 },
                 constraints:gbc(gridx:0, gridy:1, weightx: 0.5, fill:GridBagConstraints.HORIZONTAL, insets:[0,5,0,0]))
-            checkBox(text:'Replace custom tags with space',
+            checkBox(text:res.getString("cbReplaceCustomTags"),
                 selected: replaceCustomTags,
                 actionPerformed: {
                     replaceCustomTags = !replaceCustomTags;
                 },
                 constraints:gbc(gridx:1, gridy:1, weightx: 0.5, fill:GridBagConstraints.HORIZONTAL, insets:[0,5,0,0]))
-            checkBox(text:'<html>' + 'Remove OmegaT tags which have <br>lower case letter before and after it' + '</html>',
+            checkBox(text:'<html>' + res.getString("cbRemoveOmegaTTags") + '</html>',
                 selected: removeOmegaTags,
                 actionPerformed: {
                     removeOmegaTags = !removeOmegaTags;
                 },
                 constraints:gbc(gridx:0, gridy:2, weightx: 0.5, fill:GridBagConstraints.HORIZONTAL, insets:[0,5,0,0]))
-            checkBox(text:'Remove mnemonics' + ' (' + MNEMONIC_CHARACTERS + ')',
+            checkBox(text:res.getString("cbRemoveMnemonics") + ' (' + MNEMONIC_CHARACTERS + ')',
                 selected: removeMnemonicChars,
                 actionPerformed: {
                     removeMnemonicChars = !removeMnemonicChars;
                 },
                 constraints:gbc(gridx:1, gridy:2, weightx: 0.5, fill:GridBagConstraints.HORIZONTAL, insets:[0,5,0,0]))
-            checkBox(text:'Remove defined fragments',
+            checkBox(text:res.getString("cbRemoveDefinedFragments"),
                 selected: removeDefinedFragments,
                 actionPerformed: {
                     removeDefinedFragments = !removeDefinedFragments;
                 },
                 constraints:gbc(gridx:2, gridy:2, weightx: 0.5, fill:GridBagConstraints.HORIZONTAL, insets:[0,5,0,5]))
-            button(text:'Refresh',
+            button(text:res.getString("btnRefresh"),
                 actionPerformed: {
                     spellcheck();
                     locationxy = frame.getLocation();

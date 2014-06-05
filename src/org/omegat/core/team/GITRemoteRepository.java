@@ -594,44 +594,53 @@ public class GITRemoteRepository implements IRemoteRepository {
         }
 
     }
-    
-    private static class WrappedBoolean {
-    	public boolean value = false;
+
+
+    /**
+     * A dummy {@link CredentialsProvider} that simply allows detecting whether or
+     * not the repository was valid enough for JGit to ask about credentials.
+     */
+    private static class DummyCredentialsProvider extends CredentialsProvider {
+
+        public boolean wasAccessed = false;
+
+        @Override
+        public boolean supports(CredentialItem... items) {
+            wasAccessed = true;
+            return false;
+        }
+        @Override
+        public boolean isInteractive() {
+            wasAccessed = true;
+            return false;
+        }
+        @Override
+        public boolean get(URIish uri, CredentialItem... items)
+                throws UnsupportedCredentialItem {
+            wasAccessed = true;
+            return false;
+        }
+
     }
-    
-    public static boolean isGitRepository(String url) throws Exception {
-    	File temp;
-    	temp = File.createTempFile("omegat", "git");
-    	final WrappedBoolean authResult = new WrappedBoolean();
+
+
+    /**
+     * Determines whether or not the supplied URL represents a valid Git repository.
+     * @param url URL of supposed remote repository
+     * @return true if repository appears to be valid, false otherwise
+     */
+    public static boolean isGitRepository(String url) {
+        File temp = FileUtil.createTempDir();
+        DummyCredentialsProvider dummyProvider = new DummyCredentialsProvider();
         try {
-            temp.delete();
-            temp.mkdir();
             Repository repo = Git.init().setDirectory(temp).call().getRepository();
-            
-            CredentialsProvider.setDefault(new CredentialsProvider() {
-				@Override
-				public boolean supports(CredentialItem... items) {
-					authResult.value = true;
-					return false;
-				}
-				@Override
-				public boolean isInteractive() {
-					authResult.value = true;
-					return false;
-				}
-				@Override
-				public boolean get(URIish uri, CredentialItem... items)
-						throws UnsupportedCredentialItem {
-					authResult.value = true;
-					return false;
-				}
-			});
+            CredentialsProvider.setDefault(dummyProvider);
             new LsRemoteCommand(repo).setRemote(url).call();
         } catch (GitAPIException ex) {
             ex.printStackTrace();
-            return authResult.value;
+            return dummyProvider.wasAccessed;
         } finally {
-        	// TODO: Delete temp
+            FileUtil.deleteTree(temp);
         }
         return true;
     }

@@ -4,6 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2012 Alex Buloichick
+               2014 Aaron Madlon-Kay
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -28,9 +29,13 @@ package org.omegat.gui.dialogs;
 import javax.swing.SwingWorker;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
+
 import org.omegat.core.Core;
 import org.omegat.core.team.GITRemoteRepository;
+import org.omegat.core.team.IRemoteRepository;
+import org.omegat.core.team.RepositoryUtils;
 import org.omegat.core.team.SVNRemoteRepository;
+import org.omegat.util.Log;
 import org.omegat.util.OStrings;
 import org.omegat.util.StringUtil;
 import org.omegat.util.gui.OmegaTFileChooser;
@@ -38,14 +43,12 @@ import org.omegat.util.gui.OmegaTFileChooser;
 /**
  *
  * @author Alex Buloichik (alex73mail@gmail.com)
+ * @author Aaron Madlon-Kay
  */
 public class NewTeamProject extends javax.swing.JDialog {
+
     
-    public enum REPOSITORY_TYPE {
-        REPO_UNKNOWN, REPO_SVN, REPO_GIT
-    }
-    
-    public REPOSITORY_TYPE repoType = REPOSITORY_TYPE.REPO_UNKNOWN;
+    public Class<? extends IRemoteRepository> repoType = null;
     
     /**
      * Creates new form NewTeamProject
@@ -54,65 +57,86 @@ public class NewTeamProject extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         
-        DocumentListener newTeamProjectOkHider = new DocumentListener() {
-            public void changedUpdate(DocumentEvent e) {
-                updateButton();
-            }
-
-            public void removeUpdate(DocumentEvent e) {
-                updateButton();
-            }
-
+        txtRepositoryURL.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
             public void insertUpdate(DocumentEvent e) {
-                updateButton();
+                clearRepo();
             }
-        };
-        
-        txtDirectory.getDocument().addDocumentListener(newTeamProjectOkHider);
-        txtRepositoryURL.getDocument().addDocumentListener(newTeamProjectOkHider);
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                clearRepo();
+            }
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                clearRepo();
+            }
+        });
+        txtDirectory.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                updateDialog();
+            }
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                updateDialog();
+            }
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                updateDialog();
+            }
+        });
     }
     
-    private class RepoTypeChecker extends SwingWorker<REPOSITORY_TYPE, Object> {
+    private void detectRepo() {
+        String url = txtRepositoryURL.getText().trim();
+        if (StringUtil.isEmpty(url)) {
+            return;
+        }
+        RepoTypeChecker checker = new RepoTypeChecker(url);
+        checker.execute();
+    }
+    
+    private void clearRepo() {
+        repoType = null;
+        detectedRepoLabel.setText(" ");
+        updateDialog();
+    }
+    
+    
+    private class RepoTypeChecker extends SwingWorker<Class<? extends IRemoteRepository>, Object> {
 
+        private String url = null;
+
+        public RepoTypeChecker(String url) {
+            this.url = url;
+        }
+        
         @Override
-        protected REPOSITORY_TYPE doInBackground() throws Exception {
-            String url = txtRepositoryURL.getText();
-            if (StringUtil.isEmpty(url)) {
-                    return null;
-            }
+        protected Class<? extends IRemoteRepository> doInBackground() throws Exception {
+            
             detectedRepoLabel.setText(OStrings.getString("TEAM_DETECTING_REPO"));
-            if (GITRemoteRepository.isGitRepository(url)) {
-                return REPOSITORY_TYPE.REPO_GIT;
-            } else if (SVNRemoteRepository.isSVNRepository(url)) {
-                return REPOSITORY_TYPE.REPO_SVN;
-            }
-            return REPOSITORY_TYPE.REPO_UNKNOWN;
+            return RepositoryUtils.detectRemoteRepoType(url);
         }
 
         @Override
         protected void done() {
+            String descKey = "TEAM_DETECTED_REPO_UNKNOWN";
             try {
-                REPOSITORY_TYPE result = get();
-                if (result == null) {
-                	return;
-                }
-                repoType = result;
-                String descKey;
-                switch(repoType) {
-                    case REPO_GIT:
+                repoType = get();
+                if (repoType != null) {
+                    if (repoType.equals(GITRemoteRepository.class)) {
                         descKey = "TEAM_DETECTED_REPO_GIT";
-                        break;
-                    case REPO_SVN:
+                    } else if (repoType.equals(SVNRemoteRepository.class)) {
                         descKey = "TEAM_DETECTED_REPO_SVN";
-                        break;
-                    default:
-                        descKey = "TEAM_DETECTED_REPO_UNKNOWN";
+                    }
                 }
-                detectedRepoLabel.setText(OStrings.getString(descKey));
             } catch (Exception ex) {
-                // Ignore
+                descKey = "TEAM_ERROR_DETECTING_REPO";
+                Log.logErrorRB(ex, descKey);
+            } finally {
+                detectedRepoLabel.setText(OStrings.getString(descKey));
             }
-            updateButton();
+            updateDialog();
         }
         
     };
@@ -127,7 +151,6 @@ public class NewTeamProject extends javax.swing.JDialog {
     private void initComponents() {
         java.awt.GridBagConstraints gridBagConstraints;
 
-        buttonGroup1 = new javax.swing.ButtonGroup();
         urlLabel = new javax.swing.JLabel();
         txtRepositoryURL = new javax.swing.JTextField();
         detectedRepoLabel = new javax.swing.JLabel();
@@ -187,6 +210,16 @@ public class NewTeamProject extends javax.swing.JDialog {
         getContentPane().add(localFolderLabel, gridBagConstraints);
 
         txtDirectory.setToolTipText("");
+        txtDirectory.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtDirectoryFocusLost(evt);
+            }
+        });
+        txtDirectory.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtDirectoryActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 3;
@@ -234,10 +267,14 @@ public class NewTeamProject extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void updateButton() {
-        boolean enabled = repoType != null && repoType != REPOSITORY_TYPE.REPO_UNKNOWN;
-        enabled &= !StringUtil.isEmpty(txtRepositoryURL.getText());
-        enabled &= !StringUtil.isEmpty(txtDirectory.getText());
+    private void updateDialog() {
+        String repoUrl = txtRepositoryURL.getText();
+        if (repoUrl.trim().equals(" ")) {
+            detectedRepoLabel.setText("");
+        }
+        boolean enabled = repoType != null
+                && !StringUtil.isEmpty(repoUrl)
+                && !StringUtil.isEmpty(txtDirectory.getText());
         btnOk.setEnabled(enabled);
     }
     
@@ -257,23 +294,29 @@ public class NewTeamProject extends javax.swing.JDialog {
         if (ndcResult == OmegaTFileChooser.APPROVE_OPTION) {
             txtDirectory.setText(ndc.getSelectedFile().getPath());
         }
+        updateDialog();
     }//GEN-LAST:event_btnDirectoryActionPerformed
 
     private void txtRepositoryURLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtRepositoryURLActionPerformed
-        RepoTypeChecker checker = new RepoTypeChecker();
-        checker.execute();
+        detectRepo();
     }//GEN-LAST:event_txtRepositoryURLActionPerformed
 
     private void txtRepositoryURLFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtRepositoryURLFocusLost
-        RepoTypeChecker checker = new RepoTypeChecker();
-        checker.execute();
+        detectRepo();
     }//GEN-LAST:event_txtRepositoryURLFocusLost
 
+    private void txtDirectoryFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtDirectoryFocusLost
+        updateDialog();
+    }//GEN-LAST:event_txtDirectoryFocusLost
+
+    private void txtDirectoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDirectoryActionPerformed
+        updateDialog();
+    }//GEN-LAST:event_txtDirectoryActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    public javax.swing.JButton btnCancel;
-    public javax.swing.JButton btnDirectory;
-    public javax.swing.JButton btnOk;
-    private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.JButton btnCancel;
+    private javax.swing.JButton btnDirectory;
+    private javax.swing.JButton btnOk;
     private javax.swing.JLabel detectedRepoLabel;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JLabel localFolderLabel;

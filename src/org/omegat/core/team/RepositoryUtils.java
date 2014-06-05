@@ -4,6 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2012 Alex Buloichik
+               2014 Aaron Madlon-Kay
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -29,10 +30,11 @@ import org.omegat.gui.dialogs.TeamUserPassDialog;
 import org.omegat.util.OStrings;
 import org.omegat.util.gui.DockingUI;
 
-/*
+/**
  * Some utility methods for working with remote repository.
  *  
  * @author Alex Buloichik <alex73mail@gmail.com>
+ * @author Aaron Madlon-Kay
  */
 public class RepositoryUtils {
     /**
@@ -95,4 +97,21 @@ public class RepositoryUtils {
         abstract protected void callRepository() throws Exception;
     }
 
+    
+    /**
+     * Detect the type of the remote repository. Returns the class object representing the
+     * repository type (one of the OmegaT classes extending {@link IRemoteRepository}), or
+     * null if the detection fails for whatever reason.
+     * 
+     * @param url The URL of the remote repository
+     * @return The class representing the repository type or null if detection failed
+     */
+    public static Class<? extends IRemoteRepository> detectRemoteRepoType(String url) {
+        if (GITRemoteRepository.isGitRepository(url)) {
+            return GITRemoteRepository.class;
+        } else if (SVNRemoteRepository.isSVNRepository(url)) {
+            return SVNRemoteRepository.class;
+        }
+        return null;
+    }
 }

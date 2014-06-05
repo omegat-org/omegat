@@ -30,17 +30,12 @@
 package org.omegat.gui.main;
 
 import java.awt.Cursor;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.File;
 import java.util.concurrent.ExecutionException;
 
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import javax.swing.SwingWorker;
-import javax.swing.event.DocumentEvent;
-import javax.swing.event.DocumentListener;
-
 import org.omegat.core.Core;
 import org.omegat.core.KnownException;
 import org.omegat.core.data.ProjectFactory;
@@ -58,7 +53,6 @@ import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
 import org.omegat.util.ProjectFileStorage;
-import org.omegat.util.StringUtil;
 import org.omegat.util.gui.DockingUI;
 import org.omegat.util.gui.OmegaTFileChooser;
 import org.omegat.util.gui.OpenProjectFileChooser;
@@ -70,6 +64,7 @@ import org.omegat.util.gui.UIThreadsUtil;
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Martin Fleurke
  * @author Thomas Cordonnier
+ * @author Aaron Madlon-Kay
  */
 public class ProjectUICommands {
     public static void projectCreate() {
@@ -158,12 +153,8 @@ public class ProjectUICommands {
                         mainWindow.setCursor(oldCursor);
                         return null;
                     }
-                    if (dialog.repoType == NewTeamProject.REPOSITORY_TYPE.REPO_SVN) {
-                        // SVN selected
-                        repository = new SVNRemoteRepository(localDirectory);
-                    } else if (dialog.repoType == NewTeamProject.REPOSITORY_TYPE.REPO_GIT) {
-                        // GIT selected
-                        repository = new GITRemoteRepository(localDirectory);
+                    if (dialog.repoType != null) {
+                        repository = dialog.repoType.getConstructor(File.class).newInstance(localDirectory);
                     } else {
                         mainWindow.setCursor(oldCursor);
                         return null;

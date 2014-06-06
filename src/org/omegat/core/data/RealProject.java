@@ -1619,6 +1619,15 @@ public class RealProject implements IProject {
     private class TranslateFilesCallback extends TranslateEntry {
         private String currentFile;
 
+        /**
+         * Getter for currentFile
+         * @return the current file being processed
+         */
+        @Override
+        protected String getCurrentFile(){
+            return currentFile;
+        }
+        
         public TranslateFilesCallback() {
             super(m_config);
         }

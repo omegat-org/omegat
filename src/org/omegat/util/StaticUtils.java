@@ -181,6 +181,20 @@ public class StaticUtils {
         }
         return res;
     }
+    
+    /**
+     * Find the first tag in a segment
+     * @param str A segment
+     * @return the first tag in the segment, or null if there are no tags
+     */
+    public static String getFirstTag(String str) {
+        Pattern placeholderPattern = PatternConsts.OMEGAT_TAG;
+        Matcher placeholderMatcher = placeholderPattern.matcher(str);
+        if (placeholderMatcher.find()) {
+            return placeholderMatcher.group(0);
+        }
+        return null;
+    }
 
     /**
      * Check if specified key pressed.

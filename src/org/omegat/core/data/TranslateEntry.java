@@ -78,6 +78,8 @@ public abstract class TranslateEntry implements ITranslateCallback {
     protected void fileStarted() {
         currentlyProcessedSegment = 0;
     }
+    
+    abstract String getCurrentFile();
 
     protected void fileFinished() {
         if (currentlyProcessedSegment != translateQueue.size()) {
@@ -97,8 +99,9 @@ public abstract class TranslateEntry implements ITranslateCallback {
         // Fetch removed tags if the options 
         // has been enabled.
         String tags = null;
-        if(m_config.isRemoveTags())
+        if (m_config.isRemoveTags()) {
             tags = StaticUtils.buildTagListForRemove(origSource);
+        }
         
         boolean removeSpaces = Core.getFilterMaster().getConfig().isRemoveSpacesNonseg();
         final String source = ParseEntry.stripSomeChars(origSource, spr, m_config.isRemoveTags(), removeSpaces);
@@ -140,11 +143,37 @@ public abstract class TranslateEntry implements ITranslateCallback {
         // fix for bug 1462566
         String r = res.toString();
         
+        //- Word: anything placed before the leading tag is omitted in translated document
+        // https://sourceforge.net/p/omegat/bugs/634/
+        // This is a Word document, Remove Tags (from Project Properties) is not checked and Remove leading and 
+        // trailing tags (from File Filters) is not checked
+        if ((getCurrentFile().endsWith(".docx") || getCurrentFile().endsWith(".docm")) &&
+            !m_config.isRemoveTags() && !Core.getFilterMaster().getConfig().isRemoveTags()) {
+            // Locate the location of the first tag
+            String firstTag = StaticUtils.getFirstTag(r);
+            if (firstTag != null) { 
+                int locFirstTag = r.indexOf(firstTag);
+                // Is there text before that first tag?
+                if (locFirstTag != -1) {
+                    // Was the first tag between two words without any spaces around?
+                    String addSpace = "";
+                    if (!Character.isWhitespace(r.charAt(locFirstTag -1)) && 
+                        !Character.isWhitespace(r.charAt(locFirstTag + firstTag.length()))) {
+                        addSpace = " ";
+                    }
+                    // Move that first tag before the text, adding a space if needed.
+                    r = firstTag + r.substring(0, locFirstTag) + addSpace + r.substring(locFirstTag + firstTag.length());
+                }
+            }                           
+        }
+
+        
         // fix for bug 3487497; 
         // explicitly add the removed tags at 
         // the end of the translated string.
-        if(tags != null)
+        if (m_config.isRemoveTags()) {
             r += tags;
+        }
         
         if (spr.crlf) {
             r = r.replace("\n", "\r\n");

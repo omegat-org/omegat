@@ -1,11 +1,11 @@
 ----------------------------------------------------------------------
- OmegaT 3.1.1 update 2
+ OmegaT 3.1.2
 ----------------------------------------------------------------------
-   7 Enhancements
+   8 Enhancements
    1 Bug fix
    2 Localisation update
 ----------------------------------------------------------------------
-3.1.1 update 2 vs. 3.1.1 update 1
+3.1.2 vs. 3.1.1 update 1
 
   Implemented requests:
 
@@ -28,6 +28,10 @@
   - Make "auto" colors more distinctive
 
   - Auto-completer choices can be confirmed by a double click
+
+  - For team projects, the type of repository (Git or SVN) is now detected
+automatically. When authentication is required, credentials have to be
+provided first to detect the type of repository.
 
   Bug fixes:
 

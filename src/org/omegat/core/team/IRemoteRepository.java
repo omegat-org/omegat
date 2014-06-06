@@ -205,7 +205,9 @@ public interface IRemoteRepository {
         public Credentials clone() {
             Credentials clone = new Credentials();
             clone.username = username;
-            clone.password = Arrays.copyOf(password, password.length);
+            if (password != null) {
+                clone.password = Arrays.copyOf(password, password.length);
+            }
             clone.fingerprint = fingerprint;
             clone.saveAsPlainText = saveAsPlainText;
             clone.readOnly = readOnly;

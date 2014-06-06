@@ -289,6 +289,9 @@ public class FileUtil {
      * @param dir The directory to delete
      */
     public static void deleteTree(File dir) {
+        if (!dir.exists()) {
+            return;
+        }
         if (!dir.isDirectory()) {
             throw new IllegalArgumentException("Argument must be a directory.");
         }

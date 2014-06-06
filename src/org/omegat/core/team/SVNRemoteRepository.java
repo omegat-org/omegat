@@ -120,16 +120,17 @@ public class SVNRemoteRepository implements IRemoteRepository {
         return statusType != SVNStatusType.STATUS_UNVERSIONED && statusType != SVNStatusType.STATUS_NONE;
     }
 
-    public void setCredentials(String username, String password, boolean forceSacePlainPassword) {
+    public void setCredentials(Credentials credentials) {        
         ourClientManager.dispose();
 
-        DefaultSVNAuthenticationManager authManager = new DefaultSVNAuthenticationManager(null, true, username,
-                password);
-        if (forceSacePlainPassword) {
+        DefaultSVNAuthenticationManager authManager = new DefaultSVNAuthenticationManager(null, true,
+                credentials.username, new String(credentials.password));
+        if (credentials.saveAsPlainText) {
             authManager.setAuthenticationStorageOptions(FORCE_SAVE_PLAIN_PASSWORD);
         }
         ISVNOptions options = SVNWCUtil.createDefaultOptions(true);
         ourClientManager = SVNClientManager.newInstance(options, authManager);
+        setReadOnly(credentials.readOnly);
     }
 
     public void setReadOnly(boolean value) {
@@ -312,17 +313,23 @@ public class SVNRemoteRepository implements IRemoteRepository {
      * @param url URL of supposed remote repository
      * @return true if repository appears to be valid, false otherwise
      */
-    public static boolean isSVNRepository(String url) {
+    public static boolean isSVNRepository(String url, Credentials credentials)
+            throws AuthenticationException {
         // Heuristics to save some waiting time
         if (url.startsWith("git://")) {
             return false;
         }
         try {
             SVNURL svnurl = SVNURL.parseURIDecoded(url);
-            SVNClientManager manager = SVNClientManager.newInstance(SVNWCUtil.createDefaultOptions(true), SVNWCUtil.createDefaultAuthenticationManager());
+            SVNClientManager manager = SVNClientManager.newInstance();
+            if (credentials.password != null) {
+                DefaultSVNAuthenticationManager authManager = new DefaultSVNAuthenticationManager(null,
+                        true, credentials.username, new String(credentials.password));
+                manager.setAuthenticationManager(authManager);
+            }
             manager.getWCClient().doInfo(svnurl, SVNRevision.HEAD, SVNRevision.HEAD);
         } catch (SVNAuthenticationException ex) {
-            return true;
+            throw new AuthenticationException(ex);
         } catch (SVNException ex) {
             return false;
         }

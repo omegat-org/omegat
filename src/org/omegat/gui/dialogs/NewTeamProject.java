@@ -26,6 +26,8 @@
 
 package org.omegat.gui.dialogs;
 
+import java.util.concurrent.CancellationException;
+
 import javax.swing.SwingWorker;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
@@ -33,6 +35,7 @@ import javax.swing.event.DocumentListener;
 import org.omegat.core.Core;
 import org.omegat.core.team.GITRemoteRepository;
 import org.omegat.core.team.IRemoteRepository;
+import org.omegat.core.team.IRemoteRepository.Credentials;
 import org.omegat.core.team.RepositoryUtils;
 import org.omegat.core.team.SVNRemoteRepository;
 import org.omegat.util.Log;
@@ -49,6 +52,9 @@ public class NewTeamProject extends javax.swing.JDialog {
 
     
     public Class<? extends IRemoteRepository> repoType = null;
+    public Credentials credentials = new Credentials();
+    private RepoTypeChecker checker = null;
+    private boolean detecting = false;
     
     /**
      * Creates new form NewTeamProject
@@ -88,11 +94,16 @@ public class NewTeamProject extends javax.swing.JDialog {
     }
     
     private void detectRepo() {
+        synchronized(credentials) {
+            if (detecting || !isVisible()) {
+                return;
+            }
+        }
         String url = txtRepositoryURL.getText().trim();
         if (StringUtil.isEmpty(url)) {
             return;
         }
-        RepoTypeChecker checker = new RepoTypeChecker(url);
+        checker = new RepoTypeChecker(url);
         checker.execute();
     }
     
@@ -113,9 +124,11 @@ public class NewTeamProject extends javax.swing.JDialog {
         
         @Override
         protected Class<? extends IRemoteRepository> doInBackground() throws Exception {
-            
+            synchronized(credentials) {
+                detecting = true;
+            }
             detectedRepoLabel.setText(OStrings.getString("TEAM_DETECTING_REPO"));
-            return RepositoryUtils.detectRemoteRepoType(url);
+            return RepositoryUtils.detectRemoteRepoType(url, credentials);
         }
 
         @Override
@@ -130,15 +143,18 @@ public class NewTeamProject extends javax.swing.JDialog {
                         descKey = "TEAM_DETECTED_REPO_SVN";
                     }
                 }
+            } catch (CancellationException ex) {
+                // Nothing
             } catch (Exception ex) {
                 descKey = "TEAM_ERROR_DETECTING_REPO";
                 Log.logErrorRB(ex, descKey);
-            } finally {
-                detectedRepoLabel.setText(OStrings.getString(descKey));
             }
+            detectedRepoLabel.setText(OStrings.getString(descKey));
             updateDialog();
+            synchronized(credentials) {
+                detecting = false;
+            }
         }
-        
     };
 
     /**
@@ -280,6 +296,9 @@ public class NewTeamProject extends javax.swing.JDialog {
     
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
         repoType = null;
+        if (checker != null) {
+            checker.cancel(true);
+        }
         dispose();
     }//GEN-LAST:event_btnCancelActionPerformed
 

@@ -155,6 +155,7 @@ public class ProjectUICommands {
                     }
                     if (dialog.repoType != null) {
                         repository = dialog.repoType.getConstructor(File.class).newInstance(localDirectory);
+                        repository.setCredentials(dialog.credentials);
                     } else {
                         mainWindow.setCursor(oldCursor);
                         return null;
@@ -179,6 +180,8 @@ public class ProjectUICommands {
                     Core.getMainWindow().displayErrorRB(ex, "TEAM_CHECKOUT_ERROR");
                     mainWindow.setCursor(oldCursor);
                     return null;
+                } finally {
+                    dialog.credentials.clear();
                 }
 
                 try {

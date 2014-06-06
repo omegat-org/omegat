@@ -5,8 +5,8 @@
  * @author  Piotr Kulik
  * @author  Kos Ivantsov
  * @author  Didier Briel
- * @date	2014-06-03
- * @version 0.5
+ * @date	2014-06-05
+ * @version 0.6
  */
 
 // if FALSE only current file will be checked
@@ -33,6 +33,7 @@ import java.awt.Dimension
 import java.awt.event.*
 import java.awt.BorderLayout as BL
 import java.awt.GridBagConstraints
+import org.omegat.core.Core
 
 class QACheckData {
 	@Bindable data = []
@@ -42,6 +43,8 @@ public class IntegerComparator implements Comparator<Integer> {
 		return o1 - o2
 	}
 }
+def checker = Core.getSpellChecker()
+def tokenizer = project.getTargetTokenizer()
 
 checkLeadSpace = true
 nameLeadSpace = res.getString("nameLeadSpace")
@@ -71,6 +74,8 @@ checkTagOrder = true
 nameTagOrder = res.getString("nameTagOrder")
 checkNumErr = true
 nameNumErr = res.getString("nameNumErr")
+checkSpellErr = false
+nameSpellErr = res.getString("nameSpellErr")
 
 
 /*
@@ -126,7 +131,18 @@ ruleset = [
 				tn = tt.findAll(/\d+/), sn = st.findAll(/\d+/)
 					sn != tn
 					}
-				}
+				},
+			(nameSpellErr): {s, t -> if (t != QA_empty) {
+				def spellerror = []
+				tokenizer.tokenizeWordsForSpelling( t ).each {
+					def (int a, int b) = [it.offset, it.offset + it.length]
+					def word = t.substring( a, b )
+						if (!checker.isCorrect(word)) {
+							spellerror.add([word])
+						}
+					}
+				spellerror.size()
+				}}
 
 			]
 
@@ -190,6 +206,9 @@ def QAcheck() {
 	}
 	if (!checkNumErr) {
 		rules.remove(nameNumErr)
+	}
+	if (!checkSpellErr) {
+		rules.remove(nameSpellErr)
 	}
 
 
@@ -296,6 +315,12 @@ def interfejs(locationxy = new Point(0, 0), width = 900, height = 550, scrollpos
 					checkWholeProject = !checkWholeProject;
 				},
 				constraints:gbc(gridx:0, gridy:0, weightx: 0.5, fill:GridBagConstraints.HORIZONTAL, insets:[0,5,0,0]))
+			checkBox(text:res.getString("checkSpellErr"),
+				selected: checkSpellErr,
+				actionPerformed: {
+					checkSpellErr = !checkSpellErr;
+				},
+				constraints:gbc(gridx:0, gridy:1, weightx: 0.5, fill:GridBagConstraints.HORIZONTAL, insets:[0,5,0,0]))
 
 
 			checkBox(text:res.getString("checkLeadSpace"),

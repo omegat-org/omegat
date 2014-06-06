@@ -2,8 +2,8 @@
  OmegaT 3.1.2
 ----------------------------------------------------------------------
    8 Enhancements
-   1 Bug fix
-   2 Localisation update
+   2 Bug fixes
+   2 Localisation updates
 ----------------------------------------------------------------------
 3.1.2 vs. 3.1.1 update 1
 
@@ -34,6 +34,9 @@ automatically. When authentication is required, credentials have to be
 provided first to detect the type of repository.
 
   Bug fixes:
+
+  - Word: anything placed before the leading tag is omitted in translated document
+  https://sourceforge.net/p/omegat/bugs/634/
 
   - The color used in the View menu to identify "auto" colors was
 COLOR_MARK_COMES_FROM_TM_XICE instead of COLOR_MARK_COMES_FROM_TM_XAUTO

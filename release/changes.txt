@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 3.1.2
 ----------------------------------------------------------------------
-   8 Enhancements
+   9 Enhancements
    2 Bug fixes
    2 Localisation updates
 ----------------------------------------------------------------------
@@ -20,6 +20,9 @@
 
   - Extend check_rules.groovy with ability to sort by error type 
   https://sourceforge.net/p/omegat/feature-requests/992/
+
+  - Show segments with spelling errors in check_rules.groovy 
+  https://sourceforge.net/p/omegat/feature-requests/999/
 
   Other enhancements:
 

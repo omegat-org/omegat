@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 3.1.2
 ----------------------------------------------------------------------
-  10 Enhancements
+  11 Enhancements
    2 Bug fixes
    2 Localisation updates
 ----------------------------------------------------------------------
@@ -26,6 +26,9 @@
 
   - Script: Strip tags only in selection 
   https://sourceforge.net/p/omegat/feature-requests/998/
+
+  -  Make SVN_cleanup script localizable 
+  https://sourceforge.net/p/omegat/feature-requests/997/
 
   Other enhancements:
 

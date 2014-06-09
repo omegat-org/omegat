@@ -101,8 +101,16 @@ public class NewTeamProject extends javax.swing.JDialog {
         if (StringUtil.isEmpty(url)) {
             return;
         }
-        repoTypeWorker = new RepoTypeWorker(url);
-        repoTypeWorker.execute();
+        if (url.startsWith("git!")) {
+            txtRepositoryURL.setText(url.substring("git!".length()));
+            detectedRepoLabel.setText(OStrings.getString("TEAM_DETECTED_REPO_GIT"));
+        } else if (url.startsWith("svn!")) {
+            txtRepositoryURL.setText(url.substring("svn!".length()));
+            detectedRepoLabel.setText(OStrings.getString("TEAM_DETECTED_REPO_SVN"));
+        } else {
+            repoTypeWorker = new RepoTypeWorker(url);
+            repoTypeWorker.execute();
+        }
     }
     
     private synchronized void startDetectingRepo() {

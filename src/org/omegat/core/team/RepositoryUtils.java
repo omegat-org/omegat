@@ -28,6 +28,7 @@ package org.omegat.core.team;
 import java.util.Arrays;
 
 import org.omegat.core.Core;
+import org.omegat.core.team.IRemoteRepository.AuthenticationException;
 import org.omegat.core.team.IRemoteRepository.Credentials;
 import org.omegat.gui.dialogs.TeamUserPassDialog;
 import org.omegat.util.OStrings;
@@ -175,11 +176,19 @@ public class RepositoryUtils {
         }
 
         private Class<? extends IRemoteRepository> detect(Credentials credentials) throws Exception {
-            if (GITRemoteRepository.isGitRepository(url, credentials)) {
-                return GITRemoteRepository.class;
+            Exception thrown = null;
+            try {
+                if (GITRemoteRepository.isGitRepository(url, credentials)) {
+                    return GITRemoteRepository.class;
+                }
+            } catch (AuthenticationException ex) {
+                thrown = ex;
             }
             if (SVNRemoteRepository.isSVNRepository(url, credentials)) {
                 return SVNRemoteRepository.class;
+            }
+            if (thrown != null) {
+                throw thrown;
             }
             return null;
         }

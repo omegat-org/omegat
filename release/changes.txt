@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 3.1.2
 ----------------------------------------------------------------------
-  11 Enhancements
+  12 Enhancements
    2 Bug fixes
    2 Localisation updates
 ----------------------------------------------------------------------
@@ -43,6 +43,9 @@ automatically. When authentication is required, credentials have to be
 provided first to detect the type of repository. The type of repository can
 be forced by prefixing the URL with "git!" or "svn!". 
 E.g., svn!https://omegat.xxxx.xx/omegat-fr
+
+  - Scripts with a separate .properties file for user messages are now 
+included in localisation bundles
 
   Bug fixes:
 

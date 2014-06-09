@@ -156,6 +156,7 @@
                 <nativelib href="hunspell-win32.jar" />
             </resources>
 		</j2se>
+		<property name="javaws.cfg.jauthenticator" value="true" />
 	</resources>
 	<application-desc main-class="org.omegat.Main" />
 </jnlp>

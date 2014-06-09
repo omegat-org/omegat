@@ -7,6 +7,7 @@
                2008-2010 Didier Briel, Alex Buloichik
                2012 Didier Briel
                2013 Didier Briel, Aaron Madlon-Kay
+               2014 Didier Briel
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -108,7 +109,12 @@
                     doc_src/en/images/InstantGuide_1.png
                     doc_src/en/images/InstantGuide_2.png
                     src/**/Bundle.properties
-                    release/win32-specific/CustomMessages.ini"/>
+                    release/win32-specific/CustomMessages.ini
+                    scripts/check_rules.properties
+                    scripts/spellcheck.properties
+                    scripts/svn_cleanup_selected.properties
+                    scripts/search_replace.properties
+                    script/replace_strip_tags.properties" />
         </copy>
         <copy file="release/readme.txt"
               tofile="${l10n.min.dir}/source/readme.utf8"
@@ -131,7 +137,12 @@
         </copy>
         <copy todir="${l10n.max.dir}/source"> 
             <fileset dir="."
-                    includes="doc_src/en/** src/**/Bundle.properties release/win32-specific/CustomMessages.ini"
+                    includes="doc_src/en/** src/**/Bundle.properties release/win32-specific/CustomMessages.ini
+                    scripts/check_rules.properties
+                    scripts/spellcheck.properties
+                    scripts/svn_cleanup_selected.properties
+                    scripts/search_replace.properties
+                    script/replace_strip_tags.properties"
                     excludes="doc_src/en/index.xml
                     doc_src/en/html/**
                     doc_src/en/pdf/**" />

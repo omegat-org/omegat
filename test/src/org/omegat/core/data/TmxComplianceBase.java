@@ -146,6 +146,10 @@ public abstract class TmxComplianceBase extends TestCase {
                 Assert.assertNotNull(e);
                 return e.translation;
             }
+            @Override
+            String getCurrentFile() {
+                return null;
+            }
         };
         filter.translateFile(new File("test/data/tmx/TMXComplianceKit/" + fileTextIn), outFile, config, fc,
                 cb);

@@ -1083,7 +1083,7 @@ OmegaT failed to load the valid ones
  OmegaT 2.6.3 update 10 
 ----------------------------------------------------------------------
    0 Enhancement
-   1 Bug fix
+   2 Bug fixes
    1 Localisation update
 ----------------------------------------------------------------------
 2.6.3 update 10 vs. 2.6.3 update 9
@@ -1091,6 +1091,12 @@ OmegaT failed to load the valid ones
   Bug fixes: 
 
   - Swedish segmentation rules were using a wrong language code
+
+  - In team projects, a "server authentication" could happen, which
+prevented from properly entering credentials
+
+  Localisation updates:
+
   - Japanese localisation updated to 2.6.3 update 7 (Documentation)
 
 ----------------------------------------------------------------------

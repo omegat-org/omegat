@@ -168,7 +168,7 @@ public class NewTeamProject extends javax.swing.JDialog {
                 resultText = " ";
             } catch (Exception ex) {
                 resultText = OStrings.getString("TEAM_ERROR_DETECTING_REPO");
-                Log.logErrorRB(ex, resultText);
+                Log.logErrorRB(ex, "TEAM_ERROR_DETECTING_REPO");
             }
             detectedRepoLabel.setText(resultText);
             updateDialog();

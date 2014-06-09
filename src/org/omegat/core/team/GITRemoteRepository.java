@@ -201,6 +201,9 @@ public class GITRemoteRepository implements IRemoteRepository {
     }
     
     public void setCredentials(Credentials credentials) {
+        if (credentials == null) {
+            return;
+        }
         myCredentialsProvider.setCredentials(credentials);
         setReadOnly(credentials.readOnly);
     }
@@ -391,6 +394,9 @@ public class GITRemoteRepository implements IRemoteRepository {
         }
         
         public void setCredentials(Credentials credentials) {
+            if (credentials == null) {
+                return;
+            }
             this.credentials = credentials.clone();
         }
         
@@ -587,7 +593,7 @@ public class GITRemoteRepository implements IRemoteRepository {
             // A temporary local repository appears to be required even though
             // we're just calling `git ls-remote`.
             Repository repo = Git.init().setDirectory(temp).call().getRepository();
-            if (credentials.password != null) {
+            if (credentials != null) {
                 MyCredentialsProvider provider = new MyCredentialsProvider(null);
                 provider.setCredentials(credentials);
                 CredentialsProvider.setDefault(provider);
@@ -605,7 +611,6 @@ public class GITRemoteRepository implements IRemoteRepository {
             return false;
         } finally {
             FileUtil.deleteTree(temp);
-            CredentialsProvider.setDefault(null);
         }
         return true;
     }

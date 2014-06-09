@@ -29,7 +29,6 @@ import java.util.Arrays;
 
 import org.omegat.core.Core;
 import org.omegat.core.team.IRemoteRepository.Credentials;
-import org.omegat.core.team.IRemoteRepository.AuthenticationException;
 import org.omegat.gui.dialogs.TeamUserPassDialog;
 import org.omegat.util.OStrings;
 import org.omegat.util.StringUtil;
@@ -88,6 +87,8 @@ public class RepositoryUtils {
      * In that case, a username/password dialog will be shown.
      */
     public static abstract class AskCredentials {
+        
+        public Credentials credentials = null;
 
        /**
          * wrapper around callRepository to execute some repository command. 
@@ -102,10 +103,13 @@ public class RepositoryUtils {
                     callRepository();
                     break;
                 } catch (IRemoteRepository.AuthenticationException ex) {
-                    Credentials credentials = new Credentials();
+                    if (credentials == null) {
+                        credentials = new Credentials();
+                    }
                     boolean entered = RepositoryUtils.askForCredentials(credentials,
                             OStrings.getString(firstPass ? "TEAM_USERPASS_FIRST" : "TEAM_USERPASS_WRONG"),
                             false);
+                    repository.setCredentials(credentials);
                     if (!entered) {
                         throw ex;
                     }
@@ -123,43 +127,61 @@ public class RepositoryUtils {
          */
         abstract protected void callRepository() throws Exception;
     }
-
     
+
     /**
-     * Detect the type of the remote repository. Returns the class object representing the
-     * repository type (one of the OmegaT classes extending {@link IRemoteRepository}), or
-     * null if the detection fails for whatever reason.
-     * 
-     * @param url The URL of the remote repository
-     * @return The class representing the repository type or null if detection failed
+     * A class to facilitate detecting the type of a remote repository.
+     * <p>
+     * Instantiate with the URL of the repository and initial default credentials (may be null).
+     * After running {@link #execute(IRemoteRepository)}, the results will be available in the
+     * {@link #credentials} and {@link #repoType} members.
      */
-    public static Class<? extends IRemoteRepository> detectRemoteRepoType(String url, Credentials credentials) {
-        boolean firstPass = true;
-        boolean usernameIsPreset = false;
-        String usernameInUrl = getUsernameFromUrl(url);
-        if (!StringUtil.isEmpty(usernameInUrl)) {
-            credentials.username = usernameInUrl;
-            usernameIsPreset = true;
+    public static class RepoTypeDetector {
+        
+        private String url = null;
+        public Credentials credentials = null;
+        public Class<? extends IRemoteRepository> repoType = null;
+        
+        public RepoTypeDetector(String url, Credentials credentials) {
+            this.url = url;
+            this.credentials = credentials;
         }
-        while (true) {
-            try {
-                if (GITRemoteRepository.isGitRepository(url, credentials)) {
-                    return GITRemoteRepository.class;
-                } else if (SVNRemoteRepository.isSVNRepository(url, credentials)) {
-                    return SVNRemoteRepository.class;
-                }
-                return null;
-            } catch (AuthenticationException ex) {
-                ex.printStackTrace();
-                boolean provided = askForCredentials(credentials,
-                        OStrings.getString(firstPass ? "TEAM_USERPASS_FIRST" : "TEAM_USERPASS_WRONG"),
-                        usernameIsPreset);
-                if (!provided) {
+
+        public void execute() throws Exception {
+            boolean firstPass = true;
+            boolean usernameIsPreset = false;
+            while (true) {
+                try {
+                    repoType = detect(credentials);
                     break;
+                } catch (IRemoteRepository.AuthenticationException ex) {
+                    if (credentials == null) {
+                        credentials = new Credentials();
+                        String usernameInUrl = getUsernameFromUrl(url);
+                        if (!StringUtil.isEmpty(usernameInUrl)) {
+                            credentials.username = usernameInUrl;
+                            usernameIsPreset = true;
+                        }
+                    }
+                    boolean entered = RepositoryUtils.askForCredentials(credentials,
+                            OStrings.getString(firstPass ? "TEAM_USERPASS_FIRST" : "TEAM_USERPASS_WRONG"),
+                            usernameIsPreset);
+                    if (!entered) {
+                        throw ex;
+                    }
+                    firstPass = false;
                 }
-                firstPass = false;
             }
         }
-        return null;
+
+        private Class<? extends IRemoteRepository> detect(Credentials credentials) throws Exception {
+            if (GITRemoteRepository.isGitRepository(url, credentials)) {
+                return GITRemoteRepository.class;
+            }
+            if (SVNRemoteRepository.isSVNRepository(url, credentials)) {
+                return SVNRemoteRepository.class;
+            }
+            return null;
+        }
     }
 }

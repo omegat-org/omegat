@@ -181,7 +181,9 @@ public class ProjectUICommands {
                     mainWindow.setCursor(oldCursor);
                     return null;
                 } finally {
-                    dialog.credentials.clear();
+                    if (dialog.credentials != null) {
+                        dialog.credentials.clear();
+                    }
                 }
 
                 try {

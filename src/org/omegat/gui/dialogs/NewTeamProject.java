@@ -36,7 +36,7 @@ import org.omegat.core.Core;
 import org.omegat.core.team.GITRemoteRepository;
 import org.omegat.core.team.IRemoteRepository;
 import org.omegat.core.team.IRemoteRepository.Credentials;
-import org.omegat.core.team.RepositoryUtils;
+import org.omegat.core.team.RepositoryUtils.RepoTypeDetector;
 import org.omegat.core.team.SVNRemoteRepository;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
@@ -52,8 +52,8 @@ public class NewTeamProject extends javax.swing.JDialog {
 
     
     public Class<? extends IRemoteRepository> repoType = null;
-    public Credentials credentials = new Credentials();
-    private RepoTypeChecker checker = null;
+    public Credentials credentials = null;
+    private RepoTypeWorker repoTypeWorker = null;
     private boolean detecting = false;
     
     /**
@@ -93,67 +93,76 @@ public class NewTeamProject extends javax.swing.JDialog {
         });
     }
     
-    private void detectRepo() {
-        synchronized(credentials) {
-            if (detecting || !isVisible()) {
-                return;
-            }
+    private synchronized void detectRepo() {
+        if (detecting || !isVisible()) {
+            return;
         }
         String url = txtRepositoryURL.getText().trim();
         if (StringUtil.isEmpty(url)) {
             return;
         }
-        checker = new RepoTypeChecker(url);
-        checker.execute();
+        repoTypeWorker = new RepoTypeWorker(url);
+        repoTypeWorker.execute();
+    }
+    
+    private synchronized void startDetectingRepo() {
+        detecting = true;
+    }
+    
+    private synchronized void stopDetectingRepo() {
+        detecting = false;
     }
     
     private void clearRepo() {
         repoType = null;
         detectedRepoLabel.setText(" ");
+        if (repoTypeWorker != null) {
+            repoTypeWorker.cancel(true);
+        }
         updateDialog();
     }
     
     
-    private class RepoTypeChecker extends SwingWorker<Class<? extends IRemoteRepository>, Object> {
+    private class RepoTypeWorker extends SwingWorker<RepoTypeDetector, Object> {
 
         private String url = null;
 
-        public RepoTypeChecker(String url) {
+        public RepoTypeWorker(String url) {
             this.url = url;
         }
         
         @Override
-        protected Class<? extends IRemoteRepository> doInBackground() throws Exception {
-            synchronized(credentials) {
-                detecting = true;
-            }
+        protected RepoTypeDetector doInBackground() throws Exception {
+            startDetectingRepo();
             detectedRepoLabel.setText(OStrings.getString("TEAM_DETECTING_REPO"));
-            return RepositoryUtils.detectRemoteRepoType(url, credentials);
+            RepoTypeDetector detector = new RepoTypeDetector(url, credentials);
+            detector.execute();
+            return detector;
         }
 
         @Override
         protected void done() {
-            String descKey = "TEAM_DETECTED_REPO_UNKNOWN";
+            String resultText = OStrings.getString("TEAM_DETECTED_REPO_UNKNOWN");
             try {
-                repoType = get();
+                RepoTypeDetector detector = get();
+                repoType = detector.repoType;
+                credentials = detector.credentials;
                 if (repoType != null) {
                     if (repoType.equals(GITRemoteRepository.class)) {
-                        descKey = "TEAM_DETECTED_REPO_GIT";
+                        resultText = OStrings.getString("TEAM_DETECTED_REPO_GIT");
                     } else if (repoType.equals(SVNRemoteRepository.class)) {
-                        descKey = "TEAM_DETECTED_REPO_SVN";
+                        resultText = OStrings.getString("TEAM_DETECTED_REPO_SVN");
                     }
                 }
             } catch (CancellationException ex) {
-                // Nothing
+                resultText = " ";
             } catch (Exception ex) {
-                descKey = "TEAM_ERROR_DETECTING_REPO";
-                Log.logErrorRB(ex, descKey);
+                resultText = OStrings.getString("TEAM_ERROR_DETECTING_REPO");
+                Log.logErrorRB(ex, resultText);
             }
-            detectedRepoLabel.setText(OStrings.getString(descKey));
+            detectedRepoLabel.setText(resultText);
             updateDialog();
-            synchronized(credentials) {
-                detecting = false;
-            }
+            stopDetectingRepo();
         }
     };
 
@@ -296,8 +305,12 @@ public class NewTeamProject extends javax.swing.JDialog {
     
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
         repoType = null;
-        if (checker != null) {
-            checker.cancel(true);
+        if (credentials != null) {
+            credentials.clear();
+            credentials = null;
+        }
+        if (repoTypeWorker != null) {
+            repoTypeWorker.cancel(true);
         }
         dispose();
     }//GEN-LAST:event_btnCancelActionPerformed

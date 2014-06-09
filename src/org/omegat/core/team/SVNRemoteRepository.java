@@ -120,7 +120,10 @@ public class SVNRemoteRepository implements IRemoteRepository {
         return statusType != SVNStatusType.STATUS_UNVERSIONED && statusType != SVNStatusType.STATUS_NONE;
     }
 
-    public void setCredentials(Credentials credentials) {        
+    public void setCredentials(Credentials credentials) {
+        if (credentials == null) {
+            return;
+        }
         ourClientManager.dispose();
 
         DefaultSVNAuthenticationManager authManager = new DefaultSVNAuthenticationManager(null, true,
@@ -277,7 +280,7 @@ public class SVNRemoteRepository implements IRemoteRepository {
         }
     }
 
-    ISVNAuthenticationStorageOptions FORCE_SAVE_PLAIN_PASSWORD = new ISVNAuthenticationStorageOptions() {
+    static ISVNAuthenticationStorageOptions FORCE_SAVE_PLAIN_PASSWORD = new ISVNAuthenticationStorageOptions() {
         public boolean isNonInteractive() throws SVNException {
             return false;
         }
@@ -295,7 +298,7 @@ public class SVNRemoteRepository implements IRemoteRepository {
         }
     };
 
-    ISVNAuthStoreHandler FORCE_SAVE_PLAIN_PASSWORD_HANDLER = new ISVNAuthStoreHandler() {
+    static ISVNAuthStoreHandler FORCE_SAVE_PLAIN_PASSWORD_HANDLER = new ISVNAuthStoreHandler() {
         public boolean canStorePlainTextPassphrases(String realm, SVNAuthentication auth) throws SVNException {
             return false;
         }
@@ -322,11 +325,18 @@ public class SVNRemoteRepository implements IRemoteRepository {
         try {
             SVNURL svnurl = SVNURL.parseURIDecoded(url);
             SVNClientManager manager = SVNClientManager.newInstance();
-            if (credentials.password != null) {
-                DefaultSVNAuthenticationManager authManager = new DefaultSVNAuthenticationManager(null,
+            ISVNAuthenticationManager authManager;
+            if (credentials != null) {
+                DefaultSVNAuthenticationManager defaultManager = new DefaultSVNAuthenticationManager(null,
                         true, credentials.username, new String(credentials.password));
-                manager.setAuthenticationManager(authManager);
+                if (credentials.saveAsPlainText) {
+                    defaultManager.setAuthenticationStorageOptions(FORCE_SAVE_PLAIN_PASSWORD);
+                }
+                authManager = defaultManager;
+            } else {
+                authManager = SVNWCUtil.createDefaultAuthenticationManager();
             }
+            manager.setAuthenticationManager(authManager);
             manager.getWCClient().doInfo(svnurl, SVNRevision.HEAD, SVNRevision.HEAD);
         } catch (SVNAuthenticationException ex) {
             throw new AuthenticationException(ex);

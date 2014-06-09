@@ -107,7 +107,11 @@ public class GITRemoteRepository implements IRemoteRepository {
         } catch (Exception e) {}
 
         this.localDirectory = localDirectory;
+        CredentialsProvider prevProvider = CredentialsProvider.getDefault();
         myCredentialsProvider = new MyCredentialsProvider(this);
+        if (prevProvider instanceof MyCredentialsProvider) {
+            myCredentialsProvider.setCredentials(((MyCredentialsProvider)prevProvider).credentials);
+        }
         CredentialsProvider.setDefault(myCredentialsProvider);
         File localRepositoryDirectory = getLocalRepositoryRoot(localDirectory);
         if (localRepositoryDirectory != null) {
@@ -154,6 +158,7 @@ public class GITRemoteRepository implements IRemoteRepository {
             config.setString("core", null, "autocrlf", "input");
         }
         config.save();
+        myCredentialsProvider.saveCredentials();
         Log.logInfoRB("GIT_FINISH", "clone");
     }
 
@@ -415,7 +420,7 @@ public class GITRemoteRepository implements IRemoteRepository {
         }
         
         private void saveCredentials() {
-            if (credentials == null || credentialsFile == null) {
+            if (credentials == null || credentialsFile == null || !credentials.saveAsPlainText) {
                 return;
             }
             try {
@@ -486,9 +491,7 @@ public class GITRemoteRepository implements IRemoteRepository {
                         if (promptedFingerprint != null) {
                             credentials.fingerprint = promptedFingerprint;
                         }
-                        if (credentials.saveAsPlainText) {
-                            saveCredentials();
-                        }
+                        saveCredentials();
                     } else {
                         ((CredentialItem.YesNoType) i).setValue(false);
                     }
@@ -546,9 +549,7 @@ public class GITRemoteRepository implements IRemoteRepository {
                     gitRemoteRepository.setReadOnly(credentials.readOnly);
                 }
                 credentials.saveAsPlainText = userPassDialog.cbForceSavePlainPassword.isSelected();
-                if (credentials.saveAsPlainText) {
-                    saveCredentials();
-                }
+                saveCredentials();
                 return true;
             } else {
                 return false;

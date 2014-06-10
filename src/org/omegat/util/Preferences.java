@@ -33,13 +33,17 @@
 
 package org.omegat.util;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.UnsupportedEncodingException;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -635,13 +639,27 @@ public class Preferences {
             // trying again later
             m_loaded = true;
 
+            XMLStreamReader xml = new XMLStreamReader();
+            xml.killEmptyBlocks();
+            
             File prefsFile = new File(StaticUtils.getConfigDir() + FILE_PREFERENCES);
+            // If user prefs don't exist, fall back to defaults (possibly) bundled with OmegaT.
             if (!prefsFile.exists()) {
                 prefsFile = new File(StaticUtils.installDir(), FILE_PREFERENCES);
             }
-            XMLStreamReader xml = new XMLStreamReader();
-            xml.killEmptyBlocks();
-            xml.setStream(prefsFile);
+            // If no prefs are found so far, look inside JAR for defaults. Useful for e.g. Web Start.
+            if (prefsFile.exists()) {
+                xml.setStream(prefsFile);
+            } else {
+                InputStream is = Preferences.class.getResourceAsStream(FILE_PREFERENCES);
+                if (is == null) {
+                    throw new FileNotFoundException("No prefs found of any kind.");
+                } else {
+                    BufferedReader br = new BufferedReader(new InputStreamReader(is));
+                    xml.setStream(br);
+                }
+            }
+            
             XMLBlock blk;
             List<XMLBlock> lst;
 

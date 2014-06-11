@@ -82,6 +82,12 @@ import org.omegat.util.Preferences;
 import org.omegat.util.StaticUtils;
 import org.openide.awt.Mnemonics;
 
+/**
+ * Scripting window
+ * 
+ * @author Briac Pilpre
+ * @author Alex Buloichik
+ */
 public class ScriptingWindow extends JFrame {
 
     private static final long serialVersionUID = 1L;

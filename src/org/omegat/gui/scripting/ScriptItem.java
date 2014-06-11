@@ -47,87 +47,79 @@ import org.omegat.util.LFileCopy;
 import org.omegat.util.LinebreakPreservingReader;
 import org.omegat.util.OConsts;
 
-
 /**
- * A script file in the script list is represented as ScriptListFile to allow for localization, description and reordering.
+ * A script file in the script list is represented as ScriptListFile to allow for localization, description and
+ * reordering.
  */
 public class ScriptItem extends File {
-	private static final long serialVersionUID = -257191026120285430L;
 
-	public ScriptItem(File scriptFile) {
-		super(scriptFile.getParentFile(), scriptFile.getName());
+    private static final long serialVersionUID = -257191026120285430L;
 
-		try {
-			ClassLoader loader = new URLClassLoader(new URL[] {scriptFile.getParentFile().toURI().toURL()});
-			String shortName = ScriptingWindow.getBareFileName(scriptFile.getName());
-			m_res = ResourceBundle.getBundle(shortName, Locale.getDefault(), loader);
-		} catch (MissingResourceException e) {
-			scanFileForDescription(scriptFile);
-		} catch (MalformedURLException e) {
-			/* ignore */
-		}
-	}
+    public ScriptItem(File scriptFile) {
+        super(scriptFile.getParentFile(), scriptFile.getName());
 
-	private void scanFileForDescription(File file) {
-		try {
-			Scanner scan = new Scanner(file);
-			scan.findInLine(":name\\s*=\\s*(.*)\\s+:description\\s*=\\s*(.*)");
-			MatchResult results = scan.match();
-			m_scriptName = results.group(1).trim();
-			m_description = results.group(2).trim();	
-		}
-		catch (IllegalStateException e)
-		{
-			/* bad luck */
-		} catch (FileNotFoundException e) {
-			/* ignore - it should not happen here */
-		}
-	}
+        try {
+            ClassLoader loader = new URLClassLoader(new URL[]{scriptFile.getParentFile().toURI().toURL()});
+            String shortName = ScriptingWindow.getBareFileName(scriptFile.getName());
+            m_res = ResourceBundle.getBundle(shortName, Locale.getDefault(), loader);
+        } catch (MissingResourceException e) {
+            scanFileForDescription(scriptFile);
+        } catch (MalformedURLException e) {
+            /* ignore */
+        }
+    }
 
-	public ResourceBundle getResourceBundle() {
-		return m_res;
-	}
-	
-	public String getScriptName() {
-		if (m_scriptName != null)
-		{
-			return m_scriptName;
-		}
-		
-    	try {
-    		m_scriptName = m_res == null ? getName() : m_res.getString("name"); //OStrings.getString("SCRIPT." + fileName + ".name");
-    	}
-    	catch (MissingResourceException e)
-    	{
-    		m_scriptName = getName();
-    	}
+    private void scanFileForDescription(File file) {
+        try {
+            Scanner scan = new Scanner(file);
+            scan.findInLine(":name\\s*=\\s*(.*)\\s+:description\\s*=\\s*(.*)");
+            MatchResult results = scan.match();
+            m_scriptName = results.group(1).trim();
+            m_description = results.group(2).trim();
+        } catch (IllegalStateException e) {
+            /* bad luck */
+        } catch (FileNotFoundException e) {
+            /* ignore - it should not happen here */
+        }
+    }
 
-		return m_scriptName;
-	}
+    public ResourceBundle getResourceBundle() {
+        return m_res;
+    }
 
-	public String getDescription() {
-		if (m_description != null)
-		{
-			return m_description;
-		}
+    public String getScriptName() {
+        if (m_scriptName != null) {
+            return m_scriptName;
+        }
 
-    	try {
-    		m_description = m_res == null ? "" : m_res.getString("description"); //OStrings.getString("SCRIPT." + fileName + ".description");
-    	}
-    	catch (MissingResourceException e)
-    	{
-    		m_description = "";
-    	}
+        try {
+            m_scriptName = m_res == null ? getName() : m_res.getString("name"); //OStrings.getString("SCRIPT." + fileName + ".name");
+        } catch (MissingResourceException e) {
+            m_scriptName = getName();
+        }
 
-		return m_description;
-	}
+        return m_scriptName;
+    }
 
-	
-	public String getToolTip() {
-		String name = getScriptName();
-		String description = getDescription();
-		return "".equals(description) ? name : name + " - " + description;
-	}
+    public String getDescription() {
+        if (m_description != null) {
+            return m_description;
+        }
+
+        try {
+            m_description = m_res == null ? "" : m_res.getString("description"); //OStrings.getString("SCRIPT." + fileName + ".description");
+        } catch (MissingResourceException e) {
+            m_description = "";
+        }
+
+        return m_description;
+    }
+
+    public String getToolTip() {
+        String name = getScriptName();
+        String description = getDescription();
+        return "".equals(description) ? name : name + " - " + description;
+    }
 
     public String getText() throws FileNotFoundException, IOException {
         String ret = "";
@@ -143,7 +135,7 @@ public class ScriptItem extends File {
             while (s != null) {
                 sb.append(s);
                 String br = lpin.getLinebreak();
-                if (! br.isEmpty()) {
+                if (!br.isEmpty()) {
                     lineBreak = br;
                     sb.append('\n');
                 }
@@ -178,25 +170,25 @@ public class ScriptItem extends File {
         InputStream is = new ByteArrayInputStream(text.getBytes(OConsts.UTF8));
         LFileCopy.copy(is, this);
     }
-	
-	@Override
-	public String toString() {
-		return getScriptName();
-	}
-	
-	public static class ScriptItemComparator implements Comparator<ScriptItem>
-	{
-		@Override
-		public int compare(ScriptItem o1, ScriptItem o2) {
-			return o1.getScriptName().compareTo(o2.getScriptName());
-		}
+
+    @Override
+    public String toString() {
+        return getScriptName();
     }
 
-	private final String BOM = "\uFEFF";
+    public static class ScriptItemComparator implements Comparator<ScriptItem> {
+
+        @Override
+        public int compare(ScriptItem o1, ScriptItem o2) {
+            return o1.getScriptName().compareTo(o2.getScriptName());
+        }
+    }
+
+    private final String BOM = "\uFEFF";
     private boolean startsWithBOM = false;
     private String lineBreak = System.getProperty("line.separator");
-	
-	private String m_scriptName = null;
-	private String m_description = null;
-	private ResourceBundle m_res = null;
+
+    private String m_scriptName = null;
+    private String m_description = null;
+    private ResourceBundle m_res = null;
 }

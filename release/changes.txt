@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 3.1.2
 ----------------------------------------------------------------------
-  12 Enhancements
+  13 Enhancements
    2 Bug fixes
    2 Localisation updates
 ----------------------------------------------------------------------
@@ -46,6 +46,9 @@ E.g., svn!https://omegat.xxxx.xx/omegat-fr
 
   - Scripts with a separate .properties file for user messages are now 
 included in localisation bundles
+
+  - Specific preferences can be built into a Java Web Start package at
+compilation time, by putting an omegat.prefs file in /release/WebStart-specific
 
   Bug fixes:
 

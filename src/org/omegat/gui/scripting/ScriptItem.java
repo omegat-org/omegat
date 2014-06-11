@@ -3,7 +3,7 @@
           with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
- Copyright (C) 2014 Briac Pilpre
+ Copyright (C) 2014 Briac Pilpre, Didier Briel
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -50,10 +50,15 @@ import org.omegat.util.OConsts;
 /**
  * A script file in the script list is represented as ScriptListFile to allow for localization, description and
  * reordering.
+ * 
+ * @author Briac Pilpre
+ * @author Didier Briel
  */
 public class ScriptItem extends File {
 
     private static final long serialVersionUID = -257191026120285430L;
+    
+    private static final String PROPERTIES = "properties/";
 
     public ScriptItem(File scriptFile) {
         super(scriptFile.getParentFile(), scriptFile.getName());
@@ -61,9 +66,15 @@ public class ScriptItem extends File {
         try {
             ClassLoader loader = new URLClassLoader(new URL[]{scriptFile.getParentFile().toURI().toURL()});
             String shortName = ScriptingWindow.getBareFileName(scriptFile.getName());
-            m_res = ResourceBundle.getBundle(shortName, Locale.getDefault(), loader);
-        } catch (MissingResourceException e) {
-            scanFileForDescription(scriptFile);
+            try { // Try first at the root of the script dir, for compatibility
+                m_res = ResourceBundle.getBundle(shortName, Locale.getDefault(), loader); 
+            } catch (MissingResourceException e) {
+                try { // Then inside the /properties dir
+                    m_res = ResourceBundle.getBundle(PROPERTIES  + shortName, Locale.getDefault(), loader);
+                } catch (MissingResourceException ex) {
+                    scanFileForDescription(scriptFile);
+                }
+            }
         } catch (MalformedURLException e) {
             /* ignore */
         }

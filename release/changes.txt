@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 3.1.2
 ----------------------------------------------------------------------
-  13 Enhancements
+  14 Enhancements
    2 Bug fixes
    2 Localisation updates
 ----------------------------------------------------------------------
@@ -49,6 +49,10 @@ included in localisation bundles
 
   - Specific preferences can be built into a Java Web Start package at
 compilation time, by putting an omegat.prefs file in /release/WebStart-specific
+
+  - .properties files for script localisation can now be put into a
+/properties folder inside the /scripts folder. For compatibility, .properties from
+the root of the /script folder are loaded if they exist.
 
   Bug fixes:
 

@@ -1,4 +1,4 @@
-@@TRANSLATION_NOTICE@@
+﻿@@TRANSLATION_NOTICE@@
 
 ==============================================================================
   OmegaT 2.0, Read Me file
@@ -259,7 +259,7 @@ To contribute in other ways, subscribe first to the user group at:
 And get a feel of what is going on in the OmegaT world...
 
   OmegaT is the original work of Keith Godfrey.
-  Marc Prior is the coordinator of the OmegaT project.
+  Didier Briel is the OmegaT project manager.
 
 Previous contributors include:
 (alphabetical order)
@@ -267,7 +267,7 @@ Previous contributors include:
 Code has been contributed by
   Zoltan Bartko
   Volker Berlin
-  Didier Briel (development manager)
+  Didier Briel
   Kim Bruning
   Alex Buloichik (lead developer)
   Sandra Jean Chua
@@ -302,7 +302,7 @@ Other contributions by
   Jean-Christophe Helary (localization manager)
   Vito Smolej (documentation manager)
   Samuel Murray
-  Marc Prior 
+  Marc Prior (webmaster)
   and many, many more very helpful people
 
 (If you think you have significantly contributed to the OmegaT Project 

@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 3.1.2
 ----------------------------------------------------------------------
-  14 Enhancements
+  15 Enhancements
    2 Bug fixes
    2 Localisation updates
 ----------------------------------------------------------------------
@@ -53,6 +53,11 @@ compilation time, by putting an omegat.prefs file in /release/WebStart-specific
   - .properties files for script localisation can now be put into a
 /properties folder inside the /scripts folder. For compatibility, .properties from
 the root of the /script folder are loaded if they exist.
+
+  - In the Search window, the labels Number of results and Display all results
+were misleading, because what is counted is the number of segments containing the
+results, not the number of search results. To clarify, the labels were renamed to
+Number of matching segments and Display all matching segments.
 
   Bug fixes:
 

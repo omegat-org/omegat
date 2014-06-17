@@ -1,4 +1,4 @@
-Ce document a été traduit par Didier Briel et Jean-Christophe Helary, copyright© 2007-2013.
+Ce document a été traduit par Didier Briel et Jean-Christophe Helary, copyright© 2007-2014.
 
 ==============================================================================
   OmegaT 2.0, fichier « Lisez-moi »
@@ -18,13 +18,13 @@ Les informations les plus récentes au sujet d'OmegaT sont à :
       http://www.omegat.org/
 
 Aide utilisateur sur le groupe Yahoo. Vous pouvez y consulter les archives sans vous inscrire au groupe :
-     http://groups.yahoo.com/group/OmegaT/
+     http://tech.groups.yahoo.com/group/omegat/
 
 Demandes d'améliorations (en anglais), sur le site de SourceForge :
-     http://sourceforge.net/tracker/?group_id=68187&atid=520350
+     https://sourceforge.net/p/omegat/feature-requests/
 
 Rapports de bogues (en anglais), sur le site de SourceForge :
-     http://sourceforge.net/tracker/?group_id=68187&atid=520347
+     https://sourceforge.net/p/omegat/bugs/
 
 ==============================================================================
   2.  Qu'est ce qu'OmegaT ?
@@ -87,7 +87,7 @@ OmegaT est capable d'analyser les structures de dossiers les plus complexes pour
 
 Pour commencer à utiliser OmegaT tout de suite, lancez OmegaT et lisez le tutoriel qui s'affiche dans la fenêtre principale : « OmegaT : Tutoriel premiers pas ».
 
-Le manuel utilisateur se trouve dans le paquet que vous avez téléchargé, vous y avez accès à partir du menu [Aide] après avoir lancé OmegaT.
+Le guide de l'utilisateur se trouve dans le paquet que vous avez téléchargé, vous y avez accès à partir du menu [Aide] après avoir lancé OmegaT.
 
 ==============================================================================
  3. Installer OmegaT
@@ -186,20 +186,20 @@ Faites glisser OmegaT.app sur votre dock ou sur la barre d'outils d'une fenêtre
 Pour participer au développement d'OmegaT, prenez contact avec les développeurs à :
     http://lists.sourceforge.net/lists/listinfo/omegat-development
 
-Pour traduire l'interface utilisateur, le manuel ou d'autres documents, lisez :
+Pour traduire l'interface utilisateur, le guide ou d'autres documents, lisez :
       
-      http://www.omegat.org/en/translation-info.html
+      http://www.omegat.org/en/howtos/localizing_omegat.php
 
 Et inscrivez vous à la liste des traducteurs (multilingue) :
-      http://lists.sourceforge.net/mailman/listinfo/omegat-l10n
+      https://lists.sourceforge.net/lists/listinfo/omegat-l10n
 
 Pour d'autres types de contributions, inscrivez-vous d'abord au groupe des utilisateurs :
       http://tech.groups.yahoo.com/group/omegat/
 
 Et voyez comment se passent les choses dans le monde d'OmegaT...
 
-  OmegaT est l'œuvre de Keith Godfrey.
-  Le coordinateur du projet OmegaT est Marc Prior.
+  OmegaT est l'œuvre initiale de Keith Godfrey.
+  Didier Briel est le responsable du projet OmegaT.
 
 Les personnes qui ont contribué incluent :
 (ordre alphabétique)
@@ -207,7 +207,7 @@ Les personnes qui ont contribué incluent :
 Contributions au code :
   Zoltan Bartko
   Volker Berlin
-  Didier Briel (responsable du développement)
+  Didier Briel
   Kim Bruning
   Alex Buloichik (développeur principal)
   Sandra Jean Chua
@@ -242,7 +242,7 @@ Autres contributions par :
   Jean-Christophe Helary (responsable localisations)
   Vito Smolej (responsable documentation)
   Samuel Murray
-  Marc Prior 
+  Marc Prior (webmestre)
   ainsi que beaucoup d'autres personnes.
 
 (Si vous pensez avoir contribué à OmegaT de manière significative et si votre nom ne se trouve pas sur cette liste, n'hésitez pas à nous contacter.)
@@ -269,7 +269,7 @@ OmegaT utilise les bibliothèques suivantes :
 ==============================================================================
  5.  Est-ce qu'OmegaT vous pose problème ? Avez-vous besoin d'aide ?
 
-Avant de faire un rapport de bogue, prenez la précaution de bien lire le manuel utilisateur. Ce que vous considérez comme un problème peut en fait être une fonction d'OmegaT. Si les mots suivants se trouvent dans le journal : « Erreur », « Avertissement », ou bien « a été avortée », vous avez probablement trouvé un problème. Le journal est le fichier log.txt situé dans le répertoire des préférences utilisateur (consulter le manuel pour déterminer son l'emplacement).
+Avant de faire un rapport de bogue, prenez la précaution de bien lire le guide de l'utilisateur. Ce que vous considérez comme un problème peut en fait être une fonction d'OmegaT. Si les mots suivants se trouvent dans le journal : « Erreur », « Avertissement », ou bien « s'est arrêté de manière imprévue », vous avez probablement trouvé un problème. Le journal est le fichier log.txt situé dans le dossier des préférences utilisateur (consulter le guide pour déterminer son l'emplacement).
 
 L'étape suivante est d'avoir votre découverte confirmée par d'autres utilisateurs pour s'assurer qu'un rapport n'a pas déjà été rempli. Vous pouvez aussi consulter la page des bogues sur SourceForge. Une fois que vous êtes sûr d'avoir découvert une séquence reproductible d'événements qui aboutit à un résultat non souhaitable, il est possible de remplir un rapport de bogue.
 
@@ -281,10 +281,10 @@ Un bon rapport de bogue comporte exactement 3 parties.
 Il est possible d'ajouter des copies de fichiers, des portions du journal, des copies d'écran à votre rapport, tout ce qui vous semble qui aidera les développeurs à résoudre votre problème.
 
 Les archives du groupe utilisateur sont à :
-     http://groups.yahoo.com/group/OmegaT/
+     http://tech.groups.yahoo.com/group/omegat/
 
 Pour consulter la page des rapports de bogue et pour remplir un nouveau rapport rendez-vous à :
-     http://sourceforge.net/tracker/?group_id=68187&atid=520347
+     https://sourceforge.net/p/omegat/bugs/
 
 Il sera nécessaire de procéder à un enregistrement en tant qu'utilisateur de SourceForge si vous souhaitez recevoir des informations sur les suites données à votre rapport.
 

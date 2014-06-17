@@ -1092,7 +1092,7 @@ OmegaT failed to load the valid ones
   - Turkish localisation updated to 3.0.0 (UI)
 
 ----------------------------------------------------------------------
- OmegaT 2.6.3 update 10 
+ OmegaT 2.6.3 update 10 (2014-06-18)
 ----------------------------------------------------------------------
    0 Enhancement
    2 Bug fixes

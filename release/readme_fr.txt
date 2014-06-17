@@ -1,4 +1,4 @@
-Ce document a été traduit par Didier Briel et Jean-Christophe Helary, copyright© 2007-2013.
+Ce document a été traduit par Didier Briel et Jean-Christophe Helary, copyright© 2007-2014.
 
 ==============================================================================
   OmegaT 3.0, fichier « Lisez-moi »
@@ -87,7 +87,7 @@ OmegaT est capable d'analyser les structures de dossiers les plus complexes pour
 
 Pour commencer à utiliser OmegaT tout de suite, lancez OmegaT et lisez le tutoriel qui s'affiche dans la fenêtre principale : « OmegaT : Tutoriel premiers pas ».
 
-Le manuel utilisateur se trouve dans le paquet que vous avez téléchargé, vous y avez accès à partir du menu [Aide] après avoir lancé OmegaT.
+Le guide de l'utilisateur se trouve dans le paquet que vous avez téléchargé, vous y avez accès à partir du menu [Aide] après avoir lancé OmegaT.
 
 ==============================================================================
  3. Installer OmegaT
@@ -102,7 +102,7 @@ Pour ce faire, téléchargez le fichier suivant et exécutez-le :
 
 Il installera l'environnement approprié pour votre ordinateur et l'application elle-même lors de la première exécution. Il ne sera pas nécessaire d'être en ligne pour les lancements suivants.
 
-Durant l'installation, en fonction de votre système d'exploitation, vous recevrez peut-être plusieurs avertissements de sécurité. Le certificat est auto-signé par « Didier Briel ». 
+Durant l'installation, en fonction de votre système d'exploitation, vous recevrez peut-être plusieurs avertissements de sécurité. Le certificat est de « PnS Concept ». 
 Les autorisations que vous accordez à cette version (qui peuvent être mentionnées comme étant un « accès sans restriction à l'ordinateur ») sont identiques aux autorisations que vous donnez à la version locale, telle qu'installée par une des procédures décrites plus loin : elles autorisent l'accès au disque dur de l'ordinateur. Les clics suivants sur OmegaT.jnlp vérifieront l'existence de mises à jour, si vous êtes en ligne, les installeront le cas échéant et démarreront ensuite OmegaT. 
 
 Les méthodes et les moyens alternatifs pour télécharger et installer OmegaT sont indiqués ci-dessous. 
@@ -186,7 +186,7 @@ Faites glisser OmegaT.app sur votre dock ou sur la barre d'outils d'une fenêtre
 Pour participer au développement d'OmegaT, prenez contact avec les développeurs à :
     http://lists.sourceforge.net/lists/listinfo/omegat-development
 
-Pour traduire l'interface utilisateur, le manuel ou d'autres documents, lisez :
+Pour traduire l'interface utilisateur, le guide ou d'autres documents, lisez :
       
       http://www.omegat.org/en/howtos/localizing_omegat.php
 
@@ -198,8 +198,8 @@ Pour d'autres types de contributions, inscrivez-vous d'abord au groupe des utili
 
 Et voyez comment se passent les choses dans le monde d'OmegaT...
 
-  OmegaT est l'œuvre de Keith Godfrey.
-  Le coordinateur du projet OmegaT est Marc Prior.
+  OmegaT est l'œuvre initiale de Keith Godfrey.
+  Didier Briel est le responsable du projet OmegaT.
 
 Les personnes qui ont contribué incluent :
 (ordre alphabétique)
@@ -207,11 +207,12 @@ Les personnes qui ont contribué incluent :
 Contributions au code :
   Zoltan Bartko
   Volker Berlin
-  Didier Briel (responsable du développement)
+  Didier Briel
   Kim Bruning
   Alex Buloichik (développeur principal)
   Sandra Jean Chua
   Thomas Cordonnier
+  Enrique Estévez Fernández
   Martin Fleurke  
   Wildrich Fourie
   Phillip Hall
@@ -219,10 +220,12 @@ Contributions au code :
   Thomas Huriaux
   Hans-Peter Jacobs
   Kyle Katarn
+  Piotr Kulik
   Ibai Lakunza Velasco
   Guido Leenders
   Aaron Madlon-Kay
   Fabián Mandelbaum
+  Manfred Martin
   John Moran
   Maxym Mykhalchuk 
   Arno Peters
@@ -243,18 +246,17 @@ Autres contributions par :
   Jean-Christophe Helary (responsable localisations)
   Vito Smolej (responsable documentation)
   Samuel Murray
-  Marc Prior 
+  Marc Prior (webmestre)
   ainsi que beaucoup d'autres personnes.
 
 (Si vous pensez avoir contribué à OmegaT de manière significative et si votre nom ne se trouve pas sur cette liste, n'hésitez pas à nous contacter.)
 
 OmegaT utilise les bibliothèques suivantes :
   HTMLParser par Somik Raha, Derrick Oswald, etc. (licence LGPL)
-  MRJ Adapter par Steve Roy (licence LGPL)
   VLDocking Framework 2.1.4 par VLSolutions (licence CeCILL)
   Hunspell par László Németh et d'autres personnes (licence LGPL)
   JNA par Todd Fast, Timothy Wall et d'autres personnes (licence LGPL)
-  Swing-Layout 1.0.2 (licence LGPL)
+  Swing-Layout 1.0.4 (licence LGPL)
   Jmyspell 2.1.4 (licence LGPL)
   SVNKit 1.7.5 (licence TMate)
   Sequence Library (licence Sequence Library)
@@ -276,11 +278,14 @@ OmegaT utilise les bibliothèques suivantes :
   morfologik-*.jar (licence Morfologik)
   segment-1.4.1.jar (licence Segment)
   pdfbox-app-1.8.1.jar (licence Apache 2.0)
+  KoreanAnalyzer-3x-120223.jar (licence Apache 2.0)
+  SuperTMXMerge-for_OmegaT.jar (licence LGPL)
+  groovy-all-2.2.2.jar (licence Apache 2.0)
 
 ==============================================================================
  5.  Est-ce qu'OmegaT vous pose problème ? Avez-vous besoin d'aide ?
 
-Avant de faire un rapport de bogue, prenez la précaution de bien lire le manuel utilisateur. Ce que vous considérez comme un problème peut en fait être une fonction d'OmegaT. Si les mots suivants se trouvent dans le journal : « Erreur », « Avertissement », ou bien « a été avortée », vous avez probablement trouvé un problème. Le journal est le fichier log.txt situé dans le répertoire des préférences utilisateur (consulter le manuel pour déterminer son l'emplacement).
+Avant de faire un rapport de bogue, prenez la précaution de bien lire le guide de l'utilisateur. Ce que vous considérez comme un problème peut en fait être une fonction d'OmegaT. Si les mots suivants se trouvent dans le journal : « Erreur », « Avertissement », ou bien « s'est arrêté de manière imprévue », vous avez probablement trouvé un problème. Le journal est le fichier log.txt situé dans le dossier des préférences utilisateur (consulter le guide pour déterminer son l'emplacement).
 
 L'étape suivante est d'avoir votre découverte confirmée par d'autres utilisateurs pour s'assurer qu'un rapport n'a pas déjà été rempli. Vous pouvez aussi consulter la page des bogues sur SourceForge. Une fois que vous êtes sûr d'avoir découvert une séquence reproductible d'événements qui aboutit à un résultat non souhaitable, il est possible de remplir un rapport de bogue.
 

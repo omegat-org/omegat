@@ -66,7 +66,9 @@ public class TaaSGlossary implements IGlossary {
         for (String term : terms) {
             List<TaasTerm> r = TaaSPlugin.client.termLookup(sLang, tLang, term);
             for (TaasTerm tt : r) {
-                result.add(new GlossaryEntry(term, tt.getTerm(), tt.getDomainName(), false));
+                result.add(new GlossaryEntry(term, 
+                                             tt.getTerm(), 
+                                             "TaaS " + tt.getCollectionName() + "," + tt.getDomainName(), false));
             }
         }
         return result;

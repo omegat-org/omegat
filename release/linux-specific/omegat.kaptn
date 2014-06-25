@@ -180,7 +180,7 @@ taas_k "User key for TaaS" -> @password="" ;
 
 taas_help :dialog "Help" -> taas_m taas_hc ;
 taas_m :horizontal -> taas_t ;
-taas_t "Enter API key to access your private collection at TaaS (terminology as a service) website" -> @ ;
+taas_t "Enter API key to access your private collection from TaaS (terminology as a service) website" -> @ ;
 taas_hc :horizontal -> @close="Close" ;
 
 

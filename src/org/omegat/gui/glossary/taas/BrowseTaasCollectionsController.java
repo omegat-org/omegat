@@ -30,13 +30,11 @@ import gen.taas.TaasCollectionType;
 import gen.taas.TaasDomain;
 import gen.taas.TaasLanguage;
 
-import java.awt.Color;
+import java.awt.Component;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.io.File;
 import java.text.DateFormat;
 import java.text.MessageFormat;
@@ -49,10 +47,10 @@ import java.util.concurrent.ExecutionException;
 import javax.swing.AbstractAction;
 import javax.swing.Action;
 import javax.swing.JComponent;
+import javax.swing.JTable;
 import javax.swing.KeyStroke;
 import javax.swing.RowSorter;
 import javax.swing.SortOrder;
-import javax.swing.SwingConstants;
 import javax.swing.SwingWorker;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableCellRenderer;
@@ -173,6 +171,7 @@ public class BrowseTaasCollectionsController {
         TableColumnModel columns = new DefaultTableColumnModel();
         TableColumn cName = new TableColumn(0, 150);
         cName.setHeaderValue(OStrings.getString("TAAS_LIST_NAME"));
+        cName.setCellRenderer(NAME_CELL_RENDERER);
         TableColumn cDesc = new TableColumn(1, 150);
         cDesc.setHeaderValue(OStrings.getString("TAAS_LIST_DESC"));
         TableColumn cSource = new TableColumn(2, 50);
@@ -197,12 +196,19 @@ public class BrowseTaasCollectionsController {
         return columns;
     }
 
-    static class DownloadCellRenderer extends DefaultTableCellRenderer {
-        public DownloadCellRenderer() {
-            setHorizontalAlignment(SwingConstants.CENTER);
-            setForeground(Color.BLUE);
+    static DefaultTableCellRenderer NAME_CELL_RENDERER = new DefaultTableCellRenderer() {
+        @Override
+        public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected,
+                boolean hasFocus, int row, int column) {
+            Component c = super
+                    .getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+            final List<TaasCollection> list = ((CollectionsTable) dialog.tableCollections.getModel()).list;
+            if (list.get(row).getType() == TaasCollectionType.PRIVATE) {
+                c.setFont(c.getFont().deriveFont(Font.BOLD));
+            }
+            return c;
         }
-    }
+    };
 
     static ActionListener DOWNLOAD_LISTENER = new ActionListener() {
         @Override
@@ -325,7 +331,7 @@ public class BrowseTaasCollectionsController {
             File glossaryFile = getFileForCollection(c);
             switch (columnIndex) {
             case 0:
-                return c.getName() + (c.getType() == TaasCollectionType.PRIVATE ? '*' : ' ');
+                return c.getName();
             case 1:
                 return c.getDescription();
             case 2:

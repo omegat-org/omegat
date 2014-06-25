@@ -49,7 +49,11 @@ public class TaasGlossaries {
      * Register plugin into OmegaT.
      */
     public static void loadPlugins() {
-        client = new TaaSClient("OmegaT", "Ts1DW4^UpE", "a49d7de4-c5c0-421a-9e93-356fdcde2444");
+        try {        
+            client = new TaaSClient();
+        } catch (Exception ex) {
+            // Eat error silently
+        }
 
         CoreEvents.registerApplicationEventListener(new IApplicationEventListener() {
             public void onApplicationStartup() {

@@ -3,7 +3,7 @@
           with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
- Copyright (C) 2014 Alex Buloichik
+ Copyright (C) 2014 Alex Buloichik, Didier Briel
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -49,6 +49,7 @@ import org.omegat.util.Base64;
 import org.omegat.util.LFileCopy;
 import org.omegat.util.Language;
 import org.omegat.util.Log;
+import org.omegat.util.OStrings;
 
 /**
  * Client for TaaS REST service.
@@ -57,16 +58,26 @@ import org.omegat.util.Log;
  */
 public class TaaSClient {
     public static final String WS_URL = "https://api.taas-project.eu";
+    /** Machine user name */
+    public static final String M_USERNAME = "OmegaT";
+    /** Machine password */
+    public static final String M_PASSWORD = "Ts1DW4^UpE";
+     
     private final JAXBContext context;
 
     private final String basicAuth;
     private final String taasUserKey;
 
-    public TaaSClient(String username, String password, String taasUserKey) {
+    public TaaSClient() throws Exception {
+        
+        String APIKey = System.getProperty("taas.user.key");
+        if (APIKey == null) {
+            throw new Exception(OStrings.getString("TAAS_API_KEY_NOT_FOUND"));
+        } 
         try {
             this.basicAuth = "Basic "
-                    + Base64.encodeBytes((username + ":" + password).getBytes("ISO-8859-1"));
-            this.taasUserKey = taasUserKey;
+                    + Base64.encodeBytes((M_USERNAME + ":" + M_PASSWORD).getBytes("ISO-8859-1"));
+            this.taasUserKey = APIKey;
             context = JAXBContext.newInstance(TaasCollections.class, TaasArrayOfTerm.class);
         } catch (Exception ex) {
             throw new RuntimeException(ex);

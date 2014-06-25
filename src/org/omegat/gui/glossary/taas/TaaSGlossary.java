@@ -29,11 +29,13 @@ import gen.taas.TaasExtractionResult;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.logging.Logger;
 
 import org.omegat.core.glossaries.IGlossary;
 import org.omegat.gui.glossary.GlossaryEntry;
 import org.omegat.gui.glossary.GlossaryReaderTBX;
 import org.omegat.util.Language;
+import org.omegat.util.Log;
 import org.omegat.util.Preferences;
 
 /**
@@ -42,6 +44,7 @@ import org.omegat.util.Preferences;
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
 public class TaaSGlossary implements IGlossary {
+    private static final Logger LOGGER = Logger.getLogger(TaaSGlossary.class.getName());
 
     @Override
     public List<GlossaryEntry> search(Language sLang, Language tLang, String srcText) throws Exception {
@@ -51,6 +54,8 @@ public class TaaSGlossary implements IGlossary {
 
         TaasExtractionResult res = TaaSPlugin.client.termExtraction(sLang, tLang, srcText);
         String data = TaaSPlugin.filterTaasResult(res.getTerms());
-        return GlossaryReaderTBX.read(data, false);
+        List<GlossaryEntry> entries = GlossaryReaderTBX.read(data, false);
+        Log.logDebug(LOGGER, "termExtraction returns data");
+        return entries;
     }
 }

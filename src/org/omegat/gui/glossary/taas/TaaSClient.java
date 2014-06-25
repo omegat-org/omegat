@@ -46,6 +46,7 @@ import java.net.URL;
 import java.net.URLEncoder;
 import java.nio.charset.Charset;
 import java.util.List;
+import java.util.logging.Logger;
 
 import javax.xml.bind.JAXBContext;
 
@@ -61,6 +62,8 @@ import org.omegat.util.Log;
  */
 public class TaaSClient {
     static final Charset UTF8 = Charset.forName("UTF-8");
+
+    private static final Logger LOGGER = Logger.getLogger(TaaSClient.class.getName());
 
     public static final String WS_URL = "https://api.taas-project.eu";
     /** Machine user name */
@@ -204,6 +207,7 @@ public class TaaSClient {
         } catch (Exception ex) {
             throw new FormatError("Wrong content: " + ex.getMessage());
         }
+        Log.logDebug(LOGGER, "getCollectionsList() returns {0} collections", result.getCollection().size());
         return result.getCollection();
     }
 
@@ -221,6 +225,7 @@ public class TaaSClient {
         } catch (Exception ex) {
             throw new FormatError("Wrong content: " + ex.getMessage());
         }
+        Log.logDebug(LOGGER, "getDomainsList() returns {0} domains", result.getDomain().size());
         return result.getDomain();
     }
 
@@ -242,6 +247,7 @@ public class TaaSClient {
         } finally {
             in.close();
         }
+        Log.logDebug(LOGGER, "Collection {0} downloaded", collectionId);
     }
 
     /**
@@ -260,6 +266,7 @@ public class TaaSClient {
         } catch (Exception ex) {
             throw new FormatError("Wrong content: " + ex.getMessage());
         }
+        Log.logDebug(LOGGER, "termLookup returns {0} results", result.getTerm().size());
         return result.getTerm();
     }
 
@@ -276,6 +283,7 @@ public class TaaSClient {
         } catch (Exception ex) {
             throw new FormatError("Wrong content: " + ex.getMessage());
         }
+        Log.logDebug(LOGGER, "termExtraction returns data");
         return result;
     }
 

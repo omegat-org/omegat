@@ -255,8 +255,9 @@ public class TaaSClient {
      */
     List<TaasTerm> termLookup(Language sourceLang, Language targetLang, String term) throws IOException,
             Unauthorized, FormatError {
-        HttpURLConnection conn = requestGet(WS_URL + "/lookup/" + sourceLang.getLanguageCode() + "/"
-                + URLEncoder.encode(term, "UTF-8") + "?targetLang=" + targetLang.getLanguageCode());
+        HttpURLConnection conn = requestGet(WS_URL + "/lookup/" + sourceLang.getLanguageCode().toLowerCase()
+                + "/" + URLEncoder.encode(term, "UTF-8") + "?targetLang="
+                + targetLang.getLanguageCode().toLowerCase());
         checkXMLUTF8ContentType(conn);
 
         String data = readUTF8(conn);
@@ -272,9 +273,9 @@ public class TaaSClient {
 
     TaasExtractionResult termExtraction(Language sourceLang, Language targetLang, String text)
             throws IOException, Unauthorized, FormatError {
-        HttpURLConnection conn = requestPost(
-                WS_URL + "/extraction/?sourceLang=" + sourceLang.getLanguageCode() + "&targetLang="
-                        + targetLang.getLanguageCode() + "&method=" + EXTRACTION_METHOD, text);
+        HttpURLConnection conn = requestPost(WS_URL + "/extraction/?sourceLang="
+                + sourceLang.getLanguageCode().toLowerCase() + "&targetLang="
+                + targetLang.getLanguageCode().toLowerCase() + "&method=" + EXTRACTION_METHOD, text);
         checkXMLUTF8ContentType(conn);
         String data = readUTF8(conn);
         TaasExtractionResult result;

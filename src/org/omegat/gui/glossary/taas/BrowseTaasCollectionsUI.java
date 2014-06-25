@@ -65,6 +65,7 @@ public class BrowseTaasCollectionsUI extends javax.swing.JDialog {
         GridBagConstraints gridBagConstraints;
 
         labelStatus = new JLabel();
+        btnDownload = new JButton();
         btnClose = new JButton();
         jScrollPane1 = new JScrollPane();
         tableCollections = new JTable();
@@ -77,15 +78,22 @@ public class BrowseTaasCollectionsUI extends javax.swing.JDialog {
         labelStatus.setHorizontalAlignment(SwingConstants.CENTER);
         Mnemonics.setLocalizedText(labelStatus, " ");
         gridBagConstraints = new GridBagConstraints();
-        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 10;
         gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
         gridBagConstraints.weightx = 1.0;
         getContentPane().add(labelStatus, gridBagConstraints);
 
+        Mnemonics.setLocalizedText(btnDownload, OStrings.getString("TAAS_LIST_DOWNLOAD")); // NOI18N
+        gridBagConstraints = new GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 10;
+        gridBagConstraints.insets = new Insets(5, 5, 5, 5);
+        getContentPane().add(btnDownload, gridBagConstraints);
+
         Mnemonics.setLocalizedText(btnClose, OStrings.getString("BUTTON_CLOSE")); // NOI18N
         gridBagConstraints = new GridBagConstraints();
-        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 10;
         gridBagConstraints.anchor = GridBagConstraints.NORTH;
         gridBagConstraints.insets = new Insets(5, 5, 5, 5);
@@ -107,7 +115,7 @@ public class BrowseTaasCollectionsUI extends javax.swing.JDialog {
         gridBagConstraints = new GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.gridwidth = 3;
         gridBagConstraints.fill = GridBagConstraints.BOTH;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.weighty = 1.0;
@@ -159,6 +167,7 @@ public class BrowseTaasCollectionsUI extends javax.swing.JDialog {
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public JButton btnClose;
+    public JButton btnDownload;
     public JScrollPane jScrollPane1;
     public JLabel labelStatus;
     public JTable tableCollections;

@@ -121,7 +121,7 @@ public class BrowseTaasCollectionsController {
                 }
             }
         }.execute();
-        dialog.tableCollections.addMouseListener(MOUSE_LISTENER);
+        dialog.btnDownload.addActionListener(DOWNLOAD_LISTENER);
 
         // Handle escape key to close the window
         KeyStroke escape = KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0, false);
@@ -185,15 +185,14 @@ public class BrowseTaasCollectionsController {
         cUpdated.setHeaderValue(OStrings.getString("TAAS_LIST_UPDATED"));
         TableColumn cDownload = new TableColumn(6, 50);
         cDownload.setHeaderValue("");
-        cDownload.setCellRenderer(new DownloadCellRenderer());
 
+        columns.addColumn(cDownload);
         columns.addColumn(cName);
         columns.addColumn(cDesc);
         columns.addColumn(cSource);
         columns.addColumn(cTarget);
         columns.addColumn(cDomains);
         columns.addColumn(cUpdated);
-        columns.addColumn(cDownload);
 
         return columns;
     }
@@ -205,47 +204,52 @@ public class BrowseTaasCollectionsController {
         }
     }
 
-    static MouseListener MOUSE_LISTENER = new MouseAdapter() {
+    static ActionListener DOWNLOAD_LISTENER = new ActionListener() {
         @Override
-        public void mouseClicked(MouseEvent e) {
-            int colIndex = dialog.tableCollections.columnAtPoint(e.getPoint());
-            int rowIndex = dialog.tableCollections.rowAtPoint(e.getPoint());
-            colIndex = dialog.tableCollections.convertColumnIndexToModel(colIndex);
-            rowIndex = dialog.tableCollections.convertRowIndexToModel(rowIndex);
+        public void actionPerformed(ActionEvent e) {
 
-            if (colIndex != 6) {
-                return; // only for 'Download' column
-            }
+            final List<TaasCollection> list = ((CollectionsTable) dialog.tableCollections.getModel()).list;
+            final boolean[] marks = ((CollectionsTable) dialog.tableCollections.getModel()).marks;
 
-            final TaasCollection c = ((CollectionsTable) dialog.tableCollections.getModel()).list
-                    .get(rowIndex);
-
-            dialog.labelStatus.setText(MessageFormat.format(OStrings.getString("TAAS_STATUS_DOWNLOAD"),
-                    c.getName()));
-            new SwingWorker<Object, Void>() {
-                File glossaryFile, newFile;
-
+            new SwingWorker<Object, String>() {
                 protected Object doInBackground() throws Exception {
-                    glossaryFile = getFileForCollection(c);
-                    newFile = new File(glossaryFile.getAbsolutePath() + ".new");
+                    for (int i = 0; i < list.size(); i++) {
+                        TaasCollection c = list.get(i);
+                        if (marks[i]) {
+                            publish(c.getName());
 
-                    TaaSPlugin.client.downloadCollection(c.getId(), newFile);
+                            File glossaryFile = getFileForCollection(c);
+                            File newFile = new File(glossaryFile.getAbsolutePath() + ".new");
+                            TaaSPlugin.client.downloadCollection(c.getId(), newFile);
+
+                            if (glossaryFile.exists()) {
+                                glossaryFile.delete();
+                            }
+                            if (!newFile.renameTo(glossaryFile)) {
+                                dialog.labelStatus.setText(OStrings.getString("TAAS_REPLACE_ERROR"));
+                                return null;
+                            }
+                        }
+                    }
 
                     return null;
+                }
+
+                /**
+                 * Show collection name.
+                 */
+                protected void process(List<String> chunks) {
+                    for (String n : chunks) {
+                        dialog.labelStatus.setText(MessageFormat.format(
+                                OStrings.getString("TAAS_STATUS_DOWNLOAD"), n));
+                    }
                 }
 
                 protected void done() {
                     try {
                         get();
-                        if (glossaryFile.exists()) {
-                            glossaryFile.delete();
-                        }
-                        if (!newFile.renameTo(glossaryFile)) {
-                            dialog.labelStatus.setText(OStrings.getString("TAAS_REPLACE_ERROR"));
-                        } else {
-                            dialog.labelStatus.setText(" ");
-                            dialog.tableCollections.repaint();
-                        }
+                        dialog.labelStatus.setText(" ");
+                        dialog.tableCollections.repaint();
                     } catch (ExecutionException e) {
                         Throwable ex = e.getCause();
                         if (ex instanceof TaaSClient.FormatError) {
@@ -273,11 +277,13 @@ public class BrowseTaasCollectionsController {
 
     public static class CollectionsTable extends AbstractTableModel {
         final List<TaasCollection> list;
+        final boolean[] marks;
         final Language source;
         final Language target;
 
         public CollectionsTable(List<TaasCollection> list, Language source, Language target) {
             this.list = list;
+            marks = new boolean[list.size()];
             this.source = source;
             this.target = target;
         }
@@ -307,7 +313,7 @@ public class BrowseTaasCollectionsController {
             case 5:
                 return String.class;
             case 6:
-                return String.class;
+                return Boolean.class;
             default:
                 return null;
             }
@@ -345,9 +351,25 @@ public class BrowseTaasCollectionsController {
                     return "";
                 }
             case 6:
-                return OStrings.getString("TAAS_LIST_DOWNLOAD");
+                return marks[rowIndex];
             default:
                 return null;
+            }
+        }
+
+        @Override
+        public boolean isCellEditable(int rowIndex, int columnIndex) {
+            if (columnIndex == 6) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+        @Override
+        public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
+            if (columnIndex == 6) {
+                marks[rowIndex] = (Boolean) aValue;
             }
         }
     }

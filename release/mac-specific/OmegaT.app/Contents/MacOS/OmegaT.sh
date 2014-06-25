@@ -21,5 +21,7 @@ JAVA=../jre/bin/java
 #MS_CLIENT_SECRET="-Dmicrosoft.api.client_secret=xxxxx'
 # MyMemory email
 #MY_MEMORY_EMAIL="-Dmymemory.api.email=xxxxx@xxxxx.xx"
+# TaaS user key
+#TAAS_USER_KEY="-Dtaas.user.key=xxxxx"
 
-${JAVA} -Xmx1024m ${MACOS} ${LANGUAGE} ${COUNTRY} ${PROXY_HOST} ${PROXY_PORT} ${GOOGLE_API_KEY} ${MS_CLIENT_ID} ${MS_CLIENT_SECRET} ${MY_MEMORY_EMAIL} -jar OmegaT.jar
+${JAVA} -Xmx1024m ${MACOS} ${LANGUAGE} ${COUNTRY} ${PROXY_HOST} ${PROXY_PORT} ${GOOGLE_API_KEY} ${MS_CLIENT_ID} ${MS_CLIENT_SECRET} ${MY_MEMORY_EMAIL} ${TAAS_USER_KEY} -jar OmegaT.jar

@@ -363,7 +363,7 @@ public class Searcher {
         // search the TM, if requested
         if (m_searchExpression.glossary) {
             String intro = OStrings.getString("SW_GLOSSARY_RESULT");
-            List<GlossaryEntry> entries = Core.getGlossaryManager().getGlossaryEntries(m_searchExpression.text);
+            List<GlossaryEntry> entries = Core.getGlossaryManager().search(m_searchExpression.text);
             for (GlossaryEntry en : entries) {
                 checkEntry(en.getSrcText(), en.getLocText(), null, null, null, ENTRY_ORIGIN_GLOSSARY, intro);
                 // stop searching if the max. nr of hits has been reached

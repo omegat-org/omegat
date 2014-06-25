@@ -87,7 +87,7 @@ public class BrowseTaasCollectionsController {
         dialog.labelStatus.setText(OStrings.getString("TAAS_STATUS_LIST"));
         new SwingWorker<List<TaasCollection>, Void>() {
             protected List<TaasCollection> doInBackground() throws Exception {
-                return TaasGlossaries.client.getCollectionsList();
+                return TaaSPlugin.client.getCollectionsList();
             }
 
             protected void done() {
@@ -195,7 +195,7 @@ public class BrowseTaasCollectionsController {
                     glossaryFile = getFileForCollection(c);
                     newFile = new File(glossaryFile.getAbsolutePath() + ".new");
 
-                    TaasGlossaries.client.downloadCollection(c.getId(), newFile);
+                    TaaSPlugin.client.downloadCollection(c.getId(), newFile);
 
                     return null;
                 }

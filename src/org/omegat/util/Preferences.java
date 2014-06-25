@@ -355,6 +355,9 @@ public class Preferences {
     /** status bar progress mode */
     public static final String SB_PROGRESS_MODE = "sb_progress_mode";
 
+    /** TaaS glossary client.*/
+    public static final String TAAS_LOOKUP = "taas_lookup";
+
     /** Private constructor, because this file is singleton */
     static {
         m_loaded = false;

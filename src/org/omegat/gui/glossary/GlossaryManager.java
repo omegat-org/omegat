@@ -29,6 +29,7 @@ package org.omegat.gui.glossary;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
@@ -58,7 +59,7 @@ public class GlossaryManager implements DirectoryMonitor.Callback {
     private final Map<String, List<GlossaryEntry>> glossaries = new TreeMap<String, List<GlossaryEntry>>();
 
     protected File priorityGlossary;
-    protected final IGlossary[] externalGlossaries;
+    protected IGlossary[] externalGlossaries;
 
     public GlossaryManager(final GlossaryTextArea pane) {
         this.pane = pane;
@@ -72,6 +73,12 @@ public class GlossaryManager implements DirectoryMonitor.Callback {
             }
         }
         externalGlossaries = gl.toArray(new IGlossary[gl.size()]);
+    }
+
+    public void addGlossaryProvider(IGlossary provider) {
+        List<IGlossary> providers = new ArrayList<IGlossary>(Arrays.asList(externalGlossaries));
+        providers.add(provider);
+        externalGlossaries = providers.toArray(new IGlossary[providers.size()]);
     }
 
     public void start() {
@@ -148,6 +155,25 @@ public class GlossaryManager implements DirectoryMonitor.Callback {
         }
 
         addExternalGlossaryEntries(result, src);
+
+        return result;
+    }
+
+    /**
+     * Get glossary entries for search operation. Almost the same as getGlossaryEntries(), except search
+     * usually executed for every segment in project, i.e. should work enough fast. Then, search should be
+     * produced by local files only.
+     * 
+     * @return all entries
+     * @param src
+     */
+    public List<GlossaryEntry> search(String src) {
+        List<GlossaryEntry> result = new ArrayList<GlossaryEntry>();
+        synchronized (this) {
+            for (List<GlossaryEntry> en : glossaries.values()) {
+                result.addAll(en);
+            }
+        }
 
         return result;
     }

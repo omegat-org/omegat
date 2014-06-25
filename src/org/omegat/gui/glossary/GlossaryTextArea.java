@@ -157,6 +157,12 @@ public class GlossaryTextArea extends EntryInfoThreadPane<List<GlossaryEntry>> {
         }
     }
 
+    @Override
+    public void onEntryActivated(SourceTextEntry newEntry) {
+        setText("");
+        super.onEntryActivated(newEntry);
+    }
+
     /**
      * Sets the list of glossary entries to show in the pane. Each element of the list should be an instance
      * of {@link GlossaryEntry}.

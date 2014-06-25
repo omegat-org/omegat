@@ -93,6 +93,7 @@ public class BrowseTaasCollectionsController {
             protected void done() {
                 try {
                     List<TaasCollection> list = get();
+                    removeUnusedCollections(list);
 
                     CollectionsTable model = new CollectionsTable(list, sourceLang, targetLang);
                     dialog.tableCollections.setModel(model);
@@ -133,6 +134,32 @@ public class BrowseTaasCollectionsController {
         DockingUI.displayCentered(dialog);
 
         dialog.setVisible(true);
+    }
+
+    /**
+     * Removes collections with zero terms count.
+     */
+    static void removeUnusedCollections(List<TaasCollection> list) {
+        final Language sourceLang = Core.getProject().getProjectProperties().getSourceLanguage();
+        final Language targetLang = Core.getProject().getProjectProperties().getTargetLanguage();
+
+        for (int i = 0; i < list.size(); i++) {
+            TaasCollection c = list.get(i);
+            if (getCountForLanguage(c, sourceLang) == 0 || getCountForLanguage(c, targetLang) == 0) {
+                list.remove(i);
+                i--;
+            }
+        }
+    }
+
+    static int getCountForLanguage(TaasCollection c, Language lang) {
+        String langCode = lang.getLanguageCode();
+        for (TaasLanguage l : c.getLanguages().getLanguage()) {
+            if (langCode.equalsIgnoreCase(l.getId())) {
+                return l.getCount();
+            }
+        }
+        return 0;
     }
 
     static TableColumnModel createColumnModel() {
@@ -315,16 +342,6 @@ public class BrowseTaasCollectionsController {
             default:
                 return null;
             }
-        }
-
-        int getCountForLanguage(TaasCollection c, Language lang) {
-            String langCode = lang.getLanguageCode();
-            for (TaasLanguage l : c.getLanguages().getLanguage()) {
-                if (langCode.equalsIgnoreCase(l.getId())) {
-                    return l.getCount();
-                }
-            }
-            return 0;
         }
     }
 }

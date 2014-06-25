@@ -31,6 +31,7 @@ import gen.taas.TaasLanguage;
 
 import java.awt.Color;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -128,6 +129,11 @@ public class BrowseTaasCollectionsController {
                 dialog.dispose();
             }
         };
+        dialog.btnClose.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                dialog.dispose();
+            }
+        });
         dialog.getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(escape, "ESCAPE");
         dialog.getRootPane().getActionMap().put("ESCAPE", escapeAction);
 

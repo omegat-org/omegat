@@ -27,6 +27,8 @@ package org.omegat.gui.glossary.taas;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.StringReader;
@@ -59,7 +61,7 @@ public class TaaSPlugin {
     public static TaaSClient client;
 
     static JMenuItem browse;
-    static Transformer filterTransformer;
+    static Transformer filterTransformer, filterTransformerContext;
 
     /**
      * Register plugin into OmegaT.
@@ -78,6 +80,17 @@ public class TaaSPlugin {
                 TransformerFactory factory = TransformerFactory.newInstance();
                 Source xslt = new StreamSource(in);
                 filterTransformer = factory.newTransformer(xslt);
+            } finally {
+                in.close();
+            }
+            in = TaaSGlossary.class.getResourceAsStream("filterContext.xslt");
+            if (in == null) {
+                throw new Exception("filterContext.xslt is unaccessible");
+            }
+            try {
+                TransformerFactory factory = TransformerFactory.newInstance();
+                Source xslt = new StreamSource(in);
+                filterTransformerContext = factory.newTransformer(xslt);
             } finally {
                 in.close();
             }
@@ -112,6 +125,20 @@ public class TaaSPlugin {
                 });
                 menu.add(select);
 
+                final JMenuItem displayContext = new JCheckBoxMenuItem();
+                displayContext.setSelected(Preferences.isPreferenceDefault(Preferences.TAAS_DISPLAY_CONTEXT,
+                        true));
+                Mnemonics.setLocalizedText(displayContext, OStrings.getString("TAAS_MENU_DISPLAY_CONTEXT"));
+                displayContext.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        Preferences.setPreference(Preferences.TAAS_DISPLAY_CONTEXT,
+                                displayContext.isSelected());
+                        Preferences.save();
+                    }
+                });
+                menu.add(displayContext);
+
                 final JMenuItem lookup = new JCheckBoxMenuItem();
                 lookup.setSelected(Preferences.isPreferenceDefault(Preferences.TAAS_LOOKUP, false));
                 Mnemonics.setLocalizedText(lookup, OStrings.getString("TAAS_MENU_LOOKUP"));
@@ -119,6 +146,7 @@ public class TaaSPlugin {
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         Preferences.setPreference(Preferences.TAAS_LOOKUP, lookup.isSelected());
+                        Preferences.save();
                     }
                 });
                 menu.add(lookup);
@@ -151,12 +179,28 @@ public class TaaSPlugin {
         Source src = new StreamSource(new StringReader(xml));
         StringWriter out = new StringWriter();
         filterTransformer.transform(src, new StreamResult(out));
+
+        if (!Preferences.isPreferenceDefault(Preferences.TAAS_DISPLAY_CONTEXT, true)) {
+            src = new StreamSource(new StringReader(out.toString()));
+            out = new StringWriter();
+            filterTransformerContext.transform(src, new StreamResult(out));
+        }
+
         return out.toString();
     }
 
     static void filterTaasResult(InputStream in, OutputStream out) throws Exception {
+        ByteArrayOutputStream o = new ByteArrayOutputStream();
         Source src = new StreamSource(in);
-        filterTransformer.transform(src, new StreamResult(out));
+        filterTransformer.transform(src, new StreamResult(o));
+
+        if (!Preferences.isPreferenceDefault(Preferences.TAAS_DISPLAY_CONTEXT, true)) {
+            src = new StreamSource(new ByteArrayInputStream(o.toByteArray()));
+            o = new ByteArrayOutputStream();
+            filterTransformerContext.transform(src, new StreamResult(o));
+        }
+
+        out.write(o.toByteArray());
     }
 
     public static void unloadPlugins() {

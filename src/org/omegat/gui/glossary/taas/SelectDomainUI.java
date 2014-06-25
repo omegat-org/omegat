@@ -72,10 +72,11 @@ public class SelectDomainUI extends javax.swing.JDialog {
         jPanel1 = new JPanel();
 
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle(OStrings.getString("TAAS_DOMAIN_SELECTION_TITLE")); // NOI18N
         setPreferredSize(new Dimension(450, 600));
         getContentPane().setLayout(new GridBagLayout());
 
-        Mnemonics.setLocalizedText(btnSelect, OStrings.getString("TAAS_DOMAINS_SELECT")); // NOI18N
+        Mnemonics.setLocalizedText(btnSelect, OStrings.getString("TAAS_DOMAIN_SELECT")); // NOI18N
         gridBagConstraints = new GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 2;
@@ -107,7 +108,7 @@ public class SelectDomainUI extends javax.swing.JDialog {
         gridBagConstraints.insets = new Insets(5, 5, 5, 5);
         getContentPane().add(labelStatus, gridBagConstraints);
 
-        Mnemonics.setLocalizedText(btnClose, OStrings.getString("TAAS_DOMAINS_CLOSE")); // NOI18N
+        Mnemonics.setLocalizedText(btnClose, OStrings.getString("BUTTON_CANCEL")); // NOI18N
         gridBagConstraints = new GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 2;

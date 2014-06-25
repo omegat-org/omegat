@@ -54,6 +54,7 @@ import org.omegat.util.Base64;
 import org.omegat.util.LFileCopy;
 import org.omegat.util.Language;
 import org.omegat.util.Log;
+import org.omegat.util.StringUtil;
 
 /**
  * Client for TaaS REST service.
@@ -75,7 +76,7 @@ public class TaaSClient {
      * 1-statistical terminology annotation, 2- statistical terminology annotation with references to
      * terminology entries, 4- Terminology DB based terminology annotation (fast)
      */
-    public static final int EXTRACTION_METHOD = 4;
+    public static final String EXTRACTION_METHOD = "4";
 
     private final JAXBContext context;
 
@@ -271,11 +272,20 @@ public class TaaSClient {
         return result.getTerm();
     }
 
-    TaasExtractionResult termExtraction(Language sourceLang, Language targetLang, String text)
+    /**
+     * Term Extraction method. Domain can be null for request all domains.
+     */
+    TaasExtractionResult termExtraction(Language sourceLang, Language targetLang, String text, String domain)
             throws IOException, Unauthorized, FormatError {
-        HttpURLConnection conn = requestPost(WS_URL + "/extraction/?sourceLang="
-                + sourceLang.getLanguageCode().toLowerCase() + "&targetLang="
-                + targetLang.getLanguageCode().toLowerCase() + "&method=" + EXTRACTION_METHOD, text);
+        StringBuilder r = new StringBuilder();
+        r.append(WS_URL).append("/extraction/");
+        r.append("?sourceLang=").append(sourceLang.getLanguageCode().toLowerCase());
+        r.append("&targetLang=").append(targetLang.getLanguageCode().toLowerCase());
+        r.append("&method=").append(EXTRACTION_METHOD);
+        if (!StringUtil.isEmpty(domain)) {
+            r.append("&domain=").append(URLEncoder.encode(domain, "UTF-8"));
+        }
+        HttpURLConnection conn = requestPost(r.toString(), text);
         checkXMLUTF8ContentType(conn);
         String data = readUTF8(conn);
         TaasExtractionResult result;

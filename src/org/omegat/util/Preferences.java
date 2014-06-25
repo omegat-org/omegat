@@ -357,6 +357,7 @@ public class Preferences {
 
     /** TaaS glossary client.*/
     public static final String TAAS_LOOKUP = "taas_lookup";
+    public static final String TAAS_DOMAIN = "taas_domain";
 
     /** Private constructor, because this file is singleton */
     static {

@@ -52,7 +52,8 @@ public class TaaSGlossary implements IGlossary {
             return Collections.emptyList();
         }
 
-        TaasExtractionResult res = TaaSPlugin.client.termExtraction(sLang, tLang, srcText);
+        TaasExtractionResult res = TaaSPlugin.client.termExtraction(sLang, tLang, srcText,
+                Preferences.getPreference(Preferences.TAAS_DOMAIN));
         String data = TaaSPlugin.filterTaasResult(res.getTerms());
         List<GlossaryEntry> entries = GlossaryReaderTBX.read(data, false);
         Log.logDebug(LOGGER, "TaaS returns {0} glossary entries", entries.size());

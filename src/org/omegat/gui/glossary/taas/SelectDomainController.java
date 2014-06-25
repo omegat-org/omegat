@@ -27,16 +27,29 @@ package org.omegat.gui.glossary.taas;
 
 import gen.taas.TaasDomain;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 import java.text.MessageFormat;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Enumeration;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
+import javax.swing.AbstractAction;
+import javax.swing.AbstractButton;
+import javax.swing.Action;
+import javax.swing.JComponent;
 import javax.swing.JRadioButton;
+import javax.swing.KeyStroke;
 import javax.swing.SwingWorker;
 
 import org.omegat.core.Core;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
+import org.omegat.util.Preferences;
+import org.omegat.util.StringUtil;
 import org.omegat.util.gui.DockingUI;
 
 /**
@@ -49,19 +62,39 @@ public class SelectDomainController {
 
     public static void show() {
         dialog = new SelectDomainUI(Core.getMainWindow().getApplicationFrame(), true);
+        dialog.scrollPane.getVerticalScrollBar().setUnitIncrement(16);
+        dialog.labelStatus.setText(OStrings.getString("TAAS_STATUS_DOMAIN_LIST"));
 
         new SwingWorker<List<TaasDomain>, Void>() {
             protected List<TaasDomain> doInBackground() throws Exception {
-                return TaaSPlugin.client.getDomainsList();
+                List<TaasDomain> result = TaaSPlugin.client.getDomainsList();
+
+                Collections.sort(result, new Comparator<TaasDomain>() {
+                    @Override
+                    public int compare(TaasDomain d1, TaasDomain d2) {
+                        return d1.getName().compareToIgnoreCase(d2.getName());
+                    }
+                });
+                return result;
             }
 
             protected void done() {
                 try {
                     List<TaasDomain> list = get();
+                    String previouslySelected = Preferences.getPreference(Preferences.TAAS_DOMAIN);
+                    if (StringUtil.isEmpty(previouslySelected)) {
+                        previouslySelected = null;
+                        dialog.rbAll.setSelected(true);
+                    }
 
                     for (TaasDomain d : list) {
                         JRadioButton btn = new JRadioButton(d.getName());
+                        btn.setName(d.getId());
+                        dialog.buttonGroup.add(btn);
                         dialog.list.add(btn);
+                        if (previouslySelected != null && previouslySelected.equals(btn.getName())) {
+                            btn.setSelected(true);
+                        }
                     }
                     dialog.list.revalidate();
 
@@ -83,6 +116,34 @@ public class SelectDomainController {
                 }
             }
         }.execute();
+
+        dialog.btnSelect.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                if (dialog.rbAll.isSelected()) {
+                    Preferences.setPreference(Preferences.TAAS_DOMAIN, "");
+                } else {
+                    for (Enumeration<AbstractButton> en = dialog.buttonGroup.getElements(); en
+                            .hasMoreElements();) {
+                        AbstractButton btn = en.nextElement();
+                        if (btn.isSelected()) {
+                            Preferences.setPreference(Preferences.TAAS_DOMAIN, btn.getName());
+                            break;
+                        }
+                    }
+                }
+                Preferences.save();
+                dialog.dispose();
+            }
+        });
+
+        KeyStroke escape = KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0, false);
+        Action escapeAction = new AbstractAction() {
+            public void actionPerformed(ActionEvent e) {
+                dialog.dispose();
+            }
+        };
+        dialog.getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(escape, "ESCAPE");
+        dialog.getRootPane().getActionMap().put("ESCAPE", escapeAction);
 
         DockingUI.displayCentered(dialog);
 

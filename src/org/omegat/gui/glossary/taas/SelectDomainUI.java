@@ -29,6 +29,7 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import javax.swing.BoxLayout;
+import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -61,14 +62,15 @@ public class SelectDomainUI extends javax.swing.JDialog {
     private void initComponents() {
         GridBagConstraints gridBagConstraints;
 
+        buttonGroup = new ButtonGroup();
         btnSelect = new JButton();
-        jScrollPane1 = new JScrollPane();
+        scrollPane = new JScrollPane();
         list = new JPanel();
         rbAll = new JRadioButton();
         labelStatus = new JLabel();
 
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-        setPreferredSize(new Dimension(400, 600));
+        setPreferredSize(new Dimension(450, 600));
         getContentPane().setLayout(new GridBagLayout());
 
         Mnemonics.setLocalizedText(btnSelect, OStrings.getString("TAAS_DOMAINS_SELECT")); // NOI18N
@@ -80,10 +82,11 @@ public class SelectDomainUI extends javax.swing.JDialog {
 
         list.setLayout(new BoxLayout(list, BoxLayout.PAGE_AXIS));
 
+        buttonGroup.add(rbAll);
         Mnemonics.setLocalizedText(rbAll, OStrings.getString("TAAS_DOMAINS_ALL")); // NOI18N
         list.add(rbAll);
 
-        jScrollPane1.setViewportView(list);
+        scrollPane.setViewportView(list);
 
         gridBagConstraints = new GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -91,7 +94,7 @@ public class SelectDomainUI extends javax.swing.JDialog {
         gridBagConstraints.fill = GridBagConstraints.BOTH;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.weighty = 1.0;
-        getContentPane().add(jScrollPane1, gridBagConstraints);
+        getContentPane().add(scrollPane, gridBagConstraints);
 
         Mnemonics.setLocalizedText(labelStatus, " ");
         gridBagConstraints = new GridBagConstraints();
@@ -146,9 +149,10 @@ public class SelectDomainUI extends javax.swing.JDialog {
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public JButton btnSelect;
-    public JScrollPane jScrollPane1;
+    public ButtonGroup buttonGroup;
     public JLabel labelStatus;
     public JPanel list;
     public JRadioButton rbAll;
+    public JScrollPane scrollPane;
     // End of variables declaration//GEN-END:variables
 }

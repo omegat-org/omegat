@@ -28,6 +28,7 @@ package org.omegat.gui.glossary;
 
 import gen.core.tbx.Descrip;
 import gen.core.tbx.DescripGrp;
+import gen.core.tbx.Hi;
 import gen.core.tbx.LangSet;
 import gen.core.tbx.Martif;
 import gen.core.tbx.Note;
@@ -193,7 +194,12 @@ public class GlossaryReaderTBX {
     protected static String readContent(final List<Object> content) {
         StringBuilder res = new StringBuilder();
         for (Object o : content) {
-            res.append(o.toString());
+            if (o instanceof Hi) {
+                Hi hi = (Hi) o;
+                res.append(" *").append(hi.getContent()).append("* ");
+            } else {
+                res.append(o.toString());
+            }
         }
         return res.toString();
     }

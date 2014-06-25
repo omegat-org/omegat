@@ -28,6 +28,7 @@ package org.omegat.gui.glossary.taas;
 import gen.taas.TaasArrayOfTerm;
 import gen.taas.TaasCollection;
 import gen.taas.TaasCollections;
+import gen.taas.TaasExtractionResult;
 import gen.taas.TaasTerm;
 
 import java.io.BufferedOutputStream;
@@ -41,6 +42,7 @@ import java.io.StringReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.nio.charset.Charset;
 import java.util.List;
 
 import javax.xml.bind.JAXBContext;
@@ -56,12 +58,20 @@ import org.omegat.util.Log;
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
 public class TaaSClient {
+    static final Charset UTF8 = Charset.forName("UTF-8");
+
     public static final String WS_URL = "https://api.taas-project.eu";
     /** Machine user name */
     public static final String M_USERNAME = "OmegaT";
     /** Machine password */
     public static final String M_PASSWORD = "Ts1DW4^UpE";
-     
+
+    /**
+     * 1-statistical terminology annotation, 2- statistical terminology annotation with references to
+     * terminology entries, 4- Terminology DB based terminology annotation (fast)
+     */
+    public static final int EXTRACTION_METHOD = 4;
+
     private final JAXBContext context;
 
     private final String basicAuth;
@@ -74,13 +84,14 @@ public class TaaSClient {
         if (this.taasUserKey == null) {
             Log.logWarningRB("TAAS_API_KEY_NOT_FOUND");
         }
-        context = JAXBContext.newInstance(TaasCollections.class, TaasArrayOfTerm.class);
+        context = JAXBContext.newInstance(TaasCollections.class, TaasArrayOfTerm.class,
+                TaasExtractionResult.class);
     }
 
     /**
      * Request specified URL and check response code.
      */
-    HttpURLConnection request(String url) throws IOException, Unauthorized, FormatError {
+    HttpURLConnection requestGet(String url) throws IOException, Unauthorized, FormatError {
         Log.logInfoRB("TAAS_REQUEST", url);
         HttpURLConnection conn;
         conn = (HttpURLConnection) new URL(url).openConnection();
@@ -90,6 +101,40 @@ public class TaaSClient {
             conn.setRequestProperty("TaaS-User-Key", taasUserKey);
         }
         conn.setRequestProperty("Accept", "application/xml");
+
+        if (conn.getResponseCode() == HttpURLConnection.HTTP_UNAUTHORIZED) {
+            throw new Unauthorized();
+        }
+
+        if (conn.getResponseCode() != HttpURLConnection.HTTP_OK) {
+            throw new FormatError(conn.getResponseCode() + " " + conn.getResponseMessage());
+        }
+        return conn;
+    }
+
+    /**
+     * Request specified URL and check response code.
+     */
+    HttpURLConnection requestPost(String url, String body) throws IOException, Unauthorized, FormatError {
+        Log.logInfoRB("TAAS_REQUEST", url);
+        HttpURLConnection conn;
+        conn = (HttpURLConnection) new URL(url).openConnection();
+
+        conn.setRequestProperty("Authorization", basicAuth);
+        if (taasUserKey != null) {
+            conn.setRequestProperty("TaaS-User-Key", taasUserKey);
+        }
+        conn.setRequestProperty("Accept", "application/xml");
+        conn.setRequestMethod("POST");
+
+        conn.setRequestProperty("Content-Type", "text/plain");// ; charset=UTF-8
+        conn.setDoOutput(true);
+        OutputStream out = conn.getOutputStream();
+        try {
+            out.write(body.getBytes(UTF8));
+        } finally {
+            out.close();
+        }
 
         if (conn.getResponseCode() == HttpURLConnection.HTTP_UNAUTHORIZED) {
             throw new Unauthorized();
@@ -124,7 +169,7 @@ public class TaaSClient {
         try {
             ByteArrayOutputStream o = new ByteArrayOutputStream();
             LFileCopy.copy(in, o);
-            return new String(o.toByteArray(), "UTF-8");
+            return new String(o.toByteArray(), UTF8);
         } finally {
             in.close();
         }
@@ -134,7 +179,7 @@ public class TaaSClient {
      * Get a List of Collections.
      */
     List<TaasCollection> getCollectionsList() throws IOException, Unauthorized, FormatError {
-        HttpURLConnection conn = request(WS_URL + "/collections");
+        HttpURLConnection conn = requestGet(WS_URL + "/collections");
         checkContentType(conn, "application/xml; charset=utf-8");
 
         String data = readUTF8(conn);
@@ -151,7 +196,7 @@ public class TaaSClient {
      * Download specific collection into file.
      */
     void downloadCollection(long collectionId, File outFile) throws IOException, Unauthorized, FormatError {
-        HttpURLConnection conn = request(WS_URL + "/collections/" + collectionId);
+        HttpURLConnection conn = requestGet(WS_URL + "/collections/" + collectionId);
         checkContentType(conn, "application/xml");
 
         InputStream in = conn.getInputStream();
@@ -172,7 +217,7 @@ public class TaaSClient {
      */
     List<TaasTerm> termLookup(Language sourceLang, Language targetLang, String term) throws IOException,
             Unauthorized, FormatError {
-        HttpURLConnection conn = request(WS_URL + "/lookup/" + sourceLang.getLanguageCode() + "/"
+        HttpURLConnection conn = requestGet(WS_URL + "/lookup/" + sourceLang.getLanguageCode() + "/"
                 + URLEncoder.encode(term, "UTF-8") + "?targetLang=" + targetLang.getLanguageCode());
         checkContentType(conn, "application/xml; charset=utf-8");
 
@@ -184,6 +229,22 @@ public class TaaSClient {
             throw new FormatError("Wrong content: " + ex.getMessage());
         }
         return result.getTerm();
+    }
+
+    TaasExtractionResult termExtraction(Language sourceLang, Language targetLang, String text)
+            throws IOException, Unauthorized, FormatError {
+        HttpURLConnection conn = requestPost(
+                WS_URL + "/extraction/?sourceLang=" + sourceLang.getLanguageCode() + "&targetLang="
+                        + targetLang.getLanguageCode() + "&method=" + EXTRACTION_METHOD, text);
+        checkContentType(conn, "application/xml; charset=utf-8");
+        String data = readUTF8(conn);
+        TaasExtractionResult result;
+        try {
+            result = (TaasExtractionResult) context.createUnmarshaller().unmarshal(new StringReader(data));
+        } catch (Exception ex) {
+            throw new FormatError("Wrong content: " + ex.getMessage());
+        }
+        return result;
     }
 
     public static class Unauthorized extends Exception {

@@ -79,4 +79,13 @@
 			</xs:sequence>
 		</xs:complexType>
 	</xs:element>
+
+	<xs:element name="extractionResult">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="text" type="xs:string" />
+				<xs:element name="terms" type="xs:string" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
 </xs:schema>

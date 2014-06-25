@@ -27,8 +27,6 @@ package org.omegat.gui.glossary.taas;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Collections;
-import java.util.List;
 
 import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JMenu;
@@ -37,14 +35,10 @@ import javax.swing.JMenuItem;
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
 import org.omegat.core.events.IApplicationEventListener;
-import org.omegat.core.glossaries.IGlossary;
-import org.omegat.gui.glossary.GlossaryEntry;
-import org.omegat.tokenizer.ITokenizer;
-import org.omegat.util.Language;
+import org.omegat.core.events.IProjectEventListener;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
-import org.omegat.util.Token;
 import org.openide.awt.Mnemonics;
 
 /**
@@ -54,6 +48,8 @@ import org.openide.awt.Mnemonics;
  */
 public class TaaSPlugin {
     public static TaaSClient client;
+
+    static JMenuItem browse;
 
     /**
      * Register plugin into OmegaT.
@@ -70,7 +66,7 @@ public class TaaSPlugin {
                 JMenu menu = Core.getMainWindow().getMainMenu().getGlossaryMenu();
                 menu.setEnabled(true);
 
-                JMenuItem browse = new JMenuItem();
+                browse = new JMenuItem();
                 Mnemonics.setLocalizedText(browse, OStrings.getString("TAAS_MENU_BROWSE"));
                 browse.addActionListener(new ActionListener() {
                     @Override
@@ -78,6 +74,7 @@ public class TaaSPlugin {
                         BrowseTaasCollectionsController.show();
                     }
                 });
+                browse.setEnabled(false);
                 menu.add(browse);
 
                 final JMenuItem lookup = new JCheckBoxMenuItem();
@@ -97,7 +94,22 @@ public class TaaSPlugin {
             public void onApplicationShutdown() {
             }
         });
-
+        CoreEvents.registerProjectChangeListener(new IProjectEventListener() {
+            public void onProjectChanged(PROJECT_CHANGE_TYPE eventType) {
+                if (browse == null) {
+                    return;
+                }
+                switch (eventType) {
+                case CLOSE:
+                    browse.setEnabled(false);
+                    break;
+                case CREATE:
+                case LOAD:
+                    browse.setEnabled(true);
+                    break;
+                }
+            }
+        });
     }
 
     public static void unloadPlugins() {

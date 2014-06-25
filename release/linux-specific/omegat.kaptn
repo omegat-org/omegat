@@ -3,7 +3,7 @@
 # This version of the Kaptain OmegaT Launcher: 2014-04-28
 
 start "OmegaT Launcher" -> omticon top bottom ;
-  top :tabbed  -> locs mem langs connect appearance about ;
+  top :tabbed  -> locs mem langs connect services appearance about ;
   bottom :horizontal -> button_bar ;
 
 omticon -> @icon("images/OmegaT.png") ;
@@ -114,10 +114,9 @@ languages_hc :horizontal -> @close="Close" ;
 
 ### Connectivity tab
 
-connect :framed "Connectivity" -> proxy gt ms mymem;
+connect :framed "Connectivity" -> proxy team ;
 
 proxy "Proxy settings" -> proxyhost proxyport ;
-
 
 # Enter proxy host IP address
 
@@ -127,9 +126,24 @@ proxyhost "IP address of your proxy server, if your system uses a proxy" -> @str
 
 proxyport "Port number used by your system to access the proxy server" -> @string ;
 
+# Team connectivity
+
+team :vertical "Team connectivity for Team projects" -> !ton | toff | thelp ;
+ton "Sync with the server" -> " " ;
+toff "Disable sync" -> " --no-team" ;
+
+thelp :dialog "Help" -> team_m team_hc ;
+team_m :horizontal -> team_t ;
+team_t "With this option it is possible to temporarily disable synchronization\nwith the server for Team projects. To re-enable synchronization OmegaT\nneeds to be restarted with the appropriate option." -> @ ;
+team_hc :horizontal -> @close="Close" ;
+
+### Services tab
+
+services :framed "Online Services" -> gt ms mymem taas ;
+
 # Google Translate API key
 
-gt "Google Translate API key" -> @password gt_help ;
+gt "Google Translate API key" -> @password="" gt_help ;
 
 gt_help :dialog "Help" -> gt_m gt_hc ;
 gt_m :horizontal ->  gt_t ;
@@ -149,7 +163,7 @@ ms_m :horizontal ->  ms_t ;
 ms_t "To use Microsoft Translator within OmegaT, you must order \na client ID and a secret key from Microsoft Azure Marketplace \n(see https://datamarket.azure.com/dataset/bing/microsofttranslator) \nand enter them here." -> @ ;
 ms_hc :horizontal -> @close="Close";
 
-# MyMemory MT email address 
+# MyMemory MT email address
 
 mymem "MyMemory Machine Translation" -> mymem_em mymem_help ;
 mymem_em "Valid email address" -> @string="" ;
@@ -159,7 +173,17 @@ mymem_m :horizontal -> mymem_t ;
 mymem_t "Provide your email address to be able to make \n1000 requests to MyMemory server a day \ninstead of 100" -> @ ;
 mymem_hc :horizontal -> @close="Close" ;
 
- 
+# TaaS key
+
+taas "TaaS user key" -> taas_k taas_help ;
+taas_k "User key for TaaS" -> @password="" ;
+
+taas_help :dialog "Help" -> taas_m taas_hc ;
+taas_m :horizontal -> taas_t ;
+taas_t "Enter API key to access your private collection at TaaS (terminology as a service) website" -> @ ;
+taas_hc :horizontal -> @close="Close" ;
+
+
 ### Appearance settings tab
 
 appearance :framed "Appearance" -> fontaa laf ;
@@ -228,4 +252,4 @@ close_button -> @close="Cancel" ;
 
 ### Launch command
 
-omt -> javaloc " -jar " memory " -Duser.language=" UIlang " -Duser.country=" country " -Dgoogle.api.key=" gt " -Dmicrosoft.api.client_secret=" msk " -Dmicrosoft.api.client_id=" msi " -Dmymemory.api.email=" mymem " -Dhttp.proxyHost=" proxyhost " -Dhttp.proxyPort=" proxyport " -Dawt.useSystemAAFontSettings=" fontaa laf " " jarfileloc " " projectloc " --config-dir=" configloc ;
+omt -> javaloc " -jar " memory " -Duser.language=" UIlang " -Duser.country=" country " -Dgoogle.api.key=" gt " -Dmicrosoft.api.client_secret=" msk " -Dmicrosoft.api.client_id=" msi " -Dmymemory.api.email=" mymem " -Dtaas.user.key=" taas " -Dhttp.proxyHost=" proxyhost " -Dhttp.proxyPort=" proxyport " -Dawt.useSystemAAFontSettings=" fontaa laf " " jarfileloc " " projectloc " --config-dir=" configloc team;

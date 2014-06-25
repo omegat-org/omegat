@@ -87,7 +87,7 @@ public class TaaSClient {
         this.basicAuth = "Basic "
                 + Base64.encodeBytes((M_USERNAME + ":" + M_PASSWORD).getBytes("ISO-8859-1"));
         this.taasUserKey = System.getProperty("taas.user.key");
-        if (this.taasUserKey == null) {
+        if (this.taasUserKey == null || this.taasUserKey.isEmpty()) {
             Log.logWarningRB("TAAS_API_KEY_NOT_FOUND");
         }
         context = JAXBContext.newInstance(TaasCollections.class, TaasArrayOfTerm.class,
@@ -103,7 +103,7 @@ public class TaaSClient {
         conn = (HttpURLConnection) new URL(url).openConnection();
 
         conn.setRequestProperty("Authorization", basicAuth);
-        if (taasUserKey != null) {
+        if (taasUserKey != null && !taasUserKey.isEmpty()) {
             conn.setRequestProperty("TaaS-User-Key", taasUserKey);
         }
         conn.setRequestProperty("Accept", "text/xml");

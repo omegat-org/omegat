@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<jxb:bindings xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:jxb="http://java.sun.com/xml/ns/jaxb" version="2.1">
+	<jxb:bindings schemaLocation="taas.xsd">
+  
+		<jxb:bindings node="/xs:schema">
+			<jxb:schemaBindings>
+				<jxb:nameXmlTransform>
+					<jxb:typeName prefix="Taas"/>
+					<jxb:elementName prefix="Taas"/>
+				</jxb:nameXmlTransform>
+			</jxb:schemaBindings>
+		</jxb:bindings>
+
+	</jxb:bindings>
+</jxb:bindings>

@@ -42,12 +42,20 @@
 			</xs:sequence>
 		</xs:complexType>
 	</xs:element>
+	<xs:element name="domains">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="domain" minOccurs="0" maxOccurs="unbounded" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
 	<xs:element name="domain">
 		<xs:complexType>
 			<xs:sequence>
 				<xs:element name="id" type="xs:string" />
+				<xs:element name="parent" type="xs:string" minOccurs="0" />
 				<xs:element name="name" type="xs:string" />
-				<xs:element name="count" type="xs:int" />
+				<xs:element name="count" type="xs:int" minOccurs="0" />
 			</xs:sequence>
 		</xs:complexType>
 	</xs:element>

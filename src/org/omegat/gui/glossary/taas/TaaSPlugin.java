@@ -102,6 +102,16 @@ public class TaaSPlugin {
                 browse.setEnabled(false);
                 menu.add(browse);
 
+                JMenuItem select = new JMenuItem();
+                Mnemonics.setLocalizedText(select, OStrings.getString("TAAS_MENU_DOMAINS"));
+                select.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        SelectDomainController.show();
+                    }
+                });
+                menu.add(select);
+
                 final JMenuItem lookup = new JCheckBoxMenuItem();
                 lookup.setSelected(Preferences.isPreferenceDefault(Preferences.TAAS_LOOKUP, false));
                 Mnemonics.setLocalizedText(lookup, OStrings.getString("TAAS_MENU_LOOKUP"));

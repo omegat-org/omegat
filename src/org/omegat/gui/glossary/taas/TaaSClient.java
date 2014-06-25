@@ -28,6 +28,8 @@ package org.omegat.gui.glossary.taas;
 import gen.taas.TaasArrayOfTerm;
 import gen.taas.TaasCollection;
 import gen.taas.TaasCollections;
+import gen.taas.TaasDomain;
+import gen.taas.TaasDomains;
 import gen.taas.TaasExtractionResult;
 import gen.taas.TaasTerm;
 
@@ -85,7 +87,7 @@ public class TaaSClient {
             Log.logWarningRB("TAAS_API_KEY_NOT_FOUND");
         }
         context = JAXBContext.newInstance(TaasCollections.class, TaasArrayOfTerm.class,
-                TaasExtractionResult.class);
+                TaasExtractionResult.class, TaasDomains.class);
     }
 
     /**
@@ -203,6 +205,23 @@ public class TaaSClient {
             throw new FormatError("Wrong content: " + ex.getMessage());
         }
         return result.getCollection();
+    }
+
+    /**
+     * Get a List of Domains.
+     */
+    List<TaasDomain> getDomainsList() throws IOException, Unauthorized, FormatError {
+        HttpURLConnection conn = requestGet(WS_URL + "/domains");
+        checkXMLUTF8ContentType(conn);
+
+        String data = readUTF8(conn);
+        TaasDomains result;
+        try {
+            result = (TaasDomains) context.createUnmarshaller().unmarshal(new StringReader(data));
+        } catch (Exception ex) {
+            throw new FormatError("Wrong content: " + ex.getMessage());
+        }
+        return result.getDomain();
     }
 
     /**

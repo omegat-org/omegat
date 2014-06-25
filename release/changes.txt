@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 3.1.2
 ----------------------------------------------------------------------
-  15 Enhancements
+  16 Enhancements
    2 Bug fixes
    2 Localisation updates
 ----------------------------------------------------------------------
@@ -58,6 +58,9 @@ the root of the /script folder are loaded if they exist.
 were misleading, because what is counted is the number of segments containing the
 results, not the number of search results. To clarify, the labels were renamed to
 Number of matching segments and Display all matching segments.
+
+  - Under Linux, the layout of omegat.kaptn was improved, with a separate tab
+for online services, and the option --no-team was added
 
   Bug fixes:
 

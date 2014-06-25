@@ -142,6 +142,11 @@ public class SelectDomainController {
                 dialog.dispose();
             }
         };
+        dialog.btnClose.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                dialog.dispose();
+            }
+        });
         dialog.getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(escape, "ESCAPE");
         dialog.getRootPane().getActionMap().put("ESCAPE", escapeAction);
 

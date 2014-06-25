@@ -68,6 +68,8 @@ public class SelectDomainUI extends javax.swing.JDialog {
         list = new JPanel();
         rbAll = new JRadioButton();
         labelStatus = new JLabel();
+        btnClose = new JButton();
+        jPanel1 = new JPanel();
 
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         setPreferredSize(new Dimension(450, 600));
@@ -75,7 +77,7 @@ public class SelectDomainUI extends javax.swing.JDialog {
 
         Mnemonics.setLocalizedText(btnSelect, OStrings.getString("TAAS_DOMAINS_SELECT")); // NOI18N
         gridBagConstraints = new GridBagConstraints();
-        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 2;
         gridBagConstraints.insets = new Insets(5, 5, 5, 5);
         getContentPane().add(btnSelect, gridBagConstraints);
@@ -91,6 +93,7 @@ public class SelectDomainUI extends javax.swing.JDialog {
         gridBagConstraints = new GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridwidth = 3;
         gridBagConstraints.fill = GridBagConstraints.BOTH;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.weighty = 1.0;
@@ -100,8 +103,22 @@ public class SelectDomainUI extends javax.swing.JDialog {
         gridBagConstraints = new GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridwidth = 3;
         gridBagConstraints.insets = new Insets(5, 5, 5, 5);
         getContentPane().add(labelStatus, gridBagConstraints);
+
+        Mnemonics.setLocalizedText(btnClose, OStrings.getString("TAAS_DOMAINS_CLOSE")); // NOI18N
+        gridBagConstraints = new GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.insets = new Insets(5, 5, 5, 5);
+        getContentPane().add(btnClose, gridBagConstraints);
+        gridBagConstraints = new GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.weightx = 1.0;
+        getContentPane().add(jPanel1, gridBagConstraints);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -148,8 +165,10 @@ public class SelectDomainUI extends javax.swing.JDialog {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    public JButton btnClose;
     public JButton btnSelect;
     public ButtonGroup buttonGroup;
+    public JPanel jPanel1;
     public JLabel labelStatus;
     public JPanel list;
     public JRadioButton rbAll;

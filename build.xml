@@ -393,6 +393,7 @@ Custom strings from release\win32-specific must be added manually to the languag
             <arg line="-p gen.core.tmx14"/>
             <arg line="-b src/schemas/tmx14.xjb"/>
             <arg value="src/schemas/tmx14.xsd"/>
+        </exec>
         <exec executable="xjc">
             <arg line="-d src"/>
             <arg line="-p gen.taas"/>

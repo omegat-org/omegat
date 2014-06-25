@@ -100,7 +100,7 @@ public class TaaSClient {
         if (taasUserKey != null) {
             conn.setRequestProperty("TaaS-User-Key", taasUserKey);
         }
-        conn.setRequestProperty("Accept", "application/xml");
+        conn.setRequestProperty("Accept", "text/xml");
 
         if (conn.getResponseCode() == HttpURLConnection.HTTP_UNAUTHORIZED) {
             throw new Unauthorized();
@@ -124,7 +124,7 @@ public class TaaSClient {
         if (taasUserKey != null) {
             conn.setRequestProperty("TaaS-User-Key", taasUserKey);
         }
-        conn.setRequestProperty("Accept", "application/xml");
+        conn.setRequestProperty("Accept", "text/xml");
         conn.setRequestMethod("POST");
 
         conn.setRequestProperty("Content-Type", "text/plain");// ; charset=UTF-8
@@ -149,15 +149,28 @@ public class TaaSClient {
     /**
      * Check content type of response.
      */
-    void checkContentType(HttpURLConnection conn, String requiredContentType) throws FormatError {
+    void checkXMLContentType(HttpURLConnection conn) throws FormatError {
         String contentType = conn.getHeaderField("Content-Type");
         if (contentType == null) {
             throw new FormatError("Empty Content-Type header");
         }
-        requiredContentType = requiredContentType.replace(" ", "").toLowerCase();
-        contentType = contentType.replace(" ", "").toLowerCase();
-        if (!requiredContentType.equals(contentType)) {
-            throw new FormatError("Wrong Content-Type header");
+        String ct = contentType.replace(" ", "").toLowerCase();
+        if (!"text/xml".equals(ct) && !"application/xml".equals(ct)) {
+            throw new FormatError("Wrong Content-Type header: " + contentType);
+        }
+    }
+
+    /**
+     * Check content type of response.
+     */
+    void checkXMLUTF8ContentType(HttpURLConnection conn) throws FormatError {
+        String contentType = conn.getHeaderField("Content-Type");
+        if (contentType == null) {
+            throw new FormatError("Empty Content-Type header");
+        }
+        String ct = contentType.replace(" ", "").toLowerCase();
+        if (!"text/xml;charset=utf-8".equals(ct) && !"application/xml;charset=utf-8".equals(ct)) {
+            throw new FormatError("Wrong Content-Type header: " + contentType);
         }
     }
 
@@ -180,7 +193,7 @@ public class TaaSClient {
      */
     List<TaasCollection> getCollectionsList() throws IOException, Unauthorized, FormatError {
         HttpURLConnection conn = requestGet(WS_URL + "/collections");
-        checkContentType(conn, "application/xml; charset=utf-8");
+        checkXMLUTF8ContentType(conn);
 
         String data = readUTF8(conn);
         TaasCollections result;
@@ -197,7 +210,7 @@ public class TaaSClient {
      */
     void downloadCollection(long collectionId, File outFile) throws IOException, Unauthorized, FormatError {
         HttpURLConnection conn = requestGet(WS_URL + "/collections/" + collectionId);
-        checkContentType(conn, "application/xml");
+        checkXMLContentType(conn);
 
         InputStream in = conn.getInputStream();
         try {
@@ -219,7 +232,7 @@ public class TaaSClient {
             Unauthorized, FormatError {
         HttpURLConnection conn = requestGet(WS_URL + "/lookup/" + sourceLang.getLanguageCode() + "/"
                 + URLEncoder.encode(term, "UTF-8") + "?targetLang=" + targetLang.getLanguageCode());
-        checkContentType(conn, "application/xml; charset=utf-8");
+        checkXMLUTF8ContentType(conn);
 
         String data = readUTF8(conn);
         TaasArrayOfTerm result;
@@ -236,7 +249,7 @@ public class TaaSClient {
         HttpURLConnection conn = requestPost(
                 WS_URL + "/extraction/?sourceLang=" + sourceLang.getLanguageCode() + "&targetLang="
                         + targetLang.getLanguageCode() + "&method=" + EXTRACTION_METHOD, text);
-        checkContentType(conn, "application/xml; charset=utf-8");
+        checkXMLUTF8ContentType(conn);
         String data = readUTF8(conn);
         TaasExtractionResult result;
         try {

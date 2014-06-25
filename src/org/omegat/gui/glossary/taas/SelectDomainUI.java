@@ -24,6 +24,7 @@
  **************************************************************************/
 package org.omegat.gui.glossary.taas;
 
+import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -67,6 +68,7 @@ public class SelectDomainUI extends javax.swing.JDialog {
         labelStatus = new JLabel();
 
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+        setPreferredSize(new Dimension(400, 600));
         getContentPane().setLayout(new GridBagLayout());
 
         Mnemonics.setLocalizedText(btnSelect, OStrings.getString("TAAS_DOMAINS_SELECT")); // NOI18N

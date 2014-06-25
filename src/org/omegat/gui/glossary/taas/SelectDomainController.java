@@ -25,7 +25,6 @@
 
 package org.omegat.gui.glossary.taas;
 
-import gen.taas.TaasCollection;
 import gen.taas.TaasDomain;
 
 import java.text.MessageFormat;
@@ -64,6 +63,7 @@ public class SelectDomainController {
                         JRadioButton btn = new JRadioButton(d.getName());
                         dialog.list.add(btn);
                     }
+                    dialog.list.revalidate();
 
                     dialog.labelStatus.setText(" ");
                 } catch (ExecutionException e) {

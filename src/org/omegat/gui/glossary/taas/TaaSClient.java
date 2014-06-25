@@ -49,7 +49,6 @@ import org.omegat.util.Base64;
 import org.omegat.util.LFileCopy;
 import org.omegat.util.Language;
 import org.omegat.util.Log;
-import org.omegat.util.OStrings;
 
 /**
  * Client for TaaS REST service.
@@ -69,19 +68,13 @@ public class TaaSClient {
     private final String taasUserKey;
 
     public TaaSClient() throws Exception {
-        
-        String APIKey = System.getProperty("taas.user.key");
-        if (APIKey == null) {
-            throw new Exception(OStrings.getString("TAAS_API_KEY_NOT_FOUND"));
-        } 
-        try {
-            this.basicAuth = "Basic "
-                    + Base64.encodeBytes((M_USERNAME + ":" + M_PASSWORD).getBytes("ISO-8859-1"));
-            this.taasUserKey = APIKey;
-            context = JAXBContext.newInstance(TaasCollections.class, TaasArrayOfTerm.class);
-        } catch (Exception ex) {
-            throw new RuntimeException(ex);
+        this.basicAuth = "Basic "
+                + Base64.encodeBytes((M_USERNAME + ":" + M_PASSWORD).getBytes("ISO-8859-1"));
+        this.taasUserKey = System.getProperty("taas.user.key");
+        if (this.taasUserKey == null) {
+            Log.logWarningRB("TAAS_API_KEY_NOT_FOUND");
         }
+        context = JAXBContext.newInstance(TaasCollections.class, TaasArrayOfTerm.class);
     }
 
     /**
@@ -93,7 +86,9 @@ public class TaaSClient {
         conn = (HttpURLConnection) new URL(url).openConnection();
 
         conn.setRequestProperty("Authorization", basicAuth);
-        conn.setRequestProperty("TaaS-User-Key", taasUserKey);
+        if (taasUserKey != null) {
+            conn.setRequestProperty("TaaS-User-Key", taasUserKey);
+        }
         conn.setRequestProperty("Accept", "application/xml");
 
         if (conn.getResponseCode() == HttpURLConnection.HTTP_UNAUTHORIZED) {

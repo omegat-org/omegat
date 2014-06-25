@@ -25,21 +25,16 @@
 
 package org.omegat.gui.glossary.taas;
 
-import gen.taas.TaasTerm;
+import gen.taas.TaasExtractionResult;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Set;
-import java.util.TreeSet;
 
-import org.omegat.core.Core;
 import org.omegat.core.glossaries.IGlossary;
 import org.omegat.gui.glossary.GlossaryEntry;
-import org.omegat.tokenizer.ITokenizer;
+import org.omegat.gui.glossary.GlossaryReaderTBX;
 import org.omegat.util.Language;
 import org.omegat.util.Preferences;
-import org.omegat.util.Token;
 
 /**
  * TaaS glossary implementation.
@@ -53,24 +48,8 @@ public class TaaSGlossary implements IGlossary {
         if (!Preferences.isPreferenceDefault(Preferences.TAAS_LOOKUP, false)) {
             return Collections.emptyList();
         }
-        ITokenizer tok = Core.getProject().getSourceTokenizer();
-        if (tok == null) {
-            return Collections.emptyList();
-        }
-        Token[] strTokens = tok.tokenizeWords(srcText, ITokenizer.StemmingMode.GLOSSARY);
-        Set<String> terms = new TreeSet<String>();
-        for (Token t : strTokens) {
-            terms.add(t.getTextFromString(srcText));
-        }
-        List<GlossaryEntry> result = new ArrayList<GlossaryEntry>();
-        for (String term : terms) {
-            List<TaasTerm> r = TaaSPlugin.client.termLookup(sLang, tLang, term);
-            for (TaasTerm tt : r) {
-                result.add(new GlossaryEntry(term, 
-                                             tt.getTerm(), 
-                                             "TaaS " + tt.getCollectionName() + "," + tt.getDomainName(), false));
-            }
-        }
-        return result;
+
+        TaasExtractionResult res = TaaSPlugin.client.termExtraction(sLang, tLang, srcText);
+        return GlossaryReaderTBX.read(res.getTerms(), false);
     }
 }

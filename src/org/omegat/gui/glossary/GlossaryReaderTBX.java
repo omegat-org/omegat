@@ -39,7 +39,9 @@ import gen.core.tbx.Tig;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.StringReader;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import javax.xml.bind.JAXBContext;
@@ -80,7 +82,18 @@ public class GlossaryReaderTBX {
 
     public static List<GlossaryEntry> read(final File file, boolean priorityGlossary) throws Exception {
         Martif tbx = load(file);
+        return readMartif(tbx, priorityGlossary);
+    }
 
+    public static List<GlossaryEntry> read(final String data, boolean priorityGlossary) throws Exception {
+        Martif tbx = loadFromString(data);
+        return readMartif(tbx, priorityGlossary);
+    }
+
+    public static List<GlossaryEntry> readMartif(final Martif tbx, boolean priorityGlossary) throws Exception {
+        if (tbx.getText() == null) {
+            return Collections.emptyList();
+        }
         String sLang = Core.getProject().getProjectProperties().getSourceLanguage().getLanguageCode();
         String tLang = Core.getProject().getProjectProperties().getTargetLanguage().getLanguageCode();
 
@@ -204,6 +217,19 @@ public class GlossaryReaderTBX {
         } finally {
             in.close();
         }
+    }
+
+    static Martif loadFromString(String data) throws Exception {
+        Unmarshaller unm = TBX_CONTEXT.createUnmarshaller();
+
+        SAXParser parser = SAX_FACTORY.newSAXParser();
+
+        NamespaceFilter xmlFilter = new NamespaceFilter(parser.getXMLReader());
+        xmlFilter.setContentHandler(unm.getUnmarshallerHandler());
+
+        SAXSource source = new SAXSource(xmlFilter, new InputSource(new StringReader(data)));
+
+        return (Martif) unm.unmarshal(source);
     }
 
     public static class NamespaceFilter extends XMLFilterImpl {

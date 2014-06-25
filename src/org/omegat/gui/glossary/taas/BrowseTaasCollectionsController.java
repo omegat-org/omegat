@@ -26,6 +26,7 @@
 package org.omegat.gui.glossary.taas;
 
 import gen.taas.TaasCollection;
+import gen.taas.TaasCollectionType;
 import gen.taas.TaasDomain;
 import gen.taas.TaasLanguage;
 
@@ -318,7 +319,7 @@ public class BrowseTaasCollectionsController {
             File glossaryFile = getFileForCollection(c);
             switch (columnIndex) {
             case 0:
-                return c.getName();
+                return c.getName() + (c.getType() == TaasCollectionType.PRIVATE ? '*' : ' ');
             case 1:
                 return c.getDescription();
             case 2:

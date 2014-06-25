@@ -27,10 +27,19 @@ package org.omegat.gui.glossary.taas;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.io.StringReader;
+import java.io.StringWriter;
 
 import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
+import javax.xml.transform.Source;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.stream.StreamResult;
+import javax.xml.transform.stream.StreamSource;
 
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
@@ -50,15 +59,31 @@ public class TaaSPlugin {
     public static TaaSClient client;
 
     static JMenuItem browse;
+    static Transformer filterTransformer;
 
     /**
      * Register plugin into OmegaT.
      */
     public static void loadPlugins() {
+        final TaaSGlossary glossary;
         try {
             client = new TaaSClient();
+            glossary = new TaaSGlossary();
+
+            InputStream in = TaaSGlossary.class.getResourceAsStream("filter.xslt");
+            if (in == null) {
+                throw new Exception("filter.xslt is unaccessible");
+            }
+            try {
+                TransformerFactory factory = TransformerFactory.newInstance();
+                Source xslt = new StreamSource(in);
+                filterTransformer = factory.newTransformer(xslt);
+            } finally {
+                in.close();
+            }
         } catch (Exception ex) {
             Log.log(ex);
+            return;
         }
 
         CoreEvents.registerApplicationEventListener(new IApplicationEventListener() {
@@ -88,7 +113,7 @@ public class TaaSPlugin {
                 });
                 menu.add(lookup);
 
-                Core.getGlossaryManager().addGlossaryProvider(new TaaSGlossary());
+                Core.getGlossaryManager().addGlossaryProvider(glossary);
             }
 
             public void onApplicationShutdown() {
@@ -110,6 +135,18 @@ public class TaaSPlugin {
                 }
             }
         });
+    }
+
+    static String filterTaasResult(String xml) throws Exception {
+        Source src = new StreamSource(new StringReader(xml));
+        StringWriter out = new StringWriter();
+        filterTransformer.transform(src, new StreamResult(out));
+        return out.toString();
+    }
+
+    static void filterTaasResult(InputStream in, OutputStream out) throws Exception {
+        Source src = new StreamSource(in);
+        filterTransformer.transform(src, new StreamResult(out));
     }
 
     public static void unloadPlugins() {

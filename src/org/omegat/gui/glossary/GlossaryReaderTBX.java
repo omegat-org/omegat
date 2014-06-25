@@ -168,7 +168,9 @@ public class GlossaryReaderTBX {
                 line = d.getType() + ": " + readContent(d.getContent());
             } else if (o instanceof DescripGrp) {
                 DescripGrp dg = (DescripGrp) o;
-                line = dg.getDescrip().getType() + ": " + readContent(dg.getDescrip().getContent());
+                if (dg.getDescrip() != null) {
+                    line = dg.getDescrip().getType() + ": " + readContent(dg.getDescrip().getContent());
+                }
             } else if (o instanceof TermNote) {
                 TermNote tn = (TermNote) o;
                 line = readContent(tn.getContent());

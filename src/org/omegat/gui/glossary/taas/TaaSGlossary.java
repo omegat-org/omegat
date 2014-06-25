@@ -50,6 +50,7 @@ public class TaaSGlossary implements IGlossary {
         }
 
         TaasExtractionResult res = TaaSPlugin.client.termExtraction(sLang, tLang, srcText);
-        return GlossaryReaderTBX.read(res.getTerms(), false);
+        String data = TaaSPlugin.filterTaasResult(res.getTerms());
+        return GlossaryReaderTBX.read(data, false);
     }
 }

@@ -208,7 +208,7 @@ public class TaaSClient {
     /**
      * Download specific collection into file.
      */
-    void downloadCollection(long collectionId, File outFile) throws IOException, Unauthorized, FormatError {
+    void downloadCollection(long collectionId, File outFile) throws Exception {
         HttpURLConnection conn = requestGet(WS_URL + "/collections/" + collectionId);
         checkXMLContentType(conn);
 
@@ -216,7 +216,7 @@ public class TaaSClient {
         try {
             OutputStream out = new BufferedOutputStream(new FileOutputStream(outFile));
             try {
-                LFileCopy.copy(in, out);
+                TaaSPlugin.filterTaasResult(in, out);
             } finally {
                 out.close();
             }

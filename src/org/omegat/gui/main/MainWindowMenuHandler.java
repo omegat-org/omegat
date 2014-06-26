@@ -727,6 +727,16 @@ public class MainWindowMenuHandler {
         new CharTableAutoCompleterOptionsDialog(mainWindow).setVisible(true);
     }
 
+    public void optionsGlossaryTBXDisplayContextCheckBoxMenuItemActionPerformed() {
+        Preferences.setPreference(Preferences.GLOSSARY_TBX_DISPLAY_CONTEXT,
+                mainWindow.menu.optionsGlossaryTBXDisplayContextCheckBoxMenuItem.isSelected());
+        Preferences.save();
+
+        // Dirty hack for create new TBX glossaries text. Should be changed for better TBX support.
+        Core.getGlossaryManager().stop();
+        Core.getGlossaryManager().start();
+    }
+
     /**
      * Displays the font dialog to allow selecting the font for source, target text (in main window) and for
      * match and glossary windows.

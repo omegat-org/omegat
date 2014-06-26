@@ -82,6 +82,7 @@ public class Preferences {
     public static final String DICT_FOLDER = "dict_folder";
     public static final String GLOSSARY_FOLDER = "glossary_folder";
     public static final String GLOSSARY_FILE = "glossary_file";
+    public static final String GLOSSARY_TBX_DISPLAY_CONTEXT = "glossary_tbx_display_context";
 
     public static final String MAINWINDOW_WIDTH = "screen_width";
     public static final String MAINWINDOW_HEIGHT = "screen_height";
@@ -358,7 +359,6 @@ public class Preferences {
     /** TaaS glossary client.*/
     public static final String TAAS_LOOKUP = "taas_lookup";
     public static final String TAAS_DOMAIN = "taas_domain";
-    public static final String TAAS_DISPLAY_CONTEXT = "taas_display_context";
 
     /** Private constructor, because this file is singleton */
     static {

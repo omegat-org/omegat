@@ -54,6 +54,7 @@ import javax.xml.transform.sax.SAXSource;
 import org.omegat.core.Core;
 import org.omegat.util.Language;
 import org.omegat.util.OStrings;
+import org.omegat.util.Preferences;
 import org.xml.sax.InputSource;
 import org.xml.sax.XMLReader;
 import org.xml.sax.helpers.XMLFilterImpl;
@@ -165,11 +166,23 @@ public class GlossaryReaderTBX {
             String line = null;
             if (o instanceof Descrip) {
                 Descrip d = (Descrip) o;
-                line = d.getType() + ": " + readContent(d.getContent());
+                if ("context".equalsIgnoreCase(d.getType())) {
+                    if (Preferences.isPreferenceDefault(Preferences.GLOSSARY_TBX_DISPLAY_CONTEXT, true)) {
+                        line = d.getType() + ": " + readContent(d.getContent());
+                    }
+                } else {
+                    line = d.getType() + ": " + readContent(d.getContent());
+                }
             } else if (o instanceof DescripGrp) {
                 DescripGrp dg = (DescripGrp) o;
                 if (dg.getDescrip() != null) {
-                    line = dg.getDescrip().getType() + ": " + readContent(dg.getDescrip().getContent());
+                    if ("context".equalsIgnoreCase(dg.getDescrip().getType())) {
+                        if (Preferences.isPreferenceDefault(Preferences.GLOSSARY_TBX_DISPLAY_CONTEXT, true)) {
+                            line = dg.getDescrip().getType() + ": " + readContent(dg.getDescrip().getContent());
+                        }
+                    } else {
+                        line = dg.getDescrip().getType() + ": " + readContent(dg.getDescrip().getContent());
+                    }
                 }
             } else if (o instanceof TermNote) {
                 TermNote tn = (TermNote) o;

@@ -27,7 +27,6 @@ package org.omegat.gui.glossary.taas;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -83,17 +82,6 @@ public class TaaSPlugin {
             } finally {
                 in.close();
             }
-            in = TaaSGlossary.class.getResourceAsStream("filterContext.xslt");
-            if (in == null) {
-                throw new Exception("filterContext.xslt is unaccessible");
-            }
-            try {
-                TransformerFactory factory = TransformerFactory.newInstance();
-                Source xslt = new StreamSource(in);
-                filterTransformerContext = factory.newTransformer(xslt);
-            } finally {
-                in.close();
-            }
         } catch (Exception ex) {
             Log.log(ex);
             return;
@@ -102,7 +90,6 @@ public class TaaSPlugin {
         CoreEvents.registerApplicationEventListener(new IApplicationEventListener() {
             public void onApplicationStartup() {
                 JMenu menu = Core.getMainWindow().getMainMenu().getGlossaryMenu();
-                menu.setEnabled(true);
 
                 browse = new JMenuItem();
                 Mnemonics.setLocalizedText(browse, OStrings.getString("TAAS_MENU_BROWSE"));
@@ -124,20 +111,6 @@ public class TaaSPlugin {
                     }
                 });
                 menu.add(select);
-
-                final JMenuItem displayContext = new JCheckBoxMenuItem();
-                displayContext.setSelected(Preferences.isPreferenceDefault(Preferences.TAAS_DISPLAY_CONTEXT,
-                        true));
-                Mnemonics.setLocalizedText(displayContext, OStrings.getString("TAAS_MENU_DISPLAY_CONTEXT"));
-                displayContext.addActionListener(new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
-                        Preferences.setPreference(Preferences.TAAS_DISPLAY_CONTEXT,
-                                displayContext.isSelected());
-                        Preferences.save();
-                    }
-                });
-                menu.add(displayContext);
 
                 final JMenuItem lookup = new JCheckBoxMenuItem();
                 lookup.setSelected(Preferences.isPreferenceDefault(Preferences.TAAS_LOOKUP, false));
@@ -180,27 +153,13 @@ public class TaaSPlugin {
         StringWriter out = new StringWriter();
         filterTransformer.transform(src, new StreamResult(out));
 
-        if (!Preferences.isPreferenceDefault(Preferences.TAAS_DISPLAY_CONTEXT, true)) {
-            src = new StreamSource(new StringReader(out.toString()));
-            out = new StringWriter();
-            filterTransformerContext.transform(src, new StreamResult(out));
-        }
-
         return out.toString();
     }
 
     static void filterTaasResult(InputStream in, OutputStream out) throws Exception {
         ByteArrayOutputStream o = new ByteArrayOutputStream();
         Source src = new StreamSource(in);
-        filterTransformer.transform(src, new StreamResult(o));
-
-        if (!Preferences.isPreferenceDefault(Preferences.TAAS_DISPLAY_CONTEXT, true)) {
-            src = new StreamSource(new ByteArrayInputStream(o.toByteArray()));
-            o = new ByteArrayOutputStream();
-            filterTransformerContext.transform(src, new StreamResult(o));
-        }
-
-        out.write(o.toByteArray());
+        filterTransformer.transform(src, new StreamResult(out));
     }
 
     public static void unloadPlugins() {

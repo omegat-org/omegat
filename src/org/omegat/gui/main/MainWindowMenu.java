@@ -367,6 +367,9 @@ public class MainWindowMenu implements ActionListener, MenuListener, IMainMenu {
         optionsMenu.add(optionsMachineTranslateMenu = createMenu("TF_OPTIONSMENU_MACHINETRANSLATE"));
         optionsMenu.add(optionsGlossaryMenu = createMenu("TF_OPTIONSMENU_GLOSSARY"));
 
+        optionsGlossaryMenu
+                .add(optionsGlossaryTBXDisplayContextCheckBoxMenuItem = createCheckboxMenuItem("TF_OPTIONSMENU_GLOSSARY_TBX_DISPLAY_CONTEXT"));
+
         optionsMenu.add(optionsTransTipsMenu = createMenu("TF_OPTIONSMENU_TRANSTIPS"));
         optionsTransTipsMenu
                 .add(optionsTransTipsEnableMenuItem = createCheckboxMenuItem("TF_OPTIONSMENU_TRANSTIPS_ENABLE"));
@@ -399,10 +402,6 @@ public class MainWindowMenu implements ActionListener, MenuListener, IMainMenu {
         helpMenu.add(helpAboutMenuItem = createMenuItem("TF_MENU_HELP_ABOUT"));
         helpMenu.add(helpLastChangesMenuItem = createMenuItem("TF_MENU_HELP_LAST_CHANGES"));
         helpMenu.add(helpLogMenuItem = createMenuItem("TF_MENU_HELP_LOG"));
-        
-
-        // Grayed out if there is no glossary plugins. Plugin can enable it.
-        optionsGlossaryMenu.setEnabled(false);
         
         setActionCommands();
         MainWindowMenuShortcuts.setShortcuts(mainMenu);
@@ -472,6 +471,9 @@ public class MainWindowMenu implements ActionListener, MenuListener, IMainMenu {
         viewDisplayModificationInfoAllRadioButtonMenuItem
                 .setSelected(EditorSettings.DISPLAY_MODIFICATION_INFO_ALL.equals(Core.getEditor()
                         .getSettings().getDisplayModificationInfo()));
+
+        optionsGlossaryTBXDisplayContextCheckBoxMenuItem.setSelected(Preferences.isPreferenceDefault(
+                Preferences.GLOSSARY_TBX_DISPLAY_CONTEXT, true));
     }
 
     /**
@@ -683,6 +685,7 @@ public class MainWindowMenu implements ActionListener, MenuListener, IMainMenu {
     JCheckBoxMenuItem optionsTabAdvanceCheckBoxMenuItem;
     JMenu optionsMachineTranslateMenu;
     JMenu optionsGlossaryMenu;
+    JMenuItem optionsGlossaryTBXDisplayContextCheckBoxMenuItem;
     JMenu optionsTransTipsMenu;
     JCheckBoxMenuItem optionsTransTipsEnableMenuItem;
     JCheckBoxMenuItem optionsTransTipsExactMatchMenuItem;

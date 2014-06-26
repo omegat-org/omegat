@@ -556,7 +556,7 @@ public class StaticUtils {
         String path;
 
         // running from a Jar ?
-        path = tryThisClasspathElement(cp, OConsts.APPLICATION_JAR);
+        path = tryThisClasspathElement(cp, File.separator + OConsts.APPLICATION_JAR);
 
         // again missed, we're not running from Jar, most probably debug mode
         if (path == null)

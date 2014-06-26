@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 3.1.2
 ----------------------------------------------------------------------
-  16 Enhancements
+  17 Enhancements
    2 Bug fixes
    2 Localisation updates
 ----------------------------------------------------------------------
@@ -29,6 +29,9 @@
 
   -  Make SVN_cleanup script localizable 
   https://sourceforge.net/p/omegat/feature-requests/997/
+
+  - Connector to TaaS online service 
+  https://sourceforge.net/p/omegat/feature-requests/1007/
 
   Other enhancements:
 

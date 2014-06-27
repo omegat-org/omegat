@@ -1,9 +1,9 @@
 #!/usr/bin/kaptain
 
-# This version of the Kaptain OmegaT Launcher: 2014-04-28
+# This version of the Kaptain OmegaT Launcher: 2014-06-27
 
 start "OmegaT Launcher" -> omticon top bottom ;
-  top :tabbed  -> locs mem langs connect services appearance about ;
+  top :tabbed  -> locs mem connect services appearance about ;
   bottom :horizontal -> button_bar ;
 
 omticon -> @icon("images/OmegaT.png") ;
@@ -91,27 +91,6 @@ memory_t "Determine how much RAM OmegaT is allowed to make use of. \nToo low a v
 memory_hc :horizontal -> @close="Close" ;
 
 
-### languages tab
-
-# Selection of the user interface language
-# Add language codes (that OmegaT has) or delete them.
-# The first one on the list becomes the default
-
-langs :framed "Languages" -> UI ;
-
-UI "User interface" -> UIlang country languages_help ;
-
-UIlang "User interface language (nn)" -> @combow("en", "ar", "be", "ca", "cs", "cy", "da", "de", "el", "eo", "es", "eu", "fr", "gl", "hu", "id", "it", "ja", "nl", "pl", "pt", "ru", "sh", "sk", "sl", "sq", "sv", "tr", "uk", "zh") ;
-
-# Selection of the user country
-
-country "User country (NN)" -> @string(2) ;
-
-languages_help :dialog "Help" -> languages_m languages_hc ;
-languages_m :horizontal ->  languages_t ;
-languages_t "Select the language of OmegaT's user interface. If no language \nis specified or a language is not available, OmegaT defaults first to the operating \nsystem language, then to English. Different country variants for the same language are not \nused at present." -> @ ;
-languages_hc :horizontal -> @close="Close" ;
-
 ### Connectivity tab
 
 connect :framed "Connectivity" -> proxy team ;
@@ -186,7 +165,27 @@ taas_hc :horizontal -> @close="Close" ;
 
 ### Appearance settings tab
 
-appearance :framed "Appearance" -> fontaa laf ;
+appearance :framed "GUI Settings" -> langs fontaa laf ;
+
+# Selection of the user interface language
+# Add language codes (that OmegaT has) or delete them.
+# The first one on the list becomes the default
+
+langs "Languages" -> UI ;
+
+UI -> UIlang country languages_help ;
+
+UIlang "User interface language (nn)" -> @combow("en", "ar", "be", "ca", "cs", "cy", "da", "de", "el", "eo", "es", "eu", "fr", "gl", "hu", "id", "it", "ja", "nl", "pl", "pt", "ru", "sh", "sk", "sl", "sq", "sv", "tr", "uk", "zh") ;
+
+# Selection of the user country
+
+country "User country (NN)" -> @string(2) ;
+
+languages_help :dialog "Help" -> languages_m languages_hc ;
+languages_m :horizontal ->  languages_t ;
+languages_t "Select the language of OmegaT's user interface. If no language \nis specified or a language is not available, OmegaT defaults first to the operating \nsystem language, then to English. Different country variants for the same language are not \nused at present." -> @ ;
+languages_hc :horizontal -> @close="Close" ;
+
 
 # Font anti-aliasing settings
 

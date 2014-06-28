@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 3.1.2 update 1
 ----------------------------------------------------------------------
-   1 Enhancement
+   2 Enhancements
    0 Bug fix
    0 Localisation update
 ----------------------------------------------------------------------
@@ -11,6 +11,9 @@
 
   - Under Linux, the layout of omegat.kaptn was improved. the "Languages" 
 and "Appearance" tabs are now merged into a single "GUI Settings" tab.
+
+  - The size of the About dialog is reduced automatically if it doesn't
+fit on screen
 
 ----------------------------------------------------------------------
  OmegaT 3.1.2 (2014-06-26)

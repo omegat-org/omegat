@@ -86,7 +86,7 @@ public class AboutDialog extends JDialog {
         invalidate();
         pack();
 
-        // Reduce automatically size of dialog when they don't fit on screen
+        // Reduce automatically size of dialog when it doesn't fit on screen
         Toolkit kit = getToolkit();
         Dimension screenSize = kit.getScreenSize();
         Dimension dialogSize = getSize();

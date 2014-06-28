@@ -204,7 +204,7 @@ OmegaT のユーザーインターフェースや取扱説明書、他の関連�
 そして、OmegaT の世界がどんな雰囲気であるのかをつかんでください。
 
   OmegaT のオリジナルは Keith Godfrey によるものです。
-  Marc Prior が OmegaT プロジェクトのコーディネーターです。
+  現在は、Didier Briel が OmegaT のプロジェクトマネージャーを務めています。
 
 これまでに貢献してくれた方々：
 （アルファベット順）
@@ -212,7 +212,7 @@ OmegaT のユーザーインターフェースや取扱説明書、他の関連�
 コードに関する貢献者
   Zoltan Bartko
   Volker Berlin
-  Didier Briel（開発マネージャー）
+  Didier Briel
   Kim Bruning
   Alex Buloichik（リード開発者）
   Sandra Jean Chua
@@ -251,7 +251,7 @@ OmegaT のユーザーインターフェースや取扱説明書、他の関連�
   Jean-Christophe Helary（地域化担当）
   Vito Smolej（文書作成担当）
   Samuel Murray
-  Marc Prior 
+  Marc Prior（ウェブサイト管理者）
   そして、大いに貢献してくださった多くの方々
 
 （万が一、OmegaT プロジェクトへ大きく協力したのに、ここに名前がないという場合は、遠慮なくご連絡ください）

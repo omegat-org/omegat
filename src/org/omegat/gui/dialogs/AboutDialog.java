@@ -25,16 +25,18 @@
 
 package org.omegat.gui.dialogs;
 
+import java.awt.Dimension;
 import java.awt.Frame;
+import java.awt.GraphicsConfiguration;
+import java.awt.Insets;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
-
 import javax.swing.AbstractAction;
 import javax.swing.Action;
 import javax.swing.JComponent;
 import javax.swing.JDialog;
 import javax.swing.KeyStroke;
-
 import org.omegat.util.OStrings;
 import org.omegat.util.StaticUtils;
 
@@ -83,6 +85,19 @@ public class AboutDialog extends JDialog {
 
         invalidate();
         pack();
+
+        // Reduce automatically size of dialog when they don't fit on screen
+        Toolkit kit = getToolkit();
+        Dimension screenSize = kit.getScreenSize();
+        Dimension dialogSize = getSize();
+        GraphicsConfiguration config = getGraphicsConfiguration();
+        Insets insets = kit.getScreenInsets(config);
+        screenSize.height -= (insets.top + insets.bottom);  // excluding the Windows taskbar
+        if (dialogSize.height > screenSize.height) {
+            dialogSize.height = screenSize.height;
+            setSize(dialogSize);
+        }
+        setLocationRelativeTo(null);
     }
 
     /** @return the return status of this dialog - one of RET_OK or RET_CANCEL */
@@ -106,6 +121,7 @@ public class AboutDialog extends JDialog {
         okButton = new javax.swing.JButton();
         memoryusage = new javax.swing.JLabel();
         versionLabel = new javax.swing.JLabel();
+        aboutpane = new javax.swing.JScrollPane();
         abouttext = new javax.swing.JTextArea();
 
         setTitle(OStrings.getString("ABOUTDIALOG_TITLE")); // NOI18N
@@ -152,14 +168,20 @@ public class AboutDialog extends JDialog {
         versionLabel.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 5, 5, 5));
         getContentPane().add(versionLabel, java.awt.BorderLayout.NORTH);
 
-        abouttext.setBackground(javax.swing.UIManager.getDefaults().getColor("Label.background"));
+        aboutpane.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        aboutpane.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+
         abouttext.setEditable(false);
+        abouttext.setBackground(javax.swing.UIManager.getDefaults().getColor("Label.background"));
         abouttext.setFont(versionLabel.getFont());
         abouttext.setLineWrap(true);
         abouttext.setText(OStrings.getString("ABOUTDIALOG_CONTRIBUTORS")); // NOI18N
         abouttext.setWrapStyleWord(true);
         abouttext.setBorder(javax.swing.BorderFactory.createEmptyBorder(3, 3, 3, 3));
-        getContentPane().add(abouttext, java.awt.BorderLayout.CENTER);
+        abouttext.setCaretPosition(0);
+        aboutpane.setViewportView(abouttext);
+
+        getContentPane().add(aboutpane, java.awt.BorderLayout.CENTER);
 
         pack();
         setLocationRelativeTo(null);
@@ -187,6 +209,7 @@ public class AboutDialog extends JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JScrollPane aboutpane;
     private javax.swing.JTextArea abouttext;
     private javax.swing.JPanel buttonPanel;
     private javax.swing.JLabel jLabel2;

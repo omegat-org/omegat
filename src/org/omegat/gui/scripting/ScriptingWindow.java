@@ -473,8 +473,8 @@ public class ScriptingWindow extends JFrame {
             removeQuickScriptMenuItem.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent evt) {
-                    ScriptItem scriptItem = (ScriptItem) m_scriptList.getSelectedValue();
-                    logResult(StaticUtils.format(OStrings.getString("SCW_REMOVED_QUICK_SCRIPT"), scriptItem.getName(), scriptKey));
+                    String scriptName = Preferences.getPreferenceDefault("scripts_quick_" + scriptKey, "(unknown)");
+                    logResult(StaticUtils.format(OStrings.getString("SCW_REMOVED_QUICK_SCRIPT"), scriptName, scriptKey));
                     Preferences.setPreference("scripts_quick_" + scriptKey, "");
                     m_quickScriptButtons[index].setToolTipText(OStrings.getString("SCW_NO_SCRIPT_SET"));
                     m_quickScriptButtons[index].setText(" " + scriptKey + " ");

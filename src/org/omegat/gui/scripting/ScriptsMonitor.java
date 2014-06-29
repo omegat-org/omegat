@@ -48,6 +48,7 @@ import org.omegat.util.DirectoryMonitor;
  */
 public class ScriptsMonitor implements DirectoryMonitor.DirectoryCallback, DirectoryMonitor.Callback {
 	private static final boolean SCRIPTING_EVENTS = true;
+	private static boolean applicationStartupEventScriptsExecuted = false;
 	
 	public ScriptsMonitor(final ScriptingWindow scriptingWindow, final JList list, List<String> extensions) {
 		this.m_list = list;
@@ -74,6 +75,17 @@ public class ScriptsMonitor implements DirectoryMonitor.DirectoryCallback, Direc
     	this.m_scriptDir = scriptDir;
         m_monitor = new DirectoryMonitor(scriptDir, this, this);
         m_monitor.start();
+
+        // Immediately execute APPLICATION_STARTUP event scripts
+        if (!applicationStartupEventScriptsExecuted) { // first-time only
+            applicationStartupEventScriptsExecuted = true;
+            addEventScripts(EventType.APPLICATION_STARTUP);
+            ArrayList<ScriptItem> scripts = m_eventsScript.get(EventType.APPLICATION_STARTUP);
+            for (ScriptItem si : scripts) {
+                m_scriptingWindow.executeScriptFile(si, true);
+            }
+            scripts.clear();
+        }
     }
 
     public void stop() {
@@ -253,7 +265,7 @@ public class ScriptsMonitor implements DirectoryMonitor.DirectoryCallback, Direc
 	
 	private enum EventType {
 		// ApplicationEvent
-		//APPLICATION_STARTUP,
+		APPLICATION_STARTUP,
 		APPLICATION_SHUTDOWN,
 		
 		// EditorEvent

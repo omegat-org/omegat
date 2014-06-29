@@ -4,7 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2011 Briac Pilpre (briacp@gmail.com)
-               2013 Alex Buloichik
+               2013 Alex Buloichik, 2014 Yu Tang
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -88,6 +88,7 @@ import org.openide.awt.Mnemonics;
  * 
  * @author Briac Pilpre
  * @author Alex Buloichik
+ * @author Yu Tang
  */
 public class ScriptingWindow extends JFrame {
 

@@ -442,7 +442,6 @@ public class ScriptingWindow extends JFrame {
                 @Override
                 public void actionPerformed(ActionEvent a) {
                     if (Preferences.existsPreference("scripts_quick_" + scriptKey)) {
-                        logResult(StaticUtils.format(OStrings.getString("SCW_QUICK_RUN"), scriptKey));
                         runQuickScript(index);
                     } else {
                         logResult(StaticUtils.format(OStrings.getString("SCW_NO_SCRIPT_BOUND"), scriptKey));

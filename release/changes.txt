@@ -2,7 +2,7 @@
  OmegaT 3.1.2 update 1
 ----------------------------------------------------------------------
    3 Enhancements
-   0 Bug fix
+   1 Bug fix
    0 Localisation update
 ----------------------------------------------------------------------
 3.1.2 update 1 vs. 3.1.2
@@ -19,6 +19,11 @@ and "Appearance" tabs are now merged into a single "GUI Settings" tab.
 
   - The size of the About dialog is reduced automatically if it doesn't
 fit on screen
+
+  Bug fixes:
+
+  - Remove script action outputs wrong script name 
+  https://sourceforge.net/p/omegat/bugs/656/
 
 ----------------------------------------------------------------------
  OmegaT 3.1.2 (2014-06-26)

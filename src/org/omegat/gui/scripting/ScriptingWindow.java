@@ -40,7 +40,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
-
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineFactory;
 import javax.script.ScriptEngineManager;
@@ -69,10 +68,11 @@ import javax.swing.SwingConstants;
 import javax.swing.WindowConstants;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+import javax.swing.event.PopupMenuEvent;
+import javax.swing.event.PopupMenuListener;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.Document;
 import javax.swing.text.Highlighter.HighlightPainter;
-
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
 import org.omegat.core.events.IApplicationEventListener;
@@ -80,6 +80,7 @@ import org.omegat.gui.editor.mark.Mark;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
 import org.omegat.util.StaticUtils;
+import org.omegat.util.StringUtil;
 import org.openide.awt.Mnemonics;
 
 /**
@@ -452,7 +453,7 @@ public class ScriptingWindow extends JFrame {
             JPopupMenu quickScriptPopup = new JPopupMenu();
 
             // Add a script to the quick script button bar
-            JMenuItem addQuickScriptMenuItem = new JMenuItem(OStrings.getString("SCW_ADD_SCRIPT"));
+            final JMenuItem addQuickScriptMenuItem = new JMenuItem(OStrings.getString("SCW_ADD_SCRIPT"));
             addQuickScriptMenuItem.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent evt) {
@@ -469,7 +470,7 @@ public class ScriptingWindow extends JFrame {
             quickScriptPopup.add(addQuickScriptMenuItem);
 
             // Remove a script from the button bar
-            JMenuItem removeQuickScriptMenuItem = new JMenuItem(OStrings.getString("SCW_REMOVE_SCRIPT"));
+            final JMenuItem removeQuickScriptMenuItem = new JMenuItem(OStrings.getString("SCW_REMOVE_SCRIPT"));
             removeQuickScriptMenuItem.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent evt) {
@@ -483,6 +484,28 @@ public class ScriptingWindow extends JFrame {
                 }
             });
             quickScriptPopup.add(removeQuickScriptMenuItem);
+
+            quickScriptPopup.addPopupMenuListener(new PopupMenuListener() {
+                @Override
+                public void popupMenuWillBecomeVisible(PopupMenuEvent e) {
+                    // Disable add a script command if sctipt selection empty
+                    addQuickScriptMenuItem.setEnabled(!m_scriptList.isSelectionEmpty());
+
+                    // Disable remove a script command if the quick run button is not bounded
+                    String scriptName = Preferences.getPreferenceDefault("scripts_quick_" + scriptKey, null);
+                    removeQuickScriptMenuItem.setEnabled(!StringUtil.isEmpty(scriptName));
+                }
+
+                @Override
+                public void popupMenuWillBecomeInvisible(PopupMenuEvent e) {
+                    // do nothing
+                }
+
+                @Override
+                public void popupMenuCanceled(PopupMenuEvent e) {
+                    // do nothing
+                }
+            });
 
             m_quickScriptButtons[i].setComponentPopupMenu(quickScriptPopup);
 

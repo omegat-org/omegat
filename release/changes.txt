@@ -1,13 +1,18 @@
 ----------------------------------------------------------------------
  OmegaT 3.1.2 update 1
 ----------------------------------------------------------------------
-   2 Enhancements
+   3 Enhancements
    0 Bug fix
    0 Localisation update
 ----------------------------------------------------------------------
 3.1.2 update 1 vs. 3.1.2
 
   Other enhancements:
+
+  Implemented requests:
+
+  - Implement application_start event for scripts 
+  https://sourceforge.net/p/omegat/feature-requests/1000/
 
   - Under Linux, the layout of omegat.kaptn was improved. the "Languages" 
 and "Appearance" tabs are now merged into a single "GUI Settings" tab.

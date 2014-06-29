@@ -4,7 +4,8 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2011 Briac Pilpre (briacp@gmail.com)
-               2013 Alex Buloichik, 2014 Yu Tang
+               2013 Alex Buloichik
+               2014 Briac Pilpre (briacp@gmail.com), Yu Tang
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 

@@ -488,7 +488,7 @@ public class ScriptingWindow extends JFrame {
             quickScriptPopup.addPopupMenuListener(new PopupMenuListener() {
                 @Override
                 public void popupMenuWillBecomeVisible(PopupMenuEvent e) {
-                    // Disable add a script command if sctipt selection empty
+                    // Disable add a script command if script selection empty
                     addQuickScriptMenuItem.setEnabled(!m_scriptList.isSelectionEmpty());
 
                     // Disable remove a script command if the quick run button is not bounded

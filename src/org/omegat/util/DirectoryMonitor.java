@@ -30,7 +30,9 @@ import java.io.FileFilter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.TreeMap;
+import java.util.TreeSet;
 import java.util.logging.Logger;
 
 /**
@@ -100,13 +102,19 @@ public class DirectoryMonitor extends Thread {
         }
     }
 
+    public synchronized Set<File> getExistFiles() {
+        Set<File> result = new TreeSet<File>();
+        for (String fn : existFiles.keySet()) {
+            result.add(new File(fn));
+        }
+        return result;
+    }
+
     /**
-     * Proces changes in directory. This method can be called before thread start for load all files from
+     * Process changes in directory. This method can be called before thread start for load all files from
      * directory immediately.
-     * 
-     * DON'T EXECUTE IT WHEN THREAD STARTED ! Because working with map not synchronized.
      */
-    public void checkChanges() {
+    public synchronized void checkChanges() {
     	boolean directoryChanged = false;
         // find deleted or changed files
         for (String fn : new ArrayList<String>(existFiles.keySet())) {

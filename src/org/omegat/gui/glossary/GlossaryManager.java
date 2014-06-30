@@ -32,6 +32,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.TreeMap;
 
 import org.omegat.core.Core;
@@ -115,6 +116,15 @@ public class GlossaryManager implements DirectoryMonitor.Callback {
             }
         }
         pane.refresh();
+    }
+
+    public void forceReloadTBX() {
+        Set<File> files = monitor.getExistFiles();
+        for (File f : files) {
+            if (f.getName().toLowerCase().endsWith(OConsts.EXT_TBX)) {
+                fileChanged(f);
+            }
+        }
     }
 
     /**

@@ -732,9 +732,7 @@ public class MainWindowMenuHandler {
                 mainWindow.menu.optionsGlossaryTBXDisplayContextCheckBoxMenuItem.isSelected());
         Preferences.save();
 
-        // Dirty hack for create new TBX glossaries text. Should be changed for better TBX support.
-        Core.getGlossaryManager().stop();
-        Core.getGlossaryManager().start();
+        Core.getGlossaryManager().forceReloadTBX();
     }
 
     /**

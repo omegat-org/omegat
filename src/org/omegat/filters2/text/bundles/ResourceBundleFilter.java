@@ -288,7 +288,8 @@ public class ResourceBundleFilter extends AbstractFilter {
 
         // Parameter in the options of filter to customize the target file
         String removeStringsUntranslatedStr = processOptions.get(OPTION_REMOVE_STRINGS_UNTRANSLATED);
-        if ((removeStringsUntranslatedStr == null) || (removeStringsUntranslatedStr.equalsIgnoreCase("true"))) {
+        // If the value is null the default is false
+        if ((removeStringsUntranslatedStr != null) && (removeStringsUntranslatedStr.equalsIgnoreCase("true"))) {
             removeStringsUntranslated = true;
         } else {
             removeStringsUntranslated = false;

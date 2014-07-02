@@ -2,7 +2,7 @@
  OmegaT 3.1.2 update 1
 ----------------------------------------------------------------------
    4 Enhancements
-   1 Bug fix
+   2 Bug fixes
    0 Localisation update
 ----------------------------------------------------------------------
 3.1.2 update 1 vs. 3.1.2
@@ -30,6 +30,9 @@ of all glossaries
 
   - Remove script action outputs wrong script name 
   https://sourceforge.net/p/omegat/bugs/656/
+
+  - Untranslated segments missing in target Java .properties 
+  https://sourceforge.net/p/omegat/bugs/690/
 
 ----------------------------------------------------------------------
  OmegaT 3.1.2 (2014-06-26)

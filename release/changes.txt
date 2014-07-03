@@ -31,7 +31,7 @@ of all glossaries
   - Remove script action outputs wrong script name 
   https://sourceforge.net/p/omegat/bugs/656/
 
-  - Untranslated segments missing in target Java .properties 
+  - Untranslated segments missing in target Java .properties and Mozilla DTDs
   https://sourceforge.net/p/omegat/bugs/690/
 
 ----------------------------------------------------------------------

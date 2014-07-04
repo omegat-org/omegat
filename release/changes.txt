@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 3.1.2 update 1
 ----------------------------------------------------------------------
-   6 Enhancements
+   7 Enhancements
    2 Bug fixes
    0 Localisation update
 ----------------------------------------------------------------------
@@ -14,6 +14,9 @@
 
   - XLIFF filter - RESNAME as id for alternative translations
   https://sourceforge.net/p/omegat/feature-requests/996/
+
+  - Make adding filename to alternative translations configurable 
+  https://sourceforge.net/p/omegat/feature-requests/961/
 
   Other enhancements:
 

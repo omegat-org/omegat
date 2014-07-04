@@ -4,6 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2010 Alex Buloichik
+               2014 Aaron Madlon-Kay
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -30,6 +31,7 @@ import org.omegat.util.StringUtil;
  * Class for store full entry's identifier, including file, id, src, etc.
  * 
  * @author Alex Buloichik (alex73mail@gmail.com)
+ * @author Aaron Madlon-Kay
  */
 public class EntryKey implements Comparable<EntryKey> {
     public final String file;
@@ -38,6 +40,11 @@ public class EntryKey implements Comparable<EntryKey> {
     public final String prev;
     public final String next;
     public final String path;
+    
+    /**
+     * When true, ignore the {@link #file} member when comparing EntryKeys.
+     */
+    public static boolean IGNORE_FILE_CONTEXT = false;
 
     public EntryKey(final String file, final String sourceText, final String id, final String prev,
             final String next, final String path) {
@@ -51,7 +58,7 @@ public class EntryKey implements Comparable<EntryKey> {
 
     public int hashCode() {
         int hash = sourceText.hashCode();
-        if (file != null) {
+        if (!IGNORE_FILE_CONTEXT && file != null) {
             hash += file.hashCode();
         }
         if (id != null) {
@@ -75,7 +82,7 @@ public class EntryKey implements Comparable<EntryKey> {
     	}
         EntryKey o = (EntryKey) obj;
         return StringUtil.equalsWithNulls(sourceText, o.sourceText) && // source
-                StringUtil.equalsWithNulls(file, o.file) && // file
+                (IGNORE_FILE_CONTEXT || StringUtil.equalsWithNulls(file, o.file)) && // file
                 StringUtil.equalsWithNulls(id, o.id) && // id
                 StringUtil.equalsWithNulls(prev, o.prev) && // prev
                 StringUtil.equalsWithNulls(next, o.next) && // next
@@ -83,7 +90,7 @@ public class EntryKey implements Comparable<EntryKey> {
     }
 
     public int compareTo(EntryKey o) {
-        int c = StringUtil.compareToWithNulls(file, o.file);
+        int c = IGNORE_FILE_CONTEXT ? 0 : StringUtil.compareToWithNulls(file, o.file);
         if (c == 0) {
             c = StringUtil.compareToWithNulls(id, o.id);
         }
@@ -105,5 +112,9 @@ public class EntryKey implements Comparable<EntryKey> {
     public String toString() {
         return "[file:" + file + ", id=" + id + ", path=" + path + ", source='" + sourceText + "', prev='"
                 + prev + "', next='" + next + "']";
+    }
+    
+    public static void setIgnoreFileContext(boolean ignoreFileContext) {
+        IGNORE_FILE_CONTEXT = ignoreFileContext;
     }
 }

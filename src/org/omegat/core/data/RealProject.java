@@ -304,6 +304,8 @@ public class RealProject implements IProject {
                 filterMasterConfig = FilterMaster.createDefaultFiltersConfig();
             }
             Core.setFilterMaster(new FilterMaster(filterMasterConfig));
+            
+            EntryKey.setIgnoreFileContext(filterMasterConfig.isIgnoreFileContext());
 
             // set project specific segmentation rules if they exist
             Segmenter.srx = m_config.getProjectSRX();

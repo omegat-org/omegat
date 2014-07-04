@@ -5,6 +5,7 @@
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
                2013 Alex Buloichik, Yu Tang
+               2014 Aaron Madlon-Kay
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -61,6 +62,7 @@ import org.omegat.util.OStrings;
  * @author Maxym Mykhalchuk
  * @author Alex Buloichik
  * @author Yu Tang
+ * @author Aaron Madlon-Kay
  */
 @SuppressWarnings("serial")
 public class FiltersCustomizer extends JDialog implements ListSelectionListener {
@@ -132,6 +134,7 @@ public class FiltersCustomizer extends JDialog implements ListSelectionListener 
         cbRemoveTags.setSelected(editableFilters.isRemoveTags());
         cbRemoveSpacesNonseg.setSelected(editableFilters.isRemoveSpacesNonseg());
         cbPreserveSpaces.setSelected(editableFilters.isPreserveSpaces());
+        cbIgnoreFileContext.setSelected(editableFilters.isIgnoreFileContext());
 
         // hack for "autoresizing" the dialog
         // accomodating table dimensions
@@ -203,6 +206,7 @@ public class FiltersCustomizer extends JDialog implements ListSelectionListener 
         cbRemoveTags = new javax.swing.JCheckBox();
         cbRemoveSpacesNonseg = new javax.swing.JCheckBox();
         cbPreserveSpaces = new javax.swing.JCheckBox();
+        cbIgnoreFileContext = new javax.swing.JCheckBox();
 
         setTitle(OStrings.getString("FILTERSCUSTOMIZER_TITLE")); // NOI18N
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -365,6 +369,19 @@ public class FiltersCustomizer extends JDialog implements ListSelectionListener 
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         getContentPane().add(cbPreserveSpaces, gridBagConstraints);
 
+        org.openide.awt.Mnemonics.setLocalizedText(cbIgnoreFileContext, OStrings.getString("FILTERSCUSTOMIZER_OPTION_GLOBAL_IGNORE_FILE")); // NOI18N
+        cbIgnoreFileContext.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbIgnoreFileContextActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 7;
+        gridBagConstraints.gridheight = 2;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        getContentPane().add(cbIgnoreFileContext, gridBagConstraints);
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -375,6 +392,7 @@ public class FiltersCustomizer extends JDialog implements ListSelectionListener 
             cbRemoveTags.setEnabled(true);
             cbRemoveSpacesNonseg.setEnabled(true);
             cbPreserveSpaces.setEnabled(true);
+            cbIgnoreFileContext.setEnabled(true);
             toDefaultsButton.setEnabled(true);
         } else {
             filtersTable.setEnabled(false);
@@ -383,6 +401,7 @@ public class FiltersCustomizer extends JDialog implements ListSelectionListener 
             cbRemoveTags.setEnabled(false);
             cbRemoveSpacesNonseg.setEnabled(false);
             cbPreserveSpaces.setEnabled(false);
+            cbIgnoreFileContext.setEnabled(false);
             toDefaultsButton.setEnabled(false);
         }
     }//GEN-LAST:event_projectSpecificCBActionPerformed
@@ -398,6 +417,10 @@ public class FiltersCustomizer extends JDialog implements ListSelectionListener 
     private void cbPreserveSpacesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbPreserveSpacesActionPerformed
         editableFilters.setPreserveSpaces(cbPreserveSpaces.isSelected());
     }//GEN-LAST:event_cbPreserveSpacesActionPerformed
+
+    private void cbIgnoreFileContextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbIgnoreFileContextActionPerformed
+        editableFilters.setIgnoreFileContext(cbIgnoreFileContext.isSelected());
+    }//GEN-LAST:event_cbIgnoreFileContextActionPerformed
 
     private void optionsButtonActionPerformed(java.awt.event.ActionEvent evt)// GEN-FIRST:event_optionsButtonActionPerformed
     {// GEN-HEADEREND:event_optionsButtonActionPerformed
@@ -419,6 +442,7 @@ public class FiltersCustomizer extends JDialog implements ListSelectionListener 
         cbRemoveTags.setSelected(editableFilters.isRemoveTags());
         cbRemoveSpacesNonseg.setSelected(editableFilters.isRemoveSpacesNonseg());
         cbPreserveSpaces.setSelected(editableFilters.isPreserveSpaces());
+        cbIgnoreFileContext.setSelected(editableFilters.isIgnoreFileContext());
     }// GEN-LAST:event_toDefaultsButtonActionPerformed
 
     private void editButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_editButtonActionPerformed
@@ -460,6 +484,7 @@ public class FiltersCustomizer extends JDialog implements ListSelectionListener 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel buttonPanel;
     private javax.swing.JButton cancelButton;
+    private javax.swing.JCheckBox cbIgnoreFileContext;
     private javax.swing.JCheckBox cbPreserveSpaces;
     private javax.swing.JCheckBox cbRemoveSpacesNonseg;
     private javax.swing.JCheckBox cbRemoveTags;

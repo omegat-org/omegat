@@ -641,6 +641,7 @@ public class FilterMaster {
         c.setRemoveTags(orig.isRemoveTags());
         c.setRemoveSpacesNonseg(orig.isRemoveSpacesNonseg());
         c.setPreserveSpaces(orig.isPreserveSpaces());
+        c.setIgnoreFileContext(orig.isIgnoreFileContext());
         for (Filter f : orig.getFilters()) {
             c.getFilters().add(cloneFilter(f));
         }

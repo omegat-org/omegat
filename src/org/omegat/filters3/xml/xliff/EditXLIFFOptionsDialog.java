@@ -6,7 +6,7 @@
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
                2007-2012 Didier Briel
                2013 Didier Briel, Piotr Kulik
-               2014 Didier Briel
+               2014 Didier Briel, Aaron Madlon-Kay, Piotr Kulik
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -38,6 +38,7 @@ import javax.swing.Action;
 import javax.swing.JComponent;
 import javax.swing.KeyStroke;
 
+import org.omegat.filters3.xml.xliff.XLIFFOptions.ID_TYPE;
 import org.omegat.util.OStrings;
 
 /**
@@ -46,6 +47,7 @@ import org.omegat.util.OStrings;
  * @author Maxym Mykhalchuk
  * @author Didier Briel
  * @author Piotr Kulik
+ * @author Aaron Madlon-Kay
  */
 @SuppressWarnings("serial")
 public class EditXLIFFOptionsDialog extends javax.swing.JDialog {
@@ -64,8 +66,9 @@ public class EditXLIFFOptionsDialog extends javax.swing.JDialog {
         forceshortcut2fCB.setSelected(options.getForceShortcutToF());
         ignoreTypeForPhTagsCB.setSelected(options.getIgnoreTypeForPhTags());
         ignoreTypeForBptTagsCB.setSelected(options.getIgnoreTypeForBptTags());
-        prevAndNextRB.setSelected(!options.getAltTransID());
-        transIDRB.setSelected(options.getAltTransID());
+        prevAndNextRB.setSelected(options.getAltTransIDType() == ID_TYPE.CONTEXT);
+        transIDRB.setSelected(options.getAltTransIDType() == ID_TYPE.ELEMENT_ID);
+        transResnameRB.setSelected(options.getAltTransIDType() == ID_TYPE.RESNAME_ATTR);
         
         // Handle escape key to close the window
         KeyStroke escape = KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0, false);
@@ -111,6 +114,10 @@ public class EditXLIFFOptionsDialog extends javax.swing.JDialog {
         jLabel3 = new javax.swing.JLabel();
         prevAndNextRB = new javax.swing.JRadioButton();
         transIDRB = new javax.swing.JRadioButton();
+        transResnameRB = new javax.swing.JRadioButton();
+        jPanel2 = new javax.swing.JPanel();
+        filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(30, 0), new java.awt.Dimension(30, 0), new java.awt.Dimension(30, 32767));
+        jLabel4 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         forceshortcut2fCB = new javax.swing.JCheckBox();
         ignoreTypeForPhTagsCB = new javax.swing.JCheckBox();
@@ -167,6 +174,18 @@ public class EditXLIFFOptionsDialog extends javax.swing.JDialog {
         org.openide.awt.Mnemonics.setLocalizedText(transIDRB, OStrings.getString("XLIFF_OPTIONS_ID_TRANS_UNIT")); // NOI18N
         jPanel1.add(transIDRB);
 
+        buttonGroup1.add(transResnameRB);
+        org.openide.awt.Mnemonics.setLocalizedText(transResnameRB, OStrings.getString("XLIFF_OPTIONS_RESNAME_TRANS_UNIT")); // NOI18N
+        jPanel1.add(transResnameRB);
+
+        jPanel2.setLayout(new java.awt.BorderLayout());
+        jPanel2.add(filler1, java.awt.BorderLayout.WEST);
+
+        org.openide.awt.Mnemonics.setLocalizedText(jLabel4, OStrings.getString("XLIFF_OPTIONS_RESNAME_EXPLANATION")); // NOI18N
+        jPanel2.add(jLabel4, java.awt.BorderLayout.CENTER);
+
+        jPanel1.add(jPanel2);
+
         org.openide.awt.Mnemonics.setLocalizedText(jLabel1, OStrings.getString("XLIFF_OPTIONS_36_ONLY")); // NOI18N
         jPanel1.add(jLabel1);
 
@@ -193,9 +212,11 @@ public class EditXLIFFOptionsDialog extends javax.swing.JDialog {
         options.setIgnoreTypeForPhTags(ignoreTypeForPhTagsCB.isSelected());
         options.setIgnoreTypeForBptTags(ignoreTypeForBptTagsCB.isSelected());
         if (prevAndNextRB.isSelected()) {
-            options.setAltTransID(false);
-        } else {
-            options.setAltTransID(true);
+            options.setAltTransIDType(ID_TYPE.CONTEXT);
+        } else if (transIDRB.isSelected()) {
+            options.setAltTransIDType(ID_TYPE.ELEMENT_ID);
+        } else if (transResnameRB.isSelected()) {
+        	options.setAltTransIDType(ID_TYPE.RESNAME_ATTR);
         }
 
         doClose(RET_OK);
@@ -224,15 +245,19 @@ public class EditXLIFFOptionsDialog extends javax.swing.JDialog {
     private javax.swing.JPanel buttonPanel;
     private javax.swing.JButton cancelButton;
     private javax.swing.JCheckBox compatibility26CB;
+    private javax.swing.Box.Filler filler1;
     private javax.swing.JCheckBox forceshortcut2fCB;
     private javax.swing.JCheckBox ignoreTypeForBptTagsCB;
     private javax.swing.JCheckBox ignoreTypeForPhTagsCB;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JButton okButton;
     private javax.swing.JRadioButton prevAndNextRB;
     private javax.swing.JRadioButton transIDRB;
+    private javax.swing.JRadioButton transResnameRB;
     // End of variables declaration//GEN-END:variables
 }

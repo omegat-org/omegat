@@ -6,7 +6,7 @@
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
                2007-2010 Didier Briel
                2013 Alex Buloichik, Didier Briel, Piotr Kulik
-               2014 Didier Briel
+               2014 Didier Briel, Aaron Madlon-Kay, Piotr Kulik
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -38,6 +38,7 @@ import org.omegat.filters3.Tag;
 import org.omegat.filters3.xml.DefaultXMLDialect;
 import org.omegat.filters3.xml.XMLContentBasedTag;
 import org.omegat.filters3.xml.XMLText;
+import org.omegat.filters3.xml.xliff.XLIFFOptions.ID_TYPE;
 import org.omegat.util.InlineTagHandler;
 import org.omegat.util.StaticUtils;
 import org.omegat.util.StringUtil;
@@ -51,6 +52,7 @@ import org.omegat.util.StringUtil;
  * @author Didier Briel
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Piotr Kulik
+ * @author Aaron Madlon-Kay
  */
 public class XLIFFDialect extends DefaultXMLDialect {
     private boolean forceShortCutToF;
@@ -59,7 +61,7 @@ public class XLIFFDialect extends DefaultXMLDialect {
     /**
      * Sets whether alternative translations are identified by previous and next paragraphs or by &lt;trans-unit&gt; ID
     */
-    protected boolean useTransUnitID;
+    protected ID_TYPE altTransIDType;
     
     public XLIFFDialect() {
     }
@@ -95,7 +97,7 @@ public class XLIFFDialect extends DefaultXMLDialect {
             forceShortCutToF = options.getForceShortcutToF();
             ignoreTypeForPhTags = options.getIgnoreTypeForPhTags();
             ignoreTypeForBptTags = options.getIgnoreTypeForBptTags();
-            useTransUnitID = options.getAltTransID();
+            altTransIDType = options.getAltTransIDType();
         }
 
     }

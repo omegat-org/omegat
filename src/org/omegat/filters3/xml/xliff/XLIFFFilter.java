@@ -6,7 +6,7 @@
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
                2007-2011 Didier Briel
                2013 Didier Briel, Aaron Madlon-Kay, Piotr Kulik
-               2014 Piotr Kulik, Didier Briel
+               2014 Piotr Kulik, Didier Briel, Aaron Madlon-Kay
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -31,6 +31,7 @@ package org.omegat.filters3.xml.xliff;
 import java.awt.Dialog;
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 
@@ -39,8 +40,10 @@ import org.omegat.core.data.ProtectedPart;
 import org.omegat.filters2.FilterContext;
 import org.omegat.filters2.Instance;
 import org.omegat.filters3.xml.XMLFilter;
+import org.omegat.filters3.xml.xliff.XLIFFOptions.ID_TYPE;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
+import org.omegat.util.StringUtil;
 import org.xml.sax.Attributes;
 
 /**
@@ -60,12 +63,13 @@ public class XLIFFFilter extends XMLFilter {
     private String text;
     private ArrayList<String> entryText = new ArrayList<String>();
     private ArrayList<List<ProtectedPart>> protectedParts = new ArrayList<List<ProtectedPart>>();
+    private HashSet<String> altIDCache = new HashSet<String>();
     
     private String id;
    /**
      * Sets whether alternative translations are identified by previous and next paragraphs or by &lt;trans-unit&gt; ID
     */
-     private boolean useTransUnitID;
+     private ID_TYPE altTransIDType;
 
     /**
      * Register plugin into OmegaT.
@@ -132,11 +136,7 @@ public class XLIFFFilter extends XMLFilter {
     
     @Override
     protected boolean requirePrevNextFields() {
-        if (useTransUnitID) {
-            return false;
-        } else {
-            return true;
-        }
+        return altTransIDType == ID_TYPE.CONTEXT;
     }
     
     /**
@@ -189,7 +189,7 @@ public class XLIFFFilter extends XMLFilter {
                 } catch (Exception e) {
                     Log.log(e);
                 }
-                this.useTransUnitID = dialect.useTransUnitID;
+                this.altTransIDType = dialect.altTransIDType;
         }
         return result;
     }
@@ -200,10 +200,9 @@ public class XLIFFFilter extends XMLFilter {
     @Override
     public void tagStart(String path, Attributes atts) {
         if (atts != null && path.endsWith("trans-unit")) {
-            resname = atts.getValue("resname");
-            if (useTransUnitID) {
-                id = atts.getValue("id");
-            }
+            // resname may or may not be present.
+        	resname = atts.getValue("resname");
+            id = atts.getValue("id");
         }
         // not all <group> tags have resname attribute
         if (path.endsWith("/group")) {
@@ -246,23 +245,54 @@ public class XLIFFFilter extends XMLFilter {
                 String comment = buf.length() == 0 ? null : buf.substring(0, buf.length() - 1);
                 
                 for (int i = 0; i < entryText.size(); i++) {
-                    if (!useTransUnitID) {
-                        id = null;
-                    }
-                    entryParseCallback.addEntry(id, entryText.get(i), null, false, comment, null, this, protectedParts.get(i));
+                    entryParseCallback.addEntry(getSegID(), entryText.get(i), null, false, comment, null, this, protectedParts.get(i));
                 }
             }
 
+            id = null;
             resname = null;
             notes.clear();
             entryText.clear();
             protectedParts.clear();
         } else if (path.endsWith("/group")) {
             groupResname.remove(--groupLevel);
+        } else if (path.endsWith("/file")) {
+        	altIDCache.clear();
         }
         if ("/xliff/file/header".equals(path)) {
             ignored = false;
         }
+    }
+    
+    private String getSegID() {
+        String segID = null;
+        switch (altTransIDType) {
+        case ELEMENT_ID:
+            segID = id;
+            break;
+        case RESNAME_ATTR:
+            segID = resname == null ? id : resname;
+            break;
+        default:
+            // Leave key null
+        }
+        if (segID != null) {
+            segID = ensureUniqueID(segID);
+        }
+        return segID;
+    }
+    
+    String ensureUniqueID(String id) {
+    	int i = 0;
+    	String tryID;
+    	while (true) {
+    		tryID = id + (i == 0 ? "" : "_" + i);
+    		if (!altIDCache.contains(tryID)) {
+    			altIDCache.add(tryID);
+    			return tryID;
+    		}
+    		i++;
+    	}
     }
 
     @Override
@@ -278,11 +308,13 @@ public class XLIFFFilter extends XMLFilter {
     @Override
     public String translate(String entry, List<ProtectedPart> protectedParts) {
         if (entryParseCallback != null) {
-            entryText.add(entry);
-            this.protectedParts.add(protectedParts);
+        	if (!StringUtil.isEmpty(entry)) {
+        		entryText.add(entry);
+        		this.protectedParts.add(protectedParts);
+        	}
             return entry;
         } else if (entryTranslateCallback != null) {
-            String translation = entryTranslateCallback.getTranslation(null, entry, null);
+            String translation = StringUtil.isEmpty(entry) ? entry : entryTranslateCallback.getTranslation(getSegID(), entry, null);
             return translation != null ? translation : entry;
         } else {
             return entry;

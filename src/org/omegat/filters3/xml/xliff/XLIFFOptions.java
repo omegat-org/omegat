@@ -5,7 +5,7 @@
 
  Copyright (C) 2007-2012 Didier Briel
                2013 Piotr Kulik
-               2014 Didier Briel
+               2014 Didier Briel, Aaron Madlon-Kay, Piotr Kulik
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -48,13 +48,28 @@ import org.omegat.filters2.AbstractOptions;
  * 
  * @author Didier Briel
  * @author Piotr Kulik
+ * @author Aaron Madlon-Kay
  */
 public class XLIFFOptions extends AbstractOptions {
     private static final String OPTION_26_COMPATIBILITY = "compatibility26";
     private static final String OPTION_FORCE_SHORTCUT_2_F = "forceshortcut2f";
     private static final String OPTION_IGNORE_TYPE_4_PH_TAGS = "ignoretype4phtags";
     private static final String OPTION_IGNORE_TYPE_4_BPT_TAGS = "ignoretype4bpttags";
+    @Deprecated
     private static final String OPTION_ALT_TRANS_ID = "alttransid";
+    private static final String OPTION_ALT_TRANS_ID_TYPE = "alttransidtype";
+    
+    /**
+     * Identify how the ID for alternative translations is decided.
+     */
+    public enum ID_TYPE {
+    	/** Take the ID from the prev and next segments. */
+    	CONTEXT,
+    	/** Take the ID from the &lt;trans-unit&gt;'s XML ID. */
+    	ELEMENT_ID,
+    	/** Take the ID from the &lt;trans-unit&gt;'s resname attribute. */
+    	RESNAME_ATTR
+    }
     
     public XLIFFOptions(Map<String, String> config) {
         super(config);
@@ -123,19 +138,29 @@ public class XLIFFOptions extends AbstractOptions {
     }
     
     /** 
-     * Return whether the ID for alternative translations should be previous and nex paragraph (false)
-     * or the &lt;trans-unit&gt; id (true)
+     * Return how the ID for alternative translations should be taken:
+     * <ul><li>previous and next paragraph ({@link ID_TYPE#CONTEXT}, default)</li>
+     * <li>the &lt;trans-unit&gt; id ({@link ID_TYPE#ELEMENT_ID})</li>
+     * <li>the &lt;trans-unit&gt; resname attribute ({@link ID_TYPE#RESNAME_ATTR})</li>
+     * </ul>
      */
-    public boolean getAltTransID() {
-        return getBoolean(OPTION_ALT_TRANS_ID, false);
+    public ID_TYPE getAltTransIDType() {
+        ID_TYPE result = getEnum(ID_TYPE.class, OPTION_ALT_TRANS_ID_TYPE, null);
+        if (result == null) {
+        	return getBoolean(OPTION_ALT_TRANS_ID, false) ? ID_TYPE.ELEMENT_ID : ID_TYPE.CONTEXT;
+        }
+        return result;
     }
     
     /** 
-     * Set whether the ID for alternative translations should be previous and nex paragraph (false)
-     * or the &lt;trans-unit&gt; id (true)
+     * Set how the ID for alternative translations should be taken:
+     * <ul><li>previous and next paragraph ({@link ID_TYPE#CONTEXT}, default)</li>
+     * <li>the &lt;trans-unit&gt; id ({@link ID_TYPE#ELEMENT_ID})</li>
+     * <li>the &lt;trans-unit&gt; resname attribute ({@link ID_TYPE#RESNAME_ATTR})</li>
+     * </ul>
      */
-    public void setAltTransID(boolean altTransID) {
-        setBoolean(OPTION_ALT_TRANS_ID, altTransID);
+    public void setAltTransIDType(ID_TYPE idType) {
+        setEnum(OPTION_ALT_TRANS_ID_TYPE, idType);
     }
 
 }

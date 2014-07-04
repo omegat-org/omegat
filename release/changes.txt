@@ -1,18 +1,25 @@
 ----------------------------------------------------------------------
  OmegaT 3.1.2 update 1
 ----------------------------------------------------------------------
-   4 Enhancements
+   6 Enhancements
    2 Bug fixes
    0 Localisation update
 ----------------------------------------------------------------------
 3.1.2 update 1 vs. 3.1.2
 
-  Other enhancements:
-
   Implemented requests:
 
   - Implement application_start event for scripts 
   https://sourceforge.net/p/omegat/feature-requests/1000/
+
+  - XLIFF filter - RESNAME as id for alternative translations
+  https://sourceforge.net/p/omegat/feature-requests/996/
+
+  Other enhancements:
+
+  - When enabling or disabling Options > Glossary > Display Context 
+Description for TBX Glossaries, only TBX glossaries are reloaded, instead
+of all glossaries
 
   - Under Linux, the layout of omegat.kaptn was improved. the "Languages" 
 and "Appearance" tabs are now merged into a single "GUI Settings" tab.
@@ -20,11 +27,7 @@ and "Appearance" tabs are now merged into a single "GUI Settings" tab.
   - The size of the About dialog is reduced automatically if it doesn't
 fit on screen
 
-  Other enhancements:
-
-  - When enabling or disabling Options > Glossary > Display Context 
-Description for TBX Glossaries, only TBX glossaries are reloaded, instead
-of all glossaries
+  - VLDocking (the docking system) updated to 3.0.4
 
   Bug fixes:
 

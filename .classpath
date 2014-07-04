@@ -10,7 +10,6 @@
 	<classpathentry exported="true" kind="lib" path="test/lib/junit-4.4.jar"/>
 	<classpathentry exported="true" kind="lib" path="test/lib/xmlunit-1.1.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/pdfbox-app-1.8.1.jar"/>
-	<classpathentry exported="true" kind="lib" path="lib/vldocking_2.1.4.jar"/>
 	<classpathentry kind="lib" path="lib/org.eclipse.jgit-2.1.0.201209190230-r.jar"/>
 	<classpathentry kind="lib" path="lib/jsch-0.1.49.jar"/>
 	<classpathentry kind="lib" path="lib/sequence-library-1.0.2.jar"/>
@@ -41,5 +40,8 @@
 	<classpathentry kind="lib" path="lib/KoreanAnalyzer-3x-120223.jar"/>
 	<classpathentry kind="lib" path="lib/SuperTMXMerge-for_OmegaT.jar"/>
 	<classpathentry kind="lib" path="lib/swing-layout-1.0.4.jar"/>
+	<classpathentry kind="lib" path="lib/slf4j-api-1.7.7.jar"/>
+	<classpathentry kind="lib" path="lib/slf4j-jdk14-1.7.7.jar"/>
+	<classpathentry kind="lib" path="lib/vldocking-3.0.4.jar"/>
 	<classpathentry kind="output" path="classes"/>
 </classpath>

@@ -36,7 +36,7 @@
 				<jar href="jna.jar" />
 				<jar href="lib-mnemonics.jar" />
 				<jar href="swing-layout-1.0.4.jar" />
-				<jar href="vldocking_2.1.4.jar" />
+				<jar href="vldocking-3.0.4.jar" />
 				<jar href="svnkit-1.7.5.jar" />
 				<jar href="antlr-runtime-3.4.jar" />
 				<jar href="sqljet-1.1.3.jar" />
@@ -65,7 +65,8 @@
 				<jar href="groovy-all-2.2.2.jar"  />
 				<jar href="diff.jar" />
 				<jar href="SuperTMXMerge-for_OmegaT.jar" />
-
+				<jar href="slf4j-api-1.7.7.jar" />
+				<jar href="slf4j-jdk14-1.7.7.jar" />
 			</resources>
 			<resources os="Linux" arch="amd64">
 				<nativelib href="hunspell-linux64.jar" />

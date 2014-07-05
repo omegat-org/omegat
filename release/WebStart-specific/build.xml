@@ -2,11 +2,37 @@
 
 <project name="OmegaT-WebStart" default="pack" basedir=".">
 	<property name="root" value="../.." />
-
+	<property file="../../../webstart.properties" />
+	
+	<condition property="has.layout.defaults">
+		<available file="uiLayout.xml" />
+	</condition>
+	
+	<!-- Ant-contrib is required in order to mark all JARs as "Trusted-Library: true"
+	     so as to suppress a Java Web Start "mixed content" warning on launch.
+	     Install ant-contrib.jar in ANT_HOME/lib or ~/.ant/lib.
+	     http://ant-contrib.sourceforge.net/ -->
+	<condition property="ant-contrib.installed">
+		<available classname="net.sf.antcontrib.logic.ForEach" />
+	</condition>
+	<taskdef resource="net/sf/antcontrib/antlib.xml" />
+	
 	<!-- Build WebStart pack -->
-	<target name="pack" depends="clean" description="Build WebStart pack">
-		<property file="../../../webstart.properties" />
+	<target name="pack" depends="clean,copy-jars,set-bundled-defaults,make-trusted" description="Build WebStart pack">
+	
+		<signjar keystore="${signkey.keystore}" alias="${signkey.alias}" storepass="${signkey.storepass}" keypass="${signkey.keypass}">
+			<fileset dir="${root}/build/webstart/" includes="*.jar" />
+		</signjar>
 
+		<mkdir dir="${root}/dist2" />
+		<zip destfile="${root}/dist2/OmegaT-WebStart.zip" basedir="${root}/build/webstart" />
+	</target>
+
+	<target name="clean">
+		<delete dir="${root}/build/webstart" failonerror="false" />
+	</target>
+	
+	<target name="copy-jars">
 		<mkdir dir="${root}/build/webstart" />
 		<copy todir="${root}/build/webstart">
 			<fileset dir="." includes="*.jnlp" />
@@ -30,16 +56,43 @@
 		<jar jarfile="${root}/build/webstart/hunspell-macos32.jar" basedir="${root}/native" includes="libhunspell-macos32.dylib" />
 		<jar jarfile="${root}/build/webstart/hunspell-win64.jar" basedir="${root}/native" includes="hunspell-win64.dll" />
 		<jar jarfile="${root}/build/webstart/hunspell-win32.jar" basedir="${root}/native" includes="hunspell-win32.dll" />
-
-		<signjar keystore="${signkey.keystore}" alias="${signkey.alias}" storepass="${signkey.storepass}" keypass="${signkey.keypass}">
-			<fileset dir="${root}/build/webstart/" includes="*.jar" />
-		</signjar>
-
-		<mkdir dir="${root}/dist2" />
-		<zip destfile="${root}/dist2/OmegaT-WebStart.zip" basedir="${root}/build/webstart" />
 	</target>
-
-	<target name="clean">
-		<delete dir="${root}/build/webstart" failonerror="false" />
+	
+	<target name="set-bundled-defaults" depends="set-layout-defaults">
+		<!-- Place an omegat.prefs in release/WebStart-specific to bundle default preferences
+			 for new users. -->
+		<jar destfile="${root}/build/webstart/OmegaT.jar" update="true">
+			<zipfileset dir="." includes="omegat.prefs" prefix="org/omegat/util/" />
+		</jar>
 	</target>
+	
+	<target name="set-layout-defaults" description="Set window layout defaults" if="has.layout.defaults">
+		<!-- Place a uiLayout.xml in release/WebStart-specific to bundle a custom
+			 default window layout for new users. -->
+		<zip destfile="temp.jar">
+			<zipfileset src="${root}/build/webstart/OmegaT.jar" excludes="org/omegat/gui/main/DockingDefaults.xml" />
+		</zip>
+		<move file="temp.jar" tofile="${root}/build/webstart/OmegaT.jar" />
+		<jar destfile="${root}/build/webstart/OmegaT.jar" update="true" >
+			<zipfileset dir="." includes="uiLayout.xml" fullpath="org/omegat/gui/main/DockingDefaults.xml" />
+		</jar>
+	</target>
+	
+	<target name="make-trusted" if="ant-contrib.installed"
+		description="Mark each included JAR as Trusted-Library: true">
+		<foreach target="make-trusted-jar" param="trusted.jar">
+			<path>
+				<fileset dir="${root}/build/webstart/" includes="*.jar" />
+			</path>
+		</foreach>
+	</target>
+	
+	<target name="make-trusted-jar">
+		<jar destfile="${trusted.jar}" update="true">
+			<manifest>
+				<attribute name="Trusted-Library" value="true" />
+			</manifest>
+		</jar>
+	</target>
+		
 </project>

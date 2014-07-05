@@ -173,7 +173,7 @@ public class LineLengthLimitWriter extends Writer {
                 }
             }
         }
-        // impossible to break on space boundaries - break at any token
+        // impossible to break on space boundaries - break at any token, except brackets
         for (int i = 0; i < tokens.length; i++) {
             Token t = tokens[i];
             if (t == null) {
@@ -181,10 +181,14 @@ public class LineLengthLimitWriter extends Writer {
                 continue;
             }
             if (t.getOffset() >= lineLength && t.getOffset() < maxLineLength) {
-                return t.getOffset();
+                if (isPossibleBreakBefore(t.getOffset())) {
+                    return t.getOffset();
+                }
             }
             if (t.getOffset() + t.getLength() >= lineLength && t.getOffset() + t.getLength() < maxLineLength) {
-                return t.getOffset() + t.getLength();
+                if (isPossibleBreakBefore(t.getOffset() + t.getLength())) {
+                    return t.getOffset() + t.getLength();
+                }
             }
         }
         // use latest token before line length
@@ -195,16 +199,19 @@ public class LineLengthLimitWriter extends Writer {
                 continue;
             }
             if (t.getOffset() >= lineLength) {
-                if (i > 0) {
-                    Token tp = tokens[i - 1];
-                    if (tp != null && tp.getOffset() > 0) {
-                        return tp.getOffset();
-                    } else {
-                        return t.getOffset();
-                    }
-                } else {
+                if (i == 0) {
                     return t.getOffset() + t.getLength();
                 }
+                int j = i - 1;
+                while (j >= 0) {
+                    Token tp = tokens[j--];
+                    if (tp != null && tp.getOffset() > 0) {
+                        if (isPossibleBreakBefore(tp.getOffset())) {
+                            return tp.getOffset();
+                        }
+                    }
+                }
+                return t.getOffset();
             }
         }
         // use full line
@@ -244,7 +251,28 @@ public class LineLengthLimitWriter extends Writer {
         if (eol2 != 0) {
             out.write(eol2);
         }
+    }
 
+    boolean isPossibleBreakBefore(int pos) {
+        try {
+            char c = str.charAt(pos - 1);
+            if ("([{<«„".indexOf(c) >= 0) {
+                return false;
+            }
+        } catch (StringIndexOutOfBoundsException ex) {
+        }
+        try {
+            char c = str.charAt(pos);
+            if (")]}>»“".indexOf(c) >= 0) {
+                return false;
+            }
+        } catch (StringIndexOutOfBoundsException ex) {
+        }
+        return true;
+    }
+
+    boolean isCloseBracket(char c) {
+        return ")]}>»“".indexOf(c) >= 0;
     }
 
     @Override

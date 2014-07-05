@@ -1,8 +1,8 @@
 ----------------------------------------------------------------------
  OmegaT 3.1.2 update 1
 ----------------------------------------------------------------------
-   7 Enhancements
-   2 Bug fixes
+   8 Enhancements
+   3 Bug fixes
    0 Localisation update
 ----------------------------------------------------------------------
 3.1.2 update 1 vs. 3.1.2
@@ -32,6 +32,9 @@ fit on screen
 
   - VLDocking (the docking system) updated to 3.0.4
 
+  - Specific user interface layout can be built into a Java Web Start package at
+compilation time, by putting an uiLayout.xml file in /release/WebStart-specific
+
   Bug fixes:
 
   - Remove script action outputs wrong script name 
@@ -39,6 +42,9 @@ fit on screen
 
   - Untranslated segments missing in target Java .properties and Mozilla DTDs
   https://sourceforge.net/p/omegat/bugs/690/
+
+  - No more warning about mixed content in the Java Web Start package. Requires
+ant-contrib. See details in /release/WebStart-specific/build.xml
 
 ----------------------------------------------------------------------
  OmegaT 3.1.2 (2014-06-26)

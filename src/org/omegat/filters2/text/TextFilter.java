@@ -148,6 +148,7 @@ public class TextFilter extends AbstractFilter {
         } else {
             processSegEmptyLines(in, output);
         }
+        output.close();
     }
 
     /** Process the file without segmenting it. */

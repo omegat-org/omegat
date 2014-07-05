@@ -1149,11 +1149,30 @@ OmegaT failed to load the valid ones
 ----------------------------------------------------------------------
  OmegaT 2.6.3 update 11
 ----------------------------------------------------------------------
-   0 Enhancement
-   0 Bug fix
+   2 Enhancements
+   1 Bug fix
    1 Localisation update
 ----------------------------------------------------------------------
 2.6.3 update 11 vs. 2.6.3 update 10
+
+
+  Other enhancements:
+
+  -  Specific preferences can be built into a Java Web Start package at
+compilation time, by putting an omegat.prefs file in /release/WebStart-specific
+(backported from 3.1)
+
+  - Specific user interface layout can be built into a Java Web Start package at
+compilation time, by putting an uiLayout.xml file in /release/WebStart-specific
+(backported from 3.1)
+
+  Bug fixes: 
+
+  - No more warning about mixed content in the Java Web Start package. Requires
+ant-contrib. See details in /release/WebStart-specific/build.xml
+(backported from 3.1)
+
+  Localisation updates:
 
   - Japanese localisation updated to 2.6.3 update 10 (UI, readme)
 

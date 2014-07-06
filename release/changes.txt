@@ -1,8 +1,8 @@
 ----------------------------------------------------------------------
  OmegaT 3.1.2 update 1
 ----------------------------------------------------------------------
-   8 Enhancements
-   3 Bug fixes
+   9 Enhancements
+   4 Bug fixes
    1 Localisation update
 ----------------------------------------------------------------------
 3.1.2 update 1 vs. 3.1.2
@@ -35,6 +35,10 @@ fit on screen
   - Specific user interface layout can be built into a Java Web Start package at
 compilation time, by putting an uiLayout.xml file in /release/WebStart-specific
 
+  - Text filter: when using the line length limit, OmegaT tries to avoid 
+putting a new line just after an opening bracket. Opening brackets are 
+defined as '([{<«„'.
+
   Bug fixes:
 
   - Remove script action outputs wrong script name 
@@ -45,6 +49,8 @@ compilation time, by putting an uiLayout.xml file in /release/WebStart-specific
 
   - No more warning about mixed content in the Java Web Start package. Requires
 ant-contrib. See details in /release/WebStart-specific/build.xml
+
+  - Text filter: some of the last lines of the target document could be lors
 
   Localisation updates:
 

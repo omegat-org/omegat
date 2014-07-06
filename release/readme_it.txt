@@ -1,4 +1,4 @@
-Questa traduzione è frutto del lavoro di Valter Mura, copyright© 2013
+Questa traduzione è frutto del lavoro di Valter Mura, copyright© 2014 e revisione di Valter Mura e Carmelo Serraino copyright© 2014.
 
 ==============================================================================
   File Leggimi di OmegaT 3.0
@@ -18,13 +18,13 @@ Le informazioni più aggiornate su OmegaT possono essere reperite accedendo a:
       http://www.omegat.org/
 
 Assistenza all'utente, nel gruppo utenti di Yahoo (multilingue), in cui è possibile ricercare negli archivi senza necessità di iscrizione:
-     http://groups.yahoo.com/group/OmegaT/
+     http://tech.groups.yahoo.com/group/OmegaT/
 
 Richieste di miglioramenti (in Inglese), nel sito SourceForge:
-     http://sourceforge.net/tracker/?group_id=68187&atid=520350
+     https://sourceforge.net/p/omegat/feature-requests/
 
 Segnalazione errori (in Inglese), nel sito SourceForge:
-     http://sourceforge.net/tracker/?group_id=68187&atid=520347
+     https://sourceforge.net/p/omegat/bugs/
 
 ==============================================================================
   2.  Che cosa è OmegaT?
@@ -102,7 +102,7 @@ A questo proposito, scaricare ed eseguire il file seguente:
 
 Esso installerà l'ambiente corretto per il proprio computer e l'applicazione per il primo avvio. Non è necessario eseguire online le chiamate successive.
 
-Durante l'installazione, in base al sistema operativo, si potrebbero ricevere diversi avvisi di sicurezza. Il certificato è firmato da "Didier Briel". 
+Durante l'installazione, in base al sistema operativo, si potrebbero ricevere diversi avvisi di sicurezza. Il certificato è rilasciato da "PnS Concept". 
 I permessi che si concedono a questa versione (che potremmo chiamare "accesso illimitato al computer") sono gli stessi che si attribuiscono alla versione locale, come installati da una procedura descritta in seguito: essi consentono l'accesso al disco rigido del computer. I clic successivi su OmegaT.jnlp verificheranno e installeranno gli aggiornamenti, se presenti, e avvieranno OmegaT. 
 
 Di seguito, sono descritti i metodi alternativi e gli strumenti per scaricare e installare OmegaT. 
@@ -168,10 +168,10 @@ Per partecipare allo sviluppo di OmegaT, mettersi in contatto con gli sviluppato
 
 Per tradurre l'interfaccia utente di OmegaT, il manuale per l'utente o altri documenti correlati, leggere:
       
-      http://www.omegat.org/en/translation-info.html
+      http://www.omegat.org/en/howtos/localizing_omegat.php
 
 e iscriversi all'elenco dei traduttori:
-      http://lists.sourceforge.net/mailman/listinfo/omegat-l10n
+      https://lists.sourceforge.net/lists/listinfo/omegat-l10n
 
 Per altri tipi di contributi, prima iscriversi al gruppo di utenti all'indirizzo:
       http://tech.groups.yahoo.com/group/omegat/
@@ -179,18 +179,19 @@ Per altri tipi di contributi, prima iscriversi al gruppo di utenti all'indirizzo
 Avrete così un'idea di che cosa accade nel mondo di OmegaT...
 
   OmegaT è un lavoro originale di Keith Godfrey.
-  Marc Prior è il coordinatore del progetto OmegaT.
+  Didier Briel è il gestore del progetto OmegaT.
 
 Elenco dei contributi precedenti (in ordine alfabetico)
 
 Contributi al codice:
   (in ordine alfabetico)
   Volker Berlin
-  Didier Briel (gestore dello sviluppo)
+  Didier Briel
   Kim Bruning
   Alex Buloichik (sviluppatore primario)
   Sandra Jean Chua
   Thomas Cordonnier
+  Enrique Estévez Fernández
   Martin Fleurke  
   Wildrich Fourie
   Phillip Hall
@@ -198,10 +199,12 @@ Contributi al codice:
   Thomas Huriaux
   Hans-Peter Jacobs
   Kyle Katarn
+  Piotr Kulik
   Ibai Lakunza Velasco
   Guido Leenders
   Aaron Madlon-Kay
   Fabián Mandelbaum
+  Manfred Martin
   John Moran
   Maxym Mykhalchuk 
   Arno Peters
@@ -222,18 +225,17 @@ Altri contributi:
   Jean-Christophe Helary (gestore della localizzazione)
   Vito Smolej (gestore della documentazione)
   Samuel Murray
-  Marc Prior  
-  e molte, molte altre persone che hanno contribuito
+  Marc Prior (webmaster)
+  e tantissime altre persone che hanno contribuito
 
 (se ritenete di aver contribuito in modo significativo al Progetto OmegaT ma il vostro nome non è presente nell'elenco, contattateci senza problemi).
 
 OmegaT usa le seguenti librerie:
   HTMLParser 1.6 di Somik Raha, Derrick Oswald et al (licenza LGPL)
-  MRJ Adapter 1.0.8 di Steve Roy (licenza LGPL)
   VLDocking Framework 2.1.4 di VLSolutions (licenza CeCILL)
   Hunspell di László Németh et al (licenza LGPL)
   JNA di Todd Fast, Timothy Wall et al (licenza LGPL)
-  Swing-Layout 1.0.2 (licenza LGPL)
+  Swing-Layout 1.0.4 (licenza LGPL)
   Jmyspell 2.1.4 (licenza LGPL)
   SVNKit 1.7.5 (licenza TMate)
   Sequence Library (licenza Sequence Library)
@@ -243,8 +245,21 @@ OmegaT usa le seguenti librerie:
   JSch (licenza JSch)
   Base64 (dominio pubblico)
   Diff (GPL)
-  JSAP (LGPL)
   orion-ssh2-214 (licenza Orion SSH per Java)
+  lucene-*.jar (licenza Apache 2.0)
+  I tokenizer inglesi (org.omegat.tokenizer.SnowballEnglishTokenizer e
+  org.omegat.tokenizer.LuceneEnglishTokenizer) mutua le stop words da Okapi
+(http://okapi.sourceforge.net) (licenza LGPL)
+  tinysegmenter.jar (licenza BSD modificata)
+  commons-*.jar (licenza Apache 2.0)
+  jWordSplitter (licenza Apache 2.0)
+  LanguageTool.jar (licenza LGPL)
+  morfologik-*.jar (licenza Morfologik)
+  segment-1.4.1.jar (licenza Segment)
+  pdfbox-app-1.8.1.jar (licenza Apache 2.0)
+  KoreanAnalyzer-3x-120223.jar (licenza Apache 2.0)
+  SuperTMXMerge-for_OmegaT.jar (licenza LGPL)
+  groovy-all-2.2.2.jar (licenza Apache 2.0)
 
 ==============================================================================
  5.  OmegaT genera problemi? Si ha bisogno di assistenza?
@@ -261,11 +276,11 @@ Una qualsiasi segnalazione di errore dovrebbe prevedere tre elementi:
 Si possono allegare copie di file, parti del file di registro, schermate e tutto ciò che si ritiene possa essere d'aiuto agli sviluppatori per il reperimento e la correzione dell'errore.
 
 Per accedere agli archivi del gruppo di utenti:
-     http://groups.yahoo.com/group/OmegaT/
+     http://tech.groups.yahoo.com/group/OmegaT/
 
 Per accedere alla pagina delle segnalazioni degli errori e registrare
 una nuova segnalazione di errore:
-     http://sourceforge.net/tracker/?group_id=68187&atid=520347
+     https://sourceforge.net/p/omegat/bugs/
 
 Per seguire il corso degli eventi relativi a una segnalazione di errore ci si dovrebbe iscrivere come utente Source Forge.
 

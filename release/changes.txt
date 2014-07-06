@@ -3,7 +3,7 @@
 ----------------------------------------------------------------------
    8 Enhancements
    3 Bug fixes
-   0 Localisation update
+   1 Localisation update
 ----------------------------------------------------------------------
 3.1.2 update 1 vs. 3.1.2
 
@@ -45,6 +45,10 @@ compilation time, by putting an uiLayout.xml file in /release/WebStart-specific
 
   - No more warning about mixed content in the Java Web Start package. Requires
 ant-contrib. See details in /release/WebStart-specific/build.xml
+
+  Localisation updates:
+
+  - Italian localisation updated to 3.1.2 (UI, scripts, readme
 
 ----------------------------------------------------------------------
  OmegaT 3.1.2 (2014-06-26)

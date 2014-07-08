@@ -255,6 +255,7 @@ public class LineLengthLimitWriter extends Writer {
 
     boolean isPossibleBreakBefore(int pos) {
         try {
+            // check previous char. Can't split after specified chars.
             char c = str.charAt(pos - 1);
             if ("([{<«„".indexOf(c) >= 0) {
                 return false;
@@ -262,17 +263,14 @@ public class LineLengthLimitWriter extends Writer {
         } catch (StringIndexOutOfBoundsException ex) {
         }
         try {
+            // check next char. Can't split before specified chars.
             char c = str.charAt(pos);
-            if (")]}>»“".indexOf(c) >= 0) {
+            if (")]}>»“,.".indexOf(c) >= 0) {
                 return false;
             }
         } catch (StringIndexOutOfBoundsException ex) {
         }
         return true;
-    }
-
-    boolean isCloseBracket(char c) {
-        return ")]}>»“".indexOf(c) >= 0;
     }
 
     @Override

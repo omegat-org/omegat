@@ -1160,7 +1160,7 @@ OmegaT failed to load the valid ones
  OmegaT 2.6.3 update 11
 ----------------------------------------------------------------------
    2 Enhancements
-   1 Bug fix
+   2 Bug fixes
    1 Localisation update
 ----------------------------------------------------------------------
 2.6.3 update 11 vs. 2.6.3 update 10
@@ -1181,6 +1181,9 @@ compilation time, by putting an uiLayout.xml file in /release/WebStart-specific
   - No more warning about mixed content in the Java Web Start package. Requires
 ant-contrib. See details in /release/WebStart-specific/build.xml
 (backported from 3.1)
+
+  - Excel files: when using the option to translate sheet names, some not-
+translatable text could appear (the content of <definedNames> tags)
 
   Localisation updates:
 

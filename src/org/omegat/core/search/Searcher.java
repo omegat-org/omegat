@@ -8,7 +8,7 @@
                2009 Didier Briel
                2010 Martin Fleurke, Antonio Vilei, Alex Buloichik, Didier Briel
                2013 Aaron Madlon-Kay, Alex Buloichik
-               2014 Alex Buloichik, Piotr Kulik
+               2014 Alex Buloichik, Piotr Kulik, Aaron Madlon-Kay
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -41,6 +41,7 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
+
 import org.omegat.core.Core;
 import org.omegat.core.data.EntryKey;
 import org.omegat.core.data.ExternalTMX;
@@ -62,6 +63,7 @@ import org.omegat.gui.glossary.GlossaryEntry;
 import org.omegat.util.Language;
 import org.omegat.util.OStrings;
 import org.omegat.util.StaticUtils;
+import org.omegat.util.StringUtil;
 
 /**
  * This class implements search functionality. It is non-reentrant: each searcher instance must be used by a
@@ -121,8 +123,9 @@ public class Searcher {
                     } else if (entry.getEntryNum() > ENTRY_ORIGIN_PROJECT_MEMORY) {
                         // at this stage each PM entry num is increased by 1
                         if (m_entryMap.containsKey(key) && (m_entryMap.get(key) > 0)) {
-                            entry.setPreamble(StaticUtils.format(OStrings.getString("SW_NR_OF_MORE"),
-                                    new Object[]{m_entryMap.get(key)}));
+                            entry.setPreamble((StringUtil.isEmpty(entry.getPreamble()) ? "" : entry.getPreamble() + " ")
+                                    + StaticUtils.format(OStrings.getString("SW_NR_OF_MORE"),
+                                            new Object[]{m_entryMap.get(key)}));
                         }
                     }
                 }
@@ -261,7 +264,8 @@ public class Searcher {
             if (!m_entryMap.containsKey(key) || expression.allResults) {
                 // HP, duplicate entry prevention
                 // entries are referenced at offset 1 but stored at offset 0
-                addEntry(entryNum + 1, null, (entryNum + 1) + "> ", src, target,
+                String file = expression.fileNames ? getFileForEntry(entryNum + 1) : null;
+                addEntry(entryNum + 1, file, (entryNum + 1) + "> ", src, target,
                         note, srcMatches, targetMatches, noteMatches);
                 if (!expression.allResults) // If we filter results
                     m_entryMap.put(key, 0); // HP
@@ -373,6 +377,18 @@ public class Searcher {
                 checkStop.checkInterrupted();
             }
         }
+    }
+
+    private String getFileForEntry(int i) {
+        List<FileInfo> fileList = Core.getProject().getProjectFiles();
+        for (FileInfo fi : fileList) {
+            int first = fi.entries.get(0).entryNum();
+            int last = fi.entries.get(fi.entries.size() - 1).entryNum();
+            if (i >= first && i <= last) {
+                return fi.filePath;
+            }
+        }
+        return null;
     }
 
     /**

@@ -154,6 +154,7 @@ public class SearchWindowController {
             form.setTitle(OStrings.getString("SW_TITLE_REPLACE"));
             form.m_SearchInPane.setVisible(false);
             form.m_allResultsCB.setVisible(false);
+            form.m_fileNamesCB.setVisible(false);
             form.m_filterButton.setVisible(false);
             form.m_numberLabel.setVisible(false);;
             form.m_numberOfResults.setVisible(false);
@@ -299,6 +300,7 @@ public class SearchWindowController {
         form.m_cbSearchInTMs.addActionListener(searchFieldRequestFocus);
 
         form.m_allResultsCB.addActionListener(searchFieldRequestFocus);
+        form.m_fileNamesCB.addActionListener(searchFieldRequestFocus);
 
         form.m_rbDir.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -461,6 +463,7 @@ public class SearchWindowController {
 
         // all results
         form.m_allResultsCB.setSelected(Preferences.isPreferenceDefault(Preferences.SEARCHWINDOW_ALL_RESULTS, false));
+        form.m_fileNamesCB.setSelected(Preferences.isPreferenceDefault(Preferences.SEARCHWINDOW_FILE_NAMES, false));
 
         // update the enabled/selected status of normal options
         updateOptionStatus();
@@ -535,6 +538,7 @@ public class SearchWindowController {
         Preferences.setPreference(Preferences.SEARCHWINDOW_TM_SEARCH, form.m_cbSearchInTMs.isSelected());
 
         Preferences.setPreference(Preferences.SEARCHWINDOW_ALL_RESULTS, form.m_allResultsCB.isSelected());
+        Preferences.setPreference(Preferences.SEARCHWINDOW_FILE_NAMES, form.m_fileNamesCB.isSelected());
         // advanced search options
         Preferences.setPreference(Preferences.SEARCHWINDOW_ADVANCED_VISIBLE, form.m_advancedVisiblePane.isVisible());
         Preferences.setPreference(Preferences.SEARCHWINDOW_SEARCH_AUTHOR, form.m_authorCB.isSelected());
@@ -710,6 +714,7 @@ public class SearchWindowController {
             s.memory = mode == SearchMode.SEARCH ? form.m_cbSearchInMemory.isSelected() : true;
             s.tm = mode == SearchMode.SEARCH ? form.m_cbSearchInTMs.isSelected() : false;
             s.allResults = mode == SearchMode.SEARCH ? form.m_allResultsCB.isSelected() : true;
+            s.fileNames = mode == SearchMode.SEARCH ? form.m_fileNamesCB.isSelected() : true;
             s.searchSource = form.m_searchSource.isSelected();
             s.searchTarget = form.m_searchTranslation.isSelected();
             if (form.m_searchTranslatedUntranslated.isSelected()) {
@@ -735,6 +740,7 @@ public class SearchWindowController {
             s.memory = true;
             s.tm = false;
             s.allResults = true;
+            s.fileNames = Core.getProject().getProjectFiles().size() > 1;
             s.searchSource = false;
             s.searchTarget = false;
             s.searchTranslated = false;

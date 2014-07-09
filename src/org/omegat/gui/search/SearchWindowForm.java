@@ -97,7 +97,9 @@ public class SearchWindowForm extends javax.swing.JFrame {
         filler28 = new javax.swing.Box.Filler(new java.awt.Dimension(5, 0), new java.awt.Dimension(5, 0), new java.awt.Dimension(5, 32767));
         m_searchUntranslated = new javax.swing.JRadioButton();
         filler8 = new javax.swing.Box.Filler(new java.awt.Dimension(5, 0), new java.awt.Dimension(5, 0), new java.awt.Dimension(5, 32767));
+        m_displayLabel = new javax.swing.JLabel();
         m_allResultsCB = new javax.swing.JCheckBox();
+        m_fileNamesCB = new javax.swing.JCheckBox();
         filler26 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
         m_panelReplace = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
@@ -284,9 +286,16 @@ public class SearchWindowForm extends javax.swing.JFrame {
         jPanel12.add(m_searchUntranslated);
         jPanel12.add(filler8);
 
+        m_displayLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        org.openide.awt.Mnemonics.setLocalizedText(m_displayLabel, OStrings.getString("SW_DISPLAY_LABEL")); // NOI18N
+        jPanel12.add(m_displayLabel);
+
         m_allResultsCB.setSelected(true);
         org.openide.awt.Mnemonics.setLocalizedText(m_allResultsCB, OStrings.getString("SW_ALL_RESULTS")); // NOI18N
         jPanel12.add(m_allResultsCB);
+
+        org.openide.awt.Mnemonics.setLocalizedText(m_fileNamesCB, OStrings.getString("SW_FILE_NAMES")); // NOI18N
+        jPanel12.add(m_fileNamesCB);
         jPanel12.add(filler26);
 
         m_panelSearch.add(jPanel12);
@@ -704,6 +713,8 @@ public class SearchWindowForm extends javax.swing.JFrame {
     javax.swing.JTextField m_dirField;
     javax.swing.JLabel m_dirLabel;
     javax.swing.JButton m_dismissButton;
+    javax.swing.JLabel m_displayLabel;
+    javax.swing.JCheckBox m_fileNamesCB;
     javax.swing.JButton m_filterButton;
     javax.swing.JLabel m_numberLabel;
     javax.swing.JSpinner m_numberOfResults;

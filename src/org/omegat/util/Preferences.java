@@ -11,7 +11,7 @@
                2012 Martin Fleurke, Wildrich Fourie, Didier Briel, Thomas Cordonnier,
                     Aaron Madlon-Kay
                2013 Aaron Madlon-Kay, Zoltan Bartko
-               2014 Piotr Kulik
+               2014 Piotr Kulik, Aaron Madlon-Kay
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -43,7 +43,6 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.UnsupportedEncodingException;
-import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -120,6 +119,7 @@ public class Preferences {
     public static final String SEARCHWINDOW_MEMORY_SEARCH = "search_window_memory_search";
     public static final String SEARCHWINDOW_TM_SEARCH = "search_window_tm_search";
     public static final String SEARCHWINDOW_ALL_RESULTS = "search_window_all_results";
+    public static final String SEARCHWINDOW_FILE_NAMES = "search_window_file_names";
     public static final String SEARCHWINDOW_ADVANCED_VISIBLE = "search_window_advanced_visible";
     public static final String SEARCHWINDOW_SEARCH_AUTHOR = "search_window_search_author";
     public static final String SEARCHWINDOW_AUTHOR_NAME = "search_window_author_name";

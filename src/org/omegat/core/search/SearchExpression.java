@@ -8,6 +8,7 @@
                2009 Didier Briel
                2010 Martin Fleurke, Antonio Vilei, Didier Briel
                2013 Alex Buloichik
+               2014 Aaron Madlon-Kay
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -41,6 +42,7 @@ import org.omegat.util.OConsts;
  * @author Martin Fleurke
  * @author Antonio Vilei
  * @author Alex Buloichik (alex73mail@gmail.com)
+ * @author Aaron Madlon-Kay
  */
 public class SearchExpression {
     public enum SearchExpressionType {
@@ -66,6 +68,7 @@ public class SearchExpression {
     public boolean memory = true;
     public boolean tm = true;
     public boolean allResults = false;
+    public boolean fileNames = false;
     public boolean searchSource = true;
     public boolean searchTarget = true;
     public boolean searchTranslated;

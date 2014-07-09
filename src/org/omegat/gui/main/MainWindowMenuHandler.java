@@ -568,7 +568,7 @@ public class MainWindowMenuHandler {
         Core.getEditor().gotoHistoryForward();
     }
     
-    public void gotoSourceSegmentActionPerformed() {
+    public void gotoMatchSourceSegmentActionPerformed() {
         NearString ns = Core.getMatcher().getActiveMatch();
         if (ns != null && ns.comesFrom == MATCH_SOURCE.MEMORY) {
             Core.getEditor().gotoEntry(ns.source, ns.key);

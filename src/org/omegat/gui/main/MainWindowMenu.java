@@ -12,6 +12,7 @@
                2011 Didier Briel
                2012 Wildrich Fourie, Guido Leenders, Martin Fleurke, Didier Briel
                2013 Zoltan Bartko, Didier Briel, Yu Tang
+               2014 Aaron Madlon-Kay
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -81,6 +82,7 @@ import org.openide.awt.Mnemonics;
  * @author Wildrich Fourie
  * @author Martin Fleurke
  * @author Yu Tang
+ * @author Aaron Madlon-Kay
  */
 public class MainWindowMenu implements ActionListener, MenuListener, IMainMenu {
     private static final Logger LOGGER = Logger.getLogger(MainWindowMenu.class.getName());
@@ -314,6 +316,7 @@ public class MainWindowMenu implements ActionListener, MenuListener, IMainMenu {
         gotoMenu.add(gotoSegmentMenuItem = createMenuItem("TF_MENU_EDIT_GOTO"));
         gotoMenu.add(gotoNextNoteMenuItem = createMenuItem("TF_MENU_EDIT_NEXT_NOTE"));
         gotoMenu.add(gotoPreviousNoteMenuItem = createMenuItem("TF_MENU_EDIT_PREV_NOTE"));
+        gotoMenu.add(gotoMatchSourceSegment = createMenuItem("TF_MENU_GOTO_SELECTED_MATCH_SOURCE"));
         gotoMenu.add(new JSeparator());
         gotoMenu.add(gotoHistoryForwardMenuItem = createMenuItem("TF_MENU_GOTO_FORWARD_IN_HISTORY"));
         gotoMenu.add(gotoHistoryBackMenuItem = createMenuItem("TF_MENU_GOTO_BACK_IN_HISTORY"));
@@ -593,7 +596,7 @@ public class MainWindowMenu implements ActionListener, MenuListener, IMainMenu {
                 editRegisterUntranslatedMenuItem, editRegisterEmptyMenuItem, editRegisterIdenticalMenuItem,
 
                 gotoMenu, gotoNextSegmentMenuItem, gotoNextUntranslatedMenuItem, gotoPreviousSegmentMenuItem,
-                gotoSegmentMenuItem, gotoNextNoteMenuItem, gotoPreviousNoteMenuItem,
+                gotoSegmentMenuItem, gotoNextNoteMenuItem, gotoPreviousNoteMenuItem, gotoMatchSourceSegment,
 
                 viewFileListMenuItem, toolsValidateTagsMenuItem, toolsSingleValidateTagsMenuItem,
                 toolsShowStatisticsStandardMenuItem, toolsShowStatisticsMatchesMenuItem,
@@ -668,6 +671,7 @@ public class MainWindowMenu implements ActionListener, MenuListener, IMainMenu {
     JMenuItem gotoSegmentMenuItem;
     JMenuItem gotoNextNoteMenuItem;
     JMenuItem gotoPreviousNoteMenuItem;
+    JMenuItem gotoMatchSourceSegment;
     JMenuItem helpAboutMenuItem;
     JMenuItem helpContentsMenuItem;
     JMenuItem helpLastChangesMenuItem;

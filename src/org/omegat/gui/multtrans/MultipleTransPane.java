@@ -5,6 +5,7 @@
 
  Copyright (C) 2011 Alex Buloichik
                2012 Jean-Christophe Helary
+               2014 Aaron Madlon-Kay
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -40,9 +41,7 @@ import javax.swing.JPopupMenu;
 import javax.swing.text.JTextComponent;
 
 import org.omegat.core.Core;
-import org.omegat.core.data.IProject;
 import org.omegat.core.data.SourceTextEntry;
-import org.omegat.core.data.TMXEntry;
 import org.omegat.gui.common.EntryInfoThreadPane;
 import org.omegat.gui.editor.IPopupMenuConstructor;
 import org.omegat.gui.editor.SegmentBuilder;
@@ -57,6 +56,7 @@ import org.omegat.util.gui.UIThreadsUtil;
  * 
  * @author Alex Buloichik <alex73mail@gmail.com>
  * @author Jean-Christophe Helary
+ * @author Aaron Madlon-Kay
  */
 @SuppressWarnings("serial")
 public class MultipleTransPane extends EntryInfoThreadPane<List<MultipleTransFoundEntry>> {
@@ -214,33 +214,7 @@ public class MultipleTransPane extends EntryInfoThreadPane<List<MultipleTransFou
         item = popup.add(OStrings.getString("MULT_POPUP_GOTO"));
         item.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                /*
-                 * Goto segment with contains matched source. Since it enough rarely executed code, it
-                 * possible to find this segment each time.
-                 */
-                IProject project = Core.getProject();
-                List<SourceTextEntry> entries = Core.getProject().getAllEntries();
-                for (int i = 0; i < entries.size(); i++) {
-                    SourceTextEntry ste = entries.get(i);
-                    if (de.entry.sourceText != null) {
-                        if (!ste.getSrcText().equals(de.entry.sourceText)) {
-                            // source text not equals
-                            continue;
-                        }
-                        // default translation - multiple shouldn't exist for this entry
-                        TMXEntry trans = project.getTranslationInfo(ste);
-                        if (!trans.isTranslated() || trans.defaultTranslation) {
-                            // we need exist alternative translation
-                            continue;
-                        }
-                    } else {
-                        if (!de.entry.key.equals(ste.getKey())) {
-                            continue;
-                        }
-                    }
-                    Core.getEditor().gotoEntry(i + 1);
-                    break;
-                }
+                Core.getEditor().gotoEntry(de.entry.sourceText, de.entry.key);
             }
         });
 

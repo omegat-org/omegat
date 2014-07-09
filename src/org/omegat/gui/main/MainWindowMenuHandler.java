@@ -11,6 +11,7 @@
                2010 Wildrich Fourie, Didier Briel
                2012 Wildrich Fourie, Guido Leenders, Didier Briel
                2013 Zoltan Bartko, Didier Briel, Yu Tang
+               2014 Aaron Madlon-Kay
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -46,6 +47,8 @@ import org.omegat.core.data.ProtectedPart;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.data.TMXEntry;
 import org.omegat.core.search.SearchMode;
+import org.omegat.core.matching.NearString;
+import org.omegat.core.matching.NearString.MATCH_SOURCE;
 import org.omegat.core.segmentation.SRX;
 import org.omegat.core.spellchecker.ISpellChecker;
 import org.omegat.core.tagvalidation.ErrorReport;
@@ -96,6 +99,7 @@ import org.omegat.util.StringUtil;
  * @author Didier Briel
  * @author Wildrich Fourie
  * @author Yu Tang
+ * @author Aaron Madlon-Kay
  */
 public class MainWindowMenuHandler {
     private final MainWindow mainWindow;
@@ -563,6 +567,14 @@ public class MainWindowMenuHandler {
     public void gotoHistoryForwardMenuItemActionPerformed() {
         Core.getEditor().gotoHistoryForward();
     }
+    
+    public void gotoSourceSegmentActionPerformed() {
+        NearString ns = Core.getMatcher().getActiveMatch();
+        if (ns != null && ns.comesFrom == MATCH_SOURCE.MEMORY) {
+            Core.getEditor().gotoEntry(ns.source, ns.key);
+        }
+    }
+
 
     public void viewMarkTranslatedSegmentsCheckBoxMenuItemActionPerformed() {
         Core.getEditor().getSettings()

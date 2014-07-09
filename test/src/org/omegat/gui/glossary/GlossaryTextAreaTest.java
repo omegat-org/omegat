@@ -32,6 +32,7 @@ import javax.swing.SwingUtilities;
 
 import org.omegat.core.TestCore;
 import org.omegat.core.TestCoreInitializer;
+import org.omegat.core.data.EntryKey;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.gui.editor.EditorSettings;
 import org.omegat.gui.editor.IEditor;
@@ -122,6 +123,9 @@ public class GlossaryTextAreaTest extends TestCore {
             }
 
             public void gotoEntry(int entryNum) {
+            }
+
+            public void gotoEntry(String srcString, EntryKey key) {
             }
 
             public void gotoFile(int fileIndex) {

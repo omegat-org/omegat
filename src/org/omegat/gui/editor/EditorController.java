@@ -1346,6 +1346,38 @@ public class EditorController implements IEditor {
         this.editor.setCursor(oldCursor);
     }
 
+    public void gotoEntry(String srcString, EntryKey key) {
+        UIThreadsUtil.mustBeSwingThread();
+        
+        /*
+         * Goto segment with contains matched source. Since it enough rarely executed code, it
+         * will be better to find this segment each time, instead use additional memory storage.
+         */
+        List<SourceTextEntry> entries = Core.getProject().getAllEntries();
+        for (int i = 0; i < entries.size(); i++) {
+            SourceTextEntry ste = entries.get(i);
+            if (srcString != null && !ste.getSrcText().equals(srcString)) {
+                // source text not equals - there is no sense to checking this entry
+                continue;
+            }
+            if (key != null) {
+                // multiple translation
+                if (!ste.getKey().equals(key)) {
+                    continue;
+                }
+            } else {
+                // default translation - multiple shouldn't exist for this entry
+                TMXEntry trans = Core.getProject().getTranslationInfo(entries.get(i));
+                if (!trans.isTranslated() || !trans.defaultTranslation) {
+                    // we need exist alternative translation
+                    continue;
+                }
+            }
+            gotoEntry(i + 1);
+            break;
+        }
+    }
+
     public void gotoEntryAfterFix(final int entryNum, final String fixedSource) {
         UIThreadsUtil.mustBeSwingThread();
 

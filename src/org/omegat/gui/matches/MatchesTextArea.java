@@ -8,6 +8,7 @@
                2011 John Moran
                2012 Alex Buloichik, Jean-Christophe Helary, Didier Briel, Thomas Cordonnier, Aaron Madlon-Kay
                2013 Zoltan Bartko, Aaron Madlon-Kay
+               2014 Aaron Madlon-Kay
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -526,37 +527,10 @@ public class MatchesTextArea extends EntryInfoThreadPane<List<NearString>> imple
         item = popup.add(OStrings.getString("MATCHES_GO_TO_SEGMENT_SOURCE"));
 
         if (StringUtil.isEmpty(proj)) {
-            final IProject project = Core.getProject();
             item.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    /*
-                     * Goto segment with contains matched source. Since it enough rarely executed code, it
-                     * will be better to find this segment each time, instead use additional memory storage.
-                     */
-                    List<SourceTextEntry> entries = Core.getProject().getAllEntries();
-                    for (int i = 0; i < entries.size(); i++) {
-                        SourceTextEntry ste = entries.get(i);
-                        if (!ste.getSrcText().equals(ns.source)) {
-                            // source text not equals - there is no sense to checking this entry
-                            continue;
-                        }
-                        if (ns.key != null) {
-                            // multiple translation
-                            if (!ste.getKey().equals(ns.key)) {
-                                continue;
-                            }
-                        } else {
-                            // default translation - multiple shouldn't exist for this entry
-                            TMXEntry trans = project.getTranslationInfo(entries.get(i));
-                            if (!trans.isTranslated() || !trans.defaultTranslation) {
-                                // we need exist alternative translation
-                                continue;
-                            }
-                        }
-                        Core.getEditor().gotoEntry(i + 1);
-                        break;
-                    }
+                    Core.getEditor().gotoEntry(ns.source, ns.key);
                 }
             });
         } else {

@@ -7,6 +7,7 @@
                2011 Alex Buloichik, Didier Briel
                2012 Guido Leenders, Didier Briel
                2013 Zoltan Bartko, Aaron Madlon-Kay
+               2014 Aaron Madlon-Kay
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -30,6 +31,7 @@ package org.omegat.gui.editor;
 
 import java.util.List;
 
+import org.omegat.core.data.EntryKey;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.gui.editor.mark.Mark;
 
@@ -159,6 +161,18 @@ public interface IEditor {
      *            Must be called only from UI thread.
      */
     void gotoEntry(int entryNum);
+
+    /**
+     * Goto entry based on a string and entry key.
+     * 
+     * @param srcString
+     *            entry source string
+     * @param key
+     *            entry key (can be null)           
+     * 
+     *            Must be called only from UI thread.
+     */
+    void gotoEntry(String srcString, EntryKey key);
 
     /**
      * Goto entry with specified number while avoiding clobbering the tag fixes.

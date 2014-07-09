@@ -255,6 +255,8 @@ public class RealProject implements IProject {
             }
 
             loadTranslations();
+            m_modifiedFlag = true;
+            saveProject(false);
 
             allProjectEntries = Collections.unmodifiableList(allProjectEntries);
             importHandler = new ImportFromAutoTMX(this, allProjectEntries);

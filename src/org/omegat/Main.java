@@ -213,8 +213,6 @@ public class Main {
      */
     protected static int runGUI() {
         // MacOSX-specific - they must be setted BEFORE any GUI calls
-        System.setProperty("apple.laf.useScreenMenuBar", "true");
-        System.setProperty("com.apple.mrj.application.apple.menu.about.name", "OmegaT");
         if (StaticUtils.onMacOSX()) {
             OSXIntegration.init();
         }

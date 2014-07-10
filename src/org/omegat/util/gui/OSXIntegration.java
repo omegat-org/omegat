@@ -45,6 +45,9 @@ public class OSXIntegration {
 
     public static void init() {
         try {
+            System.setProperty("apple.laf.useScreenMenuBar", "true");
+            System.setProperty("com.apple.mrj.application.apple.menu.about.name", "OmegaT");
+            
             // Set quit strategy:
             //   app.setQuitStrategy(com.apple.eawt.QuitStrategy.CLOSE_ALL_WINDOWS);
             Class<?> strategyClass = Class.forName("com.apple.eawt.QuitStrategy");

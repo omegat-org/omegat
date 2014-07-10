@@ -42,6 +42,8 @@ import javax.swing.UIManager;
 import org.omegat.core.Core;
 import org.omegat.util.OStrings;
 
+import com.vlsolutions.swing.docking.AutoHidePolicy;
+import com.vlsolutions.swing.docking.AutoHidePolicy.ExpandMode;
 import com.vlsolutions.swing.docking.ui.DockingUISettings;
 
 /**
@@ -54,6 +56,7 @@ public class DockingUI {
      */
     public static void initialize() {
         DockingUISettings.getInstance().installUI();
+        AutoHidePolicy.getPolicy().setExpandMode(ExpandMode.EXPAND_ON_ROLLOVER);
         UIManager.put("DockViewTitleBar.minimizeButtonText", OStrings.getString("DOCKING_HINT_MINIMIZE"));
         UIManager.put("DockViewTitleBar.maximizeButtonText", OStrings.getString("DOCKING_HINT_MAXIMIZE"));
         UIManager.put("DockViewTitleBar.restoreButtonText", OStrings.getString("DOCKING_HINT_RESTORE"));

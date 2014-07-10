@@ -175,7 +175,7 @@
 
   <section id="OmegaT.main.window">
     <title><application>OmegaT</application> fenestra principal<indexterm class="singular">
-        <primary>Windows e quadros in OmegaT</primary> <secondary>Fenestra Principal</secondary>
+        <primary>Fenestras e quadros in OmegaT</primary> <secondary>Fenestra Principal</secondary>
       </indexterm></title>
 
     <figure id="OmegaT.main.window.figure">
@@ -200,7 +200,7 @@
 
     <table>
       <title>Etiquettas del Quadro<indexterm class="singular">
-          <primary>Windows e quadros in OmegaT</primary> <secondary>Etiquettas del Quadro</secondary>
+          <primary>Fenestras e quadros in OmegaT</primary> <secondary>Etiquettas del Quadro</secondary>
         </indexterm></title>
 
       <tgroup cols="2">
@@ -281,7 +281,7 @@
     </table>
 
     <para>Tu, si lo vole, pote superponer le quadros. Quando isto is facite le quadros monstra un linguetta al summitate. Quando isto is facite le quadros monstra un linguetta al summitate. Si tu deberea perder tracia de tu cambios al interfacie del usator, tu pote usar <guimenuitem><indexterm class="singular">
-        <primary>Fenestras de OmegaT</primary> <seealso>Windows e quadros in OmegaT</seealso>
+        <primary>Fenestras de OmegaT</primary> <seealso>Fenestras e quadros in OmegaT</seealso>
       </indexterm> <indexterm class="singular">
         <primary>Fenestras de OmegaT</primary> <secondary>Restauration al preparation de fabrica</secondary>
       </indexterm>Optiones → Restaura le Fenestra Principal</guimenuitem> in omne tempore pro retornar al arrangiamento original.</para>
@@ -290,7 +290,7 @@
 
     <table>
       <title>Fenestra principal - contatores<indexterm class="singular">
-          <primary>Windows e quadros in OmegaT</primary> <secondary>Contatores</secondary>
+          <primary>Fenestras e quadros in OmegaT</primary> <secondary>Contatores</secondary>
         </indexterm></title>
 
       <tgroup cols="2">
@@ -328,7 +328,7 @@
 
     <section id="editor.pane">
       <title>Quadro Modifica (Editor)<indexterm class="singular">
-          <primary>Windows e quadros in OmegaT</primary> <secondary>Quadro del Modifica (Editor)</secondary>
+          <primary>Fenestras e quadros in OmegaT</primary> <secondary>Quadro del Modifica (Editor)</secondary>
         </indexterm></title>
 
       <para>Isto es ubi tu scribe e modifica (edita) tu traduction. Le quadro Modifica monstra le texto del documento partialmente rendite: le texto ja rendite es displicate in traduction e le texto non rendite es monstrate in le lingua original. Le texto monstrate es fisse in segmentos e tu pote rolar a a transverso del documento e  cliccar duo vices sur cata segmento pro aperir e modificar lo. In le caso precedente, le segmentos jam rendite es monstrate in jalne.</para>
@@ -344,14 +344,14 @@
 
     <section id="match.viewer">
       <title>Quadro del Concordantias Partial<indexterm class="singular">
-          <primary>Windows e quadros in OmegaT</primary> <secondary>Quadro del Concordantias Partial</secondary>
+          <primary>Fenestras e quadros in OmegaT</primary> <secondary>Quadro del Concordantias Partial</secondary>
         </indexterm></title>
 
       <para><figure id="matches.pane">
           <title><indexterm class="singular">
               <primary>Concordantias</primary> <secondary>Quadro del concordantias - figura</secondary>
             </indexterm><indexterm class="singular">
-              <primary>Windows e quadros in OmegaT</primary> <secondary>Quadro del concordantias - figura</secondary>
+              <primary>Fenestras e quadros in OmegaT</primary> <secondary>Quadro del concordantias - figura</secondary>
             </indexterm>Quadro del concordantias</title>
 
           <mediaobject>
@@ -403,7 +403,7 @@
 
       <section>
         <title>Personalisar le quadro pro le Concordantias Partial<indexterm class="singular">
-            <primary>Windows e quadros in OmegaT</primary> <secondary>Quadro del concordantias partial (fuzzy)</secondary> <tertiary>Personalisation</tertiary>
+            <primary>Fenestras e quadros in OmegaT</primary> <secondary>Quadro del concordantias partial (fuzzy)</secondary> <tertiary>Personalisation</tertiary>
           </indexterm><indexterm class="singular">
             <primary>Files fonte</primary> <secondary>Render fonte renovate</secondary>
           </indexterm></title>
@@ -526,7 +526,7 @@
 
     <section>
       <title>Quadro Glossario<indexterm class="singular">
-          <primary>Windows e quadros in OmegaT</primary> <secondary>Quadro del Glossario</secondary>
+          <primary>Fenestras e quadros in OmegaT</primary> <secondary>Quadro del Glossario</secondary>
         </indexterm></title>
 
       <para>Le quadro del Glossario permitte te de acceder tu proprie collection de expressiones e terminologia specialistic le qual tu ha create in tu files glossario. Illo monstra le traduction del terminos trovate in le segmento currente. Le segmento original in le exemplo sequente era “<emphasis>Commando del menu contexto</emphasis>”, como in le exemplo de concordantias partial precedente, e le terminos monstrate esseva trovate in le glossarios, disponibile (Microsoft's Term collection e Slovenian Linux User group Glossary).</para>
@@ -552,7 +552,7 @@
 
     <section id="dictionaries">
       <title>Quadro del Dictionario<indexterm class="singular">
-          <primary>Windows e quadros in OmegaT</primary> <secondary>Quadro del Dictionario</secondary>
+          <primary>Fenestras e quadros in OmegaT</primary> <secondary>Quadro del Dictionario</secondary>
         </indexterm></title>
 
       <para>Le Dictionarios es le equivalentes electronic de dictionarios imprimite como Merriam Webster, Duden, Larousse et cetera, que on pote haber sur su scriptorio. Vide plus re illos in le capitulo re <link linkend="chapter.dictionaries">Dictionarios</link></para>
@@ -560,7 +560,7 @@
 
     <section id="Multiple.Translations">
       <title>Quadro del Traductiones multiple<indexterm class="singular">
-          <primary>Windows e quadros in OmegaT</primary> <secondary>Quadro del Traductiones multiple</secondary>
+          <primary>Fenestras e quadros in OmegaT</primary> <secondary>Quadro del Traductiones multiple</secondary>
         </indexterm></title>
 
       <para>Un date segmento fonte pote requirer plure traductiones differente, dependente del contexto. Si le traduction currente del segmento non conveni, le usator pote seliger <guisubmenu>Modifica → Crea Traduction Alternative</guisubmenu>. Le texto final inscribite post que essera tractate ut un traduction alternative del segmento original. Tu pote definir uno del alternativas - per exemplo le plus probabile inter illos - como traduction base seligente <guisubmenu>Modifica → Usa como traduction base</guisubmenu></para>
@@ -596,7 +596,7 @@
 
     <section id="Google.Translate">
       <title>Quadro del Traduction automatic (MT)<indexterm class="singular">
-          <primary>Windows e quadros in OmegaT</primary> <secondary>Quadro del Traduction automatic (MT)</secondary>
+          <primary>Fenestras e quadros in OmegaT</primary> <secondary>Quadro del Traduction automatic (MT)</secondary>
         </indexterm></title>
 
       <para>Le quadro del Traduction Automatic, quando aperte, contine le suggestiones ex instrumentos de traductor automatic pro le segmento currente. Pressa <keysym>Ctrl+M </keysym>pro reimplaciar le traduction del segmento currente con le suggerite translation. Plus in le capitulo <link linkend="chapter.machine.translate">Traductor automatic</link></para>
@@ -620,7 +620,7 @@
 
     <section id="section.project.files">
       <title>Files del projecto<indexterm class="singular">
-          <primary>Windows e quadros in OmegaT</primary> <secondary>Files del Projecto</secondary>
+          <primary>Fenestras e quadros in OmegaT</primary> <secondary>Files del Projecto</secondary>
         </indexterm></title>
 
       <para>Le fenestra Files del Projecto lista le files del projecto e monstra altere information de projecto. Il es monstrate automaticamente quando OmegaT carga un projecto. Usa <guimenuitem>Ctrl+L<indexterm class="singular">
@@ -664,7 +664,7 @@
 
     <section id="section.search.window">
       <title>Fenestra Recerca<indexterm class="singular">
-          <primary>Windows e quadros in OmegaT</primary> <secondary>Quadro del Recerca</secondary>
+          <primary>Fenestras e quadros in OmegaT</primary> <secondary>Quadro del Recerca</secondary>
         </indexterm></title>
 
       <para>Tu pote usar le fenestra de recerca pro trovar segmentos specific in un projecto. Tu pote alsi haber plure fenestras de recerca aperte simultaneemente Pro aperir un nove Fenestra de Recerca, usa <keycombo> <keycap>Ctrl</keycap> <keycap>F</keycap> </keycombo> in le fenestra Principal. Le Fenestra de Recerca consiste de un campo de texto pro lineas o parolas clave,  e buttones pro le preparation del recerca e un area de monstra continente le resultatos del recerca. Vide le capitulo<emphasis> <link linkend="chapter.user.interface">Recercas</link> </emphasis>pro plus de information re le Fenestra de Recerca.</para>

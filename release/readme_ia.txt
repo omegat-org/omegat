@@ -141,7 +141,7 @@ haber experientia de defectos, problemas de apparentia o characteristicas perdit
 que tu discarga e installa anque le ambiente Oracle Java Runtime (JRE) 
 o le pacchetto OmegaT impacchettate con le pacco JRE (le .tar.bz2) marcate 
 "Linux"). Si tu  installa un version de Java al nivello de systema, tu debe o 
-te assecurar que illo es in tu percurso de lancha, o lo lancear explicitemente 
+te assecurar que illo es in tu percurso de lanceamento, o lo lancear explicitemente 
 OmegaT.  Si tu non es multo familiar con Linux, eo nos recommenda 
 que tu installa un version de OmegaT includente JRE. Isto es secur, 
 proque iste "local" JRE non interferera con necun altere JRE installate 
@@ -189,8 +189,8 @@ Lancea OmegaT como seque.
 Si, durante le installation, tu creava un via breve sur le scriptorio, 
 clicca duo vices sur iste via breve. Alternativemente, clicca duo vices sur le file 
 OmegaT.exe. Si tu vide la file OmegaT ma non vide OmegaT.exe in tu 
-administrator de files (Windows Explorer), cambia le preparationes a fin que 
-esse exponite le extensiones del files.
+administrator de files (e. g. Windows Explorer), cambia le preparationes al fin que 
+sia exponite le extensiones del files.
 
 * Usatores de Linux:
 Si tu usa le script de installation supplite, tu potera lancear OmegaT con:
@@ -220,13 +220,13 @@ Adapta tu experientia de lancha de OmegaT:
 
 *Usatores de Windows  
 Le programma de installation pote te crear vias breve in le menu de 
- initio, sur le scriptorio e in le area de lancha rapide. Tu pote alsi trainar manualmente 
-le file OmegaT.exe in le menu de initio, le scriptorio o le area de lancha rapide
-pro lo ligar lo ab eo.
+ initio, sur le scriptorio e in le area de lanceamento rapide. Tu pote alsi trainar manualmente 
+le file OmegaT.exe in le menu de initio, le scriptorio o le area de lanceamento rapide
+pro ligar lo ab eo.
 
 * Usatores de Linux:
 Pro un modo plus facile de lancear OmegaT, tu pote usar le 
-scriptura Kaptain fornite (omegat.kaptn). Pro usar iste scriptura tu debe in prime loco installar 
+script Kaptain fornite (omegat.kaptn). Pro usar iste script tu debe in prime loco installar 
 Kaptain. Deinde tu pote lancear le scriptura de lancha de Kaptain con
 Alt+F2
 omegat.kaptn
@@ -253,7 +253,7 @@ lege:
 E abona te al lista del traductores:
       https://lists.sourceforge.net/lists/listinfo/omegat-l10n
 
-Pro contribuer in altere manieras, subscribe primo al gruppo del usuarios  a:
+Pro contribuer in altere manieras, antea subscribe te al Gruppo del usatores a:
       http://tech.groups.yahoo.com/group/omegat/
 
 E senti lo que va in le mundo de OmegaT...

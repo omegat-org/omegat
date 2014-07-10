@@ -59,7 +59,7 @@
 
       <itemizedlist>
         <listitem>
-          <para><emphasis role="bold">Installar super le installation existente. </emphasis>Pro facer isto, selige simplemente le mesme plica del installation existente, quando tu installara le version nove. Le version &quot;vetule&quot; de OmegaT essera superscribite, ma omne le preparationes essera retenite. Isto include preferentias fixate intra OmegaT, qualcunque cambios que tu faceva a tu file <filename>OmegaT.l4J.ini</filename> , e alsi a tu scriptura de lanceamento (file .bat), si tu usa ipso.</para>
+          <para><emphasis role="bold">Installar super le installation existente. </emphasis>Pro facer isto, selige simplemente le mesme plica del installation existente, quando tu installara le version nove. Le version &quot;vetule&quot; de OmegaT essera superscribite, ma omne le preparationes essera retenite. Isto include preferentias fixate intra OmegaT, qualcunque cambios que tu faceva a tu file <filename>OmegaT.l4J.ini</filename> , e alsi a tu script de lanceamento (file .bat), si tu usa ipso.</para>
         </listitem>
       </itemizedlist>
 

@@ -8,7 +8,7 @@
         <primary>Menu</primary>
       </indexterm>Menu principal</title>
 
-    <para>Omne le functiones de OmegaT es disponibile per le barra del menu a le summitate del fenestra del editor. Multe functiones es alsi disponibile per le vias breve del claviero. Le vias breve es activate pressante &lt;s0&gt;&lt;s1&gt;Ctrl&lt;/s1&gt;&lt;/s0&gt; e un littera.<keycap></keycap> Alcun vias breve implica altere claves. Pro le legibilitate, le litteras ci es scribite in capital. <keycap>Ctrl</keycap> es usate sur le systemas operative Windows, UNIX e UNIX-simile, con le clavieros presentante un clave <keycap>Ctrl</keycap> o <keycap>Control</keycap>. Le usatores de Mac usara in vice le &lt;s8&gt;&lt;s9&gt;clave&lt;/s9&gt;&lt;/s8&gt;+&lt;s10&gt;&lt;s11&gt;Cmd&lt;/s11&gt;&lt;/s10&gt;.<keycombo><keycap></keycap><keycap></keycap></keycombo> Sur le clavieros del Apple le clave &quot;Cmd&quot; ha o un etiquetta  &quot;command&quot; o un tag con un symbolo de pomo.</para>
+    <para>Omne le functiones de OmegaT es disponibile per le barra del menu a le summitate del fenestra del editor. Multe functiones es alsi disponibile per le vias breve del claviero. Le vias breve es activate pressante <keycap>Ctrl</keycap> e un littera. Alcun vias breve implica altere claves. Pro le legibilitate, le litteras ci es scribite in capital. <keycap>Ctrl</keycap> es usate sur le systemas operative Windows, UNIX e UNIX-simile, con le clavieros presentante un clave <keycap>Ctrl</keycap> o <keycap>Control</keycap>. Le usatores de Mac usa in su loco le <keycombo> <keycap>Cmd</keycap> <keycap>key</keycap> </keycombo>. Sur le clavieros del Apple le clave &quot;Cmd&quot; ha o un etiquetta  &quot;command&quot; o un tag con un symbolo de pomo.</para>
 
     <para>Tu pote personalisar le vias breve existente o adder los nove conformemente a tu necessitates. <link linkend="ch04.shortcuts.customization">Vide appendice - Personalisation del Vias breve</link></para>
 
@@ -133,7 +133,7 @@
             </row>
 
             <row>
-              <entry><guimenuitem>Proprietates ...</guimenuitem></entry>
+              <entry><guimenuitem>Proprietates...</guimenuitem></entry>
 
               <entry><keycombo>
                   <keycap>Ctrl</keycap>
@@ -487,7 +487,7 @@
             </row>
 
             <row>
-              <entry><guimenuitem>No&amp;ta previe</guimenuitem></entry>
+              <entry><guimenuitem>Nota Previe</guimenuitem></entry>
 
               <entry/>
 
@@ -539,19 +539,19 @@
 
           <tbody>
             <row>
-              <entry><guimenuitem>Marca le segmentos &amp;Traduct</guimenuitem></entry>
+              <entry><guimenuitem>Marca le Segmentos Rendite</guimenuitem></entry>
 
               <entry>Si iste option es activate, le segmentos rendite essera marcate in jalne.</entry>
             </row>
 
             <row>
-              <entry><guimenuitem>Marca segmentos non rendite (&amp;Untranslated)</guimenuitem></entry>
+              <entry><guimenuitem>Marca segmentos non rendite</guimenuitem></entry>
 
               <entry>Si activate, le segmentos non rendite essera marcate in violetto.</entry>
             </row>
 
             <row>
-              <entry><guimenuitem>monstra le segmentos primari (&amp;Source)</guimenuitem></entry>
+              <entry><guimenuitem>Monstra le Segmentos Fte</guimenuitem></entry>
 
               <entry>Si activate, le segmentos fonte essera monstrate e marcate in verde. Si non activate, le segmentos fonte non essera monstrate.</entry>
             </row>
@@ -609,13 +609,13 @@
 
           <tbody>
             <row>
-              <entry><guimenuitem>&amp;Valida le tags</guimenuitem></entry>
+              <entry><guimenuitem>Valida le tags</guimenuitem></entry>
 
               <entry><guimenu>Ctrl+T</guimenu>: controla pro tags mancante o dispaisate in le files formattate. Monstrara un lista de segmentos con errores de tag e possibile contradictiones. Vide <link linkend="section.tag.validation">Validation del Tag</link> e <xref linkend="chapter.formatted.text"/>.</entry>
             </row>
 
             <row>
-              <entry><guimenuitem>Remove le Ta&amp;gs</guimenuitem></entry>
+              <entry><guimenuitem>Remove le Tags</guimenuitem></entry>
 
               <entry>Quando habilitate, tote le tags de formato es removite del segmentos fonte. Isto es utile pro tractar textos ubi le formattation in linea ha nulle uso real (per exemplo, PDF ex OCR,  .odt o .docx mal convertite, et cetera) Sol le tags in linea son removite, assi normalmente deberea non esser problema con le apertura  del documentos de destination. Le formattation non-visibile (id es, que non appare como tags in le editor de OmegaT) is retenite in le documento final.</entry>
             </row>
@@ -649,13 +649,13 @@
 
           <tbody>
             <row>
-              <entry><guimenuitem>Usa le clave &quot;&amp;Tab&quot; pro avantiar</guimenuitem></entry>
+              <entry><guimenuitem>Usa le clave &quot;Tab&quot; pro avantiar</guimenuitem></entry>
 
               <entry>Pone le clave de validation del segmento a <guimenuitem>Tab</guimenuitem> in loco del base prefixate <guimenuitem>Enter</guimenuitem>. Iste option es utile pro alicun systemas de inscription de character: chinese, japonese o coreano.</entry>
             </row>
 
             <row>
-              <entry><guimenuitem>Confirma semper (&amp;Always) le cessation</guimenuitem></entry>
+              <entry><guimenuitem>Confirma semper le cessation</guimenuitem></entry>
 
               <entry>Le programma videra le confirmation ante que clauder.</entry>
             </row>
@@ -790,7 +790,7 @@
 
     <para>Le vias breve sequente son disponibile ab le fenestra principal. Quando un altere fenestra es sur le prime plano, clicca sur le fenestra principal pro apportar lo al prime plano o pulsa <keycap>Esc</keycap> pro clauder le altere fenestra.</para>
 
-    <para>Le vias breve es activate pressante &lt;s0&gt;&lt;s1&gt;Ctrl&lt;/s1&gt;&lt;/s0&gt; e un littera.<keycap></keycap> Alcun vias breve implica altere claves. Pro le legibilitate, le litteras ci es scribite in capital.</para>
+    <para>Le vias breve es activate pressante <keycap>Ctrl</keycap> e un littera. Alcun vias breve implica altere claves. Pro le legibilitate, le litteras ci es scribite in capital.</para>
 
     <para>Ctrl es usate sur le systemas operative Windows, UNIX e simile a UNIX, con le clavieros que ha un clave <keycap>Ctrl</keycap> o  <keycap>Control</keycap>. Le usatores de Mac usa in vice le <guimenuitem>cmd+key.</guimenuitem> Sur le clavieros Apple le clave <guimenuitem>cmd</guimenuitem> o ha sur illo un etiquetta command o un icone pomo.</para>
 

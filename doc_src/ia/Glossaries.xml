@@ -2,7 +2,7 @@
 <!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
 <chapter id="chapter.glossaries">
   <title>Glossarios<indexterm class="singular">
-      <primary>Windows e quadros in OmegaT</primary> <secondary>Quadro del Glossario</secondary>
+      <primary>Fenestras e quadros in OmegaT</primary> <secondary>Quadro del Glossario</secondary>
     </indexterm><indexterm class="singular">
       <primary>Glossarios</primary>
     </indexterm></title>

@@ -3,7 +3,7 @@
 ----------------------------------------------------------------------
    2 Enhancements
    2 Bug fixes
-   1 Localisation update
+   2 Localisation updates
 ----------------------------------------------------------------------
 2.6.3 update 11 vs. 2.6.3 update 10
 
@@ -30,6 +30,7 @@ translatable text could appear (the content of <definedNames> tags)
   Localisation updates:
 
   - Japanese localisation updated to 2.6.3 update 10 (UI, readme)
+  - Interlingua localisation updated to 2.6.3 update 7 (UI, readme, documentation)
 
 ----------------------------------------------------------------------
  OmegaT 2.6.3 update 10 (2014-06-18)

@@ -135,35 +135,35 @@
           </listitem>
 
           <listitem>
-            <para>- Files Help (*.xml) e Manual (*.hmxp)</para>
+            <para>Files Help (*.xml) e Manual (*.hmxp)</para>
           </listitem>
 
           <listitem>
-            <para>- Typo3 LocManager (*.xml)</para>
+            <para>Typo3 LocManager (*.xml)</para>
           </listitem>
         </itemizedlist><itemizedlist>
           <listitem>
-            <para>- Localisation WiX (*.wxl)</para>
+            <para>Localisation WiX (*.wxl)</para>
           </listitem>
 
           <listitem>
-            <para>- Iceni Infix (*.xml)</para>
+            <para>Iceni Infix (*.xml)</para>
           </listitem>
 
           <listitem>
-            <para>- exportation Flash XML (*.xml)</para>
+            <para>exportation Flash XML (*.xml)</para>
           </listitem>
 
           <listitem>
-            <para>- Wordfast TXML (*.txml)</para>
+            <para>Wordfast TXML (*.txml)</para>
           </listitem>
 
           <listitem>
-            <para>- Camtasia pro Windows (*.camproj)</para>
+            <para>Camtasia pro Windows (*.camproj)</para>
           </listitem>
 
           <listitem>
-            <para>- Visio (*.vxd)</para>
+            <para>Visio (*.vxd)</para>
           </listitem>
         </itemizedlist></para>
 
@@ -285,7 +285,7 @@
       
       <para>Pro le files .docx, alicun cambios son totevia facite automaticamente:<itemizedlist>
       <listitem>Le paragraphos, sectiones e tabellas son fixate a bidi</listitem>
-      <listitem>Le 'runs' (elementos de texto) son fixate a RTL</listitem>     
+      <listitem>Le elementos de texto son fixate a RTL</listitem>     
       </itemizedlist>
       </para>
 

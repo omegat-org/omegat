@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
 <chapter id="chapter.machine.translate">
-  <title>Traduction automatica<indexterm class="singular">
-      <primary>Traduction automatica</primary>
+  <title>Traduction automatic<indexterm class="singular">
+      <primary>Traduction automatic</primary>
     </indexterm></title>
 
   <section>
     <title>Introduction<indexterm class="singular">
-        <primary>Traduction automatica</primary> <secondary>Introduction</secondary>
+        <primary>Traduction automatic</primary> <secondary>Introduction</secondary>
       </indexterm></title>
 
     <para>Al contrario del memorias de traduction generate per le usator (como in le caso de <application>OmegaT</application>) le applicationes de Traduction Automatic usa instrumentos linguistic basate sur regulas pro crear un traduction del segmento fonte sin le necessitate de un memoria de traduction. Pro construer un modello de traduction son usate technicas statistic de saper, basate sur textos de origine e final. Le servicios de Traduction Automatic ha complite resultatos bon e constantemente melior in le evalutationes del recerca.</para>
@@ -20,7 +20,7 @@
         <primary>Traductor Automatic</primary> <secondary>Google Translate</secondary>
       </indexterm></title>
 
-    <para>Google Translate es un servicio pagabile offerite ex Google, pro render phrases, sitos TTT e textos complete inter un numero de linguas semper crescente. Al tempore de scriptura le lista include plus que 50 linguas, ab le albanese al judeogermano, includite naturalmente omne le linguas major. The current version of the service is based on usage, with the price of 20 USD per million characters at the time of writing.<emphasis role="bold"/></para>
+    <para>Google Translate es un servicio pagabile offerite ex Google, pro render phrases, sitos TTT e textos complete inter un numero de linguas semper crescente. Al tempore de scriptura le lista include plus que 50 linguas, ab le albanese al judeogermano, includite naturalmente omne le linguas major. le version actual del servicio  es basate super le uso, con le precio de 20 USD per million de characteres al tempore del scriptura.<emphasis role="bold"/></para>
 
     <para><emphasis role="bold">Importante: </emphasis>Google Translate API v2 necessita information pro le factura pro omne le contos ante que tu pote initiar a usar le servicio (vide <ulink url="https://developers.google.com/translate/v2/pricing?hl=en-US">Pricing and Terms of Service</ulink> pro magis). Pro identificar te quam un usator valide del servicios Google, tu usa tu clave unic private expedite a te per Google, quando tu ha registrate te pro le servicio. Vide capitulo <link linkend="chapter.installing.and.running">Installar e executar</link>, section Argumentos del commando de Lanceamento, pro detalios sur como adder iste clave clave al ambiente OmegaT.</para>
 
@@ -70,7 +70,7 @@
         <primary>Traduction Automatic</primary> <secondary>Apertium</secondary>
       </indexterm></title>
 
-    <para><ulink url="http://www.apertium.org/">Apertium</ulink> es un platteforma de traductor automatic gratuite, open source, finalisate initialmente a pares de linguas relative, como CA, ES, GA, PT, OC e FR ma in le ultime tempore expandite pro tractar con plus pares de linguas divergente (assi como anglese-catalano). controla le sito TTT pro le ultime lista del pares de linguas implementate.</para>
+    <para><ulink url="http://www.apertium.org/">Apertium</ulink> es un platteforma de traductor automatic gratuite, open source, finalisate initialmente a pares de linguas relative, como CA, ES, GA, PT, OC e FR ma in le ultime tempore expandite pro tractar con plus pares de linguas divergente (assi como anglese-catalano). Controla le sito TTT pro le ultime lista del pares de linguas implementate.</para>
 
     <para>Le platteforma provide</para>
 
@@ -100,7 +100,7 @@
         <primary>Traduction Automatic</primary> <secondary>Chassa al defecto</secondary>
       </indexterm></title>
 
-    <para>Si il ha nihil appare in le quadro Traduction Automatic, alora controla le sequente:</para>
+    <para>Si il ha nihil que appare in le quadro Traduction Automatic, alora controla le sequente:</para>
 
     <itemizedlist>
       <listitem>

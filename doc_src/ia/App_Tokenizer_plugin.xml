@@ -1,20 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
 <appendix id="appendix.TokenizerPlugin.inOmegaT">
-  <title>Plugin Tokenizer<indexterm class="singular">
-      <primary>Plugins</primary> <secondary>Cercator de stirpe (tokenizer)</secondary>
+  <title>Plugin Tokenizer&amp;<indexterm class="singular">
+      <primary>Plugins</primary>
+
+      <secondary>Tokenizer</secondary>
     </indexterm></title>
 
   <section>
     <title>Introduction<indexterm class="singular">
-        <primary>Lucene</primary> <see>Tokenizer</see>t
+        <primary>Lucene</primary>
+
+        <see>Tokenizer</see>
       </indexterm><indexterm class="singular">
-        <primary>Cercator de radice</primary> <see>Tokenizer</see>
+        <primary>Cercator de stirpe</primary> <see>Tokenizer</see>
       </indexterm></title>
 
-    <para>Le cercatores del radice (tokenizers) meliora le qualitate de concordantias con le recognition del parolas declinate in le datos del memoria primari e in le traduction. Illos meliora alsi la concordantia del glossario.</para>
+    <para>Le cercatores del stirpe meliora le qualitate de concordantias con le recognition del parolas declinate in le datos del memoria primari e in le traduction. Illos meliora alsi la concordantia del glossario.</para>
 
-    <para>Un cercator de radice pro le anglese, per exemplo, deberea identificar le linea &quot;cats&quot; (e possibilemente &quot;catlike&quot;, &quot;catty&quot; etc.) como basate super le radice &quot;cat&quot;, e &quot;stemmer&quot;, &quot;stemming&quot;, &quot;stemmed&quot; como basate super &quot;stem&quot;. Un algorithmo de cerca del radice reduce le parolas &quot;fishing&quot;, &quot;fished&quot;, &quot;fish&quot;, e &quot;fisher&quot; al radice, &quot;fish&quot;. Isto es in modo special utile in caso de  linguas que usa formas con pre- e suffixo pro le radices. Faciente se prestar un exemplo ex le sloveno, ci &quot;bon&quot; in omne possibile formas grammaticamente correcte:</para>
+    <para>Un cercator del stirpe pro le anglese deberea identificar, exempli gratia, le linea de character &quot;cats&quot; (e possibilemente &quot;catlike&quot;, &quot;catty&quot; etc.) como basate sur le mesme radice &quot;cat&quot;, e &quot;stemmer&quot;, &quot;stemming&quot;, &quot;stemmed&quot; como basate sur &quot;stem&quot;. Un algorithmo de cerca del stirpe reduce le parolas &quot;fishing&quot;, &quot;fished&quot;, &quot;fish&quot;, e &quot;fisher&quot; al radice, &quot;fish&quot;. Isto es in modo special utile in caso de linguas que usa formas con prefixo e suffixo pro le parolas stirpe. Faciente se prestar un exemplo ex le sloveno, ci &quot;bon&quot; in omne possibile formas grammaticamente correcte:</para>
 
     <itemizedlist>
       <listitem>
@@ -30,7 +34,7 @@
 
     <itemizedlist>
       <listitem>
-        <para>najlepših - superlative, plural, genitive pro M,F,N</para>
+        <para>najlepših - superlative, plural, genitive pro M, F,  N</para>
       </listitem>
     </itemizedlist>
   </section>

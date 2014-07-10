@@ -2,13 +2,13 @@
 <!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
 <chapter id="chapter.project.properties">
   <title>Proprietates del projecto<indexterm class="singular">
-      <primary>Proprietates</primary> del <secondary>Projecto</secondary>
+      <primary>Projecto</primary> <secondary>Proprietates</secondary>
     </indexterm></title>
 
   <para/>
 
   <section id="properties.dialog">
-    <title>Dialogo del proprietates</title>
+    <title>Fenestra de dialogo del Proprietates</title>
 
     <para>Le dialogo <menuchoice> <shortcut> <keycombo> <keycap>Ctrl</keycap> <keycap>E</keycap> </keycombo> </shortcut> <guimenu>Projecto</guimenu> <guimenuitem>Proprietates...</guimenuitem> </menuchoice> es usate pro definir e modificar le plicas e le linguas del projecto.</para>
 
@@ -89,7 +89,7 @@
             <primary>Projecto</primary> <secondary>Option remove le tags</secondary>
           </indexterm></para>
 
-        <para>Quando habilitate, tote le tags de formato es removite del segmentos fonte. Isto es specialmente utile in le tractamento del textos ubi le formattation in linea non es vermente utile (per exemplo,  PDF ex OCR,  .odt or .docx mal convertite, etc.) In un caso normal il deberea semper esser possibile aperir le documentos final, pois que es removite sol le tags in linea. Le formattation non-visibile (id es, que non appare como tags in le editor de OmegaT) is retenite in le documentos final.</para>
+        <para>Quando habilitate, tote le tags de formato es removite del segmentos fonte. Isto es specialmente utile in le tractamento del textos ubi le formattation in linea non es vermente utile (per exemplo,  PDF ex OCR,  .odt o .docx mal convertite, etc.) In un caso normal il deberea semper esser possibile aperir le documentos de destination, pois que es removite sol le tags in linea. Le formattation non-visibile (id es, que non appare como tags in le editor de OmegaT) is retenite in le documentos final.</para>
       </listitem>
     </itemizedlist>
 

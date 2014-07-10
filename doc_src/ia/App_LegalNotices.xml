@@ -6,10 +6,8 @@
     </indexterm>Advertentias legal</title>
 
   <section id="legal.notices.for.documentation">
-    <title>For the documentation<indexterm class="singular">
-        <primary>Legal notices</primary>
-
-        <secondary>For the documentation</secondary>
+    <title>Pro le documentation<indexterm class="singular">
+        <primary>Advertentias legal</primary> <secondary>Pro le documentation</secondary>
       </indexterm></title>
 
     <para><emphasis role="bold">Copyright</emphasis></para>
@@ -44,10 +42,10 @@
 
     <para><emphasis role="bold"><application>OmegaT</application>
     </emphasis> is Copyright © 2000-2013 Keith Godfrey, Zoltan Bartko, Volker Berlin, Didier Briel,
-    Kim Bruning, Alex Buloichik, Thomas Cordonnier, Sandra Jean Chua, 
+    Kim Bruning, Alex Buloichik, Thomas Cordonnier, Sandra Jean Chua, Enrique Estévez Fernández,
     Martin Fleurke, Wildrich Fourie, Phillip Hall, Jean-Christophe Helary, Thomas Huriaux, 
-    Hans-Peter Jacobs, Kyle Katarn, Ibai Lakunza Velasco, Guido Leenders, Aaron Madlon-Kay, 
-    Fabián Mandelbaum, John Moran, Maxym Mykhalchuk, Arno Peters, 
+    Hans-Peter Jacobs, Kyle Katarn, Piotr Kulik, Ibai Lakunza Velasco, Guido Leenders, Aaron Madlon-Kay, 
+    Fabián Mandelbaum, Manfred Martin, John Moran, Maxym Mykhalchuk, Arno Peters, 
     Henry Pijffers, Briac Pilpré, Tiago Saboga, Andrzej Sawuła, 
     Benjamin Siband, Yu Tang, Rashid Umarov, Antonio Vilei, Martin Wunderlich and Michael Zakharov.</para>
 

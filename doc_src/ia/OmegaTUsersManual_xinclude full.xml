@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
-<book lang="en">
+<book lang="ia">
   <bookinfo>
-    <title>OmegaT - Guida del usuario</title>
+    <title>OmegaT - Guida del usator</title>
 
-    <authorinitials>vs</authorinitials>
+    <authorinitials>per</authorinitials>
 
     <author>
-      <firstname>Vito Smolej</firstname>
+      <firstname>Vito Smolej (rendite in Interlingua per Carmelo Serraino in martio 2014)</firstname>
     </author>
 
     <pubdate/>
 
     <abstract>
-      <para>Iste documento es le guida official del usator pro OmegaT, le instrumento gratuite de traduction assistite ab computator. Illo contine alsi le instructiones de installation.</para>
+      <para>Iste documento es le guida official del usator pro OmegaT, le application gratuite de Traduction Assistite per le Computator (Computer Assisted Translation - CAT). Illo contine alsi le instructiones de installation.</para>
     </abstract>
   </bookinfo>
 

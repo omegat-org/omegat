@@ -110,7 +110,7 @@
 
                 <entry><indexterm class="singular">
                     <primary>Files del Projecto</primary> <secondary>ignored_words e learned_words</secondary>
-                  </indexterm>son create e usate per le corrector orthographic. Si tu jam ha colligite parolas tu desidera le corrector orthographic ignora / accepta, tu debe solmente copiar le duo files correspondente in le sub plica <filename>omegat</filename>de tu projecto actual.</entry>
+                  </indexterm>son create e usate del corrector orthographic. Si tu jam ha colligite parolas tu desidera le corrector orthographic ignora / accepta, tu debe solmente copiar le duo files correspondente in le sub plica <filename>omegat</filename>de tu projecto actual.</entry>
               </row>
 
               <row>
@@ -136,7 +136,7 @@
     </section>
 
     <section id="folder.source">
-      <title>Sub plica /source<indexterm class="singular">
+      <title>Sub plica source<indexterm class="singular">
           <primary>Files del Projecto</primary> <secondary>Sub plica /source</secondary>
         </indexterm></title>
 
@@ -144,7 +144,7 @@
     </section>
 
     <section id="folder.target">
-      <title>Sub plica /target<indexterm class="singular">
+      <title>Sub plica target<indexterm class="singular">
           <primary>Files del Projecto</primary> <secondary>Sub plica /target</secondary>
         </indexterm></title>
 
@@ -203,7 +203,7 @@
       </tgroup>
     </informaltable>
 
-    <para>Nota que le regulas de segmentation base e le filtros de file pote esser superscribite per preparationes specific del projecto (vide supra). Le ubication del files del usator depende del platteforma que tu usa:</para>
+    <para>Nota que le regulas de segmentation base e le filtros de file pote esser superscribite per preparationes specific del projecto (vide supra). Le ubication del files del usator depende ab qual platteforma tu usa:</para>
 
     <informaltable>
       <tgroup align="left" cols="2" rowsep="1">
@@ -259,7 +259,7 @@
         <primary>Files del Projecto</primary> <secondary>Files application</secondary>
       </indexterm></title>
 
-    <para>OmegaT es supplite como un pacchetto que pote esser discargate ex SourceForge. Ci es considerate un pacchetto independente ab platteformas in un forma Java standard. Le alternativas comprende un pacchetto .tar Linux, un installator Windows – con o sin un Java Runtime Environment (JRE) –, un installator Mac OS X, e un pacchetto codice fonte pro le disveloppatores.</para>
+    <para>OmegaT es supplite como un pacchetto que pote esser discargate ab SourceForge. Ci es considerate un pacchetto independente ab platteformas in un forma Java standard. Le alternativas comprende un pacchetto .tar Linux, un installator Windows – con o sin un Java Runtime Environment (JRE) –, un installator Mac OS X, e un pacchetto codice fonte pro le disveloppatores.</para>
 
     <para>Le pacchetto independente ab platteformas pote esser usate sur omne platteforma con un ambiente runtime Java 1.6 functionante, includite le platteformas pro le qual existe alsi un pacchetto specific. Illo es fornite como file comprimite (archivo zip o tar) que tu debe extraher al plica de tu election pro le installation. Le file pote habitualmente esser extrahite per clic duplice sur le pacchetto discargate. Un vice que le archivo esseva extrahite, es create un plica continente le contentos sequente:</para>
 
@@ -271,13 +271,13 @@
           <row>
             <entry><emphasis role="bold">Sub plica file/ </emphasis></entry>
 
-            <entry><emphasis role="bold">Con&amp;tentos</emphasis></entry>
+            <entry><emphasis role="bold">Contentos</emphasis></entry>
           </row>
 
           <row>
             <entry><filename>/docs/</filename></entry>
 
-            <entry>Omne le files del manual del usator pote esser trovate in iste plica. Tu pote aperir los in un lector del tela Interrete pro obtener accesso al ligamines externe.</entry>
+            <entry>Omne le files del manual del usator pote esser trovate in iste plica. Tu pote aperir los in un navigator TTT pro obtener accesso al ligamines externe.</entry>
           </row>
 
           <row>
@@ -295,7 +295,7 @@
           <row>
             <entry><filename>join.html</filename></entry>
 
-            <entry>Isto es un file html ordinari que, quando aperte in tu lector del tela Interrete, dirige te al gruppo del usator OmegaT sur Yahoo! Gruppos. Non es necessari participar, ma supplera te con accesso a servicios additional, assi como files, questionarios, e le opportunitate a sumer parte in discussiones re OmegaT. Le archivos del gruppo son public e on pote vider los sin subscription al gruppo.</entry>
+            <entry>Isto es un file html ordinari que, quando aperte in tu navigator TTT, dirige te al gruppo del usator OmegaT sur Yahoo! Gruppos. Non es necessari participar, ma supplera te con accesso a servicios additional, assi como files, questionarios, e le opportunitate a sumer parte in discussiones re OmegaT. Le archivos del gruppo son public e on pote vider los sin subscription al gruppo.</entry>
           </row>
 
           <row>
@@ -331,7 +331,7 @@
           </row>
 
           <row>
-            <entry><application>omegat</application></entry>
+            <entry><application>OmegaT</application></entry>
 
             <entry><para>Un file texto continente duo lineas:</para>
 

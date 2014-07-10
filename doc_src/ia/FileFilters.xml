@@ -3,7 +3,7 @@
 <chapter id="chapter.file.filters">
   <title>Filtros del file</title>
 
-  <para>OmegaT ha filtros multo personalisabile, que habilita te a configurar plure aspectos. Filtros de File es applicationes capabile de:</para>
+  <para>OmegaT presenta filtros multo personalisabile, que habilita te a configurar plure aspectos. Le Filtros de File es breve applicationes capabile de:</para>
 
   <itemizedlist>
     <listitem>
@@ -19,7 +19,7 @@
 
   <itemizedlist>
     <listitem>
-      <para>Automatisar le modificationes del nomines del file del documento rendite per reimplaciamento del contentos traducibile con lor traduction.</para>
+      <para>Automatisar le modificationes del nomines del file del documento rendite per reimplaciamento del contentos traducibile con su traduction.</para>
     </listitem>
   </itemizedlist>
 
@@ -31,14 +31,14 @@
       <primary>Filtros de file</primary> <secondary>Filtros del file specific pro le projecto</secondary>
     </indexterm>. In iste caso un copia del configuration del filtros essera immagazinate con le projecto. Si tu plus tarde cambiara le filtros, sol le filtros del projecto essera renovate, dum le filtros del usator restara sin alteration.</para>
 
-  <para><emphasis role="bold">Advertimento!</emphasis> deberea tu cambiar optiones filtro durante un projecto es aperte, tu debe recargar le projecto pro que le cambios sume effecto.</para>
+  <para><emphasis role="bold">Advertimento!</emphasis> si tu cambia le optiones del filtro con un projecto aperte, postea tu debe recargar le projecto pro que le cambios sume effecto.</para>
 
   <section id="file.filters.dialog">
     <title>Dialogo del filtros del file<indexterm class="singular">
-        <primary>Dialogo</primary> <secondary>del filtros del file</secondary>
+        <primary>Dialogo</primary> del <secondary>Filtros del file</secondary>
       </indexterm></title>
 
-    <para>Iste fenestra de dialogo lista le filtros de file disponibile. deberea tu desirar non usar OmegaT pro render files de un certe typo, tu pote volver foras le filtro correspondente per le disactivation del quadrato de controlo al latere de su nomine. OmegaT omittera alora le files appropriate durante le cargamento del projectos, e copiara los identic quando creara le documentos de destination. Quando tu desidera usar de nove le filtro, marca justo le quadrato de controlo. Clicca <emphasis role="bold">preparationes base </emphasis> pro prefixar le filtros de file al preparationes base. Pro rediger qual files in qual codificationes le filtro es a processar, selige le filtro ex le lista e clicca <emphasis role="bold">Modifica.</emphasis></para>
+    <para>Iste fenestra de dialogo lista le filtros de file disponibile. Si tu desira non usar OmegaT pro render files de un certe typo, tu pote volver foras le filtro correspondente, per le disactivation del quadrato de controlo al latere de su nomine. OmegaT omittera alora le files appropriate durante le cargamento del projectos, e copiara los identic quando creara le documentos rendite. Quando tu desidera usar de nove le filtro, marca justo le quadrato de controlo. Clicca <emphasis role="bold">preparationes base </emphasis> pro prefixar le filtros de file al preparationes base. Pro rediger qual files in qual codificationes le filtro debe processar, selige le filtro ex le lista e clicca <emphasis role="bold">Modifica.</emphasis></para>
   </section>
 
   <section id="filters.options">
@@ -52,9 +52,9 @@
 
     <itemizedlist>
       <listitem>
-        <para><emphasis>segmentation a paragrapho sur interruptiones de linea, lineas vacue o nunquam:</emphasis></para>
+        <para><emphasis>Segmentation a paragrapho sur interruptiones de linea, lineas vacue o nunquam:</emphasis></para>
 
-        <para>si son active le regulas de segmentation, le texto essera ulteriormente segmentate secundo le option seligite ci.</para>
+        <para>si le regulas de segmentation son active, le texto essera ulteriormente segmentate secundo le option seligite ci.</para>
       </listitem>
     </itemizedlist>
 
@@ -64,15 +64,15 @@
       <listitem>
         <para><emphasis>Permitte le traductiones blanc in le file de destination</emphasis>:</para>
 
-        <para>Si active, quando un segmento PO (le qual pote esser un paragrapho integre) non es rendite, le traduction essera vacue in le file de destination. In terminos technic, le segmento <code>msgstr</code> in le file destination PO, si create, essera lassate vacue. Pois que isto es le comportamento standard pro files PO, illo es active per arrangiamento prefixate initial. Si le option es disactivate, le texto fonte essera copiate al segmento destination.</para>
+        <para>Si active, quando un segmento PO (le qual pote esser un paragrapho integre) non es rendite, le traduction essera vacue in le file de destination. In terminos technic, le segmento <code>msgstr</code> in le file destination PO, si create, essera lassate vacue. Pois que isto es le comportamento standard pro le files PO, isto is active per arrangiamento initial. Si le option es disactivate, le texto fonte essera copiate al segmento destination.</para>
       </listitem>
     </itemizedlist>
 
     <itemizedlist>
       <listitem>
-        <para><emphasis>Skip PO header</emphasis></para>
+        <para><emphasis>Salta le testa del PO</emphasis></para>
 
-        <para>Le testa PO essera saltate e lassate sin alteration, si iste option es marcate.</para>
+        <para>Le testa del PO essera saltate e lassate sin alteration, si es marcate iste option.</para>
       </listitem>
     </itemizedlist>
 
@@ -80,7 +80,7 @@
       <listitem>
         <para><emphasis>Auto reimplacia 'nplurals=INTEGER; plural=EXPRESSION;' in le testa</emphasis></para>
 
-        <para><emphasis><emphasis>Le option permitte a OmegaT de haber plus de importantia del specification in le testa del file PO e usar le arrangiamento initial pro le lingua de destination seligite.</emphasis></emphasis></para>
+        <para><emphasis><emphasis>Le option permitte a OmegaT de non curar se del specification in le testa del file PO e de usar le arrangiamento base initial por le lingua de destination seligite.</emphasis></emphasis></para>
       </listitem>
     </itemizedlist>
 
@@ -88,7 +88,7 @@
 
     <itemizedlist>
       <listitem>
-        <para><emphasis>Adde o rescribe le declaration de codification in le files HTML e XHTML </emphasis>: frequentemente le files final debe haber le serie de character differente cello in le file fonte (sia illo definite explicitemente o implicite). Le traductor usante iste option pote specificar, si le files final debe haber le declaration de codification includite. Per exemplo, si le filtro del file specifica UTF8 ut le schema de codification pro le files final, seliger Semper assecurara que iste information es includite in le files rendite.</para>
+        <para><emphasis>Adde o rescribe le declaration de codification in le files HTML e XHTML:</emphasis>: frequentemente le files de destination debe haber le collection de codification del character differente de illo in le file fonte (sia que isto es definite explicitemente o implicite). Con iste option le traductor pote specificar, si le files de destination debe haber le declaration de codification includite. Per exemplo, si le filtro del file specifica UTF8 ut le schema de codification pro le files de destination, seliger Semper assecurara que iste information es includite in le files rendite.</para>
       </listitem>
     </itemizedlist>
 
@@ -100,13 +100,13 @@
 
     <itemizedlist>
       <listitem>
-        <para><emphasis>Initia un nove paragrapho sur: le &lt;br&gt;tag HTML</emphasis>  constituera un paragrapho pro fines de segmentation.</para>
+        <para><emphasis>Comencia un nove paragrapho sur: le tag HTML &lt;br&gt;</emphasis> constituera un paragrapho pro le fines de segmentation.</para>
       </listitem>
     </itemizedlist>
 
     <itemizedlist>
       <listitem>
-        <para><emphasis>salta texto concordantia expression regular</emphasis>: le texto que concorda le expression regular es saltate. Il es monstrate marcate rubie in le validator de  tag. Le texto in le segmento fonte que concorda es monstrate in italic.</para>
+        <para><emphasis>Salta le texto que concorda le expression regular</emphasis>: le texto que concorda le expression regular es saltate. Illo es monstrate marcate rubre in le validator del tag. Le texto in le segmento fonte que concorda es monstrate in italic.</para>
       </listitem>
     </itemizedlist>
 
@@ -120,7 +120,7 @@
       <listitem>
         <para><emphasis>Non render le contento del tags con le sequente pares de valor clave de attributos (separate ab virgulas):</emphasis>: un concordantia in le lista del pares de valor clave producera que essera ignorate le contento del tags</para>
 
-        <para>Il es alicun vices utile pro esser habile a render alicun tags intraducibile sur le base del valor del attributos. Per exemplo, <literal>&lt;div class=&quot;hide&quot;&gt; &lt;span translate=&quot;no&quot;&gt;</literal> Tu pote definir pares de valor clave pro le tags a esser lassate non rendite. pro le exemplo precedente, le campo facerea continer: <literal>class=hide, translate=no </literal></para>
+        <para>Il es alicun vices utile pro esser habile a render alicun tags intraducibile sur le base del valor del attributos. Per exemplo, <literal>&lt;div class=&quot;hide&quot;&gt; &lt;span translate=&quot;no&quot;&gt;</literal> Tu pote definir pares de valor-clave pro le tags que debe restar non rendite. Pro le exemplo precedente, le campo que continerea: <literal>class=hide, translate=no </literal></para>
       </listitem>
     </itemizedlist>
 
@@ -158,11 +158,13 @@
 
         <itemizedlist>
           <listitem>
-            <para><emphasis>Aggrega le tags</emphasis>: si marcate, le tags sin texto traducibile inter illos essera aggregate in tags singule.</para>
+            <para><emphasis>Aggregate tags</emphasis>: if checked, tags
+            without translatable text between them will be aggregated into
+            single tags.</para>
           </listitem>
 
           <listitem>
-            <para><emphasis>Retene spatios pro omne le tags</emphasis>: si marcate, &quot;spatio blanc&quot; (id es, spatios e newlines) essera conservate, etiam si non fixate technicamente in le documento</para>
+            <para><emphasis>Retene spatios pro omne le tags</emphasis>: si marcate, le &quot;spatio blanc&quot; (id es, spatios e nove lineas) essera conservate, etiam si non imponite technicamente in le documento</para>
           </listitem>
         </itemizedlist>
       </listitem>
@@ -172,7 +174,7 @@
 
     <itemizedlist>
       <listitem>
-        <para><emphasis>Adde o rescribe le declaration de codification in le files HTML e XHTML</emphasis>: Semper (base prefixate), Sol si le file (X)HTML ha un testa, Sol si le file (X)HTML ha un declaration de codification, Nunquam</para>
+        <para><emphasis>Adde o rescribe le declaration de codification in le files HTML e XHTML</emphasis>: Semper (prefixate), Sol si (X) le file HTML ha un testa, Sol si le file (X)HTML ha un declaration de codification, Nunquam</para>
       </listitem>
     </itemizedlist>
 
@@ -184,13 +186,13 @@
 
     <itemizedlist>
       <listitem>
-        <para><emphasis>Initia un nove paragrapho sur: le &lt;br&gt;tag HTML</emphasis>  constituera un paragrapho pro fines de segmentation.</para>
+        <para><emphasis>Comencia un nove paragrapho sur: le tag HTML &lt;br&gt;</emphasis> constituera un paragrapho pro le fines de segmentation.</para>
       </listitem>
     </itemizedlist>
 
     <itemizedlist>
       <listitem>
-        <para><emphasis>Salta texto que concorda le expression regular</emphasis>: le texto que concorda le expression regular essera saltate.</para>
+        <para><emphasis>Salta le texto que concorda le expression regular</emphasis>: le texto que concorda le expression regular essera saltate.</para>
       </listitem>
     </itemizedlist>
 
@@ -210,9 +212,9 @@
 
     <itemizedlist>
       <listitem>
-        <para><emphasis>Le segmentation a paragrapho sur interruptiones de linea, lineas vacue o nunquam</emphasis>:</para>
+        <para><emphasis>Segmentation a paragrapho sur interruptiones de linea, lineas vacue o nunquam:</emphasis></para>
 
-        <para>si son active le regulas de segmentation, le texto essera ulteriormente segmentate secundo le option seligite ci.</para>
+        <para>si le regulas de segmentation son active, le texto essera ulteriormente segmentate secundo le option seligite ci.</para>
       </listitem>
     </itemizedlist>
 
@@ -220,28 +222,28 @@
 
     <itemizedlist>
       <listitem>
-        <para>Tu pote seliger qual del elementos sequente debe esser traducite:</para>
+        <para>Tu pote seliger qual del sequente elementos debe esser rendite:</para>
 
-        <para>Entratas de indice, signa-libros, referentias de signa-libro, notas, commentos, notas de presentation, ligamines (URL), nomines de pagina</para>
+        <para>entratas indice, signa-libros, referentias de signa-libro, notes, commentos, notas de presentation, ligamines (URL), nomines de pagina</para>
       </listitem>
     </itemizedlist>
   </section>
 
   <section id="edit.filter.dialog">
-    <title>Editar le dialogo del filtro<indexterm class="singular">
+    <title>Fenestra de dialogo de Modifica del filtro<indexterm class="singular">
         <primary>Filtros de file</primary> <secondary>Modifica</secondary>
       </indexterm></title>
 
-    <para>Iste fenestra de dialogo habilita te a preparar le modellos de files del nomine de file fonte a esser processate per le filtro, personalisa le nomine de files rendite, e selige qual codificationes deberea esser usate por cargar le file e salvar su pendant traducite. Pro modificar un modello de filtro de file, o modifica del mano al mano le campos o clicca <emphasis role="bold">Edit.</emphasis> Pro adder un nove modello de filtro de file, clicca <emphasis role="bold">Add</emphasis>. Le mesme fenestra de dialogo es usate pro adder un modello o pro modificar un modello particular. Le fenestra de dialogo es utile pois que illo include un special editor de modello de nomine de file con le qual tu pote personalisar le nomines del files final.</para>
+    <para>Iste fenestra de dialogo habilita te a preparar le modellos de files del nomine de file fonte a esser processate per le filtro, personalisa le nomine de files rendite, e selige qual codificationes deberea esser usate por cargar le file e salvar su pendant traducite. Pro modificar un modello de filtro del file, modifica le campos directemente o clicca <emphasis role="bold">Modifica.</emphasis> Pro adder un nove modello de filtro del file, clicca <emphasis role="bold">Adde</emphasis>. Le fenestra de dialogo pro adder un modello es le mesme que illo pro modificar un modello particular. Le fenestra de dialogo es utile quia illo include un editor special  pro modello de nomine de file de destination con le qual tu pote personalisar le nomines del files emittite.</para>
 
     <section id="source.filetype.and.filename.pattern">
       <title><indexterm class="singular">
-          <primary>Files fonte</primary> <secondary>Exemplo de typo e nomine de file</secondary>
-        </indexterm>Typo de file fonte, exemplo de nomine de file<indexterm class="singular">
-          <primary>Filtros de File</primary> <secondary>Exemplo de typo e nomine de file</secondary>
+          <primary>Files fonte</primary> <secondary>Modello de typo e nomine de file</secondary>
+        </indexterm>Typo de file fonte, modello de nomine de file<indexterm class="singular">
+          <primary>Filtros de File</primary> <secondary>Modello de typo e nomine de file</secondary>
         </indexterm></title>
 
-      <para>Quando OmegaT incontra un file in su plica fonte, illo tenta a seliger le filtro con le extension del file. Plus precisemente, OmegaT tenta de concordar omne le modellos del nomine del file fonte, erga le nomine del file. per exemplo, le exemplo <literal>*.xhtml </literal>concorda omne file con le extension <literal>.xhtml</literal>. Si es trovate le filtro appropriate, le file es assignate a illo pro le processo. Per exemplo, per arrangiamento base prefixate, le filtros XHTML son usate pro processar files con le extension .xhtml. Tu pote cambiar o adder modellos de nomine de file pro le files a tractar, per cata file. Le modellos de nomine de file fonte usa carta salvage similabile a illos usate in <emphasis role="bold">Recercas. </emphasis>Le character '*' equala zero o  plus characteres. Le character '?' equala exactemente un character. Omne le altere characteres representa se ipse. Per exemplo, si tu desira le filtro de texto pro tractar files lege-me (<literal>lege-me, lege.me</literal>, e <literal>lege-me.txt</literal>) tu deberea usar le patrono <literal>lege*</literal>.</para>
+      <para>Quando OmegaT incontra un file in su plica fonte, il tenta de seliger le filtro basate sur le extension del file. Plus precisemente, OmegaT tenta de concordar cata modellos del filtro de nomine de file fonte, verso le nomine de file. Per exemplo, le modello <literal>*.xhtml </literal>concorda omne file con le extension <literal>.xhtml</literal>. Si le filtro appropriate es trovate, le file es assignate a Illo pro le successive processo. Per exemplo, per arrangiamento initial, le filtros XHTML son usate pro processar le files con le extension .xhtml. Tu pote mutar o adder modellos de nomine de file, pro tractar cata file. Le modellos de nomine de file fonte usa characteres 'carta salvage' similabile a illos usate in le <emphasis role="bold">Recercas. </emphasis>Le character salvage '*' equala zero o plus characteres. Le character salvage '?' equala exactemente un character. Omne le altere characteres representa se ipse. Per exemplo, si vos vole le filtro de texto pro tractar le files readme  (<literal>readme, read.me</literal>, e  <literal>readme.txt</literal>) tu deberea usar le modello <literal>read*</literal>.</para>
     </section>
 
     <section id="source.and.target.files.encoding">
@@ -259,11 +261,11 @@
         <primary>Filtros de File</primary> <secondary>Codification - fonte, final</secondary>
       </indexterm>
 
-      <para>Sol alicun formatos de file specifica un codification obligatori. Le Formatos del file que non specifica lor codification usara le codification que tu prefixara pro le extension que concorda lor nomine. Per exemplo, per arrangiamento base le files <literal>.txt</literal> essera cargate con le codification base de tu systema operative. Tu pote cambiar le codification fonte pro cata differente typo de nomine de file fonte. Assi como tal files pote alsi esser create in omne codification. Per arrangiamento base, le codification del file rendite es identic al codification del  file fonte. Le campos de codification fonte e final usa quadratos combo con includite omne le codificationes supportate. &lt;auto&gt; lassa le selection del codification a <application>OmegaT</application>. Isto es como illo opera:</para>
+      <para>Sol un numero limitate de formatos de file specifica un codification obligatori. Le formatos del file que non specifica lor codification usara le codification que tu prefixa pro le extension que concorda lor nomine. Per exemplo, per arrangiamento base le files <literal>.txt</literal> essera cargate con le codification base de tu systema operative. Tu pote cambiar le codification fonte pro cata differente typo de nomine de file fonte. Assi como tal files pote alsi esser create in omne codification. Per arrangiamento base, le codification del file rendite es identic al codification del  file fonte. Le campos de codification fonte e de destination usa quadratos de combination con omne le codificationes supportate includite. &lt;auto&gt; lassa le selection del codification a <application>OmegaT</application>. Isto es como illo opera:</para>
 
       <itemizedlist>
         <listitem>
-          <para>OmegaT identifica le codification del file fonte con su declaration de codification, si presente (files HTML, files basate sur XML)</para>
+          <para>OmegaT identifica le codification del file fonte usante su declaration de codification, si presente (files HTML, files basate sur XML)</para>
         </listitem>
       </itemizedlist>
 
@@ -285,8 +287,8 @@
           <primary>Files final</primary> <secondary>Nomines del File</secondary>
         </indexterm></title>
 
-      <para>A vices tu pote desirar renominar automaticamente le files que tu rende, per exemplo con le addition de un codice de lingua post le nomine del file. Le modello nomine de file de destination usa un syntaxe special, assi si tu desidera modificar iste campo, tu debe cliccar <emphasis role="bold">Modifica...</emphasis>e usar le <indexterm class="singular">
-          <primary>Dialogo</primary> <secondary>del filtros del file</secondary>
+      <para>Alicun vices tu pote desiderar de renominar automaticamente le files que tu rende, per exemplo con le addition de un codice de lingua post le nomine del file. Le modello nomine de file de destination usa un syntaxe special, assi si tu desidera modificar iste campo, tu debe cliccar <emphasis role="bold">Modifica...</emphasis>e usar le <indexterm class="singular">
+          <primary>Dialogo</primary> del <secondary>Filtros del file</secondary>
         </indexterm>Fenestra de dialogo del Modifica Modello. Si tu desira retornar al configuration base del filtro, clicca <emphasis role="bold">Defaults.</emphasis> Tu pote alsi modificar le nomine directemente in le campo nomine de file final del modello del fenestra de dialogo Filtros de File. Le Fenestra de dialogo Modifica Modello offere inter le alteres le optiones sequente:</para>
 
       <itemizedlist>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
 <chapter id="chapter.regexp">
-  <title>Expressiones regular<indexterm class="singular">
+  <title>Expressiones Regular<indexterm class="singular">
       <primary>Expressiones regular</primary> <seealso>Segmentation</seealso> <seealso>Cerca</seealso>
     </indexterm></title>
 
@@ -53,7 +53,7 @@
         <row>
           <entry>x</entry>
 
-          <entry>Le character x, excepte le following...</entry>
+          <entry>Le character x, excepte le sequente...</entry>
         </row>
 
         <row>
@@ -132,7 +132,7 @@
   </table>
 
   <table>
-    <title>Regex - Quotation</title>
+    <title>Regex - Citation</title>
 
     <tgroup align="left" cols="2" rowsep="1">
       <colspec align="left" colnum="1"/>
@@ -149,7 +149,7 @@
         <row>
           <entry>\</entry>
 
-          <entry>Nihil, excepte quotes le character sequente. Isto necessita si tu vole entrar in cata del meta-characteres !$()*+.&lt;&gt;?[\]^{|} pro concordar como se ipse.</entry>
+          <entry>Nihil, excepte quotes le character sequente. Isto necessita si tu amarea inscriber alicun del meta-characteres !$()*+.&lt;&gt;?[\]^{|} pro concordar con ipsos.</entry>
         </row>
 
         <row>
@@ -161,20 +161,20 @@
         <row>
           <entry>\Q</entry>
 
-          <entry>Nihil, excepte quotes omne characteres usque /E.</entry>
+          <entry>Nihil, sed virgulettas omne characteres usque \E</entry>
         </row>
 
         <row>
           <entry>\E</entry>
 
-          <entry>Nihil, excepte le fines del quotas initiate per \Q</entry>
+          <entry>nihil, sed termina le citation initiate per \Q</entry>
         </row>
       </tbody>
     </tgroup>
   </table>
 
   <table>
-    <title>Regex - classes pro le blocos Unicode e categorias</title>
+    <title>Classes - Regex pro blocos Unicode e categorias</title>
 
     <tgroup align="left" cols="2" rowsep="1">
       <colspec align="left" colnum="1"/>
@@ -191,13 +191,13 @@
         <row>
           <entry>\p{InGreek}</entry>
 
-          <entry>Un character in le bloco block (simple <ulink url="http://download.oracle.com/javase/1.6.0/docs/api/java/util/regex/Pattern.html#ubc"> block</ulink>)</entry>
+          <entry>Un character in le bloco grec (simplice  <ulink url="http://download.oracle.com/javase/1.6.0/docs/api/java/util/regex/Pattern.html#ubc"> bloco</ulink>)</entry>
         </row>
 
         <row>
           <entry>\p{Lu}</entry>
 
-          <entry>Un littera majuscule (<ulink url="http://download.oracle.com/javase/1.6.0/docs/api/java/util/regex/Pattern.html#ubc"> categoria</ulink> simple)</entry>
+          <entry>Un littera majuscule (simplice<ulink url="http://download.oracle.com/javase/1.6.0/docs/api/java/util/regex/Pattern.html#ubc"> categoria</ulink>)</entry>
         </row>
 
         <row>
@@ -209,20 +209,20 @@
         <row>
           <entry>\P{InGreek}</entry>
 
-          <entry>omne character excepte uno in in lebloco Greek block (negation)</entry>
+          <entry>omne character preter uno in le bloco grec (negation)</entry>
         </row>
 
         <row>
           <entry>[\p{L}&amp;&amp;[^\p{Lu}]]</entry>
 
-          <entry>qualcunque litera extra un litera majuscule (subtraction)</entry>
+          <entry>omne littera si non un littera majuscule (subtraction)</entry>
         </row>
       </tbody>
     </tgroup>
   </table>
 
   <table>
-    <title>Regex - Classes de Character</title>
+    <title>Regex - Classes de character</title>
 
     <tgroup align="left" cols="2" rowsep="1">
       <colspec align="left" colnum="1"/>
@@ -239,7 +239,7 @@
         <row>
           <entry>[abc]</entry>
 
-          <entry>a, b, o c (classe simple)</entry>
+          <entry>a, b, o c (classe simplice)</entry>
         </row>
 
         <row>
@@ -273,9 +273,9 @@
 
       <tbody>
         <row>
-          <entry>.</entry>
+          <entry>U.</entry>
 
-          <entry>Omne character (excepte pro le terminatores del linea)</entry>
+          <entry>Cata character (excepte pro le terminatores del linea)</entry>
         </row>
 
         <row>
@@ -299,26 +299,26 @@
         <row>
           <entry>\S</entry>
 
-          <entry>Un character non spatio blanco: [^\s]</entry>
+          <entry>Un character non-spatio blanc: [^\s]</entry>
         </row>
 
         <row>
           <entry>\w</entry>
 
-          <entry>Un character del parola: [a-zA-Z_0-9]</entry>
+          <entry>Un character parola: [a-zA-Z_0-9]</entry>
         </row>
 
         <row>
           <entry>\W</entry>
 
-          <entry>Un character non del parola: [^\w]</entry>
+          <entry>Un character non-parola: [^\w]</entry>
         </row>
       </tbody>
     </tgroup>
   </table>
 
   <table>
-    <title>Regex - Concordatores de confin</title>
+    <title>Regex - Concordatores del confinios </title>
 
     <tgroup align="left" cols="2" rowsep="1">
       <colspec align="left" colnum="1"/>
@@ -353,14 +353,14 @@
         <row>
           <entry>7.B.</entry>
 
-          <entry>Un frontiera de non-parola</entry>
+          <entry>Un frontiera non-parola</entry>
         </row>
       </tbody>
     </tgroup>
   </table>
 
   <table>
-    <title>Regex - quantificatores avide</title>
+    <title>Regex - Quantificatores avide</title>
 
     <tgroup align="left" cols="2" rowsep="1">
       <colspec align="left" colnum="1"/>
@@ -377,7 +377,7 @@
         <row>
           <entry>X<emphasis>?</emphasis></entry>
 
-          <entry>X, un vice o nullo del toto</entry>
+          <entry>X, un vice o non del toto</entry>
         </row>
 
         <row>
@@ -396,11 +396,11 @@
   </table>
 
   <note>
-    <para>le quantificatores avide concordara a mesura que illos pote. Per exemplo, <emphasis>a+?</emphasis> concordara le aaa in <emphasis>aaabbb</emphasis></para>
+    <para>La quantificatores avide concordara tanto como illos pote. Per exemplo, <emphasis>a+?</emphasis>concordara le aaa in <emphasis>aaabbb</emphasis></para>
   </note>
 
   <table>
-    <title>Regex - Quantificatores reluctante (non-avide) </title>
+    <title>Quantificatores Regex - Reluctante (non-avide)</title>
 
     <tgroup align="left" cols="2" rowsep="1">
       <colspec align="left" colnum="1"/>
@@ -417,7 +417,7 @@
         <row>
           <entry>X??</entry>
 
-          <entry>X, un vice o nullo del toto</entry>
+          <entry>X, un vice o non del toto</entry>
         </row>
 
         <row>
@@ -436,7 +436,7 @@
   </table>
 
   <note>
-    <para>le quantificatores non-avide concordara ut pauco illos pote. Per exemplo, <emphasis>a+?</emphasis> concordara le prime <emphasis>a</emphasis> in <emphasis>aaabbb</emphasis></para>
+    <para>Le quantificatores non-avide concordara assi pauc quam illos pote. Per exemplo, <emphasis>a+?</emphasis> concordara le prime <emphasis>a</emphasis> in <emphasis>aaabbb</emphasis></para>
   </note>
 
   <table>
@@ -482,7 +482,7 @@
         <primary>Expressiones regular</primary> <secondary>Exemplos de uso</secondary>
       </indexterm></title>
 
-    <para>Plure instrumentos interactive son disponibile pro disveloppar e essayar le expressiones regular. Illos generalmente seque circa le mesme modello (pro un exemplo ex le Probator del Expression Eegular vide in sequito): le expression regular (entrata summe) analyse le texto de recerca (Cassa de texto in le medio) , que rende le occurrentias, monstrate in le Cassa de texto resultato.</para>
+    <para>Plure instrumentos interactive son disponibile pro disveloppar e essayar le expressiones regular. Illos seque generalmente multo le mesme schema (Per un exemplo ex le Probator de Expression Regular vide in sequito): le expression regular (entrata vertice) analyse le texto de recerca (Cassa del texto in le medio) , que rende le occurrentias, monstrate in le cassa de Taxo resultato.</para>
 
     <figure id="regerx.tester">
       <title>Probator de Regex </title>
@@ -498,9 +498,9 @@
       </mediaobject>
     </figure>
 
-    <para>Vide <ulink url="http://weitz.de/regex-coach/">Le Regex Coach</ulink> versiones de un application autonome pro Windows, Linux e FreeBSD. Isto es identic al exemplo precedente.</para>
+    <para>Vide <ulink url="http://weitz.de/regex-coach/">Le Repetitor Regex</ulink> pro le versiones de un application autonome in Windows, Linux, FreeBSD. Isto es identic al exemplo precedente.</para>
 
-    <para>Un sympathic collection de casos regex utile pote esser trovate in <application>OmegaT</application> ipse (vide Optiones &gt; Segmentation). Le lista sequente include expressiones que tu pote trovar utile quando recerca per le memoria de traduction:</para>
+    <para>Un amabile collection de casos regex utile pote esser discoperte trovate in <application>OmegaT</application> ipse (vide Optiones &gt; Segmentation). Le lista sequente include expressiones que tu pote trovar utile quando cerca per le memoria de traduction:</para>
 
     <table>
       <title>Regex - Exemplos de expressiones regular in le traductiones</title>
@@ -526,25 +526,25 @@
           <row>
             <entry>[\.,]\s*[\.,]+</entry>
 
-            <entry>virgula o un periodo, sequite per spatios e etsi un altere virgula o periodo</entry>
+            <entry>un virgula o un periodo, sequite per spatios e ancora un altere virgula o periodo</entry>
           </row>
 
           <row>
-            <entry>Re OmegaT - introduction \s+$</entry>
+            <entry>\. \s+$</entry>
 
-            <entry>spatios extra post le puncto  al fin del linea</entry>
+            <entry>spatios extra post le periodo al fin del linea</entry>
           </row>
 
           <row>
             <entry>\s+a\s+[aeiou]</entry>
 
-            <entry>Anglese: le parolas que initia con vocales deberea generalmente esser precedite per &quot;an&quot; e non per &quot;a&quot;</entry>
+            <entry>Anglese: parolas, incipiente con le vocales, deberea generalmente esser precedite per &quot;an&quot;, non &quot;a&quot;</entry>
           </row>
 
           <row>
             <entry>\s+an\s+[^aeiou]</entry>
 
-            <entry>Anglese: le mesme controlo del precedente, ma concernente consonantes (&quot;a&quot; e non &quot;an&quot;)</entry>
+            <entry>Anglese: le mesme controlo quam ante, ma re le consonantes (&quot;a&quot;, non &quot;an&quot;)</entry>
           </row>
 
           <row>
@@ -556,7 +556,7 @@
           <row>
             <entry>\.[A-Z]</entry>
 
-            <entry>Periodo, sequite per un littera majuscule - possibilemente un spatio es mancante inter le periodo e le initio de un nove phrase?</entry>
+            <entry>Periodo, sequite per un littera majuscule - possibilemente un spatio es mancante inter le periodo e le initio de un phrase nove?</entry>
           </row>
 
           <row>

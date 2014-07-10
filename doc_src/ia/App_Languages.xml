@@ -5,17 +5,17 @@
     <primary>Linguas</primary>
   </indexterm>
   <indexterm class="singular">
-    <primary>Codices del lingua ISO</primary>
+    <primary>Codices ISO del lingua</primary>
   </indexterm>
   <indexterm class="singular">
     <primary>Projecto</primary> <secondary>Proprietates</secondary> <seealso>Linguas</seealso>
   </indexterm>
   </title>
 
-  <para>Per favor controla le<ulink url="http://www.sil.org/ISO639-3/codes.asp"> Tabellas del codices ISO 639</ulink> pro informationes additional e recente re codices del lingua.</para>
+  <para>Per favor controla le<ulink url="http://www.sil.org/ISO639-3/codes.asp"> Tabellas del codices ISO 639</ulink> pro informationes additional e recente, re le codices del lingua.</para>
 
   <table id="table.language.code.list">
-    <title>Lista del codices del linguas ISO 639-639/1-2</title>
+    <title>Lista del codices del linguas ISO 639-1/639-2</title>
     <tgroup cols="3" align="left" colsep="1" rowsep="1">
       <colspec align="left" colnum="1"/>
       <colspec align="left" colnum="2"/>
@@ -40,7 +40,7 @@
 	</row>
         <row>
 	  <entry>Afrikaans</entry>
-	  <entry>Afrikaans</entry>
+	  <entry>af</entry>
 	  <entry>afr</entry>
 	</row>
         <row>
@@ -154,7 +154,7 @@
 	  <entry>mya</entry>
 	</row>
         <row>
-	  <entry>catalano</entry>
+	  <entry>Catalan</entry>
 	  <entry>ca</entry>
 	  <entry>cat</entry>
 	</row>
@@ -230,7 +230,7 @@
 	</row>
         <row>
 	  <entry>Anglese</entry>
-	  <entry>en</entry>
+	  <entry>ia</entry>
 	  <entry>eng</entry>
 	</row>
         <row>
@@ -581,8 +581,7 @@
         <row>
 	  <entry>North Ndebele</entry>
 	  <entry>nd</entry>
-	  <entry>
-nde</entry>
+	  <entry>nde</entry>
 	</row>
         <row>
 	  <entry>Nepali</entry>
@@ -636,7 +635,7 @@ nde</entry>
 	</row>
         <row>
 	  <entry>Oriya</entry>
-	  <entry>o</entry>
+	  <entry>or</entry>
 	  <entry>ori</entry>
 	</row>
         <row>
@@ -841,7 +840,7 @@ nde</entry>
 	</row>
         <row>
 	  <entry>Tonga (Insulas Tonga)</entry>
-	  <entry>a</entry>
+	  <entry>to</entry>
 	  <entry>ton</entry>
 	</row>
         <row>

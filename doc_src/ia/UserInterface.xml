@@ -4,9 +4,9 @@
   <title>Le interfacie del usator </title>
 
   <section id="user.interface.items">
-    <title>La fenestra principal de OmegaT, altere fenestras e dialogos</title>
+    <title>La fenestra principal de OmegaT, altere fenestras e fenestras de dialogo</title>
 
-    <para>Le interfacie del usator  Additional fenestras es disponibile, como dialogos, usate pro cambiar le preparationes del projecto OmegaT. Le information in basso reassume le lor uso e  como illos es invocate:</para>
+    <para>Le fenestra principal de OmegaT contine le menu principal, le barra del stato e plure quadros. Additional fenestras son disponibile, como le fenestras de dialogo, usate pro cambiar le preparationes del projecto OmegaT. Le information in basso reassume lor uso e como illos son invocate:</para>
 
     <table colsep="0" rowsep="0">
       <title>La fenestra principal de OmegaT<indexterm class="singular">
@@ -20,19 +20,19 @@
 
         <tbody>
           <row>
-            <entry><guimenuitem>Quadro del Modifica (Editor)</guimenuitem></entry>
+            <entry><guimenuitem>Quadro Modifica (Editor)</guimenuitem></entry>
 
             <entry>ubi tu scribe e redige le traduction</entry>
           </row>
 
           <row>
-            <entry><guimenuitem>Quadro del concordantias</guimenuitem></entry>
+            <entry><guimenuitem>Quadro del Concordantias</guimenuitem></entry>
 
             <entry>expone le segmentos le plus simile ex le memorias de traduction</entry>
           </row>
 
           <row>
-            <entry><guimenuitem>Quadro del glossario</guimenuitem></entry>
+            <entry><guimenuitem>Quadro Glossario</guimenuitem></entry>
 
             <entry>monstra le terminologia trovate pro le articulos in le segmento currente</entry>
           </row>
@@ -78,7 +78,7 @@
           <row>
             <entry><guimenuitem><indexterm class="singular">
                 <primary>Vias breve</primary> <secondary>Validation del tag - Ctrl+T</secondary>
-              </indexterm>Fenestra Validation del tag</guimenuitem></entry>
+              </indexterm>Fenestra Validation del tags</guimenuitem></entry>
 
             <entry><para>Utilisate pro validar le tags (aperir Con <keycombo> <keycap>Ctrl</keycap> <keycap>T</keycap> </keycombo>, clauder con <keycap>Esc</keycap>)</para></entry>
           </row>
@@ -92,7 +92,7 @@
           </row>
 
           <row>
-            <entry><guimenuitem>Fenestra del statisticas</guimenuitem></entry>
+            <entry><guimenuitem>Fenestra del Statisticas</guimenuitem></entry>
 
             <entry><para>Utilisate pro aperir le  fenestra  con le statisticas del projecto, monstra los, usante <menuchoice> <guimenu><indexterm class="singular">
                     <primary>Menu Instrumentos</primary> <secondary>Statisticas</secondary>
@@ -136,7 +136,7 @@
                 <primary>Preparationes del Projecto</primary> <secondary>Typo del character</secondary>
               </indexterm></guimenuitem></entry>
 
-            <entry><para>Utilisate pro modificar le typo de character usate per <application>OmegaT</application> pro monstrar le terminos fonte, traduction, concordantias e glossario, (accede via <menuchoice> <guimenu>Optiones</guimenu> <guimenuitem>Typo de character...</guimenuitem> </menuchoice>, clauder via <keycap>Esc</keycap>)</para></entry>
+            <entry><para>Used to modify the font used by <application>OmegaT</application> to display source, translation, matches and glossary terms, (access via <menuchoice> <guimenu>Optiones</guimenu> <guimenuitem>Typo de character...</guimenuitem> </menuchoice>, clauder via <keycap>Esc</keycap>)</para></entry>
           </row>
 
           <row>
@@ -327,7 +327,7 @@
     <para>Ab un puncto de vista practic, the plus importante par de numeros is the secunde par: illo dice, quanto tu ha intertanto have facite, in relation al total o secunde numero. Le projecto in le exemplo es evidentemente finite, como omne le segmentos unic esseva jam rendite.</para>
 
     <section id="editor.pane">
-      <title>Quadro del Modifica (Editor)<indexterm class="singular">
+      <title>Quadro Modifica (Editor)<indexterm class="singular">
           <primary>Fenestras e quadros in OmegaT</primary> <secondary>Quadro del Modifica (Editor)</secondary>
         </indexterm></title>
 
@@ -525,11 +525,11 @@
     </section>
 
     <section>
-      <title>Quadro del glossario<indexterm class="singular">
-          <primary>Fenestras e quadros in OmegaT</primary> <secondary>Quadro del glossario</secondary>
+      <title>Quadro Glossario<indexterm class="singular">
+          <primary>Fenestras e quadros in OmegaT</primary> <secondary>Quadro del Glossario</secondary>
         </indexterm></title>
 
-      <para>Le quadro pro le Glossario permitte te de acceder a tu proprie collection de expressiones e terminologia specialistic que tu ha create in tu files glossario Illo monstra le traduction del terminos trovate in le segmento currente. Le segmento original in le exemplo sequente era “<emphasis>Commando del menu contexto</emphasis>”, como in le exemplo de concordantias partial precedente, e le terminos monstrate esseva trovate in le glossarios, disponibile (Microsoft's Term collection e Slovenian Linux User group Glossary).</para>
+      <para>Le quadro del Glossario permitte te de acceder tu proprie collection de expressiones e terminologia specialistic le qual tu ha create in tu files glossario. Illo monstra le traduction del terminos trovate in le segmento currente. Le segmento original in le exemplo sequente era “<emphasis>Commando del menu contexto</emphasis>”, como in le exemplo de concordantias partial precedente, e le terminos monstrate esseva trovate in le glossarios, disponibile (Microsoft's Term collection e Slovenian Linux User group Glossary).</para>
 
       <figure id="multiword.pane">
         <title><indexterm class="singular">

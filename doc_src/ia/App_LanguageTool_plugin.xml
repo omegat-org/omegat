@@ -30,11 +30,11 @@
   <section>
     <title>Installation e uso</title>
 
-    <para>Le plugin LanguageTool es includite in OmegaT. Illo essera usate automaticamente ab OmegaT si <guimenuitem>Optiones &gt; Corrector del lingua</guimenuitem> es marcate. Le regulas applicate (si ulle) dependera ex le lingua primari e final del projecto. Quando un regula es discatenate, le phrase correspondente essera sublineate in azur in le Editor (vide <emphasis>also </emphasis>e <emphasis>I didn't do nothing</emphasis> in le pictura anterior). Quando on passa le mouse supra le phrase sublineate, comparera un  explication.</para>
+    <para>Le plugin LanguageTool es includite in OmegaT. Illo essera usate automaticamente ab OmegaT si <guimenuitem>Optiones &gt; Corrector del lingua</guimenuitem> es marcate. Le regulas applicate (si ulle) dependera ex le lingua primari e final del projecto. Quando un regula es discatenate, le phrase correspondente essera sublineate in azur in le Editor (vide <emphasis>also </emphasis>e <emphasis>I didn't do nothing</emphasis> in le imagine precedente). Quando on passa le mouse supra le phrase sublineate, comparera un explication.</para>
     
 	<warning>
 		<title>Incompatibilitates</title>
-		<para>LanguageTool non laborara debitemente si un version vetule es trovate in le plica /plugin. Remove LanguageTool ex le plica /plugin ante lancear OmegaT.</para>
+		<para>LanguageTool non laborara debitemente si un version vetule es trovate in le plica /plugin. Remove LanguageTool ex le plica /plugin ante que tu lancea OmegaT.</para>
 	</warning>
 
   </section>

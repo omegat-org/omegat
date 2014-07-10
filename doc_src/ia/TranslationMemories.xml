@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
 <chapter id="chapter.translation.memories">
-  <title>Memorias de traduction<indexterm class="singular">
-      <primary>Memorias de traduction</primary>
+  <title>Memorias de traduction:<indexterm class="singular">
+      <primary>Memorias de traduction:</primary>
     </indexterm><indexterm class="singular">
       <primary>TMX</primary> <see>Memorias de traduction</see>
     </indexterm></title>
@@ -28,11 +28,11 @@
 
         <varlistentry>
           <term><indexterm class="singular">
-              <primary>Memorias de traduction</primary> <secondary>Plica principal del projecto</secondary>
-            </indexterm>plica principal del projecto</term>
+              <primary>Memorias de traduction</primary> <secondary>Classificator principal del projecto</secondary>
+            </indexterm>classificator principal del projecto</term>
 
           <listitem>
-            <para>Le plica principal del projecto contine 3 files tmx, <filename>project_name-omegat.tmx</filename>, <filename>project_name-level1.tmx</filename> e <filename>project_name-level2.tmx</filename> (project_name es le nomine de tu projecto).</para>
+            <para>Le classificator principal del projecto contine 3 files tmx, <filename>project_name-omegat.tmx</filename>, <filename>project_name-level1.tmx</filename> e <filename>project_name-level2.tmx</filename> (project_name es le nomine de tu projecto).</para>
 
             <itemizedlist>
               <listitem>
@@ -58,13 +58,13 @@
             </indexterm>tm</filename> </term>
 
           <listitem>
-            <para>Le plica /tm/ pote continer qualcunque numero de  memorias de traduction auxiliar - id es files tmx. On pote crear tal files in qualcunque del tres varietates ante indicate. On pote crear tal files in qualcunque del tres varietates ante indicate. Le melior cosa naturalmente es usar files TMX specific pro OmegaT (vide supra), de maniera que le es retenite le formato intra le segmento.</para>
+            <para>Le plica /tm/ pote continer qualcunque numero de  memorias de traduction auxiliar - id es files tmx. On pote crear tal files in qualcunque del tres varietates ante indicate. Nota que altere instrumentos CAT pote exportar (e importar) files tmx, habitualmente in omne le tres formas. Le melior cosa naturalmente es usar files TMX specific pro OmegaT (vide supra), de maniera que le es retenite le formato intra le segmento.</para>
 
             <para>Le contentos del memorias de traduction in le sub plica tm serve a generar suggestiones pro le texto(s) a traducer. Omne le textos, jam rendite e registrate in ille files, apparera inter le concordantias partial, si illo es satis simile al texto actualmente a render.</para>
 
             <para>Si le segmento original in uno del TMs auxiliar es identic al texto a render, OmegaT age ut definite in le fenestra de dialogo <menuchoice> <guimenu>Optiones</guimenu> <guimenuitem>Comportamento del Modifica...</guimenuitem> </menuchoice> . Per exemplo (si le preparation base es acceptate), le traduction ex le TM auxiliar es acceptate e prefixate con<emphasis> [fuzzy]</emphasis>, de maniera que le traductor pote revider le traductiones in un grado sequente e controlar si le segmentos etiquettate in iste modo, esseva rendite correctemente (Vide le capitulo <link linkend="chapter.translation.editing">Comportamento del Modifica</link>)<menuchoice> <guimenu>.</guimenu> </menuchoice> </para>
 
-            <para>Il pote occurrer, que le memorias de traduction, disponibile in le sub-classificator <filename>tm</filename>, contine segmentos con texto primari identic, ma textos final differente. Le files TMX es legite un linea al vice, ordinate, intra un file TMX date, secundo lor nomines e segmentos. Assi prevalera le ultime segmento con le identic texto fonte (Note: naturalmente ha plus senso evitar que isto occurre in le prime posto).</para>
+            <para>Il pote occurrer, que memorias de traduction, disponibile in le sub-classificator <filename>tm</filename>, contine segmentos con texto primari identic, ma textos final differente. Le files TMX es legite un linea al vice, ordinate secundo lor nomines e segmentos, intra un file TMX date. Assi prevalera le ultime segmento con le identic texto fonte (Note: naturalmente ha plus senso evitar que isto occurre in le prime posto).</para>
 
             <para>Nota que le le files TMX in le plica tm pote esser comprimite con gzip.<indexterm class="singular">
                 <primary>Memorias de traduction</primary> <secondary>comprimite</secondary>
@@ -90,7 +90,7 @@
             </indexterm>plicas tm/penalty-xxx</term>
 
           <listitem>
-            <para>Alicun vices, il es utile distinguer inter memorias de traduction de alte qualitate e  illos que es, a causa del stato del materia subjecto, del cliente, del revision, etc. es minus digne de fide. Pro le memorias de traduction in le plicas con nomine &quot;penalty-xxx&quot; (con xxx inter 0 e 100), le concordantias essera degradate secundo le nomine del plica: un concordantia 100% in omne de TMs, residente in un plica nominate Penalty-30 per exemplo, essera diminuite a un concordantia del 70%. Le penalitate refere a omne le tres percentual de concordantia: concordantias 75, 80, 90 essera in iste caso diminuite a 45, 50, 60.</para>
+            <para>Alicun vices, il es utile distinguer inter memorias de traduction de alte qualitate e illos que es, a causa del stato minus digne de fide del materia subjecto, del cliente, del revision, etc. Pro le memorias de traduction in le plicas con nomine &quot;penalty-xxx&quot; (con xxx inter 0 e 100), le concordantias essera degradate secundo le nomine del plica: un concordantia 100% in omne de TMs, residente in un plica nominate Penalty-30 per exemplo, essera diminuite a un concordantia del 70%. Le penalitate refere a omne le tres percentual de concordantia: concordantias 75, 80, 90 essera in iste caso diminuite a 45, 50, 60.</para>
           </listitem>
         </varlistentry>
       </variablelist>
@@ -143,7 +143,7 @@
     </section>
 
     <section id="tmx.files.and.language">
-      <title>files tmx e lingua<indexterm class="singular">
+      <title>files e lingua del tmx<indexterm class="singular">
           <primary>Memorias de traduction</primary> <secondary>Lingua</secondary>
         </indexterm></title>
 
@@ -337,7 +337,7 @@
         <primary>Memorias de traduction</primary> <secondary>Promover a segmentation per phrase</secondary>
       </indexterm></title>
 
-    <para>Le versiones initial de <application>OmegaT</application> esseva capabile de segmentar le Files fonte in paragraphos solmente e esseva inconsistente le numeration del tags de formattation in  files HTML e Open Document. <application>OmegaT</application> pote discoperir e promover tal files TMX al volo pro accrescer le qualitate del Concordantia partial e elevar melio tu traduction existente, sparniante te del travalio de facer isto manualmente.</para>
+    <para>Le versiones initial de <application>OmegaT</application> esseva capabile de segmentar le Files fonte in paragraphos solmente e esseva inconsistente le numeration del tags de formattation in files HTML e Open Document. <application>OmegaT</application> pote discoperir e promover tal files TMX al volo pro accrescer le qualitate del Concordantia partial e elevar melio tu traduction existente, sparniante te del travalio de facer isto manualmente.</para>
 
     <para>Un TMX del projecto essera promovite sol un vice, e essera scripte in forma promovite in le <filename>project-save.tmx</filename>; le files TMX hereditage essera promovite al volo cata vece le projecto es cargate. Nota que in alicun casos le cambios in le filtros de file in <application>OmegaT</application> pote ducer a segmentation totalmente differente; in consequentia, tu debera promover tu traduction manualmente in tal rar casos.</para>
   </section>

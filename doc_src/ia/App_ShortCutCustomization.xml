@@ -5,20 +5,20 @@
 
   <section id="ch04.shortcuts.customization">
     <title><indexterm class="singular">
-        <primary>Personalisation</primary><secondary> del vias breve</secondary>
+        <primary>Personalisation</primary><secondary></secondary> del vias breve
       </indexterm>Personalisation del vias breve</title>
 
     <para>On pote assignar nove vias breve al major parte del commandos que appare in le menu principal. Tu pote mutar le vias breve jam assignate e adder vias breve nove, ponente un file definition de via breve in tu plica del preferentias de OmegaT (vide <link linkend="user.files">Ubication del files del usator</link>).</para>
 
-    <para>Le file definition de via breve debe esser nominate <filename>MainMenuShortcuts.properties</filename> e debe continer al maximo un definition de via breve definition per cata linea. Le lineas vacue es acceptate e le lineas commento debera initiar con &quot;//&quot;. Alicun cosa post le &quot;//&quot; essera ignorate.</para>
+    <para>Le file definition del via breve debe esser nominate <filename>MainMenuShortcuts.properties</filename> e debe continer al maximo un definition de via breve per cata linea. Le lineas vacue es acceptate e le lineas commento debera initiar con &quot;//&quot;. Alicun cosa post le &quot;//&quot; usque al fin del linea, essera ignorate.</para>
 
     <para>Un vice que le file <filename>MainMenuShortcuts.properties</filename> es modificate, <application>OmegaT</application> debe esser reinitiate pro prender in conto le nove vias breve.</para>
 
     <para>Le syntaxe de definition del via breve es le sequente: <code>&lt;codice del commando del menu&gt;=&lt;via breve&gt;</code>, ubi <emphasis>&lt;codice del commando del menu&gt;</emphasis> es un codice ex le tabellas sequente e <emphasis>&lt;via breve&gt;</emphasis> es un combination de percussiones de clave specificate per le usator<footnote>
         <para>Le syntaxe complete pro le percussiones de clave (vias breve) es definite in le documentation sequente de Java 1.6 ex Oracle (al fundo del pagina): <ulink url="http://docs.oracle.com/javase/6/docs/api/javax/swing/KeyStroke.html">Java 1.6 vias breve e percussiones de clave,</ulink></para>
-      </footnote>.</para>
+      </footnote>U.</para>
 
-    <para>o&lt;via breve&gt; debe esser del forma sequente: 0 o plus <code>&lt;modificator&gt;</code> sequite per 0 o 1 <code>&lt;evento&gt;</code> sequite per 1 <code>&lt;clave&gt;</code>, ubi:<itemizedlist>
+    <para>&lt;via breve&gt; debe esser del forma sequente: 0 o plus <code>&lt;modificator&gt;</code> sequite per 0 o 1 <code>&lt;evento&gt;</code> sequite per 1 <code>&lt;clave&gt;</code>, ubi:<itemizedlist>
         <listitem>
           <para><code>&lt;modificator&gt;</code> pote esser: <emphasis>shift</emphasis>, <emphasis>control</emphasis>, <emphasis>ctrl</emphasis>, <emphasis>meta</emphasis><footnote>
               <para>Sur le Mac, le modificator <emphasis>meta</emphasis> debe esser utilisate pro specificar le clave <emphasis>commando</emphasis>.</para>
@@ -33,7 +33,7 @@
         <listitem>
           <para>e <code>&lt;clave&gt;</code> pote esser qualcunque clave disponibile sur tu claviero<footnote>
               <para>Le possibile evento del clave(s) es listate in le documentation sequente de Java 1.6 ex Oracle: <ulink url="http://docs.oracle.com/javase/6/docs/api/java/awt/event/KeyEvent.html">Java 1.6 vias breve e eventos de clave,</ulink>&gt;</para>
-            </footnote>.</para>
+            </footnote>U.</para>
         </listitem>
       </itemizedlist></para>
 
@@ -75,118 +75,26 @@
       <title>Menu del projecto</title>
 
       <tgroup cols="3" colsep="1">
-        <colspec align="left" colname="1" colnum="1"/>
-
-        <colspec align="left" colname="2" colnum="2"/>
-
-        <colspec align="left" colname="3" colnum="3"/>
+        <colspec align="left" colname="1" colnum="1"/><colspec align="left" colname="2" colnum="2"/><colspec align="left" colname="3" colnum="3"/>
 
         <thead>
-          <row>
-            <entry>Commando del Menu</entry>
-
-            <entry>Via breve base initial</entry>
-
-            <entry>Codice Commando del Menu</entry>
-          </row>
+          <row><entry>Menu Commando</entry><entry>Via breve initial</entry><entry>Codice Commando del Menu</entry></row>
         </thead>
 
         <tbody>
-          <row>
-            <entry>Nove</entry>
-
-            <entry/>
-
-            <entry>projectNewMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Aperi</entry>
-
-            <entry><keycap>Ctrl O</keycap></entry>
-
-            <entry>projectOpenMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Discarga Projecto de Equipa</entry>
-
-            <entry/>
-
-            <entry>projectTeamNewMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Importa Files Fonte...</entry>
-
-            <entry/>
-
-            <entry>projectImportMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Importa ex MediaWiki.</entry>
-
-            <entry/>
-
-            <entry>projectWikiImportMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Recarga</entry>
-
-            <entry><keycap>F5</keycap></entry>
-
-            <entry>projectReloadMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Claude</entry>
-
-            <entry><keycap>Ctrl+Shift+W</keycap></entry>
-
-            <entry>projectCloseMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Salva</entry>
-
-            <entry><keycap>Ctrl+S</keycap></entry>
-
-            <entry>projectSaveMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Crea documentos rendite</entry>
-
-            <entry><keycap>Ctrl+D</keycap></entry>
-
-            <entry>projectCompileMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Proprietates...</entry>
-
-            <entry><keycap>Ctrl+E</keycap></entry>
-
-            <entry>projectEditMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Files del Projecto...</entry>
-
-            <entry><keycap>Ctrl+L</keycap></entry>
-
-            <entry>viewFileListMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Quita</entry>
-
-            <entry><keycap>Ctrl+Q</keycap></entry>
-
-            <entry>projectExitMenuItem</entry>
-          </row>
+          <row><entry>Nove</entry><entry><keycap>Shift+Ctrl+N</keycap></entry><entry>projectNewMenuItem</entry></row>
+          <row><entry>Aperir</entry><entry><keycap>Ctrl O</keycap></entry><entry>projectOpenMenuItem</entry></row>
+          <row><entry>Discarga Projecto de Equipa</entry><entry/><entry>projectTeamNewMenuItem</entry></row>
+          <row><entry>Importar le files fontal ...</entry><entry/><entry>projectImportMenuItem</entry></row>
+          <row><entry>Importar ab MediaWiki ...</entry><entry/><entry>projectWikiImportMenuItem</entry></row>
+          <row><entry>Recargar</entry><entry><keycap>F5</keycap></entry><entry>projectReloadMenuItem</entry></row>
+          <row><entry>Claude</entry><entry><keycap>Ctrl+Shift+W</keycap></entry><entry>projectCloseMenuItem</entry></row>
+          <row><entry>Salva</entry><entry><keycap>Ctrl+S</keycap></entry><entry>projectSaveMenuItem</entry></row>
+          <row><entry>Crear le documentos rendite</entry><entry><keycap>Ctrl+D</keycap></entry><entry>projectCompileMenuItem</entry></row>
+          <row><entry>Crea le Documentos Rendite Actual</entry><entry><keycap>Shift+Ctrl+D</keycap></entry><entry>projectSingleCompileMenuItem</entry></row>
+          <row><entry>Proprietates...</entry><entry><keycap>Ctrl+E</keycap></entry><entry>projectEditMenuItem</entry></row>
+          <row><entry>Files del projecto ...</entry><entry><keycap>Ctrl+L</keycap></entry><entry>viewFileListMenuItem</entry></row>
+          <row><entry>Quita</entry><entry><keycap>Ctrl+Q</keycap></entry><entry>projectExitMenuItem</entry></row>
         </tbody>
       </tgroup>
     </table>
@@ -199,198 +107,40 @@
       <title>Menu Modifica</title>
 
       <tgroup cols="3" colsep="1">
-        <colspec align="left" colname="1" colnum="1"/>
-
-        <colspec align="left" colname="2" colnum="2"/>
-
-        <colspec align="left" colname="3" colnum="3"/>
+        <colspec align="left" colname="1" colnum="1"/><colspec align="left" colname="2" colnum="2"/><colspec align="left" colname="3" colnum="3"/>
 
         <thead>
-          <row>
-            <entry>Commando del Menu</entry>
-
-            <entry>Via breve base initial</entry>
-
-            <entry>Codice Commando del Menu</entry>
-          </row>
+          <row><entry>Menu Commando</entry><entry>Via breve initial</entry><entry>Codice Commando del Menu</entry></row>
         </thead>
 
         <tbody>
-          <row>
-            <entry>Disface le Ultime Action</entry>
-
-            <entry><keycap>Ctrl+Z</keycap></entry>
-
-            <entry>editUndoMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Reface le Ultime Action</entry>
-
-            <entry><keycap>Ctrl+Y</keycap></entry>
-
-            <entry>editRedoMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Reimplacia Con le Concordantia</entry>
-
-            <entry><keycap>Ctrl+R</keycap></entry>
-
-            <entry>editOverwriteTranslationMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Insere le Concordantia</entry>
-
-            <entry><keycap>Ctrl+I</keycap></entry>
-
-            <entry>editInsertTranslationMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Reimplacia con le Traduction Automatic</entry>
-
-            <entry><keycap>Ctrl+M</keycap></entry>
-
-            <entry>editOverwriteMachineTranslationMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Reimplacia Con le segmento Fonte</entry>
-
-            <entry><keycap>Shift+Ctrl+R</keycap></entry>
-
-            <entry>editOverwriteSourceMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>I&amp;nsere fonte</entry>
-
-            <entry><keycap>Shift+Ctrl+I</keycap></entry>
-
-            <entry>editInsertSourceMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Insere le Tags Original</entry>
-
-            <entry><keycap>Shift+Ctrl+T</keycap></entry>
-
-            <entry>editTagPainterMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Exporta le Selection</entry>
-
-            <entry><keycap>Shift Ctrl+C</keycap></entry>
-
-            <entry>editExportSelectionMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Crea Entrata del Glossario</entry>
-
-            <entry><keycap>Shift Ctrl G</keycap></entry>
-
-            <entry>editCreateGlossaryEntryMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Recerca le projecto...</entry>
-
-            <entry><keycap>Ctrl F</keycap></entry>
-
-            <entry>editFindInProjectMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Selige Concordantia Partial 1</entry>
-
-            <entry><keycap>Ctrl+1</keycap></entry>
-
-            <entry>editSelectFuzzy1MenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Selige Concordantia Partial 2</entry>
-
-            <entry><keycap>Ctrl+2</keycap></entry>
-
-            <entry>editSelectFuzzy2MenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Selige Concordantia Partial 3</entry>
-
-            <entry><keycap>Ctrl+3</keycap></entry>
-
-            <entry>editSelectFuzzy3MenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Selige Concordantia Partial 4</entry>
-
-            <entry><keycap>Ctrl+4</keycap></entry>
-
-            <entry>editSelectFuzzy4MenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Selige Concordantia Partial 5</entry>
-
-            <entry><keycap>Ctrl+5</keycap></entry>
-
-            <entry>editSelectFuzzy5MenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Cambia Character a Minuscule</entry>
-
-            <entry/>
-
-            <entry>lowerCaseMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Cambia Character a Majuscule</entry>
-
-            <entry/>
-
-            <entry>upperCaseMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Cambia prime Character a Majuscule</entry>
-
-            <entry/>
-
-            <entry>titleCaseMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Rota le formato Character a...</entry>
-
-            <entry><keycap>Shift+F3</keycap></entry>
-
-            <entry>cycleSwitchCaseMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Usa como Traduction base</entry>
-
-            <entry/>
-
-            <entry>editMultipleDefault</entry>
-          </row>
-
-          <row>
-            <entry>Crea un traduction alternativa</entry>
-
-            <entry/>
-
-            <entry>editMultipleAlternate</entry>
-          </row>
+          <row><entry>Disface le Ultime Action</entry><entry><keycap>Ctrl+Z</keycap></entry><entry>editUndoMenuItem</entry></row>
+          <row><entry>Reface le ultime action</entry><entry><keycap>Ctrl+Y</keycap></entry><entry>editRedoMenuItem</entry></row>
+          <row><entry>Reimplacia con le concordantia</entry><entry><keycap>Ctrl+R</keycap></entry><entry>editOverwriteTranslationMenuItem</entry></row>
+          <row><entry>Introduce le concordantia</entry><entry><keycap>Ctrl+I</keycap></entry><entry>editInsertTranslationMenuItem</entry></row>
+          <row><entry>Reimplacia con le traduction a Machina</entry><entry><keycap>Ctrl+M</keycap></entry><entry>editOverwriteMachineTranslationMenuItem</entry></row>
+          <row><entry>Reim&amp;placia con fonte</entry><entry><keycap>Shift+Ctrl+R</keycap></entry><entry>editOverwriteSourceMenuItem</entry></row>
+          <row><entry>I&amp;nsere fonte</entry><entry><keycap>Shift+Ctrl+I</keycap></entry><entry>editInsertSourceMenuItem</entry></row>
+          <row><entry>Insere le fonte e les tags</entry><entry><keycap>Shift+Ctrl+T</keycap></entry><entry>editTagPainterMenuItem</entry></row>
+          <row><entry>Insere le proxime tag mancante</entry><entry><keycap>Ctrl +T</keycap></entry><entry>editTagNextMissedMenuItem</entry></row>
+          <row><entry>Exporta le selection</entry><entry><keycap>Shift Ctrl+C</keycap></entry><entry>editExportSelectionMenuItem</entry></row>
+          <row><entry>Crea un entrata del glossario</entry><entry><keycap>Shift Ctrl G</keycap></entry><entry>editCreateGlossaryEntryMenuItem</entry></row>
+          <row><entry>Recerca le projecto...</entry><entry><keycap>Ctrl F</keycap></entry><entry>editFindInProjectMenuItem</entry></row>
+          <row><entry>Cerca e replacia...</entry><entry><keycap>Ctrl+K</keycap></entry><entry>editReplaceInProjectMenuItem</entry></row>
+          <row><entry>Selige le concordantia previe</entry><entry><keycap>Ctrl+↑</keycap></entry><entry>editSelectFuzzyPrevMenuItem</entry></row>
+          <row><entry>Selige le concordantia sequente</entry><entry><keycap>Ctrl+↓</keycap></entry><entry>editSelectFuzzyNextMenuItem</entry></row>
+          <row><entry>Selige le concordantia partial 1</entry><entry><keycap>Ctrl+1</keycap></entry><entry>editSelectFuzzy1MenuItem</entry></row>
+          <row><entry>Selige le concordantia partial 2</entry><entry><keycap>Ctrl+2</keycap></entry><entry>editSelectFuzzy2MenuItem</entry></row>
+          <row><entry>Selige le concordantia partial 3</entry><entry><keycap>Ctrl+3</keycap></entry><entry>editSelectFuzzy3MenuItem</entry></row>
+          <row><entry>Selige Concordantia Partial 4</entry><entry><keycap>Ctrl+4</keycap></entry><entry>editSelectFuzzy4MenuItem</entry></row>
+          <row><entry>Selige Concordantia Partial 5</entry><entry><keycap>Ctrl+5</keycap></entry><entry>editSelectFuzzy5MenuItem</entry></row>
+          <row><entry>Cambia Character a Minuscule</entry><entry/><entry>lowerCaseMenuItem</entry></row>
+          <row><entry>Cambia Character a Majuscule</entry><entry/><entry>upperCaseMenuItem</entry></row>
+          <row><entry>Cambia Character a Majuscule</entry><entry/><entry>titleCaseMenuItem</entry></row>
+          <row><entry>Rota le formato Character a...</entry><entry><keycap>Shift+F3</keycap></entry><entry>cycleSwitchCaseMenuItem</entry></row>
+          <row><entry>Usa como Traduction Base</entry><entry/><entry>editMultipleDefault</entry></row>
+          <row><entry>Crea un traduction alternativa</entry><entry/><entry>editMultipleAlternate</entry></row>
+          <row><entry>Register Identical Translation</entry><entry/><entry>editRegisterIdenticalMenuItem</entry></row>
 
         </tbody>
       </tgroup>
@@ -404,87 +154,22 @@
       <title>Vade al Menu</title>
 
       <tgroup cols="3" colsep="1">
-        <colspec align="left" colname="1" colnum="1"/>
-
-        <colspec align="left" colname="2" colnum="2"/>
-
-        <colspec align="left" colname="3" colnum="3"/>
+        <colspec align="left" colname="1" colnum="1"/><colspec align="left" colname="2" colnum="2"/><colspec align="left" colname="3" colnum="3"/>
 
         <thead>
-          <row>
-            <entry>Commando del Menu</entry>
-
-            <entry>Via breve base initial</entry>
-
-            <entry>Codice Commando del Menu</entry>
-          </row>
+          <row><entry>Menu Commando</entry><entry>Via breve initial</entry><entry>Codice Commando del Menu</entry></row>
         </thead>
 
         <tbody>
-          <row>
-            <entry>Al segmento sequente non rendite</entry>
-
-            <entry><keycap>Ctrl+U</keycap></entry>
-
-            <entry>gotoNextUntranslatedMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Al segmento sequente</entry>
-
-            <entry><keycap> Ctrl N </keycap> o <keycap>Enter</keycap>o <keycap> Tab</keycap> </entry>
-
-            <entry>gotoNextSegmentMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Al segmento previe</entry>
-
-            <entry><keycap>Ctrl+P</keycap> or <keycap>Ctrl+Enter</keycap> or
-            <keycap>Ctrl+Tab</keycap></entry>
-
-            <entry>gotoPreviousSegmentMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Al segmento numero ...</entry>
-
-            <entry><keycap>Ctrl+J</keycap></entry>
-
-            <entry>gotoSegmentMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>N&amp;ota sequente</entry>
-
-            <entry/>
-
-            <entry>gotoNextNoteMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>No&amp;ta previe</entry>
-
-            <entry/>
-
-            <entry>gotoPreviousNoteMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Avantia in historia...</entry>
-
-            <entry><keycap>Ctrl+Shift+N</keycap></entry>
-
-            <entry>gotoHistoryForwardMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Retrocede in historia...</entry>
-
-            <entry><keycap>Ctrl+Shift+P</keycap></entry>
-
-            <entry>gotoHistoryBackMenuItem</entry>
-          </row>
+          <row><entry>Al Segmento sequente Non Rendite</entry><entry><keycap>Ctrl+U</keycap></entry><entry>gotoNextUntranslatedMenuItem</entry></row>
+          <row><entry>Segmento Sequente Rendite</entry><entry><keycap>Shift+Ctrl+U</keycap></entry><entry>gotoNextTranslatedMenuItem</entry></row>
+          <row><entry>Al Segmento Sequente</entry><entry><keycap> Ctrl N </keycap> o <keycap>Enter</keycap>o <keycap> Tab</keycap> </entry><entry>gotoNextSegmentMenuItem</entry></row>
+          <row><entry>A le previe segmento</entry><entry><keycap>Ctrl+P</keycap> or <keycap>Ctrl+Enter</keycap> or <keycap>Ctrl+Tab</keycap></entry><entry>gotoPreviousSegmentMenuItem</entry></row>
+          <row><entry>A le segmento numero ...</entry><entry><keycap>Ctrl+J</keycap></entry><entry>gotoSegmentMenuItem</entry></row>
+          <row><entry>N&amp;ota sequente</entry><entry/><entry>gotoNextNoteMenuItem</entry></row>
+          <row><entry>Nota previe</entry><entry/><entry>gotoPreviousNoteMenuItem</entry></row>
+          <row><entry>Avante in chronologia...</entry><entry><keycap>Ctrl+Shift+N</keycap></entry><entry>gotoHistoryForwardMenuItem</entry></row>
+          <row><entry>Retro in chronologia...</entry><entry><keycap>Ctrl+Shift+P</keycap></entry><entry>gotoHistoryBackMenuItem</entry></row>
         </tbody>
       </tgroup>
     </table>
@@ -501,110 +186,25 @@
       </indexterm>
 
       <tgroup cols="3" colsep="1">
-        <colspec align="left" colname="1" colnum="1"/>
-
-        <colspec align="left" colname="2" colnum="2"/>
-
-        <colspec align="left" colname="3" colnum="3"/>
+        <colspec align="left" colname="1" colnum="1"/><colspec align="left" colname="2" colnum="2"/><colspec align="left" colname="3" colnum="3"/>
 
         <thead>
-          <row>
-            <entry>Commando del Menu</entry>
-
-            <entry>Via breve base initial</entry>
-
-            <entry>Codice Commando del Menu</entry>
-          </row>
+          <row><entry>Menu Commando</entry><entry>Via breve initial</entry><entry>Codice Commando del Menu</entry></row>
         </thead>
 
         <tbody>
-          <row>
-            <entry>Marca Segmentos Rendite</entry>
-
-            <entry/>
-
-            <entry>viewMarkTranslatedSegmentsCheckBoxMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Marca Segmentos Non rendite</entry>
-
-            <entry/>
-
-            <entry>viewMarkUntranslatedSegmentsCheckBoxMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Monstra Segmentos original</entry>
-
-            <entry/>
-
-            <entry>viewDisplaySegmentSourceCheckBoxMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Marca Segmentos Non Unic</entry>
-
-            <entry/>
-
-            <entry>viewMarkNonUniqueSegmentsCheckBoxMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Marca segmentos con (&amp;with) notas</entry>
-
-            <entry/>
-
-            <entry>viewMarkNotedSegmentsCheckBoxMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Marca le spatios &amp;Non-frangibile</entry>
-
-            <entry/>
-
-            <entry>viewMarkNBSPCheckBoxMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Marca (&amp;k) un Spatio blanc</entry>
-
-            <entry/>
-
-            <entry>viewMarkWhitespaceCheckBoxMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Marca algorithmo &amp;Bidirectional de controlo characteres</entry>
-
-            <entry/>
-
-            <entry>viewMarkBidiCheckBoxMenuItem</entry>
-          </row>
-
-           <row>
-            <entry>Modification Info/Displica Necun</entry>
-
-            <entry/>
-
-            <entry>viewDisplayModificationInfoNoneRadioButtonMenuItem</entry>
-          </row>
-
-         <row>
-            <entry>Modification Info/Displica Seligite</entry>
-
-            <entry/>
-
-            <entry>viewDisplayModificationInfoSelectedRadioButtonMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Modification Info/Displica Omne</entry>
-
-            <entry/>
-
-            <entry>viewDisplayModificationInfoAllRadioButtonMenuItem</entry>
-          </row>
+          <row><entry>Marca le segmentos Traducite</entry><entry/><entry>viewMarkTranslatedSegmentsCheckBoxMenuItem</entry></row>
+          <row><entry>Marca le Segmentos Non Rendite</entry><entry/><entry>viewMarkUntranslatedSegmentsCheckBoxMenuItem</entry></row>
+          <row><entry>Monstra le Segmentos Fonte</entry><entry/><entry>viewDisplaySegmentSourceCheckBoxMenuItem</entry></row>
+          <row><entry>Marca le Segmentos Non Unic</entry><entry/><entry>viewMarkNonUniqueSegmentsCheckBoxMenuItem</entry></row>
+          <row><entry>Marca le Segmentos con Notas</entry><entry/><entry>viewMarkNotedSegmentsCheckBoxMenuItem</entry></row>
+          <row><entry>Marca le Spatios Non-frangibile</entry><entry/><entry>viewMarkNBSPCheckBoxMenuItem</entry></row>
+          <row><entry>Marca le Spatio blanc</entry><entry/><entry>viewMarkWhitespaceCheckBoxMenuItem</entry></row>
+          <row><entry>Marca le Algorithmo Bidirectional de Controlo Characteres</entry><entry/><entry>viewMarkBidiCheckBoxMenuItem</entry></row>
+          
+          <row><entry>Modification Info/Displica Necun</entry><entry/><entry>viewDisplayModificationInfoNoneRadioButtonMenuItem</entry></row>
+          <row><entry>Modification Info/Displica Seligite</entry><entry/><entry>viewDisplayModificationInfoSelectedRadioButtonMenuItem</entry></row>
+          <row><entry>Modification Info/Displica Omne</entry><entry/><entry>viewDisplayModificationInfoAllRadioButtonMenuItem</entry></row>
         </tbody>
       </tgroup>
     </table>
@@ -617,46 +217,18 @@
       <title>Menu Instrumentos</title>
 
       <tgroup cols="3" colsep="1">
-        <colspec align="left" colname="1" colnum="1"/>
-
-        <colspec align="left" colname="2" colnum="2"/>
-
-        <colspec align="left" colname="3" colnum="3"/>
+        <colspec align="left" colname="1" colnum="1"/><colspec align="left" colname="2" colnum="2"/><colspec align="left" colname="3" colnum="3"/>
 
         <thead>
-          <row>
-            <entry>Commando del Menu</entry>
-
-            <entry>Via breve base initial</entry>
-
-            <entry>Codice Commando del Menu</entry>
-          </row>
+          <row><entry>Menu Commando</entry><entry>Via breve initial</entry><entry>Codice Commando del Menu</entry></row>
         </thead>
 
         <tbody>
-          <row>
-            <entry>&amp;Valida le tags</entry>
-
-            <entry><keycap>Ctrl +T</keycap></entry>
-
-            <entry>toolsValidateTagsMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Statistica</entry>
-
-            <entry/>
-
-            <entry>toolsShowStatisticsStandardMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Statistica Concordantia</entry>
-
-            <entry/>
-
-            <entry>toolsShowStatisticsMatchesMenuItem</entry>
-          </row>
+          <row><entry>Valida le tags</entry><entry><keycap>Shift+Ctrl+V</keycap></entry><entry>toolsValidateTagsMenuItem</entry></row>
+          <row><entry>Valida Tags pro le Actual Documento</entry><entry/><entry>toolsSingleValidateTagsMenuItem</entry></row>
+          <row><entry>Statistica</entry><entry/><entry>toolsShowStatisticsStandardMenuItem</entry></row>
+          <row><entry>Statistica del concordantias</entry><entry/><entry>toolsShowStatisticsMatchesMenuItem</entry></row>
+          <row><entry>Statistica del concordantias per File</entry><entry/><entry>toolsShowStatisticsMatchesPerFileMenuItem</entry></row>
         </tbody>
       </tgroup>
     </table>
@@ -669,158 +241,33 @@
       <title>Menu Optiones</title>
 
       <tgroup cols="3" colsep="1">
-        <colspec align="left" colname="1" colnum="1"/>
-
-        <colspec align="left" colname="2" colnum="2"/>
-
-        <colspec align="left" colname="3" colnum="3"/>
+        <colspec align="left" colname="1" colnum="1"/><colspec align="left" colname="2" colnum="2"/><colspec align="left" colname="3" colnum="3"/>
 
         <thead>
-          <row>
-            <entry>Commando del Menu</entry>
-
-            <entry>Via breve base initial</entry>
-
-            <entry>Codice Commando del Menu</entry>
-          </row>
+          <row><entry>Menu Commando</entry><entry>Via breve initial</entry><entry>Codice Commando del Menu</entry></row>
         </thead>
 
         <tbody>
-          <row>
-            <entry>Usa le clave &quot;Tabulation&quot; pro avantiar</entry>
-
-            <entry/>
-
-            <entry>optionsTabAdvanceCheckBoxMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Confirma semper (&amp;Always) le cessation</entry>
-
-            <entry/>
-
-            <entry>optionsAlwaysConfirmQuitCheckBoxMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Traduction automatic</entry>
-
-            <entry/>
-
-            <entry/>
-          </row>
-
-          <row>
-            <entry>TransTips/Enable Transtips</entry>
-
-            <entry/>
-
-            <entry>optionsTransTipsEnableMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>TransTips/Exact Match</entry>
-
-            <entry/>
-
-            <entry>optionsTransTipsExactMatchMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>F&amp;ont...</entry>
-
-            <entry/>
-
-            <entry>optionsFontSelectionMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>File &amp;Filtros...</entry>
-
-            <entry/>
-
-            <entry>optionsSetupFileFiltersMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Segmentation...</entry>
-
-            <entry/>
-
-            <entry>optionsSentsegMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Controlo orthographic...</entry>
-
-            <entry/>
-
-            <entry>optionsSpellCheckMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Comportamento del editor</entry>
-
-            <entry/>
-
-            <entry>optionsWorkflowMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Validation del tags...</entry>
-
-            <entry/>
-
-            <entry>optionsTagValidationMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Equipa... (Tea&amp;m)...</entry>
-
-            <entry/>
-
-            <entry>optionsTeamMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>TM&amp;Xs externe...</entry>
-
-            <entry/>
-
-            <entry>optionsExtTMXMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Vista...</entry>
-
-            <entry/>
-
-            <entry>optionsViewOptionsMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Sal&amp;vamento e Output...</entry>
-
-            <entry/>
-
-            <entry>optionsSaveOptionsMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Registrar se al Procurator (Proxy)...</entry>
-
-            <entry/>
-
-            <entry>optionsViewOptionsMenuLoginItem</entry>
-          </row>
-
-          <row>
-            <entry>Restaura le fenestra principal</entry>
-
-            <entry/>
-
-            <entry>optionsRestoreGUIMenuItem</entry>
-          </row>
+          <row><entry>Usa le clave pro avantiar</entry><entry/><entry>optionsTabAdvanceCheckBoxMenuItem</entry></row>
+          <row><entry>Confirma semper le cessation</entry><entry/><entry>optionsAlwaysConfirmQuitCheckBoxMenuItem</entry></row>
+          <row><entry>Traduction automatic</entry><entry/><entry/></row>
+          <row><entry>TransTips/Enable Transtips</entry><entry/><entry>optionsTransTipsEnableMenuItem</entry></row>
+          <row><entry>TransTips/Exact Match</entry><entry/><entry>optionsTransTipsExactMatchMenuItem</entry></row>
+          <row><entry>Auto-completamento/Glossario...</entry><entry/><entry>optionsAutoCompleteGlossaryMenuItem</entry></row>
+          <row><entry>Auto-completion/Auto-text...</entry><entry/><entry>optionsAutoCompleteAutoTextMenuItem</entry></row>
+          <row><entry>Auto-completion/Character Table...</entry><entry/><entry>optionsAutoCompleteCharTableMenuItem</entry></row>
+          <row><entry>Typo del character...</entry><entry/><entry>optionsFontSelectionMenuItem</entry></row>
+          <row><entry>Filtros del File...</entry><entry/><entry>optionsSetupFileFiltersMenuItem</entry></row>
+          <row><entry>Segmentation...</entry><entry/><entry>optionsSentsegMenuItem</entry></row>
+          <row><entry>Controlo orthographic...</entry><entry/><entry>optionsSpellCheckMenuItem</entry></row>
+          <row><entry>Comportamento del editor</entry><entry/><entry>optionsWorkflowMenuItem</entry></row>
+          <row><entry>Validation del tags...</entry><entry/><entry>optionsTagValidationMenuItem</entry></row>
+          <row><entry>Equipa... </entry><entry/><entry>optionsTeamMenuItem</entry></row>
+          <row><entry>TMXs externe...</entry><entry/><entry>optionsExtTMXMenuItem</entry></row>
+          <row><entry>Vista...</entry><entry/><entry>optionsViewOptionsMenuItem</entry></row>
+          <row><entry>Salvamento e Output...</entry><entry/><entry>optionsSaveOptionsMenuItem</entry></row>
+          <row><entry>Registrar se al Procurator (Proxy)...</entry><entry/><entry>optionsViewOptionsMenuLoginItem</entry></row>
+          <row><entry>Restaura le fenestra principal</entry><entry/><entry>optionsRestoreGUIMenuItem</entry></row>
         </tbody>
       </tgroup>
     </table>
@@ -833,38 +280,17 @@
       <title>Menu Adjuta</title>
 
       <tgroup cols="3" colsep="1">
-        <colspec align="left" colname="1" colnum="1"/>
-
-        <colspec align="left" colname="2" colnum="2"/>
-
-        <colspec align="left" colname="3" colnum="3"/>
+        <colspec align="left" colname="1" colnum="1"/><colspec align="left" colname="2" colnum="2"/><colspec align="left" colname="3" colnum="3"/>
 
         <thead>
-          <row>
-            <entry>Commando del Menu</entry>
-
-            <entry>Via breve base initial</entry>
-
-            <entry>Codice Commando del Menu</entry>
-          </row>
+          <row><entry>Menu Commando</entry><entry>Via breve initial</entry><entry>Codice Commando del Menu</entry></row>
         </thead>
 
         <tbody>
-          <row>
-            <entry>Manual del usator...</entry>
-
-            <entry><keycap>F1</keycap></entry>
-
-            <entry>helpContentsMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Circa...</entry>
-
-            <entry/>
-
-            <entry>[fuzzy]helpAboutMenuItem</entry>
-          </row>
+          <row><entry>Manual del Usator...</entry><entry><keycap>F1</keycap></entry><entry>helpContentsMenuItem</entry></row>
+          <row><entry>Circa...</entry><entry/><entry>helpAboutMenuItem</entry></row>
+          <row><entry>Last Changes...</entry><entry/><entry>helpLastChangesMenuItem</entry></row>
+          <row><entry>Registration...</entry><entry/><entry>helpLogMenuItem</entry></row>
         </tbody>
       </tgroup>
     </table>

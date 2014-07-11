@@ -1,5 +1,5 @@
 ----------------------------------------------------------------------
- OmegaT 3.1.3
+ OmegaT 3.1.3 (2014-07-11)
 ----------------------------------------------------------------------
   12 Enhancements
    4 Bug fixes
@@ -59,7 +59,7 @@ for each search result
   - No more warning about mixed content in the Java Web Start package. Requires
 ant-contrib. See details in /release/WebStart-specific/build.xml
 
-  - Text filter: some of the last lines of the target document could be lors
+  - Text filter: some of the last lines of the target document could be lost
 
   Localisation updates:
 

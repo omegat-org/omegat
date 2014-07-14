@@ -27,9 +27,7 @@ package org.omegat.util.gui;
 
 import java.awt.Component;
 
-import javax.swing.JLabel;
 import javax.swing.JList;
-import javax.swing.plaf.basic.BasicComboBoxRenderer;
 
 import org.omegat.util.Language;
 
@@ -39,7 +37,9 @@ import org.omegat.util.Language;
  * @author Maxym Mykhalchuk
  */
 @SuppressWarnings("serial")
-public class LanguageComboBoxRenderer extends BasicComboBoxRenderer {
+public class LanguageComboBoxRenderer extends DelegatingComboBoxRenderer {    
+    
+    @Override
     public Component getListCellRendererComponent(JList list, Object value, // value
                                                                             // to
                                                                             // display
@@ -47,10 +47,11 @@ public class LanguageComboBoxRenderer extends BasicComboBoxRenderer {
             boolean isSelected, // is the cell selected
             boolean cellHasFocus) // the list and the cell have the focus
     {
-        JLabel label = (JLabel) super.getListCellRendererComponent(list, value, index, isSelected,
-                cellHasFocus);
+        if (!(value instanceof Language)) {
+            throw new RuntimeException("Unsupported type in language combobox");
+        }
         Language lang = (Language) value;
-        label.setText(lang + " - " + lang.getDisplayName());
-        return label;
+        return super.getListCellRendererComponent(list, lang + " - " + lang.getDisplayName(),
+                index, isSelected, cellHasFocus);
     }
 }

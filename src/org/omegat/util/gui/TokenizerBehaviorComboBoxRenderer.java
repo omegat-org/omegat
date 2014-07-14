@@ -29,7 +29,6 @@ import java.awt.Component;
 import java.util.Map;
 
 import javax.swing.JList;
-import javax.swing.plaf.basic.BasicComboBoxRenderer;
 
 import org.apache.lucene.util.Version;
 
@@ -39,10 +38,10 @@ import org.apache.lucene.util.Version;
  * @author Aaron Madlon-Kay
  */
 @SuppressWarnings("serial")
-public class TokenizerBehaviorComboBoxRenderer extends BasicComboBoxRenderer {
+public class TokenizerBehaviorComboBoxRenderer extends DelegatingComboBoxRenderer {
 
-    private Map<Version, String> names;
-    private Version recommended;
+    private final Map<Version, String> names;
+    private final Version recommended;
     
     public TokenizerBehaviorComboBoxRenderer(Map<Version, String> names, Version recommended) {
         this.names = names;
@@ -54,15 +53,19 @@ public class TokenizerBehaviorComboBoxRenderer extends BasicComboBoxRenderer {
             int index, boolean isSelected, boolean cellHasFocus) {
         if (value instanceof Version) {
             String name = names.get((Version) value);
-            if (name == null) name = value.toString();
-            setText((Version)value == recommended ? "* " + name : name);
+            if (name == null) {
+                name = value.toString();
+            }
+            return super.getListCellRendererComponent(list,
+                    (Version)value == recommended ? "* " + name : name,
+                    index,
+                    isSelected,
+                    cellHasFocus);
         } else if (value instanceof String) {
-            setText((String)value);
-        } else if (value != null) {
+            return super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
+        } else {
             throw new RuntimeException("Unsupported type in tokenizer behavior combobox");
         }
-        
-        return this;
     }
 
 }

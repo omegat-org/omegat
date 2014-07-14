@@ -1,15 +1,15 @@
 ----------------------------------------------------------------------
  OmegaT 3.1.3 update 1
 ----------------------------------------------------------------------
-   0 Enhancement
-   1 Bug fix
+   1 Enhancement
+   0 Bug fix
    0 Localisation update
 ----------------------------------------------------------------------
 3.1.3 update 1 vs. 3.1.3
 
-  Bug fixes:
+  Enhancements:
 
-  - Fix combo box styling on OS X
+  - Improve combo box look and feel on OS X
 
 ----------------------------------------------------------------------
  OmegaT 3.1.3 (2014-07-11)

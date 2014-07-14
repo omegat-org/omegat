@@ -3,7 +3,7 @@
           with fuzzy matching, translation memory, keyword search, 
           glossaries, and translation leveraging into updated projects.
 
- Copyright (C) 2013 Aaron Madlon-Kay
+ Copyright (C) 2013-2014 Aaron Madlon-Kay
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -25,32 +25,24 @@
 
 package org.omegat.util.gui;
 
-import java.awt.Component;
-import javax.swing.DefaultListCellRenderer;
-
-import javax.swing.JList;
 
 /**
  * A class that renders a tokenizer combo box.
  * 
  * @author Aaron Madlon-Kay
  */
-@SuppressWarnings("serial")
-public class TokenizerComboBoxRenderer extends DelegatingComboBoxRenderer {
-    public Component getListCellRendererComponent(JList list, Object value, // value
-                                                                            // to
-                                                                            // display
-            int index, // cell index
-            boolean isSelected, // is the cell selected
-            boolean cellHasFocus) // the list and the cell have the focus
-    {
-        if (value instanceof Class<?>) {
+public class TokenizerComboBoxRenderer extends DelegatingComboBoxRenderer<Object> {
+    
+    @Override
+    protected Object getDisplayText(Object value) {
+    	if (value instanceof Class<?>) {
             Class<?> cls = (Class<?>) value;
-            return super.getListCellRendererComponent(list, cls.getSimpleName(), index, isSelected, cellHasFocus);
-        } else if (value instanceof String) {
-            return super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
-        } else {
-            throw new RuntimeException("Unsupported type in tokenizer combobox");
+            return cls.getSimpleName();
         }
+    	if (value instanceof String) {
+            return value;
+        }
+    	
+    	throw new RuntimeException("Unsupported type in tokenizer combobox");
     }
 }

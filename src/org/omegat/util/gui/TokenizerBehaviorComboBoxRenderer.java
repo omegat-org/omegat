@@ -25,10 +25,7 @@
 
 package org.omegat.util.gui;
 
-import java.awt.Component;
 import java.util.Map;
-
-import javax.swing.JList;
 
 import org.apache.lucene.util.Version;
 
@@ -37,8 +34,7 @@ import org.apache.lucene.util.Version;
  * 
  * @author Aaron Madlon-Kay
  */
-@SuppressWarnings("serial")
-public class TokenizerBehaviorComboBoxRenderer extends DelegatingComboBoxRenderer {
+public class TokenizerBehaviorComboBoxRenderer extends DelegatingComboBoxRenderer<Object> {
 
     private final Map<Version, String> names;
     private final Version recommended;
@@ -49,23 +45,19 @@ public class TokenizerBehaviorComboBoxRenderer extends DelegatingComboBoxRendere
     }
     
     @Override
-    public Component getListCellRendererComponent(JList list, Object value,
-            int index, boolean isSelected, boolean cellHasFocus) {
-        if (value instanceof Version) {
+    protected Object getDisplayText(Object value) {
+    	if (value instanceof Version) {
             String name = names.get((Version) value);
             if (name == null) {
                 name = value.toString();
             }
-            return super.getListCellRendererComponent(list,
-                    (Version)value == recommended ? "* " + name : name,
-                    index,
-                    isSelected,
-                    cellHasFocus);
-        } else if (value instanceof String) {
-            return super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
-        } else {
-            throw new RuntimeException("Unsupported type in tokenizer behavior combobox");
+            return (Version)value == recommended ? "* " + name : name;
         }
+    	if (value instanceof String) {
+            return value;
+        }
+    	
+        throw new RuntimeException("Unsupported type in tokenizer behavior combobox");
     }
 
 }

@@ -4,6 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
+ 			   2014 Aaron Madlon-Kay
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -25,33 +26,18 @@
 
 package org.omegat.util.gui;
 
-import java.awt.Component;
-
-import javax.swing.JList;
-
 import org.omegat.util.Language;
 
 /**
  * A class that renders a language combo box smartly.
  * 
  * @author Maxym Mykhalchuk
+ * @author Aaron Madlon-Kay
  */
-@SuppressWarnings("serial")
-public class LanguageComboBoxRenderer extends DelegatingComboBoxRenderer {    
+public class LanguageComboBoxRenderer extends DelegatingComboBoxRenderer<Language> {    
     
     @Override
-    public Component getListCellRendererComponent(JList list, Object value, // value
-                                                                            // to
-                                                                            // display
-            int index, // cell index
-            boolean isSelected, // is the cell selected
-            boolean cellHasFocus) // the list and the cell have the focus
-    {
-        if (!(value instanceof Language)) {
-            throw new RuntimeException("Unsupported type in language combobox");
-        }
-        Language lang = (Language) value;
-        return super.getListCellRendererComponent(list, lang + " - " + lang.getDisplayName(),
-                index, isSelected, cellHasFocus);
+    protected Object getDisplayText(Language value) {
+    	return value + " - " + value.getDisplayName();
     }
 }

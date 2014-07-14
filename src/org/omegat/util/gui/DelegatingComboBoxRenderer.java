@@ -26,6 +26,7 @@
 package org.omegat.util.gui;
 
 import java.awt.Component;
+
 import javax.swing.JComboBox;
 import javax.swing.JList;
 import javax.swing.ListCellRenderer;
@@ -36,11 +37,12 @@ import javax.swing.ListCellRenderer;
  * 
  * @author Aaron Madlon-Kay
  */
-abstract public class DelegatingComboBoxRenderer implements ListCellRenderer {
+abstract public class DelegatingComboBoxRenderer<T> implements ListCellRenderer {
 
     private final ListCellRenderer original = new JComboBox().getRenderer();
     
-    @Override
+    @SuppressWarnings("unchecked")
+	@Override
     public Component getListCellRendererComponent(JList list, Object value, // value
                                                                             // to
                                                                             // display
@@ -48,6 +50,9 @@ abstract public class DelegatingComboBoxRenderer implements ListCellRenderer {
             boolean isSelected, // is the cell selected
             boolean cellHasFocus) // the list and the cell have the focus
     {
-        return original.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
+        return original.getListCellRendererComponent(list, getDisplayText((T)value),
+        		index, isSelected, cellHasFocus);
     }
+    
+    protected abstract Object getDisplayText(T value);
 }

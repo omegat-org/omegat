@@ -139,5 +139,30 @@ public class NearString {
             b.append("%)");
             return b.toString();
         }
+        
+        public int primaryScore() {
+            return score;
+        }
+        
+        public int secondaryScore() {
+            return scoreNoStem;
+        }
+        
+        public int ternaryScore() {
+            return adjustedScore;
+        }
+        
+        public int compareTo(Scores s) {
+            if (primaryScore() != s.primaryScore()) {
+                return primaryScore() > s.primaryScore() ? 1 : -1;
+            }
+            if (secondaryScore() != s.secondaryScore()) {
+                return secondaryScore() > s.secondaryScore() ? 1 : -1;
+            }
+            if (ternaryScore() != s.ternaryScore()) {
+                return ternaryScore() > s.ternaryScore() ? 1 : -1;
+            }
+            return 0;
+        }
     }
 }

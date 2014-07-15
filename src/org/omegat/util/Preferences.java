@@ -290,6 +290,8 @@ public class Preferences {
     public static final String EXT_TMX_USE_SLASH = "ext_tmx_use_slash";
     /** External TMX options: Display template **/
     public static final String EXT_TMX_MATCH_TEMPLATE = "ext_tmx_match_template";
+    /** External TMX options: Fuzzy match sort key **/
+    public static final String EXT_TMX_SORT_KEY = "ext_tmx_sort_key";
 
     /** View options: Show all sources in bold */
     public static final String VIEW_OPTION_SOURCE_ALL_BOLD = "view_option_source_all_bold";

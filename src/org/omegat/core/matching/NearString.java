@@ -32,6 +32,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.omegat.core.data.EntryKey;
+import org.omegat.util.Preferences;
 import org.omegat.util.TMXProp;
 
 /**
@@ -46,6 +47,12 @@ public class NearString {
     public enum MATCH_SOURCE {
         MEMORY, TM, FILES
     };
+    
+    public enum SORT_KEY {
+        SCORE, SCORE_NO_STEM, ADJUSTED_SCORE
+    }
+    
+    private static SORT_KEY KEY = SORT_KEY.SCORE;
 
     public NearString(final EntryKey key, final String source, final String translation, MATCH_SOURCE comesFrom,
             final boolean fuzzyMark, final int nearScore, final int nearScoreNoStem, final int adjustedScore,
@@ -105,6 +112,10 @@ public class NearString {
     public boolean fuzzyMark;
 
     public Scores[] scores;
+    
+    public static void setSortKey(SORT_KEY key) {
+        KEY = key;
+    }
 
     /** matching attributes of near strEntry */
     public byte[] attr;
@@ -141,15 +152,39 @@ public class NearString {
         }
         
         public int primaryScore() {
-            return score;
+            switch(KEY) {
+            case SCORE:
+                return score;
+            case SCORE_NO_STEM:
+                return scoreNoStem;
+            case ADJUSTED_SCORE:
+            default:
+                return adjustedScore;
+            }
         }
         
         public int secondaryScore() {
-            return scoreNoStem;
+            switch(KEY) {
+            case SCORE:
+                return scoreNoStem;
+            case SCORE_NO_STEM:
+                return score;
+            case ADJUSTED_SCORE:
+            default:
+                return score;
+            }
         }
         
         public int ternaryScore() {
-            return adjustedScore;
+            switch(KEY) {
+            case SCORE:
+                return adjustedScore;
+            case SCORE_NO_STEM:
+                return adjustedScore;
+            case ADJUSTED_SCORE:
+            default:
+                return scoreNoStem;
+            }
         }
         
         public int compareTo(Scores s) {

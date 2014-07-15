@@ -250,7 +250,7 @@ public class ExternalTMXMatchesDialog extends JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void insertButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_insertButtonActionPerformed
-        matchesTemplate.insert(variablesList.getSelectedItem().toString(), matchesTemplate.getCaretPosition());
+        matchesTemplate.replaceSelection(variablesList.getSelectedItem().toString());
     }//GEN-LAST:event_insertButtonActionPerformed
 
     private void okButtonActionPerformed(java.awt.event.ActionEvent evt)// GEN-FIRST:event_okButtonActionPerformed

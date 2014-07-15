@@ -1190,7 +1190,7 @@ public class ProjectPropertiesDialog extends JDialog {
     }
     
     private void insertButtonActionPerformed(JTextArea area, JComboBox box) {
-        area.insert(box.getSelectedItem().toString(), area.getCaretPosition());
+        area.replaceSelection(box.getSelectedItem().toString());
     }
 
     private void updateUIText(JTextArea m_messageArea) {

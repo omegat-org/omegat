@@ -238,6 +238,7 @@ public class MainWindowMenuHandler {
         flushExportedSegments();
 
         new SwingWorker<Object, Void>() {
+            @Override
             protected Object doInBackground() throws Exception {
                 if (Core.getProject().isProjectLoaded()) {
                     // Save the list of learned and ignore words
@@ -257,6 +258,7 @@ public class MainWindowMenuHandler {
                 return null;
             }
 
+            @Override
             protected void done() {
                 try {
                     get();
@@ -477,6 +479,7 @@ public class MainWindowMenuHandler {
 
         // Make the dialog verify the input
         input.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            @Override
             public void propertyChange(java.beans.PropertyChangeEvent event) {
                 // Handle the event
                 if (dialog.isVisible() && (event.getSource() == input)) {
@@ -489,7 +492,7 @@ public class MainWindowMenuHandler {
                         return;
 
                     if (property.equals(JOptionPane.INPUT_VALUE_PROPERTY)
-                            || (property.equals(JOptionPane.VALUE_PROPERTY) && ((Integer) value).intValue() == JOptionPane.OK_OPTION)) {
+                            || (property.equals(JOptionPane.VALUE_PROPERTY) && ((Integer) value) == JOptionPane.OK_OPTION)) {
                         // Prevent the checks from being done twice
                         input.setValue(JOptionPane.UNINITIALIZED_VALUE);
 
@@ -506,7 +509,7 @@ public class MainWindowMenuHandler {
                         }
 
                         // Check if the user really entered a number
-                        int segmentNr = -1;
+                        int segmentNr;
                         try {
                             // Just parse it. If parsed, it's a number.
                             segmentNr = Integer.parseInt(inputValue);
@@ -811,7 +814,7 @@ public class MainWindowMenuHandler {
      * Opens the spell checking window
      */
     public void optionsSpellCheckMenuItemActionPerformed() {
-        Language currentLanguage = null;
+        Language currentLanguage;
         if (Core.getProject().isProjectLoaded()) {
             currentLanguage = Core.getProject().getProjectProperties().getTargetLanguage();
         } else {

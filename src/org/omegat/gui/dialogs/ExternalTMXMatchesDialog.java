@@ -150,7 +150,7 @@ public class ExternalTMXMatchesDialog extends JDialog {
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTH;
         gridBagConstraints.weightx = 1.0;
-        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+        gridBagConstraints.insets = new java.awt.Insets(4, 4, 0, 4);
         getContentPane().add(descriptionTextArea, gridBagConstraints);
 
         org.openide.awt.Mnemonics.setLocalizedText(okButton, OStrings.getString("BUTTON_OK")); // NOI18N
@@ -213,6 +213,7 @@ public class ExternalTMXMatchesDialog extends JDialog {
         gridBagConstraints.gridy = 8;
         gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.insets = new java.awt.Insets(4, 4, 0, 4);
         getContentPane().add(templateLabel, gridBagConstraints);
 
         jScrollPane1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -228,23 +229,24 @@ public class ExternalTMXMatchesDialog extends JDialog {
         gridBagConstraints.gridy = 9;
         gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
         getContentPane().add(jScrollPane1, gridBagConstraints);
 
         org.openide.awt.Mnemonics.setLocalizedText(variablesLabel, bundle.getString("EXT_TMX_MATCHES_TEMPLATE_VARIABLES")); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 10;
-        gridBagConstraints.gridwidth = 3;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.insets = new java.awt.Insets(0, 4, 4, 0);
         getContentPane().add(variablesLabel, gridBagConstraints);
 
         variablesList.setModel(new DefaultComboBoxModel(org.omegat.gui.matches.MatchesVarExpansion.MATCHES_VARIABLES));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 10;
-        gridBagConstraints.gridwidth = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 4, 0);
         getContentPane().add(variablesList, gridBagConstraints);
 
         org.openide.awt.Mnemonics.setLocalizedText(insertButton, bundle.getString("BUTTON_INSERT")); // NOI18N
@@ -256,8 +258,8 @@ public class ExternalTMXMatchesDialog extends JDialog {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 6;
         gridBagConstraints.gridy = 10;
-        gridBagConstraints.gridwidth = 3;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 4, 0);
         getContentPane().add(insertButton, gridBagConstraints);
 
         org.openide.awt.Mnemonics.setLocalizedText(sortMatchesLabel, OStrings.getString("EXT_TMX_SORT_KEY")); // NOI18N
@@ -265,12 +267,14 @@ public class ExternalTMXMatchesDialog extends JDialog {
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 0);
         getContentPane().add(sortMatchesLabel, gridBagConstraints);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.insets = new java.awt.Insets(4, 0, 4, 4);
         getContentPane().add(sortMatchesList, gridBagConstraints);
 
         pack();

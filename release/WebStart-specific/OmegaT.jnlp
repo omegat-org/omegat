@@ -37,9 +37,9 @@
 				<jar href="lib-mnemonics.jar" />
 				<jar href="swing-layout-1.0.4.jar" />
 				<jar href="vldocking-3.0.4.jar" />
-				<jar href="svnkit-1.7.5.jar" />
+				<jar href="svnkit-1.8.5.jar" />
 				<jar href="antlr-runtime-3.4.jar" />
-				<jar href="sqljet-1.1.3.jar" />
+				<jar href="sqljet-1.1.10.jar" />
 				<jar href="sequence-library-1.0.2.jar" />
 				<jar href="org.eclipse.jgit-2.1.0.201209190230-r.jar" />
 				<jar href="jsch-0.1.49.jar" />

@@ -28,7 +28,7 @@ jmyspell-core-1.0.0-beta-2-1.4.jar is distributed under the
 GNU Lesser General Public License version 2.1 and greater
 Sources are available in OmegaT sources, in the directory lib/sources
 
-svnkit-1.7.5.jar is distributed under the
+svnkit-1.8.5.jar is distributed under the
 TMate Open Source / Commercial dual license
 (required for SVNRemoteRepository.java)
 
@@ -38,7 +38,7 @@ sequence-library-1.0.2.jar is distributed under the Sequence Library License
 antlr-runtime-3.4.jar is distributed under the ANTLR 3 License
 (required for SVNRemoteRepository.java)
 
-sqljet-1.1.3.jar is distributed under the GNU General Public License version 2
+sqljet-1.1.10.jar is distributed under the GNU General Public License version 2
 (required for SVNRemoteRepository.java)
 Sources are available in OmegaT sources, in the directory lib/sources
 

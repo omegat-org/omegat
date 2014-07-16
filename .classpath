@@ -23,7 +23,6 @@
 	<classpathentry kind="lib" path="lib/tinysegmenter.jar"/>
 	<classpathentry kind="lib" path="lib/commons-lang-2.4.jar"/>
 	<classpathentry kind="lib" path="lib/commons-logging-1.1.1.jar"/>
-	<classpathentry kind="lib" path="lib/orion-ssh2-214.jar"/>
 	<classpathentry kind="lib" path="lib/LanguageTool/cjftransform-1.0.1.jar"/>
 	<classpathentry kind="lib" path="lib/LanguageTool/ictclas4j-1.0.1.jar"/>
 	<classpathentry kind="lib" path="lib/LanguageTool/jwordsplitter-3.4.jar"/>
@@ -43,5 +42,6 @@
 	<classpathentry kind="lib" path="lib/vldocking-3.0.4.jar"/>
 	<classpathentry kind="lib" path="lib/sqljet-1.1.10.jar"/>
 	<classpathentry kind="lib" path="lib/svnkit-1.8.5.jar"/>
+	<classpathentry kind="lib" path="lib/trilead-ssh2-1.0.0-build217.jar"/>
 	<classpathentry kind="output" path="classes"/>
 </classpath>

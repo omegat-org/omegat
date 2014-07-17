@@ -209,7 +209,6 @@ public class ProjectPropertiesDialog extends JDialog {
             m_sourceLocaleField.setMaximumRowCount(20);
         m_sourceLocaleField.setEditable(true);
         m_sourceLocaleField.setRenderer(new LanguageComboBoxRenderer());
-        m_sourceLocaleField.setSelectedItem(projectProperties.getSourceLanguage());
         bL.add(m_sourceLocaleField);
 
         // Target language label
@@ -227,7 +226,6 @@ public class ProjectPropertiesDialog extends JDialog {
             m_targetLocaleField.setMaximumRowCount(20);
         m_targetLocaleField.setEditable(true);
         m_targetLocaleField.setRenderer(new LanguageComboBoxRenderer());
-        m_targetLocaleField.setSelectedItem(projectProperties.getTargetLanguage());
         bL.add(m_targetLocaleField);
 
         // Tokenizers box
@@ -448,6 +446,9 @@ public class ProjectPropertiesDialog extends JDialog {
                 } catch (Exception ex) {
                 }
             }});
+        
+        m_sourceLocaleField.setSelectedItem(projectProperties.getSourceLanguage());
+        m_targetLocaleField.setSelectedItem(projectProperties.getTargetLanguage());
 
         centerBox.add(localesBox);
 

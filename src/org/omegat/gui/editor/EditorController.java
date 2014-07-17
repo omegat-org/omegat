@@ -2015,10 +2015,12 @@ public class EditorController implements IEditor {
     
     @Override
     public void waitForCommit(int timeoutSeconds) {
+        ForceCommitTimer timer;
         if (dirtyTime == -1) {
             return;
         } else {
-            new ForceCommitTimer(timeoutSeconds).start();
+            timer = new ForceCommitTimer(timeoutSeconds);
+            timer.start();
         }
         try {
             synchronized (this) {
@@ -2026,12 +2028,15 @@ public class EditorController implements IEditor {
             }
         } catch (InterruptedException e) {
             e.printStackTrace();
+        } finally {
+            timer.cancel();
         }
     }
     
     private class ForceCommitTimer extends Thread {
         
         private final long limit;
+        private boolean isCanceled = false;
         
         public ForceCommitTimer(int limit) {
             this.limit = limit * 1000000000L;
@@ -2039,7 +2044,7 @@ public class EditorController implements IEditor {
         
         @Override
         public void run() {
-            while (true) {
+            while (!isCanceled) {
                 long t = System.nanoTime() - dirtyTime;
                 if (t >= limit) {
                     UIThreadsUtil.executeInSwingThread(new Runnable() {
@@ -2061,6 +2066,10 @@ public class EditorController implements IEditor {
                     e.printStackTrace();
                 }
             }
+        }
+        
+        public void cancel() {
+            this.isCanceled = true;
         }
     }
 }

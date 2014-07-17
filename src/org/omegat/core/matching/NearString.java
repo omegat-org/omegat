@@ -6,7 +6,7 @@
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
                2009 Alex Buloichik
                2012 Thomas Cordonnier
-               2013 Aaron Madlon-Kay
+               2013-2014 Aaron Madlon-Kay
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -29,6 +29,7 @@
 package org.omegat.core.matching;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 import org.omegat.core.data.EntryKey;
@@ -51,8 +52,6 @@ public class NearString {
     public enum SORT_KEY {
         SCORE, SCORE_NO_STEM, ADJUSTED_SCORE
     }
-    
-    private static SORT_KEY KEY = SORT_KEY.SCORE;
 
     public NearString(final EntryKey key, final String source, final String translation, MATCH_SOURCE comesFrom,
             final boolean fuzzyMark, final int nearScore, final int nearScoreNoStem, final int adjustedScore,
@@ -112,10 +111,6 @@ public class NearString {
     public boolean fuzzyMark;
 
     public Scores[] scores;
-    
-    public static void setSortKey(SORT_KEY key) {
-        KEY = key;
-    }
 
     /** matching attributes of near strEntry */
     public byte[] attr;
@@ -150,54 +145,95 @@ public class NearString {
             b.append("%)");
             return b.toString();
         }
+    }
+    
+    public static class ScoresComparator implements Comparator<Scores> {
         
-        public int primaryScore() {
-            switch(KEY) {
-            case SCORE:
-                return score;
-            case SCORE_NO_STEM:
-                return scoreNoStem;
-            case ADJUSTED_SCORE:
-            default:
-                return adjustedScore;
-            }
+        private final SORT_KEY key;
+        
+        public ScoresComparator() {
+            this.key = Preferences.getPreferenceEnumDefault(Preferences.EXT_TMX_SORT_KEY, SORT_KEY.SCORE);
         }
         
-        public int secondaryScore() {
-            switch(KEY) {
-            case SCORE:
-                return scoreNoStem;
-            case SCORE_NO_STEM:
-                return score;
-            case ADJUSTED_SCORE:
-            default:
-                return score;
-            }
+        public ScoresComparator(SORT_KEY key) {
+            this.key = key;
         }
         
-        public int ternaryScore() {
-            switch(KEY) {
-            case SCORE:
-                return adjustedScore;
-            case SCORE_NO_STEM:
-                return adjustedScore;
-            case ADJUSTED_SCORE:
-            default:
-                return scoreNoStem;
+        @Override
+        public int compare(Scores o1, Scores o2) {
+            int s1 = primaryScore(o1);
+            int s2 = primaryScore(o2);
+            if (s1 != s2) {
+                return s1 > s2 ? 1 : -1;
             }
-        }
-        
-        public int compareTo(Scores s) {
-            if (primaryScore() != s.primaryScore()) {
-                return primaryScore() > s.primaryScore() ? 1 : -1;
+            s1 = secondaryScore(o1);
+            s2 = secondaryScore(o2);
+            if (s1 != s2) {
+                return s1 > s2 ? 1 : -1;
             }
-            if (secondaryScore() != s.secondaryScore()) {
-                return secondaryScore() > s.secondaryScore() ? 1 : -1;
-            }
-            if (ternaryScore() != s.ternaryScore()) {
-                return ternaryScore() > s.ternaryScore() ? 1 : -1;
+            s1 = ternaryScore(o1);
+            s2 = ternaryScore(o2);
+            if (s1 != s2) {
+                return s1 > s2 ? 1 : -1;
             }
             return 0;
+        }
+        
+        private int primaryScore(Scores s) {
+            switch(key) {
+            case SCORE:
+                return s.score;
+            case SCORE_NO_STEM:
+                return s.scoreNoStem;
+            case ADJUSTED_SCORE:
+            default:
+                return s.adjustedScore;
+            }
+        }
+        
+        private int secondaryScore(Scores s) {
+            switch(key) {
+            case SCORE:
+                return s.scoreNoStem;
+            case SCORE_NO_STEM:
+                return s.score;
+            case ADJUSTED_SCORE:
+            default:
+                return s.score;
+            }
+        }
+        
+        private int ternaryScore(Scores s) {
+            switch(key) {
+            case SCORE:
+                return s.adjustedScore;
+            case SCORE_NO_STEM:
+                return s.adjustedScore;
+            case ADJUSTED_SCORE:
+            default:
+                return s.scoreNoStem;
+            }
+        }
+    }
+    
+    public static class NearStringComparator implements Comparator<NearString> {
+        
+        private final SORT_KEY key;
+        private final ScoresComparator c;
+        
+        public NearStringComparator() {
+            this.key = Preferences.getPreferenceEnumDefault(Preferences.EXT_TMX_SORT_KEY, SORT_KEY.SCORE);
+            this.c = new ScoresComparator(key);
+        }
+        
+        public NearStringComparator(SORT_KEY key) {
+            this.key = key;
+            this.c = new ScoresComparator(key);
+        }
+        
+        @Override
+        public int compare(NearString o1, NearString o2) {
+            return c.compare(o1.scores[0], o2.scores[0]);
         }
     }
 }

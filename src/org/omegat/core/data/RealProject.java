@@ -67,8 +67,6 @@ import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
 import org.omegat.core.KnownException;
 import org.omegat.core.events.IProjectEventListener;
-import org.omegat.core.matching.NearString;
-import org.omegat.core.matching.NearString.SORT_KEY;
 import org.omegat.core.segmentation.Segmenter;
 import org.omegat.core.statistics.CalcStandardStatistics;
 import org.omegat.core.statistics.Statistics;
@@ -310,8 +308,6 @@ public class RealProject implements IProject {
             Core.setFilterMaster(new FilterMaster(filterMasterConfig));
             
             EntryKey.setIgnoreFileContext(filterMasterConfig.isIgnoreFileContext());
-            NearString.setSortKey(Preferences.getPreferenceEnumDefault(
-                    Preferences.EXT_TMX_SORT_KEY, SORT_KEY.SCORE));
 
             // set project specific segmentation rules if they exist
             Segmenter.srx = m_config.getProjectSRX();

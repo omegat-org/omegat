@@ -39,6 +39,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -49,7 +50,6 @@ import javax.swing.text.AttributeSet;
 import javax.swing.text.StyledDocument;
 
 import org.omegat.core.Core;
-import org.omegat.core.data.IProject;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.data.StringData;
 import org.omegat.core.data.TMXEntry;
@@ -133,6 +133,8 @@ public class MatchesTextArea extends EntryInfoThreadPane<List<NearString>> imple
     @Override
     protected void setFoundResult(final SourceTextEntry se, List<NearString> newMatches) {
         UIThreadsUtil.mustBeSwingThread();
+        
+        Collections.sort(newMatches, Collections.reverseOrder(new NearString.NearStringComparator()));
 
         activeMatch = -1;
         matches.clear();

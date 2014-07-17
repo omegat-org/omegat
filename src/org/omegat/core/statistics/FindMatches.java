@@ -48,7 +48,6 @@ import org.omegat.core.matching.FuzzyMatcher;
 import org.omegat.core.matching.ISimilarityCalculator;
 import org.omegat.core.matching.LevenshteinDistance;
 import org.omegat.core.matching.NearString;
-import org.omegat.core.matching.NearString.Scores;
 import org.omegat.core.segmentation.Rule;
 import org.omegat.core.segmentation.Segmenter;
 import org.omegat.tokenizer.ITokenizer;
@@ -404,7 +403,6 @@ public class FindMatches {
             final String tmxName, final String creator, final long creationDate, final String changer,
             final long changedDate, final List<TMXProp> tuProperties) {
         // find position for new data
-        Scores thisScore = new Scores(similarity, similarityNoStem, simAdjusted);
         int pos = 0;
         for (int i = 0; i < result.size(); i++) {
             NearString st = result.get(i);
@@ -418,15 +416,24 @@ public class FindMatches {
                         changer, changedDate, tuProperties));
                 return;
             }
-            
-            if (st.scores[0].compareTo(thisScore) < 0) {
+            if (st.scores[0].score < similarity) {
                 break;
             }
-            // Patch contributed by Antonio Vilei
-            String entrySource = srcText;
-            // text with the same case has precedence
-            if (similarity == 100 && !st.source.equals(entrySource) && source.equals(entrySource)) {
-                break;
+            if (st.scores[0].score == similarity) {
+                if (st.scores[0].scoreNoStem < similarityNoStem) {
+                    break;
+                }
+                if (st.scores[0].scoreNoStem == similarityNoStem) {
+                    if (st.scores[0].adjustedScore < simAdjusted) {
+                        break;
+                    }
+                    // Patch contributed by Antonio Vilei
+                    String entrySource = srcText;
+                    // text with the same case has precedence
+                    if (similarity == 100 && !st.source.equals(entrySource) && source.equals(entrySource)) {
+                        break;
+                    }
+                }
             }
             pos = i + 1;
         }

@@ -56,8 +56,10 @@ public class TokenizerBehaviorComboBoxRenderer extends DelegatingComboBoxRendere
     	if (value instanceof String) {
             return value;
         }
-    	
-        throw new RuntimeException("Unsupported type in tokenizer behavior combobox");
+    	if (value != null) {
+    		throw new RuntimeException("Unsupported type in tokenizer behavior combobox");
+    	}
+    	return null;
     }
 
 }

@@ -92,6 +92,7 @@ import org.omegat.util.gui.UIThreadsUtil;
 import com.vlsolutions.swing.docking.DockingDesktop;
 import com.vlsolutions.swing.docking.event.DockableSelectionEvent;
 import com.vlsolutions.swing.docking.event.DockableSelectionListener;
+
 import org.omegat.gui.main.MainWindowUI;
 
 /**
@@ -168,6 +169,14 @@ public class EditorController implements IEditor {
     private Component entriesFilterControlComponent;
 
     private SegmentExportImport segmentExportImport;
+    
+    /**
+     * Indicates, in nanoseconds, the last time a keypress was input.
+     * This is reset to -1 upon commit or entering a segment.
+     * Used by {@link ForceCommitTimer} to tell if the user is still
+     * typing or not.
+     */
+    private long dirtyTime = -1;
 
     public EditorController(final MainWindow mainWindow) {
         this.mw = mainWindow;
@@ -619,6 +628,8 @@ public class EditorController implements IEditor {
 
         // fire event about new segment activated
         CoreEvents.fireEntryActivated(ste);
+        
+        dirtyTime = -1;
     }
     
     private void setMenuEnabled() {
@@ -651,6 +662,7 @@ public class EditorController implements IEditor {
             return;
         }
         if (doc.isEditMode()) {
+            dirtyTime = System.nanoTime();
             m_docSegList[displayedEntryIndex].onActiveEntryChanged();
 
             SwingUtilities.invokeLater(new Runnable() {
@@ -849,6 +861,7 @@ public class EditorController implements IEditor {
         if (newTrans != null) {
             commitAndDeactivate(null, newTrans);
         }
+        dirtyTime = -1;
     }
 
     void commitAndDeactivate(ForceTranslation forceTranslation, String newTrans) {
@@ -953,6 +966,11 @@ public class EditorController implements IEditor {
                 }
             }.execute();
         }
+        
+        synchronized (this) {
+            notifyAll();
+        }
+        dirtyTime = -1;
     }
 
     /**
@@ -1992,6 +2010,57 @@ public class EditorController implements IEditor {
          */
         public static CaretPosition startOfEntry() {
             return new CaretPosition(0);
+        }
+    }
+    
+    @Override
+    public void waitForCommit(int timeoutSeconds) {
+        if (dirtyTime == -1) {
+            return;
+        } else {
+            new ForceCommitTimer(timeoutSeconds).start();
+        }
+        try {
+            synchronized (this) {
+                wait();
+            }
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    private class ForceCommitTimer extends Thread {
+        
+        private final long limit;
+        
+        public ForceCommitTimer(int limit) {
+            this.limit = limit * 1000000000L;
+        }
+        
+        @Override
+        public void run() {
+            while (true) {
+                long t = System.nanoTime() - dirtyTime;
+                if (t >= limit) {
+                    UIThreadsUtil.executeInSwingThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            commitAndLeave();
+                        }
+                    });
+                    Core.getMainWindow().showStatusMessageRB("TEAM_SYNCHRONIZE");
+                    break;
+                } else if (t >= limit - 5000000000L) {
+                    Core.getMainWindow().showStatusMessageRB("TEAM_SYNCHRONIZE_COUNTDOWN", (limit - t) / 1000000000L);
+                } else {
+                    Core.getMainWindow().showStatusMessageRB("TEAM_SYNCHRONIZE_WAITING");
+                }
+                try {
+                    sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
         }
     }
 }

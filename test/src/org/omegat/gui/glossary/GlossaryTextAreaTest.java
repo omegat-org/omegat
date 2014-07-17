@@ -189,13 +189,6 @@ public class GlossaryTextAreaTest extends TestCore {
             public void removeFilter() {
             }
 
-            public void setEmptyTranslation(boolean flag) {
-            }
-
-            public void activateEntry(int preferredPosition) {
-                throw new UnsupportedOperationException("Not supported yet.");
-            }
-
             public void nextEntryWithNote() {
                 throw new UnsupportedOperationException("Not supported yet.");
             }
@@ -227,6 +220,10 @@ public class GlossaryTextAreaTest extends TestCore {
             }
 
             public void registerUntranslated() {
+            }
+            
+            @Override
+            public void waitForCommit(int timeoutSeconds) {   
             }
         });
     }

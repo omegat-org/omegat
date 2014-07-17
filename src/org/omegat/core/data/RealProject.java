@@ -140,6 +140,13 @@ public class RealProject implements IProject {
     private DirectoryMonitor tmMonitor;
     
     private DirectoryMonitor tmOtherLanguagesMonitor;
+    
+    /**
+     * Indicates when there is an ongoing save event. Saving might take a while during
+     * team sync: if a merge is required the save might be postponed indefinitely while we
+     * wait for the user to confirm the current segment.
+     */
+    private boolean isSaving = false;
 
     /**
      * Storage for all translation memories, which shouldn't be changed and saved, i.e. for /tm/*.tmx files,
@@ -639,6 +646,11 @@ public class RealProject implements IProject {
     }
     
     public synchronized void saveProject(boolean doTeamSync) {
+        if (isSaving) {
+            return;
+        }
+        isSaving = true;
+        
         Log.logInfoRB("LOG_DATAENGINE_SAVE_START");
         UIThreadsUtil.mustNotBeSwingThread();
 
@@ -682,6 +694,8 @@ public class RealProject implements IProject {
             Core.getAutoSave().enable();
         }
         Log.logInfoRB("LOG_DATAENGINE_SAVE_END");
+        
+        isSaving = false;
     }
 
     /**
@@ -851,12 +865,20 @@ public class RealProject implements IProject {
                 again = true;
                 headTMX = new ProjectTMX(m_config.getSourceLanguage(), m_config.getTargetLanguage(), m_config.isSentenceSegmentingEnabled(), projectTMXFile, null);
                 
-                SwingUtilities.invokeAndWait(new Runnable() {
-                    @Override
-                    public void run() {
-                        Core.getEditor().commitAndLeave();
-                    }
-                });
+                // We must wait for the user to finish committing the current translation before
+                // we can proceed. Otherwise there is the possibility of a silent, unrecoverable
+                // merge conflict:
+                //   1. Local user starts editing segment X.
+                //   2. Remote user commits and pushes a different translation for X.
+                //   3. Team sync starts before local user has finished editing.
+                //   4. Team sync finishes, with remote user's translation for X used
+                //      (no conflict detected because local user has not committed).
+                //   5. Local user commits translation, which overwrites remote user's
+                //      (no conflict detected because this is now a standard local edit).
+                // It is undesirable to simply forcibly commit the current translation because
+                // there are distracting visual and/or cursor-location jumps on commit and
+                // on the post-merge refresh.
+                Core.getEditor().waitForCommit(10);
                 
                 // Do 3-way merge of:
                 // Base: baseTMX

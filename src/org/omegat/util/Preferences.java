@@ -489,9 +489,9 @@ public class Preferences {
      *            default value for the key
      * @return preference value as enum
      */
-    public static <T extends Enum<T>> Enum<T> getPreferenceEnumDefault(String key, Enum<T> defaultValue) {
+    public static <T extends Enum<T>> T getPreferenceEnumDefault(String key, T defaultValue) {
         String val = getPreference(key);
-        Enum<T> r;
+        T r;
         try {
             r = Enum.valueOf(defaultValue.getDeclaringClass(), val);
         } catch (IllegalArgumentException ex) {

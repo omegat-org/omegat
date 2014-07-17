@@ -310,8 +310,8 @@ public class RealProject implements IProject {
             Core.setFilterMaster(new FilterMaster(filterMasterConfig));
             
             EntryKey.setIgnoreFileContext(filterMasterConfig.isIgnoreFileContext());
-            NearString.setSortKey(SORT_KEY.valueOf(Preferences.getPreferenceEnumDefault(
-                    Preferences.EXT_TMX_SORT_KEY, SORT_KEY.SCORE).name()));
+            NearString.setSortKey(Preferences.getPreferenceEnumDefault(
+                    Preferences.EXT_TMX_SORT_KEY, SORT_KEY.SCORE));
 
             // set project specific segmentation rules if they exist
             Segmenter.srx = m_config.getProjectSRX();

@@ -382,9 +382,9 @@ public class SearchWindowController {
         form.m_recursiveCB.setSelected(Preferences.isPreferenceDefault(Preferences.SEARCHWINDOW_RECURSIVE, true));
 
         // search type
-        SearchExpression.SearchExpressionType searchType = SearchExpression.SearchExpressionType
-                .valueOf(Preferences.getPreferenceEnumDefault(Preferences.SEARCHWINDOW_SEARCH_TYPE,
-                        SearchExpression.SearchExpressionType.EXACT).name());
+        SearchExpression.SearchExpressionType searchType = Preferences.getPreferenceEnumDefault(
+                Preferences.SEARCHWINDOW_SEARCH_TYPE,
+                SearchExpression.SearchExpressionType.EXACT);
         switch (searchType) {
         case EXACT:
         default:

@@ -738,9 +738,9 @@ public class EditorController implements IEditor {
 
         StatisticsInfo stat = project.getStatistics();
         StringBuilder pMsg = new StringBuilder(1024).append(" ");
-        final MainWindowUI.STATUS_BAR_MODE progressMode = MainWindowUI.STATUS_BAR_MODE.valueOf(
+        final MainWindowUI.STATUS_BAR_MODE progressMode =
                 Preferences.getPreferenceEnumDefault(Preferences.SB_PROGRESS_MODE,
-                        MainWindowUI.STATUS_BAR_MODE.DEFAULT).name());
+                        MainWindowUI.STATUS_BAR_MODE.DEFAULT);
         
         if (progressMode == MainWindowUI.STATUS_BAR_MODE.DEFAULT) {
             pMsg.append(translatedInFile).append("/").append(fi.entries.size()).append(" (")

@@ -134,9 +134,9 @@ public class MainWindowUI {
         mainWindow.progressLabel.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                STATUS_BAR_MODE progressMode = STATUS_BAR_MODE.valueOf(
-                        Preferences.getPreferenceEnumDefault(Preferences.SB_PROGRESS_MODE,
-                                STATUS_BAR_MODE.DEFAULT).name());
+                STATUS_BAR_MODE progressMode = Preferences.getPreferenceEnumDefault(
+                        Preferences.SB_PROGRESS_MODE,
+                        STATUS_BAR_MODE.DEFAULT);
                 progressMode = STATUS_BAR_MODE.values()[(progressMode.ordinal() + 1) % STATUS_BAR_MODE.values().length];
 
                 Preferences.setPreference(Preferences.SB_PROGRESS_MODE, progressMode);

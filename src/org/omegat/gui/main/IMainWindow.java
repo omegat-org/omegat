@@ -95,6 +95,20 @@ public interface IMainWindow {
      *            warning text parameters
      */
     void displayWarningRB(String warningKey, Object... params);
+    
+    /**
+     * Same as {@link #displayWarningRB(String, Object...)} but this will close the previous
+     * dialog if the dialog is still open and the supplied supercedesKey matches the previous
+     * dialog's key.
+     * 
+     * @param warningKey
+     *            warning message key in resource bundle
+     * @param supercedesKey
+     *            the key of the warning dialog to close, if still open
+     * @param params
+     *            warning text parameters
+     */
+    void displayWarningRB(String warningKey, String supercedesKey, Object... params);
 
     /**
      * Display error.

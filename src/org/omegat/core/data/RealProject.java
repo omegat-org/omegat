@@ -1741,7 +1741,7 @@ public class RealProject implements IProject {
     void setOnlineMode() {
         if (!isOnlineMode) {
             Log.logInfoRB("VCS_ONLINE");
-            Core.getMainWindow().displayWarningRB("VCS_ONLINE");
+            Core.getMainWindow().displayWarningRB("VCS_ONLINE", "VCS_OFFLINE");
         }
         isOnlineMode = true;
     }
@@ -1749,7 +1749,7 @@ public class RealProject implements IProject {
     void setOfflineMode() {
         if (isOnlineMode) {
             Log.logInfoRB("VCS_OFFLINE");
-            Core.getMainWindow().displayWarningRB("VCS_OFFLINE");
+            Core.getMainWindow().displayWarningRB("VCS_OFFLINE", "VCS_ONLINE");
         }
         isOnlineMode = false;
     }

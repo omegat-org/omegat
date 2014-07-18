@@ -106,6 +106,9 @@ public abstract class TestCore extends XMLTestCase {
 
             public void displayWarningRB(String warningKey, Object... params) {
             }
+            
+            public void displayWarningRB(String warningKey, String supercedesKey, Object... params) {
+            }
 
             public void showErrorDialogRB(String message, Object[] args, String title) {
             }

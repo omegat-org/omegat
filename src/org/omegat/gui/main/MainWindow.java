@@ -36,6 +36,7 @@ import java.awt.Font;
 import java.awt.Frame;
 import java.awt.HeadlessException;
 import java.awt.Image;
+import java.awt.Window;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.File;
@@ -49,6 +50,7 @@ import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
 import javax.swing.WindowConstants;
 
 import org.omegat.core.Core;
@@ -393,11 +395,21 @@ public class MainWindow extends JFrame implements IMainWindow {
     // /////////////////////////////////////////////////////////////
     // /////////////////////////////////////////////////////////////
     // display oriented code
+    
+    private JLabel lastDialogText;
+    private String lastDialogKey;
 
     /**
      * {@inheritDoc}
      */
-    public void displayWarningRB(final String warningKey, final Object... params) {
+    public void displayWarningRB(String warningKey, Object... params) {
+        displayWarningRB(warningKey, null, params);
+    };
+    
+    /**
+     * {@inheritDoc}
+     */
+    public void displayWarningRB(final String warningKey, final String supercedesKey, final Object... params) {
         UIThreadsUtil.executeInSwingThread(new Runnable() {
             public void run() {
                 String msg;
@@ -406,10 +418,20 @@ public class MainWindow extends JFrame implements IMainWindow {
                 } else {
                     msg = OStrings.getString(warningKey);
                 }
+                
+                if (supercedesKey != null && lastDialogText != null && supercedesKey.equals(lastDialogKey)) {
+                    Window w = SwingUtilities.getWindowAncestor(lastDialogText);
+                    if (w != null) {
+                        w.dispose();
+                    }
+                }
+                
+                lastDialogText = new JLabel(msg);
+                lastDialogKey = warningKey;
 
                 statusLabel.setText(msg);
-                String fulltext = msg;
-                JOptionPane.showMessageDialog(MainWindow.this, fulltext, OStrings.getString("TF_WARNING"),
+                
+                JOptionPane.showMessageDialog(MainWindow.this, lastDialogText, OStrings.getString("TF_WARNING"),
                         JOptionPane.WARNING_MESSAGE);
             }
         });

@@ -85,6 +85,10 @@ public class ConsoleWindow implements IMainWindow {
     }
 
     public void displayWarningRB(String message, Object... args) {
+        displayWarningRB(message, null, args);
+    }
+    
+    public void displayWarningRB(String message, String supercedesKey, Object... args) {
         System.err.println(StaticUtils.format(OStrings.getString(message), args));
     }
 

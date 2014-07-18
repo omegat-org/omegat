@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 3.1.4
 ----------------------------------------------------------------------
-   3 Enhancements
+   4 Enhancements
    0 Bug fix
    0 Localisation update
 ----------------------------------------------------------------------
@@ -21,6 +21,9 @@ tool or OmegaT 3.1.3.
 
   - When a team project gets online/offline, the last dialog box replaces
 the previous one, instead of piling up as was done previously
+
+  - In Options > External TMXs and in Project Properties, the variable
+insertions buttons replace selection instead of ignoring it
 
 ----------------------------------------------------------------------
  OmegaT 3.1.3 (2014-07-11)

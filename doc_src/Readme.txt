@@ -8,7 +8,7 @@ The creation of the documentation requires a number of tools:
 
 - DocBook XSL Stylesheets 1.75.2 ("dbk")
 - DocBook XML 4.5
-- fop 0.95
+- fop 1.1
 - libxml2 2-2.7.7
 - Saxon 6-5-5
 - Ant 1.7.1 or above
@@ -45,11 +45,11 @@ C:\Program Files\apache-ant
 Corresponding path:
 path=C:\Program Files\libxml2-2.7.7.win32\bin;C:\Program Files\apache-ant\bin
 
-fop-0.95 can be installed anywhere, usually in Program Files.
-C:\Program Files\fop-0.95
+fop-1.1 can be installed anywhere, usually in Program Files.
+C:\Program Files\fop-1.1
 
-The location of fop-0.95, dbk and Saxon must be set in doc_src_paths.xml, in the corresponding properties:
-    <property name="fop.home" value="C:\Program Files\fop-0.95" />
+The location of fop-1.1, dbk and Saxon must be set in doc_src_paths.xml, in the corresponding properties:
+    <property name="fop.home" value="C:\Program Files\fop-1.1" />
     <property name="dbk" value="c:\dbk" />
     <property name="saxon" value="C:\Program Files\saxon6-5-5\saxon.jar" />
 

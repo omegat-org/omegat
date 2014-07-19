@@ -28,6 +28,7 @@ package org.omegat.core.team;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.Collection;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -599,9 +600,11 @@ public class GITRemoteRepository implements IRemoteRepository {
                 provider.setCredentials(credentials);
                 CredentialsProvider.setDefault(provider);
             }
-            new LsRemoteCommand(repo).setRemote(url).call();
+            Collection<Ref> result = new LsRemoteCommand(repo).setRemote(url).call();
+            return !result.isEmpty();
         } catch (TransportException ex) {
-            if (ex.getMessage().endsWith("not authorized") || ex.getMessage().endsWith("Auth fail")) {
+            if (ex.getMessage().endsWith("not authorized") || ex.getMessage().endsWith("Auth fail")
+            		|| ex.getMessage().contains("Too many authentication failures")) {
                 throw new AuthenticationException(ex);
             }
             return false;
@@ -613,6 +616,5 @@ public class GITRemoteRepository implements IRemoteRepository {
         } finally {
             FileUtil.deleteTree(temp);
         }
-        return true;
     }
 }

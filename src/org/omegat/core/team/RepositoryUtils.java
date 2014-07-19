@@ -168,7 +168,7 @@ public class RepositoryUtils {
                             OStrings.getString(firstPass ? "TEAM_USERPASS_FIRST" : "TEAM_USERPASS_WRONG"),
                             usernameIsPreset);
                     if (!entered) {
-                        throw ex;
+                        throw new RuntimeException("User declined to enter credentials.", ex);
                     }
                     firstPass = false;
                 }

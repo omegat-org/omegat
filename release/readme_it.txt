@@ -1,4 +1,4 @@
-Questa traduzione è frutto del lavoro di Valter Mura, copyright© 2014 e revisione di Valter Mura e Carmelo Serraino copyright© 2014.
+﻿Questa traduzione è frutto del lavoro di Valter Mura, copyright© 2014 e revisione di Valter Mura e Carmelo Serraino copyright© 2014.
 
 ==============================================================================
   File Leggimi di OmegaT 3.0
@@ -232,7 +232,7 @@ Altri contributi:
 
 OmegaT usa le seguenti librerie:
   HTMLParser 1.6 di Somik Raha, Derrick Oswald et al (licenza LGPL)
-  VLDocking Framework 2.1.4 di VLSolutions (licenza CeCILL)
+  VLDocking Framework 3.0.4 (licenza LGPL)
   Hunspell di László Németh et al (licenza LGPL)
   JNA di Todd Fast, Timothy Wall et al (licenza LGPL)
   Swing-Layout 1.0.4 (licenza LGPL)
@@ -260,6 +260,7 @@ OmegaT usa le seguenti librerie:
   KoreanAnalyzer-3x-120223.jar (licenza Apache 2.0)
   SuperTMXMerge-for_OmegaT.jar (licenza LGPL)
   groovy-all-2.2.2.jar (licenza Apache 2.0)
+  slf4j (licenza MIT)
 
 ==============================================================================
  5.  OmegaT genera problemi? Si ha bisogno di assistenza?

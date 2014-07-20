@@ -10,7 +10,7 @@
  */
 
 // if FALSE only current file will be checked
-checkWholeProject = false
+checkWholeProject = true
 // 0 - segment number, 1 - rule, 2 - source, 3 - target
 defaultSortColumn = 1
 // if TRUE column will be sorted in reverse

@@ -1,11 +1,16 @@
 ----------------------------------------------------------------------
  OmegaT 3.1.4
 ----------------------------------------------------------------------
-   4 Enhancements
+   5 Enhancements
    0 Bug fix
    0 Localisation update
 ----------------------------------------------------------------------
 3.1.4 update vs. 3.1.3
+
+  Implemented requests:
+
+  - Enable Check whole project by default in check_rules.groovy 
+  https://sourceforge.net/p/omegat/feature-requests/1012/
 
   Enhancements:
 

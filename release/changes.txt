@@ -2,7 +2,7 @@
  OmegaT 3.1.4
 ----------------------------------------------------------------------
    6 Enhancements
-   0 Bug fix
+   1 Bug fix
    1 Localisation update
 ----------------------------------------------------------------------
 3.1.4 update vs. 3.1.3
@@ -12,7 +12,7 @@
   - Enable Check whole project by default in check_rules.groovy 
   https://sourceforge.net/p/omegat/feature-requests/1012/
 
-  Enhancements:
+  Other enhancements:
 
   - Improve combo box look and feel on OS X
 
@@ -31,6 +31,11 @@ the previous one, instead of piling up as was done previously
 insertions buttons replace selection instead of ignoring it
 
   - In team projects, the repository type detection is now more robust
+
+  Bug fixes:
+
+  - Minor cursor issue in team projects 
+  https://sourceforge.net/p/omegat/bugs/672/
 
   Localisation updates:
 

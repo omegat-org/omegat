@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 3.1.4
 ----------------------------------------------------------------------
-   5 Enhancements
+   6 Enhancements
    0 Bug fix
    1 Localisation update
 ----------------------------------------------------------------------
@@ -29,6 +29,8 @@ the previous one, instead of piling up as was done previously
 
   - In Options > External TMXs and in Project Properties, the variable
 insertions buttons replace selection instead of ignoring it
+
+  - In team projects, the repository type detection is now more robust
 
   Localisation updates:
 

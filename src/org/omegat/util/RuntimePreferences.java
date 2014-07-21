@@ -40,6 +40,9 @@ public class RuntimePreferences {
     private static String configDir;
 
     private static boolean projectLockingEnabled = true;
+    
+    /** Last opened project location save control **/
+    private static boolean locationSaveEnabled = true;
 
     public static boolean isQuietMode() {
         return quietMode;
@@ -63,5 +66,13 @@ public class RuntimePreferences {
 
     public static void setProjectLockingEnabled(boolean v) {
         projectLockingEnabled = v;
+    }
+
+    public static boolean isLocationSaveEnabled() {
+        return locationSaveEnabled;
+    }
+
+    public static void setLocationSaveEnabled(boolean v) {
+        locationSaveEnabled = v;
     }
 }

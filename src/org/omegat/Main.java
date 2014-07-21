@@ -164,6 +164,10 @@ public class Main {
         if (params.containsKey("disable-project-locking")) {
             RuntimePreferences.setProjectLockingEnabled(false);
         }
+        
+        if (params.containsKey("disable-location-save")) {
+            RuntimePreferences.setLocationSaveEnabled(false);
+        }
 
         Log.log("\n" + "===================================================================" + "\n"
                 + OStrings.getDisplayVersion() + " (" + new Date() + ") " + " Locale " + Locale.getDefault());

@@ -298,9 +298,11 @@ public class RealProject implements IProject {
             }
             isOnlineMode = onlineMode;
 
-            Preferences.setPreference(Preferences.CURRENT_FOLDER, new File(m_config.getProjectRoot())
-                    .getParentFile().getAbsolutePath());
-            Preferences.save();
+            if (RuntimePreferences.isLocationSaveEnabled()) {
+                Preferences.setPreference(Preferences.CURRENT_FOLDER, new File(m_config.getProjectRoot())
+                        .getParentFile().getAbsolutePath());
+                Preferences.save();
+            }
 
             Core.getMainWindow().showStatusMessageRB("CT_LOADING_PROJECT");
 
@@ -1653,7 +1655,7 @@ public class RealProject implements IProject {
         protected String getCurrentFile(){
             return currentFile;
         }
-        
+
         public TranslateFilesCallback() {
             super(m_config);
         }

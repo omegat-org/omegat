@@ -846,6 +846,7 @@ public class ProjectPropertiesDialog extends JDialog {
             m_dictRootField.setEnabled(false);
             m_locBrowse.setEnabled(false);
             m_locRootField.setEnabled(false);
+            m_srcExcludes.setEnabled(false);
         }
 
         updateUIText(m_messageArea);

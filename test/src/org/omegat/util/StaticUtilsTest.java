@@ -29,6 +29,7 @@ package org.omegat.util;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.regex.Pattern;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
@@ -107,5 +108,10 @@ public class StaticUtilsTest extends TestCase
     {
         if ( !"One Two Three Four Five".equals(StaticUtils.compressSpaces(" One Two\nThree   Four\r\nFive ")) ) fail("Space wrongly compressed");
         if ( !"Six seven".equals(StaticUtils.compressSpaces("Six\tseven")) ) fail("Space wrongly compressed");
+    }
+
+    public void testCompileFileMask() {
+        Pattern r = StaticUtils.compileFileMask("Ab1-&*/**");
+        assertEquals("Ab1\\-\\&[^/]*/.*", r.pattern());
     }
 }

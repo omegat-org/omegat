@@ -543,32 +543,30 @@ public class RealProject implements IProject {
         List<String> fileList = new ArrayList<String>(256);
         String srcRoot = m_config.getSourceRoot();
         String locRoot = m_config.getTargetRoot();
-        StaticUtils.buildDirList(fileList, new File(srcRoot));
-
-        for (String filename : fileList) {
-            String destFileName = locRoot + filename.substring(srcRoot.length());
-            File destFile = new File(destFileName);
-            if (!destFile.exists()) {
-                // target directory doesn't exist - create it
-                if (!destFile.mkdir()) {
-                    throw new IOException(OStrings.getString("CT_ERROR_CREATING_TARGET_DIR") + destFileName);
-                }
-            }
-        }
 
         // build translated files
         FilterMaster fm = Core.getFilterMaster();
 
         fileList.clear();
         StaticUtils.buildFileList(fileList, new File(srcRoot), true);
+        for (int i = 0; i < fileList.size(); i++) {
+            fileList.set(i, fileList.get(i).substring(m_config.getSourceRoot().length()));
+        }
+        StaticUtils.removeFilesByMasks(fileList, m_config.getSourceRootExcludes());
 
         TranslateFilesCallback translateFilesCallback = new TranslateFilesCallback();
 
-        for (String filename : fileList) {
+        for (String midName : fileList) {
             // shorten filename to that which is relative to src root
-            String midName = filename.substring(srcRoot.length());
             Matcher fileMatch = FILE_PATTERN.matcher(midName);
             if (fileMatch.matches()) {
+                File fn = new File(locRoot+midName);
+                if (!fn.getParentFile().exists()) {
+                    // target directory doesn't exist - create it
+                    if (!fn.getParentFile().mkdir()) {
+                        throw new IOException(OStrings.getString("CT_ERROR_CREATING_TARGET_DIR") + fn.getParentFile());
+                    }
+                }
                 Core.getMainWindow().showStatusMessageRB("CT_COMPILE_FILE_MX", midName);
                 translateFilesCallback.fileStarted(midName);
                 fm.translateFile(srcRoot, midName, locRoot, new FilterContext(m_config),
@@ -1068,6 +1066,7 @@ public class RealProject implements IProject {
         for (int i = 0; i < srcFileList.size(); i++) {
             srcFileList.set(i, srcFileList.get(i).substring(m_config.getSourceRoot().length()));
         }
+        StaticUtils.removeFilesByMasks(srcFileList, m_config.getSourceRootExcludes());
         StaticUtils.sortByList(srcFileList, getSourceFilesOrder());
 
         for (String filename : srcFileList) {

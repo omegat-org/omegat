@@ -15,6 +15,7 @@
 		<xs:complexType>
 			<xs:all>
 				<xs:element name="source_dir" type="xs:string"/>
+				<xs:element name="source_dir_excludes" minOccurs="0" type="masks"/>
 				<xs:element name="target_dir" type="xs:string"/>
 				<xs:element name="tm_dir" type="xs:string"/>
 				<xs:element name="glossary_dir" type="xs:string"/>
@@ -32,4 +33,10 @@
 			<xs:attribute name="version" type="xs:string" use="required"/>
 		</xs:complexType>
 	</xs:element>
+	<xs:complexType name="masks">
+		<xs:sequence>
+			<xs:element name="mask" type="xs:string" minOccurs="0"
+				maxOccurs="unbounded" />
+		</xs:sequence>
+	</xs:complexType>
 </xs:schema>

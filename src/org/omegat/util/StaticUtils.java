@@ -48,6 +48,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Enumeration;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 import java.util.jar.JarEntry;
@@ -312,6 +313,52 @@ public class StaticUtils {
                 return localCollator.compare(o1, o2);
             }
         });
+    }
+
+    /**
+     * Remove files by masks.
+     */
+    public static void removeFilesByMasks(List<String> lst, List<String> excludeMasks) {
+        // exclude by masks
+        for (String mask : excludeMasks) {
+            Pattern re = compileFileMask(mask);
+            for (Iterator<String> it = lst.iterator(); it.hasNext();) {
+                String fn = "/" + it.next();
+                if (re.matcher(fn).matches()) {
+                    it.remove();
+                }
+            }
+        }
+    }
+
+    static Pattern compileFileMask(String mask) {
+        StringBuilder m = new StringBuilder();
+        for (int i = 0; i < mask.length(); i++) {
+            char c = mask.charAt(i);
+            if (c >= 'A' && c <= 'Z') {
+                m.append(c);
+            } else if (c >= 'a' && c <= 'z') {
+                m.append(c);
+            } else if (c >= '0' && c <= '9') {
+                m.append(c);
+            } else if (c == '/') {
+                m.append(c);
+            } else if (c == '?') {
+                m.append('.');
+            } else if (c == '*') {
+                if (i + 1 < mask.length() && mask.charAt(i + 1) == '*') {
+                    // **
+                    m.append(".*");
+                    i++;
+                } else {
+                    // *
+                    m.append("[^/]*");
+                }
+            } else {
+                m.append('\\').append(c);
+            }
+        }
+        return Pattern.compile(m.toString());
     }
 
     /**

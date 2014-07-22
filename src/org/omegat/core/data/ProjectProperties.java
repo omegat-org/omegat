@@ -6,7 +6,7 @@
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
                2012 Guido Leenders, Didier Briel
                2013 Aaron Madlon-Kay, Yu Tang
-               2014 Aaron Madlon-Kay
+               2014 Aaron Madlon-Kay, Alex Buloichik
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -31,6 +31,9 @@ package org.omegat.core.data;
 import gen.core.filters.Filters;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import org.omegat.core.segmentation.SRX;
 import org.omegat.filters2.master.PluginUtils;
@@ -50,8 +53,12 @@ import org.omegat.util.StringUtil;
  * @author Didier Briel
  * @author Aaron Madlon-Kay
  * @author Yu Tang
+ * @author Alex Buloichik (alex73mail@gmail.com)
  */
 public class ProjectProperties {
+
+    public static final String[] DEFAULT_EXCLUDES = { "**/.svn/**", "**/CSV/**", "**/.cvs/**",
+            "**/desktop.ini", "**/Thumbs.db" };
 
     /**
      * Constructor for tests only.
@@ -64,6 +71,7 @@ public class ProjectProperties {
         setProjectName(projectDir.getCanonicalFile().getName());
         setProjectRoot(projectDir.getAbsolutePath() + File.separator);
         setSourceRoot(projectRoot + OConsts.DEFAULT_SOURCE + File.separator);
+        sourceRootExcludes.addAll(Arrays.asList(DEFAULT_EXCLUDES));
         setTargetRoot(projectRoot + OConsts.DEFAULT_TARGET + File.separator);
         setGlossaryRoot(projectRoot + OConsts.DEFAULT_GLOSSARY + File.separator);
         setWriteableGlossary(projectRoot + OConsts.DEFAULT_GLOSSARY + File.separator + OConsts.DEFAULT_W_GLOSSARY);
@@ -223,6 +231,10 @@ public class ProjectProperties {
         if (!StringUtil.isEmpty(sourceRoot)) {
             this.sourceRoot = sourceRoot;
         }
+    }
+
+    public List<String> getSourceRootExcludes() {
+        return sourceRootExcludes;
     }
 
     /**
@@ -452,6 +464,7 @@ public class ProjectProperties {
     private String projectName;
     private String projectRoot;
     private String sourceRoot;
+    private final List<String> sourceRootExcludes = new ArrayList<String>();
     private String targetRoot;
     private String glossaryRoot;
     private String writeableGlossaryFile;

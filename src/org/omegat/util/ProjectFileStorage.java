@@ -8,7 +8,7 @@
                2009 Didier Briel
                2012 Didier Briel, Aaron Madlon-Kay
                2013 Aaron Madlon-Kay, Guido Leenders
-               2014 Aaron Madlon-Kay
+               2014 Aaron Madlon-Kay, Alex Buloichik
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -30,11 +30,13 @@
 
 package org.omegat.util;
 
+import gen.core.project.Masks;
 import gen.core.project.Omegat;
 import gen.core.project.Project;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Arrays;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Marshaller;
@@ -85,10 +87,17 @@ public class ProjectFileStorage {
                 OConsts.DEFAULT_TARGET));
         result.setSourceRoot(computeAbsolutePath(m_root, om.getProject().getSourceDir(),
                 OConsts.DEFAULT_SOURCE));
+        result.getSourceRootExcludes().clear();
+        if (om.getProject().getSourceDirExcludes() != null) {
+            result.getSourceRootExcludes().addAll(om.getProject().getSourceDirExcludes().getMask());
+        } else {
+            // sourceRootExclude was not defined
+            result.getSourceRootExcludes().addAll(Arrays.asList(ProjectProperties.DEFAULT_EXCLUDES));
+        }
         result.setTMRoot(computeAbsolutePath(m_root, om.getProject().getTmDir(), OConsts.DEFAULT_TM));
         result.setGlossaryRoot(computeAbsolutePath(m_root, om.getProject().getGlossaryDir(),
                 OConsts.DEFAULT_GLOSSARY));
-        
+
         // Compute glossary file location
         String glossaryFile = om.getProject().getGlossaryFile();
         String glossaryDir = null;
@@ -146,6 +155,8 @@ public class ProjectFileStorage {
 
         om.getProject().setSourceDir(
                 computeRelativePath(m_root, props.getSourceRoot(), OConsts.DEFAULT_SOURCE));
+        om.getProject().setSourceDirExcludes(new Masks());
+        om.getProject().getSourceDirExcludes().getMask().addAll(props.getSourceRootExcludes());
         om.getProject().setTargetDir(
                 computeRelativePath(m_root, props.getTargetRoot(), OConsts.DEFAULT_TARGET));
         om.getProject().setTmDir(computeRelativePath(m_root, props.getTMRoot(), OConsts.DEFAULT_TM));

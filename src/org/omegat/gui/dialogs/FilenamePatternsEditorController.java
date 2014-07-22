@@ -31,10 +31,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.table.AbstractTableModel;
-import javax.swing.table.TableModel;
 
 import org.omegat.core.Core;
 import org.omegat.util.OStrings;
+import org.omegat.util.gui.DockingUI;
 
 /**
  * @author Alex Buloichik (alex73mail@gmail.com)
@@ -101,6 +101,7 @@ public class FilenamePatternsEditorController {
                 model.fireTableDataChanged();
             }
         });
+        DockingUI.displayCentered(dialog);
 
         dialog.setVisible(true);
 

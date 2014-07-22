@@ -43,6 +43,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.AbstractAction;
 import javax.swing.Action;
@@ -152,6 +154,8 @@ public class ProjectPropertiesDialog extends JDialog {
     /** Project filters. */
     private Filters filters;
 
+    private List<String> srcExcludes = new ArrayList<String>();
+
     /**
      * Creates a dialog to create a new project / edit folders of existing one.
      * 
@@ -170,6 +174,7 @@ public class ProjectPropertiesDialog extends JDialog {
         this.srx = projectProperties.getProjectSRX();
         this.dialogType = dialogTypeValue;
         filters = FilterMaster.loadConfig(projectProperties.getProjectInternal());
+        srcExcludes.addAll(projectProperties.getSourceRootExcludes());
 
         Border emptyBorder = new EmptyBorder(2, 0, 2, 0);
         Box centerBox = Box.createVerticalBox();
@@ -557,6 +562,9 @@ public class ProjectPropertiesDialog extends JDialog {
         bSrc.setBorder(emptyBorder);
         bSrc.add(m_srcRootLabel);
         bSrc.add(Box.createHorizontalGlue());
+        JButton m_srcExcludes = new JButton();
+        Mnemonics.setLocalizedText(m_srcExcludes, OStrings.getString("PP_BUTTON_BROWSE_SRC_EXCLUDES"));
+        bSrc.add(m_srcExcludes);
         JButton m_srcBrowse = new JButton();
         Mnemonics.setLocalizedText(m_srcBrowse, OStrings.getString("PP_BUTTON_BROWSE_SRC"));
         bSrc.add(m_srcBrowse);
@@ -668,6 +676,15 @@ public class ProjectPropertiesDialog extends JDialog {
         m_srcBrowse.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 doBrowseDirectoy(1, m_srcRootField);
+            }
+        });
+        m_srcExcludes.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                List<String> result = FilenamePatternsEditorController.show(srcExcludes);
+                if (result != null) {
+                    srcExcludes.clear();
+                    srcExcludes.addAll(result);
+                }
             }
         });
 
@@ -1173,6 +1190,8 @@ public class ProjectPropertiesDialog extends JDialog {
 
         projectProperties.setProjectSRX(srx);
         projectProperties.setProjectFilters(filters);
+        projectProperties.getSourceRootExcludes().clear();
+        projectProperties.getSourceRootExcludes().addAll(srcExcludes);
 
         m_dialogCancelled = false;
         setVisible(false);

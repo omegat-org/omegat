@@ -32,27 +32,22 @@ import java.awt.BorderLayout;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
 import java.awt.event.WindowEvent;
 import java.util.ArrayList;
-import java.util.HashSet;
+import java.util.EnumSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
 import javax.swing.AbstractAction;
 import javax.swing.Action;
 import javax.swing.Box;
 import javax.swing.JButton;
-import javax.swing.JComponent;
 import javax.swing.JEditorPane;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
-import javax.swing.KeyStroke;
-
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
 import org.omegat.core.data.PrepareTMXEntry;
@@ -68,6 +63,7 @@ import org.omegat.util.OStrings;
 import org.omegat.util.PatternConsts;
 import org.omegat.util.Preferences;
 import org.omegat.util.StaticUtils;
+import org.omegat.util.gui.StaticUIUtils;
 import org.openide.awt.Mnemonics;
 
 /**
@@ -86,16 +82,14 @@ public class TagValidationFrame extends JFrame {
 
         // set window size & position
         initWindowLayout();
-
-        // Handle escape key to close the window
-        KeyStroke escape = KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0, false);
+        
         Action escapeAction = new AbstractAction() {
+            @Override
             public void actionPerformed(ActionEvent e) {
                 doCancel();
             }
         };
-        getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(escape, "ESCAPE");
-        getRootPane().getActionMap().put("ESCAPE", escapeAction);
+        StaticUIUtils.setEscapeAction(this, escapeAction);
 
         // Configure close button
         JButton closeButton = new JButton();
@@ -106,6 +100,7 @@ public class TagValidationFrame extends JFrame {
         m_fixAllButton = new JButton();
         Mnemonics.setLocalizedText(m_fixAllButton, OStrings.getString("BUTTON_FIX_ALL"));
         m_fixAllButton.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent e) {
                 if (JOptionPane.YES_OPTION != JOptionPane.showConfirmDialog(Core.getMainWindow().getApplicationFrame(),
                         StaticUtils.format(OStrings.getString("TAG_FIX_ALL_WARNING"), m_numFixableErrors),
@@ -134,6 +129,7 @@ public class TagValidationFrame extends JFrame {
         getContentPane().add(bbut, BorderLayout.SOUTH);
 
         CoreEvents.registerFontChangedEventListener(new IFontChangedEventListener() {
+            @Override
             public void onFontChanged(Font newFont) {
                 TagValidationFrame.this.setFont(newFont);
             }
@@ -142,7 +138,8 @@ public class TagValidationFrame extends JFrame {
     }
 
     /** Call this to set OmegaT-wide font for the Tag Validation window. */
-    public void setFont(Font f) {
+    @Override
+    public final void setFont(Font f) {
         super.setFont(f);
         if (isVisible())
             update();
@@ -180,6 +177,7 @@ public class TagValidationFrame extends JFrame {
         Preferences.setPreference(Preferences.TAGVWINDOW_Y, getY());
     }
 
+    @Override
     public void processWindowEvent(WindowEvent w) {
         int evt = w.getID();
         if (evt == WindowEvent.WINDOW_CLOSING || evt == WindowEvent.WINDOW_CLOSED) {
@@ -320,7 +318,7 @@ public class TagValidationFrame extends JFrame {
 
         m_numFixableErrors = 0;
 
-        StringBuffer output = new StringBuffer();
+        StringBuilder output = new StringBuilder();
 
         output.append("<html>\n");
         output.append("<head>\n");
@@ -362,7 +360,7 @@ public class TagValidationFrame extends JFrame {
                     report.ste.getProtectedParts(), report.transErrors));
             output.append("</td>");
             output.append("<td width=\"10%\">");
-            Set<TagError> allErrors = new HashSet<TagError>(report.srcErrors.values());
+            Set<TagError> allErrors = EnumSet.copyOf(report.srcErrors.values());
             allErrors.addAll(report.transErrors.values());
             for (TagError err : allErrors) {
                 output.append(colorize(ErrorReport.localizedTagError(err), err));
@@ -517,7 +515,7 @@ public class TagValidationFrame extends JFrame {
     /** The URL prefix given to "Fix" links in the Tag Validation window */
     public static final String FIX_URL_PREFIX = "fix:";
     private String message;
-    private JEditorPane m_editorPane;
+    private final JEditorPane m_editorPane;
     private List<ErrorReport> m_errorList;
     private JButton m_fixAllButton;
     private int m_numFixableErrors;

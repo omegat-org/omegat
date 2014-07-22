@@ -29,20 +29,16 @@ package org.omegat.gui.stat;
 import java.awt.BorderLayout;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
-import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
 import javax.swing.AbstractAction;
-import javax.swing.Action;
 import javax.swing.BorderFactory;
-import javax.swing.JComponent;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
-import javax.swing.KeyStroke;
 import javax.swing.SwingUtilities;
 
 import org.omegat.core.Core;
@@ -51,6 +47,7 @@ import org.omegat.core.statistics.CalcStandardStatistics;
 import org.omegat.core.threads.LongProcessThread;
 import org.omegat.util.OStrings;
 import org.omegat.util.gui.DockingUI;
+import org.omegat.util.gui.StaticUIUtils;
 
 /**
  * Display match statistics window and save data to file.
@@ -107,16 +104,13 @@ public class StatisticsWindow extends JDialog {
         output.setFont(new Font("Monospaced", Font.PLAIN, Core.getMainWindow().getApplicationFont().getSize()));
         p.add(new JScrollPane(output), BorderLayout.CENTER);
 
-        setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-        KeyStroke escape = KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0, false);
-        Action escapeAction = new AbstractAction() {
+        StaticUIUtils.setEscapeAction(this, new AbstractAction() {
+            @Override
             public void actionPerformed(ActionEvent e) {
                 thread.fin();
                 dispose();
             }
-        };
-        getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(escape, "ESCAPE");
-        getRootPane().getActionMap().put("ESCAPE", escapeAction);
+        });
 
         addWindowListener(new WindowAdapter() {
             @Override
@@ -131,6 +125,7 @@ public class StatisticsWindow extends JDialog {
 
     public void showProgress(final int percent) {
         SwingUtilities.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 progressBar.setValue(percent);
                 progressBar.setString(percent + "%");
@@ -140,6 +135,7 @@ public class StatisticsWindow extends JDialog {
 
     public void displayData(final String result) {
         SwingUtilities.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 output.setText(result);
             }
@@ -148,6 +144,7 @@ public class StatisticsWindow extends JDialog {
 
     public void appendData(final String result) {
         SwingUtilities.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 output.append(result);
             }
@@ -156,6 +153,7 @@ public class StatisticsWindow extends JDialog {
 
     public void finishData() {
         SwingUtilities.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 progressBar.setValue(100);
                 progressBar.setString("");

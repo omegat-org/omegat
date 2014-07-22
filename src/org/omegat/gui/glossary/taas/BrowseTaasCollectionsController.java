@@ -34,7 +34,6 @@ import java.awt.Component;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
 import java.io.File;
 import java.text.DateFormat;
 import java.text.MessageFormat;
@@ -44,11 +43,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
-import javax.swing.AbstractAction;
-import javax.swing.Action;
-import javax.swing.JComponent;
 import javax.swing.JTable;
-import javax.swing.KeyStroke;
 import javax.swing.RowSorter;
 import javax.swing.SortOrder;
 import javax.swing.SwingWorker;
@@ -64,6 +59,7 @@ import org.omegat.util.Language;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
 import org.omegat.util.gui.DockingUI;
+import org.omegat.util.gui.StaticUIUtils;
 
 /**
  * Controller for TaaS download UI.
@@ -86,10 +82,13 @@ public class BrowseTaasCollectionsController {
 
         dialog.labelStatus.setText(OStrings.getString("TAAS_STATUS_LIST"));
         new SwingWorker<List<TaasCollection>, Void>() {
+            
+            @Override
             protected List<TaasCollection> doInBackground() throws Exception {
                 return TaaSPlugin.client.getCollectionsList();
             }
 
+            @Override
             protected void done() {
                 try {
                     List<TaasCollection> list = get();
@@ -121,20 +120,13 @@ public class BrowseTaasCollectionsController {
         }.execute();
         dialog.btnDownload.addActionListener(DOWNLOAD_LISTENER);
 
-        // Handle escape key to close the window
-        KeyStroke escape = KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0, false);
-        Action escapeAction = new AbstractAction() {
-            public void actionPerformed(ActionEvent e) {
-                dialog.dispose();
-            }
-        };
+        StaticUIUtils.setEscapeClosable(dialog);
         dialog.btnClose.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent e) {
                 dialog.dispose();
             }
         });
-        dialog.getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(escape, "ESCAPE");
-        dialog.getRootPane().getActionMap().put("ESCAPE", escapeAction);
 
         DockingUI.displayCentered(dialog);
 
@@ -218,6 +210,7 @@ public class BrowseTaasCollectionsController {
             final boolean[] marks = ((CollectionsTable) dialog.tableCollections.getModel()).marks;
 
             new SwingWorker<Object, String>() {
+                @Override
                 protected Object doInBackground() throws Exception {
                     for (int i = 0; i < list.size(); i++) {
                         TaasCollection c = list.get(i);
@@ -244,6 +237,7 @@ public class BrowseTaasCollectionsController {
                 /**
                  * Show collection name.
                  */
+                @Override
                 protected void process(List<String> chunks) {
                     for (String n : chunks) {
                         dialog.labelStatus.setText(MessageFormat.format(
@@ -251,6 +245,7 @@ public class BrowseTaasCollectionsController {
                     }
                 }
 
+                @Override
                 protected void done() {
                     try {
                         get();
@@ -304,6 +299,7 @@ public class BrowseTaasCollectionsController {
             return list.size();
         }
 
+        @Override
         public Class<?> getColumnClass(int columnIndex) {
             switch (columnIndex) {
             case 0:
@@ -365,11 +361,7 @@ public class BrowseTaasCollectionsController {
 
         @Override
         public boolean isCellEditable(int rowIndex, int columnIndex) {
-            if (columnIndex == 6) {
-                return true;
-            } else {
-                return false;
-            }
+            return columnIndex == 6;
         }
 
         @Override

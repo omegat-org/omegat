@@ -29,7 +29,6 @@ import gen.taas.TaasDomain;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
 import java.text.MessageFormat;
 import java.util.Collections;
 import java.util.Comparator;
@@ -37,12 +36,8 @@ import java.util.Enumeration;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
-import javax.swing.AbstractAction;
 import javax.swing.AbstractButton;
-import javax.swing.Action;
-import javax.swing.JComponent;
 import javax.swing.JRadioButton;
-import javax.swing.KeyStroke;
 import javax.swing.SwingWorker;
 
 import org.omegat.core.Core;
@@ -51,6 +46,7 @@ import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
 import org.omegat.util.StringUtil;
 import org.omegat.util.gui.DockingUI;
+import org.omegat.util.gui.StaticUIUtils;
 
 /**
  * Controller for select TaaS domains.
@@ -66,6 +62,8 @@ public class SelectDomainController {
         dialog.labelStatus.setText(OStrings.getString("TAAS_STATUS_DOMAIN_LIST"));
 
         new SwingWorker<List<TaasDomain>, Void>() {
+            
+            @Override
             protected List<TaasDomain> doInBackground() throws Exception {
                 List<TaasDomain> result = TaaSPlugin.client.getDomainsList();
 
@@ -78,6 +76,7 @@ public class SelectDomainController {
                 return result;
             }
 
+            @Override
             protected void done() {
                 try {
                     List<TaasDomain> list = get();
@@ -118,6 +117,7 @@ public class SelectDomainController {
         }.execute();
 
         dialog.btnSelect.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent e) {
                 if (dialog.rbAll.isSelected()) {
                     Preferences.setPreference(Preferences.TAAS_DOMAIN, "");
@@ -136,19 +136,13 @@ public class SelectDomainController {
             }
         });
 
-        KeyStroke escape = KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0, false);
-        Action escapeAction = new AbstractAction() {
-            public void actionPerformed(ActionEvent e) {
-                dialog.dispose();
-            }
-        };
+        StaticUIUtils.setEscapeClosable(dialog);
         dialog.btnClose.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent e) {
                 dialog.dispose();
             }
         });
-        dialog.getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(escape, "ESCAPE");
-        dialog.getRootPane().getActionMap().put("ESCAPE", escapeAction);
 
         DockingUI.displayCentered(dialog);
 

@@ -309,6 +309,7 @@ public class StaticUtils {
         final Collator localCollator = Collator.getInstance(Locale.getDefault());
         localCollator.setStrength(Collator.PRIMARY);
         Collections.sort(lst, new Comparator<String>() {
+            @Override
             public int compare(String o1, String o2) {
                 return localCollator.compare(o1, o2);
             }
@@ -366,6 +367,7 @@ public class StaticUtils {
      */
     public static void sortByList(final List<String> list, final List<String> order) {
         Collections.sort(list, new Comparator<String>() {
+            @Override
             public int compare(String o1, String o2) {
                 int pos1, pos2;
                 if (order != null) {
@@ -463,10 +465,7 @@ public class StaticUtils {
     private static boolean isProperDirectory(File file) {
         if (file.isDirectory()) {
             Matcher directoryMatch = IGNORED_FOLDERS.matcher(file.getName());
-            if (directoryMatch.matches())
-                return false;
-            else
-                return true;
+            return !directoryMatch.matches();
         } else
             return false;
     }
@@ -497,20 +496,20 @@ public class StaticUtils {
      */
     public static String entitiesToCharacters(String text) {
 
-        if (text.indexOf("&gt;") >= 0) {
+        if (text.contains("&gt;")) {
             text = text.replaceAll("&gt;", ">");
         }
-        if (text.indexOf("&lt;") >= 0) {
+        if (text.contains("&lt;")) {
             text = text.replaceAll("&lt;", "<");
         }
-        if (text.indexOf("&quot;") >= 0) {
+        if (text.contains("&quot;")) {
             text = text.replaceAll("&quot;", "\"");
         }
        // If makeValidXML converts ' to apos;, the following lines should be uncommented
         /* if (text.indexOf("&apos;") >= 0) {
             text = text.replaceAll("&apos;", "'");
         }*/
-        if (text.indexOf("&amp;") >= 0) {
+        if (text.contains("&amp;")) {
             text = text.replaceAll("&amp;", "&");
         }
         return text;
@@ -522,7 +521,7 @@ public class StaticUtils {
      */
     public static String makeValidXML(String plaintext) {
         char c;
-        StringBuffer out = new StringBuffer();
+        StringBuilder out = new StringBuilder();
         String text = fixChars(plaintext);
         for (int i = 0; i < text.length(); i++) {
             c = text.charAt(i);
@@ -534,7 +533,7 @@ public class StaticUtils {
     /** Compresses spaces in case of non-preformatting paragraph. */
     public static String compressSpaces(String str) {
         int strlen = str.length();
-        StringBuffer res = new StringBuffer(strlen);
+        StringBuilder res = new StringBuilder(strlen);
         boolean wasspace = true;
         for (int i = 0; i < strlen; i++) {
             char ch = str.charAt(i);
@@ -861,7 +860,7 @@ public class StaticUtils {
         if (buf.length <= 0)
             return new String();
 
-        StringBuffer res = new StringBuffer();
+        StringBuilder res = new StringBuilder();
         res.append(buf[0]);
         for (int i = 1; i < buf.length; i++) {
             res.append('#');
@@ -1005,8 +1004,8 @@ public class StaticUtils {
      * dowload a file from the internet
      */
     public static String downloadFileToString(String urlString) throws IOException {
-        URLConnection urlConn = null;
-        InputStream in = null;
+        URLConnection urlConn;
+        InputStream in;
 
         URL url = new URL(urlString);
         urlConn = url.openConnection();
@@ -1031,7 +1030,7 @@ public class StaticUtils {
      * Download a file to the disk
      */
     public static void downloadFileToDisk(String address, String filename) throws MalformedURLException {
-        URLConnection urlConn = null;
+        URLConnection urlConn;
         InputStream in = null;
         OutputStream out = null;
         try {
@@ -1081,7 +1080,7 @@ public class StaticUtils {
 
                 byte[] byteBuffer = new byte[1024];
 
-                int numRead = 0;
+                int numRead;
                 while ((numRead = in.read(byteBuffer)) != -1) {
                     out.write(byteBuffer, 0, numRead);
                 }
@@ -1151,6 +1150,7 @@ public class StaticUtils {
             this.source = source;
         }
 
+        @Override
         public int compare(String tag1, String tag2) {
             // Check for equality
             if (tag1.equals(tag2)) {

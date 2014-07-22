@@ -25,16 +25,12 @@
 
 package org.omegat.gui.dialogs;
 
-import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
-import javax.swing.AbstractAction;
-import javax.swing.Action;
-import javax.swing.JComponent;
 import javax.swing.JTable;
-import javax.swing.KeyStroke;
 import org.omegat.gui.editor.chartable.CharTableModel;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
+import org.omegat.util.gui.StaticUIUtils;
 
 /**
  *
@@ -54,17 +50,8 @@ public class CharTableAutoCompleterOptionsDialog extends javax.swing.JDialog {
      */
     public CharTableAutoCompleterOptionsDialog(java.awt.Frame parent) {
         super(parent, true);
-        // HP
-        // Handle escape key to close the window
-        KeyStroke escape = KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0, false);
-        Action escapeAction = new AbstractAction() {
-            public void actionPerformed(ActionEvent e) {
-                dispose();
-            }
-        };
-        getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(escape, "ESCAPE");
-        getRootPane().getActionMap().put("ESCAPE", escapeAction);
-        // END HP
+        
+        StaticUIUtils.setEscapeClosable(this);
 
         initComponents();
         allCharTable.setModel(allCharModel);

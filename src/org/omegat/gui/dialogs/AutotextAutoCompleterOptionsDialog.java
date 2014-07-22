@@ -26,20 +26,15 @@
 package org.omegat.gui.dialogs;
 
 import java.awt.Component;
-import java.awt.event.ActionEvent;
-import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import javax.swing.AbstractAction;
-import javax.swing.Action;
 import javax.swing.JComponent;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
-import javax.swing.KeyStroke;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.TableCellEditor;
@@ -51,6 +46,7 @@ import org.omegat.gui.editor.autotext.AutotextPair;
 import org.omegat.gui.editor.autotext.AutotextTableModel;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
+import org.omegat.util.gui.StaticUIUtils;
 
 /**
  *
@@ -79,17 +75,7 @@ public class AutotextAutoCompleterOptionsDialog extends javax.swing.JDialog {
     public AutotextAutoCompleterOptionsDialog(java.awt.Frame parent) {
         super(parent, true);
         
-        // HP
-        // Handle escape key to close the window
-        KeyStroke escape = KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0, false);
-        Action escapeAction = new AbstractAction() {
-            public void actionPerformed(ActionEvent e) {
-                dispose();
-            }
-        };
-        getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(escape, "ESCAPE");
-        getRootPane().getActionMap().put("ESCAPE", escapeAction);
-        // END HP
+        StaticUIUtils.setEscapeClosable(this);
         
         initComponents();
         

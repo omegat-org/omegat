@@ -31,31 +31,24 @@ import gen.core.filters.Filter;
 import java.awt.Dialog;
 import java.awt.Dimension;
 import java.awt.Toolkit;
-import java.awt.event.ActionEvent;
-import java.awt.event.KeyEvent;
-import java.util.Vector;
 
-import javax.swing.AbstractAction;
-import javax.swing.Action;
 import javax.swing.DefaultCellEditor;
 import javax.swing.JComboBox;
-import javax.swing.JComponent;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.KeyStroke;
 import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.TableColumn;
 
-import org.omegat.core.Core;
 import org.omegat.filters2.IFilter;
 import org.omegat.filters2.master.FilterMaster;
 import org.omegat.filters2.master.OneFilterTableModel;
 import org.omegat.util.OStrings;
 import org.omegat.util.StaticUtils;
 import org.omegat.util.StringUtil;
+import org.omegat.util.gui.StaticUIUtils;
 
 /**
  * Editor for a single filter. Filter is a class that allows for reading and
@@ -75,17 +68,7 @@ public class FilterEditor extends JDialog implements ListSelectionListener {
         super(parent, true);
         this.filter = FilterMaster.cloneFilter(filter);
 
-        // HP
-        // Handle escape key to close the window
-        KeyStroke escape = KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0, false);
-        Action escapeAction = new AbstractAction() {
-            public void actionPerformed(ActionEvent e) {
-                dispose();
-            }
-        };
-        getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(escape, "ESCAPE");
-        getRootPane().getActionMap().put("ESCAPE", escapeAction);
-        // END HP
+        StaticUIUtils.setEscapeClosable(this);
 
         initComponents();
 
@@ -119,9 +102,10 @@ public class FilterEditor extends JDialog implements ListSelectionListener {
     }
 
     private JComboBox encodingComboBox() {
-        return new JComboBox(new Vector<String>(FilterMaster.getSupportedEncodings()));
+        return new JComboBox(FilterMaster.getSupportedEncodings().toArray());
     }
 
+    @Override
     public void valueChanged(ListSelectionEvent e) {
         if (e.getValueIsAdjusting())
             return;
@@ -349,7 +333,7 @@ public class FilterEditor extends JDialog implements ListSelectionListener {
     private void toDefaultsButtonActionPerformed(java.awt.event.ActionEvent evt)// GEN-FIRST:event_toDefaultsButtonActionPerformed
     {// GEN-HEADEREND:event_toDefaultsButtonActionPerformed
         try {
-            filter = Core.getFilterMaster().getDefaultSettingsFromFilter(filter.getClassName());
+            filter = FilterMaster.getDefaultSettingsFromFilter(filter.getClassName());
             instances.setModel(new OneFilterTableModel(filter));
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this,

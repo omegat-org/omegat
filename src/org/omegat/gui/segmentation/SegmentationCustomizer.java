@@ -29,16 +29,12 @@ import java.awt.Dialog;
 import java.awt.Dimension;
 import java.awt.Frame;
 import java.awt.event.ActionEvent;
-import java.awt.event.KeyEvent;
 import java.beans.ExceptionListener;
 
 import javax.swing.AbstractAction;
-import javax.swing.Action;
-import javax.swing.JComponent;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.KeyStroke;
 import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -50,6 +46,7 @@ import org.omegat.core.segmentation.datamodels.MappingRulesModel;
 import org.omegat.core.segmentation.datamodels.SegmentationRulesModel;
 import org.omegat.util.OStrings;
 import org.omegat.util.StaticUtils;
+import org.omegat.util.gui.StaticUIUtils;
 
 /**
  * Main dialog for for setting up sentence segmenting. The dialog is created as
@@ -85,17 +82,12 @@ public class SegmentationCustomizer extends JDialog implements ListSelectionList
         this.projectSRX = projectSRX;
         this.editableSRX = isProjectSpecific && projectSRX != null ? projectSRX.clone() : userSRX.clone();
         
-        // HP
-        // Handle escape key to close the window
-        KeyStroke escape = KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0, false);
-        Action escapeAction = new AbstractAction() {
+        StaticUIUtils.setEscapeAction(this, new AbstractAction() {
+            @Override
             public void actionPerformed(ActionEvent e) {
                 cancelButtonActionPerformed(null);
             }
-        };
-        getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(escape, "ESCAPE");
-        getRootPane().getActionMap().put("ESCAPE", escapeAction);
-        // END HP
+        });
 
         initComponents();
         hintTextArea.setBackground(javax.swing.UIManager.getDefaults().getColor("Label.background"));
@@ -107,6 +99,7 @@ public class SegmentationCustomizer extends JDialog implements ListSelectionList
 
         MappingRulesModel model = (MappingRulesModel) mapTable.getModel();
         model.addExceptionListener(new ExceptionListener() {
+            @Override
             public void exceptionThrown(Exception e) {
                 mapErrorsLabel.setText(e.getLocalizedMessage());
             }
@@ -172,6 +165,7 @@ public class SegmentationCustomizer extends JDialog implements ListSelectionList
         MappingRulesModel model = new MappingRulesModel(editableSRX);
         mapTable.setModel(model);
         model.addExceptionListener(new ExceptionListener() {
+            @Override
             public void exceptionThrown(Exception e) {
                 mapErrorsLabel.setText(e.getLocalizedMessage());
             }
@@ -179,6 +173,7 @@ public class SegmentationCustomizer extends JDialog implements ListSelectionList
         ruleTable.setModel(new DefaultTableModel());
     }
 
+    @Override
     public void valueChanged(ListSelectionEvent e) {
         if (e.getValueIsAdjusting())
             return;
@@ -212,6 +207,7 @@ public class SegmentationCustomizer extends JDialog implements ListSelectionList
                 SegmentationRulesModel model = new SegmentationRulesModel(maprule.getRules());
                 ruleTable.setModel(model);
                 model.addExceptionListener(new ExceptionListener() {
+                    @Override
                     public void exceptionThrown(Exception e) {
                         ruleErrorsLabel.setText(e.getLocalizedMessage());
                     }

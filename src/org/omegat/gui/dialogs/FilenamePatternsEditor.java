@@ -26,6 +26,7 @@
 package org.omegat.gui.dialogs;
 
 import org.omegat.util.OStrings;
+import org.omegat.util.gui.StaticUIUtils;
 
 /**
  * @author Alex Buloichik (alex73mail@gmail.com)
@@ -38,6 +39,7 @@ public class FilenamePatternsEditor extends javax.swing.JDialog {
     public FilenamePatternsEditor(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        StaticUIUtils.setEscapeClosable(this);
     }
 
     /**

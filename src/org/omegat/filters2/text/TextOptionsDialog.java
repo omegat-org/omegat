@@ -29,16 +29,13 @@ package org.omegat.filters2.text;
 
 import java.awt.Dialog;
 import java.awt.event.ActionEvent;
-import java.awt.event.KeyEvent;
 import java.util.Map;
 import java.util.TreeMap;
-
 import javax.swing.AbstractAction;
-import javax.swing.Action;
-import javax.swing.JComponent;
-import javax.swing.KeyStroke;
+
 
 import org.omegat.util.OStrings;
+import org.omegat.util.gui.StaticUIUtils;
 
 /**
  * Modal dialog to edit Text filter options.
@@ -107,15 +104,12 @@ public class TextOptionsDialog extends javax.swing.JDialog {
         
         checkLineLengthValue();        
 
-        // Handle escape key to close the window
-        KeyStroke escape = KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0, false);
-        Action escapeAction = new AbstractAction() {
+        StaticUIUtils.setEscapeAction(this, new AbstractAction() {
+            @Override
             public void actionPerformed(ActionEvent e) {
                 doClose(RET_CANCEL);
             }
-        };
-        getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(escape, "ESCAPE");
-        getRootPane().getActionMap().put("ESCAPE", escapeAction);
+        });
     }
 
     /** @return the return status of this dialog - one of RET_OK or RET_CANCEL */

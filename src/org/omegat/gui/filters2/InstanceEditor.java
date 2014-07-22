@@ -26,22 +26,16 @@
 package org.omegat.gui.filters2;
 
 import java.awt.Dialog;
-import java.awt.event.ActionEvent;
-import java.awt.event.KeyEvent;
-import java.util.Vector;
 
-import javax.swing.AbstractAction;
-import javax.swing.Action;
 import javax.swing.DefaultComboBoxModel;
-import javax.swing.JComponent;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
-import javax.swing.KeyStroke;
 import javax.swing.border.TitledBorder;
 
 import org.omegat.filters2.AbstractFilter;
 import org.omegat.filters2.master.FilterMaster;
 import org.omegat.util.OStrings;
+import org.omegat.util.gui.StaticUIUtils;
 import org.openide.awt.Mnemonics;
 
 /**
@@ -73,17 +67,7 @@ public class InstanceEditor extends JDialog {
         else
             hintTextArea.setVisible(false);
 
-        // HP
-        // Handle escape key to close the window
-        KeyStroke escape = KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0, false);
-        Action escapeAction = new AbstractAction() {
-            public void actionPerformed(ActionEvent e) {
-                dispose();
-            }
-        };
-        getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(escape, "ESCAPE");
-        getRootPane().getActionMap().put("ESCAPE", escapeAction);
-        // END HP
+        StaticUIUtils.setEscapeClosable(this);
 
         pack();
     }
@@ -303,7 +287,7 @@ public class InstanceEditor extends JDialog {
         gridBagConstraints.insets = new java.awt.Insets(3, 3, 3, 3);
         getContentPane().add(jLabel3, gridBagConstraints);
 
-        sourceEncodingField.setModel(new DefaultComboBoxModel(new Vector(FilterMaster.getSupportedEncodings())));
+        sourceEncodingField.setModel(new DefaultComboBoxModel(FilterMaster.getSupportedEncodings().toArray()));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 2;
@@ -320,7 +304,7 @@ public class InstanceEditor extends JDialog {
         gridBagConstraints.insets = new java.awt.Insets(3, 3, 3, 3);
         getContentPane().add(jLabel6, gridBagConstraints);
 
-        targetEncodingField.setModel(new DefaultComboBoxModel(new Vector(FilterMaster.getSupportedEncodings())));
+        targetEncodingField.setModel(new DefaultComboBoxModel(FilterMaster.getSupportedEncodings().toArray()));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 3;
@@ -330,9 +314,7 @@ public class InstanceEditor extends JDialog {
         getContentPane().add(targetEncodingField, gridBagConstraints);
 
         pack();
-        java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
-        java.awt.Dimension dialogSize = getSize();
-        setLocation((screenSize.width-dialogSize.width)/2,(screenSize.height-dialogSize.height)/2);
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void insertButtonActionPerformed(java.awt.event.ActionEvent evt)// GEN-FIRST:event_insertButtonActionPerformed

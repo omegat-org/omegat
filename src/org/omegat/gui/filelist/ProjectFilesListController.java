@@ -58,11 +58,8 @@ import java.util.Comparator;
 import java.util.List;
 
 import javax.swing.AbstractAction;
-import javax.swing.Action;
 import javax.swing.BorderFactory;
-import javax.swing.JComponent;
 import javax.swing.JTable;
-import javax.swing.KeyStroke;
 import javax.swing.ListSelectionModel;
 import javax.swing.RowSorter;
 import javax.swing.SortOrder;
@@ -94,6 +91,7 @@ import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
 import org.omegat.util.StaticUtils;
+import org.omegat.util.gui.StaticUIUtils;
 import org.omegat.util.gui.UIThreadsUtil;
 
 /**
@@ -123,7 +121,7 @@ public class ProjectFilesListController {
     private AbstractTableModel modelFiles, modelTotal;
     private Sorter currentSorter;
 
-    private MainWindow m_parent;
+    private final MainWindow m_parent;
 
     private Font dialogFont;
 
@@ -160,15 +158,12 @@ public class ProjectFilesListController {
             }
         });
 
-        // Handle escape key to close the window
-        KeyStroke escape = KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0, false);
-        Action escapeAction = new AbstractAction() {
+        StaticUIUtils.setEscapeAction(list, new AbstractAction() {
+            @Override
             public void actionPerformed(ActionEvent e) {
                 doCancel();
             }
-        };
-        list.getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(escape, "ESCAPE");
-        list.getRootPane().getActionMap().put("ESCAPE", escapeAction);
+        });
 
         list.statLabel.setFont(list.tableTotal.getFont());
         list.statLabel.setBackground(list.getBackground());
@@ -693,7 +688,7 @@ public class ProjectFilesListController {
 
         if (Preferences.isPreference(Preferences.PROJECT_FILES_USE_FONT)) {
             String fontName = Preferences.getPreference(OConsts.TF_SRC_FONT_NAME);
-            int fontSize = Integer.valueOf(Preferences.getPreference(OConsts.TF_SRC_FONT_SIZE)).intValue();
+            int fontSize = Integer.valueOf(Preferences.getPreference(OConsts.TF_SRC_FONT_SIZE));
             list.tableFiles.setFont(new Font(fontName, Font.PLAIN, fontSize));
             list.tableTotal.setFont(new Font(fontName, Font.BOLD, fontSize));
             list.tableFiles.setRowHeight(fontSize + LINE_SPACING);

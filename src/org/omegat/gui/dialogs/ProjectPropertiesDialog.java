@@ -41,20 +41,17 @@ import java.awt.Label;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.AbstractAction;
-import javax.swing.Action;
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
-import javax.swing.JComponent;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -62,7 +59,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
-import javax.swing.KeyStroke;
 import javax.swing.UIManager;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
@@ -87,6 +83,7 @@ import org.omegat.util.StaticUtils;
 import org.omegat.util.StringUtil;
 import org.omegat.util.gui.LanguageComboBoxRenderer;
 import org.omegat.util.gui.OmegaTFileChooser;
+import org.omegat.util.gui.StaticUIUtils;
 import org.omegat.util.gui.TokenizerBehaviorComboBoxRenderer;
 import org.omegat.util.gui.TokenizerComboBoxRenderer;
 import org.openide.awt.Mnemonics;
@@ -539,6 +536,7 @@ public class ProjectPropertiesDialog extends JDialog {
             bIC.add(m_variablesList);
             Mnemonics.setLocalizedText(m_insertButton, OStrings.getString("BUTTON_INSERT"));
             m_insertButton.addActionListener(new java.awt.event.ActionListener() {
+                @Override
                 public void actionPerformed(ActionEvent e) {
                     insertButtonActionPerformed(m_externalCommandTextArea, m_variablesList);
                 }
@@ -658,6 +656,7 @@ public class ProjectPropertiesDialog extends JDialog {
         setResizable(false);
 
         m_okButton.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent e) {
                 doOK(m_sourceLocaleField, m_targetLocaleField, m_sourceTokenizerField, m_targetTokenizerField,
                         m_sourceTokenizerBehaviorField, m_targetTokenizerBehaviorField,
@@ -668,12 +667,14 @@ public class ProjectPropertiesDialog extends JDialog {
         });
 
         m_cancelButton.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent e) {
                 doCancel();
             }
         });
 
         m_srcBrowse.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent e) {
                 doBrowseDirectoy(1, m_srcRootField);
             }
@@ -689,12 +690,14 @@ public class ProjectPropertiesDialog extends JDialog {
         });
 
         m_locBrowse.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent e) {
                 doBrowseDirectoy(2, m_locRootField);
             }
         });
 
         m_glosBrowse.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent e) {
                 // Test now, because result may change after doBrowseDirectory().
                 boolean isDefaultGlossaryFile = projectProperties.isDefaultWriteableGlossaryFile();
@@ -709,18 +712,21 @@ public class ProjectPropertiesDialog extends JDialog {
         });
 
         m_wGlosBrowse.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent e) {
                 doBrowseDirectoy(6, m_writeableGlosField);
             }
         });
 
         m_tmBrowse.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent e) {
                 doBrowseDirectoy(4, m_tmRootField);
             }
         });
 
         m_dictBrowse.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent e) {
                 doBrowseDirectoy(5, m_dictRootField);
             }
@@ -728,6 +734,7 @@ public class ProjectPropertiesDialog extends JDialog {
 
         final JDialog self = this;
         m_sentenceSegmentingButton.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent e) {
                 SegmentationCustomizer segmentationCustomizer = new SegmentationCustomizer(self, true,
                         SRX.getDefault(), Preferences.getSRX(), srx);
@@ -739,6 +746,7 @@ public class ProjectPropertiesDialog extends JDialog {
         });
         
         m_fileFiltersButton.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent e) {
                 JFrame mainWindow = Core.getMainWindow().getApplicationFrame();
                 FiltersCustomizer dlg = new FiltersCustomizer(mainWindow, true, FilterMaster
@@ -752,15 +760,12 @@ public class ProjectPropertiesDialog extends JDialog {
             }
         });
 
-        // Handle escape key to close the window
-        KeyStroke escape = KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0, false);
-        Action escapeAction = new AbstractAction() {
+        StaticUIUtils.setEscapeAction(this, new AbstractAction() {
+            @Override
             public void actionPerformed(ActionEvent e) {
                 doCancel();
             }
-        };
-        getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(escape, "ESCAPE");
-        getRootPane().getActionMap().put("ESCAPE", escapeAction);
+        });
 
         m_srcRootField.setText(projectProperties.getSourceRoot());
         m_locRootField.setText(projectProperties.getTargetRoot());
@@ -866,11 +871,14 @@ public class ProjectPropertiesDialog extends JDialog {
      * Browses for the directory.
      * 
      * @param browseTarget
-     *            customizes the messages depening on what is browsed for
+     *            customizes the messages depending on what is browsed for
      * @param field
      *            text field to write browsed folder to
      */
     private void doBrowseDirectoy(int browseTarget, JTextField field) {
+        if (field == null) {
+            return;
+        }
         String title;
         boolean fileMode = false;
         boolean glossaryFile = false;
@@ -920,7 +928,7 @@ public class ProjectPropertiesDialog extends JDialog {
         }
 
         // check if the current directory as specified by the field exists
-        String curDir = (field != null) ? field.getText() : "";
+        String curDir = field.getText();
         File curDirCheck = new File(curDir);
         if (fileMode && !StringUtil.isEmpty(curDirCheck.getName())) {
             String dirOnly = curDirCheck.getParent();

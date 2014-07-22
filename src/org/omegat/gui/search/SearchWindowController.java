@@ -71,6 +71,7 @@ import org.omegat.util.Preferences;
 import org.omegat.util.StaticUtils;
 import org.omegat.util.StringUtil;
 import org.omegat.util.gui.OmegaTFileChooser;
+import org.omegat.util.gui.StaticUIUtils;
 import org.omegat.util.gui.UIThreadsUtil;
 
 /**
@@ -245,15 +246,12 @@ public class SearchWindowController {
             }
         });
 
-        // Handle escape key to close the window
-        KeyStroke escape = KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0, false);
-        Action escapeAction = new AbstractAction() {
+        StaticUIUtils.setEscapeAction(form, new AbstractAction() {
+            @Override
             public void actionPerformed(ActionEvent e) {
                 doCancel();
             }
-        };
-        form.getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(escape, "ESCAPE");
-        form.getRootPane().getActionMap().put("ESCAPE", escapeAction);
+        });
         
         // Make Ctrl+F re-focus on search field
         KeyStroke find = KeyStroke.getKeyStroke(KeyEvent.VK_F,
@@ -583,7 +581,7 @@ public class SearchWindowController {
                 EntryListPane viewer = (EntryListPane) form.m_viewer;
                 viewer.displaySearchResult(searcher, ((Integer) form.m_numberOfResults.getValue()));
                 form.m_resultsLabel.setText(StaticUtils.format(OStrings.getString("SW_NR_OF_RESULTS"),
-                        new Object[] { new Integer(viewer.getNrEntries()) }));
+                        new Object[] { viewer.getNrEntries()}));
                 form.m_filterButton.setEnabled(true);
                 form.m_replaceButton.setEnabled(true);
                 form.m_replaceAllButton.setEnabled(true);
@@ -841,36 +839,22 @@ public class SearchWindowController {
 
     private void loadAdvancedOptionPreferences() {
         // advanced options visibility
-        String advancedVisible = Preferences.getPreference(Preferences.SEARCHWINDOW_ADVANCED_VISIBLE);
-        if (StringUtil.isEmpty(advancedVisible))
-            advancedVisible = "false";
-        form.m_advancedVisiblePane.setVisible(Boolean.valueOf(advancedVisible).booleanValue());
+        form.m_advancedVisiblePane.setVisible(Preferences.isPreference(Preferences.SEARCHWINDOW_ADVANCED_VISIBLE));
 
         // author options
-        String searchAuthor = Preferences.getPreference(Preferences.SEARCHWINDOW_SEARCH_AUTHOR);
-        if (StringUtil.isEmpty(searchAuthor))
-            searchAuthor = "false";
-        form.m_authorCB.setSelected(Boolean.valueOf(searchAuthor).booleanValue());
-        String authorName = Preferences.getPreference(Preferences.SEARCHWINDOW_AUTHOR_NAME);
-        if (!StringUtil.isEmpty(authorName))
-            form.m_authorField.setText(authorName);
+        form.m_authorCB.setSelected(Preferences.isPreference(Preferences.SEARCHWINDOW_SEARCH_AUTHOR));
+        form.m_authorField.setText(Preferences.getPreference(Preferences.SEARCHWINDOW_AUTHOR_NAME));
 
         // date options
         try {
             // from date
-            String dateFrom = Preferences.getPreference(Preferences.SEARCHWINDOW_DATE_FROM);
-            if (StringUtil.isEmpty(dateFrom))
-                dateFrom = "false";
-            form.m_dateFromCB.setSelected(Boolean.valueOf(dateFrom).booleanValue());
+            form.m_dateFromCB.setSelected(Preferences.isPreference(Preferences.SEARCHWINDOW_DATE_FROM));
             String dateFromValue = Preferences.getPreference(Preferences.SEARCHWINDOW_DATE_FROM_VALUE);
             if (!StringUtil.isEmpty(dateFromValue))
                 m_dateFromModel.setValue(m_dateFormat.parse(dateFromValue));
 
             // to date
-            String dateTo = Preferences.getPreference(Preferences.SEARCHWINDOW_DATE_TO);
-            if (StringUtil.isEmpty(dateTo))
-                dateTo = "false";
-            form.m_dateToCB.setSelected(Boolean.valueOf(dateTo).booleanValue());
+            form.m_dateToCB.setSelected(Preferences.isPreference(Preferences.SEARCHWINDOW_DATE_TO));
             String dateToValue = Preferences.getPreference(Preferences.SEARCHWINDOW_DATE_TO_VALUE);
             if (!StringUtil.isEmpty(dateToValue))
                 m_dateToModel.setValue(m_dateFormat.parse(dateToValue));

@@ -53,7 +53,7 @@
       <Properties>
         <Property name="enabled" type="boolean" value="false"/>
         <Property name="value" type="java.lang.Object" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-          <Connection code="new Integer(90)" type="code"/>
+          <Connection code="90" type="code"/>
         </Property>
       </Properties>
       <Constraints>

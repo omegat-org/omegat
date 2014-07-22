@@ -35,16 +35,10 @@ import java.awt.Frame;
 import java.awt.GraphicsConfiguration;
 import java.awt.Insets;
 import java.awt.Toolkit;
-import java.awt.event.ActionEvent;
-import java.awt.event.KeyEvent;
 import java.util.Map;
 
-import javax.swing.AbstractAction;
-import javax.swing.Action;
-import javax.swing.JComponent;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
-import javax.swing.KeyStroke;
 import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -53,6 +47,7 @@ import org.omegat.filters2.IFilter;
 import org.omegat.filters2.master.FilterMaster;
 import org.omegat.filters2.master.FiltersTableModel;
 import org.omegat.util.OStrings;
+import org.omegat.util.gui.StaticUIUtils;
 
 /**
  * Main dialog for for setting up filters. Filter is a class that allows for
@@ -73,18 +68,18 @@ public class FiltersCustomizer extends JDialog implements ListSelectionListener 
 
     public Filters result;
     /** Filters from OmegaT. */
-    private Filters defaultFilters;
+    private final Filters defaultFilters;
     /** Filters from user preferences. */
-    private Filters userFilters;
+    private final Filters userFilters;
     /** Filters from current project. */
-    private Filters projectFilters;
+    private final Filters projectFilters;
     /** Filters which editable now. */
     private Filters editableFilters;
 
     /**
      * Flag if this customizer shows project specific filters or not
      */
-    private boolean isProjectSpecific;
+    private final boolean isProjectSpecific;
 
     /** Creates new form FilterCustomizer */
     public FiltersCustomizer(Frame parent, boolean projectSpecific, Filters defaultFilters,
@@ -101,18 +96,7 @@ public class FiltersCustomizer extends JDialog implements ListSelectionListener 
         this.editableFilters = isProjectSpecific && projectFilters != null ? FilterMaster.cloneConfig(projectFilters)
                 : FilterMaster.cloneConfig(userFilters);
 
-        // HP
-        // Handle escape key to close the window
-        KeyStroke escape = KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0, false);
-        Action escapeAction = new AbstractAction() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                dispose();
-            }
-        };
-        getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(escape, "ESCAPE");
-        getRootPane().getActionMap().put("ESCAPE", escapeAction);
-        // END HP
+        StaticUIUtils.setEscapeClosable(this);
 
         initComponents();
 

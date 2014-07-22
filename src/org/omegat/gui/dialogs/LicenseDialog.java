@@ -26,18 +26,12 @@
 
 package org.omegat.gui.dialogs;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.KeyEvent;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.StringWriter;
 import java.net.URL;
 
-import javax.swing.AbstractAction;
-import javax.swing.Action;
-import javax.swing.JComponent;
-import javax.swing.KeyStroke;
 
 import org.omegat.gui.help.HelpFrame;
 import org.omegat.util.OConsts;
@@ -45,6 +39,7 @@ import org.omegat.util.OStrings;
 import org.omegat.util.LFileCopy;
 import org.openide.awt.Mnemonics;
 import org.omegat.util.FileUtil;
+import org.omegat.util.gui.StaticUIUtils;
 
 /**
  * Dialog showing GNU Public License.
@@ -86,27 +81,19 @@ public class LicenseDialog extends javax.swing.JDialog {
         setTitle(OStrings.getString("LICENSEDIALOG_TITLE"));
         setResizable(true);
         addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 closeDialog(evt);
             }
         });
 
-        // HP
-        // Handle escape key to close the window
-        KeyStroke escape = KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0, false);
-        Action escapeAction = new AbstractAction() {
-            public void actionPerformed(ActionEvent e) {
-                dispose();
-            }
-        };
-        getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(escape, "ESCAPE");
-        getRootPane().getActionMap().put("ESCAPE", escapeAction);
-        // END HP
+        StaticUIUtils.setEscapeClosable(this);
 
         buttonPanel.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT));
 
         Mnemonics.setLocalizedText(okButton, OStrings.getString("BUTTON_OK"));
         okButton.addActionListener(new java.awt.event.ActionListener() {
+            @Override
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 okButtonActionPerformed(evt);
             }

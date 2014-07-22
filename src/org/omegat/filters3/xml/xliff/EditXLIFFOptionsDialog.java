@@ -29,17 +29,14 @@
 package org.omegat.filters3.xml.xliff;
 
 import java.awt.event.ActionEvent;
-import java.awt.event.KeyEvent;
 import java.util.Map;
 import java.util.TreeMap;
 
 import javax.swing.AbstractAction;
-import javax.swing.Action;
-import javax.swing.JComponent;
-import javax.swing.KeyStroke;
 
 import org.omegat.filters3.xml.xliff.XLIFFOptions.ID_TYPE;
 import org.omegat.util.OStrings;
+import org.omegat.util.gui.StaticUIUtils;
 
 /**
  * Modal dialog to edit XLIFF filter options.
@@ -70,19 +67,15 @@ public class EditXLIFFOptionsDialog extends javax.swing.JDialog {
         transIDRB.setSelected(options.getAltTransIDType() == ID_TYPE.ELEMENT_ID);
         transResnameRB.setSelected(options.getAltTransIDType() == ID_TYPE.RESNAME_ATTR);
         
-        // Handle escape key to close the window
-        KeyStroke escape = KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0, false);
-        Action escapeAction = new AbstractAction() {
+        StaticUIUtils.setEscapeAction(this, new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 doClose(RET_CANCEL);
             }
-        };
-        getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(escape, "ESCAPE");
-        getRootPane().getActionMap().put("ESCAPE", escapeAction);
+        });
     }
 
-    private XLIFFOptions options;
+    private final XLIFFOptions options;
 
     public XLIFFOptions getOptions() {
         return options;

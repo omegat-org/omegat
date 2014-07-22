@@ -46,7 +46,6 @@ import javax.script.ScriptEngineFactory;
 import javax.script.ScriptEngineManager;
 import javax.script.SimpleBindings;
 import javax.swing.AbstractAction;
-import javax.swing.Action;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JEditorPane;
@@ -82,6 +81,7 @@ import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
 import org.omegat.util.StaticUtils;
 import org.omegat.util.StringUtil;
+import org.omegat.util.gui.StaticUIUtils;
 import org.openide.awt.Mnemonics;
 
 /**
@@ -133,20 +133,7 @@ public class ScriptingWindow extends JFrame {
     public ScriptingWindow() {
         setTitle(OStrings.getString("SCW_TITLE"));
 
-        // HP
-        // Handle escape key to close the window
-        KeyStroke escape = KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0, false);
-        Action escapeAction = new AbstractAction() {
-            private static final long serialVersionUID = 1L;
-
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                dispose();
-            }
-        };
-        getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(escape, "ESCAPE");
-        getRootPane().getActionMap().put("ESCAPE", escapeAction);
-        // END HP
+        StaticUIUtils.setEscapeClosable(this);
 
         addScriptCommandToOmegaT();
         addRunShortcutToOmegaT();
@@ -264,7 +251,7 @@ public class ScriptingWindow extends JFrame {
 
     private class QuickScriptActionListener implements ActionListener {
 
-        private int index;
+        private final int index;
 
         QuickScriptActionListener(int index) {
             this.index = index;
@@ -735,17 +722,17 @@ public class ScriptingWindow extends JFrame {
     private JTextArea m_txtScriptEditor;
     private JButton m_btnRunScript;
 
-    private ScriptEngineManager manager = new ScriptEngineManager(getClass().getClassLoader());
+    private final ScriptEngineManager manager = new ScriptEngineManager(getClass().getClassLoader());
 
     protected ScriptsMonitor monitor;
 
     private File m_scriptsDirectory;
     private ScriptItem m_currentScriptItem;
     private JTextField m_txtScriptsDir;
-    private JFileChooser m_fileChooser = new JFileChooser();
+    private final JFileChooser m_fileChooser = new JFileChooser();
 
-    private String[] m_quickScripts = new String[NUMBERS_OF_QUICK_SCRIPTS];
-    private JMenuItem[] m_quickMenus = new JMenuItem[NUMBERS_OF_QUICK_SCRIPTS];
-    private JButton[] m_quickScriptButtons = new JButton[NUMBERS_OF_QUICK_SCRIPTS];
+    private final String[] m_quickScripts = new String[NUMBERS_OF_QUICK_SCRIPTS];
+    private final JMenuItem[] m_quickMenus = new JMenuItem[NUMBERS_OF_QUICK_SCRIPTS];
+    private final JButton[] m_quickScriptButtons = new JButton[NUMBERS_OF_QUICK_SCRIPTS];
 
 }

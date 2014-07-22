@@ -27,16 +27,13 @@
 package org.omegat.filters3.xml.opendoc;
 
 import java.awt.event.ActionEvent;
-import java.awt.event.KeyEvent;
 import java.util.Map;
 import java.util.TreeMap;
-
 import javax.swing.AbstractAction;
-import javax.swing.Action;
-import javax.swing.JComponent;
-import javax.swing.KeyStroke;
+
 
 import org.omegat.util.OStrings;
+import org.omegat.util.gui.StaticUIUtils;
 
 /**
  * Modal dialog to edit OpenDoc filter options.
@@ -66,18 +63,15 @@ public class EditOpenDocOptionsDialog extends javax.swing.JDialog {
         translateLinksCB.setSelected(options.getTranslateLinks());
         translateSheetNamesCB.setSelected(options.getTranslateSheetNames());
 
-        // Handle escape key to close the window
-        KeyStroke escape = KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0, false);
-        Action escapeAction = new AbstractAction() {
+        StaticUIUtils.setEscapeAction(this, new AbstractAction() {
+            @Override
             public void actionPerformed(ActionEvent e) {
                 doClose(RET_CANCEL);
             }
-        };
-        getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(escape, "ESCAPE");
-        getRootPane().getActionMap().put("ESCAPE", escapeAction);
+        });
     }
 
-    private OpenDocOptions options;
+    private final OpenDocOptions options;
 
     public OpenDocOptions getOptions() {
         return options;

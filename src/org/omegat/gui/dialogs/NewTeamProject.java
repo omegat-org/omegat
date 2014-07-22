@@ -42,6 +42,7 @@ import org.omegat.util.Log;
 import org.omegat.util.OStrings;
 import org.omegat.util.StringUtil;
 import org.omegat.util.gui.OmegaTFileChooser;
+import org.omegat.util.gui.StaticUIUtils;
 
 /**
  *
@@ -91,6 +92,8 @@ public class NewTeamProject extends javax.swing.JDialog {
                 updateDialog();
             }
         });
+        
+        StaticUIUtils.setEscapeClosable(this);
     }
     
     private synchronized void detectRepo() {

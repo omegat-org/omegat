@@ -18,12 +18,8 @@
 	<taskdef resource="net/sf/antcontrib/antlib.xml" />
 	
 	<!-- Build WebStart pack -->
-	<target name="pack" depends="clean,copy-jars,set-bundled-defaults,make-trusted" description="Build WebStart pack">
-	
-		<signjar keystore="${signkey.keystore}" alias="${signkey.alias}" storepass="${signkey.storepass}" keypass="${signkey.keypass}">
-			<fileset dir="${root}/build/webstart/" includes="*.jar" />
-		</signjar>
-
+	<target name="pack" depends="clean,copy-jars,set-bundled-defaults,make-trusted,sign-no-timestamp,sign-and-timestamp"
+		description="Build WebStart pack">
 		<mkdir dir="${root}/dist2" />
 		<zip destfile="${root}/dist2/OmegaT-WebStart.zip" basedir="${root}/build/webstart" />
 	</target>
@@ -93,6 +89,20 @@
 				<attribute name="Trusted-Library" value="true" />
 			</manifest>
 		</jar>
+	</target>
+	
+	<target name="sign-no-timestamp" unless="signkey.tsaurl">
+		<signjar keystore="${signkey.keystore}" alias="${signkey.alias}" storepass="${signkey.storepass}"
+			keypass="${signkey.keypass}">
+			<fileset dir="${root}/build/webstart/" includes="*.jar" />
+		</signjar>
+	</target>
+	
+	<target name="sign-and-timestamp" if="signkey.tsaurl">
+		<signjar keystore="${signkey.keystore}" alias="${signkey.alias}" storepass="${signkey.storepass}"
+			keypass="${signkey.keypass}" tsaurl="${signkey.tsaurl}">
+			<fileset dir="${root}/build/webstart/" includes="*.jar" />
+		</signjar>
 	</target>
 		
 </project>

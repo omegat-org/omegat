@@ -387,12 +387,12 @@ public class AutotextAutoCompleterOptionsDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_addNewRowButtonActionPerformed
 
     private void removeEntryButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeEntryButtonActionPerformed
-        if (entryTable.getSelectedRow() != -1)
+        if (entryTable.getSelectedRow() != -1) {
             model.removeRow(entryTable.getSelectedRow());
+        }
     }//GEN-LAST:event_removeEntryButtonActionPerformed
 
     private void sortFullTextCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sortFullTextCheckBoxActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_sortFullTextCheckBoxActionPerformed
 
     private void doClose(int retStatus) {

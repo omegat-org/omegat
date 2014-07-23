@@ -114,8 +114,9 @@ public class AutotextTableModel extends AbstractTableModel {
     }
     
     @Override
-    public boolean isCellEditable(int row, int col)
-        { return true; }
+    public boolean isCellEditable(int row, int col) {
+        return true;
+    }
     
     /**
      * add a new row.

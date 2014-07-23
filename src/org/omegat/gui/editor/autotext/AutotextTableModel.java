@@ -122,14 +122,11 @@ public class AutotextTableModel extends AbstractTableModel {
      * @param pair what to add
      * @param position at which position
      */
-    public void addRow(AutotextPair pair, int position) {
-        int newPosition;
-        if (position == -1)
-            newPosition = data.size();
-        else
-            newPosition = position;
+    public int addRow(AutotextPair pair, int position) {
+        int newPosition = position == -1 ? data.size() : position;
         data.add(newPosition, pair);
         fireTableDataChanged();
+        return newPosition;
     }
     
     /**

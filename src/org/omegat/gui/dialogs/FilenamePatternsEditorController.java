@@ -91,6 +91,9 @@ public class FilenamePatternsEditorController {
             public void actionPerformed(ActionEvent e) {
                 data.add("");
                 model.fireTableDataChanged();
+                dialog.table.changeSelection(data.size() - 1, 0, false, false);
+                dialog.table.editCellAt(data.size() - 1, 0);
+                dialog.table.transferFocus();
             }
         });
         dialog.btnRemove.addActionListener(new ActionListener() {

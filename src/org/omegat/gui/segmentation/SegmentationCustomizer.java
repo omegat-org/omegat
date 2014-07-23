@@ -629,6 +629,8 @@ public class SegmentationCustomizer extends JDialog implements ListSelectionList
         commitTableEdits();
         SegmentationRulesModel model = (SegmentationRulesModel) ruleTable.getModel();
         model.addRow();
+        ruleTable.changeSelection(ruleTable.getRowCount() - 1, 0, false, false);
+        ruleTable.changeSelection(ruleTable.getRowCount() - 1, ruleTable.getColumnCount() - 1, false, true);
     }// GEN-LAST:event_ruleInsertButtonActionPerformed
 
     private void mapInsertButtonActionPerformed(java.awt.event.ActionEvent evt)// GEN-FIRST:event_mapInsertButtonActionPerformed
@@ -636,6 +638,8 @@ public class SegmentationCustomizer extends JDialog implements ListSelectionList
         commitTableEdits();
         MappingRulesModel model = (MappingRulesModel) mapTable.getModel();
         model.addRow();
+        mapTable.changeSelection(mapTable.getRowCount() - 1, 0, false, false);
+        mapTable.changeSelection(mapTable.getRowCount() - 1, mapTable.getColumnCount() - 1, false, true);
     }// GEN-LAST:event_mapInsertButtonActionPerformed
 
     private void okButtonActionPerformed(java.awt.event.ActionEvent evt)// GEN-FIRST:event_okButtonActionPerformed

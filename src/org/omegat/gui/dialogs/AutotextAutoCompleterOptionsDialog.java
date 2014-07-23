@@ -379,8 +379,11 @@ public class AutotextAutoCompleterOptionsDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_sortAlphabeticallyCheckBoxActionPerformed
 
     private void addNewRowButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addNewRowButtonActionPerformed
-        // TODO add your handling code here:
-        model.addRow(new AutotextPair("","",""), entryTable.getSelectedRow());
+        int newRow = model.addRow(new AutotextPair("","",""), entryTable.getSelectedRow());
+        entryTable.changeSelection(newRow, 0, false, false);
+        entryTable.changeSelection(newRow, entryTable.getColumnCount() - 1, false, true);
+        entryTable.editCellAt(newRow, 0);
+        entryTable.transferFocus();
     }//GEN-LAST:event_addNewRowButtonActionPerformed
 
     private void removeEntryButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeEntryButtonActionPerformed

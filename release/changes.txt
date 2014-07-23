@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 3.1.4
 ----------------------------------------------------------------------
-   6 Enhancements
+   7 Enhancements
    1 Bug fix
    1 Localisation update
 ----------------------------------------------------------------------
@@ -31,6 +31,9 @@ the previous one, instead of piling up as was done previously
 insertions buttons replace selection instead of ignoring it
 
   - In team projects, the repository type detection is now more robust
+
+  - It's possible to specify a timestamp authority for Java Web Start
+See: https://ant.apache.org/manual/Tasks/signjar.html
 
   Bug fixes:
 

@@ -258,20 +258,20 @@ OmegaT のユーザーインターフェースや取扱説明書、他の関連�
 
 OmegaT は以下に示すライブラリを使用しています。
   Somik Raha, Derrick Oswald などによる HTMLParser 1.6（LGPL ライセンス）
-  VLSolutions 社による VLDocking Framework 2.1.4（CeCILL ライセンス）
+  VLDocking Framework 3.0.4（LGPL ライセンス）
   László Németh などによる Hunspell（LGPL ライセンス）
   Todd Fast, Timothy Wall などによる JNA（LGPL ライセンス）
   Swing-Layout 1.0.4（LGPL ライセンス）
   Jmyspell 2.1.4（LGPL ライセンス）
-  SVNKit 1.7.5（TMate ライセンス）
+  SVNKit 1.8.5（TMate ライセンス）
   Sequence Library（Sequence Library ライセンス）
   ANTLR 3.4（ANTLR 3 ライセンス）
-  SQLJet 1.1.3（GPL v2 ライセンス）
+  SQLJet 1.1.10（GPL v2 ライセンス）
   JGit（Eclipse Distribution ライセンス）
   JSch（JSch ライセンス）
   Base64（パブリックドメイン）
   Diff（GPL ライセンス）
-  orion-ssh2-214（Orion SSH for Java ライセンス）
+  trilead-ssh2-1.0.0-build217（Trilead SSH ライセンス）
   lucene-*.jar（Apache ライセンス 2.0）
   英語用のトークナイザー（org.omegat.tokenizer.SnowballEnglishTokenizer および
   org.omegat.tokenizer.LuceneEnglishTokenizer）が利用する 
@@ -286,6 +286,7 @@ OmegaT は以下に示すライブラリを使用しています。
   KoreanAnalyzer-3x-120223.jar（Apache ライセンス 2.0）
   SuperTMXMerge-for_OmegaT.jar（LGPL ライセンス）
   groovy-all-2.2.2.jar（Apache ライセンス 2.0）
+  slf4j（MIT ライセンス）
 
 ==============================================================================
  5.  バグかな？と思ったら

@@ -41,6 +41,7 @@ import org.omegat.filters2.IFilter;
 import org.omegat.filters2.master.FilterMaster;
 import org.omegat.filters2.master.PluginUtils;
 import org.omegat.gui.comments.CommentsTextArea;
+import org.omegat.gui.comments.IComments;
 import org.omegat.gui.dictionaries.DictionariesTextArea;
 import org.omegat.gui.editor.EditorController;
 import org.omegat.gui.editor.IEditor;
@@ -105,8 +106,7 @@ public class Core {
     @SuppressWarnings("unused")
     private static MultipleTransPane multiple;
     private static INotes notes;
-    @SuppressWarnings("unused")
-    private static CommentsTextArea comments;
+    private static IComments comments;
 
     private static Map<String, String> cmdLineParams;
 
@@ -186,7 +186,7 @@ public class Core {
      * 
      * @return the comment area
      */
-    public static CommentsTextArea getComments() {
+    public static IComments getComments() {
         return comments;
     }
     

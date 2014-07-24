@@ -28,6 +28,10 @@
 package org.omegat.gui.comments;
 
 import java.awt.Dimension;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 
 import org.omegat.core.CoreEvents;
 import org.omegat.core.data.SourceTextEntry;
@@ -46,9 +50,12 @@ import org.omegat.util.gui.UIThreadsUtil;
  * @author Alex Buloichik
  */
 @SuppressWarnings("serial")
-public class CommentsTextArea extends EntryInfoPane<SourceTextEntry> implements IEntryEventListener {
+public class CommentsTextArea extends EntryInfoPane<SourceTextEntry> implements IEntryEventListener,
+        IComments {
 
     private static final String EXPLANATION = OStrings.getString("GUI_COMMENTSWINDOW_explanation");
+
+    private final List<ProviderStorage> providers = new ArrayList<ProviderStorage>();
 
     /** Creates new Comments Text Area Pane */
     public CommentsTextArea(MainWindow mw) {
@@ -62,40 +69,60 @@ public class CommentsTextArea extends EntryInfoPane<SourceTextEntry> implements 
         this.setText(EXPLANATION);
         setMinimumSize(new Dimension(100, 50));
 
+        addCommentProvider(ENTRY_COMMENT_PROVIDER, 0);
+
         CoreEvents.registerEntryEventListener(this);
     }
 
     public void onEntryActivated(SourceTextEntry newEntry) {
         UIThreadsUtil.mustBeSwingThread();
 
+        List<ProviderStorage> list;
+        synchronized (providers) {
+            list = new ArrayList<ProviderStorage>(providers);
+        }
         StringBuilder text = new StringBuilder(1024);
-        if (newEntry.getKey().id != null) {
-            text.append(OStrings.getString("GUI_COMMENTSWINDOW_FIELD_ID"));
-            text.append(' ');
-            text.append(newEntry.getKey().id);
-            text.append('\n');
+        for (ProviderStorage ps : list) {
+            String c = ps.provider.getComment(newEntry);
+            if (c != null) {
+                text.append(c);
+            }
         }
-        if (newEntry.getKey().path != null) {
-            text.append(OStrings.getString("GUI_COMMENTSWINDOW_FIELD_Path"));
-            text.append(' ');
-            text.append(newEntry.getKey().path);
-            text.append('\n');
-        }
-        if (newEntry.getSourceTranslation() != null) {
-            text.append(OStrings.getString("GUI_COMMENTSWINDOW_FIELD_Translation"));
-            text.append(' ');
-            text.append(newEntry.getSourceTranslation());
-            text.append('\n');
-        }
-        if (newEntry.getComment() != null) {
-            text.append(OStrings.getString("GUI_COMMENTSWINDOW_FIELD_Comment"));
-            text.append('\n');
-            text.append(newEntry.getComment());
-            text.append('\n');
-        }
+
         this.setText(text.toString());
         this.setCaretPosition(0);
     }
+
+    static final ICommentProvider ENTRY_COMMENT_PROVIDER = new ICommentProvider() {
+        public String getComment(SourceTextEntry newEntry) {
+            StringBuilder text = new StringBuilder(1024);
+            if (newEntry.getKey().id != null) {
+                text.append(OStrings.getString("GUI_COMMENTSWINDOW_FIELD_ID"));
+                text.append(' ');
+                text.append(newEntry.getKey().id);
+                text.append('\n');
+            }
+            if (newEntry.getKey().path != null) {
+                text.append(OStrings.getString("GUI_COMMENTSWINDOW_FIELD_Path"));
+                text.append(' ');
+                text.append(newEntry.getKey().path);
+                text.append('\n');
+            }
+            if (newEntry.getSourceTranslation() != null) {
+                text.append(OStrings.getString("GUI_COMMENTSWINDOW_FIELD_Translation"));
+                text.append(' ');
+                text.append(newEntry.getSourceTranslation());
+                text.append('\n');
+            }
+            if (newEntry.getComment() != null) {
+                text.append(OStrings.getString("GUI_COMMENTSWINDOW_FIELD_Comment"));
+                text.append('\n');
+                text.append(newEntry.getComment());
+                text.append('\n');
+            }
+            return text.toString();
+        }
+    };
 
     public void onNewFile(String activeFileName) {
     }
@@ -116,5 +143,38 @@ public class CommentsTextArea extends EntryInfoPane<SourceTextEntry> implements 
         UIThreadsUtil.mustBeSwingThread();
 
         this.setText("");
+    }
+
+    @Override
+    public void addCommentProvider(ICommentProvider provider, int priority) {
+        ProviderStorage s = new ProviderStorage();
+        s.provider = provider;
+        s.priority = priority;
+        synchronized (providers) {
+            providers.add(s);
+            Collections.sort(providers, new Comparator<ProviderStorage>() {
+                @Override
+                public int compare(ProviderStorage o1, ProviderStorage o2) {
+                    return new Integer(o1.priority).compareTo(new Integer(o2.priority));
+                }
+            });
+        }
+    }
+
+    @Override
+    public void removeCommentProvider(ICommentProvider provider) {
+        synchronized (providers) {
+            for (int i = 0; i < providers.size(); i++) {
+                if (providers.get(i).provider == provider) {
+                    providers.remove(i);
+                    break;
+                }
+            }
+        }
+    }
+
+    static class ProviderStorage {
+        ICommentProvider provider;
+        int priority;
     }
 }

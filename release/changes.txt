@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 3.1.4
 ----------------------------------------------------------------------
-   7 Enhancements
+   8 Enhancements
    1 Bug fix
    1 Localisation update
 ----------------------------------------------------------------------
@@ -11,6 +11,9 @@
 
   - Enable Check whole project by default in check_rules.groovy 
   https://sourceforge.net/p/omegat/feature-requests/1012/
+
+  - Don't save location of projects opened via command line
+  https://sourceforge.net/p/omegat/feature-requests/1010/
 
   Other enhancements:
 

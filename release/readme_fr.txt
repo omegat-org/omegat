@@ -1,4 +1,4 @@
-﻿Ce document a été traduit par Didier Briel et Jean-Christophe Helary, copyright© 2007-2014.
+Ce document a été traduit par Didier Briel et Jean-Christophe Helary, copyright© 2007-2014.
 
 ==============================================================================
   OmegaT 3.0, fichier « Lisez-moi »
@@ -258,15 +258,15 @@ OmegaT utilise les bibliothèques suivantes :
   JNA par Todd Fast, Timothy Wall et d'autres personnes (licence LGPL)
   Swing-Layout 1.0.4 (licence LGPL)
   Jmyspell 2.1.4 (licence LGPL)
-  SVNKit 1.7.5 (licence TMate)
+  SVNKit 1.8.5 (licence TMate)
   Sequence Library (licence Sequence Library)
   ANTLR 3.4 (licence ANTLR 3)
-  SQLJet 1.1.3 (GPL v2)
+  SQLJet 1.1.10 (GPL v2)
   JGit (Eclipse Distribution License)
   JSch (licence JSch)
   Base64 (domaine public)
   Diff (GPL)
-  orion-ssh2-214 (licence Orion SSH for Java)
+  trilead-ssh2-1.0.0-build217 (licence Trilead SSH)
   lucene-*.jar (licence Apache 2.0)
   Les lemmatiseurs anglais (org.omegat.tokenizer.SnowballEnglishTokenizer et
   org.omegat.tokenizer.LuceneEnglishTokenizer) utilisent des mots non significatifs d'Okapi
@@ -281,7 +281,7 @@ OmegaT utilise les bibliothèques suivantes :
   KoreanAnalyzer-3x-120223.jar (licence Apache 2.0)
   SuperTMXMerge-for_OmegaT.jar (licence LGPL)
   groovy-all-2.2.2.jar (licence Apache 2.0)
-  slf4j (MIT License)
+  slf4j (licence MIT)
 
 ==============================================================================
  5.  Est-ce qu'OmegaT vous pose problème ? Avez-vous besoin d'aide ?

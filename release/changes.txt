@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 3.1.4
 ----------------------------------------------------------------------
-   8 Enhancements
+  10 Enhancements
    1 Bug fix
    1 Localisation update
 ----------------------------------------------------------------------
@@ -40,6 +40,9 @@ insertions buttons replace selection instead of ignoring it
 
   - It's possible to specify a timestamp authority for Java Web Start
 See: https://ant.apache.org/manual/Tasks/signjar.html
+
+  - Internal support for multiple comment providers, so that plugins can write
+to the comment pane
 
   Bug fixes:
 

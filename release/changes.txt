@@ -15,6 +15,9 @@
   - Don't save location of projects opened via command line
   https://sourceforge.net/p/omegat/feature-requests/1010/
 
+  - Select the matching percentage on which to base the match ordering
+  https://sourceforge.net/p/omegat/feature-requests/847/
+
   Other enhancements:
 
   - Improve combo box look and feel on OS X

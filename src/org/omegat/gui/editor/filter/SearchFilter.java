@@ -58,7 +58,7 @@ public class SearchFilter implements IEditorFilter {
 
     @Override
     public boolean isSourceAsEmptyTranslation() {
-        return true;
+        return false;
     }
 
     @Override

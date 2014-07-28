@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 2.6.3 update 11
 ----------------------------------------------------------------------
-   2 Enhancements
+   3 Enhancements
    2 Bug fixes
    2 Localisation updates
 ----------------------------------------------------------------------
@@ -17,6 +17,8 @@ compilation time, by putting an omegat.prefs file in /release/WebStart-specific
   - Specific user interface layout can be built into a Java Web Start package at
 compilation time, by putting an uiLayout.xml file in /release/WebStart-specific
 (backported from 3.1)
+
+  - Documentation can now be created as PDF for CJK languages
 
   Bug fixes: 
 

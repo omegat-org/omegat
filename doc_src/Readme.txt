@@ -99,7 +99,10 @@ Both doc_src_paths.xml and docbook-utf8.xsl must be copied at the same level as 
 
 The ones available in doc_src are only there for reference.
 
+***Fonts***
 
+Creating PDFs requires having the DejaVu Sans font family available.
+Creating PDFs for CJK languages requires having the Arial Unicode MS font family available.
 
 ***Usage***
 
@@ -117,6 +120,9 @@ ant -Dlanguage=en html
 
 Building PDF
 ant -Dlanguage=en pdf
+
+Building PDF for a CJK language
+ant -Dlanguage=ja pdf-cjk
 
 Building Javahelp
 ant -Dlanguage=en javahelp

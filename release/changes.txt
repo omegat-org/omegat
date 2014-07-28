@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 3.1.4 (2014-07-28)
 ----------------------------------------------------------------------
-  11 Enhancements
+  12 Enhancements
    2 Bug fixes
    2 Localisation update
 ----------------------------------------------------------------------
@@ -17,6 +17,9 @@
 
   - Select the matching percentage on which to base the match ordering
   https://sourceforge.net/p/omegat/feature-requests/847/
+
+  - Select folders and files to ignore in the source folder 
+  https://sourceforge.net/p/omegat/feature-requests/954/
 
   Other enhancements:
 

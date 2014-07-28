@@ -215,6 +215,12 @@ public class SearchWindowController {
                 enableDisableAuthor();
             }
         });
+        
+        ((MFindField) form.m_authorField).enterActionListener = new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                doSearch();
+            }
+        };
 
         form.m_dateToCB.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {

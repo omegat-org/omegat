@@ -2,443 +2,212 @@
    <head>
       <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
    
-      <title>Útmutató az azonnali kezdéshez</title>
-      <link rel="stylesheet" href="OmegaT.css" type="text/css">
-      <meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+      <title>Vegye használatba az OmegaT-t 5 percen belül!</title>
+      <link rel="stylesheet" type="text/css" href="OmegaT.css">
+      <meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
    </head>
    <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
-      <div class="chapter" title="Útmutató az azonnali kezdéshez">
+      <div class="chapter">
          <div class="titlepage">
             <div>
                <div>
-                  <h2 class="title"><a name="chapter.instant.start.guide"></a>Útmutató az azonnali kezdéshez
+                  <h2 class="title"><a name="chapter.instant.start.guide"></a>Vegye használatba az OmegaT-t 5 percen belül!
                   </h2>
                </div>
             </div>
          </div>
-         <div class="section" title="1.&nbsp;Vegye használatba az OmegaT-t 5 percen belül!">
+         <div class="section">
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="d0e4"></a>1.&nbsp;Vegye használatba az <span class="application">OmegaT</span>-t 5 percen belül!
+                     <h2 class="title" style="clear: both"><a name="create.and.open.new.project"></a>1.&nbsp;Új projekt létrehozása<a class="indexterm" name="d0e7"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <p><em><span class="remark">Megjegyzés:</span></em> Apple Mac esetén használja a
+               <span class="keycap"><strong>Cmd</strong></span>- vagy az <span class="keycap"><strong>Apple</strong></span>Apple-billentyűt a
+               <span class="keycap"><strong>Ctrl</strong></span>-billentyű helyett .
+            </p>
+            <p>Az OmegaT használatbavételéhez először hozzon létre egy új
+               projektet a különféle fájlok (forrásszövegek, fordítási memóriák,
+               szójegyzékek, fordítások) számára. A <span class="guimenu">Projekt </span>
+               menüből válassza ki az  <span class="guimenuitem">Új...</span><a class="indexterm" name="d0e33"></a> menüpontot és adjon meg egy projektnevet. Ne feledje
+               el, hogy hol jött létre a projekt, mert később vissza kell térnie
+               ide.
+            </p>
+            <p>A név megadása után megjelenik az Új projekt létrehozása
+               ablak. Az ablak felső részében válassza ki a forrásnyelvet és a
+               célnyelvet, majd a <span class="guibutton">Rendben </span>.gombra kattintva lépjen
+               tovább.
+            </p>
+            <p><span class="application">Ha az ablak többi beállítási lehetőségével
+                  élni kíván, bármikor visszatérhet ide a  <span class="keycap"><strong>Ctrl+E.</strong></span>
+                  megnyomásával.</span></p>
+            <p>Ezután megjelenik a Projektállományok ablak. A forrásszövegek
+               kiválasztásához kattintson a Forrásszövegek importálása... gombra. Az
+               OmegaT a kiválasztott szövegeket az újonnan létrehozott projekt
+               <code class="filename">/source/</code> almappájába másolja. Ha a forrásszöveg
+               megjelenik a Szerkesztő panelen, zárja be a Projektállományok
+               ablakot.
+            </p>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="translate.the.segments.one.by.one"></a>2.&nbsp;Fordítsa le a szöveget
                      </h2>
                   </div>
                </div>
             </div>
-            <p>Ez az azonnali kezdéshez való útmutató csak az OmegaT alapjait ismerteti. Ideális esetben a felhasználóknak ajánlatos alaposan
-               megismerkedni a felhasználói kézikönyvvel, mert megtudhatják belőle mindazt, amit az <span class="application">OmegaT</span> számukra tartogat. Megjegyzés Mac-felhasználóknak: az itt leírt gyorsbillentyűk a "<span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>billentyű</strong></span>" kombinációval érhetők el, Mac esetén viszont a "<span class="keycap"><strong>Cmd</strong></span>+<span class="keycap"><strong>billentyű</strong></span>" használandó. A "<span class="keycap"><strong>Cmd</strong></span>" billentyűn az Apple billentyűzetén a "command" felirat vagy az "alma"-jel látható.
-            </p>
-            <p>Az <span class="application">OmegaT</span> képernyőjén megjelenő munkaterület öt ablakra van felosztva<a class="indexterm" name="d0e35"></a>. Ezek mindegyikét átméretezheti az egérrel. Balra található a szerkesztő, ahol begépeli a fordítást. Jobbra fent látható
-               a Bizonytalan egyezések ablak, ahol a fordítási memóriában fellelt részleges egyezések jelennek meg. Ez alatt található a
-               Szójegyzék ablak, benne pedig a szójegyzékben fellelt egyezések. Az ablak alján látható két gombbal a Szótár és a Gépi fordítás
-               ablak érhető el. (Megjegyzés: az ablakokat természetesen tetszése szerint átszabhatja. A fenti leírás az OmegaT telepítés
-               utáni megjelenésére vonatkozik).
-            </p>
-            <p>A Szerkesztő ablakban az OmegaT a forrásszöveget jeleníti meg mondatokra (vagy bekezdésekre)  'darabolva'.. Ezeket a szövegrészeket
-               fogja egymás után lefordítani. A szövegben előrehaladva a lefordított részek automatikusan egy fordítási memóriába kerülnek.
-               Ha minden szövegegységet lefordított (vagy ha úgy kívánja, akár munka közben) az <span class="application">OmegaT</span>  a fordítási memória segítségével a “target” [célnyelvi] mappában előállítja a lefordított dokumentumo(ka)t.
-            </p>
-            <p>Az OmegaT a fordításokat fordítási "projektekben" tárolja. Az OmegaT minden egyes projekthez létrehoz egy sor mappát és ezekben
-               tárolja a lefordítandó forrásszövegeket, valamint az esetleg használni kívánt szójegyzékeket és fordítási memóriákat. Az OmegaT
-               létrehoz egy “target” [célnyelvi] mappát is, ebbe kerülnek a végleges lefordított dokumentumok.
+            <p>Az OmegaT egységről egységre haladva jeleníti meg a
+               fordítandó szöveget. Egy egység lefordítása után a <span class="keycap"><strong>Ctrl+U
+                     </strong></span> lenyomásával térhet át a következő fordítandó egységre
+               (vagy a <span class="keycap"><strong>Ctrl+Shift+U </strong></span>-val a következő lefordított
+               egységre).. A fordítás végleges formájának megtekintéséhez nyomja
+               meg a <span class="keycap"><strong>Ctrl+D</strong></span>-t. Ennek hatására a /target/ mappában
+               létrejön a fordítás. A fordítás folyamán a
+               <span class="guimenu">Szerkesztés</span> és az <span class="guimenu">Ugrás</span>  menükből
+               hasznos menüpontokat érhet el.
             </p>
          </div>
-         <div class="section" title="2.&nbsp;Fordítás az OmegaT segítségével">
+         <div class="section">
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="d0e46"></a>2.&nbsp;Fordítás az <span class="application">OmegaT</span> segítségével
+                     <h2 class="title" style="clear: both"><a name="d0e75"></a>3.&nbsp;Címkék ellenőrzése
                      </h2>
                   </div>
                </div>
             </div>
-            <div class="section" title="2.1.&nbsp;Új projekt létrehozása és megnyitása">
-               <div class="titlepage">
-                  <div>
-                     <div>
-                        <h3 class="title"><a name="create.and.open.new.project"></a>2.1.&nbsp;Új projekt létrehozása és megnyitása<a class="indexterm" name="d0e55"></a></h3>
-                     </div>
-                  </div>
-               </div>
-               <p>A menüből válassza ki a <span class="guimenu">Projekt</span> → <span class="guimenuitem">Új...</span><a class="indexterm" name="d0e67"></a> pontot.
-               </p>
-               <p>Térjen át arra a mappára, amelybe a projekt állományait menteni kívánja, majd adjon meg egy nevet a fordítási projektnek.
-                  A projekt fő mappája ezt a nevet fogja használni: minden projektfájl ebbe a mappába vagy annak almappáiba kerül majd.
-               </p>
-               <p>Az <span class="application">OmegaT</span> a létrehozandó projektmappák megerősítésére vagy módosítására az alábbi párbeszédablakot használja:
-               </p>
-               <div class="figure"><a name="New.project.dialog.window"></a><p class="title"><b>Figure&nbsp;1.&nbsp;<a class="indexterm" name="d0e82"></a>új projekt párbeszédablaka</b></p>
-                  <div class="figure-contents">
-                     <div class="mediaobject"><img src="images/NewProject.png" alt="ProjektProjekt párbeszédablak - ábraúj projekt párbeszédablaka"></div>
-                  </div>
-               </div><br class="figure-break"><p>Elfogadhatja az almappák felkínált helyét, de előtte ellenőrizze, hogy a forrásnyelvi és a célnyelvi kódok helyesek-e. A lenyíló
-                  listából válassza ki a nyelvi kódot (2 betűs) vagy a nyelvi- és régiókódot (2 + 2 betűs), vagy írja be őket (a a nyelvi kód
-                  2 vagy 3 betűs lehet). Jegyezze meg a 'target' célmappa helyét (ahová a lefordított szövegek kerülnek majd). Ha "bekezdésenkénti"
-                  szövegdarabolás helyett mondatonkéntit szeretne használni, olvassa el a szövegdarabolási szabályokról szóló fejezetet.
-               </p>
-               <p>Amikor a projekt beállításait a Rendben gombra kattintva jóváhagyja, az OmegaT felszólítja az importálandó forrásdokumentumok
-                  kiválasztására. Importálhat akár egyetlen állományt, de importálhat egész könyvtárakat (az alkönyvtáraikban lévő összes állománnyal
-                  együtt). Erre a célra használhat egy fájlkezelő alkalmazást is. Ha véletlenül rossz vagy túl sok dokumentumot importált, törölje
-                  őket a projekt 'source' [forrásnyelvi] mappájából.
-               </p>
-               <p>A fordítandó állományok ellenőrzéséhez térjen át a <span class="bold"><strong>Projektállományok</strong></span>  <a class="indexterm" name="d0e100"></a>ablakra (Menü:  <span class="guimenu">Projekt </span> → <span class="guimenuitem"> Projektállományok...</span>,<a class="indexterm" name="d0e112"></a> ha a mappa nem nyílik ki automatikusan).. Ha módosította a 'source' forrásmappa tartalmát, előbb ne feledje újból betölteni
-                  a projektet (Menü: <span class="guimenu">Projekt </span> → <span class="guimenuitem"> Újratöltés</span> (<span class="shortcut"><strong><span class="keycap"><strong>F5</strong></span></strong></span>)). Az <span class="application">OmegaT</span> alaphelyzetben a projektben felsorolt állományok közül az elsőt nyitja meg. Az <span class="application">OmegaT</span> csak az alábbi formátumú állományok fordítását támogatja, amennyiben azok megfelelnek az állományszűrők között megadott mintáknak.
-                  Minden egyéb állományt figyelmen kívül hagy.<a class="indexterm" name="d0e133"></a></p>
-               <div class="itemizedlist">
-                  <ul class="itemizedlist" type="disc">
-                     <li class="listitem">
-                        <p><span class="bold"><strong>Egyszerű szöveges állományok<a class="indexterm" name="d0e143"></a></strong></span></p>
-                        <div class="itemizedlist">
-                           <ul class="itemizedlist" type="circle">
-                              <li class="listitem">
-                                 <p>ASCII-szöveg (.txt stb.)</p>
-                              </li>
-                              <li class="listitem">
-                                 <p>Kódolt szöveg (*.UTF8)</p>
-                              </li>
-                           </ul>
-                        </div>
-                        <div class="itemizedlist">
-                           <ul class="itemizedlist" type="circle">
-                              <li class="listitem">
-                                 <p>Java nyelvi forrásszövegek (*.properties)</p>
-                              </li>
-                           </ul>
-                        </div>
-                        <div class="itemizedlist">
-                           <ul class="itemizedlist" type="circle">
-                              <li class="listitem">
-                                 <p>PO-állományok (*.po)</p>
-                              </li>
-                           </ul>
-                        </div>
-                        <div class="itemizedlist">
-                           <ul class="itemizedlist" type="circle">
-                              <li class="listitem">
-                                 <p>INI (kulcs=érték) állományok (*.ini)</p>
-                              </li>
-                           </ul>
-                        </div>
-                        <div class="itemizedlist">
-                           <ul class="itemizedlist" type="circle">
-                              <li class="listitem">
-                                 <p>DTD-állományok (*.DTD)</p>
-                              </li>
-                              <li class="listitem">
-                                 <p>DocuWiki-állományok (*.txt)</p>
-                              </li>
-                           </ul>
-                        </div>
-                     </li>
-                  </ul>
-               </div>
-               <div class="itemizedlist">
-                  <ul class="itemizedlist" type="disc">
-                     <li class="listitem">
-                        <p><span class="bold"><strong>Címkékkel ellátott szöveges állományok<a class="indexterm" name="d0e179"></a></strong></span></p>
-                        <div class="itemizedlist">
-                           <ul class="itemizedlist" type="circle">
-                              <li class="listitem">
-                                 <p>OpenOffice.org / OpenDocument (*.odt, *.ott, *.ods, *.ots,
-                                    *.odp, *.otp)
-                                 </p>
-                              </li>
-                           </ul>
-                        </div>
-                        <div class="itemizedlist">
-                           <ul class="itemizedlist" type="circle">
-                              <li class="listitem">
-                                 <p>Microsoft Open XML (*.docx. *.xlsx, *.pptx)</p>
-                              </li>
-                           </ul>
-                        </div>
-                        <div class="itemizedlist">
-                           <ul class="itemizedlist" type="circle">
-                              <li class="listitem">
-                                 <p>(X)HTML (*.html, *.xhtml,*.xht)</p>
-                              </li>
-                           </ul>
-                        </div>
-                        <div class="itemizedlist">
-                           <ul class="itemizedlist" type="circle">
-                              <li class="listitem">
-                                 <p>HTML Help Compiler (*.hhc, *.hhk)</p>
-                              </li>
-                           </ul>
-                        </div>
-                        <div class="itemizedlist">
-                           <ul class="itemizedlist" type="circle">
-                              <li class="listitem">
-                                 <p>DocBook (*.xml)</p>
-                              </li>
-                           </ul>
-                        </div>
-                        <div class="itemizedlist">
-                           <ul class="itemizedlist" type="circle">
-                              <li class="listitem">
-                                 <p>egynyelvű XLIFF (*.xlf, *.xliff, *.sdlxliff)</p>
-                              </li>
-                           </ul>
-                        </div>
-                        <div class="itemizedlist">
-                           <ul class="itemizedlist" type="circle">
-                              <li class="listitem">
-                                 <p>QuarkXPress CopyFlowGold (*.tag, *.xtg)</p>
-                              </li>
-                           </ul>
-                        </div>
-                        <div class="itemizedlist">
-                           <ul class="itemizedlist" type="circle">
-                              <li class="listitem">
-                                 <p>SubRip feliratok (*.srt)</p>
-                              </li>
-                           </ul>
-                        </div>
-                        <div class="itemizedlist">
-                           <ul class="itemizedlist" type="circle">
-                              <li class="listitem">
-                                 <p>ResX-állományok (*.resx)</p>
-                              </li>
-                           </ul>
-                        </div>
-                        <div class="itemizedlist">
-                           <ul class="itemizedlist" type="circle">
-                              <li class="listitem">
-                                 <p>Android forrásfájlok (*.xml)</p>
-                              </li>
-                           </ul>
-                        </div>
-                        <div class="itemizedlist">
-                           <ul class="itemizedlist" type="circle">
-                              <li class="listitem">
-                                 <p>LaTex (*.tex, *.latex)</p>
-                              </li>
-                              <li class="listitem">
-                                 <p>Súgóállományok (*.xml) és kézikönyvek (*.hmxp)</p>
-                              </li>
-                              <li class="listitem">
-                                 <p>Typo3 LocManager (*.xml)</p>
-                              </li>
-                           </ul>
-                        </div>
-                        <div class="itemizedlist">
-                           <ul class="itemizedlist" type="circle">
-                              <li class="listitem">
-                                 <p>WiX honosítási állományok (*.wxl)</p>
-                              </li>
-                              <li class="listitem">
-                                 <p>Iceni Infix (*.xml)</p>
-                              </li>
-                              <li class="listitem">
-                                 <p>Flash XML export (*.xml)</p>
-                              </li>
-                           </ul>
-                        </div>
-                     </li>
-                  </ul>
-               </div>
-               <p>A lefordítandó szövegen túl a címkékkel ellátott szöveges állományok formázási információkat tartalmaznak, melyeket az OmegaT
-                  “címkék” formájában rejt el. A címkéknek a célnyelvi szövegben is szerepelni kell, még akkor is, ha a formázás nem “fordítandó”.
-                  Hiányzó vagy rossz helyre kerülő címkék esetén a a fordítást utólag javítani kell - lásd alább: "Címkék ellenőrzése".
-               </p>
-            </div>
-            <div class="section" title="2.2.&nbsp;Szövegegységek fordítása egyesével">
-               <div class="titlepage">
-                  <div>
-                     <div>
-                        <h3 class="title"><a name="translate.the.segments.one.by.one"></a>2.2.&nbsp;Szövegegységek fordítása egyesével
-                        </h3>
-                     </div>
-                  </div>
-               </div>
-               <p>Ha meghatározta a projektet és a fordítandó állományokat, az <span class="application">OmegaT</span> a szerkesztőben megnyitja az első forrásszöveget.
-               </p>
-               <p>Az aktuális szövegegység zöld színnel kiemelve látható; alatta a célnyelvi mezőben megismétlődik a forrásszöveg. (Ekkor a
-                  célnyelvi mezőn kívüli összes szöveg zárolva van és nem módosítható.) A fordítást a forrásszöveg felülírásával az &lt;<code class="literal">0001. egység&gt;</code> elé kell beírnia. Az OmegaT-t beállíthatja úgy, hogy a forrásszöveg automatikusan a célnyelvi szövegbe kerüljön (lásd: <span class="emphasis"><em>Beállítások &gt; Szerkesztési mód...</em></span>), ami hasznos lehet, ha a forrásszöveg egyes részei változatlanul megmaradnak. Ilyen esetekben a feladat a forrásszöveg felülírása.
-                  A következő szövegegységre az "<span class="bold"><strong>ENTER</strong></span>" lenyomásával térhet át. Megjegyzés:
-               </p>
-               <div class="itemizedlist">
-                  <ul class="itemizedlist" type="disc">
-                     <li class="listitem">
-                        <p>Bármely, akár feljebb, akár lejjebb lévő szövegrészre áttérhet, ha kétszer rákattint a megnyitni kívánt mondatra vagy bekezdésre.</p>
-                     </li>
-                     <li class="listitem">
-                        <p>Ha inkább üres célnyelvi mezőbe szeretné beírni a fordítást, módosítsa ennek megfelelően a <span class="guimenu">Beállítások </span> → <span class="guimenuitem">Szerkesztési mód...<a class="indexterm" name="d0e277"></a></span> menüpontot.
-                        </p>
-                     </li>
-                     <li class="listitem">
-                        <p>A főmenü Nézet menüpontjából módosíthatja a szerkesztőablak beállításait (pl. azt, hogy látsszon-e a forrásnyelvi szöveg,
-                           kiemeleten jelenjen-e meg a lefordított szöveg stb.).
-                        </p>
-                        <p>Az <span class="bold"><strong>ENTER</strong></span> megnyomásakor több dolog történik a háttérben: az <span class="application">OmegaT</span> a szövegegységpárt (a forrást és annak fordítását) hozzáadja a belső fordítási memóriához. Emellett automatikusan lefordítja
-                           az összes ezzel egyező, de más projektfájlokban fellelt szöveget is. Továbbmenve, végignézi a fordítási memóriát és a szójegyzéket,
-                           nincs-e bennük egyezés a következő lefordítatlan szövegegységgel, melyet azután meg is nyit.
-                        </p>
-                     </li>
-                  </ul>
-               </div>
-            </div>
-            <div class="section" title="2.3.&nbsp;A fordítási memória, a szójegyzékek és a szótárak egyezéseinek felhasználása">
-               <div class="titlepage">
-                  <div>
-                     <div>
-                        <h3 class="title"><a name="use.matches.in.TMs.dictionaries.and.glossaries"></a>2.3.&nbsp;A fordítási memória, a szójegyzékek és a szótárak egyezéseinek felhasználása
-                        </h3>
-                     </div>
-                  </div>
-               </div>
-               <div class="section" title="2.3.1.&nbsp;Egyezések a fordítási memóriában">
-                  <div class="titlepage">
-                     <div>
-                        <div>
-                           <h4 class="title"><a name="translation.memory.matches"></a>2.3.1.&nbsp;Egyezések a fordítási memóriában<a class="indexterm" name="d0e300"></a><a class="indexterm" name="d0e305"></a></h4>
-                        </div>
-                     </div>
-                  </div>
-                  <div class="figure"><a name="d0e310"></a><p class="title"><b>Figure&nbsp;2.&nbsp;Az egyezések panelje</b></p>
-                     <div class="figure-contents">
-                        <div class="mediaobject"><img src="images/MatchesPane.png" alt="Az egyezések panelje"></div>
-                     </div>
-                  </div><br class="figure-break"><p>Ha az <span class="application">OmegaT</span> a fordítási memóriában  a következő szövegegységhez bizonytalan (30% vagy azt meghaladó mértékű) egyezéseket talál, akkor
-                     megjeleníti azokat a Bizonytalan egyezések ablakban. Alaphelyzetben a Bizonytalan egyezések ablakból az első egyezést választja
-                     ki.
-                  </p>
-                  <div class="itemizedlist">
-                     <ul class="itemizedlist" type="disc">
-                        <li class="listitem">
-                           <p>A <span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>I</strong></span><a class="indexterm" name="d0e332"></a> lenyomásával a kiválasztott egyezést beszúrja a kurzor helyére, illetve...
-                           </p>
-                        </li>
-                        <li class="listitem">
-                           <p>A <span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>R</strong></span> <a class="indexterm" name="d0e347"></a><a class="indexterm" name="d0e352"></a> lenyomásával a kiválasztott egyezéssel felülírja a teljes szövegegységet..
-                           </p>
-                        </li>
-                     </ul>
-                  </div>
-                  <p>Ha több egyezés is előfordul, de nem az előre kiválasztottat kívánja használni:</p>
-                  <div class="itemizedlist">
-                     <ul class="itemizedlist" type="disc">
-                        <li class="listitem">
-                           <p>Válassza ki a kívánt egyezést a Bizonytalan egyezések ablakból: <span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>2</strong></span> a másodikként megjelenített egyezés, <span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>3</strong></span> a harmadik egyezés kiválasztásához stb.
-                           </p>
-                        </li>
-                        <li class="listitem">
-                           <p>Ezután használhatja a <span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>I</strong></span> vagy a <span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>R</strong></span> billentyűparancsot a fent leírtak szerint..
-                           </p>
-                        </li>
-                     </ul>
-                  </div>
-                  <p>Arra is utasíthatja az OmegaT-t, hogy bármely megadott százalék fölötti egyezést automatikusan szúrjon be a célnyelvi mezőbe.
-                     Ezt a lehetőséget a <span class="guimenu">Beállítások</span> menüben állíthatja be.
-                  </p>
-               </div>
-               <div class="section" title="2.3.2.&nbsp;A szójegyzékben a szótárban előforduló egyezések">
-                  <div class="titlepage">
-                     <div>
-                        <div>
-                           <h4 class="title"><a name="glossary.and.dictionary.matches"></a>2.3.2.&nbsp;A szójegyzékben a szótárban előforduló egyezések<a class="indexterm" name="d0e398"></a></h4>
-                        </div>
-                     </div>
-                  </div>
-                  <p>A projektbe felvett szójegyzékekben és szótárakban fellelhető egyezéseket tájékozódás céljából a Szójegyzék és a Szótár ablak
-                     jeleníti meg..
-                  </p>
-               </div>
-               <div class="section" title="2.3.3.&nbsp;Keresések">
-                  <div class="titlepage">
-                     <div>
-                        <div>
-                           <h4 class="title"><a name="use.searches"></a>2.3.3.&nbsp;Keresések
-                           </h4>
-                        </div>
-                     </div>
-                  </div>
-                  <p>Az <span class="application">OmegaT</span> kiterjedt keresési lehetőségeket biztosít. Hívja elő a Szöveg keresése ablakot a <span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>F</strong></span> -fel és a Keresendő: mezőbe írja be a kikeresendő szót vagy kifejezést. Másik megoldásként kijelölheti a Szerkesztő ablakban
-                     a keresendő szót vagy kifejezést, majd használja a <span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>F</strong></span> billentyűparancsot.
-                  </p>
-               </div>
-               <div class="section" title="2.3.4.&nbsp;Gépi fordítás használata">
-                  <div class="titlepage">
-                     <div>
-                        <div>
-                           <h4 class="title"><a name="use.Google.Translate"></a>2.3.4.&nbsp;Gépi fordítás használata<a class="indexterm" name="d0e428"></a></h4>
-                        </div>
-                     </div>
-                  </div>
-                  <p>Bekapcsolt szolgáltatás esetén (lásd: <span class="emphasis"><em>Beállítások&gt; Gépi fordítás</em></span>) a Gépi fordítás ablakban automatikusan megjelennek az adott szövegegység lefordításához kapcsolódó javaslatok. A <span class="emphasis"><em>Ctrl+M </em></span> lenyomásakor a javasolt egyezéssel felülírja a célnyelvi szövegegységet.
-                  </p>
-               </div>
-            </div>
-            <div class="section" title="2.4.&nbsp;Lefordított állományok előállítása">
-               <div class="titlepage">
-                  <div>
-                     <div>
-                        <h3 class="title"><a name="create.translated.documents"></a>2.4.&nbsp;Lefordított állományok előállítása<a class="indexterm" name="d0e444"></a></h3>
-                     </div>
-                  </div>
-               </div>
-               <p>Ha minden szövegegységet lefordított (vagy akár már előtte), az <span class="application">OmegaT</span> a fordítási memóriában tárolt fordítások alapján frissíti a célnyelvi dokumentumo(ka)t. Ehhez a menüből válassza ki a  <span class="guimenu">Projekt</span> → <span class="guimenuitem">Lefordított állományok előállítása</span> (<span class="shortcut"><strong><span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>D</strong></span></strong></span>)<a class="indexterm" name="d0e465"></a> <a class="indexterm" name="d0e471"></a> pontot. Az <span class="application">OmegaT</span> előállítja a projekt forrásmappájában lévő összes állomány fordítását, akár teljesen elkészültek, akár nem. A teljesen vagy
-                  részben kész állományokat a projekt célmappájába (target) menti. A fordítás befejezéséhez nyissa meg a célnyelvi szövegeket
-                  a velük használatos alkalmazásban (böngészőben, szövegszerkesztőben...), majd ellenőrizze a fordítás tartalmát és szerkesztését.
-                  Ezután visszatérhet az <span class="application">OmegaT</span>-hez és elvégezheti a szükséges javításokat; ne feledkezzen meg a lefordított szövegek újbóli előállításáról.
-               </p>
-            </div>
+            <p>Ha forrásszövege formázott állomány, pl. Microsoft Word,
+               LibreOffice Writer vagy HTML, az OmegaT a formázást a szöveget
+               körülvevő címkékké alakítja át. Emellett a szövegben megjelenhetnek
+               más, formázáshoz nem kötődő címkék is, A forrásszöveg pl. így
+               nézhet ki
+            </p>
+            <p></p>
+            <div class="mediaobject" align="left"><img src="images/InstantGuide_1.png" align="left"></div>
+            <p></p>
+            <p>Ugyanakkor az OmegaT ezt a mondatot az alábbi módon jeleníti
+               meg:
+            </p>
+            <p><code class="literal"></code></p>
+            <div class="mediaobject" align="left"><img src="images/InstantGuide_2.png" align="left"></div>
+            <p></p>
+            <p>A címkék az OmegaT-ben szürke színnel jelennek meg, így
+               könnyen felismerhetők. Mivel a program nem védett szövegként kezeli
+               őket, azért törölhet, beszúrhat és áthelyezhet címkéket a
+               célnyelvi szövegben. Ha viszont ezen műveletek során hibázik,
+               előfordulhat, hogy a fordítást nem fogja tudni megnyitni. Ennek
+               elkerülésére a fordítás előállítása előtt nyomja meg a
+               <span class="keycap"><strong>Ctrl+T</strong></span>-t és ellenőrizze a címkék helyességét.
+            </p>
          </div>
-         <div class="section" title="3.&nbsp;Címkét tartalmazó szöveg kezelése">
+         <div class="section">
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="how.to.handle.tagged.text"></a>3.&nbsp;Címkét tartalmazó szöveg kezelése<a class="indexterm" name="d0e486"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="d0e102"></a>4.&nbsp;A fordítás előállítása
+                     </h2>
                   </div>
                </div>
             </div>
-            <p>Az <span class="application">OmegaT</span> speciális címkék használatával gondoskodik arról, hogy a forrásszövegek formázása (vastag, dőlt stb.) megőrződjék. Az <span class="application">OmegaT</span> címkéi egy vagy több betűből és egy vagy több azt követő számjegyből, valamint a címkét lezáró "/" karakterből állnak (például:
-               &lt;f0&gt;,  &lt;/f0&gt; &lt;br&gt;, &lt;/s2&gt;). Ezekre ügyelnie kell és a célnyelvi szövegbe a megfelelő helyre kell őket beszúrnia (lásd a címkeműveletekről
-               szóló részt).
+            <p>Ha a fordításban bizonyosan nincsenek címkehibák, nyomja meg a
+               <span class="keycap"><strong>Ctrl+D</strong></span>-t és a e<code class="filename"> /target/</code> almappában
+               állítsa elő a fordítást.
             </p>
-            <div class="section" title="3.1.&nbsp;Egy példa...">
-               <div class="titlepage">
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
                   <div>
-                     <div>
-                        <h3 class="title"><a name="d0e497"></a>3.1.&nbsp;Egy példa...<a class="indexterm" name="d0e500"></a></h3>
-                     </div>
+                     <h2 class="title" style="clear: both"><a name="d0e113"></a>5.&nbsp;Amit még észben kell tartania
+                     </h2>
                   </div>
                </div>
-               <p>Ezekben a példákban a címkék ki vannak emelve a könnyebbség kedvéért, de az <span class="application">OmegaT</span>-ben nem kiemelten jelennek meg. A kék HTML-címkéket az <span class="application">OmegaT</span> figyelmen kívül hagyja, mivel ezek teljesen körbeveszik az adott egységet..  Az alább zöld színnel kiemelt címkéket az <span class="application">OmegaT</span>-nek kezelnie kell, mert azok az egységen belül helyezkednek el. Íme egy példa egy HTML-állományban szereplő címkére:
-               </p>
-               <p><code class="literal">&lt;p&gt;Egy másik megjelenítési betűtípust választhat a &lt;b&gt;Betű...&lt;/b&gt; párbeszédablakból. Megnyitása a&lt;i&gt;Beállítások  → Betű...&lt;/i&gt;
-                     menüpontból történik. A párbeszédablakban beállíthatja a betű típusát és méretét.&lt;/p&gt;</code></p>
-               <p>Ezt az <span class="application">OmegaT</span> az alábbi módon jeleníti meg afrikaans fordítás esetén:
-               </p>
-               <div class="figure"><a name="fig.tagged.segment.source"></a><p class="title"><b>Figure&nbsp;3.&nbsp;Forrásnyelvi szövegegység <a class="indexterm" name="d0e527"></a>HTML-ben</b></p>
-                  <div class="figure-contents">
-                     <div class="mediaobject"><img src="images/tagged_segment.png" alt="Forrásnyelvi szövegegység Szövegegység, forrásnyelvi és célnyelvi - ábraHTML-ben"></div>
-                  </div>
-               </div><br class="figure-break"><p>Amikor az <span class="application">OmegaT</span> előállítja a fordítást, a HTML ekként néz ki:
-               </p>
-               <div class="figure"><a name="fig.tagged.segment.target"></a><p class="title"><b>Figure&nbsp;4.&nbsp;Célnyelvi szövegegység HTML-ben</b></p>
-                  <div class="figure-contents">
-                     <div class="mediaobject"><img src="images/tagged_segment_target.png" alt="Célnyelvi szövegegység HTML-ben"></div>
-                  </div>
-               </div><br class="figure-break"></div>
-            <div class="section" title="3.2.&nbsp;Címkék ellenőrzése">
-               <div class="titlepage">
-                  <div>
-                     <div>
-                        <h3 class="title"><a name="tag.verification"></a>3.2.&nbsp;Címkék ellenőrzése<a class="indexterm" name="d0e552"></a><a class="indexterm" name="d0e557"></a></h3>
-                     </div>
-                  </div>
-               </div>
-               <p>Az <span class="application">OmegaT</span> automatikusan nem szűri ki a lefordított dokumentumban lévő hibás címkéket. Ezért a szöveg leadása előtt a fordítónak kell
-                  ellenőrizni a címkék helyességét. Válassza ki a menüből az <span class="guimenu">Eszközök</span> → <span class="guimenuitem">Címkék ellenőrzése...</span> (<span class="shortcut"><strong><span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>T</strong></span></strong></span>) pontot. Ekkor egy táblázat jelenik meg, amelyben látható, hol nem egyeznek a forrásnyelvi és a célnyelvi címkék. Kattintson
-                  a szövegegység számára. Ennek hatására automatikusan a szerkesztőben a hibás szövegegységhez kerül, ahol kijavíthatja a hibás
-                  címkét. A javítások elvégzése után ellenőrizze ismét a <span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>T<a class="indexterm" name="d0e582"></a></strong></span> lenyomásával. Ne feledje, hogy a címkeellenőrző hibát találhat helyes címkék esetén is - például amikor a nyelvtani alak
-                  helyessége érdekében a címkék sorrendje megváltozik. Ez esetben a hibát vegye óvatosságból kiadott figyelmeztetésnek.
-               </p>
-               <p>Egyes esetekben címkehiba miatt nem lehet a dokumentumot megnyitni. Aggodalomra semmi ok: a forrásszöveg és a célnyelvi szöveg
-                  nem veszett el. Javítsa ki a hibás címkéket, mielőtt előállítja a lefordított állományokat. Végezetül nyissa meg a böngészőben
-                  vagy a szerkesztőben a lefordított szöveget és ellenőrizze a végső formázást.
-               </p>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>Ha egy szöveg nem jelenik meg a Szerkesztő panelen,
+                        előfordulhat, hogy annak formátumát az OmegaT nem kezeli. Lásd:a
+                        Felhasználói kézikönyv 7. fejezetében az OmegaT által kezelt
+                        állományok felsorolását.
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>Minden új munkához létrehozhat új projektet, de egy
+                        projekthez több forrásszöveget is hozzáadhat.
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>A projekt kezdő beállításait a Projekt menü
+                        Beállítások... menüpontjából, vagy a <span class="keycap"><strong>Ctrl+E</strong></span>
+                        lenyomásával tekintheti meg. A projektbe felvett állományok listájának
+                        megtekintéséhez használja a  <span class="keycap"><strong>Ctrl+L</strong></span>
+                        billentyűkombinációt, amely megnyitja a Projekt menü
+                        Projektállományok... menüpontját..
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>A fordítást befejezésekor az OmegaT a projektmappába
+                        három fordítási memóriát exportál, ezek neve "level1",
+                        "level2" és "omegat". A "level1" és a
+                        "level2" memóriákat megoszthatja más fordítóprogramok
+                        felhasználóival. Az "omegat" elnevezésű memóriát az OmegaT
+                        használja a később létrehozandó projektek során. Ha a fordítási
+                        memória fájljait a projekt /tm/ almappájába helyezi, akkor az OmegaT
+                        automatikusan keresni fogja bennük a hasonló egységeket, melyek
+                        elnevezése: "bizonytalan egyezések".
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>Szójegyzéket a <span class="guibutton">Ctrl+Shift+G</span>
+                        lenyomásával hozhat létre. Meglévő szójegyzékeit a projekt
+                        <code class="filename">/glossary/</code> almappájába másolva az OmegaT
+                        automatikusan kikeresi a bennük lévő fordításokat.
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>Ha a forrásszövegben vagy a forrásban előforduló szavakra
+                        vagy kifejezésekre kíván rákeresni, használja a <span class="keycap"><strong>Ctrl+F</strong></span>
+                        billentyűkombinációt, amely megnyitja a "Szöveg keresése"
+                        párbeszédablakot.
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>Átfogó bevezetőt talál kezdők számára (<a class="ulink" href="http://www.omegat.org/en/tutorial/OmegaT%20for%20Beginners.pdf" target="_top">OmegaT
+                           for beginners</a> ) az OmegaT weboldalán. Ha bármilyen segítségre
+                        van szüksége az OmegaT-vel kapcsolatban, csatlakozzon az <a class="ulink" href="http://tech.groups.yahoo.com/group/OmegaT/" target="_top">OmegaT felhasználói
+                           csoportjához.</a>.
+                     </p>
+                  </li>
+               </ul>
             </div>
          </div>
       </div>

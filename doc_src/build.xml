@@ -3,7 +3,8 @@
 <!--
 /**************************************************************************
  OmegaT - Java based Computer Assisted Translation (CAT) tool
- Copyright (C) 2011 Didier Briel
+ Copyright (C) 2011-2012 Didier Briel
+               2014 Didier Briel
  
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
@@ -70,6 +71,39 @@
             </classpath>
         </java>
     </target>
+
+    <target name="fo-cjk" depends="include">
+        <java dir="."
+              fork="true"
+              failonerror="true"
+              maxmemory="128m"
+              classname="com.icl.saxon.StyleSheet" >
+            <arg value="-o" />
+            <arg value="${language}/pdf/OmegaT_documentation.fo" />
+            <arg value="${language}/index.xml" />
+            <arg value="${dbk}/fo/docbook.xsl" />
+            <arg value="paper.type=A4" />
+            <arg value="page.margin.inner=&quot;18mm&quot;" />
+            <arg value="page.margin.outer=&quot;12mm&quot;" />
+            <arg value="page.margin.top=&quot;8mm&quot;" />
+            <arg value="page.margin.bottom=&quot;8mm&quot;" />
+            <arg value="generate.toc=book toc,title,figure,table" />       
+            <arg value="chapter.autolabel=1" />
+            <arg value="section.autolabel=1" />
+            <arg value="toc.max.depth=2" />
+            <arg value="indent=&quot;no&quot;" />
+            <arg value="fop.extension=1" />
+            <arg value="insert.olink.pdf.frag=1" />
+            <!-- The Arial Unicode MS fonts must be available in the system -->
+            <arg value="body.font.family=Arial Unicode MS" />
+            <arg value="title.font.family=Arial Unicode MS" />
+            <arg value="monospace.font.family=Arial Unicode MS" />
+            <classpath>
+                <pathelement location="${saxon}"/>
+                <pathelement path="${saxon}"/>
+            </classpath>
+        </java>
+    </target>
     
     <taskdef name="fop" 
              classname="org.apache.fop.tools.anttasks.Fop">
@@ -85,6 +119,15 @@
     </taskdef>
 
     <target name="pdf" depends="fo">
+        <fop format="application/pdf" 
+             fofile="${language}/PDF/OmegaT_documentation.fo"
+             outfile="${language}/PDF/OmegaT_documentation_${language}.PDF" 
+             basedir="${language}/"
+             userconfig="fop.xconf"
+             force="true" />
+    </target>
+
+    <target name="pdf-cjk" depends="fo-cjk">
         <fop format="application/pdf" 
              fofile="${language}/PDF/OmegaT_documentation.fo"
              outfile="${language}/PDF/OmegaT_documentation_${language}.PDF" 

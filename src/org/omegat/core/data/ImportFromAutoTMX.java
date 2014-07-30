@@ -25,12 +25,14 @@
 
 package org.omegat.core.data;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.omegat.util.StringUtil;
+import org.omegat.util.TMXProp;
 
 /**
  * Utility class for import translations from tm/auto/ files.
@@ -75,8 +77,13 @@ public class ImportFromAutoTMX {
                 boolean has100PC = id != null && e.hasPropValue(ProjectTMX.PROP_X100PC, id);
 
                 if (!hasICE && !has100PC) {// TMXEntry without x-ids
-                    if (!existTranslation.defaultTranslation) {
-                        // alternative exist - skip
+                    boolean isDefaultTranslation = !isAltTranslation(e);
+                    if (!existTranslation.defaultTranslation && isDefaultTranslation) {
+                        // Existing translation is alt but the TMX entry is not.
+                        continue;
+                    }
+                    if (!isDefaultTranslation && !altTranslationMatches(e, ste.getKey())) {
+                        // TMX entry is an alternative translation that does not match this STE.
                         continue;
                     }
                     if (existTranslation.isTranslated()) { // default translation already exist
@@ -85,11 +92,11 @@ public class ImportFromAutoTMX {
                                 || isEnforcedTMX) {
                             // translation already from auto and really changed or translation comes 
                             // from the enforce folder
-                            setTranslation(ste, e, true, TMXEntry.ExternalLinked.xAUTO);
+                            setTranslation(ste, e, isDefaultTranslation, TMXEntry.ExternalLinked.xAUTO);
                         }
                     } else {
                         // default translation not exist - use from auto tmx
-                        setTranslation(ste, e, true, TMXEntry.ExternalLinked.xAUTO);
+                        setTranslation(ste, e, isDefaultTranslation, TMXEntry.ExternalLinked.xAUTO);
                     }
                 } else {// TMXEntry with x-ids
                     if (!existTranslation.isTranslated() || existTranslation.defaultTranslation) {
@@ -115,6 +122,40 @@ public class ImportFromAutoTMX {
                     }
                 }
             }
+        }
+    }
+    
+    private boolean isAltTranslation(PrepareTMXEntry entry) {
+        boolean hasFileProp = false;
+        boolean hasOtherProp = false;
+        for (TMXProp p : entry.otherProperties) {
+            if (p.getType().equals(ProjectTMX.PROP_FILE)) {
+                hasFileProp = true;
+            } else if (p.getType().equals(ProjectTMX.PROP_ID)
+                    || p.getType().equals(ProjectTMX.PROP_NEXT)
+                    || p.getType().equals(ProjectTMX.PROP_PATH)
+                    || p.getType().equals(ProjectTMX.PROP_PREV)) {
+                hasOtherProp = true;
+            }
+        }
+        return EntryKey.IGNORE_FILE_CONTEXT ? hasFileProp && hasOtherProp : hasFileProp;
+    }
+    
+    private boolean altTranslationMatches(PrepareTMXEntry entry, EntryKey key) {
+        try {
+            for (TMXProp p : entry.otherProperties) {
+                if (p.getType().equals(ProjectTMX.PROP_FILE) && EntryKey.IGNORE_FILE_CONTEXT) {
+                    continue;
+                }
+                Field f = EntryKey.class.getField(p.getType());
+                Object value = f.get(key);
+                if (!value.equals(p.getValue())) {
+                    return false;
+                }
+            }
+            return true;
+        } catch (Exception e) {
+            return false;
         }
     }
     

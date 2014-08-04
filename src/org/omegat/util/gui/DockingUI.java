@@ -133,18 +133,20 @@ public class DockingUI {
         // to ensure DockViewTitleBar title readability
         Color textColor = UIManager.getColor("InternalFrame.inactiveTitleForeground");
         Color backColor = UIManager.getColor("Panel.background");
-        if (textColor.equals(backColor)) {
-            float[] hsb = Color.RGBtoHSB(textColor.getRed(),
-                    textColor.getGreen(), textColor.getBlue(), null);
-            float brightness = hsb[2]; // darkest 0.0f <--> 1.0f brightest
-            if (brightness >= 0.5f) {
-                brightness -= 0.5f;    // to darker
-            } else {
-                brightness += 0.5f;    // to brighter
+        if (textColor!= null && backColor!=null) { // One of these could be null
+            if (textColor.equals(backColor)) {
+                float[] hsb = Color.RGBtoHSB(textColor.getRed(),
+                        textColor.getGreen(), textColor.getBlue(), null);
+                float brightness = hsb[2]; // darkest 0.0f <--> 1.0f brightest
+                if (brightness >= 0.5f) {
+                    brightness -= 0.5f;    // to darker
+                } else {
+                    brightness += 0.5f;    // to brighter
+                }
+                int rgb = Color.HSBtoRGB(hsb[0], hsb[1], brightness);
+                ColorUIResource res = new ColorUIResource(rgb);
+                UIManager.put("InternalFrame.inactiveTitleForeground", res);
             }
-            int rgb = Color.HSBtoRGB(hsb[0], hsb[1], brightness);
-            ColorUIResource res = new ColorUIResource(rgb);
-            UIManager.put("InternalFrame.inactiveTitleForeground", res);
         }
     }
 

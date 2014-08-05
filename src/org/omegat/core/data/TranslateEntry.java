@@ -154,7 +154,7 @@ public abstract class TranslateEntry implements ITranslateCallback {
             if (firstTag != null) { 
                 int locFirstTag = r.indexOf(firstTag);
                 // Is there text before that first tag?
-                if (locFirstTag != -1) {
+                if (locFirstTag > 0) {
                     // Was the first tag between two words without any spaces around?
                     String addSpace = "";
                     if (!Character.isWhitespace(r.charAt(locFirstTag -1)) && 

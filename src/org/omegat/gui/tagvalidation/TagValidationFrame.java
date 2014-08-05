@@ -35,6 +35,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import java.util.EnumSet;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -360,7 +361,10 @@ public class TagValidationFrame extends JFrame {
                     report.ste.getProtectedParts(), report.transErrors));
             output.append("</td>");
             output.append("<td width=\"10%\">");
-            Set<TagError> allErrors = EnumSet.copyOf(report.srcErrors.values());
+            // Although NetBeans mentions that the HashSet can be replaced with java.util.EnumSet
+            // Set<TagError> allErrors = EnumSet.copyOf(report.srcErrors.values());
+            // creates a runtime exception in some cases, while the HashSet does not
+            Set<TagError> allErrors = new HashSet<TagError>(report.srcErrors.values());
             allErrors.addAll(report.transErrors.values());
             for (TagError err : allErrors) {
                 output.append(colorize(ErrorReport.localizedTagError(err), err));

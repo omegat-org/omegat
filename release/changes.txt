@@ -1,8 +1,8 @@
 ----------------------------------------------------------------------
- OmegaT 3.1.4 
+ OmegaT 3.1.4 update 1 
 ----------------------------------------------------------------------
    1 Enhancement
-   1 Bug fix
+   2 Bug fixes
    0 Localisation update
 ----------------------------------------------------------------------
 3.1.4 update 1 vs. 3.1.4
@@ -16,6 +16,9 @@
 
   - Pane headline missing using the Windows classic theme
   https://sourceforge.net/p/omegat/bugs/697/
+
+  - Error while trying to validate tags with a changed order
+  https://sourceforge.net/p/omegat/bugs/698/
 
 ----------------------------------------------------------------------
  OmegaT 3.1.4 (2014-07-28)

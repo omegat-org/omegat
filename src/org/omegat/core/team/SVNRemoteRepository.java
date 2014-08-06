@@ -168,7 +168,7 @@ public class SVNRemoteRepository implements IRemoteRepository {
         try {
             long rev = ourClientManager.getUpdateClient().doCheckout(url, baseDirectory, SVNRevision.HEAD,
                     SVNRevision.HEAD, SVNDepth.INFINITY, false);
-            Log.logDebug(LOGGER, "SVN checkouted to revision {0}", rev);
+            Log.logDebug(LOGGER, "SVN checked out to revision {0}", rev);
             Log.logInfoRB("SVN_FINISH", "checkout");
         } catch (SVNAuthenticationException ex) {
             // authentication failed - need to ask username/password

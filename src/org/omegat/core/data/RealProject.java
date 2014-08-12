@@ -563,7 +563,7 @@ public class RealProject implements IProject {
                 File fn = new File(locRoot+midName);
                 if (!fn.getParentFile().exists()) {
                     // target directory doesn't exist - create it
-                    if (!fn.getParentFile().mkdir()) {
+                    if (!fn.getParentFile().mkdirs()) {
                         throw new IOException(OStrings.getString("CT_ERROR_CREATING_TARGET_DIR") + fn.getParentFile());
                     }
                 }

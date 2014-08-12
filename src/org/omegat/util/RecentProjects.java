@@ -47,6 +47,10 @@ public class RecentProjects implements Iterable<String> {
 
 	public void saveToPrefs() {
 		for (int i = 0; i < mostRecentProjectSize; i++) {
+			if ( i + 1 > recentProjects.size())
+			{
+				break;
+			}
 			Preferences.setPreference(Preferences.MOST_RECENT_PROJECTS_PREFIX
 					+ i, recentProjects.get(i));
 		}

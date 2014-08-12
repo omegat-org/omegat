@@ -268,6 +268,10 @@ public class Preferences {
     public static final String SCRIPTWINDOW_HEIGHT = "script_window_height";
     public static final String SCRIPTWINDOW_X = "script_window_x";
     public static final String SCRIPTWINDOW_Y = "script_window_y";
+    
+    /** Most recent projects list */
+    public static final String MOST_RECENT_PROJECTS_SIZE = "most_recent_projects_size";
+    public static final String MOST_RECENT_PROJECTS_PREFIX = "most_recent_projects_";
 
     /**
      * display the segment sources

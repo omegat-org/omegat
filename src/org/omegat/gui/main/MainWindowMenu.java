@@ -62,6 +62,7 @@ import org.omegat.gui.editor.EditorSettings;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
+import org.omegat.util.RecentProjects;
 import org.omegat.util.StaticUtils;
 import org.omegat.util.gui.OSXIntegration;
 import org.omegat.util.gui.Styles;
@@ -245,6 +246,11 @@ public class MainWindowMenu implements ActionListener, MenuListener, IMainMenu {
         projectMenu.add(projectNewMenuItem = createMenuItem("TF_MENU_FILE_CREATE"));
         projectMenu.add(projectTeamNewMenuItem = createMenuItem("TF_MENU_FILE_TEAM_CREATE"));
         projectMenu.add(projectOpenMenuItem = createMenuItem("TF_MENU_FILE_OPEN"));
+        projectMenu.add(projectOpenRecentMenuItem = createMenu("TF_MENU_FILE_OPEN_RECENT"));
+        // Load recent used projects
+        RecentProjects recentProjects = new RecentProjects(projectOpenRecentMenuItem);
+        recentProjects.updateMenu();
+
         projectMenu.add(projectImportMenuItem = createMenuItem("TF_MENU_FILE_IMPORT"));
         projectMenu.add(projectWikiImportMenuItem = createMenuItem("TF_MENU_WIKI_IMPORT"));
         projectMenu.add(projectReloadMenuItem = createMenuItem("TF_MENU_PROJECT_RELOAD"));
@@ -632,6 +638,10 @@ public class MainWindowMenu implements ActionListener, MenuListener, IMainMenu {
     public JMenu getProjectMenu() {
         return projectMenu;
     }
+    
+    public JMenuItem getProjectRecentMenuItem() {
+        return projectOpenRecentMenuItem;
+    }
 
     JMenuItem cycleSwitchCaseMenuItem;
     JMenuItem editFindInProjectMenuItem;
@@ -714,6 +724,7 @@ public class MainWindowMenu implements ActionListener, MenuListener, IMainMenu {
     JMenuItem projectNewMenuItem;
     JMenuItem projectTeamNewMenuItem;
     JMenuItem projectOpenMenuItem;
+    JMenuItem projectOpenRecentMenuItem;
     JMenuItem projectReloadMenuItem;
     JMenuItem projectSaveMenuItem;
     JMenuItem projectWikiImportMenuItem;

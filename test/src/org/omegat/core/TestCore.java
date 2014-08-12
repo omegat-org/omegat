@@ -32,6 +32,7 @@ import java.io.File;
 
 import javax.swing.JFrame;
 import javax.swing.JMenu;
+import javax.swing.JMenuItem;
 
 import org.custommonkey.xmlunit.XMLTestCase;
 import org.omegat.core.data.NotLoadedProject;
@@ -75,6 +76,10 @@ public abstract class TestCore extends XMLTestCase {
             public JMenu getGlossaryMenu() {
                 return menu;
             }
+
+			public JMenuItem getProjectRecentMenuItem() {
+				return menu;
+			}
         };
 
         Core.setMainWindow(new IMainWindow() {

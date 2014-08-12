@@ -53,6 +53,7 @@ import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
 import org.omegat.util.ProjectFileStorage;
+import org.omegat.util.RecentProjects;
 import org.omegat.util.gui.DockingUI;
 import org.omegat.util.gui.OmegaTFileChooser;
 import org.omegat.util.gui.OpenProjectFileChooser;
@@ -341,6 +342,12 @@ public class ProjectUICommands {
                         return null;
                     }
                 }
+
+                RecentProjects recentProjects = new RecentProjects();
+				recentProjects.add(projectRootFolder.getAbsolutePath());
+                recentProjects.saveToPrefs();
+                recentProjects.updateMenu();
+
                 mainWindow.setCursor(oldCursor);
                 return null;
             }

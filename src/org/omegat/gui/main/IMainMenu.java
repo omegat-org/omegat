@@ -27,6 +27,7 @@
 package org.omegat.gui.main;
 
 import javax.swing.JMenu;
+import javax.swing.JMenuItem;
 
 /**
  * Main menu interface.
@@ -44,4 +45,6 @@ public interface IMainMenu {
     JMenu getGlossaryMenu();
 
     JMenu getProjectMenu();
+    
+    JMenuItem getProjectRecentMenuItem();
 }

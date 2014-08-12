@@ -1,3 +1,28 @@
+/**************************************************************************
+ OmegaT - Computer Assisted Translation (CAT) tool 
+          with fuzzy matching, translation memory, keyword search, 
+          glossaries, and translation leveraging into updated projects.
+
+ Copyright (C) 2014 Briac Pilpre
+               Home page: http://www.omegat.org/
+               Support center: http://groups.yahoo.com/group/OmegaT/
+
+ This file is part of OmegaT.
+
+ OmegaT is free software: you can redistribute it and/or modify
+ it under the terms of the GNU General Public License as published by
+ the Free Software Foundation, either version 3 of the License, or
+ (at your option) any later version.
+
+ OmegaT is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
+
+ You should have received a copy of the GNU General Public License
+ along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ **************************************************************************/
+
 package org.omegat.util;
 
 import java.awt.event.ActionEvent;
@@ -14,98 +39,100 @@ import org.omegat.core.data.ProjectFactory;
 import org.omegat.gui.main.IMainWindow;
 import org.omegat.gui.main.ProjectUICommands;
 
+/**
+ * Management of recent projects
+ * 
+ * @author Briac Pilpre
+ */
 public class RecentProjects implements Iterable<String> {
-	private final ArrayList<String> recentProjects = new ArrayList<String>();
-	private final int mostRecentProjectSize;
-	private final JMenuItem projectOpenRecentMenuItem;
+    private final ArrayList<String> recentProjects = new ArrayList<String>();
+    private final int mostRecentProjectSize;
+    private final JMenuItem projectOpenRecentMenuItem;
 
-	public RecentProjects(JMenuItem projectOpenRecentMenuItem) {
-		if (projectOpenRecentMenuItem == null) {
-			IMainWindow mainWindow = Core.getMainWindow();
-			if (mainWindow == null) {
-				throw new IllegalArgumentException(
-						"Cannot initialize Recent Menu Items without a Main Window");
-			}
-			projectOpenRecentMenuItem = mainWindow.getMainMenu()
-					.getProjectRecentMenuItem();
-		}
+    public RecentProjects(JMenuItem projectOpenRecentMenuItem) {
+        if (projectOpenRecentMenuItem == null) {
+            IMainWindow mainWindow = Core.getMainWindow();
+            if (mainWindow == null) {
+                throw new IllegalArgumentException(
+                        "Cannot initialize Recent Menu Items without a Main Window");
+            }
+            projectOpenRecentMenuItem = mainWindow.getMainMenu().getProjectRecentMenuItem();
+        }
 
-		this.mostRecentProjectSize = Preferences.getPreferenceDefault(
-				Preferences.MOST_RECENT_PROJECTS_SIZE, 5);
-		this.projectOpenRecentMenuItem = projectOpenRecentMenuItem;
-		loadFromPrefs();
-	}
+        this.mostRecentProjectSize = Preferences.getPreferenceDefault(Preferences.MOST_RECENT_PROJECTS_SIZE, 5);
+        this.projectOpenRecentMenuItem = projectOpenRecentMenuItem;
+        loadFromPrefs();
+    }
 
-	public RecentProjects() {
-		this(null);
-	}
+    public RecentProjects() {
+        this(null);
+    }
 
-	@Override
-	public Iterator<String> iterator() {
-		return Collections.unmodifiableCollection(recentProjects).iterator();
-	}
+    @Override
+    public Iterator<String> iterator() {
+        return Collections.unmodifiableCollection(recentProjects).iterator();
+    }
 
-	public void saveToPrefs() {
-		for (int i = 0; i < mostRecentProjectSize; i++) {
-			if ( i + 1 > recentProjects.size())
-			{
-				break;
-			}
-			Preferences.setPreference(Preferences.MOST_RECENT_PROJECTS_PREFIX
-					+ i, recentProjects.get(i));
-		}
+    public void saveToPrefs() {
+        for (int i = 0; i < mostRecentProjectSize; i++) {
+            if (i + 1 > recentProjects.size()) {
+                break;
+            }
+            Preferences.setPreference(Preferences.MOST_RECENT_PROJECTS_PREFIX
+                    + i, recentProjects.get(i));
+        }
 
-		Preferences.save();
-	}
+        Preferences.save();
+    }
 
-	public void loadFromPrefs() {
-		for (int i = 0; i < mostRecentProjectSize; i++) {
-			String projectKey = Preferences.MOST_RECENT_PROJECTS_PREFIX + i;
+    public void loadFromPrefs() {
+        for (int i = 0; i < mostRecentProjectSize; i++) {
+            String projectKey = Preferences.MOST_RECENT_PROJECTS_PREFIX + i;
 
-			if (!Preferences.existsPreference(projectKey)) {
-				break;
-			}
+            if (!Preferences.existsPreference(projectKey)) {
+                break;
+            }
 
-			add(Preferences.getPreference(projectKey));
-		}
-	}
+            add(Preferences.getPreference(projectKey));
+        }
+    }
 
-	public void updateMenu() {
-		if (projectOpenRecentMenuItem == null && Core.getMainWindow() == null) {
-			return;
-		}
+    public void updateMenu() {
+        if (projectOpenRecentMenuItem == null && Core.getMainWindow() == null) {
+            return;
+        }
 
-		JMenuItem recentMenu = projectOpenRecentMenuItem;
+        JMenuItem recentMenu = projectOpenRecentMenuItem;
 
-		recentMenu.removeAll();
+        recentMenu.removeAll();
 
-		Iterator<String> it = recentProjects.iterator();
-		while (it.hasNext()) {
-			final String recentProject = it.next();
+        Iterator<String> it = recentProjects.iterator();
+        while (it.hasNext()) {
+            final String recentProject = it.next();
 
-			JMenuItem recentProjectMenuItem = new JMenuItem(recentProject);
-			recentProjectMenuItem.addActionListener(new ActionListener() {
-				@Override
-				public void actionPerformed(ActionEvent event) {
-					Core.getProject().saveProject();
-					ProjectFactory.closeProject();
-					ProjectUICommands.projectOpen(new File(recentProject));
-				}
-			});
+            JMenuItem recentProjectMenuItem = new JMenuItem(recentProject);
+            recentProjectMenuItem.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent event) {
+                    Core.getProject().saveProject();
+                    ProjectFactory.closeProject();
+                    ProjectUICommands.projectOpen(new File(recentProject));
+                }
+            });
 
-			recentMenu.add(recentProjectMenuItem);
-		}
+            recentMenu.add(recentProjectMenuItem);
+        }
 
-	}
+    }
 
-	public void add(String element) {
-		recentProjects.remove(element);
-		recentProjects.add(0, element);
+    public void add(String element) {
+        recentProjects.remove(element);
+        recentProjects.add(0, element);
 
-		// Shrink the list to match the desired size.
-		while (recentProjects.size() > mostRecentProjectSize) {
-			recentProjects.remove(recentProjects.size() - 1);
-		}
-	}
+        // Shrink the list to match the desired size.
+        while (recentProjects.size() > mostRecentProjectSize) {
+            recentProjects.remove(recentProjects.size() - 1);
+        }
+    }
 
 }

@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 3.1.4 update 1 
 ----------------------------------------------------------------------
-   1 Enhancement
+   2 Enhancements
    3 Bug fixes
    0 Localisation update
 ----------------------------------------------------------------------
@@ -11,6 +11,9 @@
 
   - Load alternative translations from external TMXs created by OmegaT
   https://sourceforge.net/p/omegat/feature-requests/783/
+
+  - List recent projects
+  https://sourceforge.net/p/omegat/feature-requests/161/
 
   Bug fixes:
 

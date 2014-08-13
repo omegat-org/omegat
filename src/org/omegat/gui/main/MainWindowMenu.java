@@ -85,6 +85,14 @@ import org.openide.awt.Mnemonics;
  * @author Yu Tang
  * @author Aaron Madlon-Kay
  */
+ 
+/**
+ * Add newly created MenuItem items to
+ * /src/org/omegat/gui/main/MainMenuShortcuts.properties and
+ * /src/org/omegat/gui/main/MainMenuShortcuts.mac.properties
+ * with the proper shortcuts if set.
+ */
+  
 public class MainWindowMenu implements ActionListener, MenuListener, IMainMenu {
     private static final Logger LOGGER = Logger.getLogger(MainWindowMenu.class.getName());
 

@@ -1,10 +1,16 @@
 ----------------------------------------------------------------------
- OmegaT 3.1.5 update 1
+ OmegaT 3.1.6 
 ----------------------------------------------------------------------
    1 Enhancement
-   1 Bug fixes
+   1 Bug fix
    1 Localisation update
 ----------------------------------------------------------------------
+3.1.6 vs. 3.1.5
+
+  Implemented requests:
+
+  - Allow customising segment modification information 
+  https://sourceforge.net/p/omegat/feature-requests/1022/
 
   Other enhancements:
 

@@ -16,6 +16,9 @@
 
   - Ctrl+Shift+M was added as a shortcut to "Go to selected match" 
   https://sourceforge.net/p/omegat/feature-requests/1009/
+
+  - Protected parts tooltip view changes. In Options > View, paired tags 
+can be removed from tooltip, text between paired tags can be bolded.
   
   Bug fixes:
   

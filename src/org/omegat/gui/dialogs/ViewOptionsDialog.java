@@ -27,8 +27,10 @@
 package org.omegat.gui.dialogs;
 
 import java.awt.Frame;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JDialog;
 
+import org.omegat.gui.editor.ModificationInfoManager;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
 import org.omegat.util.gui.StaticUIUtils;
@@ -58,6 +60,17 @@ public class ViewOptionsDialog extends JDialog {
         // Initializing options
         viewSourceAllBold.setSelected(Preferences.isPreferenceDefault(Preferences.VIEW_OPTION_SOURCE_ALL_BOLD, true));
         markFirstNonUnique.setSelected(Preferences.isPreference(Preferences.VIEW_OPTION_UNIQUE_FIRST));
+        
+        templateActivator.setSelected(Preferences.isPreferenceDefault(Preferences.VIEW_OPTION_TEMPLATE_ACTIVE, false));
+        templatesSetEnabled(templateActivator.isSelected());
+
+        modInfoTemplate.setText(Preferences.getPreferenceDefault(
+                Preferences.VIEW_OPTION_MOD_INFO_TEMPLATE, ModificationInfoManager.DEFAULT_TEMPLATE));
+        modInfoTemplate.setCaretPosition(0);
+
+        modInfoTemplateND.setText(Preferences.getPreferenceDefault(
+                Preferences.VIEW_OPTION_MOD_INFO_TEMPLATE_WO_DATE, ModificationInfoManager.DEFAULT_TEMPLATE_NO_DATE));
+        modInfoTemplateND.setCaretPosition(0);
 
         invalidate();
         pack();
@@ -82,6 +95,17 @@ public class ViewOptionsDialog extends JDialog {
         cancelButton = new javax.swing.JButton();
         viewSourceAllBold = new javax.swing.JCheckBox();
         markFirstNonUnique = new javax.swing.JCheckBox();
+        templateLabel = new javax.swing.JLabel();
+        modInfoTemplate = new javax.swing.JTextField();
+        variablesLabel = new javax.swing.JLabel();
+        variablesList = new javax.swing.JComboBox();
+        insertButton = new javax.swing.JButton();
+        templateLabelND = new javax.swing.JLabel();
+        modInfoTemplateND = new javax.swing.JTextField();
+        variablesLabelND = new javax.swing.JLabel();
+        variablesListND = new javax.swing.JComboBox();
+        insertButtonND = new javax.swing.JButton();
+        templateActivator = new javax.swing.JCheckBox();
 
         setTitle(OStrings.getString("VIEW_OPTION_TITLE")); // NOI18N
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -98,8 +122,8 @@ public class ViewOptionsDialog extends JDialog {
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 8;
+        gridBagConstraints.gridx = 6;
+        gridBagConstraints.gridy = 14;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.SOUTHEAST;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.weighty = 1.0;
@@ -113,8 +137,8 @@ public class ViewOptionsDialog extends JDialog {
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 3;
-        gridBagConstraints.gridy = 8;
+        gridBagConstraints.gridx = 7;
+        gridBagConstraints.gridy = 14;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.SOUTHEAST;
         gridBagConstraints.weighty = 1.0;
         gridBagConstraints.insets = new java.awt.Insets(14, 4, 4, 4);
@@ -124,7 +148,7 @@ public class ViewOptionsDialog extends JDialog {
         org.openide.awt.Mnemonics.setLocalizedText(viewSourceAllBold, OStrings.getString("VIEW_OPTION_SOURCE")); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 6;
+        gridBagConstraints.gridy = 1;
         gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
         gridBagConstraints.ipadx = 1;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
@@ -135,7 +159,7 @@ public class ViewOptionsDialog extends JDialog {
         org.openide.awt.Mnemonics.setLocalizedText(markFirstNonUnique, OStrings.getString("VIEW_OPTION_UNIQUE")); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 7;
+        gridBagConstraints.gridy = 2;
         gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
         gridBagConstraints.ipadx = 1;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
@@ -143,16 +167,153 @@ public class ViewOptionsDialog extends JDialog {
         gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
         getContentPane().add(markFirstNonUnique, gridBagConstraints);
 
+        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("org/omegat/Bundle"); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(templateLabel, bundle.getString("MOD_INFO_TEMPLATE")); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 8;
+        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.insets = new java.awt.Insets(4, 4, 0, 4);
+        getContentPane().add(templateLabel, gridBagConstraints);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(4, 6, 4, 4);
+        getContentPane().add(modInfoTemplate, gridBagConstraints);
+
+        org.openide.awt.Mnemonics.setLocalizedText(variablesLabel, bundle.getString("MOD_INFO_TEMPLATE_VARIABLES")); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 10;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.insets = new java.awt.Insets(0, 4, 4, 0);
+        getContentPane().add(variablesLabel, gridBagConstraints);
+
+        variablesList.setModel(new DefaultComboBoxModel(org.omegat.gui.editor.ModificationInfoManager.MOD_INFO_VARIABLES));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridy = 10;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 4, 4);
+        getContentPane().add(variablesList, gridBagConstraints);
+
+        org.openide.awt.Mnemonics.setLocalizedText(insertButton, bundle.getString("BUTTON_INSERT")); // NOI18N
+        insertButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                insertButtonActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 6;
+        gridBagConstraints.gridy = 10;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 4, 0);
+        getContentPane().add(insertButton, gridBagConstraints);
+
+        org.openide.awt.Mnemonics.setLocalizedText(templateLabelND, bundle.getString("MOD_INFO_TEMPLATE_NO_DATE")); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 11;
+        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.insets = new java.awt.Insets(4, 4, 0, 4);
+        getContentPane().add(templateLabelND, gridBagConstraints);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(4, 6, 4, 4);
+        getContentPane().add(modInfoTemplateND, gridBagConstraints);
+
+        org.openide.awt.Mnemonics.setLocalizedText(variablesLabelND, bundle.getString("MOD_INFO_TEMPLATE_VARIABLES")); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 13;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.insets = new java.awt.Insets(0, 4, 4, 4);
+        getContentPane().add(variablesLabelND, gridBagConstraints);
+
+        variablesListND.setModel(new DefaultComboBoxModel(org.omegat.gui.editor.ModificationInfoManager.MOD_INFO_VARIABLES_NO_DATE));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridy = 13;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 4, 4);
+        getContentPane().add(variablesListND, gridBagConstraints);
+
+        org.openide.awt.Mnemonics.setLocalizedText(insertButtonND, bundle.getString("BUTTON_INSERT")); // NOI18N
+        insertButtonND.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                insertButtonNDActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 6;
+        gridBagConstraints.gridy = 13;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 4, 0);
+        getContentPane().add(insertButtonND, gridBagConstraints);
+
+        org.openide.awt.Mnemonics.setLocalizedText(templateActivator, OStrings.getString("MOD_INFO_TEMPLATE_ACTIVATOR")); // NOI18N
+        templateActivator.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                templateActivatorActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 5;
+        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
+        gridBagConstraints.ipadx = 1;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+        getContentPane().add(templateActivator, gridBagConstraints);
+
         pack();
-        java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
-        java.awt.Dimension dialogSize = getSize();
-        setLocation((screenSize.width-dialogSize.width)/2,(screenSize.height-dialogSize.height)/2);
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void insertButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_insertButtonActionPerformed
+        modInfoTemplate.replaceSelection(variablesList.getSelectedItem().toString());
+    }//GEN-LAST:event_insertButtonActionPerformed
+
+    private void insertButtonNDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_insertButtonNDActionPerformed
+        modInfoTemplateND.replaceSelection(variablesListND.getSelectedItem().toString());
+    }//GEN-LAST:event_insertButtonNDActionPerformed
+
+    private void templateActivatorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_templateActivatorActionPerformed
+        templatesSetEnabled(templateActivator.isSelected());
+    }//GEN-LAST:event_templateActivatorActionPerformed
+
+    private void templatesSetEnabled(boolean isEnabled) {
+        modInfoTemplate.setEnabled(isEnabled);
+        templateLabel.setEnabled(isEnabled);
+        variablesLabel.setEnabled(isEnabled);
+        variablesList.setEnabled(isEnabled);
+        insertButton.setEnabled(isEnabled);
+        modInfoTemplateND.setEnabled(isEnabled);
+        templateLabelND.setEnabled(isEnabled);
+        variablesLabelND.setEnabled(isEnabled);
+        variablesListND.setEnabled(isEnabled);
+        insertButtonND.setEnabled(isEnabled);
+    }
     private void okButtonActionPerformed(java.awt.event.ActionEvent evt)// GEN-FIRST:event_okButtonActionPerformed
     {
         Preferences.setPreference(Preferences.VIEW_OPTION_SOURCE_ALL_BOLD, viewSourceAllBold.isSelected());
         Preferences.setPreference(Preferences.VIEW_OPTION_UNIQUE_FIRST, markFirstNonUnique.isSelected());
+        Preferences.setPreference(Preferences.VIEW_OPTION_TEMPLATE_ACTIVE, templateActivator.isSelected());
+        Preferences.setPreference(Preferences.VIEW_OPTION_MOD_INFO_TEMPLATE, modInfoTemplate.getText());
+        Preferences.setPreference(Preferences.VIEW_OPTION_MOD_INFO_TEMPLATE_WO_DATE, modInfoTemplateND.getText());
+        ModificationInfoManager.reset();
 
         doClose(RET_OK);
     }// GEN-LAST:event_okButtonActionPerformed
@@ -176,8 +337,19 @@ public class ViewOptionsDialog extends JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cancelButton;
+    private javax.swing.JButton insertButton;
+    private javax.swing.JButton insertButtonND;
     private javax.swing.JCheckBox markFirstNonUnique;
+    private javax.swing.JTextField modInfoTemplate;
+    private javax.swing.JTextField modInfoTemplateND;
     private javax.swing.JButton okButton;
+    private javax.swing.JCheckBox templateActivator;
+    private javax.swing.JLabel templateLabel;
+    private javax.swing.JLabel templateLabelND;
+    private javax.swing.JLabel variablesLabel;
+    private javax.swing.JLabel variablesLabelND;
+    private javax.swing.JComboBox variablesList;
+    private javax.swing.JComboBox variablesListND;
     private javax.swing.JCheckBox viewSourceAllBold;
     // End of variables declaration//GEN-END:variables
 

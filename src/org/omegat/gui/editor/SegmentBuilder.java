@@ -480,22 +480,27 @@ public class SegmentBuilder {
         if (!trans.isTranslated())
             return;
 
-        String author = (trans.changer == null ? OStrings.getString("TF_CUR_SEGMENT_UNKNOWN_AUTHOR")
-                : trans.changer);
-        String template;
         String text;
-        if (trans.changeDate != 0) {
-            template = OStrings.getString("TF_CUR_SEGMENT_AUTHOR_DATE");
-            Date changeDate = new Date(trans.changeDate);
-            String changeDateString = dateFormat.format(changeDate);
-            String changeTimeString = timeFormat.format(changeDate);
-            Object[] args = { author, changeDateString, changeTimeString };
-            text = StaticUtils.format(template, args);
+        if (Preferences.isPreference(Preferences.VIEW_OPTION_TEMPLATE_ACTIVE)) {
+             text = ModificationInfoManager.apply(trans);
         } else {
-            template = OStrings.getString("TF_CUR_SEGMENT_AUTHOR");
-            Object[] args = { author };
-            text = StaticUtils.format(template, args);
+            String author = (trans.changer == null ? OStrings.getString("TF_CUR_SEGMENT_UNKNOWN_AUTHOR")
+                    : trans.changer);
+            String template;
+            if (trans.changeDate != 0) {
+                template = OStrings.getString("TF_CUR_SEGMENT_AUTHOR_DATE");
+                Date changeDate = new Date(trans.changeDate);
+                String changeDateString = dateFormat.format(changeDate);
+                String changeTimeString = timeFormat.format(changeDate);
+                Object[] args = { author, changeDateString, changeTimeString };
+                text = StaticUtils.format(template, args);
+            } else {
+                template = OStrings.getString("TF_CUR_SEGMENT_AUTHOR");
+                Object[] args = { author };
+                text = StaticUtils.format(template, args);
+            }
         }
+
         int prevOffset = offset;
         boolean rtl = EditorUtils.localeIsRTL();
         insertDirectionEmbedding(rtl);

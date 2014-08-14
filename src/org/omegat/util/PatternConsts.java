@@ -130,6 +130,18 @@ public class PatternConsts {
      * Call <code>matcher.group(n)</code> to get each piece.
      */
     public static final Pattern OMEGAT_TAG_DECOMPILE = Pattern.compile("<(\\/?)([a-zA-Z]+)([0-9]+)(\\/?)>");
+    
+    /**
+     * Pattern that matches paired tag in protected parts
+     * <ol>
+     * <li>opening tag
+     * <li>text between tags
+     * <li>closing tag
+     * </ol>
+     * Call <code>matcher.group(n)</code> to get each piece.
+     */
+    public static final Pattern PROTECTED_PARTS_PAIRED_TAG_DECOMPILE = Pattern.compile("^(<.+?>)([^<]+?)(<\\/.+?>)");
+
 
     /** Pattern that detects space-only regular expressions. */
     public static final Pattern SPACY_REGEX = Pattern.compile("((\\s|\\\\n|\\\\t|\\\\s)(\\+|\\*)?)+");

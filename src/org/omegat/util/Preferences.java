@@ -301,6 +301,10 @@ public class Preferences {
     public static final String VIEW_OPTION_SOURCE_ALL_BOLD = "view_option_source_all_bold";
     /** View options: Mark first non-unique */
     public static final String VIEW_OPTION_UNIQUE_FIRST = "view_option_unique_first";
+    /** View options: Strip tags from protected parts tooltip */
+    public static final String VIEW_OPTION_PPT_STRIP_TAGS = "view_option_ppt_strip_tags";
+    /** View options: Display text in protected parts tooltip in bold */
+    public static final String VIEW_OPTION_PPT_BOLD_TEXT = "view_option_ppt_bold_text";
     /** View options: Modification Info display templates **/
     public static final String VIEW_OPTION_TEMPLATE_ACTIVE = "view_option_template_active";
     public static final String VIEW_OPTION_MOD_INFO_TEMPLATE = "view_option_mod_info_template";

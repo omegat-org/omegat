@@ -27,15 +27,17 @@ package org.omegat.gui.editor.mark;
 
 import java.util.ArrayList;
 import java.util.List;
-
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.swing.text.AttributeSet;
 import javax.swing.text.Highlighter.HighlightPainter;
-
 import org.omegat.core.Core;
 import org.omegat.core.data.ProtectedPart;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.gui.editor.Document3;
 import org.omegat.gui.editor.EditorController;
+import org.omegat.util.PatternConsts;
+import org.omegat.util.Preferences;
 import org.omegat.util.gui.Styles;
 
 /**
@@ -89,6 +91,30 @@ public class ProtectedPartsMarker implements IMarker {
     }
 
     private String escapeHtml(String s) {
-        return s.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;");
+        s = s.replace("&", "&amp;");
+        Matcher m = PatternConsts.PROTECTED_PARTS_PAIRED_TAG_DECOMPILE.matcher(s);
+        if (m.find()) {
+            // paired tag
+            boolean nostrip = !Preferences.isPreference(Preferences.VIEW_OPTION_PPT_STRIP_TAGS);
+            boolean bold = Preferences.isPreference(Preferences.VIEW_OPTION_PPT_BOLD_TEXT);
+            StringBuilder text = new StringBuilder(1024);
+            if (nostrip) {
+                text.append(m.group(1).replace("<", "&lt;").replace(">", "&gt;"));
+            }
+            if (bold) {
+                text.append("<b>");
+            }
+            text.append(m.group(2).replace("<", "&lt;").replace(">", "&gt;"));
+            if (bold) {
+                text.append("</b>");
+            }
+            if (nostrip) {
+                text.append(m.group(3).replace("<", "&lt;").replace(">", "&gt;"));
+            }
+            return text.toString();
+        } else {
+            // standalone tag
+            return s.replace("<", "&lt;").replace(">", "&gt;");
+        }
     }
 }

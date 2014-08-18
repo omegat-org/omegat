@@ -284,7 +284,6 @@ public final class Segmenter {
             return "";
 
         StringBuffer res = new StringBuffer();
-        res.append(spaces.get(0));
         res.append(sentences.get(0));
 
         for (int i = 1; i < sentences.size(); i++) {
@@ -308,7 +307,6 @@ public final class Segmenter {
             res.append(sp);
             res.append(sentences.get(i));
         }
-        res.append(spaces.get(spaces.size() - 1));
         return res.toString();
     }
 

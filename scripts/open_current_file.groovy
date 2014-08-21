@@ -1,4 +1,4 @@
-/* :name=Open Current File		:description=Open the current translated file
+/* :name=Open Current File		:description=Open the current source file
  * 
  * Open current file
  *

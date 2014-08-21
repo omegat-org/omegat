@@ -3,7 +3,7 @@
 ----------------------------------------------------------------------
    1 Enhancement
    1 Bug fix
-   1 Localisation update
+   2 Localisation update
 ----------------------------------------------------------------------
 3.1.6 vs. 3.1.5
 
@@ -28,6 +28,7 @@ can be removed from tooltip, text between paired tags can be bolded.
   Localisation updates:
 
   - Dutch localisation updated to 3.1.5 (UI)
+  - Japanese localisation updated to 3.1.6 (UI)
 
 ----------------------------------------------------------------------
  OmegaT 3.1.5 (2014-08-13)
@@ -168,7 +169,7 @@ compilation time, by putting an uiLayout.xml file in /release/WebStart-specific
 
   - Text filter: when using the line length limit, OmegaT tries to avoid 
 putting a new line just after an opening bracket. Opening brackets are 
-defined as '([{<«„'.
+defined as '([{<«E.
 
   - A new option in the search window allows showing the source file name 
 for each search result

@@ -1,4 +1,4 @@
-﻿Questa traduzione è frutto del lavoro di Valter Mura, copyright© 2014 e revisione di Valter Mura e Carmelo Serraino copyright© 2014.
+Questa traduzione è frutto del lavoro di Valter Mura, copyright© 2014 e revisione di Valter Mura e Carmelo Serraino copyright© 2014.
 
 ==============================================================================
   File Leggimi di OmegaT 3.0
@@ -237,15 +237,15 @@ OmegaT usa le seguenti librerie:
   JNA di Todd Fast, Timothy Wall et al (licenza LGPL)
   Swing-Layout 1.0.4 (licenza LGPL)
   Jmyspell 2.1.4 (licenza LGPL)
-  SVNKit 1.7.5 (licenza TMate)
+  SVNKit 1.8.5 (licenza TMate)
   Sequence Library (licenza Sequence Library)
   ANTLR 3.4 (licenza ANTLR 3)
-  SQLJet 1.1.3 (GPL v2)
+  SQLJet 1.1.10 (GPL v2)
   JGit (licenza di distribuzione Eclipse)
   JSch (licenza JSch)
   Base64 (dominio pubblico)
   Diff (GPL)
-  orion-ssh2-214 (licenza Orion SSH per Java)
+  trilead-ssh2-1.0.0-build217 (licenza Trilead SSH)
   lucene-*.jar (licenza Apache 2.0)
   I tokenizer inglesi (org.omegat.tokenizer.SnowballEnglishTokenizer e
   org.omegat.tokenizer.LuceneEnglishTokenizer) mutua le stop words da Okapi

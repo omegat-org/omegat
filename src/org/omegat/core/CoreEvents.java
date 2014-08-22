@@ -26,8 +26,8 @@
 package org.omegat.core;
 
 import java.awt.Font;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import javax.swing.SwingUtilities;
 
@@ -48,11 +48,11 @@ import org.omegat.util.Log;
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
 public class CoreEvents {
-    private static final List<IProjectEventListener> projectEventListeners = new ArrayList<IProjectEventListener>();
-    private static final List<IApplicationEventListener> applicationEventListeners = new ArrayList<IApplicationEventListener>();
-    private static final List<IEntryEventListener> entryEventListeners = new ArrayList<IEntryEventListener>();
-    private static final List<IFontChangedEventListener> fontChangedEventListeners = new ArrayList<IFontChangedEventListener>();
-    private static final List<IEditorEventListener> editorEventListeners = new ArrayList<IEditorEventListener>();
+    private static final List<IProjectEventListener> projectEventListeners = new CopyOnWriteArrayList<IProjectEventListener>();
+    private static final List<IApplicationEventListener> applicationEventListeners = new CopyOnWriteArrayList<IApplicationEventListener>();
+    private static final List<IEntryEventListener> entryEventListeners = new CopyOnWriteArrayList<IEntryEventListener>();
+    private static final List<IFontChangedEventListener> fontChangedEventListeners = new CopyOnWriteArrayList<IFontChangedEventListener>();
+    private static final List<IEditorEventListener> editorEventListeners = new CopyOnWriteArrayList<IEditorEventListener>();
 
     /** Register listener. */
     public static void registerProjectChangeListener(final IProjectEventListener listener) {

@@ -3,7 +3,7 @@
           with fuzzy matching, translation memory, keyword search, 
           glossaries, and translation leveraging into updated projects.
 
- Copyright (C) 2014 Briac Pilpre
+ Copyright (C) 2014 Briac Pilpre, Aaron Madlon-Kay
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -35,7 +35,9 @@ import java.util.Iterator;
 import javax.swing.JMenuItem;
 
 import org.omegat.core.Core;
+import org.omegat.core.CoreEvents;
 import org.omegat.core.data.ProjectFactory;
+import org.omegat.core.events.IProjectEventListener;
 import org.omegat.gui.main.IMainWindow;
 import org.omegat.gui.main.ProjectUICommands;
 
@@ -43,6 +45,7 @@ import org.omegat.gui.main.ProjectUICommands;
  * Management of recent projects
  * 
  * @author Briac Pilpre
+ * @author Aaron Madlon-Kay
  */
 public class RecentProjects implements Iterable<String> {
     private final ArrayList<String> recentProjects = new ArrayList<String>();
@@ -85,7 +88,7 @@ public class RecentProjects implements Iterable<String> {
         Preferences.save();
     }
 
-    public void loadFromPrefs() {
+    public final void loadFromPrefs() {
         for (int i = 0; i < mostRecentProjectSize; i++) {
             String projectKey = Preferences.MOST_RECENT_PROJECTS_PREFIX + i;
 
@@ -114,9 +117,20 @@ public class RecentProjects implements Iterable<String> {
             recentProjectMenuItem.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent event) {
-                    Core.getProject().saveProject();
-                    ProjectFactory.closeProject();
-                    ProjectUICommands.projectOpen(new File(recentProject));
+                    if (Core.getProject().isProjectLoaded()) {
+                        CoreEvents.registerProjectChangeListener(new IProjectEventListener() {
+                            @Override
+                            public void onProjectChanged(PROJECT_CHANGE_TYPE eventType) {
+                                if (eventType == PROJECT_CHANGE_TYPE.CLOSE) {
+                                    ProjectUICommands.projectOpen(new File(recentProject));
+                                    CoreEvents.unregisterProjectChangeListener(this);
+                                }
+                            }
+                        });
+                        ProjectUICommands.projectClose();
+                    } else {
+                        ProjectUICommands.projectOpen(new File(recentProject));
+                    }
                 }
             });
 
@@ -131,7 +145,7 @@ public class RecentProjects implements Iterable<String> {
 
         // Shrink the list to match the desired size.
         while (recentProjects.size() > mostRecentProjectSize) {
-            recentProjects.remove(recentProjects.size() - 1);
+            recentProjects.remove(mostRecentProjectSize);
         }
     }
 

@@ -27,7 +27,7 @@ can be removed from tooltip, text between paired tags can be bolded.
 
   Localisation updates:
 
-  - Dutch localisation updated to 3.1.5 (UI)
+  - Dutch localisation updated to 3.1.5 (UI, readme, documentation, scripts)
   - Italian localisation updated to 3.1.5 (UI, readme)
   - Japanese localisation updated to 3.1.6 (UI)
 

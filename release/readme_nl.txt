@@ -103,7 +103,7 @@ Download voor dit doel het volgende bestand en voer het uit:
 
 Het zal de juiste omgeving voor uw computer installeren en de toepassing zelf bij de eerste keer dat het wordt uitgevoerd. Latere aanroepen behoeven niet online te worden gedaan.
 
-Gedurende de installatie, afhankelijk van uw besturingssysteem, zou u verschillende beveiligingswaarschuwingen kunnen ontvangen. Het certificaat is zelf-ondertekend door "Didier Briel". 
+Gedurende de installatie, afhankelijk van uw besturingssysteem, zou u verschillende beveiligingswaarschuwingen kunnen ontvangen. Het certificaat is van "PnS Concept". 
 De rechten die u aan deze versie geeft (welke kunnen worden omschreven als een "onbeperkte toegang tot de computer") zijn identiek aan de rechten die u geeft voor de locale versie, zoals die door een procedure geïnstalleerd wordt: zij geven toegang tot de harde schijf van de computer. Opvolgende klikken op OmegaT.jnlp zal leiden tot het controleren op upgrades, als u on line bent, ze installeren als ze er zijn, en dan OmegaT starten. 
 
 De alternatieve manieren en mogelijkheden voor het downloaden en installeren van OmegaT worden hieronder weergegeven. 
@@ -201,7 +201,7 @@ Voor het op andere manieren bijdragen abonneert u zich eerst op de gebruikersgro
 en krijg daar een indruk van wat er gaande is in de wereld van OmegaT...
 
   OmegaT is van origine het werk van Keith Godfrey.
-  Marc Prior is de coördinator van het OmegaT-project.
+  Didier Briel is de projectmanager van OmegaT.
 
 Eerdere bijdragen van:
 (alfabetische volgorde)
@@ -209,7 +209,7 @@ Eerdere bijdragen van:
 Code is bijgedragen door
   Zoltan Bartko
   Volker Berlin
-  Didier Briel (manager ontwikkeling)
+  Didier Briel
   Kim Bruning
   Alex Buloichik (hoofd ontwikkeling)
   Sandra Jean Chua
@@ -227,6 +227,7 @@ Code is bijgedragen door
   Guido Leenders
   Aaron Madlon-Kay
   Fabián Mandelbaum
+  Manfred Martin
   John Moran
   Maxym Mykhalchuk 
   Arno Peters
@@ -247,14 +248,14 @@ Andere bijdragen door
   Jean-Christophe Helary (manager lokalisatie)
   Vito Smolej (manager documentatie)
   Samuel Murray
-  Marc Prior 
+  Marc Prior (webmaster)
   en vele, vele andere zeer behulpzame mensen
 
 (Als u denkt dat u een significante bijdrage heeft geleverd aan het OmegaT-project, maar ziet u uw naam niet op deze lijst, neem dan alstublieft contact met ons op.)
 
 OmegaT gebruikt de volgende bibliotheken:
   HTMLParser 1.6 van Somik Raha, Derrick Oswald en anderen (LGPL License)
-  VLDocking Framework 2.1.4 van VLSolutions (CeCILL License)
+  VLDocking Framework 3.0.4 (LGPL License)
   Hunspell van László Németh en anderen (LGPL License)
   JNA van Todd Fast, Timothy Wall en anderen (LGPL License)
   Swing-Layout 1.0.4 (LGPL License)
@@ -282,6 +283,7 @@ OmegaT gebruikt de volgende bibliotheken:
   KoreanAnalyzer-3x-120223.jar (Apache License 2.0)
   SuperTMXMerge-for_OmegaT.jar (LGPL License)
   groovy-all-2.2.2.jar (Apache License 2.0)
+  slf4j (MIT License)
 
 ==============================================================================
  5.  Heeft u problemen met OmegaT ? Heeft u hulp nodig?

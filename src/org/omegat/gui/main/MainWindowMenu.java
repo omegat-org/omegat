@@ -256,8 +256,7 @@ public class MainWindowMenu implements ActionListener, MenuListener, IMainMenu {
         projectMenu.add(projectOpenMenuItem = createMenuItem("TF_MENU_FILE_OPEN"));
         projectMenu.add(projectOpenRecentMenuItem = createMenu("TF_MENU_FILE_OPEN_RECENT"));
         // Load recent used projects
-        RecentProjects recentProjects = new RecentProjects(projectOpenRecentMenuItem);
-        recentProjects.updateMenu();
+        RecentProjects.updateMenu();
 
         projectMenu.add(projectImportMenuItem = createMenuItem("TF_MENU_FILE_IMPORT"));
         projectMenu.add(projectWikiImportMenuItem = createMenuItem("TF_MENU_WIKI_IMPORT"));

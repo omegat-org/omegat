@@ -343,10 +343,8 @@ public class ProjectUICommands {
                     }
                 }
 
-                RecentProjects recentProjects = new RecentProjects();
-				recentProjects.add(projectRootFolder.getAbsolutePath());
-                recentProjects.saveToPrefs();
-                recentProjects.updateMenu();
+				RecentProjects.add(projectRootFolder.getAbsolutePath());
+                RecentProjects.updateMenu();
 
                 mainWindow.setCursor(oldCursor);
                 return null;

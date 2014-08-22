@@ -169,7 +169,7 @@ compilation time, by putting an uiLayout.xml file in /release/WebStart-specific
 
   - Text filter: when using the line length limit, OmegaT tries to avoid 
 putting a new line just after an opening bracket. Opening brackets are 
-defined as '([{<«E.
+defined as '([{<'.
 
   - A new option in the search window allows showing the source file name 
 for each search result

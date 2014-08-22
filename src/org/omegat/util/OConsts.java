@@ -127,6 +127,9 @@ public class OConsts {
     /** The name of the file with project match statistics. */
     public static final String STATS_MATCH_PER_FILE_FILENAME = "project_stats_match_per_file.txt";
 
+    /** The name of the file with the last entry number for later reopening. */
+    public static final String LAST_ENTRY_NUMBER = "last_entry.txt";
+
     /** The name of the file with the ignored words: one ignored word per line */
     public static final String IGNORED_WORD_LIST_FILE_NAME = "ignored_words.txt";
 

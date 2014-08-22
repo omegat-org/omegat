@@ -341,6 +341,29 @@ public class RealProject implements IProject {
             String stat = CalcStandardStatistics.buildProjectStats(this, hotStat);
             String fn = m_config.getProjectInternal() + OConsts.STATS_FILENAME;
             Statistics.writeStat(fn, stat);
+            
+            // Jump to last edited entry
+            File lf = new File(m_config.getProjectInternal(), OConsts.LAST_ENTRY_NUMBER);
+            if (lf.exists())
+            {
+            	SwingUtilities.invokeLater(new Runnable() {
+            		public void run() {
+            			String lastEntry = "";
+            			try {
+            				lastEntry = FileUtil.readTextFile(new File(m_config.getProjectInternal(), OConsts.LAST_ENTRY_NUMBER));
+            				lastEntry = lastEntry.trim();
+            				int lastEntryNumber = Integer.parseInt(lastEntry, 10);
+            				Log.logDebug(LOGGER, "Jumping to last entry {0}.", lastEntryNumber);
+            				Core.getEditor().gotoEntry(lastEntryNumber);
+            			} catch (NumberFormatException e) {
+            				//Log.logDebug(LOGGER, "Entry number \"{0}\" doesn't look like a number.", lastEntry);
+            			} catch (IOException e) {
+            				//Log.logDebug(LOGGER, "Couldn't load last entry number file.", e.getMessage());
+						}
+            		}
+            	});
+
+            }
 
             loaded = true;
 
@@ -680,6 +703,15 @@ public class RealProject implements IProject {
                     Log.logErrorRB(e, "CT_ERROR_SAVING_PROJ");
                     Core.getMainWindow().displayErrorRB(e, "CT_ERROR_SAVING_PROJ");
                 }
+
+                // Save current entry position for repositioning on reload (RFE#35)
+                int currentEntryNumber = Core.getEditor().getCurrentEntryNumber();
+                File lf = new File(m_config.getProjectInternal(), OConsts.LAST_ENTRY_NUMBER);
+                try {
+					FileUtil.writeTextFile(lf, Integer.toString(currentEntryNumber, 10));
+				} catch (IOException e) {
+					Log.logDebug(LOGGER, "Could not write the last entry number: {0}", e.getMessage());
+				}
 
                 // update statistics
                 String stat = CalcStandardStatistics.buildProjectStats(this, hotStat);

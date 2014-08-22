@@ -344,7 +344,6 @@ public class ProjectUICommands {
                 }
 
 				RecentProjects.add(projectRootFolder.getAbsolutePath());
-                RecentProjects.updateMenu();
 
                 mainWindow.setCursor(oldCursor);
                 return null;

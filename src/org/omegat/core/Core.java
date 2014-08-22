@@ -71,6 +71,7 @@ import org.omegat.gui.tagvalidation.ITagValidation;
 import org.omegat.gui.tagvalidation.TagValidationTool;
 import org.omegat.tokenizer.ITokenizer;
 import org.omegat.util.Preferences;
+import org.omegat.util.RecentProjects;
 import org.omegat.util.StaticUtils;
 
 /**
@@ -202,6 +203,8 @@ public class Core {
         // 2. Initialize application frame
         MainWindow me = new MainWindow();
         mainWindow = me;
+        // Load recent used projects
+        RecentProjects.updateMenu();
 
         Core.registerMarker(new ProtectedPartsMarker());
         Core.registerMarker(new RemoveTagMarker());

@@ -46,33 +46,30 @@ import org.omegat.gui.main.ProjectUICommands;
  * @author Aaron Madlon-Kay
  */
 public class RecentProjects {
-    private static List<String> recentProjects;
+    
+    private static final List<String> recentProjects;
     private static final int mostRecentProjectSize;
     
     static {
         mostRecentProjectSize = Preferences.getPreferenceDefault(Preferences.MOST_RECENT_PROJECTS_SIZE, 5);
         recentProjects = new ArrayList<String>(mostRecentProjectSize);
-    }
-
-    public static void saveToPrefs() {
-        for (int i = 0; i < recentProjects.size(); i++) {
-            String project = recentProjects.get(i);
-            if (!StringUtil.isEmpty(project)) {
-                Preferences.setPreference(Preferences.MOST_RECENT_PROJECTS_PREFIX
-                        + i, recentProjects.get(i));
+        for (int i = 0; i < mostRecentProjectSize; i++) {
+            String project = Preferences.getPreferenceDefault(Preferences.MOST_RECENT_PROJECTS_PREFIX + i, null);
+            if (project != null) {
+                recentProjects.add(project);
             }
         }
     }
+    
+    private RecentProjects() {}
 
-    public static void loadFromPrefs() {
-        for (int i = 0; i < mostRecentProjectSize; i++) {
-            String projectKey = Preferences.MOST_RECENT_PROJECTS_PREFIX + i;
-
-            if (!Preferences.existsPreference(projectKey)) {
-                break;
+    private static void saveToPrefs() {
+        for (int i = 0; i < recentProjects.size(); i++) {
+            String project = recentProjects.get(i);
+            if (!StringUtil.isEmpty(project)) {
+                Preferences.setPreference(Preferences.MOST_RECENT_PROJECTS_PREFIX + i,
+                        recentProjects.get(i));
             }
-
-            add(Preferences.getPreference(projectKey));
         }
     }
 
@@ -110,6 +107,9 @@ public class RecentProjects {
     }
 
     public static void add(String element) {
+        if (StringUtil.isEmpty(element)) {
+            return;
+        }
         recentProjects.remove(element);
         recentProjects.add(0, element);
 
@@ -118,10 +118,13 @@ public class RecentProjects {
             recentProjects.remove(mostRecentProjectSize);
         }
         updateMenu();
+        saveToPrefs();
     }
 
     private static class CloseThenOpen implements IProjectEventListener {
+        
         private final String project;
+        
         public CloseThenOpen(String project) {
             this.project = project;
         }

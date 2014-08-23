@@ -59,6 +59,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import javax.swing.SwingUtilities;
+import javax.swing.SwingWorker;
 
 import org.apache.lucene.util.Version;
 import org.madlonkay.supertmxmerge.StmProperties;
@@ -81,6 +82,7 @@ import org.omegat.filters2.TranslationException;
 import org.omegat.filters2.master.FilterMaster;
 import org.omegat.gui.glossary.GlossaryEntry;
 import org.omegat.gui.glossary.GlossaryReaderTSV;
+import org.omegat.gui.main.IMainWindow;
 import org.omegat.tokenizer.DefaultTokenizer;
 import org.omegat.tokenizer.ITokenizer;
 import org.omegat.util.DirectoryMonitor;
@@ -330,40 +332,19 @@ public class RealProject implements IProject {
 
             allProjectEntries = Collections.unmodifiableList(allProjectEntries);
             importHandler = new ImportFromAutoTMX(this, allProjectEntries);
-
+            
             importTranslationsFromSources();
 
             loadTM();
 
             loadOtherLanguages();
 
+            jumpToLastEntry();
+            
             // build word count
             String stat = CalcStandardStatistics.buildProjectStats(this, hotStat);
             String fn = m_config.getProjectInternal() + OConsts.STATS_FILENAME;
             Statistics.writeStat(fn, stat);
-            
-            // Jump to last edited entry
-            File lf = new File(m_config.getProjectInternal(), OConsts.LAST_ENTRY_NUMBER);
-            if (lf.exists())
-            {
-            	SwingUtilities.invokeLater(new Runnable() {
-            		public void run() {
-            			String lastEntry = "";
-            			try {
-            				lastEntry = FileUtil.readTextFile(new File(m_config.getProjectInternal(), OConsts.LAST_ENTRY_NUMBER));
-            				lastEntry = lastEntry.trim();
-            				int lastEntryNumber = Integer.parseInt(lastEntry, 10);
-            				Log.logDebug(LOGGER, "Jumping to last entry {0}.", lastEntryNumber);
-            				Core.getEditor().gotoEntry(lastEntryNumber);
-            			} catch (NumberFormatException e) {
-            				//Log.logDebug(LOGGER, "Entry number \"{0}\" doesn't look like a number.", lastEntry);
-            			} catch (IOException e) {
-            				//Log.logDebug(LOGGER, "Couldn't load last entry number file.", e.getMessage());
-						}
-            		}
-            	});
-
-            }
 
             loaded = true;
 
@@ -1320,6 +1301,42 @@ public class RealProject implements IProject {
         tmOtherLanguagesMonitor.checkChanges();
         tmOtherLanguagesMonitor.start();
     }
+    
+    /**
+     * Jump to last edited entry
+     */
+	protected void jumpToLastEntry() {
+        IMainWindow mainWindow = Core.getMainWindow();
+        mainWindow.showStatusMessageRB("MW_JUMPING_LAST_ENTRY");
+
+		File lf = new File(m_config.getProjectInternal(), OConsts.LAST_ENTRY_NUMBER);
+		if (lf.exists())
+		{
+			new SwingWorker<Object, Void>() {
+				int lastEntryNumber = 0;
+
+				protected Object doInBackground() throws Exception {
+					String lastEntry = FileUtil.readTextFile(new File(m_config.getProjectInternal(), OConsts.LAST_ENTRY_NUMBER)).trim();
+					lastEntryNumber = Integer.parseInt(lastEntry, 10);
+					Log.logDebug(LOGGER, "Jumping to last entry #" + lastEntryNumber + ".");
+					return null;
+				}
+
+				protected void done() {
+					try {
+						get();
+						SwingUtilities.invokeLater(new Runnable() {
+							public void run() {
+								Core.getEditor().gotoEntry(lastEntryNumber);						
+							}
+						});
+					} catch (Exception ex) {
+						Log.logDebug(LOGGER, "Could not jump to last entry #" + lastEntryNumber + ": {0}", ex.getMessage());
+					}
+				}
+			}.execute();
+		}
+	}
 
     /**
      * Append new translation from auto TMX.

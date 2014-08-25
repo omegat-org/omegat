@@ -813,6 +813,7 @@ public class EditorController implements IEditor {
 		Log.logDebug(LOGGER, "Jumping to last entry #" + lastEntryNumber + ".");
 		
 		gotoEntry(lastEntryNumber);
+		 Core.getMainWindow().showStatusMessageRB(null);
 	}
 
     /**

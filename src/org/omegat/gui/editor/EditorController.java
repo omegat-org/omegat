@@ -40,6 +40,7 @@ import java.awt.Container;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -79,6 +80,7 @@ import org.omegat.gui.help.HelpFrame;
 import org.omegat.gui.main.DockablePanel;
 import org.omegat.gui.main.MainWindow;
 import org.omegat.gui.tagvalidation.ITagValidation;
+import org.omegat.util.FileUtil;
 import org.omegat.util.Language;
 import org.omegat.util.Log;
 import org.omegat.util.OConsts;
@@ -317,6 +319,7 @@ public class EditorController implements IEditor {
                     // should be called before
                     loadDocument();
                     activateEntry();
+                    jumpToLastEntry();
                 }
             });
             break;
@@ -786,6 +789,31 @@ public class EditorController implements IEditor {
 
         Core.getMainWindow().showProgressMessage(pMsg.toString());
     }
+    
+    
+    /**
+     * Jump to last edited entry
+     */
+	protected void jumpToLastEntry() {
+        File lastEntryFile = new File(Core.getProject().getProjectProperties().getProjectInternal(), OConsts.LAST_ENTRY_NUMBER);
+
+    	if (! lastEntryFile.exists())
+    	{
+    		return;
+    	}
+
+        Core.getMainWindow().showStatusMessageRB("MW_JUMPING_LAST_ENTRY");
+		int lastEntryNumber = 0;
+		try {
+			String lastEntry = FileUtil.readTextFile(lastEntryFile).trim();
+			lastEntryNumber = Integer.parseInt(lastEntry, 10);
+		} catch (Exception e) {
+			Log.logDebug(LOGGER, "Cannot jump to last entry #" + lastEntryNumber + ":" + e.getMessage());
+		}
+		Log.logDebug(LOGGER, "Jumping to last entry #" + lastEntryNumber + ".");
+		
+		gotoEntry(lastEntryNumber);
+	}
 
     /**
      * Go to segment at specified location.

@@ -63,9 +63,9 @@ public class SearchWindowForm extends javax.swing.JFrame {
         buttonGroupSearchState = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         m_searchLabel = new javax.swing.JLabel();
-        m_searchField = new MFindField();
+        m_searchField = new javax.swing.JComboBox();
         m_replaceLabel = new javax.swing.JLabel();
-        m_replaceField = new javax.swing.JTextField();
+        m_replaceField = new javax.swing.JComboBox();
         m_searchButton = new javax.swing.JButton();
         m_panelSearch = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
@@ -176,6 +176,8 @@ public class SearchWindowForm extends javax.swing.JFrame {
         gridBagConstraints.gridy = 0;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         jPanel1.add(m_searchLabel, gridBagConstraints);
+
+        m_searchField.setEditable(true);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 0;
@@ -190,6 +192,8 @@ public class SearchWindowForm extends javax.swing.JFrame {
         gridBagConstraints.gridy = 1;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         jPanel1.add(m_replaceLabel, gridBagConstraints);
+
+        m_replaceField.setEditable(true);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 1;
@@ -727,7 +731,7 @@ public class SearchWindowForm extends javax.swing.JFrame {
     javax.swing.JButton m_replaceButton;
     javax.swing.JCheckBox m_replaceCase;
     javax.swing.JRadioButton m_replaceExactSearchRB;
-    javax.swing.JTextField m_replaceField;
+    javax.swing.JComboBox m_replaceField;
     javax.swing.JLabel m_replaceLabel;
     javax.swing.JRadioButton m_replaceRegexpSearchRB;
     javax.swing.JCheckBox m_replaceSpaceMatchNbsp;
@@ -738,7 +742,7 @@ public class SearchWindowForm extends javax.swing.JFrame {
     javax.swing.JCheckBox m_searchCase;
     javax.swing.JCheckBox m_searchCommentsCB;
     javax.swing.JRadioButton m_searchExactSearchRB;
-    javax.swing.JTextField m_searchField;
+    javax.swing.JComboBox m_searchField;
     javax.swing.JRadioButton m_searchKeywordSearchRB;
     javax.swing.JLabel m_searchLabel;
     javax.swing.JCheckBox m_searchNotesCB;

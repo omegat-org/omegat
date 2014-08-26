@@ -111,8 +111,8 @@ public class MFindField extends JTextField implements FocusListener {
 
     @Override
     protected void processKeyEvent(KeyEvent e) {
-        if (e.getKeyCode() == KeyEvent.VK_ENTER && e.getID() == KeyEvent.KEY_PRESSED) {
-            if (!getText().equals(""))
+        if (enterActionListener != null && e.getKeyCode() == KeyEvent.VK_ENTER
+                && e.getID() == KeyEvent.KEY_PRESSED && !getText().equals("")) {
                 enterActionListener.actionPerformed(null); // doSearch()
         } else {
             super.processKeyEvent(e);

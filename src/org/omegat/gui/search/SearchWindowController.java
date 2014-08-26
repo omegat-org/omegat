@@ -48,13 +48,18 @@ import java.util.Date;
 
 import javax.swing.AbstractAction;
 import javax.swing.Action;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.InputMap;
+import javax.swing.JComboBox;
 import javax.swing.JComponent;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 import javax.swing.KeyStroke;
 import javax.swing.SpinnerDateModel;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
+import javax.swing.undo.UndoManager;
 
 import org.omegat.core.Core;
 import org.omegat.core.search.SearchExpression;
@@ -88,6 +93,7 @@ import org.omegat.util.gui.UIThreadsUtil;
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Piotr Kulik
  */
+@SuppressWarnings("serial")
 public class SearchWindowController {
 
     private final SearchWindowForm form;
@@ -100,11 +106,20 @@ public class SearchWindowController {
         m_parent = par;
 
         m_dateFormat = new SimpleDateFormat(SAVED_DATE_FORMAT);
-
-        if (startText != null) {
-            form.m_searchField.setText(startText);
+        
+        form.m_searchField.setModel(new DefaultComboBoxModel(HistoryManager.getSearchItems()));
+        if (form.m_searchField.getModel().getSize() > 0) {
+            form.m_searchField.setSelectedIndex(-1);
         }
-
+        if (!StringUtil.isEmpty(startText)) {
+            ((JTextField) form.m_searchField.getEditor().getEditorComponent()).setText(startText);
+        }
+        
+        form.m_replaceField.setModel(new DefaultComboBoxModel(HistoryManager.getReplaceItems()));
+        if (form.m_replaceField.getModel().getSize() > 0) {
+            form.m_replaceField.setSelectedIndex(-1);
+        }
+        
         // box DateBox
         Calendar calendar = Calendar.getInstance();
         Date initDate = calendar.getTime();
@@ -168,85 +183,92 @@ public class SearchWindowController {
         form.m_searchField.requestFocus();
     }
 
-    void initActions() {
+    final void initActions() {
 
         // ///////////////////////////////////
         // action listeners
         form.m_dismissButton.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent e) {
                 doCancel();
             }
         });
         form.m_filterButton.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent e) {
                 doFilter();
             }
         });
         form.m_replaceButton.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent e) {
                 doReplace();
             }
         });
         form.m_replaceAllButton.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent e) {
                 doReplaceAll();
             }
         });
 
         form.m_searchButton.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent e) {
                 doSearch();
             }
         });
-        ((MFindField) form.m_searchField).enterActionListener = new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                doSearch();
-            }
-        };
-
         form.m_advancedButton.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent e) {
                 toggleAdvancedOptions();
             }
         });
 
         form.m_authorCB.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent e) {
                 enableDisableAuthor();
             }
         });
         
         ((MFindField) form.m_authorField).enterActionListener = new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent e) {
                 doSearch();
             }
         };
 
         form.m_dateToCB.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent e) {
                 enableDisableDateTo();
             }
         });
 
         form.m_dateToButton.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent e) {
                 doResetDateTo();
             }
         });
 
         form.m_dateFromButton.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent e) {
                 doResetDateFrom();
             }
         });
 
         form.m_dateFromCB.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent e) {
                 enableDisableDateFrom();
             }
         });
 
         form.m_dirButton.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent e) {
                 doBrowseDirectory();
             }
@@ -266,11 +288,15 @@ public class SearchWindowController {
             @Override
             public void actionPerformed(ActionEvent arg0) {
                 form.m_searchField.requestFocus();
-                form.m_searchField.selectAll();
+                form.m_searchField.getEditor().selectAll();
             }
         };
         form.getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(find, "CTRL+F");
         form.getRootPane().getActionMap().put("CTRL+F", focusAction);
+        
+        // Set search and replace combo boxes' actions, undo, key handling
+        configureHistoryComboBox(form.m_searchField);
+        configureHistoryComboBox(form.m_replaceField);        
 
         // need to control check boxes and radio buttons manually
         //
@@ -307,6 +333,7 @@ public class SearchWindowController {
         form.m_fileNamesCB.addActionListener(searchFieldRequestFocus);
 
         form.m_rbDir.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent e) {
                 updateOptionStatus();
 
@@ -319,6 +346,7 @@ public class SearchWindowController {
             }
         });
         form.m_rbProject.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent e) {
                 updateOptionStatus();
                 form.m_searchField.requestFocus();
@@ -326,6 +354,7 @@ public class SearchWindowController {
         });
 
         form.m_numberOfResults.addChangeListener(new ChangeListener() {
+            @Override
             public void stateChanged(ChangeEvent e) {
                 // move focus to search edit field
                 form.m_searchField.requestFocus();
@@ -333,6 +362,7 @@ public class SearchWindowController {
         });
 
         form.addWindowListener(new WindowAdapter() {
+            @Override
             public void windowClosed(WindowEvent e) {
                 // save user preferences
                 savePreferences();
@@ -346,8 +376,59 @@ public class SearchWindowController {
             }
         });
     }
+    
+    private void configureHistoryComboBox(final JComboBox box) {
+        final JTextField field = (JTextField) box.getEditor().getEditorComponent();
+        InputMap map = field.getInputMap();
+        
+        final UndoManager undoManager = new UndoManager();
+        field.getDocument().addUndoableEditListener(undoManager);
+        
+        // Set up undo/redo handling
+        KeyStroke undoKey = KeyStroke.getKeyStroke(KeyEvent.VK_Z,
+                Toolkit.getDefaultToolkit().getMenuShortcutKeyMask(), false);
+        map.put(undoKey, new AbstractAction() {
+            public void actionPerformed(ActionEvent e) {
+                if (undoManager.canUndo()) {
+                    undoManager.undo();
+                }
+            }
+        });
+        KeyStroke redoKey = KeyStroke.getKeyStroke(KeyEvent.VK_Y,
+                Toolkit.getDefaultToolkit().getMenuShortcutKeyMask(), false);
+        map.put(redoKey, new AbstractAction() {
+            public void actionPerformed(ActionEvent e) {
+                if (undoManager.canRedo()) {
+                    undoManager.redo();
+                }
+            }
+        });
+        
+        // Close dialog with Esc key
+        map.put(KeyStroke.getKeyStroke("ESCAPE"), new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (box.isPopupVisible()) {
+                    box.hidePopup();
+                } else {
+                    doCancel();
+                }
+            }
+        });
+        
+        // Perform search on Enter key (if search field not empty)
+        field.setAction(new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (!form.m_searchField.getEditor().getItem().toString().isEmpty()) {
+                    doSearch();
+                }
+            }
+        });
+    }
 
     ActionListener searchFieldRequestFocus = new ActionListener() {
+        @Override
         public void actionPerformed(ActionEvent e) {
             // move focus to search edit field
             form.m_searchField.requestFocus();
@@ -560,6 +641,9 @@ public class SearchWindowController {
         Preferences.setPreference(Preferences.SEARCHWINDOW_SEARCH_FILES, form.m_rbDir.isSelected());
         Preferences.setPreference(Preferences.SEARCHWINDOW_RECURSIVE, form.m_recursiveCB.isSelected());
 
+        // Search/replace history
+        HistoryManager.save();
+        
         // need to explicitly save preferences
         // because project might not be open
         Preferences.save();
@@ -583,6 +667,7 @@ public class SearchWindowController {
      */
     public void displaySearchResult(final Searcher searcher) {
         UIThreadsUtil.executeInSwingThread(new Runnable() {
+            @Override
             public void run() {
                 EntryListPane viewer = (EntryListPane) form.m_viewer;
                 viewer.displaySearchResult(searcher, ((Integer) form.m_numberOfResults.getValue()));
@@ -630,15 +715,22 @@ public class SearchWindowController {
     }
 
     private void doReplace() {
+        String replaceString = form.m_replaceField.getEditor().getItem().toString();
+        HistoryManager.addReplaceItem(replaceString);
+        form.m_replaceField.setModel(new DefaultComboBoxModel(HistoryManager.getReplaceItems()));
+        
         EntryListPane viewer = (EntryListPane) form.m_viewer;
         Core.getEditor().commitAndLeave(); // Otherwise, the current segment being edited is lost
         Core.getEditor()
                 .setFilter(
-                        new ReplaceFilter(viewer.getEntryList(), viewer.getSearcher(), form.m_replaceField
-                                .getText()));
+                        new ReplaceFilter(viewer.getEntryList(), viewer.getSearcher(), replaceString));
     }
 
     private void doReplaceAll() {
+        String replaceString = form.m_replaceField.getEditor().getItem().toString();
+        HistoryManager.addReplaceItem(replaceString);
+        form.m_replaceField.setModel(new DefaultComboBoxModel(HistoryManager.getReplaceItems()));
+        
         EntryListPane viewer = (EntryListPane) form.m_viewer;
         Core.getEditor().commitAndDeactivate(); // Otherwise, the current segment being edited is lost
         int count = viewer.getEntryList().size();
@@ -646,8 +738,7 @@ public class SearchWindowController {
         int r = JOptionPane.showConfirmDialog(form, msg, OStrings.getString("CONFIRM_DIALOG_TITLE"),
                 JOptionPane.YES_NO_OPTION);
         if (r == JOptionPane.YES_OPTION) {
-            new ReplaceFilter(viewer.getEntryList(), viewer.getSearcher(), form.m_replaceField.getText())
-                    .replaceAll();
+            new ReplaceFilter(viewer.getEntryList(), viewer.getSearcher(), replaceString).replaceAll();
         }
         Core.getEditor().activateEntry();
         form.m_replaceButton.setEnabled(false);
@@ -663,6 +754,10 @@ public class SearchWindowController {
 
         EntryListPane viewer = (EntryListPane) form.m_viewer;
 
+        String queryString = form.m_searchField.getEditor().getItem().toString();
+        
+        HistoryManager.addSearchItem(queryString);
+        form.m_searchField.setModel(new DefaultComboBoxModel(HistoryManager.getSearchItems()));
         form.m_searchField.requestFocus();
 
         viewer.reset();
@@ -691,15 +786,15 @@ public class SearchWindowController {
         // save user preferences
         savePreferences();
 
-        if (StringUtil.isEmpty(form.m_searchField.getText())) {
+        if (StringUtil.isEmpty(queryString)) {
             form.setTitle(OStrings.getString("SW_TITLE"));
         } else {
-            form.setTitle(form.m_searchField.getText() + " - OmegaT");
+            form.setTitle(queryString + " - OmegaT");
         }
 
         SearchExpression s = new SearchExpression();
         s.mode = mode;
-        s.text = form.m_searchField.getText();
+        s.text = queryString;
         s.rootDir = root;
         s.recursive = form.m_recursiveCB.isSelected();
 
@@ -919,6 +1014,7 @@ public class SearchWindowController {
      */
     public void displayErrorRB(final Throwable ex, final String errorKey, final Object... params) {
         UIThreadsUtil.executeInSwingThread(new Runnable() {
+            @Override
             public void run() {
                 String msg;
                 if (params != null) {

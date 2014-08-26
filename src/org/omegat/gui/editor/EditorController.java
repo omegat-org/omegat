@@ -64,6 +64,7 @@ import org.omegat.core.CoreEvents;
 import org.omegat.core.data.EntryKey;
 import org.omegat.core.data.IProject;
 import org.omegat.core.data.IProject.FileInfo;
+import org.omegat.core.data.LastSegmentManager;
 import org.omegat.core.data.PrepareTMXEntry;
 import org.omegat.core.data.ProjectTMX;
 import org.omegat.core.data.SourceTextEntry;
@@ -319,7 +320,7 @@ public class EditorController implements IEditor {
                     // should be called before
                     loadDocument();
                     activateEntry();
-                    jumpToLastEntry();
+                    LastSegmentManager.restoreLastSegment(EditorController.this);
                 }
             });
             break;
@@ -789,32 +790,6 @@ public class EditorController implements IEditor {
 
         Core.getMainWindow().showProgressMessage(pMsg.toString());
     }
-    
-    
-    /**
-     * Jump to last edited entry
-     */
-	protected void jumpToLastEntry() {
-        File lastEntryFile = new File(Core.getProject().getProjectProperties().getProjectInternal(), OConsts.LAST_ENTRY_NUMBER);
-
-    	if (! lastEntryFile.exists())
-    	{
-    		return;
-    	}
-
-        Core.getMainWindow().showStatusMessageRB("MW_JUMPING_LAST_ENTRY");
-		int lastEntryNumber = 0;
-		try {
-			String lastEntry = FileUtil.readTextFile(lastEntryFile).trim();
-			lastEntryNumber = Integer.parseInt(lastEntry, 10);
-		} catch (Exception e) {
-			Log.logDebug(LOGGER, "Cannot jump to last entry #" + lastEntryNumber + ":" + e.getMessage());
-		}
-		Log.logDebug(LOGGER, "Jumping to last entry #" + lastEntryNumber + ".");
-		
-		gotoEntry(lastEntryNumber);
-		 Core.getMainWindow().showStatusMessageRB(null);
-	}
 
     /**
      * Go to segment at specified location.

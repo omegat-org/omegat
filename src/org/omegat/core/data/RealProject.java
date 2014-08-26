@@ -681,14 +681,7 @@ public class RealProject implements IProject {
                     Core.getMainWindow().displayErrorRB(e, "CT_ERROR_SAVING_PROJ");
                 }
 
-                // Save current entry position for repositioning on reload (RFE#35)
-                int currentEntryNumber = Core.getEditor().getCurrentEntryNumber();
-                File lf = new File(m_config.getProjectInternal(), OConsts.LAST_ENTRY_NUMBER);
-                try {
-					FileUtil.writeTextFile(lf, Integer.toString(currentEntryNumber, 10));
-				} catch (IOException e) {
-					Log.logDebug(LOGGER, "Could not write the last entry number: {0}", e.getMessage());
-				}
+                LastSegmentManager.saveLastSegment();
 
                 // update statistics
                 String stat = CalcStandardStatistics.buildProjectStats(this, hotStat);

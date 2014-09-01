@@ -3,7 +3,7 @@
           with fuzzy matching, translation memory, keyword search, 
           glossaries, and translation leveraging into updated projects.
 
- Copyright (C) 2014      Briac Pilpre
+ Copyright (C) 2014 Briac Pilpre
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -38,164 +38,157 @@ import org.omegat.gui.editor.IEditor;
 import org.omegat.util.Log;
 import org.omegat.util.OConsts;
 
+/**
+ *  * @Briac Pilpre
+ */
 public class LastSegmentManager {
-	private static final Logger LOGGER = Logger.getLogger(LastSegmentManager.class.getName());
 
-	private static final String LAST_ENTRY_SRC = "LAST_ENTRY_SRC";
-	private static final String LAST_ENTRY_FILE = "LAST_ENTRY_FILE";
-	private static final String LAST_ENTRY_NUMBER = "LAST_ENTRY_NUMBER";
-	private static final String LAST_ENTRY_OFFSET = "LAST_ENTRY_OFFSET";
-	
-	private static File getLastEntryFile() {
-		return new File(Core.getProject().getProjectProperties().getProjectInternal(), OConsts.LAST_ENTRY_NUMBER);
-	}
-	
-	/** Save current entry position for repositioning on reload (RFE#35). This method is called from RealProject during saveProject(boolean) */
-	public static void saveLastSegment() {
-		Properties prop = new Properties();
-		IEditor editor = Core.getEditor();
-		
-		int lastEntryNumber = editor.getCurrentEntryNumber();
-		String currentFile = editor.getCurrentFile();
-		
-		if (currentFile == null)
-		{
-			// Project has no files, no need to save.
-			return;
-		}
-		
-		
-		prop.put(LAST_ENTRY_NUMBER, Integer.toString(lastEntryNumber, 10));
-		prop.put(LAST_ENTRY_FILE, currentFile);
-		prop.put(LAST_ENTRY_SRC, editor.getCurrentEntry().getSrcText());
-		
+    private static final Logger LOGGER = Logger.getLogger(LastSegmentManager.class.getName());
+
+    private static final String LAST_ENTRY_SRC = "LAST_ENTRY_SRC";
+    private static final String LAST_ENTRY_FILE = "LAST_ENTRY_FILE";
+    private static final String LAST_ENTRY_NUMBER = "LAST_ENTRY_NUMBER";
+    private static final String LAST_ENTRY_OFFSET = "LAST_ENTRY_OFFSET";
+
+    private static File getLastEntryFile() {
+        return new File(Core.getProject().getProjectProperties().getProjectInternal(), OConsts.LAST_ENTRY_NUMBER);
+    }
+
+    /**
+     * Save current entry position for repositioning on reload (RFE#35). This method is called from RealProject during
+     * saveProject(boolean)
+     */
+    public static void saveLastSegment() {
+        Properties prop = new Properties();
+        IEditor editor = Core.getEditor();
+
+        int lastEntryNumber = editor.getCurrentEntryNumber();
+        String currentFile = editor.getCurrentFile();
+
+        if (currentFile == null) {
+            // Project has no files, no need to save.
+            return;
+        }
+
+        prop.put(LAST_ENTRY_NUMBER, Integer.toString(lastEntryNumber, 10));
+        prop.put(LAST_ENTRY_FILE, currentFile);
+        prop.put(LAST_ENTRY_SRC, editor.getCurrentEntry().getSrcText());
+
 		// Won't work in EditorController.saveProject - editor commands are in SwingThread
 //		int fileIndex = fileIndex(editor.getCurrentFile());
 //		editor.gotoFile(fileIndex);
 //		int fileFirstSegment = lastEntryNumber - editor.getCurrentEntryNumber();
 //		prop.put(LAST_ENTRY_OFFSET, Integer.toString(fileFirstSegment));
+        try {
+            FileOutputStream fos = new FileOutputStream(getLastEntryFile());
+            prop.store(fos, null);
+            fos.close();
+        } catch (IOException e) {
+            Log.logDebug(LOGGER, "Could not write the last entry number: {0}", e.getMessage());
+        }
+    }
 
-		try {
-			FileOutputStream fos = new FileOutputStream(getLastEntryFile());
-			prop.store(fos, null);
-			fos.close();
-		} catch (IOException e) {
-			Log.logDebug(LOGGER, "Could not write the last entry number: {0}", e.getMessage());
-		}
-	}
-	
     /**
      * Jump to last edited entry
      */
-	public static void restoreLastSegment(IEditor editor) {
-		File lastEntryFile = getLastEntryFile();
+    public static void restoreLastSegment(IEditor editor) {
+        File lastEntryFile = getLastEntryFile();
 
-		if (! lastEntryFile.exists())
-		{
-			return;
-		}
+        if (!lastEntryFile.exists()) {
+            return;
+        }
 
-		Properties prop = new Properties();
-		try {
-			prop.load(new FileInputStream(lastEntryFile));
-		} catch (IOException e) {
-			Log.logDebug(LOGGER, "Could not load last segment info", e.getMessage());
-			return;
-		}
+        Properties prop = new Properties();
+        try {
+            prop.load(new FileInputStream(lastEntryFile));
+        } catch (IOException e) {
+            Log.logDebug(LOGGER, "Could not load last segment info", e.getMessage());
+            return;
+        }
 
-		Core.getMainWindow().showStatusMessageRB("MW_JUMPING_LAST_ENTRY");
-		int lastEntryNumber = 1;
-		try {
-			String lastEntry = prop.getProperty(LAST_ENTRY_NUMBER, "1");
-			lastEntryNumber = Integer.parseInt(lastEntry, 10);
-		} catch (Exception e) {
-			Log.logDebug(LOGGER, "Cannot jump to last entry #" + lastEntryNumber + ":" + e.getMessage());
-		}
-		Log.logDebug(LOGGER, "Jumping to last entry #" + lastEntryNumber + ".");
+        Core.getMainWindow().showStatusMessageRB("MW_JUMPING_LAST_ENTRY");
+        int lastEntryNumber = 1;
+        try {
+            String lastEntry = prop.getProperty(LAST_ENTRY_NUMBER, "1");
+            lastEntryNumber = Integer.parseInt(lastEntry, 10);
+        } catch (Exception e) {
+            Log.logDebug(LOGGER, "Cannot jump to last entry #" + lastEntryNumber + ":" + e.getMessage());
+        }
+        Log.logDebug(LOGGER, "Jumping to last entry #" + lastEntryNumber + ".");
 
-		List<SourceTextEntry> allEntries = Core.getProject().getAllEntries();
+        List<SourceTextEntry> allEntries = Core.getProject().getAllEntries();
 
-		if (allEntries.size() < lastEntryNumber)
-		{
-			Log.logDebug(LOGGER, "Not enough segments to jump to " + lastEntryNumber);
-			Core.getMainWindow().showStatusMessageRB(null);
-			return;
-		}
+        if (allEntries.size() < lastEntryNumber) {
+            Log.logDebug(LOGGER, "Not enough segments to jump to " + lastEntryNumber);
+            Core.getMainWindow().showStatusMessageRB(null);
+            return;
+        }
 
-		SourceTextEntry propEntry = allEntries.get(lastEntryNumber - 1);
+        SourceTextEntry propEntry = allEntries.get(lastEntryNumber - 1);
 
-		String lastFile = prop.getProperty(LAST_ENTRY_FILE, "");
-		String lastSrc = prop.getProperty(LAST_ENTRY_SRC, "");
-		
-		// Best case scenario, segment matches src (if it doesn't match filename, it's still okay)
-		if (propEntry.getSrcText().equals(lastSrc))
-		{
-			gotoEntry(propEntry.entryNum(), editor);
-			Core.getMainWindow().showStatusMessageRB(null);
-			return;
-		}
+        String lastFile = prop.getProperty(LAST_ENTRY_FILE, "");
+        String lastSrc = prop.getProperty(LAST_ENTRY_SRC, "");
 
-		// Check to see if the source and file match
-		Log.logDebug(LOGGER, "Last entry #" + lastEntryNumber + " mismatch (file \"" + lastFile + "\", src \"" + lastSrc + "\")" );
+        // Best case scenario, segment matches src (if it doesn't match filename, it's still okay)
+        if (propEntry.getSrcText().equals(lastSrc)) {
+            gotoEntry(propEntry.entryNum(), editor);
+            Core.getMainWindow().showStatusMessageRB(null);
+            return;
+        }
 
-		int fileIndex = fileIndex(lastFile);
+        // Check to see if the source and file match
+        Log.logDebug(LOGGER, "Last entry #" + lastEntryNumber + " mismatch (file \"" + lastFile + "\", src \"" + lastSrc + "\")");
 
-		if (fileIndex == -1)
-		{
-			Log.logDebug(LOGGER, "File \"" + lastFile + "\" is not in the project anymore.");
-			Core.getMainWindow().showStatusMessageRB(null);
-			return;
-		}
+        int fileIndex = fileIndex(lastFile);
 
-		
-		// We landed in the right file, just not the right segment
-		List<SourceTextEntry> fileEntries = Core.getProject().getProjectFiles().get(fileIndex).entries;
-		for (SourceTextEntry entry : fileEntries)
-		{
-			if (entry.getSrcText().equals(lastSrc))
-			{
-				Log.logDebug(LOGGER, "Found a matching entry in the right file.");
-				gotoEntry(entry.entryNum(), editor);
-				return;
-			}
-		}
-		
-		// Things look bad, nothing in the matching file. Look in all the project or quit ?
-		for (SourceTextEntry entry : allEntries)
-		{
-			if (entry.getSrcText().equals(lastSrc))
-			{
-				Log.logDebug(LOGGER, "Found a matching entry in the wrong file.");
-				gotoEntry(entry.entryNum(), editor);
-				return;
-			}
-		}
+        if (fileIndex == -1) {
+            Log.logDebug(LOGGER, "File \"" + lastFile + "\" is not in the project anymore.");
+            Core.getMainWindow().showStatusMessageRB(null);
+            return;
+        }
 
-		Core.getMainWindow().showStatusMessageRB(null);
-	}
-	
-	/** Get the project index given its name, returns -1 if the file is not found */
-	private static int fileIndex(String filename)
-	{
+        // We landed in the right file, just not the right segment
+        List<SourceTextEntry> fileEntries = Core.getProject().getProjectFiles().get(fileIndex).entries;
+        for (SourceTextEntry entry : fileEntries) {
+            if (entry.getSrcText().equals(lastSrc)) {
+                Log.logDebug(LOGGER, "Found a matching entry in the right file.");
+                gotoEntry(entry.entryNum(), editor);
+                return;
+            }
+        }
 
-		int fileIndex = 0;
-		for (FileInfo file : Core.getProject().getProjectFiles())
-		{
-			if (file.filePath.equals(filename))
-			{
-				return fileIndex; 
-			}
-			fileIndex++;
-		}
-		
-		return -1;
-	}
-	
-	private static void gotoEntry(int num, IEditor editor)
-	{
-		editor.gotoEntry(num);
-		Core.getMainWindow().showStatusMessageRB(null);
-		return;
-	}
-	
+        // Things look bad, nothing in the matching file. Look in all the project or quit ?
+        for (SourceTextEntry entry : allEntries) {
+            if (entry.getSrcText().equals(lastSrc)) {
+                Log.logDebug(LOGGER, "Found a matching entry in the wrong file.");
+                gotoEntry(entry.entryNum(), editor);
+                return;
+            }
+        }
+
+        Core.getMainWindow().showStatusMessageRB(null);
+    }
+
+    /**
+     * Get the project index given its name, returns -1 if the file is not found
+     */
+    private static int fileIndex(String filename) {
+
+        int fileIndex = 0;
+        for (FileInfo file : Core.getProject().getProjectFiles()) {
+            if (file.filePath.equals(filename)) {
+                return fileIndex;
+            }
+            fileIndex++;
+        }
+
+        return -1;
+    }
+
+    private static void gotoEntry(int num, IEditor editor) {
+        editor.gotoEntry(num);
+        Core.getMainWindow().showStatusMessageRB(null);
+        return;
+    }
+
 }

@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 3.1.6 
 ----------------------------------------------------------------------
-   4 Enhancements
+   5 Enhancements
    2 Bug fixes
    3 Localisation update
 ----------------------------------------------------------------------
@@ -14,6 +14,9 @@
 
   - Automatically open last visited segment 
   https://sourceforge.net/p/omegat/feature-requests/35/
+
+  - Memory for searched items
+  https://sourceforge.net/p/omegat/feature-requests/176/
 
   Other enhancements:
 

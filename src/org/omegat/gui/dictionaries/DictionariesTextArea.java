@@ -26,6 +26,7 @@
 
 package org.omegat.gui.dictionaries;
 
+import java.awt.Font;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -43,6 +44,9 @@ import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.Element;
+import javax.swing.text.MutableAttributeSet;
+import javax.swing.text.SimpleAttributeSet;
+import javax.swing.text.html.CSS;
 import javax.swing.text.html.HTMLDocument;
 
 import org.omegat.core.Core;
@@ -52,6 +56,7 @@ import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.dictionaries.DictionariesManager;
 import org.omegat.core.dictionaries.DictionaryEntry;
 import org.omegat.core.events.IEditorEventListener;
+import org.omegat.core.events.IFontChangedEventListener;
 import org.omegat.gui.common.EntryInfoSearchThread;
 import org.omegat.gui.common.EntryInfoThreadPane;
 import org.omegat.gui.main.DockableScrollPane;
@@ -94,6 +99,7 @@ public class DictionariesTextArea extends EntryInfoThreadPane<List<DictionaryEnt
         setEditable(false);
         AlwaysVisibleCaret.apply(this);
         this.setText(EXPLANATION);
+    	applyFont();
         setMinimumSize(new Dimension(100, 50));
 
         CoreEvents.registerEditorEventListener(new IEditorEventListener() {
@@ -101,7 +107,27 @@ public class DictionariesTextArea extends EntryInfoThreadPane<List<DictionaryEnt
                 callDictionary(newWord);
             }
         });
+        
+        // register font changes callback
+        CoreEvents.registerFontChangedEventListener(new IFontChangedEventListener() {
+            public void onFontChanged(Font newFont) {
+ 				applyFont(newFont);          
+            }
+        });
     }
+
+    private void applyFont() {
+    	applyFont(Core.getMainWindow().getApplicationFont());
+		
+	}
+
+	private void applyFont(Font font) {
+		MutableAttributeSet attr = new SimpleAttributeSet();
+		HTMLDocument doc = (HTMLDocument) getDocument();
+    	doc.getStyleSheet().addCSSAttribute(attr, CSS.Attribute.FONT_FAMILY, font.getFontName());
+    	doc.getStyleSheet().addCSSAttribute(attr, CSS.Attribute.FONT_SIZE, font.getSize() + "pt");
+    	doc.setCharacterAttributes(0, doc.getLength(), attr, false);
+	}
 
     @Override
     protected void onProjectOpen() {
@@ -115,6 +141,7 @@ public class DictionariesTextArea extends EntryInfoThreadPane<List<DictionaryEnt
     protected void onProjectClose() {
         clear();
         this.setText(EXPLANATION);
+        applyFont();
         manager.stop();
         tokenizer = null;
     }
@@ -197,6 +224,7 @@ public class DictionariesTextArea extends EntryInfoThreadPane<List<DictionaryEnt
             i++;
         }
         setText(txt.toString());
+        applyFont();
         setCaretPosition(0);
     }
 

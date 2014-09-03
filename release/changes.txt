@@ -27,6 +27,9 @@
 can be removed from tooltip, text between paired tags can be bolded.
   
   Bug fixes:
+
+    - Wrong font used in dictionary window
+  https://sourceforge.net/p/omegat/bugs/706
   
   - Alt+Up/Down was set to Select Next Match and Select Previous Match on Mac OSX
   https://sourceforge.net/p/omegat/bugs/687/

@@ -60,7 +60,7 @@ public class XLIFFFilter extends XMLFilter {
     private ArrayList<String> groupResname = new ArrayList<String>();
     private int groupLevel;
     private ArrayList<String> notes = new ArrayList<String>();
-    private String text;
+    private StringBuilder text = new StringBuilder();
     private ArrayList<String> entryText = new ArrayList<String>();
     private ArrayList<List<ProtectedPart>> protectedParts = new ArrayList<List<ProtectedPart>>();
     private HashSet<String> altIDCache = new HashSet<String>();
@@ -213,13 +213,16 @@ public class XLIFFFilter extends XMLFilter {
         if ("/xliff/file/header".equals(path)) {
             ignored = true;
         }
+        if (path.endsWith("trans-unit/note")) {
+            text = new StringBuilder();
+        }
     }
 
     @Override
     public void tagEnd(String path) {
         if (path.endsWith("trans-unit/note")) {
             // <trans-unit> <note>'s only 
-            notes.add(text);
+            notes.add(text.toString());
         } else if (path.endsWith("trans-unit")) {
             if (entryParseCallback != null) {
                 StringBuffer buf = new StringBuffer();
@@ -302,7 +305,7 @@ public class XLIFFFilter extends XMLFilter {
 
     @Override
     public void text(String text) {
-        this.text = text;
+        this.text.append(text);
     }
 
     @Override

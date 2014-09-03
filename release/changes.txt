@@ -2,7 +2,7 @@
  OmegaT 3.1.6 
 ----------------------------------------------------------------------
    5 Enhancements
-   3 Bug fixes
+   4 Bug fixes
    3 Localisation update
 ----------------------------------------------------------------------
 3.1.6 vs. 3.1.5
@@ -39,6 +39,9 @@ can be removed from tooltip, text between paired tags can be bolded.
 
   - The HTML filter had a different behaviour, where attributes were transformed into 
 tags and could not be translated.
+
+  - Wrong font in dictionary window
+  https://sourceforge.net/p/omegat/bugs/706/
 
   Localisation updates:
 

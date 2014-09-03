@@ -2,7 +2,7 @@
  OmegaT 3.1.6 
 ----------------------------------------------------------------------
    5 Enhancements
-   4 Bug fixes
+   5 Bug fixes
    3 Localisation update
 ----------------------------------------------------------------------
 3.1.6 vs. 3.1.5
@@ -42,6 +42,8 @@ tags and could not be translated.
 
   - Wrong font in dictionary window
   https://sourceforge.net/p/omegat/bugs/706/
+
+  - Multi-line notes in XLIFF files were not extracted correctly
 
   Localisation updates:
 

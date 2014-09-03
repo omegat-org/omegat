@@ -40,9 +40,6 @@ can be removed from tooltip, text between paired tags can be bolded.
   - The HTML filter had a different behaviour, where attributes were transformed into 
 tags and could not be translated.
 
-  - Wrong font in dictionary window
-  https://sourceforge.net/p/omegat/bugs/706/
-
   - Multi-line notes in XLIFF files were not extracted correctly
 
   Localisation updates:

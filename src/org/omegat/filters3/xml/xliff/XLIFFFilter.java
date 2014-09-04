@@ -213,9 +213,7 @@ public class XLIFFFilter extends XMLFilter {
         if ("/xliff/file/header".equals(path)) {
             ignored = true;
         }
-        if (path.endsWith("trans-unit/note")) {
-            text = new StringBuilder();
-        }
+        text.setLength(0);
     }
 
     @Override

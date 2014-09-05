@@ -147,8 +147,13 @@ public class LatexFilter extends AbstractFilter {
         String state;
         while ((s = in.readLine()) != null) {
             // String[] c = s.split(""); In Java 8, that line gave a first empty element, so it was replaced with the 
-            // following line, and idx below was started at 0 instead of 1
-            String[] c = s.split("(?!^)");
+            // following lines, and idx below was started at 0 instead of 1
+            String[] c;
+            if (s.length() > 0){
+              c = s.split("(?!^)");
+            } else {
+              c = new String[0];
+            }
             state = "N";
 
             int idx = 0;

@@ -206,6 +206,9 @@ public class ProjectUICommands {
                     Log.logErrorRB(ex, "PP_ERROR_UNABLE_TO_READ_PROJECT_FILE");
                     Core.getMainWindow().displayErrorRB(ex, "PP_ERROR_UNABLE_TO_READ_PROJECT_FILE");
                 }
+                
+                RecentProjects.add(localDirectory.getAbsolutePath());
+                
                 mainWindow.setCursor(oldCursor);
                 return null;
             }

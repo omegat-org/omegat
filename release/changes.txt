@@ -42,7 +42,8 @@ tags and could not be translated.
 
   - Multi-line notes in XLIFF files were not extracted correctly
 
-  - When using Java 8, the first character of each line of a LaTeX document was lost
+  - Issues with LaTeX filter with Java 8
+  https://sourceforge.net/p/omegat/bugs/658/
 
   Localisation updates:
 

@@ -286,6 +286,7 @@ Code has been contributed by
   Aaron Madlon-Kay
   Fabián Mandelbaum
   Manfred Martin
+  Adiel Mittmann
   John Moran
   Maxym Mykhalchuk 
   Arno Peters

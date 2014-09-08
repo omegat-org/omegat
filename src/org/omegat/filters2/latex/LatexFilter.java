@@ -8,7 +8,7 @@
                2008 Martin Fleurke
                2009 Arno Peters
                2011 Didier Briel
-               2013 Adiel Mittmann
+               2014 Adiel Mittmann
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 

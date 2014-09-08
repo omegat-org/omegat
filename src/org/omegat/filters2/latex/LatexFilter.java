@@ -8,6 +8,7 @@
                2008 Martin Fleurke
                2009 Arno Peters
                2011 Didier Briel
+               2013 Adiel Mittmann
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -53,6 +54,7 @@ import org.omegat.util.OStrings;
  * @author Martin Fleurke
  * @author Arno Peters
  * @author Didier Briel
+ * @author Adiel Mittmann
  */
 public class LatexFilter extends AbstractFilter {
 
@@ -415,9 +417,10 @@ public class LatexFilter extends AbstractFilter {
         for (Iterator<String> it = commands.iterator(); it.hasNext();) {
             String command = it.next();
 
-            if (command.equals("\\\\") || command.equals("\\{") || command.equals("\\["))
+            if (command.equals("\\\\") || command.equals("\\{") || command.equals("\\[") || command.equals("\\|")) {                
                 // continue;
                 command = "\\" + command;
+            }
 
             StringBuffer sb = new StringBuffer();
             String find = "\\" + command;

@@ -45,6 +45,9 @@ tags and could not be translated.
   - Issues with LaTeX filter with Java 8
   https://sourceforge.net/p/omegat/bugs/658/
 
+  - Extra tags in LaTex file
+  https://sourceforge.net/p/omegat/bugs/564/
+
   Localisation updates:
 
   - Dutch localisation updated to 3.1.5 (UI, readme, documentation, scripts)

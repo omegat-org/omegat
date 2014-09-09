@@ -231,6 +231,7 @@ OmegaT のユーザーインターフェースや取扱説明書、他の関連�
   Aaron Madlon-Kay
   Fabián Mandelbaum
   Manfred Martin
+  Adiel Mittmann
   John Moran
   Maxym Mykhalchuk 
   Arno Peters

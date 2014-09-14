@@ -16,7 +16,7 @@
  *
  * @author  Yu Tang
  * @date    2014-09-12
- * @version 0.1-alpha
+ * @version 0.1
  */
 
 // User defined settings

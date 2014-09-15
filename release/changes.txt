@@ -2,7 +2,7 @@
  OmegaT 3.1.6 update 1
 ----------------------------------------------------------------------
    2 Enhancements
-   0 Bug fix
+   1 Bug fix
    1 Localisation update
 ----------------------------------------------------------------------
 3.1.6 update 1 vs. 3.1.6
@@ -14,6 +14,11 @@
 
   - Accept UTF-16 text files for glossaries 
   https://sourceforge.net/p/omegat/feature-requests/644/
+
+  Bug fixes:
+
+  - Line length limit doesn't work on one line text files 
+  https://sourceforge.net/p/omegat/bugs/707/
 
   Localisation updates:
 

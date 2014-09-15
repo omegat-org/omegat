@@ -37,6 +37,8 @@ import org.omegat.util.Token;
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
 public class LineLengthLimitWriter extends Writer {
+    public static String PLATFORM_LINE_SEPARATOR = System.getProperty("line.separator");
+
     final Writer out;
     final int lineLength;
     final int maxLineLength;
@@ -97,7 +99,7 @@ public class LineLengthLimitWriter extends Writer {
         }
         if (str.length() == 0) {
             // was empty line
-            writeEol();
+            writeSourceEol();
         } else {
             Token[] tokens = tokenizer.tokenizeAllExactly(str.toString());
             while (str.length() > 0) {
@@ -232,8 +234,12 @@ public class LineLengthLimitWriter extends Writer {
      */
     void breakAt(int pos, Token[] tokens) throws IOException {
         out.write(str.toString(), 0, pos);
-        writeEol();
         str.delete(0, pos);
+        if (str.length() > 0) {
+            writeBreakEol();
+        } else {
+            writeSourceEol();
+        }
         for (int i = 0; i < tokens.length; i++) {
             Token t = tokens[i];
             if (t == null || t.getOffset() < pos) {
@@ -244,7 +250,27 @@ public class LineLengthLimitWriter extends Writer {
         }
     }
 
-    void writeEol() throws IOException {
+    /**
+     * Write EOL at the line break. Need to write force EOL, even there is no EOL chars in source file at all.
+     */
+    void writeBreakEol() throws IOException {
+        if (eol1 == 0 && eol2 == 0) {
+            // there is no known EOL, use platform-dependent
+            out.write(PLATFORM_LINE_SEPARATOR);
+        } else {
+            if (eol1 != 0) {
+                out.write(eol1);
+            }
+            if (eol2 != 0) {
+                out.write(eol2);
+            }
+        }
+    }
+
+    /**
+     * Write EOL in the source line's end. It can be file without EOL at the end.
+     */
+    void writeSourceEol() throws IOException {
         if (eol1 != 0) {
             out.write(eol1);
         }

@@ -46,8 +46,8 @@ import org.omegat.util.gui.Styles;
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
 public class ProtectedPartsMarker implements IMarker {
-    protected static final HighlightPainter PAINTERrtl = new TransparentHighlightPainter(Styles.COLOR_PLACEHOLDER, 0.2F);
-    protected static final AttributeSet ATTRIBUTESltr = Styles.createAttributeSet(Styles.COLOR_PLACEHOLDER, null, null,
+    protected static final HighlightPainter PAINTERrtl = new TransparentHighlightPainter(Styles.EditorColor.COLOR_PLACEHOLDER.getColor(), 0.2F);
+    protected static final AttributeSet ATTRIBUTESltr = Styles.createAttributeSet(Styles.EditorColor.COLOR_PLACEHOLDER.getColor(), null, null,
             null);
 
     @Override

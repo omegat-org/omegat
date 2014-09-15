@@ -49,12 +49,12 @@ public class RemoveTagMarker extends AbstractMarker {
     AttributeSet ATTRIBUTESltrTranslation;
 
     public RemoveTagMarker() throws Exception {
-        // PAINTER = new javax.swing.text.DefaultHighlighter.DefaultHighlightPainter(Styles.COLOR_REMOVETEXT_TARGET);
-        PAINTERrtl = new TransparentHighlightPainter(Styles.COLOR_REMOVETEXT_TARGET, 0.2F);
+        // PAINTER = new javax.swing.text.DefaultHighlighter.DefaultHighlightPainter(Styles.EditorColor.COLOR_REMOVETEXT_TARGET.getColor());
+        PAINTERrtl = new TransparentHighlightPainter(Styles.EditorColor.COLOR_REMOVETEXT_TARGET.getColor(), 0.2F);
         toolTip = OStrings.getString("MARKER_REMOVETAG");
 
         ATTRIBUTESltrSource = Styles.createAttributeSet(null, null, null, true);
-        ATTRIBUTESltrTranslation = Styles.createAttributeSet(Styles.COLOR_REMOVETEXT_TARGET, null, null, null);
+        ATTRIBUTESltrTranslation = Styles.createAttributeSet(Styles.EditorColor.COLOR_REMOVETEXT_TARGET.getColor(), null, null, null);
     }
 
     @Override

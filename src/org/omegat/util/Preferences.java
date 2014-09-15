@@ -379,6 +379,24 @@ public class Preferences {
     public static final String TAAS_LOOKUP = "taas_lookup";
     public static final String TAAS_DOMAIN = "taas_domain";
 
+    
+    /** Custom colors. */
+    private static String COLOR_SOURCE="color_source";
+    private static String COLOR_NOTED="color_noted";
+    private static String COLOR_UNTRANSLATED="color_untranslated";
+    private static String COLOR_TRANSLATED="color_translated";
+    private static String COLOR_NON_UNIQUE="color_non_unique";
+    private static String COLOR_PLACEHOLDER="color_placeholder";
+    private static String COLOR_REMOVETEXT_TARGET="color_removetext_target";
+    private static String COLOR_NBSP="color_nbsp";
+    private static String COLOR_WHITESPACE="color_whitespace";
+    private static String COLOR_BIDIMARKERS="color_bidimarkers";
+    private static String COLOR_MARK_COMES_FROM_TM="color_mark_comes_from_tm";
+    private static String COLOR_MARK_COMES_FROM_TM_XICE="color_mark_comes_from_tm_xice";
+    private static String COLOR_MARK_COMES_FROM_TM_X100PC="color_mark_comes_from_tm_x100pc";
+    private static String COLOR_MARK_COMES_FROM_TM_XAUTO="color_mark_comes_from_tm_xauto";
+    private static String COLOR_REPLACE="color_replace";
+    
     /** Private constructor, because this file is singleton */
     static {
         m_loaded = false;

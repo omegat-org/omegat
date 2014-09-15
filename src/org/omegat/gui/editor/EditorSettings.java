@@ -382,44 +382,44 @@ public class EditorSettings {
                 break;
             case FIRST:
                 if (markFirstNonUnique) {
-                    fg = Styles.COLOR_NON_UNIQUE;
+                    fg = Styles.EditorColor.COLOR_NON_UNIQUE.getColor();
                 }
                 break;
             case NEXT:
-                fg = Styles.COLOR_NON_UNIQUE;
+                fg = Styles.EditorColor.COLOR_NON_UNIQUE.getColor();
                 break;
             }
         }
-        if (isPlaceholder) fg = Styles.COLOR_PLACEHOLDER;
+        if (isPlaceholder) fg = Styles.EditorColor.COLOR_PLACEHOLDER.getColor();
         if (isRemoveText && !isSource) {
-            fg = Styles.COLOR_REMOVETEXT_TARGET;
+            fg = Styles.EditorColor.COLOR_REMOVETEXT_TARGET.getColor();
         }
         
         //determine background color
         Color bg = null;
         if (active) {
             if (isSource) {
-                bg = Styles.COLOR_SOURCE;
+                bg = Styles.EditorColor.COLOR_SOURCE.getColor();
             }
         } else {
             if (isSource) {
                 if (isMarkNotedSegments() && hasNote && !translationExists) {
-                    bg = Styles.COLOR_NOTED;
+                    bg = Styles.EditorColor.COLOR_NOTED.getColor();
                 } else if (markUntranslated && !translationExists) {
-                    bg = Styles.COLOR_UNTRANSLATED;
+                    bg = Styles.EditorColor.COLOR_UNTRANSLATED.getColor();
                 } else if (isDisplaySegmentSources()) {
-                    bg = Styles.COLOR_SOURCE;
+                    bg = Styles.EditorColor.COLOR_SOURCE.getColor();
                 }
             } else {
                 if (isMarkNotedSegments() && hasNote) {
-                    bg = Styles.COLOR_NOTED;
+                    bg = Styles.EditorColor.COLOR_NOTED.getColor();
                 } else if (markTranslated) {
-                    bg = Styles.COLOR_TRANSLATED;
+                    bg = Styles.EditorColor.COLOR_TRANSLATED.getColor();
                 }
             }
         }
         if (isNBSP && isMarkNBSP()) { //overwrite others, because space is smallest.
-            bg = Styles.COLOR_NBSP;
+            bg = Styles.EditorColor.COLOR_NBSP.getColor();
         }
 
         //determine bold
@@ -457,6 +457,6 @@ public class EditorSettings {
      * @return
      */
     public AttributeSet getOtherLanguageTranslationAttributeSet() {
-        return Styles.createAttributeSet(null, Styles.COLOR_SOURCE, false, true);
+        return Styles.createAttributeSet(null, Styles.EditorColor.COLOR_SOURCE.getColor(), false, true);
     }
 }

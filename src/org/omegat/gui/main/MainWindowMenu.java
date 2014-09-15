@@ -352,17 +352,17 @@ public class MainWindowMenu implements ActionListener, MenuListener, IMainMenu {
                 .add(viewDisplayModificationInfoAllRadioButtonMenuItem = createRadioButtonMenuItem(
                         "MW_VIEW_MENU_MODIFICATION_INFO_ALL", viewModificationInfoMenuBG));
         
-        viewMarkTranslatedSegmentsCheckBoxMenuItem.setIcon(getViewMenuMarkBGIcon(Styles.COLOR_TRANSLATED));
-        viewMarkUntranslatedSegmentsCheckBoxMenuItem.setIcon(getViewMenuMarkBGIcon(Styles.COLOR_UNTRANSLATED));
-        viewDisplaySegmentSourceCheckBoxMenuItem.setIcon(getViewMenuMarkBGIcon(Styles.COLOR_SOURCE));
-        viewMarkNonUniqueSegmentsCheckBoxMenuItem.setIcon(getViewMenuMarkTextIcon(Styles.COLOR_NON_UNIQUE));
-        viewMarkNotedSegmentsCheckBoxMenuItem.setIcon(getViewMenuMarkBGIcon(Styles.COLOR_NOTED));
-        viewMarkNBSPCheckBoxMenuItem.setIcon(getViewMenuMarkBGIcon(Styles.COLOR_NBSP));
-        viewMarkWhitespaceCheckBoxMenuItem.setIcon(getViewMenuMarkBGIcon(Styles.COLOR_WHITESPACE));
-        viewMarkBidiCheckBoxMenuItem.setIcon(getViewMenuMarkBGIcon(Styles.COLOR_BIDIMARKERS));
+        viewMarkTranslatedSegmentsCheckBoxMenuItem.setIcon(getViewMenuMarkBGIcon(Styles.EditorColor.COLOR_TRANSLATED.getColor()));
+        viewMarkUntranslatedSegmentsCheckBoxMenuItem.setIcon(getViewMenuMarkBGIcon(Styles.EditorColor.COLOR_UNTRANSLATED.getColor()));
+        viewDisplaySegmentSourceCheckBoxMenuItem.setIcon(getViewMenuMarkBGIcon(Styles.EditorColor.COLOR_SOURCE.getColor()));
+        viewMarkNonUniqueSegmentsCheckBoxMenuItem.setIcon(getViewMenuMarkTextIcon(Styles.EditorColor.COLOR_NON_UNIQUE.getColor()));
+        viewMarkNotedSegmentsCheckBoxMenuItem.setIcon(getViewMenuMarkBGIcon(Styles.EditorColor.COLOR_NOTED.getColor()));
+        viewMarkNBSPCheckBoxMenuItem.setIcon(getViewMenuMarkBGIcon(Styles.EditorColor.COLOR_NBSP.getColor()));
+        viewMarkWhitespaceCheckBoxMenuItem.setIcon(getViewMenuMarkBGIcon(Styles.EditorColor.COLOR_WHITESPACE.getColor()));
+        viewMarkBidiCheckBoxMenuItem.setIcon(getViewMenuMarkBGIcon(Styles.EditorColor.COLOR_BIDIMARKERS.getColor()));
         viewModificationInfoMenu.setIcon(getViewMenuMarkBGIcon(null));
         viewMarkAutoPopulatedCheckBoxMenuItem
-                .setIcon(getViewMenuMarkBGIcon(Styles.COLOR_MARK_COMES_FROM_TM_XAUTO));
+                .setIcon(getViewMenuMarkBGIcon(Styles.EditorColor.COLOR_MARK_COMES_FROM_TM_XAUTO.getColor()));
 
         toolsMenu.add(toolsValidateTagsMenuItem = createMenuItem("TF_MENU_TOOLS_VALIDATE"));
         toolsMenu.add(toolsSingleValidateTagsMenuItem = createMenuItem("TF_MENU_TOOLS_SINGLE_VALIDATE"));

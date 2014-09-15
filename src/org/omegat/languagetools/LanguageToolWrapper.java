@@ -51,6 +51,7 @@ import org.omegat.gui.editor.mark.Mark;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
+import org.omegat.util.gui.Styles;
 
 /**
  * Marker implementation for LanguageTool support.
@@ -60,7 +61,7 @@ import org.omegat.util.Preferences;
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
 public class LanguageToolWrapper implements IMarker, IProjectEventListener {
-    protected static final HighlightPainter PAINTER = new UnderlineFactory.WaveUnderline(Color.BLUE);
+    protected static final HighlightPainter PAINTER = new UnderlineFactory.WaveUnderline(Styles.EditorColor.COLOR_LANGUAGE_TOOLS.getColor());
 
     private JLanguageTool sourceLt, targetLt;
     private List<BitextRule> bRules;

@@ -37,6 +37,7 @@ import org.omegat.gui.editor.UnderlineFactory;
 import org.omegat.gui.editor.mark.IMarker;
 import org.omegat.gui.editor.mark.Mark;
 import org.omegat.util.Token;
+import org.omegat.util.gui.Styles;
 
 /**
  * Spell checker marker implementation. All words for displayed file will be
@@ -45,7 +46,7 @@ import org.omegat.util.Token;
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
 public class SpellCheckerMarker implements IMarker {
-    protected static final HighlightPainter PAINTER = new UnderlineFactory.WaveUnderline(Color.RED);
+    protected static final HighlightPainter PAINTER = new UnderlineFactory.WaveUnderline(Styles.EditorColor.COLOR_SPELLCHECK.getColor());
 
     @Override
     public List<Mark> getMarksForEntry(SourceTextEntry ste, String sourceText, String translationText, boolean isActive)

@@ -62,7 +62,10 @@ public final class Styles {
     	COLOR_MARK_COMES_FROM_TM_XICE("#af76df"), // Purple 
     	COLOR_MARK_COMES_FROM_TM_X100PC("#ff948"), // Dark Orange 
     	COLOR_MARK_COMES_FROM_TM_XAUTO("#ffd596"), // Orange
-    	COLOR_REPLACE("#0000ff"); // Blue
+    	COLOR_REPLACE("#0000ff"), // Blue
+    	COLOR_LANGUAGE_TOOLS("#0000ff"),
+    	COLOR_SPELLCHECK("#ff0000"),
+    	;
     	private Color color;
 
     	private EditorColor(String defaultColor) {

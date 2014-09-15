@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 3.1.6 update 1
 ----------------------------------------------------------------------
-   2 Enhancements
+   3 Enhancements
    1 Bug fix
    1 Localisation update
 ----------------------------------------------------------------------
@@ -14,6 +14,11 @@
 
   - Accept UTF-16 text files for glossaries 
   https://sourceforge.net/p/omegat/feature-requests/644/
+
+  Other enhancements:
+
+  - A new script (auto_open_last_project.groovy) allows opening automatically
+the last open project
 
   Bug fixes:
 

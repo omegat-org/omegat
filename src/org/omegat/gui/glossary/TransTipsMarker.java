@@ -25,7 +25,6 @@
 
 package org.omegat.gui.glossary;
 
-import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,6 +36,7 @@ import org.omegat.gui.editor.UnderlineFactory;
 import org.omegat.gui.editor.mark.IMarker;
 import org.omegat.gui.editor.mark.Mark;
 import org.omegat.util.Preferences;
+import org.omegat.util.gui.Styles;
 
 /**
  * Marker for TransTips.
@@ -44,7 +44,7 @@ import org.omegat.util.Preferences;
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
 public class TransTipsMarker implements IMarker {
-    protected static final HighlightPainter transTipsUnderliner = new UnderlineFactory.SolidBoldUnderliner(Color.blue);
+    protected static final HighlightPainter transTipsUnderliner = new UnderlineFactory.SolidBoldUnderliner(Styles.EditorColor.COLOR_TRANSTIPS.getColor());
 
     @Override
     public List<Mark> getMarksForEntry(SourceTextEntry ste, String sourceText, String translationText, boolean isActive) {

@@ -63,6 +63,7 @@ import org.omegat.gui.dialogs.TeamUserPassDialog;
 import org.omegat.util.FileUtil;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
+import org.omegat.util.StringUtil;
 import org.omegat.util.gui.DockingUI;
 
 /**
@@ -616,5 +617,10 @@ public class GITRemoteRepository implements IRemoteRepository {
         } finally {
             FileUtil.deleteTree(temp);
         }
+    }
+
+    public static String guessRepoName(String url) {
+        url = StringUtil.stripFromEnd(url, "/", ".git");
+        return url.substring(url.lastIndexOf('/') + 1);
     }
 }

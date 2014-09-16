@@ -26,6 +26,7 @@
 
 package org.omegat.gui.dialogs;
 
+import java.io.File;
 import java.util.concurrent.CancellationException;
 
 import javax.swing.SwingWorker;
@@ -96,6 +97,15 @@ public class NewTeamProject extends javax.swing.JDialog {
         StaticUIUtils.setEscapeClosable(this);
     }
     
+    private void suggestSaveDirectory(String repoName) {
+        if (repoName == null || !txtDirectory.getText().isEmpty()) {
+            return;
+        }
+        String usrDir = System.getProperty("user.home");
+        File suggestion = new File(usrDir, repoName);
+        txtDirectory.setText(suggestion.getAbsolutePath());
+    }
+    
     private synchronized void detectRepo() {
         if (detecting || !isVisible()) {
             return;
@@ -156,6 +166,7 @@ public class NewTeamProject extends javax.swing.JDialog {
         @Override
         protected void done() {
             String resultText = OStrings.getString("TEAM_DETECTED_REPO_UNKNOWN");
+            String repoName = null;
             try {
                 RepoTypeDetector detector = get();
                 repoType = detector.repoType;
@@ -163,8 +174,10 @@ public class NewTeamProject extends javax.swing.JDialog {
                 if (repoType != null) {
                     if (repoType.equals(GITRemoteRepository.class)) {
                         resultText = OStrings.getString("TEAM_DETECTED_REPO_GIT");
+                        repoName = GITRemoteRepository.guessRepoName(url);
                     } else if (repoType.equals(SVNRemoteRepository.class)) {
                         resultText = OStrings.getString("TEAM_DETECTED_REPO_SVN");
+                        repoName = SVNRemoteRepository.guessRepoName(url);
                     }
                 }
             } catch (CancellationException ex) {
@@ -174,6 +187,7 @@ public class NewTeamProject extends javax.swing.JDialog {
                 Log.logErrorRB(ex, "TEAM_ERROR_DETECTING_REPO");
             }
             detectedRepoLabel.setText(resultText);
+            suggestSaveDirectory(repoName);
             updateDialog();
             stopDetectingRepo();
         }

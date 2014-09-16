@@ -183,4 +183,19 @@ public class StringUtil {
         }
         return substring.equals(text.substring(pos - substring.length(), pos));
     }
+    
+    public static String stripFromEnd(String string, String... toStrip) {
+        if (string == null) {
+            return null;
+        }
+        if (toStrip == null) {
+            return string;
+        }
+        for (String s : toStrip) {
+            if (string.endsWith(s)) {
+                string = string.substring(0, string.length() - s.length());
+            }
+        }
+        return string;
+    }
 }

@@ -34,6 +34,7 @@ import java.util.List;
 import java.util.logging.Logger;
 
 import org.omegat.util.Log;
+import org.omegat.util.StringUtil;
 import org.tmatesoft.svn.core.SVNAuthenticationException;
 import org.tmatesoft.svn.core.SVNCommitInfo;
 import org.tmatesoft.svn.core.SVNDepth;
@@ -344,5 +345,10 @@ public class SVNRemoteRepository implements IRemoteRepository {
             return false;
         }
         return true;
+    }
+
+    public static String guessRepoName(String url) {
+        url = StringUtil.stripFromEnd(url, "/", "/trunk", "/branches", "/tags", "/svn");
+        return url.substring(url.lastIndexOf('/') + 1);
     }
 }

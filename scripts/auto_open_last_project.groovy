@@ -7,8 +7,8 @@
  * for event driven automatically execution.
  *
  * @author  Yu Tang
- * @date    2014-09-15
- * @version 0.1
+ * @date    2014-09-16
+ * @version 0.2
  */
 
 import org.omegat.util.Log
@@ -26,6 +26,8 @@ void openLastProject() {
         Log.log "$SCRIPT_NAME: No ProjectRecentMenuItems found."
     } else if (!item.isEnabled()) {
         Log.log "$SCRIPT_NAME: First ProjectRecentMenuItem is disabled."
+    } else if (org.omegat.Main.projectLocation) {
+        Log.log "$SCRIPT_NAME: Another project is specified via commandline arguments."
     } else {
         Log.log "$SCRIPT_NAME: Open '${item.text}'"
         item.doClick()

@@ -72,16 +72,8 @@ public final class Styles {
     	private Color color;
 
     	private EditorColor(Color defaultColor) {
-    		Color color = null;
-    		try {
-    			color = Color.decode(Preferences.getPreference(this.name()));
-    		} catch (NumberFormatException e) {
-    			Log.logDebug(LOGGER, "Cannot set custom color for {0}, default to {1}.", this.name(), defaultColor);
-    			color = defaultColor;
-        		// Store the preference
-        		Preferences.setPreference(this.name(), this.toHex());
-    		}
-    		this.color = color;
+    		color = defaultColor;
+    		Preferences.setPreference(this.name(), this.toHex());
     	}
 
     	private EditorColor(String defaultColor) {

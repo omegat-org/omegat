@@ -349,6 +349,10 @@ public class NewTeamProject extends javax.swing.JDialog {
 
     private void btnDirectoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDirectoryActionPerformed
         NewProjectFileChooser ndc = new NewProjectFileChooser();
+        String saveDir = txtDirectory.getText();
+        if (!saveDir.isEmpty()) {
+            ndc.setSelectedFile(new File(saveDir));
+        }
         int ndcResult = ndc.showSaveDialog(Core.getMainWindow().getApplicationFrame());
         if (ndcResult == OmegaTFileChooser.APPROVE_OPTION) {
             txtDirectory.setText(ndc.getSelectedFile().getPath());

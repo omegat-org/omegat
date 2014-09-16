@@ -67,13 +67,31 @@ public final class Styles {
     	COLOR_REPLACE("#0000ff"), // Blue
     	COLOR_LANGUAGE_TOOLS("#0000ff"),
     	COLOR_TRANSTIPS("#0000ff"),
-    	COLOR_SPELLCHECK("#ff0000"),
-    	;
+    	COLOR_SPELLCHECK("#ff0000");
+
     	private Color color;
 
     	private EditorColor(Color defaultColor) {
-    		color = defaultColor;
-    		Preferences.setPreference(this.name(), this.toHex());
+    		if (Preferences.existsPreference(this.name()))
+    		{
+				String prefColor = Preferences.getPreference(this.name());
+				
+				if (prefColor.equals("__DEFAULT__"))
+				{
+					color = defaultColor;
+				}
+
+    			try {
+					color = Color.decode(prefColor);
+    			} catch (NumberFormatException e) {
+        			Log.logDebug(LOGGER, "Cannot set custom color for {0}, default to {1}.", this.name(), prefColor);
+        			color = defaultColor;
+        		}
+    		}
+    		else
+    		{
+        		color = defaultColor;
+    		}
     	}
 
     	private EditorColor(String defaultColor) {
@@ -86,12 +104,12 @@ public final class Styles {
     		}
     		this.color = color;
     	}
-    	
+
     	public String toHex()
     	{
     		return String.format("#%02x%02x%02x", color.getRed(), color.getGreen(), color.getBlue());
     	}
-    	
+
     	public Color getColor()
     	{
     		return color;

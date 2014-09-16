@@ -41,6 +41,7 @@ import org.omegat.core.team.RepositoryUtils.RepoTypeDetector;
 import org.omegat.core.team.SVNRemoteRepository;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
+import org.omegat.util.Preferences;
 import org.omegat.util.StringUtil;
 import org.omegat.util.gui.OmegaTFileChooser;
 import org.omegat.util.gui.StaticUIUtils;
@@ -101,8 +102,13 @@ public class NewTeamProject extends javax.swing.JDialog {
         if (repoName == null || !txtDirectory.getText().isEmpty()) {
             return;
         }
-        String usrDir = System.getProperty("user.home");
-        File suggestion = new File(usrDir, repoName);
+        String dir = Preferences.getPreferenceDefault(Preferences.CURRENT_FOLDER,
+                System.getProperty("user.home"));
+        File suggestion = new File(dir, repoName);
+        int suff = 1;
+        while (suggestion.exists()) {
+            suggestion = new File(dir, repoName + "-" + suff++);
+        }
         txtDirectory.setText(suggestion.getAbsolutePath());
     }
     

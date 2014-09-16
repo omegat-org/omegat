@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 3.1.6 update 1
 ----------------------------------------------------------------------
-   3 Enhancements
+   4 Enhancements
    1 Bug fix
    1 Localisation update
 ----------------------------------------------------------------------
@@ -19,6 +19,8 @@
 
   - A new script (auto_open_last_project.groovy) allows opening automatically
 the last open project
+
+  - Suggest local directory for new team project based on repository URL
 
   Bug fixes:
 

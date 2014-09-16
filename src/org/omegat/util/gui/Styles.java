@@ -69,14 +69,15 @@ public final class Styles {
     	COLOR_TRANSTIPS("#0000ff"),
     	COLOR_SPELLCHECK("#ff0000");
 
-    	private Color color;
+    	private static final String DEFAULT_COLOR = "__DEFAULT__";
+		private Color color;
 
     	private EditorColor(Color defaultColor) {
     		if (Preferences.existsPreference(this.name()))
     		{
 				String prefColor = Preferences.getPreference(this.name());
 				
-				if (prefColor.equals("__DEFAULT__"))
+				if (prefColor.equals(DEFAULT_COLOR))
 				{
 					color = defaultColor;
 				}
@@ -91,13 +92,21 @@ public final class Styles {
     		else
     		{
         		color = defaultColor;
+        		Preferences.setPreference(this.name(), DEFAULT_COLOR);
     		}
     	}
 
     	private EditorColor(String defaultColor) {
     		Color color = null;
     		try {
-    			color = Color.decode(Preferences.getPreferenceDefault(this.name(), defaultColor));
+    			String prefColor = Preferences.getPreferenceDefault(this.name(), defaultColor);
+    			
+    			if (prefColor.equals(DEFAULT_COLOR))
+				{
+    				prefColor = defaultColor;
+				}
+    			
+				color = Color.decode(prefColor);
     		} catch (NumberFormatException e) {
     			Log.logDebug(LOGGER, "Cannot set custom color for {0}, default to {1}.", this.name(), defaultColor);
     			color = Color.decode(defaultColor);

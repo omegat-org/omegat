@@ -29,6 +29,7 @@
 
 package org.omegat;
 
+import java.awt.Color;
 import java.awt.Toolkit;
 import java.io.File;
 import java.io.IOException;
@@ -68,6 +69,7 @@ import org.omegat.util.StaticUtils;
 import org.omegat.util.StringUtil;
 import org.omegat.util.TMXWriter;
 import org.omegat.util.gui.OSXIntegration;
+import org.omegat.util.gui.Styles;
 
 import com.vlsolutions.swing.docking.DockingDesktop;
 
@@ -249,6 +251,14 @@ public class Main {
             UIManager.getInstalledLookAndFeels();
 
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+            
+            // Override LAF with custom colors, if any (they defaut to the LAF attributes)
+            Color backgroundColor = Styles.EditorColor.COLOR_BACKGROUND.getColor();
+            Color foregroundColor = Styles.EditorColor.COLOR_FOREGROUND.getColor();
+            UIManager.put("EditorPane.background", backgroundColor);
+            UIManager.put("TextPane.background",   backgroundColor);  
+            UIManager.put("TextPane.foreground",   foregroundColor);
+
         } catch (Exception e) {
             // do nothing
             Log.logErrorRB("MAIN_ERROR_CANT_INIT_OSLF");

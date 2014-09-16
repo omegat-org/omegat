@@ -28,6 +28,7 @@ package org.omegat.util.gui;
 import java.awt.Color;
 import java.util.logging.Logger;
 
+import javax.swing.UIManager;
 import javax.swing.text.AttributeSet;
 import javax.swing.text.MutableAttributeSet;
 import javax.swing.text.SimpleAttributeSet;
@@ -46,8 +47,9 @@ public final class Styles {
     private static final Logger LOGGER = Logger.getLogger(EditorColor.class.getName());
 
     public enum EditorColor {
-    	COLOR_BACKGROUND("#ffffff"),
-    	COLOR_TEXT("#000000"),
+    	COLOR_BACKGROUND(UIManager.getColor("TextPane.background")), // Also used for EditorPane.background
+    	COLOR_FOREGROUND(UIManager.getColor("TextPane.foreground")),
+
     	COLOR_SOURCE("#c0ffc0"),
     	COLOR_NOTED("#c0ffff"),
     	COLOR_UNTRANSLATED("#c0c0ff"),
@@ -69,6 +71,19 @@ public final class Styles {
     	;
     	private Color color;
 
+    	private EditorColor(Color defaultColor) {
+    		Color color = null;
+    		try {
+    			color = Color.decode(Preferences.getPreference(this.name()));
+    		} catch (NumberFormatException e) {
+    			Log.logDebug(LOGGER, "Cannot set custom color for {0}, default to {1}.", this.name(), defaultColor);
+    			color = defaultColor;
+        		// Store the preference
+        		Preferences.setPreference(this.name(), this.toHex());
+    		}
+    		this.color = color;
+    	}
+
     	private EditorColor(String defaultColor) {
     		Color color = null;
     		try {
@@ -78,6 +93,11 @@ public final class Styles {
     			color = Color.decode(defaultColor);
     		}
     		this.color = color;
+    	}
+    	
+    	public String toHex()
+    	{
+    		return String.format("#%02x%02x%02x", color.getRed(), color.getGreen(), color.getBlue());
     	}
     	
     	public Color getColor()
@@ -102,6 +122,11 @@ public final class Styles {
         if (foregroundColor != null) {
             StyleConstants.setForeground(r, foregroundColor);
         }
+        else
+        {
+        	StyleConstants.setForeground(r, EditorColor.COLOR_FOREGROUND.getColor());
+        }
+
         if (backgroundColor != null) {
             StyleConstants.setBackground(r, backgroundColor);
         }

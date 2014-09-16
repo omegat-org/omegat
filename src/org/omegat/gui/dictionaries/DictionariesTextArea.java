@@ -65,6 +65,7 @@ import org.omegat.util.OStrings;
 import org.omegat.util.StaticUtils;
 import org.omegat.util.Token;
 import org.omegat.util.gui.AlwaysVisibleCaret;
+import org.omegat.util.gui.Styles.EditorColor;
 import org.omegat.util.gui.UIThreadsUtil;
 
 /**
@@ -124,6 +125,10 @@ public class DictionariesTextArea extends EntryInfoThreadPane<List<DictionaryEnt
 	private void applyFont(Font font) {
 		MutableAttributeSet attr = new SimpleAttributeSet();
 		HTMLDocument doc = (HTMLDocument) getDocument();
+		
+		doc.getStyleSheet().addCSSAttribute(attr, CSS.Attribute.BACKGROUND_COLOR, EditorColor.COLOR_BACKGROUND.toHex());
+		doc.getStyleSheet().addCSSAttribute(attr, CSS.Attribute.COLOR, EditorColor.COLOR_FOREGROUND.toHex());
+
     	doc.getStyleSheet().addCSSAttribute(attr, CSS.Attribute.FONT_FAMILY, font.getFontName());
     	doc.getStyleSheet().addCSSAttribute(attr, CSS.Attribute.FONT_SIZE, font.getSize() + "pt");
     	doc.setCharacterAttributes(0, doc.getLength(), attr, false);

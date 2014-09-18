@@ -2,7 +2,7 @@
  OmegaT 3.1.6 update 1
 ----------------------------------------------------------------------
    4 Enhancements
-   1 Bug fix
+   2 Bug fixes
    1 Localisation update
 ----------------------------------------------------------------------
 3.1.6 update 1 vs. 3.1.6
@@ -26,6 +26,9 @@ the last open project
 
   - Line length limit doesn't work on one line text files 
   https://sourceforge.net/p/omegat/bugs/707/
+
+  - Scripts folder is not created in the source package 
+  https://sourceforge.net/p/omegat/bugs/709/
 
   Localisation updates:
 

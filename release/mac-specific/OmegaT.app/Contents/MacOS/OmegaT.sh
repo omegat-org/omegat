@@ -18,7 +18,7 @@ JAVA=../jre/bin/java
 #GOOGLE_API_KEY="-Dgoogle.api.key=0123456789A0123456789B0123456789C0123456789D"
 # Microsoft Translator credentials
 #MS_CLIENT_ID="-Dmicrosoft.api.client_id=xxxxx"
-#MS_CLIENT_SECRET="-Dmicrosoft.api.client_secret=xxxxx'
+#MS_CLIENT_SECRET="-Dmicrosoft.api.client_secret=xxxxx"
 # MyMemory email
 #MY_MEMORY_EMAIL="-Dmymemory.api.email=xxxxx@xxxxx.xx"
 # TaaS user key

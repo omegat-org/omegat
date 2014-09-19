@@ -4,6 +4,8 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2010 Alex Buloichik, Aaron Madlon-Kay
+               2012 Aaron Madlon-Kay
+               2014 Briac Pilpre
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -42,6 +44,7 @@ import org.omegat.util.Preferences;
  * 
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Aaron Madlon-Kay
+ * @author Briac Pilpre
  */
 public final class Styles {
     private static final Logger LOGGER = Logger.getLogger(EditorColor.class.getName());
@@ -72,57 +75,50 @@ public final class Styles {
     	private static final String DEFAULT_COLOR = "__DEFAULT__";
 		private Color color;
 
-    	private EditorColor(Color defaultColor) {
-    		if (Preferences.existsPreference(this.name()))
-    		{
-				String prefColor = Preferences.getPreference(this.name());
-				
-				if (prefColor.equals(DEFAULT_COLOR))
-				{
-					color = defaultColor;
-				}
+        private EditorColor(Color defaultColor) {
+            if (Preferences.existsPreference(this.name())) {
+                String prefColor = Preferences.getPreference(this.name());
 
-    			try {
-					color = Color.decode(prefColor);
-    			} catch (NumberFormatException e) {
-        			Log.logDebug(LOGGER, "Cannot set custom color for {0}, default to {1}.", this.name(), prefColor);
-        			color = defaultColor;
-        		}
-    		}
-    		else
-    		{
-        		color = defaultColor;
-        		Preferences.setPreference(this.name(), DEFAULT_COLOR);
-    		}
-    	}
+                if (prefColor.equals(DEFAULT_COLOR)) {
+                    color = defaultColor;
+                }
 
-    	private EditorColor(String defaultColor) {
-    		Color color = null;
-    		try {
-    			String prefColor = Preferences.getPreferenceDefault(this.name(), defaultColor);
-    			
-    			if (prefColor.equals(DEFAULT_COLOR))
-				{
-    				prefColor = defaultColor;
-				}
-    			
-				color = Color.decode(prefColor);
-    		} catch (NumberFormatException e) {
-    			Log.logDebug(LOGGER, "Cannot set custom color for {0}, default to {1}.", this.name(), defaultColor);
-    			color = Color.decode(defaultColor);
-    		}
-    		this.color = color;
-    	}
+                try {
+                    color = Color.decode(prefColor);
+                } catch (NumberFormatException e) {
+                    Log.logDebug(LOGGER, "Cannot set custom color for {0}, default to {1}.", this.name(), prefColor);
+                    color = defaultColor;
+                }
+            } else {
+                color = defaultColor;
+                Preferences.setPreference(this.name(), DEFAULT_COLOR);
+            }
+        }
 
-    	public String toHex()
-    	{
-    		return String.format("#%02x%02x%02x", color.getRed(), color.getGreen(), color.getBlue());
-    	}
+        private EditorColor(String defaultColor) {
+            Color color = null;
+            try {
+                String prefColor = Preferences.getPreferenceDefault(this.name(), defaultColor);
 
-    	public Color getColor()
-    	{
-    		return color;
-    	}
+                if (prefColor.equals(DEFAULT_COLOR)) {
+                    prefColor = defaultColor;
+                }
+
+                color = Color.decode(prefColor);
+            } catch (NumberFormatException e) {
+                Log.logDebug(LOGGER, "Cannot set custom color for {0}, default to {1}.", this.name(), defaultColor);
+                color = Color.decode(defaultColor);
+            }
+            this.color = color;
+        }
+
+        public String toHex() {
+            return String.format("#%02x%02x%02x", color.getRed(), color.getGreen(), color.getBlue());
+        }
+
+        public Color getColor() {
+            return color;
+        }
     }
 
     /**
@@ -140,10 +136,8 @@ public final class Styles {
         MutableAttributeSet r = new SimpleAttributeSet();
         if (foregroundColor != null) {
             StyleConstants.setForeground(r, foregroundColor);
-        }
-        else
-        {
-        	StyleConstants.setForeground(r, EditorColor.COLOR_FOREGROUND.getColor());
+        } else {
+            StyleConstants.setForeground(r, EditorColor.COLOR_FOREGROUND.getColor());
         }
 
         if (backgroundColor != null) {

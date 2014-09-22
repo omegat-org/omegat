@@ -66,7 +66,7 @@ public final class Styles {
     	COLOR_BIDIMARKERS("#c80000"),
     	COLOR_MARK_COMES_FROM_TM("#fa8072"), // Salmon red
     	COLOR_MARK_COMES_FROM_TM_XICE("#af76df"), // Purple 
-    	COLOR_MARK_COMES_FROM_TM_X100PC("#ff948"), // Dark Orange 
+    	COLOR_MARK_COMES_FROM_TM_X100PC("#ff9408"), // Dark Orange 
     	COLOR_MARK_COMES_FROM_TM_XAUTO("#ffd596"), // Orange
     	COLOR_REPLACE("#0000ff"), // Blue
     	COLOR_LANGUAGE_TOOLS("#0000ff"),

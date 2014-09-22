@@ -37,6 +37,7 @@ import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 
 import org.omegat.util.Log;
+import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
 
 /**
@@ -74,8 +75,13 @@ public final class Styles {
 
     	private static final String DEFAULT_COLOR = "__DEFAULT__";
 		private Color color;
+		private Color defaultColor;
 
         private EditorColor(Color defaultColor) {
+            if (this.defaultColor == null) {
+                this.defaultColor = defaultColor;
+            }
+
             if (Preferences.existsPreference(this.name())) {
                 String prefColor = Preferences.getPreference(this.name());
 
@@ -96,6 +102,10 @@ public final class Styles {
         }
 
         private EditorColor(String defaultColor) {
+            if (this.defaultColor == null) {
+                this.defaultColor = Color.decode(defaultColor);
+            }
+
             Color color = null;
             try {
                 String prefColor = Preferences.getPreferenceDefault(this.name(), defaultColor);
@@ -118,6 +128,32 @@ public final class Styles {
 
         public Color getColor() {
             return color;
+        }
+
+        public String toString() {
+            return OStrings.getString(this.name());
+        }
+
+        public void setColor(Color newColor) {
+            if (newColor == null) {
+                color = this.defaultColor;
+                Preferences.setPreference(name(), DEFAULT_COLOR);
+            }
+            else
+            {
+                color = newColor;
+                Preferences.setPreference(name(), toHex());   
+            }
+
+            if (this.equals(COLOR_BACKGROUND)) {
+                UIManager.put("EditorPane.background", color);
+                UIManager.put("TextPane.background", color);
+            } else if (this.equals(COLOR_FOREGROUND)) {
+                UIManager.put("TextPane.foreground", color);
+                UIManager.put("EditorPane.caretForeground", color);
+                UIManager.put("TextPane.caretForeground", color);
+            }
+
         }
     }
 
@@ -151,7 +187,7 @@ public final class Styles {
         }
         return r;
     }
-    
+
     public static AttributeSet createAttributeSet(Color foregroundColor, Color backgroundColor, Boolean bold,
             Boolean italic, Boolean strikethrough, Boolean underline) {
     	

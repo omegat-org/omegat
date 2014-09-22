@@ -258,6 +258,8 @@ public class Main {
             UIManager.put("EditorPane.background", backgroundColor);
             UIManager.put("TextPane.background",   backgroundColor);  
             UIManager.put("TextPane.foreground",   foregroundColor);
+            UIManager.put("TextPane.caretForeground", foregroundColor);
+            UIManager.put("EditorPane.caretForeground", foregroundColor);
 
         } catch (Exception e) {
             // do nothing

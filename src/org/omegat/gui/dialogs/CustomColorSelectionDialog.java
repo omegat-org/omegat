@@ -73,7 +73,7 @@ public class CustomColorSelectionDialog extends javax.swing.JDialog {
         sampleEditorPane = new javax.swing.JTextArea();
         colorStylesLabel = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        colorStylesList = new javax.swing.JList<Styles.EditorColor>(Styles.EditorColor.values());
+        colorStylesList = new javax.swing.JList(Styles.EditorColor.values());
         colorChooser = new javax.swing.JColorChooser();
         applyColorChangesButton = new javax.swing.JButton();
         defaultColorButton = new javax.swing.JButton();
@@ -113,7 +113,7 @@ public class CustomColorSelectionDialog extends javax.swing.JDialog {
                 ColorSelectionModel model = (ColorSelectionModel) evt.getSource();
 
                 samplePanel.curColor = model.getSelectedColor();
-                samplePanel.editorColor = colorStylesList.getSelectedValue();
+                samplePanel.editorColor = (Styles.EditorColor) colorStylesList.getSelectedValue();
             }
         });
 
@@ -208,16 +208,16 @@ public class CustomColorSelectionDialog extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void colorStylesListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_colorStylesListValueChanged
-        Color selectedColor = colorStylesList.getSelectedValue().getColor();
+        Color selectedColor = ((Styles.EditorColor) colorStylesList.getSelectedValue()).getColor();
         colorChooser.setColor(selectedColor);
     }//GEN-LAST:event_colorStylesListValueChanged
 
     private void defaultColorButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_defaultColorButtonActionPerformed
-        colorStylesList.getSelectedValue().setColor(null);
+    	((Styles.EditorColor) colorStylesList.getSelectedValue()).setColor(null);
     }//GEN-LAST:event_defaultColorButtonActionPerformed
 
     private void setColorButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_setColorButtonActionPerformed
-        colorStylesList.getSelectedValue().setColor(colorChooser.getColor());
+    	((Styles.EditorColor) colorStylesList.getSelectedValue()).setColor(colorChooser.getColor());
     }//GEN-LAST:event_setColorButtonActionPerformed
 
     private void applyColorChangesButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_applyColorChangesButtonActionPerformed
@@ -257,10 +257,10 @@ public class CustomColorSelectionDialog extends javax.swing.JDialog {
         EditorColor editorColor;
 		Color curColor;
 
-        CustomColorPreview(JColorChooser colorChooser, EditorColor editorColor)
+        CustomColorPreview(JColorChooser colorChooser, Object object)
         {
             curColor = colorChooser.getColor();
-            this.editorColor = editorColor;
+            this.editorColor = (Styles.EditorColor) object;
             init();
         }
         
@@ -294,7 +294,7 @@ public class CustomColorSelectionDialog extends javax.swing.JDialog {
     private javax.swing.JButton cancelButton;
     private javax.swing.JColorChooser colorChooser;
     private javax.swing.JLabel colorStylesLabel;
-    private javax.swing.JList<Styles.EditorColor> colorStylesList;
+    private javax.swing.JList colorStylesList;
     private javax.swing.JButton defaultColorButton;
     private javax.swing.JScrollPane jScrollPane1;
     private JTextArea sampleEditorPane;

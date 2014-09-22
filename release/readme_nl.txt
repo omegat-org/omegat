@@ -228,6 +228,7 @@ Code is bijgedragen door
   Aaron Madlon-Kay
   Fabián Mandelbaum
   Manfred Martin
+  Adiel Mittmann
   John Moran
   Maxym Mykhalchuk 
   Arno Peters
@@ -260,15 +261,15 @@ OmegaT gebruikt de volgende bibliotheken:
   JNA van Todd Fast, Timothy Wall en anderen (LGPL License)
   Swing-Layout 1.0.4 (LGPL License)
   Jmyspell 2.1.4 (LGPL License)
-  SVNKit 1.7.5 (TMate License)
+  SVNKit 1.8.5 (TMate License)
   Sequence Library (Sequence Library License)
   ANTLR 3.4 (ANTLR 3 licentie)
-  SQLJet 1.1.3 (GPL v2)
+  SQLJet 1.1.10 (GPL v2)
   JGit (Eclipse Distribution License)
   JSch (JSch License)
   Base64 (publieke domein)
   Diff (GPL)
-  orion-ssh2-214 (Orion SSH voor Java-licentie)
+  trilead-ssh2-1.0.0-build217 (Trilead SSH-licentie)
   lucene-*.jar (Apache License 2.0)
   De Engelse tokenizers (org.omegat.tokenizer.SnowballEnglishTokenizer en
   org.omegat.tokenizer.LuceneEnglishTokenizer) gebruiken stopwoorden van Okapi

@@ -3,7 +3,7 @@
 ----------------------------------------------------------------------
    4 Enhancements
    3 Bug fixes
-   1 Localisation update
+   3 Localisation updates
 ----------------------------------------------------------------------
 3.1.6 update 1 vs. 3.1.6
 
@@ -37,6 +37,7 @@ the last open project
 
   - Japanese localisation updated to 3.1.6 (UI, readme, documentation)
   - Italian localisation updated to 3.1.6 (UI, readme)
+  - Dutch localisation updated to 3.1.6 (UI, readme, documentation)
 
 ----------------------------------------------------------------------
  OmegaT 3.1.6 (2014-09-10)

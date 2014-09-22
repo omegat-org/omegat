@@ -61,7 +61,7 @@ public class TransTipsMarker implements IMarker {
 
         final List<Mark> marks = new ArrayList<Mark>();
         // Get the index of the current segment in the whole document
-        sourceText = sourceText.toLowerCase();
+        //sourceText = sourceText.toLowerCase();
 
         TransTips.Search callback = new TransTips.Search() {
             public void found(GlossaryEntry ge, int start, int end) {

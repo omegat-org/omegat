@@ -844,8 +844,6 @@ public class EditorController implements IEditor {
      * <p>
      * All displayed segments with the same source text updated also.
      * 
-     * @param forceCommit
-     *            If false, the translation will not be saved
      */
     public void commitAndDeactivate() {
         UIThreadsUtil.mustBeSwingThread();

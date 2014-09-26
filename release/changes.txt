@@ -1360,7 +1360,7 @@ OmegaT failed to load the valid ones
   - Turkish localisation updated to 3.0.0 (UI)
 
 ----------------------------------------------------------------------
- OmegaT 2.6.3 update 11
+ OmegaT 2.6.3 update 11 (2014-08-06)
 ----------------------------------------------------------------------
    3 Enhancements
    2 Bug fixes

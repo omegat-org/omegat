@@ -252,14 +252,8 @@ public class Main {
 
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
             
-            // Override LAF with custom colors, if any (they defaut to the LAF attributes)
-            Color backgroundColor = Styles.EditorColor.COLOR_BACKGROUND.getColor();
-            Color foregroundColor = Styles.EditorColor.COLOR_FOREGROUND.getColor();
-            UIManager.put("EditorPane.background", backgroundColor);
-            UIManager.put("TextPane.background",   backgroundColor);  
-            UIManager.put("TextPane.foreground",   foregroundColor);
-            UIManager.put("TextPane.caretForeground", foregroundColor);
-            UIManager.put("EditorPane.caretForeground", foregroundColor);
+            // Override LAF with custom colors, if any (they default to the LAF attributes)
+            Styles.setupLAF();
 
         } catch (Exception e) {
             // do nothing

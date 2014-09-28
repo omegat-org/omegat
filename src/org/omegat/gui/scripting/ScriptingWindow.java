@@ -77,6 +77,7 @@ import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
 import org.omegat.core.events.IApplicationEventListener;
 import org.omegat.gui.editor.mark.Mark;
+import org.omegat.util.Log;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
 import org.omegat.util.StaticUtils;
@@ -524,6 +525,36 @@ public class ScriptingWindow extends JFrame {
 
     public void executeScriptFile(ScriptItem scriptItem, boolean forceFromFile) {
         executeScriptFile(scriptItem, forceFromFile, null);
+    }
+
+    public static void executeScriptFileHeadless(ScriptItem scriptItem, boolean forceFromFile, Map<String, Object> additionalBindings) {
+    	ScriptEngineManager manager = new ScriptEngineManager(ScriptingWindow.class.getClassLoader());
+    	ScriptEngine scriptEngine = manager.getEngineByExtension(getFileExtension(scriptItem.getName()));
+
+    	if (scriptEngine == null) {
+    		scriptEngine = manager.getEngineByName(DEFAULT_SCRIPT);
+    	}
+
+    	SimpleBindings bindings = new SimpleBindings();
+    	bindings.put(VAR_PROJECT, Core.getProject());
+    	bindings.put(VAR_EDITOR, Core.getEditor());
+    	bindings.put(VAR_GLOSSARY, Core.getGlossary());
+    	bindings.put(VAR_MAINWINDOW, Core.getMainWindow());
+    	bindings.put(VAR_RESOURCES, scriptItem.getResourceBundle());
+
+    	if (additionalBindings != null) {
+    		bindings.putAll(additionalBindings);
+    	}
+
+    	try {
+    		Object eval = scriptEngine.eval(scriptItem.getText(), bindings);
+    		if (eval != null) {
+    			Log.logRB("SCW_SCRIPT_RESULT");
+    			Log.log(eval.toString());
+    		}
+    	} catch (Throwable e) {
+    		Log.logErrorRB(e, "SCW_SCRIPT_ERROR");
+    	}
     }
 
     public void executeScriptFile(ScriptItem scriptItem, boolean forceFromFile, Map<String, Object> additionalBindings) {

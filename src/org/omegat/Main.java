@@ -29,7 +29,6 @@
 
 package org.omegat;
 
-import java.awt.Color;
 import java.awt.Toolkit;
 import java.io.File;
 import java.io.IOException;
@@ -57,9 +56,12 @@ import org.omegat.core.data.ProjectProperties;
 import org.omegat.core.data.RealProject;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.data.TMXEntry;
+import org.omegat.core.events.IProjectEventListener;
 import org.omegat.core.tagvalidation.ErrorReport;
 import org.omegat.filters2.master.PluginUtils;
 import org.omegat.gui.main.ProjectUICommands;
+import org.omegat.gui.scripting.ScriptItem;
+import org.omegat.gui.scripting.ScriptingWindow;
 import org.omegat.util.Log;
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
@@ -316,9 +318,14 @@ public class Main {
         else
             p.compileProject(".*", false);
 
-        p.closeProject();
-        System.out.println(OStrings.getString("CONSOLE_FINISHED"));
+        // Called *after* executing post processing command (unlike the 
+        // regular PROJECT_CHANGE_TYPE.COMPILE)
+        executeConsoleScript(IProjectEventListener.PROJECT_CHANGE_TYPE.COMPILE);
 
+        p.closeProject();
+        executeConsoleScript(IProjectEventListener.PROJECT_CHANGE_TYPE.CLOSE);
+        System.out.println(OStrings.getString("CONSOLE_FINISHED"));
+        
         return 0;
     }
     
@@ -481,11 +488,35 @@ public class Main {
         if (loadProject) {
             p.loadProject(true);
             if (!p.isProjectLoaded()) {
-                Core.setProject(new NotLoadedProject());
+            	Core.setProject(new NotLoadedProject());
             }
+            else
+            {
+            	executeConsoleScript(IProjectEventListener.PROJECT_CHANGE_TYPE.LOAD);
+            }
+
         }
         return p;
     }
+    
+    /** Execute script as PROJECT_CHANGE events. We can't use the regular project listener because 
+     *  the SwingUtilities.invokeLater method used in CoreEvents doesn't stop the project processing
+     *  in console mode. 
+     */
+    private static void executeConsoleScript(IProjectEventListener.PROJECT_CHANGE_TYPE eventType) {
+    	if (params.containsKey("script"))
+    	{
+    		File script = new File(params.get("script").toString());
+
+    		if (script.exists())
+    		{
+    			HashMap<String, Object> binding = new HashMap<String, Object>();
+    			binding.put("eventType", eventType);
+    			ScriptingWindow.executeScriptFileHeadless(new ScriptItem(script), true, binding);
+    		}
+    	}
+    }
+
 
     public static void showError(Throwable ex) {
         String msg;

@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 3.1.6 update 1
 ----------------------------------------------------------------------
-   4 Enhancements
+   5 Enhancements
    3 Bug fixes
    3 Localisation updates
 ----------------------------------------------------------------------
@@ -14,6 +14,9 @@
 
   - Accept UTF-16 text files for glossaries 
   https://sourceforge.net/p/omegat/feature-requests/644/
+
+  - Allow scripts to run in console mode
+  https://sourceforge.net/p/omegat/feature-requests/994/ 
 
   Other enhancements:
 

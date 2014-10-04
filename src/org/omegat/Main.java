@@ -440,7 +440,7 @@ public class Main {
 
         System.out.println(OStrings.getString("CONSOLE_INITIALIZING"));
         Core.initializeConsole(params);
-        RealProject p = selectProjectConsoleMode(false);
+        RealProject p = selectProjectConsoleMode(true);
 
         validateTagsConsoleMode();
 
@@ -456,6 +456,7 @@ public class Main {
 
         TMXWriter.buildTMXFile(tmxFile, false, false, p.getProjectProperties(), result);
 
+        p.closeProject();
         System.out.println(OStrings.getString("CONSOLE_FINISHED"));
         return 0;
     }

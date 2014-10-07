@@ -2,7 +2,7 @@
  OmegaT 3.1.6 update 1
 ----------------------------------------------------------------------
    5 Enhancements
-   3 Bug fixes
+   4 Bug fixes
    3 Localisation updates
 ----------------------------------------------------------------------
 3.1.6 update 1 vs. 3.1.6
@@ -35,6 +35,9 @@ the last open project
 
   - TransTip doesn't highlight acronyms
   https://sourceforge.net/p/omegat/bugs/708/
+
+  - Console-mode align doesn't load the project correctly and crashes
+  https://sourceforge.net/p/omegat/bugs/711/
 
   Localisation updates:
 

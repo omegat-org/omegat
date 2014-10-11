@@ -58,6 +58,10 @@ public class OpenXMLDialect extends DefaultXMLDialect {
         else
             defineIntactTag("w:instrText");
 
+        if (!options.getTranslateFallbackText()) { // Word
+            defineIntactTag("mc:Fallback");
+        }
+        
         defineIntactTags(new String[] {
                 // Excel
                 "authors", "rPh", "definedNames",

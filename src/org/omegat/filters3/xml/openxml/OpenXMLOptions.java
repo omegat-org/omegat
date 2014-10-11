@@ -5,7 +5,7 @@
 
  Copyright (C) 2007-2010 Didier Briel
                2010 Antonio Vilei
-               2011-2013 Didier Briel
+               2011-2014 Didier Briel
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -44,6 +44,7 @@ import org.omegat.filters2.AbstractOptions;
  * <li>[+] Endnotes (Word)
  * <li>[+] Header (Word)
  * <li>[+] Footer (Word)
+ * <li>[] Duplicate fallback text (Word)
  * <li>[+] Comments (Excel)
  * <li>[] Sheet names (Excel)
  * <li>[+] Slide comments (PowerPoint)
@@ -70,6 +71,7 @@ public class OpenXMLOptions extends AbstractOptions {
     private static final String OPTION_TRANSLATE_ENDNOTES = "translateEndnotes";
     private static final String OPTION_TRANSLATE_HEADERS = "translateHeaders";
     private static final String OPTION_TRANSLATE_FOOTERS = "translateFooters";
+    private static final String OPTION_TRANSLATE_FALLBACK_TEXT = "translateFallbackText";
     private static final String OPTION_TRANSLATE_DIAGRAMS = "translateDiagrams";
     private static final String OPTION_TRANSLATE_EXCEL_COMMENTS = "translateExcelComments";
     private static final String OPTION_TRANSLATE_SHEET_NAMES = "translateSheetNames";
@@ -169,6 +171,20 @@ public class OpenXMLOptions extends AbstractOptions {
      */
     public void setTranslateFooters(boolean translateFooters) {
         setBoolean(OPTION_TRANSLATE_FOOTERS, translateFooters);
+    }
+    
+    /**
+     * @return whether Fallback Text should be translated.
+     */
+    public boolean getTranslateFallbackText() {
+        return getBoolean(OPTION_TRANSLATE_FALLBACK_TEXT, false);
+    }
+
+    /**
+     * Sets whether Fallback Text should be translated.
+     */
+    public void setTranslateFallbackText(boolean translateFallbackText) {
+        setBoolean(OPTION_TRANSLATE_FALLBACK_TEXT, translateFallbackText);
     }
 
     /**

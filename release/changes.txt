@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 3.1.6 update 1
 ----------------------------------------------------------------------
-   5 Enhancements
+   6 Enhancements
    4 Bug fixes
    3 Localisation updates
 ----------------------------------------------------------------------
@@ -24,6 +24,10 @@
 the last open project
 
   - Suggest local directory for new team project based on repository URL
+
+  - Word filter: an option allows to translate or not duplicate legacy 
+fallback text. It is off by default, which means the legacy fallback
+text is not translated.
 
   Bug fixes:
 

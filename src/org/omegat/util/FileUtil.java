@@ -76,7 +76,13 @@ public class FileUtil {
             if (bakFiles != null && bakFiles.length > maxBackups) {
                 Arrays.sort(bakFiles, new Comparator<File>() {
                     public int compare(File f1, File f2) {
-                        return Long.compare(f2.lastModified(), f1.lastModified());
+                        if (f2.lastModified() < f1.lastModified()) {
+                            return -1;
+                        } else if (f2.lastModified() > f1.lastModified()) {
+                            return 1;
+                        } else {
+                            return 0;
+                        }
                     }
                 });
                 for (int i = maxBackups; i < bakFiles.length; i++) {

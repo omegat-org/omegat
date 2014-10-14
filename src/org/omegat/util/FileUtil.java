@@ -59,7 +59,6 @@ import org.omegat.gui.help.HelpFrame;
  * @author Aaron Madlon-Kay
  */
 public class FileUtil {
-    private static final int MAX_BACKUPS = 11;
     public static String LINE_SEPARATOR = System.getProperty("line.separator");
 
     /**

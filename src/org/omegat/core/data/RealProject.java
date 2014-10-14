@@ -45,8 +45,10 @@ import java.io.OutputStreamWriter;
 import java.io.RandomAccessFile;
 import java.nio.channels.FileChannel;
 import java.nio.channels.FileLock;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -797,6 +799,12 @@ public class RealProject implements IProject {
             filenameTMXwithLocalChangesOnBase = new File(projectTMXFilename + "-based_on_" + baseRevTMX + OConsts.NEWFILE_EXTENSION);
             filenameGlossarywithLocalChangesOnBase = null;
             projectTMX.exportTMX(m_config, filenameTMXwithLocalChangesOnBase, false, false, true); //overwrites file if it exists
+            if (System.getProperty("team.supersafe") != null) {
+                // save supersafe backup
+                File bak = new File(projectTMXFilename + "-based_on_" + baseRevTMX + "_at_"
+                        + new SimpleDateFormat("MMdd-HHmmss").format(new Date()) + OConsts.BACKUP_EXTENSION);
+                projectTMX.exportTMX(m_config, bak, false, false, true);
+            }
             if (updateGlossary) {
                 filenameGlossarywithLocalChangesOnBase = new File(glossaryFilename + "-based_on_" + baseRevGlossary + OConsts.NEWFILE_EXTENSION);
                 if (filenameGlossarywithLocalChangesOnBase.exists()) {
@@ -914,6 +922,13 @@ public class RealProject implements IProject {
                 
                 filenameTMXwithLocalChangesOnHead = new File(projectTMXFilename + "-based_on_" + headRevTMX + OConsts.NEWFILE_EXTENSION);
                 projectTMX.exportTMX(m_config, filenameTMXwithLocalChangesOnHead, false, false, true);
+                if (System.getProperty("team.supersafe") != null) {
+                    // save supersafe backup
+                    File bak = new File(projectTMXFilename + "-merged_on_" + headRevTMX + "_at_"
+                            + new SimpleDateFormat("MMdd-HHmmss").format(new Date())
+                            + OConsts.BACKUP_EXTENSION);
+                    projectTMX.exportTMX(m_config, bak, false, false, true);
+                }
                 //free memory
                 headTMX = null;
             }
@@ -1044,7 +1059,8 @@ public class RealProject implements IProject {
             if (tmxFile.exists()) {
                 // RFE 1001918 - backing up project's TMX upon successful read
                 FileUtil.backupFile(tmxFile);
-                FileUtil.removeOldBackups(tmxFile);
+                FileUtil.removeOldBackups(tmxFile, System.getProperty("team.supersafe") != null ? 300
+                        : OConsts.MAX_BACKUPS);
             }
         } catch (SAXParseException ex) {
             Log.logErrorRB(ex, "TMXR_FATAL_ERROR_WHILE_PARSING", ex.getLineNumber(), ex.getColumnNumber());

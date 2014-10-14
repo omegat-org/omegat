@@ -169,6 +169,8 @@ public class OConsts {
     /** Number of fuzzy matches to store */
     public static final int MAX_STORED_NEAR_STRINGS = 50;
 
+    public static final int MAX_BACKUPS = 11;
+
     /**
      * The limit of bytes that AbstractFilter.isFileSupported may read. 8k (8192
      * bytes) for now, as this is the default buffer size for BufferedReader.

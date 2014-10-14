@@ -748,6 +748,8 @@ public class RealProject implements IProject {
         List<GlossaryEntry> headGlossaryEntries = null;
         final boolean updateGlossary;
 
+        Log.logInfoRB("TEAM_REBASE_START");
+
         final String projectTMXFilename = m_config.getProjectInternal() + OConsts.STATUS_EXTENSION;
         final File projectTMXFile = new File(projectTMXFilename);
 
@@ -857,12 +859,14 @@ public class RealProject implements IProject {
             Log.logDebug(LOGGER, "rebaseProject: TMX head revision: {0}", headRevTMX);
     
             if (headRevTMX.equals(baseRevTMX)) {
+                Log.logDebug(LOGGER, "rebaseProject: head equals base");
                 // don't need rebase
                 filenameTMXwithLocalChangesOnHead = filenameTMXwithLocalChangesOnBase;
                 filenameTMXwithLocalChangesOnBase = null;
                 //free up some memory
                 baseTMX = null;
             } else {
+                Log.logDebug(LOGGER, "rebaseProject: real rebase");
                 // need rebase
                 again = true;
                 headTMX = new ProjectTMX(m_config.getSourceLanguage(), m_config.getTargetLanguage(), m_config.isSentenceSegmentingEnabled(), projectTMXFile, null);
@@ -1001,7 +1005,7 @@ public class RealProject implements IProject {
                 throw new KnownException(ex, "TEAM_SYNCHRONIZATION_ERROR");
             }
         }
-
+        Log.logInfoRB("TEAM_REBASE_END");
     }
 
     /**

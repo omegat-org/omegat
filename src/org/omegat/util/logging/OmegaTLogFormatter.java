@@ -127,7 +127,12 @@ public class OmegaTLogFormatter extends Formatter {
         String message;
         String format;
         if (record.getResourceBundle() != null) {
-            format = record.getResourceBundle().getString(record.getMessage());
+            try {
+                format = record.getResourceBundle().getString(record.getMessage());
+            } catch (Exception ex) {
+                // looks like ID not found in bundle
+                format = record.getMessage();
+            }
         } else {
             format = record.getMessage();
         }

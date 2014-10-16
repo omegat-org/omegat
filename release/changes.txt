@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 3.1.6 update 1
 ----------------------------------------------------------------------
-   6 Enhancements
+   7 Enhancements
    5 Bug fixes
    3 Localisation updates
 ----------------------------------------------------------------------
@@ -28,6 +28,9 @@ the last open project
   - Word filter: an option allows to translate or not duplicate legacy 
 fallback text. It is off by default, which means the legacy fallback
 text is not translated.
+
+  - For team projects, a parameter (-Dteam.supersafe) allows to keep all backups
+(up to 300). New log messages were also added.
 
   Bug fixes:
 

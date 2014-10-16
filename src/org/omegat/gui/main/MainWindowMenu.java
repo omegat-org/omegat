@@ -397,6 +397,7 @@ public class MainWindowMenu implements ActionListener, MenuListener, IMainMenu {
 
         optionsMenu.add(new JSeparator());
         optionsMenu.add(optionsFontSelectionMenuItem = createMenuItem("TF_MENU_DISPLAY_FONT"));
+        optionsMenu.add(optionsColorsSelectionMenuItem = createMenuItem("TF_MENU_COLORS"));
         optionsMenu.add(optionsSetupFileFiltersMenuItem = createMenuItem("TF_MENU_DISPLAY_FILTERS"));
         optionsMenu.add(optionsSentsegMenuItem = createMenuItem("MW_OPTIONSMENU_SENTSEG"));
         optionsMenu.add(optionsSpellCheckMenuItem = createMenuItem("MW_OPTIONSMENU_SPELLCHECK"));
@@ -695,6 +696,7 @@ public class MainWindowMenu implements ActionListener, MenuListener, IMainMenu {
     JMenuBar mainMenu;
     JCheckBoxMenuItem optionsAlwaysConfirmQuitCheckBoxMenuItem;
     JMenuItem optionsFontSelectionMenuItem;
+    JMenuItem optionsColorsSelectionMenuItem;
     JMenu optionsMenu;
     JMenuItem optionsRestoreGUIMenuItem;
     JMenuItem optionsSentsegMenuItem;

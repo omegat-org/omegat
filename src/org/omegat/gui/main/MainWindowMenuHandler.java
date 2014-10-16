@@ -57,6 +57,7 @@ import org.omegat.filters2.master.PluginUtils;
 import org.omegat.gui.dialogs.AboutDialog;
 import org.omegat.gui.dialogs.AutotextAutoCompleterOptionsDialog;
 import org.omegat.gui.dialogs.CharTableAutoCompleterOptionsDialog;
+import org.omegat.gui.dialogs.CustomColorSelectionDialog;
 import org.omegat.gui.dialogs.ExternalTMXMatchesDialog;
 import org.omegat.gui.dialogs.FontSelectionDialog;
 import org.omegat.gui.dialogs.GlossaryAutoCompleterOptionsDialog;
@@ -763,6 +764,15 @@ public class MainWindowMenuHandler {
         }
     }
 
+    /**
+     * Displays the color dialog selection. It needs an application restart after color changes.
+     */
+    public void optionsColorsSelectionMenuItemActionPerformed() {
+        CustomColorSelectionDialog dlg = new CustomColorSelectionDialog(Core.getMainWindow().getApplicationFrame(), true);
+        dlg.setVisible(true);
+    }
+
+    
     /**
      * Displays the filters setup dialog to allow customizing file filters in detail.
      */

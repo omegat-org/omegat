@@ -558,6 +558,8 @@ public class RealProject implements IProject {
 
         TranslateFilesCallback translateFilesCallback = new TranslateFilesCallback();
 
+        int numberOfCompiled = 0;
+
         for (String midName : fileList) {
             // shorten filename to that which is relative to src root
             Matcher fileMatch = FILE_PATTERN.matcher(midName);
@@ -574,9 +576,14 @@ public class RealProject implements IProject {
                 fm.translateFile(srcRoot, midName, locRoot, new FilterContext(m_config),
                         translateFilesCallback);
                 translateFilesCallback.fileFinished();
+                numberOfCompiled++;
             }
         }
-        Core.getMainWindow().showStatusMessageRB("CT_COMPILE_DONE_MX");
+        if (numberOfCompiled == 1) {
+            Core.getMainWindow().showStatusMessageRB("CT_COMPILE_DONE_MX_SINGULAR");
+        } else {
+            Core.getMainWindow().showStatusMessageRB("CT_COMPILE_DONE_MX");
+        }
 
         CoreEvents.fireProjectChange(IProjectEventListener.PROJECT_CHANGE_TYPE.COMPILE);
         

@@ -49,22 +49,21 @@
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="colorStylesLabel" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="setColorButton" max="32767" attributes="0"/>
-                          <Component id="defaultColorButton" max="32767" attributes="0"/>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="jScrollPane1" min="-2" pref="231" max="-2" attributes="0"/>
-                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                          </Group>
-                      </Group>
+                      <Component id="jScrollPane1" pref="267" max="32767" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="colorChooser" min="-2" pref="639" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                      <Component id="cancelButton" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="applyColorChangesButton" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Group type="102" alignment="1" attributes="0">
+                              <Component id="cancelButton" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="applyColorChangesButton" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Component id="defaultColorButton" alignment="1" pref="281" max="32767" attributes="0"/>
+                          <Component id="setColorButton" alignment="1" max="32767" attributes="0"/>
+                      </Group>
                   </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
@@ -76,13 +75,7 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
-                      <Component id="jScrollPane1" min="-2" pref="169" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="setColorButton" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="defaultColorButton" min="-2" max="-2" attributes="0"/>
-                  </Group>
+                  <Component id="jScrollPane1" min="-2" pref="169" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="1" attributes="0">
                       <Group type="102" attributes="0">
                           <Component id="colorStylesLabel" min="-2" max="-2" attributes="0"/>
@@ -91,7 +84,11 @@
                       <Component id="colorChooser" min="-2" pref="336" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="setColorButton" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="defaultColorButton" min="-2" max="-2" attributes="0"/>
+              <EmptySpace pref="18" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="applyColorChangesButton" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="cancelButton" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -132,7 +129,7 @@
     </Container>
     <Component class="javax.swing.JColorChooser" name="colorChooser">
       <AuxValues>
-        <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="&#xd;&#xa;final CustomColorPreview samplePanel = new CustomColorPreview(colorChooser, colorStylesList.getSelectedValue());&#xd;&#xa;&#xd;&#xa;colorChooser.setPreviewPanel(samplePanel);&#xd;&#xa;ColorSelectionModel model = colorChooser.getSelectionModel();&#xd;&#xa;    model.addChangeListener(new ChangeListener() {&#xd;&#xa;      public void stateChanged(ChangeEvent evt) {&#xd;&#xa;        ColorSelectionModel model = (ColorSelectionModel) evt.getSource();&#xd;&#xa;        samplePanel.curColor = model.getSelectedColor();&#xd;&#xa;      }&#xd;&#xa;    });&#xd;&#xa;&#xd;&#xa;&#xd;&#xa;// Remove sample Swatches&#xd;&#xa;javax.swing.colorchooser.AbstractColorChooserPanel[] oldPanels = colorChooser.getChooserPanels();&#xd;&#xa;for (int i = 0; i &lt; oldPanels.length; i++) {&#xd;&#xa;    String clsName = oldPanels[i].getClass().getName();&#xd;&#xa;    if (clsName.equals(&quot;javax.swing.colorchooser.DefaultSwatchChooserPanel&quot;)) {&#xd;&#xa;        colorChooser.removeChooserPanel(oldPanels[i]);&#xd;&#xa;    }&#xd;&#xa;}"/>
+        <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="/*&#xd;&#xa;final CustomColorPreview samplePanel = new CustomColorPreview(colorChooser, colorStylesList.getSelectedValue());&#xd;&#xa;&#xd;&#xa;colorChooser.setPreviewPanel(samplePanel);&#xd;&#xa;ColorSelectionModel model = colorChooser.getSelectionModel();&#xd;&#xa;    model.addChangeListener(new ChangeListener() {&#xd;&#xa;      public void stateChanged(ChangeEvent evt) {&#xd;&#xa;        ColorSelectionModel model = (ColorSelectionModel) evt.getSource();&#xd;&#xa;        samplePanel.curColor = model.getSelectedColor();&#xd;&#xa;      }&#xd;&#xa;    });&#xd;&#xa;*/&#xd;&#xa;&#xd;&#xa;// Remove sample Swatches&#xd;&#xa;javax.swing.colorchooser.AbstractColorChooserPanel[] oldPanels = colorChooser.getChooserPanels();&#xd;&#xa;for (int i = 0; i &lt; oldPanels.length; i++) {&#xd;&#xa;    String clsName = oldPanels[i].getClass().getName();&#xd;&#xa;    if (clsName.equals(&quot;javax.swing.colorchooser.DefaultSwatchChooserPanel&quot;)) {&#xd;&#xa;        colorChooser.removeChooserPanel(oldPanels[i]);&#xd;&#xa;    }&#xd;&#xa;}"/>
       </AuxValues>
     </Component>
     <Component class="javax.swing.JButton" name="applyColorChangesButton">
@@ -150,6 +147,7 @@
         <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
           <Connection code="OStrings.getString(&quot;GUI_COLORS_DEFAULT_COLOR&quot;)" type="code"/>
         </Property>
+        <Property name="verticalAlignment" type="int" value="1"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="defaultColorButtonActionPerformed"/>
@@ -161,6 +159,7 @@
           <Connection code="OStrings.getString(&quot;GUI_COLORS_SET_COLOR&quot;)" type="code"/>
         </Property>
         <Property name="toolTipText" type="java.lang.String" value=""/>
+        <Property name="verticalAlignment" type="int" value="1"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="setColorButtonActionPerformed"/>

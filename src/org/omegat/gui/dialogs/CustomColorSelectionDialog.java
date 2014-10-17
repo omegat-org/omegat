@@ -68,14 +68,14 @@ public class CustomColorSelectionDialog extends javax.swing.JDialog {
         cancelButton = new javax.swing.JButton();
 
         sampleEditorPane.setEditable(false);
-        //sampleEditorPane.setText("Sample translation text");
+        sampleEditorPane.setText("Sample translation text");
         sampleEditorPane.setMinimumSize(new java.awt.Dimension(400, 100));
         sampleEditorPane.setName(""); // NOI18N
         sampleEditorPane.setPreferredSize(new java.awt.Dimension(400, 100));
         sampleEditorPane.setRequestFocusEnabled(false);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle(OStrings.getString("GUI_COLORS_SELECTION"));
+        setTitle("OmegaT Custom Color");
         setIconImage(null);
 
         colorStylesLabel.setText(OStrings.getString("GUI_COLORS_COLOR"));
@@ -88,17 +88,18 @@ public class CustomColorSelectionDialog extends javax.swing.JDialog {
         });
         jScrollPane1.setViewportView(colorStylesList);
 
-        // Sample preview - FIXME
-//        final CustomColorPreview samplePanel = new CustomColorPreview(colorChooser, colorStylesList.getSelectedValue());
-//        colorChooser.setPreviewPanel(samplePanel);
-//
-//        ColorSelectionModel model = colorChooser.getSelectionModel();
-//        model.addChangeListener(new ChangeListener() {
-//            public void stateChanged(ChangeEvent evt) {
-//                ColorSelectionModel model = (ColorSelectionModel) evt.getSource();
-//                samplePanel.curColor = model.getSelectedColor();
-//            }
-//        });
+        /*
+        final CustomColorPreview samplePanel = new CustomColorPreview(colorChooser, colorStylesList.getSelectedValue());
+
+        colorChooser.setPreviewPanel(samplePanel);
+        ColorSelectionModel model = colorChooser.getSelectionModel();
+        model.addChangeListener(new ChangeListener() {
+            public void stateChanged(ChangeEvent evt) {
+                ColorSelectionModel model = (ColorSelectionModel) evt.getSource();
+                samplePanel.curColor = model.getSelectedColor();
+            }
+        });
+        */
 
         // Remove sample Swatches
         javax.swing.colorchooser.AbstractColorChooserPanel[] oldPanels = colorChooser.getChooserPanels();
@@ -117,6 +118,7 @@ public class CustomColorSelectionDialog extends javax.swing.JDialog {
         });
 
         defaultColorButton.setText(OStrings.getString("GUI_COLORS_DEFAULT_COLOR"));
+        defaultColorButton.setVerticalAlignment(javax.swing.SwingConstants.TOP);
         defaultColorButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 defaultColorButtonActionPerformed(evt);
@@ -125,6 +127,7 @@ public class CustomColorSelectionDialog extends javax.swing.JDialog {
 
         setColorButton.setText(OStrings.getString("GUI_COLORS_SET_COLOR"));
         setColorButton.setToolTipText("");
+        setColorButton.setVerticalAlignment(javax.swing.SwingConstants.TOP);
         setColorButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 setColorButtonActionPerformed(evt);
@@ -149,19 +152,18 @@ public class CustomColorSelectionDialog extends javax.swing.JDialog {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(colorStylesLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(setColorButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(defaultColorButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE)))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 267, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(colorChooser, javax.swing.GroupLayout.PREFERRED_SIZE, 639, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(cancelButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(applyColorChangesButton)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(cancelButton)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(applyColorChangesButton))
+                            .addComponent(defaultColorButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 281, Short.MAX_VALUE)
+                            .addComponent(setColorButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -169,18 +171,17 @@ public class CustomColorSelectionDialog extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(setColorButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(defaultColorButton))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addGroup(layout.createSequentialGroup()
                             .addComponent(colorStylesLabel)
                             .addGap(320, 320, 320))
                         .addComponent(colorChooser, javax.swing.GroupLayout.PREFERRED_SIZE, 336, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(setColorButton)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(defaultColorButton)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(applyColorChangesButton)
                     .addComponent(cancelButton))
@@ -197,6 +198,8 @@ public class CustomColorSelectionDialog extends javax.swing.JDialog {
 
     private void defaultColorButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_defaultColorButtonActionPerformed
     	((Styles.EditorColor) colorStylesList.getSelectedValue()).setColor(null);
+        colorChooser.setColor(((Styles.EditorColor) colorStylesList.getSelectedValue()).getColor());
+        
     }//GEN-LAST:event_defaultColorButtonActionPerformed
 
     private void setColorButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_setColorButtonActionPerformed

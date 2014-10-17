@@ -1,11 +1,11 @@
 ----------------------------------------------------------------------
- OmegaT 3.1.6 update 1
+ OmegaT 3.1.7
 ----------------------------------------------------------------------
    7 Enhancements
    6 Bug fixes
    3 Localisation updates
 ----------------------------------------------------------------------
-3.1.6 update 1 vs. 3.1.6
+3.1.7 vs. 3.1.6
 
   Implemented requests:
 
@@ -53,7 +53,7 @@ text is not translated.
 
   Localisation updates:
 
-  - Japanese localisation updated to 3.1.6 update 1 (UI, readme, documentation)
+  - Japanese localisation updated to 3.1.7 (UI, readme, documentation)
   - Italian localisation updated to 3.1.6 (UI, readme)
   - Dutch localisation updated to 3.1.6 (UI, readme, documentation)
 

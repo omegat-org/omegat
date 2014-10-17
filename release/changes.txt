@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 3.1.7
 ----------------------------------------------------------------------
-   8 Enhancements
+   9 Enhancements
    6 Bug fixes
    3 Localisation updates
 ----------------------------------------------------------------------
@@ -20,6 +20,9 @@
 
   - Colour themes (e.g., light/dark GUI modes)
   https://sourceforge.net/p/omegat/feature-requests/958/
+
+  - Editable colours 
+  https://sourceforge.net/p/omegat/feature-requests/549/
 
   Other enhancements:
 

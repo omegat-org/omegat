@@ -32,6 +32,7 @@ import javax.swing.JOptionPane;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
 import org.omegat.util.gui.Styles;
+import org.omegat.util.gui.Styles.EditorColor;
 
 /**
  * Dialog for configuring custom colors.
@@ -197,13 +198,23 @@ public class CustomColorSelectionDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_colorStylesListValueChanged
 
     private void defaultColorButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_defaultColorButtonActionPerformed
-    	((Styles.EditorColor) colorStylesList.getSelectedValue()).setColor(null);
-        colorChooser.setColor(((Styles.EditorColor) colorStylesList.getSelectedValue()).getColor());
+    	EditorColor editorColor = (Styles.EditorColor) colorStylesList.getSelectedValue();
+    	if (editorColor == null)
+    	{
+    	    return;
+    	}
+        editorColor.setColor(null);
+        colorChooser.setColor(editorColor.getColor());
         
     }//GEN-LAST:event_defaultColorButtonActionPerformed
 
     private void setColorButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_setColorButtonActionPerformed
-    	((Styles.EditorColor) colorStylesList.getSelectedValue()).setColor(colorChooser.getColor());
+        EditorColor editorColor = (Styles.EditorColor) colorStylesList.getSelectedValue();
+        if (editorColor == null)
+        {
+            return;
+        }
+        editorColor.setColor(colorChooser.getColor());
     }//GEN-LAST:event_setColorButtonActionPerformed
 
     private void applyColorChangesButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_applyColorChangesButtonActionPerformed

@@ -2,7 +2,7 @@
  OmegaT 3.1.7
 ----------------------------------------------------------------------
    9 Enhancements
-   6 Bug fixes
+   7 Bug fixes
    3 Localisation updates
 ----------------------------------------------------------------------
 3.1.7 vs. 3.1.6
@@ -56,6 +56,11 @@ text is not translated.
 
   - When using Create Current Translated Document, the message should be in the singular 
   https://sourceforge.net/p/omegat/bugs/713/
+
+  - PO filter: it was not possible to enter an alternative translation for a 
+different plural when the source sentences of the plural were the same.
+As the identifier for alternative translations of PO were changed, it is not
+recommanded to change version during a project.
 
   Localisation updates:
 

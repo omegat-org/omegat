@@ -79,7 +79,7 @@ public class CustomColorSelectionDialog extends javax.swing.JDialog {
         setTitle("OmegaT Custom Color");
         setIconImage(null);
 
-        colorStylesLabel.setText(OStrings.getString("GUI_COLORS_COLOR"));
+        org.openide.awt.Mnemonics.setLocalizedText(colorStylesLabel, OStrings.getString("GUI_COLORS_COLOR")); // NOI18N
 
         colorStylesList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         colorStylesList.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
@@ -111,14 +111,14 @@ public class CustomColorSelectionDialog extends javax.swing.JDialog {
             }
         }
 
-        applyColorChangesButton.setText(OStrings.getString("GUI_COLORS_APPLY"));
+        org.openide.awt.Mnemonics.setLocalizedText(applyColorChangesButton, OStrings.getString("GUI_COLORS_APPLY")); // NOI18N
         applyColorChangesButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 applyColorChangesButtonActionPerformed(evt);
             }
         });
 
-        defaultColorButton.setText(OStrings.getString("GUI_COLORS_DEFAULT_COLOR"));
+        org.openide.awt.Mnemonics.setLocalizedText(defaultColorButton, OStrings.getString("GUI_COLORS_DEFAULT_COLOR")); // NOI18N
         defaultColorButton.setVerticalAlignment(javax.swing.SwingConstants.TOP);
         defaultColorButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -126,7 +126,7 @@ public class CustomColorSelectionDialog extends javax.swing.JDialog {
             }
         });
 
-        setColorButton.setText(OStrings.getString("GUI_COLORS_SET_COLOR"));
+        org.openide.awt.Mnemonics.setLocalizedText(setColorButton, OStrings.getString("GUI_COLORS_SET_COLOR")); // NOI18N
         setColorButton.setToolTipText("");
         setColorButton.setVerticalAlignment(javax.swing.SwingConstants.TOP);
         setColorButton.addActionListener(new java.awt.event.ActionListener() {
@@ -135,8 +135,7 @@ public class CustomColorSelectionDialog extends javax.swing.JDialog {
             }
         });
 
-        cancelButton.setText(OStrings.getString("BUTTON_CANCEL"));
-        org.openide.awt.Mnemonics.setLocalizedText(cancelButton, OStrings.getString("BUTTON_CANCEL"));
+        org.openide.awt.Mnemonics.setLocalizedText(cancelButton, OStrings.getString("BUTTON_CANCEL")); // NOI18N
         cancelButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cancelButtonActionPerformed(evt);
@@ -199,8 +198,7 @@ public class CustomColorSelectionDialog extends javax.swing.JDialog {
 
     private void defaultColorButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_defaultColorButtonActionPerformed
     	EditorColor editorColor = (Styles.EditorColor) colorStylesList.getSelectedValue();
-    	if (editorColor == null)
-    	{
+    	if (editorColor == null) {
     	    return;
     	}
         editorColor.setColor(null);
@@ -210,8 +208,7 @@ public class CustomColorSelectionDialog extends javax.swing.JDialog {
 
     private void setColorButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_setColorButtonActionPerformed
         EditorColor editorColor = (Styles.EditorColor) colorStylesList.getSelectedValue();
-        if (editorColor == null)
-        {
+        if (editorColor == null) {
             return;
         }
         editorColor.setColor(colorChooser.getColor());

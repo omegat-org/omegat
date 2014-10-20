@@ -68,6 +68,7 @@ import org.omegat.core.data.LastSegmentManager;
 import org.omegat.core.data.PrepareTMXEntry;
 import org.omegat.core.data.ProjectTMX;
 import org.omegat.core.data.SourceTextEntry;
+import org.omegat.core.data.SourceTextEntry.DUPLICATE;
 import org.omegat.core.data.TMXEntry;
 import org.omegat.core.events.IEntryEventListener;
 import org.omegat.core.events.IFontChangedEventListener;
@@ -1273,6 +1274,59 @@ public class EditorController implements IEditor {
                 // Non-translated.
                 break;
             }
+        } while (true);
+
+        activateEntry();
+
+        this.editor.setCursor(oldCursor);
+    }
+
+    /**
+     * Find the next unique entry.
+     * @param findTranslated should the next entry be translated or not.
+     */
+    public void nextUniqueEntry() {
+        UIThreadsUtil.mustBeSwingThread();
+
+        // check if a document is loaded
+        if (Core.getProject().isProjectLoaded() == false)
+            return;
+
+        Cursor hourglassCursor = new Cursor(Cursor.WAIT_CURSOR);
+        Cursor oldCursor = this.editor.getCursor();
+        this.editor.setCursor(hourglassCursor);
+
+        // save the current entry
+        commitAndDeactivate();
+
+        List<FileInfo> files = Core.getProject().getProjectFiles();
+        SourceTextEntry ste;
+        int startFileIndex = displayedFileIndex;
+        int startEntryIndex = displayedEntryIndex;
+        do {
+            displayedEntryIndex++;
+            if (displayedEntryIndex >= m_docSegList.length) {
+                // file finished - need new
+                displayedFileIndex++;
+                displayedEntryIndex = 0;
+                if (displayedFileIndex >= files.size()) {
+                    displayedFileIndex = 0;
+                }
+                loadDocument(); // to get proper EntryIndex when filter active
+            }
+            ste = getCurrentEntry();
+
+            if (ste == null) {
+                break;// filtered file has no entries
+            }
+            if (displayedFileIndex == startFileIndex && displayedEntryIndex == startEntryIndex) {
+                break; // not found
+            }
+            
+            if (ste.getDuplicate() != DUPLICATE.NEXT){
+                break;
+            }
+
         } while (true);
 
         activateEntry();

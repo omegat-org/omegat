@@ -326,6 +326,7 @@ public class MainWindowMenu implements ActionListener, MenuListener, IMainMenu {
         gotoMenu.add(gotoSegmentMenuItem = createMenuItem("TF_MENU_EDIT_GOTO"));
         gotoMenu.add(gotoNextNoteMenuItem = createMenuItem("TF_MENU_EDIT_NEXT_NOTE"));
         gotoMenu.add(gotoPreviousNoteMenuItem = createMenuItem("TF_MENU_EDIT_PREV_NOTE"));
+        gotoMenu.add(gotoNextUniqueMenuItem = createMenuItem("TF_MENU_GOTO_NEXT_UNIQUE"));
         gotoMenu.add(gotoMatchSourceSegment = createMenuItem("TF_MENU_GOTO_SELECTED_MATCH_SOURCE"));
         gotoMenu.add(new JSeparator());
         gotoMenu.add(gotoHistoryForwardMenuItem = createMenuItem("TF_MENU_GOTO_FORWARD_IN_HISTORY"));
@@ -687,6 +688,7 @@ public class MainWindowMenu implements ActionListener, MenuListener, IMainMenu {
     JMenuItem gotoNextNoteMenuItem;
     JMenuItem gotoPreviousNoteMenuItem;
     JMenuItem gotoMatchSourceSegment;
+    JMenuItem gotoNextUniqueMenuItem;
     JMenuItem helpAboutMenuItem;
     JMenuItem helpContentsMenuItem;
     JMenuItem helpLastChangesMenuItem;

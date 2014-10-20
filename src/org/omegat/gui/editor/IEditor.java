@@ -145,6 +145,12 @@ public interface IEditor {
     void nextTranslatedEntry();
     
     /**
+     * Move to the first non-unique entry.
+     * Must be called from UI thread.
+     */
+    void nextUniqueEntry();
+    
+    /**
      * Goto first entry in specified file.
      * 
      * @param fileIndex

@@ -444,6 +444,10 @@ public class MainWindowMenuHandler {
         Core.getEditor().nextUntranslatedEntry();
     }
 
+    public void gotoNextUniqueMenuItemActionPerformed() {
+        Core.getEditor().nextUniqueEntry();
+    }
+    
     public void gotoNextTranslatedMenuItemActionPerformed() {
         Core.getEditor().nextTranslatedEntry();
     }

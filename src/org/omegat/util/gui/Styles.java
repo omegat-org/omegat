@@ -87,17 +87,18 @@ public final class Styles {
 
                 if (prefColor.equals(DEFAULT_COLOR)) {
                     color = defaultColor;
+                    return;
                 }
 
                 try {
                     color = Color.decode(prefColor);
                 } catch (NumberFormatException e) {
-                    Log.logDebug(LOGGER, "Cannot set custom color for {0}, default to {1}.", this.name(), prefColor);
+                    Log.logDebug(LOGGER, "Cannot set custom color for {0}, default to {1}.", this.name(),
+                            prefColor);
                     color = defaultColor;
                 }
             } else {
                 color = defaultColor;
-                Preferences.setPreference(this.name(), DEFAULT_COLOR);
             }
         }
 
@@ -108,15 +109,16 @@ public final class Styles {
 
             Color color = null;
             try {
-                String prefColor = Preferences.getPreferenceDefault(this.name(), defaultColor);
-
-                if (prefColor.equals(DEFAULT_COLOR)) {
-                    prefColor = defaultColor;
+                if (!Preferences.existsPreference(this.name())) {
+                    this.color = this.defaultColor;
+                    return;
+                } else {
+                    color = Color.decode(Preferences.getPreference(this.name()));
                 }
 
-                color = Color.decode(prefColor);
             } catch (NumberFormatException e) {
-                Log.logDebug(LOGGER, "Cannot set custom color for {0}, default to {1}.", this.name(), defaultColor);
+                Log.logDebug(LOGGER, "Cannot set custom color for {0}, default to {1}.", this.name(),
+                        defaultColor);
                 color = Color.decode(defaultColor);
             }
             this.color = color;

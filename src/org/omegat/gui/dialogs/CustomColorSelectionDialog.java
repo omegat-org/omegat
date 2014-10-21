@@ -76,7 +76,7 @@ public class CustomColorSelectionDialog extends javax.swing.JDialog {
         sampleEditorPane.setRequestFocusEnabled(false);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("OmegaT Custom Color");
+        setTitle(OStrings.getString("GUI_COLORS_TITLE")); // NOI18N
         setIconImage(null);
 
         org.openide.awt.Mnemonics.setLocalizedText(colorStylesLabel, OStrings.getString("GUI_COLORS_COLOR")); // NOI18N

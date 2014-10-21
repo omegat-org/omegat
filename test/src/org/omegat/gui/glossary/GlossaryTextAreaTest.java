@@ -137,6 +137,9 @@ public class GlossaryTextAreaTest extends TestCore {
             public void gotoHistoryForward() {
             }
 
+            public void nextUniqueEntry() {
+            }
+
             public void insertText(String text) {
             }
 

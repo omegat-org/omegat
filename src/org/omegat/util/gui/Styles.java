@@ -51,31 +51,35 @@ public final class Styles {
     private static final Logger LOGGER = Logger.getLogger(EditorColor.class.getName());
 
     public enum EditorColor {
-    	COLOR_BACKGROUND(UIManager.getColor("TextPane.background")), // Also used for EditorPane.background
-    	COLOR_FOREGROUND(UIManager.getColor("TextPane.foreground")),
+        COLOR_BACKGROUND(UIManager.getColor("TextPane.background")), // Also used for EditorPane.background
+        COLOR_FOREGROUND(UIManager.getColor("TextPane.foreground")),
 
-    	COLOR_SOURCE("#c0ffc0"),
-    	COLOR_NOTED("#c0ffff"),
-    	COLOR_UNTRANSLATED("#c0c0ff"),
-    	COLOR_TRANSLATED("#ffff99"),
-    	COLOR_NON_UNIQUE("#808080"),
-    	COLOR_PLACEHOLDER("#969696"),
-    	COLOR_REMOVETEXT_TARGET("#ff0000"),
-    	COLOR_NBSP("#c8c8c8"),
-    	COLOR_WHITESPACE("#808080"),
-    	COLOR_BIDIMARKERS("#c80000"),
-    	COLOR_MARK_COMES_FROM_TM("#fa8072"), // Salmon red
-    	COLOR_MARK_COMES_FROM_TM_XICE("#af76df"), // Purple 
-    	COLOR_MARK_COMES_FROM_TM_X100PC("#ff9408"), // Dark Orange 
-    	COLOR_MARK_COMES_FROM_TM_XAUTO("#ffd596"), // Orange
-    	COLOR_REPLACE("#0000ff"), // Blue
-    	COLOR_LANGUAGE_TOOLS("#0000ff"),
-    	COLOR_TRANSTIPS("#0000ff"),
-    	COLOR_SPELLCHECK("#ff0000");
+        COLOR_SOURCE("#c0ffc0"),
+        COLOR_NOTED("#c0ffff"),
+        COLOR_UNTRANSLATED("#c0c0ff"),
+        COLOR_TRANSLATED("#ffff99"),
+        COLOR_NON_UNIQUE("#808080"),
+        COLOR_PLACEHOLDER("#969696"),
+        COLOR_REMOVETEXT_TARGET("#ff0000"),
+        COLOR_NBSP("#c8c8c8"),
+        COLOR_WHITESPACE("#808080"),
+        COLOR_BIDIMARKERS("#c80000"),
+        COLOR_MARK_COMES_FROM_TM("#fa8072"), // Salmon red
+        COLOR_MARK_COMES_FROM_TM_XICE("#af76df"), // Purple 
+        COLOR_MARK_COMES_FROM_TM_X100PC("#ff9408"), // Dark Orange 
+        COLOR_MARK_COMES_FROM_TM_XAUTO("#ffd596"), // Orange
+        COLOR_REPLACE("#0000ff"), // Blue
+        COLOR_LANGUAGE_TOOLS("#0000ff"),
+        COLOR_TRANSTIPS("#0000ff"),
+        COLOR_SPELLCHECK("#ff0000"),
+        COLOR_MATCHES_CHANGED("#0000ff"),
+        COLOR_MATCHES_UNCHANGED("#00ff00"),
+        COLOR_MATCHES_INS_ACTIVE("#0000ff"),
+        COLOR_MATCHES_INS_INACTIVE("#808080"); // Color.gray
 
-    	private static final String DEFAULT_COLOR = "__DEFAULT__";
-		private Color color;
-		private Color defaultColor;
+        private static final String DEFAULT_COLOR = "__DEFAULT__";
+        private Color color;
+        private Color defaultColor;
 
         private EditorColor(Color defaultColor) {
             if (this.defaultColor == null) {

@@ -26,6 +26,7 @@
 
 package org.omegat.gui.editor;
 
+import java.awt.Color;
 import java.awt.Font;
 
 import javax.swing.event.DocumentEvent;
@@ -35,7 +36,12 @@ import javax.swing.text.DefaultStyledDocument;
 import javax.swing.text.Element;
 import javax.swing.text.MutableAttributeSet;
 import javax.swing.text.Position;
+import javax.swing.text.Style;
 import javax.swing.text.StyleConstants;
+import javax.swing.text.StyleContext;
+
+import org.htmlparser.scanners.StyleScanner;
+import org.omegat.util.gui.Styles;
 
 /**
  * We need to redefine some standard document behavior.
@@ -74,6 +80,12 @@ public class Document3 extends DefaultStyledDocument {
 
     public Document3(final EditorController controller) {
         this.controller = controller;
+
+        // 
+        StyleContext styleContext = (StyleContext) getAttributeContext();
+        Style defaultStyle = styleContext.getStyle(StyleContext.DEFAULT_STYLE);
+        StyleConstants.setForeground(defaultStyle, Styles.EditorColor.COLOR_FOREGROUND.getColor());
+        StyleConstants.setBackground(defaultStyle, Styles.EditorColor.COLOR_BACKGROUND.getColor());
     }
 
     /**
@@ -106,6 +118,19 @@ public class Document3 extends DefaultStyledDocument {
             return null;
         }
     }
+
+//    @Override
+//    public Color getForeground(AttributeSet attr) {
+//      //((StyleContext) getAttributeContext()).getForeground(Styles.defaultAttributeSet());
+//      Color fg  = StyleConstants.getForeground(attr);
+//      System.out.println("GET FOREGROUND == " + fg);
+//      if (fg == null)
+//      {
+//          fg = Styles.EditorColor.COLOR_FOREGROUND.getColor();
+//      }
+//      System.out.println("GET FOREGROUND => " + fg);
+//      return fg;
+//    }
 
     /**
      * Check if document is in edit mode, i.e. one of segment activated for

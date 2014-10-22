@@ -169,8 +169,6 @@ public final class Styles {
         MutableAttributeSet r = new SimpleAttributeSet();
         if (foregroundColor != null) {
             StyleConstants.setForeground(r, foregroundColor);
-        } else {
-            StyleConstants.setForeground(r, EditorColor.COLOR_FOREGROUND.getColor());
         }
 
         if (backgroundColor != null) {

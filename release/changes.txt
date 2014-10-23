@@ -1,15 +1,19 @@
 ----------------------------------------------------------------------
  OmegaT 3.1.7 update 1
 ----------------------------------------------------------------------
-   0 Enhancement
-   1 Bug fix
+   2 Enhancement
+   2 Bug fixes
    0 Localisation update
 ----------------------------------------------------------------------
 3.1.7 update 1 vs. 3.1.7
 
+  - It is now possible to customise colours used in the Fuzzy Matches pane  
+
   Bug fixes:
 
   - Colours were not working in the Fuzzy Matches pane
+
+  - The text colour was not applied in the Editor
 
 ----------------------------------------------------------------------
  OmegaT 3.1.7 (2014-10-20)

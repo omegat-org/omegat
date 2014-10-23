@@ -91,8 +91,8 @@ public class MatchesTextArea extends EntryInfoThreadPane<List<NearString>> imple
     private static final AttributeSet ATTRIBUTES_UNCHANGED = Styles.createAttributeSet(Styles.EditorColor.COLOR_MATCHES_UNCHANGED.getColor(), null, null,
             null);
     private static final AttributeSet ATTRIBUTES_SELECTED = Styles.createAttributeSet(null, null, true, null);
-    private static final AttributeSet ATTRIBUTES_DELETED_ACTIVE = Styles.createAttributeSet(null, null, true, null, true, null);
-    private static final AttributeSet ATTRIBUTES_DELETED_INACTIVE = Styles.createAttributeSet(null, null, null, null, true, null);
+    private static final AttributeSet ATTRIBUTES_DELETED_ACTIVE = Styles.createAttributeSet(Styles.EditorColor.COLOR_MATCHES_DEL_ACTIVE.getColor(), null, true, null, true, null);
+    private static final AttributeSet ATTRIBUTES_DELETED_INACTIVE = Styles.createAttributeSet(Styles.EditorColor.COLOR_MATCHES_DEL_INACTIVE.getColor(), null, null, null, true, null);
     private static final AttributeSet ATTRIBUTES_INSERTED_ACTIVE = Styles.createAttributeSet(Styles.EditorColor.COLOR_MATCHES_INS_ACTIVE.getColor(), null, true, null, null, true);
     private static final AttributeSet ATTRIBUTES_INSERTED_INACTIVE = Styles.createAttributeSet(Styles.EditorColor.COLOR_MATCHES_INS_INACTIVE.getColor(), null, null, null, null, true);
     

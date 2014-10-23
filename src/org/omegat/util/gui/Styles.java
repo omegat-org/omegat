@@ -74,6 +74,8 @@ public final class Styles {
         COLOR_SPELLCHECK("#ff0000"),
         COLOR_MATCHES_CHANGED("#0000ff"),
         COLOR_MATCHES_UNCHANGED("#00ff00"),
+        COLOR_MATCHES_DEL_ACTIVE((Color) null),
+        COLOR_MATCHES_DEL_INACTIVE((Color) null),
         COLOR_MATCHES_INS_ACTIVE("#0000ff"),
         COLOR_MATCHES_INS_INACTIVE("#808080"); // Color.gray
 

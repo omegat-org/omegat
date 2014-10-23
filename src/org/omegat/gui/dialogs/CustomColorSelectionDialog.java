@@ -26,8 +26,17 @@
 package org.omegat.gui.dialogs;
 
 import java.awt.Color;
+import java.lang.reflect.Array;
+import java.lang.reflect.Field;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JColorChooser;
+import javax.swing.JLabel;
 
 import javax.swing.JOptionPane;
+import javax.swing.JSlider;
+import javax.swing.JSpinner;
+import javax.swing.colorchooser.AbstractColorChooserPanel;
 
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
@@ -101,6 +110,13 @@ public class CustomColorSelectionDialog extends javax.swing.JDialog {
             }
         });
         */
+
+        try {
+            removeTransparencySlider(colorChooser);
+        }
+        catch (Exception e) {
+            /* empty */
+        }
 
         // Remove sample Swatches
         javax.swing.colorchooser.AbstractColorChooserPanel[] oldPanels = colorChooser.getChooserPanels();
@@ -193,14 +209,18 @@ public class CustomColorSelectionDialog extends javax.swing.JDialog {
 
     private void colorStylesListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_colorStylesListValueChanged
         Color selectedColor = ((Styles.EditorColor) colorStylesList.getSelectedValue()).getColor();
+        if (selectedColor == null)
+        {
+            selectedColor = Color.WHITE;
+        }
         colorChooser.setColor(selectedColor);
     }//GEN-LAST:event_colorStylesListValueChanged
 
     private void defaultColorButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_defaultColorButtonActionPerformed
-    	EditorColor editorColor = (Styles.EditorColor) colorStylesList.getSelectedValue();
-    	if (editorColor == null) {
-    	    return;
-    	}
+        EditorColor editorColor = (Styles.EditorColor) colorStylesList.getSelectedValue();
+        if (editorColor == null) {
+            return;
+        }
         editorColor.setColor(null);
         colorChooser.setColor(editorColor.getColor());
         
@@ -284,6 +304,44 @@ public class CustomColorSelectionDialog extends javax.swing.JDialog {
 //        }
 //    }
 
+    // Hide the Transparency Slider.
+    // From: http://stackoverflow.com/a/22608885
+    private void removeTransparencySlider(JColorChooser jc) throws Exception {
+
+    AbstractColorChooserPanel[] colorPanels = jc.getChooserPanels();
+    for (int i = 1; i < colorPanels.length; i++) {
+        AbstractColorChooserPanel cp = colorPanels[i];
+
+        Field f = cp.getClass().getDeclaredField("panel");
+        f.setAccessible(true);
+
+        Object colorPanel = f.get(cp);
+        Field f2 = colorPanel.getClass().getDeclaredField("spinners");
+        f2.setAccessible(true);
+        Object spinners = f2.get(colorPanel);
+
+        Object transpSlispinner = Array.get(spinners, 3);
+        if (i == colorPanels.length - 1) {
+            transpSlispinner = Array.get(spinners, 4);
+        }
+        Field f3 = transpSlispinner.getClass().getDeclaredField("slider");
+        f3.setAccessible(true);
+        JSlider slider = (JSlider) f3.get(transpSlispinner);
+        slider.setEnabled(false);
+        slider.setVisible(false);
+        Field f4 = transpSlispinner.getClass().getDeclaredField("spinner");
+        f4.setAccessible(true);
+        JSpinner spinner = (JSpinner) f4.get(transpSlispinner);
+        spinner.setEnabled(false);
+        spinner.setVisible(false);
+
+        Field f5 = transpSlispinner.getClass().getDeclaredField("label");
+        f5.setAccessible(true);
+        JLabel label = (JLabel) f5.get(transpSlispinner);
+        label.setVisible(false);
+    }
+}
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton applyColorChangesButton;
     private javax.swing.JButton cancelButton;

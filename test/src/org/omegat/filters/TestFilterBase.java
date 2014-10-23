@@ -78,6 +78,7 @@ public abstract class TestFilterBase extends TestCore {
 
         Core.initializeConsole(new TreeMap<String, String>());
         Core.setFilterMaster(new FilterMaster(FilterMaster.createDefaultFiltersConfig()));
+        Core.setProject(new TestProject(new ProjectPropertiesTest()));
 
         outFile = new File("build/testdata/OmegaT_test-" + getClass().getName() + "-" + getName());
         outFile.getParentFile().mkdirs();

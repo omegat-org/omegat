@@ -38,6 +38,10 @@ import org.omegat.util.Language;
  */
 public class SegmenterTest extends TestCore
 {
+    protected void setUp() throws Exception {
+        Segmenter.srx = SRX.getDefault();
+    }
+
     /**
      * Test of segment method, of class org.omegat.core.segmentation.Segmenter.
      */

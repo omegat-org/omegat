@@ -34,6 +34,7 @@ import junit.framework.TestCase;
 import org.junit.Before;
 import org.junit.Test;
 import org.omegat.core.Core;
+import org.omegat.tokenizer.DefaultTokenizer;
 
 /**
  * Tests for RealProject classs.
@@ -136,6 +137,7 @@ public class RealProjectTest extends TestCase {
     private void createProject(boolean supportDefaultTranslations) {
         ProjectProperties props = new ProjectProperties();
         props.setSupportDefaultTranslations(supportDefaultTranslations);
+        props.setTargetTokenizer(DefaultTokenizer.class);
         project = new RealProjectWithTMXAccess(props);
 
         fi = new IProject.FileInfo();

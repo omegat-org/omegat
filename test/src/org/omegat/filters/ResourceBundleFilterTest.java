@@ -64,7 +64,9 @@ public class ResourceBundleFilterTest extends TestFilterBase {
         checkMultiStart(fi, f);
         checkMulti("Value", "ID", null, null, null, null);
         checkMulti("Value2", "ID2", null, null, null, null);
-        checkMulti("Value3", "ID3", null, null, null, null);
+        checkMulti("Value3", "ID3", null, null, null, "# some comment");
+        checkMulti("Value4", "ID4", null, null, null, "# multiple line\n# comment");
+        checkMulti("Value5", "ID5", null, null, null, "! alternate comment style");
         checkMultiEnd();
     }
 }

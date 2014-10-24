@@ -732,7 +732,7 @@ public class MainWindowMenu implements ActionListener, MenuListener, IMainMenu {
     JMenuItem projectNewMenuItem;
     JMenuItem projectTeamNewMenuItem;
     JMenuItem projectOpenMenuItem;
-    JMenuItem projectOpenRecentMenuItem;
+    JMenu projectOpenRecentMenuItem;
     JMenuItem projectReloadMenuItem;
     JMenuItem projectSaveMenuItem;
     JMenuItem projectWikiImportMenuItem;

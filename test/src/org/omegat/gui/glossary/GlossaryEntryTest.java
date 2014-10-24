@@ -63,4 +63,27 @@ public class GlossaryEntryTest extends TestCore {
         list.remove(a);
         assertEquals(2, list.size());
     }
+
+    public void testToStyledString() {
+        GlossaryEntry ge = new GlossaryEntry("source1", "translation1", "", false);
+        assertEquals("source1 = translation1", ge.toStyledString().text.toString());
+    }
+
+    public void testToStyledStringMultipleTranslations() {
+        GlossaryEntry ge = new GlossaryEntry("source1", new String[] {"translation1", "translation2"},
+                                             new String[] { "", "" }, new boolean[] {false, false});
+        assertEquals("source1 = translation1, translation2", ge.toStyledString().text.toString());
+    }
+
+    public void testToStyledStringWithComment() {
+        GlossaryEntry ge = new GlossaryEntry("source1", "translation1", "comment1", false);
+        assertEquals("source1 = translation1\n1. comment1", ge.toStyledString().text.toString());
+    }
+
+    public void testToStyledStringMultipleComments() {
+        GlossaryEntry ge = new GlossaryEntry("source1", new String[] {"translation1", "translation2"},
+                                             new String[] { "comment1", "comment2" }, new boolean[] {false, false});
+        assertEquals("source1 = translation1, translation2\n1. comment1\n2. comment2",
+                     ge.toStyledString().text.toString());
+    }
 }

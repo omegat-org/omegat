@@ -61,9 +61,10 @@ public class GlossaryTextAreaTest extends TestCore {
                 gta.setFoundResult(null, entries);
             }
         });
-        String GTATEXT = "source1 = translation1\n\nsource2 = translation2\ncomment2\n\n";
-        if (!gta.getText().equals(GTATEXT))
-            fail("Glossary pane doesn't show what it should.");
+        // Make sure representations of both entries are rendered
+        String GTATEXT = entries.get(0).toStyledString().text.toString() + "\n\n" +
+                         entries.get(1).toStyledString().text.toString() + "\n\n";
+        assertEquals(GTATEXT, gta.getText());
     }
 
     /**

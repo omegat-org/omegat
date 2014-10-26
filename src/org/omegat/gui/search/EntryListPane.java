@@ -77,7 +77,7 @@ class EntryListPane extends JTextPane {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                if (e.getClickCount() == 2) {
+                if (e.getClickCount() == 2 && m_entryList.size() > 0) {
                     final Cursor oldCursor = getCursor();
                     setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                     // user double clicked on viewer pane - send message

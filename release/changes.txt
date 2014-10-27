@@ -2,7 +2,7 @@
  OmegaT 3.1.7 update 1
 ----------------------------------------------------------------------
    3 Enhancement
-   2 Bug fixes
+   3 Bug fixes
    1 Localisation update
 ----------------------------------------------------------------------
 3.1.7 update 1 vs. 3.1.7
@@ -14,6 +14,10 @@
   - Colours were not working in the Fuzzy Matches pane
 
   - The text colour was not applied in the Editor
+
+  - If there was a double click in the search result entries pane in the 
+Search window before the first searching execution, the cursor (i.e., 
+mouse pointer) changed to the Wait icon and could not be restored
 
   Localisation updates:
 

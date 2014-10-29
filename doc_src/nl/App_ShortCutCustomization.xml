@@ -140,7 +140,7 @@
           <row><entry>Schakel Hoofd-/kleine letters naar...</entry><entry><keycap>Shift+F3</keycap></entry><entry>cycleSwitchCaseMenuItem</entry></row>
           <row><entry>Als standaard vertaling gebruiken</entry><entry/><entry>editMultipleDefault</entry></row>
           <row><entry>Alternatieve vertaling maken</entry><entry/><entry>editMultipleAlternate</entry></row>
-          <row><entry>Register Identieke Vertaling</entry><entry/><entry>editRegisterIdenticalMenuItem</entry></row>
+          <row><entry>Identieke vertaling registreren</entry><entry/><entry>editRegisterIdenticalMenuItem</entry></row>
 
         </tbody>
       </tgroup>

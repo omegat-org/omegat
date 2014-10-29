@@ -170,7 +170,7 @@
       </listitem>
     </itemizedlist>
 
-    <para><emphasis role="bold">Files HTML e XHTML </emphasis></para>
+    <para><emphasis role="bold">Files HTML e XHTML</emphasis></para>
 
     <itemizedlist>
       <listitem>
@@ -212,7 +212,7 @@
 
     <itemizedlist>
       <listitem>
-        <para><emphasis>Segmentation a paragrapho sur interruptiones de linea, lineas vacue o nunquam:</emphasis></para>
+        <para><emphasis>Segmentation a paragrapho sur interruptiones de linea, lineas vacue o nunquam</emphasis>:</para>
 
         <para>si le regulas de segmentation son active, le texto essera ulteriormente segmentate secundo le option seligite ci.</para>
       </listitem>

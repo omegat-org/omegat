@@ -90,7 +90,9 @@
 
     <para>Major cambios al regulas de segmentation deberea esser generalmente evitate, in modo special post le completamento del prime minuta, sed cambios minor, ut le addition de un abbreviation admittite, pote esser avantagiose.</para>
 
-    <para>Pro modificar o expander un collection de regulas existente, clicca simplemente sur illo in le summitate del tabella. Le regulas pro ce collection apparera in le medietate basso del fenestra.</para>
+    <para>In order to edit or expand an existing set of rules, simply click on
+    it in the top table. The rules for that set will appear in the bottom half
+    of the window.</para>
 
     <para>Pro crear un collection de regulas vacue pro un modello de lingua nove clicca <emphasis role="bold">Adde </emphasis>in le medietate superior del fenestra de dialogo. Un linea vacue apparera al fundo del tabella superior (tu pote deber rolar in basso pro vider lo). Cambia le nomine del collection de regula, le modello de lingua al lingua concernite e su codice (vide <xref linkend="appendix.languages"/> pro un lista del codices de lingua). Le syntaxe del schema del lingua conforma al syntaxe del expression regular. Si tu collection de regulas tracta un par lingua-pais, nos monera te a mover lo al summitate usante le button <emphasis role="bold">Move in alto</emphasis>.</para>
 

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
 <chapter id="chapter.regexp">
-  <title>Expressiones Regular<indexterm class="singular">
+  <title>Expressiones regular<indexterm class="singular">
       <primary>Expressiones regular</primary> <seealso>Segmentation</seealso> <seealso>Cerca</seealso>
     </indexterm></title>
 
@@ -318,7 +318,7 @@
   </table>
 
   <table>
-    <title>Regex - Concordatores del confinios </title>
+    <title>Regex - Concordatores del confinios</title>
 
     <tgroup align="left" cols="2" rowsep="1">
       <colspec align="left" colnum="1"/>
@@ -440,7 +440,7 @@
   </note>
 
   <table>
-    <title>Regex - Operatores Logic </title>
+    <title>Regex - Operatores Logic</title>
 
     <tgroup align="left" cols="2" rowsep="1">
       <colspec align="left" colnum="1"/>
@@ -485,7 +485,7 @@
     <para>Plure instrumentos interactive son disponibile pro disveloppar e essayar le expressiones regular. Illos seque generalmente multo le mesme schema (Per un exemplo ex le Probator de Expression Regular vide in sequito): le expression regular (entrata vertice) analyse le texto de recerca (Cassa del texto in le medio) , que rende le occurrentias, monstrate in le cassa de Taxo resultato.</para>
 
     <figure id="regerx.tester">
-      <title>Probator de Regex </title>
+      <title>Probator de Regex</title>
 
       <mediaobject>
         <imageobject role="html">

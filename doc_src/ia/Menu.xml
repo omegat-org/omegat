@@ -487,7 +487,7 @@
             </row>
 
             <row>
-              <entry><guimenuitem>Nota previe</guimenuitem></entry>
+              <entry><guimenuitem>Nota Previe</guimenuitem></entry>
 
               <entry/>
 
@@ -539,19 +539,19 @@
 
           <tbody>
             <row>
-              <entry><guimenuitem>Marca le segmentos Traducite</guimenuitem></entry>
+              <entry><guimenuitem>Marca le Segmentos Rendite</guimenuitem></entry>
 
               <entry>Si iste option es activate, le segmentos rendite essera marcate in jalne.</entry>
             </row>
 
             <row>
-              <entry><guimenuitem>Marca le Segmentos Non Rendite</guimenuitem></entry>
+              <entry><guimenuitem>Marca segmentos non rendite</guimenuitem></entry>
 
               <entry>Si activate, le segmentos non rendite essera marcate in violetto.</entry>
             </row>
 
             <row>
-              <entry><guimenuitem>Monstra le Segmentos Fonte</guimenuitem></entry>
+              <entry><guimenuitem>Monstra le Segmentos Fte</guimenuitem></entry>
 
               <entry>Si activate, le segmentos fonte essera monstrate e marcate in verde. Si non activate, le segmentos fonte non essera monstrate.</entry>
             </row>
@@ -575,7 +575,7 @@
             </row>
 
             <row>
-              <entry><guimenuitem>Information de Modification</guimenuitem></entry>
+              <entry><guimenuitem>Information de &amp;Modification</guimenuitem></entry>
 
               <entry>Prefixar le option Modification del Apparentia a <emphasis>Seligite</emphasis> monstrara le tempore e le autor del ultime cambio in le segmento currente. Prefixar illo a<emphasis> Omne </emphasis>monstra iste information pro omne segmentos e <emphasis>Necun</emphasis> disactiva iste option.</entry>
             </row>
@@ -649,7 +649,7 @@
 
           <tbody>
             <row>
-              <entry><guimenuitem>Usa le clave pro avantiar</guimenuitem></entry>
+              <entry><guimenuitem>Usa le clave &quot;Tab&quot; pro avantiar</guimenuitem></entry>
 
               <entry>Pone le clave de validation del segmento a <guimenuitem>Tab</guimenuitem> in loco del base prefixate <guimenuitem>Enter</guimenuitem>. Iste option es utile pro alicun systemas de inscription de character: chinese, japonese o coreano.</entry>
             </row>
@@ -673,19 +673,19 @@
             </row>
 
             <row>
-              <entry><guimenuitem>TransTips</guimenuitem></entry>
+              <entry><guimenuitem>Avisos (Tra&amp;nsTips)</guimenuitem></entry>
 
               <entry>Permitte te de activar/disactivar le characteristica <emphasis>TransTips </emphasis>e fixar su option<emphasis> Concordantia Exacte.</emphasis> Con <emphasis>TransTips</emphasis> activate un clic dextre sur un parola marcate in le fonte aperira un menu con le entratas del glossario por le parola que tu ha cliccate. Tu pote alora cliccar sur le traduction ideal pro inserer lo in le segmento final al position actual. Con <emphasis>TransTips/Concordantia Exacte </emphasis> marcate, sol parolas complete essera verificate, alteremente essera anque concordate partes del parolas.</entry>
             </row>
 
             <row>
-              <entry><guimenuitem>Typo del character...</guimenuitem></entry>
+              <entry><guimenuitem>F&amp;ont...</guimenuitem></entry>
 
               <entry>Monstra le fenestra de dialogo pro modificar le typo del character del texto monstrate. Le usatores de computatores vetule qui senti que le dimensionamento del fenestra es multo lente pote probar a  cambiar le typo de character. Vide le preparationes del typo del character in <link linkend="chapter.misc">Miscellanea</link></entry>
             </row>
 
             <row>
-              <entry><guimenuitem>Filtros del File...</guimenuitem></entry>
+              <entry><guimenuitem>Filtros de File...</guimenuitem></entry>
 
               <entry>Monstra le fenestra de dialogo <link linkend="chapter.file.filters">Filtros de file</link> pro configurar de tractamento e le analyse del file.</entry>
             </row>
@@ -715,7 +715,7 @@
             </row>
 
             <row>
-              <entry><guimenuitem>Equipa... </guimenuitem></entry>
+              <entry><guimenuitem>Equipa...</guimenuitem></entry>
 
               <entry>Inscribe ci tu nomine e illo essera alligate a omne le segmentos que tu rendera.</entry>
             </row>
@@ -796,7 +796,7 @@
 
     <itemizedlist>
       <listitem>
-        <para>Gestion del projecto </para>
+        <para>Gestion del projecto</para>
       </listitem>
     </itemizedlist>
 
@@ -827,7 +827,7 @@
     <section>
       <title id="keyboard.project.management"><indexterm class="singular">
           <primary>Vias breve del Claviero</primary> <secondary>Projecto</secondary>
-        </indexterm>Gestion del projecto <indexterm class="singular">
+        </indexterm>Gestion del projecto<indexterm class="singular">
           <primary>Projecto</primary> <secondary>Vias breve de gestion del Projecto</secondary>
         </indexterm></title>
 

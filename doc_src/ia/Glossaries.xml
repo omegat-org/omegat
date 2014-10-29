@@ -66,7 +66,7 @@
   <section>
     <title><indexterm class="singular">
         <primary>Glossarios</primary> <secondary>Formato del file</secondary>
-      </indexterm>Formato del File <indexterm class="singular">
+      </indexterm>Formato del File<indexterm class="singular">
         <primary>Files del Projecto</primary> <secondary>Files del usator</secondary> <seealso>Glossarios</seealso>
       </indexterm></title>
 
@@ -104,7 +104,7 @@
 
     <para><indexterm class="singular">
         <primary>Glossarios</primary> <secondary>Ubication del file glossario scribibile</secondary>
-      </indexterm>Le ubication del file glossario scribibile pote esser fixate in le fenestra de dialogo <guimenuitem>Projecto &gt; Proprietates ... </guimenuitem>. Le extensiones admittite son <filename>TXT</filename> e <filename>UTF8</filename> </para>
+      </indexterm>Le ubication del file glossario scribibile pote esser fixate in le fenestra de dialogo <guimenuitem>Projecto &gt; Proprietates ... </guimenuitem>. Le extensiones admittite son <filename>TXT</filename> e <filename>UTF8</filename></para>
 
     <para><emphasis role="bold">Nota: </emphasis>naturalmente il habe altere manieras e medios pro crear un simplice file con entratas delimitate per tabulation. Nihil a dicer contra le uso de Notepad++ sur Windows, GEdit sur Linux per exemplo o alicun programma de folio de calculo (per exemplo OpenOffice Calc) pro iste proposito: omne application, que pote tractar UTF8 e que pote monstrar spatio blanc (de maniera que tu non perde le character <keycap>TAB</keycap> ) pote esser utilisate.</para>
   </section>
@@ -120,7 +120,7 @@
   <section>
     <title><indexterm class="singular">
         <primary>Glossarios</primary> <secondary>Problemas con le glossarios</secondary>
-      </indexterm>Problemas commun al glossario </title>
+      </indexterm>Problemas commun al glossario</title>
 
     <para><emphasis role="bold">Problema: Nulle terminos del glossario es exponite - causas possibile:</emphasis></para>
 

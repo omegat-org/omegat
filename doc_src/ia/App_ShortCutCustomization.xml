@@ -91,7 +91,7 @@
           <row><entry>Claude</entry><entry><keycap>Ctrl+Shift+W</keycap></entry><entry>projectCloseMenuItem</entry></row>
           <row><entry>Salva</entry><entry><keycap>Ctrl+S</keycap></entry><entry>projectSaveMenuItem</entry></row>
           <row><entry>Crear le documentos rendite</entry><entry><keycap>Ctrl+D</keycap></entry><entry>projectCompileMenuItem</entry></row>
-          <row><entry>Crea le Documentos Rendite Actual</entry><entry><keycap>Shift+Ctrl+D</keycap></entry><entry>projectSingleCompileMenuItem</entry></row>
+          <row><entry>Crea le Documentos Actual Rendite</entry><entry><keycap>Shift+Ctrl+D</keycap></entry><entry>projectSingleCompileMenuItem</entry></row>
           <row><entry>Proprietates...</entry><entry><keycap>Ctrl+E</keycap></entry><entry>projectEditMenuItem</entry></row>
           <row><entry>Files del projecto ...</entry><entry><keycap>Ctrl+L</keycap></entry><entry>viewFileListMenuItem</entry></row>
           <row><entry>Quita</entry><entry><keycap>Ctrl+Q</keycap></entry><entry>projectExitMenuItem</entry></row>
@@ -122,13 +122,13 @@
           <row><entry>Reim&amp;placia con fonte</entry><entry><keycap>Shift+Ctrl+R</keycap></entry><entry>editOverwriteSourceMenuItem</entry></row>
           <row><entry>I&amp;nsere fonte</entry><entry><keycap>Shift+Ctrl+I</keycap></entry><entry>editInsertSourceMenuItem</entry></row>
           <row><entry>Insere le fonte e les tags</entry><entry><keycap>Shift+Ctrl+T</keycap></entry><entry>editTagPainterMenuItem</entry></row>
-          <row><entry>Insere le proxime tag mancante</entry><entry><keycap>Ctrl +T</keycap></entry><entry>editTagNextMissedMenuItem</entry></row>
+          <row><entry>Insere le Tag Mancante Sequente</entry><entry><keycap>Ctrl +T</keycap></entry><entry>editTagNextMissedMenuItem</entry></row>
           <row><entry>Exporta le selection</entry><entry><keycap>Shift Ctrl+C</keycap></entry><entry>editExportSelectionMenuItem</entry></row>
           <row><entry>Crea un entrata del glossario</entry><entry><keycap>Shift Ctrl G</keycap></entry><entry>editCreateGlossaryEntryMenuItem</entry></row>
           <row><entry>Recerca le projecto...</entry><entry><keycap>Ctrl F</keycap></entry><entry>editFindInProjectMenuItem</entry></row>
-          <row><entry>Cerca e replacia...</entry><entry><keycap>Ctrl+K</keycap></entry><entry>editReplaceInProjectMenuItem</entry></row>
-          <row><entry>Selige le concordantia previe</entry><entry><keycap>Ctrl+↑</keycap></entry><entry>editSelectFuzzyPrevMenuItem</entry></row>
-          <row><entry>Selige le concordantia sequente</entry><entry><keycap>Ctrl+↓</keycap></entry><entry>editSelectFuzzyNextMenuItem</entry></row>
+          <row><entry>Cerca e Replacia...</entry><entry><keycap>Ctrl+K</keycap></entry><entry>editReplaceInProjectMenuItem</entry></row>
+          <row><entry>Selige le Concordantia Previe</entry><entry><keycap>Ctrl+↑</keycap></entry><entry>editSelectFuzzyPrevMenuItem</entry></row>
+          <row><entry>Selige le Concordantia Sequente</entry><entry><keycap>Ctrl+↓</keycap></entry><entry>editSelectFuzzyNextMenuItem</entry></row>
           <row><entry>Selige le concordantia partial 1</entry><entry><keycap>Ctrl+1</keycap></entry><entry>editSelectFuzzy1MenuItem</entry></row>
           <row><entry>Selige le concordantia partial 2</entry><entry><keycap>Ctrl+2</keycap></entry><entry>editSelectFuzzy2MenuItem</entry></row>
           <row><entry>Selige le concordantia partial 3</entry><entry><keycap>Ctrl+3</keycap></entry><entry>editSelectFuzzy3MenuItem</entry></row>
@@ -163,11 +163,11 @@
         <tbody>
           <row><entry>Al Segmento sequente Non Rendite</entry><entry><keycap>Ctrl+U</keycap></entry><entry>gotoNextUntranslatedMenuItem</entry></row>
           <row><entry>Segmento Sequente Rendite</entry><entry><keycap>Shift+Ctrl+U</keycap></entry><entry>gotoNextTranslatedMenuItem</entry></row>
-          <row><entry>Al Segmento Sequente</entry><entry><keycap> Ctrl N </keycap> o <keycap>Enter</keycap>o <keycap> Tab</keycap> </entry><entry>gotoNextSegmentMenuItem</entry></row>
+          <row><entry>Al Segmento Sequente</entry><entry><keycap> Ctrl N </keycap> o <keycap>Enter</keycap>o <keycap> Tab</keycap></entry><entry>gotoNextSegmentMenuItem</entry></row>
           <row><entry>A le previe segmento</entry><entry><keycap>Ctrl+P</keycap> or <keycap>Ctrl+Enter</keycap> or <keycap>Ctrl+Tab</keycap></entry><entry>gotoPreviousSegmentMenuItem</entry></row>
           <row><entry>A le segmento numero ...</entry><entry><keycap>Ctrl+J</keycap></entry><entry>gotoSegmentMenuItem</entry></row>
           <row><entry>N&amp;ota sequente</entry><entry/><entry>gotoNextNoteMenuItem</entry></row>
-          <row><entry>Nota previe</entry><entry/><entry>gotoPreviousNoteMenuItem</entry></row>
+          <row><entry>Nota Previe</entry><entry/><entry>gotoPreviousNoteMenuItem</entry></row>
           <row><entry>Avante in chronologia...</entry><entry><keycap>Ctrl+Shift+N</keycap></entry><entry>gotoHistoryForwardMenuItem</entry></row>
           <row><entry>Retro in chronologia...</entry><entry><keycap>Ctrl+Shift+P</keycap></entry><entry>gotoHistoryBackMenuItem</entry></row>
         </tbody>
@@ -193,14 +193,14 @@
         </thead>
 
         <tbody>
-          <row><entry>Marca le segmentos Traducite</entry><entry/><entry>viewMarkTranslatedSegmentsCheckBoxMenuItem</entry></row>
-          <row><entry>Marca le Segmentos Non Rendite</entry><entry/><entry>viewMarkUntranslatedSegmentsCheckBoxMenuItem</entry></row>
-          <row><entry>Monstra le Segmentos Fonte</entry><entry/><entry>viewDisplaySegmentSourceCheckBoxMenuItem</entry></row>
+          <row><entry>Marca le Segmentos Rendite</entry><entry/><entry>viewMarkTranslatedSegmentsCheckBoxMenuItem</entry></row>
+          <row><entry>Marca segmentos non rendite</entry><entry/><entry>viewMarkUntranslatedSegmentsCheckBoxMenuItem</entry></row>
+          <row><entry>Monstra le Segmentos Fte</entry><entry/><entry>viewDisplaySegmentSourceCheckBoxMenuItem</entry></row>
           <row><entry>Marca le Segmentos Non Unic</entry><entry/><entry>viewMarkNonUniqueSegmentsCheckBoxMenuItem</entry></row>
           <row><entry>Marca le Segmentos con Notas</entry><entry/><entry>viewMarkNotedSegmentsCheckBoxMenuItem</entry></row>
           <row><entry>Marca le Spatios Non-frangibile</entry><entry/><entry>viewMarkNBSPCheckBoxMenuItem</entry></row>
-          <row><entry>Marca le Spatio blanc</entry><entry/><entry>viewMarkWhitespaceCheckBoxMenuItem</entry></row>
-          <row><entry>Marca le Algorithmo Bidirectional de Controlo Characteres</entry><entry/><entry>viewMarkBidiCheckBoxMenuItem</entry></row>
+          <row><entry>Marca (&amp;k) un Spatio blanc</entry><entry/><entry>viewMarkWhitespaceCheckBoxMenuItem</entry></row>
+          <row><entry>Marca algorithmo &amp;Bidirectional de controlo characteres</entry><entry/><entry>viewMarkBidiCheckBoxMenuItem</entry></row>
           
           <row><entry>Modification Info/Displica Necun</entry><entry/><entry>viewDisplayModificationInfoNoneRadioButtonMenuItem</entry></row>
           <row><entry>Modification Info/Displica Seligite</entry><entry/><entry>viewDisplayModificationInfoSelectedRadioButtonMenuItem</entry></row>
@@ -248,7 +248,7 @@
         </thead>
 
         <tbody>
-          <row><entry>Usa le clave pro avantiar</entry><entry/><entry>optionsTabAdvanceCheckBoxMenuItem</entry></row>
+          <row><entry>Usa le clave &quot;Tab&quot; pro avantiar</entry><entry/><entry>optionsTabAdvanceCheckBoxMenuItem</entry></row>
           <row><entry>Confirma semper le cessation</entry><entry/><entry>optionsAlwaysConfirmQuitCheckBoxMenuItem</entry></row>
           <row><entry>Traduction automatic</entry><entry/><entry/></row>
           <row><entry>TransTips/Enable Transtips</entry><entry/><entry>optionsTransTipsEnableMenuItem</entry></row>
@@ -256,13 +256,13 @@
           <row><entry>Auto-completamento/Glossario...</entry><entry/><entry>optionsAutoCompleteGlossaryMenuItem</entry></row>
           <row><entry>Auto-completion/Auto-text...</entry><entry/><entry>optionsAutoCompleteAutoTextMenuItem</entry></row>
           <row><entry>Auto-completion/Character Table...</entry><entry/><entry>optionsAutoCompleteCharTableMenuItem</entry></row>
-          <row><entry>Typo del character...</entry><entry/><entry>optionsFontSelectionMenuItem</entry></row>
-          <row><entry>Filtros del File...</entry><entry/><entry>optionsSetupFileFiltersMenuItem</entry></row>
+          <row><entry>F&amp;ont...</entry><entry/><entry>optionsFontSelectionMenuItem</entry></row>
+          <row><entry>Filtros de File...</entry><entry/><entry>optionsSetupFileFiltersMenuItem</entry></row>
           <row><entry>Segmentation...</entry><entry/><entry>optionsSentsegMenuItem</entry></row>
           <row><entry>Controlo orthographic...</entry><entry/><entry>optionsSpellCheckMenuItem</entry></row>
           <row><entry>Comportamento del editor</entry><entry/><entry>optionsWorkflowMenuItem</entry></row>
           <row><entry>Validation del tags...</entry><entry/><entry>optionsTagValidationMenuItem</entry></row>
-          <row><entry>Equipa... </entry><entry/><entry>optionsTeamMenuItem</entry></row>
+          <row><entry>Equipa...</entry><entry/><entry>optionsTeamMenuItem</entry></row>
           <row><entry>TMXs externe...</entry><entry/><entry>optionsExtTMXMenuItem</entry></row>
           <row><entry>Vista...</entry><entry/><entry>optionsViewOptionsMenuItem</entry></row>
           <row><entry>Salvamento e Output...</entry><entry/><entry>optionsSaveOptionsMenuItem</entry></row>
@@ -290,7 +290,7 @@
           <row><entry>Manual del Usator...</entry><entry><keycap>F1</keycap></entry><entry>helpContentsMenuItem</entry></row>
           <row><entry>Circa...</entry><entry/><entry>helpAboutMenuItem</entry></row>
           <row><entry>Last Changes...</entry><entry/><entry>helpLastChangesMenuItem</entry></row>
-          <row><entry>Registration...</entry><entry/><entry>helpLogMenuItem</entry></row>
+          <row><entry>Log...</entry><entry/><entry>helpLogMenuItem</entry></row>
         </tbody>
       </tgroup>
     </table>

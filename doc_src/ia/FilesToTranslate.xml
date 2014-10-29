@@ -75,7 +75,7 @@
         </listitem>
       </itemizedlist>
 
-      <para>Altere typos de file in formato texto simple pote esser tractate per <application>OmegaT</application> con lor extension associate al typo de file supportate (exempli gratia, le files .pod pote esser associate al filtro de texto ASCII) e con lor pre-processo per regulas de segmentation specific. </para>
+      <para>Altere typos de file in formato texto simple pote esser tractate per <application>OmegaT</application> con lor extension associate al typo de file supportate (exempli gratia, le files .pod pote esser associate al filtro de texto ASCII) e con lor pre-processo per regulas de segmentation specific.</para>
 
       <para>Le files PO<indexterm class="singular">
           <primary>Files fonte</primary> <secondary>PO como files bilingue</secondary>
@@ -103,7 +103,7 @@
           </listitem>
         </itemizedlist><itemizedlist>
           <listitem>
-            <para>(X)HTML (*.html, *.xhtml,*.xht)</para>
+            <para>- (X)HTML (*.html, *.xhtml,*.xht)</para>
           </listitem>
         </itemizedlist><itemizedlist>
           <listitem>
@@ -119,11 +119,11 @@
           </listitem>
         </itemizedlist><itemizedlist>
           <listitem>
-            <para>QuarkXPress CopyFlowGold (*.tag, *.xtg)</para>
+            <para>- QuarkXPress CopyFlowGold (*.tag, *.xtg)</para>
           </listitem>
         </itemizedlist><itemizedlist>
           <listitem>
-            <para>Files ResX (*.resx)</para>
+            <para>- Files ResX (*.resx)</para>
           </listitem>
         </itemizedlist><itemizedlist>
           <listitem>
@@ -131,15 +131,15 @@
           </listitem>
         </itemizedlist><itemizedlist>
           <listitem>
-            <para>LaTex (*.tex, *.latex)</para>
+            <para>- LaTex (*.tex, *.latex)</para>
           </listitem>
 
           <listitem>
-            <para>Files de Adjuta (*.xml) e Manual (*.hmxp)</para>
+            <para>Files Help (*.xml) e Manual (*.hmxp)</para>
           </listitem>
 
           <listitem>
-            <para>LocManager Typo3 (*.xml)</para>
+            <para>Typo3 LocManager (*.xml)</para>
           </listitem>
         </itemizedlist><itemizedlist>
           <listitem>
@@ -151,7 +151,7 @@
           </listitem>
 
           <listitem>
-            <para>Exportation Flash XML (*.xml)</para>
+            <para>exportation Flash XML (*.xml)</para>
           </listitem>
 
           <listitem>

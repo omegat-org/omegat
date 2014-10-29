@@ -206,7 +206,7 @@
       </listitem>
 
       <listitem>
-        <para>Presta cura particular al cambios al files in  le plica <literal>/source</literal> durante que es in le medio de un projecto. Si le file fonte es modificate postquam tu ha initiate a render, <application>OmegaT</application> pote esser incapace a trovar un segmento que tu jam habeva rendite.</para>
+        <para>Presta cura particular al cambios al files in  le plica <literal>/source</literal> si tu es in le medio de un projecto. Si le file fonte es modificate postquam tu ha initiate a render, <application>OmegaT</application> pote esser incapace a trovar un segmento que tu jam habeva rendite.</para>
       </listitem>
     </itemizedlist>
 

@@ -55,14 +55,14 @@
         <varlistentry>
           <term>plica <filename><indexterm class="singular">
               <primary>Memorias de traduction</primary> <secondary>Sub-plica tm</secondary> <seealso>Files del projecto </seealso>
-            </indexterm>tm</filename> </term>
+            </indexterm>tm</filename></term>
 
           <listitem>
             <para>Le plica /tm/ pote continer qualcunque numero de  memorias de traduction auxiliar - id es files tmx. On pote crear tal files in qualcunque del tres varietates ante indicate. Nota que altere instrumentos CAT pote exportar (e importar) files tmx, habitualmente in omne le tres formas. Le melior cosa naturalmente es usar files TMX specific pro OmegaT (vide supra), de maniera que le es retenite le formato intra le segmento.</para>
 
             <para>Le contentos del memorias de traduction in le sub plica tm serve a generar suggestiones pro le texto(s) a traducer. Omne le textos, jam rendite e registrate in ille files, apparera inter le concordantias partial, si illo es satis simile al texto actualmente a render.</para>
 
-            <para>Si le segmento original in uno del TMs auxiliar es identic al texto a render, OmegaT age ut definite in le fenestra de dialogo <menuchoice> <guimenu>Optiones</guimenu> <guimenuitem>Comportamento del Modifica...</guimenuitem> </menuchoice> . Per exemplo (si le preparation base es acceptate), le traduction ex le TM auxiliar es acceptate e prefixate con<emphasis> [fuzzy]</emphasis>, de maniera que le traductor pote revider le traductiones in un grado sequente e controlar si le segmentos etiquettate in iste modo, esseva rendite correctemente (Vide le capitulo <link linkend="chapter.translation.editing">Comportamento del Modifica</link>)<menuchoice> <guimenu>.</guimenu> </menuchoice> </para>
+            <para>Si le segmento original in uno del TMs auxiliar es identic al texto a render, OmegaT age ut definite in le fenestra de dialogo <menuchoice> <guimenu>Optiones</guimenu> <guimenuitem>Comportamento del Modifica...</guimenuitem> </menuchoice> . Per exemplo (si le preparation base es acceptate), le traduction ex le TM auxiliar es acceptate e prefixate con<emphasis> [fuzzy]</emphasis>, de maniera que le traductor pote revider le traductiones in un grado sequente e controlar si le segmentos etiquettate in iste modo, esseva rendite correctemente (Vide le capitulo <link linkend="chapter.translation.editing">Comportamento del Modifica</link>)<menuchoice> <guimenu>.</guimenu> </menuchoice></para>
 
             <para>Il pote occurrer, que memorias de traduction, disponibile in le sub-classificator <filename>tm</filename>, contine segmentos con texto primari identic, ma textos final differente. Le files TMX es legite un linea al vice, ordinate secundo lor nomines e segmentos, intra un file TMX date. Assi prevalera le ultime segmento con le identic texto fonte (Note: naturalmente ha plus senso evitar que isto occurre in le prime posto).</para>
 
@@ -109,7 +109,7 @@
     </section>
 
     <section id="tmx.backup">
-      <title>copia de reserva del tmx <indexterm class="singular">
+      <title>copia de reserva del tmx<indexterm class="singular">
           <primary>Memorias de traduction</primary> <secondary>Copia de reserva</secondary>
         </indexterm></title>
 
@@ -129,7 +129,7 @@
         </listitem>
 
         <listitem>
-          <para>Selige le copia de reserva del memoria de traduction que es le plus probabile a continer le data pro le qual tu quere - per exemplo le plus recente, o le ultime version ex le die precedente </para>
+          <para>Selige le copia de reserva del memoria de traduction que es le plus probabile a continer le data pro le qual tu quere - per exemplo le plus recente, o le ultime version ex le die precedente</para>
         </listitem>
 
         <listitem>
@@ -169,7 +169,7 @@
     </section>
 
     <section>
-      <title>Segmentos orphano<indexterm class="singular">
+      <title>Segmentos orphane<indexterm class="singular">
           <primary>Memorias de traduction</primary> <secondary>Segmentos orphane</secondary>
         </indexterm></title>
 
@@ -221,7 +221,7 @@
 
       <para>Qualque applicationes son note producer files tmx invalide sub certe conditiones. Si tu desira usar tal files como traductiones de referentia in OmegaT, illos debe esser reparate, o OmegaT reportara un error e fallera a cargar los. Le reparationes son operationes trivial e OmegaT assiste le chassa al defecto con le message de error message pertinente. Tu pote demandar al Gruppo del usator pro le consilio si tu ha problemas.</para>
 
-      <para>OmegaT exporta files TMX version 1.4 (ambe nivello 1 e nivello 2). Le exportation nivello 2 non es plenmente conforme con le standard nivello 2, ma es satis prope e generara concordantias correcte in altere applicationes memoria de traduction que supporta le TMX nivello 2. Si tu necessita solmente information textual (e non information de formattation), usa le file nivello 1 que OmegaT ha create.</para>
+      <para>OmegaT exporta files TMX version 1.4 (ambe nivello 1 e nivello 2). Le exportation nivello 2 non es plenmente conforme con le standard nivello 2, ma es satis prope e generara concordantias correcte in altere applicationes memoria de traduction que supporta le TMX nivello 1. Si tu necessita solmente information textual (e non information de formattation), usa le file nivello 2 que OmegaT ha create.</para>
     </section>
 
     <section id="Creating.a.translation.memory.for.selected.documents">

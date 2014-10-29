@@ -39,11 +39,11 @@
     <section>
       <title>Ubication del recerca</title>
 
-      <para>Le recercas son effectuate per arrangiamento initial in ambe le sectiones fonte e de destination del projecto, sed tu pote can limitar tu recerca al texto fonte sol o al texto de destination. Tu pote cercar in</para>
+      <para>Le recercas son effectuate per arrangiamento initial in ambe le sectiones fonte e de destination del projecto, sed tu pote limitar tu recerca al texto fonte sol o al texto de destination. Tu pote cercar in</para>
 
       <itemizedlist>
         <listitem>
-          <para>le projecto solmente (preparation prefixate initial)</para>
+          <para>le projecto solmente (prefixate)</para>
         </listitem>
       </itemizedlist>
 
@@ -59,7 +59,7 @@
         </listitem>
       </itemizedlist>
 
-      <para>Quando tu cerca per le files (al contrario al memorias de traduction), <application>OmegaT</application> restringe le recerca al files in le formatos del file fonte. Per consequentia, ben que OmegaT is bastante capace a tractar files <filename> tmx</filename>, illo non include los in le Files a perquirer del recerca. Si tu activa le <emphasis role="bold"><indexterm class="singular">
+      <para>Quando tu cerca in le files (al contrario del memorias de traduction), <application>OmegaT</application> restringe le recerca al files in le formatos del file fonte. Per consequentia, ben que OmegaT is bastante capace a tractar files <filename> tmx</filename>, illo non include los in le Files a perquirer del recerca. Si tu activa le <emphasis role="bold"><indexterm class="singular">
           <primary>Recercas</primary> <secondary>Optiones Avantiate</secondary>
         </indexterm>Optiones Avantiate</emphasis>, tu pote combinar le recerca con le nomine del autor del traduction e le tempore del ultime cambio facite.</para>
     </section>
@@ -84,7 +84,7 @@
       </listitem>
     </itemizedlist>
 
-    <para>Le concordantias essera marcate in azur hardite. Nota que '*' e '?' ha significato special in le expressiones regular, assi le recerca con carta salvage, ut describite ci, refere se al exacte e recerca parola clave solmente (vide in sequito).</para>
+    <para>Le concordantias essera marcate in azur hardite. Nota que '*' e '?' ha significato special in le expressiones regular, assi le recerca con character generic, ut describite ci, refere se al cerca exacte e cerca per parola clave solmente (vide in sequito).</para>
   </section>
 
   <section id="search.methoids">
@@ -96,7 +96,7 @@
 
     <variablelist>
       <varlistentry>
-        <term>Cerca Exacte</term>
+        <term>Cerca &amp;Exacte</term>
 
         <listitem>
           <para>Recerca pro le segmentos continente le linea de character exacte que tu ha specificate. Un recerca exacte quere pro un phrase, id es si plure parolas son entrate, illos son trovate solmente si illos occurre in justo celle sequentia. Usante le recerca per parola clave con <literal>open file</literal> trovara assi omne occurrentias del linea de character  <emphasis><literal>open file</literal></emphasis> ma non <emphasis><literal>file opened</literal></emphasis> o <emphasis><literal>open input file</literal></emphasis>.</para>
@@ -104,7 +104,7 @@
       </varlistentry>
 
       <varlistentry>
-        <term>recerca parola clave </term>
+        <term>recerca per parola clave</term>
 
         <listitem>
           <para>Cerca pro le segmentos continente omne le parolas clave tu specificava, in omne positura. Selige &quot;recerca parola clave&quot; per perquirer pro omne numero de individual parolas complete, in omne ordine. OmegaT monstra un lista de omne segmentos continente tote le parolas specificate. Recercas per parola clave es simile a un recerca &quot;con omne le  parolas&quot; in un motor de recerca Interrete como Google  (AND logic). Usante le recerca per parola clave con <emphasis><literal>open file</literal></emphasis> trovara assi omne occurrentias del linea de character <emphasis><literal>open file</literal>,</emphasis> assi como <emphasis><literal>file opened</literal>, <literal>open input file</literal>, <literal>file may not be safe to open</literal></emphasis>, et cetera.</para>

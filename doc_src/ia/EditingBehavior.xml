@@ -34,7 +34,7 @@
     </varlistentry>
 
     <varlistentry>
-      <term>Lassa le segmento vacue<indexterm class="singular">
+      <term>&amp;Lassa le segmento vacue<indexterm class="singular">
           <primary>Menu Optiones</primary> <secondary>Comportamento del Modifica</secondary> <tertiary>Traduction vacue</tertiary>
         </indexterm></term>
 
@@ -58,7 +58,7 @@
 
   <variablelist>
     <varlistentry>
-      <term>Tenta de converter le numeros quando insere un concordantia confuse<indexterm class="singular">
+      <term>Tenta de converter le numeros quando insere un concordantia partial<indexterm class="singular">
           <primary>Menu Optiones</primary> <secondary>Comportamento del Modifica</secondary> <tertiary>Convertimento del numeros</tertiary>
         </indexterm></term>
 

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
 <chapter id="chapter.spellchecker">
-  <title>Corrector orthographic <indexterm class="singular">
-      <primary>Corrector orthographic </primary>
+  <title>Corrector orthographic<indexterm class="singular">
+      <primary>Corrector orthographic</primary>
     </indexterm></title>
 
   <para>OmegaT include un corrector orthographic basate super le corrector orthographic usate in OpenOffice.org, Firefox e Thunderbird. Illo ergo es habile a usar le enorme extension de dictionarios orthographic gratuite disponibile pro iste applicationes.</para>

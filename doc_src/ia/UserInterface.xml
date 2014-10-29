@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
 <chapter id="chapter.user.interface">
-  <title>Le interfacie del usator </title>
+  <title>Le interfacie del usator</title>
 
   <section id="user.interface.items">
     <title>La fenestra principal de OmegaT, altere fenestras e fenestras de dialogo</title>

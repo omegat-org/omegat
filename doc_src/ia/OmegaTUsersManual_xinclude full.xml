@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
-<book lang="ia">
+<book lang="en">
   <bookinfo>
     <title>OmegaT - Guida del usator</title>
 
     <authorinitials>per</authorinitials>
 
     <author>
-      <firstname>Vito Smolej (rendite in Interlingua per Carmelo Serraino in martio 2014)</firstname>
+      <firstname>Vito Smolej (rendite in Interlingua per Carmelo Serraino in octobre 2014)</firstname>
     </author>
 
     <pubdate/>

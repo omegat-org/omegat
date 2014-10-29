@@ -22,7 +22,7 @@
       <colspec align="left" colnum="3"/>
       <thead>
         <row>
-          <entry align="left">Nomine del lingua </entry>
+          <entry align="left">Nomine del lingua</entry>
           <entry align="left">ISO 639-1</entry>
           <entry align="left">ISO 639-2</entry>
 	</row>
@@ -230,7 +230,7 @@
 	</row>
         <row>
 	  <entry>Anglese</entry>
-	  <entry>ia</entry>
+	  <entry>en</entry>
 	  <entry>eng</entry>
 	</row>
         <row>
@@ -264,7 +264,7 @@
 	  <entry>fin</entry>
 	</row>
         <row>
-	  <entry>Francese </entry>
+	  <entry>Francese</entry>
 	  <entry>fr</entry>
 	  <entry>fra</entry>
 	</row>

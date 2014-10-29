@@ -4,7 +4,7 @@
   <title>Installar e executar <application>OmegaT</application></title>
 
   <section>
-    <title id="Windows.users">Usatores de Windows <indexterm class="singular">
+    <title id="Windows.users">Usatores de Windows<indexterm class="singular">
         <primary>Installar OmegaT</primary> <secondary>Windows</secondary>
       </indexterm></title>
 
@@ -67,7 +67,7 @@
 
       <itemizedlist>
         <listitem>
-          <para><emphasis role="bold">Installa in un plica nove. </emphasis>Isto habilitara te a retener ambe versiones uno al latere del altere, le qual tu potera desirar facer usque tu sentira te confortabile con le nove version. Iste methodo usara alsi le preferentias e le preparationes que tu ha facite inter OmegaT. In iste caso, comocunque:</para>
+          <para><emphasis role="bold">Installar in un classificator nove. </emphasis>Isto habilitara te a retener ambe versiones uno al latere del altere, le qual tu potera desirar facer usque tu sentira te confortabile con le nove version. Iste methodo usara alsi le preferentias e le preparationes que tu ha facite inter OmegaT. In iste caso, comocunque:</para>
 
           <itemizedlist>
             <listitem>
@@ -86,7 +86,7 @@
   </section>
 
   <section id="Linux.Intel.users">
-    <title>Usatores de Linux (Intel) <indexterm class="singular">
+    <title>Usatores de Linux (Intel)<indexterm class="singular">
         <primary>Installar OmegaT</primary> <secondary>Linux</secondary>
       </indexterm></title>
 
@@ -120,7 +120,7 @@
       <title>Adder <application>OmegaT</application> al menus (KDE) o al pannellos (Gnome)</title>
 
       <section id="KDE.users">
-        <title>Usatores de KDE 4 <indexterm class="singular">
+        <title>Usatores de KDE 4<indexterm class="singular">
             <primary>Personalisar OmegaT</primary> <secondary>Linux</secondary>
           </indexterm></title>
 
@@ -555,7 +555,7 @@
 
             <itemizedlist>
               <listitem>
-                <para><emphasis><literal>.*\.html</literal></emphasis></para>
+                <para><emphasis><literal>&lt;html&gt;</literal></emphasis></para>
 
                 <para>Omne le files HTML essera traducite - Nota que le periodo in le *.html usual debe esser escappate (\.) assi como specificate ab le regulas pro le expressiones regular.</para>
               </listitem>
@@ -581,7 +581,7 @@
 
             <itemizedlist>
               <listitem>
-                <para><emphasis><literal>.*\.html</literal></emphasis></para>
+                <para><emphasis><literal>&lt;html&gt;</literal></emphasis></para>
 
                 <para>Omne le files HTML essera traducite - Nota que le periodo in le *.html usual debe esser escappate (\.) assi como specificate ab le regulas pro le expressiones regular.</para>
               </listitem>

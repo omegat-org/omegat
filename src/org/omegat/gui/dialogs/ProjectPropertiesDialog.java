@@ -740,7 +740,11 @@ public class ProjectPropertiesDialog extends JDialog {
                         SRX.getDefault(), Preferences.getSRX(), srx);
                 segmentationCustomizer.setVisible(true);
                 if (segmentationCustomizer.getReturnStatus() == SegmentationCustomizer.RET_OK) {
-                    srx = segmentationCustomizer.getSRX();
+                    if (segmentationCustomizer.isProjectSpecific()) {
+                        srx = segmentationCustomizer.getSRX();
+                    } else {
+                        srx = null;
+                    }
                 }
             }
         });

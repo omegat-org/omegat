@@ -160,6 +160,10 @@ public class SegmentationCustomizer extends JDialog implements ListSelectionList
         return editableSRX;
     }
 
+    public boolean isProjectSpecific() {
+        return projectSpecificCB.isSelected();
+    }
+
     protected void setEditableSRX(SRX srx) {
         editableSRX = srx.clone();
         MappingRulesModel model = new MappingRulesModel(editableSRX);

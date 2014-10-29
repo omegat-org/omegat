@@ -30,6 +30,7 @@
  */
 package org.omegat.gui.search;
 
+import org.omegat.gui.common.OmegaTIcons;
 import org.omegat.util.OStrings;
 
 /**
@@ -44,6 +45,7 @@ public class SearchWindowForm extends javax.swing.JFrame {
      * Creates new form SearchWindowForm
      */
     public SearchWindowForm() {
+        OmegaTIcons.setIconImages(this);
         initComponents();
     }
 

@@ -76,6 +76,7 @@ import javax.swing.text.Highlighter.HighlightPainter;
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
 import org.omegat.core.events.IApplicationEventListener;
+import org.omegat.gui.common.OmegaTIcons;
 import org.omegat.gui.editor.mark.Mark;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
@@ -133,6 +134,8 @@ public class ScriptingWindow extends JFrame {
 
     public ScriptingWindow() {
         setTitle(OStrings.getString("SCW_TITLE"));
+
+        OmegaTIcons.setIconImages(this);
 
         StaticUIUtils.setEscapeClosable(this);
 

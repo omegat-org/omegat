@@ -59,6 +59,7 @@ import org.omegat.core.data.ExternalTMX;
 import org.omegat.core.events.IApplicationEventListener;
 import org.omegat.core.events.IProjectEventListener;
 import org.omegat.core.matching.NearString;
+import org.omegat.gui.common.OmegaTIcons;
 import org.omegat.gui.filelist.ProjectFilesListController;
 import org.omegat.gui.search.SearchWindowController;
 import org.omegat.util.LFileCopy;
@@ -145,12 +146,7 @@ public class MainWindow extends JFrame implements IMainWindow {
 
         getContentPane().add(MainWindowUI.initDocking(this), BorderLayout.CENTER);
 
-        // set two icons, 16x16 and 32x32
-        final List<Image> icons = new ArrayList<Image>();
-        final String RESOURCES = "/org/omegat/gui/resources/";
-        icons.add(ResourcesUtil.getIcon(RESOURCES + "OmegaT_small.gif").getImage());
-        icons.add(ResourcesUtil.getIcon(RESOURCES + "OmegaT.gif").getImage());
-        setIconImages(icons);
+        OmegaTIcons.setIconImages(this);
 
         CoreEvents.registerProjectChangeListener(new IProjectEventListener() {
             public void onProjectChanged(PROJECT_CHANGE_TYPE eventType) {

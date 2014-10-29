@@ -30,7 +30,7 @@ import java.io.File;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
-
+import org.omegat.gui.common.OmegaTIcons;
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
@@ -60,8 +60,7 @@ public class OmegaTFileChooser extends JFileChooser {
         super(path);
         try {
             if (omegatIcon == null)
-                omegatIcon = new ImageIcon(getClass().getResource(
-                        "/org/omegat/gui/resources/OmegaT_small.gif"));
+                omegatIcon = new ImageIcon(OmegaTIcons.ICONS.get(0));
         } catch (Exception e) {
             // do nothing
         }

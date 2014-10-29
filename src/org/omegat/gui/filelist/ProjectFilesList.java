@@ -40,6 +40,7 @@ import javax.swing.ListSelectionModel;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.WindowConstants;
 import javax.swing.table.DefaultTableModel;
+import org.omegat.gui.common.OmegaTIcons;
 import org.omegat.util.OStrings;
 import org.openide.awt.Mnemonics;
 
@@ -52,6 +53,7 @@ public class ProjectFilesList extends javax.swing.JFrame {
      * Creates new form ProjectFilesList
      */
     public ProjectFilesList() {
+        OmegaTIcons.setIconImages(this);
         initComponents();
     }
 

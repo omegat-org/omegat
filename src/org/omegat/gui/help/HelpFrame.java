@@ -48,6 +48,7 @@ import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 import javax.swing.event.HyperlinkEvent;
 import javax.swing.event.HyperlinkListener;
+import org.omegat.gui.common.OmegaTIcons;
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
@@ -79,6 +80,8 @@ public class HelpFrame extends JFrame {
     /** Creates the Help Frame */
     private HelpFrame() {
         m_historyList = new ArrayList<URL>();
+
+        OmegaTIcons.setIconImages(this);
 
         // set window size & position
         initWindowLayout();

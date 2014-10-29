@@ -58,6 +58,7 @@ import org.omegat.core.events.IFontChangedEventListener;
 import org.omegat.core.tagvalidation.ErrorReport;
 import org.omegat.core.tagvalidation.ErrorReport.TagError;
 import org.omegat.gui.HListener;
+import org.omegat.gui.common.OmegaTIcons;
 import org.omegat.gui.main.MainWindow;
 import org.omegat.util.OStrings;
 import org.omegat.util.PatternConsts;
@@ -79,6 +80,8 @@ import org.openide.awt.Mnemonics;
 public class TagValidationFrame extends JFrame {
     public TagValidationFrame(MainWindow parent) {
         setTitle(OStrings.getString("TF_NOTICE_BAD_TAGS"));
+
+        OmegaTIcons.setIconImages(this);
 
         // set window size & position
         initWindowLayout();

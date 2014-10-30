@@ -306,10 +306,10 @@ public class GITRemoteRepository implements IRemoteRepository {
         boolean ok = true;
         Log.logInfoRB("GIT_START", "upload");
         try {
-            if (!isChanged(file)) {
-                Log.logInfoRB("GIT_FINISH", "upload(not changed)");
-                return;
-            }
+//            if (!isChanged(file)) {
+//                Log.logInfoRB("GIT_FINISH", "upload(not changed)");
+//                return;
+//            }
             String filePattern = FileUtil.computeRelativePath(repository.getWorkTree(), file);
             new Git(repository).add().addFilepattern(filePattern).call();
             new Git(repository).commit().setMessage(commitMessage).call();

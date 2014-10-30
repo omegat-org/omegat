@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 3.1.7 update 1
 ----------------------------------------------------------------------
-   4 Enhancements
+   5 Enhancements
    4 Bug fixes
    2 Localisation updates
 ----------------------------------------------------------------------
@@ -15,6 +15,9 @@
   Other enhancements:
 
   - It is now possible to customise colours used in the Fuzzy Matches pane  
+
+  - All OmegaT windows (Search and Scripting windows) now use the OmegaT icon 
+instead of the standard Java ones
 
   Bug fixes:
 

@@ -212,4 +212,7 @@ public class OConsts {
     public static final String REMOTE_SC_DICTIONARY_LIST_LOCATION = "http://download.services.openoffice.org/files/contrib/dictionaries/";
 
     public static final String segmentMarkerString = "<" + OStrings.getSegmentMarker() + ">";
+    
+    /** Max number of recent projects to remember */
+    public static final int MAX_RECENT_PROJECTS = 5;
 }

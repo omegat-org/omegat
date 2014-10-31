@@ -170,6 +170,11 @@ public class EditorSettings {
         return markNonUniqueSegments;
     }
 
+    public boolean isHideDuplicateSegments()
+    {
+        return true;
+    }
+
     public boolean isMarkNotedSegments() {
         return markNoted;
     }
@@ -441,17 +446,19 @@ public class EditorSettings {
                 }
             }
         }
-        if (markNonUniqueSegments) {
+
+        Color nonUniqueBg = Styles.EditorColor.COLOR_NON_UNIQUE_BG.getColor();
+        if (markNonUniqueSegments && nonUniqueBg != null) {
             switch (duplicate) {
             case NONE:
                 break;
             case FIRST:
                 if (markFirstNonUnique) {
-                    bg = Styles.EditorColor.COLOR_NON_UNIQUE_BG.getColor();
+                    bg = nonUniqueBg;
                 }
                 break;
             case NEXT:
-                bg = Styles.EditorColor.COLOR_NON_UNIQUE_BG.getColor();
+                bg = nonUniqueBg;
                 break;
             }
         }

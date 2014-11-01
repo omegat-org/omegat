@@ -69,7 +69,7 @@ public class FileUtil {
             File[] bakFiles = originalFile.getParentFile().listFiles(new FileFilter() {
                 public boolean accept(File f) {
                     return !f.isDirectory() && f.getName().startsWith(originalFile.getName())
-                            && f.getName().endsWith(".bak");
+                            && f.getName().endsWith(OConsts.BACKUP_EXTENSION);
                 }
             });
 
@@ -100,7 +100,7 @@ public class FileUtil {
     public static void backupFile(File f) throws IOException {
         long fileMillis = f.lastModified();
         String str = new SimpleDateFormat("yyyyMMddHHmm").format(new Date(fileMillis));
-        LFileCopy.copy(f, new File(f.getPath() + "." + str + ".bak"));
+        LFileCopy.copy(f, new File(f.getPath() + "." + str + OConsts.BACKUP_EXTENSION));
     }
 
     /**

@@ -3,7 +3,7 @@
 ----------------------------------------------------------------------
    5 Enhancements
    4 Bug fixes
-   2 Localisation updates
+   3 Localisation updates
 ----------------------------------------------------------------------
 3.1.7 update 1 vs. 3.1.7
 
@@ -36,6 +36,7 @@ mouse pointer) changed to the Wait icon and could not be restored
 
   - Dutch localisation updated to 3.1.7 (UI)
   - Interlingua localisation updated to 3.1.7 (UI, documentation)
+  - Italian localisation updated to 3.1.7 (UI)
 
 ----------------------------------------------------------------------
  OmegaT 3.1.7 (2014-10-20)

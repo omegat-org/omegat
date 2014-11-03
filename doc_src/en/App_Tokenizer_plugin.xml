@@ -59,7 +59,7 @@
     the tokenizer (Tokenizer Behavior) from the Project Properties
     window.</para>
 
-    <para>In the case no Tokeniser exist for the current languages, OmegaT
+    <para>In case no tokenizer exists for the current languages, OmegaT
     uses Hunspell instead (in that case, make sure that relevant Hunspell
     dictionaries are installed).</para>
 

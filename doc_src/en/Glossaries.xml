@@ -208,7 +208,7 @@
         <secondary>Priorities</secondary>
       </indexterm>Priority glossary</title>
 
-    <para>The results from the priority glossary (glossary/glossary.txt)
+    <para>The results from the priority glossary (by default, glossary/glossary.txt)
     appear in first places in the Glossary pane and in TransTips.</para>
 
     <para>As entries can mix words from priority and non priority glossaries,

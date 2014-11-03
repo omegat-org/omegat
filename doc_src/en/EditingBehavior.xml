@@ -243,10 +243,10 @@
       <term>Allow tag editing</term>
 
       <listitem>
-        <para>Uncheck this option to prevent any damage on the tags (i.e:
+        <para>Uncheck this option to prevent any damage on the tags (i.e.,
         partial deletion) during editing. Removing an entire tag remains
         possible in that case, by using Ctrl+Backspace/Delete or by selecting
-        it completely (Ctrl+Shift+Left/Right) then deleting it (Delete of
+        it completely (Ctrl+Shift+Left/Right) then deleting it (Delete or
         Ctrl+X).</para>
       </listitem>
     </varlistentry>
@@ -258,7 +258,7 @@
 
       <listitem>
         <para>Check this option to be warned about differences between source
-        and target segments tags, at each time you leave a segment.</para>
+        and target segments tags each time you leave a segment.</para>
       </listitem>
     </varlistentry>
   </variablelist>

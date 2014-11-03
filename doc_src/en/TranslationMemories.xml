@@ -170,7 +170,7 @@
         </varlistentry>
 
         <varlistentry>
-          <term>tm/mt folder [vb:ici?]</term>
+          <term>tm/mt folder</term>
 
           <listitem>
             <para>In the editor pane, when a match is inserted from a TMX

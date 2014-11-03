@@ -15,9 +15,9 @@
   <para>Formatting information present in the source file usually needs to be
   reproduced in the target file. The in-line formatting information made
   possible by the supported formats (in particular DocBook, HTML, XHTML, Open
-  Document Format(ODF) and Office Open XML (MS Office 2007 and later) at
-  the time of writing) is presented as tags in OmegaT. Normally tags are
-  ignored when considering the similarity between different texts for matching
+  Document Format(ODF) and Office Open XML (MS Office 2007 and later) at the
+  time of writing) is presented as tags in OmegaT. Normally tags are ignored
+  when considering the similarity between different texts for matching
   purposes. Tags reproduced in the translated segment will be present in the
   translated document.</para>
 
@@ -264,7 +264,7 @@
 
     <para>The validate tags function detects changes to tag sequences (whether
     deliberate or accidental), and shows the affected segments. Launching this
-    function – <guimenuitem>Ctrl+T<indexterm class="singular">
+    function – <guimenuitem>Ctrl+Shift+V<indexterm class="singular">
         <primary>Shortcuts</primary>
 
         <secondary>Tag validation - Ctrl+T</secondary>
@@ -272,8 +272,8 @@
     the file containing suspected broken or bad tags in the translation.
     Repairing the tags and recreating the target documents is easy with the
     validate tags function. The window that opens when
-    <guimenuitem>Ctrl+T</guimenuitem> is pressed features a 3-column table
-    with a link to the segment, the original segment and the target
+    <guimenuitem>Ctrl+Shift+V</guimenuitem> is pressed features a 3-column
+    table with a link to the segment, the original segment and the target
     segment</para>
 
     <figure id="tag.validation">
@@ -294,11 +294,12 @@
     the original and the translated contents. Click on the link to activate
     the segment in the Editor. Correct the error if necessary (in the case
     above it is the missing &lt;i2&gt;&lt;/i2&gt; pair) and press
-    <guimenuitem>Ctrl+T</guimenuitem> to return to the tag validation window
-    to correct other errors. Tag errors are tag sequences in the translation
-    in which the same tag order and number as in the original segment is not
-    reproduced. Some tag manipulations are necessary and are benign, others
-    will cause problems when the translated document is created.</para>
+    <guimenuitem>Ctrl+Shift+V</guimenuitem> to return to the tag validation
+    window to correct other errors. Tag errors are tag sequences in the
+    translation in which the same tag order and number as in the original
+    segment is not reproduced. Some tag manipulations are necessary and are
+    benign, others will cause problems when the translated document is
+    created.</para>
   </section>
 
   <section id="hints.for.tag.management">

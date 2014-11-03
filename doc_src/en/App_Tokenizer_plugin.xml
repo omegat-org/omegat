@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
 "../../../docbook-xml-4.5/docbookx.dtd">
-<appendix id="appendix.TokenizerPlugin.inOmegaT">
-  <title>Tokenizer plugin<indexterm class="singular">
-      <primary>Plugins</primary>
-
-      <secondary>Tokenizer</secondary>
+<appendix id="appendix.Tokenizers.inOmegaT">
+  <title>Tokenizers<indexterm class="singular">
+      <primary>Tokenizers</primary>
     </indexterm></title>
 
   <section>
@@ -52,14 +50,25 @@
   </section>
 
   <section>
-    <title>Installation and use</title>
+    <title>Languages selection</title>
 
-	<para>Tokenizers are included in OmegaT. OmegaT automatically selects a tokenizer for the source and the target language according to the language settings of the project. It is possible to select another tokenizer or a different version of the tokenizer from the Project Properties window.</para>
+    <para>Tokenizers are included in OmegaT and active by default. OmegaT
+    automatically selects a tokenizer for the source and the target language
+    according to the language settings of the project. It is possible to
+    select another tokenizer (Language Tokenizer) or a different version of
+    the tokenizer (Tokenizer Behavior) from the Project Properties
+    window.</para>
 
-	<warning>
-		<title>Incompatibilities</title>
-		<para>OmegaT will not launch if tokenizers are found in the /plugin folder. Remove all the tokenizers from the /plugin folder before starting OmegaT.</para>
-	</warning>
-	
+    <para>In the case no Tokeniser exist for the current languages, OmegaT
+    uses Hunspell instead (in that case, make sure that relevant Hunspell
+    dictionaries are installed).</para>
+
+    <warning>
+      <title>Incompatibilities</title>
+
+      <para>OmegaT will not launch if tokenizers are found in the /plugin
+      folder. Remove all the tokenizers from the /plugin folder before
+      starting OmegaT.</para>
+    </warning>
   </section>
 </appendix>

@@ -100,7 +100,9 @@
             <entry><para>Used to validate tags (open with <keycombo>
                 <keycap>Ctrl</keycap>
 
-                <keycap>T</keycap>
+                <keycap>Shift</keycap>
+
+                <keycap>V</keycap>
               </keycombo>, close with <keycap>Esc</keycap>)</para></entry>
           </row>
 
@@ -191,13 +193,12 @@
               </indexterm></guimenuitem></entry>
 
             <entry><para>Used to modify the font used by
-            <application>OmegaT</application> to display source, translation, matches and
-            glossary terms, (access via <menuchoice>
+            <application>OmegaT</application> to display source, translation,
+            matches and glossary terms, (access via <menuchoice>
                 <guimenu>Options</guimenu>
 
                 <guimenuitem>Font...</guimenuitem>
-              </menuchoice>, close via
-            <keycap>Esc</keycap>)</para></entry>
+              </menuchoice>, close via <keycap>Esc</keycap>)</para></entry>
           </row>
 
           <row>
@@ -589,7 +590,7 @@
 
       <itemizedlist>
         <listitem>
-          <para>match percentage when the tokenizer plugin is used</para>
+          <para>match percentage (with operation of tokenisers)</para>
         </listitem>
       </itemizedlist>
 
@@ -913,10 +914,15 @@
 
       <itemizedlist>
         <listitem>
-          <para>the list of all translatable files in the project. These are
-          the files present in the Source files folder in a format that OmegaT
-          is able to recognize. Clicking on any file will open it for
-          translation</para>
+          <para>the total number of translatable files in the project. These
+          are the files present in the /source folder in a format that OmegaT
+          is able to recognize. This number is displayed in brackets, next to
+          the "Project file" title.</para>
+        </listitem>
+
+        <listitem>
+          <para>the list of all translatable files in the project. Clicking on
+          any file will open it for translation</para>
         </listitem>
       </itemizedlist>
 
@@ -1110,12 +1116,12 @@
       Statistics.</guimenuitem> The evaluation is rather CPU intensive and can
       be time-consuming, so a progress bar is shown during the calculation. As
       far as categories are concerned, the de facto industry standard of
-      classifying matches into the following groups is used: Repetitions, Exact match,
-      95%-100%, 85%-94%, 75%-84%, 50%-74% and No match. This information is
-      computed for segments as well as for words and for characters (without
-      and including spaces). Note that there could be minor differences
-      between the OmegaT counts and the numbers, provided by other CAT
-      tools.<figure>
+      classifying matches into the following groups is used: Repetitions,
+      Exact match, 95%-100%, 85%-94%, 75%-84%, 50%-74% and No match. This
+      information is computed for segments as well as for words and for
+      characters (without and including spaces). Note that there could be
+      minor differences between the OmegaT counts and the numbers, provided by
+      other CAT tools.<figure>
           <title>Match statistics</title>
 
           <mediaobject>

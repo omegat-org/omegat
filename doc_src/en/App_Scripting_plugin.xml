@@ -1,35 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
 "../../../docbook-xml-4.5/docbookx.dtd">
-<appendix id="appendix.ScriptingPlugin.inOmegaT">
-  <title>Scripting plugin<indexterm class="singular">
-      <primary>Plugins</primary>
-
-      <secondary>Scripting</secondary>
+<appendix id="appendix.Scripts.inOmegaT">
+  <title>Scripts<indexterm class="singular">
+      <primary>Scripts</primary>
     </indexterm></title>
 
   <section>
     <title>Introduction</title>
 
-    <para>OmegaT-Scripting allows to run scripts written in different
-    scripting languages in OmegaT.</para>
+    <para>OmegaT allows to run scripts written in different scripting
+    languages.</para>
   </section>
 
   <section>
-    <title>Installation and Use</title>
+    <title>Use</title>
 
-    <para>The Scripting plugin for OmegaT can be downloaded from the <ulink
-    url="http://sourceforge.net/projects/omegat-plugins/files">OmegaT plugins
-    download site</ulink>. Unzip the files, and put them all in the "plugins"
-    folder located in OmegaT installation folder, that is the folder that
-    contains the OmegaT.jar. Create the "plugins" folder first, if it does not
-    exist.</para>
-
-    <para>This adds a new submenu<guisubmenu> Tools &gt;
-    </guisubmenu><guisubmenu>Scripting.</guisubmenu> Below the
-    <guisubmenu>Scripting</guisubmenu> submenu , there's 12 place holders
-    available for scripts. Clicking <guisubmenu>Scripting</guisubmenu> opens
-    the Scripting dialog:<screenshot>
+    <para>Clicking <guisubmenu>Tools &gt;
+    </guisubmenu><guisubmenu>Scripting</guisubmenu> opens the Scripting
+    dialog:<screenshot>
         <screeninfo>Scripting dialog</screeninfo>
 
         <mediaobject>
@@ -66,6 +55,17 @@
         pressing<keycap> Ctrl+Alt+F#</keycap> (# 1 to 12).</para>
       </listitem>
     </itemizedlist>
+
+    <para>By default, scripts are stored in the "scripts" folder located in
+    OmegaT installation folder (the folder that contains the OmegaT.jar).
+    </para>
+
+    <para>You can add new scripts there, so they will appear in the list of
+    available scripts in the Scripting dialog.</para>
+  </section>
+
+  <section>
+    <title>Scripting languages</title>
 
     <para>The following scripting languages have been implemented:</para>
 

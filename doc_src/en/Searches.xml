@@ -63,25 +63,21 @@
 
       <para>Searches are performed by default in both the source and target
       sections of the project, but you can limit your search to just the
-      source or the target text. You may search in</para>
+      source or the target text.</para>
+
+      <para>You may search in</para>
 
       <itemizedlist>
         <listitem>
-          <para>the project only (default setting)</para>
+          <para>the project (check <emphasis>Project)</emphasis>, along with
+          Memory, TMs (in /tm/) or Glossaries (if checked)</para>
         </listitem>
       </itemizedlist>
 
       <itemizedlist>
         <listitem>
-          <para>both the project and the reference translation memories in
-          /tm/ (check <emphasis>Search TMs)</emphasis></para>
-        </listitem>
-      </itemizedlist>
-
-      <itemizedlist>
-        <listitem>
-          <para>a single file or a folder containing a set of files (check
-          <emphasis>Search files)</emphasis></para>
+          <para>or in a single file or a folder containing a set of files
+          (check <emphasis>Files)</emphasis></para>
         </listitem>
       </itemizedlist>
 
@@ -122,9 +118,9 @@
 
     <itemizedlist>
       <listitem>
-        <para>'?' matches any single character. For instance, <literal>'run?'</literal> 
-        would match the word <literal>'runs'</literal> and
-        <literal>'runn'</literal> in the word
+        <para>'?' matches any single character. For instance,
+        <literal>'run?'</literal> would match the word
+        <literal>'runs'</literal> and <literal>'runn'</literal> in the word
         <literal>'running'</literal>.</para>
       </listitem>
     </itemizedlist>
@@ -256,28 +252,34 @@
     quickly see their contents by looking at their title: it will contain the
     search term used.</para>
   </section>
-  
+
   <section id="search.filter">
     <title>Filter entries in editor according to search</title>
-    
-    <para>For easier navigation in the search result set, you can apply the search to
-  the editor. Press the <emphasis role="bold">Filter</emphasis> button on the bottom to limit the shown entries 
-  in the editor window to those that match the current search. You can use 
-  normal navigation to go to e.g. the next (untranslated) segment that matches
-  the search criteria.</para>
-  
-   <para>NB:</para>
-   
+
+    <para>For easier navigation in the search result set, you can apply the
+    search to the editor. Press the <emphasis role="bold">Filter</emphasis>
+    button on the bottom to limit the shown entries in the editor window to
+    those that match the current search. You can use normal navigation to go
+    to e.g. the next (untranslated) segment that matches the search
+    criteria.</para>
+
+    <para>NB:</para>
+
     <itemizedlist>
-      <listitem>A search may be limited to 1000 items, so if you search on a common
-  phrase, the editor then shows only those 1000 matching entries, and not all 
-  entries that match the search criteria.</listitem>
-      <listitem>A file might have no matching entries, so it will show empty.</listitem>
-      <listitem>If a search removes duplicates, those duplicates will not be in the Editor.</listitem>
+      <listitem>
+        A search may be limited to 1000 items, so if you search on a common phrase, the editor then shows only those 1000 matching entries, and not all entries that match the search criteria.
+      </listitem>
+
+      <listitem>
+        A file might have no matching entries, so it will show empty.
+      </listitem>
+
+      <listitem>
+        If a search removes duplicates, those duplicates will not be in the Editor.
+      </listitem>
     </itemizedlist>
-    
-    <para>To remove a filter, press the <emphasis role="bold">Remove filter</emphasis> button, or reload a project.</para>
- </section>
-      
-    
+
+    <para>To remove a filter, press the <emphasis role="bold">Remove
+    filter</emphasis> button, or reload a project.</para>
+  </section>
 </chapter>

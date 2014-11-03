@@ -68,9 +68,15 @@
 
           <tbody>
             <row>
-              <entry><guimenuitem>New</guimenuitem></entry>
+              <entry><guimenuitem>New...</guimenuitem></entry>
 
-              <entry/>
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>Shift</keycap>
+
+                  <keycap>N</keycap>
+                </keycombo></entry>
 
               <entry>Creates and opens a new project. The dialog to create a
               project is the same as to edit the project. See <xref
@@ -78,7 +84,17 @@
             </row>
 
             <row>
-              <entry><guimenuitem>Open</guimenuitem></entry>
+              <entry><guimenuitem>Download Team
+              Project...</guimenuitem></entry>
+
+              <entry/>
+
+              <entry>Creates a local copy of a remote OmegaT project. See
+              <xref linkend="chapter.project.createteamproject"/></entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Open...</guimenuitem></entry>
 
               <entry><keycombo>
                   <keycap>Ctrl</keycap>
@@ -90,7 +106,16 @@
             </row>
 
             <row>
-              <entry><guimenuitem>Import Source Files...</guimenuitem></entry>
+              <entry><guimenuitem>Open Recent Project</guimenuitem></entry>
+
+              <entry/>
+
+              <entry>Give access to the five last edited projects</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Copy Files to Source
+              Folder...</guimenuitem></entry>
 
               <entry/>
 
@@ -100,12 +125,12 @@
             </row>
 
             <row>
-              <entry><guimenuitem>Import From
-              MediaWiki...</guimenuitem></entry>
+              <entry><guimenuitem>Download MediaWiki
+              Page...</guimenuitem></entry>
 
               <entry/>
 
-              <entry>Imports units from MediaWiki pages, based on the URL
+              <entry>Downloads units from MediaWiki pages, based on the URL
               entered.</entry>
             </row>
 
@@ -148,8 +173,8 @@
             </row>
 
             <row>
-              <entry><guimenuitem>Create translated
-              documents</guimenuitem></entry>
+              <entry><guimenuitem>Create Translated
+              Documents</guimenuitem></entry>
 
               <entry><keycombo>
                   <keycap>Ctrl</keycap>
@@ -160,6 +185,20 @@
               <entry>Creates the target documents based on your translation of
               the documents' text. The created target documents are located in
               the <filename>target</filename> folder.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Create Current Translated
+              Document</guimenuitem></entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>D</keycap>
+                </keycombo></entry>
+
+              <entry>Creates the target document corresponding to the current
+              document in translation.</entry>
             </row>
 
             <row>
@@ -357,9 +396,9 @@
               <entry><guimenuitem>Replace With Source</guimenuitem></entry>
 
               <entry><keycombo>
-                  <keycap>Shift</keycap>
-
                   <keycap>Ctrl</keycap>
+
+                  <keycap>Shift</keycap>
 
                   <keycap>R</keycap>
                 </keycombo></entry>
@@ -372,9 +411,9 @@
               <entry><guimenuitem>Insert Source</guimenuitem></entry>
 
               <entry><keycombo>
-                  <keycap>Shift</keycap>
-
                   <keycap>Ctrl</keycap>
+
+                  <keycap>Shift</keycap>
 
                   <keycap>I</keycap>
                 </keycombo></entry>
@@ -383,11 +422,30 @@
             </row>
 
             <row>
-              <entry><guimenuitem>Insert Source Tags</guimenuitem></entry>
+              <entry><guimenuitem>Insert Missing Source
+              Tags</guimenuitem></entry>
 
               <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
                   <keycap>Shift</keycap>
 
+                  <keycap>T</keycap>
+                </keycombo></entry>
+
+              <entry><indexterm class="singular">
+                  <primary>Tags</primary>
+
+                  <secondary>Inserting missing source tags</secondary>
+                </indexterm>Inserts the source tags (if they where missing) at
+              the cursor position.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Insert Next Missing
+              Tag</guimenuitem></entry>
+
+              <entry><keycombo>
                   <keycap>Ctrl</keycap>
 
                   <keycap>T</keycap>
@@ -396,24 +454,18 @@
               <entry><indexterm class="singular">
                   <primary>Tags</primary>
 
-                  <secondary>Inserting source tags</secondary>
-                </indexterm>Inserts the source tags at the cursor position.
-              All the relevant tags in the source - i.e. OmegaT as well as
-              custom, Java, printf etc tags - will be inserted into the
-              current target, regardless of whether they are already there or
-              not. Texts, bracketed by tags, are replaced by spaces:.
-              <literal>&lt;f0&gt;&lt;f1&gt;This is
-              text&lt;/f0&gt;&lt;/f1&gt;</literal> thus will be copied as
-              <literal>&lt;f0&gt;&lt;f1&gt;one_space&lt;/f0&gt;&lt;/f1&gt;</literal></entry>
+                  <secondary>Inserting next missing tag</secondary>
+                </indexterm>Inserts only one tag (among the missing ones) at
+              the cursor position.</entry>
             </row>
 
             <row>
               <entry><guimenuitem>Export Selection</guimenuitem></entry>
 
               <entry><keycombo>
-                  <keycap>Shift</keycap>
-
                   <keycap>Ctrl</keycap>
+
+                  <keycap>Shift</keycap>
 
                   <keycap>C</keycap>
                 </keycombo></entry>
@@ -433,9 +485,9 @@
               <entry><guimenuitem>Create Glossary Entry</guimenuitem></entry>
 
               <entry><keycombo>
-                  <keycap>Shift</keycap>
-
                   <keycap>Ctrl</keycap>
+
+                  <keycap>Shift</keycap>
 
                   <keycap>G</keycap>
                 </keycombo></entry>
@@ -458,7 +510,21 @@
             </row>
 
             <row>
-              <entry><guimenuitem>Switch case to...</guimenuitem></entry>
+              <entry><guimenuitem>Search and Replace...</guimenuitem></entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>K</keycap>
+                </keycombo></entry>
+
+              <entry>Opens a new <link
+              linkend="section.searchreplace.window">Search and replace
+              window</link>.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Switch case to</guimenuitem></entry>
 
               <entry><keycombo>
                   <keycap>Shift</keycap>
@@ -479,7 +545,7 @@
             </row>
 
             <row>
-              <entry><guimenuitem>Select Fuzzy Match #N</guimenuitem></entry>
+              <entry><guimenuitem>Select Match</guimenuitem></entry>
 
               <entry><keycombo>
                   <keycap>Ctrl</keycap>
@@ -515,6 +581,37 @@
               context, require different translations. Select this menu item,
               if the current translation does not apply and enter the
               alternative translation.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Remove Translation</guimenuitem></entry>
+
+              <entry/>
+
+              <entry>xxxx</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Set empty translation</guimenuitem></entry>
+
+              <entry/>
+
+              <entry>xxxx</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Register Identical
+              Translation</guimenuitem></entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>Shift</keycap>
+
+                  <keycap>S</keycap>
+                </keycombo></entry>
+
+              <entry>xxxx</entry>
             </row>
           </tbody>
         </tgroup>
@@ -552,14 +649,29 @@
             </row>
 
             <row>
+              <entry><guimenuitem>Next Translated
+              Segment</guimenuitem></entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>Shift</keycap>
+
+                  <keycap>U</keycap>
+                </keycombo></entry>
+
+              <entry>Moves to the next already translated segment, ignoring
+              untranslated segments.</entry>
+            </row>
+
+            <row>
               <entry><guimenuitem>Next Segment</guimenuitem></entry>
 
               <entry><keycombo>
                   <keycap>Ctrl</keycap>
 
                   <keycap>N</keycap>
-                </keycombo> or <keycap>Enter</keycap> or
-              <keycap>Tab</keycap></entry>
+                </keycombo> or <keycap>Enter</keycap></entry>
 
               <entry>Moves to the next segment. If the current segment is the
               last segment in a file, it moves to the first segment of the
@@ -577,10 +689,6 @@
                   <keycap>Ctrl</keycap>
 
                   <keycap>Enter</keycap>
-                </keycombo> or <keycombo>
-                  <keycap>Ctrl</keycap>
-
-                  <keycap>Tab</keycap>
                 </keycombo></entry>
 
               <entry>Moves to the previous segment. If the current segment is
@@ -616,6 +724,21 @@
               <entry/>
 
               <entry>The previous segment with a note will open.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Source of Selected
+              Match</guimenuitem></entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>Shift</keycap>
+
+                  <keycap>M</keycap>
+                </keycombo></entry>
+
+              <entry>xxxx</entry>
             </row>
 
             <row>
@@ -716,23 +839,46 @@
               <entry><guimenuitem>Mark Non-breakable
               Spaces</guimenuitem></entry>
 
-              <entry>If checked, non-breakable spaces in the segment will be
-              displayed with a grey background.</entry>
+              <entry>If checked, non-breakable spaces will be displayed with a
+              grey background.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Mark Whitespace</guimenuitem></entry>
+
+              <entry>If checked, white spaces will be displayed with a small
+              dot.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Mark Bidirectional Algorithm Control
+              Characters</guimenuitem></entry>
+
+              <entry>xxxx</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Mark Auto-Populated
+              Segments</guimenuitem></entry>
+
+              <entry>xxxx</entry>
             </row>
 
             <row>
               <entry><guimenuitem>Modification Info</guimenuitem></entry>
 
               <entry>Setting the Display Modification option to
-              <emphasis>Selected</emphasis> will display the time and the
-              author of the last change in the current segment. Setting it
-              to<emphasis> All </emphasis>shows this information for all
-              segments and <emphasis>None</emphasis> turns this option
+              <emphasis>Current segment</emphasis> will display the time and
+              the author of the last change in the current segment. Setting it
+              to<emphasis> All segments </emphasis>shows this information for
+              all segments and <emphasis>None</emphasis> turns this option
               off.</entry>
             </row>
           </tbody>
         </tgroup>
       </table>
+
+      <para>Note: colors are customizable through the xxxx dialog box.</para>
     </section>
 
     <section id="submenu.Tools">
@@ -770,7 +916,7 @@
             <row>
               <entry><guimenuitem>Validate Tags</guimenuitem></entry>
 
-              <entry><guimenu>Ctrl+T</guimenu>: Checks for missing or
+              <entry><guimenu>Ctrl+Shift+V</guimenu>: Checks for missing or
               displaced tags in formatted files. Will display a list of
               segments with tag errors and possible inconsistencies. See <link
               linkend="section.tag.validation">Tag Validation</link> and <xref
@@ -778,16 +924,11 @@
             </row>
 
             <row>
-              <entry><guimenuitem>Remove Tags</guimenuitem></entry>
+              <entry><guimenuitem>Validate Tags for Current
+              Document</guimenuitem></entry>
 
-              <entry>When enabled, all the formatting tags are removed from
-              source segments. This is useful when dealing with texts where
-              inline formatting has no real use (e.g., OCRed PDF, bad
-              converted .odt or .docx, etc.) Only inline tags are removed, so
-              normally there should be no problem with opening the target
-              documents. Non-visible formatting (i.e., which doesn't appear as
-              tags in the OmegaT editor) is kept in the target
-              document.</entry>
+              <entry>Same as above, but only for the current document in
+              translation.</entry>
             </row>
 
             <row>
@@ -804,6 +945,24 @@
               <entry>Displays the Match Statistics for the project: the number
               of repetitions, exact matches, fuzzy matches and no-matches, for
               segments, words and in characters.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Match Statistics per
+              File</guimenuitem></entry>
+
+              <entry>Displays the Match Statistics for each file of the
+              project: the number of repetitions, exact matches, fuzzy matches
+              and no-matches, for segments, words and in characters.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Scripting...</guimenuitem></entry>
+
+              <entry>Opens a dialog box where external scripts can be added to
+              the project [vb:seulement?] and associated with a shortcut (see
+              <link linkend="appendix.Scripts.inOmegaT">Scripts
+              dialog</link>)</entry>
             </row>
           </tbody>
         </tgroup>
@@ -855,7 +1014,13 @@
             <row>
               <entry><guimenuitem>Glossary</guimenuitem></entry>
 
-              <entry>reserved for future use by plugins</entry>
+              <entry>xxxx Display Context Description for TBX
+              Glossaries<para>Click on <guimenuitem>Browse TaaS
+              Collections...</guimenuitem> to display a window where
+              xxxxx</para><para>Click on <guimenuitem>Select TaaS Terminology
+              Lookup Domain...</guimenuitem> to display a window where
+              xxxxx</para><para>Select <guimenuitem>&amp;TaaS Terminology
+              Lookup</guimenuitem> to xxxx</para></entry>
             </row>
 
             <row>
@@ -871,6 +1036,17 @@
               <emphasis>TransTips/Exact Match </emphasis> checked, only
               complete words will be checked, otherwise parts of words will be
               matched as well.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Auto-completion</guimenuitem></entry>
+
+              <entry><para>Click on <guimenuitem>Glossary...</guimenuitem> to
+              display a window where xxxxx</para><para>Click on
+              <guimenuitem>Auto-text...</guimenuitem> to display a window
+              where xxxxx</para><para>Click on <guimenuitem>Character
+              Table...</guimenuitem> to display a window where
+              xxxxx</para></entry>
             </row>
 
             <row>
@@ -939,16 +1115,19 @@
             <row>
               <entry><guimenuitem>View...</guimenuitem></entry>
 
-              <entry>Contains the option to have all source segments in bold
-              and to mark the first non-unique segment.</entry>
+              <entry>Contains options for displaying texts and modification
+              informations in different ways.</entry>
             </row>
 
             <row>
-              <entry><guimenuitem>Save...</guimenuitem></entry>
+              <entry><guimenuitem>Saving and Output...</guimenuitem></entry>
 
               <entry>Allows the user select the interval - in minutes and
               seconds - between consecutive automatic saves of the project.
-              The minimum is 10 seconds.</entry>
+              The minimum is 10 seconds.<para>The dialog box allows also to
+              set external Post-processing commands (that are executed after
+              <guimenuitem>Create Translated Documents</guimenuitem>
+              command</para></entry>
             </row>
 
             <row>
@@ -966,6 +1145,12 @@
               moved, or hidden one or more components and you are unable to
               restore the desired arrangement. It can also be used when panes
               do not appear as expected following an OmegaT upgrade.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Language Checker</guimenuitem></entry>
+
+              <entry>When selected, xxxx</entry>
             </row>
           </tbody>
         </tgroup>
@@ -998,6 +1183,21 @@
 
               <entry>Displays copyright, credits and license
               information.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Last Changes...</guimenuitem></entry>
+
+              <entry>Displays the list of new functionalities, enhancements
+              and bug fixes for each new release.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Log...</guimenuitem></entry>
+
+              <entry>Displays the current log file. The title of the dialog
+              reflects the file actually used (which depends on how many
+              instances of OmegaT are running concurrently).</entry>
             </row>
           </tbody>
         </tgroup>
@@ -1085,8 +1285,7 @@
                   <keycap>O</keycap>
                 </keycombo></entry>
 
-              <entry>Displays a dialog to locate an existing
-              project.</entry>
+              <entry>Displays a dialog to locate an existing project.</entry>
             </row>
 
             <row>

@@ -81,8 +81,8 @@
             <filename>project_save.tmx</filename>, i.e. of the project's main
             translation memory, excluding the so-called orphan segments. They
             carry appropriately changed names, so that its contents still
-            remain identifiable, when used elsewhere, for instance in
-            the <filename>tm</filename> subfolder of some other project (see
+            remain identifiable, when used elsewhere, for instance in the
+            <filename>tm</filename> subfolder of some other project (see
             below).</para>
           </listitem>
         </varlistentry>
@@ -127,13 +127,13 @@
                 <guimenu>.</guimenu>
               </menuchoice></para>
 
-            <para>It may happen, that translation memories, available in
-            the <filename>tm</filename> subfolder, contain segments with
-            identical source text, but differing targets. TMX files are read
-            sorted by their names and segments within a given TMX file line by
-            line. The last segment with the identical source text will thus
-            prevail (Note: of course it makes more sense to avoid this to
-            happen in the first place).</para>
+            <para>It may happen, that translation memories, available in the
+            <filename>tm</filename> subfolder, contain segments with identical
+            source text, but differing targets. TMX files are read sorted by
+            their names and segments within a given TMX file line by line. The
+            last segment with the identical source text will thus prevail
+            (Note: of course it makes more sense to avoid this to happen in
+            the first place).</para>
 
             <para>Note that the TMX files in the tm folder can be compressed
             with gzip.<indexterm class="singular">
@@ -166,6 +166,17 @@
             source text: all the segments in the source text, for which
             translations can be found in those "auto" TMs, will land in the
             main TM of the project without any user intervention.</para>
+          </listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term>tm/mt folder [vb:ici?]</term>
+
+          <listitem>
+            <para>In the editor pane, when a match is inserted from a TMX
+            contained in a folder named <emphasis role="bold">mt</emphasis>,
+            the background of the active segment is changed to red. The
+            background is restored to normal when the segment is left.</para>
           </listitem>
         </varlistentry>
 
@@ -215,8 +226,8 @@
 
       <para><emphasis role="bold">several projects on the same subject:
       </emphasis>keep the project structure, and change source and target
-      folders (Source = source/order1, target = target/order1 etc). Note
-      that you segments from order1, that are not present in order2 and other
+      folders (Source = source/order1, target = target/order1 etc). Note that
+      you segments from order1, that are not present in order2 and other
       subsequent jobs, will be tagged as orphan segments; however, they will
       still be useful for getting fuzzy matches.</para>
 
@@ -511,8 +522,8 @@
 
       <itemizedlist>
         <listitem>
-          <para>To avoid reusing the project and thus possibly polluting future
-          cases, delete the project folder or archive it away from your
+          <para>To avoid reusing the project and thus possibly polluting
+          future cases, delete the project folder or archive it away from your
           workplace.</para>
         </listitem>
       </itemizedlist>
@@ -635,12 +646,12 @@
     [pseudotranslatetype=[equal|empty]]</literal></para>
 
     <para>Replace <literal>&lt;filename&gt;</literal> with the name of the
-    file you wish to create, either absolute or relative to the working
-    folder (the folder you start <application>OmegaT</application>
-    from). The second argument <literal>--pseudotranslatetype</literal> is
-    optional. Its value is either <literal>equal</literal> (default value, for
-    source=target) or <literal>empty</literal> (target segment is empty). You
-    can process the generated tmx with any tool you want. To reuse it in
+    file you wish to create, either absolute or relative to the working folder
+    (the folder you start <application>OmegaT</application> from). The second
+    argument <literal>--pseudotranslatetype</literal> is optional. Its value
+    is either <literal>equal</literal> (default value, for source=target) or
+    <literal>empty</literal> (target segment is empty). You can process the
+    generated tmx with any tool you want. To reuse it in
     <application>OmegaT</application> rename it to <emphasis>project_save.tmx
     </emphasis> and place it in the <literal>omegat</literal>-folder of your
     project.</para>
@@ -656,8 +667,8 @@
     <para>Very early versions of <application>OmegaT</application> were
     capable of segmenting source files into paragraphs only and were
     inconsistent when numbering formatting tags in HTML and Open Document
-    files. <application>OmegaT</application> can detect and upgrade such
-    tmx files on the fly to increase fuzzy matching quality and leverage your
+    files. <application>OmegaT</application> can detect and upgrade such tmx
+    files on the fly to increase fuzzy matching quality and leverage your
     existing translation better, saving you the work of doing this
     manually.</para>
 

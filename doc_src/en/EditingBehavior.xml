@@ -24,7 +24,8 @@
       <imageobject role="html">
         <imagedata fileref="images/EditingBehaviourOptions25.png"/>
       </imageobject>
-	  <imageobject role="fo">
+
+      <imageobject role="fo">
         <imagedata fileref="images/EditingBehaviourOptions25.png"/>
       </imageobject>
     </mediaobject>
@@ -119,17 +120,19 @@
 
         <itemizedlist>
           <listitem>
-            <para>The source segment and the fuzzy matches must contain the same
-            list of numbers</para>
+            <para>The source segment and the fuzzy matches must contain the
+            same list of numbers</para>
           </listitem>
-        
+
           <listitem>
-            <para>The numbers must be exactly the same between the source and the target matches.</para>
+            <para>The numbers must be exactly the same between the source and
+            the target matches.</para>
           </listitem>
-        
+
           <listitem>
-            <para>Only integers and simple floats (using the period as a decimal
-            character, e.g. 5.4, but not 5,4 or 54E-01) are considered.</para>
+            <para>Only integers and simple floats (using the period as a
+            decimal character, e.g. 5.4, but not 5,4 or 54E-01) are
+            considered.</para>
           </listitem>
         </itemizedlist>
       </listitem>
@@ -231,6 +234,41 @@
         cause <emphasis role="bold"> Go To Next Untranslated
         Segment</emphasis>stop on the next such segment, irrespective of
         whether it has already been translated or not.</para>
+      </listitem>
+    </varlistentry>
+  </variablelist>
+
+  <variablelist>
+    <varlistentry>
+      <term>Allow tag editing</term>
+
+      <listitem>
+        <para>Uncheck this option to prevent any damage on the tags (i.e:
+        partial deletion) during editing. Removing an entire tag remains
+        possible in that case, by using Ctrl+Backspace/Delete or by selecting
+        it completely (Ctrl+Shift+Left/Right) then deleting it (Delete of
+        Ctrl+X).</para>
+      </listitem>
+    </varlistentry>
+  </variablelist>
+
+  <variablelist>
+    <varlistentry>
+      <term>Validate tags when leaving a segment</term>
+
+      <listitem>
+        <para>Check this option to be warned about differences between source
+        and target segments tags, at each time you leave a segment.</para>
+      </listitem>
+    </varlistentry>
+  </variablelist>
+
+  <variablelist>
+    <varlistentry>
+      <term>Save auto-populated status</term>
+
+      <listitem>
+        <para>xxxxx</para>
       </listitem>
     </varlistentry>
   </variablelist>

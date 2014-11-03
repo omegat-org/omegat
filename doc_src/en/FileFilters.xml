@@ -69,6 +69,28 @@
     settings. To edit which files in which encodings the filter is to process,
     select the filter from the list and click <emphasis
     role="bold">Edit.</emphasis></para>
+
+    <para>The dialog allows to enable or disable the following options:</para>
+
+    <itemizedlist>
+      <listitem>
+        <para>Remove leading and trailing tags: xxxx</para>
+      </listitem>
+
+      <listitem>
+        <para>Remove leading and trailing whitespace in non-segmented
+        projects; xxxx</para>
+      </listitem>
+
+      <listitem>
+        <para>Preserve spaces for all tags: xxxx</para>
+      </listitem>
+
+      <listitem>
+        <para>Ignore file context when identifying segments with alternate
+        translations: xxxx</para>
+      </listitem>
+    </itemizedlist>
   </section>
 
   <section id="filters.options">
@@ -507,28 +529,33 @@
         </listitem>
 
         <listitem>
-          <para><literal>${system-os-name}</literal> - operating system of the computer
-          used</para>
+          <para><literal>${system-os-name}</literal> - operating system of the
+          computer used</para>
         </listitem>
 
         <listitem>
-          <para><literal>${system-user-name}</literal> - system user name</para>
+          <para><literal>${system-user-name}</literal> - system user
+          name</para>
         </listitem>
 
         <listitem>
-          <para><literal>${system-host-name}</literal> - system host name</para>
+          <para><literal>${system-host-name}</literal> - system host
+          name</para>
         </listitem>
 
         <listitem>
-          <para><literal>${file-source-encoding}</literal> - source file encoding</para>
+          <para><literal>${file-source-encoding}</literal> - source file
+          encoding</para>
         </listitem>
 
         <listitem>
-          <para><literal>${file-target-encoding}</literal> - target file encoding</para>
+          <para><literal>${file-target-encoding}</literal> - target file
+          encoding</para>
         </listitem>
 
         <listitem>
-          <para><literal>${targetLocaleLCID}</literal> - Microsoft target locale</para>
+          <para><literal>${targetLocaleLCID}</literal> - Microsoft target
+          locale</para>
         </listitem>
       </itemizedlist>
 

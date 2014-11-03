@@ -19,8 +19,8 @@
 
   <para>You define its location and name in the project properties dialog. The
   extension must be <filename>.txt</filename>(if not, it will be added). The
-  location of the file must be within the <filename>/glossary</filename>folder, 
-  but it can be in a deeper folder (e.g.,
+  location of the file must be within the <filename>/glossary</filename>
+  folder, but it can be in a deeper folder (e.g.,
   <filename>glossary/sub/glossary.txt</filename>). The file does not need to
   exist when setting it, it will be created (if necessary) when adding a
   glossary entry. If the file already exists, no attempt is done to verify the
@@ -179,10 +179,10 @@
 
     <para>The contents of glossary files are kept in memory and are loaded
     when the project is opened or reloaded. Updating a glossary file is thus
-    rather simple: press <keycap>Ctrl+Shift+G</keycap> and enter the new
-    term, its translation and any comments you may have (ensuring you press
-    tab between the fields) and save the file. The contents of the glossary
-    pane will be updated accordingly.</para>
+    rather simple: press <keycap>Ctrl+Shift+G</keycap> and enter the new term,
+    its translation and any comments you may have (ensuring you press tab
+    between the fields) and save the file. The contents of the glossary pane
+    will be updated accordingly.</para>
 
     <para><indexterm class="singular">
         <primary>Glossaries</primary>
@@ -199,6 +199,20 @@
     some spreadsheet program for this purpose: any application, that can
     handle UTF8 and that can show white space (so that you do not miss the
     required <keycap>TAB</keycap> characters) can be used.</para>
+  </section>
+
+  <section>
+    <title><indexterm class="singular">
+        <primary>Glossaries</primary>
+
+        <secondary>Priorities</secondary>
+      </indexterm>Priority glossary</title>
+
+    <para>The results from the priority glossary (glossary/glossary.txt)
+    appear in first places in the Glossary pane and in TransTips.</para>
+
+    <para>As entries can mix words from priority and non priority glossaries,
+    the words from the priority glossary are displayed in bold.</para>
   </section>
 
   <section>

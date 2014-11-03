@@ -149,6 +149,18 @@
 
           <entry>RTL-LTR switch</entry>
         </row>
+
+        <row>
+          <entry><emphasis role="bold">Ctrl+Space</emphasis></entry>
+
+          <entry>open a dialog box with contextual suggestions (Mac: <emphasis
+          role="bold">Esc</emphasis>). Use <emphasis
+          role="bold">Ctrl+PgUp/PgDn</emphasis> (Cmd+PgUp/PgDn on Mac) to
+          switch successively from <emphasis>Glossaries entries</emphasis>,
+          <emphasis>Autotext entries,</emphasis> <emphasis>Missing
+          tags</emphasis> and <emphasis>Character table</emphasis> options.
+          </entry>
+        </row>
       </tbody>
     </tgroup>
   </table>

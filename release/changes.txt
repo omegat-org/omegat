@@ -65,6 +65,9 @@ mouse pointer) changed to the Wait icon and could not be restored
   - Editable colours 
   https://sourceforge.net/p/omegat/feature-requests/549/
 
+  - Go to next unique segment
+  https://sourceforge.net/p/omegat/feature-requests/198
+
   Other enhancements:
 
   - A new script (auto_open_last_project.groovy) allows opening automatically

@@ -959,9 +959,9 @@
             <row>
               <entry><guimenuitem>Scripting...</guimenuitem></entry>
 
-              <entry>Opens a dialog box where external scripts can be added to
-              the project [vb:seulement?] and associated with a shortcut (see
-              <link linkend="appendix.Scripts.inOmegaT">Scripts
+              <entry>Opens a dialog box where the location of external scripts can be 
+              set, and where scripts can be written, run and associated 
+              with a shortcut (see <link linkend="appendix.Scripts.inOmegaT">Scripts
               dialog</link>)</entry>
             </row>
           </tbody>

@@ -71,30 +71,6 @@
 
     <para><itemizedlist>
         <listitem>
-          <para><emphasis role="bold">NetRexx</emphasis>
-          (http://www.netrexx.org/): it supports a classic REXX syntax, with
-          no reserved keywords, along with considerable additions to support
-          object-oriented programming in a manner compatible with Java's
-          object model. All existing Java class libraries can be used
-          unchanged and without special setup; at the same time, a Java
-          programmer can opt to just use the Rexx class from the runtime
-          package for improved string handling in Java syntax source
-          programs.</para>
-        </listitem>
-      </itemizedlist><itemizedlist>
-        <listitem>
-          <para><emphasis role="bold">XSLT</emphasis> (Extensible Stylesheet
-          Language Transformations): is a declarative, XML-based language used
-          for the transformation of XML documents. The original document is
-          not changed; rather, a new document is created based on the content
-          of an existing one. The new document may be serialized (output) by
-          the processor in standard XML syntax or in another format, such as
-          HTML or plain text. XSLT is most often used to convert data between
-          different XML schemas or to convert XML data into web pages or PDF
-          documents.</para>
-        </listitem>
-      </itemizedlist><itemizedlist>
-        <listitem>
           <para><emphasis role="bold">Groovy</emphasis>
           (http://groovy.codehaus.org): is a dynamic language for the Java
           Virtual machine. It builds upon the strengths of Java but has

@@ -18,8 +18,8 @@
 
     <para>Clicking <guisubmenu>Tools &gt;
     </guisubmenu><guisubmenu>Scripting</guisubmenu> opens the Scripting
-    dialog:<screenshot>
-        <screeninfo>Scripting dialog</screeninfo>
+    window:<screenshot>
+        <screeninfo>Scripting window</screeninfo>
 
         <mediaobject>
           <imageobject>
@@ -28,7 +28,7 @@
         </mediaobject>
       </screenshot></para>
 
-    <para>The Scripting dialog allows you to load an existing script into the
+    <para>The Scripting window allows you to load an existing script into the
     text area and run it against the current opened project. To customize the
     script feature, do the following:</para>
 
@@ -61,7 +61,7 @@
     </para>
 
     <para>You can add new scripts there, so they will appear in the list of
-    available scripts in the Scripting dialog.</para>
+    available scripts in the Scripting window.</para>
   </section>
 
   <section>

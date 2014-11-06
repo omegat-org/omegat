@@ -777,7 +777,6 @@ public class RealProject implements IProject {
         if (repository.isUnderVersionControl(glossaryFile)) {
             Log.logDebug(LOGGER, "rebaseProject: glossary file {0} is under version control", glossaryFile);
             //glossary is under version control
-            glossaryEntries = GlossaryReaderTSV.read(glossaryFile, true);
             modifiedFiles = new File[]{projectTMXFile, glossaryFile};
             updateGlossary = true;
         } else {
@@ -791,7 +790,10 @@ public class RealProject implements IProject {
 
         while (true) {
             boolean again = false;
-            
+
+            // Load glossary entries inside loop to make sure changes are synced properly.
+            glossaryEntries = GlossaryReaderTSV.read(glossaryFile, true);
+
             //get revisions of files
             String baseRevTMX = repository.getBaseRevisionId(projectTMXFile);
             Log.logDebug(LOGGER, "rebaseProject: TMX base revision: {0}", baseRevTMX);

@@ -791,8 +791,10 @@ public class RealProject implements IProject {
         while (true) {
             boolean again = false;
 
-            // Load glossary entries inside loop to make sure changes are synced properly.
-            glossaryEntries = GlossaryReaderTSV.read(glossaryFile, true);
+            if (updateGlossary) {
+                // Load glossary entries inside loop to make sure changes are synced properly.
+                glossaryEntries = GlossaryReaderTSV.read(glossaryFile, true);
+            }
 
             //get revisions of files
             String baseRevTMX = repository.getBaseRevisionId(projectTMXFile);

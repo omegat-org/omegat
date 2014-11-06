@@ -972,38 +972,39 @@ public class RealProject implements IProject {
                 filenameGlossarywithLocalChangesOnHead = null;
             }
             
+            /* project_save.tmx / writableGlossary are now the head version (or still the base version, if offline)
+             * the old situation is in based_on_<base>.new files
+             * the new situation is in based_on_<head>.new files
+             */
+
+            projectTMXFile.delete(); //delete head version (or base version, if offline)
+            // Rename new file into TMX file
+            if (!filenameTMXwithLocalChangesOnHead.renameTo(projectTMXFile)) {
+                throw new IOException("Error rename new file to tmx");
+            }
+            if (filenameTMXwithLocalChangesOnBase != null) {
+                // Remove temp backup file
+                if (!filenameTMXwithLocalChangesOnBase.delete()) {
+                    throw new IOException("Error remove old file");
+                }
+            }
+            if (updateGlossary) {
+                glossaryFile.delete();
+                if (!filenameGlossarywithLocalChangesOnHead.renameTo(glossaryFile)) {
+                    throw new IOException("Error rename new file to glossary");
+                }
+                if (filenameGlossarywithLocalChangesOnBase != null) {
+                    // Remove temp backup file
+                    if (!filenameGlossarywithLocalChangesOnBase.delete()) {
+                        throw new IOException("Error remove old glossary file");
+                    }
+                }
+            }
+            
             if (!again) {
                 // free memory
                 glossaryEntries = null;
                 break;
-            }
-        }
-        /* project_save.tmx / writableGlossary are now the head version (or still the base version, if offline)
-         * the old situation is in based_on_<base>.new files
-         * the new situation is in based_on_<head>.new files
-         */
-
-        projectTMXFile.delete(); //delete head version (or base version, if offline)
-        // Rename new file into TMX file
-        if (!filenameTMXwithLocalChangesOnHead.renameTo(projectTMXFile)) {
-            throw new IOException("Error rename new file to tmx");
-        }
-        if (filenameTMXwithLocalChangesOnBase != null) {
-            // Remove temp backup file
-            if (!filenameTMXwithLocalChangesOnBase.delete()) {
-                throw new IOException("Error remove old file");
-            }
-        }
-        if (updateGlossary) {
-            glossaryFile.delete();
-            if (!filenameGlossarywithLocalChangesOnHead.renameTo(glossaryFile)) {
-                throw new IOException("Error rename new file to glossary");
-            }
-            if (filenameGlossarywithLocalChangesOnBase != null) {
-                // Remove temp backup file
-                if (!filenameGlossarywithLocalChangesOnBase.delete()) {
-                    throw new IOException("Error remove old glossary file");
-                }
             }
         }
 

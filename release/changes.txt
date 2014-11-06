@@ -2,7 +2,7 @@
  OmegaT 3.1.8 
 ----------------------------------------------------------------------
    5 Enhancements
-   5 Bug fixes
+   6 Bug fixes
    4 Localisation updates
 ----------------------------------------------------------------------
 3.1.8 vs. 3.1.7
@@ -34,6 +34,9 @@ mouse pointer) changed to the Wait icon and could not be restored
 
   - Strange glossary behavior - removing of newly added terms
   https://sourceforge.net/p/omegat/bugs/696/
+
+  - OmegaT keeps temporary files project_save.tmx-based_on_revision_number.new
+  https://sourceforge.net/p/omegat/bugs/683/
 
   Localisation updates:
 

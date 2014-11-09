@@ -456,7 +456,9 @@
 
                   <secondary>Inserting next missing tag</secondary>
                 </indexterm>Inserts only one tag (among the missing ones) at
-              the cursor position.</entry>
+              the cursor position. See also <xref
+              linkend="chapter.suggestions"/> to discover other inserting
+              possibilities (in Missing Tags view).</entry>
             </row>
 
             <row>
@@ -611,7 +613,10 @@
                   <keycap>S</keycap>
                 </keycombo></entry>
 
-              <entry>xxxx</entry>
+              <entry>Use this command to register the translation to be
+              identical to the source, even if "Allow translation to be equal
+              to source" (in Options/Editing Behaviour...) is not
+              checked.</entry>
             </row>
           </tbody>
         </tgroup>
@@ -861,7 +866,13 @@
               <entry><guimenuitem>Mark Auto-Populated
               Segments</guimenuitem></entry>
 
-              <entry>xxxx</entry>
+              <entry>If checked, the background of all segments where the
+              target segment has been auto-populated (from TMXs placed in
+              /tm/auto for example) are displayed in color. The colors are
+              displayed as long as the "Save auto-populated status" (in
+              Options/Editing behaviour..) option is checked, [vb:going deeper
+              in details, with the 3 different colors, and formats with
+              IDs?]</entry>
             </row>
 
             <row>
@@ -959,9 +970,10 @@
             <row>
               <entry><guimenuitem>Scripting...</guimenuitem></entry>
 
-              <entry>Opens a dialog box where the location of external scripts can be 
-              set, and where scripts can be written, run and associated 
-              with a shortcut (see <link linkend="appendix.Scripts.inOmegaT">Scripts
+              <entry>Opens a dialog box where the location of external scripts
+              can be set, and where scripts can be written, run and associated
+              with a shortcut (see <link
+              linkend="appendix.Scripts.inOmegaT">Scripts
               dialog</link>)</entry>
             </row>
           </tbody>

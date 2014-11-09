@@ -7,93 +7,27 @@
     </indexterm></title>
 
   <section id="search.window">
-    <title>Search window</title>
+    <title>Search window<indexterm class="singular">
+        <primary>Shortcuts</primary>
 
-    <figure id="text.search.window">
-      <title>Text search Window<indexterm class="singular">
-          <primary>Search window</primary>
+        <secondary>Search - Ctrl+F</secondary>
+      </indexterm></title>
 
-          <secondary>Example</secondary>
-        </indexterm></title>
+    <para>Open the Search window with <keycombo>
+        <keycap>Ctrl</keycap>
 
-      <mediaobject>
-        <imageobject role="html">
-          <imagedata fileref="images/TextSearch25.png"/>
-        </imageobject>
+        <keycap>F</keycap>
+      </keycombo> and enter the word or phrase you wish to search for in the
+    <emphasis>Search for</emphasis> box. Alternatively, in the Editor window,
+    select a word or phrase in the editing field (target text of the current
+    segment) and hit <keycombo>
+        <keycap>Ctrl</keycap>
 
-        <imageobject role="fo">
-          <imagedata fileref="images/TextSearch25.png" width="90%"/>
-        </imageobject>
-      </mediaobject>
-    </figure>
-
-    <note>
-      <para>The above search finds all target segments that contain
-      characters, rather improbable in the target - i.e. Slovenian -
-      language.</para>
-    </note>
-
-    <section>
-      <title>Searching<indexterm class="singular">
-          <primary>Shortcuts</primary>
-
-          <secondary>Search - Ctrl+F</secondary>
-        </indexterm></title>
-
-      <para><application>OmegaT</application> provides a powerful range of
-      search functions. Open the Search window with <keycombo>
-          <keycap>Ctrl</keycap>
-
-          <keycap>F</keycap>
-        </keycombo> and enter the word or phrase you wish to search for in the
-      Search for box. Alternatively, in the Editor window, select a word or
-      phrase in the editing field (target text of the current segment) and hit
-      <keycombo>
-          <keycap>Ctrl</keycap>
-
-          <keycap>F</keycap>
-        </keycombo>. The word or phrase is entered in the Search for box
-      automatically. You can have several Search windows open at the same
-      time, but close them when they are no longer needed so that they do not
-      clutter your desktop.</para>
-    </section>
-
-    <section>
-      <title>Search location</title>
-
-      <para>Searches are performed by default in both the source and target
-      sections of the project, but you can limit your search to just the
-      source or the target text.</para>
-
-      <para>You may search in</para>
-
-      <itemizedlist>
-        <listitem>
-          <para>the project (check <emphasis>Project)</emphasis>, along with
-          Memory, TMs (in /tm/) or Glossaries (if checked)</para>
-        </listitem>
-      </itemizedlist>
-
-      <itemizedlist>
-        <listitem>
-          <para>or in a single file or a folder containing a set of files
-          (check <emphasis>Files)</emphasis></para>
-        </listitem>
-      </itemizedlist>
-
-      <para>When searching through files (as opposed to translation memories),
-      <application>OmegaT</application> restricts the search to files in
-      source file formats. Consequently, although OmegaT is quite able to
-      handle<filename> tmx</filename> files, it does not include them in the
-      Search files search. If you turn on <emphasis role="bold"><indexterm
-          class="singular">
-          <primary>Searches</primary>
-
-          <secondary>Advanced Options</secondary>
-        </indexterm>Advanced Options</emphasis>, you can combine the search
-      with the name of the author of the translation and time of the last
-      change made.</para>
-    </section>
+        <keycap>F</keycap>
+      </keycombo>. The word or phrase is entered in the <emphasis>Search
+    for</emphasis> box automatically. You can have several Search windows open
+    at the same time, but close them when they are no longer needed so that
+    they do not clutter your desktop.</para>
   </section>
 
   <section id="using.wild.cards">
@@ -201,6 +135,13 @@
       </listitem>
 
       <listitem>
+        <para><emphasis role="bold">Space matches nbsp</emphasis>: when this
+        option is checked, a space character put in search entry can match
+        either a normal space character or a non-breacking space (\u00A)
+        character.</para>
+      </listitem>
+
+      <listitem>
         <para><emphasis role="bold">in source: </emphasis>search in the source
         segments</para>
       </listitem>
@@ -216,15 +157,56 @@
       </listitem>
 
       <listitem>
-        <para><emphasis role="bold">search TMs</emphasis>: translation
-        memories in the <filename>tm</filename> folder are included in the
-        search.</para>
+        <para><emphasis role="bold">in comments: </emphasis>search in comments
+        to segments</para>
       </listitem>
 
       <listitem>
-        <para><emphasis role="bold">display all results: </emphasis>clearing
-        this check box will case OmegaT show just the first occurrence of a
-        hit, if several hits exist</para>
+        <para><emphasis role="bold">Translated or untranslated:
+        </emphasis>search in both translated and untranslated segments.</para>
+      </listitem>
+
+      <listitem>
+        <para><emphasis role="bold">Translated: </emphasis>search only in
+        translated segments.</para>
+      </listitem>
+
+      <listitem>
+        <para><emphasis role="bold">Untranslated: </emphasis>search only in
+        untranslated segments.</para>
+      </listitem>
+
+      <listitem>
+        <para><emphasis role="bold">Display: all matching segments:
+        </emphasis>if checked, all the segments are displayed one by one, even
+        if they are present several times in the same document or in different
+        documents.</para>
+      </listitem>
+
+      <listitem>
+        <para><emphasis role="bold">Display: file names: </emphasis>if
+        checked, the name of the file where each segment is founded is
+        displayed above each result.</para>
+      </listitem>
+
+      <listitem>
+        <para><emphasis role="bold">Search in Project</emphasis>: check
+        <emphasis>Memory</emphasis> to include the project memory
+        (project_save.tmx file) in the search [vb: what's the difference
+        between "Project" and "Project+Memory"?]. Check
+        <emphasis>TMs</emphasis> to include the translation memories located
+        in the <filename>tm</filename> folder in the search. Check
+        <emphasis>Glossaries</emphasis> to include the glossaries located in
+        the <filename>glossary</filename> folder in the search.</para>
+      </listitem>
+
+      <listitem>
+        <para><emphasis role="bold">Search in Files: </emphasis>search in a
+        single file or a folder containing a set of files. When searching
+        through files (as opposed to translation memories), OmegaT restricts
+        the search to files in source file formats. Consequently, although
+        OmegaT is quite able to handle<filename> tmx</filename> files, it does
+        not include them in the Search files search.</para>
       </listitem>
     </itemizedlist>
 
@@ -267,15 +249,15 @@
 
     <itemizedlist>
       <listitem>
-        A search may be limited to 1000 items, so if you search on a common phrase, the editor then shows only those 1000 matching entries, and not all entries that match the search criteria.
+         A search may be limited to 1000 items, so if you search on a common phrase, the editor then shows only those 1000 matching entries, and not all entries that match the search criteria. 
       </listitem>
 
       <listitem>
-        A file might have no matching entries, so it will show empty.
+         A file might have no matching entries, so it will show empty. 
       </listitem>
 
       <listitem>
-        If a search removes duplicates, those duplicates will not be in the Editor.
+         If a search removes duplicates, those duplicates will not be in the Editor. 
       </listitem>
     </itemizedlist>
 

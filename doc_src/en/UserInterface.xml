@@ -917,12 +917,15 @@
           <para>the total number of translatable files in the project. These
           are the files present in the /source folder in a format that OmegaT
           is able to recognize. This number is displayed in brackets, next to
-          the "Project file" title.</para>
+          the "Project file" title</para>
         </listitem>
 
         <listitem>
           <para>the list of all translatable files in the project. Clicking on
-          any file will open it for translation</para>
+          any file will open it for translation. Note: filenames (in first
+          column) can be sorted alphabetically by clicking in the header. It
+          also possible to change the position of a filename, by clicking on
+          it and pressing <emphasis>Move ...</emphasis> buttons.</para>
         </listitem>
       </itemizedlist>
 

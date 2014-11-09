@@ -170,6 +170,17 @@
         </varlistentry>
 
         <varlistentry>
+          <term>tm/enforce folder</term>
+
+          <listitem>
+            <para>If you have no doubt that a TMX is more accurate than the
+            <filename>project_save.tmx</filename> of OmegaT, put this TMX in
+            /tm/enforce to overwrite existing default translations
+            unconditionally.</para>
+          </listitem>
+        </varlistentry>
+
+        <varlistentry>
           <term>tm/mt folder</term>
 
           <listitem>

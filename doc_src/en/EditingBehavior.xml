@@ -268,7 +268,11 @@
       <term>Save auto-populated status</term>
 
       <listitem>
-        <para>xxxxx</para>
+        <para>Check this option to record in the
+        <filename>project_save.tmx</filename> file the information that a
+        segment has been auto-populated, so it can be displayed with a
+        specific color in the Editor pane (if "Mark Auto-Populated Segments"
+        option, in View tab, is checked).</para>
       </listitem>
     </varlistentry>
   </variablelist>

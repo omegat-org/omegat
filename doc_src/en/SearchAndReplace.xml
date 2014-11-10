@@ -35,7 +35,7 @@
         <listitem>
           <para><emphasis role="bold">Replace:</emphasis> operates a "one by
           one" replacement, by the mean of buttons in the <emphasis
-          role="bold">header of Editor pane</emphasis>. Click
+          role="bold">header of the Editor pane</emphasis>. Click
           <emphasis>Replace Next</emphasis> or <emphasis>Skip</emphasis>, then
           end the replacement session with <emphasis>Finish</emphasis>.</para>
         </listitem>

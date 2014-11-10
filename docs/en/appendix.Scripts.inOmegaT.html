@@ -1,0 +1,188 @@
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <title>Appendix&nbsp;F.&nbsp;Scripts</title>
+      <link rel="stylesheet" type="text/css" href="OmegaT.css">
+      <meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
+      <link rel="home" href="index.html" title="OmegaT 3.0 - User's Guide">
+      <link rel="up" href="index.html" title="OmegaT 3.0 - User's Guide">
+      <link rel="prev" href="appendix.LanguageToolPlugin.inOmegaT.html" title="Appendix&nbsp;E.&nbsp;LanguageTool plugin">
+      <link rel="next" href="appendix.website.html" title="Appendix&nbsp;G.&nbsp;OmegaT on the web">
+   </head>
+   <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+      <div class="navheader">
+         <table width="100%" summary="Navigation header">
+            <tr>
+               <th colspan="3" align="center">Appendix&nbsp;F.&nbsp;Scripts</th>
+            </tr>
+            <tr>
+               <td width="20%" align="left"><a accesskey="p" href="appendix.LanguageToolPlugin.inOmegaT.html">Prev</a>&nbsp;
+               </td>
+               <th width="60%" align="center">&nbsp;</th>
+               <td width="20%" align="right">&nbsp;<a accesskey="n" href="appendix.website.html">Next</a></td>
+            </tr>
+         </table>
+         <hr>
+      </div>
+      <div class="appendix">
+         <div class="titlepage">
+            <div>
+               <div>
+                  <h1 class="title"><a name="appendix.Scripts.inOmegaT"></a>Appendix&nbsp;F.&nbsp;Scripts<a class="indexterm" name="d0e11263"></a></h1>
+               </div>
+            </div>
+         </div>
+         <div class="toc">
+            <dl class="toc">
+               <dt><span class="section"><a href="appendix.Scripts.inOmegaT.html#d0e11266">1. Introduction</a></span></dt>
+               <dt><span class="section"><a href="appendix.Scripts.inOmegaT.html#d0e11271">2. Use</a></span></dt>
+               <dt><span class="section"><a href="appendix.Scripts.inOmegaT.html#d0e11311">3. Scripting languages</a></span></dt>
+            </dl>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e11266"></a>1.&nbsp;Introduction
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>OmegaT allows to run scripts written in different scripting
+                   languages.
+            </p>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e11271"></a>2.&nbsp;Use
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>Clicking <span class="guisubmenu">Tools &gt;
+                      </span><span class="guisubmenu">Scripting</span> opens the Scripting
+                   window:
+            </p>
+            <div class="screenshot">
+               <div class="mediaobject"><img src="images/ScriptingDialog.png"></div>
+            </div>
+            <p>The Scripting window allows you to load an existing script into the
+                   text area and run it against the current opened project. To customize the
+                   script feature, do the following:
+            </p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>Load a script into the editor by clicking on its name in the
+                                list on the left panel.
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>Right-click on a button from "&lt;1&gt;" to "&lt;12&gt;" in the
+                                bottom panel and select "Add". In the above example, two scripts
+                                (position 1 and 2) have already been added.
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>When you left-click on the number, the selected script will run.
+                                You can start the selected macros from the main menu as well by using
+                                their entries in the <span class="guisubmenu">Tools </span>menu or by
+                                pressing<span class="keycap"><strong> Ctrl+Alt+F#</strong></span> (# 1 to 12).
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <p>By default, scripts are stored in the "scripts" folder located in
+                   OmegaT installation folder (the folder that contains the OmegaT.jar).
+                   
+            </p>
+            <p>You can add new scripts there, so they will appear in the list of
+                   available scripts in the Scripting window.
+            </p>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e11311"></a>3.&nbsp;Scripting languages
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>The following scripting languages have been implemented:</p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p><span class="bold"><strong>Groovy</strong></span>
+                                  (http://groovy.codehaus.org): is a dynamic language for the Java
+                                  Virtual machine. It builds upon the strengths of Java but has
+                                  additional power features inspired by languages like Python, Ruby
+                                  and Smalltalk.
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p><span class="bold"><strong>JavaScript</strong></span> (sometimes
+                                  abbreviated JS, not to be confused with Java): is a prototype-based
+                                  scripting language that is dynamic, weakly typed and has first-class
+                                  functions. It is a multi-paradigm language, supporting
+                                  object-oriented, imperative, and functional programming styles.
+                                  Being the language behind popular software such as Firefox it is a
+                                  familiar and preferred programming tool in the open-source
+                                  domain.
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <p>All the languages have access to the OmegaT object model,
+                   with the project as the top object. The following code snippet in groovy
+                   for instance scans through all the segments in all files in the current
+                   project and, if the translation exists, prints out the source and the
+                   target of the segment:
+            </p><pre class="programlisting">    files = project.projectFiles;
+    for (i in 0 ..&lt; files.size())
+    {
+        for (j in 0 ..&lt; files[i].entries.size())
+        {
+            currSegment = files[i].entries[j];
+            if (project.getTranslationInfo(currSegment))
+            {
+                source = currSegment.getSrcText();
+                target = project.getTranslationInfo(currSegment).translation;
+                console.println(source + " &gt;&gt;&gt;&gt; " + target);
+            }     
+        }
+    }</pre></div>
+      </div>
+      <div class="navfooter">
+         <hr>
+         <table width="100%" summary="Navigation footer">
+            <tr>
+               <td width="40%" align="left"><a accesskey="p" href="appendix.LanguageToolPlugin.inOmegaT.html">Prev</a>&nbsp;
+               </td>
+               <td width="20%" align="center">&nbsp;</td>
+               <td width="40%" align="right">&nbsp;<a accesskey="n" href="appendix.website.html">Next</a></td>
+            </tr>
+            <tr>
+               <td width="40%" align="left" valign="top">Appendix&nbsp;E.&nbsp;LanguageTool plugin&nbsp;</td>
+               <td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
+               <td width="40%" align="right" valign="top">&nbsp;Appendix&nbsp;G.&nbsp;OmegaT on the web</td>
+            </tr>
+         </table>
+      </div>
+   </body>
+</html>

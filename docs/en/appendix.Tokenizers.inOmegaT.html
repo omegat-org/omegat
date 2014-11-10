@@ -1,0 +1,132 @@
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <title>Appendix&nbsp;D.&nbsp;Tokenizers</title>
+      <link rel="stylesheet" type="text/css" href="OmegaT.css">
+      <meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
+      <link rel="home" href="index.html" title="OmegaT 3.0 - User's Guide">
+      <link rel="up" href="index.html" title="OmegaT 3.0 - User's Guide">
+      <link rel="prev" href="appendix.TeamProjects.html" title="Appendix&nbsp;C.&nbsp;OmegaT Team Projects">
+      <link rel="next" href="appendix.LanguageToolPlugin.inOmegaT.html" title="Appendix&nbsp;E.&nbsp;LanguageTool plugin">
+   </head>
+   <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+      <div class="navheader">
+         <table width="100%" summary="Navigation header">
+            <tr>
+               <th colspan="3" align="center">Appendix&nbsp;D.&nbsp;Tokenizers</th>
+            </tr>
+            <tr>
+               <td width="20%" align="left"><a accesskey="p" href="appendix.TeamProjects.html">Prev</a>&nbsp;
+               </td>
+               <th width="60%" align="center">&nbsp;</th>
+               <td width="20%" align="right">&nbsp;<a accesskey="n" href="appendix.LanguageToolPlugin.inOmegaT.html">Next</a></td>
+            </tr>
+         </table>
+         <hr>
+      </div>
+      <div class="appendix">
+         <div class="titlepage">
+            <div>
+               <div>
+                  <h1 class="title"><a name="appendix.Tokenizers.inOmegaT"></a>Appendix&nbsp;D.&nbsp;Tokenizers<a class="indexterm" name="d0e11170"></a></h1>
+               </div>
+            </div>
+         </div>
+         <div class="toc">
+            <dl class="toc">
+               <dt><span class="section"><a href="appendix.Tokenizers.inOmegaT.html#d0e11173">1. Introduction</a></span></dt>
+               <dt><span class="section"><a href="appendix.Tokenizers.inOmegaT.html#d0e11202">2. Languages selection</a></span></dt>
+            </dl>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e11173"></a>1.&nbsp;Introduction<a class="indexterm" name="d0e11176"></a><a class="indexterm" name="d0e11181"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <p>Tokenizers (or stemmers) improve the quality of matches by
+                   recognizing inflected words in source and translation memory data. They
+                   also improve glossary matching.
+            </p>
+            <p>A stemmer for English, for example, should identify the string
+               "cats" (and possibly "catlike", "catty" etc.) as based on the root "cat",
+               and "stemmer", "stemming", "stemmed" as based on "stem". A stemming
+               algorithm reduces the words "fishing", "fished", "fish", and "fisher" to
+                   the root word, "fish". This is especially useful in case of languages that
+                   use pre- and postfix forms for the stem words. Borrowing an example from
+                   Slovenian, here "good" in all possible grammatically correct forms:
+            </p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>lep, lepa, lepo - singular, masculine, feminine, neutral</p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>lepši, lepša, lepše . - comparative, nominative, masculine,
+                                feminine, neutral, resp. Plural form of the adjective
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>najlepših - superlative, plural, genitive for M,F,N</p>
+                  </li>
+               </ul>
+            </div>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e11202"></a>2.&nbsp;Languages selection
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>Tokenizers are included in OmegaT and active by default. OmegaT
+                   automatically selects a tokenizer for the source and the target language
+                   according to the language settings of the project. It is possible to
+                   select another tokenizer (Language Tokenizer) or a different version of
+                   the tokenizer (Tokenizer Behavior) from the Project Properties
+                   window.
+            </p>
+            <p>In case no tokenizer exists for the current languages, OmegaT
+                   uses Hunspell instead (in that case, make sure that relevant Hunspell
+                   dictionaries are installed).
+            </p>
+            <div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+               <h3 class="title">Incompatibilities</h3>
+               <p>OmegaT will not launch if tokenizers are found in the /plugin
+                        folder. Remove all the tokenizers from the /plugin folder before
+                        starting OmegaT.
+               </p>
+            </div>
+         </div>
+      </div>
+      <div class="navfooter">
+         <hr>
+         <table width="100%" summary="Navigation footer">
+            <tr>
+               <td width="40%" align="left"><a accesskey="p" href="appendix.TeamProjects.html">Prev</a>&nbsp;
+               </td>
+               <td width="20%" align="center">&nbsp;</td>
+               <td width="40%" align="right">&nbsp;<a accesskey="n" href="appendix.LanguageToolPlugin.inOmegaT.html">Next</a></td>
+            </tr>
+            <tr>
+               <td width="40%" align="left" valign="top">Appendix&nbsp;C.&nbsp;OmegaT Team Projects&nbsp;</td>
+               <td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
+               <td width="40%" align="right" valign="top">&nbsp;Appendix&nbsp;E.&nbsp;LanguageTool plugin</td>
+            </tr>
+         </table>
+      </div>
+   </body>
+</html>

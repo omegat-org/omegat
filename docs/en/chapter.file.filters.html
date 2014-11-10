@@ -86,7 +86,7 @@
          </p>
          <p>You can enable project specific filters via the <span class="bold"><strong>Project → Properties...</strong></span>. Click on <span class="guibutton">File
                  Filters</span> button and activate the check box <span class="guimenuitem">Enable
-                 project specific filters</span><a class="indexterm" name="d0e4401"></a>. A copy of the filters configuration will be stored with the
+                 project specific filters</span><a class="indexterm" name="d0e4612"></a>. A copy of the filters configuration will be stored with the
               project in this case. If you later change filters, only the project filters
               will be updated, while the user filters stay unchanged.
          </p>
@@ -98,7 +98,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="file.filters.dialog"></a>1.&nbsp;File filters dialog<a class="indexterm" name="d0e4414"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="file.filters.dialog"></a>1.&nbsp;File filters dialog<a class="indexterm" name="d0e4625"></a></h2>
                   </div>
                </div>
             </div>
@@ -110,12 +110,33 @@
                    filter again, just tick the check box. Click <span class="bold"><strong>Defaults</strong></span> to reset the file filters to the default
                    settings. To edit which files in which encodings the filter is to process,
                    select the filter from the list and click <span class="bold"><strong>Edit.</strong></span></p>
+            <p>The dialog allows to enable or disable the following options:</p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>Remove leading and trailing tags: xxxx</p>
+                  </li>
+                  <li class="listitem">
+                     <p>Remove leading and trailing whitespace in non-segmented
+                                projects; xxxx
+                     </p>
+                  </li>
+                  <li class="listitem">
+                     <p>Preserve spaces for all tags: xxxx</p>
+                  </li>
+                  <li class="listitem">
+                     <p>Ignore file context when identifying segments with alternate
+                                translations: xxxx
+                     </p>
+                  </li>
+               </ul>
+            </div>
          </div>
          <div class="section">
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="filters.options"></a>2.&nbsp;Filter options<a class="indexterm" name="d0e4429"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="filters.options"></a>2.&nbsp;Filter options<a class="indexterm" name="d0e4655"></a></h2>
                   </div>
                </div>
             </div>
@@ -404,7 +425,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="edit.filter.dialog"></a>3.&nbsp;Edit filter dialog<a class="indexterm" name="d0e4632"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="edit.filter.dialog"></a>3.&nbsp;Edit filter dialog<a class="indexterm" name="d0e4858"></a></h2>
                   </div>
                </div>
             </div>
@@ -422,7 +443,7 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="source.filetype.and.filename.pattern"></a>3.1.&nbsp;<a class="indexterm" name="d0e4647"></a>Source file type, filename pattern<a class="indexterm" name="d0e4653"></a></h3>
+                        <h3 class="title"><a name="source.filetype.and.filename.pattern"></a>3.1.&nbsp;<a class="indexterm" name="d0e4873"></a>Source file type, filename pattern<a class="indexterm" name="d0e4879"></a></h3>
                      </div>
                   </div>
                </div>
@@ -451,7 +472,7 @@
                         </h3>
                      </div>
                   </div>
-               </div><a class="indexterm" name="d0e4681"></a><a class="indexterm" name="d0e4686"></a><a class="indexterm" name="d0e4691"></a><p>Only a limited number of file formats specify a mandatory
+               </div><a class="indexterm" name="d0e4907"></a><a class="indexterm" name="d0e4912"></a><a class="indexterm" name="d0e4917"></a><p>Only a limited number of file formats specify a mandatory
                         encoding. File formats that do not specify their encoding will use the
                         encoding you set up for the extension that matches their name. For
                         example, by default <code class="literal">.txt</code> files will be loaded using
@@ -496,14 +517,14 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="target.name"></a>3.3.&nbsp;Target filename<a class="indexterm" name="d0e4719"></a></h3>
+                        <h3 class="title"><a name="target.name"></a>3.3.&nbsp;Target filename<a class="indexterm" name="d0e4945"></a></h3>
                      </div>
                   </div>
                </div>
                <p>Sometimes you may wish to rename the files you translate
                         automatically, for example adding a language code after the file name.
                         The target filename pattern uses a special syntax, so if you wish to
-                        edit this field, you must click <span class="bold"><strong>Edit...</strong></span>and use the <a class="indexterm" name="d0e4729"></a>Edit Pattern Dialog. If you wish to revert to default
+                        edit this field, you must click <span class="bold"><strong>Edit...</strong></span>and use the <a class="indexterm" name="d0e4955"></a>Edit Pattern Dialog. If you wish to revert to default
                         configuration of the filter, click <span class="bold"><strong>Defaults.</strong></span> You may also modify the name directly
                         in the target filename pattern field of the file filters dialog. The
                         Edit Pattern Dialog offers among others the following options:
@@ -576,28 +597,33 @@
                         </p>
                      </li>
                      <li class="listitem">
-                        <p><code class="literal">${system-os-name}</code> - operating system of the computer
-                                     used
+                        <p><code class="literal">${system-os-name}</code> - operating system of the
+                                     computer used
                         </p>
                      </li>
                      <li class="listitem">
-                        <p><code class="literal">${system-user-name}</code> - system user name
+                        <p><code class="literal">${system-user-name}</code> - system user
+                                     name
                         </p>
                      </li>
                      <li class="listitem">
-                        <p><code class="literal">${system-host-name}</code> - system host name
+                        <p><code class="literal">${system-host-name}</code> - system host
+                                     name
                         </p>
                      </li>
                      <li class="listitem">
-                        <p><code class="literal">${file-source-encoding}</code> - source file encoding
+                        <p><code class="literal">${file-source-encoding}</code> - source file
+                                     encoding
                         </p>
                      </li>
                      <li class="listitem">
-                        <p><code class="literal">${file-target-encoding}</code> - target file encoding
+                        <p><code class="literal">${file-target-encoding}</code> - target file
+                                     encoding
                         </p>
                      </li>
                      <li class="listitem">
-                        <p><code class="literal">${targetLocaleLCID}</code> - Microsoft target locale
+                        <p><code class="literal">${targetLocaleLCID}</code> - Microsoft target
+                                     locale
                         </p>
                      </li>
                   </ul>

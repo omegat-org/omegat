@@ -40,7 +40,7 @@
                <dd>
                   <dl>
                      <dt><span class="section"><a href="chapter.menu.html#submenu.Project">1.1. Project</a></span></dt>
-                     <dt><span class="section"><a href="chapter.menu.html#d0e3030">1.2. Edit</a></span></dt>
+                     <dt><span class="section"><a href="chapter.menu.html#d0e3072">1.2. Edit</a></span></dt>
                      <dt><span class="section"><a href="chapter.menu.html#submenu.GoTo">1.3. Go to</a></span></dt>
                      <dt><span class="section"><a href="chapter.menu.html#submenu.View">1.4. View</a></span></dt>
                      <dt><span class="section"><a href="chapter.menu.html#submenu.Tools">1.5. Tools</a></span></dt>
@@ -51,7 +51,7 @@
                <dt><span class="section"><a href="chapter.menu.html#keyboard.shortcuts">2. Keyboard shortcuts</a></span></dt>
                <dd>
                   <dl>
-                     <dt><span class="section"><a href="chapter.menu.html#d0e3793">2.1. Project management</a></span></dt>
+                     <dt><span class="section"><a href="chapter.menu.html#d0e4004">2.1. Project management</a></span></dt>
                      <dt><span class="section"><a href="chapter.menu.html#keyboard.editing">2.2. Editing</a></span></dt>
                      <dt><span class="section"><a href="chapter.menu.html#keyboard.moving.around">2.3. Moving around</a></span></dt>
                      <dt><span class="section"><a href="chapter.menu.html#keyboard.other">2.4. Other</a></span></dt>
@@ -63,7 +63,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="ch04.main.menu"></a>1.&nbsp;<a class="indexterm" name="d0e2828"></a>Main Menu
+                     <h2 class="title" style="clear: both"><a name="ch04.main.menu"></a>1.&nbsp;<a class="indexterm" name="d0e2836"></a>Main Menu
                      </h2>
                   </div>
                </div>
@@ -110,11 +110,11 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="submenu.Project"></a>1.1.&nbsp;Project<a class="indexterm" name="d0e2886"></a></h3>
+                        <h3 class="title"><a name="submenu.Project"></a>1.1.&nbsp;Project<a class="indexterm" name="d0e2894"></a></h3>
                      </div>
                   </div>
                </div>
-               <div class="table"><a name="d0e2891"></a><p class="title"><b>Table&nbsp;5.2.&nbsp;Project menu</b></p>
+               <div class="table"><a name="d0e2899"></a><p class="title"><b>Table&nbsp;5.2.&nbsp;Project menu</b></p>
                   <div class="table-contents">
                      <table summary="Project menu" border="1">
                         <colgroup>
@@ -124,18 +124,31 @@
                         </colgroup>
                         <tbody>
                            <tr>
-                              <td align="left"><span class="guimenuitem">New</span></td>
-                              <td align="left">&nbsp;</td>
+                              <td align="left"><span class="guimenuitem">New...</span></td>
+                              <td align="left"><span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>Shift</strong></span>+<span class="keycap"><strong>N</strong></span></td>
                               <td>Creates and opens a new project. The dialog to create a
                                                project is the same as to edit the project. See <a class="xref" href="chapter.project.properties.html" title="Chapter&nbsp;6.&nbsp;Project properties">Chapter&nbsp;6, <i>Project properties</i></a></td>
                            </tr>
                            <tr>
-                              <td align="left"><span class="guimenuitem">Open</span></td>
+                              <td align="left"><span class="guimenuitem">Download Team
+                                                  Project...</span></td>
+                              <td align="left">&nbsp;</td>
+                              <td>Creates a local copy of a remote OmegaT project. See
+                                               <a class="xref" href="">???</a></td>
+                           </tr>
+                           <tr>
+                              <td align="left"><span class="guimenuitem">Open...</span></td>
                               <td align="left"><span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>O</strong></span></td>
                               <td>Opens a previously created project.</td>
                            </tr>
                            <tr>
-                              <td align="left"><span class="guimenuitem">Import Source Files...</span></td>
+                              <td align="left"><span class="guimenuitem">Open Recent Project</span></td>
+                              <td align="left">&nbsp;</td>
+                              <td>Give access to the five last edited projects</td>
+                           </tr>
+                           <tr>
+                              <td align="left"><span class="guimenuitem">Copy Files to Source
+                                                  Folder...</span></td>
                               <td align="left">&nbsp;</td>
                               <td>Copies the selected files to the
                                                <code class="filename">source</code> folder and reloads the project to
@@ -143,10 +156,10 @@
                               </td>
                            </tr>
                            <tr>
-                              <td align="left"><span class="guimenuitem">Import From
-                                                  MediaWiki...</span></td>
+                              <td align="left"><span class="guimenuitem">Download MediaWiki
+                                                  Page...</span></td>
                               <td align="left">&nbsp;</td>
-                              <td>Imports units from MediaWiki pages, based on the URL
+                              <td>Downloads units from MediaWiki pages, based on the URL
                                                entered.
                               </td>
                            </tr>
@@ -172,12 +185,20 @@
                               </td>
                            </tr>
                            <tr>
-                              <td align="left"><span class="guimenuitem">Create translated
-                                                  documents</span></td>
+                              <td align="left"><span class="guimenuitem">Create Translated
+                                                  Documents</span></td>
                               <td align="left"><span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>D</strong></span></td>
                               <td>Creates the target documents based on your translation of
                                                the documents' text. The created target documents are located in
                                                the <code class="filename">target</code> folder.
+                              </td>
+                           </tr>
+                           <tr>
+                              <td align="left"><span class="guimenuitem">Create Current Translated
+                                                  Document</span></td>
+                              <td align="left"><span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>D</strong></span></td>
+                              <td>Creates the target document corresponding to the current
+                                               document in translation.
                               </td>
                            </tr>
                            <tr>
@@ -211,7 +232,7 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="d0e3030"></a>1.2.&nbsp;Edit<a class="indexterm" name="d0e3033"></a></h3>
+                        <h3 class="title"><a name="d0e3072"></a>1.2.&nbsp;Edit<a class="indexterm" name="d0e3075"></a></h3>
                      </div>
                   </div>
                </div>
@@ -219,7 +240,7 @@
                         are not displayed in this menu, but are available using your system
                         shortcuts. For example:
                </p>
-               <div class="table"><a name="d0e3040"></a><p class="title"><b>Table&nbsp;5.3.&nbsp;Copy/cut/paste shortcuts</b></p>
+               <div class="table"><a name="d0e3082"></a><p class="title"><b>Table&nbsp;5.3.&nbsp;Copy/cut/paste shortcuts</b></p>
                   <div class="table-contents">
                      <table summary="Copy/cut/paste shortcuts" border="1">
                         <colgroup>
@@ -251,7 +272,7 @@
                      </table>
                   </div>
                </div><br class="table-break"><p>The Edit menu itself contains the following items:</p>
-               <div class="table"><a name="d0e3085"></a><p class="title"><b>Table&nbsp;5.4.&nbsp;Edit menu</b></p>
+               <div class="table"><a name="d0e3127"></a><p class="title"><b>Table&nbsp;5.4.&nbsp;Edit menu</b></p>
                   <div class="table-contents">
                      <table summary="Edit menu" border="1">
                         <colgroup>
@@ -304,31 +325,36 @@
                            </tr>
                            <tr>
                               <td align="left"><span class="guimenuitem">Replace With Source</span></td>
-                              <td align="left"><span class="keycap"><strong>Shift</strong></span>+<span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>R</strong></span></td>
+                              <td align="left"><span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>Shift</strong></span>+<span class="keycap"><strong>R</strong></span></td>
                               <td>Replaces the whole target segment with the
                                                source.
                               </td>
                            </tr>
                            <tr>
                               <td align="left"><span class="guimenuitem">Insert Source</span></td>
-                              <td align="left"><span class="keycap"><strong>Shift</strong></span>+<span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>I</strong></span></td>
+                              <td align="left"><span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>Shift</strong></span>+<span class="keycap"><strong>I</strong></span></td>
                               <td>Inserts the source at the cursor position.</td>
                            </tr>
                            <tr>
-                              <td align="left"><span class="guimenuitem">Insert Source Tags</span></td>
-                              <td align="left"><span class="keycap"><strong>Shift</strong></span>+<span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>T</strong></span></td>
-                              <td><a class="indexterm" name="d0e3193"></a>Inserts the source tags at the cursor position.
-                                               All the relevant tags in the source - i.e. OmegaT as well as
-                                               custom, Java, printf etc tags - will be inserted into the
-                                               current target, regardless of whether they are already there or
-                                               not. Texts, bracketed by tags, are replaced by spaces:.
-                                               <code class="literal">&lt;f0&gt;&lt;f1&gt;This is
-                                                  text&lt;/f0&gt;&lt;/f1&gt;</code> thus will be copied as
-                                               <code class="literal">&lt;f0&gt;&lt;f1&gt;one_space&lt;/f0&gt;&lt;/f1&gt;</code></td>
+                              <td align="left"><span class="guimenuitem">Insert Missing Source
+                                                  Tags</span></td>
+                              <td align="left"><span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>Shift</strong></span>+<span class="keycap"><strong>T</strong></span></td>
+                              <td><a class="indexterm" name="d0e3235"></a>Inserts the source tags (if they where missing) at
+                                               the cursor position.
+                              </td>
+                           </tr>
+                           <tr>
+                              <td align="left"><span class="guimenuitem">Insert Next Missing
+                                                  Tag</span></td>
+                              <td align="left"><span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>T</strong></span></td>
+                              <td><a class="indexterm" name="d0e3252"></a>Inserts only one tag (among the missing ones) at
+                                               the cursor position. See also <a class="xref" href="">???</a> to discover other inserting
+                                               possibilities (in Missing Tags view).
+                              </td>
                            </tr>
                            <tr>
                               <td align="left"><span class="guimenuitem">Export Selection</span></td>
-                              <td align="left"><span class="keycap"><strong>Shift</strong></span>+<span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>C</strong></span></td>
+                              <td align="left"><span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>Shift</strong></span>+<span class="keycap"><strong>C</strong></span></td>
                               <td>Exports the current selection to a text file for
                                                processing. If no text has been selected, the current source
                                                segment is written to this file. When the user exits
@@ -341,7 +367,7 @@
                            </tr>
                            <tr>
                               <td align="left"><span class="guimenuitem">Create Glossary Entry</span></td>
-                              <td align="left"><span class="keycap"><strong>Shift</strong></span>+<span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>G</strong></span></td>
+                              <td align="left"><span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>Shift</strong></span>+<span class="keycap"><strong>G</strong></span></td>
                               <td>Allows the user create an entry in the default glossary
                                                file.
                               </td>
@@ -354,19 +380,26 @@
                               </td>
                            </tr>
                            <tr>
-                              <td align="left"><span class="guimenuitem">Switch case to...</span></td>
+                              <td align="left"><span class="guimenuitem">Search and Replace...</span></td>
+                              <td align="left"><span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>K</strong></span></td>
+                              <td>Opens a new <a class="link" href="">Search and replace
+                                                  window</a>.
+                              </td>
+                           </tr>
+                           <tr>
+                              <td align="left"><span class="guimenuitem">Switch case to</span></td>
                               <td align="left"><span class="keycap"><strong>Shift</strong></span>+<span class="keycap"><strong>F3</strong></span> (see text)
                               </td>
                               <td>Changes the case of the highlighted text in the target
                                                segment to the selected option (Lower case, Upper case or Title
-                                               case). Use Shift+F3 <a class="indexterm" name="d0e3268"></a>to cycle through the three alternatives. If no
+                                               case). Use Shift+F3 <a class="indexterm" name="d0e3339"></a>to cycle through the three alternatives. If no
                                                text is selected, <span class="application">OmegaT</span> selects the
                                                word that contains the letter immediately to the right of the
                                                cursor.
                               </td>
                            </tr>
                            <tr>
-                              <td align="left"><span class="guimenuitem">Select Fuzzy Match #N</span></td>
+                              <td align="left"><span class="guimenuitem">Select Match</span></td>
                               <td align="left"><span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>#N</strong></span></td>
                               <td>(#N is a digit from 1 to 5) - Selects the Nth fuzzy match
                                                displayed in the match viewer to replace or insert it to the
@@ -394,6 +427,26 @@
                                                alternative translation.
                               </td>
                            </tr>
+                           <tr>
+                              <td align="left"><span class="guimenuitem">Remove Translation</span></td>
+                              <td align="left">&nbsp;</td>
+                              <td>xxxx</td>
+                           </tr>
+                           <tr>
+                              <td align="left"><span class="guimenuitem">Set empty translation</span></td>
+                              <td align="left">&nbsp;</td>
+                              <td>xxxx</td>
+                           </tr>
+                           <tr>
+                              <td align="left"><span class="guimenuitem">Register Identical
+                                                  Translation</span></td>
+                              <td align="left"><span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>Shift</strong></span>+<span class="keycap"><strong>S</strong></span></td>
+                              <td>Use this command to register the translation to be
+                                               identical to the source, even if "Allow translation to be equal
+                                               to source" (in Options/Editing Behaviour...) is not
+                                               checked.
+                              </td>
+                           </tr>
                         </tbody>
                      </table>
                   </div>
@@ -402,11 +455,11 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="submenu.GoTo"></a>1.3.&nbsp;Go to<a class="indexterm" name="d0e3308"></a></h3>
+                        <h3 class="title"><a name="submenu.GoTo"></a>1.3.&nbsp;Go to<a class="indexterm" name="d0e3407"></a></h3>
                      </div>
                   </div>
                </div>
-               <div class="table"><a name="d0e3313"></a><p class="title"><b>Table&nbsp;5.5.&nbsp;Go To menu</b></p>
+               <div class="table"><a name="d0e3412"></a><p class="title"><b>Table&nbsp;5.5.&nbsp;Go To menu</b></p>
                   <div class="table-contents">
                      <table summary="Go To menu" border="1">
                         <colgroup>
@@ -424,9 +477,16 @@
                               </td>
                            </tr>
                            <tr>
+                              <td align="left"><span class="guimenuitem">Next Translated
+                                                  Segment</span></td>
+                              <td align="left"><span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>Shift</strong></span>+<span class="keycap"><strong>U</strong></span></td>
+                              <td>Moves to the next already translated segment, ignoring
+                                               untranslated segments.
+                              </td>
+                           </tr>
+                           <tr>
                               <td align="left"><span class="guimenuitem">Next Segment</span></td>
-                              <td align="left"><span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>N</strong></span> or <span class="keycap"><strong>Enter</strong></span> or
-                                               <span class="keycap"><strong>Tab</strong></span></td>
+                              <td align="left"><span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>N</strong></span> or <span class="keycap"><strong>Enter</strong></span></td>
                               <td>Moves to the next segment. If the current segment is the
                                                last segment in a file, it moves to the first segment of the
                                                next file.
@@ -434,7 +494,7 @@
                            </tr>
                            <tr>
                               <td align="left"><span class="guimenuitem">Previous Segment</span></td>
-                              <td align="left"><span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>P</strong></span> or <span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>Enter</strong></span> or <span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>Tab</strong></span></td>
+                              <td align="left"><span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>P</strong></span> or <span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>Enter</strong></span></td>
                               <td>Moves to the previous segment. If the current segment is
                                                the first one in a file, it moves to the last segment of the
                                                previous file.
@@ -458,6 +518,12 @@
                               <td align="left"><span class="guimenuitem">Previous Note</span></td>
                               <td align="left">&nbsp;</td>
                               <td>The previous segment with a note will open.</td>
+                           </tr>
+                           <tr>
+                              <td align="left"><span class="guimenuitem">Source of Selected
+                                                  Match</span></td>
+                              <td align="left"><span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>Shift</strong></span>+<span class="keycap"><strong>M</strong></span></td>
+                              <td>xxxx</td>
                            </tr>
                            <tr>
                               <td align="left"><span class="guimenuitem">Forward in history...</span></td>
@@ -485,11 +551,11 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="submenu.View"></a>1.4.&nbsp;View<a class="indexterm" name="d0e3439"></a></h3>
+                        <h3 class="title"><a name="submenu.View"></a>1.4.&nbsp;View<a class="indexterm" name="d0e3557"></a></h3>
                      </div>
                   </div>
                </div>
-               <div class="table"><a name="d0e3444"></a><p class="title"><b>Table&nbsp;5.6.&nbsp;View menu</b></p>
+               <div class="table"><a name="d0e3562"></a><p class="title"><b>Table&nbsp;5.6.&nbsp;View menu</b></p>
                   <div class="table-contents">
                      <table summary="View menu" border="1">
                         <colgroup>
@@ -537,34 +603,58 @@
                            <tr>
                               <td align="left"><span class="guimenuitem">Mark Non-breakable
                                                   Spaces</span></td>
-                              <td>If checked, non-breakable spaces in the segment will be
-                                               displayed with a grey background.
+                              <td>If checked, non-breakable spaces will be displayed with a
+                                               grey background.
+                              </td>
+                           </tr>
+                           <tr>
+                              <td align="left"><span class="guimenuitem">Mark Whitespace</span></td>
+                              <td>If checked, white spaces will be displayed with a small
+                                               dot.
+                              </td>
+                           </tr>
+                           <tr>
+                              <td align="left"><span class="guimenuitem">Mark Bidirectional Algorithm Control
+                                                  Characters</span></td>
+                              <td>xxxx</td>
+                           </tr>
+                           <tr>
+                              <td align="left"><span class="guimenuitem">Mark Auto-Populated
+                                                  Segments</span></td>
+                              <td>If checked, the background of all segments where the
+                                               target segment has been auto-populated (from TMXs placed in
+                                               /tm/auto for example) are displayed in color. The colors are
+                                               displayed as long as the "Save auto-populated status" (in
+                                               Options/Editing behaviour..) option is checked, [vb:going deeper
+                                               in details, with the 3 different colors, and formats with
+                                               IDs?]
                               </td>
                            </tr>
                            <tr>
                               <td align="left"><span class="guimenuitem">Modification Info</span></td>
                               <td>Setting the Display Modification option to
-                                               <span class="emphasis"><em>Selected</em></span> will display the time and the
-                                               author of the last change in the current segment. Setting it
-                                               to<span class="emphasis"><em> All </em></span>shows this information for all
-                                               segments and <span class="emphasis"><em>None</em></span> turns this option
+                                               <span class="emphasis"><em>Current segment</em></span> will display the time and
+                                               the author of the last change in the current segment. Setting it
+                                               to<span class="emphasis"><em> All segments </em></span>shows this information for
+                                               all segments and <span class="emphasis"><em>None</em></span> turns this option
                                                off.
                               </td>
                            </tr>
                         </tbody>
                      </table>
                   </div>
-               </div><br class="table-break"></div>
+               </div><br class="table-break"><p>Note: colors are customizable through the xxxx dialog box.</p>
+            </div>
             <div class="section">
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="submenu.Tools"></a>1.5.&nbsp;Tools<a class="indexterm" name="d0e3504"></a></h3>
+                        <h3 class="title"><a name="submenu.Tools"></a>1.5.&nbsp;Tools<a class="indexterm" name="d0e3642"></a></h3>
                      </div>
                   </div>
                </div>
-               <div class="table"><a name="d0e3509"></a><p class="title"><b>Table&nbsp;5.7.&nbsp;Tools menu</b></p>
-                  <div class="table-contents"><a class="indexterm" name="d0e3512"></a><a class="indexterm" name="d0e3517"></a><a class="indexterm" name="d0e3522"></a><table summary="Tools menu" border="1">
+               <div class="table"><a name="d0e3647"></a><p class="title"><b>Table&nbsp;5.7.&nbsp;Tools menu</b></p>
+                  <div class="table-contents"><a class="indexterm" name="d0e3650"></a><a class="indexterm" name="d0e3655"></a><a class="indexterm" name="d0e3660"></a><table summary="Tools menu" border="1">
                         <colgroup>
                            <col align="left">
                            <col>
@@ -572,21 +662,16 @@
                         <tbody>
                            <tr>
                               <td align="left"><span class="guimenuitem">Validate Tags</span></td>
-                              <td><span class="guimenu">Ctrl+T</span>: Checks for missing or
+                              <td><span class="guimenu">Ctrl+Shift+V</span>: Checks for missing or
                                                displaced tags in formatted files. Will display a list of
                                                segments with tag errors and possible inconsistencies. See <a class="link" href="chapter.user.interface.html#section.tag.validation" title="3.3.&nbsp;Tag validation">Tag Validation</a> and <a class="xref" href="chapter.formatted.text.html" title="Chapter&nbsp;12.&nbsp;Working with formatted text">Chapter&nbsp;12, <i>Working with formatted text</i></a>.
                               </td>
                            </tr>
                            <tr>
-                              <td align="left"><span class="guimenuitem">Remove Tags</span></td>
-                              <td>When enabled, all the formatting tags are removed from
-                                               source segments. This is useful when dealing with texts where
-                                               inline formatting has no real use (e.g., OCRed PDF, bad
-                                               converted .odt or .docx, etc.) Only inline tags are removed, so
-                                               normally there should be no problem with opening the target
-                                               documents. Non-visible formatting (i.e., which doesn't appear as
-                                               tags in the OmegaT editor) is kept in the target
-                                               document.
+                              <td align="left"><span class="guimenuitem">Validate Tags for Current
+                                                  Document</span></td>
+                              <td>Same as above, but only for the current document in
+                                               translation.
                               </td>
                            </tr>
                            <tr>
@@ -603,6 +688,22 @@
                                                segments, words and in characters.
                               </td>
                            </tr>
+                           <tr>
+                              <td align="left"><span class="guimenuitem">Match Statistics per
+                                                  File</span></td>
+                              <td>Displays the Match Statistics for each file of the
+                                               project: the number of repetitions, exact matches, fuzzy matches
+                                               and no-matches, for segments, words and in characters.
+                              </td>
+                           </tr>
+                           <tr>
+                              <td align="left"><span class="guimenuitem">Scripting...</span></td>
+                              <td>Opens a dialog box where the location of external scripts
+                                               can be set, and where scripts can be written, run and associated
+                                               with a shortcut (see <a class="link" href="appendix.Scripts.inOmegaT.html" title="Appendix&nbsp;F.&nbsp;Scripts">Scripts
+                                                  dialog</a>)
+                              </td>
+                           </tr>
                         </tbody>
                      </table>
                   </div>
@@ -611,12 +712,12 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="submenu.Options"></a>1.6.&nbsp;<a class="indexterm" name="d0e3563"></a>Options
+                        <h3 class="title"><a name="submenu.Options"></a>1.6.&nbsp;<a class="indexterm" name="d0e3716"></a>Options
                         </h3>
                      </div>
                   </div>
                </div>
-               <div class="table"><a name="d0e3569"></a><p class="title"><b>Table&nbsp;5.8.&nbsp;Options menu</b></p>
+               <div class="table"><a name="d0e3722"></a><p class="title"><b>Table&nbsp;5.8.&nbsp;Options menu</b></p>
                   <div class="table-contents">
                      <table summary="Options menu" border="1">
                         <colgroup>
@@ -647,7 +748,20 @@
                            </tr>
                            <tr>
                               <td align="left"><span class="guimenuitem">Glossary</span></td>
-                              <td>reserved for future use by plugins</td>
+                              <td>xxxx Display Context Description for TBX
+                                               Glossaries
+                                 <p>Click on <span class="guimenuitem">Browse TaaS
+                                                     Collections...</span> to display a window where
+                                                  xxxxx
+                                 </p>
+                                 <p>Click on <span class="guimenuitem">Select TaaS Terminology
+                                                     Lookup Domain...</span> to display a window where
+                                                  xxxxx
+                                 </p>
+                                 <p>Select <span class="guimenuitem">&amp;TaaS Terminology
+                                                     Lookup</span> to xxxx
+                                 </p>
+                              </td>
                            </tr>
                            <tr>
                               <td align="left"><span class="guimenuitem">TransTips</span></td>
@@ -661,6 +775,22 @@
                                                <span class="emphasis"><em>TransTips/Exact Match </em></span> checked, only
                                                complete words will be checked, otherwise parts of words will be
                                                matched as well.
+                              </td>
+                           </tr>
+                           <tr>
+                              <td align="left"><span class="guimenuitem">Auto-completion</span></td>
+                              <td>
+                                 <p>Click on <span class="guimenuitem">Glossary...</span> to
+                                                  display a window where xxxxx
+                                 </p>
+                                 <p>Click on
+                                                  <span class="guimenuitem">Auto-text...</span> to display a window
+                                                  where xxxxx
+                                 </p>
+                                 <p>Click on <span class="guimenuitem">Character
+                                                     Table...</span> to display a window where
+                                                  xxxxx
+                                 </p>
                               </td>
                            </tr>
                            <tr>
@@ -717,15 +847,20 @@
                            </tr>
                            <tr>
                               <td align="left"><span class="guimenuitem">View...</span></td>
-                              <td>Contains the option to have all source segments in bold
-                                               and to mark the first non-unique segment.
+                              <td>Contains options for displaying texts and modification
+                                               informations in different ways.
                               </td>
                            </tr>
                            <tr>
-                              <td align="left"><span class="guimenuitem">Save...</span></td>
+                              <td align="left"><span class="guimenuitem">Saving and Output...</span></td>
                               <td>Allows the user select the interval - in minutes and
                                                seconds - between consecutive automatic saves of the project.
                                                The minimum is 10 seconds.
+                                 <p>The dialog box allows also to
+                                                  set external Post-processing commands (that are executed after
+                                                  <span class="guimenuitem">Create Translated Documents</span>
+                                                  command
+                                 </p>
                               </td>
                            </tr>
                            <tr>
@@ -743,6 +878,10 @@
                                                do not appear as expected following an OmegaT upgrade.
                               </td>
                            </tr>
+                           <tr>
+                              <td align="left"><span class="guimenuitem">Language Checker</span></td>
+                              <td>When selected, xxxx</td>
+                           </tr>
                         </tbody>
                      </table>
                   </div>
@@ -751,11 +890,11 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="submenu.Help"></a>1.7.&nbsp;Help<a class="indexterm" name="d0e3718"></a></h3>
+                        <h3 class="title"><a name="submenu.Help"></a>1.7.&nbsp;Help<a class="indexterm" name="d0e3917"></a></h3>
                      </div>
                   </div>
                </div>
-               <div class="table"><a name="d0e3723"></a><p class="title"><b>Table&nbsp;5.9.&nbsp;Help menu</b></p>
+               <div class="table"><a name="d0e3922"></a><p class="title"><b>Table&nbsp;5.9.&nbsp;Help menu</b></p>
                   <div class="table-contents">
                      <table summary="Help menu" border="1">
                         <colgroup>
@@ -775,6 +914,19 @@
                                                information.
                               </td>
                            </tr>
+                           <tr>
+                              <td align="left"><span class="guimenuitem">Last Changes...</span></td>
+                              <td>Displays the list of new functionalities, enhancements
+                                               and bug fixes for each new release.
+                              </td>
+                           </tr>
+                           <tr>
+                              <td align="left"><span class="guimenuitem">Log...</span></td>
+                              <td>Displays the current log file. The title of the dialog
+                                               reflects the file actually used (which depends on how many
+                                               instances of OmegaT are running concurrently).
+                              </td>
+                           </tr>
                         </tbody>
                      </table>
                   </div>
@@ -784,7 +936,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="keyboard.shortcuts"></a>2.&nbsp;Keyboard shortcuts<a class="indexterm" name="d0e3746"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="keyboard.shortcuts"></a>2.&nbsp;Keyboard shortcuts<a class="indexterm" name="d0e3957"></a></h2>
                   </div>
                </div>
             </div>
@@ -843,11 +995,11 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="d0e3793"></a>2.1.&nbsp;<a class="indexterm" name="d0e3795"></a>Project management<a class="indexterm" name="d0e3801"></a></h3>
+                        <h3 class="title"><a name="d0e4004"></a>2.1.&nbsp;<a class="indexterm" name="d0e4006"></a>Project management<a class="indexterm" name="d0e4012"></a></h3>
                      </div>
                   </div>
                </div>
-               <div class="table"><a name="d0e3806"></a><p class="title"><b>Table&nbsp;5.10.&nbsp;Project management shortcuts</b></p>
+               <div class="table"><a name="d0e4017"></a><p class="title"><b>Table&nbsp;5.10.&nbsp;Project management shortcuts</b></p>
                   <div class="table-contents">
                      <table summary="Project management shortcuts" border="1">
                         <colgroup>
@@ -859,9 +1011,7 @@
                            <tr>
                               <td align="left">Open project</td>
                               <td align="left"><span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>O</strong></span></td>
-                              <td>Displays a dialog to locate an existing
-                                               project.
-                              </td>
+                              <td>Displays a dialog to locate an existing project.</td>
                            </tr>
                            <tr>
                               <td align="left">Save</td>
@@ -899,11 +1049,11 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="keyboard.editing"></a>2.2.&nbsp;<a class="indexterm" name="d0e3875"></a>Editing<a class="indexterm" name="d0e3881"></a></h3>
+                        <h3 class="title"><a name="keyboard.editing"></a>2.2.&nbsp;<a class="indexterm" name="d0e4086"></a>Editing<a class="indexterm" name="d0e4092"></a></h3>
                      </div>
                   </div>
                </div>
-               <div class="table"><a name="d0e3886"></a><p class="title"><b>Table&nbsp;5.11.&nbsp;Editing shortcuts</b></p>
+               <div class="table"><a name="d0e4097"></a><p class="title"><b>Table&nbsp;5.11.&nbsp;Editing shortcuts</b></p>
                   <div class="table-contents">
                      <table summary="Editing shortcuts" border="1">
                         <colgroup>
@@ -1007,12 +1157,12 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="keyboard.moving.around"></a>2.3.&nbsp;<a class="indexterm" name="d0e4031"></a>Moving around
+                        <h3 class="title"><a name="keyboard.moving.around"></a>2.3.&nbsp;<a class="indexterm" name="d0e4242"></a>Moving around
                         </h3>
                      </div>
                   </div>
                </div>
-               <div class="table"><a name="d0e4037"></a><p class="title"><b>Table&nbsp;5.12.&nbsp;Moving around shortcuts</b></p>
+               <div class="table"><a name="d0e4248"></a><p class="title"><b>Table&nbsp;5.12.&nbsp;Moving around shortcuts</b></p>
                   <div class="table-contents">
                      <table summary="Moving around shortcuts" border="1">
                         <colgroup>
@@ -1062,12 +1212,12 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="keyboard.other"></a>2.4.&nbsp;<a class="indexterm" name="d0e4118"></a>Other
+                        <h3 class="title"><a name="keyboard.other"></a>2.4.&nbsp;<a class="indexterm" name="d0e4329"></a>Other
                         </h3>
                      </div>
                   </div>
                </div>
-               <div class="table"><a name="d0e4124"></a><p class="title"><b>Table&nbsp;5.13.&nbsp;Various shortcuts</b></p>
+               <div class="table"><a name="d0e4335"></a><p class="title"><b>Table&nbsp;5.13.&nbsp;Various shortcuts</b></p>
                   <div class="table-contents">
                      <table summary="Various shortcuts" border="1">
                         <colgroup>

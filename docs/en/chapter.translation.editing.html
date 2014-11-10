@@ -29,7 +29,7 @@
          <div class="titlepage">
             <div>
                <div>
-                  <h1 class="title"><a name="chapter.translation.editing"></a>Chapter&nbsp;10.&nbsp;Editing behavior<a class="indexterm" name="d0e5693"></a></h1>
+                  <h1 class="title"><a name="chapter.translation.editing"></a>Chapter&nbsp;10.&nbsp;Editing behavior<a class="indexterm" name="d0e5919"></a></h1>
                </div>
             </div>
          </div>
@@ -56,7 +56,7 @@
                              other proper nouns you which must be left unchanged.
                   </p>
                </dd>
-               <dt><span class="term">Leave the segment empty<a class="indexterm" name="d0e5738"></a></span></dt>
+               <dt><span class="term">Leave the segment empty<a class="indexterm" name="d0e5964"></a></span></dt>
                <dd>
                   <p>OmegaT leaves the editing field blank. This option allows you to
                              enter the translation without the need to remove the source text, thus
@@ -70,7 +70,7 @@
                              by clearing the target segment and pressing
                              <span class="guibutton">Enter.</span></p>
                </dd>
-               <dt><span class="term">Insert the best fuzzy match<a class="indexterm" name="d0e5765"></a></span></dt>
+               <dt><span class="term">Insert the best fuzzy match<a class="indexterm" name="d0e5991"></a></span></dt>
                <dd>
                   <p>OmegaT inserts the translation of the string most similar to the
                              current source, if it is above the similarity threshold that you have
@@ -87,7 +87,7 @@
          </p>
          <div class="variablelist">
             <dl class="variablelist">
-               <dt><span class="term">Attempt to convert numbers when inserting a fuzzy match<a class="indexterm" name="d0e5781"></a></span></dt>
+               <dt><span class="term">Attempt to convert numbers when inserting a fuzzy match<a class="indexterm" name="d0e6007"></a></span></dt>
                <dd>
                   <p>If this option is checked, when a fuzzy match is inserted,
                              either manually or automatically, OmegaT attempts to convert the
@@ -97,16 +97,19 @@
                   <div class="itemizedlist">
                      <ul class="itemizedlist" style="list-style-type: disc; ">
                         <li class="listitem">
-                           <p>The source segment and the fuzzy matches must contain the same
-                                          list of numbers
+                           <p>The source segment and the fuzzy matches must contain the
+                                          same list of numbers
                            </p>
                         </li>
                         <li class="listitem">
-                           <p>The numbers must be exactly the same between the source and the target matches.</p>
+                           <p>The numbers must be exactly the same between the source and
+                                          the target matches.
+                           </p>
                         </li>
                         <li class="listitem">
-                           <p>Only integers and simple floats (using the period as a decimal
-                                          character, e.g. 5.4, but not 5,4 or 54E-01) are considered.
+                           <p>Only integers and simple floats (using the period as a
+                                          decimal character, e.g. 5.4, but not 5,4 or 54E-01) are
+                                          considered.
                            </p>
                         </li>
                      </ul>
@@ -116,7 +119,7 @@
          </div>
          <div class="variablelist">
             <dl class="variablelist">
-               <dt><span class="term">Allow the translation to be equal to source<a class="indexterm" name="d0e5805"></a></span></dt>
+               <dt><span class="term">Allow the translation to be equal to source<a class="indexterm" name="d0e6031"></a></span></dt>
                <dd>
                   <p>Documents for translation may contain trade marks, names or
                              other proper nouns that will be the same in translated documents.
@@ -135,7 +138,7 @@
          </div>
          <div class="variablelist">
             <dl class="variablelist">
-               <dt><span class="term">Export the segment to text files<a class="indexterm" name="d0e5830"></a></span></dt>
+               <dt><span class="term">Export the segment to text files<a class="indexterm" name="d0e6056"></a></span></dt>
                <dd>
                   <p>The text export function exports data from within the current
                              <span class="application">OmegaT</span> project to plain text files. The
@@ -177,13 +180,49 @@
          <div class="variablelist">
             <dl class="variablelist">
                <dt><span class="term">Go To Next Untranslated Segment stops where there is at least one
-                           alternative translation<a class="indexterm" name="d0e5877"></a></span></dt>
+                           alternative translation<a class="indexterm" name="d0e6103"></a></span></dt>
                <dd>
                   <p>If we want to avoid any mis-translations in case of segments
                              with several possible target contents, checking this check box will
                              cause <span class="bold"><strong>&nbsp;Go To Next Untranslated
                                    Segment</strong></span>stop on the next such segment, irrespective of
                              whether it has already been translated or not.
+                  </p>
+               </dd>
+            </dl>
+         </div>
+         <div class="variablelist">
+            <dl class="variablelist">
+               <dt><span class="term">Allow tag editing</span></dt>
+               <dd>
+                  <p>Uncheck this option to prevent any damage on the tags (i.e.,
+                             partial deletion) during editing. Removing an entire tag remains
+                             possible in that case, by using Ctrl+Backspace/Delete or by selecting
+                             it completely (Ctrl+Shift+Left/Right) then deleting it (Delete or
+                             Ctrl+X).
+                  </p>
+               </dd>
+            </dl>
+         </div>
+         <div class="variablelist">
+            <dl class="variablelist">
+               <dt><span class="term">Validate tags when leaving a segment</span></dt>
+               <dd>
+                  <p>Check this option to be warned about differences between source
+                             and target segments tags each time you leave a segment.
+                  </p>
+               </dd>
+            </dl>
+         </div>
+         <div class="variablelist">
+            <dl class="variablelist">
+               <dt><span class="term">Save auto-populated status</span></dt>
+               <dd>
+                  <p>Check this option to record in the
+                             <code class="filename">project_save.tmx</code> file the information that a
+                             segment has been auto-populated, so it can be displayed with a
+                             specific color in the Editor pane (if "Mark Auto-Populated Segments"
+                             option, in View tab, is checked).
                   </p>
                </dd>
             </dl>

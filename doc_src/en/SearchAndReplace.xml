@@ -23,8 +23,8 @@
     <para>Then click on <emphasis>Search</emphasis> button to display all the
     corresponding occurrences.</para>
 
-    <para>Enter the new word or expression in the <emphasis>Replace
-    with</emphasis> box, then click one of the following options:
+    <para>Enter the new word or phrase (regular expressions are not supported) in the
+    <emphasis>Replace with</emphasis> box, then click one of the following options:
     <itemizedlist>
         <listitem>
           <para><emphasis role="bold">Replace All:</emphasis> operates

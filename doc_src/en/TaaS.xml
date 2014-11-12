@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
+"../../../docbook-xml-4.5/docbookx.dtd">
+<chapter id="chapter.TaaS">
+  <title>Using TaaS in OmegaT<indexterm class="singular">
+      <primary>Search</primary>
+    </indexterm></title>
+
+  <section id="TaaS.options">
+    <title>Generalities</title>
+
+    <para>The TaaS service at https://demo.taas-project.eu/info provides
+    terminology services in European languages. It allows accessing both
+    public and private data, where private glossaries (called "collections")
+    can be extracted from existing documents, and the target terms partly
+    populated automatically from various sources.</para>
+  </section>
+
+  <section id="TaaS.options">
+    <title>Public and private collections</title>
+
+    <para>OmegaT allows accessing the public part of TaaS without any
+    registration.</para>
+
+    <para>To access the private part, a user must create a key using
+    https://demo.taas-project.eu/account/keys/create?system=omegaT.</para>
+
+    <para>The key must then be given to OmegaT using -Dtaas.user.key=xxxxx.
+    OmegaT configuration launchers (OmegaT.l4J.ini, omegat.kaptn and
+    OmegaT.sh) contain a template entry.</para>
+
+    <para>When accessing the service without a private key, the following
+    message will be put in the log: TaaS API key not found. Go to
+    https://demo.taas-project.eu/account/keys/create?system=omegaT to create
+    your own key then give it to OmegaT with -Dtaas.user.key=xxxxx
+    (TAAS_API_KEY_NOT_FOUND)</para>
+  </section>
+
+  <section id="TaaS.options">
+    <title>Accessing the TaaS service</title>
+
+    <para>Click on <emphasis role="bold">Options, Glossary</emphasis> to
+    display the following options:</para>
+
+    <para><emphasis role="bold">Browse TaaS Collections</emphasis> will allow
+    browsing existing collections for the source and target languages of the
+    project, and downloading them. Private collections are displayed in bold.
+    The collections are downloaded as TBX glossaries in the current glossary
+    folder.</para>
+
+    <para><emphasis role="bold">TaaS Terminology Lookup</emphasis>: when
+    checked, will allow querying TaaS data on a segment by segment basis. All
+    collections (public and private) will be queried for the source and target
+    language.</para>
+
+    <para>To limit the amount of data, it is possible to select a specific
+    domain by selecting <emphasis role="bold">Select TaaS Terminology Lookup
+    Domain</emphasis>. In that dialog, it's possible to select All domains or
+    a specific one.</para>
+  </section>
+</chapter>

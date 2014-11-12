@@ -33,7 +33,8 @@
   <xi:include href="UserInterface.xml"
               xmlns:xi="http://www.w3.org/2001/XInclude"/>
 
-  <xi:include href="Menu.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+  <xi:include href="Menu.xml"
+              xmlns:xi="http://www.w3.org/2001/XInclude"/>
 
   <xi:include href="ProjectProperties.xml"
               xmlns:xi="http://www.w3.org/2001/XInclude"/>
@@ -50,7 +51,8 @@
   <xi:include href="EditingBehavior.xml"
               xmlns:xi="http://www.w3.org/2001/XInclude"/>
 
-  <xi:include href="PlainText.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+  <xi:include href="PlainText.xml"
+              xmlns:xi="http://www.w3.org/2001/XInclude"/>
 
   <xi:include href="FormattedText.xml"
               xmlns:xi="http://www.w3.org/2001/XInclude"/>
@@ -61,16 +63,23 @@
   <xi:include href="Segmentation.xml"
               xmlns:xi="http://www.w3.org/2001/XInclude"/>
 
-  <xi:include href="Searches.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+  <xi:include href="Searches.xml"
+              xmlns:xi="http://www.w3.org/2001/XInclude"/>
 
-  <xi:include href="SearchAndReplace.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+  <xi:include href="SearchAndReplace.xml"
+              xmlns:xi="http://www.w3.org/2001/XInclude"/>
 
-  <xi:include href="Regexp.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+  <xi:include href="Regexp.xml"
+              xmlns:xi="http://www.w3.org/2001/XInclude"/>
 
   <xi:include href="Dictionaries.xml"
               xmlns:xi="http://www.w3.org/2001/XInclude"/>
 
-  <xi:include href="Glossaries.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+  <xi:include href="Glossaries.xml"
+              xmlns:xi="http://www.w3.org/2001/XInclude"/>
+
+  <xi:include href="TaaS.xml"
+              xmlns:xi="http://www.w3.org/2001/XInclude"/>
 
   <xi:include href="MachineTranslation.xml"
               xmlns:xi="http://www.w3.org/2001/XInclude"/>
@@ -78,7 +87,8 @@
   <xi:include href="Spellchecker.xml"
               xmlns:xi="http://www.w3.org/2001/XInclude"/>
 
-  <xi:include href="Miscelanea.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+  <xi:include href="Miscelanea.xml"
+              xmlns:xi="http://www.w3.org/2001/XInclude"/>
 
   <xi:include href="App_Languages.xml"
               xmlns:xi="http://www.w3.org/2001/XInclude"/>

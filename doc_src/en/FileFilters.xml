@@ -74,21 +74,31 @@
 
     <itemizedlist>
       <listitem>
-        <para>Remove leading and trailing tags: xxxx</para>
+        <para>Remove leading and trailing tags: uncheck this option to display
+        all the tags including the leading and trailing ones. Warning: in
+        Microsoft Open XML formats (docx, xlsx, etc.), if all tags are
+        displayed, DO NOT write text before the first tag (it is a technical
+        tag that must always begin the segment).</para>
       </listitem>
 
       <listitem>
         <para>Remove leading and trailing whitespace in non-segmented
-        projects; xxxx</para>
+        projects; same as above, but in in non-segmented projects [vb:
+        right?].</para>
       </listitem>
 
       <listitem>
-        <para>Preserve spaces for all tags: xxxx</para>
+        <para>Preserve spaces for all tags: check this option if the source
+        documents contain significant spaces (for layout matters) that must
+        not be ignored. </para>
       </listitem>
 
       <listitem>
         <para>Ignore file context when identifying segments with alternate
-        translations: xxxx</para>
+        translations: if the option is checked, alternative translations will
+        take effect in any file as long as the other context (prev/next
+        segments, or some sort of ID depending on the file format) matches
+        [vb: not so clear for me].</para>
       </listitem>
     </itemizedlist>
   </section>

@@ -41,6 +41,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineFactory;
 import javax.script.ScriptEngineManager;
@@ -73,6 +74,7 @@ import javax.swing.event.PopupMenuListener;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.Document;
 import javax.swing.text.Highlighter.HighlightPainter;
+
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
 import org.omegat.core.events.IApplicationEventListener;
@@ -530,34 +532,38 @@ public class ScriptingWindow extends JFrame {
         executeScriptFile(scriptItem, forceFromFile, null);
     }
 
-    public static void executeScriptFileHeadless(ScriptItem scriptItem, boolean forceFromFile, Map<String, Object> additionalBindings) {
-    	ScriptEngineManager manager = new ScriptEngineManager(ScriptingWindow.class.getClassLoader());
-    	ScriptEngine scriptEngine = manager.getEngineByExtension(getFileExtension(scriptItem.getName()));
+    public static Object executeScriptFileHeadless(ScriptItem scriptItem, boolean forceFromFile,
+            Map<String, Object> additionalBindings) {
+        ScriptEngineManager manager = new ScriptEngineManager(ScriptingWindow.class.getClassLoader());
+        ScriptEngine scriptEngine = manager.getEngineByExtension(getFileExtension(scriptItem.getName()));
 
-    	if (scriptEngine == null) {
-    		scriptEngine = manager.getEngineByName(DEFAULT_SCRIPT);
-    	}
+        if (scriptEngine == null) {
+            scriptEngine = manager.getEngineByName(DEFAULT_SCRIPT);
+        }
 
-    	SimpleBindings bindings = new SimpleBindings();
-    	bindings.put(VAR_PROJECT, Core.getProject());
-    	bindings.put(VAR_EDITOR, Core.getEditor());
-    	bindings.put(VAR_GLOSSARY, Core.getGlossary());
-    	bindings.put(VAR_MAINWINDOW, Core.getMainWindow());
-    	bindings.put(VAR_RESOURCES, scriptItem.getResourceBundle());
+        SimpleBindings bindings = new SimpleBindings();
+        bindings.put(VAR_PROJECT, Core.getProject());
+        bindings.put(VAR_EDITOR, Core.getEditor());
+        bindings.put(VAR_GLOSSARY, Core.getGlossary());
+        bindings.put(VAR_MAINWINDOW, Core.getMainWindow());
+        bindings.put(VAR_RESOURCES, scriptItem.getResourceBundle());
 
-    	if (additionalBindings != null) {
-    		bindings.putAll(additionalBindings);
-    	}
+        if (additionalBindings != null) {
+            bindings.putAll(additionalBindings);
+        }
 
-    	try {
-    		Object eval = scriptEngine.eval(scriptItem.getText(), bindings);
-    		if (eval != null) {
-    			Log.logRB("SCW_SCRIPT_RESULT");
-    			Log.log(eval.toString());
-    		}
-    	} catch (Throwable e) {
-    		Log.logErrorRB(e, "SCW_SCRIPT_ERROR");
-    	}
+        Object eval = null;
+        try {
+            eval = scriptEngine.eval(scriptItem.getText(), bindings);
+            if (eval != null) {
+                Log.logRB("SCW_SCRIPT_RESULT");
+                Log.log(eval.toString());
+            }
+        } catch (Throwable e) {
+            Log.logErrorRB(e, "SCW_SCRIPT_ERROR");
+        }
+
+        return eval;
     }
 
     public void executeScriptFile(ScriptItem scriptItem, boolean forceFromFile, Map<String, Object> additionalBindings) {
@@ -739,13 +745,13 @@ public class ScriptingWindow extends JFrame {
         return extension;
     }
 
-    private static final String DEFAULT_SCRIPT = "javascript";
-    private static final String VAR_CONSOLE = "console";
-    private static final String VAR_MAINWINDOW = "mainWindow";
-    private static final String VAR_GLOSSARY = "glossary";
-    private static final String VAR_EDITOR = "editor";
-    private static final String VAR_PROJECT = "project";
-    private static final String VAR_RESOURCES = "res";
+    public static final String DEFAULT_SCRIPT = "javascript";
+    public static final String VAR_CONSOLE = "console";
+    public static final String VAR_MAINWINDOW = "mainWindow";
+    public static final String VAR_GLOSSARY = "glossary";
+    public static final String VAR_EDITOR = "editor";
+    public static final String VAR_PROJECT = "project";
+    public static final String VAR_RESOURCES = "res";
 
     private static final String DEFAULT_SCRIPTS_DIR = "scripts";
 

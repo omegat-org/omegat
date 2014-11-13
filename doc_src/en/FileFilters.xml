@@ -83,22 +83,24 @@
 
       <listitem>
         <para>Remove leading and trailing whitespace in non-segmented
-        projects; same as above, but in in non-segmented projects [vb:
-        right?].</para>
+        projects: by default, OmegaT removes leading and trailing whitespace. 
+        In non-segmented projects, it is possible to keep it by unchecking this option.</para>
       </listitem>
 
       <listitem>
         <para>Preserve spaces for all tags: check this option if the source
         documents contain significant spaces (for layout matters) that must
-        not be ignored. </para>
+        not be ignored.</para>
       </listitem>
 
       <listitem>
         <para>Ignore file context when identifying segments with alternate
-        translations: if the option is checked, alternative translations will
-        take effect in any file as long as the other context (prev/next
-        segments, or some sort of ID depending on the file format) matches
-        [vb: not so clear for me].</para>
+        translations: by default, OmegaT uses the source file name as part of the 
+        identification of an alternate translation.
+        if the option is checked, the source file name will not be used, and
+        alternative translations will take effect in any file as long 
+        as the other context (previous/next
+        segments, or some sort of ID depending on the file format) matches.</para>
       </listitem>
     </itemizedlist>
   </section>

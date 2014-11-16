@@ -46,6 +46,7 @@ import java.util.Map.Entry;
 
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
+import javax.swing.SwingUtilities;
 import javax.swing.text.AttributeSet;
 import javax.swing.text.StyledDocument;
 
@@ -423,8 +424,12 @@ public class MatchesTextArea extends EntryInfoThreadPane<List<NearString>> imple
         doc.setCharacterAttributes(start, end - start, ATTRIBUTES_SELECTED, false);
         setCaretPosition(end - 2); // two newlines
         final int fstart = start;
-
-        setCaretPosition(fstart);
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                setCaretPosition(fstart);
+            }
+        });
     }
 
     /** Clears up the pane. */

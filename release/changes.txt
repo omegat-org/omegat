@@ -2,7 +2,7 @@
  OmegaT 3.1.8 
 ----------------------------------------------------------------------
    5 Enhancements
-   7 Bug fixes
+   8 Bug fixes
    4 Localisation updates
 ----------------------------------------------------------------------
 3.1.8 vs. 3.1.7
@@ -40,6 +40,9 @@ mouse pointer) changed to the Wait icon and could not be restored
 
   - Git team project saving failure with 3.1.6 
   https://sourceforge.net/p/omegat/bugs/714/
+
+  - Fuzzy match segment not shown entirely when Ctrl+Arrow/Num is typed
+  https://sourceforge.net/p/omegat/bugs/720/
 
   Localisation updates:
 

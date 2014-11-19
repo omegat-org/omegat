@@ -766,7 +766,6 @@ public class RealProject implements IProject {
         File[] modifiedFiles;
         //do we have local changes?
         boolean needUpload = false;
-        final StringBuilder commitDetails = new StringBuilder();
 
         final String glossaryFilename = m_config.getWriteableGlossary();
         final File glossaryFile = new File(glossaryFilename);
@@ -905,27 +904,9 @@ public class RealProject implements IProject {
                 // there are distracting visual and/or cursor-location jumps on commit and
                 // on the post-merge refresh.
                 Core.getEditor().waitForCommit(10);
-                
-                // Do 3-way merge of:
-                // Base: baseTMX
-                // File 1: projectTMX (mine)
-                // File 2: headTMX (theirs)
-                synchronized (projectTMX) {
-                    StmProperties props = new StmProperties().setBaseTmxName(OStrings.getString("TMX_MERGE_BASE"))
-                            .setTmx1Name(OStrings.getString("TMX_MERGE_MINE"))
-                            .setTmx2Name(OStrings.getString("TMX_MERGE_THEIRS"))
-                            .setLanguageResource(OStrings.getResourceBundle())
-                            .setParentWindow(Core.getMainWindow().getApplicationFrame())
-                            // More than this number of conflicts will trigger List View by default.
-                            .setListViewThreshold(5);
-                    ProjectTMX mergedTMX = SuperTmxMerge.merge(baseTMX, projectTMX, headTMX,
-                            m_config.getSourceLanguage().getLanguage(), m_config.getTargetLanguage().getLanguage(),
-                            props);
-                    projectTMX.replaceContent(mergedTMX);
-                    commitDetails.append('\n');
-                    commitDetails.append(props.getReport().toString());
-                }
-                
+
+                mergeTMX(baseTMX, headTMX);
+
                 // Refresh view immediately to make sure changes are applied properly.
                 SwingUtilities.invokeAndWait(new Runnable() {
                     @Override
@@ -1022,7 +1003,7 @@ public class RealProject implements IProject {
             try {
                 new RepositoryUtils.AskCredentials() {
                     public void callRepository() throws Exception {
-                        repository.upload(projectTMXFile, "Translated by " + author + commitDetails.toString());
+                        repository.upload(projectTMXFile, "Translated by " + author);
                         if (updateGlossary) {
                             repository.upload(glossaryFile, "Added glossaryitem(s) by " + author);
                         }
@@ -1036,6 +1017,31 @@ public class RealProject implements IProject {
             }
         }
         Log.logInfoRB("TEAM_REBASE_END");
+    }
+
+    /**
+     * Do 3-way merge of:
+     * 
+     * Base: baseTMX
+     * 
+     * File 1: projectTMX (mine)
+     * 
+     * File 2: headTMX (theirs)
+     */
+    protected void mergeTMX(ProjectTMX baseTMX, ProjectTMX headTMX) {
+        StmProperties props = new StmProperties().setBaseTmxName(OStrings.getString("TMX_MERGE_BASE"))
+                .setTmx1Name(OStrings.getString("TMX_MERGE_MINE"))
+                .setTmx2Name(OStrings.getString("TMX_MERGE_THEIRS"))
+                .setLanguageResource(OStrings.getResourceBundle())
+                .setParentWindow(Core.getMainWindow().getApplicationFrame())
+                // More than this number of conflicts will trigger List View by default.
+                .setListViewThreshold(5);
+        synchronized (projectTMX) {
+            ProjectTMX mergedTMX = SuperTmxMerge.merge(baseTMX, projectTMX, headTMX, m_config
+                    .getSourceLanguage().getLanguage(), m_config.getTargetLanguage().getLanguage(), props);
+            projectTMX.replaceContent(mergedTMX);
+        }
+        Log.logDebug(LOGGER, "Merge report: {0}", props.getReport());
     }
 
     /**

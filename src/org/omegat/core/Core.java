@@ -97,7 +97,7 @@ public class Core {
     private static ISpellChecker spellChecker;
     private static FilterMaster filterMaster;
 
-    private static IAutoSave saveThread;
+    protected static IAutoSave saveThread;
 
     private static GlossaryTextArea glossary;
     private static GlossaryManager glossaryManager;

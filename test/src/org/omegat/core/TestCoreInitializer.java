@@ -25,7 +25,9 @@
 
 package org.omegat.core;
 
+import org.omegat.core.threads.IAutoSave;
 import org.omegat.gui.editor.IEditor;
+import org.omegat.gui.main.IMainWindow;
 
 /**
  * Core initializer for unit tests.
@@ -35,5 +37,13 @@ import org.omegat.gui.editor.IEditor;
 public class TestCoreInitializer {
     public static void initEditor(IEditor editor) {
         Core.editor = editor;
+    }
+
+    public static void initAutoSave(IAutoSave autoSave) {
+        Core.saveThread = autoSave;
+    }
+
+    public static void initMainWindow(IMainWindow mainWindow) {
+        Core.setMainWindow(mainWindow);
     }
 }

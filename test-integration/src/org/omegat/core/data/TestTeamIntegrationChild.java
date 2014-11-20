@@ -502,48 +502,49 @@ public class TestTeamIntegrationChild {
         ProjectTMX headTMX;
 
         @Override
-        protected void mergeTMX(ProjectTMX baseTMX, ProjectTMX headTMX) {
-            synchronized (projectTMX) {
-                StmProperties props = new StmProperties()
-                        .setBaseTmxName(OStrings.getString("TMX_MERGE_BASE"))
-                        .setTmx1Name(OStrings.getString("TMX_MERGE_MINE"))
-                        .setTmx2Name(OStrings.getString("TMX_MERGE_THEIRS"))
-                        .setLanguageResource(OStrings.getResourceBundle())
-                        .setResolutionStrategy(new ResolutionStrategy() {
-                            @Override
-                            public ITuv resolveConflict(Key key, ITuv baseTuv, ITuv projectTuv, ITuv headTuv) {
-                                TMXEntry enBase = baseTuv != null ? (TMXEntry) baseTuv
-                                        .getUnderlyingRepresentation() : null;
-                                TMXEntry enProject = projectTuv != null ? (TMXEntry) projectTuv
-                                        .getUnderlyingRepresentation() : null;
-                                TMXEntry enHead = headTuv != null ? (TMXEntry) headTuv
-                                        .getUnderlyingRepresentation() : null;
-                                String s = "Rebase " + src(enProject) + " base=" + tr(enBase) + " head="
-                                        + tr(enHead) + " project=" + tr(enProject);
-                                if (CONCURRENT_NAME.equals(enProject.source)) {
-                                    if (v(enHead) < v(enBase)) {
-                                        throw new RuntimeException("Rebase HEAD: wrong concurrent: " + s);
-                                    }
-                                    if (v(enProject) < v(enBase)) {
-                                        throw new RuntimeException("Rebase project: wrong concurrent: " + s);
-                                    }
-                                    if (v(enHead) > v(enProject)) {
-                                        System.err.println(s + ": result=head");
-                                        return headTuv;
-                                    } else {
-                                        System.err.println(s + ": result=project");
-                                        return projectTuv;
-                                    }
-                                } else {
-                                    throw new RuntimeException("Rebase error: non-concurrent entry: " + s);
+        protected void mergeTMX(ProjectTMX baseTMX, ProjectTMX headTMX, StringBuilder commitDetails) {
+            StmProperties props = new StmProperties().setBaseTmxName(OStrings.getString("TMX_MERGE_BASE"))
+                    .setTmx1Name(OStrings.getString("TMX_MERGE_MINE"))
+                    .setTmx2Name(OStrings.getString("TMX_MERGE_THEIRS"))
+                    .setLanguageResource(OStrings.getResourceBundle())
+                    .setResolutionStrategy(new ResolutionStrategy() {
+                        @Override
+                        public ITuv resolveConflict(Key key, ITuv baseTuv, ITuv projectTuv, ITuv headTuv) {
+                            TMXEntry enBase = baseTuv != null ? (TMXEntry) baseTuv
+                                    .getUnderlyingRepresentation() : null;
+                            TMXEntry enProject = projectTuv != null ? (TMXEntry) projectTuv
+                                    .getUnderlyingRepresentation() : null;
+                            TMXEntry enHead = headTuv != null ? (TMXEntry) headTuv
+                                    .getUnderlyingRepresentation() : null;
+                            String s = "Rebase " + src(enProject) + " base=" + tr(enBase) + " head="
+                                    + tr(enHead) + " project=" + tr(enProject);
+                            if (CONCURRENT_NAME.equals(enProject.source)) {
+                                if (v(enHead) < v(enBase)) {
+                                    throw new RuntimeException("Rebase HEAD: wrong concurrent: " + s);
                                 }
+                                if (v(enProject) < v(enBase)) {
+                                    throw new RuntimeException("Rebase project: wrong concurrent: " + s);
+                                }
+                                if (v(enHead) > v(enProject)) {
+                                    System.err.println(s + ": result=head");
+                                    return headTuv;
+                                } else {
+                                    System.err.println(s + ": result=project");
+                                    return projectTuv;
+                                }
+                            } else {
+                                throw new RuntimeException("Rebase error: non-concurrent entry: " + s);
                             }
-                        });
+                        }
+                    });
+            synchronized (projectTMX) {
                 ProjectTMX mergedTMX = SuperTmxMerge
                         .merge(baseTMX, projectTMX, headTMX, m_config.getSourceLanguage().getLanguage(),
                                 m_config.getTargetLanguage().getLanguage(), props);
                 projectTMX.replaceContent(mergedTMX);
             }
+            commitDetails.append('\n');
+            commitDetails.append(props.getReport().toString());
         }
 
         protected void mergeTMXOld(ProjectTMX baseTMX, ProjectTMX headTMX) {

@@ -47,7 +47,6 @@ import org.omegat.util.Language;
 import org.omegat.util.TMXWriter2;
 import org.tmatesoft.svn.core.ISVNLogEntryHandler;
 import org.tmatesoft.svn.core.SVNDepth;
-import org.tmatesoft.svn.core.SVNErrorCode;
 import org.tmatesoft.svn.core.SVNException;
 import org.tmatesoft.svn.core.SVNLogEntry;
 import org.tmatesoft.svn.core.auth.ISVNAuthenticationManager;

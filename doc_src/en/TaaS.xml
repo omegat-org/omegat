@@ -6,7 +6,7 @@
       <primary>Search</primary>
     </indexterm></title>
 
-  <section id="TaaS.options">
+  <section id="section.TaaS.options">
     <title>Generalities</title>
 
     <para>The TaaS service at https://demo.taas-project.eu/info provides
@@ -16,7 +16,7 @@
     populated automatically from various sources.</para>
   </section>
 
-  <section id="TaaS.options">
+  <section id="section.TaaS.options.collections">
     <title>Public and private collections</title>
 
     <para>OmegaT allows accessing the public part of TaaS without any
@@ -36,7 +36,7 @@
     (TAAS_API_KEY_NOT_FOUND)</para>
   </section>
 
-  <section id="TaaS.options">
+  <section id="section.TaaS.options.access">
     <title>Accessing the TaaS service</title>
 
     <para>Click on <emphasis role="bold">Options, Glossary</emphasis> to

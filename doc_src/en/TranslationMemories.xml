@@ -573,11 +573,11 @@
       sources, and a translation in say English. Then you need a translation
       in e.g. Chinese, but your translator does not understand Dutch; she,
       however, understands perfectly English. In this case NL-EN translation
-      memory can serve as a go-between to help generate NL-ZH
+      memory can serve as a go-between to help generate NL to ZH
       translation.</para>
 
       <para>The solution in our example is to copy the existing translation
-      memory into the tm subfolder and rename it ZH_CN.tmx to indicate the
+      memory into the tm/tmx2source/ subfolder and rename it ZH_CN.tmx to indicate the
       target language of the tmx. The translator will be shown English
       translations for source segments in Dutch and use them to create the
       Chinese translation.</para>

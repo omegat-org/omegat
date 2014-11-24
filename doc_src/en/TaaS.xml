@@ -10,7 +10,7 @@
     <title>Generalities</title>
 
     <para>The TaaS service at https://demo.taas-project.eu/info provides
-    terminology services in European languages. It allows accessing both
+    terminology services in European languages (plus Russian). It allows accessing both
     public and private data, where private glossaries (called "collections")
     can be extracted from existing documents, and the target terms partly
     populated automatically from various sources.</para>

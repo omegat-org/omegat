@@ -28,7 +28,7 @@
     <itemizedlist>
         <listitem>
           <para><emphasis role="bold">Replace All:</emphasis> operates
-          replacement of all occurrences, (after displaying a confirmation
+          replacement of all occurrences (after displaying a confirmation
           window where the number of occurrences is shown).</para>
         </listitem>
       </itemizedlist><itemizedlist>
@@ -57,7 +57,7 @@
       translated yet.</para>
 
       <para>To make it possible (although Search and replace operates only on
-      Memory), OmegaT will copy the source segment to the target segment
+      memory), OmegaT will copy the source segment to the target segment
       before the replace operation occurs. If no replacement is done to a
       given segment, the target segment will be “emptied”, i.e., it will
       remain untranslated.</para>

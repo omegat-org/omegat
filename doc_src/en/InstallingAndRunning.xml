@@ -693,20 +693,6 @@
       </itemizedlist>
 
       <itemizedlist>
-        <listitem>
-          <para><emphasis role="bold">Font antialiasing</emphasis> - (Java 1.6
-          only)</para>
-
-          <para><emphasis role="bold">-Dswing.aatext=true<indexterm
-              class="singular">
-              <primary>Running OmegaT</primary>
-
-              <secondary>Launch script arguments</secondary>
-
-              <tertiary>Font antialiasing</tertiary>
-            </indexterm></emphasis> This argument effects anti-aliasing of the
-          fonts, thereby improving their appearance.</para>
-        </listitem>
 
         <listitem>
           <para><emphasis role="bold">Memory assignment</emphasis></para>

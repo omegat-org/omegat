@@ -8,7 +8,7 @@
       <link rel="home" href="index.html" title="OmegaT 3.0 - User's Guide">
       <link rel="up" href="index.html" title="OmegaT 3.0 - User's Guide">
       <link rel="prev" href="chapter.dictionaries.html" title="Chapter&nbsp;18.&nbsp;Dictionaries">
-      <link rel="next" href="chapter.machine.translate.html" title="Chapter&nbsp;20.&nbsp;Machine Translation">
+      <link rel="next" href="chapter.TaaS.html" title="Chapter&nbsp;20.&nbsp;Using TaaS in OmegaT">
    </head>
    <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
       <div class="navheader">
@@ -20,7 +20,7 @@
                <td width="20%" align="left"><a accesskey="p" href="chapter.dictionaries.html">Prev</a>&nbsp;
                </td>
                <th width="60%" align="center">&nbsp;</th>
-               <td width="20%" align="right">&nbsp;<a accesskey="n" href="chapter.machine.translate.html">Next</a></td>
+               <td width="20%" align="right">&nbsp;<a accesskey="n" href="chapter.TaaS.html">Next</a></td>
             </tr>
          </table>
          <hr>
@@ -29,18 +29,18 @@
          <div class="titlepage">
             <div>
                <div>
-                  <h1 class="title"><a name="chapter.glossaries"></a>Chapter&nbsp;19.&nbsp;Glossaries<a class="indexterm" name="d0e8379"></a><a class="indexterm" name="d0e8384"></a></h1>
+                  <h1 class="title"><a name="chapter.glossaries"></a>Chapter&nbsp;19.&nbsp;Glossaries<a class="indexterm" name="d0e8378"></a><a class="indexterm" name="d0e8383"></a></h1>
                </div>
             </div>
          </div>
          <div class="toc">
             <dl class="toc">
-               <dt><span class="section"><a href="chapter.glossaries.html#d0e8408">1. Usage</a></span></dt>
-               <dt><span class="section"><a href="chapter.glossaries.html#d0e8463">2. File format</a></span></dt>
-               <dt><span class="section"><a href="chapter.glossaries.html#d0e8502">3. How to create glossaries</a></span></dt>
-               <dt><span class="section"><a href="chapter.glossaries.html#d0e8547">4. Priority glossary</a></span></dt>
-               <dt><span class="section"><a href="chapter.glossaries.html#d0e8559">5. Using Trados MultiTerm</a></span></dt>
-               <dt><span class="section"><a href="chapter.glossaries.html#d0e8575">6. Common glossary problems</a></span></dt>
+               <dt><span class="section"><a href="chapter.glossaries.html#d0e8407">1. Usage</a></span></dt>
+               <dt><span class="section"><a href="chapter.glossaries.html#d0e8462">2. File format</a></span></dt>
+               <dt><span class="section"><a href="chapter.glossaries.html#d0e8501">3. How to create glossaries</a></span></dt>
+               <dt><span class="section"><a href="chapter.glossaries.html#d0e8546">4. Priority glossary</a></span></dt>
+               <dt><span class="section"><a href="chapter.glossaries.html#d0e8558">5. Using Trados MultiTerm</a></span></dt>
+               <dt><span class="section"><a href="chapter.glossaries.html#d0e8574">6. Common glossary problems</a></span></dt>
             </dl>
          </div>
          <p>Glossaries are files created and updated manually for use in
@@ -65,17 +65,17 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="d0e8408"></a>1.&nbsp;Usage
+                     <h2 class="title" style="clear: both"><a name="d0e8407"></a>1.&nbsp;Usage
                      </h2>
                   </div>
                </div>
             </div>
-            <p>To use an existing glossary, simply place it in the<a class="indexterm" name="d0e8413"></a> <code class="filename">/glossary</code> folder after creating the
+            <p>To use an existing glossary, simply place it in the<a class="indexterm" name="d0e8412"></a> <code class="filename">/glossary</code> folder after creating the
                    project. <span class="application">OmegaT</span> automatically detects glossary
                    files in this folder when a project is opened. Terms in the current
                    segment which <span class="application">OmegaT</span> finds in the glossary
                    file(s) are displayed in the Glossary pane:
-            </p><a class="indexterm" name="d0e8428"></a><div class="figure"><a name="d0e8431"></a><p class="title"><b>Figure&nbsp;19.1.&nbsp;Glossary pane</b></p>
+            </p><a class="indexterm" name="d0e8427"></a><div class="figure"><a name="d0e8430"></a><p class="title"><b>Figure&nbsp;19.1.&nbsp;Glossary pane</b></p>
                <div class="figure-contents">
                   <div class="mediaobject"><img src="images/GlossaryPane_25.png" alt="Glossary pane"></div>
                </div>
@@ -90,20 +90,20 @@
             <p>The source term does not have to be a single-word item, as the next
                    example shows:
             </p>
-            <div class="figure"><a name="d0e8443"></a><p class="title"><b>Figure&nbsp;19.2.&nbsp;multiple words entries in glossaries - example<a class="indexterm" name="d0e8446"></a></b></p>
+            <div class="figure"><a name="d0e8442"></a><p class="title"><b>Figure&nbsp;19.2.&nbsp;multiple words entries in glossaries - example<a class="indexterm" name="d0e8445"></a></b></p>
                <div class="figure-contents">
                   <div class="mediaobject"><img src="images/MultiTerm_Glossary_25.png" alt="multiple words entries in glossaries - example"></div>
                </div>
             </div><br class="figure-break"><p>The underlined item "pop-up menu" can be found in the glossary pane
                    as "pojavni menu". Highlighting it in the Glossary pane and then
                    rightclicking insets at the cursor position in the target
-                   segment.<a href="#ftn.d0e8460" class="footnote" name="d0e8460"><sup class="footnote">[1]</sup></a></p>
+                   segment.<a href="#ftn.d0e8459" class="footnote" name="d0e8459"><sup class="footnote">[1]</sup></a></p>
          </div>
          <div class="section">
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="d0e8463"></a>2.&nbsp;<a class="indexterm" name="d0e8465"></a>File format<a class="indexterm" name="d0e8471"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="d0e8462"></a>2.&nbsp;<a class="indexterm" name="d0e8464"></a>File format<a class="indexterm" name="d0e8470"></a></h2>
                   </div>
                </div>
             </div>
@@ -123,12 +123,12 @@
             </p>
             <p><code class="literal">"This is a source term, which contains a comma","c'est un
                       terme, qui contient une virgule"</code></p>
-            <p>In addition to the plain text format, TBX format <a class="indexterm" name="d0e8487"></a> is also supported. TBX - Term Base eXchange - is the open,
+            <p>In addition to the plain text format, TBX format <a class="indexterm" name="d0e8486"></a> is also supported. TBX - Term Base eXchange - is the open,
                    XML-based standard for exchanging structured terminological data, TBX has
                    been approved as an international standard by LISA and ISO. If you have an
                    existing terminology handling system - MultiTerm for example - it is quite
                    possible it offers the export of terminology data via TBX format. <a class="ulink" href="http://www.microsoft.com/Language/en-US/Terminology.aspx" target="_top">Microsoft
-                      Terminology Collection</a> <a class="indexterm" name="d0e8496"></a> can be downloaded in nearly 100 languages and can serve as
+                      Terminology Collection</a> <a class="indexterm" name="d0e8495"></a> can be downloaded in nearly 100 languages and can serve as
                    a cornerstone IT glossary.
             </p>
          </div>
@@ -136,7 +136,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="d0e8502"></a>3.&nbsp;How to create glossaries<a class="indexterm" name="d0e8505"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="d0e8501"></a>3.&nbsp;How to create glossaries<a class="indexterm" name="d0e8504"></a></h2>
                   </div>
                </div>
             </div>
@@ -154,7 +154,7 @@
                    between the fields) and save the file. The contents of the glossary pane
                    will be updated accordingly.
             </p>
-            <p><a class="indexterm" name="d0e8526"></a>The location of the writable glossary file can be set in the
+            <p><a class="indexterm" name="d0e8525"></a>The location of the writable glossary file can be set in the
                    <span class="guimenuitem">Project &gt; Properties ... </span>dialog. The
                    recognized extensions are <code class="filename">TXT</code> and
                    <code class="filename">UTF8</code></p>
@@ -170,7 +170,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="d0e8547"></a>4.&nbsp;<a class="indexterm" name="d0e8549"></a>Priority glossary
+                     <h2 class="title" style="clear: both"><a name="d0e8546"></a>4.&nbsp;<a class="indexterm" name="d0e8548"></a>Priority glossary
                      </h2>
                   </div>
                </div>
@@ -186,7 +186,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="d0e8559"></a>5.&nbsp;<a class="indexterm" name="d0e8561"></a>Using Trados MultiTerm
+                     <h2 class="title" style="clear: both"><a name="d0e8558"></a>5.&nbsp;<a class="indexterm" name="d0e8560"></a>Using Trados MultiTerm
                      </h2>
                   </div>
                </div>
@@ -204,7 +204,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="d0e8575"></a>6.&nbsp;<a class="indexterm" name="d0e8577"></a>Common glossary problems
+                     <h2 class="title" style="clear: both"><a name="d0e8574"></a>6.&nbsp;<a class="indexterm" name="d0e8576"></a>Common glossary problems
                      </h2>
                   </div>
                </div>
@@ -288,8 +288,8 @@
             </div>
          </div>
          <div class="footnotes"><br><hr style="width:100; text-align:left;margin-left: 0">
-            <div id="ftn.d0e8460" class="footnote">
-               <p><a href="#d0e8460" class="para"><sup class="para">[1] </sup></a>Note that in the above case, this is just half (or even less) of
+            <div id="ftn.d0e8459" class="footnote">
+               <p><a href="#d0e8459" class="para"><sup class="para">[1] </sup></a>Note that in the above case, this is just half (or even less) of
                           the story, as the target language (Slovenian) uses declension. So the
                           inserted "pojavni meni" in the nominative form - has to be changed to
                           "pojavnem meniju" , i.e. to the locative. So it is probably faster to
@@ -306,12 +306,12 @@
                <td width="40%" align="left"><a accesskey="p" href="chapter.dictionaries.html">Prev</a>&nbsp;
                </td>
                <td width="20%" align="center">&nbsp;</td>
-               <td width="40%" align="right">&nbsp;<a accesskey="n" href="chapter.machine.translate.html">Next</a></td>
+               <td width="40%" align="right">&nbsp;<a accesskey="n" href="chapter.TaaS.html">Next</a></td>
             </tr>
             <tr>
                <td width="40%" align="left" valign="top">Chapter&nbsp;18.&nbsp;Dictionaries&nbsp;</td>
                <td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
-               <td width="40%" align="right" valign="top">&nbsp;Chapter&nbsp;20.&nbsp;Machine Translation</td>
+               <td width="40%" align="right" valign="top">&nbsp;Chapter&nbsp;20.&nbsp;Using TaaS in OmegaT</td>
             </tr>
          </table>
       </div>

@@ -2,7 +2,7 @@
  OmegaT 3.1.8 
 ----------------------------------------------------------------------
    4 Enhancements
-   8 Bug fixes
+   9 Bug fixes
    4 Localisation updates
 ----------------------------------------------------------------------
 3.1.8 vs. 3.1.7
@@ -46,6 +46,9 @@ mouse pointer) changed to the Wait icon and could not be restored
 
   - Fuzzy match segment not shown entirely when Ctrl+Arrow/Num is typed
   https://sourceforge.net/p/omegat/bugs/720/
+
+  - PO comments also included as source text 
+  https://sourceforge.net/p/omegat/bugs/705/
 
   Localisation updates:
 

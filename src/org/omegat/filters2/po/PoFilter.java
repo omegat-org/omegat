@@ -453,16 +453,7 @@ public class PoFilter extends AbstractFilter {
                         flushTranslation(currentMode, fc);
                     }
                     currentMode = MODE.MSGID;
-                    // Hack to be able to translate empty segments
-                    // If the source segment is empty and there is a reference then
-                    // it copies the reference of the segment and the localization note into the source segment
-                    if (allowEditingBlankSegment == true && text.length() == 0 && references.length() > 0)
-                    { 
-                        String aux = references.toString() + extractedComments.toString();
-                        sources[0].append(aux);
-                    }
-                    else
-                        sources[0].append(text);
+                    sources[0].append(text);
                 } else {
                     // plural ID ('msg_id_plural')
                     currentMode = MODE.MSGID_PLURAL;
@@ -474,6 +465,16 @@ public class PoFilter extends AbstractFilter {
             }
 
             if ((m = MSG_STR.matcher(s)).matches()) {
+                
+                // Hack to be able to translate empty segments
+                // If the source segment is empty and there is a reference then
+                // it copies the reference of the segment and the localization note into the source segment
+                if (allowEditingBlankSegment == true && sources[0].length() == 0 && references.length() > 0)
+                {
+                    String aux = references.toString() + extractedComments.toString();
+                    sources[0].append(aux);
+                }
+
                 String text = m.group(3);
                 if (m.group(1) == null) {
                     // non-plural lines

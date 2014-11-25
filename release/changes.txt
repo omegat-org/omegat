@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 3.1.8 
 ----------------------------------------------------------------------
-   5 Enhancements
+   4 Enhancements
    8 Bug fixes
    4 Localisation updates
 ----------------------------------------------------------------------
@@ -11,6 +11,9 @@
   
   - Allow custom background/foreground colors for different elements in the editor
   https://sourceforge.net/p/omegat/feature-requests/1035/
+
+  - Show dialog for unsupported SVN errors 
+  https://sourceforge.net/p/omegat/feature-requests/1041/
 
   Other enhancements:
 

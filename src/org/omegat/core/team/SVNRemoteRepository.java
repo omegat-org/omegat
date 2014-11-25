@@ -33,6 +33,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.logging.Logger;
 
+import org.omegat.core.Core;
 import org.omegat.util.Log;
 import org.omegat.util.StringUtil;
 import org.tmatesoft.svn.core.SVNAuthenticationException;
@@ -63,6 +64,9 @@ import org.tmatesoft.svn.core.wc.SVNWCUtil;
  */
 public class SVNRemoteRepository implements IRemoteRepository {
     private static final Logger LOGGER = Logger.getLogger(SVNRemoteRepository.class.getName());
+
+    /** Tests can disable show error. */
+    public static boolean SHOW_UNKNOWN_ERRORS = true;
 
     File baseDirectory;
     SVNClientManager ourClientManager;
@@ -249,6 +253,10 @@ public class SVNRemoteRepository implements IRemoteRepository {
             } else {
                 Log.logErrorRB("SVN_ERROR", "upload", ex.getMessage());
                 checkNetworkException(ex);
+            }
+            if (SHOW_UNKNOWN_ERRORS) {
+                Core.getMainWindow().showErrorDialogRB("SVN_UPLOAD_ERROR", new Object[] { ex.getMessage() },
+                        "SVN_UPLOAD_ERROR_TITLE");
             }
             throw ex;
         } catch (Exception ex) {

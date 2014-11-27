@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 3.1.8 
 ----------------------------------------------------------------------
-   4 Enhancements
+   5 Enhancements
    9 Bug fixes
    4 Localisation updates
 ----------------------------------------------------------------------
@@ -14,6 +14,9 @@
 
   - Show dialog for unsupported SVN errors 
   https://sourceforge.net/p/omegat/feature-requests/1041/
+
+  - Allow configurable diff-style colours in fuzzy matching 
+  https://sourceforge.net/p/omegat/feature-requests/900/
 
   Other enhancements:
 

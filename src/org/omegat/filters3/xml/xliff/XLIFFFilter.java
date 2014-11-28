@@ -5,7 +5,7 @@
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
                2007-2011 Didier Briel
-               2013 Didier Briel, Aaron Madlon-Kay, Piotr Kulik
+               2013 Didier Briel, Aaron Madlon-Kay, Piotr Kulik, Alex Buloichik
                2014 Piotr Kulik, Didier Briel, Aaron Madlon-Kay
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
@@ -52,6 +52,7 @@ import org.xml.sax.Attributes;
  * @author Didier Briel
  * @author Aaron Madlon-Kay
  * @author Piotr Kulik
+ * @author Alex Buloichik
  */
 public class XLIFFFilter extends XMLFilter {
 

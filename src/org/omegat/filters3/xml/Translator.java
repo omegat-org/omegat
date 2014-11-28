@@ -4,7 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
-               2013 Didier Briel
+               2013 Didier Briel, Alex Buloichik
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -42,6 +42,7 @@ import org.xml.sax.Attributes;
  * 
  * @author Maxym Mykhalchuk
  * @author Didier Briel
+ * @author Alex Buloichik
  */
 interface Translator {
     /**

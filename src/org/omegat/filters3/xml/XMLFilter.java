@@ -5,7 +5,7 @@
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
                2007-2008 Didier Briel
-               2013 Didier Briel
+               2013 Didier Briel, Alex Buloichik
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -59,6 +59,7 @@ import org.xml.sax.SAXException;
  * 
  * @author Maxym Mykhalchuk
  * @author Didier Briel
+ * @author Alex Buloichik
  */
 public abstract class XMLFilter extends AbstractFilter implements Translator {
     /** Factory for SAX parsers. */

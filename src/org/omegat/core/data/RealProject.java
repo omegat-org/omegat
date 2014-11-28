@@ -969,7 +969,7 @@ public class RealProject implements IProject {
             projectTMXFile.delete(); //delete head version (or base version, if offline)
             // Rename new file into TMX file
             if (!filenameTMXwithLocalChangesOnHead.renameTo(projectTMXFile)) {
-                throw new IOException("Error rename new file to tmx");
+                throw new IOException("Error rename new file to tmx: \n"+filenameTMXwithLocalChangesOnHead.getAbsolutePath()+" to \n"+projectTMXFile.getAbsolutePath()+" \n f1.exist="+filenameTMXwithLocalChangesOnHead.exists()+" f2.exist="+projectTMXFile.exists());
             }
             if (filenameTMXwithLocalChangesOnBase != null) {
                 // Remove temp backup file

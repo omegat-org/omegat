@@ -590,7 +590,7 @@
 
       <itemizedlist>
         <listitem>
-          <para>match percentage (taking into account tokenisers)</para>
+          <para>match percentage (taking into account tokenizers)</para>
         </listitem>
       </itemizedlist>
 

@@ -18,9 +18,10 @@
 
         <keycap>F</keycap>
       </keycombo> and enter the word or phrase you wish to search for in the
-    <emphasis>Search for</emphasis> box. Alternatively, in the Editor window,
-    select a word or phrase in the editing field (target text of the current
-    segment) and hit <keycombo>
+    <emphasis>Search for</emphasis> box.</para>
+
+    <para>Alternatively, in the Editor window, select a word or phrase in the
+    editing field (target text of the current segment) and hit <keycombo>
         <keycap>Ctrl</keycap>
 
         <keycap>F</keycap>
@@ -28,6 +29,9 @@
     for</emphasis> box automatically. You can have several Search windows open
     at the same time, but close them when they are no longer needed so that
     they do not clutter your desktop.</para>
+
+    <para>Click the dropdown arrow of the <emphasis>Search for</emphasis> box
+    to retrieve access the last 10 searches.</para>
   </section>
 
   <section id="using.wild.cards">

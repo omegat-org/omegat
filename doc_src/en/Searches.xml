@@ -197,7 +197,7 @@
         <para><emphasis role="bold">Search in Project</emphasis>: check
         <emphasis>Memory</emphasis> to include the project memory
         (project_save.tmx file) in the search [vb: what's the difference
-        between "Project" and "Project+Memory"?]. Check
+        between "Project" and "Project+Memory"?][jc: Tu as 3 choix pour affiner la recherche. Memory est la memoire du project, TM est les mémoires externes, Glossary est les glossaires. Il n'y a pas d'option "Project" seule, indépendante d'un de ces 3 choix]. Check
         <emphasis>TMs</emphasis> to include the translation memories located
         in the <filename>tm</filename> folder in the search. Check
         <emphasis>Glossaries</emphasis> to include the glossaries located in

@@ -126,8 +126,8 @@
 
     <para>Glossary files can be either in system default encoding (and
     indicated by the extension .tab) or in UTF-8 (the extension .utf8) or in
-    UTF-16 (the extension .utf16) [vb: right?]. The Unicode encoding (UTF8) is
-    preferred for obvious reasons. Also supported is the CSV format. This
+    UTF-16 (the extension .utf16) [vb: right?][jc: ça n'a pas l'air de marcher]. The Unicode encoding (UTF8) is
+    preferred for obvious reasons[jc: je pense qu'on peut zapper cette phrase]. Also supported is the CSV format. This
     format is the same as the tab separated one: source term, target term.
     Comment fields are separated by a comma ','. Strings can be enclosed by
     quotes ", which allows having a comma inside a string:</para>
@@ -191,7 +191,7 @@
       </indexterm>The location of the writable glossary file can be set in the
     <guimenuitem>Project &gt; Properties ... </guimenuitem>dialog. The
     recognized extensions are <filename>TXT</filename> and <filename>UTF8 [vb:
-    and UTF16?]</filename></para>
+    and UTF16?][jc: si ça marche. Didier ?]</filename></para>
 
     <para><emphasis role="bold">Note: </emphasis>Of course there are other
     ways and means to create a simple file with tab delimited entries. Nothing

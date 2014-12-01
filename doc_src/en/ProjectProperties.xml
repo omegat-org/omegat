@@ -170,7 +170,7 @@
         <term>External Post-processing Command</term>
 
         <listitem>
-          <para>[vb: how to enable it? What to say about it?]</para>
+          <para>[vb: how to enable it? What to say about it?][jc: dans Options/Saving and Output -> "Also allow per-project external commands" où tu trouveras aussi l'explication du truc.]</para>
         </listitem>
       </varlistentry>
     </variablelist>

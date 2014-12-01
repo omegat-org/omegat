@@ -862,7 +862,7 @@
               <entry><guimenuitem>Mark Bidirectional Algorithm Control
               Characters</guimenuitem></entry>
 
-              <entry>[vb: kesako?]</entry>
+              <entry>[vb: kesako?] [jc:ce sont des caractères qui forcent l'affichage droite-gauche, voir http://www.w3.org/International/questions/qa-bidi-controls]</entry>
             </row>
 
             <row>
@@ -875,7 +875,7 @@
               displayed as long as the "Save auto-populated status" (in
               Options/Editing behaviour..) option is checked, [vb: going
               deeper in details, with the 3 different colors, and formats with
-              IDs?]</entry>
+              IDs?][jc: oui, tant que le manuel ne décrit pas en totalité la fonction ? voir http://sourceforge.net/p/omegat/feature-requests/963/]</entry>
             </row>
 
             <row>

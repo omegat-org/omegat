@@ -153,7 +153,7 @@
       </varlistentry>
 
       <varlistentry>
-        <term><emphasis role="bold">Remove Tags</emphasis></term>
+        <term>Remove Tags</term>
 
         <listitem>
           <para>When enabled, all the formatting tags are removed from source

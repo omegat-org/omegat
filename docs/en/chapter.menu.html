@@ -51,7 +51,7 @@
                <dt><span class="section"><a href="chapter.menu.html#keyboard.shortcuts">2. Keyboard shortcuts</a></span></dt>
                <dd>
                   <dl>
-                     <dt><span class="section"><a href="chapter.menu.html#d0e3988">2.1. Project management</a></span></dt>
+                     <dt><span class="section"><a href="chapter.menu.html#d0e4004">2.1. Project management</a></span></dt>
                      <dt><span class="section"><a href="chapter.menu.html#keyboard.editing">2.2. Editing</a></span></dt>
                      <dt><span class="section"><a href="chapter.menu.html#keyboard.moving.around">2.3. Moving around</a></span></dt>
                      <dt><span class="section"><a href="chapter.menu.html#keyboard.other">2.4. Other</a></span></dt>
@@ -144,7 +144,10 @@
                            <tr>
                               <td align="left"><span class="guimenuitem">Open Recent Project</span></td>
                               <td align="left">&nbsp;</td>
-                              <td>Give access to the five last edited projects</td>
+                              <td>Give access to the five last edited projects. Clicking on
+                                               one will save the current project, close it and open the other
+                                               project.
+                              </td>
                            </tr>
                            <tr>
                               <td align="left"><span class="guimenuitem">Copy Files to Source
@@ -348,8 +351,7 @@
                                                   Tag</span></td>
                               <td align="left"><span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>T</strong></span></td>
                               <td><a class="indexterm" name="d0e3237"></a>Inserts only one tag (among the missing ones) at
-                                               the cursor position. See also <a class="xref" href="">???</a> to discover other inserting
-                                               possibilities (in Missing Tags view).
+                                               the cursor position.
                               </td>
                            </tr>
                            <tr>
@@ -392,7 +394,7 @@
                               </td>
                               <td>Changes the case of the highlighted text in the target
                                                segment to the selected option (Lower case, Upper case or Title
-                                               case). Use Shift+F3 <a class="indexterm" name="d0e3324"></a>to cycle through the three alternatives. If no
+                                               case). Use Shift+F3 <a class="indexterm" name="d0e3322"></a>to cycle through the three alternatives. If no
                                                text is selected, <span class="application">OmegaT</span> selects the
                                                word that contains the letter immediately to the right of the
                                                cursor.
@@ -430,12 +432,15 @@
                            <tr>
                               <td align="left"><span class="guimenuitem">Remove Translation</span></td>
                               <td align="left">&nbsp;</td>
-                              <td>xxxx</td>
+                              <td>Deletes the translation and set the segment as untranslated.</td>
                            </tr>
                            <tr>
                               <td align="left"><span class="guimenuitem">Set empty translation</span></td>
                               <td align="left">&nbsp;</td>
-                              <td>xxxx</td>
+                              <td>Define the translation as being empty. In the target document,
+                                               nothing will appear for this segment. In the Editor, the translation is
+                                               displayed as &lt;EMPTY&gt;
+                              </td>
                            </tr>
                            <tr>
                               <td align="left"><span class="guimenuitem">Register Identical
@@ -455,11 +460,11 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="submenu.GoTo"></a>1.3.&nbsp;Go to<a class="indexterm" name="d0e3392"></a></h3>
+                        <h3 class="title"><a name="submenu.GoTo"></a>1.3.&nbsp;Go to<a class="indexterm" name="d0e3390"></a></h3>
                      </div>
                   </div>
                </div>
-               <div class="table"><a name="d0e3397"></a><p class="title"><b>Table&nbsp;5.5.&nbsp;Go To menu</b></p>
+               <div class="table"><a name="d0e3395"></a><p class="title"><b>Table&nbsp;5.5.&nbsp;Go To menu</b></p>
                   <div class="table-contents">
                      <table summary="Go To menu" border="1">
                         <colgroup>
@@ -554,11 +559,11 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="submenu.View"></a>1.4.&nbsp;View<a class="indexterm" name="d0e3545"></a></h3>
+                        <h3 class="title"><a name="submenu.View"></a>1.4.&nbsp;View<a class="indexterm" name="d0e3543"></a></h3>
                      </div>
                   </div>
                </div>
-               <div class="table"><a name="d0e3550"></a><p class="title"><b>Table&nbsp;5.6.&nbsp;View menu</b></p>
+               <div class="table"><a name="d0e3548"></a><p class="title"><b>Table&nbsp;5.6.&nbsp;View menu</b></p>
                   <div class="table-contents">
                      <table summary="View menu" border="1">
                         <colgroup>
@@ -619,19 +624,22 @@
                            <tr>
                               <td align="left"><span class="guimenuitem">Mark Bidirectional Algorithm Control
                                                   Characters</span></td>
-                              <td>xxxx</td>
+                              <td>This option displays <a class="ulink" href="http://www.w3.org/International/questions/qa-bidi-controls" target="_top">bidirectional control characters"</a>
+                                               
+                              </td>
                            </tr>
                            <tr>
                               <td align="left"><span class="guimenuitem">Mark Auto-Populated
                                                   Segments</span></td>
                               <td>If checked, the background of all segments where the
                                                target segment has been auto-populated (from TMXs placed in
-                                               /tm/auto for example) are displayed in color. The colors are
+                                               /tm/auto for example) are displayed in colour. The colours are
                                                displayed as long as the "Save auto-populated status" (in
-                                               Options/Editing behaviour..) option is checked, [vb:going deeper
-                                               in details, with the 3 different colors, and formats with
-                                               IDs?]
-                              </td>
+                                               Options/Editing behaviour..) option is checked. Usual translations
+                                               inserted from the auto folder are displayed in orange. Other translations,
+                                               identified specifically in the TMX, can be displayed using different colours.
+                                               For technical details, see the 
+                                               <a class="ulink" href="http://sourceforge.net/p/omegat/feature-requests/963/" target="_top">Request For Enhancement</a></td>
                            </tr>
                            <tr>
                               <td align="left"><span class="guimenuitem">Modification Info</span></td>
@@ -646,18 +654,20 @@
                         </tbody>
                      </table>
                   </div>
-               </div><br class="table-break"><p>Note: colors are customizable through the xxxx dialog box.</p>
+               </div><br class="table-break"><p>Note: colors are customizable through the <span class="guimenu">Options /
+                           Custom colours...</span> dialog.
+               </p>
             </div>
             <div class="section">
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="submenu.Tools"></a>1.5.&nbsp;Tools<a class="indexterm" name="d0e3630"></a></h3>
+                        <h3 class="title"><a name="submenu.Tools"></a>1.5.&nbsp;Tools<a class="indexterm" name="d0e3636"></a></h3>
                      </div>
                   </div>
                </div>
-               <div class="table"><a name="d0e3635"></a><p class="title"><b>Table&nbsp;5.7.&nbsp;Tools menu</b></p>
-                  <div class="table-contents"><a class="indexterm" name="d0e3638"></a><a class="indexterm" name="d0e3643"></a><a class="indexterm" name="d0e3648"></a><table summary="Tools menu" border="1">
+               <div class="table"><a name="d0e3641"></a><p class="title"><b>Table&nbsp;5.7.&nbsp;Tools menu</b></p>
+                  <div class="table-contents"><a class="indexterm" name="d0e3644"></a><a class="indexterm" name="d0e3649"></a><a class="indexterm" name="d0e3654"></a><table summary="Tools menu" border="1">
                         <colgroup>
                            <col align="left">
                            <col>
@@ -715,12 +725,12 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="submenu.Options"></a>1.6.&nbsp;<a class="indexterm" name="d0e3704"></a>Options
+                        <h3 class="title"><a name="submenu.Options"></a>1.6.&nbsp;<a class="indexterm" name="d0e3710"></a>Options
                         </h3>
                      </div>
                   </div>
                </div>
-               <div class="table"><a name="d0e3710"></a><p class="title"><b>Table&nbsp;5.8.&nbsp;Options menu</b></p>
+               <div class="table"><a name="d0e3716"></a><p class="title"><b>Table&nbsp;5.8.&nbsp;Options menu</b></p>
                   <div class="table-contents">
                      <table summary="Options menu" border="1">
                         <colgroup>
@@ -780,15 +790,15 @@
                               <td align="left"><span class="guimenuitem">Auto-completion</span></td>
                               <td>
                                  <p>Click on <span class="guimenuitem">Glossary...</span> to
-                                                  display a window where xxxxx
+                                                  configure the Auto-completer Glossary View.
                                  </p>
                                  <p>Click on
-                                                  <span class="guimenuitem">Auto-text...</span> to display a window
-                                                  where xxxxx
+                                                  <span class="guimenuitem">Auto-text...</span> to configure Auto-text
+                                                  options and to add or remove entries.
                                  </p>
-                                 <p>Click on <span class="guimenuitem">Character
-                                                     Table...</span> to display a window where
-                                                  xxxxx
+                                 <p>Click on
+                                                  <span class="guimenuitem">Character Table...</span> to set the
+                                                  Character table auto-completer options.
                                  </p>
                               </td>
                            </tr>
@@ -797,6 +807,16 @@
                               <td>Shows the dialog to modify the text display font. Users
                                                of old computers who feel window resizing is very slow can try
                                                changing the font. See font settings in <a class="link" href="chapter.misc.html" title="Chapter&nbsp;23.&nbsp;Miscellaneous subjects">Miscellanea</a></td>
+                           </tr>
+                           <tr>
+                              <td align="left"><span class="guimenuitem">Custom colours...</span></td>
+                              <td>
+                                 <p>Allows you to choose different colours for each
+                                                  part of the User Interface.
+                                 </p>Pre-defined themes can be set through
+                                               a script. A default script called called Switch Colour Themes
+                                               provides a default "Dark".
+                              </td>
                            </tr>
                            <tr>
                               <td align="left"><span class="guimenuitem">File Filters...</span></td>
@@ -842,6 +862,12 @@
                               <td align="left"><span class="guimenuitem">External TMXs...</span></td>
                               <td>Allows the user decide, how tags in foreign TMX files
                                                (i.e. not generated by OmegaT) are to be treated.
+                                 <p>The fuzzy
+                                                  matches can be also sorted in different ways (for displaying
+                                                  only; no influence on statistics). The Match Display Template area
+                                                  also allows changing how fuzzy matches are displayed, through the use
+                                                  of pre-configured variables.
+                                 </p>
                               </td>
                            </tr>
                            <tr>
@@ -879,7 +905,9 @@
                            </tr>
                            <tr>
                               <td align="left"><span class="guimenuitem">Language Checker</span></td>
-                              <td>When selected, xxxx</td>
+                              <td>When selected, LanguageTool checks the translations, and underline
+                                               potential issues in blue.
+                              </td>
                            </tr>
                         </tbody>
                      </table>
@@ -889,11 +917,11 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="submenu.Help"></a>1.7.&nbsp;Help<a class="indexterm" name="d0e3901"></a></h3>
+                        <h3 class="title"><a name="submenu.Help"></a>1.7.&nbsp;Help<a class="indexterm" name="d0e3917"></a></h3>
                      </div>
                   </div>
                </div>
-               <div class="table"><a name="d0e3906"></a><p class="title"><b>Table&nbsp;5.9.&nbsp;Help menu</b></p>
+               <div class="table"><a name="d0e3922"></a><p class="title"><b>Table&nbsp;5.9.&nbsp;Help menu</b></p>
                   <div class="table-contents">
                      <table summary="Help menu" border="1">
                         <colgroup>
@@ -935,7 +963,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="keyboard.shortcuts"></a>2.&nbsp;Keyboard shortcuts<a class="indexterm" name="d0e3941"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="keyboard.shortcuts"></a>2.&nbsp;Keyboard shortcuts<a class="indexterm" name="d0e3957"></a></h2>
                   </div>
                </div>
             </div>
@@ -994,11 +1022,11 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="d0e3988"></a>2.1.&nbsp;<a class="indexterm" name="d0e3990"></a>Project management<a class="indexterm" name="d0e3996"></a></h3>
+                        <h3 class="title"><a name="d0e4004"></a>2.1.&nbsp;<a class="indexterm" name="d0e4006"></a>Project management<a class="indexterm" name="d0e4012"></a></h3>
                      </div>
                   </div>
                </div>
-               <div class="table"><a name="d0e4001"></a><p class="title"><b>Table&nbsp;5.10.&nbsp;Project management shortcuts</b></p>
+               <div class="table"><a name="d0e4017"></a><p class="title"><b>Table&nbsp;5.10.&nbsp;Project management shortcuts</b></p>
                   <div class="table-contents">
                      <table summary="Project management shortcuts" border="1">
                         <colgroup>
@@ -1048,11 +1076,11 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="keyboard.editing"></a>2.2.&nbsp;<a class="indexterm" name="d0e4070"></a>Editing<a class="indexterm" name="d0e4076"></a></h3>
+                        <h3 class="title"><a name="keyboard.editing"></a>2.2.&nbsp;<a class="indexterm" name="d0e4086"></a>Editing<a class="indexterm" name="d0e4092"></a></h3>
                      </div>
                   </div>
                </div>
-               <div class="table"><a name="d0e4081"></a><p class="title"><b>Table&nbsp;5.11.&nbsp;Editing shortcuts</b></p>
+               <div class="table"><a name="d0e4097"></a><p class="title"><b>Table&nbsp;5.11.&nbsp;Editing shortcuts</b></p>
                   <div class="table-contents">
                      <table summary="Editing shortcuts" border="1">
                         <colgroup>
@@ -1156,12 +1184,12 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="keyboard.moving.around"></a>2.3.&nbsp;<a class="indexterm" name="d0e4226"></a>Moving around
+                        <h3 class="title"><a name="keyboard.moving.around"></a>2.3.&nbsp;<a class="indexterm" name="d0e4242"></a>Moving around
                         </h3>
                      </div>
                   </div>
                </div>
-               <div class="table"><a name="d0e4232"></a><p class="title"><b>Table&nbsp;5.12.&nbsp;Moving around shortcuts</b></p>
+               <div class="table"><a name="d0e4248"></a><p class="title"><b>Table&nbsp;5.12.&nbsp;Moving around shortcuts</b></p>
                   <div class="table-contents">
                      <table summary="Moving around shortcuts" border="1">
                         <colgroup>
@@ -1211,12 +1239,12 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="keyboard.other"></a>2.4.&nbsp;<a class="indexterm" name="d0e4313"></a>Other
+                        <h3 class="title"><a name="keyboard.other"></a>2.4.&nbsp;<a class="indexterm" name="d0e4329"></a>Other
                         </h3>
                      </div>
                   </div>
                </div>
-               <div class="table"><a name="d0e4319"></a><p class="title"><b>Table&nbsp;5.13.&nbsp;Various shortcuts</b></p>
+               <div class="table"><a name="d0e4335"></a><p class="title"><b>Table&nbsp;5.13.&nbsp;Various shortcuts</b></p>
                   <div class="table-contents">
                      <table summary="Various shortcuts" border="1">
                         <colgroup>

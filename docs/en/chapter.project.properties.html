@@ -29,21 +29,23 @@
          <div class="titlepage">
             <div>
                <div>
-                  <h1 class="title"><a name="chapter.project.properties"></a>Chapter&nbsp;6.&nbsp;Project properties<a class="indexterm" name="d0e4384"></a></h1>
+                  <h1 class="title"><a name="chapter.project.properties"></a>Chapter&nbsp;6.&nbsp;Project properties<a class="indexterm" name="d0e4400"></a></h1>
                </div>
             </div>
          </div>
          <div class="toc">
             <dl class="toc">
-               <dt><span class="section"><a href="chapter.project.properties.html#properties.dialog">1. Properties dialog</a></span></dt>
+               <dt><span class="section"><a href="chapter.project.properties.html#properties.dialog">1. Generalities</a></span></dt>
+               <dt><span class="section"><a href="chapter.project.properties.html#d0e4424">2. Languages</a></span></dt>
+               <dt><span class="section"><a href="chapter.project.properties.html#d0e4434">3. Options</a></span></dt>
+               <dt><span class="section"><a href="chapter.project.properties.html#d0e4528">4. File locations</a></span></dt>
             </dl>
          </div>
-         <p></p>
          <div class="section">
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="properties.dialog"></a>1.&nbsp;Properties dialog
+                     <h2 class="title" style="clear: both"><a name="properties.dialog"></a>1.&nbsp;Generalities
                      </h2>
                   </div>
                </div>
@@ -54,139 +56,178 @@
             <p>It is possible to modify the project properties during a translation
                session. Note that changes to the project setup may have some
                consequences, especially, when the project has already been started. Until
-               you have some experience with OmegaT, it is safest to consider all
+                   you have some experience with OmegaT, it is safest to consider all
                    settings final once the translation has started – unless of course you
                    realize a major mistake has been made. See the section Preventing data
                    loss for ways and means of protecting your work.
             </p>
-            <div class="figure"><a name="d0e4409"></a><p class="title"><b>Figure&nbsp;6.1.&nbsp;Project properties window</b></p>
-               <div class="figure-contents">
-                  <div class="mediaobject"><img src="images/NewProject_26.png" alt="Project properties window"></div>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e4424"></a>2.&nbsp;Languages
+                     </h2>
+                  </div>
                </div>
-            </div><br class="figure-break"><p>It contains:</p>
-            <div class="itemizedlist">
-               <ul class="itemizedlist" style="list-style-type: disc; ">
-                  <li class="listitem">
-                     <p><span class="bold"><strong>An area for setting project source and
-                                      target languages</strong></span></p>
-                     <p>You can either enter the source and target languages by hand or
-                                use the drop down menus. Bear in mind that changing the languages may
-                                render the currently used translation memories useless since their
-                                language pair may not longer match the new languages.
-                     </p>
-                  </li>
-               </ul>
             </div>
-            <div class="itemizedlist">
-               <ul class="itemizedlist" style="list-style-type: disc; ">
-                  <li class="listitem">
-                     <p><span class="bold"><strong><span class="guilabel">Enable Sentence-level
-                                         segmentation</span> </strong></span>check box
-                     </p><a class="indexterm" name="d0e4434"></a><p>The segmentation settings only address the way the source files
-                                are handled by <span class="application">OmegaT</span>. The predominant way
-                                of segmenting the sources is the sentence-level segmenting, so this
-                                check box should in a normal case be left checked.
+            <p>You can either enter the source and target languages by hand or use
+                   the drop down menus. Bear in mind that changing the languages may render
+                   the currently used translation memories useless since their language pair
+                   may not longer match the new languages.
+            </p>
+            <p>Tokenizers corresponding to the selected languages are displayed.
+                   See <a class="link" href="appendix.Tokenizers.inOmegaT.html" title="Appendix&nbsp;D.&nbsp;Tokenizers">Tokenizers
+                      Appendix</a> for details.
+            </p>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e4434"></a>3.&nbsp;Options
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <div class="variablelist">
+               <dl class="variablelist">
+                  <dt><span class="term">Enable Sentence-level segmentation</span></dt>
+                  <dd>
+                     <p>The segmentation settings only address the way the source
+                                  files are handled by <span class="application">OmegaT</span>. The
+                                  predominant way of segmenting the sources is the sentence-level
+                                  segmenting, so this check box should in a normal case be left
+                                  checked.
                      </p>
                      <p>In some seldom cases the alternative, i.e. segmenting by
-                                paragraphs, may be preferred. Changing this flag does not modify the
-                                segmentation of already existing translation memories. If you decide
-                                mid-translation to switch from sentence to paragraph translation, the
-                                internal translation memory of the project will not be changed (OmegaT
-                                may upgrade old translation memories that did not use sentence
-                                segmentation, but not vice versa).
+                                  paragraphs, may be preferred. Changing this flag does not modify the
+                                  segmentation of already existing translation memories. If you decide
+                                  mid-translation to switch from sentence to paragraph translation,
+                                  the internal translation memory of the project will not be changed
+                                  (OmegaT may upgrade old translation memories that did not use
+                                  sentence segmentation, but not vice versa), but OmegaT will attemps to create
+                                  paragraph fuzzy matches by glueing together existing sentence translations.
                      </p>
-                     <p>Changing segmentation settings may cause some already translated
-                                segments to be split or merged. This will effectively return them to
-                                the "untranslated" status, as they will no longer match segments
-                                recorded in the project memory, even though their original translation
-                                is still there.
+                     <p>Changing segmentation settings may cause some already
+                                  translated segments to be split or merged. This will effectively
+                                  return them to the "untranslated" status, as they will no longer
+                                  match segments recorded in the project memory, even though their
+                                  original translation is still there.
                      </p>
-                  </li>
-               </ul>
-            </div>
-            <div class="itemizedlist">
-               <ul class="itemizedlist" style="list-style-type: disc; ">
-                  <li class="listitem">
-                     <p><span class="bold"><strong><span class="guibutton">Segmentation...</span>
-                                      </strong></span>button<a class="indexterm" name="d0e4456"></a></p>
+                  </dd>
+                  <dt><span class="term"><span class="guibutton">Segmentation...</span> <a class="indexterm" name="d0e4456"></a></span></dt>
+                  <dd>
                      <p>The segmentation rules are generally valid across all the
-                                projects. The user, however, may need to generate a set of rules,
-                                specific to the project in question. Use this button to open a
-                                dialog,activate the check box <span class="guimenuitem">Project specific
-                                   segmentation rules</span>, then proceed to adjust the
-                                segmentation rules as desired. The new set of rules will be stored
-                                together with the project and will not interfere with the general set
-                                of segmentation rules. To delete project specific segmentation rules,
-                                uncheck the check box. See chapter <a class="link" href="chapter.segmentation.html" title="Chapter&nbsp;14.&nbsp;Source segmentation">Source Segmentation</a> for more
-                                information on segmentation rules. <span class="emphasis"><em></em></span></p>
+                                  projects. The user, however, may need to generate a set of rules,
+                                  specific to the project in question. Use this button to open a
+                                  dialog, activate the check box <span class="guimenuitem">Project specific
+                                     segmentation rules</span>, then proceed to adjust the
+                                  segmentation rules as desired. The new set of rules will be stored
+                                  together with the project and will not interfere with the general
+                                  set of segmentation rules. To delete project specific segmentation
+                                  rules, uncheck the check box. See chapter <a class="link" href="chapter.segmentation.html" title="Chapter&nbsp;14.&nbsp;Source segmentation">Source Segmentation</a> for more
+                                  information on segmentation rules. 
+                     </p>
                      <p><span class="emphasis"><em>Hint:</em></span> the set of segmentation rules for a
-                                given project is stored as
-                                <code class="filename">project/omegat/segmentation.conf.</code></p>
-                  </li>
-                  <li class="listitem">
-                     <p><span class="bold"><strong><span class="guibutton">File Filters...</span>
-                                      </strong></span>button<a class="indexterm" name="d0e4483"></a></p>
+                                  given project is stored as
+                                  <code class="filename">project/omegat/segmentation.conf.</code></p>
+                  </dd>
+                  <dt><span class="term"><span class="guibutton">File Filters...</span><a class="indexterm" name="d0e4480"></a></span></dt>
+                  <dd>
                      <p>In a similar fashion as above the user can create
-                                project-specific File filters, which will be stored together with the
-                                project and will be valid for the current project only. To create a
-                                project-specific set of file filters, click on the <span class="guibutton">File
-                                   filter ... </span>button, then activate <span class="guimenuitem">Enable
-                                   project specific filters</span> check box in the window, that
-                                opens. A copy of the changed filters configuration will be stored with
-                                the project. To delete project specific file filters, uncheck the
-                                check box. Note that in the menu <span class="guimenuitem">Options-&gt;File
-                                   Filters</span>, the global user filters are changed, not the
-                                project filters. See chapter<a class="link" href="chapter.file.filters.html" title="Chapter&nbsp;7.&nbsp;File Filters"> File
-                                   filters </a>for more on the subject. <span class="emphasis"><em></em></span></p>
+                                  project-specific File filters, which will be stored together with
+                                  the project and will be valid for the current project only. To
+                                  create a project-specific set of file filters, click on the
+                                  <span class="guibutton">File filter ... </span>button, then activate
+                                  <span class="guimenuitem">Enable project specific filters</span> check box
+                                  in the window that opens. A copy of the changed filters
+                                  configuration will be stored with the project. To delete project
+                                  specific file filters, uncheck the check box. Note that in the menu
+                                  <span class="guimenuitem">Options-&gt;File Filters</span>, the global user
+                                  filters are changed, not the project filters. See chapter <a class="link" href="chapter.file.filters.html" title="Chapter&nbsp;7.&nbsp;File Filters">File filters</a>for more on the
+                                  subject. <span class="emphasis"><em></em></span></p>
                      <p><span class="emphasis"><em>Hint:</em></span> the set of file filters for a given
-                                project is stored as
-                                <code class="filename">project/omegat/filters.xml.</code></p>
-                  </li>
-                  <li class="listitem">
-                     <p><span class="bold"><strong>Autopropagation </strong></span>check
-                                box<span class="bold"><strong><a class="indexterm" name="d0e4515"></a></strong></span></p>
+                                  project is stored as
+                                  <code class="filename">project/omegat/filters.xml.</code></p>
+                  </dd>
+                  <dt><span class="term">Auto-propagation of Translations</span></dt>
+                  <dd>
                      <p>In case there are non-unique segments in source documents, the
-                                Auto-propagation check box offers the user the following two
-                                possibilities as regards automatic translation: if checked, the first
-                                translated segment will be assumed as the default translation and its
-                                target text will be automatically used for later hits during the
-                                translation process. Mistranslated segments can of course be corrected
-                                later manually using <span class="guimenuitem">Create Alternative
-                                   Translation</span>. If the Auto-propagation check box is not
-                                checked, the segments with alternative translations are left
-                                untranslated until the user has decided which translation is to be
-                                used.
+                                  Auto-propagation check box offers the user the following two
+                                  possibilities as regards automatic translation: if checked, the
+                                  first translated segment will be assumed as the default translation
+                                  and its target text will be automatically used for later hits during
+                                  the translation process. Mistranslated segments can of course be
+                                  corrected later manually using <span class="guimenuitem">Create Alternative
+                                     Translation</span>. If the Auto-propagation check box is not
+                                  checked, the segments with alternative translations are left
+                                  untranslated until the user has decided which translation is to be
+                                  used.
                      </p>
-                  </li>
-                  <li class="listitem">
-                     <p><span class="bold"><strong>Remove tags</strong></span> check box
-                                <a class="indexterm" name="d0e4530"></a></p>
+                  </dd>
+                  <dt><span class="term">Remove Tags</span></dt>
+                  <dd>
                      <p>When enabled, all the formatting tags are removed from source
-                                segments. This is especially useful when dealing with texts where
-                                inline formatting is not really useful (e.g., OCRed PDF, bad converted
-                                .odt or .docx, etc.) In a normal case it should always be possible to
-                                open the target documents, as only inline tags are removed.
-                                Non-visible formatting (i.e., which doesn't appear as tags in the
-                                OmegaT editor) is retained in target documents.
+                                  segments. This is especially useful when dealing with texts where
+                                  inline formatting is not really useful (e.g., OCRed PDF, bad
+                                  converted .odt or .docx, etc.) In a normal case it should always be
+                                  possible to open the target documents, as only inline tags are
+                                  removed. Non-visible formatting (i.e., which doesn't appear as tags
+                                  in the OmegaT editor) is retained in target documents.
                      </p>
-                  </li>
-               </ul>
+                  </dd>
+                  <dt><span class="term">External Post-processing Command</span></dt>
+                  <dd>
+                     <p>This area allows entering an external post-processing command
+                                  (for instance, a script to rename files) that will be applied each time 
+                                  Create Translated Documents is used. This external command cannot include "pipes", etc.,
+                                  which is why calling a script is recommanded.
+                     </p>
+                  </dd>
+               </dl>
             </div>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e4528"></a>4.&nbsp;File locations
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>Here you can select different subfolders, for instance the subfolder
+                   with source files, subfolder for target files etc. If you enter names of
+                   folders that do not exist yet, <span class="application">OmegaT</span> creates
+                   them for you. In case you decide to modify project folders, keep in mind
+                   that this will not move existing files from old folders to the new
+                   location.
+            </p>
+            <p>Clic on <span class="guibutton">Exclusions...</span> to define the files or
+                   folders that will be ignored by <span class="application">OmegaT</span>. An
+                   ignored file or folder:
+            </p>
             <div class="itemizedlist">
                <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
-                     <p><span class="bold"><strong>An area for setting project
-                                      folders</strong></span><a class="indexterm" name="d0e4542"></a><a class="indexterm" name="d0e4547"></a></p>
-                     <p>Here you can select different subfolders, for instance the
-                                subfolder with source files, subfolder for target files etc. If you
-                                enter names of folders that do not exist yet,
-                                <span class="application">OmegaT</span> creates them for you. In case you
-                                decide to modify project folders, keep in mind that this will not move
-                                existing files from old folders to the new location.
+                     <p>is not displayed in the Editor pane,</p>
+                  </li>
+                  <li class="listitem">
+                     <p>is not taken into account in statistics,</p>
+                  </li>
+                  <li class="listitem">
+                     <p>is not copied in /target folder during the translated files
+                                creation process.
                      </p>
                   </li>
                </ul>
             </div>
+            <p>In the Exclusion patterns dialog, it is possible to Add or Remove a
+                   pattern, or edit one by selecting a line and pressing F2. It is possible
+                   to use wildcards, using the <a class="ulink" href="https://ant.apache.org/manual/dirtasks.html#patterns" target="_top">ant
+                      syntax</a>.
+            </p>
          </div>
       </div>
       <div class="navfooter">

@@ -68,7 +68,8 @@
           mid-translation to switch from sentence to paragraph translation,
           the internal translation memory of the project will not be changed
           (OmegaT may upgrade old translation memories that did not use
-          sentence segmentation, but not vice versa).</para>
+          sentence segmentation, but not vice versa), but OmegaT will attemps to create
+          paragraph fuzzy matches by glueing together existing sentence translations.</para>
 
           <para>Changing segmentation settings may cause some already
           translated segments to be split or merged. This will effectively
@@ -120,12 +121,12 @@
           create a project-specific set of file filters, click on the
           <guibutton>File filter ... </guibutton>button, then activate
           <guimenuitem>Enable project specific filters</guimenuitem> check box
-          in the window, that opens. A copy of the changed filters
+          in the window that opens. A copy of the changed filters
           configuration will be stored with the project. To delete project
           specific file filters, uncheck the check box. Note that in the menu
           <guimenuitem>Options-&gt;File Filters</guimenuitem>, the global user
-          filters are changed, not the project filters. See chapter<link
-          linkend="chapter.file.filters"> File filters </link>for more on the
+          filters are changed, not the project filters. See chapter <link
+          linkend="chapter.file.filters">File filters</link>for more on the
           subject. <emphasis/></para>
 
           <para><emphasis>Hint:</emphasis> the set of file filters for a given
@@ -170,7 +171,10 @@
         <term>External Post-processing Command</term>
 
         <listitem>
-          <para>[vb: how to enable it? What to say about it?][jc: dans Options/Saving and Output -> "Also allow per-project external commands" où tu trouveras aussi l'explication du truc.]</para>
+          <para>This area allows entering an external post-processing command
+          (for instance, a script to rename files) that will be applied each time 
+          Create Translated Documents is used. This external command cannot include "pipes", etc.,
+          which is why calling a script is recommanded.</para>
         </listitem>
       </varlistentry>
     </variablelist>
@@ -207,7 +211,7 @@
 
     <para>In the Exclusion patterns dialog, it is possible to Add or Remove a
     pattern, or edit one by selecting a line and pressing F2. It is possible
-    to use standard wildcards (and ?) plus *, using the <ulink
+    to use wildcards, using the <ulink
     url="https://ant.apache.org/manual/dirtasks.html#patterns">ant
     syntax</ulink>.</para>
   </section>

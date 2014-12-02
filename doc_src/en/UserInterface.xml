@@ -845,7 +845,7 @@
 
       <para>The machine translation pane, when opened, contains the
       suggestions by machine translation tools for the current segment. Press
-      <keysym>Ctrl+M</keysym>to replace the translation of the current
+      <keysym>Ctrl+M</keysym> to replace the translation of the current
       segment with the suggested translation. More in the chapter <link
       linkend="chapter.machine.translate">Machine translation</link></para>
     </section>

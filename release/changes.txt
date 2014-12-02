@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 3.1.8 
 ----------------------------------------------------------------------
-   5 Enhancements
+   6 Enhancements
    9 Bug fixes
    5 Localisation updates
 ----------------------------------------------------------------------
@@ -24,6 +24,8 @@
 
   - All OmegaT windows (Search and Scripting windows) now use the OmegaT icon 
 instead of the standard Java ones
+
+  - Revised user manual
 
   Bug fixes:
 

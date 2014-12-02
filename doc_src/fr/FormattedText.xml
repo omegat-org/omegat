@@ -36,7 +36,7 @@
 
     <para>&lt;br1&gt; est une balise unique et n'affecte pas le texte avoisinant. Les balises doubles donnent généralement des informations sur le style qui s'applique au texte contenu entre la balise ouvrante et la balise fermante de la balise double. &lt;b0&gt; et &lt;/b0&gt; ci-dessus sont doubles et affectent le texte log.txt . Veuillez noter que la balise ouvrante doit toujours se trouver avant la balise fermante qui lui correspond.</para>
 
-    <para>&lt;<literal>Fichier journal (&lt;b0&gt;log.txt&lt;/b0&gt;) : pour le suivi des opérations et des erreurs.</literal></para>
+    <para>&lt;<literal>Fichier journal (&lt;b0&gt;log.txt&lt;/b0&gt;) : pour le suivi des opérations et des erreurs.&lt;segment 3167&gt;</literal></para>
 
     <para><application>OmegaT</application> crée ses balises avant de procéder à la segmentation des phrases. En fonction des règles de segmentation, les paires de balises peuvent être séparées dans deux segments consécutifs, auquel cas la validation des balises marquera les deux segments par règle de précaution.</para>
   </section>
@@ -74,7 +74,7 @@
 
     <para>Après la suppression :</para>
 
-    <para><literal>Ce formatage a été supprimé.</literal></para>
+    <para><literal>Ce formatage a été supprimé.&lt;segment 0001&gt;</literal></para>
   </section>
 
   <section id="tag.group.nesting">

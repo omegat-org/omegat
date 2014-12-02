@@ -10,9 +10,9 @@
         <primary>Raccourcis</primary> <secondary>Rechercher - Ctrl+F</secondary>
       </indexterm></title>
 
-    <para>Ouvrez la fenêtre de Recherche textuelle en utilisant  <keycombo> <keycap>Ctrl</keycap> <keycap>F</keycap> </keycombo> &gt; et saisissez dans le champ de recherche le mot ou l'expression que vous souhaitez trouver.</para>
+    <para>Ouvrez la fenêtre de Recherche textuelle en utilisant  <keycombo> <keycap>Ctrl</keycap> <keycap>F</keycap> </keycombo> &gt; et saisissez dans le champ <emphasis>Rechercher</emphasis> le mot ou l'expression que vous souhaitez trouver.</para>
 
-    <para>Vous pouvez également sélectionner un mot ou une expression dans l'Éditeur et appuyer sur &lt;<keycap>Ctrl</keycap> <keycap>F</keycap> </keycombo>. Le mot ou l'expression est alors saisi(e) automatiquement dans le champ <emphasis>Rechercher</emphasis>. Il est possible d'avoir plusieurs fenêtres de recherche ouvertes en même temps mais il est préférable de les fermer lorsqu'elles ne sont plus utiles afin de ne pas encombrer le bureau.</para>
+    <para>Vous pouvez également sélectionner un mot ou une expression dans l'Éditeur et appuyer sur <keycombo> <keycap>Ctrl</keycap> <keycap>F</keycap> </keycombo>. Le mot ou l'expression est alors saisi(e) automatiquement dans le champ <emphasis>Rechercher</emphasis>. Il est possible d'avoir plusieurs fenêtres de recherche ouvertes en même temps mais il est préférable de les fermer lorsqu'elles ne sont plus utiles afin de ne pas encombrer le bureau.</para>
 
     <para>Cliquez sur la flèche déroulante de la case <emphasis>Rechercher</emphasis> pour accéder aux 10 dernières recherches.</para>
   </section>

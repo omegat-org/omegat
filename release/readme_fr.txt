@@ -245,7 +245,7 @@ Autres contributions par :
   Sabine Cretella
   Dmitri Gabinski
   Jean-Christophe Helary (responsable localisations)
-  Vito Smolej (responsable documentation)
+  Vincent Bidaux (responsable documentation)
   Samuel Murray
   Marc Prior (webmestre)
   ainsi que beaucoup d'autres personnes.

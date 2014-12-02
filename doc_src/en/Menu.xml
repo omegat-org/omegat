@@ -1036,7 +1036,7 @@
               <entry>The <guimenuitem>Display Context Description for TBX
               Glossaries</guimenuitem> option allows to show or hide
               contextual information with the terms (that come from TBX
-              glossaries located in <filename>glossary</filename> directory)
+              glossaries located in <filename>glossary</filename> folder)
               in the Glossary pane.<para>The 3 other options are described in
               the specific page concerning <link
               linkend="section.TaaS.options">TaaS</link> (Terminology as a

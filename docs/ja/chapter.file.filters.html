@@ -74,7 +74,7 @@
          </p>
          <p>ほとんどの場合は、デフォルトのファイルフィルター設定のままで問題ないでしょう。もしそうでなければ、メインメニューから<span class="bold"><strong>［設定］→［ファイルフィルター］</strong></span>を選択してダイアログを開いてください。プロジェクト設定から<span class="bold"><strong>［ファイルフィルター...］</strong></span>を選ぶことで、現在のプロジェクト専用のファイルフィルターを設定することもできます。この設定は、他のプロジェクトに影響を与えません。
          </p>
-         <p>プロジェクト専用ファイルフィルターを設定するには、まずメニューから<span class="bold"><strong>［プロジェクト］→［プロジェクト設定...］を選びます。</strong></span>次に<span class="guibutton">［ファイルフィルター...］</span>ボタンをクリックして、<span class="guimenuitem">［ファイルフィルター設定をプロジェクト専用にする］</span>チェックボックスにチェックを入れます<a class="indexterm" name="d0e4388"></a>。こうすると、フィルター設定のコピーがプロジェクト自体とセットで保持されるようになります。この状態でフィルターの設定を変更すると、プロジェクト専用フィルターだけが更新されます。ユーザーレベルのフィルターには影響しません。
+         <p>プロジェクト専用ファイルフィルターを設定するには、まずメニューから<span class="bold"><strong>［プロジェクト］→［プロジェクト設定...］を選びます。</strong></span>次に<span class="guibutton">［ファイルフィルター...］</span>ボタンをクリックして、<span class="guimenuitem">［ファイルフィルター設定をプロジェクト専用にする］</span>チェックボックスにチェックを入れます<a class="indexterm" name="d0e4574"></a>。こうすると、フィルター設定のコピーがプロジェクト自体とセットで保持されるようになります。この状態でフィルターの設定を変更すると、プロジェクト専用フィルターだけが更新されます。ユーザーレベルのフィルターには影響しません。
          </p>
          <p><span class="bold"><strong>警告：</strong></span>プロジェクトを開いているときにフィルター設定を変更すると、変更を適用するためにプロジェクトの再読み込みが必要になります。
          </p>
@@ -82,18 +82,37 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="file.filters.dialog"></a>1. ファイルフィルター ダイアログ<a class="indexterm" name="d0e4401"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="file.filters.dialog"></a>1. ファイルフィルター ダイアログ<a class="indexterm" name="d0e4587"></a></h2>
                   </div>
                </div>
             </div>
             <p>使用可能なファイルフィルターを一覧表示します。OmegaT の中で翻訳したくないファイル形式がある場合は、ファイル形式名の横にあるチェックボックスのチェックを外すと、その形式に対してフィルター機能を使わないようにすることができます。フィルターを無効にしているファイル形式のファイルは、プロジェクトの読み込み時に無視され、訳文生成時には未変更の状態で訳文フォルダーにコピーされます。再びフィルターを使用したくなったら、対象のチェックボックスにチェックを入れてください。<span class="bold"><strong>［初期値を復元］</strong></span> をクリックすると、それまでのフィルター設定をリセットし初期設定に戻します。フィルター対象とするファイルやエンコーディングを変更する場合は<span class="bold"><strong>［編集...］</strong></span>をクリックします。
             </p>
+            <p>ダイアログ上で、次の設定の有効/無効を切り替えることができます：</p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>先頭と末尾のタグを削除：先頭と末尾のタグを含むすべてのタグを表示したい場合は、この設定のチェックを外してください。警告：Microsoft Open XML 形式のファイル（docx や xlsx など）について、すべてのタグを表示した場合は、決して先頭のタグの前にテキストを入力しないでください（そのタグは技術的な理由で、常に分節の先頭に置かなければなりません）。</p>
+                  </li>
+                  <li class="listitem">
+                     <p>分節化しないプロジェクトから、先頭と末尾の空白文字を削除：OmegaT は既定で、先頭と末尾の空白文字を削除します。分節化しないプロジェクトの場合、このオプションのチェックを外すことによって、それらの空白文字を保持することができます。</p>
+                  </li>
+                  <li class="listitem">
+                     <p>すべてのタグの空白を維持：原文ファイルにとって空白文字が（レイアウトの都合上）重要な意味を持ち、それを無視すべきでない場合は、このオプションのチェックを入れてください。</p>
+                  </li>
+                  <li class="listitem">
+                     <p>複数訳文の識別時にファイルのフルパス情報を無視する：OmegaT は既定で、原文ファイル名を複数訳文の識別基準のひとつに利用します。このオプションにチェックを入れると、ファイル名は識別に利用されません。複数訳文の識別には、ファイル名以外の文脈情報（前後の分節や、ファイル形式によってはある種の
+                        ID）だけが使用されます。
+                     </p>
+                  </li>
+               </ul>
+            </div>
          </div>
          <div class="section">
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="filters.options"></a>2. フィルター設定<a class="indexterm" name="d0e4417"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="filters.options"></a>2. フィルター設定<a class="indexterm" name="d0e4618"></a></h2>
                   </div>
                </div>
             </div>
@@ -312,7 +331,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="edit.filter.dialog"></a>3. フィルターの編集ダイアログ<a class="indexterm" name="d0e4623"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="edit.filter.dialog"></a>3. フィルターの編集ダイアログ<a class="indexterm" name="d0e4824"></a></h2>
                   </div>
                </div>
             </div>
@@ -322,7 +341,7 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="source.filetype.and.filename.pattern"></a>3.1. <a class="indexterm" name="d0e4638"></a>原文ファイル形式、ファイル名構成例<a class="indexterm" name="d0e4644"></a></h3>
+                        <h3 class="title"><a name="source.filetype.and.filename.pattern"></a>3.1. <a class="indexterm" name="d0e4839"></a>原文ファイル形式、ファイル名構成例<a class="indexterm" name="d0e4845"></a></h3>
                      </div>
                   </div>
                </div>
@@ -338,7 +357,7 @@
                         </h3>
                      </div>
                   </div>
-               </div><a class="indexterm" name="d0e4678"></a><a class="indexterm" name="d0e4683"></a><a class="indexterm" name="d0e4688"></a><p>エンコーディングの指定が必須のファイル形式は限られています。エンコーディングを特に指定しなかった場合（&lt;自動&gt; の場合）は、拡張子に応じたエンコーディングが使用されます。たとえばデフォルトでは、<code class="literal">.txt</code> ファイルには OS のデフォルト エンコーディングが使用されます。原文ファイルのエンコーディングを、ファイル名構成例ごとに変更することもできます。まったく同様に、訳文ファイルを出力する際のエンコーディングも、任意に変更できます。デフォルトでは、訳文ファイルのエンコーディングは、原文ファイルと同じになります。原文ファイルと訳文ファイルのエンコーディングを指定する項目では、対応したすべてのエンコーディングをコンボボックスから選択できます。&lt;自動&gt;
+               </div><a class="indexterm" name="d0e4879"></a><a class="indexterm" name="d0e4884"></a><a class="indexterm" name="d0e4889"></a><p>エンコーディングの指定が必須のファイル形式は限られています。エンコーディングを特に指定しなかった場合（&lt;自動&gt; の場合）は、拡張子に応じたエンコーディングが使用されます。たとえばデフォルトでは、<code class="literal">.txt</code> ファイルには OS のデフォルト エンコーディングが使用されます。原文ファイルのエンコーディングを、ファイル名構成例ごとに変更することもできます。まったく同様に、訳文ファイルを出力する際のエンコーディングも、任意に変更できます。デフォルトでは、訳文ファイルのエンコーディングは、原文ファイルと同じになります。原文ファイルと訳文ファイルのエンコーディングを指定する項目では、対応したすべてのエンコーディングをコンボボックスから選択できます。&lt;自動&gt;
                   は、<span class="application">OmegaT</span> に自動的に判断させます。自動の場合のエンコーディングは、次の仕組みで判定します：
                </p>
                <div class="itemizedlist">
@@ -367,11 +386,11 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="target.name"></a>3.3. 訳文ファイル名<a class="indexterm" name="d0e4716"></a></h3>
+                        <h3 class="title"><a name="target.name"></a>3.3. 訳文ファイル名<a class="indexterm" name="d0e4917"></a></h3>
                      </div>
                   </div>
                </div>
-               <p>翻訳するファイル名を自動的に変更したい時があると思います。たとえば、ファイル名のあとに言語コードを追加したい場合などです。訳文ファイル名構成例は特別な文法で記述されています。これを編集したい場合は、［<span class="bold"><strong>編集...</strong></span>］をクリックして<a class="indexterm" name="d0e4726"></a>構成例編集ダイアログを使用してください。編集内容をそのフィルターの初期値に戻したい時は、［<span class="bold"><strong>初期値を復元</strong></span>］をクリックしてください。またファイルフィルターダイアログの中で、訳文ファイル名構成例を直接編集することもできます。構成例編集ダイアログでは、以下のような変数を使用できます：
+               <p>翻訳するファイル名を自動的に変更したい時があると思います。たとえば、ファイル名のあとに言語コードを追加したい場合などです。訳文ファイル名構成例は特別な文法で記述されています。これを編集したい場合は、［<span class="bold"><strong>編集...</strong></span>］をクリックして<a class="indexterm" name="d0e4927"></a>構成例編集ダイアログを使用してください。編集内容をそのフィルターの初期値に戻したい時は、［<span class="bold"><strong>初期値を復元</strong></span>］をクリックしてください。またファイルフィルターダイアログの中で、訳文ファイル名構成例を直接編集することもできます。構成例編集ダイアログでは、以下のような変数を使用できます：
                </p>
                <div class="itemizedlist">
                   <ul class="itemizedlist" style="list-style-type: disc; ">
@@ -480,7 +499,7 @@
                         </p>
                      </li>
                      <li class="listitem">
-                        <p><code class="literal">${nameOnly-2}</code> Document.xx.docx
+                        <p><code class="literal">${extension-2}</code> Document.xx.docx
                         </p>
                      </li>
                   </ul>

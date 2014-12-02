@@ -68,14 +68,14 @@
                <dt><span class="section"><a href="chapter.installing.and.running.html#other.systems">4. その他のシステム</a></span></dt>
                <dd>
                   <dl>
-                     <dt><span class="section"><a href="chapter.installing.and.running.html#d0e875">4.1. 適切なパッケージのダウンロード</a></span></dt>
+                     <dt><span class="section"><a href="chapter.installing.and.running.html#d0e871">4.1. 適切なパッケージのダウンロード</a></span></dt>
                      <dt><span class="section"><a href="chapter.installing.and.running.html#OmegaT.installation.other">4.2. <span class="application">OmegaT をインストールする</span></a></span></dt>
                      <dt><span class="section"><a href="chapter.installing.and.running.html#installing.convenient.shortcuts">4.3. 起動に便利なショートカットの作成</a></span></dt>
                      <dt><span class="section"><a href="chapter.installing.and.running.html#running.OmegaT.other">4.4. OmegaT の実行</a></span></dt>
                   </dl>
                </dd>
                <dt><span class="section"><a href="chapter.installing.and.running.html#using.Java.Web.Start">5. Java Web Start の使用</a></span></dt>
-               <dt><span class="section"><a href="chapter.installing.and.running.html#d0e1020">6. コマンドラインから OmegaT を起動する</a></span></dt>
+               <dt><span class="section"><a href="chapter.installing.and.running.html#d0e1016">6. コマンドラインから OmegaT を起動する</a></span></dt>
                <dd>
                   <dl>
                      <dt><span class="section"><a href="chapter.installing.and.running.html#method1.opening.commandline.window">6.1. コマンドラインウィンドウを開く</a></span></dt>
@@ -350,7 +350,7 @@
                      </div>
                   </div>
                </div>
-               <p><span class="application">OmegaT</span> の実行には Java 1.6 が必要です。Apple メニューから［システム環境設定］→［表示］→［ソフトウェアアップデート］→［今すぐ確認］で、最新バージョンの Java がインストールされているか確認してください。
+               <p><span class="application">OmegaT</span> には Java JRE 1.7 が含まれています。
                </p>
                <p><span class="emphasis"><em>OmegaT_3.n.n_Mac.zip</em></span> をダウンロードしてください。
                </p>
@@ -389,14 +389,17 @@
                </div>
                <p><span class="emphasis"><em><span class="application">OmegaT</span>.app</em></span> をダブルクリックするか、ドックのアイコンをクリックします。
                </p>
-               <p>OmegaT の挙動は、<span class="application"><span class="emphasis"><em>Info.plist</em></span></span> ファイルの <span class="emphasis"><em>Properties</em></span> 部分と <span class="emphasis"><em>VMOptions</em></span> 部分を編集することでカスタマイズできます。
+               <p>OmegaT の挙動は、パッケージに含まれる <span class="emphasis"><em>Properties</em></span> と <span class="emphasis"><em>OmegaT.sh</em></span> ファイルを編集することでカスタマイズできます。
                </p>
-               <p>まず <span class="emphasis"><em><span class="application">OmegaT</span>.app</em></span> を右クリックして、［パッケージの内容を表示］を選びます。次に、Contents フォルダーにある <span class="application"><span class="emphasis"><em>Info.plist</em></span></span> を右クリックして、任意のテキストエディターで開きます。あるいはコマンドラインから「cd」コマンドで目的の階層に移動し、<span class="application">emacs</span> や <span class="application">vi</span> のようなコマンドラインエディターで <span class="emphasis"><em>Info.plist</em></span> を開いてもよいでしょう。<a class="indexterm" name="d0e808"></a></p>
-               <p><span class="emphasis"><em>VMOptions</em></span> に値を追加したい場合は、値と値のあいだに空白を入れてください。たとえば <code class="filename">-Xmx1024M -Duser.language=ja</code> とすると、最大 1024MB のメモリを確保できる設定で、日本語のユーザーインターフェースで<span class="application">OmegaT</span> を起動します。
+               <p>まず <span class="emphasis"><em><span class="application">OmegaT</span>.app</em></span> を右クリックして、［パッケージの内容を表示］を選びます。次に、Contents/MacOS フォルダーにある <span class="application"><span class="emphasis"><em>OmegaT.sh</em></span></span> を右クリックして、任意のテキストエディターで開きます。あるいはコマンドラインから「cd」コマンドで目的の階層に移動し、emacs や vi のようなコマンドラインエディターで <span class="application"><span class="emphasis"><em>OmegaT.sh</em></span></span> を開いてもよいでしょう。<a class="indexterm" name="d0e799"></a></p>
+               <p><span class="emphasis"><em>OmegaT.sh</em></span> を編集することで、設定を変更できます。定義済みの設定を有効にするには、引数の先頭の # 記号を削除してください。たとえば、<code class="filename">LANGUAGE="-Duser.language=ja"</code>（# 記号なし）とすると、<span class="application">OmegaT</span> は日本語のユーザーインターフェースで起動します。
                </p>
-               <p><span class="emphasis"><em><span class="application">OmegaT</span>.app</em></span> を複数起動したい場合は、代わりに <span class="emphasis"><em><span class="application">OmegaT</span>.app/Contents/MacOS/</em></span> にある <span class="emphasis"><em>JavaApplicationStub</em></span> ファイルをダブルクリックしてください。
+               <p>メモリ容量の割り当てを変更する場合は、起動行を直接編集します。たとえば、<code class="filename">${JAVA} -Xmx2048m ${MACOS} ${LANGUAGE} ${COUNTRY} ${PROXY_HOST} ${PROXY_PORT} ${GOOGLE_API_KEY} ${MS_CLIENT_ID} ${MS_CLIENT_SECRET}
+                     ${MY_MEMORY_EMAIL} ${TAAS_USER_KEY} -jar OmegaT.jar</code> とすると、OmegaT は 2 ギガのメモリ割り当てで起動します。
                </p>
-               <p><span class="application">OmegaT</span> をコマンドラインから起動する場合は、<span class="emphasis"><em><span class="application">OmegaT</span>.app/Contents/Resources/Java/</em></span> にある <span class="emphasis"><em><span class="application">OmegaT</span>.jar</em></span> ファイルを指定してください。詳細は「コマンドラインから OmegaT を起動する」を参照してください。
+               <p><span class="emphasis"><em><span class="application">OmegaT</span>.app</em></span> を複数起動したい場合は、<span class="emphasis"><em><span class="application">OmegaT</span>.app/Contents/MacOS/</em></span> にある <span class="emphasis"><em>OmegaT.sh</em></span> ファイルをダブルクリックしてください。
+               </p>
+               <p><span class="application">OmegaT</span> をコマンドラインから起動する場合は、<span class="emphasis"><em><span class="application">OmegaT</span>.app/Contents/MacOS/Java/</em></span> にある <span class="emphasis"><em><span class="application">OmegaT</span>.jar</em></span> ファイルを指定してください。詳細は「コマンドラインから OmegaT を起動する」を参照してください。
                </p>
             </div>
             <div class="section">
@@ -416,7 +419,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="other.systems"></a>4. その他のシステム<a class="indexterm" name="d0e868"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="other.systems"></a>4. その他のシステム<a class="indexterm" name="d0e864"></a></h2>
                   </div>
                </div>
             </div>
@@ -425,7 +428,7 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="d0e875"></a>4.1. 適切なパッケージのダウンロード
+                        <h3 class="title"><a name="d0e871"></a>4.1. 適切なパッケージのダウンロード
                         </h3>
                      </div>
                   </div>
@@ -458,7 +461,7 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="OmegaT.installation.other"></a>4.2. <span class="application">OmegaT をインストールする</span><a class="indexterm" name="d0e922"></a></h3>
+                        <h3 class="title"><a name="OmegaT.installation.other"></a>4.2. <span class="application">OmegaT をインストールする</span><a class="indexterm" name="d0e918"></a></h3>
                      </div>
                   </div>
                </div>
@@ -481,7 +484,7 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="running.OmegaT.other"></a>4.4. <span class="application">OmegaT<a class="indexterm" name="d0e952"></a></span> の実行
+                        <h3 class="title"><a name="running.OmegaT.other"></a>4.4. <span class="application">OmegaT<a class="indexterm" name="d0e948"></a></span> の実行
                         </h3>
                      </div>
                   </div>
@@ -494,7 +497,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="using.Java.Web.Start"></a>5. Java Web Start の使用<a class="indexterm" name="d0e976"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="using.Java.Web.Start"></a>5. Java Web Start の使用<a class="indexterm" name="d0e972"></a></h2>
                   </div>
                </div>
             </div>
@@ -512,7 +515,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="d0e1020"></a>6. コマンドラインから OmegaT を起動する<a class="indexterm" name="d0e1023"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="d0e1016"></a>6. コマンドラインから OmegaT を起動する<a class="indexterm" name="d0e1019"></a></h2>
                   </div>
                </div>
             </div>
@@ -558,7 +561,7 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="launch.command.arguments"></a>6.2. 起動コマンドの引数<a class="indexterm" name="d0e1123"></a></h3>
+                        <h3 class="title"><a name="launch.command.arguments"></a>6.2. 起動コマンドの引数<a class="indexterm" name="d0e1119"></a></h3>
                      </div>
                   </div>
                </div>
@@ -570,7 +573,7 @@
                   <ul class="itemizedlist" style="list-style-type: disc; ">
                      <li class="listitem">
                         <p><span class="bold"><strong>ユーザーインターフェース言語</strong></span></p>
-                        <p><span class="bold"><strong>-Duser.language=XX</strong></span><a class="indexterm" name="d0e1165"></a> 通常、何も引数を指定せずに <span class="application">OmegaT</span> を起動した場合は、プログラムはまず OS の言語を検出します。<span class="application">OmegaT</span> のユーザーインターフェースがその言語に対応していれば、<span class="application">OmegaT</span> はそれを使用します。したがって、たとえば OS がロシア語であれば、<span class="application">OmegaT</span> のユーザーインターフェースやメニューなどはロシア語で表示されます。もし OS の言語に対応していない場合、<span class="application">OmegaT</span> はデフォルトの英語で表示されます。これが基本的な仕組みです。
+                        <p><span class="bold"><strong>-Duser.language=XX</strong></span><a class="indexterm" name="d0e1161"></a> 通常、何も引数を指定せずに <span class="application">OmegaT</span> を起動した場合は、プログラムはまず OS の言語を検出します。<span class="application">OmegaT</span> のユーザーインターフェースがその言語に対応していれば、<span class="application">OmegaT</span> はそれを使用します。したがって、たとえば OS がロシア語であれば、<span class="application">OmegaT</span> のユーザーインターフェースやメニューなどはロシア語で表示されます。もし OS の言語に対応していない場合、<span class="application">OmegaT</span> はデフォルトの英語で表示されます。これが基本的な仕組みです。
                         </p>
                         <p>「<span class="emphasis"><em>-Duser.language=XX</em></span>」引数の指定により、<span class="application">OmegaT</span> は OS の言語よりも優先して、指定した言語を使用するようになります。引数の中の「XX」は、指定したい言語の 2 桁の言語コードです。<span class="application">OmegaT</span> を（たとえばロシア語 OS 上で）日本語のユーザーインターフェースで使用したい場合は、実行コマンドは以下のようになります：
                         </p>
@@ -582,7 +585,7 @@
                   <ul class="itemizedlist" style="list-style-type: disc; ">
                      <li class="listitem">
                         <p><span class="bold"><strong>ユーザーの地域設定</strong></span></p>
-                        <p><span class="bold"><strong>-Duser.country=XX</strong></span><a class="indexterm" name="d0e1213"></a> 言語と合わせて、国を指定することもできます。例えば日本の場合、JP を指定します。特定の言語版の「5 分でわかる！ OmegaT の使い方」を表示するには、言語と国の両方を指定する必要があります。「ポルトガル語 - ブラジル」の組み合わせに対する
+                        <p><span class="bold"><strong>-Duser.country=XX</strong></span><a class="indexterm" name="d0e1209"></a> 言語と合わせて、国を指定することもできます。例えば日本の場合、JP を指定します。特定の言語版の「5 分でわかる！ OmegaT の使い方」を表示するには、言語と国の両方を指定する必要があります。「ポルトガル語 - ブラジル」の組み合わせに対する
                            pt_BR のように、１つの言語に１つの国のみの組み合わせである場合であっても、これは必要です。
                         </p>
                      </li>
@@ -591,14 +594,8 @@
                <div class="itemizedlist">
                   <ul class="itemizedlist" style="list-style-type: disc; ">
                      <li class="listitem">
-                        <p><span class="bold"><strong>字体のアンチエイリアス</strong></span> -（Java 1.5 のみ）
-                        </p>
-                        <p><span class="bold"><strong>-Dswing.aatext=true<a class="indexterm" name="d0e1230"></a></strong></span> この引数は、字体のアンチエイリアスを有効にするかどうかを設定します。有効にすると、字体の見た目を改善できます。（日本語訳註：Java 1.6 以降では「-Dawt.useSystemAAFontSettings=on」を使います）
-                        </p>
-                     </li>
-                     <li class="listitem">
                         <p><span class="bold"><strong>メモリの割り当て</strong></span></p>
-                        <p><span class="bold"><strong>-XmxZZM</strong></span><a class="indexterm" name="d0e1245"></a> この引数により、<span class="application">OmegaT</span> により多くのメモリを割り当てられます。デフォルトでは 512 MB が割り当てられます。そのため、これより小さな値をこの引数で指定しても効果はありません。「ZZ」には、割り当てたいメモリ容量を MB（メガバイト）単位で指定します。1024MB（1GB）のメモリを割り当てて
+                        <p><span class="bold"><strong>-XmxZZM</strong></span><a class="indexterm" name="d0e1225"></a> この引数により、<span class="application">OmegaT</span> により多くのメモリを割り当てられます。デフォルトでは 512 MB が割り当てられます。そのため、これより小さな値をこの引数で指定しても効果はありません。「ZZ」には、割り当てたいメモリ容量を MB（メガバイト）単位で指定します。1024MB（1GB）のメモリを割り当てて
                            <span class="application">OmegaT</span> を起動する場合のコマンドは：
                         </p>
                         <p><code class="literal">java -Xmx1024M -jar
@@ -606,22 +603,22 @@
                      </li>
                      <li class="listitem">
                         <p><span class="bold"><strong>プロキシサーバーのホスト名と IP アドレス</strong></span></p>
-                        <p><span class="bold"><strong><span class="bold"><strong>-Dhttp.proxyHost=nnn.nnn.nnn.nnn</strong></span><a class="indexterm" name="d0e1273"></a></strong></span> プロキシサーバーの IP アドレス。
+                        <p><span class="bold"><strong><span class="bold"><strong>-Dhttp.proxyHost=nnn.nnn.nnn.nnn</strong></span><a class="indexterm" name="d0e1253"></a></strong></span> プロキシサーバーの IP アドレス。
                         </p>
                      </li>
                      <li class="listitem">
                         <p><span class="bold"><strong>プロキシサーバーのポート番号</strong></span></p>
-                        <p><span class="bold"><strong>-Dhttp.proxyPort=NNNN</strong></span><a class="indexterm" name="d0e1288"></a> プロキシサーバーのポート番号。
+                        <p><span class="bold"><strong>-Dhttp.proxyPort=NNNN</strong></span><a class="indexterm" name="d0e1268"></a> プロキシサーバーのポート番号。
                         </p>
                      </li>
                      <li class="listitem">
                         <p><span class="bold"><strong>Google Translate v2</strong></span></p>
-                        <p><span class="bold"><strong>-Dgoogle.api.key=A123456789B123456789C123456789D12345678 </strong></span><span class="bold"><strong><a class="indexterm" name="d0e1304"></a></strong></span> Google Translate サービスのプライベートな Google API キー。キーの文字列長は 38 文字であることに注意してください。
+                        <p><span class="bold"><strong>-Dgoogle.api.key=A123456789B123456789C123456789D12345678 </strong></span><span class="bold"><strong><a class="indexterm" name="d0e1284"></a></strong></span> Google Translate サービスのプライベートな Google API キー。キーの文字列長は 38 文字であることに注意してください。
                         </p>
                      </li>
                      <li class="listitem">
                         <p><span class="bold"><strong>Microsoft
-                                           Translator</strong></span><a class="indexterm" name="d0e1316"></a></p>
+                                           Translator</strong></span><a class="indexterm" name="d0e1296"></a></p>
                         <p>事前に無料の Microsoft アカウントを取得しておいてください。それには <a class="ulink" href="http://datamarket.azure.com/dataset/bing/microsofttranslator#schema" target="_top">Windows Azure Marketplace</a> に登録し、Translator サービスを使用（サブスクライブ）する必要があります。一ヶ月 200 万字までは、無料で使えます。<a class="ulink" href="https://datamarket.azure.com/account" target="_top">アカウント情報</a>のページにある２つの情報、プライマリ アカウント キーと顧客 ID が必要になります。
                         </p>
                         <p><span class="bold"><strong>-Dmicrosoft.api.client_id=</strong></span><span class="bold"><strong>XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX</strong></span></p>
@@ -638,7 +635,7 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="omegat.command.arguments"></a>6.3. OmegaT をコマンドラインモードで使う<a class="indexterm" name="d0e1351"></a></h3>
+                        <h3 class="title"><a name="omegat.command.arguments"></a>6.3. OmegaT をコマンドラインモードで使う<a class="indexterm" name="d0e1331"></a></h3>
                      </div>
                   </div>
                </div>
@@ -831,7 +828,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="building.OmegaT.from.source"></a>7. ソースコードからの <span class="application">OmegaT</span> のビルド<a class="indexterm" name="d0e1640"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="building.OmegaT.from.source"></a>7. ソースコードからの <span class="application">OmegaT</span> のビルド<a class="indexterm" name="d0e1620"></a></h2>
                   </div>
                </div>
             </div>

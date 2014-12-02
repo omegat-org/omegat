@@ -8,7 +8,7 @@
       <link rel="home" href="index.html" title="OmegaT 3.0 - 取扱説明書">
       <link rel="up" href="index.html" title="OmegaT 3.0 - 取扱説明書">
       <link rel="prev" href="chapter.segmentation.html" title="第14章 原文の分節化">
-      <link rel="next" href="chapter.regexp.html" title="第16章 正規表現">
+      <link rel="next" href="chapter.searchandreplace.html" title="第16章 置換を実行">
    </head>
    <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
       <div class="navheader">
@@ -20,7 +20,7 @@
                <td width="20%" align="left"><a accesskey="p" href="chapter.segmentation.html">戻る</a>&nbsp;
                </td>
                <th width="60%" align="center">&nbsp;</th>
-               <td width="20%" align="right">&nbsp;<a accesskey="n" href="chapter.regexp.html">次へ</a></td>
+               <td width="20%" align="right">&nbsp;<a accesskey="n" href="chapter.searchandreplace.html">次へ</a></td>
             </tr>
          </table>
          <hr>
@@ -29,19 +29,13 @@
          <div class="titlepage">
             <div>
                <div>
-                  <h1 class="title"><a name="chapter.searches"></a>第15章 検索<a class="indexterm" name="d0e7100"></a></h1>
+                  <h1 class="title"><a name="chapter.searches"></a>第15章 検索<a class="indexterm" name="d0e7342"></a></h1>
                </div>
             </div>
          </div>
          <div class="toc">
             <dl class="toc">
                <dt><span class="section"><a href="chapter.searches.html#search.window">1. 検索ウィンドウ</a></span></dt>
-               <dd>
-                  <dl>
-                     <dt><span class="section"><a href="chapter.searches.html#d0e7122">1.1. 検索</a></span></dt>
-                     <dt><span class="section"><a href="chapter.searches.html#d0e7146">1.2. 検索する対象</a></span></dt>
-                  </dl>
-               </dd>
                <dt><span class="section"><a href="chapter.searches.html#using.wild.cards">2. ワイルドカードの使用</a></span></dt>
                <dt><span class="section"><a href="chapter.searches.html#search.methoids">3. 検索方法と設定</a></span></dt>
                <dt><span class="section"><a href="chapter.searches.html#search.result.display">4. 検索結果の表示</a></span></dt>
@@ -52,72 +46,22 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="search.window"></a>1. 検索ウィンドウ
-                     </h2>
+                     <h2 class="title" style="clear: both"><a name="search.window"></a>1. 検索ウィンドウ<a class="indexterm" name="d0e7348"></a></h2>
                   </div>
                </div>
             </div>
-            <div class="figure"><a name="text.search.window"></a><p class="title"><b>図15.1 テキスト検索ウィンドウ<a class="indexterm" name="d0e7109"></a></b></p>
-               <div class="figure-contents">
-                  <div class="mediaobject"><img src="images/TextSearch25.png" alt="テキスト検索ウィンドウ"></div>
-               </div>
-            </div><br class="figure-break"><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;">
-               <h3 class="title">注記</h3>
-               <p>上の検索例では、すべての訳文分節から、訳文言語（ここではスロヴェニア語）ではありえなさそうな文字が使われている箇所を検索しています。</p>
-            </div>
-            <div class="section">
-               <div class="titlepage">
-                  <div>
-                     <div>
-                        <h3 class="title"><a name="d0e7122"></a>1.1. 検索<a class="indexterm" name="d0e7125"></a></h3>
-                     </div>
-                  </div>
-               </div>
-               <p><span class="application">OmegaT</span> は強力な文字列検索機能を備えています。<span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>F</strong></span> で文字列検索ウィンドウを開き、［検索文字列］欄に検索したい単語または語句を入力します。または、編集ウィンドウであらかじめ検索したい単語や語句を選択してから、<span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>F</strong></span> を押します。この場合、［検索文字列］欄に単語または語句が自動的に入力されます。検索ウィンドウはいくつも同時に開いておくことができます。しかし、デスクトップを散らかさないように、検索が終わったら閉じることを忘れないでください。
-               </p>
-            </div>
-            <div class="section">
-               <div class="titlepage">
-                  <div>
-                     <div>
-                        <h3 class="title"><a name="d0e7146"></a>1.2. 検索する対象
-                        </h3>
-                     </div>
-                  </div>
-               </div>
-               <p>検索は、デフォルトでそのプロジェクトの原文と訳文の両方に対して行われます。しかし、原文のみ、あるいは訳文のみに限定することもできます。以下を検索できます：</p>
-               <div class="itemizedlist">
-                  <ul class="itemizedlist" style="list-style-type: disc; ">
-                     <li class="listitem">
-                        <p>プロジェクトのみ（デフォルトの設定）</p>
-                     </li>
-                  </ul>
-               </div>
-               <div class="itemizedlist">
-                  <ul class="itemizedlist" style="list-style-type: disc; ">
-                     <li class="listitem">
-                        <p>プロジェクトの内部翻訳メモリと、tm フォルダーにある翻訳メモリ（<span class="emphasis"><em>参考翻訳メモリ検索</em></span>を参照してください）の両方
-                        </p>
-                     </li>
-                  </ul>
-               </div>
-               <div class="itemizedlist">
-                  <ul class="itemizedlist" style="list-style-type: disc; ">
-                     <li class="listitem">
-                        <p>任意のファイル、または複数ファイルを含む任意のフォルダー（<span class="emphasis"><em>ファイル検索</em></span>を参照してください）
-                        </p>
-                     </li>
-                  </ul>
-               </div>
-               <p>（翻訳メモリではない）複数のファイルを検索する場合、対象となるファイルは、<span class="application">OmegaT</span> が対応している原文ファイル形式に限定されます。そのため、OmegaT は <code class="filename">TMX</code> ファイルの検索にも対応していますが、ファイル検索機能からは対象外になります。<span class="bold"><strong><a class="indexterm" name="d0e7178"></a>詳細設定</strong></span>を表示すると、翻訳者の名前や、翻訳が最後に更新された日時を指定して、検索することができるようになります。
-               </p>
-            </div>
+            <p><span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>F</strong></span> で文字列検索ウィンドウを開き、<span class="emphasis"><em>［検索文字列］</em></span>欄に検索したい単語または語句を入力します。
+            </p>
+            <p>または、編集ウィンドウであらかじめ検索したい単語や語句を選択してから、<span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>F</strong></span>を押します。この場合、<span class="emphasis"><em>［検索文字列］</em></span>欄に単語または語句が自動的に入力されます。検索ウィンドウはいくつも同時に開いておくことができます。しかし、デスクトップを散らかさないように、検索が終わったら閉じることを忘れないでください。
+            </p>
+            <p><span class="emphasis"><em>［検索文字列］</em></span>欄のドロップダウンボタンをクリックすると、直近の検索履歴が 10 個まで表示されます。
+            </p>
          </div>
          <div class="section">
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="using.wild.cards"></a>2. ワイルドカードの使用<a class="indexterm" name="d0e7188"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="using.wild.cards"></a>2. ワイルドカードの使用<a class="indexterm" name="d0e7381"></a></h2>
                   </div>
                </div>
             </div>
@@ -144,7 +88,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="search.methoids"></a>3. 検索方法と設定<a class="indexterm" name="d0e7232"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="search.methoids"></a>3. 検索方法と設定<a class="indexterm" name="d0e7425"></a></h2>
                   </div>
                </div>
             </div>
@@ -164,7 +108,7 @@
                   </dd>
                   <dt><span class="term"><span class="bold"><strong>正規表現</strong></span></span></dt>
                   <dd>
-                     <p>検索文字列が正規表現として扱われます。たとえば上の図で指定されている「[a-zA-Z]+[öäüqwß]」という検索文字列は、ドイツ語配列のキーボードでは不自然な文字が使われている箇所を訳文から検索しています。正規表現は、文字列を検索するにあたって、とても効果的な方法です。詳しくは「<a class="link" href="chapter.regexp.html" title="第16章 正規表現">正規表現</a>」の章を参照してください。
+                     <p>検索文字列が正規表現として扱われます。たとえば上の図で指定されている「[a-zA-Z]+[öäüqwß]」という検索文字列は、ドイツ語配列のキーボードでは不自然な文字が使われている箇所を訳文から検索しています。正規表現は、文字列を検索するにあたって、とても効果的な方法です。詳しくは「<a class="link" href="chapter.regexp.html" title="第17章 正規表現">正規表現</a>」の章を参照してください。
                      </p>
                   </dd>
                </dl>
@@ -174,6 +118,10 @@
                <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
                      <p><span class="bold"><strong>大文字と小文字を区別：</strong></span>指定した文字列そのものを検索します。大文字と小文字の違いも含めて、一致を判断します。
+                     </p>
+                  </li>
+                  <li class="listitem">
+                     <p><span class="bold"><strong>スペース文字で nbsp も検索</strong></span>：検索文字列に入力されたスペース文字を、通常のスペース文字だけでなく、ノーブレークスペース（\u00A）にも一致させます。
                      </p>
                   </li>
                   <li class="listitem">
@@ -189,11 +137,35 @@
                      </p>
                   </li>
                   <li class="listitem">
-                     <p><span class="bold"><strong>翻訳メモリを検索：</strong></span><code class="filename">tm</code> フォルダー内の翻訳メモリから検索します。
+                     <p><span class="bold"><strong>コメントを検索：</strong></span>コメントから検索します。
                      </p>
                   </li>
                   <li class="listitem">
-                     <p><span class="bold"><strong>繰り返し結果も表示：</strong></span>このチェックボックスのチェックを外すと、結果に重複する内容が含まれている場合は、最初の内容のみが表示されます。
+                     <p><span class="bold"><strong>全分節：</strong></span>翻訳済み分節と未翻訳分節の両方から検索します。
+                     </p>
+                  </li>
+                  <li class="listitem">
+                     <p><span class="bold"><strong>翻訳済み分節：</strong></span>翻訳済み分節だけから検索します。
+                     </p>
+                  </li>
+                  <li class="listitem">
+                     <p><span class="bold"><strong>未翻訳分節：</strong></span>未翻訳分節だけから検索します。
+                     </p>
+                  </li>
+                  <li class="listitem">
+                     <p><span class="bold"><strong>表示：繰り返し分節：</strong></span>内容が同じ分節が複数見つかった場合でも、検索結果にすべての分節を繰り返し表示します。
+                     </p>
+                  </li>
+                  <li class="listitem">
+                     <p><span class="bold"><strong>表示：ファイル名：</strong></span>分節ごとに、その分節が属するファイル名を先頭に表示します。
+                     </p>
+                  </li>
+                  <li class="listitem">
+                     <p><span class="bold"><strong>プロジェクトを検索</strong></span>：<span class="emphasis"><em>内部メモリ</em></span>にチェックを入れると、プロジェクト専用の翻訳メモリ（project_save.tmx ファイル）から検索します。<span class="emphasis"><em>翻訳メモリ</em></span>にチェックを入れると、<code class="filename">tm</code> フォルダー内の翻訳メモリファイルが検索対象になります。<span class="emphasis"><em>用語集</em></span>にチェックを入れると、<code class="filename">glossary</code> フォルダー内の用語集ファイルが検索対象になります。
+                     </p>
+                  </li>
+                  <li class="listitem">
+                     <p><span class="bold"><strong>ファイルから検索：</strong></span>単独のファイル、またはフォルダーに含まれるファイル群を検索します。（翻訳メモリではない）複数のファイルを検索する場合、対象となるファイルは、OmegaT が対応している原文ファイル形式に限定されます。そのため、OmegaT は <code class="filename">TMX</code> ファイルの検索にも対応していますが、ファイル検索機能からは対象外になります。
                      </p>
                   </li>
                </ul>
@@ -246,12 +218,12 @@
                <td width="40%" align="left"><a accesskey="p" href="chapter.segmentation.html">戻る</a>&nbsp;
                </td>
                <td width="20%" align="center">&nbsp;</td>
-               <td width="40%" align="right">&nbsp;<a accesskey="n" href="chapter.regexp.html">次へ</a></td>
+               <td width="40%" align="right">&nbsp;<a accesskey="n" href="chapter.searchandreplace.html">次へ</a></td>
             </tr>
             <tr>
                <td width="40%" align="left" valign="top">第14章 原文の分節化&nbsp;</td>
                <td width="20%" align="center"><a accesskey="h" href="index.html">ホーム</a></td>
-               <td width="40%" align="right" valign="top">&nbsp;第16章 正規表現</td>
+               <td width="40%" align="right" valign="top">&nbsp;第16章 置換を実行</td>
             </tr>
          </table>
       </div>

@@ -977,11 +977,11 @@
             <row>
               <entry><guimenuitem>Scripting...</guimenuitem></entry>
 
-              <entry>Opens a dialog box where the location of external scripts
+              <entry>Opens a dialog box where the location of scripts
               can be set, and where scripts can be written, run and associated
               with a shortcut (see <link
               linkend="appendix.Scripts.inOmegaT">Scripts
-              dialog</link>)</entry>
+              window</link>)</entry>
             </row>
           </tbody>
         </tgroup>

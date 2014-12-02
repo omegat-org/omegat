@@ -158,7 +158,7 @@
     a cornerstone IT glossary. </para>
 
     <para>Note: the <filename>.tbx</filename> output of MultiTerm seems to not
-    be reliable (november 2013), it is better to use the
+    be reliable (November 2013), it is better to use the
     <filename>.tab</filename> output of MultiTerm instead. </para>
   </section>
 

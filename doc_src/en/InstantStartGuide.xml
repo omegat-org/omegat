@@ -126,7 +126,7 @@
     <itemizedlist>
       <listitem>
         <para>To remind yourself of the project's initial settings, open the
-        project settings dialog by pressing <keycap>Ctrl+E</keycap>. To see a
+        project properties dialog by pressing <keycap>Ctrl+E</keycap>. To see a
         list of files in the project, open the <guilabel>Project Files</guilabel> dialog by
         pressing <keycap>Ctrl+L</keycap>.</para>
       </listitem>

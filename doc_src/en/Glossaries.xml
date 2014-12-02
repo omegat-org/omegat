@@ -139,12 +139,12 @@
         <primary>Glossaries</primary>
 
         <secondary>TBX format</secondary>
-      </indexterm> is also supported as read-only glossaries format. The
+      </indexterm> is also supported as a read-only glossary format. The
     location of the <filename>.tbx</filename> file must be within the
     <filename>/glossary</filename> folder, but it can be in a deeper folder
     (e.g., <filename>glossary/sub/MyGlossary.tbx</filename>).</para>
 
-    <para>TBX files TBX - Term Base eXchange - is the open, XML-based standard
+    <para>TBX - Term Base eXchange - is the open, XML-based standard
     for exchanging structured terminological data, TBX has been approved as an
     international standard by LISA and ISO. If you have an existing
     terminology handling system it is quite possible it offers the export of

@@ -862,7 +862,7 @@
               <entry><guimenuitem>Mark Bidirectional Algorithm Control
               Characters</guimenuitem></entry>
 
-              <entry>This option displays <ulink url="http://www.w3.org/International/questions/qa-bidi-controls">bidirectional control characters"</ulink>
+              <entry>This option displays <ulink url="http://www.w3.org/International/questions/qa-bidi-controls">bidirectional control characters</ulink>
               </entry>
             </row>
 
@@ -887,7 +887,7 @@
               <entry>Setting the Display Modification option to
               <emphasis>Current segment</emphasis> will display the time and
               the author of the last change in the current segment. Setting it
-              to<emphasis> All segments </emphasis>shows this information for
+              to <emphasis>All segments</emphasis> shows this information for
               all segments and <emphasis>None</emphasis> turns this option
               off.</entry>
             </row>

@@ -271,8 +271,8 @@
         <para>Check this option to record in the
         <filename>project_save.tmx</filename> file the information that a
         segment has been auto-populated, so it can be displayed with a
-        specific color in the Editor pane (if "Mark Auto-Populated Segments"
-        option, in View tab, is checked).</para>
+        specific color in the Editor (if the "Mark Auto-Populated Segments"
+        option, in the View menu, is checked).</para>
       </listitem>
     </varlistentry>
   </variablelist>

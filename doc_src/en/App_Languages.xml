@@ -16,9 +16,8 @@
   </indexterm>
   </title>
 
-  <para>Please check the <ulink url="http://www.sil.org/ISO639-3/codes.asp">
-  ISO 639 Code Tables</ulink> for further and up-to-date information about
-  language codes.</para>
+  <para>Please check the 
+  <ulink url="http://www.sil.org/ISO639-3/codes.asp">ISO 639 Code Tables</ulink> for further and up-to-date information about language codes.</para>
 
   <table id="table.language.code.list">
     <title>ISO 639-1/639-2 Language code list</title>

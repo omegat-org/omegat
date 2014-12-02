@@ -390,7 +390,7 @@
       <emphasis><application>OmegaT</application>.app/
       Contents/MacOS/</emphasis>.</para>
 
-      <para>Use <emphasis><application>OmegaT</application>.jar</emphasis>
+      <para>Use the <emphasis><application>OmegaT</application>.jar</emphasis>
       file located in
       <emphasis><application>OmegaT</application>.app/Contents/MacOS/Java/</emphasis>
       to launch <application>OmegaT</application> from the command line. Check

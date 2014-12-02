@@ -205,6 +205,12 @@
   role="bold">(Ctrl+I</emphasis>) and Insert source (<emphasis
   role="bold">Ctrl+Shift+I</emphasis>) act in principle on the text within the
   currently open segment only.</para>
+  
+  <para>It is possible to move from one pane to another (for instance, from the
+  Editor to the Fuzzy Matches pane) using <keycap>Ctrl+Tab</keycap>.
+  <keycap>Ctrl+Shift+Tab</keycap> moves back to the previous pane. The
+  shortcuts <keycap>Ctrl+A</keycap> and <keycap>Ctrl+C</keycap> work
+  in panes, allowing to copy all or some of the information to the clipboard.</para>
 
   <para>Note that you can reassign the shortcuts to your own preferences. See
   <link linkend="ch04.shortcuts.customization">Appendix ShortCut

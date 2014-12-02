@@ -8,7 +8,7 @@
       <link rel="home" href="index.html" title="OmegaT - Guide de l'utilisateur">
       <link rel="up" href="index.html" title="OmegaT - Guide de l'utilisateur">
       <link rel="prev" href="chapter.segmentation.html" title="Chapitre&nbsp;14.&nbsp;Segmentation de la source">
-      <link rel="next" href="chapter.regexp.html" title="Chapitre&nbsp;16.&nbsp;Expressions régulières">
+      <link rel="next" href="chapter.searchandreplace.html" title="Chapitre&nbsp;16.&nbsp;Rechercher et remplacer">
    </head>
    <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
       <div class="navheader">
@@ -20,7 +20,7 @@
                <td width="20%" align="left"><a accesskey="p" href="chapter.segmentation.html">Précédent</a>&nbsp;
                </td>
                <th width="60%" align="center">&nbsp;</th>
-               <td width="20%" align="right">&nbsp;<a accesskey="n" href="chapter.regexp.html">Suivant</a></td>
+               <td width="20%" align="right">&nbsp;<a accesskey="n" href="chapter.searchandreplace.html">Suivant</a></td>
             </tr>
          </table>
          <hr>
@@ -29,19 +29,13 @@
          <div class="titlepage">
             <div>
                <div>
-                  <h1 class="title"><a name="chapter.searches"></a>Chapitre&nbsp;15.&nbsp;Recherches<a class="indexterm" name="d0e7145"></a></h1>
+                  <h1 class="title"><a name="chapter.searches"></a>Chapitre&nbsp;15.&nbsp;Recherches<a class="indexterm" name="d0e7378"></a></h1>
                </div>
             </div>
          </div>
          <div class="toc">
             <dl class="toc">
                <dt><span class="section"><a href="chapter.searches.html#search.window">1. La fenêtre Recherche textuelle</a></span></dt>
-               <dd>
-                  <dl>
-                     <dt><span class="section"><a href="chapter.searches.html#d0e7167">1.1. Rechercher</a></span></dt>
-                     <dt><span class="section"><a href="chapter.searches.html#d0e7191">1.2. Où chercher ?</a></span></dt>
-                  </dl>
-               </dd>
                <dt><span class="section"><a href="chapter.searches.html#using.wild.cards">2. Utilisation de caractères génériques</a></span></dt>
                <dt><span class="section"><a href="chapter.searches.html#search.methoids">3. Méthodes de recherche et options</a></span></dt>
                <dt><span class="section"><a href="chapter.searches.html#search.result.display">4. Affichage des résultats de la recherche</a></span></dt>
@@ -52,80 +46,23 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="search.window"></a>1.&nbsp;La fenêtre Recherche textuelle
-                     </h2>
+                     <h2 class="title" style="clear: both"><a name="search.window"></a>1.&nbsp;La fenêtre Recherche textuelle<a class="indexterm" name="d0e7384"></a></h2>
                   </div>
                </div>
             </div>
-            <div class="figure"><a name="text.search.window"></a><p class="title"><b>Figure&nbsp;15.1.&nbsp;La fenêtre Recherche textuelle<a class="indexterm" name="d0e7154"></a></b></p>
-               <div class="figure-contents">
-                  <div class="mediaobject"><img src="images/TextSearch25.png" alt="La fenêtre Recherche textuelle"></div>
-               </div>
-            </div><br class="figure-break"><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;">
-               <h3 class="title">Note</h3>
-               <p>La recherche ci-dessus permet de trouver tous les segments cible qui contiennent des caractères, plutôt improbables, dans
-                  la langue cible - c.-à.-d. le Slovène.
-               </p>
-            </div>
-            <div class="section">
-               <div class="titlepage">
-                  <div>
-                     <div>
-                        <h3 class="title"><a name="d0e7167"></a>1.1.&nbsp;Rechercher<a class="indexterm" name="d0e7170"></a></h3>
-                     </div>
-                  </div>
-               </div>
-               <p><span class="application">OmegaT</span> vous donne accès à de puissantes fonctions de recherche. Ouvrez la fenêtre de Recherche textuelle en utilisant <span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>F</strong></span> et saisissez dans le champ de recherche le mot ou l'expression que vous souhaitez trouver. Vous pouvez également sélectionner
-                  un mot ou une expression dans le volet Editeur et appuyer sur <span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>F</strong></span>. Le mot ou l'expression est alors saisi(e) automatiquement dans le champ de recherche. Il est possible d'avoir plusieurs
-                  fenêtres de recherche ouvertes en même temps mais il est préférable de les fermer lorsqu'elles ne sont plus utiles afin de
-                  ne pas encombrer le bureau.
-               </p>
-            </div>
-            <div class="section">
-               <div class="titlepage">
-                  <div>
-                     <div>
-                        <h3 class="title"><a name="d0e7191"></a>1.2.&nbsp;Où chercher ?
-                        </h3>
-                     </div>
-                  </div>
-               </div>
-               <p>Les recherches sont effectuées par défaut à la fois dans les sections source et cible du projet, mais il est possible de les
-                  limiter au seul texte cible ou source. Vous pouvez ainsi choisir de rechercher dans
-               </p>
-               <div class="itemizedlist">
-                  <ul class="itemizedlist" style="list-style-type: disc; ">
-                     <li class="listitem">
-                        <p>le projet seulement (option par défaut),</p>
-                     </li>
-                  </ul>
-               </div>
-               <div class="itemizedlist">
-                  <ul class="itemizedlist" style="list-style-type: disc; ">
-                     <li class="listitem">
-                        <p>à la fois le projet et les mémoires de traduction de référence présentes dans le dossier /tm/ (cochez <span class="emphasis"><em>Recherche dans les MT)</em></span>,
-                        </p>
-                     </li>
-                  </ul>
-               </div>
-               <div class="itemizedlist">
-                  <ul class="itemizedlist" style="list-style-type: disc; ">
-                     <li class="listitem">
-                        <p>un seul fichier ou dossier contenant un ensemble de fichiers (cochez <span class="emphasis"><em>Rechercher dans les fichiers - en bas de la fenêtre)</em></span></p>
-                     </li>
-                  </ul>
-               </div>
-               <p>Pour les recherches dans les fichiers (qui s'opposent à celles dans les mémoires de traduction), <span class="application">OmegaT</span> restreint son champ de recherche aux fichiers qui possèdent les formats des fichiers source. En conséquence, même si OmegaT
-                  est parfaitement capable de traiter les fichiers<code class="filename"> TMX</code>, ceux-ci ne seront pas inclus dans les fichiers de recherche. En ouvrant <span class="bold"><strong><a class="indexterm" name="d0e7222"></a>Options avancées</strong></span>, il est possible de combiner la recherche avec le nom de l'auteur de la traduction et l'heure de la dernière modification
-                  apportée.
-               </p>
-            </div>
+            <p>Ouvrez la fenêtre de Recherche textuelle en utilisant  <span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>F</strong></span> &gt; et saisissez dans le champ <span class="emphasis"><em>Rechercher</em></span> le mot ou l'expression que vous souhaitez trouver.
+            </p>
+            <p>Vous pouvez également sélectionner un mot ou une expression dans l'Éditeur et appuyer sur <span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>F</strong></span>. Le mot ou l'expression est alors saisi(e) automatiquement dans le champ <span class="emphasis"><em>Rechercher</em></span>. Il est possible d'avoir plusieurs fenêtres de recherche ouvertes en même temps mais il est préférable de les fermer lorsqu'elles
+               ne sont plus utiles afin de ne pas encombrer le bureau.
+            </p>
+            <p>Cliquez sur la flèche déroulante de la case <span class="emphasis"><em>Rechercher</em></span> pour accéder aux 10 dernières recherches.
+            </p>
          </div>
          <div class="section">
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="using.wild.cards"></a>2.&nbsp;Utilisation de caractères génériques<a class="indexterm" name="d0e7232"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="using.wild.cards"></a>2.&nbsp;Utilisation de caractères génériques<a class="indexterm" name="d0e7419"></a></h2>
                   </div>
                </div>
             </div>
@@ -158,7 +95,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="search.methoids"></a>3.&nbsp;Méthodes de recherche et options<a class="indexterm" name="d0e7276"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="search.methoids"></a>3.&nbsp;Méthodes de recherche et options<a class="indexterm" name="d0e7463"></a></h2>
                   </div>
                </div>
             </div>
@@ -186,7 +123,7 @@
                      <p>La chaîne de caractères recherchée sera traitée comme une expression régulière. La chaîne de caractères recherchée - [a-zA-Z]
                         + [öäüqwß] - dans l'exemple ci-dessus, cherche dans le segment cible des mots contenant des caractères du clavier allemand.
                         Les expressions régulières sont un moyen efficace de rechercher les apparitions d'une chaîne de caractères. Pour plus de détails,
-                        voir le chapitre : <a class="link" href="chapter.regexp.html" title="Chapitre&nbsp;16.&nbsp;Expressions régulières"> Expressions régulières</a></p>
+                        voir le chapitre : <a class="link" href="chapter.regexp.html" title="Chapitre&nbsp;17.&nbsp;Expressions régulières"> Expressions régulières</a></p>
                   </dd>
                </dl>
             </div>
@@ -196,6 +133,11 @@
                   <li class="listitem">
                      <p><span class="bold"><strong>Respecter la casse</strong></span> : la recherche sera effectuée pour la chaîne de caractères exactement spécifiée, c'est à dire que la recherche tient compte
                         de la casse (majuscule, minuscule).
+                     </p>
+                  </li>
+                  <li class="listitem">
+                     <p><span class="bold"><strong>L'espace comprend l'espace insécable</strong></span> : lorsque cette option est coché, un caractère d'espacement entré dans le texte à rechercher peut correspondre à un caractère
+                        d'espacement normal ou au caractère d'espace insécable (\u00A).
                      </p>
                   </li>
                   <li class="listitem">
@@ -211,11 +153,38 @@
                      </p>
                   </li>
                   <li class="listitem">
-                     <p><span class="bold"><strong>Recherche dans les MT</strong></span> : les mémoires de traduction du dossier <code class="filename">tm</code> sont incluses dans la recherche.
+                     <p><span class="bold"><strong>Commentaires : </strong></span>rechercher dans les commentaires des segments
                      </p>
                   </li>
                   <li class="listitem">
-                     <p><span class="bold"><strong>Afficher tous les résultats : </strong></span>décocher cette case conduira OmegaT à n'afficher que la première occurrence trouvée parmi tous les résultats de recherche.
+                     <p><span class="bold"><strong>Traduits ou non traduits : </strong></span>rechercher à la fois dans les segments traduits et non traduits.
+                     </p>
+                  </li>
+                  <li class="listitem">
+                     <p><span class="bold"><strong>Traduits : </strong></span>rechercher uniquement dans les segments traduits.
+                     </p>
+                  </li>
+                  <li class="listitem">
+                     <p><span class="bold"><strong>Non traduits : </strong></span>rechercher uniquement dans les segments non traduits.
+                     </p>
+                  </li>
+                  <li class="listitem">
+                     <p><span class="bold"><strong>Afficher : tous les segments correspondants : </strong></span>si cochée, tous les segments sont affichés, même s'ils sont présents à plusieurs reprises dans le même document ou dans des
+                        documents différents.
+                     </p>
+                  </li>
+                  <li class="listitem">
+                     <p><span class="bold"><strong>Afficher : les noms des fichiers : </strong></span>si cochée, le nom du fichier dans lequel chaque segment est trouvé est affiché au-dessus de chaque résultat.
+                     </p>
+                  </li>
+                  <li class="listitem">
+                     <p><span class="bold"><strong>Rechercher dans le projet</strong></span> : cochez <span class="emphasis"><em>la mémoire</em></span> pour inclure la mémoire du projet (fichier project_save.tmx) dans la recherche. Cochez <span class="emphasis"><em>les MT</em></span> pour inclure les mémoires de traductions situées dans le dossier <code class="filename">tm</code> dans la recherche. Cochez <span class="emphasis"><em>Glossaires</em></span> pour inclure les glossaires situés dans le dossier<code class="filename">glossary</code> dans la recherche.
+                     </p>
+                  </li>
+                  <li class="listitem">
+                     <p><span class="bold"><strong>Rechercher dans les fichiers : </strong></span>rechercher dans un fichier unique ou dans un dossier contenant un ensemble de fichiers. Pour les recherches dans les fichiers
+                        (qui s'opposent à celles dans les mémoires de traduction), OmegaT restreint son champ de recherche aux fichiers qui possèdent
+                        les formats des fichiers source. En conséquence, même si OmegaT est parfaitement capable de traiter les fichiers<code class="filename"> TMX</code>, ceux-ci ne seront pas inclus dans les fichiers de recherche.
                      </p>
                   </li>
                </ul>
@@ -280,12 +249,12 @@
                <td width="40%" align="left"><a accesskey="p" href="chapter.segmentation.html">Précédent</a>&nbsp;
                </td>
                <td width="20%" align="center">&nbsp;</td>
-               <td width="40%" align="right">&nbsp;<a accesskey="n" href="chapter.regexp.html">Suivant</a></td>
+               <td width="40%" align="right">&nbsp;<a accesskey="n" href="chapter.searchandreplace.html">Suivant</a></td>
             </tr>
             <tr>
                <td width="40%" align="left" valign="top">Chapitre&nbsp;14.&nbsp;Segmentation de la source&nbsp;</td>
                <td width="20%" align="center"><a accesskey="h" href="index.html">Sommaire</a></td>
-               <td width="40%" align="right" valign="top">&nbsp;Chapitre&nbsp;16.&nbsp;Expressions régulières</td>
+               <td width="40%" align="right" valign="top">&nbsp;Chapitre&nbsp;16.&nbsp;Rechercher et remplacer</td>
             </tr>
          </table>
       </div>

@@ -1,0 +1,116 @@
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <title>Chapitre&nbsp;20.&nbsp;Utilisation de TaaS dans OmegaT</title>
+      <link rel="stylesheet" type="text/css" href="OmegaT.css">
+      <meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
+      <link rel="home" href="index.html" title="OmegaT - Guide de l'utilisateur">
+      <link rel="up" href="index.html" title="OmegaT - Guide de l'utilisateur">
+      <link rel="prev" href="chapter.glossaries.html" title="Chapitre&nbsp;19.&nbsp;Glossaires">
+      <link rel="next" href="chapter.machine.translate.html" title="Chapitre&nbsp;21.&nbsp;Traduction automatique">
+   </head>
+   <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+      <div class="navheader">
+         <table width="100%" summary="Navigation header">
+            <tr>
+               <th colspan="3" align="center">Chapitre&nbsp;20.&nbsp;Utilisation de TaaS dans OmegaT</th>
+            </tr>
+            <tr>
+               <td width="20%" align="left"><a accesskey="p" href="chapter.glossaries.html">Précédent</a>&nbsp;
+               </td>
+               <th width="60%" align="center">&nbsp;</th>
+               <td width="20%" align="right">&nbsp;<a accesskey="n" href="chapter.machine.translate.html">Suivant</a></td>
+            </tr>
+         </table>
+         <hr>
+      </div>
+      <div class="chapter">
+         <div class="titlepage">
+            <div>
+               <div>
+                  <h1 class="title"><a name="chapter.TaaS"></a>Chapitre&nbsp;20.&nbsp;Utilisation de TaaS dans OmegaT<a class="indexterm" name="d0e8636"></a></h1>
+               </div>
+            </div>
+         </div>
+         <div class="toc">
+            <dl class="toc">
+               <dt><span class="section"><a href="chapter.TaaS.html#section.TaaS.options">1. Généralités</a></span></dt>
+               <dt><span class="section"><a href="chapter.TaaS.html#section.TaaS.options.collections">2. Collections publics et privées</a></span></dt>
+               <dt><span class="section"><a href="chapter.TaaS.html#section.TaaS.options.access">3. Accès au service TaaS</a></span></dt>
+            </dl>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="section.TaaS.options"></a>1.&nbsp;Généralités
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>Le service TaaS (https://demo.taas-project.eu/info) fournit des services de terminologie dans les langues européennes (plus
+               le russe). Il permet l'accès à des données publiques et privées, où des glossaires privés (appelés des «&nbsp;collections&nbsp;») peuvent
+               être extraits à partir de documents existants et les termes cible peuvent être en partie remplis automatiquement à partir
+               de différentes sources.
+            </p>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="section.TaaS.options.collections"></a>2.&nbsp;Collections publics et privées
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>OmegaT permet d'accéder à la partie public de TaaS sans inscription.</p>
+            <p>Pour accéder à la partie privée, un utilisateur doit créer une clé en utilisant https://demo.taas-project.eu/account/keys/create?system=omegaT.</p>
+            <p>La clé doit être transmise à OmegaT avec -Dtaas.user.key=xxxxx. Les lanceurs de configuration d'OmegaT (OmegaT.l4J.ini, omegat.kaptn
+               et OmegaT.sh) contiennent un modèle d'entrée.
+            </p>
+            <p>Lors de l'accès au service sans clé privée, le message suivant sera inscrit dans le journal : Clé API TaaS introuvable. Allez
+               à https://demo.taas-project.eu/account/keys/create?system=omegaT pour créer votre propre clé et passez-la à OmegaT avec -Dtaas.user.key=xxxxx
+               (TAAS_API_KEY_NOT_FOUND)
+            </p>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="section.TaaS.options.access"></a>3.&nbsp;Accès au service TaaS
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>Cliquez sur <span class="bold"><strong>Options, Glossaire</strong></span> pour afficher les options suivantes :
+            </p>
+            <p><span class="bold"><strong>Parcourir les collections TaaS</strong></span> permettra de parcourir et de télécharger les collections existantes pour les langues source et cible du projet. Les collections
+               privées sont affichées en gras. Les collections sont téléchargées sous la forme de glossaires TBX dans le dossier de glossaires
+               actuel.
+            </p>
+            <p><span class="bold"><strong>Recherche terminologique TaaS</strong></span>: si cochée, permettra d'interroger les données de TaaS segment par segment. Toutes les collections (publiques et privées)
+               seront interrogées pour les langues source et cible.
+            </p>
+            <p>Pour limiter le volume des données, il est possible de sélectionner un domaine spécifique en sélectionnant <span class="bold"><strong>Sélectionner le domaine de recherche terminologique TaaS...</strong></span>. Dans ce dialogue, il est possible de sélectionner Tous les domaines ou un domaine en particulier.
+            </p>
+         </div>
+      </div>
+      <div class="navfooter">
+         <hr>
+         <table width="100%" summary="Navigation footer">
+            <tr>
+               <td width="40%" align="left"><a accesskey="p" href="chapter.glossaries.html">Précédent</a>&nbsp;
+               </td>
+               <td width="20%" align="center">&nbsp;</td>
+               <td width="40%" align="right">&nbsp;<a accesskey="n" href="chapter.machine.translate.html">Suivant</a></td>
+            </tr>
+            <tr>
+               <td width="40%" align="left" valign="top">Chapitre&nbsp;19.&nbsp;Glossaires&nbsp;</td>
+               <td width="20%" align="center"><a accesskey="h" href="index.html">Sommaire</a></td>
+               <td width="40%" align="right" valign="top">&nbsp;Chapitre&nbsp;21.&nbsp;Traduction automatique</td>
+            </tr>
+         </table>
+      </div>
+   </body>
+</html>

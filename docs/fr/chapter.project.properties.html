@@ -29,21 +29,23 @@
          <div class="titlepage">
             <div>
                <div>
-                  <h1 class="title"><a name="chapter.project.properties"></a>Chapitre&nbsp;6.&nbsp;Propriétés du projet<a class="indexterm" name="d0e4196"></a></h1>
+                  <h1 class="title"><a name="chapter.project.properties"></a>Chapitre&nbsp;6.&nbsp;Propriétés du projet<a class="indexterm" name="d0e4386"></a></h1>
                </div>
             </div>
          </div>
          <div class="toc">
             <dl class="toc">
-               <dt><span class="section"><a href="chapter.project.properties.html#properties.dialog">1. Boîte de dialogue Propriétés</a></span></dt>
+               <dt><span class="section"><a href="chapter.project.properties.html#properties.dialog">1. Généralités</a></span></dt>
+               <dt><span class="section"><a href="chapter.project.properties.html#d0e4410">2. Langues</a></span></dt>
+               <dt><span class="section"><a href="chapter.project.properties.html#d0e4420">3. Options</a></span></dt>
+               <dt><span class="section"><a href="chapter.project.properties.html#d0e4514">4. Emplacement des fichiers</a></span></dt>
             </dl>
          </div>
-         <p></p>
          <div class="section">
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="properties.dialog"></a>1.&nbsp;Boîte de dialogue Propriétés
+                     <h2 class="title" style="clear: both"><a name="properties.dialog"></a>1.&nbsp;Généralités
                      </h2>
                   </div>
                </div>
@@ -56,62 +58,71 @@
                une fois la traduction commencée - à moins, bien sûr, que vous ne vous rendiez compte qu'une erreur majeure a été commise.
                Voir la section Prévention des pertes de données pour savoir comment protéger votre travail.
             </p>
-            <div class="figure"><a name="d0e4221"></a><p class="title"><b>Figure&nbsp;6.1.&nbsp;Fenêtre de propriétés du projet</b></p>
-               <div class="figure-contents">
-                  <div class="mediaobject"><img src="images/NewProject_26.png" alt="Fenêtre de propriétés du projet"></div>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e4410"></a>2.&nbsp;Langues
+                     </h2>
+                  </div>
                </div>
-            </div><br class="figure-break"><p>Elle contient :</p>
-            <div class="itemizedlist">
-               <ul class="itemizedlist" style="list-style-type: disc; ">
-                  <li class="listitem">
-                     <p><span class="bold"><strong>Un espace permettant de paramétrer les langues source et cible du projet.</strong></span></p>
-                     <p>Vous pouvez entrer les langues cible et source à la main ou utiliser les menus déroulants. Gardez à l'esprit que la modification
-                        des langues peut rendre les mémoires de traduction actuellement utilisées inutiles puisque leurs paires de langues peuvent
-                        ne plus correspondre aux nouvelles langues.
-                     </p>
-                  </li>
-               </ul>
             </div>
-            <div class="itemizedlist">
-               <ul class="itemizedlist" style="list-style-type: disc; ">
-                  <li class="listitem">
-                     <p>La case <span class="bold"><strong><span class="guilabel">Activer la segmentation par phrase</span> </strong></span></p><a class="indexterm" name="d0e4246"></a><p>Les paramètres de segmentation n'affectent que la façon dont les fichiers sources sont traités par <span class="application">OmegaT</span>. La façon la plus courante de segmenter les fichiers est la segmentation par phrase. En temps normal, cette case doit donc
+            <p>Vous pouvez entrer les langues cible et source à la main ou utiliser les menus déroulants. Gardez à l'esprit que la modification
+               des langues peut rendre les mémoires de traduction actuellement utilisées inutiles puisque leurs paires de langues peuvent
+               ne plus correspondre aux nouvelles langues.
+            </p>
+            <p>Les lemmatiseurs correspondant aux langues sélectionnées sont affichés. Voir l'<a class="link" href="appendix.Tokenizers.inOmegaT.html" title="Annexe&nbsp;D.&nbsp;Lemmatiseurs">annexe sur les lemmatiseurs</a> pour plus de détails.
+            </p>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e4420"></a>3.&nbsp;Options
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <div class="variablelist">
+               <dl class="variablelist">
+                  <dt><span class="term">Activer la segmentation par phrase</span></dt>
+                  <dd>
+                     <p>Les paramètres de segmentation n'affectent que la façon dont les fichiers source sont traités par <span class="application">OmegaT</span>. La façon la plus courante de segmenter les fichiers est la segmentation par phrase. En temps normal, cette case doit donc
                         rester cochée.
                      </p>
                      <p>Mais dans certains cas isolés, l'alternative (soit la segmentation par paragraphe) peut être préférée. La modification de
                         ce marqueur ne modifie pas la segmentation des mémoires de traduction déjà existantes. Si, en plein milieu de la traduction,
                         vous décidez de passer d'une traduction par phrase à une traduction par paragraphe, la mémoire de traduction interne du projet
                         ne sera pas modifiée (OmegaT peut mettre à jour des vieilles mémoires de traduction qui n'étaient pas segmentées par phrase,
-                        mais pas l'inverse).
+                        mais pas l'inverse), mais OmegaT essayera de créer des correspondances pour les paragraphes en ajoutant bout à bout des traductions
+                        de phrases existantes.
                      </p>
                      <p>La modification des paramètres de segmentation peut entraîner la séparation ou la fusion de segments déjà traduits. Dans les
                         faits, cela va les faire revenir au statut de « non traduits » puisqu'ils ne correspondront plus aux segments enregistrés
                         dans la mémoire du projet, même si leur traduction de départ y est toujours présente.
                      </p>
-                  </li>
-               </ul>
-            </div>
-            <div class="itemizedlist">
-               <ul class="itemizedlist" style="list-style-type: disc; ">
-                  <li class="listitem">
-                     <p>Bouton <span class="bold"><strong><span class="guibutton">Segmentation...</span> </strong></span><a class="indexterm" name="d0e4268"></a></p>
+                  </dd>
+                  <dt><span class="term"><span class="guibutton">Segmentation...</span> <a class="indexterm" name="d0e4442"></a></span></dt>
+                  <dd>
                      <p>Les règles de segmentation sont généralement valables pour l'ensemble des projets. Cependant, il est possible que l'utilisateur
                         ait besoin de créer un nouvel ensemble de règles qui s'appliqueront spécifiquement au projet en question. Appuyez sur ce bouton
                         pour ouvrir la boîte de dialogue, cochez la case <span class="guimenuitem">Appliquer les règles de segmentation spécifiques au projet</span> puis ajustez les règles de segmentation comme vous le souhaitez. Ce nouvel ensemble de règles sera sauvegardé avec le projet
                         et n'interférera pas avec l'ensemble général de règles de segmentation. Pour supprimer les règles de segmentation spécifiques
-                        au projet, décochez la case. Voir le chapitre <a class="link" href="chapter.segmentation.html" title="Chapitre&nbsp;14.&nbsp;Segmentation de la source">Segmentation de la source</a> pour plus d'informations concernant les règles de segmentation.<span class="emphasis"><em></em></span></p>
+                        au projet, décochez la case. Voir le chapitre <a class="link" href="chapter.segmentation.html" title="Chapitre&nbsp;14.&nbsp;Segmentation de la source">Segmentation de la source</a> pour plus d'informations concernant les règles de segmentation.
+                     </p>
                      <p><span class="emphasis"><em>Astuce :</em></span> l'ensemble des règles de segmentation spécifiques à un projet est sauvegardé dans le fichier <code class="filename">project/omegat/segmentation.conf.</code></p>
-                  </li>
-                  <li class="listitem">
-                     <p>Bouton<span class="bold"><strong><span class="guibutton">Fichiers et filtres...</span> </strong></span><a class="indexterm" name="d0e4295"></a></p>
+                  </dd>
+                  <dt><span class="term"><span class="guibutton">Fichiers et filtres...</span><a class="indexterm" name="d0e4466"></a></span></dt>
+                  <dd>
                      <p>De manière similaire, l'utilisateur peut créer des filtres de fichiers spécifiques au projet qui seront sauvegardés avec le
                         projet et ne seront donc valables que pour le projet en cours. Pour créer un ensemble de filtres de fichiers spécifiques au
-                        projet, cliquez sur le bouton <span class="guibutton">Fichiers et filtres... </span> puis cochez la case <span class="guimenuitem">Appliquer des paramètres de filtres de fichiers spécifiques au projet</span> dans la fenêtre qui s'ouvre. Une copie des modifications apportées à la configuration des filtres sera sauvegardée avec le
-                        projet. Pour supprimer les filtres de fichiers spécifiques au projet, décochez la case. Veuillez noter que dans le menu <span class="guimenuitem">Options -&gt; Fichiers et filtres...</span>, ce sont les filtres globaux des utilisateurs qui sont modifiés, et pas seulement les filtres du projet. Voir chapitre<a class="link" href="chapter.file.filters.html" title="Chapitre&nbsp;7.&nbsp;Fichiers et filtres"> Filtres de fichiers... </a>pour plus d'informations à ce sujet.<span class="emphasis"><em></em></span></p>
+                        projet, cliquez sur le bouton <span class="guibutton">Fichiers et filtres...</span> puis cochez la case <span class="guimenuitem">Appliquer des paramètres de filtres de fichiers spécifiques au projet</span> dans la fenêtre qui s'ouvre. Une copie des modifications apportées à la configuration des filtres sera sauvegardée avec le
+                        projet. Pour supprimer les filtres de fichiers spécifiques au projet, décochez la case. Veuillez noter que dans le menu <span class="guimenuitem">Options -&gt; Fichiers et filtres...</span>, ce sont les filtres globaux des utilisateurs qui sont modifiés, et pas seulement les filtres du projet. Voir chapitre <a class="link" href="chapter.file.filters.html" title="Chapitre&nbsp;7.&nbsp;Fichiers et filtres">Filtres de fichiers...</a> pour plus d'informations à ce sujet.<span class="emphasis"><em></em></span></p>
                      <p><span class="emphasis"><em>Astuce :</em></span> l'ensemble des filtres de fichiers d'un projet donné est sauvegardé dans le fichier <code class="filename">project/omegat/filters.xml.</code></p>
-                  </li>
-                  <li class="listitem">
-                     <p>Case <span class="bold"><strong>Propagation automatique des traductions</strong></span><span class="bold"><strong><a class="indexterm" name="d0e4327"></a></strong></span></p>
+                  </dd>
+                  <dt><span class="term">Propagation automatique des traductions</span></dt>
+                  <dd>
                      <p>Dans le cas où il existerait des segments non uniques dans les documents source, la case Propagation automatique des traductions
                         donne à l'utilisateur les deux possibilités suivantes concernant la traduction automatique : si la case est cochée, le premier
                         segment traduit sera considéré comme la traduction par défaut et son texte cible sera automatiquement utilisé pour les segments
@@ -119,29 +130,57 @@
                         tard manuellement via <span class="guimenuitem">Créer une traduction alternative</span>. Si la case Propagation automatique des traductions n'est pas cochée, les segments ayant des traductions alternatives ne
                         seront pas traduits jusqu'à ce que l'utilisateur décide du choix de la traduction.
                      </p>
-                  </li>
-                  <li class="listitem">
-                     <p>Case <span class="bold"><strong>Supprimer les balises</strong></span><a class="indexterm" name="d0e4342"></a></p>
+                  </dd>
+                  <dt><span class="term">Supprimer les balises</span></dt>
+                  <dd>
                      <p>Lorsque cette option est activée, toutes les balises de formatage sont retirées des segments source. Cela est particulièrement
                         utile pour des textes dont le formatage intégré n'est pas vraiment utile (par exemple des PDF passés par la reconnaissance
                         optique de caractères, des documents .odt ou .docx mal convertis, etc). Normalement, il doit toujours être possible d'ouvrir
                         les documents cibles puisque seuls les balises intégrées sont supprimées. Le formatage non visible (c'est-à-dire qui n'apparaît
                         pas sous forme de balises dans l'Éditeur d'OmegaT) est conservé dans les documents cibles.
                      </p>
-                  </li>
-               </ul>
+                  </dd>
+                  <dt><span class="term">Commande de post-traitement externe</span></dt>
+                  <dd>
+                     <p>Cette zone permet d'entrer une commande de post-traitement externe (par exemple, un script pour renommer des fichiers) qui
+                        sera appliquée à chaque utilisation de Créer les documents traduits. Cette commande externe ne pouvant pas comporter de «&nbsp;pipe&nbsp;»,
+                        etc., l'appel d'un script est recommandé.
+                     </p>
+                  </dd>
+               </dl>
             </div>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e4514"></a>4.&nbsp;Emplacement des fichiers
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>À cet endroit, vous pouvez sélectionner différents sous-dossiers, par exemple le sous-dossier contenant les fichiers source,
+               le sous-dossier des fichiers cible, etc. Si vous entrez le nom de dossiers qui n'existent pas encore, <span class="application">OmegaT</span> les crée pour vous. Si vous avez décidé de modifier les dossiers du projet, gardez à l'esprit que cela ne déplacera pas les
+               fichiers existants dans les vieux dossiers vers le nouvel emplacement.
+            </p>
+            <p>Cliquez sur <span class="guibutton">Exclusions...</span> pour définir les fichiers ou les filtres qui seront ignorés par <span class="application">OmegaT</span>. Un fichier ou un dossier ignoré :
+            </p>
             <div class="itemizedlist">
                <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
-                     <p><span class="bold"><strong>Un espace pour paramétrer les dossiers du projet</strong></span><a class="indexterm" name="d0e4354"></a><a class="indexterm" name="d0e4359"></a></p>
-                     <p>À cet endroit, vous pouvez sélectionner différents sous-dossiers, par exemple le sous-dossier contenant les fichiers source,
-                        le sous-dossier des fichiers cible, etc. Si vous entrez le nom de dossiers qui n'existent pas encore, <span class="application">OmegaT</span> les crée pour vous. Si vous avez décidé de modifier les dossiers du projet, gardez à l'esprit que cela ne déplacera pas les
-                        fichiers existants dans les vieux dossiers vers le nouvel emplacement.
-                     </p>
+                     <p>n'est pas affiché dans l'Éditeur,</p>
+                  </li>
+                  <li class="listitem">
+                     <p>n'est pas pris en compte dans les statistiques,</p>
+                  </li>
+                  <li class="listitem">
+                     <p>n'est pas copié dans le dossier /target durant le processus de création des fichiers traduits.</p>
                   </li>
                </ul>
             </div>
+            <p>Dans le dialogue des masques d'exclusion, il est possible d'Ajouter ou de Supprimer un masque, ou d'en modifier un en sélectionnant
+               une ligne et en appuyant sur F2. Il est possible d'utiliser des caractères joker, en utilisant la <a class="ulink" href="https://ant.apache.org/manual/dirtasks.html#patterns" target="_top">syntaxe ant</a>.
+            </p>
          </div>
       </div>
       <div class="navfooter">

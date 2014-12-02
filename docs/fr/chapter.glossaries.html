@@ -2,25 +2,25 @@
    <head>
       <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
    
-      <title>Chapitre&nbsp;18.&nbsp;Glossaires</title>
+      <title>Chapitre&nbsp;19.&nbsp;Glossaires</title>
       <link rel="stylesheet" type="text/css" href="OmegaT.css">
       <meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
       <link rel="home" href="index.html" title="OmegaT - Guide de l'utilisateur">
       <link rel="up" href="index.html" title="OmegaT - Guide de l'utilisateur">
-      <link rel="prev" href="chapter.dictionaries.html" title="Chapitre&nbsp;17.&nbsp;Dictionnaires">
-      <link rel="next" href="chapter.machine.translate.html" title="Chapitre&nbsp;19.&nbsp;Traduction automatique">
+      <link rel="prev" href="chapter.dictionaries.html" title="Chapitre&nbsp;18.&nbsp;Dictionnaires">
+      <link rel="next" href="chapter.TaaS.html" title="Chapitre&nbsp;20.&nbsp;Utilisation de TaaS dans OmegaT">
    </head>
    <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
       <div class="navheader">
          <table width="100%" summary="Navigation header">
             <tr>
-               <th colspan="3" align="center">Chapitre&nbsp;18.&nbsp;Glossaires</th>
+               <th colspan="3" align="center">Chapitre&nbsp;19.&nbsp;Glossaires</th>
             </tr>
             <tr>
                <td width="20%" align="left"><a accesskey="p" href="chapter.dictionaries.html">Précédent</a>&nbsp;
                </td>
                <th width="60%" align="center">&nbsp;</th>
-               <td width="20%" align="right">&nbsp;<a accesskey="n" href="chapter.machine.translate.html">Suivant</a></td>
+               <td width="20%" align="right">&nbsp;<a accesskey="n" href="chapter.TaaS.html">Suivant</a></td>
             </tr>
          </table>
          <hr>
@@ -29,17 +29,18 @@
          <div class="titlepage">
             <div>
                <div>
-                  <h1 class="title"><a name="chapter.glossaries"></a>Chapitre&nbsp;18.&nbsp;Glossaires<a class="indexterm" name="d0e8048"></a><a class="indexterm" name="d0e8053"></a></h1>
+                  <h1 class="title"><a name="chapter.glossaries"></a>Chapitre&nbsp;19.&nbsp;Glossaires<a class="indexterm" name="d0e8365"></a><a class="indexterm" name="d0e8370"></a></h1>
                </div>
             </div>
          </div>
          <div class="toc">
             <dl class="toc">
-               <dt><span class="section"><a href="chapter.glossaries.html#d0e8077">1. Utilisation</a></span></dt>
-               <dt><span class="section"><a href="chapter.glossaries.html#d0e8132">2. Format de fichier</a></span></dt>
-               <dt><span class="section"><a href="chapter.glossaries.html#d0e8171">3. Création des glossaires</a></span></dt>
-               <dt><span class="section"><a href="chapter.glossaries.html#d0e8216">4. Utilisation de Trados MultiTerm</a></span></dt>
-               <dt><span class="section"><a href="chapter.glossaries.html#d0e8232">5. Problèmes de glossaire les plus courants</a></span></dt>
+               <dt><span class="section"><a href="chapter.glossaries.html#d0e8397">1. Utilisation</a></span></dt>
+               <dt><span class="section"><a href="chapter.glossaries.html#d0e8452">2. Format de fichier</a></span></dt>
+               <dt><span class="section"><a href="chapter.glossaries.html#d0e8510">3. Création des glossaires</a></span></dt>
+               <dt><span class="section"><a href="chapter.glossaries.html#d0e8555">4. Glossaire prioritaire</a></span></dt>
+               <dt><span class="section"><a href="chapter.glossaries.html#d0e8567">5. Utilisation de Trados MultiTerm</a></span></dt>
+               <dt><span class="section"><a href="chapter.glossaries.html#d0e8583">6. Problèmes de glossaire les plus courants</a></span></dt>
             </dl>
          </div>
          <p>Les glossaires sont des fichiers créés et mis à jour manuellement pour être utilisés dans <span class="application">OmegaT</span>.
@@ -48,7 +49,7 @@
             automatiquement dans le volet Glossaires.
          </p>
          <p>Vous pouvez définir son emplacement et son nom dans la boite de dialogue des propriétés du projet. Son extension doit être
-            <code class="filename">.txt</code> (sinon, il ne sera pas ajouté). Le fichier doit se trouver à l'intérieur du dossier <code class="filename">/glossary (glossaire)</code>, mais il peut être inséré dans un sous-dossier (ex&nbsp;: <code class="filename">glossary/sub/glossary.txt</code>). Il n'est pas nécessaire que le fichier existe au moment de la configuration, il sera créé (si besoin est) au moment de
+            <code class="filename">.txt</code> ou <code class="filename">.utf8</code> (sinon, elle sera ajoutée). Le fichier doit se trouver à l'intérieur du dossier <code class="filename">/glossary </code>, (glossaire)mais il peut être inséré dans un sous-dossier (ex&nbsp;: <code class="filename">glossary/sub/glossary.txt</code>). Il n'est pas nécessaire que le fichier existe au moment de la configuration, il sera créé (si besoin est) au moment de
             l'ajout d'une entrée de glossaire. Si le fichier existe déjà, il n'y a pas de vérification du format ou du jeu caractères
             du fichier&nbsp;: les nouvelles entrées sont toujours présentées sous format texte séparé par des tabulations et en UTF-8. Dans
             la mesure où le contenu existant n'est pas touché, il y a peu de risque de commettre des erreurs dans le fichier existant.
@@ -57,14 +58,14 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="d0e8077"></a>1.&nbsp;Utilisation
+                     <h2 class="title" style="clear: both"><a name="d0e8397"></a>1.&nbsp;Utilisation
                      </h2>
                   </div>
                </div>
             </div>
-            <p>Pour utiliser un glossaire préexistant, placez-le simplement dans le dossier <a class="indexterm" name="d0e8082"></a> <code class="filename">/glossary</code> après avoir créé le projet. <span class="application">OmegaT</span> détecte automatiquement les fichiers glossaire présents dans ce dossier lorsqu'un projet est ouvert. Les termes du segment
+            <p>Pour utiliser un glossaire préexistant, placez-le simplement dans le dossier <a class="indexterm" name="d0e8402"></a> <code class="filename">/glossary</code> après avoir créé le projet. <span class="application">OmegaT</span> détecte automatiquement les fichiers glossaire présents dans ce dossier lorsqu'un projet est ouvert. Les termes du segment
                en cours qu'<span class="application">OmegaT</span> trouve dans le(s) fichier(s) glossaire sont affichés dans le volet Glossaires&nbsp;:
-            </p><a class="indexterm" name="d0e8097"></a><div class="figure"><a name="d0e8100"></a><p class="title"><b>Figure&nbsp;18.1.&nbsp;Volet Glossaires</b></p>
+            </p><a class="indexterm" name="d0e8417"></a><div class="figure"><a name="d0e8420"></a><p class="title"><b>Figure&nbsp;19.1.&nbsp;Volet Glossaires</b></p>
                <div class="figure-contents">
                   <div class="mediaobject"><img src="images/GlossaryPane_25.png" alt="Volet Glossaires"></div>
                </div>
@@ -75,18 +76,18 @@
                termes nouvellement ajoutés ne sont reconnus qu'une fois les changements du fichier texte enregistrés.
             </p>
             <p>Un terme source ne doit pas nécessairement être un mot seul. Comme dans cet exemple&nbsp;:</p>
-            <div class="figure"><a name="d0e8112"></a><p class="title"><b>Figure&nbsp;18.2.&nbsp;Les entrées à plusieurs mots dans les glossaires – exemple<a class="indexterm" name="d0e8115"></a></b></p>
+            <div class="figure"><a name="d0e8432"></a><p class="title"><b>Figure&nbsp;19.2.&nbsp;Les entrées à plusieurs mots dans les glossaires – exemple<a class="indexterm" name="d0e8435"></a></b></p>
                <div class="figure-contents">
                   <div class="mediaobject"><img src="images/MultiTerm_Glossary_25.png" alt="Les entrées à plusieurs mots dans les glossaires – exemple"></div>
                </div>
             </div><br class="figure-break"><p>L'élément souligné «&nbsp;free software&nbsp;» figure dans le volet Glossaires face à «&nbsp;logiciel libre&nbsp;». Surlignez ce mot dans le volet
-               Glossaires et faites un clic droit dessus après avoir placé le curseur à la bonne position dans le segment cible.<a href="#ftn.d0e8129" class="footnote" name="d0e8129"><sup class="footnote">[1]</sup></a></p>
+               Glossaires et faites un clic droit dessus après avoir placé le curseur à la bonne position dans le segment cible.<a href="#ftn.d0e8449" class="footnote" name="d0e8449"><sup class="footnote">[1]</sup></a></p>
          </div>
          <div class="section">
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="d0e8132"></a>2.&nbsp;<a class="indexterm" name="d0e8134"></a>Format de fichier<a class="indexterm" name="d0e8140"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="d0e8452"></a>2.&nbsp;<a class="indexterm" name="d0e8454"></a>Format de fichier<a class="indexterm" name="d0e8460"></a></h2>
                   </div>
                </div>
             </div>
@@ -96,23 +97,26 @@
                c.-à-d. contenant seulement le terme source et le commentaire.
             </p>
             <p>Les fichiers glossaire peuvent être du type d'encodage par défaut du système (et indiqués par l'extension .tab) ou en UTF-8
-               (extension .utf8). Le format Unicode (UTF8) est préférable pour des raisons évidentes. Le format CSV est également pris en
-               charge. Ce format est le même que celui à séparation par tabulation : terme source, terme cible. Les champs de commentaire
-               sont séparés par une virgule. Les chaînes de caractères peuvent être encadrées par des guillemets, ce qui permet d'inclure
-               des virgules à l'intérieur des chaînes de caractères :
+               (extension .utf8 ou .txt) ou en UTF-16 LE (extension .txt). Le format CSV est également pris en charge. Ce format est le même
+               que celui à séparation par tabulation : terme source, terme cible. Les champs de commentaire sont séparés par une virgule.
+               Les chaînes de caractères peuvent être encadrées par des guillemets, ce qui permet d'inclure des virgules à l'intérieur des
+               chaînes de caractères :
             </p>
             <p><code class="literal">"This is a source term, which contains a comma","Ceci est un terme, qui contient une virgule"</code></p>
-            <p>En plus du format texte brut, le format TBX <a class="indexterm" name="d0e8156"></a> est également pris en charge. Le TBX (Term Base eXchange), est le standard libre basé sur XML utilisé pour l'échange de données
-               terminologiques structurées. TBX a été approuvé, en tant que standard international, par LISA et ISO. Si vous possédez déjà
-               un système de gestion de la terminologie (MultiTerm par exemple), il est possible que celui-ci propose une exportation des
-               données terminologiques via le format TBX. La <a class="ulink" href="http://www.microsoft.com/Language/en-US/Terminology.aspx" target="_top">Banque terminologique Microsoft</a> <a class="indexterm" name="d0e8165"></a> peut être téléchargée dans plus de 100 langues différentes et servir d'élément fondateur pour un glossaire informatique.
+            <p>En plus du format texte brut, le format TBX <a class="indexterm" name="d0e8476"></a> est également pris en charge en tant que format de glossaire en lecture seule. L'emplacement du fichier <code class="filename">.tbx</code> doit se trouver à l'intérieur du dossier <code class="filename">/glossary</code>, mais il peut être inséré dans un sous-dossier (ex. : <code class="filename">glossary/sub/MyGlossary.tbx</code>).
+            </p>
+            <p>Le TBX (Term Base eXchange), est le standard libre basé sur XML utilisé pour l'échange de données terminologiques structurées.
+               TBX a été approuvé, en tant que standard international, par LISA et ISO. Si vous possédez déjà un système de gestion de la
+               terminologie, il est possible que celui-ci propose une exportation des données terminologiques via le format TBX. La <a class="ulink" href="http://www.microsoft.com/Language/en-US/Terminology.aspx" target="_top">Banque terminologique Microsoft</a> <a class="indexterm" name="d0e8496"></a> peut être téléchargée dans plus de 100 langues différentes et servir d'élément fondateur pour un glossaire informatique.
+            </p>
+            <p>Note : l'export <code class="filename">.tbx</code> de MultiTerm ne semblant pas être fiable (novembre 2013), il semble plus efficace d'utiliser à la place l'export <code class="filename">.tab</code> de MultiTerm.
             </p>
          </div>
          <div class="section">
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="d0e8171"></a>3.&nbsp;Création des glossaires<a class="indexterm" name="d0e8174"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="d0e8510"></a>3.&nbsp;Création des glossaires<a class="indexterm" name="d0e8513"></a></h2>
                   </div>
                </div>
             </div>
@@ -126,33 +130,48 @@
                sur la touche Tab entre les différents champs) et enregistrez le fichier. Le contenu du volet Glossaires sera mis à jour en
                conséquence.
             </p>
-            <p><a class="indexterm" name="d0e8195"></a>L'emplacement du fichier glossaire modifiable peut être défini dans la boite de dialogue <span class="guimenuitem">Projet &gt; Propriétés... </span>. Les extensions reconnues sont <code class="filename">TXT</code> et <code class="filename">UTF8</code></p>
+            <p><a class="indexterm" name="d0e8534"></a>L'emplacement du fichier glossaire modifiable peut être défini dans la boite de dialogue <span class="guimenuitem">Projet &gt; Propriétés... </span>. Les extensions reconnues sont <code class="filename">TXT</code> et <code class="filename">UTF8</code></p>
             <p><span class="bold"><strong>Remarque :</strong></span> il existe bien évidemment d'autres façons de créer un fichier simple contenant des entrées délimitées par tabulation. Rien
                n'interdit d'utiliser Notepad++ sous Windows, GEdit sous Linux par exemple ou certains tableurs pour créer un glossaire :
-               n'importe quelle application, capable de prendre en charge UTF8 et d'afficher des caractères d'espacement (afin de pouvoir
-               distinguer les caractères <span class="keycap"><strong>TAB</strong></span> obligatoires) peut être utilisée.
+               n'importe quelle application, capable de prendre en charge UTF-8 (ou UTF-16 LE) et d'afficher des caractères d'espacement
+               (afin de pouvoir distinguer les caractères <span class="keycap"><strong>TAB</strong></span> obligatoires) peut être utilisée.
             </p>
          </div>
          <div class="section">
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="d0e8216"></a>4.&nbsp;<a class="indexterm" name="d0e8218"></a>Utilisation de Trados MultiTerm
+                     <h2 class="title" style="clear: both"><a name="d0e8555"></a>4.&nbsp;<a class="indexterm" name="d0e8557"></a>Glossaire prioritaire
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>Les résultats du glossaire prioritaire (par défaut, glossary/glossary.txt) apparaissent en premier dans l'onglet Glossaires
+               et dans les TransTips.
+            </p>
+            <p>Les entrées pouvant mélanger des mots de glossaires prioritaires et non prioritaires, les mots du glossaire prioritaires sont
+               affichés en gras.
+            </p>
+         </div>
+         <div class="section">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e8567"></a>5.&nbsp;<a class="indexterm" name="d0e8569"></a>Utilisation de Trados MultiTerm
                      </h2>
                   </div>
                </div>
             </div>
             <p>Les données exportées depuis Trados MultiTerm peuvent servir de glossaire <span class="application">OmegaT</span> sans avoir à être modifiées, dès lors que leur extension de fichier est <code class="filename">.tab</code> et que le terme source et le terme cible sont placés respectivement dans le champ un et deux du glossaire. Si vous réalisez
                l'exportation en utilisant l'option «&nbsp;Exportation délimitée par tabulation&nbsp;», il sera nécessaire que vous supprimiez les 5
-               premières colonnes (Seq. Nr, Date de création, etc). La nouvelle version de MultiTerm prend en charge l'exportation au format
-               TBX.
+               premières colonnes (Seq. Nr, Date de création, etc).
             </p>
          </div>
          <div class="section">
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="d0e8232"></a>5.&nbsp;<a class="indexterm" name="d0e8234"></a>Problèmes de glossaire les plus courants
+                     <h2 class="title" style="clear: both"><a name="d0e8583"></a>6.&nbsp;<a class="indexterm" name="d0e8585"></a>Problèmes de glossaire les plus courants
                      </h2>
                   </div>
                </div>
@@ -182,7 +201,7 @@
             <div class="itemizedlist">
                <ul class="itemizedlist" style="list-style-type: disc; ">
                   <li class="listitem">
-                     <p>Le fichier glossaire ne possède pas la bonne extension (.tab ou .utf8).</p>
+                     <p>Le fichier glossaire ne possède pas la bonne extension (.tab, .utf8 ou .txt).</p>
                   </li>
                </ul>
             </div>
@@ -228,8 +247,8 @@
             </div>
          </div>
          <div class="footnotes"><br><hr style="width:100; text-align:left;margin-left: 0">
-            <div id="ftn.d0e8129" class="footnote">
-               <p><a href="#d0e8129" class="para"><sup class="para">[1] </sup></a>Pour insérer des termes du glossaire, il est également possible d'effectuer un clic droit sur la partie soulignée en bleu
+            <div id="ftn.d0e8449" class="footnote">
+               <p><a href="#d0e8449" class="para"><sup class="para">[1] </sup></a>Pour insérer des termes du glossaire, il est également possible d'effectuer un clic droit sur la partie soulignée en bleu
                   dans le segment source et de choisir le terme correspondant.  
                </p>
             </div>
@@ -242,12 +261,12 @@
                <td width="40%" align="left"><a accesskey="p" href="chapter.dictionaries.html">Précédent</a>&nbsp;
                </td>
                <td width="20%" align="center">&nbsp;</td>
-               <td width="40%" align="right">&nbsp;<a accesskey="n" href="chapter.machine.translate.html">Suivant</a></td>
+               <td width="40%" align="right">&nbsp;<a accesskey="n" href="chapter.TaaS.html">Suivant</a></td>
             </tr>
             <tr>
-               <td width="40%" align="left" valign="top">Chapitre&nbsp;17.&nbsp;Dictionnaires&nbsp;</td>
+               <td width="40%" align="left" valign="top">Chapitre&nbsp;18.&nbsp;Dictionnaires&nbsp;</td>
                <td width="20%" align="center"><a accesskey="h" href="index.html">Sommaire</a></td>
-               <td width="40%" align="right" valign="top">&nbsp;Chapitre&nbsp;19.&nbsp;Traduction automatique</td>
+               <td width="40%" align="right" valign="top">&nbsp;Chapitre&nbsp;20.&nbsp;Utilisation de TaaS dans OmegaT</td>
             </tr>
          </table>
       </div>

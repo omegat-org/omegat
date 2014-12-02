@@ -77,7 +77,7 @@
             ouvrez la boite de dialogue en sélectionnant <span class="bold"><strong> Options → Fichiers et filtres...</strong></span>. Vous pouvez également activer des filtres de fichiers spécifiques au projet, qui seront utilisés uniquement pour le projet
             en cours, en sélectionnant l'option <span class="bold"><strong>Fichiers et filtres...</strong></span> dans Projet → Propriétés....
          </p>
-         <p>Vous pouvez activer le filtre de fichiers spécifiques au projet via <span class="bold"><strong>Projet → Propriétés...</strong></span>. Cliquez sur le bouton <span class="guibutton">Fichiers et filtres...</span> et cochez la case <span class="guimenuitem">Appliquez des paramètres de filtres de fichiers spécifiques au projet</span><a class="indexterm" name="d0e4408"></a>. Une copie de la configuration des filtres sera alors enregistrée avec le projet. Si vous changez les filtres par la suite,
+         <p>Vous pouvez activer le filtre de fichiers spécifiques au projet via <span class="bold"><strong>Projet → Propriétés...</strong></span>. Cliquez sur le bouton <span class="guibutton">Fichiers et filtres...</span> et cochez la case <span class="guimenuitem">Appliquez des paramètres de filtres de fichiers spécifiques au projet</span><a class="indexterm" name="d0e4584"></a>. Une copie de la configuration des filtres sera alors enregistrée avec le projet. Si vous changez les filtres par la suite,
             seul les filtres du projet seront mis à jour, tandis que les filtres utilisateur resteront inchangés.
          </p>
          <p><span class="bold"><strong>Attention !</strong></span> Si vous changez les options de filtrage alors que le projet est ouvert, vous devrez fermer et redémarrer le projet pour que
@@ -87,7 +87,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="file.filters.dialog"></a>1.&nbsp;Boite de dialogue Fichiers et filtres...<a class="indexterm" name="d0e4421"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="file.filters.dialog"></a>1.&nbsp;Boite de dialogue Fichiers et filtres...<a class="indexterm" name="d0e4597"></a></h2>
                   </div>
                </div>
             </div>
@@ -97,12 +97,43 @@
                les modifier lors de la création des documents cible. Si vous souhaitez réutiliser le filtre, re-cochez simplement la case
                correspondante. Cliquez sur <span class="bold"><strong>Valeurs par défaut</strong></span> pour que les filtres de fichiers retrouvent leurs valeurs par défaut. Pour modifier le type et l'encodage des fichiers à
                traiter par un filtre, sélectionnez le filtre dans la liste et cliquez sur <span class="bold"><strong>Modifier...</strong></span></p>
+            <p>Le dialogue permet d'activer ou de désactiver les options suivantes :</p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" style="list-style-type: disc; ">
+                  <li class="listitem">
+                     <p>Supprimer les balises en début et fin de segment : décocher cette option pour afficher toutes les balises, y compris celles
+                        de début et de fin de segment. Avertissement : dans les formats Microsoft Open XML (docx, xlsx, etc.), si toutes les balises
+                        sont affichées, n'écrivez AUCUN texte avant la première balise (il s'agit d'une balise technique qui doit toujours commencer
+                        le segment).
+                     </p>
+                  </li>
+                  <li class="listitem">
+                     <p>Supprimer les espaces en début et fin de segment dans les projets non segmentés : par défaut, OmegaT supprime les caractères
+                        d'espacement de début et de fin de segment. Dans les projets non segmentés, il est possible de les conserver en décochant
+                        cette option.
+                     </p>
+                  </li>
+                  <li class="listitem">
+                     <p>Préserver les espaces pour toutes les balises : cochez cette option si les documents source contiennent des espaces significatifs
+                        (pour des raisons de mise en page) qui ne doivent pas être ignorés.
+                     </p>
+                  </li>
+                  <li class="listitem">
+                     <p>Ignorer le nom du fichier pour identifier les segments comportant des traductions alternatives : par défaut, OmegaT utiliser
+                        le nom du fichier source comme partie de l'identification d'une traduction alternative. Si cette option n'est pas cochée,
+                        le nom du fichier source ne sera pas utilisé et les traductions alternatives prendront effet dans n'importe quel fichier dès
+                        lors que le reste du contexte (segments précédents/suivants, ou un identifiant quelconque en fonction du format du fichier)
+                        correspond.
+                     </p>
+                  </li>
+               </ul>
+            </div>
          </div>
          <div class="section">
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="filters.options"></a>2.&nbsp;Les options de filtrage<a class="indexterm" name="d0e4436"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="filters.options"></a>2.&nbsp;Les options de filtrage<a class="indexterm" name="d0e4627"></a></h2>
                   </div>
                </div>
             </div>
@@ -336,7 +367,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="edit.filter.dialog"></a>3.&nbsp;Modification de la boite de dialogue du filtre<a class="indexterm" name="d0e4639"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="edit.filter.dialog"></a>3.&nbsp;Modification de la boite de dialogue du filtre<a class="indexterm" name="d0e4830"></a></h2>
                   </div>
                </div>
             </div>
@@ -351,7 +382,7 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="source.filetype.and.filename.pattern"></a>3.1.&nbsp;<a class="indexterm" name="d0e4654"></a>Type de fichier source, masque de nom de fichier<a class="indexterm" name="d0e4660"></a></h3>
+                        <h3 class="title"><a name="source.filetype.and.filename.pattern"></a>3.1.&nbsp;<a class="indexterm" name="d0e4845"></a>Type de fichier source, masque de nom de fichier<a class="indexterm" name="d0e4851"></a></h3>
                      </div>
                   </div>
                </div>
@@ -373,7 +404,7 @@
                         </h3>
                      </div>
                   </div>
-               </div><a class="indexterm" name="d0e4688"></a><a class="indexterm" name="d0e4693"></a><a class="indexterm" name="d0e4698"></a><p>Seul un nombre limité de formats de fichier définissent un encodage obligatoire. Les formats de fichier qui ne définissent
+               </div><a class="indexterm" name="d0e4879"></a><a class="indexterm" name="d0e4884"></a><a class="indexterm" name="d0e4889"></a><p>Seul un nombre limité de formats de fichier définissent un encodage obligatoire. Les formats de fichier qui ne définissent
                   pas leur encodage utiliseront l'encodage que vous avez mis en place pour l'extension qui correspond à leur nom. Par exemple,
                   par défaut, les fichiers <code class="literal">.txt</code>seront chargés en utilisant l'encodage par défaut de votre système d'exploitation. Vous pouvez changer l'encodage source pour
                   chacun des différents masques de nom de fichier source. Ces fichiers peuvent ainsi être écrits dans n'importe quel encodage.
@@ -408,13 +439,13 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="target.name"></a>3.3.&nbsp;Nom de fichier source<a class="indexterm" name="d0e4726"></a></h3>
+                        <h3 class="title"><a name="target.name"></a>3.3.&nbsp;Nom de fichier source<a class="indexterm" name="d0e4917"></a></h3>
                      </div>
                   </div>
                </div>
                <p>Il peut arriver que vous ayez envie de renommer les fichiers que vous avez traduits automatiquement, en ajoutant, par exemple,
                   un code de langue après le nom du fichier. Le masque de nom de fichier cible utilise une syntaxe spéciale, de sorte que si
-                  vous voulez modifier ce champ, vous devez cliquer sur <span class="bold"><strong>Modifier...</strong></span> et utiliser <a class="indexterm" name="d0e4736"></a>la boite de dialogue Modifier le masque. Si vous souhaitez retourner à la configuration par défaut du filtre, cliquez sur
+                  vous voulez modifier ce champ, vous devez cliquer sur <span class="bold"><strong>Modifier...</strong></span> et utiliser <a class="indexterm" name="d0e4927"></a>la boite de dialogue Modifier le masque. Si vous souhaitez retourner à la configuration par défaut du filtre, cliquez sur
                   <span class="bold"><strong>Valeurs par défaut.</strong></span> Vous pourrez ainsi modifier le nom directement dans le champ de masque de nom de fichier cible présent dans la boite de dialogue
                   des filtres de fichiers. La boite de dialogue «&nbsp;Modifier le masque&nbsp;» propose ces options :
                </p>

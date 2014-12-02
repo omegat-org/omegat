@@ -6,63 +6,15 @@
     </indexterm></title>
 
   <section id="search.window">
-    <title>検索ウィンドウ</title>
+    <title>検索ウィンドウ<indexterm class="singular">
+        <primary>ショートカット</primary> <secondary>検索 - Ctrl+F</secondary>
+      </indexterm></title>
 
-    <figure id="text.search.window">
-      <title>テキスト検索ウィンドウ<indexterm class="singular">
-          <primary>検索ウィンドウ</primary> <secondary>使用例</secondary>
-        </indexterm></title>
+    <para><keycombo><keycap>Ctrl</keycap> <keycap>F</keycap></keycombo> で文字列検索ウィンドウを開き、<emphasis>［検索文字列］</emphasis>欄に検索したい単語または語句を入力します。</para>
 
-      <mediaobject>
-        <imageobject role="html">
-          <imagedata fileref="images/TextSearch25.png"/>
-        </imageobject>
+    <para>または、編集ウィンドウであらかじめ検索したい単語や語句を選択してから、<keycombo> <keycap>Ctrl</keycap> <keycap>F</keycap> </keycombo>を押します。この場合、<emphasis>［検索文字列］</emphasis>欄に単語または語句が自動的に入力されます。検索ウィンドウはいくつも同時に開いておくことができます。しかし、デスクトップを散らかさないように、検索が終わったら閉じることを忘れないでください。</para>
 
-        <imageobject role="fo">
-          <imagedata fileref="images/TextSearch25.png" width="90%"/>
-        </imageobject>
-      </mediaobject>
-    </figure>
-
-    <note>
-      <para>上の検索例では、すべての訳文分節から、訳文言語（ここではスロヴェニア語）ではありえなさそうな文字が使われている箇所を検索しています。</para>
-    </note>
-
-    <section>
-      <title>検索<indexterm class="singular">
-          <primary>ショートカット</primary> <secondary>検索 - Ctrl+F</secondary>
-        </indexterm></title>
-
-      <para><application>OmegaT</application> は強力な文字列検索機能を備えています。<keycombo><keycap>Ctrl</keycap> <keycap>F</keycap></keycombo> で文字列検索ウィンドウを開き、［検索文字列］欄に検索したい単語または語句を入力します。または、編集ウィンドウであらかじめ検索したい単語や語句を選択してから、<keycombo><keycap>Ctrl</keycap> <keycap>F</keycap></keycombo> を押します。この場合、［検索文字列］欄に単語または語句が自動的に入力されます。検索ウィンドウはいくつも同時に開いておくことができます。しかし、デスクトップを散らかさないように、検索が終わったら閉じることを忘れないでください。</para>
-    </section>
-
-    <section>
-      <title>検索する対象</title>
-
-      <para>検索は、デフォルトでそのプロジェクトの原文と訳文の両方に対して行われます。しかし、原文のみ、あるいは訳文のみに限定することもできます。以下を検索できます：</para>
-
-      <itemizedlist>
-        <listitem>
-          <para>プロジェクトのみ（デフォルトの設定）</para>
-        </listitem>
-      </itemizedlist>
-
-      <itemizedlist>
-        <listitem>
-          <para>プロジェクトの内部翻訳メモリと、tm フォルダーにある翻訳メモリ（<emphasis>参考翻訳メモリ検索</emphasis>を参照してください）の両方</para>
-        </listitem>
-      </itemizedlist>
-
-      <itemizedlist>
-        <listitem>
-          <para>任意のファイル、または複数ファイルを含む任意のフォルダー（<emphasis>ファイル検索</emphasis>を参照してください）</para>
-        </listitem>
-      </itemizedlist>
-
-      <para>（翻訳メモリではない）複数のファイルを検索する場合、対象となるファイルは、<application>OmegaT</application> が対応している原文ファイル形式に限定されます。そのため、OmegaT は <filename>TMX</filename> ファイルの検索にも対応していますが、ファイル検索機能からは対象外になります。<emphasis role="bold"><indexterm class="singular">
-          <primary>検索</primary> <secondary>詳細設定</secondary>
-        </indexterm>詳細設定</emphasis>を表示すると、翻訳者の名前や、翻訳が最後に更新された日時を指定して、検索することができるようになります。</para>
-    </section>
+    <para><emphasis>［検索文字列］</emphasis>欄のドロップダウンボタンをクリックすると、直近の検索履歴が 10 個まで表示されます。</para>
   </section>
 
   <section id="using.wild.cards">
@@ -128,6 +80,10 @@
       </listitem>
 
       <listitem>
+        <para><emphasis role="bold">スペース文字で nbsp も検索</emphasis>：検索文字列に入力されたスペース文字を、通常のスペース文字だけでなく、ノーブレークスペース（\u00A）にも一致させます。</para>
+      </listitem>
+
+      <listitem>
         <para><emphasis role="bold">原文を検索：</emphasis>原文分節から検索します。</para>
       </listitem>
 
@@ -140,11 +96,35 @@
       </listitem>
 
       <listitem>
-        <para><emphasis role="bold">翻訳メモリを検索：</emphasis><filename>tm</filename> フォルダー内の翻訳メモリから検索します。</para>
+        <para><emphasis role="bold">コメントを検索：</emphasis>コメントから検索します。</para>
       </listitem>
 
       <listitem>
-        <para><emphasis role="bold">繰り返し結果も表示：</emphasis>このチェックボックスのチェックを外すと、結果に重複する内容が含まれている場合は、最初の内容のみが表示されます。</para>
+        <para><emphasis role="bold">全分節：</emphasis>翻訳済み分節と未翻訳分節の両方から検索します。</para>
+      </listitem>
+
+      <listitem>
+        <para><emphasis role="bold">翻訳済み分節：</emphasis>翻訳済み分節だけから検索します。</para>
+      </listitem>
+
+      <listitem>
+        <para><emphasis role="bold">未翻訳分節：</emphasis>未翻訳分節だけから検索します。</para>
+      </listitem>
+
+      <listitem>
+        <para><emphasis role="bold">表示：繰り返し分節：</emphasis>内容が同じ分節が複数見つかった場合でも、検索結果にすべての分節を繰り返し表示します。</para>
+      </listitem>
+
+      <listitem>
+        <para><emphasis role="bold">表示：ファイル名：</emphasis>分節ごとに、その分節が属するファイル名を先頭に表示します。</para>
+      </listitem>
+
+      <listitem>
+        <para><emphasis role="bold">プロジェクトを検索</emphasis>：<emphasis>内部メモリ</emphasis>にチェックを入れると、プロジェクト専用の翻訳メモリ（project_save.tmx ファイル）から検索します。<emphasis>翻訳メモリ</emphasis>にチェックを入れると、<filename>tm</filename> フォルダー内の翻訳メモリファイルが検索対象になります。<emphasis>用語集</emphasis>にチェックを入れると、<filename>glossary</filename> フォルダー内の用語集ファイルが検索対象になります。</para>
+      </listitem>
+
+      <listitem>
+        <para><emphasis role="bold">ファイルから検索：</emphasis>単独のファイル、またはフォルダーに含まれるファイル群を検索します。（翻訳メモリではない）複数のファイルを検索する場合、対象となるファイルは、OmegaT が対応している原文ファイル形式に限定されます。そのため、OmegaT は <filename>TMX</filename> ファイルの検索にも対応していますが、ファイル検索機能からは対象外になります。</para>
       </listitem>
     </itemizedlist>
 
@@ -161,22 +141,22 @@
 
     <para>同時に複数の検索ウィンドウを開くことができます。検索ウィンドウのウィンドウタイトルには検索文字列が設定されるため、検索ウィンドウが複数開いていても、容易に識別できます。</para>
   </section>
-  
+
   <section id="search.filter">
     <title>編集ウィンドウの分節に検索フィルターをかける</title>
-    
+
     <para>検索結果の分節間を移動しやすいように、編集ウィンドウに対して検索フィルターをかけることができます。最下部にある［<emphasis role="bold">フィルター</emphasis>］ボタンをクリックすると、編集ウィンドウには現在の検索条件に一致する分節のみが表示されます。分節間の移動には、通常の移動コマンド（［次の分節］や［次の未翻訳分節］など）を使用できます。</para>
-  
-   <para>注意事項：</para>
-   
+
+    <para>注意事項：</para>
+
     <itemizedlist>
       <listitem>検索結果には上限（既定で 1,000 件）があるため、一般的な語句を検索した場合、編集ウィンドウには検索条件に合致するすべての分節が表示されるのではなく、その中の 1,000 件だけが表示されることになります。</listitem>
+
       <listitem>検索条件に合致する分節を含むファイルが見つからない場合は、空白の画面が表示されます。</listitem>
+
       <listitem>［繰り返し結果も表示］の設定がオフになっている場合、繰り返しに該当する分節は編集ウィンドウ上でも表示されません。</listitem>
     </itemizedlist>
-    
+
     <para>フィルターを解除するには、［<emphasis role="bold">フィルターを解除</emphasis>］ボタンをクリックするか、またはプロジェクトを再読み込みしてください。</para>
- </section>
-      
-    
+  </section>
 </chapter>

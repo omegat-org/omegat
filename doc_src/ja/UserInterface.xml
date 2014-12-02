@@ -80,7 +80,7 @@
                 <primary>ショートカット</primary> <secondary>タグ検証 - Ctrl+T</secondary>
               </indexterm>タグ検証ウィンドウ</guimenuitem></entry>
 
-            <entry><para>タグ検証の結果を閲覧できます。［<keycombo><keycap>Ctrl</keycap> <keycap>T</keycap></keycombo>］で開き、［<keycap>Esc</keycap>］で閉じます。</para></entry>
+            <entry><para>タグ検証の結果を閲覧できます。［<keycombo><keycap>Ctrl</keycap> <keycap>Shift</keycap> <keycap>V</keycap></keycombo>］で開き、［<keycap>Esc</keycap>］で閉じます。</para></entry>
           </row>
 
           <row>
@@ -371,7 +371,7 @@
           <primary>ショートカット</primary> <secondary>参考訳文の選択 - Ctrl+#N</secondary>
         </indexterm>もちろん、５番目の参考訳文が存在しないときに［<keycombo><keycap>Ctrl</keycap> <keycap>5</keycap></keycombo>］を押しても、何も起こりません。選択した（太字で表示された）参考訳文を、現在編集中の訳文と置換して使用するには<guimenuitem>Ctrl+R</guimenuitem><indexterm class="singular">
           <primary>ショートカット</primary> <secondary>参考訳文に置換 - Ctrl+R</secondary>
-        </indexterm> を押します。現在のカーソル位置に挿入する場合は［<guimenuitem>Ctrl+I <indexterm class="singular">
+        </indexterm> を押します。現在のカーソル位置に挿入する場合は［<guimenuitem>Ctrl+I<indexterm class="singular">
           <primary>ショートカット</primary> <secondary>参考訳文を挿入 - Ctrl+I</secondary>
         </indexterm></guimenuitem>］を押します。</para>
 
@@ -381,11 +381,11 @@
           <primary>翻訳メモリ</primary> <secondary>現在の原文に存在しない分節</secondary>
         </indexterm>（上図での２番目の参考訳文）とは、そのプロジェクトの翻訳メモリ中に存在するが、原文の分節とは一致しなくなった分節を指します。</para>
 
-      <para>一致率には３種類の数値が表示されます（上図の４番目の参考訳文で言うと「66/66/30」の部分）。定義は、次の通りです：</para>
+      <para>一致率には３種類の数値が表示されます（上図の４番目の参考訳文で言うと「66/66/80」の部分）。定義は、次の通りです：</para>
 
       <itemizedlist>
         <listitem>
-          <para>トークナイザープラグインによる一致率</para>
+          <para>トークナイザーによる一致率</para>
         </listitem>
       </itemizedlist>
 
@@ -629,7 +629,11 @@
 
       <itemizedlist>
         <listitem>
-          <para>プロジェクト中の翻訳可能なファイルの全リスト。対象は、原文ファイルフォルダーに存在し、OmegaT が扱える形式のファイルです。クリックすると、翻訳作業のために開くことができます。</para>
+          <para>プロジェクト中の翻訳可能なファイル数。対象は、原文ファイルフォルダーに存在し、OmegaT が扱える形式のファイルです。この数は、「翻訳対象ファイル一覧」のタイトルに続く括弧内に表示されます。</para>
+        </listitem>
+
+        <listitem>
+          <para>プロジェクト中の翻訳可能なファイルの全リスト。クリックすると、翻訳作業のために開くことができます。注意：ヘッダーをクリックすると、たとえばファイル名（左端の列）のアルファベット順で並べ替えたりできます。また<emphasis>［...へ移動］</emphasis>ボタンでファイルの順番を任意に変更することもできます。</para>
         </listitem>
       </itemizedlist>
 

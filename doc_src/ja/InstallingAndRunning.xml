@@ -196,7 +196,7 @@
     <section id="which.package.to.download.OSX">
       <title>パッケージのダウンロード</title>
 
-      <para><application>OmegaT</application> の実行には Java 1.6 が必要です。Apple メニューから［システム環境設定］→［表示］→［ソフトウェアアップデート］→［今すぐ確認］で、最新バージョンの Java がインストールされているか確認してください。</para>
+      <para><application>OmegaT</application> には Java JRE 1.7 が含まれています。</para>
 
       <para><emphasis>OmegaT_3.n.n_Mac.zip</emphasis> をダウンロードしてください。</para>
     </section>
@@ -220,17 +220,19 @@
 
       <para><emphasis><application>OmegaT</application>.app</emphasis> をダブルクリックするか、ドックのアイコンをクリックします。</para>
 
-      <para>OmegaT の挙動は、<application><emphasis>Info.plist</emphasis></application> ファイルの <emphasis>Properties</emphasis> 部分と <emphasis>VMOptions</emphasis> 部分を編集することでカスタマイズできます。</para>
+      <para>OmegaT の挙動は、パッケージに含まれる <emphasis>Properties</emphasis> と <emphasis>OmegaT.sh</emphasis> ファイルを編集することでカスタマイズできます。</para>
       
-      <para>まず <emphasis><application>OmegaT</application>.app</emphasis> を右クリックして、［パッケージの内容を表示］を選びます。次に、Contents フォルダーにある <application><emphasis>Info.plist</emphasis></application> を右クリックして、任意のテキストエディターで開きます。あるいはコマンドラインから「cd」コマンドで目的の階層に移動し、<application>emacs</application> や <application>vi</application> のようなコマンドラインエディターで <emphasis>Info.plist</emphasis> を開いてもよいでしょう。<indexterm class="singular">
+      <para>まず <emphasis><application>OmegaT</application>.app</emphasis> を右クリックして、［パッケージの内容を表示］を選びます。次に、Contents/MacOS フォルダーにある <application><emphasis>OmegaT.sh</emphasis></application> を右クリックして、任意のテキストエディターで開きます。あるいはコマンドラインから「cd」コマンドで目的の階層に移動し、emacs や vi のようなコマンドラインエディターで <application><emphasis>OmegaT.sh</emphasis></application> を開いてもよいでしょう。<indexterm class="singular">
           <primary>OmegaT のカスタマイズ</primary> <secondary>OS X</secondary> <tertiary>起動引数</tertiary>
         </indexterm></para>
 
-      <para><emphasis>VMOptions</emphasis> に値を追加したい場合は、値と値のあいだに空白を入れてください。たとえば <filename>-Xmx1024M -Duser.language=ja</filename> とすると、最大 1024MB のメモリを確保できる設定で、日本語のユーザーインターフェースで<application>OmegaT</application> を起動します。</para>
+      <para><emphasis>OmegaT.sh</emphasis> を編集することで、設定を変更できます。定義済みの設定を有効にするには、引数の先頭の # 記号を削除してください。たとえば、<filename>LANGUAGE=&quot;-Duser.language=ja&quot;</filename>（# 記号なし）とすると、<application>OmegaT</application> は日本語のユーザーインターフェースで起動します。</para>
+      
+      <para>メモリ容量の割り当てを変更する場合は、起動行を直接編集します。たとえば、<filename>${JAVA} -Xmx2048m ${MACOS} ${LANGUAGE} ${COUNTRY} ${PROXY_HOST} ${PROXY_PORT} ${GOOGLE_API_KEY} ${MS_CLIENT_ID} ${MS_CLIENT_SECRET} ${MY_MEMORY_EMAIL} ${TAAS_USER_KEY} -jar OmegaT.jar</filename> とすると、OmegaT は 2 ギガのメモリ割り当てで起動します。</para>
 
-      <para><emphasis><application>OmegaT</application>.app</emphasis> を複数起動したい場合は、代わりに <emphasis><application>OmegaT</application>.app/Contents/MacOS/</emphasis> にある <emphasis>JavaApplicationStub</emphasis> ファイルをダブルクリックしてください。</para>
+      <para><emphasis><application>OmegaT</application>.app</emphasis> を複数起動したい場合は、<emphasis><application>OmegaT</application>.app/Contents/MacOS/</emphasis> にある <emphasis>OmegaT.sh</emphasis> ファイルをダブルクリックしてください。</para>
 
-      <para><application>OmegaT</application> をコマンドラインから起動する場合は、<emphasis><application>OmegaT</application>.app/Contents/Resources/Java/</emphasis> にある <emphasis><application>OmegaT</application>.jar</emphasis> ファイルを指定してください。詳細は「コマンドラインから OmegaT を起動する」を参照してください。</para>
+      <para><application>OmegaT</application> をコマンドラインから起動する場合は、<emphasis><application>OmegaT</application>.app/Contents/MacOS/Java/</emphasis> にある <emphasis><application>OmegaT</application>.jar</emphasis> ファイルを指定してください。詳細は「コマンドラインから OmegaT を起動する」を参照してください。</para>
     </section>
 
     <section id="Mac.OSX.goodies">
@@ -395,13 +397,6 @@
       </itemizedlist>
 
       <itemizedlist>
-        <listitem>
-          <para><emphasis role="bold">字体のアンチエイリアス</emphasis> -（Java 1.5 のみ）</para>
-
-          <para><emphasis role="bold">-Dswing.aatext=true<indexterm class="singular">
-              <primary>OmegaT の実行</primary> <secondary>起動スクリプトの引数</secondary> <tertiary>字体のアンチエイリアス</tertiary>
-            </indexterm></emphasis> この引数は、字体のアンチエイリアスを有効にするかどうかを設定します。有効にすると、字体の見た目を改善できます。（日本語訳註：Java 1.6 以降では「-Dawt.useSystemAAFontSettings=on」を使います）</para>
-        </listitem>
 
         <listitem>
           <para><emphasis role="bold">メモリの割り当て</emphasis></para>

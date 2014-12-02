@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
-<appendix id="appendix.TokenizerPlugin.inOmegaT">
-  <title>トークナイザー プラグイン<indexterm class="singular">
-      <primary>プラグイン</primary> <secondary>トークナイザー</secondary>
+<appendix id="appendix.Tokenizers.inOmegaT">
+  <title>トークナイザー<indexterm class="singular">
+      <primary>トークナイザー</primary>
     </indexterm></title>
 
   <section>
@@ -36,14 +36,16 @@
   </section>
 
   <section>
-    <title>インストールと使い方</title>
+    <title>言語設定</title>
 
-	<para>トークナイザー プラグインは OmegaT 本体に統合されました。プロジェクトの原文と訳文の言語に応じて、OmegaT がトークナイザーを自動的に設定します。プロジェクト設定ウィンドウから、トークナイザーの種類やバージョンを変更できます。</para>
+    <para>OmegaT のトークナイザーは、デフォルトで有効になっています。プロジェクトの原文と訳文の言語に応じて、OmegaT がトークナイザーを自動的に設定します。プロジェクト設定ウィンドウから、トークナイザーの種類（言語のトークナイザー）やバージョン（互換設定）を変更できます。</para>
 
-	<warning>
-		<title>互換性に関する注意点</title>
-		<para>トークナイザーは、plugin フォルダーに古いバージョンのファイルが存在すると、正常に機能しません。plugin フォルダーにトークナイザーがあれば、OmegaT を起動する前にすべて削除してください。</para>
-	</warning>
-	
+    <para>現在の言語に対して使用可能なトークナイザーが見つからない場合、OmegaT は代わりに Hunspell を使用します（このような場合は、該当する言語の Hunspell 辞書が導入済みであることを確認してください）。</para>
+
+    <warning>
+      <title>互換性に関する注意点</title>
+
+      <para>トークナイザーは、plugin フォルダーに古いバージョンのファイルが存在すると、正常に機能しません。plugin フォルダーにトークナイザーがあれば、OmegaT を起動する前にすべて削除してください。</para>
+    </warning>
   </section>
 </appendix>

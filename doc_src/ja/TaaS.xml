@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<chapter id="chapter.TaaS">
+  <title>TaaS の使用<indexterm class="singular">
+      <primary>検索文字列</primary>
+    </indexterm></title>
+
+  <section id="section.TaaS.options">
+    <title>概要</title>
+
+    <para>TaaS はヨーロッパ言語（およびロシア語）向けの用語管理サービスです。https://demo.taas-project.eu/info で提供されています。公開と非公開、両方のデータを取り扱うことができます。既存の文書から用語を抽出し、複数の情報源から訳語を自動生成することで、非公開の用語集を作成できます。</para>
+  </section>
+
+  <section id="section.TaaS.options.collections">
+    <title>公開用語集と非公開用語集</title>
+
+    <para>OmegaT から TaaS の公開データを利用する分には、特に登録不要です。</para>
+
+    <para>非公開データを利用するには、まずウェブブラウザで https://demo.taas-project.eu/account/keys/create?system=omegaT にアクセスして、キーを作成する必要があります。</para>
+
+    <para>作成したキーは、起動オプション -Dtaas.user.key=xxxxx で使用します。OmegaT ランチャー用設定ファイル（OmegaT.l4J.ini、omegat.kaptn、OmegaT.sh）に雛形の項目が含まれています。</para>
+
+    <para>プライベートキーを指定せずにサービスを利用しようとすると、次のメッセージがログに出力されます：TaaS API キーが指定されていません。https://demo.taas-project.eu/account/keys/create?system=omegaT にアクセスし、専用の API キーを作成してください。それを Java の起動オプション -Dtaas.user.key=xxxxx に指定して OmegaT を起動してください。(TAAS_API_KEY_NOT_FOUND)</para>
+  </section>
+
+  <section id="section.TaaS.options.access">
+    <title>TaaS サービスへのアクセス</title>
+
+    <para><emphasis role="bold">［設定］→［用語集］</emphasis>をクリックし、次のオプションを表示します：</para>
+
+    <para><emphasis role="bold">TaaS 用語集をダウンロード</emphasis>：現在のプロジェクトの原文言語と訳文言語に応じた既存の用語集を閲覧し、ダウンロードできます。非公開の用語集は、太字で表示されます。用語集をダウンロードすると、現在の用語集フォルダー内に TBX 形式で保存されます。</para>
+
+    <para><emphasis role="bold">TaaS 用語を参照</emphasis>：チェックを入れると、分節を移動するたびに TaaS データを検索します。すべての用語集（公開、非公開とも）は、使用中の原文言語と訳文言語に限定して検索されます。</para>
+
+    <para>データ量を制限するには、<emphasis role="bold">TaaS 用語分野を選択</emphasis>から特定分野を選んでください。ダイアログ上で、すべての分野から用語を取得するか、特定の一分野からだけ取得するかを選択できます。</para>
+  </section>
+</chapter>

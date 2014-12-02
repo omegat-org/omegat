@@ -14,7 +14,8 @@
       <imageobject role="html">
         <imagedata fileref="images/EditingBehaviourOptions25.png"/>
       </imageobject>
-	  <imageobject role="fo">
+
+      <imageobject role="fo">
         <imagedata fileref="images/EditingBehaviourOptions25.png"/>
       </imageobject>
     </mediaobject>
@@ -69,11 +70,11 @@
           <listitem>
             <para>編集中の原文分節と参考訳文は、同じ個数の数値を含んでいること</para>
           </listitem>
-        
+
           <listitem>
             <para>参考訳文とその原文に含まれる数値は、完全に一致していること</para>
           </listitem>
-        
+
           <listitem>
             <para>整数と単純な小数（小数点の記号としてピリオドを使うこと。たとえば 5.4 は小数とみなすが、5,4 や 54E-01 は小数とみなさない）だけを対象とする</para>
           </listitem>
@@ -132,6 +133,36 @@
 
       <listitem>
         <para>たとえば同一の原文に対して、いくつかの異なる訳文が対応する場合があります。このような分節が存在していて、翻訳を慎重に進めたい場合は、このチェックボックスにチェックを入れてください。<emphasis role="bold">［次の未翻訳分節］</emphasis>で分節を移動するときに、翻訳済みか未翻訳かに関わらず、このような複数訳文に該当する分節で止まります。</para>
+      </listitem>
+    </varlistentry>
+  </variablelist>
+
+  <variablelist>
+    <varlistentry>
+      <term>タグの編集を許可する</term>
+
+      <listitem>
+        <para>編集作業中にタグの破損（たとえば部分的な削除）を防ぐには、このオプションのチェックを外しておいてください。タグ全体を削除したい場合は、このオプションにチェックを入れなくても、Ctrl+Backspace/Delete か、または全体を選択（Ctrl+Shift+Left/Right）して削除（Delete か Ctrl+X）で削除できます。</para>
+      </listitem>
+    </varlistentry>
+  </variablelist>
+
+  <variablelist>
+    <varlistentry>
+      <term>分節を離れる時にタグを検証する</term>
+
+      <listitem>
+        <para>このオプションにチェックを入れると、原文と訳文のあいだでタグが同じか、分節を離れる時に検証して、もし違いがあれば警告します。</para>
+      </listitem>
+    </varlistentry>
+  </variablelist>
+
+  <variablelist>
+    <varlistentry>
+      <term>auto フォルダー由来の翻訳かどうかを記録する</term>
+
+      <listitem>
+        <para>このオプションにチェックを入れると、auto フォルダー内の翻訳メモリから自動挿入された分節であることを示す情報が <filename>project_save.tmx</filename> ファイルに記録されます。その場合は、［表示］→［auto フォルダー由来の分節を色付け］にチェックを入れることで、該当する分節の背景色を変えることができます。</para>
       </listitem>
     </varlistentry>
   </variablelist>

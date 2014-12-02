@@ -85,6 +85,22 @@
         </varlistentry>
 
         <varlistentry>
+          <term>tm/enforce フォルダー</term>
+
+          <listitem>
+            <para>OmegaT の <filename>project_save.tmx</filename> よりも優先度が高いことが明らかな TMX がある場合は、そのファイルを /tm/enforce に配置してください。そこからの分節は、既存の翻訳を無条件に上書きします。</para>
+          </listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term>tm/mt フォルダー</term>
+
+          <listitem>
+            <para><emphasis role="bold">mt</emphasis> と名付けられたフォルダー内の TMX から編集ウィンドウに参考訳文を挿入すると、その分節は一時的に赤い背景色に変わります。その分節から離れると、背景色は通常に戻ります。</para>
+          </listitem>
+        </varlistentry>
+
+        <varlistentry>
           <term><indexterm class="singular">
               <primary>翻訳メモリ</primary> <secondary>tm/penalty-xxx フォルダー</secondary> <seealso>プロジェクトファイル</seealso>
             </indexterm>tm/penalty-xxx フォルダー</term>
@@ -283,7 +299,7 @@
 
       <para>ここに、完了したプロジェクト（たとえばオランダ語の原文を英語に翻訳したもの）があるとします。次に、これを中国語に翻訳する必要が発生しました。翻訳者はオランダ語を解しませんが、英語であれば理解できます。このような状況では、蘭中翻訳を、蘭英の翻訳メモリを介して行うしかありません。</para>
 
-      <para>この例における解決策は、既存の翻訳メモリを tm フォルダーにコピーし、訳文言語を示すために ZH_CN.tmx とリネームすることです。編集ウィンドウの現在分節には、オランダ語の原文分節と共に英語の対訳も表示されます。翻訳者は両方を見ながら、中国語の訳文を作成することができます。</para>
+      <para>この例における解決策は、既存の翻訳メモリを tm/tmx2source/ フォルダーにコピーし、訳文言語を示すために ZH_CN.tmx とリネームすることです。編集ウィンドウの現在分節には、オランダ語の原文分節と共に英語の対訳も表示されます。翻訳者は両方を見ながら、中国語の訳文を作成することができます。</para>
 
       <para><emphasis role="bold">重要：</emphasis>補助用の TMX ファイルは必ず「XX_YY.tmx」形式にリネームしなければなりません。「XX_YY」はプロジェクトの訳文言語と同じコードです。たとえば上の例では、「ZH_CN.tmx」となっています。プロジェクトの原文言語コードと TMX の原文言語コードは、同一でなければなりません。例では「NL」がそれです。特定の言語ペアについて関連付けできるのは、TMX ファイルひとつだけです。したがって、関連付けたい翻訳メモリが複数ある場合は、それらを XX_YY.tmx にマージする必要があります。</para>
     </section>

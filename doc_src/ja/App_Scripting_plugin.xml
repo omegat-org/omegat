@@ -1,24 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
-<appendix id="appendix.ScriptingPlugin.inOmegaT">
-  <title>スクリプト プラグイン<indexterm class="singular">
-      <primary>プラグイン</primary> <secondary>スクリプト</secondary>
+<appendix id="appendix.Scripts.inOmegaT">
+  <title>スクリプト<indexterm class="singular">
+      <primary>スクリプト</primary>
     </indexterm></title>
 
   <section>
     <title>はじめに</title>
 
-    <para>スクリプト プラグインを使うと、さまざまなスクリプト言語で書かれたスクリプトを OmegaT で実行することができます。</para>
+    <para>さまざまなスクリプト言語で書かれたスクリプトを OmegaT で実行することができます。</para>
   </section>
 
   <section>
-    <title>インストールと使い方</title>
+    <title>使い方</title>
 
-    <para>OmegaT 用のスクリプト プラグインは、<ulink url="http://sourceforge.net/projects/omegat-plugins/files">OmegaT プラグインのダウンロードサイト</ulink>から入手できます。Zip 圧縮ファイルを解凍して、展開されたすべてのファイルを「plugins」フォルダーに移動してください。「plugins」フォルダーは通常、OmegaT のインストール先フォルダー（OmegaT.jar ファイルを含む）の配下にあります。もし「plugins」フォルダーが見当たらなければ、先にフォルダーを作成してください。</para>
+    <para><guisubmenu>［ツール］→</guisubmenu><guisubmenu>［スクリプト...］</guisubmenu>をクリックすると、スクリプト ウィンドウが開きます：<screenshot> <screeninfo>スクリプト ウィンドウ</screeninfo> <mediaobject> <imageobject> <imagedata fileref="images/ScriptingDialog.png"/> </imageobject> </mediaobject> </screenshot></para>
 
-    <para>インストールが完了すると、<guisubmenu>［ツール］</guisubmenu>メニューに新たに<guisubmenu>［スクリプト...］</guisubmenu>サブメニューが追加されます。また<guisubmenu>［スクリプト...］</guisubmenu>サブメニューの下には、スクリプト用の 12 のプレースホルダーも追加されます。<guisubmenu>［スクリプト...］</guisubmenu> をクリックすると、スクリプト ダイアログが開きます：<screenshot> <screeninfo>スクリプト ダイアログ</screeninfo> <mediaobject> <imageobject> <imagedata fileref="images/ScriptingDialog.png"/> </imageobject> </mediaobject> </screenshot></para>
-
-    <para>スクリプト ダイアログ上では、既存のスクリプトをテキスト欄に読み込んだり、それをいま開いているプロジェクトに対して実行したりできます。スクリプトをカスタマイズする手順は、次の通りです：</para>
+    <para>スクリプト ウィンドウ上では、既存のスクリプトをテキスト欄に読み込んだり、いま開いているプロジェクトに対して実行できます。スクリプトをカスタマイズする手順は、次の通りです：</para>
 
     <itemizedlist>
       <listitem>
@@ -38,17 +36,17 @@
       </listitem>
     </itemizedlist>
 
+    <para>デフォルトでは、スクリプトファイルは「scripts」フォルダーに格納されています。このフォルダーは、OmegaT のインストール先フォルダー（OmegaT.jar ファイルを含む）の配下にあります。</para>
+
+    <para>このフォルダーに新しいスクリプトファイルを追加すると、スクリプト ウィンドウの一覧に表示されます。</para>
+  </section>
+
+  <section>
+    <title>スクリプト言語</title>
+
     <para>以下のスクリプト言語は、最初から使える状態になっています：</para>
 
     <para><itemizedlist>
-        <listitem>
-          <para><emphasis role="bold">NetRexx</emphasis>（http://www.netrexx.org/）： 旧来の REXX 構文を利用できます。予約キーワードはありません。Java のオブジェクト モデルと互換性のある形でオブジェクト指向プログラミングをサポートするため、多くの拡張が施されています。環境に存在するすべての Java クラスライブラリを、特別な設定をすることなくそのまま利用できます。あるいは Java プログラマーであれば、Java のソースプログラムからランタイム パッケージ経由で単純に Rexx クラスを呼び出し、強力な文字列処理を行うこともできます。</para>
-        </listitem>
-      </itemizedlist><itemizedlist>
-        <listitem>
-          <para><emphasis role="bold">XSLT</emphasis>（Extensible Stylesheet Language Transformations）：XML 文書を変換するために用いられる、宣言的な XML ベースの言語です。原文書には一切変更を加えません。既存の文書を元に、新しい文書を作成します。プロセッサーは、文書を標準的な XML 形式や、HTML、プレーンテキストなどの形式に変換（出力）できます。XSLT は、異なる XML スキーマ間での変換や、XML データをウェブページや PDF 文書などに変換する用途で、最もよく使われています。</para>
-        </listitem>
-      </itemizedlist><itemizedlist>
         <listitem>
           <para><emphasis role="bold">Groovy</emphasis>（http://groovy.codehaus.org）：Java 仮想マシン向けの動的言語です。構文的に Java との互換性を最大限に保った上で、さらに Python や Ruby、Smalltalk に触発された強力な拡張機能を持ちます。</para>
         </listitem>

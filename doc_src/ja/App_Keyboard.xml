@@ -135,6 +135,12 @@
 
           <entry>文字列の方向（右から左、左から右）の切り替え</entry>
         </row>
+
+        <row>
+          <entry><emphasis role="bold">Ctrl+Space</emphasis></entry>
+
+          <entry>入力補完用のダイアログボックスを表示します（Mac：<emphasis role="bold">Esc</emphasis>）。<emphasis role="bold">Ctrl+PgUp/PgDn</emphasis>（Mac では Cmd+PgUp/PgDn）を押すことで、<emphasis>用語集</emphasis>、<emphasis>定型文</emphasis>、<emphasis>未使用のタグ</emphasis>、<emphasis>文字一覧</emphasis>を連続的に切り替えることができます。</entry>
+        </row>
       </tbody>
     </tgroup>
   </table>

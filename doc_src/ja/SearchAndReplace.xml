@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<chapter id="chapter.searchandreplace">
+  <title>置換を実行<indexterm class="singular">
+      <primary>検索文字列</primary>
+    </indexterm></title>
+
+  <section id="section.searchreplace.window">
+    <title>検索ウィンドウ<indexterm class="singular">
+        <primary>ショートカット</primary> <secondary>検索と置換 - Ctrl+K</secondary>
+      </indexterm></title>
+
+    <para><keycombo><keycap>Ctrl</keycap> <keycap>K</keycap></keycombo> で検索と置換ウィンドウを開き、<emphasis>［検索文字列］</emphasis>欄に検索したい語句または正規表現を入力します。</para>
+
+    <para><emphasis>［検索］</emphasis>ボタンをクリックすると、検索条件に一致したすべての分節が表示されます。</para>
+
+    <para><emphasis>［置換後の文字列］</emphasis>欄に新しい語句を入力し（正規表現は使えません）、以下のいずれかをクリックします：<itemizedlist>
+        <listitem>
+          <para><emphasis role="bold">すべて置換：</emphasis>すべての検索文字列を置換後の文字列で置き換えます（事前に置換件数を示した確認ダイアログが表示されます）。</para>
+        </listitem>
+      </itemizedlist><itemizedlist>
+        <listitem>
+          <para><emphasis role="bold">置換フィルター：</emphasis>編集ウィンドウに置換用のフィルターをかけ、<emphasis role="bold">編集ウィンドウのヘッダー</emphasis>に現れるボタンを使って、1 件ずつ置換します。<emphasis>［置換して次へ］</emphasis>か<emphasis>［次を検索］</emphasis>をクリックしていき、最後に<emphasis>［フィルターを解除］</emphasis>でフィルターを解除します。</para>
+        </listitem>
+      </itemizedlist><itemizedlist>
+        <listitem>
+          <para><emphasis role="bold">閉じる：</emphasis>変更なしにウィンドウを閉じます。</para>
+        </listitem>
+      </itemizedlist></para>
+
+    <section>
+      <title>検索オプション</title>
+
+      <para>検索オプションは、<link linkend="section.search.window">検索ウィンドウ</link>に表示される検索オプションとほぼ同じです。</para>
+
+      <para>例外的に、<emphasis role="bold">未翻訳分節</emphasis>にチェックを入れると、翻訳前の分節の原文も検索対象になります。</para>
+
+      <para>検索条件に一致した未翻訳分節に対しては、原文を訳文にコピーした上で置換が実行されます。置換が実行されなかった場合、未翻訳分節はそのままです。つまり、原文は訳文にコピーされません。</para>
+    </section>
+  </section>
+</chapter>

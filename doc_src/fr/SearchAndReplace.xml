@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<chapter id="chapter.searchandreplace">
+  <title>Rechercher et remplacer<indexterm class="singular">
+      <primary>Rechercher</primary>
+    </indexterm></title>
+
+  <section id="section.searchreplace.window">
+    <title>La fenêtre Recherche textuelle<indexterm class="singular">
+        <primary>Raccourcis</primary> <secondary>Rechercher et remplacer - Ctrl+K</secondary>
+      </indexterm></title>
+
+    <para>Ouvrez la fenêtre de Recherche et remplacement avec <keycombo> <keycap>Ctrl</keycap> <keycap>K</keycap> </keycombo> et entrez le mot ou l'expression que vous voulez remplacer dans la case <emphasis>Rechercher</emphasis>.</para>
+
+    <para>Cliquez ensuite sur le bouton <emphasis>Rechercher</emphasis> pour afficher toutes les occurrences correspondantes.</para>
+
+    <para>Entrez le nouveau mot ou la nouvelle expression (les expressions régulières ne sont pas prises en charge) dans la case <emphasis>Remplacer par</emphasis>, puis cliquez sur l'une des options suivantes :<itemizedlist>
+        <listitem>
+          <para><emphasis role="bold">Remplacer tout :</emphasis> effectue le remplacement de toutes les occurrences (après l'affichage d'une fenêtre de confirmation où le nombre d'occurrences est affiché).</para>
+        </listitem>
+      </itemizedlist><itemizedlist>
+        <listitem>
+          <para><emphasis role="bold">Remplacer :</emphasis> effectue les remplacements les uns après les autres, à l'aide de boutons dans l'<emphasis role="bold">en-tête de l'Éditeur</emphasis>. Cliquez sur <emphasis>Remplacer suivant</emphasis> ou <emphasis>Ignorer</emphasis>, puis mettez un terme à la session de remplacement avec <emphasis>Terminer</emphasis>.</para>
+        </listitem>
+      </itemizedlist><itemizedlist>
+        <listitem>
+          <para><emphasis role="bold">Fermer :</emphasis> ferme la fenêtre sans aucune modification.</para>
+        </listitem>
+      </itemizedlist></para>
+
+    <section>
+      <title>Options de recherche</title>
+
+      <para>Les options de recherche sont similaires à celles affichées dans la <link linkend="section.search.window">fenêtre de Recherche</link>.</para>
+
+      <para>Exceptée celle-ci : cochez<emphasis role="bold">Non traduits</emphasis> pour effectuer une recherche et remplacement également sur les segments qui ne sont pas encore traduits.</para>
+
+      <para>Pour rendre cela possible (bien que la recherche et remplacement ne fonctionne qu'en mémoire), OmegaT copiera le segment source dans le segment cible avant que l'opération de remplacement ne survienne. Si aucun remplacement n'est effectué dans un segment donné, le segment cible sera « vidé », c'est-à-dire qu'il restera non traduit.</para>
+    </section>
+  </section>
+</chapter>

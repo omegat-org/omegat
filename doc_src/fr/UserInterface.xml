@@ -80,7 +80,7 @@
                 <primary>Raccourcis</primary> <secondary>Validation des balises - Ctrl+T</secondary>
               </indexterm>Fenêtre de validation des balises</guimenuitem></entry>
 
-            <entry><para>Utilisée pour valider les balises (s'ouvre avec les touches <keycombo> <keycap>Ctrl</keycap> <keycap>T</keycap> </keycombo>, se ferme en appuyant sur <keycap>Echap</keycap>)</para></entry>
+            <entry><para>Utiliser pour valider les balises (s'ouvre avec <keycombo> <keycap>Ctrl</keycap> <keycap>Maj</keycap> <keycap>V</keycap> </keycombo>, se ferme avec <keycap>Échap</keycap>)</para></entry>
           </row>
 
           <row>
@@ -133,7 +133,7 @@
 
           <row>
             <entry><guimenuitem>Police<indexterm class="singular">
-                <primary>Paramètres du projet</primary> <secondary>Police</secondary>
+                <primary>Police</primary>
               </indexterm></guimenuitem></entry>
 
             <entry><para>Utilisée pour modifier la police utilisée par <application>OmegaT</application> pour afficher la source, la traduction, les correspondances et les éléments du glossaire (accès par <menuchoice> <guimenu>Options</guimenu> <guimenuitem>Police...</guimenuitem> </menuchoice>, se ferme en appuyant sur <keycap>Echap</keycap>)</para></entry>
@@ -141,9 +141,7 @@
 
           <row>
             <entry><guimenuitem>Fichiers et filtres...<indexterm class="singular">
-                <primary>Paramètres du projet</primary> <secondary>Filtres de fichiers</secondary>
-              </indexterm><indexterm class="singular">
-                <primary>Menu Options</primary> <secondary>Fichiers et filtres...</secondary>
+                <primary>Fichiers et filtres...</primary>
               </indexterm></guimenuitem></entry>
 
             <entry>Utilisé pour ajuster la gestion des formats pris en charge (accès par <menuchoice> <guimenu>Options</guimenu> <guimenuitem>Fichiers et filtres...</guimenuitem> </menuchoice>, se ferme en appuyant sur <keycap>Échap</keycap>)</entry>
@@ -151,9 +149,7 @@
 
           <row>
             <entry><guimenuitem>Segmentation...<indexterm class="singular">
-                <primary>Paramètres du projet</primary> <secondary>Segmentation...</secondary>
-              </indexterm><indexterm class="singular">
-                <primary>Menu Options</primary> <secondary>Segmentation...</secondary>
+                <primary>Segmentation...</primary>
               </indexterm></guimenuitem></entry>
 
             <entry>Utilisée pour modifier la façon dont votre texte est segmenté en phrases (accès par <menuchoice> <guimenu>Options</guimenu> <guimenuitem>Segmentation...</guimenuitem> </menuchoice>, se ferme en appuyant sur <keycap>Échap</keycap>)</entry>
@@ -161,9 +157,7 @@
 
           <row>
             <entry><guimenuitem>Ligne d'édition...<indexterm class="singular">
-                <primary>Menu Options</primary> <secondary>Ligne d'édition...</secondary>
-              </indexterm><indexterm class="singular">
-                <primary>Paramètres du projet</primary> <secondary>Ligne d'édition...</secondary>
+                <primary>Ligne d'édition...</primary>
               </indexterm></guimenuitem></entry>
 
             <entry>Utilisée pour modifier la façon dont <application>OmegaT</application> se comporte lorsque vous passez d'un segment à l'autre (accès par <menuchoice> <guimenu>Options</guimenu> <guimenuitem>Ligne d'édition...</guimenuitem> </menuchoice>, se ferme en appuyant sur<keycap>Échap</keycap>)</entry>
@@ -385,7 +379,7 @@
 
       <itemizedlist>
         <listitem>
-          <para>pourcentage de correspondance lorsque l'extension lemmatiseur est utilisée</para>
+          <para>pourcentage de correspondance (prenant en compte les lemmatiseurs)</para>
         </listitem>
       </itemizedlist>
 
@@ -599,13 +593,13 @@
           <primary>Les fenêtres et les volets dans OmegaT</primary> <secondary>Volet Traduction automatique</secondary>
         </indexterm></title>
 
-      <para>Le volet Traduction automatique, lorsqu'il est ouvert, contient les suggestions de traduction proposées par les outils de traduction automatique pour le segment en cours. Appuyer sur <keysym>Ctrl+M </keysym>permet de remplacer la traduction du segment en cours par la traduction suggérée. Pour plus de détails, voir le chapitre : <link linkend="chapter.machine.translate">Traduction automatique</link></para>
+      <para>Le volet Traduction automatique, lorsqu'il est ouvert, contient les suggestions de traduction proposées par les outils de traduction automatique pour le segment en cours. Appuyer sur <keysym>Ctrl+M</keysym> permet de remplacer la traduction du segment en cours par la traduction suggérée. Pour plus de détails, voir le chapitre : <link linkend="chapter.machine.translate">Traduction automatique</link></para>
     </section>
 
     <section>
       <title id="main.menu">Menu Principal</title>
 
-      <para>Le menu principal donne accès à toutes les fonctions d'<application>OmegaT</application>. Voir l'annexe<emphasis> Menu principal</emphasis> pour une description complète de tous les menus et des éléments de menu. Les fonctions les plus fréquemment utilisées sont accessibles grâce à leur raccourci clavier (une fois habitués à ceux-ci, il ne vous sera plus nécessaire de naviguer entre les menus pendant la traduction). Pour plus de détails, voir le chapitre : <link linkend="chapter.menu">Menus et raccourcis clavier</link>.</para>
+      <para>Le menu principal donne accès à toutes les fonctions d'<application>OmegaT</application>. Voir l'annexe <emphasis> Menu principal</emphasis> pour une description complète de tous les menus et des éléments de menu. Les fonctions les plus fréquemment utilisées sont accessibles grâce à leur raccourci clavier (une fois habitués à ceux-ci, il ne vous sera plus nécessaire de naviguer entre les menus pendant la traduction). Pour plus de détails, voir le chapitre : <link linkend="chapter.menu">Menus et raccourcis clavier</link>.</para>
     </section>
 
     <section id="status.bar">
@@ -629,7 +623,11 @@
 
       <itemizedlist>
         <listitem>
-          <para>La liste de tous les fichiers traduisibles du projet. Il s'agit de tous les fichiers présents dans le dossier de fichiers source du projet qui sont écrit dans un format qu'OmegaT est en mesure de traiter. Cliquer sur n'importe lequel de ces fichiers provoquera l'ouverture de celui-ci (dans le volet Editeur, ce qui permet d'effectuer sa traduction).</para>
+          <para>le nombre total de fichiers traduisibles du projet. Il s'agit de tous les fichiers présents dans le dossier /source qui sont écrit dans un format qu'OmegaT est en mesure de traiter. Ce nombre est affiché entre parenthèses, à côté du titre « Fichiers du projet »</para>
+        </listitem>
+
+        <listitem>
+          <para>La liste de tous les fichiers traduisibles du projet. Cliquer sur n'importe lequel de ces fichiers provoquera l'ouverture de celui-ci (dans l'Éditeur, ce qui permet d'effectuer sa traduction). Note : les noms des fichiers (dans la première colonne) peuvent être triés par ordre alphabétique en cliquant sur l'en-tête. Il est également possible de changer la position d'un nom de fichier, en cliquant dessus et en appuyant sur les boutons <emphasis>Placer/Glisser</emphasis>  </para>
         </listitem>
       </itemizedlist>
 

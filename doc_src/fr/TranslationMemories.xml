@@ -75,12 +75,28 @@
         <varlistentry>
           <term><indexterm class="singular">
               <primary>Mémoires de traduction</primary> <secondary>sous-dossier tm/auto</secondary> <seealso>Fichiers projet</seealso>
-            </indexterm>dossier tm/auto<indexterm class="singular">
+            </indexterm>Dossier tm/auto<indexterm class="singular">
               <primary>Projet</primary> <secondary>Prétraduction</secondary>
             </indexterm></term>
 
           <listitem>
             <para>S'il est certain dès le début que toutes les traductions d'une ou de plusieurs mémoires de traduction sont correctes, les placer dans le dossier <emphasis role="bold"> tm/auto</emphasis> permet d'éviter de devoir confirmer de nombreux cas de <emphasis> [correspondance]</emphasis>. Cela va en effet <emphasis role="bold">prétraduire</emphasis> le texte source : tous les segments du texte source pour lesquels il est possible de trouver des traductions dans les mémoires de traduction « auto » seront transférés dans la mémoire de traduction principale du projet sans que l'utilisateur n'ait besoin d'intervenir.</para>
+          </listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term>Dossier tm/enforce</term>
+
+          <listitem>
+            <para>Si vous êtes certains qu'une TMX est plus à jour que <filename>project_save.tmx</filename> d'OmegaT, placez cette TMX dans /tm/enforce pour remplacer les traductions existantes par défaut inconditionnellement.</para>
+          </listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term>Dossier tm/mt</term>
+
+          <listitem>
+            <para>Dans l'Éditeur, lorsqu'une correspondance est insérée depuis une TMX contenu dans un dossier nommé <emphasis role="bold">mt</emphasis>, l'arrière-plan du segment actuel passe en rouge. L'arrière-plan revient à la normale lorsque l'utilisateur quitte le segment.</para>
           </listitem>
         </varlistentry>
 
@@ -281,9 +297,9 @@
           <primary>Mémoires de traduction</primary> <secondary>Paires de langues alternatives</secondary>
         </indexterm></title>
 
-      <para>Il peut arriver que vous ayez effectué un projet avec, par exemple, des sources néerlandaises et une traduction en anglais. Ensuite, vous avez par exemple besoin d'une traduction en chinois, mais votre traductrice ne comprend pas le néerlandais. Cependant, elle comprend parfaitement l'anglais. Dans ce cas, la mémoire de traduction NL-EN peut servir d'intermédiaire pour aider à créer la traduction NL-ZH.</para>
+      <para>Il peut arriver que vous ayez effectué un projet avec, par exemple, des sources néerlandaises et une traduction en anglais. Ensuite, vous avez par exemple besoin d'une traduction en chinois, mais votre traductrice ne comprend pas le néerlandais. Cependant, elle comprend parfaitement l'anglais. Dans ce cas, la mémoire de traduction NL-EN peut être utilisée comme intermédiaire pour aider à générer la traduction NL vers ZH.</para>
 
-      <para>Dans cet exemple, la solution consiste à copier la mémoire de traduction déjà existante dans le sous-dossier tm et de la renommer ZH_CN.tmx pour indiquer la langue cible du TMX. Le traducteur verra des traductions en anglais de segments sources néerlandais et les utilisera pour créer une traduction en chinois.</para>
+      <para>Dans cet exemple, la solution consiste à copier la mémoire de traduction déjà existante dans le sous-dossier tm/tmx2source/ et de la renommer ZH_CN.tmx pour indiquer la langue cible de la TMX. Le traducteur verra des traductions en anglais de segments sources néerlandais et les utilisera pour créer une traduction en chinois.</para>
 
       <para><emphasis role="bold">Important :</emphasis> le fichier TMX de référence doit être renommé XX_YY.tmx, XX_YY correspondant à la langue cible du fichier TMX, par exemple ZH_CN.tmx dans l'exemple ci-dessus. La langue source du projet et du TMX doivent bien sûr être identiques - NL dans notre exemple. Notez qu'une seule TMX est utilisable pour une paire de langues donné. Si plusieurs mémoires de traduction sont impliquées dans le projet, vous devrez donc les fusionner dans le fichier XX_YY.tmx.</para>
     </section>

@@ -39,6 +39,26 @@
       </indexterm></title>
 
     <para>Cette boite de dialogue liste les filtres de fichiers disponibles. Si vous décidez de ne pas utiliser OmegaT pour traduire des fichiers d'un certain type, vous pouvez fermer le filtre correspondant en décochant la case qui se trouve à côté du nom de format de fichier. OmegaT laissera alors de côté les fichiers appropriés lors du chargement du projet et les copiera sans les modifier lors de la création des documents cible. Si vous souhaitez réutiliser le filtre, re-cochez simplement la case correspondante. Cliquez sur <emphasis role="bold">Valeurs par défaut</emphasis> pour que les filtres de fichiers retrouvent leurs valeurs par défaut. Pour modifier le type et l'encodage des fichiers à traiter par un filtre, sélectionnez le filtre dans la liste et cliquez sur <emphasis role="bold">Modifier...</emphasis></para>
+
+    <para>Le dialogue permet d'activer ou de désactiver les options suivantes :</para>
+
+    <itemizedlist>
+      <listitem>
+        <para>Supprimer les balises en début et fin de segment : décocher cette option pour afficher toutes les balises, y compris celles de début et de fin de segment. Avertissement : dans les formats Microsoft Open XML (docx, xlsx, etc.), si toutes les balises sont affichées, n'écrivez AUCUN texte avant la première balise (il s'agit d'une balise technique qui doit toujours commencer le segment).</para>
+      </listitem>
+
+      <listitem>
+        <para>Supprimer les espaces en début et fin de segment dans les projets non segmentés : par défaut, OmegaT supprime les caractères d'espacement de début et de fin de segment. Dans les projets non segmentés, il est possible de les conserver en décochant cette option.</para>
+      </listitem>
+
+      <listitem>
+        <para>Préserver les espaces pour toutes les balises : cochez cette option si les documents source contiennent des espaces significatifs (pour des raisons de mise en page) qui ne doivent pas être ignorés.</para>
+      </listitem>
+
+      <listitem>
+        <para>Ignorer le nom du fichier pour identifier les segments comportant des traductions alternatives : par défaut, OmegaT utiliser le nom du fichier source comme partie de l'identification d'une traduction alternative. Si cette option n'est pas cochée, le nom du fichier source ne sera pas utilisé et les traductions alternatives prendront effet dans n'importe quel fichier dès lors que le reste du contexte (segments précédents/suivants, ou un identifiant quelconque en fonction du format du fichier) correspond.</para>
+      </listitem>
+    </itemizedlist>
   </section>
 
   <section id="filters.options">

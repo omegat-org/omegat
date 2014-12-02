@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<chapter id="chapter.TaaS">
+  <title>Utilisation de TaaS dans OmegaT<indexterm class="singular">
+      <primary>Rechercher</primary>
+    </indexterm></title>
+
+  <section id="section.TaaS.options">
+    <title>Généralités</title>
+
+    <para>Le service TaaS (https://demo.taas-project.eu/info) fournit des services de terminologie dans les langues européennes (plus le russe). Il permet l'accès à des données publiques et privées, où des glossaires privés (appelés des « collections ») peuvent être extraits à partir de documents existants et les termes cible peuvent être en partie remplis automatiquement à partir de différentes sources.</para>
+  </section>
+
+  <section id="section.TaaS.options.collections">
+    <title>Collections publics et privées</title>
+
+    <para>OmegaT permet d'accéder à la partie public de TaaS sans inscription.</para>
+
+    <para>Pour accéder à la partie privée, un utilisateur doit créer une clé en utilisant https://demo.taas-project.eu/account/keys/create?system=omegaT.</para>
+
+    <para>La clé doit être transmise à OmegaT avec -Dtaas.user.key=xxxxx. Les lanceurs de configuration d'OmegaT (OmegaT.l4J.ini, omegat.kaptn et OmegaT.sh) contiennent un modèle d'entrée.</para>
+
+    <para>Lors de l'accès au service sans clé privée, le message suivant sera inscrit dans le journal : Clé API TaaS introuvable. Allez à https://demo.taas-project.eu/account/keys/create?system=omegaT pour créer votre propre clé et passez-la à OmegaT avec -Dtaas.user.key=xxxxx (TAAS_API_KEY_NOT_FOUND)</para>
+  </section>
+
+  <section id="section.TaaS.options.access">
+    <title>Accès au service TaaS</title>
+
+    <para>Cliquez sur <emphasis role="bold">Options, Glossaire</emphasis> pour afficher les options suivantes :</para>
+
+    <para><emphasis role="bold">Parcourir les collections TaaS</emphasis> permettra de parcourir et de télécharger les collections existantes pour les langues source et cible du projet. Les collections privées sont affichées en gras. Les collections sont téléchargées sous la forme de glossaires TBX dans le dossier de glossaires actuel.</para>
+
+    <para><emphasis role="bold">Recherche terminologique TaaS</emphasis>: si cochée, permettra d'interroger les données de TaaS segment par segment. Toutes les collections (publiques et privées) seront interrogées pour les langues source et cible.</para>
+
+    <para>Pour limiter le volume des données, il est possible de sélectionner un domaine spécifique en sélectionnant <emphasis role="bold">Sélectionner le domaine de recherche terminologique TaaS...</emphasis>. Dans ce dialogue, il est possible de sélectionner Tous les domaines ou un domaine en particulier.</para>
+  </section>
+</chapter>

@@ -135,6 +135,12 @@
 
           <entry>Passer du mode de lecture droite-à-gauche au mode de lecture gauche-à-droite (et inversement.)</entry>
         </row>
+
+        <row>
+          <entry><emphasis role="bold">Ctrl+Space</emphasis></entry>
+
+          <entry>ouvre une boîte de dialogue contenant des suggestions contextuels (Mac : <emphasis role="bold">Échap</emphasis>). Utiliser <emphasis role="bold">Ctrl+Pg préc/Pg suiv</emphasis> (Cmd+Pg préc/Pg suiv sur Mac) pour basculer successivement entre les options <emphasis>Entrées de glossaires</emphasis>, <emphasis>Entrées de texte automatique,</emphasis> <emphasis>Balises manquantes</emphasis> et <emphasis>Table de caractères</emphasis>.</entry>
+        </row>
       </tbody>
     </tgroup>
   </table>
@@ -166,6 +172,8 @@
   <para>En elle-même, la touche « Maj » ne provoque pas de comportement particulier : lorsque vous appuyez sur la touche « Maj », toutes les touches déplacent le curseur de manière habituelle, à l'exception de la combinaison <literal>Maj+Entrée</literal> qui insère un retour à la ligne dans le texte.</para>
 
   <para>Les commandes utilisées pour l'ensemble du système, Tout sélectionner (<keycap>Ctrl+A</keycap>), Coller (<emphasis role="bold">Ctrl+V</emphasis>), Couper (<emphasis role="bold">Ctrl+X</emphasis>), Copier (<emphasis role="bold">Ctrl+C)</emphasis>, Insérer la correspondance <emphasis role="bold">(Ctrl+I</emphasis>) et Insérer le texte source (<emphasis role="bold">Ctrl+Maj+I</emphasis>) fonctionnent uniquement sur le texte à l'intérieur du segment ouvert.</para>
+  
+  <para>Il est possible de se déplacer d'un volet à l'autre (par exemple, de l'Éditeur au volet des Correspondances) en utilisant <keycap>Ctrl+Tab</keycap>. <keycap>Ctrl+Maj+Tab</keycap> revient au volet précédent. Les raccourcis <keycap>Ctrl+A</keycap> et <keycap>Ctrl+C</keycap> fonctionnent dans les volets, permettant ainsi de copier toutes les informations ou une partie seulement dans le presse-papiers.</para>
 
   <para>Notez que vous pouvez reprogrammer les raccourcis selon vos préférences. Voir <link linkend="ch04.shortcuts.customization">Annexe Personnalisation des raccourcis</link></para>
 </appendix>

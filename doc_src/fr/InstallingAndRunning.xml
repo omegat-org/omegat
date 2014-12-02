@@ -46,6 +46,10 @@
         </indexterm>Dans ce cas, les options de démarrage du programme sont lues depuis le fichier <emphasis><application>OmegaT</application>.l4J.ini </emphasis> qui se trouve dans le même dossier que le fichier exe. Ce fichier peut être modifié afin d'être adapté à votre installation. L'exemple suivant du fichier INI utilise 1 Go de mémoire, choisit le français comme langue utilisateur et le Canada comme pays :</para>
 
       <literallayout><code># OmegaT.exe runtime configuration # Pour utiliser un paramètre, supprimez le '#' avant le '-' # Memory -Xmx1024M # Language -Duser.language=FR # Country -Duser.country=CA</code></literallayout>
+
+      <para>Conseil : si OmegaT fonctionne plus lentement dans des sessions de Bureaux à distance, vous pouvez utiliser cette option :</para>
+
+      <literallayout><code>-Dsun.java2d.noddraw=false</code></literallayout>
     </section>
 
     <section>
@@ -191,7 +195,7 @@
     <section id="which.package.to.download.OSX">
       <title>Téléchargement du paquet</title>
 
-      <para>Java 1.6 est nécessaire à l'exécution d'<application>OmegaT</application>. Cliquez sur « Mise à jour des logiciels... » dans le menu Pomme pour mettre à jour votre version de Java.</para>
+      <para><application>OmegaT</application> contient Java 1.7</para>
 
       <para>Téléchargez<emphasis>OmegaT_3.n.n_Mac.zip.</emphasis></para>
     </section>
@@ -215,17 +219,19 @@
 
       <para>Double-cliquez sur <emphasis> <application>OmegaT</application>.app</emphasis> ou cliquez sur son emplacement dans le Dock.</para>
 
-      <para>Vous pouvez modifier le comportement d'OmegaT en modifiant les <emphasis>Propriétés</emphasis> ainsi que la partie <emphasis>VMOptions</emphasis> du paquet <application><emphasis>Info.plist</emphasis></application> file.</para>
-      
-      <para>Pour accéder à <application><emphasis>Info.plist</emphasis></application>, faites un clic droit sur <emphasis><application>OmegaT</application>.app</emphasis> et sélectionnez « Afficher le contenu du paquet », puis ouvrez le fichier avec un clic droit et en sélectionnant l'éditeur de texte de votre choix. Vous pouvez également utiliser la commande UNIX « cd » directement à partir de la ligne de commande et ouvrir <application><emphasis>Info.plist</emphasis> dans un éditeur de ligne de commande comme emacs ou vi</application>.<indexterm class="singular">
+      <para>Vous pouvez modifier le comportement d'OmegaT en modifiant les <emphasis>Propriétés</emphasis> ainsi que le fichier <emphasis>OmegaT.sh</emphasis> dans le paquet.</para>
+
+      <para>Pour accéder à <application><emphasis>OmegaT.sh</emphasis></application>, faites un clic droit sur <emphasis><application>OmegaT</application>.app</emphasis> et sélectionnez « Afficher le contenu du paquet », puis ouvrez le fichier dans Contents/MacOS avec un clic droit et en sélectionnant l'éditeur de texte de votre choix. Vous pouvez également utiliser la commande Unix « cd » directement à partir de la ligne de commande et ouvrir <application><emphasis>OmegaT.sh</emphasis> dans un éditeur de ligne de commande comme emacs ou vi</application>.<indexterm class="singular">
           <primary>Personnaliser OmegaT</primary> <secondary>OS X</secondary> <tertiary>Paramètres de lancement</tertiary>
         </indexterm></para>
 
-      <para>Pour ajouter des valeurs à <emphasis>VMOptions</emphasis>, séparez-les par une espace. Par exemple, <filename>-Xmx1024M -Duser.language=ja</filename> lancera <application>OmegaT</application> avec une mémoire de 1024 Mo et une interface utilisateur en japonais.</para>
+      <para>Les options se modifient en éditant <emphasis>OmegaT.sh</emphasis>. Pour les options prédéfinies, supprimer le # devant un paramètre pour l'activer. Par exemple, <filename>LANGUAGE=&quot;-Duser.language=ja&quot;</filename> (sans le #) lancera <application>OmegaT</application> avec l'interface utilisateur en japonais.</para>
 
-      <para>Pour lancer plusieurs instances d'<emphasis><application>OmegaT</application>.app</emphasis>, double-cliquez sur le fichier <emphasis>JavaApplicationStub</emphasis> situé dans <emphasis><application>OmegaT</application>.app/ Contents/MacOS/</emphasis>.</para>
+      <para>Pour modifier la quantité de mémoire disponible, modifiez directement la ligne de lancement. Par exemple, <filename>${JAVA} -Xmx2048m ${MACOS} ${LANGUAGE} ${COUNTRY} ${PROXY_HOST} ${PROXY_PORT} ${GOOGLE_API_KEY} ${MS_CLIENT_ID} ${MS_CLIENT_SECRET} ${MY_MEMORY_EMAIL} ${TAAS_USER_KEY} -jar OmegaT.jar</filename> lancera OmegaT avec 2 gigas de mémoire.</para>
 
-      <para>Utilisez le fichier <emphasis><application>OmegaT</application>.jar</emphasis> situé dans <emphasis><application>OmegaT</application>.app/Contents/Resources/Java/</emphasis> pour lancer <application>OmegaT</application> à partir de la ligne de commande. Voir « Lancement des lignes de commandes » ci-dessous pour plus d'informations.</para>
+      <para>Pour lancer plusieurs instances d'<emphasis><application>OmegaT</application>.app</emphasis>, double-cliquez sur le fichier <emphasis>OmegaT.sh</emphasis> situé dans <emphasis><application>OmegaT</application>.app/ Contents/MacOS/</emphasis>.</para>
+
+      <para>Utilisez le fichier <emphasis><application>OmegaT</application>.jar</emphasis> situé dans <emphasis><application>OmegaT</application>.app/Contents/MacOS/Java/</emphasis> pour lancer <application>OmegaT</application> à partir de la ligne de commande. Voir « Lancement des lignes de commandes » ci-dessous pour plus d'informations.</para>
     </section>
 
     <section id="Mac.OSX.goodies">
@@ -391,14 +397,6 @@
 
       <itemizedlist>
         <listitem>
-          <para><emphasis role="bold">Lissage des polices</emphasis> - (seulement avec Java 1.6)</para>
-
-          <para><emphasis role="bold">-Dswing.aatext=true<indexterm class="singular">
-              <primary>Exécution d'OmegaT</primary> <secondary>Arguments de scripts de lancement</secondary> <tertiary>Lissage des polices</tertiary>
-            </indexterm></emphasis> : cet argument a pour effet de lisser toutes les polices et ainsi d'améliorer leur apparence.</para>
-        </listitem>
-
-        <listitem>
           <para><emphasis role="bold">Affectation de la mémoire</emphasis></para>
 
           <para><emphasis role="bold">-XmxZZM</emphasis><indexterm class="singular">
@@ -445,7 +443,6 @@
 
           <para>-<emphasis role="bold">Dmicrosoft.api.client_secret=XXXX9xXxX9xXXxxXXX9xxX99xXXXX9xx9XXxXxXXXXX=</emphasis></para>
         </listitem>
-
       </itemizedlist>
 
       <para>Les arguments peuvent être combinés. Pour lancer <application>OmegaT</application> avec tous les exemples décrits plus haut, la commande serait :</para>
@@ -607,7 +604,7 @@
             <para>Cette option permet d'effectuer une validation des balises en mode batch (par lots). Si <literal>abort</literal> est sélectionné, le validateur de balises s'arrêtera au premier segment invalide. Si <literal>warn</literal> est précisé, le validateur de balises traitera tous les segments et affichera des avertissements dans le fichier concerné pour tout segment contenant des balises invalides.</para>
           </listitem>
         </itemizedlist>
-        
+
         <itemizedlist>
           <listitem>
             <para><literal>--no-team</literal> est destinée aux projets prévus pour un travail en équipe. Utilisez-la si vous voulez qu'OmegaT ne synchronise pas le contenu du projet.</para>
@@ -619,7 +616,6 @@
             <para><literal>--disable-project-locking</literal> permet, sous Windows, d'ouvrir le même projet avec plusieurs instances d'OmegaT. Par défaut, sous Windows, <literal>omegat.project</literal> est verrouillé et un message d'erreur est reçu lors d'une tentative d'ouverture d'un projet déjà ouvert dans une autre instance d'OmegaT. Avec cette option, aucun verrouillage ne survient.</para>
           </listitem>
         </itemizedlist>
-
       </section>
 
       <section id="console.mode.option.quiet">

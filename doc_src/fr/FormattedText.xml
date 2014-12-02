@@ -160,9 +160,9 @@
         <primary>Balises</primary> <secondary>Validation des groupes</secondary>
       </indexterm></title>
 
-    <para>L'option de validation des balises détecte les modifications survenues dans la séquence de balises (que ce changement soit délibéré ou accidentel) et affiche les segments concernés. Lancer cette option – <guimenuitem>Ctrl+T<indexterm class="singular">
+    <para>L'option de validation des balises détecte les modifications survenues dans la séquence de balises (que ce changement soit délibéré ou accidentel) et affiche les segments concernés. Lancer cette option – <guimenuitem>Ctrl+Maj+V<indexterm class="singular">
         <primary>Raccourcis</primary> <secondary>Validation des balises - Ctrl+T</secondary>
-      </indexterm></guimenuitem> - ouvre une fenêtre qui liste tous les segments du fichier contenant des balises qui pourraient être altérées ou fausses dans les segments traduits. L'option de validation des balises permet de réparer les balises et de recréer les documents cibles facilement. La fenêtre qui s'ouvre quand <guimenuitem>Ctrl+T</guimenuitem> est appuyé se présente sous la forme d'un tableau à 3 colonnes avec un lien vers le segment, sa partie originale et sa partie cible</para>
+      </indexterm></guimenuitem> - ouvre une fenêtre qui liste tous les segments du fichier contenant des balises qui pourraient être altérées ou fausses dans les segments traduits. L'option de validation des balises permet de réparer les balises et de recréer les documents cibles facilement. La fenêtre qui s'ouvre lors d'un appui sur <guimenuitem>Ctrl+Maj+V</guimenuitem> se présente sous la forme d'un tableau à 3 colonnes avec un lien vers le segment, sa partie originale et sa partie cible</para>
 
     <figure id="tag.validation">
       <title>Entrée de validation des balises</title>
@@ -178,7 +178,7 @@
       </mediaobject>
     </figure>
 
-    <para>Les balises sont en gras et en bleu pour faciliter la comparaison entre le contenu original et le contenu traduit. Cliquez sur le lien pour activer le segment dans l'Éditeur. Corrigez les erreurs si nécessaire (dans le cas ci-dessus, il manque la paire &lt;i2&gt;&lt;/i2&gt;) et appuyez sur <guimenuitem>Ctrl+T</guimenuitem> pour retourner dans la fenêtre de validation des balises afin de corriger d'autres erreurs. Les erreurs de balises sont des séquences de balises présentes dans la partie traduite pour lesquelles l'ordre et le nombre de balises du segment d'origine ne sont pas respectés. Certaines manipulations de balises sont nécessaires et sans conséquences, mais d'autres poseront problème lors de la création du document traduit.</para>
+    <para>Les balises sont en gras et en bleu pour faciliter la comparaison entre le contenu original et le contenu traduit. Cliquez sur le lien pour activer le segment dans l'Éditeur. Corrigez les erreurs si nécessaire (dans le cas ci-dessus, il manque la paire &lt;i2&gt;&lt;/i2&gt;) et appuyez sur <guimenuitem>Ctrl+Maj+V</guimenuitem> pour retourner dans la fenêtre de validation des balises afin de corriger d'autres erreurs. Les erreurs de balises sont des séquences de balises présentes dans la partie traduite pour lesquelles l'ordre et le nombre de balises du segment d'origine ne sont pas respectés. Certaines manipulations de balises sont nécessaires et sans conséquences, mais d'autres poseront problème lors de la création du document traduit.</para>
   </section>
 
   <section id="hints.for.tag.management">

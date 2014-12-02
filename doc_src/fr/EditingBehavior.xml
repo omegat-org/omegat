@@ -14,7 +14,8 @@
       <imageobject role="html">
         <imagedata fileref="images/EditingBehaviourOptions25.png"/>
       </imageobject>
-	  <imageobject role="fo">
+
+      <imageobject role="fo">
         <imagedata fileref="images/EditingBehaviourOptions25.png"/>
       </imageobject>
     </mediaobject>
@@ -69,11 +70,11 @@
           <listitem>
             <para>Le segment source et les correspondances doivent contenir la même liste de nombres</para>
           </listitem>
-        
+
           <listitem>
             <para>Les nombres du texte source et des correspondances cible doivent être rigoureusement identiques.</para>
           </listitem>
-        
+
           <listitem>
             <para>Seuls les nombres entiers et les nombres réels simples (utilisant le point comme caractère décimal, soit 5.4 mais pas 5,4 ou 54E-01) sont pris en compte.</para>
           </listitem>
@@ -132,6 +133,36 @@
 
       <listitem>
         <para>Pour éviter toute erreur de traduction dans le cas de segments avec plusieurs contenus cible possibles, cocher cette case obligera <emphasis role="bold">Atteindre segment non traduit suivant</emphasis> à s'arrêter au segment suivant de ce type, sans tenir compte du fait qu'il ait été traduit ou non.</para>
+      </listitem>
+    </varlistentry>
+  </variablelist>
+
+  <variablelist>
+    <varlistentry>
+      <term>Autoriser la modification des balises</term>
+
+      <listitem>
+        <para>Décochez cette option pour empêcher les balises d'être endommagées (par exemple par une suppression partielle) durant les modifications. Supprimmer une balises entière reste possible dans ce cas, en utilisant Ctrl+Retour arrière/Suppr ou en la sélectionnant entièrement (Ctrl+Maj+Gauche/Droite) puis en la supprimant (Suppr ou Ctrl+X).</para>
+      </listitem>
+    </varlistentry>
+  </variablelist>
+
+  <variablelist>
+    <varlistentry>
+      <term>Valider les balises en quittant un segment</term>
+
+      <listitem>
+        <para>Cochez cette option pour être prévenu des différences entre les balises des segments source et cible à chaque fois que vous quittez un segment.</para>
+      </listitem>
+    </varlistentry>
+  </variablelist>
+
+  <variablelist>
+    <varlistentry>
+      <term>Enregistrer l'état des traductions issues du dossier auto</term>
+
+      <listitem>
+        <para>Cochez cette option pour enregistrer dans le fichier <filename>project_save.tmx</filename> les informations indiquant qu'un segment a été traduit automatiquement, afin qu'il puisse être affiché dans une couleur spécifique dans l'Éditeur (si l'option « Marquer les segments traduits à partir du dossier auto » du menu Affichage est cochée).</para>
       </listitem>
     </varlistentry>
   </variablelist>

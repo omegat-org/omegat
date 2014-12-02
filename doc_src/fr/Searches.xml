@@ -6,63 +6,15 @@
     </indexterm></title>
 
   <section id="search.window">
-    <title>La fenêtre Recherche textuelle</title>
+    <title>La fenêtre Recherche textuelle<indexterm class="singular">
+        <primary>Raccourcis</primary> <secondary>Rechercher - Ctrl+F</secondary>
+      </indexterm></title>
 
-    <figure id="text.search.window">
-      <title>La fenêtre Recherche textuelle<indexterm class="singular">
-          <primary>La fenêtre Recherche textuelle</primary> <secondary>Exemple</secondary>
-        </indexterm></title>
+    <para>Ouvrez la fenêtre de Recherche textuelle en utilisant  <keycombo> <keycap>Ctrl</keycap> <keycap>F</keycap> </keycombo> &gt; et saisissez dans le champ de recherche le mot ou l'expression que vous souhaitez trouver.</para>
 
-      <mediaobject>
-        <imageobject role="html">
-          <imagedata fileref="images/TextSearch25.png"/>
-        </imageobject>
+    <para>Vous pouvez également sélectionner un mot ou une expression dans l'Éditeur et appuyer sur &lt;<keycap>Ctrl</keycap> <keycap>F</keycap> </keycombo>. Le mot ou l'expression est alors saisi(e) automatiquement dans le champ <emphasis>Rechercher</emphasis>. Il est possible d'avoir plusieurs fenêtres de recherche ouvertes en même temps mais il est préférable de les fermer lorsqu'elles ne sont plus utiles afin de ne pas encombrer le bureau.</para>
 
-        <imageobject role="fo">
-          <imagedata fileref="images/TextSearch25.png" width="90%"/>
-        </imageobject>
-      </mediaobject>
-    </figure>
-
-    <note>
-      <para>La recherche ci-dessus permet de trouver tous les segments cible qui contiennent des caractères, plutôt improbables, dans la langue cible - c.-à.-d. le Slovène.</para>
-    </note>
-
-    <section>
-      <title>Rechercher<indexterm class="singular">
-          <primary>Raccourcis</primary> <secondary>Rechercher - Ctrl+F</secondary>
-        </indexterm></title>
-
-      <para><application>OmegaT</application> vous donne accès à de puissantes fonctions de recherche. Ouvrez la fenêtre de Recherche textuelle en utilisant <keycombo> <keycap>Ctrl</keycap> <keycap>F</keycap> </keycombo> et saisissez dans le champ de recherche le mot ou l'expression que vous souhaitez trouver. Vous pouvez également sélectionner un mot ou une expression dans le volet Editeur et appuyer sur <keycombo> <keycap>Ctrl</keycap> <keycap>F</keycap> </keycombo>. Le mot ou l'expression est alors saisi(e) automatiquement dans le champ de recherche. Il est possible d'avoir plusieurs fenêtres de recherche ouvertes en même temps mais il est préférable de les fermer lorsqu'elles ne sont plus utiles afin de ne pas encombrer le bureau.</para>
-    </section>
-
-    <section>
-      <title>Où chercher ?</title>
-
-      <para>Les recherches sont effectuées par défaut à la fois dans les sections source et cible du projet, mais il est possible de les limiter au seul texte cible ou source. Vous pouvez ainsi choisir de rechercher dans</para>
-
-      <itemizedlist>
-        <listitem>
-          <para>le projet seulement (option par défaut),</para>
-        </listitem>
-      </itemizedlist>
-
-      <itemizedlist>
-        <listitem>
-          <para>à la fois le projet et les mémoires de traduction de référence présentes dans le dossier /tm/ (cochez <emphasis>Recherche dans les MT)</emphasis>,</para>
-        </listitem>
-      </itemizedlist>
-
-      <itemizedlist>
-        <listitem>
-          <para>un seul fichier ou dossier contenant un ensemble de fichiers (cochez <emphasis>Rechercher dans les fichiers - en bas de la fenêtre)</emphasis></para>
-        </listitem>
-      </itemizedlist>
-
-      <para>Pour les recherches dans les fichiers (qui s'opposent à celles dans les mémoires de traduction), <application>OmegaT</application> restreint son champ de recherche aux fichiers qui possèdent les formats des fichiers source. En conséquence, même si OmegaT est parfaitement capable de traiter les fichiers<filename> TMX</filename>, ceux-ci ne seront pas inclus dans les fichiers de recherche. En ouvrant <emphasis role="bold"><indexterm class="singular">
-          <primary>Rechercher</primary> <secondary>Options avancées</secondary>
-        </indexterm>Options avancées</emphasis>, il est possible de combiner la recherche avec le nom de l'auteur de la traduction et l'heure de la dernière modification apportée.</para>
-    </section>
+    <para>Cliquez sur la flèche déroulante de la case <emphasis>Rechercher</emphasis> pour accéder aux 10 dernières recherches.</para>
   </section>
 
   <section id="using.wild.cards">
@@ -128,6 +80,10 @@
       </listitem>
 
       <listitem>
+        <para><emphasis role="bold">L'espace comprend l'espace insécable</emphasis> : lorsque cette option est coché, un caractère d'espacement entré dans le texte à rechercher peut correspondre à un caractère d'espacement normal ou au caractère d'espace insécable (\u00A).</para>
+      </listitem>
+
+      <listitem>
         <para><emphasis role="bold">Source :</emphasis> effectue la recherche dans les segments source</para>
       </listitem>
 
@@ -140,11 +96,35 @@
       </listitem>
 
       <listitem>
-        <para><emphasis role="bold">Recherche dans les MT</emphasis> : les mémoires de traduction du dossier <filename>tm</filename> sont incluses dans la recherche.</para>
+        <para><emphasis role="bold">Commentaires : </emphasis>rechercher dans les commentaires des segments</para>
       </listitem>
 
       <listitem>
-        <para><emphasis role="bold">Afficher tous les résultats : </emphasis>décocher cette case conduira OmegaT à n'afficher que la première occurrence trouvée parmi tous les résultats de recherche.</para>
+        <para><emphasis role="bold">Traduits ou non traduits : </emphasis>rechercher à la fois dans les segments traduits et non traduits.</para>
+      </listitem>
+
+      <listitem>
+        <para><emphasis role="bold">Traduits : </emphasis>rechercher uniquement dans les segments traduits.</para>
+      </listitem>
+
+      <listitem>
+        <para><emphasis role="bold">Non traduits : </emphasis>rechercher uniquement dans les segments non traduits.</para>
+      </listitem>
+
+      <listitem>
+        <para><emphasis role="bold">Afficher : tous les segments correspondants : </emphasis>si cochée, tous les segments sont affichés, même s'ils sont présents à plusieurs reprises dans le même document ou dans des documents différents.</para>
+      </listitem>
+
+      <listitem>
+        <para><emphasis role="bold">Afficher : les noms des fichiers : </emphasis>si cochée, le nom du fichier dans lequel chaque segment est trouvé est affiché au-dessus de chaque résultat.</para>
+      </listitem>
+
+      <listitem>
+        <para><emphasis role="bold">Rechercher dans le projet</emphasis> : cochez <emphasis>la mémoire</emphasis> pour inclure la mémoire du projet (fichier project_save.tmx) dans la recherche. Cochez <emphasis>les MT</emphasis> pour inclure les mémoires de traductions situées dans le dossier <filename>tm</filename> dans la recherche. Cochez <emphasis>Glossaires</emphasis> pour inclure les glossaires situés dans le dossier<filename>glossary</filename> dans la recherche.</para>
+      </listitem>
+
+      <listitem>
+        <para><emphasis role="bold">Rechercher dans les fichiers : </emphasis>rechercher dans un fichier unique ou dans un dossier contenant un ensemble de fichiers. Pour les recherches dans les fichiers (qui s'opposent à celles dans les mémoires de traduction), OmegaT restreint son champ de recherche aux fichiers qui possèdent les formats des fichiers source. En conséquence, même si OmegaT est parfaitement capable de traiter les fichiers<filename> TMX</filename>, ceux-ci ne seront pas inclus dans les fichiers de recherche.</para>
       </listitem>
     </itemizedlist>
 
@@ -160,22 +140,22 @@
 
     <para>Plusieurs fenêtres de recherche peuvent être ouvertes en même temps. On peut rapidement connaître leur contenu en regardant leur titre : il contient les termes de recherche utilisés.</para>
   </section>
-  
+
   <section id="search.filter">
     <title>Filtrer le contenu de l'éditeur en fonction de la recherche</title>
-    
+
     <para>Pour une navigation plus facile dans les résultats de recherche, vous pouvez appliquer la recherche à l'Éditeur. Appuyez sur le bouton <emphasis role="bold">Filtrer</emphasis> en bas de la fenêtre pour limiter les entrées affichées dans la fenêtre de l'Éditeur à celles correspondant à la recherche actuelle. Vous pouvez utiliser la navigation habituelle pour, par exemple, atteindre le segment (non traduit) suivant correspondant aux critères de recherche.</para>
-  
-   <para>N.B. :</para>
-   
+
+    <para>N.B. :</para>
+
     <itemizedlist>
       <listitem>Il est possible qu'une recherche soit limitée à 1000 éléments. Dans ce cas, si vous rechercher une expression courante, l'Éditeur ne vous montre que les 1000 entrées correspondantes, et non pas toutes les entrées correspondant aux critères de recherche.</listitem>
+
       <listitem>Si un fichier ne contient aucune entrée correspondante, il sera affiché vide.</listitem>
+
       <listitem>Si une recherche supprime les doublons, ceux-ci ne seront pas présentes dans l'Éditeur.</listitem>
     </itemizedlist>
-    
+
     <para>Pour supprimer un filtre, appuyez sur le bouton <emphasis role="bold">Supprimer le filtre</emphasis> ou rechargez le projet.</para>
- </section>
-      
-    
+  </section>
 </chapter>

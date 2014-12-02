@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
-<appendix id="appendix.TokenizerPlugin.inOmegaT">
-  <title>Extension module Tokenizer<indexterm class="singular">
-      <primary>Extensions</primary> <secondary>Module Tokenizer</secondary>
+<appendix id="appendix.Tokenizers.inOmegaT">
+  <title>Lemmatiseurs<indexterm class="singular">
+      <primary>Lemmatiseurs</primary>
     </indexterm></title>
 
   <section>
@@ -36,14 +36,16 @@
   </section>
 
   <section>
-    <title>Installation et Utilisation</title>
+    <title>Sélection des langues</title>
 
-	<para>Les lemmatiseurs sont inclus dans OmegaT OmegaT sélectionne automatiquement les lemmatiseurs pour les langues sources et cibles en fonction des paramètres du projet. Il est possible de sélectionner un autre lemmatiseur ou une version différente du lemmatiseur dans la fenêtre de Propriétés du projet.</para>
+    <para>Les lemmatiseurs sont inclus dans OmegaT et actifs par défaut. OmegaT sélectionne automatiquement les lemmatiseurs pour les langues sources et cibles en fonction des paramètres du projet. Il est possible de sélectionner un autre lemmatiseur (Lemmatiseur de la langue) ou une version différente du lemmatiseur (Comportement du lemmatiseur) dans la fenêtre de Propriétés du projet.</para>
 
-	<warning>
-		<title>Incompatibilités</title>
-		<para>OmegaT ne se lancera pas si des lemmatiseurs sont présents dans le dossier /plugin. Retirer tous les lemmatiseurs du dossier /plugin avant de lancer OmegaT.</para>
-	</warning>
-	
+    <para>S'il n'existe aucun lemmatiseur pour les langues actuelles, OmegaT utilise Hunspell à la place (dans ce cas, vérifiez que les dictionnaires Hunspell appropriés sont installés).</para>
+
+    <warning>
+      <title>Incompatibilités</title>
+
+      <para>OmegaT ne se lancera pas si des lemmatiseurs sont présents dans le dossier /plugin. Retirer tous les lemmatiseurs du dossier /plugin avant de lancer OmegaT.</para>
+    </warning>
   </section>
 </appendix>

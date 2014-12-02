@@ -187,9 +187,7 @@
 
           <row>
             <entry><guimenuitem>Font<indexterm class="singular">
-                <primary>Project Settings</primary>
-
-                <secondary>Font</secondary>
+                <primary>Font</primary>
               </indexterm></guimenuitem></entry>
 
             <entry><para>Used to modify the font used by
@@ -203,13 +201,7 @@
 
           <row>
             <entry><guimenuitem>File filters<indexterm class="singular">
-                <primary>Project Settings</primary>
-
-                <secondary>File filters</secondary>
-              </indexterm><indexterm class="singular">
-                <primary>Menu Options</primary>
-
-                <secondary>File filters</secondary>
+                <primary>File filters</primary>
               </indexterm></guimenuitem></entry>
 
             <entry>Used to adjust the handling of supported file formats
@@ -222,13 +214,7 @@
 
           <row>
             <entry><guimenuitem>Segmentation<indexterm class="singular">
-                <primary>Project Settings</primary>
-
-                <secondary>Segmentation</secondary>
-              </indexterm><indexterm class="singular">
-                <primary>Menu Options</primary>
-
-                <secondary>Segmentation</secondary>
+                <primary>Segmentation</primary>
               </indexterm></guimenuitem></entry>
 
             <entry>Used to change the way your text is segmented into
@@ -241,13 +227,7 @@
 
           <row>
             <entry><guimenuitem>Editing Behavior<indexterm class="singular">
-                <primary>Menu Options</primary>
-
-                <secondary>Editing Behavior</secondary>
-              </indexterm><indexterm class="singular">
-                <primary>Project Settings</primary>
-
-                <secondary>Editing Behavior</secondary>
+                <primary>Editing Behavior</primary>
               </indexterm></guimenuitem></entry>
 
             <entry>Used to change how <application>OmegaT</application>

@@ -89,8 +89,7 @@
 
               <entry/>
 
-              <entry>Creates a local copy of a remote OmegaT project. See
-              <xref linkend="chapter.project.createteamproject"/></entry>
+              <entry>Creates a local copy of a remote OmegaT project.</entry>
             </row>
 
             <row>

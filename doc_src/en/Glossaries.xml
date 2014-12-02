@@ -18,15 +18,15 @@
   segment will be automatically displayed in the Glossary viewer.</para>
 
   <para>You define its location and name in the project properties dialog. The
-  extension must be <filename>.txt</filename> (if not, it will be added). The
-  location of the file must be within the <filename>/glossary</filename>
-  folder, but it can be in a deeper folder (e.g.,
-  <filename>glossary/sub/glossary.txt</filename>). The file does not need to
-  exist when setting it, it will be created (if necessary) when adding a
-  glossary entry. If the file already exists, no attempt is done to verify the
-  format or the character set of the file: the new entries will always be in
-  tab-separated format and UTF-8. As the existing content will not be touched,
-  damage to an existing file would be limited.</para>
+  extension must be <filename>.txt</filename> or <filename>.utf8</filename>
+  (if not, it will be added). The location of the file must be within the
+  <filename>/glossary</filename> folder, but it can be in a deeper folder
+  (e.g., <filename>glossary/sub/glossary.txt</filename>). The file does not
+  need to exist when setting it, it will be created (if necessary) when adding
+  a glossary entry. If the file already exists, no attempt is done to verify
+  the format or the character set of the file: the new entries will always be
+  in tab-separated format and UTF-8. As the existing content will not be
+  touched, damage to an existing file would be limited.</para>
 
   <section>
     <title>Usage</title>
@@ -125,11 +125,11 @@
     just containing the source term and the comment.</para>
 
     <para>Glossary files can be either in system default encoding (and
-    indicated by the extension .tab) or in UTF-8 (the extension .utf8 or .txt) or in
-    UTF-16 LE (the extension .txt). Also supported is the CSV format. This
-    format is the same as the tab separated one: source term, target term.
-    Comment fields are separated by a comma ','. Strings can be enclosed by
-    quotes ", which allows having a comma inside a string:</para>
+    indicated by the extension .tab) or in UTF-8 (the extension .utf8 or .txt)
+    or in UTF-16 LE (the extension .txt). Also supported is the CSV format.
+    This format is the same as the tab separated one: source term, target
+    term. Comment fields are separated by a comma ','. Strings can be enclosed
+    by quotes ", which allows having a comma inside a string:</para>
 
     <para><literal>"This is a source term, which contains a comma","c'est un
     terme, qui contient une virgule"</literal></para>
@@ -139,18 +139,27 @@
         <primary>Glossaries</primary>
 
         <secondary>TBX format</secondary>
-      </indexterm> is also supported. TBX - Term Base eXchange - is the open,
-    XML-based standard for exchanging structured terminological data, TBX has
-    been approved as an international standard by LISA and ISO. If you have an
-    existing terminology handling system - MultiTerm for example - it is quite
-    possible it offers the export of terminology data via TBX format. <ulink
+      </indexterm> is also supported as read-only glossaries format. The
+    location of the <filename>.tbx</filename> file must be within the
+    <filename>/glossary</filename> folder, but it can be in a deeper folder
+    (e.g., <filename>glossary/sub/MyGlossary.tbx</filename>).</para>
+
+    <para>TBX files TBX - Term Base eXchange - is the open, XML-based standard
+    for exchanging structured terminological data, TBX has been approved as an
+    international standard by LISA and ISO. If you have an existing
+    terminology handling system it is quite possible it offers the export of
+    terminology data via TBX format. <ulink
     url="http://www.microsoft.com/Language/en-US/Terminology.aspx">Microsoft
     Terminology Collection</ulink> <indexterm class="singular">
         <primary>Glossaries</primary>
 
         <secondary>Microsoft Terminology collection</secondary>
       </indexterm> can be downloaded in nearly 100 languages and can serve as
-    a cornerstone IT glossary.</para>
+    a cornerstone IT glossary. </para>
+
+    <para>Note: the <filename>.tbx</filename> output of MultiTerm seems to not
+    be reliable (november 2013), it is better to use the
+    <filename>.tab</filename> output of MultiTerm instead. </para>
   </section>
 
   <section>
@@ -189,14 +198,15 @@
         <secondary>Location of the writable glossary file</secondary>
       </indexterm>The location of the writable glossary file can be set in the
     <guimenuitem>Project &gt; Properties ... </guimenuitem>dialog. The
-    recognized extensions are <filename>TXT</filename> and <filename>UTF8</filename></para>
+    recognized extensions are <filename>TXT</filename> and
+    <filename>UTF8</filename></para>
 
     <para><emphasis role="bold">Note: </emphasis>Of course there are other
     ways and means to create a simple file with tab delimited entries. Nothing
     speaks against using Notepad++ on Windows, GEdit on Linux for instance or
     some spreadsheet program for this purpose: any application, that can
-    handle UTF-8 (or UTF-16 LE) and that can show white space (so that you do not
-    miss the required <keycap>TAB</keycap> characters) can be used.</para>
+    handle UTF-8 (or UTF-16 LE) and that can show white space (so that you do
+    not miss the required <keycap>TAB</keycap> characters) can be used.</para>
   </section>
 
   <section>
@@ -226,8 +236,7 @@
     provided they are given the file extension <filename>.tab</filename> and
     the source and target term fields are the first two fields respectively.
     If you export using the system option "Tab-delimited export", you will
-    need to delete the first 5 columns (Seq. Nr, Date created etc). The newer
-    versions of MultiTerm support exporting to TBX format.</para>
+    need to delete the first 5 columns (Seq. Nr, Date created etc).</para>
   </section>
 
   <section>

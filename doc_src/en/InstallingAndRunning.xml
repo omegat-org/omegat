@@ -90,6 +90,11 @@
 -Duser.language=FR
 # Country 
 -Duser.country=CA </code></literallayout>
+
+      <para>Advice: if OmegaT works slowly in Remote Desktop sessions under
+      Windows, you may use this option:</para>
+
+      <literallayout><code>-Dsun.java2d.noddraw=false</code></literallayout>
     </section>
 
     <section>
@@ -347,15 +352,16 @@
       <application>OmegaT</application>.app</emphasis> or click on its
       location in the Dock.</para>
 
-      <para>You can modify OmegaT's behaviour by editing the <emphasis>Properties</emphasis> as well as the
+      <para>You can modify OmegaT's behaviour by editing the
+      <emphasis>Properties</emphasis> as well as the
       <emphasis>OmegaT.sh</emphasis> file in the package.</para>
-      
+
       <para>To access
       <application><emphasis>OmegaT.sh</emphasis></application>, right-click
       on <emphasis><application>OmegaT</application>.app</emphasis> and select
-      "Show Package Contents", then open the file in Contents/MacOS by 
-      right-clicking on it and selecting your text editor of choice. You can also "cd" there directly
-      from the command line and open
+      "Show Package Contents", then open the file in Contents/MacOS by
+      right-clicking on it and selecting your text editor of choice. You can
+      also "cd" there directly from the command line and open
       <application><emphasis>OmegaT.sh</emphasis> in a command line editor
       like emacs or vi</application>.<indexterm class="singular">
           <primary>Customizing OmegaT</primary>
@@ -365,15 +371,18 @@
           <tertiary>Launch parameters</tertiary>
         </indexterm></para>
 
-      <para>Options are changed by modifying <emphasis>OmegaT.sh</emphasis>. For 
-      pre-defined options, remove the # before a parameter to enable it. 
-      For example, <filename>LANGUAGE="-Duser.language=ja"</filename>
-      (without the #) will launch
-      <application>OmegaT</application> with the
-      user interface in Japanese.</para>
-      
-      <para>To change the amount of memory available, edit directly the lauching line. 
-      For instance, <filename>${JAVA} -Xmx2048m ${MACOS} ${LANGUAGE} ${COUNTRY} ${PROXY_HOST} ${PROXY_PORT} ${GOOGLE_API_KEY} ${MS_CLIENT_ID} ${MS_CLIENT_SECRET} ${MY_MEMORY_EMAIL} ${TAAS_USER_KEY} -jar OmegaT.jar</filename> will launch OmegaT with 2 gigas of memory.</para>
+      <para>Options are changed by modifying <emphasis>OmegaT.sh</emphasis>.
+      For pre-defined options, remove the # before a parameter to enable it.
+      For example, <filename>LANGUAGE="-Duser.language=ja"</filename> (without
+      the #) will launch <application>OmegaT</application> with the user
+      interface in Japanese.</para>
+
+      <para>To change the amount of memory available, edit directly the
+      lauching line. For instance, <filename>${JAVA} -Xmx2048m ${MACOS}
+      ${LANGUAGE} ${COUNTRY} ${PROXY_HOST} ${PROXY_PORT} ${GOOGLE_API_KEY}
+      ${MS_CLIENT_ID} ${MS_CLIENT_SECRET} ${MY_MEMORY_EMAIL} ${TAAS_USER_KEY}
+      -jar OmegaT.jar</filename> will launch OmegaT with 2 gigas of
+      memory.</para>
 
       <para>To launch multiple instances of
       <emphasis><application>OmegaT</application>.app</emphasis>, double-click
@@ -381,9 +390,8 @@
       <emphasis><application>OmegaT</application>.app/
       Contents/MacOS/</emphasis>.</para>
 
-      <para>Use
-      <emphasis><application>OmegaT</application>.jar</emphasis> file located
-      in
+      <para>Use <emphasis><application>OmegaT</application>.jar</emphasis>
+      file located in
       <emphasis><application>OmegaT</application>.app/Contents/MacOS/Java/</emphasis>
       to launch <application>OmegaT</application> from the command line. Check
       "Command line launching" below for more information.</para>
@@ -695,7 +703,6 @@
       </itemizedlist>
 
       <itemizedlist>
-
         <listitem>
           <para><emphasis role="bold">Memory assignment</emphasis></para>
 
@@ -788,7 +795,6 @@
           <para>-<emphasis
           role="bold">Dmicrosoft.api.client_secret=XXXX9xXxX9xXXxxXXX9xxX99xXXXX9xx9XXxXxXXXXX=</emphasis></para>
         </listitem>
-
       </itemizedlist>
 
       <para>Arguments can be combined: to launch
@@ -967,9 +973,9 @@
               <listitem>
                 <para><literal>test\.html</literal></para>
 
-                <para>Only the file test.html at the root of the source
-                folder will be translated. If there are other files named
-                test.html in other folders, they will be ignored.</para>
+                <para>Only the file test.html at the root of the source folder
+                will be translated. If there are other files named test.html
+                in other folders, they will be ignored.</para>
               </listitem>
 
               <listitem>
@@ -1002,9 +1008,9 @@
               <listitem>
                 <para><literal>test\.html</literal></para>
 
-                <para>Only the file test.html at the root of the source
-                folder will be translated. If there are other files named
-                test.html in other folders, they will be ignored.</para>
+                <para>Only the file test.html at the root of the source folder
+                will be translated. If there are other files named test.html
+                in other folders, they will be ignored.</para>
               </listitem>
 
               <listitem>
@@ -1029,24 +1035,26 @@
             specified.</para>
           </listitem>
         </itemizedlist>
-        
+
         <itemizedlist>
           <listitem>
-            <para><literal>--no-team</literal> addresses projects
-          set up for team work. Use it if OmegaT is not to synchronize the
-          project contents.</para>
+            <para><literal>--no-team</literal> addresses projects set up for
+            team work. Use it if OmegaT is not to synchronize the project
+            contents.</para>
           </listitem>
         </itemizedlist>
 
         <itemizedlist>
           <listitem>
-            <para><literal>--disable-project-locking</literal> allows, under Windows, to open the same project 
-            with several instances of OmegaT. By default, under Windows, <literal>omegat.project</literal>
-            is locked, and an error message is received when trying to open a project already opened in
-            another instance of OmegaT. With that option, no locking occurs.</para>
+            <para><literal>--disable-project-locking</literal> allows, under
+            Windows, to open the same project with several instances of
+            OmegaT. By default, under Windows,
+            <literal>omegat.project</literal> is locked, and an error message
+            is received when trying to open a project already opened in
+            another instance of OmegaT. With that option, no locking
+            occurs.</para>
           </listitem>
         </itemizedlist>
-
       </section>
 
       <section id="console.mode.option.quiet">
@@ -1091,8 +1099,8 @@
     own version of OmegaT. Unpack the
     <emphasis>OmegaT_3.n.n_Source.zip</emphasis> file and enter the
     OmegaT_3.n.n_Source folder or enter the <emphasis>./omegat/</emphasis>
-    folder of the SVN checked out code. Please make sure that a build.xml
-    file is present in that folder. Then, on the command line, type:</para>
+    folder of the SVN checked out code. Please make sure that a build.xml file
+    is present in that folder. Then, on the command line, type:</para>
 
     <para><literal>$ ant jar release</literal></para>
 

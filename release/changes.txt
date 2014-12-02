@@ -446,7 +446,7 @@ used by most users
 
   Implemented requests:
 
-  - Strip special strings before pasing text to spellchecker script
+  - Strip special strings before passing text to spellchecker script
   https://sourceforge.net/p/omegat/feature-requests/991/
 
   Bug fixes:

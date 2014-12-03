@@ -172,6 +172,8 @@
   <para>［Shift］キー自体は、特に機能を持ちません。［Shift］キーを押しながら何かのキーを押しても、そのキー本来の動作をするだけです。ただし <literal>Shift+Enter</literal> の組み合わせに限っては、テキストに改行を挿入します。</para>
 
   <para>システム共通のコマンド：すべて選択（<keycap>Ctrl+A</keycap>）、貼り付け（<emphasis role="bold">Ctrl+V</emphasis>）、切り取り（<emphasis role="bold">Ctrl+X</emphasis>）、コピー（<emphasis role="bold">Ctrl+C</emphasis>）、参考訳文を挿入（<emphasis role="bold">Ctrl+I</emphasis>）、原文を挿入（<emphasis role="bold">Ctrl+Shift+I</emphasis>）は、原理的に現在編集中の分節内のテキストに対してだけ実行されます。</para>
+  
+  <para>現在のウィンドウから別のウィンドウに移動する（たとえば編集ウィンドウから参考訳文ウィンドウに）には、<keycap>Ctrl+Tab</keycap> を使います。<keycap>Ctrl+Shift+Tab</keycap> を押すと、ひとつ前のウィンドウへ戻ります。ショートカット <keycap>Ctrl+A</keycap> と <keycap>Ctrl+C</keycap> の連携は、ウィンドウ内のすべてのテキストまたは一部のテキストをクリップボードにコピーします。</para>
 
   <para>ショートカットは個人設定でカスタマイズできることに注意してください。詳しくは<link linkend="ch04.shortcuts.customization">付録 ショートカットのカスタマイズ</link>を参照してください。</para>
 </appendix>

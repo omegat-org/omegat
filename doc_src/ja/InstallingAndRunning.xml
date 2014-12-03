@@ -51,6 +51,10 @@
 -Duser.language=JA
 # Country
 -Duser.country=JP</code></literallayout>
+
+      <para>参考：Windows のリモートデスクトップ経由で OmegaT を使っていて動作が遅い場合は、次のオプションを試してみてください。</para>
+
+      <literallayout><code>-Dsun.java2d.noddraw=false</code></literallayout>
     </section>
 
     <section>
@@ -221,13 +225,13 @@
       <para><emphasis><application>OmegaT</application>.app</emphasis> をダブルクリックするか、ドックのアイコンをクリックします。</para>
 
       <para>OmegaT の挙動は、パッケージに含まれる <emphasis>Properties</emphasis> と <emphasis>OmegaT.sh</emphasis> ファイルを編集することでカスタマイズできます。</para>
-      
+
       <para>まず <emphasis><application>OmegaT</application>.app</emphasis> を右クリックして、［パッケージの内容を表示］を選びます。次に、Contents/MacOS フォルダーにある <application><emphasis>OmegaT.sh</emphasis></application> を右クリックして、任意のテキストエディターで開きます。あるいはコマンドラインから「cd」コマンドで目的の階層に移動し、emacs や vi のようなコマンドラインエディターで <application><emphasis>OmegaT.sh</emphasis></application> を開いてもよいでしょう。<indexterm class="singular">
           <primary>OmegaT のカスタマイズ</primary> <secondary>OS X</secondary> <tertiary>起動引数</tertiary>
         </indexterm></para>
 
       <para><emphasis>OmegaT.sh</emphasis> を編集することで、設定を変更できます。定義済みの設定を有効にするには、引数の先頭の # 記号を削除してください。たとえば、<filename>LANGUAGE=&quot;-Duser.language=ja&quot;</filename>（# 記号なし）とすると、<application>OmegaT</application> は日本語のユーザーインターフェースで起動します。</para>
-      
+
       <para>メモリ容量の割り当てを変更する場合は、起動行を直接編集します。たとえば、<filename>${JAVA} -Xmx2048m ${MACOS} ${LANGUAGE} ${COUNTRY} ${PROXY_HOST} ${PROXY_PORT} ${GOOGLE_API_KEY} ${MS_CLIENT_ID} ${MS_CLIENT_SECRET} ${MY_MEMORY_EMAIL} ${TAAS_USER_KEY} -jar OmegaT.jar</filename> とすると、OmegaT は 2 ギガのメモリ割り当てで起動します。</para>
 
       <para><emphasis><application>OmegaT</application>.app</emphasis> を複数起動したい場合は、<emphasis><application>OmegaT</application>.app/Contents/MacOS/</emphasis> にある <emphasis>OmegaT.sh</emphasis> ファイルをダブルクリックしてください。</para>
@@ -397,7 +401,6 @@
       </itemizedlist>
 
       <itemizedlist>
-
         <listitem>
           <para><emphasis role="bold">メモリの割り当て</emphasis></para>
 
@@ -445,7 +448,6 @@
 
           <para>-<emphasis role="bold">Dmicrosoft.api.client_secret=XXXX9xXxX9xXXxxXXX9xxX99xXXXX9xx9XXxXxXXXXX=</emphasis></para>
         </listitem>
-
       </itemizedlist>
 
       <para>複数の引数を、組み合わせて指定することもできます。上記で例示したすべての引数を使用して <application>OmegaT</application> を起動する場合、コマンドは以下のようになります：</para>
@@ -603,7 +605,7 @@
             <para>この設定は、バッチモードでタグ検証を可能にします。「<literal>abort</literal>」を指定した場合は、不正なタグを見つけた時点で、タグ検証を中止します。「<literal>warn</literal>」を指定した場合は、すべての分節についてタグ検証を実施し、不正なタグについては警告を出力します。</para>
           </listitem>
         </itemizedlist>
-        
+
         <itemizedlist>
           <listitem>
             <para><literal>--no-team</literal> チーム作業用のプロジェクトに関連する引数です。この引数を指定すると、チームプロジェクトを開いても同期しません。</para>
@@ -615,7 +617,6 @@
             <para><literal>--disable-project-locking</literal> Windows において、OmegaT の複数のインスタンスが同じプロジェクトを開けるようになります。Windows 上では、OmegaT がプロジェクトを開くと、既定で <literal>omegat.project</literal> ファイルをロックします。そのため、OmegaT の別のインスタンスが使用中のプロジェクトを開こうとすると、エラーメッセージが表示されます。この引数を指定すると、ロックしません。</para>
           </listitem>
         </itemizedlist>
-
       </section>
 
       <section id="console.mode.option.quiet">

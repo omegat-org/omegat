@@ -11,7 +11,7 @@
 
   <para>ある <application>OmegaT</application> のプロジェクトに１つ以上の用語集がある場合、現在の分節中に見つかった用語が、用語集ウィンドウに自動的に表示されます。</para>
 
-  <para>用語集ファイルの場所と名前は、プロジェクト設定ダイアログで設定できます。拡張子は必ず <filename>.txt</filename> にしてください（拡張子を指定しなければ、自動的に付加されます）。ファイルの場所は <filename>glossary</filename> フォルダー内を指定する必要があります。ただし、直下ではなくもっと深い階層に置いてもかまいません（たとえば <filename>glossary/sub/glossary.txt</filename>）。場所を指定した時点では、ファイルが必ずしも存在する必要はありません。用語を追加するときに、（必要であれば）自動的に作成されます。ファイルがすでに存在した場合、その形式と文字コードに問題が無ければ、特にメッセージは表示されません。新しい用語は常にタブ区切り形式の文字コード UTF-8 で追加されます。このとき、既存の内容は変更されません。したがって、既存のファイルへの影響は最小限に留まります。</para>
+  <para>用語集ファイルの場所と名前は、プロジェクト設定ダイアログで設定できます。拡張子は必ず <filename>.txt</filename> か <filename>.utf8</filename> にしてください（拡張子を指定しなければ、自動的に付加されます）。ファイルの場所は <filename>glossary</filename> フォルダー内を指定する必要があります。ただし、直下ではなくもっと深い階層に置いてもかまいません（たとえば <filename>glossary/sub/glossary.txt</filename>）。場所を指定した時点では、ファイルが必ずしも存在する必要はありません。用語を追加するときに、（必要であれば）自動的に作成されます。ファイルがすでに存在した場合、その形式と文字コードに問題が無ければ、特にメッセージは表示されません。新しい用語は常にタブ区切り形式の文字コード UTF-8 で追加されます。このとき、既存の内容は変更されません。したがって、既存のファイルへの影響は最小限に留まります。</para>
 
   <section>
     <title>使い方</title>
@@ -78,9 +78,13 @@
 
     <para>プレーンテキストファイルだけでなく、TBX 形式<indexterm class="singular">
         <primary>用語集</primary> <secondary>TBX 形式</secondary>
-      </indexterm>にも対応しています。TBX（Term Base eXchange）は、オープンな XML ベースの標準規格で、構造化された用語集データの互換を目的としています。TBX は国際標準規格として、LISA と ISO によって承認されています。もし何か用語を扱うシステム（たとえば MultiTerm）を使っているなら、用語集データを TBX 形式で出力できる機能を備えている可能性が十分にあります。<ulink url="https://www.microsoft.com/Language/ja-JP/Terminology.aspx">マイクロソフト用語集</ulink> <indexterm class="singular">
+      </indexterm>にも対応しています（読み取り専用）。<filename>.tbx</filename> ファイルの場所は <filename>glossary</filename> フォルダー内を指定する必要があります。ただし、直下ではなくもっと深い階層に置いてもかまいません（たとえば <filename>glossary/sub/MyGlossary.tbx</filename>）。</para>
+
+    <para>TBX ファイル TBX（Term Base eXchange）は、オープンな XML ベースの標準規格で、構造化された用語集データの互換を目的としています。TBX は国際標準規格として、LISA と ISO によって承認されています。もし何か用語を扱うシステムを使っているなら、用語集データを TBX 形式で出力できる機能を備えている可能性が十分にあります。<ulink url="https://www.microsoft.com/Language/ja-JP/Terminology.aspx">マイクロソフト用語集</ulink> <indexterm class="singular">
         <primary>用語集</primary> <secondary>マイクロソフト用語集</secondary>
       </indexterm>は 100 種類近くの言語でダウンロード提供されており、基本的な IT 用語集として使うことができます。</para>
+
+    <para>注意：MultiTerm が出力する <filename>.tbx</filename> 形式ファイルは、信頼性に劣っているようです（2013 年 11 月時点）。MultiTerm の場合は、<filename>.tab</filename> 形式ファイルの方で出力することをお勧めします。</para>
   </section>
 
   <section>
@@ -124,7 +128,7 @@
         <primary>用語集</primary> <secondary>Trados MultiTerm</secondary>
       </indexterm>TRADOS Multiterm の使用</title>
 
-    <para>TRADOS Multiterm のテキスト出力機能を用いて作成した用語集は、拡張子を <filename>.tab</filename> として、最初のフィールドを原文の用語、２番目を訳文の用語としておけば、特に修正を加えることなく <application>OmegaT</application> で使用することができます。システムオプションで［タブ区切り出力］を用いた場合は、残したい２つの項目の前にある、先頭の５つの列（Seq. Nr、Date created など）を削除する必要があります。MultiTerm の新しいバージョンでは、TBX 形式での出力に対応しています。</para>
+    <para>TRADOS Multiterm のテキスト出力機能を用いて作成した用語集は、拡張子を <filename>.tab</filename> として、最初のフィールドを原文の用語、２番目を訳文の用語としておけば、特に修正を加えることなく <application>OmegaT</application> で使用することができます。システムオプションで［タブ区切り出力］を用いた場合は、残したい２つの項目の前にある、先頭の５つの列（Seq. Nr、Date created など）を削除する必要があります。</para>
   </section>
 
   <section>

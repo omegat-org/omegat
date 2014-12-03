@@ -133,7 +133,7 @@
 
           <row>
             <entry><guimenuitem>字体設定<indexterm class="singular">
-                <primary>プロジェクト設定</primary> <secondary>字体設定</secondary>
+                <primary>字体設定</primary>
               </indexterm></guimenuitem></entry>
 
             <entry><para><application>OmegaT</application> が使用する字体を変更します。原文、訳文、参考訳文、用語集の表示に使用されます。メインメニューの<menuchoice><guimenu>［設定］</guimenu><guimenuitem>［字体...］</guimenuitem></menuchoice>で開き、<keycap>［Esc］</keycap> で閉じます。</para></entry>
@@ -141,9 +141,7 @@
 
           <row>
             <entry><guimenuitem>ファイルフィルター<indexterm class="singular">
-                <primary>プロジェクト設定</primary> <secondary>ファイルフィルター</secondary>
-              </indexterm><indexterm class="singular">
-                <primary>設定メニュー</primary> <secondary>ファイルフィルター</secondary>
+                <primary>ファイルフィルター</primary>
               </indexterm></guimenuitem></entry>
 
             <entry>OmegaT が対応するファイル形式の取り扱い方を設定します。<menuchoice><guimenu>［設定］</guimenu><guimenuitem>［ファイルフイルター...］</guimenuitem></menuchoice>で開き、<keycap>［Esc］</keycap>で閉じます。</entry>
@@ -151,9 +149,7 @@
 
           <row>
             <entry><guimenuitem>分節化規則<indexterm class="singular">
-                <primary>プロジェクト設定</primary> <secondary>分節化規則</secondary>
-              </indexterm><indexterm class="singular">
-                <primary>設定メニュー</primary> <secondary>分節化規則...</secondary>
+                <primary>分節化規則</primary>
               </indexterm></guimenuitem></entry>
 
             <entry>文章を分節化する方法を設定します。<menuchoice><guimenu>［設定］</guimenu><guimenuitem>［分節化規則...］</guimenuitem></menuchoice>で開き、<keycap>［Esc］</keycap>で閉じます。</entry>
@@ -161,9 +157,7 @@
 
           <row>
             <entry><guimenuitem>翻訳入力行<indexterm class="singular">
-                <primary>設定メニュー</primary> <secondary>翻訳入力行...</secondary>
-              </indexterm><indexterm class="singular">
-                <primary>プロジェクト設定</primary> <secondary>翻訳入力行</secondary>
+                <primary>翻訳入力行</primary>
               </indexterm></guimenuitem></entry>
 
             <entry>分節を移動する際の <application>OmegaT</application> の挙動を設定します。<menuchoice><guimenu>［設定］</guimenu><guimenuitem>［翻訳入力行...］</guimenuitem></menuchoice>で開き、<keycap>［Esc］</keycap>で閉じます。</entry>

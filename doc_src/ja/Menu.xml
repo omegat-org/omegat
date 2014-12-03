@@ -788,7 +788,7 @@
             <row>
               <entry><guimenuitem>スクリプト...</guimenuitem></entry>
 
-              <entry>外部スクリプト管理用のダイアログボックスを表示します。このダイアログ上で、スクリプトフォルダーの指定、スクリプトの編集や実行、ショートカットへの関連付けを行えます。詳しくは<link linkend="appendix.Scripts.inOmegaT">スクリプト ダイアログ</link>を参照してください。</entry>
+              <entry>スクリプト管理用のウィンドウを表示します。このウィンドウ上で、スクリプトフォルダーの指定、スクリプトの編集や実行、ショートカットへの関連付けを行えます。詳しくは<link linkend="appendix.Scripts.inOmegaT">スクリプト ウィンドウ</link>を参照してください。</entry>
             </row>
           </tbody>
         </tgroup>

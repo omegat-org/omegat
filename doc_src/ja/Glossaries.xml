@@ -80,7 +80,7 @@
         <primary>用語集</primary> <secondary>TBX 形式</secondary>
       </indexterm>にも対応しています（読み取り専用）。<filename>.tbx</filename> ファイルの場所は <filename>glossary</filename> フォルダー内を指定する必要があります。ただし、直下ではなくもっと深い階層に置いてもかまいません（たとえば <filename>glossary/sub/MyGlossary.tbx</filename>）。</para>
 
-    <para>TBX ファイル TBX（Term Base eXchange）は、オープンな XML ベースの標準規格で、構造化された用語集データの互換を目的としています。TBX は国際標準規格として、LISA と ISO によって承認されています。もし何か用語を扱うシステムを使っているなら、用語集データを TBX 形式で出力できる機能を備えている可能性が十分にあります。<ulink url="https://www.microsoft.com/Language/ja-JP/Terminology.aspx">マイクロソフト用語集</ulink> <indexterm class="singular">
+    <para>TBX（Term Base eXchange）は、オープンな XML ベースの標準規格で、構造化された用語集データの互換を目的としています。TBX は国際標準規格として、LISA と ISO によって承認されています。もし何か用語を扱うシステムを使っているなら、用語集データを TBX 形式で出力できる機能を備えている可能性が十分にあります。<ulink url="https://www.microsoft.com/Language/ja-JP/Terminology.aspx">マイクロソフト用語集</ulink> <indexterm class="singular">
         <primary>用語集</primary> <secondary>マイクロソフト用語集</secondary>
       </indexterm>は 100 種類近くの言語でダウンロード提供されており、基本的な IT 用語集として使うことができます。</para>
 

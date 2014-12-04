@@ -60,6 +60,7 @@ import org.omegat.gui.help.HelpFrame;
  */
 public class FileUtil {
     public static String LINE_SEPARATOR = System.getProperty("line.separator");
+    public static long RENAME_RETRY_TIMEOUT = 3000;
 
     /**
      * Removes old backups so that only 10 last are there.
@@ -101,6 +102,26 @@ public class FileUtil {
         long fileMillis = f.lastModified();
         String str = new SimpleDateFormat("yyyyMMddHHmm").format(new Date(fileMillis));
         LFileCopy.copy(f, new File(f.getPath() + "." + str + OConsts.BACKUP_EXTENSION));
+    }
+
+    /**
+     * Renames file, with checking errors and 3 seconds retry against external programs(like antivirus or
+     * TortoiseSVN) locking.
+     */
+    public static void rename(File from, File to) throws IOException {
+        if (!from.exists()) {
+            throw new IOException("Source file for rename(" + from + ") doesn't exist");
+        }
+        if (to.exists()) {
+            throw new IOException("Target file for rename(" + to + ") already exist");
+        }
+        long b = System.currentTimeMillis();
+        while (!from.renameTo(to)) {
+            long e = System.currentTimeMillis();
+            if (e - b > RENAME_RETRY_TIMEOUT) {
+                throw new IOException("Error rename " + from + " to " + to);
+            }
+        }
     }
 
     /**

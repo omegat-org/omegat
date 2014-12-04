@@ -2,7 +2,7 @@
  OmegaT 3.1.8 
 ----------------------------------------------------------------------
    6 Enhancements
-   9 Bug fixes
+  10 Bug fixes
    6 Localisation updates
 ----------------------------------------------------------------------
 3.1.8 vs. 3.1.7
@@ -54,6 +54,9 @@ mouse pointer) changed to the Wait icon and could not be restored
 
   - PO comments also included as source text 
   https://sourceforge.net/p/omegat/bugs/705/
+
+  - In team projects, OmegaT was sometimes failing to rename files (perhaps 
+blocked by antivirus or cache software). There's now a 3-second retry.
 
   Localisation updates:
 

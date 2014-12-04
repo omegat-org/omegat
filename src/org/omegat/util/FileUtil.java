@@ -105,21 +105,21 @@ public class FileUtil {
     }
 
     /**
-     * Renames file, with checking errors and 3 seconds retry against external programs(like antivirus or
+     * Renames file, with checking errors and 3 seconds retry against external programs (like antivirus or
      * TortoiseSVN) locking.
      */
     public static void rename(File from, File to) throws IOException {
         if (!from.exists()) {
-            throw new IOException("Source file for rename(" + from + ") doesn't exist");
+            throw new IOException("Source file to rename (" + from + ") doesn't exist");
         }
         if (to.exists()) {
-            throw new IOException("Target file for rename(" + to + ") already exist");
+            throw new IOException("Target file to rename (" + to + ") already exists");
         }
         long b = System.currentTimeMillis();
         while (!from.renameTo(to)) {
             long e = System.currentTimeMillis();
             if (e - b > RENAME_RETRY_TIMEOUT) {
-                throw new IOException("Error rename " + from + " to " + to);
+                throw new IOException("Error renaming " + from + " to " + to);
             }
         }
     }

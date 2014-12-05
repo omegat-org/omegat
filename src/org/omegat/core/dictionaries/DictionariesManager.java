@@ -43,6 +43,7 @@ import java.util.TreeSet;
 
 import org.omegat.gui.dictionaries.DictionariesTextArea;
 import org.omegat.util.DirectoryMonitor;
+import org.omegat.util.FileUtil;
 import org.omegat.util.Log;
 import org.omegat.util.OConsts;
 
@@ -157,7 +158,7 @@ public class DictionariesManager implements DirectoryMonitor.Callback {
                 wr.close();
             }
             outFile.delete();
-            outFileTmp.renameTo(outFile);
+            FileUtil.rename(outFileTmp, outFile);
         } catch (Exception ex) {
             Log.log("Error save ignore words:" + ex.getMessage());
         }

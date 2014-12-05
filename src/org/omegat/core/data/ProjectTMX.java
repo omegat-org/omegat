@@ -36,6 +36,7 @@ import java.util.TreeMap;
 import java.util.logging.Logger;
 
 import org.omegat.core.segmentation.Segmenter;
+import org.omegat.util.FileUtil;
 import org.omegat.util.Language;
 import org.omegat.util.Log;
 import org.omegat.util.OConsts;
@@ -144,15 +145,11 @@ public class ProjectTMX {
         // is encountered during the write procedure - that way
         // everything won't be lost
         if (orig.exists()) {
-            if (!orig.renameTo(backup)) {
-                throw new IOException("Error rename old file to backup");
-            }
+            FileUtil.rename(orig, backup);
         }
 
         // Rename new file into TMX file
-        if (!newFile.renameTo(orig)) {
-            throw new IOException("Error rename new file to tmx");
-        }
+        FileUtil.rename(newFile, orig);
     }
 
     public void exportTMX(ProjectProperties props, File outFile, final boolean forceValidTMX,

@@ -2,8 +2,8 @@
  OmegaT 3.1.8 update 1
 ----------------------------------------------------------------------
    0 Enhancement
-   3 Bug fixes
-   0 Localisation update
+   4 Bug fixes
+   1 Localisation update
 ----------------------------------------------------------------------
 3.1.8 update 1 vs. 3.1.8
 
@@ -16,6 +16,12 @@ loaded
 
   - License information was missing from the lib folder of binary
 distributions
+
+  - Wrong Swedish segmentation exception corrected
+
+  Localisation updates:
+
+  - Belarusian localisation updated to 3.1.8 (UI, tutorial, scripts, readme)
 
 ----------------------------------------------------------------------
  OmegaT 3.1.8 (2014-12-04)

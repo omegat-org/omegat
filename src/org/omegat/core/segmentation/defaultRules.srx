@@ -4599,7 +4599,7 @@
           <afterbreak>\s</afterbreak>
         </rule>
         <rule break="no">
-          <beforebreak>t\.e\.x\.</beforebreak>
+          <beforebreak>t\.ex\.</beforebreak>
           <afterbreak>\s</afterbreak>
         </rule>
         <rule break="no">

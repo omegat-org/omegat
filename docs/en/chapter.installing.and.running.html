@@ -5,8 +5,8 @@
       <title>Chapter&nbsp;3.&nbsp;Installing and running OmegaT</title>
       <link rel="stylesheet" type="text/css" href="OmegaT.css">
       <meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
-      <link rel="home" href="index.html" title="OmegaT 3.0 - User's Guide">
-      <link rel="up" href="index.html" title="OmegaT 3.0 - User's Guide">
+      <link rel="home" href="index.html" title="OmegaT 3.1 - User's Guide">
+      <link rel="up" href="index.html" title="OmegaT 3.1 - User's Guide">
       <link rel="prev" href="chapter.instant.start.guide.html" title="Chapter&nbsp;2.&nbsp;Learn to use OmegaT in 5 minutes!">
       <link rel="next" href="chapter.user.interface.html" title="Chapter&nbsp;4.&nbsp;The user interface">
    </head>
@@ -793,11 +793,10 @@
                         added after the initial <span class="emphasis"><em>"java"</em></span>, and before the
                         <span class="emphasis"><em>"-jar <span class="application">OmegaT</span>.jar"</em></span>. Note
                         that in Windows you can change the
-                        <span class="emphasis"><em><span class="application">OmegaT</span>.l4J.ini</em></span> file to
-                        reflect your preferences. On Mac OS X, you can change the
-                        <span class="emphasis"><em>Info.plist</em></span> located in
-                        <span class="emphasis"><em><span class="application">OmegaT</span>.app/Contents/</em></span> to
-                        do the same.
+                        <code class="filename">OmegaT.l4J.ini</code> file to
+                        reflect your preferences. In other platforms, you can modify your 
+                        launcher (e.g., <code class="filename">OmegaT.sh</code> on the Mac, 
+                        <code class="filename">OmegaT</code> under Linux) to do the same.
                </p>
                <p>A list of possible arguments is given below. Advanced users can
                         obtain more information on the arguments by typing <span class="emphasis"><em>man
@@ -808,7 +807,7 @@
                      <li class="listitem">
                         <p><span class="bold"><strong>User interface language
                                            </strong></span></p>
-                        <p><span class="bold"><strong>-Duser.language=XX</strong></span><a class="indexterm" name="d0e1196"></a> Normally, i.e. when <span class="application">OmegaT</span>
+                        <p><span class="bold"><strong>-Duser.language=XX</strong></span><a class="indexterm" name="d0e1192"></a> Normally, i.e. when <span class="application">OmegaT</span>
                                      is launched without any arguments, the program first detects the
                                      language of the user's operating system. If a user interface in this
                                      language is available, <span class="application">OmegaT</span> uses it.
@@ -836,7 +835,7 @@
                   <ul class="itemizedlist" style="list-style-type: disc; ">
                      <li class="listitem">
                         <p><span class="bold"><strong>User country</strong></span></p>
-                        <p><span class="bold"><strong>-Duser.country=XX</strong></span><a class="indexterm" name="d0e1244"></a> Besides the language, you can also specify the
+                        <p><span class="bold"><strong>-Duser.country=XX</strong></span><a class="indexterm" name="d0e1240"></a> Besides the language, you can also specify the
                                      country, for example CN or TW in case of the Chinese language. To
                                      display the instant start guide in the desired language, you need to
                                      specify both the language and the country. This is necessary even if
@@ -850,7 +849,7 @@
                   <ul class="itemizedlist" style="list-style-type: disc; ">
                      <li class="listitem">
                         <p><span class="bold"><strong>Memory assignment</strong></span></p>
-                        <p><span class="bold"><strong>-XmxZZM </strong></span><a class="indexterm" name="d0e1260"></a>This command assigns more memory to
+                        <p><span class="bold"><strong>-XmxZZM </strong></span><a class="indexterm" name="d0e1256"></a>This command assigns more memory to
                                      <span class="application">OmegaT</span>. By default, 512 MB are assigned,
                                      so there is no advantage in assigning less than this figure. "ZZ"
                                      stands for the amount of memory assigned, in megabytes. The command
@@ -862,28 +861,28 @@
                      </li>
                      <li class="listitem">
                         <p><span class="bold"><strong>Proxy host IP address</strong></span></p>
-                        <p><span class="bold"><strong><span class="bold"><strong>-Dhttp.proxyHost=nnn.nnn.nnn.nnn</strong></span> <a class="indexterm" name="d0e1289"></a></strong></span> The IP address of your proxy server, if
+                        <p><span class="bold"><strong><span class="bold"><strong>-Dhttp.proxyHost=nnn.nnn.nnn.nnn</strong></span> <a class="indexterm" name="d0e1285"></a></strong></span> The IP address of your proxy server, if
                                      your system uses a proxy.
                         </p>
                      </li>
                      <li class="listitem">
                         <p><span class="bold"><strong>Proxy host port number</strong></span></p>
                         <p><span class="bold"><strong>-Dhttp.proxyPort=NNNN</strong></span>
-                                     <a class="indexterm" name="d0e1305"></a> The port number your system uses to access the proxy
+                                     <a class="indexterm" name="d0e1301"></a> The port number your system uses to access the proxy
                                      server.
                         </p>
                      </li>
                      <li class="listitem">
                         <p><span class="bold"><strong>Google Translate V2 </strong></span></p>
                         <p><span class="bold"><strong>-Dgoogle.api.key=A123456789B123456789C123456789D12345678
-                                           </strong></span><span class="bold"><strong><a class="indexterm" name="d0e1321"></a></strong></span> If you have signed up for the Google
+                                           </strong></span><span class="bold"><strong><a class="indexterm" name="d0e1317"></a></strong></span> If you have signed up for the Google
                                      Translate services, enter your private Google API key here. Note
                                      that the key is 38 characters long.
                         </p>
                      </li>
                      <li class="listitem">
                         <p><span class="bold"><strong>Microsoft
-                                           Translator</strong></span><a class="indexterm" name="d0e1333"></a></p>
+                                           Translator</strong></span><a class="indexterm" name="d0e1329"></a></p>
                         <p>Make sure that you have a free Microsoft account. You’ll need
                                      this to sign-in to <a class="ulink" href="http://datamarket.azure.com/dataset/bing/microsofttranslator#schema" target="_top">Windows
                                         Azure Marketplace</a> and use the Translator service. Note that
@@ -909,7 +908,7 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="omegat.command.arguments"></a>6.3.&nbsp;OmegaT in the command line mode<a class="indexterm" name="d0e1374"></a></h3>
+                        <h3 class="title"><a name="omegat.command.arguments"></a>6.3.&nbsp;OmegaT in the command line mode<a class="indexterm" name="d0e1370"></a></h3>
                      </div>
                   </div>
                </div>
@@ -1209,7 +1208,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="building.OmegaT.from.source"></a>7.&nbsp;Building <span class="application">OmegaT</span> From Source<a class="indexterm" name="d0e1675"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="building.OmegaT.from.source"></a>7.&nbsp;Building <span class="application">OmegaT</span> From Source<a class="indexterm" name="d0e1671"></a></h2>
                   </div>
                </div>
             </div>

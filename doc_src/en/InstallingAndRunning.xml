@@ -636,11 +636,10 @@
       added after the initial <emphasis>"java"</emphasis>, and before the
       <emphasis>"-jar <application>OmegaT</application>.jar"</emphasis>. Note
       that in Windows you can change the
-      <emphasis><application>OmegaT</application>.l4J.ini</emphasis> file to
-      reflect your preferences. On Mac OS X, you can change the
-      <emphasis>Info.plist</emphasis> located in
-      <emphasis><application>OmegaT</application>.app/Contents/</emphasis> to
-      do the same.</para>
+      <filename>OmegaT.l4J.ini</filename> file to
+      reflect your preferences. In other platforms, you can modify your 
+      launcher (e.g., <filename>OmegaT.sh</filename> on the Mac, 
+      <filename>OmegaT</filename> under Linux) to do the same.</para>
 
       <para>A list of possible arguments is given below. Advanced users can
       obtain more information on the arguments by typing <emphasis>man

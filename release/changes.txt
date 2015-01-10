@@ -2,7 +2,7 @@
  OmegaT 3.1.8 update 1
 ----------------------------------------------------------------------
    0 Enhancement
-   4 Bug fixes
+   5 Bug fixes
    1 Localisation update
 ----------------------------------------------------------------------
 3.1.8 update 1 vs. 3.1.8
@@ -18,6 +18,9 @@ loaded
 distributions
 
   - Wrong Swedish segmentation exception corrected
+
+  - Newline characters are lost in Japanese target documents
+  https://sourceforge.net/p/omegat/bugs/721/ 
 
   Localisation updates:
 
